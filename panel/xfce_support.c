@@ -204,7 +204,7 @@ void write_backup_file(const char *path)
 
     if((bakfp = fopen(bakfile, "w")) && (fp = fopen(path, "r")))
     {
-        char c;
+        int c;
 
         while((c = fgetc(fp)) != EOF)
             putc(c, bakfp);
