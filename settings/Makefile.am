@@ -81,11 +81,16 @@ iconbox_plugin_la_LIBADD = 						\
 	@XFCE_MCS_MANAGER_LIBS@
 
 # .desktop files
-appsdir = $(datadir)/applications
-apps_DATA = 								\
-	xfce-panel-settings.desktop					\
-	xfce-taskbar-settings.desktop					\
-	xfce-iconbox-settings.desktop
+desktopdir = $(datadir)/applications
+desktop_in_files = 							\
+	xfce-panel-settings.desktop.in					\
+	xfce-taskbar-settings.desktop.in				\
+	xfce-iconbox-settings.desktop.in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
 
-EXTRA_DIST = $(apps_DATA)
+EXTRA_DIST = 								\
+	$(desktop_DATA)
 
+DISTCLEANFILES =							\
+	$(desktop_DATA)

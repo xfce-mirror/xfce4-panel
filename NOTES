@@ -1,10 +1,8 @@
 Developer notes:
 ----------------
 
-	* I18n: Do NOT ever edit the po/Makefile.in.in or run glib-gettextize
-	  or gettextize in this directory, as it'll break the locales
-	  install stuff. If you think you need to change something,
-	  ask Benedikt Meurer first (benedikt.meurer@unix-ag.uni-siegen.de).
+	* Building this package from CVS requires the xfce4-devel-tools
+	  package to be installed.
 
 	* Theres now a xfce4-panel-1.0.pc file for use with external panel
 	  plugins. In addition the panel header files are now installed into

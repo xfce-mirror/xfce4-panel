@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Tamil XFCE Panel 4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2003-09-24 17:41-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "கோப்பு தெரிவுசெய்க"
 
@@ -24,7 +24,8 @@ msgstr "கோப்பு தெரிவுசெய்க"
 msgid "No data was found. The panel will be empty."
 msgstr ""
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "இடம்:"
 
@@ -33,7 +34,7 @@ msgstr "இடம்:"
 msgid "Item properties"
 msgstr "/_பண்புகள்..."
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 #, fuzzy
 msgid "Removing the item will also remove its popup menu."
 msgstr ""
@@ -41,11 +42,11 @@ msgstr ""
 "\n"
 "உருப்படியைக் கழட்ட விருப்பமா?"
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "கட்டளை தெரிவுசெய்க"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "கட்டளை:"
 
@@ -65,41 +66,41 @@ msgstr "வேரோர் குறும்படம்"
 msgid "Drag file onto this frame to change the icon"
 msgstr "குறும்படத்தை மாற்றுவதற்கு, þச்சட்டம் மேல் கோப்பு þழுத்துப் போடவும்"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "தலைப்பு வாக்கியம்"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "உதவிகருவி:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "ஓர் பட்டியை தொடங்கருடன் சேர்க்கவும்"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "பட்டி உருப்படி மாற்றவும்"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1217 panel/controls.c:748
 #, fuzzy
 msgid "_Remove"
 msgstr "/_கழட்டுக"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "தொடங்கர்"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "உருப்படி மாற்றுவதற்கு 3ஆம் சுட்டி பொத்தானை அமுத்தவும்"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "தொடங்கர் சேர்க்கவும்"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "புதிய உருப்படி சேர்க்கவும்"
 
@@ -107,7 +108,7 @@ msgstr "புதிய உருப்படி சேர்க்கவும�
 msgid "Are you sure you want to exit?"
 msgstr "வெளிசெல்ல உங்களுக்கு விருப்பமா?"
 
-#: panel/main.c:401
+#: panel/main.c:402
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -124,61 +125,61 @@ msgstr ""
 "Xfce கணிமேசை சூழலை சேர்ந்தது\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:488
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr ""
 
-#: panel/main.c:493
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr ""
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr ""
 
-#: panel/controls.c:723 panel/panel.c:585
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 #, fuzzy
 msgid "_Properties..."
 msgstr "/_பண்புகள்..."
 
-#: panel/controls.c:737 panel/panel.c:575
+#: panel/controls.c:757 panel/panel.c:665
 #, fuzzy
 msgid "Add _new item"
 msgstr "/புதிய _உருப்படி சேர்க்கவும்"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "þந்த உருப்படிக்கு அமைப்புத் தேர்வுகள் கிடையாது"
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "XFCE பலகை"
 
-#: panel/panel.c:590
+#: panel/panel.c:680
 #, fuzzy
 msgid "_About Xfce"
 msgstr "/_XFCE பற்றி"
 
-#: panel/panel.c:595
+#: panel/panel.c:685
 #, fuzzy
 msgid "_Help"
 msgstr "/_உதவி"
 
-#: panel/panel.c:604
+#: panel/panel.c:694
 #, fuzzy
 msgid "_Lock screen"
 msgstr "/_திரையைப் பூட்டுக"
 
-#: panel/panel.c:609
+#: panel/panel.c:699
 #, fuzzy
 msgid "_Restart"
 msgstr "_நிலைமீட்டு"
 
-#: panel/panel.c:618
+#: panel/panel.c:708 iconbox/iconbox.c:627
 #, fuzzy
 msgid "E_xit"
 msgstr "/வெளி_ச்செல்"
@@ -243,55 +244,104 @@ msgstr "அமைப்புகள் மேலாளர் கிடையா�
 msgid "Menu"
 msgstr "பட்டி"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "þத்திரையில் ஏற்கனவே ஓர் அமைப்புத் தட்டு இயங்குகிறது"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "அமைப்பு தட்டு பதிவு செய்யமுடியவில்லை: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+msgid "%A %d %B %Y"
+msgstr ""
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "வேலைப் பட்டை"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "MCS சேவைப்பயனர் தடம் படைக்க முடியவில்லை"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "/_XFCE பற்றி"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "சிறிது"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "நடுத்தரம்"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "பெரிது"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "கிடையான"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "செங்குத்தமான"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "இடது"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "வலது"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "மேல்"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "கீழ்"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "பலகை அளவு:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "பலகை திசை அமைவு:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "பலகை இடம்:"
 
@@ -299,21 +349,166 @@ msgstr "பலகை இடம்:"
 msgid "Always on top:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "தானாகவே ஒளி/மறை:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce பலகை அமைப்புகள்"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "தோற்றம்"
 
-#: settings/xfce_settings_dialog.c:491
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "ஒழுக்கம்"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "இடம்"
+
+#: settings/xftaskbar_plugin.c:399
+#, fuzzy
+msgid "_Top"
+msgstr "மேல்"
+
+#: settings/xftaskbar_plugin.c:409
+#, fuzzy
+msgid "_Bottom"
+msgstr "கீழ்"
+
+#: settings/xftaskbar_plugin.c:422
+msgid "Alignment:"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr ""
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "அளவு"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "உயரம்:"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "தானாகவே மறைக்கவும்"
+
+#: settings/xftaskbar_plugin.c:566
+#, fuzzy
+msgid "Auto _hide taskbar"
+msgstr "வேலைப்பட்டையை தானாகவே மறைக்கவும்"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "வேலைகள்"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+#, fuzzy
+msgid "Show tasks from _all workspaces"
+msgstr ""
+"அனைத்து வேலை þடங்களில்\n"
+"உள்ள செயல்களையும் காண்பிக்கவும்"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr ""
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "பயனழையம்"
+
+#: settings/xftaskbar_plugin.c:634
+#, fuzzy
+msgid "Show _pager in taskbar"
+msgstr "பயனழையத்தை வேலைப்பட்டையில் காண்பிக்கவும்"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+#, fuzzy
+msgid "Status area"
+msgstr "சனி"
+
+#: settings/xftaskbar_plugin.c:650
+msgid "Show _notification icons"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+#, fuzzy
+msgid "Icon size"
+msgstr "குறும்படம் முன்காட்சி"
+
+#: settings/iconbox_plugin.c:691
+msgid "_Show only minimized applications"
+msgstr ""
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+#, fuzzy
+msgid "None"
+msgstr "_மூடு"
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+#, fuzzy
+msgid "Iconbox"
+msgstr "குறும்படம்:"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -367,15 +562,15 @@ msgstr "நொடிகள் காண்பிக்கவும்:"
 msgid "Xfce Clock"
 msgstr "XFCE கடிகாரம்"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr ""
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr ""
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "வரைவியல் பயனழையம்"
 
@@ -439,156 +634,82 @@ msgstr "அமைப்பு பொத்தான்கள்"
 msgid "Separator"
 msgstr "பிரிப்பு"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "அஞ்சல் பெட்டி:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 #, fuzzy
 msgid "New mail command:"
 msgstr "அஞ்சல் கட்டளை:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 #, fuzzy
 msgid "Command to run when new mail arrives"
 msgstr "பலகை பொத்தானை அமுத்தினால் þயக்கவேண்டிய கட்டளை"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "பலகை பொத்தானை அமுத்தினால் þயக்கவேண்டிய கட்டளை"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "இடைவெளி (நொடி):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 #, fuzzy
 msgid "Mail checker"
 msgstr "அஞ்சல் சரிபார்ப்பு"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Xfce பலகை அமைப்புகள்"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce பலகை அமைப்புகள்"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Xfce பலகை அமைப்புகள்"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce பலகை அமைப்புகள்"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "வேலைப் பட்டை"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "இடம்"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
+#: settings/xfce-taskbar-settings.desktop.in.h:2
 #, fuzzy
-msgid "_Top"
-msgstr "மேல்"
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce பலகை அமைப்புகள்"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
+#~ msgid "Notification area"
+#~ msgstr "அறிவிப்பு þடம்"
+
 #, fuzzy
-msgid "_Bottom"
-msgstr "கீழ்"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "வேலைப்பட்டையில் அமைப்பு தட்டு காண்பிக்கவும்"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr ""
+#~ msgid "Cannot get initial style"
+#~ msgstr "தொடக்க பாணியை பெறமுடியவில்லை"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr ""
+#~ msgid "This should not happen"
+#~ msgstr "þது நடைபெறக்கூடாது"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "தானாகவே மறைக்கவும்"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
 #, fuzzy
-msgid "Auto _hide taskbar"
-msgstr "வேலைப்பட்டையை தானாகவே மறைக்கவும்"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "கணிமேசை எல்லைகளை பெறமுடியவில்லை"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "அளவு"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "உயரம்:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "வேலைகள்"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-#, fuzzy
-msgid "Show tasks from _all workspaces"
-msgstr ""
-"அனைத்து வேலை þடங்களில்\n"
-"உள்ள செயல்களையும் காண்பிக்கவும்"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "பயனழையம்"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-#, fuzzy
-msgid "Show _pager in taskbar"
-msgstr "பயனழையத்தை வேலைப்பட்டையில் காண்பிக்கவும்"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "அறிவிப்பு þடம்"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-#, fuzzy
-msgid "Show _system tray in taskbar"
-msgstr "வேலைப்பட்டையில் அமைப்பு தட்டு காண்பிக்கவும்"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "தொடக்க பாணியை பெறமுடியவில்லை"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "þத்திரையில் ஏற்கனவே ஓர் அமைப்புத் தட்டு இயங்குகிறது"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "அமைப்பு தட்டு பதிவு செய்யமுடியவில்லை: %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "þது நடைபெறக்கூடாது"
-
-#: xftaskbar/xftaskbar.c:592
-#, fuzzy
-msgid "Cannot get default screen\n"
-msgstr "கணிமேசை எல்லைகளை பெறமுடியவில்லை"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "அமர்வு மேலாளருடன் இணைப்பு கொள்ள முடியவில்லை"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "MCS சேவைப்பயனர் தடம் படைக்க முடியவில்லை"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "அமர்வு மேலாளருடன் இணைப்பு கொள்ள முடியவில்லை"
 
 #~ msgid "Remove"
 #~ msgstr "கழட்டுக"
@@ -613,12 +734,6 @@ msgstr "MCS சேவைப்பயனர் தடம் படைக்க �
 
 #~ msgid "Select icon"
 #~ msgstr "குறுப்படம் தெரிவு செய்"
-
-#~ msgid "Icon:"
-#~ msgstr "குறும்படம்:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "குறும்படம் முன்காட்சி"
 
 #~ msgid ""
 #~ "Your window manager does not seem to support the new window manager hints "
@@ -668,9 +783,6 @@ msgstr "MCS சேவைப்பயனர் தடம் படைக்க �
 #~ msgid "Friday"
 #~ msgstr "வெள்ளி"
 
-#~ msgid "Saturday"
-#~ msgstr "சனி"
-
 #~ msgid "January"
 #~ msgstr "ஜனவரி"
 
@@ -706,9 +818,6 @@ msgstr "MCS சேவைப்பயனர் தடம் படைக்க �
 
 #~ msgid "December"
 #~ msgstr "டிசம்பர்"
-
-#~ msgid "_Done"
-#~ msgstr "_மூடு"
 
 #~ msgid "Type:"
 #~ msgstr "வகை:"

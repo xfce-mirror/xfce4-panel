@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-22 21:58+0100\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-12-31 16:47+0200\n"
 "Last-Translator: Yuval Tanny <tanai@int.gov.il>\n"
 "Language-Team: Hebrew Team <xfce2004@yahoo.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#: panel/xfce_support.c:557
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "בחר קובץ:"
 
@@ -25,7 +25,8 @@ msgstr "בחר קובץ:"
 msgid "No data was found. The panel will be empty."
 msgstr "לא נמצא מידע. הלוח יהיה ריק."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "מיקום:"
 
@@ -41,60 +42,60 @@ msgstr "הסרת הפריט גם תסיר את כל התפריטים הקופצ�
 msgid "Select command"
 msgstr "בחר פקודה"
 
-#: panel/item_dialog.c:268
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "פקודה:"
 
-#: panel/item_dialog.c:311
+#: panel/item_dialog.c:307
 msgid "Run in _terminal"
 msgstr "הרץ בתוך _מסוף"
 
-#: panel/item_dialog.c:329
+#: panel/item_dialog.c:325
 msgid "Use startup _notification"
 msgstr "השתמש בהתראת _פתיחה"
 
-#: panel/item_dialog.c:515
+#: panel/item_dialog.c:511
 msgid "Other Icon"
 msgstr "צלמית אחרת"
 
-#: panel/item_dialog.c:626
+#: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
 msgstr "גרור קובץ למסגרת זו כדי לשנות את הצלמית"
 
-#: panel/item_dialog.c:938
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "כותרת:"
 
-#: panel/item_dialog.c:967
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "תיאור כלי:"
 
-#: panel/item_dialog.c:995
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "הוסף תפריט למשגר"
 
-#: panel/item_dialog.c:1215
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "שנה פריט תפריט"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_הסר"
 
-#: panel/item_dialog.c:1233 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "משגר"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "לחץ על לחצן העכבר 3 פעמים כדי לשנות את הפריט"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "הוסף משגר"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "הוסף פריט חדש"
 
@@ -139,11 +140,11 @@ msgstr "%s הופעל בהצלחה עם ניהול ההפעלה"
 msgid "Could not create panel item \"%s\"."
 msgstr "אין אפשרות ליצור פריט ללוח \"%s\"."
 
-#: panel/controls.c:743 panel/panel.c:647
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "_מאפיינים..."
 
-#: panel/controls.c:757 panel/panel.c:637
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "הוסף פריט _חדש"
 
@@ -151,28 +152,28 @@ msgstr "הוסף פריט _חדש"
 msgid "This item has no configuration options"
 msgstr "לפריט זה אין אפשרויות הגדרה"
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:451
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "לוח Xfce"
 
-#: panel/panel.c:652
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "_אודות Xfce"
 
-#: panel/panel.c:657
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "_עזרה"
 
-#: panel/panel.c:666
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "_נעילת מסך"
 
-#: panel/panel.c:671
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "_איתחול"
 
-#: panel/panel.c:680
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "י_ציאה"
 
@@ -236,77 +237,266 @@ msgstr "מנהל ההגדרות אינו זמין"
 msgid "Menu"
 msgstr "תפריט"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "מגש המערכת כבר פתוח בחלון זה"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "אין אפשרות לרשום את מגש המערכת: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "שורת המשימות"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "אין אפשרות ליצור ערוץ לקוח MCS"
+
+#: iconbox/iconbox.c:567
+#, fuzzy
+msgid "Xfce Iconbox"
+msgstr "הגדרות סמלים Xfce 4"
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "_אודות Xfce"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "קטן"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "בינוני"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "גדול"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "ענק"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "אופקי"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "אנכי"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "משמאל"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "מימין"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "מעל"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "מתחת"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "גודל הלוח:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "כיוון הלוח:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "מיקום תפריט התוכניות:"
 
-#: settings/xfce_settings_dialog.c:344
+#: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "תמיד בחזית:"
 
-#: settings/xfce_settings_dialog.c:398
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "הסתרה אוטומטית:"
 
-#: settings/xfce_settings_dialog.c:468
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "הגדרות לוח Xfce"
 
-#: settings/xfce_settings_dialog.c:478
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "מראה"
 
-#: settings/xfce_settings_dialog.c:493
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "התנהגות"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "מיקום"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "_עליון"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "_תחתון"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "יישור"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_שמאל"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_אמצע"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "_מין"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "גודל"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "גובה:"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "רוחב:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "הסתרה אוטומטית"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "_הסתרה אוטומטית של שורת המשימות"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "משימות"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "הצג משימות מ_כל סביבות העבודה"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "תמיד _קבץ משימות"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "הצג _שמות של יישומים"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "מחליף סביבות עבודה"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "הצג _מחליף סביבות עבודה בשורת המשימות"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "הצג _שמות של יישומים"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "הצג _שמות של יישומים"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+#, fuzzy
+msgid "Iconbox"
+msgstr "הגדרות סמלים"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -431,138 +621,65 @@ msgstr "לחצני מערכת"
 msgid "Separator"
 msgstr "מפריד"
 
-#: plugins/mailcheck/mailcheck.c:836
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "תיבת דואר:"
 
-#: plugins/mailcheck/mailcheck.c:873
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "פקודת דואר חדשה:"
 
-#: plugins/mailcheck/mailcheck.c:887
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "פקודה להרצה כאשר דואר חדש מגיע"
 
-#: plugins/mailcheck/mailcheck.c:917
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "פקודה להרצה כאשר הלחצן על הלוח נלחץ"
 
-#: plugins/mailcheck/mailcheck.c:938
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "משך זמן (שניות):"
 
-#: plugins/mailcheck/mailcheck.c:1014
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "בדיקת דואר"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:534
-msgid "Taskbar"
-msgstr "שורת המשימות"
+#: settings/xfce-panel-settings.desktop.in.h:1
+msgid "Panel Settings"
+msgstr "הגדרות לוח"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "מיקום"
+#: settings/xfce-panel-settings.desktop.in.h:2
+msgid "Xfce 4 Panel Settings"
+msgstr "הגדרות לוח Xfce 4"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "_עליון"
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+msgid "Iconbox Settings"
+msgstr "הגדרות סמלים"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_תחתון"
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+msgid "Xfce 4 Iconbox Settings"
+msgstr "הגדרות סמלים Xfce 4"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "יישור"
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+msgid "Taskbar Settings"
+msgstr "הגדרות שורת המשימות"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_שמאל"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+msgid "Xfce 4 Taskbar Settings"
+msgstr "הגדרות שורת המשימות Xfce 4"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_אמצע"
+#~ msgid "Notification area"
+#~ msgstr "איזור התראה"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "_מין"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "הצג את _מגש המערכת בשורת המשימות"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "הסתרה אוטומטית"
+#~ msgid "Cannot get initial style"
+#~ msgstr "סגנון הפתיחה אינו זמין"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "_הסתרה אוטומטית של שורת המשימות"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "אין אפשרות לקבל את מסך ברירת המחדל\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "גודל"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "גובה:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "רוחב:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "משימות"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "הצג משימות מ_כל סביבות העבודה"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "תמיד _קבץ משימות"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "הצג _שמות של יישומים"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "מחליף סביבות עבודה"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "הצג _מחליף סביבות עבודה בשורת המשימות"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "איזור התראה"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "הצג את _מגש המערכת בשורת המשימות"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "סגנון הפתיחה אינו זמין"
-
-#: xftaskbar/xftaskbar.c:267
-msgid "There is already a system tray running on this screen"
-msgstr "מגש המערכת כבר פתוח בחלון זה"
-
-#: xftaskbar/xftaskbar.c:275
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "אין אפשרות לרשום את מגש המערכת: %s"
-
-#: xftaskbar/xftaskbar.c:603
-msgid "Cannot get default screen\n"
-msgstr "אין אפשרות לקבל את מסך ברירת המחדל\n"
-
-#: xftaskbar/xftaskbar.c:692
-msgid "Cannot connect to session manager"
-msgstr "אין אפשרות להתחבר למנהל ההפעלה"
-
-#: xftaskbar/xftaskbar.c:705
-msgid "Cannot create MCS client channel"
-msgstr "אין אפשרות ליצור ערוץ לקוח MCS"
-
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "אין אפשרות להתחבר למנהל ההפעלה"

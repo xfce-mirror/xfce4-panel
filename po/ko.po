@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-11-27 22:36+0900\n"
 "Last-Translator: ByungHyun Choi<byunghyunchoi@rtlinux.or.kr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "화일선택"
 
@@ -23,7 +23,8 @@ msgstr "화일선택"
 msgid "No data was found. The panel will be empty."
 msgstr "데이터를 찾지 못했기 때문에 패널에는 아무 것도 보이지 않습니다."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "위치:"
 
@@ -31,15 +32,15 @@ msgstr "위치:"
 msgid "Item properties"
 msgstr "속성"
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "이 항목을 삭제하면 팝업 메뉴도 같이 사라집니다."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "명령어 선택"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "명령:"
 
@@ -59,40 +60,40 @@ msgstr "다른 아이콘"
 msgid "Drag file onto this frame to change the icon"
 msgstr "아이콘을 변경하려면 이 프레임에 화일을 끌어다 놓으세요."
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "캡션:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "도구도움말:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "실행기에 메뉴 추가"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "메뉴 항목 변경"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "삭제(_R)"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "실행기"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "항목을 변경하려면 마우스 버튼 3을 클릭하세요."
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "실행기 추가"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "새 항목 추가"
 
@@ -100,7 +101,7 @@ msgstr "새 항목 추가"
 msgid "Are you sure you want to exit?"
 msgstr "종료하시겠습니까?"
 
-#: panel/main.c:401
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -123,55 +124,55 @@ msgstr ""
 " GNU GPL 라이선스를 따릅니다.\n"
 "\n"
 
-#: panel/main.c:488
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "세션관리 없이 %s를(을) 시작했습니다."
 
-#: panel/main.c:493
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "세션을 관리하면서 %s를(을) 시작했습니다."
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "패널 항목 \"%s\"를(을) 생성하지 못 했습니다."
 
-#: panel/controls.c:723 panel/panel.c:585
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "속성(_P)"
 
-#: panel/controls.c:737 panel/panel.c:575
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "새 항목 추가(_n)"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "이 아이템은 속성을 정의할 수 없습니다."
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce 패널"
 
-#: panel/panel.c:590
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "Xfce는(_A)..."
 
-#: panel/panel.c:595
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: panel/panel.c:604
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "화면잠금(_L)"
 
-#: panel/panel.c:609
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "다시 시작(_R)"
 
-#: panel/panel.c:618
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "종료(_x)"
 
@@ -235,55 +236,106 @@ msgstr "설정 도구 모음을 실행시킬 수 없군요."
 msgid "Menu"
 msgstr "메뉴"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "이 화면에는 시스템 트레이가 이미 동작 중입니다."
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "시스템 트레이에 %s를(을) 등록하지 못 했습니다."
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%Y-%m-%d %A"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "태스크바"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "MCS 클라이언트 채널을 생성하지 못 했습니다."
+
+#: iconbox/iconbox.c:567
+#, fuzzy
+msgid "Xfce Iconbox"
+msgstr "Xfce 4 아이콘박스 설정"
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "Xfce는(_A)..."
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "작게"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "중간"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "크게"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "아주 크게"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "수평"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "수직"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "좌측"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "우측"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "위"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "아래"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "패널 크기:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "패널 방향:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "패널 위치:"
 
@@ -291,21 +343,159 @@ msgstr "패널 위치:"
 msgid "Always on top:"
 msgstr "항상 위에 보이기:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "자동 숨김:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce 패널 설정"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "겉 모습"
 
-#: settings/xfce_settings_dialog.c:491
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "동작"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "위치"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "위(_T)"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "아래(_B)"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "배치"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "왼쪽(_L)"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "가운데(_C)"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "오른쪽(_R)"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "크기"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "높이 :"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "폭:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "자동 숨기기"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "태스크바 자동 숨김(_h)"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "태스크"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "모든 작업공간의 태스크 보이기(_a)"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "같은 태스크는 한 군데로 모으기(_g) "
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "프로그램 이름 보이기(_n)"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "페이저"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "태스크바에 페이저 보이기(_p)"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "프로그램 이름 보이기(_n)"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "프로그램 이름 보이기(_n)"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+#, fuzzy
+msgid "Iconbox"
+msgstr "아이콘박스 설정"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -359,15 +549,15 @@ msgstr "초:"
 msgid "Xfce Clock"
 msgstr "Xfce 시계"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "몇 줄:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "몇 열:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "페이저"
 
@@ -429,137 +619,65 @@ msgstr "시스템 버튼"
 msgid "Separator"
 msgstr "분리표시"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "우편함:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "메일 명령:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "새로운 편지가 왔을 때 실행할 명령"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "패널의 버튼을 클릭할 때 실행할 명령"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "확인주기(초):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "메일 확인"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:534
-msgid "Taskbar"
-msgstr "태스크바"
+#: settings/xfce-panel-settings.desktop.in.h:1
+msgid "Panel Settings"
+msgstr "패널 설정"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "위치"
+#: settings/xfce-panel-settings.desktop.in.h:2
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce 4 패널 설정"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "위(_T)"
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+msgid "Iconbox Settings"
+msgstr "아이콘박스 설정"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "아래(_B)"
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce 4 아이콘박스 설정"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "배치"
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+msgid "Taskbar Settings"
+msgstr "태스크바 설정"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "왼쪽(_L)"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce 4 태스크바 설정"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "가운데(_C)"
+#~ msgid "Notification area"
+#~ msgstr "알림 영역"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "오른쪽(_R)"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "태스크바에 시스템 트레이 보이기(_s)"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "자동 숨기기"
+#~ msgid "Cannot get initial style"
+#~ msgstr "초기화 스타일을 못 찾겠습니다."
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "태스크바 자동 숨김(_h)"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "화면 여백을 확보하지 못 했습니다.\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "크기"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "높이 :"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "폭:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "태스크"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "모든 작업공간의 태스크 보이기(_a)"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "같은 태스크는 한 군데로 모으기(_g) "
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "프로그램 이름 보이기(_n)"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "페이저"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "태스크바에 페이저 보이기(_p)"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "알림 영역"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "태스크바에 시스템 트레이 보이기(_s)"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "초기화 스타일을 못 찾겠습니다."
-
-#: xftaskbar/xftaskbar.c:267
-msgid "There is already a system tray running on this screen"
-msgstr "이 화면에는 시스템 트레이가 이미 동작 중입니다."
-
-#: xftaskbar/xftaskbar.c:275
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "시스템 트레이에 %s를(을) 등록하지 못 했습니다."
-
-#: xftaskbar/xftaskbar.c:603
-msgid "Cannot get default screen\n"
-msgstr "화면 여백을 확보하지 못 했습니다.\n"
-
-#: xftaskbar/xftaskbar.c:692
-msgid "Cannot connect to session manager"
-msgstr "세션 관리도구와 연결하지 못 했습니다."
-
-#: xftaskbar/xftaskbar.c:705
-msgid "Cannot create MCS client channel"
-msgstr "MCS 클라이언트 채널을 생성하지 못 했습니다."
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "세션 관리도구와 연결하지 못 했습니다."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-21 13:35+0200\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-10-28 10:34+0000\n"
 "Last-Translator: Alois Nespor <Alois.Nespor@seznam.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
 
-#: panel/xfce_support.c:514
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "Vyber soubor"
 
@@ -26,23 +26,24 @@ msgstr "Vyber soubor"
 msgid "No data was found. The panel will be empty."
 msgstr "Nenalezeny žádné data. Panel bude prázdný."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Pozice:"
 
-#: panel/controls_dialog.c:153
+#: panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "Vlastnosti položky"
 
-#: panel/controls_dialog.c:207 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Odstranením položky odstraníte také její vyskakovací menu."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Vyber příkaz"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "Příkaz:"
 
@@ -62,40 +63,40 @@ msgstr "Jiná ikona"
 msgid "Drag file onto this frame to change the icon"
 msgstr "Táhni soubor na tento rám ke změně ikony"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "Nadpis:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "Rada:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "Pridej menu k spušteči"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "Změnit položku menu"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Odstranit"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "Spoušteč"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Klikni třetím tlačítkem ke změně položky"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Přidej spoušteč"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Přidej novou položku"
 
@@ -103,7 +104,7 @@ msgstr "Přidej novou položku"
 msgid "Are you sure you want to exit?"
 msgstr "Skutečně chcete ukončit Xfce?"
 
-#: panel/main.c:398
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -126,107 +127,107 @@ msgstr ""
 " Licence GNU GPL.\n"
 "\n"
 
-#: panel/main.c:472
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Úspešně spustěno bez správy relace"
 
-#: panel/main.c:477
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Úspešně spustěno se správou relace"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Nelze vytvořit položku panelu \"%s\"."
 
-#: panel/controls.c:723 panel/panel.c:562
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "_Vlastnosti..."
 
-#: panel/controls.c:737 panel/panel.c:552
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "Přidat _novou položku"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Tato položka nemá žádná nastavitelné vlastnosti"
 
-#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:448
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: panel/panel.c:567
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "_O Xfce"
 
-#: panel/panel.c:572
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "_Nápověda"
 
-#: panel/panel.c:581
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "_Zamknout obrazovku"
 
-#: panel/panel.c:586
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "_Restartovat"
 
-#: panel/panel.c:595
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "_Ukončit práci"
 
-#: panel/icons.c:60
+#: panel/icons.c:63
 msgid "Default"
 msgstr "Výchozí"
 
-#: panel/icons.c:61
+#: panel/icons.c:64
 msgid "Editor"
 msgstr "Editor"
 
-#: panel/icons.c:62
+#: panel/icons.c:65
 msgid "File management"
 msgstr "Správa souborů"
 
-#: panel/icons.c:63
+#: panel/icons.c:66
 msgid "Utilities"
 msgstr "Nástroje"
 
-#: panel/icons.c:64
+#: panel/icons.c:67
 msgid "Games"
 msgstr "Hry"
 
-#: panel/icons.c:65
+#: panel/icons.c:68
 msgid "Help browser"
 msgstr "Prohlížeč nápovědy"
 
-#: panel/icons.c:66
+#: panel/icons.c:69
 msgid "Multimedia"
 msgstr "Multimédia"
 
-#: panel/icons.c:67
+#: panel/icons.c:70
 msgid "Network"
 msgstr "Síť"
 
-#: panel/icons.c:68
+#: panel/icons.c:71
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panel/icons.c:69
+#: panel/icons.c:72
 msgid "Printer"
 msgstr "Tiskárna"
 
-#: panel/icons.c:70
+#: panel/icons.c:73
 msgid "Productivity"
 msgstr "Produktivita"
 
-#: panel/icons.c:71
+#: panel/icons.c:74
 msgid "Sound"
 msgstr "Zvuk"
 
-#: panel/icons.c:72
+#: panel/icons.c:75
 msgid "Terminal"
 msgstr "Terminál"
 
@@ -238,55 +239,105 @@ msgstr "Správce nastavení není dostupný"
 msgid "Menu"
 msgstr "Menu"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "Na této obrazovce již jedna upozorňovací oblast běží"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Nelze vložit do systémového panelu: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "Panel úloh"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "Nelze vytvořit kanál MCS klienta"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "_O Xfce"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Malý"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Střední"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Velký"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Obrovský"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Horizontální"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Vertikální"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Vlevo"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Vpravo"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Nahoře"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Dole"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Velikost panelu:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Orientace panelu:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Pozice pro vyskakovací okno:"
 
@@ -294,21 +345,158 @@ msgstr "Pozice pro vyskakovací okno:"
 msgid "Always on top:"
 msgstr "Vždy nahoře:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Automaticky skrývat:"
 
-#: settings/xfce_settings_dialog.c:465
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Nastavení panelu Xfce"
 
-#: settings/xfce_settings_dialog.c:475
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: settings/xfce_settings_dialog.c:493
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Chování"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "Pozice"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "_Nahoře"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "_Dole"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "Zarovnat"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_Vlevo"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_Na střed"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "_Napravo"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "Velikost"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "Výška"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "Šířka:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "Automatické skrývání "
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "Automatické skrývání panelu úloh"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "Úlohy"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "Ukazovat úlohy ze všech pracovních ploch"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "Vždy _seskupovat úkoly"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "Ukázat _jména aplikací"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "Přepínač ploch"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "Zobrazit přepínač ploch v panelu úloh"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "Ukázat _jména aplikací"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "Ukázat _jména aplikací"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+msgid "Iconbox"
+msgstr ""
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -322,55 +510,55 @@ msgstr "Chování"
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:423
+#: plugins/clock/clock.c:429
 msgid "Clock type:"
 msgstr "Typ hodin:"
 
-#: plugins/clock/clock.c:436
+#: plugins/clock/clock.c:442
 msgid "Analog"
 msgstr "Analogové"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:446
 msgid "Digital"
 msgstr "Digitální"
 
-#: plugins/clock/clock.c:444
+#: plugins/clock/clock.c:450
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:506
+#: plugins/clock/clock.c:512
 msgid "Hour mode:"
 msgstr "Hodinový mód:"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:519
 msgid "24 hour"
 msgstr "24 hodinový"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:525
 msgid "12 hour"
 msgstr "12 hodinový"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:531
 msgid "AM/PM"
 msgstr "Dopoledne/Odpoledne"
 
-#: plugins/clock/clock.c:563
+#: plugins/clock/clock.c:569
 msgid "Show seconds:"
 msgstr "Ukázat sekundy:"
 
-#: plugins/clock/clock.c:676
+#: plugins/clock/clock.c:682
 msgid "Xfce Clock"
 msgstr "Hodiny Xfce"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Počet řádků:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Počet sloupců:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Grafický přepínač ploch"
 
@@ -433,142 +621,74 @@ msgstr "Systémová tlačítka"
 msgid "Separator"
 msgstr "Oddělovač"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Poštovní schránka"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Příkaz nové pošty:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Při obdržení nové pošty spustit příkaz"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Při stiknutí tlačítka na panelu spustit příkaz"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Interval (sek)"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Kontrola pošty"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Nastavení panelu Xfce"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Nastavení panelu Xfce"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Nastavení panelu Xfce"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Nastavení panelu Xfce"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "Panel úloh"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Pozice"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Nastavení panelu Xfce"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "_Nahoře"
+#~ msgid "Notification area"
+#~ msgstr "Upozorňovací oblast"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_Dole"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "Ukázat systémový panel v panelu úloh"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "Zarovnat"
+#~ msgid "Cannot get initial style"
+#~ msgstr "Nemohu získat výchozí styl"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_Vlevo"
+#~ msgid "This should not happen"
+#~ msgstr "Toto se nemělo stát"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_Na střed"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Nemohu získat standartní obraz\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "_Napravo"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Automatické skrývání "
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "Automatické skrývání panelu úloh"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Velikost"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Výška"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "Šířka:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Úlohy"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "Ukazovat úlohy ze všech pracovních ploch"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "Vždy _seskupovat úkoly"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "Ukázat _jména aplikací"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Přepínač ploch"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "Zobrazit přepínač ploch v panelu úloh"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Upozorňovací oblast"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "Ukázat systémový panel v panelu úloh"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Nemohu získat výchozí styl"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Na této obrazovce již jedna upozorňovací oblast běží"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Nelze vložit do systémového panelu: %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Toto se nemělo stát"
-
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "Nemohu získat standartní obraz\n"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "Nemohu se připojit ke správci sezení"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "Nelze vytvořit kanál MCS klienta"
-
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "Nemohu se připojit ke správci sezení"

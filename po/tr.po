@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-21 13:35+0200\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-10-10 11:59+0300\n"
 "Last-Translator: Erçin EKER <ercin.eker@linux.org.tr>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:514
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "Dosya seç"
 
@@ -23,23 +23,24 @@ msgstr "Dosya seç"
 msgid "No data was found. The panel will be empty."
 msgstr "Hiçbir veri bulunamadı. Panel boş olacak."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Konum:"
 
-#: panel/controls_dialog.c:153
+#: panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "Nesne tercihleri"
 
-#: panel/controls_dialog.c:207 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Bu bileşeni silmek ona bağlı menüyüde silecektir."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Komut seç"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "Komut:"
 
@@ -59,40 +60,40 @@ msgstr "Diğer Simge"
 msgid "Drag file onto this frame to change the icon"
 msgstr "Simgeyi değiştirmek için bu çerçeveye bir dosya sürükleyin"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "Başlık:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "İpucu:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "Başlatıcıya menü ekle"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "Menü nesnesini değiştir"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Sil"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "Başlatıcı"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Nesneyi değiştirmek için farenin 3. tuşuna basın"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Başlatıcı ekle"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Yeni nesne ekle"
 
@@ -100,7 +101,7 @@ msgstr "Yeni nesne ekle"
 msgid "Are you sure you want to exit?"
 msgstr "Çıkmak istediğinizden emin misiniz?"
 
-#: panel/main.c:398
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -123,107 +124,107 @@ msgstr ""
 " GNU GPL ile lisanslanmıştır.\n"
 "\n"
 
-#: panel/main.c:472
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Oturum yöneticimi olmadan başarıyla başladı"
 
-#: panel/main.c:477
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Oturum yönetimiyle başarıyla başladı"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Panel nesnesi \"%s\" oluşturulamıyor."
 
-#: panel/controls.c:723 panel/panel.c:562
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "_Seçenekler..."
 
-#: panel/controls.c:737 panel/panel.c:552
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "Yeni nesne _ekle"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Bu nesne ayarlanabilir seçenek sunmuyor"
 
-#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:448
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Paneli"
 
-#: panel/panel.c:567
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "Xfce _Hakkında"
 
-#: panel/panel.c:572
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "_Yardım"
 
-#: panel/panel.c:581
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "Ekranı _kilitle"
 
-#: panel/panel.c:586
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "_Yeniden Başlat"
 
-#: panel/panel.c:595
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "_Çık"
 
-#: panel/icons.c:60
+#: panel/icons.c:63
 msgid "Default"
 msgstr "Öntanımlı"
 
-#: panel/icons.c:61
+#: panel/icons.c:64
 msgid "Editor"
 msgstr "Düzenleyici"
 
-#: panel/icons.c:62
+#: panel/icons.c:65
 msgid "File management"
 msgstr "Dosya yönetimi"
 
-#: panel/icons.c:63
+#: panel/icons.c:66
 msgid "Utilities"
 msgstr "Araçlar"
 
-#: panel/icons.c:64
+#: panel/icons.c:67
 msgid "Games"
 msgstr "Oyunlar"
 
-#: panel/icons.c:65
+#: panel/icons.c:68
 msgid "Help browser"
 msgstr "Yardım Merkezi"
 
-#: panel/icons.c:66
+#: panel/icons.c:69
 msgid "Multimedia"
 msgstr "Çoklu Ortam"
 
-#: panel/icons.c:67
+#: panel/icons.c:70
 msgid "Network"
 msgstr "Ağ"
 
-#: panel/icons.c:68
+#: panel/icons.c:71
 msgid "Graphics"
 msgstr "Grafik"
 
-#: panel/icons.c:69
+#: panel/icons.c:72
 msgid "Printer"
 msgstr "Yazıcı"
 
-#: panel/icons.c:70
+#: panel/icons.c:73
 msgid "Productivity"
 msgstr "Üretkenlik"
 
-#: panel/icons.c:71
+#: panel/icons.c:74
 msgid "Sound"
 msgstr "Ses"
 
-#: panel/icons.c:72
+#: panel/icons.c:75
 msgid "Terminal"
 msgstr "Terminal"
 
@@ -235,55 +236,105 @@ msgstr "Ayar yöneticisi kullanılamıyor"
 msgid "Menu"
 msgstr "Menü"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "Bu ekranda zaten çalışan bir sistem çekmecesi var"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Sistem çekmecesi kaydedilemiyor: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%d %B %Y, %A"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "Görev çubuğu"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "MCS istemci kanalı oluşturulamıyor"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "Xfce _Hakkında"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Küçük"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Orta"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Büyük"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Kocaman"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Yatay"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Dikey"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Sol"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Sağ"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Üst"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Alt"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Panel boyutu:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Panel yönelimi:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Popup konumu:"
 
@@ -291,21 +342,161 @@ msgstr "Popup konumu:"
 msgid "Always on top:"
 msgstr "Her zaman üstte:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Otomatik Gizleme:"
 
-#: settings/xfce_settings_dialog.c:465
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce Panel Ayarları"
 
-#: settings/xfce_settings_dialog.c:475
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: settings/xfce_settings_dialog.c:493
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Davranış"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "Konum"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "Ü_st"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "A_lt"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "Hizalama"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_Sol"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_Merkez"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "S_ağ"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "Boyut"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "Yükseklik:"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "Genişlik:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "Otomatik gizle"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "Görev çubuğunu Oto. _gizle"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "Görevler"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "_Tüm masaüstlerindeki görevleri göster"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "Göreleri _her zaman grupla"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "Uygulama _isimlerini göster"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "Sayfalayıcı"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "Görev çubuğunda _sayfalayıcıyı göster"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+#, fuzzy
+msgid "Status area"
+msgstr "Cumartesi"
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "Uygulama _isimlerini göster"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+#, fuzzy
+msgid "Icon size"
+msgstr "Simge Önizlemesi"
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "Uygulama _isimlerini göster"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+#, fuzzy
+msgid "Iconbox"
+msgstr "Simge:"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -319,55 +510,55 @@ msgstr "Davranış"
 msgid "%A, %d %B %Y"
 msgstr "%d %B %Y, %A"
 
-#: plugins/clock/clock.c:423
+#: plugins/clock/clock.c:429
 msgid "Clock type:"
 msgstr "Saat türü:"
 
-#: plugins/clock/clock.c:436
+#: plugins/clock/clock.c:442
 msgid "Analog"
 msgstr "Analog"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:446
 msgid "Digital"
 msgstr "Sayısal"
 
-#: plugins/clock/clock.c:444
+#: plugins/clock/clock.c:450
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:506
+#: plugins/clock/clock.c:512
 msgid "Hour mode:"
 msgstr "Saat biçimi:"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:519
 msgid "24 hour"
 msgstr "24 saat"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:525
 msgid "12 hour"
 msgstr "12 saat"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:531
 msgid "AM/PM"
 msgstr "ÖÖ/ÖS"
 
-#: plugins/clock/clock.c:563
+#: plugins/clock/clock.c:569
 msgid "Show seconds:"
 msgstr "Saniyeyi göster:"
 
-#: plugins/clock/clock.c:676
+#: plugins/clock/clock.c:682
 msgid "Xfce Clock"
 msgstr "Xfce Saati"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Satır sayısı:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Sütun sayısı:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Grafik sayfalayıcı"
 
@@ -430,144 +621,77 @@ msgstr "Sistem düğmeleri"
 msgid "Separator"
 msgstr "Ayırıcı"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Posta kutusu:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Yeni posta komutu:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Yeni posta geldiğinde çalıştırılacak komut"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Paneldeki düğmeye tıklandığında çalıştırılacak komut"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Gecikme (sn):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Posta denetleyici"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Xfce Panel Ayarları"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce Panel Ayarları"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Xfce Panel Ayarları"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce Panel Ayarları"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "Görev çubuğu"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Konum"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce Panel Ayarları"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "Ü_st"
+#~ msgid "Notification area"
+#~ msgstr "Bilgilendirme bölümü"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "A_lt"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "Sis_tem çekmecesini görev çubuğunda göster"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "Hizalama"
+#~ msgid "Cannot get initial style"
+#~ msgstr "Stil elde edilemiyor"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_Sol"
+#~ msgid "This should not happen"
+#~ msgstr "Bu gerçekleşmeyecek"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_Merkez"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Öntanımlı ekran belirlenemiyor\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "S_ağ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Otomatik gizle"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "Görev çubuğunu Oto. _gizle"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Boyut"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Yükseklik:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "Genişlik:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Görevler"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "_Tüm masaüstlerindeki görevleri göster"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "Göreleri _her zaman grupla"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "Uygulama _isimlerini göster"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Sayfalayıcı"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "Görev çubuğunda _sayfalayıcıyı göster"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Bilgilendirme bölümü"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "Sis_tem çekmecesini görev çubuğunda göster"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Stil elde edilemiyor"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Bu ekranda zaten çalışan bir sistem çekmecesi var"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Sistem çekmecesi kaydedilemiyor: %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Bu gerçekleşmeyecek"
-
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "Öntanımlı ekran belirlenemiyor\n"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "Oturum yöneticisine bağlanılamıyor"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "MCS istemci kanalı oluşturulamıyor"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "Oturum yöneticisine bağlanılamıyor"
 
 #~ msgid "Remove"
 #~ msgstr "Kaldır"
@@ -592,12 +716,6 @@ msgstr "MCS istemci kanalı oluşturulamıyor"
 
 #~ msgid "Select icon"
 #~ msgstr "Simge seçin"
-
-#~ msgid "Icon:"
-#~ msgstr "Simge:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Simge Önizlemesi"
 
 #~ msgid ""
 #~ "Your window manager does not seem to support the new window manager hints "
@@ -646,9 +764,6 @@ msgstr "MCS istemci kanalı oluşturulamıyor"
 
 #~ msgid "Friday"
 #~ msgstr "Cuma"
-
-#~ msgid "Saturday"
-#~ msgstr "Cumartesi"
 
 #~ msgid "January"
 #~ msgstr "Ocak"

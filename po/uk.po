@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-12-22 21:58+0100\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2005-01-6 00:21+0200\n"
 "Last-Translator: axim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:557
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "Вибір файлу"
 
@@ -23,7 +23,8 @@ msgstr "Вибір файлу"
 msgid "No data was found. The panel will be empty."
 msgstr "Дані не знайдено. Панель буде порожня."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Позиція:"
 
@@ -39,60 +40,60 @@ msgstr "При видаленні об'єкта також буде видало
 msgid "Select command"
 msgstr "Вибір програми"
 
-#: panel/item_dialog.c:268
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "Команда:"
 
-#: panel/item_dialog.c:311
+#: panel/item_dialog.c:307
 msgid "Run in _terminal"
 msgstr "Запустити у _терміналі"
 
-#: panel/item_dialog.c:329
+#: panel/item_dialog.c:325
 msgid "Use startup _notification"
 msgstr "Використовувати _сповіщення про запуск"
 
-#: panel/item_dialog.c:515
+#: panel/item_dialog.c:511
 msgid "Other Icon"
 msgstr "Інший значок"
 
-#: panel/item_dialog.c:626
+#: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
 msgstr "Перетягніть сюди файл, щоб змінити значок"
 
-#: panel/item_dialog.c:938
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "Назва:"
 
-#: panel/item_dialog.c:967
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "Підказка:"
 
-#: panel/item_dialog.c:995
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "Додати меню до об'єкта"
 
-#: panel/item_dialog.c:1215
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "Зміна елемента меню"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "В_идалити"
 
-#: panel/item_dialog.c:1233 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "Запуск"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Клацніть середньою кнопкою миші щоб змінити об'єкт"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Додати запуск"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Додати новий об'єкт"
 
@@ -138,11 +139,11 @@ msgstr "%s: Успішно запущено. Керування сеансами
 msgid "Could not create panel item \"%s\"."
 msgstr "Не вдається створити елемент панелі \"%s\"."
 
-#: panel/controls.c:743 panel/panel.c:647
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "В_ластивості..."
 
-#: panel/controls.c:757 panel/panel.c:637
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "Додати _новий об'єкт"
 
@@ -150,28 +151,28 @@ msgstr "Додати _новий об'єкт"
 msgid "This item has no configuration options"
 msgstr "Об'єкт не має параметрів"
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:451
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Панель Xfce"
 
-#: panel/panel.c:652
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "_Про Xfce"
 
-#: panel/panel.c:657
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "_Довідка"
 
-#: panel/panel.c:666
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "_Блокувати екран"
 
-#: panel/panel.c:671
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "_Перезапустити"
 
-#: panel/panel.c:680
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "Ви_йти"
 
@@ -235,78 +236,266 @@ msgstr "Менеджер параметрів відсутній"
 msgid "Menu"
 msgstr "Меню"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "Системний лоток вже зареєстрований на цьому екрані"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Неможливо зареєструвати системний лоток: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "Панель задач"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "Неможливо створити канал до MCS клієнта"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "_Про Xfce"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Маленький"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Середній"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Великий"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Величезний"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Горизонтальне"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Вертикальне"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Зліва"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Справа"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Згори"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Знизу"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Розмір панелі:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Розташування панелі:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Кнопка меню:"
 
-#: settings/xfce_settings_dialog.c:344
+#: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "Згори над вікнами:"
 
-#: settings/xfce_settings_dialog.c:398
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Автоматично приховувати:"
 
-#: settings/xfce_settings_dialog.c:468
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Параметри панелі Xfce"
 
-#: settings/xfce_settings_dialog.c:478
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Зовнішній вигляд"
 
-#. autohide
-#: settings/xfce_settings_dialog.c:712
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Поведінка"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "Розташування"
+
+#: settings/xftaskbar_plugin.c:399
+#, fuzzy
+msgid "_Top"
+msgstr "Згори"
+
+#: settings/xftaskbar_plugin.c:409
+#, fuzzy
+msgid "_Bottom"
+msgstr "Знизу"
+
+#: settings/xftaskbar_plugin.c:422
+msgid "Alignment:"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr ""
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "Розмір"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "Висота:"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "Автоматичне приховування"
+
+#: settings/xftaskbar_plugin.c:566
+#, fuzzy
+msgid "Auto _hide taskbar"
+msgstr "Автоматично приховувати панель задач"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "Процеси"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+#, fuzzy
+msgid "Show tasks from _all workspaces"
+msgstr "Показувати процеси усіх робочих стільниць"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr ""
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "Графічний пейджер"
+
+#: settings/xftaskbar_plugin.c:634
+#, fuzzy
+msgid "Show _pager in taskbar"
+msgstr "Показувати пейджер на панелі задач"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+msgid "Show _notification icons"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+msgid "_Show only minimized applications"
+msgstr ""
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+msgid "Iconbox"
+msgstr ""
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -431,148 +620,76 @@ msgstr "Системні кнопки"
 msgid "Separator"
 msgstr "Розділювач"
 
-#: plugins/mailcheck/mailcheck.c:836
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Поштова скринька:"
 
-#: plugins/mailcheck/mailcheck.c:873
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "При отриманні нової пошти виконувати:"
 
-#: plugins/mailcheck/mailcheck.c:887
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Команда, що виконується при отриманні нової пошти"
 
-#: plugins/mailcheck/mailcheck.c:917
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Команда, що виконується при натисканні кнопки на панелі"
 
-#: plugins/mailcheck/mailcheck.c:938
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Інтервал (сек):"
 
-#: plugins/mailcheck/mailcheck.c:1014
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Перевірка почти"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Параметри панелі Xfce"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Параметри панелі Xfce"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Параметри панелі Xfce"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Параметри панелі Xfce"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "Панель задач"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Розташування"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
+#: settings/xfce-taskbar-settings.desktop.in.h:2
 #, fuzzy
-msgid "_Top"
-msgstr "Згори"
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Параметри панелі Xfce"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
+#~ msgid "Notification area"
+#~ msgstr "Область сповіщення"
+
 #, fuzzy
-msgid "_Bottom"
-msgstr "Знизу"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "Показувати системний лоток на панелі задач"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr ""
+#~ msgid "Cannot get initial style"
+#~ msgstr "Помилка отримання початкового стилю"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr ""
+#~ msgid "This should not happen"
+#~ msgstr "Цього не повинно бути"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Автоматичне приховування"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
 #, fuzzy
-msgid "Auto _hide taskbar"
-msgstr "Автоматично приховувати панель задач"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Неможливо визначити поля робочої стільниці"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Розмір"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Висота:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Процеси"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-#, fuzzy
-msgid "Show tasks from _all workspaces"
-msgstr "Показувати процеси усіх робочих стільниць"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr ""
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Графічний пейджер"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-#, fuzzy
-msgid "Show _pager in taskbar"
-msgstr "Показувати пейджер на панелі задач"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Область сповіщення"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-#, fuzzy
-msgid "Show _system tray in taskbar"
-msgstr "Показувати системний лоток на панелі задач"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Помилка отримання початкового стилю"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Системний лоток вже зареєстрований на цьому екрані"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Неможливо зареєструвати системний лоток: %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Цього не повинно бути"
-
-#: xftaskbar/xftaskbar.c:592
-#, fuzzy
-msgid "Cannot get default screen\n"
-msgstr "Неможливо визначити поля робочої стільниці"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "Помилка підключення до менеджера сеансів"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "Неможливо створити канал до MCS клієнта"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "Помилка підключення до менеджера сеансів"

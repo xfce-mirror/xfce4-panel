@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 3.99.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-11 18:28+0200\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-10-29 22:44+0300\n"
 "Last-Translator: Mantas <zaz@xxx.lt>\n"
 "Language-Team: Lithuania <zaz@xxx.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-13\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "Pasirinkite failà"
 
@@ -23,23 +23,24 @@ msgstr "Pasirinkite failà"
 msgid "No data was found. The panel will be empty."
 msgstr "Duomenğ nerasta. Skydelis bus tuğèias."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Pozicija:"
 
-#: panel/controls_dialog.c:153
+#: panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "Elemento savybës"
 
-#: panel/controls_dialog.c:207 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Pağalindami elementà kartu pağalinsite jo iğskleidşiamà meniu."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Pasirinkite komandà"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "Komanda:"
 
@@ -59,40 +60,40 @@ msgstr "Kita piktograma"
 msgid "Drag file onto this frame to change the icon"
 msgstr "Norëdami pakeisti piktogramà, tempkite failà ant ğio rëmo "
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "Pavadinimas:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "Patarimas:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "Pridëti meniu á leistukà"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "Pakeisti meniu elementà"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Pağalinti"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "Leistukas"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Norëdami pakeisti elementà, spauskite viduriná pelës mygtukà"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Ádëti leistukà"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Ádëti naujà leistukà"
 
@@ -100,7 +101,7 @@ msgstr "Ádëti naujà leistukà"
 msgid "Are you sure you want to exit?"
 msgstr "Ar tikrai norite iğeiti?"
 
-#: panel/main.c:401
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -123,107 +124,107 @@ msgstr ""
 " Licencijuota pagal GNU GPL.\n"
 "\n"
 
-#: panel/main.c:488
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Sëkmingai paleista be sesijø valdymo"
 
-#: panel/main.c:493
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Sëkmingai paleista su sesijø valdymu"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Neámanoma sukurti skydelio elemento \"%s\"."
 
-#: panel/controls.c:723 panel/panel.c:579
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "/_Savybës..."
 
-#: panel/controls.c:737 panel/panel.c:569
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "Pridëti _naujà elementà"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Ğis elementas neturi parinkties parametrø "
 
-#: panel/panel.c:560 panel/panel.c:961 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Skydelis"
 
-#: panel/panel.c:584
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "/_Apie Xfce"
 
-#: panel/panel.c:589
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "/Pa_galba"
 
-#: panel/panel.c:598
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "/_Uşrakinti ekranà"
 
-#: panel/panel.c:603
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "/_Perkrauti"
 
-#: panel/panel.c:612
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "Iğ_eiti"
 
-#: panel/icons.c:60
+#: panel/icons.c:63
 msgid "Default"
 msgstr "Áprastas"
 
-#: panel/icons.c:61
+#: panel/icons.c:64
 msgid "Editor"
 msgstr "Redaktorius"
 
-#: panel/icons.c:62
+#: panel/icons.c:65
 msgid "File management"
 msgstr "Failø valdymas"
 
-#: panel/icons.c:63
+#: panel/icons.c:66
 msgid "Utilities"
 msgstr "Pagalbinës programos"
 
-#: panel/icons.c:64
+#: panel/icons.c:67
 msgid "Games"
 msgstr "Şaidimai"
 
-#: panel/icons.c:65
+#: panel/icons.c:68
 msgid "Help browser"
 msgstr "Pagalbos narğyklë"
 
-#: panel/icons.c:66
+#: panel/icons.c:69
 msgid "Multimedia"
 msgstr " Daugialypë terpë"
 
-#: panel/icons.c:67
+#: panel/icons.c:70
 msgid "Network"
 msgstr "Tinklas"
 
-#: panel/icons.c:68
+#: panel/icons.c:71
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panel/icons.c:69
+#: panel/icons.c:72
 msgid "Printer"
 msgstr "Spausdintuvas"
 
-#: panel/icons.c:70
+#: panel/icons.c:73
 msgid "Productivity"
 msgstr "Produktyvumas"
 
-#: panel/icons.c:71
+#: panel/icons.c:74
 msgid "Sound"
 msgstr "Garsas"
 
-#: panel/icons.c:72
+#: panel/icons.c:75
 msgid "Terminal"
 msgstr "Terminalas"
 
@@ -235,55 +236,105 @@ msgstr "Nëra nustatymø tvarkyklë"
 msgid "Menu"
 msgstr "Meniu"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "Sisteminis skydelis jau paleistas ğiame ekrane"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Neámanoma uşregistruoti sisteminio skydelio : %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %-d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "Uşduoèiø juosta"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "Neámanoma sukurti MCS kliento kanalo"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "/_Apie Xfce"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Maşas"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Vidutinis"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Didelis"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Didşiulis"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Horizontalus"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Vertikalus"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Kairë"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Değinë"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Virğutinis"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Apatinis"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Skydelio dydis:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Skydelio orientacija:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Iğskleişiamo meniu pozicija:"
 
@@ -291,21 +342,161 @@ msgstr "Iğskleişiamo meniu pozicija:"
 msgid "Always on top:"
 msgstr "Visada virğuje:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Autopaslëpimas"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce skydelio nustatymai"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Vaizdas"
 
-#: settings/xfce_settings_dialog.c:491
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Elgesys"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "Pozicija"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "_Virğus"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "_Apaèia"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "Iğdëstymas"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_Kairë"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_Centras"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "_Değinë"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "Dydis"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "Aukğtis :"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "Plotis:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "Autopaslëpimas"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "Automatiğkai _paslëpti uşduoèiø juostà"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "Uşduotys"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "Rodyti uşduotis iğ _visø darbalaukiø"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "Visada _grupuoti uşduotis"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "Rodyti progr_amø pavadinimus"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "Pageris"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "Rodyti _pagerá uşduoèiø juostoje"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+#, fuzzy
+msgid "Status area"
+msgstr "Ã…Â eÃ…â€tadienis"
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "Rodyti progr_amø pavadinimus"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+#, fuzzy
+msgid "Icon size"
+msgstr "Pikrogramos PerÅ¾iÅ«ra"
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "Rodyti progr_amø pavadinimus"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+#, fuzzy
+msgid "Iconbox"
+msgstr "Piktograma:"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -359,15 +550,15 @@ msgstr "Rodyti sekundes:"
 msgid "Xfce Clock"
 msgstr "Xfce laikrodis"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Eiluèiø skaièius:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Stulpeliø skaièius:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Grafinis praneğimø gaviklis"
 
@@ -383,7 +574,8 @@ msgid ""
 msgstr ""
 "Priega prie sistemos sàrankos iğjungta.\n"
 "\n"
-"Paklauskite jûsø kompiuterio administratoriaus norëdami suşinoti daugiau informacijos"
+"Paklauskite jûsø kompiuterio administratoriaus norëdami suşinoti daugiau "
+"informacijos"
 
 #: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
@@ -430,144 +622,77 @@ msgstr "Sisteminiai mygtukai"
 msgid "Separator"
 msgstr "Skyriklis"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Pağto dëşutë:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Nauja pağto komanda:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Komanda,kurià paleisti,kai naujos pağto şinutës ateina"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Komanda kurià paleisti kai skydelio mygtukas paspaustas"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Intervalas (sek):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Pağto tikrinimas"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Xfce skydelio nustatymai"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce skydelio nustatymai"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Xfce skydelio nustatymai"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce skydelio nustatymai"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "Uşduoèiø juosta"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Pozicija"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce skydelio nustatymai"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "_Virğus"
+#~ msgid "Notification area"
+#~ msgstr "Praneğimø sritis"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_Apaèia"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "Rodyti _sisteminá skydelá uşduoèiø juostoje"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "Iğdëstymas"
+#~ msgid "Cannot get initial style"
+#~ msgstr "Neámanoma gauti pradinio stiliaus"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_Kairë"
+#~ msgid "This should not happen"
+#~ msgstr "Taip neturëtø ávykti"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_Centras"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Neámanoma gauti pagrindinio ekrano\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "_Değinë"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Autopaslëpimas"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "Automatiğkai _paslëpti uşduoèiø juostà"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Dydis"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Aukğtis :"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "Plotis:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Uşduotys"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "Rodyti uşduotis iğ _visø darbalaukiø"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "Visada _grupuoti uşduotis"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "Rodyti progr_amø pavadinimus"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Pageris"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "Rodyti _pagerá uşduoèiø juostoje"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Praneğimø sritis"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "Rodyti _sisteminá skydelá uşduoèiø juostoje"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Neámanoma gauti pradinio stiliaus"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Sisteminis skydelis jau paleistas ğiame ekrane"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Neámanoma uşregistruoti sisteminio skydelio : %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Taip neturëtø ávykti"
-
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "Neámanoma gauti pagrindinio ekrano\n"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "Neámanoma susijungti su sesijø tvarkykle"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "Neámanoma sukurti MCS kliento kanalo"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "Neámanoma susijungti su sesijø tvarkykle"
 
 #~ msgid "Remove"
 #~ msgstr "PaÅ¡alinti"
@@ -593,18 +718,13 @@ msgstr "Neámanoma sukurti MCS kliento kanalo"
 #~ msgid "Select icon"
 #~ msgstr "Pasirinkite piktogramÄ…"
 
-#~ msgid "Icon:"
-#~ msgstr "Piktograma:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Pikrogramos PerÅ¾iÅ«ra"
-
 #~ msgid ""
 #~ "Your window manager does not seem to support the new window manager hints "
 #~ "as defined on http://www.freedesktop.org. \n"
 #~ "Some Xfce features may not work as intended."
 #~ msgstr ""
-#~ "Atrodo, kad jÅ«sÅ³ langÅ³ tvarkyklÄ— nepalaiko naujÅ³ langÅ³ tvarkykliÅ³ patarimÅ³ apibrÄ—Å¾tÅ³ tinklalapyje http://www.freedesktop.org. \n"
+#~ "Atrodo, kad jÅ«sÅ³ langÅ³ tvarkyklÄ— nepalaiko naujÅ³ langÅ³ tvarkykliÅ³ "
+#~ "patarimÅ³ apibrÄ—Å¾tÅ³ tinklalapyje http://www.freedesktop.org. \n"
 #~ "Keletas Xfce sudÄ—tiniÅ³ daliÅ³ gali neveikti kaip numatyta."
 
 #~ msgid "/_Settings manager"
@@ -645,9 +765,6 @@ msgstr "Neámanoma sukurti MCS kliento kanalo"
 
 #~ msgid "Friday"
 #~ msgstr "Penktadienis"
-
-#~ msgid "Saturday"
-#~ msgstr "Ã…Â eÃ…â€tadienis"
 
 #~ msgid "January"
 #~ msgstr "Sausis"

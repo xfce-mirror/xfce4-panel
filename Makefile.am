@@ -1,6 +1,10 @@
 @SET_MAKE@
 
+
 EXTRA_DIST = 								\
+	intltool-extract.in						\
+	intltool-merge.in						\
+	intltool-update.in						\
 	AUTHORS								\
 	COPYING								\
 	ChangeLog							\
@@ -26,8 +30,14 @@ SUBDIRS =								\
 	settings							\
 	plugins
 
+DISTCLEANFILES =							\
+	intltool-extract						\
+	intltool-merge							\
+	intltool-update							\
+	xfce4-panel.spec
+	
 distclean-local:
-	rm -rf xfce4.spec *.cache *~
+	rm -rf *.cache *~
 
 rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-08-18 22:29+0300\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani <translation-team-az@lists.sourceforge.net>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "Faylı seç"
 
@@ -27,7 +27,8 @@ msgstr "Faylı seç"
 msgid "No data was found. The panel will be empty."
 msgstr "Heç bir məlumat tapılmadı. Panel boş olacaqdır"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Mövqe:"
 
@@ -36,15 +37,15 @@ msgstr "Mövqe:"
 msgid "Item properties"
 msgstr "_Xassələr..."
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Üzvün silinməsi eyni zamanda onun popup pəncərəsini də siləcəkdir."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Əmr seç"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "Əmr:"
 
@@ -64,40 +65,40 @@ msgstr "Başqa Timsal"
 msgid "Drag file onto this frame to change the icon"
 msgstr "Timsalı dəyişdirmək üçün yeni timsalı bu çərçivəyə daşıyın"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "Başlıq:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "İzahat:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "Menyuya başladıcı əlavə et"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "Menyu üzvünü dəyişdir"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Sil"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "Başladıcı"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Üzvü dəyişdirmək üçün siçanın 3-cü düyməsinə basın"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Başladıcı əlavə et"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Yeni üzv əlavə et"
 
@@ -105,7 +106,7 @@ msgstr "Yeni üzv əlavə et"
 msgid "Are you sure you want to exit?"
 msgstr "Həqiqətən də çıxmaq istəyirsiniz?"
 
-#: panel/main.c:401
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -128,59 +129,59 @@ msgstr ""
 " GNU GPL lisenziyasına tabedir.\n"
 "\n"
 
-#: panel/main.c:488
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: İclas idarəsi olmadan müvəffəqiyyətlə başladıldı"
 
-#: panel/main.c:493
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: İclas idarəsi ilə müvəffəqiyyətlə başladıldı"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "\"%s\" panel üzvü yaradıla bilmədi."
 
-#: panel/controls.c:723 panel/panel.c:585
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "_Xassələr..."
 
-#: panel/controls.c:737 panel/panel.c:575
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "_Yeni üzv əlavə et"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Bu üzvün qurğuları yoxdur"
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Paneli"
 
-#: panel/panel.c:590
+#: panel/panel.c:680
 #, fuzzy
 msgid "_About Xfce"
 msgstr "/Xfce _Haqqında"
 
-#: panel/panel.c:595
+#: panel/panel.c:685
 #, fuzzy
 msgid "_Help"
 msgstr "/_Yardım"
 
-#: panel/panel.c:604
+#: panel/panel.c:694
 #, fuzzy
 msgid "_Lock screen"
 msgstr "/Ekranı _qıfılla"
 
-#: panel/panel.c:609
+#: panel/panel.c:699
 #, fuzzy
 msgid "_Restart"
 msgstr "/_Yenidən başlat"
 
-#: panel/panel.c:618
+#: panel/panel.c:708 iconbox/iconbox.c:627
 #, fuzzy
 msgid "E_xit"
 msgstr "/Çı_x"
@@ -245,55 +246,105 @@ msgstr "Qurğular idarəçisi mövcud deyil"
 msgid "Menu"
 msgstr "Menyu"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "Hazırkı ekranda onsuzda bir bildiriş sahəsi mövcuddur"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Bildiriş sahəsi qeyd edilə bilmədi: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "Vəzifə çubuğu"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "MCS alıcı kanalı yaradıla bilmir"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "/Xfce _Haqqında"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Kiçik"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Orta"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Geniş"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Çox böyük"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Üfüqi"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Şaquli"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Sol"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Sağ"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Üst"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Alt"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Panel böyüklüyü:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Panel istiqaməti:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Popup mövqeyi:"
 
@@ -301,21 +352,158 @@ msgstr "Popup mövqeyi:"
 msgid "Always on top:"
 msgstr "Həmişə üstdə:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Avtomatik gizlətmə:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce Paneli Qurğuları"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Görünüş"
 
-#: settings/xfce_settings_dialog.c:491
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Davranış"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "Mövqe"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "Ü_st"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "_Alt"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "Tərəfləmə"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_Sol"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_Orta"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "_Sağ"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "Böyüklük"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "Hündürlük :"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "En:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "Avtomatik gizlət"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "Vəzifə çubuğunu avtomatik _gizlət"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "Vəzifələr"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "_Bütün iş sahələrindəki vəzifələri göstər"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "Vəzifələri həmişə _qrupla"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "Proqram _adlarını göstər"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "Peycer"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "Vəzifə çubuğunda _peyceri göstər"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "Proqram _adlarını göstər"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "Proqram _adlarını göstər"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+msgid "Iconbox"
+msgstr ""
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -369,15 +557,15 @@ msgstr "Saniyələrin göstərilməsi:"
 msgid "Xfce Clock"
 msgstr "Xfce Saatı"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Sətir ədədi:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Sütun ədədi:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Qrafiki peycer"
 
@@ -440,146 +628,79 @@ msgstr "Sistem düymələri"
 msgid "Separator"
 msgstr "Ayırıcı"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Poçt qutusu:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 #, fuzzy
 msgid "New mail command:"
 msgstr "Yeni məktub:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Yeni məktub gəldiyində işə salınacaq əmr"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Paneldəki düyməyə basıldığında işə salınacaq əmr"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Aralıq (san):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 #, fuzzy
 msgid "Mail checker"
 msgstr "Poçt yoxlaması"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Xfce Paneli Qurğuları"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce Paneli Qurğuları"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Xfce Paneli Qurğuları"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce Paneli Qurğuları"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "Vəzifə çubuğu"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Mövqe"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce Paneli Qurğuları"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "Ü_st"
+#~ msgid "Notification area"
+#~ msgstr "Bildiriş sahəsi"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_Alt"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "Vəzifə çubuğunda _bildiriş sahəsini göstər"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "Tərəfləmə"
+#~ msgid "Cannot get initial style"
+#~ msgstr "Başlanğıc tərzi alına bilmir"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_Sol"
+#~ msgid "This should not happen"
+#~ msgstr "Bu olmamalıdır"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_Orta"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Ön quröulu ekran alına bilmir\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "_Sağ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Avtomatik gizlət"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "Vəzifə çubuğunu avtomatik _gizlət"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Böyüklük"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Hündürlük :"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "En:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Vəzifələr"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "_Bütün iş sahələrindəki vəzifələri göstər"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "Vəzifələri həmişə _qrupla"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "Proqram _adlarını göstər"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Peycer"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "Vəzifə çubuğunda _peyceri göstər"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Bildiriş sahəsi"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "Vəzifə çubuğunda _bildiriş sahəsini göstər"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Başlanğıc tərzi alına bilmir"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Hazırkı ekranda onsuzda bir bildiriş sahəsi mövcuddur"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Bildiriş sahəsi qeyd edilə bilmədi: %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Bu olmamalıdır"
-
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "Ön quröulu ekran alına bilmir\n"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "İclas idarəçisinə bağlana bilmir"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "MCS alıcı kanalı yaradıla bilmir"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "İclas idarəçisinə bağlana bilmir"
 
 #~ msgid "Change item"
 #~ msgstr "Üzvü dəyişdir"

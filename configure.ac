@@ -15,7 +15,6 @@ AC_COPYRIGHT([Copyright (c) 2002-2005
 
 Written for Xfce by Jasper Huijsmans <jasper@xfce.org>.])
 AC_INIT([xfce4-panel], [xfce4_panel_version()], [xfce4-dev@xfce.org])
-AC_PREREQ([2.50])
 
 dnl init automake
 XFCE4_PANEL_VERSION=xfce4_panel_version()
@@ -29,14 +28,15 @@ AC_ISC_POSIX
 AC_MINIX
 AM_CONDITIONAL([HAVE_CYGWIN], [test "`uname | grep \"CYGWIN\"`" != ""])
 
+dnl disable static libs
+AC_DISABLE_STATIC
+
 dnl Check for basic programs
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_LN_S
-
-dnl disable static libs
-AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
+AC_PROG_INTLTOOL
 
 LIBXFCE4PANEL_VERINFO=libxfce4panel_verinfo()
 AC_SUBST([LIBXFCE4PANEL_VERINFO])

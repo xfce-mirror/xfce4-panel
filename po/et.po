@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-12-09 01:36+0300\n"
 "Last-Translator: Mart Tõnso <mart.tonso@ttu.ee>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:556
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "Vali fail"
 
@@ -22,8 +22,8 @@ msgstr "Vali fail"
 msgid "No data was found. The panel will be empty."
 msgstr "Mingeid andmeid ei leitud. Paneel on tühi."
 
-#: panel/controls_dialog.c:89
-#: panel/item_dialog.c:1161
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Positsioon:"
 
@@ -31,8 +31,7 @@ msgstr "Positsioon:"
 msgid "Item properties"
 msgstr "Omadused"
 
-#: panel/controls_dialog.c:209
-#: panel/controls.c:711
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Asja eemaldamine eemaldab ka selle küljes oleva menüü."
 
@@ -40,62 +39,60 @@ msgstr "Asja eemaldamine eemaldab ka selle küljes oleva menüü."
 msgid "Select command"
 msgstr "Vali käsklus"
 
-#: panel/item_dialog.c:268
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "Käsklus:"
 
-#: panel/item_dialog.c:311
+#: panel/item_dialog.c:307
 msgid "Run in _terminal"
 msgstr "Käivita _terminalis"
 
-#: panel/item_dialog.c:329
+#: panel/item_dialog.c:325
 msgid "Use startup _notification"
 msgstr "Kasuta _stardi teavitust"
 
-#: panel/item_dialog.c:515
+#: panel/item_dialog.c:511
 msgid "Other Icon"
 msgstr "Teine ikoon"
 
-#: panel/item_dialog.c:626
+#: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
 msgstr "Tiri fail sellesse raami, et ikooni muuta"
 
-#: panel/item_dialog.c:921
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "Silt:"
 
-#: panel/item_dialog.c:950
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "Tutvustus:"
 
-#: panel/item_dialog.c:978
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "Lisa käivitajale menüü"
 
-#: panel/item_dialog.c:1198
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "Muuda menüü asja"
 
 #. add buttons
-#: panel/item_dialog.c:1204
-#: panel/controls.c:748
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Eemalda"
 
-#: panel/item_dialog.c:1216
-#: panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "Startija"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Vajuta hiire keskmist muppu, et asja muuta"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Lisa startija"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Lisa uus asi"
 
@@ -103,7 +100,7 @@ msgstr "Lisa uus asi"
 msgid "Are you sure you want to exit?"
 msgstr "Oled sa kindel, et soovid väljuda?"
 
-#: panel/main.c:401
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -126,12 +123,12 @@ msgstr ""
 " Litsentseeritud GNU GPL litsentsi all.\n"
 "\n"
 
-#: panel/main.c:488
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Õnnelikult käivitunud ilma sessioonihaldurita"
 
-#: panel/main.c:493
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Õnnelikult käivitunud koos sessioonihalduriga"
@@ -141,13 +138,11 @@ msgstr "%s: Õnnelikult käivitunud koos sessioonihalduriga"
 msgid "Could not create panel item \"%s\"."
 msgstr "Ei suuda luua paneeli asja \"%s\"."
 
-#: panel/controls.c:743
-#: panel/panel.c:639
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "_Omadused..."
 
-#: panel/controls.c:757
-#: panel/panel.c:629
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "Lisa _uus asi"
 
@@ -155,30 +150,28 @@ msgstr "Lisa _uus asi"
 msgid "This item has no configuration options"
 msgstr "Sellel asjal ei ole midagi sättida"
 
-#: panel/panel.c:620
-#: panel/panel.c:1042
-#: settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:451
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
-#: panel/panel.c:644
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "_Xfce-st"
 
-#: panel/panel.c:649
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "_Abi"
 
-#: panel/panel.c:658
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "_Lukusta ekraan"
 
-#: panel/panel.c:663
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "_Käivita uuesti"
 
-#: panel/panel.c:672
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "V_älja"
 
@@ -242,80 +235,275 @@ msgstr "Seadistuste haldur ei ole kättesaadav"
 msgid "Menu"
 msgstr "Menüü"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "Sellel ekraanil juba töötab süsteemi teateala"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Ei suutnud süsteemi teateala registreerida: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "Tegumiriba"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "Ei suutnud luua MCS kliendi kanalit"
+
+#: iconbox/iconbox.c:567
+#, fuzzy
+msgid "Xfce Iconbox"
+msgstr "Xfce 4 ikoonikasti seaded"
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "_Xfce-st"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Väike"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Keskmine"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Suur"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Väga suur"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Horisontaalne"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Vertikaalne"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Vasak"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Parem"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Ülal"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "All"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Paneeli suurus:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Paneeli orientatsioon:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Menüü positsioon:"
 
-#: settings/xfce_settings_dialog.c:344
+#: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "Alati kõige peal:"
 
-#: settings/xfce_settings_dialog.c:398
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Automaatne varjamine:"
 
-#: settings/xfce_settings_dialog.c:468
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce paneeli seaded"
 
-#: settings/xfce_settings_dialog.c:478
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Väljanägemine"
 
-#: settings/xfce_settings_dialog.c:493
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Käitumine"
 
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "Asukoht"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "_Üleval"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "_All"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "Asetus"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_Vasakul"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_Keskel"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "_Paremal"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "Suurus"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "Kõrgus :"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "Laius:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "Automaatne varjamine"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "_Varja tegumiriba automaatselt"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "Rakendused"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "Näita kõigi tööruumide rakendusi."
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "_Grupita rakendusi alati"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "Näita rakenduste _nimesid"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "Lehitseja"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "Näita _lehitsejat tegumiribal"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "Näita rakenduste _nimesid"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "Näita rakenduste _nimesid"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+#, fuzzy
+msgid "Iconbox"
+msgstr "Ikoonikasti seaded"
+
 #. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
 #. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
 #: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
@@ -431,142 +619,68 @@ msgstr "Süsteemi nupud"
 msgid "Separator"
 msgstr "Eraldaja"
 
-#: plugins/mailcheck/mailcheck.c:836
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Kirjakast:"
 
-#: plugins/mailcheck/mailcheck.c:873
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Uue kirja käsklus:"
 
-#: plugins/mailcheck/mailcheck.c:887
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Käsklus, mida käivitada, kui saabub uus kiri"
 
-#: plugins/mailcheck/mailcheck.c:917
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Käsklus, mida käivitada, kui paneelil asuvat nuppu vajutatakse"
 
-#: plugins/mailcheck/mailcheck.c:938
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Intervall (sec):"
 
-#: plugins/mailcheck/mailcheck.c:1014
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Kirjade kontrollija"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
-msgstr "Tegumiriba"
+#: settings/xfce-panel-settings.desktop.in.h:1
+msgid "Panel Settings"
+msgstr "Paneeli seaded"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Asukoht"
+#: settings/xfce-panel-settings.desktop.in.h:2
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce 4 paneeli seaded"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "_Üleval"
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+msgid "Iconbox Settings"
+msgstr "Ikoonikasti seaded"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_All"
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce 4 ikoonikasti seaded"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "Asetus"
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+msgid "Taskbar Settings"
+msgstr "Tegumiriba seaded"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_Vasakul"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce 4 tegumiriba seaded"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_Keskel"
+#~ msgid "Notification area"
+#~ msgstr "Teadete ala"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "_Paremal"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "Näita süsteemi _teateala tegumiribal"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Automaatne varjamine"
+#~ msgid "Cannot get initial style"
+#~ msgstr "Ei suutnud võtta algstiili"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "_Varja tegumiriba automaatselt"
+#~ msgid "This should not happen"
+#~ msgstr "Seda ei tohiks juhtuda"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Suurus"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Ei suuda võtta vaikimisi ekraani\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Kõrgus :"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "Laius:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Rakendused"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "Näita kõigi tööruumide rakendusi."
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "_Grupita rakendusi alati"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "Näita rakenduste _nimesid"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Lehitseja"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "Näita _lehitsejat tegumiribal"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Teadete ala"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "Näita süsteemi _teateala tegumiribal"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Ei suutnud võtta algstiili"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Sellel ekraanil juba töötab süsteemi teateala"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Ei suutnud süsteemi teateala registreerida: %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Seda ei tohiks juhtuda"
-
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "Ei suuda võtta vaikimisi ekraani\n"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "Ei suutnud ühenduda sessioonihalduriga"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "Ei suutnud luua MCS kliendi kanalit"
-
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "Ei suutnud ühenduda sessioonihalduriga"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-02 11:01+0100\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2005-01-05 00:19+0100\n"
 "Last-Translator: Moritz Heiber <moe@xfce.org>\n"
 "Language-Team: none <none@none>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:557
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "Datei auswählen"
 
@@ -22,7 +22,8 @@ msgstr "Datei auswählen"
 msgid "No data was found. The panel will be empty."
 msgstr "Keine Daten gefunden. Das Panel wird leer sein"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Position:"
 
@@ -38,60 +39,60 @@ msgstr "Das Entfernen des Objektes entfernt auch sein Menü."
 msgid "Select command"
 msgstr "Kommando auswählen"
 
-#: panel/item_dialog.c:268
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "Kommando:"
 
-#: panel/item_dialog.c:311
+#: panel/item_dialog.c:307
 msgid "Run in _terminal"
 msgstr "In _Terminal ausführen"
 
-#: panel/item_dialog.c:329
+#: panel/item_dialog.c:325
 msgid "Use startup _notification"
 msgstr "Benutze Startup _Notifikation"
 
-#: panel/item_dialog.c:515
+#: panel/item_dialog.c:511
 msgid "Other Icon"
 msgstr "Anderes Icon"
 
-#: panel/item_dialog.c:626
+#: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
 msgstr "Dateien auf diesen Rahmen ziehen, um das Icon zu verändern"
 
-#: panel/item_dialog.c:938
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "Bezeichnung:"
 
-#: panel/item_dialog.c:967
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:995
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "Menü für Starter"
 
-#: panel/item_dialog.c:1215
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "Menüobjekt verändern"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Entfernen"
 
-#: panel/item_dialog.c:1233 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "Starter"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Maustaste 3 zum Verändern benutzen"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Starter hinzufügen"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Neues Objekt hinzufügen"
 
@@ -136,11 +137,11 @@ msgstr "%s: Erfolgreich mit Sessionmanagement gestartet"
 msgid "Could not create panel item \"%s\"."
 msgstr "Konnte Panelobjekt \"%s\" nicht erzeugen."
 
-#: panel/controls.c:743 panel/panel.c:647
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "_Eigenschaften..."
 
-#: panel/controls.c:757 panel/panel.c:637
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "Neues _Objekt hinzufügen"
 
@@ -148,28 +149,28 @@ msgstr "Neues _Objekt hinzufügen"
 msgid "This item has no configuration options"
 msgstr "Dieses Objekt hat keine Optionen"
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: panel/panel.c:652
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "_Über Xfce"
 
-#: panel/panel.c:657
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: panel/panel.c:666
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "_Desktop sperren"
 
-#: panel/panel.c:671
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "_Neu starten"
 
-#: panel/panel.c:680
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "B_eenden"
 
@@ -233,7 +234,56 @@ msgstr "Einstellungsmanager nicht verfügbar"
 msgid "Menu"
 msgstr "Menü"
 
-#: settings/xfce_settings_dialog.c:87
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "Es läuft bereits ein Systemtray"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Konnte Systemtray nicht registrieren: %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "Taskbar"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "Kann MCS Kanal nicht erstellen"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "_Über Xfce"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Klein"
 
@@ -241,7 +291,8 @@ msgstr "Klein"
 msgid "Medium"
 msgstr "Mittel"
 
-#: settings/xfce_settings_dialog.c:95
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Groß"
 
@@ -301,9 +352,146 @@ msgstr "Xfce Paneleinstellungen"
 msgid "Appearance"
 msgstr "Aussehen"
 
-#: settings/xfce_settings_dialog.c:492
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Verhalten"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "Position"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "_Oben"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "_Unten"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "Ausrichtung"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_Links"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_Mittig"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "_Rechts"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "Größe"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "Höhe :"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "Breite:"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "Ausblenden"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "Taskbar _automatisch ausblenden"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "Tasks"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "Sämtliche Tasks _anzeigen"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "Tasks _immer gruppieren"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "Programmnamen _anzeigen"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "Pager"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "_Pager in Taskbar anzeigen"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "Programmnamen _anzeigen"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "Programmnamen _anzeigen"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+msgid "Iconbox"
+msgstr ""
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -452,117 +640,50 @@ msgstr "Intervall (Sek.):"
 msgid "Mail checker"
 msgstr "Mailchecker"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Xfce Paneleinstellungen"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce Paneleinstellungen"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Xfce Paneleinstellungen"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce Paneleinstellungen"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "Taskbar"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Position"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce Paneleinstellungen"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "_Oben"
+#~ msgid "Notification area"
+#~ msgstr "Status Icons"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_Unten"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "_Systemtray in Taskbar anzeigen"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "Ausrichtung"
+#~ msgid "Cannot get initial style"
+#~ msgstr "Kann Eingangsstil nicht finden"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_Links"
+#~ msgid "This should not happen"
+#~ msgstr "Das sollte nicht passieren"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_Mittig"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Kann Desktop nicht finden\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "_Rechts"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Ausblenden"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "Taskbar _automatisch ausblenden"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Größe"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Höhe :"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "Breite:"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Tasks"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "Sämtliche Tasks _anzeigen"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "Tasks _immer gruppieren"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "Programmnamen _anzeigen"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Pager"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "_Pager in Taskbar anzeigen"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Status Icons"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "_Systemtray in Taskbar anzeigen"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Kann Eingangsstil nicht finden"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Es läuft bereits ein Systemtray"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Konnte Systemtray nicht registrieren: %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Das sollte nicht passieren"
-
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "Kann Desktop nicht finden\n"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "Keinen Sitzungsmanager gefunden"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "Kann MCS Kanal nicht erstellen"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "Keinen Sitzungsmanager gefunden"

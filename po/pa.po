@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
+"POT-Creation-Date: 2005-01-27 15:46+0100\n"
 "PO-Revision-Date: 2004-09-20 12:56+0530\n"
 "Last-Translator: Amanpreet Singh Alam <aalam@redhat.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:551
 msgid "Select file"
 msgstr "ਫਾਇਲ ਚੁਣੋ"
 
@@ -26,7 +26,8 @@ msgstr "ਫਾਇਲ ਚੁਣੋ"
 msgid "No data was found. The panel will be empty."
 msgstr "ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਲੱਭਾ ਹੈ। ਪੈਨਲ ਖਾਲੀ ਹੋਵੇਗਾ।"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "ਸਥਿਤੀ:"
 
@@ -34,15 +35,15 @@ msgstr "ਸਥਿਤੀ:"
 msgid "Item properties"
 msgstr "ਇਕਾਈ ਵਿਸ਼ੇਸਤਾ"
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "ਇਕਾਈ ਨੂੰ ਹਟਾਉਣ ਨਾਲ ਇਸ ਦਾ ਮੇਨੂ ਵੀ ਹਟਾਇਆ ਜਾਵੇਗਾ।"
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "ਕਮਾਂਡ ਚੁਣੋ"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:261
 msgid "Command:"
 msgstr "ਕਮਾਂਡ:"
 
@@ -62,40 +63,40 @@ msgstr "ਹੋਰ ਆਈਕਾਨ"
 msgid "Drag file onto this frame to change the icon"
 msgstr "ਆਈਕਾਨ ਤਬਦੀਲ ਕਰਨ ਲਈ ਇਸ ਫਰੇਮ ਵਿੱਚ ਫਾਇਲ ਸੁੱਟੋ"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:934
 msgid "Caption:"
 msgstr "ਸਿਰਲੇਖ:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:963
 msgid "Tooltip:"
 msgstr "ਸੰਦ-ਸੰਕੇਤ:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:991
 msgid "Attach menu to launcher"
 msgstr "ਸ਼ੁਰੂਆਤੀ ਨਾਲ ਮੇਨੂ ਸ਼ਾਮਿਲ ਕਰੋ"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1211
 msgid "Change menu item"
 msgstr "ਮੇਨੂ ਇਕਾਈ ਤਬਦੀਲ"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1217 panel/controls.c:748
 msgid "_Remove"
 msgstr "_ਹਟਾਓ"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1229 panel/item.c:738
 msgid "Launcher"
 msgstr "ਸ਼ੁਰੂਆਤੀ"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "ਇਕਾਈ ਤਬਦੀਲ ਕਰਨ ਲਈ ਮਾਊਸ ਬਟਨ ੩ ਕਲਿੱਕ ਕਰੋ"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "ਸ਼ੁਰੂਆਤੀ ਸ਼ਾਮਿਲ ਕਰੋ"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "ਨਵੀਂ ਇਕਾਈ ਸ਼ਾਮਿਲ ਕਰੋ"
 
@@ -103,7 +104,7 @@ msgstr "ਨਵੀਂ ਇਕਾਈ ਸ਼ਾਮਿਲ ਕਰੋ"
 msgid "Are you sure you want to exit?"
 msgstr "ਕੀ ਤੁਸੀਂ ਬੰਦ ਕਰਨ ਲਈ ਯਕੀਨੀ ਹੋ?"
 
-#: panel/main.c:401
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -126,55 +127,55 @@ msgstr ""
 " GNU GPL ਲਾਈਸੈਂਸ ਅਧੀਨ\n"
 "\n"
 
-#: panel/main.c:488
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: ਅਜਲਾਸ ਪ੍ਰਬੰਧਕ ਬਿਨਾਂ ਸਫਲਤਾਪੂਰਕ ਸ਼ੁਰੂ ਹੋਇਆ"
 
-#: panel/main.c:493
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: ਅਜਲਾਸ ਪ੍ਰਬੰਧਕ ਨਾਲ ਸਫਲਤਾਪੂਰਕ ਸ਼ੁਰੂ ਹੋਇਆ"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "ਪੈਨਲ ਇਕਾਈ \"%s\" ਬਣਾਈ ਨਹੀਂ ਜਾ ਸਕੀ ਹੈ"
 
-#: panel/controls.c:723 panel/panel.c:585
+#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
 msgid "_Properties..."
 msgstr "_ਵਿਸ਼ੇਸਤਾ..."
 
-#: panel/controls.c:737 panel/panel.c:575
+#: panel/controls.c:757 panel/panel.c:665
 msgid "Add _new item"
 msgstr "_ਨਵੀਂ ਇਕਾਈ ਸ਼ਾਮਿਲ"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "ਇਸ ਇਕਾਈ ਲਈ ਕੋਈ ਸੰਰਚਨਾ ਚੋਣ ਸ਼ਾਮਿਲ ਨਹੀਂ ਹੈ"
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce ਪੈਨਲ"
 
-#: panel/panel.c:590
+#: panel/panel.c:680
 msgid "_About Xfce"
 msgstr "Xfce _ਬਾਰੇ"
 
-#: panel/panel.c:595
+#: panel/panel.c:685
 msgid "_Help"
 msgstr "_ਸਹਾਇਤਾ"
 
-#: panel/panel.c:604
+#: panel/panel.c:694
 msgid "_Lock screen"
 msgstr "ਪਰਦਾ _ਤਾਲਾ"
 
-#: panel/panel.c:609
+#: panel/panel.c:699
 msgid "_Restart"
 msgstr "_ਮੁੜ ਚਾਲੂ"
 
-#: panel/panel.c:618
+#: panel/panel.c:708 iconbox/iconbox.c:627
 msgid "E_xit"
 msgstr "ਬੰ_ਦ"
 
@@ -238,55 +239,105 @@ msgstr "ਵਿਵਸਥਾ ਪ੍ਰਬੰਧਕ ਉਪਲੱਬਧ ਨਹੀਂ
 msgid "Menu"
 msgstr "ਮੇਨੂ"
 
-#: settings/xfce_settings_dialog.c:88
+#: taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr "ਇਸ ਟਰੇ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਸਿਸਟਮ ਟਰੇ ਚੱਲ ਰਹੀ ਹੈ"
+
+#: taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "ਸਿਸਟਮ ਟਰੇ ਰਜਿਸਟਰ ਕਰਨ ਵਿੱਚ ਅਯੋਗਃ %s"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: taskbar/xftaskbar.c:612
+#, fuzzy
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: taskbar/xftaskbar.c:633
+msgid "%H:%M"
+msgstr ""
+
+#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+msgid "Taskbar"
+msgstr "ਦਰਜਾ-ਪੱਟੀ"
+
+#: taskbar/xftaskbar.c:1022
+msgid "Cannot create MCS client channel"
+msgstr "MCS ਕਲਾਂਈਟ ਚੈਨਲ ਬਣਾ ਨਹੀਂ ਸਕਿਆ"
+
+#: iconbox/iconbox.c:567
+msgid "Xfce Iconbox"
+msgstr ""
+
+#: iconbox/iconbox.c:575
+msgid "Developer"
+msgstr ""
+
+#: iconbox/iconbox.c:611
+#, fuzzy
+msgid "_About"
+msgstr "Xfce _ਬਾਰੇ"
+
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "ਛੋਟਾ"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "ਮੱਧਮ"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "ਵੱਡਾ"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "ਵਿਸ਼ਾਲ"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "ਖਿਤਿਜੀ"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "ਲੰਬਕਾਰੀ"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "ਖੱਬਾ"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "ਸੱਜਾ"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "ਉੱਪਰ"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "ਹੇਠਾਂ"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "ਪੈਨਲ ਆਕਾਰ:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "ਪੈਨਲ ਸਥਿਤੀ:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "ਪੌਪ-ਅੱਪ ਸਥਿਤੀ:"
 
@@ -294,21 +345,158 @@ msgstr "ਪੌਪ-ਅੱਪ ਸਥਿਤੀ:"
 msgid "Always on top:"
 msgstr "ਹਮੇਸ਼ਾ ਉੱਪਰ:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "ਸਵੈ-ਓਹਲੇ:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce ਪੈਨਲ ਵਿਵਸਥਾ"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "ਦਿੱਖ"
 
-#: settings/xfce_settings_dialog.c:491
+#. show only hidden
+#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "ਵਿਵਹਾਰ"
+
+#. position
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+msgid "Position"
+msgstr "ਸਥਿਤੀ"
+
+#: settings/xftaskbar_plugin.c:399
+msgid "_Top"
+msgstr "_ਸਿਖਰ"
+
+#: settings/xftaskbar_plugin.c:409
+msgid "_Bottom"
+msgstr "_ਹੇਠਾਂ"
+
+#: settings/xftaskbar_plugin.c:422
+#, fuzzy
+msgid "Alignment:"
+msgstr "ਅਨੁਕੂਲਤਾ"
+
+#: settings/xftaskbar_plugin.c:429
+msgid "_Left"
+msgstr "_ਖੱਬੇ"
+
+#: settings/xftaskbar_plugin.c:439
+msgid "_Center"
+msgstr "_ਵਿਚਕਾਰ"
+
+#: settings/xftaskbar_plugin.c:447
+msgid "_Right"
+msgstr "ਸੱਜੇ"
+
+#. size
+#: settings/xftaskbar_plugin.c:464
+msgid "Size"
+msgstr "ਆਕਾਰ"
+
+#: settings/xftaskbar_plugin.c:474
+#, fuzzy
+msgid "Height:"
+msgstr "ਉਚਾਈਃ"
+
+#: settings/xftaskbar_plugin.c:505
+msgid "Width:"
+msgstr "ਚੌੜਾਈਃ"
+
+#: settings/xftaskbar_plugin.c:541
+msgid "_Shrink to fit"
+msgstr ""
+
+#. Autohide
+#: settings/xftaskbar_plugin.c:561
+msgid "Autohide"
+msgstr "ਸਵੈ-ਲੁਕਵਾਂ"
+
+#: settings/xftaskbar_plugin.c:566
+msgid "Auto _hide taskbar"
+msgstr "ਸਵੈ ਲੁਕਵੀਂ ਦਰਜਾ ਪੱਟੀ"
+
+#. tasklist
+#: settings/xftaskbar_plugin.c:583
+#, fuzzy
+msgid "Tasklist"
+msgstr "ਕਾਰਜ"
+
+#: settings/xftaskbar_plugin.c:592
+msgid "Show tasklist"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:604
+msgid "Show tasks from _all workspaces"
+msgstr "ਸਾਰੇ ਵਰਕਸਪੇਸਾਂ ਵਿੱਚ ਕਾਰਜ ਵਿਖਾਓ"
+
+#: settings/xftaskbar_plugin.c:613
+msgid "Always _group tasks"
+msgstr "ਕਾਰਜਾਂ ਦੇ ਹਮੇਸ਼ਾ ਸਮੂਹ ਬਣਾਓ"
+
+#: settings/xftaskbar_plugin.c:621
+msgid "Show application _names"
+msgstr "ਕਾਰਜ _ਨਾਂ ਵਿਖਾਓ"
+
+#. pager
+#: settings/xftaskbar_plugin.c:629
+msgid "Pager"
+msgstr "ਪੇਜ਼ਰ"
+
+#: settings/xftaskbar_plugin.c:634
+msgid "Show _pager in taskbar"
+msgstr "ਦਰਜਾ-ਪੱਟੀ ਵਿੱਚ ਪੇਜ਼ਰ ਵਿਖਾਓ"
+
+#. status area
+#: settings/xftaskbar_plugin.c:641
+msgid "Status area"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:650
+#, fuzzy
+msgid "Show _notification icons"
+msgstr "ਕਾਰਜ _ਨਾਂ ਵਿਖਾਓ"
+
+#: settings/xftaskbar_plugin.c:657
+msgid "Show _time"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:718
+msgid "General"
+msgstr ""
+
+#: settings/xftaskbar_plugin.c:729
+msgid "Components"
+msgstr ""
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr ""
+
+#: settings/iconbox_plugin.c:691
+#, fuzzy
+msgid "_Show only minimized applications"
+msgstr "ਕਾਰਜ _ਨਾਂ ਵਿਖਾਓ"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr ""
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr ""
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+msgid "Iconbox"
+msgstr ""
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -362,15 +550,15 @@ msgstr "ਸਕਿੰਟ ਵਿਖਾਓ:"
 msgid "Xfce Clock"
 msgstr "Xfce ਘੜੀ"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "ਕਾਲਮਾਂ ਦੀ ਗਿਣਤੀ:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "ਗਰਾਫਿਕਲ ਪੇਜ਼ਰ"
 
@@ -433,141 +621,74 @@ msgstr "ਸਿਸਟਮ ਬਟਨ"
 msgid "Separator"
 msgstr "ਵੱਖਰੇਵਾਂ"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "ਪੱਤਰ ਬਕਸਾ:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "ਨਵੀਂ ਪੱਤਰ ਕਮਾਂਡ:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "ਨਵੇਂ ਪੱਤਰ ਆਉਣ ਤੇ ਚੱਲਣ ਵਾਲੀ ਕਮਾਂਡ"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "ਪੈਨਲ ਦੇ ਬਟਨ ਨੂੰ ਦਬਾਉਣ ਤੇ ਚੱਲਣ ਵਾਲੀ ਕਮਾਂਡ"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "ਅੰਤਰਾਲ (ਸਕਿੰਟ):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "ਪੱਤਰ ਜਾਂਚਕਾਰ"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
+#: settings/xfce-panel-settings.desktop.in.h:1
+#, fuzzy
+msgid "Panel Settings"
+msgstr "Xfce ਪੈਨਲ ਵਿਵਸਥਾ"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce ਪੈਨਲ ਵਿਵਸਥਾ"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+#, fuzzy
+msgid "Iconbox Settings"
+msgstr "Xfce ਪੈਨਲ ਵਿਵਸਥਾ"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce ਪੈਨਲ ਵਿਵਸਥਾ"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+#, fuzzy
+msgid "Taskbar Settings"
 msgstr "ਦਰਜਾ-ਪੱਟੀ"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "ਸਥਿਤੀ"
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+#, fuzzy
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce ਪੈਨਲ ਵਿਵਸਥਾ"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "_ਸਿਖਰ"
+#~ msgid "Notification area"
+#~ msgstr "ਐਲਾਨ ਖੇਤਰ"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_ਹੇਠਾਂ"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "ਦਰਜਾ-ਪੱਟੀ ਵਿੱਚ ਸਿਸਟਮ ਟਰੇ ਵਿਖਾਓ"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "ਅਨੁਕੂਲਤਾ"
+#~ msgid "Cannot get initial style"
+#~ msgstr "ਸ਼ੁਰੂਆਤੀ ਸ਼ੈਲੀ ਪ੍ਰਾਪਤ ਨਹੀ ਕਰ ਸਕਿਆ"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_ਖੱਬੇ"
+#~ msgid "This should not happen"
+#~ msgstr "ਅਜਿਹਾ ਨਹੀਂ ਵਾਪਰਨਾ ਚਾਹੀਦਾਆ"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_ਵਿਚਕਾਰ"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "ਮੂਲ ਪਰਦਾ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰ ਸਕਿਆ\n"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "ਸੱਜੇ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "ਸਵੈ-ਲੁਕਵਾਂ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "ਸਵੈ ਲੁਕਵੀਂ ਦਰਜਾ ਪੱਟੀ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "ਆਕਾਰ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "ਉਚਾਈਃ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "ਚੌੜਾਈਃ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "ਕਾਰਜ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "ਸਾਰੇ ਵਰਕਸਪੇਸਾਂ ਵਿੱਚ ਕਾਰਜ ਵਿਖਾਓ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "ਕਾਰਜਾਂ ਦੇ ਹਮੇਸ਼ਾ ਸਮੂਹ ਬਣਾਓ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "ਕਾਰਜ _ਨਾਂ ਵਿਖਾਓ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "ਪੇਜ਼ਰ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "ਦਰਜਾ-ਪੱਟੀ ਵਿੱਚ ਪੇਜ਼ਰ ਵਿਖਾਓ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "ਐਲਾਨ ਖੇਤਰ"
-
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "ਦਰਜਾ-ਪੱਟੀ ਵਿੱਚ ਸਿਸਟਮ ਟਰੇ ਵਿਖਾਓ"
-
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "ਸ਼ੁਰੂਆਤੀ ਸ਼ੈਲੀ ਪ੍ਰਾਪਤ ਨਹੀ ਕਰ ਸਕਿਆ"
-
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "ਇਸ ਟਰੇ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਸਿਸਟਮ ਟਰੇ ਚੱਲ ਰਹੀ ਹੈ"
-
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "ਸਿਸਟਮ ਟਰੇ ਰਜਿਸਟਰ ਕਰਨ ਵਿੱਚ ਅਯੋਗਃ %s"
-
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "ਅਜਿਹਾ ਨਹੀਂ ਵਾਪਰਨਾ ਚਾਹੀਦਾਆ"
-
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "ਮੂਲ ਪਰਦਾ ਪ੍ਰਾਪਤ ਨਹੀਂ ਕਰ ਸਕਿਆ\n"
-
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "ਅਜਲਾਸ ਮੈਨੇਜਰ ਨਾਲ ਜੁੜ ਨਹੀਂ ਸਕਿਆ"
-
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "MCS ਕਲਾਂਈਟ ਚੈਨਲ ਬਣਾ ਨਹੀਂ ਸਕਿਆ"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "ਅਜਲਾਸ ਮੈਨੇਜਰ ਨਾਲ ਜੁੜ ਨਹੀਂ ਸਕਿਆ"
