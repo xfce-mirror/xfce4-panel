@@ -197,7 +197,7 @@ add_notebook (GtkBox * box)
 	gtk_widget_show (frame);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), frame, NULL);
 
-	control_add_options (control, GTK_CONTAINER (frame), done);
+	control_create_options (control, GTK_CONTAINER (frame), done);
     }
 
     gtk_box_pack_start (box, notebook, TRUE, TRUE, 0);

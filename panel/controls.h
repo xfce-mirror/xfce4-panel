@@ -46,7 +46,7 @@ struct _ControlClass
     void (*attach_callback) (Control * control, const char *signal,
 			     GCallback callback, gpointer data);
 
-    void (*add_options) (Control * control, GtkContainer * container,
+    void (*create_options) (Control * control, GtkContainer * container,
 			 GtkWidget * done);
 
     /* global preferences */
@@ -94,7 +94,7 @@ void control_unpack (Control * control);
 
 void control_attach_callbacks (Control * control);
 
-void control_add_options (Control * control, GtkContainer * container,
+void control_create_options (Control * control, GtkContainer * container,
 			  GtkWidget * done);
 
 /* global settings */

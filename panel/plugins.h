@@ -25,7 +25,7 @@
 
 #include <panel/xfce.h>
 
-#define XFCE_PLUGIN_API_VERSION 4
+#define XFCE_PLUGIN_API_VERSION 5
 
 #ifdef __cplusplus
 extern "C"

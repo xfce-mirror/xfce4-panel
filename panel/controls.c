@@ -105,7 +105,7 @@ control_class_free (ControlClass * cc)
 #define SOEXT 		("." G_MODULE_SUFFIX)
 #define SOEXT_LEN 	(strlen (SOEXT))
 
-#define API_VERSION 4
+#define API_VERSION 5
 
 gchar *
 xfce_plugin_check_version (gint version)
@@ -629,14 +629,14 @@ control_write_xml (Control * control, xmlNodePtr parent)
 
 /* options dialog */
 void
-control_add_options (Control * control, GtkContainer * container,
+control_create_options (Control * control, GtkContainer * container,
 		     GtkWidget * done)
 {
     ControlClass *cc = control->cclass;
 
-    if (cc && cc->add_options)
+    if (cc && cc->create_options)
     {
-	cc->add_options (control, container, done);
+	cc->create_options (control, container, done);
     }
     else
     {

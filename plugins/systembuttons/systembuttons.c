@@ -531,7 +531,7 @@ systembuttons_revert_configuration (t_systembuttons_dialog * sbd)
 #endif
 
 void
-systembuttons_add_options (Control * control, GtkContainer * container,
+systembuttons_create_options (Control * control, GtkContainer * container,
 			   GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label, *om = NULL;
@@ -677,7 +677,7 @@ xfce_control_class_init (ControlClass * cc)
     cc->set_size = systembuttons_set_size;
     cc->set_orientation = systembuttons_set_orientation;
     cc->set_theme = systembuttons_set_theme;
-    cc->add_options = systembuttons_add_options;
+    cc->create_options = systembuttons_create_options;
 }
 
 XFCE_PLUGIN_CHECK_INIT

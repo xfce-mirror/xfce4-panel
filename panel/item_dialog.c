@@ -912,7 +912,7 @@ item_revert_options (void)
 #endif
 
 static void
-item_add_options (GtkContainer * container)
+item_create_options (GtkContainer * container)
 {
     GtkWidget *vbox;
     GtkWidget *box;
@@ -1001,7 +1001,7 @@ item_add_options (GtkContainer * container)
  *  -----------------
 */
 void
-panel_item_add_options (Control * control, GtkContainer * container,
+panel_item_create_options (Control * control, GtkContainer * container,
                         GtkWidget * done)
 {
     config_control = control;
@@ -1012,7 +1012,7 @@ panel_item_add_options (Control * control, GtkContainer * container,
     g_signal_connect_swapped (done, "clicked",
                               G_CALLBACK (item_apply_options), NULL);
 
-    item_add_options (container);
+    item_create_options (container);
 }
 
 /*  Menu item dialogs
@@ -1060,7 +1060,7 @@ create_menu_item_dialog (Item * mi)
     gtk_box_pack_start (GTK_BOX (main_vbox), frame, TRUE, TRUE, 0);
 
     config_item = mi;
-    item_add_options (GTK_CONTAINER (frame));
+    item_create_options (GTK_CONTAINER (frame));
 
     /* signals */
     g_signal_connect (done_button, "clicked",

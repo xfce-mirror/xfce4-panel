@@ -721,7 +721,7 @@ add_interval_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 
 /* the dialog */
 void
-mailcheck_add_options (Control * control, GtkContainer * container,
+mailcheck_create_options (Control * control, GtkContainer * container,
 		       GtkWidget * done)
 {
     GtkWidget *vbox;
@@ -784,7 +784,7 @@ xfce_control_class_init (ControlClass * cc)
     cc->write_config = mailcheck_write_config;
     cc->attach_callback = mailcheck_attach_callback;
 
-    cc->add_options = (gpointer) mailcheck_add_options;
+    cc->create_options = (gpointer) mailcheck_create_options;
 
     cc->set_theme = mailcheck_set_theme;
 }

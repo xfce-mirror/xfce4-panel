@@ -607,7 +607,7 @@ panel_item_class_init (ControlClass * cc)
     cc->write_config = panel_item_write_config;
     cc->attach_callback = panel_item_attach_callback;
 
-    cc->add_options = panel_item_add_options;
+    cc->create_options = panel_item_create_options;
 
     cc->set_theme = panel_item_set_theme;
 }

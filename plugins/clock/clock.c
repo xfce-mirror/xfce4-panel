@@ -543,7 +543,7 @@ clock_restore_backup (ClockDialog * cd)
 
 /* clock options box */
 void
-clock_add_options (Control * control, GtkContainer * container,
+clock_create_options (Control * control, GtkContainer * container,
 		   GtkWidget * done)
 {
     GtkWidget *vbox;
@@ -605,7 +605,7 @@ xfce_control_class_init (ControlClass * cc)
     cc->write_config = clock_write_config;
     cc->attach_callback = clock_attach_callback;
 
-    cc->add_options = clock_add_options;
+    cc->create_options = clock_create_options;
 
     cc->set_size = clock_set_size;
 }
