@@ -694,6 +694,76 @@ static void exit_set_icon_theme(PanelModule * pm, const char *theme)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+GtkWidget *lock_entry;
+GtkWidget *exit_entry;
+
+void exit_add_options(PanelModule * pm, GtkContainer * container)
+{
+    GtkWidget *vbox, *hbox, *label;
+    GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+
+    vbox = gtk_vbox_new(FALSE, 4);
+    gtk_widget_show(vbox);
+
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Lock command:"));
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    lock_entry = gtk_entry_new();
+    if (settings.lock_command)
+	gtk_entry_set_text(GTK_ENTRY(lock_entry), settings.lock_command);
+    gtk_widget_show(lock_entry);
+    gtk_box_pack_start(GTK_BOX(hbox), lock_entry, FALSE, FALSE, 0);
+
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Exit command"));
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    exit_entry = gtk_entry_new();
+    if (settings.exit_command)
+	gtk_entry_set_text(GTK_ENTRY(exit_entry), settings.exit_command);
+    gtk_widget_show(exit_entry);
+    gtk_box_pack_start(GTK_BOX(hbox), exit_entry, FALSE, FALSE, 0);
+
+    gtk_container_add(container, vbox);
+}
+
+static void exit_apply_configuration(PanelModule * pm)
+{
+    const char *tmp;
+
+    tmp = gtk_entry_get_text(GTK_ENTRY(lock_entry));
+
+    g_free(settings.lock_command);
+
+    if (tmp && *tmp)
+	settings.lock_command = g_strdup(tmp);
+    else
+	settings.lock_command = NULL;
+
+    tmp = gtk_entry_get_text(GTK_ENTRY(exit_entry));
+
+    g_free(settings.exit_command);
+
+    if (tmp && *tmp)
+	settings.exit_command = g_strdup(tmp);
+    else
+	settings.exit_command = NULL;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static gboolean create_exit_module(PanelModule * pm)
 {
     t_exit *exit = exit_new();
@@ -711,6 +781,9 @@ static gboolean create_exit_module(PanelModule * pm)
 
     pm->set_size = (gpointer) exit_set_size;
     pm->set_icon_theme = (gpointer) exit_set_icon_theme;
+
+    pm->add_options = (gpointer) exit_add_options;
+    pm->apply_configuration = (gpointer) exit_apply_configuration;
 
     return TRUE;
 }
