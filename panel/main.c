@@ -316,7 +316,8 @@ ensure_base_dir_spec (XfceResourceType type,
                       const char *old_subdir, const char *old_file,
                       const char *new_subdir, const char *new_file)
 {
-    char  *old, *new, *path, c;
+    char  *old, *new, *path;
+    int c;
     FILE *r, *w;
     GError *error = NULL;
 

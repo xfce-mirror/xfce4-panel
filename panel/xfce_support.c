@@ -194,7 +194,8 @@ write_backup_file (const char * path)
 {
     FILE *fp;
     FILE *bakfp;
-    char bakfile[MAXSTRLEN + 1], c;
+    char bakfile[MAXSTRLEN + 1];
+    int c;
 
     snprintf (bakfile, MAXSTRLEN, "%s.bak", path);
 
