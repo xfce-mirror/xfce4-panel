@@ -1,6 +1,6 @@
-/*  item_dialog.c
+/*  xfce4
  *
- *  Copyright (C) Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2003 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,6 +37,7 @@
 #include <config.h>
 #endif
 
+#include <libxfce4util/debug.h>
 #include <libxfce4util/i18n.h>
 
 #include "xfce.h"
@@ -45,9 +46,7 @@
 #include "item.h"
 #include "item_dialog.h"
 #include "settings.h"
-
-/* what's this? */
-#define USE_XFFM_THEME_MAKER
+#include "xfcombo.h"
 
 #define BORDER 6
 
@@ -75,9 +74,10 @@ struct _ItemProperties
     GtkWidget *pos_spin;
 
     /* common */
+    GtkWidget *combo;
     GtkWidget *cdm_entry;
     GtkWidget *tip_entry;
-    
+  
     GtkWidget *icon_menu;
     GtkWidget *icon_entry;
     GtkWidget *image;
@@ -112,6 +112,11 @@ static GtkWidget *icon_entry;
 static GtkWidget *icon_browse_button;
 static GtkWidget *tip_entry;
 static GtkWidget *preview_image;
+
+/* for completion combo (not always available) */
+static xfc_combo_info_t *combo_info;
+static GtkWidget *command_combo;
+static void combo_completion_cb (xfc_combo_info_t *info);
 
 /* for panel launchers */
 static GtkWidget *popup_checkbutton;
@@ -323,7 +328,6 @@ change_icon (int id, const char *path)
 	gtk_entry_set_text (GTK_ENTRY (icon_entry), "");
 
 	gtk_widget_set_sensitive (icon_entry, FALSE);
-/*        gtk_widget_set_sensitive(icon_browse_button, FALSE);*/
     }
 
     g_signal_handler_block (icon_id_menu, id_callback);
@@ -392,7 +396,6 @@ icon_browse_cb (GtkWidget * b, GtkEntry * entry)
     }
 }
 
-#ifdef USE_XFFM_THEME_MAKER
 static void
 xtm_cb (GtkWidget * b, GtkEntry * entry)
 {
@@ -403,7 +406,6 @@ xtm_cb (GtkWidget * b, GtkEntry * entry)
     if (error)
 	g_error_free (error);
 }
-#endif
 
 gboolean
 icon_entry_lost_focus (GtkEntry * entry, GdkEventFocus * event, gpointer data)
@@ -472,7 +474,6 @@ create_icon_option (GtkSizeGroup * sg)
     g_signal_connect (icon_browse_button, "clicked",
 		      G_CALLBACK (icon_browse_cb), icon_entry);
 
-#ifdef USE_XFFM_THEME_MAKER
     {
 	gchar *g = g_find_program_in_path ("xffm_theme_maker");
 
@@ -494,9 +495,6 @@ create_icon_option (GtkSizeGroup * sg)
 	    g_free (g);
 	}
     }
-
-#endif
-
 
     return vbox;
 }
@@ -542,13 +540,26 @@ create_command_option (GtkSizeGroup * sg)
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    command_entry = gtk_entry_new ();
-    gtk_widget_show (command_entry);
-    gtk_box_pack_start (GTK_BOX (hbox), command_entry, TRUE, TRUE, 0);
+    /* only available when compiled with libdbh support and 
+     * libxfce4_combo module is installed */
+    combo_info = create_completion_combo ((ComboCallback)combo_completion_cb);
 
-    if (config_item->command)
-	gtk_entry_set_text (GTK_ENTRY (command_entry), config_item->command);
-    
+    if (combo_info)
+    {
+	DBG ("using completion combo");
+	command_combo = GTK_WIDGET (combo_info->combo);
+	gtk_widget_show (command_combo);
+	gtk_box_pack_start (GTK_BOX (hbox), command_combo, TRUE, TRUE, 0);
+	command_entry = GTK_WIDGET (combo_info->entry);
+    }
+    else
+    {
+	command_combo = NULL;
+	command_entry = gtk_entry_new ();
+	gtk_widget_show (command_entry);
+	gtk_box_pack_start (GTK_BOX (hbox), command_entry, TRUE, TRUE, 0);
+    }
+
     command_browse_button = gtk_button_new ();
     gtk_widget_show (command_browse_button);
     gtk_box_pack_start (GTK_BOX (hbox), command_browse_button, FALSE, FALSE,
@@ -580,20 +591,43 @@ create_command_option (GtkSizeGroup * sg)
     gtk_widget_show (term_checkbutton);
     gtk_box_pack_start (GTK_BOX (vbox2), term_checkbutton, FALSE, FALSE, 0);
 
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (term_checkbutton),
-				  config_item->in_terminal);
-
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     sn_checkbutton =
 	gtk_check_button_new_with_mnemonic (_("Use startup _notification"));
     gtk_widget_show (sn_checkbutton);
     gtk_box_pack_start (GTK_BOX (vbox2), sn_checkbutton, FALSE, FALSE, 0);
-    
+
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sn_checkbutton),
 				  config_item->use_sn);
 #endif
 
+    if (combo_info)
+    {
+	if (config_item->command)
+	    completion_combo_set_text (combo_info, config_item->command);
+	else
+	    completion_combo_set_text (combo_info, "");
+    }
+    else if (config_item->command)
+    {
+	gtk_entry_set_text (GTK_ENTRY (command_entry), config_item->command);
+    }
+    
+    /* if we're using the completion combo, this may not have been set 
+     * correctly */
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (term_checkbutton),
+				  config_item->in_terminal);
     return vbox;
+}
+
+static void combo_completion_cb (xfc_combo_info_t *info)
+{
+    const char *cmd;
+
+    cmd = gtk_entry_get_text (info->entry);
+
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (term_checkbutton),
+				  history_check_in_terminal (cmd));    
 }
 
 /*  Change caption
@@ -868,9 +902,12 @@ item_apply_options (void)
 
     config_item->in_terminal =
 	gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (term_checkbutton));
-
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     config_item->use_sn =
 	gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (sn_checkbutton));
+#else
+    config_item->use_sn = FALSE;
+#endif
 
     /* tooltip */
     g_free (config_item->tooltip);
@@ -951,6 +988,13 @@ item_create_options (GtkContainer * container)
 /*  Panel item dialog
  *  -----------------
 */
+static void
+panel_item_destroyed (void)
+{
+    if (combo_info)
+	destroy_completion_combo (combo_info);
+}
+
 void
 panel_item_create_options (Control * control, GtkContainer * container,
 			   GtkWidget * done)
@@ -960,8 +1004,11 @@ panel_item_create_options (Control * control, GtkContainer * container,
 
     dialog = gtk_widget_get_toplevel (done);
 
-    g_signal_connect_swapped (done, "clicked",
-			      G_CALLBACK (item_apply_options), NULL);
+    g_signal_connect_swapped (done, "clicked", 
+	    		      G_CALLBACK (item_apply_options), NULL);
+
+    g_signal_connect (dialog, "destroy", G_CALLBACK (panel_item_destroyed),
+	    	      NULL);
 
     item_create_options (container);
 }
@@ -973,10 +1020,8 @@ static GtkWidget *
 create_menu_item_dialog (Item * mi)
 {
     GtkDialog *dlg;
-    GtkWidget *main_vbox;
     GtkWidget *align;
     GtkWidget *remove_button;
-    GtkWidget *sep;
     GtkWidget *header;
 
     config_item = mi;
@@ -1073,6 +1118,9 @@ edit_menu_item_dialog (Item * mi)
 
     gtk_widget_destroy (dlg);
     num_items = 0;
+
+    if (combo_info)
+	destroy_completion_combo (combo_info);
 
     write_panel_config ();
 }

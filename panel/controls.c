@@ -182,6 +182,12 @@ control_class_info_create_control (ControlClassInfo *info, Control *control)
     g_return_val_if_fail (info != NULL, FALSE);
     g_return_val_if_fail (control != NULL, FALSE);
 
+    if (info->class->id == ICON)
+    {
+	info->class->create_control (control);
+	return TRUE;
+    }
+    
     while (unloading)
     {
 	DBG ("unloading in progress");

@@ -27,7 +27,9 @@ xfce4_panel_SOURCES =						\
 	settings.h 						\
 	xfce.h 							\
 	xfce_support.c 						\
-	xfce_support.h
+	xfce_support.h						\
+	xfcombo.c 						\
+	xfcombo.h
 
 xfce4_panelincludedir = $(includedir)/xfce4/panel
 
@@ -47,6 +49,7 @@ xfce4_panel_CFLAGS = 							\
 	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
+	@LIBDBH_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXFCE4MCS_CLIENT_CFLAGS@					\
 	@LIBXML_CFLAGS@							\
@@ -63,7 +66,8 @@ xfce4_panel_LDADD =							\
 	@LIBX11_LIBS@							\
 	@LIBXFCEGUI4_LIBS@						\
 	@LIBXFCE4MCS_CLIENT_LIBS@					\
-	@LIBXML_LIBS@
+	@LIBXML_LIBS@							\
+	@LIBDBH_LIBS@
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xfce4-panel-1.0.pc

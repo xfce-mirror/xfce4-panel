@@ -78,6 +78,9 @@ INSTALL_STRIP_PROGRAM = @INSTALL_STRIP_PROGRAM@
 INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LDFLAGS = @LDFLAGS@
+LIBDBH_CFLAGS = @LIBDBH_CFLAGS@
+LIBDBH_LIBS = @LIBDBH_LIBS@
+LIBDBH_REQUIRED_VERSION = @LIBDBH_REQUIRED_VERSION@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBSTARTUP_NOTIFICATION_CFLAGS = @LIBSTARTUP_NOTIFICATION_CFLAGS@
@@ -202,7 +205,9 @@ xfce4_panel_SOURCES = \
 	settings.h 						\
 	xfce.h 							\
 	xfce_support.c 						\
-	xfce_support.h
+	xfce_support.h						\
+	xfcombo.c 						\
+	xfcombo.h
 
 
 xfce4_panelincludedir = $(includedir)/xfce4/panel
@@ -224,6 +229,7 @@ xfce4_panel_CFLAGS = \
 	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
+	@LIBDBH_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXFCE4MCS_CLIENT_CFLAGS@					\
 	@LIBXML_CFLAGS@							\
@@ -242,7 +248,8 @@ xfce4_panel_LDADD = \
 	@LIBX11_LIBS@							\
 	@LIBXFCEGUI4_LIBS@						\
 	@LIBXFCE4MCS_CLIENT_LIBS@					\
-	@LIBXML_LIBS@
+	@LIBXML_LIBS@							\
+	@LIBDBH_LIBS@
 
 
 pkgconfigdir = $(libdir)/pkgconfig
@@ -262,7 +269,8 @@ am_xfce4_panel_OBJECTS = xfce4_panel-controls.$(OBJEXT) \
 	xfce4_panel-main.$(OBJEXT) xfce4_panel-mcs_client.$(OBJEXT) \
 	xfce4_panel-panel.$(OBJEXT) xfce4_panel-popup.$(OBJEXT) \
 	xfce4_panel-settings.$(OBJEXT) \
-	xfce4_panel-xfce_support.$(OBJEXT)
+	xfce4_panel-xfce_support.$(OBJEXT) \
+	xfce4_panel-xfcombo.$(OBJEXT)
 xfce4_panel_OBJECTS = $(am_xfce4_panel_OBJECTS)
 xfce4_panel_DEPENDENCIES =
 
@@ -280,7 +288,8 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-panel.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-popup.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-settings.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-xfce_support.Po
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-xfce_support.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-xfcombo.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -359,6 +368,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-popup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-settings.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-xfce_support.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-xfcombo.Po@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -791,6 +801,39 @@ xfce4_panel-xfce_support.lo: xfce_support.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-xfce_support.Plo' tmpdepfile='$(DEPDIR)/xfce4_panel-xfce_support.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-xfce_support.lo `test -f 'xfce_support.c' || echo '$(srcdir)/'`xfce_support.c
+
+xfce4_panel-xfcombo.o: xfcombo.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-xfcombo.o -MD -MP -MF "$(DEPDIR)/xfce4_panel-xfcombo.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o xfce4_panel-xfcombo.o `test -f 'xfcombo.c' || echo '$(srcdir)/'`xfcombo.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/xfce4_panel-xfcombo.Tpo" "$(DEPDIR)/xfce4_panel-xfcombo.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-xfcombo.Tpo"; exit 1; \
+@am__fastdepCC_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfcombo.c' object='xfce4_panel-xfcombo.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-xfcombo.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-xfcombo.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-xfcombo.o `test -f 'xfcombo.c' || echo '$(srcdir)/'`xfcombo.c
+
+xfce4_panel-xfcombo.obj: xfcombo.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-xfcombo.obj -MD -MP -MF "$(DEPDIR)/xfce4_panel-xfcombo.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o xfce4_panel-xfcombo.obj `if test -f 'xfcombo.c'; then $(CYGPATH_W) 'xfcombo.c'; else $(CYGPATH_W) '$(srcdir)/xfcombo.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/xfce4_panel-xfcombo.Tpo" "$(DEPDIR)/xfce4_panel-xfcombo.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-xfcombo.Tpo"; exit 1; \
+@am__fastdepCC_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfcombo.c' object='xfce4_panel-xfcombo.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-xfcombo.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-xfcombo.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-xfcombo.obj `if test -f 'xfcombo.c'; then $(CYGPATH_W) 'xfcombo.c'; else $(CYGPATH_W) '$(srcdir)/xfcombo.c'; fi`
+
+xfce4_panel-xfcombo.lo: xfcombo.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-xfcombo.lo -MD -MP -MF "$(DEPDIR)/xfce4_panel-xfcombo.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o xfce4_panel-xfcombo.lo `test -f 'xfcombo.c' || echo '$(srcdir)/'`xfcombo.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/xfce4_panel-xfcombo.Tpo" "$(DEPDIR)/xfce4_panel-xfcombo.Plo"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-xfcombo.Tpo"; exit 1; \
+@am__fastdepCC_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfcombo.c' object='xfce4_panel-xfcombo.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-xfcombo.Plo' tmpdepfile='$(DEPDIR)/xfce4_panel-xfcombo.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-xfcombo.lo `test -f 'xfcombo.c' || echo '$(srcdir)/'`xfcombo.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
