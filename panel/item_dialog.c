@@ -649,7 +649,8 @@ create_position_option (void)
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    pos_spin = gtk_spin_button_new_with_range (1, num_items, 1);
+    pos_spin = gtk_spin_button_new_with_range 
+                                 (1, (num_items > 0) ? num_items : 1, 1);
     gtk_widget_show (pos_spin);
     gtk_box_pack_start (GTK_BOX (hbox), pos_spin, FALSE, FALSE, 0);
 
