@@ -1,3 +1,121 @@
+2003-05-12 20:02  huysmans
+
+	* panel/item_dialog.c, po/de.gmo, po/de.po, po/es.gmo, po/es.po,
+	po/es_MX.gmo, po/es_MX.po, po/fi.gmo, po/fi.po, po/fr.gmo,
+	po/fr.po, po/ja.gmo, po/ja.po, po/nl.gmo, po/nl.po, po/pl.gmo,
+	po/pl.po, po/xfce4-panel.pot, po/zh_CN.gmo, po/zh_CN.po: Renamed
+	subpanel to menu
+
+2003-05-12 18:37  huysmans
+
+	* panel/controls.c, panel/controls_dialog.c,
+	panel/controls_dialog.h, panel/groups.c, panel/groups.h,
+	panel/panel.c, po/de.gmo, po/de.po, po/es.gmo, po/es.po,
+	po/es_MX.gmo, po/es_MX.po, po/fi.gmo, po/fi.po, po/fr.gmo,
+	po/fr.po, po/ja.gmo, po/ja.po, po/nl.gmo, po/nl.po, po/pl.gmo,
+	po/pl.po, po/xfce4-panel.pot, po/zh_CN.gmo, po/zh_CN.po: Get rid of
+	type option menu from item dialog
+
+2003-05-12 12:41  huysmans
+
+	* po/: de.po, es.po, es_MX.po, fi.po, fr.po, ja.po, nl.po, pl.po,
+	xfce4-panel.pot, zh_CN.po: Update po files
+
+2003-05-12 12:31  huysmans
+
+	* Makefile.am, Makefile.in, aclocal.m4, configure, panel/item.c,
+	panel/item.h, panel/item_dialog.c, plugins/mailcheck/mailcheck.c:
+	Allow hiding of subpanels; remove subpanel from mailcheck plugin
+
+2003-05-05 00:18  huysmans
+
+	* Makefile.am, Makefile.in, configure, configure.ac, xfce4.spec.in,
+	xfce4rc, xfce4rc.in, icons/Makefile.am, icons/Makefile.in,
+	panel/Makefile.am, panel/Makefile.in, plugins/clock/Makefile.am,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.am,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.am,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.am,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in, po/de.gmo, po/de.po, po/es.gmo,
+	po/es.po, po/es_MX.gmo, po/es_MX.po, po/fi.gmo, po/fi.po,
+	po/fr.gmo, po/fr.po, po/ja.gmo, po/ja.po, po/nl.gmo, po/nl.po,
+	po/pl.gmo, po/pl.po, po/xfce4-panel.pot, po/zh_CN.gmo, po/zh_CN.po,
+	settings/Makefile.am, settings/Makefile.in: Fixes for rpm target
+	and distcheck stuff
+
+2003-05-04 00:02  xfce
+
+	* po/: fr.gmo, fr.po: Various fixes, added french translation,
+	fixed desktop switching in xfwm4
+
+2003-05-03 11:43  huysmans
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	ltcf-c.sh, ltconfig, ltmain.sh, doc/Makefile.in,
+	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, po/zh_CN.gmo, po/zh_CN.po,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add chinese
+	translations
+
+2003-05-03 11:12  huysmans
+
+	* panel/controls.c: Ensure item popup menu uses panel domain for
+	translations
+
+2003-05-02 22:34  huysmans
+
+	* ChangeLog, Makefile.in, aclocal.m4, config.guess, config.h.in,
+	config.sub, configure, ltmain.sh, doc/Makefile.in,
+	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, panel/xfce_support.c,
+	plugins/Makefile.in, plugins/clock/Makefile.am,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.am,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.am,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.am,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Update to use the new panel-plugins
+	location
+
+2003-05-02 19:12  bmeurer
+
+	* Makefile.in, aclocal.m4, configure, configure.ac,
+	doc/Makefile.in, doc/html/Makefile.in,
+	doc/html/panel-copyright.html, doc/html/panel-getting-started.html,
+	doc/html/panel-settings.html, doc/html/panel-use.html,
+	doc/html/xfce4-panel.html, doc/images/Makefile.in,
+	doc/xml/Makefile.in, doc/xml/xfce.xsl, icons/Makefile.in,
+	m4/depends.m4, panel/Makefile.in, panel/xfce4-panel-1.0.pc.in,
+	plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	plugins/systembuttons/systembuttons.c, settings/Makefile.am,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Several changes.
+	See http://www.home.unix-ag.org/bmeurer/xfce/index.html#20030502
+	for details.
+
+2003-05-02 11:19  huysmans
+
+	* panel/controls.c: only popup warning dialog about subpanels being
+	removed when not empty (2)
+
+2003-05-02 11:00  huysmans
+
+	* panel/controls_dialog.c: properly check for return values when
+	creating controls
+
 2003-05-02 10:05  huysmans
 
 	* panel/: controls_dialog.c, groups.c, groups.h: only popup warning

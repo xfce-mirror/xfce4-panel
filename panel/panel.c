@@ -94,27 +94,6 @@ settings_mgr (void)
 }
 
 static void
-add_new (void)
-{
-    Control *control;
-    gboolean hidden = settings.autohide;
-
-    if (hidden)
-    {
-	DBG("unhide before adding new item");
-	panel_set_autohide(FALSE);
-
-	while (gtk_events_pending())
-	    gtk_main_iteration();
-    }
-	
-    controls_add_dialog (-1);
-
-    if (hidden)
-	panel_set_autohide(TRUE);
-}
-
-static void
 lock_screen (void)
 {
     exec_cmd ("xflock4", FALSE, FALSE);
@@ -141,7 +120,7 @@ do_help (void)
 static GtkItemFactoryEntry panel_items[] = {
     {N_("/XFce Panel"), NULL, NULL, 0, "<Title>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/Add _new item"), NULL, add_new, 0, "<Item>"},
+    {N_("/Add _new item"), NULL, NULL, 0, "<Branch>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
     {N_("/_Properties..."), NULL, edit_prefs, 0, "<Item>"},
     {N_("/_Settings manager"), NULL, settings_mgr, 0, "<Item>"},
@@ -156,17 +135,25 @@ static GtkItemFactoryEntry panel_items[] = {
 static const char *
 translate_menu (const char *msg)
 {
-    return gettext (msg);
+#if ENABLE_NLS
+    /* ensure we use the panel domain and not that of a plugin */
+    return dgettext (GETTEXT_PACKAGE, msg);
+#else
+    return msg;
+#endif
 }
 
 static GtkMenu *
-create_handle_menu (void)
+get_handle_menu (void)
 {
     static GtkMenu *menu = NULL;
     GtkItemFactory *ifactory;
 
     if (!menu)
     {
+	GtkItemFactoryEntry *entries;
+	int n_entries;
+	
         ifactory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
 
         gtk_item_factory_set_translate_func (ifactory,
@@ -174,6 +161,14 @@ create_handle_menu (void)
                                              NULL, NULL);
         gtk_item_factory_create_items (ifactory, G_N_ELEMENTS (panel_items),
                                        panel_items, NULL);
+	
+	n_entries = get_controls_menu_entries (&entries, "/Add new item");
+
+        gtk_item_factory_create_items (ifactory, n_entries,
+                                       entries, NULL);
+
+/*	free_controls_menu_entries(entries, n_entries); */
+	
         menu = GTK_MENU (gtk_item_factory_get_widget (ifactory, "<popup>"));
     }
 
@@ -197,13 +192,17 @@ handle_set_size (GtkWidget * mh, int size)
 }
 
 static gboolean
-handler_pressed_cb (GtkWidget * h, GdkEventButton * event, GtkMenu * menu)
+handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
 {
     hide_current_popup_menu ();
 
     if (event->button == 3 ||
         (event->button == 1 && event->state & GDK_SHIFT_MASK))
     {
+	GtkMenu *menu;
+
+	menu = get_handle_menu ();
+
         gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button,
                         event->time);
 
@@ -230,17 +229,14 @@ GtkWidget *
 handle_new (void)
 {
     GtkWidget *mh;
-    GtkMenu *menu;
 
     mh = xfce_movehandler_new (panel.toplevel);
     gtk_widget_show (mh);
 
     gtk_widget_set_name (mh, "xfce_panel");
 
-    menu = create_handle_menu ();
-
     g_signal_connect (mh, "button-press-event",
-                      G_CALLBACK (handler_pressed_cb), menu);
+                      G_CALLBACK (handler_pressed_cb), NULL);
 
     g_signal_connect (mh, "move-end",
                       G_CALLBACK (handler_move_end_cb), NULL);

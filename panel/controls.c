@@ -279,9 +279,12 @@ remove_control (void)
 }
 
 static void
-add_control (void)
+add_control (gpointer data, int n, GtkWidget *w)
 {
     gboolean hidden = settings.autohide;
+    ControlClass *cc;
+    Control *control;
+    int index;
 
     if (hidden)
     {
@@ -292,8 +295,19 @@ add_control (void)
 	    gtk_main_iteration();
     }
 
-    controls_add_dialog(popup_control ? popup_control->index : -1);
+    cc = g_slist_nth(control_class_list, n-1)->data;
+
+    index = popup_control ? popup_control->index : -1;
     
+    groups_add_control(cc->id, cc->filename, index);
+    
+    control = groups_get_control (index >= 0 ? index :
+				     settings.num_groups - 1);
+
+    controls_dialog(control);
+
+    write_panel_config ();
+ 
     popup_control = NULL;
     
     if (hidden)
@@ -301,10 +315,10 @@ add_control (void)
 }
 
 static GtkItemFactoryEntry control_items[] = {
+    {N_("/Add _new item"), NULL, NULL, 0, "<Branch>"},
+    {"/sep", NULL, NULL, 0, "<Separator>"},
     {N_("/_Properties..."), NULL, edit_control, 0, "<Item>"},
     {N_("/_Remove"), NULL, remove_control, 0, "<Item>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/Add _new item"), NULL, add_control, 0, "<Item>"}
 };
 
 static const char *
@@ -318,6 +332,43 @@ translate_menu (const char *msg)
 #endif
 }
 
+void
+free_controls_menu_entries(GtkItemFactoryEntry *entries, int n)
+{
+    int i;
+
+    for (i = 0; i < n; i++)
+    {
+	g_free((entries+i)->path);
+    }
+
+    g_free(entries);
+}
+
+
+int
+get_controls_menu_entries(GtkItemFactoryEntry **entries, const char *base)
+{
+    GSList *li;
+    int i, n;
+    GtkItemFactoryEntry *entry;
+
+    n = g_slist_length(control_class_list);
+    *entries = g_new0(GtkItemFactoryEntry, n);
+    
+    for (entry = *entries, li = control_class_list, i = 1; 
+	    li; li = li->next, entry++, i++)
+    {
+	ControlClass *cc = li->data;
+	entry->path = g_strconcat(base, "/", cc->caption, NULL);
+	entry->callback = add_control;
+	entry->callback_action = i;
+	entry->item_type = "<Item>";
+    }
+    
+    return n;
+}
+
 static GtkWidget *
 get_control_menu (void)
 {
@@ -326,6 +377,9 @@ get_control_menu (void)
 
     if (!menu)
     {
+	GtkItemFactoryEntry *entries;
+	int n_entries;
+	
         factory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
 
         gtk_item_factory_set_translate_func (factory,
@@ -334,6 +388,12 @@ get_control_menu (void)
         gtk_item_factory_create_items (factory, G_N_ELEMENTS (control_items),
                                        control_items, NULL);
 
+	n_entries = get_controls_menu_entries (&entries, "/Add new item");
+
+        gtk_item_factory_create_items (factory, n_entries,
+                                       entries, NULL);
+
+/*	free_controls_menu_entries(entries, n_entries);*/
         menu = gtk_item_factory_get_widget (factory, "<popup>");
     }
 

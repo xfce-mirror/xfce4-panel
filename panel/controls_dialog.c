@@ -389,6 +389,7 @@ controls_dialog (Control * control)
     write_panel_config ();
 }
 
+#if 0
 /*  Add new control
  *  ---------------
 */
@@ -570,5 +571,4 @@ controls_add_dialog(int index)
 	gtk_widget_destroy(dlg);
     }
 }
-
-
+#endif

@@ -76,6 +76,10 @@ void control_class_list_cleanup (void);
 
 GSList *get_control_class_list (void);
 
+/* add controls menu */
+void free_controls_menu_entries(GtkItemFactoryEntry *entries, int n);
+int get_controls_menu_entries(GtkItemFactoryEntry **entries, const char *base);
+
 /* controls */
 Control *control_new (int index);
 void create_control (Control * control, int id, const char *filename);
