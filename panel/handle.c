@@ -58,7 +58,7 @@ static GtkItemFactoryEntry panel_items[] = {
   { N_("/_Lock screen"), NULL, lock_screen, 0, "<Item>" },
   { N_("/E_xit"),        NULL, exit_panel,  0, "<Item>" },
   { "/sep",              NULL, NULL,        0, "<Separator>" },
-  { N_("/_About xfce"),  NULL, do_info,     0, "<Item>" },
+  { N_("/_About XFce"),  NULL, do_info,     0, "<Item>" },
   { N_("/_Help"),        NULL, do_help,     0, "<Item>" },
 };
 

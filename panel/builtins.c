@@ -372,3 +372,19 @@ void create_config(PanelControl * pc)
 
     pc->set_theme = config_set_theme;
 }
+
+#if 0
+/*  Desktop switcher
+ *  ----------------
+ *  Still a special case module, but hopefully not for much longer ...
+*/
+
+void create_central(PanelControl *pc)
+{
+    central_panel_init(GTK_CONTAINER(pc->base));
+
+    pc->caption = g_strdup(_("Desktop switcher"));
+    pc->main = pc->base; /* hack */
+}
+#endif
+

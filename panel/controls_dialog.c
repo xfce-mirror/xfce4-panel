@@ -256,26 +256,61 @@ static void add_notebook(GtkBox * box)
 */
 
 static int backup_pos;
+static int backup_index;
+static int backup_central_index;
 
 static void revert_pos(GtkWidget *w)
 {
-    if (backup_pos == current_pc->index)
-	return;
+    if (backup_central_index != settings.central_index)
+	panel_set_central_index(backup_central_index);
 
-    side_panel_move(current_pc->index, backup_pos);
+    if (backup_index != current_pc->index)
+	side_panel_move(current_pc->index, backup_index);
+    
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), backup_pos);
 }
+
+/* from xfce.c */
+extern gboolean central_created;
 
 static void pos_changed(GtkSpinButton *spin)
 {
-    int n;
+    int n, index;
     gboolean changed = FALSE;
     
-    n = gtk_spin_button_get_value_as_int(spin);
+    n = gtk_spin_button_get_value_as_int(spin) - 1;
 
-    if (n == current_pc->index)
+    if (!central_created || n < settings.central_index)
+    {
+	index = n;
+    }
+    else
+    {
+	if (n == settings.central_index)
+	{
+	    if (current_pc->index == settings.central_index)
+	    {
+		/* special case: move the desktop switcher */
+		panel_set_central_index(settings.central_index + 1);
+		return;
+	    }
+	    else
+	    {
+		/* special case: move the desktop switcher */
+		panel_set_central_index(settings.central_index - 1);
+		return;
+	    }
+	}
+	else
+	{
+	    index = n-1;
+	}
+    }
+    
+    if (index == current_pc->index)
 	return;
 
-    side_panel_move(current_pc->index, n);
+    side_panel_move(current_pc->index, index);
 
     gtk_widget_set_sensitive(revert, TRUE);
 }
@@ -289,7 +324,7 @@ void change_panel_control_dialog(PanelControl * pc)
     GtkWidget *label;
     GtkWidget *separator;
     GtkWidget *main_vbox;
-    int response;
+    int response, n;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
     /* Keep track of the panel container */
@@ -310,6 +345,7 @@ void change_panel_control_dialog(PanelControl * pc)
 
     main_vbox = GTK_DIALOG(dlg)->vbox;
 
+    /* find all available controls */
     create_controls_list(pc);
 
     vbox = gtk_vbox_new(FALSE, 8);
@@ -343,9 +379,14 @@ void change_panel_control_dialog(PanelControl * pc)
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    backup_pos = pc->index;
-    pos_spin = gtk_spin_button_new_with_range(0, settings.num_groups, 1);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), pc->index);
+    backup_index = pc->index;
+    backup_central_index = settings.central_index;
+    
+    n = (backup_index >= backup_central_index && central_created) ? 1 : 0;
+    backup_pos = 1 + backup_index + n;
+    
+    pos_spin = gtk_spin_button_new_with_range(1, settings.num_groups + n, 1);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), backup_pos);
     gtk_widget_show(pos_spin);
     gtk_box_pack_start(GTK_BOX(hbox), pos_spin, FALSE, FALSE, 0);
     

@@ -366,6 +366,8 @@ void side_panel_move(int from, int to)
     li = g_list_nth(group_list, from);
     group = li->data;
 
+    /* FIXME: This isn't right 
+     * We need to incorporate the desktop switcher in the group list */
     if (to >= settings.central_index && settings.show_central)
 	gtk_box_reorder_child(groupbox, group->base, to + 1);
     else

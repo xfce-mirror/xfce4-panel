@@ -110,7 +110,8 @@ enum
     DUMMY_TRASH,
     EXIT,
     CONFIG,
-    NUM_BUILTINS
+    NUM_BUILTINS,
+    CENTRAL	/* still special case so > NUM_BUILTINS */
 };
 
 /* typedefs */
