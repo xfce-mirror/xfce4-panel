@@ -1,19 +1,18 @@
-# Xfce4 Malay translation.
+# Xfce4-panel Malay translation.
 # Copyright (C) 2003 Olivier Fourdan
 # This file is distributed under the same license as the xfce4 package.
 # Harun Musa <mharun@gmx.net>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 3.99.3\n"
-"POT-Creation-Date: 2003-12-04 09:37+0100\n"
-"PO-Revision-Date: 2003-08-31 13:00+0800\n"
+"Project-Id-Version: xfce4-panel 4.0.3\n"
+"POT-Creation-Date: 2004-01-07 08:45+0100\n"
+"PO-Revision-Date: 2004-02-07 10:31+0800\n"
 "Last-Translator: Harun Musa <mharun@gmx.net>\n"
 "Language-Team: Malay <translation-team-ms@list.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: panel/xfce_support.c:597
 msgid "Select file"
@@ -23,11 +22,11 @@ msgstr "Pilih fail"
 msgid "Change item"
 msgstr "Tukar item"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:681
+#: panel/controls_dialog.c:288 panel/item_dialog.c:691
 msgid "Position:"
 msgstr "Posisi:"
 
-#: panel/controls_dialog.c:342 panel/controls.c:272
+#: panel/controls_dialog.c:345
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -37,64 +36,64 @@ msgstr ""
 "\n"
 "Adakah anda mahu buang item?"
 
-#: panel/item_dialog.c:321
+#: panel/item_dialog.c:331
 msgid "Other Icon"
 msgstr "Ikon Lain"
 
-#: panel/item_dialog.c:346
+#: panel/item_dialog.c:355
 msgid "Select icon"
 msgstr "Pilih ikon"
 
-#: panel/item_dialog.c:396
+#: panel/item_dialog.c:407
 msgid "Icon:"
 msgstr "Ikon:"
 
-#: panel/item_dialog.c:467
+#: panel/item_dialog.c:482
 msgid "Select command"
 msgstr "Pilih arahan"
 
-#: panel/item_dialog.c:495
+#: panel/item_dialog.c:510
 msgid "Command:"
 msgstr "Arahan:"
 
-#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:547 plugins/mailcheck/mailcheck.c:831
 msgid "Run in _terminal"
 msgstr "Lari dalam _terminal"
 
-#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:552 plugins/mailcheck/mailcheck.c:839
 msgid "Use startup _notification"
 msgstr "Guna _notifikasi pemula"
 
-#: panel/item_dialog.c:564
+#: panel/item_dialog.c:579
 msgid "Caption:"
 msgstr "Caption:"
 
-#: panel/item_dialog.c:597
+#: panel/item_dialog.c:612
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:633
+#: panel/item_dialog.c:643
 msgid "Menu:"
 msgstr "Menu:"
 
-#: panel/item_dialog.c:640
+#: panel/item_dialog.c:650
 msgid "Attach menu to launcher"
 msgstr "Tambah menu ke pelancar"
 
-#: panel/item_dialog.c:773
+#: panel/item_dialog.c:783
 msgid "Icon Preview"
 msgstr "Pralihat Ikon"
 
-#: panel/item_dialog.c:777
+#: panel/item_dialog.c:787
 msgid "Drag file onto this frame to change the icon"
 msgstr "Jatuhkan fail kedalam frame ini untuk tukar ikon"
 
-#: panel/item_dialog.c:965
+#: panel/item_dialog.c:975
 msgid "Change menu item"
 msgstr "Tukar menu item"
 
 #. add buttons
-#: panel/item_dialog.c:968
+#: panel/item_dialog.c:978
 msgid "Remove"
 msgstr "Buang"
 
@@ -118,7 +117,7 @@ msgstr "Pelancar"
 msgid "Are you sure you want to exit?"
 msgstr "Adakah anda pasti untuk keluar?"
 
-#: panel/main.c:329
+#: panel/main.c:331
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -129,61 +128,65 @@ msgstr ""
 "Sebahagian Persekitaran Meja XFce\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:361
+#: panel/main.c:363
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Pengrus tetingkap anda nampaknya tidak menyokong petua pengurus tetingkap "
+"Pengurus tetingkap anda nampaknya tidak menyokong petua pengurus tetingkap "
 "baru sebagai yang didefinasikan di http://www.freedesktop.org. \n"
 "Sebahagian ciri-ciri XFce tidak bekerja seperti yang dikehendaki."
 
-#: panel/controls.c:320 panel/panel.c:412
+#: panel/controls.c:479
+msgid "Removing the item will also remove its popup menu."
+msgstr "Menyahkan item juga akan menyahkan menu popupnya."
+
+#: panel/controls.c:534 panel/panel.c:416
 msgid "/Add _new item"
 msgstr "/Tambah _item baru"
 
-#: panel/controls.c:322 panel/panel.c:414
+#: panel/controls.c:536 panel/panel.c:418
 msgid "/_Properties..."
 msgstr "/_Perbendaharaan..."
 
-#: panel/controls.c:323
+#: panel/controls.c:537
 msgid "/_Remove"
 msgstr "/_Buang"
 
-#: panel/controls.c:655
+#: panel/controls.c:874
 msgid "This item has no configuration options"
 msgstr "Item ini tiada opsyen konfigurasi"
 
-#: panel/panel.c:410
+#: panel/panel.c:414
 msgid "/XFce Panel"
 msgstr "/Panel XFce"
 
-#: panel/panel.c:415
+#: panel/panel.c:419
 msgid "/_About XFce"
 msgstr "/Perih_al XFce"
 
-#: panel/panel.c:416
+#: panel/panel.c:420
 msgid "/_Help"
 msgstr "/_Bantuan"
 
-#: panel/panel.c:419
+#: panel/panel.c:423
 msgid "/_Settings manager"
 msgstr "/Pengurus _Tetapan"
 
-#: panel/panel.c:422
+#: panel/panel.c:426
 msgid "/_Lock screen"
 msgstr "/_Kunci skrin"
 
-#: panel/panel.c:423
+#: panel/panel.c:427
 msgid "/_Restart"
-msgstr ""
+msgstr "/_Ulangmula"
 
-#: panel/panel.c:425
+#: panel/panel.c:429
 msgid "/E_xit"
 msgstr "/K_eluar"
 
-#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:814 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Panel XFce"
@@ -244,7 +247,7 @@ msgstr "Terminal"
 msgid "Settings manager not available"
 msgstr "Pengurus tetapan tidak ada"
 
-#: panel/popup.c:261
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Menu"
 
@@ -349,51 +352,51 @@ msgstr "Kelakuan"
 #. * to get the proper string for your locale.
 #. * I used these:
 #. * %A  : full weekday name
-#. * %-d : day of the month, without prefixed 0
+#. * %d  : day of the month
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:119
-msgid "%A, %-d %B %Y"
-msgstr ""
+#: plugins/clock/clock.c:202
+msgid "%A, %d %B %Y"
+msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:336
+#: plugins/clock/clock.c:423
 msgid "Clock type:"
 msgstr "Jenis jam:"
 
-#: plugins/clock/clock.c:349
+#: plugins/clock/clock.c:436
 msgid "Analog"
 msgstr "Analog"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:440
 msgid "Digital"
 msgstr "Digital"
 
-#: plugins/clock/clock.c:357
+#: plugins/clock/clock.c:444
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:419
+#: plugins/clock/clock.c:506
 msgid "Hour mode:"
 msgstr "Mod jam:"
 
-#: plugins/clock/clock.c:426
+#: plugins/clock/clock.c:513
 msgid "24 hour"
 msgstr "24 jam"
 
-#: plugins/clock/clock.c:432
+#: plugins/clock/clock.c:519
 msgid "12 hour"
 msgstr "12 jam"
 
-#: plugins/clock/clock.c:438
+#: plugins/clock/clock.c:525
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:476
+#: plugins/clock/clock.c:563
 msgid "Show seconds:"
 msgstr "Lihat saat:"
 
-#: plugins/clock/clock.c:585
+#: plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Jam Xfce"
 
@@ -459,79 +462,22 @@ msgstr "Bebutang sistem"
 msgid "Separator"
 msgstr "Pemisah"
 
-#: plugins/mailcheck/mailcheck.c:539
+#: plugins/mailcheck/mailcheck.c:702
 msgid "Mail box:"
 msgstr "Kotak mel:"
 
-#: plugins/mailcheck/mailcheck.c:623
+#: plugins/mailcheck/mailcheck.c:786
 msgid "Mail command:"
 msgstr "Arahan mel:"
 
-#: plugins/mailcheck/mailcheck.c:637
+#: plugins/mailcheck/mailcheck.c:800
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Arahan untuk larikan apabila bebutang pada panel diklik"
 
-#: plugins/mailcheck/mailcheck.c:706
+#: plugins/mailcheck/mailcheck.c:869
 msgid "Interval (sec):"
 msgstr "Interval (saat):"
 
-#: plugins/mailcheck/mailcheck.c:778
+#: plugins/mailcheck/mailcheck.c:941
 msgid "Mail check"
 msgstr "Periksa mel"
-
-#~ msgid "Sunday"
-#~ msgstr "Ahad"
-
-#~ msgid "Monday"
-#~ msgstr "Isnin"
-
-#~ msgid "Tuesday"
-#~ msgstr "Selasa"
-
-#~ msgid "Wednesday"
-#~ msgstr "Rabu"
-
-#~ msgid "Thursday"
-#~ msgstr "Khamis"
-
-#~ msgid "Friday"
-#~ msgstr "Jumaat"
-
-#~ msgid "Saturday"
-#~ msgstr "Sabtu"
-
-#~ msgid "January"
-#~ msgstr "Januari"
-
-#~ msgid "February"
-#~ msgstr "Februari"
-
-#~ msgid "March"
-#~ msgstr "Mac"
-
-#~ msgid "April"
-#~ msgstr "April"
-
-#~ msgid "May"
-#~ msgstr "Mei"
-
-#~ msgid "June"
-#~ msgstr "Jun"
-
-#~ msgid "July"
-#~ msgstr "Julai"
-
-#~ msgid "August"
-#~ msgstr "Ogos"
-
-#~ msgid "September"
-#~ msgstr "September"
-
-#~ msgid "October"
-#~ msgstr "Oktober"
-
-#~ msgid "November"
-#~ msgstr "November"
-
-#~ msgid "December"
-#~ msgstr "Disember"

@@ -42,6 +42,150 @@
 #define RUN_FLAG_FILE "xffm.runflag.2.dbh"
 #define RUN_DBH_FILE "xffm.runlist.2.dbh"
 
+#if 0
+typedef struct _CompletionCombo CompletionCombo;
+
+/* Treate everything as private, read-only.
+ *
+ * Use API to change members of this struct 
+*/
+struct _CompletionCombo
+{
+    GtkWidget *combo;
+    GtkWidget *entry;
+
+    gmodule *gmodule;
+
+    xfc_combo_functions_t *fun;
+
+    xfc_combo_info_t *info;
+    
+    gboolean widget_destroyed;
+    
+    /* callbacks */
+    void (*cancel)(CompletionCombo *combo, gpointer data);
+    gpointer cancel_data;
+    void (*activate)(CompletionCombo *combo, gpointer data);
+    gpointer activate_data;
+    void (*complete)(CompletionCombo *combo, gpointer data);
+    gpointer complete_data;
+};
+
+CompletionCombo *completion_combo_new (GtkCombo *combo);
+
+void completion_combo_destroy (CompletionCombo *combo);
+
+void completion_combo_set_cancel_callback (CompletionCombo *combo,
+					   void (*callback)(CompletionCombo*,
+					       		    gpointer),
+					   gpointer data);
+
+void completion_combo_set_activate_callback (CompletionCombo *combo,
+					     void (*callback)(CompletionCombo*,
+					       		      gpointer),
+					     gpointer data);
+
+void completion_combo_set_complete_callback (CompletionCombo *combo,
+					     void (*callback)(CompletionCombo*,
+					       		      gpointer),
+					     gpointer data);
+
+#define CC_SET_COMBO(combo,token)					\
+	(CompletionCombo *)combo->fun->xfc_set_combo (			\
+		(CompletionCombo *)combo->info, token);
+
+#define CC_SET_BLANK(combo)						\
+	(CompletionCombo *)combo->fun->xfc_set_blank (			\
+		(CompletionCombo *)combo->info);
+
+#define CC_SET_ENTRY(combo,text)					\
+	(CompletionCombo *)combo->fun->xfc_set_entry (			\
+		(CompletionCombo *)combo->info, text);
+
+#define CC_READ_HISTORY(combo)						\
+	(CompletionCombo *)combo->fun->xfc_read_history (		\
+		(CompletionCombo *)combo->info, 			\
+		(CompletionCombo *)combo->info->active_dbh_file);
+
+#define CC_CLEAR_HISTORY(combo,text)					\
+	(CompletionCombo *)combo->fun->xfc_clear_history (		\
+		(CompletionCombo *)combo->info);
+
+#define CC_IS_IN_HISTORY(combo,text) 					\
+	(CompletionCombo *)combo->fun->xfc_is_in_history (		\
+		(CompletionCombo *)combo->info->active_dbh_file, text);
+
+#define CC_SAVE_TO_HISTORY(combo,text)					\
+	(CompletionCombo *)combo->fun->xfc_save_to_history (		\
+		(CompletionCombo *)combo->info->active_dbh_file, text);
+
+#define CC_REMOVE_FROM_HISTORY(combo,text)				\
+	(CompletionCombo *)combo->fun->xfc_remove_from_history (	\
+		(CompletionCombo *)combo->info->active_dbh_file, text);
+
+CompletionCombo *
+completion_combo_new (void)
+{
+    CompletionCombo *cc;
+    gpointer symbol;
+
+    cc = g_new0 (CompletionCombo,1);
+
+    cc->combo = gtk_combo_new();
+    cc->entry = GTK_COMBO (cc->combo)->entry;
+
+    cc->gmodule = get_combo_module();
+
+    if (!g_module_find_symbol (cc->gmodule, "module_init", &symbol))
+    {
+	goto failed;
+    }
+    else
+    {
+	xfc_combo_fun_t *init (void);
+
+	init = symbol;
+
+	if (!(cc->fun = init ()))
+	    goto failed;
+    }
+
+    cc->info = cc->fun->xfc_init_combo (GTK_COMBO (cc->combo));
+    
+    /* set all user data to the CompletionCombo */
+    cc->info->cancel_user_data = cc->info->activate_user_data =
+	cc->fun->extra_key_data = cc;
+    
+    cc->info->cancel_func = completion_combo_cancel;
+    cc->info->activate_function = completion_combo_activate;
+    cc->fun->extra_key_completion = completion_combo_complete;
+    
+    return cc;
+
+failed:
+    gtk_widget_destroy (cc->combo);
+    g_free (cc);
+
+    return NULL;
+}
+
+void completion_combo_destroy (CompletionCombo *combo);
+
+void completion_combo_set_cancel_callback (CompletionCombo *combo,
+					   void (*callback)(CompletionCombo*,
+					       		    gpointer),
+					   gpointer data);
+
+void completion_combo_set_activate_callback (CompletionCombo *combo,
+					     void (*callback)(CompletionCombo*,
+					       		      gpointer),
+					     gpointer data);
+
+void completion_combo_set_complete_callback (CompletionCombo *combo,
+					     void (*callback)(CompletionCombo*,
+					       		      gpointer),
+					     gpointer data);
+#endif
 static int refcount = 0;
 
 static xfc_combo_functions *xfc_fun = NULL;

@@ -6,6 +6,7 @@ conf_DATA = 								\
 	xfce4rc.az 							\
 	xfce4rc.nl 							\
 	xfce4rc.ca							\
+	xfce4rc.ms							\
 	xfce4rc.vi							\
 	xfce4rc.hu
 
