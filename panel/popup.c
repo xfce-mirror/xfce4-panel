@@ -17,8 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include <xfce_togglebutton.h>
-#include <xfce_menubutton.h>
+#include <libxfcegui4/xfce_togglebutton.h>
+#include <libxfcegui4/xfce_menubutton.h>
 
 #include "popup.h"
 

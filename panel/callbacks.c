@@ -21,7 +21,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include <xfce_togglebutton.h>
+#include <libxfcegui4/xfce_togglebutton.h>
 
 #include "callbacks.h"
 #include "xfce_support.h"

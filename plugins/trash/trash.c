@@ -23,7 +23,7 @@
 #include <sys/stat.h>
 #include <time.h>
 
-#include <xfce_iconbutton.h>
+#include <libxfcegui4/xfce_iconbutton.h>
 
 #include "global.h"
 #include "debug.h"

@@ -17,8 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include <xfce_movehandler.h>
-#include <xfce_decorbutton.h>
+#include <libxfcegui4/xfce_movehandler.h>
+#include <libxfcegui4/xfce_decorbutton.h>
 
 #include "handle.h"
 #include "popup.h" /* to hide popups */

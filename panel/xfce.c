@@ -30,7 +30,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-#include <session-client.h>
+#include <libxfcegui4/session-client.h>
 
 #include "xfce.h"
 

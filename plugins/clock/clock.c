@@ -25,7 +25,7 @@
 #include <sys/stat.h>
 #include <time.h>
 
-#include <xfce_clock.h>
+#include <libxfcegui4/xfce_clock.h>
 
 #include "global.h"
 #include "debug.h"

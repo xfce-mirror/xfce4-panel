@@ -20,7 +20,7 @@
 #include <sys/stat.h>
 #include <gtk/gtk.h>
 
-#include <xfce_iconbutton.h>
+#include <libxfcegui4/xfce_iconbutton.h>
 
 #include "global.h"
 #include "xfce_support.h"
