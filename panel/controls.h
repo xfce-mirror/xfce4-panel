@@ -72,6 +72,20 @@ struct _Control
 
 #define CONTROL_CLASS(cc) ((ControlClass*) cc)
 
+/* for add-control-dialog.c */
+typedef struct
+{
+    char *name;
+    char *caption;
+    GdkPixbuf *icon;
+    gboolean can_be_added;
+}
+ControlInfo;
+
+GSList *get_control_info_list (void);
+
+void insert_control (Panel *panel, const char *name, int position);
+
 /* control classes */
 void control_class_list_init (void);
 

@@ -355,6 +355,12 @@ panel_reallocate (Panel * p, GtkRequisition * previous)
  *  ----------------
 */
 static void
+run_add_control_dialog (void)
+{
+    add_control_dialog (&panel, -1);
+}
+
+static void
 edit_prefs (void)
 {
     mcs_dialog (NULL);
@@ -401,7 +407,7 @@ do_help (void)
 static GtkItemFactoryEntry panel_items[] = {
     {N_("/XFce Panel"), NULL, NULL, 0, "<Title>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/Add _new item"), NULL, NULL, 0, "<Branch>"},
+    {N_("/Add _new item"), NULL, run_add_control_dialog, 0, "<Item>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
     {N_("/_Properties..."), NULL, edit_prefs, 0, "<Item>"},
     {N_("/_About XFce"), NULL, do_info, 0, "<Item>"},
@@ -448,11 +454,11 @@ get_handle_menu (void)
 	menu = GTK_MENU (gtk_item_factory_get_widget (ifactory, "<popup>"));
     }
 
-    /* the third item, keep in sync with factory */
+    /* the third item, keep in sync with factory 
     item = GTK_MENU_SHELL (menu)->children->next->next->data;
     
     submenu = get_controls_submenu();
-    gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
+    gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);*/
 
     return menu;
 }

@@ -492,6 +492,96 @@ control_class_unref (ControlClass *cclass)
 	info->refcount--;
 }
 
+/* for add-controls-dialog.c */
+GSList *
+get_control_info_list (void)
+{
+    GSList *li;
+    GSList *infolist = NULL;
+
+    for (li = control_class_info_list; li; li = li->next)
+    {
+	ControlClassInfo *info = li->data;
+	ControlInfo *ci = g_new0 (ControlInfo, 1);
+
+	ci->name = g_strdup (info->name);
+	ci->caption = g_strdup (info->caption);
+	ci->icon = info->icon != NULL ? g_object_ref (info->icon) : NULL;
+
+	ci->can_be_added = !(info->unique && info->refcount > 0);
+	
+	infolist = g_slist_prepend (infolist, ci);
+    }
+
+    return g_slist_reverse (infolist);
+}
+
+void 
+insert_control (Panel *panel, const char *name, int position)
+{
+    gboolean hidden = settings.autohide;
+    Control *control;
+    ControlClassInfo *info;
+    GSList *list;
+    
+    if (hidden)
+    {
+	DBG ("unhide before adding new item");
+	panel_set_autohide (FALSE);
+
+	while (gtk_events_pending ())
+	    gtk_main_iteration ();
+    }
+
+    list = g_slist_find_custom (control_class_info_list, name, 
+	    			compare_class_info_by_name);
+
+    if (G_UNLIKELY (list == NULL))
+    {
+	g_warning ("Could not load item \"%s\"", name);
+
+	goto out;
+    }
+
+    info = list->data; 
+
+    control = control_new (position);
+    control->cclass = info->class;
+    
+    if (control_class_info_create_control (info, control))
+    {
+	hide_current_popup_menu ();
+	groups_add_control (control, position);
+	control_attach_callbacks (control);
+	control_set_settings (control);
+
+	controls_dialog (control);
+
+	write_panel_config ();
+    }
+    else
+    {
+	control_free (control);
+
+	xfce_err (_("Could not create panel item \"%s\"."), info->caption);
+    }
+
+out:
+    popup_control = NULL;
+
+    if (hidden)
+	panel_set_autohide (TRUE);
+}
+
+static void
+run_add_control_dialog (void)
+{
+    int position;
+    
+    position = popup_control ? popup_control->index : -1;
+
+    add_control_dialog (&panel, position);
+}
 
 /*  Controls
  *  --------
@@ -638,16 +728,18 @@ get_control_menu (void)
 	
 	mi = gtk_menu_item_new_with_mnemonic(_("Add _new item"));
 	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (run_add_control_dialog), 
+			  NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     }
 
     g_assert (menu != NULL);
     
-    /* the third item, keep in sync with menu */
+    /* the third item, keep in sync with menu 
     mi = GTK_MENU_SHELL (menu)->children->next->next->data;
     
     submenu = get_controls_submenu();
-    gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);
+    gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);*/
 
     return menu;
 }

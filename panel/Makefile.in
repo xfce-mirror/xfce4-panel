@@ -55,7 +55,8 @@ CONFIG_CLEAN_FILES = xfce4-panel-1.0.pc
 am__installdirs = $(DESTDIR)$(bindir) $(DESTDIR)$(pkgconfigdir) $(DESTDIR)$(xfce4_panelincludedir)
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_xfce4_panel_OBJECTS = xfce4_panel-controls.$(OBJEXT) \
+am_xfce4_panel_OBJECTS = xfce4_panel-add-control-dialog.$(OBJEXT) \
+	xfce4_panel-controls.$(OBJEXT) \
 	xfce4_panel-controls_dialog.$(OBJEXT) \
 	xfce4_panel-groups.$(OBJEXT) xfce4_panel-icons.$(OBJEXT) \
 	xfce4_panel-item.$(OBJEXT) xfce4_panel-item_dialog.$(OBJEXT) \
@@ -69,7 +70,8 @@ xfce4_panel_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4_panel-controls.Po \
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4_panel-add-control-dialog.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-controls.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-controls_dialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-groups.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-icons.Po \
@@ -240,6 +242,8 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 xfce4_panel_SOURCES = \
+	add-control-dialog.c					\
+	add-control-dialog.h					\
 	controls.c						\
 	controls.h 						\
 	controls_dialog.c 					\
@@ -272,6 +276,7 @@ xfce4_panel_SOURCES = \
 
 xfce4_panelincludedir = $(includedir)/xfce4/panel
 xfce4_panelinclude_HEADERS = \
+	add-control-dialog.h					\
 	controls.h						\
 	global.h 						\
 	icons.h 						\
@@ -383,6 +388,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-add-control-dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-controls.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-controls_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-groups.Po@am__quote@
@@ -420,6 +426,30 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
+
+xfce4_panel-add-control-dialog.o: add-control-dialog.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-add-control-dialog.o -MD -MP -MF "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo" -c -o xfce4_panel-add-control-dialog.o `test -f 'add-control-dialog.c' || echo '$(srcdir)/'`add-control-dialog.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo" "$(DEPDIR)/xfce4_panel-add-control-dialog.Po"; else rm -f "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='add-control-dialog.c' object='xfce4_panel-add-control-dialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-add-control-dialog.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-add-control-dialog.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-add-control-dialog.o `test -f 'add-control-dialog.c' || echo '$(srcdir)/'`add-control-dialog.c
+
+xfce4_panel-add-control-dialog.obj: add-control-dialog.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-add-control-dialog.obj -MD -MP -MF "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo" -c -o xfce4_panel-add-control-dialog.obj `if test -f 'add-control-dialog.c'; then $(CYGPATH_W) 'add-control-dialog.c'; else $(CYGPATH_W) '$(srcdir)/add-control-dialog.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo" "$(DEPDIR)/xfce4_panel-add-control-dialog.Po"; else rm -f "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='add-control-dialog.c' object='xfce4_panel-add-control-dialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-add-control-dialog.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-add-control-dialog.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-add-control-dialog.obj `if test -f 'add-control-dialog.c'; then $(CYGPATH_W) 'add-control-dialog.c'; else $(CYGPATH_W) '$(srcdir)/add-control-dialog.c'; fi`
+
+xfce4_panel-add-control-dialog.lo: add-control-dialog.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-add-control-dialog.lo -MD -MP -MF "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo" -c -o xfce4_panel-add-control-dialog.lo `test -f 'add-control-dialog.c' || echo '$(srcdir)/'`add-control-dialog.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo" "$(DEPDIR)/xfce4_panel-add-control-dialog.Plo"; else rm -f "$(DEPDIR)/xfce4_panel-add-control-dialog.Tpo"; exit 1; fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='add-control-dialog.c' object='xfce4_panel-add-control-dialog.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-add-control-dialog.Plo' tmpdepfile='$(DEPDIR)/xfce4_panel-add-control-dialog.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-add-control-dialog.lo `test -f 'add-control-dialog.c' || echo '$(srcdir)/'`add-control-dialog.c
 
 xfce4_panel-controls.o: controls.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-controls.o -MD -MP -MF "$(DEPDIR)/xfce4_panel-controls.Tpo" -c -o xfce4_panel-controls.o `test -f 'controls.c' || echo '$(srcdir)/'`controls.c; \

@@ -1,6 +1,8 @@
 bin_PROGRAMS = xfce4-panel
 
 xfce4_panel_SOURCES =						\
+	add-control-dialog.c					\
+	add-control-dialog.h					\
 	controls.c						\
 	controls.h 						\
 	controls_dialog.c 					\
@@ -34,6 +36,7 @@ xfce4_panel_SOURCES =						\
 xfce4_panelincludedir = $(includedir)/xfce4/panel
 
 xfce4_panelinclude_HEADERS =					\
+	add-control-dialog.h					\
 	controls.h						\
 	global.h 						\
 	icons.h 						\
