@@ -344,6 +344,10 @@ main (int argc, char **argv)
 	xfce_panel_set_xselection ();
     }
 
+    /* so clients are started on the correct screen */
+    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default()),
+                 TRUE);
+
     client_session = client_session_new (argc, argv, NULL /* data */ ,
 					 SESSION_RESTART_IF_RUNNING, 40);
 
