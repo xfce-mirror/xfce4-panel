@@ -55,6 +55,21 @@ static gboolean
 check_disable_user_config (void)
 {
     const char *var = g_getenv ("XFCE_DISABLE_USER_CONFIG");
+    XfceKiosk *kiosk;
+    gboolean result;
+
+    kiosk = xfce_kiosk_new ("xfce4-panel");
+    result = xfce_kiosk_query (kiosk, "CustomizePanel");
+    xfce_kiosk_free (kiosk);
+
+    if (var != NULL)
+      {
+        g_warning ("Deprecated XFCE_DISABLE_USER_CONFIG environment variable "
+                   "found. Please use the new KIOSK mode instead.");
+      }
+
+    if (!result)
+      return TRUE;
 
     return (var && !strequal (var, "0"));
 }
