@@ -431,8 +431,7 @@ void panel_set_position(void)
     {
 	if (settings.orientation == VERTICAL)
 	{
-	    settings.x = w - req.width;
-	    settings.y = h - req.height;
+	    settings.x = settings.y = 0;
 	}
 	else
 	{
