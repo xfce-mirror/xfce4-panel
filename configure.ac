@@ -79,6 +79,10 @@ AC_PROG_LIBTOOL
 AC_OUTPUT([
 xfce4.spec
 Makefile
+doc/Makefile
+doc/images/Makefile
+doc/html/Makefile
+doc/xml/Makefile
 po/Makefile.in
 icons/Makefile
 panel/Makefile

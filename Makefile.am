@@ -10,7 +10,7 @@ conf_DATA = xfce4rc
 
 EXTRA_DIST = example.xfce4rc.in xfce4.spec xfce4.spec.in autogen.sh
 
-SUBDIRS = po @MY_SUBDIRS@
+SUBDIRS = po doc @MY_SUBDIRS@
 
 distclean-local:
 	rm -rf xfce4rc xfce4.spec *.cache

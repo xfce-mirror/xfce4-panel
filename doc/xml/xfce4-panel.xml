@@ -1,0 +1,281 @@
+<?xml version='1.0'?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+                  "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"[
+  <!ENTITY copyright SYSTEM "copyright.xml">
+  <!ENTITY GPL SYSTEM "GPL.xml">
+  <!ENTITY appversion "4.0">
+  <!ENTITY manrevision "0.1">
+  <!ENTITY date "February 2003">
+  <!ENTITY app "<application>xfce4-panel</application>">
+]>
+
+<article id="index" lang="en">
+
+<!-- Header -->
+<articleinfo>
+
+  <title>XFce Panel Manual V&manrevision;</title>       
+    
+  <copyright>
+    <year>2003</year>
+    <holder>Jasper Huijsmans</holder>
+  </copyright>
+
+<!-- translators: uncomment this:
+
+  <copyright>
+   <year>2002</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+
+  -->
+  
+  <legalnotice id="legalnotice">
+    <para>
+      This document is provided under the terms of the GNU GPL, version 2 or
+      (at your option) any later version.
+    </para>
+  </legalnotice>
+
+  <authorgroup>
+
+    <author>
+      <firstname>Jasper</firstname>
+      <surname>Huijsmans</surname>
+      <affiliation>
+	<address><email>huysmans@users.sourceforge.net</email></address>
+      </affiliation>
+    </author>
+
+<!-- This is appropriate place for other contributors: translators,
+     maintainers,  etc. Commented out by default.
+     
+    <othercredit role="translator">
+	      <firstname>Latin</firstname> 
+	      <surname>Translator 1</surname> 
+	      <affiliation> 
+		      <orgname>Latin Translation Team</orgname> 
+		      <address> <email>translator@gnome.org</email> </address> 
+	      </affiliation>
+	      <contrib>Latin translation</contrib>
+    </othercredit>
+-->
+      
+  </authorgroup>
+
+  <revhistory>
+    <revision>
+      <revnumber>&manrevision;</revnumber>
+      <date>&date;</date>
+      <authorinitials>jbh</authorinitials>
+    </revision>
+  </revhistory>
+
+  <releaseinfo>This manual describes &app; version &appversion;</releaseinfo>
+  
+</articleinfo>
+
+<sect1 id="panel-intro">
+  <title>Introduction</title>
+  
+  <para>The XFce panel is part of the XFce Desktop Environment and features 
+    program lauchers, popup menus, a desktop switcher and more. The actual
+    command to run is &app;. Many aspects of the panel can be configured 
+    through graphical dialogs.</para>
+
+  <para>XFce is a collection of programs that together provide a 
+    full-featured desktop environment. It aims to be fast and lightweight,
+    while still being visually appealing and easy to use. The following 
+    programs are currently part of XFce:</para>
+
+  <variablelist>
+    
+    <varlistentry>
+      <term>Window Manager (<application>xfwm4</application>)</term>
+      <listitem>
+	<para>Handles the placement of windows on the screen and provides
+	  decorative borders.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry>
+      <term>Panel (&app;)</term>
+      <listitem>
+	<para>The program described in this manual.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry>
+      <term>Desktop Manager (<application>xfdesktop</application>)</term>
+      <listitem>
+	<para>Sets a background color or image and provides a menu when you 
+	  click on the desktop background.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry>
+      <term>File Manager (<application>xffm</application>)</term>
+      <listitem>
+	<para>Fast file manager.</para>
+      </listitem>
+    </varlistentry>
+    
+    <varlistentry>
+      <term>Utilities</term>
+      <listitem>
+	<para>Several smaller programs and scripts, for instance a taskbar
+	  (<application>xftaskbar4</application>) and a run dialog
+	  (<application>xfrun4</application>). </para>
+      </listitem>
+    </varlistentry>
+    
+  </variablelist>
+
+  <para>For more information visit the 
+    <ulink url="http://www.xfce.org" type="http">XFce website</ulink>.
+  </para>
+
+</sect1>
+
+<sect1 id="panel-getting-started">
+  <title>Getting Started</title>
+
+  <para>The usual way to run the panel is at the end of your
+    <filename>~/.xinitrc</filename> file or <filename>~/.xsession</filename>
+    if you use a graphical login manager.</para>
+
+  <para>Here is an example of such a file, also using other components of
+    the XFce Desktop Environment:</para>
+
+  <programlisting>
+# window manager (go to background after initialization)
+xfwm4 --daemon
+
+# taskbar
+xftaskbar4 &amp;
+
+# background, menu and other desktop settings
+xfdesktop &amp;
+
+# finally, run the panel 
+# You can exit your session by choosing exit from the panel
+exec xfce4-panel
+  </programlisting>
+
+  <para>To find out how to obtain all these programs visit the 
+    <ulink url="http://www.xfce.org" type="http">XFce website</ulink>.
+  </para>
+
+</sect1>
+
+<sect1 id="panel-use">
+  <title>Using the XFce Panel</title>
+
+  <para>When you start the panel you will see a bar apearing at the bottom
+    of your screen, looking like this:</para>
+
+  <figure id="default-panel-fig">
+    <title>Default XFce panel</title>
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="../images/default_panel.png" format="PNG"/>
+	</imageobject>
+	<!--
+	<imageobject>
+	  <imagedata fileref="../images/default_panel.eps" format="EPS"/>
+	</imageobject>
+	-->
+	<textobject>
+	  <phrase>Shows XFce panel default configuration. Contains several
+	    launchers, a new mail monitor, a clock and a desktop switcher. 
+	    Also shows an opened subpanel.</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>The figure shows the default panel configuration with one open 
+    subpanel and the mouse hovering over the setup button, making it show a 
+    tooltip.</para>
+
+  <para>The two strips on either side of the panel are move handles which
+    you can use to drag the panel anywhere on the screen. Right clicking (or
+    Shift-click) shows a popup menu &mdash; go on, try it ;-)</para>
+
+  <para>The area between the move handles contains panel items. There are
+    several types of items, for instance program launchers, a clock and a
+    desktop switcher.</para>
+  
+  <para>Most items perform an action when clicked, like launching a program 
+    or switching to another virtual desktop. Right-clicking will open a popup
+    menu, from which you can open a dialog to change item properties, remove 
+    an item or add a new item to the panel.</para>
+
+  <para>Panel items can have a subpanel associated with it, which can be
+    opened by clicking on the button next to the item. Use the right mouse
+    button to open a dialog to change the properties of the items on the
+    subpanel.</para>
+
+  <para>Panel preferences can be changed from the XFce settings manager, which
+    can be started either from the 'Setup' button on the panel (see 
+    <xref linkend="default-panel-fig"/>) or from the right-click menu on the 
+    move handles.</para>
+
+</sect1>
+
+<sect1 id="panel-prefs">
+  <title>Customization</title>
+
+  <sect2 id="settings">
+    <title>Panel Preferences</title>
+
+    <para>The properties dialog for the XFce panel can be opened from the
+      XFce settings manager, which can be started from the panel using the
+      setup button as shown in <xref linkend="default-panel-fig"/> or from 
+      the right-click menu on the panel handles. The latter menu also 
+      provides direct access to the panel properties dialog.</para>
+
+    <para>Size, orientation, popup position and icon theme.</para>
+
+    <para>Panel layer and centering.</para>
+
+  </sect2>
+
+  <sect2 id="panel-items">
+    <title>Panel Items</title>
+
+    <para>You can add panel items from the right-click menu on another item
+      or the move handles. To remove panel items use the right-click menu 
+      or the 'Remove' button in the item properties dialog. </para>
+
+    <para>The properties dialog can be opened from the right-click menu on
+      the item. Each type of panel item has its own configuration dialog.
+      You can also change to another item type in this dialog, e.g. turn a
+      launcher icon into a clock or vice versa.</para>
+
+    <para>Launcher, clock, mailcheck, switcher and systembuttons.</para>
+
+  </sect2>
+
+  <sect2 id="subpanels">
+    <title>Subpanels</title>
+
+    <para>Use the 'Add laucher' item at the top of a subpanel to add an item
+      to a subpanel or drag an executable to this item from a file manager. 
+      To remove items from a subpanel use the 'Remove' button in the item 
+      properties dialog. </para>
+
+    <para>The properties dialog for a subpanel item is opened immediately 
+      when clicking the right mouse button. The dialog itself is very 
+      similar to the dialog for Launcher type panel items.</para>
+
+  </sect2>
+
+</sect1>
+
+&copyright;
+
+&GPL;
+
+</article>

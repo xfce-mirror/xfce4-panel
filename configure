@@ -12112,7 +12112,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtool'
 
 
 
-                                                                                                                                                                          ac_config_files="$ac_config_files xfce4.spec Makefile po/Makefile.in icons/Makefile panel/Makefile plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile settings/Makefile themes/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
+                                                                                                                                                                                                                  ac_config_files="$ac_config_files xfce4.spec Makefile doc/Makefile doc/images/Makefile doc/html/Makefile doc/xml/Makefile po/Makefile.in icons/Makefile panel/Makefile plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile settings/Makefile themes/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -12678,6 +12678,10 @@ do
   # Handling of arguments.
   "xfce4.spec" ) CONFIG_FILES="$CONFIG_FILES xfce4.spec" ;;
   "Makefile" ) CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+  "doc/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
+  "doc/images/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/images/Makefile" ;;
+  "doc/html/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/html/Makefile" ;;
+  "doc/xml/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/xml/Makefile" ;;
   "po/Makefile.in" ) CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
   "icons/Makefile" ) CONFIG_FILES="$CONFIG_FILES icons/Makefile" ;;
   "panel/Makefile" ) CONFIG_FILES="$CONFIG_FILES panel/Makefile" ;;
