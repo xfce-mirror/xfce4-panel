@@ -1,6 +1,32 @@
 NEWS for xfce4-panel
 ====================
 
+- Increase plugin API version. Plugins build against a panel older than RC1
+  need to be rebuild (Jasper)
+
+- Fix two bugs in the graphical pager (Jasper, Olivier)
+
+
+4.1.99.1 (4.2 RC1)
+==================
+- Updated documentation screenshots (Jasper)
+
+- Fix POP3 mail checking, patch by Piotr Chmura (Jasper)
+
+- Make transparency configurable with a 'hidden' option (Jasper)
+
+- Increase API version, but still support old plugins (Jasper)
+
+- Use new gtk 2.4 file chooser (Jasper)
+
+- Improve focus management (in combination with xfwm4) by setting the dock
+  type hint. Panel will now always be on top; the option is gone. 
+  (Olivier, Jasper)
+
+- Transparency is always on, but toggled off when the mouse is over the panel
+  (Jasper)
+
+
 4.1.91 (4.2 BETA2)
 ==================
 - Several translation updates (Jean-Francois)
