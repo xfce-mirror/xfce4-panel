@@ -78,6 +78,7 @@ typedef struct
     int button_types[2]; /* 0, 1, 2 or 3 for lock, exit, setup and info */
 
     GtkWidget *box;
+    GtkWidget *buttonbox;
     GtkWidget *align[2]; /* containers for the actual buttons */
 
     GList *callbacks; /* save callbacks for when we change buttons */
@@ -89,6 +90,7 @@ typedef struct
     int backup_show_two;
     int backup_button_types[2];
 
+    Control *control;
     t_systembuttons *sb;
 
     GtkWidget *two_checkbutton;
@@ -198,23 +200,47 @@ static void systembuttons_change_type(t_systembuttons *sb, int n, int type)
 
 static void arrange_systembuttons(t_systembuttons *sb, int orientation)
 {
+    GtkWidget *align;
+    int spacing;
+    
     if (sb->box)
     {
-	gtk_container_remove(GTK_CONTAINER(sb->box), sb->align[0]);
-	gtk_container_remove(GTK_CONTAINER(sb->box), sb->align[1]);
+	gtk_container_remove(GTK_CONTAINER(sb->buttonbox), sb->align[0]);
+	gtk_container_remove(GTK_CONTAINER(sb->buttonbox), sb->align[1]);
 
 	gtk_widget_destroy(sb->box);
     }
 
-    if (orientation == HORIZONTAL)
-	sb->box = gtk_vbox_new(TRUE, 0);
+    if ((orientation == HORIZONTAL && settings.size > SMALL) ||
+	(orientation == VERTICAL && settings.size <= SMALL))
+    {
+	sb->box = gtk_vbox_new(FALSE, 0);
+	sb->buttonbox = gtk_vbox_new(TRUE, 0);
+    }
     else
-	sb->box = gtk_hbox_new(TRUE, 0);
+    {
+	sb->box = gtk_hbox_new(FALSE, 0);
+	sb->buttonbox = gtk_hbox_new(TRUE, 0);
+    }
 
     gtk_widget_show(sb->box);
+    gtk_widget_show(sb->buttonbox);
 
-    gtk_box_pack_start(GTK_BOX(sb->box), sb->align[0], TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(sb->box), sb->align[1], TRUE, TRUE, 0);
+    spacing = border_width / 2;
+    
+    align = gtk_alignment_new(0,0,0,0);
+    gtk_widget_set_size_request(align, spacing, spacing);
+    gtk_widget_show(align);
+    gtk_box_pack_start(GTK_BOX(sb->box), align, FALSE, FALSE, 0);
+
+    gtk_box_pack_start(GTK_BOX(sb->box), sb->buttonbox, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(sb->buttonbox), sb->align[0], TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(sb->buttonbox), sb->align[1], TRUE, TRUE, 0);
+
+    align = gtk_alignment_new(0,0,0,0);
+    gtk_widget_set_size_request(align, spacing, spacing);
+    gtk_widget_show(align);
+    gtk_box_pack_start(GTK_BOX(sb->box), align, FALSE, FALSE, 0);
 }
 
 static t_systembuttons *systembuttons_new(void)
@@ -346,23 +372,38 @@ static void systembuttons_write_config(Control * control, xmlNodePtr node)
 /* global prefs */
 static void systembuttons_set_size(Control *control, int size)
 {
-    int s1, s2;
+    int s1, s2, n;
+    t_systembuttons *sb = control->data;
 
     s1 = icon_size[size] + border_width;
-    s2 = s1 / 2 + border_width;
     
-    if (settings.orientation == VERTICAL)
-	gtk_widget_set_size_request(control->base, s1, s2);
+    n = sb->show_two ? 2 : 1;
+
+    arrange_systembuttons(sb, settings.orientation);
+    gtk_container_add(GTK_CONTAINER(control->base), sb->box);
+    
+    if (size > SMALL)
+	s2 = s1 * 0.5 * n + border_width;
     else
+	s2 = s1 * 0.75 * n + border_width;
+    
+    if ((settings.orientation == VERTICAL && size <= SMALL) ||
+	(settings.orientation == HORIZONTAL && size > SMALL))
+    {
+	gtk_widget_set_size_request(control->base, s1, s2);
+    }
+    else
+    {
 	gtk_widget_set_size_request(control->base, s2, s1);
+    }
 }
 
 static void systembuttons_set_orientation(Control *control, int orientation)
 {
-   t_systembuttons *sb = control->data;
+    t_systembuttons *sb = control->data;
 
-   arrange_systembuttons(sb, orientation);
-   gtk_container_add(GTK_CONTAINER(control->base), sb->box);
+    arrange_systembuttons(sb, orientation);
+    gtk_container_add(GTK_CONTAINER(control->base), sb->box);
 }
 
 static void systembuttons_set_theme(Control * control, const char *theme)
@@ -403,6 +444,8 @@ static void checkbutton_changed(GtkToggleButton *tb,
 	}
 
 	gtk_widget_set_sensitive(sbd->revert, TRUE);
+	
+	systembuttons_set_size(sbd->control, settings.size);
     }
 }
     
@@ -455,6 +498,7 @@ void systembuttons_add_options(Control * control, GtkContainer * container,
     sbd->backup_button_types[0] = sb->button_types[0];
     sbd->backup_button_types[1] = sb->button_types[1];
 
+    sbd->control = control;
     sbd->sb = sb;
     sbd->revert = revert;
     
