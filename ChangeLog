@@ -1,32 +1,93 @@
-2003-02-11  xfce
+2003-02-14 22:46  xfce
+
+	* panel/xfce_support.c: Use static var for startup notification
+	internals
+
+2003-02-14 21:40  huysmans
+
+	* panel/xfce_support.c: Fix typo
+
+2003-02-14 20:57  huysmans
+
+	* panel/xfce_support.c: Don't use a variable after freeing it ...
+
+2003-02-14 12:45  xfce
+
+	* panel/xfce_support.c: Fix crash at logout
+
+2003-02-14 12:14  xfce
+
+	* panel/: main.c, xfce_support.c, xfce_support.h: Fix startup
+	notification/GdkScreen problems
+
+2003-02-14 10:34  xfce
+
+	* panel/xfce_support.c: Fix use of gtk+-2.2 function in
+	xfce_support
+
+2003-02-13 22:42  huysmans
+
+	* TODO: Update TODO list
+
+2003-02-13 21:22  huysmans
+
+	* panel/: controls.c, panel.c: Small fixes to position setting and
+	other cleanups
+
+2003-02-12 15:59  huysmans
+
+	* panel/icons.h, panel/item_dialog.c, panel/xfce_support.c,
+	panel/xfce_support.h, plugins/systembuttons/systembuttons.c:
+	Properly use const keyword in several places
+
+2003-02-12 09:52  xfce
+
+	* panel/xfce_support.c: [no log message]
+
+2003-02-12 07:53  huysmans
+
+	* panel/: controls.c, panel.c: Fix menu translation functions
+
+2003-02-11 23:34  huysmans
+
+	* doc/: html/index.html, html/ln-legalnotice.html,
+	html/panel-getting-started.html, html/panel-prefs.html,
+	html/panel-use.html, xml/xfce4-panel.xml: Add a little more
+	structure and text to the documentation
+
+2003-02-11 20:48  xfce
+
+	* ChangeLog: Update ChangeLog
+
+2003-02-11 20:43  xfce
 
 	* panel/xfce_support.c: Add additional sanity checks to satrtup
 	notification code.
 
-2003-02-11  xfce
+2003-02-11 19:07  xfce
 
 	* panel/xfce_support.c: [no log message]
 
-2003-02-11  xfce
+2003-02-11 17:40  xfce
 
 	* panel/xfce_support.c: Make sure we don't free system var environ
 	by mistake...
 
-2003-02-10  huysmans
+2003-02-10 22:57  huysmans
 
 	* configure, configure.ac, po/es_MX.gmo, po/es_MX.po: Forgot to put
 	old spanish translations back as es_MX
 
-2003-02-10  huysmans
+2003-02-10 20:39  huysmans
 
 	* po/: es.gmo, es.po, fi.gmo, fi.po: Update spanish translations
 
-2003-02-10  xfce
+2003-02-10 13:17  xfce
 
 	* panel/xfce_support.c: Increase startup notification timeout to 30
 	seconds
 
-2003-02-10  xfce
+2003-02-10 12:51  xfce
 
 	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
 	doc/Makefile.in, doc/html/Makefile.in, doc/images/Makefile.in,
@@ -44,12 +105,12 @@
 	startup notification from freedesktop.org standard Fix a few memory
 	leaks
 
-2003-02-04  huysmans
+2003-02-04 12:01  huysmans
 
 	* ChangeLog, example.xfce4rc.in: Fix the default rc file to show
 	the correct number of items
 
-2003-02-04  huysmans
+2003-02-04 11:00  huysmans
 
 	* Makefile.am, Makefile.in, configure, configure.ac,
 	example.xfce4rc.in, doc/Makefile.am, doc/Makefile.in,
@@ -64,85 +125,85 @@
 	po/fr.gmo, po/nl.gmo: Add documentation framework and some
 	preliminary text
 
-2003-02-03  huysmans
+2003-02-03 19:44  huysmans
 
 	* settings/xfce_settings_dialog.c: Fix setting the correct theme in
 	the dialog
 
-2003-02-03  huysmans
+2003-02-03 09:31  huysmans
 
 	* plugins/systembuttons/systembuttons.c: Fix systembutton sizing
 
-2003-02-02  huysmans
+2003-02-02 22:02  huysmans
 
 	* ChangeLog, po/POTFILES.in, po/de.po, po/es.po, po/fi.po,
 	po/fr.po, po/nl.po, po/xfce4-panel.pot: Update translatable strings
 
-2003-02-02  huysmans
+2003-02-02 21:29  huysmans
 
 	* panel/item_dialog.c, panel/panel.c,
 	plugins/systembuttons/systembuttons.c,
 	settings/xfce_settings_dialog.c: Oh, I don't know. Random changes I
 	guess
 
-2003-02-02  huysmans
+2003-02-02 14:20  huysmans
 
 	* ChangeLog, example.xfce4rc.in, panel/controls.c,
 	plugins/systembuttons/systembuttons.c: Updates assorti, mainly
 	systembuttons
 
-2003-02-02  huysmans
+2003-02-02 13:39  huysmans
 
 	* plugins/systembuttons/systembuttons.c: Improve arranging
 	systembuttons
 
-2003-02-02  huysmans
+2003-02-02 09:49  huysmans
 
 	* plugins/mailcheck/mailcheck.c: Fix mail check.
 
-2003-02-01  huysmans
+2003-02-01 20:34  huysmans
 
 	* configure, configure.ac, plugins/Makefile.am,
 	plugins/Makefile.in, plugins/mailcheck/mailcheck.c, po/de.gmo,
 	po/es.gmo, po/fi.gmo, po/fr.gmo, po/nl.gmo: Remove trash plugin.
 	Cleanup mailcheck plugin
 
-2003-02-01  xfce
+2003-02-01 15:08  xfce
 
 	* settings/xfce_settings.h: Use "xfce" lowercase for channel name
 
-2003-02-01  huysmans
+2003-02-01 14:37  huysmans
 
 	* plugins/clock/clock.c: Fix crash when changing clock type
 
-2003-02-01  huysmans
+2003-02-01 14:23  huysmans
 
 	* AUTHORS, plugins/clock/clock.c: Small cleanup
 
-2003-02-01  huysmans
+2003-02-01 14:16  huysmans
 
 	* AUTHORS, ChangeLog, plugins/clock/clock.c, po/de.po, po/es.po,
 	po/fi.po, po/fr.po, po/nl.po, po/xfce4-panel.pot: Cleanup clock
 	plugin. Update to gettext 0.11.5
 
-2003-02-01  huysmans
+2003-02-01 10:44  huysmans
 
 	* po/: fi.gmo, fi.po: Update finnish translations
 
-2003-02-01  huysmans
+2003-02-01 09:29  huysmans
 
 	* panel/item.c: Fix bug where libxml ate special characters. Patch
 	by Michael Mosier.
 
-2003-01-30  huysmans
+2003-01-30 17:18  huysmans
 
 	* panel/panel.c: Make handle look a bit better when size >= MEDIUM
 
-2003-01-30  huysmans
+2003-01-30 17:12  huysmans
 
 	* panel/info.c: Make dialog look a bit better
 
-2003-01-30  huysmans
+2003-01-30 16:51  huysmans
 
 	* AUTHORS, COPYING, ChangeLog, icons/xfce_slogan.xpm, panel/info.c,
 	po/POTFILES.in, po/de.gmo, po/de.po, po/es.gmo, po/es.po,
@@ -150,19 +211,19 @@
 	po/xfce4-panel.pot: Update info text. Use AUTHORS for the credits
 	page. Fix strange characters in COPYING
 
-2003-01-30  huysmans
+2003-01-30 14:32  huysmans
 
 	* panel/: Makefile.am, Makefile.in, handle.c, handle.h, info.h,
 	panel.c: Remove handle.[ch]. Code moved to panel.c.
 
-2003-01-30  huysmans
+2003-01-30 12:53  huysmans
 
 	* ChangeLog, panel/Makefile.am, panel/Makefile.in,
 	panel/callbacks.c, panel/callbacks.h, panel/groups.c,
 	panel/handle.c, panel/item.c, panel/popup.c, panel/popup.h: Remove
 	callbacks.[ch]. Last remaining functions moved to popup.c
 
-2003-01-29  huysmans
+2003-01-29 16:40  huysmans
 
 	* README, TODO, panel/callbacks.c, panel/callbacks.h,
 	panel/global.h, panel/item.c, panel/item.h, panel/item_dialog.c,
@@ -171,7 +232,7 @@
 	settings/xfce_settings.h: Cleanup. Unify PanelItem and MenuItem to
 	avoid code duplication. Small bug fixes.
 
-2003-01-29  huysmans
+2003-01-29 13:14  huysmans
 
 	* ChangeLog, po/de.po, po/es.po, po/fi.po, panel/Makefile.am,
 	po/fr.po, po/nl.po, po/xfce4-panel.pot, panel/Makefile.in,
@@ -179,17 +240,17 @@
 	panel/mcs_client.h, panel/panel.c, panel/settings.c: Cleanup
 	configuration handling and other fixes. Includes string changes.
 
-2003-01-28  huysmans
+2003-01-28 22:50  huysmans
 
 	* panel/item_dialog.c: Fix menu item reordering
 
-2003-01-28  huysmans
+2003-01-28 16:35  huysmans
 
 	* ChangeLog, panel/global.h, panel/groups.c, panel/icons.c,
 	panel/main.c, panel/panel.c, plugins/switcher/switcher.c: Several
 	small cleanups and some gratuitous reformating
 
-2003-01-27  huysmans
+2003-01-27 23:00  huysmans
 
 	* ChangeLog, configure, panel/controls.c, panel/controls.h,
 	panel/global.h, panel/groups.c, panel/groups.h, panel/handle.c,
@@ -199,35 +260,35 @@
 	settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c:
 	Remove old style and switcher minibuttons
 
-2003-01-26  huysmans
+2003-01-26 19:33  huysmans
 
 	* configure.ac, po/fi.gmo, po/fi.po: Add Finnish translations
 
-2003-01-25  huysmans
+2003-01-25 22:26  huysmans
 
 	* panel/controls_dialog.c: Don't ask for removal confirmation for
 	controls without popup menu
 
-2003-01-25  huysmans
+2003-01-25 19:30  huysmans
 
 	* plugins/systembuttons/systembuttons.c: Add orientation to
 	systembuttons
 
-2003-01-25  huysmans
+2003-01-25 14:14  huysmans
 
 	* po/: de.gmo, de.po: Really add german translation
 
-2003-01-25  huysmans
+2003-01-25 14:12  huysmans
 
 	* configure, configure.ac: Add german translation
 
-2003-01-25  huysmans
+2003-01-25 13:24  huysmans
 
 	* ChangeLog, plugins/clock/clock.c, plugins/switcher/switcher.c,
 	plugins/systembuttons/systembuttons.c: Hide popup for clock and
 	systembuttons
 
-2003-01-24  xfce
+2003-01-24 16:18  xfce
 
 	* plugins/clock/Makefile.am, plugins/clock/Makefile.in,
 	plugins/clock/clock.c, plugins/mailcheck/Makefile.am,
@@ -241,14 +302,14 @@
 	something otherwise other bindtextdomains take precedence and
 	display is not translated anymore...
 
-2003-01-24  xfce
+2003-01-24 15:57  xfce
 
 	* po/: es.gmo, es.po, fr.gmo, fr.po, nl.gmo, nl.po,
 	xfce4-panel.pot: Fix encoding not specified in es.po, regenerate
 	pot file (required after Edscott fixed a typo in the source) and
 	adjust french translation.
 
-2003-01-24  xfce
+2003-01-24 15:39  xfce
 
 	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
@@ -259,7 +320,7 @@
 	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
 	themes/XFce/Makefile.in: Add french xtion.
 
-2003-01-24  edscott
+2003-01-24 14:33  edscott
 
 	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
 	icons/Makefile.in, panel/Makefile.in, panel/icons.c,
@@ -272,7 +333,7 @@
 	themes/XFce/Makefile.in: added spanish translation and fixed a typo
 	in source code
 
-2003-01-24  huysmans
+2003-01-24 12:53  huysmans
 
 	* ChangeLog, Makefile.am, Makefile.in, aclocal.m4, config.h.in,
 	configure, configure.ac, icons/Makefile.in, panel/Makefile.am,
@@ -297,66 +358,66 @@
 	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add i18n
 	framework and Dutch translation
 
-2003-01-21  huysmans
+2003-01-21 20:12  huysmans
 
 	* ChangeLog, panel/controls.c, panel/panel.c: Small things that
 	weren't committed yet
 
-2003-01-19  huysmans
+2003-01-19 23:22  huysmans
 
 	* panel/controls.c: Fixing popup menu positioning
 
-2003-01-19  huysmans
+2003-01-19 22:51  huysmans
 
 	* panel/: controls.c, panel.c: Use edit/remove/add menu on panel
 	control right-click
 
-2003-01-19  madkiss
+2003-01-19 17:39  madkiss
 
 	* panel/xfce_support.c: 
 	Line 209: Change "char c;" to "int c;" since "char" can end in an
 	infinite loop. Please also refer to Debian GNU/Linux bugreport
 	#177429, available at http://bugs.debian.org/177429
 
-2003-01-19  huysmans
+2003-01-19 15:34  huysmans
 
 	* panel/: callbacks.c, main.c, panel.c: Fix problem with dragging
 	files that contain spaces
 
-2003-01-18  huysmans
+2003-01-18 18:13  huysmans
 
 	* panel/panel.c: Damnit I must learn some basic math. Got the
 	ratios the wrong way around
 
-2003-01-18  huysmans
+2003-01-18 17:20  huysmans
 
 	* panel/panel.c: Save screen width and height, so we can use a
 	relative position, when the user logs in with a different screen
 	resolution
 
-2003-01-18  huysmans
+2003-01-18 11:37  huysmans
 
 	* panel/popup.c: Open a menu when dragging over the toggle button.
 	Thanks to perldude for suggesting it. This is a cool feature
 
-2003-01-18  huysmans
+2003-01-18 10:51  huysmans
 
 	* panel/: mcs_client.c, panel.c, panel.h, popup.c: Use
 	gdk_window_move() to prevent margins from interfering with position
 	setting
 
-2003-01-18  huysmans
+2003-01-18 00:06  huysmans
 
 	* panel/controls_dialog.c: revert changes that made saving changes
 	fail
 
-2003-01-17  huysmans
+2003-01-17 21:15  huysmans
 
 	* ChangeLog, panel/controls_dialog.c, plugins/switcher/switcher.c:
 	Use updated netk functions for workspace names and other dialog
 	fixes
 
-2003-01-17  huysmans
+2003-01-17 11:24  huysmans
 
 	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,
 	panel/handle.c, plugins/Makefile.in, plugins/clock/Makefile.in,
@@ -368,21 +429,21 @@
 	themes/XFce/Makefile.in: Use same border width gtk uses in dialog
 	action area. Some reordering in the panel dialog. Looks better IMO.
 
-2003-01-13  huysmans
+2003-01-13 11:17  huysmans
 
 	* ChangeLog, panel/item_dialog.c: Really fix crash in menu
 
-2003-01-12  huysmans
+2003-01-12 23:41  huysmans
 
 	* panel/: Makefile.in, item_dialog.c: Fix panel crash when removing
 	menu items
 
-2003-01-12  huysmans
+2003-01-12 23:20  huysmans
 
 	* panel/callbacks.c: Fix bug in mouse press handling that stopped
 	the menu from working
 
-2003-01-12  xfce
+2003-01-12 21:33  xfce
 
 	* Makefile.in, aclocal.m4, configure, configure.ac, xfce4.spec.in,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
@@ -394,22 +455,22 @@
 	themes/XFce/Makefile.in: Add a check for availability of
 	xfce-mcs-manager
 
-2003-01-12  huysmans
+2003-01-12 20:50  huysmans
 
 	* panel/: callbacks.c, controls.c, handle.c: Use SHIFT-button1 as
 	equivalent for right-click
 
-2003-01-11  huysmans
+2003-01-11 19:58  huysmans
 
 	* panel/: Makefile.am, Makefile.in: Rename binary to xfce4-panel
 
-2003-01-11  huysmans
+2003-01-11 17:31  huysmans
 
 	* ChangeLog, configure, configure.ac, panel/mcs_client.c,
 	settings/Makefile.am, settings/Makefile.in: Update to use new
 	settings manager plugin path
 
-2003-01-11  huysmans
+2003-01-11 13:08  huysmans
 
 	* ChangeLog, Makefile.in, aclocal.m4, configure, configure.ac,
 	icons/Makefile.in, panel/Makefile.in, panel/mcs_client.c,
@@ -421,7 +482,7 @@
 	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
 	themes/XFce/Makefile.in: Use new check for running settings manager
 
-2003-01-10  xfce
+2003-01-10 00:02  xfce
 
 	* Makefile.in, config.h.in, configure, configure.ac, xfce4.spec.in,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
@@ -433,7 +494,7 @@
 	themes/XFce/Makefile.in: Update dependencies on libxfcegui4 version
 	and libxfce4mcs
 
-2003-01-09  xfce
+2003-01-09 23:53  xfce
 
 	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,
 	panel/Makefile.in, plugins/Makefile.in, plugins/clock/Makefile.in,
@@ -445,53 +506,53 @@
 	themes/XFce/Makefile.in: Add " -avoid-version " to 
 	libxfce4settings_la_LDFLAGS in settings/Makefile.am
 
-2003-01-09  huysmans
+2003-01-09 23:25  huysmans
 
 	* panel/: item_dialog.c, popup.c, popup.h: Fix possible bug in menu
 	item ordering. See if you can break this one perldude :)
 
-2003-01-09  huysmans
+2003-01-09 08:05  huysmans
 
 	* ChangeLog, plugins/switcher/switcher.c,
 	plugins/systembuttons/systembuttons.c: Fix bug in calling
 	mcs_dialog(). Thanks to L. Friendman for pointing it out.
 
-2003-01-08  huysmans
+2003-01-08 15:55  huysmans
 
 	* panel/: handle.c, mcs_client.c, mcs_client.h: Add option to run
 	settings manager dialog to right-click menu on move handles
 
-2003-01-08  huysmans
+2003-01-08 14:15  huysmans
 
 	* ChangeLog, settings/xfce_settings_dialog.c: Add new header to
 	xfce4 plugin and add a bit more border
 
-2003-01-08  huysmans
+2003-01-08 13:27  huysmans
 
 	* panel/info.c, settings/xfce_settings_dialog.c: Use new dialog
 	header for settings plugin
 
-2003-01-05  huysmans
+2003-01-05 16:55  huysmans
 
 	* ChangeLog, panel/global.h, panel/main.c, panel/mcs_client.c,
 	panel/xfce_support.c, panel/xfce_support.h,
 	settings/xfce_settings_dialog.c: Use dialogs from libxfcegui4
 
-2003-01-04  huysmans
+2003-01-04 09:49  huysmans
 
 	* settings/xfce_settings_plugin.c: Use inline icon
 
-2003-01-02  huysmans
+2003-01-02 12:34  huysmans
 
 	* panel/xfce_support.c: Fix small bug in localized config file
 	names
 
-2002-12-31  huysmans
+2002-12-31 12:20  huysmans
 
 	* plugins/switcher/switcher.c: Resize on workspace
 	creation/deletion
 
-2002-12-31  huysmans
+2002-12-31 12:12  huysmans
 
 	* ChangeLog, Makefile.in, aclocal.m4, configure, icons/Makefile.am,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
@@ -505,48 +566,48 @@
 	minibuttons position, settings plugin icon and non-modal dialog,
 	netk_pager sizing
 
-2002-12-30  huysmans
+2002-12-30 21:52  huysmans
 
 	* panel/handle.c, plugins/switcher/switcher.c: Remove exit and
 	iconify buttons from handles
 
-2002-12-28  huysmans
+2002-12-28 22:16  huysmans
 
 	* panel/main.c: Fix SIGHUP handling. Thanks to Steganos for
 	pointing it out
 
-2002-12-28  huysmans
+2002-12-28 09:54  huysmans
 
 	* ChangeLog, TODO: Update ChangeLog and TODO file
 
-2002-12-28  huysmans
+2002-12-28 09:53  huysmans
 
 	* plugins/switcher/switcher.c: Fix minibutton positioning
 
-2002-12-27  huysmans
+2002-12-27 16:25  huysmans
 
 	* plugins/switcher/switcher.c: Fix size setting of graphical pager
 
-2002-12-27  huysmans
+2002-12-27 15:30  huysmans
 
 	* plugins/switcher/switcher.c: Small fix to dialog
 
-2002-12-27  huysmans
+2002-12-27 15:08  huysmans
 
 	* plugins/switcher/switcher.c: Add graphical pager option to
 	switcher plugin
 
-2002-12-24  huysmans
+2002-12-24 11:56  huysmans
 
 	* panel/: callbacks.c, callbacks.h, popup.c: Make ESC close popup
 	menu
 
-2002-12-23  huysmans
+2002-12-23 10:27  huysmans
 
 	* ChangeLog, panel/mcs_client.c, panel/mcs_client.h: Add missing
 	files
 
-2002-12-23  huysmans
+2002-12-23 10:16  huysmans
 
 	* Makefile.am, Makefile.in, configure, configure.ac,
 	icons/Makefile.in, panel/Makefile.am, panel/Makefile.in,
@@ -568,24 +629,24 @@
 	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add settings
 	manager plugin and make the panel a settings client. Cool stuff :)
 
-2002-12-20  huysmans
+2002-12-20 13:12  huysmans
 
 	* panel/: controls.c, controls.h, controls_dialog.c, panel.c,
 	settings.c: Fix bug with controls dialog. Thanks to Korbinus for
 	reporting it.
 
-2002-12-17  huysmans
+2002-12-17 19:07  huysmans
 
 	* ChangeLog, README, TODO: Update README and TODO file
 
-2002-12-17  huysmans
+2002-12-17 17:03  huysmans
 
 	* plugins/: mailcheck/mailcheck.c, switcher/switcher.c,
 	systembuttons/systembuttons.c: Another big API change. I think I
 	got it right this time: control classes providing the interface to
 	panel controls, including a function to create new instances.
 
-2002-12-17  huysmans
+2002-12-17 16:59  huysmans
 
 	* ChangeLog, panel/callbacks.c, panel/callbacks.h,
 	panel/controls.c, panel/controls.h, panel/controls_dialog.c,
@@ -598,14 +659,14 @@
 	classes providing the interface to panel controls, including a
 	function to create new instances.
 
-2002-12-16  huysmans
+2002-12-16 20:11  huysmans
 
 	* ChangeLog, panel/controls.c, panel/plugins.h,
 	plugins/clock/clock.c, plugins/mailcheck/mailcheck.c,
 	plugins/switcher/switcher.c, plugins/systembuttons/systembuttons.c:
 	Fix version checking code
 
-2002-12-16  huysmans
+2002-12-16 18:59  huysmans
 
 	* ChangeLog, panel/Makefile.am, panel/Makefile.in,
 	panel/controls.c, panel/controls.h, panel/controls_dialog.c,
@@ -613,15 +674,15 @@
 	plugins/mailcheck/mailcheck.c, plugins/switcher/switcher.c,
 	plugins/systembuttons/systembuttons.c: Add new module loading code
 
-2002-12-16  huysmans
+2002-12-16 09:09  huysmans
 
 	* plugins/clock/clock.c: Fix date bug
 
-2002-12-16  huysmans
+2002-12-16 08:16  huysmans
 
 	* panel/groups.c: Fix bug with handling old config file
 
-2002-12-13  huysmans
+2002-12-13 23:09  huysmans
 
 	* ChangeLog, configure, configure.ac, panel/Makefile.am,
 	panel/Makefile.in, panel/builtins.c, panel/builtins.h,
@@ -632,24 +693,24 @@
 	plugins/systembuttons/systembuttons.c: remove last builtins and add
 	new systembuttons plugin
 
-2002-12-12  huysmans
+2002-12-12 22:20  huysmans
 
 	* ChangeLog, panel/groups.c, panel/groups.h, panel/handle.c: Allow
 	user to add a panel control from the handle right-click menu
 
-2002-12-12  huysmans
+2002-12-12 16:28  huysmans
 
 	* panel/: main.c, panel.c, panel.h: Improve SIGHUP handling
 
-2002-12-12  huysmans
+2002-12-12 12:09  huysmans
 
 	* panel/: panel.c, xfce_support.c: Improve window layer handling
 
-2002-12-12  huysmans
+2002-12-12 10:23  huysmans
 
 	* ChangeLog, example.xfce4rc.in: Update default rc file
 
-2002-12-12  huysmans
+2002-12-12 10:16  huysmans
 
 	* ChangeLog, configure, configure.ac, panel/Makefile.am,
 	panel/Makefile.in, panel/builtins.c, panel/callbacks.c,
@@ -669,7 +730,7 @@
 	main and panel modules. New general header file xfce.h that
 	includes all exported headers. New fixes and probably new bugs
 
-2002-12-03  huysmans
+2002-12-03 15:24  huysmans
 
 	* themes/: Crystal/Makefile.am, Crystal/Makefile.in,
 	Crystal/newmail.png, Crystal/nomail.png, Crystal/oldmail.png,
@@ -677,27 +738,27 @@
 	Noia/nomail.png, Noia/oldmail.png: Add mail icons to Crystal and
 	Noia themes. Thanks (again) to Jeroen Vloothuis
 
-2002-11-28  madkiss
+2002-11-28 21:28  madkiss
 
 	* debian/: changelog, control, rules, xfce4.install,
 	maintain/gdm-Xfce, maintain/xfce4_setup, maintain/xfce4_setup.1: 
 	Update to debian/-subdir included in xfce4_20021127-1.
 
-2002-11-27  huysmans
+2002-11-27 22:30  huysmans
 
 	* ChangeLog, panel/icons.c, panel/xfce.c,
 	plugins/mailcheck/mailcheck.c: Fix a bug in icon handling. Thanks
 	to Korbinus
 
-2002-11-26  huysmans
+2002-11-26 15:04  huysmans
 
 	* themes/XFce/: Makefile.am, Makefile.in: Also update makefiles
 
-2002-11-26  huysmans
+2002-11-26 15:01  huysmans
 
 	* themes/XFce/: mail.xpm, newmail.xpm: Fix naming of new mail icon
 
-2002-11-26  huysmans
+2002-11-26 14:06  huysmans
 
 	* configure, configure.ac, panel/icons.c, themes/Makefile.am,
 	themes/Makefile.in, themes/Crystal/Makefile.am,
@@ -724,7 +785,7 @@
 	themes/Noia/trash_full.png, themes/Noia/unknown.png: Add Crystal
 	and Noia themes provided by Jeroen Vloothuis (aka slm on IRC)
 
-2002-11-26  huysmans
+2002-11-26 09:06  huysmans
 
 	* ChangeLog, aclocal.m4, configure, panel/wmhints.c,
 	themes/Curve/Makefile.am, themes/Curve/Makefile.in,
@@ -732,39 +793,39 @@
 	themes/Curve/oldmail.png: Fix bug in wmhints and add mail icons to
 	Curve theme
 
-2002-11-25  xfce
+2002-11-25 12:39  xfce
 
 	* panel/xfce.c: Put back "gtk_widget_show" on toplevel, the panel
 	doesn't show otherwise :)
 
-2002-11-24  huysmans
+2002-11-24 20:26  huysmans
 
 	* panel/: item_dialog.c, xfce_support.c, xfce_support.h: Only show
 	preview when slecting icons
 
-2002-11-23  xfce
+2002-11-23 18:39  xfce
 
 	* aclocal.m4, configure, panel/builtins.c, panel/callbacks.c,
 	panel/global.h, panel/handle.c, panel/item.c, panel/popup.c,
 	panel/xfce.c, plugins/clock/clock.c, plugins/mailcheck/mailcheck.c:
 	Update for libxfcegui4 new include base dir.
 
-2002-11-23  huysmans
+2002-11-23 12:24  huysmans
 
 	* Makefile.am, Makefile.in, example.xfce4rc.in, panel/xfce.c:
 	Install default xfce4rc
 
-2002-11-22  huysmans
+2002-11-22 14:33  huysmans
 
 	* ChangeLog, panel/builtins.c, panel/item_dialog.c: Fix bug where
 	file dialog stays below control dialog
 
-2002-11-18  huysmans
+2002-11-18 22:51  huysmans
 
 	* panel/: builtins.c, controls.c, controls.h, xfce.c: Fix SIGHUP
 	handling, I'll just quit. Restarting doesn't work
 
-2002-11-13  huysmans
+2002-11-13 10:22  huysmans
 
 	* ChangeLog, aclocal.m4, configure, panel/builtins.c,
 	panel/controls.c, panel/controls.h, panel/controls_dialog.c,
@@ -772,61 +833,61 @@
 	plugins/mailcheck/mailcheck.c: Panel control API change and several
 	small fixes
 
-2002-11-10  huysmans
+2002-11-10 16:23  huysmans
 
 	* panel/: central.c, dialogs.c: Fix repositioning bug in
 	preferences dialog
 
-2002-11-10  huysmans
+2002-11-10 16:02  huysmans
 
 	* panel/central.c: Fix screen button positioning bug (again./xfce4
 	)
 
-2002-11-10  huysmans
+2002-11-10 15:54  huysmans
 
 	* panel/central.c: Fix small screen naming bug
 
-2002-11-10  huysmans
+2002-11-10 15:41  huysmans
 
 	* panel/central.c: Update desktop switcher
 
-2002-11-10  huysmans
+2002-11-10 14:07  huysmans
 
 	* panel/: controls_dialog.c, side.c, side.h: Allow removal of panel
 	controls
 
-2002-11-10  huysmans
+2002-11-10 12:45  huysmans
 
 	* panel/central.c: Fix a bug in screen name handling
 
-2002-11-10  huysmans
+2002-11-10 11:35  huysmans
 
 	* panel/: dialogs.c, global.h, popup.c, side.c, xfce.c, xfce.h: Try
 	to fix a bug in panel control positioning
 
-2002-11-10  madkiss
-
-	* debian/: changelog, control, copyright, docs, rules,
-	xfce4-dev.install, xfce4-themes.install, xfce4.install, xfce4.menu,
-	maintain/xfce4.1: Initial revision
-
-2002-11-10  madkiss
+2002-11-10 11:03  madkiss
 
 	* debian/: changelog, control, copyright, docs, rules,
 	xfce4-dev.install, xfce4-themes.install, xfce4.install, xfce4.menu,
 	maintain/xfce4.1: 
 	Added first version of official debian/ subdirectory
 
-2002-11-09  huysmans
+2002-11-10 11:03  madkiss
+
+	* debian/: changelog, control, copyright, docs, rules,
+	xfce4-dev.install, xfce4-themes.install, xfce4.install, xfce4.menu,
+	maintain/xfce4.1: Initial revision
+
+2002-11-09 22:49  huysmans
 
 	* panel/: icons.c, xfce.c: Fix a bug whith icon handling when there
 	is no rc file or theme == NULL
 
-2002-11-09  huysmans
+2002-11-09 11:48  huysmans
 
 	* panel/dialogs.c: Add back notebook tabs in global dialog
 
-2002-11-08  xfce
+2002-11-08 23:21  xfce
 
 	* panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
@@ -835,19 +896,19 @@
 	required libs for build/rpm are listed, with versions and keep the
 	minimum version required at only one place (configure.ac)
 
-2002-11-08  xfce
+2002-11-08 23:14  xfce
 
 	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
 	xfce4.spec.in, icons/Makefile.in: make sure required libs for
 	build/rpm are listed, with versions and keep the minimum version
 	required at only one place (configure.ac)
 
-2002-11-08  huysmans
+2002-11-08 15:16  huysmans
 
 	* ChangeLog, panel/dialogs.c: Add panel centering options to global
 	dialog
 
-2002-11-08  huysmans
+2002-11-08 13:49  huysmans
 
 	* configure, configure.ac, icons/Makefile.am, icons/Makefile.in,
 	icons/addicon.xpm, icons/down.xpm, icons/edit.xpm, icons/file1.xpm,
@@ -874,26 +935,26 @@
 	themes/XFce/trash_full.xpm, themes/XFce/unknown.xpm: Make default
 	theme a normal theme. Get rid of builtin icons
 
-2002-11-06  huysmans
+2002-11-06 16:44  huysmans
 
 	* ChangeLog, panel/central.c, panel/dialogs.c, panel/popup.c: Small
 	fixes and cleanups
 
-2002-11-06  huysmans
+2002-11-06 12:14  huysmans
 
 	* panel/controls_dialog.c: Really fixed control positioning.
 
-2002-11-06  huysmans
+2002-11-06 12:09  huysmans
 
 	* panel/: builtins.c, controls_dialog.c, dialogs.c, global.h,
 	handle.c, side.c: Fixed control positioning.
 
-2002-11-05  huysmans
+2002-11-05 23:53  huysmans
 
 	* panel/side.c: This is an 'almost' fix for a control positioning
 	bug.
 
-2002-11-05  huysmans
+2002-11-05 23:04  huysmans
 
 	* ChangeLog, panel/callbacks.c, panel/callbacks.h, panel/central.c,
 	panel/central.h, panel/controls.c, panel/controls.h,
@@ -902,36 +963,36 @@
 	panel/side.h, panel/xfce.c: Major reworking of panel internals.
 	Work in progress
 
-2002-10-28  huysmans
+2002-10-28 08:10  huysmans
 
 	* panel/callbacks.c: Fix positioning bug the right way (Olivier's
 	suggestion)
 
-2002-10-27  huysmans
+2002-10-27 17:22  huysmans
 
 	* panel/: side.c, xfce_support.c: Use putenv instead of setenv.
 	Solaris doesn't have it.
 
-2002-10-27  huysmans
+2002-10-27 14:25  huysmans
 
 	* panel/item_dialog.c: Fix a menu editing bug that caused a crash
 
-2002-10-27  huysmans
+2002-10-27 13:38  huysmans
 
 	* panel/callbacks.c: Attempt to fix menu positioning bug
 
-2002-10-27  huysmans
+2002-10-27 13:06  huysmans
 
 	* panel/: builtins.c, callbacks.c, callbacks.h, central.c,
 	global.h, xfce.c: More central panel code rearrangment
 
-2002-10-27  huysmans
+2002-10-27 12:10  huysmans
 
 	* aclocal.m4, configure, panel/central.c, panel/central.h,
 	panel/wmhints.c, panel/xfce.c, panel/xfce.h: separate central panel
 	more from the panel code. First step to making it a module
 
-2002-10-27  xfce
+2002-10-27 11:13  xfce
 
 	* Makefile.in, aclocal.m4, autogen.sh, configure,
 	icons/Makefile.in, panel/Makefile.in, panel/global.h,
@@ -942,26 +1003,26 @@
 	if available (instead of auto*-1.x as it was before) Make use of
 	preview file selector instead of basic gtk file selector.
 
-2002-10-25  xfce
+2002-10-25 23:57  xfce
 
 	* panel/xfce.c: Increase SM priority to 40
 
-2002-10-21  huysmans
+2002-10-21 22:54  huysmans
 
 	* ChangeLog, panel/xfce.c: Add session management functionality
 
-2002-10-18  huysmans
+2002-10-18 11:57  huysmans
 
 	* ChangeLog, autogen.sh, panel/callbacks.c, panel/icons.h,
 	panel/item_dialog.c, panel/popup.c, panel/popup.h: Use
 	xfce_menubutton widget in popup menus
 
-2002-10-11  xfce
+2002-10-11 22:56  xfce
 
 	* xfce4.spec.in: Fix xfce4.spec file still pointing on old plugin
 	location.
 
-2002-10-11  huysmans
+2002-10-11 16:18  huysmans
 
 	* panel/Makefile.am, panel/Makefile.in, panel/global.h,
 	panel/xfce_support.c, plugins/clock/Makefile.am,
@@ -969,23 +1030,23 @@
 	plugins/mailcheck/Makefile.in: Move plugins under /usr/lib (FHS
 	compliant). Thanks to Martin Loschwitz for bringing it up.
 
-2002-10-10  huysmans
+2002-10-10 17:43  huysmans
 
 	* panel/builtins.c: Fix bug in builtins (stupid gcc 3.2 didn't
 	complain)
 
-2002-10-10  huysmans
+2002-10-10 17:40  huysmans
 
 	* panel/item_dialog.c: Fix bug where popup menu disappears if you
 	press Add icon
 
-2002-10-10  huysmans
+2002-10-10 08:46  huysmans
 
 	* ChangeLog, panel/dialogs.c, panel/global.h, panel/popup.c,
 	panel/popup.h, panel/side.c, panel/side.h, panel/xfce.c,
 	panel/xfce.h: Remove popup_size option and change add-to-menu icon
 
-2002-10-10  huysmans
+2002-10-10 00:31  huysmans
 
 	* panel/Makefile.am, panel/Makefile.in, panel/builtins.c,
 	panel/builtins.h, panel/controls.c, panel/iconbutton.c,
@@ -993,59 +1054,59 @@
 	plugins/mailcheck/mailcheck.c: Use xfce_iconbutton widget for panel
 	items
 
-2002-10-09  huysmans
+2002-10-09 00:13  huysmans
 
 	* panel/: callbacks.c, item_dialog.c, popup.c, popup.h: New popup
 	buttons. Really this time
 
-2002-10-09  huysmans
+2002-10-09 00:06  huysmans
 
 	* panel/: builtins.c, controls.c, controls.h, popup.h: Oops used an
 	old tree to commit. Revert.
 
-2002-10-08  huysmans
+2002-10-08 23:27  huysmans
 
 	* panel/: builtins.c, controls.c, controls.h, popup.h: Use new
 	xfce_togglebutton from libxfcegui4
 
-2002-10-07  huysmans
+2002-10-07 21:18  huysmans
 
 	* icons/Makefile.am, icons/Makefile.in, icons/close.xpm,
 	icons/handle.xpm, icons/iconify.xpm, panel/handle.c, panel/icons.c,
 	panel/icons.h: Fix position saving bug
 
-2002-10-07  huysmans
+2002-10-07 16:36  huysmans
 
 	* ChangeLog, panel/xfce.c: Increase size popup buttons by two
 	pixels
 
-2002-10-07  huysmans
+2002-10-07 08:25  huysmans
 
 	* ChangeLog, panel/handle.c: Add new decorbuttons
 
-2002-10-06  huysmans
+2002-10-06 23:32  huysmans
 
 	* ChangeLog, panel/handle.c: Fix position saving
 
-2002-10-06  huysmans
+2002-10-06 17:17  huysmans
 
 	* configure, configure.ac, panel/handle.c,
 	plugins/clock/Makefile.am, plugins/clock/Makefile.in,
 	plugins/clock/clock.c, plugins/clock/xfce_clock.c,
 	plugins/clock/xfce_clock.h: Use new libxfcegui4
 
-2002-10-05  huysmans
+2002-10-05 23:53  huysmans
 
 	* configure, configure.ac, panel/builtins.c, panel/controls.c,
 	panel/global.h, plugins/Makefile.am, plugins/Makefile.in: Make
 	trash can a plugin
 
-2002-10-05  huysmans
+2002-10-05 23:01  huysmans
 
 	* ChangeLog, panel/builtins.c, panel/global.h: A few fixes for bugs
 	created with the clock plugin move
 
-2002-10-05  huysmans
+2002-10-05 22:49  huysmans
 
 	* configure, configure.ac, panel/Makefile.am, panel/Makefile.in,
 	panel/builtins.c, panel/controls.c, panel/xfce_clock.c,
@@ -1054,33 +1115,33 @@
 	plugins/clock/clock.c, plugins/clock/xfce_clock.c,
 	plugins/clock/xfce_clock.h: Make the clock a plugin
 
-2002-10-05  huysmans
+2002-10-05 10:37  huysmans
 
 	* ChangeLog, panel/handle.c, panel/handle.h, panel/xfce.c: update
 	handle layout
 
-2002-10-03  huysmans
+2002-10-03 19:24  huysmans
 
 	* panel/: builtins.c, xfce.c: Fix current desktop bug
 
-2002-10-02  huysmans
+2002-10-02 08:49  huysmans
 
 	* panel/: handle.c, xfce.c: Re-add frame to move handles, remove
 	separators. Looks a bit better I think
 
-2002-10-02  huysmans
+2002-10-02 00:25  huysmans
 
 	* Makefile.am, Makefile.in, panel/Makefile.am, panel/Makefile.in,
 	panel/handle.c, panel/handle.h, panel/move.c, panel/move.h,
 	panel/popup.c, panel/side.c, panel/xfce.c: Initial layout change:
 	handles on the sides
 
-2002-09-30  xfce
+2002-09-30 10:33  xfce
 
 	* panel/xfce_clock.c: Change length of hour needle to improve
 	readability, especially in small size.
 
-2002-09-29  huysmans
+2002-09-29 23:22  huysmans
 
 	* configure, configure.ac, themes/Makefile.am, themes/Makefile.in,
 	themes/Curve/Makefile.am, themes/Curve/Makefile.in,
@@ -1095,58 +1156,58 @@
 	themes/Curve/trash_empty.png, themes/Curve/trash_full.png,
 	themes/Curve/unknown.png: Change theme name
 
-2002-09-29  huysmans
+2002-09-29 20:54  huysmans
 
 	* ChangeLog, panel/Makefile.am, panel/Makefile.in: Fix header
 	missing from dist tarball
 
-2002-09-29  huysmans
+2002-09-29 20:39  huysmans
 
 	* ChangeLog, configure, configure.ac, themes/Makefile.am,
 	themes/Makefile.in, themes/Gnome/Makefile.am,
 	themes/Gnome/Makefile.in: Add Bluecurve theme
 
-2002-09-29  xfce
+2002-09-29 11:00  xfce
 
 	* panel/xfce_clock.c: Rendering and optimizations to clock_widget
 
-2002-09-29  xfce
+2002-09-29 09:46  xfce
 
 	* panel/xfce_clock.c: clock tweaking.
 
-2002-09-29  xfce
+2002-09-29 09:38  xfce
 
 	* panel/xfce_clock.c: Use MIN where MIN is meant and not MAX !
 
-2002-09-28  xfce
+2002-09-28 23:31  xfce
 
 	* panel/builtins.c: Put back main field for builtin clock to
 	eventbox otherwise the date doesn't show (Jasper was right :) )
 
-2002-09-28  xfce
+2002-09-28 23:24  xfce
 
 	* panel/: builtins.c, xfce.c, xfce_clock.c: Bug fixes in panel.
 	When started w/out central panel, changing style
 	(traditionnal/modern) cause gtk warning on NULL widget, and once
 	started w/out central panel, it could not be showed anymore.
 
-2002-09-28  xfce
+2002-09-28 22:55  xfce
 
 	* panel/: builtins.c, xfce_clock.c: Change the clock widget so
 	analog mode stay readable even in tiny mode. Remove the round frame
 	arround the clock (it looked outdated) and change various
 	internals.
 
-2002-09-28  zedek
+2002-09-28 17:08  zedek
 
 	* TODO: Update TODO list
 
-2002-09-28  xfce
+2002-09-28 17:03  xfce
 
 	* icons/: Makefile.am, Makefile.in: Err, forgot to remove the
 	digits.xbm files from the Makefile.am !
 
-2002-09-28  xfce
+2002-09-28 16:53  xfce
 
 	* icons/digits.xbm, panel/xfce_clock.c, panel/xfce_clock.h: Fix
 	multiple clock not updating correctly, move digits.xbm inside
@@ -1154,25 +1215,25 @@
 	xfce_clock.[ch] and get all that is needed w/out requiring other
 	external files.
 
-2002-09-28  xfce
+2002-09-28 15:47  xfce
 
 	* Makefile.am, Makefile.in, configure: Add removal of
 	autom4te.cache dir at distclean.
 
-2002-09-27  xfce
+2002-09-27 16:23  xfce
 
 	* panel/xfce_clock.c: [no log message]
 
-2002-09-27  xfce
+2002-09-27 15:35  xfce
 
 	* panel/xfce_clock.c: Add _finalize() method to xfce_clock widget.
 
-2002-09-27  xfce
+2002-09-27 14:46  xfce
 
 	* panel/controls.c: Jasper is right (as usual), the eventbox makes
 	sense.
 
-2002-09-27  xfce
+2002-09-27 14:18  xfce
 
 	* panel/: builtins.c, callbacks.c, central.c, controls.c,
 	controls_dialog.c, dialogs.c, item_dialog.c, popup.c, side.c,
@@ -1181,52 +1242,52 @@
 	gtk-app-devel-list, revert g_ref since it's not necessary anymore,
 	fix various compilation warnings (some being serious)
 
-2002-09-26  xfce
+2002-09-26 22:59  xfce
 
 	* panel/: builtins.c, controls.c, controls_dialog.c, xfce_clock.c:
 	Bug hunting. Fixed the double free bug when removing clock widget.
 
-2002-09-26  xfce
+2002-09-26 11:36  xfce
 
 	* panel/builtins.c: Fix clock mode not being restored at startup.
 
-2002-09-26  huysmans
+2002-09-26 08:27  huysmans
 
 	* panel/: controls.c, controls_dialog.c: Try to fix double free bug
 
-2002-09-26  huysmans
+2002-09-26 08:00  huysmans
 
 	* ChangeLog, panel/dialogs.c: Fix embarrassing bug in the code for
 	finding themes. Thanks Korbinus.
 
-2002-09-25  xfce
+2002-09-25 23:17  xfce
 
 	* panel/builtins.c: Put back clock frame with traditional panel
 	style for zeDek :)
 
-2002-09-25  xfce
+2002-09-25 22:35  xfce
 
 	* panel/: builtins.c, xfce_clock.c, xfce_clock.h: Change clock
 	internals.
 
-2002-09-24  zedek
+2002-09-24 23:33  zedek
 
 	* panel/builtins.c: Fixed a bug (again) in the clock code
 	(unnitialized variable)
 
-2002-09-24  huysmans
+2002-09-24 20:39  huysmans
 
 	* ChangeLog, panel/popup.c: Fix sizing Add Icon menu item
 
-2002-09-24  zedek
+2002-09-24 18:01  zedek
 
 	* panel/builtins.c: Fixed (who knows ;) the LED clock
 
-2002-09-24  zedek
+2002-09-24 02:33  zedek
 
 	* ChangeLog: Update ChangeLog
 
-2002-09-24  zedek
+2002-09-24 02:28  zedek
 
 	* panel/: builtins.c, xfce_clock.c: Removed the previous debug
 	messages Code cleanups Applied Olivie's Patch (another one :p)
@@ -1235,7 +1296,7 @@
 	changes (actually it only make a call to clock_set_size) ... other
 	things I can't remember :D (I'm a little bit tired you know)
 
-2002-09-24  zedek
+2002-09-24 00:46  zedek
 
 	* panel/: builtins.c, xfce_clock.c, xfce_clock.h: Added lots of
 	debug messages Fixed (huh?) the LED/Digital display bug (still
@@ -1243,85 +1304,85 @@
 	calls replace the previous gtk_draw_box) Fixed the frame display
 	bug (was not shown on startup)
 
-2002-09-23  huysmans
+2002-09-23 22:58  huysmans
 
 	* panel/xfce.c: Try to fix crash on exit
 
-2002-09-23  huysmans
+2002-09-23 22:25  huysmans
 
 	* panel/xfce.c: Fix crash on ctrl-c.
 
-2002-09-23  huysmans
+2002-09-23 21:04  huysmans
 
 	* panel/xfce.c: Change default vertical position
 
-2002-09-23  huysmans
+2002-09-23 20:09  huysmans
 
 	* panel/: controls_dialog.c, dialogs.c, item_dialog.c: Save
 	settings after closing any dialog
 
-2002-09-23  huysmans
+2002-09-23 18:45  huysmans
 
 	* panel/: builtins.c, central.c, controls.c, dialogs.c, side.c: Fix
 	resize bug
 
-2002-09-22  huysmans
+2002-09-22 22:08  huysmans
 
 	* TODO, config.h.in, configure, panel/side.c: Fixed the move handle
 	positioning. Or did I?
 
-2002-09-22  huysmans
+2002-09-22 20:46  huysmans
 
 	* panel/callbacks.c: Fix popup menu positioning even more ;-)
 
-2002-09-22  huysmans
+2002-09-22 20:29  huysmans
 
 	* panel/side.c: Now really fix move handle positioning. Really.
 
-2002-09-22  zedek
+2002-09-22 20:11  zedek
 
 	* configure.ac: Add debug infos at runtime (--enable-debug)
 
-2002-09-22  huysmans
+2002-09-22 20:01  huysmans
 
 	* panel/: controls.c, controls.h: Some cleanup
 
-2002-09-22  zedek
+2002-09-22 19:43  zedek
 
 	* panel/debug.h: fix my previous commit (debug macro)
 
-2002-09-22  zedek
+2002-09-22 19:42  zedek
 
 	* panel/global.h: Added debug macros
 
-2002-09-22  huysmans
+2002-09-22 17:19  huysmans
 
 	* ChangeLog: Update ChangeLog
 
-2002-09-22  huysmans
+2002-09-22 17:17  huysmans
 
 	* panel/: callbacks.c, callbacks.h, controls.c, side.c: Add close
 	button on move handle (like xfce3)
 
-2002-09-22  huysmans
+2002-09-22 16:35  huysmans
 
 	* panel/callbacks.c: Really fix popup menu positioning
 
-2002-09-22  huysmans
+2002-09-22 16:30  huysmans
 
 	* panel/callbacks.c: Fix popup menu positioning
 
-2002-09-22  huysmans
+2002-09-22 15:39  huysmans
 
 	* panel/: central.c, side.c, xfce.c: Fix move handle positioning in
 	vertical mode
 
-2002-09-21  huysmans
+2002-09-21 23:06  huysmans
 
 	* ChangeLog, panel/central.c: Fix button ordering bug. Quite
 	embarrassing actually
 
-2002-09-21  huysmans
+2002-09-21 21:28  huysmans
 
 	* configure, icons/Makefile.am, icons/Makefile.in,
 	panel/builtins.c, panel/callbacks.c, panel/callbacks.h,
@@ -1330,52 +1391,52 @@
 	panel/side.c, panel/side.h, panel/xfce.c, panel/xfce.h: Fix panel
 	reorientation
 
-2002-09-21  zedek
+2002-09-21 12:07  zedek
 
 	* TODO: Update the TODO list
 
-2002-09-21  zedek
+2002-09-21 09:26  zedek
 
 	* ChangeLog: ChangeLog updates
 
-2002-09-21  zedek
+2002-09-21 09:21  zedek
 
 	* panel/dialogs.c: Fix the bad number of desktop buttons when
 	reverting in the panel configuration
 
-2002-09-20  zedek
+2002-09-20 10:54  zedek
 
 	* panel/central.c: Fix the desktop buttons handling
 	(size,positionning)
 
-2002-09-20  zedek
+2002-09-20 10:05  zedek
 
 	* icons/digits.xbm, panel/builtins.c, panel/xfce_clock.c,
 	panel/xfce_clock.h: Cosmetic changes Removed the digits data from
 	the C source (clean up) and set it in a separate file Added tiny
 	size handle (still not functionnal for the clock :))
 
-2002-09-18  zedek
+2002-09-18 17:05  zedek
 
 	* panel/builtins.c: Fixed my previous commit (bis) :)
 
-2002-09-18  zedek
+2002-09-18 17:02  zedek
 
 	* panel/builtins.c: Fixed my previous commit :)
 
-2002-09-18  zedek
+2002-09-18 14:52  zedek
 
 	* panel/builtins.c: Added Write/Read to the xfce4 rc file to store
 	our configuration Fixed minor bugs (sic) Added functions to
 	apply/revert the configuration in the confi dialog Code clean up
 	More comments
 
-2002-09-17  huysmans
+2002-09-17 22:27  huysmans
 
 	* TODO: Update todo list: we want to add variable width/height
 	modules
 
-2002-09-16  huysmans
+2002-09-16 23:24  huysmans
 
 	* panel/: builtins.c, builtins.h, callbacks.c, callbacks.h,
 	central.c, central.h, controls.c, controls.h, controls_dialog.c,
@@ -1384,81 +1445,81 @@
 	xfce_clock.c, xfce_clock.h, xfce_support.c, xfce_support.h: Started
 	fixing issues with the vertical panel
 
-2002-09-16  huysmans
+2002-09-16 18:36  huysmans
 
 	* ChangeLog: Update ChangeLog
 
-2002-09-16  huysmans
+2002-09-16 18:34  huysmans
 
 	* TODO, panel/callbacks.c, panel/callbacks.h, panel/central.c,
 	panel/dialogs.c, panel/global.h, panel/xfce.c: Add vertical panel
 	option by Botsie. Now this is a cool feature.
 
-2002-09-15  huysmans
+2002-09-15 10:48  huysmans
 
 	* ChangeLog, panel/Makefile.in: Update ChangeLog and
 	panel/Makefile.in
 
-2002-09-14  zedek
+2002-09-14 08:49  zedek
 
 	* ChangeLog: Updated the Changelog
 
-2002-09-14  zedek
+2002-09-14 08:40  zedek
 
 	* AUTHORS: updated my informations (addedd email)
 
-2002-09-14  zedek
+2002-09-14 08:35  zedek
 
 	* panel/builtins.c: First commit to support the new clock module.
 
-2002-09-14  zedek
+2002-09-14 08:09  zedek
 
 	* panel/Makefile.am: Added xfce_clock file to the compilation
 	source list
 
-2002-09-14  zedek
+2002-09-14 08:07  zedek
 
 	* panel/: xfce_clock.c, xfce_clock.h: First commit for the clock
 	module
 
-2002-09-10  huysmans
+2002-09-10 22:59  huysmans
 
 	* panel/dialogs.c: fix problem with saving popup size
 
-2002-09-06  huysmans
+2002-09-06 21:54  huysmans
 
 	* panel/central.c: Fix bug in screen button handling
 
-2002-09-06  huysmans
+2002-09-06 21:02  huysmans
 
 	* panel/wmhints.c: Hopefully fix bug in panel-on-top option
 
-2002-09-06  huysmans
+2002-09-06 12:27  huysmans
 
 	* panel/: builtins.c, item_dialog.c, popup.c: fix small bugs in
 	popup menu
 
-2002-09-06  xfce
+2002-09-06 11:51  xfce
 
 	* panel/controls.c: Fix crash at quit (g_free on GTK unref'd object
 	is a bad idea, gtk+ does that itself).
 
-2002-09-05  huysmans
+2002-09-05 21:22  huysmans
 
 	* panel/xfce.c: Fix bug that showed central panel, even if option
 	was FALSE
 
-2002-09-05  huysmans
+2002-09-05 20:22  huysmans
 
 	* Makefile.am, Makefile.in, xfce4.spec.in: fix spec file and update
 	rpm build command (reported by R.P. Herrold)
 
-2002-09-04  huysmans
+2002-09-04 20:05  huysmans
 
 	* ChangeLog, Makefile.am, Makefile.in: update ChangeLog and
 	Makefile.am
 
-2002-09-04  huysmans
+2002-09-04 19:59  huysmans
 
 	* AUTHORS, ChangeLog, Makefile.in, README, README.xml, TODO,
 	example.xfce4rc.in, icons/Makefile.am, icons/Makefile.in,
@@ -1480,51 +1541,51 @@
 	instant-apply, rearrange preferences dialog, add option to keep
 	panel on top, probably more
 
-2002-08-16  xfce
+2002-08-16 23:35  xfce
 
 	* panel/global.h: Play with sizes, make the "tiny" panel somehow,
 	well, tiny.
 
-2002-08-11  huysmans
+2002-08-11 23:04  huysmans
 
 	* panel/info.c: fix deprecated gtk function
 
-2002-08-11  huysmans
+2002-08-11 22:55  huysmans
 
 	* panel/xfce.c: temporarily comment out the DOCK_TYPE window hint
 
-2002-08-11  huysmans
+2002-08-11 21:38  huysmans
 
 	* ChangeLog, panel/info.c: Update ChangeLog and update info panel a
 	bit
 
-2002-08-11  huysmans
+2002-08-11 08:29  huysmans
 
 	* ChangeLog, icons/xfce_slogan.xpm, panel/info.c: Really add info
 	panel by Xavier Maillard
 
-2002-08-10  huysmans
+2002-08-10 22:45  huysmans
 
 	* ChangeLog, Makefile.am, Makefile.in, configure, configure.ac,
 	panel/Makefile.am, panel/Makefile.in, panel/callbacks.c,
 	panel/dialogs.c, panel/dialogs.h, panel/xfce.c: Add info panel by
 	Xavier Maillard
 
-2002-08-08  huysmans
+2002-08-08 23:27  huysmans
 
 	* panel/builtins.c: Additions to Exit/Lock module
 
-2002-08-08  huysmans
+2002-08-08 20:24  huysmans
 
 	* panel/: central.c, dialogs.c, global.h, xfce.c, xfce.h: More
 	config options for configuring central panel
 
-2002-08-08  huysmans
+2002-08-08 08:05  huysmans
 
 	* panel/: builtins.c, dialogs.c, global.h, module.c, module.h,
 	xfce.c, xfce.h: Add option to hide central panel
 
-2002-08-06  huysmans
+2002-08-06 20:15  huysmans
 
 	* Makefile.in, aclocal.m4, icons/Makefile.in, panel/Makefile.in,
 	panel/central.c, panel/global.h, panel/icons.c, panel/wmhints.c,
@@ -1536,17 +1597,17 @@
 	for themeable minibuttons and increased the maximum number of
 	groups to 16
 
-2002-08-05  huysmans
+2002-08-05 08:18  huysmans
 
 	* ChangeLog, panel/dialogs.c: Don't disable changing number of
 	desktops when desktop buttons are hidden
 
-2002-08-04  huysmans
+2002-08-04 16:42  huysmans
 
 	* panel/: central.c, central.h, dialogs.c, global.h, xfce.c: Add
 	option to hide desktop buttons
 
-2002-07-31  huysmans
+2002-07-31 08:41  huysmans
 
 	* panel/: builtins.c, callbacks.c, callbacks.h, central.c,
 	dialogs.c, icons.c, icons.h, item.c, item.h, item_dialog.c,
@@ -1555,74 +1616,74 @@
 	xfce_support.h: Reformat files (missing empty lines at the end) and
 	remove panel.h includes. Reported by Biju Chacko
 
-2002-07-29  huysmans
+2002-07-29 23:11  huysmans
 
 	* panel/xfce.c: Destroy the panel before restarting or you will end
 	up with ghost panels
 
-2002-07-28  huysmans
+2002-07-28 20:56  huysmans
 
 	* panel/: side.c, side.h: Change frame in panel group to
 	gtk_alignment. Much better size control
 
-2002-07-28  huysmans
+2002-07-28 17:42  huysmans
 
 	* panel/: builtins.c, dialogs.c: In global dialog on revert change
 	position at the end (after resizing)
 
-2002-07-28  huysmans
+2002-07-28 17:33  huysmans
 
 	* panel/dialogs.c: Fix bug in finding icon themes
 
-2002-07-28  huysmans
+2002-07-28 17:08  huysmans
 
 	* panel/: dialogs.c, xfce.c: Force modern style for tiny panel.
 	Traditional looks weird.
 
-2002-07-28  huysmans
+2002-07-28 16:07  huysmans
 
 	* panel/builtins.c: Update clock plugin to accept new panel size
 
-2002-07-28  huysmans
+2002-07-28 15:23  huysmans
 
 	* panel/: side.c, xfce.c: Oops, forgot to add TINY_PANEL_ICONS to
 	icon_size()
 
-2002-07-28  huysmans
+2002-07-28 14:56  huysmans
 
 	* panel/: builtins.c, central.c, dialogs.c, global.h, item.c,
 	item_dialog.c, popup.c, side.c, side.h, xfce.c: Added new size
 	(Tiny)
 
-2002-07-26  huysmans
+2002-07-26 08:32  huysmans
 
 	* ChangeLog: Updated ChangeLog
 
-2002-07-26  huysmans
+2002-07-26 08:28  huysmans
 
 	* panel/xfce.c, README: Updated README and added delete/destroy
 	callbacks to the panel
 
-2002-07-18  xfce
+2002-07-18 23:40  xfce
 
 	* configure, configure.ac: Change version scheme to YYMMDD instead
 	of YYYYMMDD to keep consistent with xfwm4
 
-2002-07-18  huysmans
+2002-07-18 23:19  huysmans
 
 	* config.h.in, configure, panel/builtins.c, panel/dialogs.c:
 	hopefully fix a bug in directory opening
 
-2002-07-16  huysmans
+2002-07-16 19:50  huysmans
 
 	* panel/item_dialog.c: refresh preview when leaving text entry in
 	item dialog
 
-2002-07-15  huysmans
+2002-07-15 17:19  huysmans
 
 	* panel/item_dialog.c: fixed bug in panel item dialog
 
-2002-07-14  huysmans
+2002-07-14 17:56  huysmans
 
 	* panel/Makefile.am, panel/Makefile.in, panel/builtins.c,
 	panel/callbacks.c, panel/dialogs.c, panel/dialogs.h, panel/item.c,
@@ -1630,28 +1691,28 @@
 	panel/module.h, plugins/mailcheck/mailcheck.c: Split up dialogs.c
 	file and change item dialogs. This changes the module structure
 
-2002-07-07  huysmans
+2002-07-07 12:02  huysmans
 
 	* panel/callbacks.c, panel/callbacks.h, panel/xfce.c,
 	panel/xfce_support.c, panel/xfce_support.h,
 	plugins/mailcheck/mailcheck.c: add execution in terminal option to
 	mailcheck
 
-2002-07-07  huysmans
+2002-07-07 10:41  huysmans
 
 	* panel/: wmhints.c, xfce.c, xfce.h, xfce_support.c: fix some
 	startup issues
 
-2002-07-07  huysmans
+2002-07-07 09:08  huysmans
 
 	* ChangeLog: Update ChangeLog
 
-2002-07-07  huysmans
+2002-07-07 09:05  huysmans
 
 	* panel/: module.c, xfce.c, xfce_support.c, xfce_support.h: Add
 	exit dialog
 
-2002-07-06  huysmans
+2002-07-06 17:19  huysmans
 
 	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,
 	panel/module.c, panel/settings.c, panel/xfce_support.c,
@@ -1660,53 +1721,53 @@
 	themes/Makefile.in, themes/Gnome/Makefile.in: Add preferences to
 	mailcheck plugin and probably some other things as well
 
-2002-07-03  huysmans
+2002-07-03 23:53  huysmans
 
 	* panel/xfce.c: fix a small bug in global option behaviour and
 	removed panel forking
 
-2002-07-03  huysmans
+2002-07-03 23:30  huysmans
 
 	* panel/: Makefile.am, Makefile.in, builtins.c, callbacks.c,
 	central.c, dialogs.c, icons.c, icons.h, item.c, popup.c, side.c,
 	xfce.c, xfce_support.c: improve icon handling
 
-2002-07-03  huysmans
+2002-07-03 22:19  huysmans
 
 	* panel/: Makefile.am, callbacks.h, dialogs.h, dnd.c, dnd.h,
 	icons.c, icons.h, xfce_support.c, xfce_support.h: add new support
 	module and remove dnd.*
 
-2002-06-23  huysmans
+2002-06-23 20:22  huysmans
 
 	* panel/: callbacks.c, dialogs.c, dialogs.h: add dialog for screen
 	names and fix global dialog when setting number of desktops
 
-2002-06-22  huysmans
+2002-06-22 23:39  huysmans
 
 	* panel/callbacks.c: also diable global configuration when
 	disable_user_config is set
 
-2002-06-22  huysmans
+2002-06-22 22:53  huysmans
 
 	* ChangeLog: update ChangeLog
 
-2002-06-22  huysmans
+2002-06-22 22:51  huysmans
 
 	* panel/: builtins.c, callbacks.c, dialogs.c, dialogs.h, global.h,
 	settings.c, xfce.c: handle menu item limits better and honor
 	disable_user_config
 
-2002-06-20  huysmans
+2002-06-20 22:03  huysmans
 
 	* panel/dialogs.c, themes/Gnome/file1.png: make icon themes work
 	from dialogs
 
-2002-06-18  xfce
+2002-06-18 00:15  xfce
 
 	* COPYING: Forgot COPYING :-(
 
-2002-06-18  xfce
+2002-06-18 00:14  xfce
 
 	* AUTHORS, Makefile.in, aclocal.m4, configure, xfce4.spec.in,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
@@ -1714,16 +1775,16 @@
 	themes/Gnome/Makefile.in: Add (empty) AUTHORS required by automake,
 	Fix spec file
 
-2002-06-17  huysmans
+2002-06-17 23:32  huysmans
 
 	* Makefile, example.xfce4rc: remove some leftovers
 
-2002-06-17  huysmans
+2002-06-17 23:25  huysmans
 
 	* ChangeLog, panel/dialogs.c: Update ChangeLog and refixed typo
 	Olivier fixed earlier
 
-2002-06-17  huysmans
+2002-06-17 22:32  huysmans
 
 	* ChangeLog, INSTALL, Makefile.am, Makefile.in, NEWS, aclocal.m4,
 	autogen.sh, compile, config.guess, config.h.in, config.sub,
@@ -1752,12 +1813,12 @@
 	themes/Gnome/trash_full.png, themes/Gnome/unknown.png: (Re)add all
 	files and automake framework
 
-2002-06-17  huysmans
+2002-06-17 22:18  huysmans
 
 	* plugins/Makefile: removing old files, before putting them in new
 	locations (2)
 
-2002-06-17  huysmans
+2002-06-17 22:14  huysmans
 
 	* builtins.c, builtins.h, callbacks.c, callbacks.h, central.c,
 	central.h, dialogs.c, dialogs.h, dnd.c, dnd.h, global.h, icons.c,
@@ -1766,39 +1827,39 @@
 	wmhints.c, wmhints.h, xfce.c, xfce.h, plugins/mailcheck.c: removing
 	old files, before putting them in new locations
 
-2002-06-14  xfce
+2002-06-14 15:52  xfce
 
 	* dialogs.c: Fixed a typo (Apearance => Appearance)
 
-2002-06-11  huysmans
+2002-06-11 22:24  huysmans
 
 	* dialogs.c, icons.c, xfce.c, plugins/mailcheck.c: Panel settings
 	dialog seems to work now, initial icon theme support
 
-2002-06-11  huysmans
+2002-06-11 16:42  huysmans
 
 	* dialogs.c, wmhints.c: Settings dialog now works
 
-2002-06-11  huysmans
+2002-06-11 08:24  huysmans
 
 	* callbacks.c, dialogs.c, dialogs.h, wmhints.c, xfce.c, xfce.h:
 	Initial global settings dialog and fork() panel at startup
 
-2002-06-09  huysmans
+2002-06-09 22:53  huysmans
 
 	* callbacks.c, dialogs.c: allow running command in terminal
 
-2002-06-09  huysmans
+2002-06-09 22:27  huysmans
 
 	* callbacks.c, callbacks.h, dialogs.c, item.c, item.h, popup.c,
 	popup.h, settings.c, settings.h, xfce.c: make xml parsing replace
 	entities
 
-2002-06-09  huysmans
+2002-06-09 19:12  huysmans
 
 	* settings.c: Fixed crash when no configuration file was found
 
-2002-06-09  huysmans
+2002-06-09 17:49  huysmans
 
 	* Makefile, README, README.xml, builtins.c, builtins.h,
 	callbacks.c, callbacks.h, central.c, central.h, dialogs.c,
@@ -1808,16 +1869,16 @@
 	wmhints.c, wmhints.h, xfce.c, xfce.h, plugins/mailcheck.c: Major
 	update
 
-2002-05-21  huysmans
+2002-05-21 22:48  huysmans
 
 	* dialogs.c, plugins/mailcheck.c: change dialog button order and
 	other dialog fixes
 
-2002-05-20  huysmans
+2002-05-20 20:03  huysmans
 
 	* example.xfce4rc: example config file
 
-2002-05-20  huysmans
+2002-05-20 16:56  huysmans
 
 	* Makefile, README, README.xml, builtins.c, builtins.h,
 	callbacks.c, callbacks.h, central.c, central.h, dialogs.c,

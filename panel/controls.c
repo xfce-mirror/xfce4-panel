@@ -542,11 +542,12 @@ void control_add_options(Control * control, GtkContainer * container,
             gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
                                      GTK_ICON_SIZE_LARGE_TOOLBAR);
         gtk_widget_show(image);
-        gtk_box_pack_start(GTK_BOX(hbox), image, TRUE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
 
         label = gtk_label_new(_("This item has no configuration options"));
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
         gtk_widget_show(label);
-        gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
         gtk_container_add(container, hbox);
     }

@@ -2,4 +2,5 @@ SUBDIRS = \
 clock \
 mailcheck \
 switcher \
-systembuttons
+systembuttons \
+pager

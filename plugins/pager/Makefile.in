@@ -158,29 +158,29 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 plugindir = $(pkglibdir)/plugins
 
-plugin_LTLIBRARIES = libswitcher.la
-libswitcher_la_LDFLAGS = "-module -avoid-version"
+plugin_LTLIBRARIES = libpager.la
+libpager_la_LDFLAGS = "-module -avoid-version"
 
-libswitcher_la_SOURCES = \
-switcher.c
+libpager_la_SOURCES = \
+pager.c
 
 
-libswitcher_la_CFLAGS = -Wall -I$(top_srcdir) -I$(top_srcdir)/panel  @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ -DG_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DLIBDIR=\"$(pkglibdir)\" -DLOCALEDIR=\"$(datadir)/locale\"
-libswitcher_la_LIBADD = @LIBS@ @X_LIBS@  @BASE_DEPENDENCIES_LIBS@
-subdir = plugins/switcher
+libpager_la_CFLAGS = -Wall -I$(top_srcdir) -I$(top_srcdir)/panel  @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ -DG_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DLIBDIR=\"$(pkglibdir)\" -DLOCALEDIR=\"$(datadir)/locale\"
+libpager_la_LIBADD = @LIBS@ @X_LIBS@  @BASE_DEPENDENCIES_LIBS@
+subdir = plugins/pager
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(plugin_LTLIBRARIES)
 
-libswitcher_la_DEPENDENCIES =
-am_libswitcher_la_OBJECTS = libswitcher_la-switcher.lo
-libswitcher_la_OBJECTS = $(am_libswitcher_la_OBJECTS)
+libpager_la_DEPENDENCIES =
+am_libpager_la_OBJECTS = libpager_la-pager.lo
+libpager_la_OBJECTS = $(am_libpager_la_OBJECTS)
 
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/libswitcher_la-switcher.Plo
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/libpager_la-pager.Plo
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -188,9 +188,9 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(libswitcher_la_SOURCES)
+DIST_SOURCES = $(libpager_la_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(libswitcher_la_SOURCES)
+SOURCES = $(libpager_la_SOURCES)
 
 all: all-am
 
@@ -198,7 +198,7 @@ all: all-am
 .SUFFIXES: .c .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  plugins/switcher/Makefile
+	  $(AUTOMAKE) --gnu  plugins/pager/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 pluginLTLIBRARIES_INSTALL = $(INSTALL)
@@ -229,8 +229,8 @@ clean-pluginLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-libswitcher.la: $(libswitcher_la_OBJECTS) $(libswitcher_la_DEPENDENCIES) 
-	$(LINK) -rpath $(plugindir) $(libswitcher_la_LDFLAGS) $(libswitcher_la_OBJECTS) $(libswitcher_la_LIBADD) $(LIBS)
+libpager.la: $(libpager_la_OBJECTS) $(libpager_la_DEPENDENCIES) 
+	$(LINK) -rpath $(plugindir) $(libpager_la_LDFLAGS) $(libpager_la_OBJECTS) $(libpager_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -238,7 +238,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libswitcher_la-switcher.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libpager_la-pager.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -276,38 +276,38 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
-libswitcher_la-switcher.o: switcher.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -MT libswitcher_la-switcher.o -MD -MP -MF "$(DEPDIR)/libswitcher_la-switcher.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libswitcher_la-switcher.o `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libswitcher_la-switcher.Tpo" "$(DEPDIR)/libswitcher_la-switcher.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libswitcher_la-switcher.Tpo"; exit 1; \
+libpager_la-pager.o: pager.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpager_la_CFLAGS) $(CFLAGS) -MT libpager_la-pager.o -MD -MP -MF "$(DEPDIR)/libpager_la-pager.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libpager_la-pager.o `test -f 'pager.c' || echo '$(srcdir)/'`pager.c; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libpager_la-pager.Tpo" "$(DEPDIR)/libpager_la-pager.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libpager_la-pager.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='switcher.c' object='libswitcher_la-switcher.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libswitcher_la-switcher.Po' tmpdepfile='$(DEPDIR)/libswitcher_la-switcher.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pager.c' object='libpager_la-pager.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libpager_la-pager.Po' tmpdepfile='$(DEPDIR)/libpager_la-pager.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -c -o libswitcher_la-switcher.o `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpager_la_CFLAGS) $(CFLAGS) -c -o libpager_la-pager.o `test -f 'pager.c' || echo '$(srcdir)/'`pager.c
 
-libswitcher_la-switcher.obj: switcher.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -MT libswitcher_la-switcher.obj -MD -MP -MF "$(DEPDIR)/libswitcher_la-switcher.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libswitcher_la-switcher.obj `if test -f 'switcher.c'; then $(CYGPATH_W) 'switcher.c'; else $(CYGPATH_W) '$(srcdir)/switcher.c'; fi`; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libswitcher_la-switcher.Tpo" "$(DEPDIR)/libswitcher_la-switcher.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libswitcher_la-switcher.Tpo"; exit 1; \
+libpager_la-pager.obj: pager.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpager_la_CFLAGS) $(CFLAGS) -MT libpager_la-pager.obj -MD -MP -MF "$(DEPDIR)/libpager_la-pager.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libpager_la-pager.obj `if test -f 'pager.c'; then $(CYGPATH_W) 'pager.c'; else $(CYGPATH_W) '$(srcdir)/pager.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libpager_la-pager.Tpo" "$(DEPDIR)/libpager_la-pager.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libpager_la-pager.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='switcher.c' object='libswitcher_la-switcher.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libswitcher_la-switcher.Po' tmpdepfile='$(DEPDIR)/libswitcher_la-switcher.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pager.c' object='libpager_la-pager.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libpager_la-pager.Po' tmpdepfile='$(DEPDIR)/libpager_la-pager.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -c -o libswitcher_la-switcher.obj `if test -f 'switcher.c'; then $(CYGPATH_W) 'switcher.c'; else $(CYGPATH_W) '$(srcdir)/switcher.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpager_la_CFLAGS) $(CFLAGS) -c -o libpager_la-pager.obj `if test -f 'pager.c'; then $(CYGPATH_W) 'pager.c'; else $(CYGPATH_W) '$(srcdir)/pager.c'; fi`
 
-libswitcher_la-switcher.lo: switcher.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -MT libswitcher_la-switcher.lo -MD -MP -MF "$(DEPDIR)/libswitcher_la-switcher.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libswitcher_la-switcher.lo `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libswitcher_la-switcher.Tpo" "$(DEPDIR)/libswitcher_la-switcher.Plo"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libswitcher_la-switcher.Tpo"; exit 1; \
+libpager_la-pager.lo: pager.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpager_la_CFLAGS) $(CFLAGS) -MT libpager_la-pager.lo -MD -MP -MF "$(DEPDIR)/libpager_la-pager.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libpager_la-pager.lo `test -f 'pager.c' || echo '$(srcdir)/'`pager.c; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libpager_la-pager.Tpo" "$(DEPDIR)/libpager_la-pager.Plo"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libpager_la-pager.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='switcher.c' object='libswitcher_la-switcher.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libswitcher_la-switcher.Plo' tmpdepfile='$(DEPDIR)/libswitcher_la-switcher.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='pager.c' object='libpager_la-pager.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libpager_la-pager.Plo' tmpdepfile='$(DEPDIR)/libpager_la-pager.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -c -o libswitcher_la-switcher.lo `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libpager_la_CFLAGS) $(CFLAGS) -c -o libpager_la-pager.lo `test -f 'pager.c' || echo '$(srcdir)/'`pager.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

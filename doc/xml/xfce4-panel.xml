@@ -1,10 +1,12 @@
 <?xml version='1.0'?> <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook
-XML V4.1.2//EN"
-"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"[ <!ENTITY
-copyright SYSTEM "copyright.xml"> <!ENTITY GPL SYSTEM "GPL.xml">
-<!ENTITY appversion "4.0"> <!ENTITY manrevision "0.1"> <!ENTITY date
-"February 2003"> <!ENTITY app
-"<application>xfce4-panel</application>"> ]>
+XML V4.1.2//EN" "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"[ 
+  <!ENTITY copyright SYSTEM "copyright.xml"> 
+  <!ENTITY GPL SYSTEM "GPL.xml">
+  <!ENTITY appversion "4.0"> 
+  <!ENTITY manrevision "0.1"> 
+  <!ENTITY date "February 2003"> 
+  <!ENTITY app "<application>xfce4-panel</application>"> 
+]>
 
 <article id="index" lang="en">
 
@@ -46,12 +48,13 @@ copyright SYSTEM "copyright.xml"> <!ENTITY GPL SYSTEM "GPL.xml">
 maintainers, etc. Commented out by default.
      
     <othercredit role="translator">
-	      <firstname>Latin</firstname> <surname>Translator
-	      1</surname> <affiliation> <orgname>Latin Translation
-	      Team</orgname> <address>
-	      <email>translator@gnome.org</email> </address>
-	      </affiliation>
-	      <contrib>Latin translation</contrib>
+      <firstname>Latin</firstname> 
+      <surname>Translator 1</surname> 
+      <affiliation> 
+        <orgname>Latin Translation Team</orgname> 
+        <address><email>translator@gnome.org</email> </address>
+      </affiliation>
+      <contrib>Latin translation</contrib>
     </othercredit>
 -->
       
@@ -64,8 +67,8 @@ maintainers, etc. Commented out by default.
     </revision>
   </revhistory>
 
-  <releaseinfo>This manual describes &app; version
-  &appversion;</releaseinfo>
+  <releaseinfo>This manual describes &app; version &appversion;
+  </releaseinfo>
   
 </articleinfo>
 
@@ -80,54 +83,8 @@ maintainers, etc. Commented out by default.
   <para>XFce is a collection of programs that together provide a
   full-featured desktop environment. It aims to be fast and
   lightweight, while still being visually appealing and easy to
-  use. The following programs are currently part of XFce:</para>
-
-  <variablelist>
-    
-    <varlistentry>
-      <term>Window Manager (<application>xfwm4</application>)</term>
-      <listitem>
-	<para>Handles the placement of windows on the screen and
-	provides decorative borders.</para>
-      </listitem>
-    </varlistentry>
-    
-    <varlistentry>
-      <term>Panel (&app;)</term>
-      <listitem>
-	<para>The program described in this manual.</para>
-      </listitem>
-    </varlistentry>
-    
-    <varlistentry>
-      <term>Desktop Manager
-      (<application>xfdesktop</application>)</term>
-      <listitem>
-	<para>Sets a background color or image and provides a menu
-	when you click on the desktop background.</para>
-      </listitem>
-    </varlistentry>
-    
-    <varlistentry>
-      <term>File Manager (<application>xffm</application>)</term>
-      <listitem>
-	<para>Fast file manager.</para>
-      </listitem>
-    </varlistentry>
-    
-    <varlistentry>
-      <term>Utilities</term>
-      <listitem>
-	<para>Several smaller programs and scripts, for instance a
-	taskbar (<application>xftaskbar4</application>) and a run
-	dialog (<application>xfrun4</application>). </para>
-      </listitem>
-    </varlistentry>
-    
-  </variablelist>
-
-  <para>For more information visit the <ulink
-  url="http://www.xfce.org" type="http">XFce website</ulink>.
+  use. For more information visit the 
+  <ulink url="http://www.xfce.org" type="http">XFce website</ulink>.
   </para>
 
 </sect1>
@@ -135,7 +92,17 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-getting-started">
   <title>Getting Started</title>
 
-  <para>The usual way to run the panel is at the end of your
+  <para>Use <application>startxfce4</application>to start an XFce
+  session, which includes the panel, the window manager and the
+  desktop manager. To customize its behaviour copy the file from
+  <filename>${sysconfdir}/xfce4/xinitrc</filename> to
+  <filename>~/.xfce4/xinitrc</filename> (you may have to create that
+  directory first) and edit that file. If you install from source
+  ${sysconfdir} defaults to <filename>/usr/local/etc</filename>; For
+  binary packages it is often set to
+  <filename>/etc</filename>. </para>
+
+  <para>Another way to run the panel is at the end of your
   <filename>~/.xinitrc</filename> file or
   <filename>~/.xsession</filename> if you use a graphical login
   manager.</para>
@@ -143,7 +110,7 @@ maintainers, etc. Commented out by default.
   <para>Here is an example of such a file, also using other components
   of the XFce Desktop Environment:</para>
 
-  <programlisting>
+<programlisting>
 # window manager (go to background after initialization) 
 xfwm4 --daemon
 
@@ -156,7 +123,7 @@ xfdesktop &amp;
 # finally, run the panel You can exit your session by choosing exit
 # from the panel 
 exec xfce4-panel
-  </programlisting>
+</programlisting>
 
   <para>To find out how to obtain all these programs visit the <ulink
   url="http://www.xfce.org" type="http">XFce website</ulink>.
@@ -185,7 +152,7 @@ exec xfce4-panel
 	<textobject>
 	  <phrase>Shows XFce panel default configuration. Contains
 	  several launchers, a new mail monitor, a clock and a desktop
-	  switcher.  Also shows an opened subpanel.</phrase>
+	  pager.  Also shows an opened subpanel.</phrase>
 	</textobject>
       </mediaobject>
     </screenshot>
@@ -325,6 +292,13 @@ exec xfce4-panel
 
     <sect3 id="switcher-item">
       <title>Desktop switcher</title>
+
+      <para></para>
+
+    </sect3>
+
+    <sect3 id="pager-item">
+      <title>Graphical pager</title>
 
       <para></para>
 

@@ -1,7 +1,7 @@
 plugindir = $(pkglibdir)/plugins
 
 plugin_LTLIBRARIES = libswitcher.la
-libswitcher_la_LDFLAGS = "-module"
+libswitcher_la_LDFLAGS = "-module -avoid-version"
 
 libswitcher_la_SOURCES = \
 switcher.c

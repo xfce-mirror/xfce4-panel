@@ -1,7 +1,7 @@
 plugindir = $(pkglibdir)/plugins
 
 plugin_LTLIBRARIES = libmailcheck.la
-libmailcheck_la_LDFLAGS = "-module"
+libmailcheck_la_LDFLAGS = "-module -avoid-version"
 
 libmailcheck_la_SOURCES = \
 mailcheck.c

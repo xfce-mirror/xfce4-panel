@@ -1,7 +1,7 @@
 plugindir = $(pkglibdir)/plugins
 
 plugin_LTLIBRARIES = libsystembuttons.la
-libsystembuttons_la_LDFLAGS = "-module"
+libsystembuttons_la_LDFLAGS = "-module -avoid-version"
 
 libsystembuttons_la_SOURCES = \
 systembuttons.c

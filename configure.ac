@@ -104,6 +104,7 @@ plugins/mailcheck/Makefile
 plugins/clock/Makefile
 plugins/switcher/Makefile
 plugins/systembuttons/Makefile
+plugins/pager/Makefile
 settings/Makefile
 themes/Makefile
 themes/Crystal/Makefile

@@ -1,7 +1,7 @@
 plugindir = $(pkglibdir)/plugins
 
 plugin_LTLIBRARIES = libclock.la
-libclock_la_LDFLAGS = "-module"
+libclock_la_LDFLAGS = "-module -avoid-version"
 
 libclock_la_SOURCES = \
 clock.c
