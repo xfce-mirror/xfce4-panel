@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.1.99.3])
+AM_INIT_AUTOMAKE([xfce4-panel], [4.2.0])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -42,9 +42,9 @@ dnl Check for X11 installed
 BM_LIBX11_REQUIRE
 
 dnl Check for required packages
-BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.1.99])
-BM_DEPEND([LIBXFCE4UTIL], [libxfce4util-1.0], [4.1.99])
-BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.1.99])
+BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.2.0])
+BM_DEPEND([LIBXFCE4UTIL], [libxfce4util-1.0], [4.2.0])
+BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.2.0])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 
 dnl disable threading, too much trouble for too little gain
@@ -57,7 +57,7 @@ dnl BM_DEPEND_CHECK([LIBDBH], [dbh-1.0], [1.0],
 dnl  [dbh], [DBH library], [yes])
 
 dnl Configure the mcs plugin
-XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.1.99])
+XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.2.0])
 
 dnl Check for optional packages
 BM_DEPEND_CHECK([LIBSTARTUP_NOTIFICATION], [libstartup-notification-1.0],
