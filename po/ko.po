@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-10-29 11:29+0200\n"
-"PO-Revision-Date: 2003-10-13 23:51+0900\n"
+"PO-Revision-Date: 2004-11-24 16:34+0900\n"
 "Last-Translator: ByungHyun Choi<byunghyunchoi@rtlinux.or.kr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,16 +21,15 @@ msgstr "화일선택"
 
 #: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "데이터를 찾지 못했기 때문에 패널에는 아무 것도 보이지 않습니다."
 
 #: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "위치:"
 
 #: panel/controls_dialog.c:155
-#, fuzzy
 msgid "Item properties"
-msgstr "/속성(_P)"
+msgstr "속성"
 
 #: panel/controls_dialog.c:209 panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
@@ -42,7 +41,7 @@ msgstr "명령어 선택"
 
 #: panel/item_dialog.c:264
 msgid "Command:"
-msgstr "명령"
+msgstr "명령:"
 
 #: panel/item_dialog.c:307
 msgid "Run in _terminal"
@@ -78,9 +77,8 @@ msgstr "메뉴 항목 변경"
 
 #. add buttons
 #: panel/item_dialog.c:1200 panel/controls.c:728
-#, fuzzy
 msgid "_Remove"
-msgstr "/삭제(_R)"
+msgstr "삭제(_R)"
 
 #: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
@@ -129,17 +127,15 @@ msgstr ""
 #: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "패널 항목 \"%s\"를(을) 생성하지 못 했습니다."
 
 #: panel/controls.c:723 panel/panel.c:585
-#, fuzzy
 msgid "_Properties..."
-msgstr "/속성(_P)"
+msgstr "속성(_P)"
 
 #: panel/controls.c:737 panel/panel.c:575
-#, fuzzy
 msgid "Add _new item"
-msgstr "/새 항목 추가(_n)"
+msgstr "새 항목 추가(_n)"
 
 #: panel/controls.c:1020
 msgid "This item has no configuration options"
@@ -151,28 +147,24 @@ msgid "Xfce Panel"
 msgstr "XFcae 패널"
 
 #: panel/panel.c:590
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/Xfce에 대하여...(_A)"
+msgstr "Xfce에 대하여...(_A)"
 
 #: panel/panel.c:595
-#, fuzzy
 msgid "_Help"
-msgstr "/도움말(_H)"
+msgstr "도움말(_H)"
 
 #: panel/panel.c:604
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/화면잠금(_L)"
+msgstr "화면잠금(_L)"
 
 #: panel/panel.c:609
 msgid "_Restart"
-msgstr ""
+msgstr "다시 시작(_R)"
 
 #: panel/panel.c:618
-#, fuzzy
 msgid "E_xit"
-msgstr "/종료(_x)"
+msgstr "종료(_x)"
 
 #: panel/icons.c:63
 msgid "Default"
@@ -228,7 +220,7 @@ msgstr "터미널"
 
 #: panel/mcs_client.c:170
 msgid "Settings manager not available"
-msgstr "설정 매니저를 실행시킬 수 없군요."
+msgstr "설정 도구 모음을 실행시킬 수 없군요."
 
 #: panel/popup.c:267
 msgid "Menu"
@@ -248,7 +240,7 @@ msgstr "크게"
 
 #: settings/xfce_settings_dialog.c:100
 msgid "Huge"
-msgstr ""
+msgstr "아주 크게"
 
 #: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
@@ -288,7 +280,7 @@ msgstr "패널 위치:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "항상 위에 보이기:"
 
 #: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
@@ -316,7 +308,7 @@ msgstr "동작"
 #.
 #: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%Y %m %d %A"
 
 #: plugins/clock/clock.c:429
 msgid "Clock type:"
@@ -417,9 +409,8 @@ msgstr "버튼 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
 msgid "_Hide"
-msgstr "/도움말(_H)"
+msgstr "도움말(_H)"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -434,14 +425,12 @@ msgid "Mail box:"
 msgstr "우편함:"
 
 #: plugins/mailcheck/mailcheck.c:824
-#, fuzzy
 msgid "New mail command:"
 msgstr "메일 명령:"
 
 #: plugins/mailcheck/mailcheck.c:838
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "패널의 버튼을 클릭할 때 실행할 명령"
+msgstr "새로운 편지가 왔을 때 실행할 명령"
 
 #: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
@@ -452,79 +441,5 @@ msgid "Interval (sec):"
 msgstr "확인주기(초):"
 
 #: plugins/mailcheck/mailcheck.c:965
-#, fuzzy
 msgid "Mail checker"
 msgstr "메일 확인"
-
-#~ msgid "Remove"
-#~ msgstr "삭제"
-
-#~ msgid "Show two buttons:"
-#~ msgstr "버튼 2개"
-
-#~ msgid "Change item"
-#~ msgstr "아이템 변경"
-
-#, fuzzy
-#~ msgid "Menu:"
-#~ msgstr "메뉴:"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Xfce 패널"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/새 항목 추가(_n)"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/속성(_P)"
-
-#~ msgid ""
-#~ "Removing an item will also remove its popup menu.\n"
-#~ "\n"
-#~ "Do you want to remove the item?"
-#~ msgstr ""
-#~ "아이템을 삭제하시면 해당 팝업 메뉴도 같이 삭제됩니다.\n"
-#~ "\n"
-#~ "그래도 끝까지 아이템을 삭제하시겠습니까?"
-
-#~ msgid "Select icon"
-#~ msgstr "아이콘 선택"
-
-#~ msgid "Icon:"
-#~ msgstr "아이콘:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "아이콘 미리 보기"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "사용하시는 창관리자는 http://www.freedesktop.org에서 규정한 새로운 창관리"
-#~ "자 힌트를 지원하지 않는 것 같습니다.\n"
-#~ "따라서 Xfce의 일부 기능이 원하는 데로 동작하지 않을 수도 있습니다."
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/설정 도구(_S)"
-
-#~ msgid "Tiny"
-#~ msgstr "아주 작게"
-
-#~ msgid "Icon theme:"
-#~ msgstr "아이콘 테마:"
-
-#~ msgid "Panel layer:"
-#~ msgstr "패널 레이어:"
-
-#~ msgid "Normal"
-#~ msgstr "보통"
-
-#~ msgid "Center the panel:"
-#~ msgstr "패널 위치 조정:"
-
-#~ msgid "Set"
-#~ msgstr "설정"
-
-#~ msgid "Position"
-#~ msgstr "위치"
