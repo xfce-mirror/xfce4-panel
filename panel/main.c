@@ -56,7 +56,7 @@
 #include "item_dialog.h"
 #include "popup.h"
 
-/*#define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%d"*/
+#define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%u"
 
 /* signal handling */
 typedef enum
@@ -229,12 +229,11 @@ xfce_panel_is_running (void)
 
     scr = DefaultScreen (gdk_display);
 
-    TRACE ("check for running instance on screen %d", scr);
+    TRACE ("check for running instance on screen %u", scr);
 
     if (!selection_atom)
     {
-/*	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);*/
-	selection_name = g_strdup ("XFCE_PANEL_SELECTION");
+	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);
 	selection_atom = XInternAtom (gdk_display, selection_name, False);
 	g_free (selection_name);
     }
@@ -263,8 +262,7 @@ xfce_panel_set_xselection (void)
 
     if (!selection_atom)
     {
-/*	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);*/
-	selection_name = g_strdup ("XFCE_PANEL_SELECTION");
+	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);
 	selection_atom = XInternAtom (display, selection_name, False);
 	g_free (selection_name);
     }
@@ -346,27 +344,6 @@ main (int argc, char **argv)
 	xfce_panel_set_xselection ();
     }
 
-#if 0
-    {
-	gboolean net_wm_support = FALSE;
-
-	for (i = 0; i < 5; i++)
-	{
-	    if ((net_wm_support = check_net_wm_support ()) == TRUE)
-		break;
-
-	    g_usleep (2000 * 1000);
-	}
-
-	if (!net_wm_support)
-	{
-	    xfce_err (_("Your window manager does not seem to support "
-			"the new window manager hints as defined on "
-			"http://www.freedesktop.org. \n"
-			"Some Xfce features may not work as intended."));
-	}
-    }
-#endif
     client_session = client_session_new (argc, argv, NULL /* data */ ,
 					 SESSION_RESTART_IF_RUNNING, 40);
 

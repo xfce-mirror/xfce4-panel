@@ -67,7 +67,29 @@ get_save_dir (void)
 gchar *
 get_save_file (const gchar * name)
 {
-    return (xfce_get_userfile (name, NULL));
+    int scr;
+    char *file = NULL;
+
+    scr = DefaultScreen (gdk_display);
+
+    if (scr == 0)
+    {
+	file = xfce_get_userfile (name, NULL);
+    }
+    else
+    {
+	char *fmt, *realname;
+
+	fmt = g_strconcat (name, ".%u", NULL);
+	realname = g_strdup_printf (fmt, scr);
+	
+	file = xfce_get_userfile (realname, NULL);
+	
+	g_free (fmt);
+	g_free (realname);
+    }
+
+    return file;
 }
 
 gchar **
