@@ -50,9 +50,11 @@ The panel design is a hierarchy of components:
 Other files:
 - callbacks.c: most callback functions are defined here.
 
-- dialogs.c: convenience dialogs and panel configuration dialogs.
+- dialogs.c: panel configuration dialogs.
 
-- dnd.c: general dnd convenience functions.
+- item_dialog.c: configuration dialog for item/module and menuitem
+
+- xfce_support.c: convenience dialogs and general convenience functions.
 
 - move.c: moveing the panel around.
 

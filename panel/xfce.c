@@ -146,13 +146,13 @@ void xfce_init(void)
 
 void xfce_run(void)
 {
-	init_settings();
+    init_settings();
     panel_init();
     side_panel_init(LEFT);
     central_panel_init();
     side_panel_init(RIGHT);
-	
-	get_panel_config();
+
+    get_panel_config();
 
     create_xfce_panel();
 
@@ -207,6 +207,9 @@ static GtkWidget *create_panel_window(void)
     gtk_window_set_icon(window, pb);
     g_object_unref(pb);
 
+    g_signal_connect(w, "destroy-event", G_CALLBACK(panel_destroy_cb), NULL);
+    g_signal_connect(w, "delete-event", G_CALLBACK(panel_delete_cb), NULL);
+
     return w;
 }
 
@@ -236,12 +239,12 @@ void panel_init(void)
     hbox1 = gtk_hbox_new(FALSE, 0);
     gtk_container_add(GTK_CONTAINER(frame1), hbox1);
     gtk_widget_show(hbox1);
-	
+
     hbox2 = gtk_hbox_new(FALSE, 0);
     gtk_container_add(GTK_CONTAINER(hbox1), hbox2);
     gtk_widget_show(hbox2);
 
-	left_hbox = hbox2;
+    left_hbox = hbox2;
 
     frame2 = gtk_frame_new(NULL);
     gtk_container_add(GTK_CONTAINER(hbox1), frame2);
@@ -253,13 +256,13 @@ void panel_init(void)
     gtk_container_add(GTK_CONTAINER(frame2), hbox3);
     gtk_widget_show(hbox3);
 
-	central_hbox = hbox3;
+    central_hbox = hbox3;
 
     hbox4 = gtk_hbox_new(FALSE, 0);
     gtk_container_add(GTK_CONTAINER(hbox1), hbox4);
     gtk_widget_show(hbox4);
 
-	right_hbox = hbox4;
+    right_hbox = hbox4;
 }
 
 void create_xfce_panel(void)
