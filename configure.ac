@@ -64,9 +64,9 @@ plugins/systembuttons/Makefile
 plugins/pager/Makefile
 settings/Makefile
 themes/Makefile
-themes/Carillon/Makefile
 themes/Crystal/Makefile
 themes/Curve/Makefile
+themes/FreeIcons/Makefile
 themes/Gnome/Makefile
 themes/Noia/Makefile
 themes/XFce/Makefile

@@ -4,5 +4,5 @@ SUBDIRS = 								\
 	Curve 								\
 	Noia 								\
 	Crystal 							\
-	Carillon
+	FreeIcons
 
