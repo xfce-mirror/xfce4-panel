@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "POT-Creation-Date: 2003-12-04 09:37+0100\n"
-"PO-Revision-Date: 2003-08-29 21:17+0800\n"
+"PO-Revision-Date: 2004-04-20 16:21+0800\n"
 "Last-Translator: umm <umm@pchome.com.tw>\n"
-"Language-Team:  <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,11 +21,13 @@ msgstr "選擇檔案"
 msgid "Change item"
 msgstr "改變項目"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:681
+#: panel/controls_dialog.c:286
+#: panel/item_dialog.c:681
 msgid "Position:"
 msgstr "位置："
 
-#: panel/controls_dialog.c:342 panel/controls.c:272
+#: panel/controls_dialog.c:342
+#: panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -55,11 +57,13 @@ msgstr "選擇指令"
 msgid "Command:"
 msgstr "指令："
 
-#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532
+#: plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "在終端機中執行(_T)"
 
-#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537
+#: plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "使用啟動提示(_N)"
 
@@ -129,19 +133,19 @@ msgstr ""
 
 #: panel/main.c:361
 msgid ""
-"Your window manager does not seem to support the new window manager hints as "
-"defined on http://www.freedesktop.org. \n"
+"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
 "Some Xfce features may not work as intended."
 msgstr ""
-"你的視窗管理程式似乎不支援 http://www.freedesktop.org 所定義的視窗管理程式提"
-"示。\n"
+"你的視窗管理程式似乎不支援 http://www.freedesktop.org 所定義的視窗管理程式提示。\n"
 "某些 Xfce 的功能可能無法正常運行。"
 
-#: panel/controls.c:320 panel/panel.c:412
+#: panel/controls.c:320
+#: panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/增加新項目(_N)"
 
-#: panel/controls.c:322 panel/panel.c:414
+#: panel/controls.c:322
+#: panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/屬性(_P)..."
 
@@ -175,13 +179,14 @@ msgstr "/鎖住螢幕(_L)"
 
 #: panel/panel.c:423
 msgid "/_Restart"
-msgstr ""
+msgstr "重置(_R)"
 
 #: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/離開(_X)"
 
-#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812
+#: settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "Xfce Panel"
 msgstr "Xfce 面板"
@@ -270,20 +275,24 @@ msgstr "水平"
 msgid "Vertical"
 msgstr "垂直"
 
-#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
+#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:456
 msgid "Left"
 msgstr "左側"
 
-#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
+#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:457
 msgid "Right"
 msgstr "右側"
 
-#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:455
 #: settings/xfce_settings_dialog.c:511
 msgid "Top"
 msgstr "頂部"
 
-#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:238
+#: settings/xfce_settings_dialog.c:454
 #: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
 msgstr "底部"
@@ -343,14 +352,13 @@ msgstr "位置"
 msgid "Behaviour"
 msgstr "特性"
 
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %-d : day of the month, without prefixed 0
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
+#  Use format characters from strftime(3)
+#  * to get the proper string for your locale.
+#  * I used these:
+#  * %A  : full weekday name
+#  * %-d : day of the month, without prefixed 0
+#  * %B  : full month name
+#  * %Y  : four digit year
 #: plugins/clock/clock.c:119
 msgid "%A, %-d %B %Y"
 msgstr ""
@@ -436,7 +444,7 @@ msgstr "資訊"
 msgid "Show two buttons:"
 msgstr "顯示兩個按鈕："
 
-#. set names to use in option menus
+#  set names to use in option menus
 #: plugins/systembuttons/systembuttons.c:517
 msgid "Lock"
 msgstr "鎖住"
@@ -477,59 +485,3 @@ msgstr "間隔（秒）："
 msgid "Mail check"
 msgstr "檢查郵件"
 
-#~ msgid "Sunday"
-#~ msgstr "星期日"
-
-#~ msgid "Monday"
-#~ msgstr "星期一"
-
-#~ msgid "Tuesday"
-#~ msgstr "星期二"
-
-#~ msgid "Wednesday"
-#~ msgstr "星期三"
-
-#~ msgid "Thursday"
-#~ msgstr "星期四"
-
-#~ msgid "Friday"
-#~ msgstr "星期五"
-
-#~ msgid "Saturday"
-#~ msgstr "星期六"
-
-#~ msgid "January"
-#~ msgstr "一月"
-
-#~ msgid "February"
-#~ msgstr "二月"
-
-#~ msgid "March"
-#~ msgstr "三月"
-
-#~ msgid "April"
-#~ msgstr "四月"
-
-#~ msgid "May"
-#~ msgstr "五月"
-
-#~ msgid "June"
-#~ msgstr "六月"
-
-#~ msgid "July"
-#~ msgstr "七月"
-
-#~ msgid "August"
-#~ msgstr "八月"
-
-#~ msgid "September"
-#~ msgstr "九月"
-
-#~ msgid "October"
-#~ msgstr "十月"
-
-#~ msgid "November"
-#~ msgstr "十一月"
-
-#~ msgid "December"
-#~ msgstr "十二月"
