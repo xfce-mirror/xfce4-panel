@@ -45,8 +45,8 @@
 #include "settings.h"
 #include "mcs_client.h"
 
-#define HIDE_TIMEOUT   2000
-#define UNHIDE_TIMEOUT  200
+#define HIDE_TIMEOUT   500
+#define UNHIDE_TIMEOUT 100
 #define HIDDEN_SIZE 5
 
 /* globals */
