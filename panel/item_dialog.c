@@ -965,6 +965,7 @@ static void reindex_items(GList *items)
 void edit_menu_item_dialog(MenuItem * mi)
 {
     GtkWidget *dlg;
+    PanelPopup *pp = mi->parent;
 
     mitem = mi;
     pitem = NULL;
@@ -991,8 +992,6 @@ void edit_menu_item_dialog(MenuItem * mi)
          * with removal */
         if(response == RESPONSE_REMOVE)
         {
-            PanelPopup *pp = mi->parent;
-
             gtk_container_remove(GTK_CONTAINER(pp->item_vbox), mi->button);
             pp->items = g_list_remove(pp->items, mi);
             menu_item_free(mi);
