@@ -313,16 +313,27 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
     }
     else
     {
-        if(pos % 2 == 0 || settings.size <= SMALL)
+        if(settings.size <= SMALL)
 	{
             gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1,
                              GTK_EXPAND, GTK_EXPAND, 1, 1);
 	}
-        else
+        else 
 	{
-	    pos = (pos - 1)/2;
-            gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 1, 2,
-                             GTK_EXPAND, GTK_EXPAND, 1, 1);
+	    if (pos % 2 == 0)
+	    {
+		pos = pos / 2;
+		gtk_table_attach(GTK_TABLE(table), sb->frame, 
+				 pos, pos + 1, 0, 1,
+				 GTK_EXPAND, GTK_EXPAND, 1, 1);
+	    }
+	    else
+	    {
+		pos = (pos - 1)/2;
+		gtk_table_attach(GTK_TABLE(table), sb->frame, 
+				 pos, pos + 1, 1, 2,
+				 GTK_EXPAND, GTK_EXPAND, 1, 1);
+	    }
 	}
     }
 }
