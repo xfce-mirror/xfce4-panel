@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.1.99.3])
+AM_INIT_AUTOMAKE([xfce4-panel], [4.2.1.1])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -34,17 +34,17 @@ AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h netinet/in.h])
 AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support
-BM_I18N([xfce4-panel], [ar az be bg ca cs de en_GB es es_MX et eu fa fr fi
-		        gu he hi hu it ja lt ms nl ko nb_NO pa pl pt_BR	
-			pt_PT ro ru sv sk ta tr vi zh_CN zh_TW])
+BM_I18N([xfce4-panel], [ar az be bg ca cs da de en_GB es es_MX et eu fa fr fi \
+                        gu he hi hu it ja lt ms nl ko nb_NO pa pl pt_BR	\
+                        pt_PT ro ru sv sk ta tr vi zh_CN zh_TW])
 
 dnl Check for X11 installed
 BM_LIBX11_REQUIRE
 
 dnl Check for required packages
-BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.1.99])
-BM_DEPEND([LIBXFCE4UTIL], [libxfce4util-1.0], [4.1.99])
-BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.1.99])
+BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.2.0])
+BM_DEPEND([LIBXFCE4UTIL], [libxfce4util-1.0], [4.2.0])
+BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.2.0])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 
 dnl disable threading, too much trouble for too little gain
@@ -57,7 +57,7 @@ dnl BM_DEPEND_CHECK([LIBDBH], [dbh-1.0], [1.0],
 dnl  [dbh], [DBH library], [yes])
 
 dnl Configure the mcs plugin
-XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.1.99])
+XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.2.0])
 
 dnl Check for optional packages
 BM_DEPEND_CHECK([LIBSTARTUP_NOTIFICATION], [libstartup-notification-1.0],
@@ -72,10 +72,6 @@ Makefile
 doc/Makefile
 doc/C/Makefile
 doc/C/images/Makefile
-doc/fr/Makefile
-doc/fr/images/Makefile
-doc/it/Makefile
-doc/it/images/Makefile
 po/Makefile.in
 icons/Makefile
 panel/Makefile

@@ -2,8 +2,8 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY manrevision "1.2"> 
-  <!ENTITY date "November 2004"> 
-  <!ENTITY appversion "4.2"> 
+  <!ENTITY date "Jan 2005"> 
+  <!ENTITY appversion "4.2.0"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
 
@@ -368,11 +368,9 @@ maintainers, etc. Commented out by default.
     <title>Mail checker</title>
 
     <para>The mail checker monitors a mailbox for incoming mail. The
-      mailbox can be in mbox or Maildir format. For advanced usage you can
-      also provide a remote POP3 mailbox if you use the following format for
-      the mailbox entry: <option>pop3://user:password@server</option>.
+      mailbox can be in mbox or Maildir format.
     </para>
-
+    
     <para>The mailbox icon will follow
       your icon theme. You can choose the location of the mailbox, the
       command to run when you click on the button and the interval between
@@ -402,6 +400,16 @@ maintainers, etc. Commented out by default.
       </screenshot>
     </figure>
 
+    <para>For advanced usage you can also provide a remote POP3 mailbox if 
+      you use the following format for the mailbox entry: 
+      <option>pop3://user:password@server:port</option>. If you omit the port
+      it will default to 110.
+    </para>
+    
+    <para>Note that this feature is still experimental. Before using it, make 
+      sure you have a good network connection, because when the mail check 
+      fails it can block the panel.
+    </para>
 
   </sect2>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Xfce>
-  <Panel orientation="0" size="1" popupposition="1">
+  <Panel orientation="0" layer="0" size="1" popupposition="1" icontheme="Curve" groups="15">
   </Panel>
   <Groups>
     <Group>
@@ -14,35 +14,29 @@
     <Group>
       <Popup>
         <Item>
-          <Caption>Appfinder</Caption>
-          <Command term="0" sn="1">xfce4-appfinder</Command>
-          <Tooltip>Căutare şi pornire aplicaţii</Tooltip>
-          <Icon id="3"/>
-        </Item>
-        <Item>
           <Caption>Konqueror</Caption>
           <Command term="0" sn="0">konqueror</Command>
-          <Tooltip>Administratorul de fişiere Konqueror</Tooltip>
+          <Tooltip>Konqueror File Manager</Tooltip>
           <Icon id="2"/>
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
           <Command term="0" sn="0">nautilus --no-desktop</Command>
-          <Tooltip>Administratorul de fişiere Nautlius</Tooltip>
+          <Tooltip>Nautilus File Manager</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xffm</Command>
-        <Tooltip>Administrator fişiere</Tooltip>
+        <Tooltip>File manager</Tooltip>
         <Icon id="2"/>
       </Control>
     </Group>
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">mozilla -splash</Command>
-        <Tooltip>Navigatorul Mozilla</Tooltip>
+        <Command term="0" sn="0">mozilla</Command>
+        <Tooltip>Mozilla Web Browser</Tooltip>
         <Icon id="7"/>
       </Control>
     </Group>
@@ -50,7 +44,7 @@
       <Popup/>
       <Control id="-1" filename="libmailcheck.so">
         <Mailcheck interval="30">
-          <Command term="0" sn="0">mozilla -mail -splash</Command>
+          <Command term="0" sn="0">mozilla -mail</Command>
         </Mailcheck>
       </Control>
     </Group>
@@ -58,7 +52,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xmms</Command>
-        <Tooltip>Redare audio</Tooltip>
+        <Tooltip>Music player</Tooltip>
         <Icon id="6"/>
       </Control>
     </Group>
@@ -75,24 +69,32 @@
       <Control id="-1" filename="libseparator.so"/>
     </Group>
     <Group>
-      <Control id="-2" popup="0">
+      <Popup>
+        <Item>
+          <Caption>Screensaver</Caption>
+          <Command term="0" sn="1">xscreensaver-demo</Command>
+          <Tooltip>Screensaver</Tooltip>
+          <Icon id="3"/>
+        </Item>
+      </Popup>
+      <Control id="-2" popup="1">
         <Command term="0" sn="0">xfce-setting-show</Command>
-        <Tooltip>Setări</Tooltip>
+        <Tooltip>Settings</Tooltip>
         <Icon id="3"/>
       </Control>
     </Group>
     <Group>
       <Popup>
         <Item>
-          <Caption>Administrare imprimantă</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
-          <Tooltip>Administrare imprimantă</Tooltip>
+          <Caption>Printer Management</Caption>
+          <Command term="0" sn="1">xfprint-manager</Command>
+          <Tooltip>Printer Management</Tooltip>
           <Icon id="9"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xfprint4</Command>
-        <Tooltip>Trageţi aici un fişier pentru tipărire</Tooltip>
+        <Tooltip>Drag file to print</Tooltip>
         <Icon id="9"/>
       </Control>
     </Group>

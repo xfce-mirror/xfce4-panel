@@ -238,7 +238,7 @@ old_xml_read_options (const char *path)
     GMarkupParser *parser;
     GMarkupParseContext *context;
     char *contents;
-    int len;
+    gsize len;
     GError *error = NULL;
 
     if (!g_file_get_contents (path, &contents, &len, &error))
