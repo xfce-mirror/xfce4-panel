@@ -1,3 +1,36 @@
+2002-12-23 10:16  huysmans
+
+	* Makefile.am, Makefile.in, configure, configure.ac,
+	icons/Makefile.in, panel/Makefile.am, panel/Makefile.in,
+	panel/callbacks.c, panel/dialogs.c, panel/dialogs.h,
+	panel/handle.c, panel/main.c, panel/panel.c, panel/settings.c,
+	plugins/Makefile.in, plugins/clock/Makefile.am,
+	plugins/clock/Makefile.in, plugins/clock/clock.c,
+	plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
+	plugins/mailcheck/mailcheck.c, plugins/switcher/Makefile.am,
+	plugins/switcher/Makefile.in, plugins/switcher/switcher.c,
+	plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in,
+	plugins/systembuttons/systembuttons.c, plugins/trash/Makefile.am,
+	plugins/trash/Makefile.in, settings/Makefile.am,
+	settings/Makefile.in, settings/xfce_settings.h,
+	settings/xfce_settings_dialog.c, settings/xfce_settings_dialog.h,
+	settings/xfce_settings_plugin.c, settings/xfce_settings_plugin.h,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add settings
+	manager plugin and make the panel a settings client. Cool stuff :)
+
+2002-12-20 13:12  huysmans
+
+	* panel/: controls.c, controls.h, controls_dialog.c, panel.c,
+	settings.c: Fix bug with controls dialog. Thanks to Korbinus for
+	reporting it.
+
+2002-12-17 19:07  huysmans
+
+	* ChangeLog, README, TODO: Update README and TODO file
+
 2002-12-17 17:03  huysmans
 
 	* plugins/: mailcheck/mailcheck.c, switcher/switcher.c,
