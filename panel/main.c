@@ -57,6 +57,8 @@
 #include "item_dialog.h"
 #include "popup.h"
 
+#define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%d"
+
 /* signal handling */
 typedef enum
 {
@@ -138,8 +140,8 @@ quit (gboolean force)
     }
 }
 
-/*  Main program
- *  ------------
+/*  Signals
+ *  -------
 */
 static gboolean
 check_signal_state (void)
@@ -199,6 +201,98 @@ sighandler (int sig)
     }
 }
 
+/*  Uniqueness
+ *  ----------
+*/
+static Atom selection_atom = 0;
+static Atom manager_atom = 0;
+static Window selection_window = 0;
+
+static gboolean
+xfce_panel_is_running (void)
+{
+    char *selection_name;
+    int scr;
+
+    scr = DefaultScreen (gdk_display);
+
+    TRACE ("check for running instance on screen %d", scr);
+
+    if (!selection_atom)
+    {
+	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);
+	selection_atom = XInternAtom (gdk_display, selection_name, False);
+	g_free (selection_name);
+    }
+
+    if (XGetSelectionOwner (gdk_display, selection_atom))
+	return TRUE;
+
+    return FALSE;
+}
+
+static void
+xfce_panel_set_xselection (void)
+{
+    Display *display;
+    int scr;
+    char *selection_name;
+    GtkWidget *invisible;
+
+    TRACE ("claiming xfdesktop manager selection for screen %d", scr);
+
+    display = GDK_DISPLAY ();
+    scr = DefaultScreen (display);
+    
+    invisible = gtk_invisible_new ();
+    gtk_widget_realize (invisible);
+
+    if (!selection_atom)
+    {
+	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);
+	selection_atom = XInternAtom (gdk_display, selection_name, False);
+	g_free (selection_name);
+    }
+
+    if (!manager_atom)
+	manager_atom = XInternAtom (gdk_display, "MANAGER", False);
+
+    selection_window = GDK_WINDOW_XWINDOW (invisible->window);
+
+    XSelectInput (display, selection_window, PropertyChangeMask);
+    XSetSelectionOwner (display, selection_atom,
+			selection_window, GDK_CURRENT_TIME);
+
+    /* Check to see if we managed to claim the selection. If not,
+     * we treat it as if we got it then immediately lost it
+     */
+    if (XGetSelectionOwner (display, selection_atom) == selection_window)
+    {
+	XClientMessageEvent xev;
+
+	xev.type = ClientMessage;
+	xev.window = GDK_ROOT_WINDOW ();
+	xev.message_type = manager_atom;
+	xev.format = 32;
+	xev.data.l[0] = GDK_CURRENT_TIME;
+	xev.data.l[1] = selection_atom;
+	xev.data.l[2] = selection_window;
+	xev.data.l[3] = 0;	/* manager specific data */
+	xev.data.l[4] = 0;	/* manager specific data */
+
+	XSendEvent (display, RootWindow (display, scr), False,
+		    StructureNotifyMask, (XEvent *) & xev);
+    }
+    else
+    {
+	g_warning ("%s could not set selection ownership", PACKAGE);
+	exit (1);
+    }
+}
+
+/*  Main program
+ *  ------------
+*/
 int
 main (int argc, char **argv)
 {
@@ -208,23 +302,8 @@ main (int argc, char **argv)
     gboolean net_wm_support;
     int i;
 
-    progname = argv[0];
-    
-    net_wm_support = FALSE;
-
-#if 0
-#ifdef ENABLE_NLS
-    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-#endif
-    textdomain (GETTEXT_PACKAGE);
-#endif
-#else
     xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
-#endif
 
-    gtk_set_locale ();
     gtk_init (&argc, &argv);
 
     if (argc == 2 &&
@@ -236,6 +315,20 @@ main (int argc, char **argv)
 		   "http://www.xfce.org\n"), PACKAGE, VERSION);
 	return 0;
     }
+
+    progname = argv[0];
+    
+    if (xfce_panel_is_running())
+    {
+	g_message ("%s is already running", PACKAGE);
+	return 0;
+    }
+    else
+    {
+	xfce_panel_set_xselection ();
+    }
+    
+    net_wm_support = FALSE;
 
     for (i = 0; i < 5; i++)
     {
