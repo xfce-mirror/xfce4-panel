@@ -199,7 +199,6 @@ static void
 systembuttons_change_type (t_systembuttons * sb, int n, int type)
 {
     GtkWidget *button;
-    GList *li;
 
     sb->button_types[n] = type;
 
@@ -215,8 +214,6 @@ systembuttons_change_type (t_systembuttons * sb, int n, int type)
 static void
 arrange_systembuttons (t_systembuttons * sb, int orientation)
 {
-    GtkWidget *align;
-    int spacing;
 
     if (sb->box)
     {
@@ -259,7 +256,6 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 static t_systembuttons *
 systembuttons_new (void)
 {
-    GtkWidget *button;
     t_systembuttons *sb = g_new0 (t_systembuttons, 1);
 
     sb->show_two = TRUE;
@@ -295,7 +291,6 @@ systembuttons_attach_callback (Control * control, const char *signal,
 {
     t_systembuttons *sb = (t_systembuttons *) control->data;
     SignalCallback *cb;
-    GtkWidget *button;
 
     cb = g_new0 (SignalCallback, 1);
     cb->signal = signal;
