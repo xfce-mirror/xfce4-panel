@@ -88,6 +88,8 @@ void quit(gboolean force)
     if (!disable_user_config)
 	write_panel_config();
 
+    panel_cleanup();
+    
     if (gtk_main_level())
 	gtk_main_quit();
 
@@ -96,6 +98,10 @@ void quit(gboolean force)
 
 void restart(void)
 {
+    if (!disable_user_config)
+	write_panel_config();
+
+    panel_cleanup();
     gtk_widget_destroy(toplevel);
 
     if (gtk_main_level())

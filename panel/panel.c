@@ -67,14 +67,6 @@ static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev,
     return TRUE;
 }
 
-static gboolean panel_destroy_cb(GtkWidget * frame, GdkEvent * ev, 
-				      gpointer data)
-{
-    groups_cleanup();
-
-    return TRUE;
-}
-
 /*  creation and destruction  */
 static GtkWidget *create_panel_window(void)
 {
@@ -91,7 +83,6 @@ static GtkWidget *create_panel_window(void)
     gtk_window_set_icon(window, pb);
     g_object_unref(pb);
 
-    g_signal_connect(w, "destroy-event", G_CALLBACK(panel_destroy_cb), NULL);
     g_signal_connect(w, "delete-event", G_CALLBACK(panel_delete_cb), NULL);
 
     return w;
@@ -158,8 +149,7 @@ static void create_panel_framework(void)
 
 void panel_cleanup(void)
 {
-    if(toplevel)
-        gtk_widget_destroy(toplevel);
+    groups_cleanup();
 }
 
 static void init_settings();

@@ -24,6 +24,7 @@
 
 /* panel functions */
 void create_panel(void);
+void panel_cleanup(void);
 void panel_add_control(void);
 
 /* apply panel settings */
