@@ -1,3 +1,22 @@
+2003-08-03 20:37  bmeurer
+
+	* m4/X11.m4: grep -q does not work with Solaris grep, fixed it.
+
+2003-07-31 09:31  huysmans
+
+	* xfce4rc: most people will not have their mail in
+	/var/spool/ofourdan ;-)
+
+2003-07-31 08:30  huysmans
+
+	* panel/: controls_dialog.c, controls_dialog.h, item_dialog.c,
+	item_dialog.h, main.c: Fix SIGUSR1 handling when there are open
+	dialogs
+
+2003-07-30 13:31  huysmans
+
+	* ChangeLog: Update changlogs
+
 2003-07-30 10:05  huysmans
 
 	* config.h.in, configure, configure.ac, po/ca.gmo, po/ca.po,
