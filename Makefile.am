@@ -2,9 +2,9 @@
 
 
 EXTRA_DIST = 								\
-	xml-i18n-extract.in						\
-	xml-i18n-merge.in						\
-	xml-i18n-update.in						\
+	intltool-extract.in						\
+	intltool-merge.in						\
+	intltool-update.in						\
 	AUTHORS								\
 	COPYING								\
 	ChangeLog							\
@@ -30,9 +30,9 @@ SUBDIRS =								\
 	plugins
 
 DISTCLEANFILES =							\
-	xml-i18n-extract						\
-	xml-i18n-merge							\
-	xml-i18n-update							\
+	intltool-extract						\
+	intltool-merge							\
+	intltool-update							\
 	xfce4-panel.spec
 	
 distclean-local:
