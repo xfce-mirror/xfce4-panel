@@ -100,7 +100,6 @@ typedef struct
     GtkWidget *twentyfour_rb;
     GtkWidget *twelve_rb;
     GtkWidget *ampm_rb;
-    GSList *mode_radiogroup; 
 
     GtkWidget *seconds_cb;
 }
@@ -303,11 +302,15 @@ static void clock_type_changed(GtkOptionMenu * om, ClockDialog *cd)
 
     if (xclock->mode == XFCE_CLOCK_ANALOG)
     {
-	g_slist_foreach(cd->mode_radiogroup, (GFunc)make_insensitive, NULL);
+	make_insensitive(cd->twentyfour_rb);
+	make_insensitive(cd->twelve_rb);
+	make_insensitive(cd->ampm_rb);
     }
     else
     {
-	g_slist_foreach(cd->mode_radiogroup, (GFunc)make_sensitive, NULL);
+	make_sensitive(cd->twentyfour_rb);
+	make_sensitive(cd->twelve_rb);
+	make_sensitive(cd->ampm_rb);
     }
     
     gtk_widget_set_sensitive(cd->revert, TRUE );
@@ -349,7 +352,7 @@ static void add_type_box(GtkWidget *vbox, GtkSizeGroup *sg, ClockDialog *cd)
     gtk_option_menu_set_history(GTK_OPTION_MENU(om),
                                 XFCE_CLOCK(cd->clock->clock)->mode);
 
-    g_signal_connect(om, "changed", G_CALLBACK(clock_type_changed), clock);
+    g_signal_connect(om, "changed", G_CALLBACK(clock_type_changed), cd);
 }
 
 /* hour mode */
@@ -427,8 +430,6 @@ static void add_hour_mode_box(GtkWidget *vbox, GtkSizeGroup *sg,
     gtk_widget_show(rb3);
     gtk_box_pack_start(GTK_BOX(hbox), rb3, FALSE, FALSE, 0);
     
-    cd->mode_radiogroup = gtk_radio_button_get_group(GTK_RADIO_BUTTON(rb1));
-
     xclock = XFCE_CLOCK(cd->clock->clock);
 
     if (xclock->military_time)
