@@ -157,10 +157,7 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
-pkginfodir = $(pkgdatadir)
 confdir = $(sysconfdir)/xfce4
-
-pkginfo_DATA = AUTHORS COPYING ChangeLog
 
 conf_DATA = xfce4rc
 
@@ -173,7 +170,7 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES = xfce4.spec
 DIST_SOURCES =
-DATA = $(conf_DATA) $(pkginfo_DATA)
+DATA = $(conf_DATA)
 
 
 RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
@@ -252,24 +249,6 @@ uninstall-confDATA:
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
 	  echo " rm -f $(DESTDIR)$(confdir)/$$f"; \
 	  rm -f $(DESTDIR)$(confdir)/$$f; \
-	done
-pkginfoDATA_INSTALL = $(INSTALL_DATA)
-install-pkginfoDATA: $(pkginfo_DATA)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(pkginfodir)
-	@list='$(pkginfo_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(pkginfoDATA_INSTALL) $$d$$p $(DESTDIR)$(pkginfodir)/$$f"; \
-	  $(pkginfoDATA_INSTALL) $$d$$p $(DESTDIR)$(pkginfodir)/$$f; \
-	done
-
-uninstall-pkginfoDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(pkginfo_DATA)'; for p in $$list; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(pkginfodir)/$$f"; \
-	  rm -f $(DESTDIR)$(pkginfodir)/$$f; \
 	done
 
 # This directory's subdirectories are mostly independent; you can cd
@@ -520,7 +499,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	$(mkinstalldirs) $(DESTDIR)$(confdir) $(DESTDIR)$(pkginfodir)
+	$(mkinstalldirs) $(DESTDIR)$(confdir)
 
 install: install-recursive
 install-exec: install-exec-recursive
@@ -563,7 +542,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-confDATA install-pkginfoDATA
+install-data-am: install-confDATA
 
 install-exec-am:
 
@@ -590,7 +569,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-confDATA uninstall-info-am uninstall-pkginfoDATA
+uninstall-am: uninstall-confDATA uninstall-info-am
 
 uninstall-info: uninstall-info-recursive
 
@@ -604,16 +583,14 @@ uninstall-info: uninstall-info-recursive
 	install-confDATA install-data install-data-am \
 	install-data-recursive install-exec install-exec-am \
 	install-exec-recursive install-info install-info-am \
-	install-info-recursive install-man install-pkginfoDATA \
-	install-recursive install-strip installcheck installcheck-am \
-	installdirs installdirs-am installdirs-recursive \
-	maintainer-clean maintainer-clean-generic \
-	maintainer-clean-recursive mostlyclean mostlyclean-generic \
-	mostlyclean-libtool mostlyclean-recursive pdf pdf-am \
-	pdf-recursive ps ps-am ps-recursive tags tags-recursive \
-	uninstall uninstall-am uninstall-confDATA uninstall-info-am \
-	uninstall-info-recursive uninstall-pkginfoDATA \
-	uninstall-recursive
+	install-info-recursive install-man install-recursive \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am installdirs-recursive maintainer-clean \
+	maintainer-clean-generic maintainer-clean-recursive mostlyclean \
+	mostlyclean-generic mostlyclean-libtool mostlyclean-recursive \
+	pdf pdf-am pdf-recursive ps ps-am ps-recursive tags \
+	tags-recursive uninstall uninstall-am uninstall-confDATA \
+	uninstall-info-am uninstall-info-recursive uninstall-recursive
 
 @SET_MAKE@
 

@@ -28,7 +28,6 @@
 #include "controls.h"
 #include "controls_dialog.h"
 #include "popup.h"
-#include "info.h"
 #include "settings.h"
 #include "mcs_client.h"
 
@@ -100,12 +99,12 @@ static void exit_panel(void)
 
 static void do_info(void)
 {
-   info_panel_dialog(); 
+    exec_cmd("xfce4-about", FALSE, FALSE);
 }
 
 static void do_help(void)
 {
-    exec_cmd("xfhelp", FALSE, FALSE);
+    exec_cmd("xfhelp4", FALSE, FALSE);
 }
 
 static GtkItemFactoryEntry panel_items[] = {

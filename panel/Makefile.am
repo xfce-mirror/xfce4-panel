@@ -9,8 +9,6 @@ groups.c \
 groups.h \
 icons.c \
 icons.h \
-info.c \
-info.h \
 item.c \
 item.h \
 item_dialog.c \

@@ -1,12 +1,8 @@
 @SET_MAKE@
 
-pkginfodir=$(pkgdatadir)
 confdir=$(sysconfdir)/xfce4
 
-pkginfo_DATA = AUTHORS COPYING ChangeLog
-
 conf_DATA = xfce4rc
-
 
 EXTRA_DIST = example.xfce4rc.in xfce4.spec xfce4.spec.in autogen.sh
 

@@ -37,11 +37,9 @@ static void mini_lock_cb(void)
     exec_cmd("xflock", FALSE, FALSE);
 }
 
-extern void info_panel_dialog(void);
-
 static void mini_info_cb(void)
 {
-    info_panel_dialog();
+    exec_cmd("xfce4-about", FALSE, FALSE);
 }
 
 static void mini_palet_cb(void)
