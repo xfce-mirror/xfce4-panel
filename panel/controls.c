@@ -257,14 +257,22 @@ GSList *get_control_class_list(void)
 */
 static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *control)
 {
-    if(ev->button != 3 || disable_user_config)
+    if (disable_user_config)
+	return FALSE;
+    
+    if(ev->button == 3 || 
+	    (ev->button == 1 && (ev->state & GDK_SHIFT_MASK)))
+    {
+	hide_current_popup_menu();
+
+	controls_dialog(control);
+
+	return TRUE;
+    }
+    else
+    {
         return FALSE;
-
-    hide_current_popup_menu();
-
-    controls_dialog(control);
-
-    return TRUE;
+    }
 }
 
 static gboolean create_plugin(Control *control, const char *filename)

@@ -176,9 +176,11 @@ static gboolean handler_pressed_cb(GtkWidget *h, GdkEventButton *event,
 {
     hide_current_popup_menu();
 
-    if (event->button == 3)
+    if (event->button == 3 || 
+	    (event->button == 1 && event->state & GDK_SHIFT_MASK ))
     {
 	gtk_menu_popup(menu, NULL, NULL, NULL, NULL, event->button, event->time); 
+	return TRUE;
     }
     
     /* let default handler run */

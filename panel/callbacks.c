@@ -338,15 +338,20 @@ void addtomenu_item_click_cb(GtkButton * b, PanelPopup * pp)
 
 gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi)
 {
-    if(ev->button != 3)
-        return FALSE;
-
     if(disable_user_config)
         return FALSE;
 
-    edit_menu_item_dialog(mi);
+    if(ev->button != 3 || 
+	    (ev->button == 1 && (ev->state & GDK_SHIFT_MASK)))
+    {
+	edit_menu_item_dialog(mi);
 
-    return TRUE;
+	return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
 }
 
 void
