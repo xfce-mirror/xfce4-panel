@@ -256,6 +256,7 @@ void panel_set_orientation(int orientation)
     central_panel_init(GTK_BOX(central_box));
 
     panel_set_position();
+    panel_set_current(current_screen);
 }
 
 void panel_set_on_top(gboolean on_top)
@@ -372,6 +373,21 @@ void panel_set_show_minibuttons(gboolean show)
 
 void panel_set_current(int n)
 {
+    static gboolean need_init = TRUE;
+
+    if (need_init)
+    {
+	/* force creation of _NET_CURRENT_DESKTOP hint */
+	if (n == 0)
+	{
+	    request_net_current_desktop(1);
+
+	    request_net_current_desktop(0);
+	}
+
+	need_init = FALSE;
+    }
+    
     current_screen = n;
     central_panel_set_current(n);
 }
@@ -404,12 +420,12 @@ void init_settings(void)
 
     settings.lock_command = NULL;
     settings.exit_command = NULL;
+    
+    current_screen = get_net_current_desktop();
 }
 
 void panel_set_settings(void)
 {
-    int n;
-
     panel_set_size(settings.size);
     panel_set_popup_size(settings.popup_size);
     panel_set_popup_position(settings.popup_position);
@@ -426,17 +442,7 @@ void panel_set_settings(void)
     central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
     panel_set_show_minibuttons(settings.show_minibuttons);
 
-    request_net_number_of_desktops(settings.num_screens);
-
-    n = get_net_current_desktop();
-
-    /* force creation of _NET_CURRENT_DESKTOP hint */
-    if(n == 0)
-        central_panel_set_current(1);
-
-    current_screen = n;
-    central_panel_set_current(n);
-/*    panel_set_orientation(settings.orientation);*/
+    central_panel_set_current(current_screen);
 }
 
 void panel_set_position(void)
@@ -831,6 +837,8 @@ void xfce_run(void)
     watch_root_properties();
 
     request_net_number_of_desktops(settings.num_screens);
+
+    central_panel_set_current(current_screen);
 
     gtk_main();
 }

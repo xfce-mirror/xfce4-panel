@@ -133,60 +133,6 @@ static t_clock *clock_new(void)
     return clock;
 }
 
-#if 0
-static gboolean adjust_time(PanelControl * pc)
-{
-    time_t t;
-    struct tm *tm;
-    int hrs, mins;
-    char *text, *markup;
-
-    t_clock *clock = (t_clock *) pc->data;
-
-    t = time(0);
-    tm = localtime(&t);
-
-    hrs = tm->tm_hour;
-    mins = tm->tm_min;
-
-    text =
-        g_strdup_printf("%.2d%c%.2d", hrs, clock->show_colon ? ':' : ' ', mins);
-
-    switch (settings.size)
-    {
-        case TINY:
-            markup =
-                g_strconcat("<tt><span size=\"x-small\">", text, "</span></tt>",
-                            NULL);
-            break;
-        case SMALL:
-            markup =
-                g_strconcat("<tt><span size=\"small\">", text, "</span></tt>",
-                            NULL);
-            break;
-        case LARGE:
-            markup =
-                g_strconcat("<tt><span size=\"large\">", text, "</span></tt>",
-                            NULL);
-            break;
-        default:
-            markup =
-                g_strconcat("<tt><span size=\"medium\">", text, "</span></tt>",
-                            NULL);
-            break;
-    }
-
-    clock->show_colon = !clock->show_colon;
-
-    gtk_label_set_markup(GTK_LABEL(clock->label), markup);
-
-    g_free(text);
-    g_free(markup);
-
-    return TRUE;
-}
-#endif
-
 void clock_free(PanelControl * pc)
 {
     t_clock *clock = (t_clock *) pc->data;
