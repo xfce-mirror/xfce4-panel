@@ -60,9 +60,11 @@ void close_cb(void)
 /*  Panel control callbacks
  *  -----------------------
 */
-gboolean panel_control_press_cb(GtkButton * b, GdkEventButton * ev,
+gboolean panel_control_press_cb(GtkWidget * b, GdkEventButton * ev,
                                 PanelControl * pc)
 {
+    GtkWidget *item;
+    
     if(ev->button != 3)
         return FALSE;
 

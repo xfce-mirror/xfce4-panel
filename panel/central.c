@@ -431,7 +431,7 @@ static void add_desktop_table(GtkBox * hbox)
     gtk_box_pack_start(hbox, desktop_table, TRUE, TRUE, 0);
 }
 
-void central_panel_init(GtkContainer * container)
+void central_panel_init(GtkBox * box)
 {
     int i;
     static gboolean need_init = TRUE;
@@ -440,12 +440,12 @@ void central_panel_init(GtkContainer * container)
     if (need_init)
     {
 	init_screen_names();
-	 need_init = FALSE;
+	need_init = FALSE;
     }
 
     central_frame = gtk_frame_new(NULL);
     gtk_widget_show(central_frame);
-    gtk_container_add(container, central_frame);
+    gtk_box_pack_start(box, central_frame, FALSE, FALSE, 0);
 
     if (newstyle)
 	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_NONE);
@@ -871,6 +871,21 @@ void central_panel_set_num_screens(int n)
         gtk_widget_hide(desktop_table);
     else if(settings.show_desktop_buttons)
         gtk_widget_show(desktop_table);
+}
+
+void central_panel_move(GtkBox * box, int n)
+{
+    gtk_box_reorder_child(box, central_frame, n);
+}
+
+void central_panel_show(void)
+{
+    gtk_widget_show(central_frame);
+}
+
+void central_panel_hide(void)
+{
+    gtk_widget_hide(central_frame);
 }
 
 void central_panel_set_show_desktop_buttons(gboolean show)

@@ -23,7 +23,7 @@
 #include "global.h"
 
 /* central panel */
-void central_panel_init(GtkContainer *container);
+void central_panel_init(GtkBox *box);
 
 void central_panel_set_from_xml(xmlNodePtr node);
 
@@ -41,6 +41,12 @@ void central_panel_set_theme(const char *theme);
 void central_panel_set_current(int n);
 
 void central_panel_set_num_screens(int n);
+
+void central_panel_move(GtkBox * box, int n);
+
+void central_panel_show(void);
+
+void central_panel_hide(void);
 
 void central_panel_set_show_desktop_buttons(gboolean show);
 

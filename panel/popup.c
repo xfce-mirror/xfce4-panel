@@ -359,9 +359,9 @@ PanelPopup *create_panel_popup(void)
     return pp;
 }
 
-void panel_popup_pack(PanelPopup * pp, GtkContainer * container)
+void panel_popup_pack(PanelPopup * pp, GtkBox * box)
 {
-    gtk_container_add(container, pp->button);
+    gtk_box_pack_start(box, pp->button, TRUE, TRUE, 0);
 }
 
 void panel_popup_unpack(PanelPopup * pp, GtkContainer * container)

@@ -1,3 +1,47 @@
+2002-10-27 17:22  huysmans
+
+	* panel/: side.c, xfce_support.c: Use putenv instead of setenv.
+	Solaris doesn't have it.
+
+2002-10-27 14:25  huysmans
+
+	* panel/item_dialog.c: Fix a menu editing bug that caused a crash
+
+2002-10-27 13:38  huysmans
+
+	* panel/callbacks.c: Attempt to fix menu positioning bug
+
+2002-10-27 13:06  huysmans
+
+	* panel/: builtins.c, callbacks.c, callbacks.h, central.c,
+	global.h, xfce.c: More central panel code rearrangment
+
+2002-10-27 12:10  huysmans
+
+	* aclocal.m4, configure, panel/central.c, panel/central.h,
+	panel/wmhints.c, panel/xfce.c, panel/xfce.h: separate central panel
+	more from the panel code. First step to making it a module
+
+2002-10-27 11:13  xfce
+
+	* Makefile.in, aclocal.m4, autogen.sh, configure,
+	icons/Makefile.in, panel/Makefile.in, panel/global.h,
+	panel/xfce_support.c, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/trash/Makefile.in, themes/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in: Change
+	autogen.sh script to use env vars if available (instead of
+	auto*-1.x as it was before) Make use of preview file selector
+	instead of basic gtk file selector.
+
+2002-10-25 23:57  xfce
+
+	* panel/xfce.c: Increase SM priority to 40
+
+2002-10-21 22:54  huysmans
+
+	* ChangeLog, panel/xfce.c: Add session management functionality
+
 2002-10-18 11:57  huysmans
 
 	* ChangeLog, autogen.sh, panel/callbacks.c, panel/icons.h,

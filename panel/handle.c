@@ -24,6 +24,64 @@
 #include "popup.h" /* to hide popups */
 #include "callbacks.h"
 
+/* popup menu */
+static void edit_prefs(void)
+{
+    global_settings_dialog();
+}
+
+static void lock_screen(void)
+{
+    exec_cmd("xflock", FALSE);
+}
+
+static void exit_panel(void)
+{
+    quit(FALSE);
+}
+
+static void do_info(void)
+{
+   info_panel_dialog(); 
+}
+
+static void do_help(void)
+{
+    exec_cmd("xfhelp", FALSE);
+}
+
+static GtkItemFactoryEntry panel_items[] = {
+  { N_("/XFce Panel"),        NULL, NULL,        0, "<Title>" },
+  { "/sep",              NULL, NULL,        0, "<Separator>" },
+  { N_("/_Preferences"), NULL, edit_prefs,  0, "<Item>" },
+  { N_("/sep"),          NULL, NULL,        0, "<Separator>" },
+  { N_("/_Lock screen"), NULL, lock_screen, 0, "<Item>" },
+  { N_("/E_xit"),        NULL, exit_panel,  0, "<Item>" },
+  { "/sep",              NULL, NULL,        0, "<Separator>" },
+  { N_("/_About xfce"),  NULL, do_info,     0, "<Item>" },
+  { N_("/_Help"),        NULL, do_help,     0, "<Item>" },
+};
+
+static int n_panel_items = 9;
+
+static GtkMenu *create_handle_menu(void)
+{
+    static GtkMenu *menu = NULL;
+    GtkItemFactory *ifactory;
+
+    if (!menu)
+    {
+	ifactory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
+
+	gtk_item_factory_create_items(ifactory, n_panel_items, panel_items, NULL);
+
+	menu = GTK_MENU(gtk_item_factory_get_widget(ifactory, "<popup>"));
+    }
+
+    return menu;
+}
+
+/* the handle */
 struct _Handle
 {
     GtkWidget *base;
@@ -86,9 +144,15 @@ static void handle_arrange(Handle * mh)
 }
 
 static gboolean handler_pressed_cb(GtkWidget *h, GdkEventButton *event, 
-			       gpointer data)
+			       GtkMenu *menu)
 {
     hide_current_popup_menu();
+
+    if (event->button == 3)
+    {
+	gtk_menu_popup(menu, NULL, NULL, NULL, NULL, event->button, event->time); 
+    }
+    
     /* let default handler run */
     return FALSE;
 }
@@ -96,7 +160,7 @@ static gboolean handler_pressed_cb(GtkWidget *h, GdkEventButton *event,
 static gboolean handler_released_cb(GtkWidget *h, GdkEventButton *event, 
 			            gpointer data)
 {
-    gtk_window_get_position(GTK_WINDOW(toplevel), &settings.x, &settings.y);
+    gtk_window_get_position(GTK_WINDOW(toplevel), &position.x, &position.y);
     /* let default handler run */
     return FALSE;
 }
@@ -105,6 +169,7 @@ Handle *handle_new(int side)
 {
     GtkWidget *im;
     Handle *mh = g_new(Handle, 1);
+    GtkMenu *menu;
 
     mh->base = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(mh->base);
@@ -145,8 +210,10 @@ Handle *handle_new(int side)
     
     gtk_widget_set_name(mh->handler, "xfce_panel");
 
+    menu = create_handle_menu();
+    
     g_signal_connect(mh->handler, "button-press-event", 
-	    	     G_CALLBACK(handler_pressed_cb), NULL);
+	    	     G_CALLBACK(handler_pressed_cb), menu);
 
     g_signal_connect(mh->handler, "button-release-event", 
 	    	     G_CALLBACK(handler_released_cb), NULL);

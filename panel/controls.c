@@ -172,14 +172,13 @@ static void panel_control_read_config(PanelControl * pc, xmlNodePtr node)
 
 /*  creation
 */
-PanelControl *panel_control_new(int side, int index)
+PanelControl *panel_control_new(int index)
 {
     int size = icon_size[settings.size] + border_width;
     PanelControl *pc = g_new(PanelControl, 1);
 
     pc->container = NULL;
 
-    pc->side = side;
     pc->index = index;
 
     /* this is the only widget created here
@@ -297,13 +296,11 @@ void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node)
 
 /*  packing and unpacking
 */
-void panel_control_pack(PanelControl * pc, GtkContainer * container)
+void panel_control_pack(PanelControl * pc, GtkBox * box)
 {
-    pc->container = container;
+    pc->container = GTK_CONTAINER(box);
 
-    gtk_container_add(container, pc->base);
-
-    side_panel_register_control(pc);
+    gtk_box_pack_start(box, pc->base, TRUE, TRUE, 0);
 
     if(pc->main)
     {
@@ -322,7 +319,7 @@ void panel_control_unpack(PanelControl * pc)
     if(pc->callback_id)
         g_signal_handler_disconnect(pc->main, pc->callback_id);
 
-    if(GTK_IS_WIDGET(pc->container))
+    if(pc->container && GTK_IS_WIDGET(pc->container))
     {
         gtk_container_remove(pc->container, pc->base);
         pc->container = NULL;

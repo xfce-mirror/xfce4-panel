@@ -42,21 +42,9 @@
 #include "icons.h"
 
 typedef struct _PanelGroup PanelGroup;
-/* left and right versions of all important data are represented in a
- * single two dimensional array. This allows for the use of the enum
- * members LEFT (== 0) and RIGHT (== 1) as index.*/
 
-static PanelGroup *groups[2][NBGROUPS];
-static PanelPopup *popups[2][NBGROUPS];
-static PanelControl *controls[2][NBGROUPS];
-static GtkBox *boxes[2];
-
-/*
-static GPtrArray *groups[2];
-static GPtrArray *popups[2];
-static GPtrArray *controls[2];
-static GtkBox *boxes[2];
-*/
+static GList *group_list = NULL;
+static GtkBox *groupbox;
 
 /*  Panel group
  *  -----------
@@ -64,12 +52,12 @@ static GtkBox *boxes[2];
 struct _PanelGroup
 {
     int index;
-    int side;
 
     GtkWidget *base;            /* container to pack into panel */
     GtkWidget *box;             /* hbox or vbox */
-    GtkWidget *top;             /* container for popup button or move handle */
-    GtkWidget *bottom;          /* container for panel control */
+
+    PanelPopup *popup;
+    PanelControl *control;
 };
 
 void panel_group_arrange(PanelGroup * pg, int position)
@@ -78,11 +66,12 @@ void panel_group_arrange(PanelGroup * pg, int position)
     
     if(pg->box)
     {
-        gtk_container_remove(GTK_CONTAINER(pg->box), pg->top);
-        gtk_container_remove(GTK_CONTAINER(pg->box), pg->bottom);
+	if (pg->popup)
+	    panel_popup_unpack(pg->popup, GTK_CONTAINER(pg->box));
+	if (pg->control)
+	    panel_control_unpack(pg->control);
 
-        /* removing the box will destroy it */
-        gtk_container_remove(GTK_CONTAINER(pg->base), pg->box);
+        gtk_widget_destroy(pg->box);
     }
 
     if(position == TOP || position == BOTTOM)
@@ -93,55 +82,45 @@ void panel_group_arrange(PanelGroup * pg, int position)
     gtk_widget_show(pg->box);
     gtk_container_add(GTK_CONTAINER(pg->base), pg->box);
 
-    /* find all cases for which we must use .._pack_end() */
     if (position == RIGHT || position == BOTTOM)
     {
-	gtk_box_pack_end(GTK_BOX(pg->box), pg->top, FALSE, TRUE, 0);
-	gtk_box_pack_end(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
+	if (pg->control)
+	    panel_control_pack(pg->control, GTK_BOX(pg->box));
+	if (pg->popup)
+	    panel_popup_pack(pg->popup, GTK_BOX(pg->box));
     }
     else
     {
-        gtk_box_pack_start(GTK_BOX(pg->box), pg->top, FALSE, TRUE, 0);
-        gtk_box_pack_start(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
+	if (pg->popup)
+	    panel_popup_pack(pg->popup, GTK_BOX(pg->box));
+	if (pg->control)
+	    panel_control_pack(pg->control, GTK_BOX(pg->box));
     }
 }
 
-PanelGroup *create_panel_group(int side, int index)
+PanelGroup *create_panel_group(int index)
 {
     PanelGroup *pg = g_new(PanelGroup, 1);
 
     pg->index = index;
-    pg->side = side;
 
     pg->base = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(pg->base);
 
     /* protect against destruction when unpacking */
     g_object_ref(pg->base);
+    gtk_object_sink(GTK_OBJECT(pg->base));
 
-    pg->top = gtk_alignment_new(0, 0, 1, 1);
-    gtk_widget_show(pg->top);
-
-    pg->bottom = gtk_alignment_new(0, 0, 1, 1);
-    gtk_widget_show(pg->bottom);
-
-    /* protect against destruction when removed from box */
-    g_object_ref(pg->top);
-    g_object_ref(pg->bottom);
-
-    /* create box and arrange containers */
     pg->box = NULL;
-    panel_group_arrange(pg, settings.popup_position);
+    pg->popup = NULL;
+    pg->control = NULL;
 
     return pg;
 }
 
 void panel_group_pack(PanelGroup * pg, GtkBox * hbox)
 {
-    if(pg->side == LEFT)
-        gtk_box_pack_start(hbox, pg->base, TRUE, TRUE, 0);
-    else
-        gtk_box_pack_end(hbox, pg->base, TRUE, TRUE, 0);
+    gtk_box_pack_start(hbox, pg->base, TRUE, TRUE, 0);
 }
 
 void panel_group_unpack(PanelGroup * pg, GtkContainer *container)
@@ -154,50 +133,54 @@ void panel_group_unpack(PanelGroup * pg, GtkContainer *container)
 */
 void side_panel_init(int side, GtkBox * box)
 {
-    int i;
-    int num = (side == LEFT) ? settings.num_left : settings.num_right;
+    int i = (side == LEFT) ? 0 : 
+		settings.central_index >= 0 ? settings.central_index : 0;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    PanelGroup *group;
 
-    boxes[side] = box;
+    groupbox = box;
 
-    for(i = 0; i < NBGROUPS; i++)
+    for(; i < num; i++)
     {
-        if(i < num)
-        {
-            groups[side][i] = create_panel_group(side, i);
-	    panel_group_pack(groups[side][i], box);
+	group = create_panel_group(i);
+	panel_group_pack(group, box);
 
-	    popups[side][i] = create_panel_popup();
-	    panel_popup_pack(popups[side][i],
-			     GTK_CONTAINER(groups[side][i]->top));
+	group_list = g_list_append(group_list, group);
 
-            /* we create an empty control, because we don't know what to put
-             * here until after we read the configuration file */
-            controls[side][i] = panel_control_new(side, i);
-	    panel_control_pack(controls[side][i],
-			       GTK_CONTAINER(groups[side][i]->bottom));
-        }
-        else
-        {
-            groups[side][i] = NULL;
-            popups[side][i] = NULL;
-            controls[side][i] = NULL;
-        }
+	group->popup = create_panel_popup();
+
+	/* we create an empty control, because we don't know what to put
+	 * here until after we read the configuration file */
+	group->control = panel_control_new(i);
+
+	panel_group_arrange(group, settings.popup_position);
     }
 }
 
 void side_panel_pack(int side, GtkBox *box)
 {
     int i;
-    int num = (side == LEFT) ? settings.num_left : settings.num_right;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
-    boxes[side] = box;
+    groupbox = box;
 
-    for(i = 0; i < NBGROUPS; i++)
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
+    for(i = 0; i < num && li; i++, li = li->next)
     {
-        if(groups[side][i])
+	group = li->data;
+	
+        if(group)
 	{
-	    panel_group_pack(groups[side][i], box);
-	    panel_group_arrange(groups[side][i], settings.popup_position);
+	    panel_group_pack(group, box);
+	    panel_group_arrange(group, settings.popup_position);
 	}
     }
 }
@@ -205,110 +188,197 @@ void side_panel_pack(int side, GtkBox *box)
 void side_panel_unpack(int side)
 {
     int i;
-    int num = (side == LEFT) ? settings.num_left : settings.num_right;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < num; i++)
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
+    for(i = 0; i < num && li; i++, li = li->next)
     {
-        panel_group_unpack(groups[side][i], GTK_CONTAINER(boxes[side]));
+	group = li->data;
+	
+        panel_group_unpack(group, GTK_CONTAINER(groupbox));
     }
 }
 
 void side_panel_register_control(PanelControl * pc)
 {
-    controls[pc->side][pc->index] = pc;
+    PanelGroup *group;
+
+    group = g_list_nth(group_list, pc->index)->data;
+
+    group->control = pc;
+
+    panel_group_arrange(group, settings.popup_position);
 }
 
 void side_panel_cleanup(int side)
 {
-    int i;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < NBGROUPS; i++)
+    /* ok, here I cheat. I just clean all groups when side == RIGHT */
+    if (side == LEFT)
+	return;
+
+    for(li = group_list; li; li = li->next)
     {
-        if(popups[side][i])
-            panel_popup_free(popups[side][i]);
+	group = li->data;
 
-        if(controls[side][i])
-            panel_control_free(controls[side][i]);
+	panel_popup_free(group->popup);
+	panel_control_free(group->control);
+
+	g_object_unref(group->base);
+	g_free(group);
     }
+
+    g_list_free(group_list);
+    group_list = NULL;
 }
 
 void side_panel_set_size(int side, int size)
 {
     int i;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < NBGROUPS; i++)
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
+    for(i = 0; i < num && li; i++, li = li->next)
     {
-	if(popups[side][i])
-            panel_popup_set_size(popups[side][i], size);
+	group = li->data;
 
-        if(controls[side][i])
-            panel_control_set_size(controls[side][i], size);
+	panel_popup_set_size(group->popup, size);
+
+        panel_control_set_size(group->control, size);
     }
 }
-
-#if 0
-void side_panel_set_popup_size(int side, int size)
-{
-    int i;
-
-    for(i = 0; i < NBGROUPS; i++)
-    {
-        if(popups[side][i])
-            panel_popup_set_popup_size(popups[side][i], size);
-    }
-}
-#endif
 
 void side_panel_set_popup_position(int side, int position)
 {
     int i;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < NBGROUPS; i++)
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
+    for(i = 0; i < num && li; i++, li = li->next)
     {
-        if(groups[side][i])
-            panel_group_arrange(groups[side][i], position);
+	group = li->data;
+	
+        panel_group_arrange(group, position);
 
-        if(popups[side][i])
-            panel_popup_set_popup_position(popups[side][i], position);
+        panel_popup_set_popup_position(group->popup, position);
     }
 }
 
 void side_panel_set_on_top(int side, gboolean on_top)
 {
     int i;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < NBGROUPS; i++)
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
+    for(i = 0; i < num && li; i++, li = li->next)
     {
-        if(popups[side][i])
-            panel_popup_set_on_top(popups[side][i], on_top);
+	group = li->data;
+
+	panel_popup_set_on_top(group->popup, on_top);
     }
 }
 
 void side_panel_set_style(int side, int style)
 {
     int i;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < NBGROUPS; i++)
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
+    for(i = 0; i < num && li; i++, li = li->next)
     {
-        if(popups[side][i])
-            panel_popup_set_style(popups[side][i], style);
+	group = li->data;
+        
+	panel_popup_set_style(group->popup, style);
 
-        if(controls[side][i])
-            panel_control_set_style(controls[side][i], style);
+        panel_control_set_style(group->control, style);
     }
 }
 
 void side_panel_set_theme(int side, const char *theme)
 {
     int i;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < NBGROUPS; i++)
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
+    for(i = 0; i < num && li; i++, li = li->next)
     {
-        if(popups[side][i])
-            panel_popup_set_theme(popups[side][i], theme);
+	group = li->data;
+        
+	panel_popup_set_theme(group->popup, theme);
 
-        if(controls[side][i])
-            panel_control_set_theme(controls[side][i], theme);
+        panel_control_set_theme(group->control, theme);
+    }
+}
+
+void side_panel_move(int from, int to)
+{
+    int i;
+    GList *li;
+    PanelGroup *group;
+
+    if (from < 0 || from >= settings.num_groups)
+	return;
+    
+    li = g_list_nth(group_list, from);
+    group = li->data;
+
+    if (to > settings.central_index && settings.central_index > 0)
+	gtk_box_reorder_child(groupbox, group->base, to+settings.central_index);
+    else
+	gtk_box_reorder_child(groupbox, group->base, to);
+
+    group_list = g_list_delete_link(group_list, li);
+    group_list = g_list_insert(group_list, group, to);
+
+    for (i = 0, li = group_list; li; i++, li = li->next)
+    {
+	group = li->data;
+
+	group->index = group->control->index = i;
     }
 }
 
@@ -316,16 +386,26 @@ void side_panel_set_from_xml(int side, xmlNodePtr node)
 {
     xmlNodePtr child;
     int i;
-    int num = (side == LEFT) ? settings.num_left : settings.num_right;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
     /* children are "Group" nodes */
     if(node)
         node = node->children;
 
-    for(i = 0; i < num; i++)
+    for(i = 0; i < num && li; i++, li = li->next)
     {
         gboolean control_created = FALSE;
 
+	group = li->data;
+	
         if(node)
         {
             for(child = node->children; child; child = child->next)
@@ -333,56 +413,60 @@ void side_panel_set_from_xml(int side, xmlNodePtr node)
                 /* create popup items and panel control */
                 if(xmlStrEqual(child->name, (const xmlChar *)"Popup"))
                 {
-                    panel_popup_set_from_xml(popups[side][i], child);
+                    panel_popup_set_from_xml(group->popup, child);
                 }
                 else if(xmlStrEqual(child->name, (const xmlChar *)"Control"))
                 {
-                    panel_control_set_from_xml(controls[side][i], child);
+                    panel_control_set_from_xml(group->control, child);
                     control_created = TRUE;
                 }
             }
         }
 
         if(!control_created)
-            panel_control_set_from_xml(controls[side][i], NULL);
+            panel_control_set_from_xml(group->control, NULL);
 
         if(node)
             node = node->next;
     }
 }
 
-void side_panel_set_num_groups(int side, int n)
+void side_panel_set_num_groups(int n)
 {
     int i;
+    GList *li;
+    PanelGroup *group;
 
-    for(i = 0; i < NBGROUPS; i++)
+    for(i = 0, li = group_list; i < n ||li; i++)
     {
+	group = li ? li->data : NULL;
+	
         if(i < n)
         {
-            if(!groups[side][i])
+            if(!group)
             {
-                groups[side][i] = create_panel_group(side, i);
-                panel_group_pack(groups[side][i], boxes[side]);
+                group = create_panel_group(i);
+                panel_group_pack(group, groupbox);
 
-                popups[side][i] = create_panel_popup();
-                panel_popup_pack(popups[side][i],
-                                 GTK_CONTAINER(groups[side][i]->top));
+		group_list = g_list_append(group_list, group);
 
-                /* we create an empty control, because we don't know what to 
-                 * put here until after we read the configuration file */
-                controls[side][i] = panel_control_new(side, i);
-                panel_control_pack(controls[side][i],
-                                   GTK_CONTAINER(groups[side][i]->bottom));
+                group->popup = create_panel_popup();
 
-                create_panel_control(controls[side][i]);
+                group->control = panel_control_new(i);
+                create_panel_control(group->control);
+
+		panel_group_arrange(group, settings.popup_position);
             }
 
-            gtk_widget_show(groups[side][i]->base);
+	    gtk_widget_show(group->base);
         }
-        else if(groups[side][i])
+        else if(group)
         {
-            gtk_widget_hide(groups[side][i]->base);
+            gtk_widget_hide(group->base);
         }
+
+	if (li)
+	    li = li->next;
     }
 }
 
@@ -390,16 +474,27 @@ void side_panel_write_xml(int side, xmlNodePtr root)
 {
     xmlNodePtr node, child;
     int i;
-    int num = (side == LEFT) ? settings.num_left : settings.num_right;
+    int num = (side == RIGHT) ? settings.num_groups :
+		settings.central_index >= 0 ? settings.central_index : 0;
+    GList *li;
+    PanelGroup *group;
 
+    if (side == RIGHT && settings.central_index >= 0)
+	li = g_list_nth(group_list, settings.central_index);
+    else
+	li = group_list;
+    
     node = xmlNewTextChild(root, NULL, side == LEFT ? "Left" : "Right", NULL);
 
-    for(i = 0; i < num; i++)
+    for(i = 0; i < num && li; i++, li = li->next)
     {
+	group = li->data;
+
         child = xmlNewTextChild(node, NULL, "Group", NULL);
 
-        panel_popup_write_xml(popups[side][i], child);
+        panel_popup_write_xml(group->popup, child);
 
-        panel_control_write_xml(controls[side][i], child);
+        panel_control_write_xml(group->control, child);
     }
 }
+

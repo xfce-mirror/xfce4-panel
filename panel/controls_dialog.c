@@ -35,16 +35,18 @@
 #include "xfce_support.h"
 #include "xfce.h"
 #include "settings.h"
+#include "side.h"
 
-GtkContainer *container;        /* container on the panel to hold the 
+static GtkContainer *container;        /* container on the panel to hold the 
                                    panel control */
-GList *controls = NULL;         /* list of all available controls */
-PanelControl *current_pc = NULL;
-int current_index = 0;
-GtkWidget *type_option_menu;
-GtkWidget *notebook;
-GtkWidget *done;
-GtkWidget *revert;
+static GList *controls = NULL;         /* list of all available controls */
+static PanelControl *current_pc = NULL;
+static int current_index = 0;
+static GtkWidget *type_option_menu;
+static GtkWidget *pos_spin;
+static GtkWidget *notebook;
+static GtkWidget *done;
+static GtkWidget *revert;
 
 /*  Global controls list
  *  --------------------
@@ -67,7 +69,7 @@ void create_controls_list(PanelControl * pc)
     /* most common control */
     if(pc->id != ICON)
     {
-        new_pc = panel_control_new(pc->side, pc->index);
+        new_pc = panel_control_new(pc->index);
         create_panel_control(new_pc);
 
         controls = g_list_append(controls, new_pc);
@@ -79,7 +81,7 @@ void create_controls_list(PanelControl * pc)
         if(i == pc->id)
             continue;
 
-        new_pc = panel_control_new(pc->side, pc->index);
+        new_pc = panel_control_new(pc->index);
         new_pc->id = i;
 
         create_panel_control(new_pc);
@@ -115,7 +117,7 @@ void create_controls_list(PanelControl * pc)
             if(!strequal(s, G_MODULE_SUFFIX))
                 continue;
 
-            new_pc = panel_control_new(pc->side, pc->index);
+            new_pc = panel_control_new(pc->index);
             new_pc->id = PLUGIN;
             new_pc->filename = g_strdup(file);
             new_pc->dir = g_strdup(*d);
@@ -177,10 +179,13 @@ static void type_option_changed(GtkOptionMenu * om)
     li = g_list_nth(controls, n);
     new_pc = (PanelControl *) li->data;
 
+    /* this may have changed */
+    new_pc->index = current_pc->index;
+    
     panel_control_unpack(current_pc);
-    panel_control_pack(new_pc, container);
-    /* Isn't that already done in panel_control_pack() ?? */
-    /* side_panel_register_control(new_pc); */
+    panel_control_pack(new_pc, GTK_BOX(container));
+    side_panel_register_control(new_pc); 
+    container = new_pc->container;
 
     current_pc = new_pc;
     current_index = n;
@@ -212,25 +217,6 @@ static GtkWidget *create_type_option_menu(void)
     g_signal_connect(om, "changed", G_CALLBACK(type_option_changed), NULL);
 
     return om;
-}
-
-void add_type_option_menu(GtkBox * box)
-{
-    GtkWidget *hbox, *label;
-
-    hbox = gtk_hbox_new(FALSE, 8);
-    gtk_widget_show(hbox);
-    gtk_container_set_border_width(GTK_CONTAINER(hbox), 10);
-
-    label = gtk_label_new(_("Type:"));
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    type_option_menu = create_type_option_menu();
-    gtk_widget_show(type_option_menu);
-    gtk_box_pack_start(GTK_BOX(hbox), type_option_menu, FALSE, FALSE, 0);
-
-    gtk_box_pack_start(box, hbox, FALSE, FALSE, 0);
 }
 
 /*  Notebook containing all options
@@ -268,22 +254,46 @@ static void add_notebook(GtkBox * box)
 /*  The main dialog
  *  ---------------
 */
+
+static int backup_pos;
+
+static void revert_pos(GtkWidget *w)
+{
+    if (backup_pos == current_pc->index)
+	return;
+
+    side_panel_move(current_pc->index, backup_pos);
+}
+
+static void pos_changed(GtkSpinButton *spin)
+{
+    int n;
+    gboolean changed = FALSE;
+    
+    n = gtk_spin_button_get_value_as_int(spin);
+
+    if (n == current_pc->index)
+	return;
+
+    side_panel_move(current_pc->index, n);
+
+    gtk_widget_set_sensitive(revert, TRUE);
+}
+
 void change_panel_control_dialog(PanelControl * pc)
 {
     GtkWidget *dlg;
     GtkWidget *button;
+    GtkWidget *vbox;
     GtkWidget *hbox;
     GtkWidget *label;
-    GtkWidget *option_menu;
     GtkWidget *separator;
     GtkWidget *main_vbox;
     int response;
+    GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
     /* Keep track of the panel container */
     container = pc->container;
-
-    /* find all possible controls */
-    create_controls_list(pc);
 
     dlg = gtk_dialog_new_with_buttons(_("Change item"), GTK_WINDOW(toplevel),
                                       GTK_DIALOG_MODAL, NULL);
@@ -300,10 +310,50 @@ void change_panel_control_dialog(PanelControl * pc)
 
     main_vbox = GTK_DIALOG(dlg)->vbox;
 
-    /* option menu */
     create_controls_list(pc);
-    add_type_option_menu(GTK_BOX(main_vbox));
 
+    vbox = gtk_vbox_new(FALSE, 8);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), 8);
+    gtk_widget_show(vbox);
+    gtk_box_pack_start(GTK_BOX(main_vbox), vbox, FALSE, FALSE, 0);
+    
+    /* option menu */
+    hbox = gtk_hbox_new(FALSE, 8);
+    gtk_widget_show(hbox);
+
+    label = gtk_label_new(_("Type:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    type_option_menu = create_type_option_menu();
+    gtk_widget_show(type_option_menu);
+    gtk_box_pack_start(GTK_BOX(hbox), type_option_menu, FALSE, FALSE, 0);
+
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+    
+    /* position */
+    hbox = gtk_hbox_new(FALSE, 8);
+    gtk_widget_show(hbox);
+
+    label = gtk_label_new(_("Position:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0.1, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    backup_pos = pc->index;
+    pos_spin = gtk_spin_button_new_with_range(0, settings.num_groups, 1);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), pc->index);
+    gtk_widget_show(pos_spin);
+    gtk_box_pack_start(GTK_BOX(hbox), pos_spin, FALSE, FALSE, 0);
+    
+    g_signal_connect(pos_spin, "value-changed", G_CALLBACK(pos_changed), NULL);
+    g_signal_connect(revert, "clicked", G_CALLBACK(revert_pos), NULL);
+
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+    
     /* separator */
     separator = gtk_hseparator_new();
     gtk_widget_show(separator);

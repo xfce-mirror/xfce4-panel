@@ -111,8 +111,8 @@ void set_transient_for_dialog(GtkWidget * window)
  *  style: option menu (should be radio buttons according to GNOME HIG)
  *  panel orientation: option menu
  *  icon theme: option menu
- *  left : spinbutton
- *  right: spinbutton
+ *  num groups : spinbutton
+ *  central index: spinbutton
  *  screens: spinbutton
  *  central panels: checkbox
  *  desktop buttons: checkbox
@@ -127,8 +127,8 @@ static GtkWidget *popup_position_menu;
 static GtkWidget *style_menu;
 static GtkWidget *orientation_menu;
 static GtkWidget *theme_menu;
-static GtkWidget *left_spin;
-static GtkWidget *right_spin;
+static GtkWidget *groups_spin;
+static GtkWidget *central_spin;
 
 static GtkWidget *central_vbox;
 static GtkWidget *central_checkbox;
@@ -144,6 +144,7 @@ static GtkWidget *exit_entry;
 static GtkSizeGroup *sg = NULL;
 static GtkWidget *revert;
 
+static Position backup_pos;
 static Settings backup;
 static int backup_theme_index = 0;
 
@@ -155,15 +156,15 @@ GtkShadowType option_shadow = GTK_SHADOW_NONE;
 */
 static void create_backup(void)
 {
-    backup.x = settings.x;
-    backup.y = settings.y;
+    backup_pos.x = position.x;
+    backup_pos.y = position.y;
     backup.size = settings.size;
     backup.popup_position = settings.popup_position;
     backup.style = settings.style;
     backup.orientation = settings.orientation;
     backup.theme = g_strdup(settings.theme);
-    backup.num_left = settings.num_left;
-    backup.num_right = settings.num_right;
+    backup.num_groups = settings.num_groups;
+    backup.central_index = settings.central_index;
     backup.num_screens = settings.num_screens;
     backup.show_desktop_buttons = settings.show_desktop_buttons;
     backup.show_central = settings.show_central;
@@ -189,8 +190,8 @@ static void restore_backup(void)
     gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
                                 backup_theme_index);
 
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), backup.num_left);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), backup.num_right);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(groups_spin), backup.num_groups);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(central_spin), backup.central_index);
 
     /* Fix a bad revert number of desktop
        FIXME: there should be a better way to do this
@@ -217,8 +218,8 @@ static void restore_backup(void)
     else
         gtk_entry_set_text(GTK_ENTRY(exit_entry), "");
 
-    settings.x = backup.x;
-    settings.y = backup.y;
+    position.x = backup_pos.x;
+    position.y = backup_pos.y;
     panel_set_position();
 }
 
@@ -252,7 +253,7 @@ static void add_header(const char *text, GtkBox * box)
 
 static void add_spacer(GtkBox * box)
 {
-    GtkWidget *eventbox = gtk_event_box_new();
+    GtkWidget *eventbox = gtk_alignment_new(0,0,0,0);
 
     gtk_widget_set_size_request(eventbox, SKIP, SKIP);
     gtk_widget_show(eventbox);
@@ -693,14 +694,15 @@ static void spin_changed(GtkWidget * spin)
     n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin));
 
 
-    if(spin == left_spin && n != settings.num_left)
+    if(spin == groups_spin && n != settings.num_groups)
     {
-        panel_set_num_left(n);
+        panel_set_num_groups(n);
         changed = TRUE;
+	gtk_spin_button_set_range(GTK_SPIN_BUTTON(central_spin), 0, n);
     }
-    else if(spin == right_spin && n != settings.num_right)
+    else if(spin == central_spin && n != settings.central_index)
     {
-        panel_set_num_right(n);
+        panel_set_central_index(n);
         changed = TRUE;
     }
     else if(spin == screens_spin && n != settings.num_screens)
@@ -759,42 +761,23 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(vbox);
     gtk_container_add(GTK_CONTAINER(frame), vbox);
 
-    /* left */
+    /* groups */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Left panel controls:"));
+    label = gtk_label_new(_("Panel controls:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    left_spin = gtk_spin_button_new_with_range(1, NBGROUPS, 1);
-    gtk_widget_show(left_spin);
-    gtk_box_pack_start(GTK_BOX(hbox), left_spin, FALSE, FALSE, 0);
+    groups_spin = gtk_spin_button_new_with_range(1, 2*NBGROUPS, 1);
+    gtk_widget_show(groups_spin);
+    gtk_box_pack_start(GTK_BOX(hbox), groups_spin, FALSE, FALSE, 0);
 
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), settings.num_left);
-    g_signal_connect(left_spin, "value-changed", G_CALLBACK(spin_changed),
-                     NULL);
-
-    /* right */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Right panel controls:"));
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    right_spin = gtk_spin_button_new_with_range(1, NBGROUPS, 1);
-    gtk_widget_show(right_spin);
-    gtk_box_pack_start(GTK_BOX(hbox), right_spin, FALSE, FALSE, 0);
-
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), settings.num_right);
-    g_signal_connect(right_spin, "value-changed", G_CALLBACK(spin_changed),
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(groups_spin), settings.num_groups);
+    g_signal_connect(groups_spin, "value-changed", G_CALLBACK(spin_changed),
                      NULL);
 
     /* central panel */
@@ -805,7 +788,7 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Show central panel:"));
+    label = gtk_label_new(_("Desktop switcher:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -825,12 +808,32 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(central_vbox);
     gtk_box_pack_start(GTK_BOX(vbox), central_vbox, FALSE, TRUE, 0);
 
-    /* central - show desktop buttons */
+    /* central index */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(central_vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Show desktop buttons:"));
+    label = gtk_label_new(_("- position:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    central_spin = gtk_spin_button_new_with_range(0, settings.num_groups, 1);
+    gtk_widget_show(central_spin);
+    gtk_box_pack_start(GTK_BOX(hbox), central_spin, FALSE, FALSE, 0);
+
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(central_spin), settings.central_index);
+    g_signal_connect(central_spin, "value-changed", G_CALLBACK(spin_changed),
+                     NULL);
+
+    /* central - show desktop buttons 
+     * FIXME: get rid of this option! */
+    hbox = gtk_hbox_new(FALSE, 4);
+/*    gtk_widget_show(hbox);*/
+    gtk_box_pack_start(GTK_BOX(central_vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("- desktop buttons:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -850,7 +853,7 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(central_vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Show mini buttons:"));
+    label = gtk_label_new(_("- mini buttons:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -902,8 +905,8 @@ static void ontop_changed(GtkToggleButton * button, gpointer data)
 
 static void position_clicked(GtkWidget * button)
 {
-    settings.x = -1;
-    settings.y = -1;
+    position.x = -1;
+    position.y = -1;
 
     panel_set_position();
     gtk_widget_set_sensitive(revert, TRUE);

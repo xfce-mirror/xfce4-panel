@@ -27,7 +27,6 @@
 struct _PanelControl
 {
     /* provided by system */
-    int side;
     int index;
 
     GtkContainer *container;    /* pointer to parent container */
@@ -65,7 +64,7 @@ struct _PanelControl
                          GtkWidget * revert, GtkWidget * done);
 };
 
-PanelControl *panel_control_new(int side, int index);
+PanelControl *panel_control_new(int index);
 
 void create_panel_control(PanelControl * pc);
 
@@ -75,7 +74,7 @@ void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent);
 
 void panel_control_free(PanelControl * pc);
 
-void panel_control_pack(PanelControl * pc, GtkContainer * container);
+void panel_control_pack(PanelControl * pc, GtkBox * box);
 
 void panel_control_unpack(PanelControl * pc);
 

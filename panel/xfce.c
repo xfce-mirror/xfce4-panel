@@ -72,9 +72,7 @@ static GtkWidget *panel_box;	/* contains all panel components */
 
 Handle *handles[2];
 
-static GtkWidget *left_box;
-static GtkWidget *right_box;
-static GtkWidget *central_container;
+static GtkWidget *group_box;
 
 gboolean central_created = FALSE;
 
@@ -145,9 +143,7 @@ static void create_panel_contents(void)
 
 	panel_box = gtk_vbox_new(FALSE, 0);
 
-	left_box = gtk_vbox_new(FALSE, 0);
-
-	right_box = gtk_vbox_new(FALSE, 0);
+	group_box = gtk_vbox_new(FALSE, 0);
     }
     else
     {
@@ -155,26 +151,19 @@ static void create_panel_contents(void)
 
 	panel_box = gtk_hbox_new(FALSE, 0);
 
-	left_box = gtk_hbox_new(FALSE, 0);
-
-	right_box = gtk_hbox_new(FALSE, 0);
+	group_box = gtk_hbox_new(FALSE, 0);
     }
     
     /* show them */
     gtk_widget_show(main_box);
     gtk_widget_show(panel_box);
-    gtk_widget_show(left_box);
-    gtk_widget_show(right_box);
+    gtk_widget_show(group_box);
 
     /* create the other widgets */
 
     handles[LEFT] = handle_new(LEFT);
     handles[RIGHT] = handle_new(RIGHT);
     
-    central_container = gtk_alignment_new(0,0,1,1);
-    
-    if(settings.show_central)
-        gtk_widget_show(central_container);
     
     /* pack the widgets into the main frame */
     
@@ -184,12 +173,8 @@ static void create_panel_contents(void)
 
     handle_pack(handles[LEFT], GTK_BOX(panel_box));
 
-    gtk_box_pack_start(GTK_BOX(panel_box), left_box, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(panel_box), group_box, TRUE, TRUE, 0);
 
-    gtk_box_pack_start(GTK_BOX(panel_box), central_container, TRUE, TRUE, 0);
-
-    gtk_box_pack_start(GTK_BOX(panel_box), right_box, TRUE, TRUE, 0);
-    
     handle_pack(handles[RIGHT], GTK_BOX(panel_box));
 }
 
@@ -203,6 +188,7 @@ void panel_cleanup(void)
 {
     if(toplevel && GTK_IS_WIDGET(toplevel))
         gtk_widget_destroy(toplevel);
+    toplevel = NULL;
 }
 
 /*  Panel settings
@@ -212,9 +198,9 @@ void panel_set_orientation(int orientation)
 {
     settings.orientation = orientation;
 
-    settings.x = settings.y = -1;
+    position.x = position.y = -1;
 
-    /* only keep side panels. We just rebuild the central panel
+    /* only keep groups. We just rebuild the central panel
      * if necessary */
     side_panel_unpack(LEFT);
     side_panel_unpack(RIGHT);
@@ -223,15 +209,16 @@ void panel_set_orientation(int orientation)
 
     create_panel_contents();
 
-    side_panel_pack(LEFT, GTK_BOX(left_box));
-    side_panel_pack(RIGHT, GTK_BOX(right_box));
-    
+    side_panel_pack(LEFT, GTK_BOX(group_box));
+
     if (settings.show_central)
     {
-	central_panel_init(GTK_CONTAINER(central_container));
+	central_panel_init(GTK_BOX(group_box));
 	central_created = TRUE;
     }
 
+    side_panel_pack(RIGHT, GTK_BOX(group_box));
+    
     panel_set_position();
     panel_set_popup_position(settings.popup_position);
 }
@@ -302,16 +289,18 @@ void panel_set_theme(const char *theme)
     side_panel_set_theme(RIGHT, theme);
 }
 
-void panel_set_num_left(int n)
+void panel_set_central_index(int n)
 {
-    settings.num_left = n;
-    side_panel_set_num_groups(LEFT, n);
+    settings.central_index = n;
+
+    if (central_created)
+	central_panel_move(GTK_BOX(group_box), n);
 }
 
-void panel_set_num_right(int n)
+void panel_set_num_groups(int n)
 {
-    settings.num_right = n;
-    side_panel_set_num_groups(RIGHT, n);
+    settings.num_groups = n;
+    side_panel_set_num_groups(n);
 }
 
 void panel_set_num_screens(int n)
@@ -326,16 +315,24 @@ void panel_set_show_central(gboolean show)
 {
     settings.show_central = show;
 
-    if (show && !central_created)
-    {
-	central_panel_init(GTK_CONTAINER(central_container));
-	central_created = TRUE;
-    }
-    
     if (show)
-        gtk_widget_show(central_container);
-    else
-        gtk_widget_hide(central_container);
+    {
+	if (!central_created)
+	{
+	    if (settings.central_index == -1)
+		settings.central_index = settings.num_groups / 2;
+	    
+	    central_panel_init(GTK_BOX(group_box));
+	    central_created = TRUE;
+	    panel_set_central_index(settings.central_index);
+	}
+
+	central_panel_show();
+    }
+    else if (central_created)
+    {
+	central_panel_hide();
+    }
 }
 
 void panel_set_show_desktop_buttons(gboolean show)
@@ -356,11 +353,12 @@ void panel_set_show_minibuttons(gboolean show)
  *  ------------------
 */
 Settings settings;
+Position position;
 
 void init_settings(void)
 {
-    settings.x = -1;
-    settings.y = -1;
+    position.x = -1;
+    position.y = -1;
 
     settings.size = SMALL;
     settings.popup_position = TOP;
@@ -369,9 +367,9 @@ void init_settings(void)
     settings.theme = NULL;
     settings.on_top = TRUE;
 
-    settings.num_left = 5;
-    settings.num_right = 5;
     settings.num_screens = 4;
+    settings.num_groups = 8;
+    settings.central_index = -1;
 
     settings.show_central = TRUE;
     settings.show_desktop_buttons = TRUE;
@@ -389,12 +387,12 @@ void panel_set_settings(void)
     panel_set_style(settings.style);
     panel_set_theme(settings.theme);
 
-    side_panel_set_num_groups(LEFT, settings.num_left);
-    side_panel_set_num_groups(RIGHT, settings.num_right);
+    side_panel_set_num_groups(settings.num_groups);
 
     panel_set_num_screens(settings.num_screens);
 
     panel_set_show_central(settings.show_central);
+    panel_set_central_index(settings.central_index);
 
     if (central_created)
     {
@@ -416,31 +414,31 @@ void panel_set_position(void)
 
     gtk_widget_size_request(toplevel, &req);
 
-    if(settings.x == -1 || settings.y == -1)
+    if(position.x == -1 || position.y == -1)
     {
 	if (settings.orientation == VERTICAL)
 	{
-	    settings.x = settings.y = 0;
+	    position.x = position.y = 0;
 	}
 	else
 	{
-	    settings.x = w / 2 - req.width / 2;
-	    settings.y = h - req.height;
+	    position.x = w / 2 - req.width / 2;
+	    position.y = h - req.height;
 	}
     }
     else
     {
-        if(settings.x < 0)
-            settings.x = 0;
-        if(settings.x > w - req.width)
-            settings.x = w - req.width;
-        if(settings.y < 0)
-            settings.y = 0;
-        if(settings.y > h - req.height)
-            settings.y = h - req.height;
+        if(position.x < 0)
+            position.x = 0;
+        if(position.x > w - req.width)
+            position.x = w - req.width;
+        if(position.y < 0)
+            position.y = 0;
+        if(position.y > h - req.height)
+            position.y = h - req.height;
     }
 
-    gtk_window_move(GTK_WINDOW(toplevel), settings.x, settings.y);
+    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
 }
 
 void panel_parse_xml(xmlNodePtr node)
@@ -502,14 +500,19 @@ void panel_parse_xml(xmlNodePtr node)
     value = xmlGetProp(node, (const xmlChar *)"left");
 
     if(value)
-        settings.num_left = atoi(value);
+        settings.central_index = atoi(value);
 
     g_free(value);
 
     value = xmlGetProp(node, (const xmlChar *)"right");
 
     if(value)
-        settings.num_right = atoi(value);
+    {
+        settings.num_groups = atoi(value);
+
+	if (settings.central_index > -1)
+	    settings.num_groups += settings.central_index;
+    }
 
     g_free(value);
 
@@ -570,14 +573,14 @@ void panel_parse_xml(xmlNodePtr node)
             value = xmlGetProp(child, (const xmlChar *)"x");
 
             if(value)
-                settings.x = atoi(value);
+                position.x = atoi(value);
 
             g_free(value);
 
             value = xmlGetProp(child, (const xmlChar *)"y");
 
             if(value)
-                settings.y = atoi(value);
+                position.y = atoi(value);
 
             g_free(value);
         }
@@ -604,10 +607,8 @@ void panel_parse_xml(xmlNodePtr node)
         settings.orientation = HORIZONTAL;
     if(settings.size < TINY || settings.size > LARGE)
         settings.size = SMALL;
-    if(settings.num_left < 1 || settings.num_left > NBGROUPS)
-        settings.num_left = 5;
-    if(settings.num_right < 1 || settings.num_right > NBGROUPS)
-        settings.num_right = 5;
+    if(settings.num_groups < 1 || settings.num_groups > 2*NBGROUPS)
+        settings.num_groups = 10;
     if(settings.num_screens < 1 || settings.num_screens > NBSCREENS)
         settings.num_screens = 4;
 
@@ -656,10 +657,13 @@ void panel_write_xml(xmlNodePtr root)
     snprintf(value, 2, "%d", settings.on_top);
     xmlSetProp(node, "ontop", value);
 
-    snprintf(value, 3, "%d", settings.num_left);
+    snprintf(value, 3, "%d", settings.central_index);
     xmlSetProp(node, "left", value);
 
-    snprintf(value, 3, "%d", settings.num_right);
+    if (settings.central_index == -1)
+	snprintf(value, 3, "%d", settings.num_groups);
+    else
+	snprintf(value, 3, "%d", settings.num_groups - settings.central_index);
     xmlSetProp(node, "right", value);
 
     snprintf(value, 3, "%d", settings.num_screens);
@@ -676,10 +680,10 @@ void panel_write_xml(xmlNodePtr root)
 
     child = xmlNewTextChild(node, NULL, "Position", NULL);
 
-    snprintf(value, 5, "%d", settings.x);
+    snprintf(value, 5, "%d", position.x);
     xmlSetProp(child, "x", value);
 
-    snprintf(value, 5, "%d", settings.y);
+    snprintf(value, 5, "%d", position.y);
     xmlSetProp(child, "y", value);
 
     if(settings.lock_command)
@@ -772,14 +776,15 @@ void xfce_run(void)
     /* panel framework */
     panel_init();
     
-    side_panel_init(LEFT, GTK_BOX(left_box));
-    side_panel_init(RIGHT, GTK_BOX(right_box));
-
+    side_panel_init(LEFT, GTK_BOX(group_box));
+    
     if (settings.show_central)
     {
-	central_panel_init(GTK_CONTAINER(central_container));
+	central_panel_init(GTK_BOX(group_box));
 	central_created = TRUE;
     }
+
+    side_panel_init(RIGHT, GTK_BOX(group_box));
 
     /* give early visual feedback 
      * the init functions have already created the basic panel */

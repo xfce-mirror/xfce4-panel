@@ -124,10 +124,15 @@ typedef struct _MenuItem MenuItem;
 /* global settings */
 typedef struct _Settings Settings;
 
-struct _Settings
+typedef struct _Position Position;
+
+struct _Position
 {
     int x, y;
+};
 
+struct _Settings
+{
     int orientation;
     gboolean on_top;
 
@@ -137,10 +142,10 @@ struct _Settings
     int style;
     char *theme;
 
-    int num_left;
-    int num_right;
     int num_screens;
-
+    int num_groups;
+    int central_index;
+    
     gboolean show_central;
     gboolean show_desktop_buttons;
     gboolean show_minibuttons;
@@ -155,5 +160,6 @@ extern gboolean disable_user_config;
 /* defined in xfce.c */
 extern GtkWidget *toplevel;
 extern Settings settings;
+extern Position position;
 
 #endif /* __XFCE_GLOBAL_H__ */
