@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-04-13 23:15+0200\n"
+"POT-Creation-Date: 2003-04-18 23:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/controls.c:265 panel/controls_dialog.c:349
+#: panel/xfce_support.c:644
+msgid "Select file"
+msgstr "Seleccionar archivo"
+
+#: panel/controls_dialog.c:256
+msgid "Change item"
+msgstr "Cambiar elemento"
+
+#: panel/controls_dialog.c:266 panel/item_dialog.c:916
+msgid "_Revert"
+msgstr "_Revertir"
+
+#: panel/controls_dialog.c:271 panel/item_dialog.c:922
+msgid "_Done"
+msgstr "Termina_Do"
+
+#: panel/controls_dialog.c:294
+msgid "Type:"
+msgstr "Tipo:"
+
+#: panel/controls_dialog.c:310 panel/item_dialog.c:545
+msgid "Position:"
+msgstr "Posición"
+
+#: panel/controls_dialog.c:351 panel/controls.c:265
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -24,110 +48,6 @@ msgstr ""
 "Remover un elemento también removerá su menú emergente.\n"
 "\n"
 "Desea remover el elemento?"
-
-#: panel/controls.c:294 panel/panel.c:136
-msgid "/_Properties..."
-msgstr ""
-
-#: panel/controls.c:295
-msgid "/_Remove"
-msgstr "/_Remover"
-
-#: panel/controls.c:297 panel/panel.c:134
-msgid "/Add _new item"
-msgstr "/Adicionar nuevo elemento"
-
-#: panel/controls.c:578
-msgid "This item has no configuration options"
-msgstr "Este elemento no tiene opciones de configuración"
-
-#: panel/controls_dialog.c:254
-msgid "Change item"
-msgstr "Cambiar elemento"
-
-#: panel/controls_dialog.c:264 panel/item_dialog.c:916
-msgid "_Revert"
-msgstr "_Revertir"
-
-#: panel/controls_dialog.c:269 panel/item_dialog.c:922
-msgid "_Done"
-msgstr "Termina_Do"
-
-#: panel/controls_dialog.c:292
-msgid "Type:"
-msgstr "Tipo:"
-
-#: panel/controls_dialog.c:308 panel/item_dialog.c:545
-msgid "Position:"
-msgstr "Posición"
-
-#: panel/icons.c:69
-msgid "Default"
-msgstr "Por omisión"
-
-#: panel/icons.c:70
-msgid "Editor"
-msgstr "Editor"
-
-#: panel/icons.c:71
-msgid "File management"
-msgstr "Administración de archivos"
-
-#: panel/icons.c:72
-msgid "Utilities"
-msgstr "Utilerías"
-
-#: panel/icons.c:73
-msgid "Games"
-msgstr "Juegos"
-
-#: panel/icons.c:74
-msgid "Help browser"
-msgstr "Navegador de ayuda"
-
-#: panel/icons.c:75
-msgid "Multimedia"
-msgstr "Multimedia"
-
-#: panel/icons.c:76
-msgid "Network"
-msgstr "Red"
-
-#: panel/icons.c:77
-msgid "Graphics"
-msgstr "Gráficos"
-
-#: panel/icons.c:78
-msgid "Printer"
-msgstr "Impresora"
-
-#: panel/icons.c:79
-msgid "Productivity"
-msgstr "Productividad"
-
-#: panel/icons.c:80
-msgid "Sound"
-msgstr "Sonido"
-
-#: panel/icons.c:81
-msgid "Terminal"
-msgstr "Terminal"
-
-#: panel/item.c:337
-msgid "Click mouse button 3 to change item"
-msgstr "Pinche el botón 3 del ratón para cambiar elemento"
-
-#: panel/item.c:359
-msgid "Add launcher"
-msgstr "Adicionar launcher"
-
-#: panel/item.c:363
-msgid "Add new item"
-msgstr "Adicionar nuevo elemento"
-
-#: panel/item.c:490
-msgid "Launcher"
-msgstr ""
 
 #: panel/item_dialog.c:260
 msgid "Other Icon"
@@ -183,11 +103,27 @@ msgstr "Cambiar elemento de menú"
 msgid "Remove"
 msgstr "Remover"
 
-#: panel/main.c:93
+#: panel/item.c:337
+msgid "Click mouse button 3 to change item"
+msgstr "Pinche el botón 3 del ratón para cambiar elemento"
+
+#: panel/item.c:359
+msgid "Add launcher"
+msgstr "Adicionar launcher"
+
+#: panel/item.c:363
+msgid "Add new item"
+msgstr "Adicionar nuevo elemento"
+
+#: panel/item.c:490
+msgid "Launcher"
+msgstr ""
+
+#: panel/main.c:112
 msgid "Are you sure you want to exit?"
 msgstr "¿Está seguro de querer salir?"
 
-#: panel/main.c:201
+#: panel/main.c:252
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -198,16 +134,28 @@ msgstr ""
 "Parte del ambiente de escritorio XFce\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:217
+#: panel/main.c:268
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
 
-#: panel/mcs_client.c:207
-msgid "Settings manager not available"
-msgstr "Administrador de sessión no disponible"
+#: panel/controls.c:294 panel/panel.c:136
+msgid "/_Properties..."
+msgstr ""
+
+#: panel/controls.c:295
+msgid "/_Remove"
+msgstr "/_Remover"
+
+#: panel/controls.c:297 panel/panel.c:134
+msgid "/Add _new item"
+msgstr "/Adicionar nuevo elemento"
+
+#: panel/controls.c:578
+msgid "This item has no configuration options"
+msgstr "Este elemento no tiene opciones de configuración"
 
 #: panel/panel.c:132
 msgid "/XFce Panel"
@@ -233,18 +181,70 @@ msgstr "/B_Loquear estación"
 msgid "/E_xit"
 msgstr "/Salir"
 
-#: panel/panel.c:429 settings/xfce_settings_dialog.c:630
-#: settings/xfce_settings_plugin.c:75
+#: panel/panel.c:457 settings/xfce_settings_plugin.c:75
+#: settings/xfce_settings_dialog.c:630
 msgid "XFce Panel"
 msgstr "Panel XFce"
+
+#: panel/icons.c:71
+msgid "Default"
+msgstr "Por omisión"
+
+#: panel/icons.c:72
+msgid "Editor"
+msgstr "Editor"
+
+#: panel/icons.c:73
+msgid "File management"
+msgstr "Administración de archivos"
+
+#: panel/icons.c:74
+msgid "Utilities"
+msgstr "Utilerías"
+
+#: panel/icons.c:75
+msgid "Games"
+msgstr "Juegos"
+
+#: panel/icons.c:76
+msgid "Help browser"
+msgstr "Navegador de ayuda"
+
+#: panel/icons.c:77
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: panel/icons.c:78
+msgid "Network"
+msgstr "Red"
+
+#: panel/icons.c:79
+msgid "Graphics"
+msgstr "Gráficos"
+
+#: panel/icons.c:80
+msgid "Printer"
+msgstr "Impresora"
+
+#: panel/icons.c:81
+msgid "Productivity"
+msgstr "Productividad"
+
+#: panel/icons.c:82
+msgid "Sound"
+msgstr "Sonido"
+
+#: panel/icons.c:83
+msgid "Terminal"
+msgstr "Terminal"
+
+#: panel/mcs_client.c:207
+msgid "Settings manager not available"
+msgstr "Administrador de sessión no disponible"
 
 #: panel/popup.c:255
 msgid "Menu"
 msgstr "Menú"
-
-#: panel/xfce_support.c:644
-msgid "Select file"
-msgstr "Seleccionar archivo"
 
 #: settings/xfce_settings_dialog.c:118
 msgid "Tiny"
@@ -460,26 +460,6 @@ msgstr "Mostrar segundos:"
 msgid "Xfce Clock"
 msgstr "Reloj XFce"
 
-#: plugins/mailcheck/mailcheck.c:527
-msgid "Mail box:"
-msgstr "Buzón de correo:"
-
-#: plugins/mailcheck/mailcheck.c:619
-msgid "Mail command:"
-msgstr "Comando de correo:"
-
-#: plugins/mailcheck/mailcheck.c:632
-msgid "Command to run when the button on the panel is clicked"
-msgstr "Comando a ejecutar cuando el botón del panel se pincha"
-
-#: plugins/mailcheck/mailcheck.c:705
-msgid "Interval (sec):"
-msgstr "Intervalo (sec):"
-
-#: plugins/mailcheck/mailcheck.c:781
-msgid "Mail check"
-msgstr "Revisar correo"
-
 #: plugins/pager/pager.c:323
 #, fuzzy
 msgid "Graphical pager"
@@ -538,6 +518,26 @@ msgstr "Botón 2:"
 #: plugins/systembuttons/systembuttons.c:667
 msgid "System buttons"
 msgstr "Botones de sistema"
+
+#: plugins/mailcheck/mailcheck.c:527
+msgid "Mail box:"
+msgstr "Buzón de correo:"
+
+#: plugins/mailcheck/mailcheck.c:619
+msgid "Mail command:"
+msgstr "Comando de correo:"
+
+#: plugins/mailcheck/mailcheck.c:632
+msgid "Command to run when the button on the panel is clicked"
+msgstr "Comando a ejecutar cuando el botón del panel se pincha"
+
+#: plugins/mailcheck/mailcheck.c:705
+msgid "Interval (sec):"
+msgstr "Intervalo (sec):"
+
+#: plugins/mailcheck/mailcheck.c:781
+msgid "Mail check"
+msgstr "Revisar correo"
 
 #~ msgid "Credits"
 #~ msgstr "Créditos"

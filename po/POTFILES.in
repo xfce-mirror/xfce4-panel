@@ -1,27 +1,26 @@
-# 20030122 added only *.c files. Should be alright. (Jasper)
-
-# panel sources
-panel/controls.c
-panel/controls_dialog.c
+# panel
 panel/groups.c
-panel/icons.c
-panel/item.c
-panel/item_dialog.c
-panel/main.c
-panel/mcs_client.c
-panel/panel.c
-panel/popup.c
-panel/settings.c
 panel/xfce_support.c
+panel/settings.c
+panel/controls_dialog.c
+panel/item_dialog.c
+panel/item.c
+panel/main.c
+panel/controls.c
+panel/panel.c
+panel/icons.c
+panel/mcs_client.c
+panel/popup.c
 
-# settings manager plugin
-settings/xfce_settings_dialog.c
+# settings
 settings/xfce_settings_plugin.c
+settings/xfce_settings_dialog.c
 
 # plugins
 plugins/clock/clock.c
-plugins/mailcheck/mailcheck.c
 plugins/pager/pager.c
 plugins/switcher/switcher.c
 plugins/systembuttons/systembuttons.c
+plugins/mailcheck/mailcheck.c
+
 

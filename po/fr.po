@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 1.0.0\n"
-"POT-Creation-Date: 2003-04-13 23:15+0200\n"
+"POT-Creation-Date: 2003-04-18 23:12+0200\n"
 "PO-Revision-Date: 2003-01-23 23:59+0100\n"
 "Last-Translator: Olivier Fourdan <fourdan@xfce.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/controls.c:265 panel/controls_dialog.c:349
+#: panel/xfce_support.c:644
+msgid "Select file"
+msgstr "Sélection de fichier"
+
+#: panel/controls_dialog.c:256
+msgid "Change item"
+msgstr "Modifier l'entrée"
+
+#: panel/controls_dialog.c:266 panel/item_dialog.c:916
+msgid "_Revert"
+msgstr "_Revenir"
+
+#: panel/controls_dialog.c:271 panel/item_dialog.c:922
+msgid "_Done"
+msgstr "_Terminé"
+
+#: panel/controls_dialog.c:294
+msgid "Type:"
+msgstr "Type:"
+
+#: panel/controls_dialog.c:310 panel/item_dialog.c:545
+msgid "Position:"
+msgstr "Position:"
+
+#: panel/controls_dialog.c:351 panel/controls.c:265
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -24,110 +48,6 @@ msgstr ""
 "Supprimer une entrée va supprimer le menu associé.\n"
 "\n"
 "Voulez-vous supprimer cette entrée ?"
-
-#: panel/controls.c:294 panel/panel.c:136
-msgid "/_Properties..."
-msgstr "/_Propriétés..."
-
-#: panel/controls.c:295
-msgid "/_Remove"
-msgstr "/_Supprimer"
-
-#: panel/controls.c:297 panel/panel.c:134
-msgid "/Add _new item"
-msgstr "/Ajouter une _nouvelle entrée"
-
-#: panel/controls.c:578
-msgid "This item has no configuration options"
-msgstr "Cette entrée n'a pas d'option de configuration"
-
-#: panel/controls_dialog.c:254
-msgid "Change item"
-msgstr "Modifier l'entrée"
-
-#: panel/controls_dialog.c:264 panel/item_dialog.c:916
-msgid "_Revert"
-msgstr "_Revenir"
-
-#: panel/controls_dialog.c:269 panel/item_dialog.c:922
-msgid "_Done"
-msgstr "_Terminé"
-
-#: panel/controls_dialog.c:292
-msgid "Type:"
-msgstr "Type:"
-
-#: panel/controls_dialog.c:308 panel/item_dialog.c:545
-msgid "Position:"
-msgstr "Position:"
-
-#: panel/icons.c:69
-msgid "Default"
-msgstr "Défaut"
-
-#: panel/icons.c:70
-msgid "Editor"
-msgstr "Éditeur"
-
-#: panel/icons.c:71
-msgid "File management"
-msgstr "Gestionnaire de fichiers"
-
-#: panel/icons.c:72
-msgid "Utilities"
-msgstr "Utilitaires"
-
-#: panel/icons.c:73
-msgid "Games"
-msgstr "Jeux"
-
-#: panel/icons.c:74
-msgid "Help browser"
-msgstr "Navigateur d'aide"
-
-#: panel/icons.c:75
-msgid "Multimedia"
-msgstr "Multimédia"
-
-#: panel/icons.c:76
-msgid "Network"
-msgstr "Réseau"
-
-#: panel/icons.c:77
-msgid "Graphics"
-msgstr "Graphiques"
-
-#: panel/icons.c:78
-msgid "Printer"
-msgstr "Imprimantes"
-
-#: panel/icons.c:79
-msgid "Productivity"
-msgstr "Productivité"
-
-#: panel/icons.c:80
-msgid "Sound"
-msgstr "Son"
-
-#: panel/icons.c:81
-msgid "Terminal"
-msgstr "Terminal"
-
-#: panel/item.c:337
-msgid "Click mouse button 3 to change item"
-msgstr "Cliquer avec le bouton 3 pour modifier une entrée"
-
-#: panel/item.c:359
-msgid "Add launcher"
-msgstr "Ajouter un lanceur"
-
-#: panel/item.c:363
-msgid "Add new item"
-msgstr "Ajouter une entrée"
-
-#: panel/item.c:490
-msgid "Launcher"
-msgstr "Lanceur"
 
 #: panel/item_dialog.c:260
 msgid "Other Icon"
@@ -183,11 +103,27 @@ msgstr "Changer une entrée de menu"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: panel/main.c:93
+#: panel/item.c:337
+msgid "Click mouse button 3 to change item"
+msgstr "Cliquer avec le bouton 3 pour modifier une entrée"
+
+#: panel/item.c:359
+msgid "Add launcher"
+msgstr "Ajouter un lanceur"
+
+#: panel/item.c:363
+msgid "Add new item"
+msgstr "Ajouter une entrée"
+
+#: panel/item.c:490
+msgid "Launcher"
+msgstr "Lanceur"
+
+#: panel/main.c:112
 msgid "Are you sure you want to exit?"
 msgstr "Êtes-vous sûr de vouloir quitter ?"
 
-#: panel/main.c:201
+#: panel/main.c:252
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -198,7 +134,7 @@ msgstr ""
 "Élément  de l'environnement de bureau XFce\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:217
+#: panel/main.c:268
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -208,9 +144,21 @@ msgstr ""
 "definit sur http://www.freedesktop.org. \n"
 "Certaines fonctionalités de XFce ne fonctionneront pas correctement."
 
-#: panel/mcs_client.c:207
-msgid "Settings manager not available"
-msgstr "Gestionnaire de paramètres non disponible"
+#: panel/controls.c:294 panel/panel.c:136
+msgid "/_Properties..."
+msgstr "/_Propriétés..."
+
+#: panel/controls.c:295
+msgid "/_Remove"
+msgstr "/_Supprimer"
+
+#: panel/controls.c:297 panel/panel.c:134
+msgid "/Add _new item"
+msgstr "/Ajouter une _nouvelle entrée"
+
+#: panel/controls.c:578
+msgid "This item has no configuration options"
+msgstr "Cette entrée n'a pas d'option de configuration"
 
 #: panel/panel.c:132
 msgid "/XFce Panel"
@@ -236,18 +184,70 @@ msgstr "/_Vérouiller l'écran"
 msgid "/E_xit"
 msgstr "/Sor_tir"
 
-#: panel/panel.c:429 settings/xfce_settings_dialog.c:630
-#: settings/xfce_settings_plugin.c:75
+#: panel/panel.c:457 settings/xfce_settings_plugin.c:75
+#: settings/xfce_settings_dialog.c:630
 msgid "XFce Panel"
 msgstr "Panneau XFce"
+
+#: panel/icons.c:71
+msgid "Default"
+msgstr "Défaut"
+
+#: panel/icons.c:72
+msgid "Editor"
+msgstr "Éditeur"
+
+#: panel/icons.c:73
+msgid "File management"
+msgstr "Gestionnaire de fichiers"
+
+#: panel/icons.c:74
+msgid "Utilities"
+msgstr "Utilitaires"
+
+#: panel/icons.c:75
+msgid "Games"
+msgstr "Jeux"
+
+#: panel/icons.c:76
+msgid "Help browser"
+msgstr "Navigateur d'aide"
+
+#: panel/icons.c:77
+msgid "Multimedia"
+msgstr "Multimédia"
+
+#: panel/icons.c:78
+msgid "Network"
+msgstr "Réseau"
+
+#: panel/icons.c:79
+msgid "Graphics"
+msgstr "Graphiques"
+
+#: panel/icons.c:80
+msgid "Printer"
+msgstr "Imprimantes"
+
+#: panel/icons.c:81
+msgid "Productivity"
+msgstr "Productivité"
+
+#: panel/icons.c:82
+msgid "Sound"
+msgstr "Son"
+
+#: panel/icons.c:83
+msgid "Terminal"
+msgstr "Terminal"
+
+#: panel/mcs_client.c:207
+msgid "Settings manager not available"
+msgstr "Gestionnaire de paramètres non disponible"
 
 #: panel/popup.c:255
 msgid "Menu"
 msgstr "Menu"
-
-#: panel/xfce_support.c:644
-msgid "Select file"
-msgstr "Sélection de fichier"
 
 #: settings/xfce_settings_dialog.c:118
 msgid "Tiny"
@@ -462,26 +462,6 @@ msgstr "Afficher les secondes:"
 msgid "Xfce Clock"
 msgstr "Horloge Xfce"
 
-#: plugins/mailcheck/mailcheck.c:527
-msgid "Mail box:"
-msgstr "Boîte aux lettres:"
-
-#: plugins/mailcheck/mailcheck.c:619
-msgid "Mail command:"
-msgstr "Commande de courrier:"
-
-#: plugins/mailcheck/mailcheck.c:632
-msgid "Command to run when the button on the panel is clicked"
-msgstr "Commande à exécuter lorsque le bouton est activé"
-
-#: plugins/mailcheck/mailcheck.c:705
-msgid "Interval (sec):"
-msgstr "Intervale (sec.):"
-
-#: plugins/mailcheck/mailcheck.c:781
-msgid "Mail check"
-msgstr "Contrôle de courrier"
-
 #: plugins/pager/pager.c:323
 msgid "Graphical pager"
 msgstr "Changeur de bureaux graphique"
@@ -539,3 +519,23 @@ msgstr "Bouton 2:"
 #: plugins/systembuttons/systembuttons.c:667
 msgid "System buttons"
 msgstr "Boutons système"
+
+#: plugins/mailcheck/mailcheck.c:527
+msgid "Mail box:"
+msgstr "Boîte aux lettres:"
+
+#: plugins/mailcheck/mailcheck.c:619
+msgid "Mail command:"
+msgstr "Commande de courrier:"
+
+#: plugins/mailcheck/mailcheck.c:632
+msgid "Command to run when the button on the panel is clicked"
+msgstr "Commande à exécuter lorsque le bouton est activé"
+
+#: plugins/mailcheck/mailcheck.c:705
+msgid "Interval (sec):"
+msgstr "Intervale (sec.):"
+
+#: plugins/mailcheck/mailcheck.c:781
+msgid "Mail check"
+msgstr "Contrôle de courrier"
