@@ -48,7 +48,6 @@ MenuItem *menu_item_new(PanelPopup * pp)
 
     mi->button = NULL;
     mi->hbox = NULL;
-    mi->frame = NULL;
     mi->label = NULL;
 
     mi->pixbuf = NULL;
@@ -159,20 +158,15 @@ void menu_item_set_popup_size(MenuItem * mi, int size)
     GdkPixbuf *pb;
     int s = popup_icon_size[size];
 
-    pb = get_scaled_pixbuf(mi->pixbuf, s - border_width);
-    gtk_image_set_from_pixbuf(GTK_IMAGE(mi->image), pb);
-    g_object_unref(pb);
+    if (mi->pixbuf)
+    {
+	pb = get_scaled_pixbuf(mi->pixbuf, s - border_width);
+	gtk_image_set_from_pixbuf(GTK_IMAGE(mi->image), pb);
+	g_object_unref(pb);
+    }
 
-    gtk_widget_set_size_request(mi->frame, s, s);
+    gtk_widget_set_size_request(mi->image, s, s);
     gtk_widget_set_size_request(mi->button, -1, s + border_width);
-}
-
-void menu_item_set_style(MenuItem * mi, int style)
-{
-    if(style == OLD_STYLE)
-        gtk_frame_set_shadow_type(GTK_FRAME(mi->frame), GTK_SHADOW_IN);
-    else
-        gtk_frame_set_shadow_type(GTK_FRAME(mi->frame), GTK_SHADOW_NONE);
 }
 
 void menu_item_set_theme(MenuItem * mi, const char *theme)
@@ -183,7 +177,7 @@ void menu_item_set_theme(MenuItem * mi, const char *theme)
     g_object_unref(mi->pixbuf);
 
     mi->pixbuf = get_pixbuf_by_id(mi->icon_id);
-    menu_item_set_popup_size(mi, settings.popup_size);
+    menu_item_set_popup_size(mi, settings.size);
 }
 
 void menu_item_apply_config(MenuItem * mi)
@@ -197,7 +191,7 @@ void menu_item_apply_config(MenuItem * mi)
     else
         mi->pixbuf = get_pixbuf_by_id(mi->icon_id);
 
-    menu_item_set_popup_size(mi, settings.popup_size);
+    menu_item_set_popup_size(mi, settings.size);
 
     if(mi->tooltip)
         add_tooltip(mi->button, mi->tooltip);
@@ -212,14 +206,9 @@ void create_addtomenu_item(MenuItem * mi)
 
     mi->hbox = gtk_hbox_new(FALSE, 8);
     gtk_container_add(GTK_CONTAINER(mi->button), mi->hbox);
-
-    mi->frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(mi->frame), GTK_SHADOW_NONE);
-    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->frame, FALSE, FALSE, 0);
-
-    mi->pixbuf = get_system_pixbuf(ADDICON_ICON);
-    mi->image = gtk_image_new_from_pixbuf(mi->pixbuf);
-    gtk_container_add(GTK_CONTAINER(mi->frame), mi->image);
+    
+    mi->image = gtk_image_new_from_stock(GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->image, FALSE, FALSE, 0);
 
     add_tooltip(mi->button, _("Add new item"));
     mi->label = gtk_label_new(_("Add icon..."));
@@ -235,8 +224,7 @@ void create_addtomenu_item(MenuItem * mi)
     g_signal_connect(mi->button, "clicked", G_CALLBACK(addtomenu_item_click_cb),
                      mi->parent);
 
-    menu_item_set_popup_size(mi, settings.popup_size);
-    menu_item_set_style(mi, settings.style);
+    menu_item_set_popup_size(mi, settings.size);
 }
 
 void create_menu_item(MenuItem * mi)
@@ -254,15 +242,10 @@ void create_menu_item(MenuItem * mi)
     mi->hbox = gtk_hbox_new(FALSE, 8);
     gtk_container_add(GTK_CONTAINER(mi->button), mi->hbox);
 
-    mi->frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(mi->frame), GTK_SHADOW_NONE);
-    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->frame, FALSE, FALSE, 0);
-
-    pb = get_scaled_pixbuf(mi->pixbuf, icon_size[settings.size]);
-
+    pb = get_scaled_pixbuf(mi->pixbuf, popup_icon_size[settings.size]);
     mi->image = gtk_image_new_from_pixbuf(pb);
     g_object_unref(pb);
-    gtk_container_add(GTK_CONTAINER(mi->frame), mi->image);
+    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->image, FALSE, FALSE, 0);
 
     mi->label = gtk_label_new(mi->caption);
     gtk_box_pack_start(GTK_BOX(mi->hbox), mi->label, FALSE, FALSE, 0);
@@ -288,8 +271,7 @@ void create_menu_item(MenuItem * mi)
     g_signal_connect(mi->button, "drag_data_received",
                      G_CALLBACK(menu_item_drop_cb), mi);
 
-    menu_item_set_popup_size(mi, settings.popup_size);
-    menu_item_set_style(mi, settings.style);
+    menu_item_set_popup_size(mi, settings.size);
 }
 
 /*  Popup menus 
@@ -505,6 +487,7 @@ void panel_popup_set_size(PanelPopup * pp, int size)
     int pos = settings.popup_position;
     GdkPixbuf *pb;
     int w, h, s;
+    GList *li;
 
     w = icon_size[size] + border_width;
     h = top_height[size];
@@ -513,6 +496,16 @@ void panel_popup_set_size(PanelPopup * pp, int size)
         gtk_widget_set_size_request(pp->button, h, w);
     else
         gtk_widget_set_size_request(pp->button, w, h);
+
+    /* decide on popup size based on panel size */
+    menu_item_set_popup_size(pp->addtomenu_item, size);
+    
+    for(li = pp->items; li && li->data; li = li->next)
+    {
+        MenuItem *mi = (MenuItem *) li->data;
+        menu_item_set_popup_size(mi, size);
+    }
+
 }
 
 void panel_popup_set_style(PanelPopup * pp, int style)
@@ -522,7 +515,7 @@ void panel_popup_set_style(PanelPopup * pp, int style)
         xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NORMAL);
     else
         xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NONE);
-
+/*
     menu_item_set_style(pp->addtomenu_item, style);
     
     for(li = pp->items; li && li->data; li = li->next)
@@ -530,6 +523,7 @@ void panel_popup_set_style(PanelPopup * pp, int style)
         MenuItem *mi = (MenuItem *) li->data;
         menu_item_set_style(mi, style);
     }
+*/
 }
 
 void panel_popup_set_popup_position(PanelPopup * pp, int position)
@@ -574,15 +568,3 @@ void panel_popup_set_theme(PanelPopup * pp, const char *theme)
     }
 }
 
-void panel_popup_set_popup_size(PanelPopup * pp, int size)
-{
-    GList *li;
-
-    menu_item_set_popup_size(pp->addtomenu_item, size);
-    
-    for(li = pp->items; li && li->data; li = li->next)
-    {
-        MenuItem *mi = (MenuItem *) li->data;
-        menu_item_set_popup_size(mi, size);
-    }
-}

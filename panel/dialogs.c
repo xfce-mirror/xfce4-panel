@@ -158,7 +158,6 @@ static void create_backup(void)
     backup.x = settings.x;
     backup.y = settings.y;
     backup.size = settings.size;
-    backup.popup_size = settings.popup_size;
     backup.popup_position = settings.popup_position;
     backup.style = settings.style;
     backup.orientation = settings.orientation;
@@ -182,7 +181,6 @@ static void restore_backup(void)
     				backup.orientation);
 
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
 
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu),
     				backup.popup_position);
@@ -261,7 +259,7 @@ static void add_spacer(GtkBox * box)
     gtk_box_pack_start(box, eventbox, FALSE, TRUE, 0);
 }
 
-/*  sizes
+/*  size
 */
 static void size_menu_changed(GtkOptionMenu * menu)
 {
@@ -283,10 +281,6 @@ static void size_menu_changed(GtkOptionMenu * menu)
             gtk_widget_set_sensitive(style_menu, TRUE);
         }
     }
-    else if(n + 1 != settings.popup_size)
-    {
-        panel_set_popup_size(n + 1);
-    }
     else
     {
         changed = FALSE;
@@ -299,17 +293,14 @@ static void size_menu_changed(GtkOptionMenu * menu)
     }
 }
 
-static void add_size_menu(GtkWidget * option_menu, int size, gboolean is_popup)
+static void add_size_menu(GtkWidget * option_menu, int size)
 {
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
 
-    if(!is_popup)
-    {
-        item = gtk_menu_item_new_with_label(_("Tiny"));
-        gtk_widget_show(item);
-        gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-    }
+    item = gtk_menu_item_new_with_label(_("Tiny"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
     item = gtk_menu_item_new_with_label(_("Small"));
     gtk_widget_show(item);
@@ -324,59 +315,10 @@ static void add_size_menu(GtkWidget * option_menu, int size, gboolean is_popup)
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
     gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu),
-                                is_popup ? size - 1 : size);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), size);
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(size_menu_changed),
                      NULL);
-}
-
-static void add_size_box(GtkBox * box)
-{
-    GtkWidget *frame, *vbox, *hbox, *label;
-
-    /* frame and vbox */
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), option_shadow);
-    gtk_widget_show(frame);
-    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
-
-    vbox = gtk_vbox_new(FALSE, 4);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
-    gtk_widget_show(vbox);
-    gtk_container_add(GTK_CONTAINER(frame), vbox);
-
-    /* size */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Panel size:"));
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    size_menu = gtk_option_menu_new();
-    gtk_widget_show(size_menu);
-    add_size_menu(size_menu, settings.size, FALSE);
-    gtk_box_pack_start(GTK_BOX(hbox), size_menu, TRUE, TRUE, 0);
-
-    /* popup */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Popup menu size:"));
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    popup_menu = gtk_option_menu_new();
-    gtk_widget_show(popup_menu);
-    add_size_menu(popup_menu, settings.popup_size, TRUE);
-    gtk_box_pack_start(GTK_BOX(hbox), popup_menu, TRUE, TRUE, 0);
 }
 
 /*  style
@@ -410,8 +352,16 @@ static void add_style_menu(GtkWidget * option_menu, int style)
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(style_changed), NULL);
 
-    if(settings.popup_position == LEFT || settings.popup_position == RIGHT)
-        gtk_widget_set_sensitive(option_menu, FALSE);
+    if (settings.orientation == VERTICAL)
+    {
+	if(settings.popup_position == TOP || settings.popup_position == BOTTOM)
+	    gtk_widget_set_sensitive(option_menu, FALSE);
+    }
+    else
+    {
+	if(settings.popup_position == LEFT || settings.popup_position == RIGHT)
+	    gtk_widget_set_sensitive(option_menu, FALSE);
+    }
 }
 
 
@@ -486,6 +436,7 @@ static void popup_position_changed(GtkOptionMenu * menu)
     }
 
     panel_set_popup_position(n);
+    panel_set_position();
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -649,6 +600,22 @@ static void add_style_box(GtkBox * box)
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
     gtk_widget_show(vbox);
     gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+    /* size */
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Panel size:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    size_menu = gtk_option_menu_new();
+    gtk_widget_show(size_menu);
+    add_size_menu(size_menu, settings.size);
+    gtk_box_pack_start(GTK_BOX(hbox), size_menu, TRUE, TRUE, 0);
 
     /* style */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -1200,13 +1167,8 @@ void global_settings_dialog(void)
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    /* sizes */
-    add_header(_("Sizes"), GTK_BOX(vbox));
-    add_size_box(GTK_BOX(vbox));
-    add_spacer(GTK_BOX(vbox));
-
-    /* style */
-    add_header(_("Style"), GTK_BOX(vbox));
+    /* Appearance */
+    add_header(_("Appearance"), GTK_BOX(vbox));
     add_style_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 

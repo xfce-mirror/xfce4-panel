@@ -1,3 +1,37 @@
+2002-10-10 00:31  huysmans
+
+	* panel/Makefile.am, panel/Makefile.in, panel/builtins.c,
+	panel/builtins.h, panel/controls.c, panel/iconbutton.c,
+	panel/iconbutton.h, panel/item.c, panel/item.h,
+	plugins/mailcheck/mailcheck.c, plugins/trash/trash.c: Use
+	xfce_iconbutton widget for panel items
+
+2002-10-09 00:13  huysmans
+
+	* panel/: callbacks.c, item_dialog.c, popup.c, popup.h: New popup
+	buttons. Really this time
+
+2002-10-09 00:06  huysmans
+
+	* panel/: builtins.c, controls.c, controls.h, popup.h: Oops used an
+	old tree to commit. Revert.
+
+2002-10-08 23:27  huysmans
+
+	* panel/: builtins.c, controls.c, controls.h, popup.h: Use new
+	xfce_togglebutton from libxfcegui4
+
+2002-10-07 21:18  huysmans
+
+	* icons/Makefile.am, icons/Makefile.in, icons/close.xpm,
+	icons/handle.xpm, icons/iconify.xpm, panel/handle.c, panel/icons.c,
+	panel/icons.h: Fix position saving bug
+
+2002-10-07 16:36  huysmans
+
+	* ChangeLog, panel/xfce.c: Increase size popup buttons by two
+	pixels
+
 2002-10-07 08:25  huysmans
 
 	* ChangeLog, panel/handle.c: Add new decorbuttons

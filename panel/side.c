@@ -246,6 +246,7 @@ void side_panel_set_size(int side, int size)
     }
 }
 
+#if 0
 void side_panel_set_popup_size(int side, int size)
 {
     int i;
@@ -256,6 +257,7 @@ void side_panel_set_popup_size(int side, int size)
             panel_popup_set_popup_size(popups[side][i], size);
     }
 }
+#endif
 
 void side_panel_set_popup_position(int side, int position)
 {

@@ -42,8 +42,6 @@ void side_panel_cleanup(int side);
 /* settings */
 void side_panel_set_size(int side, int size);
 
-void side_panel_set_popup_size(int side, int size);
-
 void side_panel_set_popup_position(int side, int position);
 
 void side_panel_set_on_top(int side, gboolean on_top);

@@ -59,7 +59,6 @@ struct _MenuItem
     GtkWidget *button;
     GtkWidget *hbox;
 
-    GtkWidget *frame;
     GdkPixbuf *pixbuf;
     GtkWidget *image;
 
@@ -78,7 +77,6 @@ void panel_popup_add_item(PanelPopup * pp, MenuItem * mi);
 void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi);
 
 void panel_popup_set_size(PanelPopup * pp, int size);
-void panel_popup_set_popup_size(PanelPopup * pp, int size);
 void panel_popup_set_popup_position(PanelPopup * pp, int position);
 void panel_popup_set_on_top(PanelPopup * pp, gboolean on_top);
 void panel_popup_set_style(PanelPopup * pp, int size);

@@ -43,13 +43,13 @@
 
 /*  Panel dimensions 
 */
-int minibutton_size[] = { 16, 24, 24, 24 };
+int minibutton_size[] = { 16, 24, 24, 32 };
 
 int icon_size[] = { 24, 30, 45, 60 };
 
 int border_width = 4;
 
-int popup_icon_size[] = { 16, 20, 24, 32 };
+int popup_icon_size[] = { 20, 24, 24, 32 };
 
 int top_height[] = { 14, 16, 16, 18 };
 
@@ -258,8 +258,7 @@ void panel_set_orientation(int orientation)
     panel_set_position();
     panel_set_current(current_screen);
     
-    handle_set_popup_position(handles[LEFT]);
-    handle_set_popup_position(handles[RIGHT]);
+    panel_set_popup_position(settings.popup_position);
 }
 
 void panel_set_on_top(gboolean on_top)
@@ -281,14 +280,6 @@ void panel_set_size(int size)
 
     handle_set_size(handles[LEFT], size);
     handle_set_size(handles[RIGHT], size);
-}
-
-void panel_set_popup_size(int size)
-{
-    settings.popup_size = size;
-
-    side_panel_set_popup_size(LEFT, size);
-    side_panel_set_popup_size(RIGHT, size);
 }
 
 void panel_set_popup_position(int position)
@@ -409,7 +400,6 @@ void init_settings(void)
     settings.y = -1;
 
     settings.size = SMALL;
-    settings.popup_size = MEDIUM;
     settings.popup_position = TOP;
     settings.style = NEW_STYLE;
     settings.orientation = HORIZONTAL;
@@ -433,7 +423,6 @@ void init_settings(void)
 void panel_set_settings(void)
 {
     panel_set_size(settings.size);
-    panel_set_popup_size(settings.popup_size);
     panel_set_popup_position(settings.popup_position);
 
     panel_set_style(settings.style);
@@ -502,13 +491,6 @@ void panel_parse_xml(xmlNodePtr node)
 
     if(value)
         settings.size = atoi(value);
-
-    g_free(value);
-
-    value = xmlGetProp(node, (const xmlChar *)"popupsize");
-
-    if(value)
-        settings.popup_size = atoi(value);
 
     g_free(value);
 
@@ -659,8 +641,6 @@ void panel_parse_xml(xmlNodePtr node)
         settings.orientation = HORIZONTAL;
     if(settings.size < TINY || settings.size > LARGE)
         settings.size = SMALL;
-    if(settings.popup_size < SMALL || settings.popup_size > LARGE)
-        settings.popup_size = MEDIUM;
     if(settings.num_left < 1 || settings.num_left > NBGROUPS)
         settings.num_left = 5;
     if(settings.num_right < 1 || settings.num_right > NBGROUPS)
@@ -697,9 +677,6 @@ void panel_write_xml(xmlNodePtr root)
 
     snprintf(value, 2, "%d", settings.size);
     xmlSetProp(node, "size", value);
-
-    snprintf(value, 2, "%d", settings.popup_size);
-    xmlSetProp(node, "popupsize", value);
 
     snprintf(value, 2, "%d", settings.popup_position);
     xmlSetProp(node, "popupposition", value);

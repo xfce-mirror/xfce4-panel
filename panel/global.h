@@ -127,7 +127,6 @@ struct _Settings
     gboolean on_top;
 
     int size;
-    int popup_size;
     int popup_position;
 
     int style;
