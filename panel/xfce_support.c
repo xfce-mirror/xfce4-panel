@@ -579,8 +579,14 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
 	       gboolean use_sn, gboolean silent)
 {
     GError *error = NULL;
+    char *realcmd;
 
-    if (!xfce_exec (cmd, in_terminal, use_sn, &error))
+    realcmd = xfce_expand_variables (cmd, NULL);
+
+    if (!realcmd)
+        realcmd = g_strdup (cmd);
+
+    if (!xfce_exec (realcmd, in_terminal, use_sn, &error))
     {
 	if (error)
 	{
@@ -599,6 +605,8 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
 	    g_error_free (error);
 	}
     }
+
+    g_free (realcmd);
 }
 
 /*
