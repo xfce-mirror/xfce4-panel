@@ -1,45 +1,165 @@
-# Xfce4-panel German translation
-# Copyright (C) 2003 Olivier Fourdan
+# Japanese translation for xfce4-panel.
+# Copyright (C) 2003-2005 Olivier Fourdan
 # This file is distributed under the same license as the xfce4-panel package.
-# Moritz Heiber <mistermoe@hackerboard.de>, 2003
+# Zhao Ji <zhao-ji@awz.ne.jp>, 2003-2004.
+# Daichi Kawahata <daichi.k@users.sourceforge.net>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-27 15:46+0100\n"
-"PO-Revision-Date: 2003-12-09 17:30+0900\n"
-"Last-Translator: Zhao Ji <zhao-ji@awz.ne.jp>\n"
-"Language-Team: xfce-users-jp <xfce-users-jp@ml.fdiary.net>\n"
+"Project-Id-Version: xfce4-panel 4.3.2\n"
+"Report-Msgid-Bugs-To: xfce-i18n@xfce.org\n"
+"POT-Creation-Date: 2005-02-16 09:05+0900\n"
+"PO-Revision-Date: 2005-02-17 21:34+0900\n"
+"Last-Translator: Daichi Kawahata <daichi.k@users.sourceforge.net>\n"
+"Language-Team: Japanese <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:551
-msgid "Select file"
-msgstr "ファイル選択"
+#: iconbox/iconbox.c:568
+msgid "Xfce Iconbox"
+msgstr "Xfce アイコンボックス"
 
-#: panel/settings.c:179
-msgid "No data was found. The panel will be empty."
-msgstr ""
+#: iconbox/iconbox.c:576 plugins/launcher/launcher.c:136
+msgid "Developer"
+msgstr "開発者"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
+#: iconbox/iconbox.c:612
+msgid "_About"
+msgstr "このプログラムにについて(_A)"
+
+#: iconbox/iconbox.c:618 panel/controls.c:743 panel/panel.c:701
+msgid "_Properties..."
+msgstr "プロパティ(_P)..."
+
+#: iconbox/iconbox.c:628 panel/panel.c:734
+msgid "E_xit"
+msgstr "終了(_X)"
+
+#: libs/xfce-arrow-button.c:145
+msgid "Arrow type"
+msgstr "矢印の種類"
+
+#: libs/xfce-arrow-button.c:146
+msgid "The arrow type of the menu button"
+msgstr "メニューボタンの矢印の種類です"
+
+#: libs/xfce-panel-window.c:225
+msgid "Orientation"
+msgstr "方向"
+
+#: libs/xfce-panel-window.c:226
+msgid "The orientation of the itembar"
+msgstr "アイテムバーが延びる方向です"
+
+#: libs/xfce-panel-window.c:239
+msgid "Handle style"
+msgstr "ハンドルのスタイル"
+
+#: libs/xfce-panel-window.c:240
+msgid "Type of handles to draw"
+msgstr "描画するハンドルの種類です"
+
+#: panel/add-control-dialog.c:86 panel/add-control-dialog.c:222
+#: panel/item.c:601
+msgid "Add new item"
+msgstr "新規アイテムを追加"
+
+#: panel/controls.c:666
+#, c-format
+msgid "Could not create panel item \"%s\"."
+msgstr "パネルアイテム \"%s\" を作成できませんでした。"
+
+#: panel/controls.c:711 panel/controls_dialog.c:210
+msgid "Removing the item will also remove its popup menu."
+msgstr "アイテムを削除するとポップアップメニューも削除されます。"
+
+#. add buttons
+#: panel/controls.c:748 panel/item_dialog.c:1199
+msgid "_Remove"
+msgstr "削除(_R)"
+
+#: panel/controls.c:757 panel/panel.c:691
+msgid "Add _new item"
+msgstr "新規アイテムを追加(_N)"
+
+#: panel/controls.c:1040
+msgid "This item has no configuration options"
+msgstr "このアイテムにオプション設定は存在しません"
+
+#: panel/controls_dialog.c:90 panel/item_dialog.c:1156
 #: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "位置:"
 
-#: panel/controls_dialog.c:155
-#, fuzzy
+#: panel/controls_dialog.c:156
 msgid "Item properties"
-msgstr "/プロパティ(_P)"
+msgstr "アイテムのプロパティ"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
-#, fuzzy
-msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"ポップアップメニューの項目を削除します。\n"
-"\n"
-"このメニュー項目を削除してもよろしいですか？"
+#: panel/icons.c:63 plugins/launcher/launcher-dialog.c:83
+msgid "Default"
+msgstr "標準"
+
+#: panel/icons.c:64 plugins/launcher/launcher-dialog.c:84
+msgid "Editor"
+msgstr "エディタ"
+
+#: panel/icons.c:65 plugins/launcher/launcher-dialog.c:85
+msgid "File management"
+msgstr "ファイル管理"
+
+#: panel/icons.c:66 plugins/launcher/launcher-dialog.c:86
+msgid "Utilities"
+msgstr "実用"
+
+#: panel/icons.c:67 plugins/launcher/launcher-dialog.c:87
+msgid "Games"
+msgstr "ゲーム"
+
+#: panel/icons.c:68 plugins/launcher/launcher-dialog.c:88
+msgid "Help browser"
+msgstr "ヘルプブラウザ"
+
+#: panel/icons.c:69 plugins/launcher/launcher-dialog.c:89
+msgid "Multimedia"
+msgstr "マルチメディア"
+
+#: panel/icons.c:70 plugins/launcher/launcher-dialog.c:90
+msgid "Network"
+msgstr "ネットワーク"
+
+#: panel/icons.c:71 plugins/launcher/launcher-dialog.c:91
+msgid "Graphics"
+msgstr "グラフィック"
+
+#: panel/icons.c:72 plugins/launcher/launcher-dialog.c:92
+msgid "Printer"
+msgstr "印刷機"
+
+#: panel/icons.c:73 plugins/launcher/launcher-dialog.c:93
+msgid "Productivity"
+msgstr "プロダクト"
+
+#: panel/icons.c:74 plugins/launcher/launcher-dialog.c:94
+msgid "Sound"
+msgstr "サウンド"
+
+#: panel/icons.c:75 plugins/launcher/launcher-dialog.c:95
+msgid "Terminal"
+msgstr "ターミナル"
+
+#: panel/item-control.c:292 panel/item_dialog.c:1211
+#: plugins/launcher/launcher.c:128
+msgid "Launcher"
+msgstr "ランチャ"
+
+#: panel/item.c:571
+msgid "Click mouse button 3 to change item"
+msgstr "アイテムを変更するにはマウスの右ボタンをクリックして下さい"
+
+#: panel/item.c:596
+msgid "Add launcher"
+msgstr "ランチャーを追加"
 
 #: panel/item_dialog.c:124
 msgid "Select command"
@@ -47,15 +167,15 @@ msgstr "コマンド選択"
 
 #: panel/item_dialog.c:261
 msgid "Command:"
-msgstr "コマンド"
+msgstr "コマンド:"
 
-#: panel/item_dialog.c:307
+#: panel/item_dialog.c:307 plugins/launcher/launcher-dialog.c:602
 msgid "Run in _terminal"
-msgstr "ターミナル内部で実行(_t)"
+msgstr "ターミナルで実行(_T)"
 
 #: panel/item_dialog.c:325
 msgid "Use startup _notification"
-msgstr "起動通知を使う (_n)"
+msgstr "起動通知を使用(_N)"
 
 #: panel/item_dialog.c:511
 msgid "Other Icon"
@@ -63,52 +183,30 @@ msgstr "その他のアイコン"
 
 #: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
-msgstr "項目変更のために、ここへファイルをドラッグしてください"
+msgstr "アイコンを変更するにはこのフレームへファイルをドラッグして下さい"
 
 #: panel/item_dialog.c:934
 msgid "Caption:"
-msgstr "キャプション:"
+msgstr "見出し:"
 
 #: panel/item_dialog.c:963
 msgid "Tooltip:"
-msgstr "ツール チップ:"
+msgstr "ツールチップ:"
 
-#: panel/item_dialog.c:991
+#: panel/item_dialog.c:989
 msgid "Attach menu to launcher"
-msgstr "メニューをランチャーへ追加"
+msgstr "メニューをランチャーへ付ける"
 
-#: panel/item_dialog.c:1211
+#: panel/item_dialog.c:1193
 msgid "Change menu item"
-msgstr "メニュー項目の変更"
-
-#. add buttons
-#: panel/item_dialog.c:1217 panel/controls.c:748
-#, fuzzy
-msgid "_Remove"
-msgstr "/削除 (_R)"
-
-#: panel/item_dialog.c:1229 panel/item.c:738
-msgid "Launcher"
-msgstr "ランチャ"
-
-#: panel/item.c:566
-msgid "Click mouse button 3 to change item"
-msgstr "項目変更するために、マウスの右ボタンをクリックして下さい"
-
-#: panel/item.c:591
-msgid "Add launcher"
-msgstr "ランチャ追加"
-
-#: panel/item.c:596
-msgid "Add new item"
-msgstr "項目追加"
+msgstr "メニューアイテムの変更"
 
 #: panel/main.c:121
 msgid "Are you sure you want to exit?"
-msgstr "本当に終了してもいいですか？"
+msgstr "本当に終了しても宜しいですか？"
 
 #: panel/main.c:402
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -120,136 +218,62 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"Xfceデスクトップ環境部品\n"
+"\n"
+"Xfce パネル\n"
+"バージョン %s\n"
+"\n"
+"Xfce デスクトップ環境の一部\n"
 "http://www.xfce.org\n"
+"\n"
+"GNU GPL の下に使用できます。\n"
+"\n"
 
 #: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: セッション管理無しでの起動に成功しました"
 
 #: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
-
-#: panel/controls.c:666
-#, c-format
-msgid "Could not create panel item \"%s\"."
-msgstr ""
-
-#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
-#, fuzzy
-msgid "_Properties..."
-msgstr "/プロパティ(_P)"
-
-#: panel/controls.c:757 panel/panel.c:665
-#, fuzzy
-msgid "Add _new item"
-msgstr "/項目追加 (_n)"
-
-#: panel/controls.c:1040
-msgid "This item has no configuration options"
-msgstr "この項目に、オプション設定は存在しません"
-
-#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:450
-msgid "Xfce Panel"
-msgstr "Xfceパネル"
-
-#: panel/panel.c:680
-#, fuzzy
-msgid "_About Xfce"
-msgstr "/Xfceについて (_A)"
-
-#: panel/panel.c:685
-#, fuzzy
-msgid "_Help"
-msgstr "/ヘルプ (_H)"
-
-#: panel/panel.c:694
-#, fuzzy
-msgid "_Lock screen"
-msgstr "/画面ロック (_L)"
-
-#: panel/panel.c:699
-#, fuzzy
-msgid "_Restart"
-msgstr "元に戻す(_R)"
-
-#: panel/panel.c:708 iconbox/iconbox.c:627
-#, fuzzy
-msgid "E_xit"
-msgstr "/終了 (_x)"
-
-#: panel/icons.c:63
-msgid "Default"
-msgstr "標準"
-
-#: panel/icons.c:64
-msgid "Editor"
-msgstr "エディタ"
-
-#: panel/icons.c:65
-msgid "File management"
-msgstr "ファイル操作"
-
-#: panel/icons.c:66
-msgid "Utilities"
-msgstr "ユーティリティ"
-
-#: panel/icons.c:67
-msgid "Games"
-msgstr "ゲーム"
-
-#: panel/icons.c:68
-msgid "Help browser"
-msgstr "ヘルプ ブラウザ"
-
-#: panel/icons.c:69
-msgid "Multimedia"
-msgstr "マルチメディア"
-
-#: panel/icons.c:70
-msgid "Network"
-msgstr "ネットワーク"
-
-#: panel/icons.c:71
-msgid "Graphics"
-msgstr "グラフィック"
-
-#: panel/icons.c:72
-msgid "Printer"
-msgstr "プリンタ"
-
-#: panel/icons.c:73
-msgid "Productivity"
-msgstr "プロダクト"
-
-#: panel/icons.c:74
-msgid "Sound"
-msgstr "サウンド"
-
-#: panel/icons.c:75
-msgid "Terminal"
-msgstr "ターミナル"
+msgstr "%s: セッション管理有りでの起動に成功しました"
 
 #: panel/mcs_client.c:170
 msgid "Settings manager not available"
-msgstr "設定マネージャが利用不可能です"
+msgstr "設定マネージャが利用できません"
 
-#: panel/popup.c:267
+#: panel/panel.c:682 panel/panel.c:1038 settings/xfce_settings_dialog.c:450
+#: settings/xfce_settings_plugin.c:86
+msgid "Xfce Panel"
+msgstr "Xfce パネル"
+
+#: panel/panel.c:706
+msgid "_About Xfce"
+msgstr "Xfce について(_A)"
+
+#: panel/panel.c:711
+msgid "_Help"
+msgstr "ヘルプ(_H)"
+
+#: panel/panel.c:720
+msgid "_Lock screen"
+msgstr "画面のロック(_L)"
+
+#: panel/panel.c:725
+msgid "_Restart"
+msgstr "再起動(_R)"
+
+#: panel/popup.c:265
 msgid "Menu"
 msgstr "メニュー"
 
-#: taskbar/xftaskbar.c:510
-msgid "There is already a system tray running on this screen"
-msgstr "システム・トレーは、既に起動されています"
+#: panel/settings.c:178
+msgid "No data was found. The panel will be empty."
+msgstr "データがありませんでした。パネルは空になります。"
 
-#: taskbar/xftaskbar.c:516
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "システム・トレーに登録できません: %s"
+#: panel/xfce_support.c:551
+msgid "Select file"
+msgstr "ファイル選択"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -259,36 +283,298 @@ msgstr "システム・トレーに登録できません: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: taskbar/xftaskbar.c:612
-#, fuzzy
-msgid "%A %d %B %Y"
-msgstr "%Y-%B-%-d(%A)"
+#: plugins/clock/clock.c:201
+msgid "%A, %d %B %Y"
+msgstr "%Y, %B %d %A"
 
-#: taskbar/xftaskbar.c:633
-msgid "%H:%M"
+#: plugins/clock/clock.c:428
+msgid "Clock type:"
+msgstr "時計の種類:"
+
+#: plugins/clock/clock.c:441
+msgid "Analog"
+msgstr "アナログ"
+
+#: plugins/clock/clock.c:445
+msgid "Digital"
+msgstr "デジタル"
+
+#: plugins/clock/clock.c:449
+msgid "LED"
+msgstr "LED"
+
+#: plugins/clock/clock.c:511
+msgid "Hour mode:"
+msgstr "時制:"
+
+#: plugins/clock/clock.c:518
+msgid "24 hour"
+msgstr "24時間制"
+
+#: plugins/clock/clock.c:524
+msgid "12 hour"
+msgstr "12時間制"
+
+#: plugins/clock/clock.c:530
+msgid "AM/PM"
+msgstr "午前/午後"
+
+#: plugins/clock/clock.c:568
+msgid "Show seconds:"
+msgstr "秒表示:"
+
+#: plugins/clock/clock.c:681
+msgid "Xfce Clock"
+msgstr "Xfce 時計"
+
+#: plugins/launcher/launcher-dialog.c:96
+msgid "Development"
+msgstr "開発"
+
+#: plugins/launcher/launcher-dialog.c:97
+msgid "Settings"
+msgstr "設定"
+
+#: plugins/launcher/launcher-dialog.c:98
+msgid "System"
+msgstr "システム"
+
+#: plugins/launcher/launcher-dialog.c:99
+msgid "Windows programs"
+msgstr "Windows プログラム"
+
+#: plugins/launcher/launcher-dialog.c:262
+msgid "Name"
+msgstr "名前"
+
+#: plugins/launcher/launcher-dialog.c:282
+msgid "Description"
+msgstr "説明"
+
+#: plugins/launcher/launcher-dialog.c:397
+msgid "Select image file"
+msgstr "画像ファイルを選択"
+
+#: plugins/launcher/launcher-dialog.c:468
+msgid "Other..."
+msgstr "その他..."
+
+#: plugins/launcher/launcher-dialog.c:567
+msgid "Command"
+msgstr "コマンド"
+
+#: plugins/launcher/launcher-dialog.c:622
+msgid "Use _startup notification"
+msgstr "起動通知を使用(_S)"
+
+#: plugins/launcher/launcher-dialog.c:644
+#: plugins/launcher/launcher-dialog.c:649
+msgid "Edit launcher"
+msgstr "ランチャーを編集"
+
+#: plugins/launcher/launcher-dialog.c:1184 plugins/launcher/launcher.c:622
+msgid "New item"
+msgstr "新規アイテム"
+
+#: plugins/launcher/launcher-dialog.c:1185 plugins/launcher/launcher.c:624
+msgid "This item has not yet been configured"
+msgstr "このアイテムはまだ設定されていません"
+
+#: plugins/launcher/launcher-dialog.c:1261
+msgid "_Edit"
+msgstr "編集(_E)"
+
+#: plugins/launcher/launcher-dialog.c:1297
+msgid ""
+"The first item in the list is shown on the panel. Additional items will "
+"appear in a menu."
 msgstr ""
+"リストの最初のアイテムはパネルに表示されます。追加したアイテムはメニューに表"
+"示されます。"
 
-#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
-#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
-msgid "Taskbar"
-msgstr "タスクバー"
+#: plugins/launcher/launcher.c:128
+msgid "Launcher Plugin"
+msgstr "ランチャープラグイン"
 
-#: taskbar/xftaskbar.c:1022
-msgid "Cannot create MCS client channel"
-msgstr "MCSクライアント・チャネルを作成できません"
+#: plugins/launcher/launcher.c:310
+msgid "Alternative Launcher"
+msgstr "別のランチャー"
 
-#: iconbox/iconbox.c:567
-msgid "Xfce Iconbox"
+#: plugins/launcher/launcher.c:368
+#, c-format
+msgid ""
+"Could not run \"%s\":\n"
+"%s"
 msgstr ""
+"\"%s\" を実行できませんでした:\n"
+"%s"
 
-#: iconbox/iconbox.c:575
-msgid "Developer"
+#: plugins/mailcheck/mailcheck.c:838
+msgid "Mail box:"
+msgstr "メール受信箱:"
+
+#: plugins/mailcheck/mailcheck.c:875
+msgid "New mail command:"
+msgstr "新規メール受信時のコマンド:"
+
+#: plugins/mailcheck/mailcheck.c:889
+msgid "Command to run when new mail arrives"
+msgstr "新しいメールが到着した時に実行されるコマンド"
+
+#: plugins/mailcheck/mailcheck.c:919
+msgid "Command to run when the button on the panel is clicked"
+msgstr "パネル上のボタンがクリックされた時に実行されるコマンド"
+
+#: plugins/mailcheck/mailcheck.c:940
+msgid "Interval (sec):"
+msgstr "間隔 (秒):"
+
+#: plugins/mailcheck/mailcheck.c:1016
+msgid "Mail checker"
+msgstr "メール確認プログラム"
+
+#: plugins/pager/pager.c:314
+msgid "Number of rows:"
+msgstr "行数:"
+
+#: plugins/pager/pager.c:316
+msgid "Number of columns:"
+msgstr "列数:"
+
+#: plugins/pager/pager.c:373
+msgid "Graphical pager"
+msgstr "グラフィカルページャ"
+
+#: plugins/separator/separator.c:155
+msgid "Separator"
+msgstr "セパレータ"
+
+#: plugins/switcher/switcher.c:698
+msgid "Desktop switcher"
+msgstr "デスクトップ切替プログラム"
+
+#: plugins/systembuttons/systembuttons.c:85
+msgid ""
+"Access to the configuration system has been disabled.\n"
+"\n"
+"Ask your system administrator for more information"
 msgstr ""
+"設定システムへのアクセスが無効になっています。\n"
+"\n"
+"詳しい情報は、システム管理者へ問い合わせて下さい。"
 
-#: iconbox/iconbox.c:611
-#, fuzzy
-msgid "_About"
-msgstr "/Xfceについて (_A)"
+#: plugins/systembuttons/systembuttons.c:170
+msgid "Lock the screen"
+msgstr "画面をロックする"
+
+#: plugins/systembuttons/systembuttons.c:171
+#: plugins/systembuttons/systembuttons.c:519
+msgid "Exit"
+msgstr "終了"
+
+#: plugins/systembuttons/systembuttons.c:172
+#: plugins/systembuttons/systembuttons.c:520
+msgid "Setup"
+msgstr "設定"
+
+#: plugins/systembuttons/systembuttons.c:173
+#: plugins/systembuttons/systembuttons.c:521
+msgid "Info"
+msgstr "お知らせ"
+
+#. set names to use in option menus
+#: plugins/systembuttons/systembuttons.c:518
+msgid "Lock"
+msgstr "ロック"
+
+#: plugins/systembuttons/systembuttons.c:550
+msgid "Button 1:"
+msgstr "ボタン1:"
+
+#: plugins/systembuttons/systembuttons.c:565
+msgid "Button 2:"
+msgstr "ボタン2:"
+
+#. checkbox
+#: plugins/systembuttons/systembuttons.c:579
+msgid "_Hide"
+msgstr "隠す(_H)"
+
+#: plugins/systembuttons/systembuttons.c:616
+msgid "System buttons"
+msgstr "システムボタン"
+
+#: plugins/systray/systray.c:65 taskbar/xftaskbar.c:510
+msgid "There is already a system tray running on this screen"
+msgstr " この画面には既に動作しているシステムトレイがあります"
+
+#: plugins/systray/systray.c:71 taskbar/xftaskbar.c:516
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "システムトレイを登録できません: %s"
+
+#: plugins/systray/systray.c:273
+msgid "Notification Area"
+msgstr "通知エリア"
+
+#. position
+#: settings/iconbox_plugin.c:298 settings/xftaskbar_plugin.c:383
+msgid "Position"
+msgstr "位置"
+
+#: settings/iconbox_plugin.c:629
+msgid "Icon size"
+msgstr "アイコンの大きさ"
+
+#. show only hidden
+#: settings/iconbox_plugin.c:685 settings/xfce_settings_dialog.c:492
+msgid "Behaviour"
+msgstr "振る舞い"
+
+#: settings/iconbox_plugin.c:691
+msgid "_Show only minimized applications"
+msgstr "最小化したアプリケーションのみ表示(_S)"
+
+#: settings/iconbox_plugin.c:754
+msgid "Transparency"
+msgstr "透明度"
+
+#: settings/iconbox_plugin.c:762
+msgid "None"
+msgstr "不透明"
+
+#: settings/iconbox_plugin.c:777
+msgid "Full"
+msgstr "透明"
+
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
+msgid "Iconbox"
+msgstr "アイコンボックス"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:1
+msgid "Iconbox Settings"
+msgstr "アイコンボックス設定"
+
+#: settings/xfce-iconbox-settings.desktop.in.h:2
+msgid "Xfce 4 Iconbox Settings"
+msgstr "Xfce 4 アイコンボックス設定"
+
+#: settings/xfce-panel-settings.desktop.in.h:1
+msgid "Panel Settings"
+msgstr "パネル設定"
+
+#: settings/xfce-panel-settings.desktop.in.h:2
+msgid "Xfce 4 Panel Settings"
+msgstr "Xfce 4 パネル設定"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:1
+msgid "Taskbar Settings"
+msgstr "タスクバー設定"
+
+#: settings/xfce-taskbar-settings.desktop.in.h:2
+msgid "Xfce 4 Taskbar Settings"
+msgstr "Xfce 4 タスクバー設定"
 
 #: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
 #: settings/xftaskbar_plugin.c:511
@@ -306,7 +592,7 @@ msgstr "大"
 
 #: settings/xfce_settings_dialog.c:99
 msgid "Huge"
-msgstr ""
+msgstr "巨大"
 
 #: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
@@ -334,11 +620,11 @@ msgstr "下"
 
 #: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
-msgstr "パネル サイズ:"
+msgstr "パネルの大きさ:"
 
 #: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
-msgstr "パネル方向"
+msgstr "パネルの方向:"
 
 #: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
@@ -346,11 +632,11 @@ msgstr "ポップアップ位置:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "常に上部へ:"
 
 #: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
-msgstr "自動で隠す"
+msgstr "自動的に隠す:"
 
 #: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
@@ -360,152 +646,111 @@ msgstr "Xfce パネル設定"
 msgid "Appearance"
 msgstr "外観"
 
-#. show only hidden
-#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
-msgid "Behaviour"
-msgstr "動き"
-
-#. position
-#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
-msgid "Position"
-msgstr "位置"
-
 #: settings/xftaskbar_plugin.c:399
-#, fuzzy
 msgid "_Top"
-msgstr "最上部"
+msgstr "最上部(_T)"
 
 #: settings/xftaskbar_plugin.c:409
-#, fuzzy
 msgid "_Bottom"
-msgstr "最下部"
+msgstr "最下部(_B)"
 
 #: settings/xftaskbar_plugin.c:422
 msgid "Alignment:"
-msgstr ""
+msgstr "配置:"
 
 #: settings/xftaskbar_plugin.c:429
 msgid "_Left"
-msgstr ""
+msgstr "左側(_L)"
 
 #: settings/xftaskbar_plugin.c:439
 msgid "_Center"
-msgstr ""
+msgstr "中央(_C)"
 
 #: settings/xftaskbar_plugin.c:447
 msgid "_Right"
-msgstr ""
+msgstr "右側(_R)"
 
 #. size
 #: settings/xftaskbar_plugin.c:464
 msgid "Size"
-msgstr "サイズ"
+msgstr "大きさ"
 
 #: settings/xftaskbar_plugin.c:474
-#, fuzzy
 msgid "Height:"
-msgstr "高さ :"
+msgstr "縦幅:"
 
 #: settings/xftaskbar_plugin.c:505
 msgid "Width:"
-msgstr ""
+msgstr "横幅:"
 
 #: settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
-msgstr ""
+msgstr "画面に合うよう縮める(_S)"
 
 #. Autohide
 #: settings/xftaskbar_plugin.c:561
 msgid "Autohide"
-msgstr "自動隠蔽"
+msgstr "自動的に隠す"
 
 #: settings/xftaskbar_plugin.c:566
-#, fuzzy
 msgid "Auto _hide taskbar"
-msgstr "タスクバーを自動で隠す"
+msgstr "タスクバーを自動的に隠す(_H)"
 
 #. tasklist
 #: settings/xftaskbar_plugin.c:583
-#, fuzzy
 msgid "Tasklist"
-msgstr "タスク"
+msgstr "タスクリスト"
 
 #: settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
-msgstr ""
+msgstr "タスクリストを表示"
 
 #: settings/xftaskbar_plugin.c:604
-#, fuzzy
 msgid "Show tasks from _all workspaces"
-msgstr "全てのワークスペースのタスクを表示"
+msgstr "全てのワークスペースからタスクを表示(_A)"
 
 #: settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
-msgstr ""
+msgstr "常にタスクをまとめる(_G)"
 
 #: settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
-msgstr ""
+msgstr "アプリケーション名を表示(_N)"
 
 #. pager
 #: settings/xftaskbar_plugin.c:629
 msgid "Pager"
-msgstr "ページャー"
+msgstr "ページャ"
 
 #: settings/xftaskbar_plugin.c:634
-#, fuzzy
 msgid "Show _pager in taskbar"
-msgstr "タスクバー内にページャーを表示"
+msgstr "タスクバーでページャを表示(_P)"
 
 #. status area
 #: settings/xftaskbar_plugin.c:641
-#, fuzzy
 msgid "Status area"
-msgstr "土曜"
+msgstr "通知エリア"
 
 #: settings/xftaskbar_plugin.c:650
 msgid "Show _notification icons"
-msgstr ""
+msgstr "通知アイコンを表示(_N)"
 
 #: settings/xftaskbar_plugin.c:657
 msgid "Show _time"
-msgstr ""
+msgstr "時間を表示(_T)"
+
+#: settings/xftaskbar_plugin.c:696 settings/xftaskbar_plugin.c:706
+#: settings/xftaskbar_plugin.c:987 taskbar/xftaskbar.c:910
+msgid "Taskbar"
+msgstr "タスクバー"
 
 #: settings/xftaskbar_plugin.c:718
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: settings/xftaskbar_plugin.c:729
 msgid "Components"
-msgstr ""
-
-#: settings/iconbox_plugin.c:629
-#, fuzzy
-msgid "Icon size"
-msgstr "アイコン確認"
-
-#: settings/iconbox_plugin.c:691
-msgid "_Show only minimized applications"
-msgstr ""
-
-#: settings/iconbox_plugin.c:754
-msgid "Transparency"
-msgstr ""
-
-#: settings/iconbox_plugin.c:762
-#, fuzzy
-msgid "None"
-msgstr "実行(_D)"
-
-#: settings/iconbox_plugin.c:777
-msgid "Full"
-msgstr ""
-
-#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
-#: settings/iconbox_plugin.c:992
-#, fuzzy
-msgid "Iconbox"
-msgstr "アイコン:"
+msgstr "コンポーネント"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -515,318 +760,14 @@ msgstr "アイコン:"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:202
-#, fuzzy
-msgid "%A, %d %B %Y"
-msgstr "%Y-%B-%-d(%A)"
-
-#: plugins/clock/clock.c:429
-msgid "Clock type:"
-msgstr "時計のタイプ:"
-
-#: plugins/clock/clock.c:442
-msgid "Analog"
-msgstr "アナログ"
-
-#: plugins/clock/clock.c:446
-msgid "Digital"
-msgstr "デヂタル"
-
-#: plugins/clock/clock.c:450
-msgid "LED"
-msgstr "ＬＥＤ"
-
-#: plugins/clock/clock.c:512
-msgid "Hour mode:"
-msgstr "時間制:"
-
-#: plugins/clock/clock.c:519
-msgid "24 hour"
-msgstr "24時間制"
-
-#: plugins/clock/clock.c:525
-msgid "12 hour"
-msgstr "12時間制"
-
-#: plugins/clock/clock.c:531
-msgid "AM/PM"
-msgstr "午前/午後"
-
-#: plugins/clock/clock.c:569
-msgid "Show seconds:"
-msgstr "秒表示:"
-
-#: plugins/clock/clock.c:682
-msgid "Xfce Clock"
-msgstr "Xfce時計"
-
-#: plugins/pager/pager.c:314
-msgid "Number of rows:"
-msgstr ""
-
-#: plugins/pager/pager.c:316
-msgid "Number of columns:"
-msgstr ""
-
-#: plugins/pager/pager.c:373
-msgid "Graphical pager"
-msgstr "グラフィカル・ページャ"
-
-#: plugins/switcher/switcher.c:698
-msgid "Desktop switcher"
-msgstr "デスクトップ・スイッチャ"
-
-#: plugins/systembuttons/systembuttons.c:85
-msgid ""
-"Access to the configuration system has been disabled.\n"
-"\n"
-"Ask your system administrator for more information"
-msgstr ""
-"設定システムへの操作は、無効になりました。\n"
-"\n"
-"詳しい情報は、システム管理者へ問い合わせて下さい。"
-
-#: plugins/systembuttons/systembuttons.c:170
-msgid "Lock the screen"
-msgstr "画面ロック"
-
-#: plugins/systembuttons/systembuttons.c:171
-#: plugins/systembuttons/systembuttons.c:519
-msgid "Exit"
-msgstr "終了"
-
-#: plugins/systembuttons/systembuttons.c:172
-#: plugins/systembuttons/systembuttons.c:520
-msgid "Setup"
-msgstr "設定"
-
-#: plugins/systembuttons/systembuttons.c:173
-#: plugins/systembuttons/systembuttons.c:521
-msgid "Info"
-msgstr "お知らせ"
-
-#. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:518
-msgid "Lock"
-msgstr "ロック"
-
-#: plugins/systembuttons/systembuttons.c:550
-msgid "Button 1:"
-msgstr "ボタン１:"
-
-#: plugins/systembuttons/systembuttons.c:565
-msgid "Button 2:"
-msgstr "ボタン２:"
-
-#. checkbox
-#: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
-msgid "_Hide"
-msgstr "/ヘルプ (_H)"
-
-#: plugins/systembuttons/systembuttons.c:616
-msgid "System buttons"
-msgstr "システム・ボタン"
-
-#: plugins/separator/separator.c:155
-msgid "Separator"
-msgstr "区切り"
-
-#: plugins/mailcheck/mailcheck.c:838
-msgid "Mail box:"
-msgstr "メール受信箱:"
-
-#: plugins/mailcheck/mailcheck.c:875
-#, fuzzy
-msgid "New mail command:"
-msgstr "メール コマンド:"
-
-#: plugins/mailcheck/mailcheck.c:889
-#, fuzzy
-msgid "Command to run when new mail arrives"
-msgstr "ボタンを押されると、実行されるコマンド"
-
-#: plugins/mailcheck/mailcheck.c:919
-msgid "Command to run when the button on the panel is clicked"
-msgstr "ボタンを押されると、実行されるコマンド"
-
-#: plugins/mailcheck/mailcheck.c:940
-msgid "Interval (sec):"
-msgstr "間隔 (sec):"
-
-#: plugins/mailcheck/mailcheck.c:1016
-#, fuzzy
-msgid "Mail checker"
-msgstr "メール確認"
-
-#: settings/xfce-panel-settings.desktop.in.h:1
-#, fuzzy
-msgid "Panel Settings"
-msgstr "Xfce パネル設定"
-
-#: settings/xfce-panel-settings.desktop.in.h:2
-#, fuzzy
-msgid "Xfce 4 Panel Settings"
-msgstr "Xfce パネル設定"
-
-#: settings/xfce-iconbox-settings.desktop.in.h:1
-#, fuzzy
-msgid "Iconbox Settings"
-msgstr "Xfce パネル設定"
-
-#: settings/xfce-iconbox-settings.desktop.in.h:2
-#, fuzzy
-msgid "Xfce 4 Iconbox Settings"
-msgstr "Xfce パネル設定"
-
-#: settings/xfce-taskbar-settings.desktop.in.h:1
-#, fuzzy
-msgid "Taskbar Settings"
-msgstr "タスクバー"
-
-#: settings/xfce-taskbar-settings.desktop.in.h:2
-#, fuzzy
-msgid "Xfce 4 Taskbar Settings"
-msgstr "Xfce パネル設定"
-
-#~ msgid "Notification area"
-#~ msgstr "通知エリア"
-
-#, fuzzy
-#~ msgid "Show _system tray in taskbar"
-#~ msgstr "タスクバー内にシステム・トレーを表示"
-
-#~ msgid "Cannot get initial style"
-#~ msgstr "初期のスタイルを取得できない"
-
-#~ msgid "This should not happen"
-#~ msgstr "これは、起こるべきでない"
-
-#, fuzzy
-#~ msgid "Cannot get default screen\n"
-#~ msgstr "デスクトップ・マージンを取得できません"
-
-#~ msgid "Cannot connect to session manager"
-#~ msgstr "セッション・マネージャと接続できません"
-
-#~ msgid "Remove"
-#~ msgstr "削除"
-
-#~ msgid "Show two buttons:"
-#~ msgstr "２つボタンを表示"
-
-#~ msgid "Change item"
-#~ msgstr "項目変更"
-
-#, fuzzy
-#~ msgid "Menu:"
-#~ msgstr "メニュー"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Xfceパネル"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/項目追加 (_n)"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/プロパティ(_P)"
-
-#~ msgid "Select icon"
-#~ msgstr "アイコン選択"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "あなたのウィンド・マネージャは、http://www.freedesktop.orgで定義された新し"
-#~ "いヒントをサポートしていません。\n"
-#~ "Xfceの特徴は、いくつか意図する通りに動かないかもしれません。"
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/設定マネージャ (_S)"
-
-#~ msgid "Tiny"
-#~ msgstr "極小"
-
-#~ msgid "Icon theme:"
-#~ msgstr "アイコン テーマ:"
-
-#~ msgid "Panel layer:"
-#~ msgstr "パネル・レイヤ"
-
-#~ msgid "Normal"
-#~ msgstr "ノーマル"
-
-#~ msgid "Center the panel:"
-#~ msgstr "パネル中央"
-
-#~ msgid "Set"
-#~ msgstr "セット"
-
-#~ msgid "Sunday"
-#~ msgstr "日曜"
-
-#~ msgid "Monday"
-#~ msgstr "月曜"
-
-#~ msgid "Tuesday"
-#~ msgstr "火曜"
-
-#~ msgid "Wednesday"
-#~ msgstr "水曜"
-
-#~ msgid "Thursday"
-#~ msgstr "木曜"
-
-#~ msgid "Friday"
-#~ msgstr "金曜"
-
-#~ msgid "January"
-#~ msgstr " 1月"
-
-#~ msgid "February"
-#~ msgstr " 2月"
-
-#~ msgid "March"
-#~ msgstr " 3月"
-
-#~ msgid "April"
-#~ msgstr " 4月"
-
-#~ msgid "May"
-#~ msgstr " 5月"
-
-#~ msgid "June"
-#~ msgstr " 6月"
-
-#~ msgid "July"
-#~ msgstr " 7月"
-
-#~ msgid "August"
-#~ msgstr " 8月"
-
-#~ msgid "September"
-#~ msgstr " 9月"
-
-#~ msgid "October"
-#~ msgstr "10月"
-
-#~ msgid "November"
-#~ msgstr "11月"
-
-#~ msgid "December"
-#~ msgstr "12月"
-
-#~ msgid "Type:"
-#~ msgstr "タイプ:"
-
-#, fuzzy
-#~ msgid "Add item"
-#~ msgstr "項目追加"
-
-#~ msgid "Select Item Type"
-#~ msgstr "項目タイプ選択"
-
-#~ msgid "Select an item type from the list"
-#~ msgstr "リストから項目のタイプを選択"
+#: taskbar/xftaskbar.c:616
+msgid "%A %d %B %Y"
+msgstr "%Y %B %d %A"
+
+#: taskbar/xftaskbar.c:637
+msgid "%H:%M"
+msgstr "%H:%M"
+
+#: taskbar/xftaskbar.c:1023
+msgid "Cannot create MCS client channel"
+msgstr "MCS クライアントのチャンネルを作成できません"
