@@ -1,3 +1,37 @@
+2003-02-02 13:39  huysmans
+
+	* plugins/systembuttons/systembuttons.c: Improve arranging
+	systembuttons
+
+2003-02-02 09:49  huysmans
+
+	* plugins/mailcheck/mailcheck.c: Fix mail check.
+
+2003-02-01 20:34  huysmans
+
+	* configure, configure.ac, plugins/Makefile.am,
+	plugins/Makefile.in, plugins/mailcheck/mailcheck.c, po/de.gmo,
+	po/es.gmo, po/fi.gmo, po/fr.gmo, po/nl.gmo: Remove trash plugin.
+	Cleanup mailcheck plugin
+
+2003-02-01 15:08  xfce
+
+	* settings/xfce_settings.h: Use "xfce" lowercase for channel name
+
+2003-02-01 14:37  huysmans
+
+	* plugins/clock/clock.c: Fix crash when changing clock type
+
+2003-02-01 14:23  huysmans
+
+	* AUTHORS, plugins/clock/clock.c: Small cleanup
+
+2003-02-01 14:16  huysmans
+
+	* AUTHORS, ChangeLog, plugins/clock/clock.c, po/de.po, po/es.po,
+	po/fi.po, po/fr.po, po/nl.po, po/xfce4-panel.pot: Cleanup clock
+	plugin. Update to gettext 0.11.5
+
 2003-02-01 10:44  huysmans
 
 	* po/: fi.gmo, fi.po: Update finnish translations
@@ -108,8 +142,7 @@
 	plugins/switcher/Makefile.am, plugins/switcher/Makefile.in,
 	plugins/switcher/switcher.c, plugins/systembuttons/Makefile.am,
 	plugins/systembuttons/Makefile.in,
-	plugins/systembuttons/systembuttons.c, plugins/trash/Makefile.am,
-	plugins/trash/Makefile.in, plugins/trash/trash.c,
+	plugins/systembuttons/systembuttons.c,
 	settings/xfce_settings_dialog.c: Fix a bunch of i18n problems:
 	bindtextdomain must be invoked each time a plugin has to display
 	something otherwise other bindtextdomains take precedence and
@@ -128,8 +161,7 @@
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	plugins/trash/Makefile.in, po/fr.gmo, po/fr.po,
-	settings/Makefile.in, themes/Makefile.in,
+	po/fr.gmo, po/fr.po, settings/Makefile.in, themes/Makefile.in,
 	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
 	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
 	themes/XFce/Makefile.in: Add french xtion.
@@ -140,12 +172,12 @@
 	icons/Makefile.in, panel/Makefile.in, panel/icons.c,
 	plugins/Makefile.in, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
-	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
-	po/es.gmo, po/es.po, po/nl.gmo, po/nl.po, settings/Makefile.in,
-	themes/Makefile.in, themes/Crystal/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
-	themes/Noia/Makefile.in, themes/XFce/Makefile.in: added spanish
-	translation and fixed a typo in source code
+	plugins/systembuttons/Makefile.in, po/es.gmo, po/es.po, po/nl.gmo,
+	po/nl.po, settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: added spanish translation and fixed a typo
+	in source code
 
 2003-01-24 12:53  huysmans
 
@@ -163,10 +195,9 @@
 	plugins/switcher/Makefile.am, plugins/switcher/Makefile.in,
 	plugins/switcher/switcher.c, plugins/systembuttons/Makefile.am,
 	plugins/systembuttons/Makefile.in,
-	plugins/systembuttons/systembuttons.c, plugins/trash/Makefile.am,
-	plugins/trash/Makefile.in, plugins/trash/trash.c,
-	po/Makefile.in.in, po/POTFILES.in, po/nl.gmo, po/nl.po,
-	po/xfce4-panel.pot, settings/Makefile.am, settings/Makefile.in,
+	plugins/systembuttons/systembuttons.c, po/Makefile.in.in,
+	po/POTFILES.in, po/nl.gmo, po/nl.po, po/xfce4-panel.pot,
+	settings/Makefile.am, settings/Makefile.in,
 	settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
 	themes/Makefile.in, themes/Crystal/Makefile.in,
 	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
@@ -237,13 +268,12 @@
 	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,
 	panel/handle.c, plugins/Makefile.in, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
-	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
-	settings/Makefile.in, settings/xfce_settings_dialog.c,
-	themes/Makefile.in, themes/Crystal/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
-	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Use same border
-	width gtk uses in dialog action area. Some reordering in the panel
-	dialog. Looks better IMO.
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	settings/xfce_settings_dialog.c, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Use same border width gtk uses in dialog
+	action area. Some reordering in the panel dialog. Looks better IMO.
 
 2003-01-13 11:17  huysmans
 
@@ -265,8 +295,7 @@
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	plugins/trash/Makefile.in, settings/Makefile.am,
-	settings/Makefile.in, themes/Makefile.in,
+	settings/Makefile.am, settings/Makefile.in, themes/Makefile.in,
 	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
 	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
 	themes/XFce/Makefile.in: Add a check for availability of
@@ -293,12 +322,11 @@
 	icons/Makefile.in, panel/Makefile.in, panel/mcs_client.c,
 	plugins/Makefile.in, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
-	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
-	settings/Makefile.in, settings/xfce_settings_dialog.c,
-	themes/Makefile.in, themes/Crystal/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
-	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Use new check for
-	running settings manager
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	settings/xfce_settings_dialog.c, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Use new check for running settings manager
 
 2003-01-10 00:02  xfce
 
@@ -306,19 +334,19 @@
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	plugins/trash/Makefile.in, settings/Makefile.in,
-	themes/Makefile.in, themes/Crystal/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
-	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Update
-	dependencies on libxfcegui4 version and libxfce4mcs
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Update dependencies on libxfcegui4 version
+	and libxfce4mcs
 
 2003-01-09 23:53  xfce
 
 	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,
 	panel/Makefile.in, plugins/Makefile.in, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
-	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
-	settings/Makefile.am, settings/Makefile.in, themes/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.am,
+	settings/Makefile.in, themes/Makefile.in,
 	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
 	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
 	themes/XFce/Makefile.in: Add " -avoid-version " to 
@@ -376,13 +404,13 @@
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/switcher/Makefile.in, plugins/switcher/switcher.c,
-	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
-	settings/Makefile.in, settings/xfce_settings_dialog.c,
-	settings/xfce_settings_plugin.c, themes/Makefile.in,
-	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
-	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
-	themes/XFce/Makefile.in: Several fixes: minibuttons position,
-	settings plugin icon and non-modal dialog, netk_pager sizing
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Several fixes:
+	minibuttons position, settings plugin icon and non-modal dialog,
+	netk_pager sizing
 
 2002-12-30 21:52  huysmans
 
@@ -438,8 +466,7 @@
 	plugins/switcher/Makefile.in, plugins/switcher/switcher.c,
 	plugins/systembuttons/Makefile.am,
 	plugins/systembuttons/Makefile.in,
-	plugins/systembuttons/systembuttons.c, plugins/trash/Makefile.am,
-	plugins/trash/Makefile.in, settings/Makefile.am,
+	plugins/systembuttons/systembuttons.c, settings/Makefile.am,
 	settings/Makefile.in, settings/xfce_settings.h,
 	settings/xfce_settings_dialog.c, settings/xfce_settings_dialog.h,
 	settings/xfce_settings_plugin.c, settings/xfce_settings_plugin.h,
@@ -461,10 +488,9 @@
 2002-12-17 17:03  huysmans
 
 	* plugins/: mailcheck/mailcheck.c, switcher/switcher.c,
-	systembuttons/systembuttons.c, trash/trash.c: Another big API
-	change. I think I got it right this time: control classes providing
-	the interface to panel controls, including a function to create new
-	instances.
+	systembuttons/systembuttons.c: Another big API change. I think I
+	got it right this time: control classes providing the interface to
+	panel controls, including a function to create new instances.
 
 2002-12-17 16:59  huysmans
 
@@ -483,8 +509,8 @@
 
 	* ChangeLog, panel/controls.c, panel/plugins.h,
 	plugins/clock/clock.c, plugins/mailcheck/mailcheck.c,
-	plugins/switcher/switcher.c, plugins/systembuttons/systembuttons.c,
-	plugins/trash/trash.c: Fix version checking code
+	plugins/switcher/switcher.c, plugins/systembuttons/systembuttons.c:
+	Fix version checking code
 
 2002-12-16 18:59  huysmans
 
@@ -492,8 +518,7 @@
 	panel/controls.c, panel/controls.h, panel/controls_dialog.c,
 	panel/groups.c, panel/plugins.h, plugins/clock/clock.c,
 	plugins/mailcheck/mailcheck.c, plugins/switcher/switcher.c,
-	plugins/systembuttons/systembuttons.c, plugins/trash/trash.c: Add
-	new module loading code
+	plugins/systembuttons/systembuttons.c: Add new module loading code
 
 2002-12-16 09:09  huysmans
 
@@ -628,8 +653,8 @@
 
 	* aclocal.m4, configure, panel/builtins.c, panel/callbacks.c,
 	panel/global.h, panel/handle.c, panel/item.c, panel/popup.c,
-	panel/xfce.c, plugins/clock/clock.c, plugins/mailcheck/mailcheck.c,
-	plugins/trash/trash.c: Update for libxfcegui4 new include base dir.
+	panel/xfce.c, plugins/clock/clock.c, plugins/mailcheck/mailcheck.c:
+	Update for libxfcegui4 new include base dir.
 
 2002-11-23 12:24  huysmans
 
@@ -651,8 +676,8 @@
 	* ChangeLog, aclocal.m4, configure, panel/builtins.c,
 	panel/controls.c, panel/controls.h, panel/controls_dialog.c,
 	panel/item.c, panel/side.c, panel/side.h, plugins/clock/clock.c,
-	plugins/mailcheck/mailcheck.c, plugins/trash/trash.c: Panel control
-	API change and several small fixes
+	plugins/mailcheck/mailcheck.c: Panel control API change and several
+	small fixes
 
 2002-11-10 16:23  huysmans
 
@@ -712,11 +737,10 @@
 
 	* panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
-	plugins/trash/Makefile.in, themes/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
-	themes/XFce/Makefile.in: make sure required libs for build/rpm are
-	listed, with versions and keep the minimum version required at only
-	one place (configure.ac)
+	themes/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/XFce/Makefile.in: make sure
+	required libs for build/rpm are listed, with versions and keep the
+	minimum version required at only one place (configure.ac)
 
 2002-11-08 23:14  xfce
 
@@ -742,8 +766,8 @@
 	icons/terminal.xpm, icons/trash_empty.xpm, icons/trash_full.xpm,
 	icons/unknown.xpm, icons/up.xpm, panel/builtins.c, panel/central.c,
 	panel/dialogs.c, panel/global.h, panel/icons.c, panel/icons.h,
-	plugins/mailcheck/mailcheck.c, plugins/trash/trash.c,
-	themes/Makefile.am, themes/Makefile.in, themes/XFce/Makefile.am,
+	plugins/mailcheck/mailcheck.c, themes/Makefile.am,
+	themes/Makefile.in, themes/XFce/Makefile.am,
 	themes/XFce/Makefile.in, themes/XFce/edit.xpm,
 	themes/XFce/file1.xpm, themes/XFce/file2.xpm,
 	themes/XFce/games.xpm, themes/XFce/mail.xpm, themes/XFce/man.xpm,
@@ -820,11 +844,10 @@
 	icons/Makefile.in, panel/Makefile.in, panel/global.h,
 	panel/xfce_support.c, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
-	plugins/trash/Makefile.in, themes/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in: Change
-	autogen.sh script to use env vars if available (instead of
-	auto*-1.x as it was before) Make use of preview file selector
-	instead of basic gtk file selector.
+	themes/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in: Change autogen.sh script to use env vars
+	if available (instead of auto*-1.x as it was before) Make use of
+	preview file selector instead of basic gtk file selector.
 
 2002-10-25 23:57  xfce
 
@@ -850,8 +873,7 @@
 	* panel/Makefile.am, panel/Makefile.in, panel/global.h,
 	panel/xfce_support.c, plugins/clock/Makefile.am,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.am,
-	plugins/mailcheck/Makefile.in, plugins/trash/Makefile.am,
-	plugins/trash/Makefile.in: Move plugins under /usr/lib (FHS
+	plugins/mailcheck/Makefile.in: Move plugins under /usr/lib (FHS
 	compliant). Thanks to Martin Loschwitz for bringing it up.
 
 2002-10-10 17:43  huysmans
@@ -875,8 +897,8 @@
 	* panel/Makefile.am, panel/Makefile.in, panel/builtins.c,
 	panel/builtins.h, panel/controls.c, panel/iconbutton.c,
 	panel/iconbutton.h, panel/item.c, panel/item.h,
-	plugins/mailcheck/mailcheck.c, plugins/trash/trash.c: Use
-	xfce_iconbutton widget for panel items
+	plugins/mailcheck/mailcheck.c: Use xfce_iconbutton widget for panel
+	items
 
 2002-10-09 00:13  huysmans
 
@@ -922,9 +944,8 @@
 2002-10-05 23:53  huysmans
 
 	* configure, configure.ac, panel/builtins.c, panel/controls.c,
-	panel/global.h, plugins/Makefile.am, plugins/Makefile.in,
-	plugins/trash/Makefile.am, plugins/trash/Makefile.in,
-	plugins/trash/trash.c: Make trash can a plugin
+	panel/global.h, plugins/Makefile.am, plugins/Makefile.in: Make
+	trash can a plugin
 
 2002-10-05 23:01  huysmans
 

@@ -150,26 +150,27 @@ static void load_plugin(gchar *path)
 	
 	if (g_slist_find_custom(control_class_list, cc, compare_classes))
 	{
-            g_message ("xfce4: module %s has already been loaded", cc->name);
+            g_message ("%s: module %s has already been loaded", 
+		       PACKAGE, cc->name);
 	    control_class_free(cc);
 	}
 	else
 	{
-            g_message ("xfce4: module %s successfully loaded", cc->name);
+            g_message ("%s: module %s successfully loaded", PACKAGE, cc->name);
 	    control_class_list = g_slist_append(control_class_list, cc);
 	    cc->filename = g_path_get_basename(path);
 	}
     }
     else if (gm)
     {
-        g_warning ("xfce4: incompatible module %s",  path);
+        g_warning ("%s: incompatible module %s", PACKAGE, path);
         g_module_close (gm);
 	g_free(cc);
     }
     else
     {
-        g_warning ("xfce4: module %s cannot be opened (%s)",  
-		   path, g_module_error());
+        g_warning ("%s: module %s cannot be opened (%s)",  
+		   PACKAGE, path, g_module_error());
 	g_free(cc);
     }
 }

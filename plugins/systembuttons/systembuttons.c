@@ -53,7 +53,7 @@ static void mini_palet_cb(void)
         return;
     }
 
-    mcs_dialog(NULL);
+    mcs_dialog("all");
 }
 
 static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)

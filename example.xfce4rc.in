@@ -1,22 +1,19 @@
 <?xml version="1.0"?>
 <Xfce>
-  <Panel size="1" popupposition="2" style="1" orientation="0" layer="0" left="5" right="5" screens="4" showcentral="1" desktopbuttons="1" minibuttons="1">
-  </Panel>
   <Groups>
     <Group>
-      <Popup/>
+      <Popup>
+        <Item>
+          <Caption>XTerm</Caption>
+          <Command term="0">xterm</Command>
+          <Tooltip>Terminal</Tooltip>
+          <Icon id="12"/>
+        </Item>
+      </Popup>
       <Control id="-2">
-        <Command term="0">xftree</Command>
-        <Tooltip>File manager</Tooltip>
+        <Command term="0">xffm</Command>
+        <Tooltip>File manager (xffm)</Tooltip>
         <Icon id="2"/>
-      </Control>
-    </Group>
-    <Group>
-      <Popup/>
-      <Control id="-2">
-        <Command term="0">xterm</Command>
-        <Tooltip>Terminal</Tooltip>
-        <Icon id="12"/>
       </Control>
     </Group>
     <Group>
@@ -30,29 +27,31 @@
       </Popup>
       <Control id="-2">
         <Command term="0">gvim</Command>
-        <Tooltip>Editor</Tooltip>
+        <Tooltip>Editor (gvim)</Tooltip>
         <Icon id="1"/>
       </Control>
     </Group>
     <Group>
-      <Popup/>
-      <Control id="-1" filename="libmailcheck.so">
-      </Control>
-    </Group>
-    <Group>
-      <Popup/>
-      <Control id="-2">
-        <Command term="0">mozilla</Command>
-        <Tooltip>Web browser</Tooltip>
-        <Icon id="7"/>
-      </Control>
-    </Group>
-    <Group>
-	<Popup/>
-	<Control id="-1" filename="libswitcher.so"/>
-    </Group>
-    <Group>
-      <Popup/>
+      <Popup>
+        <Item>
+          <Caption>MPlayer</Caption>
+          <Command term="0">gmplayer</Command>
+          <Tooltip>Multimedia player</Tooltip>
+          <Icon id="6"/>
+        </Item>
+        <Item>
+          <Caption>XMMS</Caption>
+          <Command term="0">xmms</Command>
+          <Tooltip>Sound player</Tooltip>
+          <Icon id="11"/>
+        </Item>
+        <Item>
+          <Caption>AbiWord</Caption>
+          <Command term="0">abiword</Command>
+          <Tooltip>Word processor</Tooltip>
+          <Icon id="1"/>
+        </Item>
+      </Popup>
       <Control id="-2">
         <Command term="0">gimp</Command>
         <Tooltip>The Gimp</Tooltip>
@@ -60,8 +59,47 @@
       </Control>
     </Group>
     <Group>
+      <Popup>
+        <Item>
+          <Caption>Dillo</Caption>
+          <Command term="0">dillo</Command>
+          <Tooltip>Small and fast web browser</Tooltip>
+          <Icon id="7"/>
+        </Item>
+        <Item>
+          <Caption>gFtp</Caption>
+          <Command term="0">gftp</Command>
+          <Tooltip>Ftp client</Tooltip>
+          <Icon id="3"/>
+        </Item>
+        <Item>
+          <Caption>Mozilla</Caption>
+          <Command term="0">mozilla</Command>
+          <Tooltip>Web browser</Tooltip>
+          <Icon id="7"/>
+        </Item>
+      </Popup>
+      <Control id="-1" filename="libmailcheck.so"/>
+    </Group>
+    <Group>
       <Popup/>
-      <Control id="-1" filename="libtrash.so"/>
+      <Control id="-1" filename="libsystembuttons.so" button1="3" button2="2" showtwo="1"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libswitcher.so" graphical="0"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libsystembuttons.so" button1="0" button2="1" showtwo="1"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-2">
+        <Command term="0">xfrun4</Command>
+        <Tooltip>Run program ...</Tooltip>
+        <Icon id="3"/>
+      </Control>
     </Group>
     <Group>
       <Popup/>
@@ -72,20 +110,7 @@
       </Control>
     </Group>
     <Group>
-      <Popup>
-        <Item>
-          <Caption>XFMouse</Caption>
-          <Command term="0">xfmouse4 -i</Command>
-          <Tooltip>Change mouse settings</Tooltip>
-          <Icon id="3"/>
-        </Item>
-        <Item>
-          <Caption>XFbd</Caption>
-          <Command term="0">xfbd4 -i</Command>
-          <Tooltip>Change background</Tooltip>
-          <Icon id="3"/>
-        </Item>
-      </Popup>
+      <Popup/>
       <Control id="-2">
         <Command term="0">xfhelp</Command>
         <Tooltip>Manual</Tooltip>
@@ -95,7 +120,7 @@
     <Group>
       <Popup/>
       <Control id="-1" filename="libclock.so">
-        <XfceClock Clock_type="0" Toggle_military="0" Toggle_am_pm="1" Toggle_secs="0"/>
+        <XfceClock Clock_type="1" Toggle_military="1" Toggle_am_pm="0" Toggle_secs="1"/>
       </Control>
     </Group>
   </Groups>
