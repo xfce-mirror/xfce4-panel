@@ -1,3 +1,76 @@
+2003-02-18 22:56  xfce
+
+	* panel/panel.c: Use xflock4 instead of xflock (same file, just a
+	name change for xfce4)
+
+2003-02-17 21:06  huysmans
+
+	* doc/xml/: Makefile.am, Makefile.in: Update Makefiles
+
+2003-02-17 20:24  huysmans
+
+	* doc/: html/GPL.html, html/Makefile.am, html/Makefile.in,
+	html/copyright.html, html/index.html, html/ln-legalnotice.html,
+	html/panel-copyright.html, html/panel-getting-started.html,
+	html/panel-settings.html, html/panel-use.html, html/settings.html,
+	html/xfce4-panel.html, xml/GPL.xml, xml/copyright.xml,
+	xml/xfce.xsl, xml/xfce4-panel.xml: Rename some docs. Don't call the
+	root file index.html.
+
+2003-02-17 14:20  huysmans
+
+	* panel/Makefile.in: Fix make dist. Add my_gettext.h to sources in
+	Makefile.
+
+2003-02-17 14:14  huysmans
+
+	* Makefile.am, Makefile.in, doc/xml/xfce4-panel.xml,
+	icons/Makefile.am, icons/Makefile.in, icons/xfce_slogan.xpm,
+	panel/Makefile.am, panel/Makefile.in, panel/info.c, panel/info.h,
+	panel/panel.c, plugins/systembuttons/systembuttons.c, po/ChangeLog,
+	po/POTFILES.in, po/de.gmo, po/de.po, po/es.gmo, po/es.po,
+	po/es_MX.gmo, po/es_MX.po, po/fi.gmo, po/fi.po, po/fr.gmo,
+	po/fr.po, po/nl.gmo, po/nl.po, po/xfce4-panel.pot: Remove info
+	panel. Use xfce4-about instead.
+
+2003-02-16 17:43  huysmans
+
+	* doc/html/: Makefile.am, Makefile.in: Add missing files to
+	Makefile
+
+2003-02-16 16:56  huysmans
+
+	* doc/: html/panel-use.html, html/settings.html,
+	images/handle-popup.png, images/item-popup.png,
+	xml/xfce4-panel.xml: Add screenshots of popup menus
+
+2003-02-16 16:16  huysmans
+
+	* doc/: html/GPL.html, html/copyright.html, html/index.html,
+	html/ln-legalnotice.html, html/panel-getting-started.html,
+	html/panel-prefs.html, html/panel-use.html, html/settings.html,
+	images/clock-properties.png, images/launcher-properties.png,
+	images/mailcheck-properties.png, images/menuitem-properties.png,
+	images/nooptions-properties.png, images/panel-settings.png,
+	images/systembuttons-properties.png, xml/xfce4-panel.xml: Added
+	lots of informative screenshots to the docs.
+
+2003-02-15 20:28  huysmans
+
+	* ChangeLog, configure, configure.ac, example.xfce4rc.in,
+	doc/html/index.html, doc/html/panel-getting-started.html,
+	doc/html/panel-prefs.html, doc/html/panel-use.html,
+	doc/images/default_panel.png, doc/xml/xfce4-panel.xml,
+	panel/controls.c, plugins/Makefile.am, plugins/Makefile.in,
+	plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.am, plugins/pager/Makefile.in,
+	plugins/pager/pager.c, plugins/switcher/Makefile.am,
+	plugins/switcher/Makefile.in, plugins/switcher/switcher.c,
+	plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in: Split graphical pager out from
+	switcher plugin. Add it to the default configuration
+
 2003-02-14 22:46  xfce
 
 	* panel/xfce_support.c: Use static var for startup notification
