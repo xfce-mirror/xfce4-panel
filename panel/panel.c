@@ -251,12 +251,6 @@ panel_set_hidden (Panel * p, gboolean hide)
     Position pos;
     static int minx = 0, maxx = 0, miny = 0, maxy = 0, centerx = 0, centery=0;
     
-    if (!p->hidden)
-    {
-        gtk_window_get_position (GTK_WINDOW (p->toplevel), &(p->position.x),
-                                 &(p->position.y));
-    }
-
     /* Get the size */
     gtk_widget_size_request (p->toplevel, &req);
     pos = p->position;
@@ -333,7 +327,12 @@ panel_hide_timeout (Panel * p)
         return TRUE;
 
     if (!p->hidden)
+    {
+        gtk_window_get_position (GTK_WINDOW (p->toplevel), &(p->position.x),
+                                 &(p->position.y));
+
 	panel_set_hidden (p, TRUE);
+    }
 
     return FALSE;
 }
@@ -596,6 +595,8 @@ panel_set_orientation (int orientation)
     if (!panel_created)
         return;
 
+    hide_current_popup_menu ();
+
     hidden = settings.autohide;
     if (hidden)
     {
@@ -605,8 +606,6 @@ panel_set_orientation (int orientation)
 	    gtk_main_iteration();
     }
     
-    hide_current_popup_menu ();
-
     /* save panel controls */
     groups_unpack ();
 
