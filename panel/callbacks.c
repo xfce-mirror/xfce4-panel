@@ -266,8 +266,9 @@ panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
 
         for(fnp = fnames; fnp; fnp = fnp->next, count--)
         {
-            strcat(execute, " ");
+            strcat(execute, " \'");
             strncat(execute, (char *)(fnp->data), MAXSTRLEN - strlen(execute));
+            strcat(execute, "\' ");
         }
 
         exec_cmd(execute, pi->in_terminal);
@@ -374,8 +375,9 @@ menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
 
         for(fnp = fnames; fnp; fnp = fnp->next, count--)
         {
-            strcat(execute, " ");
+            strcat(execute, " \'");
             strncat(execute, (char *)(fnp->data), MAXSTRLEN - strlen(execute));
+            strcat(execute, "\' ");
         }
 
         exec_cmd(execute, mi->in_terminal);

@@ -53,7 +53,6 @@ int screen_button_width[] = { 35, 45, 80, 80 };
 GtkWidget *toplevel = NULL;
 
 static GtkWidget *main_frame;
-/* static GtkWidget *main_box;	contains panel and taskbar (future) */
 
 static GtkWidget *panel_box;	/* contains all panel components */
 
@@ -114,23 +113,16 @@ static void create_panel_framework(void)
     /* create all widgets that depend on orientation */
     if (vertical)
     {
-/*	main_box = gtk_hbox_new(FALSE, 0);*/
-
 	panel_box = gtk_vbox_new(FALSE, 0);
-
 	group_box = gtk_vbox_new(FALSE, 0);
     }
     else
     {
-/*	main_box = gtk_vbox_new(FALSE, 0);*/
-
 	panel_box = gtk_hbox_new(FALSE, 0);
-
 	group_box = gtk_hbox_new(FALSE, 0);
     }
     
     /* show them */
-/*    gtk_widget_show(main_box);*/
     gtk_widget_show(panel_box);
     gtk_widget_show(group_box);
 
@@ -139,16 +131,9 @@ static void create_panel_framework(void)
     handles[RIGHT] = handle_new(RIGHT);
     
     /* pack the widgets into the main frame */
-    
-/*    gtk_container_add(GTK_CONTAINER(main_frame), main_box);
-    gtk_box_pack_start(GTK_BOX(main_box), panel_box, TRUE, TRUE, 0);
-*/
     gtk_container_add(GTK_CONTAINER(main_frame), panel_box);
-    
     handle_pack(handles[LEFT], GTK_BOX(panel_box));
-
     gtk_box_pack_start(GTK_BOX(panel_box), group_box, TRUE, TRUE, 0);
-
     handle_pack(handles[RIGHT], GTK_BOX(panel_box));
 }
 
@@ -250,8 +235,6 @@ void panel_set_layer(int layer)
 	return;
     
     set_window_layer(toplevel, layer);
-
-/*    groups_set_layer(layer);*/
 }
 
 void panel_set_size(int size)
@@ -299,10 +282,8 @@ void panel_set_style(int style)
 
 void panel_set_theme(const char *theme)
 {
-    char *tmp = settings.theme;
-
+    g_free(settings.theme);
     settings.theme = g_strdup(theme);
-    g_free(tmp);
 
     if (!panel_created)
 	return;
@@ -372,7 +353,7 @@ void panel_center(int side)
 
 void panel_set_position(void)
 {
-    if(position.x == -1 || position.y == -1)
+    if(position.x < 0 || position.y < 0)
     {
 	if (settings.orientation == HORIZONTAL)
 	    panel_center(BOTTOM);
@@ -530,11 +511,15 @@ void panel_parse_xml(xmlNodePtr node)
 	    else
 		break;
 
-	    if (w != gdk_screen_width())
-		position.x = (int)((double)(position.x * gdk_screen_width()) / (double)w);
-	    
-	    if (h != gdk_screen_height())
-		position.y = (int)((double)(position.y * gdk_screen_height()) / (double)h);
+	    /* this doesn't actually work completely, we need to
+	     * save the panel width as well to do it right */
+	    if (w != gdk_screen_width() || h != gdk_screen_height())
+	    {
+		position.x = (int)((double)(position.x * gdk_screen_width()) / 
+				(double)w);
+		position.y = (int)((double)(position.y * gdk_screen_height()) / 
+				(double)h);
+	    }
         }
     }
 

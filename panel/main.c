@@ -49,8 +49,7 @@ static gboolean session_managed = FALSE;
 
 static void save_yourself(gpointer data, int save_style, gboolean shutdown, int interact_style, gboolean fast)
 {
-    if (!disable_user_config)
-	write_panel_config();
+    write_panel_config();
 }
 
 static void die (gpointer client_data)
@@ -109,9 +108,8 @@ void restart(void)
     /* somehow the position gets lost here ... */
     x = position.x;
     y = position.y;
-    
-    if (!disable_user_config)
-	write_panel_config();
+	
+    write_panel_config();
 
     gtk_widget_hide(toplevel);
 
@@ -122,7 +120,7 @@ void restart(void)
     
     position.x = x;
     position.y = y;
-    gtk_window_move(GTK_WINDOW(toplevel), x, y);
+    panel_set_position();
 }
 
 /* signal handler */
@@ -132,13 +130,10 @@ static void sighandler(int sig)
     switch (sig)
     {
         case SIGHUP:
-	    /* FIXME: doesn't work when run from xterm and xterm closes
-	       find something else!
-	       ? does it still ?
-	     */
-	       
-	      restart();
-	      break;
+	    /* sleep for a second, we may be exiting X */
+	    g_usleep(1000000);
+	    restart();
+	    break;
 	case SIGINT:
 	    /* hack: prevent the panel from saving config */
 	    disable_user_config = TRUE;
@@ -153,27 +148,15 @@ int main(int argc, char **argv)
     int i;
     gboolean net_wm_support = FALSE;
     
+    gtk_init(&argc, &argv);
+
     if(argc == 2 && (strequal(argv[1], "-v") || strequal(argv[1], "--version")))
     {
         g_print(_("xfce4, version %s\n\n"
                   "Part of the XFce Desktop Environment\n"
                   "http://www.xfce.org\n"), VERSION);
+	return 0;
     }
-
-    gtk_init(&argc, &argv);
-
-    client_session = client_session_new(argc, argv, NULL /* data */ , 
-	    				SESSION_RESTART_IF_RUNNING, 40);
-
-    client_session->save_yourself = save_yourself;
-    client_session->die = die;
-
-    if(!(session_managed = session_init(client_session)))
-        g_message("xfce4: Cannot connect to session manager");
-
-    signal(SIGHUP, &sighandler);
-    signal(SIGTERM, &sighandler);
-    signal(SIGINT, &sighandler);
 
     for (i = 0; i < 5; i++)
     {
@@ -193,6 +176,19 @@ int main(int argc, char **argv)
 		       "Some XFce features may not work as intended."));
     }		
     
+    client_session = client_session_new(argc, argv, NULL /* data */ , 
+	    				SESSION_RESTART_IF_RUNNING, 40);
+
+    client_session->save_yourself = save_yourself;
+    client_session->die = die;
+
+    if(!(session_managed = session_init(client_session)))
+        g_message("xfce4: Cannot connect to session manager");
+
+    signal(SIGHUP, &sighandler);
+    signal(SIGTERM, &sighandler);
+    signal(SIGINT, &sighandler);
+
     icons_init();
     
     xfce_run();
