@@ -185,6 +185,9 @@ create_systembutton (t_systembuttons *sb, int n, int type)
 
     sb->cb_ids[n] = connect_callback(button, type);
     sb->buttons[n] = button;
+
+    if (G_UNLIKELY (type == SETUP && disable_user_config))
+	gtk_widget_set_sensitive (button, FALSE);
 }
 
 static void

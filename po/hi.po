@@ -5,14 +5,14 @@
 #
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2004-08-06 16:24+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-22 16:35+0200\n"
 "PO-Revision-Date: 2003-05-21 12:50+0530\n"
 "Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "Project-Id-Version  Xfce 4\n"
 
 # libgnomeui/gnome-file-entry.c:418
@@ -21,83 +21,80 @@ msgid "Select file"
 msgstr "फाइल चयन करें"
 
 #: panel/settings.c:172
-msgid "No data was found. The panel will be empty"
+msgid "No data was found. The panel will be empty."
 msgstr ""
 
-#: panel/controls_dialog.c:88 panel/item_dialog.c:1132
+#: panel/controls_dialog.c:88 panel/item_dialog.c:1200
 msgid "Position:"
 msgstr "स्थान:"
 
 #: panel/controls_dialog.c:148
-msgid "Change item"
-msgstr "बदलें"
+#, fuzzy
+msgid "Item properties"
+msgstr "/विशेषताएं (_P) ..."
 
-#: panel/controls_dialog.c:200 panel/controls.c:654
+#: panel/controls_dialog.c:200 panel/controls.c:685
 msgid "Removing the item will also remove its popup menu."
 msgstr ""
 
-#: panel/item_dialog.c:135 panel/item_dialog.c:518
+#: panel/item_dialog.c:151 panel/item_dialog.c:605
 msgid "Select command"
 msgstr "आदेश चुनें"
 
-#: panel/item_dialog.c:215
+#: panel/item_dialog.c:294
 msgid "Command:"
 msgstr "आदेश :"
 
-#: panel/item_dialog.c:266
+#: panel/item_dialog.c:353
 msgid "Run in _terminal"
 msgstr "टर्मिनल में चलाएं (_t)"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:372
 msgid "Use startup _notification"
 msgstr ""
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:566
 msgid "Other Icon"
 msgstr "अन्य आईकाॅन"
 
-#: panel/item_dialog.c:589
+#: panel/item_dialog.c:676
 msgid "Drag file onto this frame to change the icon"
 msgstr ""
 
-#: panel/item_dialog.c:875
+#: panel/item_dialog.c:962
 msgid "Caption:"
 msgstr ""
 
-#: panel/item_dialog.c:904
+#: panel/item_dialog.c:991
 msgid "Tooltip:"
 msgstr "टूल टिप्पणी"
 
-#: panel/item_dialog.c:939
-msgid "Menu:"
-msgstr "मेनु:"
-
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:1019
 msgid "Attach menu to launcher"
 msgstr "मेनू को लाँचर से जोडें"
 
-#: panel/item_dialog.c:1166
+#: panel/item_dialog.c:1234
 msgid "Change menu item"
 msgstr "मेनू वस्तु बदलें"
 
 #. add buttons
-#: panel/item_dialog.c:1172
+#: panel/item_dialog.c:1240
 msgid "Remove"
 msgstr "हटाएं"
 
-#: panel/item_dialog.c:1184 panel/item.c:635
+#: panel/item_dialog.c:1252 panel/item.c:631
 msgid "Launcher"
 msgstr "लाँचर"
 
-#: panel/item.c:470
+#: panel/item.c:466
 msgid "Click mouse button 3 to change item"
 msgstr "वस्तु बदलने के लिए माउस बट्टन ३ दबाएं"
 
-#: panel/item.c:493
+#: panel/item.c:489
 msgid "Add launcher"
 msgstr "लाँचर जोडें"
 
-#: panel/item.c:498
+#: panel/item.c:494
 msgid "Add new item"
 msgstr "नया वस्तु जोडें"
 
@@ -105,7 +102,7 @@ msgstr "नया वस्तु जोडें"
 msgid "Are you sure you want to exit?"
 msgstr "कया आप सचमुच बाहर निकलना चाहते हैं"
 
-#: panel/main.c:335
+#: panel/main.c:326
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -122,77 +119,69 @@ msgstr ""
 "Xfce डेसकटॉप वातावरण का भाग\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:408
+#: panel/main.c:395
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr ""
 
-#: panel/main.c:413
+#: panel/main.c:400
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr ""
 
-#: panel/controls.c:609 panel/controls.c:700
+#: panel/controls.c:640 panel/controls.c:731
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr ""
 
-#: panel/controls.c:761
+#: panel/controls.c:792 panel/panel.c:573
 #, fuzzy
 msgid "_Properties..."
 msgstr "/विशेषताएं (_P) ..."
 
-#: panel/controls.c:766
+#: panel/controls.c:797
 #, fuzzy
 msgid "_Remove"
 msgstr "/हटाएं (_R)"
 
-#: panel/controls.c:775
+#: panel/controls.c:806 panel/panel.c:563
 #, fuzzy
 msgid "Add _new item"
 msgstr "/नया वस्तु जोडें (_n)"
 
-#: panel/controls.c:1049
+#: panel/controls.c:1080
 msgid "This item has no configuration options"
 msgstr "इस वस्तु के कोइ कॉनफिगरेशन विकल्प नहीं हैं"
 
-#: panel/panel.c:547
-msgid "/Xfce Panel"
-msgstr "/Xfce पेनेल"
-
-#: panel/panel.c:549
-msgid "/Add _new item"
-msgstr "/नया वस्तु जोडें (_n)"
-
-#: panel/panel.c:551
-msgid "/_Properties..."
-msgstr "/विशेषताएं (_P) ..."
-
-#: panel/panel.c:552
-msgid "/_About Xfce"
-msgstr "/Xfce के बोरे में (_A)"
-
-#: panel/panel.c:553
-msgid "/_Help"
-msgstr "/सहायता (_H)"
-
-#: panel/panel.c:555
-msgid "/_Lock screen"
-msgstr "/सक्रीन पर ताला (_L)"
-
-#: panel/panel.c:556
-#, fuzzy
-msgid "/_Restart"
-msgstr "पुरानी स्थिति में लाएं (_R)"
-
-#: panel/panel.c:558
-msgid "/E_xit"
-msgstr "/बाहर निकलें (_x)"
-
-#: panel/panel.c:937 settings/xfce_settings_plugin.c:67
+#: panel/panel.c:554 panel/panel.c:956 settings/xfce_settings_plugin.c:67
 #: settings/xfce_settings_dialog.c:453
 msgid "Xfce Panel"
 msgstr "Xfce पेनेल"
+
+#: panel/panel.c:578
+#, fuzzy
+msgid "_About Xfce"
+msgstr "/Xfce के बोरे में (_A)"
+
+#: panel/panel.c:583
+#, fuzzy
+msgid "_Help"
+msgstr "/सहायता (_H)"
+
+#: panel/panel.c:592
+#, fuzzy
+msgid "_Lock screen"
+msgstr "/सक्रीन पर ताला (_L)"
+
+#: panel/panel.c:597
+#, fuzzy
+msgid "_Restart"
+msgstr "पुरानी स्थिति में लाएं (_R)"
+
+#: panel/panel.c:606
+#, fuzzy
+msgid "E_xit"
+msgstr "/बाहर निकलें (_x)"
 
 #: panel/icons.c:68
 msgid "Default"
@@ -336,47 +325,47 @@ msgstr "व्यावहार"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:204
+#: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
 msgstr ""
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:423
 msgid "Clock type:"
 msgstr "घडी प्रकार"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:436
 msgid "Analog"
 msgstr "एनॉलॉग"
 
-#: plugins/clock/clock.c:450
+#: plugins/clock/clock.c:440
 msgid "Digital"
 msgstr "डिजिटल"
 
-#: plugins/clock/clock.c:454
+#: plugins/clock/clock.c:444
 msgid "LED"
 msgstr "एलईडी"
 
-#: plugins/clock/clock.c:516
+#: plugins/clock/clock.c:506
 msgid "Hour mode:"
 msgstr "घंटा पद्धति"
 
-#: plugins/clock/clock.c:523
+#: plugins/clock/clock.c:513
 msgid "24 hour"
 msgstr "२४ घंटे"
 
-#: plugins/clock/clock.c:529
+#: plugins/clock/clock.c:519
 msgid "12 hour"
 msgstr "१२ घंटे"
 
-#: plugins/clock/clock.c:535
+#: plugins/clock/clock.c:525
 msgid "AM/PM"
 msgstr "पुर्ववगन्ह/अपरान्ह"
 
-#: plugins/clock/clock.c:573
+#: plugins/clock/clock.c:563
 msgid "Show seconds:"
 msgstr "क्षण दिखाएं"
 
-#: plugins/clock/clock.c:684
+#: plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Xfce घडी"
 
@@ -408,38 +397,38 @@ msgid "Lock the screen"
 msgstr "सक्रीन पर ताला लगाएं"
 
 #: plugins/systembuttons/systembuttons.c:141
-#: plugins/systembuttons/systembuttons.c:505
+#: plugins/systembuttons/systembuttons.c:508
 msgid "Exit"
 msgstr "बाहर"
 
 #: plugins/systembuttons/systembuttons.c:142
-#: plugins/systembuttons/systembuttons.c:506
+#: plugins/systembuttons/systembuttons.c:509
 msgid "Setup"
 msgstr "सेटप"
 
 #: plugins/systembuttons/systembuttons.c:143
-#: plugins/systembuttons/systembuttons.c:507
+#: plugins/systembuttons/systembuttons.c:510
 msgid "Info"
 msgstr "जानकारी"
 
-#: plugins/systembuttons/systembuttons.c:487
+#: plugins/systembuttons/systembuttons.c:490
 msgid "Show two buttons:"
 msgstr "दो बट्टन दिखाएं"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:504
+#: plugins/systembuttons/systembuttons.c:507
 msgid "Lock"
 msgstr "ताला"
 
-#: plugins/systembuttons/systembuttons.c:536
+#: plugins/systembuttons/systembuttons.c:539
 msgid "Button 1:"
 msgstr "बट्टन 1"
 
-#: plugins/systembuttons/systembuttons.c:552
+#: plugins/systembuttons/systembuttons.c:555
 msgid "Button 2:"
 msgstr "बट्टन 2"
 
-#: plugins/systembuttons/systembuttons.c:588
+#: plugins/systembuttons/systembuttons.c:591
 msgid "System buttons"
 msgstr "सिसटम बट्टन"
 
@@ -447,30 +436,47 @@ msgstr "सिसटम बट्टन"
 msgid "Separator"
 msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:792
+#: plugins/mailcheck/mailcheck.c:788
 msgid "Mail box:"
 msgstr "डाक पेटी"
 
-#: plugins/mailcheck/mailcheck.c:829
-msgid "New mail:"
-msgstr ""
+#: plugins/mailcheck/mailcheck.c:825
+#, fuzzy
+msgid "New mail command:"
+msgstr "डाक आदेश"
 
-#: plugins/mailcheck/mailcheck.c:843
+#: plugins/mailcheck/mailcheck.c:839
 #, fuzzy
 msgid "Command to run when new mail arrives"
 msgstr "पेनेल पर बट्टन दबाने पर चलाने वाला आदेश"
 
-#: plugins/mailcheck/mailcheck.c:873
+#: plugins/mailcheck/mailcheck.c:869
 msgid "Command to run when the button on the panel is clicked"
 msgstr "पेनेल पर बट्टन दबाने पर चलाने वाला आदेश"
 
-#: plugins/mailcheck/mailcheck.c:895
+#: plugins/mailcheck/mailcheck.c:891
 msgid "Interval (sec):"
 msgstr "अंतराल (क्षण):"
 
-#: plugins/mailcheck/mailcheck.c:967
-msgid "Mail check"
+#: plugins/mailcheck/mailcheck.c:963
+#, fuzzy
+msgid "Mail checker"
 msgstr "डाक देखो"
+
+#~ msgid "Change item"
+#~ msgstr "बदलें"
+
+#~ msgid "Menu:"
+#~ msgstr "मेनु:"
+
+#~ msgid "/Xfce Panel"
+#~ msgstr "/Xfce पेनेल"
+
+#~ msgid "/Add _new item"
+#~ msgstr "/नया वस्तु जोडें (_n)"
+
+#~ msgid "/_Properties..."
+#~ msgstr "/विशेषताएं (_P) ..."
 
 #~ msgid "Select icon"
 #~ msgstr "आईकाॅन चुनें"
@@ -505,9 +511,6 @@ msgstr "डाक देखो"
 
 #~ msgid "Position"
 #~ msgstr "स्थिति"
-
-#~ msgid "Mail command:"
-#~ msgstr "डाक आदेश"
 
 #~ msgid "Sunday"
 #~ msgstr "रविवार"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-10 13:26+0200\n"
+"POT-Creation-Date: 2004-08-22 16:35+0200\n"
 "PO-Revision-Date: 2004-07-25 02:19+0300\n"
 "Last-Translator: Yuval Tanny <yuvaltanny@walla.co.il>\n"
 "Language-Team: Yuval Tanny <en@li.org>\n"
@@ -16,92 +16,93 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: panel/xfce_support.c:638
+#: panel/xfce_support.c:603
 msgid "Select file"
 msgstr "בחר קובץ:"
 
-#: panel/controls_dialog.c:87 panel/item_dialog.c:1132
+#: panel/settings.c:172
+msgid "No data was found. The panel will be empty."
+msgstr ""
+
+#: panel/controls_dialog.c:88 panel/item_dialog.c:1200
 msgid "Position:"
 msgstr "מיקום:"
 
-#: panel/controls_dialog.c:145
-msgid "Change item"
-msgstr "שנה פריט"
+#: panel/controls_dialog.c:148
+#, fuzzy
+msgid "Item properties"
+msgstr "_מאפיינים..."
 
-#: panel/controls_dialog.c:197 panel/controls.c:659
+#: panel/controls_dialog.c:200 panel/controls.c:685
 msgid "Removing the item will also remove its popup menu."
 msgstr "הסרת הפריט גם תסיר את כל התפריטים הקופצים."
 
-#: panel/item_dialog.c:135 panel/item_dialog.c:518
+#: panel/item_dialog.c:151 panel/item_dialog.c:605
 msgid "Select command"
 msgstr "בחר פקודה"
 
-#: panel/item_dialog.c:215
+#: panel/item_dialog.c:294
 msgid "Command:"
 msgstr "פקודה:"
 
-#: panel/item_dialog.c:266
+#: panel/item_dialog.c:353
 msgid "Run in _terminal"
 msgstr "הרץ בתוך _מסוף"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:372
 msgid "Use startup _notification"
 msgstr "השתמש בהתרעת _פתיחה"
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:566
 msgid "Other Icon"
 msgstr "צלמית אחרת"
 
-#: panel/item_dialog.c:589
+#: panel/item_dialog.c:676
 msgid "Drag file onto this frame to change the icon"
 msgstr "גרור קובץ למסגרת זו כדי לשנות את הצלמית"
 
-#: panel/item_dialog.c:875
+#: panel/item_dialog.c:962
 msgid "Caption:"
 msgstr "כותרת:"
 
-#: panel/item_dialog.c:904
+#: panel/item_dialog.c:991
 msgid "Tooltip:"
 msgstr "תיאור כלי:"
 
-#: panel/item_dialog.c:939
-msgid "Menu:"
-msgstr "תפריט:"
-
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:1019
 msgid "Attach menu to launcher"
 msgstr "הוסף תפריט למשגר"
 
-#: panel/item_dialog.c:1166
+#: panel/item_dialog.c:1234
 msgid "Change menu item"
 msgstr "שנה פריט תפריט"
 
 #. add buttons
-#: panel/item_dialog.c:1172
+#: panel/item_dialog.c:1240
 msgid "Remove"
 msgstr "הסר"
 
-#: panel/item_dialog.c:1184 panel/item.c:637
+#: panel/item_dialog.c:1252 panel/item.c:631
 msgid "Launcher"
 msgstr "משגר"
 
-#: panel/item.c:470
+#: panel/item.c:466
 msgid "Click mouse button 3 to change item"
 msgstr "לחץ על לחצן העכבר 3 פעמים כדי לשנות את הפריט"
 
-#: panel/item.c:493
+#: panel/item.c:489
 msgid "Add launcher"
 msgstr "הוסף משגר"
 
-#: panel/item.c:498
+#: panel/item.c:494
 msgid "Add new item"
 msgstr "הוסף פריט חדש"
 
-#: panel/main.c:115
+#: panel/main.c:119
 msgid "Are you sure you want to exit?"
 msgstr "האם אתה בטוח שברצונך לצאת?"
 
-#: panel/main.c:322
+#: panel/main.c:326
 #, c-format
 msgid ""
 "\n"
@@ -115,8 +116,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" לוח Xfce "
-"%s גרסה\n"
+" לוח Xfce %s גרסה\n"
 "\n"
 " חלק מסביבת העבודה של Xfce\n"
 " http://www.xfce.org\n"
@@ -124,215 +124,196 @@ msgstr ""
 " מופץ תחת רישיון ה GNU GPL.\n"
 "\n"
 
-#: panel/main.c:386
+#: panel/main.c:395
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s הופעל בהצלחה ללא ניהול ההפעלה"
 
-#: panel/main.c:391
+#: panel/main.c:400
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s הופעל בהצלחה עם ניהול ההפעלה"
 
-#: panel/controls.c:614 panel/controls.c:705
+#: panel/controls.c:640 panel/controls.c:731
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "אין אפשרות ליצור פריט ללוח \"%s\"."
 
-#: panel/controls.c:763
+#: panel/controls.c:792 panel/panel.c:573
 msgid "_Properties..."
 msgstr "_מאפיינים..."
 
-#: panel/controls.c:768
+#: panel/controls.c:797
 msgid "_Remove"
 msgstr "_הסר"
 
-#: panel/controls.c:777
+#: panel/controls.c:806 panel/panel.c:563
 msgid "Add _new item"
 msgstr "הוסף פריט _חדש"
 
-#: panel/controls.c:1055
+#: panel/controls.c:1080
 msgid "This item has no configuration options"
 msgstr "לפריט זה אין אפשרויות הגדרה"
 
-#: panel/panel.c:369
-msgid "/Xfce Panel"
-msgstr "/לוח  Xfce"
-
-#: panel/panel.c:371
-msgid "/Add _new item"
-msgstr "/הוסף פריט חדש"
-
-#: panel/panel.c:373
-msgid "/_Properties..."
-msgstr "/_מאפיינים..."
-
-#: panel/panel.c:374
-msgid "/_About Xfce"
-msgstr "/_אודות Xfce"
-
-#: panel/panel.c:375
-msgid "/_Help"
-msgstr "/_עזרה"
-
-#: panel/panel.c:378
-msgid "/_Settings manager"
-msgstr "/_מנהל ההגדרות"
-
-#: panel/panel.c:381
-msgid "/_Lock screen"
-msgstr "/_נעל מסך"
-
-#: panel/panel.c:382
-msgid "/_Restart"
-msgstr "/_הפלה מחדש"
-
-#: panel/panel.c:384
-msgid "/E_xit"
-msgstr "/י_ציאה"
-
-#: panel/panel.c:785 settings/xfce_settings_plugin.c:67
-#: settings/xfce_settings_dialog.c:606
+#: panel/panel.c:554 panel/panel.c:956 settings/xfce_settings_plugin.c:67
+#: settings/xfce_settings_dialog.c:453
 msgid "Xfce Panel"
 msgstr "לוח Xfce"
 
-#: panel/icons.c:65
+#: panel/panel.c:578
+#, fuzzy
+msgid "_About Xfce"
+msgstr "/_אודות Xfce"
+
+#: panel/panel.c:583
+#, fuzzy
+msgid "_Help"
+msgstr "/_עזרה"
+
+#: panel/panel.c:592
+#, fuzzy
+msgid "_Lock screen"
+msgstr "/_נעל מסך"
+
+#: panel/panel.c:597
+#, fuzzy
+msgid "_Restart"
+msgstr "/_הפלה מחדש"
+
+#: panel/panel.c:606
+#, fuzzy
+msgid "E_xit"
+msgstr "/י_ציאה"
+
+#: panel/icons.c:68
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: panel/icons.c:66
+#: panel/icons.c:69
 msgid "Editor"
 msgstr "עורך"
 
-#: panel/icons.c:67
+#: panel/icons.c:70
 msgid "File management"
 msgstr "מנהל הקבצים"
 
-#: panel/icons.c:68
+#: panel/icons.c:71
 msgid "Utilities"
 msgstr "כלים"
 
-#: panel/icons.c:69
+#: panel/icons.c:72
 msgid "Games"
 msgstr "משחקים"
 
-#: panel/icons.c:70
+#: panel/icons.c:73
 msgid "Help browser"
 msgstr "דפדפן העזרה"
 
-#: panel/icons.c:71
+#: panel/icons.c:74
 msgid "Multimedia"
 msgstr "מולטימדיה"
 
-#: panel/icons.c:72
+#: panel/icons.c:75
 msgid "Network"
 msgstr "רשת"
 
-#: panel/icons.c:73
+#: panel/icons.c:76
 msgid "Graphics"
 msgstr "גרפיקה"
 
-#: panel/icons.c:74
+#: panel/icons.c:77
 msgid "Printer"
 msgstr "מדפסת"
 
-#: panel/icons.c:75
+#: panel/icons.c:78
 msgid "Productivity"
 msgstr "פרודוקטיביות"
 
-#: panel/icons.c:76
+#: panel/icons.c:79
 msgid "Sound"
 msgstr "צליל"
 
-#: panel/icons.c:77
+#: panel/icons.c:80
 msgid "Terminal"
 msgstr "מסוף"
 
-#: panel/mcs_client.c:213
+#: panel/mcs_client.c:204
 msgid "Settings manager not available"
 msgstr "מנהל ההגדרות אינו זמין"
 
-#: panel/popup.c:270
+#: panel/popup.c:255
 msgid "Menu"
 msgstr "תפריט"
 
-#: settings/xfce_settings_dialog.c:101
+#: settings/xfce_settings_dialog.c:97
 msgid "Small"
 msgstr "קטן"
 
-#: settings/xfce_settings_dialog.c:105
+#: settings/xfce_settings_dialog.c:101
 msgid "Medium"
 msgstr "בינוני"
 
-#: settings/xfce_settings_dialog.c:109
+#: settings/xfce_settings_dialog.c:105
 msgid "Large"
 msgstr "גדול"
 
-#: settings/xfce_settings_dialog.c:113
+#: settings/xfce_settings_dialog.c:109
 msgid "Huge"
 msgstr "ענק"
 
-#: settings/xfce_settings_dialog.c:193
+#: settings/xfce_settings_dialog.c:189
 msgid "Horizontal"
 msgstr "אופקי"
 
-#: settings/xfce_settings_dialog.c:197
+#: settings/xfce_settings_dialog.c:193
 msgid "Vertical"
 msgstr "אנכי"
 
-#: settings/xfce_settings_dialog.c:236
+#: settings/xfce_settings_dialog.c:232
 msgid "Left"
 msgstr "שמאל"
 
-#: settings/xfce_settings_dialog.c:240
+#: settings/xfce_settings_dialog.c:236
 msgid "Right"
 msgstr "ימין"
 
-#: settings/xfce_settings_dialog.c:244 settings/xfce_settings_dialog.c:504
+#: settings/xfce_settings_dialog.c:240
 msgid "Top"
 msgstr "מעלה"
 
-#: settings/xfce_settings_dialog.c:248 settings/xfce_settings_dialog.c:512
+#: settings/xfce_settings_dialog.c:244
 msgid "Bottom"
 msgstr "תחתית"
 
-#: settings/xfce_settings_dialog.c:406
+#: settings/xfce_settings_dialog.c:279
 msgid "Panel size:"
 msgstr "גודל הלוח:"
 
-#: settings/xfce_settings_dialog.c:422
+#: settings/xfce_settings_dialog.c:295
 msgid "Panel orientation:"
 msgstr "כיוון הלוח:"
 
-#: settings/xfce_settings_dialog.c:438
+#: settings/xfce_settings_dialog.c:311
 msgid "Popup position:"
 msgstr "עמדת הקפצה:"
 
-#: settings/xfce_settings_dialog.c:454
-msgid "Icon theme:"
-msgstr "ערכת נושא לצלמיות"
+#: settings/xfce_settings_dialog.c:349
+msgid "Always on top:"
+msgstr ""
 
-#: settings/xfce_settings_dialog.c:488
-msgid "Panel layer:"
-msgstr "שכבת הלוח:"
-
-#: settings/xfce_settings_dialog.c:508
-msgid "Normal"
-msgstr "רגיל"
-
-#: settings/xfce_settings_dialog.c:554
+#: settings/xfce_settings_dialog.c:401
 msgid "Autohide:"
 msgstr "הסתרה אוטומטית:"
 
-#: settings/xfce_settings_dialog.c:623
+#: settings/xfce_settings_dialog.c:470
 msgid "Xfce Panel Settings"
 msgstr "הגדרות לוח Xfce"
 
-#: settings/xfce_settings_dialog.c:634
+#: settings/xfce_settings_dialog.c:481
 msgid "Appearance"
 msgstr "מראה"
 
-#: settings/xfce_settings_dialog.c:647
+#: settings/xfce_settings_dialog.c:494
 msgid "Behaviour"
 msgstr "התנהגות"
 
@@ -388,7 +369,15 @@ msgstr "הראה שניות:"
 msgid "Xfce Clock"
 msgstr "שעון Xfce"
 
-#: plugins/pager/pager.c:271
+#: plugins/pager/pager.c:309
+msgid "Number of rows:"
+msgstr ""
+
+#: plugins/pager/pager.c:311
+msgid "Number of columns:"
+msgstr ""
+
+#: plugins/pager/pager.c:355
 msgid "Graphical pager"
 msgstr "מחליף סביבות עבודה גרפי"
 
@@ -396,7 +385,7 @@ msgstr "מחליף סביבות עבודה גרפי"
 msgid "Desktop switcher"
 msgstr "מחליף שולחנות עבודה"
 
-#: plugins/systembuttons/systembuttons.c:60
+#: plugins/systembuttons/systembuttons.c:55
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -406,43 +395,43 @@ msgstr ""
 "\n"
 "שאל את מנהל המערכת שלך למידע נוסף."
 
-#: plugins/systembuttons/systembuttons.c:148
+#: plugins/systembuttons/systembuttons.c:140
 msgid "Lock the screen"
 msgstr "נעל מסך"
 
-#: plugins/systembuttons/systembuttons.c:149
-#: plugins/systembuttons/systembuttons.c:518
+#: plugins/systembuttons/systembuttons.c:141
+#: plugins/systembuttons/systembuttons.c:508
 msgid "Exit"
 msgstr "יציאה"
 
-#: plugins/systembuttons/systembuttons.c:150
-#: plugins/systembuttons/systembuttons.c:519
+#: plugins/systembuttons/systembuttons.c:142
+#: plugins/systembuttons/systembuttons.c:509
 msgid "Setup"
 msgstr "הגדרות"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:520
+#: plugins/systembuttons/systembuttons.c:143
+#: plugins/systembuttons/systembuttons.c:510
 msgid "Info"
 msgstr "מידע"
 
-#: plugins/systembuttons/systembuttons.c:500
+#: plugins/systembuttons/systembuttons.c:490
 msgid "Show two buttons:"
 msgstr "הראה שני לחצנים:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:517
+#: plugins/systembuttons/systembuttons.c:507
 msgid "Lock"
 msgstr "נעול"
 
-#: plugins/systembuttons/systembuttons.c:549
+#: plugins/systembuttons/systembuttons.c:539
 msgid "Button 1:"
 msgstr "לחצן 1:"
 
-#: plugins/systembuttons/systembuttons.c:565
+#: plugins/systembuttons/systembuttons.c:555
 msgid "Button 2:"
 msgstr "לחצן 2:"
 
-#: plugins/systembuttons/systembuttons.c:600
+#: plugins/systembuttons/systembuttons.c:591
 msgid "System buttons"
 msgstr "לחצני מערכת"
 
@@ -450,27 +439,55 @@ msgstr "לחצני מערכת"
 msgid "Separator"
 msgstr "מפריד"
 
-#: plugins/mailcheck/mailcheck.c:767
+#: plugins/mailcheck/mailcheck.c:788
 msgid "Mail box:"
 msgstr "תיבת דוא\"ל:"
 
-#: plugins/mailcheck/mailcheck.c:804
-msgid "New mail:"
+#: plugins/mailcheck/mailcheck.c:825
+#, fuzzy
+msgid "New mail command:"
 msgstr "דואר חדש:"
 
-#: plugins/mailcheck/mailcheck.c:818
+#: plugins/mailcheck/mailcheck.c:839
 msgid "Command to run when new mail arrives"
 msgstr "פקודה להרצה כאשר דואר חדש מגיע"
 
-#: plugins/mailcheck/mailcheck.c:848
+#: plugins/mailcheck/mailcheck.c:869
 msgid "Command to run when the button on the panel is clicked"
 msgstr "פקודה להרצה כאשר הלחצן על הלוח נלחץ"
 
-#: plugins/mailcheck/mailcheck.c:870
+#: plugins/mailcheck/mailcheck.c:891
 msgid "Interval (sec):"
 msgstr "משך זמן (שניות):"
 
-#: plugins/mailcheck/mailcheck.c:942
-msgid "Mail check"
+#: plugins/mailcheck/mailcheck.c:963
+#, fuzzy
+msgid "Mail checker"
 msgstr "בדיקת דוא\"ל"
 
+#~ msgid "Change item"
+#~ msgstr "שנה פריט"
+
+#~ msgid "Menu:"
+#~ msgstr "תפריט:"
+
+#~ msgid "/Xfce Panel"
+#~ msgstr "/לוח  Xfce"
+
+#~ msgid "/Add _new item"
+#~ msgstr "/הוסף פריט חדש"
+
+#~ msgid "/_Properties..."
+#~ msgstr "/_מאפיינים..."
+
+#~ msgid "/_Settings manager"
+#~ msgstr "/_מנהל ההגדרות"
+
+#~ msgid "Icon theme:"
+#~ msgstr "ערכת נושא לצלמיות"
+
+#~ msgid "Panel layer:"
+#~ msgstr "שכבת הלוח:"
+
+#~ msgid "Normal"
+#~ msgstr "רגיל"

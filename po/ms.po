@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.0.3\n"
-"POT-Creation-Date: 2004-08-06 16:24+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-22 16:35+0200\n"
 "PO-Revision-Date: 2004-02-07 10:31+0800\n"
 "Last-Translator: Harun Musa <mharun@gmx.net>\n"
 "Language-Team: Malay <translation-team-ms@list.sourceforge.net>\n"
@@ -19,83 +20,80 @@ msgid "Select file"
 msgstr "Pilih fail"
 
 #: panel/settings.c:172
-msgid "No data was found. The panel will be empty"
+msgid "No data was found. The panel will be empty."
 msgstr ""
 
-#: panel/controls_dialog.c:88 panel/item_dialog.c:1132
+#: panel/controls_dialog.c:88 panel/item_dialog.c:1200
 msgid "Position:"
 msgstr "Posisi:"
 
 #: panel/controls_dialog.c:148
-msgid "Change item"
-msgstr "Tukar item"
+#, fuzzy
+msgid "Item properties"
+msgstr "/_Perbendaharaan..."
 
-#: panel/controls_dialog.c:200 panel/controls.c:654
+#: panel/controls_dialog.c:200 panel/controls.c:685
 msgid "Removing the item will also remove its popup menu."
 msgstr "Menyahkan item juga akan menyahkan menu popupnya."
 
-#: panel/item_dialog.c:135 panel/item_dialog.c:518
+#: panel/item_dialog.c:151 panel/item_dialog.c:605
 msgid "Select command"
 msgstr "Pilih arahan"
 
-#: panel/item_dialog.c:215
+#: panel/item_dialog.c:294
 msgid "Command:"
 msgstr "Arahan:"
 
-#: panel/item_dialog.c:266
+#: panel/item_dialog.c:353
 msgid "Run in _terminal"
 msgstr "Lari dalam _terminal"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:372
 msgid "Use startup _notification"
 msgstr "Guna _notifikasi pemula"
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:566
 msgid "Other Icon"
 msgstr "Ikon Lain"
 
-#: panel/item_dialog.c:589
+#: panel/item_dialog.c:676
 msgid "Drag file onto this frame to change the icon"
 msgstr "Jatuhkan fail kedalam frame ini untuk tukar ikon"
 
-#: panel/item_dialog.c:875
+#: panel/item_dialog.c:962
 msgid "Caption:"
 msgstr "Caption:"
 
-#: panel/item_dialog.c:904
+#: panel/item_dialog.c:991
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:939
-msgid "Menu:"
-msgstr "Menu:"
-
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:1019
 msgid "Attach menu to launcher"
 msgstr "Tambah menu ke pelancar"
 
-#: panel/item_dialog.c:1166
+#: panel/item_dialog.c:1234
 msgid "Change menu item"
 msgstr "Tukar menu item"
 
 #. add buttons
-#: panel/item_dialog.c:1172
+#: panel/item_dialog.c:1240
 msgid "Remove"
 msgstr "Buang"
 
-#: panel/item_dialog.c:1184 panel/item.c:635
+#: panel/item_dialog.c:1252 panel/item.c:631
 msgid "Launcher"
 msgstr "Pelancar"
 
-#: panel/item.c:470
+#: panel/item.c:466
 msgid "Click mouse button 3 to change item"
 msgstr "Klik bebutang 3 tetikus untuk tukar item"
 
-#: panel/item.c:493
+#: panel/item.c:489
 msgid "Add launcher"
 msgstr "Tambah pelancar"
 
-#: panel/item.c:498
+#: panel/item.c:494
 msgid "Add new item"
 msgstr "Tambah item baru"
 
@@ -103,7 +101,7 @@ msgstr "Tambah item baru"
 msgid "Are you sure you want to exit?"
 msgstr "Adakah anda pasti untuk keluar?"
 
-#: panel/main.c:335
+#: panel/main.c:326
 #, fuzzy, c-format
 msgid ""
 "\n"
@@ -120,76 +118,69 @@ msgstr ""
 "Sebahagian Persekitaran Meja Xfce\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:408
+#: panel/main.c:395
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr ""
 
-#: panel/main.c:413
+#: panel/main.c:400
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr ""
 
-#: panel/controls.c:609 panel/controls.c:700
+#: panel/controls.c:640 panel/controls.c:731
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr ""
 
-#: panel/controls.c:761
+#: panel/controls.c:792 panel/panel.c:573
 #, fuzzy
 msgid "_Properties..."
 msgstr "/_Perbendaharaan..."
 
-#: panel/controls.c:766
+#: panel/controls.c:797
 #, fuzzy
 msgid "_Remove"
 msgstr "/_Buang"
 
-#: panel/controls.c:775
+#: panel/controls.c:806 panel/panel.c:563
 #, fuzzy
 msgid "Add _new item"
 msgstr "/Tambah _item baru"
 
-#: panel/controls.c:1049
+#: panel/controls.c:1080
 msgid "This item has no configuration options"
 msgstr "Item ini tiada opsyen konfigurasi"
 
-#: panel/panel.c:547
-msgid "/Xfce Panel"
-msgstr "/Panel Xfce"
-
-#: panel/panel.c:549
-msgid "/Add _new item"
-msgstr "/Tambah _item baru"
-
-#: panel/panel.c:551
-msgid "/_Properties..."
-msgstr "/_Perbendaharaan..."
-
-#: panel/panel.c:552
-msgid "/_About Xfce"
-msgstr "/Perih_al Xfce"
-
-#: panel/panel.c:553
-msgid "/_Help"
-msgstr "/_Bantuan"
-
-#: panel/panel.c:555
-msgid "/_Lock screen"
-msgstr "/_Kunci skrin"
-
-#: panel/panel.c:556
-msgid "/_Restart"
-msgstr "/_Ulangmula"
-
-#: panel/panel.c:558
-msgid "/E_xit"
-msgstr "/K_eluar"
-
-#: panel/panel.c:937 settings/xfce_settings_plugin.c:67
+#: panel/panel.c:554 panel/panel.c:956 settings/xfce_settings_plugin.c:67
 #: settings/xfce_settings_dialog.c:453
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
+
+#: panel/panel.c:578
+#, fuzzy
+msgid "_About Xfce"
+msgstr "/Perih_al Xfce"
+
+#: panel/panel.c:583
+#, fuzzy
+msgid "_Help"
+msgstr "/_Bantuan"
+
+#: panel/panel.c:592
+#, fuzzy
+msgid "_Lock screen"
+msgstr "/_Kunci skrin"
+
+#: panel/panel.c:597
+#, fuzzy
+msgid "_Restart"
+msgstr "/_Ulangmula"
+
+#: panel/panel.c:606
+#, fuzzy
+msgid "E_xit"
+msgstr "/K_eluar"
 
 #: panel/icons.c:68
 msgid "Default"
@@ -331,47 +322,47 @@ msgstr "Kelakuan"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:204
+#: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:423
 msgid "Clock type:"
 msgstr "Jenis jam:"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:436
 msgid "Analog"
 msgstr "Analog"
 
-#: plugins/clock/clock.c:450
+#: plugins/clock/clock.c:440
 msgid "Digital"
 msgstr "Digital"
 
-#: plugins/clock/clock.c:454
+#: plugins/clock/clock.c:444
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:516
+#: plugins/clock/clock.c:506
 msgid "Hour mode:"
 msgstr "Mod jam:"
 
-#: plugins/clock/clock.c:523
+#: plugins/clock/clock.c:513
 msgid "24 hour"
 msgstr "24 jam"
 
-#: plugins/clock/clock.c:529
+#: plugins/clock/clock.c:519
 msgid "12 hour"
 msgstr "12 jam"
 
-#: plugins/clock/clock.c:535
+#: plugins/clock/clock.c:525
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:573
+#: plugins/clock/clock.c:563
 msgid "Show seconds:"
 msgstr "Lihat saat:"
 
-#: plugins/clock/clock.c:684
+#: plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Jam Xfce"
 
@@ -406,38 +397,38 @@ msgid "Lock the screen"
 msgstr "Kunci skrin"
 
 #: plugins/systembuttons/systembuttons.c:141
-#: plugins/systembuttons/systembuttons.c:505
+#: plugins/systembuttons/systembuttons.c:508
 msgid "Exit"
 msgstr "Keluar"
 
 #: plugins/systembuttons/systembuttons.c:142
-#: plugins/systembuttons/systembuttons.c:506
+#: plugins/systembuttons/systembuttons.c:509
 msgid "Setup"
 msgstr "Tetapan"
 
 #: plugins/systembuttons/systembuttons.c:143
-#: plugins/systembuttons/systembuttons.c:507
+#: plugins/systembuttons/systembuttons.c:510
 msgid "Info"
 msgstr "Info"
 
-#: plugins/systembuttons/systembuttons.c:487
+#: plugins/systembuttons/systembuttons.c:490
 msgid "Show two buttons:"
 msgstr "Lihat dua bebutang:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:504
+#: plugins/systembuttons/systembuttons.c:507
 msgid "Lock"
 msgstr "Kunci"
 
-#: plugins/systembuttons/systembuttons.c:536
+#: plugins/systembuttons/systembuttons.c:539
 msgid "Button 1:"
 msgstr "Bebutang 1:"
 
-#: plugins/systembuttons/systembuttons.c:552
+#: plugins/systembuttons/systembuttons.c:555
 msgid "Button 2:"
 msgstr "Bebutang 2:"
 
-#: plugins/systembuttons/systembuttons.c:588
+#: plugins/systembuttons/systembuttons.c:591
 msgid "System buttons"
 msgstr "Bebutang sistem"
 
@@ -445,30 +436,47 @@ msgstr "Bebutang sistem"
 msgid "Separator"
 msgstr "Pemisah"
 
-#: plugins/mailcheck/mailcheck.c:792
+#: plugins/mailcheck/mailcheck.c:788
 msgid "Mail box:"
 msgstr "Kotak mel:"
 
-#: plugins/mailcheck/mailcheck.c:829
-msgid "New mail:"
-msgstr ""
+#: plugins/mailcheck/mailcheck.c:825
+#, fuzzy
+msgid "New mail command:"
+msgstr "Arahan mel:"
 
-#: plugins/mailcheck/mailcheck.c:843
+#: plugins/mailcheck/mailcheck.c:839
 #, fuzzy
 msgid "Command to run when new mail arrives"
 msgstr "Arahan untuk larikan apabila bebutang pada panel diklik"
 
-#: plugins/mailcheck/mailcheck.c:873
+#: plugins/mailcheck/mailcheck.c:869
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Arahan untuk larikan apabila bebutang pada panel diklik"
 
-#: plugins/mailcheck/mailcheck.c:895
+#: plugins/mailcheck/mailcheck.c:891
 msgid "Interval (sec):"
 msgstr "Interval (saat):"
 
-#: plugins/mailcheck/mailcheck.c:967
-msgid "Mail check"
+#: plugins/mailcheck/mailcheck.c:963
+#, fuzzy
+msgid "Mail checker"
 msgstr "Periksa mel"
+
+#~ msgid "Change item"
+#~ msgstr "Tukar item"
+
+#~ msgid "Menu:"
+#~ msgstr "Menu:"
+
+#~ msgid "/Xfce Panel"
+#~ msgstr "/Panel Xfce"
+
+#~ msgid "/Add _new item"
+#~ msgstr "/Tambah _item baru"
+
+#~ msgid "/_Properties..."
+#~ msgstr "/_Perbendaharaan..."
 
 #~ msgid ""
 #~ "Removing an item will also remove its popup menu.\n"
@@ -521,6 +529,3 @@ msgstr "Periksa mel"
 
 #~ msgid "Position"
 #~ msgstr "Posisi"
-
-#~ msgid "Mail command:"
-#~ msgstr "Arahan mel:"

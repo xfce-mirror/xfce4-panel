@@ -822,7 +822,7 @@ add_newmail_cmd_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("New mail:"));
+    label = gtk_label_new (_("New mail command:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_size_group_add_widget (sg, label);
     gtk_widget_show (label);
@@ -960,7 +960,7 @@ G_MODULE_EXPORT void
 xfce_control_class_init (ControlClass * cc)
 {
     cc->name = "mailcheck";
-    cc->caption = _("Mail check");
+    cc->caption = _("Mail checker");
 
     cc->create_control = (CreateControlFunc) create_mailcheck_control;
 

@@ -169,7 +169,7 @@ get_panel_config (void)
 
     if (!node)
     {
-	xfce_err (_("No data was found. The panel will be empty"));
+	xfce_err (_("No data was found. The panel will be empty."));
 	return;
     }
 

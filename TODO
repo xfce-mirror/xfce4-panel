@@ -1,5 +1,8 @@
 TODO
 ----
+* Fix gettext issues so I don't have to use a special
+  #define dg_(s)  dgettext (PACKAGE, s)
+  Somehow PACKAGE_GETTEXT is set to something else ...
 * [DONE] unload unused plugins 
 * plugin library
   - with API docs

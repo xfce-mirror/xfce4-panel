@@ -45,6 +45,9 @@
 #define SNAP_WIDTH	25
 
 
+/* make sure translations are taken from the panel not some plugin */
+#define dg_(s)	dgettext (PACKAGE, s)
+
 /* typedefs *
  * -------- */
 
@@ -540,51 +543,77 @@ do_help (void)
     exec_cmd ("xfhelp4", FALSE, FALSE);
 }
 
-static GtkItemFactoryEntry panel_items[] = {
-    {N_("/Xfce Panel"), NULL, NULL, 0, "<Title>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/Add _new item"), NULL, run_add_control_dialog, 0, "<Item>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/_Properties..."), NULL, edit_prefs, 0, "<Item>"},
-    {N_("/_About Xfce"), NULL, do_info, 0, "<Item>"},
-    {N_("/_Help"), NULL, do_help, 0, "<Item>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/_Lock screen"), NULL, lock_screen, 0, "<Item>"},
-    {N_("/_Restart"), NULL, restart_panel, 0, "<Item>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/E_xit"), NULL, exit_panel, 0, "<Item>"},
-};
-
-static const char *
-translate_menu (const char *msg)
-{
-#if ENABLE_NLS
-    /* ensure we use the panel domain and not that of a plugin */
-    return dgettext (GETTEXT_PACKAGE, msg);
-#else
-    return msg;
-#endif
-}
-
 static GtkMenu *
 get_handle_menu (void)
 {
-    static GtkMenu *menu = NULL;
-    static GtkItemFactory *ifactory;
+    static GtkWidget *menu = NULL;
 
     if (!menu)
     {
-	ifactory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
+	GtkWidget *mi;
+	
+	menu = gtk_menu_new ();
 
-	gtk_item_factory_set_translate_func (ifactory,
-					     (GtkTranslateFunc)
-					     translate_menu, NULL, NULL);
-	gtk_item_factory_create_items (ifactory, G_N_ELEMENTS (panel_items),
-				       panel_items, NULL);
+	mi = gtk_menu_item_new_with_label(dg_("Xfce Panel"));
+	gtk_widget_show (mi);
+	gtk_widget_set_sensitive (mi, FALSE);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+		
+	mi = gtk_separator_menu_item_new ();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_menu_item_new_with_mnemonic(dg_("Add _new item"));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (run_add_control_dialog), 
+			  NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-	menu = GTK_MENU (gtk_item_factory_get_widget (ifactory, "<popup>"));
+	mi = gtk_separator_menu_item_new ();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_menu_item_new_with_mnemonic (dg_("_Properties..."));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (edit_prefs), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+	mi = gtk_menu_item_new_with_mnemonic (dg_("_About Xfce"));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (do_info), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_menu_item_new_with_mnemonic (dg_("_Help"));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (do_help), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_separator_menu_item_new ();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_menu_item_new_with_mnemonic (dg_("_Lock screen"));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (lock_screen), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_menu_item_new_with_mnemonic (dg_("_Restart"));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (restart_panel), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_separator_menu_item_new ();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_menu_item_new_with_mnemonic (dg_("E_xit"));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (exit_panel), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     }
 
+    g_assert (menu != NULL);
+    
     /* when XFCE_DISABLE_USER_CONFIG is set, hide 3rd, 4th and 5th item;
      * keep in sync with factory. */
     if (G_UNLIKELY (disable_user_config))
@@ -605,7 +634,7 @@ get_handle_menu (void)
 	gtk_widget_hide (item);
     }
     
-    return menu;
+    return GTK_MENU (menu);
 }
 
 /*  Move handles
@@ -927,7 +956,7 @@ create_panel_window (Panel * p)
     w = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     window = GTK_WINDOW (w);
 
-    gtk_window_set_title (window, _("Xfce Panel"));
+    gtk_window_set_title (window, dg_("Xfce Panel"));
     gtk_window_set_decorated (window, FALSE);
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);
