@@ -204,7 +204,7 @@ G_MODULE_EXPORT /* EXPORT:write_panel_config */
 void
 write_panel_config (void)
 {
-    char *xfcerc, *tmprc, *path;
+    char *xfcerc, *tmprc;
     xmlNodePtr root;
     static gboolean backup = TRUE;
 
@@ -213,9 +213,7 @@ write_panel_config (void)
     if (disable_user_config)
 	return;
 
-    path = g_build_filename ("xfce4", "panel", "contents.xml", NULL);
-    xfcerc = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
-    g_free (path);
+    xfcerc = get_save_file ("contents.xml");
     
     if (!xfcerc)
     {
