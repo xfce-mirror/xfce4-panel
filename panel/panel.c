@@ -1099,7 +1099,7 @@ create_panel (void)
     update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
 	    			 p->position.y + p->priv->req.height / 2);
     
-    gtk_widget_show (p->toplevel);
+    gtk_widget_show_now (p->toplevel);
 
     /* set layer on visible window */
     panel_set_layer (p->priv->settings.layer);
