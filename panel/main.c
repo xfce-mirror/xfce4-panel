@@ -46,6 +46,7 @@
 #endif
 
 #include <libxfce4util/i18n.h>
+#include <libxfce4util/debug.h>
 #include <libxfcegui4/session-client.h>
 #include <libxfcegui4/netk-util.h>
 
@@ -68,6 +69,8 @@ SignalState;
 
 static SignalState sigstate = NOSIGNAL;
 
+static char *progname = NULL;
+
 /*  session management
  *  ------------------
 */
@@ -77,29 +80,8 @@ static gboolean session_managed = FALSE;
 static void
 save_panel (void)
 {
-#if 0
-    gboolean hidden = settings.autohide;
-
-    if (panel.toplevel)
-    {
-	if (hidden)
-	{
-	    panel_set_autohide (FALSE);
-
-	    while (gtk_events_pending ())
-		gtk_main_iteration ();
-	}
-
-	gtk_window_get_position (GTK_WINDOW (panel.toplevel),
-				 &panel.position.x, &panel.position.y);
-
-	gtk_widget_hide (panel.toplevel);
-    }
-
-    if (hidden && panel.toplevel)
-	panel_set_autohide (TRUE);
-#endif
-    write_panel_config ();
+    if (!disable_user_config)
+	write_panel_config ();
 }
 
 static void
@@ -148,36 +130,12 @@ quit (gboolean force)
     if (gtk_main_level ())
 	gtk_main_quit ();
 
-    exit (0);
-}
-
-void
-restart (void)
-{
-/*    int x, y;
-    
-    x = panel.position.x;
-    y = panel.position.y;
-*/
-    hide_current_popup_menu();
-
-    save_panel ();
-
-    if (panel.toplevel)
-	gtk_widget_hide (panel.toplevel);
-
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    free_startup_timeout ();
-#endif
-
-    panel_cleanup ();
-    gtk_widget_destroy (panel.main_frame);
-
-    create_panel ();
-/*
-    panel.position.x = x;
-    panel.position.y = y;
-    panel_set_position ();*/
+    DBG("sigstate: %d", sigstate);
+    if (sigstate != RESTART)
+    {
+	exit (0);
+	g_message("%s: Exit", PACKAGE);
+    }
 }
 
 /*  Main program
@@ -196,10 +154,16 @@ check_signal_state (void)
 	
 	if (sigstate == RESTART && !restarting)
 	{
+	    /* prevent quit() from exiting */
 	    restarting = TRUE;
-	    sigstate = NOSIGNAL;
-	    restart ();
-	    restarting = FALSE;
+	    
+	    /* calls gtk_main_quit() */
+	    quit(TRUE);
+
+	    /* progname is saved on startup 
+	     * TODO: do we need to pass on arguments? */
+	    g_message("%s: restarting ...", PACKAGE);
+	    execlp(progname,progname,NULL);
 	}
 	else if (sigstate == QUIT)
 	{
@@ -244,6 +208,8 @@ main (int argc, char **argv)
     gboolean net_wm_support;
     int i;
 
+    progname = argv[0];
+    
     net_wm_support = FALSE;
 
 #if 0
