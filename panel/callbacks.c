@@ -164,7 +164,10 @@ static void show_popup(PanelPopup * pp)
 {
     GtkRequisition req1, req2;
     GdkWindow *p;
-    int xb, yb, xp, yp, x, y;
+    int xbutton, ybutton, xparent, yparent, x, y;
+    int w, h;
+    gboolean vertical = settings.orientation == VERTICAL;
+    int pos = settings.popup_position;
 
     if(open_popup)
         hide_popup(open_popup);
@@ -190,47 +193,88 @@ static void show_popup(PanelPopup * pp)
 
     gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
 
-    if(!GTK_WIDGET_REALIZED(pp->button))
+/*    if(!GTK_WIDGET_REALIZED(pp->button))
         gtk_widget_realize(pp->button);
-
+*/
     gtk_widget_size_request(pp->button, &req1);
-    xb = pp->button->allocation.x;
-    yb = pp->button->allocation.y;
+    xbutton = pp->button->allocation.x;
+    ybutton = pp->button->allocation.y;
 
     p = gtk_widget_get_parent_window(pp->button);
-    gdk_window_get_root_origin(p, &xp, &yp);
-
-    x = xb + xp + req1.width / 2;
-    y = yb + yp;
+    gdk_window_get_root_origin(p, &xparent, &yparent);
 
     if(!GTK_WIDGET_REALIZED(pp->window))
         gtk_widget_realize(pp->window);
 
     gtk_widget_size_request(pp->window, &req2);
 
-    /* show upwards or downwards ?
-     * and make detached menu appear loose from the button */
-    if(y < req2.height && gdk_screen_height() - y > req2.height)
-    {
-        y = y + req1.height;
+    w = gdk_screen_width();
+    h = gdk_screen_height();
 
-        if(pp->detached)
-            y = y + 30;
+    /*  positioning logic (well ...)
+     *  ----------------------------
+     *  1) vertical panel
+     *  - to the left or the right
+     *    - if buttons right -> right else left
+     *  - fit the screen
+     *  2) horizontal
+     *  - up or down
+     *    - if buttons down -> down else up
+     *  - fit the screen
+    */
+
+    /* set x and y to topleft corner of the button */
+    x = xbutton + xparent;
+    y = ybutton + yparent;
+	
+    if (vertical)
+    {
+	/* left or right */
+	if (pos == RIGHT && x + req1.width + req2.width <= w)
+	{
+	    x = x + req1.width;
+	    y = y + req1.height - req2.height;
+	}
+	else if (pos == LEFT && x - req2.width < 0)
+	{
+	    x = x + req1.width;
+	    y = y + req1.height - req2.height;
+	}
+	else
+	{
+	    x = x - req2.width;
+	    y = y + req1.height - req2.height;
+	}
+
+	/* check if it fits upwards */
+	if (y < 0)
+	    y = 0;
     }
     else
     {
-        y = y - req2.height;
+	/* up or down */
+	if (pos == BOTTOM && y + req1.height + req2.height <= h)
+	{
+	    x = x + req1.width / 2 - req2.width / 2;
+	    y = y + req1.width;
+	}
+	else if (pos == TOP && y - req2.height < 0)
+	{
+	    x = x + req1.width / 2 - req2.width / 2;
+	    y = y + req1.width;
+	}
+	else
+	{
+	    x = x + req1.width / 2 - req2.width / 2;
+	    y = y - req2.height;
+	}
 
-        if(pp->detached)
-            y = y - 15;
+	/* check if it fits to the left and the right */
+	if (x < 0)
+	    x = 0;
+	else if (x + req2.width > w)
+	    x = w - req2.width;
     }
-
-    x = x - req2.width / 2;
-
-    if(x < 0)
-        x = 0;
-    if(x + req2.width > gdk_screen_width())
-        x = gdk_screen_width() - req2.width;
 
     gtk_window_move(GTK_WINDOW(pp->window), x, y);
     gtk_widget_show(pp->window);
