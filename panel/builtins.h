@@ -31,4 +31,3 @@ void create_exit(PanelControl * pc);
 void create_config(PanelControl * pc);
 
 #endif /* __XFCE_BUILTINS_H__ */
-

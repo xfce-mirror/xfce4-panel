@@ -60,11 +60,11 @@ extern "C"
 
     struct _XfceClock
     {
-        GtkWidget widget;	/* parent */
-	
+        GtkWidget widget;       /* parent */
+
         GtkStyle *parent_style;
         GdkBitmap *digits_bmap;
-	
+
         /* Dimensions of clock components */
         gint radius;
         gint internal;

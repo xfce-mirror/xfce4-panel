@@ -34,4 +34,3 @@ void icon_button_set_command(IconButton * b, const char *cmd,
 void icon_button_free(IconButton * b);
 
 #endif /* __XFCE_ICON_BUTTON_H__ */
-

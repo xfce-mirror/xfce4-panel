@@ -266,23 +266,22 @@ void create_menu_item(MenuItem * mi)
     gtk_widget_show_all(mi->button);
 
     if(mi->tooltip && strlen(mi->tooltip))
-	add_tooltip(mi->button, mi->tooltip);
-    else if (mi->command && strlen(mi->command))
-	add_tooltip(mi->button, mi->command);
+        add_tooltip(mi->button, mi->tooltip);
+    else if(mi->command && strlen(mi->command))
+        add_tooltip(mi->button, mi->command);
     else
-	add_tooltip(mi->button, _("Click Mouse 3 to change item"));
+        add_tooltip(mi->button, _("Click Mouse 3 to change item"));
 
     /* signals */
     g_signal_connect(mi->button, "button-press-event",
                      G_CALLBACK(menu_item_press), mi);
 
-    g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb),
-		     mi);
+    g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb), mi);
 
     dnd_set_drag_dest(mi->button);
 
     g_signal_connect(mi->button, "drag_data_received",
-		     G_CALLBACK(menu_item_drop_cb), mi);
+                     G_CALLBACK(menu_item_drop_cb), mi);
 
     menu_item_set_popup_size(mi, settings.popup_size);
     menu_item_set_style(mi, settings.style);
@@ -291,11 +290,11 @@ void create_menu_item(MenuItem * mi)
 /*  Popup menus 
  *  -----------
 */
-static void set_popup_window_properties(GtkWidget *win)
+static void set_popup_window_properties(GtkWidget * win)
 {
     GtkWindow *window = GTK_WINDOW(win);
     GdkPixbuf *pb;
-    
+
     gtk_window_set_decorated(window, FALSE);
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
@@ -307,9 +306,9 @@ static void set_popup_window_properties(GtkWidget *win)
     gtk_window_set_icon(window, pb);
     g_object_unref(pb);
 
-    if (settings.on_top)
-	set_window_type_dock(window, settings.on_top);
-    
+    if(settings.on_top)
+        set_window_type_dock(window, settings.on_top);
+
     /* don't care about decorations when calculating position */
     gtk_window_set_gravity(window, GDK_GRAVITY_STATIC);
 }
@@ -378,16 +377,16 @@ PanelPopup *create_panel_popup(void)
 
     panel_popup_set_size(pp, settings.size);
     panel_popup_set_style(pp, settings.style);
-    
+
     return pp;
 }
 
-void panel_popup_pack(PanelPopup * pp, GtkContainer *container)
+void panel_popup_pack(PanelPopup * pp, GtkContainer * container)
 {
     gtk_container_add(container, pp->button);
 }
 
-void panel_popup_add_item(PanelPopup *pp, MenuItem *mi)
+void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
 {
     GList *li;
     int i;
@@ -395,33 +394,33 @@ void panel_popup_add_item(PanelPopup *pp, MenuItem *mi)
     gtk_size_group_add_widget(pp->hgroup, mi->image);
     gtk_box_pack_start(GTK_BOX(pp->vbox), mi->button, TRUE, TRUE, 0);
     gtk_box_reorder_child(GTK_BOX(pp->vbox), mi->button, mi->pos + 2);
-    
+
     pp->items = g_list_insert(pp->items, mi, mi->pos);
 
     for(i = 0, li = pp->items; li && li->data; i++, li = li->next)
     {
-	MenuItem *item = (MenuItem *) li->data;
-	
-	mi->pos = i;
+        MenuItem *item = (MenuItem *) li->data;
+
+        mi->pos = i;
     }
 }
 
-void panel_popup_remove_item(PanelPopup *pp, MenuItem *mi)
+void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi)
 {
     GList *li;
     int i;
 
     gtk_container_remove(GTK_CONTAINER(pp->vbox), mi->button);
-    
+
     pp->items = g_list_remove(pp->items, mi);
 
     menu_item_free(mi);
-    
+
     for(i = 0, li = pp->items; li && li->data; i++, li = li->next)
     {
-	MenuItem *item = (MenuItem *) li->data;
-	
-	mi->pos = i;
+        MenuItem *item = (MenuItem *) li->data;
+
+        mi->pos = i;
     }
 }
 
@@ -439,13 +438,13 @@ void panel_popup_set_from_xml(PanelPopup * pp, xmlNodePtr node)
 
         mi = menu_item_new(pp);
         menu_item_read_config(mi, child);
-	create_menu_item(mi);
+        create_menu_item(mi);
 
-	mi->pos = i;
-	
-	panel_popup_add_item(pp, mi);
+        mi->pos = i;
 
-	i++;
+        panel_popup_add_item(pp, mi);
+
+        i++;
     }
 }
 
@@ -486,27 +485,27 @@ void panel_popup_set_size(PanelPopup * pp, int size)
     w = icon_size[size] + border_width;
     h = top_height[size];
 
-    if (pp->up)
-	g_object_unref(pp->up);
+    if(pp->up)
+        g_object_unref(pp->up);
     pb = get_system_pixbuf(UP_ICON);
     pp->up = get_scaled_pixbuf(pb, h - border_width);
     g_object_unref(pb);
-    
-    if (pp->down)
-	g_object_unref(pp->down);
+
+    if(pp->down)
+        g_object_unref(pp->down);
     pb = get_system_pixbuf(DOWN_ICON);
     pp->down = get_scaled_pixbuf(pb, h - border_width);
     g_object_unref(pb);
-    
+
     if(!pp->detached)
         gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
     else
         gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
 
-    if (pos == LEFT || pos == RIGHT)
-	gtk_widget_set_size_request(pp->button, h, w);
+    if(pos == LEFT || pos == RIGHT)
+        gtk_widget_set_size_request(pp->button, h, w);
     else
-	gtk_widget_set_size_request(pp->button, w, h);
+        gtk_widget_set_size_request(pp->button, w, h);
 }
 
 void panel_popup_set_style(PanelPopup * pp, int style)
@@ -534,13 +533,13 @@ void panel_popup_set_style(PanelPopup * pp, int style)
     }
 }
 
-void panel_popup_set_popup_position(PanelPopup *pp, int position)
+void panel_popup_set_popup_position(PanelPopup * pp, int position)
 {
     settings.popup_position = position;
     panel_popup_set_size(pp, settings.size);
 }
 
-void panel_popup_set_on_top(PanelPopup *pp, gboolean on_top)
+void panel_popup_set_on_top(PanelPopup * pp, gboolean on_top)
 {
     set_window_type_dock(pp->window, on_top);
 }
@@ -571,5 +570,3 @@ void panel_popup_set_popup_size(PanelPopup * pp, int size)
         menu_item_set_popup_size(mi, size);
     }
 }
-
-

@@ -76,4 +76,3 @@ void menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
 void menu_item_click_cb(GtkButton * b, MenuItem * mi);
 
 #endif /* __XFCE_CALLBACKS_H__ */
-

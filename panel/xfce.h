@@ -32,11 +32,13 @@ void xfce_run(void);
 /* panel functions */
 void panel_init(void);
 void panel_cleanup(void);
+void panel_reorient(void);
 
 /* apply panel settings */
 void panel_set_size(int size);
 void panel_set_popup_size(int size);
 void panel_set_popup_position(int position);
+void panel_set_orientation(int orientation);
 void panel_set_on_top(gboolean on_top);
 
 void panel_set_style(int size);

@@ -23,7 +23,7 @@
 #include "global.h"
 
 /* central panel */
-void central_panel_init(GtkBox *hbox);
+void central_panel_init(GtkBox * hbox);
 
 void central_panel_set_from_xml(xmlNodePtr node);
 
@@ -47,10 +47,10 @@ void central_panel_set_show_desktop_buttons(gboolean show);
 void central_panel_set_show_minibuttons(gboolean show);
 
 /* Screen buttons */
-char *screen_button_get_name(ScreenButton *sb);
+char *screen_button_get_name(ScreenButton * sb);
 
-void screen_button_set_name(ScreenButton *sb, const char *name);
+void screen_button_set_name(ScreenButton * sb, const char *name);
 
-int screen_button_get_index(ScreenButton *sb);
+int screen_button_get_index(ScreenButton * sb);
 
 #endif /* __XFCE_CENTRAL_H__ */

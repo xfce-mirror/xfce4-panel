@@ -42,26 +42,26 @@ GtkWidget *revert_button;
 /* Clock tooltip - From xfce3 */
 /* FIXME: Find another place for that */
 static char *day_names[] = { N_("Sunday"),
-  N_("Monday"),
-  N_("Tuesday"),
-  N_("Wednesday"),
-  N_("Thursday"),
-  N_("Friday"),
-  N_("Saturday")
+    N_("Monday"),
+    N_("Tuesday"),
+    N_("Wednesday"),
+    N_("Thursday"),
+    N_("Friday"),
+    N_("Saturday")
 };
 
 static char *month_names[] = { N_("January"),
-  N_("February"),
-  N_("March"),
-  N_("April"),
-  N_("May"),
-  N_("June"),
-  N_("July"),
-  N_("August"),
-  N_("September"),
-  N_("October"),
-  N_("November"),
-  N_("December")
+    N_("February"),
+    N_("March"),
+    N_("April"),
+    N_("May"),
+    N_("June"),
+    N_("July"),
+    N_("August"),
+    N_("September"),
+    N_("October"),
+    N_("November"),
+    N_("December")
 };
 
 /*  Clock module
@@ -86,7 +86,7 @@ typedef struct
 
     GtkWidget *frame;
     GtkWidget *eventbox;
-    GtkWidget *clock; /* our XfceClock widget */
+    GtkWidget *clock;           /* our XfceClock widget */
 }
 t_clock;
 
@@ -116,7 +116,7 @@ static t_clock *clock_new(void)
 
     clock->clock = xfce_clock_new();
     gtk_container_add(GTK_CONTAINER(clock->eventbox), clock->clock);
-    xfce_clock_set_mode(XFCE_CLOCK(clock->clock),XFCE_CLOCK_LEDS);
+    xfce_clock_set_mode(XFCE_CLOCK(clock->clock), XFCE_CLOCK_LEDS);
     gtk_widget_show(clock->clock);
 
     return clock;
@@ -214,36 +214,36 @@ void clock_set_style(PanelControl * pc, int style)
 static void clock_type_changed(GtkOptionMenu * om, t_clock * clock)
 {
     clock->type = gtk_option_menu_get_history(om);
-    xfce_clock_set_mode(XFCE_CLOCK(clock->clock),clock->type);
+    xfce_clock_set_mode(XFCE_CLOCK(clock->clock), clock->type);
 }
 
-gboolean
-update_gxfce_date_timer (GtkWidget * widget)
+gboolean update_gxfce_date_timer(GtkWidget * widget)
 {
-  time_t ticks;
-  struct tm *tm;
-  static gint mday = -1;
-  static gint wday = -1;
-  static gint mon = -1;
-  static gint year = -1;
-  char date_s[255];
+    time_t ticks;
+    struct tm *tm;
+    static gint mday = -1;
+    static gint wday = -1;
+    static gint mon = -1;
+    static gint year = -1;
+    char date_s[255];
 
-  g_return_val_if_fail (widget != NULL, FALSE);
-  g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
+    g_return_val_if_fail(widget != NULL, FALSE);
+    g_return_val_if_fail(GTK_IS_WIDGET(widget), FALSE);
 
-  ticks = time (0);
-  tm = localtime (&ticks);
-  if ((mday != tm->tm_mday) || (wday != tm->tm_wday) || (mon != tm->tm_mon) || (year != tm->tm_year))
-  {
-    mday = tm->tm_mday;
-    wday = tm->tm_wday;
-    mon = tm->tm_mon;
-    year = tm->tm_year;
-    snprintf (date_s, 255, "%s, %u %s %u", _(day_names[wday]), mday, _(month_names[mon]), year + 1900);
-    add_tooltip(widget,
-		_(date_s));
-  }
-  return TRUE;
+    ticks = time(0);
+    tm = localtime(&ticks);
+    if((mday != tm->tm_mday) || (wday != tm->tm_wday) || (mon != tm->tm_mon) ||
+       (year != tm->tm_year))
+    {
+        mday = tm->tm_mday;
+        wday = tm->tm_wday;
+        mon = tm->tm_mon;
+        year = tm->tm_year;
+        snprintf(date_s, 255, "%s, %u %s %u", _(day_names[wday]), mday,
+                 _(month_names[mon]), year + 1900);
+        add_tooltip(widget, _(date_s));
+    }
+    return TRUE;
 }
 
 static GtkWidget *create_clock_type_option_menu(t_clock * clock)
@@ -269,7 +269,8 @@ static GtkWidget *create_clock_type_option_menu(t_clock * clock)
 
     gtk_option_menu_set_menu(GTK_OPTION_MENU(om), menu);
 
-    gtk_option_menu_set_history(GTK_OPTION_MENU(om),XFCE_CLOCK(clock->clock)->mode);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(om),
+                                XFCE_CLOCK(clock->clock)->mode);
 
 /*    xfce_clock_set_mode(XFCE_CLOCK(clock->clock),XFCE_CLOCK(clock->clock)->mode);*/
     g_signal_connect(om, "changed", G_CALLBACK(clock_type_changed), clock);
@@ -282,45 +283,48 @@ static void clock_hour_mode_changed(GtkToggleButton * tb, t_clock * clock)
     XFCE_CLOCK(clock->clock)->military_time = gtk_toggle_button_get_active(tb);
     if(XFCE_CLOCK(clock->clock)->military_time == 1)
     {
-	/* Disable ampm mode when we use 24h mode */
-	gtk_widget_set_sensitive(ampmbutton,FALSE);
-	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ampmbutton), FALSE);
+        /* Disable ampm mode when we use 24h mode */
+        gtk_widget_set_sensitive(ampmbutton, FALSE);
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ampmbutton), FALSE);
     }
     else
-	gtk_widget_set_sensitive(ampmbutton,TRUE);
+        gtk_widget_set_sensitive(ampmbutton, TRUE);
 
-    xfce_clock_show_military(XFCE_CLOCK(clock->clock),XFCE_CLOCK(clock->clock)->military_time);
+    xfce_clock_show_military(XFCE_CLOCK(clock->clock),
+                             XFCE_CLOCK(clock->clock)->military_time);
 }
 
 static GtkWidget *create_clock_24hrs_button(t_clock * clock)
 {
     GtkWidget *cb;
-    XfceClock *tmp=XFCE_CLOCK(clock->clock);
+    XfceClock *tmp = XFCE_CLOCK(clock->clock);
     cb = gtk_check_button_new();
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb), XFCE_CLOCK(clock->clock)->military_time);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb),
+                                 XFCE_CLOCK(clock->clock)->military_time);
 
-    xfce_clock_show_secs(tmp,tmp->military_time);
+    xfce_clock_show_secs(tmp, tmp->military_time);
     g_signal_connect(cb, "toggled", G_CALLBACK(clock_hour_mode_changed), clock);
     return cb;
 }
 
 static void clock_secs_mode_changed(GtkToggleButton * tb, t_clock * clock)
 {
-    XfceClock *tmp=XFCE_CLOCK(clock->clock);
+    XfceClock *tmp = XFCE_CLOCK(clock->clock);
     XFCE_CLOCK(clock->clock)->display_secs = gtk_toggle_button_get_active(tb);
     //  xfce_clock_secs_toggle(XFCE_CLOCK(clock->clock));
-     xfce_clock_show_secs(tmp,tmp->display_secs);
+    xfce_clock_show_secs(tmp, tmp->display_secs);
 
 }
 
 static GtkWidget *create_clock_secs_button(t_clock * clock)
 {
     GtkWidget *cb;
-    XfceClock *tmp=XFCE_CLOCK(clock->clock);
+    XfceClock *tmp = XFCE_CLOCK(clock->clock);
     cb = gtk_check_button_new();
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb), XFCE_CLOCK(clock->clock)->display_secs);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb),
+                                 XFCE_CLOCK(clock->clock)->display_secs);
 
-    xfce_clock_show_secs(tmp,tmp->display_secs);
+    xfce_clock_show_secs(tmp, tmp->display_secs);
     g_signal_connect(cb, "toggled", G_CALLBACK(clock_secs_mode_changed), clock);
 
     return cb;
@@ -328,27 +332,29 @@ static GtkWidget *create_clock_secs_button(t_clock * clock)
 
 static void clock_ampm_mode_changed(GtkToggleButton * tb, t_clock * clock)
 {
-    XfceClock *tmp=XFCE_CLOCK(clock->clock);
+    XfceClock *tmp = XFCE_CLOCK(clock->clock);
     XFCE_CLOCK(clock->clock)->display_am_pm = gtk_toggle_button_get_active(tb);
     //  xfce_clock_secs_toggle(XFCE_CLOCK(clock->clock));
-     xfce_clock_show_ampm(tmp,tmp->display_am_pm);
+    xfce_clock_show_ampm(tmp, tmp->display_am_pm);
 
 }
 
 static GtkWidget *create_clock_ampm_button(t_clock * clock)
 {
     GtkWidget *cb;
-    XfceClock *tmp=XFCE_CLOCK(clock->clock);
+    XfceClock *tmp = XFCE_CLOCK(clock->clock);
     cb = gtk_check_button_new();
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb), XFCE_CLOCK(clock->clock)->display_am_pm && ! XFCE_CLOCK(clock->clock)->military_time);
-gtk_widget_set_sensitive(cb, ! XFCE_CLOCK(clock->clock)->military_time);
-    xfce_clock_show_secs(tmp,tmp->display_secs);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb),
+                                 XFCE_CLOCK(clock->clock)->display_am_pm &&
+                                 !XFCE_CLOCK(clock->clock)->military_time);
+    gtk_widget_set_sensitive(cb, !XFCE_CLOCK(clock->clock)->military_time);
+    xfce_clock_show_secs(tmp, tmp->display_secs);
     g_signal_connect(cb, "toggled", G_CALLBACK(clock_ampm_mode_changed), clock);
 
     return cb;
 }
 
-static void clock_create_backup(t_clock *clock)
+static void clock_create_backup(t_clock * clock)
 {
 }
 
@@ -356,7 +362,7 @@ static void clock_clean_backup(void)
 {
 }
 
-static void clock_revert(t_clock *clock)
+static void clock_revert(t_clock * clock)
 {
 }
 
@@ -439,11 +445,11 @@ void clock_add_options(PanelControl * pc, GtkContainer * container,
 
     /* signals */
     g_signal_connect_swapped(revert, "clicked",
-	    		     G_CALLBACK(clock_revert), clock);
+                             G_CALLBACK(clock_revert), clock);
     g_signal_connect_swapped(done, "clicked",
-	    		     G_CALLBACK(clock_clean_backup), NULL);
+                             G_CALLBACK(clock_clean_backup), NULL);
     g_signal_connect_swapped(done, "clicked",
-	    		     G_CALLBACK(clock_apply_configuration), pc);
+                             G_CALLBACK(clock_apply_configuration), pc);
 
     gtk_container_add(container, vbox);
 }
@@ -470,7 +476,7 @@ void create_clock(PanelControl * pc)
     pc->add_options = (gpointer) clock_add_options;
 
     /* Add tooltip to show up the current date */
-    update_gxfce_date_timer (clock->eventbox);
+    update_gxfce_date_timer(clock->eventbox);
 
 }
 
@@ -500,19 +506,19 @@ static void trash_run(t_trash * trash)
     exec_cmd(trash->command, trash->in_terminal);
 }
 
-void trash_dropped(GtkWidget *widget, GList *drop_data, gpointer data)
+void trash_dropped(GtkWidget * widget, GList * drop_data, gpointer data)
 {
-    t_trash *trash = (t_trash *)data;
+    t_trash *trash = (t_trash *) data;
     char *cmd;
     GList *li;
 
-    for (li = drop_data; li && li->data; li = li->next)
+    for(li = drop_data; li && li->data; li = li->next)
     {
-	cmd = g_strconcat(trash->command, " ", (char *)li->data, NULL);
+        cmd = g_strconcat(trash->command, " ", (char *)li->data, NULL);
 
-	exec_cmd_silent(cmd, FALSE);
+        exec_cmd_silent(cmd, FALSE);
 
-	g_free(cmd);
+        g_free(cmd);
     }
 }
 
@@ -887,22 +893,21 @@ static IconButton *config_new(void)
 
     add_tooltip(b, _("Setup..."));
 
-    g_signal_connect_swapped(b, "clicked", G_CALLBACK(mini_palet_cb),
-                             NULL);
+    g_signal_connect_swapped(b, "clicked", G_CALLBACK(mini_palet_cb), NULL);
 
     return button;
 }
 
 static void config_free(PanelControl * pc)
 {
-    IconButton *b = (IconButton *)pc->data;
+    IconButton *b = (IconButton *) pc->data;
 
     icon_button_free(b);
 }
 
 static void config_set_size(PanelControl * pc, int size)
 {
-    IconButton *b = (IconButton *)pc->data;
+    IconButton *b = (IconButton *) pc->data;
 
     icon_button_set_size(b, size);
 }
@@ -910,7 +915,7 @@ static void config_set_size(PanelControl * pc, int size)
 static void config_set_theme(PanelControl * pc, const char *theme)
 {
     GdkPixbuf *pb;
-    IconButton *b = (IconButton *)pc->data;
+    IconButton *b = (IconButton *) pc->data;
 
     pb = get_system_pixbuf(MINIPALET_ICON);
     icon_button_set_pixbuf(b, pb);
@@ -935,4 +940,3 @@ void create_config(PanelControl * pc)
     pc->set_size = (gpointer) config_set_size;
     pc->set_theme = (gpointer) config_set_theme;
 }
-

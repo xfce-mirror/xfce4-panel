@@ -30,7 +30,7 @@ struct _PanelControl
     int index;
 
     GtkContainer *container;    /* pointer to parent container */
-    GtkWidget *base;		/* base container for control */
+    GtkWidget *base;            /* base container for control */
 
     int id;
     char *filename;
@@ -48,7 +48,7 @@ struct _PanelControl
 
     int interval;
     int timeout_id;
-    gboolean(*update) (PanelControl * pc);
+      gboolean(*update) (PanelControl * pc);
 
     /* global settings */
     void (*set_size) (PanelControl * pc, int size);
@@ -56,7 +56,7 @@ struct _PanelControl
     void (*set_theme) (PanelControl * pc, const char *theme);
 
     /* config dialog */
-    int callback_id;	/* right click callback */
+    int callback_id;            /* right click callback */
     void (*add_options) (PanelControl * pc, GtkContainer * container,
                          GtkWidget * revert, GtkWidget * done);
 };
@@ -65,10 +65,10 @@ struct _PanelControl
 PanelControl *panel_control_new(int side, int index);
 
 /* create a default control bsaed on id and filename */
-void create_panel_control(PanelControl *pc);
+void create_panel_control(PanelControl * pc);
 
 /* create control based on xml config. node may be NULL */
-void panel_control_set_from_xml(PanelControl *pc, xmlNodePtr node);
+void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node);
 
 /* packing and unpacking */
 void panel_control_pack(PanelControl * pc, GtkContainer * container);

@@ -127,7 +127,8 @@ void create_controls_list(PanelControl * pc)
                 continue;
             }
 
-            if(g_list_find_custom(names, new_pc->caption, (GCompareFunc) strcmp))
+            if(g_list_find_custom
+               (names, new_pc->caption, (GCompareFunc) strcmp))
             {
                 panel_control_free(new_pc);
                 continue;
@@ -148,14 +149,14 @@ void clear_controls_list(void)
 
     /* remove current control from the list */
     controls = g_list_remove(controls, current_pc);
-    
+
     /* free all other controls */
     for(current = controls; current; current = current->next)
     {
         pc = (PanelControl *) current->data;
 
-	if (pc)
-	    panel_control_free(pc);
+        if(pc)
+            panel_control_free(pc);
     }
 
     controls = NULL;

@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+*/
 
 /*  central.c
  *  ---------
@@ -41,7 +41,7 @@ static char *screen_class[] = {
 };
 
 GtkWidget *minibuttons[4];
-GtkWidget *mini_tables[2]; /* LEFT and RIGHT */
+GtkWidget *mini_tables[2];      /* LEFT and RIGHT */
 
 GtkWidget *desktop_table;
 ScreenButton *screen_buttons[NBSCREENS];
@@ -55,7 +55,7 @@ static char *get_default_screen_name(int index)
 {
     char temp[3];
 
-    g_snprintf(temp, 3, "%d", index+1);
+    g_snprintf(temp, 3, "%d", index + 1);
 
     return g_strdup(temp);
 }
@@ -64,8 +64,8 @@ void init_screen_names(void)
 {
     int i;
 
-    for (i = 0; i < NBSCREENS; i++)
-	screen_names[i] = NULL;
+    for(i = 0; i < NBSCREENS; i++)
+        screen_names[i] = NULL;
 }
 
 /*  Screen buttons
@@ -82,20 +82,20 @@ struct _ScreenButton
     GtkWidget *label;
 };
 
-char *screen_button_get_name(ScreenButton *sb)
+char *screen_button_get_name(ScreenButton * sb)
 {
     return g_strdup(screen_names[sb->index]);
 }
 
-void screen_button_set_name(ScreenButton *sb, const char *name)
+void screen_button_set_name(ScreenButton * sb, const char *name)
 {
     g_free(screen_names[sb->index]);
-    
+
     screen_names[sb->index] = g_strdup(name);
     gtk_label_set_text(GTK_LABEL(sb->label), name);
 }
 
-int screen_button_get_index(ScreenButton *sb)
+int screen_button_get_index(ScreenButton * sb)
 {
     return sb->index;
 }
@@ -108,9 +108,13 @@ static void screen_button_set_size(ScreenButton * sb, int size)
      * calculation of height is very arbitrary. I just put here what looks 
      * good on my screen. Should probably be something a little more 
      * intelligent. */
-    
-    w = screen_button_width[size];
-    
+
+    /* don't let screen buttons get to large in vertical mode */
+    if(settings.orientation == VERTICAL && settings.size > SMALL)
+        w = screen_button_width[MEDIUM] * 3 / 4;
+    else
+        w = screen_button_width[size];
+
     switch (size)
     {
         case TINY:
@@ -183,11 +187,14 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
 {
     int pos = sb->index;
 
-    if (settings.orientation == VERTICAL) {
-        gtk_table_attach(GTK_TABLE(table), sb->frame, 0, 1, pos, pos + 1, 
+    if(settings.orientation == VERTICAL)
+    {
+        gtk_table_attach(GTK_TABLE(table), sb->frame, 0, 1, pos, pos + 1,
                          GTK_EXPAND, GTK_EXPAND, 0, 0);
-    } else {
-        if (pos % 2 == 0 || settings.size <= SMALL)
+    }
+    else
+    {
+        if(pos % 2 == 0 || settings.size <= SMALL)
         {
             gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1,
                              GTK_EXPAND, GTK_EXPAND, 0, 0);
@@ -195,7 +202,7 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
         else
         {
             gtk_table_attach(GTK_TABLE(table), sb->frame, pos - 1, pos, 1, 2,
-                                 GTK_EXPAND, GTK_EXPAND, 0, 0);
+                             GTK_EXPAND, GTK_EXPAND, 0, 0);
         }
     }
 }
@@ -242,11 +249,9 @@ static void create_minibuttons(void)
     add_tooltip(minibuttons[3], _("Exit"));
 
     /* signals */
-    g_signal_connect(minibuttons[0], "clicked",
-                     G_CALLBACK(mini_lock_cb), NULL);
+    g_signal_connect(minibuttons[0], "clicked", G_CALLBACK(mini_lock_cb), NULL);
 
-    g_signal_connect(minibuttons[1], "clicked",
-                     G_CALLBACK(mini_info_cb), NULL);
+    g_signal_connect(minibuttons[1], "clicked", G_CALLBACK(mini_info_cb), NULL);
 
     g_signal_connect(minibuttons[2], "clicked",
                      G_CALLBACK(mini_palet_cb), NULL);
@@ -262,46 +267,52 @@ static void add_mini_table(int side, GtkBox * hbox)
 
     mini_tables[side] = gtk_table_new(2, 2, FALSE);
 
-    if (settings.show_minibuttons)
-	gtk_widget_show(mini_tables[side]);
+    if(settings.show_minibuttons)
+        gtk_widget_show(mini_tables[side]);
 
     if(side == LEFT)
         first = 0;
     else
         first = 2;
 
-    if (settings.size > SMALL)
+    if(settings.size > SMALL)
     {
-        if (settings.orientation == VERTICAL) {
+        if(settings.orientation == VERTICAL)
+        {
             gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
             gtk_table_attach(GTK_TABLE(mini_tables[side]),
-                     minibuttons[first + 1],
-                     1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-        } else {
+                             minibuttons[first + 1],
+                             1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        }
+        else
+        {
             gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-            gtk_table_attach(GTK_TABLE(mini_tables[side]), 
-                     minibuttons[first + 1],
-                     0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+            gtk_table_attach(GTK_TABLE(mini_tables[side]),
+                             minibuttons[first + 1],
+                             0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
         }
 
         gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);
     }
     else
     {
-        if (settings.orientation == VERTICAL) {
+        if(settings.orientation == VERTICAL)
+        {
             gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-            gtk_table_attach(GTK_TABLE(mini_tables[side]), 
-                     minibuttons[first + 1],
-                     0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
-        } else {
-            gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
             gtk_table_attach(GTK_TABLE(mini_tables[side]),
-                     minibuttons[first + 1],
-                     1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             minibuttons[first + 1],
+                             0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        }
+        else
+        {
+            gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
+                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+            gtk_table_attach(GTK_TABLE(mini_tables[side]),
+                             minibuttons[first + 1],
+                             1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
         }
 
         gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);
@@ -313,9 +324,12 @@ static void add_desktop_table(GtkBox * hbox)
     GtkWidget *table;
     int i;
 
-    if (settings.orientation == VERTICAL) {
+    if(settings.orientation == VERTICAL)
+    {
         table = gtk_table_new(NBSCREENS, 2, FALSE);
-    } else {
+    }
+    else
+    {
         table = gtk_table_new(2, NBSCREENS, FALSE);
     }
 
@@ -334,26 +348,28 @@ static void add_desktop_table(GtkBox * hbox)
     gtk_box_pack_start(hbox, table, TRUE, TRUE, 0);
 }
 
-void central_panel_init(GtkBox *hbox)
+void central_panel_init(GtkBox * hbox)
 {
     int i;
 
     init_screen_names();
 
     create_minibuttons();
-    
+
 
     for(i = 0; i < NBSCREENS; i++)
     {
-	if (i < settings.num_screens)
-	    screen_buttons[i] = create_screen_button(i);
-	else
-	    screen_buttons[i] = NULL;
+        if(i < settings.num_screens)
+            screen_buttons[i] = create_screen_button(i);
+        else
+            screen_buttons[i] = NULL;
     }
-    
+
     add_mini_table(LEFT, hbox);
     add_desktop_table(hbox);
     add_mini_table(RIGHT, hbox);
+
+    central_panel_set_size(settings.size);
 }
 
 void central_panel_set_from_xml(xmlNodePtr node)
@@ -362,26 +378,26 @@ void central_panel_set_from_xml(xmlNodePtr node)
     xmlChar *value;
     int i;
 
-    if (node)
-	child = node->children;
+    if(node)
+        child = node->children;
 
     for(i = 0; i < NBSCREENS; i++)
     {
         ScreenButton *sb = screen_buttons[i];
 
         if(!child || !xmlStrEqual(child->name, (const xmlChar *)"Screen"))
-	    value = NULL;
-	else
-	    value = DATA(child);
+            value = NULL;
+        else
+            value = DATA(child);
 
         if(value)
             screen_names[i] = (char *)value;
         else
             screen_names[i] = get_default_screen_name(i);
 
-	if (i < settings.num_screens)
-	    gtk_label_set_text(GTK_LABEL(sb->label), screen_names[i]);
-	
+        if(i < settings.num_screens)
+            gtk_label_set_text(GTK_LABEL(sb->label), screen_names[i]);
+
         if(child)
             child = child->next;
     }
@@ -406,8 +422,8 @@ void central_panel_cleanup()
 
     for(i = 0; i < NBSCREENS; i++)
     {
-	if (screen_buttons[i])
-	    screen_button_free(screen_buttons[i]);
+        if(screen_buttons[i])
+            screen_button_free(screen_buttons[i]);
     }
 }
 
@@ -419,17 +435,27 @@ static void reorder_minitable(int side, int size)
     GtkTableChild *tc;
     int hpos, vpos;
 
+    /* Here's an attempt to explain the apparently random code below:
+     * 
+     * - The two mini buttons on either side of the desktop switcher
+     *   are added to a 2x2 table. 
+     * - there are 4 mini buttons, with index 0, 1, 2 and 3
+     * - the first mini button (0 or 2) is fixed at the top left of
+     *   the table
+     * - the second mini button (1 or 3) is placed either next to the 
+     *   first (on the same row) or below the first (in the same column)
+     * - we only have to move the second mini button (1 or 3) when the
+     *   size or the orientation changes.
+     */
     if(side == LEFT)
         n = 1;
     else
         n = 3;
 
-    /* when size == SMALL put second button in second column first row
-     * otherwise put second button in first column second row */
-
     /* Botsie: I didn't understand the bit above -- but in vertical mode
-     * we do the exact opposite */
-    
+     * we do the exact opposite 
+     * Jasper: Is it any better now? */
+
     for(child = GTK_TABLE(table)->children;
         child && child->data; child = child->next)
     {
@@ -441,20 +467,26 @@ static void reorder_minitable(int side, int size)
 
     if(size == SMALL || size == TINY)
     {
-        if (settings.orientation == VERTICAL) {
+        if(settings.orientation == VERTICAL)
+        {
             hpos = 0;
             vpos = 1;
-        } else {
+        }
+        else
+        {
             hpos = 1;
             vpos = 0;
         }
     }
     else
     {
-        if (settings.orientation == VERTICAL) {
+        if(settings.orientation == VERTICAL)
+        {
             hpos = 1;
             vpos = 0;
-        } else {
+        }
+        else
+        {
             hpos = 0;
             vpos = 1;
         }
@@ -492,10 +524,13 @@ static void reorder_desktop_table(int size)
                 break;
         }
 
-        if (settings.orientation == VERTICAL) {
+        if(settings.orientation == VERTICAL)
+        {
             hpos = 0;
             vpos = i;
-        } else {
+        }
+        else
+        {
             if((i % 2) == 0)
             {
                 if(size <= SMALL)
@@ -562,8 +597,8 @@ void central_panel_set_size(int size)
     {
         ScreenButton *sb = screen_buttons[i];
 
-	if (sb)
-	    screen_button_set_size(sb, size);
+        if(sb)
+            screen_button_set_size(sb, size);
     }
 
     /* desktop table */
@@ -597,8 +632,8 @@ void central_panel_set_style(int style)
     {
         ScreenButton *sb = screen_buttons[i];
 
-	if (sb)
-	    screen_button_set_style(sb, style);
+        if(sb)
+            screen_button_set_style(sb, style);
     }
 }
 
@@ -646,9 +681,9 @@ void central_panel_set_current(int n)
     {
         ScreenButton *sb = screen_buttons[i];
 
-	if (!sb)
-	    continue;
-	
+        if(!sb)
+            continue;
+
         /* Prevent signal handler to run; we're being called
          * as a reaction to a change by another program
          */
@@ -666,16 +701,16 @@ void central_panel_set_num_screens(int n)
     {
         ScreenButton *sb = screen_buttons[i];
 
-	if (!sb && i < n)
-	{
-	    sb = screen_buttons[i] = create_screen_button(i);
-	    screen_button_pack(sb, desktop_table);
-	    gtk_label_set_text(GTK_LABEL(sb->label), screen_names[i]);
-	}
-	
+        if(!sb && i < n)
+        {
+            sb = screen_buttons[i] = create_screen_button(i);
+            screen_button_pack(sb, desktop_table);
+            gtk_label_set_text(GTK_LABEL(sb->label), screen_names[i]);
+        }
+
         if(i < n)
             gtk_widget_show(sb->frame);
-        else if (sb)
+        else if(sb)
             gtk_widget_hide(sb->frame);
     }
 
@@ -706,5 +741,3 @@ void central_panel_set_show_minibuttons(gboolean show)
         gtk_widget_hide(mini_tables[RIGHT]);
     }
 }
-
-

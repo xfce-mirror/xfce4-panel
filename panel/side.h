@@ -26,7 +26,7 @@
 void side_panel_init(int side, GtkBox * hbox);
 
 /* just points the proper array element to this panel control */
-void side_panel_register_control(PanelControl *pc);
+void side_panel_register_control(PanelControl * pc);
 
 void side_panel_set_from_xml(int side, xmlNodePtr node);
 

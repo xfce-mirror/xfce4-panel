@@ -72,7 +72,7 @@ IconButton *icon_button_new(GdkPixbuf * pb)
     gtk_widget_show(b->button);
 
     icon_button_set_size(b, settings.size);
-    
+
     gtk_container_add(GTK_CONTAINER(b->button), b->image);
 
     return b;

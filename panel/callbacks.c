@@ -49,7 +49,7 @@ gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
 gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
 {
     write_panel_config();
-    
+
     panel_cleanup();
 
     gtk_main_quit();
@@ -78,11 +78,11 @@ void iconify_cb(void)
 */
 void screen_button_click(GtkWidget * b, ScreenButton * sb)
 {
-    int n =screen_button_get_index(sb);
-    
+    int n = screen_button_get_index(sb);
+
     if(n == current_screen)
     {
-	/* keep the button depressed */
+        /* keep the button depressed */
         central_panel_set_current(n);
         return;
     }
@@ -443,4 +443,3 @@ void menu_item_click_cb(GtkButton * b, MenuItem * mi)
     hide_current_popup_menu();
     exec_cmd(mi->command, mi->in_terminal);
 }
-

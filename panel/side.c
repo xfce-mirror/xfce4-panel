@@ -47,7 +47,7 @@ typedef struct _MoveHandle MoveHandle;
 /* left and right versions of all important data are represented in a
  * single two dimensional array. This allows for the use of the enum
  * members LEFT (== 0) and RIGHT (== 1) as index.*/
- 
+
 static PanelGroup *groups[2][NBGROUPS];
 static PanelPopup *popups[2][NBGROUPS];
 static PanelControl *controls[2][NBGROUPS];
@@ -199,10 +199,10 @@ MoveHandle *create_move_handle(int side)
     gtk_widget_show(im);
     gtk_container_add(GTK_CONTAINER(mh->button), im);
 
-    if (settings.style == NEW_STYLE)
-	gtk_widget_set_name(im, "gxfce_color1");
+    if(settings.style == NEW_STYLE)
+        gtk_widget_set_name(im, "gxfce_color1");
     else
-	gtk_widget_set_name(im, "gxfce_color7");
+        gtk_widget_set_name(im, "gxfce_color7");
 
     mh->eventbox = gtk_event_box_new();
     add_tooltip(mh->eventbox, _("Move panel"));
@@ -217,11 +217,11 @@ MoveHandle *create_move_handle(int side)
     g_object_unref(pb);
     gtk_widget_show(im);
     gtk_container_add(GTK_CONTAINER(mh->frame), im);
-    
-    if (settings.style == NEW_STYLE)
-	gtk_widget_set_name(im, "gxfce_color1");
+
+    if(settings.style == NEW_STYLE)
+        gtk_widget_set_name(im, "gxfce_color1");
     else
-	gtk_widget_set_name(im, "gxfce_color7");
+        gtk_widget_set_name(im, "gxfce_color7");
 
     /* protect against destruction when removed from box */
     g_object_ref(mh->button);
@@ -359,48 +359,48 @@ void side_panel_init(int side, GtkBox * hbox)
     int num = (side == LEFT) ? settings.num_left : settings.num_right;
 
     boxes[side] = hbox;
-    
+
     for(i = 0; i < NBGROUPS; i++)
     {
-	if (i < num)
-	{
-	    groups[side][i] = create_panel_group(side, i);
-	    panel_group_pack(groups[side][i], hbox);
-	    
-	    if (i == 0)
-	    {
-		handles[side] = create_move_handle(side);
-		move_handle_pack(handles[side], 
-			         GTK_CONTAINER(groups[side][i]->top));
+        if(i < num)
+        {
+            groups[side][i] = create_panel_group(side, i);
+            panel_group_pack(groups[side][i], hbox);
 
-		/* Theoretically the popups array can be 1 item shorter
-		   than the others, because this on will always be NULL.
-		   However, that would be really confusing. */
-		popups[side][i] = NULL;
-	    }
-	    else
-	    {
-		popups[side][i] = create_panel_popup();
-		panel_popup_pack(popups[side][i], 
-				 GTK_CONTAINER(groups[side][i]->top));
-	    }
-	    
-	    /* we create an empty control, because we don't know what to put
-	     * here until after we read the configuration file */
-	    controls[side][i] = panel_control_new(side, i);
-	    panel_control_pack(controls[side][i], 
-		    	       GTK_CONTAINER(groups[side][i]->bottom));
-	}
-	else
-	{
-	    groups[side][i] = NULL;
-	    popups[side][i] = NULL;
-	    controls[side][i] = NULL;
-	}
+            if(i == 0)
+            {
+                handles[side] = create_move_handle(side);
+                move_handle_pack(handles[side],
+                                 GTK_CONTAINER(groups[side][i]->top));
+
+                /* Theoretically the popups array can be 1 item shorter
+                   than the others, because this on will always be NULL.
+                   However, that would be really confusing. */
+                popups[side][i] = NULL;
+            }
+            else
+            {
+                popups[side][i] = create_panel_popup();
+                panel_popup_pack(popups[side][i],
+                                 GTK_CONTAINER(groups[side][i]->top));
+            }
+
+            /* we create an empty control, because we don't know what to put
+             * here until after we read the configuration file */
+            controls[side][i] = panel_control_new(side, i);
+            panel_control_pack(controls[side][i],
+                               GTK_CONTAINER(groups[side][i]->bottom));
+        }
+        else
+        {
+            groups[side][i] = NULL;
+            popups[side][i] = NULL;
+            controls[side][i] = NULL;
+        }
     }
 }
 
-void side_panel_register_control(PanelControl *pc)
+void side_panel_register_control(PanelControl * pc)
 {
     controls[pc->side][pc->index] = pc;
 }
@@ -456,9 +456,9 @@ void side_panel_set_popup_position(int side, int position)
 
     for(i = 0; i < NBGROUPS; i++)
     {
-	if (groups[side][i])
-	    panel_group_arrange(groups[side][i], position);
-	
+        if(groups[side][i])
+            panel_group_arrange(groups[side][i], position);
+
         if(i == 0)
             move_handle_arrange(handles[side], position);
         else if(popups[side][i])
@@ -469,7 +469,7 @@ void side_panel_set_popup_position(int side, int position)
 void side_panel_set_on_top(int side, gboolean on_top)
 {
     int i;
-    
+
     for(i = 0; i < NBGROUPS; i++)
     {
         if(popups[side][i])
@@ -512,37 +512,37 @@ void side_panel_set_from_xml(int side, xmlNodePtr node)
     xmlNodePtr child;
     int i;
     int num = (side == LEFT) ? settings.num_left : settings.num_right;
-    
+
     /* children are "Group" nodes */
-    if (node)
-	node = node->children;
+    if(node)
+        node = node->children;
 
-    for (i = 0; i < num; i++)
+    for(i = 0; i < num; i++)
     {
-	gboolean control_created = FALSE;
-	
-	if (node)
-	{
-	    for (child = node->children; child; child = child->next)
-	    {
-		/* create popup items and panel control */
-		if(xmlStrEqual(child->name, (const xmlChar *)"Popup"))
-		{
-		    panel_popup_set_from_xml(popups[side][i], child);
-		}
-		else if(xmlStrEqual(child->name, (const xmlChar *)"Control"))
-		{
-		    panel_control_set_from_xml(controls[side][i], child);
-		    control_created = TRUE;
-		}
-	    }
-	}
+        gboolean control_created = FALSE;
 
-	if (!control_created)
-	    panel_control_set_from_xml(controls[side][i], NULL);
+        if(node)
+        {
+            for(child = node->children; child; child = child->next)
+            {
+                /* create popup items and panel control */
+                if(xmlStrEqual(child->name, (const xmlChar *)"Popup"))
+                {
+                    panel_popup_set_from_xml(popups[side][i], child);
+                }
+                else if(xmlStrEqual(child->name, (const xmlChar *)"Control"))
+                {
+                    panel_control_set_from_xml(controls[side][i], child);
+                    control_created = TRUE;
+                }
+            }
+        }
 
-	if (node)
-	    node = node->next;
+        if(!control_created)
+            panel_control_set_from_xml(controls[side][i], NULL);
+
+        if(node)
+            node = node->next;
     }
 }
 
@@ -550,34 +550,34 @@ void side_panel_set_num_groups(int side, int n)
 {
     int i;
 
-    for (i = 0; i < NBGROUPS; i++)
+    for(i = 0; i < NBGROUPS; i++)
     {
-	if (i < n)
-	{
-	    if (!groups[side][i])
-	    {
-		groups[side][i] = create_panel_group(side, i);
-		panel_group_pack(groups[side][i], boxes[side]);
+        if(i < n)
+        {
+            if(!groups[side][i])
+            {
+                groups[side][i] = create_panel_group(side, i);
+                panel_group_pack(groups[side][i], boxes[side]);
 
-		popups[side][i] = create_panel_popup();
-		panel_popup_pack(popups[side][i], 
-				 GTK_CONTAINER(groups[side][i]->top));
-		
-		/* we create an empty control, because we don't know what to 
-		 * put here until after we read the configuration file */
-		controls[side][i] = panel_control_new(side, i);
-		panel_control_pack(controls[side][i], 
-				   GTK_CONTAINER(groups[side][i]->bottom));
+                popups[side][i] = create_panel_popup();
+                panel_popup_pack(popups[side][i],
+                                 GTK_CONTAINER(groups[side][i]->top));
 
-		create_panel_control(controls[side][i]);
-	    }
+                /* we create an empty control, because we don't know what to 
+                 * put here until after we read the configuration file */
+                controls[side][i] = panel_control_new(side, i);
+                panel_control_pack(controls[side][i],
+                                   GTK_CONTAINER(groups[side][i]->bottom));
 
-	    gtk_widget_show(groups[side][i]->base);
-	}
-	else if (groups[side][i])
-	{
-	    gtk_widget_hide(groups[side][i]->base);
-	}
+                create_panel_control(controls[side][i]);
+            }
+
+            gtk_widget_show(groups[side][i]->base);
+        }
+        else if(groups[side][i])
+        {
+            gtk_widget_hide(groups[side][i]->base);
+        }
     }
 }
 
@@ -588,7 +588,7 @@ void side_panel_write_xml(int side, xmlNodePtr root)
     int num = (side == LEFT) ? settings.num_left : settings.num_right;
 
     node = xmlNewTextChild(root, NULL, side == LEFT ? "Left" : "Right", NULL);
-    
+
     for(i = 0; i < num; i++)
     {
         child = xmlNewTextChild(node, NULL, "Group", NULL);
@@ -599,4 +599,3 @@ void side_panel_write_xml(int side, xmlNodePtr root)
         panel_control_write_xml(controls[side][i], child);
     }
 }
-

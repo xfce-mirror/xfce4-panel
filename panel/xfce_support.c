@@ -284,16 +284,15 @@ static void dnd_drop_cb(GtkWidget * widget, GdkDragContext * context,
     f(widget, fnames, user_data);
 
     gnome_uri_list_free_strings(fnames);
-    gtk_drag_finish(context, FALSE, (context->action == GDK_ACTION_MOVE),
-                    time);
+    gtk_drag_finish(context, FALSE, (context->action == GDK_ACTION_MOVE), time);
 }
 
-void dnd_set_callback(GtkWidget *widget, DropCallback function, gpointer data)
+void dnd_set_callback(GtkWidget * widget, DropCallback function, gpointer data)
 {
     g_object_set_data(G_OBJECT(widget), "dropfunction", (gpointer) function);
-    
-    g_signal_connect(widget, "drag-data-received", 
-	    	     G_CALLBACK(dnd_drop_cb), data);
+
+    g_signal_connect(widget, "drag-data-received",
+                     G_CALLBACK(dnd_drop_cb), data);
 }
 
 /*** the next three routines are taken straight from gnome-libs so that the

@@ -120,7 +120,7 @@ void set_window_type_dock(GtkWidget * window, gboolean set)
     /* TODO: Use gdk function when it supports this type */
     {
         GdkAtom window_type;
-	gboolean mapped;
+        gboolean mapped;
 
         if(set)
             window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_DOCK", FALSE);
@@ -130,26 +130,26 @@ void set_window_type_dock(GtkWidget * window, gboolean set)
         if(!GTK_WIDGET_REALIZED(window))
             gtk_widget_realize(window);
 
-	if ((mapped = GTK_WIDGET_MAPPED(window)))
-	    gtk_widget_unmap(window);
-	
+        if((mapped = GTK_WIDGET_MAPPED(window)))
+            gtk_widget_unmap(window);
+
         gdk_property_change(window->window,
                             gdk_atom_intern("_NET_WM_WINDOW_TYPE", FALSE),
                             gdk_atom_intern("ATOM", FALSE), 32,
-                            GDK_PROP_MODE_REPLACE, (guchar *) &window_type, 1);
+                            GDK_PROP_MODE_REPLACE, (guchar *) & window_type, 1);
 
-	if (!set)
-	    gdk_property_delete(window->window, 
-		    		gdk_atom_intern("_WIN_LAYER", FALSE));
-	
-	if (mapped)
-	    gtk_widget_map(window);
+        if(!set)
+            gdk_property_delete(window->window,
+                                gdk_atom_intern("_WIN_LAYER", FALSE));
 
-	if (GTK_IS_WINDOW(toplevel))
-	{
-	    panel_set_position();
-	    gtk_window_present(GTK_WINDOW(toplevel));
-	}
+        if(mapped)
+            gtk_widget_map(window);
+
+        if(GTK_IS_WINDOW(toplevel))
+        {
+            panel_set_position();
+            gtk_window_present(GTK_WINDOW(toplevel));
+        }
     }
 }
 

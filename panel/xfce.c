@@ -92,8 +92,8 @@ static GtkWidget *create_panel_window(void)
     g_signal_connect(w, "destroy-event", G_CALLBACK(panel_destroy_cb), NULL);
     g_signal_connect(w, "delete-event", G_CALLBACK(panel_delete_cb), NULL);
 
-    if (settings.on_top)
-	set_window_type_dock(w, TRUE);
+    if(settings.on_top)
+        set_window_type_dock(w, TRUE);
 
     return w;
 }
@@ -105,22 +105,28 @@ void panel_contents_init()
     gtk_container_set_border_width(GTK_CONTAINER(main_frame), 0);
     gtk_widget_show(main_frame);
 
-    g_signal_connect(main_frame, "destroy-event", 
-            G_CALLBACK(main_frame_destroy_cb), NULL);
-    
+    g_signal_connect(main_frame, "destroy-event",
+                     G_CALLBACK(main_frame_destroy_cb), NULL);
+
     gtk_container_add(GTK_CONTAINER(toplevel), main_frame);
 
-    if (settings.orientation == VERTICAL) {
+    if(settings.orientation == VERTICAL)
+    {
         main_hbox = gtk_vbox_new(FALSE, 0);
-    } else {
+    }
+    else
+    {
         main_hbox = gtk_hbox_new(FALSE, 0);
     }
     gtk_widget_show(main_hbox);
     gtk_container_add(GTK_CONTAINER(main_frame), main_hbox);
 
-    if (settings.orientation == VERTICAL) {
+    if(settings.orientation == VERTICAL)
+    {
         left_hbox = gtk_vbox_new(FALSE, 0);
-    } else {
+    }
+    else
+    {
         left_hbox = gtk_hbox_new(FALSE, 0);
     }
     gtk_widget_show(left_hbox);
@@ -130,22 +136,28 @@ void panel_contents_init()
     if(settings.style == OLD_STYLE)
         gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
 
-    if (settings.show_central)
-	gtk_widget_show(central_frame);
+    if(settings.show_central)
+        gtk_widget_show(central_frame);
 
     gtk_container_add(GTK_CONTAINER(main_hbox), central_frame);
 
-    if (settings.orientation == VERTICAL) {
+    if(settings.orientation == VERTICAL)
+    {
         central_hbox = gtk_vbox_new(FALSE, 0);
-    } else {
+    }
+    else
+    {
         central_hbox = gtk_hbox_new(FALSE, 0);
     }
     gtk_widget_show(central_hbox);
     gtk_container_add(GTK_CONTAINER(central_frame), central_hbox);
 
-    if (settings.orientation == VERTICAL) {
+    if(settings.orientation == VERTICAL)
+    {
         right_hbox = gtk_vbox_new(FALSE, 0);
-    } else {
+    }
+    else
+    {
         right_hbox = gtk_hbox_new(FALSE, 0);
     }
     gtk_container_add(GTK_CONTAINER(main_hbox), right_hbox);
@@ -164,9 +176,9 @@ void panel_cleanup(void)
     if(!disable_user_config)
         write_panel_config();
 
-    if (GTK_IS_WIDGET(toplevel))
-	    gtk_widget_destroy(toplevel);
-    
+    if(GTK_IS_WIDGET(toplevel))
+        gtk_widget_destroy(toplevel);
+
 }
 
 /*  Panel settings
@@ -184,7 +196,7 @@ void panel_set_size(int size)
 void panel_set_orientation(int orientation)
 {
     settings.orientation = orientation;
-    // panel_set_size(settings.size);
+    /* panel_set_size(settings.size); */
 }
 
 void panel_set_popup_size(int size)
@@ -358,10 +370,10 @@ void panel_set_position(void)
     GtkRequisition req;
     int w = 0, h = 0;
 
-    if (!w)
+    if(!w)
     {
-	w = gdk_screen_width();
-	h = gdk_screen_height();
+        w = gdk_screen_width();
+        h = gdk_screen_height();
     }
 
     gtk_widget_size_request(toplevel, &req);
@@ -427,7 +439,7 @@ void panel_parse_xml(xmlNodePtr node)
         settings.orientation = atoi(value);
 
     g_free(value);
-    
+
     value = xmlGetProp(node, (const xmlChar *)"icontheme");
 
     if(value)
@@ -680,7 +692,7 @@ void quit(void)
         exec_cmd_silent(settings.exit_command, FALSE);
 
     panel_cleanup();
-    
+
     gtk_main_quit();
 }
 

@@ -47,7 +47,7 @@ void screen_button_dialog(ScreenButton * sb)
     GtkWidget *vbox1, *vbox2;
     const char *temp;
     char *name;
-    
+
     int response = GTK_RESPONSE_NONE;
 
     dialog = gtk_dialog_new_with_buttons(_("Change name"), GTK_WINDOW(toplevel),
@@ -65,14 +65,14 @@ void screen_button_dialog(ScreenButton * sb)
     gtk_box_pack_start(GTK_BOX(vbox1), vbox2, TRUE, TRUE, 0);
 
     entry = gtk_entry_new();
-    
+
     gtk_widget_show(entry);
     gtk_box_pack_start(GTK_BOX(vbox2), entry, TRUE, TRUE, 0);
 
     name = screen_button_get_name(sb);
     gtk_entry_set_text(GTK_ENTRY(entry), name);
     g_free(name);
-    
+
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 
     response = gtk_dialog_run(GTK_DIALOG(dialog));
@@ -121,9 +121,9 @@ void set_transient_for_dialog(GtkWidget * window)
 */
 static GtkWidget *size_menu;
 static GtkWidget *popup_menu;
-static GtkWidget *orientation_menu;
+static GtkWidget *popup_position_menu;
 static GtkWidget *style_menu;
-static GtkWidget *panel_orientation_menu;
+static GtkWidget *orientation_menu;
 static GtkWidget *theme_menu;
 static GtkWidget *left_spin;
 static GtkWidget *right_spin;
@@ -175,13 +175,16 @@ static void restore_backup(void)
 {
     /* we just let the calbacks of our dialog do all the work */
 
+    /* this must be first */
+    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu), 
+    				backup.orientation); 
+
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
 
-    /*
-     * This is not working properly just yet.
-    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu), 
-	    			backup.orientation); */
+    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu), 
+    				backup.popup_position); 
+
     gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), backup.style);
     gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
                                 backup_theme_index);
@@ -191,8 +194,6 @@ static void restore_backup(void)
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin),
                               backup.num_screens);
-    /* apparently the callback doesn't always work 
-       panel_set_num_screens(backup.num_screens); */
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox),
                                  backup.show_desktop_buttons);
@@ -277,9 +278,9 @@ static void size_menu_changed(GtkOptionMenu * menu)
             gtk_widget_set_sensitive(style_menu, TRUE);
         }
     }
-    else if(n+1 != settings.popup_size)
+    else if(n + 1 != settings.popup_size)
     {
-        panel_set_popup_size(n+1);
+        panel_set_popup_size(n + 1);
     }
     else
     {
@@ -318,8 +319,8 @@ static void add_size_menu(GtkWidget * option_menu, int size, gboolean is_popup)
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
     gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), 
-	    			is_popup ? size -1 : size);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu),
+                                is_popup ? size - 1 : size);
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(size_menu_changed),
                      NULL);
@@ -413,9 +414,10 @@ static void add_style_menu(GtkWidget * option_menu, int style)
  * Panel Orientation
  */
 
-static void panel_orientation_changed(GtkOptionMenu * menu)
+static void orientation_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
+    int pos = settings.popup_position;
 
     if(n == settings.orientation)
         return;
@@ -423,11 +425,22 @@ static void panel_orientation_changed(GtkOptionMenu * menu)
     panel_set_orientation(n);
 
     panel_reorient();
-    
-    // gtk_widget_set_sensitive(revert, TRUE);
+
+    if ((n == HORIZONTAL && (pos == LEFT || pos == RIGHT)) ||
+        (n == VERTICAL && (pos == TOP || pos == BOTTOM)))
+    {
+        gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
+        gtk_widget_set_sensitive(style_menu, FALSE);
+    }
+    else
+    {
+        gtk_widget_set_sensitive(style_menu, TRUE);
+    }
+
+    gtk_widget_set_sensitive(revert, TRUE);
 }
 
-static void add_panel_orientation_menu(GtkWidget * option_menu, int orientation)
+static void add_orientation_menu(GtkWidget * option_menu, int orientation)
 {
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
@@ -443,36 +456,37 @@ static void add_panel_orientation_menu(GtkWidget * option_menu, int orientation)
     gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
     gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), orientation);
 
-    g_signal_connect(option_menu, "changed", 
-            G_CALLBACK(panel_orientation_changed), NULL);
+    g_signal_connect(option_menu, "changed",
+                     G_CALLBACK(orientation_changed), NULL);
 
 }
 
 
-/*  popup orientation
+/*  popup position
 */
-static void orientation_changed(GtkOptionMenu * menu)
+static void popup_position_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
 
     if(n == settings.popup_position)
         return;
 
-    if (n == LEFT || n == RIGHT)
+    if ((settings.orientation == HORIZONTAL && (n == LEFT || n == RIGHT)) ||
+        (settings.orientation == VERTICAL && (n == TOP || n == BOTTOM)))
     {
-	gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
-	gtk_widget_set_sensitive(style_menu, FALSE);
+        gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
+        gtk_widget_set_sensitive(style_menu, FALSE);
     }
     else
     {
-	gtk_widget_set_sensitive(style_menu, TRUE);
+        gtk_widget_set_sensitive(style_menu, TRUE);
     }
-    
+
     panel_set_popup_position(n);
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
-static void add_orientation_menu(GtkWidget * option_menu, int orientation)
+static void add_popup_position_menu(GtkWidget * option_menu, int position)
 {
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
@@ -494,10 +508,10 @@ static void add_orientation_menu(GtkWidget * option_menu, int orientation)
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
     gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), orientation);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), position);
 
-    g_signal_connect(option_menu, "changed", 
-	    	     G_CALLBACK(orientation_changed), NULL);
+    g_signal_connect(option_menu, "changed",
+                     G_CALLBACK(popup_position_changed), NULL);
 }
 
 /*  theme
@@ -660,11 +674,11 @@ static void add_style_box(GtkBox * box)
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    panel_orientation_menu = gtk_option_menu_new();
-    gtk_widget_show(panel_orientation_menu);
-    add_panel_orientation_menu(panel_orientation_menu, settings.orientation);
-    gtk_box_pack_start(GTK_BOX(hbox), panel_orientation_menu, TRUE, TRUE, 0);
-    
+    orientation_menu = gtk_option_menu_new();
+    gtk_widget_show(orientation_menu);
+    add_orientation_menu(orientation_menu, settings.orientation);
+    gtk_box_pack_start(GTK_BOX(hbox), orientation_menu, TRUE, TRUE, 0);
+
 
     /* popup orientation */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -677,10 +691,10 @@ static void add_style_box(GtkBox * box)
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    orientation_menu = gtk_option_menu_new();
-    gtk_widget_show(orientation_menu);
-    add_orientation_menu(orientation_menu, settings.popup_position);
-    gtk_box_pack_start(GTK_BOX(hbox), orientation_menu, TRUE, TRUE, 0);
+    popup_position_menu = gtk_option_menu_new();
+    gtk_widget_show(popup_position_menu);
+    add_popup_position_menu(popup_position_menu, settings.popup_position);
+    gtk_box_pack_start(GTK_BOX(hbox), popup_position_menu, TRUE, TRUE, 0);
 
     /* icon theme */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -1091,7 +1105,7 @@ void global_settings_dialog(void)
     gboolean done;
     GtkWidget *notebook, *label;
     char *markup;
-    
+
     if(running)
     {
         gtk_window_present(GTK_WINDOW(dialog));
@@ -1103,12 +1117,16 @@ void global_settings_dialog(void)
 
     create_backup();
 
+    /* we may recreate the panel so safe the changes now */
+    if (!disable_user_config)
+	write_panel_config();
+
     dialog =
         gtk_dialog_new_with_buttons(_("Xfce Panel Settings"),
                                     GTK_WINDOW(toplevel),
                                     GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
                                     NULL);
-    
+
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
 
@@ -1124,16 +1142,16 @@ void global_settings_dialog(void)
     /* main notebook */
     notebook = gtk_notebook_new();
     gtk_widget_show(notebook);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), notebook, 
-	    	       TRUE, TRUE, 0);
-    
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), notebook,
+                       TRUE, TRUE, 0);
+
     /* first notebook page */
     frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
     gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
-    
-    markup = g_strconcat("<span> ",_("General")," </span>", NULL);
+
+    markup = g_strconcat("<span> ", _("General"), " </span>", NULL);
     label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(label), markup);
     g_free(markup);
@@ -1162,8 +1180,8 @@ void global_settings_dialog(void)
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
     gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
-    
-    markup = g_strconcat("<span> ",_("Appearance")," </span>", NULL);
+
+    markup = g_strconcat("<span> ", _("Appearance"), " </span>", NULL);
     label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(label), markup);
     g_free(markup);
@@ -1194,8 +1212,8 @@ void global_settings_dialog(void)
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
     gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
-    
-    markup = g_strconcat("<span> ",_("Advanced")," </span>", NULL);
+
+    markup = g_strconcat("<span> ", _("Advanced"), " </span>", NULL);
     label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(label), markup);
     g_free(markup);

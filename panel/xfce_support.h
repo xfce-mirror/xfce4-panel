@@ -38,11 +38,12 @@ GtkWidget *mixed_button_new(const char *stock, const char *message);
 /* dnd */
 void dnd_set_drag_dest(GtkWidget * widget);
 
-typedef void (*DropCallback)(GtkWidget *widget, GList *drop_data, gpointer data);
+typedef void (*DropCallback) (GtkWidget * widget, GList * drop_data,
+                              gpointer data);
 
 #define DROP_CALLBACK(f) (DropCallback)f
 
-void dnd_set_callback(GtkWidget *widget, DropCallback function, gpointer data);
+void dnd_set_callback(GtkWidget * widget, DropCallback function, gpointer data);
 
 void gnome_uri_list_free_strings(GList * list);
 GList *gnome_uri_list_extract_uris(const gchar * uri_list);

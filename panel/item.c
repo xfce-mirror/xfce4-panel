@@ -73,7 +73,7 @@ static PanelItem *panel_item_new(void)
     pi->command = NULL;
     pi->in_terminal = FALSE;
     pi->tooltip = NULL;
-   
+
     pi->icon_id = UNKNOWN_ICON;
     pi->icon_path = NULL;
 
@@ -200,9 +200,9 @@ void create_panel_item(PanelControl * pc)
 {
     PanelItem *pi = panel_item_new();
     GtkWidget *w = icon_button_get_button(pi->button);
-    
+
     gtk_container_add(GTK_CONTAINER(pc->base), w);
-    
+
     /* fill the PanelControl structure */
     pc->id = ICON;
 
@@ -220,4 +220,3 @@ void create_panel_item(PanelControl * pc)
 
     pc->add_options = panel_item_add_options;
 }
-
