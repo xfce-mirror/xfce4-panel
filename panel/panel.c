@@ -265,6 +265,26 @@ update_position (Panel * p, int *x, int *y)
 static void
 panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
 {
+    static int num_screens = 0;
+
+    if (G_UNLIKELY(num_screens == 0))
+	num_screens = xineramaGetHeads ();
+
+    if (G_UNLIKELY(num_screens > 1))
+    {
+	int xcenter, ycenter;
+
+	xcenter = *x + panel_req.width / 2;
+	ycenter = *y + panel_req.height / 2;
+	
+	if (xcenter < xinerama_scr.xmin || ycenter < xinerama_scr.ymax
+	    || xcenter > xinerama_scr.xmax || ycenter > xinerama_scr.ymax)
+	{
+	    update_xinerama_coordinates (panel);
+	}
+    }
+    
+    /* check if xinerama screen must be updated */
     update_position (panel, x, y);
 }
 
@@ -276,9 +296,12 @@ panel_reallocate (Panel * p, GtkRequisition * previous)
 
     gtk_widget_size_request (p->toplevel, &new);
 
-    xold = xnew = p->position.x;
-    yold = ynew = p->position.y;
+    xold = p->position.x;
+    yold = p->position.y;
 
+    xnew = xold - (new.width - previous->width) / 2;
+    ynew = yold - (new.height - previous->height) / 2;
+    
     panel_req = new;
 
     update_position (p, &xnew, &ynew);
