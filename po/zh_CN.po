@@ -1,21 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
+# xfce4-panel simplified Chinese translation file.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <edscott@imp.mx>, 2003.
+# This file is distributed under the same license as the xfce4-panel package.
+# Yongtao Yang <yongtao.yang@telia.com>, 2003.
+# Minor changes by Ambrose Li <acli@ada.dhs.org>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-12-04 09:37+0100\n"
+"Project-Id-Version: xfce4-panel 4.0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2004-01-19 20:52+0100\n"
 "Last-Translator: Yongtao Yang <yongtao.yang@telia.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "选择文件"
 
@@ -23,7 +24,7 @@ msgstr "选择文件"
 msgid "Change item"
 msgstr "改变条目"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:681
+#: panel/controls_dialog.c:286 panel/item_dialog.c:647
 msgid "Position:"
 msgstr "位置"
 
@@ -37,88 +38,88 @@ msgstr ""
 "\n"
 "你希望删除该条目吗?"
 
-#: panel/item_dialog.c:321
+#: panel/item_dialog.c:320
 msgid "Other Icon"
 msgstr "其它图标"
 
-#: panel/item_dialog.c:346
+#: panel/item_dialog.c:345
 msgid "Select icon"
 msgstr "选择图标"
 
-#: panel/item_dialog.c:396
+#: panel/item_dialog.c:384
 msgid "Icon:"
 msgstr "图标:"
 
-#: panel/item_dialog.c:467
+#: panel/item_dialog.c:433
 msgid "Select command"
 msgstr "选择命令"
 
-#: panel/item_dialog.c:495
+#: panel/item_dialog.c:461
 msgid "Command:"
 msgstr "命令:"
 
-#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "在终端中运行(_T)"
 
-#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "使用启动提示(_N)"
 
-#: panel/item_dialog.c:564
+#: panel/item_dialog.c:530
 msgid "Caption:"
 msgstr "标题:"
 
-#: panel/item_dialog.c:597
+#: panel/item_dialog.c:563
 msgid "Tooltip:"
 msgstr "工具提示:"
 
-#: panel/item_dialog.c:633
+#: panel/item_dialog.c:599
 msgid "Menu:"
 msgstr "菜单:"
 
-#: panel/item_dialog.c:640
+#: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
 msgstr "将菜单附加到启动器"
 
-#: panel/item_dialog.c:773
+#: panel/item_dialog.c:738
 msgid "Icon Preview"
 msgstr "图标预览"
 
-#: panel/item_dialog.c:777
+#: panel/item_dialog.c:742
 msgid "Drag file onto this frame to change the icon"
 msgstr "拖拽文件到该框架中以改变图标"
 
-#: panel/item_dialog.c:965
+#: panel/item_dialog.c:930
 msgid "Change menu item"
 msgstr "改变菜单条目"
 
 #. add buttons
-#: panel/item_dialog.c:968
+#: panel/item_dialog.c:933
 msgid "Remove"
 msgstr "删除"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "点击鼠标右键以改变条目"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "添加启动器"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "添加新条目"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "启动器"
 
-#: panel/main.c:117
+#: panel/main.c:115
 msgid "Are you sure you want to exit?"
 msgstr "你确定要退出吗?"
 
-#: panel/main.c:329
+#: panel/main.c:243
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -129,7 +130,7 @@ msgstr ""
 "XFce桌面环境的组成部分\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:361
+#: panel/main.c:259
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -139,11 +140,11 @@ msgstr ""
 "示 \n"
 "某些XFce的功能可能无法正常运行。"
 
-#: panel/controls.c:320 panel/panel.c:412
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/添加新条目(_N)"
 
-#: panel/controls.c:322 panel/panel.c:414
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/属性(_P)..."
 
@@ -155,35 +156,31 @@ msgstr "/删除(_R)"
 msgid "This item has no configuration options"
 msgstr "该条目没有配置选项"
 
-#: panel/panel.c:410
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/XFce启动面板"
 
-#: panel/panel.c:415
-msgid "/_About XFce"
-msgstr "/关于XFce(_A)"
-
-#: panel/panel.c:416
-msgid "/_Help"
-msgstr "/帮助(_H)"
-
-#: panel/panel.c:419
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/配置管理器(_S)"
 
-#: panel/panel.c:422
+#: panel/panel.c:404
+msgid "/_About XFce"
+msgstr "/关于XFce(_A)"
+
+#: panel/panel.c:405
+msgid "/_Help"
+msgstr "/帮助(_H)"
+
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/锁住屏幕(_L)"
 
-#: panel/panel.c:423
-msgid "/_Restart"
-msgstr "恢复(_R)"
-
-#: panel/panel.c:425
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/退出(_X)"
 
-#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce面板"
@@ -244,7 +241,7 @@ msgstr "终端"
 msgid "Settings manager not available"
 msgstr "配置管理器不可用"
 
-#: panel/popup.c:261
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "菜单"
 
@@ -345,60 +342,128 @@ msgstr "位置"
 msgid "Behaviour"
 msgstr "行为"
 
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %-d : day of the month, without prefixed 0
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: plugins/clock/clock.c:119
-msgid "%A, %-d %B %Y"
-msgstr ""
+#: plugins/clock/clock.c:57
+msgid "Sunday"
+msgstr "星期天"
 
-#: plugins/clock/clock.c:336
+#: plugins/clock/clock.c:58
+msgid "Monday"
+msgstr "星期一"
+
+#: plugins/clock/clock.c:59
+msgid "Tuesday"
+msgstr "星期二"
+
+#: plugins/clock/clock.c:60
+msgid "Wednesday"
+msgstr "星期三"
+
+#: plugins/clock/clock.c:61
+msgid "Thursday"
+msgstr "星期四"
+
+#: plugins/clock/clock.c:62
+msgid "Friday"
+msgstr "星期五"
+
+#: plugins/clock/clock.c:63
+msgid "Saturday"
+msgstr "星期六"
+
+#: plugins/clock/clock.c:67
+msgid "January"
+msgstr "1月"
+
+#: plugins/clock/clock.c:68
+msgid "February"
+msgstr "2月"
+
+#: plugins/clock/clock.c:69
+msgid "March"
+msgstr "3月"
+
+#: plugins/clock/clock.c:70
+msgid "April"
+msgstr "4月"
+
+#: plugins/clock/clock.c:71
+msgid "May"
+msgstr "5月"
+
+#: plugins/clock/clock.c:72
+msgid "June"
+msgstr "6月"
+
+#: plugins/clock/clock.c:73
+msgid "July"
+msgstr "7月"
+
+#: plugins/clock/clock.c:74
+msgid "August"
+msgstr "8月"
+
+#: plugins/clock/clock.c:75
+msgid "September"
+msgstr "9月"
+
+#: plugins/clock/clock.c:76
+msgid "October"
+msgstr "10月"
+
+#: plugins/clock/clock.c:77
+msgid "November"
+msgstr "11月"
+
+#: plugins/clock/clock.c:78
+msgid "December"
+msgstr "12月"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr "%4$u年%3$s%2$u日 (%1$s)"
+
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "钟表类型:"
 
-#: plugins/clock/clock.c:349
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "模拟式"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "数字式"
 
-#: plugins/clock/clock.c:357
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr "数字液晶显示"
 
-#: plugins/clock/clock.c:419
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
-msgstr "Tryb godzin"
+msgstr "时间模式:"
 
-#: plugins/clock/clock.c:426
+#: plugins/clock/clock.c:440
 msgid "24 hour"
 msgstr "24小时"
 
-#: plugins/clock/clock.c:432
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12小时"
 
-#: plugins/clock/clock.c:438
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:476
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "显示秒:"
 
-#: plugins/clock/clock.c:585
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "XFce时钟"
 
 #: plugins/pager/pager.c:271
-#, fuzzy
 msgid "Graphical pager"
 msgstr "图形化的窗口切换器"
 
@@ -480,62 +545,8 @@ msgstr "间隔(秒):"
 msgid "Mail check"
 msgstr "检查邮件"
 
-#~ msgid "Sunday"
-#~ msgstr "星期天"
-
-#~ msgid "Monday"
-#~ msgstr "星期一"
-
-#~ msgid "Tuesday"
-#~ msgstr "星期二"
-
-#~ msgid "Wednesday"
-#~ msgstr "星期三"
-
-#~ msgid "Thursday"
-#~ msgstr "星期四"
-
-#~ msgid "Friday"
-#~ msgstr "星期五"
-
-#~ msgid "Saturday"
-#~ msgstr "星期六"
-
-#~ msgid "January"
-#~ msgstr "一月"
-
-#~ msgid "February"
-#~ msgstr "二月"
-
-#~ msgid "March"
-#~ msgstr "三月"
-
-#~ msgid "April"
-#~ msgstr "四月"
-
-#~ msgid "May"
-#~ msgstr "五月"
-
-#~ msgid "June"
-#~ msgstr "六月"
-
-#~ msgid "July"
-#~ msgstr "七月"
-
-#~ msgid "August"
-#~ msgstr "八月"
-
-#~ msgid "September"
-#~ msgstr "Wrzesień"
-
-#~ msgid "October"
-#~ msgstr "十月"
-
-#~ msgid "November"
-#~ msgstr "十一月"
-
-#~ msgid "December"
-#~ msgstr "十二月"
+#~ msgid "/_Restart"
+#~ msgstr "恢复(_R)"
 
 #~ msgid "_Done"
 #~ msgstr "完成(_D)"

@@ -7,16 +7,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 VERSION\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 24-01-03 12:43:34+0100\n"
 "Last-Translator: Jasper Huijsmans <huysmans@sourceforge.net>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Bestand selecteren"
 
@@ -99,19 +99,19 @@ msgstr "Menu item veranderen"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Klik muisknop 3 om item te bewerken"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Toevoegen"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Nieuw item toevoegen"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Starter"
 
@@ -140,11 +140,11 @@ msgstr ""
 "zijn gedefinieerd op http://www.freedesktop.org. \n"
 "Sommige XFce functie zullen niet werken zoals bedoeld."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/_Item toevoegen"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_Eigenschappen"
 
@@ -156,31 +156,31 @@ msgstr "/_Verwijderen"
 msgid "This item has no configuration options"
 msgstr "Geen configuratie opties"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/XFce Panel"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/_Optiemanager"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/XFce _info"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/_Help"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/Scherm _beveiligen"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/_Afsluiten"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce Panel"
@@ -241,7 +241,7 @@ msgstr "Terminal"
 msgid "Settings manager not available"
 msgstr "Optiemanager niet beschikbaar"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Menu"
 
@@ -417,6 +417,11 @@ msgstr "November"
 #: plugins/clock/clock.c:78
 msgid "December"
 msgstr "December"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"

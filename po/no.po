@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-12-04 09:37+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Velg fil"
 
@@ -23,7 +24,7 @@ msgstr "Velg fil"
 msgid "Change item"
 msgstr "Endre element"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:681
+#: panel/controls_dialog.c:286 panel/item_dialog.c:647
 msgid "Position:"
 msgstr "Posisjon:"
 
@@ -37,88 +38,88 @@ msgstr ""
 "\n"
 "Vil du fjerne elementet?"
 
-#: panel/item_dialog.c:321
+#: panel/item_dialog.c:320
 msgid "Other Icon"
 msgstr "Annet ikon"
 
-#: panel/item_dialog.c:346
+#: panel/item_dialog.c:345
 msgid "Select icon"
 msgstr "Velg ikon"
 
-#: panel/item_dialog.c:396
+#: panel/item_dialog.c:384
 msgid "Icon:"
 msgstr "Ikon:"
 
-#: panel/item_dialog.c:467
+#: panel/item_dialog.c:433
 msgid "Select command"
 msgstr "Velg kommando"
 
-#: panel/item_dialog.c:495
+#: panel/item_dialog.c:461
 msgid "Command:"
 msgstr "Kommando:"
 
-#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Kjør i _terminal"
 
-#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Bruk oppstarts _varsel"
 
-#: panel/item_dialog.c:564
+#: panel/item_dialog.c:530
 msgid "Caption:"
 msgstr "Bildetekst:"
 
-#: panel/item_dialog.c:597
+#: panel/item_dialog.c:563
 msgid "Tooltip:"
 msgstr "Verktøytips:"
 
-#: panel/item_dialog.c:633
+#: panel/item_dialog.c:599
 msgid "Menu:"
 msgstr "Meny:"
 
-#: panel/item_dialog.c:640
+#: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
 msgstr "Fest meny til programstarter"
 
-#: panel/item_dialog.c:773
+#: panel/item_dialog.c:738
 msgid "Icon Preview"
 msgstr "Ikon forhåndsvisning"
 
-#: panel/item_dialog.c:777
+#: panel/item_dialog.c:742
 msgid "Drag file onto this frame to change the icon"
 msgstr "Dra filen på denne rammen for å forandre ikonet"
 
-#: panel/item_dialog.c:965
+#: panel/item_dialog.c:930
 msgid "Change menu item"
 msgstr "Endre meny element"
 
 #. add buttons
-#: panel/item_dialog.c:968
+#: panel/item_dialog.c:933
 msgid "Remove"
 msgstr "Fjern"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Klikk tredje museknapp for å forandre element"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Legg til programstarter"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Tilføy nytt element"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Programstarter"
 
-#: panel/main.c:117
+#: panel/main.c:115
 msgid "Are you sure you want to exit?"
 msgstr "Er du sikker på at du vil avslutte?"
 
-#: panel/main.c:329
+#: panel/main.c:243
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -129,21 +130,21 @@ msgstr ""
 "Del av XFce skrivebordsmiljøet\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:361
+#: panel/main.c:259
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Vinduhåndtereren din ser ikke ut til å støtte de vinduhånteringshintene som er "
-"definert av http://www.freedesktop.org. \n"
+"Vinduhåndtereren din ser ikke ut til å støtte de vinduhånteringshintene som "
+"er definert av http://www.freedesktop.org. \n"
 "Noen XFce egenskaper virker kanskje ikke som påtenkt."
 
-#: panel/controls.c:320 panel/panel.c:412
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/Legg til _nytt element"
 
-#: panel/controls.c:322 panel/panel.c:414
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_Egenskaper.."
 
@@ -155,35 +156,31 @@ msgstr "/_Fjern"
 msgid "This item has no configuration options"
 msgstr "Dette elementet har konfigurasjons alternativer"
 
-#: panel/panel.c:410
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/XFce Panel"
 
-#: panel/panel.c:415
-msgid "/_About XFce"
-msgstr "/_Om XFce"
-
-#: panel/panel.c:416
-msgid "/_Help"
-msgstr "/_Hjelp"
-
-#: panel/panel.c:419
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/_Instillings håndterer"
 
-#: panel/panel.c:422
+#: panel/panel.c:404
+msgid "/_About XFce"
+msgstr "/_Om XFce"
+
+#: panel/panel.c:405
+msgid "/_Help"
+msgstr "/_Hjelp"
+
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/_Lås skjerm"
 
-#: panel/panel.c:423
-msgid "/_Restart"
-msgstr "/_Omstart"
-
-#: panel/panel.c:425
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/A_vslutt"
 
-#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce Panel"
@@ -244,7 +241,7 @@ msgstr "Terminal"
 msgid "Settings manager not available"
 msgstr "Instillignshåndterer ikke tilgjengelig"
 
-#: panel/popup.c:261
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Meny"
 
@@ -345,55 +342,125 @@ msgstr "Posisjon"
 msgid "Behaviour"
 msgstr "Oppførsel"
 
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %-d : day of the month, without prefixed 0
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: plugins/clock/clock.c:119
-msgid "%A, %-d %B %Y"
+#: plugins/clock/clock.c:57
+#, fuzzy
+msgid "Sunday"
+msgstr "Lyd"
+
+#: plugins/clock/clock.c:58
+msgid "Monday"
+msgstr ""
+
+#: plugins/clock/clock.c:59
+msgid "Tuesday"
+msgstr ""
+
+#: plugins/clock/clock.c:60
+msgid "Wednesday"
+msgstr ""
+
+#: plugins/clock/clock.c:61
+msgid "Thursday"
+msgstr ""
+
+#: plugins/clock/clock.c:62
+msgid "Friday"
+msgstr ""
+
+#: plugins/clock/clock.c:63
+msgid "Saturday"
+msgstr ""
+
+#: plugins/clock/clock.c:67
+msgid "January"
+msgstr ""
+
+#: plugins/clock/clock.c:68
+msgid "February"
+msgstr ""
+
+#: plugins/clock/clock.c:69
+msgid "March"
+msgstr ""
+
+#: plugins/clock/clock.c:70
+msgid "April"
+msgstr ""
+
+#: plugins/clock/clock.c:71
+msgid "May"
+msgstr ""
+
+#: plugins/clock/clock.c:72
+msgid "June"
+msgstr ""
+
+#: plugins/clock/clock.c:73
+msgid "July"
+msgstr ""
+
+#: plugins/clock/clock.c:74
+msgid "August"
+msgstr ""
+
+#: plugins/clock/clock.c:75
+msgid "September"
+msgstr ""
+
+#: plugins/clock/clock.c:76
+msgid "October"
+msgstr ""
+
+#: plugins/clock/clock.c:77
+msgid "November"
+msgstr ""
+
+#: plugins/clock/clock.c:78
+msgid "December"
+msgstr ""
+
+#: plugins/clock/clock.c:142
+#, fuzzy, c-format
+msgid "%s, %u %s %u"
 msgstr "%A, %-d %B %Y"
 
-#: plugins/clock/clock.c:336
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "Klokke type:"
 
-#: plugins/clock/clock.c:349
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "Analog"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "Digital"
 
-#: plugins/clock/clock.c:357
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:419
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
 msgstr "Time modus:"
 
-#: plugins/clock/clock.c:426
+#: plugins/clock/clock.c:440
 msgid "24 hour"
 msgstr "24 timer"
 
-#: plugins/clock/clock.c:432
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12 timer"
 
-#: plugins/clock/clock.c:438
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:476
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "Vis sekunder:"
 
-#: plugins/clock/clock.c:585
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "Xfce klokke"
 
@@ -478,3 +545,6 @@ msgstr "Intervall (sek):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "E-post sjekk"
+
+#~ msgid "/_Restart"
+#~ msgstr "/_Omstart"

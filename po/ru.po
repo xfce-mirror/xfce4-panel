@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2004-06-27 05:36+0600\n"
 "Last-Translator: Anthony Ivanoff <a-i@bk.ru>\n"
 "Language-Team: Russian\n"
@@ -15,9 +16,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Выбор файла"
 
@@ -100,19 +102,19 @@ msgstr "Изменение элемента меню"
 msgid "Remove"
 msgstr "Удалить"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Щелкните среднюю кнопку мыши для изменения объекта"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Добавить запуск"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Добавить объект"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Запуск"
 
@@ -141,11 +143,11 @@ msgstr ""
 "www.freedesktop.org. \n"
 "Возможно, некоторые возможности Xfce не будут правильно работать."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/Добавить объект"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/Свойства..."
 
@@ -157,31 +159,31 @@ msgstr "/Удалить"
 msgid "This item has no configuration options"
 msgstr "Обьект не имеет настраиваемых параметров"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/Панель Xfce"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/Менеджер настроек"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/Об Xfce"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/Помощь"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/Блокировать экран"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/Выход"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Панель Xfce"
@@ -242,7 +244,7 @@ msgstr "Терминал"
 msgid "Settings manager not available"
 msgstr "Менеджер настроек недоступен"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Меню"
 
@@ -419,6 +421,11 @@ msgstr "ноябрь"
 msgid "December"
 msgstr "декабрь"
 
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
+
 #: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "Тип часов:"
@@ -540,4 +547,3 @@ msgstr "Интервал (сек):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Проверка почты"
-

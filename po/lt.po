@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 3.99.2\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2003-08-03 01:16+0300\n"
 "Last-Translator: Mantas <zaz@xxx.lt>\n"
 "Language-Team: Lithuania <zaz@xxx.lt>\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Pasirinkite failà"
 
@@ -97,19 +98,19 @@ msgstr "Pakeisti meniu elementà"
 msgid "Remove"
 msgstr "Paðalinti"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Norëdami pakeisti elementà, spauskite viduriná pelës mygtukà"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Ádëti leistukà"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Ádëti naujà leistukà"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Leistukas"
 
@@ -138,11 +139,11 @@ msgstr ""
 "apibrëþtø tinklalapyje http://www.freedesktop.org. \n"
 "Keletas XFce sudëtiniø daliø gali neveikti kaip numatyta."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/Pridëti _naujà elementà"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_Savybës..."
 
@@ -154,31 +155,31 @@ msgstr "/_Paðalinti"
 msgid "This item has no configuration options"
 msgstr "Ðis elementas neturi parinkties parametrø "
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/XFce Skydelis"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/Nuo_statø tvarkyklë"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/_Apie XFce"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/Pa_galba"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/_Uþrakinti ekranà"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/Ið_eiti"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce Skydelis"
@@ -239,7 +240,7 @@ msgstr "Terminalas"
 msgid "Settings manager not available"
 msgstr "Nëra nustatymø tvarkyklë"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Meniu"
 
@@ -415,6 +416,11 @@ msgstr "Lapkritis"
 #: plugins/clock/clock.c:78
 msgid "December"
 msgstr "Gruodis"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"

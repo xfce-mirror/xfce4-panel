@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFce4\n"
-"POT-Creation-Date: 2003-12-04 09:37+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2004-03-11 13:45+0100\n"
 "Last-Translator: Alex Dupre <ale@FreeBSD.org>\n"
 "Language-Team: GUFI <traduzioni@gufi.org>\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Seleziona il file"
 
@@ -22,13 +23,11 @@ msgstr "Seleziona il file"
 msgid "Change item"
 msgstr "Cambia oggetto"
 
-#: panel/controls_dialog.c:286
-#: panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:647
 msgid "Position:"
 msgstr "Posizione:"
 
-#: panel/controls_dialog.c:342
-#: panel/controls.c:272
+#: panel/controls_dialog.c:342 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -58,13 +57,11 @@ msgstr "Seleziona comando"
 msgid "Command:"
 msgstr "Comando:"
 
-#: panel/item_dialog.c:498
-#: plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Esegui nel _terminale"
 
-#: panel/item_dialog.c:503
-#: plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Usa _notifica in avvio"
 
@@ -101,19 +98,19 @@ msgstr "Cambia oggetto del menu"
 msgid "Remove"
 msgstr "Rimuovi"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Clicca il terzo tasto del mouse per cambiare oggetto"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Aggiungi launcher"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Aggiungi un nuovo oggetto"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Launcher"
 
@@ -134,19 +131,19 @@ msgstr ""
 
 #: panel/main.c:259
 msgid ""
-"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+"Your window manager does not seem to support the new window manager hints as "
+"defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Il tuo gestore di finestre non sembra supportare alcune delle specifiche definite da http://www.freedesktop.org. \n"
+"Il tuo gestore di finestre non sembra supportare alcune delle specifiche "
+"definite da http://www.freedesktop.org. \n"
 "Alcune caratteristiche di XFce potrebbero non funzionare correttamente."
 
-#: panel/controls.c:320
-#: panel/panel.c:399
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/Aggiungi un _nuovo oggetto"
 
-#: panel/controls.c:322
-#: panel/panel.c:401
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_Proprietà ..."
 
@@ -182,8 +179,7 @@ msgstr "/_Blocca schermo"
 msgid "/E_xit"
 msgstr "/_Esci"
 
-#: panel/panel.c:795
-#: settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Pannello XFce"
@@ -272,24 +268,20 @@ msgstr "Orizzontale"
 msgid "Vertical"
 msgstr "Verticale"
 
-#: settings/xfce_settings_dialog.c:226
-#: settings/xfce_settings_dialog.c:456
+#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
 msgid "Left"
 msgstr "Sinistra"
 
-#: settings/xfce_settings_dialog.c:230
-#: settings/xfce_settings_dialog.c:457
+#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
 msgid "Right"
 msgstr "Destra"
 
-#: settings/xfce_settings_dialog.c:234
-#: settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
 #: settings/xfce_settings_dialog.c:511
 msgid "Top"
 msgstr "Alto"
 
-#: settings/xfce_settings_dialog.c:238
-#: settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
 #: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
 msgstr "Basso"
@@ -425,6 +417,11 @@ msgstr "Novembre"
 msgid "December"
 msgstr "Dicembre"
 
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
+
 #: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "Tipo di orologio:"
@@ -546,4 +543,3 @@ msgstr "Intervallo (sec):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Controllo posta"
-

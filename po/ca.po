@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2003-07-05 16:17+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: ca <LL@li.org>\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Seleccioneu el fitxer"
 
@@ -97,19 +98,19 @@ msgstr "Canvia l'element del menú"
 msgid "Remove"
 msgstr "Elimina"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Cliqueu el botó 3 del ratolí per canviar l'element"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Afegir llançador"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Afegir un nou element"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Llançador"
 
@@ -138,11 +139,11 @@ msgstr ""
 "finestras tal com estan definits a http://www..freedesktop.org. \n"
 "Algunes funcionalitats poden no funcionar tal com es van preveure."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/Afegir _nou element"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_Propietats..."
 
@@ -154,31 +155,31 @@ msgstr "/_Elimina"
 msgid "This item has no configuration options"
 msgstr "Aquest element no té opcions de configuració"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/Plafó XFce"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/_Gestor d'ajustaments"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/_Quant a XFce"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/_Ajuda"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/_Bloqueja la pantalla"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/S_urt"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Plafó XFce"
@@ -239,7 +240,7 @@ msgstr "Terminal"
 msgid "Settings manager not available"
 msgstr "El gestor d'ajustaments no està disponible"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Menú"
 
@@ -415,6 +416,11 @@ msgstr "Novembre"
 #: plugins/clock/clock.c:78
 msgid "December"
 msgstr "Decembre"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"

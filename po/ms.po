@@ -6,16 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 3.99.3\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2003-08-31 13:00+0800\n"
 "Last-Translator: Harun Musa <mharun@gmx.net>\n"
 "Language-Team: Malay <translation-team-ms@list.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Pilih fail"
 
@@ -98,19 +98,19 @@ msgstr "Tukar menu item"
 msgid "Remove"
 msgstr "Buang"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Klik bebutang 3 tetikus untuk tukar item"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Tambah pelancar"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Tambah item baru"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Pelancar"
 
@@ -139,11 +139,11 @@ msgstr ""
 "baru sebagai yang didefinasikan di http://www.freedesktop.org. \n"
 "Sebahagian ciri-ciri XFce tidak bekerja seperti yang dikehendaki."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/Tambah _item baru"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_Perbendaharaan..."
 
@@ -155,31 +155,31 @@ msgstr "/_Buang"
 msgid "This item has no configuration options"
 msgstr "Item ini tiada opsyen konfigurasi"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/Panel XFce"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/Pengurus _Tetapan"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/Perih_al XFce"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/_Bantuan"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/_Kunci skrin"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/K_eluar"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Panel XFce"
@@ -240,7 +240,7 @@ msgstr "Terminal"
 msgid "Settings manager not available"
 msgstr "Pengurus tetapan tidak ada"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Menu"
 
@@ -416,6 +416,11 @@ msgstr "November"
 #: plugins/clock/clock.c:78
 msgid "December"
 msgstr "Disember"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"

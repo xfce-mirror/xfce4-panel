@@ -2,11 +2,11 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # saleh alhathal <hathalsal@hotmail.com>, 2004.
-
 msgid ""
 msgstr ""
 "Project-Id-Version: ar\n"
-"POT-Creation-Date: 2004-01-07 08:45+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2004-2-8 8:25+0300\n"
 "Last-Translator: saleh alhathal <hathalsal@hotmail.com>\n"
 "Language-Team: arabic\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "إختر ملف"
 
@@ -22,11 +22,11 @@ msgstr "إختر ملف"
 msgid "Change item"
 msgstr "غير المادة"
 
-#: panel/controls_dialog.c:288 panel/item_dialog.c:691
+#: panel/controls_dialog.c:286 panel/item_dialog.c:647
 msgid "Position:"
 msgstr "موقع:"
 
-#: panel/controls_dialog.c:345
+#: panel/controls_dialog.c:342 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -36,88 +36,88 @@ msgstr ""
 "\n"
 "هل تريد حذف هذة المادة؟"
 
-#: panel/item_dialog.c:331
+#: panel/item_dialog.c:320
 msgid "Other Icon"
 msgstr "أيقونة أخرى"
 
-#: panel/item_dialog.c:355
+#: panel/item_dialog.c:345
 msgid "Select icon"
 msgstr "إختر أيقونة"
 
-#: panel/item_dialog.c:407
+#: panel/item_dialog.c:384
 msgid "Icon:"
 msgstr "أيقونة:"
 
-#: panel/item_dialog.c:482
+#: panel/item_dialog.c:433
 msgid "Select command"
 msgstr "إختر أمر"
 
-#: panel/item_dialog.c:510
+#: panel/item_dialog.c:461
 msgid "Command:"
 msgstr "أمر :"
 
-#: panel/item_dialog.c:547 plugins/mailcheck/mailcheck.c:831
+#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "تنفيذ في _سطر اﻷوامر"
 
-#: panel/item_dialog.c:552 plugins/mailcheck/mailcheck.c:839
+#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "أستخدم _تنبية بدأ التشغيل"
 
-#: panel/item_dialog.c:579
+#: panel/item_dialog.c:530
 msgid "Caption:"
 msgstr "تعليق :"
 
-#: panel/item_dialog.c:612
+#: panel/item_dialog.c:563
 msgid "Tooltip:"
 msgstr "تلميح للأداة :"
 
-#: panel/item_dialog.c:643
+#: panel/item_dialog.c:599
 msgid "Menu:"
 msgstr "قائمة :"
 
-#: panel/item_dialog.c:650
+#: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
 msgstr "الصاق قائمة بالبرنامج"
 
-#: panel/item_dialog.c:783
+#: panel/item_dialog.c:738
 msgid "Icon Preview"
 msgstr "عرض أيقونات"
 
-#: panel/item_dialog.c:787
+#: panel/item_dialog.c:742
 msgid "Drag file onto this frame to change the icon"
 msgstr "إسحب الملف لهذا اﻹطار لتغير أيقونته"
 
-#: panel/item_dialog.c:975
+#: panel/item_dialog.c:930
 msgid "Change menu item"
 msgstr "غير قائمة المواد"
 
 #. add buttons
-#: panel/item_dialog.c:978
+#: panel/item_dialog.c:933
 msgid "Remove"
 msgstr "حذف"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "إضغط على الزر 3 في الفأرة لتغير المادة"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "أضف برنامج"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "أضف مادة جديدة"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "برنامج"
 
-#: panel/main.c:117
+#: panel/main.c:115
 msgid "Are you sure you want to exit?"
 msgstr "هل أنت متاكد تريد الخروج؟"
 
-#: panel/main.c:331
+#: panel/main.c:243
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -128,65 +128,57 @@ msgstr ""
 "جزء من الواجهة الرسومية XFce\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:363
+#: panel/main.c:259
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"يبدوان واجهتك الرسومية ﻻ تدعم التلميحات كما"
-"تم تعريفها في http://www.freedesktop.org. \n"
+"يبدوان واجهتك الرسومية ﻻ تدعم التلميحات كماتم تعريفها في http://www."
+"freedesktop.org. \n"
 "بعض خصائص XFce قد ﻻ تعمل كما يجب"
 
-#: panel/controls.c:479
-msgid "Removing the item will also remove its popup menu."
-msgstr "حذف هذة المادة سيؤدي لحذف قائمتها المنسدلة أيضا"
-
-#: panel/controls.c:534 panel/panel.c:416
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/أضف _جديد"
 
-#: panel/controls.c:536 panel/panel.c:418
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_خصائص..."
 
-#: panel/controls.c:537
+#: panel/controls.c:323
 msgid "/_Remove"
 msgstr "/_حذف"
 
-#: panel/controls.c:874
+#: panel/controls.c:655
 msgid "This item has no configuration options"
 msgstr "ﻻ يحوي على خيرات أعداد"
 
-#: panel/panel.c:414
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/شريط XFce"
 
-#: panel/panel.c:419
-msgid "/_About XFce"
-msgstr "/_حول XFce"
-
-#: panel/panel.c:420
-msgid "/_Help"
-msgstr "/_مساعدة"
-
-#: panel/panel.c:423
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/_مدير اﻹعدادات"
 
-#: panel/panel.c:426
+#: panel/panel.c:404
+msgid "/_About XFce"
+msgstr "/_حول XFce"
+
+#: panel/panel.c:405
+msgid "/_Help"
+msgstr "/_مساعدة"
+
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/_إغلاق الشاشة"
 
-#: panel/panel.c:427
-msgid "/_Restart"
-msgstr "/_إعادة التشغيل"
-
-#: panel/panel.c:429
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/خ_روج"
 
-#: panel/panel.c:814 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "شريط XFce"
@@ -348,55 +340,125 @@ msgstr "موقع"
 msgid "Behaviour"
 msgstr "سلوك"
 
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %d  : day of the month
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: plugins/clock/clock.c:202
-msgid "%A, %d %B %Y"
+#: plugins/clock/clock.c:57
+#, fuzzy
+msgid "Sunday"
+msgstr "صوت"
+
+#: plugins/clock/clock.c:58
+msgid "Monday"
+msgstr ""
+
+#: plugins/clock/clock.c:59
+msgid "Tuesday"
+msgstr ""
+
+#: plugins/clock/clock.c:60
+msgid "Wednesday"
+msgstr ""
+
+#: plugins/clock/clock.c:61
+msgid "Thursday"
+msgstr ""
+
+#: plugins/clock/clock.c:62
+msgid "Friday"
+msgstr ""
+
+#: plugins/clock/clock.c:63
+msgid "Saturday"
+msgstr ""
+
+#: plugins/clock/clock.c:67
+msgid "January"
+msgstr ""
+
+#: plugins/clock/clock.c:68
+msgid "February"
+msgstr ""
+
+#: plugins/clock/clock.c:69
+msgid "March"
+msgstr ""
+
+#: plugins/clock/clock.c:70
+msgid "April"
+msgstr ""
+
+#: plugins/clock/clock.c:71
+msgid "May"
+msgstr ""
+
+#: plugins/clock/clock.c:72
+msgid "June"
+msgstr ""
+
+#: plugins/clock/clock.c:73
+msgid "July"
+msgstr ""
+
+#: plugins/clock/clock.c:74
+msgid "August"
+msgstr ""
+
+#: plugins/clock/clock.c:75
+msgid "September"
+msgstr ""
+
+#: plugins/clock/clock.c:76
+msgid "October"
+msgstr ""
+
+#: plugins/clock/clock.c:77
+msgid "November"
+msgstr ""
+
+#: plugins/clock/clock.c:78
+msgid "December"
+msgstr ""
+
+#: plugins/clock/clock.c:142
+#, fuzzy, c-format
+msgid "%s, %u %s %u"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:423
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "نوع الساعة:"
 
-#: plugins/clock/clock.c:436
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "عقارب"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "رقمية"
 
-#: plugins/clock/clock.c:444
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr ""
 
-#: plugins/clock/clock.c:506
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
 msgstr "نظام الساعة:"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:440
 msgid "24 hour"
 msgstr "24 ساعة"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12 ساعة"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "صباح/مساء"
 
-#: plugins/clock/clock.c:563
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "إضهار الثواني :"
 
-#: plugins/clock/clock.c:674
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "ساعة Xfce"
 
@@ -406,7 +468,7 @@ msgstr "مراقب المهام"
 
 #: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
-msgstr "محول سطح المكتب" 
+msgstr "محول سطح المكتب"
 
 #: plugins/systembuttons/systembuttons.c:60
 msgid ""
@@ -462,22 +524,28 @@ msgstr "زر النظام"
 msgid "Separator"
 msgstr "فاصل"
 
-#: plugins/mailcheck/mailcheck.c:702
+#: plugins/mailcheck/mailcheck.c:539
 msgid "Mail box:"
 msgstr "حاوي البريد:"
 
-#: plugins/mailcheck/mailcheck.c:786
+#: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
 msgstr "أمر البريد:"
 
-#: plugins/mailcheck/mailcheck.c:800
+#: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
 msgstr "عند الضغط علي الزر يتم تنفيذ اﻷمر"
 
-#: plugins/mailcheck/mailcheck.c:869
+#: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
 msgstr "فترة بثانية :"
 
-#: plugins/mailcheck/mailcheck.c:941
+#: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "مراقبة البريد"
+
+#~ msgid "Removing the item will also remove its popup menu."
+#~ msgstr "حذف هذة المادة سيؤدي لحذف قائمتها المنسدلة أيضا"
+
+#~ msgid "/_Restart"
+#~ msgstr "/_إعادة التشغيل"

@@ -7,16 +7,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil XFCE Panel 4\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2003-09-24 17:41-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "கோப்பு தெரிவுசெய்க"
 
@@ -99,19 +99,19 @@ msgstr "பட்டி உருப்படி மாற்றவும்"
 msgid "Remove"
 msgstr "கழட்டுக"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "உருப்படி மாற்றுவதற்கு 3ஆம் சுட்டி பொத்தானை அமுத்தவும்"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "தொடங்கர் சேர்க்கவும்"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "புதிய உருப்படி சேர்க்கவும்"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "தொடங்கர்"
 
@@ -140,11 +140,11 @@ msgstr ""
 "ஆதரவளிப்பு கிடையாது. \n"
 "சில XFce செயல்பாடுகள் விரும்பியதுபோல் வேலைசெய்யாது."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/புதிய _உருப்படி சேர்க்கவும்"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_பண்புகள்..."
 
@@ -156,31 +156,31 @@ msgstr "/_கழட்டுக"
 msgid "This item has no configuration options"
 msgstr "þந்த உருப்படிக்கு அமைப்புத் தேர்வுகள் கிடையாது"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/XFCE பலகை"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/_அமைப்புகள் மேலாளர்"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/_XFCE பற்றி"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/_உதவி"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/_திரையைப் பூட்டுக"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/வெளி_ச்செல்"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFCE பலகை"
@@ -241,7 +241,7 @@ msgstr "முனையம்"
 msgid "Settings manager not available"
 msgstr "அமைப்புகள் மேலாளர் கிடையாது"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "பட்டி"
 
@@ -417,6 +417,11 @@ msgstr "நவம்பர்"
 #: plugins/clock/clock.c:78
 msgid "December"
 msgstr "டிசம்பர்"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"

@@ -5,18 +5,18 @@
 #
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2003-05-21 12:50+0530\n"
 "Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
 "Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 "Project-Id-Version  Xfce 4\n"
 
 # libgnomeui/gnome-file-entry.c:418
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "फाइल चयन करें"
 
@@ -97,19 +97,19 @@ msgstr "मेनू वस्तु बदलें"
 msgid "Remove"
 msgstr "हटाएं"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "वस्तु बदलने के लिए माउस बट्टन ३ दबाएं"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "लाँचर जोडें"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "नया वस्तु जोडें"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "लाँचर"
 
@@ -135,11 +135,11 @@ msgid ""
 "Some XFce features may not work as intended."
 msgstr ""
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/नया वस्तु जोडें (_n)"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/विशेषताएं (_P) ..."
 
@@ -151,31 +151,31 @@ msgstr "/हटाएं (_R)"
 msgid "This item has no configuration options"
 msgstr "इस वस्तु के कोइ कॉनफिगरेशन विकल्प नहीं हैं"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/XFce पेनेल"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/समायोजन प्रभंधक (_S)"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/XFce के बोरे में (_A)"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/सहायता (_H)"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/सक्रीन पर ताला (_L)"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/बाहर निकलें (_x)"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce पेनेल"
@@ -238,7 +238,7 @@ msgstr "टर्मिनल"
 msgid "Settings manager not available"
 msgstr "समायोजन प्रभंधक उपलब्ध नहीं"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "मेनू"
 
@@ -414,6 +414,11 @@ msgstr "नवम्बर"
 #: plugins/clock/clock.c:78
 msgid "December"
 msgstr "दिसम्बर"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr ""
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"

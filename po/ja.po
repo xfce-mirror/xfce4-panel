@@ -1,21 +1,22 @@
-# Xfce4-panel German translation
-# Copyright (C) 2003 Olivier Fourdan
+# Xfce4-panel Japanese translation
+# Copyright (C) 2003 Zhao Ji <zhao-ji@awz.ne.jp>
 # This file is distributed under the same license as the xfce4-panel package.
-# Moritz Heiber <mistermoe@hackerboard.de>, 2003
+# Zhao Ji <zhao-ji@awz.ne.jp>, 2003.
+# Minor changes by Ambrose Li <acli@ada.dhs.org>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 1.0.0\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Project-Id-Version: xfce4-panel 4.0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: 2003-05-27 12:30+0900\n"
 "Last-Translator: Zhao Ji <zhao-ji@awz.ne.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "ファイル選択"
 
@@ -74,9 +75,8 @@ msgid "Tooltip:"
 msgstr "ツール チップ:"
 
 #: panel/item_dialog.c:599
-#, fuzzy
 msgid "Menu:"
-msgstr "メニュー"
+msgstr "メニュー:"
 
 #: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
@@ -99,19 +99,19 @@ msgstr "メニュー項目の変更"
 msgid "Remove"
 msgstr "削除"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "項目変更するために、マウスの右ボタンをクリックして下さい"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "ランチャ追加"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "項目追加"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "ランチャ"
 
@@ -137,11 +137,11 @@ msgstr ""
 "ヒントをサポートしていません。\n"
 "XFceの特徴は、いくつか意図する通りに動かないかもしれません。"
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/項目追加 (_n)"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/プロパティ(_P)"
 
@@ -153,31 +153,31 @@ msgstr "/削除 (_R)"
 msgid "This item has no configuration options"
 msgstr "この項目に、オプション設定は存在しません"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr ""
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/設定マネージャ (_S)"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/XFceについて (_A)"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/ヘルプ (_H)"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/画面ロック (_L)"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/終了 (_x)"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFceパネル"
@@ -238,7 +238,7 @@ msgstr "ターミナル"
 msgid "Settings manager not available"
 msgstr "設定マネージャが利用不可能です"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "メニュー"
 
@@ -414,6 +414,11 @@ msgstr "11月"
 #: plugins/clock/clock.c:78
 msgid "December"
 msgstr "12月"
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
+msgstr "%4$u年%3$s%2$u日 (%1$s)"
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"

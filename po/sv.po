@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-10 11:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:602
 msgid "Select file"
 msgstr "Välj fil"
 
@@ -98,19 +99,19 @@ msgstr "Ändra menyobjekt"
 msgid "Remove"
 msgstr "Ta bort"
 
-#: panel/item.c:441
+#: panel/item.c:447
 msgid "Click mouse button 3 to change item"
 msgstr "Musknapp 3 för att ändra objektet"
 
-#: panel/item.c:464
+#: panel/item.c:470
 msgid "Add launcher"
 msgstr "Lägg till objekt"
 
-#: panel/item.c:469
+#: panel/item.c:475
 msgid "Add new item"
 msgstr "Lägg till nytt objekt"
 
-#: panel/item.c:601
+#: panel/item.c:607
 msgid "Launcher"
 msgstr "Programstartare"
 
@@ -139,11 +140,11 @@ msgstr ""
 "såsomdefinierade på http://www.freedesktop.org. \n"
 "Detta kan begränsa XFce:s avsedda funktionalitet."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
 msgstr "/_Nytt objekt"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
 msgstr "/_Egenskaper..."
 
@@ -155,31 +156,31 @@ msgstr "/_Ta bort"
 msgid "This item has no configuration options"
 msgstr "Detta objekt saknar konfigurationsalternativ"
 
-#: panel/panel.c:121
+#: panel/panel.c:397
 msgid "/XFce Panel"
 msgstr "/XFce-panelen"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
 msgstr "/_Inställningshanterare"
 
-#: panel/panel.c:128
+#: panel/panel.c:404
 msgid "/_About XFce"
 msgstr "/_Om XFce"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
 msgstr "/_Hjälp"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/_Lås skärmen"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
 msgstr "/_Avsluta"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce-panelen"
@@ -240,7 +241,7 @@ msgstr ""
 msgid "Settings manager not available"
 msgstr "Inställningshanterare inte tillgänglig"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Meny"
 
@@ -415,6 +416,11 @@ msgstr ""
 
 #: plugins/clock/clock.c:78
 msgid "December"
+msgstr ""
+
+#: plugins/clock/clock.c:142
+#, c-format
+msgid "%s, %u %s %u"
 msgstr ""
 
 #: plugins/clock/clock.c:350
