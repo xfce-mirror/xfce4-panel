@@ -50,7 +50,7 @@ add_container (GtkBox * box, GtkWidget *close, Control *control)
 {
     GtkWidget *align;
 
-    align = gtk_alignment_new (0,0,0,0);
+    align = gtk_alignment_new (0,0,1,1);
     gtk_widget_show (align);
     gtk_container_set_border_width (GTK_CONTAINER (align), BORDER);
     gtk_box_pack_start (box, align, TRUE, TRUE, 0);
