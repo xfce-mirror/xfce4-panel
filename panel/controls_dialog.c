@@ -73,6 +73,7 @@ static void create_control_list(Control * control)
 	new_control->cclass = cc;
 	cc->create_control(new_control);
 
+	control_attach_callbacks(new_control);
 	control_set_settings(new_control);
 
 	control_list = g_slist_append(control_list, new_control);

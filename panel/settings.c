@@ -52,9 +52,7 @@ static xmlDocPtr make_empty_doc(void)
     xmlDocSetRootElement(doc, root);
 
     xmlNewTextChild(root, NULL, "Panel", NULL);
-    xmlNewTextChild(root, NULL, "Central", NULL);
-    xmlNewTextChild(root, NULL, "Left", NULL);
-    xmlNewTextChild(root, NULL, "Right", NULL);
+    xmlNewTextChild(root, NULL, "Groups", NULL);
 
     return doc;
 }

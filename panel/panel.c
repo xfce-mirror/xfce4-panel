@@ -157,10 +157,15 @@ void panel_cleanup(void)
 
 static void init_settings();
 
+static gboolean panel_created = FALSE;
+
 void create_panel(void)
 {
     gboolean need_init = TRUE;
     int x, y;
+
+    /* necessary for initial settings to do the right thing */
+    panel_created = FALSE;
 
     if (need_init)
     {
@@ -195,6 +200,8 @@ void create_panel(void)
     gtk_widget_show(toplevel);
     set_window_layer(toplevel, settings.layer);
     set_window_skip(toplevel);
+
+    panel_created = TRUE;
 }
 
 void panel_add_control(void)
@@ -211,6 +218,9 @@ void panel_set_orientation(int orientation)
 {
     settings.orientation = orientation;
 
+    if (!panel_created)
+	return;
+    
     /* save panel controls */
     groups_unpack();
 
@@ -248,6 +258,9 @@ void panel_set_layer(int layer)
 {
     settings.layer = layer;
 
+    if (!panel_created)
+	return;
+    
     set_window_layer(toplevel, layer);
 
 /*    groups_set_layer(layer);*/
@@ -257,6 +270,9 @@ void panel_set_size(int size)
 {
     settings.size = size;
 
+    if (!panel_created)
+	return;
+    
     groups_set_size(size);
     handle_set_size(handles[LEFT], size);
     handle_set_size(handles[RIGHT], size);
@@ -266,6 +282,9 @@ void panel_set_popup_position(int position)
 {
     settings.popup_position = position;
 
+    if (!panel_created)
+	return;
+    
     groups_set_popup_position(position);
     handle_set_popup_position(handles[LEFT]);
     handle_set_popup_position(handles[RIGHT]);
@@ -277,6 +296,9 @@ void panel_set_popup_position(int position)
 void panel_set_style(int style)
 {
     settings.style = style;
+    
+    if (!panel_created)
+	return;
     
     groups_set_style(style);
     handle_set_style(handles[LEFT], style);
@@ -290,6 +312,9 @@ void panel_set_theme(const char *theme)
     settings.theme = g_strdup(theme);
     g_free(tmp);
 
+    if (!panel_created)
+	return;
+    
     groups_set_theme(theme);
 }
 
@@ -298,6 +323,10 @@ void panel_set_theme(const char *theme)
 void panel_set_num_groups(int n)
 {
     settings.num_groups = n;
+
+    if (!panel_created)
+	return;
+    
     groups_set_num_groups(n);
 }
 

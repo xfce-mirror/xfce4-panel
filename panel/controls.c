@@ -329,12 +329,7 @@ void create_control(Control * control, int id, const char *filename)
         create_launcher(control);
     }
 
-    cc->attach_callback(control, "button-press-event", 
-	    		G_CALLBACK(control_press_cb), control);
-
-    g_signal_connect(control->base, "button-press-event", 
-	    	     G_CALLBACK(control_press_cb), control);
-
+    control_attach_callbacks(control);
     control_set_settings(control);
 }
 
@@ -376,6 +371,17 @@ void control_pack(Control * control, GtkBox * box)
 void control_unpack(Control * control)
 {
     gtk_container_remove(GTK_CONTAINER(control->base->parent), control->base);
+}
+
+void control_attach_callbacks(Control *control)
+{
+    ControlClass *cc = control->cclass;
+    
+    cc->attach_callback(control, "button-press-event", 
+	    		G_CALLBACK(control_press_cb), control);
+
+    g_signal_connect(control->base, "button-press-event", 
+	    	     G_CALLBACK(control_press_cb), control);
 }
 
 /* configuration */

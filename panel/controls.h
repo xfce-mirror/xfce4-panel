@@ -88,6 +88,8 @@ void control_write_xml(Control * control, xmlNodePtr parent);
 void control_pack(Control * control, GtkBox * box);
 void control_unpack(Control * control);
 
+void control_attach_callbacks(Control *control);
+
 void control_add_options(Control * control, GtkContainer * container,
                          GtkWidget * revert, GtkWidget * done);
 
