@@ -5,9 +5,11 @@ dnl
 dnl 2003 Benedikt Meurer <benedikt.meurer@unix-ag.uni-siegen.de>
 dnl
 
+m4_define([libxfce4panel_verinfo], [1:0:0])
+
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.3.1])
+AM_INIT_AUTOMAKE([xfce4-panel], [4.3.2])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -27,6 +29,9 @@ AC_PROG_LN_S
 dnl disable static libs
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
+
+LIBXFCE4PANEL_VERINFO=libxfce4panel_verinfo()
+AC_SUBST([LIBXFCE4PANEL_VERINFO])
 
 dnl Check for standard header files
 AC_HEADER_STDC
@@ -86,13 +91,14 @@ taskbar/Makefile
 iconbox/Makefile
 settings/Makefile
 plugins/Makefile
-plugins/mailcheck/Makefile
 plugins/clock/Makefile
-plugins/switcher/Makefile
-plugins/systembuttons/Makefile
+plugins/launcher/Makefile
+plugins/mailcheck/Makefile
 plugins/pager/Makefile
 plugins/sample-plugin/Makefile
 plugins/separator/Makefile
+plugins/switcher/Makefile
+plugins/systembuttons/Makefile
 plugins/systray/Makefile
 ])
 

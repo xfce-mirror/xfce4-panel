@@ -1,5 +1,6 @@
 SUBDIRS =								\
 	clock								\
+	launcher							\
 	mailcheck							\
 	pager								\
 	sample-plugin							\

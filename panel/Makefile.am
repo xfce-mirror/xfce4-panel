@@ -65,7 +65,6 @@ xfce4_panel_CFLAGS = 							\
 	-DLOCALEDIR=\"$(localedir)\"
 
 xfce4_panel_LDFLAGS =							\
-	../libs/libxfce4panel.la					\
 	-export-dynamic
 
 if HAVE_CYGWIN
@@ -73,6 +72,7 @@ xfce4_panel_LDFLAGS += -no-undefined
 endif
 
 xfce4_panel_LDADD =							\
+	-L$(top_srcdir)/libs -lxfce4panel				\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
 	@LIBXFCEGUI4_LIBS@						\

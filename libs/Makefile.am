@@ -1,10 +1,12 @@
-noinst_LTLIBRARIES = libxfce4panel.la
+lib_LTLIBRARIES = libxfce4panel.la
 
 libxfce4panel_la_SOURCES =						\
 	xfce-enum-types.h						\
 	xfce-enum-types.c						\
 	xfce-marshal.h							\
 	xfce-marshal.c							\
+	xfce-arrow-button.c						\
+	xfce-arrow-button.h						\
 	xfce-paint-private.c						\
 	xfce-paint-private.h						\
 	xfce-panel-window.c						\
@@ -14,6 +16,9 @@ libxfce4panel_la_CFLAGS =						\
 	-I$(top_srcdir)							\
 	-I$(top_srcdir)/lib						\
 	@LIBXFCEGUI4_CFLAGS@
+	
+libxfce4panel_la_LDFLAGS = 						\
+	-version-info @LIBXFCE4PANEL_VERINFO@
 
 xfce_headers = \
 	xfce-panel-window.h

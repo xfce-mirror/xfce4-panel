@@ -147,3 +147,15 @@ iconbox_disconnect_mcs_client (McsClient *client)
 	client = NULL;
 }
 
+void
+mcs_open_dialog (GdkScreen *screen, const char *channel)
+{
+    if (channel)
+    {
+        int scr = gdk_screen_get_number (screen);
+        Display *dpy = 
+            gdk_x11_display_get_xdisplay (gdk_screen_get_display (screen));
+        
+	mcs_client_show (dpy, scr, channel);
+    }
+}

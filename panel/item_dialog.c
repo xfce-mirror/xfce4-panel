@@ -78,7 +78,7 @@ struct _ItemDialog
 static GtkWidget *menudialog = NULL;	/* keep track of this for signal 
 					   handling */
 
-static GtkTargetEntry entry[] = {
+static GtkTargetEntry target_entry[] = {
     {"text/uri-list", 0, 0},
     {"UTF8_STRING", 0, 1},
     {"STRING", 0, 2}
@@ -92,8 +92,7 @@ static const char *keys[] = {
     "Categories",
     "OnlyShowIn",
     "Exec",
-    "Terminal",
-    NULL
+    "Terminal"
 };
 
 /* useful widgets */
@@ -191,51 +190,44 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 	      gint y, GtkSelectionData * sd, guint info,
 	      guint time, CommandOptions * opts)
 {
-    gchar *filename = NULL;
-    gchar *temp = NULL;
-    gchar *buf = NULL;
-    gchar *exec = NULL;
-    gchar *execp = NULL;
-    XfceDesktopEntry *dentry;
-
     if (sd->data)
     {
-	if (g_str_has_prefix (sd->data, "file://"))
-	    buf = g_strdup (&(sd->data)[7]);
-	else if (g_str_has_prefix (sd->data, "file:"))
-	    buf = g_strdup (&(sd->data)[5]);
-	else
-	    buf = g_strdup (sd->data);
+        char *exec = NULL;
+        char *buf, *s;
+        XfceDesktopEntry *dentry;
 
-	/* Remove \n at the end of filename (if present) */
-	temp = strtok (buf, "\n");
-	if (!temp)
-	    filename = g_strdup (buf);
-	else if (!g_file_test (temp, G_FILE_TEST_EXISTS))
-	    filename = g_strndup (temp, strlen (temp) - 1);
-	else
-	    filename = g_strdup (temp);
-	g_free (buf);
+        s = (char *) sd->data;
 
-	if (g_file_test (filename, G_FILE_TEST_EXISTS) &&
-	    XFCE_IS_DESKTOP_ENTRY (dentry =
-				   xfce_desktop_entry_new (filename, keys,
-                                       G_N_ELEMENTS (keys))))
-	{
+        if (!strncmp (s, "file", 5))
+        {
+            s += 5;
+
+            if (!strncmp (s, "//", 2))
+                s += 2;
+        }
+
+        buf = g_strdup (s);
+
+        if ((s = strchr (buf, '\n')))
+            *s = '\0';
+        
+	if (g_file_test (buf, G_FILE_TEST_EXISTS) &&
+	    (dentry = xfce_desktop_entry_new (buf, keys, G_N_ELEMENTS (keys))))
+	{ 
             xfce_desktop_entry_get_string (dentry, "Exec", FALSE, &exec);
             g_object_unref (dentry);
-            g_free (filename);
+            g_free (buf);
 	}
         else
         {
-            exec = filename;
+            exec = buf;
         }
 
         if (exec)
         {
-            if ((execp = g_strrstr (exec, " %")) != NULL)
+            if ((s = g_strrstr (exec, " %")) != NULL)
             {
-                execp[0] = '\0';
+                s[0] = '\0';
             }
             
             command_options_set_command (opts, exec, FALSE, FALSE);
@@ -243,7 +235,7 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
         }
     }
 
-    gtk_drag_finish (context, sd->data != NULL, FALSE, time);
+    gtk_drag_finish (context, TRUE, FALSE, time);
 }
 
 G_MODULE_EXPORT /* EXPORT:create_command_options */
@@ -289,12 +281,15 @@ create_command_options (GtkSizeGroup * sg)
     g_signal_connect (w, "clicked", G_CALLBACK (command_browse_cb), opts);
 
     /* xfce4-appfinder support (desktop files / menu spec) */
-    gtk_drag_dest_set (opts->base, GTK_DEST_DEFAULT_ALL, entry, 2,
-		       GDK_ACTION_COPY);
-    g_signal_connect (opts->base, "drag-data-received",
+    gtk_drag_dest_set (opts->command_entry, GTK_DEST_DEFAULT_ALL, 
+                       target_entry, G_N_ELEMENTS (target_entry), 
+                       GDK_ACTION_COPY);
+    g_signal_connect (opts->command_entry, "drag-data-received",
 		      G_CALLBACK (drag_drop_cb), opts);
 
-    g_signal_connect (opts->command_entry, "drag-data-received",
+    gtk_drag_dest_set (opts->base, GTK_DEST_DEFAULT_ALL, target_entry, 
+                       G_N_ELEMENTS (target_entry), GDK_ACTION_COPY);
+    g_signal_connect (opts->base, "drag-data-received",
 		      G_CALLBACK (drag_drop_cb), opts);
 
     hbox = gtk_hbox_new (FALSE, BORDER);

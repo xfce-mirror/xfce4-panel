@@ -590,6 +590,12 @@ menu_about (GtkWidget *w, Iconbox *ib)
 }
 
 static void
+menu_properties (GtkWidget *w, Iconbox *ib)
+{
+    mcs_open_dialog (ib->gdk_screen, "iconbox");
+}
+
+static void
 menu_quit (GtkWidget *w, Iconbox *ib)
 {
     gtk_main_quit ();
@@ -602,17 +608,23 @@ create_menu (Iconbox *ib)
     
     menu = gtk_menu_new ();
 
-    mi = gtk_menu_item_new_with_label (_("About"));
+    mi = gtk_menu_item_new_with_mnemonic (_("_About"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
     g_signal_connect (mi, "activate", G_CALLBACK (menu_about), ib);
 
+    mi = gtk_menu_item_new_with_mnemonic (_("_Properties..."));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    g_signal_connect (mi, "activate", G_CALLBACK (menu_properties), ib);
+
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-    mi = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+    mi = gtk_menu_item_new_with_mnemonic (_("E_xit"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -1020,6 +1032,8 @@ main (int argc, char **argv)
 {
     Iconbox *ib;
     
+    xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+
     iconbox_check_options (argc, argv);
 
     gtk_init (&argc, &argv);

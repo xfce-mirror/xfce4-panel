@@ -27,3 +27,4 @@ McsClient *iconbox_connect_mcs_client (GdkScreen *screen, Iconbox *ib);
 
 void iconbox_disconnect_mcs_client (McsClient *client);
 
+void mcs_open_dialog (GdkScreen *screen, const char *channel);
