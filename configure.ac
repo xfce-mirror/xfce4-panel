@@ -21,6 +21,9 @@ AC_MINIX
 dnl Check for basic programs
 AC_PROG_CC
 AC_PROG_INSTALL
+
+dnl disable static libs
+AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
 dnl Check for standard header files
