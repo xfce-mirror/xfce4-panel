@@ -47,7 +47,6 @@ static GtkWidget *container;	/* container on the panel to hold the
 static Control *old_control = NULL;	/* original panel control */
 static Control *current_control = NULL;	/* current control == old_control, 
 					   if type is not changed */
-static GtkWidget *type_option_menu;
 static GtkWidget *pos_spin;
 static GtkWidget *notebook;
 static GtkWidget *done;
@@ -115,6 +114,7 @@ clear_control_list (void)
     control_list = NULL;
 }
 
+#if 0 /* NEVER USED */
 /*  Type options menu
  *  -----------------
 */
@@ -144,7 +144,9 @@ type_option_changed (GtkOptionMenu * om)
 
     gtk_widget_set_sensitive (revert, TRUE);
 }
+#endif
 
+#if 0 /* NEVER USED */
 static GtkWidget *
 create_type_option_menu (void)
 {
@@ -171,6 +173,7 @@ create_type_option_menu (void)
 
     return om;
 }
+#endif
 
 static void
 add_notebook (GtkBox * box)

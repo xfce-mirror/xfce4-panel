@@ -48,6 +48,7 @@
 #include "groups.h"
 #include "plugins.h"
 #include "controls_dialog.h"
+#include "settings.h"
 
 static GSList *control_class_list = NULL;
 

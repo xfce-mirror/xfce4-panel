@@ -564,8 +564,7 @@ groups_set_theme (const char *theme)
 void
 groups_add_control (int id, const char *filename, int index)
 {
-    int i, len;
-    GSList *li;
+    int len;
     PanelGroup *group = NULL;
 
     len = g_slist_length (group_list);
