@@ -277,6 +277,11 @@ panel_set_hidden (Panel * p, gboolean hide)
 	centery = miny + (maxy - miny) / 2;
     }
 
+    DBG("\n\tCoordinates:\n\t  min x, max x, min y, max y: %d, %d, %d, %d", 
+	    minx,maxx,miny,maxy);
+    DBG("\n\tPanel position (x,y): %d, %d", pos.x, pos.y);
+    DBG("\n\tPanel size: %d x %d\n", req.width, req.height);
+    
     /* Handle the resize */
     if (hide)
     {
@@ -312,7 +317,8 @@ panel_set_hidden (Panel * p, gboolean hide)
 	y = pos.y;
     }
 
-/*    g_print("(x=%d,y=%d) => (x=%d,y=%d)\n", pos.x, pos.y, x, y);*/
+    DBG("\n\tMove panel: (x=%d,y=%d) => (x=%d,y=%d)\n", pos.x, pos.y, x, y);
+
     if (hide)
 	gtk_widget_hide (p->main_frame);
     else
