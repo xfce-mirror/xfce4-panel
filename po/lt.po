@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 3.99.2\n"
-"POT-Creation-Date: 2003-07-19 10:02+0200\n"
+"POT-Creation-Date: 2003-08-26 08:23+0200\n"
 "PO-Revision-Date: 2003-08-03 01:16+0300\n"
 "Last-Translator: Mantas <zaz@xxx.lt>\n"
 "Language-Team: Lithuania <zaz@xxx.lt>\n"
@@ -14,21 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:648
+#: panel/xfce_support.c:597
 msgid "Select file"
 msgstr "Pasirinkite failà"
 
-#: panel/controls_dialog.c:246
+#: panel/controls_dialog.c:254
 msgid "Change item"
 msgstr "Pakeisti elementà"
 
-#: panel/controls_dialog.c:278
-#: panel/item_dialog.c:650
+#: panel/controls_dialog.c:286 panel/item_dialog.c:653
 msgid "Position:"
 msgstr "Pozicija:"
 
-#: panel/controls_dialog.c:323
-#: panel/controls.c:272
+#: panel/controls_dialog.c:331 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -38,66 +36,64 @@ msgstr ""
 "\n"
 "Ar norite paðalinti elementà?"
 
-#: panel/item_dialog.c:317
+#: panel/item_dialog.c:320
 msgid "Other Icon"
 msgstr "Kita piktograma"
 
-#: panel/item_dialog.c:342
+#: panel/item_dialog.c:345
 msgid "Select icon"
 msgstr "Pasirinkite piktogramà"
 
-#: panel/item_dialog.c:381
+#: panel/item_dialog.c:384
 msgid "Icon:"
 msgstr "Piktograma:"
 
-#: panel/item_dialog.c:430
+#: panel/item_dialog.c:433
 msgid "Select command"
 msgstr "Pasirinkite komandà"
 
-#: panel/item_dialog.c:458
+#: panel/item_dialog.c:461
 msgid "Command:"
 msgstr "Komanda:"
 
-#: panel/item_dialog.c:495
-#: plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Paleisti _terminale"
 
-#: panel/item_dialog.c:500
-#: plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Naudoti paleisties pra_neðimà"
 
-#: panel/item_dialog.c:527
+#: panel/item_dialog.c:530
 msgid "Caption:"
 msgstr "Pavadinimas:"
 
-#: panel/item_dialog.c:560
+#: panel/item_dialog.c:563
 msgid "Tooltip:"
 msgstr "Patarimas:"
 
-#: panel/item_dialog.c:596
+#: panel/item_dialog.c:599
 msgid "Menu:"
 msgstr "Meniu:"
 
-#: panel/item_dialog.c:603
+#: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
 msgstr "Pridëti meniu á leistukà"
 
-#: panel/item_dialog.c:745
+#: panel/item_dialog.c:748
 msgid "Icon Preview"
 msgstr "Pikrogramos Perþiûra"
 
-#: panel/item_dialog.c:749
+#: panel/item_dialog.c:752
 msgid "Drag file onto this frame to change the icon"
 msgstr "Norëdami pakeisti piktogramà, tempkite failà ant ðio rëmo "
 
-#: panel/item_dialog.c:1032
+#: panel/item_dialog.c:1034
 msgid "Change menu item"
 msgstr "Pakeisti meniu elementà"
 
 #. add buttons
-#: panel/item_dialog.c:1035
+#: panel/item_dialog.c:1037
 msgid "Remove"
 msgstr "Paðalinti"
 
@@ -117,11 +113,11 @@ msgstr "Ádëti naujà leistukà"
 msgid "Launcher"
 msgstr "Leistukas"
 
-#: panel/main.c:129
+#: panel/main.c:132
 msgid "Are you sure you want to exit?"
 msgstr "Ar tikrai norite iðeiti?"
 
-#: panel/main.c:259
+#: panel/main.c:268
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -132,21 +128,21 @@ msgstr ""
 "Dalis XFce Desktop Environment\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:275
+#: panel/main.c:284
 msgid ""
-"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+"Your window manager does not seem to support the new window manager hints as "
+"defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Atrodo, kad jûsø langø tvarkyklë nepalaiko naujø langø tvarkykliø patarimø apibrëþtø tinklalapyje http://www.freedesktop.org. \n"
+"Atrodo, kad jûsø langø tvarkyklë nepalaiko naujø langø tvarkykliø patarimø "
+"apibrëþtø tinklalapyje http://www.freedesktop.org. \n"
 "Keletas XFce sudëtiniø daliø gali neveikti kaip numatyta."
 
-#: panel/controls.c:320
-#: panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/Pridëti _naujà elementà"
 
-#: panel/controls.c:322
-#: panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:125
 msgid "/_Properties..."
 msgstr "/_Savybës..."
 
@@ -182,9 +178,8 @@ msgstr "/_Uþrakinti ekranà"
 msgid "/E_xit"
 msgstr "/Ið_eiti"
 
-#: panel/panel.c:469
-#: settings/xfce_settings_plugin.c:82
-#: settings/xfce_settings_dialog.c:641
+#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce Skydelis"
 
@@ -244,7 +239,7 @@ msgstr "Terminalas"
 msgid "Settings manager not available"
 msgstr "Nëra nustatymø tvarkyklë"
 
-#: panel/popup.c:255
+#: panel/popup.c:272
 msgid "Menu"
 msgstr "Meniu"
 
@@ -264,88 +259,84 @@ msgstr "Vidutinis"
 msgid "Large"
 msgstr "Didelis"
 
-#: settings/xfce_settings_dialog.c:182
+#: settings/xfce_settings_dialog.c:190
 msgid "Horizontal"
 msgstr "Horizontalus"
 
-#: settings/xfce_settings_dialog.c:186
+#: settings/xfce_settings_dialog.c:194
 msgid "Vertical"
 msgstr "Vertikalus"
 
-#: settings/xfce_settings_dialog.c:218
-#: settings/xfce_settings_dialog.c:448
+#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
 msgid "Left"
 msgstr "Kairë"
 
-#: settings/xfce_settings_dialog.c:222
-#: settings/xfce_settings_dialog.c:449
+#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
 msgid "Right"
 msgstr "Deðinë"
 
-#: settings/xfce_settings_dialog.c:226
-#: settings/xfce_settings_dialog.c:447
-#: settings/xfce_settings_dialog.c:503
+#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:511
 msgid "Top"
 msgstr "Virðutinis"
 
-#: settings/xfce_settings_dialog.c:230
-#: settings/xfce_settings_dialog.c:446
-#: settings/xfce_settings_dialog.c:511
+#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
 msgstr "Apatinis"
 
-#: settings/xfce_settings_dialog.c:366
+#: settings/xfce_settings_dialog.c:374
 msgid "Panel size:"
 msgstr "Skydelio dydis:"
 
-#: settings/xfce_settings_dialog.c:382
+#: settings/xfce_settings_dialog.c:390
 msgid "Panel orientation:"
 msgstr "Skydelio orientacija:"
 
-#: settings/xfce_settings_dialog.c:399
+#: settings/xfce_settings_dialog.c:407
 msgid "Popup position:"
 msgstr "Iðskleiþiamo meniu pozicija:"
 
-#: settings/xfce_settings_dialog.c:416
+#: settings/xfce_settings_dialog.c:424
 msgid "Icon theme:"
 msgstr "Piktogramos tema"
 
-#: settings/xfce_settings_dialog.c:487
+#: settings/xfce_settings_dialog.c:495
 msgid "Panel layer:"
 msgstr "Skydelio iðdëstymas:"
 
-#: settings/xfce_settings_dialog.c:507
+#: settings/xfce_settings_dialog.c:515
 msgid "Normal"
 msgstr "Normalus"
 
-#: settings/xfce_settings_dialog.c:527
+#: settings/xfce_settings_dialog.c:535
 msgid "Center the panel:"
 msgstr "Centruoti skydelá"
 
-#: settings/xfce_settings_dialog.c:551
+#: settings/xfce_settings_dialog.c:559
 msgid "Set"
 msgstr "Nustatyti"
 
-#: settings/xfce_settings_dialog.c:587
+#: settings/xfce_settings_dialog.c:595
 msgid "Autohide:"
 msgstr "Autopaslëpimas"
 
-#: settings/xfce_settings_dialog.c:655
+#: settings/xfce_settings_dialog.c:663
 msgid "XFce Panel Settings"
 msgstr "XFce skydelio nustatymai"
 
 #. Appearance
-#: settings/xfce_settings_dialog.c:667
+#: settings/xfce_settings_dialog.c:675
 msgid "Appearance"
 msgstr "Vaizdas"
 
 #. Position
-#: settings/xfce_settings_dialog.c:688
+#: settings/xfce_settings_dialog.c:696
 msgid "Position"
 msgstr "Pozicija"
 
 #. autohide
-#: settings/xfce_settings_dialog.c:704
+#: settings/xfce_settings_dialog.c:712
 msgid "Behaviour"
 msgstr "Elgesys"
 
@@ -482,45 +473,46 @@ msgid ""
 msgstr ""
 "Priega prie sistemos sàrankos iðjungta.\n"
 "\n"
-"Paklauskite jûsø kompiuterio administratoriaus norëdami suþinoti daugiau informacijos"
+"Paklauskite jûsø kompiuterio administratoriaus norëdami suþinoti daugiau "
+"informacijos"
 
 #: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
 msgstr "Uþrakinti ekranà"
 
 #: plugins/systembuttons/systembuttons.c:149
-#: plugins/systembuttons/systembuttons.c:586
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Exit"
 msgstr "Iðeiti"
 
 #: plugins/systembuttons/systembuttons.c:150
-#: plugins/systembuttons/systembuttons.c:587
+#: plugins/systembuttons/systembuttons.c:519
 msgid "Setup"
 msgstr "Sàranka"
 
 #: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:588
+#: plugins/systembuttons/systembuttons.c:520
 msgid "Info"
 msgstr "Informacija"
 
-#: plugins/systembuttons/systembuttons.c:568
+#: plugins/systembuttons/systembuttons.c:500
 msgid "Show two buttons:"
 msgstr "Rodyti du mygtukus:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:585
+#: plugins/systembuttons/systembuttons.c:517
 msgid "Lock"
 msgstr "Uþrakinti"
 
-#: plugins/systembuttons/systembuttons.c:617
+#: plugins/systembuttons/systembuttons.c:549
 msgid "Button 1:"
 msgstr "Mygtukas 1"
 
-#: plugins/systembuttons/systembuttons.c:633
+#: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "Mygtukas 2"
 
-#: plugins/systembuttons/systembuttons.c:668
+#: plugins/systembuttons/systembuttons.c:600
 msgid "System buttons"
 msgstr "Sisteminiai mygtukai"
 
@@ -547,4 +539,3 @@ msgstr "Intervalas (sek):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Paðto tikrinimas"
-
