@@ -1,3 +1,30 @@
+2002-11-25 12:39  xfce
+
+	* panel/xfce.c: Put back "gtk_widget_show" on toplevel, the panel
+	doesn't show otherwise :)
+
+2002-11-24 20:26  huysmans
+
+	* panel/: item_dialog.c, xfce_support.c, xfce_support.h: Only show
+	preview when slecting icons
+
+2002-11-23 18:39  xfce
+
+	* aclocal.m4, configure, panel/builtins.c, panel/callbacks.c,
+	panel/global.h, panel/handle.c, panel/item.c, panel/popup.c,
+	panel/xfce.c, plugins/clock/clock.c, plugins/mailcheck/mailcheck.c,
+	plugins/trash/trash.c: Update for libxfcegui4 new include base dir.
+
+2002-11-23 12:24  huysmans
+
+	* Makefile.am, Makefile.in, example.xfce4rc.in, panel/xfce.c:
+	Install default xfce4rc
+
+2002-11-22 14:33  huysmans
+
+	* ChangeLog, panel/builtins.c, panel/item_dialog.c: Fix bug where
+	file dialog stays below control dialog
+
 2002-11-18 22:51  huysmans
 
 	* panel/: builtins.c, controls.c, controls.h, xfce.c: Fix SIGHUP

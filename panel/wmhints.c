@@ -258,9 +258,15 @@ void request_net_number_of_desktops(int n)
     gdk_error_trap_pop();
 }
 
+/* from xfce.c */
+extern int central_created;
+
 /* next two functions are copied from rox pager */
 static void root_property_notify(XPropertyEvent * event)
 {
+    if (!central_created)
+	return;
+
     if(event->atom == xa_NET_CURRENT_DESKTOP)
     {
         int n = get_net_current_desktop();

@@ -19,6 +19,9 @@ terminal.png \
 trash_empty.png \
 trash_full.png \
 unknown.png \
+newmail.png \
+nomail.png \
+oldmail.png \
 README
 
 EXTRA_DIST = $(curve_DATA)
