@@ -208,14 +208,15 @@ mcs_watch_xfce_channel (void)
 
     mcs_client_add_channel (client, CHANNEL);
 
-    g_object_get (G_OBJECT (gsettings), "gtk-icon-theme-name",
-	    	  &theme, NULL);
-
-    xfce_set_icon_theme (theme);
-
-    panel_set_theme (theme);
-
-    g_free (theme);
+    theme = NULL;
+    g_object_get (G_OBJECT (gsettings), "gtk-icon-theme-name", &theme, NULL);
+    
+    if (theme)
+    {
+        xfce_set_icon_theme (theme);
+        panel_set_theme (theme);
+        g_free (theme);
+    }
     
 #if GTK_CHECK_VERSION (2,4,0)
     settings_cb_id = 
