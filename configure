@@ -1573,7 +1573,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xfce4
- VERSION=0.1
+ VERSION=0.9
 
 
 cat >>confdefs.h <<_ACEOF
@@ -3025,13 +3025,14 @@ fi
 rm -f conftest*
 
 
-echo "$as_me:$LINENO: checking for library containing strerror" >&5
-echo $ECHO_N "checking for library containing strerror... $ECHO_C" >&6
-if test "${ac_cv_search_strerror+set}" = set; then
+
+        echo "$as_me:$LINENO: checking for strerror in -lcposix" >&5
+echo $ECHO_N "checking for strerror in -lcposix... $ECHO_C" >&6
+if test "${ac_cv_lib_cposix_strerror+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
-  ac_func_search_save_LIBS=$LIBS
-ac_cv_search_strerror=no
+  ac_check_lib_save_LIBS=$LIBS
+LIBS="-lcposix  $LIBS"
 cat >conftest.$ac_ext <<_ACEOF
 #line $LINENO "configure"
 /* confdefs.h.  */
@@ -3067,69 +3068,23 @@ if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
   ac_status=$?
   echo "$as_me:$LINENO: \$? = $ac_status" >&5
   (exit $ac_status); }; }; then
-  ac_cv_search_strerror="none required"
+  ac_cv_lib_cposix_strerror=yes
 else
   echo "$as_me: failed program was:" >&5
 sed 's/^/| /' conftest.$ac_ext >&5
 
+ac_cv_lib_cposix_strerror=no
 fi
 rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
-if test "$ac_cv_search_strerror" = no; then
-  for ac_lib in cposix; do
-    LIBS="-l$ac_lib  $ac_func_search_save_LIBS"
-    cat >conftest.$ac_ext <<_ACEOF
-#line $LINENO "configure"
-/* confdefs.h.  */
-_ACEOF
-cat confdefs.h >>conftest.$ac_ext
-cat >>conftest.$ac_ext <<_ACEOF
-/* end confdefs.h.  */
+LIBS=$ac_check_lib_save_LIBS
+fi
+echo "$as_me:$LINENO: result: $ac_cv_lib_cposix_strerror" >&5
+echo "${ECHO_T}$ac_cv_lib_cposix_strerror" >&6
+if test $ac_cv_lib_cposix_strerror = yes; then
+  LIBS="$LIBS -lcposix"
+fi
 
-/* Override any gcc2 internal prototype to avoid an error.  */
-#ifdef __cplusplus
-extern "C"
-#endif
-/* We use char because int might match the return type of a gcc2
-   builtin and then its argument prototype would still apply.  */
-char strerror ();
-int
-main ()
-{
-strerror ();
-  ;
-  return 0;
-}
-_ACEOF
-rm -f conftest.$ac_objext conftest$ac_exeext
-if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
-  (eval $ac_link) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); } &&
-         { ac_try='test -s conftest$ac_exeext'
-  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
-  (eval $ac_try) 2>&5
-  ac_status=$?
-  echo "$as_me:$LINENO: \$? = $ac_status" >&5
-  (exit $ac_status); }; }; then
-  ac_cv_search_strerror="-l$ac_lib"
-break
-else
-  echo "$as_me: failed program was:" >&5
-sed 's/^/| /' conftest.$ac_ext >&5
 
-fi
-rm -f conftest.$ac_objext conftest$ac_exeext conftest.$ac_ext
-  done
-fi
-LIBS=$ac_func_search_save_LIBS
-fi
-echo "$as_me:$LINENO: result: $ac_cv_search_strerror" >&5
-echo "${ECHO_T}$ac_cv_search_strerror" >&6
-if test "$ac_cv_search_strerror" != no; then
-  test "$ac_cv_search_strerror" = "none required" || LIBS="$ac_cv_search_strerror $LIBS"
-
-fi
 
 echo "$as_me:$LINENO: checking for ANSI C header files" >&5
 echo $ECHO_N "checking for ANSI C header files... $ECHO_C" >&6
@@ -5122,7 +5077,7 @@ test x"$pic_mode" = xno && libtool_flags="$libtool_flags --prefer-non-pic"
 case $host in
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 5125 "configure"' > conftest.$ac_ext
+  echo '#line 5080 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -8756,7 +8711,7 @@ echo "${ECHO_T}yes" >&6
   fi
 
 
-                                                                                                                                                                                                                                      ac_config_files="$ac_config_files xfce4.spec xfce4rc Makefile doc/Makefile doc/images/Makefile doc/html/Makefile doc/xml/Makefile po/Makefile.in icons/Makefile panel/Makefile plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile plugins/pager/Makefile settings/Makefile themes/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
+                                                                                                                                                                                                                                                ac_config_files="$ac_config_files xfce4.spec xfce4rc Makefile doc/Makefile doc/images/Makefile doc/html/Makefile doc/xml/Makefile po/Makefile.in icons/Makefile panel/Makefile plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile plugins/pager/Makefile settings/Makefile themes/Makefile themes/Carillon/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -9338,6 +9293,7 @@ do
   "plugins/pager/Makefile" ) CONFIG_FILES="$CONFIG_FILES plugins/pager/Makefile" ;;
   "settings/Makefile" ) CONFIG_FILES="$CONFIG_FILES settings/Makefile" ;;
   "themes/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Makefile" ;;
+  "themes/Carillon/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Carillon/Makefile" ;;
   "themes/Crystal/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Crystal/Makefile" ;;
   "themes/Curve/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Curve/Makefile" ;;
   "themes/Gnome/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/Makefile" ;;

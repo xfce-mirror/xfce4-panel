@@ -3,5 +3,6 @@ SUBDIRS = 								\
 	Gnome 								\
 	Curve 								\
 	Noia 								\
-	Crystal
+	Crystal 							\
+	Carillon
 

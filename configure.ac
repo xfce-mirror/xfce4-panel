@@ -7,7 +7,7 @@ AC_INIT([panel/main.c])
 
 AM_CONFIG_HEADER([config.h])
 
-AM_INIT_AUTOMAKE([xfce4], [0.1])
+AM_INIT_AUTOMAKE([xfce4], [0.9])
 
 AM_MAINTAINER_MODE
 
@@ -64,6 +64,7 @@ plugins/systembuttons/Makefile
 plugins/pager/Makefile
 settings/Makefile
 themes/Makefile
+themes/Carillon/Makefile
 themes/Crystal/Makefile
 themes/Curve/Makefile
 themes/Gnome/Makefile
