@@ -578,11 +578,12 @@ pos_changed (GtkSpinButton * spin, gpointer data)
 }
 
 GtkWidget *
-create_position_option (GtkSizeGroup * sg)
+create_position_option (void)
 {
     GtkWidget *vbox;
     GtkWidget *hbox;
     GtkWidget *label;
+    GtkWidget *sep;
 
     vbox = gtk_vbox_new (FALSE, 8);
     gtk_widget_show (vbox);
@@ -593,7 +594,6 @@ create_position_option (GtkSizeGroup * sg)
 
     label = gtk_label_new (_("Position:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_size_group_add_widget (sg, label);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
@@ -603,6 +603,10 @@ create_position_option (GtkSizeGroup * sg)
 
     g_signal_connect (pos_spin, "value-changed", G_CALLBACK (pos_changed),
                       NULL);
+
+    sep = gtk_hseparator_new();
+    gtk_widget_show(sep);
+    gtk_box_pack_start (GTK_BOX (vbox), sep, FALSE, TRUE, 0);
 
     return vbox;
 }
@@ -646,13 +650,6 @@ create_item_options_box (void)
         gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 4);
     }
     
-    /* position (menu item) */
-    if (config_item->type == MENUITEM && num_items > 1)
-    {
-        box = create_position_option (sg);
-        gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
-    }
-
     return vbox;
 }
 
@@ -860,6 +857,8 @@ item_revert_options (void)
 static void
 item_add_options (GtkContainer * container)
 {
+    GtkWidget *vbox;
+    GtkWidget *box;
     GtkWidget *main_hbox;
     GtkWidget *options_box;
     GtkWidget *preview_frame;
@@ -889,10 +888,22 @@ item_add_options (GtkContainer * container)
         backup.pos = config_item->pos;
     }
 
+    /* main vbox */
+    vbox = gtk_vbox_new(FALSE, 8);
+    gtk_widget_show(vbox);
+    gtk_container_add (container, vbox);
+    
+    /* position (menu item) */
+    if (config_item->type == MENUITEM && num_items > 1)
+    {
+        box = create_position_option ();
+        gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
+    }
+
     /* options box */
     main_hbox = gtk_hbox_new (FALSE, 6);
     gtk_widget_show (main_hbox);
-    gtk_container_add (container, main_hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), main_hbox, FALSE, TRUE, 0);
 
     options_box = create_item_options_box ();
     gtk_box_pack_start (GTK_BOX (main_hbox), options_box, TRUE, TRUE, 0);

@@ -35,7 +35,7 @@ extern GtkWidget *	create_icon_option(GtkSizeGroup *);
 extern GtkWidget *	create_command_option(GtkSizeGroup *);
 extern GtkWidget *	create_caption_option(GtkSizeGroup *);
 extern GtkWidget *	create_tooltip_option(GtkSizeGroup *);
-extern GtkWidget *	create_position_option(GtkSizeGroup *);
+extern GtkWidget *	create_position_option(void);
 extern GtkWidget *	create_item_options_box(void);
 extern GtkWidget *	create_icon_preview_frame(void);
 extern GtkWidget *	create_menu_item_dialog (Item *);
