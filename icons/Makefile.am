@@ -25,11 +25,5 @@ hicolor16_DATA = \
 	xfce-system-lock.png \
 	xfce-system-settings.png
 
-noinst_DATA = xfce4-panel-icon.h
-
-EXTRA_DIST = $(noinst_DATA) $(hicolor48_DATA) $(hicolor16_DATA)
-
-xfce4-panel-icon.h: $(srcdir)/xfce4-panel.png
-	gdk-pixbuf-csource --raw --build-list 				\
-	panel_icon_data $(srcdir)/xfce4-panel.png > xfce4-panel-icon.h
+EXTRA_DIST = $(hicolor48_DATA) $(hicolor16_DATA)
 

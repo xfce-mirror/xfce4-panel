@@ -46,8 +46,6 @@
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
 
-#include "icons/xfce4-panel-icon.h"
-
 #define DEFAULT_THEME "Curve"
 
 #define STREQUAL(s1,s2) !strcmp(s1, s2)
@@ -68,7 +66,7 @@ mcs_plugin_init (McsPlugin * mp)
     mp->plugin_name = g_strdup (CHANNEL);
     mp->caption = g_strdup (_("Xfce Panel"));
     mp->run_dialog = run_xfce_settings_dialog;
-    mp->icon = xfce_inline_icon_at_size (panel_icon_data, 48, 48);
+    mp->icon = xfce_themed_icon_load ("xfce4-panel", 48);
 
     return MCS_PLUGIN_INIT_OK;
 }
