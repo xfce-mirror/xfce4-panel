@@ -160,7 +160,6 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-EXTRA_DIST = $(images_DATA)
 imagesdir = $(datadir)/xfce4/doc/C/images
 images_DATA = \
 	clock-properties.png \
@@ -174,6 +173,8 @@ images_DATA = \
 	panel-settings.png \
 	systembuttons-properties.png
 
+
+EXTRA_DIST = $(images_DATA)
 subdir = doc/C/images
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h

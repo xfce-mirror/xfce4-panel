@@ -1,4 +1,3 @@
-EXTRA_DIST = $(images_DATA)
 imagesdir = $(datadir)/xfce4/doc/C/images
 images_DATA = \
 	clock-properties.png \
@@ -12,3 +11,4 @@ images_DATA = \
 	panel-settings.png \
 	systembuttons-properties.png
 
+EXTRA_DIST = $(images_DATA)
