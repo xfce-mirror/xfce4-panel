@@ -259,7 +259,7 @@ main (int argc, char **argv)
 	g_print (_("%s, version %s\n"
 		   "Part of the XFce Desktop Environment\n"
 		   "http://www.xfce.org\n"), PACKAGE, VERSION);
-	return (0);
+	return 0;
     }
 
     for (i = 0; i < 5; i++)

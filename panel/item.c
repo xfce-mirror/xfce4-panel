@@ -32,6 +32,9 @@
 #include "item_dialog.h"
 #include "settings.h"
 
+static gboolean popup_from_timeout = FALSE;
+static int popup_timeout_id = 0;
+
 /*  Common item callbacks
  *  ---------------------
 */
@@ -78,6 +81,15 @@ item_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 static void
 item_click_cb (GtkButton * b, Item * item)
 {
+    if (item->type == PANELITEM && popup_from_timeout)
+	return;
+    
+    if (popup_timeout_id > 0)
+    {
+	g_source_remove(popup_timeout_id);
+	popup_timeout_id = 0;
+    }
+
     hide_current_popup_menu ();
 
     exec_cmd (item->command, item->in_terminal, item->use_sn);
@@ -150,6 +162,75 @@ menu_item_press (GtkButton * b, GdkEventButton * ev, Item * mi)
     {
 	return FALSE;
     }
+}
+
+/*  Panel item callbacks
+ *  --------------------
+*/  
+static gboolean
+popup_menu_timeout(Item * item)
+{
+    GtkWidget *box;
+    GList *li;
+
+    popup_timeout_id = 0;
+    
+    /* FIXME: items should know about their parent */
+    
+    /* Explanantion of code below:
+     * 
+     * For a panel item with menu we have a GtkBox containing a control 
+     * and a popup button.
+     * The item->button is a child of the control's base container, so
+     * 'item->button->parent->parent' is the box we are looking for.
+     *
+     * A GtkBox contains children of the type GtkBoxChild. We are 
+     * interested in the widget member of this struct. If it is not
+     * the same as the parent container of our button, it must be the
+     * toggle button.
+     *
+     * There, that's it.
+     */ 
+    box=item->button->parent->parent;
+
+    for (li = GTK_BOX(box)->children; li; li = li->next)
+    {
+	GtkWidget *w = ((GtkBoxChild*)li->data)->widget;
+	
+	if (!GTK_IS_WIDGET(w))
+	    continue;
+	
+	if (w != item->button->parent)
+	{
+	    if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(w)))
+	    {
+		popup_from_timeout = TRUE;
+
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(w), TRUE);
+	    }
+	    
+	    break;
+	}
+    }
+
+    return FALSE;
+}
+
+static gboolean
+panel_item_press (GtkButton * b, GdkEventButton * ev, Item * item)
+{    
+    popup_from_timeout = FALSE;
+
+    if (!item->with_popup)
+	return FALSE;
+
+    if (ev->button == 1 && !(ev->state & GDK_SHIFT_MASK))
+    {
+	popup_timeout_id = g_timeout_add(400, (GSourceFunc)popup_menu_timeout, 
+					 item);
+    }
+
+    return FALSE;
 }
 
 /*  Common item interface
@@ -447,6 +528,8 @@ panel_item_new (void)
     item_apply_config (pi);
 
     g_signal_connect (pi->button, "clicked", G_CALLBACK (item_click_cb), pi);
+    g_signal_connect (pi->button, "button-press-event", 
+	    	      G_CALLBACK (panel_item_press), pi);
 
     dnd_set_drag_dest (pi->button);
     g_signal_connect (pi->button, "drag-data-received",
