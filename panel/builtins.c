@@ -111,17 +111,24 @@ static GtkWidget *ampmbutton, *secsbutton, *checkbutton, *om;
 static t_clock *clock_new(void)
 {
     t_clock *clock = g_new(t_clock, 1);
+    clock->clock = xfce_clock_new();
 
     clock->frame = gtk_frame_new(NULL);
     gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
-    gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
+
+    /* Cosmetic change */
+    if(XFCE_CLOCK(clock->clock)->mode == XFCE_CLOCK_ANALOG)
+	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
+    else
+	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
+
     gtk_widget_show(clock->frame);
 
     clock->eventbox = gtk_event_box_new();
     gtk_container_add(GTK_CONTAINER(clock->frame), clock->eventbox);
     gtk_widget_show(clock->eventbox);
 
-    clock->clock = xfce_clock_new();
+
     gtk_container_add(GTK_CONTAINER(clock->eventbox), clock->clock);
 
     gtk_widget_show(clock->clock);
@@ -266,6 +273,13 @@ static void clock_update_options_box(t_clock *clock)
 static void clock_type_changed(GtkOptionMenu * omi, t_clock * clock)
 {
     XFCE_CLOCK(clock->clock)->mode = gtk_option_menu_get_history(omi);
+
+    /* Cosmetic change : in analog mode 3D mode is not cute */
+    if(XFCE_CLOCK(clock->clock)->mode == XFCE_CLOCK_ANALOG)
+	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
+    else
+	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
+
     xfce_clock_set_mode(XFCE_CLOCK(clock->clock), XFCE_CLOCK(clock->clock)->mode);
 
      /* Make the revert_button sensitive to get our initial value back

@@ -51,6 +51,7 @@ extern "C"
 
     typedef enum
     {
+	DIGIT_TINY,
         DIGIT_SMALL,
         DIGIT_MEDIUM,
         DIGIT_LARGE,
@@ -60,6 +61,7 @@ extern "C"
 
     struct _XfceClock
     {
+
         GtkWidget widget;       /* parent */
 
         GtkStyle *parent_style;
