@@ -727,7 +727,7 @@ void sighandler(int sig)
             restart();
             break;
         default:
-            quit(FALSE);
+            quit(TRUE);
     }
 }
 
