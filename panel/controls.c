@@ -337,11 +337,9 @@ void panel_control_free(PanelControl * pc)
 
     if (pc->caption)
 	g_free(pc->caption);
+
     if (G_IS_OBJECT(pc->base))
 	g_object_unref(pc->base);
-    
-    if(GTK_IS_WIDGET(pc->base))
-        gtk_widget_destroy(pc->base);
 
     g_free(pc);
 }
