@@ -900,6 +900,7 @@ panel_unhide_timeout (Panel * p)
     if (p->hidden)
     {
 	panel_set_hidden (p, FALSE);
+        gtk_widget_queue_resize (p->toplevel);
     }
 
     return FALSE;
@@ -908,28 +909,25 @@ panel_unhide_timeout (Panel * p)
 static gboolean
 panel_enter (GtkWindow * w, GdkEventCrossing * event, Panel * p)
 {
-    if (!(settings.autohide))
-    {
-        if (event->detail != GDK_NOTIFY_INFERIOR)
-            set_opacity (p, FALSE);
-        
-	return FALSE;
-    }
-
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-	if (p->hide_timeout)
-	{
-	    g_source_remove (p->hide_timeout);
-	    p->hide_timeout = 0;
-	}
+        set_opacity (p, FALSE);
 
-	if (!p->unhide_timeout)
-	{
-	    p->unhide_timeout =
-		g_timeout_add (UNHIDE_TIMEOUT,
-			       (GSourceFunc) panel_unhide_timeout, p);
-	}
+        if (settings.autohide)
+        {
+            if (p->hide_timeout)
+            {
+                g_source_remove (p->hide_timeout);
+                p->hide_timeout = 0;
+            }
+
+            if (!p->unhide_timeout)
+            {
+                p->unhide_timeout =
+                    g_timeout_add (UNHIDE_TIMEOUT,
+                                   (GSourceFunc) panel_unhide_timeout, p);
+            }
+        }
     }
 
     return FALSE;
@@ -938,28 +936,25 @@ panel_enter (GtkWindow * w, GdkEventCrossing * event, Panel * p)
 static gboolean
 panel_leave (GtkWidget * w, GdkEventCrossing * event, Panel * p)
 {
-    if (!(settings.autohide))
-    {
-        if (event->detail != GDK_NOTIFY_INFERIOR)
-            set_opacity (p, TRUE);
-	
-        return FALSE;
-    }
-
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-	if (p->unhide_timeout)
-	{
-	    g_source_remove (p->unhide_timeout);
-	    p->unhide_timeout = 0;
-	}
+        set_opacity (p, TRUE);
 
-	if (!p->hide_timeout)
-	{
-	    p->hide_timeout =
-		g_timeout_add (HIDE_TIMEOUT, (GSourceFunc) panel_hide_timeout,
-			       p);
-	}
+        if (settings.autohide)
+        {
+            if (p->unhide_timeout)
+            {
+                g_source_remove (p->unhide_timeout);
+                p->unhide_timeout = 0;
+            }
+
+            if (!p->hide_timeout)
+            {
+                p->hide_timeout =
+                    g_timeout_add (HIDE_TIMEOUT, 
+                                   (GSourceFunc) panel_hide_timeout, p);
+            }
+        }
     }
 
     return FALSE;
@@ -1200,8 +1195,8 @@ create_panel (void)
 
     if (p->priv->settings.autohide)
 	panel_set_autohide (TRUE);
-    else
-        set_opacity (p, TRUE);
+    
+    set_opacity (p, TRUE);
 
     update_partial_struts (p);
 
@@ -1301,8 +1296,8 @@ panel_set_orientation (int orientation)
 
     if (hidden)
 	panel_set_autohide (TRUE);
-    else
-        set_opacity (&panel, TRUE);
+
+    set_opacity (&panel, TRUE);
 
     update_partial_struts (&panel);
 }
@@ -1463,13 +1458,11 @@ panel_set_autohide (gboolean hide)
             panel.hide_timeout = 
                 g_timeout_add (1000, (GSourceFunc) panel_hide_timeout, &panel);
         }
-
-        set_opacity (&panel, FALSE);
     }
     else
     {
-	panel_set_hidden (&panel, hide);
-        set_opacity (&panel, TRUE);
+	panel_set_hidden (&panel, FALSE);
+        gtk_widget_queue_resize (panel.toplevel);
     }
 
     update_partial_struts (&panel);
@@ -1779,10 +1772,8 @@ menu_destroyed (GtkWidget * menu, Panel * p)
 
             gdk_event_free (ev);
         }
-        else
-        {
-            set_opacity (p, TRUE);
-        }
+        
+        set_opacity (p, TRUE);
     }
 }
 
