@@ -57,6 +57,7 @@ typedef struct
 {
     char *mbox;
     char *command;
+    char *newmail_command;
     gboolean term;
     gboolean use_sn;
     int interval;
@@ -101,7 +102,7 @@ get_mailcheck_pixbuf (int id)
 
     pb = get_themed_pixbuf (name);
 
-    if (!pb || !GDK_IS_PIXBUF (pb))
+    if (!pb)
 	pb = get_pixbuf_by_id (UNKNOWN_ICON);
 
     return pb;
@@ -118,7 +119,7 @@ mailcheck_set_tip (t_mailcheck * mc)
     if (!tooltips)
 	tooltips = gtk_tooltips_new ();
 
-    if (mc->command && strlen(mc->command))
+    if (mc->command && strlen (mc->command))
     {
 	tip = g_strdup (mc->command);
 
@@ -129,19 +130,25 @@ mailcheck_set_tip (t_mailcheck * mc)
 	g_free (tip);
     }
 }
-    
+
 static gboolean
 set_mail_icon (t_mailcheck * mc)
 {
     if (mc->status == NO_MAIL)
+    {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
 				    mc->nomail_pb);
+    }
     else if (mc->status == OLD_MAIL)
+    {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
 				    mc->oldmail_pb);
+    }
     else
+    {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
 				    mc->newmail_pb);
+    }
 
     return FALSE;
 }
@@ -149,135 +156,137 @@ set_mail_icon (t_mailcheck * mc)
 /* POP3 routines */
 
 static int
-pop3_read_response(int fd, char* buff, int size)
+pop3_read_response (int fd, char *buff, int size)
 {
-  int bytes_read=0;
-  int state=0;
-  
-  while(bytes_read < size && state != 2)
+    int bytes_read = 0;
+    int state = 0;
+
+    while (bytes_read < size && state != 2)
     {
-      
-      bytes_read += read(fd, &buff[bytes_read], sizeof(char));
-      
-    switch(state)
-      {
-      case 0:
-      if(buff[bytes_read-1] == '\r')
-        state = 1;
-      break;
-      case 1:
-	if(buff[bytes_read-1] == '\n')
-	  state = 2;
-	else
-        state = 0;
-	break;
-      }
-    }
+	bytes_read += read (fd, &buff[bytes_read], sizeof (char));
 
-  if(state == 2)
-    buff[bytes_read-2*sizeof(char)] = '\0';
-  
-  if(strncmp(buff, "+OK", 3*sizeof(char)) == 0)
-    return 1;
-  else
-    return 0;
-
-}
-
-static int
-pop3_send_command(int fd, char* buff)
-{
-
-  return write(fd, buff, strlen(buff));
-
-}
-
-static int
-pop3_check_mail(char *username, char *password, char *hostname)
-{
-
-  struct sockaddr_in sa;
-  struct hostent *hp;
-  int msg_count;
-  char buff[1024];
-  char command[256];
-  int port = 110;
-  int sd;
-  int i;
-  
-  /* Lookup hostname */
-  hp = gethostbyname(hostname);
-  if(hp == NULL)
-    return NO_MAIL;
-  
-  sa.sin_port = htons(port);
-  sa.sin_family = hp->h_addrtype;
-
-  /* Create the socket */
-  sd = socket(AF_INET, SOCK_STREAM, 0);
-  if(sd == -1)
-    return NO_MAIL;
-  
-  /* Try each address until we get one that works */
-  for(i=0;;i++)
-    {
-      
-      if(hp->h_addr_list[i] == NULL)
+	switch (state)
 	{
-	  close(sd);
-	  return NO_MAIL;
+	    case 0:
+		if (buff[bytes_read - 1] == '\r')
+		    state = 1;
+		break;
+	    case 1:
+		if (buff[bytes_read - 1] == '\n')
+		    state = 2;
+		else
+		    state = 0;
+		break;
 	}
-      
-      memcpy((char *)&sa.sin_addr, hp->h_addr_list[i], hp->h_length);
-      
-      if( connect(sd, (struct sockaddr *)&sa, sizeof(sa)) == 0)
-	break;
-      
     }
 
-  if( !pop3_read_response(sd, buff, 1024) )
-    {
-      close(sd);
-      return NO_MAIL;
-    }
-  
-  g_snprintf(command, 256, "USER %s\r\n", username);
-  pop3_send_command(sd, command);
-  if( !pop3_read_response(sd, buff, 1024) )
-    {
-      pop3_send_command(sd, "QUIT\r\n");
-      close(sd);
-      return NO_MAIL;
-    }
-  
-  g_snprintf(command, 256, "PASS %s\r\n", password);
-  pop3_send_command(sd, command);
-  if( !pop3_read_response(sd, buff, 1024) )
-    {
-      pop3_send_command(sd, "QUIT\r\n");
-      close(sd);
-      return NO_MAIL;
-    }
-  
-  pop3_send_command(sd, "STAT\r\n");
-  if( !pop3_read_response(sd, buff, 1024) )
-    {
-      pop3_send_command(sd, "QUIT\r\n");
-      close(sd);
-      return NO_MAIL;
-    }
-  
-  sscanf(buff, "+OK %d", &msg_count);
-  
-  pop3_send_command(sd, "QUIT\r\n");
-  
-  close(sd);
-  
-  if(msg_count > 0)
-    return NEW_MAIL;
-  else
-    return NO_MAIL;
+    if (state == 2)
+	buff[bytes_read - 2 * sizeof (char)] = '\0';
 
+    if (strncmp (buff, "+OK", 3 * sizeof (char)) == 0)
+	return 1;
+    else
+	return 0;
+
+}
+
+static int
+pop3_send_command (int fd, char *buff)
+{
+    return write (fd, buff, strlen (buff));
+}
+
+static int
+pop3_check_mail (char *username, char *password, char *hostname)
+{
+    struct sockaddr_in sa;
+    struct hostent *hp;
+    int msg_count;
+    char buff[1024];
+    char command[256];
+    int port = 110;
+    int sd;
+    int i;
+
+    /* Lookup hostname */
+    hp = gethostbyname (hostname);
+    if (hp == NULL)
+	return NO_MAIL;
+
+    sa.sin_port = htons (port);
+    sa.sin_family = hp->h_addrtype;
+
+    /* Create the socket */
+    sd = socket (AF_INET, SOCK_STREAM, 0);
+    if (sd == -1)
+	return NO_MAIL;
+
+    /* Try each address until we get one that works */
+    for (i = 0;; i++)
+    {
+	if (hp->h_addr_list[i] == NULL)
+	{
+	    close (sd);
+	    return NO_MAIL;
+	}
+
+	memcpy ((char *) &sa.sin_addr, hp->h_addr_list[i], hp->h_length);
+
+	if (connect (sd, (struct sockaddr *) &sa, sizeof (sa)) == 0)
+	    break;
+    }
+
+    if (!pop3_read_response (sd, buff, 1024))
+    {
+	close (sd);
+	return NO_MAIL;
+    }
+
+    g_snprintf (command, 256, "USER %s\r\n", username);
+    pop3_send_command (sd, command);
+    if (!pop3_read_response (sd, buff, 1024))
+    {
+	pop3_send_command (sd, "QUIT\r\n");
+	close (sd);
+	return NO_MAIL;
+    }
+
+    g_snprintf (command, 256, "PASS %s\r\n", password);
+    pop3_send_command (sd, command);
+    if (!pop3_read_response (sd, buff, 1024))
+    {
+	pop3_send_command (sd, "QUIT\r\n");
+	close (sd);
+	return NO_MAIL;
+    }
+
+    pop3_send_command (sd, "STAT\r\n");
+    if (!pop3_read_response (sd, buff, 1024))
+    {
+	pop3_send_command (sd, "QUIT\r\n");
+	close (sd);
+	return NO_MAIL;
+    }
+
+    sscanf (buff, "+OK %d", &msg_count);
+
+    pop3_send_command (sd, "QUIT\r\n");
+
+    close (sd);
+
+    if (msg_count > 0)
+	return NEW_MAIL;
+    else
+	return NO_MAIL;
+
+}
+
+static gboolean
+exec_newmail_cmd (const char *cmd)
+{
+    exec_cmd (cmd, FALSE, FALSE);
+
+    return FALSE;
 }
 
 static gboolean
@@ -286,35 +295,42 @@ check_mail (t_mailcheck * mailcheck)
     int mail;
     struct stat s;
 
-    DBG("Checking mail ... ");
- 
-    if(mailcheck->pop3 == TRUE)
-      {
-	mail = pop3_check_mail(mailcheck->pop3_username,
-			       mailcheck->pop3_password,
-			       mailcheck->pop3_hostname);
-      }
+    DBG ("Checking mail ... ");
+
+    if (mailcheck->pop3 == TRUE)
+    {
+	mail = pop3_check_mail (mailcheck->pop3_username,
+				mailcheck->pop3_password,
+				mailcheck->pop3_hostname);
+    }
     else
-      {
+    {
 	if (stat (mailcheck->mbox, &s) < 0)
-	  mail = NO_MAIL;
+	    mail = NO_MAIL;
 	else if (!s.st_size)
-	  mail = NO_MAIL;
+	    mail = NO_MAIL;
 	else if (s.st_mtime <= s.st_atime)
-	  mail = OLD_MAIL;
+	    mail = OLD_MAIL;
 	else
-	  mail = NEW_MAIL;
-      }
+	    mail = NEW_MAIL;
+    }
 
     if (mail != mailcheck->status)
-      {
-	mailcheck->status = mail;
+    {
+	if (mail == NEW_MAIL && mailcheck->status != NEW_MAIL &&
+	    mailcheck->newmail_command &&
+	    strlen (mailcheck->newmail_command) != 0)
+	{
+	    g_idle_add ((GSourceFunc) exec_newmail_cmd,
+			mailcheck->newmail_command);
+	}
 
+	mailcheck->status = mail;
 	g_idle_add ((GSourceFunc) set_mail_icon, mailcheck);
-      }
-    
-    DBG("Done\n");
-    
+    }
+
+    DBG ("Done\n");
+
     /* keep the g_timeout running */
     return TRUE;
 }
@@ -324,10 +340,7 @@ static void
 run_mailcheck (t_mailcheck * mc)
 {
     if (mc->timeout_id > 0)
-    {
-	g_source_remove (mc->timeout_id);
-	mc->timeout_id = 0;
-    }
+	return;
 
     if (mc->interval > 0)
     {
@@ -335,7 +348,6 @@ run_mailcheck (t_mailcheck * mc)
 					(GSourceFunc) check_mail, mc);
     }
 }
-
 
 void
 mailcheck_read_config (Control * control, xmlNodePtr node)
@@ -374,15 +386,25 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 	    {
 		g_free (mc->mbox);
 		mc->mbox = (char *) value;
-		
-		if (strncmp(mc->mbox, "pop3://", 7*sizeof(char)) == 0 )
-		  {
+
+		if (strncmp (mc->mbox, "pop3://", 7 * sizeof (char)) == 0)
+		{
 		    mc->pop3 = TRUE;
-		    sscanf(mc->mbox, "pop3://%[^:]:%[^@]@%s",
-			   mc->pop3_username,
-			   mc->pop3_password,
-			   mc->pop3_hostname);
-		  }
+		    sscanf (mc->mbox, "pop3://%[^:]:%[^@]@%s",
+			    mc->pop3_username,
+			    mc->pop3_password, mc->pop3_hostname);
+		}
+	    }
+	}
+	else if (xmlStrEqual
+		 (node->name, (const xmlChar *) "newmail-command"))
+	{
+	    value = DATA (node);
+
+	    if (value)
+	    {
+		g_free (mc->newmail_command);
+		mc->newmail_command = (char *) value;
 	    }
 	}
 	else if (xmlStrEqual (node->name, (const xmlChar *) "Command"))
@@ -408,6 +430,8 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 
 		g_free (value);
 	    }
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+	    
 	    value = xmlGetProp (node, "sn");
 
 	    if (value)
@@ -421,6 +445,7 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 
 		g_free (value);
 	    }
+#endif
 	}
     }
 
@@ -451,6 +476,8 @@ mailcheck_write_config (Control * control, xmlNodePtr parent)
 
     g_snprintf (value, 2, "%d", mc->use_sn);
     xmlSetProp (node, "sn", value);
+
+    xmlNewTextChild (root, NULL, "newmail-command", mc->newmail_command);
 }
 
 static void
@@ -484,10 +511,14 @@ mailcheck_new (void)
     mailcheck->oldmail_pb = get_mailcheck_pixbuf (OLD_MAIL);
     mailcheck->newmail_pb = get_mailcheck_pixbuf (NEW_MAIL);
 
+    mailcheck->newmail_command = g_strdup ("");
+
     mail = g_getenv ("MAIL");
 
     if (mail)
+    {
 	mailcheck->mbox = g_strdup (mail);
+    }
     else
     {
 	const char *logname = g_getenv ("LOGNAME");
@@ -519,6 +550,7 @@ mailcheck_free (Control * control)
 
     g_free (mailcheck->mbox);
     g_free (mailcheck->command);
+    g_free (mailcheck->newmail_command);
 
     g_object_unref (mailcheck->nomail_pb);
     g_object_unref (mailcheck->oldmail_pb);
@@ -526,9 +558,6 @@ mailcheck_free (Control * control)
 
     g_free (mailcheck);
 }
-
-
-
 
 static void
 mailcheck_set_theme (Control * control, const char *theme)
@@ -544,14 +573,20 @@ mailcheck_set_theme (Control * control, const char *theme)
     mailcheck->newmail_pb = get_mailcheck_pixbuf (NEW_MAIL);
 
     if (mailcheck->status == NO_MAIL)
+    {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mailcheck->button),
 				    mailcheck->nomail_pb);
+    }
     else if (mailcheck->status == OLD_MAIL)
+    {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mailcheck->button),
 				    mailcheck->oldmail_pb);
+    }
     else
+    {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mailcheck->button),
 				    mailcheck->newmail_pb);
+    }
 }
 
 /*  Options dialog
@@ -561,18 +596,12 @@ typedef struct
 {
     t_mailcheck *mc;
 
-    /* backup */
-    char *mbox;
-    char *command;
-    gboolean term;
-    gboolean use_sn;
-    int interval;
-
     /* control dialog */
     GtkWidget *dialog;
 
     /* options */
     GtkWidget *mbox_entry;
+    GtkWidget *newmail_cmd_entry;
     GtkWidget *cmd_entry;
     GtkWidget *term_cb;
     GtkWidget *sn_cb;
@@ -580,25 +609,9 @@ typedef struct
 }
 MailDialog;
 
-/* backup */
-static void
-create_backup (MailDialog * md)
-{
-    t_mailcheck *mc = md->mc;
-
-    md->mbox = g_strdup (mc->mbox);
-    md->command = g_strdup (mc->command);
-    md->term = mc->term;
-    md->use_sn = mc->use_sn;
-    md->interval = mc->interval;
-}
-
 static void
 free_maildialog (MailDialog * md)
 {
-    g_free (md->mbox);
-    g_free (md->command);
-
     g_free (md);
 }
 
@@ -619,7 +632,9 @@ mailcheck_apply_options (MailDialog * md)
 
     mc->term = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (md->term_cb));
 
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     mc->use_sn = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (md->sn_cb));
+#endif
 
     tmp = gtk_entry_get_text (GTK_ENTRY (md->mbox_entry));
 
@@ -627,6 +642,14 @@ mailcheck_apply_options (MailDialog * md)
     {
 	g_free (mc->mbox);
 	mc->mbox = g_strdup (tmp);
+    }
+
+    tmp = gtk_entry_get_text (GTK_ENTRY (md->newmail_cmd_entry));
+
+    if (tmp && *tmp)
+    {
+	g_free (mc->newmail_command);
+	mc->newmail_command = g_strdup (tmp);
     }
 
     mc->interval =
@@ -637,30 +660,6 @@ mailcheck_apply_options (MailDialog * md)
 
     run_mailcheck (mc);
 }
-
-#if 0
-/* restore baclup */
-static void
-mailcheck_revert_options (MailDialog * md)
-{
-    if (md->mbox)
-	gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), md->mbox);
-
-    if (md->command)
-	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), md->command);
-
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->term_cb), md->term);
-
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->sn_cb), md->use_sn);
-
-    gtk_spin_button_set_value (GTK_SPIN_BUTTON (md->interval_spin),
-			       md->interval);
-
-    mailcheck_apply_options (md);
-
-    gtk_widget_set_sensitive (md->revert, FALSE);
-}
-#endif
 
 /* mbox */
 static void
@@ -681,8 +680,27 @@ mbox_browse_cb (GtkWidget * b, MailDialog * md)
     }
 }
 
+/* newmail command */
+static void
+newmail_cmd_brows_cb (GtkWidget * b, MailDialog * md)
+{
+    const char *text;
+    char *file;
+
+    text = gtk_entry_get_text (GTK_ENTRY (md->newmail_cmd_entry));
+
+    file = select_file_name (NULL, text, md->dialog);
+
+    if (file)
+    {
+	gtk_entry_set_text (GTK_ENTRY (md->newmail_cmd_entry), file);
+	g_free (file);
+	mailcheck_apply_options (md);
+    }
+}
+
 gboolean
-mbox_entry_lost_focus (MailDialog * md)
+entry_lost_focus (MailDialog * md)
 {
     mailcheck_apply_options (md);
 
@@ -694,6 +712,7 @@ static void
 add_mbox_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 {
     GtkWidget *hbox, *label, *button, *image;
+    t_mailcheck *mc = md->mc;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -706,24 +725,66 @@ add_mbox_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     md->mbox_entry = gtk_entry_new ();
-    if (md->mbox)
-	gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), md->mbox);
+    if (mc->mbox)
+	gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), mc->mbox);
     gtk_widget_show (md->mbox_entry);
     gtk_box_pack_start (GTK_BOX (hbox), md->mbox_entry, TRUE, TRUE, 0);
 
-    button = gtk_button_new();
+    button = gtk_button_new ();
     gtk_widget_show (button);
     gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-    image = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show(image);
-    gtk_container_add(GTK_CONTAINER(button), image);
-    
+    image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
+    gtk_widget_show (image);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
     g_signal_connect (button, "clicked", G_CALLBACK (mbox_browse_cb), md);
 
     /* only set label on focus out */
     g_signal_connect_swapped (md->mbox_entry, "focus-out-event",
-			      G_CALLBACK (mbox_entry_lost_focus), md);
+			      G_CALLBACK (entry_lost_focus), md);
+}
+
+static void
+add_newmail_cmd_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
+{
+    GtkWidget *hbox, *label, *button, *image;
+    t_mailcheck *mc = md->mc;
+
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_label_new (_("New mail:"));
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_size_group_add_widget (sg, label);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    md->newmail_cmd_entry = gtk_entry_new ();
+    if (mc->newmail_command)
+	gtk_entry_set_text (GTK_ENTRY (md->newmail_cmd_entry),
+			    mc->newmail_command);
+    gtk_widget_show (md->newmail_cmd_entry);
+    gtk_box_pack_start (GTK_BOX (hbox), md->newmail_cmd_entry, TRUE, TRUE, 0);
+
+    gtk_tooltips_set_tip (tooltips, md->newmail_cmd_entry,
+			  _("Command to run when new mail arrives"), NULL);
+
+    button = gtk_button_new ();
+    gtk_widget_show (button);
+    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
+    gtk_widget_show (image);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
+    g_signal_connect (button, "clicked", G_CALLBACK (newmail_cmd_brows_cb),
+		      md);
+
+    /* only set label on focus out */
+    g_signal_connect_swapped (md->mbox_entry, "focus-out-event",
+			      G_CALLBACK (entry_lost_focus), md);
 }
 
 /* command */
@@ -778,36 +839,37 @@ static void
 add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 {
     GtkWidget *hbox, *hbox2, *vbox2, *label, *button, *align, *image;
+    t_mailcheck *mc = md->mc;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Mail command:"));
+    label = gtk_label_new (_("Command:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_size_group_add_widget (sg, label);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     md->cmd_entry = gtk_entry_new ();
-    if (md->command)
-	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), md->command);
+    if (mc->command)
+	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), mc->command);
     gtk_widget_show (md->cmd_entry);
     gtk_box_pack_start (GTK_BOX (hbox), md->cmd_entry, TRUE, TRUE, 0);
 
     gtk_tooltips_set_tip (tooltips, md->cmd_entry,
-			  _
-			  ("Command to run when the button on the panel is clicked"),
+			  _("Command to run when the button "
+			    "on the panel is clicked"),
 			  NULL);
 
-    button = gtk_button_new();
+    button = gtk_button_new ();
     gtk_widget_show (button);
     gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
-    image = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show(image);
-    gtk_container_add(GTK_CONTAINER(button), image);
-    
+    image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
+    gtk_widget_show (image);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
     g_signal_connect (button, "clicked", G_CALLBACK (command_browse_cb), md);
 
     /* only set command on focus out */
@@ -829,25 +891,21 @@ add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     gtk_box_pack_start (GTK_BOX (hbox2), vbox2, FALSE, FALSE, 0);
 
     md->term_cb = gtk_check_button_new_with_mnemonic (_("Run in _terminal"));
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->term_cb), md->term);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->term_cb), mc->term);
     gtk_widget_show (md->term_cb);
     gtk_box_pack_start (GTK_BOX (vbox2), md->term_cb, FALSE, FALSE, 0);
 
     g_signal_connect (md->term_cb, "toggled", G_CALLBACK (term_toggled), md);
 
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     md->sn_cb =
 	gtk_check_button_new_with_mnemonic (_("Use startup _notification"));
     gtk_widget_show (md->sn_cb);
     gtk_box_pack_start (GTK_BOX (vbox2), md->sn_cb, FALSE, FALSE, 0);
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->sn_cb), md->use_sn);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->sn_cb), mc->use_sn);
     gtk_widget_set_sensitive (md->sn_cb, TRUE);
-#else
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->sn_cb), FALSE);
-    gtk_widget_set_sensitive (md->sn_cb, FALSE);
-#endif
     g_signal_connect (md->sn_cb, "toggled", G_CALLBACK (sn_toggled), md);
-
+#endif
 }
 
 /* interval */
@@ -861,6 +919,7 @@ static void
 add_interval_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 {
     GtkWidget *hbox, *label;
+    t_mailcheck *mc = md->mc;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -874,7 +933,7 @@ add_interval_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 
     md->interval_spin = gtk_spin_button_new_with_range (1, 600, 1);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (md->interval_spin),
-			       md->interval);
+			       mc->interval);
     gtk_widget_show (md->interval_spin);
     gtk_box_pack_start (GTK_BOX (hbox), md->interval_spin, FALSE, FALSE, 0);
 
@@ -885,7 +944,7 @@ add_interval_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 /* the dialog */
 void
 mailcheck_create_options (Control * control, GtkContainer * container,
-		       GtkWidget * done)
+			  GtkWidget * done)
 {
     GtkWidget *vbox;
     GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -897,16 +956,16 @@ mailcheck_create_options (Control * control, GtkContainer * container,
 
     md->dialog = gtk_widget_get_toplevel (done);
 
-    create_backup (md);
-
-    vbox = gtk_vbox_new (TRUE, BORDER);
+    vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
 
     add_mbox_box (vbox, sg, md);
 
-    add_command_box (vbox, sg, md);
-
     add_interval_box (vbox, sg, md);
+
+    add_newmail_cmd_box (vbox, sg, md);
+
+    add_command_box (vbox, sg, md);
 
     /* signals */
     g_signal_connect_swapped (done, "clicked",
