@@ -113,6 +113,7 @@ on_button_press_event_cb(GtkWidget *widget,
 {
   GdkAtom atom;
   Window xwindow;
+  static guint32 start_time = 0;
 
   if (event->button == 1)
   {
@@ -147,7 +148,7 @@ on_button_press_event_cb(GtkWidget *widget,
 	  send_client_message (control->base->window, xwindow, msg);
           return TRUE;
       }        
-      else
+      else if (event->time > start_time + 2000 || start_time == 0)
       {
 	  exec_cmd_silent ("xfcalendar", FALSE, FALSE);
       }
