@@ -18,20 +18,11 @@
 */
 
 #include <xfce_movehandler.h>
+#include <xfce_decorbutton.h>
 
 #include "handle.h"
-#include "icons.h"
 #include "popup.h" /* to hide popups */
 #include "callbacks.h"
-
-#if 0
-#include "icons/handle.xpm"
-#include "icons/close.xpm"
-#include "icons/iconify.xpm"
-#endif
-
-enum
-{HANDLE_ICONIFY, HANDLE_CLOSE, HANDLE_NOICON};
 
 struct _Handle
 {
@@ -108,7 +99,6 @@ static gboolean handler_released_cb(GtkWidget *h, GdkEventButton *event,
 
 Handle *handle_new(int side)
 {
-    GdkPixbuf *pb;
     GtkWidget *im;
     Handle *mh = g_new(Handle, 1);
 
@@ -125,24 +115,20 @@ Handle *handle_new(int side)
 
     if (side == LEFT)
     {
-	pb = get_system_pixbuf(CLOSE_ICON);
-	im = gtk_image_new_from_pixbuf(pb);
-	g_object_unref(pb);
+	im = xfce_decorbutton_new(XFCE_DECORBUTTON_CLOSE);
 	gtk_widget_show(im);
 	gtk_container_add(GTK_CONTAINER(mh->button), im);
-
+	
 	add_tooltip(mh->button, _("Quit..."));
 	
 	g_signal_connect(mh->button, "clicked", G_CALLBACK(close_cb), NULL);
     }
     else
     {
-	pb = get_system_pixbuf(ICONIFY_ICON);
-	im = gtk_image_new_from_pixbuf(pb);
-	g_object_unref(pb);
+	im = xfce_decorbutton_new(XFCE_DECORBUTTON_HIDE);
 	gtk_widget_show(im);
 	gtk_container_add(GTK_CONTAINER(mh->button), im);
-
+	
 	add_tooltip(mh->button, _("Iconify panel"));
 	
 	g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
