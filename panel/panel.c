@@ -47,7 +47,7 @@
 
 #define HIDE_TIMEOUT   2000
 #define UNHIDE_TIMEOUT  200
-#define HIDDEN_SIZE 10
+#define HIDDEN_SIZE 5
 
 /* globals */
 Settings settings;
