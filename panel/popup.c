@@ -327,6 +327,9 @@ PanelPopup *create_panel_popup(void)
 
     /* we don't know the items until we read the config file */
     pp->items = NULL;
+    pp->item_vbox = gtk_vbox_new(TRUE, 0);
+    gtk_widget_show(pp->item_vbox);
+    gtk_box_pack_start(GTK_BOX(pp->vbox), pp->item_vbox, FALSE, FALSE, 0);
 
     pp->tearoff_button = gtk_button_new();
     gtk_button_set_relief(GTK_BUTTON(pp->tearoff_button), GTK_RELIEF_NONE);
@@ -374,8 +377,8 @@ void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
     GList *li;
     int i;
 
-    gtk_box_pack_start(GTK_BOX(pp->vbox), mi->button, TRUE, TRUE, 0);
-    gtk_box_reorder_child(GTK_BOX(pp->vbox), mi->button, mi->pos + 2);
+    gtk_box_pack_start(GTK_BOX(pp->item_vbox), mi->button, TRUE, TRUE, 0);
+    gtk_box_reorder_child(GTK_BOX(pp->item_vbox), mi->button, mi->pos);
 
     pp->items = g_list_insert(pp->items, mi, mi->pos);
 

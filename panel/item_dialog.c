@@ -779,7 +779,7 @@ static void menu_item_apply_options(void)
     else
         mitem->caption = NULL;
 
-    gtk_box_reorder_child(GTK_BOX(pp->vbox), mitem->button, mitem->pos + 2);
+    gtk_box_reorder_child(GTK_BOX(pp->item_vbox), mitem->button, mitem->pos);
 
     menu_item_apply_config(mitem);
 }
@@ -806,8 +806,8 @@ void menu_item_revert_options(void)
 
     menu_item_apply_config(mitem);
 
-    gtk_box_reorder_child(GTK_BOX(mitem->parent->vbox), mitem->button,
-                          mitem->pos + 2);
+    gtk_box_reorder_child(GTK_BOX(mitem->parent->item_vbox), mitem->button,
+                          mitem->pos);
 
     /* revert the widgets */
     if(mitem->command)
@@ -948,6 +948,20 @@ static void reposition_popup(PanelPopup * pp)
     gtk_button_clicked(GTK_BUTTON(pp->button));
 }
 
+static void reindex_items(GList *items)
+{
+    MenuItem *item;
+    GList *li;
+    int i;
+
+    for (i = 0, li = items; li; i++, li = li->next)
+    {
+	item = li->data;
+
+	item->pos = i;
+    }
+}
+
 void edit_menu_item_dialog(MenuItem * mi)
 {
     GtkWidget *dlg;
@@ -979,7 +993,7 @@ void edit_menu_item_dialog(MenuItem * mi)
         {
             PanelPopup *pp = mi->parent;
 
-            gtk_container_remove(GTK_CONTAINER(pp->vbox), mi->button);
+            gtk_container_remove(GTK_CONTAINER(pp->item_vbox), mi->button);
             pp->items = g_list_remove(pp->items, mi);
             menu_item_free(mi);
 
@@ -989,6 +1003,8 @@ void edit_menu_item_dialog(MenuItem * mi)
         break;
     }
 
+    reindex_items(mi->parent->items);
+    
     gtk_widget_destroy(dlg);
     num_items = 0;
 

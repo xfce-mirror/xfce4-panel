@@ -41,6 +41,7 @@ struct _PanelPopup
     GtkWidget *separator;
     GtkWidget *tearoff_button;
 
+    GtkWidget *item_vbox;
     GList *items;               /* type MenuItem */
 };
 
