@@ -69,7 +69,14 @@
       <Control id="-1" filename="libseparator.so"/>
     </Group>
     <Group>
-      <Popup/>
+      <Popup>
+        <Item>
+          <Caption>Screensaver</Caption>
+          <Command term="0" sn="0">xscreensaver-demo</Command>
+          <Tooltip>Screensaver</Tooltip>
+          <Icon id="3"/>
+        </Item>
+      </Popup>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfce-setting-show</Command>
         <Tooltip>Settings</Tooltip>
