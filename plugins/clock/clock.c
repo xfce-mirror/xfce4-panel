@@ -683,6 +683,8 @@ xfce_control_class_init (ControlClass * cc)
     cc->create_options = clock_create_options;
 
     cc->set_size = clock_set_size;
+
+    control_class_set_unique (cc, TRUE);
 }
 
 /* macro defined in plugins.h */

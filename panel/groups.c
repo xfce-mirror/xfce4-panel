@@ -280,13 +280,17 @@ groups_set_from_xml (xmlNodePtr node)
 	    else if (xmlStrEqual
 		     (child->name, (const xmlChar *) "Control"))
 	    {
-		control_set_from_xml (group->control, child);
-		control_created = TRUE;
+		control_created = 
+		    control_set_from_xml (group->control, child);
 	    }
 	}
 
 	if (!control_created)
-	    control_set_from_xml (group->control, NULL);
+	{
+	    group_list = g_slist_remove (group_list, group);
+	    panel_group_unpack (group);
+	    panel_group_free (group);
+	}
     }
 
     settings.num_groups = g_slist_length (group_list);
@@ -439,8 +443,11 @@ groups_remove (int index)
     li = g_slist_nth (group_list, index);
     group = li->data;
 
+    DBG ("unref class %s", group->control->cclass->caption);
+    control_class_unref (group->control->cclass);
+    
     panel_group_unpack (group);
-
+    
     group_list = g_slist_delete_link (group_list, li);
 
     panel_group_free (group);
@@ -576,7 +583,7 @@ groups_get_arrow_direction (void)
 }
 
 void
-groups_add_control (int id, const char *filename, int index)
+groups_add_control (Control *control, int index)
 {
     int len;
     PanelGroup *group = NULL;
@@ -590,8 +597,8 @@ groups_add_control (int id, const char *filename, int index)
     panel_group_pack (group, groupbox);
     group_list = g_slist_append (group_list, group);
 
-    group->control = control_new (index);
-    create_control (group->control, id, filename);
+    group->control = control;
+    control->index = index;
 
     panel_group_arrange (group);
 

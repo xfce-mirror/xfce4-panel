@@ -17,23 +17,28 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-/*  Controls
+/**
+ *  Controls
  *  --------
  *  Controls provide a unified interface for panel items. Each control has an
  *  associated control class that defines interface functions for the control.
+ *  Each class in turn has an ControlClassInfo parent structure, that contains
+ *  private info like refcount and uniqueness setting.
  *
- *  A control is created using the create_control function of its associated
- *  class. This takes an allocated control structure as argument, containing
- *  only a base container widget.
- * 
- *  On startup a list of control classes is made from which new controls can
- *  be created.
- *
- *  Plugins
- *  -------
- *  A control class can also be provided by a plugin. The plugin is accessed 
+ *  A control class can be provided by a plugin. The plugin is accessed 
  *  using the g_module interface.
-*/
+ *  
+ *  A control is created using the create_control function of its associated
+ *  class. The module is loaded if necessary. This function takes an allocated 
+ *  control structure as argument, containing only a base container widget.
+ * 
+ *  On startup a list of ControlClassInfo structures is made from which new 
+ *  controls can be created.
+ *
+ *  Periodically the panel will check the list and unload modules that are no
+ *  longer in use.
+ *  
+ **/
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -50,43 +55,76 @@
 #include "controls_dialog.h"
 #include "settings.h"
 
-static GSList *control_class_list = NULL;
+#define SOEXT 		("." G_MODULE_SUFFIX)
+#define SOEXT_LEN 	(strlen (SOEXT))
 
-/*  Control classes
- *  ---------------
-*/
-static gint
-compare_classes (gconstpointer class_a, gconstpointer class_b)
+#define API_VERSION 5
+
+typedef struct _ControlClassInfo ControlClassInfo;
+
+struct _ControlClassInfo
 {
-    g_assert (class_a != NULL);
-    g_assert (class_b != NULL);
+    ControlClass *class;
 
-    return (g_ascii_strcasecmp (CONTROL_CLASS (class_a)->name,
-				CONTROL_CLASS (class_b)->name));
+    /* Copied from ControlClass. This allows use of 
+     * these values when the module is unloaded */
+    char *name;
+    char *caption;
+    
+    /* private info */
+    char *path;
+    int refcount; 
+    gboolean unique;
+    GdkPixbuf *icon;
+};
+
+
+static GSList *control_class_info_list = NULL;
+static ControlClassInfo *info_to_add = NULL;
+
+/*  ControlClass and ControlClassInfo 
+ *  ---------------------------------
+*/
+
+static gint
+compare_class_info_by_name (gconstpointer info, gconstpointer name)
+{
+    g_assert (info != NULL);
+    g_assert (name != NULL);
+
+    return g_ascii_strcasecmp (((ControlClassInfo *)info)->name,
+	    		       (char *)name);
 }
 
 static gint
-lookup_classes_by_filename (gconstpointer class, gconstpointer filename)
+lookup_info_by_filename (gconstpointer info, gconstpointer filename)
 {
     char *fn;
-    int result;
+    int result = -1;
 
-    g_assert (class != NULL);
+    g_assert (info != NULL);
     g_assert (filename != NULL);
 
-    if (CONTROL_CLASS (class)->gmodule)
-	fn = g_path_get_basename (g_module_name
-				  (CONTROL_CLASS (class)->gmodule));
-    else
-	return -1;
+    if (((ControlClassInfo *)info)->class->gmodule)
+    {
+	fn = g_path_get_basename (
+		g_module_name(((ControlClassInfo *)info)->class->gmodule));
 
-    result = g_ascii_strcasecmp (fn, filename);
-    g_free (fn);
+	result = g_ascii_strcasecmp (fn, filename);
+	g_free (fn);
+    }
 
     return result;
 }
 
-/* free a class */
+static void
+control_class_info_free (ControlClassInfo * cci)
+{
+    g_free (cci->name);
+    g_free (cci->caption);
+    g_free (cci);
+}
+
 static void
 control_class_free (ControlClass * cc)
 {
@@ -99,13 +137,63 @@ control_class_free (ControlClass * cc)
     g_free (cc);
 }
 
-/*  Plugins
- *  -------
-*/
-#define SOEXT 		("." G_MODULE_SUFFIX)
-#define SOEXT_LEN 	(strlen (SOEXT))
+static ControlClassInfo *
+get_control_class_info (ControlClass *cc)
+{
+    ControlClassInfo *info;
+    
+    if (info_to_add && 
+	g_ascii_strcasecmp (info_to_add->class->name, cc->name) == 0)
+    {
+	DBG ("class is from info_to_add");
+	info = info_to_add;
+    }
+    else
+    {
+	GSList *li = 
+	    g_slist_find_custom (control_class_info_list,
+	    			 cc->name, compare_class_info_by_name);
 
-#define API_VERSION 5
+	info = li->data; 
+    }
+    
+    return info;
+}
+
+static gboolean
+control_class_info_create_control (ControlClassInfo *info, Control *control)
+{
+    g_return_val_if_fail (info != NULL, FALSE);
+    g_return_val_if_fail (control != NULL, FALSE);
+
+    if (info->class->id == PLUGIN && info->refcount == 0 && 
+	info->class->gmodule == NULL)
+    {
+	GModule *gm;
+	gpointer symbol;
+	void (*init) (ControlClass * cc);
+
+	gm = info->class->gmodule = g_module_open (info->path, 0);
+	
+	if (!g_module_symbol (gm, "xfce_control_class_init", &symbol))
+	    goto failed;
+
+	init = symbol;
+	init (info->class);
+    }
+
+    if (info->unique && info->refcount > 0)
+	goto failed;
+    
+    info->refcount++;
+
+    return info->class->create_control (control);
+
+failed:
+    return FALSE;
+}
+
+/* plugins */
 
 gchar *
 xfce_plugin_check_version (gint version)
@@ -119,47 +207,65 @@ xfce_plugin_check_version (gint version)
 static void
 load_plugin (gchar * path)
 {
-    gpointer tmp;
-    ControlClass *cc;
     GModule *gm;
+    gpointer symbol;
 
-    void (*init) (ControlClass * cc);
+    DBG ("Load module: %s", path);
+    
+    gm = g_module_open (path, 0);
 
-    cc = g_new0 (ControlClass, 1);
-    cc->id = PLUGIN;
-
-    cc->gmodule = gm = g_module_open (path, 0);
-
-    if (gm && g_module_symbol (gm, "xfce_control_class_init", &tmp))
+    if (gm && g_module_symbol (gm, "xfce_control_class_init", &symbol))
     {
-	init = tmp;
+	ControlClassInfo *info;
+	ControlClass *cc;
+	void (*init) (ControlClass * cc);
+	
+	info = g_new0 (ControlClassInfo, 1);
+	cc = info->class = g_new0 (ControlClass, 1);
+	
+	cc->id = PLUGIN;
+	cc->gmodule = gm;
+	
+	/* keep track of info structure we are about to add */
+	info_to_add = info;
+	
+	/* fill in the class structure */
+	init = symbol;
 	init (cc);
 
-	if (g_slist_find_custom (control_class_list, cc, compare_classes))
+	info_to_add = NULL;
+
+	if (g_slist_find_custom (control_class_info_list, 
+		    		 cc->name, compare_class_info_by_name))
 	{
-	    g_message ("%s: module %s has already been loaded",
-		       PACKAGE, cc->name);
+	    DBG ("...already loaded");
+	    
 	    control_class_free (cc);
+	    control_class_info_free (info);
 	}
 	else
 	{
-	    g_message ("%s: module %s successfully loaded", PACKAGE,
-		       cc->name);
-	    control_class_list = g_slist_append (control_class_list, cc);
+	    DBG ("...ok");
+	    
+	    control_class_info_list = 
+		g_slist_prepend (control_class_info_list, info);
+	
 	    cc->filename = g_path_get_basename (path);
+	    info->path = g_strdup (path);
+	    info->name = g_strdup (cc->name);
+	    info->caption = g_strdup (cc->caption);
 	}
     }
     else if (gm)
     {
 	g_warning ("%s: incompatible module %s", PACKAGE, path);
+	
 	g_module_close (gm);
-	g_free (cc);
     }
     else
     {
 	g_warning ("%s: module %s cannot be opened (%s)",
 		   PACKAGE, path, g_module_error ());
-	g_free (cc);
     }
 }
 
@@ -190,9 +296,6 @@ load_plugin_dir (const char *dir)
     g_dir_close (gdir);
 }
 
-/*  Control class list 
- *  ------------------
-*/
 static void
 add_plugin_classes (void)
 {
@@ -206,21 +309,36 @@ add_plugin_classes (void)
     g_strfreev (dirs);
 }
 
+/*  builtin launcher class */
+
 static void
 add_launcher_class (void)
 {
-    ControlClass *cc = g_new0 (ControlClass, 1);
+    ControlClassInfo *info;
+    ControlClass *cc;
+    
+    info = g_new0(ControlClassInfo, 1);
+    cc = info->class = g_new0 (ControlClass, 1);
 
     panel_item_class_init (cc);
 
-    control_class_list = g_slist_append (control_class_list, cc);
+    info->name = g_strdup (cc->name);
+    info->caption = g_strdup (cc->caption);
+
+    control_class_info_list = g_slist_append (control_class_info_list, info);
 }
+
+/* exported interface */
 
 void
 control_class_list_init (void)
 {
+    /* prepend class info to the list */
     add_launcher_class ();
     add_plugin_classes ();
+
+    /* reverse to get correct order */
+    control_class_info_list = g_slist_reverse (control_class_info_list);
 }
 
 void
@@ -228,26 +346,58 @@ control_class_list_cleanup (void)
 {
     GSList *li;
 
-    for (li = control_class_list; li; li = li->next)
+    for (li = control_class_info_list; li; li = li->next)
     {
-	ControlClass *cc = li->data;
+	ControlClassInfo *info = li->data;
 
-	control_class_free (cc);
+	control_class_free (info->class);
+	control_class_info_free (info);
     }
 
-    g_slist_free (control_class_list);
-    control_class_list = NULL;
+    g_slist_free (control_class_info_list);
+    control_class_info_list = NULL;
 }
 
-GSList *
-get_control_class_list (void)
+void 
+control_class_set_unique (ControlClass *cclass, gboolean unique)
 {
-    return control_class_list;
+    ControlClassInfo *info;
+
+    info = get_control_class_info (cclass);
+
+    info->unique = unique;
 }
 
-/* Control right click menu 
- * ------------------------
+void 
+control_class_set_icon (ControlClass *cclass, GdkPixbuf *icon)
+{
+    ControlClassInfo *info;
+
+    info = get_control_class_info (cclass);
+
+    info->icon = g_object_ref (icon);
+}
+
+void 
+control_class_unref (ControlClass *cclass)
+{
+    ControlClassInfo *info;
+
+    info = get_control_class_info (cclass);
+
+    DBG ("decrease refcount: %s (%d)", info->caption, info->refcount);
+    
+    if (info && info->refcount > 0)
+	info->refcount--;
+}
+
+
+/*  Controls
+ *  --------
 */
+
+/* right-click menu */
+
 static Control *popup_control = NULL;
 
 static void
@@ -269,7 +419,7 @@ remove_control (void)
 	pp = groups_get_popup (popup_control->index);
 
 	if (!(popup_control->with_popup) || !pp || pp->items == NULL ||
-	    confirm (_("Removing an item will also remove its popup menu.\n\n"
+	    confirm (_("Removing the item will also remove its popup menu.\n\n"
 		       "Do you want to remove the item?"),
 		     GTK_STOCK_REMOVE, NULL))
 	{
@@ -281,10 +431,9 @@ remove_control (void)
 }
 
 static void
-add_control (gpointer data, int n, GtkWidget * w)
+add_control (GtkWidget * w, ControlClassInfo *info)
 {
     gboolean hidden = settings.autohide;
-    ControlClass *cc;
     Control *control;
     int index;
 
@@ -297,18 +446,21 @@ add_control (gpointer data, int n, GtkWidget * w)
 	    gtk_main_iteration ();
     }
 
-    cc = g_slist_nth (control_class_list, n - 1)->data;
-
     index = popup_control ? popup_control->index : -1;
 
-    groups_add_control (cc->id, cc->filename, index);
+    control = control_new (index);
+    control->cclass = info->class;
+    
+    if (control_class_info_create_control (info, control))
+    {
+	groups_add_control (control, index);
+	control_attach_callbacks (control);
+	control_set_settings (control);
 
-    control = groups_get_control (index >= 0 ? index :
-				  settings.num_groups - 1);
+	controls_dialog (control);
 
-    controls_dialog (control);
-
-    write_panel_config ();
+	write_panel_config ();
+    }
 
     popup_control = NULL;
 
@@ -317,6 +469,8 @@ add_control (gpointer data, int n, GtkWidget * w)
 }
 
 static GtkItemFactoryEntry control_items[] = {
+    {"/Item", NULL, NULL, 0, "<Title>"},
+    {"/sep", NULL, NULL, 0, "<Separator>"},
     {N_("/Add _new item"), NULL, NULL, 0, "<Branch>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
     {N_("/_Properties..."), NULL, edit_control, 0, "<Item>"},
@@ -334,42 +488,35 @@ translate_menu (const char *msg)
 #endif
 }
 
-void
-free_controls_menu_entries (GtkItemFactoryEntry * entries, int n)
+GtkWidget *
+get_controls_submenu (void)
 {
-    int i;
-
-    for (i = 0; i < n; i++)
-    {
-	g_free ((entries + i)->path);
-    }
-
-    g_free (entries);
-}
-
-
-int
-get_controls_menu_entries (GtkItemFactoryEntry ** entries, const char *base)
-{
+    static GtkWidget *menu = NULL;
     GSList *li;
-    int i, n;
-    GtkItemFactoryEntry *entry;
+    
+    if (menu)
+	gtk_widget_destroy (menu);
 
-    n = g_slist_length (control_class_list);
-    *entries = g_new0 (GtkItemFactoryEntry, n);
-
-    for (entry = *entries, li = control_class_list, i = 1;
-	 li; li = li->next, entry++, i++)
+    menu = gtk_menu_new ();
+    
+    for (li = control_class_info_list; li != NULL; li = li->next)
     {
-	ControlClass *cc = li->data;
+	ControlClassInfo *info = li->data;
+	GtkWidget *item;
 
-	entry->path = g_strconcat (base, "/", cc->caption, NULL);
-	entry->callback = add_control;
-	entry->callback_action = i;
-	entry->item_type = "<Item>";
+	DBG ("info: %s (%s)", info->caption, info->name);
+	
+	item = gtk_menu_item_new_with_label (info->caption);
+	gtk_widget_show (item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+	g_signal_connect (item, "activate", G_CALLBACK (add_control), info);
+
+	if (info->unique && info->refcount > 0)
+	    gtk_widget_set_sensitive (item, FALSE);
     }
 
-    return n;
+    return menu;
 }
 
 static GtkWidget *
@@ -377,27 +524,29 @@ get_control_menu (void)
 {
     static GtkItemFactory *factory;
     static GtkWidget *menu = NULL;
+    GtkWidget *submenu, *item;
 
     if (!menu)
     {
-	GtkItemFactoryEntry *entries;
-	int n_entries;
-
 	factory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
 
 	gtk_item_factory_set_translate_func (factory,
 					     (GtkTranslateFunc)
 					     translate_menu, NULL, NULL);
+
 	gtk_item_factory_create_items (factory, G_N_ELEMENTS (control_items),
 				       control_items, NULL);
 
-	n_entries = get_controls_menu_entries (&entries, "/Add new item");
-
-	gtk_item_factory_create_items (factory, n_entries, entries, NULL);
-
-/*	free_controls_menu_entries(entries, n_entries);*/
 	menu = gtk_item_factory_get_widget (factory, "<popup>");
     }
+
+    g_assert (menu != NULL);
+    
+    /* the third item, keep in sync with factory */
+    item = GTK_MENU_SHELL (menu)->children->next->next->data;
+    
+    submenu = get_controls_submenu();
+    gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
 
     return menu;
 }
@@ -410,7 +559,7 @@ control_press_cb (GtkWidget * b, GdkEventButton * ev, Control * control)
 
     if (ev->button == 3 || (ev->button == 1 && (ev->state & GDK_SHIFT_MASK)))
     {
-	GtkWidget *menu;
+	GtkWidget *menu, *item, *label;
 
 	hide_current_popup_menu ();
 
@@ -419,6 +568,12 @@ control_press_cb (GtkWidget * b, GdkEventButton * ev, Control * control)
 	popup_control = control;
 
 	menu = get_control_menu ();
+
+	/* update first item */
+	item = GTK_MENU_SHELL(menu)->children->data;
+	label = gtk_bin_get_child (GTK_BIN (item));
+	gtk_label_set_text (GTK_LABEL (label), 
+			    popup_control->cclass->caption);
 
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
 			ev->button, ev->time);
@@ -431,64 +586,65 @@ control_press_cb (GtkWidget * b, GdkEventButton * ev, Control * control)
     }
 }
 
-/*  Controls creation and destruction 
- *  ---------------------------------
-*/
+/* creation and destruction */
+
 static gboolean
 create_plugin (Control * control, const char *filename)
 {
     GSList *li = NULL;
-    ControlClass *cc;
+    ControlClassInfo *info;
 
-    li = g_slist_find_custom (control_class_list, filename,
-			      lookup_classes_by_filename);
+    li = g_slist_find_custom (control_class_info_list, filename,
+			      lookup_info_by_filename);
 
     if (!li)
 	return FALSE;
 
-    cc = control->cclass = li->data;
+    info = li->data;
+    control->cclass = info->class;
 
-    return cc->create_control (control);
+    return control_class_info_create_control (info, control);
 }
 
 static void
 create_launcher (Control * control)
 {
-    /* we know it is the first item in the list */
-    control->cclass = control_class_list->data;
+    ControlClassInfo *info;
 
-    control->cclass->create_control (control);
+    /* we know it is the first item in the list */
+    info = control_class_info_list->data;
+    control->cclass = info->class;
+
+    /* we also assume it never fails ;-) */
+    info->class->create_control (control);
+    info->refcount++;
 }
 
-void
+gboolean
 create_control (Control * control, int id, const char *filename)
 {
     ControlClass *cc;
 
-    switch (id)
+    if (id == PLUGIN)
     {
-	case PLUGIN:
-	    if (!create_plugin (control, filename))
-		create_launcher (control);
-	    break;
-	default:
-	    create_launcher (control);
+	if (!create_plugin (control, filename))
+	    goto failed;
+    }
+    else
+    {
+	create_launcher (control);
     }
 
     /* the control class is set in the create_* functions above */
     cc = control->cclass;
 
-    /* these are required for proper operation */
-    if (!gtk_bin_get_child (GTK_BIN (control->base)))
-    {
-	if (cc && cc->free)
-	    cc->free (control);
-
-	create_launcher (control);
-    }
-
     control_attach_callbacks (control);
     control_set_settings (control);
+
+    return TRUE;
+    
+failed:
+    return FALSE;
 }
 
 Control *
@@ -548,11 +704,8 @@ control_attach_callbacks (Control * control)
 		      G_CALLBACK (control_press_cb), control);
 }
 
-/*  Controls configuration
- *  ----------------------
-*/
+/* controls configuration */
 
-/* module configuration */
 static void
 control_read_config (Control * control, xmlNodePtr node)
 {
@@ -571,8 +724,7 @@ control_write_config (Control * control, xmlNodePtr node)
 	cc->write_config (control, node);
 }
 
-/* control configuration */
-void
+gboolean
 control_set_from_xml (Control * control, xmlNodePtr node)
 {
     xmlChar *value;
@@ -582,7 +734,7 @@ control_set_from_xml (Control * control, xmlNodePtr node)
     if (!node)
     {
 	create_control (control, ICON, NULL);
-	return;
+	return TRUE;
     }
 
     /* get id and filename */
@@ -598,7 +750,12 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 	filename = (char *) xmlGetProp (node, (const xmlChar *) "filename");
 
     /* create a default control of specified type */
-    create_control (control, id, filename);
+    if (!create_control (control, id, filename))
+    {
+	g_free (filename);
+	return FALSE;
+    }
+
     g_free (filename);
 
     /* hide popup? also check if added to the panel */
@@ -607,6 +764,8 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 
     /* allow the control to read its configuration */
     control_read_config (control, node);
+
+    return TRUE;
 }
 
 void
@@ -628,7 +787,6 @@ control_write_xml (Control * control, xmlNodePtr parent)
     control_write_config (control, node);
 }
 
-/* options dialog */
 void
 control_create_options (Control * control, GtkContainer * container,
 			GtkWidget * done)
@@ -662,9 +820,8 @@ control_create_options (Control * control, GtkContainer * container,
     }
 }
 
-/*  Controls global preferences
- *  ---------------------------
-*/
+/* controls global preferences */
+
 void
 control_set_settings (Control * control)
 {

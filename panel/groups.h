@@ -35,7 +35,7 @@ void groups_register_control (Control * control);
 Control *groups_get_control (int index);
 PanelPopup *groups_get_popup (int index);
 
-void groups_add_control (int id, const char *filename, int index);
+void groups_add_control (Control *control, int index);
 void groups_move (int from, int to);
 void groups_remove (int index);
 void groups_show_popup (int index, gboolean show);

@@ -444,13 +444,11 @@ static GtkMenu *
 get_handle_menu (void)
 {
     static GtkMenu *menu = NULL;
-    GtkItemFactory *ifactory;
+    static GtkItemFactory *ifactory;
+    GtkWidget *submenu, *item;
 
     if (!menu)
     {
-	GtkItemFactoryEntry *entries;
-	int n_entries;
-
 	ifactory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
 
 	gtk_item_factory_set_translate_func (ifactory,
@@ -459,14 +457,14 @@ get_handle_menu (void)
 	gtk_item_factory_create_items (ifactory, G_N_ELEMENTS (panel_items),
 				       panel_items, NULL);
 
-	n_entries = get_controls_menu_entries (&entries, "/Add new item");
-
-	gtk_item_factory_create_items (ifactory, n_entries, entries, NULL);
-
-/*	free_controls_menu_entries(entries, n_entries); */
-
 	menu = GTK_MENU (gtk_item_factory_get_widget (ifactory, "<popup>"));
     }
+
+    /* the third item, keep in sync with factory */
+    item = GTK_MENU_SHELL (menu)->children->next->next->data;
+    
+    submenu = get_controls_submenu();
+    gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
 
     return menu;
 }

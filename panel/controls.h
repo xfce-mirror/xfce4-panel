@@ -53,6 +53,9 @@ struct _ControlClass
     void (*set_orientation) (Control * control, int orientation);
     void (*set_size) (Control * control, int size);
     void (*set_theme) (Control * control, const char *theme);
+
+    /* open about dialog */
+    void (*about) (void);
 };
 
 struct _Control
@@ -69,27 +72,33 @@ struct _Control
 
 #define CONTROL_CLASS(cc) ((ControlClass*) cc)
 
-/* control class list */
+/* control classes */
 void control_class_list_init (void);
 
 void control_class_list_cleanup (void);
 
-GSList *get_control_class_list (void);
+void control_class_set_icon (ControlClass *cclass, GdkPixbuf *icon);
+
+void control_class_set_unique (ControlClass *cclass, gboolean unique);
+
+void control_class_unref (ControlClass *cclass);
 
 /* add controls menu */
-void free_controls_menu_entries (GtkItemFactoryEntry * entries, int n);
-int get_controls_menu_entries (GtkItemFactoryEntry ** entries,
-			       const char *base);
+GtkWidget *get_controls_submenu (void);
 
 /* controls */
 Control *control_new (int index);
-void create_control (Control * control, int id, const char *filename);
+
+gboolean create_control (Control * control, int id, const char *filename);
+
 void control_free (Control * control);
 
-void control_set_from_xml (Control * control, xmlNodePtr node);
+gboolean control_set_from_xml (Control * control, xmlNodePtr node);
+
 void control_write_xml (Control * control, xmlNodePtr parent);
 
 void control_pack (Control * control, GtkBox * box);
+
 void control_unpack (Control * control);
 
 void control_attach_callbacks (Control * control);
@@ -101,7 +110,9 @@ void control_create_options (Control * control, GtkContainer * container,
 void control_set_settings (Control * control);
 
 void control_set_orientation (Control * control, int orientation);
+
 void control_set_size (Control * control, int size);
+
 void control_set_theme (Control * control, const char *theme);
 
 #endif /* __XFCE_CONTROLS_H__ */
