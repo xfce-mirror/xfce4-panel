@@ -111,7 +111,7 @@ GtkWidget *create_scrolled_text_view(const char *file)
     return frame;
 }
 
-static GtkWidget *create_header(void)
+static GtkWidget *create_info_header(void)
 {
     GtkWidget *vbox1, *vbox2;
     GdkPixbuf *logo_pb;
@@ -280,7 +280,7 @@ void info_panel_dialog(void)
     gtk_container_add(GTK_CONTAINER(info), vbox);
 
     /* header with logo */
-    header = create_header();
+    header = create_info_header();
     gtk_box_pack_start(GTK_BOX(vbox), header, FALSE, FALSE, 0);
 
     /* the notebook */

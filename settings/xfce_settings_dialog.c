@@ -821,7 +821,7 @@ static void dialog_response(GtkWidget *dialog, int response)
 
 void run_xfce_settings_dialog(McsPlugin *mp)
 {
-    GtkWidget *frame, *vbox, *button;
+    GtkWidget *header, *frame, *vbox, *button;
 /*    GtkWidget *notebook, *label;
     char *markup;*/
 
@@ -837,14 +837,13 @@ void run_xfce_settings_dialog(McsPlugin *mp)
 
     xfce_create_backup();
 
-    /* we may have to recreate the panel so safe the changes now */
+    /* we may have to recreate the panel so save the changes now */
     dialog =
         gtk_dialog_new_with_buttons(_("XFce Panel Preferences"),
                                     NULL,
                                     GTK_DIALOG_NO_SEPARATOR,
                                     NULL);
 
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
 
     revert = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
@@ -856,6 +855,11 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
 
+    /* pretty header */
+    header = create_header(mp->icon, _("Panel settings"));
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), header, 
+	    	       TRUE, TRUE, 0);
+    
     /* main notebook 
     notebook = gtk_notebook_new();
     gtk_widget_show(notebook);
