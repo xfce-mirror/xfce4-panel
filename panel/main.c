@@ -135,11 +135,13 @@ static void sighandler(int sig)
 {
     switch (sig)
     {
-        case SIGHUP:
+#if 0
+	case SIGHUP:
 	    /* sleep for a second, we may be exiting X */
 	    g_usleep(1000000);
 	    restart();
 	    break;
+#endif
 	case SIGINT:
 	    /* hack: prevent the panel from saving config */
 	    disable_user_config = TRUE;
