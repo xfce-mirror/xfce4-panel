@@ -860,10 +860,10 @@ Optional Features:
   --enable-static=PKGS  build static libraries default=yes
   --enable-fast-install=PKGS  optimize for fast installation default=yes
   --disable-libtool-lock  avoid locking (might break parallel builds)
-  --enable-startup-notification-check
+  --enable-startup-notification
                           Enable checking for startup notification library
-                          (default)
-  --disable-startup-notification-check
+                          (default=yes)
+  --disable-startup-notification
                           Disable checking for startup notification library
   --enable-debug=yes|no|full
                           Build with debugging support
@@ -8552,9 +8552,9 @@ echo "$as_me: error: Library requirements (xfce-mcs-manager >= 0.1.0) not met; c
 
 
 
-  # Check whether --enable-startup-notification-check or --disable-startup-notification-check was given.
-if test "${enable_startup_notification_check+set}" = set; then
-  enableval="$enable_startup_notification_check"
+  # Check whether --enable-startup-notification or --disable-startup-notification was given.
+if test "${enable_startup_notification+set}" = set; then
+  enableval="$enable_startup_notification"
   ac_cv_LIBSTARTUP_NOTIFICATION_check=$enableval
 else
   ac_cv_LIBSTARTUP_NOTIFICATION_check=yes
@@ -8697,7 +8697,7 @@ cat >>confdefs.h <<\_ACEOF
 #define DEBUG 1
 _ACEOF
 
-    if test x"$ac_cv_debug" = x"full"; then
+    if test x"$enable_debug" = x"full"; then
 
 cat >>confdefs.h <<\_ACEOF
 #define DEBUG_TRACE 1
