@@ -271,9 +271,9 @@ static void size_menu_changed(GtkOptionMenu * menu)
             gtk_widget_set_sensitive(style_menu, TRUE);
         }
     }
-    else if(n != settings.popup_size)
+    else if(n+1 != settings.popup_size)
     {
-        panel_set_popup_size(n);
+        panel_set_popup_size(n+1);
     }
     else
     {
@@ -312,7 +312,8 @@ static void add_size_menu(GtkWidget * option_menu, int size, gboolean is_popup)
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
     gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), size);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), 
+	    			is_popup ? size -1 : size);
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(size_menu_changed),
                      NULL);
