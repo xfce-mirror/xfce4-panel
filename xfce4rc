@@ -39,10 +39,16 @@
     <Group>
       <Popup>
         <Item>
-          <Caption>Root Terminal</Caption>
-          <Command term="0" sn="0">xfterm4 -e &quot;su -&quot;</Command>
-          <Tooltip>Run 'su -' in terminal</Tooltip>
-          <Icon id="12"/>
+          <Caption>XFce Settings</Caption>
+          <Command term="0" sn="0">xfce-setting-show</Command>
+          <Tooltip>XFce Settings Manager</Tooltip>
+          <Icon id="3"/>
+        </Item>
+        <Item>
+          <Caption>Screensaver ...</Caption>
+          <Command term="0" sn="1">xscreensaver-demo</Command>
+          <Tooltip>Screensaver options</Tooltip>
+          <Icon id="4"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
@@ -62,7 +68,7 @@
         <Item>
           <Caption>OpenOffice.org</Caption>
           <Command term="0" sn="0">soffice</Command>
-          <Tooltip>Write, Calc, Impress, ...</Tooltip>
+	  <Tooltip>Wordprocessor, spreadsheet, presentations, ...</Tooltip>
           <Icon id="10"/>
         </Item>
         <Item>
@@ -93,22 +99,22 @@
     <Group>
       <Popup>
         <Item>
-          <Caption>FTP client</Caption>
-          <Command term="0" sn="1">gftp</Command>
-          <Tooltip>gFtp</Tooltip>
-          <Icon id="3"/>
+          <Caption>MPlayer</Caption>
+          <Command term="0" sn="0">gmplayer</Command>
+          <Tooltip>Movie player</Tooltip>
+          <Icon id="6"/>
         </Item>
         <Item>
-          <Caption>Dillo</Caption>
-          <Command term="0" sn="0">dillo</Command>
-          <Tooltip>Fast Web Browser</Tooltip>
-          <Icon id="7"/>
+          <Caption>XMMS</Caption>
+          <Command term="0" sn="0">xmms</Command>
+          <Tooltip>Sound player</Tooltip>
+          <Icon id="11"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
-        <Command term="0" sn="0">mozilla</Command>
-        <Tooltip>Browser suite</Tooltip>
-        <Icon id="7"/>
+        <Command term="0" sn="1">gimp</Command>
+        <Tooltip>Gimp image manipulation</Tooltip>
+        <Icon id="8"/>
       </Control>
     </Group>
     <Group>
@@ -134,26 +140,27 @@
     <Group>
       <Popup>
         <Item>
-          <Caption>MPlayer</Caption>
-          <Command term="0" sn="0">gmplayer</Command>
-          <Tooltip>Movie player</Tooltip>
-          <Icon id="6"/>
+          <Caption>FTP client</Caption>
+          <Command term="0" sn="1">gftp</Command>
+          <Tooltip>gFtp</Tooltip>
+          <Icon id="3"/>
         </Item>
         <Item>
-          <Caption>XMMS</Caption>
-          <Command term="0" sn="0">xmms</Command>
-          <Tooltip>Sound player</Tooltip>
-          <Icon id="11"/>
+          <Caption>Dillo</Caption>
+          <Command term="0" sn="0">dillo</Command>
+          <Tooltip>Fast Web Browser</Tooltip>
+          <Icon id="7"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
-        <Command term="0" sn="1">gimp</Command>
-        <Tooltip>Gimp image manipulation</Tooltip>
-        <Icon id="8"/>
+        <Command term="0" sn="0">mozilla</Command>
+        <Tooltip>Mozilla browser suite</Tooltip>
+        <Icon id="7"/>
       </Control>
     </Group>
     <Group>
-      <Control id="-1" filename="libmailcheck.so" />
+      <Popup/>
+      <Control id="-1" filename="libmailcheck.so"/>
     </Group>
     <Group>
       <Popup/>
