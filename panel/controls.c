@@ -310,6 +310,11 @@ static GtkItemFactoryEntry control_items[] = {
   { N_("/Add _new item"), NULL, add_control,    0, "<Item>" }
 };
 
+static const char *translate_menu(const char *msg)
+{
+    return gettext(msg);
+}
+
 static GtkWidget *get_control_menu(void)
 {
     static GtkItemFactory *factory;
@@ -320,7 +325,7 @@ static GtkWidget *get_control_menu(void)
         factory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
        
 	gtk_item_factory_set_translate_func(factory, 
-					    (GtkTranslateFunc) gettext,
+					    (GtkTranslateFunc) translate_menu,
 					    NULL, NULL);
         gtk_item_factory_create_items(factory, G_N_ELEMENTS(control_items),
 				      control_items, NULL);

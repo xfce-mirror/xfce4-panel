@@ -120,6 +120,11 @@ static GtkItemFactoryEntry panel_items[] = {
   { N_("/E_xit"),        NULL, exit_panel,  0, "<Item>" },
 };
 
+static const char *translate_menu(const char *msg)
+{
+    return gettext(msg);
+}
+
 static GtkMenu *create_handle_menu(void)
 {
     static GtkMenu *menu = NULL;
@@ -130,7 +135,7 @@ static GtkMenu *create_handle_menu(void)
 	ifactory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
 
 	gtk_item_factory_set_translate_func(ifactory, 
-					    (GtkTranslateFunc) gettext,
+					    (GtkTranslateFunc) translate_menu,
 					    NULL, NULL);
 	gtk_item_factory_create_items(ifactory, G_N_ELEMENTS(panel_items), 
 				      panel_items, NULL);
