@@ -33,7 +33,6 @@
 #include "iconbutton.h"
 #include "callbacks.h"
 #include "xfce.h"
-#include "xfce_clock.h"
 
 #include "debug.h"
 

@@ -101,7 +101,7 @@ enum
 {
     ICON = -2,
     PLUGIN = -1,
-    CLOCK,
+    DUMMY, /* used to be the clock */
     TRASH,
     EXIT,
     CONFIG,
