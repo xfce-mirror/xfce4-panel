@@ -168,13 +168,13 @@
       <tt class="filename">${sysconfdir}/xdg/xfce4/kiosk/kioskrc</tt>.
     </p><p>The best way to explain the format of this file is by using an 
       example. The xfce4-panel section of your kioskrc might look like this:
-    </p><table border="0" bgcolor="#E0E0E0" width="100%"><tr><td><pre class="programlisting">
+    </p><table border="0" bgcolor="#F3F4F8" width="100%"><tr><td><pre class="programlisting">
 [xfce4-panel]
 CustomizePanel=%powerusers,foo
 </pre></td></tr></table><p>This allows only users in the group powerusers and the user foo to 
       customize their panels.
     </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-transparency"></a>Transparency</h3></div></div></div><p>Please, note that transparency only works with an X server that
-      supports the XComposite extension, like XOrg &gt;= 6.8.0 and the
+      supports the Composite extension, like XOrg &gt;= 6.8.0 and the
       composite extension has been enabled in the configuration file and
       the window manager supports it (e.g. 
       <b class="application"><tt>xfwm4</tt></b> has to be compiled with 
@@ -189,7 +189,7 @@ CustomizePanel=%powerusers,foo
       <span class="emphasis"><em><tt class="option">panel=&lt;value&gt;</tt></em></span>, where
       value is a number between 0 and 100. Setting it to 0 effectively turns
       transparency off.
-    </p><p>For example, a transparency file may look like this:</p><table border="0" bgcolor="#E0E0E0" width="100%"><tr><td><pre class="programlisting">panel=25
+    </p><p>For example, a transparency file may look like this:</p><table border="0" bgcolor="#F3F4F8" width="100%"><tr><td><pre class="programlisting">panel=25
 iconbox=0</pre></td></tr></table></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-copyright"></a>About <b class="application"><tt>xfce4-panel</tt></b></h2></div></div></div><p><b class="application"><tt>xfce4-panel</tt></b> was written by Jasper Huijsmans 
     (<tt class="email">&lt;<a href="mailto:jasper@xfce.org">jasper@xfce.org</a>&gt;</tt>). To find more information, please visit 
     the <a href="http://www.xfce.org" target="_top">Xfce web site</a>. 
