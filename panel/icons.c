@@ -72,7 +72,7 @@ static void set_icon_names()
     icon_names[++i] = _("Network");
     icon_names[++i] = _("Graphics");
     icon_names[++i] = _("Printer");
-    icon_names[++i] = _("Productvity");
+    icon_names[++i] = _("Productivity");
     icon_names[++i] = _("Sound");
     icon_names[++i] = _("Terminal");
 }
