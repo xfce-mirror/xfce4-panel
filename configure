@@ -19712,7 +19712,7 @@ cat >>confdefs.h <<\_ACEOF
 _ACEOF
 
 
-  ALL_LINGUAS="ca de es es_MX fr fi hi hu ms nl ja pl ru ta tr zh_CN"
+  ALL_LINGUAS="ca de es es_MX fr fi hi hu ms nl ja ko pl ru ta tr zh_CN"
 
 
 
@@ -22292,7 +22292,7 @@ _ACEOF
           ;;
         esac
       done
-      if ! echo $LIBX11_LIBS | grep -q -- '-lX11'; then
+      if ! echo $LIBX11_LIBS | grep -- '-lX11' > /dev/null; then
         LIBX11_LIBS="$LIBX11_LIBS -lX11"
       fi
 
