@@ -955,17 +955,20 @@ create_menu_item_dialog (Item * mi)
     config_item = mi;
 
     /* position */
-    frame = gtk_frame_new (NULL);
-    gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-    gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (main_vbox), frame, FALSE, TRUE, 0);
+    if (num_items > 1)
+    {
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+	gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
+	gtk_widget_show (frame);
+	gtk_box_pack_start (GTK_BOX (main_vbox), frame, FALSE, TRUE, 0);
 
-    gtk_container_add (GTK_CONTAINER (frame), create_position_option ());
-    
-    sep = gtk_hseparator_new ();
-    gtk_widget_show (sep);
-    gtk_box_pack_start (GTK_BOX (main_vbox), sep, FALSE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (frame), create_position_option ());
+	
+	sep = gtk_hseparator_new ();
+	gtk_widget_show (sep);
+	gtk_box_pack_start (GTK_BOX (main_vbox), sep, FALSE, TRUE, 0);
+    }
 
     /* other options */
     frame = gtk_frame_new (NULL);
