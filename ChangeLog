@@ -1,0 +1,113 @@
+2002-06-17 22:32  huysmans
+
+	* ChangeLog, INSTALL, Makefile.am, Makefile.in, NEWS, aclocal.m4,
+	autogen.sh, compile, config.guess, config.h.in, config.sub,
+	configure, configure.ac, depcomp, example.xfce4rc.in, install-sh,
+	ltmain.sh, missing, mkinstalldirs, xfce4.spec.in,
+	icons/Makefile.am, icons/Makefile.in, panel/Makefile.am,
+	panel/Makefile.in, panel/builtins.c, panel/builtins.h,
+	panel/callbacks.c, panel/callbacks.h, panel/central.c,
+	panel/central.h, panel/dialogs.c, panel/dialogs.h, panel/dnd.c,
+	panel/dnd.h, panel/global.h, panel/icons.c, panel/icons.h,
+	panel/item.c, panel/item.h, panel/module.c, panel/module.h,
+	panel/move.c, panel/move.h, panel/popup.c, panel/popup.h,
+	panel/settings.c, panel/settings.h, panel/side.c, panel/side.h,
+	panel/wmhints.c, panel/wmhints.h, panel/xfce.c, panel/xfce.h,
+	plugins/Makefile.am, plugins/Makefile.in,
+	plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
+	plugins/mailcheck/mailcheck.c, themes/Makefile.am,
+	themes/Makefile.in, themes/Gnome/Makefile.am,
+	themes/Gnome/Makefile.in, themes/Gnome/edit.png,
+	themes/Gnome/file1.png, themes/Gnome/file2.png,
+	themes/Gnome/games.png, themes/Gnome/man.png,
+	themes/Gnome/multimedia.png, themes/Gnome/network.png,
+	themes/Gnome/paint.png, themes/Gnome/print.png,
+	themes/Gnome/schedule.png, themes/Gnome/sound.png,
+	themes/Gnome/terminal.png, themes/Gnome/trash_empty.png,
+	themes/Gnome/trash_full.png, themes/Gnome/unknown.png: (Re)add all
+	files and automake framework
+
+2002-06-17 22:18  huysmans
+
+	* plugins/Makefile: removing old files, before putting them in new
+	locations (2)
+
+2002-06-17 22:14  huysmans
+
+	* builtins.c, builtins.h, callbacks.c, callbacks.h, central.c,
+	central.h, dialogs.c, dialogs.h, dnd.c, dnd.h, global.h, icons.c,
+	icons.h, item.c, item.h, module.c, module.h, move.c, move.h,
+	popup.c, popup.h, settings.c, settings.h, side.c, side.h,
+	wmhints.c, wmhints.h, xfce.c, xfce.h, plugins/mailcheck.c: removing
+	old files, before putting them in new locations
+
+2002-06-14 15:52  xfce
+
+	* dialogs.c: Fixed a typo (Apearance => Appearance)
+
+2002-06-11 22:24  huysmans
+
+	* dialogs.c, icons.c, xfce.c, plugins/mailcheck.c: Panel settings
+	dialog seems to work now, initial icon theme support
+
+2002-06-11 16:42  huysmans
+
+	* dialogs.c, wmhints.c: Settings dialog now works
+
+2002-06-11 08:24  huysmans
+
+	* callbacks.c, dialogs.c, dialogs.h, wmhints.c, xfce.c, xfce.h:
+	Initial global settings dialog and fork() panel at startup
+
+2002-06-09 22:53  huysmans
+
+	* callbacks.c, dialogs.c: allow running command in terminal
+
+2002-06-09 22:27  huysmans
+
+	* callbacks.c, callbacks.h, dialogs.c, item.c, item.h, popup.c,
+	popup.h, settings.c, settings.h, xfce.c: make xml parsing replace
+	entities
+
+2002-06-09 19:12  huysmans
+
+	* settings.c: Fixed crash when no configuration file was found
+
+2002-06-09 17:49  huysmans
+
+	* Makefile, README, README.xml, builtins.c, builtins.h,
+	callbacks.c, callbacks.h, central.c, central.h, dialogs.c,
+	dialogs.h, dnd.c, dnd.h, example.xfce4rc, global.h, icons.c,
+	icons.h, item.c, item.h, module.c, module.h, move.c, move.h,
+	popup.c, popup.h, settings.c, settings.h, side.c, side.h,
+	wmhints.c, wmhints.h, xfce.c, xfce.h, plugins/mailcheck.c: Major
+	update
+
+2002-05-21 22:48  huysmans
+
+	* dialogs.c, plugins/mailcheck.c: change dialog button order and
+	other dialog fixes
+
+2002-05-20 20:03  huysmans
+
+	* example.xfce4rc: example config file
+
+2002-05-20 16:56  huysmans
+
+	* Makefile, README, README.xml, builtins.c, builtins.h,
+	callbacks.c, callbacks.h, central.c, central.h, dialogs.c,
+	dialogs.h, icons.c, icons.h, item.c, item.h, module.c, module.h,
+	move.c, move.h, popup.c, popup.h, settings.c, settings.h, side.c,
+	side.h, wmhints.c, wmhints.h, xfce.c, xfce.h, icons/addicon.xpm,
+	icons/close.xpm, icons/diag_icon.xpm, icons/down.xpm,
+	icons/edit.xpm, icons/file1.xpm, icons/file2.xpm, icons/games.xpm,
+	icons/handle.xpm, icons/iconify.xpm, icons/mail.xpm, icons/man.xpm,
+	icons/menu_icon.xpm, icons/miniinfo.xpm, icons/minilock.xpm,
+	icons/minipalet.xpm, icons/minipower.xpm, icons/multimedia.xpm,
+	icons/network.xpm, icons/nomail.xpm, icons/oldmail.xpm,
+	icons/paint.xpm, icons/print.xpm, icons/schedule.xpm,
+	icons/sound.xpm, icons/terminal.xpm, icons/trash_empty.xpm,
+	icons/trash_full.xpm, icons/unknown.xpm, icons/up.xpm,
+	icons/xfce_icon.xpm, plugins/Makefile, plugins/mailcheck.c: Add
+	gtk2 based panel
+
