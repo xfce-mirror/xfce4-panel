@@ -1,0 +1,115 @@
+.\" SCCS ID: xfce.1 3.0.0 12/06/1999
+.TH xfce 1F "Olivier Fourdan"
+.SH NAME
+xfce \- The Cholesterol Free Desktop Environment
+.SH SYNOPSYS
+.B xfce
+[--display host:dpy] [-nowm]
+.PP
+.TP 6
+.BI \--display " host:dpy"
+specifies the server to connect to.
+.TP
+.BI \-nowm 
+disable detection of window manager when used as XFwm module.
+.PP
+.PP
+.SH DESCRIPTION
+xfce is an easy-to-use and easy-to-configure toolbar for X11. 
+Features pulldown menus with color icons, 3D widgets, etc. 
+It's designed to work with XFwm, (window manager shipped with xfce)
+.PP
+xfce requires an X-based workstation or X-Terminal.  If you
+have used telnet or rlogin to access the host system, set
+the Unix environment variable for your display:
+.PP
+% export DISPLAY devicename:0
+.PP
+.PP
+When you first start xfce, it creates an empty configuration file (.xfce3rc)
+in your home directory.
+.PP
+Of course, nothing is defined, so, menus are empty. To add a new file in a menu,
+first open it by clicking on the little arrow. then choose "Add icon...", and
+fill out all fields (command, pixmap and label).
+.PP
+You can also drag programs onto the "Add icon..." button to easily add entries 
+to the corresponding menu.
+.PP
+Modification and removal of existing items in menus can be performed with the 
+right mouse button.
+.PP
+To define programs associated with the icons on the panel, use the right mouse button.
+Enter the command line and press "enter" to validate. Press "escape" to cancel.
+You can also choose the icon to be displayed on the front panel. Click on the down 
+arrow and choose a category (Files related, Terminal connections, Writting/text tools, etc.)
+.PP
+Drag and Drop is also supported. You can drag files from XFTree (file manager 
+shipped with xfce) or any other GTK+ based filemanager (GNOME included) and
+drop it onto the panel to start the corresponding application with the files 
+dragged.
+.PP
+To change the name of screens, just click on button with right mouse button.
+.PP
+.SH PREDEFINED KEYWORDS
+.PP
+A number of applications shipped with xfce/XFwm must cooperate closely with the window
+manager. Those applications are called "modules" and must be started from xfwm
+itself or from xfce.
+In order to start XFwm's modules, xfce has to be started as a module itself 
+(This is the default unless you've started xfce from the command line). 
+.PP
+Use the keyword
+.I
+Module
+to indicate that your command has to be considered as a module. Then enter 
+your command, just like you would do in XFwm's configuration file.
+.PP
+.PP
+Example : To start the module xfpager, use
+.PP
+.nf
+.sp
+Module xfpager
+.sp
+.fi
+.PP
+Some other applications, basically console text based applications cannot be 
+started as an X application directly (this may cause the X server to hang)
+.PP
+For this, xfce provides the keyword 
+.I
+Term
+to indicate that xfce has to start a terminal first to be able to execute the
+command.
+.PP
+.PP
+Example : To start the program vi, use
+.PP
+.nf
+.sp
+Term vi
+.sp
+.fi
+.PP
+.SH ENVIRONMENT VARIABLE
+XFCE_DATA: By default, xfce looks for its data in the directory specified at compile time.
+This directory can be overridden with the environment variable XFCE_DATA.
+.PP
+DISABLE_XFCE_USER_CONFIG: When set to 1 or yes, xfce won't allow any user specific
+configuration, it will not even read user's configuration. This is for people
+using xfce on "set top boxes" or for making a terminal publicly available.
+.PP
+.SH FILES
+.PP
+.I ~/.xfce3rc
+contains the user preferences for xfce.
+.P
+This file is not supposed to be edited by hand.
+.PP
+.SH SEE ALSO
+xfce, xftree, xfwm, xfpager, xfsound, xfmouse, xfbd, xfclock
+.PP
+.SH AUTHOR
+Olivier Fourdan (fourdan@xfce.org)
+.PP
