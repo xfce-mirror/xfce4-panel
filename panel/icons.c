@@ -21,49 +21,10 @@
 #include "icons.h"
 #include "xfce_support.h"
 
-/* launcher and menu icons */
-
-#include "icons/unknown.xpm"
-
-#include "icons/edit.xpm"
-#include "icons/file1.xpm"
-#include "icons/file2.xpm"
-#include "icons/games.xpm"
-#include "icons/man.xpm"
-#include "icons/multimedia.xpm"
-#include "icons/network.xpm"
-#include "icons/paint.xpm"
-#include "icons/print.xpm"
-#include "icons/schedule.xpm"
-#include "icons/sound.xpm"
-#include "icons/terminal.xpm"
-
-/* system icons */
-
-/* icons for the panel */
-#include "icons/minilock.xpm"
-#include "icons/miniinfo.xpm"
-#include "icons/minipalet.xpm"
-#include "icons/minipower.xpm"
-
-#include "icons/addicon.xpm"
-#include "icons/up.xpm"
-#include "icons/down.xpm"
-
 /* program icons */
 #include "icons/diag_icon.xpm"
 #include "icons/menu_icon.xpm"
 #include "icons/xfce_icon.xpm"
-
-/* module icons */
-
-/* trashcan icons */
-#include "icons/trash_full.xpm"
-#include "icons/trash_empty.xpm"
-
-static GdkPixbuf *xfce_icons[NUM_ICONS];
-static GdkPixbuf *system_icons[SYS_ICONS];
-static GdkPixbuf *module_icons[MODULE_ICONS];
 
 /* icon themes */
 static char *icon_suffix[] = {
@@ -88,27 +49,12 @@ static char *xfce_icon_names[] = {
     "terminal"
 };
 
-static char *module_icon_names[] = {
-    "trash_empty",
-    "trash_full",
-    "ppp_off",
-    "ppp_on",
-    "ppp_connecting"
-};
-
-static char *system_icon_names[] = {
+static char *minibutton_names[] = {
     /* icons for the panel */
     "minilock",
     "miniinfo",
     "minipalet",
     "minipower",
-    "addicon",
-    "up",
-    "down",
-    /* program icons */
-    "diag",
-    "menu",
-    "xfce"
 };
 
 static void set_icon_names()
@@ -133,66 +79,6 @@ static void set_icon_names()
 void create_builtin_pixbufs(void)
 {
     set_icon_names();
-
-    /* general icons */
-    xfce_icons[UNKNOWN_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)unknown_xpm);
-    xfce_icons[EDIT_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)edit_xpm);
-    xfce_icons[FILE1_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)file1_xpm);
-    xfce_icons[FILE2_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)file2_xpm);
-    xfce_icons[GAMES_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)games_xpm);
-    xfce_icons[MAN_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)man_xpm);
-    xfce_icons[MULTIMEDIA_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)multimedia_xpm);
-    xfce_icons[NETWORK_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)network_xpm);
-    xfce_icons[PAINT_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)paint_xpm);
-    xfce_icons[PRINT_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)print_xpm);
-    xfce_icons[SCHEDULE_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)schedule_xpm);
-    xfce_icons[SOUND_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)sound_xpm);
-    xfce_icons[TERMINAL_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)terminal_xpm);
-
-    /* small buttons on central panel */
-    system_icons[MINILOCK_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)minilock_xpm);
-    system_icons[MINIINFO_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)miniinfo_xpm);
-    system_icons[MINIPALET_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)minipalet_xpm);
-    system_icons[MINIPOWER_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)minipower_xpm);
-
-    /* popup menu */
-    system_icons[ADDICON_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)addicon_xpm);
-
-    /* POPUP BUTTOns */
-    system_icons[UP_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)up_xpm);
-    system_icons[DOWN_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)down_xpm);
-
-    /* APP ICONS */
-    system_icons[DIAG_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)diag_icon_xpm);
-    system_icons[MENU_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)menu_icon_xpm);
-    system_icons[XFCE_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)xfce_icon_xpm);
-
-    /* TRASH ICONS */
-    module_icons[TRASH_FULL_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)trash_full_xpm);
-    module_icons[TRASH_EMPTY_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)trash_empty_xpm);
 }
 
 GdkPixbuf *get_pixbuf_by_id(int id)
@@ -202,15 +88,7 @@ GdkPixbuf *get_pixbuf_by_id(int id)
     if(id < UNKNOWN_ICON || id >= NUM_ICONS)
         id = UNKNOWN_ICON;
 
-    pb = get_themed_pixbuf(xfce_icon_names[id]);
-
-    if(!pb)
-    {
-        pb = xfce_icons[id];
-        g_object_ref(pb);
-    }
-
-    return pb;
+    return get_themed_pixbuf(xfce_icon_names[id]);
 }
 
 GdkPixbuf *get_pixbuf_from_file(const char *path)
@@ -230,25 +108,35 @@ GdkPixbuf *get_pixbuf_from_file(const char *path)
 
 GdkPixbuf *get_system_pixbuf(int id)
 {
-    GdkPixbuf *pb;
+    GdkPixbuf *pb = NULL;
 
-    if(id < 0 || id >= SYS_ICONS)
+    /* APP ICONS */
+    if (id == DIAG_ICON)
+	pb = gdk_pixbuf_new_from_xpm_data((const char **)diag_icon_xpm);
+    else if (id == MENU_ICON)
+        pb = gdk_pixbuf_new_from_xpm_data((const char **)menu_icon_xpm);
+    else if (id == XFCE_ICON)
+        pb = gdk_pixbuf_new_from_xpm_data((const char **)xfce_icon_xpm);
+
+    if (!pb)
+	pb = get_pixbuf_by_id(UNKNOWN_ICON);
+}
+
+GdkPixbuf *get_minibutton_pixbuf(int id)
+{
+    GdkPixbuf *pb, *tmp;
+
+    if(id < 0 || id >= MINIBUTTONS)
         return get_pixbuf_by_id(UNKNOWN_ICON);
 
-    pb = get_themed_pixbuf(system_icon_names[id]);
+    pb = get_themed_pixbuf(minibutton_names[id]);
 
     if(!pb)
-    {
-        pb = system_icons[id];
-        g_object_ref(pb);
-    }
-    else
-    {
-        GdkPixbuf *tmp = pb;
+        pb = get_pixbuf_by_id(UNKNOWN_ICON);
 
-        pb = get_scaled_pixbuf(tmp, minibutton_size[settings.size]);
-        g_object_unref(tmp);
-    }
+    tmp = pb;
+    pb = get_scaled_pixbuf(tmp, minibutton_size[settings.size]);
+    g_object_unref(tmp);
 
     return pb;
 }
@@ -280,44 +168,25 @@ GdkPixbuf *get_scaled_pixbuf(GdkPixbuf * pb, int size)
     else if(h > w)
     {
         newh = size;
-        neww = w * size / h;
+        neww = ((double)w * (double)size / (double)h);
     }
     else
     {
         neww = size;
-        newh = h * size / w;
+        newh = ((double)h * (double)size / (double)w);
     }
 
     return gdk_pixbuf_scale_simple(pb, neww, newh, GDK_INTERP_BILINEAR);
 }
 
-GdkPixbuf *get_module_pixbuf(int id)
-{
-    GdkPixbuf *pb;
-
-    if(id < 0 || id >= MODULE_ICONS)
-        return get_pixbuf_by_id(UNKNOWN_ICON);
-
-    pb = get_themed_pixbuf(module_icon_names[id]);
-
-    if(!pb)
-    {
-        pb = module_icons[id];
-        g_object_ref(pb);
-    }
-
-    return pb;
-}
-
-GdkPixbuf *get_themed_pixbuf(const char *name)
+static GdkPixbuf *_get_themed_pixbuf(const char *name, const char *theme)
 {
     GdkPixbuf *pb = NULL;
-    char *theme = settings.theme;
     char **icon_paths, **p;
-
+    
     if(!theme)
         return NULL;
-
+    
     icon_paths = get_theme_dirs();
 
     for(p = icon_paths; *p; p++)
@@ -344,5 +213,20 @@ GdkPixbuf *get_themed_pixbuf(const char *name)
 
     g_strfreev(icon_paths);
 
+    return pb;
+}
+
+GdkPixbuf *get_themed_pixbuf(const char *name)
+{
+    GdkPixbuf *pb = NULL;
+
+    pb = _get_themed_pixbuf(name, settings.theme);
+
+    if (!pb && settings.theme && !strequal(DEFAULT_THEME, settings.theme))
+	pb = _get_themed_pixbuf(name, DEFAULT_THEME);
+
+    if (!pb)
+	pb = get_pixbuf_by_id(UNKNOWN_ICON);
+    
     return pb;
 }

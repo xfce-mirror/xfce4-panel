@@ -1,3 +1,4 @@
 SUBDIRS = \
+XFce \
 Gnome \
 Curve

@@ -67,6 +67,8 @@
 #define NBGROUPS  16
 #define NBITEMS   16
 
+#define DEFAULT_THEME "XFce"
+
 /* panel sides / popup orientation */
 enum
 { LEFT, RIGHT, TOP, BOTTOM };

@@ -42,6 +42,18 @@ GtkWidget *revert_button;
 int is_xfce_panel_control = 1;
 
 
+enum
+{
+    TRASH_EMPTY_ICON,
+    TRASH_FULL_ICON,
+    MODULE_ICONS
+};
+
+static char *trash_icon_names[] = {
+    "trash_empty",
+    "trash_full"
+};
+
 /*  Trash module
  *  ------------
 */
@@ -59,6 +71,18 @@ typedef struct
     GtkWidget *button;
 }
 t_trash;
+
+static GdkPixbuf *get_trash_pixbuf(int id)
+{
+    GdkPixbuf *pb;
+    
+    pb = get_themed_pixbuf(trash_icon_names[id]);
+
+    if(!pb)
+        pb = get_pixbuf_by_id(UNKNOWN_ICON);
+
+    return pb;
+}
 
 static void trash_run(t_trash * trash)
 {
@@ -94,8 +118,8 @@ static t_trash *trash_new(void)
     trash->command = g_strdup("xftrash");
     trash->in_terminal = FALSE;
 
-    trash->empty_pb = get_module_pixbuf(TRASH_EMPTY_ICON);
-    trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
+    trash->empty_pb = get_trash_pixbuf(TRASH_EMPTY_ICON);
+    trash->full_pb = get_trash_pixbuf(TRASH_FULL_ICON);
 
     trash->button = xfce_iconbutton_new_from_pixbuf(trash->empty_pb);
     gtk_widget_show(trash->button);
@@ -205,13 +229,15 @@ static void trash_set_theme(PanelControl * pc, const char *theme)
     g_object_unref(trash->empty_pb);
     g_object_unref(trash->full_pb);
 
-    trash->empty_pb = get_module_pixbuf(TRASH_EMPTY_ICON);
-    trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
+    trash->empty_pb = get_trash_pixbuf(TRASH_EMPTY_ICON);
+    trash->full_pb = get_trash_pixbuf(TRASH_FULL_ICON);
 
     if(trash->empty)
         xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(trash->button), trash->empty_pb);
     else
         xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(trash->button), trash->full_pb);
+
+    panel_control_set_size(pc, settings.size);
 }
 
 /*  create trash panel control

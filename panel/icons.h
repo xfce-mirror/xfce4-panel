@@ -49,32 +49,18 @@ char *icon_names[NUM_ICONS];
 /* system icons */
 enum
 {
-    /* icons for the panel */
     MINILOCK_ICON,
     MINIINFO_ICON,
     MINIPALET_ICON,
     MINIPOWER_ICON,
-    ADDICON_ICON,
-    UP_ICON,
-    DOWN_ICON,
-    /* program icons */
+    MINIBUTTONS
+};
+
+enum 
+{
     DIAG_ICON,
     MENU_ICON,
     XFCE_ICON,
-    SYS_ICONS
-};
-
-/* module icons */
-enum
-{
-    /* thrash module icons */
-    TRASH_EMPTY_ICON,
-    TRASH_FULL_ICON,
-    MODULE_ICONS
-        /* ppp module icons 
-           PPP_OFF_ICON,
-           PPP_ON_ICON,
-           PPP_CONNECTING_ICON, */
 };
 
 #define UNKNOWN_ICON DEFAULT_ICON
@@ -82,11 +68,10 @@ enum
 void create_builtin_pixbufs(void);
 
 GdkPixbuf *get_pixbuf_by_id(int id);
-GdkPixbuf *get_pixbuf_from_file(const char *path);
-
+GdkPixbuf *get_minibutton_pixbuf(int id);
 GdkPixbuf *get_system_pixbuf(int id);
 
-GdkPixbuf *get_module_pixbuf(int id);
+GdkPixbuf *get_pixbuf_from_file(const char *path);
 
 GdkPixbuf *get_scaled_pixbuf(GdkPixbuf * pb, int size);
 

@@ -478,12 +478,14 @@ static void add_popup_position_menu(GtkWidget * option_menu, int position)
 static char **find_themes(void)
 {
     char **themes = NULL;
-    GList *list = NULL;
+    GList *list = NULL, *li;
     GDir *gdir;
     char **dirs, **d;
     const char *file;
-    int i;
+    int i, len;
 
+    /* Add default theme */
+    list = g_list_append(list, g_strdup(DEFAULT_THEME));
     dirs = get_theme_dirs();
 
     for(d = dirs; *d; d++)
@@ -509,20 +511,18 @@ static char **find_themes(void)
         }
     }
 
-    if(list)
+    len = g_list_length(list);
+
+    themes = g_new0(char *, len + 1);
+
+    for(i = 0, li = list; li; li = li->next, i++)
     {
-        int len = g_list_length(list);
-        GList *li;
-
-        themes = g_new0(char *, len + 1);
-
-        for(i = 0, li = list; li; li = li->next, i++)
-        {
-            themes[i] = (char *)li->data;
-        }
+	themes[i] = (char *)li->data;
     }
 
+    g_list_free(list);
     g_strfreev(dirs);
+
     return themes;
 }
 
@@ -530,28 +530,20 @@ static void theme_changed(GtkOptionMenu * option_menu)
 {
     int n = gtk_option_menu_get_history(option_menu);
     const char *theme;
+    GtkWidget *label;
 
-    if(n == 0)
-        theme = NULL;
-    else
-    {
-        GtkWidget *label;
+    /* Right, this is weird, apparently the option menu
+     * button reparents the label connected to the menuitem
+     * that is selected. So to get to the label we go to the
+     * child of the button and not of the menu item!
+     *
+     * This took a while to find out :-)
+     */
+    label = gtk_bin_get_child(GTK_BIN(option_menu));
 
-        /* Right, this is weird, apparently the option menu
-         * button reparents the label connected to the menuitem
-         * that is selected. So to get to the label we go to the
-         * child of the button and not of the menu item!
-         *
-         * This took a while to find out :-)
-         */
+    theme = gtk_label_get_text(GTK_LABEL(label));
 
-        label = gtk_bin_get_child(GTK_BIN(option_menu));
-
-        theme = gtk_label_get_text(GTK_LABEL(label));
-    }
-
-    if((theme == NULL && settings.theme == NULL) ||
-       (settings.theme && theme && strequal(theme, settings.theme)))
+    if(settings.theme && theme && strequal(theme, settings.theme))
         return;
 
     panel_set_theme(theme);
@@ -566,24 +558,17 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
     char **themes = find_themes();
     char **s;
 
-    item = gtk_menu_item_new_with_label(_("XFce standard theme"));
-    gtk_widget_show(item);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-    if(themes)
+    for(i = 0, s = themes; *s; s++, i++)
     {
-        for(i = 0, s = themes; *s; s++, i++)
-        {
-            item = gtk_menu_item_new_with_label(*s);
-            gtk_widget_show(item);
-            gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+	item = gtk_menu_item_new_with_label(*s);
+	gtk_widget_show(item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
-            if(settings.theme && strequal(settings.theme, *s))
-                n = backup_theme_index = i + 1;
-        }
-
-        g_strfreev(themes);
+	if(settings.theme && strequal(settings.theme, *s))
+	    n = backup_theme_index = i;
     }
+
+    g_strfreev(themes);
 
     gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
     gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), n);

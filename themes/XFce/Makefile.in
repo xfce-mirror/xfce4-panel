@@ -20,7 +20,7 @@ VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ..
+top_builddir = ../..
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = @INSTALL@
@@ -126,20 +126,39 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-noinst_DATA = \
-diag_icon.xpm \
-menu_icon.xpm \
-xfce_icon.xpm \
-xfce_slogan.xpm
+xfcedir = $(pkgdatadir)/themes/XFce
+xfce_DATA = \
+edit.xpm \
+file1.xpm \
+file2.xpm \
+games.xpm \
+mail.xpm \
+man.xpm \
+miniinfo.xpm \
+minilock.xpm \
+minipalet.xpm \
+minipower.xpm \
+multimedia.xpm \
+network.xpm \
+nomail.xpm \
+oldmail.xpm \
+paint.xpm \
+print.xpm \
+schedule.xpm \
+sound.xpm \
+terminal.xpm \
+trash_empty.xpm \
+trash_full.xpm \
+unknown.xpm
 
 
-EXTRA_DIST = $(noinst_DATA)
-subdir = icons
+EXTRA_DIST = $(xfce_DATA)
+subdir = themes/XFce
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-DATA = $(noinst_DATA)
+DATA = $(xfce_DATA)
 
 DIST_COMMON = Makefile.am Makefile.in
 all: all-am
@@ -147,7 +166,7 @@ all: all-am
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  icons/Makefile
+	  $(AUTOMAKE) --gnu  themes/XFce/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -160,6 +179,24 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
+xfceDATA_INSTALL = $(INSTALL_DATA)
+install-xfceDATA: $(xfce_DATA)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(xfcedir)
+	@list='$(xfce_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(xfceDATA_INSTALL) $$d$$p $(DESTDIR)$(xfcedir)/$$f"; \
+	  $(xfceDATA_INSTALL) $$d$$p $(DESTDIR)$(xfcedir)/$$f; \
+	done
+
+uninstall-xfceDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(xfce_DATA)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f $(DESTDIR)$(xfcedir)/$$f"; \
+	  rm -f $(DESTDIR)$(xfcedir)/$$f; \
+	done
 tags: TAGS
 TAGS:
 
@@ -168,7 +205,7 @@ CTAGS:
 
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
-top_distdir = ..
+top_distdir = ../..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
@@ -203,6 +240,7 @@ check: check-am
 all-am: Makefile $(DATA)
 
 installdirs:
+	$(mkinstalldirs) $(DESTDIR)$(xfcedir)
 
 install: install-am
 install-exec: install-exec-am
@@ -244,7 +282,7 @@ info: info-am
 
 info-am:
 
-install-data-am:
+install-data-am: install-xfceDATA
 
 install-exec-am:
 
@@ -270,17 +308,17 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-info-am
+uninstall-am: uninstall-info-am uninstall-xfceDATA
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
 	dvi-am info info-am install install-am install-data \
 	install-data-am install-exec install-exec-am install-info \
-	install-info-am install-man install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
+	install-info-am install-man install-strip install-xfceDATA \
+	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
-	uninstall-info-am
+	uninstall-info-am uninstall-xfceDATA
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

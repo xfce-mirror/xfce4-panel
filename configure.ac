@@ -69,4 +69,5 @@ plugins/trash/Makefile
 themes/Makefile
 themes/Curve/Makefile
 themes/Gnome/Makefile
+themes/XFce/Makefile
 ])

@@ -101,14 +101,14 @@ static t_exit *exit_new(void)
     exit->vbox = gtk_vbox_new(TRUE, 0);
     gtk_widget_show(exit->vbox);
 
-    pb = get_system_pixbuf(MINILOCK_ICON);
+    pb = get_minibutton_pixbuf(MINILOCK_ICON);
     exit->lock_button = xfce_iconbutton_new_from_pixbuf(pb);
     g_object_unref(pb);
     gtk_button_set_relief(GTK_BUTTON(exit->lock_button), GTK_RELIEF_NONE);
     gtk_widget_show(exit->lock_button);
     gtk_box_pack_start(GTK_BOX(exit->vbox), exit->lock_button, TRUE, TRUE, 0);
 
-    pb = get_system_pixbuf(MINIPOWER_ICON);
+    pb = get_minibutton_pixbuf(MINIPOWER_ICON);
     exit->exit_button = xfce_iconbutton_new_from_pixbuf(pb);
     g_object_unref(pb);
     gtk_button_set_relief(GTK_BUTTON(exit->exit_button), GTK_RELIEF_NONE);
@@ -164,11 +164,11 @@ static void exit_set_theme(PanelControl * pc, const char *theme)
     GdkPixbuf *pb;
     t_exit *exit = (t_exit*)pc->data;
     
-    pb = get_system_pixbuf(MINILOCK_ICON);
+    pb = get_minibutton_pixbuf(MINILOCK_ICON);
     xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(exit->lock_button), pb);
     g_object_unref(pb);
     
-    pb = get_system_pixbuf(MINIPOWER_ICON);
+    pb = get_minibutton_pixbuf(MINIPOWER_ICON);
     xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(exit->exit_button), pb);
     g_object_unref(pb);
 
@@ -340,7 +340,7 @@ static GtkWidget *config_new(void)
     GtkWidget *button;
     GdkPixbuf *pb = NULL;
 
-    pb = get_system_pixbuf(MINIPALET_ICON);
+    pb = get_minibutton_pixbuf(MINIPALET_ICON);
     button = xfce_iconbutton_new_from_pixbuf(pb);
     g_object_unref(pb);
     gtk_widget_show(button);
@@ -357,7 +357,7 @@ static void config_set_theme(PanelControl * pc, const char *theme)
 {
     GdkPixbuf *pb;
 
-    pb = get_system_pixbuf(MINIPALET_ICON);
+    pb = get_minibutton_pixbuf(MINIPALET_ICON);
     xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(pc->main), pb);
     g_object_unref(pb);
 }

@@ -165,12 +165,23 @@ char *screen_button_get_name(ScreenButton * sb)
     return g_strdup(screen_names[sb->index]);
 }
 
+static void screen_button_update_name(ScreenButton * sb)
+{
+/*    char *markup;
+    
+    markup = g_strconcat("<b>", screen_names[sb->index], "</b>", NULL);
+    gtk_label_set_markup(GTK_LABEL(sb->label), markup);
+    g_free(markup); */
+    gtk_label_set_text(GTK_LABEL(sb->label), screen_names[sb->index]);
+}
+
 void screen_button_set_name(ScreenButton * sb, const char *name)
 {
     g_free(screen_names[sb->index]);
 
     screen_names[sb->index] = g_strdup(name);
-    gtk_label_set_text(GTK_LABEL(sb->label), name);
+
+    screen_button_update_name(sb);
 }
 
 int screen_button_get_index(ScreenButton * sb)
@@ -318,10 +329,10 @@ static void create_minibuttons(void)
     GtkWidget *button;
     int i;
 
-    pb[0] = get_system_pixbuf(MINILOCK_ICON);
-    pb[1] = get_system_pixbuf(MINIINFO_ICON);
-    pb[2] = get_system_pixbuf(MINIPALET_ICON);
-    pb[3] = get_system_pixbuf(MINIPOWER_ICON);
+    pb[0] = get_minibutton_pixbuf(MINILOCK_ICON);
+    pb[1] = get_minibutton_pixbuf(MINIINFO_ICON);
+    pb[2] = get_minibutton_pixbuf(MINIPALET_ICON);
+    pb[3] = get_minibutton_pixbuf(MINIPOWER_ICON);
 
     for(i = 0; i < 4; i++)
     {
@@ -542,7 +553,7 @@ void central_panel_set_from_xml(xmlNodePtr node)
             screen_names[i] = get_default_screen_name(i);
 
         if(i < settings.num_screens)
-            gtk_label_set_text(GTK_LABEL(sb->label), screen_names[i]);
+            screen_button_update_name(sb);
 
         if(child)
             child = child->next;
@@ -720,10 +731,10 @@ void central_panel_set_size(int size)
     GtkRequisition req;
     int w, h, i;
 
-    pb[0] = get_system_pixbuf(MINILOCK_ICON);
-    pb[1] = get_system_pixbuf(MINIINFO_ICON);
-    pb[2] = get_system_pixbuf(MINIPALET_ICON);
-    pb[3] = get_system_pixbuf(MINIPOWER_ICON);
+    pb[0] = get_minibutton_pixbuf(MINILOCK_ICON);
+    pb[1] = get_minibutton_pixbuf(MINIINFO_ICON);
+    pb[2] = get_minibutton_pixbuf(MINIPALET_ICON);
+    pb[3] = get_minibutton_pixbuf(MINIPOWER_ICON);
 
     for(i = 0; i < 4; i++)
     {
@@ -805,10 +816,10 @@ void central_panel_set_theme(const char *theme)
     GtkWidget *button;
     int i;
 
-    pb[0] = get_system_pixbuf(MINILOCK_ICON);
-    pb[1] = get_system_pixbuf(MINIINFO_ICON);
-    pb[2] = get_system_pixbuf(MINIPALET_ICON);
-    pb[3] = get_system_pixbuf(MINIPOWER_ICON);
+    pb[0] = get_minibutton_pixbuf(MINILOCK_ICON);
+    pb[1] = get_minibutton_pixbuf(MINIINFO_ICON);
+    pb[2] = get_minibutton_pixbuf(MINIPALET_ICON);
+    pb[3] = get_minibutton_pixbuf(MINIPOWER_ICON);
 
     for(i = 0; i < 4; i++)
     {
@@ -870,7 +881,7 @@ void central_panel_set_num_screens(int n)
         {
             sb = screen_buttons[i] = create_screen_button(i);
             screen_button_pack(sb, desktop_table);
-            gtk_label_set_text(GTK_LABEL(sb->label), screen_names[i]);
+            screen_button_update_name(sb);
         }
 
         if(i < n)

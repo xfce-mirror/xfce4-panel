@@ -1,6 +1,6 @@
 /*  mailcheck.c
  *
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,10 +28,12 @@
 #include "controls.h"
 #include "settings.h"
 
+#if 0
 /* mailcheck icons */
 #include "icons/mail.xpm"
 #include "icons/nomail.xpm"
 #include "icons/oldmail.xpm"
+#endif
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   Globals
@@ -84,24 +86,10 @@ static char *mailcheck_icon_names[] = {
 static GdkPixbuf *get_mailcheck_pixbuf(int id)
 {
     GdkPixbuf *pb;
+    char *name = mailcheck_icon_names[id];
+    pb = get_themed_pixbuf(name);
 
-    if(settings.theme)
-    {
-        char *name = mailcheck_icon_names[id];
-        pb = get_themed_pixbuf(name);
-
-        if(GDK_IS_PIXBUF(pb))
-            return pb;
-    }
-
-    if(id == NEW_MAIL)
-        pb = gdk_pixbuf_new_from_xpm_data((const char **)mail_xpm);
-    else if(id == OLD_MAIL)
-        pb = gdk_pixbuf_new_from_xpm_data((const char **)oldmail_xpm);
-    else
-        pb = gdk_pixbuf_new_from_xpm_data((const char **)nomail_xpm);
-
-    if(!GDK_IS_PIXBUF(pb))
+    if(!pb || !GDK_IS_PIXBUF(pb))
         pb = get_pixbuf_by_id(UNKNOWN_ICON);
 
     return pb;
@@ -331,6 +319,26 @@ static gboolean check_mail(PanelControl * pc)
     }
 
     return TRUE;
+}
+
+static void mailcheck_set_theme(PanelControl *pc, const char *theme)
+{
+    t_mailcheck *mailcheck = (t_mailcheck *) pc->data;
+
+    g_object_unref(mailcheck->nomail_pb);
+    g_object_unref(mailcheck->oldmail_pb);
+    g_object_unref(mailcheck->newmail_pb);
+
+    mailcheck->nomail_pb = get_mailcheck_pixbuf(NO_MAIL);
+    mailcheck->oldmail_pb = get_mailcheck_pixbuf(OLD_MAIL);
+    mailcheck->newmail_pb = get_mailcheck_pixbuf(NEW_MAIL);
+
+    if(mailcheck->status == NO_MAIL)
+	xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->nomail_pb);
+    else if(mailcheck->status == OLD_MAIL)
+	xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->oldmail_pb);
+    else
+	xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->newmail_pb);
 }
 
 /*  Options dialog
@@ -604,6 +612,7 @@ void module_init(PanelControl * pc)
 
     pc->read_config = mailcheck_read_config;
     pc->write_config = mailcheck_write_config;
+    pc->set_theme = mailcheck_set_theme;
 
     pc->add_options = (gpointer) mailcheck_add_options;
 }
