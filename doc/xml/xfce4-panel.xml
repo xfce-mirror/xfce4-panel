@@ -98,126 +98,77 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-getting-started">
   <title>Getting Started</title>
 
-  <para>Use <application>startxfce4</application> to start an XFce session; 
-    this includes the panel, the window manager and the desktop background 
-    manager. All programs, or symbolic links to programs, in 
-    <filename>~/Autostart/</filename> will be run by 
-    <application>startxfce4</application> on startup.
-  </para>
-  
-  <para>
-    To customize the behaviour of <application>startxfce4</application>, 
-    copy <filename>${sysconfdir}/xfce4/xinitrc</filename> to your personal 
-    <filename>~/.xfce4/</filename> directory and edit that file. If you 
-    install from source, <filename>${sysconfdir}</filename> defaults to 
-    <filename>/usr/local/etc</filename>; for binary packages it is often 
-    set to <filename>/etc</filename>. 
+  <para>When you start the panel you will see a bar apearing at the bottom
+    of your screen, looking like this:
   </para>
 
-  <para>Another way to run the panel is at the end of your
-    <filename>~/.xinitrc</filename> file or <filename>~/.xsession</filename>
-    if you use a graphical login manager. Here is an example of such a file, 
-    also using other components of the XFce Desktop Environment:
+  <figure id="default-panel-fig">
+    <title>Default XFce panel</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="../images/default_panel.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="../images/default_panel.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Shows XFce panel default configuration. Contains several
+	    launchers, a new mail monitor, a clock and a desktop pager.
+	    Also shows an opened subpanel.
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>The figure shows the default panel configuration with one open
+    subpanel and the mouse hovering over the setup button, making it show
+    a tooltip.
   </para>
 
-<programlisting> 
-# window manager (go to background after initialization)
-xfwm4 --daemon
+  <para>The two strips on either side of the panel are move handles which
+    you can use to drag the panel anywhere on the screen. Right clicking
+    (or Shift-click) shows a popup menu. Go on, try it ;-)
+  </para>
 
-# taskbar 
-xftaskbar4 &amp;
+  <figure id="handle-popup-fig">
+    <title>Move handle popup menu</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="../images/handle-popup.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="../images/handle-popup.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Shows move handle popup menu.</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
 
-# background, menu and other desktop settings 
-xfdesktop &amp;
+  <para>The area between the move handles contains panel items. There are 
+    several types of items, for instance program launchers, a clock and a 
+    pager. The available items are are described in 
+    <xref linkend="panel-use"/>.
+  </para>
 
-# finally, run the panel You can exit your session by choosing exit 
-# from the panel 
-exec xfce4-panel
-
-</programlisting>
-
-  <para>To find out how to obtain all these programs visit the 
-    <ulink url="http://www.xfce.org" type="http">XFce website</ulink>.  
+  <para>Panel preferences can be changed from the XFce settings manager,
+    which can be started either from the 'Setup' button on the panel or from 
+    the right-click menu on the move handles. See 
+    <xref linkend="panel-settings"/>.
   </para>
 
 </sect1>
 
 <sect1 id="panel-use">
-  <title>Using the XFce Panel</title>
-
-  <sect2 id="panel-layout">
-    <title>Panel Layout</title>
-    
-    <para>When you start the panel you will see a bar apearing at the bottom
-      of your screen, looking like this:
-    </para>
-
-    <figure id="default-panel-fig">
-      <title>Default XFce panel</title> 
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="../images/default_panel.png" format="PNG"/>
-	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="../images/default_panel.eps" format="EPS"/>
-	  </imageobject> 
-	  --> 
-	  <textobject>
-	    <phrase>Shows XFce panel default configuration. Contains several
-	      launchers, a new mail monitor, a clock and a desktop pager.
-	      Also shows an opened subpanel.
-	    </phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-    </figure>
-
-    <para>The figure shows the default panel configuration with one open
-      subpanel and the mouse hovering over the setup button, making it show
-      a tooltip.
-    </para>
-
-    <para>The two strips on either side of the panel are move handles which
-      you can use to drag the panel anywhere on the screen. Right clicking
-      (or Shift-click) shows a popup menu. Go on, try it ;-)
-    </para>
-
-    <figure id="handle-popup-fig">
-      <title>Move handle popup menu</title> 
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="../images/handle-popup.png" format="PNG"/>
-	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="../images/handle-popup.eps" format="EPS"/>
-	  </imageobject> 
-	  --> 
-	  <textobject>
-	    <phrase>Shows move handle popup menu.</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-    </figure>
-
-    <para>The area between the move handles contains panel items. There are 
-      several types of items, for instance program launchers, a clock and a 
-      pager.
-    </para>
-
-    <para>Panel preferences can be changed from the XFce settings manager,
-      which can be started either from the 'Setup' button on the panel or from 
-      the right-click menu on the move handles. See 
-      <xref linkend="panel-settings"/>.
-    </para>
-
-    <!-- extra space -->
-    <para>&nbsp;</para>
-
-  </sect2>
+  <title>Using the panel</title>
 
   <sect2 id="panel-items">
     <title>Panel Items</title>
