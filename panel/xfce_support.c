@@ -879,7 +879,14 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
 
     if (g_path_is_absolute(cmd) && g_file_test (cmd, G_FILE_TEST_IS_DIR))
     {
-	execute = g_strdup_printf ("xfterm4 %s", cmd);
+        if (in_terminal)
+        {
+	    execute = g_strdup_printf ("xfterm4 %s", cmd);
+        }
+        else
+        {
+	    execute = g_strdup_printf ("xftree4 %s", cmd);
+        }
     }
     else if (in_terminal)
     {
