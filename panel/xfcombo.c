@@ -93,35 +93,7 @@ load_xfc (void)
     module_init = symbol;
 
     xfc_fun = module_init ();
-
-    /* FIXME: should be done in module_init() */
-    if (!(g_module_symbol (xfc_cm, "xfc_is_in_history", &symbol) &&
-	  (xfc_fun->xfc_is_in_history = symbol))	||
-	!(g_module_symbol (xfc_cm, "xfc_set_combo", &symbol) &&
-	  (xfc_fun->xfc_set_combo = symbol))		||
-	!(g_module_symbol (xfc_cm, "xfc_set_blank", &symbol) &&
-	  (xfc_fun->xfc_set_blank = symbol))		||
-	!(g_module_symbol (xfc_cm, "xfc_set_entry", &symbol) &&
-	  (xfc_fun->xfc_set_entry = symbol))		||
-	!(g_module_symbol (xfc_cm, "xfc_save_to_history", &symbol) &&
-	  (xfc_fun->xfc_save_to_history = symbol))	||
-	!(g_module_symbol (xfc_cm, "xfc_remove_from_history", &symbol) &&
-	  (xfc_fun->xfc_remove_from_history = symbol))	||
-	!(g_module_symbol (xfc_cm, "xfc_read_history", &symbol) &&
-	  (xfc_fun->xfc_read_history = symbol))		||
-	!(g_module_symbol (xfc_cm, "xfc_clear_history", &symbol) &&
-	  (xfc_fun->xfc_clear_history = symbol))	||
-	!(g_module_symbol (xfc_cm, "xfc_init_combo", &symbol) &&
-	  (xfc_fun->xfc_init_combo = symbol))		||
-	!(g_module_symbol (xfc_cm, "xfc_destroy_combo", &symbol) &&
-	  (xfc_fun->xfc_destroy_combo = symbol)))
-    {
-	g_warning ("Missing symbols in module \"libxfce4_combo\"");
-	unload_xfc ();
-
-	goto failed;
-    }
-			     
+ 
     DBG ("module %s successfully loaded", library);
     
     g_free (library);
