@@ -35,7 +35,6 @@ void write_backup_file (const char *path);
 void add_tooltip (GtkWidget * widget, const char *tip);
 
 /* x atoms and properties */
-void set_window_type_dock (GtkWidget * win, gboolean set);
 void set_window_layer (GtkWidget * win, int layer);
 gboolean check_net_wm_support (void);
 void set_window_skip (GtkWidget * win);
