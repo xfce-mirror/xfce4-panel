@@ -840,7 +840,7 @@ static void draw_sec_pointer(GtkWidget * widget, GdkGC * gc, gint xc, gint yc)
 
     s = sin(clock->sec_angle);
     c = cos(clock->sec_angle);
-    width = (gdouble) MAX (clock->pointer_width / 2, 1);
+    width = (gdouble) MAX (clock->pointer_width / 3, 1);
 
     points[0].x = xc + s * width;
     points[0].y = yc + c * width;
