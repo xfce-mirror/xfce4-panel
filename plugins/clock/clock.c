@@ -171,8 +171,8 @@ clock_date_tooltip (GtkWidget * widget)
     char date_s[255];
     char *utf8date = NULL;
 
-    g_return_val_if_fail (widget != NULL, FALSE);
-    g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
+    g_return_val_if_fail (widget != NULL, TRUE);
+    g_return_val_if_fail (GTK_IS_WIDGET (widget), TRUE);
 
     ticks = time (0);
     tm = localtime (&ticks);
@@ -245,7 +245,10 @@ clock_free (Control * control)
     g_return_if_fail (clock != NULL);
 
     if (clock->timeout_id)
+    {
 	g_source_remove (clock->timeout_id);
+        clock->timeout_id = 0;
+    }
 
     g_free (clock);
 }
