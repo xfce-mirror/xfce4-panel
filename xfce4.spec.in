@@ -23,6 +23,14 @@ BuildRequires: 	libxml2-devel >= @LIBXML_REQUIRED_VERSION@
 %description
 xfce4-panel is the panel for the Xfce desktop environment
 
+%package devel
+Summary:	developpment headers for xfce4-panel
+Group: 		User Interface/Desktops
+Requires:	xfce4-panel >= @VERSION@
+
+%description devel
+Header files to build plugins for xfce4-panel.
+
 %prep
 %setup -q
 
@@ -45,9 +53,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/locale/
 %{_datadir}/applications
 %{_datadir}/icons
-%{_includedir}/xfce4/
 %{_libdir}/xfce4/mcs-plugins/
-%{_libdir}/pkgconfig/
 %{_bindir}/*
 %{_libdir}/xfce4/panel-plugins/
 
+%files devel
+%defattr(-, root, root)
+%{_libdir}/pkgconfig/
+%{_includedir}/xfce4/
