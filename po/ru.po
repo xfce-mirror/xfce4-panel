@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2003-07-03 10:52+0200\n"
+"POT-Creation-Date: 2003-07-30 09:20+0200\n"
 "PO-Revision-Date: 2003-07-18 00:26+0000\n"
 "Last-Translator: Poul Ionkin <wizzard@nmg.lv>\n"
 "Language-Team: Russian <none>\n"
@@ -20,27 +20,15 @@ msgstr ""
 msgid "Select file"
 msgstr "Выберите файл"
 
-#: panel/controls_dialog.c:267
+#: panel/controls_dialog.c:246
 msgid "Change item"
 msgstr "Изменение объекта"
 
-#: panel/controls_dialog.c:275 panel/item_dialog.c:1004
-msgid "_Revert"
-msgstr "Перевернуть"
-
-#: panel/controls_dialog.c:280 panel/item_dialog.c:1010
-msgid "_Done"
-msgstr "Готово"
-
-#: panel/controls_dialog.c:304
-msgid "Type:"
-msgstr "Тип:"
-
-#: panel/controls_dialog.c:320 panel/item_dialog.c:609
+#: panel/controls_dialog.c:278 panel/item_dialog.c:650
 msgid "Position:"
 msgstr "Позиция:"
 
-#: panel/controls_dialog.c:366 panel/controls.c:272
+#: panel/controls_dialog.c:323 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -50,81 +38,80 @@ msgstr ""
 "\n"
 "Удалить объект?"
 
-#: panel/item_dialog.c:279
+#: panel/item_dialog.c:317
 msgid "Other Icon"
 msgstr "Другие иконки"
 
-#: panel/item_dialog.c:304
+#: panel/item_dialog.c:342
 msgid "Select icon"
 msgstr "Выберите иконку"
 
-#: panel/item_dialog.c:342
+#: panel/item_dialog.c:381
 msgid "Icon:"
 msgstr "Иконка:"
 
-#: panel/item_dialog.c:387
+#: panel/item_dialog.c:430
 msgid "Select command"
 msgstr "Выберите команду"
 
-#: panel/item_dialog.c:414
+#: panel/item_dialog.c:458
 msgid "Command:"
 msgstr "Команда:"
 
-#: panel/item_dialog.c:447 plugins/mailcheck/mailcheck.c:679
+#: panel/item_dialog.c:495 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Выполнить в терминале"
 
-#: panel/item_dialog.c:452 plugins/mailcheck/mailcheck.c:687
+#: panel/item_dialog.c:500 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Использовать область уведомления"
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:527
 msgid "Caption:"
 msgstr "Заголовок:"
 
-#: panel/item_dialog.c:518
+#: panel/item_dialog.c:560
 msgid "Tooltip:"
 msgstr "Подсказка:"
 
-#: panel/item_dialog.c:554
+#: panel/item_dialog.c:596
 msgid "Menu:"
 msgstr "Меню:"
 
-#: panel/item_dialog.c:561
+#: panel/item_dialog.c:603
 msgid "Attach menu to launcher"
 msgstr "Добавить меню к запуску"
 
-#: panel/item_dialog.c:704
+#: panel/item_dialog.c:745
 msgid "Icon Preview"
 msgstr "Просмотр иконки"
 
-#: panel/item_dialog.c:708
+#: panel/item_dialog.c:749
 msgid "Drag file onto this frame to change the icon"
 msgstr "Перетащите файл в эту рамку, чтобы изменить иконку"
 
-#. create dialog
-#: panel/item_dialog.c:993
+#: panel/item_dialog.c:1031
 msgid "Change menu item"
 msgstr "Изменение элемента меню"
 
 #. add buttons
-#: panel/item_dialog.c:998
+#: panel/item_dialog.c:1034
 msgid "Remove"
 msgstr "Удалить"
 
-#: panel/item.c:352
+#: panel/item.c:441
 msgid "Click mouse button 3 to change item"
 msgstr "Нажмите на 3 клавишу мышки для редактирования объекта"
 
-#: panel/item.c:374
+#: panel/item.c:464
 msgid "Add launcher"
 msgstr "Добавить запуск"
 
-#: panel/item.c:379
+#: panel/item.c:469
 msgid "Add new item"
 msgstr "Добавить новый объект"
 
-#: panel/item.c:509
+#: panel/item.c:601
 msgid "Launcher"
 msgstr "Запуск"
 
@@ -149,8 +136,9 @@ msgid ""
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Ваш оконый менеджер не поддерживает подсказки, которые определены на сайте http://www.freedesktop.org. \n "
-"Возможно не будут работать некоторые функции XFce."
+"Ваш оконый менеджер не поддерживает подсказки, которые определены на сайте "
+"http://www.freedesktop.org. \n"
+" Возможно не будут работать некоторые функции XFce."
 
 #: panel/controls.c:320 panel/panel.c:123
 msgid "/Add _new item"
@@ -192,8 +180,8 @@ msgstr "/Блокировать экран"
 msgid "/E_xit"
 msgstr "/Выход"
 
-#: panel/panel.c:469 settings/xfce_settings_plugin.c:82
-#: settings/xfce_settings_dialog.c:641
+#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Панель XFce"
 
@@ -273,84 +261,84 @@ msgstr "Средний"
 msgid "Large"
 msgstr "Большой"
 
-#: settings/xfce_settings_dialog.c:182
+#: settings/xfce_settings_dialog.c:190
 msgid "Horizontal"
 msgstr "По горизонтали"
 
-#: settings/xfce_settings_dialog.c:186
+#: settings/xfce_settings_dialog.c:194
 msgid "Vertical"
 msgstr "По вертикали"
 
-#: settings/xfce_settings_dialog.c:218 settings/xfce_settings_dialog.c:448
+#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
 msgid "Left"
 msgstr "Слева"
 
-#: settings/xfce_settings_dialog.c:222 settings/xfce_settings_dialog.c:449
+#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
 msgid "Right"
 msgstr "Справа"
 
-#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:447
-#: settings/xfce_settings_dialog.c:503
+#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:511
 msgid "Top"
 msgstr "Сверху"
 
-#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:446
-#: settings/xfce_settings_dialog.c:511
+#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
 msgstr "Снизу"
 
-#: settings/xfce_settings_dialog.c:366
+#: settings/xfce_settings_dialog.c:374
 msgid "Panel size:"
 msgstr "Размер панели:"
 
-#: settings/xfce_settings_dialog.c:382
+#: settings/xfce_settings_dialog.c:390
 msgid "Panel orientation:"
 msgstr "Положение панели:"
 
-#: settings/xfce_settings_dialog.c:399
+#: settings/xfce_settings_dialog.c:407
 msgid "Popup position:"
 msgstr "Всплывающее меню:"
 
-#: settings/xfce_settings_dialog.c:416
+#: settings/xfce_settings_dialog.c:424
 msgid "Icon theme:"
 msgstr "Тема иконок:"
 
-#: settings/xfce_settings_dialog.c:487
+#: settings/xfce_settings_dialog.c:495
 msgid "Panel layer:"
 msgstr "Расположение панели:"
 
-#: settings/xfce_settings_dialog.c:507
+#: settings/xfce_settings_dialog.c:515
 msgid "Normal"
 msgstr "Обычное"
 
-#: settings/xfce_settings_dialog.c:527
+#: settings/xfce_settings_dialog.c:535
 msgid "Center the panel:"
 msgstr "Центр панели:"
 
-#: settings/xfce_settings_dialog.c:551
+#: settings/xfce_settings_dialog.c:559
 msgid "Set"
 msgstr "Установить"
 
-#: settings/xfce_settings_dialog.c:587
+#: settings/xfce_settings_dialog.c:595
 msgid "Autohide:"
 msgstr "Автоматически прятать:"
 
-#: settings/xfce_settings_dialog.c:655
+#: settings/xfce_settings_dialog.c:663
 msgid "XFce Panel Settings"
 msgstr "Настройки панели XFce"
 
 #. Appearance
-#: settings/xfce_settings_dialog.c:667
+#: settings/xfce_settings_dialog.c:675
 msgid "Appearance"
 msgstr "Внешний вид"
 
 #. Position
-#: settings/xfce_settings_dialog.c:688
+#: settings/xfce_settings_dialog.c:696
 msgid "Position"
 msgstr "Позиция"
 
 #. autohide
-#: settings/xfce_settings_dialog.c:704
+#: settings/xfce_settings_dialog.c:712
 msgid "Behaviour"
 msgstr "Режим работы"
 
@@ -430,47 +418,47 @@ msgstr "Ноябрь"
 msgid "December"
 msgstr "Декабрь"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "Тип часов:"
 
-#: plugins/clock/clock.c:366
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "Аналоговые"
 
-#: plugins/clock/clock.c:370
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "Электронные"
 
-#: plugins/clock/clock.c:374
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:439
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
 msgstr "Стиль:"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:440
 msgid "24 hour"
 msgstr "24 часа"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12 часов"
 
-#: plugins/clock/clock.c:458
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:498
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "Показывать секунды:"
 
-#: plugins/clock/clock.c:609
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "Часы Xfce"
 
-#: plugins/pager/pager.c:278
+#: plugins/pager/pager.c:277
 msgid "Graphical pager"
 msgstr "Графический пейджер"
 
@@ -488,47 +476,47 @@ msgstr ""
 "\n"
 "Обратитесь к системному администратору"
 
-#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
 msgstr "Блокировать экран"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:591
+#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Exit"
 msgstr "Выход"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:592
+#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:519
 msgid "Setup"
 msgstr "Настройка"
 
-#: plugins/systembuttons/systembuttons.c:153
-#: plugins/systembuttons/systembuttons.c:593
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:520
 msgid "Info"
 msgstr "Информация"
 
-#: plugins/systembuttons/systembuttons.c:573
+#: plugins/systembuttons/systembuttons.c:500
 msgid "Show two buttons:"
 msgstr "Показывать две кнопки:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:590
+#: plugins/systembuttons/systembuttons.c:517
 msgid "Lock"
 msgstr "Блокировать"
 
-#: plugins/systembuttons/systembuttons.c:622
+#: plugins/systembuttons/systembuttons.c:549
 msgid "Button 1:"
 msgstr "Кнопка 1:"
 
-#: plugins/systembuttons/systembuttons.c:638
+#: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "Кнопка 2:"
 
-#: plugins/systembuttons/systembuttons.c:677
+#: plugins/systembuttons/systembuttons.c:600
 msgid "System buttons"
 msgstr "Системные кнопки"
 
-#: plugins/separator/separator.c:147
+#: plugins/separator/separator.c:153
 msgid "Separator"
 msgstr "Разделитель"
 
@@ -536,19 +524,27 @@ msgstr "Разделитель"
 msgid "Mail box:"
 msgstr "Почтовый ящик:"
 
-#: plugins/mailcheck/mailcheck.c:632
+#: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
 msgstr "Команда:"
 
-#: plugins/mailcheck/mailcheck.c:646
+#: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Выполнить команду при нажатии кнопки на панели"
 
-#: plugins/mailcheck/mailcheck.c:719
+#: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
 msgstr "Интервал (сек):"
 
-#: plugins/mailcheck/mailcheck.c:796
+#: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Проверка почты"
 
+#~ msgid "_Revert"
+#~ msgstr "Перевернуть"
+
+#~ msgid "_Done"
+#~ msgstr "Готово"
+
+#~ msgid "Type:"
+#~ msgstr "Тип:"

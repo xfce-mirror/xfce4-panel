@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [3.99.2.3])
+AM_INIT_AUTOMAKE([xfce4-panel], [3.99.3])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -38,16 +38,16 @@ dnl Check for X11 installed
 BM_LIBX11_REQUIRE
 
 dnl Check for required packages
-BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [3.99.2])
-BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [3.99.2])
+BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [3.99.3])
+BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [3.99.3])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 
 dnl Configure the mcs plugin
-XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [3.99.2])
+XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [3.99.3])
 
 dnl Check for optional packages
 BM_DEPEND_CHECK([LIBSTARTUP_NOTIFICATION], [libstartup-notification-1.0],
-  [0.4], [startup-notification], [startup notification library], [yes])
+  [0.5], [startup-notification], [startup notification library], [yes])
 
 dnl Check for debugging support
 BM_DEBUG_SUPPORT
