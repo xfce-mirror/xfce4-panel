@@ -513,6 +513,8 @@ panel_popup_free (PanelPopup * pp)
     if (!pp)
 	return;
 
+    gtk_widget_destroy (pp->window);
+    
     for (li = pp->items; li && li->data; li = li->next)
     {
 	Item *mi = li->data;
