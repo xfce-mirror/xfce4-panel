@@ -63,6 +63,7 @@ struct _PanelPrivate
     GtkRequisition req;
     
     gboolean is_created;
+    int block_autohide;
 };
 
 
@@ -636,6 +637,8 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
 	popup_control = NULL;
 	menu = get_handle_menu ();
 
+	panel_register_open_menu (GTK_WIDGET (menu));
+	
 	gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button,
 			event->time);
 
@@ -787,7 +790,7 @@ static gboolean
 panel_hide_timeout (Panel * p)
 {
     /* if popup is open, keep trying */
-    if (open_popup)
+    if (open_popup || p->priv->block_autohide > 0)
 	return TRUE;
 
     if (!p->hidden)
@@ -1594,3 +1597,44 @@ panel_write_xml (xmlNodePtr root)
     snprintf (value, 5, "%d", panel.position.y);
     xmlSetProp (child, "y", value);
 }
+
+/* for menus, to prevent problems with autohide */
+
+static void
+menu_destroyed (GtkWidget *menu, Panel *p)
+{
+    if (p->priv->settings.autohide 
+	&& gdk_window_at_pointer (NULL, NULL) != p->toplevel->window)
+    {
+	GdkEvent *ev = gdk_event_new (GDK_LEAVE_NOTIFY);
+
+	((GdkEventCrossing *)ev)->time = GDK_CURRENT_TIME;
+	((GdkEventCrossing *)ev)->detail = GDK_NOTIFY_NONLINEAR;
+
+	gtk_widget_event (p->toplevel, ev);
+
+	gdk_event_free (ev);
+    }
+}
+
+void 
+panel_register_open_menu (GtkWidget *menu)
+{
+    g_return_if_fail (GTK_IS_WIDGET (menu));
+
+    g_signal_connect (menu, "deactivate", G_CALLBACK (menu_destroyed), &panel);
+}
+
+void 
+panel_block_autohide (Panel *p)
+{
+    p->priv->block_autohide++;
+}
+
+void 
+panel_unblock_autohide (Panel *p)
+{
+    if (p->priv->block_autohide > 0)
+	p->priv->block_autohide--;
+}
+

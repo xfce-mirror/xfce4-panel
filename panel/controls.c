@@ -808,6 +808,8 @@ control_press_cb (GtkWidget * b, GdkEventButton * ev, Control * control)
 	gtk_label_set_text (GTK_LABEL (label), 
 			    popup_control->cclass->caption);
 
+	panel_register_open_menu (menu);
+
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
 			ev->button, ev->time);
 

@@ -76,6 +76,8 @@ add_control_dialog (Panel * panel, int position)
 	return;
     }
 
+    panel_block_autohide (panel);
+    
     dlg = gtk_dialog_new_with_buttons (_("Xfce Panel"),
 				       GTK_WINDOW (panel->toplevel),
 				       GTK_DIALOG_DESTROY_WITH_PARENT |
@@ -132,6 +134,8 @@ dialog_response (GtkWidget *dlg, int response, ControlList *list)
     {
 	insert_control (list->panel, list->current->name, list->position);
     }
+
+    panel_unblock_autohide (list->panel);
 
     gtk_widget_destroy (dlg);
     the_dialog = NULL;

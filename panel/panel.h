@@ -79,4 +79,11 @@ void panel_set_autohide (gboolean hide);
 void panel_parse_xml (xmlNodePtr node);
 void panel_write_xml (xmlNodePtr root);
 
+/* for menus, to prevent problems with autohide */
+void panel_register_open_menu (GtkWidget *menu);
+
+void panel_block_autohide (Panel *panel);
+
+void panel_unblock_autohide (Panel *panel);
+
 #endif /* __XFCE_PANEL_H */
