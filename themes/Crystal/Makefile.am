@@ -11,6 +11,9 @@ minilock.png \
 minipalet.png \
 minipower.png \
 multimedia.png \
+newmail.png \
+oldmail.png \
+nomail.png \
 network.png \
 paint.png \
 print.png \

@@ -5,6 +5,9 @@ edit.png \
 file1.png \
 file2.png \
 games.png \
+newmail.png \
+oldmail.png \
+nomail.png \
 man.png \
 miniinfo.png \
 minilock.png \
