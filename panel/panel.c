@@ -120,7 +120,7 @@ set_opacity (Panel * p, gboolean translucent)
 {
     guint opacity;
 
-    opacity = (translucent ? 0xc0000000 : 0xffffffff);
+    opacity = (translucent ? 0xe0000000 : 0xffffffff);
     gdk_error_trap_push ();
 
     gdk_property_change (p->toplevel->window,
