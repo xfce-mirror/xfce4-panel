@@ -325,7 +325,6 @@ check_mail (t_mailcheck * mailcheck)
     int mail;
     struct stat s;
 
-#if 1
     if (stat (mailcheck->mbox, &s) < 0)
         mail = NO_MAIL;
     else if (!s.st_size)
@@ -334,21 +333,6 @@ check_mail (t_mailcheck * mailcheck)
         mail = OLD_MAIL;
     else
         mail = NEW_MAIL;
-#else
-    int status;
-    FILE *fp;
-
-    fp = popen("/usr/bin/ssh vmax.unix-ag.org perl", "w");
-    fputs("if (!(($size, $atime, $mtime) = (stat(\"/users/bmeurer/Mail/private\"))[7,8,9]) or $size <= 0) { exit 2; } elsif ($mtime <= $atime) { exit 1; } exit 0;", fp);
-    status = pclose(fp);
-
-    if (!WIFEXITED(status) || WEXITSTATUS(status) == 0)
-	    mail = NEW_MAIL;
-    else if (WEXITSTATUS(status) == 1)
-	    mail = OLD_MAIL;
-    else
-	    mail = NO_MAIL;
-#endif
 
     if (mail != mailcheck->status)
     {
