@@ -52,10 +52,12 @@ static void xfce_create_channel(McsManager *sm);
 McsPluginInitResult mcs_plugin_init(McsPlugin *mp)
 {
 #ifdef ENABLE_NLS
-    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    /* This is required for UTF-8 at least - Please don't remove it */
+    bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
 #endif
+
 
     mcs_manager = mp->manager;
 
