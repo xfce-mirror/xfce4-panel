@@ -78,7 +78,7 @@ typedef struct
     char *name;
     char *caption;
     GdkPixbuf *icon;
-    gboolean can_be_added;
+    gboolean can_be_added; /* not unique or not already added */
 }
 ControlInfo;
 

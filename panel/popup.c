@@ -36,6 +36,8 @@
 #include "item.h"
 #include "settings.h"
 
+#define NBITEMS 32
+
 PanelPopup *open_popup = NULL;
 
 /*  Panel popup callbacks

@@ -38,11 +38,6 @@
 #define PLUGINDIR  "panel-plugins"
 #define THEMEDIR   "icons"
 
-/* limits to the panel size */
-#define NBSCREENS 12
-#define NBGROUPS  16
-#define NBITEMS   25
-
 /* don't change default here, this is the fallback option
  * default config is set in the settings manager plugin */
 #define DEFAULT_THEME "Curve"
@@ -115,7 +110,10 @@ struct _Settings
     int num_groups;
 };
 
-/* global variables */
+/* global variables 
+ *
+ * FIXME: should be changed to use accessor functions 
+ * for more flexibility (e.g. multple panels) */
 
 /* defined in settings.c */
 extern gboolean disable_user_config;

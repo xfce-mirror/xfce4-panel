@@ -279,10 +279,11 @@ find_themes (void)
     int i, len;
 
     /* Add default theme */
-    dirs = g_new0 (char *, 3);
+    dirs = g_new0 (char *, 4);
 
     dirs[0] = g_build_filename (g_get_home_dir (), ".xfce4", "icons", NULL);
     dirs[1] = g_build_filename (DATADIR, "icons", NULL);
+    dirs[2] = g_build_filename (g_get_home_dir (), ".icons", NULL);
 
     for (d = dirs; *d; d++)
     {
