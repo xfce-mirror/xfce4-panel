@@ -404,6 +404,35 @@ panel_leave (GtkWidget * w, GdkEventCrossing * event, gpointer data)
     return FALSE;
 }
 
+/* unhide when receiving drag data */
+static GtkTargetEntry entry[] = {
+    {"text/uri-list", 0, 0},
+    {"STRING", 0, 1}
+};
+
+static gboolean
+drag_motion (GtkWidget * widget, GdkDragContext * context,
+             int x, int y, guint time, Panel * p)
+{
+    if (!p->hidden)
+	return TRUE;
+
+    if (p->hide_timeout)
+    {
+	g_source_remove (p->hide_timeout);
+	p->hide_timeout = 0;
+    }
+
+    if (!p->unhide_timeout)
+    {
+	p->unhide_timeout =
+	    g_timeout_add (UNHIDE_TIMEOUT,
+			   (GSourceFunc) panel_unhide_timeout, p);
+    }
+
+    return TRUE;
+}
+
 /*  Panel framework
  *  ---------------
 */
@@ -462,6 +491,10 @@ create_panel_framework (Panel * p)
     g_signal_connect (GTK_WINDOW (p->toplevel), "leave-notify-event",
                       G_CALLBACK (panel_leave), &panel);
 
+    gtk_drag_dest_set (p->toplevel, GTK_DEST_DEFAULT_ALL, entry, 2,
+                       GDK_ACTION_COPY);
+    g_signal_connect (p->toplevel, "drag-motion", G_CALLBACK (drag_motion), p);
+    
     /* main frame */
     p->main_frame = gtk_frame_new (NULL);
     gtk_frame_set_shadow_type (GTK_FRAME (p->main_frame), GTK_SHADOW_OUT);
