@@ -1,3 +1,316 @@
+2004-09-20 22:16  fleclainche
+
+	* icons/xfce-system-settings.png: oups... :)
+
+2004-09-20 22:13  fleclainche
+
+	* icons/: xfce-system-lock.png, xfce-system-settings.png,
+	  xfce-utils.png: Updated icons.
+
+2004-09-19 11:29  jasper
+
+	* Makefile.in, configure, configure.ac, panel/Makefile.am,
+	  panel/add-control-dialog.c, panel/controls.c, panel/controls.h,
+	  panel/controls_dialog.c, panel/item.c, panel/item_dialog.c,
+	  panel/main.c, panel/panel.c, panel/popup.c, panel/xfce_support.c,
+	  plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	  plugins/clock/clock.c, plugins/mailcheck/Makefile.am,
+	  plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
+	  plugins/pager/Makefile.am, plugins/pager/Makefile.in,
+	  plugins/pager/pager.c, plugins/sample-plugin/Makefile.am,
+	  plugins/sample-plugin/Makefile.in,
+	  plugins/sample-plugin/sample.c, plugins/separator/Makefile.am,
+	  plugins/separator/Makefile.in, plugins/separator/separator.c,
+	  plugins/switcher/Makefile.am, plugins/switcher/Makefile.in,
+	  plugins/switcher/switcher.c, plugins/systembuttons/Makefile.am,
+	  plugins/systembuttons/Makefile.in,
+	  plugins/systembuttons/systembuttons.c, themes/Makefile.am,
+	  themes/Makefile.in: Throw xfce_textdomain() in lots of places to
+	  fix translations. Hopefully.
+
+2004-09-18 18:41  pollux
+
+	* Makefile.am, po/de.gmo, po/eu.gmo, po/eu.po: update EU
+	  translations
+
+2004-09-18 02:02  moe
+
+	* po/de.po: Updating these for alpha release. Not yet finished ..
+	  but I'm just too tired to continue. Needs extensive spell
+	  checking and approvement (Note to myself: Write mail to the
+	  list!).
+
+2004-09-17 00:10  pollux
+
+	* configure, configure.ac, po/be.gmo, po/be.po: add BE translations
+	  from Ales Nyakhaychyk <nab@mail.by>
+
+2004-09-13 22:31  jasper
+
+	* panel/Makefile.am, panel/Makefile.in, panel/add-control-dialog.c,
+	  panel/add-control-dialog.h, panel/controls.c, panel/controls.h,
+	  panel/controls_dialog.c, panel/controls_dialog.h,
+	  panel/create-def-file.sh, panel/global.h, panel/groups.c,
+	  panel/groups.h, panel/icons.c, panel/icons.h, panel/item.c,
+	  panel/item.h, panel/item_dialog.c, panel/item_dialog.h,
+	  panel/main.c, panel/main.h, panel/mcs_client.c,
+	  panel/mcs_client.h, panel/panel.c, panel/panel.h,
+	  panel/plugins.h, panel/popup.c, panel/popup.h, panel/settings.c,
+	  panel/settings.h, panel/xfce_support.c, panel/xfce_support.h,
+	  plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	  plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
+	  plugins/pager/Makefile.am, plugins/pager/Makefile.in,
+	  plugins/sample-plugin/Makefile.am,
+	  plugins/sample-plugin/Makefile.in, plugins/separator/Makefile.am,
+	  plugins/separator/Makefile.in, plugins/switcher/Makefile.am,
+	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.am,
+	  plugins/systembuttons/Makefile.in: CYGWIN changes. Patch by
+	  Marrten boekhold.
+
+2004-09-12 18:39  jasper
+
+	* settings/xfce_settings_plugin.c: Make sure we always create the
+	  mcs channel
+
+2004-09-11 17:12  jasper
+
+	* Makefile.in, configure, configure.ac, doc/Makefile.in,
+	  doc/C/Makefile.in, doc/C/images/Makefile.in, doc/fr/Makefile.in,
+	  doc/fr/images/Makefile.in, doc/it/Makefile.in,
+	  doc/it/images/Makefile.in, icons/Makefile.in, panel/Makefile.am,
+	  panel/Makefile.in, panel/controls.c, panel/controls.h,
+	  panel/global.h, panel/icons.c, panel/icons.h,
+	  panel/item_dialog.c, panel/item_dialog.h, panel/main.c,
+	  panel/main.h, panel/mcs_client.c, panel/mcs_client.h,
+	  panel/panel.c, panel/panel.def, panel/plugins.h, panel/popup.c,
+	  panel/popup.h, panel/settings.c, panel/settings.h,
+	  panel/xfce_support.c, panel/xfce_support.h, plugins/Makefile.in,
+	  plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	  plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
+	  plugins/pager/Makefile.am, plugins/pager/Makefile.in,
+	  plugins/sample-plugin/Makefile.am,
+	  plugins/sample-plugin/Makefile.in, plugins/separator/Makefile.am,
+	  plugins/separator/Makefile.in, plugins/switcher/Makefile.am,
+	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.am,
+	  plugins/systembuttons/Makefile.in, settings/Makefile.am,
+	  settings/Makefile.in, themes/Makefile.in: Cygwin changes. Patch
+	  by Maarten Boekhold.
+
+2004-09-11 12:30  dannym
+
+	* panel/xfce_support.c: strfreev expects paths to be NULL
+	  terminated
+
+2004-09-11 10:16  jasper
+
+	* Makefile.am, Makefile.in, configure.ac, contents.xml,
+	  contents.xml.ar, contents.xml.az, contents.xml.ca,
+	  contents.xml.eu, contents.xml.he, contents.xml.hu,
+	  contents.xml.it, contents.xml.ms, contents.xml.nl,
+	  contents.xml.ro, contents.xml.ru, contents.xml.sk,
+	  contents.xml.vi, xfce4rc, xfce4rc.ar, xfce4rc.az, xfce4rc.ca,
+	  xfce4rc.eu, xfce4rc.he, xfce4rc.hu, xfce4rc.it, xfce4rc.ms,
+	  xfce4rc.nl, xfce4rc.ro, xfce4rc.ru, xfce4rc.sk, xfce4rc.vi,
+	  doc/C/xfce4-panel.html, doc/C/xfce4-panel.xml, panel/controls.c,
+	  panel/main.c, panel/settings.c, panel/xfce_support.c,
+	  panel/xfce_support.h, settings/xfce_settings_plugin.c: Rather big
+	  update: * use Base Dir Spec * xfce4rc -> panel/contents.xml *
+	  small doc update, more to come
+
+2004-09-10 22:49  pollux
+
+	* Makefile.am, Makefile.in, xfce4rc.he, po/he.gmo, po/he.po: HE
+	  translations update from Yuval Tanny <tanai@int.gov.il>
+
+2004-09-09 20:51  pollux
+
+	* xfce4rc.vi, po/vi.gmo, po/vi.po: update VI translations
+
+2004-09-09 10:24  jasper
+
+	* settings/xfce_settings_dialog.c: Fix compiler warning
+
+2004-09-08 18:13  jasper
+
+	* settings/xfce_settings_dialog.c: Nobody tell me anything ;) Seems
+	  we're using all 48x48 sized icons in headers now...
+
+2004-09-07 15:43  jasper
+
+	* po/: ar.po, az.gmo, az.po, bg.gmo, bg.po, ca.gmo, ca.po, cs.gmo,
+	  cs.po, de.gmo, de.po, es.gmo, es.po, es_MX.gmo, es_MX.po, et.gmo,
+	  et.po, eu.gmo, eu.po, fa_IR.gmo, fa_IR.po, fi.gmo, fi.po, fr.gmo,
+	  fr.po, he.gmo, he.po, hi.gmo, hi.po, hu.gmo, hu.po, it.gmo,
+	  it.po, ja.gmo, ja.po, ko.gmo, ko.po, lt.gmo, lt.po, ms.gmo,
+	  ms.po, nl.gmo, nl.po, no.gmo, no.po, pl.gmo, pl.po, pt_BR.gmo,
+	  pt_BR.po, pt_PT.gmo, pt_PT.po, ru.gmo, ru.po, sk.gmo, sk.po,
+	  sv.gmo, sv.po, ta.gmo, ta.po, tr.gmo, tr.po, vi.gmo, vi.po,
+	  xfce4-panel.pot, zh_CN.gmo, zh_CN.po, zh_TW.gmo, zh_TW.po: Tiny
+	  string freeze breakage (1 message). Sorry.
+
+2004-09-07 15:37  jasper
+
+	* po/ar.gmo: Tiny string freeze breakage (1 message). Sorry.
+
+2004-09-06 23:14  jasper
+
+	* panel/: Makefile.am, Makefile.in: Build fix (today's lesson: test
+	  before you commit)
+
+2004-09-06 21:32  jasper
+
+	* icons/Makefile.am, icons/Makefile.in, icons/xfce-edit.png,
+	  icons/xfce-filemanager.png, icons/xfce-games.png,
+	  icons/xfce-graphics.png, icons/xfce-internet.png,
+	  icons/xfce-mail.png, icons/xfce-man.png,
+	  icons/xfce-multimedia.png, icons/xfce-print.png,
+	  icons/xfce-printer.png, icons/xfce-schedule.png,
+	  icons/xfce-sound.png, icons/xfce-system-exit.png,
+	  icons/xfce-system-info.png, icons/xfce-system-lock.png,
+	  icons/xfce-system-settings.png, icons/xfce-terminal.png,
+	  icons/xfce-unknown.png, icons/xfce-utils.png, panel/Makefile.am,
+	  panel/Makefile.in, panel/add-control-dialog.c, panel/controls.c,
+	  panel/icons.c, panel/item_dialog.c, panel/item_dialog.h,
+	  panel/panel.c, panel/xfcombo.c, panel/xfcombo.h,
+	  plugins/sample-plugin/sample.c,
+	  plugins/systembuttons/systembuttons.c,
+	  settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c:
+	  Big update after server move: * updated icons to Rodent versions
+	  * remove xfcombo stuff * general cleanups
+
+2004-09-06 16:08  pollux
+
+	* configure, configure.ac, po/et.gmo, po/et.po: ET translations
+	  from Peeter Vois <Peeter.Vois@proekspert.ee>
+
+2004-09-05 23:40  olivier
+
+	* xfce4.spec.in: Fix spec file
+
+2004-08-30 17:57  jasper
+
+	* panel/icons.c: Get non-themed icons right
+
+2004-08-30 14:55  jasper
+
+	* .indent.pro, panel/add-control-dialog.c,
+	  panel/add-control-dialog.h, panel/controls.c, panel/controls.h,
+	  panel/controls_dialog.c, panel/controls_dialog.h, panel/global.h,
+	  panel/groups.c, panel/groups.h, panel/icons.c, panel/icons.h,
+	  panel/item.c, panel/item.h, panel/item_dialog.c,
+	  panel/item_dialog.h, panel/main.c, panel/main.h,
+	  panel/mcs_client.c, panel/mcs_client.h, panel/panel.c,
+	  panel/panel.h, panel/plugins.h, panel/popup.c, panel/popup.h,
+	  panel/settings.c, panel/settings.h, panel/xfce.h,
+	  panel/xfce_support.c, panel/xfce_support.h, panel/xfcombo.c,
+	  panel/xfcombo.h, plugins/clock/clock.c,
+	  plugins/mailcheck/mailcheck.c, plugins/pager/pager.c,
+	  plugins/sample-plugin/sample.c, plugins/separator/separator.c,
+	  plugins/switcher/switcher.c,
+	  plugins/systembuttons/systembuttons.c, po/ru.gmo,
+	  settings/xfce_settings.h, settings/xfce_settings_dialog.c,
+	  settings/xfce_settings_dialog.h, settings/xfce_settings_plugin.c,
+	  settings/xfce_settings_plugin.h: * Use XfceIconTheme (warning:
+	  still crashes) * Add $ and clean up copyright statements *
+	  Reindent using only spaces (more like Olivier's style)
+
+2004-08-29 18:03  pollux
+
+	* po/: az.gmo, az.po: AZ translations update from Metin Amiroff
+	  <metin@karegen.com>
+
+2004-08-28 21:20  pollux
+
+	* Makefile.am, Makefile.in, configure, configure.ac, xfce4rc.sk,
+	  po/sk.gmo, po/sk.po: add Slovak translations from Juraj Brosz
+	  <Juraj.Brosz@pobox.sk>
+
+2004-08-26 21:54  pollux
+
+	* po/: fi.po, fi.gmo: finnish translations update from Ilkka
+	  Ollakka <ilkka.j.ollakka@students.oamk.fi>
+
+2004-08-24 12:04  pollux
+
+	* Makefile.am, Makefile.in, xfce4rc.ru, po/ru.po: RU translations
+	  update from Anthony Ivanoff <a-i@bk.ru>
+
+2004-08-24 09:02  jasper
+
+	* panel/icons.c: Use correct file name for print icon
+
+2004-08-23 23:01  olivier
+
+	* panel/panel.c: Reverting my last revert as the bug has been found
+	  (in the WM)
+
+2004-08-23 00:06  olivier
+
+	* panel/panel.c: Reverting gtk_widget_show_now as it breaks
+	  SKIP_PAGER and SKIP_TASKBAR properties
+
+2004-08-22 19:36  jasper
+
+	* panel/: controls.c, controls_dialog.c, item.c, item_dialog.c,
+	  main.c, panel.c: Gettext hack only if gettext is used. Removed an
+	  gtk_widget_show_now()
+
+2004-08-22 18:55  jasper
+
+	* panel/: add-control-dialog.c, controls.c, controls_dialog.c,
+	  item.c, item_dialog.c, main.c, panel.c: This is better, should be
+	  temporary until I find out what's wrong.
+
+2004-08-22 17:29  jasper
+
+	* TODO, configure, configure.ac, panel/controls.c,
+	  panel/controls_dialog.c, panel/item.c, panel/item_dialog.c,
+	  panel/main.c, panel/panel.c, panel/settings.c,
+	  plugins/mailcheck/mailcheck.c,
+	  plugins/systembuttons/systembuttons.c, po/POTFILES.in, po/ar.gmo,
+	  po/ar.po, po/az.gmo, po/az.po, po/bg.gmo, po/bg.po, po/ca.gmo,
+	  po/ca.po, po/cs.gmo, po/cs.po, po/de.gmo, po/de.po, po/es.gmo,
+	  po/es.po, po/es_MX.gmo, po/es_MX.po, po/eu.gmo, po/eu.po,
+	  po/fa_IR.gmo, po/fa_IR.po, po/fi.gmo, po/fi.po, po/fr.gmo,
+	  po/fr.po, po/he.gmo, po/he.po, po/hi.gmo, po/hi.po, po/hu.gmo,
+	  po/hu.po, po/it.gmo, po/it.po, po/ja.gmo, po/ja.po, po/ko.gmo,
+	  po/ko.po, po/lt.gmo, po/lt.po, po/ms.gmo, po/ms.po, po/nl.gmo,
+	  po/nl.po, po/no.gmo, po/no.po, po/pl.gmo, po/pl.po, po/pt_BR.gmo,
+	  po/pt_BR.po, po/pt_PT.gmo, po/pt_PT.po, po/ru.gmo, po/ru.po,
+	  po/sv.gmo, po/sv.po, po/ta.gmo, po/ta.po, po/tr.gmo, po/tr.po,
+	  po/vi.gmo, po/vi.po, po/xfce4-panel.pot, po/zh_CN.gmo,
+	  po/zh_CN.po, po/zh_TW.gmo, po/zh_TW.po: Update strings. Gettext
+	  stuff seems a bit broken...
+
+2004-08-21 22:36  jasper
+
+	* panel/panel.c: Fix initial positioning (will I ever get this
+	  right?)
+
+2004-08-19 21:55  pollux
+
+	* panel/controls.c: allow panel to compile with --enable-debug=full
+
+2004-08-19 13:39  jasper
+
+	* ChangeLog, Makefile.in, TODO, configure, configure.ac,
+	  doc/Makefile.in, doc/C/Makefile.in, doc/C/images/Makefile.in,
+	  doc/fr/Makefile.in, doc/fr/images/Makefile.in,
+	  doc/it/Makefile.in, doc/it/images/Makefile.in, icons/Makefile.in,
+	  panel/Makefile.am, panel/Makefile.in, panel/item.c, panel/main.c,
+	  panel/panel.c, panel/xfce_support.c, plugins/Makefile.in,
+	  plugins/clock/Makefile.in, plugins/clock/clock.c,
+	  plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
+	  plugins/pager/Makefile.in, plugins/sample-plugin/Makefile.in,
+	  plugins/separator/Makefile.in, plugins/switcher/Makefile.in,
+	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	  themes/Makefile.in: Rip out thread support. threads + gtk ==
+	  trouble ;-)
+
+2004-08-17 13:26  jasper
+
+	* panel/controls.c: Keep launcher at the top of the 'Add item' list
+
 2004-08-15 21:39  olivier
 
 	* panel/add-control-dialog.c, panel/controls.c, po/ar.gmo,
@@ -174,7 +487,7 @@
 	* m4/depends.m4: Modifed panel plugin check, so one (the installer)
 	  can choose to install into a different plugin dir.
 
-2004-07-19 20:37  pollux
+2004-07-19 20:35  pollux
 
 	* po/: no.gmo, no.po: definitively fix #162
 
@@ -308,12 +621,211 @@
 	  plugins/mailcheck/mailcheck.c, plugins/sample-plugin/sample.c,
 	  plugins/systembuttons/systembuttons.c, po/xfce4-panel.pot,
 	  settings/xfce_settings_dialog.c, themes/Makefile.am,
-	  themes/Makefile.in: Oh dear, big changes. Please test.  Changes
-	  include: * Icon themeing based on icon spec. No more
-	  panel-specific theme option.	  Panel themes can still be
-	  created, but additionally the panel looks for    gnome and kde
-	  icons, when no xfce- namespaced icons were found.    Old panel
-	  themes will no longer work.  * Removed old icon themes.  *
+	  themes/Makefile.in, themes/Crystal/Makefile.am,
+	  themes/Crystal/Makefile.in, themes/Crystal/README,
+	  themes/Crystal/index.theme, themes/Crystal/22x22/Makefile.am,
+	  themes/Crystal/22x22/Makefile.in,
+	  themes/Crystal/22x22/emblems/Makefile.am,
+	  themes/Crystal/22x22/emblems/Makefile.in,
+	  themes/Crystal/22x22/emblems/miniinfo.png,
+	  themes/Crystal/22x22/emblems/minilock.png,
+	  themes/Crystal/22x22/emblems/minipalet.png,
+	  themes/Crystal/22x22/emblems/minipower.png,
+	  themes/Crystal/48x48/Makefile.am,
+	  themes/Crystal/48x48/Makefile.in,
+	  themes/Crystal/48x48/emblems/Makefile.am,
+	  themes/Crystal/48x48/emblems/Makefile.in,
+	  themes/Crystal/48x48/emblems/edit.png,
+	  themes/Crystal/48x48/emblems/file1.png,
+	  themes/Crystal/48x48/emblems/file2.png,
+	  themes/Crystal/48x48/emblems/games.png,
+	  themes/Crystal/48x48/emblems/man.png,
+	  themes/Crystal/48x48/emblems/multimedia.png,
+	  themes/Crystal/48x48/emblems/network.png,
+	  themes/Crystal/48x48/emblems/newmail.png,
+	  themes/Crystal/48x48/emblems/nomail.png,
+	  themes/Crystal/48x48/emblems/oldmail.png,
+	  themes/Crystal/48x48/emblems/paint.png,
+	  themes/Crystal/48x48/emblems/print.png,
+	  themes/Crystal/48x48/emblems/schedule.png,
+	  themes/Crystal/48x48/emblems/sound.png,
+	  themes/Crystal/48x48/emblems/terminal.png,
+	  themes/Crystal/48x48/emblems/trash_empty.png,
+	  themes/Crystal/48x48/emblems/trash_full.png,
+	  themes/Crystal/48x48/emblems/unknown.png,
+	  themes/Curve/Makefile.am, themes/Curve/Makefile.in,
+	  themes/Curve/README, themes/Curve/index.theme,
+	  themes/Curve/22x22/Makefile.am, themes/Curve/22x22/Makefile.in,
+	  themes/Curve/22x22/emblems/Makefile.am,
+	  themes/Curve/22x22/emblems/Makefile.in,
+	  themes/Curve/22x22/emblems/miniinfo.png,
+	  themes/Curve/22x22/emblems/minilock.png,
+	  themes/Curve/22x22/emblems/minipalet.png,
+	  themes/Curve/22x22/emblems/minipower.png,
+	  themes/Curve/48x48/Makefile.am, themes/Curve/48x48/Makefile.in,
+	  themes/Curve/48x48/emblems/Makefile.am,
+	  themes/Curve/48x48/emblems/Makefile.in,
+	  themes/Curve/48x48/emblems/edit.png,
+	  themes/Curve/48x48/emblems/file1.png,
+	  themes/Curve/48x48/emblems/file2.png,
+	  themes/Curve/48x48/emblems/games.png,
+	  themes/Curve/48x48/emblems/man.png,
+	  themes/Curve/48x48/emblems/multimedia.png,
+	  themes/Curve/48x48/emblems/network.png,
+	  themes/Curve/48x48/emblems/newmail.png,
+	  themes/Curve/48x48/emblems/nomail.png,
+	  themes/Curve/48x48/emblems/oldmail.png,
+	  themes/Curve/48x48/emblems/paint.png,
+	  themes/Curve/48x48/emblems/print.png,
+	  themes/Curve/48x48/emblems/schedule.png,
+	  themes/Curve/48x48/emblems/sound.png,
+	  themes/Curve/48x48/emblems/terminal.png,
+	  themes/Curve/48x48/emblems/trash_empty.png,
+	  themes/Curve/48x48/emblems/trash_full.png,
+	  themes/Curve/48x48/emblems/unknown.png,
+	  themes/FreeIcons/Makefile.am, themes/FreeIcons/Makefile.in,
+	  themes/FreeIcons/README, themes/FreeIcons/index.theme,
+	  themes/FreeIcons/22x22/Makefile.am,
+	  themes/FreeIcons/22x22/Makefile.in,
+	  themes/FreeIcons/22x22/emblems/Makefile.am,
+	  themes/FreeIcons/22x22/emblems/Makefile.in,
+	  themes/FreeIcons/22x22/emblems/minipower.png,
+	  themes/FreeIcons/24x24/Makefile.am,
+	  themes/FreeIcons/24x24/Makefile.in,
+	  themes/FreeIcons/24x24/emblems/Makefile.am,
+	  themes/FreeIcons/24x24/emblems/Makefile.in,
+	  themes/FreeIcons/24x24/emblems/miniinfo.png,
+	  themes/FreeIcons/24x24/emblems/minilock.png,
+	  themes/FreeIcons/24x24/emblems/minipalet.png,
+	  themes/FreeIcons/48x48/Makefile.am,
+	  themes/FreeIcons/48x48/Makefile.in,
+	  themes/FreeIcons/48x48/emblems/Makefile.am,
+	  themes/FreeIcons/48x48/emblems/Makefile.in,
+	  themes/FreeIcons/48x48/emblems/edit.png,
+	  themes/FreeIcons/48x48/emblems/file1.png,
+	  themes/FreeIcons/48x48/emblems/file2.png,
+	  themes/FreeIcons/48x48/emblems/games.png,
+	  themes/FreeIcons/48x48/emblems/man.png,
+	  themes/FreeIcons/48x48/emblems/multimedia.png,
+	  themes/FreeIcons/48x48/emblems/network.png,
+	  themes/FreeIcons/48x48/emblems/newmail.png,
+	  themes/FreeIcons/48x48/emblems/nomail.png,
+	  themes/FreeIcons/48x48/emblems/oldmail.png,
+	  themes/FreeIcons/48x48/emblems/paint.png,
+	  themes/FreeIcons/48x48/emblems/print.png,
+	  themes/FreeIcons/48x48/emblems/schedule.png,
+	  themes/FreeIcons/48x48/emblems/sound.png,
+	  themes/FreeIcons/48x48/emblems/terminal.png,
+	  themes/FreeIcons/48x48/emblems/unknown.png,
+	  themes/Gnome/Makefile.am, themes/Gnome/Makefile.in,
+	  themes/Gnome/index.theme, themes/Gnome/24x24/Makefile.am,
+	  themes/Gnome/24x24/Makefile.in,
+	  themes/Gnome/24x24/emblems/Makefile.am,
+	  themes/Gnome/24x24/emblems/Makefile.in,
+	  themes/Gnome/24x24/emblems/miniinfo.png,
+	  themes/Gnome/24x24/emblems/minilock.png,
+	  themes/Gnome/24x24/emblems/minipalet.png,
+	  themes/Gnome/24x24/emblems/minipower.png,
+	  themes/Gnome/48x48/Makefile.am, themes/Gnome/48x48/Makefile.in,
+	  themes/Gnome/48x48/emblems/Makefile.am,
+	  themes/Gnome/48x48/emblems/Makefile.in,
+	  themes/Gnome/48x48/emblems/edit.png,
+	  themes/Gnome/48x48/emblems/file1.png,
+	  themes/Gnome/48x48/emblems/file2.png,
+	  themes/Gnome/48x48/emblems/man.png,
+	  themes/Gnome/48x48/emblems/multimedia.png,
+	  themes/Gnome/48x48/emblems/network.png,
+	  themes/Gnome/48x48/emblems/paint.png,
+	  themes/Gnome/48x48/emblems/print.png,
+	  themes/Gnome/48x48/emblems/schedule.png,
+	  themes/Gnome/48x48/emblems/sound.png,
+	  themes/Gnome/48x48/emblems/terminal.png,
+	  themes/Gnome/48x48/emblems/trash_empty.png,
+	  themes/Gnome/48x48/emblems/trash_full.png,
+	  themes/Gnome/48x48/emblems/unknown.png,
+	  themes/Gnome/50x50/Makefile.am, themes/Gnome/50x50/Makefile.in,
+	  themes/Gnome/50x50/emblems/Makefile.am,
+	  themes/Gnome/50x50/emblems/Makefile.in,
+	  themes/Gnome/50x50/emblems/games.png, themes/Noia/Makefile.am,
+	  themes/Noia/Makefile.in, themes/Noia/README,
+	  themes/Noia/index.theme, themes/Noia/22x22/Makefile.am,
+	  themes/Noia/22x22/Makefile.in,
+	  themes/Noia/22x22/emblems/Makefile.am,
+	  themes/Noia/22x22/emblems/Makefile.in,
+	  themes/Noia/22x22/emblems/miniinfo.png,
+	  themes/Noia/22x22/emblems/minilock.png,
+	  themes/Noia/22x22/emblems/minipalet.png,
+	  themes/Noia/22x22/emblems/minipower.png,
+	  themes/Noia/48x48/Makefile.am, themes/Noia/48x48/Makefile.in,
+	  themes/Noia/48x48/emblems/Makefile.am,
+	  themes/Noia/48x48/emblems/Makefile.in,
+	  themes/Noia/48x48/emblems/edit.png,
+	  themes/Noia/48x48/emblems/file1.png,
+	  themes/Noia/48x48/emblems/file2.png,
+	  themes/Noia/48x48/emblems/games.png,
+	  themes/Noia/48x48/emblems/man.png,
+	  themes/Noia/48x48/emblems/multimedia.png,
+	  themes/Noia/48x48/emblems/network.png,
+	  themes/Noia/48x48/emblems/newmail.png,
+	  themes/Noia/48x48/emblems/nomail.png,
+	  themes/Noia/48x48/emblems/oldmail.png,
+	  themes/Noia/48x48/emblems/paint.png,
+	  themes/Noia/48x48/emblems/print.png,
+	  themes/Noia/48x48/emblems/schedule.png,
+	  themes/Noia/48x48/emblems/sound.png,
+	  themes/Noia/48x48/emblems/terminal.png,
+	  themes/Noia/48x48/emblems/trash_empty.png,
+	  themes/Noia/48x48/emblems/trash_full.png,
+	  themes/Noia/48x48/emblems/unknown.png, themes/XFce/Makefile.am,
+	  themes/XFce/Makefile.in, themes/XFce/index.theme,
+	  themes/XFce/14x14/Makefile.am, themes/XFce/14x14/Makefile.in,
+	  themes/XFce/14x14/emblems/Makefile.am,
+	  themes/XFce/14x14/emblems/Makefile.in,
+	  themes/XFce/14x14/emblems/minipower.xpm,
+	  themes/XFce/16x16/Makefile.am, themes/XFce/16x16/Makefile.in,
+	  themes/XFce/16x16/emblems/Makefile.am,
+	  themes/XFce/16x16/emblems/Makefile.in,
+	  themes/XFce/16x16/emblems/minilock.xpm,
+	  themes/XFce/19x19/Makefile.am, themes/XFce/19x19/Makefile.in,
+	  themes/XFce/19x19/emblems/Makefile.am,
+	  themes/XFce/19x19/emblems/Makefile.in,
+	  themes/XFce/19x19/emblems/miniinfo.xpm,
+	  themes/XFce/24x24/Makefile.am, themes/XFce/24x24/Makefile.in,
+	  themes/XFce/24x24/emblems/Makefile.am,
+	  themes/XFce/24x24/emblems/Makefile.in,
+	  themes/XFce/24x24/emblems/minipalet.xpm,
+	  themes/XFce/48x48/Makefile.am, themes/XFce/48x48/Makefile.in,
+	  themes/XFce/48x48/emblems/Makefile.am,
+	  themes/XFce/48x48/emblems/Makefile.in,
+	  themes/XFce/48x48/emblems/edit.xpm,
+	  themes/XFce/48x48/emblems/file1.xpm,
+	  themes/XFce/48x48/emblems/file2.xpm,
+	  themes/XFce/48x48/emblems/games.xpm,
+	  themes/XFce/48x48/emblems/man.xpm,
+	  themes/XFce/48x48/emblems/multimedia.xpm,
+	  themes/XFce/48x48/emblems/network.xpm,
+	  themes/XFce/48x48/emblems/newmail.xpm,
+	  themes/XFce/48x48/emblems/nomail.xpm,
+	  themes/XFce/48x48/emblems/oldmail.xpm,
+	  themes/XFce/48x48/emblems/print.xpm,
+	  themes/XFce/48x48/emblems/schedule.xpm,
+	  themes/XFce/48x48/emblems/sound.xpm,
+	  themes/XFce/48x48/emblems/terminal.xpm,
+	  themes/XFce/48x48/emblems/unknown.xpm,
+	  themes/XFce/50x50/Makefile.am, themes/XFce/50x50/Makefile.in,
+	  themes/XFce/50x50/emblems/Makefile.am,
+	  themes/XFce/50x50/emblems/Makefile.in,
+	  themes/XFce/50x50/emblems/paint.xpm,
+	  themes/XFce/53x53/Makefile.am, themes/XFce/53x53/Makefile.in,
+	  themes/XFce/53x53/emblems/Makefile.am,
+	  themes/XFce/53x53/emblems/Makefile.in,
+	  themes/XFce/53x53/emblems/trash_empty.xpm,
+	  themes/XFce/53x53/emblems/trash_full.xpm: Oh dear, big changes.
+	  Please test.	Changes include: * Icon themeing based on icon
+	  spec. No more panel-specific theme option.	Panel themes can
+	  still be created, but additionally the panel looks for    gnome
+	  and kde icons, when no xfce- namespaced icons were found.    Old
+	  panel themes will no longer work.  * Removed old icon themes.  *
 	  Removed panel layer option. The panel now is a dock-type window
 	  and sets   partial struts to allow the wm to do the right thing.
 
@@ -388,8 +900,46 @@
 	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	  plugins/separator/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, po/zh_TW.gmo, po/zh_TW.po,
-	  themes/Makefile.in: Update zh_TW translations from umm
-	  <umm@pchome.com.tw>
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Crystal/22x22/Makefile.in,
+	  themes/Crystal/22x22/emblems/Makefile.in,
+	  themes/Crystal/48x48/Makefile.in,
+	  themes/Crystal/48x48/emblems/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Curve/22x22/Makefile.in,
+	  themes/Curve/22x22/emblems/Makefile.in,
+	  themes/Curve/48x48/Makefile.in,
+	  themes/Curve/48x48/emblems/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/FreeIcons/22x22/Makefile.in,
+	  themes/FreeIcons/22x22/emblems/Makefile.in,
+	  themes/FreeIcons/24x24/Makefile.in,
+	  themes/FreeIcons/24x24/emblems/Makefile.in,
+	  themes/FreeIcons/48x48/Makefile.in,
+	  themes/FreeIcons/48x48/emblems/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Gnome/24x24/Makefile.in,
+	  themes/Gnome/24x24/emblems/Makefile.in,
+	  themes/Gnome/48x48/Makefile.in,
+	  themes/Gnome/48x48/emblems/Makefile.in,
+	  themes/Gnome/50x50/Makefile.in,
+	  themes/Gnome/50x50/emblems/Makefile.in, themes/Noia/Makefile.in,
+	  themes/Noia/22x22/Makefile.in,
+	  themes/Noia/22x22/emblems/Makefile.in,
+	  themes/Noia/48x48/Makefile.in,
+	  themes/Noia/48x48/emblems/Makefile.in, themes/XFce/Makefile.in,
+	  themes/XFce/14x14/Makefile.in,
+	  themes/XFce/14x14/emblems/Makefile.in,
+	  themes/XFce/16x16/Makefile.in,
+	  themes/XFce/16x16/emblems/Makefile.in,
+	  themes/XFce/19x19/Makefile.in,
+	  themes/XFce/19x19/emblems/Makefile.in,
+	  themes/XFce/24x24/Makefile.in,
+	  themes/XFce/24x24/emblems/Makefile.in,
+	  themes/XFce/48x48/Makefile.in,
+	  themes/XFce/48x48/emblems/Makefile.in,
+	  themes/XFce/50x50/Makefile.in,
+	  themes/XFce/50x50/emblems/Makefile.in,
+	  themes/XFce/53x53/Makefile.in,
+	  themes/XFce/53x53/emblems/Makefile.in: Update zh_TW translations
+	  from umm <umm@pchome.com.tw>
 
 2004-05-03 22:20  kelnos
 
@@ -546,11 +1096,49 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/separator/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.in, themes/Makefile.in: - Reduce handle width
-	  to show only one line of dots - disable completion combo, because
-	  it doesn't work on new installs - put 'Properties...' and
-	  'Remove' in a submenu of panel item right-click   menus. May
-	  prevent some accidental removals.
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Crystal/22x22/Makefile.in,
+	  themes/Crystal/22x22/emblems/Makefile.in,
+	  themes/Crystal/48x48/Makefile.in,
+	  themes/Crystal/48x48/emblems/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Curve/22x22/Makefile.in,
+	  themes/Curve/22x22/emblems/Makefile.in,
+	  themes/Curve/48x48/Makefile.in,
+	  themes/Curve/48x48/emblems/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/FreeIcons/22x22/Makefile.in,
+	  themes/FreeIcons/22x22/emblems/Makefile.in,
+	  themes/FreeIcons/24x24/Makefile.in,
+	  themes/FreeIcons/24x24/emblems/Makefile.in,
+	  themes/FreeIcons/48x48/Makefile.in,
+	  themes/FreeIcons/48x48/emblems/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Gnome/24x24/Makefile.in,
+	  themes/Gnome/24x24/emblems/Makefile.in,
+	  themes/Gnome/48x48/Makefile.in,
+	  themes/Gnome/48x48/emblems/Makefile.in,
+	  themes/Gnome/50x50/Makefile.in,
+	  themes/Gnome/50x50/emblems/Makefile.in, themes/Noia/Makefile.in,
+	  themes/Noia/22x22/Makefile.in,
+	  themes/Noia/22x22/emblems/Makefile.in,
+	  themes/Noia/48x48/Makefile.in,
+	  themes/Noia/48x48/emblems/Makefile.in, themes/XFce/Makefile.in,
+	  themes/XFce/14x14/Makefile.in,
+	  themes/XFce/14x14/emblems/Makefile.in,
+	  themes/XFce/16x16/Makefile.in,
+	  themes/XFce/16x16/emblems/Makefile.in,
+	  themes/XFce/19x19/Makefile.in,
+	  themes/XFce/19x19/emblems/Makefile.in,
+	  themes/XFce/24x24/Makefile.in,
+	  themes/XFce/24x24/emblems/Makefile.in,
+	  themes/XFce/48x48/Makefile.in,
+	  themes/XFce/48x48/emblems/Makefile.in,
+	  themes/XFce/50x50/Makefile.in,
+	  themes/XFce/50x50/emblems/Makefile.in,
+	  themes/XFce/53x53/Makefile.in,
+	  themes/XFce/53x53/emblems/Makefile.in: - Reduce handle width to
+	  show only one line of dots - disable completion combo, because it
+	  doesn't work on new installs - put 'Properties...' and 'Remove'
+	  in a submenu of panel item right-click   menus. May prevent some
+	  accidental removals.
 
 2004-03-31 17:15  kelnos
 
@@ -567,8 +1155,41 @@
 
 2004-03-30 05:54  kelnos
 
-	* themes/: Makefile.am, Makefile.in: move panel icon themes to
+	* themes/: Makefile.am, Makefile.in, Crystal/Makefile.am,
+	  Crystal/Makefile.in, Crystal/22x22/emblems/Makefile.am,
+	  Crystal/22x22/emblems/Makefile.in,
+	  Crystal/48x48/emblems/Makefile.am,
+	  Crystal/48x48/emblems/Makefile.in, Curve/Makefile.am,
+	  Curve/Makefile.in, Curve/22x22/emblems/Makefile.am,
+	  Curve/22x22/emblems/Makefile.in, Curve/48x48/emblems/Makefile.am,
+	  Curve/48x48/emblems/Makefile.in, FreeIcons/Makefile.am,
+	  FreeIcons/Makefile.in, FreeIcons/22x22/emblems/Makefile.am,
+	  FreeIcons/22x22/emblems/Makefile.in,
+	  FreeIcons/24x24/emblems/Makefile.am,
+	  FreeIcons/24x24/emblems/Makefile.in,
+	  FreeIcons/48x48/emblems/Makefile.am,
+	  FreeIcons/48x48/emblems/Makefile.in, Gnome/Makefile.am,
+	  Gnome/Makefile.in, Gnome/24x24/emblems/Makefile.am,
+	  Gnome/24x24/emblems/Makefile.in, Gnome/48x48/emblems/Makefile.am,
+	  Gnome/48x48/emblems/Makefile.in, Gnome/50x50/emblems/Makefile.am,
+	  Gnome/50x50/emblems/Makefile.in, Noia/Makefile.am,
+	  Noia/Makefile.in, Noia/22x22/emblems/Makefile.am,
+	  Noia/22x22/emblems/Makefile.in, Noia/48x48/emblems/Makefile.am,
+	  Noia/48x48/emblems/Makefile.in, XFce/Makefile.am,
+	  XFce/Makefile.in, XFce/14x14/emblems/Makefile.am,
+	  XFce/14x14/emblems/Makefile.in, XFce/16x16/emblems/Makefile.am,
+	  XFce/16x16/emblems/Makefile.in, XFce/19x19/emblems/Makefile.am,
+	  XFce/19x19/emblems/Makefile.in, XFce/24x24/emblems/Makefile.am,
+	  XFce/24x24/emblems/Makefile.in, XFce/48x48/emblems/Makefile.am,
+	  XFce/48x48/emblems/Makefile.in, XFce/50x50/emblems/Makefile.am,
+	  XFce/50x50/emblems/Makefile.in, XFce/53x53/emblems/Makefile.am,
+	  XFce/53x53/emblems/Makefile.in: move panel icon themes to
 	  $datadir/xfce4/icons
+
+2004-03-29 12:55  kelnos
+
+	* themes/Gnome/index.theme: match the 'official' gnome icon theme
+	  name
 
 2004-03-20 21:22  jasper
 
@@ -630,14 +1251,265 @@
 	  in dialog and remove position settings from dialog (not a real
 	  setting)
 
+2004-02-26 01:19  kelnos
+
+	* themes/: Crystal/index.theme, Curve/index.theme,
+	  FreeIcons/index.theme, Gnome/index.theme, Noia/index.theme,
+	  XFce/index.theme: add Inherits= so we have some defaults
+
 2004-02-25 20:16  kelnos
 
 	* panel/: icons.c, panel.c: make the panel use GtkIconTheme and the
 	  new layout
 
-2004-02-25 20:10  kelnos
+2004-02-25 20:13  kelnos
 
-	* configure, configure.ac: more icon reorg...
+	* themes/: Crystal/edit.png, Crystal/file1.png, Crystal/file2.png,
+	  Crystal/games.png, Crystal/man.png, Crystal/miniinfo.png,
+	  Crystal/minilock.png, Crystal/minipalet.png,
+	  Crystal/minipower.png, Crystal/multimedia.png,
+	  Crystal/network.png, Crystal/newmail.png, Crystal/nomail.png,
+	  Crystal/oldmail.png, Crystal/paint.png, Crystal/print.png,
+	  Crystal/schedule.png, Crystal/sound.png, Crystal/terminal.png,
+	  Crystal/trash_empty.png, Crystal/trash_full.png,
+	  Crystal/unknown.png, Curve/edit.png, Curve/file1.png,
+	  Curve/file2.png, Curve/games.png, Curve/man.png,
+	  Curve/miniinfo.png, Curve/minilock.png, Curve/minipalet.png,
+	  Curve/minipower.png, Curve/multimedia.png, Curve/network.png,
+	  Curve/newmail.png, Curve/nomail.png, Curve/oldmail.png,
+	  Curve/paint.png, Curve/print.png, Curve/schedule.png,
+	  Curve/sound.png, Curve/terminal.png, Curve/trash_empty.png,
+	  Curve/trash_full.png, Curve/unknown.png, FreeIcons/edit.png,
+	  FreeIcons/file1.png, FreeIcons/file2.png, FreeIcons/games.png,
+	  FreeIcons/man.png, FreeIcons/miniinfo.png,
+	  FreeIcons/minilock.png, FreeIcons/minipalet.png,
+	  FreeIcons/minipower.png, FreeIcons/multimedia.png,
+	  FreeIcons/network.png, FreeIcons/newmail.png,
+	  FreeIcons/nomail.png, FreeIcons/oldmail.png, FreeIcons/paint.png,
+	  FreeIcons/print.png, FreeIcons/schedule.png, FreeIcons/sound.png,
+	  FreeIcons/terminal.png, FreeIcons/unknown.png, Gnome/edit.png,
+	  Gnome/file1.png, Gnome/file2.png, Gnome/games.png, Gnome/man.png,
+	  Gnome/miniinfo.png, Gnome/minilock.png, Gnome/minipalet.png,
+	  Gnome/minipower.png, Gnome/multimedia.png, Gnome/network.png,
+	  Gnome/paint.png, Gnome/print.png, Gnome/schedule.png,
+	  Gnome/sound.png, Gnome/terminal.png, Gnome/trash_empty.png,
+	  Gnome/trash_full.png, Gnome/unknown.png, Noia/edit.png,
+	  Noia/file1.png, Noia/file2.png, Noia/games.png, Noia/man.png,
+	  Noia/miniinfo.png, Noia/minilock.png, Noia/minipalet.png,
+	  Noia/minipower.png, Noia/multimedia.png, Noia/network.png,
+	  Noia/newmail.png, Noia/nomail.png, Noia/oldmail.png,
+	  Noia/paint.png, Noia/print.png, Noia/schedule.png,
+	  Noia/sound.png, Noia/terminal.png, Noia/trash_empty.png,
+	  Noia/trash_full.png, Noia/unknown.png, XFce/edit.xpm,
+	  XFce/file1.xpm, XFce/file2.xpm, XFce/games.xpm, XFce/man.xpm,
+	  XFce/miniinfo.xpm, XFce/minilock.xpm, XFce/minipalet.xpm,
+	  XFce/minipower.xpm, XFce/multimedia.xpm, XFce/network.xpm,
+	  XFce/newmail.xpm, XFce/nomail.xpm, XFce/oldmail.xpm,
+	  XFce/paint.xpm, XFce/print.xpm, XFce/schedule.xpm,
+	  XFce/sound.xpm, XFce/terminal.xpm, XFce/trash_empty.xpm,
+	  XFce/trash_full.xpm, XFce/unknown.xpm: add was successful, remove
+	  the old
+
+2004-02-25 20:09  kelnos
+
+	* themes/Crystal/Makefile.am, themes/Crystal/Makefile.in,
+	  themes/Crystal/index.theme, themes/Crystal/22x22/Makefile.am,
+	  themes/Crystal/22x22/Makefile.in,
+	  themes/Crystal/22x22/emblems/Makefile.am,
+	  themes/Crystal/22x22/emblems/Makefile.in,
+	  themes/Crystal/22x22/emblems/miniinfo.png,
+	  themes/Crystal/22x22/emblems/minilock.png,
+	  themes/Crystal/22x22/emblems/minipalet.png,
+	  themes/Crystal/22x22/emblems/minipower.png,
+	  themes/Crystal/48x48/Makefile.am,
+	  themes/Crystal/48x48/Makefile.in,
+	  themes/Crystal/48x48/emblems/Makefile.am,
+	  themes/Crystal/48x48/emblems/Makefile.in,
+	  themes/Crystal/48x48/emblems/edit.png,
+	  themes/Crystal/48x48/emblems/file1.png,
+	  themes/Crystal/48x48/emblems/file2.png,
+	  themes/Crystal/48x48/emblems/games.png,
+	  themes/Crystal/48x48/emblems/man.png,
+	  themes/Crystal/48x48/emblems/multimedia.png,
+	  themes/Crystal/48x48/emblems/network.png,
+	  themes/Crystal/48x48/emblems/newmail.png,
+	  themes/Crystal/48x48/emblems/nomail.png,
+	  themes/Crystal/48x48/emblems/oldmail.png,
+	  themes/Crystal/48x48/emblems/paint.png,
+	  themes/Crystal/48x48/emblems/print.png,
+	  themes/Crystal/48x48/emblems/schedule.png,
+	  themes/Crystal/48x48/emblems/sound.png,
+	  themes/Crystal/48x48/emblems/terminal.png,
+	  themes/Crystal/48x48/emblems/trash_empty.png,
+	  themes/Crystal/48x48/emblems/trash_full.png,
+	  themes/Crystal/48x48/emblems/unknown.png,
+	  themes/Curve/Makefile.am, themes/Curve/Makefile.in,
+	  themes/Curve/index.theme, themes/Curve/22x22/Makefile.am,
+	  themes/Curve/22x22/Makefile.in,
+	  themes/Curve/22x22/emblems/Makefile.am,
+	  themes/Curve/22x22/emblems/Makefile.in,
+	  themes/Curve/22x22/emblems/miniinfo.png,
+	  themes/Curve/22x22/emblems/minilock.png,
+	  themes/Curve/22x22/emblems/minipalet.png,
+	  themes/Curve/22x22/emblems/minipower.png,
+	  themes/Curve/48x48/Makefile.am, themes/Curve/48x48/Makefile.in,
+	  themes/Curve/48x48/emblems/Makefile.am,
+	  themes/Curve/48x48/emblems/Makefile.in,
+	  themes/Curve/48x48/emblems/edit.png,
+	  themes/Curve/48x48/emblems/file1.png,
+	  themes/Curve/48x48/emblems/file2.png,
+	  themes/Curve/48x48/emblems/games.png,
+	  themes/Curve/48x48/emblems/man.png,
+	  themes/Curve/48x48/emblems/multimedia.png,
+	  themes/Curve/48x48/emblems/network.png,
+	  themes/Curve/48x48/emblems/newmail.png,
+	  themes/Curve/48x48/emblems/nomail.png,
+	  themes/Curve/48x48/emblems/oldmail.png,
+	  themes/Curve/48x48/emblems/paint.png,
+	  themes/Curve/48x48/emblems/print.png,
+	  themes/Curve/48x48/emblems/schedule.png,
+	  themes/Curve/48x48/emblems/sound.png,
+	  themes/Curve/48x48/emblems/terminal.png,
+	  themes/Curve/48x48/emblems/trash_empty.png,
+	  themes/Curve/48x48/emblems/trash_full.png,
+	  themes/Curve/48x48/emblems/unknown.png,
+	  themes/FreeIcons/Makefile.am, themes/FreeIcons/Makefile.in,
+	  themes/FreeIcons/index.theme, themes/FreeIcons/22x22/Makefile.am,
+	  themes/FreeIcons/22x22/Makefile.in,
+	  themes/FreeIcons/22x22/emblems/Makefile.am,
+	  themes/FreeIcons/22x22/emblems/Makefile.in,
+	  themes/FreeIcons/22x22/emblems/minipower.png,
+	  themes/FreeIcons/24x24/Makefile.am,
+	  themes/FreeIcons/24x24/Makefile.in,
+	  themes/FreeIcons/24x24/emblems/Makefile.am,
+	  themes/FreeIcons/24x24/emblems/Makefile.in,
+	  themes/FreeIcons/24x24/emblems/miniinfo.png,
+	  themes/FreeIcons/24x24/emblems/minilock.png,
+	  themes/FreeIcons/24x24/emblems/minipalet.png,
+	  themes/FreeIcons/48x48/Makefile.am,
+	  themes/FreeIcons/48x48/Makefile.in,
+	  themes/FreeIcons/48x48/emblems/Makefile.am,
+	  themes/FreeIcons/48x48/emblems/Makefile.in,
+	  themes/FreeIcons/48x48/emblems/edit.png,
+	  themes/FreeIcons/48x48/emblems/file1.png,
+	  themes/FreeIcons/48x48/emblems/file2.png,
+	  themes/FreeIcons/48x48/emblems/games.png,
+	  themes/FreeIcons/48x48/emblems/man.png,
+	  themes/FreeIcons/48x48/emblems/multimedia.png,
+	  themes/FreeIcons/48x48/emblems/network.png,
+	  themes/FreeIcons/48x48/emblems/newmail.png,
+	  themes/FreeIcons/48x48/emblems/nomail.png,
+	  themes/FreeIcons/48x48/emblems/oldmail.png,
+	  themes/FreeIcons/48x48/emblems/paint.png,
+	  themes/FreeIcons/48x48/emblems/print.png,
+	  themes/FreeIcons/48x48/emblems/schedule.png,
+	  themes/FreeIcons/48x48/emblems/sound.png,
+	  themes/FreeIcons/48x48/emblems/terminal.png,
+	  themes/FreeIcons/48x48/emblems/unknown.png,
+	  themes/Gnome/Makefile.am, themes/Gnome/Makefile.in,
+	  themes/Gnome/index.theme, themes/Gnome/24x24/Makefile.am,
+	  themes/Gnome/24x24/Makefile.in,
+	  themes/Gnome/24x24/emblems/Makefile.am,
+	  themes/Gnome/24x24/emblems/Makefile.in,
+	  themes/Gnome/24x24/emblems/miniinfo.png,
+	  themes/Gnome/24x24/emblems/minilock.png,
+	  themes/Gnome/24x24/emblems/minipalet.png,
+	  themes/Gnome/24x24/emblems/minipower.png,
+	  themes/Gnome/48x48/Makefile.am, themes/Gnome/48x48/Makefile.in,
+	  themes/Gnome/48x48/emblems/Makefile.am,
+	  themes/Gnome/48x48/emblems/Makefile.in,
+	  themes/Gnome/48x48/emblems/edit.png,
+	  themes/Gnome/48x48/emblems/file1.png,
+	  themes/Gnome/48x48/emblems/file2.png,
+	  themes/Gnome/48x48/emblems/man.png,
+	  themes/Gnome/48x48/emblems/multimedia.png,
+	  themes/Gnome/48x48/emblems/network.png,
+	  themes/Gnome/48x48/emblems/paint.png,
+	  themes/Gnome/48x48/emblems/print.png,
+	  themes/Gnome/48x48/emblems/schedule.png,
+	  themes/Gnome/48x48/emblems/sound.png,
+	  themes/Gnome/48x48/emblems/terminal.png,
+	  themes/Gnome/48x48/emblems/trash_empty.png,
+	  themes/Gnome/48x48/emblems/trash_full.png,
+	  themes/Gnome/48x48/emblems/unknown.png,
+	  themes/Gnome/50x50/Makefile.am, themes/Gnome/50x50/Makefile.in,
+	  themes/Gnome/50x50/emblems/Makefile.am,
+	  themes/Gnome/50x50/emblems/Makefile.in,
+	  themes/Gnome/50x50/emblems/games.png, themes/Noia/Makefile.am,
+	  themes/Noia/Makefile.in, themes/Noia/index.theme,
+	  themes/Noia/22x22/Makefile.am, themes/Noia/22x22/Makefile.in,
+	  themes/Noia/22x22/emblems/Makefile.am,
+	  themes/Noia/22x22/emblems/Makefile.in,
+	  themes/Noia/22x22/emblems/miniinfo.png,
+	  themes/Noia/22x22/emblems/minilock.png,
+	  themes/Noia/22x22/emblems/minipalet.png,
+	  themes/Noia/22x22/emblems/minipower.png,
+	  themes/Noia/48x48/Makefile.am, themes/Noia/48x48/Makefile.in,
+	  themes/Noia/48x48/emblems/Makefile.am,
+	  themes/Noia/48x48/emblems/Makefile.in,
+	  themes/Noia/48x48/emblems/edit.png,
+	  themes/Noia/48x48/emblems/file1.png,
+	  themes/Noia/48x48/emblems/file2.png,
+	  themes/Noia/48x48/emblems/games.png,
+	  themes/Noia/48x48/emblems/man.png,
+	  themes/Noia/48x48/emblems/multimedia.png,
+	  themes/Noia/48x48/emblems/network.png,
+	  themes/Noia/48x48/emblems/newmail.png,
+	  themes/Noia/48x48/emblems/nomail.png,
+	  themes/Noia/48x48/emblems/oldmail.png,
+	  themes/Noia/48x48/emblems/paint.png,
+	  themes/Noia/48x48/emblems/print.png,
+	  themes/Noia/48x48/emblems/schedule.png,
+	  themes/Noia/48x48/emblems/sound.png,
+	  themes/Noia/48x48/emblems/terminal.png,
+	  themes/Noia/48x48/emblems/trash_empty.png,
+	  themes/Noia/48x48/emblems/trash_full.png,
+	  themes/Noia/48x48/emblems/unknown.png, themes/XFce/Makefile.am,
+	  themes/XFce/Makefile.in, themes/XFce/index.theme,
+	  themes/XFce/14x14/Makefile.am, themes/XFce/14x14/Makefile.in,
+	  themes/XFce/14x14/emblems/Makefile.am,
+	  themes/XFce/14x14/emblems/Makefile.in,
+	  themes/XFce/14x14/emblems/minipower.xpm,
+	  themes/XFce/16x16/Makefile.am, themes/XFce/16x16/Makefile.in,
+	  themes/XFce/16x16/emblems/Makefile.am,
+	  themes/XFce/16x16/emblems/Makefile.in,
+	  themes/XFce/16x16/emblems/minilock.xpm,
+	  themes/XFce/19x19/Makefile.am, themes/XFce/19x19/Makefile.in,
+	  themes/XFce/19x19/emblems/Makefile.am,
+	  themes/XFce/19x19/emblems/Makefile.in,
+	  themes/XFce/19x19/emblems/miniinfo.xpm,
+	  themes/XFce/24x24/Makefile.am, themes/XFce/24x24/Makefile.in,
+	  themes/XFce/24x24/emblems/Makefile.am,
+	  themes/XFce/24x24/emblems/Makefile.in,
+	  themes/XFce/24x24/emblems/minipalet.xpm,
+	  themes/XFce/48x48/Makefile.am, themes/XFce/48x48/Makefile.in,
+	  themes/XFce/48x48/emblems/Makefile.am,
+	  themes/XFce/48x48/emblems/Makefile.in,
+	  themes/XFce/48x48/emblems/edit.xpm,
+	  themes/XFce/48x48/emblems/file1.xpm,
+	  themes/XFce/48x48/emblems/file2.xpm,
+	  themes/XFce/48x48/emblems/games.xpm,
+	  themes/XFce/48x48/emblems/man.xpm,
+	  themes/XFce/48x48/emblems/multimedia.xpm,
+	  themes/XFce/48x48/emblems/network.xpm,
+	  themes/XFce/48x48/emblems/newmail.xpm,
+	  themes/XFce/48x48/emblems/nomail.xpm,
+	  themes/XFce/48x48/emblems/oldmail.xpm,
+	  themes/XFce/48x48/emblems/print.xpm,
+	  themes/XFce/48x48/emblems/schedule.xpm,
+	  themes/XFce/48x48/emblems/sound.xpm,
+	  themes/XFce/48x48/emblems/terminal.xpm,
+	  themes/XFce/48x48/emblems/unknown.xpm,
+	  themes/XFce/50x50/Makefile.am, themes/XFce/50x50/Makefile.in,
+	  themes/XFce/50x50/emblems/Makefile.am,
+	  themes/XFce/50x50/emblems/Makefile.in,
+	  themes/XFce/50x50/emblems/paint.xpm,
+	  themes/XFce/53x53/Makefile.am, themes/XFce/53x53/Makefile.in,
+	  themes/XFce/53x53/emblems/Makefile.am,
+	  themes/XFce/53x53/emblems/Makefile.in,
+	  themes/XFce/53x53/emblems/trash_empty.xpm,
+	  themes/XFce/53x53/emblems/trash_full.xpm, configure,
+	  configure.ac: more icon reorg...
 
 2004-02-18 22:43  jasper
 
@@ -683,8 +1555,11 @@
 	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	  plugins/separator/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: Update libtool and other automake, autoconf
-	  and gettext packages
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Update libtool and other automake,
+	  autoconf and gettext packages
 
 2004-01-23 08:47  jasper
 
@@ -744,8 +1619,11 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/separator/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.in, themes/Makefile.in: Completion combo
-	  support. I'll probably be changing this a bit later.
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Completion
+	  combo support. I'll probably be changing this a bit later.
 
 2004-01-08 22:18  jasper
 
@@ -838,7 +1716,7 @@
 	* panel/: groups.c, panel.c: Fix positioning when screen size is
 	  different than in previous session
 
-2003-12-06 17:05  jasper
+2003-12-06 17:04  jasper
 
 	* panel/popup.c: Fix panel crash when removing an item with a
 	  detached menu
@@ -901,7 +1779,7 @@
 	* configure.ac, po/it.gmo, po/it.po: Added italian translation,
 	  thanks to Eduard Roccatello.
 
-2003-11-17 16:10  jasper
+2003-11-17 16:08  jasper
 
 	* panel/xfce_support.c: Check for cmd != NULL when executing
 	  commands
@@ -910,7 +1788,7 @@
 
 	* po/de.gmo: Fix 64bit/endianess problem
 
-2003-11-16 09:45  jasper
+2003-11-16 09:44  jasper
 
 	* po/: cs.gmo, cs.po: Update Czech translations
 
@@ -1941,7 +2819,10 @@
 	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	  plugins/separator/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: libttol update and all
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: libttol update and all
 
 2003-07-04 18:55  bmeurer
 
@@ -1987,9 +2868,12 @@
 	  po/hi.po, po/ja.gmo, po/ja.po, po/ms.gmo, po/ms.po, po/nl.gmo,
 	  po/nl.po, po/pl.gmo, po/pl.po, po/ru.gmo, po/ru.po, po/ta.gmo,
 	  po/ta.po, po/tr.gmo, po/tr.po, po/xfce4-panel.pot, po/zh_CN.gmo,
-	  po/zh_CN.po, settings/Makefile.in, themes/Makefile.in: Add
-	  separator. Remove separators from pager. Several smaller fixes to
-	  plugins. Update docs.
+	  po/zh_CN.po, settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add separator.
+	  Remove separators from pager. Several smaller fixes to plugins.
+	  Update docs.
 
 2003-07-02 10:29  huysmans
 
@@ -2008,8 +2892,11 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: Update to libtool-1.5 Use proper complete
-	  CURRENT:REVISION:AGE scheme for lib versionning
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Update to libtool-1.5 Use proper
+	  complete CURRENT:REVISION:AGE scheme for lib versionning
 
 2003-06-21 21:22  bmeurer
 
@@ -2079,7 +2966,10 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: automake 1.7.5
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: automake 1.7.5
 
 2003-06-10 23:34  xfce
 
@@ -2108,9 +2998,12 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  settings/xfce_settings_dialog.c, themes/Makefile.in: Add new
-	  widget xfce_framebox to unify look across UI Migrate all plugins
-	  to this new widget
+	  settings/xfce_settings_dialog.c, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add new widget
+	  xfce_framebox to unify look across UI Migrate all plugins to this
+	  new widget
 
 2003-06-08 21:06  huysmans
 
@@ -2125,8 +3018,11 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, po/ru.gmo, po/ru.po,
-	  settings/Makefile.in, themes/Makefile.in: Add russian translation
-	  and fix xfdesktop not reading a new local menu
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add russian
+	  translation and fix xfdesktop not reading a new local menu
 
 2003-06-08 15:51  bmeurer
 
@@ -2145,7 +3041,10 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: Versionning scheme
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Versionning scheme
 
 2003-06-06 17:46  huysmans
 
@@ -2254,8 +3153,11 @@
 	  plugins/Makefile.in, plugins/clock/Makefile.in,
 	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  po/ta.gmo, po/ta.po, settings/Makefile.in, themes/Makefile.in:
-	  Add tamil translations
+	  po/ta.gmo, po/ta.po, settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add tamil
+	  translations
 
 2003-05-15 15:25  huysmans
 
@@ -2328,7 +3230,13 @@
 	  po/fi.gmo, po/fi.po, po/fr.gmo, po/fr.po, po/ja.gmo, po/ja.po,
 	  po/nl.gmo, po/nl.po, po/pl.gmo, po/pl.po, po/xfce4-panel.pot,
 	  po/zh_CN.gmo, po/zh_CN.po, settings/Makefile.am,
-	  settings/Makefile.in: Fix distcheck target. Rename package to
+	  settings/Makefile.in, themes/Crystal/Makefile.am,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.am,
+	  themes/Curve/Makefile.in, themes/FreeIcons/Makefile.am,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.am,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.am,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.am,
+	  themes/XFce/Makefile.in: Fix distcheck target. Rename package to
 	  xfce4-panel. Set version to 3.90 (betas will be 3.90, 3.91, 3.92,
 	  etc.)
 
@@ -2400,7 +3308,10 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, po/zh_CN.gmo, po/zh_CN.po,
-	  settings/Makefile.in, themes/Makefile.in: Add chinese
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add chinese
 	  translations
 
 2003-05-03 11:12  huysmans
@@ -2419,7 +3330,11 @@
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.am,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.am,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: Update to use the new panel-plugins location
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Update to use the new panel-plugins
+	  location
 
 2003-05-02 19:12  bmeurer
 
@@ -2430,7 +3345,11 @@
 	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
 	  plugins/systembuttons/systembuttons.c, settings/Makefile.am,
-	  settings/Makefile.in, themes/Makefile.in: Several changes. See
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Several
+	  changes. See
 	  http://www.home.unix-ag.org/bmeurer/xfce/index.html#20030502 for
 	  details.
 
@@ -2524,6 +3443,11 @@
 
 	* panel/main.c: Fix signal handling - gtk mainloop interaction
 
+2003-04-21 22:48  huysmans
+
+	* themes/FreeIcons/minipower.png: Use Curve exit icon instead of
+	  confusing gear
+
 2003-04-21 20:52  bmeurer
 
 	* AUTHORS, Makefile.am, Makefile.in, NOTES, aclocal.m4, configure,
@@ -2541,14 +3465,31 @@
 	  plugins/systembuttons/Makefile.am,
 	  plugins/systembuttons/Makefile.in,
 	  plugins/systembuttons/systembuttons.c, settings/Makefile.am,
-	  settings/Makefile.in, settings/xfce_settings_plugin.c: Its now
-	  possible to write panel plugins outside the panel. See the NOTES
-	  file for details and enjoy writing new panel plugins.
+	  settings/Makefile.in, settings/xfce_settings_plugin.c,
+	  themes/FreeIcons/Makefile.am, themes/FreeIcons/Makefile.in: Its
+	  now possible to write panel plugins outside the panel. See the
+	  NOTES file for details and enjoy writing new panel plugins.
+
+2003-04-21 17:46  huysmans
+
+	* themes/FreeIcons/: Makefile.am, Makefile.in: Really rename the
+	  theme
 
 2003-04-21 16:26  huysmans
 
-	* configure, configure.ac, themes/Makefile.am, themes/Makefile.in:
-	  Rename Carillon to FreeIcons
+	* configure, configure.ac, themes/Makefile.am, themes/Makefile.in,
+	  themes/FreeIcons/Makefile.am, themes/FreeIcons/Makefile.in,
+	  themes/FreeIcons/README, themes/FreeIcons/edit.png,
+	  themes/FreeIcons/file1.png, themes/FreeIcons/file2.png,
+	  themes/FreeIcons/games.png, themes/FreeIcons/man.png,
+	  themes/FreeIcons/miniinfo.png, themes/FreeIcons/minilock.png,
+	  themes/FreeIcons/minipalet.png, themes/FreeIcons/minipower.png,
+	  themes/FreeIcons/multimedia.png, themes/FreeIcons/network.png,
+	  themes/FreeIcons/newmail.png, themes/FreeIcons/nomail.png,
+	  themes/FreeIcons/oldmail.png, themes/FreeIcons/paint.png,
+	  themes/FreeIcons/print.png, themes/FreeIcons/schedule.png,
+	  themes/FreeIcons/sound.png, themes/FreeIcons/terminal.png,
+	  themes/FreeIcons/unknown.png: Rename Carillon to FreeIcons
 
 2003-04-21 09:42  huysmans
 
@@ -2569,8 +3510,10 @@
 	  plugins/switcher/Makefile.am, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.am,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.am,
-	  settings/Makefile.in, themes/Makefile.in: Some autotools
-	  cleanups.
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Some autotools cleanups.
 
 2003-04-20 13:16  huysmans
 
@@ -2601,9 +3544,12 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/mailcheck/mailcheck.c, plugins/pager/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.am, settings/Makefile.in, themes/Makefile.in:
-	  Added system tray support to libxfcegui4 and frontend to
-	  xftaskbar4.  Lots of cleanups in the autotools stuff.
+	  settings/Makefile.am, settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Added system tray support to libxfcegui4
+	  and frontend to xftaskbar4.  Lots of cleanups in the autotools
+	  stuff.
 
 2003-04-18 23:17  huysmans
 
@@ -2696,7 +3642,10 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: Improved debug.m4:
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Improved
+	  debug.m4:
 
 		  1) --disable-debug no longer disables assert()'s
 		  2) --enable-profiling now enables profiling code
@@ -2720,7 +3669,10 @@
 	  plugins/Makefile.in, plugins/clock/Makefile.in,
 	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.in, themes/Makefile.in: Fixed BM_DEPEND_CHECK
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Fixed BM_DEPEND_CHECK
 
 2003-04-02 23:18  xfce
 
@@ -2773,8 +3725,11 @@
 	  plugins/systembuttons/systembuttons.c, settings/Makefile.in,
 	  settings/xfce_settings.h, settings/xfce_settings_dialog.c,
 	  settings/xfce_settings_dialog.h, settings/xfce_settings_plugin.c,
-	  settings/xfce_settings_plugin.h, themes/Makefile.in: Re-indent
-	  files. Add HACKING and .indent.pro
+	  settings/xfce_settings_plugin.h, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Re-indent files. Add HACKING and
+	  .indent.pro
 
 2003-04-02 19:33  bmeurer
 
@@ -2818,10 +3773,13 @@
 	  plugins/systembuttons/systembuttons.c, po/Makefile.in.in,
 	  settings/Makefile.am, settings/Makefile.in,
 	  settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
-	  themes/Makefile.am, themes/Makefile.in: Large autotools update.
-	  Should fix James problems with unsubstituted @PKG_LDFLAGS@ in .pc
-	  files. Should also make it easier to port XFce4 to a non-POSIX
-	  (or even non-UNIX) plattform, using autoconf.
+	  themes/Makefile.am, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Large autotools update. Should fix James
+	  problems with unsubstituted @PKG_LDFLAGS@ in .pc files. Should
+	  also make it easier to port XFce4 to a non-POSIX (or even
+	  non-UNIX) plattform, using autoconf.
 
 2003-04-01 23:33  xfce
 
@@ -2918,7 +3876,10 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: [no log message]
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: [no log
+	  message]
 
 2003-02-28 20:09  bmeurer
 
@@ -2931,8 +3892,11 @@
 	  plugins/Makefile.in, plugins/clock/Makefile.in,
 	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.in, themes/Makefile.in: Fix xfce-mcs-manager
-	  API/ABI versionning Update configure/libtool to use libtool 1.4.3
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Fix xfce-mcs-manager API/ABI versionning
+	  Update configure/libtool to use libtool 1.4.3
 
 2003-02-28 11:53  bmeurer
 
@@ -2942,7 +3906,10 @@
 	  plugins/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  themes/Makefile.in: Fixes xfce-mcs-manager issue.
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Fixes
+	  xfce-mcs-manager issue.
 
 2003-02-27 22:48  xfce
 
@@ -2966,8 +3933,10 @@
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
 	  settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
-	  themes/Makefile.in: Apply Benedikt Meurer
-	  <Benedikt.Meurer@unix-ag.uni-siegen.de> patch Replace all
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Apply Benedikt
+	  Meurer <Benedikt.Meurer@unix-ag.uni-siegen.de> patch Replace all
 	  occurences of g_getenv("HOME") with g_get_home_dir() Regenerate
 	  all Makefiles.on and configure scripts
 
@@ -2986,8 +3955,10 @@
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in,
-	  settings/xfce_settings_dialog.c, themes/Makefile.in: Update
-	  screenshots for new dialog style
+	  settings/xfce_settings_dialog.c, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Update screenshots for new dialog style
 
 2003-02-24 23:10  huysmans
 
@@ -3135,8 +4106,11 @@
 	  plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
 	  plugins/systembuttons/systembuttons.c, settings/Makefile.in,
-	  themes/Makefile.in: Add support for startup notification from
-	  freedesktop.org standard Fix a few memory leaks
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add support for
+	  startup notification from freedesktop.org standard Fix a few
+	  memory leaks
 
 2003-02-04 12:01  huysmans
 
@@ -3342,8 +4316,10 @@
 	  icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  po/fr.gmo, po/fr.po, settings/Makefile.in, themes/Makefile.in:
-	  Add french xtion.
+	  po/fr.gmo, po/fr.po, settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Add french xtion.
 
 2003-01-24 14:33  edscott
 
@@ -3352,8 +4328,11 @@
 	  plugins/Makefile.in, plugins/clock/Makefile.in,
 	  plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, po/es.gmo, po/es.po,
-	  po/nl.gmo, po/nl.po, settings/Makefile.in, themes/Makefile.in:
-	  added spanish translation and fixed a typo in source code
+	  po/nl.gmo, po/nl.po, settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: added spanish translation and fixed a
+	  typo in source code
 
 2003-01-24 12:53  huysmans
 
@@ -3375,7 +4354,10 @@
 	  po/POTFILES.in, po/nl.gmo, po/nl.po, po/xfce4-panel.pot,
 	  settings/Makefile.am, settings/Makefile.in,
 	  settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
-	  themes/Makefile.in: Add i18n framework and Dutch translation
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add i18n
+	  framework and Dutch translation
 
 2003-01-21 20:12  huysmans
 
@@ -3442,9 +4424,12 @@
 	  panel/handle.c, plugins/Makefile.in, plugins/clock/Makefile.in,
 	  plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  settings/xfce_settings_dialog.c, themes/Makefile.in: Use same
-	  border width gtk uses in dialog action area. Some reordering in
-	  the panel dialog. Looks better IMO.
+	  settings/xfce_settings_dialog.c, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Use same border width gtk uses in dialog
+	  action area. Some reordering in the panel dialog. Looks better
+	  IMO.
 
 2003-01-13 11:17  huysmans
 
@@ -3466,8 +4451,11 @@
 	  icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.am, settings/Makefile.in, themes/Makefile.in:
-	  Add a check for availability of xfce-mcs-manager
+	  settings/Makefile.am, settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Add a check for availability of
+	  xfce-mcs-manager
 
 2003-01-12 20:50  huysmans
 
@@ -3491,8 +4479,11 @@
 	  plugins/Makefile.in, plugins/clock/Makefile.in,
 	  plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	  settings/xfce_settings_dialog.c, themes/Makefile.in: Use new
-	  check for running settings manager
+	  settings/xfce_settings_dialog.c, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Use new check for running settings
+	  manager
 
 2003-01-10 00:02  xfce
 
@@ -3500,8 +4491,11 @@
 	  icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.in, themes/Makefile.in: Update dependencies on
-	  libxfcegui4 version and libxfce4mcs
+	  settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Update dependencies on libxfcegui4
+	  version and libxfce4mcs
 
 2003-01-09 23:53  xfce
 
@@ -3509,9 +4503,11 @@
 	  panel/Makefile.in, plugins/Makefile.in,
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
-	  settings/Makefile.am, settings/Makefile.in, themes/Makefile.in:
-	  Add " -avoid-version " to  libxfce4settings_la_LDFLAGS in
-	  settings/Makefile.am
+	  settings/Makefile.am, settings/Makefile.in, themes/Makefile.in,
+	  themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	  themes/XFce/Makefile.in: Add " -avoid-version " to
+	  libxfce4settings_la_LDFLAGS in settings/Makefile.am
 
 2003-01-09 23:25  huysmans
 
@@ -3567,8 +4563,11 @@
 	  plugins/switcher/Makefile.in, plugins/switcher/switcher.c,
 	  plugins/systembuttons/Makefile.in, settings/Makefile.in,
 	  settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
-	  themes/Makefile.in: Several fixes: minibuttons position, settings
-	  plugin icon and non-modal dialog, netk_pager sizing
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Several fixes:
+	  minibuttons position, settings plugin icon and non-modal dialog,
+	  netk_pager sizing
 
 2002-12-30 21:52  huysmans
 
@@ -3628,8 +4627,11 @@
 	  settings/Makefile.in, settings/xfce_settings.h,
 	  settings/xfce_settings_dialog.c, settings/xfce_settings_dialog.h,
 	  settings/xfce_settings_plugin.c, settings/xfce_settings_plugin.h,
-	  themes/Makefile.in: Add settings manager plugin and make the
-	  panel a settings client. Cool stuff :)
+	  themes/Makefile.in, themes/Crystal/Makefile.in,
+	  themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	  themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add settings
+	  manager plugin and make the panel a settings client. Cool stuff
+	  :)
 
 2002-12-20 13:12  huysmans
 
@@ -3734,22 +4736,63 @@
 	  header file xfce.h that includes all exported headers. New fixes
 	  and probably new bugs
 
+2002-12-03 15:24  huysmans
+
+	* themes/: Crystal/Makefile.am, Crystal/Makefile.in,
+	  Crystal/newmail.png, Crystal/nomail.png, Crystal/oldmail.png,
+	  Noia/Makefile.am, Noia/Makefile.in, Noia/newmail.png,
+	  Noia/nomail.png, Noia/oldmail.png: Add mail icons to Crystal and
+	  Noia themes. Thanks (again) to Jeroen Vloothuis
+
 2002-11-27 22:30  huysmans
 
 	* ChangeLog, panel/icons.c, panel/xfce.c,
 	  plugins/mailcheck/mailcheck.c: Fix a bug in icon handling. Thanks
 	  to Korbinus
 
+2002-11-26 15:04  huysmans
+
+	* themes/XFce/: Makefile.am, Makefile.in: Also update makefiles
+
+2002-11-26 15:01  huysmans
+
+	* themes/XFce/: mail.xpm, newmail.xpm: Fix naming of new mail icon
+
 2002-11-26 14:06  huysmans
 
 	* configure, configure.ac, panel/icons.c, themes/Makefile.am,
-	  themes/Makefile.in: Add Crystal and Noia themes provided by
+	  themes/Makefile.in, themes/Crystal/Makefile.am,
+	  themes/Crystal/Makefile.in, themes/Crystal/README,
+	  themes/Crystal/edit.png, themes/Crystal/file1.png,
+	  themes/Crystal/file2.png, themes/Crystal/games.png,
+	  themes/Crystal/man.png, themes/Crystal/miniinfo.png,
+	  themes/Crystal/minilock.png, themes/Crystal/minipalet.png,
+	  themes/Crystal/minipower.png, themes/Crystal/multimedia.png,
+	  themes/Crystal/network.png, themes/Crystal/paint.png,
+	  themes/Crystal/print.png, themes/Crystal/schedule.png,
+	  themes/Crystal/sound.png, themes/Crystal/terminal.png,
+	  themes/Crystal/trash_empty.png, themes/Crystal/trash_full.png,
+	  themes/Crystal/unknown.png, themes/Noia/Makefile.am,
+	  themes/Noia/Makefile.in, themes/Noia/README,
+	  themes/Noia/edit.png, themes/Noia/file1.png,
+	  themes/Noia/file2.png, themes/Noia/games.png,
+	  themes/Noia/man.png, themes/Noia/miniinfo.png,
+	  themes/Noia/minilock.png, themes/Noia/minipalet.png,
+	  themes/Noia/minipower.png, themes/Noia/multimedia.png,
+	  themes/Noia/network.png, themes/Noia/paint.png,
+	  themes/Noia/print.png, themes/Noia/schedule.png,
+	  themes/Noia/sound.png, themes/Noia/terminal.png,
+	  themes/Noia/trash_empty.png, themes/Noia/trash_full.png,
+	  themes/Noia/unknown.png: Add Crystal and Noia themes provided by
 	  Jeroen Vloothuis (aka slm on IRC)
 
 2002-11-26 09:06  huysmans
 
-	* ChangeLog, aclocal.m4, configure, panel/wmhints.c: Fix bug in
-	  wmhints and add mail icons to Curve theme
+	* ChangeLog, aclocal.m4, configure, panel/wmhints.c,
+	  themes/Curve/Makefile.am, themes/Curve/Makefile.in,
+	  themes/Curve/newmail.png, themes/Curve/nomail.png,
+	  themes/Curve/oldmail.png: Fix bug in wmhints and add mail icons
+	  to Curve theme
 
 2002-11-25 12:39  xfce
 
@@ -3837,9 +4880,10 @@
 
 	* panel/Makefile.in, plugins/Makefile.in,
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
-	  themes/Makefile.in: make sure required libs for build/rpm are
-	  listed, with versions and keep the minimum version required at
-	  only one place (configure.ac)
+	  themes/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in, themes/XFce/Makefile.in: make sure
+	  required libs for build/rpm are listed, with versions and keep
+	  the minimum version required at only one place (configure.ac)
 
 2002-11-08 23:14  xfce
 
@@ -3867,8 +4911,19 @@
 	  icons/up.xpm, panel/builtins.c, panel/central.c, panel/dialogs.c,
 	  panel/global.h, panel/icons.c, panel/icons.h,
 	  plugins/mailcheck/mailcheck.c, themes/Makefile.am,
-	  themes/Makefile.in: Make default theme a normal theme. Get rid of
-	  builtin icons
+	  themes/Makefile.in, themes/XFce/Makefile.am,
+	  themes/XFce/Makefile.in, themes/XFce/edit.xpm,
+	  themes/XFce/file1.xpm, themes/XFce/file2.xpm,
+	  themes/XFce/games.xpm, themes/XFce/mail.xpm, themes/XFce/man.xpm,
+	  themes/XFce/miniinfo.xpm, themes/XFce/minilock.xpm,
+	  themes/XFce/minipalet.xpm, themes/XFce/minipower.xpm,
+	  themes/XFce/multimedia.xpm, themes/XFce/network.xpm,
+	  themes/XFce/nomail.xpm, themes/XFce/oldmail.xpm,
+	  themes/XFce/paint.xpm, themes/XFce/print.xpm,
+	  themes/XFce/schedule.xpm, themes/XFce/sound.xpm,
+	  themes/XFce/terminal.xpm, themes/XFce/trash_empty.xpm,
+	  themes/XFce/trash_full.xpm, themes/XFce/unknown.xpm: Make default
+	  theme a normal theme. Get rid of builtin icons
 
 2002-11-06 16:44  huysmans
 
@@ -3933,9 +4988,10 @@
 	  icons/Makefile.in, panel/Makefile.in, panel/global.h,
 	  panel/xfce_support.c, plugins/Makefile.in,
 	  plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
-	  themes/Makefile.in: Change autogen.sh script to use env vars if
-	  available (instead of auto*-1.x as it was before) Make use of
-	  preview file selector instead of basic gtk file selector.
+	  themes/Makefile.in, themes/Curve/Makefile.in,
+	  themes/Gnome/Makefile.in: Change autogen.sh script to use env
+	  vars if available (instead of auto*-1.x as it was before) Make
+	  use of preview file selector instead of basic gtk file selector.
 
 2002-10-25 23:57  xfce
 
@@ -4078,8 +5134,19 @@
 
 2002-09-29 23:22  huysmans
 
-	* configure, configure.ac, themes/Makefile.am, themes/Makefile.in:
-	  Change theme name
+	* configure, configure.ac, themes/Makefile.am, themes/Makefile.in,
+	  themes/Curve/Makefile.am, themes/Curve/Makefile.in,
+	  themes/Curve/README, themes/Curve/edit.png,
+	  themes/Curve/file1.png, themes/Curve/file2.png,
+	  themes/Curve/games.png, themes/Curve/man.png,
+	  themes/Curve/miniinfo.png, themes/Curve/minilock.png,
+	  themes/Curve/minipalet.png, themes/Curve/minipower.png,
+	  themes/Curve/multimedia.png, themes/Curve/network.png,
+	  themes/Curve/paint.png, themes/Curve/print.png,
+	  themes/Curve/schedule.png, themes/Curve/sound.png,
+	  themes/Curve/terminal.png, themes/Curve/trash_empty.png,
+	  themes/Curve/trash_full.png, themes/Curve/unknown.png: Change
+	  theme name
 
 2002-09-29 20:54  huysmans
 
@@ -4089,7 +5156,8 @@
 2002-09-29 20:39  huysmans
 
 	* ChangeLog, configure, configure.ac, themes/Makefile.am,
-	  themes/Makefile.in: Add Bluecurve theme
+	  themes/Makefile.in, themes/Gnome/Makefile.am,
+	  themes/Gnome/Makefile.in: Add Bluecurve theme
 
 2002-09-29 11:00  xfce
 
@@ -4516,9 +5584,12 @@
 	* Makefile.in, aclocal.m4, icons/Makefile.in, panel/Makefile.in,
 	  panel/central.c, panel/global.h, panel/icons.c, panel/wmhints.c,
 	  panel/wmhints.h, panel/xfce.c, plugins/Makefile.in,
-	  plugins/mailcheck/Makefile.in, themes/Makefile.in: Add support
-	  for themeable minibuttons and increased the maximum number of
-	  groups to 16
+	  plugins/mailcheck/Makefile.in, themes/Makefile.in,
+	  themes/Gnome/Makefile.am, themes/Gnome/Makefile.in,
+	  themes/Gnome/miniinfo.png, themes/Gnome/minilock.png,
+	  themes/Gnome/minipalet.png, themes/Gnome/minipower.png: Add
+	  support for themeable minibuttons and increased the maximum
+	  number of groups to 16
 
 2002-08-05 08:18  huysmans
 
@@ -4642,8 +5713,8 @@
 	  panel/module.c, panel/settings.c, panel/xfce_support.c,
 	  panel/xfce_support.h, plugins/Makefile.in,
 	  plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
-	  themes/Makefile.in: Add preferences to mailcheck plugin and
-	  probably some other things as well
+	  themes/Makefile.in, themes/Gnome/Makefile.in: Add preferences to
+	  mailcheck plugin and probably some other things as well
 
 2002-07-03 23:53  huysmans
 
@@ -4684,7 +5755,8 @@
 
 2002-06-20 22:03  huysmans
 
-	* panel/dialogs.c: make icon themes work from dialogs
+	* panel/dialogs.c, themes/Gnome/file1.png: make icon themes work
+	  from dialogs
 
 2002-06-18 00:15  xfce
 
@@ -4694,8 +5766,9 @@
 
 	* AUTHORS, Makefile.in, aclocal.m4, configure, xfce4.spec.in,
 	  icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
-	  plugins/mailcheck/Makefile.in, themes/Makefile.in: Add (empty)
-	  AUTHORS required by automake, Fix spec file
+	  plugins/mailcheck/Makefile.in, themes/Makefile.in,
+	  themes/Gnome/Makefile.in: Add (empty) AUTHORS required by
+	  automake, Fix spec file
 
 2002-06-17 23:32  huysmans
 
@@ -4724,7 +5797,16 @@
 	  plugins/Makefile.am, plugins/Makefile.in,
 	  plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
 	  plugins/mailcheck/mailcheck.c, themes/Makefile.am,
-	  themes/Makefile.in: (Re)add all files and automake framework
+	  themes/Makefile.in, themes/Gnome/Makefile.am,
+	  themes/Gnome/Makefile.in, themes/Gnome/edit.png,
+	  themes/Gnome/file1.png, themes/Gnome/file2.png,
+	  themes/Gnome/games.png, themes/Gnome/man.png,
+	  themes/Gnome/multimedia.png, themes/Gnome/network.png,
+	  themes/Gnome/paint.png, themes/Gnome/print.png,
+	  themes/Gnome/schedule.png, themes/Gnome/sound.png,
+	  themes/Gnome/terminal.png, themes/Gnome/trash_empty.png,
+	  themes/Gnome/trash_full.png, themes/Gnome/unknown.png: (Re)add
+	  all files and automake framework
 
 2002-06-17 22:18  huysmans
 
