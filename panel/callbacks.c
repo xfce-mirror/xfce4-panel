@@ -245,6 +245,9 @@ screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev, ScreenButton * sb)
 {
     hide_current_popup_menu();
 
+    if (disable_user_config)
+	return FALSE;
+    
     if(ev->button != 3)
         return FALSE;
 
@@ -272,6 +275,13 @@ void mini_palet_cb(void)
 {
     hide_current_popup_menu();
 
+    if (disable_user_config)
+    {
+	show_info(_("Access to the configuration system has been disabled.\n\n"
+		    "Ask your system administrator for more information"));
+	return;
+    }
+    
     global_settings_dialog();
 }
 
