@@ -50,7 +50,6 @@ static GModule *xfc_cm = NULL;
 void
 unload_xfc (void)
 {
-    g_free (xfc_fun);
     xfc_fun = NULL;
 
     DBG ("unloading module \"libxfce4_combo\"");
