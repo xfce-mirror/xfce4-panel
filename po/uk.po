@@ -303,7 +303,8 @@ msgstr "Параметри панелі Xfce"
 msgid "Appearance"
 msgstr "Зовнішній вигляд"
 
-#: settings/xfce_settings_dialog.c:493
+#. autohide
+#: settings/xfce_settings_dialog.c:712
 msgid "Behaviour"
 msgstr "Поведінка"
 
@@ -345,7 +346,7 @@ msgstr "24 години"
 
 #: plugins/clock/clock.c:525
 msgid "12 hour"
-msgstr "12 годин"
+msgstr "12 години"
 
 #: plugins/clock/clock.c:531
 msgid "AM/PM"
@@ -453,3 +454,125 @@ msgstr "Інтервал (сек):"
 #: plugins/mailcheck/mailcheck.c:1014
 msgid "Mail checker"
 msgstr "Перевірка почти"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:278
+#: xftaskbar/plugin/xftaskbar_plugin.c:285
+#: xftaskbar/plugin/xftaskbar_plugin.c:533
+msgid "Taskbar"
+msgstr "Панель задач"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:298
+msgid "Position"
+msgstr "Розташування"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:306
+#, fuzzy
+msgid "_Top"
+msgstr "Згори"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:313
+#, fuzzy
+msgid "_Bottom"
+msgstr "Знизу"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:320
+msgid "Alignment"
+msgstr ""
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:329
+msgid "_Left"
+msgstr ""
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:336
+msgid "_Center"
+msgstr ""
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:343
+msgid "_Right"
+msgstr ""
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:350
+msgid "Autohide"
+msgstr "Автоматичне приховування"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:354
+#, fuzzy
+msgid "Auto _hide taskbar"
+msgstr "Автоматично приховувати панель задач"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:359
+msgid "Size"
+msgstr "Розмір"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:368
+msgid "Height :"
+msgstr "Висота:"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:403
+msgid "Width:"
+msgstr ""
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:452
+msgid "Tasks"
+msgstr "Процеси"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:460
+#, fuzzy
+msgid "Show tasks from _all workspaces"
+msgstr "Показувати процеси усіх робочих стільниць"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:465
+msgid "Always _group tasks"
+msgstr ""
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:470
+msgid "Show application _names"
+msgstr ""
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:475
+msgid "Pager"
+msgstr "Графічний пейджер"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:479
+#, fuzzy
+msgid "Show _pager in taskbar"
+msgstr "Показувати пейджер на панелі задач"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:484
+msgid "Notification area"
+msgstr "Область сповіщення"
+
+#: xftaskbar/plugin/xftaskbar_plugin.c:488
+#, fuzzy
+msgid "Show _system tray in taskbar"
+msgstr "Показувати системний лоток на панелі задач"
+
+#: xftaskbar/xftaskbar.c:137
+msgid "Cannot get initial style"
+msgstr "Помилка отримання початкового стилю"
+
+#: xftaskbar/xftaskbar.c:260
+msgid "There is already a system tray running on this screen"
+msgstr "Системний лоток вже зареєстрований на цьому екрані"
+
+#: xftaskbar/xftaskbar.c:268
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Неможливо зареєструвати системний лоток: %s"
+
+#: xftaskbar/xftaskbar.c:467
+msgid "This should not happen"
+msgstr "Цього не повинно бути"
+
+#: xftaskbar/xftaskbar.c:592
+#, fuzzy
+msgid "Cannot get default screen\n"
+msgstr "Неможливо визначити поля робочої стільниці"
+
+#: xftaskbar/xftaskbar.c:681
+msgid "Cannot connect to session manager"
+msgstr "Помилка підключення до менеджера сеансів"
+
+#: xftaskbar/xftaskbar.c:694
+msgid "Cannot create MCS client channel"
+msgstr "Неможливо створити канал до MCS клієнта"

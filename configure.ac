@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.2.0])
+AM_INIT_AUTOMAKE([xfce4-panel], [4.3.0])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -36,7 +36,7 @@ AC_CHECK_FUNCS([sigaction])
 dnl Check for i18n support
 BM_I18N([xfce4-panel], [ar az be bg ca cs de en_GB es es_MX et eu fa fr fi
 		        gu he hi hu it ja lt ms nl ko nb_NO pa pl pt_BR	
-			pt_PT ro ru sv sk ta tr vi zh_CN zh_TW])
+			pt_PT ro ru sv sk ta tr uk vi zh_CN zh_TW])
 
 dnl Check for X11 installed
 BM_LIBX11_REQUIRE
@@ -67,7 +67,7 @@ dnl Check for debugging support
 BM_DEBUG_SUPPORT
 
 AC_OUTPUT([
-xfce4.spec
+xfce4-panel.spec
 Makefile
 doc/Makefile
 doc/C/Makefile
@@ -78,8 +78,13 @@ doc/it/Makefile
 doc/it/images/Makefile
 po/Makefile.in
 icons/Makefile
+config/Makefile
+libs/Makefile
 panel/Makefile
 panel/xfce4-panel-1.0.pc
+taskbar/Makefile
+iconbox/Makefile
+settings/Makefile
 plugins/Makefile
 plugins/mailcheck/Makefile
 plugins/clock/Makefile
@@ -88,6 +93,5 @@ plugins/systembuttons/Makefile
 plugins/pager/Makefile
 plugins/sample-plugin/Makefile
 plugins/separator/Makefile
-settings/Makefile
 ])
 

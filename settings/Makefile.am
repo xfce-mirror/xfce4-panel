@@ -30,7 +30,34 @@ libxfce4settings_la_CFLAGS =						\
 libxfce4settings_la_LIBADD =						\
 	@XFCE_MCS_MANAGER_LIBS@
 
-appsdir = $(datadir)/applications
-apps_DATA = xfce-panel-settings.desktop
+xftaskbar_plugindir = $(libdir)/xfce4/mcs-plugins
 
-EXTRA_DIST = xfce-panel-settings.desktop
+xftaskbar_plugin_LTLIBRARIES = xftaskbar_plugin.la
+
+xftaskbar_plugin_la_LDFLAGS =						\
+	-avoid-version							\
+	-module
+
+if HAVE_CYGWIN
+xftaskbar_plugin_la_LDFLAGS +=                                          \
+	-no-undefined                                                   \
+	-export-symbols $(datadir)/xfce4/devel/mcs-manager.def
+endif
+
+xftaskbar_plugin_la_SOURCES =						\
+	xftaskbar_plugin.c
+
+xftaskbar_plugin_la_CFLAGS = 						\
+	@XFCE_MCS_MANAGER_CFLAGS@ 					\
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"				
+
+xftaskbar_plugin_la_LIBADD = 						\
+	@XFCE_MCS_MANAGER_LIBS@
+
+appsdir = $(datadir)/applications
+apps_DATA = 								\
+	xfce-panel-settings.desktop					\
+	xfce-taskbar-settings.desktop
+
+EXTRA_DIST = $(apps_DATA)
+

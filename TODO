@@ -3,17 +3,8 @@ TODO
 * Fix gettext issues so I don't have to use a special
   #define dg_(s)  dgettext (PACKAGE, s)
   Somehow PACKAGE_GETTEXT is set to something else ...
-* [DONE] unload unused plugins 
 * plugin library
   - with API docs
-* smarter resize/move
-  - [DONE] popup arrow direction
-  - [DONE] keep panel on same x/y alignment
-  - [DONE] save 'centered' state to better keep the panel aligned?
-* [DONE] use icon theme spec
-* [DONE] Move the exec_cmd stuff to libxfce4util/libxfcegui4
-* [DONE] Move to glib xml parsing. More work, but more speed / 
-  reduced memory usage
 * multiple panels
   - Most settings should become per panel
   - multiscreen
@@ -22,7 +13,7 @@ TODO
   - add/remove
   - move
 * gtk widgets (panel, controls)
-  - include move handles (steal code form GtkHandlebox)
+  - [DONE] include move handles (steal code form GtkHandlebox)
   - use properties and signals for settings
   - perhaps use interfaces or derived widgets for controls
 
@@ -32,10 +23,4 @@ Ideas
   - dockapps support
 * 2 plugins side by side 
    (like systembuttons)
-* change icon themes to use a mapping between categories and icon names that
-  can be looked up using the icon theme spec?
-  e.g.:
-  [Xfce panel icon theme]
-  network=gnome-network
-  file1=xdg:folder
-  ...
+

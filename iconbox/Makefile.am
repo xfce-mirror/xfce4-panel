@@ -1,0 +1,19 @@
+bin_PROGRAMS = xfce4-iconbox
+
+xfce4_iconbox_SOURCES =							\
+	xfce-iconlist.c							\
+	xfce-iconlist.h							\
+	iconbox.c
+
+xfce4_iconbox_CFLAGS =							\
+	-I$(srcdir)							\
+	-I$(top_srcdir)/libs						\
+	@LIBXFCEGUI4_CFLAGS@						\
+	@LIBXFCE4MCS_CLIENT_CFLAGS@					\
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
+
+xfce4_iconbox_LDADD =							\
+	../libs/libxfce4panel.la					\
+	@LIBXFCEGUI4_LIBS@						\
+	@LIBXFCE4MCS_CLIENT_LIBS@
+
