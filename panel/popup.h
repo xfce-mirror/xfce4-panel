@@ -58,7 +58,6 @@ G_MODULE_IMPORT void panel_popup_remove_item (PanelPopup * pp, Item * mi);
 
 G_MODULE_IMPORT void panel_popup_set_size (PanelPopup * pp, int size);
 G_MODULE_IMPORT void panel_popup_set_popup_position (PanelPopup * pp, int position);
-G_MODULE_IMPORT void panel_popup_set_layer (PanelPopup * pp, int layer);
 G_MODULE_IMPORT void panel_popup_set_theme (PanelPopup * pp, const char *theme);
 G_MODULE_IMPORT void panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type);
 

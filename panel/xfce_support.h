@@ -35,8 +35,6 @@ G_MODULE_IMPORT void write_backup_file (const char *path);
 G_MODULE_IMPORT void add_tooltip (GtkWidget * widget, const char *tip);
 
 /* x atoms and properties */
-G_MODULE_IMPORT void set_window_layer (GtkWidget * win, int layer);
-G_MODULE_IMPORT gboolean check_net_wm_support (void);
 G_MODULE_IMPORT void set_window_skip (GtkWidget * win);
 
 /* dnd */

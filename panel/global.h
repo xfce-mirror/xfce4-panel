@@ -60,26 +60,9 @@ enum
 enum
 { HORIZONTAL, VERTICAL };
 
-/* panel layer */
-enum
-{ ABOVE, NORMAL, BELOW };
-
-/*  Panel sizes
- *  -----------
- *  `settings.size' is a symbolic size given by an enum. The actual sizes
- *  are put in an array so you can use the symbolic size as index, e.g. 
- *  icon_size[SMALL]. The sizes are defined in 'panel.c'.
-*/
+/* panel sizes */
 enum
 { TINY, SMALL, MEDIUM, LARGE, PANEL_SIZES };
-
-G_MODULE_IMPORT int icon_size[PANEL_SIZES];
-
-G_MODULE_IMPORT int border_width;
-
-G_MODULE_IMPORT int top_height[PANEL_SIZES];
-
-G_MODULE_IMPORT int popup_icon_size[PANEL_SIZES];
 
 /* types for panel controls */
 enum
@@ -106,17 +89,23 @@ struct _Settings
     int num_groups;
 };
 
-/* global variables 
+/* global variables, from globals.c
  *
  * FIXME: should be changed to use accessor functions 
  * for more flexibility (e.g. multple panels) */
 
-/* defined in settings.c */
 G_MODULE_IMPORT gboolean disable_user_config;
 
-/* defined in panel.c */
 G_MODULE_IMPORT Settings settings;
 G_MODULE_IMPORT Panel panel;
+
+G_MODULE_IMPORT int icon_size[PANEL_SIZES];
+
+G_MODULE_IMPORT int border_width;
+
+G_MODULE_IMPORT int top_height[PANEL_SIZES];
+
+G_MODULE_IMPORT int popup_icon_size[PANEL_SIZES];
 
 
 #endif /* __XFCE_GLOBAL_H__ */

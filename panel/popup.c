@@ -270,8 +270,6 @@ set_popup_window_properties (GtkWidget * win)
     gtk_window_set_icon (window, pb);
     g_object_unref (pb);
 
-    set_window_layer (win, settings.layer);
-
     /* don't care about decorations when calculating position */
     gtk_window_set_gravity (window, GDK_GRAVITY_STATIC);
 }
@@ -571,16 +569,6 @@ panel_popup_set_popup_position (PanelPopup * pp, int position)
 	return;
 
     panel_popup_set_size (pp, settings.size);
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_popup_set_layer */
-void
-panel_popup_set_layer (PanelPopup * pp, int layer)
-{
-    if (!pp)
-	return;
-
-    set_window_layer (pp->window, layer);
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_popup_set_theme */

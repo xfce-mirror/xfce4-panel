@@ -44,6 +44,8 @@
 #define ROOT	"Xfce"
 #define NS	"http://www.xfce.org/xfce4/panel/1.0"
 
+#define XML_FORMAT_VERSION  2
+
 G_MODULE_EXPORT /* EXPORT:disable_user_config */
 gboolean disable_user_config = FALSE;
 
@@ -205,14 +207,12 @@ write_panel_config (void)
 {
     char *xfcerc, *tmprc;
     xmlNodePtr root;
-    static gboolean backup = TRUE;
-
-    disable_user_config = check_disable_user_config ();
+    char value[3];
 
     if (disable_user_config)
 	return;
 
-    xfcerc = get_save_file ("contents.xml");
+    xfcerc = get_save_file ("contents.xml.active");
     
     if (!xfcerc)
     {
@@ -222,20 +222,14 @@ write_panel_config (void)
     
     tmprc = g_strconcat (xfcerc, ".tmp", NULL);
 
-    if (g_file_test (xfcerc, G_FILE_TEST_EXISTS))
-    {
-	if (backup)
-	{
-	    write_backup_file (xfcerc);
-	    backup = FALSE;
-	}
-    }
-    
     xmlconfig = xmlNewDoc ("1.0");
     xmlconfig->children = xmlNewDocRawNode (xmlconfig, NULL, ROOT, NULL);
 
     root = (xmlNodePtr) xmlconfig->children;
     xmlDocSetRootElement (xmlconfig, root);
+
+    snprintf (value, 2, "%d", XML_FORMAT_VERSION);
+    xmlSetProp (root, "xmlversion", value);
 
     panel_write_xml (root);
 
@@ -249,19 +243,19 @@ write_panel_config (void)
 
     if (g_file_test (xfcerc, G_FILE_TEST_EXISTS) && unlink (xfcerc))
     {
-	g_critical ("Could not remove old xfce4rc");
+	g_critical ("Could not remove old contents.xml");
 	goto out;
     }
 
     if (link (tmprc, xfcerc))
     {
-	g_critical ("Could not link new xfce4rc");
+	g_critical ("Could not link new contents.xml");
 	goto out;
     }
 
     if (unlink (tmprc))
     {
-	g_warning ("Could not remove temporary file xfce4rc.tmp");
+	g_warning ("Could not remove temporary file contents.xml.tmp");
     }
 
   out:
@@ -270,3 +264,55 @@ write_panel_config (void)
     xmlFreeDoc (xmlconfig);
     xmlconfig = NULL;
 }
+
+G_MODULE_EXPORT /* EXPORT:write_final_panel_config */
+void
+write_final_panel_config (void)
+{
+    char *xfcerc, *tmprc;
+    
+    if (disable_user_config)
+	return;
+
+    xfcerc = get_save_file ("contents.xml");
+    
+    if (!xfcerc)
+    {
+        g_critical ("Could not write config file");
+        return;
+    }
+    
+    tmprc = g_strconcat (xfcerc, ".active", NULL);
+
+    if (!g_file_test (xfcerc, G_FILE_TEST_EXISTS))
+    {
+        g_critical ("No current config file available");
+    }
+    
+    if (g_file_test (xfcerc, G_FILE_TEST_EXISTS))
+    {
+        write_backup_file (xfcerc);
+    
+        if (unlink (xfcerc))
+        {
+            g_critical ("Could not remove old contents.xml");
+            goto out;
+        }
+    }
+
+    if (link (tmprc, xfcerc))
+    {
+	g_critical ("Could not link new contents.xml");
+	goto out;
+    }
+
+    if (unlink (tmprc))
+    {
+	g_warning ("Could not remove temporary file contents.xml.tmp");
+    }
+
+  out:
+    g_free (tmprc);
+    g_free (xfcerc);
+}
+

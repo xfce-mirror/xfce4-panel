@@ -230,68 +230,6 @@ add_tooltip (GtkWidget * widget, const char *tip)
     gtk_tooltips_set_tip (tooltips, widget, tip, NULL);
 }
 
-G_MODULE_EXPORT /* EXPORT:set_window_layer */
-void
-set_window_layer (GtkWidget * win, int layer)
-{
-    Screen *xscreen;
-    Window xid;
-    static Atom xa_ABOVE = 0;
-    static Atom xa_BELOW = 0;
-
-    if (!GTK_WIDGET_REALIZED (win))
-	gtk_widget_realize (win);
-
-    xscreen = DefaultScreenOfDisplay (GDK_DISPLAY ());
-    xid = GDK_WINDOW_XID (win->window);
-
-    if (!xa_ABOVE)
-    {
-	xa_ABOVE = XInternAtom (GDK_DISPLAY (), "_NET_WM_STATE_ABOVE", False);
-	xa_BELOW = XInternAtom (GDK_DISPLAY (), "_NET_WM_STATE_BELOW", False);
-    }
-
-    switch (layer)
-    {
-	case ABOVE:
-	    netk_change_state (xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
-	    netk_change_state (xscreen, xid, TRUE, xa_ABOVE, None);
-	    break;
-	case BELOW:
-	    netk_change_state (xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
-	    netk_change_state (xscreen, xid, TRUE, xa_BELOW, None);
-	    break;
-	default:
-	    netk_change_state (xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
-    }
-}
-
-G_MODULE_EXPORT /* EXPORT:check_net_wm_support */
-gboolean
-check_net_wm_support (void)
-{
-    static Atom xa_NET_WM_SUPPORT = 0;
-    Window xid;
-
-    if (!xa_NET_WM_SUPPORT)
-    {
-	xa_NET_WM_SUPPORT = XInternAtom (GDK_DISPLAY (),
-					 "_NET_SUPPORTING_WM_CHECK", False);
-    }
-
-    if (netk_get_window (GDK_ROOT_WINDOW (), xa_NET_WM_SUPPORT, &xid))
-    {
-/*      if (netk_get_window(xid, xa_NET_WM_SUPPORT, &xid))
-            g_print("ok");
-        else
-            g_print("not ok");
-*/
-	return TRUE;
-    }
-
-    return FALSE;
-}
-
 G_MODULE_EXPORT /* EXPORT:set_window_skip */
 void
 set_window_skip (GtkWidget * win)

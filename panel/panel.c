@@ -80,20 +80,18 @@ struct _PanelPrivate
 static guint transparency = 0xc0000000;
 
 
-/* exported globals *
- * ---------------- */
+/*  exported globals
+ *  ---------------- 
+ *  FIXME These should be replaced with accessor functions */
 
-/* FIXME: get rid of these */
 G_MODULE_EXPORT /* EXPORT:settings */
-Settings settings;
+Settings settings = {0};
 G_MODULE_EXPORT /* EXPORT:panel */
-Panel panel;
+Panel panel = {0};
 
-/**
- * These sizes are exported to all other modules.
+/* These sizes are exported to all other modules.
  * Arrays are indexed by symbolic sizes TINY, SMALL, MEDIUM, LARGE
- * (see global.h).
- **/
+ * (see global.h). */
 G_MODULE_EXPORT /* EXPORT:icon_size */
 int icon_size[] = { 24, 30, 45, 60 };
 
@@ -105,6 +103,7 @@ int top_height[] = { 14, 16, 18, 20 };
 
 G_MODULE_EXPORT /* EXPORT:popup_icon_size */
 int popup_icon_size[] = { 22, 26, 26, 32 };
+
 
 /* static prototypes *
  * ----------------- */
@@ -127,8 +126,8 @@ static void init_settings (Panel * p);
 extern void control_class_unref (ControlClass * cclass);
 
 
-/* positioning and position related functions *
- * ------------------------------------------ */
+/* transparency *
+ * ------------ */
 
 static void
 get_opacity_setting (void)
@@ -196,6 +195,10 @@ set_translucent (Panel * p, gboolean translucent)
 
     gtk_widget_queue_draw (p->toplevel);
 }
+
+
+/* positioning and position related functions *
+ * ------------------------------------------ */
 
 static void
 update_partial_struts (Panel * p)
@@ -594,7 +597,6 @@ panel_set_position (Panel * p)
     update_partial_struts (p);
 }
 
-/* G_MODULE_EXPORT * EXPORT:panel_center */
 static void
 panel_center (int side)
 {
@@ -674,7 +676,7 @@ do_info (void)
 static void
 do_help (void)
 {
-    exec_cmd ("xfhelp4", FALSE, FALSE);
+    exec_cmd ("xfhelp4 xfce4-panel.html", FALSE, FALSE);
 }
 
 static GtkMenu *
@@ -751,7 +753,7 @@ get_handle_menu (void)
     g_assert (menu != NULL);
 
     /* when XFCE_DISABLE_USER_CONFIG is set, hide 3rd, 4th and 5th item;
-     * keep in sync with factory. */
+     * keep in sync with menu changes. */
     if (G_UNLIKELY (disable_user_config))
     {
 	GList *l;
@@ -775,6 +777,7 @@ get_handle_menu (void)
 
 /* defined in controls.c, must be set to NULL to indicate the menu
  * is not being popped up from a panel item */
+/* FIXME ugly */
 extern Control *popup_control;
 
 static gboolean
@@ -810,6 +813,7 @@ window_move_end_cb (GtkWidget * w, int x, int y, Panel * p)
 
     DBG ("move end: %d,%d", p->position.x, p->position.y);
 
+    /* FIXME do we need this? */
     update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
 				 p->position.y + p->priv->req.height / 2);
 
@@ -821,6 +825,7 @@ window_move_end_cb (GtkWidget * w, int x, int y, Panel * p)
 static void
 window_move_start (Panel * p)
 {
+    /* FIXME do we need this? */
     update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
 				 p->position.y + p->priv->req.height / 2);
 }
@@ -828,6 +833,7 @@ window_move_start (Panel * p)
 /*  Autohide
  *  --------
 */
+/* FIXME even more ugly */
 extern PanelPopup *open_popup;
 
 static void
@@ -874,11 +880,7 @@ panel_set_hidden (Panel * p, gboolean hide)
 	}
     }
 
-    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (p->toplevel), 
-                                           NULL, NULL);
-    
-    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (p->toplevel), 
-                                         NULL, NULL);
+    p->priv->block_resize++;
     
     if (hide)
     {
@@ -904,11 +906,7 @@ panel_set_hidden (Panel * p, gboolean hide)
     DBG ("%s: (%d,%d) %dx%d\n", hide ? "hide" : "unhide", x, y, w, h);
     gdk_window_move_resize (p->toplevel->window, x, y, w, h);
     
-    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (p->toplevel),
-            (XfcePanelWindowResizeFunc) panel_resize_func, p);
-    
-    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (p->toplevel),
-            (XfcePanelWindowMoveFunc) panel_move_func, p);
+    p->priv->block_resize--;
     
     recursive--;
 }
@@ -1091,6 +1089,8 @@ create_panel_framework (Panel * p)
                                        vertical ? GTK_ORIENTATION_VERTICAL :
                                                   GTK_ORIENTATION_HORIZONTAL);
 }
+
+/* housekeeping for panel controls */
 
 static void
 panel_pack_controls (Panel *p)
@@ -1547,7 +1547,6 @@ static void
 init_settings (Panel * p)
 {
     p->priv->settings.orientation = HORIZONTAL;
-    p->priv->settings.layer = ABOVE;
 
     p->priv->settings.size = SMALL;
     p->priv->settings.popup_position = RIGHT;
