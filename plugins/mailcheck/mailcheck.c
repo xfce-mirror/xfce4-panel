@@ -477,6 +477,19 @@ run_mailcheck (t_mailcheck * mc)
     }
 }
 
+/* set mailbox type */
+static void
+set_mbox_type(t_mailcheck *mc)
+{
+    if (strncmp (mc->mbox, "pop3://", 7 * sizeof (char)) == 0)
+    {
+        mc->pop3 = TRUE;
+        sscanf (mc->mbox, "pop3://%[^:]:%[^@]@%s",
+		mc->pop3_username,
+	    	mc->pop3_password, mc->pop3_hostname);
+    }
+} 
+
 static void
 mailcheck_read_config (Control * control, xmlNodePtr node)
 {
@@ -514,14 +527,8 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 	    {
 		g_free (mc->mbox);
 		mc->mbox = (char *) value;
-
-		if (strncmp (mc->mbox, "pop3://", 7 * sizeof (char)) == 0)
-		{
-		    mc->pop3 = TRUE;
-		    sscanf (mc->mbox, "pop3://%[^:]:%[^@]@%s",
-			    mc->pop3_username,
-			    mc->pop3_password, mc->pop3_hostname);
-		}
+		
+		set_mbox_type(mc);
 	    }
 	}
 	else if (xmlStrEqual
@@ -749,6 +756,7 @@ mailcheck_apply_options (MailDialog * md)
     {
 	g_free (mc->mbox);
 	mc->mbox = g_strdup (tmp);
+	set_mbox_type(mc);
     }
 
     tmp = gtk_entry_get_text (GTK_ENTRY (md->newmail_cmd_entry));
