@@ -313,5 +313,9 @@ void handle_set_style(Handle * mh, int style)
         gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
 }
 
+void handle_set_popup_position(Handle *mh)
+{
+    handle_arrange(mh);
+}
 
 

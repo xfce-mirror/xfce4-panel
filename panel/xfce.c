@@ -257,6 +257,9 @@ void panel_set_orientation(int orientation)
 
     panel_set_position();
     panel_set_current(current_screen);
+    
+    handle_set_popup_position(handles[LEFT]);
+    handle_set_popup_position(handles[RIGHT]);
 }
 
 void panel_set_on_top(gboolean on_top)
@@ -294,6 +297,9 @@ void panel_set_popup_position(int position)
 
     side_panel_set_popup_position(LEFT, position);
     side_panel_set_popup_position(RIGHT, position);
+
+    handle_set_popup_position(handles[LEFT]);
+    handle_set_popup_position(handles[RIGHT]);
 
     /* this is necessary to get the right proportions */
     panel_set_size(settings.size);
