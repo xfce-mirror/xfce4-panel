@@ -55,6 +55,9 @@ Control *config_control = NULL;
 Item *config_item = NULL;
 int num_items = 0;
 
+static GtkWidget *menudialog = NULL; /* keep track of this for signal 
+					handling */
+
 static GtkWidget *dialog;
 
 static int id_callback;
@@ -1085,6 +1088,7 @@ void
 edit_menu_item_dialog (Item * mi)
 {
     GtkWidget *dlg;
+    GtkWidget **dlg_ptr;
     PanelPopup *pp = mi->parent;
     int response = GTK_RESPONSE_NONE;
 
@@ -1092,10 +1096,12 @@ edit_menu_item_dialog (Item * mi)
 
     num_items = g_list_length (pp->items);
 
-    dlg = create_menu_item_dialog (mi);
-
+    menudialog = dlg = create_menu_item_dialog (mi);
     dialog = dlg;
 
+    dlg_ptr = &menudialog;
+    g_object_add_weak_pointer(G_OBJECT(dlg), (gpointer*)dlg_ptr);
+    
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     response = gtk_dialog_run (GTK_DIALOG (dlg));
 
@@ -1131,3 +1137,11 @@ add_menu_item_dialog (PanelPopup * pp)
 
     edit_menu_item_dialog (mi);
 }
+
+void
+destroy_menu_dialog(void)
+{
+    if (menudialog)
+	gtk_dialog_response(GTK_DIALOG(menudialog), GTK_RESPONSE_OK);
+}
+

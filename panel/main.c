@@ -52,6 +52,8 @@
 #include "xfce.h"
 #include "settings.h"
 #include "mcs_client.h"
+#include "controls_dialog.h"
+#include "item_dialog.h"
 
 /* signal handling */
 typedef enum
@@ -185,6 +187,10 @@ check_signal_state (void)
 
     if (sigstate != NOSIGNAL)
     {
+	/* close open dialogs */
+	destroy_controls_dialog();
+	destroy_menu_dialog();
+	
 	if (sigstate == RESTART && !restarting)
 	{
 	    restarting = TRUE;

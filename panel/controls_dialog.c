@@ -40,6 +40,9 @@
 #include "popup.h"
 #include "settings.h"
 
+static GtkWidget *controlsdialog = NULL; /* keep track of it for 
+					     signal handling */
+
 static GSList *control_list = NULL;	/* list of available controls */
 
 static GtkWidget *container;	/* container on the panel to hold the 
@@ -227,6 +230,7 @@ void
 controls_dialog (Control * control)
 {
     GtkWidget *dlg;
+    GtkWidget **dlg_ptr;
     GtkWidget *button;
     GtkWidget *vbox;
     GtkWidget *hbox;
@@ -242,7 +246,11 @@ controls_dialog (Control * control)
     /* Keep track of the panel container */
     container = control->base->parent;
 
-    dlg = gtk_dialog_new();
+    controlsdialog = dlg = gtk_dialog_new();
+
+    dlg_ptr = &controlsdialog;
+    g_object_add_weak_pointer(G_OBJECT(dlg), (gpointer*)dlg_ptr);
+    
     gtk_window_set_title(GTK_WINDOW(dlg), _("Change item"));
 
     button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
@@ -346,5 +354,12 @@ controls_dialog (Control * control)
     }
 
     write_panel_config ();
+}
+
+void
+destroy_controls_dialog(void)
+{
+    if (controlsdialog)
+	gtk_dialog_response(GTK_DIALOG(controlsdialog), GTK_RESPONSE_OK);
 }
 

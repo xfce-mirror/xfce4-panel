@@ -23,5 +23,6 @@
 #include <panel/global.h>
 
 void controls_dialog (Control * control);
+void destroy_controls_dialog (void);
 
 #endif /* __XFCE_CONTROLS_DIALOG_H__ */
