@@ -179,11 +179,11 @@ clock_date_tooltip (GtkWidget * widget)
 	 * to get the proper string for your locale.
 	 * I used these:
 	 * %A  : full weekday name
-	 * %-d : day of the month, without prefixed 0
+	 * %d  : day of the month
 	 * %B  : full month name
 	 * %Y  : four digit year
 	 */
-	strftime (date_s, 255, _("%A, %-d %B %Y"), tm);
+	strftime (date_s, 255, _("%A, %d %B %Y"), tm);
 
 	/* Conversion to utf8
 	 * patch by Oliver M. Bolzer <oliver@fakeroot.net>
