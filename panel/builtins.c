@@ -87,7 +87,7 @@ static t_clock *clock_new(void)
     clock->twentyfour = TRUE;
 
     clock->frame = gtk_frame_new(NULL);
-    gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 4);
+    gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
     gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
     gtk_widget_show(clock->frame);
     /* protect against destruction when unpacking */
@@ -125,16 +125,20 @@ static gboolean adjust_time(PanelModule * pm)
 
     switch (clock->size)
     {
+	case TINY:
+            markup = g_strconcat("<tt><span size=\"x-small\">",
+                                 text, "</span></tt>", NULL);
+	    break;
         case SMALL:
-            markup = g_strconcat("<tt><span size=\"medium\">",
+            markup = g_strconcat("<tt><span size=\"small\">",
                                  text, "</span></tt>", NULL);
             break;
         case LARGE:
-            markup = g_strconcat("<tt><span size=\"x-large\">",
+            markup = g_strconcat("<tt><span size=\"large\">",
                                  text, "</span></tt>", NULL);
             break;
         default:
-            markup = g_strconcat("<tt><span size=\"large\">",
+            markup = g_strconcat("<tt><span size=\"medium\">",
                                  text, "</span></tt>", NULL);
             break;
     }
@@ -184,7 +188,7 @@ void clock_set_size(PanelModule * pm, int size)
 
     clock->size = size;
 
-    gtk_widget_set_size_request(clock->frame, s, s);
+    gtk_widget_set_size_request(clock->label, -1, s);
 }
 
 void clock_set_style(PanelModule * pm, int style)
