@@ -515,6 +515,7 @@ gboolean create_systembuttons_control(Control * control)
     gtk_container_add(GTK_CONTAINER(control->base), sb->vbox);
 
     control->data = (gpointer) sb;
+    control->with_popup = FALSE;
 
     control_set_size(control, settings.size);
 

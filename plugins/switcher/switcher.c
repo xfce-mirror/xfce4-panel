@@ -1075,11 +1075,6 @@ static void switcher_dialog_done(GtkWidget *b, t_switcher_dialog *sd)
     g_free(sd);
 }
 
-static void workspace_dialog(GtkWidget *b, t_switcher_dialog *sd)
-{
-    g_spawn_command_line_async("xfce-setting-show workspaces", NULL);
-}
-
 static void show_minibuttons_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 {
     t_switcher *sw = sd->sw;
@@ -1202,7 +1197,7 @@ static void switcher_revert(GtkWidget *b, t_switcher_dialog *sd)
 static void switcher_add_options(Control *control, GtkContainer *container, 
 				 GtkWidget *revert, GtkWidget *done)
 {
-    GtkWidget *vbox, *hbox, *label, *button;
+    GtkWidget *vbox, *hbox, *label;
     GtkSizeGroup *sg;
     t_switcher_dialog *sd;
 

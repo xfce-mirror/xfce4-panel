@@ -1,3 +1,76 @@
+2003-01-24 16:18  xfce
+
+	* plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	plugins/clock/clock.c, plugins/mailcheck/Makefile.am,
+	plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
+	plugins/switcher/Makefile.am, plugins/switcher/Makefile.in,
+	plugins/switcher/switcher.c, plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in,
+	plugins/systembuttons/systembuttons.c, plugins/trash/Makefile.am,
+	plugins/trash/Makefile.in, plugins/trash/trash.c,
+	settings/xfce_settings_dialog.c: Fix a bunch of i18n problems:
+	bindtextdomain must be invoked each time a plugin has to display
+	something otherwise other bindtextdomains take precedence and
+	display is not translated anymore...
+
+2003-01-24 15:57  xfce
+
+	* po/: es.gmo, es.po, fr.gmo, fr.po, nl.gmo, nl.po,
+	xfce4-panel.pot: Fix encoding not specified in es.po, regenerate
+	pot file (required after Edscott fixed a typo in the source) and
+	adjust french translation.
+
+2003-01-24 15:39  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	plugins/trash/Makefile.in, po/fr.gmo, po/fr.po,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Add french xtion.
+
+2003-01-24 14:33  edscott
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	icons/Makefile.in, panel/Makefile.in, panel/icons.c,
+	plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
+	po/es.gmo, po/es.po, po/nl.gmo, po/nl.po, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: added spanish
+	translation and fixed a typo in source code
+
+2003-01-24 12:53  huysmans
+
+	* ChangeLog, Makefile.am, Makefile.in, aclocal.m4, config.h.in,
+	configure, configure.ac, icons/Makefile.in, panel/Makefile.am,
+	panel/Makefile.in, panel/callbacks.c, panel/controls.c,
+	panel/controls_dialog.c, panel/global.h, panel/groups.c,
+	panel/handle.c, panel/icons.c, panel/info.c, panel/item.c,
+	panel/item_dialog.c, panel/main.c, panel/mcs_client.c,
+	panel/my_gettext.h, panel/panel.c, panel/popup.c, panel/settings.c,
+	panel/xfce_support.c, plugins/Makefile.in,
+	plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	plugins/clock/clock.c, plugins/mailcheck/Makefile.am,
+	plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
+	plugins/switcher/Makefile.am, plugins/switcher/Makefile.in,
+	plugins/switcher/switcher.c, plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in,
+	plugins/systembuttons/systembuttons.c, plugins/trash/Makefile.am,
+	plugins/trash/Makefile.in, plugins/trash/trash.c,
+	po/Makefile.in.in, po/POTFILES.in, po/nl.gmo, po/nl.po,
+	po/xfce4-panel.pot, settings/Makefile.am, settings/Makefile.in,
+	settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add i18n
+	framework and Dutch translation
+
 2003-01-21 20:12  huysmans
 
 	* ChangeLog, panel/controls.c, panel/panel.c: Small things that

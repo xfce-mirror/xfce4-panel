@@ -76,7 +76,6 @@ static GtkWidget *revert_button;
 /* Our real clock */
 typedef struct
 {
-    GtkWidget *frame;
     GtkWidget *eventbox;
     GtkWidget *clock;           /* our XfceClock widget */
 
@@ -110,20 +109,13 @@ static t_clock *clock_new(void)
 {
     t_clock *clock = g_new(t_clock, 1);
     
-    clock->clock = xfce_clock_new();
-
-    clock->frame = gtk_frame_new(NULL);
-    gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
-
-    gtk_widget_show(clock->frame);
-
     clock->eventbox = gtk_event_box_new();
-    gtk_container_add(GTK_CONTAINER(clock->frame), clock->eventbox);
+    gtk_widget_set_name(clock->eventbox, "xfce_clock");
     gtk_widget_show(clock->eventbox);
 
-    gtk_container_add(GTK_CONTAINER(clock->eventbox), clock->clock);
-
+    clock->clock = xfce_clock_new();
     gtk_widget_show(clock->clock);
+    gtk_container_add(GTK_CONTAINER(clock->eventbox), clock->clock);
 
     return clock;
 }
@@ -133,13 +125,6 @@ static void clock_free(Control * control)
     t_clock *clock = (t_clock *) control->data;
     g_return_if_fail( clock != NULL );
     
-    if(GTK_IS_WIDGET(clock->clock))
-        gtk_widget_destroy(clock->clock);
-    if(GTK_IS_WIDGET(clock->eventbox))
-        gtk_widget_destroy(clock->eventbox);
-    if(GTK_IS_WIDGET(clock->frame))
-        gtk_widget_destroy(clock->frame);
-
     if (clock->timeout_id)
 	g_source_remove(clock->timeout_id);
     
@@ -187,26 +172,6 @@ void clock_set_size(Control * control, int size)
           xfce_clock_set_led_size(tmp, DIGIT_HUGE);
     }
     update_clock_size(tmp, size);
-}
-
-void clock_set_style(Control * control, int style)
-{
-    t_clock *clock = (t_clock *) control->data;
-
-    if(style == OLD_STYLE)
-    {
-        gtk_widget_set_name(clock->frame, "gxfce_color2");
-	gtk_widget_set_name(clock->clock, "gxfce_color2");
-        gtk_widget_set_name(clock->eventbox, "gxfce_color2");
-	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
-    }
-    else
-    {
-        gtk_widget_set_name(clock->frame, "gxfce_color4");
-	gtk_widget_set_name(clock->clock, "gxfce_color4");
-        gtk_widget_set_name(clock->eventbox, "gxfce_color4");
-	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
-    }
 }
 
 gboolean
@@ -261,17 +226,6 @@ static void update_size(GtkToggleButton * tb, Control* control)
 static void clock_type_changed(GtkOptionMenu * omi, t_clock * clock)
 {
     XFCE_CLOCK(clock->clock)->mode = gtk_option_menu_get_history(omi);
-
-    /* No frame *please* (OF.) */
-#if 0
-    /* Cosmetic change : in analog mode 3D mode is not cute */
-    if(XFCE_CLOCK(clock->clock)->mode == XFCE_CLOCK_ANALOG)
-        gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
-    else
-	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
-#else
-    gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
-#endif
 
     xfce_clock_set_mode(XFCE_CLOCK(clock->clock), XFCE_CLOCK(clock->clock)->mode);
     gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
@@ -332,7 +286,7 @@ static void clock_hour_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
-     gtk_widget_set_size_request(clock->frame,-1, -1);
+     gtk_widget_set_size_request(clock->eventbox,-1, -1);
      gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
 }
 
@@ -364,7 +318,7 @@ static void clock_secs_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
-     gtk_widget_set_size_request(clock->frame, -1, -1);
+     gtk_widget_set_size_request(clock->eventbox, -1, -1);
      gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
 }
 
@@ -397,7 +351,7 @@ static void clock_ampm_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
 	*/
     gtk_widget_set_sensitive( revert_button, TRUE );
-    gtk_widget_set_size_request(clock->frame,-1, -1);
+    gtk_widget_set_size_request(clock->eventbox, -1, -1);
     gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
 }
 
@@ -491,25 +445,11 @@ void clock_read_config(Control *control, xmlNodePtr node)
     if(!xmlStrEqual(node->name, "XfceClock"))
         return;
 
-    /* No frame *please* (OF.) */
-#if 0	
-    if ( value = xmlGetProp(node, (const xmlChar *)"Clock_type"))
-    {
-	XFCE_CLOCK(cl->clock)->mode = atoi(value);
-	if(xfce_clock_get_mode(XFCE_CLOCK(cl->clock)) == XFCE_CLOCK_ANALOG )
-	    gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_NONE);
-	else
-	    gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_IN);
-        g_free(value);
-    }
-#else
     if ((value = xmlGetProp(node, (const xmlChar *)"Clock_type")))
     {
 	XFCE_CLOCK(cl->clock)->mode = atoi(value);
         g_free(value);
     }
-    gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_NONE);
-#endif
 
     if ((value = xmlGetProp(node, (const xmlChar *)"Toggle_military")))
     {
@@ -635,9 +575,10 @@ gboolean create_clock_control(Control * control)
 {
     t_clock *clock = clock_new();
 
-    gtk_container_add(GTK_CONTAINER(control->base), clock->frame);
+    gtk_container_add(GTK_CONTAINER(control->base), clock->eventbox);
 
     control->data = (gpointer) clock;
+    control->with_popup = FALSE;
 
     /* Add tooltip to show up the current date */
     clock_date_tooltip (clock->eventbox);
@@ -672,7 +613,6 @@ G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
     cc->add_options = clock_add_options;
 
     cc->set_size = clock_set_size;
-    cc->set_style = clock_set_style;
 }
 
 /* macro defined in plugins.h */
