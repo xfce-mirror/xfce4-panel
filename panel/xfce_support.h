@@ -58,6 +58,10 @@ GList *gnome_uri_list_extract_filenames(const gchar * uri_list);
 char *select_file_name(const char *title, const char *path, GtkWidget * parent);
 char *select_file_with_preview(const char *title, const char *path, GtkWidget * parent);
 
+#ifdef HAVE_STARTUP_NOTIFICATION
+void free_startup_timeout (void);
+#endif
+
 /* executing programs */
 void exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn);
 void exec_cmd_silent(const char *cmd, gboolean in_terminal, gboolean use_sn);

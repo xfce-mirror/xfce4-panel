@@ -80,6 +80,10 @@ void quit(gboolean force)
 
     mcs_stop_watch();
 
+#ifdef HAVE_STARTUP_NOTIFICATION
+    free_startup_timeout ();
+#endif
+
     panel_cleanup();
     
     if (gtk_main_level())
@@ -100,6 +104,10 @@ void restart(void)
     write_panel_config();
 
     gtk_widget_hide(toplevel);
+
+#ifdef HAVE_STARTUP_NOTIFICATION
+    free_startup_timeout ();
+#endif
 
     panel_cleanup();
     gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(toplevel)));

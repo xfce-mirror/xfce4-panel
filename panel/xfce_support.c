@@ -591,11 +591,12 @@ char *select_file_with_preview(const char *title, const char *path, GtkWidget * 
 
 typedef struct
 {
-    GdkScreen *screen;
     GSList *contexts;
     guint timeout_id;
 } 
 StartupTimeoutData;
+
+StartupTimeoutData *startup_timeout_data = NULL;
 
 static void sn_error_trap_push (SnDisplay *display, Display   *xdisplay)
 {
@@ -638,23 +639,6 @@ static gchar ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_con
     retval[j] = NULL;
 
     return retval;
-}
-
-
-static void free_startup_timeout (void *data)
-{
-    StartupTimeoutData *std = data;
-
-    g_slist_foreach (std->contexts, (GFunc) sn_launcher_context_unref, NULL);
-    g_slist_free (std->contexts);
-
-    if (std->timeout_id != 0) 
-    {
-        g_source_remove (std->timeout_id);
-        std->timeout_id = 0;
-    }
-
-    g_free (std);
 }
 
 static gboolean startup_timeout (void *data)
@@ -706,29 +690,41 @@ static gboolean startup_timeout (void *data)
     return FALSE;
 }
 
-static void add_startup_timeout (GdkScreen *screen, SnLauncherContext *sn_context)
+static void add_startup_timeout (SnLauncherContext *sn_context)
 {
-    StartupTimeoutData *data;
-
-    data = g_object_get_data (G_OBJECT (screen), "xfce-startup-data");
-    if (data == NULL) 
+    if (startup_timeout_data == NULL) 
     {
-        data = g_new (StartupTimeoutData, 1);
-        data->screen = screen;
-        data->contexts = NULL;
-        data->timeout_id = 0;
-
-        g_object_set_data_full (G_OBJECT (screen), "xfce-startup-data", data, free_startup_timeout);            
+        startup_timeout_data = g_new (StartupTimeoutData, 1);
+        startup_timeout_data->contexts = NULL;
+        startup_timeout_data->timeout_id = 0;
     }
 
     sn_launcher_context_ref (sn_context);
-    data->contexts = g_slist_prepend (data->contexts, sn_context);
+    startup_timeout_data->contexts = g_slist_prepend (startup_timeout_data->contexts, sn_context);
 
-    if (data->timeout_id == 0) 
+    if (startup_timeout_data->timeout_id == 0) 
     {
-        data->timeout_id = g_timeout_add (STARTUP_TIMEOUT, startup_timeout, data);              
+        startup_timeout_data->timeout_id = g_timeout_add (STARTUP_TIMEOUT, startup_timeout, startup_timeout_data);              
     }
 }
+
+void free_startup_timeout (void)
+{
+    StartupTimeoutData *std = startup_timeout_data;
+
+    g_slist_foreach (std->contexts, (GFunc) sn_launcher_context_unref, NULL);
+    g_slist_free (std->contexts);
+
+    if (std->timeout_id != 0) 
+    {
+        g_source_remove (std->timeout_id);
+        std->timeout_id = 0;
+    }
+
+    g_free (std);
+    startup_timeout_data = NULL;
+}
+
 #endif /* HAVE_STARTUP_NOTIFICATION */
 
 static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn, gboolean silent)
@@ -813,7 +809,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
             }
             else
             {
-                add_startup_timeout (DefaultScreen (gdk_display), sn_context);
+                add_startup_timeout (sn_context);
                 sn_launcher_context_unref (sn_context);
             }
         }
