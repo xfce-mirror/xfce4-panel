@@ -165,10 +165,14 @@ static void restore_backup(void)
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), backup.num_left);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), backup.num_right);
+
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), backup.num_screens);
+    /* apparently the callback doesn't always work */
+    panel_set_num_screens(backup.num_screens);
+
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox), 
 				 backup.show_desktop_buttons);
-
+    
     if(backup.lock_command)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
     else
@@ -575,8 +579,6 @@ static void desktop_buttons_changed(GtkToggleButton *button, gpointer data)
     gboolean show = gtk_toggle_button_get_active(button);
 
     central_panel_set_show_desktop_buttons(show);
-
-    gtk_widget_set_sensitive(screens_spin, show);
 }
 
 static void add_controls_box(GtkBox * box)
@@ -668,8 +670,6 @@ static void add_controls_box(GtkBox * box)
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), settings.num_screens);
     g_signal_connect(screens_spin, "value-changed", G_CALLBACK(spin_changed), NULL);
-
-    gtk_widget_set_sensitive(screens_spin, settings.show_desktop_buttons);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/

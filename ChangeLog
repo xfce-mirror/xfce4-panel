@@ -1,3 +1,60 @@
+2002-08-04 16:42  huysmans
+
+	* panel/: central.c, central.h, dialogs.c, global.h, xfce.c: Add
+	option to hide desktop buttons
+
+2002-07-31 08:41  huysmans
+
+	* panel/: builtins.c, callbacks.c, callbacks.h, central.c,
+	dialogs.c, icons.c, icons.h, item.c, item.h, item_dialog.c,
+	item_dialog.h, module.c, module.h, move.c, popup.c, popup.h,
+	settings.c, side.c, side.h, wmhints.c, xfce.c, xfce_support.c,
+	xfce_support.h: Reformat files (missing empty lines at the end) and
+	remove panel.h includes. Reported by Biju Chacko
+
+2002-07-29 23:11  huysmans
+
+	* panel/xfce.c: Destroy the panel before restarting or you will end
+	up with ghost panels
+
+2002-07-28 20:56  huysmans
+
+	* panel/: side.c, side.h: Change frame in panel group to
+	gtk_alignment. Much better size control
+
+2002-07-28 17:42  huysmans
+
+	* panel/: builtins.c, dialogs.c: In global dialog on revert change
+	position at the end (after resizing)
+
+2002-07-28 17:33  huysmans
+
+	* panel/dialogs.c: Fix bug in finding icon themes
+
+2002-07-28 17:08  huysmans
+
+	* panel/: dialogs.c, xfce.c: Force modern style for tiny panel.
+	Traditional looks weird.
+
+2002-07-28 16:07  huysmans
+
+	* panel/builtins.c: Update clock plugin to accept new panel size
+
+2002-07-28 15:23  huysmans
+
+	* panel/: side.c, xfce.c: Oops, forgot to add TINY_PANEL_ICONS to
+	icon_size()
+
+2002-07-28 14:56  huysmans
+
+	* panel/: builtins.c, central.c, dialogs.c, global.h, item.c,
+	item_dialog.c, popup.c, side.c, side.h, xfce.c: Added new size
+	(Tiny)
+
+2002-07-26 08:32  huysmans
+
+	* ChangeLog: Updated ChangeLog
+
 2002-07-26 08:28  huysmans
 
 	* panel/xfce.c, README: Updated README and added delete/destroy
