@@ -6,7 +6,7 @@ GPL.html \
 index.html \
 ln-legalnotice.html \
 panel-getting-started.html \
-panel-prefs.html \
+settings.html \
 panel-use.html 
 
 html:
