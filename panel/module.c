@@ -30,6 +30,7 @@
 
 #include "module.h"
 
+#include "xfce_support.h"
 #include "builtins.h"
 #include "callbacks.h"
 #include "icons.h"

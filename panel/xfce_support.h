@@ -39,6 +39,7 @@ GList *gnome_uri_list_extract_uris(const gchar * uri_list);
 GList *gnome_uri_list_extract_filenames(const gchar * uri_list);
 
 /* dialogs */
+gboolean confirm(const char *text, const char *stock, const char *action);
 void report_error(const char *text);
 void show_info(const char *text);
 char *select_file_name(const char *title, const char *path, GtkWidget * parent);

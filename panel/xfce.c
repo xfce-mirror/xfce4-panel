@@ -32,6 +32,7 @@
 
 #include "xfce.h"
 
+#include "xfce_support.h"
 #include "central.h"
 #include "side.h"
 #include "wmhints.h"
@@ -39,39 +40,45 @@
 #include "callbacks.h"
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Utility functions  
-
+  Utility functions  
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 int icon_size(int size)
 {
-    if(size == SMALL)
-        return SMALL_PANEL_ICONS;
-    else if(size == LARGE)
-        return LARGE_PANEL_ICONS;
-    else
-        return MEDIUM_PANEL_ICONS;
+	switch (size)
+	{
+		case SMALL:
+			return SMALL_PANEL_ICONS;
+		case LARGE:
+			return LARGE_PANEL_ICONS;
+		default:
+			return MEDIUM_PANEL_ICONS;
+	}
 }
 
 int popup_size(int size)
 {
-    if(size == SMALL)
-        return SMALL_POPUP_ICONS;
-    else if(size == LARGE)
-        return LARGE_POPUP_ICONS;
-    else
-        return MEDIUM_POPUP_ICONS;
+	switch (size)
+	{
+		case SMALL:
+			return SMALL_POPUP_ICONS;
+		case LARGE:
+			return LARGE_POPUP_ICONS;
+		default:
+			return MEDIUM_POPUP_ICONS;
+	}
 }
 
 int top_height(int size)
 {
-    if(size == SMALL)
-        return SMALL_TOPHEIGHT;
-    else if(size == LARGE)
-        return LARGE_TOPHEIGHT;
-    else
-        return MEDIUM_TOPHEIGHT;
+	switch (size)
+	{
+		case SMALL:
+			return SMALL_TOPHEIGHT;
+		case LARGE:
+			return LARGE_TOPHEIGHT;
+		default:
+			return MEDIUM_TOPHEIGHT;
+	}
 }
 
 static GtkTooltips *tooltips = NULL;
@@ -85,26 +92,44 @@ void add_tooltip(GtkWidget * widget, char *tip)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Main program
-
+  Main program
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 void sighandler(int sig)
 {
-    quit();
+	switch (sig)
+	{
+		case SIGHUP:
+			restart();
+			break;
+		default:
+			quit();
+	}
 }
 
 void quit(void)
 {
+	if (!confirm(_("Are you sure you want to close the XFce panel?\n"
+				   "This may log you off."), GTK_STOCK_QUIT, NULL))
+	{
+		return;
+	}
+	
+	gtk_widget_hide(toplevel);
+	
+    if(settings.exit_command)
+        exec_cmd(settings.exit_command, FALSE);
+	
     gtk_main_quit();
 
     panel_cleanup();
+
 }
 
 void restart(void)
 {
-    quit();
+    gtk_main_quit();
+
+    panel_cleanup();
 
     xfce_run();
 }
@@ -115,6 +140,7 @@ void xfce_init(void)
 
     create_builtin_pixbufs();
 
+	signal(SIGHUP, &sighandler);
     signal(SIGTERM, &sighandler);
     signal(SIGINT, &sighandler);
 }
@@ -152,9 +178,6 @@ int main(int argc, char **argv)
     xfce_init();
 
     xfce_run();
-
-    if(settings.exit_command)
-        exec_cmd(settings.exit_command, FALSE);
 
     return (0);
 }

@@ -392,6 +392,39 @@ GList *gnome_uri_list_extract_filenames(const gchar * uri_list)
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
    Dialogs
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+gboolean confirm(const char *text, const char *stock, const char *action)
+{
+	GtkWidget *dialog, *button;
+	int response = GTK_RESPONSE_NONE;
+	
+    dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
+                                    GTK_DIALOG_MODAL |
+                                    GTK_DIALOG_DESTROY_WITH_PARENT,
+                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_NONE, text);
+	
+	button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
+	gtk_widget_show(button);
+	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_NO);
+
+	if (action)
+		button = mixed_button_new(stock,action);
+	else
+		button = gtk_button_new_from_stock(stock);
+	gtk_widget_show(button);
+		
+	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_YES);
+	
+    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+
+    response = gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+	
+	if (response == GTK_RESPONSE_YES)
+		return TRUE;
+	else
+		return FALSE;
+}
+
 void report_error(const char *text)
 {
     GtkWidget *dialog;
