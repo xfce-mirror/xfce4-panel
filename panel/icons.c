@@ -90,7 +90,7 @@ get_pixbuf_by_id (int id)
     if (id < UNKNOWN_ICON || id >= NUM_ICONS)
 	id = UNKNOWN_ICON;
 
-    return xfce_load_themed_icon (xfce_icon_names[id], 48);
+    return xfce_load_themed_icon (xfce_icon_names[id], icon_size[settings.size]);
 }
 
 GdkPixbuf *
@@ -101,7 +101,7 @@ get_pixbuf_from_file (const char *path)
     if (!g_file_test (path, G_FILE_TEST_EXISTS))
 	return get_pixbuf_by_id (UNKNOWN_ICON);
 
-    pb = gdk_pixbuf_new_from_file (path, NULL);
+    pb = xfce_load_themed_icon (path, icon_size[settings.size]);
 
     if (pb && GDK_IS_PIXBUF (pb))
 	return pb;
