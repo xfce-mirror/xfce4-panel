@@ -1,3 +1,75 @@
+2002-09-24 02:28  zedek
+
+	* panel/: builtins.c, xfce_clock.c: Removed the previous debug
+	messages Code cleanups Applied Olivie's Patch (another one :p)
+	Removed xfce_clock_set_shadow_type function (useless) Added a
+	function to update the clock module size whenever a config option
+	changes (actually it only make a call to clock_set_size) ... other
+	things I can't remember :D (I'm a little bit tired you know)
+
+2002-09-24 00:46  zedek
+
+	* panel/: builtins.c, xfce_clock.c, xfce_clock.h: Added lots of
+	debug messages Fixed (huh?) the LED/Digital display bug (still
+	needs improvement) Applied Olivier's patch (gtk_draw_rectangles
+	calls replace the previous gtk_draw_box) Fixed the frame display
+	bug (was not shown on startup)
+
+2002-09-23 22:58  huysmans
+
+	* panel/xfce.c: Try to fix crash on exit
+
+2002-09-23 22:25  huysmans
+
+	* panel/xfce.c: Fix crash on ctrl-c.
+
+2002-09-23 21:04  huysmans
+
+	* panel/xfce.c: Change default vertical position
+
+2002-09-23 20:09  huysmans
+
+	* panel/: controls_dialog.c, dialogs.c, item_dialog.c: Save
+	settings after closing any dialog
+
+2002-09-23 18:45  huysmans
+
+	* panel/: builtins.c, central.c, controls.c, dialogs.c, side.c: Fix
+	resize bug
+
+2002-09-22 22:08  huysmans
+
+	* TODO, config.h.in, configure, panel/side.c: Fixed the move handle
+	positioning. Or did I?
+
+2002-09-22 20:46  huysmans
+
+	* panel/callbacks.c: Fix popup menu positioning even more ;-)
+
+2002-09-22 20:29  huysmans
+
+	* panel/side.c: Now really fix move handle positioning. Really.
+
+2002-09-22 20:11  zedek
+
+	* configure.ac: Add debug infos at runtime (--enable-debug)
+
+2002-09-22 20:01  huysmans
+
+	* panel/: controls.c, controls.h: Some cleanup
+
+2002-09-22 19:43  zedek
+
+	* panel/debug.h: fix my previous commit (debug macro)
+
+2002-09-22 19:42  zedek
+
+	* panel/global.h: Added debug macros
+
+2002-09-22 17:19  huysmans
+
+	* ChangeLog: Update ChangeLog
+
 2002-09-22 17:17  huysmans
 
 	* panel/: callbacks.c, callbacks.h, controls.c, side.c: Add close
