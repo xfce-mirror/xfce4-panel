@@ -54,19 +54,19 @@ mcs_position_setting (int pos)
 {
     static int x, y;
 
-    if (pos == XFCE_POSITION_NONE || !toplevel)
+    if (pos == XFCE_POSITION_NONE || !panel.toplevel)
         return;
 
     if (pos == XFCE_POSITION_SAVE)
     {
-        gtk_window_get_position (GTK_WINDOW (toplevel), &x, &y);
+        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &x, &y);
         return;
     }
 
     if (pos == XFCE_POSITION_RESTORE)
     {
-        position.x = x;
-        position.y = y;
+        panel.position.x = x;
+        panel.position.y = y;
         panel_set_position ();
 
         return;
@@ -99,6 +99,7 @@ static gpointer settings_callbacks[] = {
     panel_set_size,
     panel_set_popup_position,
     panel_set_theme,
+    panel_set_autohide,
     mcs_position_setting
 };
 

@@ -290,10 +290,10 @@ set_window_type_dock (GtkWidget * window, gboolean set)
     if (mapped)
         gtk_widget_map (window);
 
-    if (GTK_IS_WINDOW (toplevel))
+    if (GTK_IS_WINDOW (panel.toplevel))
     {
         panel_set_position ();
-        gtk_window_present (GTK_WINDOW (toplevel));
+        gtk_window_present (GTK_WINDOW (panel.toplevel));
     }
 }
 

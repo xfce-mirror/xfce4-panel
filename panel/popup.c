@@ -37,7 +37,7 @@
 #include "item.h"
 #include "settings.h"
 
-static PanelPopup *open_popup = NULL;
+PanelPopup *open_popup = NULL;
 
 /*  Panel popup callbacks
  *  ---------------------
@@ -187,7 +187,7 @@ show_popup (PanelPopup * pp)
     }
 
     gtk_window_move (GTK_WINDOW (pp->window), x, y);
-    gtk_window_stick (pp->window);
+    gtk_window_stick (GTK_WINDOW(pp->window));
     gtk_widget_show (pp->window);
 }
 
@@ -253,7 +253,7 @@ set_popup_window_properties (GtkWidget * win)
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);
     gtk_window_set_title (window, _("Menu"));
-    gtk_window_set_transient_for (window, GTK_WINDOW (toplevel));
+    gtk_window_set_transient_for (window, GTK_WINDOW (panel.toplevel));
     gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_MENU);
 
     pb = get_system_pixbuf (MENU_ICON);

@@ -81,22 +81,7 @@ static GtkWidget *dialog = NULL;
  * xfce-settings.h header for other modules */
 char **names = xfce_settings_names;
 
-/* useful widgets
-static void add_section_header(const char *text, GtkBox * box)
-{
-    GtkWidget *label;
-    char *markup;
-
-    label = gtk_label_new(NULL);
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    markup = g_strconcat("<b>", text, "</b>", NULL);
-    gtk_label_set_markup(GTK_LABEL(label), markup);
-    g_free(markup);
-    gtk_widget_show(label);
-
-    gtk_box_pack_start(box, label, FALSE, TRUE, 0);
-}
- */
+/* useful widgets */
 #define SKIP BORDER
 
 static void
@@ -569,6 +554,46 @@ add_position_box (GtkBox * box, GtkSizeGroup * sg)
                       optionmenu);
 }
 
+/* autohide */
+static void
+autohide_changed (GtkToggleButton *tb)
+{
+    int hide;
+    McsSetting *setting = &xfce_options[XFCE_AUTOHIDE];
+
+    hide = gtk_toggle_button_get_active(tb) ? 1 : 0;
+
+    if (setting->data.v_int == hide)
+        return;
+
+    setting->data.v_int = hide;
+    mcs_manager_set_setting (mcs_manager, setting, CHANNEL);
+    mcs_manager_notify (mcs_manager, CHANNEL);
+}
+
+static void
+add_autohide_box(GtkContainer *frame)
+{
+    GtkWidget *hbox, *label, *check;
+
+    hbox = gtk_hbox_new(FALSE, BORDER);
+    gtk_container_set_border_width(GTK_CONTAINER(hbox), BORDER);
+    gtk_widget_show(hbox);
+    gtk_container_add (frame, hbox);
+
+    label = gtk_label_new(_("Autohide:"));
+    gtk_widget_show(label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    check = gtk_check_button_new();
+    gtk_widget_show(check);
+    gtk_box_pack_start(GTK_BOX(hbox), check, FALSE, FALSE, 0);
+    
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(check), xfce_options[XFCE_AUTOHIDE].data.v_int == 1);
+
+    g_signal_connect(check, "toggled", G_CALLBACK(autohide_changed), NULL);
+}
+
 /* the dialog */
 static void
 dialog_delete (GtkWidget * dialog)
@@ -583,7 +608,7 @@ dialog_delete (GtkWidget * dialog)
 void
 run_xfce_settings_dialog (McsPlugin * mp)
 {
-    GtkWidget *header, *hbox, *frame, *vbox;
+    GtkWidget *header, *hbox, *frame, *vbox, *vbox2;
     GtkSizeGroup *sg;
 
     if (is_running)
@@ -642,10 +667,15 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     g_object_unref (sg);
 
+    /* second column */
+    vbox2 = gtk_vbox_new(FALSE, BORDER);
+    gtk_widget_show(vbox2);
+    gtk_box_pack_start (GTK_BOX (hbox), vbox2, FALSE, FALSE, 0);
+    
     /* Position */
     frame = gtk_frame_new (_("Position"));
     gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox2), frame, FALSE, FALSE, 0);
 
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
@@ -657,6 +687,13 @@ run_xfce_settings_dialog (McsPlugin * mp)
     add_position_box (GTK_BOX (vbox), sg);
 
     g_object_unref (sg);
+
+    /* autohide */
+    frame = gtk_frame_new (_("Behaviour"));
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (vbox2), frame, TRUE, TRUE, 0);
+
+    add_autohide_box (GTK_CONTAINER (frame));
 
     gtk_widget_show (dialog);
 }

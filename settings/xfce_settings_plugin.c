@@ -66,7 +66,6 @@ mcs_plugin_init (McsPlugin * mp)
     textdomain (GETTEXT_PACKAGE);
 #endif
 
-
     mcs_manager = mp->manager;
 
     xfce_create_channel (mp->manager);
@@ -130,6 +129,12 @@ xfce_init_options (void)
                 opt->name = "position";
                 opt->type = MCS_TYPE_INT;
                 opt->data.v_int = XFCE_POSITION_NONE;
+                mcs_manager_set_setting (mcs_manager, opt, CHANNEL);
+                break;
+            case XFCE_AUTOHIDE:
+                opt->name = "autohide";
+                opt->type = MCS_TYPE_INT;
+                opt->data.v_int = 0;
                 mcs_manager_set_setting (mcs_manager, opt, CHANNEL);
                 break;
             default:

@@ -17,6 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+/*
+    04/11/2003 - Erik Touve - etouve@earthlink.net
+    Autohide code added.  Put Panel behind a struct.
+*/
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -30,6 +35,7 @@
 #include <libxfce4util/debug.h>
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/libnetk.h>
+#include <libxfcegui4/xinerama.h>
 
 #include "xfce.h"
 #include "groups.h"
@@ -39,22 +45,13 @@
 #include "settings.h"
 #include "mcs_client.h"
 
-/* global settings */
+#define HIDE_TIMEOUT   2000
+#define UNHIDE_TIMEOUT  200
+#define HIDDEN_SIZE 10
+
+/* globals */
 Settings settings;
-Position position;
-
-static int screen_width = 0;
-static int screen_height = 0;
-
-GtkWidget *toplevel = NULL;
-
-static GtkWidget *main_frame;
-static GtkWidget *panel_box;    /* contains all panel components */
-static GtkWidget *handles[2];
-static GtkWidget *group_box;
-
-/* lock settings update when panel is not yet (re)build */
-static gboolean panel_created = FALSE;
+Panel panel;
 
 /*  Panel dimensions 
  *  ----------------
@@ -69,6 +66,15 @@ int border_width = 4;
 int top_height[] = { 14, 16, 18, 20 };
 
 int popup_icon_size[] = { 20, 24, 24, 32 };
+
+/* lock settings update when panel is not yet (re)build */
+static gboolean panel_created = FALSE;
+
+/* screen properties */
+static Display *dpy = NULL;
+static int scr = 0;
+static int screen_width = 0;
+static int screen_height = 0;
 
 /*  Move handle menu
  *  ----------------
@@ -200,7 +206,7 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event, GtkMenu * menu)
 static gboolean
 handler_released_cb (GtkWidget * h, GdkEventButton * event, gpointer data)
 {
-    gtk_window_get_position (GTK_WINDOW (toplevel), &position.x, &position.y);
+    gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x, &panel.position.y);
     /* let default handler run */
     return FALSE;
 }
@@ -211,7 +217,7 @@ handle_new (void)
     GtkWidget *mh;
     GtkMenu *menu;
 
-    mh = xfce_movehandler_new (toplevel);
+    mh = xfce_movehandler_new (panel.toplevel);
     gtk_widget_show (mh);
 
     gtk_widget_set_name (mh, "xfce_panel");
@@ -230,6 +236,173 @@ handle_new (void)
     handle_set_size (mh, settings.size);
 
     return mh;
+}
+
+/*  Autohide
+ *  --------
+*/
+extern PanelPopup *open_popup;
+
+static void
+panel_set_hidden (Panel * p, gboolean hide)
+{
+    GtkRequisition req;
+    int x, y;
+    Position pos;
+    static int minx = 0, maxx = 0, miny = 0, maxy = 0, centerx = 0, centery=0;
+    
+    if (!p->hidden)
+    {
+        gtk_window_get_position (GTK_WINDOW (p->toplevel), &(p->position.x),
+                                 &(p->position.y));
+    }
+
+    /* Get the size */
+    gtk_widget_size_request (p->toplevel, &req);
+    pos = p->position;
+
+    /* xinerama aware screen coordinates */
+    if (pos.x < minx || pos.x > maxx || pos.y < miny || pos.y > maxy)
+    {
+	minx = MyDisplayX(pos.x, pos.y);
+	maxx = MyDisplayMaxX(dpy, scr, pos.x, pos.y);
+	miny = MyDisplayY(pos.x, pos.y);
+	maxy = MyDisplayMaxY(dpy, scr, pos.x, pos.y);
+
+	centerx = minx + (maxx - minx) / 2;
+	centery = miny + (maxy - miny) / 2;
+    }
+
+    /* Handle the resize */
+    if (hide)
+    {
+        /* Depending on orientation, resize */
+        if (settings.orientation == VERTICAL)
+        {
+            if (pos.x < centerx)
+                x = pos.x;
+            else
+                x = pos.x + req.width - HIDDEN_SIZE;
+
+            y = pos.y;
+
+            req.width = HIDDEN_SIZE;
+        }
+        else
+        {
+            if (pos.y < centery)
+                y = pos.y;
+            else
+                y = pos.y + req.height - HIDDEN_SIZE;
+
+            x = pos.x;
+
+            req.height = HIDDEN_SIZE;
+        }
+    }
+    else
+    {
+        req.width = -1;
+        req.height = -1;
+        x = pos.x;
+        y = pos.y;
+    }
+
+/*    g_print("(x=%d,y=%d) => (x=%d,y=%d)\n", pos.x, pos.y, x, y);*/
+    if (hide)
+        gtk_widget_hide (p->main_frame);
+    else
+        gtk_widget_show (p->main_frame);
+
+    p->hidden = hide;
+
+    gtk_widget_set_size_request (p->toplevel, req.width, req.height);
+    
+    while(gtk_events_pending())
+	gtk_main_iteration();
+
+    gtk_window_present(GTK_WINDOW(p->toplevel));
+    gtk_window_move (GTK_WINDOW (p->toplevel), x, y);
+}
+
+gboolean
+panel_hide_timeout (Panel * p)
+{
+    /* keep trying while a subpanel is open */
+    if (open_popup)
+        return TRUE;
+
+    if (!p->hidden)
+	panel_set_hidden (p, TRUE);
+
+    return FALSE;
+}
+
+gboolean
+panel_unhide_timeout (Panel * p)
+{
+    if (p->hidden)
+	panel_set_hidden (p, FALSE);
+    
+    return FALSE;
+}
+
+gboolean
+panel_enter (GtkWindow * w, GdkEventCrossing * event, gpointer data)
+{
+    Panel *p = (Panel *) data;
+
+    if (!(settings.autohide))
+    {
+        return FALSE;
+    }
+
+    if (event->detail != GDK_NOTIFY_INFERIOR)
+    {
+        if (p->hide_timeout)
+        {
+            g_source_remove (p->hide_timeout);
+            p->hide_timeout = 0;
+        }
+
+        if (!p->unhide_timeout)
+        {
+            p->unhide_timeout =
+                g_timeout_add (UNHIDE_TIMEOUT,
+                               (GSourceFunc) panel_unhide_timeout, p);
+        }
+    }
+
+    return FALSE;
+}
+
+gboolean
+panel_leave (GtkWidget * w, GdkEventCrossing * event, gpointer data)
+{
+    Panel *p = (Panel *) data;
+
+    if (!(settings.autohide))
+    {
+        return FALSE;
+    }
+
+    if (event->detail != GDK_NOTIFY_INFERIOR)
+    {
+        if (p->unhide_timeout)
+        {
+            g_source_remove (p->unhide_timeout);
+            p->unhide_timeout = 0;
+        }
+
+        if (!p->hide_timeout)
+        {
+            p->hide_timeout =
+                g_timeout_add (HIDE_TIMEOUT, (GSourceFunc) panel_hide_timeout,
+                               p);
+        }
+    }
+
+    return FALSE;
 }
 
 /*  Panel framework
@@ -268,53 +441,62 @@ create_panel_window (void)
 }
 
 static void
-create_panel_framework (void)
+create_panel_framework (Panel * p)
 {
     gboolean vertical = (settings.orientation == VERTICAL);
 
     /* toplevel window */
-    if (!toplevel)
+    if (!p->toplevel)
     {
-        toplevel = create_panel_window ();
-        g_object_add_weak_pointer (G_OBJECT (toplevel),
-                                   (gpointer *) & toplevel);
+        p->toplevel = create_panel_window ();
+        g_object_add_weak_pointer (G_OBJECT (p->toplevel),
+                                   (gpointer *) & (p->toplevel));
     }
 
     /* this is necessary after a SIGHUP */
-    gtk_window_stick (GTK_WINDOW (toplevel));
+    gtk_window_stick (GTK_WINDOW (p->toplevel));
+
+    /* Connect signalers to window for autohide */
+    g_signal_connect (GTK_WINDOW (p->toplevel), "enter-notify-event",
+                      G_CALLBACK (panel_enter), &panel);
+
+    g_signal_connect (GTK_WINDOW (p->toplevel), "leave-notify-event",
+                      G_CALLBACK (panel_leave), &panel);
 
     /* main frame */
-    main_frame = gtk_frame_new (NULL);
-    gtk_frame_set_shadow_type (GTK_FRAME (main_frame), GTK_SHADOW_OUT);
-    gtk_container_set_border_width (GTK_CONTAINER (main_frame), 0);
-    gtk_widget_show (main_frame);
-    gtk_container_add (GTK_CONTAINER (toplevel), main_frame);
+    p->main_frame = gtk_frame_new (NULL);
+    gtk_frame_set_shadow_type (GTK_FRAME (p->main_frame), GTK_SHADOW_OUT);
+    gtk_container_set_border_width (GTK_CONTAINER (p->main_frame), 0);
+    gtk_widget_show (p->main_frame);
+    gtk_container_add (GTK_CONTAINER (p->toplevel), p->main_frame);
 
     /* create all widgets that depend on orientation */
     if (vertical)
     {
-        panel_box = gtk_vbox_new (FALSE, 0);
-        group_box = gtk_vbox_new (FALSE, 0);
+        p->panel_box = gtk_vbox_new (FALSE, 0);
+        p->group_box = gtk_vbox_new (FALSE, 0);
     }
     else
     {
-        panel_box = gtk_hbox_new (FALSE, 0);
-        group_box = gtk_hbox_new (FALSE, 0);
+        p->panel_box = gtk_hbox_new (FALSE, 0);
+        p->group_box = gtk_hbox_new (FALSE, 0);
     }
 
     /* show them */
-    gtk_widget_show (panel_box);
-    gtk_widget_show (group_box);
+    gtk_widget_show (p->panel_box);
+    gtk_widget_show (p->group_box);
 
     /* create handles */
-    handles[LEFT] = handle_new ();
-    handles[RIGHT] = handle_new ();
+    p->handles[LEFT] = handle_new ();
+    p->handles[RIGHT] = handle_new ();
 
     /* pack the widgets into the main frame */
-    gtk_container_add (GTK_CONTAINER (main_frame), panel_box);
-    gtk_box_pack_start (GTK_BOX (panel_box), handles[LEFT], FALSE, FALSE, 0);
-    gtk_box_pack_start (GTK_BOX (panel_box), group_box, TRUE, TRUE, 0);
-    gtk_box_pack_start (GTK_BOX (panel_box), handles[RIGHT], FALSE, FALSE, 0);
+    gtk_container_add (GTK_CONTAINER (p->main_frame), p->panel_box);
+    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[LEFT], FALSE, FALSE,
+                        0);
+    gtk_box_pack_start (GTK_BOX (p->panel_box), p->group_box, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[RIGHT], FALSE, FALSE,
+                        0);
 }
 
 void
@@ -328,7 +510,7 @@ static void init_settings ();
 void
 create_panel (void)
 {
-    gboolean need_init = TRUE;
+    static gboolean need_init = TRUE;
     int x, y;
 
     /* necessary for initial settings to do the right thing */
@@ -336,6 +518,22 @@ create_panel (void)
 
     if (need_init)
     {
+        /* set for later use */
+	/* TODO: for gtk 2.2 we could use gtk_widget_get_display() et al. */
+	dpy = gdk_display;
+	scr = DefaultScreen(dpy); 
+        screen_width = gdk_screen_width ();
+        screen_height = gdk_screen_height ();
+
+        panel.toplevel = NULL;
+
+        panel.position.x = -1;
+        panel.position.y = -1;
+
+        panel.hidden = FALSE;
+        panel.hide_timeout = 0;
+        panel.unhide_timeout = 0;
+
         /* fill in the 'settings' structure */
         init_settings ();
         get_global_prefs ();
@@ -343,24 +541,20 @@ create_panel (void)
         /* If there is a settings manager it takes precedence */
         mcs_watch_xfce_channel ();
 
-        /* set for later use */
-        screen_width = gdk_screen_width ();
-        screen_height = gdk_screen_height ();
-
         need_init = FALSE;
     }
 
     /* panel framework */
-    create_panel_framework ();
+    create_panel_framework (&panel);
 
     /* FIXME
      * somehow the position gets set differently in the code below
      * we just save it here and restore it before reading the config
      * file */
-    x = position.x;
-    y = position.y;
+    x = panel.position.x;
+    y = panel.position.y;
 
-    groups_init (GTK_BOX (group_box));
+    groups_init (GTK_BOX (panel.group_box));
 
     /* read and apply configuration 
      * This function creates the panel items and popup menus */
@@ -369,13 +563,14 @@ create_panel (void)
     panel_created = TRUE;
 
     /* panel may have moved slightly off the screen */
-    position.x = x;
-    position.y = y;
+    panel.position.x = x;
+    panel.position.y = y;
     panel_set_position ();
 
-    gtk_widget_show (toplevel);
-    set_window_layer (toplevel, settings.layer);
-    set_window_skip (toplevel);
+    gtk_widget_show (panel.toplevel);
+    set_window_layer (panel.toplevel, settings.layer);
+    set_window_skip (panel.toplevel);
+    panel_set_autohide (settings.autohide);
 }
 
 void
@@ -392,25 +587,34 @@ panel_add_control (void)
 void
 panel_set_orientation (int orientation)
 {
+    gboolean hidden;
+    
     settings.orientation = orientation;
 
     if (!panel_created)
         return;
 
+    hidden = panel.hidden;
+    if (hidden)
+	panel_set_autohide(FALSE);
+    
     hide_current_popup_menu ();
 
     /* save panel controls */
     groups_unpack ();
 
     /* no need to recreate the window */
-    gtk_widget_destroy (main_frame);
-    create_panel_framework ();
+    gtk_widget_destroy (panel.main_frame);
+    create_panel_framework (&panel);
 
-    groups_pack (GTK_BOX (group_box));
+    groups_pack (GTK_BOX (panel.group_box));
     groups_set_orientation (orientation);
 
-    position.x = position.y = -1;
+    panel.position.x = panel.position.y = -1;
     panel_set_position ();
+    
+    if (hidden)
+	panel_set_autohide(TRUE);
 }
 
 void
@@ -421,7 +625,7 @@ panel_set_layer (int layer)
     if (!panel_created)
         return;
 
-    set_window_layer (toplevel, layer);
+    set_window_layer (panel.toplevel, layer);
 }
 
 void
@@ -435,8 +639,8 @@ panel_set_size (int size)
     hide_current_popup_menu ();
 
     groups_set_size (size);
-    handle_set_size (handles[LEFT], size);
-    handle_set_size (handles[RIGHT], size);
+    handle_set_size (panel.handles[LEFT], size);
+    handle_set_size (panel.handles[RIGHT], size);
 
     panel_set_position ();
 }
@@ -507,32 +711,32 @@ panel_center (int side)
     xscreen = DefaultScreenOfDisplay (GDK_DISPLAY ());
     netk_get_desktop_margins (xscreen, &margins);
 
-    gtk_widget_size_request (toplevel, &req);
+    gtk_widget_size_request (panel.toplevel, &req);
 
     switch (side)
     {
         case LEFT:
-            position.x = margins.left;
-            position.y = h / 2 - req.height / 2;
+            panel.position.x = margins.left;
+            panel.position.y = h / 2 - req.height / 2;
             break;
         case RIGHT:
-            position.x = w - req.width - margins.right;
-            position.y = h / 2 - req.height / 2;
+            panel.position.x = w - req.width - margins.right;
+            panel.position.y = h / 2 - req.height / 2;
             break;
         case TOP:
-            position.x = w / 2 - req.width / 2;
-            position.y = margins.top;
+            panel.position.x = w / 2 - req.width / 2;
+            panel.position.y = margins.top;
             break;
         default:
-            position.x = w / 2 - req.width / 2;
-            position.y = h - req.height - margins.bottom;
+            panel.position.x = w / 2 - req.width / 2;
+            panel.position.y = h - req.height - margins.bottom;
     }
 
-    if (position.x < 0)
-        position.x = 0;
+    if (panel.position.x < 0)
+        panel.position.x = 0;
 
-    if (position.y < 0)
-        position.y = 0;
+    if (panel.position.y < 0)
+        panel.position.y = 0;
 
     panel_set_position ();
 }
@@ -540,7 +744,7 @@ panel_center (int side)
 void
 panel_set_position (void)
 {
-    if (position.x == -1 && position.y == -1)
+    if (panel.position.x == -1 && panel.position.y == -1)
     {
         if (settings.orientation == HORIZONTAL)
             panel_center (BOTTOM);
@@ -555,24 +759,36 @@ panel_set_position (void)
         w = screen_width;
         h = screen_height;
 
-        gtk_widget_size_request (toplevel, &req);
+        gtk_widget_size_request (panel.toplevel, &req);
 
-        if (position.x + req.width > w && req.width <= w)
-            position.x = w - req.width;
+        if (panel.position.x + req.width > w && req.width <= w)
+            panel.position.x = w - req.width;
 
-        if (position.y + req.height > h && req.height <= h)
-            position.y = h - req.height;
+        if (panel.position.y + req.height > h && req.height <= h)
+            panel.position.y = h - req.height;
 
-        if (position.x < 0)
-            position.x = 0;
+        if (panel.position.x < 0)
+            panel.position.x = 0;
 
-        if (position.y < 0)
-            position.y = 0;
+        if (panel.position.y < 0)
+            panel.position.y = 0;
 
-        DBG ("position: (%d, %d)\n", position.x, position.y);
+        DBG ("position: (%d, %d)\n", panel.position.x, panel.position.y);
 
-        gtk_window_move (GTK_WINDOW (toplevel), position.x, position.y);
+        gtk_window_move (GTK_WINDOW (panel.toplevel), panel.position.x,
+                         panel.position.y);
     }
+}
+
+void
+panel_set_autohide (gboolean hide)
+{
+    settings.autohide = hide;
+
+    if (!panel_created)
+	return;
+
+    panel_set_hidden (&panel, hide);
 }
 
 /*  Global preferences
@@ -581,14 +797,13 @@ panel_set_position (void)
 static void
 init_settings (void)
 {
-    position.x = -1;
-    position.y = -1;
-
     settings.orientation = HORIZONTAL;
     settings.layer = ABOVE;
 
     settings.size = SMALL;
     settings.popup_position = RIGHT;
+
+    settings.autohide = FALSE;
 
     settings.theme = NULL;
 
@@ -682,18 +897,18 @@ panel_parse_xml (xmlNodePtr node)
             value = xmlGetProp (child, (const xmlChar *)"x");
 
             if (value)
-                position.x = atoi (value);
+                panel.position.x = atoi (value);
 
             g_free (value);
 
             value = xmlGetProp (child, (const xmlChar *)"y");
 
             if (value)
-                position.y = atoi (value);
+                panel.position.y = atoi (value);
 
             g_free (value);
 
-            if (position.x < 0 || position.y < 0)
+            if (panel.position.x < 0 || panel.position.y < 0)
                 break;
 
             value = xmlGetProp (child, (const xmlChar *)"screenwidth");
@@ -712,12 +927,14 @@ panel_parse_xml (xmlNodePtr node)
 
             /* this doesn't actually work completely, we need to
              * save the panel width as well to do it right */
-            if (w != gdk_screen_width () || h != gdk_screen_height ())
+            if (w != screen_width || h != screen_height)
             {
-                position.x = (int)((double)(position.x * gdk_screen_width ()) /
-                                   (double)w);
-                position.y = (int)((double)(position.y * gdk_screen_height ()) /
-                                   (double)h);
+                panel.position.x =
+                    (int)((double)(panel.position.x * screen_width) /
+                          (double)w);
+                panel.position.y =
+                    (int)((double)(panel.position.y * screen_height) /
+                          (double)h);
             }
         }
     }
@@ -760,17 +977,17 @@ panel_write_xml (xmlNodePtr root)
 
     child = xmlNewTextChild (node, NULL, "Position", NULL);
 
-    snprintf (value, 5, "%d", position.x);
+    snprintf (value, 5, "%d", panel.position.x);
     xmlSetProp (child, "x", value);
 
-    snprintf (value, 5, "%d", position.y);
+    snprintf (value, 5, "%d", panel.position.y);
     xmlSetProp (child, "y", value);
 
     /* save screen width and hide, so we can use a relative position
      * the user logs in on different computers */
-    snprintf (value, 5, "%d", gdk_screen_width ());
+    snprintf (value, 5, "%d", screen_width);
     xmlSetProp (child, "screenwidth", value);
 
-    snprintf (value, 5, "%d", gdk_screen_height ());
+    snprintf (value, 5, "%d", screen_height);
     xmlSetProp (child, "screenheight", value);
 }

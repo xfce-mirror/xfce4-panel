@@ -22,6 +22,24 @@
 
 #include <libxml/tree.h>
 
+#include "global.h"
+
+/* Panel */
+struct _Panel
+{
+    gboolean hidden;
+    int hide_timeout;
+    int unhide_timeout;
+    
+    Position position;
+    GtkWidget *toplevel;
+    
+    GtkWidget *main_frame;
+    GtkWidget *panel_box;
+    GtkWidget *handles[2];
+    GtkWidget *group_box;
+};
+
 /* panel functions */
 void create_panel (void);
 void panel_cleanup (void);
@@ -39,6 +57,8 @@ void panel_set_layer (int layer);
 void panel_set_size (int size);
 void panel_set_popup_position (int position);
 void panel_set_theme (const char *theme);
+
+void panel_set_autohide(gboolean hide);
 
 void panel_set_num_groups (int n);
 

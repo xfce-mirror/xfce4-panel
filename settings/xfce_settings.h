@@ -30,6 +30,7 @@ enum
     XFCE_SIZE,
     XFCE_POPUPPOSITION,
     XFCE_THEME,
+    XFCE_AUTOHIDE,
     XFCE_POSITION,
     XFCE_OPTIONS
 };
@@ -51,6 +52,7 @@ static char *xfce_settings_names[] = {
     "size",
     "popupposition",
     "theme",
+    "autohide",
     "position"
 };
 

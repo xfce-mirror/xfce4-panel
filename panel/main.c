@@ -63,9 +63,9 @@ static void
 save_yourself (gpointer data, int save_style, gboolean shutdown,
                int interact_style, gboolean fast)
 {
-    if (toplevel)
-        gtk_window_get_position (GTK_WINDOW (toplevel), &position.x,
-                                 &position.y);
+    if (panel.toplevel)
+        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
+                                 &panel.position.y);
 
     write_panel_config ();
 }
@@ -98,11 +98,11 @@ quit (gboolean force)
 
     mcs_stop_watch ();
 
-    if (toplevel)
-        gtk_window_get_position (GTK_WINDOW (toplevel), &position.x,
-                                 &position.y);
+    if (panel.toplevel)
+        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
+                                 &panel.position.y);
 
-    gtk_widget_hide (toplevel);
+    gtk_widget_hide (panel.toplevel);
 
     write_panel_config ();
 
@@ -123,30 +123,30 @@ restart (void)
 {
     int x, y;
 
-    if (toplevel)
-        gtk_window_get_position (GTK_WINDOW (toplevel), &position.x,
-                                 &position.y);
+    if (panel.toplevel)
+        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
+                                 &panel.position.y);
 
     /* somehow the position gets lost here ... 
      * FIXME: find out why, may be a real bug */
-    x = position.x;
-    y = position.y;
+    x = panel.position.x;
+    y = panel.position.y;
 
     write_panel_config ();
 
-    gtk_widget_hide (toplevel);
+    gtk_widget_hide (panel.toplevel);
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     free_startup_timeout ();
 #endif
 
     panel_cleanup ();
-    gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (toplevel)));
+    gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (panel.toplevel)));
 
     create_panel ();
 
-    position.x = x;
-    position.y = y;
+    panel.position.x = x;
+    panel.position.y = y;
     panel_set_position ();
 }
 

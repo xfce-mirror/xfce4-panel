@@ -85,6 +85,7 @@ enum
 };
 
 /* typedefs */
+typedef struct _Panel Panel;
 typedef struct _ControlClass ControlClass;
 typedef struct _Control Control;
 typedef struct _PanelPopup PanelPopup;
@@ -107,6 +108,8 @@ struct _Settings
     int size;
     int popup_position;
 
+    int autohide;
+
     char *theme;
 
     int num_groups;
@@ -116,8 +119,8 @@ struct _Settings
 extern gboolean disable_user_config;
 
 /* defined in panel.c */
-extern GtkWidget *toplevel;
 extern Settings settings;
-extern Position position;
+extern Panel panel;
+
 
 #endif /* __XFCE_GLOBAL_H__ */
