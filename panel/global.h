@@ -50,6 +50,10 @@
 #define DATADIR    "/usr/local/share/xfce4"
 #endif
 
+#ifndef LIBDIR
+#define LIBDIR    "/usr/local/lib/xfce4"
+#endif
+
 #define HOMERCDIR  ".xfce4"
 #define SYSRCDIR   "xfce4"
 #define XFCERC     "xfce4rc"

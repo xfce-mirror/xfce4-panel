@@ -152,7 +152,7 @@ char **get_plugin_dirs(void)
     {
         dirs = g_new0(char *, 2);
 
-        dirs[0] = g_build_filename(DATADIR, "plugins", NULL);
+        dirs[0] = g_build_filename(LIBDIR, "plugins", NULL);
     }
     else
     {
@@ -160,7 +160,7 @@ char **get_plugin_dirs(void)
 
         dirs[0] =
             g_build_filename(g_getenv("HOME"), HOMERCDIR, "plugins", NULL);
-        dirs[1] = g_build_filename(DATADIR, "plugins", NULL);
+        dirs[1] = g_build_filename(LIBDIR, "plugins", NULL);
     }
 
     return dirs;
