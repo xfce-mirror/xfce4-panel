@@ -252,32 +252,32 @@ void set_window_type_dock(GtkWidget * window, gboolean set)
     gboolean mapped;
 
     if(set)
-	window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_DOCK", FALSE);
+        window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_DOCK", FALSE);
     else
-	window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_NORMAL", FALSE);
+        window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_NORMAL", FALSE);
 
     if(!GTK_WIDGET_REALIZED(window))
-	gtk_widget_realize(window);
+        gtk_widget_realize(window);
 
     if((mapped = GTK_WIDGET_MAPPED(window)))
-	gtk_widget_unmap(window);
+        gtk_widget_unmap(window);
 
     gdk_property_change(window->window,
-			gdk_atom_intern("_NET_WM_WINDOW_TYPE", FALSE),
-			gdk_atom_intern("ATOM", FALSE), 32,
-			GDK_PROP_MODE_REPLACE, (guchar *) & window_type, 1);
+                        gdk_atom_intern("_NET_WM_WINDOW_TYPE", FALSE),
+                        gdk_atom_intern("ATOM", FALSE), 32,
+                        GDK_PROP_MODE_REPLACE, (guchar *) & window_type, 1);
 
     if(!set)
-	gdk_property_delete(window->window,
-			    gdk_atom_intern("_WIN_LAYER", FALSE));
+        gdk_property_delete(window->window,
+                            gdk_atom_intern("_WIN_LAYER", FALSE));
 
     if(mapped)
-	gtk_widget_map(window);
+        gtk_widget_map(window);
 
     if(GTK_IS_WINDOW(toplevel))
     {
-	panel_set_position();
-	gtk_window_present(GTK_WINDOW(toplevel));
+        panel_set_position();
+        gtk_window_present(GTK_WINDOW(toplevel));
     }
 }
 
@@ -289,29 +289,29 @@ void set_window_layer(GtkWidget *win, int layer)
     static Atom xa_BELOW = 0;
 
     if(!GTK_WIDGET_REALIZED(win))
-	gtk_widget_realize(win);
+        gtk_widget_realize(win);
     
     xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
     xid = GDK_WINDOW_XID(win->window);
     
     if (!xa_ABOVE)
     {
-	xa_ABOVE = XInternAtom(GDK_DISPLAY(), "_NET_WM_STATE_ABOVE", False);
-	xa_BELOW = XInternAtom(GDK_DISPLAY(), "_NET_WM_STATE_BELOW", False);
+        xa_ABOVE = XInternAtom(GDK_DISPLAY(), "_NET_WM_STATE_ABOVE", False);
+        xa_BELOW = XInternAtom(GDK_DISPLAY(), "_NET_WM_STATE_BELOW", False);
     }
     
     switch (layer)
     {
-	case ABOVE:
-	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
-	    netk_change_state(xscreen, xid, TRUE, xa_ABOVE, None);
-	    break;
-	case BELOW:
-	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
-	    netk_change_state(xscreen, xid, TRUE, xa_BELOW, None);
-	    break;
-	default:
-	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
+        case ABOVE:
+            netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
+            netk_change_state(xscreen, xid, TRUE, xa_ABOVE, None);
+            break;
+        case BELOW:
+            netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
+            netk_change_state(xscreen, xid, TRUE, xa_BELOW, None);
+            break;
+        default:
+            netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
     }
 }
 
@@ -322,18 +322,18 @@ gboolean check_net_wm_support(void)
 
     if (!xa_NET_WM_SUPPORT)
     {
-	xa_NET_WM_SUPPORT = XInternAtom(GDK_DISPLAY(), 
-					"_NET_SUPPORTING_WM_CHECK", False);
+        xa_NET_WM_SUPPORT = XInternAtom(GDK_DISPLAY(), 
+                                        "_NET_SUPPORTING_WM_CHECK", False);
     }
 
     if (netk_get_window(GDK_ROOT_WINDOW(), xa_NET_WM_SUPPORT, &xid))
     {
-/*	if (netk_get_window(xid, xa_NET_WM_SUPPORT, &xid))
-	    g_print("ok");
-	else
-	    g_print("not ok");
+/*      if (netk_get_window(xid, xa_NET_WM_SUPPORT, &xid))
+            g_print("ok");
+        else
+            g_print("not ok");
 */
-	return TRUE;
+        return TRUE;
     }
 
     return FALSE;
@@ -348,10 +348,10 @@ void set_window_skip(GtkWidget *win)
 
     if (!xa_SKIP_PAGER)
     {
-	xa_SKIP_PAGER = XInternAtom(GDK_DISPLAY(), 
-				    "_NET_WM_STATE_SKIP_PAGER", False);
-	xa_SKIP_TASKBAR = XInternAtom(GDK_DISPLAY(), 
-				      "_NET_WM_STATE_SKIP_TASKBAR", False);
+        xa_SKIP_PAGER = XInternAtom(GDK_DISPLAY(), 
+                                    "_NET_WM_STATE_SKIP_PAGER", False);
+        xa_SKIP_TASKBAR = XInternAtom(GDK_DISPLAY(), 
+                                      "_NET_WM_STATE_SKIP_TASKBAR", False);
     }
     
     xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
@@ -614,10 +614,11 @@ static gchar ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_con
     gchar **retval = NULL;
     int i;
     int desktop_startup_id_len;
+    gboolean has_startup_id = FALSE;
 
     if (envp == NULL)
     {
-	envp = environ;
+        envp = environ;
     }
     for (i = 0; envp[i]; i++);
 
@@ -630,11 +631,17 @@ static gchar ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_con
         if (strncmp (envp[i], "DESKTOP_STARTUP_ID", desktop_startup_id_len) != 0)
         {
             retval[i] = g_strdup (envp[i]);
-	}
-	else
-	{
-	    retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
-	}
+        }
+        else
+        {
+            retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
+            has_startup_id = TRUE;
+        }
+    }
+    if(!has_startup_id)
+    {
+        ++i;
+        retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
     }
     ++i;
     retval[i] = NULL;
@@ -673,36 +680,36 @@ static gboolean startup_timeout (void *data)
     tmp = std->contexts;
     while (tmp != NULL) 
     {
-	SnLauncherContext *sn_context = tmp->data;
-	GSList *next = tmp->next;
-	long tv_sec, tv_usec;
-	double elapsed;
+        SnLauncherContext *sn_context = tmp->data;
+        GSList *next = tmp->next;
+        long tv_sec, tv_usec;
+        double elapsed;
 
-	sn_launcher_context_get_last_active_time (sn_context, &tv_sec, &tv_usec);
+        sn_launcher_context_get_last_active_time (sn_context, &tv_sec, &tv_usec);
 
-	elapsed = ((((double)now.tv_sec - tv_sec) * G_USEC_PER_SEC + (now.tv_usec - tv_usec))) / 1000.0;
+        elapsed = ((((double)now.tv_sec - tv_sec) * G_USEC_PER_SEC + (now.tv_usec - tv_usec))) / 1000.0;
 
-	if (elapsed >= STARTUP_TIMEOUT) 
+        if (elapsed >= STARTUP_TIMEOUT) 
         {
-	    std->contexts = g_slist_remove (std->contexts, sn_context);
-	    sn_launcher_context_complete (sn_context);
-	    sn_launcher_context_unref (sn_context);
-	} 
-	else 
-	{
-	    min_timeout = MIN (min_timeout, (STARTUP_TIMEOUT - elapsed));
-	}
+            std->contexts = g_slist_remove (std->contexts, sn_context);
+            sn_launcher_context_complete (sn_context);
+            sn_launcher_context_unref (sn_context);
+        } 
+        else 
+        {
+            min_timeout = MIN (min_timeout, (STARTUP_TIMEOUT - elapsed));
+        }
 
-	tmp = next;
+        tmp = next;
     }
 
     if (std->contexts == NULL) 
     {
-	std->timeout_id = 0;
+        std->timeout_id = 0;
     } 
     else 
     {
-	std->timeout_id = g_timeout_add (min_timeout, startup_timeout, std);
+        std->timeout_id = g_timeout_add (min_timeout, startup_timeout, std);
     }
 
     return FALSE;
@@ -715,12 +722,12 @@ static void add_startup_timeout (GdkScreen *screen, SnLauncherContext *sn_contex
     data = g_object_get_data (G_OBJECT (screen), "xfce-startup-data");
     if (data == NULL) 
     {
-	data = g_new (StartupTimeoutData, 1);
-	data->screen = screen;
-	data->contexts = NULL;
-	data->timeout_id = 0;
+        data = g_new (StartupTimeoutData, 1);
+        data->screen = screen;
+        data->contexts = NULL;
+        data->timeout_id = 0;
 
-	g_object_set_data_full (G_OBJECT (screen), "xfce-startup-data", data, free_startup_timeout);		
+        g_object_set_data_full (G_OBJECT (screen), "xfce-startup-data", data, free_startup_timeout);            
     }
 
     sn_launcher_context_ref (sn_context);
@@ -728,7 +735,7 @@ static void add_startup_timeout (GdkScreen *screen, SnLauncherContext *sn_contex
 
     if (data->timeout_id == 0) 
     {
-        data->timeout_id = g_timeout_add (STARTUP_TIMEOUT, startup_timeout, data);		
+        data->timeout_id = g_timeout_add (STARTUP_TIMEOUT, startup_timeout, data);              
     }
 }
 #endif /* HAVE_STARTUP_NOTIFICATION */
@@ -759,11 +766,11 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
     if (!g_shell_parse_argv (execute, NULL, &argv, &error))
     {
         g_free(execute);
-	if (error)
-	{
-	    g_warning("xfce: %s\n", error->message);
-	    g_error_free(error);
-	}
+        if (error)
+        {
+            g_warning("xfce: %s\n", error->message);
+            g_error_free(error);
+        }
         return;
     }
     g_free(execute);
@@ -771,61 +778,66 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
 #ifdef HAVE_STARTUP_NOTIFICATION
     if (use_sn)
     {
-	sn_display = sn_display_new (gdk_display, sn_error_trap_push, sn_error_trap_pop);
-	sn_context = sn_launcher_context_new (sn_display, DefaultScreen (gdk_display));
-    }
-    if ((sn_context != NULL) && !sn_launcher_context_get_initiated (sn_context)) 
-    {
-	sn_launcher_context_set_binary_name (sn_context, execute);
-	sn_launcher_context_initiate (sn_context, g_get_prgname () ? g_get_prgname () : "unknown", argv[0], CurrentTime);
-	envp = make_spawn_environment_for_sn_context (sn_context, envp);
-	free_envp = envp;
+        sn_display = sn_display_new (gdk_display, sn_error_trap_push, sn_error_trap_pop);
+	if (sn_display != NULL)
+	{
+            sn_context = sn_launcher_context_new (sn_display, DefaultScreen (gdk_display));
+	    if ((sn_context != NULL) && !sn_launcher_context_get_initiated (sn_context)) 
+	    {
+		sn_launcher_context_set_binary_name (sn_context, execute);
+		sn_launcher_context_initiate (sn_context, g_get_prgname () ? g_get_prgname () : "unknown", argv[0], CurrentTime);
+		envp = make_spawn_environment_for_sn_context (sn_context, NULL);
+		free_envp = envp;
+	    }
+	}
     }
 #endif
-    		     
+                     
     if (silent)
     {
         retval = g_spawn_async(NULL, argv, envp, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
-	if(!retval)
-	{
-	    if (error)
-	    {
-	        g_warning("xfce: %s\n", error->message);
-	        g_error_free(error);
-	    }
-	    success = FALSE;
-	}
+        if(!retval)
+        {
+            if (error)
+            {
+                g_warning("xfce: %s\n", error->message);
+                g_error_free(error);
+            }
+            success = FALSE;
+        }
     }
     else
     {
-	success = exec_command_full_with_envp(argv, envp);
+        success = exec_command_full_with_envp(argv, envp);
     }
 
 #ifdef HAVE_STARTUP_NOTIFICATION
     if (use_sn)
     {
-	if (sn_context != NULL) 
-	{
+        if (sn_context != NULL) 
+        {
             if (!success)
-	    {
-		sn_launcher_context_complete (sn_context); /* end sequence */
-	    }
-	    else
-	    {
-		add_startup_timeout (gdk_display_get_default_screen (gdk_display_get_default ()), sn_context);
-		sn_launcher_context_unref (sn_context);
-	    }
-	}
-	sn_display_unref (sn_display);
-	if (free_envp)
+            {
+                sn_launcher_context_complete (sn_context); /* end sequence */
+            }
+            else
+            {
+                add_startup_timeout (gdk_display_get_default_screen (gdk_display_get_default ()), sn_context);
+                sn_launcher_context_unref (sn_context);
+            }
+        }
+        if (free_envp)
+        {
+            g_strfreev (free_envp);
+            free_envp = NULL;
+        }
+	if (sn_display)
 	{
-	    g_strfreev (free_envp);
-	    free_envp = NULL;
+            sn_display_unref (sn_display);
 	}
     }
 #endif /* HAVE_STARTUP_NOTIFICATION */
     g_strfreev (argv);
-
 }
 
 void exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn)
