@@ -185,10 +185,12 @@ o Window manager (xfwm4)\n\
 o Panel (xfce4)\n\
    start programs, monitor mailboxes, show time\n\
 \n\
-o File manager (xftree4)\n\
-   simple but efficient file manager\n\
+This is a development version and the list presented here is expected to grow\n\
+considerably before the final release\n\
 \n\
-o etc.\n";
+Thank you for your interest in XFce,\n\
+\n\
+	-- The XFce Development Team --\n";
 
 	gtk_text_buffer_set_text(tb, info_text, -1);
 	info_view = gtk_text_view_new();
