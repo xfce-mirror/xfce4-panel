@@ -44,6 +44,7 @@ xfce4_panelinclude_HEADERS =					\
 	xfce.h 
 
 xfce4_panel_CFLAGS = 							\
+	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\

@@ -10,6 +10,7 @@ libpager_la_SOURCES = 							\
 	pager.c
 
 libpager_la_CFLAGS =							\
+	-I$(top_srcdir)							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXML_CFLAGS@
 

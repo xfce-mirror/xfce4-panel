@@ -51,7 +51,6 @@ BM_DEBUG_SUPPORT
 
 AC_OUTPUT([
 xfce4.spec
-xfce4rc
 Makefile
 doc/Makefile
 doc/images/Makefile

@@ -59,6 +59,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc README TODO ChangeLog NEWS NOTES INSTALL COPYING AUTHORS
+%{_sysconfdir}/xfce4/
+%{_datadir}/xfce4/doc/
+%{_datadir}/locale/
+%{_includedir}/xfce4/
+%{_libdir}/xfce4/mcs-plugins/
+%{_libdir}/pkgconfig/
 %{_bindir}/*
 
 %files themes
@@ -67,5 +73,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files plugins
 %defattr(-, root, root)
-%{_libdir}/xfce4/plugins/
+%{_libdir}/xfce4/panel-plugins/
 

@@ -6,9 +6,8 @@ conf_DATA = xfce4rc
 EXTRA_DIST = 								\
 	HACKING								\
 	NOTES								\
-	PLUGIN.NOTES
-	xfce4rc.in							\
-	xfce4.spec.in							\
+	xfce4rc							\
+	xfce4.spec							\
 	.indent.pro
 
 SUBDIRS =								\
@@ -21,7 +20,7 @@ SUBDIRS =								\
 	themes
 
 distclean-local:
-	rm -rf xfce4rc xfce4.spec *.cache *~
+	rm -rf xfce4.spec *.cache *~
 
 rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz

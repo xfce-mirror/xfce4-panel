@@ -161,6 +161,8 @@ sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 noinst_DATA = xfce4-panel-icon.h xfce4-panel.png
+
+EXTRA_DIST = $(noinst_DATA)
 subdir = icons
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

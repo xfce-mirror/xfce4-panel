@@ -10,6 +10,7 @@ libmailcheck_la_SOURCES = 						\
 	mailcheck.c
 
 libmailcheck_la_CFLAGS =						\
+	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXML_CFLAGS@

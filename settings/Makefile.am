@@ -14,6 +14,7 @@ libxfce4settings_la_SOURCES =						\
 	xfce_settings_plugin.h
 
 libxfce4settings_la_CFLAGS =						\
+	-I$(top_srcdir)							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXML_CFLAGS@							\
 	@XFCE_MCS_MANAGER_CFLAGS@					\

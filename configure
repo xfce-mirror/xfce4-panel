@@ -8720,7 +8720,7 @@ echo "${ECHO_T}yes" >&6
   fi
 
 
-                                                                                                                                                                                                                                                          ac_config_files="$ac_config_files xfce4.spec xfce4rc Makefile doc/Makefile doc/images/Makefile doc/html/Makefile doc/xml/Makefile po/Makefile.in icons/Makefile panel/Makefile panel/xfce4-panel-1.0.pc plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile plugins/pager/Makefile settings/Makefile themes/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/FreeIcons/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
+                                                                                                                                                                                                                                                ac_config_files="$ac_config_files xfce4.spec Makefile doc/Makefile doc/images/Makefile doc/html/Makefile doc/xml/Makefile po/Makefile.in icons/Makefile panel/Makefile panel/xfce4-panel-1.0.pc plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile plugins/pager/Makefile settings/Makefile themes/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/FreeIcons/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -9285,7 +9285,6 @@ do
   case "$ac_config_target" in
   # Handling of arguments.
   "xfce4.spec" ) CONFIG_FILES="$CONFIG_FILES xfce4.spec" ;;
-  "xfce4rc" ) CONFIG_FILES="$CONFIG_FILES xfce4rc" ;;
   "Makefile" ) CONFIG_FILES="$CONFIG_FILES Makefile" ;;
   "doc/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/Makefile" ;;
   "doc/images/Makefile" ) CONFIG_FILES="$CONFIG_FILES doc/images/Makefile" ;;
