@@ -52,7 +52,7 @@ static GtkWidget *desktop_table;
 static ScreenButton *screen_buttons[NBSCREENS];
 static char *screen_names[NBSCREENS];
 
-int current_screen = 0;
+static int current_screen = 0;
 
 /*  screen names
 */
@@ -71,6 +71,79 @@ void init_screen_names(void)
 
     for(i = 0; i < NBSCREENS; i++)
         screen_names[i] = NULL;
+}
+
+/*  Callbacks
+ *  ---------
+*/
+static void screen_button_click(GtkWidget * b, ScreenButton * sb)
+{
+    int n = screen_button_get_index(sb);
+
+    if(n == current_screen)
+    {
+        /* keep the button depressed */
+        central_panel_set_current(n);
+        return;
+    }
+
+    request_net_current_desktop(n);
+}
+
+static gboolean
+screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev, ScreenButton * sb)
+{
+    hide_current_popup_menu();
+
+    if(disable_user_config)
+        return FALSE;
+
+    if(ev->button != 3)
+        return FALSE;
+
+    screen_button_dialog(sb);
+
+    return TRUE;
+}
+
+static void mini_lock_cb(void)
+{
+    char *cmd = settings.lock_command;
+
+    if(!cmd)
+        return;
+
+    hide_current_popup_menu();
+
+    exec_cmd(cmd, FALSE);
+}
+
+static void mini_info_cb(void)
+{
+    hide_current_popup_menu();
+
+    info_panel_dialog();
+}
+
+static void mini_palet_cb(void)
+{
+    hide_current_popup_menu();
+
+    if(disable_user_config)
+    {
+        show_info(_("Access to the configuration system has been disabled.\n\n"
+                    "Ask your system administrator for more information"));
+        return;
+    }
+
+    global_settings_dialog();
+}
+
+static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
+{
+    hide_current_popup_menu();
+
+    quit(FALSE);
 }
 
 /*  Screen buttons
@@ -429,6 +502,8 @@ void central_panel_init(GtkContainer * container)
     gtk_box_pack_start(GTK_BOX(central_box), separators[1], FALSE, FALSE, 0);
     
     central_panel_set_size(settings.size);
+    
+    central_panel_set_current(get_net_current_desktop());
 }
 
 void central_panel_set_from_xml(xmlNodePtr node)
@@ -737,6 +812,8 @@ void central_panel_set_current(int n)
 {
     int i;
 
+    current_screen = n;
+    
     if(n < 0)
         return;
 
@@ -771,6 +848,8 @@ void central_panel_set_num_screens(int n)
 {
     int i;
 
+    settings.num_screens = n;
+    
     for(i = 0; i < NBSCREENS; i++)
     {
         ScreenButton *sb = screen_buttons[i];

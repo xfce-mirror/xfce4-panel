@@ -24,13 +24,56 @@
 #include "builtins.h"
 #include "controls.h"
 #include "icons.h"
-#include "callbacks.h"
+#include "xfce_support.h"
 
 /* panel control configuration
    Global widget used in all the module configuration
    to revert the settings
 */
 GtkWidget *revert_button;
+
+/*  Callbacks
+ *  ---------
+*/
+static void mini_lock_cb(void)
+{
+    char *cmd = settings.lock_command;
+
+    if(!cmd)
+        return;
+
+    hide_current_popup_menu();
+
+    exec_cmd(cmd, FALSE);
+}
+
+static void mini_info_cb(void)
+{
+    hide_current_popup_menu();
+
+    info_panel_dialog();
+}
+
+static void mini_palet_cb(void)
+{
+    hide_current_popup_menu();
+
+    if(disable_user_config)
+    {
+        show_info(_("Access to the configuration system has been disabled.\n\n"
+                    "Ask your system administrator for more information"));
+        return;
+    }
+
+    global_settings_dialog();
+}
+
+static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
+{
+    hide_current_popup_menu();
+
+    quit(FALSE);
+}
 
 /*  Exit module
  *  -----------
@@ -77,7 +120,7 @@ static t_exit *exit_new(void)
 
     g_signal_connect(exit->lock_button, "clicked", G_CALLBACK(mini_lock_cb), NULL);
 
-    g_signal_connect(exit->exit_button, "clicked", G_CALLBACK(close_cb), NULL);
+    g_signal_connect(exit->exit_button, "clicked", G_CALLBACK(mini_power_cb), NULL);
 
     return exit;
 }

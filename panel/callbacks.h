@@ -26,18 +26,6 @@
 void iconify_cb(void);
 void close_cb(void);
 
-/* central panel */
-void screen_button_click(GtkWidget * b, ScreenButton * sb);
-
-gboolean screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev,
-                                  ScreenButton * sb);
-
-void mini_lock_cb(void);
-void mini_info_cb(void);
-void mini_palet_cb(void);
-
-void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data);
-
 /* side panel */
 gboolean panel_control_press_cb(GtkButton * b, GdkEventButton * ev,
                                 PanelControl * pc);

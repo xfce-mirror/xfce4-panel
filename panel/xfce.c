@@ -400,7 +400,6 @@ void panel_set_settings(void)
     {
 	central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
 	central_panel_set_show_minibuttons(settings.show_minibuttons);
-        central_panel_set_current(current_screen);
     }
 }
 
@@ -797,9 +796,6 @@ void xfce_run(void)
     watch_root_properties();
 
     request_net_number_of_desktops(settings.num_screens);
-
-    if (central_created)
-	central_panel_set_current(current_screen);
 
     gtk_main();
 }

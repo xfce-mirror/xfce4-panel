@@ -149,9 +149,6 @@ struct _Settings
     char *exit_command;
 };
 
-/* defined in central.c */
-extern int current_screen;
-
 /* defined in settings.c */
 extern gboolean disable_user_config;
 
