@@ -244,28 +244,33 @@ get_pixbuf_by_id (int id)
 GdkPixbuf *
 get_pixbuf_from_file (const char *path)
 {
-    char *icon = NULL;
     GdkPixbuf *pb = NULL;
 
-    if (!g_file_test (path, G_FILE_TEST_EXISTS))
+    if (g_file_test (path, G_FILE_TEST_EXISTS))
     {
+	pb = gdk_pixbuf_new_from_file (path, NULL);
+    }
+    else
+    {
+        char *icon = NULL;
+
 	icon = xfce_icon_theme_lookup (global_icon_theme, path,
 				       icon_size[settings.size]);
-    }
+        
+        if (!icon)
+        {
+            icon =
+                xfce_icon_theme_lookup_category (global_icon_theme,
+                                                 XFCE_ICON_CATEGORY_UNKNOWN,
+                                                 icon_size[settings.size]);
+        }
 
-    if (!icon)
-    {
-	icon =
-	    xfce_icon_theme_lookup_category (global_icon_theme,
-					     XFCE_ICON_CATEGORY_UNKNOWN,
-					     icon_size[settings.size]);
-    }
+        if (icon)
+        {
+            pb = gdk_pixbuf_new_from_file (icon, NULL);
 
-    if (icon)
-    {
-	pb = gdk_pixbuf_new_from_file (icon, NULL);
-
-	g_free (icon);
+            g_free (icon);
+        }
     }
 
     return pb;
