@@ -373,9 +373,6 @@ main (int argc, char **argv)
 
     create_panel ();
 
-    /* signal state */
-    g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
-
 
     client_session = client_session_new (argc, argv, NULL /* data */ ,
 					 SESSION_RESTART_IF_RUNNING, 40);
@@ -396,6 +393,9 @@ main (int argc, char **argv)
 		   PACKAGE);
     }	
     
+    /* signal state */
+    g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
+
     gtk_main ();
 
     return 0;
