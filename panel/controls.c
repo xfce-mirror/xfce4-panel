@@ -542,11 +542,28 @@ sort_control_func (gpointer a, gpointer b, gpointer data)
     return g_utf8_collate (ca->caption, cb->caption);
 }
 
+static ControlInfo *
+create_control_info (ControlClassInfo *info)
+{
+    ControlInfo *ci;
+    
+    ci = g_new0 (ControlInfo, 1);
+
+    ci->name = g_strdup (info->name);
+    ci->caption = g_strdup (info->caption);
+    ci->icon = info->icon != NULL ? g_object_ref (info->icon) : NULL;
+
+    ci->can_be_added = !(info->unique && info->refcount > 0);
+    
+    return ci;
+}
+
 /* for add-controls-dialog.c */
 GSList *
 get_control_info_list (void)
 {
     GSList *li, *infolist = NULL;
+    ControlInfo *launcherinfo;
 
     /* good place to remove plugins that are not in use and were
      * uninstalled after the panel was started */
@@ -555,23 +572,22 @@ get_control_info_list (void)
     /* update module list */
     add_plugin_classes ();
     
-    for (li = control_class_info_list; li; li = li->next)
+    launcherinfo = 
+	create_control_info ((ControlClassInfo*)control_class_info_list->data);
+    
+    for (li = control_class_info_list->next; li; li = li->next)
     {
 	ControlClassInfo *info = li->data;
-	ControlInfo *ci;
 	
-	ci = g_new0 (ControlInfo, 1);
-
-	ci->name = g_strdup (info->name);
-	ci->caption = g_strdup (info->caption);
-	ci->icon = info->icon != NULL ? g_object_ref (info->icon) : NULL;
-
-	ci->can_be_added = !(info->unique && info->refcount > 0);
-	
-	infolist = g_slist_prepend (infolist, ci);
+	infolist = g_slist_prepend (infolist, create_control_info (info));
     }
-    
-    return g_slist_sort (infolist, (GCompareDataFunc) sort_control_func);
+
+    /* sort alphabetically, but keep launcher at the top */
+    infolist = g_slist_sort (infolist, (GCompareDataFunc) sort_control_func);
+
+    infolist = g_slist_prepend (infolist, launcherinfo);
+
+    return infolist;
 }
 
 void 
