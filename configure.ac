@@ -44,9 +44,15 @@ BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.0.0])
 BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.1.11])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 
-dnl Check for dbh installed
-BM_DEPEND_CHECK([LIBDBH], [dbh-1.0], [1.0],
-  [dbh], [DBH library], [yes])
+dnl Check for dbh installed for completion combo
+dnl disable for now, doesn't work for new install, only after
+dnl  combo has been used in xffm or xfrun.
+dnl BM_DEPEND_CHECK([LIBDBH], [dbh-1.0], [1.0],
+dnl  [dbh], [DBH library], [yes])
+LIBDBH_CFLAGS=
+LIBDBH_LIBS=
+AC_SUBST([LIBDBH_CFLAGS])
+AC_SUBST([LIBDBH_LIBS])
 
 dnl Configure the mcs plugin
 XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.0.0])

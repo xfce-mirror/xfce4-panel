@@ -575,12 +575,11 @@ add_control (GtkWidget * w, ControlClassInfo *info)
 }
 
 static GtkItemFactoryEntry control_items[] = {
-    {"/Item", NULL, NULL, 0, "<Title>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/Add _new item"), NULL, NULL, 0, "<Branch>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
+    {"/Item", NULL, NULL, 0, "<Branch>"},
     {N_("/_Properties..."), NULL, edit_control, 0, "<Item>"},
     {N_("/_Remove"), NULL, remove_control, 0, "<Item>"},
+    {"/sep", NULL, NULL, 0, "<Separator>"},
+    {N_("/Add _new item"), NULL, NULL, 0, "<Branch>"},
 };
 
 static const char *
@@ -628,31 +627,47 @@ get_controls_submenu (void)
 static GtkWidget *
 get_control_menu (void)
 {
-    static GtkItemFactory *factory;
     static GtkWidget *menu = NULL;
-    GtkWidget *submenu, *item;
+    GtkWidget *submenu, *mi;
 
     if (!menu)
     {
-	factory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
+	menu = gtk_menu_new ();
 
-	gtk_item_factory_set_translate_func (factory,
-					     (GtkTranslateFunc)
-					     translate_menu, NULL, NULL);
+	/* replaced with actual name */
+	mi = gtk_menu_item_new_with_label("Item");
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	submenu = gtk_menu_new ();
+	gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);
 
-	gtk_item_factory_create_items (factory, G_N_ELEMENTS (control_items),
-				       control_items, NULL);
+	mi = gtk_menu_item_new_with_mnemonic (_("_Properties..."));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (edit_control), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), mi);
 
-	menu = gtk_item_factory_get_widget (factory, "<popup>");
+	mi = gtk_menu_item_new_with_mnemonic (_("_Remove"));
+	gtk_widget_show (mi);
+	g_signal_connect (mi, "activate", G_CALLBACK (remove_control), NULL);
+	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), mi);
+	
+	mi = gtk_separator_menu_item_new ();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
+	mi = gtk_menu_item_new_with_label(_("Add _new item"));
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     }
 
     g_assert (menu != NULL);
     
-    /* the third item, keep in sync with factory */
-    item = GTK_MENU_SHELL (menu)->children->next->next->data;
+    /* the third item, keep in sync with menu */
+    mi = GTK_MENU_SHELL (menu)->children->next->next->data;
     
     submenu = get_controls_submenu();
-    gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
+    gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);
 
     return menu;
 }

@@ -1,6 +1,6 @@
 /*  xfce4
  *
- *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -49,7 +49,9 @@
 
 #define HIDE_TIMEOUT   500
 #define UNHIDE_TIMEOUT 100
-#define HIDDEN_SIZE 5
+#define HIDDEN_SIZE 3
+
+#define HANDLE_WIDTH 10
 
 /* TODO: I didn't actually check this ... -- Jasper */
 #define FRAME_IPADDING 1
@@ -74,7 +76,6 @@ int top_height[] = { 14, 16, 18, 20 };
 int popup_icon_size[] = { 22, 26, 26, 32 };
 
 /* lock settings update when panel is not yet (re)build */
-
 static gboolean panel_created = FALSE;
 
 /* original screen sizes, used if screen is not the same
@@ -83,7 +84,6 @@ static int old_screen_width = 0;
 static int old_screen_height = 0;
 
 /* screen properties */
-
 static Display *dpy = NULL;
 Screen *xscreen = NULL;
 static int scr = 0;
@@ -187,9 +187,6 @@ update_xinerama_coordinates (Panel * p)
  * 
  * - keep inside the screen
  * - update position status (see above)
- * - if on the edge, move slightly over the edge by the width of the shadow
- *   to take advantage of Fitts law: putting the mouse pointer on the edge
- *   will hit the buttons, instead of the window border.
  *   
  * Assumes panel_req and xinerama_scr are up-to-date.
  **/
@@ -203,7 +200,8 @@ update_position (Panel * p, int *x, int *y)
 
     DBG ("desired position: %d,%d", *x, *y);
 
-    /* use an 'error' margin of 2 */
+    /* NOTE: using an 'error' margin of 2 */
+    
     if (settings.orientation == HORIZONTAL)
     {
 	if (*y + panel_req.height > xinerama_scr.ymax - 2)
@@ -340,10 +338,6 @@ panel_reallocate (Panel * p, GtkRequisition * previous)
 
     update_position (p, &xnew, &ynew);
 
-    DBG ("reallocate: %d,%d+%dx%d -> %d,%d+%dx%d",
-	 xold, yold, previous->width, previous->height,
-	 xnew, ynew, new.width, new.height);
-
     if (xnew != xold || ynew != yold)
     {
 	gtk_window_move (GTK_WINDOW (p->toplevel), xnew, ynew);
@@ -470,14 +464,10 @@ get_handle_menu (void)
 static void
 handle_set_size (GtkWidget * mh, int size)
 {
-    int h = (size == TINY) ? top_height[TINY] : top_height[SMALL];
-    int w = icon_size[size] + 2 * border_width;
-    gboolean vertical = settings.orientation == VERTICAL;
-
-    if (vertical)
-	gtk_widget_set_size_request (mh, w, h);
+    if (settings.orientation == VERTICAL)
+	gtk_widget_set_size_request (mh, -1, HANDLE_WIDTH);
     else
-	gtk_widget_set_size_request (mh, h, w);
+	gtk_widget_set_size_request (mh, HANDLE_WIDTH, -1);
 }
 
 /* defined in controls.c, must be set to NULL to indicate the menu
@@ -822,13 +812,6 @@ create_panel_window (Panel * p)
 
     g_signal_connect (w, "delete-event", G_CALLBACK (panel_delete_cb), p);
 
-    g_signal_connect (w, "size-allocate", G_CALLBACK (panel_allocate_cb), p);
-
-#if GTK_CHECK_VERSION(2,2,0)
-    g_signal_connect (G_OBJECT (gdk_screen_get_default ()), "size-changed",
-		      G_CALLBACK (screen_size_changed), p);
-#endif
-
     return w;
 }
 
@@ -988,16 +971,25 @@ create_panel (void)
     panel.position.y = y;
     panel_set_position ();
 
-    /* this must be before set_autohide() and after set_position()
-     * otherwise the initial position will be messed up */
-    panel_created = TRUE;
-
     gtk_widget_show (panel.toplevel);
     set_window_layer (panel.toplevel, settings.layer);
     set_window_skip (panel.toplevel);
 
+    /* this must be before set_autohide() and after set_position()
+     * otherwise the initial position will be messed up */
+    panel_created = TRUE;
+
     if (hidden)
 	panel_set_autohide (TRUE);
+
+#if GTK_CHECK_VERSION(2,2,0)
+    g_signal_connect (G_OBJECT (gdk_screen_get_default ()), "size-changed",
+		      G_CALLBACK (screen_size_changed), &panel);
+#endif
+
+    g_signal_connect (GTK_WINDOW (panel.toplevel), "size-allocate", 
+	    	      G_CALLBACK (panel_allocate_cb), &panel);
+
 }
 
 /*  Panel settings
