@@ -37,6 +37,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libnetk.h>
 #include <libxfcegui4/xinerama.h>
+#include <libxfcegui4/icons.h>
 
 #include "xfce.h"
 #include "groups.h"
@@ -1101,9 +1102,12 @@ panel_set_theme (const char *theme)
 {
     g_free (settings.theme);
     settings.theme = g_strdup (theme);
+	xfce_set_icon_theme(theme);
 
+#if GTK_CHECK_VERSION(2, 4, 0)
     gtk_settings_set_string_property (gtk_settings_get_default (),
-    		"gtk-icon-theme-name", theme, "panel.c:1141");
+    		"gtk-icon-theme-name", theme, "panel.c:1108");
+#endif
 
     if (!panel_created)
 	return;
