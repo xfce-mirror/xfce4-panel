@@ -95,69 +95,18 @@ get_read_dirs (void)
     return dirs;
 }
 
-/*
- * XXX - replace with xfce_get_path_localized()
- */
 static gchar *
 get_localized_system_rcfile (const gchar * name)
 {
-    const gchar *locale;
-    gchar base_locale[3];
-    gchar *sysrcfile;
-
-    if (!(locale = g_getenv ("LC_MESSAGES")))
-	locale = g_getenv ("LANG");
-
-    if (locale)
-    {
-	base_locale[0] = locale[0];
-	base_locale[1] = locale[1];
-	base_locale[2] = '\0';
-    }
+    gchar *sysrcfile, *result;
 
     sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, name, NULL);
 
-    if (!locale)
-    {
-	if (g_file_test (sysrcfile, G_FILE_TEST_EXISTS))
-	    return sysrcfile;
-	else
-	{
-	    g_free (sysrcfile);
-	    return NULL;
-	}
-    }
-    else
-    {
-	char *file = g_build_filename (sysrcfile, locale, NULL);
+    result = xfce_get_file_localized(sysrcfile);
 
-	if (g_file_test (file, G_FILE_TEST_EXISTS))
-	{
-	    g_free (sysrcfile);
-	    return file;
-	}
-	else
-	{
-	    g_free (file);
-	}
+    g_free(sysrcfile);
 
-	file = g_build_filename (sysrcfile, base_locale, NULL);
-
-	if (g_file_test (file, G_FILE_TEST_EXISTS))
-	{
-	    g_free (sysrcfile);
-	    return file;
-	}
-	else if (g_file_test (sysrcfile, G_FILE_TEST_EXISTS))
-	{
-	    return sysrcfile;
-	}
-	else
-	{
-	    g_free (sysrcfile);
-	    return NULL;
-	}
-    }
+    return result;
 }
 
 gchar *
