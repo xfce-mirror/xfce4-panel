@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Xfce>
-  <Panel orientation="0" layer="0" size="1" popupposition="1" icontheme="Curve" groups="15">
+  <Panel orientation="0" size="1" popupposition="1">
   </Panel>
   <Groups>
     <Group>
@@ -69,15 +69,7 @@
       <Control id="-1" filename="libseparator.so"/>
     </Group>
     <Group>
-      <Popup>
-        <Item>
-          <Caption>Screensaver</Caption>
-          <Command term="0" sn="1">xscreensaver-demo</Command>
-          <Tooltip>شاشة التوقف</Tooltip>
-          <Icon id="3"/>
-        </Item>
-      </Popup>
-      <Control id="-2" popup="1">
+      <Control id="-2" popup="0">
         <Command term="0" sn="0">xfce-setting-show</Command>
         <Tooltip>إعدادات</Tooltip>
         <Icon id="3"/>
