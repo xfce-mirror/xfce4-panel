@@ -84,14 +84,12 @@ static void panel_set_hidden (Panel * p, gboolean hide);
 static void
 edit_prefs (void)
 {
-    panel_set_hidden(&panel, FALSE);
     mcs_dialog (NULL);
 }
 
 static void
 settings_mgr (void)
 {
-    panel_set_hidden(&panel, FALSE);
     mcs_dialog ("all");
 }
 
@@ -99,15 +97,26 @@ static void
 add_new (void)
 {
     Control *control;
+    gboolean hidden = settings.autohide;
 
+    if (hidden)
+    {
+	panel_set_autohide(FALSE);
+
+	while (gtk_events_pending())
+	    gtk_main_iteration();
+    }
+    
     panel_add_control ();
+    
     panel_set_position ();
-
-    panel_set_hidden(&panel, FALSE);
 
     control = groups_get_control (settings.num_groups - 1);
 
     controls_dialog (control);
+
+    if (hidden)
+	panel_set_autohide(TRUE);
 }
 
 static void
