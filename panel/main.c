@@ -56,20 +56,9 @@ static void die (gpointer client_data)
     quit(TRUE);
 }
 
-/*  Main program
- *  ------------
+/*  Exported interface
+ *  ------------------
 */
-static void xfce_run(void)
-{
-    mcs_watch_xfce_channel();
-    
-    create_panel();
-
-    gtk_main();
-}
-
-/* quit and restart */
-
 void quit(gboolean force)
 {
     if(!force)
@@ -87,8 +76,7 @@ void quit(gboolean force)
     
     gtk_widget_hide(toplevel);
 
-    if (!disable_user_config)
-	write_panel_config();
+    write_panel_config();
 
     mcs_stop_watch();
 
@@ -104,7 +92,8 @@ void restart(void)
 {
     int x, y;
 
-    /* somehow the position gets lost here ... */
+    /* somehow the position gets lost here ... 
+     * FIXME: find out why, may be a real bug */
     x = position.x;
     y = position.y;
 	
@@ -122,8 +111,9 @@ void restart(void)
     panel_set_position();
 }
 
-/* signal handler */
-
+/*  Main program
+ *  ------------
+*/
 static void sighandler(int sig)
 {
     switch (sig)
@@ -191,15 +181,20 @@ int main(int argc, char **argv)
     client_session->die = die;
 
     if(!(session_managed = session_init(client_session)))
-        g_message("xfce4: Cannot connect to session manager");
+        g_message("%s: Running without session manager", PACKAGE);
 
     signal(SIGHUP, &sighandler);
     signal(SIGTERM, &sighandler);
     signal(SIGINT, &sighandler);
 
+    /* icon framework: names and id's */
     icons_init();
     
-    xfce_run();
+    mcs_watch_xfce_channel();
+    
+    create_panel();
+
+    gtk_main();
 
     return 0;
 }

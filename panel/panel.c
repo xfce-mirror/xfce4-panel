@@ -36,19 +36,17 @@ Position position;
 
 /*  Panel dimensions 
  *  ----------------
- *  These sizes are exported to all other modules
+ *  These sizes are exported to all other modules.
+ *  Arrays are indexed by symbolic sizes TINY, SMALL, MEDIUM, LARGE
+ *  (see global.h).
 */
-int minibutton_size[] = { 20, 24, 24, 32 };
-
 int icon_size[] = { 24, 30, 45, 60 };
 
 int border_width = 4;
 
-int popup_icon_size[] = { 20, 24, 24, 32 };
-
 int top_height[] = { 14, 16, 16, 18 };
 
-int screen_button_width[] = { 35, 45, 80, 80 };
+int popup_icon_size[] = { 20, 24, 24, 32 };
 
 /*  Panel framework
  *  ---------------
@@ -56,13 +54,16 @@ int screen_button_width[] = { 35, 45, 80, 80 };
 GtkWidget *toplevel = NULL;
 
 static GtkWidget *main_frame;
-
 static GtkWidget *panel_box;	/* contains all panel components */
-
 Handle *handles[2];
 static GtkWidget *group_box;
 
-/*  callbacks  */
+/* lock settings update when panel is not yet (re)build */
+static gboolean panel_created = FALSE;
+
+/*  Callbacks  
+ *  ---------
+*/
 static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, 
 				gpointer data)
 {
@@ -71,7 +72,9 @@ static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev,
     return TRUE;
 }
 
-/*  creation and destruction  */
+/*  Creation and destruction  
+ *  ------------------------
+*/
 static GtkWidget *create_panel_window(void)
 {
     GtkWidget *w;
@@ -149,8 +152,6 @@ void panel_cleanup(void)
 }
 
 static void init_settings();
-
-static gboolean panel_created = FALSE;
 
 void create_panel(void)
 {

@@ -34,18 +34,6 @@
 #define MAXSTRLEN 1024
 
 /* files and directories */
-#ifndef SYSCONFDIR
-#define SYSCONFDIR "/usr/local/etc/"
-#endif
-
-#ifndef DATADIR
-#define DATADIR    "/usr/local/share/xfce4"
-#endif
-
-#ifndef LIBDIR
-#define LIBDIR    "/usr/local/lib/xfce4"
-#endif
-
 #define HOMERCDIR  ".xfce4"
 #define SYSRCDIR   "xfce4"
 #define XFCERC     "xfce4rc"
@@ -58,6 +46,8 @@
 #define NBGROUPS  16
 #define NBITEMS   16
 
+/* don't change default here, this is the fallback option
+ * default config is set in the settings manager plugin */
 #define DEFAULT_THEME "XFce"
 
 /* panel sides / popup orientation */
@@ -68,42 +58,33 @@ enum
 enum
 { HORIZONTAL, VERTICAL };
 
+/* panel layer */
+enum
+{ ABOVE, NORMAL, BELOW };
+
 /*  Panel sizes
  *  -----------
  *  `settings.size' is a symbolic size given by an enum. The actual sizes
  *  are put in an array so you can use the symbolic size as index, e.g. 
- *  icon_size[SMALL]. The sizes are defined in `panel.h'.
+ *  icon_size[SMALL]. The sizes are defined in 'panel.c'.
 */
 enum
 { TINY, SMALL, MEDIUM, LARGE, PANEL_SIZES };
-
-extern int minibutton_size[PANEL_SIZES];
 
 extern int icon_size[PANEL_SIZES];
 
 extern int border_width;
 
-extern int popup_icon_size[PANEL_SIZES];
-
 extern int top_height[PANEL_SIZES];
 
-extern int screen_button_width[PANEL_SIZES];
+extern int popup_icon_size[PANEL_SIZES];
 
 /* types for panel controls */
-
 enum
 {
     ICON = -2,   /* special case: the traditional laucher item */
     PLUGIN = -1, /* external plugin */
     NUM_BUILTINS /* no more builtins! yay! */
-};
-
-/* panel layer */
-enum
-{
-    ABOVE,
-    NORMAL,
-    BELOW
 };
 
 /* typedefs */

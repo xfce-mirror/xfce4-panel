@@ -35,16 +35,16 @@
 #include "popup.h"
 #include "callbacks.h"
 
-typedef struct _PanelGroup PanelGroup;
-
-static GList *group_list = NULL;
-static GList *removed_list = NULL;
+static GSList *group_list = NULL;
+static GSList *removed_list = NULL;
 
 static GtkBox *groupbox;
 
 /*  Panel group
  *  -----------
 */
+typedef struct _PanelGroup PanelGroup;
+
 struct _PanelGroup
 {
     int index;
@@ -154,7 +154,7 @@ void groups_init(GtkBox * box)
 	group = create_panel_group(i);
 	panel_group_pack(group, box);
 
-	group_list = g_list_append(group_list, group);
+	group_list = g_slist_append(group_list, group);
 
 	group->popup = create_panel_popup();
 
@@ -168,7 +168,7 @@ void groups_init(GtkBox * box)
 
 void groups_cleanup(void)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     for(li = group_list; li; li = li->next)
@@ -180,8 +180,8 @@ void groups_cleanup(void)
 
     control_class_list_cleanup();
 
-    g_list_free(group_list);
-    g_list_free(removed_list);
+    g_slist_free(group_list);
+    g_slist_free(removed_list);
     group_list = NULL;
     removed_list = NULL;
 }
@@ -191,13 +191,13 @@ void old_groups_set_from_xml(int side, xmlNodePtr node)
     static int last_group = 0;
     xmlNodePtr child;
     int i;
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     if (side == LEFT)
 	last_group = 0;
 
-    li = g_list_nth(group_list, last_group);
+    li = g_slist_nth(group_list, last_group);
 
     /* children are "Group" nodes */
     if(node)
@@ -243,7 +243,7 @@ void groups_set_from_xml(xmlNodePtr node)
 {
     xmlNodePtr child;
     int i;
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     li = group_list;
@@ -286,7 +286,7 @@ void groups_set_from_xml(xmlNodePtr node)
 void groups_write_xml(xmlNodePtr root)
 {
     xmlNodePtr node, child;
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     node = xmlNewTextChild(root, NULL, "Groups", NULL);
@@ -304,7 +304,7 @@ void groups_write_xml(xmlNodePtr root)
 
 void groups_pack(GtkBox *box)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     groupbox = box;
@@ -320,7 +320,7 @@ void groups_pack(GtkBox *box)
 
 void groups_unpack(void)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     for(li = group_list; li; li = li->next)
@@ -335,7 +335,7 @@ void groups_register_control(Control * control)
 {
     PanelGroup *group;
 
-    group = g_list_nth(group_list, control->index)->data;
+    group = g_slist_nth(group_list, control->index)->data;
 
     group->control = control;
 
@@ -349,11 +349,11 @@ void groups_register_control(Control * control)
 
 Control *groups_get_control(int index)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
     int n, len;
     
-    len = g_list_length(group_list);
+    len = g_slist_length(group_list);
 
     if (index < 0)
 	n = 0;
@@ -362,7 +362,7 @@ Control *groups_get_control(int index)
     else
 	n = index;
     
-    li = g_list_nth(group_list, n);
+    li = g_slist_nth(group_list, n);
     
     group = li->data;
 
@@ -372,19 +372,19 @@ Control *groups_get_control(int index)
 void groups_move(int from, int to)
 {
     int i;
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
-    if (from < 0 || from >= g_list_length(group_list))
+    if (from < 0 || from >= g_slist_length(group_list))
 	return;
     
-    li = g_list_nth(group_list, from);
+    li = g_slist_nth(group_list, from);
     group = li->data;
 
     gtk_box_reorder_child(groupbox, group->base, to);
 
-    group_list = g_list_delete_link(group_list, li);
-    group_list = g_list_insert(group_list, group, to);
+    group_list = g_slist_delete_link(group_list, li);
+    group_list = g_slist_insert(group_list, group, to);
 
     for (i = 0, li = group_list; li; i++, li = li->next)
     {
@@ -397,15 +397,15 @@ void groups_move(int from, int to)
 void groups_remove(int index)
 {
     int i;
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
-    li = g_list_nth(group_list, index);
+    li = g_slist_nth(group_list, index);
     group = li->data;
 
     panel_group_unpack(group);
 
-    group_list = g_list_delete_link(group_list, li);
+    group_list = g_slist_delete_link(group_list, li);
 
     panel_group_free(group);
     
@@ -421,10 +421,10 @@ void groups_remove(int index)
 
 void groups_show_popup(int index, gboolean show)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
-    li = g_list_nth(group_list, index);
+    li = g_slist_nth(group_list, index);
     group = li->data;
 
     if (show)
@@ -436,7 +436,7 @@ void groups_show_popup(int index, gboolean show)
 /* settings */
 void groups_set_orientation(int orientation)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     for(li = group_list; li; li = li->next)
@@ -449,7 +449,7 @@ void groups_set_orientation(int orientation)
 
 void groups_set_layer(int layer)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     for(li = group_list; li; li = li->next)
@@ -462,7 +462,7 @@ void groups_set_layer(int layer)
 
 void groups_set_size(int size)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     for(li = group_list; li; li = li->next)
@@ -476,7 +476,7 @@ void groups_set_size(int size)
 
 void groups_set_popup_position(int position)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     for(li = group_list; li; li = li->next)
@@ -490,7 +490,7 @@ void groups_set_popup_position(int position)
 
 void groups_set_theme(const char *theme)
 {
-    GList *li;
+    GSList *li;
     PanelGroup *group;
 
     for(li = group_list; li; li = li->next)
@@ -504,64 +504,67 @@ void groups_set_theme(const char *theme)
 
 void groups_set_num_groups(int n)
 {
-    int i, len, max;
-    GList *li;
-    PanelGroup *group;
+    int i, len;
+    GSList *li;
+    PanelGroup *group = NULL;
 
-    len = g_list_length(group_list);
-    max = (n > len) ? n : len;
-    
-    li = group_list;
-    for(i = 0; i < max; i++)
+    len = g_slist_length(group_list);
+
+    /* nothing to do */
+    if (n == len)
+	return;
+
+    /* add group(s) */
+    if (n > len)
     {
-	group = li ? li->data : NULL;
-	
-        if(i < n)
-        {
-            if(!group)
-            {
-		if (removed_list)
-		{
-		    group = removed_list->data;
-		    removed_list = g_list_delete_link(removed_list, removed_list);
-		    
-		    panel_group_pack(group, groupbox);
-		    group_list = g_list_append(group_list, group);
-		    
-		    panel_group_arrange(group);
-		}
-		else
-		{
-		    group = create_panel_group(i);
-		    panel_group_pack(group, groupbox);
-		    group_list = g_list_append(group_list, group);
+	for(i = len; i < n; i++)
+	{
+	    if (removed_list)
+	    {
+		group = removed_list->data;
+		removed_list = g_slist_delete_link(removed_list, removed_list);
+		
+		panel_group_pack(group, groupbox);
+		group_list = g_slist_append(group_list, group);
+		
+		panel_group_arrange(group);
+	    }
+	    else
+	    {
+		group = create_panel_group(i);
+		panel_group_pack(group, groupbox);
+		group_list = g_slist_append(group_list, group);
 
-		    group->popup = create_panel_popup();
+		group->popup = create_panel_popup();
 
-		    group->control = control_new(i);
-		    create_control(group->control, ICON, NULL);
+		group->control = control_new(i);
+		create_control(group->control, ICON, NULL);
 
-		    panel_group_arrange(group);
-		}
-            }
+		panel_group_arrange(group);
+	    }
 
 	    gtk_widget_show(group->base);
-        }
-        else if(group)
-        {
-	    GList *li2;
-	    
-            panel_group_unpack(group);
+	}
 
-	    li2 = li;
-	    li = li->prev;
+	return;
+    }
 
-	    group_list = g_list_remove_link(group_list, li2);
-	    removed_list = g_list_prepend(removed_list, group);
-        }
+    /* removing group(s) */
+    li = g_slist_nth(group_list, n);
+    
+    for (i = n; i < len; i++)
+    {
+	GSList *li2;
+	
+	group = li->data;
+	panel_group_unpack(group);
 
-	if (li)
-	    li = li->next;
+	/* this sets the list to the next group */
+	li2 = li;
+	li = li->next;
+
+	group_list = g_slist_remove_link(group_list, li2);
+	removed_list = g_slist_prepend(removed_list, group);
     }
 }
 

@@ -125,7 +125,7 @@ GdkPixbuf *get_system_pixbuf(int id)
 
 GdkPixbuf *get_minibutton_pixbuf(int id)
 {
-    GdkPixbuf *pb, *tmp;
+    GdkPixbuf *pb;
 
     if(id < 0 || id >= MINIBUTTONS)
         return get_pixbuf_by_id(UNKNOWN_ICON);
@@ -134,10 +134,6 @@ GdkPixbuf *get_minibutton_pixbuf(int id)
 
     if(!pb)
         pb = get_pixbuf_by_id(UNKNOWN_ICON);
-
-    tmp = pb;
-    pb = get_scaled_pixbuf(tmp, minibutton_size[settings.size]);
-    g_object_unref(tmp);
 
     return pb;
 }

@@ -31,6 +31,8 @@
 #include "plugins.h"
 #include "mcs_client.h"
 
+static int screen_button_width[] = { 35, 45, 80, 80 };
+
 typedef struct
 {
     int index;
@@ -580,7 +582,7 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 	    cde_pager_free(sw->cde_pager);
 	    sw->cde_pager = NULL;
 
-	    align = gtk_alignment_new(0, 0, 1, 1);
+	    align = gtk_alignment_new(0.5, 0.5, 0, 0);
 	    gtk_widget_show(align);
 	    gtk_container_add(GTK_CONTAINER(align), sw->netk_pager);
 	    
@@ -749,7 +751,7 @@ t_switcher *switcher_new(NetkScreen *screen)
 
     sw->graphical = FALSE;
     
-    sw->frame = gtk_alignment_new(0.5,0.5,0,0);
+    sw->frame = gtk_alignment_new(0.5,0.5,0.8,0.8);
     gtk_widget_show(sw->frame);
 
     /* this creates all widgets */
