@@ -425,10 +425,6 @@ static void orientation_changed(GtkOptionMenu * menu)
     if(n == settings.orientation)
         return;
 
-    panel_set_orientation(n);
-
-    panel_reorient();
-
     if ((n == HORIZONTAL && (pos == LEFT || pos == RIGHT)) ||
         (n == VERTICAL && (pos == TOP || pos == BOTTOM)))
     {
@@ -441,6 +437,8 @@ static void orientation_changed(GtkOptionMenu * menu)
     }
 
     gtk_widget_set_sensitive(revert, TRUE);
+
+    panel_set_orientation(n);
 }
 
 static void add_orientation_menu(GtkWidget * option_menu, int orientation)

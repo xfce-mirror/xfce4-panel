@@ -206,8 +206,8 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
                              GTK_EXPAND, GTK_EXPAND, 0, 0);
     }
 
-    /* Reorder the table to fix a bad display bug */
-    reorder_desktop_table(settings.size);
+    /* Reorder the table to fix a bad display bug 
+    reorder_desktop_table(settings.size);*/
 }
 
 void screen_button_free(ScreenButton * sb)
@@ -354,8 +354,13 @@ static void add_desktop_table(GtkBox * hbox)
 void central_panel_init(GtkBox * hbox)
 {
     int i;
+    static gboolean need_init = TRUE;
 
-    init_screen_names();
+    if (need_init)
+    {
+	init_screen_names();
+	 need_init = FALSE;
+    }
 
     create_minibuttons();
 
@@ -363,7 +368,16 @@ void central_panel_init(GtkBox * hbox)
     for(i = 0; i < NBSCREENS; i++)
     {
         if(i < settings.num_screens)
+	{
             screen_buttons[i] = create_screen_button(i);
+
+	    if (screen_names[i])
+	    {
+		char *tmp = g_strdup(screen_names[i]);
+		screen_button_set_name(screen_buttons[i], tmp);
+		g_free(tmp);
+	    }
+	}
         else
             screen_buttons[i] = NULL;
     }

@@ -56,22 +56,43 @@ int screen_button_width[] = { 30, 40, 80, 80 };
 
 /*  Panel framework
  *  ---------------
- *  - window
- *      - frame
- *          - hbox
- *              - hbox 	: left panel
- *              - frame
- *                  - hbox 	: central panel
- *              - hbox 	: right panel
 */
-GtkWidget *toplevel = NULL;
-GtkWidget *main_frame = NULL;
-GtkWidget *main_hbox = NULL;
-GtkWidget *left_hbox = NULL;
-GtkWidget *right_hbox = NULL;
-GtkWidget *central_frame = NULL;
-GtkWidget *central_hbox = NULL;
+GtkWidget *toplevel;
 
+static GtkWidget *main_frame;
+static GtkWidget *main_box;	/* contains panel and taskbar (future) */
+
+static GtkWidget *panel_box;	/* contains all panel components */
+
+static GtkWidget *left_box;
+static GtkWidget *right_box;
+static GtkWidget *central_frame;
+static GtkWidget *central_box;
+
+gboolean central_frame_created = FALSE;
+
+/*  callbacks  */
+static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, 
+				gpointer data)
+{
+    quit(FALSE);
+
+    return TRUE;
+}
+
+static gboolean panel_destroy_cb(GtkWidget * frame, GdkEvent * ev, 
+				      gpointer data)
+{
+    side_panel_cleanup(LEFT);
+    side_panel_cleanup(RIGHT);
+
+    if (central_frame_created)
+	central_panel_cleanup();
+
+    return TRUE;
+}
+
+/*  creation and destruction  */
 static GtkWidget *create_panel_window(void)
 {
     GtkWidget *w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -98,92 +119,133 @@ static GtkWidget *create_panel_window(void)
     return w;
 }
 
-void panel_contents_init()
+static void create_panel_contents(void)
 {
+    gboolean vertical = settings.orientation == VERTICAL;
+    
     main_frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(main_frame), GTK_SHADOW_OUT);
     gtk_container_set_border_width(GTK_CONTAINER(main_frame), 0);
     gtk_widget_show(main_frame);
-
-    g_signal_connect(main_frame, "destroy-event",
-                     G_CALLBACK(main_frame_destroy_cb), NULL);
-
     gtk_container_add(GTK_CONTAINER(toplevel), main_frame);
 
-    if(settings.orientation == VERTICAL)
+    /* create all widgets that depend on orientation */
+    if (vertical)
     {
-        main_hbox = gtk_vbox_new(FALSE, 0);
+	main_box = gtk_hbox_new(FALSE, 0);
+
+	panel_box = gtk_vbox_new(FALSE, 0);
+
+	left_box = gtk_vbox_new(FALSE, 0);
+
+	right_box = gtk_vbox_new(FALSE, 0);
+
+	central_box = gtk_vbox_new(FALSE, 0);
     }
     else
     {
-        main_hbox = gtk_hbox_new(FALSE, 0);
-    }
-    gtk_widget_show(main_hbox);
-    gtk_container_add(GTK_CONTAINER(main_frame), main_hbox);
+	main_box = gtk_vbox_new(FALSE, 0);
 
-    if(settings.orientation == VERTICAL)
-    {
-        left_hbox = gtk_vbox_new(FALSE, 0);
-    }
-    else
-    {
-        left_hbox = gtk_hbox_new(FALSE, 0);
-    }
-    gtk_widget_show(left_hbox);
-    gtk_container_add(GTK_CONTAINER(main_hbox), left_hbox);
+	panel_box = gtk_hbox_new(FALSE, 0);
 
-    central_frame = gtk_frame_new(NULL);
-    if(settings.style == OLD_STYLE)
-        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+	left_box = gtk_hbox_new(FALSE, 0);
 
+	right_box = gtk_hbox_new(FALSE, 0);
+
+	central_box = gtk_hbox_new(FALSE, 0);
+    }
+    
+    /* show them */
+    gtk_widget_show(main_box);
+    gtk_widget_show(panel_box);
+    gtk_widget_show(left_box);
+    gtk_widget_show(right_box);
+    gtk_widget_show(central_box);
+
+    /* ref the ones we may need to move around */
+    g_object_ref(panel_box);	/* may be swapped with taskbar container */
+    g_object_ref(right_box); 	/* may have to be temporarily removed when 
+				   adding central panel from the dialog */
+    
+    /* create the other widgets */
+    
     if(settings.show_central)
+    {
+	central_frame = gtk_frame_new(NULL);
+	
+	if(settings.style == OLD_STYLE)
+	    gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+    
         gtk_widget_show(central_frame);
+	g_object_ref(central_frame);
 
-    gtk_container_add(GTK_CONTAINER(main_hbox), central_frame);
+	central_frame_created = TRUE;
+    }
+    
+    /* pack the widgets into the main frame */
+    
+    gtk_container_add(GTK_CONTAINER(main_frame), main_box);
 
-    if(settings.orientation == VERTICAL)
-    {
-        central_hbox = gtk_vbox_new(FALSE, 0);
-    }
-    else
-    {
-        central_hbox = gtk_hbox_new(FALSE, 0);
-    }
-    gtk_widget_show(central_hbox);
-    gtk_container_add(GTK_CONTAINER(central_frame), central_hbox);
+    gtk_box_pack_start(GTK_BOX(main_box), panel_box, TRUE, TRUE, 0);
 
-    if(settings.orientation == VERTICAL)
+    gtk_box_pack_start(GTK_BOX(panel_box), left_box, TRUE, TRUE, 0);
+
+    if (settings.show_central)
     {
-        right_hbox = gtk_vbox_new(FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(panel_box), central_frame, TRUE, TRUE, 0);
+
+	gtk_container_add(GTK_CONTAINER(central_frame), central_box);
     }
-    else
-    {
-        right_hbox = gtk_hbox_new(FALSE, 0);
-    }
-    gtk_container_add(GTK_CONTAINER(main_hbox), right_hbox);
-    gtk_widget_show(right_hbox);
+
+    gtk_box_pack_start(GTK_BOX(panel_box), right_box, TRUE, TRUE, 0);
 }
 
 void panel_init(void)
 {
-
     toplevel = create_panel_window();
-    panel_contents_init();
+    create_panel_contents();
 }
 
 void panel_cleanup(void)
 {
-    if(!disable_user_config)
-        write_panel_config();
-
     if(GTK_IS_WIDGET(toplevel))
         gtk_widget_destroy(toplevel);
-
 }
 
 /*  Panel settings
  *  --------------
 */
+void panel_set_orientation(int orientation)
+{
+    settings.orientation = orientation;
+
+    /* only keep side panels. We just rebuild the central panel
+     * if necessary */
+    side_panel_unpack(LEFT);
+    side_panel_unpack(RIGHT);
+
+    gtk_widget_destroy(main_frame);
+
+    create_panel_contents();
+
+    side_panel_pack(LEFT, GTK_BOX(left_box));
+    side_panel_pack(RIGHT, GTK_BOX(right_box));
+    
+    if (settings.show_central)
+	central_panel_init(GTK_BOX(central_box));
+
+    panel_set_position();
+}
+
+void panel_set_on_top(gboolean on_top)
+{
+    settings.on_top = on_top;
+
+    set_window_type_dock(toplevel, on_top);
+    side_panel_set_on_top(LEFT, on_top);
+    side_panel_set_on_top(RIGHT, on_top);
+}
+
 void panel_set_size(int size)
 {
     settings.size = size;
@@ -191,12 +253,6 @@ void panel_set_size(int size)
     side_panel_set_size(LEFT, size);
     central_panel_set_size(size);
     side_panel_set_size(RIGHT, size);
-}
-
-void panel_set_orientation(int orientation)
-{
-    settings.orientation = orientation;
-    /* panel_set_size(settings.size); */
 }
 
 void panel_set_popup_size(int size)
@@ -216,15 +272,6 @@ void panel_set_popup_position(int position)
 
     /* this is necessary to get the right proportions */
     panel_set_size(settings.size);
-}
-
-void panel_set_on_top(gboolean on_top)
-{
-    settings.on_top = on_top;
-
-    set_window_type_dock(toplevel, on_top);
-    side_panel_set_on_top(LEFT, on_top);
-    side_panel_set_on_top(RIGHT, on_top);
 }
 
 void panel_set_style(int style)
@@ -341,7 +388,6 @@ void panel_set_settings(void)
     panel_set_popup_position(settings.popup_position);
 
     panel_set_style(settings.style);
-    panel_set_orientation(settings.orientation);
     panel_set_theme(settings.theme);
 
     side_panel_set_num_groups(LEFT, settings.num_left);
@@ -363,6 +409,7 @@ void panel_set_settings(void)
 
     current_screen = n;
     central_panel_set_current(n);
+/*    panel_set_orientation(settings.orientation);*/
 }
 
 void panel_set_position(void)
@@ -380,8 +427,16 @@ void panel_set_position(void)
 
     if(settings.x == -1 || settings.y == -1)
     {
-        settings.x = w / 2 - req.width / 2;
-        settings.y = h - req.height;
+	if (settings.orientation == VERTICAL)
+	{
+	    settings.x = w - req.width;
+	    settings.y = h - req.height;
+	}
+	else
+	{
+	    settings.x = w / 2 - req.width / 2;
+	    settings.y = h - req.height;
+	}
     }
     else
     {
@@ -646,26 +701,6 @@ void panel_write_xml(xmlNodePtr root)
     }
 }
 
-void panel_reorient()
-{
-    gtk_widget_hide(toplevel);
-    gtk_widget_destroy(main_frame);
-    panel_contents_init();
-    side_panel_init(LEFT, GTK_BOX(left_hbox));
-    central_panel_init(GTK_BOX(central_hbox));
-    side_panel_init(RIGHT, GTK_BOX(right_hbox));
-
-    /* read and apply configuration 
-     * This function creates the panel items and popup menus */
-    get_panel_config();
-
-    /* give early visual feedback 
-     * the init functions have already created the basic panel */
-    panel_set_position();
-    gtk_widget_show(toplevel);
-}
-
-
 /*  Main program
  *  ------------
 */
@@ -677,28 +712,34 @@ void sighandler(int sig)
             restart();
             break;
         default:
-            quit();
+            quit(FALSE);
     }
 }
 
-void quit(void)
+void quit(gboolean force)
 {
-    if(!confirm(_("Are you sure you want to log off ?"), GTK_STOCK_QUIT, NULL))
+    if(!force && !confirm(_("Are you sure you want to log off ?"), 
+			  GTK_STOCK_QUIT, NULL))
+    {
         return;
+    }
+    
+    if (!disable_user_config)
+	write_panel_config();
 
     gtk_widget_hide(toplevel);
 
     if(settings.exit_command)
         exec_cmd_silent(settings.exit_command, FALSE);
 
-    panel_cleanup();
+    gtk_widget_destroy(toplevel);
 
     gtk_main_quit();
 }
 
 void restart(void)
 {
-    panel_cleanup();
+    gtk_widget_destroy(main_frame);
 
     gtk_main_quit();
 
@@ -718,15 +759,22 @@ void xfce_init(void)
 
 void xfce_run(void)
 {
-    /* fill in the 'settings' structure */
-    init_settings();
-    get_global_prefs();
+    gboolean need_init = TRUE;
+
+    if (need_init)
+    {
+	/* fill in the 'settings' structure */
+	init_settings();
+	get_global_prefs();
+
+	need_init = FALSE;
+    }
 
     /* panel framework */
     panel_init();
-    side_panel_init(LEFT, GTK_BOX(left_hbox));
-    central_panel_init(GTK_BOX(central_hbox));
-    side_panel_init(RIGHT, GTK_BOX(right_hbox));
+    side_panel_init(LEFT, GTK_BOX(left_box));
+    central_panel_init(GTK_BOX(central_box));
+    side_panel_init(RIGHT, GTK_BOX(right_box));
 
     /* give early visual feedback 
      * the init functions have already created the basic panel */

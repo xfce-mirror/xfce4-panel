@@ -127,6 +127,11 @@ move_handle_pack(MoveHandle * mh, GtkContainer * container)
     gtk_container_add(container, mh->base);
 }
 
+move_handle_unpack(MoveHandle * mh, GtkContainer * container)
+{
+    gtk_container_add(container, mh->base);
+}
+
 void move_handle_free(MoveHandle * mh)
 {
     if(mh->button && GTK_IS_WIDGET(mh->button))
@@ -186,6 +191,9 @@ MoveHandle *create_move_handle(int side)
 
     mh->base = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(mh->base);
+
+    /* protect against destruction when unpacking */
+    g_object_ref(mh->base);
 
     mh->button = gtk_button_new();
     if(settings.style == NEW_STYLE)
@@ -311,6 +319,9 @@ PanelGroup *create_panel_group(int side, int index)
     pg->base = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(pg->base);
 
+    /* protect against destruction when unpacking */
+    g_object_ref(pg->base);
+
     pg->top = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(pg->top);
 
@@ -336,43 +347,33 @@ void panel_group_pack(PanelGroup * pg, GtkBox * hbox)
         gtk_box_pack_end(hbox, pg->base, TRUE, TRUE, 0);
 }
 
-void panel_group_cleanup(PanelGroup * pg)
+void panel_group_unpack(PanelGroup * pg, GtkContainer *container)
 {
-/*  This make xfce4 crash on exit. It's not necessary anyway
-
-    if(G_IS_OBJECT(pg->top))
-    {
-        g_object_unref(pg->top);
-        g_object_unref(pg->bottom);
-    }
-    if(GTK_IS_WIDGET(pg->base))
-        gtk_widget_destroy(pg->base);
-*/
+    gtk_container_remove(container, pg->base);
 }
 
 /*  Side panel
  *  ----------
 */
-void side_panel_init(int side, GtkBox * hbox)
+void side_panel_init(int side, GtkBox * box)
 {
     int i;
     int num = (side == LEFT) ? settings.num_left : settings.num_right;
 
-    boxes[side] = hbox;
+    boxes[side] = box;
 
     for(i = 0; i < NBGROUPS; i++)
     {
         if(i < num)
         {
             groups[side][i] = create_panel_group(side, i);
-            panel_group_pack(groups[side][i], hbox);
+	    panel_group_pack(groups[side][i], box);
 
             if(i == 0)
             {
                 handles[side] = create_move_handle(side);
-                move_handle_pack(handles[side],
-                                 GTK_CONTAINER(groups[side][i]->top));
-
+		move_handle_pack(handles[side],
+				 GTK_CONTAINER(groups[side][i]->top));
                 /* Theoretically the popups array can be 1 item shorter
                    than the others, because this on will always be NULL.
                    However, that would be really confusing. */
@@ -381,15 +382,15 @@ void side_panel_init(int side, GtkBox * hbox)
             else
             {
                 popups[side][i] = create_panel_popup();
-                panel_popup_pack(popups[side][i],
-                                 GTK_CONTAINER(groups[side][i]->top));
+		panel_popup_pack(popups[side][i],
+				 GTK_CONTAINER(groups[side][i]->top));
             }
 
             /* we create an empty control, because we don't know what to put
              * here until after we read the configuration file */
             controls[side][i] = panel_control_new(side, i);
-            panel_control_pack(controls[side][i],
-                               GTK_CONTAINER(groups[side][i]->bottom));
+	    panel_control_pack(controls[side][i],
+			       GTK_CONTAINER(groups[side][i]->bottom));
         }
         else
         {
@@ -397,6 +398,30 @@ void side_panel_init(int side, GtkBox * hbox)
             popups[side][i] = NULL;
             controls[side][i] = NULL;
         }
+    }
+}
+
+void side_panel_pack(int side, GtkBox *box)
+{
+    int i;
+    int num = (side == LEFT) ? settings.num_left : settings.num_right;
+
+    boxes[side] = box;
+
+    for(i = 0; i < num; i++)
+    {
+        panel_group_pack(groups[side][i], box);
+    }
+}
+
+void side_panel_unpack(int side)
+{
+    int i;
+    int num = (side == LEFT) ? settings.num_left : settings.num_right;
+
+    for(i = 0; i < num; i++)
+    {
+        panel_group_unpack(groups[side][i], GTK_CONTAINER(boxes[side]));
     }
 }
 
@@ -418,8 +443,6 @@ void side_panel_cleanup(int side)
 
         if(controls[side][i])
             panel_control_free(controls[side][i]);
-        if(groups[side][i])
-            panel_group_cleanup(groups[side][i]);
     }
 }
 

@@ -200,12 +200,15 @@ PanelControl *panel_control_new(int side, int index)
     pc->read_config = NULL;
     pc->write_config = NULL;
 
+    pc->minimum_size = NULL;
+    
     pc->free = NULL;
 
     pc->interval = 0;
     pc->timeout_id = 0;
     pc->update = NULL;
 
+    pc->set_orientation = NULL;
     pc->set_size = NULL;
     pc->set_style = NULL;
     pc->set_theme = NULL;
@@ -368,6 +371,25 @@ void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent)
  *  These are mostly wrappers around the functions provided by a 
  *  panel control
 */
+void panel_control_minimum_size(PanelControl * pc, int size, int orientation,
+		    		int *width, int *height)
+{
+    if (pc->minimum_size)
+    {
+	pc->minimum_size(pc, size, orientation, width, height);
+    }
+    else
+    {
+	*width = *height = icon_size[size];
+    }
+}
+
+void panel_control_set_orientation(PanelControl *pc, int orientation)
+{
+    if (pc->set_orientation)
+	pc->set_orientation(pc, orientation);
+}
+
 void panel_control_set_size(PanelControl * pc, int size)
 {
     int s = icon_size[size] + border_width;

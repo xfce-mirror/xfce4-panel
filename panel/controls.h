@@ -26,6 +26,7 @@
 
 struct _PanelControl
 {
+    /* provided by system */
     int side;
     int index;
 
@@ -35,6 +36,8 @@ struct _PanelControl
     int id;
     char *filename;
     char *dir;
+    
+    /* provided by control */
     GModule *gmodule;
 
     char *caption;
@@ -44,13 +47,18 @@ struct _PanelControl
     void (*read_config) (PanelControl * pc, xmlNodePtr node);
     void (*write_config) (PanelControl * pc, xmlNodePtr node);
 
+    /* width and height are return parameters */
+    void (*minimum_size)(PanelControl * pc, int size, int orientation,
+	    		 int *width, int *height);
+
     void (*free) (PanelControl *);
 
     int interval;
     int timeout_id;
-      gboolean(*update) (PanelControl * pc);
+    gboolean(*update) (PanelControl * pc);
 
     /* global settings */
+    void (*set_orientation) (PanelControl *pc, int orientation);
     void (*set_size) (PanelControl * pc, int size);
     void (*set_style) (PanelControl * pc, int style);
     void (*set_theme) (PanelControl * pc, const char *theme);
@@ -61,26 +69,25 @@ struct _PanelControl
                          GtkWidget * revert, GtkWidget * done);
 };
 
-/* create an empty control (just the base container) */
 PanelControl *panel_control_new(int side, int index);
 
-/* create a default control bsaed on id and filename */
 void create_panel_control(PanelControl * pc);
 
-/* create control based on xml config. node may be NULL */
 void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node);
 
-/* packing and unpacking */
-void panel_control_pack(PanelControl * pc, GtkContainer * container);
-void panel_control_unpack(PanelControl * pc);
-
-/* destruction */
-void panel_control_free(PanelControl * pc);
-
-/* exit */
 void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent);
 
-/* global settings */
+void panel_control_free(PanelControl * pc);
+
+void panel_control_minimum_size(PanelControl * pc, int size, int orientation,
+		    		int *width, int *height);
+
+void panel_control_pack(PanelControl * pc, GtkContainer * container);
+
+void panel_control_unpack(PanelControl * pc);
+
+void panel_control_set_orientation(PanelControl * pc, int orientation);
+
 void panel_control_set_size(PanelControl * pc, int size);
 
 void panel_control_set_style(PanelControl * pc, int style);

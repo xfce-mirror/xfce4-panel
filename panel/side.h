@@ -23,7 +23,11 @@
 #include "global.h"
 
 /* init */
-void side_panel_init(int side, GtkBox * hbox);
+void side_panel_init(int side, GtkBox * box);
+
+void side_panel_pack(int side, GtkBox * box);
+
+void side_panel_unpack(int side);
 
 /* just points the proper array element to this panel control */
 void side_panel_register_control(PanelControl * pc);

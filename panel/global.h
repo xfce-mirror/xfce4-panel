@@ -120,14 +120,15 @@ struct _Settings
 {
     int x, y;
 
+    int orientation;
+    gboolean on_top;
+
     int size;
     int popup_size;
     int popup_position;
 
     int style;
-    int orientation;
     char *theme;
-    gboolean on_top;
 
     int num_left;
     int num_right;

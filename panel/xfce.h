@@ -23,7 +23,7 @@
 #include "global.h"
 
 /* main program */
-void quit(void);
+void quit(gboolean force);
 void restart(void);
 
 void xfce_init(void);

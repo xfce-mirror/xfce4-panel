@@ -72,8 +72,10 @@ struct _MenuItem
 /* Panel popups */
 
 PanelPopup *create_panel_popup(void);
-void add_panel_popup(PanelPopup * pp, GtkContainer * container);
 void panel_popup_free(PanelPopup * pp);
+
+void panel_popup_pack(PanelPopup * pp, GtkContainer * container);
+void panel_popup_unpack(PanelPopup * pp, GtkContainer * container);
 
 void panel_popup_add_item(PanelPopup * pp, MenuItem * mi);
 void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi);

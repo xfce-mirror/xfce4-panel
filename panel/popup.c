@@ -386,6 +386,11 @@ void panel_popup_pack(PanelPopup * pp, GtkContainer * container)
     gtk_container_add(container, pp->button);
 }
 
+void panel_popup_unpack(PanelPopup * pp, GtkContainer * container)
+{
+    gtk_container_remove(container, pp->button);
+}
+
 void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
 {
     GList *li;

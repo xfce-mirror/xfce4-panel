@@ -39,33 +39,6 @@ void hide_current_popup_menu(void);
 /*  Panel callbacks
  *  ---------------
 */
-gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
-{
-    quit();
-
-    return TRUE;
-}
-
-gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
-{
-    write_panel_config();
-
-    panel_cleanup();
-
-    gtk_main_quit();
-
-    return TRUE;
-}
-
-gboolean main_frame_destroy_cb(GtkWidget * frame, GdkEvent * ev, gpointer data)
-{
-    side_panel_cleanup(LEFT);
-    central_panel_cleanup();
-    side_panel_cleanup(RIGHT);
-
-    return TRUE;
-}
-
 void iconify_cb(void)
 {
     hide_current_popup_menu();
@@ -143,7 +116,7 @@ void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
 {
     hide_current_popup_menu();
 
-    quit();
+    quit(FALSE);
 }
 
 /*  Panel control callbacks
