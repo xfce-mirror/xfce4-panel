@@ -16,19 +16,19 @@
         <Item>
           <Caption>Konqueror</Caption>
           <Command term="0" sn="0">konqueror</Command>
-          <Tooltip>Konqueror File Manager</Tooltip>
+          <Tooltip>Bestandsbeheer met Konqueror</Tooltip>
           <Icon id="2"/>
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
           <Command term="0" sn="0">nautilus</Command>
-          <Tooltip>Nautlius File Manager</Tooltip>
+	  <Tooltip>Bestandsbeheer met Nautlius</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xffm</Command>
-        <Tooltip>File manager</Tooltip>
+        <Tooltip>Bestandsbeheer</Tooltip>
         <Icon id="2"/>
       </Control>
     </Group>
@@ -52,7 +52,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xmms</Command>
-        <Tooltip>Music player</Tooltip>
+        <Tooltip>Muziekspeler</Tooltip>
         <Icon id="6"/>
       </Control>
     </Group>
@@ -72,7 +72,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfce-setting-show</Command>
-        <Tooltip>Settings</Tooltip>
+	<Tooltip>Instellingen</Tooltip>
         <Icon id="3"/>
       </Control>
     </Group>
@@ -81,13 +81,13 @@
         <Item>
           <Caption>Printer Management</Caption>
           <Command term="0" sn="0">xfprint-manager</Command>
-          <Tooltip>Printer Management</Tooltip>
+          <Tooltip>Printerbeheer</Tooltip>
           <Icon id="9"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xfprint4</Command>
-        <Tooltip>Drag file to print</Tooltip>
+	<Tooltip>Sleep bestand om te printen</Tooltip>
         <Icon id="9"/>
       </Control>
     </Group>
@@ -95,7 +95,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfhelp4</Command>
-        <Tooltip>Manual</Tooltip>
+	<Tooltip>Handleiding</Tooltip>
         <Icon id="5"/>
       </Control>
     </Group>
