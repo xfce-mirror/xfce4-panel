@@ -1,3 +1,3 @@
 SUBDIRS = \
 Gnome \
-Bluecurve
+Curve

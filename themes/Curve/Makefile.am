@@ -1,5 +1,5 @@
-bluecurvedir = $(pkgdatadir)/themes/Bluecurve
-bluecurve_DATA = \
+curvedir = $(pkgdatadir)/themes/Curve
+curve_DATA = \
 edit.png \
 file1.png \
 file2.png \
@@ -21,4 +21,4 @@ trash_full.png \
 unknown.png \
 README
 
-EXTRA_DIST = $(bluecurve_DATA)
+EXTRA_DIST = $(curve_DATA)

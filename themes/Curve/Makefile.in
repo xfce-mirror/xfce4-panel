@@ -90,8 +90,8 @@ X_PRE_LIBS = @X_PRE_LIBS@
 am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
-bluecurvedir = $(pkgdatadir)/themes/Bluecurve
-bluecurve_DATA = \
+curvedir = $(pkgdatadir)/themes/Curve
+curve_DATA = \
 edit.png \
 file1.png \
 file2.png \
@@ -114,13 +114,13 @@ unknown.png \
 README
 
 
-EXTRA_DIST = $(bluecurve_DATA)
-subdir = themes/Bluecurve
+EXTRA_DIST = $(curve_DATA)
+subdir = themes/Curve
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-DATA = $(bluecurve_DATA)
+DATA = $(curve_DATA)
 
 DIST_COMMON = README Makefile.am Makefile.in
 all: all-am
@@ -128,7 +128,7 @@ all: all-am
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  themes/Bluecurve/Makefile
+	  $(AUTOMAKE) --gnu  themes/Curve/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -141,23 +141,23 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-bluecurveDATA_INSTALL = $(INSTALL_DATA)
-install-bluecurveDATA: $(bluecurve_DATA)
+curveDATA_INSTALL = $(INSTALL_DATA)
+install-curveDATA: $(curve_DATA)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(bluecurvedir)
-	@list='$(bluecurve_DATA)'; for p in $$list; do \
+	$(mkinstalldirs) $(DESTDIR)$(curvedir)
+	@list='$(curve_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(bluecurveDATA_INSTALL) $$d$$p $(DESTDIR)$(bluecurvedir)/$$f"; \
-	  $(bluecurveDATA_INSTALL) $$d$$p $(DESTDIR)$(bluecurvedir)/$$f; \
+	  echo " $(curveDATA_INSTALL) $$d$$p $(DESTDIR)$(curvedir)/$$f"; \
+	  $(curveDATA_INSTALL) $$d$$p $(DESTDIR)$(curvedir)/$$f; \
 	done
 
-uninstall-bluecurveDATA:
+uninstall-curveDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(bluecurve_DATA)'; for p in $$list; do \
+	@list='$(curve_DATA)'; for p in $$list; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(bluecurvedir)/$$f"; \
-	  rm -f $(DESTDIR)$(bluecurvedir)/$$f; \
+	  echo " rm -f $(DESTDIR)$(curvedir)/$$f"; \
+	  rm -f $(DESTDIR)$(curvedir)/$$f; \
 	done
 tags: TAGS
 TAGS:
@@ -193,7 +193,7 @@ check: check-am
 all-am: Makefile $(DATA)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(bluecurvedir)
+	$(mkinstalldirs) $(DESTDIR)$(curvedir)
 
 install: install-am
 install-exec: install-exec-am
@@ -235,7 +235,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-bluecurveDATA
+install-data-am: install-curveDATA
 
 install-exec-am:
 
@@ -253,17 +253,17 @@ mostlyclean: mostlyclean-am
 
 mostlyclean-am: mostlyclean-generic mostlyclean-libtool
 
-uninstall-am: uninstall-bluecurveDATA uninstall-info-am
+uninstall-am: uninstall-curveDATA uninstall-info-am
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
-	dvi-am info info-am install install-am install-bluecurveDATA \
+	dvi-am info info-am install install-am install-curveDATA \
 	install-data install-data-am install-exec install-exec-am \
 	install-info install-info-am install-man install-strip \
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool uninstall uninstall-am \
-	uninstall-bluecurveDATA uninstall-info-am
+	mostlyclean-libtool uninstall uninstall-am uninstall-curveDATA \
+	uninstall-info-am
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
