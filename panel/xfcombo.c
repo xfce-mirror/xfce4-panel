@@ -183,10 +183,31 @@ recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold)
 	 in_cmd, *interm, *hold);
 }
 
+static int
+extra_key_completion (gpointer data)
+{
+    xfc_combo_info_t *info = data;
+    ComboCallback callback;
+
+    callback = g_object_get_data (G_OBJECT (info->combo), "callback");
+
+    if (callback)
+    {
+	gpointer data;
+	
+	data = g_object_get_data (G_OBJECT (info->combo), "data");
+
+	callback (info, data);
+
+	return 1;
+    }
+
+    return 0;
+}
 
 /* exported interface */
 xfc_combo_info_t *
-create_completion_combo (ComboCallback completion_cb)
+create_completion_combo (ComboCallback completion_cb, gpointer data)
 {
     xfc_combo_info_t *combo_info = NULL;
 
@@ -207,6 +228,18 @@ create_completion_combo (ComboCallback completion_cb)
 
 	command_combo = gtk_combo_new ();
 
+	if (completion_cb)
+	{
+	    g_object_set_data (G_OBJECT (command_combo), "callback", 
+		    	       completion_cb);
+
+	    if (data)
+	    {
+		g_object_set_data (G_OBJECT (command_combo), "data", 
+				   data);
+	    }
+	}
+
 	combo_info = xfc_fun->xfc_init_combo ((GtkCombo *) command_combo);
 
 	combo_info->activate_func = NULL;
@@ -224,7 +257,7 @@ create_completion_combo (ComboCallback completion_cb)
 	
 	g_free (f);
 	
-	xfc_fun->extra_key_completion = (void *) completion_cb;
+	xfc_fun->extra_key_completion = extra_key_completion;
 	xfc_fun->extra_key_data = combo_info;
     }
 

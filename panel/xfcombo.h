@@ -75,7 +75,8 @@ struct _xfc_combo_info_t
 
 typedef void (*ComboCallback) (xfc_combo_info_t *info, gpointer data);
 
-xfc_combo_info_t *create_completion_combo (ComboCallback completion_cb);
+xfc_combo_info_t *create_completion_combo (ComboCallback completion_cb, 
+    					   gpointer data);
 
 void destroy_completion_combo (xfc_combo_info_t *info);
 

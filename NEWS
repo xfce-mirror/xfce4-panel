@@ -1,6 +1,20 @@
 Noteworthy updates to the xfce4 panel should be recorded here.
 
-* 2003-01-07  Jasper Huijsmans <jasper@moongroup.com>
+* 2004-01-18  Jasper Huijsmans <jasper@moongroup.com>
+
+Split out the code for choosing a command and choosing an icon from
+item_dialog.c. to make it available for use in other dialogs (plugins). The
+mailcheck plugin makes use of it and of course the item dialog.
+
+As a consequence the item dialog was redesigned a little. Doesn't look too bad
+IMHO.
+
+* 2004-01-10  Jasper Huijsmans <jasper@moongroup.com>
+
+Add support for the completion combo from xfce4-modules, if libdbh is
+available at configure time.
+
+* 2004-01-07  Jasper Huijsmans <jasper@moongroup.com>
 
 Implement module unloading. Add uniqueness setting to plugins.
 

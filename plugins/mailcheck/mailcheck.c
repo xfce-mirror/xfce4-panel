@@ -46,6 +46,7 @@
 #include <panel/xfce.h>
 #include <panel/settings.h>
 #include <panel/plugins.h>
+#include <panel/item_dialog.h>
 
 #define MAILCHECK_ROOT "Mailcheck"
 
@@ -187,7 +188,6 @@ pop3_read_response (int fd, char *buff, int size)
 	return 1;
     else
 	return 0;
-
 }
 
 static int
@@ -278,7 +278,6 @@ pop3_check_mail (char *username, char *password, char *hostname)
 	return NEW_MAIL;
     else
 	return NO_MAIL;
-
 }
 
 static gboolean
@@ -430,7 +429,6 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 
 		g_free (value);
 	    }
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
 	    
 	    value = xmlGetProp (node, "sn");
 
@@ -445,7 +443,6 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 
 		g_free (value);
 	    }
-#endif
 	}
     }
 
@@ -601,11 +598,9 @@ typedef struct
 
     /* options */
     GtkWidget *mbox_entry;
-    GtkWidget *newmail_cmd_entry;
-    GtkWidget *cmd_entry;
-    GtkWidget *term_cb;
-    GtkWidget *sn_cb;
     GtkWidget *interval_spin;
+    GtkWidget *newmail_cmd_entry;
+    CommandOptions *cmd_opts;
 }
 MailDialog;
 
@@ -621,20 +616,12 @@ mailcheck_apply_options (MailDialog * md)
 {
     const char *tmp;
     t_mailcheck *mc = md->mc;
+    char *cmd;
 
-    tmp = gtk_entry_get_text (GTK_ENTRY (md->cmd_entry));
+    g_free (mc->command); 
 
-    if (tmp && *tmp)
-    {
-	g_free (mc->command);
-	mc->command = g_strdup (tmp);
-    }
-
-    mc->term = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (md->term_cb));
-
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    mc->use_sn = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (md->sn_cb));
-#endif
+    command_options_get_command (md->cmd_opts, &(mc->command), &(mc->term),
+	    			 &(mc->use_sn));
 
     tmp = gtk_entry_get_text (GTK_ENTRY (md->mbox_entry));
 
@@ -658,7 +645,7 @@ mailcheck_apply_options (MailDialog * md)
 
     mailcheck_set_tip (mc);
 
-    run_mailcheck (mc);
+    run_mailcheck (mc); 
 }
 
 /* mbox */
@@ -699,7 +686,7 @@ newmail_cmd_brows_cb (GtkWidget * b, MailDialog * md)
     }
 }
 
-gboolean
+static gboolean
 entry_lost_focus (MailDialog * md)
 {
     mailcheck_apply_options (md);
@@ -789,123 +776,19 @@ add_newmail_cmd_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 
 /* command */
 static void
-command_browse_cb (GtkWidget * b, MailDialog * md)
-{
-    const char *text;
-    char *file;
-
-    text = gtk_entry_get_text (GTK_ENTRY (md->cmd_entry));
-
-    file = select_file_name (NULL, text, md->dialog);
-
-    if (file)
-    {
-	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), file);
-	g_free (file);
-/*	mailcheck_apply_options(md);*/
-    }
-}
-
-gboolean
-command_entry_lost_focus (MailDialog * md)
-{
-    const char *tmp;
-
-    tmp = gtk_entry_get_text (GTK_ENTRY (md->cmd_entry));
-
-    if (tmp && *tmp)
-    {
-	g_free (md->mc->command);
-	md->mc->command = g_strdup (tmp);
-    }
-
-    /* needed to let entry handle focus-out as well */
-    return FALSE;
-}
-
-static void
-term_toggled (GtkToggleButton * tb, MailDialog * md)
-{
-    md->mc->term = gtk_toggle_button_get_active (tb);
-}
-
-static void
-sn_toggled (GtkToggleButton * tb, MailDialog * md)
-{
-    md->mc->use_sn = gtk_toggle_button_get_active (tb);
-}
-
-static void
 add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 {
-    GtkWidget *hbox, *hbox2, *vbox2, *label, *button, *align, *image;
-    t_mailcheck *mc = md->mc;
+    md->cmd_opts = create_command_options (sg);
+    
+    command_options_set_command (md->cmd_opts, md->mc->command, 
+	    			 md->mc->term, md->mc->use_sn);
 
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), md->cmd_opts->base, FALSE, TRUE, 0);
 
-    label = gtk_label_new (_("Command:"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_size_group_add_widget (sg, label);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-    md->cmd_entry = gtk_entry_new ();
-    if (mc->command)
-	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), mc->command);
-    gtk_widget_show (md->cmd_entry);
-    gtk_box_pack_start (GTK_BOX (hbox), md->cmd_entry, TRUE, TRUE, 0);
-
-    gtk_tooltips_set_tip (tooltips, md->cmd_entry,
+    gtk_tooltips_set_tip (tooltips, md->cmd_opts->command_entry,
 			  _("Command to run when the button "
 			    "on the panel is clicked"),
-			  NULL);
-
-    button = gtk_button_new ();
-    gtk_widget_show (button);
-    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-    image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (image);
-    gtk_container_add (GTK_CONTAINER (button), image);
-
-    g_signal_connect (button, "clicked", G_CALLBACK (command_browse_cb), md);
-
-    /* only set command on focus out */
-    g_signal_connect_swapped (md->cmd_entry, "focus-out-event",
-			      G_CALLBACK (command_entry_lost_focus), md);
-
-    /* run in terminal ? */
-    hbox2 = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox2);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox2, FALSE, FALSE, 0);
-
-    align = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_show (align);
-    gtk_size_group_add_widget (sg, align);
-    gtk_box_pack_start (GTK_BOX (hbox2), align, FALSE, FALSE, 0);
-
-    vbox2 = gtk_vbox_new (FALSE, BORDER);
-    gtk_widget_show (vbox2);
-    gtk_box_pack_start (GTK_BOX (hbox2), vbox2, FALSE, FALSE, 0);
-
-    md->term_cb = gtk_check_button_new_with_mnemonic (_("Run in _terminal"));
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->term_cb), mc->term);
-    gtk_widget_show (md->term_cb);
-    gtk_box_pack_start (GTK_BOX (vbox2), md->term_cb, FALSE, FALSE, 0);
-
-    g_signal_connect (md->term_cb, "toggled", G_CALLBACK (term_toggled), md);
-
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    md->sn_cb =
-	gtk_check_button_new_with_mnemonic (_("Use startup _notification"));
-    gtk_widget_show (md->sn_cb);
-    gtk_box_pack_start (GTK_BOX (vbox2), md->sn_cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->sn_cb), mc->use_sn);
-    gtk_widget_set_sensitive (md->sn_cb, TRUE);
-    g_signal_connect (md->sn_cb, "toggled", G_CALLBACK (sn_toggled), md);
-#endif
+ 			  NULL);
 }
 
 /* interval */
