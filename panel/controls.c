@@ -60,6 +60,8 @@
 
 #define API_VERSION 5
 
+#define UNLOAD_TIMEOUT 10000 /* 10 secs */
+
 typedef struct _ControlClassInfo ControlClassInfo;
 
 struct _ControlClassInfo
@@ -81,6 +83,9 @@ struct _ControlClassInfo
 
 static GSList *control_class_info_list = NULL;
 static ControlClassInfo *info_to_add = NULL;
+
+static int unload_id = 0;
+static int unloading = 0;
 
 /*  ControlClass and ControlClassInfo 
  *  ---------------------------------
@@ -120,6 +125,7 @@ lookup_info_by_filename (gconstpointer info, gconstpointer filename)
 static void
 control_class_info_free (ControlClassInfo * cci)
 {
+    g_free (cci->path);
     g_free (cci->name);
     g_free (cci->caption);
     g_free (cci);
@@ -130,7 +136,9 @@ control_class_free (ControlClass * cc)
 {
     if (cc->id == PLUGIN)
     {
-	g_module_close (cc->gmodule);
+	if (cc->gmodule)
+	    g_module_close (cc->gmodule);
+
 	g_free (cc->filename);
     }
 
@@ -166,6 +174,12 @@ control_class_info_create_control (ControlClassInfo *info, Control *control)
     g_return_val_if_fail (info != NULL, FALSE);
     g_return_val_if_fail (control != NULL, FALSE);
 
+    while (unloading)
+    {
+	DBG ("unloading in progress");
+	g_usleep (200*1000);
+    }
+    
     if (info->class->id == PLUGIN && info->refcount == 0 && 
 	info->class->gmodule == NULL)
     {
@@ -328,6 +342,38 @@ add_launcher_class (void)
     control_class_info_list = g_slist_append (control_class_info_list, info);
 }
 
+/* module unloading timeout */
+
+static gboolean
+unload_modules (void)
+{
+    GSList *li;
+
+    if (unloading)
+	return TRUE;
+
+    unloading++;
+    
+    /* first item is launcher */
+    for (li = control_class_info_list->next; li != NULL; li = li->next)
+    {
+	ControlClassInfo *info = li->data;
+
+	DBG ("info: %s (%d items)", info->caption, info->refcount);
+	
+	if (info->class->id == PLUGIN && info->refcount == 0 && 
+	    info->class->gmodule != NULL)
+	{
+	    g_module_close (info->class->gmodule);
+	    info->class->gmodule = NULL;
+	}
+    }
+    
+    unloading--;
+    
+    return TRUE;
+}
+
 /* exported interface */
 
 void
@@ -339,6 +385,9 @@ control_class_list_init (void)
 
     /* reverse to get correct order */
     control_class_info_list = g_slist_reverse (control_class_info_list);
+
+    unload_id = 
+	g_timeout_add (UNLOAD_TIMEOUT, (GSourceFunc) unload_modules, NULL);
 }
 
 void
@@ -346,6 +395,13 @@ control_class_list_cleanup (void)
 {
     GSList *li;
 
+    unloading++;
+    
+    if (unload_id)
+    {
+	g_source_remove (unload_id);
+    }
+    
     for (li = control_class_info_list; li; li = li->next)
     {
 	ControlClassInfo *info = li->data;
@@ -356,6 +412,7 @@ control_class_list_cleanup (void)
 
     g_slist_free (control_class_info_list);
     control_class_info_list = NULL;
+    unloading--;
 }
 
 void 
