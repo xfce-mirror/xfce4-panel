@@ -341,7 +341,7 @@ gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi)
     if(disable_user_config)
         return FALSE;
 
-    if(ev->button != 3 || 
+    if(ev->button == 3 || 
 	    (ev->button == 1 && (ev->state & GDK_SHIFT_MASK)))
     {
 	edit_menu_item_dialog(mi);
