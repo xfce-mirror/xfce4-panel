@@ -1040,7 +1040,6 @@ create_panel_window (Panel * p)
     window = GTK_WINDOW (w);
 
     gtk_window_set_title (window, _("Xfce Panel"));
-    gtk_window_set_gravity (window, GDK_GRAVITY_STATIC);
     gtk_window_stick (window);
     netk_gtk_window_set_dock_type (window);
 
