@@ -51,7 +51,7 @@ hide_popup (PanelPopup * pp)
 
     if (!pp)
 	return;
-    
+
     xfce_togglebutton_set_active (XFCE_TOGGLEBUTTON (pp->button), FALSE);
 
     gtk_widget_hide (pp->window);
@@ -123,23 +123,16 @@ position_popup (PanelPopup * pp)
 
     if (vertical)
     {
-	/* left if buttons left ... */
-	if (at == GTK_ARROW_LEFT && x - req.width >= 0)
+	/* left if buttons left or if menu doesn't fit right, but does fit left */
+	if ((at == GTK_ARROW_LEFT || x + req.width + alloc1.width > w) && x - req.width >= 0)
 	{
 	    x = x - req.width;
-	    y = y + alloc1.height - req.height;
-	}
-	/* .. or if menu doesn't fit right, but does fit left */
-	else if (x + req.width + alloc1.width > w && x - req.width >= 0)
-	{
-	    x = x - req.width;
-	    y = y + alloc1.height - req.height;
 	}
 	else			/* right */
 	{
 	    x = x + alloc1.width;
-	    y = y + alloc1.height - req.height;
 	}
+	y = y + alloc1.height - req.height;
 
 	/* check if it fits upwards */
 	if (y < 0)
@@ -147,23 +140,16 @@ position_popup (PanelPopup * pp)
     }
     else
     {
-	/* down if buttons on bottom ... */
-	if (at == GTK_ARROW_DOWN && y + alloc1.height + req.height <= h)
+	/* down if buttons on bottom or up doesn't fit and down doe */
+	if ((at == GTK_ARROW_DOWN || y - req.height < 0) && y + alloc1.height + req.height <= h)
 	{
-	    x = x + alloc1.width / 2 - req.width / 2;
-	    y = y + alloc1.height;
-	}
-	/* ... or up doesn't fit and down does */
-	else if (y - req.height < 0 && y + alloc1.height + req.height <= h)
-	{
-	    x = x + alloc1.width / 2 - req.width / 2;
 	    y = y + alloc1.height;
 	}
 	else
 	{
-	    x = x + alloc1.width / 2 - req.width / 2;
 	    y = y - req.height;
 	}
+	x = x + alloc1.width / 2 - req.width / 2;
 
 	/* check if it fits to the left and the right */
 	if (x < 0)
@@ -251,8 +237,7 @@ popup_key_pressed (GtkWidget * window, GdkEventKey * ev, PanelPopup * pp)
 	hide_popup (pp);
 	return TRUE;
     }
-    else
-	return FALSE;
+    return FALSE;
 }
 
 /*  Popup menus 

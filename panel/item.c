@@ -187,10 +187,8 @@ menu_item_press (GtkButton * b, GdkEventButton * ev, Item * mi)
 
 	return TRUE;
     }
-    else
-    {
-	return FALSE;
-    }
+
+    return FALSE;
 }
 
 /*  Panel item callbacks
@@ -538,9 +536,7 @@ create_menu_item (Item * mi)
 void
 menu_item_set_popup_size (Item * mi, int size)
 {
-    int s = popup_icon_size[size];
-
-    gtk_widget_set_size_request (mi->button, -1, s + border_width);
+    gtk_widget_set_size_request (mi->button, -1, popup_icon_size[size] + border_width);
 }
 
 /*  Panel item
