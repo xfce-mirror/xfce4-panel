@@ -22,7 +22,7 @@
         <Item>
           <Caption>Nautilus</Caption>
           <Command term="0" sn="0">nautilus --no-desktop</Command>
-          <Tooltip>Trình quản lí tập tin Nautlius</Tooltip>
+          <Tooltip>Trình quản lí tập tin Nautilus</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
@@ -35,7 +35,7 @@
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">mozilla -splash</Command>
+        <Command term="0" sn="0">mozilla</Command>
         <Tooltip>Trình duyệt web Mozilla</Tooltip>
         <Icon id="7"/>
       </Control>
@@ -44,7 +44,7 @@
       <Popup/>
       <Control id="-1" filename="libmailcheck.so">
         <Mailcheck interval="30">
-          <Command term="0" sn="0">mozilla -mail -splash</Command>
+          <Command term="0" sn="0">mozilla -mail</Command>
         </Mailcheck>
       </Control>
     </Group>
@@ -72,7 +72,7 @@
       <Popup>
         <Item>
           <Caption>Trình bảo vệ màn hình</Caption>
-          <Command term="0" sn="0">xscreensaver-demo</Command>
+          <Command term="0" sn="1">xscreensaver-demo</Command>
           <Tooltip>Trình bảo vệ màn hình</Tooltip>
           <Icon id="3"/>
         </Item>
@@ -87,7 +87,7 @@
       <Popup>
         <Item>
           <Caption>Trình quản lí in</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
+          <Command term="0" sn="1">xfprint-manager</Command>
           <Tooltip>Trình quản lí in</Tooltip>
           <Icon id="9"/>
         </Item>
