@@ -270,8 +270,7 @@ xfce_write_options (McsManager * sm)
 	}
     }
 
-    rcfile = g_build_filename (g_get_home_dir (), ".xfce4", "settings",
-			       "xfce-settings.xml", NULL);
+    rcfile = xfce_get_userdir ("settings", "xfce-settings.xml", NULL);
 
     dir = g_path_get_dirname (rcfile);
 
