@@ -1,3 +1,263 @@
+2004-01-07 08:41  jasper
+
+	* panel/controls.c: O dear. Module unloading. It actually appears
+	  to work too.
+
+2004-01-06 23:36  jasper
+
+	* panel/controls.c: Free new control on failure
+
+2004-01-06 23:23  jasper
+
+	* .indent.pro, panel/controls.c, panel/controls.h, panel/groups.c,
+	  panel/groups.h, panel/panel.c, plugins/clock/clock.c: Internal
+	  changes. First step towards module unloading. Add uniqueness (see
+	  clock for an example). Add title to item right-click menu.
+
+2004-01-03 21:23  olivier
+
+	* po/: pl.gmo, pl.po: Update Polish translation from Daniel Mróz
+	  <beorn@alpha.pl>
+
+2004-01-02 12:07  jasper
+
+	* plugins/clock/clock.c: improved call to xfdesktop
+
+2004-01-01 15:28  edscott
+
+	* aclocal.m4, config.h.in, configure, configure.ac,
+	  plugins/mailcheck/mailcheck.c: added missing directive for
+	  correct compilation in FreeBSD 5.1
+
+2003-12-30 09:33  jasper
+
+	* plugins/clock/clock.c: Prevent starting multiple instances of
+	  xfcalendar
+
+2003-12-29 16:18  olivier
+
+	* po/: no.gmo, no.po: Fix missing CHARSET in potfiles
+
+2003-12-29 11:56  jasper
+
+	* configure, configure.ac, po/no.gmo, po/no.po, po/tr.gmo,
+	  po/tr.po: Update Norwegian and Turkish translations
+
+2003-12-27 20:46  jasper
+
+	* po/: pl.gmo, pl.po: Update Polish translations
+
+2003-12-17 17:29  jasper
+
+	* plugins/clock/clock.c: Use %d in strftime instead of GNU
+	  extension %-d. For now ...
+
+2003-12-16 09:26  jasper
+
+	* Makefile.am, Makefile.in, xfce4rc.az: Add Azerbaijani
+	  translations
+
+2003-12-15 23:15  olivier
+
+	* plugins/mailcheck/mailcheck.c: Fix crash in workspace MCS plugin
+	  Include a patch from Patrick Bores <p@trickbores.com> that allows
+	  pop3 email checking from mailcheck panel plugin (use
+	  pop3://username:password@host for the mailbox) Small tweaks to
+	  default xfwm4 and gtk themes
+
+2003-12-15 21:56  jasper
+
+	* configure, configure.ac, po/az.gmo, po/az.po: Add Azerbaijani
+	  translations
+
+2003-12-06 19:28  jasper
+
+	* panel/: groups.c, panel.c: Fix positioning when screen size is
+	  different than in previous session
+
+2003-12-06 17:05  jasper
+
+	* panel/popup.c: Fix panel crash when removing an item with a
+	  detached menu
+
+2003-12-06 16:26  jasper
+
+	* AUTHORS, panel/controls.c, panel/controls.h,
+	  panel/controls_dialog.c, panel/groups.c, panel/groups.h,
+	  panel/icons.c, panel/item.c, panel/item_dialog.c,
+	  panel/item_dialog.h, panel/main.c, panel/panel.c, panel/panel.h,
+	  panel/popup.c, panel/xfce_support.c, plugins/clock/clock.c,
+	  po/ca.gmo, po/ca.po, po/cs.gmo, po/cs.po, po/de.gmo, po/de.po,
+	  po/es.gmo, po/es.po, po/es_MX.gmo, po/es_MX.po, po/fi.gmo,
+	  po/fi.po, po/fr.gmo, po/fr.po, po/hi.gmo, po/hi.po, po/hu.gmo,
+	  po/hu.po, po/it.gmo, po/it.po, po/ja.gmo, po/ja.po, po/ko.gmo,
+	  po/ko.po, po/lt.gmo, po/lt.po, po/ms.gmo, po/ms.po, po/nl.gmo,
+	  po/nl.po, po/pl.gmo, po/pl.po, po/pt_PT.gmo, po/pt_PT.po,
+	  po/ru.gmo, po/ru.po, po/sv.gmo, po/sv.po, po/ta.gmo, po/ta.po,
+	  po/tr.gmo, po/tr.po, po/vi.gmo, po/vi.po, po/xfce4-panel.pot,
+	  po/zh_CN.gmo, po/zh_CN.po, po/zh_TW.gmo, po/zh_TW.po: Further
+	  cleanup: only create popup widgets when actually used. Start
+	  xfcalendar from the clock or send it a client message if already
+	  running
+
+2003-12-04 09:26  jasper
+
+	* plugins/clock/clock.c: convert strftime date to utf 8. Patch by
+	  Oliver M. Bolzer.
+
+2003-12-03 15:37  jasper
+
+	* panel/: groups.c, groups.h, main.c, panel.c, popup.c, popup.h:
+	  General cleanup, positioning improvements, update arrow direction
+	  after move.
+
+2003-12-01 21:38  jasper
+
+	* panel/panel.c: Typo
+
+2003-12-01 12:53  jasper
+
+	* Makefile.am, Makefile.in, configure, xfce4rc.vi: Update
+	  vietnamese translations
+
+2003-12-01 12:41  jasper
+
+	* panel/xfce_support.c: Fix bug with XFCE_DISABLE_USER_CONFIG
+
+2003-12-01 12:04  jasper
+
+	* xfce4rc.ca: Update catalan translations (2)
+
+2003-11-22 03:35  edscott
+
+	* panel/item_dialog.c: add the xffm_theme_maker button (if
+	  available) to icon selection process.
+
+2003-11-20 22:31  benny
+
+	* configure.ac, po/it.gmo, po/it.po: Added italian translation,
+	  thanks to Eduard Roccatello.
+
+2003-11-17 16:10  jasper
+
+	* panel/xfce_support.c: Check for cmd != NULL when executing
+	  commands
+
+2003-11-16 22:49  olivier
+
+	* po/de.gmo: Fix 64bit/endianess problem
+
+2003-11-16 09:45  jasper
+
+	* po/: cs.gmo, cs.po: Update Czech translations
+
+2003-11-14 18:00  moe
+
+	* po/de.po: Minor updates
+
+2003-11-09 20:22  jasper
+
+	* configure, configure.ac, po/cs.gmo, po/cs.po: Add Check
+	  translations
+
+2003-11-08 17:16  dannym
+
+	* po/: fr.gmo, fr.po: Fix for a typo in "Lock" translation spotted
+	  by Lefungus (lefungus@altern.org)
+
+2003-11-08 12:23  jasper
+
+	* plugins/clock/clock.c: Use strftime to set clock tooltip
+
+2003-11-08 10:28  jasper
+
+	* doc/fr/images/: menuitem-properties.png,
+	  menuitems-properties.png: correct wrong image name
+
+2003-11-07 19:42  jasper
+
+	* doc/fr/: xfce4-panel.html, xfce4-panel.xml: Update French
+	  documentation
+
+2003-11-07 13:49  jasper
+
+	* configure, configure.ac, doc/Makefile.am, doc/Makefile.in,
+	  doc/C/xfce4-panel.html, doc/fr/Makefile.am, doc/fr/Makefile.in,
+	  doc/fr/xfce4-panel.html, doc/fr/xfce4-panel.xml,
+	  doc/fr/images/Makefile.am, doc/fr/images/Makefile.in,
+	  doc/fr/images/clock-properties.png,
+	  doc/fr/images/default_panel.png, doc/fr/images/handle-popup.png,
+	  doc/fr/images/item-popup.png,
+	  doc/fr/images/launcher-properties.png,
+	  doc/fr/images/mailcheck-properties.png,
+	  doc/fr/images/menuitems-properties.png,
+	  doc/fr/images/nooptions-properties.png,
+	  doc/fr/images/panel-settings.png,
+	  doc/fr/images/systembuttons-properties.png, po/xfce4-panel.pot:
+	  Add French documentation. Rather large commit.
+
+2003-11-05 17:21  jasper
+
+	* panel/main.c: Make SIGUSR2 quit with confirmation
+
+2003-11-04 14:25  jasper
+
+	* panel/: main.c, panel.c: Add Restart item to handle menu
+
+2003-11-03 19:06  jasper
+
+	* configure, configure.ac, po/uk.gmo, po/uk.po: Add Ukranian
+	  translations
+
+2003-10-25 16:37  jasper
+
+	* panel/: main.c, panel.c: Add xrandr awareness
+
+2003-10-25 00:20  jasper
+
+	* configure, configure.ac, po/vi.gmo, po/vi.po:
+	  Add vietnamese translations by Lam Vinh Nien <nienvl@yahoo.ca>.
+
+2003-10-22 08:39  jasper
+
+	* panel/controls.c: Only create controls menu once
+
+2003-10-21 13:21  jasper
+
+	* panel/main.c: Don't forget to save on SIGHUP (X exit).
+
+2003-10-21 08:09  jasper
+
+	* panel/main.c: Use x selection to run only one panel instance
+
+2003-10-17 17:37  jasper
+
+	* NEWS, configure, configure.ac, icons/xfce4-panel-icon.h,
+	  panel/main.c, po/sv.gmo, po/sv.po, po/xfce4-panel.pot: Add/update
+	  swedish translations
+
+2003-10-15 13:20  jasper
+
+	* po/: ko.gmo, ko.po: Update korean translations
+
+2003-10-14 08:21  jasper
+
+	* NEWS, TODO, configure, configure.ac, panel/panel.c: Sizing
+	  improvements: no autohide when not on screen edge (Eduard
+	  Rocatelli), always keep inside the screen, keep centered or to
+	  the edge when size changes, e.g when changing settings or
+	  adding/rmoving items. All xinerama aware.
+
+2003-10-14 00:06  olivier
+
+	* xfce4rc, xfce4rc.ca, xfce4rc.hu, xfce4rc.nl: Sync with my local
+	  tree
+
+2003-10-13 20:51  jasper
+
+	* ChangeLog: Update ChangeLog's after syncing with SF. Everything
+	  should now be up-to-date.
+
 2003-10-13 18:21  jasper
 
 	* plugins/pager/pager.c:

@@ -19,12 +19,16 @@
 
 /*  Groups
  *  ------
- *  The panel consist of a collection of panel groups. A panel group defines 
- *  several containers to pack widgets into and to allow easy rearragement of 
- *  these widgets.
- *  
- *  Two widgets are packed into a panel group: a panel control and a popup 
- *  button. 
+ *  The panel consist of a collection of panel groups. 
+ *
+ *  A PanelGroup contains two items: a panel control and a popup button. 
+ *
+ *  groups_* functions are for general houskeeping and to perform actions on
+ *  all panel groups.
+ *
+ *  panel_group_* funtions act on a single PanelGroup and handle things like
+ *  creation destruction and layout.
+ *
 */
 
 #ifdef HAVE_CONFIG_H
@@ -37,6 +41,9 @@
 #include "xfce.h"
 #include "groups.h"
 #include "popup.h"
+
+/* defined in controls.c */
+extern void control_class_unref (ControlClass *cclass);
 
 static GSList *group_list = NULL;
 static GtkArrowType popup_arrow_type = GTK_ARROW_UP;
@@ -51,8 +58,8 @@ struct _PanelGroup
 {
     int index;
 
-    GtkWidget *base;		/* container to pack into panel */
-    GtkWidget *box;		/* hbox or vbox */
+    GtkWidget *base;	/* container to pack into panel */
+    GtkWidget *box;
 
     PanelPopup *popup;
     Control *control;
@@ -100,20 +107,16 @@ panel_group_arrange (PanelGroup * pg)
 PanelGroup *
 create_panel_group (int index)
 {
-    PanelGroup *pg = g_new (PanelGroup, 1);
+    PanelGroup *pg = g_new0 (PanelGroup, 1);
 
     pg->index = index;
 
-    pg->base = gtk_alignment_new (0, 0, 1, 1);
+    pg->base = gtk_alignment_new (0.5, 0.5, 1, 1);
     gtk_widget_show (pg->base);
 
     /* protect against destruction when unpacking */
     g_object_ref (pg->base);
     gtk_object_sink (GTK_OBJECT (pg->base));
-
-    pg->box = NULL;
-    pg->popup = NULL;
-    pg->control = NULL;
 
     return pg;
 }
@@ -140,10 +143,12 @@ panel_group_unpack (PanelGroup * pg)
     gtk_container_remove (GTK_CONTAINER (pg->base->parent), pg->base);
 }
 
+
 /*  Groups
  *  ------
  *  Mainly housekeeping for the global list of panel groups
 */
+
 void
 groups_init (GtkBox * box)
 {
@@ -171,6 +176,39 @@ groups_cleanup (void)
     g_slist_free (group_list);
     group_list = NULL;
 }
+
+void
+groups_pack (GtkBox * box)
+{
+    GSList *li;
+    PanelGroup *group;
+
+    groupbox = box;
+
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
+
+	panel_group_pack (group, box);
+	panel_group_arrange (group);
+    }
+}
+
+void
+groups_unpack (void)
+{
+    GSList *li;
+    PanelGroup *group;
+
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
+
+	panel_group_unpack (group);
+    }
+}
+
+/* configuration */
 
 void
 old_groups_set_from_xml (int side, xmlNodePtr node)
@@ -318,25 +356,68 @@ groups_write_xml (xmlNodePtr root)
     }
 }
 
+/* settings */
+
 void
-groups_pack (GtkBox * box)
+groups_set_orientation (int orientation)
 {
     GSList *li;
     PanelGroup *group;
-
-    groupbox = box;
 
     for (li = group_list; li; li = li->next)
     {
 	group = li->data;
 
-	panel_group_pack (group, box);
+	control_set_orientation (group->control, orientation);
+    }
+}
+
+void
+groups_set_layer (int layer)
+{
+    GSList *li;
+    PanelGroup *group;
+
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
+
+	panel_popup_set_layer (group->popup, layer);
+    }
+}
+
+void
+groups_set_size (int size)
+{
+    GSList *li;
+    PanelGroup *group;
+
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
+
+	panel_popup_set_size (group->popup, size);
+	control_set_size (group->control, size);
+    }
+}
+
+void
+groups_set_popup_position (int position)
+{
+    GSList *li;
+    PanelGroup *group;
+
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
+
 	panel_group_arrange (group);
+	panel_popup_set_popup_position (group->popup, position);
     }
 }
 
 void
-groups_unpack (void)
+groups_set_theme (const char *theme)
 {
     GSList *li;
     PanelGroup *group;
@@ -345,26 +426,36 @@ groups_unpack (void)
     {
 	group = li->data;
 
-	panel_group_unpack (group);
+	panel_popup_set_theme (group->popup, theme);
+	control_set_theme (group->control, theme);
     }
 }
 
+/* arrow direction */
+
 void
-groups_register_control (Control * control)
+groups_set_arrow_direction (GtkArrowType type)
 {
+    GSList *li;
     PanelGroup *group;
 
-    group = g_slist_nth (group_list, control->index)->data;
+    popup_arrow_type = type;
 
-    group->control = control;
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
 
-    if (!control->with_popup)
-	groups_show_popup (control->index, FALSE);
-    else
-	groups_show_popup (control->index, TRUE);
-
-    panel_group_arrange (group);
+	panel_popup_set_arrow_type (group->popup, type);
+    }
 }
+
+GtkArrowType
+groups_get_arrow_direction (void)
+{
+    return popup_arrow_type;
+}
+
+/* find or act on specific groups */
 
 static PanelGroup *
 groups_get_nth (int n)
@@ -486,102 +577,6 @@ groups_show_popup (int index, gboolean show)
     }
 }
 
-/* settings */
-void
-groups_set_orientation (int orientation)
-{
-    GSList *li;
-    PanelGroup *group;
-
-    for (li = group_list; li; li = li->next)
-    {
-	group = li->data;
-
-	control_set_orientation (group->control, orientation);
-    }
-}
-
-void
-groups_set_layer (int layer)
-{
-    GSList *li;
-    PanelGroup *group;
-
-    for (li = group_list; li; li = li->next)
-    {
-	group = li->data;
-
-	panel_popup_set_layer (group->popup, layer);
-    }
-}
-
-void
-groups_set_size (int size)
-{
-    GSList *li;
-    PanelGroup *group;
-
-    for (li = group_list; li; li = li->next)
-    {
-	group = li->data;
-
-	panel_popup_set_size (group->popup, size);
-	control_set_size (group->control, size);
-    }
-}
-
-void
-groups_set_popup_position (int position)
-{
-    GSList *li;
-    PanelGroup *group;
-
-    for (li = group_list; li; li = li->next)
-    {
-	group = li->data;
-
-	panel_group_arrange (group);
-	panel_popup_set_popup_position (group->popup, position);
-    }
-}
-
-void
-groups_set_theme (const char *theme)
-{
-    GSList *li;
-    PanelGroup *group;
-
-    for (li = group_list; li; li = li->next)
-    {
-	group = li->data;
-
-	panel_popup_set_theme (group->popup, theme);
-	control_set_theme (group->control, theme);
-    }
-}
-
-void
-groups_set_arrow_direction (GtkArrowType type)
-{
-    GSList *li;
-    PanelGroup *group;
-
-    popup_arrow_type = type;
-
-    for (li = group_list; li; li = li->next)
-    {
-	group = li->data;
-
-	panel_popup_set_arrow_type (group->popup, type);
-    }
-}
-
-GtkArrowType
-groups_get_arrow_direction (void)
-{
-    return popup_arrow_type;
-}
-
 void
 groups_add_control (Control *control, int index)
 {
@@ -612,4 +607,5 @@ groups_add_control (Control *control, int index)
 
     settings.num_groups++;
 }
+
 

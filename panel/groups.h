@@ -22,23 +22,17 @@
 
 #include <panel/global.h>
 
+/* general */
 void groups_init (GtkBox * box);
-void groups_pack (GtkBox * box);
-void groups_unpack (void);
 void groups_cleanup (void);
 
+void groups_pack (GtkBox * box);
+void groups_unpack (void);
+
+/* configuration */
 void old_groups_set_from_xml (int side, xmlNodePtr node);
 void groups_set_from_xml (xmlNodePtr node);
 void groups_write_xml (xmlNodePtr root);
-
-void groups_register_control (Control * control);
-Control *groups_get_control (int index);
-PanelPopup *groups_get_popup (int index);
-
-void groups_add_control (Control *control, int index);
-void groups_move (int from, int to);
-void groups_remove (int index);
-void groups_show_popup (int index, gboolean show);
 
 /* settings */
 void groups_set_orientation (int orientation);
@@ -48,7 +42,17 @@ void groups_set_size (int size);
 void groups_set_popup_position (int position);
 void groups_set_theme (const char *theme);
 
+/* arrow direction */
 void groups_set_arrow_direction (GtkArrowType type);
 GtkArrowType groups_get_arrow_direction (void);
+
+/* find or act on specific group */
+Control *groups_get_control (int index);
+PanelPopup *groups_get_popup (int index);
+
+void groups_move (int from, int to);
+void groups_remove (int index);
+void groups_show_popup (int index, gboolean show);
+void groups_add_control (Control *control, int index);
 
 #endif /* __XFCE_GROUPS_H__ */

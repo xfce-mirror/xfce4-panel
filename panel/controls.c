@@ -1,6 +1,6 @@
 /*  controls.c
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2003 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -60,7 +60,7 @@
 
 #define API_VERSION 5
 
-#define UNLOAD_TIMEOUT 10000 /* 10 secs */
+#define UNLOAD_TIMEOUT 30000 /* 30 secs */
 
 typedef struct _ControlClassInfo ControlClassInfo;
 
@@ -86,6 +86,10 @@ static ControlClassInfo *info_to_add = NULL;
 
 static int unload_id = 0;
 static int unloading = 0;
+
+/* not static, must be available in panel.c for handle menu */
+Control *popup_control = NULL;
+
 
 /*  ControlClass and ControlClassInfo 
  *  ---------------------------------
@@ -128,6 +132,8 @@ control_class_info_free (ControlClassInfo * cci)
     g_free (cci->path);
     g_free (cci->name);
     g_free (cci->caption);
+    if (cci->icon)
+	g_object_unref (cci->icon);
     g_free (cci);
 }
 
@@ -149,6 +155,8 @@ static ControlClassInfo *
 get_control_class_info (ControlClass *cc)
 {
     ControlClassInfo *info;
+    
+    g_return_val_if_fail (cc->name != NULL, NULL);
     
     if (info_to_add && 
 	g_ascii_strcasecmp (info_to_add->class->name, cc->name) == 0)
@@ -364,6 +372,8 @@ unload_modules (void)
 	if (info->class->id == PLUGIN && info->refcount == 0 && 
 	    info->class->gmodule != NULL)
 	{
+	    DBG ("info: unload %s", info->caption);
+
 	    g_module_close (info->class->gmodule);
 	    info->class->gmodule = NULL;
 	}
@@ -422,7 +432,8 @@ control_class_set_unique (ControlClass *cclass, gboolean unique)
 
     info = get_control_class_info (cclass);
 
-    info->unique = unique;
+    if (info)
+	info->unique = unique;
 }
 
 void 
@@ -432,7 +443,16 @@ control_class_set_icon (ControlClass *cclass, GdkPixbuf *icon)
 
     info = get_control_class_info (cclass);
 
-    info->icon = g_object_ref (icon);
+    if (info)
+    {
+	if (info->icon)
+	    g_object_unref (info->icon);
+
+	if (icon)
+	    info->icon = g_object_ref (icon);
+	else
+	    info->icon = NULL;
+    }
 }
 
 void 
@@ -454,8 +474,6 @@ control_class_unref (ControlClass *cclass)
 */
 
 /* right-click menu */
-
-static Control *popup_control = NULL;
 
 static void
 edit_control (void)
@@ -520,6 +538,8 @@ add_control (GtkWidget * w, ControlClassInfo *info)
     else
     {
 	control_free (control);
+
+	xfce_err (_("Could not create panel item \"%s\"."), info->caption);
     }
 
     popup_control = NULL;

@@ -47,6 +47,15 @@
  * default config is set in the settings manager plugin */
 #define DEFAULT_THEME "Curve"
 
+/* typedefs */
+typedef struct _Panel Panel;
+typedef struct _ControlClass ControlClass;
+typedef struct _Control Control;
+typedef struct _PanelPopup PanelPopup;
+typedef struct _Item Item;
+typedef struct _Settings Settings;
+typedef struct _Position Position;
+
 /* panel sides / popup orientation */
 enum
 { LEFT, RIGHT, TOP, BOTTOM };
@@ -79,21 +88,12 @@ extern int popup_icon_size[PANEL_SIZES];
 /* types for panel controls */
 enum
 {
-    ICON = -2,			/* special case: the traditional laucher item */
-    PLUGIN = -1,		/* external plugin */
-    NUM_BUILTINS		/* no more builtins! yay! */
+    ICON = -2,		/* special case: the traditional laucher item */
+    PLUGIN = -1,	/* external plugin */
+    NUM_BUILTINS	/* no more builtins! yay! */
 };
 
-/* typedefs */
-typedef struct _Panel Panel;
-typedef struct _ControlClass ControlClass;
-typedef struct _Control Control;
-typedef struct _PanelPopup PanelPopup;
-typedef struct _Item Item;
-
 /* global settings */
-typedef struct _Settings Settings;
-typedef struct _Position Position;
 
 struct _Position
 {
@@ -114,6 +114,8 @@ struct _Settings
 
     int num_groups;
 };
+
+/* global variables */
 
 /* defined in settings.c */
 extern gboolean disable_user_config;

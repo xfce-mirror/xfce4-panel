@@ -485,6 +485,10 @@ handle_set_size (GtkWidget * mh, int size)
 	gtk_widget_set_size_request (mh, h, w);
 }
 
+/* defined in controls.c, must be set to NULL to indicate the menu
+ * is not being popped up from a panel item */
+extern Control *popup_control;
+
 static gboolean
 handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
 {
@@ -495,6 +499,7 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
     {
 	GtkMenu *menu;
 
+	popup_control = NULL;
 	menu = get_handle_menu ();
 
 	gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button,

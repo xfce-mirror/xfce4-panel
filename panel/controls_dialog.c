@@ -21,11 +21,10 @@
  *  --------------------
  *  The dialog consists of three parts:
  *  - Spinbox with the position on the panel;
- *  - Notebook containing the options that can be changed. This is provided
+ *  - Container for the options that can be changed. The options are provided
  *    by the panel controls. Changes must auto-apply if possible. 
- *  - Buttons: 'Revert' and 'Done'
+ *  - Buttons: 'Remove' and 'Close'
  *    
- *  Important data are kept as global variables for easy access.
 */
 
 #ifdef HAVE_CONFIG_H
@@ -40,332 +39,173 @@
 #include "popup.h"
 #include "settings.h"
 
-static GtkWidget *controlsdialog = NULL;	/* keep track of it for 
-						   signal handling */
+#define BORDER 6
 
-static GSList *control_list = NULL;	/* list of available controls */
+static GtkWidget *cdialog = NULL;
 
-static GtkWidget *container;	/* container on the panel to hold the 
-				   panel control */
-static Control *old_control = NULL;	/* original panel control */
-static Control *current_control = NULL;	/* current control == old_control, 
-					   if type is not changed */
-static GtkWidget *pos_spin;
-static GtkWidget *notebook;
-static GtkWidget *done;
-
-static int backup_index;
-
-/* control control list */
-static void
-create_control_list (Control * control)
-{
-    control_list = g_slist_append (control_list, control);
-#if 0
-    int i;
-    GSList *li, *class_list;
-
-    class_list = get_control_class_list ();
-
-    /* first the original control */
-    control_list = g_slist_append (control_list, control);
-
-    /* then one for each other control class */
-    for (i = 0, li = class_list; li; li = li->next, i++)
-    {
-	ControlClass *cc = li->data;
-	Control *new_control;
-
-	if (cc == control->cclass)
-	    continue;
-
-	new_control = control_new (control->index);
-	new_control->cclass = cc;
-
-	if (!cc->create_control (new_control))
-	{
-	    new_control->cclass = NULL;
-	    control_free (new_control);
-	    continue;
-	}
-
-	control_attach_callbacks (new_control);
-	control_set_settings (new_control);
-
-	control_list = g_slist_append (control_list, new_control);
-    }
-#endif
-}
+/* container for control options */
 
 static void
-clear_control_list (void)
+add_container (GtkBox * box, GtkWidget *close, Control *control)
 {
-    GSList *li;
+    GtkWidget *align;
 
-    /* first remove the current control */
-    control_list = g_slist_remove (control_list, current_control);
+    align = gtk_alignment_new (0,0,0,0);
+    gtk_widget_show (align);
+    gtk_container_set_border_width (GTK_CONTAINER (align), BORDER);
+    gtk_box_pack_start (box, align, TRUE, TRUE, 0);
 
-    for (li = control_list; li; li = li->next)
-    {
-	Control *control = li->data;
-
-	control_free (control);
-    }
-
-    g_slist_free (control_list);
-    control_list = NULL;
+    control_create_options (control, GTK_CONTAINER (align), close);
 }
 
-#if 0				/* NEVER USED */
-/*  Type options menu
- *  -----------------
-*/
-static void
-type_option_changed (GtkOptionMenu * om)
-{
-    int n = gtk_option_menu_get_history (om);
-    GSList *li;
-    Control *control = NULL;
-
-    li = g_slist_nth (control_list, n);
-    control = li->data;
-
-    if (control == current_control)
-	return;
-
-    control_unpack (current_control);
-    control_pack (control, GTK_BOX (container));
-
-    control->index = current_control->index;
-    groups_register_control (control);
-
-    container = control->base->parent;
-    current_control = control;
-
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), n);
-
-    gtk_widget_set_sensitive (revert, TRUE);
-}
-#endif
-
-#if 0				/* NEVER USED */
-static GtkWidget *
-create_type_option_menu (void)
-{
-    GtkWidget *om;
-    GtkWidget *menu, *mi;
-    GSList *li;
-    Control *control;
-
-    om = gtk_option_menu_new ();
-    menu = gtk_menu_new ();
-
-    for (li = control_list; li; li = li->next)
-    {
-	control = li->data;
-
-	mi = gtk_menu_item_new_with_label (control->cclass->caption);
-	gtk_widget_show (mi);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    }
-
-    gtk_option_menu_set_menu (GTK_OPTION_MENU (om), menu);
-
-    g_signal_connect (om, "changed", G_CALLBACK (type_option_changed), NULL);
-
-    return om;
-}
-#endif
+/* position */
 
 static void
-add_notebook (GtkBox * box)
-{
-    GSList *li;
-    GtkWidget *frame;
-
-    notebook = gtk_notebook_new ();
-    gtk_widget_show (notebook);
-
-    gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-    gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
-
-    /* add page for every control in control_list */
-    for (li = control_list; li; li = li->next)
-    {
-	Control *control = li->data;
-
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-	gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
-	gtk_widget_show (frame);
-	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), frame, NULL);
-
-	control_create_options (control, GTK_CONTAINER (frame), done);
-    }
-
-    gtk_box_pack_start (box, notebook, TRUE, TRUE, 0);
-}
-
-/*  The main dialog
- *  ---------------
-*/
-static void
-pos_changed (GtkSpinButton * spin)
+pos_changed (GtkSpinButton * spin, Control *control)
 {
     int n;
 
     n = gtk_spin_button_get_value_as_int (spin) - 1;
 
-    if (n != current_control->index)
+    if (n != control->index)
     {
-	groups_move (current_control->index, n);
-	current_control->index = n;
+	groups_move (control->index, n);
+	control->index = n;
     }
 }
 
-enum
-{ RESPONSE_DONE, RESPONSE_REMOVE };
-
-void
-controls_dialog (Control * control)
+static void
+add_position_option (GtkBox *box, Control *control)
 {
-    GtkWidget *dlg;
-    GtkWidget **dlg_ptr;
-    GtkWidget *button;
-    GtkWidget *vbox;
-    GtkWidget *hbox;
-    GtkWidget *label;
-    GtkWidget *separator;
-    GtkWidget *main_vbox;
-    int response;
-    GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-    old_control = current_control = control;
-    backup_index = control->index;
-
-    /* Keep track of the panel container */
-    container = control->base->parent;
-
-    controlsdialog = dlg = gtk_dialog_new ();
-
-    dlg_ptr = &controlsdialog;
-    g_object_add_weak_pointer (G_OBJECT (dlg), (gpointer *) dlg_ptr);
-
-    gtk_window_set_title (GTK_WINDOW (dlg), _("Change item"));
-
-    button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
-    gtk_widget_show (button);
-    gtk_dialog_add_action_widget (GTK_DIALOG (dlg), button, RESPONSE_REMOVE);
-    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-    gtk_button_box_set_child_secondary (GTK_BUTTON_BOX
-					(GTK_DIALOG (dlg)->action_area),
-					button, TRUE);
-
-    done = button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
-    gtk_widget_show (button);
-    gtk_dialog_add_action_widget (GTK_DIALOG (dlg), button, RESPONSE_DONE);
-    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-
-/*    gtk_widget_show(GTK_DIALOG(dlg)->action_area);
-    gtk_button_box_set_layout (GTK_BUTTON_BOX (GTK_DIALOG(dlg)->action_area),
-                               GTK_BUTTONBOX_END);
-*/
-
-    main_vbox = GTK_DIALOG (dlg)->vbox;
-
-    vbox = gtk_vbox_new (FALSE, 7);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), 8);
-    gtk_widget_show (vbox);
-    gtk_box_pack_start (GTK_BOX (main_vbox), vbox, FALSE, FALSE, 0);
-
-    /* find all available controls */
-    create_control_list (control);
-
-    /* position */
-    hbox = gtk_hbox_new (FALSE, 8);
+    GtkWidget *pos_spin, *hbox, *label;
+    
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
     gtk_widget_show (hbox);
+    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
 
     label = gtk_label_new (_("Position:"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0.1, 0.5);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
-    gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     if (settings.num_groups > 1)
     {
 	pos_spin = gtk_spin_button_new_with_range (1, settings.num_groups, 1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin),
-				   backup_index + 1);
+	
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin), 
+				   control->index + 1);
 
-	g_signal_connect (pos_spin, "value-changed", G_CALLBACK (pos_changed),
-			  NULL);
+	g_signal_connect (pos_spin, "value-changed", 
+			  G_CALLBACK (pos_changed), control);
     }
     else
     {
-	char postext[2];
-
-	sprintf (postext, "%d", 1);
-	pos_spin = gtk_label_new (postext);
+	pos_spin = gtk_label_new ("1");
     }
 
     gtk_widget_show (pos_spin);
     gtk_box_pack_start (GTK_BOX (hbox), pos_spin, FALSE, FALSE, 0);
+}
 
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+/* main dialog */
 
-    /* separator */
-    separator = gtk_hseparator_new ();
-    gtk_widget_show (separator);
-    gtk_box_pack_start (GTK_BOX (main_vbox), separator, FALSE, FALSE, 0);
+static void add_spacer (GtkBox *box, int size)
+{
+    GtkWidget *align;
 
-    /* notebook */
-    add_notebook (GTK_BOX (main_vbox));
+    align = gtk_alignment_new (0,0,0,0);
+    gtk_widget_set_size_request (align, size, size);
+    gtk_widget_show (align);
+    gtk_box_pack_start (box, align, FALSE, FALSE, 0);
+}
 
-    /* run dialog until 'Done' */
-    while (1)
+void
+controls_dialog (Control * control)
+{
+    int response;
+    GtkWidget *button, *close, *header, **ptr;
+    GtkDialog *dlg;
+
+    if (cdialog)
     {
-	response = GTK_RESPONSE_NONE;
+	gtk_window_present (GTK_WINDOW (cdialog));
+	return;
+    }
 
-	gtk_widget_grab_default (done);
-	gtk_widget_grab_focus (done);
+    cdialog = gtk_dialog_new ();
+    dlg = GTK_DIALOG (cdialog);
 
-	gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-	response = gtk_dialog_run (GTK_DIALOG (dlg));
+    /* keep gcc3 happy -- warns about this: (gpointer *)&cdialog; */
+    ptr = &cdialog;
+    g_object_add_weak_pointer (G_OBJECT (cdialog), (gpointer *)ptr);
 
-	if (response == RESPONSE_REMOVE)
+    gtk_dialog_set_has_separator (dlg, FALSE);
+
+    gtk_window_set_title (GTK_WINDOW (dlg), _("Change item"));
+
+    button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
+    gtk_widget_show (button);
+    gtk_dialog_add_action_widget (dlg, button, GTK_RESPONSE_CANCEL);
+    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+    gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (dlg->action_area),
+					button, TRUE);
+
+    close = button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
+    gtk_widget_show (button);
+    gtk_dialog_add_action_widget (dlg, button, GTK_RESPONSE_OK);
+    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+
+    header = create_header (NULL, control->cclass->caption);
+    gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child), 
+	    			    BORDER);
+    gtk_widget_set_size_request (header, -1, 32);
+    gtk_widget_show (header);
+    gtk_box_pack_start (GTK_BOX (dlg->vbox), header, FALSE, TRUE, 0);
+
+    add_spacer (GTK_BOX (dlg->vbox), BORDER);
+    
+    /* position */
+    add_position_option (GTK_BOX (dlg->vbox), control);
+
+    add_spacer (GTK_BOX (dlg->vbox), BORDER);
+
+    /* container */
+    add_container (GTK_BOX (dlg->vbox), close, control);
+
+    add_spacer (GTK_BOX (dlg->vbox), BORDER);
+
+    /* run dialog until 'Close' or 'Remove' */
+retry:
+    response = GTK_RESPONSE_NONE;
+
+    gtk_widget_grab_default (close);
+    gtk_widget_grab_focus (close);
+
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    response = gtk_dialog_run (dlg);
+
+    if (response == GTK_RESPONSE_CANCEL)
+    {
+	PanelPopup *pp;
+
+	gtk_widget_hide (cdialog);
+
+	pp = groups_get_popup (control->index);
+
+	if (!(control->with_popup) || !pp || pp->items == NULL ||
+	    confirm (_("Removing the item will also remove its popup menu."),
+		     GTK_STOCK_REMOVE, NULL))
 	{
-	    PanelPopup *popup;
-
-	    gtk_widget_hide (dlg);
-
-	    popup = groups_get_popup (control->index);
-
-	    if (!(control->with_popup) || !popup || popup->items == NULL ||
-		confirm (_
-			 ("Removing an item will also remove its popup menu.\n\n"
-			  "Do you want to remove the item?"),
-			 GTK_STOCK_REMOVE, NULL))
-	    {
-		break;
-	    }
-
-	    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-	    gtk_widget_show (dlg);
+	    groups_remove (control->index);
 	}
 	else
 	{
-	    break;
+	    goto retry;
 	}
     }
 
-    gtk_widget_destroy (dlg);
-
-    clear_control_list ();
-
-    if (response == RESPONSE_REMOVE)
-    {
-	groups_remove (current_control->index);
-    }
+    gtk_widget_destroy (cdialog);
 
     write_panel_config ();
 }
@@ -373,6 +213,8 @@ controls_dialog (Control * control)
 void
 destroy_controls_dialog (void)
 {
-    if (controlsdialog)
-	gtk_dialog_response (GTK_DIALOG (controlsdialog), GTK_RESPONSE_OK);
+    if (!cdialog)
+	return;
+
+    gtk_dialog_response (GTK_DIALOG (cdialog), GTK_RESPONSE_OK);
 }

@@ -17,6 +17,16 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+/*  Item
+ *  ----
+ *  An Item is a traditional launcher item for the panel and is also used for
+ *  (subpanel) menu items.
+ *
+ *  For the panel, the ControlClass interface is implemented, menu items have
+ *  there own interface.
+ *
+*/
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
@@ -93,6 +103,17 @@ item_click_cb (GtkButton * b, Item * item)
     hide_current_popup_menu ();
 
     exec_cmd (item->command, item->in_terminal, item->use_sn);
+}
+
+static gboolean
+item_middle_click (GtkWidget *w, GdkEventButton *ev, Item *item)
+{
+    if (ev->button == 2)
+    {
+	/* TODO: run command with data from clipboard */
+    }
+
+    return FALSE;
 }
 
 /*  Menu item callbacks
@@ -493,6 +514,9 @@ create_menu_item (Item * mi)
     g_signal_connect (mi->button, "button-press-event",
 		      G_CALLBACK (menu_item_press), mi);
 
+    g_signal_connect (mi->button, "button-press-event",
+		      G_CALLBACK (item_middle_click), mi);
+
     g_signal_connect (mi->button, "clicked", G_CALLBACK (item_click_cb), mi);
 
     dnd_set_drag_dest (mi->button);
@@ -528,8 +552,12 @@ panel_item_new (void)
     item_apply_config (pi);
 
     g_signal_connect (pi->button, "clicked", G_CALLBACK (item_click_cb), pi);
+    
     g_signal_connect (pi->button, "button-press-event",
 		      G_CALLBACK (panel_item_press), pi);
+    
+    g_signal_connect (pi->button, "button-press-event",
+		      G_CALLBACK (item_middle_click), pi);
 
     dnd_set_drag_dest (pi->button);
     g_signal_connect (pi->button, "drag-data-received",
