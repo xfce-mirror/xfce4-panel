@@ -97,8 +97,6 @@ add_control_dialog (Panel * panel, int position)
 
     the_dialog = dlg;
 
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-
     vbox = GTK_DIALOG (dlg)->vbox;
 
     add_header (GTK_BOX (vbox));
@@ -118,10 +116,10 @@ add_control_dialog (Panel * panel, int position)
 			      G_CALLBACK (dialog_destroyed), list);
 
     g_signal_connect (dlg, "response", G_CALLBACK (dialog_response), list);
+
+    gtk_widget_show_now (dlg);
     
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    
-    gtk_widget_show (dlg);
+    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
 }
 
 static void 

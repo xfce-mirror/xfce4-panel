@@ -24,7 +24,6 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
-#include "icons/xfce4-panel-icon.h"
 
 #ifdef HAVE_GDK_PIXBUF_NEW_FROM_STREAM
 #define gdk_pixbuf_new_from_inline gdk_pixbuf_new_from_stream
@@ -184,7 +183,7 @@ get_pixbuf_from_file (const char *path)
 GdkPixbuf *
 get_panel_pixbuf (void)
 {
-    return gdk_pixbuf_new_from_inline (-1, panel_icon_data, FALSE, NULL);
+    return xfce_themed_icon_load ("xfce4-panel", 48);
 }
 
 GdkPixbuf *
