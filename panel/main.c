@@ -63,7 +63,7 @@ static void
 save_yourself (gpointer data, int save_style, gboolean shutdown,
                int interact_style, gboolean fast)
 {
-    hidden = panel.hidden;
+    gboolean hidden = panel.hidden;
     
     if (panel.toplevel)
     {
