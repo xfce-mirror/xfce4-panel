@@ -42,10 +42,6 @@
 enum
 { LEFT, RIGHT, TOP, BOTTOM };
 
-/* panel styles */
-enum
-{ OLD_STYLE, NEW_STYLE };
-
 /* panel orientation */
 enum
 { HORIZONTAL, VERTICAL };
@@ -60,14 +56,12 @@ enum
  *  size: option menu
  *  panel orientation: option menu
  *  popup position: option menu
- *  style: option menu (should be radio buttons according to GNOME HIG)
  *  icon theme: option menu
  *  position: option menu + button (centering only)
 */
 static GtkWidget *orientation_menu;
 static GtkWidget *size_menu;
 static GtkWidget *popup_position_menu;
-static GtkWidget *style_menu;
 static GtkWidget *theme_menu;
 
 static GtkWidget *layer_menu;
@@ -122,7 +116,6 @@ static int bu_orientation;
 static int bu_layer;
 static int bu_size;
 static int bu_popup_position;
-static int bu_style;
 static char *bu_theme;
 
 static void xfce_create_backup(void)
@@ -140,9 +133,6 @@ static void xfce_create_backup(void)
 
     setting = &xfce_options[XFCE_POPUPPOSITION];
     bu_popup_position = setting->data.v_int;
-
-    setting = &xfce_options[XFCE_STYLE];
-    bu_style = setting->data.v_int;
 
     setting = &xfce_options[XFCE_THEME];
     bu_theme = g_strdup(setting->data.v_string);
@@ -166,7 +156,6 @@ static void xfce_restore_backup(void)
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu),
     				bu_popup_position);
 
-    gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), bu_style);
     gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
                                 backup_theme_index);
 
@@ -228,56 +217,6 @@ static void add_size_menu(GtkWidget * option_menu, int size)
                      NULL);
 }
 
-/* style */
-static void style_changed(GtkOptionMenu * menu)
-{
-    int n = gtk_option_menu_get_history(menu);
-    McsSetting *setting = &xfce_options[XFCE_STYLE];
-
-    if(n == setting->data.v_int)
-        return;
-
-    setting->data.v_int = n;
-    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
-    mcs_manager_notify(mcs_manager, CHANNEL);
-
-    gtk_widget_set_sensitive(revert, TRUE);
-}
-
-static void add_style_menu(GtkWidget * option_menu, int style)
-{
-    GtkWidget *menu = gtk_menu_new();
-    GtkWidget *item;
-    int n, pos;
-
-    item = gtk_menu_item_new_with_label(_("Traditional"));
-    gtk_widget_show(item);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-    item = gtk_menu_item_new_with_label(_("Modern"));
-    gtk_widget_show(item);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-    gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), style);
-
-    g_signal_connect(option_menu, "changed", G_CALLBACK(style_changed), NULL);
-
-    n = xfce_options[XFCE_ORIENTATION].data.v_int;
-    pos = xfce_options[XFCE_POPUPPOSITION].data.v_int;
-    
-    if ((n == HORIZONTAL && (pos == LEFT || pos == RIGHT)) ||
-        (n == VERTICAL && (pos == TOP || pos == BOTTOM)))
-    {
-        gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), NEW_STYLE);
-        gtk_widget_set_sensitive(option_menu, FALSE);
-    }
-    else
-    {
-        gtk_widget_set_sensitive(option_menu, TRUE);
-    }
-}
-
 /* Panel Orientation */
 static void orientation_changed(GtkOptionMenu * menu)
 {
@@ -310,17 +249,6 @@ static void orientation_changed(GtkOptionMenu * menu)
     
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu), pos);
 	
-    if ((n == HORIZONTAL && (pos == LEFT || pos == RIGHT)) ||
-        (n == VERTICAL && (pos == TOP || pos == BOTTOM)))
-    {
-        gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
-        gtk_widget_set_sensitive(style_menu, FALSE);
-    }
-    else
-    {
-        gtk_widget_set_sensitive(style_menu, TRUE);
-    }
-    
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -555,22 +483,6 @@ static void add_style_box(GtkBox * box, GtkSizeGroup *sg)
     add_popup_position_menu(popup_position_menu, 
 	    		    xfce_options[XFCE_POPUPPOSITION].data.v_int);
     gtk_box_pack_start(GTK_BOX(hbox), popup_position_menu, TRUE, TRUE, 0);
-
-    /* style */
-    hbox = gtk_hbox_new(FALSE, BORDER);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Panel style:"));
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    style_menu = gtk_option_menu_new();
-    gtk_widget_show(style_menu);
-    add_style_menu(style_menu, xfce_options[XFCE_STYLE].data.v_int);
-    gtk_box_pack_start(GTK_BOX(hbox), style_menu, TRUE, TRUE, 0);
 
     /* icon theme */
     hbox = gtk_hbox_new(FALSE, BORDER);

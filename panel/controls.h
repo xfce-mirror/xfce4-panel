@@ -52,7 +52,6 @@ struct _ControlClass
     /* global preferences */
     void (*set_orientation) (Control * control, int orientation);
     void (*set_size) (Control * control, int size);
-    void (*set_style) (Control * control, int style);
     void (*set_theme) (Control * control, const char *theme);
 };
 
@@ -98,7 +97,6 @@ void control_set_settings(Control * control);
 
 void control_set_orientation(Control * control, int orientation);
 void control_set_size(Control * control, int size);
-void control_set_style(Control * control, int style);
 void control_set_theme(Control * control, const char *theme);
 
 #endif /* __XFCE_CONTROLS_H__ */

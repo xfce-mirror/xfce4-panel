@@ -32,8 +32,6 @@ void handle_unpack(Handle *mh, GtkContainer *container);
 
 void handle_set_size(Handle *mh, int size);
 
-void handle_set_style(Handle *mh, int style);
-
 void handle_set_popup_position(Handle *mh);
 
 #endif /* __XFCE_HANDLE_H__ */

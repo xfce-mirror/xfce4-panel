@@ -44,7 +44,6 @@ void groups_set_layer(int layer);
 
 void groups_set_size(int size);
 void groups_set_popup_position(int position);
-void groups_set_style(int style);
 void groups_set_theme(const char *theme);
 
 void groups_set_num_groups(int n);

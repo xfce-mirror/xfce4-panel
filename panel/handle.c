@@ -206,16 +206,6 @@ void handle_set_size(Handle * mh, int size)
 /*    gtk_widget_set_size_request(mh->button, h, h);*/
 }
 
-void handle_set_style(Handle * mh, int style)
-{
-#if 0
-    if(style == OLD_STYLE)
-        gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NORMAL);
-    else
-        gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
-#endif
-}
-
 void handle_set_popup_position(Handle *mh)
 {
     handle_arrange(mh);

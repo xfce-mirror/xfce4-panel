@@ -344,6 +344,19 @@ static void systembuttons_write_config(Control * control, xmlNodePtr node)
 }
 
 /* global prefs */
+static void systembuttons_set_size(Control *control, int size)
+{
+    int s1, s2;
+
+    s1 = icon_size[size] + border_width;
+    s2 = s1 / 2 + border_width;
+    
+    if (settings.orientation == VERTICAL)
+	gtk_widget_set_size_request(control->base, s1, s2);
+    else
+	gtk_widget_set_size_request(control->base, s2, s1);
+}
+
 static void systembuttons_set_orientation(Control *control, int orientation)
 {
    t_systembuttons *sb = control->data;
@@ -548,7 +561,7 @@ gboolean create_systembuttons_control(Control * control)
     control->data = (gpointer) sb;
     control->with_popup = FALSE;
 
-    control_set_size(control, settings.size);
+    systembuttons_set_size(control, settings.size);
 
     return TRUE;
 }
@@ -571,7 +584,7 @@ G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
     cc->write_config = systembuttons_write_config;
     cc->attach_callback = systembuttons_attach_callback;
 
-    /* no set size => xfce sets size base container */
+    cc->set_size = systembuttons_set_size;
     cc->set_orientation = systembuttons_set_orientation;
     cc->set_theme = systembuttons_set_theme;
     cc->add_options = systembuttons_add_options;

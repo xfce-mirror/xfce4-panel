@@ -72,16 +72,12 @@ typedef struct
     int ws_created_id;
     int ws_destroyed_id;
     
-    gboolean show_minibuttons;
-    gboolean show_names;
     gboolean graphical;
     
     GtkWidget *frame;
     GtkWidget *box;
     
     GtkWidget *separators[2];
-    GtkWidget *minitables[2];
-    GtkWidget *minibuttons[4];
 
     /* traditional switcher */
     CdePager *cde_pager;
@@ -198,41 +194,14 @@ static void screen_button_update_size(ScreenButton * sb)
             h = (top_height[MEDIUM] + icon_size[MEDIUM]) / 2 - 5;
 	    break;
     }
-h = -1;
+
+    h = -1;
     gtk_widget_set_size_request(sb->button, w, h);
 
     screen_button_update_label(sb, gtk_label_get_text(GTK_LABEL(sb->label)));
 }
 
 /* creation and destruction */
-#if 0
-static void screen_button_modify_style(ScreenButton *sb)
-{
-    GtkStyle *style;
-    GtkWidget *w;
-
-    w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_widget_realize(w);
-    
-    style = gtk_widget_get_style(w);
-
-    gtk_widget_modify_bg(sb->button, GTK_STATE_PRELIGHT, 
-	    &(style->base[GTK_STATE_SELECTED]));
-    gtk_widget_modify_fg(sb->label, GTK_STATE_PRELIGHT, 
-	    &(style->fg[GTK_STATE_SELECTED]));
-    
-    gtk_widget_modify_bg(sb->button, GTK_STATE_ACTIVE, 
-	    &(style->base[GTK_STATE_SELECTED]));
-    gtk_widget_modify_fg(sb->label, GTK_STATE_ACTIVE, 
-	    &(style->fg[GTK_STATE_SELECTED]));
-
-    gtk_widget_modify_bg(sb->button, GTK_STATE_NORMAL, 
-	    &(style->black));
-    
-    gtk_widget_destroy(w);
-}
-#endif
-
 static void ws_name_changed(NetkWorkspace *ws, ScreenButton *sb)
 {
     const char *name = netk_workspace_get_name(ws);
@@ -542,132 +511,6 @@ GtkWidget *create_netk_pager(NetkScreen *screen)
     return pager;
 }
 
-/*  Mini buttons
- *  ------------
-*/
-static void mini_lock_cb(void)
-{
-    hide_current_popup_menu();
-
-    exec_cmd("xflock", FALSE);
-}
-
-extern void info_panel_dialog(void);
-
-static void mini_info_cb(void)
-{
-    hide_current_popup_menu();
-
-    info_panel_dialog();
-}
-
-static void mini_palet_cb(void)
-{
-    hide_current_popup_menu();
-
-    if(disable_user_config)
-    {
-        show_info(_("Access to the configuration system has been disabled.\n\n"
-                    "Ask your system administrator for more information"));
-        return;
-    }
-
-    mcs_dialog(NULL);
-}
-
-static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
-{
-    hide_current_popup_menu();
-
-    quit(FALSE);
-}
-
-static void create_minibuttons(t_switcher *sw)
-{
-    GdkPixbuf *pb[4];
-    GtkWidget *button;
-    int i;
-    GList *li;
-
-    pb[0] = get_minibutton_pixbuf(MINILOCK_ICON);
-    pb[1] = get_minibutton_pixbuf(MINIINFO_ICON);
-    pb[2] = get_minibutton_pixbuf(MINIPALET_ICON);
-    pb[3] = get_minibutton_pixbuf(MINIPOWER_ICON);
-
-    for(i = 0; i < 4; i++)
-    {
-	int size = minibutton_size[settings.size];
-
-        sw->minibuttons[i] = button = xfce_iconbutton_new_from_pixbuf(pb[i]);
-        gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
-        gtk_widget_show(button);
-	gtk_widget_set_size_request(button,size,size);
-
-	g_object_unref(pb[i]);
-
-	for (li = sw->callbacks; li; li = li->next)
-	{
-	    SignalCallback *sc = li->data;
-
-	    g_signal_connect(sw->minibuttons[i], sc->signal,
-		    	     sc->callback, sc->data);
-	}
-    }
-    
-    /* fixed tooltips, since the user can't change the icon anyway */
-    add_tooltip(sw->minibuttons[0], _("Lock the screen"));
-    add_tooltip(sw->minibuttons[1], _("Info"));
-    add_tooltip(sw->minibuttons[2], _("Setup"));
-    add_tooltip(sw->minibuttons[3], _("Exit"));
-
-    /* signals */
-    g_signal_connect(sw->minibuttons[0], "clicked", 
-		     G_CALLBACK(mini_lock_cb), NULL);
-
-    g_signal_connect(sw->minibuttons[1], "clicked", 
-		     G_CALLBACK(mini_info_cb), NULL);
-
-    g_signal_connect(sw->minibuttons[2], "clicked",
-                     G_CALLBACK(mini_palet_cb), NULL);
-
-    g_signal_connect(sw->minibuttons[3], "clicked",
-                     G_CALLBACK(mini_power_cb), NULL);
-}
-
-void add_minibuttons(t_switcher *sw)
-{
-    create_minibuttons(sw); 
-    
-    gtk_table_attach(GTK_TABLE(sw->minitables[0]), 
-		     sw->minibuttons[0],
-		     0, 1, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0); 
-    
-    gtk_table_attach(GTK_TABLE(sw->minitables[1]), 
-		     sw->minibuttons[2], 
-		     0, 1, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
-    
-    /* find if we want the minibuttons horizontally or vertically */
-    if((settings.orientation == VERTICAL && settings.size > SMALL) ||
-       (settings.orientation == HORIZONTAL && settings.size <= SMALL))
-    {
-	gtk_table_attach(GTK_TABLE(sw->minitables[0]),
-			 sw->minibuttons[1],
-			 1, 2, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
-	gtk_table_attach(GTK_TABLE(sw->minitables[1]),
-			 sw->minibuttons[3],
-			 1, 2, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
-    }
-    else
-    {
-	gtk_table_attach(GTK_TABLE(sw->minitables[0]),
-			 sw->minibuttons[1],
-			 0, 1, 1, 2, GTK_EXPAND, GTK_EXPAND, 0, 0);
-	gtk_table_attach(GTK_TABLE(sw->minitables[1]),
-			 sw->minibuttons[3],
-			 0, 1, 1, 2, GTK_EXPAND, GTK_EXPAND, 0, 0);
-    }
-}
-
 /*  Desktop switcher
  *  ----------------
 */
@@ -678,22 +521,11 @@ static void arrange_switcher(t_switcher *sw);
 /* settings */
 static void switcher_set_size(Control *control, int size)
 {
-    int i;
     t_switcher *sw;
-    int s;
 
     gtk_widget_set_size_request(control->base, -1, -1);
 
     sw = control->data;
-
-    s = minibutton_size[size];
-    
-    for (i = 0; i < 4; i++)
-    {
-	gtk_widget_destroy(sw->minibuttons[i]);
-    }
-
-    add_minibuttons(sw);
 
     if (sw->graphical)
     {
@@ -705,51 +537,6 @@ static void switcher_set_size(Control *control, int size)
     }
 }
 
-static void switcher_set_style(Control *control, int style)
-{
-    t_switcher *sw;
-
-    sw = control->data;
-
-    if (style == OLD_STYLE)
-    {
-	gtk_widget_hide(sw->separators[0]);
-	gtk_widget_hide(sw->separators[1]);
-
-	gtk_frame_set_shadow_type(GTK_FRAME(sw->frame), GTK_SHADOW_OUT);
-    }
-    else
-    {
-	gtk_widget_show(sw->separators[0]);
-	gtk_widget_show(sw->separators[1]);
-
- 	gtk_frame_set_shadow_type(GTK_FRAME(sw->frame), GTK_SHADOW_NONE);
-    }
-}
-
-static void switcher_set_theme(Control *control, const char *theme)
-{
-    GdkPixbuf *pb [4];
-    t_switcher *sw;
-    int i;
-
-    sw = control->data;
-
-    pb[0] = get_minibutton_pixbuf(MINILOCK_ICON);
-    pb[1] = get_minibutton_pixbuf(MINIINFO_ICON);
-    pb[2] = get_minibutton_pixbuf(MINIPALET_ICON);
-    pb[3] = get_minibutton_pixbuf(MINIPOWER_ICON);
-
-    for (i = 0; i < 4; i++)
-    {
- 	xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(sw->minibuttons[i]),
-				   pb[i]);
- 	g_object_unref(pb[i]);
-    }
-    
-     switcher_set_size(control, settings.size);
-}
-
 static void switcher_set_orientation(Control *control, int orientation)
 {
     t_switcher *sw;
@@ -757,7 +544,6 @@ static void switcher_set_orientation(Control *control, int orientation)
     sw = control->data;
 
     arrange_switcher(sw);
-    switcher_set_style(control, settings.style);
     switcher_set_size(control, settings.size);
 }
 
@@ -776,22 +562,6 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
     sw = control->data;
     
     /* properties */
-    value = xmlGetProp(node, "showminibuttons");
-
-    if (value)
-    {
-	i = atoi(value);
-	g_free(value);
-
-	if (i == 0)
-	{
-	    sw->show_minibuttons = FALSE;
-
-	    gtk_widget_hide(sw->minitables[0]);
-	    gtk_widget_hide(sw->minitables[1]);
-	}
-    }
-
     value = xmlGetProp(node, "graphical");
 
     if (value)
@@ -810,13 +580,13 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 	    cde_pager_free(sw->cde_pager);
 	    sw->cde_pager = NULL;
 
-	    align = gtk_alignment_new(0.5, 0.5, 0, 0);
+	    align = gtk_alignment_new(0, 0, 1, 1);
 	    gtk_widget_show(align);
 	    gtk_container_add(GTK_CONTAINER(align), sw->netk_pager);
 	    
 	    gtk_box_pack_start(GTK_BOX(sw->box), align, 
 		    	       TRUE, TRUE, 2);
-	    gtk_box_reorder_child(GTK_BOX(sw->box), align, 2);
+	    gtk_box_reorder_child(GTK_BOX(sw->box), align, 1);
 	}
     }
 }
@@ -828,9 +598,6 @@ static void switcher_write_config(Control *control, xmlNodePtr node)
 
     sw = control->data;
     
-    snprintf(prop, 3, "%d", sw->show_minibuttons ? 1 : 0);
-    xmlSetProp(node, "showminibuttons", prop);
-    
     snprintf(prop, 3, "%d", sw->graphical ? 1 : 0);
     xmlSetProp(node, "graphical", prop);
 }
@@ -840,7 +607,6 @@ static void switcher_attach_callback(Control *control, const char *signal,
 {
     SignalCallback *sc;
     t_switcher *sw;
-    int i;
 
     sw = control->data;
 
@@ -854,11 +620,6 @@ static void switcher_attach_callback(Control *control, const char *signal,
     else
     {
 	cde_pager_attach_callback(sw->cde_pager, sc);
-    }
-
-    for (i = 0; i < 4; i++)
-    {
-	g_signal_connect(sw->minibuttons[i], signal, callback, data);
     }
 }
 
@@ -899,32 +660,17 @@ static void arrange_switcher(t_switcher *sw)
 	sw->cde_pager = create_cde_pager(sw->screen, sw->screen_names);
     }
 
-    sw->minitables[0] = gtk_table_new(2,2,FALSE);
-    sw->minitables[1] = gtk_table_new(2,2,FALSE);
-    add_minibuttons(sw);
-
     /* show the widgets */
     gtk_widget_show(sw->box);
 
-    if (sw->show_minibuttons)
-    {
-	gtk_widget_show(sw->minitables[0]);
-	gtk_widget_show(sw->minitables[1]);
-    }
-    
-    if (settings.style == NEW_STYLE)
-    {
-	gtk_widget_show(sw->separators[0]);
-	gtk_widget_show(sw->separators[1]);
-    }
+    gtk_widget_show(sw->separators[0]);
+    gtk_widget_show(sw->separators[1]);
 
     /* packing the widgets */
     gtk_container_add(GTK_CONTAINER(sw->frame),sw->box);
     
     gtk_box_pack_start(GTK_BOX(sw->box), sw->separators[0], TRUE, TRUE, 2);
 
-    gtk_box_pack_start(GTK_BOX(sw->box), sw->minitables[0], TRUE, TRUE, 0);
-    
     if (sw->graphical)
     {
 	GtkWidget *align;
@@ -941,8 +687,6 @@ static void arrange_switcher(t_switcher *sw)
 	gtk_box_pack_start(GTK_BOX(sw->box), sw->cde_pager->box, 
 			   TRUE, TRUE, 2);
     }
-    
-    gtk_box_pack_start(GTK_BOX(sw->box), sw->minitables[1], TRUE, TRUE, 0);
     
     gtk_box_pack_start(GTK_BOX(sw->box), sw->separators[1], TRUE, TRUE, 2);
 
@@ -1003,11 +747,9 @@ t_switcher *switcher_new(NetkScreen *screen)
     sw->screen_names = 
 	g_ptr_array_sized_new(netk_screen_get_workspace_count(screen));
 
-    sw->show_minibuttons = TRUE;
-    sw->show_names = TRUE;
     sw->graphical = FALSE;
     
-    sw->frame = gtk_frame_new(NULL);
+    sw->frame = gtk_alignment_new(0.5,0.5,0,0);
     gtk_widget_show(sw->frame);
 
     /* this creates all widgets */
@@ -1057,15 +799,11 @@ typedef struct
 {
     t_switcher *sw;
     
-    gboolean backup_show_minibuttons;
-    gboolean backup_show_names;
     gboolean backup_graphical;
 
     GtkWidget *dialog;
     GtkWidget *revert;
 
-    GtkWidget *mini_checkbutton;
-    GtkWidget *names_checkbutton;
     GtkWidget *graphical_checkbutton;
 }
 t_switcher_dialog;
@@ -1074,48 +812,6 @@ static void switcher_dialog_done(GtkWidget *b, t_switcher_dialog *sd)
 {
     g_free(sd);
 }
-
-static void show_minibuttons_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
-{
-    t_switcher *sw = sd->sw;
-    gboolean show;
-
-    show = gtk_toggle_button_get_active(tb);
-    sw->show_minibuttons = show;
-    
-    if(show)
-    {
-        gtk_widget_show(sw->minitables[0]);
-        gtk_widget_show(sw->minitables[1]);
-    }
-    else
-    {
-        gtk_widget_hide(sw->minitables[0]);
-        gtk_widget_hide(sw->minitables[1]);
-    }
-
-    gtk_widget_set_sensitive(sd->revert, TRUE);
-}
-
-#if 0
-static void show_names_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
-{
-    t_switcher *sw = sd->sw;
-    gboolean show;
-
-    show = gtk_toggle_button_get_active(tb);
-    sw->show_names = show;
-    
-    if(show)
-    {
-    }
-    else
-    {
-    }
-
-    gtk_widget_set_sensitive(sd->revert, TRUE);
-}
-#endif
 
 static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 {
@@ -1153,7 +849,7 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 	
 	gtk_box_pack_start(GTK_BOX(sw->box), align, 
 			   TRUE, TRUE, 2);
-	gtk_box_reorder_child(GTK_BOX(sw->box), align, 2);
+	gtk_box_reorder_child(GTK_BOX(sw->box), align, 1);
     }
     else
     {
@@ -1161,7 +857,7 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 	
 	gtk_box_pack_start(GTK_BOX(sw->box), sw->cde_pager->box, 
 			   TRUE, TRUE, 2);
-	gtk_box_reorder_child(GTK_BOX(sw->box), sw->cde_pager->box, 2);
+	gtk_box_reorder_child(GTK_BOX(sw->box), sw->cde_pager->box, 1);
     }
 
     for (li = sw->callbacks; li; li = li->next)
@@ -1184,12 +880,6 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 
 static void switcher_revert(GtkWidget *b, t_switcher_dialog *sd)
 {
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->mini_checkbutton), 
-	    			 sd->backup_show_minibuttons);
-/*    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->names_checkbutton), 
-	    			 sd->backup_show_names);
-*/
-
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->graphical_checkbutton), 
 	    			 sd->backup_graphical);
 }  
@@ -1205,8 +895,6 @@ static void switcher_add_options(Control *control, GtkContainer *container,
     
     sd->sw = control->data;
 
-    sd->backup_show_minibuttons = sd->sw->show_minibuttons;
-    sd->backup_show_names = sd->sw->show_names;
     sd->backup_graphical = sd->sw->graphical;
     
     sd->dialog = gtk_widget_get_toplevel(revert);
@@ -1214,32 +902,12 @@ static void switcher_add_options(Control *control, GtkContainer *container,
     
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
     
-    vbox = gtk_vbox_new(FALSE, 4);
+    vbox = gtk_vbox_new(FALSE, 6);
     gtk_widget_show(vbox);
     gtk_container_add(container, vbox);
 
-    /* show minibuttons ? */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
-
-    label = gtk_label_new(_("Show minibuttons"));
-    gtk_widget_show(label);
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_size_group_add_widget(sg,label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    sd->mini_checkbutton = gtk_check_button_new();
-    gtk_widget_show(sd->mini_checkbutton);
-    gtk_box_pack_start(GTK_BOX(hbox), sd->mini_checkbutton, FALSE, FALSE, 0);
-    
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->mini_checkbutton), 
-	    			 sd->sw->show_minibuttons);
-    g_signal_connect(sd->mini_checkbutton, "toggled", 
-	    	     G_CALLBACK(show_minibuttons_changed), sd);
-
     /* show graphical pager ?*/ 
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, 6);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
@@ -1282,7 +950,6 @@ gboolean create_switcher_control(Control *control)
     control->data = sw;
     control->with_popup = FALSE;
     
-    switcher_set_style(control, settings.style);
     switcher_set_size(control, settings.size);
 
     return TRUE;
@@ -1310,8 +977,6 @@ G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 
     cc->set_orientation = switcher_set_orientation;
     cc->set_size = switcher_set_size;
-    cc->set_style = switcher_set_style;
-    cc->set_theme = switcher_set_theme;
 }
 
 

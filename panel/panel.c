@@ -274,18 +274,6 @@ void panel_set_popup_position(int position)
     panel_set_size(settings.size);
 }
 
-void panel_set_style(int style)
-{
-    settings.style = style;
-    
-    if (!panel_created)
-	return;
-    
-    groups_set_style(style);
-    handle_set_style(handles[LEFT], style);
-    handle_set_style(handles[RIGHT], style);
-}
-
 void panel_set_theme(const char *theme)
 {
     g_free(settings.theme);
@@ -314,7 +302,6 @@ void panel_set_settings(void)
     panel_set_size(settings.size);
     panel_set_popup_position(settings.popup_position);
 
-    panel_set_style(settings.style);
     panel_set_theme(settings.theme);
 
     panel_set_num_groups(settings.num_groups);
@@ -409,7 +396,6 @@ static void init_settings(void)
 
     settings.size = SMALL;
     settings.popup_position = RIGHT;
-    settings.style = NEW_STYLE;
 
     settings.theme = NULL;
 
@@ -458,13 +444,6 @@ void panel_parse_xml(xmlNodePtr node)
         settings.popup_position = atoi(value);
 	g_free(value);
     }
-
-    value = xmlGetProp(node, (const xmlChar *)"style");
-
-    if(value)
-        settings.style = atoi(value);
-
-    g_free(value);
 
     value = xmlGetProp(node, (const xmlChar *)"icontheme");
 
@@ -550,32 +529,12 @@ void panel_parse_xml(xmlNodePtr node)
     }
 
     /* check the values */
-    if(settings.style < OLD_STYLE || settings.style > NEW_STYLE)
-        settings.style = NEW_STYLE;
     if(settings.orientation < HORIZONTAL || settings.orientation > VERTICAL)
         settings.orientation = HORIZONTAL;
     if(settings.size < TINY || settings.size > LARGE)
         settings.size = SMALL;
     if(settings.num_groups < 1 || settings.num_groups > 2*NBGROUPS)
         settings.num_groups = 10;
-
-    /* some things just look awful with old style */
-    if(settings.orientation == HORIZONTAL)
-    {
-	if (settings.popup_position == LEFT || 
-	    settings.popup_position == RIGHT)
-	{
-	    settings.style = NEW_STYLE;
-	}
-    }
-    else
-    {
-	if (settings.popup_position == TOP || 
-	    settings.popup_position == BOTTOM)
-	{
-	    settings.style = NEW_STYLE;
-	}
-    }
 }
 
 void panel_write_xml(xmlNodePtr root)
@@ -597,9 +556,6 @@ void panel_write_xml(xmlNodePtr root)
 
     snprintf(value, 2, "%d", settings.popup_position);
     xmlSetProp(node, "popupposition", value);
-
-    snprintf(value, 2, "%d", settings.style);
-    xmlSetProp(node, "style", value);
 
     if(settings.theme)
         xmlSetProp(node, "icontheme", settings.theme);

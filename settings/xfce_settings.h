@@ -28,7 +28,6 @@ enum {
     XFCE_LAYER,
     XFCE_SIZE,
     XFCE_POPUPPOSITION,
-    XFCE_STYLE,
     XFCE_THEME,
     XFCE_POSITION,
     XFCE_OPTIONS
@@ -49,7 +48,6 @@ static char *xfce_settings_names [] = {
     "layer",
     "size",
     "popupposition",
-    "style",
     "theme",
     "position"
 };

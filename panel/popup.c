@@ -323,8 +323,7 @@ PanelPopup *create_panel_popup(void)
     g_object_ref(pp->button);
     gtk_widget_set_name(pp->button, "xfce_popup_button");
 
-    if (settings.style == NEW_STYLE)
-	xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NONE);
+    xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NONE);
 
     g_signal_connect(pp->button, "toggled", G_CALLBACK(toggle_popup), pp);
 
@@ -381,7 +380,6 @@ PanelPopup *create_panel_popup(void)
     gtk_widget_show_all(pp->frame);
 
     panel_popup_set_size(pp, settings.size);
-    panel_popup_set_style(pp, settings.style);
 
     return pp;
 }
@@ -510,23 +508,6 @@ void panel_popup_set_size(PanelPopup * pp, int size)
         menu_item_set_popup_size(mi, size);
     }
 
-}
-
-void panel_popup_set_style(PanelPopup * pp, int style)
-{
-    if(style == OLD_STYLE)
-        xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NORMAL);
-    else
-        xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NONE);
-/*
-    menu_item_set_style(pp->addtomenu_item, style);
-    
-    for(li = pp->items; li && li->data; li = li->next)
-    {
-        MenuItem *mi = (MenuItem *) li->data;
-        menu_item_set_style(mi, style);
-    }
-*/
 }
 
 void panel_popup_set_popup_position(PanelPopup * pp, int position)

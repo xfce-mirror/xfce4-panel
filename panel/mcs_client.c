@@ -91,7 +91,6 @@ static gpointer settings_callbacks [] = {
     panel_set_layer,
     panel_set_size,
     panel_set_popup_position,
-    panel_set_style,
     panel_set_theme,
 /*    panel_set_num_groups,*/
     mcs_position_setting

@@ -64,10 +64,6 @@
 enum
 { LEFT, RIGHT, TOP, BOTTOM };
 
-/* panel styles */
-enum
-{ OLD_STYLE, NEW_STYLE };
-
 /* panel orientation */
 enum
 { HORIZONTAL, VERTICAL };
@@ -134,7 +130,6 @@ struct _Settings
     int size;
     int popup_position;
 
-    int style;
     char *theme;
 
     int num_groups;

@@ -75,7 +75,6 @@ void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi);
 void panel_popup_set_size(PanelPopup * pp, int size);
 void panel_popup_set_popup_position(PanelPopup * pp, int position);
 void panel_popup_set_layer(PanelPopup * pp, int layer);
-void panel_popup_set_style(PanelPopup * pp, int size);
 void panel_popup_set_theme(PanelPopup * pp, const char *theme);
 
 void hide_current_popup_menu(void);

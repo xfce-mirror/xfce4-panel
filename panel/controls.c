@@ -583,7 +583,6 @@ void control_set_settings(Control * control)
 {
     control_set_orientation(control, settings.orientation);
     control_set_size(control, settings.size);
-    control_set_style(control, settings.style);
     control_set_theme(control, settings.theme);
 }
 
@@ -606,14 +605,6 @@ void control_set_size(Control * control, int size)
 	int s = icon_size[size] + border_width;
 	gtk_widget_set_size_request(control->base, s, s);
     }
-}
-
-void control_set_style(Control * control, int style)
-{
-    ControlClass *cc = control->cclass;
-
-    if (cc && cc->set_style)
-	cc->set_style(control, style);
 }
 
 void control_set_theme(Control * control, const char *theme)

@@ -488,20 +488,6 @@ void groups_set_popup_position(int position)
     }
 }
 
-void groups_set_style(int style)
-{
-    GList *li;
-    PanelGroup *group;
-
-    for(li = group_list; li; li = li->next)
-    {
-	group = li->data;
-        
-	panel_popup_set_style(group->popup, style);
-        control_set_style(group->control, style);
-    }
-}
-
 void groups_set_theme(const char *theme)
 {
     GList *li;

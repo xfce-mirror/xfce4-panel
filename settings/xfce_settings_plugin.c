@@ -109,11 +109,6 @@ static void xfce_init_options(void)
 	    opt->type = MCS_TYPE_INT;
 	    opt->data.v_int = 1;
 	    break;
-	case XFCE_STYLE:
-	    opt->name = "style";
-	    opt->type = MCS_TYPE_INT;
-	    opt->data.v_int = 1;
-	    break;
 	case XFCE_THEME:
 	    opt->name = "theme";
 	    opt->type = MCS_TYPE_STRING;
