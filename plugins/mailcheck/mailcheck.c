@@ -1,7 +1,28 @@
+/*  mailcheck.c
+ *
+ *  Copyright (C) Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Library General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+ 
 #include <sys/stat.h>
 #include <gtk/gtk.h>
 
 #include "global.h"
+#include "xfce_support.h"
+#include "icons.h"
 #include "module.h"
 #include "item.h"
 
@@ -10,17 +31,19 @@
 #include "icons/nomail.xpm"
 #include "icons/oldmail.xpm"
 
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Globals
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static GtkTooltips *tooltips = NULL;
 
 /* this is checked when the module is loaded */
 int is_xfce_panel_module = 1;
 
+#define MAILCHECK_ROOT "Mailcheck"
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Mailcheck module
-
+  General definitions
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 enum
 {
     NO_MAIL,
@@ -28,13 +51,13 @@ enum
     OLD_MAIL
 };
 
+/* module data structure */
 typedef struct
 {
-    char *mbox;
-
+    int size;	/* local copy of settings.size */
     int status;
-
-    int size;
+	int interval;
+    char *mbox;
 
     GdkPixbuf *nomail_pb;
     GdkPixbuf *newmail_pb;
@@ -45,74 +68,28 @@ typedef struct
 }
 t_mailcheck;
 
-static char *icon_suffix[] = {
-    "png",
-    "xpm",
-    NULL
-};
-
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Icons
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static char *mailcheck_icon_names[] = {
     "nomail",
     "newmail",
     "oldmail"
 };
 
-static char **get_icon_paths(void)
-{
-    char **dirs = g_new0(char *, 3);
-
-    dirs[0] = g_build_filename(g_getenv("HOME"), RCDIR, "themes", NULL);
-    dirs[1] = g_build_filename(DATADIR, "themes", NULL);
-
-    return dirs;
-}
-
-static GdkPixbuf *get_themed_mailcheck_pixbuf(int id, const char *theme)
-{
-    GdkPixbuf *pb = NULL;
-    char *name = mailcheck_icon_names[id];
-    char **icon_paths = get_icon_paths();
-    char **p;
-
-    if(!theme)
-        return NULL;
-
-    for(p = icon_paths; *p; p++)
-    {
-        char **suffix;
-
-        for(suffix = icon_suffix; *suffix; suffix++)
-        {
-            char *path = g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
-
-            if(g_file_test(path, G_FILE_TEST_EXISTS))
-                pb = gdk_pixbuf_new_from_file(path, NULL);
-
-            g_free(path);
-
-            if(pb)
-                break;
-        }
-
-        if(pb)
-            break;
-    }
-
-    g_strfreev(icon_paths);
-
-    if(pb)
-        return pb;
-    else
-        return NULL;
-}
-
 static GdkPixbuf *get_mailcheck_pixbuf(int id)
 {
     GdkPixbuf *pb;
 
     if (settings.icon_theme)
-	pb = get_themed_mailcheck_pixbuf(id, settings.icon_theme);
-    
+	{
+		char *name = mailcheck_icon_names[id];
+		pb = get_themed_pixbuf(name);
+		
+		if (GDK_IS_PIXBUF(pb))
+			return pb;
+	}
+    	
     if(id == NEW_MAIL)
         pb = gdk_pixbuf_new_from_xpm_data((const char **)mail_xpm);
     else if(id == OLD_MAIL)
@@ -120,46 +97,174 @@ static GdkPixbuf *get_mailcheck_pixbuf(int id)
     else
         pb = gdk_pixbuf_new_from_xpm_data((const char **)nomail_xpm);
 
+	if (!GDK_IS_PIXBUF(pb))
+		pb = get_pixbuf_by_id(UNKNOWN_ICON);
+	
     return pb;
 }
 
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Configuration
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+static xmlDocPtr doc = NULL;
+#define XMLDATA(node) xmlNodeListGetString(doc, node->children, 1)
+
+static get_mailcheck_config(t_mailcheck *mc)
+{
+	char *file;
+    const char *mail, *logname;
+	PanelItem *pi;
+	
+	pi = mc->item;
+	
+	file = get_read_file("mailcheckrc");
+	
+	if (file)
+	{
+		xmlKeepBlanksDefault(0);
+		doc = xmlParseFile(file);
+		g_free(file);
+	}
+	
+	if (doc)
+	{
+		xmlNodePtr node;
+		xmlChar *value;
+		
+		node = xmlDocGetRootElement(doc);
+	
+		if(!node)
+			g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__, __LINE__);
+	
+		if(!xmlStrEqual(node->name, (const xmlChar *)MAILCHECK_ROOT))
+		{
+			g_printerr(_("xfce: %s (line %d): wrong document type\n"),
+					   __FILE__, __LINE__);
+			
+			node = NULL;
+		}
+	
+		if (node)
+		{
+			/* Now parse the xml tree */
+			for(node = node->children; node; node = node->next)
+			{
+				if(xmlStrEqual(node->name, (const xmlChar *)"Mbox"))
+				{
+					value = XMLDATA(node);
+					
+					if (value)
+						mc->mbox = (char *) value;
+				}
+				else if(xmlStrEqual(node->name, (const xmlChar *)"Command"))
+				{
+					value = XMLDATA(node);
+					
+					if (value)
+						mc->item->command = (char *) value;
+				}
+				else if(xmlStrEqual(node->name, (const xmlChar *)"Interval"))
+				{
+					value = XMLDATA(node);
+					
+					if (value)
+					{
+						int n = atoi(value);
+						
+						if (n > 0)
+							mc->interval = n;
+					}
+				}
+			}
+		}
+	
+		xmlFreeDoc(doc);
+	}
+	
+    /* the mbox */
+	if (!mc->mbox)
+	{
+		mail = g_getenv("MAIL");
+	
+		if(mail)
+			mc->mbox = g_strdup(mail);
+		else
+		{
+			logname = g_getenv("LOGNAME");
+			mc->mbox = g_strconcat("/var/spool/mail/", logname, NULL);
+		}
+	}
+
+	if (!pi->command)
+		pi->command = g_strdup("sylpheed");
+	
+	if (!pi->tooltip)
+	{
+		pi->tooltip = g_strdup(pi->command);
+		g_ascii_toupper(*(pi->command));
+	}
+}
+
+static write_mailcheck_config(t_mailcheck *mc)
+{
+	char *dir, *rcfile;
+    xmlNodePtr root;
+    xmlNodePtr child;
+    char value[MAXSTRLEN + 1];
+	
+	rcfile = get_save_file("mailcheckrc");
+    dir = g_path_get_dirname(rcfile);
+
+    if(!g_file_test(dir, G_FILE_TEST_IS_DIR))
+        mkdir(dir, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+
+    g_free(dir);
+
+    doc = xmlNewDoc("1.0");
+    doc->children = xmlNewDocRawNode(doc, NULL, MAILCHECK_ROOT, NULL);
+
+    root = (xmlNodePtr) doc->children;
+    xmlDocSetRootElement(doc, root);
+
+    xmlNewTextChild(root, NULL, "Mbox", mc->mbox);
+	
+    xmlNewTextChild(root, NULL, "Command", mc->item->command);
+	
+	snprintf(value, MAXSTRLEN, "%d", mc->interval);
+    xmlNewTextChild(root, NULL, "Interval", value);
+
+    xmlSaveFormatFile(rcfile, doc, 1);
+
+    xmlFreeDoc(doc);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Creation and destruction
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static t_mailcheck *mailcheck_new(PanelGroup *pg)
 {
-    t_mailcheck *mailcheck = g_new(t_mailcheck, 1);
     PanelItem *pi;
-    const char *mail, *logname;
-
-    /* the mbox */
-    mail = g_getenv("MAIL");
-
-    if(mail)
-        mailcheck->mbox = g_strdup(mail);
-    else
-    {
-        logname = g_getenv("LOGNAME");
-        mailcheck->mbox = g_strconcat("/var/spool/mail/", logname, NULL);
-    }
-
-    if (!tooltips)
-	tooltips = gtk_tooltips_new();
-
-    /* TODO : read xml config here */
+    t_mailcheck *mailcheck;
+	
+	mailcheck = g_new(t_mailcheck, 1);
+    pi = mailcheck->item = panel_item_new(pg);
 
     mailcheck->status = NO_MAIL;
-
-    mailcheck->size = MEDIUM;
+    mailcheck->size = settings.size;
+	mailcheck->interval = 30;
+	mailcheck->mbox=NULL;
 
     mailcheck->nomail_pb = get_mailcheck_pixbuf(NO_MAIL);
     mailcheck->oldmail_pb = get_mailcheck_pixbuf(OLD_MAIL);
     mailcheck->newmail_pb = get_mailcheck_pixbuf(NEW_MAIL);
 
-    pi = mailcheck->item = panel_item_new(pg);
-    pi->command = g_strdup("sylpheed");
-    pi->tooltip = g_strdup("Sylpheed");
+    if (!tooltips)
+		tooltips = gtk_tooltips_new();
+
+	get_mailcheck_config(mailcheck);
 
     create_panel_item(pi);
-
-    g_object_unref (mailcheck->item->pb);
+    g_object_unref (pi->pb);
     pi->pb = mailcheck->nomail_pb;
     panel_item_set_size(pi, mailcheck->size);
     
@@ -319,7 +424,7 @@ void mailcheck_configure(PanelModule * pm)
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
     spinbutton = gtk_spin_button_new_with_range(1, 600, 1);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinbutton), pm->interval / 1000);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinbutton), mc->interval);
     gtk_box_pack_start(GTK_BOX(hbox), spinbutton, FALSE, FALSE, 0);
 
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
@@ -348,6 +453,10 @@ void mailcheck_configure(PanelModule * pm)
             g_free(mc->mbox);
             mc->mbox = g_strdup(tmp);
         }
+		
+		mc->interval = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton));
+
+		write_mailcheck_config(mc);
     }
 
     gtk_widget_destroy(dialog);
@@ -365,7 +474,7 @@ void module_init(PanelModule * pm)
     pm->data = (gpointer) mailcheck;
     pm->main = mailcheck->item->button;
     
-    pm->interval = 5000; /* 5 sec */
+    pm->interval = 1000 * mailcheck->interval; /* in msec */
     pm->update = (gpointer) check_mail;
     
     pm->pack = (gpointer) mailcheck_pack;
@@ -376,5 +485,5 @@ void module_init(PanelModule * pm)
     pm->configure = (gpointer) mailcheck_configure;
     
     if (pm->parent)
-	check_mail(pm);
+		check_mail(pm);
 }

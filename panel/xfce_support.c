@@ -52,27 +52,35 @@ char *get_save_dir(void)
     return g_build_filename(home, HOMERCDIR, NULL);
 }
 
-char *get_save_file(void)
+char *get_save_file(const char *name)
 {
     const char *home = g_getenv("HOME");
 
-    return g_build_filename(home, HOMERCDIR, XFCERC, NULL);
+    return g_build_filename(home, HOMERCDIR, name, NULL);
 }
 
-char *get_read_dir(void)
+char **get_read_dirs(void)
 {
+    char **dirs;
+
     if(disable_user_config)
     {
-        return g_strdup(SYSCONFDIR);
+        dirs = g_new0(char *, 2);
+
+        dirs[0] = g_strdup(SYSCONFDIR);
     }
     else
     {
-        /* same as save dir */
-        return get_save_dir();
+        dirs = g_new0(char *, 3);
+
+        dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, NULL);
+        dirs[1] = g_strdup(SYSCONFDIR);
     }
+
+    return dirs;
 }
 
-static char *get_localized_system_rcfile(void)
+static char *get_localized_system_rcfile(const char *name)
 {
     const char *locale;
     char base_locale[3];
@@ -88,7 +96,7 @@ static char *get_localized_system_rcfile(void)
         base_locale[3] = '\0';
     }
 
-    sysrcfile = g_build_filename(SYSCONFDIR, SYSRCDIR, RCFILE, NULL);
+    sysrcfile = g_build_filename(SYSCONFDIR, SYSRCDIR, name, NULL);
 
     if(!locale)
     {
@@ -133,12 +141,13 @@ static char *get_localized_system_rcfile(void)
     }
 }
 
-char *get_read_file(void)
+char *get_read_file(const char *name)
 {
     if(!disable_user_config)
     {
-        /* same as save file */
-        char *file = get_save_file();
+		char *dir = get_save_dir();
+        char *file = g_build_filename(dir,name,NULL);
+		g_free(dir);
 
         if(g_file_test(file, G_FILE_TEST_EXISTS))
             return file;
@@ -147,7 +156,7 @@ char *get_read_file(void)
     }
 
     /* fall through */
-    return get_localized_system_rcfile();
+    return get_localized_system_rcfile(name);
 }
 
 char **get_plugin_dirs(void)
@@ -164,11 +173,11 @@ char **get_plugin_dirs(void)
     {
         dirs = g_new0(char *, 3);
 
-        dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, "themes", NULL);
+        dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, "plugins", NULL);
         dirs[1] = g_build_filename(DATADIR, "plugins", NULL);
-
-        return dirs;
     }
+
+    return dirs;
 }
 
 char **get_theme_dirs(void)
@@ -187,8 +196,28 @@ char **get_theme_dirs(void)
 
         dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, "themes", NULL);
         dirs[1] = g_build_filename(DATADIR, "themes", NULL);
+    }
 
-        return dirs;
+    return dirs;
+}
+
+void write_backup_file(const char *path)
+{
+    FILE *fp;
+    FILE *bakfp;
+    char bakfile[MAXSTRLEN + 1];
+
+    snprintf(bakfile, MAXSTRLEN, "%s.bak", path);
+
+    if((bakfp = fopen(bakfile, "w")) && (fp = fopen(path, "r")))
+    {
+        char c;
+
+        while((c = fgetc(fp)) != EOF)
+            putc(c, bakfp);
+
+        fclose(fp);
+        fclose(bakfp);
     }
 }
 

@@ -27,6 +27,7 @@
 #include "settings.h"
 
 #include "xfce.h"
+#include "xfce_support.h"
 #include "central.h"
 #include "side.h"
 #include "popup.h"
@@ -39,131 +40,44 @@
 gboolean disable_user_config = FALSE;
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   File handling
-
+  Reading xml
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void write_backup_file(const char *path)
-{
-    FILE *fp;
-    FILE *bakfp;
-    char bakfile[MAXSTRLEN + 1];
-
-    snprintf(bakfile, MAXSTRLEN, "%s.bak", path);
-
-    if((bakfp = fopen(bakfile, "w")) && (fp = fopen(path, "r")))
-    {
-        char c;
-
-        while((c = fgetc(fp)) != EOF)
-            putc(c, bakfp);
-
-        fclose(fp);
-        fclose(bakfp);
-    }
-}
-
-static char *localized_rcfile(void)
-{
-    const char *locale;
-    const char *home;
-    char base_locale[3];
-    char rcfile[MAXSTRLEN + 1];
-    char sysrcfile[MAXSTRLEN + 1];
-    char file[MAXSTRLEN + 1];
-
-    home = g_getenv("HOME");
-
-    if(!(locale = g_getenv("LC_MESSAGES")))
-        locale = g_getenv("LANG");
-
-    if(locale)
-    {
-        base_locale[0] = locale[0];
-        base_locale[1] = locale[1];
-        base_locale[3] = '\0';
-    }
-
-    snprintf(rcfile, MAXSTRLEN, "%s/%s/%s", home, RCDIR, RCFILE);
-    snprintf(sysrcfile, MAXSTRLEN, "%s/xfce4/%s", SYSCONFDIR, RCFILE);
-
-    if(!disable_user_config && g_file_test(rcfile, G_FILE_TEST_EXISTS))
-        return g_strdup(rcfile);
-    else
-    {
-        if(!locale)
-        {
-            if(g_file_test(sysrcfile, G_FILE_TEST_EXISTS))
-                return g_strdup(sysrcfile);
-            else
-                return NULL;
-        }
-        else
-        {
-            snprintf(file, MAXSTRLEN, "%s.%s", sysrcfile, locale);
-
-            if(g_file_test(file, G_FILE_TEST_EXISTS))
-                return g_strdup(file);
-
-            snprintf(file, MAXSTRLEN, "%s.%s", sysrcfile, base_locale);
-
-            if(g_file_test(file, G_FILE_TEST_EXISTS))
-                return g_strdup(file);
-            else if(g_file_test(sysrcfile, G_FILE_TEST_EXISTS))
-                return g_strdup(sysrcfile);
-            else
-                return NULL;
-        }
-    }
-}
-
-static char *home_rcfile(void)
-{
-    const char *home;
-    char rcfile[MAXSTRLEN + 1];
-
-    home = g_getenv("HOME");
-    snprintf(rcfile, MAXSTRLEN, "%s/%s/%s", home, RCDIR, RCFILE);
-
-    return g_strdup(rcfile);
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Reading xml
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-
 xmlDocPtr xmlconfig = NULL;
 
-static xmlDocPtr read_xml_file(void)
+static xmlDocPtr make_empty_doc(void)
 {
-    char *rcfile;
-    xmlDocPtr doc;
-
-    xmlKeepBlanksDefault(0);
-
-    rcfile = localized_rcfile();
-    
-    if (rcfile)
-	doc = xmlParseFile(rcfile);
-    else
-    {
+	xmlDocPtr doc;
 	xmlNodePtr root;
-	
+
 	doc = xmlNewDoc("1.0");
-	doc->children = xmlNewDocRawNode(xmlconfig, NULL, ROOT, NULL);
+	doc->children = xmlNewDocRawNode(doc, NULL, ROOT, NULL);
 
 	root = (xmlNodePtr) doc->children;
 	xmlDocSetRootElement(doc, root);
-	
+
 	xmlNewTextChild(root, NULL, "Panel", NULL);
 	xmlNewTextChild(root, NULL, "Central", NULL);
 	xmlNewTextChild(root, NULL, "Left", NULL);
 	xmlNewTextChild(root, NULL, "Right", NULL);
-    }
+	
+	return doc;
+}
+
+
+static xmlDocPtr read_xml_file(void)
+{
+    char *rcfile;
+    xmlDocPtr doc = NULL;
+
+    xmlKeepBlanksDefault(0);
+
+    rcfile = get_read_file(RCFILE);
+
+    if(rcfile)
+        doc = xmlParseFile(rcfile);
+	
+	if (!doc)
+		doc = make_empty_doc();
 
     g_free(rcfile);
     return doc;
@@ -176,22 +90,25 @@ static void settings_from_file(void)
     /* global xmlDocPtr */
     xmlconfig = read_xml_file();
 
-    if(!xmlconfig)
-        return;
-
     node = xmlDocGetRootElement(xmlconfig);
 
     if(!node)
     {
         g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__, __LINE__);
-        return;
+		
+		xmlFreeDoc(xmlconfig);
+		xmlconfig = make_empty_doc();
+		node = xmlDocGetRootElement(xmlconfig);
     }
 
     if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
     {
         g_printerr(_("xfce: %s (line %d): wrong document type\n"),
                    __FILE__, __LINE__);
-        return;
+
+		xmlFreeDoc(xmlconfig);
+		xmlconfig = make_empty_doc();
+		node = xmlDocGetRootElement(xmlconfig);
     }
 
     /* Now parse the xml tree */
@@ -211,9 +128,7 @@ static void settings_from_file(void)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
    Writing xml
-
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 void settings_to_file(void)
@@ -222,7 +137,7 @@ void settings_to_file(void)
     char *rcfile;
     xmlNodePtr root;
 
-    rcfile = home_rcfile();
+    rcfile = get_save_file(RCFILE);
 
     if(g_file_test(rcfile, G_FILE_TEST_EXISTS))
         write_backup_file(rcfile);
@@ -241,12 +156,12 @@ void settings_to_file(void)
 
     root = (xmlNodePtr) xmlconfig->children;
     xmlDocSetRootElement(xmlconfig, root);
-    
+
     panel_write_xml(root);
     central_panel_write_xml(root);
     side_panel_write_xml(root, LEFT);
     side_panel_write_xml(root, RIGHT);
-    
+
     xmlSaveFormatFile(rcfile, xmlconfig, 1);
 
     xmlFreeDoc(xmlconfig);
@@ -268,8 +183,8 @@ static gboolean check_disable_user_config(void)
     return g_file_test(userconf, G_FILE_TEST_EXISTS);
 */
     const char *var = g_getenv("XFCE_DISABLE_USER_CONFIG");
-    
-    return (var && !strequal(var,"0"));
+
+    return (var && !strequal(var, "0"));
 }
 
 void get_panel_config(void)

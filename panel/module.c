@@ -64,33 +64,28 @@ PanelModule *panel_module_new(PanelGroup * pg)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Extern modules
-
+  Plugins
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 static char *find_module(const char *name)
 {
-    const char *home = g_getenv("HOME");
-    char dir[MAXSTRLEN + 1];
+    char **dirs, **d;
     char *path;
 
-    snprintf(dir, MAXSTRLEN, "%s/.xfce4/plugins", home);
-    path = g_build_filename(dir, name, NULL);
+	dirs = get_plugin_dirs();
+	
+	for (d = dirs; *d; d++)
+	{
+		path = g_build_filename(*d, name, NULL);
 
-    if(g_file_test(path, G_FILE_TEST_EXISTS))
-        return path;
-    else
-        g_free(path);
-
-    snprintf(dir, MAXSTRLEN, "%s/plugins", DATADIR);
-    path = g_build_filename(dir, name, NULL);
-
-    if(g_file_test(path, G_FILE_TEST_EXISTS))
-        return path;
-    else
-        g_free(path);
-
+		if(g_file_test(path, G_FILE_TEST_EXISTS))
+		{
+			g_strfreev(dirs);
+			return path;
+		}
+		else
+			g_free(path);
+	}
+	
     return NULL;
 }
 
@@ -111,18 +106,21 @@ gboolean create_extern_module(PanelModule * pm)
     g_return_val_if_fail(path, FALSE);
 
     pm->gmodule = g_module_open(path, 0);
-    g_free(path);
 
     if(!pm->gmodule) 
     {
-        g_printerr("gmodule could not be opened: %s\n", pm->name);
+        g_printerr("gmodule could not be opened: %s\n", path);
+		g_free(path);
         return FALSE;
     }
     else if (!g_module_symbol(pm->gmodule, "is_xfce_panel_module", &tmp))
     {
-        g_printerr("Not a panel module: %s\n", pm->name);
+        g_printerr("Not a panel module: %s\n", path);
+		g_free(path);
         return FALSE;
     }
+
+    g_free(path);
 
     if(g_module_symbol(pm->gmodule, "module_init", &tmp))
     {
