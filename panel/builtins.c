@@ -194,6 +194,138 @@ void clock_free(PanelControl * pc)
     g_free(clock);
 }
 
+/* Try to find the best width value depending on :
+   -panel size
+   -clock settings
+   -panel orientation
+   -popup orientation
+
+   This function assumes we want the best for an horizontally
+   oriented panel
+
+   Algorithm is simple and may be improved (IMHO)
+   Currently I test for each parms and the width is modified
+   each time the parms has been verified
+
+*/
+static int clock_guess_best_width_horiz(PanelControl * pc)
+{
+    int w = icon_size[settings.size];
+    XfceClock *tmp = XFCE_CLOCK(((t_clock*) pc->data)->clock);
+    switch (settings.size)
+    {
+    case SMALL:
+	w = w + 11;
+	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 0;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 6;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 12;
+	}
+	else
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 0;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 6;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 12;
+	}
+	break;
+
+    case TINY:
+	w = w + 11;
+	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 8;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 7;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 15;
+	}
+	else
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 5;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 7;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 17;
+	    /* A special case I prefer treat apart */
+	    if( xfce_clock_ampm_shown(tmp) && xfce_clock_secs_shown(tmp))
+		w = 57;
+	}
+	break;
+    default:
+	;
+    }
+
+    return w;
+}
+
+static int clock_guess_best_width_vert(PanelControl * pc)
+{
+    int w = icon_size[settings.size];
+    XfceClock *tmp = XFCE_CLOCK(((t_clock*) pc->data)->clock);
+    switch (settings.size)
+    {
+    case SMALL:
+	w = w + 11;
+	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 0;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 6;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 12;
+	}
+	else
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 0;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 6;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 12;
+	}
+	break;
+
+    case TINY:
+	w = w + 11;
+	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 8;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 7;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 15;
+	}
+	else
+	{
+	    if( xfce_clock_military_shown(tmp) )
+		w = w + 5;
+	    if( xfce_clock_ampm_shown(tmp) )
+		w = w + 7;
+	    if( xfce_clock_secs_shown(tmp) )
+		w = w + 17;
+	    /* A special case I prefer treat apart */
+	    if( xfce_clock_ampm_shown(tmp) && xfce_clock_secs_shown(tmp))
+		w = 57;
+	}
+	break;
+    default:
+	;
+    }
+
+    return w;
+}
+
 /* XXXXX: this is the ugliest code I ever written :)
    I'm pretty sure there are missing cases but you have to complain to
    let me know :p
@@ -205,41 +337,26 @@ void clock_set_size(PanelControl * pc, int size)
     t_clock *clock = (t_clock *) pc->data;
     XfceClock *tmp = XFCE_CLOCK(clock->clock);
 
-    switch (xfce_clock_get_mode(tmp))
+    if ( xfce_clock_get_mode(tmp) == XFCE_CLOCK_LEDS)
     {
-    case XFCE_CLOCK_LEDS:
 	w = icon_size[size];
-/* XXXXX: values are taken from my point of view (subjective)
-   I took values that IMHO seem to be best :)
-*/
-	if( settings.orientation == VERTICAL && (settings.popup_position == LEFT || settings.popup_position == RIGHT) )
-	{
-	    if(size <= SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))
-		w = w + 35;
-	}
-	else if ( settings.orientation == VERTICAL && (settings.popup_position == BOTTOM || settings.popup_position == TOP) )
-	{
-	    if( size <= SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
 
-	}
-	else if ( settings.orientation == HORIZONTAL && (settings.popup_position == LEFT || settings.popup_position == RIGHT) )
+	switch (settings.orientation)
 	{
-	    if( size == SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
-	    if( size == TINY && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
+	case HORIZONTAL:
 
-	}
-	else if ( settings.orientation == HORIZONTAL && (settings.popup_position == TOP || settings.popup_position == BOTTOM) )
-	{
-	    if( size == SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 30;
-	    if( size == TINY && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
+	    DBG("Using Horizontal mode\n");
+	    w = clock_guess_best_width_horiz(pc);
+	    break;
+	default:
 
+	    DBG("Using Verti mode \n");
+	    w = clock_guess_best_width_vert(pc);
+	    break;
 	}
-	break;
-    default:
-	w = s;
-	break;
     }
 
+    DBG("w would be %d\n",w);
     /* XXXXXX: Here we have 2 solutions :
        1.set width=height=w but in that case, we can get a really big
     clock compared to the panel size (and so compared to the buttons
@@ -255,7 +372,7 @@ void clock_set_size(PanelControl * pc, int size)
     */
 
     /* Force the first packed object to set its needed sizes */
-    gtk_widget_set_size_request(clock->frame, w, w);
+    gtk_widget_set_size_request(clock->frame, w, s);
 }
 
 /* FIXME: have to have a look into it as I don't really know if that
