@@ -273,6 +273,18 @@ static void set_popup_window_properties(GtkWidget * win)
     gtk_window_set_gravity(window, GDK_GRAVITY_STATIC);
 }
 
+static GtkTargetEntry entry[] = {
+    {"text/uri-list", 0, 0},
+    {"STRING", 0, 1}
+};
+
+static void popup_drag_cb(GtkWidget * widget, GdkDragContext * context,
+                          gint x, gint y, GtkSelectionData * data,
+                          guint info, guint time, PanelPopup *pp)
+{
+    toggle_popup(pp->button, pp);
+}
+
 PanelPopup *create_panel_popup(void)
 {
     PanelPopup *pp = g_new(PanelPopup, 1);
@@ -303,6 +315,13 @@ PanelPopup *create_panel_popup(void)
 
     if (settings.style == NEW_STYLE)
 	xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NONE);
+
+    g_signal_connect(pp->button, "toggled", G_CALLBACK(toggle_popup), pp);
+
+    gtk_drag_dest_set (pp->button, GTK_DEST_DEFAULT_ALL, entry, 2, 
+	    		GDK_ACTION_COPY);
+    g_signal_connect(pp->button, "drag-data-received", 
+	    	     G_CALLBACK(popup_drag_cb), pp);
 
     /* the menu */
     pp->hgroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
@@ -338,9 +357,6 @@ PanelPopup *create_panel_popup(void)
     gtk_container_add(GTK_CONTAINER(pp->tearoff_button), sep);
 
     /* signals */
-    g_signal_connect(pp->button, "toggled", G_CALLBACK(toggle_popup), pp);
-
-
     g_signal_connect(pp->tearoff_button, "clicked", G_CALLBACK(tearoff_popup),
                      pp);
 

@@ -29,6 +29,8 @@ void panel_add_control(void);
 
 /* apply panel settings */
 void panel_set_settings(void);
+
+void panel_center(int side);
 void panel_set_position(void);
 
 void panel_set_orientation(int orientation);

@@ -42,9 +42,6 @@ static McsClient *client = NULL;
 /* special case: position setting */
 static void mcs_position_setting(int pos)
 {
-    int width, height;
-    DesktopMargins margins;
-    Screen *xscreen;
     static int x, y;
 
     if (pos == XFCE_POSITION_NONE || !toplevel)
@@ -60,37 +57,24 @@ static void mcs_position_setting(int pos)
     {
 	position.x = x;
 	position.y = y;
-        gtk_window_move(GTK_WINDOW(toplevel), x, y);
+	panel_set_position();
 
 	return;
     }
     
-    xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
-    netk_get_desktop_margins(xscreen, &margins);
-
-    gtk_window_get_size(GTK_WINDOW(toplevel), &width, &height);
-    
     switch (pos)
     {
 	case XFCE_POSITION_BOTTOM:
-	    position.x = gdk_screen_width() / 2 - width / 2;
-	    position.y = gdk_screen_height() - height - margins.bottom;
-	    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
+	    panel_center(BOTTOM);
 	    break;
 	case XFCE_POSITION_TOP:
-	    position.y = margins.top;
-	    position.x = gdk_screen_width() / 2 - width / 2;
-	    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
+	    panel_center(TOP);
 	    break;
 	case XFCE_POSITION_LEFT:
-	    position.x = margins.left;
-	    position.y = gdk_screen_height() / 2 - height / 2;
-	    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
+	    panel_center(LEFT);
 	    break;
 	case XFCE_POSITION_RIGHT:
-	    position.x = gdk_screen_width() - width - margins.right;
-	    position.y = gdk_screen_height() / 2 - height / 2;
-	    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
+	    panel_center(RIGHT);
 	    break;
     }
 }

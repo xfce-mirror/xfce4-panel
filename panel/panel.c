@@ -333,47 +333,60 @@ void panel_set_settings(void)
     panel_set_num_groups(settings.num_groups);
 }
 
-void panel_set_position(void)
+void panel_center(int side)
 {
     GtkRequisition req;
     int w, h;
+    DesktopMargins margins;
+    Screen *xscreen;
+    
     w = gdk_screen_width();
     h = gdk_screen_height();
 
+    xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
+    netk_get_desktop_margins(xscreen, &margins);
+    
     gtk_widget_size_request(toplevel, &req);
 
-    if(position.x == -1 || position.y == -1)
+    switch (side)
     {
-	DesktopMargins margins;
-	Screen *xscreen;
-	
-	xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
-	netk_get_desktop_margins(xscreen, &margins);
-    
-	if (settings.orientation == VERTICAL)
-	{
-	    position.y = h / 2 - req.height / 2;
+	case LEFT:
 	    position.x = margins.left;
-	}
-	else
-	{
+	    position.y = h / 2 - req.height / 2;
+	    break;
+	case RIGHT:
+	    position.x = w - req.width - margins.right;
+	    position.y = h / 2 - req.height / 2;
+	    break;
+	case TOP:
+	    position.x = w / 2 - req.width / 2;
+	    position.y = margins.top;
+	    break;
+	default:
 	    position.x = w / 2 - req.width / 2;
 	    position.y = h - req.height - margins.bottom;
-	}
+    }
+
+    panel_set_position();
+}
+
+void panel_set_position(void)
+{
+    if(position.x == -1 || position.y == -1)
+    {
+	if (settings.orientation == HORIZONTAL)
+	    panel_center(BOTTOM);
+	else
+	    panel_center(LEFT);
     }
     else
     {
-        if(position.x < 0)
-            position.x = 0;
-        if(position.x > w - req.width)
-            position.x = w - req.width;
-        if(position.y < 0)
-            position.y = 0;
-        if(position.y > h - req.height)
-            position.y = h - req.height;
-    }
+	DBG("position: (%d, %d)\n", position.x, position.y);
 
-    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
+	/* use gdk to prevent margins from interfering :) */
+	gtk_window_present(GTK_WINDOW(toplevel));
+	gdk_window_move(toplevel->window, position.x, position.y);
+    }
 }
 
 /*  Global preferences
