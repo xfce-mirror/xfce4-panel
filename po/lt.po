@@ -1,16 +1,16 @@
 # Lithuania translation of xfce4-panel
 # Copyright (C) 2003 Free Software Foundation, Inc.
 # This file is distributed under the same license as the xfce4-panel package.
-# Mantas <zaz@xxx.lt>, 2003.
-# Mantas <zaz@xxx.lt>, 2005.
+# Mantas <zaz@xxx.lt>, 2003 - 2005,
+# Rimas Kudelis <rq@akl.lt>, 2005.
 # 
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 3.99.2\n"
+"Project-Id-Version: xfce4-panel 4.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-10-11 18:28+0200\n"
-"PO-Revision-Date: 2005-01-07 02:07+0200\n"
+"PO-Revision-Date: 2005-01-20 22:25+0200\n"
 "Last-Translator: Rimas Kudelis <rq@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: panel/xfce_support.c:516
 msgid "Select file"
-msgstr "Pasirinkite bylą"
+msgstr "Parinkite bylą"
 
 #: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
@@ -35,11 +35,11 @@ msgstr "Elemento savybės"
 
 #: panel/controls_dialog.c:207 panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
-msgstr "Pašalindami elementą, kartu pašalinsite jo išskleidžiamą meniu."
+msgstr "Pašalindami elementą, kartu sunaikinsite ir jo išskleidžiamą meniu."
 
 #: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
-msgstr "Pasirinkite komandą"
+msgstr "Parinkite komandą"
 
 #: panel/item_dialog.c:264
 msgid "Command:"
@@ -47,7 +47,7 @@ msgstr "Komanda:"
 
 #: panel/item_dialog.c:307
 msgid "Run in _terminal"
-msgstr "Paleisti _terminale"
+msgstr "Vykdyti _terminale"
 
 #: panel/item_dialog.c:325
 msgid "Use startup _notification"
@@ -55,11 +55,11 @@ msgstr "I_nformuoti apie vykdymą"
 
 #: panel/item_dialog.c:511
 msgid "Other Icon"
-msgstr "Kita piktograma"
+msgstr "Kita ikona"
 
 #: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
-msgstr "Norėdami pakeisti piktogramą, tempkite bylą į šį lauką"
+msgstr "Norėdami pakeisti ikoną, tempkite bylą į šį lauką"
 
 #: panel/item_dialog.c:917
 msgid "Caption:"
@@ -67,7 +67,7 @@ msgstr "Pavadinimas:"
 
 #: panel/item_dialog.c:946
 msgid "Tooltip:"
-msgstr "Patarimas:"
+msgstr "Paaiškinimas:"
 
 #: panel/item_dialog.c:974
 msgid "Attach menu to launcher"
@@ -138,7 +138,7 @@ msgstr "%s: Sėkmingai paleista su sesijų valdymu"
 #: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr "Neįmanoma sukurti skydelio elemento \"%s\"."
+msgstr "Neįmanoma sukurti skydelio elemento „%s“."
 
 #: panel/controls.c:723 panel/panel.c:579
 msgid "_Properties..."
@@ -150,7 +150,7 @@ msgstr "Pridėti _naują elementą"
 
 #: panel/controls.c:1020
 msgid "This item has no configuration options"
-msgstr "Šis elementas neturi derinamų nustatymų"
+msgstr "Šis elementas neturi derinamų savybių"
 
 #: panel/panel.c:560 panel/panel.c:961 settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:449
@@ -175,7 +175,7 @@ msgstr "Per_leisti"
 
 #: panel/panel.c:612
 msgid "E_xit"
-msgstr "I_šeiti"
+msgstr "Iš_eiti"
 
 #: panel/icons.c:60
 msgid "Default"
@@ -203,7 +203,7 @@ msgstr "Pagalbos naršyklė"
 
 #: panel/icons.c:66
 msgid "Multimedia"
-msgstr "Multimedia"
+msgstr "Multimedija"
 
 #: panel/icons.c:67
 msgid "Network"
@@ -307,7 +307,7 @@ msgstr "Išvaizda"
 
 #: settings/xfce_settings_dialog.c:491
 msgid "Behaviour"
-msgstr "Elgesys"
+msgstr "Elgsena"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -413,11 +413,11 @@ msgstr "Užrakinti"
 
 #: plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
-msgstr "Mygtukas 1"
+msgstr "Mygtukas 1:"
 
 #: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
-msgstr "Mygtukas 2"
+msgstr "Mygtukas 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
@@ -454,123 +454,5 @@ msgstr "Intervalas (sek):"
 
 #: plugins/mailcheck/mailcheck.c:965
 msgid "Mail checker"
-msgstr "Pašto tikrinimas"
+msgstr "Pašto tikrintuvė"
 
-#~ msgid "Remove"
-#~ msgstr "PaĆāalinti"
-
-#~ msgid "Show two buttons:"
-#~ msgstr "Rodyti du mygtukus:"
-
-#~ msgid "Change item"
-#~ msgstr "Pakeisti elementĆĀ"
-
-#~ msgid "Menu:"
-#~ msgstr "Meniu:"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Xfce Skydelis"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/PridĆĀti _naujĆĀ elementĆĀ"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/_SavybĆĀs..."
-
-#~ msgid "Select icon"
-#~ msgstr "Pasirinkite piktogramĆĀ"
-
-#~ msgid "Icon:"
-#~ msgstr "Piktograma:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Pikrogramos PerĆĀ¾iĆĀ«ra"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "Atrodo, kad jĆĀ«sĆĀ³ langĆĀ³ tvarkyklĆĀ nepalaiko naujĆĀ³ langĆĀ³ tvarkykliĆĀ³ patarimĆĀ³ apibrĆĀĆĀ¾tĆĀ³ tinklalapyje http://www.freedesktop.org. \n"
-#~ "Keletas Xfce sudĆĀtiniĆĀ³ daliĆĀ³ gali neveikti kaip numatyta."
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/Nuo_statĆĀ³ tvarkyklĆĀ"
-
-#~ msgid "Tiny"
-#~ msgstr "MaĆĀ¾ytis"
-
-#~ msgid "Icon theme:"
-#~ msgstr "Piktogramos tema"
-
-#~ msgid "Panel layer:"
-#~ msgstr "Skydelio iĆādĆĀstymas:"
-
-#~ msgid "Normal"
-#~ msgstr "Normalus"
-
-#~ msgid "Center the panel:"
-#~ msgstr "Centruoti skydelĆĆ"
-
-#~ msgid "Set"
-#~ msgstr "Nustatyti"
-
-#~ msgid "Position"
-#~ msgstr "Pozicija"
-
-#~ msgid "Sunday"
-#~ msgstr "Skemadienis"
-
-#~ msgid "Monday"
-#~ msgstr "Pirmadienis"
-
-#~ msgid "Tuesday"
-#~ msgstr "Antradienis"
-
-#~ msgid "Wednesday"
-#~ msgstr "TreÄĀÄĀiadienis"
-
-#~ msgid "Thursday"
-#~ msgstr "Ketvirtadienis"
-
-#~ msgid "Friday"
-#~ msgstr "Penktadienis"
-
-#~ msgid "Saturday"
-#~ msgstr "ÄĀÄĀ eÄĀÄĀĀtadienis"
-
-#~ msgid "January"
-#~ msgstr "Sausis"
-
-#~ msgid "February"
-#~ msgstr "Vasaris"
-
-#~ msgid "March"
-#~ msgstr "Kovas"
-
-#~ msgid "April"
-#~ msgstr "Balandis"
-
-#~ msgid "May"
-#~ msgstr "GeguÄĀÄĀ¾ÄĀÄĀ"
-
-#~ msgid "June"
-#~ msgstr "BirÄĀÄĀ¾elis"
-
-#~ msgid "July"
-#~ msgstr "Liepa"
-
-#~ msgid "August"
-#~ msgstr "RugpjÄĀÄĀ«tis"
-
-#~ msgid "September"
-#~ msgstr "RugsÄĀÄĀjis"
-
-#~ msgid "October"
-#~ msgstr "Spalis"
-
-#~ msgid "November"
-#~ msgstr "Lapkritis"
-
-#~ msgid "December"
-#~ msgstr "Gruodis"
