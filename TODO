@@ -1,0 +1,37 @@
+TODO list for xfce4
+===================
+
+Major features for 4.0
+----------------------
+* port clock widget			In progress (zeDek)
+* unify panel controls			Done
+  (make everything a module)
+* improve module configuration		
+  - add chosen module to panel		Done
+  - direct-apply options		Done
+  - save config in main file		Done
+    (pass xmlNodePtr to module)
+* improve global configuration		
+  - add stay-on-top option		Done
+  - split up dialog			In progress
+  - port to new xfce-wide system	
+* write API docs for plugin writers
+* write user docs
+* provide good default configuration
+* allow different positions for 
+  popup button in all sizes		Done
+
+Nice to have for 4.0
+--------------------
+* more themes: Night, KDE, Next, WindowsXP, BeOS, ...
+  (not too many released with xfce4; < 10)
+* volume control plugin
+
+Possible future features (after 4.0)
+------------------------------------
+* optional pager instead of desktop buttons
+* swallow apps
+* hide popup buttons
+* 'Eugenia'-like design with vertical move
+  handles and variable size plugins
+

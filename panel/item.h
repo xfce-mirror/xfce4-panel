@@ -1,6 +1,6 @@
 /*  item.h
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,36 +22,27 @@
 
 #include "global.h"
 
+/*  The panel item stuff is only public for use in item_dialog.c, so that
+ *  the dialog can provide immediate apply and revert functionality.
+ *
+ *  The dialog is in a separate file because it is shared with menu items.
+*/
 struct _PanelItem
 {
-    PanelGroup *parent;
-
     char *command;
     gboolean in_terminal;
     char *tooltip;
 
-    int id;
-    char *path;                 /* if id==EXTERN_ICON */
+    int icon_id;
+    char *icon_path;            /* if id==EXTERN_ICON */
 
-    GtkWidget *button;
-    GdkPixbuf *pb;
-    GtkWidget *image;
+    IconButton *button;
 };
 
-/*****************************************************************************/
+void panel_item_apply_config(PanelItem * pi);
 
-PanelItem *panel_item_new(PanelGroup * pg);
-PanelItem *panel_item_unknown_new(PanelGroup * pg);
-void create_panel_item(PanelItem * pi);
-void panel_item_pack(PanelItem * pi, GtkBox * box);
-void panel_item_unpack(PanelItem * pi, GtkContainer * container);
-void panel_item_free(PanelItem * pi);
-
-void panel_item_set_size(PanelItem * pi, int size);
-void panel_item_set_style(PanelItem * pi, int style);
-void panel_item_set_icon_theme(PanelItem * pi, const char *theme);
-
-void panel_item_parse_xml(xmlNodePtr node, PanelItem * pi);
-void panel_item_write_xml(xmlNodePtr root, PanelItem * pi);
+/*  panel control interface
+*/
+void create_panel_item(PanelControl * pc);
 
 #endif /* __XFCE_ITEM_H__ */

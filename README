@@ -35,24 +35,28 @@ The panel design is a hierarchy of components:
 - Side panels (file side.c): Left and right panel containing several panel groups.
   A panel group consists of a top widget and a bottom widget. The top widget is 
   usually a popup button, but for the outermost groups it is a move handle. The
-  bottom widget is either a panel item (a button with an icon) or a panel module
-  (dynamically updated).
-
-- Panel popup (file popup.c): Popup button and popup menu containing menu items.
-
-- Panel item (file item.c): Tradioanl panel item consisting of an icon button,
-  which starts an application.
-
-- Panel module (files module.c and builtins.c): New panel control, which is 
-  dynamically updated. Modules can be builtin or external using the gmodule 
-  interface.
+  bottom widget is called panel control and can be either a panel item (a button 
+  with an icon) or a panel module (dynamically updated).
 
 Other files:
+- popup.c: function for the popup menu inlcuding menu items.
+
+- control.c: panel control interface
+
+- item.c: traditional panel control (icon button that launches programs)
+
+- iconbutton.c: icon button used by panel items. Separate for easy use by other 
+  modules.
+
+- builtin.c: builtin dynamic panel controls (e.g. clock and trash can).
+
 - callbacks.c: most callback functions are defined here.
 
 - dialogs.c: panel configuration dialogs.
 
-- item_dialog.c: configuration dialog for item/module and menuitem
+- controls_dialog.c: configuration of panel controls
+
+- item_dialog.c: configuration dialog for panel item or menu item
 
 - xfce_support.c: convenience dialogs and general convenience functions.
 

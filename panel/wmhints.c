@@ -1,6 +1,6 @@
 /*  wmhints.c
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -44,11 +44,14 @@ static void create_atoms(void)
     root = GDK_ROOT_WINDOW();
 
     xa_NET_CURRENT_DESKTOP = XInternAtom(dpy, "_NET_CURRENT_DESKTOP", FALSE);
-    xa_NET_NUMBER_OF_DESKTOPS = XInternAtom(dpy, "_NET_NUMBER_OF_DESKTOPS", FALSE);
-    xa_NET_SUPPORTING_WM_CHECK = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", FALSE);
+    xa_NET_NUMBER_OF_DESKTOPS =
+        XInternAtom(dpy, "_NET_NUMBER_OF_DESKTOPS", FALSE);
+    xa_NET_SUPPORTING_WM_CHECK =
+        XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", FALSE);
 
     xa_NET_WM_WINDOW_TYPE = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", FALSE);
-    xa_NET_WM_WINDOW_TYPE_DOCK = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", FALSE);
+    xa_NET_WM_WINDOW_TYPE_DOCK =
+        XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", FALSE);
 
     atoms_created = TRUE;
 }
@@ -63,12 +66,13 @@ void check_net_support(void)
     long *data = 0;
     Window xid;
     int i;
+    int n = 5;
 
     if(!atoms_created)
         create_atoms();
 
-    /* try 3 times for a compliant window manager */
-    for(i = 0; i < 3; i++)
+    /* try n times for a compliant window manager */
+    for(i = 0; i < n; i++)
     {
         gdk_error_trap_push();
 
@@ -95,7 +99,7 @@ void check_net_support(void)
             gdk_error_trap_pop();
             return;
         }
-        else if(i < 2)
+        else if(i < n)
             g_usleep(2000000);  /* wait 2 seconds */
 
         gdk_flush();
@@ -110,23 +114,37 @@ void check_net_support(void)
                    "manager of the XFce project (http://www.xfce.org)"));
 }
 
-void set_window_type_dock(GtkWidget *window)
+void set_window_type_dock(GtkWidget * window, gboolean set)
 {
-  /* Copied from ROX Filer by Thomas Leonard */
-  /* TODO: Use gdk function when it supports this type */
-  {
-    GdkAtom dock_type;
+    /* Copied from ROX Filer by Thomas Leonard */
+    /* TODO: Use gdk function when it supports this type */
+    {
+        GdkAtom window_type;
+	gboolean mapped;
 
-    dock_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_DOCK",
-				   FALSE);
+        if(set)
+            window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_DOCK", FALSE);
+        else
+            window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_NORMAL", FALSE);
 
-    gtk_widget_realize(window);
+        if(!GTK_WIDGET_REALIZED(window))
+            gtk_widget_realize(window);
 
-    gdk_property_change(window->window,
-                        gdk_atom_intern("_NET_WM_WINDOW_TYPE", FALSE),
-                        gdk_atom_intern("ATOM", FALSE), 32,
-                        GDK_PROP_MODE_REPLACE, (guchar *) &dock_type, 1);
-  }
+	if ((mapped = GTK_WIDGET_MAPPED(window)))
+	    gtk_widget_unmap(window);
+	
+        gdk_property_change(window->window,
+                            gdk_atom_intern("_NET_WM_WINDOW_TYPE", FALSE),
+                            gdk_atom_intern("ATOM", FALSE), 32,
+                            GDK_PROP_MODE_REPLACE, (guchar *) &window_type, 1);
+
+	if (!set)
+	    gdk_property_delete(window->window, 
+		    		gdk_atom_intern("_WIN_LAYER", FALSE));
+	
+	if (mapped)
+	    gtk_widget_map(window);
+    }
 }
 
 /* current desktop */
@@ -142,8 +160,9 @@ int get_net_current_desktop(void)
         create_atoms();
 
     if(XGetWindowProperty
-       (dpy, root, xa_NET_CURRENT_DESKTOP, 0, 1, False, XA_CARDINAL, &ret_type, &fmt,
-        &nitems, &bytes_after, (unsigned char **)&data) == Success && data)
+       (dpy, root, xa_NET_CURRENT_DESKTOP, 0, 1, False, XA_CARDINAL, &ret_type,
+        &fmt, &nitems, &bytes_after, (unsigned char **)&data) == Success &&
+       data)
     {
         n = (int)data[0];
 
@@ -172,7 +191,8 @@ void request_net_current_desktop(int n)
 
     gdk_error_trap_push();
 
-    XSendEvent(dpy, root, False, SubstructureNotifyMask | SubstructureRedirectMask,
+    XSendEvent(dpy, root, False,
+               SubstructureNotifyMask | SubstructureRedirectMask,
                (XEvent *) & sev);
 
     gdk_flush();
@@ -192,8 +212,9 @@ int get_net_number_of_desktops(void)
         create_atoms();
 
     if(XGetWindowProperty
-       (dpy, root, xa_NET_NUMBER_OF_DESKTOPS, 0, 1, False, XA_CARDINAL, &ret_type,
-        &fmt, &nitems, &bytes_after, (unsigned char **)&data) == Success && data)
+       (dpy, root, xa_NET_NUMBER_OF_DESKTOPS, 0, 1, False, XA_CARDINAL,
+        &ret_type, &fmt, &nitems, &bytes_after,
+        (unsigned char **)&data) == Success && data)
     {
         n = (int)data[0];
 
@@ -222,7 +243,8 @@ void request_net_number_of_desktops(int n)
 
     gdk_error_trap_push();
 
-    XSendEvent(dpy, root, False, SubstructureNotifyMask | SubstructureRedirectMask,
+    XSendEvent(dpy, root, False,
+               SubstructureNotifyMask | SubstructureRedirectMask,
                (XEvent *) & sev);
 
     gdk_flush();
@@ -271,5 +293,6 @@ void watch_root_properties(void)
     GdkWindow *w = gdk_get_default_root_window();
 
     gdk_window_add_filter(w, root_filter, NULL);
-    gdk_window_set_events(w, gdk_window_get_events(w) | GDK_PROPERTY_CHANGE_MASK);
+    gdk_window_set_events(w,
+                          gdk_window_get_events(w) | GDK_PROPERTY_CHANGE_MASK);
 }

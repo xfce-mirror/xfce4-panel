@@ -1,4 +1,4 @@
-/*  side.h
+/*  controls_dialog.h
  *  
  *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
@@ -17,37 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#ifndef __XFCE_SIDE_H__
-#define __XFCE_SIDE_H__
+#ifndef __XFCE_CONTROLS_DIALOG_H__
+#define __XFCE_CONTROLS_DIALOG_H__
 
 #include "global.h"
 
-/* init */
-void side_panel_init(int side, GtkBox * hbox);
+void change_panel_control_dialog(PanelControl * pc);
 
-/* just points the proper array element to this panel control */
-void side_panel_register_control(PanelControl *pc);
-
-void side_panel_set_from_xml(int side, xmlNodePtr node);
-
-/* exit */
-void side_panel_write_xml(int side, xmlNodePtr root);
-
-void side_panel_cleanup(int side);
-
-/* settings */
-void side_panel_set_size(int side, int size);
-
-void side_panel_set_popup_size(int side, int size);
-
-void side_panel_set_popup_position(int side, int position);
-
-void side_panel_set_on_top(int side, gboolean on_top);
-
-void side_panel_set_style(int side, int style);
-
-void side_panel_set_theme(int side, const char *theme);
-
-void side_panel_set_num_groups(int side, int n);
-
-#endif /* __XFCE_SIDE_H__ */
+#endif /* __XFCE_CONTROLS_DIALOG_H__ */

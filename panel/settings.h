@@ -1,6 +1,6 @@
 /*  settings.h
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,6 +23,8 @@
 #include "global.h"
 
 void write_panel_config(void);
+
+void get_global_prefs(void);
 
 void get_panel_config(void);
 

@@ -1,6 +1,6 @@
 /*  dialogs.c
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -31,28 +31,31 @@
 #include "item.h"
 #include "popup.h"
 #include "central.h"
-#include "module.h"
+#include "controls.h"
 #include "icons.h"
 
 enum
-    { RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
+{ RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Central panel dialogs
-  -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  Central panel dialogs
+ *  ---------------------
+*/
 void screen_button_dialog(ScreenButton * sb)
 {
     GtkWidget *dialog;
     GtkWidget *entry;
     GtkWidget *vbox1, *vbox2;
     const char *temp;
+    char *name;
+    
     int response = GTK_RESPONSE_NONE;
 
     dialog = gtk_dialog_new_with_buttons(_("Change name"), GTK_WINDOW(toplevel),
                                          GTK_DIALOG_MODAL,
                                          GTK_STOCK_CANCEL,
                                          RESPONSE_CANCEL,
-                                         GTK_STOCK_APPLY, RESPONSE_CHANGE, NULL);
+                                         GTK_STOCK_APPLY, RESPONSE_CHANGE,
+                                         NULL);
 
     vbox1 = GTK_DIALOG(dialog)->vbox;
 
@@ -62,10 +65,14 @@ void screen_button_dialog(ScreenButton * sb)
     gtk_box_pack_start(GTK_BOX(vbox1), vbox2, TRUE, TRUE, 0);
 
     entry = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(entry), sb->name);
+    
     gtk_widget_show(entry);
     gtk_box_pack_start(GTK_BOX(vbox2), entry, TRUE, TRUE, 0);
 
+    name = screen_button_get_name(sb);
+    gtk_entry_set_text(GTK_ENTRY(entry), name);
+    g_free(name);
+    
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 
     response = gtk_dialog_run(GTK_DIALOG(dialog));
@@ -76,18 +83,16 @@ void screen_button_dialog(ScreenButton * sb)
 
         if(temp && strlen(temp))
         {
-            sb->name = g_strdup(temp);
-            gtk_label_set_text(GTK_LABEL(sb->label), temp);
+            screen_button_set_name(sb, temp);
         }
     }
 
     gtk_widget_destroy(dialog);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Side panel dialogs
-  -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
+/*  Side panel dialogs
+ *  ------------------
+*/
 GtkWidget *dialog = NULL;
 
 void set_transient_for_dialog(GtkWidget * window)
@@ -96,27 +101,26 @@ void set_transient_for_dialog(GtkWidget * window)
         gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(dialog));
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Global settings
-  -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-/* size: option menu
- * popup size: option menu
- * style: option menu
- * icon theme: option menu
- * left : spinbutton
- * right: spinbutton
- * screens: spinbutton
- * central panels: checkbox
- * desktop buttons: checkbox
- * mini buttons: checkbox
- * position: button (restore default)
- * lock command : entry + browse button
- * exit command : entry + browse button
- */
-
+/*  Global settings
+ *  ---------------
+ *  size: option menu
+ *  popup size: option menu
+ *  popup position: option menu
+ *  style: option menu (should be radio buttons according to GNOME HIG)
+ *  icon theme: option menu
+ *  left : spinbutton
+ *  right: spinbutton
+ *  screens: spinbutton
+ *  central panels: checkbox
+ *  desktop buttons: checkbox
+ *  mini buttons: checkbox
+ *  position: button (restore default)
+ *  lock command : entry + browse button
+ *  exit command : entry + browse button
+*/
 static GtkWidget *size_menu;
 static GtkWidget *popup_menu;
+static GtkWidget *orientation_menu;
 static GtkWidget *style_menu;
 static GtkWidget *theme_menu;
 static GtkWidget *left_spin;
@@ -128,6 +132,7 @@ static GtkWidget *buttons_checkbox;
 static GtkWidget *minibuttons_checkbox;
 
 static GtkWidget *screens_spin;
+static GtkWidget *ontop_checkbox;
 static GtkWidget *pos_button;
 static GtkWidget *lock_entry;
 static GtkWidget *exit_entry;
@@ -142,22 +147,23 @@ GtkShadowType main_shadow = GTK_SHADOW_IN;
 GtkShadowType header_shadow = GTK_SHADOW_OUT;
 GtkShadowType option_shadow = GTK_SHADOW_NONE;
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-/* backup */
-
+/*  backup 
+*/
 static void create_backup(void)
 {
     backup.x = settings.x;
     backup.y = settings.y;
     backup.size = settings.size;
     backup.popup_size = settings.popup_size;
+    backup.popup_position = settings.popup_position;
     backup.style = settings.style;
-    backup.icon_theme = g_strdup(settings.icon_theme);
+    backup.theme = g_strdup(settings.theme);
     backup.num_left = settings.num_left;
     backup.num_right = settings.num_right;
     backup.num_screens = settings.num_screens;
     backup.show_desktop_buttons = settings.show_desktop_buttons;
     backup.show_central = settings.show_central;
+    backup.on_top = settings.on_top;
     backup.lock_command = g_strdup(settings.lock_command);
     backup.exit_command = g_strdup(settings.exit_command);
 }
@@ -168,22 +174,29 @@ static void restore_backup(void)
 
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu), 
+	    			backup.popup_position);
     gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), backup.style);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu), backup_theme_index);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
+                                backup_theme_index);
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), backup.num_left);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), backup.num_right);
 
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), backup.num_screens);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin),
+                              backup.num_screens);
     /* apparently the callback doesn't always work 
-       panel_set_num_screens(backup.num_screens);*/
+       panel_set_num_screens(backup.num_screens); */
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox), 
-				 backup.show_desktop_buttons);
-    
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox), 
-				 backup.show_central);
-    
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox),
+                                 backup.show_desktop_buttons);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox),
+                                 backup.show_central);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ontop_checkbox),
+                                 backup.on_top);
+
     if(backup.lock_command)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
     else
@@ -199,9 +212,8 @@ static void restore_backup(void)
     panel_set_position();
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-/* sections */
-
+/*  sections 
+*/
 static void add_header(const char *text, GtkBox * box)
 {
     GtkWidget *frame, *eventbox, *label;
@@ -237,9 +249,8 @@ static void add_spacer(GtkBox * box)
     gtk_box_pack_start(box, eventbox, FALSE, TRUE, 0);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-/* sizes */
-
+/*  sizes 
+*/
 static void size_menu_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
@@ -303,7 +314,8 @@ static void add_size_menu(GtkWidget * option_menu, int size, gboolean is_popup)
     gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
     gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), size);
 
-    g_signal_connect(option_menu, "changed", G_CALLBACK(size_menu_changed), NULL);
+    g_signal_connect(option_menu, "changed", G_CALLBACK(size_menu_changed),
+                     NULL);
 }
 
 static void add_size_box(GtkBox * box)
@@ -354,9 +366,8 @@ static void add_size_box(GtkBox * box)
     gtk_box_pack_start(GTK_BOX(hbox), popup_menu, TRUE, TRUE, 0);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-/* style */
-
+/*  style
+*/
 static void style_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
@@ -386,12 +397,64 @@ static void add_style_menu(GtkWidget * option_menu, int style)
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(style_changed), NULL);
 
-    if(settings.size == TINY)
+    if(settings.popup_position == LEFT || settings.popup_position == RIGHT)
         gtk_widget_set_sensitive(option_menu, FALSE);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-static char **find_icon_themes(void)
+/*  popup orientation
+*/
+static void orientation_changed(GtkOptionMenu * menu)
+{
+    int n = gtk_option_menu_get_history(menu);
+
+    if(n == settings.popup_position)
+        return;
+
+    if (n == LEFT || n == RIGHT)
+    {
+	gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
+	gtk_widget_set_sensitive(style_menu, FALSE);
+    }
+    else
+    {
+	gtk_widget_set_sensitive(style_menu, TRUE);
+    }
+    
+    panel_set_popup_position(n);
+    gtk_widget_set_sensitive(revert, TRUE);
+}
+
+static void add_orientation_menu(GtkWidget * option_menu, int orientation)
+{
+    GtkWidget *menu = gtk_menu_new();
+    GtkWidget *item;
+
+    item = gtk_menu_item_new_with_label(_("Left"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    item = gtk_menu_item_new_with_label(_("Right"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    item = gtk_menu_item_new_with_label(_("Top"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    item = gtk_menu_item_new_with_label(_("Bottom"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), orientation);
+
+    g_signal_connect(option_menu, "changed", 
+	    	     G_CALLBACK(orientation_changed), NULL);
+}
+
+/*  theme
+*/
+static char **find_themes(void)
 {
     char **themes = NULL;
     GList *list = NULL;
@@ -466,11 +529,11 @@ static void theme_changed(GtkOptionMenu * option_menu)
         theme = gtk_label_get_text(GTK_LABEL(label));
     }
 
-    if((theme == NULL && settings.icon_theme == NULL) ||
-       (settings.icon_theme && theme && strequal(theme, settings.icon_theme)))
+    if((theme == NULL && settings.theme == NULL) ||
+       (settings.theme && theme && strequal(theme, settings.theme)))
         return;
 
-    panel_set_icon_theme(theme);
+    panel_set_theme(theme);
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -479,7 +542,7 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
     int i = 0, n = 0;
-    char **themes = find_icon_themes();
+    char **themes = find_themes();
     char **s;
 
     item = gtk_menu_item_new_with_label(_("XFce standard theme"));
@@ -494,7 +557,7 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
             gtk_widget_show(item);
             gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
-            if(settings.icon_theme && strequal(settings.icon_theme, *s))
+            if(settings.theme && strequal(settings.theme, *s))
                 n = backup_theme_index = i + 1;
         }
 
@@ -507,7 +570,6 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
     g_signal_connect(option_menu, "changed", G_CALLBACK(theme_changed), NULL);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static void add_style_box(GtkBox * box)
 {
     GtkWidget *frame, *vbox, *hbox, *label;
@@ -539,6 +601,22 @@ static void add_style_box(GtkBox * box)
     add_style_menu(style_menu, settings.style);
     gtk_box_pack_start(GTK_BOX(hbox), style_menu, TRUE, TRUE, 0);
 
+    /* popup orientation */
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Popup position:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    orientation_menu = gtk_option_menu_new();
+    gtk_widget_show(orientation_menu);
+    add_orientation_menu(orientation_menu, settings.popup_position);
+    gtk_box_pack_start(GTK_BOX(hbox), orientation_menu, TRUE, TRUE, 0);
+
     /* icon theme */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
@@ -552,7 +630,7 @@ static void add_style_box(GtkBox * box)
 
     theme_menu = gtk_option_menu_new();
     gtk_widget_show(theme_menu);
-    add_theme_menu(theme_menu, settings.icon_theme);
+    add_theme_menu(theme_menu, settings.theme);
     gtk_box_pack_start(GTK_BOX(hbox), theme_menu, TRUE, TRUE, 0);
 }
 
@@ -585,21 +663,21 @@ static void spin_changed(GtkWidget * spin)
 }
 
 
-static void central_changed(GtkToggleButton *button, gpointer data)
+static void central_changed(GtkToggleButton * button, gpointer data)
 {
     gboolean show = gtk_toggle_button_get_active(button);
 
     panel_set_show_central(show);
 
-    if (show)
-	gtk_widget_show(central_vbox);
+    if(show)
+        gtk_widget_show(central_vbox);
     else
-	gtk_widget_hide(central_vbox);
+        gtk_widget_hide(central_vbox);
 
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
-static void desktop_buttons_changed(GtkToggleButton *button, gpointer data)
+static void desktop_buttons_changed(GtkToggleButton * button, gpointer data)
 {
     gboolean show = gtk_toggle_button_get_active(button);
 
@@ -607,7 +685,7 @@ static void desktop_buttons_changed(GtkToggleButton *button, gpointer data)
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
-static void minibuttons_changed(GtkToggleButton *button, gpointer data)
+static void minibuttons_changed(GtkToggleButton * button, gpointer data)
 {
     gboolean show = gtk_toggle_button_get_active(button);
 
@@ -646,7 +724,8 @@ static void add_controls_box(GtkBox * box)
     gtk_box_pack_start(GTK_BOX(hbox), left_spin, FALSE, FALSE, 0);
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), settings.num_left);
-    g_signal_connect(left_spin, "value-changed", G_CALLBACK(spin_changed), NULL);
+    g_signal_connect(left_spin, "value-changed", G_CALLBACK(spin_changed),
+                     NULL);
 
     /* right */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -664,7 +743,8 @@ static void add_controls_box(GtkBox * box)
     gtk_box_pack_start(GTK_BOX(hbox), right_spin, FALSE, FALSE, 0);
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), settings.num_right);
-    g_signal_connect(right_spin, "value-changed", G_CALLBACK(spin_changed), NULL);
+    g_signal_connect(right_spin, "value-changed", G_CALLBACK(spin_changed),
+                     NULL);
 
     /* central panel */
     add_spacer(GTK_BOX(vbox));
@@ -674,7 +754,7 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Show central panel:")); 
+    label = gtk_label_new(_("Show central panel:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -684,10 +764,10 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(central_checkbox);
     gtk_box_pack_start(GTK_BOX(hbox), central_checkbox, FALSE, FALSE, 0);
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox), 
-				 settings.show_central);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox),
+                                 settings.show_central);
     g_signal_connect(central_checkbox, "toggled", G_CALLBACK(central_changed),
-		     NULL);
+                     NULL);
 
     /* subgroup central */
     central_vbox = gtk_vbox_new(TRUE, 4);
@@ -699,7 +779,7 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(central_vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Show desktop buttons:")); 
+    label = gtk_label_new(_("Show desktop buttons:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -709,17 +789,17 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(buttons_checkbox);
     gtk_box_pack_start(GTK_BOX(hbox), buttons_checkbox, FALSE, FALSE, 0);
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox), 
-				 settings.show_desktop_buttons);
-    g_signal_connect(buttons_checkbox, "toggled", G_CALLBACK(desktop_buttons_changed),
-		     NULL);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox),
+                                 settings.show_desktop_buttons);
+    g_signal_connect(buttons_checkbox, "toggled",
+                     G_CALLBACK(desktop_buttons_changed), NULL);
 
     /* central - show minibuttons */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(central_vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Show mini buttons:")); 
+    label = gtk_label_new(_("Show mini buttons:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -729,13 +809,13 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(minibuttons_checkbox);
     gtk_box_pack_start(GTK_BOX(hbox), minibuttons_checkbox, FALSE, FALSE, 0);
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(minibuttons_checkbox), 
-				 settings.show_minibuttons);
-    g_signal_connect(minibuttons_checkbox, "toggled", G_CALLBACK(minibuttons_changed),
-		     NULL);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(minibuttons_checkbox),
+                                 settings.show_minibuttons);
+    g_signal_connect(minibuttons_checkbox, "toggled",
+                     G_CALLBACK(minibuttons_changed), NULL);
 
-    if (!settings.show_central)
-	gtk_widget_hide(central_vbox);
+    if(!settings.show_central)
+        gtk_widget_hide(central_vbox);
 
     add_spacer(GTK_BOX(vbox));
 
@@ -743,7 +823,7 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Virtual desktops:")); 
+    label = gtk_label_new(_("Virtual desktops:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -753,12 +833,21 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(screens_spin);
     gtk_box_pack_start(GTK_BOX(hbox), screens_spin, FALSE, FALSE, 0);
 
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), settings.num_screens);
-    g_signal_connect(screens_spin, "value-changed", G_CALLBACK(spin_changed), NULL);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin),
+                              settings.num_screens);
+    g_signal_connect(screens_spin, "value-changed", G_CALLBACK(spin_changed),
+                     NULL);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /* position */
+static void ontop_changed(GtkToggleButton * button, gpointer data)
+{
+    gboolean ontop = gtk_toggle_button_get_active(button);
+
+    panel_set_on_top(ontop);
+    gtk_widget_set_sensitive(revert, TRUE);
+}
 
 static void position_clicked(GtkWidget * button)
 {
@@ -769,6 +858,7 @@ static void position_clicked(GtkWidget * button)
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
+/* restore position and set on top or not */
 static void add_position_box(GtkBox * box)
 {
     GtkWidget *frame, *vbox, *hbox, *label;
@@ -783,6 +873,26 @@ static void add_position_box(GtkBox * box)
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
     gtk_widget_show(vbox);
     gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+    /* checkbutton */
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Keep panel on top:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    ontop_checkbox = gtk_check_button_new();
+    gtk_widget_show(ontop_checkbox);
+    gtk_box_pack_start(GTK_BOX(hbox), ontop_checkbox, FALSE, FALSE, 0);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ontop_checkbox),
+                                 settings.on_top);
+    g_signal_connect(ontop_checkbox, "toggled",
+                     G_CALLBACK(ontop_changed), NULL);
 
     /* button */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -867,8 +977,8 @@ static void add_advanced_box(GtkBox * box)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), settings.lock_command);
     g_signal_connect(lock_entry, "insert-at-cursor", G_CALLBACK(entry_changed),
                      NULL);
-    g_signal_connect(lock_entry, "delete-from-cursor", G_CALLBACK(entry_changed),
-                     NULL);
+    g_signal_connect(lock_entry, "delete-from-cursor",
+                     G_CALLBACK(entry_changed), NULL);
 
     button = gtk_button_new_with_label(" ... ");
     gtk_widget_show(button);
@@ -895,8 +1005,8 @@ static void add_advanced_box(GtkBox * box)
         gtk_entry_set_text(GTK_ENTRY(exit_entry), settings.exit_command);
     g_signal_connect(exit_entry, "insert-at-cursor", G_CALLBACK(entry_changed),
                      NULL);
-    g_signal_connect(exit_entry, "delete-from-cursor", G_CALLBACK(entry_changed),
-                     NULL);
+    g_signal_connect(exit_entry, "delete-from-cursor",
+                     G_CALLBACK(entry_changed), NULL);
 
     button = gtk_button_new_with_label(" ... ");
     gtk_widget_show(button);
@@ -914,7 +1024,9 @@ void global_settings_dialog(void)
 {
     GtkWidget *frame, *vbox, *button;
     gboolean done;
-
+    GtkWidget *notebook, *label;
+    char *markup;
+    
     if(running)
     {
         gtk_window_present(GTK_WINDOW(dialog));
@@ -927,10 +1039,11 @@ void global_settings_dialog(void)
     create_backup();
 
     dialog =
-        gtk_dialog_new_with_buttons(_("Xfce Panel Settings"), GTK_WINDOW(toplevel),
+        gtk_dialog_new_with_buttons(_("Xfce Panel Settings"),
+                                    GTK_WINDOW(toplevel),
                                     GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
                                     NULL);
-
+    
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
     gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
 
@@ -943,24 +1056,31 @@ void global_settings_dialog(void)
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
 
+    /* main notebook */
+    notebook = gtk_notebook_new();
+    gtk_widget_show(notebook);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), notebook, 
+	    	       TRUE, TRUE, 0);
+    
+    /* first notebook page */
     frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
+    gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), frame, TRUE, TRUE, 0);
+    
+    markup = g_strconcat("<span> ",_("General")," </span>", NULL);
+    label = gtk_label_new(NULL);
+    gtk_label_set_markup(GTK_LABEL(label), markup);
+    g_free(markup);
+    gtk_widget_show(label);
+
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
 
     vbox = gtk_vbox_new(FALSE, 2);
     gtk_widget_show(vbox);
     gtk_container_add(GTK_CONTAINER(frame), vbox);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-
-    add_header(_("Sizes"), GTK_BOX(vbox));
-    add_size_box(GTK_BOX(vbox));
-    add_spacer(GTK_BOX(vbox));
-
-    add_header(_("Appearance"), GTK_BOX(vbox));
-    add_style_box(GTK_BOX(vbox));
-    add_spacer(GTK_BOX(vbox));
 
     add_header(_("Panel controls"), GTK_BOX(vbox));
     add_controls_box(GTK_BOX(vbox));
@@ -970,7 +1090,62 @@ void global_settings_dialog(void)
     add_position_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 
-    add_header(_("Advanced settings"), GTK_BOX(vbox));
+    g_object_unref(sg);
+
+    /* second notebook page */
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
+    gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
+    gtk_widget_show(frame);
+    
+    markup = g_strconcat("<span> ",_("Appearance")," </span>", NULL);
+    label = gtk_label_new(NULL);
+    gtk_label_set_markup(GTK_LABEL(label), markup);
+    g_free(markup);
+    gtk_widget_show(label);
+
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
+
+    vbox = gtk_vbox_new(FALSE, 2);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+
+    /* sizes */
+    add_header(_("Sizes"), GTK_BOX(vbox));
+    add_size_box(GTK_BOX(vbox));
+    add_spacer(GTK_BOX(vbox));
+
+    /* style */
+    add_header(_("Style"), GTK_BOX(vbox));
+    add_style_box(GTK_BOX(vbox));
+    add_spacer(GTK_BOX(vbox));
+
+    g_object_unref(sg);
+
+    /* third notebook page */
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
+    gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
+    gtk_widget_show(frame);
+    
+    markup = g_strconcat("<span> ",_("Advanced")," </span>", NULL);
+    label = gtk_label_new(NULL);
+    gtk_label_set_markup(GTK_LABEL(label), markup);
+    g_free(markup);
+    gtk_widget_show(label);
+
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
+
+    vbox = gtk_vbox_new(FALSE, 2);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+
+    /* advanced settings */
+    add_header(_("Commands"), GTK_BOX(vbox));
     add_advanced_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 

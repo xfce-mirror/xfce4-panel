@@ -1,6 +1,6 @@
 /*  callback.h
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,13 +22,14 @@
 
 #include "global.h"
 
-/*****************************************************************************/
-
+/* global */
 gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, gpointer data);
+
 gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data);
 
-/*****************************************************************************/
+void iconify_cb(void);
 
+/* central panel */
 void screen_button_click(GtkWidget * b, ScreenButton * sb);
 
 gboolean screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev,
@@ -38,15 +39,11 @@ void mini_lock_cb(void);
 void mini_info_cb(void);
 void mini_palet_cb(void);
 
-void mini_power_cb(GtkButton * b, GdkEventButton * ev, char *cmd);
+void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data);
 
-/*****************************************************************************/
-
-void iconify_cb(void);
-
-gboolean panel_group_press_cb(GtkButton * b, GdkEventButton * ev, PanelGroup * pg);
-
-/*****************************************************************************/
+/* side panel */
+gboolean panel_control_press_cb(GtkButton * b, GdkEventButton * ev,
+                                PanelControl * pc);
 
 void toggle_popup(GtkWidget * button, PanelPopup * pp);
 
@@ -54,16 +51,14 @@ void tearoff_popup(GtkWidget * button, PanelPopup * pp);
 
 gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp);
 
-/*****************************************************************************/
-
+/* panel items */
 void panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                         gint x, gint y, GtkSelectionData * data,
                         guint info, guint time, PanelItem * pi);
 
 void panel_item_click_cb(GtkButton * b, PanelItem * pi);
 
-/*****************************************************************************/
-
+/* menu items */
 void addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                             gint x, gint y, GtkSelectionData * data,
                             guint info, guint time, PanelPopup * pp);
@@ -79,3 +74,4 @@ void menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
 void menu_item_click_cb(GtkButton * b, MenuItem * mi);
 
 #endif /* __XFCE_CALLBACKS_H__ */
+

@@ -1,6 +1,6 @@
 /*  wmhints.h
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ void check_net_support(void);
 
 void watch_root_properties(void);
 
-void set_window_type_dock(GtkWidget *window);
+void set_window_type_dock(GtkWidget * window, gboolean set);
 
 void request_net_current_desktop(int n);
 void request_net_number_of_desktops(int n);

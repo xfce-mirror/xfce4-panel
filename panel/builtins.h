@@ -1,6 +1,6 @@
 /*  builtins.h
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,6 +22,13 @@
 
 #include "global.h"
 
-gboolean create_builtin_module(PanelModule * pm);
+void create_clock(PanelControl * pc);
+
+void create_trash(PanelControl * pc);
+
+void create_exit(PanelControl * pc);
+
+void create_config(PanelControl * pc);
 
 #endif /* __XFCE_BUILTINS_H__ */
+

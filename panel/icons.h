@@ -1,6 +1,6 @@
 /*  icons.h
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

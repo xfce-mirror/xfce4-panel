@@ -42,15 +42,15 @@ static void fill_buffer(const char *filename, char **buf, int *nb)
 {
     GError *err = NULL;
 
-    if (!filename)
-	return;
-    
+    if(!filename)
+        return;
+
     g_file_get_contents(filename, buf, nb, &err);
 
     if(err)
     {
-        g_printerr("\nxfce4: %s (line: %d): %s\n\n", __FILE__, __LINE__, 
-		err->message);
+        g_printerr("\nxfce4: %s (line: %d): %s\n\n", __FILE__, __LINE__,
+                   err->message);
     }
 }
 
@@ -59,8 +59,8 @@ static GtkWidget *create_bold_label(const char *text)
     GtkWidget *label;
     char *markup;
 
-    if (!text)
-	return gtk_label_new("");
+    if(!text)
+        return gtk_label_new("");
 
     markup = g_strconcat("<b> ", text, " </b>", NULL);
 
@@ -70,7 +70,7 @@ static GtkWidget *create_bold_label(const char *text)
     return label;
 }
 
-static void info_help_cb(GtkWidget *w, gpointer data)
+static void info_help_cb(GtkWidget * w, gpointer data)
 {
     exec_cmd("xfhelp", FALSE);
 }
@@ -94,10 +94,11 @@ GtkWidget *create_scrolled_text_view(const char *file)
 
     fill_buffer(file, &buffer, &nbytes_read);
 
-    if (buffer)
-	gtk_text_buffer_set_text(GTK_TEXT_BUFFER(textbuffer), buffer, nbytes_read);
+    if(buffer)
+        gtk_text_buffer_set_text(GTK_TEXT_BUFFER(textbuffer), buffer,
+                                 nbytes_read);
     else
-	gtk_text_buffer_set_text(GTK_TEXT_BUFFER(textbuffer), " ", 1);
+        gtk_text_buffer_set_text(GTK_TEXT_BUFFER(textbuffer), " ", 1);
     g_free(buffer);
 
     gtk_text_view_set_buffer(GTK_TEXT_VIEW(textview), textbuffer);
@@ -136,7 +137,7 @@ static GtkWidget *create_header(void)
     gtk_container_set_border_width(GTK_CONTAINER(vbox2), 4);
     gtk_widget_show(vbox2);
     gtk_container_add(GTK_CONTAINER(frame), vbox2);
-    
+
     label = create_bold_label(_(XFCE_VERSION));
     gtk_widget_show(label);
     gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
@@ -150,30 +151,31 @@ static GtkWidget *create_header(void)
     return vbox1;
 }
 
-static void add_info_page(GtkNotebook *notebook)
+static void add_info_page(GtkNotebook * notebook)
 {
     GtkWidget *info_label_1;
     GtkWidget *info_notebook_page;
     GtkWidget *info_bottom_frame;
     GtkWidget *info_view;
-    
+
     info_label_1 = gtk_label_new(_("Info"));
     gtk_widget_show(info_label_1);
-  
+
     info_notebook_page = gtk_vbox_new(FALSE, 0);
     gtk_container_set_border_width(GTK_CONTAINER(info_notebook_page), 4);
     gtk_widget_show(info_notebook_page);
     gtk_notebook_append_page(GTK_NOTEBOOK(notebook), info_notebook_page,
-	    info_label_1);
+                             info_label_1);
 
     info_bottom_frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(info_bottom_frame), GTK_SHADOW_IN);
     gtk_widget_show(info_bottom_frame);
-    gtk_box_pack_start(GTK_BOX(info_notebook_page), info_bottom_frame, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(info_notebook_page), info_bottom_frame, TRUE,
+                       TRUE, 0);
 
     {
-	GtkTextBuffer *tb = gtk_text_buffer_new(NULL);
-	char *info_text = "\n\
+        GtkTextBuffer *tb = gtk_text_buffer_new(NULL);
+        char *info_text = "\n\
 XFce Desktop Environment\n\
 \n\n\
 XFce is a collection of programs that together provide the full functionality\n\
@@ -185,34 +187,34 @@ o Window manager (xfwm4)\n\
 o Panel (xfce4)\n\
    start programs, monitor mailboxes, show time\n\
 \n\
-This is a development version and the list presented here is expected to grow\n\
+This is a developcent version and the list presented here is expected to grow\n\
 considerably before the final release\n\
 \n\
 Thank you for your interest in XFce,\n\
 \n\
-	-- The XFce Development Team --\n";
+	-- The XFce Developcent Team --\n";
 
-	gtk_text_buffer_set_text(tb, info_text, -1);
-	info_view = gtk_text_view_new();
-	gtk_text_view_set_buffer(GTK_TEXT_VIEW(info_view), tb);
-	gtk_text_view_set_editable(GTK_TEXT_VIEW(info_view), FALSE);
-	gtk_text_view_set_left_margin(GTK_TEXT_VIEW(info_view), 6);
-	gtk_text_view_set_right_margin(GTK_TEXT_VIEW(info_view), 6);
-	gtk_widget_show(info_view);
-	gtk_container_add(GTK_CONTAINER(info_bottom_frame), info_view);
+        gtk_text_buffer_set_text(tb, info_text, -1);
+        info_view = gtk_text_view_new();
+        gtk_text_view_set_buffer(GTK_TEXT_VIEW(info_view), tb);
+        gtk_text_view_set_editable(GTK_TEXT_VIEW(info_view), FALSE);
+        gtk_text_view_set_left_margin(GTK_TEXT_VIEW(info_view), 6);
+        gtk_text_view_set_right_margin(GTK_TEXT_VIEW(info_view), 6);
+        gtk_widget_show(info_view);
+        gtk_container_add(GTK_CONTAINER(info_bottom_frame), info_view);
     }
 }
 
-static void add_credits_page(GtkNotebook *notebook)
+static void add_credits_page(GtkNotebook * notebook)
 {
     GtkWidget *info_label;
     GtkWidget *info_notebook_page;
     GtkWidget *info_credits_view;
     char *filename;
-    
+
     info_label = gtk_label_new(_("Credits"));
     gtk_widget_show(info_label);
-    
+
     info_notebook_page = gtk_vbox_new(FALSE, 0);
     gtk_container_set_border_width(GTK_CONTAINER(info_notebook_page), 4);
     gtk_widget_show(info_notebook_page);
@@ -224,16 +226,16 @@ static void add_credits_page(GtkNotebook *notebook)
     gtk_container_add(GTK_CONTAINER(info_notebook_page), info_credits_view);
 }
 
-static void add_license_page(GtkNotebook *notebook)
+static void add_license_page(GtkNotebook * notebook)
 {
     GtkWidget *info_label;
     GtkWidget *info_notebook_page;
     GtkWidget *info_license_view;
     char *filename;
-    
+
     info_label = gtk_label_new(_("License"));
     gtk_widget_show(info_label);
-    
+
     info_notebook_page = gtk_vbox_new(FALSE, 0);
     gtk_container_set_border_width(GTK_CONTAINER(info_notebook_page), 4);
     gtk_widget_show(info_notebook_page);
@@ -271,7 +273,7 @@ void info_panel_dialog(void)
     /* header with logo */
     header = create_header();
     gtk_box_pack_start(GTK_BOX(vbox), header, FALSE, FALSE, 0);
-    
+
     /* the notebook */
     notebook = gtk_notebook_new();
     gtk_widget_show(notebook);
@@ -292,7 +294,7 @@ void info_panel_dialog(void)
     buttonbox = gtk_hbutton_box_new();
     gtk_widget_show(buttonbox);
     gtk_box_pack_start(GTK_BOX(vbox), buttonbox, FALSE, FALSE, 0);
-    
+
     info_ok_button = gtk_button_new_from_stock(GTK_STOCK_CLOSE);
     gtk_widget_show(info_ok_button);
     gtk_box_pack_start(GTK_BOX(buttonbox), info_ok_button, FALSE, FALSE, 0);
@@ -301,10 +303,13 @@ void info_panel_dialog(void)
     gtk_widget_show(info_help_button);
     gtk_box_pack_start(GTK_BOX(buttonbox), info_help_button, FALSE, FALSE, 0);
 
-    gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox), info_ok_button, TRUE);
-    
-    g_signal_connect_swapped(info_ok_button, "clicked", G_CALLBACK(gtk_widget_destroy), info);
-    g_signal_connect(info_help_button, "clicked", G_CALLBACK(info_help_cb), NULL);
+    gtk_button_box_set_child_secondary(GTK_BUTTON_BOX(buttonbox),
+                                       info_ok_button, TRUE);
+
+    g_signal_connect_swapped(info_ok_button, "clicked",
+                             G_CALLBACK(gtk_widget_destroy), info);
+    g_signal_connect(info_help_button, "clicked", G_CALLBACK(info_help_cb),
+                     NULL);
 
     gtk_widget_show_all(info);
 }

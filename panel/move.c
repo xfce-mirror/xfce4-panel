@@ -1,7 +1,7 @@
 /*  move.c
  *
  *  Copyright (C) 1999, 2002 Olivier Fourdan (fourdan@xfce.org)
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -66,8 +66,8 @@ void CreateDrawGC(GdkWindow * w)
     }
 
     gcm =
-        GDK_GC_FUNCTION | GDK_GC_LINE_WIDTH | GDK_GC_FOREGROUND | GDK_GC_SUBWINDOW |
-        GDK_GC_LINE_STYLE;
+        GDK_GC_FUNCTION | GDK_GC_LINE_WIDTH | GDK_GC_FOREGROUND |
+        GDK_GC_SUBWINDOW | GDK_GC_LINE_STYLE;
     gcv.function = GDK_XOR;
     gcv.line_width = 5;
     gcv.foreground = col;
@@ -94,8 +94,8 @@ void MoveOutline(int x, int y, int width, int height)
     /* undraw the old one, if any */
     if(lastWidth || lastHeight)
     {
-        gdk_draw_rectangle(GDK_ROOT_PARENT(), DrawGC, FALSE, lastx, lasty, lastWidth,
-                           lastHeight);
+        gdk_draw_rectangle(GDK_ROOT_PARENT(), DrawGC, FALSE, lastx, lasty,
+                           lastWidth, lastHeight);
     }
 
     lastx = x;
@@ -106,8 +106,8 @@ void MoveOutline(int x, int y, int width, int height)
     /* draw the new one, if any */
     if(lastWidth || lastHeight)
     {
-        gdk_draw_rectangle(GDK_ROOT_PARENT(), DrawGC, FALSE, lastx, lasty, lastWidth,
-                           lastHeight);
+        gdk_draw_rectangle(GDK_ROOT_PARENT(), DrawGC, FALSE, lastx, lasty,
+                           lastWidth, lastHeight);
     }
 }
 
@@ -134,11 +134,12 @@ move_pressed(GtkWidget * widget, GdkEventButton * event, gpointer * topwin)
 
     gtk_grab_add(widget);
     gdk_pointer_grab(widget->window, TRUE,
-                     GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_MOTION_MASK, NULL, NULL,
-                     0);
+                     GDK_BUTTON_RELEASE_MASK | GDK_BUTTON_MOTION_MASK, NULL,
+                     NULL, 0);
 
     p = g_object_get_data(G_OBJECT(widget), "user_data");
-    gdk_window_get_origin(((GtkWidget *) topwin)->window, &upositionx, &upositiony);
+    gdk_window_get_origin(((GtkWidget *) topwin)->window, &upositionx,
+                          &upositiony);
     gdk_window_get_size(((GtkWidget *) topwin)->window, &uwidth, &uheight);
 
     p->x = (int)upositionx - event->x_root;
@@ -180,7 +181,8 @@ move_released(GtkWidget * widget, GdkEventButton * event, gpointer * topwin)
   XSync (GDK_DISPLAY (), True);
   move_internal_ungrab (GDK_DISPLAY ());
 */
-    XMoveWindow(GDK_DISPLAY(), GDK_WINDOW_XWINDOW(((GtkWidget *) topwin)->window),
+    XMoveWindow(GDK_DISPLAY(),
+                GDK_WINDOW_XWINDOW(((GtkWidget *) topwin)->window),
                 (xp > 0) ? xp : 0, (yp > 0) ? yp : 0);
     gtk_grab_remove(widget);
     gdk_pointer_ungrab(0);
@@ -212,8 +214,8 @@ move_motion(GtkWidget * widget, GdkEventMotion * event, gpointer * topwin)
   gdk_window_get_size (((GtkWidget *) topwin)->window, &uwidth, &uheight);
   MoveOutline (xp, yp, uwidth, uheight);
 */
-    XMoveWindow(GDK_DISPLAY(), GDK_WINDOW_XWINDOW(((GtkWidget *) topwin)->window),
-                xp, yp);
+    XMoveWindow(GDK_DISPLAY(),
+                GDK_WINDOW_XWINDOW(((GtkWidget *) topwin)->window), xp, yp);
 }
 
 void attach_move_callbacks(GtkWidget * widget)
@@ -223,7 +225,8 @@ void attach_move_callbacks(GtkWidget * widget)
     icon_pos = g_new(CursorOffset, 1);
     g_object_set_data(G_OBJECT(widget), "user_data", icon_pos);
 
-    gtk_widget_set_events(widget, GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
+    gtk_widget_set_events(widget,
+                          GDK_BUTTON_MOTION_MASK | GDK_BUTTON_PRESS_MASK);
 
     g_signal_connect(widget, "button_press_event",
                      G_CALLBACK(move_pressed), toplevel);

@@ -1,27 +1,13 @@
 <?xml version="1.0"?>
 <Xfce>
-  <Panel size="1" popupsize="1" style="1" left="5" right="5" screens="4">
-    <Position x="269" y="955"/>
+  <Panel>
+    <Position x="-1" y="-1"/>
     <Lock>xflock</Lock>
-    <Exit>Apps/ROX-Session/AppRun</Exit>
   </Panel>
-  <Central>
-    <Screen>One</Screen>
-    <Screen>Two</Screen>
-    <Screen>Three</Screen>
-    <Screen>Four</Screen>
-    <Screen>Five</Screen>
-    <Screen>Six</Screen>
-    <Screen>Seven</Screen>
-    <Screen>Eight</Screen>
-    <Screen>Nine</Screen>
-    <Screen>Ten</Screen>
-    <Screen>Eleven</Screen>
-    <Screen>Twelve</Screen>
-  </Central>
+  <Central/>
   <Left>
     <Group>
-      <Module id="0"/>
+      <Control id="0"/>
     </Group>
     <Group>
       <Popup>
@@ -62,11 +48,11 @@
           <Icon id="-1">_pkgdatadir_/icons/DiskFloppy.xpm</Icon>
         </Item>
       </Popup>
-      <Item>
+      <Control id="-2">
         <Command term="0">xftree</Command>
         <Tooltip>Bestandsbeheer</Tooltip>
         <Icon id="2"/>
-      </Item>
+      </Control>
     </Group>
     <Group>
       <Popup>
@@ -77,11 +63,11 @@
           <Icon id="1"/>
         </Item>
       </Popup>
-      <Item>
+      <Control id="-2">
         <Command term="0">gvim</Command>
         <Tooltip>Editor</Tooltip>
         <Icon id="1"/>
-      </Item>
+      </Control>
     </Group>
     <Group>
       <Popup>
@@ -92,7 +78,7 @@
           <Icon id="-1">_pkgdatadir_/pixmaps/Bookshelf.xpm</Icon>
         </Item>
       </Popup>
-      <Module id="-1">libmailcheck.so</Module>
+      <Control id="-1">libmailcheck.so</Control>
     </Group>
     <Group>
       <Popup>
@@ -103,24 +89,24 @@
           <Icon id="-1">_pkgdatadir_/pixmaps/gnome-globe.png</Icon>
         </Item>
       </Popup>
-      <Item>
+      <Control id="-2">
         <Command term="0">galeon -w</Command>
         <Tooltip>Galeon internet browser</Tooltip>
         <Icon id="7"/>
-      </Item>
+      </Control>
     </Group>
     <Group>
       <Popup/>
-      <Item>
+      <Control id="-2">
         <Command term="0"/>
         <Tooltip>Click Mouse 3 to change item</Tooltip>
         <Icon id="0"/>
-      </Item>
+      </Control>
     </Group>
   </Left>
   <Right>
     <Group>
-      <Module id="1"/>
+      <Control id="1"/>
     </Group>
     <Group>
       <Popup>
@@ -136,11 +122,11 @@
           <Icon id="-1">_pkgdatadir_/icons/Pencils.xpm</Icon>
         </Item>
       </Popup>
-      <Item>
+      <Control id="-2">
         <Command term="0">xfhelp</Command>
         <Tooltip>Xfce Handleiding</Tooltip>
         <Icon id="5"/>
-      </Item>
+      </Control>
     </Group>
     <Group>
       <Popup>
@@ -157,35 +143,35 @@
           <Icon id="-1">_pkgdatadir_/icons/Mouse.xpm</Icon>
         </Item>
       </Popup>
-      <Item>
+      <Control id="-2">
         <Command term="0">xfstyle</Command>
         <Tooltip>XFce Style Manager</Tooltip>
         <Icon id="3"/>
-      </Item>
+      </Control>
     </Group>
     <Group>
       <Popup/>
-      <Item>
+      <Control id="-2">
         <Command term="0">anjuta</Command>
         <Tooltip>Anjuta C/C++ IDE</Tooltip>
 	<Icon id="-1">/usr/share/pixmaps/anjuta/applogo.png</Icon>
-      </Item>
+      </Control>
     </Group>
     <Group>
       <Popup/>
-      <Item>
+      <Control id="-2">
         <Command term="0">xfprint</Command>
         <Tooltip>Drag file to print</Tooltip>
         <Icon id="9"/>
-      </Item>
+      </Control>
     </Group>
     <Group>
       <Popup/>
-      <Item>
+      <Control id="-2">
         <Command term="0"/>
         <Tooltip>Click Mouse 3 to change item</Tooltip>
         <Icon id="0"/>
-      </Item>
+      </Control>
     </Group>
   </Right>
 </Xfce>

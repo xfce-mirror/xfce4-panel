@@ -1,6 +1,6 @@
 /*  callbacks.c
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,58 +21,64 @@
 #include <string.h>
 #include <ctype.h>
 
-
 #include "callbacks.h"
-
-#include "xfce.h"
 #include "xfce_support.h"
-#include "dialogs.h"
-#include "item_dialog.h"
+#include "xfce.h"
 #include "central.h"
-#include "side.h"
 #include "item.h"
 #include "popup.h"
-#include "icons.h"
+#include "dialogs.h"
+#include "controls_dialog.h"
+#include "settings.h"
+
 
 static PanelPopup *open_popup = NULL;
 
 void hide_current_popup_menu(void);
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Panel callbacks
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  Panel callbacks
+ *  ---------------
+*/
 gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
-{
-    char *text = _("The panel recieved a request from the window "
-                   "manager to quit. Usually this is by accident.\n"
-                   "If you want to continue using the panel choose "
-                   "\'No\'\n\n" "Do you want to quit the panel?");
-
-    if(confirm(text, GTK_STOCK_QUIT, NULL))
-        quit();
-
-    return TRUE;
-}
-
-gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
 {
     quit();
 
     return TRUE;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Central panel callbacks
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
+{
+    write_panel_config();
+    
+    panel_cleanup();
+
+    gtk_main_quit();
+
+    return TRUE;
+}
+
+void iconify_cb(void)
+{
+    hide_current_popup_menu();
+
+    gtk_window_iconify(GTK_WINDOW(toplevel));
+}
+
+/*  Central panel callbacks
+ *  -----------------------
+*/
 void screen_button_click(GtkWidget * b, ScreenButton * sb)
 {
-    if(sb->index == settings.current)
+    int n =screen_button_get_index(sb);
+    
+    if(n == current_screen)
     {
-        central_panel_set_current(sb->index);
+	/* keep the button depressed */
+        central_panel_set_current(n);
         return;
     }
 
-    request_net_current_desktop(sb->index);
+    request_net_current_desktop(n);
 }
 
 gboolean
@@ -108,7 +114,6 @@ void mini_info_cb(void)
     hide_current_popup_menu();
 
     info_panel_dialog();
-
 }
 
 void mini_palet_cb(void)
@@ -125,64 +130,35 @@ void mini_palet_cb(void)
     global_settings_dialog();
 }
 
-void mini_power_cb(GtkButton * b, GdkEventButton * ev, char *cmd)
+void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
 {
-    int w, h;
-
     hide_current_popup_menu();
 
-    gdk_window_get_size(ev->window, &w, &h);
-
-    /* we have to check if the pointer is still inside the button */
-    if(ev->x < 0 || ev->x > w || ev->y < 0 || ev->y > h)
-    {
-        gtk_button_released(b);
-        return;
-    }
-
-    if(ev->button == 1)
-    {
-        exec_cmd(cmd, FALSE);
-        quit();
-    }
-    else
-        restart();
+    quit();
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Panel group callbacks
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void iconify_cb(void)
+/*  Panel control callbacks
+ *  -----------------------
+*/
+gboolean panel_control_press_cb(GtkButton * b, GdkEventButton * ev,
+                                PanelControl * pc)
 {
-    hide_current_popup_menu();
-
-    gtk_window_iconify(GTK_WINDOW(toplevel));
-}
-
-gboolean panel_group_press_cb(GtkButton * b, GdkEventButton * ev, PanelGroup * pg)
-{
-    hide_current_popup_menu();
-
     if(ev->button != 3)
         return FALSE;
 
     if(disable_user_config)
         return FALSE;
 
-    edit_panel_group_dialog(pg);
+    hide_current_popup_menu();
+
+    change_panel_control_dialog(pc);
 
     return TRUE;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Panel popup callbacks
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
+/*  Panel popup callbacks
+ *  ---------------------
+*/
 static void hide_popup(PanelPopup * pp)
 {
     if(open_popup == pp)
@@ -311,12 +287,9 @@ gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
     return TRUE;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Panel item callbacks
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
+/*  Panel item callbacks
+ *  --------------------
+*/
 void
 panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                    gint x, gint y, GtkSelectionData * data,
@@ -357,12 +330,9 @@ void panel_item_click_cb(GtkButton * b, PanelItem * pi)
     exec_cmd(pi->command, pi->in_terminal);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Menu item callbacks
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
+/*  Menu item callbacks
+ *  -------------------
+*/
 void
 addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                        gint x, gint y, GtkSelectionData * data,
@@ -464,3 +434,4 @@ void menu_item_click_cb(GtkButton * b, MenuItem * mi)
     hide_current_popup_menu();
     exec_cmd(mi->command, mi->in_terminal);
 }
+

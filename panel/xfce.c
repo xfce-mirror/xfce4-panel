@@ -1,6 +1,6 @@
 /*  xfce.c
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -15,13 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+*/
 
-/* xfce.c 
- * 
- * Contains 'main' function, quit and restart functions, some utility functions
- * and panel function.
- */
+/*  xfce.c 
+ *  ------
+ *  Contains 'main' function, quit and restart functions, some utility functions
+ *  and panel functions.
+*/
 
 #include <signal.h>
 #include <stddef.h>
@@ -38,161 +38,35 @@
 #include "wmhints.h"
 #include "icons.h"
 #include "callbacks.h"
+#include "settings.h"
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Utility functions  
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-int icon_size(int size)
-{
-    switch (size)
-    {
-        case TINY:
-            return TINY_PANEL_ICONS;
-        case SMALL:
-            return SMALL_PANEL_ICONS;
-        case LARGE:
-            return LARGE_PANEL_ICONS;
-        default:
-            return MEDIUM_PANEL_ICONS;
-    }
-}
-
-int popup_size(int size)
-{
-    switch (size)
-    {
-        case SMALL:
-            return SMALL_POPUP_ICONS;
-        case LARGE:
-            return LARGE_POPUP_ICONS;
-        default:
-            return MEDIUM_POPUP_ICONS;
-    }
-}
-
-int top_height(int size)
-{
-    switch (size)
-    {
-        case TINY:
-            return 0;
-        case SMALL:
-            return SMALL_TOPHEIGHT;
-        case LARGE:
-            return LARGE_TOPHEIGHT;
-        default:
-            return MEDIUM_TOPHEIGHT;
-    }
-}
-
-static GtkTooltips *tooltips = NULL;
-
-void add_tooltip(GtkWidget * widget, char *tip)
-{
-    if(!tooltips)
-        tooltips = gtk_tooltips_new();
-
-    gtk_tooltips_set_tip(tooltips, widget, tip, NULL);
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Main program
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-void sighandler(int sig)
-{
-    switch (sig)
-    {
-        case SIGHUP:
-            restart();
-            break;
-        default:
-            quit();
-    }
-}
-
-void quit(void)
-{
-    if(!confirm(_("Are you sure you want to log off ?"), GTK_STOCK_QUIT, NULL))
-    {
-        return;
-    }
-
-    gtk_widget_hide(toplevel);
-
-    if(settings.exit_command)
-        exec_cmd_silent(settings.exit_command, FALSE);
-
-    gtk_main_quit();
-
-    panel_cleanup();
-}
-
-void restart(void)
-{
-    gtk_main_quit();
-
-    panel_cleanup();
-
-    xfce_run();
-}
-
-void xfce_init(void)
-{
-    check_net_support();
-
-    create_builtin_pixbufs();
-
-    signal(SIGHUP, &sighandler);
-    signal(SIGTERM, &sighandler);
-    signal(SIGINT, &sighandler);
-}
-
-void xfce_run(void)
-{
-    init_settings();
-    panel_init();
-    side_panel_init(LEFT);
-    central_panel_init();
-    side_panel_init(RIGHT);
-
-    get_panel_config();
-
-    create_xfce_panel();
-
-    watch_root_properties();
-
-    gtk_main();
-}
-
-int main(int argc, char **argv)
-{
-/*    pid_t pid = fork();
-
-    if(pid < 0)
-    {
-        g_error("%s (%d): ** ERROR ** fork() failed\n", __FILE__, __LINE__);
-    }
-    else if(pid > 0)
-    {
-        _exit(0);
-    }
+/*  Panel dimensions 
 */
-    gtk_init(&argc, &argv);
+int minibutton_size[] = { 16, 24, 24, 24 };
 
-    xfce_init();
+int icon_size[] = { 24, 30, 45, 60 };
 
-    xfce_run();
+int border_width = 4;
 
-    return (0);
-}
+int popup_icon_size[] = { 16, 20, 24, 32 };
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Panel creation and destruction
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+int top_height[] = { 12, 14, 14, 16 };
+
+int screen_button_width[] = { 30, 40, 80, 80 };
+
+/*  Panel framework
+ *  ---------------
+ *  - window
+ *  - hbox
+ *    - hbox 	: left panel
+ *    - frame
+ *      - hbox 	: central panel
+ *    - hbox 	: right panel
+*/
 GtkWidget *toplevel = NULL;
-GtkWidget *central_frame = NULL;
 GtkWidget *left_hbox = NULL;
 GtkWidget *right_hbox = NULL;
+GtkWidget *central_frame = NULL;
 GtkWidget *central_hbox = NULL;
 
 static GtkWidget *create_panel_window(void)
@@ -201,12 +75,10 @@ static GtkWidget *create_panel_window(void)
     GtkWindow *window = GTK_WINDOW(w);
     GdkPixbuf *pb;
 
-    gtk_window_set_title(window, _("XFce Main Panel"));
+    gtk_window_set_title(window, _("XFce Panel"));
     gtk_window_set_decorated(window, FALSE);
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
-
-/*    set_window_type_dock(w);*/
 
     gtk_container_set_border_width(GTK_CONTAINER(w), 0);
 
@@ -217,72 +89,47 @@ static GtkWidget *create_panel_window(void)
     g_signal_connect(w, "destroy-event", G_CALLBACK(panel_destroy_cb), NULL);
     g_signal_connect(w, "delete-event", G_CALLBACK(panel_delete_cb), NULL);
 
+    if (settings.on_top)
+	set_window_type_dock(w, TRUE);
+
     return w;
 }
 
-/* Set up the basic framework for the panel:
- * - window
- * - hbox
- *   - hbox 	: left panel
- *   - frame
- *     - hbox 	: central panel
- *   - hbox 	: right panel
- */
 void panel_init(void)
 {
     GtkWidget *window;
-    GtkWidget *frame1, *frame2;
-    GtkWidget *hbox1, *hbox2, *hbox3, *hbox4;
+    GtkWidget *frame;
+    GtkWidget *hbox;
 
-    window = create_panel_window();
+    toplevel = create_panel_window();
 
-    toplevel = window;
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
+    gtk_container_set_border_width(GTK_CONTAINER(frame), 0);
+    gtk_widget_show(frame);
+    gtk_container_add(GTK_CONTAINER(toplevel), frame);
 
-    frame1 = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame1), GTK_SHADOW_OUT);
-    gtk_container_set_border_width(GTK_CONTAINER(frame1), 0);
-    gtk_container_add(GTK_CONTAINER(window), frame1);
-    gtk_widget_show(frame1);
+    hbox = gtk_hbox_new(FALSE, 0);
+    gtk_widget_show(hbox);
+    gtk_container_add(GTK_CONTAINER(frame), hbox);
 
-    hbox1 = gtk_hbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(frame1), hbox1);
-    gtk_widget_show(hbox1);
+    left_hbox = gtk_hbox_new(FALSE, 0);
+    gtk_widget_show(left_hbox);
+    gtk_container_add(GTK_CONTAINER(hbox), left_hbox);
 
-    hbox2 = gtk_hbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(hbox1), hbox2);
-    gtk_widget_show(hbox2);
+    central_frame = gtk_frame_new(NULL);
+    if(settings.style == OLD_STYLE)
+        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+    gtk_widget_show(central_frame);
+    gtk_container_add(GTK_CONTAINER(hbox), central_frame);
 
-    left_hbox = hbox2;
+    central_hbox = gtk_hbox_new(FALSE, 0);
+    gtk_widget_show(central_hbox);
+    gtk_container_add(GTK_CONTAINER(central_frame), central_hbox);
 
-    frame2 = gtk_frame_new(NULL);
-    gtk_container_add(GTK_CONTAINER(hbox1), frame2);
-    gtk_widget_show(frame2);
-
-    central_frame = frame2;
-
-    hbox3 = gtk_hbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(frame2), hbox3);
-    gtk_widget_show(hbox3);
-
-    central_hbox = hbox3;
-
-    hbox4 = gtk_hbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(hbox1), hbox4);
-    gtk_widget_show(hbox4);
-
-    right_hbox = hbox4;
-}
-
-void create_xfce_panel(void)
-{
-    add_side_panel(LEFT, GTK_BOX(left_hbox));
-    add_central_panel(GTK_BOX(central_hbox));
-    add_side_panel(RIGHT, GTK_BOX(right_hbox));
-
-    panel_set_settings();
-    panel_set_position();
-
-    gtk_widget_show(toplevel);
+    right_hbox = gtk_hbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(hbox), right_hbox);
+    gtk_widget_show(right_hbox);
 }
 
 void panel_cleanup(void)
@@ -290,33 +137,154 @@ void panel_cleanup(void)
     if(!disable_user_config)
         write_panel_config();
 
+    if (GTK_IS_WIDGET(toplevel))
+	    gtk_widget_destroy(toplevel);
+    
     side_panel_cleanup(LEFT);
     central_panel_cleanup();
     side_panel_cleanup(RIGHT);
-
-    gtk_widget_destroy(toplevel);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Panel settings
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  Panel settings
+ *  --------------
+*/
+void panel_set_size(int size)
+{
+    settings.size = size;
+
+    side_panel_set_size(LEFT, size);
+    central_panel_set_size(size);
+    side_panel_set_size(RIGHT, size);
+}
+
+void panel_set_popup_size(int size)
+{
+    settings.popup_size = size;
+
+    side_panel_set_popup_size(LEFT, size);
+    side_panel_set_popup_size(RIGHT, size);
+}
+
+void panel_set_popup_position(int position)
+{
+    settings.popup_position = position;
+
+    side_panel_set_popup_position(LEFT, position);
+    side_panel_set_popup_position(RIGHT, position);
+
+    /* this is necessary to get the right proportions */
+    panel_set_size(settings.size);
+}
+
+void panel_set_on_top(gboolean on_top)
+{
+    settings.on_top = on_top;
+
+    set_window_type_dock(toplevel, on_top);
+    side_panel_set_on_top(LEFT, on_top);
+    side_panel_set_on_top(RIGHT, on_top);
+}
+
+void panel_set_style(int style)
+{
+    settings.style = style;
+
+    if(style == OLD_STYLE)
+        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+    else
+        gtk_frame_set_shadow_type(GTK_FRAME(central_frame),
+                                  GTK_SHADOW_ETCHED_IN);
+
+    side_panel_set_style(LEFT, style);
+    central_panel_set_style(style);
+    side_panel_set_style(RIGHT, style);
+}
+
+void panel_set_theme(const char *theme)
+{
+    char *tmp = settings.theme;
+
+    settings.theme = g_strdup(theme);
+    g_free(tmp);
+
+    side_panel_set_theme(LEFT, theme);
+    central_panel_set_theme(theme);
+    side_panel_set_theme(RIGHT, theme);
+}
+
+void panel_set_num_left(int n)
+{
+    settings.num_left = n;
+    side_panel_set_num_groups(LEFT, n);
+}
+
+void panel_set_num_right(int n)
+{
+    settings.num_right = n;
+    side_panel_set_num_groups(RIGHT, n);
+}
+
+void panel_set_num_screens(int n)
+{
+    settings.num_screens = n;
+    central_panel_set_num_screens(n);
+}
+
+void panel_set_show_central(gboolean show)
+{
+    settings.show_central = show;
+
+    if(show)
+        gtk_widget_show(central_frame);
+    else
+        gtk_widget_hide(central_frame);
+}
+
+void panel_set_show_desktop_buttons(gboolean show)
+{
+    settings.show_desktop_buttons = show;
+
+    central_panel_set_show_desktop_buttons(show);
+}
+
+void panel_set_show_minibuttons(gboolean show)
+{
+    settings.show_minibuttons = show;
+
+    central_panel_set_show_minibuttons(show);
+}
+
+void panel_set_current(int n)
+{
+    current_screen = n;
+    central_panel_set_current(n);
+}
+
+/*  Global preferences
+ *  ------------------
+*/
 Settings settings;
 
 void init_settings(void)
 {
     settings.x = -1;
     settings.y = -1;
-    settings.size = MEDIUM;
+
+    settings.size = SMALL;
     settings.popup_size = MEDIUM;
+    settings.popup_position = TOP;
     settings.style = NEW_STYLE;
-    settings.icon_theme = NULL;
+    settings.theme = NULL;
+    settings.on_top = TRUE;
+
     settings.num_left = 5;
     settings.num_right = 5;
     settings.num_screens = 4;
-    settings.current = 0;
+
     settings.show_central = TRUE;
     settings.show_desktop_buttons = TRUE;
     settings.show_minibuttons = TRUE;
+
     settings.lock_command = NULL;
     settings.exit_command = NULL;
 }
@@ -327,21 +295,13 @@ void panel_set_settings(void)
 
     panel_set_size(settings.size);
     panel_set_popup_size(settings.popup_size);
-
-
-    if(settings.size == TINY)
-        settings.style == NEW_STYLE;
+    panel_set_popup_position(settings.popup_position);
 
     panel_set_style(settings.style);
-    panel_set_icon_theme(settings.icon_theme);
+    panel_set_theme(settings.theme);
 
     side_panel_set_num_groups(LEFT, settings.num_left);
     side_panel_set_num_groups(RIGHT, settings.num_right);
-
-    n = get_net_number_of_desktops();
-
-    if(n > settings.num_screens)
-        settings.num_screens = n;
 
     central_panel_set_num_screens(settings.num_screens);
 
@@ -349,23 +309,28 @@ void panel_set_settings(void)
     central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
     panel_set_show_minibuttons(settings.show_minibuttons);
 
-    if(n < settings.num_screens)
-        request_net_number_of_desktops(settings.num_screens);
+    request_net_number_of_desktops(settings.num_screens);
 
     n = get_net_current_desktop();
 
-    if(n > 0)
-    {
-        settings.current = n;
-        central_panel_set_current(n);
-    }
+    /* force creation of _NET_CURRENT_DESKTOP hint */
+    if(n == 0)
+        central_panel_set_current(1);
+
+    current_screen = n;
+    central_panel_set_current(n);
 }
 
 void panel_set_position(void)
 {
     GtkRequisition req;
-    int w = gdk_screen_width();
-    int h = gdk_screen_height();
+    int w = 0, h = 0;
+
+    if (!w)
+    {
+	w = gdk_screen_width();
+	h = gdk_screen_height();
+    }
 
     gtk_widget_size_request(toplevel, &req);
 
@@ -389,100 +354,6 @@ void panel_set_position(void)
     gtk_window_move(GTK_WINDOW(toplevel), settings.x, settings.y);
 }
 
-void panel_set_size(int size)
-{
-    settings.size = size;
-
-    side_panel_set_size(LEFT, size);
-    central_panel_set_size(size);
-    side_panel_set_size(RIGHT, size);
-}
-
-void panel_set_popup_size(int size)
-{
-    settings.popup_size = size;
-
-    side_panel_set_popup_size(LEFT, size);
-    side_panel_set_popup_size(RIGHT, size);
-}
-
-void panel_set_style(int style)
-{
-    settings.style = style;
-
-    if(style == OLD_STYLE)
-        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
-    else
-        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_ETCHED_IN);
-
-    side_panel_set_style(LEFT, style);
-    central_panel_set_style(style);
-    side_panel_set_style(RIGHT, style);
-}
-
-void panel_set_icon_theme(const char *theme)
-{
-    char *tmp = settings.icon_theme;
-
-    settings.icon_theme = g_strdup(theme);
-    g_free(tmp);
-
-    side_panel_set_icon_theme(LEFT, theme);
-    central_panel_set_icon_theme(theme);
-    side_panel_set_icon_theme(RIGHT, theme);
-}
-
-void panel_set_num_left(int n)
-{
-    settings.num_left = n;
-    side_panel_set_num_groups(LEFT, n);
-}
-
-void panel_set_num_right(int n)
-{
-    settings.num_right = n;
-    side_panel_set_num_groups(RIGHT, n);
-}
-
-void panel_set_current(int n)
-{
-    settings.current = n;
-    central_panel_set_current(n);
-}
-
-void panel_set_num_screens(int n)
-{
-    settings.num_screens = n;
-    central_panel_set_num_screens(n);
-}
-
-void panel_set_show_central(gboolean show)
-{
-    settings.show_central = show;
-
-    if (show)
-	gtk_widget_show(central_frame);
-    else
-	gtk_widget_hide(central_frame);
-}
-
-void panel_set_show_desktop_buttons(gboolean show)
-{
-    settings.show_desktop_buttons = show;
-
-    central_panel_set_show_desktop_buttons(show);
-}
-
-void panel_set_show_minibuttons(gboolean show)
-{
-    settings.show_minibuttons = show;
-
-    central_panel_set_show_minibuttons(show);
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Panel configuration
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 void panel_parse_xml(xmlNodePtr node)
 {
     xmlChar *value;
@@ -504,6 +375,13 @@ void panel_parse_xml(xmlNodePtr node)
 
     g_free(value);
 
+    value = xmlGetProp(node, (const xmlChar *)"popupposition");
+
+    if(value)
+        settings.popup_position = atoi(value);
+
+    g_free(value);
+
     value = xmlGetProp(node, (const xmlChar *)"style");
 
     if(value)
@@ -514,10 +392,23 @@ void panel_parse_xml(xmlNodePtr node)
     value = xmlGetProp(node, (const xmlChar *)"icontheme");
 
     if(value)
-        settings.icon_theme = g_strdup(value);
+        settings.theme = g_strdup(value);
 
     g_free(value);
 
+    value = xmlGetProp(node, (const xmlChar *)"ontop");
+
+    if(value)
+    {
+        n = atoi(value);
+
+        if(n == 1)
+            settings.on_top = TRUE;
+        else
+            settings.on_top = FALSE;
+    }
+
+    g_free(value);
 
     value = xmlGetProp(node, (const xmlChar *)"left");
 
@@ -544,12 +435,12 @@ void panel_parse_xml(xmlNodePtr node)
 
     if(value)
     {
-	n = atoi(value);
+        n = atoi(value);
 
-	if (n == 1)
-	    settings.show_central = TRUE;
-	else
-	    settings.show_central = FALSE;
+        if(n == 1)
+            settings.show_central = TRUE;
+        else
+            settings.show_central = FALSE;
     }
 
     g_free(value);
@@ -558,12 +449,12 @@ void panel_parse_xml(xmlNodePtr node)
 
     if(value)
     {
-	n = atoi(value);
+        n = atoi(value);
 
-	if (n == 1)
-	    settings.show_desktop_buttons = TRUE;
-	else
-	    settings.show_desktop_buttons = FALSE;
+        if(n == 1)
+            settings.show_desktop_buttons = TRUE;
+        else
+            settings.show_desktop_buttons = FALSE;
     }
 
     g_free(value);
@@ -572,12 +463,12 @@ void panel_parse_xml(xmlNodePtr node)
 
     if(value)
     {
-	n = atoi(value);
+        n = atoi(value);
 
-	if (n == 1)
-	    settings.show_minibuttons = TRUE;
-	else
-	    settings.show_minibuttons = FALSE;
+        if(n == 1)
+            settings.show_minibuttons = TRUE;
+        else
+            settings.show_minibuttons = FALSE;
     }
 
     g_free(value);
@@ -621,7 +512,7 @@ void panel_parse_xml(xmlNodePtr node)
     if(settings.style < OLD_STYLE || settings.style > NEW_STYLE)
         settings.style = NEW_STYLE;
     if(settings.size < TINY || settings.size > LARGE)
-        settings.size = MEDIUM;
+        settings.size = SMALL;
     if(settings.popup_size < SMALL || settings.popup_size > LARGE)
         settings.popup_size = MEDIUM;
     if(settings.num_left < 1 || settings.num_left > NBGROUPS)
@@ -630,6 +521,10 @@ void panel_parse_xml(xmlNodePtr node)
         settings.num_right = 5;
     if(settings.num_screens < 1 || settings.num_screens > NBSCREENS)
         settings.num_screens = 4;
+
+    /* some things just look awful with old style */
+    if(settings.popup_position == LEFT || settings.popup_position == RIGHT)
+        settings.style = NEW_STYLE;
 }
 
 void panel_write_xml(xmlNodePtr root)
@@ -646,11 +541,17 @@ void panel_write_xml(xmlNodePtr root)
     snprintf(value, 2, "%d", settings.popup_size);
     xmlSetProp(node, "popupsize", value);
 
+    snprintf(value, 2, "%d", settings.popup_position);
+    xmlSetProp(node, "popupposition", value);
+
     snprintf(value, 2, "%d", settings.style);
     xmlSetProp(node, "style", value);
 
-    if(settings.icon_theme)
-        xmlSetProp(node, "icontheme", settings.icon_theme);
+    if(settings.theme)
+        xmlSetProp(node, "icontheme", settings.theme);
+
+    snprintf(value, 2, "%d", settings.on_top);
+    xmlSetProp(node, "ontop", value);
 
     snprintf(value, 3, "%d", settings.num_left);
     xmlSetProp(node, "left", value);
@@ -687,4 +588,103 @@ void panel_write_xml(xmlNodePtr root)
     {
         child = xmlNewTextChild(node, NULL, "Exit", settings.exit_command);
     }
+}
+
+/*  Main program
+ *  ------------
+*/
+void sighandler(int sig)
+{
+    switch (sig)
+    {
+        case SIGHUP:
+            restart();
+            break;
+        default:
+            quit();
+    }
+}
+
+void quit(void)
+{
+    if(!confirm(_("Are you sure you want to log off ?"), GTK_STOCK_QUIT, NULL))
+        return;
+
+    gtk_widget_hide(toplevel);
+
+    if(settings.exit_command)
+        exec_cmd_silent(settings.exit_command, FALSE);
+
+    panel_cleanup();
+    
+    gtk_main_quit();
+}
+
+void restart(void)
+{
+    panel_cleanup();
+
+    gtk_main_quit();
+
+    xfce_run();
+}
+
+void xfce_init(void)
+{
+    check_net_support();
+
+    create_builtin_pixbufs();
+
+    signal(SIGHUP, &sighandler);
+    signal(SIGTERM, &sighandler);
+    signal(SIGINT, &sighandler);
+}
+
+void xfce_run(void)
+{
+    /* fill in the 'settings' structure */
+    init_settings();
+    get_global_prefs();
+
+    /* panel framework */
+    panel_init();
+    side_panel_init(LEFT, GTK_BOX(left_hbox));
+    central_panel_init(GTK_BOX(central_hbox));
+    side_panel_init(RIGHT, GTK_BOX(right_hbox));
+
+    /* give early visual feedback 
+     * the init functions have already created the basic panel */
+    panel_set_position();
+    gtk_widget_show(toplevel);
+
+    /* read and apply configuration 
+     * This function creates the panel items and popup menus */
+    get_panel_config();
+
+    /* panel may have moved slightly off the screen */
+    panel_set_position();
+
+    watch_root_properties();
+
+    request_net_number_of_desktops(settings.num_screens);
+
+    gtk_main();
+}
+
+int main(int argc, char **argv)
+{
+    if(argc == 2 && (strequal(argv[1], "-v") || strequal(argv[1], "--version")))
+    {
+        g_print(_("xfce4, version %s\n\n"
+                  "Part of the XFce Desktop Environment\n"
+                  "http://www.xfce.org\n"), VERSION);
+    }
+
+    gtk_init(&argc, &argv);
+
+    xfce_init();
+
+    xfce_run();
+
+    return 0;
 }

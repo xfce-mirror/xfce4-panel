@@ -1,6 +1,6 @@
 /*  icons.c
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -143,20 +143,27 @@ void create_builtin_pixbufs(void)
     /* general icons */
     xfce_icons[UNKNOWN_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)unknown_xpm);
-    xfce_icons[EDIT_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)edit_xpm);
-    xfce_icons[FILE1_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)file1_xpm);
-    xfce_icons[FILE2_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)file2_xpm);
-    xfce_icons[GAMES_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)games_xpm);
+    xfce_icons[EDIT_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)edit_xpm);
+    xfce_icons[FILE1_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)file1_xpm);
+    xfce_icons[FILE2_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)file2_xpm);
+    xfce_icons[GAMES_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)games_xpm);
     xfce_icons[MAN_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)man_xpm);
     xfce_icons[MULTIMEDIA_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)multimedia_xpm);
     xfce_icons[NETWORK_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)network_xpm);
-    xfce_icons[PAINT_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)paint_xpm);
-    xfce_icons[PRINT_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)print_xpm);
+    xfce_icons[PAINT_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)paint_xpm);
+    xfce_icons[PRINT_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)print_xpm);
     xfce_icons[SCHEDULE_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)schedule_xpm);
-    xfce_icons[SOUND_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)sound_xpm);
+    xfce_icons[SOUND_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)sound_xpm);
     xfce_icons[TERMINAL_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)terminal_xpm);
 
@@ -182,7 +189,8 @@ void create_builtin_pixbufs(void)
 
     /* POPUP BUTTOns */
     system_icons[UP_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)up_xpm);
-    system_icons[DOWN_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)down_xpm);
+    system_icons[DOWN_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)down_xpm);
 
     /* APP ICONS */
     system_icons[DIAG_ICON] =
@@ -248,10 +256,10 @@ GdkPixbuf *get_system_pixbuf(int id)
     }
     else
     {
-	GdkPixbuf *tmp = pb;
+        GdkPixbuf *tmp = pb;
 
-	pb = get_scaled_pixbuf(tmp, MINI_SIZE);
-	g_object_unref(tmp);
+        pb = get_scaled_pixbuf(tmp, minibutton_size[settings.size]);
+        g_object_unref(tmp);
     }
 
     return pb;
@@ -316,7 +324,7 @@ GdkPixbuf *get_module_pixbuf(int id)
 GdkPixbuf *get_themed_pixbuf(const char *name)
 {
     GdkPixbuf *pb = NULL;
-    char *theme = settings.icon_theme;
+    char *theme = settings.theme;
     char **icon_paths, **p;
 
     if(!theme)
@@ -330,7 +338,8 @@ GdkPixbuf *get_themed_pixbuf(const char *name)
 
         for(suffix = icon_suffix; *suffix; suffix++)
         {
-            char *path = g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
+            char *path =
+                g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
 
             if(g_file_test(path, G_FILE_TEST_EXISTS))
                 pb = gdk_pixbuf_new_from_file(path, NULL);

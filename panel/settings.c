@@ -1,6 +1,6 @@
 /*  settings.c
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+#include "global.h"
 #include "settings.h"
 
 #include "xfce.h"
@@ -32,7 +33,7 @@
 #include "side.h"
 #include "popup.h"
 #include "item.h"
-#include "module.h"
+#include "controls.h"
 
 #define ROOT	"Xfce"
 #define NS	"http://www.xfce.org/xfce4/panel/1.0"
@@ -71,7 +72,7 @@ static xmlDocPtr read_xml_file(void)
 
     xmlKeepBlanksDefault(0);
 
-    rcfile = get_read_file(RCFILE);
+    rcfile = get_read_file(XFCERC);
 
     if(rcfile)
         doc = xmlParseFile(rcfile);
@@ -83,18 +84,32 @@ static xmlDocPtr read_xml_file(void)
     return doc;
 }
 
-static void settings_from_file(void)
+/*  Configuration
+ *  -------------
+*/
+static gboolean check_disable_user_config(void)
+{
+    const char *var = g_getenv("XFCE_DISABLE_USER_CONFIG");
+
+    return (var && !strequal(var, "0"));
+}
+
+/* for now we still read this from the xml file until we have a new 
+ * preferences system */
+void get_global_prefs(void)
 {
     xmlNodePtr node;
 
     /* global xmlDocPtr */
-    xmlconfig = read_xml_file();
+    if(!xmlconfig)
+        xmlconfig = read_xml_file();
 
     node = xmlDocGetRootElement(xmlconfig);
 
     if(!node)
     {
-        g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__, __LINE__);
+        g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__,
+                   __LINE__);
 
         xmlFreeDoc(xmlconfig);
         xmlconfig = make_empty_doc();
@@ -115,29 +130,74 @@ static void settings_from_file(void)
     for(node = node->children; node; node = node->next)
     {
         if(xmlStrEqual(node->name, (const xmlChar *)"Panel"))
+        {
             panel_parse_xml(node);
-        else if(xmlStrEqual(node->name, (const xmlChar *)"Central"))
-            central_panel_parse_xml(node);
+
+            break;
+        }
+    }
+
+}
+
+void get_panel_config(void)
+{
+    xmlNodePtr node;
+
+    disable_user_config = check_disable_user_config();
+
+    /* global xmlDocPtr */
+    if(!xmlconfig)
+        xmlconfig = read_xml_file();
+
+    node = xmlDocGetRootElement(xmlconfig);
+
+    if(!node)
+    {
+        g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__,
+                   __LINE__);
+
+        xmlFreeDoc(xmlconfig);
+        xmlconfig = make_empty_doc();
+        node = xmlDocGetRootElement(xmlconfig);
+    }
+
+    if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
+    {
+        g_printerr(_("xfce: %s (line %d): wrong document type\n"),
+                   __FILE__, __LINE__);
+
+        xmlFreeDoc(xmlconfig);
+        xmlconfig = make_empty_doc();
+        node = xmlDocGetRootElement(xmlconfig);
+    }
+
+    /* Now parse the xml tree */
+    for(node = node->children; node; node = node->next)
+    {
+        if(xmlStrEqual(node->name, (const xmlChar *)"Central"))
+            central_panel_set_from_xml(node);
         else if(xmlStrEqual(node->name, (const xmlChar *)"Left"))
-            side_panel_parse_xml(node, LEFT);
+            side_panel_set_from_xml(LEFT, node);
         else if(xmlStrEqual(node->name, (const xmlChar *)"Right"))
-            side_panel_parse_xml(node, RIGHT);
+            side_panel_set_from_xml(RIGHT, node);
     }
 
     xmlFreeDoc(xmlconfig);
+    xmlconfig = NULL;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   Writing xml
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void settings_to_file(void)
+void write_panel_config(void)
 {
     char *dir;
     char *rcfile;
     xmlNodePtr root;
 
-    rcfile = get_save_file(RCFILE);
+    disable_user_config = check_disable_user_config();
+
+    if(disable_user_config)
+        return;
+
+    rcfile = get_save_file(XFCERC);
 
     if(g_file_test(rcfile, G_FILE_TEST_EXISTS))
         write_backup_file(rcfile);
@@ -159,45 +219,11 @@ void settings_to_file(void)
 
     panel_write_xml(root);
     central_panel_write_xml(root);
-    side_panel_write_xml(root, LEFT);
-    side_panel_write_xml(root, RIGHT);
+    side_panel_write_xml(LEFT, root);
+    side_panel_write_xml(RIGHT, root);
 
     xmlSaveFormatFile(rcfile, xmlconfig, 1);
 
     xmlFreeDoc(xmlconfig);
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Configuration
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-
-static gboolean check_disable_user_config(void)
-{
-/*    char userconf[MAXSTRLEN + 1];
-
-    snprintf(userconf, MAXSTRLEN, "%s/disable_user_config", SYSCONFDIR);
-    
-    return g_file_test(userconf, G_FILE_TEST_EXISTS);
-*/
-    const char *var = g_getenv("XFCE_DISABLE_USER_CONFIG");
-
-    return (var && !strequal(var, "0"));
-}
-
-void get_panel_config(void)
-{
-    disable_user_config = check_disable_user_config();
-
-    settings_from_file();
-}
-
-void write_panel_config(void)
-{
-    disable_user_config = check_disable_user_config();
-
-    if(!disable_user_config)
-        settings_to_file();
+    xmlconfig = NULL;
 }

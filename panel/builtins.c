@@ -1,6 +1,6 @@
 /*  builtins.c
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,59 +24,28 @@
 #include <time.h>
 
 #include "builtins.h"
-
-#include "xfce.h"
+#include "controls.h"
+#include "iconbutton.h"
 #include "xfce_support.h"
-#include "module.h"
-#include "item.h"
 #include "icons.h"
-#include "dialogs.h"
+#include "iconbutton.h"
 #include "callbacks.h"
+#include "xfce.h"
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   Builtin modules
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-static gboolean create_clock_module(PanelModule * pm);
+/* panel control configuration 
+*/
+GtkWidget *revert_button;
 
-static gboolean create_trash_module(PanelModule * pm);
 
-static gboolean create_exit_module(PanelModule * pm);
-
-static gboolean create_config_module(PanelModule * pm);
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-gboolean create_builtin_module(PanelModule * pm)
-{
-    switch (pm->id)
-    {
-        case CLOCK_MODULE:
-            return create_clock_module(pm);
-            break;
-        case TRASH_MODULE:
-            return create_trash_module(pm);
-            break;
-        case EXIT_MODULE:
-            return create_exit_module(pm);
-            break;
-        case CONFIG_MODULE:
-            return create_config_module(pm);
-            break;
-        default:
-            return FALSE;
-    }
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   Clock module
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  Clock module
+ *  ------------
+ *  To be replaced by the 'real clock widget' 
+*/
 enum
 { ANALOG, DIGITAL, LED };
 
 typedef struct
 {
-    int size;
-
     int type;
     gboolean twentyfour;
 
@@ -92,7 +61,6 @@ static t_clock *clock_new(void)
 {
     t_clock *clock = g_new(t_clock, 1);
 
-    clock->size = MEDIUM;
     clock->show_colon = TRUE;
     clock->type = DIGITAL;
     clock->twentyfour = TRUE;
@@ -101,8 +69,6 @@ static t_clock *clock_new(void)
     gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
     gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
     gtk_widget_show(clock->frame);
-    /* protect against destruction when unpacking */
-    g_object_ref(clock->frame);
 
     clock->eventbox = gtk_event_box_new();
     gtk_container_add(GTK_CONTAINER(clock->frame), clock->eventbox);
@@ -115,16 +81,14 @@ static t_clock *clock_new(void)
     return clock;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static gboolean adjust_time(PanelModule * pm)
+static gboolean adjust_time(PanelControl * pc)
 {
     time_t t;
     struct tm *tm;
     int hrs, mins;
     char *text, *markup;
 
-    t_clock *clock = (t_clock *) pm->data;
+    t_clock *clock = (t_clock *) pc->data;
 
     t = time(0);
     tm = localtime(&t);
@@ -132,25 +96,30 @@ static gboolean adjust_time(PanelModule * pm)
     hrs = tm->tm_hour;
     mins = tm->tm_min;
 
-    text = g_strdup_printf("%.2d%c%.2d", hrs, clock->show_colon ? ':' : ' ', mins);
+    text =
+        g_strdup_printf("%.2d%c%.2d", hrs, clock->show_colon ? ':' : ' ', mins);
 
-    switch (clock->size)
+    switch (settings.size)
     {
         case TINY:
-            markup = g_strconcat("<tt><span size=\"x-small\">",
-                                 text, "</span></tt>", NULL);
+            markup =
+                g_strconcat("<tt><span size=\"x-small\">", text, "</span></tt>",
+                            NULL);
             break;
         case SMALL:
-            markup = g_strconcat("<tt><span size=\"small\">",
-                                 text, "</span></tt>", NULL);
+            markup =
+                g_strconcat("<tt><span size=\"small\">", text, "</span></tt>",
+                            NULL);
             break;
         case LARGE:
-            markup = g_strconcat("<tt><span size=\"large\">",
-                                 text, "</span></tt>", NULL);
+            markup =
+                g_strconcat("<tt><span size=\"large\">", text, "</span></tt>",
+                            NULL);
             break;
         default:
-            markup = g_strconcat("<tt><span size=\"medium\">",
-                                 text, "</span></tt>", NULL);
+            markup =
+                g_strconcat("<tt><span size=\"medium\">", text, "</span></tt>",
+                            NULL);
             break;
     }
 
@@ -164,48 +133,25 @@ static gboolean adjust_time(PanelModule * pm)
     return TRUE;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void clock_pack(PanelModule * pm, GtkBox * box)
+void clock_free(PanelControl * pc)
 {
-    t_clock *clock = (t_clock *) pm->data;
-
-    gtk_box_pack_start(box, clock->frame, TRUE, TRUE, 0);
-}
-
-void clock_unpack(PanelModule * pm, GtkContainer * container)
-{
-    t_clock *clock = (t_clock *) pm->data;
-
-    gtk_container_remove(container, clock->frame);
-}
-
-void clock_free(PanelModule * pm)
-{
-    t_clock *clock = (t_clock *) pm->data;
-
-    if(GTK_IS_WIDGET(clock->frame))
-        gtk_widget_destroy(clock->frame);
+    t_clock *clock = (t_clock *) pc->data;
 
     g_free(clock);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void clock_set_size(PanelModule * pm, int size)
+void clock_set_size(PanelControl * pc, int size)
 {
-    int s = icon_size(size);
-    t_clock *clock = (t_clock *) pm->data;
-
-    clock->size = size;
+    int s = icon_size[size];
+    t_clock *clock = (t_clock *) pc->data;
 
     gtk_widget_set_size_request(clock->label, -1, s);
-    adjust_time(pm);
+    adjust_time(pc);
 }
 
-void clock_set_style(PanelModule * pm, int style)
+void clock_set_style(PanelControl * pc, int style)
 {
-    t_clock *clock = (t_clock *) pm->data;
+    t_clock *clock = (t_clock *) pc->data;
 
     if(style == OLD_STYLE)
     {
@@ -274,13 +220,34 @@ static GtkWidget *create_clock_24hrs_button(t_clock * clock)
     return cb;
 }
 
-void clock_add_options(PanelModule * pm, GtkContainer * container)
+static void clock_create_backup(t_clock *clock)
+{
+}
+
+static void clock_clean_backup(void)
+{
+}
+
+static void clock_revert(t_clock *clock)
+{
+}
+
+static void clock_apply_configuration(PanelControl * pc)
+{
+}
+
+void clock_add_options(PanelControl * pc, GtkContainer * container,
+                       GtkWidget * revert, GtkWidget * done)
 {
     GtkWidget *vbox, *om, *hbox, *label, *checkbutton;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    t_clock *clock = (t_clock *) pm->data;
+    t_clock *clock = (t_clock *) pc->data;
 
+    clock_create_backup(clock);
+    
+    revert_button = revert;
+    
     vbox = gtk_vbox_new(FALSE, 4);
     gtk_widget_show(vbox);
 
@@ -312,102 +279,113 @@ void clock_add_options(PanelModule * pm, GtkContainer * container)
     gtk_widget_show(checkbutton);
     gtk_box_pack_start(GTK_BOX(hbox), checkbutton, FALSE, FALSE, 0);
 
+    /* signals */
+    g_signal_connect_swapped(revert, "clicked", 
+	    		     G_CALLBACK(clock_revert), clock);
+    g_signal_connect_swapped(done, "clicked", 
+	    		     G_CALLBACK(clock_clean_backup), NULL);
+    g_signal_connect_swapped(done, "clicked", 
+	    		     G_CALLBACK(clock_apply_configuration), pc);
+    
     gtk_container_add(container, vbox);
 }
 
-static void clock_apply_configuration(PanelModule * pm)
-{
-}
-
-void clock_configure(PanelModule * pm)
-{
-    report_error(_("No configuration possible (yet)."));
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static gboolean create_clock_module(PanelModule * pm)
+/*  create clock panel control
+*/
+void create_clock(PanelControl * pc)
 {
     t_clock *clock = clock_new();
 
-    pm->caption = g_strdup(_("XFce clock"));
-    pm->data = (gpointer) clock;
-    pm->main = clock->eventbox;
+    gtk_container_add(GTK_CONTAINER(pc->base), clock->frame);
 
-    pm->interval = 1000;        /* 1 sec */
-    pm->update = (gpointer) adjust_time;
+    pc->caption = g_strdup(_("XFce clock"));
+    pc->data = (gpointer) clock;
+    pc->main = clock->eventbox;
 
-    pm->pack = (gpointer) clock_pack;
-    pm->unpack = (gpointer) clock_unpack;
-    pm->free = (gpointer) clock_free;
+    pc->interval = 1000;        /* 1 sec */
+    pc->update = (gpointer) adjust_time;
 
-    pm->set_size = (gpointer) clock_set_size;
-    pm->set_style = (gpointer) clock_set_style;
+    pc->free = (gpointer) clock_free;
 
-    pm->add_options = (gpointer) clock_add_options;
-    pm->apply_configuration = (gpointer) clock_apply_configuration;
-/*    pm->configure = (gpointer) clock_configure;*/
+    pc->set_size = (gpointer) clock_set_size;
+    pc->set_style = (gpointer) clock_set_style;
 
-    if(pm->parent)
-        adjust_time(pm);
-
-    return TRUE;
+    pc->add_options = (gpointer) clock_add_options;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Trash module
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  Trash module
+ *  ------------
+*/
 typedef struct
 {
     char *dirname;
-
-    int size;
+    char *command;
+    gboolean in_terminal;
 
     gboolean empty;
 
     GdkPixbuf *empty_pb;
     GdkPixbuf *full_pb;
 
-    /* we just overload the panel item a bit */
-    PanelItem *item;
+    IconButton *button;
 }
 t_trash;
 
-static t_trash *trash_new(PanelGroup * pg)
+static void trash_run(t_trash * trash)
+{
+    exec_cmd(trash->command, trash->in_terminal);
+}
+
+void trash_dropped(GtkWidget *widget, GList *drop_data, gpointer data)
+{
+    t_trash *trash = (t_trash *)data;
+    char *cmd;
+    GList *li;
+
+    for (li = drop_data; li && li->data; li = li->next)
+    {
+	cmd = g_strconcat(trash->command, " ", (char *)li->data, NULL);
+
+	exec_cmd_silent(cmd, FALSE);
+
+	g_free(cmd);
+    }
+}
+
+static t_trash *trash_new(void)
 {
     t_trash *trash = g_new(t_trash, 1);
     const char *home = g_getenv("HOME");
+    GtkWidget *b;
 
     trash->dirname = g_strconcat(home, "/.xfce/trash", NULL);
 
-    trash->size = MEDIUM;
-
     trash->empty = TRUE;
 
-    trash->item = panel_item_new(pg);
-    trash->item->command = g_strdup("xftrash");
+    trash->command = g_strdup("xftrash");
+    trash->in_terminal = FALSE;
 
     trash->empty_pb = get_module_pixbuf(TRASH_EMPTY_ICON);
     trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
 
-    create_panel_item(trash->item);
+    trash->button = icon_button_new(trash->empty_pb);
 
-    g_object_unref(trash->item->pb);
-    trash->item->pb = trash->empty_pb;
+    b = icon_button_get_button(trash->button);
+    
+    add_tooltip(b, _("Trashcan: 0 files"));
 
-    panel_item_set_size(trash->item, MEDIUM);
+    /* signals */
+    dnd_set_drag_dest(b);
+    dnd_set_callback(b, DROP_CALLBACK(trash_dropped), trash);
 
-    add_tooltip(trash->item->button, _("Trashcan: 0 files"));
-
+    g_signal_connect_swapped(b, "clicked", G_CALLBACK(trash_run), trash);
+    
     return trash;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static gboolean check_trash(PanelModule * pm)
+static gboolean check_trash(PanelControl * pc)
 {
-    t_trash *trash = (t_trash *) pm->data;
-    PanelItem *pi = trash->item;
+    t_trash *trash = (t_trash *) pc->data;
 
     GDir *dir;
     const char *file;
@@ -425,10 +403,11 @@ static gboolean check_trash(PanelModule * pm)
     {
         if(!trash->empty)
         {
-            pi->pb = trash->empty_pb;
             trash->empty = TRUE;
             changed = TRUE;
-            add_tooltip(pi->button, _("Trashcan: 0 files"));
+            icon_button_set_pixbuf(trash->button, trash->empty_pb);
+            add_tooltip(icon_button_get_button(trash->button),
+                        _("Trashcan: 0 files"));
         }
     }
     else
@@ -440,12 +419,11 @@ static gboolean check_trash(PanelModule * pm)
 
         chdir(trash->dirname);
 
-
         if(trash->empty)
         {
-            pi->pb = trash->full_pb;
             trash->empty = FALSE;
             changed = TRUE;
+            icon_button_set_pixbuf(trash->button, trash->full_pb);
         }
 
         while(file)
@@ -469,68 +447,39 @@ static gboolean check_trash(PanelModule * pm)
             sprintf(text, _("Trashcan: %d files / %d MB"), number,
                     size / (1024 * 1024));
 
-        add_tooltip(pi->button, text);
+        add_tooltip(icon_button_get_button(trash->button), text);
     }
 
     if(dir)
         g_dir_close(dir);
 
-    if(changed)
-    {
-        panel_item_set_size(trash->item, settings.size);
-    }
-
     return TRUE;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void trash_pack(PanelModule * pm, GtkBox * box)
+static void trash_free(PanelControl * pc)
 {
-    t_trash *trash = (t_trash *) pm->data;
-
-    panel_item_pack(trash->item, box);
-}
-
-static void trash_unpack(PanelModule * pm, GtkContainer * container)
-{
-    t_trash *trash = (t_trash *) pm->data;
-
-    panel_item_unpack(trash->item, container);
-}
-
-static void trash_free(PanelModule * pm)
-{
-    t_trash *trash = (t_trash *) pm->data;
+    t_trash *trash = (t_trash *) pc->data;
 
     g_free(trash->dirname);
 
-    /* will be unreffed in panel_item_free() */
-    g_object_ref(trash->item->pb);
-    panel_item_free(trash->item);
+    icon_button_free(trash->button);
 
     g_object_unref(trash->empty_pb);
     g_object_unref(trash->full_pb);
 
-    if(GTK_IS_WIDGET(pm->main))
-        gtk_widget_destroy(pm->main);
-
     g_free(trash);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void trash_set_size(PanelModule * pm, int size)
+static void trash_set_size(PanelControl * pc, int size)
 {
-    t_trash *trash = (t_trash *) pm->data;
+    t_trash *trash = (t_trash *) pc->data;
 
-    trash->size = size;
-    panel_item_set_size(trash->item, size);
+    icon_button_set_size(trash->button, size);
 }
 
-static void trash_set_icon_theme(PanelModule * pm, const char *theme)
+static void trash_set_theme(PanelControl * pc, const char *theme)
 {
-    t_trash *trash = (t_trash *) pm->data;
+    t_trash *trash = (t_trash *) pc->data;
 
     g_object_unref(trash->empty_pb);
     g_object_unref(trash->full_pb);
@@ -539,42 +488,36 @@ static void trash_set_icon_theme(PanelModule * pm, const char *theme)
     trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
 
     if(trash->empty)
-        trash->item->pb = trash->empty_pb;
+        icon_button_set_pixbuf(trash->button, trash->empty_pb);
     else
-        trash->item->pb = trash->full_pb;
-
-    panel_item_set_size(trash->item, trash->size);
+        icon_button_set_pixbuf(trash->button, trash->full_pb);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static gboolean create_trash_module(PanelModule * pm)
+/*  create trash panel control
+*/
+void create_trash(PanelControl * pc)
 {
-    t_trash *trash = trash_new(pm->parent);
+    t_trash *trash = trash_new();
+    GtkWidget *b = icon_button_get_button(trash->button);
 
-    pm->caption = g_strdup(_("Trash can"));
-    pm->data = (gpointer) trash;
-    pm->main = trash->item->button;
+    gtk_container_add(GTK_CONTAINER(pc->base), b);
 
-    pm->interval = 2000;        /* 2 sec */
-    pm->update = (gpointer) check_trash;
+    pc->caption = g_strdup(_("Trash can"));
+    pc->data = (gpointer) trash;
+    pc->main = b;
 
-    pm->pack = (gpointer) trash_pack;
-    pm->unpack = (gpointer) trash_unpack;
-    pm->free = (gpointer) trash_free;
+    pc->interval = 2000;        /* 2 sec */
+    pc->update = (gpointer) check_trash;
 
-    pm->set_size = (gpointer) trash_set_size;
-    pm->set_icon_theme = (gpointer) trash_set_icon_theme;
+    pc->free = (gpointer) trash_free;
 
-    if(pm->parent)
-        check_trash(pm);
-
-    return TRUE;
+    pc->set_size = (gpointer) trash_set_size;
+    pc->set_theme = (gpointer) trash_set_theme;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Exit module
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  Exit module
+ *  -----------
+*/
 typedef struct
 {
     GtkWidget *vbox;
@@ -587,24 +530,18 @@ t_exit;
 static t_exit *exit_new(void)
 {
     GtkWidget *im;
-    GdkPixbuf *pb = NULL;
     t_exit *exit = g_new(t_exit, 1);
 
     exit->vbox = gtk_vbox_new(TRUE, 0);
     gtk_widget_show(exit->vbox);
-
-    /* protect against destruction when unpacking */
-    g_object_ref(exit->vbox);
 
     exit->lock_button = gtk_button_new();
     gtk_button_set_relief(GTK_BUTTON(exit->lock_button), GTK_RELIEF_NONE);
     gtk_widget_show(exit->lock_button);
     gtk_box_pack_start(GTK_BOX(exit->vbox), exit->lock_button, TRUE, TRUE, 0);
 
-    pb = get_system_pixbuf(MINILOCK_ICON);
-    im = gtk_image_new_from_pixbuf(pb);
+    im = gtk_image_new();
     gtk_widget_show(im);
-    g_object_unref(pb);
     gtk_container_add(GTK_CONTAINER(exit->lock_button), im);
 
     exit->exit_button = gtk_button_new();
@@ -612,68 +549,48 @@ static t_exit *exit_new(void)
     gtk_widget_show(exit->exit_button);
     gtk_box_pack_start(GTK_BOX(exit->vbox), exit->exit_button, TRUE, TRUE, 0);
 
-    pb = get_system_pixbuf(MINIPOWER_ICON);
-    im = gtk_image_new_from_pixbuf(pb);
+    im = gtk_image_new();
     gtk_widget_show(im);
-    g_object_unref(pb);
     gtk_container_add(GTK_CONTAINER(exit->exit_button), im);
 
     add_tooltip(exit->lock_button, _("Lock the screen"));
     add_tooltip(exit->exit_button, _("Exit"));
 
-    g_signal_connect_swapped(exit->lock_button, "clicked", 
-			     G_CALLBACK(mini_lock_cb), NULL);
+    g_signal_connect_swapped(exit->lock_button, "clicked",
+                             G_CALLBACK(mini_lock_cb), NULL);
 
-    g_signal_connect_swapped(exit->exit_button, "clicked", 
-			     G_CALLBACK(quit), NULL);
-    
+    g_signal_connect_swapped(exit->exit_button, "clicked", G_CALLBACK(quit),
+                             NULL);
+
     return exit;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void exit_pack(PanelModule * pm, GtkBox * box)
+static void exit_free(PanelControl * pc)
 {
-    t_exit *exit = (t_exit *) pm->data;
+    t_exit *exit = (t_exit *) pc->data;
 
-    gtk_box_pack_start(box, exit->vbox, TRUE, TRUE, 0);
-}
-
-static void exit_unpack(PanelModule * pm, GtkContainer * container)
-{
-    t_exit *exit = (t_exit *) pm->data;
-
-    gtk_container_remove(container, exit->vbox);
-}
-
-static void exit_free(PanelModule * pm)
-{
-    t_exit *exit = (t_exit *) pm->data;
-
-    if(GTK_IS_WIDGET(pm->main))
-        gtk_widget_destroy(pm->main);
+    if(GTK_IS_WIDGET(pc->main))
+        gtk_widget_destroy(pc->main);
 
     g_free(exit);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void exit_set_size(PanelModule * pm, int size)
+static void exit_set_size(PanelControl * pc, int size)
 {
-    t_exit *exit = (t_exit *) pm->data;
+    t_exit *exit = (t_exit *) pc->data;
     GdkPixbuf *pb1, *pb2;
     GtkWidget *im;
     int width, height;
 
-    width = icon_size(size);
-    height = icon_size(size) / 2;
+    width = icon_size[size];
+    height = icon_size[size] / 2;
 
     gtk_widget_set_size_request(exit->exit_button, width + 4, height + 2);
     gtk_widget_set_size_request(exit->lock_button, width + 4, height + 2);
 
     pb1 = get_system_pixbuf(MINIPOWER_ICON);
     im = gtk_bin_get_child(GTK_BIN(exit->exit_button));
-    pb2 = get_scaled_pixbuf(pb1, height-4);
+    pb2 = get_scaled_pixbuf(pb1, height - 4);
     gtk_image_set_from_pixbuf(GTK_IMAGE(im), pb2);
 
     g_object_unref(pb1);
@@ -681,23 +598,46 @@ static void exit_set_size(PanelModule * pm, int size)
 
     pb1 = get_system_pixbuf(MINILOCK_ICON);
     im = gtk_bin_get_child(GTK_BIN(exit->lock_button));
-    pb2 = get_scaled_pixbuf(pb1, height-4);
+    pb2 = get_scaled_pixbuf(pb1, height - 4);
     gtk_image_set_from_pixbuf(GTK_IMAGE(im), pb2);
 
     g_object_unref(pb1);
     g_object_unref(pb2);
 }
 
-static void exit_set_icon_theme(PanelModule * pm, const char *theme)
+static void exit_set_theme(PanelControl * pc, const char *theme)
 {
-    exit_set_size(pm, settings.size);
+    exit_set_size(pc, settings.size);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 GtkWidget *lock_entry;
 GtkWidget *exit_entry;
 
-void exit_add_options(PanelModule * pm, GtkContainer * container)
+static void exit_apply_configuration(PanelControl * pc)
+{
+    const char *tmp;
+
+    tmp = gtk_entry_get_text(GTK_ENTRY(lock_entry));
+
+    g_free(settings.lock_command);
+
+    if(tmp && *tmp)
+        settings.lock_command = g_strdup(tmp);
+    else
+        settings.lock_command = NULL;
+
+    tmp = gtk_entry_get_text(GTK_ENTRY(exit_entry));
+
+    g_free(settings.exit_command);
+
+    if(tmp && *tmp)
+        settings.exit_command = g_strdup(tmp);
+    else
+        settings.exit_command = NULL;
+}
+
+void exit_add_options(PanelControl * pc, GtkContainer * container,
+                      GtkWidget * revert, GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
@@ -716,8 +656,8 @@ void exit_add_options(PanelModule * pm, GtkContainer * container)
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
     lock_entry = gtk_entry_new();
-    if (settings.lock_command)
-	gtk_entry_set_text(GTK_ENTRY(lock_entry), settings.lock_command);
+    if(settings.lock_command)
+        gtk_entry_set_text(GTK_ENTRY(lock_entry), settings.lock_command);
     gtk_widget_show(lock_entry);
     gtk_box_pack_start(GTK_BOX(hbox), lock_entry, FALSE, FALSE, 0);
 
@@ -732,161 +672,103 @@ void exit_add_options(PanelModule * pm, GtkContainer * container)
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
     exit_entry = gtk_entry_new();
-    if (settings.exit_command)
-	gtk_entry_set_text(GTK_ENTRY(exit_entry), settings.exit_command);
+    if(settings.exit_command)
+        gtk_entry_set_text(GTK_ENTRY(exit_entry), settings.exit_command);
     gtk_widget_show(exit_entry);
     gtk_box_pack_start(GTK_BOX(hbox), exit_entry, FALSE, FALSE, 0);
 
     gtk_container_add(container, vbox);
+
+    g_signal_connect_swapped(done, "clicked",
+                             G_CALLBACK(exit_apply_configuration), pc);
 }
 
-static void exit_apply_configuration(PanelModule * pm)
-{
-    const char *tmp;
-
-    tmp = gtk_entry_get_text(GTK_ENTRY(lock_entry));
-
-    g_free(settings.lock_command);
-
-    if (tmp && *tmp)
-	settings.lock_command = g_strdup(tmp);
-    else
-	settings.lock_command = NULL;
-
-    tmp = gtk_entry_get_text(GTK_ENTRY(exit_entry));
-
-    g_free(settings.exit_command);
-
-    if (tmp && *tmp)
-	settings.exit_command = g_strdup(tmp);
-    else
-	settings.exit_command = NULL;
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-static gboolean create_exit_module(PanelModule * pm)
+void create_exit(PanelControl * pc)
 {
     t_exit *exit = exit_new();
 
-    pm->caption = g_strdup(_("Exit/Lock"));
-    pm->data = (gpointer) exit;
-    pm->main = exit->exit_button;
+    gtk_container_add(GTK_CONTAINER(pc->base), exit->vbox);
+    
+    pc->caption = g_strdup(_("Exit/Lock"));
+    pc->data = (gpointer) exit;
+    pc->main = exit->exit_button;
 
-    pm->interval = 0;
-    pm->update = NULL;
+    pc->interval = 0;
+    pc->update = NULL;
 
-    pm->pack = (gpointer) exit_pack;
-    pm->unpack = (gpointer) exit_unpack;
-    pm->free = (gpointer) exit_free;
+    pc->free = (gpointer) exit_free;
 
-    pm->set_size = (gpointer) exit_set_size;
-    pm->set_icon_theme = (gpointer) exit_set_icon_theme;
+    pc->set_size = (gpointer) exit_set_size;
+    pc->set_theme = (gpointer) exit_set_theme;
 
-    pm->add_options = (gpointer) exit_add_options;
-    pm->apply_configuration = (gpointer) exit_apply_configuration;
+    pc->add_options = (gpointer) exit_add_options;
 
-    return TRUE;
+    exit_set_size(pc, settings.size);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Config module
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-static GtkWidget *config_new(void)
+/*  Config module
+ *  -------------
+*/
+static IconButton *config_new(void)
 {
-    GtkWidget *button;
-    GtkWidget *im;
+    IconButton *button;
+    GtkWidget *b;
     GdkPixbuf *pb = NULL;
 
-    button = gtk_button_new();
-    gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
-    gtk_widget_show(button);
-    /* protect against destruction when unpacking */
-    g_object_ref(button);
-
     pb = get_system_pixbuf(MINIPALET_ICON);
-    im = gtk_image_new_from_pixbuf(pb);
-    gtk_widget_show(im);
+    button = icon_button_new(pb);
     g_object_unref(pb);
-    gtk_container_add(GTK_CONTAINER(button), im);
 
-    add_tooltip(button, _("Setup..."));
+    b = icon_button_get_button(button);
+    
+    add_tooltip(b, _("Setup..."));
 
-    g_signal_connect_swapped(button, "clicked", 
-			     G_CALLBACK(mini_palet_cb), NULL);
+    g_signal_connect_swapped(b, "clicked", G_CALLBACK(mini_palet_cb),
+                             NULL);
 
     return button;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void config_pack(PanelModule * pm, GtkBox * box)
+static void config_free(PanelControl * pc)
 {
-    GtkWidget *config = (GtkWidget *) pm->data;
+    IconButton *b = (IconButton *)pc->data;
 
-    gtk_box_pack_start(box, config, TRUE, TRUE, 0);
+    icon_button_free(b);
 }
 
-static void config_unpack(PanelModule * pm, GtkContainer * container)
+static void config_set_size(PanelControl * pc, int size)
 {
-    GtkWidget *config = (GtkWidget *) pm->data;
+    IconButton *b = (IconButton *)pc->data;
 
-    gtk_container_remove(container, config);
+    icon_button_set_size(b, size);
 }
 
-static void config_free(PanelModule * pm)
+static void config_set_theme(PanelControl * pc, const char *theme)
 {
-    if(GTK_IS_WIDGET(pm->main))
-        gtk_widget_destroy(pm->main);
+    GdkPixbuf *pb;
+    IconButton *b = (IconButton *)pc->data;
+
+    pb = get_system_pixbuf(MINIPALET_ICON);
+    icon_button_set_pixbuf(b, pb);
+    g_object_unref(pb);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void config_set_size(PanelModule * pm, int size)
+void create_config(PanelControl * pc)
 {
-    GtkWidget *config = (GtkWidget *) pm->data;
-    GdkPixbuf *pb1, *pb2;
-    GtkWidget *im;
-    int width, height;
+    IconButton *config = config_new();
+    GtkWidget *b = icon_button_get_button(config);
 
-    width = icon_size(size);
-    height = icon_size(size);
+    gtk_container_add(GTK_CONTAINER(pc->base), b);
+    pc->caption = g_strdup(_("Setup"));
+    pc->data = (gpointer) config;
+    pc->main = b;
 
-    gtk_widget_set_size_request(config, width + 4, height + 4);
+    pc->interval = 0;
+    pc->update = NULL;
 
-    pb1 = get_system_pixbuf(MINIPALET_ICON);
-    im = gtk_bin_get_child(GTK_BIN(config));
-    pb2 = get_scaled_pixbuf(pb1, height);
-    gtk_image_set_from_pixbuf(GTK_IMAGE(im), pb2);
+    pc->free = (gpointer) config_free;
 
-    g_object_unref(pb1);
-    g_object_unref(pb2);
+    pc->set_size = (gpointer) config_set_size;
+    pc->set_theme = (gpointer) config_set_theme;
 }
-
-static void config_set_icon_theme(PanelModule * pm, const char *theme)
-{
-    config_set_size(pm, settings.size);
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-static gboolean create_config_module(PanelModule * pm)
-{
-    GtkWidget *config = config_new();
-
-    pm->caption = g_strdup(_("Setup"));
-    pm->data = (gpointer) config;
-    pm->main = config;
-
-    pm->interval = 0;
-    pm->update = NULL;
-
-    pm->pack = (gpointer) config_pack;
-    pm->unpack = (gpointer) config_unpack;
-    pm->free = (gpointer) config_free;
-
-    pm->set_size = (gpointer) config_set_size;
-    pm->set_icon_theme = (gpointer) config_set_icon_theme;
-
-    return TRUE;
-}
-
 

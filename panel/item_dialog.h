@@ -1,6 +1,6 @@
 /*  item_dialog.h
  *
- *  Copyright (C) Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,10 +20,14 @@
 #ifndef __XFCE_ITEM_DIALOG_H__
 #define __XFCE_ITEM_DIALOG_H__
 
+#include "global.h"
+
 void edit_menu_item_dialog(MenuItem * mi);
 
 void add_menu_item_dialog(PanelPopup * pp);
 
-void edit_panel_group_dialog(PanelGroup * pg);
+/* options box for panel control dialog */
+void panel_item_add_options(PanelControl * pc, GtkContainer * container,
+                            GtkWidget * revert, GtkWidget * done);
 
 #endif /* __XFCE_ITEM_DIALOG_H__ */

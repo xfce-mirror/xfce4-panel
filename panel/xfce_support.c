@@ -1,6 +1,6 @@
 /*  xfce_support.c
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,25 +26,9 @@
 #include "global.h"
 #include "xfce_support.h"
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   Files and directories
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-#ifndef SYSCONFDIR
-#define SYSCONFDIR "/usr/local/etc/"
-#endif
-
-#ifndef DATADIR
-#define DATADIR "/usr/local/share/xfce4"
-#endif
-
-#define HOMERCDIR ".xfce4"
-#define SYSRCDIR "xfce4"
-#define XFCERC "xfce4rc"
-
-#define PLUGINDIR "plugins"
-#define THEMEDIR "themes"
-
+/*  Files and directories
+ *  ---------------------
+*/
 char *get_save_dir(void)
 {
     const char *home = g_getenv("HOME");
@@ -173,7 +157,8 @@ char **get_plugin_dirs(void)
     {
         dirs = g_new0(char *, 3);
 
-        dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, "plugins", NULL);
+        dirs[0] =
+            g_build_filename(g_getenv("HOME"), HOMERCDIR, "plugins", NULL);
         dirs[1] = g_build_filename(DATADIR, "plugins", NULL);
     }
 
@@ -221,12 +206,24 @@ void write_backup_file(const char *path)
     }
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   Gtk
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-/* Taken from ROX Filer (http://rox.sourceforge.net)
- * by Thomas Leonard
- */
+/*  Tooltips
+ *  --------
+*/
+static GtkTooltips *tooltips = NULL;
+
+void add_tooltip(GtkWidget * widget, char *tip)
+{
+    if(!tooltips)
+        tooltips = gtk_tooltips_new();
+
+    gtk_tooltips_set_tip(tooltips, widget, tip, NULL);
+}
+
+/*  Button with text and stock icon
+ *  -------------------------------
+ *  Taken from ROX Filer (http://rox.sourceforge.net)
+ *  by Thomas Leonard
+*/
 GtkWidget *mixed_button_new(const char *stock, const char *message)
 {
     GtkWidget *button, *align, *image, *hbox, *label;
@@ -250,9 +247,9 @@ GtkWidget *mixed_button_new(const char *stock, const char *message)
     return button;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   DND
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  DND
+ *  ---
+*/
 enum
 {
     TARGET_STRING,
@@ -273,7 +270,31 @@ void dnd_set_drag_dest(GtkWidget * widget)
                       target_table, n_targets, GDK_ACTION_COPY);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+static void dnd_drop_cb(GtkWidget * widget, GdkDragContext * context,
+                        gint x, gint y, GtkSelectionData * data,
+                        guint info, guint time, gpointer user_data)
+{
+    GList *fnames;
+    DropCallback f;
+
+    fnames = gnome_uri_list_extract_filenames((char *)data->data);
+
+    f = DROP_CALLBACK(g_object_get_data(G_OBJECT(widget), "dropfunction"));
+
+    f(widget, fnames, user_data);
+
+    gnome_uri_list_free_strings(fnames);
+    gtk_drag_finish(context, FALSE, (context->action == GDK_ACTION_MOVE),
+                    time);
+}
+
+void dnd_set_callback(GtkWidget *widget, DropCallback function, gpointer data)
+{
+    g_object_set_data(G_OBJECT(widget), "dropfunction", (gpointer) function);
+    
+    g_signal_connect(widget, "drag-data-received", 
+	    	     G_CALLBACK(dnd_drop_cb), data);
+}
 
 /*** the next three routines are taken straight from gnome-libs so that the
      gtk-only version can receive drag and drops as well ***/
@@ -389,9 +410,9 @@ GList *gnome_uri_list_extract_filenames(const gchar * uri_list)
     return result;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   Dialogs
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  User interaction dialogs
+ *  ------------------------
+*/
 gboolean confirm(const char *text, const char *stock, const char *action)
 {
     GtkWidget *dialog, *button;
@@ -400,7 +421,8 @@ gboolean confirm(const char *text, const char *stock, const char *action)
     dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
                                     GTK_DIALOG_MODAL |
                                     GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_NONE, text);
+                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_NONE,
+                                    text);
 
     button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
     gtk_widget_show(button);
@@ -423,7 +445,7 @@ gboolean confirm(const char *text, const char *stock, const char *action)
         return TRUE;
     else
         return FALSE;
-}
+}
 
 void report_error(const char *text)
 {
@@ -432,7 +454,8 @@ void report_error(const char *text)
     dialog = gtk_message_dialog_new(toplevel ? GTK_WINDOW(toplevel) : NULL,
                                     GTK_DIALOG_MODAL |
                                     GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE, text);
+                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
+                                    text);
 
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 
@@ -455,8 +478,9 @@ void show_info(const char *text)
     gtk_widget_destroy(dialog);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
+/*  File open dialog
+ *  ----------------
+*/
 static void fs_ok_cb(GtkDialog * fs)
 {
     gtk_dialog_response(fs, GTK_RESPONSE_OK);
@@ -468,7 +492,7 @@ static void fs_cancel_cb(GtkDialog * fs)
     gtk_dialog_response(fs, GTK_RESPONSE_CANCEL);
 }
 
-/* Let's user select a file in a from a dialog. Any of the arguments may be NULL */
+/* Any of the arguments may be NULL */
 char *select_file_name(const char *title, const char *path, GtkWidget * parent)
 {
     const char *t = (title) ? title : _("Select file");
@@ -503,9 +527,9 @@ char *select_file_name(const char *title, const char *path, GtkWidget * parent)
     return name;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-   Executing commands
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  Executing commands
+ *  ------------------
+*/
 
 /* '~' doesn't get expanded by g_spawn_* */
 static void *expand_path(void)
@@ -552,7 +576,8 @@ static void *expand_path(void)
     }
 }
 
-static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean silent)
+static void real_exec_cmd(const char *cmd, gboolean in_terminal,
+                          gboolean silent)
 {
     GError *error = NULL;       /* this must be NULL to prevent crash :( */
     char execute[MAXSTRLEN + 1];
@@ -592,6 +617,7 @@ void exec_cmd(const char *cmd, gboolean in_terminal)
     real_exec_cmd(cmd, in_terminal, FALSE);
 }
 
+/* without error reporting dialog */
 void exec_cmd_silent(const char *cmd, gboolean in_terminal)
 {
     real_exec_cmd(cmd, in_terminal, TRUE);

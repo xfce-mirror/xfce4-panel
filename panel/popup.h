@@ -1,6 +1,6 @@
 /*  popup.h
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -69,35 +69,39 @@ struct _MenuItem
     GtkWidget *label;
 };
 
-/*****************************************************************************/
+/* Panel popups */
 
-PanelPopup *panel_popup_new(void);
-void add_panel_popup(PanelPopup * pp, GtkBox * box);
+PanelPopup *create_panel_popup(void);
+void add_panel_popup(PanelPopup * pp, GtkContainer *container);
 void panel_popup_free(PanelPopup * pp);
 
+void panel_popup_add_item(PanelPopup *pp, MenuItem *mi);
+void panel_popup_remove_item(PanelPopup *pp, MenuItem *mi);
+    
 void panel_popup_set_size(PanelPopup * pp, int size);
 void panel_popup_set_popup_size(PanelPopup * pp, int size);
+void panel_popup_set_popup_position(PanelPopup *pp, int position);
+void panel_popup_set_on_top(PanelPopup *pp, gboolean on_top);
 void panel_popup_set_style(PanelPopup * pp, int size);
-void panel_popup_set_icon_theme(PanelPopup * pp, const char *theme);
+void panel_popup_set_theme(PanelPopup * pp, const char *theme);
 
 void hide_current_popup_menu(void);
 
-void panel_popup_parse_xml(xmlNodePtr node, PanelPopup * pp);
-void panel_popup_write_xml(xmlNodePtr root, PanelPopup * pp);
+void panel_popup_set_from_xml(PanelPopup * pp, xmlNodePtr node);
+void panel_popup_write_xml(PanelPopup * pp, xmlNodePtr root);
 
-/*****************************************************************************/
-
+/* Menu items */
 MenuItem *menu_item_new(PanelPopup * pp);
 
-void create_addtomenu_item(MenuItem * mi);
 void create_menu_item(MenuItem * mi);
+
 void menu_item_free(MenuItem * mi);
 
-void menu_item_set_popup_size(MenuItem * mi, int size);
-void menu_item_set_style(MenuItem * mi, int style);
-void menu_item_set_icon_theme(MenuItem * mi, const char *theme);
+void menu_item_apply_config(MenuItem * mi);
 
-void menu_item_parse_xml(xmlNodePtr node, MenuItem * mi);
-void menu_item_write_xml(xmlNodePtr root, MenuItem * mi);
+void panel_popup_add_item(PanelPopup *pp, MenuItem *mi);
+
+void panel_popup_remove_item(PanelPopup *pp, MenuItem *mi);
 
 #endif /* __XFCE_POPUP_H__ */
+

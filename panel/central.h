@@ -1,6 +1,6 @@
 /*  central.h
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,27 +22,21 @@
 
 #include "global.h"
 
-struct _ScreenButton
-{
-    int index;
-    char *name;
-
-    int callback_id;
-
-    GtkWidget *frame;
-    GtkWidget *button;
-    GtkWidget *label;
-};
-
 /* central panel */
-void central_panel_init(void);
-void add_central_panel(GtkBox * box);
+void central_panel_init(GtkBox *hbox);
+
+void central_panel_set_from_xml(xmlNodePtr node);
+
+void central_panel_write_xml(xmlNodePtr root);
+
 void central_panel_cleanup(void);
 
 /* global settings */
 void central_panel_set_size(int size);
+
 void central_panel_set_style(int style);
-void central_panel_set_icon_theme(const char *theme);
+
+void central_panel_set_theme(const char *theme);
 
 void central_panel_set_current(int n);
 
@@ -50,17 +44,13 @@ void central_panel_set_num_screens(int n);
 
 void central_panel_set_show_desktop_buttons(gboolean show);
 
-/* screen buttons */
-ScreenButton *screen_button_new(int index);
-void add_screen_button(ScreenButton * sb, GtkWidget * table);
-void screen_button_free(ScreenButton * sb);
+void central_panel_set_show_minibuttons(gboolean show);
 
-/* settings */
-void screen_button_set_size(ScreenButton * sb, int size);
-void screen_button_set_style(ScreenButton * sb, int style);
+/* Screen buttons */
+char *screen_button_get_name(ScreenButton *sb);
 
-/* central panel configuration */
-void central_panel_parse_xml(xmlNodePtr node);
-void central_panel_write_xml(xmlNodePtr root);
+void screen_button_set_name(ScreenButton *sb, const char *name);
+
+int screen_button_get_index(ScreenButton *sb);
 
 #endif /* __XFCE_CENTRAL_H__ */

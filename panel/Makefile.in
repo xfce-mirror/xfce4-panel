@@ -95,12 +95,14 @@ xfce4_SOURCES = \
 builtins.c \
 callbacks.c \
 central.c \
+controls.c \
+controls_dialog.c \
 dialogs.c \
+iconbutton.c \
 icons.c \
 info.c \
 item.c \
 item_dialog.c \
-module.c \
 move.c \
 popup.c \
 settings.c \
@@ -109,6 +111,7 @@ wmhints.c \
 builtins.h \
 callbacks.h \
 central.h \
+controls_dialog.h \
 dialogs.h \
 item_dialog.h \
 move.h \
@@ -121,15 +124,16 @@ xfce_support.c
 
 
 pkginclude_HEADERS = \
+iconbutton.h \
 icons.h \
 item.h \
-module.h \
+controls.h \
 xfce.h \
 xfce_support.h \
 global.h
 
 
-xfce4_CFLAGS = @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ -DG_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DSYSCONFDIR=\"$(sysconfdir)\" -DVERSION=\"@VERSION@\"
+xfce4_CFLAGS = @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ -DG_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DSYSCONFDIR=\"$(sysconfdir)\" -DVERSION=\"@VERSION@\"
 xfce4_LDADD = @LIBS@ @X_LIBS@  @BASE_DEPENDENCIES_LIBS@
 subdir = panel
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -139,13 +143,14 @@ bin_PROGRAMS = xfce4$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
 am_xfce4_OBJECTS = xfce4-builtins.$(OBJEXT) xfce4-callbacks.$(OBJEXT) \
-	xfce4-central.$(OBJEXT) xfce4-dialogs.$(OBJEXT) \
-	xfce4-icons.$(OBJEXT) xfce4-info.$(OBJEXT) xfce4-item.$(OBJEXT) \
-	xfce4-item_dialog.$(OBJEXT) xfce4-module.$(OBJEXT) \
-	xfce4-move.$(OBJEXT) xfce4-popup.$(OBJEXT) \
-	xfce4-settings.$(OBJEXT) xfce4-side.$(OBJEXT) \
-	xfce4-wmhints.$(OBJEXT) xfce4-xfce.$(OBJEXT) \
-	xfce4-xfce_support.$(OBJEXT)
+	xfce4-central.$(OBJEXT) xfce4-controls.$(OBJEXT) \
+	xfce4-controls_dialog.$(OBJEXT) xfce4-dialogs.$(OBJEXT) \
+	xfce4-iconbutton.$(OBJEXT) xfce4-icons.$(OBJEXT) \
+	xfce4-info.$(OBJEXT) xfce4-item.$(OBJEXT) \
+	xfce4-item_dialog.$(OBJEXT) xfce4-move.$(OBJEXT) \
+	xfce4-popup.$(OBJEXT) xfce4-settings.$(OBJEXT) \
+	xfce4-side.$(OBJEXT) xfce4-wmhints.$(OBJEXT) \
+	xfce4-xfce.$(OBJEXT) xfce4-xfce_support.$(OBJEXT)
 xfce4_OBJECTS = $(am_xfce4_OBJECTS)
 xfce4_DEPENDENCIES =
 xfce4_LDFLAGS =
@@ -160,11 +165,13 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4-builtins.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-callbacks.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-central.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4-controls.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4-controls_dialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-dialogs.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4-iconbutton.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-icons.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-info.Po ./$(DEPDIR)/xfce4-item.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-item_dialog.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/xfce4-module.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-move.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-popup.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-settings.Po \
@@ -227,12 +234,14 @@ clean-binPROGRAMS:
 xfce4-builtins.$(OBJEXT): builtins.c
 xfce4-callbacks.$(OBJEXT): callbacks.c
 xfce4-central.$(OBJEXT): central.c
+xfce4-controls.$(OBJEXT): controls.c
+xfce4-controls_dialog.$(OBJEXT): controls_dialog.c
 xfce4-dialogs.$(OBJEXT): dialogs.c
+xfce4-iconbutton.$(OBJEXT): iconbutton.c
 xfce4-icons.$(OBJEXT): icons.c
 xfce4-info.$(OBJEXT): info.c
 xfce4-item.$(OBJEXT): item.c
 xfce4-item_dialog.$(OBJEXT): item_dialog.c
-xfce4-module.$(OBJEXT): module.c
 xfce4-move.$(OBJEXT): move.c
 xfce4-popup.$(OBJEXT): popup.c
 xfce4-settings.$(OBJEXT): settings.c
@@ -253,12 +262,14 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-builtins.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-central.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-controls.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-controls_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-dialogs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-iconbutton.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-icons.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-item.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-item_dialog.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-module.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-move.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-popup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-settings.Po@am__quote@
@@ -342,6 +353,42 @@ xfce4-central.lo: central.c
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-central.lo `test -f 'central.c' || echo '$(srcdir)/'`central.c
 
+xfce4-controls.o: controls.c
+@AMDEP_TRUE@	source='controls.c' object='xfce4-controls.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-controls.Po' tmpdepfile='$(DEPDIR)/xfce4-controls.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-controls.o `test -f 'controls.c' || echo '$(srcdir)/'`controls.c
+
+xfce4-controls.obj: controls.c
+@AMDEP_TRUE@	source='controls.c' object='xfce4-controls.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-controls.Po' tmpdepfile='$(DEPDIR)/xfce4-controls.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-controls.obj `cygpath -w controls.c`
+
+xfce4-controls.lo: controls.c
+@AMDEP_TRUE@	source='controls.c' object='xfce4-controls.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-controls.Plo' tmpdepfile='$(DEPDIR)/xfce4-controls.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-controls.lo `test -f 'controls.c' || echo '$(srcdir)/'`controls.c
+
+xfce4-controls_dialog.o: controls_dialog.c
+@AMDEP_TRUE@	source='controls_dialog.c' object='xfce4-controls_dialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-controls_dialog.Po' tmpdepfile='$(DEPDIR)/xfce4-controls_dialog.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-controls_dialog.o `test -f 'controls_dialog.c' || echo '$(srcdir)/'`controls_dialog.c
+
+xfce4-controls_dialog.obj: controls_dialog.c
+@AMDEP_TRUE@	source='controls_dialog.c' object='xfce4-controls_dialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-controls_dialog.Po' tmpdepfile='$(DEPDIR)/xfce4-controls_dialog.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-controls_dialog.obj `cygpath -w controls_dialog.c`
+
+xfce4-controls_dialog.lo: controls_dialog.c
+@AMDEP_TRUE@	source='controls_dialog.c' object='xfce4-controls_dialog.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-controls_dialog.Plo' tmpdepfile='$(DEPDIR)/xfce4-controls_dialog.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-controls_dialog.lo `test -f 'controls_dialog.c' || echo '$(srcdir)/'`controls_dialog.c
+
 xfce4-dialogs.o: dialogs.c
 @AMDEP_TRUE@	source='dialogs.c' object='xfce4-dialogs.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-dialogs.Po' tmpdepfile='$(DEPDIR)/xfce4-dialogs.TPo' @AMDEPBACKSLASH@
@@ -359,6 +406,24 @@ xfce4-dialogs.lo: dialogs.c
 @AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-dialogs.Plo' tmpdepfile='$(DEPDIR)/xfce4-dialogs.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-dialogs.lo `test -f 'dialogs.c' || echo '$(srcdir)/'`dialogs.c
+
+xfce4-iconbutton.o: iconbutton.c
+@AMDEP_TRUE@	source='iconbutton.c' object='xfce4-iconbutton.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-iconbutton.Po' tmpdepfile='$(DEPDIR)/xfce4-iconbutton.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-iconbutton.o `test -f 'iconbutton.c' || echo '$(srcdir)/'`iconbutton.c
+
+xfce4-iconbutton.obj: iconbutton.c
+@AMDEP_TRUE@	source='iconbutton.c' object='xfce4-iconbutton.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-iconbutton.Po' tmpdepfile='$(DEPDIR)/xfce4-iconbutton.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-iconbutton.obj `cygpath -w iconbutton.c`
+
+xfce4-iconbutton.lo: iconbutton.c
+@AMDEP_TRUE@	source='iconbutton.c' object='xfce4-iconbutton.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-iconbutton.Plo' tmpdepfile='$(DEPDIR)/xfce4-iconbutton.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-iconbutton.lo `test -f 'iconbutton.c' || echo '$(srcdir)/'`iconbutton.c
 
 xfce4-icons.o: icons.c
 @AMDEP_TRUE@	source='icons.c' object='xfce4-icons.o' libtool=no @AMDEPBACKSLASH@
@@ -431,24 +496,6 @@ xfce4-item_dialog.lo: item_dialog.c
 @AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-item_dialog.Plo' tmpdepfile='$(DEPDIR)/xfce4-item_dialog.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-item_dialog.lo `test -f 'item_dialog.c' || echo '$(srcdir)/'`item_dialog.c
-
-xfce4-module.o: module.c
-@AMDEP_TRUE@	source='module.c' object='xfce4-module.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-module.Po' tmpdepfile='$(DEPDIR)/xfce4-module.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-module.o `test -f 'module.c' || echo '$(srcdir)/'`module.c
-
-xfce4-module.obj: module.c
-@AMDEP_TRUE@	source='module.c' object='xfce4-module.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-module.Po' tmpdepfile='$(DEPDIR)/xfce4-module.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-module.obj `cygpath -w module.c`
-
-xfce4-module.lo: module.c
-@AMDEP_TRUE@	source='module.c' object='xfce4-module.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-module.Plo' tmpdepfile='$(DEPDIR)/xfce4-module.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-module.lo `test -f 'module.c' || echo '$(srcdir)/'`module.c
 
 xfce4-move.o: move.c
 @AMDEP_TRUE@	source='move.c' object='xfce4-move.o' libtool=no @AMDEPBACKSLASH@

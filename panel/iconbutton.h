@@ -1,6 +1,6 @@
-/*  dialog.h
- *
- *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
+/*  iconbutton.h
+ *  
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -10,24 +10,28 @@
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+*/
 
-#ifndef __XFCE_DIALOGS_H__
-#define __XFCE_DIALOGS_H__
+#ifndef __XFCE_ICON_BUTTON_H__
+#define __XFCE_ICON_BUTTON_H__
 
-#include "global.h"
+IconButton *icon_button_new(GdkPixbuf * pb);
 
-void screen_button_dialog(ScreenButton * sb);
+GtkWidget *icon_button_get_button(IconButton * b);
 
-void set_transient_for_dialog(GtkWidget * window);
+void icon_button_set_size(IconButton * b, int size);
 
-void global_settings_dialog(void);
+void icon_button_set_pixbuf(IconButton * b, GdkPixbuf * pb);
 
-void info_panel_dialog(void);
+void icon_button_set_command(IconButton * b, const char *cmd,
+                             gboolean use_terminal);
 
-#endif /* __XFCE_DIALOGS_H__ */
+void icon_button_free(IconButton * b);
+
+#endif /* __XFCE_ICON_BUTTON_H__ */
+
