@@ -21,7 +21,7 @@
  * Functions are described using gtk-doc style comments, even though no actual
  * documentation is extracted. The format should be self-explanatory.
  *
- * The 'xfce_module_init' function is the only direct access to the module
+ * The 'xfce_control_class_init' function is the only direct access to the module
  * from the panel. It is probably easiest to start reading from there. It's
  * the last function definition in this file.
  **/
