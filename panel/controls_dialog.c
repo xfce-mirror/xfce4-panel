@@ -267,7 +267,7 @@ controls_dialog (Control * control)
     dlg = gtk_dialog_new_with_buttons (_("Change item"), NULL,
 				       GTK_DIALOG_MODAL, NULL);
 
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER_ALWAYS);
 
     button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
