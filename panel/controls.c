@@ -527,6 +527,21 @@ control_class_unref (ControlClass *cclass)
 	info->refcount--;
 }
 
+static gint
+sort_control_func (gpointer a, gpointer b, gpointer data)
+{
+    ControlInfo *ca = (ControlInfo *) a;
+    ControlInfo *cb = (ControlInfo *) b;
+
+    if ((!ca) || (!ca->caption))
+        return -1;
+         
+    if ((!cb) || (!cb->caption))
+        return 1;
+         
+    return g_utf8_collate (ca->caption, cb->caption);
+}
+
 /* for add-controls-dialog.c */
 GSList *
 get_control_info_list (void)
@@ -555,8 +570,8 @@ get_control_info_list (void)
 	
 	infolist = g_slist_prepend (infolist, ci);
     }
-
-    return g_slist_reverse (infolist);
+    
+    return g_slist_sort (infolist, (GCompareDataFunc) sort_control_func);
 }
 
 void 

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil XFCE Panel 4\n"
-"POT-Creation-Date: 2003-12-04 09:37+0100\n"
+"POT-Creation-Date: 2004-08-06 16:24+0200\n"
 "PO-Revision-Date: 2003-09-24 17:41-0500\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -16,334 +16,317 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:597
+#: panel/xfce_support.c:603
 msgid "Select file"
 msgstr "கோப்பு தெரிவுசெய்க"
 
-#: panel/controls_dialog.c:254
-msgid "Change item"
-msgstr "உருப்படி மாற்று"
+#: panel/settings.c:172
+msgid "No data was found. The panel will be empty"
+msgstr ""
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:681
+#: panel/controls_dialog.c:88 panel/item_dialog.c:1132
 msgid "Position:"
 msgstr "இடம்:"
 
-#: panel/controls_dialog.c:342 panel/controls.c:272
-msgid ""
-"Removing an item will also remove its popup menu.\n"
-"\n"
-"Do you want to remove the item?"
+#: panel/controls_dialog.c:148
+msgid "Change item"
+msgstr "உருப்படி மாற்று"
+
+#: panel/controls_dialog.c:200 panel/controls.c:654
+#, fuzzy
+msgid "Removing the item will also remove its popup menu."
 msgstr ""
 "ஓர் உருப்படியைக் கழட்டினால் அதன் மேல்மீட்பு பட்டியும் கழட்டப்படும்.\n"
 "\n"
 "உருப்படியைக் கழட்ட விருப்பமா?"
 
-#: panel/item_dialog.c:321
-msgid "Other Icon"
-msgstr "வேரோர் குறும்படம்"
-
-#: panel/item_dialog.c:346
-msgid "Select icon"
-msgstr "குறுப்படம் தெரிவு செய்"
-
-#: panel/item_dialog.c:396
-msgid "Icon:"
-msgstr "குறும்படம்:"
-
-#: panel/item_dialog.c:467
+#: panel/item_dialog.c:135 panel/item_dialog.c:518
 msgid "Select command"
 msgstr "கட்டளை தெரிவுசெய்க"
 
-#: panel/item_dialog.c:495
+#: panel/item_dialog.c:215
 msgid "Command:"
 msgstr "கட்டளை:"
 
-#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:266
 msgid "Run in _terminal"
 msgstr "முனையத்தில் þயக்க"
 
-#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:285
 msgid "Use startup _notification"
 msgstr "தொடக்க _அறிப்பு பயன்படுத்தவும்"
 
-#: panel/item_dialog.c:564
-msgid "Caption:"
-msgstr "தலைப்பு வாக்கியம்"
+#: panel/item_dialog.c:479
+msgid "Other Icon"
+msgstr "வேரோர் குறும்படம்"
 
-#: panel/item_dialog.c:597
-msgid "Tooltip:"
-msgstr "உதவிகருவி:"
-
-#: panel/item_dialog.c:633
-msgid "Menu:"
-msgstr "பட்டி"
-
-#: panel/item_dialog.c:640
-msgid "Attach menu to launcher"
-msgstr "ஓர் பட்டியை தொடங்கருடன் சேர்க்கவும்"
-
-#: panel/item_dialog.c:773
-msgid "Icon Preview"
-msgstr "குறும்படம் முன்காட்சி"
-
-#: panel/item_dialog.c:777
+#: panel/item_dialog.c:589
 msgid "Drag file onto this frame to change the icon"
 msgstr "குறும்படத்தை மாற்றுவதற்கு, þச்சட்டம் மேல் கோப்பு þழுத்துப் போடவும்"
 
-#: panel/item_dialog.c:965
+#: panel/item_dialog.c:875
+msgid "Caption:"
+msgstr "தலைப்பு வாக்கியம்"
+
+#: panel/item_dialog.c:904
+msgid "Tooltip:"
+msgstr "உதவிகருவி:"
+
+#: panel/item_dialog.c:939
+msgid "Menu:"
+msgstr "பட்டி"
+
+#: panel/item_dialog.c:946
+msgid "Attach menu to launcher"
+msgstr "ஓர் பட்டியை தொடங்கருடன் சேர்க்கவும்"
+
+#: panel/item_dialog.c:1166
 msgid "Change menu item"
 msgstr "பட்டி உருப்படி மாற்றவும்"
 
 #. add buttons
-#: panel/item_dialog.c:968
+#: panel/item_dialog.c:1172
 msgid "Remove"
 msgstr "கழட்டுக"
 
-#: panel/item.c:441
-msgid "Click mouse button 3 to change item"
-msgstr "உருப்படி மாற்றுவதற்கு 3ஆம் சுட்டி பொத்தானை அமுத்தவும்"
-
-#: panel/item.c:464
-msgid "Add launcher"
-msgstr "தொடங்கர் சேர்க்கவும்"
-
-#: panel/item.c:469
-msgid "Add new item"
-msgstr "புதிய உருப்படி சேர்க்கவும்"
-
-#: panel/item.c:601
+#: panel/item_dialog.c:1184 panel/item.c:635
 msgid "Launcher"
 msgstr "தொடங்கர்"
 
-#: panel/main.c:117
+#: panel/item.c:470
+msgid "Click mouse button 3 to change item"
+msgstr "உருப்படி மாற்றுவதற்கு 3ஆம் சுட்டி பொத்தானை அமுத்தவும்"
+
+#: panel/item.c:493
+msgid "Add launcher"
+msgstr "தொடங்கர் சேர்க்கவும்"
+
+#: panel/item.c:498
+msgid "Add new item"
+msgstr "புதிய உருப்படி சேர்க்கவும்"
+
+#: panel/main.c:119
 msgid "Are you sure you want to exit?"
 msgstr "வெளிசெல்ல உங்களுக்கு விருப்பமா?"
 
-#: panel/main.c:329
-#, c-format
+#: panel/main.c:335
+#, fuzzy, c-format
 msgid ""
-"%s, version %s\n"
-"Part of the Xfce Desktop Environment\n"
-"http://www.xfce.org\n"
+"\n"
+" The Xfce Panel\n"
+" Version %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
 msgstr ""
 "%s, பதிப்பு %s\n"
 "Xfce கணிமேசை சூழலை சேர்ந்தது\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:361
-msgid ""
-"Your window manager does not seem to support the new window manager hints as "
-"defined on http://www.freedesktop.org. \n"
-"Some Xfce features may not work as intended."
+#: panel/main.c:408
+#, c-format
+msgid "%s: Successfully started without session management"
 msgstr ""
-"உங்கள் சாளரமேலாளர் http://www.freedesktop.org அறுதியிட்ட சாளர-குறிப்பிடுகளுக்கு "
-"ஆதரவளிப்பு கிடையாது. \n"
-"சில Xfce செயல்பாடுகள் விரும்பியதுபோல் வேலைசெய்யாது."
 
-#: panel/controls.c:320 panel/panel.c:412
-msgid "/Add _new item"
-msgstr "/புதிய _உருப்படி சேர்க்கவும்"
+#: panel/main.c:413
+#, c-format
+msgid "%s: Successfully started with session management"
+msgstr ""
 
-#: panel/controls.c:322 panel/panel.c:414
-msgid "/_Properties..."
+#: panel/controls.c:609 panel/controls.c:700
+#, c-format
+msgid "Could not create panel item \"%s\"."
+msgstr ""
+
+#: panel/controls.c:761
+#, fuzzy
+msgid "_Properties..."
 msgstr "/_பண்புகள்..."
 
-#: panel/controls.c:323
-msgid "/_Remove"
+#: panel/controls.c:766
+#, fuzzy
+msgid "_Remove"
 msgstr "/_கழட்டுக"
 
-#: panel/controls.c:655
+#: panel/controls.c:775
+#, fuzzy
+msgid "Add _new item"
+msgstr "/புதிய _உருப்படி சேர்க்கவும்"
+
+#: panel/controls.c:1049
 msgid "This item has no configuration options"
 msgstr "þந்த உருப்படிக்கு அமைப்புத் தேர்வுகள் கிடையாது"
 
-#: panel/panel.c:410
+#: panel/panel.c:547
 msgid "/Xfce Panel"
 msgstr "/XFCE பலகை"
 
-#: panel/panel.c:415
+#: panel/panel.c:549
+msgid "/Add _new item"
+msgstr "/புதிய _உருப்படி சேர்க்கவும்"
+
+#: panel/panel.c:551
+msgid "/_Properties..."
+msgstr "/_பண்புகள்..."
+
+#: panel/panel.c:552
 msgid "/_About Xfce"
 msgstr "/_XFCE பற்றி"
 
-#: panel/panel.c:416
+#: panel/panel.c:553
 msgid "/_Help"
 msgstr "/_உதவி"
 
-#: panel/panel.c:419
-msgid "/_Settings manager"
-msgstr "/_அமைப்புகள் மேலாளர்"
-
-#: panel/panel.c:422
+#: panel/panel.c:555
 msgid "/_Lock screen"
 msgstr "/_திரையைப் பூட்டுக"
 
-#: panel/panel.c:423
+#: panel/panel.c:556
 #, fuzzy
 msgid "/_Restart"
 msgstr "_நிலைமீட்டு"
 
-#: panel/panel.c:425
+#: panel/panel.c:558
 msgid "/E_xit"
 msgstr "/வெளி_ச்செல்"
 
-#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
-#: settings/xfce_settings_dialog.c:649
+#: panel/panel.c:937 settings/xfce_settings_plugin.c:67
+#: settings/xfce_settings_dialog.c:453
 msgid "Xfce Panel"
 msgstr "XFCE பலகை"
 
-#: panel/icons.c:73
+#: panel/icons.c:68
 msgid "Default"
 msgstr "கொடாநிலை"
 
-#: panel/icons.c:74
+#: panel/icons.c:69
 msgid "Editor"
 msgstr "பதிப்பான்"
 
-#: panel/icons.c:75
+#: panel/icons.c:70
 msgid "File management"
 msgstr "கோப்பு மேலாண்மை"
 
-#: panel/icons.c:76
+#: panel/icons.c:71
 msgid "Utilities"
 msgstr "பயன்பாடுகள்"
 
-#: panel/icons.c:77
+#: panel/icons.c:72
 msgid "Games"
 msgstr "விளையாட்டுகள்"
 
-#: panel/icons.c:78
+#: panel/icons.c:73
 msgid "Help browser"
 msgstr "உதவி மேலோடி"
 
-#: panel/icons.c:79
+#: panel/icons.c:74
 msgid "Multimedia"
 msgstr "பல் ஊடகம்"
 
-#: panel/icons.c:80
+#: panel/icons.c:75
 msgid "Network"
 msgstr "வலையமைப்பு"
 
-#: panel/icons.c:81
+#: panel/icons.c:76
 msgid "Graphics"
 msgstr "வரைவியல்"
 
-#: panel/icons.c:82
+#: panel/icons.c:77
 msgid "Printer"
 msgstr "அச்சுப்பொறி"
 
-#: panel/icons.c:83
+#: panel/icons.c:78
 msgid "Productivity"
 msgstr "உற்பத்தித் திறன்"
 
-#: panel/icons.c:84
+#: panel/icons.c:79
 msgid "Sound"
 msgstr "ஒலி"
 
-#: panel/icons.c:85
+#: panel/icons.c:80
 msgid "Terminal"
 msgstr "முனையம்"
 
-#: panel/mcs_client.c:208
+#: panel/mcs_client.c:204
 msgid "Settings manager not available"
 msgstr "அமைப்புகள் மேலாளர் கிடையாது"
 
-#: panel/popup.c:261
+#: panel/popup.c:255
 msgid "Menu"
 msgstr "பட்டி"
 
-#: settings/xfce_settings_dialog.c:119
-msgid "Tiny"
-msgstr "மிகசிறிய"
-
-#: settings/xfce_settings_dialog.c:123
+#: settings/xfce_settings_dialog.c:97
 msgid "Small"
 msgstr "சிறிது"
 
-#: settings/xfce_settings_dialog.c:127
+#: settings/xfce_settings_dialog.c:101
 msgid "Medium"
 msgstr "நடுத்தரம்"
 
-#: settings/xfce_settings_dialog.c:131
+#: settings/xfce_settings_dialog.c:105
 msgid "Large"
 msgstr "பெரிது"
 
-#: settings/xfce_settings_dialog.c:190
+#: settings/xfce_settings_dialog.c:109
+msgid "Huge"
+msgstr ""
+
+#: settings/xfce_settings_dialog.c:189
 msgid "Horizontal"
 msgstr "கிடையான"
 
-#: settings/xfce_settings_dialog.c:194
+#: settings/xfce_settings_dialog.c:193
 msgid "Vertical"
 msgstr "செங்குத்தமான"
 
-#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
+#: settings/xfce_settings_dialog.c:232
 msgid "Left"
 msgstr "இடது"
 
-#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
+#: settings/xfce_settings_dialog.c:236
 msgid "Right"
 msgstr "வலது"
 
-#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
-#: settings/xfce_settings_dialog.c:511
+#: settings/xfce_settings_dialog.c:240
 msgid "Top"
 msgstr "மேல்"
 
-#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
-#: settings/xfce_settings_dialog.c:519
+#: settings/xfce_settings_dialog.c:244
 msgid "Bottom"
 msgstr "கீழ்"
 
-#: settings/xfce_settings_dialog.c:374
+#: settings/xfce_settings_dialog.c:279
 msgid "Panel size:"
 msgstr "பலகை அளவு:"
 
-#: settings/xfce_settings_dialog.c:390
+#: settings/xfce_settings_dialog.c:295
 msgid "Panel orientation:"
 msgstr "பலகை திசை அமைவு:"
 
-#: settings/xfce_settings_dialog.c:407
+#: settings/xfce_settings_dialog.c:311
 msgid "Popup position:"
 msgstr "பலகை இடம்:"
 
-#: settings/xfce_settings_dialog.c:424
-msgid "Icon theme:"
-msgstr "குறும்படம் தோற்றம்:"
+#: settings/xfce_settings_dialog.c:349
+msgid "Always on top:"
+msgstr ""
 
-#: settings/xfce_settings_dialog.c:495
-msgid "Panel layer:"
-msgstr "பலகை அடுக்கம்:"
-
-#: settings/xfce_settings_dialog.c:515
-msgid "Normal"
-msgstr "இயல்பானது"
-
-#: settings/xfce_settings_dialog.c:535
-msgid "Center the panel:"
-msgstr "பலகையை நடுப்படுத்து:"
-
-#: settings/xfce_settings_dialog.c:559
-msgid "Set"
-msgstr "அமை"
-
-#: settings/xfce_settings_dialog.c:595
+#: settings/xfce_settings_dialog.c:401
 msgid "Autohide:"
 msgstr "தானாகவே ஒளி/மறை:"
 
-#: settings/xfce_settings_dialog.c:663
+#: settings/xfce_settings_dialog.c:470
 msgid "Xfce Panel Settings"
 msgstr "Xfce பலகை அமைப்புகள்"
 
-#. Appearance
-#: settings/xfce_settings_dialog.c:675
+#: settings/xfce_settings_dialog.c:481
 msgid "Appearance"
 msgstr "தோற்றம்"
 
-#. Position
-#: settings/xfce_settings_dialog.c:696
-msgid "Position"
-msgstr "இடம்"
-
-#. autohide
-#: settings/xfce_settings_dialog.c:712
+#: settings/xfce_settings_dialog.c:494
 msgid "Behaviour"
 msgstr "ஒழுக்கம்"
 
@@ -351,55 +334,63 @@ msgstr "ஒழுக்கம்"
 #. * to get the proper string for your locale.
 #. * I used these:
 #. * %A  : full weekday name
-#. * %-d : day of the month, without prefixed 0
+#. * %d  : day of the month
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:119
-msgid "%A, %-d %B %Y"
+#: plugins/clock/clock.c:204
+msgid "%A, %d %B %Y"
 msgstr ""
 
-#: plugins/clock/clock.c:336
+#: plugins/clock/clock.c:433
 msgid "Clock type:"
 msgstr "கடிகாரம் வகை:"
 
-#: plugins/clock/clock.c:349
+#: plugins/clock/clock.c:446
 msgid "Analog"
 msgstr "தொடரிசை"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:450
 msgid "Digital"
 msgstr "இலக்கமுறை"
 
-#: plugins/clock/clock.c:357
+#: plugins/clock/clock.c:454
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:419
+#: plugins/clock/clock.c:516
 msgid "Hour mode:"
 msgstr "மணி வகை:"
 
-#: plugins/clock/clock.c:426
+#: plugins/clock/clock.c:523
 msgid "24 hour"
 msgstr "24 மணி"
 
-#: plugins/clock/clock.c:432
+#: plugins/clock/clock.c:529
 msgid "12 hour"
 msgstr "12 மணி"
 
-#: plugins/clock/clock.c:438
+#: plugins/clock/clock.c:535
 msgid "AM/PM"
 msgstr "கா/மா"
 
-#: plugins/clock/clock.c:476
+#: plugins/clock/clock.c:573
 msgid "Show seconds:"
 msgstr "நொடிகள் காண்பிக்கவும்:"
 
-#: plugins/clock/clock.c:585
+#: plugins/clock/clock.c:684
 msgid "Xfce Clock"
 msgstr "XFCE கடிகாரம்"
 
-#: plugins/pager/pager.c:271
+#: plugins/pager/pager.c:309
+msgid "Number of rows:"
+msgstr ""
+
+#: plugins/pager/pager.c:311
+msgid "Number of columns:"
+msgstr ""
+
+#: plugins/pager/pager.c:355
 msgid "Graphical pager"
 msgstr "வரைவியல் பயனழையம்"
 
@@ -407,7 +398,7 @@ msgstr "வரைவியல் பயனழையம்"
 msgid "Desktop switcher"
 msgstr "வேலையிட மாற்றி"
 
-#: plugins/systembuttons/systembuttons.c:60
+#: plugins/systembuttons/systembuttons.c:55
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -417,43 +408,43 @@ msgstr ""
 "\n"
 "உங்கள் கணிப்பொறி நிர்வாகியுடன் தொடர்புகொள்ளவும்"
 
-#: plugins/systembuttons/systembuttons.c:148
+#: plugins/systembuttons/systembuttons.c:140
 msgid "Lock the screen"
 msgstr "திரையைப் பூட்டுக"
 
-#: plugins/systembuttons/systembuttons.c:149
-#: plugins/systembuttons/systembuttons.c:518
+#: plugins/systembuttons/systembuttons.c:141
+#: plugins/systembuttons/systembuttons.c:505
 msgid "Exit"
 msgstr "வெளியேறுக"
 
-#: plugins/systembuttons/systembuttons.c:150
-#: plugins/systembuttons/systembuttons.c:519
+#: plugins/systembuttons/systembuttons.c:142
+#: plugins/systembuttons/systembuttons.c:506
 msgid "Setup"
 msgstr "அமைப்பு"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:520
+#: plugins/systembuttons/systembuttons.c:143
+#: plugins/systembuttons/systembuttons.c:507
 msgid "Info"
 msgstr "தகவல்"
 
-#: plugins/systembuttons/systembuttons.c:500
+#: plugins/systembuttons/systembuttons.c:487
 msgid "Show two buttons:"
 msgstr "þரண்டு பொத்தான்களை காட்டுக:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:517
+#: plugins/systembuttons/systembuttons.c:504
 msgid "Lock"
 msgstr "பூட்டு"
 
-#: plugins/systembuttons/systembuttons.c:549
+#: plugins/systembuttons/systembuttons.c:536
 msgid "Button 1:"
 msgstr "பொத்தான் 1:"
 
-#: plugins/systembuttons/systembuttons.c:565
+#: plugins/systembuttons/systembuttons.c:552
 msgid "Button 2:"
 msgstr "பொத்தான் 2:"
 
-#: plugins/systembuttons/systembuttons.c:600
+#: plugins/systembuttons/systembuttons.c:588
 msgid "System buttons"
 msgstr "அமைப்பு பொத்தான்கள்"
 
@@ -461,25 +452,75 @@ msgstr "அமைப்பு பொத்தான்கள்"
 msgid "Separator"
 msgstr "பிரிப்பு"
 
-#: plugins/mailcheck/mailcheck.c:539
+#: plugins/mailcheck/mailcheck.c:792
 msgid "Mail box:"
 msgstr "அஞ்சல் பெட்டி:"
 
-#: plugins/mailcheck/mailcheck.c:623
-msgid "Mail command:"
-msgstr "அஞ்சல் கட்டளை:"
+#: plugins/mailcheck/mailcheck.c:829
+msgid "New mail:"
+msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:637
+#: plugins/mailcheck/mailcheck.c:843
+#, fuzzy
+msgid "Command to run when new mail arrives"
+msgstr "பலகை பொத்தானை அமுத்தினால் þயக்கவேண்டிய கட்டளை"
+
+#: plugins/mailcheck/mailcheck.c:873
 msgid "Command to run when the button on the panel is clicked"
 msgstr "பலகை பொத்தானை அமுத்தினால் þயக்கவேண்டிய கட்டளை"
 
-#: plugins/mailcheck/mailcheck.c:706
+#: plugins/mailcheck/mailcheck.c:895
 msgid "Interval (sec):"
 msgstr "இடைவெளி (நொடி):"
 
-#: plugins/mailcheck/mailcheck.c:778
+#: plugins/mailcheck/mailcheck.c:967
 msgid "Mail check"
 msgstr "அஞ்சல் சரிபார்ப்பு"
+
+#~ msgid "Select icon"
+#~ msgstr "குறுப்படம் தெரிவு செய்"
+
+#~ msgid "Icon:"
+#~ msgstr "குறும்படம்:"
+
+#~ msgid "Icon Preview"
+#~ msgstr "குறும்படம் முன்காட்சி"
+
+#~ msgid ""
+#~ "Your window manager does not seem to support the new window manager hints "
+#~ "as defined on http://www.freedesktop.org. \n"
+#~ "Some Xfce features may not work as intended."
+#~ msgstr ""
+#~ "உங்கள் சாளரமேலாளர் http://www.freedesktop.org அறுதியிட்ட சாளர-குறிப்பிடுகளுக்கு "
+#~ "ஆதரவளிப்பு கிடையாது. \n"
+#~ "சில Xfce செயல்பாடுகள் விரும்பியதுபோல் வேலைசெய்யாது."
+
+#~ msgid "/_Settings manager"
+#~ msgstr "/_அமைப்புகள் மேலாளர்"
+
+#~ msgid "Tiny"
+#~ msgstr "மிகசிறிய"
+
+#~ msgid "Icon theme:"
+#~ msgstr "குறும்படம் தோற்றம்:"
+
+#~ msgid "Panel layer:"
+#~ msgstr "பலகை அடுக்கம்:"
+
+#~ msgid "Normal"
+#~ msgstr "இயல்பானது"
+
+#~ msgid "Center the panel:"
+#~ msgstr "பலகையை நடுப்படுத்து:"
+
+#~ msgid "Set"
+#~ msgstr "அமை"
+
+#~ msgid "Position"
+#~ msgstr "இடம்"
+
+#~ msgid "Mail command:"
+#~ msgstr "அஞ்சல் கட்டளை:"
 
 #~ msgid "Sunday"
 #~ msgstr "ஞாயிறு"

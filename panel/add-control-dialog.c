@@ -78,7 +78,7 @@ add_control_dialog (Panel * panel, int position)
 
     panel_block_autohide (panel);
     
-    dlg = gtk_dialog_new_with_buttons (_("Xfce Panel"),
+    dlg = gtk_dialog_new_with_buttons (_("Add new item"),
 				       GTK_WINDOW (panel->toplevel),
 				       GTK_DIALOG_DESTROY_WITH_PARENT |
 				       GTK_DIALOG_NO_SEPARATOR, NULL);
@@ -105,7 +105,6 @@ add_control_dialog (Panel * panel, int position)
 
     list = add_control_list (GTK_BOX (vbox));
 
-
     add_spacer (GTK_BOX (vbox), 12);
 
     list->panel = panel;
@@ -117,9 +116,9 @@ add_control_dialog (Panel * panel, int position)
 
     g_signal_connect (dlg, "response", G_CALLBACK (dialog_response), list);
 
-    gtk_widget_show_now (dlg);
-    
     xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
+
+    gtk_widget_show (dlg);
 }
 
 static void 
