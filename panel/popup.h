@@ -46,7 +46,6 @@ struct _PanelPopup
 };
 
 /* Panel popups */
-
 PanelPopup *create_panel_popup(void);
 void panel_popup_free(PanelPopup * pp);
 

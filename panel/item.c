@@ -26,7 +26,6 @@
 #include "xfce.h"
 #include "item.h"
 #include "popup.h"
-#include "callbacks.h"
 #include "item_dialog.h"
 #include "settings.h"
 

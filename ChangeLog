@@ -1,3 +1,20 @@
+2003-01-29 16:40  huysmans
+
+	* README, TODO, panel/callbacks.c, panel/callbacks.h,
+	panel/global.h, panel/item.c, panel/item.h, panel/item_dialog.c,
+	panel/item_dialog.h, panel/popup.c, panel/popup.h, po/de.gmo,
+	po/es.gmo, po/fi.gmo, po/fr.gmo, po/nl.gmo,
+	settings/xfce_settings.h: Cleanup. Unify PanelItem and MenuItem to
+	avoid code duplication. Small bug fixes.
+
+2003-01-29 13:14  huysmans
+
+	* ChangeLog, po/de.po, po/es.po, po/fi.po, panel/Makefile.am,
+	po/fr.po, po/nl.po, po/xfce4-panel.pot, panel/Makefile.in,
+	panel/controls.c, panel/groups.c, panel/main.c, panel/mcs_client.c,
+	panel/mcs_client.h, panel/panel.c, panel/settings.c: Cleanup
+	configuration handling and other fixes. Includes string changes.
+
 2003-01-28 22:50  huysmans
 
 	* panel/item_dialog.c: Fix menu item reordering

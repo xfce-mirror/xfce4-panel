@@ -27,7 +27,6 @@
 #include "handle.h"
 #include "popup.h" /* to hide popups */
 #include "groups.h"
-#include "callbacks.h"
 #include "controls_dialog.h"
 #include "mcs_client.h"
 

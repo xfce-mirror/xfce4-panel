@@ -156,8 +156,6 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 bin_PROGRAMS = xfce4-panel
 xfce4_panel_SOURCES = \
-callbacks.c \
-callbacks.h \
 controls.c \
 controls.h \
 controls_dialog.c \
@@ -211,8 +209,7 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = xfce4-panel$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_xfce4_panel_OBJECTS = xfce4_panel-callbacks.$(OBJEXT) \
-	xfce4_panel-controls.$(OBJEXT) \
+am_xfce4_panel_OBJECTS = xfce4_panel-controls.$(OBJEXT) \
 	xfce4_panel-controls_dialog.$(OBJEXT) \
 	xfce4_panel-groups.$(OBJEXT) xfce4_panel-handle.$(OBJEXT) \
 	xfce4_panel-icons.$(OBJEXT) xfce4_panel-info.$(OBJEXT) \
@@ -228,8 +225,7 @@ xfce4_panel_LDFLAGS =
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4_panel-callbacks.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-controls.Po \
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4_panel-controls.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-controls_dialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-groups.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-handle.Po \
@@ -304,7 +300,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-controls.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-controls_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-groups.Po@am__quote@
@@ -355,39 +350,6 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
-
-xfce4_panel-callbacks.o: callbacks.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-callbacks.o -MD -MP -MF "$(DEPDIR)/xfce4_panel-callbacks.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4_panel-callbacks.o `test -f 'callbacks.c' || echo '$(srcdir)/'`callbacks.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4_panel-callbacks.Tpo" "$(DEPDIR)/xfce4_panel-callbacks.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-callbacks.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='callbacks.c' object='xfce4_panel-callbacks.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-callbacks.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-callbacks.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-callbacks.o `test -f 'callbacks.c' || echo '$(srcdir)/'`callbacks.c
-
-xfce4_panel-callbacks.obj: callbacks.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-callbacks.obj -MD -MP -MF "$(DEPDIR)/xfce4_panel-callbacks.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4_panel-callbacks.obj `if test -f 'callbacks.c'; then $(CYGPATH_W) 'callbacks.c'; else $(CYGPATH_W) '$(srcdir)/callbacks.c'; fi`; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4_panel-callbacks.Tpo" "$(DEPDIR)/xfce4_panel-callbacks.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-callbacks.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='callbacks.c' object='xfce4_panel-callbacks.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-callbacks.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-callbacks.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-callbacks.obj `if test -f 'callbacks.c'; then $(CYGPATH_W) 'callbacks.c'; else $(CYGPATH_W) '$(srcdir)/callbacks.c'; fi`
-
-xfce4_panel-callbacks.lo: callbacks.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-callbacks.lo -MD -MP -MF "$(DEPDIR)/xfce4_panel-callbacks.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4_panel-callbacks.lo `test -f 'callbacks.c' || echo '$(srcdir)/'`callbacks.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4_panel-callbacks.Tpo" "$(DEPDIR)/xfce4_panel-callbacks.Plo"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-callbacks.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='callbacks.c' object='xfce4_panel-callbacks.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-callbacks.Plo' tmpdepfile='$(DEPDIR)/xfce4_panel-callbacks.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-callbacks.lo `test -f 'callbacks.c' || echo '$(srcdir)/'`callbacks.c
 
 xfce4_panel-controls.o: controls.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-controls.o -MD -MP -MF "$(DEPDIR)/xfce4_panel-controls.Tpo" \

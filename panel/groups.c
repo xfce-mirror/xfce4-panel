@@ -33,7 +33,6 @@
 #include "xfce.h"
 #include "groups.h"
 #include "popup.h"
-#include "callbacks.h"
 
 static GSList *group_list = NULL;
 static GSList *removed_list = NULL;

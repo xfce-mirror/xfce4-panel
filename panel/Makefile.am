@@ -1,7 +1,5 @@
 bin_PROGRAMS = xfce4-panel
 xfce4_panel_SOURCES = \
-callbacks.c \
-callbacks.h \
 controls.c \
 controls.h \
 controls_dialog.c \
