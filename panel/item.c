@@ -267,7 +267,7 @@ item_read_config (Item * item, xmlNodePtr node)
 
     if (value)
     {
-	item->with_popup = atoi (value) == 1 ? TRUE : FALSE;
+	item->with_popup = strtol (value, NULL, 0) == 1 ? TRUE : FALSE;
 	g_free (value);
     }
 
@@ -293,7 +293,7 @@ item_read_config (Item * item, xmlNodePtr node)
 
 	    if (value)
 	    {
-		n = atoi (value);
+		n = (int) strtol (value, NULL, 0);
 		g_free (value);
 	    }
 
@@ -311,7 +311,7 @@ item_read_config (Item * item, xmlNodePtr node)
 
 	    if (value)
 	    {
-		n = atoi (value);
+		n = (int) strtol (value, NULL, 0);
 		g_free (value);
 	    }
 
@@ -337,7 +337,7 @@ item_read_config (Item * item, xmlNodePtr node)
 	    value = xmlGetProp (child, (const xmlChar *) "id");
 
 	    if (value)
-		item->icon_id = atoi (value);
+		item->icon_id = (int) strtol (value, NULL, 0);
 
 	    if (!value || item->icon_id < EXTERN_ICON ||
 		item->icon_id >= NUM_ICONS)

@@ -113,8 +113,8 @@ quit (gboolean force)
 	    logout_session (client_session);
 	    return;
 	}
-	else if (!confirm
-		 (_("Are you sure you want to exit?"), GTK_STOCK_QUIT, NULL))
+	else if (!xfce_confirm (_("Are you sure you want to exit?"), 
+		    		GTK_STOCK_QUIT, NULL))
 	{
 	    return;
 	}

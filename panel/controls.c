@@ -519,8 +519,9 @@ remove_control (void)
 	pp = groups_get_popup (popup_control->index);
 
 	if (!(popup_control->with_popup) || !pp || pp->items == NULL ||
-	    confirm (_("Removing the item will also remove its popup menu."),
-		     GTK_STOCK_REMOVE, NULL))
+	    xfce_confirm (_("Removing the item will also remove "
+		            "its popup menu."),
+		          GTK_STOCK_REMOVE, NULL))
 	{
 	    groups_remove (popup_control->index);
 	}
@@ -847,7 +848,7 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 
     if (value)
     {
-	id = atoi (value);
+	id = (int) strtol (value, NULL, 0);
 	g_free (value);
     }
 

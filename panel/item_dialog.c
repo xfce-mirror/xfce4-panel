@@ -1170,7 +1170,7 @@ edit_menu_item_dialog (Item * mi)
     gtk_dialog_set_has_separator (dlg, FALSE);
     
     /* add buttons */
-    remove = mixed_button_new (GTK_STOCK_REMOVE, _("Remove"));
+    remove = xfce_create_mixed_button (GTK_STOCK_REMOVE, _("Remove"));
     gtk_widget_show (remove);
     gtk_dialog_add_action_widget (dlg, remove, GTK_RESPONSE_CANCEL);
 
@@ -1182,7 +1182,7 @@ edit_menu_item_dialog (Item * mi)
     gtk_button_box_set_child_secondary (GTK_BUTTON_BOX(dlg->action_area),
 					remove, TRUE);
 
-    header = create_header (NULL, _("Launcher"));
+    header = xfce_create_header (NULL, _("Launcher"));
     gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child), 
 	    			    BORDER);
     gtk_widget_set_size_request (header, -1, 32);

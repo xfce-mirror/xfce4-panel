@@ -156,7 +156,7 @@ controls_dialog (Control * control)
     gtk_dialog_add_action_widget (dlg, button, GTK_RESPONSE_OK);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 
-    header = create_header (NULL, control->cclass->caption);
+    header = xfce_create_header (NULL, control->cclass->caption);
     gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child), 
 	    			    BORDER);
     gtk_widget_set_size_request (header, -1, 32);
@@ -194,8 +194,9 @@ retry:
 	pp = groups_get_popup (control->index);
 
 	if (!(control->with_popup) || !pp || pp->items == NULL ||
-	    confirm (_("Removing the item will also remove its popup menu."),
-		     GTK_STOCK_REMOVE, NULL))
+	    xfce_confirm (_("Removing the item will also remove "
+		            "its popup menu."),
+		          GTK_STOCK_REMOVE, NULL))
 	{
 	    groups_remove (control->index);
 	}

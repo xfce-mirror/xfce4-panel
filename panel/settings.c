@@ -33,6 +33,8 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
+#include <libxfce4util/debug.h>
+
 #include "xfce.h"
 #include "settings.h"
 #include "groups.h"
@@ -180,8 +182,7 @@ get_panel_config (void)
 void
 write_panel_config (void)
 {
-    char *dir;
-    char *rcfile;
+    char *dir, *xfcerc, *tmprc;
     xmlNodePtr root;
     static gboolean backup = TRUE;
 
@@ -190,20 +191,21 @@ write_panel_config (void)
     if (disable_user_config)
 	return;
 
-    rcfile = get_save_file (XFCERC);
+    xfcerc = get_save_file (XFCERC);
+    tmprc = g_strconcat (xfcerc, ".tmp", NULL);
 
-    if (g_file_test (rcfile, G_FILE_TEST_EXISTS))
+    if (g_file_test (xfcerc, G_FILE_TEST_EXISTS))
     {
 	if (backup)
 	{
-	    write_backup_file (rcfile);
+	    write_backup_file (xfcerc);
 	    backup = FALSE;
 	}
 
     }
     else
     {
-	dir = g_path_get_dirname (rcfile);
+	dir = g_path_get_dirname (xfcerc);
 
 	if (!g_file_test (dir, G_FILE_TEST_IS_DIR))
 	    mkdir (dir, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
@@ -221,8 +223,32 @@ write_panel_config (void)
 
     groups_write_xml (root);
 
-    xmlSaveFormatFile (rcfile, xmlconfig, 1);
+    if (-1 == xmlSaveFormatFile (tmprc, xmlconfig, 1))
+    {
+	g_critical ("Could not save xml file");
+	goto out;
+    }
 
+    if (g_file_test (xfcerc, G_FILE_TEST_EXISTS) && unlink(xfcerc))
+    {
+	g_critical ("Could not remove old xfce4rc");
+	goto out;
+    }
+
+    if(link(tmprc, xfcerc))
+    {
+	g_critical ("Could not link new xfce4rc");
+	goto out;
+    }
+
+    if (unlink(tmprc))
+    {
+	g_warning ("Could not remove temporary file xfce4rc.tmp");
+    }
+  
+out:
+    g_free (tmprc);
+    g_free (xfcerc);
     xmlFreeDoc (xmlconfig);
     xmlconfig = NULL;
 }

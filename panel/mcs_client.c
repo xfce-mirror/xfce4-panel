@@ -35,6 +35,7 @@
 #include <gdk/gdkx.h>
 
 #include <libxfce4util/i18n.h>
+#include <libxfce4util/debug.h>
 #include <libxfce4mcs/mcs-client.h>
 #include <libxfcegui4/libnetk.h>
 
@@ -46,6 +47,7 @@
 
 static McsClient *client = NULL;
 
+#if 0
 /* special case: position setting 
  * this is not part of the settings struct, but it is being changed from
  * the settings dialog. */
@@ -89,11 +91,12 @@ mcs_position_setting (int pos)
 	    break;
     }
 }
+#endif
 
 /* settings hash table */
 static GHashTable *settings_hash = NULL;
 
-/* IMPORTATNT: keep in sync with settings names list */
+/* IMPORTANT: keep in sync with settings names list */
 static gpointer settings_callbacks[] = {
     panel_set_orientation,
     panel_set_layer,
@@ -101,7 +104,6 @@ static gpointer settings_callbacks[] = {
     panel_set_popup_position,
     panel_set_theme,
     panel_set_autohide,
-    mcs_position_setting
 };
 
 static void
@@ -129,6 +131,8 @@ update_setting (const char *name, McsSetting * setting)
     {
 	set_int = g_hash_table_lookup (settings_hash, name);
 
+	DBG ("Set %s : %d", name, setting->data.v_int);
+	
 	if (set_int)
 	    set_int (setting->data.v_int);
     }
@@ -136,6 +140,8 @@ update_setting (const char *name, McsSetting * setting)
     {
 	set_string = g_hash_table_lookup (settings_hash, name);
 
+	DBG ("Set %s : %s", name, setting->data.v_string);
+	
 	if (set_string)
 	    set_string (setting->data.v_string);
     }
@@ -197,13 +203,13 @@ mcs_watch_xfce_channel (void)
     client = NULL;
 
     if (!mcs_client_check_manager (dpy, screen, "xfce-mcs-manager"))
-	g_warning ("%s: MCS settings manager not running!", PACKAGE);
+	g_warning ("MCS settings manager not running");
     else
 	client = mcs_client_new (dpy, screen, notify_cb, watch_cb, NULL);
 
     if (!client)
     {
-	g_warning ("%s: could not connect to settings manager", PACKAGE);
+	g_warning ("Could not connect to settings manager");
 
 	xfce_warn (_("Settings manager not available"));
 

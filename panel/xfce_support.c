@@ -98,15 +98,35 @@ get_read_dirs (void)
 static gchar *
 get_localized_system_rcfile (const gchar * name)
 {
-    gchar *sysrcfile, *result;
+    char *sysrcfile, *result;
+    char buffer [PATH_MAX];
 
-    sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, name, NULL);
+    snprintf(buffer, PATH_MAX, "%s.%%l", name);
 
-    result = xfce_get_file_localized (sysrcfile);
+    sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, buffer, NULL);
+
+    result = xfce_get_path_localized (buffer, PATH_MAX, sysrcfile, NULL, 
+	    		     	      G_FILE_TEST_EXISTS);
 
     g_free (sysrcfile);
 
-    return result;
+    if (result)
+    {
+	DBG ("file: %s", buffer);
+	return g_strdup (buffer);
+    }
+
+    sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, name, NULL);
+
+    if (g_file_test (sysrcfile, G_FILE_TEST_EXISTS))
+    {
+	DBG ("file: %s", sysrcfile);
+	return sysrcfile;
+    }
+
+    g_free (sysrcfile);
+
+    return NULL;
 }
 
 gchar *

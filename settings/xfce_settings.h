@@ -31,19 +31,7 @@ enum
     XFCE_POPUPPOSITION,
     XFCE_THEME,
     XFCE_AUTOHIDE,
-    XFCE_POSITION,
     XFCE_OPTIONS
-};
-
-enum
-{
-    XFCE_POSITION_BOTTOM,
-    XFCE_POSITION_TOP,
-    XFCE_POSITION_LEFT,
-    XFCE_POSITION_RIGHT,
-    XFCE_POSITION_SAVE,
-    XFCE_POSITION_RESTORE,
-    XFCE_POSITION_NONE,
 };
 
 static char *xfce_settings_names[] = {
@@ -53,7 +41,6 @@ static char *xfce_settings_names[] = {
     "popupposition",
     "theme",
     "autohide",
-    "position"
 };
 
 #endif /* __XFCE_SETTINGS_H */

@@ -16,12 +16,10 @@ libxfce4settings_la_SOURCES =						\
 libxfce4settings_la_CFLAGS =						\
 	-I$(top_srcdir)							\
 	@LIBXFCEGUI4_CFLAGS@						\
-	@LIBXML_CFLAGS@							\
 	@XFCE_MCS_MANAGER_CFLAGS@					\
 	-DSYSCONFDIR=\"$(sysconfdir)\"					\
 	-DDATADIR=\"$(datadir)/xfce4\"					\
 	-DLOCALEDIR=\"$(localedir)\"
 
 libxfce4settings_la_LIBADD =						\
-	@LIBXML_LIBS@							\
 	@XFCE_MCS_MANAGER_LIBS@

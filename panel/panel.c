@@ -981,20 +981,20 @@ create_panel (void)
     panel.position.y = y;
     gtk_window_move (GTK_WINDOW (panel.toplevel), x, y);
 
-    gtk_widget_show_now (panel.toplevel);
+    gtk_widget_show (panel.toplevel);
     set_window_layer (panel.toplevel, settings.layer);
     set_window_skip (panel.toplevel);
 
     gtk_widget_size_request (panel.toplevel, &panel_req);
     update_xinerama_coordinates (&panel);
 
-    /* this must be before set_autohide() and after set_position()
-     * otherwise the initial position will be messed up */
-    panel_created = TRUE;
-
     panel.position.x = x;
     panel.position.y = y;
     panel_set_position ();
+
+    /* this must be before set_autohide() and after set_position()
+     * otherwise the initial position will be messed up */
+    panel_created = TRUE;
 
     if (hidden)
 	panel_set_autohide (TRUE);
@@ -1290,7 +1290,7 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	settings.orientation = atoi (value);
+	settings.orientation = (int) strtol (value, NULL, 0);
 	g_free (value);
     }
 
@@ -1298,7 +1298,7 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	n = atoi (value);
+	n = (int) strtol (value, NULL, 0);
 
 	if (n >= ABOVE && n <= BELOW)
 	    settings.layer = n;
@@ -1310,7 +1310,7 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	settings.size = atoi (value);
+	settings.size = (int) strtol (value, NULL, 0);
 	g_free (value);
     }
 
@@ -1318,7 +1318,7 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	settings.popup_position = atoi (value);
+	settings.popup_position = (int) strtol (value, NULL, 0);
 	g_free (value);
     }
 
@@ -1333,7 +1333,7 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	settings.num_groups = atoi (value);
+	settings.num_groups = (int) strtol (value, NULL, 0);
 	g_free (value);
     }
     else
@@ -1342,14 +1342,14 @@ panel_parse_xml (xmlNodePtr node)
 
 	if (value)
 	{
-	    settings.num_groups = atoi (value);
+	    settings.num_groups = (int) strtol (value, NULL, 0);
 	    g_free (value);
 
 	    value = xmlGetProp (node, (const xmlChar *) "right");
 
 	    if (value)
 	    {
-		settings.num_groups += atoi (value);
+		settings.num_groups += (int) strtol (value, NULL, 0);
 		g_free (value);
 	    }
 	}
@@ -1365,14 +1365,14 @@ panel_parse_xml (xmlNodePtr node)
 	    value = xmlGetProp (child, (const xmlChar *) "x");
 
 	    if (value)
-		panel.position.x = atoi (value);
+		panel.position.x = (int) strtol (value, NULL, 0);
 
 	    g_free (value);
 
 	    value = xmlGetProp (child, (const xmlChar *) "y");
 
 	    if (value)
-		panel.position.y = atoi (value);
+		panel.position.y = (int) strtol (value, NULL, 0);
 
 	    g_free (value);
 
@@ -1382,14 +1382,14 @@ panel_parse_xml (xmlNodePtr node)
 	    value = xmlGetProp (child, (const xmlChar *) "screenwidth");
 
 	    if (value)
-		w = atoi (value);
+		w = (int) strtol (value, NULL, 0);
 	    else
 		break;
 
 	    value = xmlGetProp (child, (const xmlChar *) "screenheight");
 
 	    if (value)
-		h = atoi (value);
+		h = (int) strtol (value, NULL, 0);
 	    else
 		break;
 
