@@ -19,7 +19,7 @@
 
 /*  central.c
  *  ---------
- *  Contains functions for the central part of the panel, which consists of 
+ *  Contains functions for the central part of the panel, which consists of
  *  the desktop switcher and four mini-buttons.
 */
 
@@ -31,7 +31,7 @@
 #include "icons.h"
 #include "settings.h"
 
-/*  colors used for screen buttons in OLD_STYLE 
+/*  colors used for screen buttons in OLD_STYLE
 */
 static char *screen_class[] = {
     "gxfce_color2",
@@ -105,8 +105,8 @@ static void screen_button_set_size(ScreenButton * sb, int size)
     int w, h;
 
     /* TODO:
-     * calculation of height is very arbitrary. I just put here what looks 
-     * good on my screen. Should probably be something a little more 
+     * calculation of height is very arbitrary. I just put here what looks
+     * good on my screen. Should probably be something a little more
      * intelligent. */
 
     /* don't let screen buttons get to large in vertical mode */
@@ -128,6 +128,7 @@ static void screen_button_set_size(ScreenButton * sb, int size)
             break;
         default:
             h = (top_height[MEDIUM] + icon_size[MEDIUM]) / 2 - 5;
+	    break;
     }
 
     gtk_widget_set_size_request(sb->button, w, h);
@@ -156,8 +157,11 @@ ScreenButton *create_screen_button(int index)
 
     sb->button = gtk_toggle_button_new();
     gtk_button_set_relief(GTK_BUTTON(sb->button), GTK_RELIEF_HALF);
-    gtk_widget_set_size_request(sb->button, screen_button_width[settings.size],
-                                -1);
+/*    gtk_widget_set_size_request(sb->button,
+      screen_button_width[settings.size], -1); */
+
+    /* fix the weird desktop button display bug */
+    screen_button_set_size(sb, settings.size);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sb->button), sb->index == 0);
     gtk_container_add(GTK_CONTAINER(sb->frame), sb->button);
     gtk_widget_show(sb->button);
@@ -169,7 +173,7 @@ ScreenButton *create_screen_button(int index)
     gtk_widget_show(sb->label);
 
     /* signals */
-    /* we need the callback id to be able to block the handler to 
+    /* we need the callback id to be able to block the handler to
        prevent a race condition when changing screens */
     sb->callback_id =
         g_signal_connect(sb->button, "clicked", G_CALLBACK(screen_button_click),
@@ -195,16 +199,15 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
     else
     {
         if(pos % 2 == 0 || settings.size <= SMALL)
-        {
             gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1,
                              GTK_EXPAND, GTK_EXPAND, 0, 0);
-        }
         else
-        {
-            gtk_table_attach(GTK_TABLE(table), sb->frame, pos - 1, pos, 1, 2,
+            gtk_table_attach(GTK_TABLE(table), sb->frame, pos - 1, pos , 1, 2,
                              GTK_EXPAND, GTK_EXPAND, 0, 0);
-        }
     }
+
+    /* Reorder the table to fix a bad display bug */
+    reorder_desktop_table(settings.size);
 }
 
 void screen_button_free(ScreenButton * sb)
@@ -342,10 +345,10 @@ static void add_desktop_table(GtkBox * hbox)
     {
         ScreenButton *sb = screen_buttons[i];
 
-        screen_button_pack(sb, table);
+        screen_button_pack(sb, desktop_table);
     }
 
-    gtk_box_pack_start(hbox, table, TRUE, TRUE, 0);
+    gtk_box_pack_start(hbox, desktop_table, TRUE, TRUE, 0);
 }
 
 void central_panel_init(GtkBox * hbox)
@@ -370,6 +373,7 @@ void central_panel_init(GtkBox * hbox)
     add_mini_table(RIGHT, hbox);
 
     central_panel_set_size(settings.size);
+
 }
 
 void central_panel_set_from_xml(xmlNodePtr node)
@@ -436,13 +440,13 @@ static void reorder_minitable(int side, int size)
     int hpos, vpos;
 
     /* Here's an attempt to explain the apparently random code below:
-     * 
+     *
      * - The two mini buttons on either side of the desktop switcher
-     *   are added to a 2x2 table. 
+     *   are added to a 2x2 table.
      * - there are 4 mini buttons, with index 0, 1, 2 and 3
      * - the first mini button (0 or 2) is fixed at the top left of
      *   the table
-     * - the second mini button (1 or 3) is placed either next to the 
+     * - the second mini button (1 or 3) is placed either next to the
      *   first (on the same row) or below the first (in the same column)
      * - we only have to move the second mini button (1 or 3) when the
      *   size or the orientation changes.
@@ -453,7 +457,7 @@ static void reorder_minitable(int side, int size)
         n = 3;
 
     /* Botsie: I didn't understand the bit above -- but in vertical mode
-     * we do the exact opposite 
+     * we do the exact opposite
      * Jasper: Is it any better now? */
 
     for(child = GTK_TABLE(table)->children;
@@ -711,7 +715,7 @@ void central_panel_set_num_screens(int n)
         if(i < n)
             gtk_widget_show(sb->frame);
         else if(sb)
-            gtk_widget_hide(sb->frame);
+	    gtk_widget_hide(sb->frame);
     }
 
     if(n == 1)
