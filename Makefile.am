@@ -21,6 +21,7 @@ conf_DATA = 								\
 	contents.xml.sk							\
 	contents.xml.tr							\
 	contents.xml.vi							\
+	contents.xml.zh_CN						\
 	contents.xml.zh_TW
 
 EXTRA_DIST = 								\
