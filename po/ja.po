@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-12 12:38+0200\n"
+"POT-Creation-Date: 2003-05-12 18:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zhao Ji <zhao-ji@awz.ne.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,27 +19,27 @@ msgstr ""
 msgid "Select file"
 msgstr "ファイル選択"
 
-#: panel/controls_dialog.c:261
+#: panel/controls_dialog.c:265
 msgid "Change item"
 msgstr "項目変更"
 
-#: panel/controls_dialog.c:271 panel/item_dialog.c:980
+#: panel/controls_dialog.c:275 panel/item_dialog.c:980
 msgid "_Revert"
 msgstr "元に戻す"
 
-#: panel/controls_dialog.c:276 panel/item_dialog.c:986
+#: panel/controls_dialog.c:280 panel/item_dialog.c:986
 msgid "_Done"
 msgstr "実行"
 
-#: panel/controls_dialog.c:299
+#: panel/controls_dialog.c:304
 msgid "Type:"
 msgstr "タイプ:"
 
-#: panel/controls_dialog.c:315 panel/item_dialog.c:593
+#: panel/controls_dialog.c:320 panel/item_dialog.c:593
 msgid "Position:"
 msgstr "ポジション:"
 
-#: panel/controls_dialog.c:360 panel/controls.c:270
+#: panel/controls_dialog.c:365 panel/controls.c:270
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -48,6 +48,19 @@ msgstr ""
 "ポップアップメニューの項目を削除します。\n"
 "\n"
 "このメニュー項目を削除してもよろしいですか？"
+
+#: panel/controls_dialog.c:469
+#, fuzzy
+msgid "Add item"
+msgstr "項目追加"
+
+#: panel/controls_dialog.c:482
+msgid "Select Item Type"
+msgstr ""
+
+#: panel/controls_dialog.c:505
+msgid "Select an item type from the list"
+msgstr ""
 
 #: panel/item_dialog.c:267
 msgid "Other Icon"
@@ -145,47 +158,47 @@ msgstr ""
 "ヒントをサポートしていません。\n"
 "XFceの特徴は、いくつか意図する通りに動かないかもしれません。"
 
-#: panel/controls.c:312 panel/panel.c:150
+#: panel/controls.c:304 panel/panel.c:146
 msgid "/_Properties..."
 msgstr "/プロパティ(_P)"
 
-#: panel/controls.c:313
+#: panel/controls.c:305
 msgid "/_Remove"
 msgstr "/削除 (_R)"
 
-#: panel/controls.c:315 panel/panel.c:148
+#: panel/controls.c:307 panel/panel.c:144
 msgid "/Add _new item"
 msgstr "/項目追加 (_n)"
 
-#: panel/controls.c:601
+#: panel/controls.c:593
 msgid "This item has no configuration options"
 msgstr "この項目に、オプション設定は存在しません"
 
-#: panel/panel.c:146
+#: panel/panel.c:142
 msgid "/XFce Panel"
 msgstr ""
 
-#: panel/panel.c:151
+#: panel/panel.c:147
 msgid "/_Settings manager"
 msgstr "/設定マネージャ (_S)"
 
-#: panel/panel.c:153
+#: panel/panel.c:149
 msgid "/_About XFce"
 msgstr "/XFceについて (_A)"
 
-#: panel/panel.c:154
+#: panel/panel.c:150
 msgid "/_Help"
 msgstr "/ヘルプ (_H)"
 
-#: panel/panel.c:156
+#: panel/panel.c:152
 msgid "/_Lock screen"
 msgstr "/画面ロック (_L)"
 
-#: panel/panel.c:157
+#: panel/panel.c:153
 msgid "/E_xit"
 msgstr "/終了 (_x)"
 
-#: panel/panel.c:478 settings/xfce_settings_plugin.c:76
+#: panel/panel.c:474 settings/xfce_settings_plugin.c:76
 #: settings/xfce_settings_dialog.c:630
 msgid "XFce Panel"
 msgstr "XFceパネル"

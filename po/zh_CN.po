@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-12 12:38+0200\n"
+"POT-Creation-Date: 2003-05-12 18:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Paweł Pastuła <pastulap@poczta.onet.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,27 +19,27 @@ msgstr ""
 msgid "Select file"
 msgstr "选择文件"
 
-#: panel/controls_dialog.c:261
+#: panel/controls_dialog.c:265
 msgid "Change item"
 msgstr "改变条目"
 
-#: panel/controls_dialog.c:271 panel/item_dialog.c:980
+#: panel/controls_dialog.c:275 panel/item_dialog.c:980
 msgid "_Revert"
 msgstr "恢复(_R)"
 
-#: panel/controls_dialog.c:276 panel/item_dialog.c:986
+#: panel/controls_dialog.c:280 panel/item_dialog.c:986
 msgid "_Done"
 msgstr "完成(_D)"
 
-#: panel/controls_dialog.c:299
+#: panel/controls_dialog.c:304
 msgid "Type:"
 msgstr "类型:"
 
-#: panel/controls_dialog.c:315 panel/item_dialog.c:593
+#: panel/controls_dialog.c:320 panel/item_dialog.c:593
 msgid "Position:"
 msgstr "位置"
 
-#: panel/controls_dialog.c:360 panel/controls.c:270
+#: panel/controls_dialog.c:365 panel/controls.c:270
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -48,6 +48,19 @@ msgstr ""
 "删除一个条目将同时删除其弹出菜单。\n"
 "\n"
 "你希望删除该条目吗?"
+
+#: panel/controls_dialog.c:469
+#, fuzzy
+msgid "Add item"
+msgstr "添加新条目"
+
+#: panel/controls_dialog.c:482
+msgid "Select Item Type"
+msgstr ""
+
+#: panel/controls_dialog.c:505
+msgid "Select an item type from the list"
+msgstr ""
 
 #: panel/item_dialog.c:267
 msgid "Other Icon"
@@ -148,47 +161,47 @@ msgstr ""
 "示 \n"
 "某些XFce的功能可能无法正常运行。"
 
-#: panel/controls.c:312 panel/panel.c:150
+#: panel/controls.c:304 panel/panel.c:146
 msgid "/_Properties..."
 msgstr "属性(_P)..."
 
-#: panel/controls.c:313
+#: panel/controls.c:305
 msgid "/_Remove"
 msgstr "删除(_R)"
 
-#: panel/controls.c:315 panel/panel.c:148
+#: panel/controls.c:307 panel/panel.c:144
 msgid "/Add _new item"
 msgstr "添加新条目(/A)"
 
-#: panel/controls.c:601
+#: panel/controls.c:593
 msgid "This item has no configuration options"
 msgstr "该条目没有配置选项"
 
-#: panel/panel.c:146
+#: panel/panel.c:142
 msgid "/XFce Panel"
 msgstr "/XFce启动面板"
 
-#: panel/panel.c:151
+#: panel/panel.c:147
 msgid "/_Settings manager"
 msgstr "配置管理器(_S)"
 
-#: panel/panel.c:153
+#: panel/panel.c:149
 msgid "/_About XFce"
 msgstr "关于XFce(/_A)"
 
-#: panel/panel.c:154
+#: panel/panel.c:150
 msgid "/_Help"
 msgstr "帮助(_H)"
 
-#: panel/panel.c:156
+#: panel/panel.c:152
 msgid "/_Lock screen"
 msgstr "锁住屏幕(_L)"
 
-#: panel/panel.c:157
+#: panel/panel.c:153
 msgid "/E_xit"
 msgstr "退出(_x)"
 
-#: panel/panel.c:478 settings/xfce_settings_plugin.c:76
+#: panel/panel.c:474 settings/xfce_settings_plugin.c:76
 #: settings/xfce_settings_dialog.c:630
 msgid "XFce Panel"
 msgstr "XFce面板"

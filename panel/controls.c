@@ -281,7 +281,6 @@ remove_control (void)
 static void
 add_control (void)
 {
-    Control *newcontrol;
     gboolean hidden = settings.autohide;
 
     if (hidden)
@@ -292,18 +291,11 @@ add_control (void)
 	while (gtk_events_pending())
 	    gtk_main_iteration();
     }
-	
-    panel_add_control ();
-    panel_set_position ();
-    newcontrol = groups_get_control (settings.num_groups - 1);
 
-    if (popup_control)
-        groups_move (settings.num_groups - 1, popup_control->index);
-
+    controls_add_dialog(popup_control ? popup_control->index : -1);
+    
     popup_control = NULL;
-
-    controls_dialog (newcontrol);
-
+    
     if (hidden)
 	panel_set_autohide(TRUE);
 }

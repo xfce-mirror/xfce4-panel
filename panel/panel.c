@@ -108,12 +108,8 @@ add_new (void)
 	    gtk_main_iteration();
     }
 	
-    panel_add_control ();
-    
-    control = groups_get_control (settings.num_groups - 1);
+    controls_add_dialog (-1);
 
-    controls_dialog (control);
-	
     if (hidden)
 	panel_set_autohide(TRUE);
 }
@@ -631,9 +627,7 @@ create_panel (void)
 void
 panel_add_control (void)
 {
-    settings.num_groups++;
-
-    groups_set_num_groups (settings.num_groups);
+    groups_set_num_groups (settings.num_groups+1);
 }
 
 /*  Panel settings

@@ -560,6 +560,38 @@ groups_set_theme (const char *theme)
 }
 
 void
+groups_add_control(int id, const char *filename, int index)
+{
+    int i, len;
+    GSList *li;
+    PanelGroup *group = NULL;
+
+    len = g_slist_length (group_list);
+
+    if (index < 0 || index > len)
+	index = len;
+
+    group = create_panel_group (index);
+    panel_group_pack (group, groupbox);
+    group_list = g_slist_append (group_list, group);
+
+    group->popup = create_panel_popup ();
+
+    group->control = control_new(index);
+    create_control(group->control, id, filename);
+
+    panel_group_arrange (group);
+
+    if (index >= 0 && index < len)
+	groups_move(len, index);
+
+    if (!group->control->with_popup)
+	groups_show_popup(index, FALSE);
+
+    settings.num_groups++;
+}
+
+void
 groups_set_num_groups (int n)
 {
     int i, len;
@@ -586,19 +618,11 @@ groups_set_num_groups (int n)
                 group_list = g_slist_append (group_list, group);
 
                 panel_group_arrange (group);
+		settings.num_groups++;
             }
             else
             {
-                group = create_panel_group (i);
-                panel_group_pack (group, groupbox);
-                group_list = g_slist_append (group_list, group);
-
-                group->popup = create_panel_popup ();
-
-                group->control = control_new (i);
-                create_control (group->control, ICON, NULL);
-
-                panel_group_arrange (group);
+		groups_add_control(ICON, NULL, i);
             }
 
             gtk_widget_show (group->base);
@@ -623,5 +647,6 @@ groups_set_num_groups (int n)
 
         group_list = g_slist_remove_link (group_list, li2);
         removed_list = g_slist_prepend (removed_list, group);
+	settings.num_groups--;
     }
 }

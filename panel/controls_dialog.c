@@ -60,6 +60,8 @@ static int backup_index;
 static void
 create_control_list (Control * control)
 {
+    control_list = g_slist_append (control_list, control);
+#if 0
     int i;
     GSList *li, *class_list;
 
@@ -92,6 +94,7 @@ create_control_list (Control * control)
 
         control_list = g_slist_append (control_list, new_control);
     }
+#endif
 }
 
 static void
@@ -225,8 +228,9 @@ pos_changed (GtkSpinButton * spin)
 static void
 controls_dialog_revert (void)
 {
+#if 0
     gtk_option_menu_set_history (GTK_OPTION_MENU (type_option_menu), 0);
-
+#endif
     if (backup_index != current_control->index)
     {
         groups_move (current_control->index, backup_index);
@@ -291,6 +295,7 @@ controls_dialog (Control * control)
 
     /* find all available controls */
     create_control_list (control);
+#if 0
 
     /* option menu */
     hbox = gtk_hbox_new (FALSE, 8);
@@ -307,7 +312,7 @@ controls_dialog (Control * control)
     gtk_box_pack_start (GTK_BOX (hbox), type_option_menu, FALSE, FALSE, 0);
 
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-
+#endif
     /* position */
     hbox = gtk_hbox_new (FALSE, 8);
     gtk_widget_show (hbox);
@@ -383,3 +388,187 @@ controls_dialog (Control * control)
 
     write_panel_config ();
 }
+
+/*  Add new control
+ *  ---------------
+*/
+static GtkWidget *newcontrol_treeview = NULL;
+GSList *class_list = NULL;
+
+static void
+create_class_store(GtkListStore *store)
+{
+    GSList *li;
+    GtkTreeIter iter;
+    
+    class_list = get_control_class_list();
+
+    for (li = class_list; li; li = li->next)
+    {
+	gtk_list_store_append(store, &iter);
+	gtk_list_store_set(store, &iter, 0, li->data, -1);
+    }
+}
+
+static void
+render_class_name (GtkTreeViewColumn *tree_column, GtkCellRenderer *cell,
+		   GtkTreeModel *tree_model, GtkTreeIter *iter, gpointer data)
+{
+    ControlClass *cc;
+
+    gtk_tree_model_get(tree_model, iter, 0, &cc, -1);
+
+    g_object_set(cell, "text", cc->caption, NULL);
+}
+
+static void 
+add_types_treeview(GtkWidget *vbox)
+{
+    GtkWidget *treeview;
+    GtkWidget *treeview_scroll;
+    GtkListStore *store;
+    GtkCellRenderer *renderer;
+    GtkTreeModel *model;
+    char *markup;
+    GtkWidget *label;
+
+    treeview_scroll = gtk_scrolled_window_new (NULL, NULL);
+    gtk_widget_show (treeview_scroll);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (treeview_scroll), 
+	    			    GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
+    gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW (treeview_scroll),
+	    				GTK_SHADOW_IN);
+    gtk_box_pack_start(GTK_BOX(vbox), treeview_scroll, TRUE, TRUE, 0);
+
+    store = gtk_list_store_new (1, G_TYPE_POINTER);
+    
+    treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
+    gtk_widget_show(treeview);
+    gtk_container_add(GTK_CONTAINER(treeview_scroll), treeview);
+
+    newcontrol_treeview = treeview;
+
+    gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(treeview), TRUE);
+    gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview), FALSE);
+
+    renderer = gtk_cell_renderer_text_new();
+    gtk_tree_view_insert_column_with_data_func (GTK_TREE_VIEW(treeview), 
+	    					-1, "Name", 
+	    					renderer, render_class_name,
+						NULL, NULL);
+    create_class_store(store);
+    g_object_unref (G_OBJECT (store));
+}
+
+static GtkWidget *
+create_add_control_dialog(void)
+{
+    GtkWidget *dialog, *mainvbox, *header, *label, *vbox, *spacer;
+    char *markup;
+
+    dialog = gtk_dialog_new_with_buttons(_("Add item"), NULL,
+	    				 GTK_DIALOG_NO_SEPARATOR,
+					 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					 GTK_STOCK_ADD, GTK_RESPONSE_OK,
+					 NULL);
+
+    gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
+
+    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+
+    mainvbox = GTK_DIALOG(dialog)->vbox;
+    gtk_container_set_border_width(GTK_CONTAINER(mainvbox), 0);
+
+    header = create_header(NULL, _("Select Item Type"));
+    gtk_widget_show(header);
+    gtk_box_pack_start(GTK_BOX(mainvbox), header, FALSE, TRUE, 0);
+    gtk_widget_set_size_request(header, -1, 36);
+    
+    spacer = gtk_alignment_new(0,0,0,0);
+    gtk_widget_show(spacer);
+    gtk_widget_set_size_request(spacer, 12, 12);
+    gtk_box_pack_start(GTK_BOX(mainvbox), spacer, FALSE, FALSE, 0);
+    
+    vbox = gtk_vbox_new(FALSE, 5);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
+    gtk_widget_show(vbox);
+    gtk_box_pack_start(GTK_BOX(mainvbox), vbox, TRUE, TRUE, 0);
+    gtk_widget_set_size_request(vbox, -1, 200);
+
+    add_types_treeview(vbox);
+    
+    label = gtk_label_new(NULL);
+    gtk_widget_show(label);
+    gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+    
+    markup = g_strdup_printf("<i>%s</i>", 
+	    		     _("Select an item type from the list"));
+    gtk_label_set_markup(GTK_LABEL(label), markup);
+    g_free(markup);
+
+    spacer = gtk_alignment_new(0,0,0,0);
+    gtk_widget_show(spacer);
+    gtk_widget_set_size_request(spacer, 12, 12);
+    gtk_box_pack_start(GTK_BOX(mainvbox), spacer, FALSE, FALSE, 0);
+    
+    return dialog;
+}
+
+static ControlClass *
+get_class_from_treeview(GtkWidget *treeview)
+{
+    GtkTreeSelection *sel;
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    ControlClass *cc = NULL;
+
+    sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
+    if (gtk_tree_selection_get_selected(sel, &model, &iter))
+    {
+	gtk_tree_model_get(model, &iter, 0, &cc, -1);
+    }
+    else
+    {
+	/* return first item */
+	cc =  class_list->data;
+    }
+
+    return cc;
+}
+
+void
+controls_add_dialog(int index)
+{
+
+    GtkWidget *dlg;
+    int response;
+
+    dlg = create_add_control_dialog();
+
+    response = GTK_RESPONSE_NONE;
+    response = gtk_dialog_run (GTK_DIALOG(dlg));
+
+    if (response == GTK_RESPONSE_OK)
+    {
+	Control *newcontrol;
+	ControlClass *cc;
+
+	cc = get_class_from_treeview(newcontrol_treeview);
+	gtk_widget_destroy(dlg);
+
+	groups_add_control(cc->id, cc->filename, index);
+	
+	newcontrol = groups_get_control (index >= 0 ? index :
+					 settings.num_groups - 1);
+
+	controls_dialog(newcontrol);
+
+	write_panel_config ();
+    }
+    else
+    {
+	gtk_widget_destroy(dlg);
+    }
+}
+
+

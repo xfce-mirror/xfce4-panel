@@ -47,6 +47,8 @@ void groups_set_size (int size);
 void groups_set_popup_position (int position);
 void groups_set_theme (const char *theme);
 
+/* add/remove */
 void groups_set_num_groups (int n);
+void groups_add_control(int id, const char *filename, int index);
 
 #endif /* __XFCE_GROUPS_H__ */
