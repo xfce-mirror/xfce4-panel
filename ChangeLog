@@ -1,3 +1,112 @@
+2004-11-13 16:19  olivier
+
+	* po/xfce4-panel.pot: Auto-tools check-up.
+
+2004-11-11 21:21  jasper
+
+	* contents.xml, doc/C/images/add-item-dialog.png,
+	  doc/C/images/clock-properties.png,
+	  doc/C/images/launcher-properties.png,
+	  doc/C/images/mailcheck-properties.png,
+	  doc/C/images/menuitem-properties.png,
+	  doc/C/images/nooptions-properties.png,
+	  doc/C/images/pager-properties.png,
+	  doc/C/images/panel-settings.png,
+	  doc/C/images/systembuttons-properties.png: Big screenshot update
+	  for the docs
+
+2004-11-11 10:21  jasper
+
+	* plugins/mailcheck/mailcheck.c: Patch by Piotr Chmura
+	  <chmooreck@poczta.onet.pl> to fix pop3 mail checking
+
+2004-11-10 20:21  jasper
+
+	* panel/panel.c: Add back transparency for the hidden panel; make
+	  hidden panel a bit more hidden ;-) People can still disable it
+	  using ~/.config/xfce4/transparency.
+
+2004-11-10 08:04  jasper
+
+	* panel/panel.c: A space in a sscanf format string magically
+	  matches 0 or more whitespace characters.
+
+2004-11-09 21:44  jasper
+
+	* contents.xml, contents.xml.ar, contents.xml.az, contents.xml.ca,
+	  contents.xml.eu, contents.xml.he, contents.xml.hu,
+	  contents.xml.it, contents.xml.ms, contents.xml.nl,
+	  contents.xml.ro, contents.xml.ru, contents.xml.sk,
+	  contents.xml.vi, contents.xml.zh_TW: Remove screensaver settings
+	  from default panel
+
+2004-11-08 22:53  jasper
+
+	* panel/panel.c: bah.
+
+2004-11-08 22:47  jasper
+
+	* panel/panel.c: Missing fclose(). Shame on me.
+
+2004-11-08 22:31  jasper
+
+	* doc/C/xfce4-panel.html, doc/C/xfce4-panel.xml,
+	  panel/item_dialog.c, panel/panel.c: Add support for
+	  <basedir>/xfce4/transparency configuration file. Panl docs
+	  updated accordingly.
+
+2004-11-07 23:32  jasper
+
+	* plugins/mailcheck/mailcheck.c: Dimm mailcheck icon in a better
+	  way, based on code from netk-tasklist
+
+2004-11-07 22:09  fleclainche
+
+	* icons/xfce-mail.png: Commit a mail icon which is visible through
+	  a transparent panel
+
+2004-11-07 16:15  fleclainche
+
+	* icons/xfce-filemanager.png: Sync with Rodent icons.
+
+2004-11-07 13:00  jasper
+
+	* panel/: controls.c, plugins.h: Bump plugin API version, but allow
+	  current plugins to be loaded. Add a message to say the user
+	  should upgrade/rebuild in case of problems.
+
+2004-11-07 09:56  fleclainche
+
+	* icons/xfce-multimedia.png: Forgot to commit the new new
+	  multimedia icon :P
+
+2004-11-06 23:20  jasper
+
+	* panel/: controls.c, panel.c: Small tweaks
+
+2004-11-06 19:28  fleclainche
+
+	* icons/: xfce-man.png, xfce-multimedia.png, xfce-sound.png,
+	  xfce-system-lock.png, xfce-terminal.png, xfce-unknown.png:
+	  Improved icons
+
+2004-11-06 17:24  olivier
+
+	* ChangeLog, Makefile.in, aclocal.m4, compile, config.guess,
+	  config.sub, configure, configure.ac, depcomp, install-sh,
+	  ltmain.sh, missing, doc/Makefile.in, doc/C/Makefile.in,
+	  doc/C/images/Makefile.in, doc/fr/Makefile.in,
+	  doc/fr/images/Makefile.in, doc/it/Makefile.in,
+	  doc/it/images/Makefile.in, icons/Makefile.in, panel/Makefile.in,
+	  plugins/Makefile.in, plugins/clock/Makefile.in,
+	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	  plugins/sample-plugin/Makefile.in, plugins/separator/Makefile.in,
+	  plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	  po/xfce4-panel.pot, settings/Makefile.in: Update
+	  automake/autoconf/libtool/gettext versions to generate the
+	  configure scripts and Makefiles, Update versions of all packages
+	  to 4.1.99.1 (ie 4.2 RC1), Update ChangeLogs.
+
 2004-11-06 14:11  jasper
 
 	* panel/xfce_support.c: Use file chooser widget
