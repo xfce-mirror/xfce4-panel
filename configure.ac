@@ -34,9 +34,9 @@ AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h netinet/in.h])
 AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support
-BM_I18N([xfce4-panel], [ar az be bg ca cs da de en_GB es es_MX et eu fa fr fi \
-                        gu he hi hu it ja lt ms nl ko nb_NO pa pl pt_BR	\
-                        pt_PT ro ru sv sk ta tr vi zh_CN zh_TW])
+BM_I18N([xfce4-panel], [ar az be bg ca cs da de el_GR en_GB es es_MX et
+                        eu fa fr fi gu he hi hu it ja lt ms nl ko nb_NO
+			pa pl pt_BR pt_PT ro ru sv sk ta tr vi zh_CN zh_TW])
 
 dnl Check for X11 installed
 BM_LIBX11_REQUIRE
