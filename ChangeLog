@@ -1,3 +1,30 @@
+2002-09-04 19:59  huysmans
+
+	* AUTHORS, ChangeLog, Makefile.in, README, README.xml, TODO,
+	example.xfce4rc.in, icons/Makefile.am, icons/Makefile.in,
+	panel/Makefile.am, panel/Makefile.in, panel/builtins.c,
+	panel/builtins.h, panel/callbacks.c, panel/callbacks.h,
+	panel/central.c, panel/central.h, panel/controls.c,
+	panel/controls.h, panel/controls_dialog.c, panel/controls_dialog.h,
+	panel/dialogs.c, panel/dialogs.h, panel/global.h,
+	panel/iconbutton.c, panel/iconbutton.h, panel/icons.c,
+	panel/icons.h, panel/info.c, panel/item.c, panel/item.h,
+	panel/item_dialog.c, panel/item_dialog.h, panel/module.c,
+	panel/module.h, panel/move.c, panel/popup.c, panel/popup.h,
+	panel/settings.c, panel/settings.h, panel/side.c, panel/side.h,
+	panel/wmhints.c, panel/wmhints.h, panel/xfce.c, panel/xfce.h,
+	panel/xfce_support.c, panel/xfce_support.h,
+	plugins/mailcheck/mailcheck.c: Major rewrite several internals.
+	Unify panel items and modules in PanelControl structure (and change
+	the xml file format in the process), make all dialogs
+	instant-apply, rearrange preferences dialog, add option to keep
+	panel on top, probably more
+
+2002-08-16 23:35  xfce
+
+	* panel/global.h: Play with sizes, make the "tiny" panel somehow,
+	well, tiny.
+
 2002-08-11 23:04  huysmans
 
 	* panel/info.c: fix deprecated gtk function
