@@ -16,6 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
+#define USE_XFFM_THEME_MAKER
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -353,6 +354,17 @@ icon_browse_cb (GtkWidget * b, GtkEntry * entry)
     }
 }
 
+#ifdef USE_XFFM_THEME_MAKER
+static void
+xtm_cb (GtkWidget * b, GtkEntry * entry)
+{
+    GError *error = NULL;
+    gchar *argv[2]={"xffm_theme_maker",NULL};
+    g_spawn_async (NULL,argv,NULL,G_SPAWN_SEARCH_PATH,NULL,NULL,NULL,&error);
+    if (error) g_error_free(error);    
+}
+#endif
+
 gboolean
 icon_entry_lost_focus (GtkEntry * entry, GdkEventFocus * event, gpointer data)
 {
@@ -419,6 +431,28 @@ create_icon_option (GtkSizeGroup * sg)
     
     g_signal_connect (icon_browse_button, "clicked",
                       G_CALLBACK (icon_browse_cb), icon_entry);
+
+#ifdef USE_XFFM_THEME_MAKER
+    {
+	gchar *g=g_find_program_in_path("xffm_theme_maker");
+	if (g) 
+	{
+           GtkWidget *xtm_button = gtk_button_new();
+           gtk_box_pack_start (GTK_BOX (hbox), xtm_button, FALSE, FALSE, 0);
+  	   gtk_widget_show (xtm_button);
+
+           image = gtk_image_new_from_stock(GTK_STOCK_SELECT_COLOR, GTK_ICON_SIZE_BUTTON);
+    	   gtk_widget_show(image);
+           gtk_container_add(GTK_CONTAINER(xtm_button), image);
+    
+           g_signal_connect (xtm_button, "clicked",
+                      G_CALLBACK (xtm_cb), icon_entry);
+	   g_free(g);
+	}
+    }
+
+#endif
+    
 
     return vbox;
 }
