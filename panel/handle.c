@@ -23,13 +23,26 @@
 #include "xfce.h"
 #include "handle.h"
 #include "popup.h" /* to hide popups */
+#include "groups.h"
 #include "callbacks.h"
 #include "dialogs.h"
+#include "controls_dialog.h"
 
 /* popup menu */
 static void edit_prefs(void)
 {
     global_settings_dialog();
+}
+
+static void add_new(void)
+{
+    PanelControl *pc;
+    
+    panel_add_control();
+    panel_set_position();
+    
+    pc = groups_get_control(settings.num_groups-1);
+    change_panel_control_dialog(pc);
 }
 
 static void lock_screen(void)
@@ -56,6 +69,7 @@ static GtkItemFactoryEntry panel_items[] = {
   { N_("/XFce Panel"),        NULL, NULL,        0, "<Title>" },
   { "/sep",              NULL, NULL,        0, "<Separator>" },
   { N_("/_Preferences"), NULL, edit_prefs,  0, "<Item>" },
+  { N_("/Add _new item"), NULL, add_new,    0, "<Item>" },
   { N_("/sep"),          NULL, NULL,        0, "<Separator>" },
   { N_("/_Lock screen"), NULL, lock_screen, 0, "<Item>" },
   { N_("/E_xit"),        NULL, exit_panel,  0, "<Item>" },

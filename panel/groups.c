@@ -337,6 +337,28 @@ void groups_register_control(PanelControl * pc)
     panel_group_arrange(group);
 }
 
+PanelControl *groups_get_control(int index)
+{
+    GList *li;
+    PanelGroup *group;
+    int n, len;
+    
+    len = g_list_length(group_list);
+
+    if (index < 0)
+	n = 0;
+    else if (index >= len)
+	n = len -1;
+    else
+	n = index;
+    
+    li = g_list_nth(group_list, n);
+    
+    group = li->data;
+
+    return group->control;
+}
+
 void groups_move(int from, int to)
 {
     int i;

@@ -32,6 +32,7 @@ void groups_set_from_xml(xmlNodePtr node);
 void groups_write_xml(xmlNodePtr root);
 
 void groups_register_control(PanelControl * pc);
+PanelControl *groups_get_control(int index);
 
 void groups_move(int from, int to);
 void groups_remove(int index);
