@@ -110,42 +110,37 @@ update_partial_struts (Panel *p, int x, int y)
     gulong data [12] = { 0, };
     int w, h;
 
-    w = p->priv->req.width;
-    h = p->priv->req.height;
+    if (!p->priv->settings.autohide && p->priv->settings.layer == 0)
+    {
+	w = p->priv->req.width;
+	h = p->priv->req.height;
 
-    if (p->priv->settings.autohide)
-    {
-	if (p->priv->settings.orientation == HORIZONTAL)
-	    h = HIDDEN_SIZE;
-	else
-	    w = HIDDEN_SIZE;
-    }
-	    
-    switch (p->priv->side)
-    {
-	case LEFT:
-	    data[0]  = w;			 /* left           */
-	    
-	    data[4]  = y;			 /* left_start_y   */
-	    data[5]  = y + h;			 /* left_end_y     */
-	    break;
-	case RIGHT:
-	    data[1]  = w;			 /* right          */
-	    
-	    data[6]  = y;			 /* right_start_y  */
-	    data[7]  = y + h;			 /* right_end_y    */
-	    break;
-	case TOP:
-	    data[2]  = h;			 /* top            */
-	    
-	    data[8]  = x;			 /* top_start_x    */
-	    data[9]  = x + w;			 /* top_end_x      */
-	    break;
-	default:
-	    data[3]  = h;			 /* bottom         */
-	    
-	    data[10] = x;			 /* bottom_start_x */
-	    data[11] = x + w;			 /* bottom_end_x   */
+	switch (p->priv->side)
+	{
+	    case LEFT:
+		data[0]  = w;		 /* left           */
+		
+		data[4]  = y;		 /* left_start_y   */
+		data[5]  = y + h;	 /* left_end_y     */
+		break;
+	    case RIGHT:
+		data[1]  = w;		 /* right          */
+		
+		data[6]  = y;		 /* right_start_y  */
+		data[7]  = y + h;	 /* right_end_y    */
+		break;
+	    case TOP:
+		data[2]  = h;		 /* top            */
+		
+		data[8]  = x;		 /* top_start_x    */
+		data[9]  = x + w;	 /* top_end_x      */
+		break;
+	    default:
+		data[3]  = h;		 /* bottom         */
+		
+		data[10] = x;		 /* bottom_start_x */
+		data[11] = x + w;	 /* bottom_end_x   */
+	}
     }
 
     DBG (" ** struts: "
@@ -382,45 +377,45 @@ panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
 static void
 panel_reallocate (Panel * p)
 {
-    int xnew, ynew;
+    int x, y;
 
     DBG ("reallocate");
 
     gtk_widget_size_request (p->toplevel, &(p->priv->req));
     
-    xnew = p->position.x;
-    ynew = p->position.y;
+    x = p->position.x;
+    y = p->position.y;
 
     /* keep centered */
     if (p->priv->pos_state == XFCE_POS_STATE_CENTER)
     {
 	if (p->priv->settings.orientation == HORIZONTAL)
 	{
-	    xnew = p->priv->monitor_geometry.x
+	    x = p->priv->monitor_geometry.x
 		+ p->priv->monitor_geometry.width / 2
 		- p->priv->req.width / 2;
 	}
 	else
 	{
-	    ynew = p->priv->monitor_geometry.y
+	    y = p->priv->monitor_geometry.y
 		+ p->priv->monitor_geometry.height / 2
 		- p->priv->req.height / 2;
 	}
     }
     
-    restrict_position (p, &xnew, &ynew);
+    restrict_position (p, &x, &y);
 
-    if (xnew != p->position.x || ynew != p->position.y)
+    if (x != p->position.x || y != p->position.y)
     {
-	gtk_window_move (GTK_WINDOW (p->toplevel), xnew, ynew);
+	gtk_window_move (GTK_WINDOW (p->toplevel), x, y);
 
-	p->position.x = xnew;
-	p->position.y = ynew;
+	p->position.x = x;
+	p->position.y = y;
 
 	/* Need to save position here... */
 	write_panel_config ();
 
-	update_partial_struts (p, xnew, ynew);
+	update_partial_struts (p, x, y);
     }
 }
 
@@ -859,27 +854,85 @@ static void
 screen_size_changed (GdkScreen * screen, Panel * p)
 {
     gboolean hidden = p->priv->settings.autohide;
+    GdkRectangle r;
+    double scale;
 
     if (hidden)
 	panel_set_hidden (p, FALSE);
     
+    r = p->priv->monitor_geometry;
+    
     gdk_screen_get_monitor_geometry (screen, p->priv->monitor,
 	    			     &(p->priv->monitor_geometry));
     
-    /* keep centered */
-    if (p->priv->pos_state == XFCE_POS_STATE_CENTER)
+    
+    /* keep centered or in corners */
+    if (p->priv->settings.orientation == VERTICAL)
     {
-	if (p->priv->settings.orientation == HORIZONTAL)
+	if (p->priv->side == LEFT)
+	{
+	    p->position.x = p->priv->monitor_geometry.x;
+	}
+	else
 	{
 	    p->position.x = p->priv->monitor_geometry.x
-		+ p->priv->monitor_geometry.width / 2
+		+ p->priv->monitor_geometry.width
 		- p->priv->req.width;
+	}
+	
+	switch (p->priv->pos_state)
+	{
+	    case XFCE_POS_STATE_CENTER:
+		p->position.y = p->priv->monitor_geometry.y
+		    + (p->priv->monitor_geometry.height 
+		       - p->priv->req.height) / 2;
+		break;
+	    case XFCE_POS_STATE_START:
+		p->position.y = p->priv->monitor_geometry.y;
+		break;
+	    case XFCE_POS_STATE_END:
+		p->position.y = p->priv->monitor_geometry.y
+		    + p->priv->monitor_geometry.height
+		    - p->priv->req.height;
+		break;
+	    default:
+		scale = (double) (p->position.y - r.y) / (double) r.height;
+		p->position.y = p->priv->monitor_geometry.y + 
+		    rint (scale * p->priv->monitor_geometry.height);
+	}
+    }
+    else
+    {
+	if (p->priv->side == TOP)
+	{
+	    p->position.y = p->priv->monitor_geometry.y;
 	}
 	else
 	{
 	    p->position.y = p->priv->monitor_geometry.y
-		+ p->priv->monitor_geometry.height / 2
+		+ p->priv->monitor_geometry.height
 		- p->priv->req.height;
+	}
+	
+	switch (p->priv->pos_state)
+	{
+	    case XFCE_POS_STATE_CENTER:
+		p->position.x = p->priv->monitor_geometry.x
+		    + (p->priv->monitor_geometry.width
+		       - p->priv->req.width) / 2;
+		break;
+	    case XFCE_POS_STATE_START:
+		p->position.x = p->priv->monitor_geometry.x;
+		break;
+	    case XFCE_POS_STATE_END:
+		p->position.x = p->priv->monitor_geometry.x
+		    + p->priv->monitor_geometry.width
+		    - p->priv->req.width;
+		break;
+	    default:
+		scale = (double) (p->position.x - r.x) / (double) r.width;
+		p->position.x = p->priv->monitor_geometry.x + 
+		    rint (scale * p->priv->monitor_geometry.width);
 	}
     }
     
@@ -1182,17 +1235,13 @@ panel_set_layer (int layer)
     
     if (panel.priv->is_created)
     {
-	gboolean visible = GTK_WIDGET_VISIBLE (panel.toplevel);
 	gboolean autohide = panel.priv->settings.autohide;
 
-	if (visible)
-	{
-	    if (autohide)
-		panel_set_autohide (FALSE);
-	    
-	    gtk_widget_hide (panel.toplevel);
-	    gtk_widget_unrealize (panel.toplevel);
-	}
+	if (autohide)
+	    panel_set_autohide (FALSE);
+	
+	gtk_widget_hide (panel.toplevel);
+	gtk_widget_unrealize (panel.toplevel);
 	
 	gtk_window_set_type_hint (GTK_WINDOW (panel.toplevel), 
 				  layer == 0 ? GDK_WINDOW_TYPE_HINT_DOCK 
@@ -1205,16 +1254,13 @@ panel_set_layer (int layer)
 	gtk_window_set_skip_pager_hint (GTK_WINDOW (panel.toplevel), TRUE);
 	gtk_window_stick (GTK_WINDOW (panel.toplevel));
 	
-	if (visible)
-	{
-	    if (layer == 0)
-		gtk_window_present (GTK_WINDOW (panel.toplevel));
-	    else
-		gtk_widget_show (panel.toplevel);
+	/* make sure it is really shown before setting struts */
+	gtk_widget_show_now (panel.toplevel);
 
-	    if (autohide)
-		panel_set_autohide (TRUE);
-	}
+	if (autohide)
+	    panel_set_autohide (TRUE);
+
+	update_partial_struts (&panel, panel.position.x, panel.position.y);
     }
 }
 
@@ -1235,6 +1281,7 @@ panel_set_size (int size)
     handle_set_size (panel.handles[LEFT], size);
     handle_set_size (panel.handles[RIGHT], size);
 
+    /* this will also resize the icons */
     panel_set_theme (panel.priv->settings.theme);
 }
 
