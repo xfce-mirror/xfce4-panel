@@ -46,21 +46,21 @@ xmlDocPtr xmlconfig = NULL;
 
 static xmlDocPtr make_empty_doc(void)
 {
-	xmlDocPtr doc;
-	xmlNodePtr root;
+    xmlDocPtr doc;
+    xmlNodePtr root;
 
-	doc = xmlNewDoc("1.0");
-	doc->children = xmlNewDocRawNode(doc, NULL, ROOT, NULL);
+    doc = xmlNewDoc("1.0");
+    doc->children = xmlNewDocRawNode(doc, NULL, ROOT, NULL);
 
-	root = (xmlNodePtr) doc->children;
-	xmlDocSetRootElement(doc, root);
+    root = (xmlNodePtr) doc->children;
+    xmlDocSetRootElement(doc, root);
 
-	xmlNewTextChild(root, NULL, "Panel", NULL);
-	xmlNewTextChild(root, NULL, "Central", NULL);
-	xmlNewTextChild(root, NULL, "Left", NULL);
-	xmlNewTextChild(root, NULL, "Right", NULL);
-	
-	return doc;
+    xmlNewTextChild(root, NULL, "Panel", NULL);
+    xmlNewTextChild(root, NULL, "Central", NULL);
+    xmlNewTextChild(root, NULL, "Left", NULL);
+    xmlNewTextChild(root, NULL, "Right", NULL);
+
+    return doc;
 }
 
 
@@ -75,9 +75,9 @@ static xmlDocPtr read_xml_file(void)
 
     if(rcfile)
         doc = xmlParseFile(rcfile);
-	
-	if (!doc)
-		doc = make_empty_doc();
+
+    if(!doc)
+        doc = make_empty_doc();
 
     g_free(rcfile);
     return doc;
@@ -95,10 +95,10 @@ static void settings_from_file(void)
     if(!node)
     {
         g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__, __LINE__);
-		
-		xmlFreeDoc(xmlconfig);
-		xmlconfig = make_empty_doc();
-		node = xmlDocGetRootElement(xmlconfig);
+
+        xmlFreeDoc(xmlconfig);
+        xmlconfig = make_empty_doc();
+        node = xmlDocGetRootElement(xmlconfig);
     }
 
     if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
@@ -106,9 +106,9 @@ static void settings_from_file(void)
         g_printerr(_("xfce: %s (line %d): wrong document type\n"),
                    __FILE__, __LINE__);
 
-		xmlFreeDoc(xmlconfig);
-		xmlconfig = make_empty_doc();
-		node = xmlDocGetRootElement(xmlconfig);
+        xmlFreeDoc(xmlconfig);
+        xmlconfig = make_empty_doc();
+        node = xmlDocGetRootElement(xmlconfig);
     }
 
     /* Now parse the xml tree */

@@ -460,14 +460,14 @@ void central_panel_write_xml(xmlNodePtr root)
 {
     xmlNodePtr node;
     int i;
-    
+
     node = xmlNewTextChild(root, NULL, "Central", NULL);
-    
-    for (i = 0; i < NBSCREENS; i++)
+
+    for(i = 0; i < NBSCREENS; i++)
     {
-	ScreenButton *sb = screen_buttons[i];
-	
-	xmlNewTextChild(node, NULL, "Screen", sb->name);
+        ScreenButton *sb = screen_buttons[i];
+
+        xmlNewTextChild(node, NULL, "Screen", sb->name);
     }
 }
 
@@ -532,8 +532,7 @@ void add_screen_button(ScreenButton * sb, GtkWidget * table)
     /* we need the callback id to be able to block the handler to 
        prevent a race condition when changing screens */
     sb->callback_id =
-        g_signal_connect(sb->button, "clicked",
-                         G_CALLBACK(screen_button_click), sb);
+        g_signal_connect(sb->button, "clicked", G_CALLBACK(screen_button_click), sb);
 
     g_signal_connect(sb->button, "button-press-event",
                      G_CALLBACK(screen_button_pressed_cb), sb);
@@ -561,23 +560,23 @@ void screen_button_set_size(ScreenButton * sb, int size)
     /* NOTE:
      * calculation of height is very arbitrary. I just put here what looks good
      * on my screen. Should probably be something a little more intelligent. */
-	switch (size)
-	{
-		case TINY:
-			w = SCREEN_BUTTON_WIDTH / 2;
-			h = icon_size(TINY);
-			break;
-		case SMALL:
-			w = SCREEN_BUTTON_WIDTH / 2;
-			h = -1;
-			break;
-		case LARGE:
-			w = SCREEN_BUTTON_WIDTH;
-			h = (LARGE_TOPHEIGHT + LARGE_PANEL_ICONS) / 2 - 6;
-			break;
-		default:
-			w = SCREEN_BUTTON_WIDTH;
-			h = (MEDIUM_TOPHEIGHT + MEDIUM_PANEL_ICONS) / 2 - 5;
+    switch (size)
+    {
+        case TINY:
+            w = SCREEN_BUTTON_WIDTH / 2;
+            h = icon_size(TINY);
+            break;
+        case SMALL:
+            w = SCREEN_BUTTON_WIDTH / 2;
+            h = -1;
+            break;
+        case LARGE:
+            w = SCREEN_BUTTON_WIDTH;
+            h = (LARGE_TOPHEIGHT + LARGE_PANEL_ICONS) / 2 - 6;
+            break;
+        default:
+            w = SCREEN_BUTTON_WIDTH;
+            h = (MEDIUM_TOPHEIGHT + MEDIUM_PANEL_ICONS) / 2 - 5;
     }
 
     gtk_widget_set_size_request(sb->button, w, h);

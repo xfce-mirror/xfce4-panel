@@ -733,10 +733,10 @@ void edit_panel_group_dialog(PanelGroup * pg)
     gtk_widget_destroy(dlg);
     dlg = NULL;
 
-    if (icon_path)
+    if(icon_path)
     {
-	g_free(icon_path);
-	icon_path = NULL;
+        g_free(icon_path);
+        icon_path = NULL;
     }
 }
 
@@ -892,10 +892,10 @@ void edit_menu_item_dialog(MenuItem * mi)
     gtk_widget_destroy(dlg);
     num_items = 0;
 
-    if (icon_path)
+    if(icon_path)
     {
-	g_free(icon_path);
-	icon_path = NULL;
+        g_free(icon_path);
+        icon_path = NULL;
     }
 }
 
@@ -917,10 +917,10 @@ void add_menu_item_dialog(PanelPopup * pp)
 
     gtk_widget_destroy(dlg);
     num_items = 0;
-    
-    if (icon_path)
+
+    if(icon_path)
     {
-	g_free(icon_path);
-	icon_path = NULL;
+        g_free(icon_path);
+        icon_path = NULL;
     }
 }

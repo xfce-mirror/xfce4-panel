@@ -52,6 +52,6 @@ void panel_item_set_style(PanelItem * pi, int style);
 void panel_item_set_icon_theme(PanelItem * pi, const char *theme);
 
 void panel_item_parse_xml(xmlNodePtr node, PanelItem * pi);
-void panel_item_write_xml(xmlNodePtr root, PanelItem *pi);
+void panel_item_write_xml(xmlNodePtr root, PanelItem * pi);
 
 #endif /* __XFCE_ITEM_H__ */

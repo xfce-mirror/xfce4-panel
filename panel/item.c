@@ -20,7 +20,6 @@
 #include "xfce.h"
 
 #include "item.h"
-#include "panel.h"
 #include "xfce_support.h"
 #include "callbacks.h"
 #include "popup.h"
@@ -61,7 +60,7 @@ void create_panel_item(PanelItem * pi)
 
     pi->button = gtk_button_new();
     gtk_button_set_relief(GTK_BUTTON(pi->button), GTK_RELIEF_NONE);
-    
+
     /* protect against destruction when unpacking */
     g_object_ref(pi->button);
 
@@ -80,8 +79,7 @@ void create_panel_item(PanelItem * pi)
 
     if(pi->command && strlen(pi->command))
     {
-        g_signal_connect(pi->button, "clicked",
-                         G_CALLBACK(panel_item_click_cb), pi);
+        g_signal_connect(pi->button, "clicked", G_CALLBACK(panel_item_click_cb), pi);
 
         if(pi->tooltip && strlen(pi->tooltip))
             add_tooltip(pi->button, pi->tooltip);
@@ -163,20 +161,20 @@ void panel_item_parse_xml(xmlNodePtr node, PanelItem * pi)
     {
         if(xmlStrEqual(child->name, (const xmlChar *)"Command"))
         {
-	    int n = -1;
-	    
+            int n = -1;
+
             value = DATA(child);
 
             if(value)
                 pi->command = (char *)value;
-	    
-	    value = xmlGetProp(child, "term");
-	    
-	    if (value)
-		n = atoi(value);
-	    
-	    if (n == 1)
-		pi->in_terminal = TRUE;
+
+            value = xmlGetProp(child, "term");
+
+            if(value)
+                n = atoi(value);
+
+            if(n == 1)
+                pi->in_terminal = TRUE;
         }
         else if(xmlStrEqual(child->name, (const xmlChar *)"Tooltip"))
         {
@@ -210,24 +208,24 @@ void panel_item_parse_xml(xmlNodePtr node, PanelItem * pi)
     }
 }
 
-void panel_item_write_xml(xmlNodePtr root, PanelItem *pi)
+void panel_item_write_xml(xmlNodePtr root, PanelItem * pi)
 {
     xmlNodePtr node;
     xmlNodePtr child;
     char value[3];
-    
+
     node = xmlNewTextChild(root, NULL, "Item", NULL);
-    
+
     child = xmlNewChild(node, NULL, "Command", pi->command);
-    
+
     snprintf(value, 2, "%d", pi->in_terminal);
     xmlSetProp(child, "term", value);
-    
-    if (pi->tooltip)
-	xmlNewTextChild(node, NULL, "Tooltip", pi->tooltip);
-    
+
+    if(pi->tooltip)
+        xmlNewTextChild(node, NULL, "Tooltip", pi->tooltip);
+
     child = xmlNewTextChild(node, NULL, "Icon", pi->path);
-    
+
     snprintf(value, 3, "%d", pi->id);
     xmlSetProp(child, "id", value);
 }

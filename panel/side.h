@@ -28,7 +28,7 @@ struct _PanelGroup
     int index;
     int size;
 
-    GtkWidget *container;           /* main container */
+    GtkWidget *container;       /* main container */
 
     GtkWidget *box;             /* hbox or vbox depending on size */
 

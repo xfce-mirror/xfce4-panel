@@ -44,11 +44,11 @@ struct _PanelModule
     char *caption;              /* name to show in the configuration dialog */
     GtkWidget *main;            /* widget to connect callback to */
     gpointer data;              /* usually the module structure */
-    
+
     /* update display */
-    int interval;		/* interval for the g_timeout */
+    int interval;               /* interval for the g_timeout */
     int timeout_id;
-    gboolean (*update) (PanelModule *);
+      gboolean(*update) (PanelModule *);
 
     /* add to and remove from panel */
     void (*pack) (PanelModule *, GtkBox *);
@@ -64,7 +64,7 @@ struct _PanelModule
     void (*set_icon_theme) (PanelModule *, const char *);
 
     /* configure */
-	void (*add_options)(PanelModule *, GtkContainer *);
+    void (*add_options) (PanelModule *, GtkContainer *);
     void (*apply_configuration) (PanelModule *);
 };
 
@@ -87,6 +87,6 @@ void panel_module_add_options(PanelModule * pm, GtkContainer * container);
 void panel_module_apply_configuration(PanelModule * pm);
 
 void panel_module_parse_xml(xmlNodePtr node, PanelModule * pm);
-void panel_module_write_xml(xmlNodePtr root, PanelModule *pm);
+void panel_module_write_xml(xmlNodePtr root, PanelModule * pm);
 
 #endif /* __XFCE_MODULE_H__ */

@@ -125,10 +125,10 @@ static gboolean adjust_time(PanelModule * pm)
 
     switch (clock->size)
     {
-	case TINY:
+        case TINY:
             markup = g_strconcat("<tt><span size=\"x-small\">",
                                  text, "</span></tt>", NULL);
-	    break;
+            break;
         case SMALL:
             markup = g_strconcat("<tt><span size=\"small\">",
                                  text, "</span></tt>", NULL);

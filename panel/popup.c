@@ -66,7 +66,7 @@ void add_panel_popup(PanelPopup * pp, GtkBox * box)
     gtk_container_add(GTK_CONTAINER(pp->button), pp->image);
 
     gtk_widget_show_all(pp->button);
-    
+
     /* protect against destruction when unpacking */
     g_object_ref(pp->button);
 
@@ -143,41 +143,42 @@ void panel_popup_free(PanelPopup * pp)
 
 void panel_popup_set_size(PanelPopup * pp, int size)
 {
-    if (size == TINY)
+    if(size == TINY)
     {
-	int h = icon_size(size);
-	int w = h / 2;
-	GdkPixbuf *pb;
-	
-	pb = get_scaled_pixbuf(pp->up, w - 4);
-	g_object_unref(pp->up);
-	pp->up = pb;
-	
-	pb = get_scaled_pixbuf(pp->down, w - 4);
-	g_object_unref(pp->down);
-	pp->down = pb;
-	
-	if (!pp->detached)
-	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
-	else
-	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
-	
-	gtk_widget_set_size_request(pp->button, w , h);
+        int h = icon_size(size);
+        int w = h / 2;
+        GdkPixbuf *pb;
+
+        pb = get_scaled_pixbuf(pp->up, w - 4);
+        g_object_unref(pp->up);
+        pp->up = pb;
+
+        pb = get_scaled_pixbuf(pp->down, w - 4);
+        g_object_unref(pp->down);
+        pp->down = pb;
+
+        if(!pp->detached)
+            gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
+        else
+            gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
+
+        gtk_widget_set_size_request(pp->button, w, h);
     }
     else
     {
-	g_object_unref(pp->up);
-	pp->up = get_system_pixbuf(UP_ICON);
-	
-	g_object_unref(pp->down);
-	pp->down = get_system_pixbuf(DOWN_ICON);
-	
-	if (!pp->detached)
-	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
-	else
-	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
-	
-	gtk_widget_set_size_request(pp->button, icon_size(size) + 4, top_height(size));
+        g_object_unref(pp->up);
+        pp->up = get_system_pixbuf(UP_ICON);
+
+        g_object_unref(pp->down);
+        pp->down = get_system_pixbuf(DOWN_ICON);
+
+        if(!pp->detached)
+            gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
+        else
+            gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
+
+        gtk_widget_set_size_request(pp->button, icon_size(size) + 4,
+                                    top_height(size));
     }
 }
 
@@ -252,18 +253,18 @@ void panel_popup_parse_xml(xmlNodePtr node, PanelPopup * pp)
     }
 }
 
-void panel_popup_write_xml(xmlNodePtr root, PanelPopup *pp)
+void panel_popup_write_xml(xmlNodePtr root, PanelPopup * pp)
 {
     xmlNodePtr node;
     GList *li;
-    
+
     node = xmlNewTextChild(root, NULL, "Popup", NULL);
-    
-    for (li = pp->items; li; li = li->next)
+
+    for(li = pp->items; li; li = li->next)
     {
-	MenuItem *mi = (MenuItem *) li->data;
-	
-	menu_item_write_xml(node, mi);
+        MenuItem *mi = (MenuItem *) li->data;
+
+        menu_item_write_xml(node, mi);
     }
 }
 
@@ -368,8 +369,7 @@ void create_menu_item(MenuItem * mi)
 
     if(mi->command && strlen(mi->command))
     {
-        g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb),
-                         mi);
+        g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb), mi);
 
         if(mi->tooltip && strlen(mi->tooltip))
             add_tooltip(mi->button, mi->tooltip);
@@ -448,20 +448,20 @@ void menu_item_parse_xml(xmlNodePtr node, MenuItem * mi)
         }
         else if(xmlStrEqual(child->name, (const xmlChar *)"Command"))
         {
-	    int n = -1;
-	    
+            int n = -1;
+
             value = DATA(child);
 
             if(value)
                 mi->command = (char *)value;
-	    
-	    value = xmlGetProp(child, "term");
-	    
-	    if (value)
-		n = atoi(value);
-	    
-	    if (n == 1)
-		mi->in_terminal = TRUE;
+
+            value = xmlGetProp(child, "term");
+
+            if(value)
+                n = atoi(value);
+
+            if(n == 1)
+                mi->in_terminal = TRUE;
         }
         else if(xmlStrEqual(child->name, (const xmlChar *)"Tooltip"))
         {
@@ -495,26 +495,26 @@ void menu_item_parse_xml(xmlNodePtr node, MenuItem * mi)
     }
 }
 
-void menu_item_write_xml(xmlNodePtr root, MenuItem *mi)
+void menu_item_write_xml(xmlNodePtr root, MenuItem * mi)
 {
     xmlNodePtr node;
     xmlNodePtr child;
     char value[3];
-    
+
     node = xmlNewTextChild(root, NULL, "Item", NULL);
-    
+
     xmlNewTextChild(node, NULL, "Caption", mi->caption);
-    
+
     child = xmlNewChild(node, NULL, "Command", mi->command);
-    
+
     snprintf(value, 2, "%d", mi->in_terminal);
     xmlSetProp(child, "term", value);
-    
-    if (mi->tooltip)
-	xmlNewTextChild(node, NULL, "Tooltip", mi->tooltip);
-    
+
+    if(mi->tooltip)
+        xmlNewTextChild(node, NULL, "Tooltip", mi->tooltip);
+
     child = xmlNewTextChild(node, NULL, "Icon", mi->icon_path);
-    
+
     snprintf(value, 3, "%d", mi->icon_id);
     xmlSetProp(child, "id", value);
 }

@@ -83,7 +83,7 @@ void panel_popup_set_icon_theme(PanelPopup * pp, const char *theme);
 void hide_current_popup_menu(void);
 
 void panel_popup_parse_xml(xmlNodePtr node, PanelPopup * pp);
-void panel_popup_write_xml(xmlNodePtr root, PanelPopup *pp);
+void panel_popup_write_xml(xmlNodePtr root, PanelPopup * pp);
 
 /*****************************************************************************/
 
@@ -98,6 +98,6 @@ void menu_item_set_style(MenuItem * mi, int style);
 void menu_item_set_icon_theme(MenuItem * mi, const char *theme);
 
 void menu_item_parse_xml(xmlNodePtr node, MenuItem * mi);
-void menu_item_write_xml(xmlNodePtr root, MenuItem *mi);
+void menu_item_write_xml(xmlNodePtr root, MenuItem * mi);
 
 #endif /* __XFCE_POPUP_H__ */

@@ -46,8 +46,8 @@ int icon_size(int size)
 {
     switch (size)
     {
-	case TINY:
-	    return TINY_PANEL_ICONS;
+        case TINY:
+            return TINY_PANEL_ICONS;
         case SMALL:
             return SMALL_PANEL_ICONS;
         case LARGE:
@@ -74,8 +74,8 @@ int top_height(int size)
 {
     switch (size)
     {
-	case TINY:
-	    return 0;
+        case TINY:
+            return 0;
         case SMALL:
             return SMALL_TOPHEIGHT;
         case LARGE:
@@ -291,7 +291,7 @@ void panel_cleanup(void)
     side_panel_cleanup(LEFT);
     central_panel_cleanup();
     side_panel_cleanup(RIGHT);
-    
+
     gtk_widget_destroy(toplevel);
 }
 
@@ -322,11 +322,11 @@ void panel_set_settings(void)
 
     panel_set_size(settings.size);
     panel_set_popup_size(settings.popup_size);
-    
 
-    if (settings.size == TINY)
-	settings.style == NEW_STYLE;
-    
+
+    if(settings.size == TINY)
+        settings.style == NEW_STYLE;
+
     panel_set_style(settings.style);
     panel_set_icon_theme(settings.icon_theme);
 

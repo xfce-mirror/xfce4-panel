@@ -73,10 +73,10 @@ enum
     TRASH_EMPTY_ICON,
     TRASH_FULL_ICON,
     MODULE_ICONS
-    /* ppp module icons 
-    PPP_OFF_ICON,
-    PPP_ON_ICON,
-    PPP_CONNECTING_ICON,*/
+        /* ppp module icons 
+           PPP_OFF_ICON,
+           PPP_ON_ICON,
+           PPP_CONNECTING_ICON, */
 };
 
 #define UNKNOWN_ICON DEFAULT_ICON
@@ -90,7 +90,7 @@ GdkPixbuf *get_system_pixbuf(int id);
 
 GdkPixbuf *get_module_pixbuf(int id);
 
-GdkPixbuf *get_scaled_pixbuf(GdkPixbuf *pb, int size);
+GdkPixbuf *get_scaled_pixbuf(GdkPixbuf * pb, int size);
 
 /* for plugins */
 GdkPixbuf *get_themed_pixbuf(const char *name);

@@ -119,9 +119,9 @@ static char *system_icon_names[] = {
 
 static void set_icon_names()
 {
-	int i = 0;
-	
-	icon_names[0] = _("Default");
+    int i = 0;
+
+    icon_names[0] = _("Default");
     icon_names[++i] = _("Editor");
     icon_names[++i] = _("File management");
     icon_names[++i] = _("Utilities");
@@ -138,8 +138,8 @@ static void set_icon_names()
 
 void create_builtin_pixbufs(void)
 {
-	set_icon_names();
-	
+    set_icon_names();
+
     /* general icons */
     xfce_icons[UNKNOWN_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)unknown_xpm);
@@ -161,29 +161,42 @@ void create_builtin_pixbufs(void)
         gdk_pixbuf_new_from_xpm_data((const char **)terminal_xpm);
 
     /* small buttons on central panel */
-    system_icons[MINILOCK_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)minilock_xpm);
-    system_icons[MINIINFO_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)miniinfo_xpm);
-    system_icons[MINIPALET_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)minipalet_xpm);
-    system_icons[MINIPOWER_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)minipower_xpm);
+    system_icons[MINILOCK_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)minilock_xpm);
+    system_icons[MINIINFO_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)miniinfo_xpm);
+    system_icons[MINIPALET_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)minipalet_xpm);
+    system_icons[MINIPOWER_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)minipower_xpm);
 
     /* move handles */
-    system_icons[HANDLE_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)handle_xpm);
-    system_icons[ADDICON_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)addicon_xpm);
-    system_icons[CLOSE_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)close_xpm);
-    system_icons[ICONIFY_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)iconify_xpm);
+    system_icons[HANDLE_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)handle_xpm);
+    system_icons[ADDICON_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)addicon_xpm);
+    system_icons[CLOSE_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)close_xpm);
+    system_icons[ICONIFY_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)iconify_xpm);
 
     /* POPUP BUTTOns */
     system_icons[UP_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)up_xpm);
     system_icons[DOWN_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)down_xpm);
 
     /* APP ICONS */
-    system_icons[DIAG_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)diag_icon_xpm);
-    system_icons[MENU_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)menu_icon_xpm);
-    system_icons[XFCE_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)xfce_icon_xpm);
+    system_icons[DIAG_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)diag_icon_xpm);
+    system_icons[MENU_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)menu_icon_xpm);
+    system_icons[XFCE_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)xfce_icon_xpm);
 
     /* TRASH ICONS */
-    module_icons[TRASH_FULL_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)trash_full_xpm);
-    module_icons[TRASH_EMPTY_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)trash_empty_xpm);
+    module_icons[TRASH_FULL_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)trash_full_xpm);
+    module_icons[TRASH_EMPTY_ICON] =
+        gdk_pixbuf_new_from_xpm_data((const char **)trash_empty_xpm);
 }
 
 GdkPixbuf *get_pixbuf_by_id(int id)
@@ -191,32 +204,32 @@ GdkPixbuf *get_pixbuf_by_id(int id)
     GdkPixbuf *pb;
 
     if(id < UNKNOWN_ICON || id >= NUM_ICONS)
-	id = UNKNOWN_ICON;
+        id = UNKNOWN_ICON;
 
     pb = get_themed_pixbuf(xfce_icon_names[id]);
 
-    if (!pb)
+    if(!pb)
     {
-	pb = xfce_icons[id];
-	g_object_ref(pb);
+        pb = xfce_icons[id];
+        g_object_ref(pb);
     }
-    
+
     return pb;
 }
 
-GdkPixbuf *get_pixbuf_from_file(const char* path)
+GdkPixbuf *get_pixbuf_from_file(const char *path)
 {
-	GdkPixbuf *pb = NULL;
-	
-	if (!g_file_test(path, G_FILE_TEST_EXISTS))
-		return get_pixbuf_by_id(UNKNOWN_ICON);
-	
-	pb = gdk_pixbuf_new_from_file(path, NULL);
-	
-	if (pb && GDK_IS_PIXBUF(pb))
-		return pb;
-	else
-		return get_pixbuf_by_id(UNKNOWN_ICON);
+    GdkPixbuf *pb = NULL;
+
+    if(!g_file_test(path, G_FILE_TEST_EXISTS))
+        return get_pixbuf_by_id(UNKNOWN_ICON);
+
+    pb = gdk_pixbuf_new_from_file(path, NULL);
+
+    if(pb && GDK_IS_PIXBUF(pb))
+        return pb;
+    else
+        return get_pixbuf_by_id(UNKNOWN_ICON);
 }
 
 GdkPixbuf *get_system_pixbuf(int id)
@@ -224,55 +237,55 @@ GdkPixbuf *get_system_pixbuf(int id)
     GdkPixbuf *pb;
 
     if(id < 0 || id >= SYS_ICONS)
-	return get_pixbuf_by_id(UNKNOWN_ICON);
+        return get_pixbuf_by_id(UNKNOWN_ICON);
 
     pb = get_themed_pixbuf(system_icon_names[id]);
 
-    if (!pb)
+    if(!pb)
     {
-	pb = system_icons[id];
-	g_object_ref(pb);
+        pb = system_icons[id];
+        g_object_ref(pb);
     }
-    
+
     return pb;
 }
 
-GdkPixbuf *get_scaled_pixbuf(GdkPixbuf *pb, int size)
+GdkPixbuf *get_scaled_pixbuf(GdkPixbuf * pb, int size)
 {
-	int w, h, neww, newh;
-	GdkPixbuf *newpb;
-	
-	if (!pb || !GDK_IS_PIXBUF(pb))
-	{
-		GdkPixbuf *tmp = get_pixbuf_by_id(UNKNOWN_ICON);
-		
-		newpb = get_scaled_pixbuf(tmp, size);
-		g_object_unref(tmp);
-		
-		return newpb;
-	}
-	
-	w = gdk_pixbuf_get_width(pb);
-	h = gdk_pixbuf_get_height(pb);
-	
-	if (size > w && size > h)
-	{
-		newpb = pb;
-		g_object_ref(newpb);
-		return newpb;
-	}
-	else if (h > w)
-	{
-		newh = size;
-		neww = w * size / h;
-	}
-	else
-	{
-		neww = size;
-		newh = h * size / w;
-	}
-	
-	return gdk_pixbuf_scale_simple(pb, neww, newh, GDK_INTERP_BILINEAR);
+    int w, h, neww, newh;
+    GdkPixbuf *newpb;
+
+    if(!pb || !GDK_IS_PIXBUF(pb))
+    {
+        GdkPixbuf *tmp = get_pixbuf_by_id(UNKNOWN_ICON);
+
+        newpb = get_scaled_pixbuf(tmp, size);
+        g_object_unref(tmp);
+
+        return newpb;
+    }
+
+    w = gdk_pixbuf_get_width(pb);
+    h = gdk_pixbuf_get_height(pb);
+
+    if(size > w && size > h)
+    {
+        newpb = pb;
+        g_object_ref(newpb);
+        return newpb;
+    }
+    else if(h > w)
+    {
+        newh = size;
+        neww = w * size / h;
+    }
+    else
+    {
+        neww = size;
+        newh = h * size / w;
+    }
+
+    return gdk_pixbuf_scale_simple(pb, neww, newh, GDK_INTERP_BILINEAR);
 }
 
 GdkPixbuf *get_module_pixbuf(int id)
@@ -280,16 +293,16 @@ GdkPixbuf *get_module_pixbuf(int id)
     GdkPixbuf *pb;
 
     if(id < 0 || id >= MODULE_ICONS)
-	return get_pixbuf_by_id(UNKNOWN_ICON);
+        return get_pixbuf_by_id(UNKNOWN_ICON);
 
     pb = get_themed_pixbuf(module_icon_names[id]);
 
-    if (!pb)
+    if(!pb)
     {
-	pb = module_icons[id];
-	g_object_ref(pb);
+        pb = module_icons[id];
+        g_object_ref(pb);
     }
-    
+
     return pb;
 }
 
@@ -303,32 +316,29 @@ GdkPixbuf *get_themed_pixbuf(const char *name)
         return NULL;
 
     icon_paths = get_theme_dirs();
-    
+
     for(p = icon_paths; *p; p++)
     {
-	char **suffix;
+        char **suffix;
 
-	for(suffix = icon_suffix; *suffix; suffix++)
-	{
-	    char *path =
-		g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
+        for(suffix = icon_suffix; *suffix; suffix++)
+        {
+            char *path = g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
 
-	    if(g_file_test(path, G_FILE_TEST_EXISTS))
-		pb = gdk_pixbuf_new_from_file(path, NULL);
+            if(g_file_test(path, G_FILE_TEST_EXISTS))
+                pb = gdk_pixbuf_new_from_file(path, NULL);
 
-	    g_free(path);
+            g_free(path);
 
-	    if(pb)
-		break;
-	}
+            if(pb)
+                break;
+        }
 
-	if(pb)
-	    break;
+        if(pb)
+            break;
     }
 
     g_strfreev(icon_paths);
 
     return pb;
 }
-
-

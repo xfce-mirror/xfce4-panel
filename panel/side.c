@@ -207,7 +207,7 @@ void panel_group_init(PanelGroup * pg, int side, int index)
 
 void add_panel_group(PanelGroup * pg, GtkBox * hbox)
 {
-    pg->container = gtk_alignment_new(0,0,1,1);
+    pg->container = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(pg->container);
 
     pg->box = gtk_vbox_new(FALSE, 0);
@@ -299,7 +299,8 @@ void panel_group_set_size(PanelGroup * pg, int size)
     {
         if(pg->index == 0 && pg->side == LEFT)
         {
-            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->container, TRUE, TRUE, 0);
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->container, TRUE, TRUE,
+                               0);
             move_handle_set_size(pg->handle, size);
         }
 
@@ -321,7 +322,8 @@ void panel_group_set_size(PanelGroup * pg, int size)
         }
         else if(pg->side == RIGHT)
         {
-            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->container, TRUE, TRUE, 0);
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->container, TRUE, TRUE,
+                               0);
             move_handle_set_size(pg->handle, size);
         }
     }
@@ -329,7 +331,8 @@ void panel_group_set_size(PanelGroup * pg, int size)
     {
         if(pg->index == 0)
         {
-            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->container, TRUE, TRUE, 0);
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->container, TRUE, TRUE,
+                               0);
             move_handle_set_size(pg->handle, size);
         }
         else
@@ -450,7 +453,7 @@ void add_move_handle(MoveHandle * mh, GtkWidget * vbox)
     GdkPixbuf *pb;
     GtkWidget *im;
 
-    mh->container = gtk_alignment_new(0,0,1,1);
+    mh->container = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(mh->container);
     /* protect against destruction when unpacking */
     g_object_ref(mh->container);
@@ -523,43 +526,43 @@ void move_handle_set_size(MoveHandle * mh, int size)
 
     gtk_container_remove(GTK_CONTAINER(mh->box), mh->button);
     gtk_container_remove(GTK_CONTAINER(mh->box), mh->eventbox);
-    
+
     gtk_container_remove(GTK_CONTAINER(mh->container), mh->box);
-    
+
     if(size == TINY)
     {
-	int h1 = 2 * (w + 4) / 3;
-	int h2 = w + 4 - h1;
-	
-	newbox = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(newbox);
-	
-	gtk_box_pack_start(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
-	
-	gtk_widget_set_size_request(mh->eventbox, h2, h1);
-	gtk_widget_set_size_request(mh->button, h2, h2);
+        int h1 = 2 * (w + 4) / 3;
+        int h2 = w + 4 - h1;
+
+        newbox = gtk_vbox_new(FALSE, 0);
+        gtk_widget_show(newbox);
+
+        gtk_box_pack_start(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
+
+        gtk_widget_set_size_request(mh->eventbox, h2, h1);
+        gtk_widget_set_size_request(mh->button, h2, h2);
     }
     else
     {
-	newbox = gtk_hbox_new(FALSE, 0);
-	gtk_widget_show(newbox);
-	
-	if (mh->side == LEFT)
-	{
-	    gtk_box_pack_start(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
-	    gtk_box_pack_start(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
-	}
-	else
-	{
-	    gtk_box_pack_end(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
-	    gtk_box_pack_end(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
-	}
-	
-	gtk_widget_set_size_request(mh->eventbox, w + 8 - h, h);
-	gtk_widget_set_size_request(mh->button, h, h);
+        newbox = gtk_hbox_new(FALSE, 0);
+        gtk_widget_show(newbox);
+
+        if(mh->side == LEFT)
+        {
+            gtk_box_pack_start(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
+            gtk_box_pack_start(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
+        }
+        else
+        {
+            gtk_box_pack_end(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
+            gtk_box_pack_end(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
+        }
+
+        gtk_widget_set_size_request(mh->eventbox, w + 8 - h, h);
+        gtk_widget_set_size_request(mh->button, h, h);
     }
-    
+
     mh->box = newbox;
     gtk_container_add(GTK_CONTAINER(mh->container), mh->box);
 }

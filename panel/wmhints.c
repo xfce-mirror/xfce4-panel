@@ -24,7 +24,6 @@
 #include "xfce.h"
 #include "wmhints.h"
 #include "dialogs.h"
-#include "panel.h"
 
 gboolean atoms_created = FALSE;
 
@@ -90,10 +89,10 @@ void check_net_support(void)
             gdk_error_trap_pop();
             return;
         }
-        else if (i < 2)
-            g_usleep(2000000); /* wait 2 seconds */
+        else if(i < 2)
+            g_usleep(2000000);  /* wait 2 seconds */
 
-		gdk_flush();
+        gdk_flush();
         gdk_error_trap_pop();
     }
 

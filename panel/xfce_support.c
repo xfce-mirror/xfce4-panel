@@ -145,9 +145,9 @@ char *get_read_file(const char *name)
 {
     if(!disable_user_config)
     {
-		char *dir = get_save_dir();
-        char *file = g_build_filename(dir,name,NULL);
-		g_free(dir);
+        char *dir = get_save_dir();
+        char *file = g_build_filename(dir, name, NULL);
+        g_free(dir);
 
         if(g_file_test(file, G_FILE_TEST_EXISTS))
             return file;
@@ -394,36 +394,36 @@ GList *gnome_uri_list_extract_filenames(const gchar * uri_list)
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 gboolean confirm(const char *text, const char *stock, const char *action)
 {
-	GtkWidget *dialog, *button;
-	int response = GTK_RESPONSE_NONE;
-	
+    GtkWidget *dialog, *button;
+    int response = GTK_RESPONSE_NONE;
+
     dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
                                     GTK_DIALOG_MODAL |
                                     GTK_DIALOG_DESTROY_WITH_PARENT,
                                     GTK_MESSAGE_WARNING, GTK_BUTTONS_NONE, text);
-	
-	button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
-	gtk_widget_show(button);
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_NO);
 
-	if (action)
-		button = mixed_button_new(stock,action);
-	else
-		button = gtk_button_new_from_stock(stock);
-	gtk_widget_show(button);
-		
-	gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_YES);
-	
+    button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
+    gtk_widget_show(button);
+    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_NO);
+
+    if(action)
+        button = mixed_button_new(stock, action);
+    else
+        button = gtk_button_new_from_stock(stock);
+    gtk_widget_show(button);
+
+    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_YES);
+
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 
     response = gtk_dialog_run(GTK_DIALOG(dialog));
     gtk_widget_destroy(dialog);
-	
-	if (response == GTK_RESPONSE_YES)
-		return TRUE;
-	else
-		return FALSE;
-}
+
+    if(response == GTK_RESPONSE_YES)
+        return TRUE;
+    else
+        return FALSE;
+}
 
 void report_error(const char *text)
 {
@@ -519,7 +519,7 @@ static void *expand_path(void)
         const char *home = g_getenv("HOME");
         int homelen = strlen(home);
         const char *c;
-		char *s;
+        char *s;
         char newpath[MAXSTRLEN + 1];
 
 
@@ -570,29 +570,29 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean silent
 
     if(!g_spawn_command_line_async(execute, &error))
     {
-		char *msg;
+        char *msg;
 
-		msg = g_strcompress(error->message);
-	
-		if (silent)
-		{
-			g_printerr("xfce: %s\n", msg);
-		}
-		else
-		{
-			report_error(msg);
-		}
-	
-		g_free(msg);
+        msg = g_strcompress(error->message);
+
+        if(silent)
+        {
+            g_printerr("xfce: %s\n", msg);
+        }
+        else
+        {
+            report_error(msg);
+        }
+
+        g_free(msg);
     }
 }
 
 void exec_cmd(const char *cmd, gboolean in_terminal)
 {
-	real_exec_cmd(cmd, in_terminal, FALSE);
+    real_exec_cmd(cmd, in_terminal, FALSE);
 }
 
 void exec_cmd_silent(const char *cmd, gboolean in_terminal)
 {
-	real_exec_cmd(cmd, in_terminal, TRUE);
+    real_exec_cmd(cmd, in_terminal, TRUE);
 }

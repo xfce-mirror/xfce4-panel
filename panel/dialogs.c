@@ -43,14 +43,14 @@ enum
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
-void screen_button_dialog(ScreenButton *sb)
+void screen_button_dialog(ScreenButton * sb)
 {
     GtkWidget *dialog;
     GtkWidget *entry;
     GtkWidget *vbox1, *vbox2;
     const char *temp;
     int response = GTK_RESPONSE_NONE;
-    
+
     dialog = gtk_dialog_new_with_buttons(_("Change name"), GTK_WINDOW(toplevel),
                                          GTK_DIALOG_MODAL,
                                          GTK_STOCK_CANCEL,
@@ -58,32 +58,32 @@ void screen_button_dialog(ScreenButton *sb)
                                          GTK_STOCK_APPLY, RESPONSE_CHANGE, NULL);
 
     vbox1 = GTK_DIALOG(dialog)->vbox;
-    
+
     vbox2 = gtk_vbox_new(FALSE, 0);
     gtk_container_set_border_width(GTK_CONTAINER(vbox2), 4);
     gtk_widget_show(vbox2);
     gtk_box_pack_start(GTK_BOX(vbox1), vbox2, TRUE, TRUE, 0);
-    
+
     entry = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(entry), sb->name);
     gtk_widget_show(entry);
     gtk_box_pack_start(GTK_BOX(vbox2), entry, TRUE, TRUE, 0);
-    
+
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 
     response = gtk_dialog_run(GTK_DIALOG(dialog));
-    
-    if (response == RESPONSE_CHANGE)
+
+    if(response == RESPONSE_CHANGE)
     {
-	temp = gtk_entry_get_text(GTK_ENTRY(entry));
-	
-	if (temp && strlen(temp))
-	{
-	    sb->name = g_strdup(temp);
-	    gtk_label_set_text(GTK_LABEL(sb->label), temp);
-	}
+        temp = gtk_entry_get_text(GTK_ENTRY(entry));
+
+        if(temp && strlen(temp))
+        {
+            sb->name = g_strdup(temp);
+            gtk_label_set_text(GTK_LABEL(sb->label), temp);
+        }
     }
-    
+
     gtk_widget_destroy(dialog);
 }
 
@@ -157,7 +157,7 @@ static void create_backup(void)
 static void restore_backup(void)
 {
     /* we just let the calbacks of our dialog do all the work */
-    
+
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), backup.style);
@@ -199,7 +199,7 @@ static void add_header(const char *text, GtkBox * box)
     gtk_widget_set_name(eventbox, "gxfce_color2");
     gtk_widget_show(eventbox);
     gtk_container_add(GTK_CONTAINER(frame), eventbox);
-    
+
     label = gtk_label_new(NULL);
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     markup = g_strconcat("<b><span size=\"large\">", text, "</span></b>", NULL);
@@ -231,17 +231,17 @@ static void size_menu_changed(GtkOptionMenu * menu)
     if(GTK_WIDGET(menu) == size_menu && n != settings.size)
     {
         panel_set_size(n);
-	
-	if (n == TINY)
-	{
-	    gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
-	    
-	    gtk_widget_set_sensitive(style_menu, FALSE);
-	}
-	else
-	{
-	    gtk_widget_set_sensitive(style_menu, TRUE);
-	}
+
+        if(n == TINY)
+        {
+            gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
+
+            gtk_widget_set_sensitive(style_menu, FALSE);
+        }
+        else
+        {
+            gtk_widget_set_sensitive(style_menu, TRUE);
+        }
     }
     else if(n != settings.popup_size)
     {
@@ -264,11 +264,11 @@ static void add_size_menu(GtkWidget * option_menu, int size, gboolean is_popup)
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
 
-    if (!is_popup)
+    if(!is_popup)
     {
-	item = gtk_menu_item_new_with_label(_("Tiny"));
-	gtk_widget_show(item);
-	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+        item = gtk_menu_item_new_with_label(_("Tiny"));
+        gtk_widget_show(item);
+        gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
     }
 
     item = gtk_menu_item_new_with_label(_("Small"));
@@ -368,9 +368,9 @@ static void add_style_menu(GtkWidget * option_menu, int style)
     gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), style);
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(style_changed), NULL);
-    
-    if (settings.size == TINY)
-	gtk_widget_set_sensitive(option_menu, FALSE);
+
+    if(settings.size == TINY)
+        gtk_widget_set_sensitive(option_menu, FALSE);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -880,11 +880,11 @@ void global_settings_dialog(void)
                 g_free(settings.lock_command);
                 settings.lock_command = g_strdup(cmd);
             }
-	    else
-	    {
+            else
+            {
                 g_free(settings.lock_command);
                 settings.lock_command = NULL;
-	    }
+            }
 
             cmd = gtk_entry_get_text(GTK_ENTRY(exit_entry));
 
@@ -893,11 +893,11 @@ void global_settings_dialog(void)
                 g_free(settings.exit_command);
                 settings.exit_command = g_strdup(cmd);
             }
-	    else
-	    {
+            else
+            {
                 g_free(settings.exit_command);
                 settings.exit_command = NULL;
-	    }
+            }
 
             done = TRUE;
         }

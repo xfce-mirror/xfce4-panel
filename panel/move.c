@@ -25,7 +25,6 @@
 
 #include "xfce.h"
 #include "move.h"
-#include "panel.h"
 
 GdkGC *DrawGC = NULL;
 static gboolean xgrabbed = FALSE;
@@ -185,7 +184,7 @@ move_released(GtkWidget * widget, GdkEventButton * event, gpointer * topwin)
                 (xp > 0) ? xp : 0, (yp > 0) ? yp : 0);
     gtk_grab_remove(widget);
     gdk_pointer_ungrab(0);
-    
+
     gtk_window_get_position(GTK_WINDOW(toplevel), &settings.x, &settings.y);
 }
 

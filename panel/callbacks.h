@@ -29,7 +29,7 @@ gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data);
 
 /*****************************************************************************/
 
-void screen_button_click(GtkWidget *b, ScreenButton *sb);
+void screen_button_click(GtkWidget * b, ScreenButton * sb);
 
 gboolean screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev,
                                   ScreenButton * sb);
@@ -58,9 +58,9 @@ gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp);
 
 void panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                         gint x, gint y, GtkSelectionData * data,
-                        guint info, guint time, PanelItem *pi);
+                        guint info, guint time, PanelItem * pi);
 
-void panel_item_click_cb(GtkButton * b, PanelItem *pi);
+void panel_item_click_cb(GtkButton * b, PanelItem * pi);
 
 /*****************************************************************************/
 
@@ -73,9 +73,9 @@ void addtomenu_item_click_cb(GtkButton * b, PanelPopup * pp);
 gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi);
 
 void menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
-                        gint x, gint y, GtkSelectionData * data,
-                        guint info, guint time, MenuItem *mi);
+                       gint x, gint y, GtkSelectionData * data,
+                       guint info, guint time, MenuItem * mi);
 
-void menu_item_click_cb(GtkButton * b, MenuItem *mi);
+void menu_item_click_cb(GtkButton * b, MenuItem * mi);
 
 #endif /* __XFCE_CALLBACKS_H__ */

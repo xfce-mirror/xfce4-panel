@@ -28,7 +28,6 @@
 #include "xfce_support.h"
 #include "dialogs.h"
 #include "item_dialog.h"
-#include "panel.h"
 #include "central.h"
 #include "side.h"
 #include "item.h"
@@ -94,8 +93,8 @@ screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev, ScreenButton * sb)
 
 void mini_lock_cb(void)
 {
-	char *cmd = settings.lock_command;
-	
+    char *cmd = settings.lock_command;
+
     if(!cmd)
         return;
 
@@ -167,9 +166,9 @@ gboolean panel_group_press_cb(GtkButton * b, GdkEventButton * ev, PanelGroup * p
     if(ev->button != 3)
         return FALSE;
 
-	if (disable_user_config)
-		return FALSE;
-	
+    if(disable_user_config)
+        return FALSE;
+
     edit_panel_group_dialog(pg);
 
     return TRUE;
@@ -415,9 +414,9 @@ gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi)
     if(ev->button != 3)
         return FALSE;
 
-	if (disable_user_config)
-		return FALSE;
-	
+    if(disable_user_config)
+        return FALSE;
+
     edit_menu_item_dialog(mi);
 
     return TRUE;

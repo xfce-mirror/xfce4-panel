@@ -44,23 +44,23 @@ PanelModule *panel_module_new(PanelGroup * pg)
     pm->name = NULL;
     pm->dir = NULL;
     pm->gmodule = NULL;
-    
+
     pm->caption = NULL;
     pm->data = NULL;
     pm->main = NULL;
-    
+
     pm->interval = 0;
     pm->timeout_id = 0;
     pm->update = NULL;
-    
+
     pm->free = NULL;
-    
+
     pm->set_size = NULL;
     pm->set_style = NULL;
     pm->set_icon_theme = NULL;
-    
-	pm->add_options = NULL;
-	pm->apply_configuration = NULL;
+
+    pm->add_options = NULL;
+    pm->apply_configuration = NULL;
 
     return pm;
 }
@@ -73,21 +73,21 @@ static char *find_module(const char *name)
     char **dirs, **d;
     char *path;
 
-	dirs = get_plugin_dirs();
-	
-	for (d = dirs; *d; d++)
-	{
-		path = g_build_filename(*d, name, NULL);
+    dirs = get_plugin_dirs();
 
-		if(g_file_test(path, G_FILE_TEST_EXISTS))
-		{
-			g_strfreev(dirs);
-			return path;
-		}
-		else
-			g_free(path);
-	}
-	
+    for(d = dirs; *d; d++)
+    {
+        path = g_build_filename(*d, name, NULL);
+
+        if(g_file_test(path, G_FILE_TEST_EXISTS))
+        {
+            g_strfreev(dirs);
+            return path;
+        }
+        else
+            g_free(path);
+    }
+
     return NULL;
 }
 
@@ -109,16 +109,16 @@ gboolean create_extern_module(PanelModule * pm)
 
     pm->gmodule = g_module_open(path, 0);
 
-    if(!pm->gmodule) 
+    if(!pm->gmodule)
     {
         g_printerr("gmodule could not be opened: %s\n", path);
-		g_free(path);
+        g_free(path);
         return FALSE;
     }
-    else if (!g_module_symbol(pm->gmodule, "is_xfce_panel_module", &tmp))
+    else if(!g_module_symbol(pm->gmodule, "is_xfce_panel_module", &tmp))
     {
         g_printerr("Not a panel module: %s\n", path);
-		g_free(path);
+        g_free(path);
         return FALSE;
     }
 
@@ -162,9 +162,9 @@ gboolean create_panel_module(PanelModule * pm)
     {
         g_signal_connect(pm->main, "button-press-event",
                          G_CALLBACK(panel_group_press_cb), pm->parent);
-	
-	if (pm->parent)
-	    panel_module_start(pm);
+
+        if(pm->parent)
+            panel_module_start(pm);
     }
 
     return success;
@@ -178,9 +178,9 @@ void panel_module_pack(PanelModule * pm, GtkBox * box)
         pm->pack(pm, box);
     else
         gtk_box_pack_start(box, pm->main, TRUE, TRUE, 0);
-    
-    if (pm->parent)
-	panel_module_start(pm);
+
+    if(pm->parent)
+        panel_module_start(pm);
 }
 
 void panel_module_unpack(PanelModule * pm, GtkContainer * container)
@@ -189,7 +189,7 @@ void panel_module_unpack(PanelModule * pm, GtkContainer * container)
         pm->unpack(pm, container);
     else
         gtk_container_remove(container, pm->main);
-    
+
     panel_module_stop(pm);
 }
 
@@ -220,7 +220,7 @@ void panel_module_stop(PanelModule * pm)
 {
     if(pm->timeout_id > 0)
         g_source_remove(pm->timeout_id);
-    
+
     pm->timeout_id = 0;
 }
 
@@ -249,31 +249,31 @@ void panel_module_set_icon_theme(PanelModule * pm, const char *theme)
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 void panel_module_add_options(PanelModule * pm, GtkContainer * container)
 {
-	if (pm->add_options)
-		pm->add_options(pm, container);
-	else
-	{
-		GtkWidget *hbox, *image, *label;
-		
-		hbox = gtk_hbox_new(FALSE, 4);
-		gtk_widget_show(hbox);
-		gtk_container_set_border_width(GTK_CONTAINER(hbox), 10);
-		gtk_container_add(container, hbox);
-		
-		image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_MENU);
-		gtk_widget_show(image);
-		gtk_box_pack_start(GTK_BOX(hbox), image, TRUE, FALSE, 0);
-		
-		label = gtk_label_new(_("This module has no configuration options"));
-		gtk_widget_show(label);
-		gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, FALSE, 0);
-	}
+    if(pm->add_options)
+        pm->add_options(pm, container);
+    else
+    {
+        GtkWidget *hbox, *image, *label;
+
+        hbox = gtk_hbox_new(FALSE, 4);
+        gtk_widget_show(hbox);
+        gtk_container_set_border_width(GTK_CONTAINER(hbox), 10);
+        gtk_container_add(container, hbox);
+
+        image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_MENU);
+        gtk_widget_show(image);
+        gtk_box_pack_start(GTK_BOX(hbox), image, TRUE, FALSE, 0);
+
+        label = gtk_label_new(_("This module has no configuration options"));
+        gtk_widget_show(label);
+        gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, FALSE, 0);
+    }
 }
 
 void panel_module_apply_configuration(PanelModule * pm)
 {
-	if (pm->apply_configuration)
-		pm->apply_configuration(pm);
+    if(pm->apply_configuration)
+        pm->apply_configuration(pm);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -303,13 +303,13 @@ void panel_module_parse_xml(xmlNodePtr node, PanelModule * pm)
     }
 }
 
-void panel_module_write_xml(xmlNodePtr root, PanelModule *pm)
+void panel_module_write_xml(xmlNodePtr root, PanelModule * pm)
 {
     xmlNodePtr node;
     char value[3];
-    
+
     node = xmlNewTextChild(root, NULL, "Module", pm->name);
-    
+
     snprintf(value, 3, "%d", pm->id);
     xmlSetProp(node, "id", value);
 }
