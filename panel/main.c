@@ -45,8 +45,7 @@
 #include <unistd.h>
 #endif
 
-#include <libxfce4util/i18n.h>
-#include <libxfce4util/debug.h>
+#include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/session-client.h>
 #include <libxfcegui4/netk-util.h>
 

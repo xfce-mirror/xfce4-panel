@@ -21,8 +21,7 @@
 #include <config.h>
 #endif
 
-#include <libxfce4util/i18n.h>
-#include <libxfcegui4/icons.h>
+#include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
 #include "icons/xfce4-panel-icon.h"

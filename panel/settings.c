@@ -33,7 +33,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include <libxfce4util/debug.h>
+#include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
 #include "settings.h"

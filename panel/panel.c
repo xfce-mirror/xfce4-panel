@@ -34,8 +34,7 @@
 
 #include <X11/Xlib.h>
 
-#include <libxfce4util/debug.h>
-#include <libxfce4util/i18n.h>
+#include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libnetk.h>
 #include <libxfcegui4/xinerama.h>
 

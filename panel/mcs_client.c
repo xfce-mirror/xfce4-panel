@@ -34,8 +34,7 @@
 #include <X11/Xatom.h>
 #include <gdk/gdkx.h>
 
-#include <libxfce4util/i18n.h>
-#include <libxfce4util/debug.h>
+#include <libxfce4util/libxfce4util.h>
 #include <libxfce4mcs/mcs-client.h>
 #include <libxfcegui4/libnetk.h>
 

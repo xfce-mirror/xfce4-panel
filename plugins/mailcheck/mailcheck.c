@@ -41,8 +41,7 @@
 #include <netdb.h>
 #include <sys/socket.h>
 
-#include <libxfce4util/i18n.h>
-#include <libxfce4util/debug.h>
+#include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/xfce_iconbutton.h>
 
 #include <panel/xfce.h>

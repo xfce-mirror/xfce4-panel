@@ -35,9 +35,7 @@
 #include <gmodule.h>
 #include <dbh.h>
 
-#include <libxfce4util/debug.h>
-#include <libxfce4util/i18n.h>
-#include <libxfce4util/util.h>
+#include <libxfce4util/libxfce4util.h>
 
 #define RUN_FLAG_FILE "xffm.runflag.2.dbh"
 #define RUN_DBH_FILE "xffm.runlist.2.dbh"

@@ -27,7 +27,7 @@
 #include <config.h>
 #endif
 
-#include <libxfce4util/i18n.h>
+#include <libxfce4util/libxfce4util.h>
 
 #include <panel/plugins.h>
 #include <panel/xfce.h>

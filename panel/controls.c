@@ -44,8 +44,7 @@
 #include <config.h>
 #endif
 
-#include <libxfce4util/i18n.h>
-#include <libxfce4util/debug.h>
+#include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
 #include "item.h"
@@ -572,25 +571,6 @@ add_control (GtkWidget * w, ControlClassInfo *info)
 
     if (hidden)
 	panel_set_autohide (TRUE);
-}
-
-static GtkItemFactoryEntry control_items[] = {
-    {"/Item", NULL, NULL, 0, "<Branch>"},
-    {N_("/_Properties..."), NULL, edit_control, 0, "<Item>"},
-    {N_("/_Remove"), NULL, remove_control, 0, "<Item>"},
-    {"/sep", NULL, NULL, 0, "<Separator>"},
-    {N_("/Add _new item"), NULL, NULL, 0, "<Branch>"},
-};
-
-static const char *
-translate_menu (const char *msg)
-{
-#if ENABLE_NLS
-    /* ensure we use the panel domain and not that of a plugin */
-    return dgettext (GETTEXT_PACKAGE, msg);
-#else
-    return msg;
-#endif
 }
 
 GtkWidget *

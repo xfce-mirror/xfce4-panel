@@ -41,7 +41,7 @@
 #include <unistd.h>
 #endif
 
-#include <libxfce4util/i18n.h>
+#include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/xfce_clock.h>
 
 #include <panel/global.h>
