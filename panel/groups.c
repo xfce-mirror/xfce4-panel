@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,19 +17,19 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-/*  Groups
- *  ------
- *  The panel consist of a collection of panel groups. 
+/**
+ * Groups
+ * ------
+ * The panel consist of a collection of panel groups. 
  *
- *  A PanelGroup contains two items: a panel control and a popup button. 
+ * A PanelGroup contains two items: a panel control and a popup button. 
  *
- *  groups_* functions are for general houskeeping and to perform actions on
- *  all panel groups.
+ * groups_* functions are for general houskeeping and to perform actions on
+ * all panel groups.
  *
- *  panel_group_* funtions act on a single PanelGroup and handle things like
- *  creation destruction and layout.
- *
-*/
+ * panel_group_* funtions act on a single PanelGroup and handle things like
+ * creation destruction and layout.
+ **/
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -284,9 +284,7 @@ old_groups_set_from_xml (int side, xmlNodePtr node)
 void
 groups_set_from_xml (xmlNodePtr node)
 {
-    xmlNodePtr child;
     int i;
-    PanelGroup *group;
 
     /* children are "Group" nodes */
     if (node)
@@ -295,6 +293,8 @@ groups_set_from_xml (xmlNodePtr node)
     for (i = 0; node; i++, node = node->next)
     {
 	gboolean control_created = FALSE;
+	xmlNodePtr child, popup_node = NULL;
+	PanelGroup *group;
 
 	group = create_panel_group (i);
 	panel_group_pack (group, groupbox);
@@ -309,16 +309,24 @@ groups_set_from_xml (xmlNodePtr node)
 	    /* create popup items and panel control */
 	    if (xmlStrEqual (child->name, (const xmlChar *) "Popup"))
 	    {
-		group->popup = create_panel_popup ();
-		panel_group_arrange (group);
-		gtk_widget_hide (group->popup->button);
-		panel_popup_set_from_xml (group->popup, child);
+		popup_node = child;
 	    }
 	    else if (xmlStrEqual
 		     (child->name, (const xmlChar *) "Control"))
 	    {
+		/* TODO: make this part of control creation */
+		if (popup_node)
+		{
+		    group->popup = create_panel_popup ();
+		    panel_group_arrange (group);
+		    gtk_widget_hide (group->popup->button);
+		    panel_popup_set_from_xml (group->popup, popup_node);
+		}
+		
 		control_created = 
 		    control_set_from_xml (group->control, child);
+
+		break;
 	    }
 	}
 
@@ -329,8 +337,6 @@ groups_set_from_xml (xmlNodePtr node)
 	    panel_group_free (group);
 	}
     }
-
-    settings.num_groups = g_slist_length (group_list);
 }
 
 void
@@ -614,4 +620,8 @@ groups_add_control (Control *control, int index)
     settings.num_groups++;
 }
 
-
+int
+groups_get_n_controls (void)
+{
+    return g_slist_length (group_list);
+}

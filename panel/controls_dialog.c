@@ -78,6 +78,7 @@ static void
 add_position_option (GtkBox *box, Control *control)
 {
     GtkWidget *pos_spin, *hbox, *label;
+    int n;
     
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
@@ -89,9 +90,11 @@ add_position_option (GtkBox *box, Control *control)
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    if (settings.num_groups > 1)
+    n = groups_get_n_controls ();
+    
+    if (n > 1)
     {
-	pos_spin = gtk_spin_button_new_with_range (1, settings.num_groups, 1);
+	pos_spin = gtk_spin_button_new_with_range (1, n, 1);
 	
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin), 
 				   control->index + 1);

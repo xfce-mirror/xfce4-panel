@@ -86,9 +86,10 @@ int top_height[] = { 14, 16, 18, 20 };
 
 int popup_icon_size[] = { 22, 26, 26, 32 };
 
-
 /* static prototypes *
  * ----------------- */
+
+static void update_partial_struts (Panel *p, int x, int y);
 
 static void update_arrow_direction (Panel *p);
 
@@ -102,6 +103,65 @@ static void panel_set_hidden (Panel * p, gboolean hide);
 
 static void init_settings (Panel *p);
 
+
+static void 
+update_partial_struts (Panel *p, int x, int y)
+{
+    gulong data [12] = { 0, };
+    int w, h;
+
+    w = p->priv->req.width;
+    h = p->priv->req.height;
+
+    if (p->priv->settings.autohide)
+    {
+	if (p->priv->settings.orientation == HORIZONTAL)
+	    h = HIDDEN_SIZE;
+	else
+	    w = HIDDEN_SIZE;
+    }
+	    
+    switch (p->priv->side)
+    {
+	case LEFT:
+	    data[0]  = w;			 /* left           */
+	    
+	    data[4]  = y;			 /* left_start_y   */
+	    data[5]  = y + h;			 /* left_end_y     */
+	    break;
+	case RIGHT:
+	    data[1]  = w;			 /* right          */
+	    
+	    data[6]  = y;			 /* right_start_y  */
+	    data[7]  = y + h;			 /* right_end_y    */
+	    break;
+	case TOP:
+	    data[2]  = h;			 /* top            */
+	    
+	    data[8]  = x;			 /* top_start_x    */
+	    data[9]  = x + w;			 /* top_end_x      */
+	    break;
+	default:
+	    data[3]  = h;			 /* bottom         */
+	    
+	    data[10] = x;			 /* bottom_start_x */
+	    data[11] = x + w;			 /* bottom_end_x   */
+    }
+
+    gdk_error_trap_push ();
+#if 0
+    gdk_property_change (p->toplevel->window,
+			 gdk_atom_intern ("_NET_WM_STRUT", FALSE),
+			 gdk_atom_intern ("CARDINAL", FALSE), 32,
+			 GDK_PROP_MODE_REPLACE, (guchar *) &data, 4);
+#endif
+    gdk_property_change (p->toplevel->window,
+			 gdk_atom_intern ("_NET_WM_STRUT_PARTIAL", FALSE),
+			 gdk_atom_intern ("CARDINAL", FALSE), 32,
+			 GDK_PROP_MODE_REPLACE, (guchar *) &data, 12);
+
+    gdk_error_trap_pop ();
+}
 
 /**
  * update_arrow_direction
@@ -354,6 +414,8 @@ panel_reallocate (Panel * p)
 
 	/* Need to save position here... */
 	write_panel_config ();
+
+	update_partial_struts (p, xnew, ynew);
     }
 }
 
@@ -549,6 +611,8 @@ handler_move_end_cb (GtkWidget * h, Panel * p)
     }
 
     write_panel_config ();
+
+    update_partial_struts (p, x, y);
 }
 
 static void
@@ -822,6 +886,8 @@ screen_size_changed (GdkScreen * screen, Panel * p)
 	panel_set_hidden (p, TRUE);
     
     write_panel_config ();
+
+    update_partial_struts (p, p->position.x, p->position.y);
 }
 
 static GtkWidget *
@@ -838,6 +904,10 @@ create_panel_window (Panel * p)
     gtk_window_set_decorated (window, FALSE);
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);
+
+    gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DOCK);
+    gtk_window_set_skip_taskbar_hint (window, TRUE);
+    gtk_window_set_skip_pager_hint (window, TRUE);
 
     pb = get_panel_pixbuf ();
     gtk_window_set_icon (window, pb);
@@ -934,6 +1004,8 @@ connect_auto_resize (Panel *p)
     if (p->priv->settings.autohide)
 	panel_set_autohide (TRUE);
 
+    update_partial_struts (p, p->position.x, p->position.y);
+    
     g_signal_connect (p->toplevel, "size-allocate", 
 	    	      G_CALLBACK (panel_allocate_cb), p);
     return FALSE;
@@ -992,8 +1064,8 @@ create_panel (void)
     gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
     
     gtk_widget_show_now (p->toplevel);
-    set_window_layer (p->toplevel, p->priv->settings.layer);
-    set_window_skip (p->toplevel);
+/*    set_window_layer (p->toplevel, p->priv->settings.layer); 
+    set_window_skip (p->toplevel);*/
 
     g_signal_connect (p->priv->screen, "size-changed",
 		      G_CALLBACK (screen_size_changed), p);
@@ -1090,6 +1162,8 @@ panel_set_orientation (int orientation)
 
     if (hidden)
 	panel_set_autohide (TRUE);
+    
+    update_partial_struts (&panel, panel.position.x, panel.position.y);
 }
 
 void
@@ -1125,6 +1199,8 @@ panel_set_size (int size)
     groups_set_size (size);
     handle_set_size (panel.handles[LEFT], size);
     handle_set_size (panel.handles[RIGHT], size);
+
+    panel_set_theme (panel.priv->settings.theme);
 }
 
 void
@@ -1152,20 +1228,16 @@ panel_set_theme (const char *theme)
 {
     g_free (panel.priv->settings.theme);
     panel.priv->settings.theme = g_strdup (theme);
-    xfce_set_icon_theme(theme);
+
+    xfce_set_icon_theme (theme);
 
     /* backwards compat */
     settings = panel.priv->settings;
     
-#if GTK_CHECK_VERSION(2, 4, 0)
-    gtk_settings_set_string_property (gtk_settings_get_default (),
-    		"gtk-icon-theme-name", theme, "panel.c:1108");
-#endif
-
-    if (!panel.priv->is_created)
-	return;
-
-    groups_set_theme (theme);
+    if (panel.priv->is_created)
+    {
+	groups_set_theme (theme);
+    }
 }
 
 void
@@ -1263,6 +1335,8 @@ panel_set_position (void)
 
     if (hidden)
 	panel_set_autohide (TRUE);
+    
+    update_partial_struts (&panel, panel.position.x, panel.position.y);
 }
 
 void

@@ -1818,7 +1818,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xfce4-panel
- VERSION=4.1.5
+ VERSION=4.1.6
 
 
 cat >>confdefs.h <<_ACEOF
@@ -23942,23 +23942,23 @@ fi
   else
      PKG_CONFIG_MIN_VERSION=0.9.0
      if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
-        echo "$as_me:$LINENO: checking for libxfcegui4-1.0 >= 4.1.14" >&5
-echo $ECHO_N "checking for libxfcegui4-1.0 >= 4.1.14... $ECHO_C" >&6
+        echo "$as_me:$LINENO: checking for libxfcegui4-1.0 >= 4.1.19" >&5
+echo $ECHO_N "checking for libxfcegui4-1.0 >= 4.1.19... $ECHO_C" >&6
 
-        if $PKG_CONFIG --exists "libxfcegui4-1.0 >= 4.1.14" ; then
+        if $PKG_CONFIG --exists "libxfcegui4-1.0 >= 4.1.19" ; then
             echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
             succeeded=yes
 
             echo "$as_me:$LINENO: checking LIBXFCEGUI4_CFLAGS" >&5
 echo $ECHO_N "checking LIBXFCEGUI4_CFLAGS... $ECHO_C" >&6
-            LIBXFCEGUI4_CFLAGS=`$PKG_CONFIG --cflags "libxfcegui4-1.0 >= 4.1.14"`
+            LIBXFCEGUI4_CFLAGS=`$PKG_CONFIG --cflags "libxfcegui4-1.0 >= 4.1.19"`
             echo "$as_me:$LINENO: result: $LIBXFCEGUI4_CFLAGS" >&5
 echo "${ECHO_T}$LIBXFCEGUI4_CFLAGS" >&6
 
             echo "$as_me:$LINENO: checking LIBXFCEGUI4_LIBS" >&5
 echo $ECHO_N "checking LIBXFCEGUI4_LIBS... $ECHO_C" >&6
-            LIBXFCEGUI4_LIBS=`$PKG_CONFIG --libs "libxfcegui4-1.0 >= 4.1.14"`
+            LIBXFCEGUI4_LIBS=`$PKG_CONFIG --libs "libxfcegui4-1.0 >= 4.1.19"`
             echo "$as_me:$LINENO: result: $LIBXFCEGUI4_LIBS" >&5
 echo "${ECHO_T}$LIBXFCEGUI4_LIBS" >&6
         else
@@ -23966,7 +23966,7 @@ echo "${ECHO_T}$LIBXFCEGUI4_LIBS" >&6
             LIBXFCEGUI4_LIBS=""
             ## If we have a custom action on failure, don't print errors, but
             ## do set a variable so people can do so.
-            LIBXFCEGUI4_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libxfcegui4-1.0 >= 4.1.14"`
+            LIBXFCEGUI4_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libxfcegui4-1.0 >= 4.1.19"`
             echo $LIBXFCEGUI4_PKG_ERRORS
         fi
 
@@ -23981,12 +23981,12 @@ echo "${ECHO_T}$LIBXFCEGUI4_LIBS" >&6
   if test $succeeded = yes; then
      :
   else
-     { { echo "$as_me:$LINENO: error: Library requirements (libxfcegui4-1.0 >= 4.1.14) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
-echo "$as_me: error: Library requirements (libxfcegui4-1.0 >= 4.1.14) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
+     { { echo "$as_me:$LINENO: error: Library requirements (libxfcegui4-1.0 >= 4.1.19) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
+echo "$as_me: error: Library requirements (libxfcegui4-1.0 >= 4.1.19) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
    { (exit 1); exit 1; }; }
   fi
 
-  LIBXFCEGUI4_REQUIRED_VERSION=4.1.14
+  LIBXFCEGUI4_REQUIRED_VERSION=4.1.19
 
 
 
@@ -24432,7 +24432,7 @@ echo "${ECHO_T}yes" >&6
   fi
 
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ac_config_files="$ac_config_files xfce4.spec Makefile doc/Makefile doc/C/Makefile doc/C/images/Makefile doc/fr/Makefile doc/fr/images/Makefile po/Makefile.in icons/Makefile panel/Makefile panel/xfce4-panel-1.0.pc plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile plugins/pager/Makefile plugins/sample-plugin/Makefile plugins/separator/Makefile settings/Makefile themes/Makefile themes/Crystal/Makefile themes/Crystal/48x48/Makefile themes/Crystal/48x48/emblems/Makefile themes/Crystal/22x22/Makefile themes/Crystal/22x22/emblems/Makefile themes/Curve/Makefile themes/Curve/48x48/Makefile themes/Curve/48x48/emblems/Makefile themes/Curve/22x22/Makefile themes/Curve/22x22/emblems/Makefile themes/FreeIcons/Makefile themes/FreeIcons/48x48/Makefile themes/FreeIcons/48x48/emblems/Makefile themes/FreeIcons/24x24/Makefile themes/FreeIcons/24x24/emblems/Makefile themes/FreeIcons/22x22/Makefile themes/FreeIcons/22x22/emblems/Makefile themes/Gnome/Makefile themes/Gnome/48x48/Makefile themes/Gnome/48x48/emblems/Makefile themes/Gnome/50x50/Makefile themes/Gnome/50x50/emblems/Makefile themes/Gnome/24x24/Makefile themes/Gnome/24x24/emblems/Makefile themes/Noia/Makefile themes/Noia/48x48/Makefile themes/Noia/48x48/emblems/Makefile themes/Noia/22x22/Makefile themes/Noia/22x22/emblems/Makefile themes/XFce/Makefile themes/XFce/48x48/Makefile themes/XFce/48x48/emblems/Makefile themes/XFce/19x19/Makefile themes/XFce/19x19/emblems/Makefile themes/XFce/16x16/Makefile themes/XFce/16x16/emblems/Makefile themes/XFce/24x24/Makefile themes/XFce/24x24/emblems/Makefile themes/XFce/14x14/Makefile themes/XFce/14x14/emblems/Makefile themes/XFce/50x50/Makefile themes/XFce/50x50/emblems/Makefile themes/XFce/53x53/Makefile themes/XFce/53x53/emblems/Makefile"
+                                                                                                                                                                                                                  ac_config_files="$ac_config_files xfce4.spec Makefile doc/Makefile doc/C/Makefile doc/C/images/Makefile doc/fr/Makefile doc/fr/images/Makefile po/Makefile.in icons/Makefile panel/Makefile panel/xfce4-panel-1.0.pc plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile plugins/pager/Makefile plugins/sample-plugin/Makefile plugins/separator/Makefile settings/Makefile themes/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -25025,50 +25025,6 @@ do
   "plugins/separator/Makefile" ) CONFIG_FILES="$CONFIG_FILES plugins/separator/Makefile" ;;
   "settings/Makefile" ) CONFIG_FILES="$CONFIG_FILES settings/Makefile" ;;
   "themes/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Makefile" ;;
-  "themes/Crystal/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Crystal/Makefile" ;;
-  "themes/Crystal/48x48/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Crystal/48x48/Makefile" ;;
-  "themes/Crystal/48x48/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Crystal/48x48/emblems/Makefile" ;;
-  "themes/Crystal/22x22/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Crystal/22x22/Makefile" ;;
-  "themes/Crystal/22x22/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Crystal/22x22/emblems/Makefile" ;;
-  "themes/Curve/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Curve/Makefile" ;;
-  "themes/Curve/48x48/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Curve/48x48/Makefile" ;;
-  "themes/Curve/48x48/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Curve/48x48/emblems/Makefile" ;;
-  "themes/Curve/22x22/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Curve/22x22/Makefile" ;;
-  "themes/Curve/22x22/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Curve/22x22/emblems/Makefile" ;;
-  "themes/FreeIcons/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/FreeIcons/Makefile" ;;
-  "themes/FreeIcons/48x48/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/FreeIcons/48x48/Makefile" ;;
-  "themes/FreeIcons/48x48/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/FreeIcons/48x48/emblems/Makefile" ;;
-  "themes/FreeIcons/24x24/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/FreeIcons/24x24/Makefile" ;;
-  "themes/FreeIcons/24x24/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/FreeIcons/24x24/emblems/Makefile" ;;
-  "themes/FreeIcons/22x22/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/FreeIcons/22x22/Makefile" ;;
-  "themes/FreeIcons/22x22/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/FreeIcons/22x22/emblems/Makefile" ;;
-  "themes/Gnome/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/Makefile" ;;
-  "themes/Gnome/48x48/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/48x48/Makefile" ;;
-  "themes/Gnome/48x48/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/48x48/emblems/Makefile" ;;
-  "themes/Gnome/50x50/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/50x50/Makefile" ;;
-  "themes/Gnome/50x50/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/50x50/emblems/Makefile" ;;
-  "themes/Gnome/24x24/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/24x24/Makefile" ;;
-  "themes/Gnome/24x24/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Gnome/24x24/emblems/Makefile" ;;
-  "themes/Noia/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Noia/Makefile" ;;
-  "themes/Noia/48x48/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Noia/48x48/Makefile" ;;
-  "themes/Noia/48x48/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Noia/48x48/emblems/Makefile" ;;
-  "themes/Noia/22x22/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Noia/22x22/Makefile" ;;
-  "themes/Noia/22x22/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Noia/22x22/emblems/Makefile" ;;
-  "themes/XFce/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/Makefile" ;;
-  "themes/XFce/48x48/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/48x48/Makefile" ;;
-  "themes/XFce/48x48/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/48x48/emblems/Makefile" ;;
-  "themes/XFce/19x19/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/19x19/Makefile" ;;
-  "themes/XFce/19x19/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/19x19/emblems/Makefile" ;;
-  "themes/XFce/16x16/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/16x16/Makefile" ;;
-  "themes/XFce/16x16/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/16x16/emblems/Makefile" ;;
-  "themes/XFce/24x24/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/24x24/Makefile" ;;
-  "themes/XFce/24x24/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/24x24/emblems/Makefile" ;;
-  "themes/XFce/14x14/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/14x14/Makefile" ;;
-  "themes/XFce/14x14/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/14x14/emblems/Makefile" ;;
-  "themes/XFce/50x50/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/50x50/Makefile" ;;
-  "themes/XFce/50x50/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/50x50/emblems/Makefile" ;;
-  "themes/XFce/53x53/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/53x53/Makefile" ;;
-  "themes/XFce/53x53/emblems/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/XFce/53x53/emblems/Makefile" ;;
   "depfiles" ) CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
   "default-1" ) CONFIG_COMMANDS="$CONFIG_COMMANDS default-1" ;;
   "config.h" ) CONFIG_HEADERS="$CONFIG_HEADERS config.h" ;;
@@ -25991,4 +25947,5 @@ if test "$no_create" != yes; then
   # would make configure fail if this is the last instruction.
   $ac_cs_success || { (exit 1); exit 1; }
 fi
+
 

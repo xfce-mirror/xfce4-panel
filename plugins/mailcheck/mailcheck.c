@@ -93,27 +93,19 @@ enum
 };
 
 static char *mailcheck_icon_names[] = {
-    "mail_section",
+    "xfce-mail",
+    "mail",
     "gnome-mailcheck",
-    "xfce-mail"
+    NULL
 };
 
 static GdkPixbuf *
 get_mail_pixbuf (void)
 {
-    GdkPixbuf *pb = NULL;
-    char *name;
-    int i;
+    GdkPixbuf *pb;
 
-    for (i = 0; i < G_N_ELEMENTS (mailcheck_icon_names); ++i)
-    {
-	name = mailcheck_icon_names [i];
-
-	pb = xfce_load_themed_icon (name, icon_size [settings.size]);
-
-	if (pb)
-	    break;
-    }
+    pb = themed_pixbuf_from_name_list (mailcheck_icon_names, 
+	    			       icon_size [settings.size]);
 
     if (G_UNLIKELY (!pb))
     {

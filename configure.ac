@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.1.5])
+AM_INIT_AUTOMAKE([xfce4-panel], [4.1.6])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -41,7 +41,7 @@ BM_LIBX11_REQUIRE
 
 dnl Check for required packages
 BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.0.0])
-BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.1.14])
+BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.1.19])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 
 dnl Check for dbh installed for completion combo
@@ -86,48 +86,49 @@ plugins/sample-plugin/Makefile
 plugins/separator/Makefile
 settings/Makefile
 themes/Makefile
-themes/Crystal/Makefile
-themes/Crystal/48x48/Makefile
-themes/Crystal/48x48/emblems/Makefile
-themes/Crystal/22x22/Makefile
-themes/Crystal/22x22/emblems/Makefile
-themes/Curve/Makefile
-themes/Curve/48x48/Makefile
-themes/Curve/48x48/emblems/Makefile
-themes/Curve/22x22/Makefile
-themes/Curve/22x22/emblems/Makefile
-themes/FreeIcons/Makefile
-themes/FreeIcons/48x48/Makefile
-themes/FreeIcons/48x48/emblems/Makefile
-themes/FreeIcons/24x24/Makefile
-themes/FreeIcons/24x24/emblems/Makefile
-themes/FreeIcons/22x22/Makefile
-themes/FreeIcons/22x22/emblems/Makefile
-themes/Gnome/Makefile
-themes/Gnome/48x48/Makefile
-themes/Gnome/48x48/emblems/Makefile
-themes/Gnome/50x50/Makefile
-themes/Gnome/50x50/emblems/Makefile
-themes/Gnome/24x24/Makefile
-themes/Gnome/24x24/emblems/Makefile
-themes/Noia/Makefile
-themes/Noia/48x48/Makefile
-themes/Noia/48x48/emblems/Makefile
-themes/Noia/22x22/Makefile
-themes/Noia/22x22/emblems/Makefile
-themes/XFce/Makefile
-themes/XFce/48x48/Makefile
-themes/XFce/48x48/emblems/Makefile
-themes/XFce/19x19/Makefile
-themes/XFce/19x19/emblems/Makefile
-themes/XFce/16x16/Makefile
-themes/XFce/16x16/emblems/Makefile
-themes/XFce/24x24/Makefile
-themes/XFce/24x24/emblems/Makefile
-themes/XFce/14x14/Makefile
-themes/XFce/14x14/emblems/Makefile
-themes/XFce/50x50/Makefile
-themes/XFce/50x50/emblems/Makefile
-themes/XFce/53x53/Makefile
-themes/XFce/53x53/emblems/Makefile
 ])
+
+dnl themes/Crystal/Makefile
+dnl themes/Crystal/48x48/Makefile
+dnl themes/Crystal/48x48/emblems/Makefile
+dnl themes/Crystal/22x22/Makefile
+dnl themes/Crystal/22x22/emblems/Makefile
+dnl themes/Curve/Makefile
+dnl themes/Curve/48x48/Makefile
+dnl themes/Curve/48x48/emblems/Makefile
+dnl themes/Curve/22x22/Makefile
+dnl themes/Curve/22x22/emblems/Makefile
+dnl themes/FreeIcons/Makefile
+dnl themes/FreeIcons/48x48/Makefile
+dnl themes/FreeIcons/48x48/emblems/Makefile
+dnl themes/FreeIcons/24x24/Makefile
+dnl themes/FreeIcons/24x24/emblems/Makefile
+dnl themes/FreeIcons/22x22/Makefile
+dnl themes/FreeIcons/22x22/emblems/Makefile
+dnl themes/Gnome/Makefile
+dnl themes/Gnome/48x48/Makefile
+dnl themes/Gnome/48x48/emblems/Makefile
+dnl themes/Gnome/50x50/Makefile
+dnl themes/Gnome/50x50/emblems/Makefile
+dnl themes/Gnome/24x24/Makefile
+dnl themes/Gnome/24x24/emblems/Makefile
+dnl themes/Noia/Makefile
+dnl themes/Noia/48x48/Makefile
+dnl themes/Noia/48x48/emblems/Makefile
+dnl themes/Noia/22x22/Makefile
+dnl themes/Noia/22x22/emblems/Makefile
+dnl themes/XFce/Makefile
+dnl themes/XFce/48x48/Makefile
+dnl themes/XFce/48x48/emblems/Makefile
+dnl themes/XFce/19x19/Makefile
+dnl themes/XFce/19x19/emblems/Makefile
+dnl themes/XFce/16x16/Makefile
+dnl themes/XFce/16x16/emblems/Makefile
+dnl themes/XFce/24x24/Makefile
+dnl themes/XFce/24x24/emblems/Makefile
+dnl themes/XFce/14x14/Makefile
+dnl themes/XFce/14x14/emblems/Makefile
+dnl themes/XFce/50x50/Makefile
+dnl themes/XFce/50x50/emblems/Makefile
+dnl themes/XFce/53x53/Makefile
+dnl themes/XFce/53x53/emblems/Makefile

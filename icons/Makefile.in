@@ -48,9 +48,10 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 SOURCES =
 DIST_SOURCES =
-am__installdirs = "$(DESTDIR)$(hicolordir)"
-hicolorDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(hicolor_DATA) $(noinst_DATA)
+am__installdirs = "$(DESTDIR)$(hicolor16dir)" "$(DESTDIR)$(hicolor48dir)"
+hicolor16DATA_INSTALL = $(INSTALL_DATA)
+hicolor48DATA_INSTALL = $(INSTALL_DATA)
+DATA = $(hicolor16_DATA) $(hicolor48_DATA) $(noinst_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMDEP_FALSE = @AMDEP_FALSE@
@@ -192,10 +193,33 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-hicolordir = $(datadir)/icons/hicolor/48x48/apps
-hicolor_DATA = xfce-mail.png
-noinst_DATA = xfce4-panel-icon.h xfce4-panel.png
-EXTRA_DIST = $(noinst_DATA)
+hicolor48dir = $(datadir)/icons/hicolor/48x48/apps
+hicolor16dir = $(datadir)/icons/hicolor/16x16/apps
+hicolor48_DATA = \
+	xfce4-panel.png \
+	xfce-edit.png \
+	xfce-filemanager.png \
+	xfce-games.png \
+	xfce-graphics.png \
+	xfce-internet.png \
+	xfce-mail.png \
+	xfce-man.png \
+	xfce-multimedia.png \
+	xfce-print.png \
+	xfce-schedule.png \
+	xfce-sound.png \
+	xfce-terminal.png \
+	xfce-unknown.png \
+	xfce-utils.png
+
+hicolor16_DATA = \
+	xfce-system-exit.png \
+	xfce-system-info.png \
+	xfce-system-lock.png \
+	xfce-system-settings.png
+
+noinst_DATA = xfce4-panel-icon.h
+EXTRA_DIST = $(noinst_DATA) $(hicolor48_DATA) $(hicolor16_DATA)
 all: all-am
 
 .SUFFIXES:
@@ -238,22 +262,39 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-install-hicolorDATA: $(hicolor_DATA)
+install-hicolor16DATA: $(hicolor16_DATA)
 	@$(NORMAL_INSTALL)
-	test -z "$(hicolordir)" || $(mkdir_p) "$(DESTDIR)$(hicolordir)"
-	@list='$(hicolor_DATA)'; for p in $$list; do \
+	test -z "$(hicolor16dir)" || $(mkdir_p) "$(DESTDIR)$(hicolor16dir)"
+	@list='$(hicolor16_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(hicolorDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(hicolordir)/$$f'"; \
-	  $(hicolorDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(hicolordir)/$$f"; \
+	  echo " $(hicolor16DATA_INSTALL) '$$d$$p' '$(DESTDIR)$(hicolor16dir)/$$f'"; \
+	  $(hicolor16DATA_INSTALL) "$$d$$p" "$(DESTDIR)$(hicolor16dir)/$$f"; \
 	done
 
-uninstall-hicolorDATA:
+uninstall-hicolor16DATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(hicolor_DATA)'; for p in $$list; do \
+	@list='$(hicolor16_DATA)'; for p in $$list; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f '$(DESTDIR)$(hicolordir)/$$f'"; \
-	  rm -f "$(DESTDIR)$(hicolordir)/$$f"; \
+	  echo " rm -f '$(DESTDIR)$(hicolor16dir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(hicolor16dir)/$$f"; \
+	done
+install-hicolor48DATA: $(hicolor48_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(hicolor48dir)" || $(mkdir_p) "$(DESTDIR)$(hicolor48dir)"
+	@list='$(hicolor48_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(hicolor48DATA_INSTALL) '$$d$$p' '$(DESTDIR)$(hicolor48dir)/$$f'"; \
+	  $(hicolor48DATA_INSTALL) "$$d$$p" "$(DESTDIR)$(hicolor48dir)/$$f"; \
+	done
+
+uninstall-hicolor48DATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(hicolor48_DATA)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f '$(DESTDIR)$(hicolor48dir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(hicolor48dir)/$$f"; \
 	done
 tags: TAGS
 TAGS:
@@ -293,7 +334,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
-	for dir in "$(DESTDIR)$(hicolordir)"; do \
+	for dir in "$(DESTDIR)$(hicolor16dir)" "$(DESTDIR)$(hicolor48dir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-am
@@ -338,7 +379,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-hicolorDATA
+install-data-am: install-hicolor16DATA install-hicolor48DATA
 
 install-exec-am:
 
@@ -364,17 +405,20 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-hicolorDATA uninstall-info-am
+uninstall-am: uninstall-hicolor16DATA uninstall-hicolor48DATA \
+	uninstall-info-am
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
 	dvi-am html html-am info info-am install install-am \
 	install-data install-data-am install-exec install-exec-am \
-	install-hicolorDATA install-info install-info-am install-man \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	uninstall uninstall-am uninstall-hicolorDATA uninstall-info-am
+	install-hicolor16DATA install-hicolor48DATA install-info \
+	install-info-am install-man install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
+	uninstall-hicolor16DATA uninstall-hicolor48DATA \
+	uninstall-info-am
 
 
 xfce4-panel-icon.h: $(srcdir)/xfce4-panel.png

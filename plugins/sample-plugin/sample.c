@@ -576,7 +576,7 @@ xfce_control_class_init (ControlClass * cc)
     {
 	GdkPixbuf *pixbuf;
 
-	pixbuf = xfce_load_themed_icon ("sampleicon.png", 48);
+	pixbuf = xfce_themed_icon_load ("sampleicon.png", 48);
 	control_class_set_icon (cc, pixbuf);
 	g_object_unref (pixbuf);
     }

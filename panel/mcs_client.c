@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
+ *  Copyright (C) 2002-2004 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -46,51 +46,7 @@
 
 static McsClient *client = NULL;
 
-#if 0
-/* special case: position setting 
- * this is not part of the settings struct, but it is being changed from
- * the settings dialog. */
-static void
-mcs_position_setting (int pos)
-{
-    static int x, y;
-
-    if (pos == XFCE_POSITION_NONE || !panel.toplevel)
-	return;
-
-    if (pos == XFCE_POSITION_SAVE)
-    {
-	x = panel.position.x;
-	y = panel.position.y;
-	return;
-    }
-
-    if (pos == XFCE_POSITION_RESTORE)
-    {
-	panel.position.x = x;
-	panel.position.y = y;
-	panel_set_position ();
-
-	return;
-    }
-
-    switch (pos)
-    {
-	case XFCE_POSITION_BOTTOM:
-	    panel_center (BOTTOM);
-	    break;
-	case XFCE_POSITION_TOP:
-	    panel_center (TOP);
-	    break;
-	case XFCE_POSITION_LEFT:
-	    panel_center (LEFT);
-	    break;
-	case XFCE_POSITION_RIGHT:
-	    panel_center (RIGHT);
-	    break;
-    }
-}
-#endif
+static int settings_cb_id = 0;
 
 /* settings hash table */
 static GHashTable *settings_hash = NULL;
@@ -189,12 +145,47 @@ watch_cb (Window window, Bool is_start, long mask, void *cb_data)
 	gdk_window_remove_filter (gdkwin, client_event_filter, NULL);
 }
 
+/* icon theme */
+#if GTK_CHECK_VERSION (2,4,0)
+static void
+icontheme_cb (GtkIconTheme *icontheme)
+{
+    char *theme;
+
+    g_object_get (gtk_settings_get_default(), "gtk-icon-theme-name",
+		  &theme, NULL);
+
+    DBG ("Theme: %s\n", theme);
+    panel_set_theme (theme);
+
+    g_free (theme);
+}
+#else /* gtk < 2.4 */
+static void
+settings_notify_cb (GtkSettings *gsettings, GParamSpec *pspec)
+{
+    if (strequal (pspec->name, "gtk-icon-theme-name"))
+    {
+	char *theme;
+
+	g_object_get (G_OBJECT (gsettings), "gtk-icon-theme-name",
+		      &theme, NULL);
+
+	panel_set_theme (theme);
+    
+	g_free (theme);
+    }
+}
+#endif
+
 /* connecting and disconnecting */
 void
 mcs_watch_xfce_channel (void)
 {
     Display *dpy = GDK_DISPLAY ();
     int screen = DefaultScreen (dpy);
+    GtkSettings *gsettings = gtk_settings_get_default ();
+    char *theme;
 
     if (!settings_hash)
 	init_settings_hash ();
@@ -216,15 +207,47 @@ mcs_watch_xfce_channel (void)
     }
 
     mcs_client_add_channel (client, CHANNEL);
+
+    g_object_get (G_OBJECT (gsettings), "gtk-icon-theme-name",
+	    	  &theme, NULL);
+
+    xfce_set_icon_theme (theme);
+
+    panel_set_theme (theme);
+
+    g_free (theme);
+    
+#if GTK_CHECK_VERSION (2,4,0)
+    settings_cb_id = 
+	g_signal_connect (gtk_icon_theme_get_default (), "changed", 
+			  G_CALLBACK (icontheme_cb), NULL);
+#else
+    settings_cb_id = g_signal_connect (gsettings, "notify", 
+	    			       G_CALLBACK (settings_notify_cb), NULL);
+#endif
 }
 
 void
 mcs_stop_watch (void)
 {
     if (client)
+    {
 	mcs_client_destroy (client);
+	
+	client = NULL;
+    }
 
-    client = NULL;
+    if (settings_cb_id)
+    {
+#if GTK_CHECK_VERSION (2,4,0)
+	g_signal_handler_disconnect (gtk_icon_theme_get_default (), 
+				     settings_cb_id);
+#else
+	g_signal_handler_disconnect (gtk_settings_get_default (), 
+				     settings_cb_id);
+#endif
+	settings_cb_id = 0;
+    }
 }
 
 /* this function is exported to allow access to other channels */

@@ -72,4 +72,6 @@ GdkPixbuf *get_scaled_pixbuf (GdkPixbuf * pb, int size);
 /* for plugins */
 GdkPixbuf *get_themed_pixbuf (const char *name);
 
+GdkPixbuf *themed_pixbuf_from_name_list (char **namelist, int size);
+
 #endif /* __XFCE_ICONS_H__ */

@@ -741,7 +741,7 @@ static GtkWidget *
 get_control_menu (void)
 {
     static GtkWidget *menu = NULL;
-    GtkWidget *submenu, *mi;
+    GtkWidget *mi;
 
     if (!menu)
     {
@@ -750,20 +750,23 @@ get_control_menu (void)
 	/* replaced with actual name */
 	mi = gtk_menu_item_new_with_label("Item");
 	gtk_widget_show (mi);
+	gtk_widget_set_sensitive (mi, FALSE);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	submenu = gtk_menu_new ();
-	gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);
-
+	
+	mi = gtk_separator_menu_item_new ();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	
 	mi = gtk_menu_item_new_with_mnemonic (_("_Properties..."));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (edit_control), NULL);
-	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
 	mi = gtk_menu_item_new_with_mnemonic (_("_Remove"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (remove_control), NULL);
-	gtk_menu_shell_append (GTK_MENU_SHELL (submenu), mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
 	mi = gtk_separator_menu_item_new ();
 	gtk_widget_show (mi);
@@ -778,12 +781,6 @@ get_control_menu (void)
 
     g_assert (menu != NULL);
     
-    /* the third item, keep in sync with menu 
-    mi = GTK_MENU_SHELL (menu)->children->next->next->data;
-    
-    submenu = get_controls_submenu();
-    gtk_menu_item_set_submenu (GTK_MENU_ITEM (mi), submenu);*/
-
     return menu;
 }
 

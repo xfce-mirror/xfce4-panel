@@ -56,14 +56,12 @@ static McsManager *mcs_manager;
  *  size: option menu
  *  panel orientation: option menu
  *  popup position: option menu
- *  icon theme: option menu
 */
 static GtkWidget *orientation_menu;
 static GtkWidget *size_menu;
 static GtkWidget *popup_position_menu;
-static GtkWidget *theme_menu;
 
-static GtkWidget *layer_menu;
+/*static GtkWidget *layer_menu;*/
 
 static gboolean is_running = FALSE;
 static GtkWidget *dialog = NULL;
@@ -266,129 +264,6 @@ add_popup_position_menu (GtkWidget * option_menu)
 		      G_CALLBACK (popup_position_changed), NULL);
 }
 
-/*  theme
-*/
-static char **
-find_themes (void)
-{
-    char **themes = NULL;
-    GList *list = NULL, *li;
-    GDir *gdir;
-    char **dirs, **d;
-    const char *file;
-    int i, len;
-
-    /* Add default theme */
-    dirs = g_new0 (char *, 4);
-
-    dirs[0] = g_build_filename (g_get_home_dir (), ".xfce4", "icons", NULL);
-    dirs[1] = g_build_filename (DATADIR, "icons", NULL);
-    dirs[2] = g_build_filename (g_get_home_dir (), ".icons", NULL);
-
-    for (d = dirs; *d; d++)
-    {
-	gdir = g_dir_open (*d, 0, NULL);
-
-	if (gdir)
-	{
-	    while ((file = g_dir_read_name (gdir)))
-	    {
-		char *path = g_build_filename (*d, file, "index.theme", NULL);
-
-		if (!g_list_find_custom (list, file, (GCompareFunc) strcmp) &&
-		    g_file_test (path, G_FILE_TEST_EXISTS))
-		{
-		    list = g_list_append (list, g_strdup (file));
-		}
-
-		g_free (path);
-	    }
-
-	    g_dir_close (gdir);
-	}
-    }
-
-    len = g_list_length (list);
-
-    themes = g_new0 (char *, len + 1);
-
-    for (i = 0, li = list; li; li = li->next, i++)
-    {
-	themes[i] = (char *) li->data;
-    }
-
-    g_list_free (list);
-    g_strfreev (dirs);
-
-    return themes;
-}
-
-static void
-theme_changed (GtkOptionMenu * option_menu)
-{
-    const char *theme;
-    GtkWidget *label;
-
-    /* Right, this is weird. Apparently the option menu
-     * button reparents the label connected to the menuitem
-     * that is selected. So to get to the label we have to go 
-     * to the child of the button and not of the menu item!
-     *
-     * This took a while to find out :-)
-     */
-    label = gtk_bin_get_child (GTK_BIN (option_menu));
-
-    theme = gtk_label_get_text (GTK_LABEL (label));
-
-    mcs_manager_set_string (mcs_manager, xfce_settings_names[XFCE_THEME],
-	    		    CHANNEL, theme);
-    mcs_manager_notify (mcs_manager, CHANNEL);
-}
-
-static void
-add_theme_menu (GtkWidget * option_menu)
-{
-    GtkWidget *menu = gtk_menu_new ();
-    GtkWidget *item;
-    int i = 0, n = 0;
-    char **themes = find_themes ();
-    char **s;
-    char *theme;
-    McsSetting *setting;
-
-    setting = mcs_manager_setting_lookup (mcs_manager,
-	    				  xfce_settings_names[XFCE_THEME],
-					  CHANNEL);
-    
-    if (setting)
-    {
-	theme = setting->data.v_string;
-    }
-    else
-    {
-	g_warning ("Theme setting not available");
-	return;
-    }
-    
-    for (i = 0, s = themes; *s; s++, i++)
-    {
-	item = gtk_menu_item_new_with_label (*s);
-	gtk_widget_show (item);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-	if (strcmp (theme, *s) == 0)
-	    n = i;
-    }
-
-    g_strfreev (themes);
-
-    gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
-    gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), n);
-
-    g_signal_connect (option_menu, "changed", G_CALLBACK (theme_changed),
-		      NULL);
-}
-
 static void
 add_style_box (GtkBox * box, GtkSizeGroup * sg)
 {
@@ -445,24 +320,9 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_widget_show (popup_position_menu);
     add_popup_position_menu (popup_position_menu);
     gtk_box_pack_start (GTK_BOX (hbox), popup_position_menu, TRUE, TRUE, 0);
-
-    /* icon theme */
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new (_("Icon theme:"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_widget_show (label);
-    gtk_size_group_add_widget (sg, label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-    theme_menu = gtk_option_menu_new ();
-    gtk_widget_show (theme_menu);
-    add_theme_menu (theme_menu);
-    gtk_box_pack_start (GTK_BOX (hbox), theme_menu, TRUE, TRUE, 0);
 }
 
+#if 0
 /* layer and popup position */
 static void
 layer_changed (GtkWidget * om, gpointer data)
@@ -527,6 +387,7 @@ add_layer_box (GtkBox * box, GtkSizeGroup * sg)
     g_signal_connect (layer_menu, "changed", G_CALLBACK (layer_changed),
 		      NULL);
 }
+#endif
 
 /* autohide */
 static void
@@ -652,7 +513,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
     gtk_widget_show (vbox);
     xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
-    add_layer_box (GTK_BOX (vbox), sg);
+/*    add_layer_box (GTK_BOX (vbox), sg);*/
 
     add_autohide_box (GTK_BOX (vbox), sg);
 

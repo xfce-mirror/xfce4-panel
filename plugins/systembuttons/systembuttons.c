@@ -34,10 +34,6 @@
 #include <panel/plugins.h>
 #include <panel/xfce.h>
 
-#if 0
-#include "mcs_client.h"
-#endif
-
 /* callbacks */
 static void
 mini_lock_cb (void)
@@ -56,9 +52,9 @@ mini_palet_cb (void)
 {
     if (disable_user_config)
     {
-	xfce_info (_
-		   ("Access to the configuration system has been disabled.\n\n"
-		    "Ask your system administrator for more information"));
+	xfce_info (_("Access to the configuration system has been disabled."
+		     "\n\n"
+		     "Ask your system administrator for more information"));
 	return;
     }
 
@@ -86,15 +82,11 @@ enum
 typedef struct
 {
     gboolean show_two;
-    int button_types[2];	/* 0, 1, 2 or 3 for lock, exit, setup and info */
+    int button_types[2];   /* 0, 1, 2 or 3 for lock, exit, setup and info */
 
     GtkWidget *box;
     GtkWidget *buttons[2];
-#if 0
-    GtkWidget *buttonbox;
-    GtkWidget *align[2];	/* containers for the actual buttons */
-#endif
-    GList *callbacks;		/* save callbacks for when we change buttons */
+    GList *callbacks;	   /* save callbacks for when we change buttons */
     int cb_ids[2];
 }
 t_systembuttons;
@@ -223,21 +215,14 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 	gtk_widget_destroy (sb->box);
     }
 
-    /* we need some extra spacing when the panel size <= SMALL
-     * hence the strange code below :) */
-    if (orientation == HORIZONTAL)
+    if ((orientation == HORIZONTAL && settings.size <= SMALL)
+	|| (orientation == VERTICAL && settings.size > SMALL))
     {
-	if (settings.size > SMALL)
-	    sb->box = gtk_vbox_new (TRUE, 0);
-	else
-	    sb->box = gtk_hbox_new (TRUE, 0);
+	sb->box = gtk_hbox_new (TRUE, 0);
     }
     else
     {
-	if (settings.size > SMALL)
-	    sb->box = gtk_hbox_new (TRUE, 0);
-	else
-	    sb->box = gtk_hbox_new (TRUE, 0);
+	sb->box = gtk_vbox_new (TRUE, 0);
     }
 
     gtk_widget_show (sb->box);
@@ -261,10 +246,10 @@ systembuttons_new (void)
     sb->show_two = TRUE;
 
     sb->button_types[0] = 0;
-    create_systembutton (sb,0,0);
+    create_systembutton (sb, 0, 0);
 
     sb->button_types[1] = 1;
-    create_systembutton (sb,1,1);
+    create_systembutton (sb, 1, 1);
 
     g_object_ref (sb->buttons[0]);
     g_object_ref (sb->buttons[1]);
@@ -307,30 +292,34 @@ systembuttons_attach_callback (Control * control, const char *signal,
 static void
 systembuttons_set_size (Control * control, int size)
 {
-    int s1, s2, n;
+    int s, w, h;
     t_systembuttons *sb = control->data;
 
     arrange_systembuttons (sb, settings.orientation);
     gtk_container_add (GTK_CONTAINER (control->base), sb->box);
 
-    n = sb->show_two ? 2 : 1;
-    s1 = icon_size[size] + border_width;
-    s2 = s1 * 0.75;
+    s = icon_size[size] + border_width;
 
-    if (settings.orientation == VERTICAL)
+    if (settings.orientation == HORIZONTAL)
     {
-	if (size > SMALL)
-	    gtk_widget_set_size_request (sb->box, s1, s2);
+	h = s;
+
+	if (settings.size > SMALL)
+	    w = s / 2;
 	else
-	    gtk_widget_set_size_request (sb->box, s1, s1 * n * 0.75);
+	    w = -1;
     }
     else
     {
-	if (size > SMALL)
-	    gtk_widget_set_size_request (sb->box, s2, s1);
+	w = s;
+
+	if (settings.size > SMALL)
+	    h = s / 2;
 	else
-	    gtk_widget_set_size_request (sb->box, s1 * n * 0.75, s1);
+	    h = -1;
     }
+
+    gtk_widget_set_size_request (sb->box, w, h);
 }
 
 static void
@@ -583,6 +572,7 @@ create_systembuttons_control (Control * control)
 {
     t_systembuttons *sb = systembuttons_new ();
 
+    gtk_widget_set_size_request (control->base, -1, -1);
     gtk_container_add (GTK_CONTAINER (control->base), sb->box);
 
     control->data = (gpointer) sb;

@@ -55,4 +55,6 @@ void groups_remove (int index);
 void groups_show_popup (int index, gboolean show);
 void groups_add_control (Control *control, int index);
 
+int groups_get_n_controls (void);
+
 #endif /* __XFCE_GROUPS_H__ */
