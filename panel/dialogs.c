@@ -239,18 +239,18 @@ static void add_header(const char *text, GtkBox * box)
     gtk_widget_show(frame);
     gtk_box_pack_start(box, frame, FALSE, TRUE, 0);
 
-    eventbox = gtk_event_box_new();
+/*    eventbox = gtk_event_box_new();
     gtk_widget_set_name(eventbox, "gxfce_color2");
     gtk_widget_show(eventbox);
     gtk_container_add(GTK_CONTAINER(frame), eventbox);
-
+*/
     label = gtk_label_new(NULL);
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     markup = g_strconcat("<b>", text, "</b>", NULL);
     gtk_label_set_markup(GTK_LABEL(label), markup);
     g_free(markup);
     gtk_widget_show(label);
-    gtk_container_add(GTK_CONTAINER(eventbox), label);
+    gtk_container_add(GTK_CONTAINER(frame), label);
 }
 
 #define SKIP 12
@@ -575,6 +575,8 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(theme_changed), NULL);
 }
+
+static int lastpage = 0;
 
 static void add_style_box(GtkBox * box)
 {
@@ -1160,11 +1162,12 @@ void global_settings_dialog(void)
     gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
 
     /* main notebook */
-/*    notebook = gtk_notebook_new();
+    notebook = gtk_notebook_new();
     gtk_widget_show(notebook);
+    gtk_container_set_border_width(GTK_CONTAINER(notebook), 5);
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), notebook,
                        TRUE, TRUE, 0);
-*/
+
     /* first notebook page */
     frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
@@ -1177,10 +1180,10 @@ void global_settings_dialog(void)
     g_free(markup);
     gtk_widget_show(label);
 
-/*    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
-*/
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), frame,
-                       TRUE, TRUE, 0);
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
+
+/*    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), frame,
+                       TRUE, TRUE, 0);*/
 
     vbox = gtk_vbox_new(FALSE, 2);
     gtk_widget_show(vbox);
@@ -1196,8 +1199,10 @@ void global_settings_dialog(void)
     add_position_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 
+    g_object_unref(sg);
+
     /* second notebook page */
-/*    frame = gtk_frame_new(NULL);
+    frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
     gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
@@ -1215,7 +1220,7 @@ void global_settings_dialog(void)
     gtk_container_add(GTK_CONTAINER(frame), vbox);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-*/
+
     /* Appearance */
     add_header(_("Appearance"), GTK_BOX(vbox));
     add_style_box(GTK_BOX(vbox));
@@ -1251,6 +1256,8 @@ void global_settings_dialog(void)
     g_object_unref(sg);
 */
 
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), lastpage);
+    
     while(!done)
     {
         int response = GTK_RESPONSE_NONE;
@@ -1301,6 +1308,8 @@ void global_settings_dialog(void)
             done = TRUE;
     }
 
+    lastpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
+    
     gtk_widget_destroy(dialog);
     running = FALSE;
     dialog = NULL;
