@@ -813,7 +813,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
             }
             else
             {
-                add_startup_timeout (gdk_display_get_default_screen (gdk_display_get_default ()), sn_context);
+                add_startup_timeout (DefaultScreen (gdk_display), sn_context);
                 sn_launcher_context_unref (sn_context);
             }
         }
