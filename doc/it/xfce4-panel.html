@@ -1,0 +1,196 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Pannello di XFce 4</title><link rel="stylesheet" href="../xfce.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.62.4"><link rel="home" href="#xfce4-panel" title="XFce 4 Panel"><link rel="next" href="#panel-intro" title="Introduction"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="xfce4-panel"></a>Pannello di XFce 4</h1></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Jasper</span> <span class="surname">Huijsmans</span></h3><div class="affiliation"><div class="address"><p><tt class="email">&lt;<a href="mailto:huysmans@users.sourceforge.net">huysmans@users.sourceforge.net</a>&gt;</tt></p></div></div></div><div class="author">Italian translation: Sascha Ales<div class="affiliation"><div class="address"><p><tt class="email">&lt;<a href="mailto:huysmans@users.sourceforge.net">europatriota@hotmail.com</a>&gt;</tt></p></div></div></div></div></div><div><span xmlns="http://www.w3.org/TR/xhtml1/transitional" class="releaseinfo">Questo manuale descrive <b xmlns="" class="application"><tt>xfce4-panel</tt></b>, versione 4.0. 
+    Altimo aggiornamento: Set 2003
+  <br></br></span></div><div><p class="copyright">Copyright &copy; 2003 Jasper
+Huijsmans</p></div><div><p class="copyright">Copyright &copy; 2004 Sascha Ales
+(Italian translation)</p></div></div><div></div><hr></div><div
+class="toc"><p><b>Tavola dei Contenuti</b></p><dl><dt><span class="sect1"><a
+href="#panel-intro">Introduzione</a></span></dt><dt><span class="sect1"><a
+href="#panel-getting-started">Prima di iniziare</a></span></dt><dt><span
+class="sect1"><a href="#panel-items">Elementi del
+pannello</a></span></dt><dd><dl><dt><span class="sect2"><a
+href="#launcher-item">Launcher</a></span></dt><dt><span class="sect2"><a
+href="#clock-item">Orologio di XFce</a></span></dt><dt><span class="sect2"><a
+href="#mailcheck-item">Controllo posta</a></span></dt><dt><span
+class="sect2"><a href="#switcher-item">Selettore del
+desktop e Pager grafico</a></span></dt><dt><span class="sect2"><a
+href="#systembuttons-item">Bottoni di sistema</a></span></dt><dt><span class="sect2"><a
+href="#separator-item">Separatore</a></span></dt></dl></dd><dt><span
+class="sect1"><a href="#subpanels">Menu del pannello</a></span></dt><dt><span
+class="sect1"><a href="#panel-settings">Impostazioni del
+pannello</a></span></dt><dd><dl><dt><span class="sect2"><a
+href="#panel-apearance">Aspetto</a></span></dt><dt><span
+class="sect2"><a
+href="#panel-position">Posizione</a></span></dt></dl></dd><dt><span
+class="sect1"><a href="#panel-copyright">Informazioni su
+xfce4-panel</a></span></dt></dl></div><p></p><div class="sect1" lang="en"><div
+class="titlepage"><div><div><h2 class="title" style="clear: both"><a
+name="panel-intro"></a>Introduzione</h2></div></div><div></div></div><p>
+    Il pannello di XFce 4 è parte dell'<a href="http://www.xfce.org" target="_top">Ambiente Desktop di XFce 4</a> e comprende i
+    launchers per i programmi, menu del pannello, un orologio, un Seletto
+re del desktop e altro. Il comando attuale per lanciarlo è <b
+class="application"><tt>xfce4-panel</tt></b>. Molti aspetti del pannello possono
+essere configurati grazie all'ausilio di una finestra di dialogo in modalità
+grafica.
+  </p><p>
+    Se hai gia familiarizzato con le precedenti versioni di XFce puoi trovare alcune nuove caratteristiche. Le più visibili sono probabilmente la modalità a pannello verticale, i temi di icone, un nuovo pager grafico e la posizione configurabile dei bottoni di popup dei menu del pannello. Questo manuale fornisce le nessarie informazioni per rendere il pannello gradevole e su misura ai tuoi gusti.
+  </p></div><p></p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-getting-started"></a>Prima di iniziare</h2></div></div><div></div></div><p>Quando avvii il pannello puoi vedere una barra nella parte bassa del tuo schermo, simile a questa:
+  </p><div class="figure"><a name="default-panel-fig"></a><p class="title"><b>Figura 1. Il pannello predefinito di XFce 4</b></p><div class="screenshot"><div class="mediaobject"><img src="images/default_panel.png" alt="Shows XFce panel default configuration. Contains several
+	    launchers, a new mail monitor, a clock and a desktop pager.
+	    Also shows an opened panel menu.
+	  "></div></div></div><p>
+    La figura mostra la configurazione predefinita del pannello con uno dei menu
+aperto e il puntatore del mouse sopra il bottone delle impostazioni con la
+comparsa automatica di un messaggio di aiuto.
+  </p><p>Le maniglie di movimento sono posizionate alle estremità del pannello, puoi usarle per trascinare il pannello ovunque tu voglia nello schermo. Clicca con il tasto destro del mouse (oppure Shift-click) su una di queste per vedere il menu di popup... Provate ;-)
+  </p><div class="figure"><a name="handle-popup-fig"></a><p class="title"><b>Figura 2. Il menu di popup delle maniglie di movimento</b></p><div class="screenshot"><div class="mediaobject"><img src="images/handle-popup.png" alt="Shows move handle popup menu."></div></div></div><p>L'area tra le maniglie di movimento contiene elementi del pannello. Gli elementi disponibili sono descritti nella sezione 
+    "<a href="#panel-items" target="_top">Elementi del pannello</a>". La maggior parte di questi esegue un azione quando vengono cliccati. La configurazione degli elementi del pannello può essere eseguita grazie al menù di popup che viene visualizzato quando si clicca, all'interno dei bottoni, con il tasto destro del mouse.
+  </p><p>Utilizzando il tasto destro del mouse sopra un elemento farà si che
+compaia un menu di popup da cui si può accedere ad una finestra di dialogo delle
+proprietà dove puoi aggiungere o rimuovere gli elementi. Questi possono
+oltremodo essere aggiunti attraverso il menu del tasto destro su una delle
+maniglie di movimento (vedi sopra). Viene visualizzato un menu secondario
+contenente la lista del tipo di elementi disponibili. Quando aggiungi un nuovo
+elemento, il pannello apre immediatamente una finestra di dialogo delle
+proprietà dove puoi scegliere le opzioni dell'elemento e la sua posizione.
+  </p><div class="figure"><a name="item-popup-fig"></a><p class="title"><b>Figura 3. Menu di popup dell'elemento</b></p><div class="screenshot"><div class="mediaobject"><img src="images/item-popup.png" alt="Shows item popup menu."></div></div></div><p>
+    Le impostazioni del pannello di XFce possono essere cambiate dal Gestore
+delle
+impostazioni di Xfce4 che può essere eseguito attraverso il launcher contenuto
+nel pannello o utilizzando il tasto 'Proprietà' nel menu da tasto destro delle
+maniglie di movimento. Leggi "<a href="#panel-settings"
+target="_top">Impostazioni del Pannello</a>" per avere una panoramica delle
+opzioni
+disponibili.
+  </p></div><p></p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-items"></a>Elementi del pannello</h2></div></div><div></div></div><p>
+    Il pannello di XFce 4 ha la possibilità di caricare plugin esterni. In questa sezione vengono descritti solamente gli elementi del pannello installati di default.
+  </p><p>
+    La finestra di dialogo per gli elementi del pannello può essere aperta utilizzando il tasto destro del mouse sopra un oggetto. Ogni tipo elemento del pannello ha la sua finestra di configurazione. Ogni finestra offre le seguenti opzioni:
+  </p><div class="itemizedlist"><ul type="disc"><li>Cambia la posizione dell'elemento nel pannello.</li><li>Rimuovi l'elemento. </li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="launcher-item"></a>Launcher</h3></div></div><div></div></div><p>I più comuni oggetti del pannello sono gli elementi launcher. Questi fanno in modo che tu possa lanciare i programmi dal pannello. La finestra di dialogo delle proprietà offre le seguenti opzioni:
+    </p><div class="variablelist"><dl><dt><span
+class="term">Posizione</span></dt><dd>Indica la posizione in cui
+verrà agganciato l'oggetto all'interno del pannello.</dd><dt><span
+class="term">Comando</span></dt><dd>Puoi digitare il comando per eseguire o curiosare tra i file di sistema. Troverai un'opzione per inizializzate un
+Terminale o usare la Notifica in avvio. Quest'ultima opzione fa in modo che il
+Gestore delle finestre mostri una clessidra quando il programma viene caricato.
+Non tutti i programmi sono compatibili con questa caratteristica, lo sono
+infatti solamente quelli sviluppati con le Gtk 2.2.
+	</dd><dt><span class="term">Icona</span></dt><dd>Il pannello fornisce un numero
+di icone standard che possono essere utilizzate. Queste icone possono essere
+visualizzate grazie ai molti temi presenti in XFce4 e possono essere raggiunte
+utilizzando la <a href="#panel-settings" target="_top">Finestra di dialogo delle
+Impostazioni globali</a>. Naturalmente puoi anche scegliere un'icona
+personalizzata navigando nel file system utilizzando il tasto 'Next' oppure
+trascinando un'immagine nell'area di anteprima del Gestore dei file
+(filemanager).
+	</dd><dt><span class="term">Suggerimento</span></dt><dd>La capacità del
+pannello di visualizzare i suggerimenti quando passi con il mouse sopra un elemento.
+	</dd><dt><span class="term">Menu</span></dt><dd>Il launcher ha un suo menu.
+Quando questa opzione è selezionata, un piccolo tasto con una freccia appare
+dopo l'oggetto. Guarda <a href="#subpanels" target="_top">qui</a> per avere maggiori
+informazioni sui menu del pannello. La posizione del tasto del menu può essere
+modificata dalle impostazioni globali.
+	</dd></dl></div><div class="figure"><a name="launcher-fig"></a><p class="title"><b>Figura 4. Elemento Launcher</b></p><div class="screenshot"><div class="mediaobject"><img src="images/launcher-properties.png" alt="Shows properties dialog for launcher item."></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="clock-item"></a>Orologio XFce</h3></div></div><div></div></div><p>L'orologio di XFce ha un numero di opzioni che possono cambiare il suo look. Sono disponibili tre tipi di orologi: analogico, digitale e LED. E' fornita una opzione per visualizzare i secondi per l'ogologio digitale e a LED. Inoltre puoi impostare il formato dell'ora sia nella modalità a 24 ore, sia in quella a 12 ore oppure nella modalità 12 ore con l'indicazione AM/PM. L'orologio visualizza anche la data corrente. Cliccare sull'orologio non da inizio a nessun evento.
+    </p><div class="figure"><a name="clock-fig"></a><p class="title"><b>Figura
+5. Elemento Orologio</b></p><div class="screenshot"><div
+class="mediaobject"><img src="images/clock-properties.png" alt="Shows properties
+dialog for clock item."></div></div></div></div><div class="sect2"
+lang="en"><div class="titlepage"><div><div><h3 class="title"><a
+name="mailcheck-item"></a>Controllo posta</h3></div></div><div></div></div><p>Il
+Controllo posta tiene sotto controllo la tua casella di posta
+elettronica o altre caselle che tu ritieni indispensabile monitorare. L'icona
+dell'elemento segue il tema di icone da te impostato. Puoi scegliere la
+posizione della tua casella di posta elettronica e il comando da eseguire quando
+clicchi sul tasto della posta arrivata. I comandi hanno le stesse opzioni di
+comando dell'elemento launcher (vedi <a href="#launcher-item"
+target="_top">sopra</a>).
+    </p><div class="figure"><a name="mailcheck-fig"></a><p
+class="title"><b>Figura 6. Elemento Controllo posta</b></p><div
+class="screenshot"><div class="mediaobject"><img src="images/mailcheck-properties.png" alt="Shows
+properties dialog for mailcheck item."></div></div></div></div><div
+class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a
+name="switcher-item"></a>Selettore del
+desktop e Pager grafico</h3></div></div><div></div></div><p>Il pannello prevede
+due elementi che riguardano i desktop virtuali. Il Selettore del desktop
+ simil CDE che visualizza tasti con il nome del desktop e un Pager grafico
+che visualizza una vista delle minuature del desktop e ti lascia la possibilità
+di muovere le finestre in altri ambienti di lavoro trascinando le mini-finestre
+nel pager. Il Pager grafico ti lascia la possibilità di cambiare gli ambienti di lavoro usando la rotellina del mouse quando passi con il mouse sopra di questo.</p><div class="figure"><a
+name="nooptions-fig"></a><p class="title"><b>Figura 7. Elemento privo di
+opzioni</b></p><div class="screenshot"><div class="mediaobject"><img
+src="images/nooptions-properties.png" alt="Shows properties dialog for item
+without options.
+	    "></div></div></div></div><div class="sect2" lang="en"><div
+class="titlepage"><div><div><h3 class="title"><a
+name="systembuttons-item"></a>Bottoni di
+sistema</h3></div></div><div></div></div><p>L'elemento dei bottoni di sistema
+visualizza uno o due tasti che eseguono speciali azioni di sistema. I tasti
+seguono il tema di icone scelto per il tuo pannello. Ci sono quattro tasti
+disponibili:</p><div class="variablelist"><dl><dt><span
+class="term">Blocca</span></dt><dd>Esegue lo script <b
+class="application"><tt>xfrun4</tt></b> che permette di bloccare lo schermo
+usando xscreensaver o, se disponibile, xlock.
+	</dd><dt><span class="term">Esci</span></dt><dd>Permette di uscire dal pannello
+e di terminare la tua sessione di X (quando utilizzi <b
+class="application"><tt>startxfce4</tt></b> oppure sposti il pannello alla fine
+del file di avvio di X).
+	</dd><dt><span class="term">Info</span></dt><dd>Il tasto delle informazioni che
+visualizza la finestra di dialogo <span class="emphasis"><em>Info su
+XFce</em></span>.
+	</dd><dt><span class="term">Imposta</span></dt><dd>Premendo il tasto 'imposta'
+viene aperta una finestra con il Gestore delle Impostazioni di XFce. Da questo
+avrai accesso alle impostazioni di tutti i componenti di XFce e a molte
+impostazioni di sistema oltre che alle impostazioni del mouse e all'interfaccia
+utente.
+	</dd></dl></div><div class="figure"><a name="systembuttons-fig"></a><p class="title"><b>Figura 8. Elemento Systembuttons</b></p><div class="screenshot"><div class="mediaobject"><img src="images/systembuttons-properties.png" alt="Shows properties dialog for systembuttons item.
+	    "></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="separator-item"></a>Separatore</h3></div></div><div></div></div><p>Questo elemento è molto semplice, inserisce una linea di separazione nel pannello. Non ha opzioni fatta eccezione per la posizione.
+    </p><p>Nota che è molto piccolo hai solamente una piccola area in cui cliccare.
+    </p></div><p></p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="subpanels"></a>Menu del pannello</h2></div></div><div></div></div><p>L'oggetto Panel launcher può avere associato un menu, può essere aperto cliccando sulla piccola freccia dopo l'elemento. L'attuale posizione di questo tasto di popup è configurabile dalla finestra delle impostazioni globali. Puoi aprire il menu del pannello premendo e tenendo premuto il tasto del launcher. Dopo un certo tempo verrà aperto il menu.
+  </p><p>Utilizza l'elemento 'Add launcher' nella parte alta del menu del pannello per aggiungere un nuovo elemento o trascinare un eseguibile di questo oggetto dal file manager. Per rimuovere l'elemento dal pannello secondario utilizza il tasto 'Remove' nella finestra di dialogo delle proprietà. 
+  </p><p>Una caratteristica speciale dei menu del pannello è che questi possono essere staccati dal pannello e visualizzati in una finestra indipendente. Per staccare il menu clicca sulla piccola linea nella parte bassa di questo (guarda la <a href="#default-panel-fig" target="_top">schermata</a> del pannello predefinito).
+  </p><p>La finestra delle proprietà di dialogo per gli oggetti del menu viene aperta immediatamente quando clicchi con il tasto destro del mouse (oppure utilizzando la combinazione di tasti Shift+tasto sinistro del mouse).
+  </p><div class="figure"><a name="menuitem-fig"></a><p class="title"><b>Figura 9. Elemento Menu</b></p><div class="screenshot"><div class="mediaobject"><img src="images/menuitem-properties.png" alt="Shows properties dialog for menu items.
+	  "></div></div></div></div><p></p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-settings"></a>Impostazioni del pannello</h2></div></div><div></div></div><p>La finestra delle proprietà per il pannello di XFce 4 può essere aperta utilizzanzo il Gestore delle Impostazioni che può essere raggiunto dal pannello utilizzando il tasto di setup oppure dal tasto destro del mouse nelle maniglie di movimento. L'ultimo menu fornisce accesso diretto alla finestra di dialogo delle Proprietà del pannello.</p><div class="figure"><a name="panel-settings-fig"></a><p class="title"><b>Figura 10. Impostazioni del pannello</b></p><div class="screenshot"><div class="mediaobject"><img src="images/panel-settings.png" alt="Shows properties dialog for global panel preferences.
+	  "></div></div></div><div class="sect2" lang="en"><div
+class="titlepage"><div><div><h3 class="title"><a
+name="panel-apearance"></a>Aspetto</h3></div></div><div></div></div><div
+class="variablelist"><dl><dt><span
+class="term">Dimensioni pannello</span></dt><dd><p>Sono disponibili quattro tipi
+di grandezza per il pannello: minuscole (tiny), piccole (small), medie (medium)
+e grandi (large). Piccole è il predefinito.
+	  </p></dd><dt><span class="term">Orientamento pannello</span></dt><dd><p>Una
+nuova ed eccitante caratteristica del pannello di XFce 4 è la possibilità di posizionarlo
+in verticale.
+	  </p></dd><dt><span class="term">Posizione popup</span></dt><dd><p>Questa
+opzione cambia la posizione dei tasti che aprono il menu del pannello. Puoi
+scegliere tra Alto (above), Basso (below), Sinistra (to the left) o Destra
+(to the right) degli elementi del pannello.
+	  </p></dd><dt><span class="term">Tema delle icone</span></dt><dd><p>Altri
+nuovi temi di icone per il pannello di XFce 4. Le icone predefinite per il Launcher e le icone degli
+altri pannelli seguono il tema delle icone del pannello.
+	  </p></dd></dl></div></div><div class="sect2" lang="en"><div
+class="titlepage"><div><div><h3 class="title"><a
+name="panel-position"></a>Posizione</h3></div></div><div></div></div><div
+class="variablelist"><dl><dt><span class="term">Livello del
+pannello</span></dt><dd><p>Il livello del pannello determina se deve avere un
+comportamento relativo verso le altre finestre. Il pannello può essere sempre
+in basso o in alto rispetto le altre finestre oppure agire come loro.
+L'impostazione predefinita al momento dell'installazione di XFce 4 è 'Alto'.
+	  </p></dd><dt><span class="term">Centra il pannello</span></dt><dd><p>E'
+davvero molto facile muovere il pannello intorno allo schermo. La finestra di dialogo delle
+impostazioni prevede una facile via per centrare il pannello in uno dei quattro
+angoli dello schermo.
+	  </p></dd><dt><span class="term">Comportamento</span></dt><dd><p>Se scegli
+l'autoscomparsa, il pannello collasserà su se stesso e scomparirà
+fino a quando non porterai il mouse nella parte dello schermo in cui lo avevi
+posizionato, in questo caso il pannello tornerà ad essere visibile.
+	  </p></dd></dl></div></div></div><p></p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-copyright"></a>Informazioni su <b class="application"><tt>xfce4-panel</tt></b></h2></div></div><div></div></div><p><b class="application"><tt>xfce4-panel</tt></b> è stato scritto da Jasper Huijsmans 
+    (<tt class="email">&lt;<a href="mailto:huysmans@users.sourceforge.net">huysmans@users.sourceforge.net</a>&gt;</tt>). Troverete informazioni supplementari visitando il 
+    <a href="http://www.xfce.org" target="_top">Sito web di XFce</a>. 
+  </p><p>Per inviare un commento su un bug e semplicemente inviare un suggerimento riguardo questa applicazione o questo manuale invia una email alla 
+    <a href="http://www.moongroup.com/mailman/listinfo/xfce4-dev/" target="_top">xfce4-dev</a> mailing list &#8212; questo è il metodo migliore &#8212; oppure utilizza il bug tracking system che puoi trovare sul
+    <a href="http://sourceforge.net/projects/xfce" target="_top">XFce SourceForge project site</a>. 
+    Se hai qualche domanda riguardo l'utilizzo o l'installazione di questo pacchetto, chiedi nella 
+    <a href="http://www.moongroup.com/mailman/listinfo/xfce/" target="_top">xfce</a> mailing list. 
+  </p><p> Questo programma è distribuito sotto i termini della GNU General Public License, pubblicata dalla Free Software Foundation; dalla versione 2 della licenza, o (a tua discrezione) ogni successiva versione.
+  </p><p>Inclusa a questo programma hai ricevuto una copia della GNU General Public License, se non è stato così, scrivi alla Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+  </p></div></div></body></html>
