@@ -82,7 +82,7 @@ typedef struct
     GtkWidget *frame;
     GtkWidget *box;
 
-    GtkWidget *separators[2];
+/*    GtkWidget *separators[2];*/
 
     /* traditional switcher */
     CdePager *cde_pager;
@@ -550,14 +550,14 @@ arrange_switcher (t_switcher * sw)
     if (vertical)
     {
 	sw->box = gtk_vbox_new (FALSE, 1);
-	sw->separators[0] = gtk_hseparator_new ();
-	sw->separators[1] = gtk_hseparator_new ();
+/*	sw->separators[0] = gtk_hseparator_new ();
+	sw->separators[1] = gtk_hseparator_new ();*/
     }
     else
     {
 	sw->box = gtk_hbox_new (FALSE, 0);
-	sw->separators[0] = gtk_vseparator_new ();
-	sw->separators[1] = gtk_vseparator_new ();
+/*	sw->separators[0] = gtk_vseparator_new ();
+	sw->separators[1] = gtk_vseparator_new ();*/
     }
 
     sw->cde_pager = create_cde_pager (sw->screen, sw->screen_names);
@@ -565,18 +565,18 @@ arrange_switcher (t_switcher * sw)
     /* show the widgets */
     gtk_widget_show (sw->box);
 
-    gtk_widget_show (sw->separators[0]);
+/*    gtk_widget_show (sw->separators[0]);
     gtk_widget_show (sw->separators[1]);
-
+*/
     /* packing the widgets */
     gtk_container_add (GTK_CONTAINER (sw->frame), sw->box);
 
-    gtk_box_pack_start (GTK_BOX (sw->box), sw->separators[0], TRUE, TRUE, 2);
-
+/*    gtk_box_pack_start (GTK_BOX (sw->box), sw->separators[0], TRUE, TRUE, 2);
+*/
     gtk_box_pack_start (GTK_BOX (sw->box), sw->cde_pager->box, TRUE, TRUE, 2);
 
-    gtk_box_pack_start (GTK_BOX (sw->box), sw->separators[1], TRUE, TRUE, 2);
-
+/*    gtk_box_pack_start (GTK_BOX (sw->box), sw->separators[1], TRUE, TRUE, 2);
+*/
     /* attach callbacks */
     for (li = sw->callbacks; li; li = li->next)
     {
