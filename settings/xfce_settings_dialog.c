@@ -335,6 +335,9 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
 	item = gtk_menu_item_new_with_label(*s);
 	gtk_widget_show(item);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+	if (strcmp(theme, *s) == 0)
+	    n = i;
     }
 
     g_strfreev(themes);
