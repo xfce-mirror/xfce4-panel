@@ -74,9 +74,7 @@ position_popup (PanelPopup * pp)
     int xbutton, ybutton, xparent, yparent, x, y;
     int w, h;
     gboolean vertical = settings.orientation == VERTICAL;
-    GtkAllocation alloc1 = { 0 }, alloc2 =
-    {
-    0};
+    GtkAllocation alloc1 = { 0 }, alloc2 = { 0};
     GtkArrowType at;
 
     if (!pp)
@@ -90,7 +88,7 @@ position_popup (PanelPopup * pp)
     ybutton = alloc1.y;
 
     p = gtk_widget_get_parent_window (pp->button);
-    gdk_window_get_root_origin (p, &xparent, &yparent);
+    gdk_window_get_origin (p, &xparent, &yparent);
 
     w = gdk_screen_width ();
     h = gdk_screen_height ();

@@ -37,7 +37,6 @@ G_MODULE_IMPORT void groups_write_xml (xmlNodePtr root);
 
 /* settings */
 G_MODULE_IMPORT void groups_set_orientation (int orientation);
-G_MODULE_IMPORT void groups_set_layer (int layer);
 
 G_MODULE_IMPORT void groups_set_size (int size);
 G_MODULE_IMPORT void groups_set_popup_position (int position);
@@ -49,11 +48,9 @@ G_MODULE_IMPORT GtkArrowType groups_get_arrow_direction (void);
 
 /* find or act on specific group */
 G_MODULE_IMPORT Control *groups_get_control (int index);
-G_MODULE_IMPORT PanelPopup *groups_get_popup (int index);
 
 G_MODULE_IMPORT void groups_move (int from, int to);
 G_MODULE_IMPORT void groups_remove (int index);
-G_MODULE_IMPORT void groups_show_popup (int index, gboolean show);
 G_MODULE_IMPORT void groups_add_control (Control * control, int index);
 
 G_MODULE_IMPORT int groups_get_n_controls (void);

@@ -44,6 +44,7 @@
 #include "groups.h"
 #include "popup.h"
 #include "item.h"
+#include "item-control.h"
 #include "item_dialog.h"
 #include "settings.h"
 
@@ -977,11 +978,9 @@ add_tooltip_option (GtkBox * box, ItemDialog * idlg, GtkSizeGroup * sg)
 static void
 popup_menu_changed (GtkToggleButton * tb, Control * control)
 {
-    Item *item = control->data;
+    control->with_popup = gtk_toggle_button_get_active (tb);
 
-    item->with_popup = gtk_toggle_button_get_active (tb);
-
-    groups_show_popup (control->index, item->with_popup);
+    item_control_show_popup (control, control->with_popup);
 }
 
 static inline void
@@ -1054,9 +1053,10 @@ destroy_item_dialog (ItemDialog * idlg)
     g_free (idlg);
 }
 
-static void
-create_item_dialog (Control * control, Item * item,
-		    GtkContainer * container, GtkWidget * close)
+G_MODULE_EXPORT /* EXPORT:reate_item_dialog */
+void
+create_item_dialog (Control *control, Item * item, GtkContainer * container, 
+                    GtkWidget * close)
 {
     ItemDialog *idlg;
     GtkWidget *vbox;
@@ -1066,16 +1066,9 @@ create_item_dialog (Control * control, Item * item,
 
     idlg = g_new0 (ItemDialog, 1);
 
-    if (control)
-    {
-	idlg->control = control;
-	idlg->item = (Item *) control->data;
-    }
-    else
-    {
-	idlg->item = item;
-    }
-
+    idlg->control = control;
+    idlg->item = item;
+    
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
     gtk_container_add (container, vbox);
@@ -1113,16 +1106,6 @@ create_item_dialog (Control * control, Item * item,
 /* panel and menu item API 
  * -----------------------
 */
-
-/* panel control */
-
-G_MODULE_EXPORT /* EXPORT:panel_item_create_options */
-void
-panel_item_create_options (Control * control, GtkContainer * container,
-			   GtkWidget * done)
-{
-    create_item_dialog (control, NULL, container, done);
-}
 
 /* menu item */
 

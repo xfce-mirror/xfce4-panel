@@ -59,11 +59,6 @@ G_MODULE_IMPORT void create_menu_item (Item * mi);
 
 G_MODULE_IMPORT void menu_item_set_popup_size (Item * item, int size);
 
-/*  panel control interface for panel items */
-G_MODULE_IMPORT void create_panel_item (Control * control);
-
-G_MODULE_IMPORT void panel_item_class_init (ControlClass * cc);
-
 /* common functions */
 G_MODULE_IMPORT void item_free (Item * item);
 
@@ -74,5 +69,8 @@ G_MODULE_IMPORT void item_apply_config (Item * item);
 G_MODULE_IMPORT void item_read_config (Item * item, xmlNodePtr node);
 
 G_MODULE_IMPORT void item_write_config (Item * item, xmlNodePtr node);
+
+/* panel item */
+Item *panel_item_new (void);
 
 #endif /* __XFCE_ITEMS_H */

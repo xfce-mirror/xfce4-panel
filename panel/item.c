@@ -311,7 +311,7 @@ popup_menu_timeout (Item * item)
      *
      * There, that's it.
      */
-    box = item->button->parent->parent;
+    box = item->button->parent;
 
     for (li = GTK_BOX (box)->children; li; li = li->next)
     {
@@ -495,6 +495,12 @@ G_MODULE_EXPORT /* EXPORT:item_free */
 void
 item_free (Item * item)
 {
+    if (item->type == PANELITEM)
+    {
+        g_object_unref (item->button);
+        gtk_widget_destroy (item->button);
+    }
+
     g_free (item->command);
     g_free (item->caption);
     g_free (item->tooltip);
@@ -645,7 +651,7 @@ menu_item_set_popup_size (Item * mi, int size)
 /*  Panel item
  *  ----------
 */
-static Item *
+Item *
 panel_item_new (void)
 {
     Item *pi = g_new0 (Item, 1);
@@ -654,7 +660,7 @@ panel_item_new (void)
     pi->button = xfce_iconbutton_new ();
     gtk_widget_show (pi->button);
     gtk_button_set_relief (GTK_BUTTON (pi->button), GTK_RELIEF_NONE);
-    pi->with_popup = TRUE;
+    pi->with_popup = FALSE;
 
     item_apply_config (pi);
 
@@ -670,81 +676,10 @@ panel_item_new (void)
     g_signal_connect (pi->button, "drag-data-received",
 		      G_CALLBACK (item_drop_cb), pi);
 
+    g_object_ref (pi->button);
+    gtk_object_sink (GTK_OBJECT (pi->button));
+    
     return pi;
 }
 
-static void
-panel_item_free (Control * control)
-{
-    Item *pi = control->data;
 
-    item_free (pi);
-}
-
-static void
-panel_item_set_theme (Control * control, const char *theme)
-{
-    Item *pi = control->data;
-
-    item_apply_config (pi);
-}
-
-static void
-panel_item_read_config (Control * control, xmlNodePtr node)
-{
-    Item *pi = control->data;
-
-    item_read_config (pi, node);
-
-    item_apply_config (pi);
-    groups_show_popup (control->index, pi->with_popup);
-}
-
-static void
-panel_item_write_config (Control * control, xmlNodePtr root)
-{
-    Item *pi = control->data;
-
-    item_write_config (pi, root);
-}
-
-static void
-panel_item_attach_callback (Control * control, const char *signal,
-			    GCallback callback, gpointer data)
-{
-    Item *pi = control->data;
-
-    g_signal_connect (pi->button, signal, callback, data);
-}
-
-G_MODULE_EXPORT /* EXPORT:create_panel_item */
-void
-create_panel_item (Control * control)
-{
-    Item *pi = panel_item_new ();
-
-    control->with_popup = TRUE;
-    gtk_container_add (GTK_CONTAINER (control->base), pi->button);
-
-    control->data = (gpointer) pi;
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_item_class_init */
-void
-panel_item_class_init (ControlClass * cc)
-{
-    cc->id = ICON;
-    cc->name = "icon";
-    cc->caption = _("Launcher");
-
-    cc->create_control = (CreateControlFunc) create_panel_item;
-
-    cc->free = panel_item_free;
-    cc->read_config = panel_item_read_config;
-    cc->write_config = panel_item_write_config;
-    cc->attach_callback = panel_item_attach_callback;
-
-    cc->create_options = panel_item_create_options;
-
-    cc->set_theme = panel_item_set_theme;
-}

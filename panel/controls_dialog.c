@@ -39,6 +39,7 @@
 #include "groups.h"
 #include "popup.h"
 #include "settings.h"
+#include "item-control.h"
 
 #define BORDER 6
 
@@ -203,7 +204,7 @@ controls_dialog (Control * control)
         {
             PanelPopup *pp;
 
-            pp = groups_get_popup (control->index);
+            pp = item_control_get_popup (control);
 
             if (!(control->with_popup) || !pp || pp->items == NULL ||
                 xfce_confirm (_("Removing the item will also remove "

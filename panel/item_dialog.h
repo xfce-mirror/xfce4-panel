@@ -118,8 +118,9 @@ G_MODULE_IMPORT void icon_options_get_icon (IconOptions * opts, int *id, char **
  * ------------------------------
  * These functions should only be used by the panel 
 */
-G_MODULE_IMPORT void panel_item_create_options (Control * control, GtkContainer * container,
-				GtkWidget * done);
+G_MODULE_IMPORT void create_item_dialog (Control *control, Item *item, 
+    					 GtkContainer * container,
+					 GtkWidget * done);
 
 G_MODULE_IMPORT void edit_menu_item_dialog (Item * mi);
 

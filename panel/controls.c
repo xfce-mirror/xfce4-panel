@@ -49,6 +49,7 @@
 #include "xfce.h"
 #include "item.h"
 #include "popup.h"
+#include "item-control.h"
 #include "groups.h"
 #include "plugins.h"
 #include "controls_dialog.h"
@@ -408,7 +409,7 @@ add_launcher_class (void)
     info = g_new0 (ControlClassInfo, 1);
     cc = info->class = g_new0 (ControlClass, 1);
 
-    panel_item_class_init (cc);
+    item_control_class_init (cc);
 
     info->name = g_strdup (cc->name);
     info->caption = g_strdup (cc->caption);
@@ -705,9 +706,9 @@ remove_control (void)
     {
 	PanelPopup *pp;
 
-	pp = groups_get_popup (popup_control->index);
+	pp = item_control_get_popup (popup_control);
 
-	if (!(popup_control->with_popup) || !pp || pp->items == NULL ||
+	if (!popup_control->with_popup || !pp || pp->items == NULL ||
 	    xfce_confirm (_("Removing the item will also remove "
 			    "its popup menu."), GTK_STOCK_REMOVE, NULL))
 	{
@@ -984,7 +985,7 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 
     /* hide popup? also check if added to the panel */
     if (control->with_popup && control->base->parent)
-	groups_show_popup (control->index, TRUE);
+	item_control_show_popup (control, TRUE);
 
     /* allow the control to read its configuration */
     control_read_config (control, node);
