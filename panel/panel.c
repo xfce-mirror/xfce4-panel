@@ -101,20 +101,19 @@ add_new (void)
 
     if (hidden)
     {
+	DBG("unhide before adding new item");
 	panel_set_autohide(FALSE);
 
 	while (gtk_events_pending())
 	    gtk_main_iteration();
     }
-    
+	
     panel_add_control ();
     
-    panel_set_position ();
-
     control = groups_get_control (settings.num_groups - 1);
 
     controls_dialog (control);
-
+	
     if (hidden)
 	panel_set_autohide(TRUE);
 }
@@ -211,6 +210,7 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event, GtkMenu * menu)
     {
         gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button,
                         event->time);
+
         return TRUE;
     }
 
@@ -827,6 +827,8 @@ panel_set_position (void)
 	hidden = settings.autohide;
 	if (hidden)
 	{
+	    DBG("unhide panel before repositioning\n");
+	    
 	    panel_set_autohide(FALSE);
 
 	    while(gtk_events_pending())

@@ -40,6 +40,7 @@
 #endif
 
 #include <libxfce4util/i18n.h>
+#include <libxfce4util/debug.h>
 
 #include "xfce.h"
 #include "item.h"
@@ -277,7 +278,17 @@ static void
 add_control (void)
 {
     Control *newcontrol;
+    gboolean hidden = settings.autohide;
 
+    if (hidden)
+    {
+	DBG("unhide before adding new item");
+	panel_set_autohide(FALSE);
+
+	while (gtk_events_pending())
+	    gtk_main_iteration();
+    }
+	
     panel_add_control ();
     panel_set_position ();
     newcontrol = groups_get_control (settings.num_groups - 1);
@@ -288,6 +299,9 @@ add_control (void)
     popup_control = NULL;
 
     controls_dialog (newcontrol);
+
+    if (hidden)
+	panel_set_autohide(TRUE);
 }
 
 static GtkItemFactoryEntry control_items[] = {
