@@ -67,6 +67,7 @@ struct _Iconbox
     int width, height;
     int offset;
     int block_resize;
+    gboolean in_move;
 
     guint opacity;
     
@@ -663,34 +664,82 @@ iconbox_move_function (GtkWidget *win, Iconbox *ib, int *x, int *y)
     {
         case GTK_SIDE_LEFT:
             *x = r.x;
-            *y = CLAMP (*y, r.y, r.y + r.height - win->allocation.height);
             break;
         case GTK_SIDE_RIGHT:
             *x = r.x + r.width - win->allocation.width;
-            *y = CLAMP (*y, r.y, r.y + r.height - win->allocation.height);
             break;
         case GTK_SIDE_TOP:
-            *x = CLAMP (*x, r.x, r.x + r.width - win->allocation.width);
             *y = r.y;
             break;
         default:
-            *x = CLAMP (*x, r.x, r.x + r.width - win->allocation.width);
             *y = r.y + r.height - win->allocation.height;
     }
 
-    if (IS_HORIZONTAL (ib->side))
+    if (!ib->in_move)
     {
-        if (ib->justification == GTK_JUSTIFY_RIGHT)
-            ib->offset = r.x + r.width - win->allocation.width - *x;
+        if (IS_HORIZONTAL (ib->side))
+        {
+            switch (ib->justification)
+            {
+                case GTK_JUSTIFY_LEFT:
+                    *x = r.x + ib->offset;
+                    break;
+                case GTK_JUSTIFY_RIGHT:
+                    *x = r.x + r.width - win->allocation.width - ib->offset;
+                    break;
+                case GTK_JUSTIFY_CENTER:
+                    /* XXX should we use an offset here as well? */
+                    *x = r.x + (r.width - win->allocation.width) / 2;
+                    break;
+                case GTK_JUSTIFY_FILL:
+                default:
+                    *x = r.x;
+            }
+
+            *x = CLAMP (*x, r.x, r.x + r.width - win->allocation.width);
+        }
         else
-            ib->offset = *x - r.x;
+        {
+            switch (ib->justification)
+            {
+                case GTK_JUSTIFY_LEFT:
+                    *y = r.y + ib->offset;
+                    break;
+                case GTK_JUSTIFY_RIGHT:
+                    *y = r.y + r.height - win->allocation.height - ib->offset;
+                    break;
+                case GTK_JUSTIFY_CENTER:
+                    /* XXX should we use an offset here as well? */
+                    *y = r.y + (r.height - win->allocation.height) / 2;
+                    break;
+                case GTK_JUSTIFY_FILL:
+                default:
+                    *y = r.y;
+            }
+            
+            *y = CLAMP (*y, r.y, r.y + r.height - win->allocation.height);
+        }
     }
     else
     {
-        if (ib->justification == GTK_JUSTIFY_RIGHT)
-            ib->offset = r.y + r.height - win->allocation.height - *y;
+        if (IS_HORIZONTAL (ib->side))
+        {
+            *x = CLAMP (*x, r.x, r.x + r.width - win->allocation.width);
+
+            if (ib->justification == GTK_JUSTIFY_RIGHT)
+                ib->offset = r.x + r.width - win->allocation.width - *x;
+            else
+                ib->offset = *x - r.x;
+        }
         else
-            ib->offset = *y - r.y;
+        {
+            *y = CLAMP (*y, r.y, r.y + r.height - win->allocation.height);
+
+            if (ib->justification == GTK_JUSTIFY_RIGHT)
+                ib->offset = r.y + r.height - win->allocation.height - *y;
+            else
+                ib->offset = *y - r.y;
+        }
     }
     
     ib->x = *x;
@@ -707,15 +756,19 @@ iconbox_resize_function (GtkWidget *win, Iconbox *ib, GtkAllocation *old,
     if (ib->block_resize)
         return;
     
-    if(ib->justification == GTK_JUSTIFY_RIGHT)
-    {
-        if (!IS_HORIZONTAL (ib->side))
-            *y = *y - new->height + old->height;
-        else
-            *x = *x - new->width + old->width;
-    }
-
     iconbox_move_function (win, ib, x, y);
+}
+
+static void
+iconbox_move_start (GtkWidget *win, Iconbox *ib)
+{
+    ib->in_move = TRUE;
+}
+
+static void
+iconbox_move_end (GtkWidget *win, int x, int y, Iconbox *ib)
+{
+    ib->in_move = FALSE;
 }
 
 static Iconbox *
@@ -752,6 +805,11 @@ create_iconbox (void)
     
     g_signal_connect (ib->win, "button-press-event", 
                       G_CALLBACK (iconbox_popup_menu), ib);
+
+    g_signal_connect (ib->win, "move-start", G_CALLBACK (iconbox_move_start),
+                      ib);
+
+    g_signal_connect (ib->win, "move-end", G_CALLBACK (iconbox_move_end), ib);
     
     return ib;
 }
@@ -776,7 +834,7 @@ iconbox_read_settings (Iconbox *ib)
             break;
         case GTK_JUSTIFY_CENTER:
             xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
-                                                XFCE_HANDLE_STYLE_BOTH);
+                                                XFCE_HANDLE_STYLE_NONE);
             break;
         case GTK_JUSTIFY_FILL:
             xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
@@ -908,7 +966,7 @@ write_offset (Iconbox *ib)
 
     if ((fp = fopen (file, "w")) != NULL)
     {
-        fprintf (fp, "offset = %d", ib->offset);
+        fprintf (fp, "offset = %d\n", ib->offset);
 
         fclose (fp);
     }
@@ -1082,7 +1140,7 @@ iconbox_set_justification (Iconbox * ib, GtkJustification justification)
             break;
         case GTK_JUSTIFY_CENTER:
             xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
-                                                XFCE_HANDLE_STYLE_BOTH);
+                                                XFCE_HANDLE_STYLE_NONE);
             break;
         case GTK_JUSTIFY_FILL:
             xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
