@@ -34,7 +34,7 @@
 /* callbacks */
 static void mini_lock_cb(void)
 {
-    exec_cmd("xflock", FALSE, FALSE);
+    exec_cmd("xflock4", FALSE, FALSE);
 }
 
 static void mini_info_cb(void)
