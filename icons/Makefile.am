@@ -4,6 +4,8 @@ hicolor16dir = $(datadir)/icons/hicolor/16x16/apps
 
 hicolor48_DATA = \
 	xfce4-panel.png \
+	xfce4-iconbox.png \
+	xfce4-taskbar.png \
 	xfce-edit.png \
 	xfce-filemanager.png \
 	xfce-games.png \
