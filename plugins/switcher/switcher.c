@@ -833,6 +833,12 @@ static void switcher_set_size(Control *control, int size)
 
     if (sw->graphical)
     {
+	s = icon_size[size];
+
+	if (settings.orientation == HORIZONTAL)
+	    gtk_widget_set_size_request(sw->netk_pager, -1, s);
+	else
+	    gtk_widget_set_size_request(sw->netk_pager, s, -1);
     }
     else
     {
@@ -939,9 +945,24 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 
 	if (i == 1)
 	{
+	    GtkOrientation gor = (settings.orientation == VERTICAL) ? 
+				 GTK_ORIENTATION_VERTICAL : 
+				 GTK_ORIENTATION_HORIZONTAL;
+	    
+	    sw->netk_pager = netk_pager_new(sw->screen);
+	    netk_pager_set_n_rows(NETK_PAGER(sw->netk_pager), 1);
+	    netk_pager_set_orientation(NETK_PAGER(sw->netk_pager), gor);
+	    gtk_widget_show(sw->netk_pager);
+	    
 	    sw->graphical = TRUE;
 
-	    /* TODO: create graphical pager */
+	    gtk_widget_destroy(sw->cde_pager->box);
+	    cde_pager_free(sw->cde_pager);
+	    sw->cde_pager = NULL;
+
+	    gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
+		    	       TRUE, TRUE, 2);
+	    gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 1);
 	}
     }
 
@@ -1082,8 +1103,12 @@ static void arrange_switcher(t_switcher *sw)
 
     if (sw->graphical)
     {
+	GtkOrientation gor = vertical ? GTK_ORIENTATION_VERTICAL : 
+	    			GTK_ORIENTATION_HORIZONTAL;
+	
 	sw->netk_pager = netk_pager_new(sw->screen);
 	netk_pager_set_n_rows(NETK_PAGER(sw->netk_pager), 1);
+	netk_pager_set_orientation(NETK_PAGER(sw->netk_pager), gor);
 	gtk_widget_show(sw->netk_pager);
     }
     else
@@ -1120,7 +1145,7 @@ static void arrange_switcher(t_switcher *sw)
     if (sw->graphical)
     {
 	gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
-			   TRUE, TRUE, 0);
+			   TRUE, TRUE, 2);
     }
     else
     {
@@ -1312,25 +1337,69 @@ static void show_names_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 }
 #endif
 
-#if 0
 static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 {
     t_switcher *sw = sd->sw;
     gboolean graphical;
+    GList *li;
     
     graphical = gtk_toggle_button_get_active(tb);
+
+    if (sw->graphical)
+    {
+	gtk_widget_destroy(sw->netk_pager);
+	sw->netk_pager = NULL;
+    }
+    else
+    {
+	gtk_widget_destroy(sw->cde_pager->box);
+	cde_pager_free(sw->cde_pager);
+	sw->cde_pager = NULL;
+    }
+    
     sw->graphical = graphical;
     
     if (graphical)
     {
+	GtkOrientation gor = (settings.orientation == VERTICAL) ? 
+	    			GTK_ORIENTATION_VERTICAL : 
+	    			GTK_ORIENTATION_HORIZONTAL;
+	
+	sw->netk_pager = netk_pager_new(sw->screen);
+	netk_pager_set_n_rows(NETK_PAGER(sw->netk_pager), 1);
+	netk_pager_set_orientation(NETK_PAGER(sw->netk_pager), gor);
+	gtk_widget_show(sw->netk_pager);
+	
+	gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
+			   TRUE, TRUE, 2);
+	gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 1);
     }
     else
     {
+	sw->cde_pager = create_cde_pager(sw->screen, sw->screen_names);
+	
+	gtk_box_pack_start(GTK_BOX(sw->box), sw->cde_pager->box, 
+			   TRUE, TRUE, 2);
+	gtk_box_reorder_child(GTK_BOX(sw->box), sw->cde_pager->box, 1);
+    }
+
+    for (li = sw->callbacks; li; li = li->next)
+    {
+	SignalCallback *cb = li->data;
+	
+	if (sw->graphical)
+	{
+	    g_signal_connect(sw->netk_pager, 
+		    	     cb->signal, cb->callback, cb->data);
+	}
+	else
+	{
+	    cde_pager_attach_callback(sw->cde_pager, cb);
+	}
     }
 
     gtk_widget_set_sensitive(sd->revert, TRUE);
 }
-#endif
 
 static void switcher_revert(GtkWidget *b, t_switcher_dialog *sd)
 {
@@ -1338,9 +1407,10 @@ static void switcher_revert(GtkWidget *b, t_switcher_dialog *sd)
 	    			 sd->backup_show_minibuttons);
 /*    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->names_checkbutton), 
 	    			 sd->backup_show_names);
+*/
+
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->graphical_checkbutton), 
 	    			 sd->backup_graphical);
-*/
 }  
 
 static void switcher_add_options(Control *control, GtkContainer *container, 
@@ -1424,7 +1494,7 @@ static void switcher_add_options(Control *control, GtkContainer *container,
     g_signal_connect(sd->names_checkbutton, "toggled", 
 	    	     G_CALLBACK(show_names_changed), sd);
 */
-    /* show graphical pager ? 
+    /* show graphical pager ?*/ 
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
@@ -1444,7 +1514,7 @@ static void switcher_add_options(Control *control, GtkContainer *container,
 	    			 sd->sw->show_minibuttons);
     g_signal_connect(sd->graphical_checkbutton, "toggled", 
 	    	     G_CALLBACK(graphical_changed), sd);
-*/
+
     g_signal_connect(revert, "clicked", G_CALLBACK(switcher_revert), sd);
     g_signal_connect(done, "clicked", G_CALLBACK(switcher_dialog_done), sd);
 }
