@@ -981,10 +981,6 @@ create_panel (void)
     panel.position.y = y;
     gtk_window_move (GTK_WINDOW (panel.toplevel), x, y);
 
-    gtk_widget_show (panel.toplevel);
-    set_window_layer (panel.toplevel, settings.layer);
-    set_window_skip (panel.toplevel);
-
     gtk_widget_size_request (panel.toplevel, &panel_req);
     update_xinerama_coordinates (&panel);
 
@@ -995,6 +991,10 @@ create_panel (void)
     /* this must be before set_autohide() and after set_position()
      * otherwise the initial position will be messed up */
     panel_created = TRUE;
+
+    gtk_widget_show (panel.toplevel);
+    set_window_layer (panel.toplevel, settings.layer);
+    set_window_skip (panel.toplevel);
 
     if (hidden)
 	panel_set_autohide (TRUE);

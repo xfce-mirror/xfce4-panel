@@ -76,10 +76,9 @@ item_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 
 	for (fnp = fnames; fnp; fnp = fnp->next, count--)
 	{
-	    strcat (execute, " \'");
+	    strcat (execute, " ");
 	    strncat (execute, (char *) (fnp->data),
-		     MAXSTRLEN - strlen (execute) - 2);
-	    strcat (execute, "\' ");
+		     MAXSTRLEN - strlen (execute) - 1);
 	}
 
 	if (item->in_terminal)
