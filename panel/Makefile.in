@@ -92,6 +92,7 @@ am__quote = @am__quote@
 install_sh = @install_sh@
 bin_PROGRAMS = xfce4
 xfce4_SOURCES = \
+xfce_clock.c \
 builtins.c \
 callbacks.c \
 central.c \
@@ -119,6 +120,7 @@ popup.h \
 settings.h \
 side.h \
 wmhints.h \
+xfce_clock.h \
 xfce.c \
 xfce_support.c
 
@@ -142,11 +144,11 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = xfce4$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_xfce4_OBJECTS = xfce4-builtins.$(OBJEXT) xfce4-callbacks.$(OBJEXT) \
-	xfce4-central.$(OBJEXT) xfce4-controls.$(OBJEXT) \
-	xfce4-controls_dialog.$(OBJEXT) xfce4-dialogs.$(OBJEXT) \
-	xfce4-iconbutton.$(OBJEXT) xfce4-icons.$(OBJEXT) \
-	xfce4-info.$(OBJEXT) xfce4-item.$(OBJEXT) \
+am_xfce4_OBJECTS = xfce4-xfce_clock.$(OBJEXT) xfce4-builtins.$(OBJEXT) \
+	xfce4-callbacks.$(OBJEXT) xfce4-central.$(OBJEXT) \
+	xfce4-controls.$(OBJEXT) xfce4-controls_dialog.$(OBJEXT) \
+	xfce4-dialogs.$(OBJEXT) xfce4-iconbutton.$(OBJEXT) \
+	xfce4-icons.$(OBJEXT) xfce4-info.$(OBJEXT) xfce4-item.$(OBJEXT) \
 	xfce4-item_dialog.$(OBJEXT) xfce4-move.$(OBJEXT) \
 	xfce4-popup.$(OBJEXT) xfce4-settings.$(OBJEXT) \
 	xfce4-side.$(OBJEXT) xfce4-wmhints.$(OBJEXT) \
@@ -178,6 +180,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-side.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-wmhints.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-xfce.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4-xfce_clock.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-xfce_support.Po
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -231,6 +234,7 @@ clean-binPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
+xfce4-xfce_clock.$(OBJEXT): xfce_clock.c
 xfce4-builtins.$(OBJEXT): builtins.c
 xfce4-callbacks.$(OBJEXT): callbacks.c
 xfce4-central.$(OBJEXT): central.c
@@ -276,6 +280,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-side.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-wmhints.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-xfce.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-xfce_clock.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-xfce_support.Po@am__quote@
 
 distclean-depend:
@@ -298,6 +303,24 @@ distclean-depend:
 @AMDEP_TRUE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 	$(LTCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
+
+xfce4-xfce_clock.o: xfce_clock.c
+@AMDEP_TRUE@	source='xfce_clock.c' object='xfce4-xfce_clock.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-xfce_clock.Po' tmpdepfile='$(DEPDIR)/xfce4-xfce_clock.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-xfce_clock.o `test -f 'xfce_clock.c' || echo '$(srcdir)/'`xfce_clock.c
+
+xfce4-xfce_clock.obj: xfce_clock.c
+@AMDEP_TRUE@	source='xfce_clock.c' object='xfce4-xfce_clock.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-xfce_clock.Po' tmpdepfile='$(DEPDIR)/xfce4-xfce_clock.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-xfce_clock.obj `cygpath -w xfce_clock.c`
+
+xfce4-xfce_clock.lo: xfce_clock.c
+@AMDEP_TRUE@	source='xfce_clock.c' object='xfce4-xfce_clock.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-xfce_clock.Plo' tmpdepfile='$(DEPDIR)/xfce4-xfce_clock.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-xfce_clock.lo `test -f 'xfce_clock.c' || echo '$(srcdir)/'`xfce_clock.c
 
 xfce4-builtins.o: builtins.c
 @AMDEP_TRUE@	source='builtins.c' object='xfce4-builtins.o' libtool=no @AMDEPBACKSLASH@
