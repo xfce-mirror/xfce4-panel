@@ -624,12 +624,16 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     is_running = TRUE;
 
+#if 0
 #ifdef ENABLE_NLS
     bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
 #ifdef HAVE_BIND_TEXTDOMAIN_CODESET
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 #endif
     textdomain (GETTEXT_PACKAGE);
+#endif
+#else
+    xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 #endif
 
     mcs_manager = mp->manager;

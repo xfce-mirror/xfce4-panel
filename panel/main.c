@@ -237,12 +237,16 @@ main (int argc, char **argv)
 
     net_wm_support = FALSE;
 
+#if 0
 #ifdef ENABLE_NLS
     bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
 #ifdef HAVE_BIND_TEXTDOMAIN_CODESET
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 #endif
     textdomain (GETTEXT_PACKAGE);
+#endif
+#else
+    xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 #endif
 
     gtk_set_locale ();
