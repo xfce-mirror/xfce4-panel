@@ -948,6 +948,19 @@ panel_allocate_cb (GtkWidget * window, GtkAllocation * allocation, Panel * p)
     }
 }
 
+static void
+set_panel_window_properties (Panel * p)
+{
+    GtkWindow *window = GTK_WINDOW (p->toplevel);
+    
+    gtk_window_set_decorated (window, FALSE);
+    gtk_window_set_resizable (window, FALSE);
+    gtk_window_stick (window);
+
+    gtk_window_set_skip_taskbar_hint (window, TRUE);
+    gtk_window_set_skip_pager_hint (window, TRUE);
+}
+
 static GtkWidget *
 create_panel_window (Panel * p)
 {
@@ -959,12 +972,6 @@ create_panel_window (Panel * p)
     window = GTK_WINDOW (w);
 
     gtk_window_set_title (window, _("Xfce Panel"));
-    gtk_window_set_decorated (window, FALSE);
-    gtk_window_set_resizable (window, FALSE);
-    gtk_window_stick (window);
-
-    gtk_window_set_skip_taskbar_hint (window, TRUE);
-    gtk_window_set_skip_pager_hint (window, TRUE);
 
     gtk_window_set_gravity (window, GDK_GRAVITY_STATIC);
 
@@ -1095,6 +1102,8 @@ create_panel (void)
 
     p->priv->is_created = TRUE;
 
+    set_panel_window_properties (p);
+    
     panel_set_position (p);
 
     DBG (" ++ position: %d, %d\n", panel.position.x, panel.position.y);
@@ -1205,12 +1214,12 @@ panel_set_orientation (int orientation)
     else
 	panel_center (RIGHT);
 
+    set_panel_window_properties (&panel);
+
     gtk_widget_show_now (panel.toplevel);
 
     /* size sometimes changes after showing */
     panel_set_position (&panel);
-
-    gtk_window_stick (GTK_WINDOW (panel.toplevel));
 
     panel_set_layer (panel.priv->settings.layer);
 
