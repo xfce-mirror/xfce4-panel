@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY copyright SYSTEM "copyright.xml"> 
-  <!ENTITY appversion "3.99.2"> 
-  <!ENTITY manrevision "0.9"> 
-  <!ENTITY date "17 July 2003"> 
+  <!ENTITY appversion "3.99.3"> 
+  <!ENTITY manrevision "0.99"> 
+  <!ENTITY date "July 2003"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
 
@@ -137,7 +137,7 @@ maintainers, etc. Commented out by default.
   </figure>
 
   <para>The figure shows the default panel configuration with one open
-    panel menu and the mouse hovering over the setup button, making it show
+    panel menu and the mouse hovering over a launcher button, making it show
     a tooltip.
   </para>
 
@@ -199,10 +199,11 @@ maintainers, etc. Commented out by default.
   </figure>
 
   <para>Global panel preferences can be changed from the XFce 4 Settings 
-    Manager, which can be started either from the 'Setup' button on the panel 
-    or from the right-click menu on the move handles. See "<ulink 
-      url="#panel-settings">Panel Preferences</ulink>" for an explanation of 
-    the available options.
+    Manager, which can be started either from the 'Setup' button on the panel
+    (see Systembuttons panel item, below), or by choosing the 'Properties...'
+    item from the right-click menu on the move handles. See 
+    "<ulink url="#panel-settings">Panel Preferences</ulink>" for an 
+    explanation of the available options.
   </para>
 
 </sect1>
@@ -213,6 +214,11 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-items">
   <title>Panel Items</title>
 
+  <para>The XFce 4 panel has the possibility to load external plugins as well
+    as builtin ones. In this section we will only decribe panel items that are
+    installed with the panel.
+  </para>
+  
   <para>The properties dialog for a panel item can be opened from the 
     right-click menu on the item. Each type of panel item has its own 
     configuration dialog. Every dialog offers at least these options:
@@ -220,11 +226,7 @@ maintainers, etc. Commented out by default.
 
   <itemizedlist>
     <listitem>Change the position of the item on the panel.</listitem>
-    <listitem>Revert changes. When you change anything on in the dialog, the
-      <guibutton>Revert</guibutton> button will be enabled so you can 
-      always go back to the initial settings.
-    </listitem>
-    <listitem>Remove the item.</listitem>
+    <listitem>Remove the item. </listitem>
   </itemizedlist>
 
 
@@ -638,8 +640,8 @@ maintainers, etc. Commented out by default.
 	  <para>It is very easy to move the panel around the screen. The 
 	    settings dialog provides an easy way to center the panel on 
 	    one of the four edges of the screen. Note that the panel will also
-	    'snap' to the edge centers as well as the screen corners when you
-	    drag it close enough to those positions.
+	    'snap' to the screen corners as well as the center of the screen
+	    edges when you drag it close enough to those positions.
 	  </para>
 	</listitem>
       </varlistentry>
