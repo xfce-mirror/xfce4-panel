@@ -564,6 +564,7 @@ fs_cancel_cb (GtkDialog * fs)
     gtk_dialog_response (fs, GTK_RESPONSE_CANCEL);
 }
 
+#if 0
 /* escaping spaces */
 static char *
 path_escape_spaces (const char *path)
@@ -597,7 +598,6 @@ path_escape_spaces (const char *path)
     return newpath;
 }
 
-#if 0
 static char *
 path_unescape_spaces (const char *path)
 {
@@ -667,7 +667,10 @@ real_select_file (const char *title, const char *path,
         temp = gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
 
         if (temp && strlen (temp))
-            name = path_escape_spaces (temp);
+	    /* Too messy: commands should be escaped, internal filenames
+	     * should not. The user now has to escape commands manually
+            name = path_escape_spaces (temp); */
+	    name = g_strdup(temp);
         else
             name = NULL;
     }
