@@ -1,3 +1,31 @@
+2002-11-06 12:14  huysmans
+
+	* panel/controls_dialog.c: Really fixed control positioning.
+
+2002-11-06 12:09  huysmans
+
+	* panel/: builtins.c, controls_dialog.c, dialogs.c, global.h,
+	handle.c, side.c: Fixed control positioning.
+
+2002-11-05 23:53  huysmans
+
+	* panel/side.c: This is an 'almost' fix for a control positioning
+	bug.
+
+2002-11-05 23:04  huysmans
+
+	* ChangeLog, panel/callbacks.c, panel/callbacks.h, panel/central.c,
+	panel/central.h, panel/controls.c, panel/controls.h,
+	panel/controls_dialog.c, panel/dialogs.c, panel/global.h,
+	panel/handle.c, panel/popup.c, panel/popup.h, panel/side.c,
+	panel/side.h, panel/xfce.c: Major reworking of panel internals.
+	Work in progress
+
+2002-10-28 08:10  huysmans
+
+	* panel/callbacks.c: Fix positioning bug the right way (Olivier's
+	suggestion)
+
 2002-10-27 17:22  huysmans
 
 	* panel/: side.c, xfce_support.c: Use putenv instead of setenv.

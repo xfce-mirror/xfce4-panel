@@ -167,10 +167,11 @@ static void create_backup(void)
     backup.central_index = settings.central_index;
     backup.num_screens = settings.num_screens;
     backup.show_desktop_buttons = settings.show_desktop_buttons;
+    backup.show_minibuttons = settings.show_minibuttons;
     backup.show_central = settings.show_central;
     backup.on_top = settings.on_top;
-    backup.lock_command = g_strdup(settings.lock_command);
-    backup.exit_command = g_strdup(settings.exit_command);
+/*    backup.lock_command = g_strdup(settings.lock_command);
+    backup.exit_command = g_strdup(settings.exit_command);*/
 }
 
 static void restore_backup(void)
@@ -202,13 +203,16 @@ static void restore_backup(void)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox),
                                  backup.show_desktop_buttons);
 
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(minibuttons_checkbox),
+                                 backup.show_minibuttons);
+
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox),
                                  backup.show_central);
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ontop_checkbox),
                                  backup.on_top);
 
-    if(backup.lock_command)
+/*    if(backup.lock_command)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
     else
         gtk_entry_set_text(GTK_ENTRY(lock_entry), "");
@@ -217,7 +221,7 @@ static void restore_backup(void)
         gtk_entry_set_text(GTK_ENTRY(exit_entry), backup.exit_command);
     else
         gtk_entry_set_text(GTK_ENTRY(exit_entry), "");
-
+*/
     position.x = backup_pos.x;
     position.y = backup_pos.y;
     panel_set_position();

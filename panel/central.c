@@ -180,6 +180,8 @@ int screen_button_get_index(ScreenButton * sb)
 
 static void screen_button_set_size(ScreenButton * sb, int size)
 {
+    GtkStyle *gstyle;
+    
     int w, h;
 
     /* TODO:
@@ -210,6 +212,16 @@ static void screen_button_set_size(ScreenButton * sb, int size)
     }
 
     gtk_widget_set_size_request(sb->button, w, h);
+
+/*    gstyle = gtk_widget_get_style(sb->button);
+    gtk_widget_modify_bg(sb->button, GTK_STATE_ACTIVE, 
+	    		 &gstyle->bg[GTK_STATE_SELECTED]);
+    gtk_widget_modify_bg(sb->button, GTK_STATE_NORMAL, 
+	    		 &gstyle->bg[GTK_STATE_NORMAL]);
+    if (sb->label)
+	gtk_widget_modify_fg(sb->label, GTK_STATE_ACTIVE, 
+			     &gstyle->fg[GTK_STATE_SELECTED]);
+*/
 }
 
 static void screen_button_set_style(ScreenButton * sb, int style)
@@ -272,20 +284,20 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
     if(settings.orientation == VERTICAL)
     {
         gtk_table_attach(GTK_TABLE(table), sb->frame, 0, 1, pos, pos + 1,
-                         GTK_EXPAND, GTK_EXPAND, 0, 0);
+                         GTK_EXPAND, GTK_EXPAND, 1, 1);
     }
     else
     {
         if(pos % 2 == 0 || settings.size <= SMALL)
 	{
             gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1,
-                             GTK_EXPAND, GTK_EXPAND, 0, 0);
+                             GTK_EXPAND, GTK_EXPAND, 1, 1);
 	}
         else
 	{
 	    pos = (pos - 1)/2;
             gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 1, 2,
-                             GTK_EXPAND, GTK_EXPAND, 0, 0);
+                             GTK_EXPAND, GTK_EXPAND, 1, 1);
 	}
     }
 }
@@ -474,7 +486,7 @@ void central_panel_init(GtkBox * box)
 	gtk_widget_show(separators[1]);
     }
     
-    gtk_box_pack_start(GTK_BOX(central_box), separators[0], FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(central_box), separators[0], FALSE, FALSE, 2);
     
     create_minibuttons();
 
@@ -499,7 +511,7 @@ void central_panel_init(GtkBox * box)
     add_desktop_table(GTK_BOX(central_box));
     add_mini_table(RIGHT, GTK_BOX(central_box));
 
-    gtk_box_pack_start(GTK_BOX(central_box), separators[1], FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(central_box), separators[1], FALSE, FALSE, 2);
     
     central_panel_set_size(settings.size);
     
