@@ -534,20 +534,21 @@ create_popup_option(GtkSizeGroup *sg)
     GtkWidget *hbox;
     GtkWidget *label;
 
-    hbox = gtk_hbox_new (FALSE, 4);
+    hbox = gtk_hbox_new (FALSE, 0);
     gtk_widget_show (hbox);
 
-    label = gtk_label_new (_("Subpanel:"));
+    label = gtk_label_new (_("Menu:"));
     gtk_size_group_add_widget (sg, label);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    popup_checkbutton = gtk_check_button_new();
+    popup_checkbutton = 
+	gtk_check_button_new_with_label(_("Attach menu to launcher"));
     gtk_widget_show(popup_checkbutton);
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(popup_checkbutton), 
 	    			 config_item->with_popup);
-    gtk_box_pack_start (GTK_BOX (hbox), popup_checkbutton, FALSE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), popup_checkbutton, FALSE, FALSE, 2);
 
     g_signal_connect(popup_checkbutton, "toggled", G_CALLBACK(popup_changed), 
 	    	     NULL);
@@ -642,7 +643,7 @@ create_item_options_box (void)
     if (config_item->type == PANELITEM)
     {
 	box = create_popup_option(sg);
-        gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 2);
+        gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 4);
     }
     
     /* position (menu item) */
