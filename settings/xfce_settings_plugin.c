@@ -25,11 +25,11 @@
 
 #include <gtk/gtk.h>
 #include <libxml/tree.h>
-#include <libxml/tree.h>
 #include <X11/Xlib.h>
 
 #include <libxfce4mcs/mcs-common.h>
 #include <libxfce4mcs/mcs-manager.h>
+#include <libxfce4util/util.h>
 #include <xfce-mcs-manager/manager-plugin.h>
 
 #include "xfce_settings.h"
@@ -53,7 +53,7 @@ McsPluginInitResult mcs_plugin_init(McsPlugin *mp)
 {
 #ifdef ENABLE_NLS
     /* This is required for UTF-8 at least - Please don't remove it */
-    bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
+    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
 #endif
@@ -164,22 +164,22 @@ static char *get_read_config_file(void)
 {
     char *path;
 
-    path = g_strconcat(g_get_home_dir(), 
-		       "/.xfce4/settings/xfce-settings.xml", NULL);
+    path = xfce_get_userfile("settings", "xfce-settings.xml", NULL);
 
     if (g_file_test(path, G_FILE_TEST_EXISTS))
 	return path;
     else
 	g_free(path);
 
-    path = g_strconcat(SYSCONFDIR, "xfce4/settings/xfce-settings.xml", NULL);
+    path = g_build_filename(SYSCONFDIR, "xfce4", "settings",
+		    "xfce-settings.xml", NULL);
     
     if (g_file_test(path, G_FILE_TEST_EXISTS))
-	return path;
+	return(path);
     else
 	g_free(path);
     
-    return NULL;
+    return(NULL);
 }
 
 static void xfce_read_options(void)

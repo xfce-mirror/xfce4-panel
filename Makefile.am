@@ -1,18 +1,15 @@
 @SET_MAKE@
 
-confdir=$(sysconfdir)/xfce4
+confdir = $(sysconfdir)/xfce4
 
 conf_DATA = xfce4rc
 
-EXTRA_DIST = example.xfce4rc.in xfce4.spec xfce4.spec.in autogen.sh
+EXTRA_DIST = xfce4rc.in xfce4.spec.in
 
-SUBDIRS = po doc @MY_SUBDIRS@
+SUBDIRS = po doc icons panel settings plugins themes
 
 distclean-local:
 	rm -rf xfce4rc xfce4.spec *.cache
-
-xfce4rc: example.xfce4rc.in
-	@sed -e "s%_pkgdatadir_%$(pkgdatadir)%g" example.xfce4rc.in > xfce4rc
 
 rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz

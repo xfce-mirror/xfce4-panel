@@ -32,10 +32,6 @@
 
 #define strequals(s1,s2) !strcmp(s1, s2)
 
-#ifndef DATADIR
-#define DATADIR "/usr/local/share/xfce4"
-#endif
-
 #define BORDER 5
 
 /* panel sides / popup orientation */

@@ -1,6 +1,6 @@
-SUBDIRS = \
-clock \
-mailcheck \
-switcher \
-systembuttons \
-pager
+SUBDIRS =								\
+	clock								\
+	mailcheck							\
+	switcher							\
+	systembuttons							\
+	pager

@@ -415,7 +415,7 @@ static GtkWidget *create_command_option(GtkSizeGroup * sg)
         gtk_check_button_new_with_mnemonic(_("Use startup _notification"));
     gtk_widget_show(sn_checkbutton);
     gtk_box_pack_start(GTK_BOX(vbox2), sn_checkbutton, FALSE, FALSE, 0);
-#ifdef HAVE_STARTUP_NOTIFICATION
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     gtk_widget_set_sensitive(sn_checkbutton, TRUE);
 #else
     gtk_widget_set_sensitive(sn_checkbutton, FALSE);

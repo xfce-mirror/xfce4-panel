@@ -569,12 +569,6 @@ gboolean create_clock_control(Control * control)
 
 G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 {
-#ifdef ENABLE_NLS
-    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-    textdomain (GETTEXT_PACKAGE);
-#endif
-
     cc->name = "clock";
     cc->caption = _("Xfce Clock");
     

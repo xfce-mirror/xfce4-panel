@@ -36,9 +36,10 @@
 #include <X11/Xatom.h>
 #include <glib.h>
 #include <gdk/gdk.h>
+#include <libxfce4util/util.h>
 #include <libxfcegui4/libxfcegui4.h>
 
-#ifdef HAVE_STARTUP_NOTIFICATION
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
 #define SN_API_NOT_YET_FROZEN
 #include <libsn/sn.h>
 #include <gdk/gdkx.h>
@@ -52,48 +53,50 @@ extern char **environ;
 /*  Files and directories
  *  ---------------------
 */
-char *get_save_dir(void)
+gchar *
+get_save_dir(void)
 {
-    const char *home = g_get_home_dir();
-
-    return g_build_filename(home, HOMERCDIR, NULL);
+    return(g_strdup(xfce_get_userdir()));
 }
 
-char *get_save_file(const char *name)
+gchar *
+get_save_file(const gchar *name)
 {
-    const char *home = g_get_home_dir();
-
-    return g_build_filename(home, HOMERCDIR, name, NULL);
+    return(xfce_get_userfile(name, NULL));
 }
 
-char **get_read_dirs(void)
+gchar **
+get_read_dirs(void)
 {
-    char **dirs;
+    gchar **dirs;
 
     if(disable_user_config)
     {
-        dirs = g_new0(char *, 2);
+        dirs = g_new(gchar *, 2);
 
         dirs[0] = g_build_filename(SYSCONFDIR, SYSRCDIR, NULL);
+	dirs[1] = NULL;
     }
     else
     {
-        dirs = g_new0(char *, 3);
+        dirs = g_new(gchar *, 3);
 
-        dirs[0] = g_build_filename(g_get_home_dir(), HOMERCDIR, NULL);
+        dirs[0] = get_save_dir();
         dirs[1] = g_build_filename(SYSCONFDIR, SYSRCDIR, NULL);
+	dirs[2] = NULL;
     }
 
     return dirs;
 }
 
-static char *get_localized_system_rcfile(const char *name)
+static gchar *
+get_localized_system_rcfile(const gchar *name)
 {
-    const char *locale;
-    char base_locale[3];
-    char *sysrcfile;
+    const gchar *locale;
+    gchar base_locale[3];
+    gchar *sysrcfile;
 
-    if(!(locale = g_getenv("LC_MESSAGES")))
+    if (!(locale = g_getenv("LC_MESSAGES")))
         locale = g_getenv("LANG");
 
     if(locale)
@@ -148,16 +151,14 @@ static char *get_localized_system_rcfile(const char *name)
     }
 }
 
-char *get_read_file(const char *name)
+gchar *
+get_read_file(const gchar *name)
 {
-    if(!disable_user_config)
-    {
-        char *dir = get_save_dir();
-        char *file = g_build_filename(dir, name, NULL);
-        g_free(dir);
+    if (!disable_user_config) {
+	gchar *file = get_save_file(name);
 
         if(g_file_test(file, G_FILE_TEST_EXISTS))
-            return file;
+            return(file);
         else
             g_free(file);
     }
@@ -166,50 +167,52 @@ char *get_read_file(const char *name)
     return get_localized_system_rcfile(name);
 }
 
-char **get_plugin_dirs(void)
+gchar **
+get_plugin_dirs(void)
 {
-    char **dirs;
+    gchar **dirs;
 
-    if(disable_user_config)
-    {
-        dirs = g_new0(char *, 2);
+    if (disable_user_config) {
+        dirs = g_new(gchar *, 2);
 
         dirs[0] = g_build_filename(LIBDIR, "plugins", NULL);
+	dirs[1] = NULL;
     }
-    else
-    {
-        dirs = g_new0(char *, 3);
+    else {
+        dirs = g_new(gchar *, 3);
 
-        dirs[0] =
-            g_build_filename(g_get_home_dir(), HOMERCDIR, "plugins", NULL);
+        dirs[0] = xfce_get_userfile("plugins", NULL);
         dirs[1] = g_build_filename(LIBDIR, "plugins", NULL);
+	dirs[2] = NULL;
     }
 
-    return dirs;
+    return(dirs);
 }
 
-char **get_theme_dirs(void)
+gchar **
+get_theme_dirs(void)
 {
-    char **dirs;
+    gchar **dirs;
 
-    if(disable_user_config)
-    {
-        dirs = g_new0(char *, 2);
+    if (disable_user_config) {
+        dirs = g_new(gchar *, 2);
 
         dirs[0] = g_build_filename(DATADIR, "themes", NULL);
+	dirs[2] = NULL;
     }
-    else
-    {
-        dirs = g_new0(char *, 3);
+    else {
+        dirs = g_new(gchar *, 3);
 
-        dirs[0] = g_build_filename(g_get_home_dir(), HOMERCDIR, "themes", NULL);
+        dirs[0] = xfce_get_userfile("themes", NULL);
         dirs[1] = g_build_filename(DATADIR, "themes", NULL);
+	dirs[2] = NULL;
     }
 
-    return dirs;
+    return(dirs);
 }
 
-void write_backup_file(const char *path)
+void
+write_backup_file(const gchar *path)
 {
     FILE *fp;
     FILE *bakfp;
@@ -659,7 +662,7 @@ char *select_file_with_preview(const char *title, const char *path, GtkWidget * 
  *  ------------------
 */
 
-#ifdef HAVE_STARTUP_NOTIFICATION
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
 
 typedef struct
 {
@@ -802,7 +805,7 @@ void free_startup_timeout (void)
     startup_timeout_data = NULL;
 }
 
-#endif /* HAVE_STARTUP_NOTIFICATION */
+#endif /* HAVE_LIBSTARTUP_NOTIFICATION */
 
 static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn, gboolean silent)
 {
@@ -813,7 +816,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
     gchar **envp = environ;
     gchar **argv = NULL;
     gboolean retval;
-#ifdef HAVE_STARTUP_NOTIFICATION
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     SnLauncherContext *sn_context = NULL;
     SnDisplay *sn_display = NULL;
 #endif
@@ -839,7 +842,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
     }
 
     free_envp = NULL;
-#ifdef HAVE_STARTUP_NOTIFICATION
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     if (use_sn)
     {
         sn_display = sn_display_new (gdk_display, sn_error_trap_push, sn_error_trap_pop);
@@ -876,7 +879,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
         success = exec_command_full_with_envp(argv, free_envp ? free_envp : envp);
     }
 
-#ifdef HAVE_STARTUP_NOTIFICATION
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     if (use_sn)
     {
         if (sn_context != NULL) 
@@ -901,7 +904,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
             sn_display_unref (sn_display);
 	}
     }
-#endif /* HAVE_STARTUP_NOTIFICATION */
+#endif /* HAVE_LIBSTARTUP_NOTIFICATION */
     g_strfreev (argv);
 }
 

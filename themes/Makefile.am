@@ -1,7 +1,7 @@
-SUBDIRS = \
-XFce \
-Gnome \
-Curve \
-Noia \
-Crystal
+SUBDIRS = 								\
+	XFce 								\
+	Gnome 								\
+	Curve 								\
+	Noia 								\
+	Crystal
 

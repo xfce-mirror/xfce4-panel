@@ -637,7 +637,7 @@ static void add_command_box(GtkWidget *vbox, GtkSizeGroup *sg, MailDialog *md)
         gtk_check_button_new_with_mnemonic(_("Use startup _notification"));
     gtk_widget_show(md->sn_cb);
     gtk_box_pack_start(GTK_BOX(vbox2), md->sn_cb, FALSE, FALSE, 0);
-#ifdef HAVE_STARTUP_NOTIFICATION
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->sn_cb), md->use_sn);
     gtk_widget_set_sensitive(md->sn_cb, TRUE);
 #else
@@ -737,12 +737,6 @@ gboolean create_mailcheck_control(Control * control)
 
 G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 {
-#ifdef ENABLE_NLS
-    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-    textdomain (GETTEXT_PACKAGE);
-#endif
-
     cc->name = "mailcheck";
     cc->caption = _("Mail check");
     
