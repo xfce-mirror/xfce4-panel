@@ -749,7 +749,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
 
     if(in_terminal)
     {
-        execute = g_strdup_printf("xfterm4 e %s", cmd);
+        execute = g_strdup_printf("xfterm4 -e %s", cmd);
     }
     else
     {
