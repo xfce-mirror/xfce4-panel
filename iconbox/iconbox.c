@@ -541,15 +541,18 @@ iconbox_check_options (int argc, char **argv)
 
         /* check for useful options ;-) */
         
-        /* fall through: unrecognized option, version or help */
-        g_print ("\n"
-                 " Xfce Iconbox " VERSION "\n"
-                 " Licensed under the GNU GPL\n"
-                 "\n"
-                 " Usage: xfce4-iconbox [--version|-V] [--help|-h]\n"
-                 "\n");
+        if (!strcmp ("-V", argv[i]) || !strcmp ("--version", argv[i]) ||
+            !strcmp ("-h", argv[i]) || !strcmp ("--help", argv[i]))
+        {
+            g_print ("\n"
+                     " Xfce Iconbox " VERSION "\n"
+                     " Licensed under the GNU GPL\n"
+                     "\n"
+                     " Usage: xfce4-iconbox [--version|-V] [--help|-h]\n"
+                     "\n");
 
-        exit (0);
+            exit (0);
+        }
     }
 }
 
