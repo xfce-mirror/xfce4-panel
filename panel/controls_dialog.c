@@ -315,6 +315,8 @@ static void pos_changed(GtkSpinButton *spin)
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
+enum { RESPONSE_DONE, RESPONSE_REVERT, RESPONSE_REMOVE };
+
 void change_panel_control_dialog(PanelControl * pc)
 {
     GtkWidget *dlg;
@@ -335,14 +337,19 @@ void change_panel_control_dialog(PanelControl * pc)
 
     gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
 
+    button = gtk_button_new_from_stock(GTK_STOCK_REMOVE);
+    gtk_widget_show(button);
+    gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_REMOVE);
+
     revert = button = mixed_button_new(GTK_STOCK_UNDO, _("Revert"));
     gtk_widget_show(button);
-    gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, GTK_RESPONSE_CANCEL);
+    gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_REVERT);
 
     done = button = mixed_button_new(GTK_STOCK_OK, _("Done"));
     gtk_widget_show(button);
-    gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, GTK_RESPONSE_OK);
-
+    gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_DONE);
+    GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
+    
     main_vbox = GTK_DIALOG(dlg)->vbox;
 
     /* find all available controls */
@@ -407,21 +414,41 @@ void change_panel_control_dialog(PanelControl * pc)
     /* run dialog until 'Done' */
     while(1)
     {
-        int response = GTK_RESPONSE_NONE;
+        response = GTK_RESPONSE_NONE;
 
         gtk_widget_set_sensitive(revert, FALSE);
+	gtk_widget_grab_default(done);
+	gtk_widget_grab_focus(done);
 
         response = gtk_dialog_run(GTK_DIALOG(dlg));
 
-        if(response != GTK_RESPONSE_CANCEL)
+	if (response == RESPONSE_REMOVE)
+	{
+	    if (confirm(_("Removing an item will also remove its popup menu.\n\n"
+			  "Do you want to remove the item?"), 
+			GTK_STOCK_REMOVE, NULL))
+	    {
+		break;
+	    }
+	}
+	else if (response == RESPONSE_REVERT)
+	{
+	    gtk_option_menu_set_history(GTK_OPTION_MENU(type_option_menu), 0);
+	}
+	else
+	{
             break;
-
-        gtk_option_menu_set_history(GTK_OPTION_MENU(type_option_menu), 0);
+	}
     }
-
+    
     gtk_widget_destroy(dlg);
 
     clear_controls_list();
+
+    if (response == RESPONSE_REMOVE)
+    {
+	side_panel_remove(pc->index);
+    }
 
     write_panel_config();
 }

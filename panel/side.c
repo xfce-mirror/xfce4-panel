@@ -388,6 +388,35 @@ void side_panel_move(int from, int to)
     }
 }
 
+void side_panel_remove(int index)
+{
+    int i;
+    GList *li;
+    PanelGroup *group;
+
+    li = g_list_nth(group_list, index);
+    group = li->data;
+
+    panel_group_unpack(group, GTK_CONTAINER(groupbox));
+
+    group_list = g_list_delete_link(group_list, li);
+    
+    panel_popup_free(group->popup);
+    panel_control_free(group->control);
+
+    g_object_unref(group->base);
+    g_free(group);
+
+    settings.num_groups--;
+
+    for (i = 0, li = group_list; li; i++, li = li->next)
+    {
+	group = li->data;
+
+	group->index = group->control->index = i;
+    }
+}
+
 void side_panel_set_from_xml(int side, xmlNodePtr node)
 {
     xmlNodePtr child;

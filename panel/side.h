@@ -52,6 +52,8 @@ void side_panel_set_theme(int side, const char *theme);
 
 void side_panel_move(int from, int to);
 
+void side_panel_remove(int index);
+
 void side_panel_set_num_groups(int n);
 
 #endif /* __XFCE_SIDE_H__ */
