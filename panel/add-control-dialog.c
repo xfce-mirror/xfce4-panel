@@ -117,6 +117,8 @@ add_control_dialog (Panel * panel, int position)
 
     g_signal_connect (dlg, "response", G_CALLBACK (dialog_response), list);
     
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    
     gtk_widget_show (dlg);
 }
 
@@ -231,7 +233,7 @@ cursor_changed (GtkTreeView * tv, ControlList * list)
 	gtk_widget_set_sensitive (list->add_button, FALSE);
 }
 
-void
+static void
 render_icon (GtkTreeViewColumn * col, GtkCellRenderer * cell,
 	     GtkTreeModel * model, GtkTreeIter * iter, gpointer data)
 {
@@ -242,7 +244,7 @@ render_icon (GtkTreeViewColumn * col, GtkCellRenderer * cell,
     g_object_set (cell, "pixbuf", info->icon, NULL);
 }
 
-void
+static void
 render_text (GtkTreeViewColumn * col, GtkCellRenderer * cell,
 	     GtkTreeModel * model, GtkTreeIter * iter, GtkWidget * treeview)
 {
