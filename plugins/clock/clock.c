@@ -25,13 +25,13 @@
 #include <sys/stat.h>
 #include <time.h>
 
+#include <xfce_clock.h>
+
 #include "global.h"
 #include "debug.h"
 
 #include "controls.h"
 #include "icons.h"
-
-#include "xfce_clock.h"
 
 /* Clock tooltip - From xfce3 */
 /* FIXME: Find another place for that */
