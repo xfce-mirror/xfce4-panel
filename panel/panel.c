@@ -31,6 +31,7 @@
 
 #include "xfce-panel-window.h"
 #include "xfce-itembar.h"
+#include "xfce-item.h"
 
 #include "xfce.h"
 #include "controls.h"
@@ -1226,7 +1227,7 @@ panel_move_control (int from, int to)
     control = li->data;
 
     xfce_itembar_reorder_child (XFCE_ITEMBAR (panel.group_box), 
-                                XFCE_ITEM (control->base), to);
+                                control->base, to);
 
     panel.priv->controls = g_slist_delete_link (panel.priv->controls, li);
     panel.priv->controls = g_slist_insert (panel.priv->controls, control, to);
@@ -1322,6 +1323,7 @@ panel_set_orientation (int orientation)
 {
     gboolean hidden;
     int pos;
+    GSList *l;
 
     panel.priv->settings.orientation = orientation;
 
@@ -1352,6 +1354,16 @@ panel_set_orientation (int orientation)
                                   orientation == VERTICAL ?
                                         GTK_ORIENTATION_VERTICAL :
                                         GTK_ORIENTATION_HORIZONTAL);
+    
+    for (l = panel.priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+
+        xfce_item_set_orientation (XFCE_ITEM (control->base), 
+                                   orientation == VERTICAL ?
+                                        GTK_ORIENTATION_VERTICAL :
+                                        GTK_ORIENTATION_HORIZONTAL);
+    }
     
     /* change popup position to make it look better 
      * done here, because it's needed for size calculation 

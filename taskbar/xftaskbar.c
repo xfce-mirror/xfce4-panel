@@ -97,17 +97,14 @@ struct _Taskbar
     gboolean all_tasks;
     gboolean group_tasks;
     gboolean show_text;
-    GtkWidget *tasklist_item;
     GtkWidget *tasklist;
 
     /* pager */
     gboolean show_pager;
-    GtkWidget *pager_item;
     GtkWidget *pageralign;
     GtkWidget *pager;
     
     /* status area */
-    GtkWidget *status_item;
     GtkWidget *statusframe;
     GtkWidget *statusbox;
     
@@ -475,11 +472,11 @@ taskbar_toggle_tasklist (Taskbar * taskbar)
     g_return_if_fail (taskbar != NULL);
     if (taskbar->show_tasklist)
     {
-        gtk_widget_show (taskbar->tasklist_item);
+        gtk_widget_show (taskbar->tasklist);
     }
     else
     {
-        gtk_widget_hide (taskbar->tasklist_item);
+        gtk_widget_hide (taskbar->tasklist);
     }
 }
 
@@ -491,11 +488,11 @@ taskbar_toggle_pager (Taskbar * taskbar)
     g_return_if_fail (taskbar != NULL);
     if (taskbar->show_pager)
     {
-        gtk_widget_show (taskbar->pager_item);
+        gtk_widget_show (taskbar->pageralign);
     }
     else
     {
-        gtk_widget_hide (taskbar->pager_item);
+        gtk_widget_hide (taskbar->pageralign);
     }
 }
 
@@ -541,7 +538,7 @@ taskbar_toggle_tray (Taskbar * taskbar)
         gtk_box_pack_start (GTK_BOX (taskbar->statusbox), taskbar->iconbox,
                             FALSE, FALSE, 0);
         gtk_widget_show (taskbar->iconbox);
-        gtk_widget_show (taskbar->status_item);
+        gtk_widget_show (taskbar->statusframe);
     }
     else
     {
@@ -557,7 +554,7 @@ taskbar_toggle_tray (Taskbar * taskbar)
             taskbar->iconbox = NULL;
 
             if (!taskbar->show_time)
-                gtk_widget_hide (taskbar->status_item);
+                gtk_widget_hide (taskbar->statusframe);
         }
     }
 
@@ -942,13 +939,6 @@ main (int argc, char **argv)
     gtk_container_add (GTK_CONTAINER (taskbar->win), taskbar->itembar);
 
     /* task list */
-    taskbar->tasklist_item = xfce_item_new ();
-    xfce_item_set_homogeneous (XFCE_ITEM (taskbar->tasklist_item), FALSE);
-    xfce_item_set_expand (XFCE_ITEM (taskbar->tasklist_item), TRUE);
-    gtk_widget_show (taskbar->tasklist_item);
-    xfce_itembar_append (XFCE_ITEMBAR (taskbar->itembar), 
-                         XFCE_ITEM (taskbar->tasklist_item));
-    
     taskbar->tasklist = netk_tasklist_new (screen);
     gtk_widget_set_size_request (taskbar->tasklist, 300, -1);
     gtk_widget_show (taskbar->tasklist);
@@ -957,21 +947,17 @@ main (int argc, char **argv)
     netk_tasklist_set_include_all_workspaces (NETK_TASKLIST
                                               (taskbar->tasklist),
                                               taskbar->all_tasks);
-    gtk_container_add (GTK_CONTAINER (taskbar->tasklist_item), 
-                       taskbar->tasklist);
+    xfce_itembar_append (XFCE_ITEMBAR (taskbar->itembar), 
+                         taskbar->tasklist);
+    xfce_itembar_set_child_expand (XFCE_ITEMBAR (taskbar->itembar),
+                                   taskbar->tasklist, TRUE);
 
     /* pager */
-    taskbar->pager_item = xfce_item_new ();
-    xfce_item_set_homogeneous (XFCE_ITEM (taskbar->pager_item), FALSE);
-    /* don't show by default */
-    xfce_itembar_append (XFCE_ITEMBAR (taskbar->itembar), 
-                         XFCE_ITEM (taskbar->pager_item));
-    
     taskbar->pageralign = gtk_alignment_new (0, 0, 0, 1);
     gtk_container_set_border_width (GTK_CONTAINER (taskbar->pageralign), 1);
-    gtk_widget_show (taskbar->pageralign);
-    gtk_container_add (GTK_CONTAINER (taskbar->pager_item), 
-                                      taskbar->pageralign);
+    /* don't show by default */
+    xfce_itembar_append (XFCE_ITEMBAR (taskbar->itembar), 
+                         taskbar->pageralign);
 
     taskbar->pager = netk_pager_new (screen);
     gtk_widget_show (taskbar->pager);
@@ -981,18 +967,12 @@ main (int argc, char **argv)
     gtk_container_add (GTK_CONTAINER (taskbar->pageralign), taskbar->pager);
     
     /* status area */
-    taskbar->status_item = xfce_item_new ();
-    xfce_item_set_homogeneous (XFCE_ITEM (taskbar->status_item), FALSE);
-    gtk_widget_show (taskbar->status_item);
-    xfce_itembar_append (XFCE_ITEMBAR (taskbar->itembar), 
-                         XFCE_ITEM (taskbar->status_item));
-    
     taskbar->statusframe = gtk_frame_new (NULL);
     gtk_frame_set_shadow_type (GTK_FRAME (taskbar->statusframe), GTK_SHADOW_IN);
     gtk_container_set_border_width (GTK_CONTAINER (taskbar->statusframe), 2);
     gtk_widget_show (taskbar->statusframe);
-    gtk_container_add (GTK_CONTAINER (taskbar->status_item), 
-                       taskbar->statusframe);
+    xfce_itembar_append (XFCE_ITEMBAR (taskbar->itembar), 
+                         taskbar->statusframe);
     
     taskbar->statusbox = gtk_hbox_new (FALSE, 2);
     gtk_container_set_border_width (GTK_CONTAINER (taskbar->statusbox), 1);

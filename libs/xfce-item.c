@@ -37,13 +37,6 @@
 
 /* keep in sync with itembar */
 #define DEFAULT_ORIENTATION     GTK_ORIENTATION_HORIZONTAL
-#define MIN_ICON_SIZE           12
-#define MAX_ICON_SIZE           256
-#define DEFAULT_ICON_SIZE       32
-#define DEFAULT_TOOLBAR_STYLE   GTK_TOOLBAR_ICONS
-
-#define DEFAULT_HOMOGENEOUS     FALSE
-#define DEFAULT_EXPAND          FALSE
 #define DEFAULT_HAS_HANDLE      FALSE
 #define DEFAULT_USE_DRAG_WINDOW FALSE
 
@@ -52,8 +45,6 @@
 enum
 {
     ORIENTATION_CHANGED,
-    ICON_SIZE_CHANGED,
-    TOOLBAR_STYLE_CHANGED,
     LAST_SIGNAL
 };
 
@@ -61,10 +52,6 @@ enum
 {
     PROP_0,
     PROP_ORIENTATION,
-    PROP_ICON_SIZE,
-    PROP_TOOLBAR_STYLE,
-    PROP_HOMOGENEOUS,
-    PROP_EXPAND,
     PROP_HAS_HANDLE,
     PROP_USE_DRAG_WINDOW
 };
@@ -75,10 +62,6 @@ typedef struct _XfceItemPrivate XfceItemPrivate;
 struct _XfceItemPrivate 
 {
     GtkOrientation orientation;
-    int icon_size;
-    GtkToolbarStyle toolbar_style;
-    guint homogeneous:1;
-    guint expand:1;
     guint has_handle:1;
     guint use_drag_window:1;
 
@@ -205,61 +188,6 @@ xfce_item_class_init (XfceItemClass * klass)
     g_object_class_install_property (gobject_class, PROP_ORIENTATION, pspec);
 
     /**
-     * XfceItem::icon_size
-     *
-     * The orientation of the #XfceItem.
-     */
-    pspec = g_param_spec_int  ("icon_size",
-			       "Icon size",
-			       "The icon size of the item",
-                               MIN_ICON_SIZE,
-                               MAX_ICON_SIZE,
-			       DEFAULT_ICON_SIZE, 
-                               G_PARAM_READWRITE);
-    
-    g_object_class_install_property (gobject_class, PROP_ICON_SIZE, pspec);
-    
-    /**
-     * XfceItem::toolbar_style
-     *
-     * The toolbar style of the #XfceItem.
-     */
-    pspec = g_param_spec_enum ("toolbar_style",
-			       "Toolbar style",
-			       "The toolbar style of the item",
-			       GTK_TYPE_TOOLBAR_STYLE,
-			       DEFAULT_TOOLBAR_STYLE, 
-                               G_PARAM_READWRITE);
-    
-    g_object_class_install_property (gobject_class, PROP_TOOLBAR_STYLE, pspec);
-    
-    /**
-     * XfceItem::homogeneous
-     *
-     * Whether the #XfceItem has the same size as other homogenous items.
-     */
-    pspec = g_param_spec_boolean ("homogeneous",
-			          "Homogenous",
-			          "Whether the item is homogeneous",
-			          DEFAULT_HOMOGENEOUS, 
-                                  G_PARAM_READWRITE);
-    
-    g_object_class_install_property (gobject_class, PROP_HOMOGENEOUS, pspec);
-    
-    /**
-     * XfceItem::expand
-     *
-     * Whether the #XfceItem expands to fill available space.
-     */
-    pspec = g_param_spec_boolean ("expand",
-			          "Expand",
-			          "Whether the item expands",
-			          DEFAULT_EXPAND, 
-                                  G_PARAM_READWRITE);
-    
-    g_object_class_install_property (gobject_class, PROP_EXPAND, pspec);
-    
-    /**
      * XfceItem::has_handle
      *
      * Whether the #XfceItem has a handle attached to it.
@@ -305,40 +233,6 @@ xfce_item_class_init (XfceItemClass * klass)
                       NULL, NULL,
                       g_cclosure_marshal_VOID__ENUM,
                       G_TYPE_NONE, 1, GTK_TYPE_ORIENTATION);
-
-    /**
-    * XfceItem::icon_size_changed:
-    * @item: the object which emitted the signal
-    * @size: the new icon size of the item
-    *
-    * Emitted when the icon size of the item changes.
-    */
-    item_signals[ICON_SIZE_CHANGED] =
-        g_signal_new ("icon-size-changed",
-                      G_OBJECT_CLASS_TYPE (klass),
-                      G_SIGNAL_RUN_FIRST,
-                      G_STRUCT_OFFSET (XfceItemClass, 
-                                       icon_size_changed),
-                      NULL, NULL,
-                      g_cclosure_marshal_VOID__INT,
-                      G_TYPE_NONE, 1, G_TYPE_INT);
-
-    /**
-    * XfceItem::toolbar_style_changed:
-    * @item: the object which emitted the signal
-    * @style: the new #GtkToolbarStyle of the item
-    *
-    * Emitted when the toolbar style of the item changes.
-    */
-    item_signals[TOOLBAR_STYLE_CHANGED] =
-        g_signal_new ("toolbar-style-changed",
-                      G_OBJECT_CLASS_TYPE (klass),
-                      G_SIGNAL_RUN_FIRST,
-                      G_STRUCT_OFFSET (XfceItemClass, 
-                                       toolbar_style_changed),
-                      NULL, NULL,
-                      g_cclosure_marshal_VOID__ENUM,
-                      G_TYPE_NONE, 1, GTK_TYPE_TOOLBAR_STYLE);
 }
 
 static void
@@ -349,10 +243,6 @@ xfce_item_init (XfceItem * item)
     GTK_WIDGET_SET_FLAGS (GTK_WIDGET (item), GTK_NO_WINDOW);
 
     priv->orientation     = DEFAULT_ORIENTATION;
-    priv->icon_size       = DEFAULT_ICON_SIZE;
-    priv->toolbar_style   = DEFAULT_TOOLBAR_STYLE;
-    priv->homogeneous     = DEFAULT_HOMOGENEOUS;
-    priv->expand          = DEFAULT_EXPAND;
     priv->has_handle      = DEFAULT_HAS_HANDLE;
     priv->use_drag_window = DEFAULT_USE_DRAG_WINDOW;
     priv->drag_window     = NULL;
@@ -368,18 +258,6 @@ xfce_item_set_property (GObject * object, guint prop_id, const GValue * value,
     {
         case PROP_ORIENTATION:
             xfce_item_set_orientation (item, g_value_get_enum (value));
-            break;
-        case PROP_ICON_SIZE:
-            xfce_item_set_icon_size (item, g_value_get_int (value));
-            break;
-        case PROP_TOOLBAR_STYLE:
-            xfce_item_set_toolbar_style (item, g_value_get_enum (value));
-            break;
-        case PROP_HOMOGENEOUS:
-            xfce_item_set_homogeneous (item, g_value_get_boolean (value));
-            break;
-        case PROP_EXPAND:
-            xfce_item_set_expand (item, g_value_get_boolean (value));
             break;
         case PROP_HAS_HANDLE:
             xfce_item_set_has_handle (item, g_value_get_boolean (value));
@@ -403,18 +281,6 @@ xfce_item_get_property (GObject * object, guint prop_id, GValue * value,
     {
         case PROP_ORIENTATION:
             g_value_set_enum (value, xfce_item_get_orientation (item));
-            break;
-        case PROP_ICON_SIZE:
-            g_value_set_int (value, xfce_item_get_icon_size (item));
-            break;
-        case PROP_TOOLBAR_STYLE:
-            g_value_set_enum (value, xfce_item_get_toolbar_style (item));
-            break;
-        case PROP_HOMOGENEOUS:
-            g_value_set_boolean (value, xfce_item_get_homogeneous (item));
-            break;
-        case PROP_EXPAND:
-            g_value_set_boolean (value, xfce_item_get_expand (item));
             break;
         case PROP_HAS_HANDLE:
             g_value_set_boolean (value, xfce_item_get_has_handle (item));
@@ -465,7 +331,7 @@ xfce_item_expose (GtkWidget * widget, GdkEventExpose *event)
                 h = HANDLE_WIDTH;
             }
 
-            xfce_paint_handle (widget, &(event->area), "xfce_item",
+            xfce_paint_handle (widget, &(event->area), "handlebox",
                                orientation, x, y, w, h);
         }
         
@@ -625,14 +491,12 @@ xfce_item_parent_set (GtkWidget * widget, GtkWidget *old_parent)
 {
     XfceItembar *bar = XFCE_ITEMBAR (widget->parent);
 
-    if (!bar)
+    if (!bar || !XFCE_IS_ITEMBAR (bar))
         return;
 
     g_object_freeze_notify (G_OBJECT (widget));
     g_object_set (G_OBJECT (widget),
                   "orientation", xfce_itembar_get_orientation (bar),
-                  "icon_size", xfce_itembar_get_icon_size (bar),
-                  "toolbar_style", xfce_itembar_get_toolbar_style (bar),
                   NULL);
     g_object_thaw_notify (G_OBJECT (widget));
 }
@@ -742,136 +606,6 @@ xfce_item_set_orientation (XfceItem * item, GtkOrientation orientation)
     g_signal_emit (item, item_signals[ORIENTATION_CHANGED], 0, orientation);
 
     g_object_notify (G_OBJECT (item), "orientation");
-
-    gtk_widget_queue_resize (GTK_WIDGET (item));
-}
-
-
-int 
-xfce_item_get_icon_size (XfceItem * item)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_val_if_fail (XFCE_IS_ITEM (item), DEFAULT_ICON_SIZE);
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    return priv->icon_size;
-}
-
-void 
-xfce_item_set_icon_size (XfceItem * item, int size)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_if_fail (XFCE_IS_ITEM (item));
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    if (size == priv->icon_size)
-        return;
-
-    priv->icon_size = size;
-
-    g_signal_emit (item, item_signals[ICON_SIZE_CHANGED], 0, size);
-
-    g_object_notify (G_OBJECT (item), "icon_size");
-
-    gtk_widget_queue_resize (GTK_WIDGET (item));
-}
-
-
-GtkToolbarStyle 
-xfce_item_get_toolbar_style (XfceItem * item)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_val_if_fail (XFCE_IS_ITEM (item), DEFAULT_TOOLBAR_STYLE);
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    return priv->toolbar_style;
-}
-
-void 
-xfce_item_set_toolbar_style (XfceItem * item, GtkToolbarStyle style)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_if_fail (XFCE_IS_ITEM (item));
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    if (style == priv->toolbar_style)
-        return;
-
-    priv->toolbar_style = style;
-
-    g_object_notify (G_OBJECT (item), "toolbar_style");
-
-    g_signal_emit (item, item_signals[TOOLBAR_STYLE_CHANGED], 0, style);
-}
-
-
-gboolean 
-xfce_item_get_homogeneous (XfceItem * item)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_val_if_fail (XFCE_IS_ITEM (item), DEFAULT_HOMOGENEOUS);
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    return priv->homogeneous;
-}
-
-void 
-xfce_item_set_homogeneous (XfceItem * item, gboolean homogeneous)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_if_fail (XFCE_IS_ITEM (item));
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    if (homogeneous == priv->homogeneous)
-        return;
-
-    priv->homogeneous = homogeneous;
-
-    g_object_notify (G_OBJECT (item), "homogeneous");
-
-    gtk_widget_queue_resize (GTK_WIDGET (item));
-}
-
-
-gboolean 
-xfce_item_get_expand (XfceItem * item)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_val_if_fail (XFCE_IS_ITEM (item), DEFAULT_EXPAND);
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    return priv->expand;
-}
-
-void 
-xfce_item_set_expand (XfceItem * item, gboolean expand)
-{
-    XfceItemPrivate *priv;
-    
-    g_return_if_fail (XFCE_IS_ITEM (item));
-
-    priv = XFCE_ITEM_GET_PRIVATE (item);
-
-    if (expand == priv->expand)
-        return;
-
-    priv->expand = expand;
-
-    g_object_notify (G_OBJECT (item), "expand");
 
     gtk_widget_queue_resize (GTK_WIDGET (item));
 }

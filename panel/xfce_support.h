@@ -25,12 +25,6 @@
 #ifndef __XFCE_SUPPORT_H__
 #define __XFCE_SUPPORT_H__
 
-/* files and directories */
-G_MODULE_IMPORT char *get_save_dir (void);
-G_MODULE_IMPORT char *get_save_file (const char *name);
-G_MODULE_IMPORT char *get_read_file (const char *name);
-G_MODULE_IMPORT void write_backup_file (const char *path);
-
 /* tooltips */
 G_MODULE_IMPORT void add_tooltip (GtkWidget * widget, const char *tip);
 

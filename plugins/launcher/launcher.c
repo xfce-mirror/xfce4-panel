@@ -22,6 +22,7 @@
 #include <config.h>
 
 #include <stdio.h>
+#include <locale.h>
 #include <gtk/gtk.h>
 
 #include <libxfce4util/libxfce4util.h>
@@ -678,30 +679,65 @@ launcher_new (void)
 /* xml handling *
  * ------------ */
 
+static guint
+match_locale_string (char **string, guint current_match, const char *locale,
+                     xmlNodePtr node)
+{
+    xmlChar *value, *lang;
+    guint match = XFCE_LOCALE_NO_MATCH;
+
+    value = DATA (node);
+
+    if (value)
+    {
+        lang = xmlNodeGetLang (node);
+
+        if (lang)
+        {
+            match = xfce_locale_match (locale, (const char *)lang);
+            xmlFree (lang);
+        }
+
+        if (match > current_match || *string == NULL)
+        {
+            g_free (*string);
+            *string = (char *)value;
+        }
+        else
+        {
+            xmlFree (value);
+        }
+    }
+
+    return match;
+}
+
 static Entry*
 create_entry_from_xml (xmlNodePtr node)
 {
+    const char *locale;
     xmlNodePtr child;
     xmlChar *value;
     Entry *entry;
-    
+    guint name_match = XFCE_LOCALE_NO_MATCH;
+    guint comment_match = XFCE_LOCALE_NO_MATCH;
+
+    locale = setlocale (LC_MESSAGES, NULL);
+
     entry = g_new0 (Entry, 1);
     
     for (child = node->children; child != NULL; child = child->next)
     {
         if (xmlStrEqual (child->name, (const xmlChar *) "name"))
         {
-            value = DATA (child);
-
-            if (value)
-                entry->name = (char *) value;
+            name_match = 
+                match_locale_string (&entry->name, name_match, locale, child);
         }
         else if (xmlStrEqual (child->name, (const xmlChar *) "comment"))
         {
-            value = DATA (child);
-
-            if (value)
-                entry->comment = (char *) value;
+            comment_match = 
+                match_locale_string (&entry->comment, comment_match, locale, 
+                                     child);
         }
         else if (xmlStrEqual (child->name, (const xmlChar *) "icon"))
         {

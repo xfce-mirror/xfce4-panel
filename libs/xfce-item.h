@@ -52,12 +52,6 @@ struct _XfceItemClass
     void (*orientation_changed)   (XfceItem * item,
                                    GtkOrientation orientation);
 
-    void (*icon_size_changed)     (XfceItem * item,
-                                   int size);
-
-    void (*toolbar_style_changed) (XfceItem * item,
-                                   GtkToolbarStyle);
-
     /* Padding for future expansion */
     void (*_xfce_reserved1)       (void);
     void (*_xfce_reserved2)       (void);
@@ -74,30 +68,6 @@ GtkOrientation xfce_item_get_orientation    (XfceItem * item);
 
 void xfce_item_set_orientation              (XfceItem * item,
                                              GtkOrientation orientation);
-
-
-int xfce_item_get_icon_size                 (XfceItem * item);
-
-void xfce_item_set_icon_size                (XfceItem * item,
-                                             int size);
-
-
-GtkToolbarStyle xfce_item_get_toolbar_style (XfceItem * item);
-
-void xfce_item_set_toolbar_style            (XfceItem * item,
-                                             GtkToolbarStyle style);
-
-
-gboolean xfce_item_get_homogeneous          (XfceItem * item);
-
-void xfce_item_set_homogeneous              (XfceItem * item,
-                                             gboolean homogeneous);
-
-
-gboolean xfce_item_get_expand               (XfceItem * item);
-
-void xfce_item_set_expand                   (XfceItem * item,
-                                             gboolean expand);
 
 
 gboolean xfce_item_get_has_handle           (XfceItem * item);

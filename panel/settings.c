@@ -80,6 +80,94 @@ check_disable_user_config (void)
     return (var && !strequal (var, "0"));
 }
 
+/*  File locations
+ *  --------------
+*/
+static char *
+get_save_file (const char * name)
+{
+    int scr;
+    char *path, *file = NULL;
+
+    scr = DefaultScreen (gdk_display);
+
+    if (scr == 0)
+    {
+        path = g_build_filename ("xfce4", "panel", name, NULL);
+    }
+    else
+    {
+	char *realname;
+
+	realname = g_strdup_printf ("%s.%u", name, scr);
+
+        path = g_build_filename ("xfce4", "panel", realname, NULL);
+        
+	g_free (realname);
+    }
+
+    file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
+    g_free (path);
+    
+    return file;
+}
+
+static char *
+get_read_file (const char * name)
+{
+    char *file = NULL;
+
+    if (G_UNLIKELY (disable_user_config))
+    {
+	file = g_build_filename (SYSCONFDIR, "xdg", "xfce4", "panel", 
+                                 name, NULL);
+
+        if (!g_file_test (file, G_FILE_TEST_IS_REGULAR))
+        {
+            g_free (file);
+            
+            file = NULL;
+        }
+    }
+    else
+    {
+        char *path = g_build_filename ("xfce4", "panel", name, NULL);
+        
+        file = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, path);
+
+        g_free (path);
+    }
+    
+    return file;
+}
+
+static void
+write_backup_file (const char * path)
+{
+    FILE *fp;
+    FILE *bakfp;
+    char bakfile[MAXSTRLEN + 1];
+    int c;
+
+    snprintf (bakfile, MAXSTRLEN, "%s.bak", path);
+
+    if (!(bakfp = fopen (bakfile, "w")))
+        return;
+    
+    if (!(fp = fopen (path, "r")))
+    {
+        fclose (bakfp);
+        return;
+    }
+    
+    while ((c = getc (fp)) != EOF)
+        putc (c, bakfp);
+
+    fclose (fp);
+    fclose (bakfp);
+}
+
+
 /*  Reading xml
  *  -----------
 */

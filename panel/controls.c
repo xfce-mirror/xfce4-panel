@@ -889,7 +889,6 @@ control_new (int index)
     control->base = xfce_item_new ();
     gtk_widget_show (control->base);
     gtk_container_set_border_width (GTK_CONTAINER (control->base), 1);
-    xfce_item_set_homogeneous (XFCE_ITEM (control->base), FALSE);
 
     /* protect against destruction when unpacking */
     g_object_ref (control->base);
@@ -915,7 +914,7 @@ control_swap_base (Control *control, GtkWidget *newbase)
     if (parent)
     {
         n = xfce_itembar_get_item_index (XFCE_ITEMBAR (parent),
-                                         XFCE_ITEM (control->base));
+                                         control->base);
     }
 
     gtk_widget_destroy (control->base);
@@ -928,7 +927,7 @@ control_swap_base (Control *control, GtkWidget *newbase)
     if (parent)
     {
         xfce_itembar_insert (XFCE_ITEMBAR (parent), 
-                             XFCE_ITEM (control->base), n);
+                             control->base, n);
     }
 }
 
@@ -951,7 +950,7 @@ G_MODULE_EXPORT /* EXPORT:control_pack */
 void
 control_pack (Control * control, GtkWidget * box)
 {
-    xfce_itembar_append (XFCE_ITEMBAR (box), XFCE_ITEM (control->base));
+    xfce_itembar_append (XFCE_ITEMBAR (box), control->base);
 }
 
 G_MODULE_EXPORT /* EXPORT:control_unpack */

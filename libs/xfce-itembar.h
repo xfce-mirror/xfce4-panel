@@ -24,7 +24,6 @@
 
 #include <gtk/gtkenums.h>
 #include <gtk/gtkcontainer.h>
-#include "xfce-item.h"
 
 #define XFCE_TYPE_ITEMBAR            (xfce_itembar_get_type ())
 #define XFCE_ITEMBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ITEMBAR, XfceItembar))
@@ -70,44 +69,38 @@ GType xfce_itembar_get_type (void) G_GNUC_CONST;
 
 GtkWidget *xfce_itembar_new (GtkOrientation orientation);
 
-
 GtkOrientation xfce_itembar_get_orientation    (XfceItembar * itembar);
 
 void xfce_itembar_set_orientation              (XfceItembar * itembar,
                                                 GtkOrientation orientation);
 
-
-int xfce_itembar_get_icon_size                 (XfceItembar * itembar);
-
-void xfce_itembar_set_icon_size                (XfceItembar * itembar,
-                                                int size);
-
-
-GtkToolbarStyle xfce_itembar_get_toolbar_style (XfceItembar * itembar);
-
-void xfce_itembar_set_toolbar_style            (XfceItembar * itembar,
-                                                GtkToolbarStyle style);
-
 void xfce_itembar_insert                       (XfceItembar * itembar,
-                                                XfceItem * item,
+                                                GtkWidget * item,
                                                 int position);
 
 void xfce_itembar_append                       (XfceItembar * itembar,
-                                                XfceItem * item);
+                                                GtkWidget * item);
 
 void xfce_itembar_prepend                      (XfceItembar * itembar,
-                                                XfceItem * item);
+                                                GtkWidget * item);
 
 void xfce_itembar_reorder_child                (XfceItembar * itembar,
-                                                XfceItem * item,
+                                                GtkWidget * item,
                                                 int position);
+
+gboolean xfce_itembar_get_child_expand         (XfceItembar * itembar,
+                                                GtkWidget * item);
+
+void xfce_itembar_set_child_expand             (XfceItembar * itembar,
+                                                GtkWidget * item,
+                                                gboolean expand);
 
 int xfce_itembar_get_n_items                   (XfceItembar * itembar);
 
 int xfce_itembar_get_item_index                (XfceItembar * itembar,
-                                                XfceItem * item);
+                                                GtkWidget * item);
 
-XfceItem * xfce_itembar_get_nth_item           (XfceItembar * itembar, 
+GtkWidget * xfce_itembar_get_nth_item          (XfceItembar * itembar, 
                                                 gint n);
 
 int xfce_itembar_get_drop_index                (XfceItembar * itembar, 
