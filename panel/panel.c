@@ -992,6 +992,7 @@ create_panel_window (Panel * p)
     gtk_window_set_title (window, _("Xfce Panel"));
     gtk_window_set_gravity (window, GDK_GRAVITY_STATIC);
     gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DOCK);
+    gtk_window_stick (window);
 
     pb = get_panel_pixbuf ();
     gtk_window_set_icon (window, pb);
