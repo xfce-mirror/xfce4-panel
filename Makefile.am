@@ -12,7 +12,7 @@ EXTRA_DIST = example.xfce4rc.in xfce4.spec xfce4.spec.in
 SUBDIRS = @MY_SUBDIRS@
 
 distclean-local:
-	rm -f example.xfce4rc xfce4.spec
+	rm -rf example.xfce4rc xfce4.spec *.cache
 
 example.xfce4rc:
 	@sed -e "s%_pkgdatadir_%$(pkgdatadir)%g" example.xfce4rc.in > example.xfce4rc
