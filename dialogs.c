@@ -451,7 +451,7 @@ static void create_item_frame(void)
     g_signal_connect(iframe->icon_browse_button, "clicked", G_CALLBACK(browse_cb),
                      iframe->icon_entry);
 
-    if(iframe->icon_id == -1)
+    if(iframe->icon_id == -1 || iframe->icon_id == 0)
     {
         gtk_option_menu_set_history(GTK_OPTION_MENU(iframe->icon_option_menu), 0);
         if(iframe->icon_path)
@@ -886,6 +886,9 @@ static GtkWidget *create_panel_control_dialog(PanelItem * pi, PanelModule * pm)
     {
         iframe->icon_id = pi->id;
         iframe->pb = pi->pb;
+	if(pi->path)
+	    iframe->icon_path = g_strdup(pi->path);
+    
         g_object_ref(iframe->pb);
     }
     else
@@ -1059,7 +1062,11 @@ void edit_menu_item_dialog(MenuItem * mi)
     gtk_box_pack_start(GTK_BOX(box), iframe->frame, TRUE, TRUE, 0);
 
     if(mi->icon_path)
+    {
         gtk_entry_set_text(GTK_ENTRY(iframe->icon_entry), mi->icon_path);
+	iframe->icon_path = g_strdup(mi->icon_path);
+    }
+    
     if(mi->command)
         gtk_entry_set_text(GTK_ENTRY(iframe->command_entry), mi->command);
     if(mi->in_terminal)

@@ -51,11 +51,11 @@ void exec_cmd(const char *cmd, gboolean in_terminal)
         return;
 
     if (in_terminal)
-	snprintf(execute, MAXSTRLEN, "xfterm -e /bin/sh -c %s", cmd);
+	snprintf(execute, MAXSTRLEN, "xterm -e %s", cmd);
     else
-	snprintf(execute, MAXSTRLEN, "/bin/sh -c %s", cmd);
+	snprintf(execute, MAXSTRLEN, "%s", cmd);
     
-    if(!g_spawn_command_line_async(cmd, &error))
+    if(!g_spawn_command_line_async(execute, &error))
     {
         char *msg;
 
