@@ -7,7 +7,7 @@
 <!-- Load chunks.xsl stylesheet 
      TODO: how can I put a location independent link here?
 -->
-<xsl:import href="/usr/share/docbook-xsl/html/chunk.xsl"/>
+<xsl:import href="/usr/pkg/share/xsl/docbook/html/chunk.xsl"/>
 
 <!-- Don't force the use of index.html as root filename -->
 <xsl:param name="root.filename" select="''"/>

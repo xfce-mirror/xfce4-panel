@@ -1,4 +1,4 @@
-plugindir = $(libdir)/xfce-mcs-manager/plugins
+plugindir = @XFCE_MCS_MANAGER_PLUGINSDIR@
 
 plugin_LTLIBRARIES = libxfce4settings.la
 
