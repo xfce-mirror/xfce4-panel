@@ -1,3 +1,113 @@
+2003-12-01 12:49  jasper
+
+	* Makefile.am, Makefile.in, xfce4rc.vi: Update vietnamese
+	  translations
+
+2003-12-01 12:42  jasper
+
+	* panel/xfce_support.c: Fix bug with XFCE_DISABLE_USER_CONFIG
+
+2003-12-01 12:04  jasper
+
+	* xfce4rc.ca: Update catalan translations (2)
+
+2003-11-17 16:08  jasper
+
+	* panel/xfce_support.c: Check for cmd != NULL when executing
+	  commands
+
+2003-11-16 09:44  jasper
+
+	* po/: cs.gmo, cs.po: Update Czech translations
+
+2003-11-12 08:02  jasper
+
+	* po/: ca.gmo, de.gmo, es.gmo, es_MX.gmo, fi.gmo, fr.gmo, hi.gmo,
+	  hu.gmo, ja.gmo, ko.gmo, lt.gmo, ms.gmo, nl.gmo, pl.gmo,
+	  pt_PT.gmo, ru.gmo, sv.gmo, ta.gmo, tr.gmo, uk.gmo, vi.gmo,
+	  zh_CN.gmo, zh_TW.gmo: Forgot gmo files update
+
+2003-11-11 19:35  jasper
+
+	* po/: ca.po, cs.po, de.po, es.po, es_MX.po, fi.po, fr.po, hi.po,
+	  hu.po, ja.po, ko.po, lt.po, ms.po, nl.po, pl.po, pt_PT.po, ru.po,
+	  sv.po, ta.po, tr.po, uk.po, vi.po, zh_CN.po, zh_TW.po: Update po
+	  files, just in case something changed ...
+
+2003-11-09 20:09  jasper
+
+	* configure, configure.ac, po/cs.gmo, po/cs.po: Add Check
+	  translations
+
+2003-11-08 10:29  jasper
+
+	* doc/fr/images/: menuitem-properties.png,
+	  menuitems-properties.png: correct wrong image name
+
+2003-11-07 22:09  jasper
+
+	* configure, configure.ac, doc/Makefile.am, doc/Makefile.in,
+	  doc/C/xfce4-panel.html, doc/fr/Makefile.am, doc/fr/Makefile.in,
+	  doc/fr/xfce4-panel.html, doc/fr/xfce4-panel.xml,
+	  doc/fr/images/Makefile.am, doc/fr/images/Makefile.in,
+	  doc/fr/images/clock-properties.png,
+	  doc/fr/images/default_panel.png, doc/fr/images/handle-popup.png,
+	  doc/fr/images/item-popup.png,
+	  doc/fr/images/launcher-properties.png,
+	  doc/fr/images/mailcheck-properties.png,
+	  doc/fr/images/menuitems-properties.png,
+	  doc/fr/images/nooptions-properties.png,
+	  doc/fr/images/panel-settings.png,
+	  doc/fr/images/systembuttons-properties.png, po/xfce4-panel.pot:
+	  Add French documentation
+
+2003-11-05 17:23  jasper
+
+	* panel/main.c: Make SIGUSR2 quit with confirmation
+
+2003-11-03 19:06  jasper
+
+	* configure, configure.ac, po/uk.gmo, po/uk.po: Add Ukranian
+	  translations
+
+2003-11-01 15:16  olivier
+
+	* icons/xfce4-panel-icon.h: Set version to 4.0.1
+
+2003-10-25 00:31  jasper
+
+	* configure, configure.ac, po/vi.gmo, po/vi.po:
+	  Add vietnamese translations by Lam Vinh Nien <nienvl@yahoo.ca>.
+
+2003-10-23 15:07  jasper
+
+	* panel/: controls.c, main.c: Use execlp to restart panel. Fixes
+	  problem with newly installed plugins not showing up in menu as
+	  well.
+
+2003-10-21 12:03  jasper
+
+	* panel/main.c: Don't forget to save on SIGHUP (X exit)
+
+2003-10-17 18:32  jasper
+
+	* configure, configure.ac, po/sv.gmo, po/sv.po: Add/update swedish
+	  translations
+
+2003-10-15 13:20  jasper
+
+	* po/: ko.gmo, ko.po: Update korean translations
+
+2003-10-13 23:26  olivier
+
+	* xfce4rc.ca, xfce4rc.hu, xfce4rc.nl: Apply changes from my local
+	  tree
+
+2003-10-13 20:30  jasper
+
+	* ChangeLog: Update ChangeLog's after syncing with SF. Everything
+	  should now be up-to-date.
+
 2003-10-13 20:01  jasper
 
 	* xfce4rc, plugins/pager/pager.c:
