@@ -20,6 +20,10 @@
 #include <config.h>
 #include <my_gettext.h>
 
+#ifdef GDK_MULTIHEAD_SAFE
+#undef GDK_MULTIHEAD_SAFE
+#endif
+
 #include <libxfcegui4/libxfcegui4.h>
 
 #include "xfce.h"

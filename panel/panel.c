@@ -20,6 +20,10 @@
 #include <config.h>
 #include <my_gettext.h>
 
+#ifdef GDK_MULTIHEAD_SAFE
+#undef GDK_MULTIHEAD_SAFE
+#endif
+
 #include <X11/Xlib.h>
 #include <libxfcegui4/libnetk.h>
 
