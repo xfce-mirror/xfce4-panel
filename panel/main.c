@@ -104,18 +104,25 @@ void quit(gboolean force)
 
 void restart(void)
 {
+    int x, y;
+
+    /* somehow the position gets lost here ... */
+    x = position.x;
+    y = position.y;
+    
     if (!disable_user_config)
 	write_panel_config();
 
-    mcs_stop_watch();
+    gtk_widget_hide(toplevel);
 
     panel_cleanup();
-    gtk_widget_destroy(toplevel);
+    gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(toplevel)));
 
-    if (gtk_main_level())
-	gtk_main_quit();
-
-    xfce_run();
+    create_panel();
+    
+    position.x = x;
+    position.y = y;
+    gtk_window_move(GTK_WINDOW(toplevel), x, y);
 }
 
 /* signal handler */
