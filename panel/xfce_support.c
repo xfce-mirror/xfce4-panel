@@ -536,6 +536,76 @@ static void fs_cancel_cb(GtkDialog * fs)
     gtk_dialog_response(fs, GTK_RESPONSE_CANCEL);
 }
 
+/* escaping spaces */
+static char *path_escape_spaces(const char *path)
+{
+    char *newpath;
+    const char *s;
+    int n = 0;
+
+    for (s = path;(s = strchr(s, ' ')) != NULL; s++)
+    {
+	n++;
+    }
+
+    newpath = g_new(char, strlen(path)+n+1);
+
+    for (n = 0, s = path; s && *s; n++, s++)
+    {
+	if (*s == ' ')
+	{
+	    newpath[n] = '\\';
+	    newpath[++n] = ' ';
+	}
+	else
+	{
+	    newpath[n] = *s;
+	}
+    }
+
+    newpath[n] = '\0';
+
+    return newpath;
+}
+
+#if 0
+static char *path_unescape_spaces(const char *path)
+{
+    char *newpath;
+    const char *s;
+    int n = 0;
+
+    for (s = path; s && *s; s++)
+    {
+	if (*s == '\\' && *(++s) == ' ')
+	{
+	    s++;
+	    n++;
+	}
+	else if (*s == ' ')
+	{
+	    break;
+	}
+    }
+
+    newpath = g_new(char, s - path - n + 1);
+    
+    for (n = 0, s = path; s && *s; n++, s++)
+    {
+	if (*s == '\\' && *(s+1) == ' ')
+	{
+	    s++;
+	}
+
+	newpath[n] = *s;
+    }
+
+    newpath[n] = '\0';
+
+    return newpath;
+}
+#endif
+
 /* Any of the arguments may be NULL */
 static char *real_select_file(const char *title, const char *path, GtkWidget * parent, gboolean with_preview)
 {
@@ -547,7 +617,9 @@ static char *real_select_file(const char *title, const char *path, GtkWidget * p
     fs = preview_file_selection_new(t, with_preview);
 
     if(path)
+    {
         gtk_file_selection_set_filename(GTK_FILE_SELECTION(fs), path);
+    }
 
     if(parent)
         gtk_window_set_transient_for(GTK_WINDOW(fs), GTK_WINDOW(parent));
@@ -563,7 +635,7 @@ static char *real_select_file(const char *title, const char *path, GtkWidget * p
         temp = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
 
         if(temp && strlen(temp))
-            name = g_strdup(temp);
+            name = path_escape_spaces(temp);
         else
             name = NULL;
     }
