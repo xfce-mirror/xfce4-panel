@@ -271,7 +271,7 @@ maintainers, etc. Commented out by default.
 	<term>Icon</term>
 	<listitem>The icons used by the panel will follow the icon theme
 	  you choose from the 
-	  <ulink url="xfce-mcs-plugins#ui-settings">user interface
+	  <ulink url="xfce-mcs-plugins.html#ui-settings">user interface
 	  settings dialog</ulink>. Of course you can also choose a custom
 	  icon, either by browsing the file system from the button next
 	  to the entry or by dragging an image on the preview area from
@@ -671,6 +671,91 @@ maintainers, etc. Commented out by default.
 
   <!-- extra space -->
   <para>&nbsp;</para>
+
+<sect1 id="panel-files">
+  <title>Advanced: Files and Environment Variables</title>
+
+  <para>The Xfce 4 Panel uses one configuration file for the panel contents
+    and another one for the global settings. Neither one of these files should
+    be edited by hand, and in fact the changes will be overwritten if you edit
+    them while the panel and the settings manager are running.
+  </para>
+
+  <para>Xfce now uses the Basedir Specification as defined on <ulink
+      url="http://freedesktop.org">Freedesktop.org</ulink> to locate its data
+    and configuration files. This means that file locations will be specified 
+    as a path relative to the directories described in the specification.
+  </para>
+
+
+  <variablelist>
+    <varlistentry>
+      <term>${XDG_DATA_HOME}</term>
+      <listitem>The first base directory to look for configuration files. If
+	empty this defaults to <filename
+	  role="directory">~/.config/</filename>.</listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>${XDG_DATA_DIRS}</term>
+      <listitem>A list of system directories that contain configuration
+	data. If empty the panel will look in <filename 
+	  role="directory">${sysconfdir}/xdg/</filename> and 
+	<filename role="directory">/etc/xdg/</filename>. The value of
+	${sysconfdir} depends on how the program was build and will often be
+	<filename role="directory">/etc/</filename> for binary packages.
+      </listitem>
+    </varlistentry>
+  
+    <varlistentry>
+      <term>xfce4/panel/contents.xml</term>
+      <listitem>This is the location of the xml configuration file
+	that describes the contents of the panel, relative to the base
+	directories metioned above.</listitem>
+    </varlistentry>
+    
+    <varlistentry>
+      <term>xfce4/mcs_settings/panel.xml</term>
+      <listitem>This is the relative location of the global panel
+	settings. This file is managed by the settings manager, rather than by
+	the panel itself.</listitem>
+    </varlistentry>
+    
+    <varlistentry>
+      <term>xfce4/kioskrc</term>
+      <listitem>Kiosk Mode configuration file. See <ulink
+	  url="#panel-kiosk">next section</ulink> for an explanation.
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+
+<sect1 id="panel-kiosk">
+  <title>Advanced: Kiosk Mode</title>
+
+  <para>The panel now has support for Kiosk Mode, that will prevent users from
+    making changes to their panel configuration. To use it you have to edit or 
+    create the file <filename>${sysconfdir}/xdg/xfce4/kioskrc</filename>.
+  </para>
+
+  <para>The best way to explain the format is by using an example. The
+    xfce4-panel section of your kioskrc might look like this:
+  </para>
+
+<programlisting>
+[xfce4-panel]
+CustomizePanel=%powerusers,foo
+</programlisting>
+
+  <para>This allows only users in the group powerusers and the user foo to 
+    customize their panels.
+  </para>
+  
+</sect1>
   
 <sect1 id="panel-copyright">
   <title>About &app;</title>
@@ -681,19 +766,21 @@ maintainers, etc. Commented out by default.
   </para>
 
   <para>To report a bug or make a suggestion regarding this application or
-    this manual, send an email to the 
-    <ulink url="http://lunar-linux.org/mailman/listinfo/xfce4-dev"
-      type="http">xfce4-dev</ulink> mailing list &mdash; this is the preferred
-    method &mdash; or use the bug tracking system at the
-    <ulink url="http://bugs.xfce.org/" 
-      type="http">http://bugs.xfce.org/</ulink>. 
-    If you have questions about the use or installation of this package,
-    please ask on the 
-    <ulink url="http://lunar-linux.org/mailman/listinfo/xfce"
-      type="http">xfce</ulink> mailing list. 
+    this manual, use the bug tracking system at <ulink 
+      url="http://bugzilla.xfce.org/" 
+      type="http">http://bugzilla.xfce.org/</ulink>. 
+  </para>
+
+  <para>If you have questions about the use or installation of this package,
+    please ask on the <ulink 
+      url="http://lunar-linux.org/mailman/listinfo/xfce"
+      type="http">xfce</ulink> mailing list. Development discussion takes
+    place on the <ulink 
+      url="http://lunar-linux.org/mailman/listinfo/xfce4-dev"
+      type="http">xfce4-dev</ulink> mailing list.
   </para>
     
-  <para> This program is distributed under the terms of the
+  <para>&app; is distributed under the terms of the
     GNU General Public License as published by the Free Software Foundation; 
     either version 2 of the License, or (at your option) any later version.
   </para>
