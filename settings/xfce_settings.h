@@ -26,7 +26,6 @@
 enum
 {
     XFCE_ORIENTATION,
-    XFCE_LAYER,
     XFCE_SIZE,
     XFCE_POPUPPOSITION,
     XFCE_THEME,
@@ -36,7 +35,6 @@ enum
 
 static char *xfce_settings_names[] = {
     "orientation",
-    "layer",
     "size",
     "popupposition",
     "theme",

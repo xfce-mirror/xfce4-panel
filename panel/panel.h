@@ -62,10 +62,7 @@ G_MODULE_IMPORT void panel_cleanup (void);
 /* global settings */
 G_MODULE_IMPORT void panel_set_settings (void);
 
-G_MODULE_IMPORT void panel_center (int side);
-
 G_MODULE_IMPORT void panel_set_orientation (int orientation);
-G_MODULE_IMPORT void panel_set_layer (int layer);
 
 G_MODULE_IMPORT void panel_set_size (int size);
 G_MODULE_IMPORT void panel_set_popup_position (int position);
@@ -89,12 +86,9 @@ G_MODULE_IMPORT int panel_get_side (void);
 G_MODULE_IMPORT GtkArrowType panel_get_arrow_direction(Panel * panel);
 
 /* find or act on specific group */
-G_MODULE_IMPORT Control *panel_get_control (int index);
-
 G_MODULE_IMPORT void panel_move_control (int from, int to);
 G_MODULE_IMPORT void panel_remove_control (int index);
 G_MODULE_IMPORT void panel_add_control (Control * control, int index);
-
 G_MODULE_IMPORT int panel_get_n_controls (void);
 
 /* groups */

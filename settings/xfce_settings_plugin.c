@@ -202,9 +202,6 @@ old_xml_start_element (GMarkupParseContext * context,
 	    case XFCE_ORIENTATION:
 		opt.type = MCS_TYPE_INT;
 		break;
-	    case XFCE_LAYER:
-		opt.type = MCS_TYPE_INT;
-		break;
 	    case XFCE_SIZE:
 		opt.type = MCS_TYPE_INT;
 		break;
@@ -309,10 +306,6 @@ xfce_init_options (void)
 	switch (i)
 	{
 	    case XFCE_ORIENTATION:
-		opt.type = MCS_TYPE_INT;
-		opt.data.v_int = 0;
-		break;
-	    case XFCE_LAYER:
 		opt.type = MCS_TYPE_INT;
 		opt.data.v_int = 0;
 		break;

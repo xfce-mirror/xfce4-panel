@@ -594,6 +594,17 @@ panel_set_position (Panel * p)
     update_partial_struts (p);
 }
 
+/* G_MODULE_EXPORT * EXPORT:panel_center */
+static void
+panel_center (int side)
+{
+    panel.priv->side = side;
+    panel.priv->pos_state = XFCE_POS_STATE_CENTER;
+    panel.priv->offset = 0;
+
+    panel_set_position (&panel);
+}
+
 static void
 screen_size_changed (GdkScreen * screen, Panel * p)
 {
@@ -1193,9 +1204,6 @@ create_panel (void)
 
     gtk_widget_show (p->toplevel);
 
-    /* set layer on visible window */
-    panel_set_layer (p->priv->settings.layer);
-
     /* size sometimes changes after showing toplevel */
     panel_set_position (p);
     
@@ -1233,31 +1241,6 @@ create_panel (void)
 }
 
 /* find or act on specific groups */
-
-static Control *
-panel_get_nth (int n)
-{
-    Control *control;
-    GSList *li;
-    int index, len;
-
-    len = g_slist_length (panel.priv->controls);
-
-    index = CLAMP (n, 0, len);
-
-    li = g_slist_nth (panel.priv->controls, index);
-
-    control = li->data;
-
-    return control;
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_get_control */
-Control *
-panel_get_control (int index)
-{
-    return panel_get_nth (index);
-}
 
 G_MODULE_EXPORT /* EXPORT:panel_move_control */
 void
@@ -1436,8 +1419,6 @@ panel_set_orientation (int orientation)
 
     panel_set_position (&panel);
 
-    panel_set_layer (panel.priv->settings.layer);
-
     if (hidden)
 	panel_set_autohide (TRUE);
 
@@ -1446,57 +1427,6 @@ panel_set_orientation (int orientation)
     update_partial_struts (&panel);
 
     panel.priv->block_resize--;
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_set_layer */
-void
-panel_set_layer (int layer)
-{
-#if 0
-    panel.priv->settings.layer = layer;
-
-    /* backwards compat */
-    settings = panel.priv->settings;
-
-    if (panel.priv->is_created)
-    {
-	set_window_layer (panel.toplevel, layer);
-
-	if (layer == ABOVE)
-	    gtk_window_present (GTK_WINDOW (panel.toplevel));
-
-	update_partial_struts (&panel);
-
-#if 0
-	/* dock type hint */
-	gboolean autohide = panel.priv->settings.autohide;
-
-	if (autohide)
-	    panel_set_autohide (FALSE);
-
-	gtk_widget_hide (panel.toplevel);
-	gtk_widget_unrealize (panel.toplevel);
-
-	gtk_window_set_type_hint (GTK_WINDOW (panel.toplevel),
-				  layer == 0 ? GDK_WINDOW_TYPE_HINT_DOCK
-				  : GDK_WINDOW_TYPE_HINT_NORMAL);
-
-	/* position and properties are lost by unrealizing */
-	gtk_window_move (GTK_WINDOW (panel.toplevel),
-			 panel.position.x, panel.position.y);
-	gtk_window_set_skip_taskbar_hint (GTK_WINDOW (panel.toplevel), TRUE);
-	gtk_window_set_skip_pager_hint (GTK_WINDOW (panel.toplevel), TRUE);
-	gtk_window_stick (GTK_WINDOW (panel.toplevel));
-
-	/* make sure it is really shown before setting struts */
-	gtk_widget_show_now (panel.toplevel);
-
-	if (autohide)
-	    panel_set_autohide (TRUE);
-
-#endif
-    }
-#endif
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_set_size */
@@ -1590,17 +1520,6 @@ panel_set_settings (void)
     panel_set_popup_position (settings.popup_position);
 
     panel_set_theme (settings.theme);
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_center */
-void
-panel_center (int side)
-{
-    panel.priv->side = side;
-    panel.priv->pos_state = XFCE_POS_STATE_CENTER;
-    panel.priv->offset = 0;
-
-    panel_set_position (&panel);
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_set_autohide */

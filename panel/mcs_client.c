@@ -53,7 +53,6 @@ static GHashTable *settings_hash = NULL;
 /* IMPORTANT: keep in sync with settings names list */
 static gpointer settings_callbacks[] = {
     panel_set_orientation,
-    panel_set_layer,
     panel_set_size,
     panel_set_popup_position,
     panel_set_theme,

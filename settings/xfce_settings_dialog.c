@@ -312,64 +312,6 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
 }
 
-#if 0
-/* layer */
-
-static void
-layer_changed (GtkToggleButton * tb)
-{
-    /* We no longer use layers, but make the panel a docktype window or not.
-     *
-     * For historical reasons we set the dock type hint if the layer is 0.
-     */
-    int layer = gtk_toggle_button_get_active (tb) ? 0 : 1;
-
-    mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_LAYER],
-			 CHANNEL, layer);
-    mcs_manager_notify (mcs_manager, CHANNEL);
-}
-
-static void
-add_layer_box (GtkBox * box, GtkSizeGroup * sg)
-{
-    GtkWidget *hbox, *label, *cb;
-    McsSetting *setting;
-
-    /* checkbutton */
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new (_("Always on top:"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_widget_show (label);
-    gtk_size_group_add_widget (sg, label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-    cb = gtk_check_button_new ();
-    gtk_widget_show (cb);
-    gtk_box_pack_start (GTK_BOX (hbox), cb, FALSE, FALSE, 0);
-
-    setting = mcs_manager_setting_lookup (mcs_manager,
-					  xfce_settings_names[XFCE_LAYER],
-					  CHANNEL);
-
-    if (setting)
-    {
-	/* We no longer use layers, but make the panel a docktype window 
-	 * or not.
-	 *
-	 * For historical reasons we set the dock type hint if the layer 
-	 * is 0.
-	 */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-				      setting->data.v_int == 0);
-    }
-
-    g_signal_connect (cb, "toggled", G_CALLBACK (layer_changed), NULL);
-}
-#endif
-
 /* autohide */
 
 static void
@@ -496,10 +438,6 @@ run_xfce_settings_dialog (McsPlugin * mp)
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
     xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
-
-#if 0
-    add_layer_box (GTK_BOX (vbox), sg);
-#endif
 
     add_autohide_box (GTK_BOX (vbox), sg);
 
