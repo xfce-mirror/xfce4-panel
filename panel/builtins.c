@@ -399,11 +399,14 @@ static gboolean check_trash(PanelModule *pm)
     t_trash *trash = (t_trash *) pm->data;
     PanelItem *pi = trash->item;
     
-    GDir *dir = g_dir_open(trash->dirname, 0, NULL);
+    GDir *dir;
     const char *file;
     char text[MAXSTRLEN];
     gboolean changed = FALSE;
 
+    if (!trash->dirname)
+      return TRUE;
+    dir = g_dir_open(trash->dirname, 0, NULL);
 
     if(dir)
         file = g_dir_read_name(dir);

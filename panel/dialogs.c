@@ -359,7 +359,7 @@ static char **find_icon_themes(void)
 
     for(d = dirs; *d; d++)
     {
-        gdir = g_dir_open(dirs[i], 0, NULL);
+        gdir = g_dir_open(*d, 0, NULL);
 
         if(gdir)
         {
