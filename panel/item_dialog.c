@@ -929,10 +929,10 @@ popup_menu_changed (GtkToggleButton * tb, Control *control)
 static inline void
 add_menu_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
 {
+#if 0
     GtkWidget *hbox;
     GtkWidget *label;
 
-#if 0
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);

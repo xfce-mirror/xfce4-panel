@@ -1,7 +1,7 @@
 /*  xfce4
  *
- *  Copyright (c) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
- *  Copyright (c) 2003 Benedikt Meurer <benedikt.meurer@unix-ag.uni-siegen.de>
+ *  Copyright (c) 2002-2004 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2003 Benedikt Meurer <benedikt.meurer@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -319,7 +319,6 @@ main (int argc, char **argv)
 #ifdef HAVE_SIGACTION
     struct sigaction act;
 #endif
-    gboolean net_wm_support;
     int i;
 
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
@@ -328,9 +327,14 @@ main (int argc, char **argv)
 	(strequal (argv[1], "-v") || strequal (argv[1], "--version") ||
 	 strequal (argv[1], "-h") || strequal (argv[1], "--help")))
     {
-	g_print (_("%s, version %s\n"
-		   "Part of the XFce Desktop Environment\n"
-		   "http://www.xfce.org\n"), PACKAGE, VERSION);
+	g_print (_("\n"
+		   " The XFce Panel\n"
+		   " Version %s\n\n"
+		   " Part of the XFce Desktop Environment\n"
+		   " http://www.xfce.org\n\n"
+		   " Licensed under the GNU GPL.\n\n"), 
+		 VERSION);
+	
 	return 0;
     }
 
@@ -348,31 +352,36 @@ main (int argc, char **argv)
 	xfce_panel_set_xselection ();
     }
 
-    net_wm_support = FALSE;
-
-    for (i = 0; i < 5; i++)
+#if 0
     {
-	if ((net_wm_support = check_net_wm_support ()) == TRUE)
-	    break;
+	gboolean net_wm_support = FALSE;
 
-	g_usleep (2000 * 1000);
+	for (i = 0; i < 5; i++)
+	{
+	    if ((net_wm_support = check_net_wm_support ()) == TRUE)
+		break;
+
+	    g_usleep (2000 * 1000);
+	}
+
+	if (!net_wm_support)
+	{
+	    xfce_err (_("Your window manager does not seem to support "
+			"the new window manager hints as defined on "
+			"http://www.freedesktop.org. \n"
+			"Some XFce features may not work as intended."));
+	}
     }
-
-    if (!net_wm_support)
-    {
-	xfce_err (_("Your window manager does not seem to support "
-		    "the new window manager hints as defined on "
-		    "http://www.freedesktop.org. \n"
-		    "Some XFce features may not work as intended."));
-    }
-
+#endif
     client_session = client_session_new (argc, argv, NULL /* data */ ,
 					 SESSION_RESTART_IF_RUNNING, 40);
 
     client_session->save_yourself = save_yourself;
     client_session->die = die;
 
-    if (!(session_managed = session_init (client_session)))
+    session_managed = session_init (client_session);
+    
+    if (!session_managed)
 	g_message ("%s: Running without session manager", PACKAGE);
 
 #ifdef HAVE_SIGACTION
@@ -404,6 +413,17 @@ main (int argc, char **argv)
     /* signal state */
     g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
 
+    if (!session_managed)
+    {
+	g_message (_("%s: Successfully started without session management"), 
+		   PACKAGE);
+    }
+    else
+    {
+	g_message (_("%s: Successfully started with session management"), 
+		   PACKAGE);
+    }	
+    
     gtk_main ();
 
     return 0;
