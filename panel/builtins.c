@@ -213,7 +213,7 @@ static gboolean create_clock_module(PanelModule * pm)
 {
     t_clock *clock = clock_new();
 
-    pm->caption = g_strdup(_("Clock"));
+    pm->caption = g_strdup(_("XFce clock"));
     pm->data = (gpointer) clock;
     pm->main = clock->eventbox;
 

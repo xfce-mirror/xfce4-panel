@@ -318,7 +318,8 @@ void create_xfce_panel(void)
 
 void panel_cleanup(void)
 {
-    write_panel_config();
+    if (!disable_user_config)
+	write_panel_config();
 
     side_panel_cleanup(LEFT);
     central_panel_cleanup();

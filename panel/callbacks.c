@@ -361,6 +361,22 @@ static void show_popup(PanelPopup * pp)
     if(!pp->detached)
         open_popup = pp;
 
+    if (pp->items && !pp->detached)
+	gtk_widget_show(pp->tearoff_button);
+    else
+	gtk_widget_hide(pp->tearoff_button);
+    
+    if (disable_user_config || g_list_length(pp->items) >= NBITEMS)
+    {
+	gtk_widget_hide(pp->addtomenu_item->button);
+	gtk_widget_hide(pp->separator);
+    }
+    else
+    {
+	gtk_widget_show(pp->addtomenu_item->button);
+	gtk_widget_show(pp->separator);
+    }
+	    
     gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
 
     if(!GTK_WIDGET_REALIZED(pp->button))
@@ -527,6 +543,7 @@ addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
             gtk_box_pack_start(GTK_BOX(pp->vbox), mi->button, TRUE, TRUE, 0);
 
             gtk_box_reorder_child(GTK_BOX(pp->vbox), mi->button, 2);
+	    
             gtk_button_clicked(GTK_BUTTON(pp->button));
             gtk_button_clicked(GTK_BUTTON(pp->button));
         }

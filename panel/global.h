@@ -43,7 +43,7 @@
 /* limits to the panel size */
 #define NBSCREENS 12
 #define NBGROUPS 6
-#define NBITEMS 10
+#define NBITEMS 16
 
 #define SMALL_PANEL_ICONS 30
 #define MEDIUM_PANEL_ICONS 45
@@ -110,6 +110,9 @@ struct _Settings
     char *lock_command;
     char *exit_command;
 };
+
+/* defined in settings.c */
+extern gboolean disable_user_config;
 
 /* defined in xfce.c */
 extern GtkWidget *toplevel;

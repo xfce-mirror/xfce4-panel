@@ -36,7 +36,7 @@
 #define ROOT	"Xfce"
 #define NS	"http://www.xfce.org/xfce4/panel/1.0"
 
-static gboolean disable_user_config = FALSE;
+gboolean disable_user_config = FALSE;
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -86,7 +86,7 @@ static char *localized_rcfile(void)
     }
 
     snprintf(rcfile, MAXSTRLEN, "%s/%s/%s", home, RCDIR, RCFILE);
-    snprintf(sysrcfile, MAXSTRLEN, "%s/%s", SYSCONFDIR, RCFILE);
+    snprintf(sysrcfile, MAXSTRLEN, "%s/xfce4/%s", SYSCONFDIR, RCFILE);
 
     if(!disable_user_config && g_file_test(rcfile, G_FILE_TEST_EXISTS))
         return g_strdup(rcfile);
@@ -110,6 +110,8 @@ static char *localized_rcfile(void)
 
             if(g_file_test(file, G_FILE_TEST_EXISTS))
                 return g_strdup(file);
+            else if(g_file_test(sysrcfile, G_FILE_TEST_EXISTS))
+                return g_strdup(sysrcfile);
             else
                 return NULL;
         }
@@ -259,11 +261,15 @@ void settings_to_file(void)
 
 static gboolean check_disable_user_config(void)
 {
-    char userconf[MAXSTRLEN + 1];
+/*    char userconf[MAXSTRLEN + 1];
 
     snprintf(userconf, MAXSTRLEN, "%s/disable_user_config", SYSCONFDIR);
-
+    
     return g_file_test(userconf, G_FILE_TEST_EXISTS);
+*/
+    const char *var = g_getenv("XFCE_DISABLE_USER_CONFIG");
+    
+    return (var && !strequal(var,"0"));
 }
 
 void get_panel_config(void)

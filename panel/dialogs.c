@@ -90,6 +90,21 @@ void report_error(const char *text)
     gtk_widget_destroy(dialog);
 }
 
+void show_info(const char *text)
+{
+    GtkWidget *dialog;
+
+    dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
+                                    GTK_DIALOG_MODAL |
+                                    GTK_DIALOG_DESTROY_WITH_PARENT,
+                                    GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, text);
+
+    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+}
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 static void fs_ok_cb(GtkDialog * fs)
@@ -989,16 +1004,8 @@ static void reposition_popup(PanelPopup * pp)
     if(pp->detached)
         return;
 
-    /* All I want to do here is close and reopen the menu; I tried all
-     * the obvious ways, but this is the only way it works for me
-     *
-     * It seems like three times the same thing, which shouldn't work
-     * ... but it does (for me)
-     */
-    gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(pp->button));
-
-    toggle_popup(pp->button, pp);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pp->button), TRUE);
+    gtk_button_clicked(GTK_BUTTON(pp->button));
+    gtk_button_clicked(GTK_BUTTON(pp->button));
 }
 
 void add_menu_item_dialog(PanelPopup * pp)
@@ -1006,6 +1013,9 @@ void add_menu_item_dialog(PanelPopup * pp)
     int response;
     GtkWidget *box;
 
+    if (disable_user_config)
+	return;
+    
     /* dialog */
     dialog = gtk_dialog_new_with_buttons(_("Add item"), GTK_WINDOW(toplevel),
                                          GTK_DIALOG_MODAL,
@@ -1086,6 +1096,9 @@ void edit_menu_item_dialog(MenuItem * mi)
     GtkWidget *box;
     int response;
 
+    if (disable_user_config)
+	return;
+    
     dialog = gtk_dialog_new_with_buttons(_("Edit item"), GTK_WINDOW(toplevel),
                                          GTK_DIALOG_MODAL,
                                          GTK_STOCK_CANCEL,
@@ -1112,12 +1125,6 @@ void edit_menu_item_dialog(MenuItem * mi)
 
     box = GTK_DIALOG(dialog)->vbox;
     gtk_box_pack_start(GTK_BOX(box), iframe->frame, TRUE, TRUE, 0);
-
-    if(mi->icon_path)
-    {
-        gtk_entry_set_text(GTK_ENTRY(iframe->icon_entry), mi->icon_path);
-        iframe->icon_path = g_strdup(mi->icon_path);
-    }
 
     if(mi->command)
         gtk_entry_set_text(GTK_ENTRY(iframe->command_entry), mi->command);
@@ -1186,7 +1193,7 @@ void edit_menu_item_dialog(MenuItem * mi)
 
         gtk_container_remove(GTK_CONTAINER(mi->parent->vbox), mi->button);
         menu_item_free(mi);
-
+	
         reposition_popup(pp);
     }
 

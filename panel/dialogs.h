@@ -24,6 +24,8 @@
 
 void report_error(const char *text);
 
+void show_info(const char *text);
+
 void edit_menu_item_dialog(MenuItem * mi);
 
 void add_menu_item_dialog(PanelPopup * pp);
