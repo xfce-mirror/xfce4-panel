@@ -639,7 +639,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
 					  GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
 					  NULL);
 
-    gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER_ALWAYS);
+    gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
     gtk_window_set_icon (GTK_WINDOW (dialog), mp->icon);
 
