@@ -821,8 +821,9 @@ void xfce_run(void)
 
     /* give early visual feedback 
      * the init functions have already created the basic panel 
+     */
     panel_set_position();
-    gtk_widget_show(toplevel);*/
+    gtk_widget_show(toplevel);
 
     /* read and apply configuration 
      * This function creates the panel items and popup menus */
