@@ -1,6 +1,6 @@
-/*  dialog.h
+/*  item_dialog.h
  *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *  Copyright (C) Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,16 +16,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+ 
+#ifndef __XFCE_ITEM_DIALOG_H__
+#define __XFCE_ITEM_DIALOG_H__
 
-#ifndef __XFCE_DIALOGS_H__
-#define __XFCE_DIALOGS_H__
+void edit_menu_item_dialog(MenuItem * mi);
 
-#include "global.h"
+void add_menu_item_dialog(PanelPopup * pp);
 
-void screen_button_dialog(ScreenButton * sb);
+void edit_panel_group_dialog(PanelGroup * pg);
 
-void set_transient_for_dialog(GtkWidget * window);
-
-void global_settings_dialog(void);
-
-#endif /* __XFCE_DIALOGS_H__ */
+#endif /* __XFCE_ITEM_DIALOG_H__ */

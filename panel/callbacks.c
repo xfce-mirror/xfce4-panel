@@ -27,6 +27,7 @@
 #include "xfce.h"
 #include "xfce_support.h"
 #include "dialogs.h"
+#include "item_dialog.h"
 #include "panel.h"
 #include "central.h"
 #include "side.h"
@@ -166,7 +167,10 @@ gboolean panel_group_press_cb(GtkButton * b, GdkEventButton * ev, PanelGroup * p
     if(ev->button != 3)
         return FALSE;
 
-    edit_panel_control_dialog(pg);
+	if (disable_user_config)
+		return FALSE;
+	
+    edit_panel_group_dialog(pg);
 
     return TRUE;
 }
@@ -411,6 +415,9 @@ gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi)
     if(ev->button != 3)
         return FALSE;
 
+	if (disable_user_config)
+		return FALSE;
+	
     edit_menu_item_dialog(mi);
 
     return TRUE;

@@ -128,7 +128,6 @@ void panel_item_set_size(PanelItem * pi, int size)
     width = icon_size(size);
     height = icon_size(size);
 
-    gtk_container_set_border_width(GTK_CONTAINER(pi->button), bw);
     gtk_widget_set_size_request(pi->button, width + 4, height + 4);
 
     pb = get_scaled_pixbuf(pi->pb, width - 2 * bw);

@@ -98,6 +98,7 @@ central.c \
 dialogs.c \
 icons.c \
 item.c \
+item_dialog.c \
 module.c \
 move.c \
 popup.c \
@@ -108,6 +109,7 @@ builtins.h \
 callbacks.h \
 central.h \
 dialogs.h \
+item_dialog.h \
 move.h \
 popup.h \
 settings.h \
@@ -138,10 +140,11 @@ PROGRAMS = $(bin_PROGRAMS)
 am_xfce4_OBJECTS = xfce4-builtins.$(OBJEXT) xfce4-callbacks.$(OBJEXT) \
 	xfce4-central.$(OBJEXT) xfce4-dialogs.$(OBJEXT) \
 	xfce4-icons.$(OBJEXT) xfce4-item.$(OBJEXT) \
-	xfce4-module.$(OBJEXT) xfce4-move.$(OBJEXT) \
-	xfce4-popup.$(OBJEXT) xfce4-settings.$(OBJEXT) \
-	xfce4-side.$(OBJEXT) xfce4-wmhints.$(OBJEXT) \
-	xfce4-xfce.$(OBJEXT) xfce4-xfce_support.$(OBJEXT)
+	xfce4-item_dialog.$(OBJEXT) xfce4-module.$(OBJEXT) \
+	xfce4-move.$(OBJEXT) xfce4-popup.$(OBJEXT) \
+	xfce4-settings.$(OBJEXT) xfce4-side.$(OBJEXT) \
+	xfce4-wmhints.$(OBJEXT) xfce4-xfce.$(OBJEXT) \
+	xfce4-xfce_support.$(OBJEXT)
 xfce4_OBJECTS = $(am_xfce4_OBJECTS)
 xfce4_DEPENDENCIES =
 xfce4_LDFLAGS =
@@ -159,6 +162,7 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-dialogs.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-icons.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-item.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4-item_dialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-module.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-move.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-popup.Po \
@@ -227,6 +231,7 @@ xfce4-central.$(OBJEXT): central.c
 xfce4-dialogs.$(OBJEXT): dialogs.c
 xfce4-icons.$(OBJEXT): icons.c
 xfce4-item.$(OBJEXT): item.c
+xfce4-item_dialog.$(OBJEXT): item_dialog.c
 xfce4-module.$(OBJEXT): module.c
 xfce4-move.$(OBJEXT): move.c
 xfce4-popup.$(OBJEXT): popup.c
@@ -251,6 +256,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-dialogs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-icons.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-item.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-item_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-module.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-move.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-popup.Po@am__quote@
@@ -388,6 +394,24 @@ xfce4-item.lo: item.c
 @AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-item.Plo' tmpdepfile='$(DEPDIR)/xfce4-item.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-item.lo `test -f 'item.c' || echo '$(srcdir)/'`item.c
+
+xfce4-item_dialog.o: item_dialog.c
+@AMDEP_TRUE@	source='item_dialog.c' object='xfce4-item_dialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-item_dialog.Po' tmpdepfile='$(DEPDIR)/xfce4-item_dialog.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-item_dialog.o `test -f 'item_dialog.c' || echo '$(srcdir)/'`item_dialog.c
+
+xfce4-item_dialog.obj: item_dialog.c
+@AMDEP_TRUE@	source='item_dialog.c' object='xfce4-item_dialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-item_dialog.Po' tmpdepfile='$(DEPDIR)/xfce4-item_dialog.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-item_dialog.obj `cygpath -w item_dialog.c`
+
+xfce4-item_dialog.lo: item_dialog.c
+@AMDEP_TRUE@	source='item_dialog.c' object='xfce4-item_dialog.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-item_dialog.Plo' tmpdepfile='$(DEPDIR)/xfce4-item_dialog.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-item_dialog.lo `test -f 'item_dialog.c' || echo '$(srcdir)/'`item_dialog.c
 
 xfce4-module.o: module.c
 @AMDEP_TRUE@	source='module.c' object='xfce4-module.o' libtool=no @AMDEPBACKSLASH@

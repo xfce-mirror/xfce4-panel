@@ -64,10 +64,15 @@ gboolean create_builtin_module(PanelModule * pm)
    Clock module
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+enum
+{ ANALOG, DIGITAL, LED };
 
 typedef struct
 {
     int size;
+	
+	int type;
+	gboolean twentyfour;
 
     gboolean show_colon;
 
@@ -83,6 +88,8 @@ static t_clock *clock_new(void)
 
     clock->size = MEDIUM;
     clock->show_colon = TRUE;
+	clock->type = DIGITAL;
+	clock->twentyfour = TRUE;
 
     clock->frame = gtk_frame_new(NULL);
     gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 4);
@@ -202,6 +209,102 @@ void clock_set_style(PanelModule * pm, int style)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+static void clock_type_changed(GtkOptionMenu *om, t_clock *clock)
+{
+	clock->type = gtk_option_menu_get_history(om);
+}
+
+static GtkWidget *create_clock_type_option_menu(t_clock *clock)
+{
+	GtkWidget *om, *menu, *mi;
+	
+	om = gtk_option_menu_new();
+	
+	menu = gtk_menu_new();
+	gtk_widget_show(menu);
+	
+	mi = gtk_menu_item_new_with_label(_("Analog"));
+	gtk_widget_show(mi);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+	
+	mi = gtk_menu_item_new_with_label(_("Digital"));
+	gtk_widget_show(mi);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+	
+	mi = gtk_menu_item_new_with_label(_("LED"));
+	gtk_widget_show(mi);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+	
+	gtk_option_menu_set_menu(GTK_OPTION_MENU(om), menu);
+	
+	gtk_option_menu_set_history(GTK_OPTION_MENU(om), clock->type);
+	
+	g_signal_connect(om, "changed", G_CALLBACK(clock_type_changed), clock);
+	
+	return om;
+}
+
+static void clock_hour_mode_changed(GtkToggleButton *tb, t_clock *clock)
+{
+	clock->twentyfour = gtk_toggle_button_get_active(tb);
+}
+
+static GtkWidget *create_clock_24hrs_button(t_clock *clock)
+{
+	GtkWidget *cb;
+	
+	cb = gtk_check_button_new();
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(cb), clock->twentyfour);
+	
+	g_signal_connect(cb, "toggled", G_CALLBACK(clock_hour_mode_changed), clock);
+	
+	return cb;
+}
+
+void clock_add_options(PanelModule *pm, GtkContainer *container)
+{
+	GtkWidget *vbox, *om, *hbox, *label, *checkbutton;
+	GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+	
+	t_clock *clock = (t_clock *) pm->data;
+	
+	vbox = gtk_vbox_new(FALSE, 4);
+	gtk_widget_show(vbox);
+	
+	hbox = gtk_hbox_new(FALSE, 4);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+	
+	label = gtk_label_new(_("Clock type:"));
+	gtk_widget_show(label);
+	gtk_size_group_add_widget(sg, label);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+	
+	om = create_clock_type_option_menu(clock);
+	gtk_widget_show(om);
+	gtk_box_pack_start(GTK_BOX(hbox), om, FALSE, FALSE, 0);
+	
+	hbox = gtk_hbox_new(FALSE, 4);
+	gtk_widget_show(hbox);
+	gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+	
+	label = gtk_label_new(_("24 hour clock:"));
+	gtk_widget_show(label);
+	gtk_size_group_add_widget(sg, label);
+	gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+	gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+	
+	checkbutton = create_clock_24hrs_button(clock);
+	gtk_widget_show(checkbutton);
+	gtk_box_pack_start(GTK_BOX(hbox), checkbutton, FALSE, FALSE, 0);
+	
+	gtk_container_add(container, vbox);
+}
+
+static void clock_apply_configuration(PanelModule *pm)
+{
+}
 
 void clock_configure(PanelModule * pm)
 {
@@ -227,10 +330,13 @@ static gboolean create_clock_module(PanelModule * pm)
 
     pm->set_size = (gpointer) clock_set_size;
     pm->set_style = (gpointer) clock_set_style;
-    pm->configure = (gpointer) clock_configure;
+	
+	pm->add_options = (gpointer) clock_add_options;
+	pm->apply_configuration = (gpointer) clock_apply_configuration;
+/*    pm->configure = (gpointer) clock_configure;*/
 
     if (pm->parent)
-	adjust_time(pm);
+		adjust_time(pm);
     
     return TRUE;
 }

@@ -64,7 +64,8 @@ struct _PanelModule
     void (*set_icon_theme) (PanelModule *, const char *);
 
     /* configure */
-    void (*configure) (PanelModule *);
+	void (*add_options)(PanelModule *, GtkContainer *);
+    void (*apply_configuration) (PanelModule *);
 };
 
 /*****************************************************************************/
@@ -81,6 +82,9 @@ void panel_module_stop(PanelModule * pm);
 void panel_module_set_size(PanelModule * pm, int size);
 void panel_module_set_style(PanelModule * pm, int style);
 void panel_module_set_icon_theme(PanelModule * pm, const char *theme);
+
+void panel_module_add_options(PanelModule * pm, GtkContainer * container);
+void panel_module_apply_configuration(PanelModule * pm);
 
 void panel_module_parse_xml(xmlNodePtr node, PanelModule * pm);
 void panel_module_write_xml(xmlNodePtr root, PanelModule *pm);

@@ -59,7 +59,8 @@ PanelModule *panel_module_new(PanelGroup * pg)
     pm->set_style = NULL;
     pm->set_icon_theme = NULL;
     
-    pm->configure = NULL;
+	pm->add_options = NULL;
+	pm->apply_configuration = NULL;
 
     return pm;
 }
@@ -244,11 +245,40 @@ void panel_module_set_icon_theme(PanelModule * pm, const char *theme)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Configuration
-
+  Module configuration
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+void panel_module_add_options(PanelModule * pm, GtkContainer * container)
+{
+	if (pm->add_options)
+		pm->add_options(pm, container);
+	else
+	{
+		GtkWidget *hbox, *image, *label;
+		
+		hbox = gtk_hbox_new(FALSE, 4);
+		gtk_widget_show(hbox);
+		gtk_container_set_border_width(GTK_CONTAINER(hbox), 10);
+		gtk_container_add(container, hbox);
+		
+		image = gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_MENU);
+		gtk_widget_show(image);
+		gtk_box_pack_start(GTK_BOX(hbox), image, TRUE, FALSE, 0);
+		
+		label = gtk_label_new(_("This module has no configuration options"));
+		gtk_widget_show(label);
+		gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, FALSE, 0);
+	}
+}
 
+void panel_module_apply_configuration(PanelModule * pm)
+{
+	if (pm->apply_configuration)
+		pm->apply_configuration(pm);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Panel configuration
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 void panel_module_parse_xml(xmlNodePtr node, PanelModule * pm)
 {
     xmlChar *value;
