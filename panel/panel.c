@@ -172,7 +172,7 @@ set_opacity (Panel * p, gboolean translucent)
         initialized = TRUE;
     }
 
-    if (!transparency)
+    if (transparency == OPAQUE)
         return;
     
     opacity = (translucent ? transparency : OPAQUE);
