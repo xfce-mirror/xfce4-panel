@@ -205,6 +205,9 @@ control_class_info_create_control (ControlClassInfo * info, Control * control)
 
     wait_for_unloading ();
 
+    if (info->unique && info->refcount > 0)
+	return FALSE;
+
     if (info->class->id == PLUGIN && info->refcount == 0 &&
 	info->class->gmodule == NULL)
     {
@@ -221,12 +224,16 @@ control_class_info_create_control (ControlClassInfo * info, Control * control)
 	init (info->class);
     }
 
-    if (info->unique && info->refcount > 0)
-	return FALSE;
+    if (info->class->create_control (control))
+    {
+        info->refcount++;
 
-    info->refcount++;
-
-    return info->class->create_control (control);
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
 }
 
 /* plugins */

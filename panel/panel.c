@@ -960,6 +960,7 @@ panel_allocate_cb (GtkWidget * window, GtkAllocation * allocation, Panel * p)
 	|| allocation->height != p->priv->req.height)
     {
 	panel_set_position (p);
+        gtk_widget_queue_draw (p->toplevel);
     }
 }
 
