@@ -14,21 +14,27 @@
     <Group>
       <Popup>
         <Item>
+          <Caption>Appfinder</Caption>
+          <Command term="0" sn="1">xfce4-appfinder</Command>
+          <Tooltip>Căutare şi pornire aplicaţii</Tooltip>
+          <Icon id="3"/>
+        </Item>
+        <Item>
           <Caption>Konqueror</Caption>
           <Command term="0" sn="0">konqueror</Command>
-          <Tooltip>Manager fisiere Konqueror</Tooltip>
+          <Tooltip>Administratorul de fişiere Konqueror</Tooltip>
           <Icon id="2"/>
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
           <Command term="0" sn="0">nautilus --no-desktop</Command>
-          <Tooltip>Manager fisiere Nautlius</Tooltip>
+          <Tooltip>Administratorul de fişiere Nautlius</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xffm</Command>
-        <Tooltip>Manager fisiere</Tooltip>
+        <Tooltip>Administrator fişiere</Tooltip>
         <Icon id="2"/>
       </Control>
     </Group>
@@ -36,7 +42,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">mozilla -splash</Command>
-        <Tooltip>Browser web Mozilla</Tooltip>
+        <Tooltip>Navigatorul Mozilla</Tooltip>
         <Icon id="7"/>
       </Control>
     </Group>
@@ -52,7 +58,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xmms</Command>
-        <Tooltip>Player Audio</Tooltip>
+        <Tooltip>Redare audio</Tooltip>
         <Icon id="6"/>
       </Control>
     </Group>
@@ -71,22 +77,22 @@
     <Group>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfce-setting-show</Command>
-        <Tooltip>Settings</Tooltip>
+        <Tooltip>Setări</Tooltip>
         <Icon id="3"/>
       </Control>
     </Group>
     <Group>
       <Popup>
         <Item>
-          <Caption>Management imprimanta</Caption>
+          <Caption>Administrare imprimantă</Caption>
           <Command term="0" sn="0">xfprint-manager</Command>
-          <Tooltip>Managenemt inprimanta</Tooltip>
+          <Tooltip>Administrare imprimantă</Tooltip>
           <Icon id="9"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xfprint4</Command>
-        <Tooltip>Trage aici un fisier pentru imprimare</Tooltip>
+        <Tooltip>Trageţi aici un fişier pentru tipărire</Tooltip>
         <Icon id="9"/>
       </Control>
     </Group>
