@@ -345,11 +345,20 @@ item_apply_config (Item * item)
     }
 
     if (item->tooltip && strlen (item->tooltip))
+    {
 	add_tooltip (item->button, item->tooltip);
+    }
     else if (item->command && strlen (item->command))
-	add_tooltip (item->button, item->command);
+    {
+	if (item->type != MENUITEM)
+	    add_tooltip (item->button, item->command);
+	else
+	    add_tooltip (item->button, NULL);
+    }
     else
+    {
 	add_tooltip (item->button, _("Click mouse button 3 to change item"));
+    }
 }
 
 /*  Menu items  
