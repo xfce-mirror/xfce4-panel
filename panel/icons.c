@@ -45,7 +45,7 @@ static char *xfce_icon_names[][4] = {
     {"xfce-multimedia", "gnome-multimedia", "multimedia", NULL},
     {"xfce-internet", "gnome-globe", "web-browser", NULL},
     {"xfce-graphics", "gnome-graphics", "graphics", NULL},
-    {"xfce-printer", "gnome-dev-printer", "printer", NULL},
+    {"xfce-print", "gnome-dev-printer", "printer", NULL},
     {"xfce-schedule", "gnome-month", "productivity", NULL},
     {"xfce-sound", "gnome-audio", "sound", NULL},
     {"xfce-terminal", "gnome-terminal", "terminal", NULL},
