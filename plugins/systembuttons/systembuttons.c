@@ -15,16 +15,19 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-*/
+ */
 
 /*  systembuttons.c : xfce4 panel plugin that shows one or two 
  *  'system buttons'. These are the same buttons also present on 
  *  both sides of the switcher plugin: 
  *  lock, exit, setup and info.
-*/
-#include <config.h>
-#include <my_gettext.h>
+ */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <libxfce4util/i18n.h>
 #include <libxfcegui4/xfce_iconbutton.h>
 
 #include "xfce.h"

@@ -27,8 +27,11 @@
  *  button. 
 */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
+
+#include <libxfce4util/i18n.h>
 
 #include "xfce.h"
 #include "groups.h"

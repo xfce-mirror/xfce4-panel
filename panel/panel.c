@@ -17,14 +17,17 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
 
 #ifdef GDK_MULTIHEAD_SAFE
 #undef GDK_MULTIHEAD_SAFE
 #endif
 
 #include <X11/Xlib.h>
+
+#include <libxfce4util/i18n.h>
 #include <libxfcegui4/libnetk.h>
 
 #include "xfce.h"

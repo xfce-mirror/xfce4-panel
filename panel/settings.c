@@ -17,12 +17,18 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
+
+#ifdef HAVE_SYS_STAT_H
+#include <sys/stat.h>
+#endif
 
 #include <stdio.h>
+#ifdef HAVE_STDLIB_H
 #include <stdlib.h>
-#include <sys/stat.h>
+#endif
 
 #include <libxml/parser.h>
 #include <libxml/tree.h>

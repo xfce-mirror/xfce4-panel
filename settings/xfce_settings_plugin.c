@@ -17,11 +17,17 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
 
+#ifdef HAVE_MEMORY_H
+#include <memory.h>
+#endif
 #include <stdio.h>
+#ifdef HAVE_STRING_H
 #include <string.h>
+#endif
 
 #include <gtk/gtk.h>
 #include <libxml/tree.h>
@@ -29,6 +35,7 @@
 
 #include <libxfce4mcs/mcs-common.h>
 #include <libxfce4mcs/mcs-manager.h>
+#include <libxfce4util/i18n.h>
 #include <libxfce4util/util.h>
 #include <xfce-mcs-manager/manager-plugin.h>
 

@@ -19,15 +19,29 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
 
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
+#ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
-#include <time.h>
+#endif
 
+#ifdef HAVE_MEMORY_H
+#include <memory.h>
+#endif
+#include <stdio.h>
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+#ifdef HAVE_TIME_H
+#include <time.h>
+#endif
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
+#include <libxfce4util/i18n.h>
 #include <libxfcegui4/xfce_clock.h>
 
 #include "global.h"

@@ -25,17 +25,23 @@
  * all modules (and external plugins).
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
 
 #include <ctype.h>
 #include <stdio.h>
+#ifdef HAVE_STDDEF_H
 #include <stddef.h>
+#endif
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+
 #include <glib.h>
 #include <gdk/gdk.h>
+
+#include <libxfce4util/i18n.h>
 #include <libxfce4util/util.h>
 #include <libxfcegui4/libxfcegui4.h>
 

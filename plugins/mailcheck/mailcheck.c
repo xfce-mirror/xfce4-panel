@@ -17,12 +17,17 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
 
+#ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
+#endif
+
 #include <gtk/gtk.h>
 
+#include <libxfce4util/i18n.h>
 #include <libxfcegui4/xfce_iconbutton.h>
 
 #include "xfce.h"

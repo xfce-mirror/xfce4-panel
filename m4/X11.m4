@@ -1,7 +1,7 @@
 dnl From Benedikt Meurer (benedikt.meurer@unix-ag.uni-siegen.de)
 dnl Check for X11
 
-AC_DEFUN([AM_LIBX11],
+AC_DEFUN([BM_LIBX11],
 [
   AC_REQUIRE([AC_PATH_XTRA])
   AC_REQUIRE([BM_RPATH_SUPPORT])
@@ -37,17 +37,17 @@ AC_DEFUN([AM_LIBX11],
   AC_SUBST(LIBX11_LIBS)
 ])
 
-AC_DEFUN([AM_LIBX11_REQUIRE],
+AC_DEFUN([BM_LIBX11_REQUIRE],
 [
-  AC_REQUIRE([AM_LIBX11])
+  AC_REQUIRE([BM_LIBX11])
   if test "$no_x" == "yes"; then
     AC_MSG_ERROR([X Window system libraries and header files are required])
   fi
 ])
 
-AC_DEFUN([AM_LIBSM],
+AC_DEFUN([BM_LIBSM],
 [
-  AC_REQUIRE([AM_LIBX11])
+  AC_REQUIRE([BM_LIBX11])
   LIBSM_CFLAGS= LIBSM_LDFLAGS= LIBSM_LIBS=
   if test "$no_x" != "yes"; then
     AC_CHECK_LIB(SM, SmcSaveYourselfDone,
@@ -66,7 +66,37 @@ AC_DEFUN([AM_LIBSM],
   AC_SUBST(LIBSM_LIBS)
 ])
 
-AC_DEFUN([AM_LIBXINERAMA],
+AC_DEFUN([BM_LIBXPM],
+[
+  AC_REQUIRE([BM_LIBX11])
+  LIBXPM_CFLAGS= LIBXPM_LDFLAGS= LIBXPM_LIBS=
+  if test "$no_x" != "yes"; then
+    AC_CHECK_LIB(Xpm, main,
+    [
+      AC_DEFINE([HAVE_LIBXPM], [1], [Define if libXpm is available])
+      LIBXPM_CFLAGS="$LIBX11_CFLAGS"
+      LIBXPM_LDFLAGS="$LIBX11_LDFLAGS"
+      LIBXPM_LIBS="$LIBX11_LIBS"
+      if ! echo $LIBXPM_LIBS | grep -q -- '-lXpm'; then
+        LIBXPM_LIBS="$LIBXPM_LIBS -lXpm"
+      fi
+    ], [], [$LIBX11_CFLAGS $LIBX11_LDFLAGS $LIBX11_LIBS -lXpm])
+  fi
+  AC_SUBST([LIBXPM_CFLAGS])
+  AC_SUBST([LIBXPM_LDFLAGS])
+  AC_SUBST([LIBXPM_LIBS])
+])
+
+AC_DEFUN([BM_LIBXPM_REQUIRE],
+[
+  AC_REQUIRE([BM_LIBX11_REQUIRE])
+  AC_REQUIRE([BM_LIBXPM])
+  if test -z "$LIBXPM_LIBS"; then
+    AC_MSG_ERROR([The Xpm library was not found on you system])
+  fi
+])
+
+AC_DEFUN([BM_LIBXINERAMA],
 [
   AC_ARG_ENABLE(xinerama,
 AC_HELP_STRING([--enable-xinerama], [enable xinerama extension])
@@ -74,7 +104,7 @@ AC_HELP_STRING([--disable-xinerama], [disable xinerama extension [default]]),
       [], [enable_xinerama=no])
   LIBXINERAMA_CFLAGS= LIBXINERAMA_LDFLAGS= LIBXINERAMA_LIBS=
   if test "x$enable_xinerama" = "xyes"; then
-    AC_REQUIRE([AM_LIBX11_REQUIRE])
+    AC_REQUIRE([BM_LIBX11_REQUIRE])
     AC_CHECK_LIB(Xinerama, XineramaQueryScreens,
     [
       AC_DEFINE(HAVE_LIBXINERAMA, 1, Define if XFree86 Xinerama is available)
@@ -94,23 +124,3 @@ AC_HELP_STRING([--disable-xinerama], [disable xinerama extension [default]]),
   AC_SUBST(LIBXINERAMA_LIBS)
 ])
 
-AC_DEFUN([AM_XEXTMIT],
-[
-  AC_REQUIRE([AC_LIBX11])
-  XEXTMIT_CFLAGS= XEXTMIT_LDFLAGS= XEXTMIT_LIBS=
-  if test "$no_x" != "yes"; then
-    AC_CHECK_LIB(Xext, XMITMiscQueryExtension,
-    [
-      AC_DEFINE(HAVE_XEXTMIT, 1, Define if X11 MIT extension is available)
-      XEXTMIT_CFLAGS="$LIBX11_CFLAGS"
-      XEXTMIT_LDFLAGS="$LIBX11_LDFLAGS"
-      XEXTMIT_LIBS="$LIBX11_LIBS"
-      if ! echo $XEXTMIT_LIBS | grep -q -- '-lXext'; then
-        XEXTMIT_LIBS="$XEXTMIT_LIBS -lXext"
-      fi
-    ], [], [$LIBX11_CFLAGS $LIBX11_LIBS])
-  fi
-  AC_SUBST(XEXTMIT_CFLAGS)
-  AC_SUBST(XEXTMIT_LDFLAGS)
-  AC_SUBST(XEXTMIT_LIBS)
-])

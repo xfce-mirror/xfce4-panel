@@ -45,10 +45,10 @@
 #include <unistd.h>
 #endif
 
+#include <libxfce4util/i18n.h>
 #include <libxfcegui4/session-client.h>
 #include <libxfcegui4/netk-util.h>
 
-#include "my_gettext.h"
 #include "xfce.h"
 #include "settings.h"
 #include "mcs_client.h"

@@ -17,18 +17,24 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#include <my_gettext.h>
+#endif
 
 #include <ctype.h>
 #include <stdio.h>
+#ifdef HAVE_STDDEF_H
 #include <stddef.h>
+#endif
+#ifdef HAVE_STDLIB_H
 #include <stdlib.h>
+#endif
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 #include <gdk/gdkx.h>
 
+#include <libxfce4util/i18n.h>
 #include <libxfce4mcs/mcs-client.h>
 #include <libxfcegui4/libnetk.h>
 
