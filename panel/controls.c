@@ -182,10 +182,12 @@ PanelControl *panel_control_new(int side, int index)
     pc->side = side;
     pc->index = index;
 
-    /* this is the only widget created here */
-    pc->base = gtk_frame_new(NULL); /* gtk_event_box_new(); */
+    /* this is the only widget created here
+     * We use the eventbox as the simplest container 
+     * (a frame adds a 2 pixel border)
+     */
+    pc->base = gtk_event_box_new();
     gtk_container_set_border_width(GTK_CONTAINER(pc->base), 0);
-    gtk_frame_set_shadow_type(GTK_FRAME(pc->base), GTK_SHADOW_NONE);
     gtk_widget_show(pc->base);
 
     /* protect against destruction when unpacking */
