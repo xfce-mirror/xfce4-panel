@@ -160,7 +160,7 @@ get_theme_dirs (void)
 	dirs = g_new (gchar *, 2);
 
 	dirs[0] = g_build_filename (DATADIR, "themes", NULL);
-	dirs[2] = NULL;
+	dirs[1] = NULL;
     }
     else
     {
