@@ -620,16 +620,16 @@ void central_panel_set_num_screens(int n)
     {
         ScreenButton *sb = screen_buttons[i];
 
-	if (!sb)
+	if (!sb && i < n)
 	{
-	    sb = create_screen_button(i);
+	    sb = screen_buttons[i] = create_screen_button(i);
 	    screen_button_pack(sb, desktop_table);
 	    gtk_label_set_text(GTK_LABEL(sb->label), screen_names[i]);
 	}
 	
         if(i < n)
             gtk_widget_show(sb->frame);
-        else
+        else if (sb)
             gtk_widget_hide(sb->frame);
     }
 
