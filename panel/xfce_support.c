@@ -85,7 +85,7 @@ static char *get_localized_system_rcfile(const char *name)
     {
         base_locale[0] = locale[0];
         base_locale[1] = locale[1];
-        base_locale[3] = '\0';
+        base_locale[2] = '\0';
     }
 
     sysrcfile = g_build_filename(SYSCONFDIR, SYSRCDIR, name, NULL);
