@@ -148,6 +148,11 @@ update_partial_struts (Panel *p, int x, int y)
 	    data[11] = x + w;			 /* bottom_end_x   */
     }
 
+    DBG (" ** struts: "
+	 "%ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld\n",
+	 data[0], data[1], data[2], data[3], data[4], data[5],
+	 data[6], data[7], data[8], data[9], data[10], data[11]);
+
     gdk_error_trap_push ();
 #if 0
     gdk_property_change (p->toplevel->window,
@@ -1362,6 +1367,8 @@ panel_set_autohide (gboolean hide)
     {
 	panel_set_hidden (&panel, hide);
     }
+    
+    update_partial_struts (&panel, panel.position.x, panel.position.y);
 }
 
 /*  Global preferences

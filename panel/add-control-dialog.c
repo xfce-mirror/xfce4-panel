@@ -46,9 +46,16 @@ static GtkWidget *the_dialog = NULL;
 
 /* prototypes */
 static void dialog_response (GtkWidget *dlg, int response, ControlList *list);
+
+static gboolean treeview_dblclick (GtkWidget *tv, GdkEventButton *evt, 
+			     	   ControlList *list);
+
 static void dialog_destroyed (ControlList * list);
+
 static void add_spacer (GtkBox * box, int size);
+
 static void add_header (GtkBox * box);
+
 static ControlList *add_control_list (GtkBox * box);
 
 /**
@@ -126,6 +133,25 @@ dialog_response (GtkWidget *dlg, int response, ControlList *list)
 
     gtk_widget_destroy (dlg);
     the_dialog = NULL;
+}
+
+static gboolean
+treeview_dblclick (GtkWidget * tv, GdkEventButton * evt, ControlList * list)
+{
+    GtkWidget *dlg;
+
+    if (evt->type == GDK_2BUTTON_PRESS)
+    {
+	dlg = gtk_widget_get_toplevel (tv);
+	if (dlg && GTK_WIDGET_TOPLEVEL (dlg))
+	{
+	    dialog_response (dlg, GTK_RESPONSE_OK, list);
+	}
+
+	return TRUE;
+    }
+
+    return FALSE;
 }
 
 static void
@@ -307,10 +333,11 @@ add_control_list (GtkBox * box)
     gtk_tree_path_free (path);
 
     g_signal_connect (tv, "cursor_changed", G_CALLBACK (cursor_changed), list);
+    
+    g_signal_connect (tv, "button-press-event", 
+	    	      G_CALLBACK (treeview_dblclick), list);
 
     gtk_widget_set_size_request (tv, 300, 300);
 
     return list;
 }
-
-
