@@ -191,6 +191,17 @@ static void icon_browse_cb(GtkWidget * b, GtkEntry * entry)
     }
 }
 
+gboolean icon_entry_lost_focus(GtkEntry *entry, GdkEventFocus *event, gpointer data)
+{
+	const char *temp = gtk_entry_get_text(entry);
+	
+	if (temp)
+		change_icon(EXTERN_ICON, temp);
+	
+	/* we must return FALSE or gtk will crash :-( */
+	return FALSE;
+}
+
 static GtkWidget *create_icon_options_box(gboolean is_menu_item)
 {
     GtkWidget *vbox;
@@ -264,6 +275,10 @@ static GtkWidget *create_icon_options_box(gboolean is_menu_item)
     icon_entry = gtk_entry_new();
     gtk_widget_show(icon_entry);
     gtk_box_pack_start(GTK_BOX(hbox), icon_entry, TRUE, TRUE, 0);
+
+	g_signal_connect(icon_entry, "focus-out-event", G_CALLBACK(icon_entry_lost_focus),
+                     NULL);
+
 
     icon_browse_button = gtk_button_new_with_label(" ... ");
     gtk_widget_show(icon_browse_button);
