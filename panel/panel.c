@@ -707,10 +707,15 @@ panel_center (int side)
     int w, h;
     DesktopMargins margins;
     Screen *xscreen;
+    gboolean hidden;
 
     w = screen_width;
     h = screen_height;
 
+    hidden = panel.hidden;
+    if (hidden)
+	panel_set_autohide(FALSE);
+    
     xscreen = DefaultScreenOfDisplay (GDK_DISPLAY ());
     netk_get_desktop_margins (xscreen, &margins);
 
@@ -742,6 +747,9 @@ panel_center (int side)
         panel.position.y = 0;
 
     panel_set_position ();
+
+    if (hidden)
+	panel_set_autohide(TRUE);
 }
 
 void
@@ -758,6 +766,11 @@ panel_set_position (void)
     {
         GtkRequisition req;
         int w, h;
+	gboolean hidden;
+    
+	hidden = panel.hidden;
+	if (hidden)
+	    panel_set_autohide(FALSE);
 
         w = screen_width;
         h = screen_height;
@@ -780,6 +793,9 @@ panel_set_position (void)
 
         gtk_window_move (GTK_WINDOW (panel.toplevel), panel.position.x,
                          panel.position.y);
+	
+	if (hidden)
+	    panel_set_autohide(TRUE);
     }
 }
 
