@@ -10,6 +10,7 @@ conf_DATA = 								\
 	xfce4rc.it							\
 	xfce4rc.ms							\
 	xfce4rc.nl 							\
+	xfce4rc.ro							\
 	xfce4rc.vi
 
 EXTRA_DIST = 								\
