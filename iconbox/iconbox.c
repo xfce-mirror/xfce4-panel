@@ -70,6 +70,7 @@ struct _Iconbox
 
     guint opacity;
     
+    GtkWidget *menu;
     GtkWidget *win;
     GtkWidget *box;
 
@@ -486,6 +487,9 @@ static void
 iconbox_init_icons (Iconbox * ib)
 {
     int i = 0;
+    GList *windows, *l;
+    
+    netk_screen_force_update (ib->netk_screen);
 
     ib->connections[i++] =
         g_signal_connect (ib->netk_screen, "active_window_changed",
@@ -509,7 +513,16 @@ iconbox_init_icons (Iconbox * ib)
 
     g_assert (i == N_ICONBOX_CONNECTIONS);
 
-    netk_screen_force_update (ib->netk_screen);
+    windows = netk_screen_get_windows (ib->netk_screen);
+
+    for (l = windows; l != NULL; l = l->next)
+    {
+        NetkWindow *w = l->data;
+
+        iconbox_window_opened (ib->netk_screen, w, ib);
+    }
+
+    iconbox_active_window_changed (ib->netk_screen, ib);
 }
 
 
@@ -538,6 +551,89 @@ iconbox_check_options (int argc, char **argv)
 
         exit (0);
     }
+}
+
+/* right-click menu */
+static void
+menu_about (GtkWidget *w, Iconbox *ib)
+{
+    XfceAboutInfo *info;
+    GtkWidget *dlg;
+    GdkPixbuf *pb;
+
+    info = xfce_about_info_new ("xfce4-iconbox", VERSION, _("Xfce Iconbox"), 
+                                XFCE_COPYRIGHT_TEXT ("2005", 
+                                                     "Jasper Huijsmans"),
+                                XFCE_LICENSE_GPL);
+
+    xfce_about_info_set_homepage (info, "http://www.xfce.org");
+
+    xfce_about_info_add_credit (info, "Jasper Huijsmans", "jasper@xfce.org",
+                                _("Developer"));
+
+    pb = xfce_themed_icon_load ("xfce4-iconbox", 32);
+    dlg = xfce_about_dialog_new (GTK_WINDOW (ib->win), info, pb);
+    g_object_unref (pb);
+
+    gtk_widget_set_size_request (dlg, 400, 300);
+
+    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
+
+    gtk_dialog_run (GTK_DIALOG (dlg));
+
+    gtk_widget_destroy (dlg);
+
+    xfce_about_info_free (info);
+}
+
+static void
+menu_quit (GtkWidget *w, Iconbox *ib)
+{
+    gtk_main_quit ();
+}
+
+static GtkWidget *
+create_menu (Iconbox *ib)
+{
+    GtkWidget *menu, *mi;
+    
+    menu = gtk_menu_new ();
+
+    mi = gtk_menu_item_new_with_label (_("About"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    g_signal_connect (mi, "activate", G_CALLBACK (menu_about), ib);
+
+    mi = gtk_separator_menu_item_new ();
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    mi = gtk_image_menu_item_new_from_stock (GTK_STOCK_QUIT, NULL);
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    g_signal_connect (mi, "activate", G_CALLBACK (menu_quit), ib);
+    
+    return menu;
+}
+
+static gboolean
+iconbox_popup_menu (GtkWidget *w, GdkEventButton *ev, Iconbox *ib)
+{
+    if (ev->button == 3)
+    {
+        if (G_UNLIKELY (ib->menu == NULL))
+        {
+            ib->menu = create_menu (ib);
+        }
+        
+        gtk_menu_popup (GTK_MENU (ib->menu), NULL, NULL, NULL, NULL,
+                        ev->button, ev->time);
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 /* widgets */
@@ -638,6 +734,9 @@ create_iconbox (void)
     
     g_signal_connect (ib->win, "leave-notify-event", 
                       G_CALLBACK (iconbox_leave), ib);
+    
+    g_signal_connect (ib->win, "button-press-event", 
+                      G_CALLBACK (iconbox_popup_menu), ib);
     
     return ib;
 }
@@ -890,6 +989,9 @@ cleanup_iconbox (Iconbox *ib)
     write_offset (ib);
     
     iconbox_disconnect_mcs_client (ib->mcs_client);
+    
+    if (ib->menu)
+        gtk_widget_destroy (ib->menu);
     
     for (i = 0; i < N_ICONBOX_CONNECTIONS; i++)
     {
