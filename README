@@ -3,8 +3,8 @@ README for xfce version 4.x
 
 WHAT IS IT ?
 ------------
-'xfce' is the panel of the XFce Desktop Environment. It is modeled after the CDE
-panel and, of course, previous versions of xfce.
+'xfce' is the panel of the XFce Desktop Environment. It is modeled after the 
+CDE panel and, of course, previous versions of xfce.
 This version is based on GTK2 and should have all the advantages that come with
 this new and improved toolkit (see http://www.gtk.org).
 
@@ -14,45 +14,53 @@ Apart from the toolkit changes the underlying framework of the panel has also
 changed completely. 
 
 All interactions with the window manager take place through the new window
-manager hints as defined on http://www.freedesktop.org. This means that you will
-need a compliant window manager for xfce to function properly (preferably xfwm4
-;-).
+manager hints as defined on http://www.freedesktop.org. This means that you 
+will need a compliant window manager for xfce to function properly (preferably 
+xfwm4 ;-).
 
 The panel can now hold normal buttons and dynamic modules.
 
 INFO FOR DEVELOPERS
 ===================
+Please keep in mind that this information will usually not be up to date!
+
 If you are interested in helping with the development of xfce4 the best place to
 start reading is global.h which hold the type definitions of the different
 data structures used.
 
-The panel design is a hierarchy of components:
+Then just continue reading at main.c and follow the flow of the program. The 
+panel design is a hierarchy of components:
 
-- Panel (file xfce.c): Global settings and panel framework.
+- main.c: main program / quit / restart
 
-- Central panel (file central.c): Minibuttons and desktop switcher.
+- panel.c: Panel framework. 
 
-- Side panels (file side.c): Left and right panel containing several panel groups.
-  A panel group consists of a top widget and a bottom widget. The top widget is 
-  usually a popup button, but for the outermost groups it is a move handle. The
-  bottom widget is called panel control and can be either a panel item (a button 
-  with an icon) or a panel module (dynamically updated).
+- groups.c: The panel consists of a list of panel groups. A panel group holds
+  two widgets: a panel control and a toggle button with associated popup menu.
+  This file also contains code for moving items on the panel and for adding and
+  removing them.
 
-Other files:
+- controls.c: This file defines functions for handling panel controls. The
+  interface to a panel control is defined by an associated control class. A
+  control class defines the functions to interface with a specific type of panel
+  control, including creating new instances of a class.
+  The default control class is the traditional launcher, a button with an icon
+  that, when clicked, runs a program.
+  All other classes are defined through external plugins. At the time of this
+  writing (2002-12-17) the following plugins are available: clock, mailcheck, 
+  trashcan, switcher (CDE like desktop switcher with minibuttons) and system
+  buttons (which are the same as the mini butons on the switcher).
+  can, 
+
 - popup.c: function for the popup menu inlcuding menu items.
-
-- control.c: panel control interface
 
 - item.c: traditional panel control (icon button that launches programs)
 
-- iconbutton.c: icon button used by panel items. Separate for easy use by other 
-  modules.
-
-- builtin.c: builtin dynamic panel controls (e.g. clock and trash can).
+- handle.c: the move handles opn either side of the panel.
 
 - callbacks.c: most callback functions are defined here.
 
-- dialogs.c: panel configuration dialogs.
+- dialogs.c: global panel configuration dialog.
 
 - controls_dialog.c: configuration of panel controls
 
@@ -60,9 +68,5 @@ Other files:
 
 - xfce_support.c: convenience dialogs and general convenience functions.
 
-- move.c: moveing the panel around.
-
 - settings.c: reading and writing panel configuration.
-
-- wmhints.c: window manager hints
 
