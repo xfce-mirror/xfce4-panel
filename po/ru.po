@@ -2,18 +2,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Poul Ionkin <wizzard@nmg.lv>, 2003.
+# Anthony Ivanoff <a-i@bk.ru>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-22 16:35+0200\n"
-"PO-Revision-Date: 2003-09-03 21:35+0300\n"
-"Last-Translator: Dan Korostelev <daniel@ats.energo.ru>\n"
-"Language-Team: Russian <daniel@ats.energo.ru>\n"
+"PO-Revision-Date: 2004-08-23 21:15+0600\n"
+"Last-Translator: Anthony Ivanoff <a-i@bk.ru>\n"
+"Language-Team: Russian\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: panel/xfce_support.c:603
 msgid "Select file"
@@ -21,24 +24,19 @@ msgstr "Выбор файла"
 
 #: panel/settings.c:172
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "Данные не найдены. Панель будет пуста."
 
 #: panel/controls_dialog.c:88 panel/item_dialog.c:1200
 msgid "Position:"
 msgstr "Позиция:"
 
 #: panel/controls_dialog.c:148
-#, fuzzy
 msgid "Item properties"
-msgstr "/Свойства..."
+msgstr "Свойства элемента"
 
 #: panel/controls_dialog.c:200 panel/controls.c:685
-#, fuzzy
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"При удалении объекта будет также удалено его подменю.\n"
-"\n"
-"Вы уверены, что хотите удалить объект?"
+msgstr "При удалении объекта будет также удалено его подменю."
 
 #: panel/item_dialog.c:151 panel/item_dialog.c:605
 msgid "Select command"
@@ -91,7 +89,7 @@ msgstr "Запуск"
 
 #: panel/item.c:466
 msgid "Click mouse button 3 to change item"
-msgstr "Щелкните среднюю кнопку мыши для изменения объекта"
+msgstr "Щелкните средней кнопкой мыши, чтобы изменить объект"
 
 #: panel/item.c:489
 msgid "Add launcher"
@@ -106,7 +104,7 @@ msgid "Are you sure you want to exit?"
 msgstr "Вы уверены, что хотите выйти?"
 
 #: panel/main.c:326
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -118,39 +116,42 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"%s, версия %s\n"
-"Часть рабочей среды Xfce\n"
-"http://www.xfce.org\n"
+"\n"
+" Панель Xfce\n"
+" Версия %s\n"
+"\n"
+" Часть рабочей среды Xfce\n"
+" http://www.xfce.org\n"
+"\n"
+" Распространяется на условиях GNU GPL.\n"
+"\n"
 
 #: panel/main.c:395
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: Успешно запущено без управления сеансами"
 
 #: panel/main.c:400
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: Успешно запущено; управление сеансами включено"
 
 #: panel/controls.c:640 panel/controls.c:731
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "Невозможно создать элемент панели \"%s\"."
 
 #: panel/controls.c:792 panel/panel.c:573
-#, fuzzy
 msgid "_Properties..."
-msgstr "/Свойства..."
+msgstr "Свойства..."
 
 #: panel/controls.c:797
-#, fuzzy
 msgid "_Remove"
-msgstr "/Удалить"
+msgstr "Удалить"
 
 #: panel/controls.c:806 panel/panel.c:563
-#, fuzzy
 msgid "Add _new item"
-msgstr "/Добавить новый объект"
+msgstr "Добавить новый объект"
 
 #: panel/controls.c:1080
 msgid "This item has no configuration options"
@@ -162,28 +163,24 @@ msgid "Xfce Panel"
 msgstr "Панель Xfce"
 
 #: panel/panel.c:578
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/Об Xfce"
+msgstr "Об Xfce"
 
 #: panel/panel.c:583
-#, fuzzy
 msgid "_Help"
-msgstr "/Помощь"
+msgstr "Помощь"
 
 #: panel/panel.c:592
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/Блокировать экран"
+msgstr "Заблокировать экран"
 
 #: panel/panel.c:597
 msgid "_Restart"
-msgstr ""
+msgstr "Перезагрузить"
 
 #: panel/panel.c:606
-#, fuzzy
 msgid "E_xit"
-msgstr "/Выход"
+msgstr "Выход"
 
 #: panel/icons.c:68
 msgid "Default"
@@ -239,7 +236,7 @@ msgstr "Терминал"
 
 #: panel/mcs_client.c:204
 msgid "Settings manager not available"
-msgstr "Менеджер настроек недоступен"
+msgstr "Диспетчер настроек недоступен"
 
 #: panel/popup.c:255
 msgid "Menu"
@@ -259,7 +256,7 @@ msgstr "Большой"
 
 #: settings/xfce_settings_dialog.c:109
 msgid "Huge"
-msgstr ""
+msgstr "Огромный"
 
 #: settings/xfce_settings_dialog.c:189
 msgid "Horizontal"
@@ -295,11 +292,11 @@ msgstr "Положение панели:"
 
 #: settings/xfce_settings_dialog.c:311
 msgid "Popup position:"
-msgstr "Кнопка меню:"
+msgstr "Положению меню:"
 
 #: settings/xfce_settings_dialog.c:349
 msgid "Always on top:"
-msgstr ""
+msgstr "Поверх всех окон"
 
 #: settings/xfce_settings_dialog.c:401
 msgid "Autohide:"
@@ -327,7 +324,7 @@ msgstr "Поведение"
 #.
 #: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%A, %d %B %Y"
 
 #: plugins/clock/clock.c:423
 msgid "Clock type:"
@@ -371,11 +368,11 @@ msgstr "Часы Xfce"
 
 #: plugins/pager/pager.c:309
 msgid "Number of rows:"
-msgstr ""
+msgstr "Число строк:"
 
 #: plugins/pager/pager.c:311
 msgid "Number of columns:"
-msgstr ""
+msgstr "Число колонок:"
 
 #: plugins/pager/pager.c:355
 msgid "Graphical pager"
@@ -397,7 +394,7 @@ msgstr ""
 
 #: plugins/systembuttons/systembuttons.c:140
 msgid "Lock the screen"
-msgstr "Блокировать экран"
+msgstr "Заблокировать экран"
 
 #: plugins/systembuttons/systembuttons.c:141
 #: plugins/systembuttons/systembuttons.c:508
@@ -444,138 +441,22 @@ msgid "Mail box:"
 msgstr "Почтовый ящик:"
 
 #: plugins/mailcheck/mailcheck.c:825
-#, fuzzy
 msgid "New mail command:"
-msgstr "Команда:"
+msgstr "Запустить по получении новой почты:"
 
 #: plugins/mailcheck/mailcheck.c:839
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Выполнить команду при нажатии кнопки на панели"
+msgstr "Команда, выполняемая при приходе новой почты"
 
 #: plugins/mailcheck/mailcheck.c:869
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Выполнить команду при нажатии кнопки на панели"
+msgstr "Команда, выполняемая при нажатии кнопки на панели"
 
 #: plugins/mailcheck/mailcheck.c:891
 msgid "Interval (sec):"
 msgstr "Интервал (сек):"
 
 #: plugins/mailcheck/mailcheck.c:963
-#, fuzzy
 msgid "Mail checker"
 msgstr "Проверка почты"
 
-#~ msgid "Change item"
-#~ msgstr "Изменение объекта"
-
-#~ msgid "Menu:"
-#~ msgstr "Меню:"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Панель Xfce"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/Добавить новый объект"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/Свойства..."
-
-#~ msgid "Select icon"
-#~ msgstr "Выбор значка"
-
-#~ msgid "Icon:"
-#~ msgstr "Значок:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Просмотр значка"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "Ваш менеджер окон не поддерживает новые возможности, определенные на "
-#~ "http://www.freedesktop.org. \n"
-#~ "Возможно некоторые возможности Xfce не будут правильно работать."
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/Менеджер настроек"
-
-#~ msgid "Tiny"
-#~ msgstr "Крошечный"
-
-#~ msgid "Icon theme:"
-#~ msgstr "Тема значков:"
-
-#~ msgid "Panel layer:"
-#~ msgstr "Слой панели:"
-
-#~ msgid "Normal"
-#~ msgstr "Обычный"
-
-#~ msgid "Center the panel:"
-#~ msgstr "Центрирование панели:"
-
-#~ msgid "Set"
-#~ msgstr "Установить"
-
-#~ msgid "Position"
-#~ msgstr "Расположение"
-
-#~ msgid "Sunday"
-#~ msgstr "Воскресенье"
-
-#~ msgid "Monday"
-#~ msgstr "Понедельник"
-
-#~ msgid "Tuesday"
-#~ msgstr "Вторник"
-
-#~ msgid "Wednesday"
-#~ msgstr "Среда"
-
-#~ msgid "Thursday"
-#~ msgstr "Черверг"
-
-#~ msgid "Friday"
-#~ msgstr "Пятница"
-
-#~ msgid "Saturday"
-#~ msgstr "Суббота"
-
-#~ msgid "January"
-#~ msgstr "января"
-
-#~ msgid "February"
-#~ msgstr "февраля"
-
-#~ msgid "March"
-#~ msgstr "марта"
-
-#~ msgid "April"
-#~ msgstr "апреля"
-
-#~ msgid "May"
-#~ msgstr "мая"
-
-#~ msgid "June"
-#~ msgstr "июня"
-
-#~ msgid "July"
-#~ msgstr "июля"
-
-#~ msgid "August"
-#~ msgstr "августа"
-
-#~ msgid "September"
-#~ msgstr "сентября"
-
-#~ msgid "October"
-#~ msgstr "октября"
-
-#~ msgid "November"
-#~ msgstr "ноября"
-
-#~ msgid "December"
-#~ msgstr "декабря"
