@@ -79,7 +79,13 @@ create_control_list (Control * control)
 
         new_control = control_new (control->index);
         new_control->cclass = cc;
-        cc->create_control (new_control);
+        
+	if (!cc->create_control (new_control))
+	{
+	    new_control->cclass = NULL;
+	    control_free(new_control);
+	    continue;
+	}	
 
         control_attach_callbacks (new_control);
         control_set_settings (new_control);
