@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<Panel size="1" popupsize="1" style="0">
+  <Position x="-1" y="-2"/>
+  <Central>
+    <Screens visible="4">
+      <Screen>Een</Screen>
+      <Screen>Twee</Screen>
+    </Screens>
+    <Lock>xflock</Lock>
+  </Central>
+  <Left visible="5"> 
+    <Group>
+      <Module id="0"></Module>
+    </Group>
+    <Group>
+      <Popup>
+	<Item>
+	  <Caption>Uitvoeren...</Caption>
+	  <Command>xfrun</Command>
+	  <Tooltip>Programma uitvoeren</Tooltip>
+	  <Icon id="-1">/usr/share/xfce/icons/FileAPP.xpm</Icon>
+	</Item>
+	<Item>
+	  <Caption>XFGlob</Caption>
+	  <Command>xfglob</Command>
+	  <Tooltip>Find files</Tooltip>
+	  <Icon id="-1">/usr/share/xfce/icons/View.xpm</Icon>
+	</Item>
+      </Popup>
+      <Item> 
+	<Caption>Bestandsbeheer</Caption>
+	<Command>xftree</Command>
+	<Tooltip>Bestandsbeheer</Tooltip>
+	<Icon id="-1">/usr/share/xfce/icons/FileManager.xpm</Icon>
+      </Item>
+    </Group>
+    <Group>
+      <Popup>
+	<Item>
+	  <Caption>GVim</Caption>
+	  <Command>gvim</Command>
+	  <Tooltip>Editor</Tooltip>
+	  <Icon id="1"></Icon>
+	</Item>
+      </Popup>
+      <Item> 
+	<Caption>Terminal</Caption>
+	<Command>xfterm</Command>
+	<Tooltip>X terminal</Tooltip>
+	<Icon id="-1">/usr/share/xfce/icons/CheckMarkMonitor.xpm</Icon>
+      </Item>
+    </Group>
+    <Group>
+      <Module id="-1">libmailcheck.so</Module>
+    </Group>
+    <Group>
+      <Popup>
+	<Item>
+	  <Caption>Skipstone</Caption>
+	  <Command>skipstone</Command>
+	  <Tooltip>Internet browser</Tooltip>
+	  <Icon id="-1">/usr/share/xfce/icons/DeskGlobe.xpm</Icon>
+	</Item>
+      </Popup>
+      <Item> 
+	<Caption>Browser</Caption>
+	<Command>galeon -w</Command>
+	<Tooltip>Galeon internet browser</Tooltip>
+	<Icon id="7"></Icon>
+      </Item>
+    </Group>
+  </Left>
+  <Right visible="5"> 
+    <Group>
+      <Module id="1"></Module>
+    </Group>
+    <Group>
+      <Popup>
+	<Item>
+	  <Caption>The Gimp</Caption>
+	  <Command>gimp</Command>
+	  <Icon id="-1">/usr/share/xfce/icons/GIMP.xpm</Icon>
+	</Item>
+	<Item>
+	  <Caption>Emacs</Caption>
+	  <Command>emacs</Command>
+	  <Tooltip>Including the kitchen sink</Tooltip>
+	  <Icon id="-1">/usr/share/xfce/icons/Pencils.xpm</Icon>
+	</Item>
+      </Popup>
+      <Item> 
+	<Caption>XFce Manual</Caption>
+	<Command>xfhelp</Command>
+	<Tooltip>Xfce Handleiding</Tooltip>
+	<Icon id="-1">/usr/share/xfce/icons/Info.xpm</Icon>
+      </Item>
+    </Group>
+    <Group>
+      <Popup>
+	<Item>
+	  <Caption>XFbd</Caption>
+	  <Command>xfbd -i</Command>
+	  <Tooltip>Backdrop settings</Tooltip>
+	  <Icon id="8"></Icon>
+	</Item>
+	<Item>
+	  <Caption>XFMouse</Caption>
+	  <Command>xfmouse -i</Command>
+	  <Tooltip>Muis-instellingen</Tooltip>
+	  <Icon id="-1">/usr/share/xfce/icons/Mouse.xpm</Icon>
+	</Item>
+      </Popup>
+      <Item> 
+	<Caption>Style manager</Caption>
+	<Command>xfstyle</Command>
+	<Tooltip>XFce Style Manager</Tooltip>
+	<Icon id="3"></Icon>
+      </Item>
+    </Group>
+    <Group>
+      <Item> 
+	<Caption>Anjuta</Caption>
+	<Command>anjuta</Command>
+	<Tooltip>Anjuta C/C++ IDE</Tooltip>
+	<Icon id="-1">/usr/share/pixmaps/anjuta/applogo.png</Icon>
+      </Item>
+    </Group>
+    <Group>
+      <Item> 
+	<Caption>Printer</Caption>
+	<Command>xfprint</Command>
+	<Tooltip>Drag file to print</Tooltip>
+	<Icon id="9"></Icon>
+      </Item>
+    </Group>
+  </Right>
+</Panel>
+
