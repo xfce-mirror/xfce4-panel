@@ -99,7 +99,7 @@ static GtkRequisition panel_req = { 0 };
 /* prototypes */
 
 static void update_arrow_direction (int x, int y);
-static void update_xinerama_coordinates (Panel * p);
+static void update_xinerama_coordinates (Panel * p, int x, int y);
 static void update_position (Panel * p, int *x, int *y);
 static void panel_reallocate (Panel * p, GtkRequisition * previous);
 static void panel_set_hidden (Panel * p, gboolean hide);
@@ -144,19 +144,14 @@ update_arrow_direction (int x, int y)
 }
 
 static void
-update_xinerama_coordinates (Panel * p)
+update_xinerama_coordinates (Panel * p, int x, int y)
 {
     GdkRectangle rect;
     gint monitor_nbr;
     GdkScreen *gscrn;
-    int x, y;
 
     g_return_if_fail (dpy != NULL);
         
-    gtk_window_get_position (GTK_WINDOW (p->toplevel), &x, &y);
-    x += p->toplevel->allocation.width / 2;
-    y += p->toplevel->allocation.height / 2;
-
     gscrn = gtk_widget_get_screen (GTK_WIDGET (p->toplevel));
     monitor_nbr = gdk_screen_get_monitor_at_point (gscrn, x, y);
     gdk_screen_get_monitor_geometry (gscrn, monitor_nbr, &rect);
@@ -277,7 +272,7 @@ panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
 	if (xcenter < xinerama_scr.xmin || ycenter < xinerama_scr.ymax
 	    || xcenter > xinerama_scr.xmax || ycenter > xinerama_scr.ymax)
 	{
-	    update_xinerama_coordinates (panel);
+	    update_xinerama_coordinates (panel, xcenter, ycenter);
 	}
     }
     
@@ -488,7 +483,8 @@ handler_move_end_cb (GtkWidget * h, Panel * p)
 
     DBG ("move end: %d,%d", p->position.x, p->position.y);
 
-    update_xinerama_coordinates (p);
+    update_xinerama_coordinates (p, p->position.x + panel_req.width / 2,
+	    			 p->position.y + panel_req.height / 2);
 
     x = panel.position.x;
     y = panel.position.y;
@@ -508,6 +504,13 @@ handler_move_end_cb (GtkWidget * h, Panel * p)
     update_arrow_direction (x, y);
 }
 
+static void
+handler_move_start (Panel *p)
+{
+    update_xinerama_coordinates (p, p->position.x + panel_req.width / 2,
+	    			 p->position.y + panel_req.height / 2);
+}
+
 GtkWidget *
 handle_new (Panel * p)
 {
@@ -524,7 +527,7 @@ handle_new (Panel * p)
 		      G_CALLBACK (handler_pressed_cb), p);
 
     g_signal_connect_swapped (mh, "move-start", 
-	    		      G_CALLBACK (update_xinerama_coordinates), p);
+	    		      G_CALLBACK (handler_move_start), p);
 
     g_signal_connect (mh, "move-end", G_CALLBACK (handler_move_end_cb), p);
 
@@ -754,7 +757,8 @@ screen_size_changed (GdkScreen * screen, Panel * p)
 
     DBG ("relative position: %.2f x %.2f", xalign, yalign);
 
-    update_xinerama_coordinates (p);
+    update_xinerama_coordinates (p, p->position.x + panel_req.width / 2,
+	    			 p->position.y + panel_req.height / 2);
 
     width = xinerama_scr.xmax - xinerama_scr.xmin;
     height = xinerama_scr.ymax - xinerama_scr.ymin;
@@ -947,7 +951,9 @@ create_panel (void)
 	old_screen_width = old_screen_height = 0;
     }
 	
-    update_xinerama_coordinates (&panel);
+    update_xinerama_coordinates (&panel, 
+	    			 panel.position.x + panel_req.width / 2,
+	    			 panel.position.y + panel_req.height / 2);
     
     panel_created = TRUE;
 
