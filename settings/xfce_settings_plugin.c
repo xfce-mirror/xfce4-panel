@@ -341,6 +341,7 @@ static void
 xfce_set_options (McsManager * sm)
 {
     char *file, *newpath, *oldpath, **dirs, **d;
+    gboolean channel_created = FALSE;
 
     dirs = xfce_resource_dirs (XFCE_RESOURCE_CONFIG);
     
@@ -356,6 +357,7 @@ xfce_set_options (McsManager * sm)
         {
             mcs_manager_add_channel_from_file (sm, CHANNEL, file);
             g_free (file);
+            channel_created = TRUE;
             break;
         }
         
@@ -366,19 +368,24 @@ xfce_set_options (McsManager * sm)
         if (g_file_test (file, G_FILE_TEST_EXISTS))
         {
             DBG ("reading old style options");
+            mcs_manager_add_channel (sm, CHANNEL);
             old_xml_read_options (file);
 
+            channel_created = TRUE;
             g_free (file);
             break;
         }
         
         g_free (file);
     }
-
+    
     g_strfreev (dirs);
     g_free (newpath);
     g_free (oldpath);
 
+    if (!channel_created)
+        mcs_manager_add_channel (sm, CHANNEL);
+    
     /* set values if not already set */
     xfce_init_options ();
 
