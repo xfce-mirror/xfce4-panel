@@ -248,12 +248,6 @@ clock_date_tooltip (GtkWidget * widget)
 }
 
 
-static void clock_type_changed(GtkOptionMenu * om, t_clock * clock)
-{
-    clock->type = gtk_option_menu_get_history(om);
-    xfce_clock_set_mode(XFCE_CLOCK(clock->clock), clock->type);
-}
-
 /* Update the widgets' state of the configuration dialog to
     reflect change
 */
