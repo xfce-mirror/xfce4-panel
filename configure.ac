@@ -23,7 +23,7 @@ AC_PROG_LIBTOOL
 
 dnl Check for standard header files
 AC_HEADER_STDC
-AC_CHECK_HEADERS(signal.h stddef.h time.h)
+AC_CHECK_HEADERS(signal.h stddef.h sys/wait.h time.h)
 AC_CHECK_FUNCS(sigaction)
 
 dnl Check for i18n support
@@ -34,12 +34,9 @@ BM_LIBX11_REQUIRE
 
 dnl AC_CHECK_LIB(Xext, main,, AC_MSG_ERROR([The X Window System installed on this machine does not support the shape extension]), $X_CFLAGS $X_PRE_LIBS $X_EXTRA_LIBS $X_LIBS)
 
-BM_DEPEND(GLIB, glib-2.0, 2.0.0)
-BM_DEPEND(GTK, gtk+-2.0, 2.0.0)
 BM_DEPEND(LIBXFCE4MCS_CLIENT, libxfce4mcs-client-1.0, 0.0.3)
-BM_DEPEND(LIBXFCE4MCS_MANAGER, libxfce4mcs-manager-1.0, 0.0.3)
 BM_DEPEND(LIBXFCE4UTIL, libxfce4util-1.0, 0.0)
-BM_DEPEND(LIBXFCEGUI4, libxfcegui4-1.0, 0.0.16)
+BM_DEPEND(LIBXFCEGUI4, libxfcegui4-1.0, 0.0.17)
 BM_DEPEND(LIBXML, libxml-2.0, 2.4.0)
 BM_DEPEND(XFCE_MCS_MANAGER, xfce-mcs-manager, 0.1)
 

@@ -308,7 +308,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP EGREP build build_cpu build_vendor build_os host host_cpu host_vendor host_os LN_S RANLIB ac_ct_RANLIB LIBTOOL GETTEXT_PACKAGE USE_NLS MSGFMT GMSGFMT XGETTEXT CATALOGS CATOBJEXT DATADIRNAME GMOFILES INSTOBJEXT INTLLIBS PO_IN_DATADIR_TRUE PO_IN_DATADIR_FALSE POFILES POSUB MKINSTALLDIRS localedir X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS LIBX11_CFLAGS LIBX11_LDFLAGS LIBX11_LIBS PKG_CONFIG GLIB_CFLAGS GLIB_LIBS GLIB_REQUIRED_VERSION GTK_CFLAGS GTK_LIBS GTK_REQUIRED_VERSION LIBXFCE4MCS_CLIENT_CFLAGS LIBXFCE4MCS_CLIENT_LIBS LIBXFCE4MCS_CLIENT_REQUIRED_VERSION LIBXFCE4MCS_MANAGER_CFLAGS LIBXFCE4MCS_MANAGER_LIBS LIBXFCE4MCS_MANAGER_REQUIRED_VERSION LIBXFCE4UTIL_CFLAGS LIBXFCE4UTIL_LIBS LIBXFCE4UTIL_REQUIRED_VERSION LIBXFCEGUI4_CFLAGS LIBXFCEGUI4_LIBS LIBXFCEGUI4_REQUIRED_VERSION LIBXML_CFLAGS LIBXML_LIBS LIBXML_REQUIRED_VERSION XFCE_MCS_MANAGER_CFLAGS XFCE_MCS_MANAGER_LIBS XFCE_MCS_MANAGER_REQUIRED_VERSION LIBSTARTUP_NOTIFICATION_CFLAGS LIBSTARTUP_NOTIFICATION_LIBS LIBSTARTUP_NOTIFICATION_REQUIRED_VERSION LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE am__leading_dot MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP EGREP build build_cpu build_vendor build_os host host_cpu host_vendor host_os LN_S RANLIB ac_ct_RANLIB LIBTOOL GETTEXT_PACKAGE USE_NLS MSGFMT GMSGFMT XGETTEXT CATALOGS CATOBJEXT DATADIRNAME GMOFILES INSTOBJEXT INTLLIBS PO_IN_DATADIR_TRUE PO_IN_DATADIR_FALSE POFILES POSUB MKINSTALLDIRS localedir X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS LIBX11_CFLAGS LIBX11_LDFLAGS LIBX11_LIBS PKG_CONFIG LIBXFCE4MCS_CLIENT_CFLAGS LIBXFCE4MCS_CLIENT_LIBS LIBXFCE4MCS_CLIENT_REQUIRED_VERSION LIBXFCE4UTIL_CFLAGS LIBXFCE4UTIL_LIBS LIBXFCE4UTIL_REQUIRED_VERSION LIBXFCEGUI4_CFLAGS LIBXFCEGUI4_LIBS LIBXFCEGUI4_REQUIRED_VERSION LIBXML_CFLAGS LIBXML_LIBS LIBXML_REQUIRED_VERSION XFCE_MCS_MANAGER_CFLAGS XFCE_MCS_MANAGER_LIBS XFCE_MCS_MANAGER_REQUIRED_VERSION LIBSTARTUP_NOTIFICATION_CFLAGS LIBSTARTUP_NOTIFICATION_LIBS LIBSTARTUP_NOTIFICATION_REQUIRED_VERSION LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -860,8 +860,6 @@ Optional Features:
   --enable-static=PKGS  build static libraries default=yes
   --enable-fast-install=PKGS  optimize for fast installation default=yes
   --disable-libtool-lock  avoid locking (might break parallel builds)
-  --enable-rpath          Specify run path to the ELF linker (default)
-  --disable-rpath         Do not use -rpath (use with care!!)
   --enable-startup-notification-check
                           Enable checking for startup notification library
                           (default)
@@ -5124,7 +5122,7 @@ test x"$pic_mode" = xno && libtool_flags="$libtool_flags --prefer-non-pic"
 case $host in
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 5127 "configure"' > conftest.$ac_ext
+  echo '#line 5125 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -5484,7 +5482,8 @@ fi
 
 
 
-for ac_header in signal.h stddef.h time.h
+
+for ac_header in signal.h stddef.h sys/wait.h time.h
 do
 as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
 if eval "test \"\${$as_ac_Header+set}\" = set"; then
@@ -8051,28 +8050,6 @@ fi
 fi
 
 
-  # Check whether --enable-rpath or --disable-rpath was given.
-if test "${enable_rpath+set}" = set; then
-  enableval="$enable_rpath"
-  ac_cv_rpath=$enableval
-else
-  ac_cv_rpath=yes
-fi;
-  echo "$as_me:$LINENO: checking whether to use -rpath" >&5
-echo $ECHO_N "checking whether to use -rpath... $ECHO_C" >&6
-  LD_RPATH=
-  if test "x$ac_cv_rpath" != "xno"; then
-    LD_RPATH="-Wl,-R"
-    echo "$as_me:$LINENO: result: yes" >&5
-echo "${ECHO_T}yes" >&6
-  else
-    LD_RPATH=""
-    echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-  fi
-
-
-
 
   LIBX11_CFLAGS= LIBX11_LDFLAGS= LIBX11_LIBS=
   if test "$no_x" != "yes"; then
@@ -8136,11 +8113,8 @@ _ACEOF
       	case "$option" in
         -L*)
           path=`echo $option | sed 's/^-L//'`
-          if test "x$path" != "x"; then
+          if test x"$path" != x""; then
             LIBX11_LDFLAGS="$LIBX11_LDFLAGS -L$path"
-            if test -n "$LD_RPATH"; then
-              LIBX11_LDFLAGS="$LIBX11_LDFLAGS $LD_RPATH$path"
-            fi
           fi
           ;;
         *)
@@ -8161,216 +8135,12 @@ fi
 
 
 
-  if test "$no_x" == "yes"; then
+  if test "$no_x" = "yes"; then
     { { echo "$as_me:$LINENO: error: X Window system libraries and header files are required" >&5
 echo "$as_me: error: X Window system libraries and header files are required" >&2;}
    { (exit 1); exit 1; }; }
   fi
 
-
-
-
-
-  succeeded=no
-
-  if test -z "$PKG_CONFIG"; then
-    # Extract the first word of "pkg-config", so it can be a program name with args.
-set dummy pkg-config; ac_word=$2
-echo "$as_me:$LINENO: checking for $ac_word" >&5
-echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
-if test "${ac_cv_path_PKG_CONFIG+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  case $PKG_CONFIG in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-  for ac_exec_ext in '' $ac_executable_extensions; do
-  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
-    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-done
-
-  test -z "$ac_cv_path_PKG_CONFIG" && ac_cv_path_PKG_CONFIG="no"
-  ;;
-esac
-fi
-PKG_CONFIG=$ac_cv_path_PKG_CONFIG
-
-if test -n "$PKG_CONFIG"; then
-  echo "$as_me:$LINENO: result: $PKG_CONFIG" >&5
-echo "${ECHO_T}$PKG_CONFIG" >&6
-else
-  echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-fi
-
-  fi
-
-  if test "$PKG_CONFIG" = "no" ; then
-     echo "*** The pkg-config script could not be found. Make sure it is"
-     echo "*** in your path, or set the PKG_CONFIG environment variable"
-     echo "*** to the full path to pkg-config."
-     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
-  else
-     PKG_CONFIG_MIN_VERSION=0.9.0
-     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
-        echo "$as_me:$LINENO: checking for glib-2.0 >= 2.0.0" >&5
-echo $ECHO_N "checking for glib-2.0 >= 2.0.0... $ECHO_C" >&6
-
-        if $PKG_CONFIG --exists "glib-2.0 >= 2.0.0" ; then
-            echo "$as_me:$LINENO: result: yes" >&5
-echo "${ECHO_T}yes" >&6
-            succeeded=yes
-
-            echo "$as_me:$LINENO: checking GLIB_CFLAGS" >&5
-echo $ECHO_N "checking GLIB_CFLAGS... $ECHO_C" >&6
-            GLIB_CFLAGS=`$PKG_CONFIG --cflags "glib-2.0 >= 2.0.0"`
-            echo "$as_me:$LINENO: result: $GLIB_CFLAGS" >&5
-echo "${ECHO_T}$GLIB_CFLAGS" >&6
-
-            echo "$as_me:$LINENO: checking GLIB_LIBS" >&5
-echo $ECHO_N "checking GLIB_LIBS... $ECHO_C" >&6
-            GLIB_LIBS=`$PKG_CONFIG --libs "glib-2.0 >= 2.0.0"`
-            echo "$as_me:$LINENO: result: $GLIB_LIBS" >&5
-echo "${ECHO_T}$GLIB_LIBS" >&6
-        else
-            GLIB_CFLAGS=""
-            GLIB_LIBS=""
-            ## If we have a custom action on failure, don't print errors, but
-            ## do set a variable so people can do so.
-            GLIB_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "glib-2.0 >= 2.0.0"`
-            echo $GLIB_PKG_ERRORS
-        fi
-
-
-
-     else
-        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
-        echo "*** See http://www.freedesktop.org/software/pkgconfig"
-     fi
-  fi
-
-  if test $succeeded = yes; then
-     :
-  else
-     { { echo "$as_me:$LINENO: error: Library requirements (glib-2.0 >= 2.0.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
-echo "$as_me: error: Library requirements (glib-2.0 >= 2.0.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
-   { (exit 1); exit 1; }; }
-  fi
-
-  GLIB_REQUIRED_VERSION=2.0.0
-
-
-
-
-  succeeded=no
-
-  if test -z "$PKG_CONFIG"; then
-    # Extract the first word of "pkg-config", so it can be a program name with args.
-set dummy pkg-config; ac_word=$2
-echo "$as_me:$LINENO: checking for $ac_word" >&5
-echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
-if test "${ac_cv_path_PKG_CONFIG+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  case $PKG_CONFIG in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-  for ac_exec_ext in '' $ac_executable_extensions; do
-  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
-    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-done
-
-  test -z "$ac_cv_path_PKG_CONFIG" && ac_cv_path_PKG_CONFIG="no"
-  ;;
-esac
-fi
-PKG_CONFIG=$ac_cv_path_PKG_CONFIG
-
-if test -n "$PKG_CONFIG"; then
-  echo "$as_me:$LINENO: result: $PKG_CONFIG" >&5
-echo "${ECHO_T}$PKG_CONFIG" >&6
-else
-  echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-fi
-
-  fi
-
-  if test "$PKG_CONFIG" = "no" ; then
-     echo "*** The pkg-config script could not be found. Make sure it is"
-     echo "*** in your path, or set the PKG_CONFIG environment variable"
-     echo "*** to the full path to pkg-config."
-     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
-  else
-     PKG_CONFIG_MIN_VERSION=0.9.0
-     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
-        echo "$as_me:$LINENO: checking for gtk+-2.0 >= 2.0.0" >&5
-echo $ECHO_N "checking for gtk+-2.0 >= 2.0.0... $ECHO_C" >&6
-
-        if $PKG_CONFIG --exists "gtk+-2.0 >= 2.0.0" ; then
-            echo "$as_me:$LINENO: result: yes" >&5
-echo "${ECHO_T}yes" >&6
-            succeeded=yes
-
-            echo "$as_me:$LINENO: checking GTK_CFLAGS" >&5
-echo $ECHO_N "checking GTK_CFLAGS... $ECHO_C" >&6
-            GTK_CFLAGS=`$PKG_CONFIG --cflags "gtk+-2.0 >= 2.0.0"`
-            echo "$as_me:$LINENO: result: $GTK_CFLAGS" >&5
-echo "${ECHO_T}$GTK_CFLAGS" >&6
-
-            echo "$as_me:$LINENO: checking GTK_LIBS" >&5
-echo $ECHO_N "checking GTK_LIBS... $ECHO_C" >&6
-            GTK_LIBS=`$PKG_CONFIG --libs "gtk+-2.0 >= 2.0.0"`
-            echo "$as_me:$LINENO: result: $GTK_LIBS" >&5
-echo "${ECHO_T}$GTK_LIBS" >&6
-        else
-            GTK_CFLAGS=""
-            GTK_LIBS=""
-            ## If we have a custom action on failure, don't print errors, but
-            ## do set a variable so people can do so.
-            GTK_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "gtk+-2.0 >= 2.0.0"`
-            echo $GTK_PKG_ERRORS
-        fi
-
-
-
-     else
-        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
-        echo "*** See http://www.freedesktop.org/software/pkgconfig"
-     fi
-  fi
-
-  if test $succeeded = yes; then
-     :
-  else
-     { { echo "$as_me:$LINENO: error: Library requirements (gtk+-2.0 >= 2.0.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
-echo "$as_me: error: Library requirements (gtk+-2.0 >= 2.0.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
-   { (exit 1); exit 1; }; }
-  fi
-
-  GTK_REQUIRED_VERSION=2.0.0
 
 
 
@@ -8530,108 +8300,6 @@ fi
   else
      PKG_CONFIG_MIN_VERSION=0.9.0
      if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
-        echo "$as_me:$LINENO: checking for libxfce4mcs-manager-1.0 >= 0.0.3" >&5
-echo $ECHO_N "checking for libxfce4mcs-manager-1.0 >= 0.0.3... $ECHO_C" >&6
-
-        if $PKG_CONFIG --exists "libxfce4mcs-manager-1.0 >= 0.0.3" ; then
-            echo "$as_me:$LINENO: result: yes" >&5
-echo "${ECHO_T}yes" >&6
-            succeeded=yes
-
-            echo "$as_me:$LINENO: checking LIBXFCE4MCS_MANAGER_CFLAGS" >&5
-echo $ECHO_N "checking LIBXFCE4MCS_MANAGER_CFLAGS... $ECHO_C" >&6
-            LIBXFCE4MCS_MANAGER_CFLAGS=`$PKG_CONFIG --cflags "libxfce4mcs-manager-1.0 >= 0.0.3"`
-            echo "$as_me:$LINENO: result: $LIBXFCE4MCS_MANAGER_CFLAGS" >&5
-echo "${ECHO_T}$LIBXFCE4MCS_MANAGER_CFLAGS" >&6
-
-            echo "$as_me:$LINENO: checking LIBXFCE4MCS_MANAGER_LIBS" >&5
-echo $ECHO_N "checking LIBXFCE4MCS_MANAGER_LIBS... $ECHO_C" >&6
-            LIBXFCE4MCS_MANAGER_LIBS=`$PKG_CONFIG --libs "libxfce4mcs-manager-1.0 >= 0.0.3"`
-            echo "$as_me:$LINENO: result: $LIBXFCE4MCS_MANAGER_LIBS" >&5
-echo "${ECHO_T}$LIBXFCE4MCS_MANAGER_LIBS" >&6
-        else
-            LIBXFCE4MCS_MANAGER_CFLAGS=""
-            LIBXFCE4MCS_MANAGER_LIBS=""
-            ## If we have a custom action on failure, don't print errors, but
-            ## do set a variable so people can do so.
-            LIBXFCE4MCS_MANAGER_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libxfce4mcs-manager-1.0 >= 0.0.3"`
-            echo $LIBXFCE4MCS_MANAGER_PKG_ERRORS
-        fi
-
-
-
-     else
-        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
-        echo "*** See http://www.freedesktop.org/software/pkgconfig"
-     fi
-  fi
-
-  if test $succeeded = yes; then
-     :
-  else
-     { { echo "$as_me:$LINENO: error: Library requirements (libxfce4mcs-manager-1.0 >= 0.0.3) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
-echo "$as_me: error: Library requirements (libxfce4mcs-manager-1.0 >= 0.0.3) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
-   { (exit 1); exit 1; }; }
-  fi
-
-  LIBXFCE4MCS_MANAGER_REQUIRED_VERSION=0.0.3
-
-
-
-
-  succeeded=no
-
-  if test -z "$PKG_CONFIG"; then
-    # Extract the first word of "pkg-config", so it can be a program name with args.
-set dummy pkg-config; ac_word=$2
-echo "$as_me:$LINENO: checking for $ac_word" >&5
-echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
-if test "${ac_cv_path_PKG_CONFIG+set}" = set; then
-  echo $ECHO_N "(cached) $ECHO_C" >&6
-else
-  case $PKG_CONFIG in
-  [\\/]* | ?:[\\/]*)
-  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
-  ;;
-  *)
-  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-for as_dir in $PATH
-do
-  IFS=$as_save_IFS
-  test -z "$as_dir" && as_dir=.
-  for ac_exec_ext in '' $ac_executable_extensions; do
-  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
-    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
-    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
-    break 2
-  fi
-done
-done
-
-  test -z "$ac_cv_path_PKG_CONFIG" && ac_cv_path_PKG_CONFIG="no"
-  ;;
-esac
-fi
-PKG_CONFIG=$ac_cv_path_PKG_CONFIG
-
-if test -n "$PKG_CONFIG"; then
-  echo "$as_me:$LINENO: result: $PKG_CONFIG" >&5
-echo "${ECHO_T}$PKG_CONFIG" >&6
-else
-  echo "$as_me:$LINENO: result: no" >&5
-echo "${ECHO_T}no" >&6
-fi
-
-  fi
-
-  if test "$PKG_CONFIG" = "no" ; then
-     echo "*** The pkg-config script could not be found. Make sure it is"
-     echo "*** in your path, or set the PKG_CONFIG environment variable"
-     echo "*** to the full path to pkg-config."
-     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
-  else
-     PKG_CONFIG_MIN_VERSION=0.9.0
-     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
         echo "$as_me:$LINENO: checking for libxfce4util-1.0 >= 0.0" >&5
 echo $ECHO_N "checking for libxfce4util-1.0 >= 0.0... $ECHO_C" >&6
 
@@ -8734,23 +8402,23 @@ fi
   else
      PKG_CONFIG_MIN_VERSION=0.9.0
      if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
-        echo "$as_me:$LINENO: checking for libxfcegui4-1.0 >= 0.0.16" >&5
-echo $ECHO_N "checking for libxfcegui4-1.0 >= 0.0.16... $ECHO_C" >&6
+        echo "$as_me:$LINENO: checking for libxfcegui4-1.0 >= 0.0.17" >&5
+echo $ECHO_N "checking for libxfcegui4-1.0 >= 0.0.17... $ECHO_C" >&6
 
-        if $PKG_CONFIG --exists "libxfcegui4-1.0 >= 0.0.16" ; then
+        if $PKG_CONFIG --exists "libxfcegui4-1.0 >= 0.0.17" ; then
             echo "$as_me:$LINENO: result: yes" >&5
 echo "${ECHO_T}yes" >&6
             succeeded=yes
 
             echo "$as_me:$LINENO: checking LIBXFCEGUI4_CFLAGS" >&5
 echo $ECHO_N "checking LIBXFCEGUI4_CFLAGS... $ECHO_C" >&6
-            LIBXFCEGUI4_CFLAGS=`$PKG_CONFIG --cflags "libxfcegui4-1.0 >= 0.0.16"`
+            LIBXFCEGUI4_CFLAGS=`$PKG_CONFIG --cflags "libxfcegui4-1.0 >= 0.0.17"`
             echo "$as_me:$LINENO: result: $LIBXFCEGUI4_CFLAGS" >&5
 echo "${ECHO_T}$LIBXFCEGUI4_CFLAGS" >&6
 
             echo "$as_me:$LINENO: checking LIBXFCEGUI4_LIBS" >&5
 echo $ECHO_N "checking LIBXFCEGUI4_LIBS... $ECHO_C" >&6
-            LIBXFCEGUI4_LIBS=`$PKG_CONFIG --libs "libxfcegui4-1.0 >= 0.0.16"`
+            LIBXFCEGUI4_LIBS=`$PKG_CONFIG --libs "libxfcegui4-1.0 >= 0.0.17"`
             echo "$as_me:$LINENO: result: $LIBXFCEGUI4_LIBS" >&5
 echo "${ECHO_T}$LIBXFCEGUI4_LIBS" >&6
         else
@@ -8758,7 +8426,7 @@ echo "${ECHO_T}$LIBXFCEGUI4_LIBS" >&6
             LIBXFCEGUI4_LIBS=""
             ## If we have a custom action on failure, don't print errors, but
             ## do set a variable so people can do so.
-            LIBXFCEGUI4_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libxfcegui4-1.0 >= 0.0.16"`
+            LIBXFCEGUI4_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libxfcegui4-1.0 >= 0.0.17"`
             echo $LIBXFCEGUI4_PKG_ERRORS
         fi
 
@@ -8773,12 +8441,12 @@ echo "${ECHO_T}$LIBXFCEGUI4_LIBS" >&6
   if test $succeeded = yes; then
      :
   else
-     { { echo "$as_me:$LINENO: error: Library requirements (libxfcegui4-1.0 >= 0.0.16) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
-echo "$as_me: error: Library requirements (libxfcegui4-1.0 >= 0.0.16) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
+     { { echo "$as_me:$LINENO: error: Library requirements (libxfcegui4-1.0 >= 0.0.17) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
+echo "$as_me: error: Library requirements (libxfcegui4-1.0 >= 0.0.17) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
    { (exit 1); exit 1; }; }
   fi
 
-  LIBXFCEGUI4_REQUIRED_VERSION=0.0.16
+  LIBXFCEGUI4_REQUIRED_VERSION=0.0.17
 
 
 
@@ -9942,18 +9610,9 @@ s,@LIBX11_CFLAGS@,$LIBX11_CFLAGS,;t t
 s,@LIBX11_LDFLAGS@,$LIBX11_LDFLAGS,;t t
 s,@LIBX11_LIBS@,$LIBX11_LIBS,;t t
 s,@PKG_CONFIG@,$PKG_CONFIG,;t t
-s,@GLIB_CFLAGS@,$GLIB_CFLAGS,;t t
-s,@GLIB_LIBS@,$GLIB_LIBS,;t t
-s,@GLIB_REQUIRED_VERSION@,$GLIB_REQUIRED_VERSION,;t t
-s,@GTK_CFLAGS@,$GTK_CFLAGS,;t t
-s,@GTK_LIBS@,$GTK_LIBS,;t t
-s,@GTK_REQUIRED_VERSION@,$GTK_REQUIRED_VERSION,;t t
 s,@LIBXFCE4MCS_CLIENT_CFLAGS@,$LIBXFCE4MCS_CLIENT_CFLAGS,;t t
 s,@LIBXFCE4MCS_CLIENT_LIBS@,$LIBXFCE4MCS_CLIENT_LIBS,;t t
 s,@LIBXFCE4MCS_CLIENT_REQUIRED_VERSION@,$LIBXFCE4MCS_CLIENT_REQUIRED_VERSION,;t t
-s,@LIBXFCE4MCS_MANAGER_CFLAGS@,$LIBXFCE4MCS_MANAGER_CFLAGS,;t t
-s,@LIBXFCE4MCS_MANAGER_LIBS@,$LIBXFCE4MCS_MANAGER_LIBS,;t t
-s,@LIBXFCE4MCS_MANAGER_REQUIRED_VERSION@,$LIBXFCE4MCS_MANAGER_REQUIRED_VERSION,;t t
 s,@LIBXFCE4UTIL_CFLAGS@,$LIBXFCE4UTIL_CFLAGS,;t t
 s,@LIBXFCE4UTIL_LIBS@,$LIBXFCE4UTIL_LIBS,;t t
 s,@LIBXFCE4UTIL_REQUIRED_VERSION@,$LIBXFCE4UTIL_REQUIRED_VERSION,;t t

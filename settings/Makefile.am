@@ -16,8 +16,6 @@ libxfce4settings_la_SOURCES =						\
 libxfce4settings_la_CFLAGS =						\
 	-I$(top_srcdir)							\
 	-I$(top_srcdir)/panel						\
-	@LIBXFCE4MCS_MANAGER_CFLAGS@					\
-	@LIBXFCE4UTIL_CFLAGS@						\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXML_CFLAGS@							\
 	@XFCE_MCS_MANAGER_CFLAGS@					\
@@ -26,6 +24,5 @@ libxfce4settings_la_CFLAGS =						\
 	-DLOCALEDIR=\"$(localedir)\"
 
 libxfce4settings_la_LIBADD =						\
-	@LIBS@								\
 	@LIBXML_LIBS@							\
 	@XFCE_MCS_MANAGER_LIBS@

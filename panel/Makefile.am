@@ -40,14 +40,10 @@ pkginclude_HEADERS = 							\
 	xfce.h 
 
 xfce4_panel_CFLAGS = 							\
-	-I$(top_srcdir)							\
-	@GLIB_CFLAGS@							\
-	@GTK_CFLAGS@							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXFCE4MCS_CLIENT_CFLAGS@					\
-	@LIBXFCE4UTIL_CFLAGS@						\
 	@LIBXML_CFLAGS@							\
 	-DDATADIR=\"$(pkgdatadir)\"					\
 	-DLIBDIR=\"$(pkglibdir)\"					\
@@ -58,12 +54,8 @@ xfce4_panel_LDFLAGS =							\
 	-export-dynamic
 
 xfce4_panel_LDADD =							\
-	@LIBS@								\
-	@GLIB_LIBS@							\
-	@GTK_LIBS@							\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
 	@LIBXFCEGUI4_LIBS@						\
 	@LIBXFCE4MCS_CLIENT_LIBS@					\
-	@LIBXFCE4UTIL_LIBS@						\
 	@LIBXML_LIBS@

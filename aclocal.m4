@@ -2084,7 +2084,6 @@ dnl Check for X11
 AC_DEFUN([BM_LIBX11],
 [
   AC_REQUIRE([AC_PATH_XTRA])
-  AC_REQUIRE([BM_RPATH_SUPPORT])
   LIBX11_CFLAGS= LIBX11_LDFLAGS= LIBX11_LIBS=
   if test "$no_x" != "yes"; then
     AC_CHECK_LIB(X11, main,
@@ -2095,11 +2094,8 @@ AC_DEFUN([BM_LIBX11],
       	case "$option" in
         -L*)
           path=`echo $option | sed 's/^-L//'`
-          if test "x$path" != "x"; then
+          if test x"$path" != x""; then
             LIBX11_LDFLAGS="$LIBX11_LDFLAGS -L$path"
-            if test -n "$LD_RPATH"; then
-              LIBX11_LDFLAGS="$LIBX11_LDFLAGS $LD_RPATH$path"
-            fi
           fi
           ;;
         *)
@@ -2120,7 +2116,7 @@ AC_DEFUN([BM_LIBX11],
 AC_DEFUN([BM_LIBX11_REQUIRE],
 [
   AC_REQUIRE([BM_LIBX11])
-  if test "$no_x" == "yes"; then
+  if test "$no_x" = "yes"; then
     AC_MSG_ERROR([X Window system libraries and header files are required])
   fi
 ])
@@ -2204,40 +2200,6 @@ AC_HELP_STRING([--disable-xinerama], [disable xinerama extension [default]]),
   AC_SUBST(LIBXINERAMA_LIBS)
 ])
 
-
-dnl From Benedikt Meurer (benedikt.meurer@unix-ag.uni-siegen.de)
-dnl
-dnl Workaround for some broken ELF systems
-dnl
-
-AC_DEFUN([BM_RPATH_SUPPORT],
-[
-  AC_ARG_ENABLE(rpath,
-AC_HELP_STRING([--enable-rpath], [Specify run path to the ELF linker (default)])
-AC_HELP_STRING([--disable-rpath], [Do not use -rpath (use with care!!)]),
-    [ac_cv_rpath=$enableval], [ac_cv_rpath=yes])
-  AC_MSG_CHECKING([whether to use -rpath])
-  LD_RPATH=
-  if test "x$ac_cv_rpath" != "xno"; then
-    LD_RPATH="-Wl,-R"
-    AC_MSG_RESULT([yes])
-  else
-    LD_RPATH=""
-    AC_MSG_RESULT([no])
-  fi
-])
-
-AC_DEFUN([BM_PKG_LDFLAGS], [
-  AC_REQUIRE([BM_RPATH_SUPPORT])
-  AC_MSG_CHECKING([which pkg-config LDFLAGS to use])
-  if test "x$LD_RPATH" == "x"; then
-    $1_LDFLAGS="-L\${libdir}"
-  else
-    $1_LDFLAGS="$LD_RPATH\${libdir} -L\${libdir}"
-  fi
-  AC_MSG_RESULT([$$1_LDFLAGS])
-  AC_SUBST($1_LDFLAGS)
-])
 
 dnl From Benedikt Meurer (benedikt.meurer@unix-ag.uni-siegen.de)
 dnl
