@@ -16,7 +16,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[Name of default
 gettext domain])
 
-ALL_LINGUAS="nl es es_MX fr de fi"
+ALL_LINGUAS="nl es es_MX fr de fi ja"
 AM_GLIB_GNU_GETTEXT
 
 AC_PROG_CC
