@@ -1153,7 +1153,7 @@ static void arrange_switcher(t_switcher *sw)
     if (sw->graphical)
     {
 	gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
-			   TRUE, TRUE, 2);
+			   TRUE, FALSE, 2);
     }
     else
     {

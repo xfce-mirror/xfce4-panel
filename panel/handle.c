@@ -103,16 +103,18 @@ static GtkMenu *create_handle_menu(void)
 /* the handle */
 struct _Handle
 {
+#if 0
     GtkWidget *base;
     GtkWidget *box;
 
     GtkWidget *button;
-
+#endif
     GtkWidget *handler;
 };
 
 static void handle_arrange(Handle * mh)
 {
+#if 0
     gboolean vertical = settings.orientation == VERTICAL;
     int position = settings.popup_position;
 
@@ -160,6 +162,7 @@ static void handle_arrange(Handle * mh)
 	    gtk_box_pack_start(GTK_BOX(mh->box), mh->handler, TRUE, TRUE, 0);
 	}
     }
+#endif
 }
 
 static gboolean handler_pressed_cb(GtkWidget *h, GdkEventButton *event, 
@@ -186,10 +189,11 @@ static gboolean handler_released_cb(GtkWidget *h, GdkEventButton *event,
 
 Handle *handle_new(int side)
 {
-    GtkWidget *im;
+/*    GtkWidget *im;*/
     Handle *mh = g_new(Handle, 1);
     GtkMenu *menu;
 
+#if 0
     mh->base = gtk_alignment_new(0, 0, 1, 1);
     gtk_widget_show(mh->base);
 
@@ -223,6 +227,7 @@ Handle *handle_new(int side)
     }
 
     gtk_widget_set_name(im, "xfce_popup_button");
+#endif
 
     mh->handler = xfce_movehandler_new(toplevel);
     gtk_widget_show(mh->handler);
@@ -237,11 +242,11 @@ Handle *handle_new(int side)
     g_signal_connect(mh->handler, "button-release-event", 
 	    	     G_CALLBACK(handler_released_cb), NULL);
 
-    /* protect against destruction when removed from box */
-    g_object_ref(mh->button);
+    /* protect against destruction when removed from box 
+    g_object_ref(mh->button);*/
     g_object_ref(mh->handler);
 
-    mh->box = NULL;
+/*    mh->box = NULL;*/
 
     handle_set_size(mh, settings.size);
     handle_arrange(mh);
@@ -251,34 +256,36 @@ Handle *handle_new(int side)
 
 void handle_pack(Handle * mh, GtkBox *box)
 {
-    gtk_box_pack_start(box, mh->base, FALSE, FALSE, 0);
+    gtk_box_pack_start(box, mh->handler, FALSE, FALSE, 0);
 }
 
 void handle_unpack(Handle * mh, GtkContainer * container)
 {
-    gtk_container_remove(container, mh->base);
+    gtk_container_remove(container, mh->handler);
 }
 
 void handle_set_size(Handle * mh, int size)
 {
     int h = top_height[size];
-    int w = icon_size[size] + border_width - h;
+    int w = icon_size[size] + 2*border_width;
     gboolean vertical = settings.orientation == VERTICAL;
 
     if(vertical)
-        gtk_widget_set_size_request(mh->handler, w + border_width, h);
+        gtk_widget_set_size_request(mh->handler, w, h);
     else
         gtk_widget_set_size_request(mh->handler, h, w);
 
-    gtk_widget_set_size_request(mh->button, h, h);
+/*    gtk_widget_set_size_request(mh->button, h, h);*/
 }
 
 void handle_set_style(Handle * mh, int style)
 {
+#if 0
     if(style == OLD_STYLE)
         gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NORMAL);
     else
         gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
+#endif
 }
 
 void handle_set_popup_position(Handle *mh)
