@@ -89,7 +89,7 @@ static void add_new(void)
 
 static void lock_screen(void)
 {
-    exec_cmd("xflock", FALSE, FALSE);
+    exec_cmd("xflock4", FALSE, FALSE);
 }
 
 static void exit_panel(void)
