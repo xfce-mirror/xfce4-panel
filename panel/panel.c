@@ -30,6 +30,7 @@
 #undef GDK_MULTIHEAD_SAFE
 #endif
 
+#include <math.h>
 #include <X11/Xlib.h>
 
 #include <libxfce4util/debug.h>
@@ -69,6 +70,10 @@ int popup_icon_size[] = { 22, 26, 26, 32 };
 
 /* lock settings update when panel is not yet (re)build */
 static gboolean panel_created = FALSE;
+
+/* used when screen size is different than in previous session */
+static int old_screen_width = 0;
+static int old_screen_height = 0;
 
 /* screen properties */
 static Display *dpy = NULL;
@@ -630,6 +635,22 @@ create_panel (void)
      * This function creates the panel items and popup menus */
     get_panel_config ();
 
+    if (old_screen_width > 0)
+    {
+	GtkRequisition req;
+	double xscale, yscale;
+
+	gtk_widget_size_request (panel.toplevel, &req);
+
+	xscale = (double) x / (double) (old_screen_width - req.width);
+	yscale = (double) y / (double) (old_screen_height - req.height);
+
+	x = rint (xscale * (screen_width - req.width));
+	y = rint (yscale * (screen_height - req.height));
+
+	old_screen_width = old_screen_height = 0;
+    }
+    
     panel.position.x = x;
     panel.position.y = y;
     panel_set_position ();
@@ -1075,16 +1096,10 @@ panel_parse_xml (xmlNodePtr node)
 	    else
 		break;
 
-	    /* this doesn't actually work completely, we need to
-	     * save the panel width as well to do it right */
 	    if (w != screen_width || h != screen_height)
 	    {
-		panel.position.x =
-		    (int) ((double) (panel.position.x * screen_width) /
-			   (double) w);
-		panel.position.y =
-		    (int) ((double) (panel.position.y * screen_height) /
-			   (double) h);
+		old_screen_width = w;
+		old_screen_height = h;
 	    }
 	}
     }
