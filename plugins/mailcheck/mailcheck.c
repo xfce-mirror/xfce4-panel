@@ -70,6 +70,7 @@ typedef struct
     char pop3_username[256];
     char pop3_password[256];
     char pop3_hostname[256];
+    int pop3_port;
 
     int timeout_id;
     int status;
@@ -268,14 +269,13 @@ pop3_send_command (int fd, char *buff)
 }
 
 static int
-pop3_check_mail (char *username, char *password, char *hostname)
+pop3_check_mail (char *username, char *password, char *hostname, int port)
 {
     struct sockaddr_in sa;
     struct hostent *hp;
     int msg_count;
     char buff[1024];
     char command[256];
-    int port = 110;
     int sd;
     int i;
 
@@ -371,7 +371,8 @@ check_mail (t_mailcheck * mailcheck)
     {
 	mail = pop3_check_mail (mailcheck->pop3_username,
 				mailcheck->pop3_password,
-				mailcheck->pop3_hostname);
+				mailcheck->pop3_hostname,
+				mailcheck->pop3_port);
     }
     else
     {
@@ -484,9 +485,10 @@ set_mbox_type(t_mailcheck *mc)
     if (strncmp (mc->mbox, "pop3://", 7 * sizeof (char)) == 0)
     {
         mc->pop3 = TRUE;
-        sscanf (mc->mbox, "pop3://%[^:]:%[^@]@%s",
+        mc->pop3_port = 110;
+        sscanf (mc->mbox, "pop3://%[^:]:%[^@]@%[^:]:%d",
 		mc->pop3_username,
-	    	mc->pop3_password, mc->pop3_hostname);
+	    	mc->pop3_password, mc->pop3_hostname, &mc->pop3_port);
     }
 } 
 
