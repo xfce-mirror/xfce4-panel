@@ -538,7 +538,7 @@ mbox_entry_lost_focus (MailDialog * md)
 static void
 add_mbox_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 {
-    GtkWidget *hbox, *label, *button;
+    GtkWidget *hbox, *label, *button, *image;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -556,10 +556,14 @@ add_mbox_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     gtk_widget_show (md->mbox_entry);
     gtk_box_pack_start (GTK_BOX (hbox), md->mbox_entry, TRUE, TRUE, 0);
 
-    button = gtk_button_new_with_label ("...");
+    button = gtk_button_new();
     gtk_widget_show (button);
     gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
+    image = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
+    gtk_widget_show(image);
+    gtk_container_add(GTK_CONTAINER(button), image);
+    
     g_signal_connect (button, "clicked", G_CALLBACK (mbox_browse_cb), md);
 
     /* activate revert button when changing the label */
@@ -631,7 +635,7 @@ sn_toggled (GtkToggleButton * tb, MailDialog * md)
 static void
 add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 {
-    GtkWidget *hbox, *hbox2, *vbox2, *label, *button, *align;
+    GtkWidget *hbox, *hbox2, *vbox2, *label, *button, *align, *image;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -654,10 +658,14 @@ add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 			  ("Command to run when the button on the panel is clicked"),
 			  NULL);
 
-    button = gtk_button_new_with_label ("...");
+    button = gtk_button_new();
     gtk_widget_show (button);
     gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
 
+    image = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
+    gtk_widget_show(image);
+    gtk_container_add(GTK_CONTAINER(button), image);
+    
     g_signal_connect (button, "clicked", G_CALLBACK (command_browse_cb), md);
 
     /* activate revert button when changing the label */
