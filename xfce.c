@@ -24,6 +24,11 @@
  */
 
 #include <signal.h>
+#include <stddef.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #include "xfce.h"
 
@@ -31,6 +36,7 @@
 #include "side.h"
 #include "wmhints.h"
 #include "icons.h"
+#include "callbacks.h"
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -108,7 +114,7 @@ void xfce_init(void)
     check_net_support();
 
     create_builtin_pixbufs();
-    
+
     signal(SIGTERM, &sighandler);
     signal(SIGINT, &sighandler);
 }
@@ -124,17 +130,31 @@ void xfce_run(void)
     create_xfce_panel();
 
     watch_root_properties();
-    
+
     gtk_main();
 }
 
 int main(int argc, char **argv)
 {
+    pid_t pid = fork();
+
+    if(pid < 0)
+    {
+        g_error("%s (%d): ** ERROR ** fork() failed\n", __FILE__, __LINE__);
+    }
+    else if(pid > 0)
+    {
+        _exit(0);
+    }
+
     gtk_init(&argc, &argv);
 
     xfce_init();
 
     xfce_run();
+
+    if(settings.exit_command)
+        exec_cmd(settings.exit_command, FALSE);
 
     return (0);
 }
@@ -188,13 +208,13 @@ static GtkWidget *create_panel_window(void)
     return w;
 }
 
-static void set_panel_position(GtkWidget * window)
+void panel_set_position(void)
 {
     GtkRequisition req;
     int w = gdk_screen_width();
     int h = gdk_screen_height();
 
-    gtk_widget_size_request(window, &req);
+    gtk_widget_size_request(toplevel, &req);
 
     if(settings.x == -1 || settings.y == -1)
     {
@@ -213,10 +233,10 @@ static void set_panel_position(GtkWidget * window)
             settings.y = h - req.height;
     }
 
-    gtk_window_move(GTK_WINDOW(window), settings.x, settings.y);
+    gtk_window_move(GTK_WINDOW(toplevel), settings.x, settings.y);
 }
 
-static void set_panel_settings(void)
+void panel_set_settings(void)
 {
     int n;
 
@@ -288,8 +308,8 @@ void create_xfce_panel(void)
     add_central_panel(GTK_BOX(hbox3));
     add_side_panel(RIGHT, GTK_BOX(hbox4));
 
-    set_panel_settings();
-    set_panel_position(window);
+    panel_set_settings();
+    panel_set_position();
 
     gtk_widget_show(window);
 }
@@ -327,11 +347,11 @@ void panel_set_popup_size(int size)
 
 void panel_set_style(int style)
 {
-    if (style == OLD_STYLE)
-	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+    if(style == OLD_STYLE)
+        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
     else
-	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_ETCHED_IN);
-    
+        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_ETCHED_IN);
+
     side_panel_set_style(LEFT, style);
     central_panel_set_style(style);
     side_panel_set_style(RIGHT, style);
@@ -492,45 +512,45 @@ void panel_write_xml(xmlNodePtr root)
     xmlNodePtr node;
     xmlNodePtr child;
     char value[MAXSTRLEN + 1];
-    
+
     node = xmlNewTextChild(root, NULL, "Panel", NULL);
-    
+
     snprintf(value, 2, "%d", settings.size);
     xmlSetProp(node, "size", value);
-    
+
     snprintf(value, 2, "%d", settings.popup_size);
     xmlSetProp(node, "popupsize", value);
-    
+
     snprintf(value, 2, "%d", settings.style);
     xmlSetProp(node, "style", value);
-    
-    if (settings.icon_theme)
-	xmlSetProp(node, "icontheme", settings.icon_theme);
-    
+
+    if(settings.icon_theme)
+        xmlSetProp(node, "icontheme", settings.icon_theme);
+
     snprintf(value, 2, "%d", settings.num_left);
     xmlSetProp(node, "left", value);
-    
+
     snprintf(value, 2, "%d", settings.num_right);
     xmlSetProp(node, "right", value);
-    
+
     snprintf(value, 2, "%d", settings.num_screens);
     xmlSetProp(node, "screens", value);
-    
+
     child = xmlNewTextChild(node, NULL, "Position", NULL);
-    
+
     snprintf(value, 5, "%d", settings.x);
     xmlSetProp(child, "x", value);
-    
+
     snprintf(value, 5, "%d", settings.y);
     xmlSetProp(child, "y", value);
-    
-    if (settings.lock_command)
+
+    if(settings.lock_command)
     {
-	child = xmlNewTextChild(node, NULL, "Lock", settings.lock_command);
+        child = xmlNewTextChild(node, NULL, "Lock", settings.lock_command);
     }
 
-    if (settings.exit_command)
+    if(settings.exit_command)
     {
-	child = xmlNewTextChild(node, NULL, "Exit", settings.exit_command);
+        child = xmlNewTextChild(node, NULL, "Exit", settings.exit_command);
     }
 }

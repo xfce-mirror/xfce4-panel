@@ -57,14 +57,21 @@ void check_net_support(void)
     unsigned long nitems, bytes_after;
     long *data = 0;
     Window xid;
+    int i;
 
     if(!atoms_created)
         create_atoms();
-    gdk_error_trap_push();
-    if(XGetWindowProperty
-       (dpy, root, xa_NET_SUPPORTING_WM_CHECK, 0, 1, False, XA_CARDINAL, &ret_type,
-        &fmt, &nitems, &bytes_after, (unsigned char **)&data) == Success && data)
+
+    /* try 3 times for a compliant window manager */
+    for(i = 0; i < 3; i++)
     {
+        gdk_error_trap_push();
+
+        if(XGetWindowProperty
+           (dpy, root, xa_NET_SUPPORTING_WM_CHECK, 0, 1, False, XA_CARDINAL,
+            &ret_type, &fmt, &nitems, &bytes_after,
+            (unsigned char **)&data) == Success && data)
+        {
 /*        xid = (Window) data[0];
 
         if(XGetWindowProperty
@@ -77,9 +84,16 @@ void check_net_support(void)
                 return;
         }
 */
-        XFree(data);
+            XFree(data);
 
-        return;
+            gdk_flush();
+            gdk_error_trap_pop();
+            return;
+        }
+        else
+        {
+            g_usleep(5);
+        }
     }
 
     gdk_flush();

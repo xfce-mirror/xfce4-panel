@@ -1,4 +1,4 @@
-/*  dialog.c
+/*  dialogs.c
  *
  *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
  *
@@ -35,7 +35,39 @@
 #include "icons.h"
 
 enum
-{ RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL };
+{ RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+   Convenience functions
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+/* Taken from ROX Filer (http://rox.sf.net)
+ * by Thomas Leonard 
+ */
+GtkWidget *mixed_button_new(const char *stock, const char *message)
+{
+    GtkWidget *button, *align, *image, *hbox, *label;
+
+    button = gtk_button_new();
+    label = gtk_label_new_with_mnemonic(message);
+    gtk_label_set_mnemonic_widget(GTK_LABEL(label), button);
+
+    image = gtk_image_new_from_stock(stock, GTK_ICON_SIZE_BUTTON);
+    hbox = gtk_hbox_new(FALSE, 2);
+
+    align = gtk_alignment_new(0.5, 0.5, 0.0, 0.0);
+
+    gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    gtk_container_add(GTK_CONTAINER(button), align);
+    gtk_container_add(GTK_CONTAINER(align), hbox);
+    gtk_widget_show_all(align);
+
+    return button;
+}
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -886,9 +918,9 @@ static GtkWidget *create_panel_control_dialog(PanelItem * pi, PanelModule * pm)
     {
         iframe->icon_id = pi->id;
         iframe->pb = pi->pb;
-	if(pi->path)
-	    iframe->icon_path = g_strdup(pi->path);
-    
+        if(pi->path)
+            iframe->icon_path = g_strdup(pi->path);
+
         g_object_ref(iframe->pb);
     }
     else
@@ -1064,9 +1096,9 @@ void edit_menu_item_dialog(MenuItem * mi)
     if(mi->icon_path)
     {
         gtk_entry_set_text(GTK_ENTRY(iframe->icon_entry), mi->icon_path);
-	iframe->icon_path = g_strdup(mi->icon_path);
+        iframe->icon_path = g_strdup(mi->icon_path);
     }
-    
+
     if(mi->command)
         gtk_entry_set_text(GTK_ENTRY(iframe->command_entry), mi->command);
     if(mi->in_terminal)
@@ -1241,4 +1273,343 @@ void edit_panel_control_dialog(PanelGroup * pg)
 
     module_frame_free(mframe);
     mframe = NULL;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+   Global settings
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+/* size		: option menu / radio button group
+ * popup size	: option menu / radio button group
+ * style	: option menu / radio button group
+ * icon theme	: option menu
+ * left 	: spinbutton
+ * right	: spinbutton
+ * screens	: spinbutton
+ * position	: button (restore default)
+ * lock command : entry + browse button
+ * exit command : entry + browse button
+ */
+
+static GtkWidget *size_menu;
+static GtkWidget *popup_menu;
+static GtkWidget *style_menu;
+static GtkWidget *theme_menu;
+static GtkWidget *left_spin;
+static GtkWidget *right_spin;
+static GtkWidget *screens_spin;
+static GtkWidget *pos_button;
+static GtkWidget *lock_entry;
+static GtkWidget *lock_browse_button;
+static GtkWidget *exit_entry;
+static GtkWidget *exit_browse_button;
+static GtkSizeGroup *sg = NULL;
+static GtkWidget *revert;
+
+static Settings backup;
+
+static void create_backup(void)
+{
+    backup.x = settings.x;
+    backup.y = settings.y;
+    backup.size = settings.size;
+    backup.popup_size = settings.popup_size;
+    backup.style = settings.style;
+    backup.icon_theme = g_strdup(settings.icon_theme);
+    backup.num_left = settings.num_left;
+    backup.num_right = settings.num_right;
+    backup.num_screens = settings.num_screens;
+}
+
+static void restore_backup(void)
+{
+    settings.x = backup.x;
+    settings.y = backup.y;
+    settings.size = backup.size;
+    settings.popup_size = backup.popup_size;
+    settings.style = backup.style;
+    g_free(settings.icon_theme);
+    settings.icon_theme = g_strdup(backup.icon_theme);
+    settings.num_left = backup.num_left;
+    settings.num_right = backup.num_right;
+    settings.num_screens = backup.num_screens;
+
+    panel_set_settings();
+    panel_set_position();
+}
+
+static GtkShadowType label_shadow = GTK_SHADOW_ETCHED_IN;
+
+static void add_header(const char *text, GtkBox *box)
+{
+    GtkWidget *label;
+    char *markup;
+    
+    label = gtk_label_new(NULL);
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    markup = g_strconcat("<b><span size=\"large\">", text, "</span></b>", NULL);
+    gtk_label_set_markup(GTK_LABEL(label), markup);
+    g_free(markup);
+    gtk_widget_show(label);
+    gtk_box_pack_start(box, label, FALSE, TRUE, 0);
+}
+
+#define SKIP 12
+
+static void add_spacer(GtkBox *box)
+{
+    GtkWidget *eventbox = gtk_event_box_new();
+    
+    gtk_widget_set_size_request(eventbox, SKIP, SKIP);
+    gtk_widget_show(eventbox);
+    gtk_box_pack_start(box, eventbox, FALSE, TRUE, 0);
+}
+
+static void size_menu_changed(GtkOptionMenu *menu)
+{
+    int n = gtk_option_menu_get_history(menu);
+    gboolean changed = TRUE;
+    
+    if (GTK_WIDGET(menu) == size_menu && n != settings.size)
+	panel_set_size(n);
+    else if (n != settings.popup_size)
+	panel_set_popup_size(n);
+    else
+	changed = FALSE;
+
+    if (changed)
+    {
+	panel_set_position();
+	gtk_widget_set_sensitive(revert, TRUE);
+    }
+}
+
+static void add_size_menu(GtkWidget *option_menu, int size)
+{
+    GtkWidget *menu = gtk_menu_new();
+    GtkWidget *item;
+    
+    item = gtk_menu_item_new_with_label(_("Small"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    item = gtk_menu_item_new_with_label(_("Medium"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    item = gtk_menu_item_new_with_label(_("Large"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
+    gtk_option_menu_set_history (GTK_OPTION_MENU(option_menu), size);
+    
+    g_signal_connect(option_menu, "changed", G_CALLBACK(size_menu_changed), NULL);
+}
+
+static void add_size_box(GtkBox *box)
+{
+    GtkWidget *frame, *vbox, *hbox, *label;
+
+    /* frame and vbox */
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
+    
+    vbox = gtk_vbox_new(FALSE, 4);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+    /* size */
+    hbox = gtk_hbox_new (FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    
+    label = gtk_label_new(_("Panel size:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+    
+    size_menu = gtk_option_menu_new();
+    gtk_widget_show(size_menu);
+    add_size_menu(size_menu, settings.size);
+    gtk_box_pack_start(GTK_BOX(hbox), size_menu, TRUE, TRUE, 0);
+    
+    /* popup */
+    hbox = gtk_hbox_new (FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    
+    label = gtk_label_new(_("Popup menu size:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+    
+    popup_menu = gtk_option_menu_new();
+    gtk_widget_show(popup_menu);
+    add_size_menu(popup_menu, settings.popup_size);
+    gtk_box_pack_start(GTK_BOX(hbox), popup_menu, TRUE, TRUE, 0);
+}
+    
+static void add_style_box(GtkBox *box)
+{
+    GtkWidget *frame, *vbox, *hbox, *label;
+
+    /* frame and vbox */
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
+    
+    vbox = gtk_vbox_new(FALSE, 4);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+}
+    
+static void add_controls_box(GtkBox *box)
+{
+    GtkWidget *frame, *vbox, *hbox, *label;
+
+    /* frame and vbox */
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
+    
+    vbox = gtk_vbox_new(FALSE, 4);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+}
+    
+static void add_position_box(GtkBox *box)
+{
+    GtkWidget *frame, *vbox, *hbox, *label;
+
+    /* frame and vbox */
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
+    
+    vbox = gtk_vbox_new(FALSE, 4);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+}
+    
+static void add_advanced_box(GtkBox *box)
+{
+    GtkWidget *frame, *vbox, *hbox, *label;
+
+    /* frame and vbox */
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
+    
+    vbox = gtk_vbox_new(FALSE, 4);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+
+}
+
+static gboolean running = FALSE;
+
+void global_settings_dialog(void)
+{
+    GtkWidget *frame, *vbox, *button;
+    gboolean done;
+    
+    if (running)
+    {
+	gtk_window_present(GTK_WINDOW(dialog));
+	return;
+    }
+    
+    running = TRUE;
+    done = FALSE;
+
+    create_backup();
+
+    dialog =
+        gtk_dialog_new_with_buttons(_("Xfce Panel Settings"), GTK_WINDOW(toplevel),
+                                    GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR, NULL);
+
+    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+    gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
+    
+    revert = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
+    gtk_widget_show(revert);
+    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), revert, RESPONSE_REVERT);
+    gtk_widget_set_sensitive(revert, FALSE);
+
+    button = mixed_button_new(GTK_STOCK_OK, _("_Done"));
+    gtk_widget_show(button);
+    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
+
+    frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_NONE);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), frame, TRUE, TRUE, 0);
+    
+    vbox = gtk_vbox_new(FALSE, 2);
+    gtk_widget_show(vbox);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
+    
+    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+    
+    add_header(_("Sizes"), GTK_BOX(vbox));
+    add_size_box(GTK_BOX(vbox));
+    add_spacer(GTK_BOX(vbox));
+    
+    add_header(_("Apearance"), GTK_BOX(vbox));
+    add_style_box(GTK_BOX(vbox));
+    add_spacer(GTK_BOX(vbox));
+    
+    add_header(_("Panel controls"), GTK_BOX(vbox));
+    add_controls_box(GTK_BOX(vbox));
+    add_spacer(GTK_BOX(vbox));
+    
+    add_header(_("Position"), GTK_BOX(vbox));
+    add_position_box(GTK_BOX(vbox));
+    add_spacer(GTK_BOX(vbox));
+    
+    add_header(_("Advanced settings"), GTK_BOX(vbox));
+    add_advanced_box(GTK_BOX(vbox));
+    add_spacer(GTK_BOX(vbox));
+    
+    g_object_unref(sg);
+    
+    while (!done)
+    {
+	int response = GTK_RESPONSE_NONE;
+	
+	response = gtk_dialog_run(GTK_DIALOG(dialog));
+	
+	if (response == RESPONSE_REVERT)
+	{
+	    restore_backup();
+	    
+	    panel_set_settings();
+	    gtk_widget_set_sensitive(revert, FALSE);
+	}
+	else
+	    done = TRUE;
+    }
+    
+    gtk_widget_destroy(dialog);
+    running = FALSE;
+    dialog = NULL;
 }

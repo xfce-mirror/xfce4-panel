@@ -295,7 +295,8 @@ void mini_palet_cb(void)
 {
     hide_current_popup_menu();
 
-    switch_style_cb();
+/*    switch_style_cb();*/
+    global_settings_dialog();
 }
 
 void mini_power_cb(GtkButton * b, GdkEventButton * ev, char *cmd)
