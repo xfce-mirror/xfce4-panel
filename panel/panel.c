@@ -1666,6 +1666,8 @@ panel_write_xml (xmlNodePtr root)
 static void
 menu_destroyed (GtkWidget * menu, Panel * p)
 {
+    panel_unblock_autohide (p);
+
     if (p->priv->settings.autohide
 	&& gdk_window_at_pointer (NULL, NULL) != p->toplevel->window)
     {
@@ -1685,7 +1687,8 @@ void
 panel_register_open_menu (GtkWidget * menu)
 {
     g_return_if_fail (GTK_IS_WIDGET (menu));
-
+ 
+    panel_block_autohide (&panel);
     g_signal_connect (menu, "deactivate", G_CALLBACK (menu_destroyed),
 		      &panel);
 }

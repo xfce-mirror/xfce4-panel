@@ -139,6 +139,8 @@ controls_dialog (Control * control)
 	return;
     }
 
+    panel_block_autohide (&panel);
+    
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     cdialog = gtk_dialog_new ();
@@ -218,6 +220,8 @@ controls_dialog (Control * control)
     }
 
     gtk_widget_destroy (cdialog);
+
+    panel_unblock_autohide (&panel);
 
     write_panel_config ();
 }
