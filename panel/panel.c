@@ -66,6 +66,8 @@ struct _PanelPrivate
 
     gboolean is_created;
     int block_autohide;
+
+    int allocate_id;
 };
 
 
@@ -819,6 +821,8 @@ panel_set_hidden (Panel * p, gboolean hide)
 {
     int x, y, w, h;
 
+    g_signal_handler_block (p->toplevel, p->priv->allocate_id);
+    
     /* set flag before moving when hiding */
     if (hide)
 	p->hidden = hide;
@@ -875,6 +879,9 @@ panel_set_hidden (Panel * p, gboolean hide)
     /* set flag after moving when unhiding */
     if (!hide)
 	p->hidden = hide;
+    
+    g_usleep (10000);
+    g_signal_handler_unblock (p->toplevel, p->priv->allocate_id);
 }
 
 static gboolean
@@ -1129,19 +1136,6 @@ create_panel (void)
     g_object_add_weak_pointer (G_OBJECT (p->toplevel),
 			       (gpointer *) & (p->toplevel));
 
-    /* Connect signalers to window for autohide */
-    g_signal_connect (p->toplevel, "enter-notify-event",
-		      G_CALLBACK (panel_enter), p);
-
-    g_signal_connect (p->toplevel, "leave-notify-event",
-		      G_CALLBACK (panel_leave), p);
-
-    gtk_drag_dest_set (p->toplevel, GTK_DEST_DEFAULT_ALL, entry, 2,
-		       GDK_ACTION_COPY);
-
-    g_signal_connect (p->toplevel, "drag-motion",
-		      G_CALLBACK (drag_motion), p);
-
     p->priv->screen = gtk_widget_get_screen (p->toplevel);
     p->priv->monitor = -1;
 
@@ -1202,9 +1196,23 @@ create_panel (void)
 
     update_arrow_direction (p);
 
+    /* Connect signalers to window for autohide */
+    g_signal_connect (p->toplevel, "enter-notify-event",
+		      G_CALLBACK (panel_enter), p);
+
+    g_signal_connect (p->toplevel, "leave-notify-event",
+		      G_CALLBACK (panel_leave), p);
+
+    gtk_drag_dest_set (p->toplevel, GTK_DEST_DEFAULT_ALL, entry, 2,
+		       GDK_ACTION_COPY);
+
+    g_signal_connect (p->toplevel, "drag-motion",
+		      G_CALLBACK (drag_motion), p);
+
     /* auto resize functions */
-    g_signal_connect (p->toplevel, "size-allocate",
-		      G_CALLBACK (panel_allocate_cb), p);
+    p->priv->allocate_id = 
+        g_signal_connect (p->toplevel, "size-allocate",
+                          G_CALLBACK (panel_allocate_cb), p);
 
     g_signal_connect (p->priv->screen, "size-changed",
 		      G_CALLBACK (screen_size_changed), p);
