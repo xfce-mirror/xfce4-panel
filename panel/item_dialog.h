@@ -75,7 +75,7 @@ void command_options_get_command  (CommandOptions *opts, char **command,
  * For use in property dialogs. Consists of:
  * - Preview frame for the icon (allows dropping of image files).
  * - Optional option menu for builtin, themed icons.
- * - Entry to hold file name. Gives access to xffm_theme_maker when that is
+ * - Entry to hold file name. Gives access to xfmime-edit when that is
  *   installed.
  *
  * You can set a callback that will be run when the icon is changed.

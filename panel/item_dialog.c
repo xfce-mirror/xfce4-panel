@@ -537,7 +537,7 @@ icon_browse_cb (GtkWidget *w, IconOptions *opts)
 static void
 xtm_cb (GtkWidget * b, GtkEntry * entry)
 {
-    gchar *argv[2] = { "xffm_theme_maker", NULL };
+    gchar *argv[2] = { "xfmime-edit", NULL };
     
     g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, 
 	    	   NULL, NULL, NULL, NULL);
@@ -671,9 +671,9 @@ create_icon_options (GtkSizeGroup *sg, gboolean use_builtins)
 
     g_signal_connect (w, "clicked", G_CALLBACK (icon_browse_cb), opts);
 
-    /* use xffm_theme_maker when available */
+    /* use xfmime-edit when available */
     {
-	gchar *g = g_find_program_in_path ("xffm_theme_maker");
+	gchar *g = g_find_program_in_path ("xfmime-edit");
 
 	if (g)
 	{
