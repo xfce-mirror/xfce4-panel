@@ -43,6 +43,8 @@
 #define DEFAULT_JUSTIFICATION  GTK_JUSTIFY_LEFT
 #define DEFAULT_SIDE           GTK_SIDE_BOTTOM
 #define DEFAULT_SIZE           32
+#define DEFAULT_OPACITY        0xc0000000;
+#define OPAQUE                 0xffffffff
 
 #define IS_HORIZONTAL(s) (s == GTK_SIDE_TOP || s == GTK_SIDE_BOTTOM)
 
@@ -66,6 +68,8 @@ struct _Iconbox
     int offset;
     int block_resize;
 
+    guint opacity;
+    
     GtkWidget *win;
     GtkWidget *box;
 
@@ -100,6 +104,51 @@ struct _Icon
 static GtkTooltips *icon_tooltips = NULL;
 
 static gboolean sig_quit = FALSE;
+
+
+/* transparency */
+static void
+iconbox_set_transparent (Iconbox *ib, gboolean transparent)
+{
+    guint opacity = (transparent ? ib->opacity : OPAQUE);
+    
+    gdk_error_trap_push ();
+
+    gdk_property_change (ib->win->window,
+			 gdk_atom_intern ("_NET_WM_WINDOW_OPACITY", FALSE),
+			 gdk_atom_intern ("CARDINAL", FALSE), 32,
+			 GDK_PROP_MODE_REPLACE, (guchar *) & opacity, 1L);
+
+    gdk_error_trap_pop ();
+
+    gtk_widget_queue_draw (ib->win);
+}
+
+static gboolean
+iconbox_enter (GtkWidget *w, GdkEventCrossing *event, gpointer data)
+{
+    Iconbox *ib = data;
+    
+    if (event->detail != GDK_NOTIFY_INFERIOR && ib->opacity != OPAQUE)
+    {
+        iconbox_set_transparent (ib, FALSE);
+    }
+    
+    return FALSE;
+}
+
+static gboolean
+iconbox_leave (GtkWidget *w, GdkEventCrossing *event, gpointer data)
+{
+    Iconbox *ib = data;
+    
+    if (event->detail != GDK_NOTIFY_INFERIOR && ib->opacity != OPAQUE)
+    {
+        iconbox_set_transparent (ib, TRUE);
+    }
+    
+    return FALSE;
+}
 
 /* icons */
 static void
@@ -582,6 +631,13 @@ create_iconbox (void)
     ib->justification = DEFAULT_JUSTIFICATION;
     ib->side          = DEFAULT_SIDE;
     ib->icon_size     = DEFAULT_SIZE;
+    ib->opacity       = DEFAULT_OPACITY;
+
+    g_signal_connect (ib->win, "enter-notify-event", 
+                      G_CALLBACK (iconbox_enter), ib);
+    
+    g_signal_connect (ib->win, "leave-notify-event", 
+                      G_CALLBACK (iconbox_leave), ib);
     
     return ib;
 }
@@ -870,6 +926,8 @@ main (int argc, char **argv)
     iconbox_set_position (ib);
     gtk_widget_show (ib->win);
     
+    iconbox_set_transparent (ib, TRUE);
+    
     connect_signal_handler ();
     g_timeout_add (500, (GSourceFunc)check_signal_state, NULL);
     
@@ -1054,8 +1112,21 @@ iconbox_set_show_only_hidden (Iconbox * ib, gboolean only_hidden)
     }
 }
 
+void
+iconbox_set_transparency (Iconbox *ib, int transparency)
+{
+    g_return_if_fail (ib != NULL);
+
+    ib->opacity = CLAMP (OPAQUE - rint ((double)transparency * OPAQUE / 100), 
+                         0.2 * OPAQUE, OPAQUE);
+
+    iconbox_set_transparent (ib, TRUE);
+}
+
 McsClient *
 iconbox_get_mcs_client (Iconbox *ib)
 {
+    g_return_val_if_fail (ib != NULL, NULL);
+
     return ib->mcs_client;
 }

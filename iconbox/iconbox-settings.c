@@ -108,6 +108,10 @@ notify_cb (const char *name, const char *channel_name, McsAction action,
         {
             iconbox_set_show_only_hidden (ib, (setting->data.v_int == 1));
         }
+        else if (!strcmp (name, "Iconbox/Transparency"))
+        {
+            iconbox_set_transparency (ib, setting->data.v_int);
+        }
     }
 }
 

@@ -31,5 +31,7 @@ void iconbox_set_icon_size (Iconbox *ib, int size);
 
 void iconbox_set_show_only_hidden (Iconbox *ib, gboolean only_hidden);
 
+void iconbox_set_transparency (Iconbox *ib, int opacity);
+
 McsClient *iconbox_get_mcs_client (Iconbox *ib);
 

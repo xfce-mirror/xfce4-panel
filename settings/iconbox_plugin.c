@@ -43,6 +43,8 @@
 #define DEFAULT_JUSTIFICATION  GTK_JUSTIFY_LEFT
 #define DEFAULT_SIZE	       32
 #define DEFAULT_SHOW_HIDDEN    FALSE
+#define DEFAULT_TRANSPARENCY   45
+#define MAX_TRANSPARENCY       80
 
 /* gui */
 #define BORDER             6
@@ -59,6 +61,7 @@ static GtkSideType side               = DEFAULT_SIDE;
 static GtkJustification justification = DEFAULT_JUSTIFICATION;
 static int icon_size                  = DEFAULT_SIZE;
 static gboolean only_hidden           = DEFAULT_SHOW_HIDDEN;
+static int transparency               = DEFAULT_TRANSPARENCY;
 
 
 /* dialog */
@@ -91,6 +94,8 @@ struct _IconboxDialog
     GtkWidget *size64;
     
     GtkWidget *only_hidden;
+
+    GtkWidget *transparency;
 };
 
 /* functions */
@@ -723,6 +728,61 @@ add_icon_options (GtkBox *box, IconboxDialog *id)
                       G_CALLBACK (only_hidden_toggled), id);
 }
 
+/* transparency */
+static void
+transparency_changed (GtkWidget *w, gpointer data)
+{
+    IconboxDialog *id = data;
+    int transparency = 
+        (int) gtk_range_get_value (GTK_RANGE (id->transparency));
+
+    g_print (" ++ transparency: %d\n", transparency);
+    
+    mcs_manager_set_int (id->mcs_plugin->manager, "Iconbox/Transparency",
+                         CHANNEL, transparency);
+
+    mcs_manager_notify (id->mcs_plugin->manager, CHANNEL);
+
+    write_options (id->mcs_plugin);
+}
+
+static void
+add_transparency_option (GtkBox *box, IconboxDialog *id)
+{
+    GtkWidget *frame, *hbox, *label;
+    
+    frame = xfce_framebox_new (_("Transparency"), TRUE);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (box, frame, FALSE, FALSE, 0);
+
+    hbox =  gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (hbox);
+    xfce_framebox_add (XFCE_FRAMEBOX (frame), hbox);
+
+    label = xfce_create_small_label (_("None"));
+    gtk_widget_show (label);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    id->transparency =
+        gtk_hscale_new_with_range (0, MAX_TRANSPARENCY, 5);
+    gtk_widget_show (id->transparency);
+    gtk_range_set_value (GTK_RANGE (id->transparency), transparency);
+    gtk_scale_set_draw_value (GTK_SCALE (id->transparency), FALSE);
+    gtk_scale_set_digits (GTK_SCALE (id->transparency), 0);
+    gtk_range_set_update_policy (GTK_RANGE (id->transparency),
+                                 GTK_UPDATE_DISCONTINUOUS);
+    gtk_box_pack_start (GTK_BOX (hbox), id->transparency, TRUE, TRUE, 0);
+
+    label = xfce_create_small_label (_("Full"));
+    gtk_widget_show (label);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    g_signal_connect (id->transparency, "value-changed", 
+                      G_CALLBACK (transparency_changed), id);
+}
+
 /* main dialog */
 static void
 dialog_response (GtkWidget * dialog, gint response_id, IconboxDialog *id)
@@ -737,7 +797,8 @@ dialog_response (GtkWidget * dialog, gint response_id, IconboxDialog *id)
              "Side         : %s\n"
              "Justification: %s\n"
              "Size         : %d\n"
-             "Only hidden  : %s", 
+             "Only hidden  : %s\n",
+             "Transparency : %s",
              (side == GTK_SIDE_TOP) ? "top" :
                (side == GTK_SIDE_BOTTOM) ? "bottom" :
                  (side == GTK_SIDE_LEFT) ? "left" : 
@@ -746,7 +807,8 @@ dialog_response (GtkWidget * dialog, gint response_id, IconboxDialog *id)
                (justification == GTK_JUSTIFY_CENTER) ? "center" : 
                  "right",
              icon_size,
-             only_hidden ? "true" : "false");
+             only_hidden ? "true" : "false",
+             transparency);
 
         write_options (id->mcs_plugin);
         g_free (id);
@@ -793,6 +855,9 @@ create_dialog (McsPlugin * mcs_plugin)
     /* icons */
     add_icon_options (GTK_BOX (vbox2), dialog);
 
+    /* transparency */
+    add_transparency_option (GTK_BOX (vbox2), dialog);
+    
     add_space (GTK_BOX (vbox), BORDER);
 
     g_signal_connect (dialog->dlg, "response", 
@@ -898,6 +963,19 @@ create_channel (McsPlugin * mcs_plugin)
     {
         mcs_manager_set_int (mcs_plugin->manager, "Iconbox/OnlyHidden", 
                              CHANNEL, only_hidden ? 1 : 0);
+    }
+
+    setting = mcs_manager_setting_lookup (mcs_plugin->manager, 
+                                          "Iconbox/Transparency",
+                                          CHANNEL);
+    if (setting)
+    {
+        transparency = CLAMP (setting->data.v_int, 0, MAX_TRANSPARENCY);
+    }
+    else
+    {
+        mcs_manager_set_int (mcs_plugin->manager, "Iconbox/Transparency", 
+                             CHANNEL, transparency);
     }
 
     write_options (mcs_plugin);
