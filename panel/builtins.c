@@ -390,30 +390,235 @@ void create_config(PanelControl * pc)
  *  ----------------
  *  Still a special case module, but hopefully not for much longer ...
 */
+static GPtrArray *screen_names = NULL;
+
+static void init_screen_names(void)
+{
+    int i;
+    
+    screen_names = g_ptr_array_sized_new(settings.num_screens);
+}
+
+static void set_screen_name(int index, const char *name)
+{
+    int i;
+
+    if (!screen_names)
+	screen_names_init();
+    
+    if (index < screen_names->len)
+    {
+	char *name = g_ptr_array_index(screen_names, index);
+
+	g_free(name);
+	screen_names->pdata[index] = g_strdup(name);
+    }
+    else
+    {
+	for (i = screen_name->len; i < index; i++)
+	    g_ptr_array_add(screen_names, NULL);
+
+	g_ptr_array_add(screen_names, g_strdup(name));
+    }
+}
+
+static char *get_screen_name(int index)
+{
+    if (!screen_names)
+	screen_names_init();
+    
+    if (index >= screen_names->len)
+    {
+	char name[3];
+
+	snprintf(name, 3, "%d", index);
+
+	set_screen_name(name);
+    }
+
+    return g_ptr_array_index(screen_names, index);
+}
+
+typedef struct
+{
+    const char *signal;
+    GCallback callback;
+    gpointer data;
+}
+SignalCallback
+
+SignalCallback *signal_callback_new(const char *signal, 
+				    GCallback callback, gpointer data)
+{
+    SignalCallback *sc = g_new0(SignalCallback, 1);
+
+    sc->signal = signal;
+    sc->callback = callback;
+    sc->data = data;
+
+    return sc;
+}
+
+typedef struct
+{
+    gboolean graphical;
+    
+    GtkWidget *frame;
+    GtkWidget *box;
+    GtkWidget *separators[2];
+
+    GdkPixbuf *minibuttons[4];
+    GtkWidget *minitables[2];
+
+    /* traditional switcher */
+    GtkWidget *buttonboxes[2];
+    GList *buttons;
+
+    /* graphical pager */
+    GtkWidget *pager;
+    
+    /* callback(s) we have to save for new buttons */
+    GList *callbacks;
+}
+t_switcher;
+
+static void arrange_switcher(t_switcher *sw)
+{
+    int i;
+    GList *li;
+    gboolean vertical = settings.orientation == VERTICAL;
+    
+    if (sw->box)
+    {
+	for (li = sw->buttons; li; li = li->next)
+	{
+	    screen_button_free(li->data);
+	}
+	g_list_free(sw->buttons);
+	sw->buttons = NULL;
+	
+	gtk_widget_destroy(sw->box);
+    }
+    
+    if (sw->graphical)
+    {
+    }
+    else
+    {
+	ScreenButton *sb;
+
+	if (vertical)
+	{
+	    sw->box = gtk_vbox_new(FALSE, 0);
+	    sw->separators[0] = gtk_hseparator_new();
+	    sw->separators[1] = gtk_hseparator_new();
+	    sw->buttonboxes[0] = gtk_vbox_new(TRUE, 1);
+	    sw->buttonboxes[1] = NULL;
+	}
+	else
+	{
+	    sw->box = gtk_hbox_new(FALSE, 0);
+	    sw->separators[0] = gtk_vseparator_new();
+	    sw->separators[1] = gtk_vseparator_new();
+	    sw->buttonboxes[0] = gtk_hbox_new(TRUE, 1);
+	    sw->buttonboxes[1] = gtk_hbox_new(TRUE, 1);
+	}
+
+	gtk_widget_show(sw->box);
+
+	if (settings.style == NEW_STYLE)
+	{
+	    gtk_widget_show(sw->separators[0]);
+	    gtk_widget_show(sw->separators[1]);
+	}
+	
+	for (i = 0; i < settings.num_screens; i++)
+	{
+	    GtkBox *box;
+	    
+	    sb = create_screen_button(i);
+	    g_list_append(sw->buttons, sb);
+
+	    if (vertical)
+		box = GTK_BOX(sw->buttonboxes[0]);
+	    else if (i % 2 == 0)
+		box = GTK_BOX(sw->buttonboxes[0]);
+	    else
+		box = GTK_BOX(sw->buttonboxes[1]);
+
+	    screen_button_pack(sb, box);
+	}
+    }
+}
+
+t_switcher *switcher_new(void)
+{
+    t_switcher *sw = g_new0(t_switcher, 1);
+
+    sw->graphical = FALSE;
+    
+    sw->frame = gtk_frame_new(NULL);
+    gtk_widget_show(sw->frame);
+
+    arrange_switcher(sw);    
+    switcher_set_style(sw, settings.style);
+    switcher_set_size(sw, settings.size);
+
+    return sw;
+}
+
+static void switcher_free(PanelControl *pc)
+{
+}
+
+static void switcher_read_config(PanelControl *pc, xmlNodePtr node)
+{
+}
+
+static void switcher_write_config(PanelControl *pc, xmlNodePtr node)
+{
+}
+
+static void switcher_attach_callback(PanelControl *pc, const char *signal, 
+				     GCallback callback, gpointer data)
+{
+}
+
+static void switcher_set_orientation(PanelControl *pc, int orientation)
+{
+}
+
+static void switcher_set_size(PanelControl *pc, int size)
+{
+}
+
+static void switcher_set_style(PanelControl *pc, int style)
+{
+}
+
+static void switcher_set_theme(PanelControl *pc, const char *theme)
+{
+}
 
 void create_switcher(PanelControl *pc)
 {
-    pc->data = switcher_init(PanelControl *pc);
+    t_switcher *sw = switcher_new();
 
+    gtk_container_add(GTK_CONTAINER(pc->base), sw->frame);
+    
     pc->caption = g_strdup(_("Desktop switcher"));
-    pc->main = pc->base; /* hack */
-
-    pc->read_config = switcher_read_config;
-    pc->write_config = switcher_read_config;
 
     pc->free = switcher_free;
+    pc->read_config = switcher_read_config;
+    pc->write_config = switcher_read_config;
+    pc->attach_callback = switcher_attach_callback;
+    
+    pc->add_options = switcher_add_options;
 
-    pc->interval = 0;
-    pc->timeout_id = 0;
-    pc->update = NULL;
-
-    pc->set_orientation = NULL;
-    pc->set_size = NULL;
-    pc->set_style = NULL;
-    pc->set_theme = NULL;
-
-    pc->callback_id = 0;
-    pc->add_options = NULL;
+    pc->set_orientation = switcher_set_orientation;
+    pc->set_size = switcher_set_size;
+    pc->set_style = switcher_set_size;
+    pc->set_theme = switcher_set_theme;
 
     return pc;
 }

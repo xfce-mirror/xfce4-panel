@@ -253,7 +253,7 @@ void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node)
 
     /* create a default control */
     create_panel_control(pc);
-
+http://mail.gnome.org/archives/desktop-devel-list/2002-November/msg00176.html
     /* allow the control to read its configuration */
     panel_control_read_config(pc, node);
 

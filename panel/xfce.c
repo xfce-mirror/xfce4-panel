@@ -727,9 +727,12 @@ void sighandler(int sig)
     switch (sig)
     {
         case SIGHUP:
-            restart();
-            break;
-        default:
+	    /* doesn't work when run from xterm and xterm closes
+	       find something else!
+	      restart();
+	      break;
+	    */
+	      default:
             quit(TRUE);
     }
 }
