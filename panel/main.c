@@ -347,15 +347,6 @@ main (int argc, char **argv)
     /* so clients are started on the correct screen */
     xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default()),
                  TRUE);
-
-    client_session = client_session_new (argc, argv, NULL /* data */ ,
-					 SESSION_RESTART_IF_RUNNING, 40);
-
-    client_session->save_yourself = save_yourself;
-    client_session->die = die;
-
-    session_managed = session_init (client_session);
-    
 #ifdef HAVE_SIGACTION
     act.sa_handler = sighandler;
     sigemptyset (&act.sa_mask);
@@ -385,6 +376,15 @@ main (int argc, char **argv)
     /* signal state */
     g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
 
+
+    client_session = client_session_new (argc, argv, NULL /* data */ ,
+					 SESSION_RESTART_IF_RUNNING, 40);
+
+    client_session->save_yourself = save_yourself;
+    client_session->die = die;
+
+    session_managed = session_init (client_session);
+    
     if (!session_managed)
     {
 	g_message (_("%s: Successfully started without session management"), 
