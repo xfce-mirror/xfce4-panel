@@ -36,7 +36,7 @@
 
 #include "xfce.h"
 #include "controls_dialog.h"
-#include "groups.h"
+#include "panel.h"
 #include "popup.h"
 #include "settings.h"
 #include "item-control.h"
@@ -71,7 +71,7 @@ pos_changed (GtkSpinButton * spin, Control * control)
 
     if (n != control->index)
     {
-	groups_move (control->index, n);
+	panel_move_control (control->index, n);
 	control->index = n;
     }
 }
@@ -92,7 +92,7 @@ add_position_option (GtkBox * box, Control * control)
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    n = groups_get_n_controls ();
+    n = panel_get_n_controls ();
 
     if (n > 1)
     {
@@ -210,7 +210,7 @@ controls_dialog (Control * control)
                 xfce_confirm (_("Removing the item will also remove "
                                 "its popup menu."), GTK_STOCK_REMOVE, NULL))
             {
-                groups_remove (control->index);
+                panel_remove_control (control->index);
                 break;
             }
         }

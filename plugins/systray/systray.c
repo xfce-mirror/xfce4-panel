@@ -90,8 +90,12 @@ icon_docked (XfceSystemTray * tray, GtkWidget * icon, Systray * systray)
 }
 
 static void
-icon_undocked (XfceSystemTray * tray, GtkWidget * icon, GtkBox * iconbox)
+icon_undocked (XfceSystemTray * tray, GtkWidget * icon, Systray *systray)
 {
+    if (systray->tray_registered)
+    {
+        gtk_container_remove (GTK_CONTAINER (systray->iconbox), icon);
+    }
 }
 
 static void

@@ -86,5 +86,26 @@ G_MODULE_IMPORT void panel_unblock_autohide (Panel * panel);
 
 G_MODULE_IMPORT int panel_get_side (void);
 
+G_MODULE_IMPORT GtkArrowType panel_get_arrow_direction(Panel * panel);
+
+/* find or act on specific group */
+G_MODULE_IMPORT Control *panel_get_control (int index);
+
+G_MODULE_IMPORT void panel_move_control (int from, int to);
+G_MODULE_IMPORT void panel_remove_control (int index);
+G_MODULE_IMPORT void panel_add_control (Control * control, int index);
+
+G_MODULE_IMPORT int panel_get_n_controls (void);
+
+/* groups */
+
+/* configuration */
+G_MODULE_IMPORT void old_groups_set_from_xml (int side, xmlNodePtr node);
+G_MODULE_IMPORT void groups_set_from_xml (xmlNodePtr node);
+G_MODULE_IMPORT void groups_write_xml (xmlNodePtr root);
+
+#ifndef XFCE_DISABLE_DEPRECATED
+G_MODULE_IMPORT GtkArrowType groups_get_arrow_direction();
+#endif
 
 #endif /* __XFCE_PANEL_H */

@@ -32,11 +32,11 @@
 #include "xfce-panel-window.h"
 
 #include "xfce.h"
-#include "groups.h"
 #include "controls.h"
 #include "controls_dialog.h"
 #include "add-control-dialog.h"
 #include "popup.h"
+#include "item-control.h"
 #include "settings.h"
 #include "mcs_client.h"
 #include "icons.h"
@@ -63,11 +63,15 @@ struct _PanelPrivate
     int side;
     XfcePositionState pos_state;
     int offset;
+    int block_resize;
 
     GtkRequisition req;
 
     gboolean is_created;
     int block_autohide;
+
+    GtkArrowType popup_arrow_type;
+    GSList *controls;
 };
 
 
@@ -118,6 +122,9 @@ static void panel_set_position (Panel * p);
 static void panel_set_hidden (Panel * p, gboolean hide);
 
 static void init_settings (Panel * p);
+
+/* defined in controls.c */
+extern void control_class_unref (ControlClass * cclass);
 
 
 /* positioning and position related functions *
@@ -251,6 +258,7 @@ static void
 update_arrow_direction (Panel * p)
 {
     GtkArrowType type;
+    GSList *l;
 
     switch (p->priv->side)
     {
@@ -267,7 +275,14 @@ update_arrow_direction (Panel * p)
 	    type = GTK_ARROW_UP;
     }
 
-    groups_set_arrow_direction (type);
+    p->priv->popup_arrow_type = type;
+
+    for (l = p->priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+
+        item_control_set_arrow_direction (control, type);
+    }
 }
 
 static void
@@ -461,27 +476,8 @@ panel_move_func (XfcePanelWindow * panel_window, Panel * panel, int *x, int *y)
 }
 
 static void
-panel_resize_func (XfcePanelWindow * panel_window, Panel *p, 
-                   GtkAllocation * old, GtkAllocation * new, int *x, int *y)
+panel_set_coordinates (Panel *p)
 {
-    if (p->hidden || !old || !new)
-        return;
-
-    *x -= (new->width - old->width) / 2;
-    *y -= (new->height - old->height) / 2;
-
-    p->priv->req.width = new->width;
-    p->priv->req.height = new->height;
-    
-    panel_move_func (panel_window, p, x, y);
-}
-
-static void
-panel_set_position (Panel * p)
-{
-    if (!p->priv->is_created || p->hidden)
-	return;
-
     gtk_widget_size_request (p->toplevel, &(p->priv->req));
 
     if (p->priv->settings.orientation == VERTICAL)
@@ -558,6 +554,36 @@ panel_set_position (Panel * p)
 	 p->priv->pos_state == XFCE_POS_STATE_CENTER ? "center" :
              p->priv->pos_state == XFCE_POS_STATE_START ? "start" :
                  p->priv->pos_state == XFCE_POS_STATE_END ? "end" : "none");
+}
+
+static void
+panel_resize_func (XfcePanelWindow * panel_window, Panel *p, 
+                   GtkAllocation * old, GtkAllocation * new, int *x, int *y)
+{
+    if (p->hidden || !old || !new || p->priv->block_resize)
+        return;
+
+    if (p->priv->settings.orientation == HORIZONTAL)
+        p->priv->offset -= (new->width - old->width) / 2;
+    else
+        p->priv->offset -= (new->height - old->height) / 2;
+
+    p->priv->req.width = new->width;
+    p->priv->req.height = new->height;
+    
+    panel_set_coordinates (p);
+
+    *x = p->position.x;
+    *y = p->position.y;
+}
+
+static void
+panel_set_position (Panel * p)
+{
+    if (!p->priv->is_created || p->hidden)
+	return;
+
+    panel_set_coordinates (p);
 
     gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
 
@@ -1055,11 +1081,51 @@ create_panel_framework (Panel * p)
                                                   GTK_ORIENTATION_HORIZONTAL);
 }
 
+static void
+panel_pack_controls (Panel *p)
+{
+    GSList *l;
+
+    for (l = p->priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+        
+        control_pack (control, GTK_BOX (p->group_box));
+    }
+}
+
+static void
+panel_unpack_controls (Panel *p)
+{
+    GSList *l;
+
+    for (l = p->priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+        
+        control_unpack (control);
+    }
+}
+
 G_MODULE_EXPORT /* EXPORT:panel_cleanup */
 void
 panel_cleanup (void)
 {
-    groups_cleanup ();
+    GSList *l;
+
+    for (l = panel.priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+
+        control_free (control);
+    }
+
+    control_class_list_cleanup ();
+
+    g_slist_free (panel.priv->controls);
+    panel.priv->controls = NULL;
+
+    g_free (panel.priv);
 }
 
 G_MODULE_EXPORT /* EXPORT:create_panel */
@@ -1106,7 +1172,7 @@ create_panel (void)
     /* panel framework */
     create_panel_framework (p);
 
-    groups_init (GTK_BOX (p->group_box));
+    control_class_list_init ();
 
     /* read and apply configuration 
      * This function creates the panel items and popup menus */
@@ -1115,6 +1181,7 @@ create_panel (void)
     if (!GTK_WIDGET_REALIZED (p->toplevel))
         gtk_widget_realize (p->toplevel);
 
+    p->priv->block_resize++;
     p->priv->is_created = TRUE;
     
     panel_set_position (p);
@@ -1131,11 +1198,13 @@ create_panel (void)
 
     /* size sometimes changes after showing toplevel */
     panel_set_position (p);
-
+    
     /* recalculate pos_state for old API where only x and y coordinates are
      * read from the config file */
     restrict_position (p, &(p->position.x), &(p->position.y));
     gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
+
+    p->priv->block_resize--;
 
     if (p->priv->settings.autohide)
 	panel_set_autohide (TRUE);
@@ -1163,15 +1232,138 @@ create_panel (void)
 		      G_CALLBACK (screen_size_changed), p);
 }
 
+/* find or act on specific groups */
+
+static Control *
+panel_get_nth (int n)
+{
+    Control *control;
+    GSList *li;
+    int index, len;
+
+    len = g_slist_length (panel.priv->controls);
+
+    index = CLAMP (n, 0, len);
+
+    li = g_slist_nth (panel.priv->controls, index);
+
+    control = li->data;
+
+    return control;
+}
+
+G_MODULE_EXPORT /* EXPORT:panel_get_control */
+Control *
+panel_get_control (int index)
+{
+    return panel_get_nth (index);
+}
+
+G_MODULE_EXPORT /* EXPORT:panel_move_control */
+void
+panel_move_control (int from, int to)
+{
+    int i;
+    GSList *li;
+    Control *control;
+
+    if (from < 0 || from >= g_slist_length (panel.priv->controls))
+	return;
+
+    li = g_slist_nth (panel.priv->controls, from);
+    control = li->data;
+
+    gtk_box_reorder_child (GTK_BOX (panel.group_box), control->base, to);
+
+    panel.priv->controls = g_slist_delete_link (panel.priv->controls, li);
+    panel.priv->controls = g_slist_insert (panel.priv->controls, control, to);
+
+    for (i = 0, li = panel.priv->controls; li; i++, li = li->next)
+    {
+	control = li->data;
+
+	control->index = i;
+    }
+}
+
+G_MODULE_EXPORT /* EXPORT:panel_remove_control */
+void
+panel_remove_control (int index)
+{
+    int i;
+    GSList *li;
+    Control *control;
+
+    li = g_slist_nth (panel.priv->controls, index);
+    
+    /* Paranoid, should not happen here */
+    if (!li)
+	return;
+
+    control = li->data;
+
+    DBG ("unref class %s", control->cclass->caption);
+    control_class_unref (control->cclass);
+
+    control_unpack (control);
+
+    panel.priv->controls = g_slist_delete_link (panel.priv->controls, li);
+    control_free (control);
+
+    settings.num_groups--;
+
+    for (i = 0, li = panel.priv->controls; li != NULL; i++, li = li->next)
+    {
+	control = li->data;
+
+	control->index = i;
+    }
+}
+
+G_MODULE_EXPORT /* EXPORT:panel_add_control */
+void
+panel_add_control (Control * control, int index)
+{
+    int len;
+
+    len = g_slist_length (panel.priv->controls);
+
+    if (index < 0 || index > len)
+	index = len;
+
+    control->index = index;
+    control_pack (control, GTK_BOX (panel.group_box));
+    panel.priv->controls = g_slist_append (panel.priv->controls, control);
+
+    if (index >= 0 && index < len)
+	panel_move_control (len, index);
+
+    if (control->with_popup)
+    {
+	item_control_show_popup (control, TRUE);
+    }
+
+    settings.num_groups++;
+}
+
+G_MODULE_EXPORT /* EXPORT:panel_get_n_controls */
+int
+panel_get_n_controls (void)
+{
+    return g_slist_length (panel.priv->controls);
+}
+
 /*  Panel settings
  *  --------------
 */
+
 G_MODULE_EXPORT /* EXPORT:panel_set_orientation */
 void
 panel_set_orientation (int orientation)
 {
     gboolean hidden;
     int pos;
+    GSList *l;
 
     panel.priv->settings.orientation = orientation;
 
@@ -1189,7 +1381,23 @@ panel_set_orientation (int orientation)
 	panel_set_autohide (FALSE);
     }
 
+    panel.priv->block_resize++;
+
     gtk_widget_hide (panel.toplevel);
+
+    /* save panel controls */
+    panel_unpack_controls (&panel);
+
+    /* no need to recreate the window */
+    gtk_widget_destroy (panel.group_box);
+    create_panel_framework (&panel);
+
+    for (l = panel.priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+
+        control_set_orientation (control, orientation);
+    }
 
     /* change popup position to make it look better 
      * done here, because it's needed for size calculation 
@@ -1214,21 +1422,7 @@ panel_set_orientation (int orientation)
     }
     panel_set_popup_position (pos);
 
-    /* save panel controls */
-    groups_unpack ();
-
-    /* no need to recreate the window */
-    gtk_widget_destroy (panel.group_box);
-    create_panel_framework (&panel);
-
-    groups_pack (GTK_BOX (panel.group_box));
-    groups_set_orientation (orientation);
-
-    /* prevent 'size-allocate' handler from wrongly adjusting 
-     * the position */
-    panel.priv->req.width = panel.priv->req.height = 0;
-
-    panel_set_size (settings.size);
+    panel_pack_controls (&panel);
 
     gtk_widget_size_request (panel.toplevel, &panel.priv->req);
 
@@ -1238,9 +1432,8 @@ panel_set_orientation (int orientation)
     else
 	panel_center (RIGHT);
 
-    gtk_widget_show_now (panel.toplevel);
+    gtk_widget_show (panel.toplevel);
 
-    /* size sometimes changes after showing */
     panel_set_position (&panel);
 
     panel_set_layer (panel.priv->settings.layer);
@@ -1251,6 +1444,8 @@ panel_set_orientation (int orientation)
     set_translucent (&panel, TRUE);
 
     update_partial_struts (&panel);
+
+    panel.priv->block_resize--;
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_set_layer */
@@ -1308,6 +1503,8 @@ G_MODULE_EXPORT /* EXPORT:panel_set_size */
 void
 panel_set_size (int size)
 {
+    GSList *l;
+    
     panel.priv->settings.size = size;
 
     /* backwards compat */
@@ -1318,7 +1515,12 @@ panel_set_size (int size)
 
     hide_current_popup_menu ();
 
-    groups_set_size (size);
+    for (l = panel.priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+
+        control_set_size (control, size);
+    }
 
     /* this will also resize the icons */
     panel_set_theme (panel.priv->settings.theme);
@@ -1328,6 +1530,8 @@ G_MODULE_EXPORT /* EXPORT:panel_set_popup_position */
 void
 panel_set_popup_position (int position)
 {
+    GSList *l;
+    
     panel.priv->settings.popup_position = position;
 
     /* backwards compat */
@@ -1338,7 +1542,13 @@ panel_set_popup_position (int position)
 
     hide_current_popup_menu ();
 
-    groups_set_popup_position (position);
+    for (l = panel.priv->controls; l != NULL; l = l->next)
+    {
+        Control *control = l->data;
+
+        item_control_set_popup_position (control, position);
+    }
+
     update_arrow_direction (&panel);
 
     /* this is necessary to get the right proportions */
@@ -1361,7 +1571,14 @@ panel_set_theme (const char *theme)
 
     if (panel.priv->is_created)
     {
-	groups_set_theme (theme);
+        GSList *l;
+
+        for (l = panel.priv->controls; l != NULL; l = l->next)
+        {
+            Control *control = l->data;
+
+            control_set_theme (control, theme);
+        }
     }
 }
 
@@ -1687,6 +1904,149 @@ panel_write_xml (xmlNodePtr root)
     xmlSetProp (child, "y", value);
 }
 
+G_MODULE_EXPORT /* EXPORT:old_groups_set_from_xml */
+void
+old_groups_set_from_xml (int side, xmlNodePtr node)
+{
+    static int last_group = 0;
+    xmlNodePtr child;
+    int i;
+    GSList *li;
+    Control *control;
+
+    if (side == LEFT)
+	last_group = 0;
+
+    li = g_slist_nth (panel.priv->controls, last_group);
+
+    /* children are "Group" nodes */
+    if (node)
+	node = node->children;
+
+    for (i = last_group; /*i < settings.num_groups || */ li || node; i++)
+    {
+	gboolean control_created = FALSE;
+
+	if (side == LEFT && !node)
+	    break;
+
+	if (li)
+	{
+	    control = li->data;
+	}
+	else
+	{
+	    control = control_new (i);
+	    control_pack (control, GTK_BOX (panel.group_box));
+            panel.priv->controls = g_slist_append (panel.priv->controls,
+                                                   control);
+	}
+
+	if (node)
+	{
+            xmlNodePtr popup_node = NULL;
+            
+	    for (child = node->children; child; child = child->next)
+	    {
+		/* create popup items and panel control */
+		if (xmlStrEqual (child->name, (const xmlChar *) "Popup"))
+		{
+		    popup_node = child;
+		}
+		else if (xmlStrEqual
+			 (child->name, (const xmlChar *) "Control"))
+		{
+		    control_set_from_xml (control, child);
+		    control_created = TRUE;
+		}
+	    }
+
+            if (control_created && popup_node)
+                item_control_add_popup_from_xml (control, popup_node);
+	}
+
+	if (!control_created)
+	    control_set_from_xml (control, NULL);
+
+	if (node)
+	    node = node->next;
+
+	if (li)
+	    li = li->next;
+
+	last_group++;
+    }
+}
+
+G_MODULE_EXPORT /* EXPORT:groups_set_from_xml */
+void
+groups_set_from_xml (xmlNodePtr node)
+{
+    int i;
+
+    /* children are "Group" nodes */
+    if (node)
+	node = node->children;
+
+    for (i = 0; node; i++, node = node->next)
+    {
+	gboolean control_created = FALSE;
+	xmlNodePtr child, popup_node = NULL;
+        Control *control;
+
+	control = control_new (i);
+	control_pack (control, GTK_BOX (panel.group_box));
+	panel.priv->controls = g_slist_append (panel.priv->controls, control);
+
+	for (child = node->children; child; child = child->next)
+	{
+	    /* create popup items and panel control */
+	    if (xmlStrEqual (child->name, (const xmlChar *) "Popup"))
+	    {
+		popup_node = child;
+	    }
+	    else if (xmlStrEqual (child->name, (const xmlChar *) "Control"))
+	    {
+		control_created =
+		    control_set_from_xml (control, child);
+
+                if (control_created && popup_node)
+                    item_control_add_popup_from_xml (control, popup_node);
+	    }
+	}
+
+	if (!control_created)
+	{
+	    panel.priv->controls = g_slist_remove (panel.priv->controls,
+                                                   control);
+	    control_unpack (control);
+	    control_free (control);
+	}
+    }
+}
+
+G_MODULE_EXPORT /* EXPORT:groups_write_xml */
+void
+groups_write_xml (xmlNodePtr root)
+{
+    xmlNodePtr node, child;
+    GSList *li;
+    Control *control;
+
+    node = xmlNewTextChild (root, NULL, "Groups", NULL);
+
+    for (li = panel.priv->controls; li; li = li->next)
+    {
+	control = li->data;
+
+	child = xmlNewTextChild (node, NULL, "Group", NULL);
+
+        /* special case for launchers */
+        item_control_write_popup_xml (control, child);
+	control_write_xml (control, child);
+    }
+}
+
 /* for menus, to prevent problems with autohide */
 
 static void
@@ -1745,3 +2105,20 @@ panel_get_side (void)
 {
     return panel.priv->side;
 }
+
+G_MODULE_EXPORT /* EXPORT:panel_get_arrow_direction */
+GtkArrowType
+panel_get_arrow_direction (Panel *p)
+{
+    return panel.priv->popup_arrow_type;
+}
+
+/* deprecated functions */
+#ifndef XFCE_DISABLE_DEPRECATED
+G_MODULE_EXPORT /* EXPORT:groups_get_arrow_direction */
+GtkArrowType
+groups_get_arrow_direction (void)
+{
+    return panel_get_arrow_direction (&panel);
+}
+#endif

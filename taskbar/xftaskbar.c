@@ -575,8 +575,12 @@ icon_docked (XfceSystemTray * tray, GtkWidget * icon, Taskbar * taskbar)
 }
 
 static void
-icon_undocked (XfceSystemTray * tray, GtkWidget * icon, GtkBox * iconbox)
+icon_undocked (XfceSystemTray * tray, GtkWidget * icon, Taskbar * taskbar)
 {
+    if (taskbar->tray_registered)
+    {
+        gtk_container_remove (GTK_CONTAINER (taskbar->iconbox), icon);
+    }
 }
 
 static void

@@ -50,7 +50,6 @@
 #include "item.h"
 #include "popup.h"
 #include "item-control.h"
-#include "groups.h"
 #include "plugins.h"
 #include "controls_dialog.h"
 #include "add-control-dialog.h"
@@ -652,7 +651,7 @@ insert_control (Panel * panel, const char *name, int position)
     if (control_class_info_create_control (info, control))
     {
 	hide_current_popup_menu ();
-	groups_add_control (control, position);
+	panel_add_control (control, position);
 	control_attach_callbacks (control);
 	control_set_settings (control);
 
@@ -712,7 +711,7 @@ remove_control (void)
 	    xfce_confirm (_("Removing the item will also remove "
 			    "its popup menu."), GTK_STOCK_REMOVE, NULL))
 	{
-	    groups_remove (popup_control->index);
+	    panel_remove_control (popup_control->index);
 	}
     }
 

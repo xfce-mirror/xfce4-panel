@@ -40,7 +40,6 @@
 #include "xfce.h"
 #include "item.h"
 #include "popup.h"
-#include "groups.h"
 #include "item_dialog.h"
 #include "settings.h"
 

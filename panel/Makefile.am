@@ -13,8 +13,6 @@ xfce4_panel_SOURCES =						\
 	controls_dialog.c 					\
 	controls_dialog.h 					\
 	global.h 						\
-	groups.c 						\
-	groups.h 						\
 	icons.c 						\
 	icons.h 						\
 	item-control.c 							\

@@ -38,7 +38,6 @@
 
 #include "xfce.h"
 #include "settings.h"
-#include "groups.h"
 #include "popup.h"
 #include "item.h"
 

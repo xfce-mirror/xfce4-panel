@@ -28,7 +28,7 @@
 #include "item.h"
 #include "popup.h"
 #include "item_dialog.h"
-#include "groups.h"
+#include "panel.h"
 
 /* PanelGroup replacement */
 
@@ -211,17 +211,6 @@ item_control_free (Control * control)
 }
 
 static void
-item_control_set_theme (Control * control, const char *theme)
-{
-    ItemControl *ic= control->data;
-
-    item_apply_config (ic->item);
-
-    if (ic->popup)
-        panel_popup_set_theme (ic->popup, theme);
-}
-
-static void
 item_control_set_size (Control * control, int size)
 {
     ItemControl *ic= control->data;
@@ -231,6 +220,17 @@ item_control_set_size (Control * control, int size)
         gtk_widget_set_size_request (ic->item->button, s, s);
     if (ic->popup)
         panel_popup_set_size (ic->popup, size);
+}
+
+static void
+item_control_set_theme (Control * control, const char *theme)
+{
+    ItemControl *ic= control->data;
+
+    item_apply_config (ic->item);
+
+    if (ic->popup)
+        panel_popup_set_theme (ic->popup, theme);
 }
 
 static void
@@ -300,6 +300,6 @@ item_control_class_init (ControlClass * cc)
 
     cc->create_options = item_control_create_options;
 
-    cc->set_theme = item_control_set_theme;
     cc->set_size = item_control_set_size;
+    cc->set_theme = item_control_set_theme;
 }

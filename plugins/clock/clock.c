@@ -48,7 +48,6 @@
 #include <panel/controls.h>
 #include <panel/icons.h>
 #include <panel/plugins.h>
-#include <panel/groups.h>
 
 #define BORDER 6
 
