@@ -21,13 +21,14 @@ After 4.0
   - perhaps using a timeout
   - perhaps use interfaces or derived widgets for controls
 * plugins:
-  - volume control plugin
+  - volume control plugin (DONE)
   - notification area plugin (as used by GNOME and KDE)
-    This would be really cool!
+    This would be really cool! (DONE)
   - dockapps support
 * allow hiding of all popup buttons
 * write API docs for plugin writers
 * new dialog for panel controls (treeview with dialog area)
   adding/removing controls from here.
 * Move to glib xml parsing. More work, but more speed / reduced memory usage
-
+* IMPORTANT: Move the exec_cmd stuff to libxfce4util/libxfcegui4 and
+  unify the interface!
