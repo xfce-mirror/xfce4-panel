@@ -462,6 +462,10 @@ groups_remove (int index)
     PanelGroup *group;
 
     li = g_slist_nth (group_list, index);
+    /* Paranoid, should not happen here */
+    if (!li) 
+        return;
+ 
     group = li->data;
 
     panel_group_unpack (group);
@@ -487,6 +491,9 @@ groups_show_popup (int index, gboolean show)
     PanelGroup *group;
 
     li = g_slist_nth (group_list, index);
+    if (!li) 
+        return;
+
     group = li->data;
 
     if (show)
