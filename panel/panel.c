@@ -495,6 +495,8 @@ void panel_parse_xml(xmlNodePtr node)
     /* child nodes */
     for(child = node->children; child; child = child->next)
     {
+	int w, h;
+	
         if(xmlStrEqual(child->name, (const xmlChar *)"Position"))
         {
             value = xmlGetProp(child, (const xmlChar *)"x");
@@ -510,6 +512,29 @@ void panel_parse_xml(xmlNodePtr node)
                 position.y = atoi(value);
 
             g_free(value);
+
+	    if (position.x < 0 || position.y < 0)
+		break;
+
+	    value = xmlGetProp(child, (const xmlChar *)"screenwidth");
+
+	    if (value)
+		w = atoi(value);
+	    else
+		break;
+
+	    value = xmlGetProp(child, (const xmlChar *)"screenheight");
+
+	    if (value)
+		h = atoi(value);
+	    else
+		break;
+
+	    if (w != gdk_screen_width())
+		position.x = (int)((double)(position.x * w) / (double)gdk_screen_width());
+	    
+	    if (h != gdk_screen_height())
+		position.y = (int)((double)(position.y * h) / (double)gdk_screen_height());
         }
     }
 
@@ -578,6 +603,14 @@ void panel_write_xml(xmlNodePtr root)
 
     snprintf(value, 5, "%d", position.y);
     xmlSetProp(child, "y", value);
+
+    /* save screen width and hide, so we can use a relative position
+     * the user logs in on different computers */
+    snprintf(value, 5, "%d", gdk_screen_width());
+    xmlSetProp(child, "screenwidth", value);
+
+    snprintf(value, 5, "%d", gdk_screen_height());
+    xmlSetProp(child, "screenheight", value);
 }
 
 
