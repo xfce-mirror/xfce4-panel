@@ -1003,6 +1003,8 @@ void edit_menu_item_dialog(MenuItem * mi)
         g_free(icon_path);
         icon_path = NULL;
     }
+
+    write_panel_config();
 }
 
 void add_menu_item_dialog(PanelPopup * pp)

@@ -328,4 +328,6 @@ void change_panel_control_dialog(PanelControl * pc)
     gtk_widget_destroy(dlg);
 
     clear_controls_list();
+
+    write_panel_config();
 }

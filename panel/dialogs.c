@@ -1289,4 +1289,6 @@ void global_settings_dialog(void)
     gtk_widget_destroy(dialog);
     running = FALSE;
     dialog = NULL;
+
+    write_panel_config();
 }
