@@ -1,14 +1,14 @@
 # Xfce4-panel German translation
 # Copyright (C) 2003 Olivier Fourdan
 # This file is distributed under the same license as the xfce4-panel package.
-# Moritz Heiber <moe@lunar-linux.org>, 2003
+# Moritz Heiber <moe@xfce.org>, 2003
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-09-07 15:17+0200\n"
-"PO-Revision-Date: 2004-01-08 00:05+0100\n"
-"Last-Translator: Moritz Heiber <moe@lunar-linux.org>\n"
+"PO-Revision-Date: 2004-09-18 00:19+0100\n"
+"Last-Translator: Moritz Heiber <moe@xfce.org>\n"
 "Language-Team: none <none@none>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,24 +20,19 @@ msgstr "Datei auswählen"
 
 #: panel/settings.c:172
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "Keine Daten gefunden. Das Panel wird leer sein"
 
 #: panel/controls_dialog.c:94 panel/item_dialog.c:1148
 msgid "Position:"
 msgstr "Position:"
 
 #: panel/controls_dialog.c:155
-#, fuzzy
 msgid "Item properties"
-msgstr "/_Eigenschaften..."
+msgstr "Eigenschaften"
 
 #: panel/controls_dialog.c:207 panel/controls.c:695
-#, fuzzy
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Das Entfernen eines Objektes entfernt auch sein Popup Menü.\n"
-"\n"
-"Wollen sie das Objekt entfernen?"
+msgstr "Das Entfernen des Objektes entfernt auch sein Menü."
 
 #: panel/item_dialog.c:128 panel/item_dialog.c:550
 msgid "Select command"
@@ -81,9 +76,8 @@ msgstr "Menüobjekt verändern"
 
 #. add buttons
 #: panel/item_dialog.c:1188 panel/controls.c:806
-#, fuzzy
 msgid "_Remove"
-msgstr "/_Entfernen"
+msgstr "_Entfernen"
 
 #: panel/item_dialog.c:1200 panel/item.c:638
 msgid "Launcher"
@@ -106,7 +100,7 @@ msgid "Are you sure you want to exit?"
 msgstr "Sind Sie sicher, dass Sie Xfce beenden wollen?"
 
 #: panel/main.c:332
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -118,34 +112,37 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"%s, Version %s\n"
+"\n"
+"Das Xfce Panel\n"
+"Version %s\n"
+"\n"
 "Teil der Xfce Desktop Umgebung\n"
 "http://www.xfce.org\n"
+"\n"
+"Lizensiert unter GNU GPL.\n"
 
 #: panel/main.c:400
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: Erfolgreich ohne Sessionmanagement gestartet"
 
 #: panel/main.c:405
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: Erfolgreich mit Sessionmanagement gestartet"
 
 #: panel/controls.c:650 panel/controls.c:740
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "Konnte Panelobjekt \"%s\" nicht erzeugen."
 
 #: panel/controls.c:801 panel/panel.c:559
-#, fuzzy
 msgid "_Properties..."
-msgstr "/_Eigenschaften..."
+msgstr "_Eigenschaften..."
 
 #: panel/controls.c:815 panel/panel.c:549
-#, fuzzy
 msgid "Add _new item"
-msgstr "/Neues Objekt hinzufügen"
+msgstr "Neues _Objekt hinzufügen"
 
 #: panel/controls.c:1089
 msgid "This item has no configuration options"
@@ -157,28 +154,24 @@ msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
 #: panel/panel.c:564
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/_Über Xfce"
+msgstr "_Über Xfce"
 
 #: panel/panel.c:569
-#, fuzzy
 msgid "_Help"
-msgstr "/_Hilfe"
+msgstr "_Hilfe"
 
 #: panel/panel.c:578
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/_Desktop sperren"
+msgstr "_Desktop sperren"
 
 #: panel/panel.c:583
 msgid "_Restart"
-msgstr ""
+msgstr "_Neu starten"
 
 #: panel/panel.c:592
-#, fuzzy
 msgid "E_xit"
-msgstr "/B_eenden"
+msgstr "B_eenden"
 
 #: panel/icons.c:57
 msgid "Default"
@@ -254,7 +247,7 @@ msgstr "Groß"
 
 #: settings/xfce_settings_dialog.c:100
 msgid "Huge"
-msgstr ""
+msgstr "Riesig"
 
 #: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
@@ -294,7 +287,7 @@ msgstr "Popup Position"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Immer obenauf"
 
 #: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
@@ -321,9 +314,8 @@ msgstr "Verhalten"
 #. * %Y  : four digit year
 #.
 #: plugins/clock/clock.c:202
-#, fuzzy
 msgid "%A, %d %B %Y"
-msgstr "%A, %-d %B %Y"
+msgstr "%A, %d %B %Y"
 
 #: plugins/clock/clock.c:423
 msgid "Clock type:"
@@ -367,11 +359,11 @@ msgstr "Xfce Uhr"
 
 #: plugins/pager/pager.c:309
 msgid "Number of rows:"
-msgstr ""
+msgstr "Anzahl der Zeilen:"
 
 #: plugins/pager/pager.c:311
 msgid "Number of columns:"
-msgstr ""
+msgstr "Anzahl der Spalten:"
 
 #: plugins/pager/pager.c:356
 msgid "Graphical pager"
@@ -425,9 +417,8 @@ msgstr "Button 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:577
-#, fuzzy
 msgid "_Hide"
-msgstr "/_Hilfe"
+msgstr "_Hilfe"
 
 #: plugins/systembuttons/systembuttons.c:612
 msgid "System buttons"
@@ -442,14 +433,12 @@ msgid "Mail box:"
 msgstr "Mailbox:"
 
 #: plugins/mailcheck/mailcheck.c:824
-#, fuzzy
 msgid "New mail command:"
-msgstr "Mailkommando"
+msgstr "Neues Mailkommando"
 
 #: plugins/mailcheck/mailcheck.c:838
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Kommando, welches beim Klicken auf das Panel ausgeführt wird"
+msgstr "Dieses Kommando bei neuer Mail ausführen"
 
 #: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
@@ -460,69 +449,5 @@ msgid "Interval (sec):"
 msgstr "Intervall (Sek.):"
 
 #: plugins/mailcheck/mailcheck.c:961
-#, fuzzy
 msgid "Mail checker"
-msgstr "Mailcheck"
-
-#~ msgid "Remove"
-#~ msgstr "Entfernen"
-
-#~ msgid "Show two buttons:"
-#~ msgstr "Zeige zwei Buttons"
-
-#~ msgid "Change item"
-#~ msgstr "Objekt verändern"
-
-#~ msgid "Menu:"
-#~ msgstr "Menü:"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Xfce Panel"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/Neues Objekt hinzufügen"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/_Eigenschaften..."
-
-#~ msgid "Select icon"
-#~ msgstr "Icon auswählen"
-
-#~ msgid "Icon:"
-#~ msgstr "Icon:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Icon Vorschau"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "Ihr Fenstermanager scheint nicht die neuen Fenstermanager-Hints, wie sie "
-#~ "auf http://www.freedesktop.org definiert sind, zu unterstützen. \n"
-#~ "Einige Funktionen von Xfce könnten nicht wie erwartetet arbeiten"
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/_Einstellungsmanager"
-
-#~ msgid "Tiny"
-#~ msgstr "Sehr klein"
-
-#~ msgid "Icon theme:"
-#~ msgstr "Icon Theme"
-
-#~ msgid "Panel layer:"
-#~ msgstr "Panelebene"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Center the panel:"
-#~ msgstr "Panel zentrieren"
-
-#~ msgid "Set"
-#~ msgstr "Setzen"
-
-#~ msgid "Position"
-#~ msgstr "Position"
+msgstr "Mailchecker"
