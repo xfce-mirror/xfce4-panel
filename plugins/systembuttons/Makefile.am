@@ -1,4 +1,4 @@
-plugindir = $(pkglibdir)/plugins
+plugindir = $(pkglibdir)/panel-plugins
 
 plugin_LTLIBRARIES = libsystembuttons.la
 

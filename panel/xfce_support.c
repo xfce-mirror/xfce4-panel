@@ -183,15 +183,15 @@ get_plugin_dirs (void)
     {
         dirs = g_new (gchar *, 2);
 
-        dirs[0] = g_build_filename (LIBDIR, "plugins", NULL);
+        dirs[0] = g_build_filename (LIBDIR, "panel-plugins", NULL);
         dirs[1] = NULL;
     }
     else
     {
         dirs = g_new (gchar *, 3);
 
-        dirs[0] = xfce_get_userfile ("plugins", NULL);
-        dirs[1] = g_build_filename (LIBDIR, "plugins", NULL);
+        dirs[0] = xfce_get_userfile ("panel-plugins", NULL);
+        dirs[1] = g_build_filename (LIBDIR, "panel-plugins", NULL);
         dirs[2] = NULL;
     }
 

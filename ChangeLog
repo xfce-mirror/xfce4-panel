@@ -1,3 +1,225 @@
+2003-05-02 10:05  huysmans
+
+	* panel/: controls_dialog.c, groups.c, groups.h: only popup warning
+	dialog about subpanels being removed when not empty
+
+2003-05-01 07:55  huysmans
+
+	* po/pl.gmo: Add missing gmo files
+
+2003-04-30 19:34  bmeurer
+
+	* configure, configure.ac, panel/xfce4-panel-1.0.pc.in: Added
+	themedir variable to pkg-config file and increased version to
+	0.10.2
+
+2003-04-30 14:27  huysmans
+
+	* doc/: html/panel-settings.html, images/panel-settings.png,
+	xml/xfce4-panel.xml: Add autohide feature to docs
+
+2003-04-30 13:37  huysmans
+
+	* panel/: main.c, mcs_client.c, panel.c: Use move handler signal to
+	properly keep the position up-to-date
+
+2003-04-27 22:08  bmeurer
+
+	* configure, configure.ac, po/pl.po: Added polish translations.
+
+2003-04-26 23:23  bmeurer
+
+	* aclocal.m4, configure: Autotools update.
+
+2003-04-26 23:16  bmeurer
+
+	* m4/depends.m4, configure.ac: Updated BM_DEPEND_CHECK.
+
+2003-04-26 13:53  bmeurer
+
+	* m4/debug.m4: Fixed a stupid typo.
+
+2003-04-25 21:00  huysmans
+
+	* plugins/mailcheck/mailcheck.c: Fix startup notification setting
+
+2003-04-25 20:48  bmeurer
+
+	* configure, configure.ac: xfce-mcs-manager version was changed to
+	0.1.0.
+
+2003-04-25 20:33  bmeurer
+
+	* aclocal.m4, configure, configure.ac, ltcf-c.sh, ltconfig,
+	ltmain.sh, panel/Makefile.am, panel/Makefile.in,
+	panel/item_dialog.c, panel/item_dialog.h: Export more functions
+	from item*.c
+
+2003-04-25 19:47  huysmans
+
+	* po/: de.gmo, fi.gmo, fi.po: Update finnish translations
+
+2003-04-25 11:53  bmeurer
+
+	* m4/depends.m4: Updated depends.m4 and added macro for use with
+	panel plugins. Updated libxfce4util to install the common m4 files
+	into $(datadir)/xfce4/m4.
+
+2003-04-25 11:23  bmeurer
+
+	* po/de.po: German translation. Provided by Moritz Heiber.
+
+2003-04-24 11:52  huysmans
+
+	* aclocal.m4, configure, ltcf-c.sh, ltconfig, ltmain.sh,
+	icons/Makefile.am, icons/Makefile.in, icons/diag_icon.xpm,
+	icons/menu_icon.xpm, icons/xfce4-panel-icon.h,
+	icons/xfce4-panel.png, icons/xfce_icon.xpm, panel/icons.c,
+	panel/icons.h, panel/panel.c, panel/popup.c,
+	settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c:
+	New panel icon
+
+2003-04-23 14:25  huysmans
+
+	* panel/main.c: Fix signal handling - gtk mainloop interaction
+
+2003-04-21 22:48  huysmans
+
+	* themes/FreeIcons/minipower.png: Use Curve exit icon instead of
+	confusing gear
+
+2003-04-21 20:52  bmeurer
+
+	* AUTHORS, Makefile.am, Makefile.in, NOTES, aclocal.m4, configure,
+	configure.ac, ltcf-c.sh, ltconfig, ltmain.sh, panel/Makefile.am,
+	panel/Makefile.in, panel/controls.h, panel/controls_dialog.h,
+	panel/groups.h, panel/icons.h, panel/item.h, panel/item_dialog.h,
+	panel/panel.h, panel/plugins.h, panel/popup.h, panel/settings.h,
+	panel/xfce.h, panel/xfce4-panel-1.0.pc.in,
+	plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	plugins/clock/clock.c, plugins/mailcheck/Makefile.am,
+	plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
+	plugins/pager/Makefile.am, plugins/pager/Makefile.in,
+	plugins/pager/pager.c, plugins/switcher/Makefile.am,
+	plugins/switcher/Makefile.in, plugins/switcher/switcher.c,
+	plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in,
+	plugins/systembuttons/systembuttons.c, settings/Makefile.am,
+	settings/Makefile.in, settings/xfce_settings_plugin.c,
+	themes/FreeIcons/Makefile.am, themes/FreeIcons/Makefile.in: Its now
+	possible to write panel plugins outside the panel. See the NOTES
+	file for details and enjoy writing new panel plugins.
+
+2003-04-21 17:46  huysmans
+
+	* themes/FreeIcons/: Makefile.am, Makefile.in: Really rename the
+	theme
+
+2003-04-21 16:26  huysmans
+
+	* configure, configure.ac, themes/Makefile.am, themes/Makefile.in,
+	themes/FreeIcons/Makefile.am, themes/FreeIcons/Makefile.in,
+	themes/FreeIcons/README, themes/FreeIcons/edit.png,
+	themes/FreeIcons/file1.png, themes/FreeIcons/file2.png,
+	themes/FreeIcons/games.png, themes/FreeIcons/man.png,
+	themes/FreeIcons/miniinfo.png, themes/FreeIcons/minilock.png,
+	themes/FreeIcons/minipalet.png, themes/FreeIcons/minipower.png,
+	themes/FreeIcons/multimedia.png, themes/FreeIcons/network.png,
+	themes/FreeIcons/newmail.png, themes/FreeIcons/nomail.png,
+	themes/FreeIcons/oldmail.png, themes/FreeIcons/paint.png,
+	themes/FreeIcons/print.png, themes/FreeIcons/schedule.png,
+	themes/FreeIcons/sound.png, themes/FreeIcons/terminal.png,
+	themes/FreeIcons/unknown.png: Rename Carillon to FreeIcons
+
+2003-04-21 09:42  huysmans
+
+	* aclocal.m4, configure, configure.ac, ltcf-c.sh, ltconfig,
+	ltmain.sh, po/de.gmo, po/de.po, po/es.gmo, po/es.po, po/es_MX.gmo,
+	po/es_MX.po, po/fi.gmo, po/fi.po, po/fr.gmo, po/fr.po, po/ja.gmo,
+	po/ja.po, po/nl.gmo, po/nl.po, po/xfce4-panel.pot,
+	themes/Makefile.am, themes/Makefile.in: Add Carillon icon theme
+	(FreeIcons by Tomasz Mielnik)
+
+2003-04-20 22:51  bmeurer
+
+	* Makefile.in, configure, configure.ac, doc/Makefile.in,
+	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.am, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.am, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.am, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in, settings/Makefile.am,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Some autotools cleanups.
+
+2003-04-20 13:16  huysmans
+
+	* panel/: controls.c, panel.c: unhide panel when adding new items
+
+2003-04-20 12:30  huysmans
+
+	* panel/panel.c: more autohide tweaks
+
+2003-04-20 11:46  huysmans
+
+	* panel/panel.c: autohide related tweaks
+
+2003-04-20 11:38  huysmans
+
+	* panel/panel.c: autohide related tweaks
+
+2003-04-19 23:33  bmeurer
+
+	* plugins/mailcheck/mailcheck.c: The previous change was not ment
+	to be commited :-)
+
+2003-04-19 23:31  bmeurer
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	doc/Makefile.in, doc/html/Makefile.in, doc/images/Makefile.in,
+	doc/xml/Makefile.in, icons/Makefile.in, m4/X11.m4, m4/rpath.m4,
+	panel/Makefile.am, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/mailcheck/mailcheck.c, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	settings/Makefile.am, settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Added system tray support to libxfcegui4
+	and frontend to xftaskbar4.  Lots of cleanups in the autotools
+	stuff.
+
+2003-04-18 23:17  huysmans
+
+	* po/: POTFILES.in, de.gmo, de.po, es.gmo, es.po, es_MX.gmo,
+	es_MX.po, fi.gmo, fi.po, fr.gmo, fr.po, ja.gmo, ja.po, nl.gmo,
+	nl.po, xfce4-panel.pot: Update file list. i18n still broken
+
+2003-04-18 16:40  huysmans
+
+	* panel/panel.c: unhide when dragging something over the collapsed
+	panel
+
+2003-04-18 11:22  huysmans
+
+	* panel/: controls_dialog.c, panel.c: This is the real fix (tm) ...
+	I think
+
+2003-04-18 11:00  huysmans
+
+	* panel/panel.c: autohide, position and reorientation ...
+
+2003-04-18 10:56  huysmans
+
+	* ChangeLog, panel/controls_dialog.c, panel/icons.c, panel/icons.h,
+	panel/main.c, panel/panel.c, po/de.gmo, po/es.gmo, po/es_MX.gmo,
+	po/fi.gmo, po/fr.gmo, po/ja.gmo, po/nl.gmo: Will this (finally) fix
+	the autohide <-> positioning problems?
+
 2003-04-16 23:06  huysmans
 
 	* panel/main.c: Bug fix 2
