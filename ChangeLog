@@ -1,3 +1,15 @@
+2003-01-30 14:32  huysmans
+
+	* panel/: Makefile.am, Makefile.in, handle.c, handle.h, info.h,
+	panel.c: Remove handle.[ch]. Code moved to panel.c.
+
+2003-01-30 12:53  huysmans
+
+	* ChangeLog, panel/Makefile.am, panel/Makefile.in,
+	panel/callbacks.c, panel/callbacks.h, panel/groups.c,
+	panel/handle.c, panel/item.c, panel/popup.c, panel/popup.h: Remove
+	callbacks.[ch]. Last remaining functions moved to popup.c
+
 2003-01-29 16:40  huysmans
 
 	* README, TODO, panel/callbacks.c, panel/callbacks.h,

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 1.0.0\n"
-"POT-Creation-Date: 2003-01-29 13:10+0100\n"
+"POT-Creation-Date: 2003-01-30 14:40+0100\n"
 "PO-Revision-Date: 2003-01-23 23:59+0100\n"
 "Last-Translator: Olivier Fourdan <fourdan@xfce.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 msgid "/_Remove"
 msgstr "/_Supprimer"
 
-#: panel/controls.c:309 panel/handle.c:82
+#: panel/controls.c:309 panel/panel.c:111
 msgid "/Add _new item"
 msgstr "/Ajouter une _nouvelle entrée"
 
@@ -45,12 +45,12 @@ msgstr "Cette entrée n'a pas d'option de configuration"
 msgid "Change item"
 msgstr "Modifier l'entrée"
 
-#: panel/controls_dialog.c:252 panel/item_dialog.c:942
+#: panel/controls_dialog.c:252 panel/item_dialog.c:858
 #: settings/xfce_settings_dialog.c:689
 msgid "_Revert"
 msgstr "_Revenir"
 
-#: panel/controls_dialog.c:256 panel/item_dialog.c:947
+#: panel/controls_dialog.c:256 panel/item_dialog.c:863
 #: settings/xfce_settings_dialog.c:694
 msgid "_Done"
 msgstr "_Terminé"
@@ -59,37 +59,9 @@ msgstr "_Terminé"
 msgid "Type:"
 msgstr "Type:"
 
-#: panel/controls_dialog.c:294 panel/item_dialog.c:515
+#: panel/controls_dialog.c:294 panel/item_dialog.c:507
 msgid "Position:"
 msgstr "Position:"
-
-#: panel/handle.c:80
-msgid "/XFce Panel"
-msgstr "/Panneau XFce"
-
-#: panel/handle.c:84
-msgid "/_Panel settings"
-msgstr "/_Paramètres du panneau"
-
-#: panel/handle.c:85
-msgid "/_Settings manager"
-msgstr "/Gestionnaire de _paramètres"
-
-#: panel/handle.c:87
-msgid "/_About XFce"
-msgstr "/_A propos de XFce"
-
-#: panel/handle.c:88
-msgid "/_Help"
-msgstr "/_Aide"
-
-#: panel/handle.c:90
-msgid "/_Lock screen"
-msgstr "/_Vérouiller l'écran"
-
-#: panel/handle.c:91
-msgid "/E_xit"
-msgstr "/Sor_tir"
 
 #: panel/icons.c:65
 msgid "Default"
@@ -164,61 +136,69 @@ msgstr "Crédits"
 msgid "License"
 msgstr "License"
 
-#: panel/item.c:76 panel/popup.c:238
+#: panel/item.c:290
 msgid "Click mouse button 3 to change item"
 msgstr "Cliquer avec le bouton 3 pour modifier une entrée"
 
-#: panel/item.c:212
+#: panel/item.c:309
+msgid "Add launcher"
+msgstr "Ajouter un lanceur"
+
+#: panel/item.c:313
+msgid "Add new item"
+msgstr "Ajouter une entrée"
+
+#: panel/item.c:430
 msgid "Launcher"
 msgstr "Lanceur"
 
-#: panel/item_dialog.c:255
+#: panel/item_dialog.c:247
 msgid "Other Icon"
 msgstr "Autre icône"
 
-#: panel/item_dialog.c:279
+#: panel/item_dialog.c:271
 msgid "Select icon"
 msgstr "Sélection de l'icône"
 
-#: panel/item_dialog.c:314
+#: panel/item_dialog.c:306
 msgid "Icon:"
 msgstr "Icône :"
 
-#: panel/item_dialog.c:358
+#: panel/item_dialog.c:350
 msgid "Select command"
 msgstr "Sélection de la commande :"
 
-#: panel/item_dialog.c:381
+#: panel/item_dialog.c:373
 msgid "Command:"
 msgstr "Commande :"
 
-#: panel/item_dialog.c:409 plugins/mailcheck/mailcheck.c:574
+#: panel/item_dialog.c:401 plugins/mailcheck/mailcheck.c:574
 msgid "Run in _terminal"
 msgstr "Exécuter dans un _terminal"
 
-#: panel/item_dialog.c:431
+#: panel/item_dialog.c:423
 msgid "Caption:"
 msgstr "Légende :"
 
-#: panel/item_dialog.c:469
+#: panel/item_dialog.c:461
 msgid "Tooltip:"
 msgstr "Bulle d'aide :"
 
-#: panel/item_dialog.c:604
+#: panel/item_dialog.c:596
 msgid "Icon Preview"
 msgstr "Prévisualisation d'icône"
 
-#: panel/item_dialog.c:608
+#: panel/item_dialog.c:600
 msgid "Drag file onto this frame to change the icon"
 msgstr "Déposer un fichier dans cette zone pour changer l'icône"
 
 #. create dialog
-#: panel/item_dialog.c:929
+#: panel/item_dialog.c:845
 msgid "Change menu item"
 msgstr "Changer une entrée de menu"
 
 #. add buttons
-#: panel/item_dialog.c:937
+#: panel/item_dialog.c:853
 msgid "Remove"
 msgstr "Supprimer"
 
@@ -251,19 +231,39 @@ msgstr ""
 msgid "Settings manager not available"
 msgstr "Gestionnaire de paramètres non disponible"
 
-#: panel/panel.c:87 settings/xfce_settings_plugin.c:66
+#: panel/panel.c:109
+msgid "/XFce Panel"
+msgstr "/Panneau XFce"
+
+#: panel/panel.c:113
+msgid "/_Panel settings"
+msgstr "/_Paramètres du panneau"
+
+#: panel/panel.c:114
+msgid "/_Settings manager"
+msgstr "/Gestionnaire de _paramètres"
+
+#: panel/panel.c:116
+msgid "/_About XFce"
+msgstr "/_A propos de XFce"
+
+#: panel/panel.c:117
+msgid "/_Help"
+msgstr "/_Aide"
+
+#: panel/panel.c:119
+msgid "/_Lock screen"
+msgstr "/_Vérouiller l'écran"
+
+#: panel/panel.c:120
+msgid "/E_xit"
+msgstr "/Sor_tir"
+
+#: panel/panel.c:228 settings/xfce_settings_plugin.c:66
 msgid "XFce Panel"
 msgstr "Panneau XFce"
 
-#: panel/popup.c:196
-msgid "Add launcher"
-msgstr "Ajouter un lanceur"
-
-#: panel/popup.c:200
-msgid "Add new item"
-msgstr "Ajouter une entrée"
-
-#: panel/popup.c:265
+#: panel/popup.c:237
 msgid "Menu"
 msgstr "Menu"
 
