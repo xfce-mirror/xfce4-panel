@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-27 15:46+0100\n"
-"PO-Revision-Date: 2004-09-28 01:05-0700\n"
+"POT-Creation-Date: 2004-10-29 11:29+0200\n"
+"PO-Revision-Date: 2005-01-24 16:02+0100\n"
 "Last-Translator: Yongtao Yang <yongtao.yang@telia.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:551
+#: panel/xfce_support.c:516
 msgid "Select file"
 msgstr "选择文件"
 
@@ -24,34 +24,33 @@ msgstr "选择文件"
 msgid "No data was found. The panel will be empty."
 msgstr "未发现数据，面板内容将是空的。"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
-#: settings/xftaskbar_plugin.c:393
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "位置："
 
 #: panel/controls_dialog.c:155
 msgid "Item properties"
-msgstr "条目属性(_P)..."
+msgstr "条目属性"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
+#: panel/controls_dialog.c:209 panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
 msgstr "删除一个条目将同时删除其弹出菜单。"
 
-#: panel/item_dialog.c:124
+#: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
 msgstr "选择命令"
 
-#: panel/item_dialog.c:261
+#: panel/item_dialog.c:264
 msgid "Command:"
 msgstr "命令："
 
 #: panel/item_dialog.c:307
 msgid "Run in _terminal"
-msgstr "在终端中运行(_t)"
+msgstr "在终端中运行(_T)"
 
 #: panel/item_dialog.c:325
 msgid "Use startup _notification"
-msgstr "使用启动提示(_n)"
+msgstr "使用启动提示(_N)"
 
 #: panel/item_dialog.c:511
 msgid "Other Icon"
@@ -61,40 +60,40 @@ msgstr "其它图标"
 msgid "Drag file onto this frame to change the icon"
 msgstr "拖拽文件到该框架中以改变图标"
 
-#: panel/item_dialog.c:934
+#: panel/item_dialog.c:917
 msgid "Caption:"
 msgstr "标题:"
 
-#: panel/item_dialog.c:963
+#: panel/item_dialog.c:946
 msgid "Tooltip:"
 msgstr "工具提示:"
 
-#: panel/item_dialog.c:991
+#: panel/item_dialog.c:974
 msgid "Attach menu to launcher"
 msgstr "将菜单附加到启动器"
 
-#: panel/item_dialog.c:1211
+#: panel/item_dialog.c:1194
 msgid "Change menu item"
 msgstr "改变菜单条目"
 
 #. add buttons
-#: panel/item_dialog.c:1217 panel/controls.c:748
+#: panel/item_dialog.c:1200 panel/controls.c:728
 msgid "_Remove"
 msgstr "删除(_R)"
 
-#: panel/item_dialog.c:1229 panel/item.c:738
+#: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
 msgstr "启动器"
 
-#: panel/item.c:566
+#: panel/item.c:496
 msgid "Click mouse button 3 to change item"
 msgstr "点击鼠标右键以改变条目"
 
-#: panel/item.c:591
+#: panel/item.c:521
 msgid "Add launcher"
 msgstr "添加启动器"
 
-#: panel/item.c:596
+#: panel/item.c:526
 msgid "Add new item"
 msgstr "添加新条目"
 
@@ -102,7 +101,7 @@ msgstr "添加新条目"
 msgid "Are you sure you want to exit?"
 msgstr "你确定要退出吗?"
 
-#: panel/main.c:402
+#: panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -125,55 +124,55 @@ msgstr ""
 " 以 GNU GPL 许可证发布。\n"
 "\n"
 
-#: panel/main.c:489
+#: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s：不带会话管理方式启动成功"
 
-#: panel/main.c:494
+#: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s：带会话管理方式启动成功"
 
-#: panel/controls.c:666
+#: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "无法创建条目 “%s ”。"
 
-#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
+#: panel/controls.c:723 panel/panel.c:585
 msgid "_Properties..."
 msgstr "属性(_P)..."
 
-#: panel/controls.c:757 panel/panel.c:665
+#: panel/controls.c:737 panel/panel.c:575
 msgid "Add _new item"
 msgstr "添加新条目(_N)"
 
-#: panel/controls.c:1040
+#: panel/controls.c:1020
 msgid "This item has no configuration options"
 msgstr "该条目没有配置选项"
 
-#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:450
+#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:449
 msgid "Xfce Panel"
 msgstr "Xfce面板"
 
-#: panel/panel.c:680
+#: panel/panel.c:590
 msgid "_About Xfce"
 msgstr "关于Xfce(_A)"
 
-#: panel/panel.c:685
+#: panel/panel.c:595
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: panel/panel.c:694
+#: panel/panel.c:604
 msgid "_Lock screen"
 msgstr "锁住屏幕(_L)"
 
-#: panel/panel.c:699
+#: panel/panel.c:609
 msgid "_Restart"
 msgstr "重新启动(_R)"
 
-#: panel/panel.c:708 iconbox/iconbox.c:627
+#: panel/panel.c:618
 msgid "E_xit"
 msgstr "退出(_X)"
 
@@ -237,104 +236,55 @@ msgstr "配置管理器不可用"
 msgid "Menu"
 msgstr "菜单"
 
-#: taskbar/xftaskbar.c:510
-msgid "There is already a system tray running on this screen"
-msgstr "本屏幕已经有另外一个系统托盘正在运行"
-
-#: taskbar/xftaskbar.c:516
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "无法注册系统托盘: %s"
-
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %d  : day of the month
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: taskbar/xftaskbar.c:612
-msgid "%A %d %B %Y"
-msgstr ""
-
-#: taskbar/xftaskbar.c:633
-msgid "%H:%M"
-msgstr ""
-
-#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
-#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
-msgid "Taskbar"
-msgstr "任务栏"
-
-#: taskbar/xftaskbar.c:1022
-msgid "Cannot create MCS client channel"
-msgstr "无法创建 MCS 客户通道"
-
-#: iconbox/iconbox.c:567
-msgid "Xfce Iconbox"
-msgstr ""
-
-#: iconbox/iconbox.c:575
-msgid "Developer"
-msgstr ""
-
-#: iconbox/iconbox.c:611
-#, fuzzy
-msgid "_About"
-msgstr "关于Xfce(_A)"
-
-#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
-#: settings/xftaskbar_plugin.c:511
+#: settings/xfce_settings_dialog.c:88
 msgid "Small"
 msgstr "小"
 
-#: settings/xfce_settings_dialog.c:91
+#: settings/xfce_settings_dialog.c:92
 msgid "Medium"
 msgstr "中"
 
-#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
-#: settings/xftaskbar_plugin.c:532
+#: settings/xfce_settings_dialog.c:96
 msgid "Large"
 msgstr "大"
 
-#: settings/xfce_settings_dialog.c:99
+#: settings/xfce_settings_dialog.c:100
 msgid "Huge"
 msgstr "巨大"
 
-#: settings/xfce_settings_dialog.c:175
+#: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
 msgstr "水平"
 
-#: settings/xfce_settings_dialog.c:179
+#: settings/xfce_settings_dialog.c:180
 msgid "Vertical"
 msgstr "竖直"
 
-#: settings/xfce_settings_dialog.c:221
+#: settings/xfce_settings_dialog.c:222
 msgid "Left"
 msgstr "左侧"
 
-#: settings/xfce_settings_dialog.c:225
+#: settings/xfce_settings_dialog.c:226
 msgid "Right"
 msgstr "右侧"
 
-#: settings/xfce_settings_dialog.c:229
+#: settings/xfce_settings_dialog.c:230
 msgid "Top"
 msgstr "顶部"
 
-#: settings/xfce_settings_dialog.c:233
+#: settings/xfce_settings_dialog.c:234
 msgid "Bottom"
 msgstr "底部"
 
-#: settings/xfce_settings_dialog.c:268
+#: settings/xfce_settings_dialog.c:269
 msgid "Panel size:"
 msgstr "面板大小："
 
-#: settings/xfce_settings_dialog.c:284
+#: settings/xfce_settings_dialog.c:285
 msgid "Panel orientation:"
 msgstr "面板方向："
 
-#: settings/xfce_settings_dialog.c:303
+#: settings/xfce_settings_dialog.c:304
 msgid "Popup position:"
 msgstr "弹出菜单位置："
 
@@ -342,158 +292,21 @@ msgstr "弹出菜单位置："
 msgid "Always on top:"
 msgstr "总是在顶层："
 
-#: settings/xfce_settings_dialog.c:397
+#: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
 msgstr "自动隐藏："
 
-#: settings/xfce_settings_dialog.c:467
+#: settings/xfce_settings_dialog.c:466
 msgid "Xfce Panel Settings"
 msgstr "Xfce面板配置"
 
-#: settings/xfce_settings_dialog.c:477
+#: settings/xfce_settings_dialog.c:476
 msgid "Appearance"
 msgstr "外观"
 
-#. show only hidden
-#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
+#: settings/xfce_settings_dialog.c:491
 msgid "Behaviour"
 msgstr "行为"
-
-#. position
-#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
-msgid "Position"
-msgstr "位置"
-
-#: settings/xftaskbar_plugin.c:399
-msgid "_Top"
-msgstr "顶端(_T)"
-
-#: settings/xftaskbar_plugin.c:409
-msgid "_Bottom"
-msgstr "底部(_B)"
-
-#: settings/xftaskbar_plugin.c:422
-#, fuzzy
-msgid "Alignment:"
-msgstr "对齐方式"
-
-#: settings/xftaskbar_plugin.c:429
-msgid "_Left"
-msgstr "左侧(_L)"
-
-#: settings/xftaskbar_plugin.c:439
-msgid "_Center"
-msgstr "居中(_C)"
-
-#: settings/xftaskbar_plugin.c:447
-msgid "_Right"
-msgstr "右侧(_R)"
-
-#. size
-#: settings/xftaskbar_plugin.c:464
-msgid "Size"
-msgstr "尺寸"
-
-#: settings/xftaskbar_plugin.c:474
-#, fuzzy
-msgid "Height:"
-msgstr "高度 :"
-
-#: settings/xftaskbar_plugin.c:505
-msgid "Width:"
-msgstr "宽度:"
-
-#: settings/xftaskbar_plugin.c:541
-msgid "_Shrink to fit"
-msgstr ""
-
-#. Autohide
-#: settings/xftaskbar_plugin.c:561
-msgid "Autohide"
-msgstr "自动隐藏"
-
-#: settings/xftaskbar_plugin.c:566
-msgid "Auto _hide taskbar"
-msgstr "任务栏自动隐藏(_h)"
-
-#. tasklist
-#: settings/xftaskbar_plugin.c:583
-#, fuzzy
-msgid "Tasklist"
-msgstr "任务"
-
-#: settings/xftaskbar_plugin.c:592
-msgid "Show tasklist"
-msgstr ""
-
-#: settings/xftaskbar_plugin.c:604
-msgid "Show tasks from _all workspaces"
-msgstr "显示所有工作区的任务(_a)"
-
-#: settings/xftaskbar_plugin.c:613
-msgid "Always _group tasks"
-msgstr "总是对任务分组(_g)"
-
-#: settings/xftaskbar_plugin.c:621
-msgid "Show application _names"
-msgstr "显示应用程序名称(_n)"
-
-#. pager
-#: settings/xftaskbar_plugin.c:629
-msgid "Pager"
-msgstr "页面切换器"
-
-#: settings/xftaskbar_plugin.c:634
-msgid "Show _pager in taskbar"
-msgstr "在任务栏中显示页面切换器(_p)"
-
-#. status area
-#: settings/xftaskbar_plugin.c:641
-msgid "Status area"
-msgstr ""
-
-#: settings/xftaskbar_plugin.c:650
-#, fuzzy
-msgid "Show _notification icons"
-msgstr "显示应用程序名称(_n)"
-
-#: settings/xftaskbar_plugin.c:657
-msgid "Show _time"
-msgstr ""
-
-#: settings/xftaskbar_plugin.c:718
-msgid "General"
-msgstr ""
-
-#: settings/xftaskbar_plugin.c:729
-msgid "Components"
-msgstr ""
-
-#: settings/iconbox_plugin.c:629
-msgid "Icon size"
-msgstr ""
-
-#: settings/iconbox_plugin.c:691
-#, fuzzy
-msgid "_Show only minimized applications"
-msgstr "显示应用程序名称(_n)"
-
-#: settings/iconbox_plugin.c:754
-msgid "Transparency"
-msgstr ""
-
-#: settings/iconbox_plugin.c:762
-msgid "None"
-msgstr ""
-
-#: settings/iconbox_plugin.c:777
-msgid "Full"
-msgstr ""
-
-#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
-#: settings/iconbox_plugin.c:992
-msgid "Iconbox"
-msgstr ""
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -547,15 +360,15 @@ msgstr "显示秒:"
 msgid "Xfce Clock"
 msgstr "Xfce时钟"
 
-#: plugins/pager/pager.c:314
+#: plugins/pager/pager.c:311
 msgid "Number of rows:"
 msgstr "行数："
 
-#: plugins/pager/pager.c:316
+#: plugins/pager/pager.c:313
 msgid "Number of columns:"
 msgstr "列数："
 
-#: plugins/pager/pager.c:373
+#: plugins/pager/pager.c:360
 msgid "Graphical pager"
 msgstr "图形化的窗口切换器"
 
@@ -618,74 +431,26 @@ msgstr "系统按钮"
 msgid "Separator"
 msgstr "隔离符"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:787
 msgid "Mail box:"
 msgstr "邮件箱:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: plugins/mailcheck/mailcheck.c:824
 msgid "New mail command:"
 msgstr "新邮件命令:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Command to run when new mail arrives"
 msgstr "当新邮件到达时所执行的命令"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
 msgstr "在面板上点击该按钮时所执行的命令"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Interval (sec):"
 msgstr "间隔(秒):"
 
-#: plugins/mailcheck/mailcheck.c:1016
+#: plugins/mailcheck/mailcheck.c:965
 msgid "Mail checker"
 msgstr "邮件检查程序"
-
-#: settings/xfce-panel-settings.desktop.in.h:1
-#, fuzzy
-msgid "Panel Settings"
-msgstr "Xfce面板配置"
-
-#: settings/xfce-panel-settings.desktop.in.h:2
-#, fuzzy
-msgid "Xfce 4 Panel Settings"
-msgstr "Xfce面板配置"
-
-#: settings/xfce-iconbox-settings.desktop.in.h:1
-#, fuzzy
-msgid "Iconbox Settings"
-msgstr "Xfce面板配置"
-
-#: settings/xfce-iconbox-settings.desktop.in.h:2
-#, fuzzy
-msgid "Xfce 4 Iconbox Settings"
-msgstr "Xfce面板配置"
-
-#: settings/xfce-taskbar-settings.desktop.in.h:1
-#, fuzzy
-msgid "Taskbar Settings"
-msgstr "任务栏"
-
-#: settings/xfce-taskbar-settings.desktop.in.h:2
-#, fuzzy
-msgid "Xfce 4 Taskbar Settings"
-msgstr "Xfce面板配置"
-
-#~ msgid "Notification area"
-#~ msgstr "系统提示区"
-
-#~ msgid "Show _system tray in taskbar"
-#~ msgstr "在任务拦中显示系统托盘(_s)"
-
-#~ msgid "Cannot get initial style"
-#~ msgstr "无法获取初始风格"
-
-#~ msgid "This should not happen"
-#~ msgstr "不应发生此种情况"
-
-#~ msgid "Cannot get default screen\n"
-#~ msgstr "无法得到默认屏幕\n"
-
-#~ msgid "Cannot connect to session manager"
-#~ msgstr "无法连接到会话管理器"
