@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"POT-Creation-Date: 2003-08-26 08:23+0200\n"
+"POT-Creation-Date: 2003-09-10 08:40+0200\n"
 "PO-Revision-Date: 2003-09-03 21:35+0300\n"
 "Last-Translator: Dan Korostelev <daniel@ats.energo.ru>\n"
 "Language-Team: Russian <daniel@ats.energo.ru>\n"
@@ -22,13 +22,11 @@ msgstr "Выбор файла"
 msgid "Change item"
 msgstr "Изменение объекта"
 
-#: panel/controls_dialog.c:286
-#: panel/item_dialog.c:653
+#: panel/controls_dialog.c:286 panel/item_dialog.c:647
 msgid "Position:"
 msgstr "Позиция:"
 
-#: panel/controls_dialog.c:331
-#: panel/controls.c:272
+#: panel/controls_dialog.c:331 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -58,13 +56,11 @@ msgstr "Выбор программы"
 msgid "Command:"
 msgstr "Команда:"
 
-#: panel/item_dialog.c:498
-#: plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Выполнять в окне терминала"
 
-#: panel/item_dialog.c:503
-#: plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Использовать уведомление о запуске"
 
@@ -84,20 +80,20 @@ msgstr "Меню:"
 msgid "Attach menu to launcher"
 msgstr "Добавить подменю к обьекту"
 
-#: panel/item_dialog.c:748
+#: panel/item_dialog.c:738
 msgid "Icon Preview"
 msgstr "Просмотр значка"
 
-#: panel/item_dialog.c:752
+#: panel/item_dialog.c:742
 msgid "Drag file onto this frame to change the icon"
 msgstr "Перетащите сюда файл, чтобы изменить значок"
 
-#: panel/item_dialog.c:1034
+#: panel/item_dialog.c:931
 msgid "Change menu item"
 msgstr "Изменение элемента меню"
 
 #. add buttons
-#: panel/item_dialog.c:1037
+#: panel/item_dialog.c:934
 msgid "Remove"
 msgstr "Удалить"
 
@@ -134,19 +130,19 @@ msgstr ""
 
 #: panel/main.c:284
 msgid ""
-"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+"Your window manager does not seem to support the new window manager hints as "
+"defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Ваш менеджер окон не поддерживает новые возможности, определенные на http://www.freedesktop.org. \n"
+"Ваш менеджер окон не поддерживает новые возможности, определенные на http://"
+"www.freedesktop.org. \n"
 "Возможно некоторые возможности XFce не будут правильно работать."
 
-#: panel/controls.c:320
-#: panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/Добавить новый объект"
 
-#: panel/controls.c:322
-#: panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:125
 msgid "/_Properties..."
 msgstr "/Свойства..."
 
@@ -182,8 +178,7 @@ msgstr "/Блокировать экран"
 msgid "/E_xit"
 msgstr "/Выход"
 
-#: panel/panel.c:489
-#: settings/xfce_settings_plugin.c:82
+#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Панель XFce"
@@ -244,7 +239,7 @@ msgstr "Терминал"
 msgid "Settings manager not available"
 msgstr "Менеджер настроек недоступен"
 
-#: panel/popup.c:272
+#: panel/popup.c:263
 msgid "Menu"
 msgstr "Меню"
 
@@ -272,24 +267,20 @@ msgstr "Горизонтальное"
 msgid "Vertical"
 msgstr "Вертикальное"
 
-#: settings/xfce_settings_dialog.c:226
-#: settings/xfce_settings_dialog.c:456
+#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
 msgid "Left"
 msgstr "Слева"
 
-#: settings/xfce_settings_dialog.c:230
-#: settings/xfce_settings_dialog.c:457
+#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
 msgid "Right"
 msgstr "Справа"
 
-#: settings/xfce_settings_dialog.c:234
-#: settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
 #: settings/xfce_settings_dialog.c:511
 msgid "Top"
 msgstr "Сверху"
 
-#: settings/xfce_settings_dialog.c:238
-#: settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
 #: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
 msgstr "Снизу"
@@ -546,4 +537,3 @@ msgstr "Интервал (сек):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Проверка почты"
-
