@@ -76,6 +76,7 @@ struct _XfceItembarPrivate
     GdkWindow *event_window;
     GdkWindow *drag_highlight;
     int drop_index;
+    gboolean raised;
 };
 
 struct _XfceItembarChild
