@@ -87,8 +87,7 @@ static gboolean session_managed = FALSE;
 static void
 save_panel (void)
 {
-    if (!disable_user_config)
-	write_panel_config ();
+    write_final_panel_config ();
 }
 
 static void

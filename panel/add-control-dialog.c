@@ -150,6 +150,20 @@ treeview_dblclick (GtkWidget * tv, GdkEventButton * evt, ControlList * list)
 
     if (evt->type == GDK_2BUTTON_PRESS)
     {
+        GtkTreeSelection *sel;
+        GtkTreeModel *model;
+        GtkTreeIter iter;
+        ControlInfo *info;
+
+        sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (tv));
+        gtk_tree_selection_get_selected (sel, &model, &iter);
+
+        gtk_tree_model_get (model, &iter, 0, &info, -1);
+
+        if (!info->can_be_added)
+            return FALSE;
+            
+	gtk_widget_set_sensitive (list->add_button, FALSE);
 	dlg = gtk_widget_get_toplevel (tv);
         
 	if (dlg && GTK_WIDGET_TOPLEVEL (dlg))

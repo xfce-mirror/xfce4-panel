@@ -6,12 +6,16 @@ conf_DATA = 								\
 	contents.xml.ar							\
 	contents.xml.az							\
 	contents.xml.ca							\
+	contents.xml.da							\
 	contents.xml.eu							\
+	contents.xml.fi							\
 	contents.xml.fr							\
 	contents.xml.he							\
 	contents.xml.hu							\
 	contents.xml.it							\
+	contents.xml.ja							\
 	contents.xml.ko							\
+	contents.xml.lt							\
 	contents.xml.ms							\
 	contents.xml.nl							\
 	contents.xml.ro							\
@@ -19,6 +23,7 @@ conf_DATA = 								\
 	contents.xml.sk							\
 	contents.xml.tr							\
 	contents.xml.vi							\
+	contents.xml.zh_CN						\
 	contents.xml.zh_TW
 
 EXTRA_DIST = 								\

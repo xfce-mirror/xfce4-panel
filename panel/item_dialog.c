@@ -48,7 +48,7 @@
 #include "settings.h"
 
 #define BORDER          6
-#define PREVIEW_SIZE    48
+#define PREVIEW_SIZE    32
 
 typedef struct _ItemDialog ItemDialog;
 
@@ -86,13 +86,13 @@ static GtkTargetEntry entry[] = {
 
 static const char *keys[] = {
     "Name",
+    "GenericName",
     "Comment",
     "Icon",
     "Categories",
     "OnlyShowIn",
     "Exec",
-    "Terminal",
-    NULL
+    "Terminal"
 };
 
 /* useful widgets */
@@ -200,9 +200,9 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
     if (sd->data)
     {
 	if (g_str_has_prefix (sd->data, "file://"))
-	    buf = g_build_filename (&(sd->data)[7], NULL);
+	    buf = g_strdup (&(sd->data)[7]);
 	else if (g_str_has_prefix (sd->data, "file:"))
-	    buf = g_build_filename (&(sd->data)[5], NULL);
+	    buf = g_strdup (&(sd->data)[5]);
 	else
 	    buf = g_strdup (sd->data);
 
@@ -219,7 +219,7 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 	if (g_file_test (filename, G_FILE_TEST_EXISTS) &&
 	    XFCE_IS_DESKTOP_ENTRY (dentry =
 				   xfce_desktop_entry_new (filename, keys,
-							   7)))
+                                       G_N_ELEMENTS (keys))))
 	{
             xfce_desktop_entry_get_string (dentry, "Exec", FALSE, &exec);
             g_object_unref (dentry);
@@ -447,7 +447,7 @@ update_icon_preview (int id, const char *path, IconOptions * opts)
     if (id == EXTERN_ICON)
     {
         if (path)
-            pb = gdk_pixbuf_new_from_file (path, NULL);
+            pb = xfce_themed_icon_load (path, PREVIEW_SIZE);
     }
     else
     {
@@ -1203,7 +1203,7 @@ G_MODULE_EXPORT /* EXPORT:edit_menu_item_dialog */
 void
 edit_menu_item_dialog (Item * mi)
 {
-    GtkWidget *remove, *close, *header;
+    GtkWidget *remove, *close, *header, *vbox;
     GtkDialog *dlg;
     int response, num_items;
 
@@ -1249,8 +1249,13 @@ edit_menu_item_dialog (Item * mi)
 	add_spacer (GTK_BOX (dlg->vbox), BORDER);
     }
 
+    vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 1);
+    gtk_box_pack_start (GTK_BOX (dlg->vbox), vbox, FALSE, FALSE, 0);
+    
     /* add the other options */
-    create_item_dialog (NULL, mi, GTK_CONTAINER (dlg->vbox), close);
+    create_item_dialog (NULL, mi, GTK_CONTAINER (vbox), close);
 
     add_spacer (GTK_BOX (dlg->vbox), BORDER);
 

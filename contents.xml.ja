@@ -7,42 +7,36 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfterm4</Command>
-        <Tooltip>Terminal</Tooltip>
+        <Tooltip>ターミナルを起動します</Tooltip>
         <Icon id="12"/>
       </Control>
     </Group>
     <Group>
       <Popup>
         <Item>
-          <Caption>Appfinder</Caption>
-          <Command term="0" sn="1">xfce4-appfinder</Command>
-          <Tooltip>Căutare şi pornire aplicaţii</Tooltip>
-          <Icon id="3"/>
-        </Item>
-        <Item>
           <Caption>Konqueror</Caption>
           <Command term="0" sn="0">konqueror</Command>
-          <Tooltip>Administratorul de fişiere Konqueror</Tooltip>
+          <Tooltip>Konqueror ファイルマネージャを起動します</Tooltip>
           <Icon id="2"/>
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
           <Command term="0" sn="0">nautilus --no-desktop</Command>
-          <Tooltip>Administratorul de fişiere Nautlius</Tooltip>
+          <Tooltip>Nautilus ファイルマネージャを起動します</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xffm</Command>
-        <Tooltip>Administrator fişiere</Tooltip>
+        <Tooltip>ファイルマネージを起動します</Tooltip>
         <Icon id="2"/>
       </Control>
     </Group>
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">mozilla -splash</Command>
-        <Tooltip>Navigatorul Mozilla</Tooltip>
+        <Command term="0" sn="0">mozilla</Command>
+        <Tooltip>Mozilla ウェブブラウザを起動します</Tooltip>
         <Icon id="7"/>
       </Control>
     </Group>
@@ -50,7 +44,7 @@
       <Popup/>
       <Control id="-1" filename="libmailcheck.so">
         <Mailcheck interval="30">
-          <Command term="0" sn="0">mozilla -mail -splash</Command>
+          <Command term="0" sn="0">mozilla -mail</Command>
         </Mailcheck>
       </Control>
     </Group>
@@ -58,7 +52,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xmms</Command>
-        <Tooltip>Redare audio</Tooltip>
+        <Tooltip>音楽プレイヤーを起動します</Tooltip>
         <Icon id="6"/>
       </Control>
     </Group>
@@ -77,22 +71,22 @@
     <Group>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfce-setting-show</Command>
-        <Tooltip>Setări</Tooltip>
+        <Tooltip>設定を行います</Tooltip>
         <Icon id="3"/>
       </Control>
     </Group>
     <Group>
       <Popup>
         <Item>
-          <Caption>Administrare imprimantă</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
-          <Tooltip>Administrare imprimantă</Tooltip>
+          <Caption>印刷機管理</Caption>
+          <Command term="0" sn="1">xfprint-manager</Command>
+          <Tooltip>印刷機の管理を行います</Tooltip>
           <Icon id="9"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xfprint4</Command>
-        <Tooltip>Trageţi aici un fişier pentru tipărire</Tooltip>
+        <Tooltip>印刷するファイルをドラッグして下さい</Tooltip>
         <Icon id="9"/>
       </Control>
     </Group>
@@ -100,7 +94,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfhelp4</Command>
-        <Tooltip>Manual</Tooltip>
+        <Tooltip>マニュアルを開きます</Tooltip>
         <Icon id="5"/>
       </Control>
     </Group>

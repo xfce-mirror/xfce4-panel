@@ -7,7 +7,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfterm4</Command>
-        <Tooltip>Terminal</Tooltip>
+        <Tooltip>Pääte</Tooltip>
         <Icon id="12"/>
       </Control>
     </Group>
@@ -16,33 +16,33 @@
         <Item>
           <Caption>Appfinder</Caption>
           <Command term="0" sn="1">xfce4-appfinder</Command>
-          <Tooltip>Căutare şi pornire aplicaţii</Tooltip>
+          <Tooltip>Etsi ja käynnistä sovelluksia</Tooltip>
           <Icon id="3"/>
         </Item>
         <Item>
           <Caption>Konqueror</Caption>
           <Command term="0" sn="0">konqueror</Command>
-          <Tooltip>Administratorul de fişiere Konqueror</Tooltip>
+          <Tooltip>Konqueror -tiedostonhallinta</Tooltip>
           <Icon id="2"/>
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
           <Command term="0" sn="0">nautilus --no-desktop</Command>
-          <Tooltip>Administratorul de fişiere Nautlius</Tooltip>
+          <Tooltip>Nautilus -tiedostonhallinta</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xffm</Command>
-        <Tooltip>Administrator fişiere</Tooltip>
+        <Tooltip>Tiedostonhallinta</Tooltip>
         <Icon id="2"/>
       </Control>
     </Group>
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">mozilla -splash</Command>
-        <Tooltip>Navigatorul Mozilla</Tooltip>
+        <Command term="0" sn="0">mozilla</Command>
+        <Tooltip>Mozilla Web-selain</Tooltip>
         <Icon id="7"/>
       </Control>
     </Group>
@@ -50,7 +50,7 @@
       <Popup/>
       <Control id="-1" filename="libmailcheck.so">
         <Mailcheck interval="30">
-          <Command term="0" sn="0">mozilla -mail -splash</Command>
+          <Command term="0" sn="0">mozilla -mail</Command>
         </Mailcheck>
       </Control>
     </Group>
@@ -58,7 +58,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xmms</Command>
-        <Tooltip>Redare audio</Tooltip>
+        <Tooltip>Musiikkisoitin</Tooltip>
         <Icon id="6"/>
       </Control>
     </Group>
@@ -77,22 +77,22 @@
     <Group>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfce-setting-show</Command>
-        <Tooltip>Setări</Tooltip>
+        <Tooltip>Asetukset</Tooltip>
         <Icon id="3"/>
       </Control>
     </Group>
     <Group>
       <Popup>
         <Item>
-          <Caption>Administrare imprimantă</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
-          <Tooltip>Administrare imprimantă</Tooltip>
+          <Caption>Tulostimien hallinta</Caption>
+          <Command term="0" sn="1">xfprint-manager</Command>
+          <Tooltip>Tulostimien hallinta</Tooltip>
           <Icon id="9"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
         <Command term="0" sn="1">xfprint4</Command>
-        <Tooltip>Trageţi aici un fişier pentru tipărire</Tooltip>
+        <Tooltip>Raahaa tiedosto tähän tulostaaksesi sen</Tooltip>
         <Icon id="9"/>
       </Control>
     </Group>
@@ -100,7 +100,7 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfhelp4</Command>
-        <Tooltip>Manual</Tooltip>
+        <Tooltip>Käsikirja</Tooltip>
         <Icon id="5"/>
       </Control>
     </Group>
@@ -119,7 +119,7 @@
     <Group>
       <Popup/>
       <Control id="-1" filename="libclock.so">
-        <XfceClock Clock_type="2" Toggle_military="1" Toggle_am_pm="1" Toggle_secs="0"/>
+        <XfceClock Clock_type="2" Toggle_military="1" Toggle_am_pm="0" Toggle_secs="0"/>
       </Control>
     </Group>
   </Groups>
