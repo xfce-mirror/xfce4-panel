@@ -162,6 +162,9 @@ position_popup (PanelPopup * pp)
 	    x = w - req.width;
     }
 
+#if 0
+    g_print(" *** Position: %d, %d\n", x, y);
+#endif
     gtk_window_move (GTK_WINDOW (pp->window), x, y);
     gtk_window_stick (GTK_WINDOW (pp->window));
     gtk_widget_show (pp->window);
