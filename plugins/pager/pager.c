@@ -133,11 +133,14 @@ static void
 pager_set_orientation (Control * control, int orientation)
 {
     t_pager *pager;
+    GtkOrientation gor = (orientation == VERTICAL) ?
+	GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
 
     pager = control->data;
 
-    arrange_pager (pager);
-    pager_set_size (control, settings.size);
+    netk_pager_set_orientation (NETK_PAGER (pager->netk_pager), gor);
+
+    netk_pager_update_size (pager->netk_pager, pager->screen);
 }
 
 /*  creation, destruction and configuration 
@@ -318,14 +321,14 @@ pager_create_options (Control * control, GtkContainer * container,
 
     if (max > 1)
     {
-    spin = gtk_spin_button_new_with_range (1, max, 1);
-    gtk_widget_show (spin);
-    gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+        spin = gtk_spin_button_new_with_range (1, max, 1);
+        gtk_widget_show (spin);
+        gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
 
-    gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), pager->rows);
+        gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), pager->rows);
 
-    g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed),
-		      pager);
+        g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed),
+                          pager);
     }
     else
     {
