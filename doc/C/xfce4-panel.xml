@@ -718,21 +718,21 @@ maintainers, etc. Commented out by default.
       </varlistentry>
     
       <varlistentry>
-	<term>xfce4/panel/contents.xml</term>
+	<term>&lt;basedir&gt;/xfce4/panel/contents.xml</term>
 	<listitem><para>This is the location of the xml configuration file
 	  that describes the contents of the panel, relative to the base
 	  directories metioned above.</para></listitem>
       </varlistentry>
       
       <varlistentry>
-	<term>xfce4/mcs_settings/panel.xml</term>
+	<term>&lt;basedir&gt;/xfce4/mcs_settings/panel.xml</term>
 	<listitem><para>This is the relative location of the global panel
 	  settings. This file is managed by the settings manager, rather than 
 	  by the panel itself.</para></listitem>
       </varlistentry>
       
       <varlistentry>
-	<term>xfce4/kiosk/kioskrc</term>
+	<term>&lt;basedir&gt;/xfce4/kiosk/kioskrc</term>
 	<listitem><para>Kiosk Mode configuration file. See <ulink
 	    url="#panel-kiosk">next section</ulink> for an explanation.
 	</para></listitem>
@@ -740,9 +740,9 @@ maintainers, etc. Commented out by default.
     </variablelist>
 
     <para>None of the configuration files, except 
-      <filename>kioskrc</filename>, should be edited by hand; in fact
-      the changes will be overwritten if you edit them while the panel
-      and the settings manager are running.
+      <filename>kioskrc</filename>, are designed to be edited by hand; 
+      in fact the changes will be overwritten if you edit them while the 
+      panel and the settings manager are running.
     </para>
 
   </sect2>

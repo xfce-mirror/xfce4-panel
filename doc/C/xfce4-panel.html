@@ -151,15 +151,15 @@
 	  <tt class="filename">/etc/xdg/</tt>. The value of
 	  ${sysconfdir} depends on how the program was build and will often be
 	  <tt class="filename">/etc/</tt> for binary
-	  packages.</p></dd><dt><span class="term">xfce4/panel/contents.xml</span></dt><dd><p>This is the location of the xml configuration file
+	  packages.</p></dd><dt><span class="term">&lt;basedir&gt;/xfce4/panel/contents.xml</span></dt><dd><p>This is the location of the xml configuration file
 	  that describes the contents of the panel, relative to the base
-	  directories metioned above.</p></dd><dt><span class="term">xfce4/mcs_settings/panel.xml</span></dt><dd><p>This is the relative location of the global panel
+	  directories metioned above.</p></dd><dt><span class="term">&lt;basedir&gt;/xfce4/mcs_settings/panel.xml</span></dt><dd><p>This is the relative location of the global panel
 	  settings. This file is managed by the settings manager, rather than 
-	  by the panel itself.</p></dd><dt><span class="term">xfce4/kiosk/kioskrc</span></dt><dd><p>Kiosk Mode configuration file. See <a href="#panel-kiosk" target="_top">next section</a> for an explanation.
+	  by the panel itself.</p></dd><dt><span class="term">&lt;basedir&gt;/xfce4/kiosk/kioskrc</span></dt><dd><p>Kiosk Mode configuration file. See <a href="#panel-kiosk" target="_top">next section</a> for an explanation.
 	</p></dd></dl></div><p>None of the configuration files, except 
-      <tt class="filename">kioskrc</tt>, should be edited by hand; in fact
-      the changes will be overwritten if you edit them while the panel
-      and the settings manager are running.
+      <tt class="filename">kioskrc</tt>, are designed to be edited by hand; 
+      in fact the changes will be overwritten if you edit them while the 
+      panel and the settings manager are running.
     </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-kiosk"></a>Kiosk Mode</h3></div></div></div><p>The panel now has support for Kiosk Mode, that will prevent users 
       from making changes to their panel configuration. To use it you have to 
       edit or create the file 
