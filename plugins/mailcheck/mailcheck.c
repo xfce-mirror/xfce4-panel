@@ -37,19 +37,17 @@ static GtkTooltips *tooltips = NULL;
 
 typedef struct
 {
-    int interval;
-    int timeout_id;
-
-    int status;
     char *mbox;
+    char *command;
+    gboolean term;
+    int interval;
+    
+    int timeout_id;
+    int status;
 
     GdkPixbuf *nomail_pb;
     GdkPixbuf *newmail_pb;
     GdkPixbuf *oldmail_pb;
-
-    char *command;
-    gboolean term;
-    char *tooltip;
 
     GtkWidget *button;
 }
@@ -93,23 +91,18 @@ static void make_sensitive(GtkWidget *w)
 
 static void mailcheck_set_tip(t_mailcheck *mc)
 {
+    char *tip;
+	
     if(!tooltips)
         tooltips = gtk_tooltips_new();
 
-    if (mc->tooltip)
-    {
-	gtk_tooltips_set_tip(tooltips, mc->button, mc->tooltip, NULL);
-    }
-    else
-    {
-	char *tip = g_strdup(mc->command);
+    tip = g_strdup(mc->command);
 
-	tip[0] = g_ascii_toupper(tip[0]);
-	
-	gtk_tooltips_set_tip(tooltips, mc->button, tip, NULL);
+    tip[0] = g_ascii_toupper(tip[0]);
+    
+    gtk_tooltips_set_tip(tooltips, mc->button, tip, NULL);
 
-	g_free(tip);
-    }
+    g_free(tip);
 }
 
 void mailcheck_read_config(Control *control, xmlNodePtr node)
@@ -139,7 +132,6 @@ void mailcheck_read_config(Control *control, xmlNodePtr node)
 	g_free(value);
     }
     
-    /* Now parse the xml tree */
     for(node = node->children; node; node = node->next)
     {
 	if(xmlStrEqual(node->name, (const xmlChar *)"Mbox"))
@@ -176,16 +168,6 @@ void mailcheck_read_config(Control *control, xmlNodePtr node)
 		g_free(value);
 	    }
 	}
-	else if(xmlStrEqual(node->name, (const xmlChar *)"Tooltip"))
-	{
-	    value = DATA(node);
-
-	    if(value)
-	    {
-		g_free(mc->tooltip);
-		mc->tooltip = (char *)value;
-	    }
-	}
     }
 
     mailcheck_set_tip(mc);
@@ -209,9 +191,6 @@ void mailcheck_write_config(Control *control, xmlNodePtr parent)
     
     snprintf(value, 2, "%d", mc->term);
     xmlSetProp(node, "term", value);
-
-    if (mc->tooltip)
-	xmlNewTextChild(root, NULL, "Tooltip", mc->tooltip);
 }
 
 static void mailcheck_attach_callback(Control *control, const char *signal,
@@ -285,34 +264,37 @@ void mailcheck_free(Control * control)
     g_free(mailcheck);
 }
 
+static gboolean set_mail_icon(t_mailcheck *mc)
+{
+    if(mc->status == NO_MAIL)
+	xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mc->button), mc->nomail_pb);
+    else if(mc->status == OLD_MAIL)
+	xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mc->button), mc->oldmail_pb);
+    else
+	xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mc->button), mc->newmail_pb);
+
+    return FALSE;
+}
+
 static gboolean check_mail(t_mailcheck *mailcheck)
 {
     int mail;
     struct stat s;
-    time_t time = 0;
 
     if(stat(mailcheck->mbox, &s) < 0)
         mail = NO_MAIL;
     else if(!s.st_size)
         mail = NO_MAIL;
-    else if(s.st_mtime > time)
+    else if(s.st_mtime <= s.st_atime)
         mail = OLD_MAIL;
     else
-    {
-	time = s.st_mtime;
         mail = NEW_MAIL;
-    }
 
     if(mail != mailcheck->status)
     {
         mailcheck->status = mail;
 
-        if(mail == NO_MAIL)
-            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->nomail_pb);
-        else if(mail == OLD_MAIL)
-            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->oldmail_pb);
-        else
-            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->newmail_pb);
+	g_idle_add((GSourceFunc)set_mail_icon, mailcheck);
     }
 
     /* keep the g_timeout running */
