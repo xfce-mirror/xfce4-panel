@@ -304,10 +304,12 @@ main (int argc, char **argv)
 #else
     act.sa_flags = 0;
 #endif
+    sigaction (SIGHUP, &act, NULL);
     sigaction (SIGUSR1, &act, NULL);
     sigaction (SIGINT, &act, NULL);
     sigaction (SIGTERM, &act, NULL);
 #else
+    signal (SIGHUP, sighandler);
     signal (SIGUSR1, sighandler);
     signal (SIGINT, sighandler);
     signal (SIGTERM, sighandler);
