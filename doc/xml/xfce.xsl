@@ -9,6 +9,9 @@
 -->
 <xsl:import href="/usr/share/docbook-xsl/html/chunk.xsl"/>
 
+<!-- Don't force the use of index.html as root filename -->
+<xsl:param name="root.filename" select="''"/>
+
 <!--  Use element id (if present) as file name  -->
 <xsl:variable name="use.id.as.filename">1</xsl:variable>
 
@@ -50,7 +53,7 @@
 </xsl:attribute-set>
 
 
-<xsl:param name="generate.legalnotice.link" select="1"/>
+<xsl:param name="generate.legalnotice.link" select="0"/>
 
 <xsl:param name="shade.verbatim" select="1"/>
 

@@ -1,12 +1,10 @@
 EXTRA_DIST = $(html_DATA)
 htmldir=$(pkgdatadir)/doc/html
 html_DATA=\
-copyright.html \
-GPL.html \
-index.html \
-ln-legalnotice.html \
+panel-copyright.html \
+xfce4-panel.html \
 panel-getting-started.html \
-settings.html \
+panel-settings.html \
 panel-use.html 
 
 html:

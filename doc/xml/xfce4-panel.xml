@@ -2,14 +2,13 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY copyright SYSTEM "copyright.xml"> 
-  <!ENTITY GPL SYSTEM "GPL.xml"> 
   <!ENTITY appversion "4.0"> 
   <!ENTITY manrevision "0.2"> 
   <!ENTITY date "February 2003"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
 
-<article id="index" lang="en">
+<article id="xfce4-panel" lang="en">
 
 <!-- Header --> 
 <articleinfo>
@@ -29,13 +28,14 @@
 
  -->
 
+<!-- I don't know about this
   <legalnotice id="legalnotice">
     <para>
       This document is provided under the terms of the GNU GPL, version
       2 or (at your option) any later version.
     </para>
   </legalnotice>
-
+-->
   <authorgroup>
 
     <author>
@@ -211,7 +211,7 @@ exec xfce4-panel
     <para>Panel preferences can be changed from the XFce settings manager,
       which can be started either from the 'Setup' button on the panel or from 
       the right-click menu on the move handles. See 
-      <xref linkend="settings"/>.
+      <xref linkend="panel-settings"/>.
     </para>
 
     <!-- extra space -->
@@ -457,7 +457,7 @@ exec xfce4-panel
 
 </sect1>
 
-<sect1 id="settings">
+<sect1 id="panel-settings">
   <title>Panel Preferences</title>
 
   <para>The properties dialog for the XFce panel can be opened from
@@ -567,7 +567,5 @@ exec xfce4-panel
 </sect1>
 
 &copyright;
-
-&GPL;
 
 </article>
