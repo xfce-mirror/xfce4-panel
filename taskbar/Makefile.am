@@ -14,3 +14,11 @@ xfce4_taskbar_LDADD =							\
 	@LIBXFCEGUI4_LIBS@						\
 	@LIBXFCE4MCS_CLIENT_LIBS@
 
+install-exec-local:
+	( cd $(DESTDIR)$(bindir) && 					\
+	  rm -f xftaskbar4 && 						\
+	  $(LN_S) xfce4-taskbar xftaskbar4    				\
+	)
+
+uninstall-local:
+	rm -f $(DESTDIR)$(bindir)/xftaskbar4
