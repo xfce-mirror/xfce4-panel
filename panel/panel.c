@@ -65,7 +65,7 @@ int border_width = 4;
 
 int top_height[] = { 14, 16, 18, 20 };
 
-int popup_icon_size[] = { 20, 24, 24, 32 };
+int popup_icon_size[] = { 22, 26, 26, 32 };
 
 /* lock settings update when panel is not yet (re)build */
 static gboolean panel_created = FALSE;
