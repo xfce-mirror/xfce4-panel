@@ -51,33 +51,6 @@
 
 #define BORDER 6
 
-/* Clock tooltip - From xfce3 */
-/* FIXME: Find another place for that */
-static char *day_names[] = {
-    N_("Sunday"),
-    N_("Monday"),
-    N_("Tuesday"),
-    N_("Wednesday"),
-    N_("Thursday"),
-    N_("Friday"),
-    N_("Saturday")
-};
-
-static char *month_names[] = {
-    N_("January"),
-    N_("February"),
-    N_("March"),
-    N_("April"),
-    N_("May"),
-    N_("June"),
-    N_("July"),
-    N_("August"),
-    N_("September"),
-    N_("October"),
-    N_("November"),
-    N_("December")
-};
-
 /*  Clock module
  *  ------------
 */
@@ -122,9 +95,6 @@ clock_date_tooltip (GtkWidget * widget)
     time_t ticks;
     struct tm *tm;
     static gint mday = -1;
-    static gint wday = -1;
-    static gint mon = -1;
-    static gint year = -1;
     char date_s[255];
 
     g_return_val_if_fail (widget != NULL, FALSE);
@@ -132,16 +102,12 @@ clock_date_tooltip (GtkWidget * widget)
 
     ticks = time (0);
     tm = localtime (&ticks);
-    if ((mday != tm->tm_mday) || (wday != tm->tm_wday) || (mon != tm->tm_mon)
-	|| (year != tm->tm_year))
+    
+    if (mday != tm->tm_mday)
     {
 	mday = tm->tm_mday;
-	wday = tm->tm_wday;
-	mon = tm->tm_mon;
-	year = tm->tm_year;
-	snprintf (date_s, 255, "%s, %u %s %u", _(day_names[wday]), mday,
-		  _(month_names[mon]), year + 1900);
-	add_tooltip (widget, _(date_s));
+	strftime (date_s, 255, "%A, %-d %B %Y", tm);
+	add_tooltip (widget, date_s);
     }
     return TRUE;
 }
