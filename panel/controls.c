@@ -101,7 +101,6 @@ wait_for_unloading (void)
 	DBG ("unloading in progress");
 	g_usleep (200 * 1000);  /* 200 msec */
     }
-
 }
 
 /*  ControlClass and ControlClassInfo 
@@ -174,6 +173,7 @@ get_control_class_info (ControlClass * cc)
 
     g_return_val_if_fail (cc->name != NULL, NULL);
 
+    /* when adding a plugin, it's not yet in the list */
     if (info_to_add &&
 	g_ascii_strcasecmp (info_to_add->class->name, cc->name) == 0)
     {
@@ -215,21 +215,18 @@ control_class_info_create_control (ControlClassInfo * info, Control * control)
 	gm = info->class->gmodule = g_module_open (info->path, 0);
 
 	if (!g_module_symbol (gm, "xfce_control_class_init", &symbol))
-	    goto failed;
+	    return FALSE;
 
 	init = symbol;
 	init (info->class);
     }
 
     if (info->unique && info->refcount > 0)
-	goto failed;
+	return FALSE;
 
     info->refcount++;
 
     return info->class->create_control (control);
-
-  failed:
-    return FALSE;
 }
 
 /* plugins */
@@ -296,14 +293,14 @@ load_plugin (gchar * path)
     }
     else if (gm)
     {
-	g_warning ("%s: incompatible module %s", PACKAGE, path);
+	g_warning ("incompatible module %s", path);
 
 	g_module_close (gm);
     }
     else
     {
-	g_warning ("%s: module %s cannot be opened (%s)",
-		   PACKAGE, path, g_module_error ());
+	g_warning ("module %s cannot be opened: %s",
+		   path, g_module_error ());
     }
 }
 
@@ -337,17 +334,12 @@ load_plugin_dir (const char *dir)
 static void
 add_plugin_classes (void)
 {
-    char *dir;
-
     wait_for_unloading ();
     unloading++;
 
-    dir = g_build_filename (LIBDIR, PLUGINDIR, NULL);
-
-    load_plugin_dir (dir);
+    load_plugin_dir (LIBDIR G_DIR_SEPARATOR_S PLUGINDIR);
 
     unloading--;
-    g_free (dir);
 }
 
 static void
@@ -457,6 +449,7 @@ control_class_list_cleanup (void)
 {
     GSList *li;
 
+    wait_for_unloading();
     unloading++;
 
     if (unload_id)
@@ -705,50 +698,6 @@ remove_control (void)
     popup_control = NULL;
 }
 
-static void
-add_control (GtkWidget * w, ControlClassInfo * info)
-{
-    gboolean hidden = settings.autohide;
-    Control *control;
-    int index;
-
-    if (hidden)
-    {
-	DBG ("unhide before adding new item");
-	panel_set_autohide (FALSE);
-
-	while (gtk_events_pending ())
-	    gtk_main_iteration ();
-    }
-
-    index = popup_control ? popup_control->index : -1;
-
-    control = control_new (index);
-    control->cclass = info->class;
-
-    if (control_class_info_create_control (info, control))
-    {
-	groups_add_control (control, index);
-	control_attach_callbacks (control);
-	control_set_settings (control);
-
-	controls_dialog (control);
-
-	write_panel_config ();
-    }
-    else
-    {
-	control_free (control);
-
-	xfce_err (_("Could not create panel item \"%s\"."), info->caption);
-    }
-
-    popup_control = NULL;
-
-    if (hidden)
-	panel_set_autohide (TRUE);
-}
-
 static GtkWidget *
 get_control_menu (void)
 {
@@ -766,7 +715,6 @@ get_control_menu (void)
 	gtk_widget_show (mi);
 	gtk_widget_set_sensitive (mi, FALSE);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
 
 	mi = gtk_separator_menu_item_new ();
 	gtk_widget_show (mi);

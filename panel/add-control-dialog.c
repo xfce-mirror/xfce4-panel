@@ -219,6 +219,7 @@ treeview_destroyed (GtkWidget * tv)
 
     store = gtk_tree_view_get_model (GTK_TREE_VIEW (tv));
     gtk_list_store_clear (GTK_LIST_STORE (store));
+    g_object_unref (store);
 }
 
 static void
