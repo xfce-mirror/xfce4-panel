@@ -255,7 +255,7 @@ static char **find_themes(void)
     /* Add default theme */
     dirs = g_new0(char *, 3);
 
-    dirs[0] = g_build_filename(g_getenv("HOME"), ".xfce4", "themes", NULL);
+    dirs[0] = g_build_filename(g_get_home_dir(), ".xfce4", "themes", NULL);
     dirs[1] = g_build_filename(DATADIR, "themes", NULL);
 
     for(d = dirs; *d; d++)

@@ -54,14 +54,14 @@ extern char **environ;
 */
 char *get_save_dir(void)
 {
-    const char *home = g_getenv("HOME");
+    const char *home = g_get_home_dir();
 
     return g_build_filename(home, HOMERCDIR, NULL);
 }
 
 char *get_save_file(const char *name)
 {
-    const char *home = g_getenv("HOME");
+    const char *home = g_get_home_dir();
 
     return g_build_filename(home, HOMERCDIR, name, NULL);
 }
@@ -80,7 +80,7 @@ char **get_read_dirs(void)
     {
         dirs = g_new0(char *, 3);
 
-        dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, NULL);
+        dirs[0] = g_build_filename(g_get_home_dir(), HOMERCDIR, NULL);
         dirs[1] = g_build_filename(SYSCONFDIR, SYSRCDIR, NULL);
     }
 
@@ -181,7 +181,7 @@ char **get_plugin_dirs(void)
         dirs = g_new0(char *, 3);
 
         dirs[0] =
-            g_build_filename(g_getenv("HOME"), HOMERCDIR, "plugins", NULL);
+            g_build_filename(g_get_home_dir(), HOMERCDIR, "plugins", NULL);
         dirs[1] = g_build_filename(LIBDIR, "plugins", NULL);
     }
 
@@ -202,7 +202,7 @@ char **get_theme_dirs(void)
     {
         dirs = g_new0(char *, 3);
 
-        dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, "themes", NULL);
+        dirs[0] = g_build_filename(g_get_home_dir(), HOMERCDIR, "themes", NULL);
         dirs[1] = g_build_filename(DATADIR, "themes", NULL);
     }
 

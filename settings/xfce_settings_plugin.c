@@ -162,7 +162,7 @@ static char *get_read_config_file(void)
 {
     char *path;
 
-    path = g_strconcat(g_getenv("HOME"), 
+    path = g_strconcat(g_get_home_dir(), 
 		       "/.xfce4/settings/xfce-settings.xml", NULL);
 
     if (g_file_test(path, G_FILE_TEST_EXISTS))
@@ -242,7 +242,7 @@ void xfce_write_options(McsManager *sm)
 	}
     }
 
-    rcfile = g_build_filename(g_getenv("HOME"), ".xfce4", "settings", 
+    rcfile = g_build_filename(g_get_home_dir(), ".xfce4", "settings", 
 	                      "xfce-settings.xml", NULL);
 
     dir = g_path_get_dirname(rcfile);
