@@ -700,10 +700,8 @@ struct _ActionCommand
 static gboolean
 delayed_exec (ActionCommand * command)
 {
-    gdk_threads_enter ();
     real_exec_cmd (command->cmd, command->in_terminal, command->use_sn,
 		   command->silent);
-    gdk_threads_leave ();
 
     g_free (command->cmd);
     g_free (command);

@@ -53,11 +53,9 @@ xfce4_panel_CFLAGS = 							\
 	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
-	@LIBDBH_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXFCE4MCS_CLIENT_CFLAGS@					\
 	@LIBXML_CFLAGS@							\
-	@GTHREAD_CFLAGS@						\
 	-DDATADIR=\"$(datadir)/xfce4\"					\
 	-DLIBDIR=\"$(libdir)/xfce4\"					\
 	-DSYSCONFDIR=\"$(sysconfdir)\"					\
@@ -69,11 +67,9 @@ xfce4_panel_LDFLAGS =							\
 xfce4_panel_LDADD =							\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
-	@GTHREAD_LIBS@							\
 	@LIBXFCEGUI4_LIBS@						\
 	@LIBXFCE4MCS_CLIENT_LIBS@					\
-	@LIBXML_LIBS@							\
-	@LIBDBH_LIBS@
+	@LIBXML_LIBS@
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xfce4-panel-1.0.pc

@@ -147,9 +147,7 @@ restart (void)
     sigstate = RESTART;
 
     /* calls gtk_main_quit() */
-    gdk_threads_enter ();
     quit (TRUE);
-    gdk_threads_leave ();
 
     /* progname is saved on startup 
      * TODO: do we need to pass on arguments? */
@@ -168,10 +166,8 @@ check_signal_state (void)
     if (sigstate != NOSIGNAL)
     {
 	/* close open dialogs */
-	gdk_threads_enter ();
 	destroy_controls_dialog ();
 	destroy_menu_dialog ();
-	gdk_threads_leave ();
 
 	if (sigstate == RESTART && !restarting)
 	{
@@ -181,17 +177,12 @@ check_signal_state (void)
 	}
 	else if (sigstate == QUIT)
 	{
-	    gdk_threads_enter ();
 	    quit (TRUE);
-	    gdk_threads_leave ();
-
 	}
 	else if (sigstate == QUIT_CONFIRM)
 	{
 	    sigstate = NOSIGNAL;
-	    gdk_threads_enter ();
 	    quit (FALSE);
-	    gdk_threads_leave ();
 	}
     }
 
@@ -343,12 +334,7 @@ main (int argc, char **argv)
 	return 0;
     }
 
-    if (!g_thread_supported ())
-	g_thread_init (NULL);
-    gdk_threads_init ();
     gtk_init (&argc, &argv);
-
-    gdk_threads_enter ();
 
     progname = argv[0];
 
@@ -418,8 +404,6 @@ main (int argc, char **argv)
     g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
 
     gtk_main ();
-
-    gdk_threads_leave ();
 
     return 0;
 }

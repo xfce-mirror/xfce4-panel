@@ -167,8 +167,6 @@ mailcheck_set_tip (t_mailcheck * mc)
 static gboolean
 set_mail_icon (t_mailcheck * mc)
 {
-    gdk_threads_enter ();
-
     if (mc->status == NO_MAIL)
     {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
@@ -184,8 +182,6 @@ set_mail_icon (t_mailcheck * mc)
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
 				    mc->newmail_pb);
     }
-
-    gdk_threads_leave ();
 
     return FALSE;
 }

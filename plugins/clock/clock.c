@@ -156,9 +156,7 @@ popup_xfcalendar (GtkWidget * widget, guint32 time)
 static gboolean
 retry_popup_xfcalendar (GtkWidget * widget)
 {
-    gdk_threads_enter ();
     popup_xfcalendar (widget, gtk_get_current_event_time ());
-    gdk_threads_leave ();
     return FALSE;
 }
 
@@ -217,14 +215,6 @@ clock_date_tooltip (GtkWidget * widget)
     return TRUE;
 }
 
-static gboolean
-clock_date_tooltip_timeout (GtkWidget * widget)
-{
-    gdk_threads_enter ();
-    clock_date_tooltip (widget);
-    gdk_threads_leave ();
-}
-
 static t_clock *
 clock_new (void)
 {
@@ -242,7 +232,7 @@ clock_new (void)
     clock_date_tooltip (clock->eventbox);
 
     clock->timeout_id =
-	g_timeout_add (60000, (GSourceFunc) clock_date_tooltip_timeout,
+	g_timeout_add (60000, (GSourceFunc) clock_date_tooltip,
 		       clock->eventbox);
 
     /* callback for calendar popup */
