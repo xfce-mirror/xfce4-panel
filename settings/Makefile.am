@@ -1,7 +1,7 @@
 plugindir = $(libdir)/libxfce4mcs/settings/
 
 plugin_LTLIBRARIES = libxfce4settings.la
-libxfce4settings_la_LDFLAGS = "-module"
+libxfce4settings_la_LDFLAGS = -module -avoid-version
 
 libxfce4settings_la_SOURCES = \
 xfce_settings.h \
