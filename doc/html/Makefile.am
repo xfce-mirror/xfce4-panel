@@ -1,5 +1,5 @@
 EXTRA_DIST = $(html_DATA)
-htmldir=$(pkgdatadir)/doc/html
+htmldir=$(datadir)/xfce4/doc/html
 html_DATA=\
 panel-copyright.html \
 xfce4-panel.html \

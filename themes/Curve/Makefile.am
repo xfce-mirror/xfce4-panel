@@ -1,4 +1,4 @@
-curvedir = $(pkgdatadir)/themes/Curve
+curvedir = $(datadir)/xfce4/themes/Curve
 curve_DATA = \
 edit.png \
 file1.png \

@@ -1,4 +1,4 @@
-crystaldir=$(pkgdatadir)/themes/Crystal
+crystaldir=$(datadir)/xfce4/themes/Crystal
 
 crystal_DATA = \
 edit.png \

@@ -19,7 +19,7 @@ libxfce4settings_la_CFLAGS =						\
 	@LIBXML_CFLAGS@							\
 	@XFCE_MCS_MANAGER_CFLAGS@					\
 	-DSYSCONFDIR=\"$(sysconfdir)\"					\
-	-DDATADIR=\"$(pkgdatadir)\"					\
+	-DDATADIR=\"$(datadir)/xfce4\"					\
 	-DLOCALEDIR=\"$(localedir)\"
 
 libxfce4settings_la_LIBADD =						\

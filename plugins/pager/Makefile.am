@@ -1,4 +1,4 @@
-plugindir = $(pkglibdir)/panel-plugins
+plugindir = $(libdir)/xfce4/panel-plugins
 
 plugin_LTLIBRARIES = libpager.la
 

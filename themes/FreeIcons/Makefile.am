@@ -1,4 +1,4 @@
-freeiconsdir = $(pkgdatadir)/themes/FreeIcons
+freeiconsdir = $(datadir)/xfce4/themes/FreeIcons
 freeicons_DATA = 							\
 	README 								\
 	edit.png							\

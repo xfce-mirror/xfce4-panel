@@ -1,5 +1,5 @@
 EXTRA_DIST = $(images_DATA)
-imagesdir = $(pkgdatadir)/doc/images
+imagesdir = $(datadir)/xfce4/doc/images
 images_DATA = \
 clock-properties.png \
 default_panel.png \

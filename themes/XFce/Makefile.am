@@ -1,4 +1,4 @@
-xfcedir = $(pkgdatadir)/themes/XFce
+xfcedir = $(datadir)/xfce4/themes/XFce
 xfce_DATA = \
 edit.xpm \
 file1.xpm \

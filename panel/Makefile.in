@@ -214,8 +214,8 @@ xfce4_panel_CFLAGS = \
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXFCE4MCS_CLIENT_CFLAGS@					\
 	@LIBXML_CFLAGS@							\
-	-DDATADIR=\"$(pkgdatadir)\"					\
-	-DLIBDIR=\"$(pkglibdir)\"					\
+	-DDATADIR=\"$(datadir)/xfce4\"					\
+	-DLIBDIR=\"$(libdir)/xfce4\"					\
 	-DSYSCONFDIR=\"$(sysconfdir)\"					\
 	-DLOCALEDIR=\"$(localedir)\"
 

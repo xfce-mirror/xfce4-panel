@@ -1,4 +1,4 @@
-noiadir=$(pkgdatadir)/themes/Noia
+noiadir=$(datadir)/xfce4/themes/Noia
 
 noia_DATA = \
 edit.png \

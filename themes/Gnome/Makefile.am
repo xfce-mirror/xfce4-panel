@@ -1,4 +1,4 @@
-gnomedir = $(pkgdatadir)/themes/Gnome
+gnomedir = $(datadir)/xfce4/themes/Gnome
 gnome_DATA = \
 edit.png \
 file1.png \
