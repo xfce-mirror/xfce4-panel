@@ -318,7 +318,12 @@ static GtkItemFactoryEntry control_items[] = {
 static const char *
 translate_menu (const char *msg)
 {
-    return gettext (msg);
+#if ENABLE_NLS
+    /* ensure we use the panel domain and not that of a plugin */
+    return dgettext (GETTEXT_PACKAGE, msg);
+#else
+    return msg;
+#endif
 }
 
 static GtkWidget *
