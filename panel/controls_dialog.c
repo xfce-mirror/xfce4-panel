@@ -329,7 +329,8 @@ void controls_dialog(Control * control)
 	{
 	    gtk_widget_hide(dlg);
 	    
-	    if (confirm(_("Removing an item will also remove its popup menu.\n\n"
+	    if (!(control->with_popup) || 
+		confirm(_("Removing an item will also remove its popup menu.\n\n"
 			  "Do you want to remove the item?"), 
 			GTK_STOCK_REMOVE, NULL))
 	    {
