@@ -18,6 +18,7 @@ conf_DATA = 								\
 	contents.xml.ru							\
 	contents.xml.sk							\
 	contents.xml.tr							\
+	contents.xml.uk							\
 	contents.xml.vi							\
 	contents.xml.zh_TW
 
