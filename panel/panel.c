@@ -560,9 +560,6 @@ create_panel (void)
      * This function creates the panel items and popup menus */
     get_panel_config ();
 
-    panel_created = TRUE;
-
-    /* panel may have moved slightly off the screen */
     panel.position.x = x;
     panel.position.y = y;
     panel_set_position ();
@@ -570,6 +567,11 @@ create_panel (void)
     gtk_widget_show (panel.toplevel);
     set_window_layer (panel.toplevel, settings.layer);
     set_window_skip (panel.toplevel);
+
+    /* this must be before set_autohide() and after set_position()
+     * otherwise the initial position will be messed up */
+    panel_created = TRUE;
+
     panel_set_autohide (settings.autohide);
 }
 
@@ -594,7 +596,7 @@ panel_set_orientation (int orientation)
     if (!panel_created)
         return;
 
-    hidden = panel.hidden;
+    hidden = settings.autohide;
     if (hidden)
 	panel_set_autohide(FALSE);
     
@@ -712,7 +714,7 @@ panel_center (int side)
     w = screen_width;
     h = screen_height;
 
-    hidden = panel.hidden;
+    hidden = settings.autohide;
     if (hidden)
     {
 	panel_set_autohide(FALSE);
@@ -773,7 +775,7 @@ panel_set_position (void)
         int w, h;
 	gboolean hidden;
     
-	hidden = panel.hidden;
+	hidden = settings.autohide;
 	if (hidden)
 	{
 	    panel_set_autohide(FALSE);

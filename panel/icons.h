@@ -44,7 +44,7 @@ enum
     NUM_ICONS
 };
 
-const char *icon_names[NUM_ICONS];
+extern const char *icon_names[NUM_ICONS];
 
 /* system icons */
 enum

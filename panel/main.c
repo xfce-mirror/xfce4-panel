@@ -63,7 +63,7 @@ static void
 save_yourself (gpointer data, int save_style, gboolean shutdown,
                int interact_style, gboolean fast)
 {
-    gboolean hidden = panel.hidden;
+    gboolean hidden = settings.autohide;
     
     if (panel.toplevel)
     {
@@ -117,7 +117,7 @@ quit (gboolean force)
 
     mcs_stop_watch ();
 
-    hidden = panel.hidden;
+    hidden = settings.autohide;
     
     if (panel.toplevel)
     {
@@ -158,7 +158,7 @@ restart (void)
     int x, y;
     gboolean hidden;
 
-    hidden = panel.hidden;
+    hidden = settings.autohide;
     
     if (panel.toplevel)
     {

@@ -30,6 +30,8 @@
 #include "icons/menu_icon.xpm"
 #include "icons/xfce_icon.xpm"
 
+const char *icon_names[NUM_ICONS];
+
 /* icon themes */
 static char *icon_suffix[] = {
     "png",

@@ -235,6 +235,7 @@ enum
 void
 controls_dialog (Control * control)
 {
+    gboolean hidden;
     GtkWidget *dlg;
     GtkWidget *button;
     GtkWidget *vbox;
@@ -248,6 +249,12 @@ controls_dialog (Control * control)
     old_control = current_control = control;
     backup_index = control->index;
 
+    hidden = settings.autohide;
+    if (hidden)
+    {
+	panel_set_autohide(FALSE);
+    }
+    
     /* Keep track of the panel container */
     container = control->base->parent;
 
@@ -371,4 +378,7 @@ controls_dialog (Control * control)
     }
 
     write_panel_config ();
+
+    if (hidden)
+	panel_set_autohide(TRUE);
 }
