@@ -183,9 +183,12 @@ static GdkPixbuf *_get_themed_pixbuf(const char *name, const char *theme)
 {
     GdkPixbuf *pb = NULL;
     char **icon_paths, **p;
+    const char *real_theme;
     
-    if(!theme)
-        return NULL;
+    if(theme)
+	real_theme = theme;
+    else
+        real_theme = DEFAULT_THEME;
     
     icon_paths = get_theme_dirs();
 
@@ -222,7 +225,7 @@ GdkPixbuf *get_themed_pixbuf(const char *name)
 
     pb = _get_themed_pixbuf(name, settings.theme);
 
-    if (!pb && (!settings.theme  || !strequal(DEFAULT_THEME, settings.theme)))
+    if (!pb && settings.theme && !strequal(DEFAULT_THEME, settings.theme))
 	pb = _get_themed_pixbuf(name, DEFAULT_THEME);
 
     if (!pb)

@@ -78,7 +78,9 @@ plugins/mailcheck/Makefile
 plugins/clock/Makefile
 plugins/trash/Makefile
 themes/Makefile
+themes/Crystal/Makefile
 themes/Curve/Makefile
 themes/Gnome/Makefile
+themes/Noia/Makefile
 themes/XFce/Makefile
 ])

@@ -1,4 +1,7 @@
 SUBDIRS = \
 XFce \
 Gnome \
-Curve
+Curve \
+Noia \
+Crystal
+
