@@ -23,3 +23,6 @@ libxfce4settings_la_CFLAGS =						\
 
 libxfce4settings_la_LIBADD =						\
 	@XFCE_MCS_MANAGER_LIBS@
+
+appsdir = $(datadir)/applications
+apps_DATA = xfce-panel-settings.desktop
