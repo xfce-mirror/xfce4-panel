@@ -27,10 +27,10 @@
 #include "xfce_support.h"
 #include "callbacks.h"
 #include "settings.h"
-#include "central.h"
 #include "side.h"
 #include "item.h"
 #include "popup.h"
+#include "central.h"
 #include "module.h"
 #include "icons.h"
 
@@ -107,7 +107,9 @@ void set_transient_for_dialog(GtkWidget * window)
  * left : spinbutton
  * right: spinbutton
  * screens: spinbutton
+ * central panels: checkbox
  * desktop buttons: checkbox
+ * mini buttons: checkbox
  * position: button (restore default)
  * lock command : entry + browse button
  * exit command : entry + browse button
@@ -119,8 +121,12 @@ static GtkWidget *style_menu;
 static GtkWidget *theme_menu;
 static GtkWidget *left_spin;
 static GtkWidget *right_spin;
-static GtkWidget *buttons_checkbox;
+
+static GtkWidget *central_vbox;
 static GtkWidget *central_checkbox;
+static GtkWidget *buttons_checkbox;
+static GtkWidget *minibuttons_checkbox;
+
 static GtkWidget *screens_spin;
 static GtkWidget *pos_button;
 static GtkWidget *lock_entry;
@@ -579,20 +585,33 @@ static void spin_changed(GtkWidget * spin)
 }
 
 
-static void desktop_buttons_changed(GtkToggleButton *button, gpointer data)
-{
-    gboolean show = gtk_toggle_button_get_active(button);
-
-    central_panel_set_show_desktop_buttons(show);
-    gtk_widget_set_sensitive(revert, TRUE);
-}
-
 static void central_changed(GtkToggleButton *button, gpointer data)
 {
     gboolean show = gtk_toggle_button_get_active(button);
 
     panel_set_show_central(show);
-    gtk_widget_set_sensitive(buttons_checkbox, show);
+
+    if (show)
+	gtk_widget_show(central_vbox);
+    else
+	gtk_widget_hide(central_vbox);
+
+    gtk_widget_set_sensitive(revert, TRUE);
+}
+
+static void desktop_buttons_changed(GtkToggleButton *button, gpointer data)
+{
+    gboolean show = gtk_toggle_button_get_active(button);
+
+    panel_set_show_desktop_buttons(show);
+    gtk_widget_set_sensitive(revert, TRUE);
+}
+
+static void minibuttons_changed(GtkToggleButton *button, gpointer data)
+{
+    gboolean show = gtk_toggle_button_get_active(button);
+
+    panel_set_show_minibuttons(show);
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -647,9 +666,10 @@ static void add_controls_box(GtkBox * box)
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), settings.num_right);
     g_signal_connect(right_spin, "value-changed", G_CALLBACK(spin_changed), NULL);
 
-    /* screens */
+    /* central panel */
     add_spacer(GTK_BOX(vbox));
 
+    /* show central panel */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
@@ -669,9 +689,15 @@ static void add_controls_box(GtkBox * box)
     g_signal_connect(central_checkbox, "toggled", G_CALLBACK(central_changed),
 		     NULL);
 
+    /* subgroup central */
+    central_vbox = gtk_vbox_new(TRUE, 0);
+    gtk_widget_show(central_vbox);
+    gtk_box_pack_start(GTK_BOX(vbox), central_vbox, FALSE, TRUE, 0);
+
+    /* central - show desktop buttons */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(central_vbox), hbox, FALSE, TRUE, 0);
 
     label = gtk_label_new(_("Show desktop buttons:")); 
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
@@ -688,7 +714,30 @@ static void add_controls_box(GtkBox * box)
     g_signal_connect(buttons_checkbox, "toggled", G_CALLBACK(desktop_buttons_changed),
 		     NULL);
 
-    gtk_widget_set_sensitive(buttons_checkbox, settings.show_central);
+    /* central - show minibuttons */
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(central_vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Show mini buttons:")); 
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    minibuttons_checkbox = gtk_check_button_new();
+    gtk_widget_show(minibuttons_checkbox);
+    gtk_box_pack_start(GTK_BOX(hbox), minibuttons_checkbox, FALSE, FALSE, 0);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(minibuttons_checkbox), 
+				 settings.show_minibuttons);
+    g_signal_connect(minibuttons_checkbox, "toggled", G_CALLBACK(minibuttons_changed),
+		     NULL);
+
+    if (!settings.show_central)
+	gtk_widget_hide(central_vbox);
+
+    add_spacer(GTK_BOX(vbox));
 
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);

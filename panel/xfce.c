@@ -112,8 +112,7 @@ void sighandler(int sig)
 
 void quit(void)
 {
-    if(!confirm(_("Are you sure you want to close the XFce panel?\n"
-                  "This may log you off."), GTK_STOCK_QUIT, NULL))
+    if(!confirm(_("Are you sure you want to log off ?"), GTK_STOCK_QUIT, NULL))
     {
         return;
     }
@@ -207,7 +206,7 @@ static GtkWidget *create_panel_window(void)
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
 
-    set_window_type_dock(w);
+    /*    set_window_type_dock(w);*/
 
     gtk_container_set_border_width(GTK_CONTAINER(w), 0);
 
@@ -317,6 +316,7 @@ void init_settings(void)
     settings.current = 0;
     settings.show_central = TRUE;
     settings.show_desktop_buttons = TRUE;
+    settings.show_minibuttons = TRUE;
     settings.lock_command = NULL;
     settings.exit_command = NULL;
 }
@@ -345,9 +345,9 @@ void panel_set_settings(void)
 
     central_panel_set_num_screens(settings.num_screens);
 
-    central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
-
     panel_set_show_central(settings.show_central);
+    central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
+    panel_set_show_minibuttons(settings.show_minibuttons);
 
     if(n < settings.num_screens)
         request_net_number_of_desktops(settings.num_screens);
@@ -466,6 +466,20 @@ void panel_set_show_central(gboolean show)
 	gtk_widget_hide(central_frame);
 }
 
+void panel_set_show_desktop_buttons(gboolean show)
+{
+    settings.show_desktop_buttons = show;
+
+    central_panel_set_show_desktop_buttons(show);
+}
+
+void panel_set_show_minibuttons(gboolean show)
+{
+    settings.show_minibuttons = show;
+
+    central_panel_set_show_minibuttons(show);
+}
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   Panel configuration
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -554,6 +568,20 @@ void panel_parse_xml(xmlNodePtr node)
 
     g_free(value);
 
+    value = xmlGetProp(node, (const xmlChar *)"minibuttons");
+
+    if(value)
+    {
+	n = atoi(value);
+
+	if (n == 1)
+	    settings.show_minibuttons = TRUE;
+	else
+	    settings.show_minibuttons = FALSE;
+    }
+
+    g_free(value);
+
     /* child nodes */
     for(child = node->children; child; child = child->next)
     {
@@ -638,6 +666,9 @@ void panel_write_xml(xmlNodePtr root)
 
     snprintf(value, 2, "%d", settings.show_desktop_buttons);
     xmlSetProp(node, "desktopbuttons", value);
+
+    snprintf(value, 2, "%d", settings.show_minibuttons);
+    xmlSetProp(node, "minibuttons", value);
 
     child = xmlNewTextChild(node, NULL, "Position", NULL);
 

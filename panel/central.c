@@ -447,10 +447,22 @@ void central_panel_set_show_desktop_buttons(gboolean show)
 {
     if (show)
 	gtk_widget_show(desktop_table);
-    else if (settings.num_screens > 1)
+    else
 	gtk_widget_hide(desktop_table);
+}
 
-    settings.show_desktop_buttons = show;
+void central_panel_set_show_minibuttons(gboolean show)
+{
+    if (show)
+    {
+	gtk_widget_show(left_table);
+	gtk_widget_show(right_table);
+    }
+    else
+    {
+	gtk_widget_hide(left_table);
+	gtk_widget_hide(right_table);
+    }
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/

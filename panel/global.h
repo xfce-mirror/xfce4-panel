@@ -111,6 +111,7 @@ struct _Settings
     int num_screens;
     gboolean show_central;
     gboolean show_desktop_buttons;
+    gboolean show_minibuttons;
     int current;
 
     char *lock_command;
