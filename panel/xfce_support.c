@@ -766,6 +766,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
     }
     g_free(execute);
 
+    free_envp = NULL;
 #ifdef HAVE_STARTUP_NOTIFICATION
     if (use_sn)
     {
@@ -777,8 +778,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
 	    {
 		sn_launcher_context_set_binary_name (sn_context, execute);
 		sn_launcher_context_initiate (sn_context, g_get_prgname () ? g_get_prgname () : "unknown", argv[0], CurrentTime);
-		envp = make_spawn_environment_for_sn_context (sn_context, NULL);
-		free_envp = envp;
+		free_envp = make_spawn_environment_for_sn_context (sn_context, NULL);
 	    }
 	}
     }
@@ -786,7 +786,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
                      
     if (silent)
     {
-        retval = g_spawn_async(NULL, argv, envp, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
+        retval = g_spawn_async(NULL, argv, free_envp ? free_envp : envp, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
         if(!retval)
         {
             if (error)
@@ -799,7 +799,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
     }
     else
     {
-        success = exec_command_full_with_envp(argv, envp);
+        success = exec_command_full_with_envp(argv, free_envp ? free_envp : envp);
     }
 
 #ifdef HAVE_STARTUP_NOTIFICATION
