@@ -85,7 +85,6 @@ panel/Makefile
 plugins/Makefile
 plugins/mailcheck/Makefile
 plugins/clock/Makefile
-plugins/trash/Makefile
 plugins/switcher/Makefile
 plugins/systembuttons/Makefile
 settings/Makefile

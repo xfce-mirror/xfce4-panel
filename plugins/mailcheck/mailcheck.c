@@ -29,23 +29,12 @@
 #include "settings.h"
 #include "plugins.h"
 
-#if 0
-/* mailcheck icons */
-#include "icons/mail.xpm"
-#include "icons/nomail.xpm"
-#include "icons/oldmail.xpm"
-#endif
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Globals
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-static GtkTooltips *tooltips = NULL;
-
 #define MAILCHECK_ROOT "Mailcheck"
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  General definitions
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+#define BORDER 6
+
+static GtkTooltips *tooltips = NULL;
+
 typedef struct
 {
     int interval;
@@ -115,7 +104,7 @@ static void mailcheck_set_tip(t_mailcheck *mc)
     {
 	char *tip = g_strdup(mc->command);
 
-	*tip = g_ascii_toupper(*tip);
+	tip[0] = g_ascii_toupper(tip[0]);
 	
 	gtk_tooltips_set_tip(tooltips, mc->button, tip, NULL);
 
@@ -243,12 +232,9 @@ static t_mailcheck *mailcheck_new(void)
     t_mailcheck *mailcheck;
     const char *mail;
 
-    mailcheck = g_new(t_mailcheck, 1);
+    mailcheck = g_new0(t_mailcheck, 1);
 
     mailcheck->status = NO_MAIL;
-    mailcheck->mbox = NULL;
-    mailcheck->command = NULL;
-    mailcheck->tooltip = NULL;
     mailcheck->interval = 30;
     mailcheck->timeout_id = 0;
 
@@ -303,15 +289,19 @@ static gboolean check_mail(t_mailcheck *mailcheck)
 {
     int mail;
     struct stat s;
+    time_t time = 0;
 
     if(stat(mailcheck->mbox, &s) < 0)
         mail = NO_MAIL;
     else if(!s.st_size)
         mail = NO_MAIL;
-    else if(s.st_mtime < s.st_atime)
+    else if(s.st_mtime > time)
         mail = OLD_MAIL;
     else
+    {
+	time = s.st_mtime;
         mail = NEW_MAIL;
+    }
 
     if(mail != mailcheck->status)
     {
@@ -329,10 +319,8 @@ static gboolean check_mail(t_mailcheck *mailcheck)
     return TRUE;
 }
 
-static void run_mailcheck(Control *control)
+static void run_mailcheck(t_mailcheck *mc)
 {
-    t_mailcheck *mc = control->data;
-
     if (mc->timeout_id > 0)
     {
 	g_source_remove(mc->timeout_id);
@@ -369,73 +357,54 @@ static void mailcheck_set_theme(Control *control, const char *theme)
 /*  Options dialog
  *  --------------
 */
-static GtkWidget *mbox_entry;
-static GtkWidget *command_entry;
-static GtkWidget *term_checkbutton;
-static GtkWidget *spinbutton;
-
-static GtkWidget *revert_button;
-
-struct BackUp 
+typedef struct 
 {
+    t_mailcheck *mc;
+    
+    /* backup */
     char *mbox;
     char *command;
     gboolean term;
     int interval;
-    char *tooltip;
-};
 
-static struct BackUp backup;
+    /* control dialog */
+    GtkWidget *dialog;
+    GtkWidget *revert;
 
-static void create_mailcheck_backup(t_mailcheck *mc)
+    /* options */
+    GtkWidget *mbox_entry;
+    GtkWidget *cmd_entry;
+    GtkWidget *term_cb;
+    GtkWidget *interval_spin;
+}
+MailDialog;
+
+/* backup */
+static void create_backup(MailDialog *md)
 {
-    backup.mbox = g_strdup(mc->mbox);
-    backup.command = g_strdup(mc->command);
-    backup.term = mc->term;
-    backup.interval = mc->interval;
-    backup.tooltip = g_strdup(mc->tooltip);
+    t_mailcheck *mc = md->mc;
+    
+    md->mbox = g_strdup(mc->mbox);
+    md->command = g_strdup(mc->command);
+    md->term = mc->term;
+    md->interval = mc->interval;
 }
 
-static void clean_mailcheck_backup(void)
+static void free_maildialog(MailDialog *md)
 {
-    g_free(backup.mbox);
-    backup.mbox = NULL;
-    g_free(backup.command);
-    backup.command = NULL;
-    g_free(backup.tooltip);
+    g_free(md->mbox);
+    g_free(md->command);
+
+    g_free(md);
 }
 
-static void update_options_box(t_mailcheck *mc)
-{
-    gtk_entry_set_text(GTK_ENTRY(mbox_entry), mc->mbox);
-    gtk_entry_set_text(GTK_ENTRY(command_entry), mc->command);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
-                                 mc->term);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinbutton), mc->interval);
-}
-
-static void mailcheck_revert_options(Control *control)
-{
-    t_mailcheck *mc = (t_mailcheck *) control->data;
-
-    g_free(mc->mbox);
-    mc->mbox = g_strdup(backup.mbox);
-
-    g_free(mc->command);
-    mc->command = g_strdup(backup.command);
-
-    mc->term = backup.term;
-    mc->interval = backup.interval;
-
-    update_options_box(mc);
-}
-
-static void mailcheck_apply_options(Control * control)
+/* update control */
+static void mailcheck_apply_options(MailDialog *md)
 {
     const char *tmp;
-    t_mailcheck *mc = (t_mailcheck *) control->data;
+    t_mailcheck *mc = md->mc;
 
-    tmp = gtk_entry_get_text(GTK_ENTRY(command_entry));
+    tmp = gtk_entry_get_text(GTK_ENTRY(md->cmd_entry));
 
     if(tmp && *tmp)
     {
@@ -444,9 +413,9 @@ static void mailcheck_apply_options(Control * control)
     }
 
     mc->term =
-        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(term_checkbutton));
+        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(md->term_cb));
 
-    tmp = gtk_entry_get_text(GTK_ENTRY(mbox_entry));
+    tmp = gtk_entry_get_text(GTK_ENTRY(md->mbox_entry));
 
     if(tmp && *tmp)
     {
@@ -455,165 +424,264 @@ static void mailcheck_apply_options(Control * control)
     }
 
     mc->interval = 
-	gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton));
-
-    run_mailcheck(control);
+	gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(md->interval_spin));
 
     mailcheck_set_tip(mc);
+
+    run_mailcheck(mc);
 }
 
-static void browse_cb(GtkWidget * b, GtkEntry * entry)
+/* restore baclup */
+static void mailcheck_revert_options(MailDialog *md)
 {
-    const char *text = gtk_entry_get_text(entry);
+    gtk_entry_set_text(GTK_ENTRY(md->mbox_entry), md->mbox);
+
+    gtk_entry_set_text(GTK_ENTRY(md->cmd_entry), md->command);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->term_cb), md->term);
+
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(md->interval_spin), 
+	    		      md->interval);
+
+    mailcheck_apply_options(md);
+
+    gtk_widget_set_sensitive(md->revert, FALSE);
+}
+
+/* mbox */
+static void mbox_browse_cb(GtkWidget * b, MailDialog *md)
+{
+    const char *text;
     char *file;
 
-    file = select_file_name(NULL, text, NULL);
+    text = gtk_entry_get_text(GTK_ENTRY(md->mbox_entry));
+    
+    file = select_file_name(NULL, text, md->dialog);
 
     if(file)
     {
-        gtk_entry_set_text(entry, file);
-	make_sensitive(revert_button);
+        gtk_entry_set_text(GTK_ENTRY(md->mbox_entry), file);
+	g_free(file);
+	mailcheck_apply_options(md);
+	make_sensitive(md->revert);
     }
 }
 
-gboolean mailcheck_entry_changed(Control *control)
+gboolean mbox_entry_lost_focus(MailDialog *md)
 {
-    mailcheck_apply_options(control);
+    mailcheck_apply_options(md);
 
-    make_sensitive(revert_button);
+    make_sensitive(md->revert);
     
     /* needed to let entry handle focus-out as well */
     return FALSE;
 }
 
-void mailcheck_add_options(Control * control, GtkContainer * container, 
-			   GtkWidget *revert, GtkWidget *done)
+static void add_mbox_box(GtkWidget *vbox, GtkSizeGroup *sg, MailDialog *md)
 {
-    GtkWidget *vbox;
-    GtkWidget *hbox;
-    GtkWidget *label;
-    GtkWidget *mbox_button;
-    GtkWidget *command_button;
-    GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-    t_mailcheck *mc = (t_mailcheck *) control->data;
+    GtkWidget *hbox, *label, *button;
 
-    create_mailcheck_backup(mc);
-    revert_button = revert;
-    
-    vbox = gtk_vbox_new(TRUE, 8);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), 10);
-
-    /* mbox location */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
     label = gtk_label_new(_("Mail box:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_size_group_add_widget(sg, label);
+    gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    mbox_entry = gtk_entry_new();
-    gtk_box_pack_start(GTK_BOX(hbox), mbox_entry, TRUE, TRUE, 0);
+    md->mbox_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(md->mbox_entry), md->mbox);
+    gtk_widget_show(md->mbox_entry);
+    gtk_box_pack_start(GTK_BOX(hbox), md->mbox_entry, TRUE, TRUE, 0);
 
-    mbox_button = gtk_button_new_with_label(" ... ");
-    gtk_box_pack_start(GTK_BOX(hbox), mbox_button, FALSE, FALSE, 0);
+    button = gtk_button_new_with_label("...");
+    gtk_widget_show(button);
+    gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
-    g_signal_connect(mbox_button, "clicked", G_CALLBACK(browse_cb), mbox_entry);
-
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    g_signal_connect(button, "clicked", G_CALLBACK(mbox_browse_cb), md);
 
     /* activate revert button when changing the label */
-    g_signal_connect_swapped(mbox_entry, "insert-at-cursor",
-                             G_CALLBACK(make_sensitive), revert_button);
-    g_signal_connect(mbox_entry, "delete-from-cursor",
-                     G_CALLBACK(make_sensitive), revert_button);
+    g_signal_connect_swapped(md->mbox_entry, "insert-at-cursor",
+                             G_CALLBACK(make_sensitive), md->revert);
+    g_signal_connect(md->mbox_entry, "delete-from-cursor",
+                     G_CALLBACK(make_sensitive), md->revert);
 
     /* only set label on focus out */
-    g_signal_connect_swapped(mbox_entry, "focus-out-event",
-                     G_CALLBACK(mailcheck_entry_changed), control);
+    g_signal_connect_swapped(md->mbox_entry, "focus-out-event",
+                     G_CALLBACK(mbox_entry_lost_focus), md);
+}
 
-    /* mail command */
-    hbox = gtk_hbox_new(FALSE, 4);
+/* command */
+static void command_browse_cb(GtkWidget * b, MailDialog *md)
+{
+    const char *text;
+    char *file;
+
+    text = gtk_entry_get_text(GTK_ENTRY(md->cmd_entry));
+    
+    file = select_file_name(NULL, text, md->dialog);
+
+    if(file)
+    {
+        gtk_entry_set_text(GTK_ENTRY(md->cmd_entry), file);
+	g_free(file);
+/*	mailcheck_apply_options(md);*/
+	make_sensitive(md->revert);
+    }
+}
+
+gboolean command_entry_lost_focus(MailDialog *md)
+{
+    const char *tmp;
+
+    tmp = gtk_entry_get_text(GTK_ENTRY(md->cmd_entry));
+
+    if (tmp && *tmp)
+    {
+	g_free(md->mc->command);
+	md->mc->command = g_strdup(tmp);
+    }
+
+    make_sensitive(md->revert);
+    
+    /* needed to let entry handle focus-out as well */
+    return FALSE;
+}
+
+static void term_toggled(GtkToggleButton *tb, MailDialog *md)
+{
+    md->mc->term = gtk_toggle_button_get_active(tb);
+
+    make_sensitive(md->revert);
+}
+
+static void add_command_box(GtkWidget *vbox, GtkSizeGroup *sg, MailDialog *md)
+{
+    GtkWidget *hbox, *label, *button, *align;
+
+    hbox = gtk_hbox_new(FALSE, BORDER);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
     label = gtk_label_new(_("Mail command:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_size_group_add_widget(sg, label);
+    gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    command_entry = gtk_entry_new();
-    gtk_tooltips_set_tip(tooltips, command_entry,
-                         _
-                         ("Command to run when the button on the panel is clicked"),
-                         NULL);
-    gtk_box_pack_start(GTK_BOX(hbox), command_entry, TRUE, TRUE, 0);
+    md->cmd_entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(md->cmd_entry), md->command);
+    gtk_widget_show(md->cmd_entry);
+    gtk_box_pack_start(GTK_BOX(hbox), md->cmd_entry, TRUE, TRUE, 0);
+    
+    gtk_tooltips_set_tip(tooltips, md->cmd_entry, 
+	    _("Command to run when the button on the panel is clicked"),
+	    NULL);
 
-    command_button = gtk_button_new_with_label(" ... ");
-    gtk_box_pack_start(GTK_BOX(hbox), command_button, FALSE, FALSE, 0);
+    button = gtk_button_new_with_label("...");
+    gtk_widget_show(button);
+    gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
 
-    g_signal_connect(command_button, "clicked", G_CALLBACK(browse_cb),
-                     command_entry);
-
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    g_signal_connect(button, "clicked", G_CALLBACK(command_browse_cb), md);
 
     /* activate revert button when changing the label */
-    g_signal_connect_swapped(command_entry, "insert-at-cursor",
-                             G_CALLBACK(make_sensitive), revert_button);
-    g_signal_connect_swapped(command_entry, "delete-from-cursor",
-                     	     G_CALLBACK(make_sensitive), revert_button);
+    g_signal_connect_swapped(md->cmd_entry, "insert-at-cursor",
+                             G_CALLBACK(make_sensitive), md->revert);
+    g_signal_connect_swapped(md->cmd_entry, "delete-from-cursor",
+                     	     G_CALLBACK(make_sensitive), md->revert);
 
-    /* only set label on focus out */
-    g_signal_connect_swapped(command_entry, "focus-out-event",
-                     G_CALLBACK(mailcheck_entry_changed), control);
+    /* only set command on focus out */
+    g_signal_connect_swapped(md->cmd_entry, "focus-out-event",
+                     G_CALLBACK(command_entry_lost_focus), md);
 
     /* run in terminal ? */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new("");
-    gtk_size_group_add_widget(sg, label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+    align = gtk_alignment_new(0,0,0,0);
+    gtk_widget_show(align);
+    gtk_size_group_add_widget(sg, align);
+    gtk_box_pack_start(GTK_BOX(hbox), align, FALSE, FALSE, 0);
 
-    term_checkbutton = gtk_check_button_new_with_mnemonic(_("Run in _terminal"));
-    gtk_box_pack_start(GTK_BOX(hbox), term_checkbutton, FALSE, FALSE, 0);
+    md->term_cb = gtk_check_button_new_with_mnemonic(_("Run in _terminal"));
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->term_cb), md->term);
+    gtk_widget_show(md->term_cb);
+    gtk_box_pack_start(GTK_BOX(hbox), md->term_cb, FALSE, FALSE, 0);
 
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    g_signal_connect(md->term_cb, "toggled", 
+	    	     G_CALLBACK(term_toggled), md);
+}
 
-    g_signal_connect_swapped(term_checkbutton, "toggled",
-                     	     G_CALLBACK(make_sensitive), revert_button);
+/* interval */
+static void interval_changed(GtkSpinButton *spin, MailDialog *md)
+{
+    md->mc->interval = gtk_spin_button_get_value_as_int(spin);
 
-    g_signal_connect_swapped(term_checkbutton, "toggled",
-                     	     G_CALLBACK(mailcheck_apply_options), control);
+    make_sensitive(md->revert);
+}
 
-    /* mail check interval */
-    hbox = gtk_hbox_new(FALSE, 4);
+static void add_interval_box(GtkWidget *vbox, GtkSizeGroup *sg, MailDialog *md)
+{
+    GtkWidget *hbox, *label;
+
+    hbox = gtk_hbox_new(FALSE, BORDER);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
     label = gtk_label_new(_("Interval (sec):"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_size_group_add_widget(sg, label);
+    gtk_widget_show(label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    spinbutton = gtk_spin_button_new_with_range(1, 600, 1);
-    gtk_box_pack_start(GTK_BOX(hbox), spinbutton, FALSE, FALSE, 0);
+    md->interval_spin = gtk_spin_button_new_with_range(1, 600, 1);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(md->interval_spin), 
+	    		      md->interval);
+    gtk_widget_show(md->interval_spin);
+    gtk_box_pack_start(GTK_BOX(hbox), md->interval_spin, FALSE, FALSE, 0);
 
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    g_signal_connect(md->interval_spin, "value-changed",
+                     G_CALLBACK(interval_changed), md);
+}
+
+/* the dialog */
+void mailcheck_add_options(Control * control, GtkContainer * container, 
+			   GtkWidget *revert, GtkWidget *done)
+{
+    GtkWidget *vbox;
+    GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+    MailDialog *md;
+
+    md = g_new0(MailDialog, 1);
+
+    md->mc = (t_mailcheck *) control->data;
     
-    g_signal_connect_swapped(spinbutton, "value-changed",
-                     	     G_CALLBACK(make_sensitive), revert_button);
+    md->revert = revert;
+    md->dialog = gtk_widget_get_toplevel(revert);
 
-    g_signal_connect_swapped(spinbutton, "value-changed",
-                     	     G_CALLBACK(mailcheck_apply_options), control);
-
-    update_options_box(mc);
+    create_backup(md);
     
-    gtk_widget_show_all(vbox);
+    vbox = gtk_vbox_new(TRUE, BORDER);
+    gtk_widget_show(vbox);
+
+    add_mbox_box(vbox, sg, md);
+
+    add_command_box(vbox, sg, md);
+
+    add_interval_box(vbox, sg, md);
 
     /* signals */
     g_signal_connect_swapped(revert, "clicked", 
-	    	     	     G_CALLBACK(mailcheck_revert_options), control);
+	    	     	     G_CALLBACK(mailcheck_revert_options), md);
 
     g_signal_connect_swapped(done, "clicked", 
-	    	     	     G_CALLBACK(mailcheck_apply_options), control);
+	    	     	     G_CALLBACK(mailcheck_apply_options), md);
 
-    g_signal_connect(done, "clicked", 
-	    	     G_CALLBACK(clean_mailcheck_backup), NULL);
+    g_signal_connect_swapped(md->dialog, "destroy-event", 
+	    	     G_CALLBACK(free_maildialog), md);
 
     gtk_container_add(container, vbox);
 }
@@ -628,7 +696,7 @@ gboolean create_mailcheck_control(Control * control)
 
     control->data = (gpointer) mailcheck;
 
-    run_mailcheck(control);
+    run_mailcheck(mailcheck);
 
     return TRUE;
 }
