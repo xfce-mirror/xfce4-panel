@@ -116,6 +116,23 @@ static void init_settings (Panel * p);
  * ------------------------------------------ */
 
 static void
+set_opacity (Panel * p, gboolean translucent)
+{
+    guint opacity;
+
+    opacity = (translucent ? 0xc0000000 : 0xffffffff);
+    gdk_error_trap_push ();
+
+    gdk_property_change (p->toplevel->window,
+			 gdk_atom_intern ("_NET_WM_WINDOW_OPACITY", FALSE),
+			 gdk_atom_intern ("CARDINAL", FALSE), 32,
+			 GDK_PROP_MODE_REPLACE, (guchar *) & opacity, 1L);
+
+    gdk_error_trap_pop ();
+    
+}
+
+static void
 update_partial_struts (Panel * p)
 {
     gulong data[12] = { 0, };
@@ -1220,6 +1237,7 @@ panel_set_layer (int layer)
 	    gtk_window_present (GTK_WINDOW (panel.toplevel));
 
 	update_partial_struts (&panel);
+        set_opacity (&panel, (layer == ABOVE));
 
 #if 0
 	/* dock type hint */
