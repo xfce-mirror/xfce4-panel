@@ -38,7 +38,7 @@ dnl Check for required packages
 BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [0.0.3])
 BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [0.0.17])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
-BM_DEPEND([XFCE_MCS_MANAGER], [xfce-mcs-manager], [0.1])
+BM_DEPEND([XFCE_MCS_MANAGER], [xfce-mcs-manager], [0.1.0])
 
 dnl Check for optional packages
 BM_DEPEND_CHECK([LIBSTARTUP_NOTIFICATION], [libstartup-notification-1.0],
