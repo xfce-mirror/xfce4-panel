@@ -246,6 +246,13 @@ GdkPixbuf *get_system_pixbuf(int id)
         pb = system_icons[id];
         g_object_ref(pb);
     }
+    else
+    {
+	GdkPixbuf *tmp = pb;
+
+	pb = get_scaled_pixbuf(tmp, MINI_SIZE);
+	g_object_unref(tmp);
+    }
 
     return pb;
 }

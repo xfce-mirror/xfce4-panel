@@ -42,8 +42,11 @@
 
 /* limits to the panel size */
 #define NBSCREENS 12
-#define NBGROUPS 6
+#define NBGROUPS 16
 #define NBITEMS 16
+
+/* minibuttons */
+#define MINI_SIZE 24
 
 #define TINY_PANEL_ICONS 25
 #define SMALL_PANEL_ICONS 30

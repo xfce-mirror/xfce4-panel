@@ -372,6 +372,24 @@ void central_panel_set_style(int style)
 
 void central_panel_set_icon_theme(const char *theme)
 {
+    GdkPixbuf *pb[4];
+    GtkWidget *im;
+    GtkWidget *button;
+    int i;
+
+    pb[0] = get_system_pixbuf(MINILOCK_ICON);
+    pb[1] = get_system_pixbuf(MINIINFO_ICON);
+    pb[2] = get_system_pixbuf(MINIPALET_ICON);
+    pb[3] = get_system_pixbuf(MINIPOWER_ICON);
+
+    for(i = 0; i < 4; i++)
+    {
+        button = minibuttons[i];
+
+        im = gtk_bin_get_child(GTK_BIN(button));
+	gtk_image_set_from_pixbuf(GTK_IMAGE(im),pb[i]);
+        g_object_unref(pb[i]);
+    }
 }
 
 void central_panel_set_current(int n)

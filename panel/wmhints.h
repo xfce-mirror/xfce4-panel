@@ -24,6 +24,8 @@ void check_net_support(void);
 
 void watch_root_properties(void);
 
+void set_window_type_dock(GtkWidget *window);
+
 void request_net_current_desktop(int n);
 void request_net_number_of_desktops(int n);
 

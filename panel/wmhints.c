@@ -31,6 +31,9 @@ Atom xa_NET_CURRENT_DESKTOP = 0;
 Atom xa_NET_NUMBER_OF_DESKTOPS = 0;
 Atom xa_NET_SUPPORTING_WM_CHECK = 0;
 
+Atom xa_NET_WM_WINDOW_TYPE = 0;
+Atom xa_NET_WM_WINDOW_TYPE_DOCK = 0;
+
 Display *dpy;
 Window root;
 
@@ -43,6 +46,9 @@ static void create_atoms(void)
     xa_NET_CURRENT_DESKTOP = XInternAtom(dpy, "_NET_CURRENT_DESKTOP", FALSE);
     xa_NET_NUMBER_OF_DESKTOPS = XInternAtom(dpy, "_NET_NUMBER_OF_DESKTOPS", FALSE);
     xa_NET_SUPPORTING_WM_CHECK = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", FALSE);
+
+    xa_NET_WM_WINDOW_TYPE = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", FALSE);
+    xa_NET_WM_WINDOW_TYPE_DOCK = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", FALSE);
 
     atoms_created = TRUE;
 }
@@ -102,6 +108,25 @@ void check_net_support(void)
                    "http://www.freedesktop.org.\n"
                    "The panel was designed to run with xfwm4, the window"
                    "manager of the XFce project (http://www.xfce.org)"));
+}
+
+void set_window_type_dock(GtkWidget *window)
+{
+  /* Copied from ROX Filer by Thomas Leonard */
+  /* TODO: Use gdk function when it supports this type */
+  {
+    GdkAtom dock_type;
+
+    dock_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_DOCK",
+				   FALSE);
+
+    gtk_widget_realize(window);
+
+    gdk_property_change(window->window,
+                        gdk_atom_intern("_NET_WM_WINDOW_TYPE", FALSE),
+                        gdk_atom_intern("ATOM", FALSE), 32,
+                        GDK_PROP_MODE_REPLACE, (guchar *) &dock_type, 1);
+  }
 }
 
 /* current desktop */

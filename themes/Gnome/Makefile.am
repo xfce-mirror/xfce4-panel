@@ -5,6 +5,10 @@ file1.png \
 file2.png \
 games.png \
 man.png \
+miniinfo.png \
+minilock.png \
+minipalet.png \
+minipower.png \
 multimedia.png \
 network.png \
 paint.png \

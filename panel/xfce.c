@@ -206,6 +206,9 @@ static GtkWidget *create_panel_window(void)
     gtk_window_set_decorated(window, FALSE);
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
+
+    set_window_type_dock(w);
+
     gtk_container_set_border_width(GTK_CONTAINER(w), 0);
 
     pb = get_system_pixbuf(XFCE_ICON);
@@ -594,13 +597,13 @@ void panel_write_xml(xmlNodePtr root)
     if(settings.icon_theme)
         xmlSetProp(node, "icontheme", settings.icon_theme);
 
-    snprintf(value, 2, "%d", settings.num_left);
+    snprintf(value, 3, "%d", settings.num_left);
     xmlSetProp(node, "left", value);
 
-    snprintf(value, 2, "%d", settings.num_right);
+    snprintf(value, 3, "%d", settings.num_right);
     xmlSetProp(node, "right", value);
 
-    snprintf(value, 2, "%d", settings.num_screens);
+    snprintf(value, 3, "%d", settings.num_screens);
     xmlSetProp(node, "screens", value);
 
     snprintf(value, 2, "%d", settings.show_desktop_buttons);
