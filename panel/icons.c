@@ -279,7 +279,7 @@ get_panel_pixbuf (void)
 
     if (icon)
     {
-	pb = gdk_pixbuf_new_from_file (icon, NULL);
+	pb = xfce_pixbuf_new_from_file_at_size (icon, 48, 48, NULL);
 
 	g_free (icon);
     }

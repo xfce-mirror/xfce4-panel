@@ -129,7 +129,6 @@ set_opacity (Panel * p, gboolean translucent)
 			 GDK_PROP_MODE_REPLACE, (guchar *) & opacity, 1L);
 
     gdk_error_trap_pop ();
-    
 }
 
 static void
