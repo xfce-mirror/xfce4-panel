@@ -184,7 +184,8 @@ static GdkPixbuf *_get_themed_pixbuf(const char *name, const char *theme)
     GdkPixbuf *pb = NULL;
     char **icon_paths, **p;
     const char *real_theme;
-    
+    char *path = NULL;
+
     if(theme)
 	real_theme = theme;
     else
@@ -198,8 +199,7 @@ static GdkPixbuf *_get_themed_pixbuf(const char *name, const char *theme)
 
         for(suffix = icon_suffix; *suffix; suffix++)
         {
-            char *path =
-                g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
+            path = g_strconcat(*p, "/", real_theme, "/", name, ".", *suffix, NULL);
 
             if(g_file_test(path, G_FILE_TEST_EXISTS))
                 pb = gdk_pixbuf_new_from_file(path, NULL);
@@ -229,7 +229,10 @@ GdkPixbuf *get_themed_pixbuf(const char *name)
 	pb = _get_themed_pixbuf(name, DEFAULT_THEME);
 
     if (!pb)
+    {
 	pb = get_pixbuf_by_id(UNKNOWN_ICON);
+	g_printerr("xfce: couldn't find icon: %s\n", name);
+    }
     
     return pb;
 }

@@ -48,14 +48,6 @@ int is_xfce_panel_control = 1;
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   General definitions
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-enum
-{
-    NO_MAIL,
-    NEW_MAIL,
-    OLD_MAIL
-};
-
-/* control data structure */
 typedef struct
 {
     int interval;
@@ -79,6 +71,13 @@ t_mailcheck;
 /*  Icons
  *  -----
 */
+enum
+{
+    NO_MAIL,
+    NEW_MAIL,
+    OLD_MAIL
+};
+
 static char *mailcheck_icon_names[] = {
     "nomail",
     "newmail",
