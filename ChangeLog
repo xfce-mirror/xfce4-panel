@@ -1,3 +1,96 @@
+2002-09-29 11:00  xfce
+
+	* panel/xfce_clock.c: Rendering and optimizations to clock_widget
+
+2002-09-29 09:46  xfce
+
+	* panel/xfce_clock.c: clock tweaking.
+
+2002-09-29 09:38  xfce
+
+	* panel/xfce_clock.c: Use MIN where MIN is meant and not MAX !
+
+2002-09-28 23:31  xfce
+
+	* panel/builtins.c: Put back main field for builtin clock to
+	eventbox otherwise the date doesn't show (Jasper was right :) )
+
+2002-09-28 23:24  xfce
+
+	* panel/: builtins.c, xfce.c, xfce_clock.c: Bug fixes in panel.
+	When started w/out central panel, changing style
+	(traditionnal/modern) cause gtk warning on NULL widget, and once
+	started w/out central panel, it could not be showed anymore.
+
+2002-09-28 22:55  xfce
+
+	* panel/: builtins.c, xfce_clock.c: Change the clock widget so
+	analog mode stay readable even in tiny mode. Remove the round frame
+	arround the clock (it looked outdated) and change various
+	internals.
+
+2002-09-28 17:08  zedek
+
+	* TODO: Update TODO list
+
+2002-09-28 17:03  xfce
+
+	* icons/: Makefile.am, Makefile.in: Err, forgot to remove the
+	digits.xbm files from the Makefile.am !
+
+2002-09-28 16:53  xfce
+
+	* icons/digits.xbm, panel/xfce_clock.c, panel/xfce_clock.h: Fix
+	multiple clock not updating correctly, move digits.xbm inside
+	xfce_clock.c because I want anybody to be able take up
+	xfce_clock.[ch] and get all that is needed w/out requiring other
+	external files.
+
+2002-09-28 15:47  xfce
+
+	* Makefile.am, Makefile.in, configure: Add removal of
+	autom4te.cache dir at distclean.
+
+2002-09-27 16:23  xfce
+
+	* panel/xfce_clock.c: [no log message]
+
+2002-09-27 15:35  xfce
+
+	* panel/xfce_clock.c: Add _finalize() method to xfce_clock widget.
+
+2002-09-27 14:46  xfce
+
+	* panel/controls.c: Jasper is right (as usual), the eventbox makes
+	sense.
+
+2002-09-27 14:18  xfce
+
+	* panel/: builtins.c, callbacks.c, central.c, controls.c,
+	controls_dialog.c, dialogs.c, item_dialog.c, popup.c, side.c,
+	wmhints.c, xfce_clock.c, xfce_support.c: Fix clock widget as
+	suggested by Olexiy Avramchenko <ath@beast.stu.cn.ua> on
+	gtk-app-devel-list, revert g_ref since it's not necessary anymore,
+	fix various compilation warnings (some being serious)
+
+2002-09-26 22:59  xfce
+
+	* panel/: builtins.c, controls.c, controls_dialog.c, xfce_clock.c:
+	Bug hunting. Fixed the double free bug when removing clock widget.
+
+2002-09-26 11:36  xfce
+
+	* panel/builtins.c: Fix clock mode not being restored at startup.
+
+2002-09-26 08:27  huysmans
+
+	* panel/: controls.c, controls_dialog.c: Try to fix double free bug
+
+2002-09-26 08:00  huysmans
+
+	* ChangeLog, panel/dialogs.c: Fix embarrassing bug in the code for
+	finding themes. Thanks Korbinus.
+
 2002-09-25 23:17  xfce
 
 	* panel/builtins.c: Put back clock frame with traditional panel

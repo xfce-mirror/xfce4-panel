@@ -65,5 +65,6 @@ panel/Makefile
 plugins/Makefile
 plugins/mailcheck/Makefile
 themes/Makefile
+themes/Bluecurve/Makefile
 themes/Gnome/Makefile
 ])

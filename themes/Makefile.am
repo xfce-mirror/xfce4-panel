@@ -1,2 +1,3 @@
 SUBDIRS = \
-Gnome
+Gnome \
+Bluecurve

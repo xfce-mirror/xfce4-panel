@@ -90,8 +90,8 @@ X_PRE_LIBS = @X_PRE_LIBS@
 am__include = @am__include@
 am__quote = @am__quote@
 install_sh = @install_sh@
-gnomedir = $(pkgdatadir)/themes/Gnome
-gnome_DATA = \
+bluecurvedir = $(pkgdatadir)/themes/Bluecurve
+bluecurve_DATA = \
 edit.png \
 file1.png \
 file2.png \
@@ -110,24 +110,25 @@ sound.png \
 terminal.png \
 trash_empty.png \
 trash_full.png \
-unknown.png
+unknown.png \
+README
 
 
-EXTRA_DIST = $(gnome_DATA)
-subdir = themes/Gnome
+EXTRA_DIST = $(bluecurve_DATA)
+subdir = themes/Bluecurve
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-DATA = $(gnome_DATA)
+DATA = $(bluecurve_DATA)
 
-DIST_COMMON = Makefile.am Makefile.in
+DIST_COMMON = README Makefile.am Makefile.in
 all: all-am
 
 .SUFFIXES:
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  themes/Gnome/Makefile
+	  $(AUTOMAKE) --gnu  themes/Bluecurve/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 
@@ -140,23 +141,23 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-gnomeDATA_INSTALL = $(INSTALL_DATA)
-install-gnomeDATA: $(gnome_DATA)
+bluecurveDATA_INSTALL = $(INSTALL_DATA)
+install-bluecurveDATA: $(bluecurve_DATA)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(gnomedir)
-	@list='$(gnome_DATA)'; for p in $$list; do \
+	$(mkinstalldirs) $(DESTDIR)$(bluecurvedir)
+	@list='$(bluecurve_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(gnomeDATA_INSTALL) $$d$$p $(DESTDIR)$(gnomedir)/$$f"; \
-	  $(gnomeDATA_INSTALL) $$d$$p $(DESTDIR)$(gnomedir)/$$f; \
+	  echo " $(bluecurveDATA_INSTALL) $$d$$p $(DESTDIR)$(bluecurvedir)/$$f"; \
+	  $(bluecurveDATA_INSTALL) $$d$$p $(DESTDIR)$(bluecurvedir)/$$f; \
 	done
 
-uninstall-gnomeDATA:
+uninstall-bluecurveDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(gnome_DATA)'; for p in $$list; do \
+	@list='$(bluecurve_DATA)'; for p in $$list; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(gnomedir)/$$f"; \
-	  rm -f $(DESTDIR)$(gnomedir)/$$f; \
+	  echo " rm -f $(DESTDIR)$(bluecurvedir)/$$f"; \
+	  rm -f $(DESTDIR)$(bluecurvedir)/$$f; \
 	done
 tags: TAGS
 TAGS:
@@ -192,7 +193,7 @@ check: check-am
 all-am: Makefile $(DATA)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(gnomedir)
+	$(mkinstalldirs) $(DESTDIR)$(bluecurvedir)
 
 install: install-am
 install-exec: install-exec-am
@@ -234,7 +235,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-gnomeDATA
+install-data-am: install-bluecurveDATA
 
 install-exec-am:
 
@@ -252,17 +253,17 @@ mostlyclean: mostlyclean-am
 
 mostlyclean-am: mostlyclean-generic mostlyclean-libtool
 
-uninstall-am: uninstall-gnomeDATA uninstall-info-am
+uninstall-am: uninstall-bluecurveDATA uninstall-info-am
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
-	dvi-am info info-am install install-am install-data \
-	install-data-am install-exec install-exec-am install-gnomeDATA \
+	dvi-am info info-am install install-am install-bluecurveDATA \
+	install-data install-data-am install-exec install-exec-am \
 	install-info install-info-am install-man install-strip \
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool uninstall uninstall-am uninstall-gnomeDATA \
-	uninstall-info-am
+	mostlyclean-libtool uninstall uninstall-am \
+	uninstall-bluecurveDATA uninstall-info-am
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -1,5 +1,5 @@
-gnomedir = $(pkgdatadir)/themes/Gnome
-gnome_DATA = \
+bluecurvedir = $(pkgdatadir)/themes/Bluecurve
+bluecurve_DATA = \
 edit.png \
 file1.png \
 file2.png \
@@ -18,6 +18,7 @@ sound.png \
 terminal.png \
 trash_empty.png \
 trash_full.png \
-unknown.png
+unknown.png \
+README
 
-EXTRA_DIST = $(gnome_DATA)
+EXTRA_DIST = $(bluecurve_DATA)
