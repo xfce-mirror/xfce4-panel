@@ -251,6 +251,8 @@ screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev, ScreenButton * sb)
     if(ev->button != 3)
         return FALSE;
 
+    screen_button_dialog(sb);
+    
     return TRUE;
 }
 

@@ -155,7 +155,57 @@ char *select_file_name(const char *title, const char *path, GtkWidget * parent)
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-   Panel dialogs
+   Central panel dialogs
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+void screen_button_dialog(ScreenButton *sb)
+{
+    GtkWidget *dialog;
+    GtkWidget *entry;
+    GtkWidget *vbox1, *vbox2;
+    const char *temp;
+    int response = GTK_RESPONSE_NONE;
+    
+    dialog = gtk_dialog_new_with_buttons(_("Change name"), GTK_WINDOW(toplevel),
+                                         GTK_DIALOG_MODAL,
+                                         GTK_STOCK_CANCEL,
+                                         RESPONSE_CANCEL,
+                                         GTK_STOCK_APPLY, RESPONSE_CHANGE, NULL);
+
+    vbox1 = GTK_DIALOG(dialog)->vbox;
+    
+    vbox2 = gtk_vbox_new(FALSE, 0);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox2), 4);
+    gtk_widget_show(vbox2);
+    gtk_box_pack_start(GTK_BOX(vbox1), vbox2, TRUE, TRUE, 0);
+    
+    entry = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(entry), sb->name);
+    gtk_widget_show(entry);
+    gtk_box_pack_start(GTK_BOX(vbox2), entry, TRUE, TRUE, 0);
+    
+    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+
+    response = gtk_dialog_run(GTK_DIALOG(dialog));
+    
+    if (response == RESPONSE_CHANGE)
+    {
+	temp = gtk_entry_get_text(GTK_ENTRY(entry));
+	
+	if (temp && strlen(temp))
+	{
+	    sb->name = g_strdup(temp);
+	    gtk_label_set_text(GTK_LABEL(sb->label), temp);
+	}
+    }
+    
+    gtk_widget_destroy(dialog);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+   Side panel dialogs
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
@@ -1371,6 +1421,8 @@ static void restore_backup(void)
     settings.y = backup.y;
     panel_set_position();
 
+    /* we just let the calbacks of our dialog do all the work */
+    
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu), backup_theme_index);
@@ -1743,7 +1795,7 @@ static void spin_changed(GtkWidget * spin)
     }
     else if(spin == screens_spin && n != settings.num_screens)
     {
-        panel_set_num_screens(n);
+        request_net_number_of_desktops(n);
         changed = TRUE;
     }
 
