@@ -111,13 +111,16 @@ mailcheck_set_tip (t_mailcheck * mc)
     if (!tooltips)
 	tooltips = gtk_tooltips_new ();
 
-    tip = g_strdup (mc->command);
+    if (mc->command && strlen(mc->command))
+    {
+	tip = g_strdup (mc->command);
 
-    tip[0] = g_ascii_toupper (tip[0]);
+	tip[0] = g_ascii_toupper (tip[0]);
 
-    gtk_tooltips_set_tip (tooltips, mc->button, tip, NULL);
+	gtk_tooltips_set_tip (tooltips, mc->button, tip, NULL);
 
-    g_free (tip);
+	g_free (tip);
+    }
 }
 
 void
@@ -471,9 +474,11 @@ mailcheck_apply_options (MailDialog * md)
 static void
 mailcheck_revert_options (MailDialog * md)
 {
-    gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), md->mbox);
+    if (md->mbox)
+	gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), md->mbox);
 
-    gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), md->command);
+    if (md->command)
+	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), md->command);
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (md->term_cb), md->term);
 
@@ -534,7 +539,8 @@ add_mbox_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     md->mbox_entry = gtk_entry_new ();
-    gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), md->mbox);
+    if (md->mbox)
+	gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), md->mbox);
     gtk_widget_show (md->mbox_entry);
     gtk_box_pack_start (GTK_BOX (hbox), md->mbox_entry, TRUE, TRUE, 0);
 
@@ -626,7 +632,8 @@ add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     md->cmd_entry = gtk_entry_new ();
-    gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), md->command);
+    if (md->command)
+	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), md->command);
     gtk_widget_show (md->cmd_entry);
     gtk_box_pack_start (GTK_BOX (hbox), md->cmd_entry, TRUE, TRUE, 0);
 
