@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
-"POT-Creation-Date: 2003-01-30 14:40+0100\n"
+"POT-Creation-Date: 2003-02-01 14:14+0100\n"
 "PO-Revision-Date: 2003-01-25 03:25+0100\n"
 "Last-Translator: Moritz Heiber <mistermoe@hackerboard.de>\n"
 "Language-Team: none <none@none>\n"
@@ -115,24 +115,24 @@ msgstr "Sound"
 msgid "Terminal"
 msgstr "Terminal"
 
-#: panel/info.c:139
-msgid "XFce 4"
-msgstr "XFce 4"
+#: panel/info.c:141
+msgid "XFce Desktop Environment"
+msgstr ""
 
-#: panel/info.c:145
-msgid "By Olivier Fourdan (c) 1997-2003"
-msgstr "Von Olivier Fourdan (c) 1997-2003"
+#: panel/info.c:146
+msgid "Copyright 2002-2003 by Olivier Fourdan"
+msgstr ""
 
-#: panel/info.c:160 panel/info.c:271 plugins/systembuttons/systembuttons.c:138
+#: panel/info.c:160 panel/info.c:272 plugins/systembuttons/systembuttons.c:138
 #: plugins/systembuttons/systembuttons.c:490
 msgid "Info"
 msgstr "Info"
 
-#: panel/info.c:223
+#: panel/info.c:226
 msgid "Credits"
 msgstr "Credits"
 
-#: panel/info.c:244
+#: panel/info.c:248
 msgid "License"
 msgstr "Lizenz"
 
@@ -357,114 +357,121 @@ msgstr "Aussehen"
 msgid "Position"
 msgstr "Position"
 
-#. Clock tooltip - From xfce3
-#. FIXME: Find another place for that
-#: plugins/clock/clock.c:43
+#: plugins/clock/clock.c:46
 msgid "Sunday"
 msgstr "Sonntag"
 
-#: plugins/clock/clock.c:44
+#: plugins/clock/clock.c:47
 msgid "Monday"
 msgstr "Montag"
 
-#: plugins/clock/clock.c:45
+#: plugins/clock/clock.c:48
 msgid "Tuesday"
 msgstr "Dienstag"
 
-#: plugins/clock/clock.c:46
+#: plugins/clock/clock.c:49
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: plugins/clock/clock.c:47
+#: plugins/clock/clock.c:50
 msgid "Thursday"
 msgstr "Donnerstag"
 
-#: plugins/clock/clock.c:48
+#: plugins/clock/clock.c:51
 msgid "Friday"
 msgstr "Freitag"
 
-#: plugins/clock/clock.c:49
+#: plugins/clock/clock.c:52
 msgid "Saturday"
 msgstr "Samstag"
 
-#: plugins/clock/clock.c:52
+#: plugins/clock/clock.c:56
 msgid "January"
 msgstr "Januar"
 
-#: plugins/clock/clock.c:53
+#: plugins/clock/clock.c:57
 msgid "February"
 msgstr "Februar"
 
-#: plugins/clock/clock.c:54
+#: plugins/clock/clock.c:58
 msgid "March"
 msgstr "März"
 
-#: plugins/clock/clock.c:55
+#: plugins/clock/clock.c:59
 msgid "April"
 msgstr "April"
 
-#: plugins/clock/clock.c:56
+#: plugins/clock/clock.c:60
 msgid "May"
 msgstr "Mai"
 
-#: plugins/clock/clock.c:57
+#: plugins/clock/clock.c:61
 #, fuzzy
 msgid "June"
 msgstr "Juni"
 
-#: plugins/clock/clock.c:58
+#: plugins/clock/clock.c:62
 msgid "July"
 msgstr "Juli"
 
-#: plugins/clock/clock.c:59
+#: plugins/clock/clock.c:63
 msgid "August"
 msgstr "August"
 
-#: plugins/clock/clock.c:60
+#: plugins/clock/clock.c:64
 msgid "September"
 msgstr "September"
 
-#: plugins/clock/clock.c:61
+#: plugins/clock/clock.c:65
 msgid "October"
 msgstr "Oktober"
 
-#: plugins/clock/clock.c:62
+#: plugins/clock/clock.c:66
 msgid "November"
 msgstr "November"
 
-#: plugins/clock/clock.c:63
+#: plugins/clock/clock.c:67
 msgid "December"
 msgstr "Dezember"
 
-#: plugins/clock/clock.c:249
-msgid "Analog"
-msgstr "Analog"
-
-#: plugins/clock/clock.c:253
-msgid "Digital"
-msgstr "Digital"
-
-#: plugins/clock/clock.c:257
-msgid "LED"
-msgstr "LED"
-
-#: plugins/clock/clock.c:508
+#: plugins/clock/clock.c:324
 msgid "Clock type:"
 msgstr "Uhrentyp:"
 
-#: plugins/clock/clock.c:522
-msgid "24 hour clock:"
+#: plugins/clock/clock.c:337
+msgid "Analog"
+msgstr "Analog"
+
+#: plugins/clock/clock.c:341
+msgid "Digital"
+msgstr "Digital"
+
+#: plugins/clock/clock.c:345
+msgid "LED"
+msgstr "LED"
+
+#: plugins/clock/clock.c:407
+msgid "Hour mode:"
+msgstr ""
+
+#: plugins/clock/clock.c:414
+#, fuzzy
+msgid "24 hour"
 msgstr "24 Std. Uhr:"
 
-#: plugins/clock/clock.c:536
-msgid "Toggle AM PM mode :"
-msgstr "AM-PM Modus:"
+#: plugins/clock/clock.c:420
+msgid "12 hour"
+msgstr ""
 
-#: plugins/clock/clock.c:550
+#: plugins/clock/clock.c:426
+msgid "AM/PM"
+msgstr ""
+
+#: plugins/clock/clock.c:467
 msgid "Show seconds:"
 msgstr "Sekunden anzeigen:"
 
-#: plugins/clock/clock.c:604
+#: plugins/clock/clock.c:579
 msgid "Xfce Clock"
 msgstr "XFce Uhr"
 
@@ -554,6 +561,15 @@ msgstr "Mülleimer: %d Dateien / %d %s"
 #: plugins/trash/trash.c:298
 msgid "Trash can"
 msgstr "Mülleimer"
+
+#~ msgid "XFce 4"
+#~ msgstr "XFce 4"
+
+#~ msgid "By Olivier Fourdan (c) 1997-2003"
+#~ msgstr "Von Olivier Fourdan (c) 1997-2003"
+
+#~ msgid "Toggle AM PM mode :"
+#~ msgstr "AM-PM Modus:"
 
 #~ msgid "/_Edit ..."
 #~ msgstr "/_Editieren ..."
