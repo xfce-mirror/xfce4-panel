@@ -21,7 +21,7 @@
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
-          <Command term="0" sn="0">nautilus</Command>
+          <Command term="0" sn="0">nautilus --no-desktop</Command>
           <Tooltip>Nautlius File Manager</Tooltip>
           <Icon id="2"/>
         </Item>
@@ -35,7 +35,7 @@
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">mozilla</Command>
+        <Command term="0" sn="0">mozilla -splash</Command>
         <Tooltip>Mozilla Web Browser</Tooltip>
         <Icon id="7"/>
       </Control>
@@ -44,7 +44,7 @@
       <Popup/>
       <Control id="-1" filename="libmailcheck.so">
         <Mailcheck interval="30">
-          <Command term="0" sn="0">mozilla -mail</Command>
+          <Command term="0" sn="0">mozilla -mail -splash</Command>
         </Mailcheck>
       </Control>
     </Group>
