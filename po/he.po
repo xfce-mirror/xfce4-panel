@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-08-22 16:35+0200\n"
+"POT-Creation-Date: 2004-10-29 11:29+0200\n"
 "PO-Revision-Date: 2004-10-27 19:34+0200\n"
 "Last-Translator: Yuval Tanny <tanai@int.gov.il>\n"
 "Language-Team: \n"
@@ -18,92 +18,92 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
 
-#: panel/xfce_support.c:603
+#: panel/xfce_support.c:516
 msgid "Select file"
 msgstr "בחר קובץ:"
 
-#: panel/settings.c:172
+#: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
 msgstr "לא נמצא מידע. הלוח יהיה ריק."
 
-#: panel/controls_dialog.c:88 panel/item_dialog.c:1200
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "מיקום:"
 
-#: panel/controls_dialog.c:148
+#: panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "מאפייני פריט"
 
-#: panel/controls_dialog.c:200 panel/controls.c:685
+#: panel/controls_dialog.c:209 panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
 msgstr "הסרת הפריט גם תסיר את כל התפריטים הקופצים."
 
-#: panel/item_dialog.c:151 panel/item_dialog.c:605
+#: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
 msgstr "בחר פקודה"
 
-#: panel/item_dialog.c:294
+#: panel/item_dialog.c:264
 msgid "Command:"
 msgstr "פקודה:"
 
-#: panel/item_dialog.c:353
+#: panel/item_dialog.c:307
 msgid "Run in _terminal"
 msgstr "הרץ בתוך _מסוף"
 
-#: panel/item_dialog.c:372
+#: panel/item_dialog.c:325
 msgid "Use startup _notification"
 msgstr "השתמש בהתראת _פתיחה"
 
-#: panel/item_dialog.c:566
+#: panel/item_dialog.c:511
 msgid "Other Icon"
 msgstr "צלמית אחרת"
 
-#: panel/item_dialog.c:676
+#: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
 msgstr "גרור קובץ למסגרת זו כדי לשנות את הצלמית"
 
-#: panel/item_dialog.c:962
+#: panel/item_dialog.c:917
 msgid "Caption:"
 msgstr "כותרת:"
 
-#: panel/item_dialog.c:991
+#: panel/item_dialog.c:946
 msgid "Tooltip:"
 msgstr "תיאור כלי:"
 
-#: panel/item_dialog.c:1019
+#: panel/item_dialog.c:974
 msgid "Attach menu to launcher"
 msgstr "הוסף תפריט למשגר"
 
-#: panel/item_dialog.c:1234
+#: panel/item_dialog.c:1194
 msgid "Change menu item"
 msgstr "שנה פריט תפריט"
 
 #. add buttons
-#: panel/item_dialog.c:1240
-msgid "Remove"
-msgstr "הסר"
+#: panel/item_dialog.c:1200 panel/controls.c:728
+msgid "_Remove"
+msgstr "_הסר"
 
-#: panel/item_dialog.c:1252 panel/item.c:631
+#: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
 msgstr "משגר"
 
-#: panel/item.c:466
+#: panel/item.c:496
 msgid "Click mouse button 3 to change item"
 msgstr "לחץ על לחצן העכבר 3 פעמים כדי לשנות את הפריט"
 
-#: panel/item.c:489
+#: panel/item.c:521
 msgid "Add launcher"
 msgstr "הוסף משגר"
 
-#: panel/item.c:494
+#: panel/item.c:526
 msgid "Add new item"
 msgstr "הוסף פריט חדש"
 
-#: panel/main.c:119
+#: panel/main.c:121
 msgid "Are you sure you want to exit?"
 msgstr "האם אתה בטוח שברצונך לצאת?"
 
-#: panel/main.c:326
+#: panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -125,191 +125,187 @@ msgstr ""
 " מופץ תחת רישיון ה GNU GPL.\n"
 "\n"
 
-#: panel/main.c:395
+#: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s הופעל בהצלחה ללא ניהול ההפעלה"
 
-#: panel/main.c:400
+#: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s הופעל בהצלחה עם ניהול ההפעלה"
 
-#: panel/controls.c:640 panel/controls.c:731
+#: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "אין אפשרות ליצור פריט ללוח \"%s\"."
 
-#: panel/controls.c:792 panel/panel.c:573
+#: panel/controls.c:723 panel/panel.c:585
 msgid "_Properties..."
 msgstr "_מאפיינים..."
 
-#: panel/controls.c:797
-msgid "_Remove"
-msgstr "_הסר"
-
-#: panel/controls.c:806 panel/panel.c:563
+#: panel/controls.c:737 panel/panel.c:575
 msgid "Add _new item"
 msgstr "הוסף פריט _חדש"
 
-#: panel/controls.c:1080
+#: panel/controls.c:1020
 msgid "This item has no configuration options"
 msgstr "לפריט זה אין אפשרויות הגדרה"
 
-#: panel/panel.c:554 panel/panel.c:956 settings/xfce_settings_plugin.c:67
-#: settings/xfce_settings_dialog.c:453
+#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:449
 msgid "Xfce Panel"
 msgstr "לוח Xfce"
 
-#: panel/panel.c:578
+#: panel/panel.c:590
 msgid "_About Xfce"
 msgstr "_אודות Xfce"
 
-#: panel/panel.c:583
+#: panel/panel.c:595
 msgid "_Help"
 msgstr "_עזרה"
 
-#: panel/panel.c:592
+#: panel/panel.c:604
 msgid "_Lock screen"
 msgstr "_נעילת מסך"
 
-#: panel/panel.c:597
+#: panel/panel.c:609
 msgid "_Restart"
 msgstr "_איתחול"
 
-#: panel/panel.c:606
+#: panel/panel.c:618
 msgid "E_xit"
 msgstr "י_ציאה"
 
-#: panel/icons.c:68
+#: panel/icons.c:63
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: panel/icons.c:69
+#: panel/icons.c:64
 msgid "Editor"
 msgstr "עורך"
 
-#: panel/icons.c:70
+#: panel/icons.c:65
 msgid "File management"
 msgstr "מנהל הקבצים"
 
-#: panel/icons.c:71
+#: panel/icons.c:66
 msgid "Utilities"
 msgstr "כלים"
 
-#: panel/icons.c:72
+#: panel/icons.c:67
 msgid "Games"
 msgstr "משחקים"
 
-#: panel/icons.c:73
+#: panel/icons.c:68
 msgid "Help browser"
 msgstr "דפדפן העזרה"
 
-#: panel/icons.c:74
+#: panel/icons.c:69
 msgid "Multimedia"
 msgstr "מולטימדיה"
 
-#: panel/icons.c:75
+#: panel/icons.c:70
 msgid "Network"
 msgstr "רשת"
 
-#: panel/icons.c:76
+#: panel/icons.c:71
 msgid "Graphics"
 msgstr "גרפיקה"
 
-#: panel/icons.c:77
+#: panel/icons.c:72
 msgid "Printer"
 msgstr "מדפסת"
 
-#: panel/icons.c:78
+#: panel/icons.c:73
 msgid "Productivity"
 msgstr "פרודוקטיביות"
 
-#: panel/icons.c:79
+#: panel/icons.c:74
 msgid "Sound"
 msgstr "צליל"
 
-#: panel/icons.c:80
+#: panel/icons.c:75
 msgid "Terminal"
 msgstr "מסוף"
 
-#: panel/mcs_client.c:204
+#: panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "מנהל ההגדרות אינו זמין"
 
-#: panel/popup.c:255
+#: panel/popup.c:267
 msgid "Menu"
 msgstr "תפריט"
 
-#: settings/xfce_settings_dialog.c:97
+#: settings/xfce_settings_dialog.c:88
 msgid "Small"
 msgstr "קטן"
 
-#: settings/xfce_settings_dialog.c:101
+#: settings/xfce_settings_dialog.c:92
 msgid "Medium"
 msgstr "בינוני"
 
-#: settings/xfce_settings_dialog.c:105
+#: settings/xfce_settings_dialog.c:96
 msgid "Large"
 msgstr "גדול"
 
-#: settings/xfce_settings_dialog.c:109
+#: settings/xfce_settings_dialog.c:100
 msgid "Huge"
 msgstr "ענק"
 
-#: settings/xfce_settings_dialog.c:189
+#: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
 msgstr "אופקי"
 
-#: settings/xfce_settings_dialog.c:193
+#: settings/xfce_settings_dialog.c:180
 msgid "Vertical"
 msgstr "אנכי"
 
-#: settings/xfce_settings_dialog.c:232
+#: settings/xfce_settings_dialog.c:222
 msgid "Left"
 msgstr "משמאל"
 
-#: settings/xfce_settings_dialog.c:236
+#: settings/xfce_settings_dialog.c:226
 msgid "Right"
 msgstr "מימין"
 
-#: settings/xfce_settings_dialog.c:240
+#: settings/xfce_settings_dialog.c:230
 msgid "Top"
 msgstr "מעל"
 
-#: settings/xfce_settings_dialog.c:244
+#: settings/xfce_settings_dialog.c:234
 msgid "Bottom"
 msgstr "מתחת"
 
-#: settings/xfce_settings_dialog.c:279
+#: settings/xfce_settings_dialog.c:269
 msgid "Panel size:"
 msgstr "גודל הלוח:"
 
-#: settings/xfce_settings_dialog.c:295
+#: settings/xfce_settings_dialog.c:285
 msgid "Panel orientation:"
 msgstr "כיוון הלוח:"
 
-#: settings/xfce_settings_dialog.c:311
+#: settings/xfce_settings_dialog.c:304
 msgid "Popup position:"
 msgstr "מיקום תפריט התוכניות:"
 
-#: settings/xfce_settings_dialog.c:349
+#: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "תמיד בחזית:"
 
-#: settings/xfce_settings_dialog.c:401
+#: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
 msgstr "הסתרה אוטומטית:"
 
-#: settings/xfce_settings_dialog.c:470
+#: settings/xfce_settings_dialog.c:466
 msgid "Xfce Panel Settings"
 msgstr "הגדרות לוח Xfce"
 
-#: settings/xfce_settings_dialog.c:481
+#: settings/xfce_settings_dialog.c:476
 msgid "Appearance"
 msgstr "מראה"
 
-#: settings/xfce_settings_dialog.c:494
+#: settings/xfce_settings_dialog.c:491
 msgid "Behaviour"
 msgstr "התנהגות"
 
@@ -325,63 +321,63 @@ msgstr "התנהגות"
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:423
+#: plugins/clock/clock.c:429
 msgid "Clock type:"
 msgstr "סוג שעון:"
 
-#: plugins/clock/clock.c:436
+#: plugins/clock/clock.c:442
 msgid "Analog"
 msgstr "אנלוגי"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:446
 msgid "Digital"
 msgstr "דיגיטלי"
 
-#: plugins/clock/clock.c:444
+#: plugins/clock/clock.c:450
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:506
+#: plugins/clock/clock.c:512
 msgid "Hour mode:"
 msgstr "מצב שעה:"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:519
 msgid "24 hour"
 msgstr "24 שעות"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:525
 msgid "12 hour"
 msgstr "12 שעות"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:531
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:563
+#: plugins/clock/clock.c:569
 msgid "Show seconds:"
 msgstr "הצג שניות:"
 
-#: plugins/clock/clock.c:674
+#: plugins/clock/clock.c:682
 msgid "Xfce Clock"
 msgstr "שעון Xfce"
 
-#: plugins/pager/pager.c:309
+#: plugins/pager/pager.c:311
 msgid "Number of rows:"
 msgstr "מספר שורות:"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:313
 msgid "Number of columns:"
 msgstr "מספר טורים:"
 
-#: plugins/pager/pager.c:355
+#: plugins/pager/pager.c:360
 msgid "Graphical pager"
 msgstr "מחליף סביבות עבודה גרפי"
 
-#: plugins/switcher/switcher.c:696
+#: plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "מחליף שולחנות עבודה"
 
-#: plugins/systembuttons/systembuttons.c:55
+#: plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -391,71 +387,77 @@ msgstr ""
 "\n"
 "שאל את מנהל המערכת שלך למידע נוסף."
 
-#: plugins/systembuttons/systembuttons.c:140
+#: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "נעילת מסך"
 
-#: plugins/systembuttons/systembuttons.c:141
-#: plugins/systembuttons/systembuttons.c:508
+#: plugins/systembuttons/systembuttons.c:171
+#: plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "יציאה"
 
-#: plugins/systembuttons/systembuttons.c:142
-#: plugins/systembuttons/systembuttons.c:509
+#: plugins/systembuttons/systembuttons.c:172
+#: plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "הגדרות"
 
-#: plugins/systembuttons/systembuttons.c:143
-#: plugins/systembuttons/systembuttons.c:510
+#: plugins/systembuttons/systembuttons.c:173
+#: plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "מידע"
 
-#: plugins/systembuttons/systembuttons.c:490
-msgid "Show two buttons:"
-msgstr "הצג שני לחצנים:"
-
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:507
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "נעילה"
 
-#: plugins/systembuttons/systembuttons.c:539
+#: plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "לחצן 1:"
 
-#: plugins/systembuttons/systembuttons.c:555
+#: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "לחצן 2:"
 
-#: plugins/systembuttons/systembuttons.c:591
+#. checkbox
+#: plugins/systembuttons/systembuttons.c:579
+msgid "_Hide"
+msgstr ""
+
+#: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
 msgstr "לחצני מערכת"
 
-#: plugins/separator/separator.c:153
+#: plugins/separator/separator.c:155
 msgid "Separator"
 msgstr "מפריד"
 
-#: plugins/mailcheck/mailcheck.c:788
+#: plugins/mailcheck/mailcheck.c:787
 msgid "Mail box:"
 msgstr "תיבת דואר:"
 
-#: plugins/mailcheck/mailcheck.c:825
+#: plugins/mailcheck/mailcheck.c:824
 msgid "New mail command:"
 msgstr "פקודת דואר חדשה:"
 
-#: plugins/mailcheck/mailcheck.c:839
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Command to run when new mail arrives"
 msgstr "פקודה להרצה כאשר דואר חדש מגיע"
 
-#: plugins/mailcheck/mailcheck.c:869
+#: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
 msgstr "פקודה להרצה כאשר הלחצן על הלוח נלחץ"
 
-#: plugins/mailcheck/mailcheck.c:891
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Interval (sec):"
 msgstr "משך זמן (שניות):"
 
-#: plugins/mailcheck/mailcheck.c:963
+#: plugins/mailcheck/mailcheck.c:965
 msgid "Mail checker"
 msgstr "בדיקת דואל"
 
+#~ msgid "Remove"
+#~ msgstr "הסר"
+
+#~ msgid "Show two buttons:"
+#~ msgstr "הצג שני לחצנים:"
