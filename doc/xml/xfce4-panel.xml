@@ -153,7 +153,8 @@ exec xfce4-panel
     </para>
 
     <figure id="default-panel-fig">
-      <title>Default XFce panel</title> <screenshot>
+      <title>Default XFce panel</title> 
+      <screenshot>
 	<mediaobject>
 	  <imageobject>
 	    <imagedata fileref="../images/default_panel.png" format="PNG"/>
@@ -183,6 +184,25 @@ exec xfce4-panel
       (or Shift-click) shows a popup menu. Go on, try it ;-)
     </para>
 
+    <figure id="handle-popup-fig">
+      <title>Move handle popup menu</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="../images/handle-popup.png" format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="../images/handle-popup.eps" format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Shows move handle popup menu.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
     <para>The area between the move handles contains panel items. There are 
       several types of items, for instance program launchers, a clock and a 
       pager.
@@ -203,18 +223,36 @@ exec xfce4-panel
     <title>Panel Items</title>
 
     <para>Most items perform an action when clicked. Right-clicking will
-      open a popup menu, from which you can open a dialog to change item
-      properties, remove an item or add a new item to the panel. 
+      open a popup menu. You can add panel items from the right-click menu 
+      on another item or one of the move handles. To remove panel items use
+      the right-click menu or the 'Remove' button in the item properties 
+      dialog. 
     </para>
-    
-    <para>You can add panel items from the right-click menu on another
-    item or the move handles. To remove panel items use the right-click
-    menu or the 'Remove' button in the item properties dialog. </para>
+
+    <figure id="item-popup-fig">
+      <title>Item popup menu</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="../images/item-popup.png" format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="../images/item-popup.eps" format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Shows item popup menu.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
 
     <para>The properties dialog can be opened from the right-click menu on
-    the item. Each type of panel item has its own configuration dialog.
-    You can also change to another item type in this dialog, e.g. turn
-    a launcher icon into a clock or vice versa.</para>
+      the item. Each type of panel item has its own configuration dialog.
+      You can also change to another item type in this dialog, e.g. turn
+      a launcher icon into a clock or vice versa.
+    </para>
 
     <para>&nbsp;</para>
 
