@@ -430,7 +430,7 @@ panel_set_hidden (Panel * p, gboolean hide)
     if (hide)
     {
 	/* Only hide when the panel is on the edge of the screen 
-	 * Thanks to Eduard Rocatelli for pointing this out */
+	 * Thanks to Eduard Rocatello for pointing this out */
 	
 	/* Depending on orientation, resize */
 	if (settings.orientation == VERTICAL)
