@@ -76,18 +76,22 @@ static int scr = 0;
 static int screen_width = 0;
 static int screen_height = 0;
 
+static void panel_set_hidden (Panel * p, gboolean hide);
+    
 /*  Move handle menu
  *  ----------------
 */
 static void
 edit_prefs (void)
 {
+    panel_set_hidden(&panel, FALSE);
     mcs_dialog (NULL);
 }
 
 static void
 settings_mgr (void)
 {
+    panel_set_hidden(&panel, FALSE);
     mcs_dialog ("all");
 }
 
@@ -95,6 +99,8 @@ static void
 add_new (void)
 {
     Control *control;
+
+    panel_set_hidden(&panel, FALSE);
 
     panel_add_control ();
     panel_set_position ();
