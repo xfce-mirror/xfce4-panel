@@ -3,6 +3,7 @@
 confdir = $(sysconfdir)/xfce4
 conf_DATA = 								\
 	xfce4rc 							\
+	xfce4rc.az 							\
 	xfce4rc.nl 							\
 	xfce4rc.ca							\
 	xfce4rc.vi							\
