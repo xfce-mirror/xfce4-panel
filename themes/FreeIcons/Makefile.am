@@ -1,4 +1,4 @@
-freeiconsdir = $(pkgdatadir)/themes/Carillon
+freeiconsdir = $(pkgdatadir)/themes/FreeIcons
 freeicons_DATA = \
 README \
 edit.png \
@@ -22,4 +22,4 @@ sound.png \
 terminal.png \
 unknown.png
 
-EXTRA_DIST = $(carillon_DATA)
+EXTRA_DIST = $(freeicons_DATA)
