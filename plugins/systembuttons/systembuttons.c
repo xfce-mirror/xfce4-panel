@@ -401,26 +401,27 @@ static void systembuttons_set_size(Control *control, int size)
     int s1, s2, n;
     t_systembuttons *sb = control->data;
 
-    s1 = icon_size[size] + border_width;
-    
-    n = sb->show_two ? 2 : 1;
-
     arrange_systembuttons(sb, settings.orientation);
     gtk_container_add(GTK_CONTAINER(control->base), sb->box);
     
-    if (size > SMALL)
-	s2 = s1 * 0.5 * n + border_width;
-    else
-	s2 = s1 * 0.75 * n + border_width;
+    n = sb->show_two ? 2 : 1;
+    s1 = icon_size[size] + border_width;
+    s2 = s1 * 0.75;
     
     if ((settings.orientation == VERTICAL && size <= SMALL) ||
 	(settings.orientation == HORIZONTAL && size > SMALL))
     {
-	gtk_widget_set_size_request(control->base, s1, s2);
+	if (size > SMALL)
+	    gtk_widget_set_size_request(sb->buttonbox, s2, s1);
+	else
+	    gtk_widget_set_size_request(sb->buttonbox, s2, s1*n*0.75);
     }
     else
     {
-	gtk_widget_set_size_request(control->base, s2, s1);
+	if (size > SMALL)
+	    gtk_widget_set_size_request(sb->buttonbox, s1, s2);
+	else
+	    gtk_widget_set_size_request(sb->buttonbox, s1*n*0.75, s2);
     }
 }
 
