@@ -17,6 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <xfce_togglebutton.h>
+
 #include "global.h"
 #include "item_dialog.h"
 #include "xfce_support.h"
@@ -951,8 +953,8 @@ static void reposition_popup(PanelPopup * pp)
     if(pp->detached)
         return;
 
-    gtk_button_clicked(GTK_BUTTON(pp->button));
-    gtk_button_clicked(GTK_BUTTON(pp->button));
+    xfce_togglebutton_toggled(XFCE_TOGGLEBUTTON(pp->button));
+    xfce_togglebutton_toggled(XFCE_TOGGLEBUTTON(pp->button));
 }
 
 void edit_menu_item_dialog(MenuItem * mi)

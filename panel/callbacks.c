@@ -21,6 +21,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <xfce_togglebutton.h>
+
 #include "callbacks.h"
 #include "xfce_support.h"
 #include "xfce.h"
@@ -155,9 +157,7 @@ static void hide_popup(PanelPopup * pp)
     if(open_popup == pp)
         open_popup = NULL;
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pp->button), FALSE);
-
-    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
+    xfce_togglebutton_set_active(XFCE_TOGGLEBUTTON(pp->button), FALSE);
 
     gtk_widget_hide(pp->window);
 
@@ -201,8 +201,6 @@ static void show_popup(PanelPopup * pp)
         gtk_widget_show(pp->separator);
     }
 
-    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
-
     alloc = pp->button->allocation;
     xbutton = alloc.x;
     ybutton = alloc.y;
@@ -222,7 +220,7 @@ static void show_popup(PanelPopup * pp)
      *  ----------------------------
      *  1) vertical panel
      *  - to the left or the right
-     *    - if buttons right -> right else left
+     *    - if buttons left the left  else right
      *  - fit the screen
      *  2) horizontal
      *  - up or down
@@ -236,20 +234,21 @@ static void show_popup(PanelPopup * pp)
 	
     if (vertical)
     {
-	/* left or right */
-	if (pos == RIGHT && x + alloc.width + req2.width <= w)
-	{
-	    x = x + alloc.width;
-	    y = y + alloc.height - req2.height;
-	}
-	else if (x - req2.width < 0)
-	{
-	    x = x + alloc.width;
-	    y = y + alloc.height - req2.height;
-	}
-	else
+	/* left if buttons left ... */
+	if (pos == LEFT && x - req2.width >= 0)
 	{
 	    x = x - req2.width;
+	    y = y + alloc.height - req2.height;
+	}
+	/* .. or if menu doesn't fit right, but does fit left */
+	else if (x + req2.width + alloc.width > w && x - req2.width >= 0)
+	{
+	    x = x - req2.width;
+	    y = y + alloc.height - req2.height;
+	}
+	else /* right */
+	{
+	    x = x + alloc.width;
 	    y = y + alloc.height - req2.height;
 	}
 
@@ -259,13 +258,14 @@ static void show_popup(PanelPopup * pp)
     }
     else
     {
-	/* up or down */
+	/* down if buttons on bottom ... */
 	if (pos == BOTTOM && y + alloc.height + req2.height <= h)
 	{
 	    x = x + alloc.width / 2 - req2.width / 2;
 	    y = y + alloc.height;
 	}
-	else if (y - req2.height < 0)
+	/* ... or up doesn't fit and down does */
+	else if (y - req2.height < 0 && y + alloc.height + req2.height <= h)
 	{
 	    x = x + alloc.width / 2 - req2.width / 2;
 	    y = y + alloc.height;
@@ -400,8 +400,11 @@ addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
 
             gtk_box_reorder_child(GTK_BOX(pp->vbox), mi->button, 2);
 
-            gtk_button_clicked(GTK_BUTTON(pp->button));
-            gtk_button_clicked(GTK_BUTTON(pp->button));
+	    if (!pp->detached)
+	    {
+		xfce_togglebutton_toggled(XFCE_TOGGLEBUTTON(pp->button));
+		xfce_togglebutton_toggled(XFCE_TOGGLEBUTTON(pp->button));
+	    }
         }
     }
 

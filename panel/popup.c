@@ -17,6 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <xfce_togglebutton.h>
+
 #include "popup.h"
 
 #include "xfce.h"
@@ -320,18 +322,32 @@ PanelPopup *create_panel_popup(void)
 {
     PanelPopup *pp = g_new(PanelPopup, 1);
     GtkWidget *sep;
-
-    pp->up = NULL;
-    pp->down = NULL;
+    GtkArrowType at;
+    gboolean vertical = settings.orientation == VERTICAL;
 
     /* the button */
-    pp->button = gtk_toggle_button_new();
-    gtk_button_set_relief(GTK_BUTTON(pp->button), GTK_RELIEF_NONE);
+    if (vertical)
+    {
+	if (settings.popup_position == LEFT)
+	    at = GTK_ARROW_LEFT;
+	else
+	    at = GTK_ARROW_RIGHT;
+    }
+    else
+    {
+	if (settings.popup_position == BOTTOM)
+	    at = GTK_ARROW_DOWN;
+	else
+	    at = GTK_ARROW_UP;
+    }
+    
+    pp->button = xfce_togglebutton_new(at);
+    gtk_widget_show(pp->button);
+    g_object_ref(pp->button);
+    gtk_widget_set_name(pp->button, "xfce_popup_button");
 
-    pp->image = gtk_image_new();
-    gtk_container_add(GTK_CONTAINER(pp->button), pp->image);
-
-    gtk_widget_show_all(pp->button);
+    if (settings.style == NEW_STYLE)
+	xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NONE);
 
     /* the menu */
     pp->hgroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
@@ -365,7 +381,7 @@ PanelPopup *create_panel_popup(void)
     gtk_container_add(GTK_CONTAINER(pp->tearoff_button), sep);
 
     /* signals */
-    g_signal_connect(pp->button, "clicked", G_CALLBACK(toggle_popup), pp);
+    g_signal_connect(pp->button, "toggled", G_CALLBACK(toggle_popup), pp);
 
 
     g_signal_connect(pp->tearoff_button, "clicked", G_CALLBACK(tearoff_popup),
@@ -493,23 +509,6 @@ void panel_popup_set_size(PanelPopup * pp, int size)
     w = icon_size[size] + border_width;
     h = top_height[size];
 
-    if(pp->up)
-        g_object_unref(pp->up);
-    pb = get_system_pixbuf(UP_ICON);
-    pp->up = get_scaled_pixbuf(pb, h - border_width);
-    g_object_unref(pb);
-
-    if(pp->down)
-        g_object_unref(pp->down);
-    pb = get_system_pixbuf(DOWN_ICON);
-    pp->down = get_scaled_pixbuf(pb, h - border_width);
-    g_object_unref(pb);
-
-    if(!pp->detached)
-        gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
-    else
-        gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
-
     if(pos == LEFT || pos == RIGHT)
         gtk_widget_set_size_request(pp->button, h, w);
     else
@@ -520,15 +519,9 @@ void panel_popup_set_style(PanelPopup * pp, int style)
 {
     GList *li;
     if(style == OLD_STYLE)
-    {
-        gtk_button_set_relief(GTK_BUTTON(pp->button), GTK_RELIEF_NORMAL);
-        gtk_widget_set_name(pp->button, "gxfce_color1");
-    }
+        xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NORMAL);
     else
-    {
-        gtk_button_set_relief(GTK_BUTTON(pp->button), GTK_RELIEF_NONE);
-        gtk_widget_set_name(pp->button, "gxfce_popup_button");
-    }
+        xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NONE);
 
     menu_item_set_style(pp->addtomenu_item, style);
     
@@ -541,7 +534,27 @@ void panel_popup_set_style(PanelPopup * pp, int style)
 
 void panel_popup_set_popup_position(PanelPopup * pp, int position)
 {
+    GtkArrowType at;
+    gboolean vertical = settings.orientation == VERTICAL;
+
     settings.popup_position = position;
+
+    if (vertical)
+    {
+	if (settings.popup_position == LEFT)
+	    at = GTK_ARROW_LEFT;
+	else
+	    at = GTK_ARROW_RIGHT;
+    }
+    else
+    {
+	if (settings.popup_position == BOTTOM)
+	    at = GTK_ARROW_DOWN;
+	else
+	    at = GTK_ARROW_UP;
+    }
+    
+    xfce_togglebutton_set_arrow_type(XFCE_TOGGLEBUTTON(pp->button), at);
     panel_popup_set_size(pp, settings.size);
 }
 
