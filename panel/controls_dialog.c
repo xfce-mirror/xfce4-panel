@@ -289,13 +289,24 @@ controls_dialog (Control * control)
     gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    pos_spin = gtk_spin_button_new_with_range (1, settings.num_groups, 1);
-    gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin), backup_index + 1);
+    if (settings.num_groups > 1)
+    {
+	pos_spin = gtk_spin_button_new_with_range (1, settings.num_groups, 1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin), 
+				   backup_index + 1);
+
+	g_signal_connect (pos_spin, "value-changed", G_CALLBACK (pos_changed),
+			  NULL);
+    }
+    else
+    {
+	char postext[2];
+	sprintf(postext, "%d", 1);
+	pos_spin = gtk_label_new(postext);
+    }
+    
     gtk_widget_show (pos_spin);
     gtk_box_pack_start (GTK_BOX (hbox), pos_spin, FALSE, FALSE, 0);
-
-    g_signal_connect (pos_spin, "value-changed", G_CALLBACK (pos_changed),
-		      NULL);
 
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
