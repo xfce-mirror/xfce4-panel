@@ -8,47 +8,47 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-07 15:17+0200\n"
+"POT-Creation-Date: 2004-09-21 13:35+0200\n"
 "PO-Revision-Date: 2004-09-12 03:12+0300\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:604
+#: panel/xfce_support.c:514
 msgid "Select file"
 msgstr "Вылучыць файл"
 
-#: panel/settings.c:172
+#: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
 msgstr "Даньні ня знойдзены. Панэля нічога ня будзе ўтрымліваць."
 
-#: panel/controls_dialog.c:94 panel/item_dialog.c:1148
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "Становішча:"
 
-#: panel/controls_dialog.c:155
+#: panel/controls_dialog.c:153
 msgid "Item properties"
 msgstr "Уласьцівасьці элемэнтка"
 
-#: panel/controls_dialog.c:207 panel/controls.c:695
+#: panel/controls_dialog.c:207 panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
 msgstr "Выдаленьне элемэнта выкліча выдаленьне ўсплыўнога мэню."
 
-#: panel/item_dialog.c:128 panel/item_dialog.c:550
+#: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
 msgstr "Вылучыць загад"
 
-#: panel/item_dialog.c:268
+#: panel/item_dialog.c:264
 msgid "Command:"
 msgstr "Загад:"
 
-#: panel/item_dialog.c:311
+#: panel/item_dialog.c:307
 msgid "Run in _terminal"
 msgstr "Выконваць у _тэрмінале"
 
-#: panel/item_dialog.c:329
+#: panel/item_dialog.c:325
 msgid "Use startup _notification"
 msgstr "Выкарыстоўваць папяр_эджаньне пад час запуску"
 
@@ -56,52 +56,52 @@ msgstr "Выкарыстоўваць папяр_эджаньне пад час �
 msgid "Other Icon"
 msgstr "Іншая значка"
 
-#: panel/item_dialog.c:621
+#: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
 msgstr "Перацягніце файл у гэты кадар каб зьмяніць значку"
 
-#: panel/item_dialog.c:911
+#: panel/item_dialog.c:917
 msgid "Caption:"
 msgstr "Загаловак:"
 
-#: panel/item_dialog.c:940
+#: panel/item_dialog.c:946
 msgid "Tooltip:"
 msgstr "Падказка:"
 
-#: panel/item_dialog.c:968
+#: panel/item_dialog.c:974
 msgid "Attach menu to launcher"
 msgstr "Далучыць мэню да запускальніка"
 
-#: panel/item_dialog.c:1182
+#: panel/item_dialog.c:1194
 msgid "Change menu item"
 msgstr "Зьмяніць элемэнт мэню"
 
 #. add buttons
-#: panel/item_dialog.c:1188 panel/controls.c:806
+#: panel/item_dialog.c:1200 panel/controls.c:728
 msgid "_Remove"
 msgstr "В_ыдаліць"
 
-#: panel/item_dialog.c:1200 panel/item.c:638
+#: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
 msgstr "Запускальнік"
 
-#: panel/item.c:472
+#: panel/item.c:496
 msgid "Click mouse button 3 to change item"
 msgstr "Пстрыкніце трэцюю кнопку мышы, каб зьмяніць элемэнт"
 
-#: panel/item.c:495
+#: panel/item.c:521
 msgid "Add launcher"
 msgstr "Дадаць запускальнік"
 
-#: panel/item.c:500
+#: panel/item.c:526
 msgid "Add new item"
 msgstr "Дадаць новы элемэнт"
 
-#: panel/main.c:125
+#: panel/main.c:121
 msgid "Are you sure you want to exit?"
 msgstr "Вы насамрэч жадаеце выйсьці?"
 
-#: panel/main.c:332
+#: panel/main.c:398
 #, c-format
 msgid ""
 "\n"
@@ -124,115 +124,115 @@ msgstr ""
 " Распаўсюджваецца на ўмовах GNU GPL.\n"
 "\n"
 
-#: panel/main.c:400
+#: panel/main.c:472
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: пасьпяхова запушчана без падтрымкі кіраваньня сэансам"
 
-#: panel/main.c:405
+#: panel/main.c:477
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: пасьпяхова запушчана з падтрымкай кіраваньня сэансам"
 
-#: panel/controls.c:650 panel/controls.c:740
+#: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Немагчыма стварыць элемэнт панэлі \"%s\"."
 
-#: panel/controls.c:801 panel/panel.c:559
+#: panel/controls.c:723 panel/panel.c:562
 msgid "_Properties..."
 msgstr "_Уласьцівасьці..."
 
-#: panel/controls.c:815 panel/panel.c:549
+#: panel/controls.c:737 panel/panel.c:552
 msgid "Add _new item"
 msgstr "Дадаць _новы элемэнт"
 
-#: panel/controls.c:1089
+#: panel/controls.c:1020
 msgid "This item has no configuration options"
 msgstr "Гэты элемэнт ня мае выбараў наладкі"
 
-#: panel/panel.c:540 panel/panel.c:940 settings/xfce_settings_plugin.c:72
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:448
 msgid "Xfce Panel"
 msgstr "Панэля XFce"
 
-#: panel/panel.c:564
+#: panel/panel.c:567
 msgid "_About Xfce"
 msgstr "_Аб XFce"
 
-#: panel/panel.c:569
+#: panel/panel.c:572
 msgid "_Help"
 msgstr "_Даведка"
 
-#: panel/panel.c:578
+#: panel/panel.c:581
 msgid "_Lock screen"
 msgstr "За_мкнуць экран"
 
-#: panel/panel.c:583
+#: panel/panel.c:586
 msgid "_Restart"
 msgstr "Пераза_пусьціць"
 
-#: panel/panel.c:592
+#: panel/panel.c:595
 msgid "E_xit"
 msgstr "Вы_йсьці"
 
-#: panel/icons.c:57
+#: panel/icons.c:60
 msgid "Default"
 msgstr "Дапомная"
 
-#: panel/icons.c:58
+#: panel/icons.c:61
 msgid "Editor"
 msgstr "Рэдактар"
 
-#: panel/icons.c:59
+#: panel/icons.c:62
 msgid "File management"
 msgstr "Кіраваньне файламі"
 
-#: panel/icons.c:60
+#: panel/icons.c:63
 msgid "Utilities"
 msgstr "Прыблуды"
 
-#: panel/icons.c:61
+#: panel/icons.c:64
 msgid "Games"
 msgstr "Гульні"
 
-#: panel/icons.c:62
+#: panel/icons.c:65
 msgid "Help browser"
 msgstr "Вандроўнік па даведке"
 
-#: panel/icons.c:63
+#: panel/icons.c:66
 msgid "Multimedia"
 msgstr "Музыка/фільмы"
 
-#: panel/icons.c:64
+#: panel/icons.c:67
 msgid "Network"
 msgstr "Сетка"
 
-#: panel/icons.c:65
+#: panel/icons.c:68
 msgid "Graphics"
 msgstr "Графіка"
 
-#: panel/icons.c:66
+#: panel/icons.c:69
 msgid "Printer"
 msgstr "Друкарка"
 
-#: panel/icons.c:67
+#: panel/icons.c:70
 msgid "Productivity"
 msgstr "Вытворчасьць"
 
-#: panel/icons.c:68
+#: panel/icons.c:71
 msgid "Sound"
 msgstr "Гук"
 
-#: panel/icons.c:69
+#: panel/icons.c:72
 msgid "Terminal"
 msgstr "Тэрмінал"
 
-#: panel/mcs_client.c:167
+#: panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "Кіраўнік усталёвак недаступны"
 
-#: panel/popup.c:260
+#: panel/popup.c:267
 msgid "Menu"
 msgstr "Мэню"
 
@@ -296,15 +296,15 @@ msgstr "Заўсёды зьверху:"
 msgid "Autohide:"
 msgstr "Аўтахаваньне:"
 
-#: settings/xfce_settings_dialog.c:467
+#: settings/xfce_settings_dialog.c:465
 msgid "Xfce Panel Settings"
 msgstr "Наладкі панэлі XFce"
 
-#: settings/xfce_settings_dialog.c:478
+#: settings/xfce_settings_dialog.c:475
 msgid "Appearance"
 msgstr "Вонкавы выгляд"
 
-#: settings/xfce_settings_dialog.c:496
+#: settings/xfce_settings_dialog.c:493
 msgid "Behaviour"
 msgstr "Паводзіны"
 
@@ -356,23 +356,23 @@ msgstr "AM/PM"
 msgid "Show seconds:"
 msgstr "Паказваць сэкунды:"
 
-#: plugins/clock/clock.c:674
+#: plugins/clock/clock.c:676
 msgid "Xfce Clock"
 msgstr "Гадзіньнік Xfce"
 
-#: plugins/pager/pager.c:309
+#: plugins/pager/pager.c:311
 msgid "Number of rows:"
 msgstr "Колькасьць радкоў:"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:313
 msgid "Number of columns:"
 msgstr "Колькасьць слупкоў:"
 
-#: plugins/pager/pager.c:356
+#: plugins/pager/pager.c:360
 msgid "Graphical pager"
 msgstr "Графічныя старонкі"
 
-#: plugins/switcher/switcher.c:696
+#: plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "Пераключальнік стальцоў"
 
@@ -391,43 +391,43 @@ msgid "Lock the screen"
 msgstr "Замкнуць экран"
 
 #: plugins/systembuttons/systembuttons.c:171
-#: plugins/systembuttons/systembuttons.c:517
+#: plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "Выхад"
 
 #: plugins/systembuttons/systembuttons.c:172
-#: plugins/systembuttons/systembuttons.c:518
+#: plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "Наладкі"
 
 #: plugins/systembuttons/systembuttons.c:173
-#: plugins/systembuttons/systembuttons.c:519
+#: plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "Зьвесткі"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:516
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "Замкнуць"
 
-#: plugins/systembuttons/systembuttons.c:548
+#: plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "Кнопка №1:"
 
-#: plugins/systembuttons/systembuttons.c:563
+#: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "Кнопка №2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:577
+#: plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "С_хаваць"
 
-#: plugins/systembuttons/systembuttons.c:612
+#: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
 msgstr "Сыстэмныя кнопкі"
 
-#: plugins/separator/separator.c:153
+#: plugins/separator/separator.c:155
 msgid "Separator"
 msgstr "Падзяляльнік"
 
@@ -451,7 +451,7 @@ msgstr "Загад на выкананьне, калі пстрыкнулі па
 msgid "Interval (sec):"
 msgstr "Прамежак (сэк.):"
 
-#: plugins/mailcheck/mailcheck.c:961
+#: plugins/mailcheck/mailcheck.c:965
 msgid "Mail checker"
 msgstr "Праверка пошты"
 

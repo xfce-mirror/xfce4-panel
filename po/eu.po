@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-07 15:17+0200\n"
+"POT-Creation-Date: 2004-09-21 13:35+0200\n"
 "PO-Revision-Date: 2004-09-13 15:35+0200\n"
 "Last-Translator: Piarres Beobide Egaña <pi@beobide.net>\n"
 "Language-Team: Euskara <librezale@librezale.org>\n"
@@ -19,39 +19,39 @@ msgstr ""
 "X-Generator: KBabel 1.3.1\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: panel/xfce_support.c:604
+#: panel/xfce_support.c:514
 msgid "Select file"
 msgstr "Fitxategia aukeratu"
 
-#: panel/settings.c:172
+#: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
 msgstr "Ez da datarik aurkitu. Panela hutsik egongo da."
 
-#: panel/controls_dialog.c:94 panel/item_dialog.c:1148
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "Kokalekua:"
 
-#: panel/controls_dialog.c:155
+#: panel/controls_dialog.c:153
 msgid "Item properties"
 msgstr "Elementu _Propietateak"
 
-#: panel/controls_dialog.c:207 panel/controls.c:695
+#: panel/controls_dialog.c:207 panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
 msgstr "Elementua ezabatzeak popup menua ere kenduko du."
 
-#: panel/item_dialog.c:128 panel/item_dialog.c:550
+#: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
 msgstr "Aukeratu komandoa"
 
-#: panel/item_dialog.c:268
+#: panel/item_dialog.c:264
 msgid "Command:"
 msgstr "Komandoa:"
 
-#: panel/item_dialog.c:311
+#: panel/item_dialog.c:307
 msgid "Run in _terminal"
 msgstr "_terminalean exekutatu"
 
-#: panel/item_dialog.c:329
+#: panel/item_dialog.c:325
 msgid "Use startup _notification"
 msgstr "Erabili notifikazioak"
 
@@ -59,52 +59,52 @@ msgstr "Erabili notifikazioak"
 msgid "Other Icon"
 msgstr "Beste ikono bat"
 
-#: panel/item_dialog.c:621
+#: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
 msgstr "Ekarri fitxategia marko honetara ikono aldatzeko"
 
-#: panel/item_dialog.c:911
+#: panel/item_dialog.c:917
 msgid "Caption:"
 msgstr "Jaso"
 
-#: panel/item_dialog.c:940
+#: panel/item_dialog.c:946
 msgid "Tooltip:"
 msgstr "Etiketa esplitatiboa"
 
-#: panel/item_dialog.c:968
+#: panel/item_dialog.c:974
 msgid "Attach menu to launcher"
 msgstr "Abiarazleari menua gehitu"
 
-#: panel/item_dialog.c:1182
+#: panel/item_dialog.c:1194
 msgid "Change menu item"
 msgstr "Menuaren elementua aldatu"
 
 #. add buttons
-#: panel/item_dialog.c:1188 panel/controls.c:806
+#: panel/item_dialog.c:1200 panel/controls.c:728
 msgid "_Remove"
 msgstr "_Ezabatu"
 
-#: panel/item_dialog.c:1200 panel/item.c:638
+#: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
 msgstr "Abiarazlea"
 
-#: panel/item.c:472
+#: panel/item.c:496
 msgid "Click mouse button 3 to change item"
 msgstr "Saguaren 3. botoia sakatu elementua aldatzeko"
 
-#: panel/item.c:495
+#: panel/item.c:521
 msgid "Add launcher"
 msgstr "Abiarazlea gehitu"
 
-#: panel/item.c:500
+#: panel/item.c:526
 msgid "Add new item"
 msgstr "Elementu berria gehitu"
 
-#: panel/main.c:125
+#: panel/main.c:121
 msgid "Are you sure you want to exit?"
 msgstr "Ziur irten nahi duzula?"
 
-#: panel/main.c:332
+#: panel/main.c:398
 #, c-format
 msgid ""
 "\n"
@@ -126,115 +126,115 @@ msgstr ""
 " GNU GPL Lizentzipean.\n"
 "\n"
 
-#: panel/main.c:400
+#: panel/main.c:472
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: saio kudeatzaile gabe arrakastatsuki abiarazia"
 
-#: panel/main.c:405
+#: panel/main.c:477
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: saio kudeatzailea erabiliaz arrakastatsuki abiarazia"
 
-#: panel/controls.c:650 panel/controls.c:740
+#: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Ezin da \"%s\" panel elementua sortu."
 
-#: panel/controls.c:801 panel/panel.c:559
+#: panel/controls.c:723 panel/panel.c:562
 msgid "_Properties..."
 msgstr "_Propietateak"
 
-#: panel/controls.c:815 panel/panel.c:549
+#: panel/controls.c:737 panel/panel.c:552
 msgid "Add _new item"
 msgstr "Elementu _berria gehitu"
 
-#: panel/controls.c:1089
+#: panel/controls.c:1020
 msgid "This item has no configuration options"
 msgstr "Elementu honek ez ditu ezarpen aukerak"
 
-#: panel/panel.c:540 panel/panel.c:940 settings/xfce_settings_plugin.c:72
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:448
 msgid "Xfce Panel"
 msgstr "Xfce Panela"
 
-#: panel/panel.c:564
+#: panel/panel.c:567
 msgid "_About Xfce"
 msgstr "_Xfce-i buruz"
 
-#: panel/panel.c:569
+#: panel/panel.c:572
 msgid "_Help"
 msgstr "_Laguntza"
 
-#: panel/panel.c:578
+#: panel/panel.c:581
 msgid "_Lock screen"
 msgstr "_PantaiLa blokeatu"
 
-#: panel/panel.c:583
+#: panel/panel.c:586
 msgid "_Restart"
 msgstr "_Desegin"
 
-#: panel/panel.c:592
+#: panel/panel.c:595
 msgid "E_xit"
 msgstr "I_rten"
 
-#: panel/icons.c:57
+#: panel/icons.c:60
 msgid "Default"
 msgstr "Lehenetsia"
 
-#: panel/icons.c:58
+#: panel/icons.c:61
 msgid "Editor"
 msgstr "Editorea"
 
-#: panel/icons.c:59
+#: panel/icons.c:62
 msgid "File management"
 msgstr "Fitxategi kudeatzailea"
 
-#: panel/icons.c:60
+#: panel/icons.c:63
 msgid "Utilities"
 msgstr "Erabilgarriak"
 
-#: panel/icons.c:61
+#: panel/icons.c:64
 msgid "Games"
 msgstr "Jokoak"
 
-#: panel/icons.c:62
+#: panel/icons.c:65
 msgid "Help browser"
 msgstr "Laguntza"
 
-#: panel/icons.c:63
+#: panel/icons.c:66
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: panel/icons.c:64
+#: panel/icons.c:67
 msgid "Network"
 msgstr "Sarea"
 
-#: panel/icons.c:65
+#: panel/icons.c:68
 msgid "Graphics"
 msgstr "Grafikoak"
 
-#: panel/icons.c:66
+#: panel/icons.c:69
 msgid "Printer"
 msgstr "Inprimagailuak"
 
-#: panel/icons.c:67
+#: panel/icons.c:70
 msgid "Productivity"
 msgstr "Produktibitatea"
 
-#: panel/icons.c:68
+#: panel/icons.c:71
 msgid "Sound"
 msgstr "Soinua"
 
-#: panel/icons.c:69
+#: panel/icons.c:72
 msgid "Terminal"
 msgstr "Terminala"
 
-#: panel/mcs_client.c:167
+#: panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "Saio kudeatzailea ez dago erabilgarri"
 
-#: panel/popup.c:260
+#: panel/popup.c:267
 msgid "Menu"
 msgstr "Menua"
 
@@ -298,15 +298,15 @@ msgstr "Beti gainean:"
 msgid "Autohide:"
 msgstr "Automatikoki ezkutatu:"
 
-#: settings/xfce_settings_dialog.c:467
+#: settings/xfce_settings_dialog.c:465
 msgid "Xfce Panel Settings"
 msgstr "Xfce Panelaren Ezarpenak"
 
-#: settings/xfce_settings_dialog.c:478
+#: settings/xfce_settings_dialog.c:475
 msgid "Appearance"
 msgstr "Itxura"
 
-#: settings/xfce_settings_dialog.c:496
+#: settings/xfce_settings_dialog.c:493
 msgid "Behaviour"
 msgstr "Portamoldea"
 
@@ -358,23 +358,23 @@ msgstr "AM/PM"
 msgid "Show seconds:"
 msgstr "Erakutsi segunduak"
 
-#: plugins/clock/clock.c:674
+#: plugins/clock/clock.c:676
 msgid "Xfce Clock"
 msgstr "Xfce-ren erlojua"
 
-#: plugins/pager/pager.c:309
+#: plugins/pager/pager.c:311
 msgid "Number of rows:"
 msgstr "Lerro kopurua:"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:313
 msgid "Number of columns:"
 msgstr "Zutabe kopurua:"
 
-#: plugins/pager/pager.c:356
+#: plugins/pager/pager.c:360
 msgid "Graphical pager"
 msgstr "Paginatzaile grafikoa"
 
-#: plugins/switcher/switcher.c:696
+#: plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "Mahaigain aldaketa"
 
@@ -393,43 +393,43 @@ msgid "Lock the screen"
 msgstr "Pantaila blokeatu"
 
 #: plugins/systembuttons/systembuttons.c:171
-#: plugins/systembuttons/systembuttons.c:517
+#: plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "Irten"
 
 #: plugins/systembuttons/systembuttons.c:172
-#: plugins/systembuttons/systembuttons.c:518
+#: plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "Konfigurazioa"
 
 #: plugins/systembuttons/systembuttons.c:173
-#: plugins/systembuttons/systembuttons.c:519
+#: plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "Informazioa"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:516
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "Blokeatu"
 
-#: plugins/systembuttons/systembuttons.c:548
+#: plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "1 botoia:"
 
-#: plugins/systembuttons/systembuttons.c:563
+#: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "2 botoia:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:577
+#: plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "_Ezkutatu"
 
-#: plugins/systembuttons/systembuttons.c:612
+#: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
 msgstr "Sistema botoiak"
 
-#: plugins/separator/separator.c:153
+#: plugins/separator/separator.c:155
 msgid "Separator"
 msgstr "Bereizlea"
 
@@ -453,7 +453,7 @@ msgstr "Paneleko botoia sakatzean exekutatu behar dena"
 msgid "Interval (sec):"
 msgstr "Interbaloa (seg):"
 
-#: plugins/mailcheck/mailcheck.c:961
+#: plugins/mailcheck/mailcheck.c:965
 msgid "Mail checker"
 msgstr "Posta egiaztatzailea"
 
@@ -633,4 +633,3 @@ msgstr "Posta egiaztatzailea"
 
 #~ msgid "Show minibuttons"
 #~ msgstr "Mostrar minibotones"
-
