@@ -103,6 +103,9 @@ static void create_panel_framework(void)
 	g_object_add_weak_pointer(G_OBJECT(toplevel), (gpointer *)&toplevel);
     }
     
+    /* this is necessary after a SIGHUP */
+    gtk_window_stick(GTK_WINDOW(toplevel));
+
     /* main frame */
     main_frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(main_frame), GTK_SHADOW_OUT);

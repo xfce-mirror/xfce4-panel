@@ -1,3 +1,48 @@
+2003-01-19 17:39  madkiss
+
+	* panel/xfce_support.c: 
+	Line 209: Change "char c;" to "int c;" since "char" can end in an
+	infinite loop. Please also refer to Debian GNU/Linux bugreport
+	#177429, available at http://bugs.debian.org/177429
+
+2003-01-19 15:34  huysmans
+
+	* panel/: callbacks.c, main.c, panel.c: Fix problem with dragging
+	files that contain spaces
+
+2003-01-18 18:13  huysmans
+
+	* panel/panel.c: Damnit I must learn some basic math. Got the
+	ratios the wrong way around
+
+2003-01-18 17:20  huysmans
+
+	* panel/panel.c: Save screen width and height, so we can use a
+	relative position, when the user logs in with a different screen
+	resolution
+
+2003-01-18 11:37  huysmans
+
+	* panel/popup.c: Open a menu when dragging over the toggle button.
+	Thanks to perldude for suggesting it. This is a cool feature
+
+2003-01-18 10:51  huysmans
+
+	* panel/: mcs_client.c, panel.c, panel.h, popup.c: Use
+	gdk_window_move() to prevent margins from interfering with position
+	setting
+
+2003-01-18 00:06  huysmans
+
+	* panel/controls_dialog.c: revert changes that made saving changes
+	fail
+
+2003-01-17 21:15  huysmans
+
+	* ChangeLog, panel/controls_dialog.c, plugins/switcher/switcher.c:
+	Use updated netk functions for workspace names and other dialog
+	fixes
+
 2003-01-17 11:24  huysmans
 
 	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,

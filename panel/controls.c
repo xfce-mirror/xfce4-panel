@@ -325,6 +325,8 @@ static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *con
 	
 	hide_current_popup_menu();
 
+	gtk_widget_grab_focus(b);
+
 	popup_control = control;
 
 	menu = get_control_menu();
