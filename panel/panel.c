@@ -77,6 +77,11 @@ int popup_icon_size[] = { 22, 26, 26, 32 };
 
 static gboolean panel_created = FALSE;
 
+/* original screen sizes, used if screen is not the same
+ * size as in previous session */
+static int old_screen_width = 0;
+static int old_screen_height = 0;
+
 /* screen properties */
 
 static Display *dpy = NULL;
@@ -959,6 +964,21 @@ create_panel (void)
      * This function creates the panel items and popup menus */
     get_panel_config ();
 
+    if (old_screen_width > 0)
+    {
+	double xscale, yscale;
+
+	gtk_widget_size_request (panel.toplevel, &panel_req);
+	
+	xscale = (double) x / (double) (old_screen_width - panel_req.width);
+	yscale = (double) y / (double) (old_screen_height - panel_req.height);
+	
+	x = rint (xscale * (screen_width - panel_req.width));
+	y = rint (yscale * (screen_height - panel_req.height));
+
+	old_screen_width = old_screen_height = 0;
+    }
+	
     panel.position.x = x;
     panel.position.y = y;
     gtk_window_move (GTK_WINDOW (panel.toplevel), x, y);
@@ -1376,12 +1396,8 @@ panel_parse_xml (xmlNodePtr node)
 	     * save the panel width as well to do it right */
 	    if (w != screen_width || h != screen_height)
 	    {
-		panel.position.x =
-		    (int) ((double) (panel.position.x * screen_width) /
-			   (double) w);
-		panel.position.y =
-		    (int) ((double) (panel.position.y * screen_height) /
-			   (double) h);
+		old_screen_width = w;
+		old_screen_height = h;
 	    }
 	}
     }
@@ -1391,8 +1407,6 @@ panel_parse_xml (xmlNodePtr node)
 	settings.orientation = HORIZONTAL;
     if (settings.size < TINY || settings.size > LARGE)
 	settings.size = SMALL;
-/*    if (settings.num_groups < 1 || settings.num_groups > 2 * NBGROUPS)
-	settings.num_groups = 2*NBGROUPS; */
 }
 
 void

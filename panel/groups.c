@@ -598,10 +598,9 @@ groups_add_control (int id, const char *filename, int index)
     if (index >= 0 && index < len)
 	groups_move (len, index);
 
-    if (!group->control->with_popup)
+    if (group->control->with_popup)
     {
-	group->popup = create_panel_popup ();
-	groups_show_popup (index, FALSE);
+	groups_show_popup (index, TRUE);
     }
 
     settings.num_groups++;
