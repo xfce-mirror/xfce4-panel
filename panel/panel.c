@@ -1183,9 +1183,13 @@ panel_set_layer (int layer)
     if (panel.priv->is_created)
     {
 	gboolean visible = GTK_WIDGET_VISIBLE (panel.toplevel);
+	gboolean autohide = panel.priv->settings.autohide;
 
 	if (visible)
 	{
+	    if (autohide)
+		panel_set_autohide (FALSE);
+	    
 	    gtk_widget_hide (panel.toplevel);
 	    gtk_widget_unrealize (panel.toplevel);
 	}
@@ -1207,6 +1211,9 @@ panel_set_layer (int layer)
 		gtk_window_present (GTK_WINDOW (panel.toplevel));
 	    else
 		gtk_widget_show (panel.toplevel);
+
+	    if (autohide)
+		panel_set_autohide (TRUE);
 	}
     }
 }
