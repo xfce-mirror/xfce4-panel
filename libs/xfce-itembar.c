@@ -1146,6 +1146,107 @@ xfce_itembar_get_nth_item (XfceItembar * itembar, int n)
 }
 
 /**
+ * xfce_itembar_raise_event_window
+ * @itembar: a #XfceItembar
+ *
+ * Raise the event window of @itembar. This causes all events, like
+ * mouse clicks or key presses to be send to the itembar and not to 
+ * any item.
+ *
+ * See also: xfce_itembar_lower_event_window
+ **/
+void
+xfce_itembar_raise_event_window (XfceItembar * itembar)
+{
+    XfceItembarPrivate *priv;
+
+    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+
+    priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
+
+    priv->raised = TRUE;
+
+    if (priv->event_window)
+        gdk_window_raise (priv->event_window);
+}
+
+/**
+ * xfce_itembar_lower_event_window
+ * @itembar: a #XfceItembar
+ *
+ * Lower the event window of @itembar. This causes all events, like
+ * mouse clicks or key presses to be send to the items, before reaching the
+ * itembar.
+ *
+ * See also: xfce_itembar_raise_event_window
+ **/
+void
+xfce_itembar_lower_event_window (XfceItembar * itembar)
+{
+    XfceItembarPrivate *priv;
+
+    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+
+    priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
+
+    priv->raised = FALSE;
+
+    if (priv->event_window)
+        gdk_window_lower (priv->event_window);
+}
+
+/**
+ * xfce_itembar_event_window_is_raised
+ * @itembar: a #XfceItembar
+ *
+ * Returns: %TRUE if event window is raised.
+ **/
+gboolean
+xfce_itembar_event_window_is_raised (XfceItembar * itembar)
+{
+    XfceItembarPrivate *priv;
+
+    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
+
+    priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
+
+    return priv->raised;
+}
+
+/**
+ * xfce_itembar_get_item_at_point
+ * @itembar: a #XfceItembar
+ * @x      : x coordinate relative to the itembar window
+ * @y      : y coordinate relative to the itembar window
+ *
+ * Returns: a #GtkWidget or %NULL.
+ **/
+GtkWidget *
+xfce_itembar_get_item_at_point (XfceItembar * itembar, int x, int y)
+{
+    XfceItembarPrivate *priv;
+    GList *l;
+    
+    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), NULL);
+
+    priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
+
+    for (l = priv->children; l != NULL; l = l->next)
+    {
+        GtkWidget *w = l->data;
+        GtkAllocation *a = &(w->allocation);
+
+        if (x >= a->x && x < a->x + a->width 
+            && y >= a->y && y < a->y + a->height)
+        {
+            return w;
+        }
+    }
+
+    return NULL;
+}
+
+/**
  * xfce_itembar_get_drop_index:
  * @itembar: a #XfceItembar
  * @x: x coordinate of a point on the itembar

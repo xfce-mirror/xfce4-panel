@@ -101,11 +101,21 @@ int xfce_itembar_get_item_index                (XfceItembar * itembar,
                                                 GtkWidget * item);
 
 GtkWidget * xfce_itembar_get_nth_item          (XfceItembar * itembar, 
-                                                gint n);
+                                                int n);
+
+void xfce_itembar_raise_event_window           (XfceItembar *itembar);
+
+void xfce_itembar_lower_event_window           (XfceItembar *itembar);
+
+gboolean xfce_itembar_event_window_is_raised   (XfceItembar * itembar);
+
+GtkWidget * xfce_itembar_get_item_at_point     (XfceItembar * itembar, 
+                                                int x, 
+                                                int y);
 
 int xfce_itembar_get_drop_index                (XfceItembar * itembar, 
-                                                gint x, 
-                                                gint y);
+                                                int x, 
+                                                int y);
 
 G_END_DECLS
 
