@@ -1019,7 +1019,7 @@ static void xfce_clock_draw_analog(GtkWidget * widget)
      * Here we decide arbitrary that if the clock widget is smaller than 
      * 20 pixels, we don't draw the shadow.
      */
-    if (MAX (xc, yc) >= 20)
+    if (MIN (xc, yc) >= 20)
     {
 	draw_ticks(widget, widget->style->dark_gc[GTK_STATE_NORMAL], xc, yc);
 	draw_hrs_pointer(widget, widget->style->dark_gc[GTK_STATE_NORMAL], xc, yc);
