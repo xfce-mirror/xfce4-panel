@@ -1089,6 +1089,8 @@ create_panel (void)
 
     update_partial_struts (p);
 
+    update_arrow_direction (p);
+
     /* auto resize functions */
     g_signal_connect (p->toplevel, "size-allocate", 
 	    	      G_CALLBACK (panel_allocate_cb), p);
