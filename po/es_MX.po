@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-09-21 13:35+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2004-01-13 00:00+0100\n"
+"Last-Translator: Edscott Wilson García <edscott@xfce.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,24 +22,20 @@ msgstr "Seleccionar archivo"
 
 #: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "No se encontró información. El panel estará vacío"
 
 #: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "Posición"
 
 #: panel/controls_dialog.c:153
-#, fuzzy
+
 msgid "Item properties"
-msgstr "/_Propiedades..."
+msgstr "Propiedades del elemento"
 
 #: panel/controls_dialog.c:207 panel/controls.c:691
-#, fuzzy
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Remover un elemento también removerá su menú emergente.\n"
-"\n"
-"Desea remover el elemento?"
+msgstr "Quitar el elemento también quitará su menú emergente."
 
 #: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
@@ -55,15 +51,15 @@ msgstr "Ejecutar en _terminal"
 
 #: panel/item_dialog.c:325
 msgid "Use startup _notification"
-msgstr "Utilice notificación de inicio"
+msgstr "Usar notificación de arranque"
 
 #: panel/item_dialog.c:511
 msgid "Other Icon"
-msgstr "Otro ícono"
+msgstr "Otro Ícono"
 
 #: panel/item_dialog.c:622
 msgid "Drag file onto this frame to change the icon"
-msgstr "Jala el archivo a este marco para cambiar el ícono"
+msgstr "Arrastre el fichero a este marco para cambiar el icono"
 
 #: panel/item_dialog.c:917
 msgid "Caption:"
@@ -71,21 +67,20 @@ msgstr "Etiqueta:"
 
 #: panel/item_dialog.c:946
 msgid "Tooltip:"
-msgstr "Etiqueta emergente:"
+msgstr "Etiqueta emergente"
 
 #: panel/item_dialog.c:974
 msgid "Attach menu to launcher"
-msgstr "Agregarle menú al lanzador"
+msgstr "Anexarle un menú al lanzador"
 
 #: panel/item_dialog.c:1194
 msgid "Change menu item"
-msgstr "Cambiar elemento de menú"
+msgstr "Cambiar elemento del menú"
 
 #. add buttons
 #: panel/item_dialog.c:1200 panel/controls.c:728
-#, fuzzy
 msgid "_Remove"
-msgstr "/_Remover"
+msgstr "_Remover"
 
 #: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
@@ -97,18 +92,17 @@ msgstr "Pinche el botón 3 del ratón para cambiar elemento"
 
 #: panel/item.c:521
 msgid "Add launcher"
-msgstr "Adicionar launcher"
+msgstr "Añadir lanzador"
 
 #: panel/item.c:526
 msgid "Add new item"
-msgstr "Adicionar nuevo elemento"
+msgstr "Añadir nuevo elemento"
 
 #: panel/main.c:121
 msgid "Are you sure you want to exit?"
 msgstr "¿Está seguro de querer salir?"
 
 #: panel/main.c:398
-#, fuzzy, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -120,34 +114,37 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"%s, versión %s\n"
-"Parte del ambiente de escritorio Xfce\n"
-"http://www.xfce.org\n"
+"\n"
+" El panel Xfce\n"
+" versión %s\n"
+" Parte del Entorno de Escritorio Xfce\n"
+" http://www.xfce.org\n"
+"\n"
+" Bajo licencia GNU GPL.\n"
+"\n"
 
 #: panel/main.c:472
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: Se inició de manera correcta sin gerente de sessión"
 
 #: panel/main.c:477
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: Se inició de manera correcta con gerente de sessión"
 
 #: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "No se pudo crear el elemento de panel \"%s\"."
 
 #: panel/controls.c:723 panel/panel.c:562
-#, fuzzy
 msgid "_Properties..."
-msgstr "/_Propiedades..."
+msgstr "_Propiedades..."
 
 #: panel/controls.c:737 panel/panel.c:552
-#, fuzzy
 msgid "Add _new item"
-msgstr "/Adicionar nuevo elemento"
+msgstr "Añadir _nuevo elemento"
 
 #: panel/controls.c:1020
 msgid "This item has no configuration options"
@@ -159,33 +156,28 @@ msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
 #: panel/panel.c:567
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/_Acerca de Xfce"
+msgstr "_Acerca de Xfce"
 
 #: panel/panel.c:572
-#, fuzzy
 msgid "_Help"
-msgstr "/Ayuda"
+msgstr "Ayuda"
 
 #: panel/panel.c:581
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/B_Loquear estación"
+msgstr "B_loquear pantalla"
 
 #: panel/panel.c:586
-#, fuzzy
 msgid "_Restart"
-msgstr "_Revertir"
+msgstr "_Recomenzar"
 
 #: panel/panel.c:595
-#, fuzzy
 msgid "E_xit"
-msgstr "/Salir"
+msgstr "Salir"
 
 #: panel/icons.c:60
 msgid "Default"
-msgstr "Por omisión"
+msgstr "Por defecto"
 
 #: panel/icons.c:61
 msgid "Editor"
@@ -237,7 +229,7 @@ msgstr "Terminal"
 
 #: panel/mcs_client.c:170
 msgid "Settings manager not available"
-msgstr "Administrador de sessión no disponible"
+msgstr "Administrador de sesión no está disponible"
 
 #: panel/popup.c:267
 msgid "Menu"
@@ -257,7 +249,7 @@ msgstr "Grande"
 
 #: settings/xfce_settings_dialog.c:100
 msgid "Huge"
-msgstr ""
+msgstr "Enorme"
 
 #: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
@@ -285,19 +277,19 @@ msgstr "Abajo"
 
 #: settings/xfce_settings_dialog.c:269
 msgid "Panel size:"
-msgstr "Tamaño de panel:"
+msgstr "Tamaño del panel:"
 
 #: settings/xfce_settings_dialog.c:285
 msgid "Panel orientation:"
-msgstr "Orientación de panel:"
+msgstr "Orientación del panel:"
 
 #: settings/xfce_settings_dialog.c:304
 msgid "Popup position:"
-msgstr "Posición de menú emergente:"
+msgstr "Posición del menú emergente:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Siempre arriba:"
 
 #: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
@@ -305,7 +297,7 @@ msgstr "Ocultar automáticamente:"
 
 #: settings/xfce_settings_dialog.c:465
 msgid "Xfce Panel Settings"
-msgstr "Configuración del panel Xfce"
+msgstr "Configuración del panel de Xfce"
 
 #: settings/xfce_settings_dialog.c:475
 msgid "Appearance"
@@ -325,7 +317,7 @@ msgstr "Comportamiento"
 #.
 #: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%A, %d %B %Y"
 
 #: plugins/clock/clock.c:423
 msgid "Clock type:"
@@ -333,11 +325,11 @@ msgstr "Tipo de reloj:"
 
 #: plugins/clock/clock.c:436
 msgid "Analog"
-msgstr "Análogo"
+msgstr "Analógico"
 
 #: plugins/clock/clock.c:440
 msgid "Digital"
-msgstr "Digital"
+msgstr "Dígital"
 
 #: plugins/clock/clock.c:444
 msgid "LED"
@@ -345,9 +337,10 @@ msgstr "LED"
 
 #: plugins/clock/clock.c:506
 msgid "Hour mode:"
-msgstr "Modo de hora:"
+msgstr "Modo Horario:"
 
 #: plugins/clock/clock.c:513
+
 msgid "24 hour"
 msgstr "24 horas"
 
@@ -365,15 +358,15 @@ msgstr "Mostrar segundos:"
 
 #: plugins/clock/clock.c:676
 msgid "Xfce Clock"
-msgstr "Reloj Xfce"
+msgstr "Reloj de Xfce"
 
 #: plugins/pager/pager.c:311
 msgid "Number of rows:"
-msgstr ""
+msgstr "Número de filas:"
 
 #: plugins/pager/pager.c:313
 msgid "Number of columns:"
-msgstr ""
+msgstr "Número de columnas"
 
 #: plugins/pager/pager.c:360
 msgid "Graphical pager"
@@ -389,13 +382,13 @@ msgid ""
 "\n"
 "Ask your system administrator for more information"
 msgstr ""
-"El acceso al sistema de configuración está vedado.\n"
+"El acceso al sistema de configuración está inhabilitado.\n"
 "\n"
-"Pregúntele por qué a su administrador de sistema"
+"Para más información consulte con su administrador de sistemas"
 
 #: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
-msgstr "Bloquear la estación"
+msgstr "Bloquear la pantalla"
 
 #: plugins/systembuttons/systembuttons.c:171
 #: plugins/systembuttons/systembuttons.c:519
@@ -427,9 +420,8 @@ msgstr "Botón 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
 msgid "_Hide"
-msgstr "/Ayuda"
+msgstr "Ocultar"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -444,195 +436,23 @@ msgid "Mail box:"
 msgstr "Buzón de correo:"
 
 #: plugins/mailcheck/mailcheck.c:824
-#, fuzzy
 msgid "New mail command:"
-msgstr "Comando de correo:"
+msgstr "Nuevo commando de correo:"
 
 #: plugins/mailcheck/mailcheck.c:838
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Comando a ejecutar cuando el botón del panel se pincha"
+msgstr "Comando a ejecutar cuando llega correo"
 
 #: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Comando a ejecutar cuando el botón del panel se pincha"
+msgstr "Comando a ejecutar cuando se pinche en el botón del panel"
 
 #: plugins/mailcheck/mailcheck.c:889
 msgid "Interval (sec):"
-msgstr "Intervalo (sec):"
+msgstr "Intervalo (seg):"
 
 #: plugins/mailcheck/mailcheck.c:965
-#, fuzzy
 msgid "Mail checker"
-msgstr "Revisar correo"
+msgstr "Revisador de correo"
 
-#~ msgid "Remove"
-#~ msgstr "Remover"
 
-#~ msgid "Show two buttons:"
-#~ msgstr "Mostrar dos botones"
-
-#~ msgid "Change item"
-#~ msgstr "Cambiar elemento"
-
-#~ msgid "Menu:"
-#~ msgstr "Menú"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Panel Xfce"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/Adicionar nuevo elemento"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/_Propiedades..."
-
-#~ msgid "Select icon"
-#~ msgstr "Seleccionar ícono"
-
-#~ msgid "Icon:"
-#~ msgstr "Ícono:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Prevista de ícono"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "Su gestor de ventanas no soporta el protocolo definido en http://www."
-#~ "freedesktop.org. \n"
-#~ "Algunas funciones podrián estar inutilizadas."
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/Administrador de configuración"
-
-#~ msgid "Tiny"
-#~ msgstr "Pequeñito"
-
-#~ msgid "Icon theme:"
-#~ msgstr "Tema de íconos:"
-
-#~ msgid "Panel layer:"
-#~ msgstr "Nivel del panel:"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Center the panel:"
-#~ msgstr "Centrar el panel:"
-
-#~ msgid "Set"
-#~ msgstr "Fijar"
-
-#~ msgid "Position"
-#~ msgstr "Posición"
-
-#~ msgid "Sunday"
-#~ msgstr "Domingo"
-
-#~ msgid "Monday"
-#~ msgstr "Lunes"
-
-#~ msgid "Tuesday"
-#~ msgstr "Martes"
-
-#~ msgid "Wednesday"
-#~ msgstr "Miércoles"
-
-#~ msgid "Thursday"
-#~ msgstr "Jueves"
-
-#~ msgid "Friday"
-#~ msgstr "Viernes"
-
-#~ msgid "Saturday"
-#~ msgstr "Sábado"
-
-#~ msgid "January"
-#~ msgstr "Enero"
-
-#~ msgid "February"
-#~ msgstr "Febrero"
-
-#~ msgid "March"
-#~ msgstr "Marzo"
-
-#~ msgid "April"
-#~ msgstr "Abril"
-
-#~ msgid "May"
-#~ msgstr "Mayo"
-
-#~ msgid "June"
-#~ msgstr "Junio"
-
-#~ msgid "July"
-#~ msgstr "Julio"
-
-#~ msgid "August"
-#~ msgstr "Agosto"
-
-#~ msgid "September"
-#~ msgstr "Septiembre"
-
-#~ msgid "October"
-#~ msgstr "Octubre"
-
-#~ msgid "November"
-#~ msgstr "Noviembre"
-
-#~ msgid "December"
-#~ msgstr "Diciembre"
-
-#~ msgid "_Done"
-#~ msgstr "Termina_Do"
-
-#~ msgid "Type:"
-#~ msgstr "Tipo:"
-
-#~ msgid "Add item"
-#~ msgstr "Adicionar nuevo elemento"
-
-#~ msgid "Credits"
-#~ msgstr "Créditos"
-
-#~ msgid "License"
-#~ msgstr "Licencia"
-
-#~ msgid "/_Panel settings"
-#~ msgstr "/Configuración del _Panel"
-
-#~ msgid "Trashcan: 0 files"
-#~ msgstr "Bote de basura: 0 archivos"
-
-#~ msgid "Trashcan: %d files / %d %s"
-#~ msgstr "Bote de basura: %d archivos / %d %s"
-
-#~ msgid "Trash can"
-#~ msgstr "Bote de basura"
-
-#~ msgid "Xfce 4"
-#~ msgstr "Xfce 4"
-
-#~ msgid "By Olivier Fourdan (c) 1997-2003"
-#~ msgstr "Por Olivier Fourdan (c) 1997-2003"
-
-#~ msgid "Toggle AM PM mode :"
-#~ msgstr "Intercambiar modo AM PM"
-
-#~ msgid "/_Edit ..."
-#~ msgstr "/_Editar ..."
-
-#~ msgid "Traditional"
-#~ msgstr "Tradicional"
-
-#~ msgid "Modern"
-#~ msgstr "Moderno"
-
-#~ msgid "Panel style:"
-#~ msgstr "Estilo del panel"
-
-#~ msgid "Show minibuttons"
-#~ msgstr "Mostrar minibotones"
