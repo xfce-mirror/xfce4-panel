@@ -222,6 +222,9 @@ handler_move_end_cb (GtkWidget * h, gpointer data)
 
     /* TODO: adjust arrow direction based on which quarter of the screen we
      * are (Xinerama aware, of course ;) */
+
+    /* Need to save position here... */
+    write_panel_config ();
 }
 
 GtkWidget *
@@ -662,9 +665,6 @@ panel_set_orientation (int orientation)
     if (hidden)
     {
 	panel_set_autohide (FALSE);
-	
-	while (gtk_events_pending ())
-	    gtk_main_iteration ();
     }
 
     gtk_widget_hide(panel.toplevel);
@@ -702,15 +702,9 @@ panel_set_orientation (int orientation)
     groups_pack (GTK_BOX (panel.group_box));
     groups_set_orientation (orientation);
 
-    while (gtk_events_pending ())
-	gtk_main_iteration ();
-
     panel.position.x = panel.position.y = -1;
     /* also sets position */
     panel_set_size (settings.size);
-
-    while (gtk_events_pending ())
-	gtk_main_iteration ();
 
     gtk_widget_show(panel.toplevel);
     
@@ -819,9 +813,6 @@ panel_center (int side)
     if (hidden)
     {
 	panel_set_autohide (FALSE);
-
-	while (gtk_events_pending ())
-	    gtk_main_iteration ();
     }
 
     gtk_widget_size_request (panel.toplevel, &req);
@@ -882,9 +873,6 @@ panel_set_position (void)
 	    DBG ("unhide panel before repositioning\n");
 
 	    panel_set_autohide (FALSE);
-
-	    while (gtk_events_pending ())
-		gtk_main_iteration ();
 	}
 
 	w = screen_width;
@@ -908,6 +896,9 @@ panel_set_position (void)
 
 	gtk_window_move (GTK_WINDOW (panel.toplevel), panel.position.x,
 			 panel.position.y);
+
+        /* Need to save position here... */
+        write_panel_config ();
 
 	if (hidden)
 	    panel_set_autohide (TRUE);
