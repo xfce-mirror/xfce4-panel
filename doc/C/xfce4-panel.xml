@@ -730,7 +730,7 @@ maintainers, etc. Commented out by default.
       </varlistentry>
       
       <varlistentry>
-	<term>xfce4/kioskrc</term>
+	<term>xfce4/kiosk/kioskrc</term>
 	<listitem><para>Kiosk Mode configuration file. See <ulink
 	    url="#panel-kiosk">next section</ulink> for an explanation.
 	</para></listitem>
@@ -751,7 +751,7 @@ maintainers, etc. Commented out by default.
     <para>The panel now has support for Kiosk Mode, that will prevent users 
       from making changes to their panel configuration. To use it you have to 
       edit or create the file 
-      <filename>${sysconfdir}/xdg/xfce4/kioskrc</filename>.
+      <filename>${sysconfdir}/xdg/xfce4/kiosk/kioskrc</filename>.
     </para>
 
     <para>The best way to explain the format of this file is by using an 
