@@ -53,10 +53,7 @@ enum
     MINIINFO_ICON,
     MINIPALET_ICON,
     MINIPOWER_ICON,
-    HANDLE_ICON,
     ADDICON_ICON,
-    CLOSE_ICON,
-    ICONIFY_ICON,
     UP_ICON,
     DOWN_ICON,
     /* program icons */

@@ -85,16 +85,20 @@ static void handle_arrange(Handle * mh)
     }
 }
 
-static void handler_pressed_cb(GtkWidget *h, GdkEventButton *event, 
+static gboolean handler_pressed_cb(GtkWidget *h, GdkEventButton *event, 
 			       gpointer data)
 {
     hide_current_popup_menu();
+    /* let default handler run */
+    return FALSE;
 }
 
 static gboolean handler_released_cb(GtkWidget *h, GdkEventButton *event, 
-			        gpointer data)
+			            gpointer data)
 {
     gtk_window_get_position(GTK_WINDOW(toplevel), &settings.x, &settings.y);
+    /* let default handler run */
+    return FALSE;
 }
 
 Handle *handle_new(int side)
@@ -141,13 +145,10 @@ Handle *handle_new(int side)
     
     gtk_widget_set_name(mh->handler, "xfce_panel");
 
-    /* connect_after is necessary to let the default handler run 
-     * probably could have returned FALSE from the handler to get
-     * the same effect; never mind, this works */
-    g_signal_connect_after(mh->handler, "button-press-event", 
+    g_signal_connect(mh->handler, "button-press-event", 
 	    	     G_CALLBACK(handler_pressed_cb), NULL);
 
-    g_signal_connect_after(mh->handler, "button-release-event", 
+    g_signal_connect(mh->handler, "button-release-event", 
 	    	     G_CALLBACK(handler_released_cb), NULL);
 
     /* protect against destruction when removed from box */

@@ -1,14 +1,11 @@
 noinst_DATA = \
 addicon.xpm \
-close.xpm \
 diag_icon.xpm \
 down.xpm \
 edit.xpm \
 file1.xpm \
 file2.xpm \
 games.xpm \
-handle.xpm \
-iconify.xpm \
 mail.xpm \
 man.xpm \
 menu_icon.xpm \

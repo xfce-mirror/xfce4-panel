@@ -46,10 +46,7 @@
 #include "icons/minipalet.xpm"
 #include "icons/minipower.xpm"
 
-#include "icons/handle.xpm"
 #include "icons/addicon.xpm"
-#include "icons/close.xpm"
-#include "icons/iconify.xpm"
 #include "icons/up.xpm"
 #include "icons/down.xpm"
 
@@ -105,10 +102,7 @@ static char *system_icon_names[] = {
     "miniinfo",
     "minipalet",
     "minipower",
-    "handle",
     "addicon",
-    "close",
-    "iconify",
     "up",
     "down",
     /* program icons */
@@ -177,15 +171,9 @@ void create_builtin_pixbufs(void)
     system_icons[MINIPOWER_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)minipower_xpm);
 
-    /* move handles */
-    system_icons[HANDLE_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)handle_xpm);
+    /* popup menu */
     system_icons[ADDICON_ICON] =
         gdk_pixbuf_new_from_xpm_data((const char **)addicon_xpm);
-    system_icons[CLOSE_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)close_xpm);
-    system_icons[ICONIFY_ICON] =
-        gdk_pixbuf_new_from_xpm_data((const char **)iconify_xpm);
 
     /* POPUP BUTTOns */
     system_icons[UP_ICON] = gdk_pixbuf_new_from_xpm_data((const char **)up_xpm);
