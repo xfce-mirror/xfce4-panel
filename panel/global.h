@@ -45,7 +45,7 @@
 
 /* don't change default here, this is the fallback option
  * default config is set in the settings manager plugin */
-#define DEFAULT_THEME "XFce"
+#define DEFAULT_THEME "Curve"
 
 /* panel sides / popup orientation */
 enum
