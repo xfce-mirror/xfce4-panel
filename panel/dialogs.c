@@ -84,6 +84,7 @@ void screen_button_dialog(ScreenButton * sb)
         if(temp && strlen(temp))
         {
             screen_button_set_name(sb, temp);
+	    write_panel_config();
         }
     }
 

@@ -201,7 +201,7 @@ void clock_set_size(PanelControl * pc, int size)
 {
     int s = icon_size[size];
     t_clock *clock = (t_clock *) pc->data;
-    gtk_widget_set_size_request(clock->clock, -1, s);
+    gtk_widget_set_size_request(clock->clock, s, s);
 }
 
 /* FIXME: have to have a look into it as I don't really know if that

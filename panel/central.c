@@ -285,18 +285,18 @@ static void add_mini_table(int side, GtkBox * hbox)
         if(settings.orientation == VERTICAL)
         {
             gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
             gtk_table_attach(GTK_TABLE(mini_tables[side]),
                              minibuttons[first + 1],
-                             1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             1, 2, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
         }
         else
         {
             gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
             gtk_table_attach(GTK_TABLE(mini_tables[side]),
                              minibuttons[first + 1],
-                             0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 1, 2, GTK_EXPAND, GTK_EXPAND, 0, 0);
         }
 
         gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);
@@ -306,18 +306,18 @@ static void add_mini_table(int side, GtkBox * hbox)
         if(settings.orientation == VERTICAL)
         {
             gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
             gtk_table_attach(GTK_TABLE(mini_tables[side]),
                              minibuttons[first + 1],
-                             0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 1, 2, GTK_EXPAND, GTK_EXPAND, 0, 0);
         }
         else
         {
             gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-                             0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             0, 1, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
             gtk_table_attach(GTK_TABLE(mini_tables[side]),
                              minibuttons[first + 1],
-                             1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+                             1, 2, 0, 1, GTK_EXPAND, GTK_EXPAND, 0, 0);
         }
 
         gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);

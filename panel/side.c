@@ -202,18 +202,6 @@ MoveHandle *create_move_handle(int side)
 
     if (side == LEFT)
     {
-	pb = get_system_pixbuf(ICONIFY_ICON);
-	im = gtk_image_new_from_pixbuf(pb);
-	g_object_unref(pb);
-	gtk_widget_show(im);
-	gtk_container_add(GTK_CONTAINER(mh->button), im);
-
-	add_tooltip(mh->button, _("Iconify panel"));
-	
-	g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
-    }
-    else
-    {
 	pb = get_system_pixbuf(CLOSE_ICON);
 	im = gtk_image_new_from_pixbuf(pb);
 	g_object_unref(pb);
@@ -223,6 +211,18 @@ MoveHandle *create_move_handle(int side)
 	add_tooltip(mh->button, _("Quit..."));
 	
 	g_signal_connect(mh->button, "clicked", G_CALLBACK(close_cb), NULL);
+    }
+    else
+    {
+	pb = get_system_pixbuf(ICONIFY_ICON);
+	im = gtk_image_new_from_pixbuf(pb);
+	g_object_unref(pb);
+	gtk_widget_show(im);
+	gtk_container_add(GTK_CONTAINER(mh->button), im);
+
+	add_tooltip(mh->button, _("Iconify panel"));
+	
+	g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
     }
 
     if(settings.style == NEW_STYLE)

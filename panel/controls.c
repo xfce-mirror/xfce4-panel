@@ -184,9 +184,6 @@ PanelControl *panel_control_new(int side, int index)
     pc->base = gtk_event_box_new();
     gtk_widget_show(pc->base);
 
-    /* FIXME: this must be removed once the clock size issues are fixed */
-    gtk_widget_set_size_request(pc->base, size, size);
-
     /* protect against destruction when unpacking */
     g_object_ref(pc->base);
 
@@ -257,6 +254,7 @@ void create_panel_control(PanelControl * pc)
                          G_CALLBACK(panel_control_press_cb), pc);
 
     panel_control_start(pc);
+    panel_control_set_settings(pc);
 }
 
 /* here the actual panel control is created */
