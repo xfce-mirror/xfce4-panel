@@ -36,7 +36,7 @@
 #define DATADIR "/usr/local/share/xfce4"
 #endif
 
-#define BORDER 6
+#define BORDER 5
 
 /* panel sides / popup orientation */
 enum
@@ -599,13 +599,13 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     add_spacer(GTK_BOX(vbox));
  
     /* hbox */
-    hbox = gtk_hbox_new(FALSE, 0);
+    hbox = gtk_hbox_new(FALSE, BORDER);
+    gtk_container_set_border_width(GTK_CONTAINER(hbox), BORDER+1);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 
     /* Appearance */
     frame = gtk_frame_new(_("Appearance"));
-    gtk_container_set_border_width(GTK_CONTAINER(frame), BORDER-1);
     gtk_widget_show(frame);
     gtk_box_pack_start(GTK_BOX(hbox), frame, FALSE, FALSE, 0);
     
@@ -622,7 +622,6 @@ void run_xfce_settings_dialog(McsPlugin *mp)
 
     /* Position */
     frame = gtk_frame_new(_("Position"));
-    gtk_container_set_border_width(GTK_CONTAINER(frame), BORDER-1);
     gtk_widget_show(frame);
     gtk_box_pack_start(GTK_BOX(hbox), frame, FALSE, FALSE, 0);
     
