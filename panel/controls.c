@@ -63,8 +63,10 @@
 #define UNLOAD_TIMEOUT 30000 /* 30 secs */
 
 /* Make sure translations are taken from the panel and not from some plugin */
+#ifdef ENABLE_NLS
 #undef _
 #define _(s) dgettext (PACKAGE, s)
+#endif
 
 typedef struct _ControlClassInfo ControlClassInfo;
 

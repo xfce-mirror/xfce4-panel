@@ -43,8 +43,10 @@
 #include "settings.h"
 
 /* Make sure translations are taken from the panel and not from some plugin */
+#ifdef ENABLE_NLS
 #undef _
 #define _(s) dgettext (PACKAGE, s)
+#endif
 
 static gboolean popup_from_timeout = FALSE;
 static int popup_timeout_id = 0;

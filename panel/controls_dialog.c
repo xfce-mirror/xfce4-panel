@@ -42,8 +42,10 @@
 #define BORDER 6
 
 /* Make sure translations are taken from the panel and not from some plugin */
+#ifdef ENABLE_NLS
 #undef _
 #define _(s) dgettext (PACKAGE, s)
+#endif
 
 static GtkWidget *cdialog = NULL;
 

@@ -46,8 +46,10 @@
 
 
 /* Make sure translations are taken from the panel and not from some plugin */
+#ifdef ENABLE_NLS
 #undef _
 #define _(s) dgettext (PACKAGE, s)
+#endif
 
 /* typedefs *
  * -------- */
@@ -1097,7 +1099,7 @@ create_panel (void)
     update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
 	    			 p->position.y + p->priv->req.height / 2);
     
-    gtk_widget_show_now (p->toplevel);
+    gtk_widget_show (p->toplevel);
 
     /* set layer on visible window */
     panel_set_layer (p->priv->settings.layer);
