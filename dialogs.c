@@ -1980,7 +1980,7 @@ void global_settings_dialog(void)
     add_size_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 
-    add_header(_("Apearance"), GTK_BOX(vbox));
+    add_header(_("Appearance"), GTK_BOX(vbox));
     add_style_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 
