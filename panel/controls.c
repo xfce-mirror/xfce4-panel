@@ -58,8 +58,6 @@
 #define SOEXT 		("." G_MODULE_SUFFIX)
 #define SOEXT_LEN 	(strlen (SOEXT))
 
-#define API_VERSION     5
-
 #define UNLOAD_TIMEOUT  30000	/* 30 secs */
 
 typedef struct _ControlClassInfo ControlClassInfo;
@@ -87,6 +85,8 @@ static ControlClassInfo *info_to_add = NULL;
 
 static int unload_id = 0;
 static int unloading = 0;
+
+static char *module_open_message = NULL;
 
 /* not static, must be available in panel.c for handle menu */
 G_MODULE_EXPORT /* EXPORT:popup_control */
@@ -242,10 +242,19 @@ G_MODULE_EXPORT /* EXPORT:xfce_plugin_check_version */
 gchar *
 xfce_plugin_check_version (gint version)
 {
-    if (version != API_VERSION)
-	return "Incompatible plugin version";
+    if (version == XFCE_PLUGIN_API_VERSION)
+        return NULL;
+    else if (version == XFCE_PLUGIN_API_VERSION - 1)
+    {
+        module_open_message = 
+            "Plugin was compiled against older panel headers. "
+            "In case of problems, please upgrade to a newer version "
+            "or rebuild.\n";
+
+        return NULL;
+    }
     else
-	return NULL;
+	return "Incompatible plugin version";
 }
 
 static void
@@ -256,8 +265,12 @@ load_plugin (gchar * path)
 
     DBG ("Load module: %s", path);
 
+    module_open_message = NULL;
     gm = g_module_open (path, 0);
 
+    if (module_open_message)
+        g_message ("Module \"%s\": %s", path, module_open_message);
+    
     if (gm && g_module_symbol (gm, "xfce_control_class_init", &symbol))
     {
 	ControlClassInfo *info;
