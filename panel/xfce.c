@@ -46,6 +46,8 @@ int icon_size(int size)
 {
     switch (size)
     {
+	case TINY:
+	    return TINY_PANEL_ICONS;
         case SMALL:
             return SMALL_PANEL_ICONS;
         case LARGE:
@@ -72,6 +74,8 @@ int top_height(int size)
 {
     switch (size)
     {
+	case TINY:
+	    return 0;
         case SMALL:
             return SMALL_TOPHEIGHT;
         case LARGE:
@@ -202,6 +206,7 @@ static GtkWidget *create_panel_window(void)
     gtk_window_set_decorated(window, FALSE);
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
+    gtk_container_set_border_width(GTK_CONTAINER(w), 0);
 
     pb = get_system_pixbuf(XFCE_ICON);
     gtk_window_set_icon(window, pb);
@@ -233,6 +238,7 @@ void panel_init(void)
 
     frame1 = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame1), GTK_SHADOW_OUT);
+    gtk_container_set_border_width(GTK_CONTAINER(frame1), 0);
     gtk_container_add(GTK_CONTAINER(window), frame1);
     gtk_widget_show(frame1);
 

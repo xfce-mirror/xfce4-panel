@@ -209,6 +209,7 @@ void add_panel_group(PanelGroup * pg, GtkBox * hbox)
 {
     pg->frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(pg->frame), GTK_SHADOW_NONE);
+    gtk_container_set_border_width(GTK_CONTAINER(pg->frame), 0);
     gtk_widget_show(pg->frame);
 
     pg->box = gtk_vbox_new(FALSE, 0);
