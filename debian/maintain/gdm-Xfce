@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Make Xfce4 selectable in the GDM menu
+#
+
+xsetroot -display :0 -solid darkblue
+/usr/bin/x-window-manager &
+exec /usr/bin/xfce4

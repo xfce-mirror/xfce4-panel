@@ -1,0 +1,40 @@
+#!/bin/sh
+
+ME="`whoami`"
+XINITRC="$HOME/.xinitrc"
+BAK="$XINITRC.bak.`date +%F | sed 's/-//g'`"
+
+print_copyright () {
+	echo "This script will set up Xfce4 for local use for user `whoami`"
+	echo "Version: xfce4_setup,v 0.1 2002/11/27 16:57:00 madkiss Exp $"
+	echo "Copyright (C) 2002 by Martin Loschwitz"
+	echo ""
+}
+
+save_old_xinitrc () {
+	if [ -f "$HOME/.xinitrc" ]; then
+	  cp "$HOME/.xinitrc" $BAK
+	  echo "Old .xinitrc saved to $BAK"
+	  echo ""
+	fi
+}
+
+warn_xwindow_manager () {
+	echo "WARNING! This scripts assumes that your x-window-manager alternatives"
+	echo "entry points to the window manager you want to use. If it doesn't, "
+	echo "please correct the /usr/bin/x-window-manager symlink."
+	echo ""
+}
+
+write_new_xinitrc () {
+	rm -rf $XINITRC
+	echo "xsetroot -display :0 -solid darkblue" > $XINITRC
+	echo "/usr/bin/x-window-manager &" >> $XINITRC
+	echo "exec /usr/bin/xfce4" >> $XINITRC
+	echo "$XINITRC has been created and should be ready for use now."
+}
+
+print_copyright
+save_old_xinitrc
+warn_xwindow_manager
+write_new_xinitrc
