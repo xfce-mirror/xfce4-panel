@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4\n"
-"POT-Creation-Date: 2003-07-10 10:18+0200\n"
+"POT-Creation-Date: 2003-07-19 10:02+0200\n"
 "PO-Revision-Date: 2003-07-16 18:04+0300\n"
 "Last-Translator: Dan Korostelev <digger_temp@netman.ru>\n"
 "Language-Team: Dan Korostelev <daniel@ats.energo.ru>\n"
@@ -22,13 +22,11 @@ msgstr "Выбор файла"
 msgid "Change item"
 msgstr ""
 
-#: panel/controls_dialog.c:278
-#: panel/item_dialog.c:650
+#: panel/controls_dialog.c:278 panel/item_dialog.c:650
 msgid "Position:"
 msgstr "Расположение:"
 
-#: panel/controls_dialog.c:323
-#: panel/controls.c:272
+#: panel/controls_dialog.c:323 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -58,13 +56,11 @@ msgstr "Выбор комманды"
 msgid "Command:"
 msgstr "Комманда:"
 
-#: panel/item_dialog.c:495
-#: plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:495 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Запуск в терминале"
 
-#: panel/item_dialog.c:500
-#: plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:500 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Оповещение о запуске"
 
@@ -101,19 +97,19 @@ msgstr "Изменение пункта меню"
 msgid "Remove"
 msgstr "Убрать"
 
-#: panel/item.c:360
+#: panel/item.c:441
 msgid "Click mouse button 3 to change item"
 msgstr ""
 
-#: panel/item.c:383
+#: panel/item.c:464
 msgid "Add launcher"
 msgstr "Добавить"
 
-#: panel/item.c:388
+#: panel/item.c:469
 msgid "Add new item"
 msgstr "Добавить новый пункт"
 
-#: panel/item.c:518
+#: panel/item.c:601
 msgid "Launcher"
 msgstr "Ярлык"
 
@@ -134,19 +130,19 @@ msgstr ""
 
 #: panel/main.c:275
 msgid ""
-"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+"Your window manager does not seem to support the new window manager hints as "
+"defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Похоже, ваш оконный менеджер не поддерживает новые вещицы, описанные на http://www.freedesktop.org.\n"
+"Похоже, ваш оконный менеджер не поддерживает новые вещицы, описанные на "
+"http://www.freedesktop.org.\n"
 "Некоторые возможности XFce могут не работать как следует."
 
-#: panel/controls.c:320
-#: panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/Добавить"
 
-#: panel/controls.c:322
-#: panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:125
 msgid "/_Properties..."
 msgstr "/Свойства..."
 
@@ -182,8 +178,7 @@ msgstr "/Запереть экран"
 msgid "/E_xit"
 msgstr "/Выход"
 
-#: panel/panel.c:469
-#: settings/xfce_settings_plugin.c:82
+#: panel/panel.c:469 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:641
 msgid "XFce Panel"
 msgstr "Панель XFce"
@@ -272,24 +267,20 @@ msgstr "Горизонтально"
 msgid "Vertical"
 msgstr "Вертикально"
 
-#: settings/xfce_settings_dialog.c:218
-#: settings/xfce_settings_dialog.c:448
+#: settings/xfce_settings_dialog.c:218 settings/xfce_settings_dialog.c:448
 msgid "Left"
 msgstr "Слева"
 
-#: settings/xfce_settings_dialog.c:222
-#: settings/xfce_settings_dialog.c:449
+#: settings/xfce_settings_dialog.c:222 settings/xfce_settings_dialog.c:449
 msgid "Right"
 msgstr "Справа"
 
-#: settings/xfce_settings_dialog.c:226
-#: settings/xfce_settings_dialog.c:447
+#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:447
 #: settings/xfce_settings_dialog.c:503
 msgid "Top"
 msgstr "Верхний"
 
-#: settings/xfce_settings_dialog.c:230
-#: settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:446
 #: settings/xfce_settings_dialog.c:511
 msgid "Bottom"
 msgstr "Нижний"
@@ -546,4 +537,3 @@ msgstr "Интервал (в секундах):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Проверка почты"
-
