@@ -28,4 +28,6 @@ void set_transient_for_dialog(GtkWidget * window);
 
 void global_settings_dialog(void);
 
+void info_panel_dialog( void );
+
 #endif /* __XFCE_DIALOGS_H__ */

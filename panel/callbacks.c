@@ -106,6 +106,9 @@ void mini_lock_cb(void)
 void mini_info_cb(void)
 {
     hide_current_popup_menu();
+
+    info_panel_dialog();
+
 }
 
 void mini_palet_cb(void)

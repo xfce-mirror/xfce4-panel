@@ -35,11 +35,11 @@
 #include "icons.h"
 
 enum
-{ RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
+    { RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   Central panel dialogs
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+  -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 void screen_button_dialog(ScreenButton * sb)
 {
     GtkWidget *dialog;
@@ -86,7 +86,7 @@ void screen_button_dialog(ScreenButton * sb)
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   Side panel dialogs
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+  -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 GtkWidget *dialog = NULL;
 
@@ -98,7 +98,7 @@ void set_transient_for_dialog(GtkWidget * window)
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   Global settings
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+  -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 /* size: option menu
  * popup size: option menu
@@ -690,7 +690,7 @@ static void add_controls_box(GtkBox * box)
 		     NULL);
 
     /* subgroup central */
-    central_vbox = gtk_vbox_new(TRUE, 0);
+    central_vbox = gtk_vbox_new(TRUE, 4);
     gtk_widget_show(central_vbox);
     gtk_box_pack_start(GTK_BOX(vbox), central_vbox, FALSE, TRUE, 0);
 
