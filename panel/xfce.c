@@ -291,6 +291,8 @@ void panel_cleanup(void)
     side_panel_cleanup(LEFT);
     central_panel_cleanup();
     side_panel_cleanup(RIGHT);
+    
+    gtk_widget_destroy(toplevel);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
