@@ -193,14 +193,14 @@ static void xfce_clock_init(XfceClock * clock)
     clock->timer = 0;
     clock->radius = 0;
     clock->pointer_width = 0;
-    clock->relief = FALSE; /* TRUE */
-    clock->parent_style = NULL;
 
     clock->mode = XFCE_CLOCK_ANALOG;
     clock->military_time = 0;   /* use 12 hour mode by default */
     clock->display_am_pm = 1;   /* display am or pm by default. */
     clock->display_secs = 0;    /* do not display secs by default */
     clock->interval = 100;      /* 1/10 seconds update interval by default */
+    
+    clock->led_size = DIGIT_MEDIUM;
 }
 
 GtkWidget *xfce_clock_new(void)
@@ -344,6 +344,22 @@ guint xfce_clock_get_interval(XfceClock * clock)
     return (clock->interval);
 }
 
+void xfce_clock_set_led_size(XfceClock * clock, XfceClockLedSize size)
+{
+    g_return_if_fail(clock != NULL);
+    g_return_if_fail(XFCE_IS_CLOCK(clock));
+    clock->led_size = size;
+    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)) && (clock->mode == XFCE_CLOCK_LEDS))
+        xfce_clock_draw(GTK_WIDGET(clock), NULL);
+}
+
+XfceClockLedSize xfce_clock_get_led_size(XfceClock * clock)
+{
+    g_return_if_fail(clock != NULL);
+    g_return_if_fail(XFCE_IS_CLOCK(clock));
+    return (clock->led_size);
+}
+
 void xfce_clock_suspend(XfceClock * clock)
 {
     g_return_if_fail(clock != NULL);
@@ -369,6 +385,15 @@ void xfce_clock_resume(XfceClock * clock)
     clock->timer =
         gtk_timeout_add(clock->interval, (GtkFunction) xfce_clock_timer,
                         (gpointer) clock);
+}
+
+void xfce_clock_set_digit_size(XfceClock * clock, XfceClockMode mode)
+{
+    g_return_if_fail(clock != NULL);
+    g_return_if_fail(XFCE_IS_CLOCK(clock));
+    clock->mode = mode;
+    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+        xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
 void xfce_clock_set_mode(XfceClock * clock, XfceClockMode mode)
@@ -410,8 +435,125 @@ XfceClockMode xfce_clock_get_mode(XfceClock * clock)
 static void xfce_clock_size_request(GtkWidget * widget,
                                     GtkRequisition * requisition)
 {
-    requisition->width = MY_CLOCK_DEFAULT_SIZE;
-    requisition->height = MY_CLOCK_DEFAULT_SIZE;
+    gchar buffer[16];
+    XfceClock *clock;
+    guint ln = 0;
+    guint width = 0;
+    guint height = 0;
+    PangoLayout *layout = NULL;
+    PangoRectangle logical_rect;
+
+    g_return_if_fail(widget != NULL);
+    g_return_if_fail(XFCE_IS_CLOCK(widget));
+
+    clock = XFCE_CLOCK(widget);
+    
+    switch (clock->mode)
+    {
+        case XFCE_CLOCK_DIGITAL:
+	    if(clock->military_time)
+	    {
+	        if (clock->display_secs)
+		{
+		    strcpy(buffer, "88:88:88");
+		}
+		else
+		{
+		    strcpy(buffer, "88:88");
+		}
+            }
+	    else if(clock->display_am_pm)
+	    {
+        	if(clock->display_secs)
+		{
+		    strcpy(buffer, "88:88:88XX");
+        	}
+		else
+		{
+		    strcpy(buffer, "88:88XX");
+		}
+	    }
+	    else
+	    {
+        	if(clock->display_secs)
+		{
+		    strcpy(buffer, "88:88:88");
+        	}
+		else
+		{
+		    strcpy(buffer, "88:88");
+		}
+	    }
+	    layout = gtk_widget_create_pango_layout(widget, buffer);
+            pango_layout_get_pixel_extents(layout, NULL, &logical_rect);
+    	    requisition->width = logical_rect.width + 6;
+	    requisition->height = logical_rect.height + 6;
+            g_object_unref(G_OBJECT(layout));
+            break;
+        case XFCE_CLOCK_LEDS:
+	    if(clock->military_time)
+	    {
+	        if (clock->display_secs)
+		{
+		    ln = 8;
+		}
+		else
+		{
+		    ln = 5;
+		}
+            }
+	    else if(clock->display_am_pm)
+	    {
+        	if(clock->display_secs)
+		{
+                    ln = 9;
+        	}
+		else
+		{
+		    ln = 6;
+		}
+	    }
+	    else
+	    {
+        	if(clock->display_secs)
+		{
+                    ln = 8;
+        	}
+		else
+		{
+		    ln = 5;
+		}
+	    }
+	    if (clock->led_size == DIGIT_HUGE)
+	    {
+		width = ln * digits_huge_width;
+		height = digits_huge_height;
+
+	    }
+	    else if(clock->led_size == DIGIT_LARGE)
+	    {
+		width = ln * digits_large_width;
+		height = digits_large_height;
+
+	    }
+	    else if(clock->led_size == DIGIT_MEDIUM)
+	    {
+		width = ln * digits_medium_width;
+		height = digits_medium_height;
+	    }
+            else
+	    {
+        	width = ln * digits_small_width;
+        	height = digits_small_height;
+	    }
+    	    requisition->width = width + 6;
+	    requisition->height = height + 6;
+            break;
+        case XFCE_CLOCK_ANALOG:
+        default:
+	    requisition->width = MY_CLOCK_DEFAULT_SIZE;
+	    requisition->height = MY_CLOCK_DEFAULT_SIZE;
+    }
 }
 
 static void xfce_clock_size_allocate(GtkWidget * widget,
@@ -522,13 +664,9 @@ static void draw_ticks(GtkWidget * widget)
             yc + c * (clock->radius - clock->pointer_width / 2) -
             clock->pointer_width / 4;
 
-        if(clock->relief)
-            gtk_draw_polygon(widget->style, widget->window, GTK_STATE_NORMAL,
-                             GTK_SHADOW_OUT, points, 5, TRUE);
-        else
-            gdk_draw_polygon(widget->window,
-                             widget->style->text_gc[GTK_STATE_NORMAL], TRUE,
-                             points, 5);
+        gdk_draw_polygon(widget->window,
+                         widget->style->text_gc[GTK_STATE_NORMAL], TRUE,
+                         points, 5);
     }
 
 }
@@ -563,13 +701,9 @@ static void draw_sec_pointer(GtkWidget * widget)
     points[4].x = xc + s * clock->pointer_width / 4;
     points[4].y = yc + c * clock->pointer_width / 4;
 
-    if(clock->relief)
-        gtk_draw_polygon(widget->style, widget->window, GTK_STATE_NORMAL,
-                         GTK_SHADOW_OUT, points, 5, TRUE);
-    else
-        gdk_draw_polygon(widget->window,
-                         widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points,
-                         5);
+    gdk_draw_polygon(widget->window,
+                     widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points,
+                     5);
 
 }
 
@@ -603,13 +737,9 @@ static void draw_min_pointer(GtkWidget * widget)
     points[4].x = xc + s * clock->pointer_width / 2;
     points[4].y = yc + c * clock->pointer_width / 2;
 
-    if(clock->relief)
-        gtk_draw_polygon(widget->style, widget->window, GTK_STATE_NORMAL,
-                         GTK_SHADOW_OUT, points, 5, TRUE);
-    else
-        gdk_draw_polygon(widget->window,
-                         widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points,
-                         5);
+    gdk_draw_polygon(widget->window,
+                     widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points,
+                     5);
 
 }
 
@@ -644,13 +774,9 @@ static void draw_hrs_pointer(GtkWidget * widget)
     points[4].y = yc + c * clock->pointer_width / 2;
 
 
-    if(clock->relief)
-        gtk_draw_polygon(widget->style, widget->window, GTK_STATE_NORMAL,
-                         GTK_SHADOW_OUT, points, 5, TRUE);
-    else
-        gdk_draw_polygon(widget->window,
-                         widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points,
-                         5);
+    gdk_draw_polygon(widget->window,
+                     widget->style->text_gc[GTK_STATE_NORMAL], TRUE, points,
+                     5);
 }
 
 
@@ -695,22 +821,19 @@ static void xfce_clock_draw_digital(GtkWidget * widget)
         else
             sprintf(time_buf, "%d:%02d", h, m);
     }
+    else if(clock->display_am_pm)
+    {
+        if(clock->display_secs)
+            sprintf(time_buf, "%d:%02d:%02d %s", h, m, s, ampm);
+        else
+            sprintf(time_buf, "%d:%02d %s", h, m, ampm);
+    }
     else
     {
-        if(clock->display_am_pm)
-        {
-            if(clock->display_secs)
-                sprintf(time_buf, "%d:%02d:%02d %s", h, m, s, ampm);
-            else
-                sprintf(time_buf, "%d:%02d %s", h, m, ampm);
-        }
+        if(clock->display_secs)
+            sprintf(time_buf, "%d:%02d:%02d", h, m, s);
         else
-        {
-            if(clock->display_secs)
-                sprintf(time_buf, "%d:%02d:%02d", h, m, s);
-            else
-                sprintf(time_buf, "%d:%02d", h, m);
-        }
+            sprintf(time_buf, "%d:%02d", h, m);
     }
 
     gdk_window_clear_area( widget->window,
@@ -794,25 +917,22 @@ static void xfce_clock_draw_leds(GtkWidget * widget)
         else
             sprintf(time_buf, "%02d%s%02d", h, separator, m);
     }
+    else if(clock->display_am_pm)
+    {
+
+        if(clock->display_secs)
+            sprintf(time_buf, "%02d%s%02d%s%02d%s", h, separator, m,
+                    separator, s, ampm);
+        else
+            sprintf(time_buf, "%02d%s%02d%s", h, separator, m, ampm);
+    }
     else
     {
-        if(clock->display_am_pm)
-        {
-
-            if(clock->display_secs)
-                sprintf(time_buf, "%02d%s%02d%s%02d%s", h, separator, m,
-                        separator, s, ampm);
-            else
-                sprintf(time_buf, "%02d%s%02d%s", h, separator, m, ampm);
-        }
+        if(clock->display_secs)
+            sprintf(time_buf, "%02d%s%02d%s%02d", h, separator, m,
+                    separator, s);
         else
-        {
-            if(clock->display_secs)
-                sprintf(time_buf, "%02d%s%02d%s%02d", h, separator, m,
-                        separator, s);
-            else
-                sprintf(time_buf, "%02d%s%02d", h, separator, m);
-        }
+            sprintf(time_buf, "%02d%s%02d", h, separator, m);
     }
     if(time_buf[0] == '0')
         time_buf[0] = ' ';
@@ -820,37 +940,34 @@ static void xfce_clock_draw_leds(GtkWidget * widget)
     len = strlen(time_buf);
 
 
-    if(((len * digits_huge_width) <= widget->allocation.width) &&
-       (digits_huge_height <= widget->allocation.height))
+    if(clock->led_size == DIGIT_HUGE)
     {
-        clock->leds_size = DIGIT_HUGE;
         c_width = digits_huge_width;
         c_height = digits_huge_height;
     }
-    else if(((len * digits_large_width) <= widget->allocation.width) &&
-            (digits_large_height <= widget->allocation.height))
+    else if(clock->led_size == DIGIT_LARGE)
     {
-        clock->leds_size = DIGIT_LARGE;
         c_width = digits_large_width;
         c_height = digits_large_height;
     }
-    else if(((len * digits_medium_width) <= widget->allocation.width) &&
-            (digits_medium_height <= widget->allocation.height))
+    else if(clock->led_size == DIGIT_MEDIUM)
     {
-        clock->leds_size = DIGIT_MEDIUM;
         c_width = digits_medium_width;
         c_height = digits_medium_height;
     }
     else
     {
-        clock->leds_size = DIGIT_SMALL;
         c_width = digits_small_width;
         c_height = digits_small_height;
 
     }
 
-    /* Center in the widget */
-    if( (x = (widget->allocation.width - (c_width * len))) <= 0 ) x = 0;
+    /* Center in the widget (if it fits in) */
+    if( (x = (widget->allocation.width - (c_width * len))) <= 0 )
+    {
+         x = 0;
+    }
+    
     x = x / 2;
     y = (widget->allocation.height - c_height) / 2;
 
@@ -923,14 +1040,7 @@ static void xfce_clock_draw(GtkWidget * widget, GdkRectangle * area)
     g_return_if_fail(GTK_WIDGET_DRAWABLE(widget->parent));
 
     clock = XFCE_CLOCK(widget);
-    if(clock->parent_style != widget->parent->style)
-    {
-        if(clock->parent_style)
-            gtk_style_unref(clock->parent_style);
-        clock->parent_style = widget->parent->style;
-        gtk_style_ref(clock->parent_style);
-    }
-    if(clock->mode == XFCE_CLOCK_ANALOG)
+     if(clock->mode == XFCE_CLOCK_ANALOG)
 	gdk_window_clear_area (widget->window,
 			       0, 0,
 			       widget->allocation.width,
@@ -975,17 +1085,6 @@ static gint xfce_clock_timer(XfceClock * clock)
     return TRUE;
 }
 
-void xfce_clock_set_relief(XfceClock * clock, gboolean relief)
-{
-    g_return_if_fail(clock != NULL);
-    g_return_if_fail(XFCE_IS_CLOCK(clock));
-
-    clock->relief = relief;
-
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
-        xfce_clock_draw_internal(GTK_WIDGET(clock));
-}
-
 static void draw_digits(XfceClock * clock, GdkGC * gc, gint x, gint y, gchar c)
 {
     gint tsx, tsy, tsw, tsh;
@@ -1005,7 +1104,7 @@ static void draw_digits(XfceClock * clock, GdkGC * gc, gint x, gint y, gchar c)
     else
         return;
 
-    switch (clock->leds_size)
+    switch (clock->led_size)
     {
         case DIGIT_HUGE:
             tsx = tc * digits_huge_width;

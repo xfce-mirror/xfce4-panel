@@ -57,22 +57,19 @@ extern "C"
         DIGIT_LARGE,
         DIGIT_HUGE
     }
-    Digit_Size;
+    XfceClockLedSize;
 
     struct _XfceClock
     {
 
         GtkWidget widget;       /* parent */
 
-        GtkStyle *parent_style;
         GdkBitmap *digits_bmap;
 
         /* Dimensions of clock components */
         gint radius;
         gint internal;
         gint pointer_width;
-
-        gboolean relief;
 
         /* ID of update timer, or 0 if none */
         guint32 timer;
@@ -86,7 +83,7 @@ extern "C"
         gboolean military_time; /* true=24 hour clock, false = 12 hour clock. */
         gboolean display_am_pm;
         gboolean display_secs;
-        Digit_Size leds_size;
+        XfceClockLedSize led_size;
     };
 
     struct _XfceClockClass
@@ -97,7 +94,6 @@ extern "C"
 
     GtkWidget *xfce_clock_new(void);
     GtkType xfce_clock_get_type(void);
-    void xfce_clock_set_relief(XfceClock * clock, gboolean relief);
     void xfce_clock_show_ampm(XfceClock * clock, gboolean show);
     void xfce_clock_ampm_toggle(XfceClock * clock);
     gboolean xfce_clock_ampm_shown(XfceClock * clock);
@@ -109,6 +105,8 @@ extern "C"
     gboolean xfce_clock_military_shown(XfceClock * clock);
     void xfce_clock_set_interval(XfceClock * clock, guint interval);
     guint xfce_clock_get_interval(XfceClock * clock);
+    void xfce_clock_set_led_size(XfceClock * clock, XfceClockLedSize size);
+    XfceClockLedSize xfce_clock_get_led_size(XfceClock * clock);
     void xfce_clock_suspend(XfceClock * clock);
     void xfce_clock_resume(XfceClock * clock);
     void xfce_clock_set_mode(XfceClock * clock, XfceClockMode mode);

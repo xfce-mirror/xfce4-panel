@@ -194,183 +194,40 @@ void clock_free(PanelControl * pc)
     g_free(clock);
 }
 
-/* Try to find the best width value depending on :
-   -panel size
-   -clock settings
-   -panel orientation
-   -popup orientation
-
-   This function assumes we want the best for an horizontally
-   oriented panel
-
-   Algorithm is simple and may be improved (IMHO)
-   Currently I test for each parms and the width is modified
-   each time the parms has been verified
-
-*/
-static int clock_guess_best_width_horiz(PanelControl * pc)
+void update_clock_size(XfceClock *clock, int size)
 {
-    int w = icon_size[settings.size];
-    XfceClock *tmp = XFCE_CLOCK(((t_clock*) pc->data)->clock);
-    switch (settings.size)
+    if ((xfce_clock_get_mode(clock) == XFCE_CLOCK_LEDS) || (xfce_clock_get_mode(clock) == XFCE_CLOCK_DIGITAL))
     {
-    case SMALL:
-	w = w + 11;
-	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 0;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 6;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 12;
-	}
-	else
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 0;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 6;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 12;
-	}
-	break;
-
-    case TINY:
-	w = w + 11;
-	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 8;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 7;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 15;
-	}
-	else
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 5;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 7;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 17;
-	    /* A special case I prefer treat apart */
-	    if( xfce_clock_ampm_shown(tmp) && xfce_clock_secs_shown(tmp))
-		w = 57;
-	}
-	break;
-
+        gtk_widget_set_size_request(GTK_WIDGET(clock), -1, -1);
     }
-
-    return w;
+    else
+    {
+        gtk_widget_set_size_request(GTK_WIDGET(clock), icon_size[size], icon_size[size]);
+    }
+    gtk_widget_queue_resize (GTK_WIDGET(clock));
 }
 
-static int clock_guess_best_width_vert(PanelControl * pc)
-{
-    int w = icon_size[settings.size];
-    XfceClock *tmp = XFCE_CLOCK(((t_clock*) pc->data)->clock);
-    switch (settings.size)
-    {
-    case SMALL:
-	w = w + 11;
-	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 0;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 6;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 12;
-	}
-	else
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 0;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 6;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 12;
-	}
-	break;
-
-    case TINY:
-	w = w + 11;
-	if( settings.popup_position == LEFT || settings.popup_position == RIGHT)
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 8;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 7;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 15;
-	}
-	else
-	{
-	    if( xfce_clock_military_shown(tmp) )
-		w = w + 5;
-	    if( xfce_clock_ampm_shown(tmp) )
-		w = w + 7;
-	    if( xfce_clock_secs_shown(tmp) )
-		w = w + 17;
-	    /* A special case I prefer treat apart */
-	    if( xfce_clock_ampm_shown(tmp) && xfce_clock_secs_shown(tmp))
-		w = 57;
-	}
-	break;
-    }
-
-    return w;
-}
-
-/* XXXXX: this is the ugliest code I ever written :)
-   I'm pretty sure there are missing cases but you have to complain to
-   let me know :p
-*/
 void clock_set_size(PanelControl * pc, int size)
 {
     int s = icon_size[size];
     int w = s;
     t_clock *clock = (t_clock *) pc->data;
     XfceClock *tmp = XFCE_CLOCK(clock->clock);
-
-    if ( xfce_clock_get_mode(tmp) == XFCE_CLOCK_LEDS)
+    switch (size)
     {
-	w = icon_size[size];
-
-	switch (settings.orientation)
-	{
-	case HORIZONTAL:
-
-	    DBG("Using Horizontal mode\n");
-	    w = clock_guess_best_width_horiz(pc);
-	    break;
+        case 0:
+          xfce_clock_set_led_size(tmp, DIGIT_SMALL);
+	  break;
+	case 1:
+          xfce_clock_set_led_size(tmp, DIGIT_MEDIUM);
+	  break;
+	case 2:
+          xfce_clock_set_led_size(tmp, DIGIT_LARGE);
+	  break;
 	default:
-
-	    DBG("Using Verti mode \n");
-	    w = clock_guess_best_width_vert(pc);
-	    break;
-	}
+          xfce_clock_set_led_size(tmp, DIGIT_HUGE);
     }
-
-    DBG("w would be %d\n",w);
-    /* XXXXXX: Here we have 2 solutions :
-       1.set width=height=w but in that case, we can get a really big
-    clock compared to the panel size (and so compared to the buttons
-    size
-       2.set width=w and height=icon_size[size], in that case the
-    clock seems (an so the panel) seems much more closed to the
-    reality (sic) that's to say : tiny is really tiny, small is really
-    small...
-
-    This is a problem for me to choose between them. Maybe with more
-    accurate w values, we can get something much more pretty but who
-    knows ?
-    */
-
-    /* Force the first packed object to set its needed sizes */
-    DBG("w is %d\n", w);
-    gtk_widget_set_size_request(clock->frame, w, s);
+    update_clock_size(tmp, size);
 }
 
 /* FIXME: have to have a look into it as I don't really know if that
@@ -448,14 +305,19 @@ static void clock_type_changed(GtkOptionMenu * omi, t_clock * clock)
 {
     XFCE_CLOCK(clock->clock)->mode = gtk_option_menu_get_history(omi);
 
+    /* No frame *please* (OF.) */
+#if 0
     /* Cosmetic change : in analog mode 3D mode is not cute */
     if(XFCE_CLOCK(clock->clock)->mode == XFCE_CLOCK_ANALOG)
-	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
+        gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
     else
 	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
+#else
+    gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
+#endif
 
     xfce_clock_set_mode(XFCE_CLOCK(clock->clock), XFCE_CLOCK(clock->clock)->mode);
-
+    gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
@@ -513,8 +375,8 @@ static void clock_hour_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
-     gtk_widget_set_size_request(clock->frame,settings.size,settings.size);
-
+     gtk_widget_set_size_request(clock->frame,-1, -1);
+     gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
 }
 
 static GtkWidget *create_clock_24hrs_button(t_clock * clock, PanelControl* pc)
@@ -546,7 +408,8 @@ static void clock_secs_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
-     gtk_widget_set_size_request(clock->frame,settings.size,settings.size);
+     gtk_widget_set_size_request(clock->frame, -1, -1);
+     gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
 }
 
 static GtkWidget *create_clock_secs_button(t_clock * clock, PanelControl* pc)
@@ -578,7 +441,8 @@ static void clock_ampm_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
 	*/
     gtk_widget_set_sensitive( revert_button, TRUE );
-    gtk_widget_set_size_request(clock->frame,settings.size,settings.size);
+    gtk_widget_set_size_request(clock->frame,-1, -1);
+    gtk_widget_queue_resize (GTK_WIDGET(clock->clock));
 }
 
 static GtkWidget *create_clock_ampm_button(t_clock * clock, PanelControl* pc)
@@ -672,6 +536,8 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
     if(!xmlStrEqual(node->name, "XfceClock"))
         return;
 
+    /* No frame *please* (OF.) */
+#if 0	
     if ( value = xmlGetProp(node, (const xmlChar *)"Clock_type"))
     {
 	XFCE_CLOCK(cl->clock)->mode = atoi(value);
@@ -681,6 +547,9 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
 	    gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_IN);
         g_free(value);
     }
+#else
+    gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_NONE);
+#endif
 
     if ( value = xmlGetProp(node, (const xmlChar *)"Toggle_military"))
     {
