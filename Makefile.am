@@ -19,6 +19,7 @@ conf_DATA = 								\
 	contents.xml.zh_TW
 
 EXTRA_DIST = 								\
+	README.Kiosk							\
 	HACKING								\
 	NOTES								\
 	$(conf_DATA)							\
