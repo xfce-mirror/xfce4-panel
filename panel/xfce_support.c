@@ -42,6 +42,7 @@
 #define SN_API_NOT_YET_FROZEN
 #include <libsn/sn.h>
 #include <gdk/gdkx.h>
+#define STARTUP_TIMEOUT (30 /* seconds */ * 1000)
 #endif
 
 #include "xfce.h"
@@ -587,7 +588,6 @@ char *select_file_with_preview(const char *title, const char *path, GtkWidget * 
 */
 
 #ifdef HAVE_STARTUP_NOTIFICATION
-#define STARTUP_TIMEOUT_LENGTH (15 /* seconds */ * 1000)
 
 typedef struct
 {
@@ -664,7 +664,7 @@ static gboolean startup_timeout (void *data)
     GTimeVal now;
     int min_timeout;
 
-    min_timeout = STARTUP_TIMEOUT_LENGTH;
+    min_timeout = STARTUP_TIMEOUT;
 
     g_get_current_time (&now);
 
@@ -680,7 +680,7 @@ static gboolean startup_timeout (void *data)
 
 	elapsed = ((((double)now.tv_sec - tv_sec) * G_USEC_PER_SEC + (now.tv_usec - tv_usec))) / 1000.0;
 
-	if (elapsed >= STARTUP_TIMEOUT_LENGTH) 
+	if (elapsed >= STARTUP_TIMEOUT) 
         {
 	    std->contexts = g_slist_remove (std->contexts, sn_context);
 	    sn_launcher_context_complete (sn_context);
@@ -688,7 +688,7 @@ static gboolean startup_timeout (void *data)
 	} 
 	else 
 	{
-	    min_timeout = MIN (min_timeout, (STARTUP_TIMEOUT_LENGTH - elapsed));
+	    min_timeout = MIN (min_timeout, (STARTUP_TIMEOUT - elapsed));
 	}
 
 	tmp = next;
@@ -726,7 +726,7 @@ static void add_startup_timeout (GdkScreen *screen, SnLauncherContext *sn_contex
 
     if (data->timeout_id == 0) 
     {
-        data->timeout_id = g_timeout_add (STARTUP_TIMEOUT_LENGTH, startup_timeout, data);		
+        data->timeout_id = g_timeout_add (STARTUP_TIMEOUT, startup_timeout, data);		
     }
 }
 #endif /* HAVE_STARTUP_NOTIFICATION */
