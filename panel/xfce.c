@@ -30,6 +30,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include <session-client.h>
+
 #include "xfce.h"
 
 #include "xfce_support.h"
@@ -59,6 +61,9 @@ int screen_button_width[] = { 30, 40, 80, 80 };
  *  ---------------
 */
 GtkWidget *toplevel;
+
+static SessionClient *client_session;
+static gboolean session_managed = FALSE;
 
 static GtkWidget *main_frame;
 static GtkWidget *main_box;	/* contains panel and taskbar (future) */
@@ -747,10 +752,17 @@ void sighandler(int sig)
 
 void quit(gboolean force)
 {
-    if(!force && !confirm(_("Are you sure you want to log off ?"), 
-			  GTK_STOCK_QUIT, NULL))
+    if(!force)
     {
-        return;
+	if (session_managed)
+	{
+	    logout_session(client_session);
+	    return;
+	}
+	else if (!confirm(_("Are you sure you want to Exit ?"), GTK_STOCK_QUIT, NULL))
+	{
+	    return;
+	}
     }
     
     if (!disable_user_config)
@@ -826,6 +838,17 @@ void xfce_run(void)
     gtk_main();
 }
 
+static void save_yourself(gpointer data, int save_style, gboolean shutdown, int interact_style, gboolean fast)
+{
+    if (!disable_user_config)
+	write_panel_config();
+}
+
+static void die (gpointer client_data)
+{
+    quit(TRUE);
+}
+
 int main(int argc, char **argv)
 {
     if(argc == 2 && (strequal(argv[1], "-v") || strequal(argv[1], "--version")))
@@ -836,6 +859,14 @@ int main(int argc, char **argv)
     }
 
     gtk_init(&argc, &argv);
+
+    client_session = client_session_new(argc, argv, NULL /* data */ , SESSION_RESTART_IF_RUNNING, 30);
+
+    client_session->save_yourself = save_yourself;
+    client_session->die = die;
+
+    if(!(session_managed = session_init(client_session)))
+        g_message("xfce4: Cannot connect to session manager");
 
     xfce_init();
 
