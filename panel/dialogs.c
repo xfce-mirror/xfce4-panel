@@ -164,6 +164,7 @@ static void restore_backup(void)
     
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), backup.style);
     gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu), backup_theme_index);
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), backup.num_left);
@@ -228,11 +229,28 @@ static void size_menu_changed(GtkOptionMenu * menu)
     gboolean changed = TRUE;
 
     if(GTK_WIDGET(menu) == size_menu && n != settings.size)
+    {
         panel_set_size(n);
+	
+	if (n == TINY)
+	{
+	    gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
+	    
+	    gtk_widget_set_sensitive(style_menu, FALSE);
+	}
+	else
+	{
+	    gtk_widget_set_sensitive(style_menu, TRUE);
+	}
+    }
     else if(n != settings.popup_size)
+    {
         panel_set_popup_size(n);
+    }
     else
+    {
         changed = FALSE;
+    }
 
     if(changed)
     {
@@ -241,14 +259,17 @@ static void size_menu_changed(GtkOptionMenu * menu)
     }
 }
 
-static void add_size_menu(GtkWidget * option_menu, int size)
+static void add_size_menu(GtkWidget * option_menu, int size, gboolean is_popup)
 {
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
 
-    item = gtk_menu_item_new_with_label(_("Tiny"));
-    gtk_widget_show(item);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+    if (!is_popup)
+    {
+	item = gtk_menu_item_new_with_label(_("Tiny"));
+	gtk_widget_show(item);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+    }
 
     item = gtk_menu_item_new_with_label(_("Small"));
     gtk_widget_show(item);
@@ -296,7 +317,7 @@ static void add_size_box(GtkBox * box)
 
     size_menu = gtk_option_menu_new();
     gtk_widget_show(size_menu);
-    add_size_menu(size_menu, settings.size);
+    add_size_menu(size_menu, settings.size, FALSE);
     gtk_box_pack_start(GTK_BOX(hbox), size_menu, TRUE, TRUE, 0);
 
     /* popup */
@@ -312,7 +333,7 @@ static void add_size_box(GtkBox * box)
 
     popup_menu = gtk_option_menu_new();
     gtk_widget_show(popup_menu);
-    add_size_menu(popup_menu, settings.popup_size);
+    add_size_menu(popup_menu, settings.popup_size, TRUE);
     gtk_box_pack_start(GTK_BOX(hbox), popup_menu, TRUE, TRUE, 0);
 }
 
@@ -347,6 +368,9 @@ static void add_style_menu(GtkWidget * option_menu, int style)
     gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), style);
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(style_changed), NULL);
+    
+    if (settings.size == TINY)
+	gtk_widget_set_sensitive(option_menu, FALSE);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -856,6 +880,11 @@ void global_settings_dialog(void)
                 g_free(settings.lock_command);
                 settings.lock_command = g_strdup(cmd);
             }
+	    else
+	    {
+                g_free(settings.lock_command);
+                settings.lock_command = NULL;
+	    }
 
             cmd = gtk_entry_get_text(GTK_ENTRY(exit_entry));
 
@@ -864,6 +893,11 @@ void global_settings_dialog(void)
                 g_free(settings.exit_command);
                 settings.exit_command = g_strdup(cmd);
             }
+	    else
+	    {
+                g_free(settings.exit_command);
+                settings.exit_command = NULL;
+	    }
 
             done = TRUE;
         }

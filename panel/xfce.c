@@ -320,6 +320,11 @@ void panel_set_settings(void)
 
     panel_set_size(settings.size);
     panel_set_popup_size(settings.popup_size);
+    
+
+    if (settings.size == TINY)
+	settings.style == NEW_STYLE;
+    
     panel_set_style(settings.style);
     panel_set_icon_theme(settings.icon_theme);
 
