@@ -335,11 +335,8 @@ static void orientation_changed(GtkOptionMenu * menu)
 	    break;
     }
     
-    setting = &xfce_options[XFCE_POPUPPOSITION];
-    setting->data.v_int = pos;
-    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
-    mcs_manager_notify(mcs_manager, CHANNEL);
-
+    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu), pos);
+	
     if ((n == HORIZONTAL && (pos == LEFT || pos == RIGHT)) ||
         (n == VERTICAL && (pos == TOP || pos == BOTTOM)))
     {
@@ -820,6 +817,30 @@ static void add_position_box(GtkBox * box)
 /* the dialog */
 /* static int lastpage = 0;*/
 
+static void dialog_delete(GtkWidget *dialog)
+{
+/*    lastpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
+*/
+    gtk_widget_destroy(dialog);
+    is_running = FALSE;
+    dialog = NULL;
+
+    xfce_free_backup();
+    xfce_write_options(mcs_manager);
+}
+
+static void dialog_response(GtkWidget *dialog, int response)
+{
+    if(response == RESPONSE_REVERT)
+    {
+	xfce_restore_backup();
+	xfce_set_options(mcs_manager);
+	gtk_widget_set_sensitive(revert, FALSE);
+    }
+    else
+	dialog_delete(dialog);
+}
+
 void run_xfce_settings_dialog(McsPlugin *mp)
 {
     GtkWidget *frame, *vbox, *button;
@@ -926,30 +947,10 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), frame,
                        TRUE, TRUE, 0);
     
-    while(1)
-    {
-        int response = GTK_RESPONSE_NONE;
-
-        response = gtk_dialog_run(GTK_DIALOG(dialog));
-
-        if(response == RESPONSE_REVERT)
-        {
-            xfce_restore_backup();
-            xfce_set_options(mcs_manager);
-            gtk_widget_set_sensitive(revert, FALSE);
-	    gtk_widget_grab_focus(button);
-        }
-        else
-            break;
-    }
-
-/*    lastpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
-*/
-    gtk_widget_destroy(dialog);
-    is_running = FALSE;
-    dialog = NULL;
-
-    xfce_free_backup();
-    xfce_write_options(mcs_manager);
+    g_signal_connect(dialog, "response", G_CALLBACK(dialog_response), dialog);
+    g_signal_connect_swapped(dialog, "delete_event", 
+	    		     G_CALLBACK(dialog_delete), dialog);
+    
+    gtk_widget_show(dialog);
 }
 

@@ -678,6 +678,48 @@ static void cde_pager_free(CdePager *pager)
     g_free(pager);
 }
 
+/*  Graphical pager
+ *  ---------------
+*/
+static void netk_pager_update_size(GtkWidget *pager, NetkScreen *screen)
+{
+    int s =icon_size[settings.size];
+    int count = netk_screen_get_workspace_count(screen);
+    int w;
+
+    if (settings.orientation == HORIZONTAL)
+    {
+	w = count * (int)((double)(gdk_screen_width() * s) / 
+			    (double)(gdk_screen_height()));
+	
+	gtk_widget_set_size_request(pager, w, s);	
+    }
+    else
+    {
+	w =  count * (int)((double)(gdk_screen_height() * s) / 
+			    (double)(gdk_screen_width()));
+	
+	gtk_widget_set_size_request(pager, s, w);
+    }
+}
+
+GtkWidget *create_netk_pager(NetkScreen *screen)
+{
+    GtkWidget *pager;
+    GtkOrientation gor = (settings.orientation == VERTICAL) ? 
+			 GTK_ORIENTATION_VERTICAL : 
+			 GTK_ORIENTATION_HORIZONTAL;
+    
+    pager = netk_pager_new(screen);
+    netk_pager_set_n_rows(NETK_PAGER(pager), 1);
+    netk_pager_set_orientation(NETK_PAGER(pager), gor);
+    gtk_widget_show(pager);
+
+    netk_pager_update_size(pager, screen);
+    
+    return pager;
+}
+
 /*  Mini buttons
  *  ------------
 */
@@ -833,12 +875,7 @@ static void switcher_set_size(Control *control, int size)
 
     if (sw->graphical)
     {
-	s = icon_size[size];
-
-	if (settings.orientation == HORIZONTAL)
-	    gtk_widget_set_size_request(sw->netk_pager, -1, s);
-	else
-	    gtk_widget_set_size_request(sw->netk_pager, s, -1);
+	netk_pager_update_size(sw->netk_pager, sw->screen);
     }
     else
     {
@@ -945,32 +982,22 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 
 	if (i == 1)
 	{
-	    int s;
-	    GtkOrientation gor = (settings.orientation == VERTICAL) ? 
-				 GTK_ORIENTATION_VERTICAL : 
-				 GTK_ORIENTATION_HORIZONTAL;
+	    GtkWidget *align;
 	    
-	    sw->netk_pager = netk_pager_new(sw->screen);
-	    netk_pager_set_n_rows(NETK_PAGER(sw->netk_pager), 1);
-	    netk_pager_set_orientation(NETK_PAGER(sw->netk_pager), gor);
-	    gtk_widget_show(sw->netk_pager);
-	    
+	    sw->netk_pager = create_netk_pager(sw->screen);
 	    sw->graphical = TRUE;
 
 	    gtk_widget_destroy(sw->cde_pager->box);
 	    cde_pager_free(sw->cde_pager);
 	    sw->cde_pager = NULL;
 
-	    gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
-		    	       TRUE, FALSE, 2);
-	    gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 2);
-	
-	    s = icon_size[settings.size];
-
-	    if (settings.orientation == HORIZONTAL)
-		gtk_widget_set_size_request(sw->netk_pager, -1, s);
-	    else
-		gtk_widget_set_size_request(sw->netk_pager, s, -1);
+	    align = gtk_alignment_new(0.5, 0.5, 0, 0);
+	    gtk_widget_show(align);
+	    gtk_container_add(GTK_CONTAINER(align), sw->netk_pager);
+	    
+	    gtk_box_pack_start(GTK_BOX(sw->box), align, 
+		    	       TRUE, TRUE, 2);
+	    gtk_box_reorder_child(GTK_BOX(sw->box), align, 2);
 	}
     }
 
@@ -1111,13 +1138,7 @@ static void arrange_switcher(t_switcher *sw)
 
     if (sw->graphical)
     {
-	GtkOrientation gor = vertical ? GTK_ORIENTATION_VERTICAL : 
-	    			GTK_ORIENTATION_HORIZONTAL;
-	
-	sw->netk_pager = netk_pager_new(sw->screen);
-	netk_pager_set_n_rows(NETK_PAGER(sw->netk_pager), 1);
-	netk_pager_set_orientation(NETK_PAGER(sw->netk_pager), gor);
-	gtk_widget_show(sw->netk_pager);
+	sw->netk_pager = create_netk_pager(sw->screen);
     }
     else
     {
@@ -1152,8 +1173,14 @@ static void arrange_switcher(t_switcher *sw)
     
     if (sw->graphical)
     {
-	gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
-			   TRUE, FALSE, 2);
+	GtkWidget *align;
+
+	align = gtk_alignment_new(0.5, 0.5, 0, 0);
+	gtk_widget_show(align);
+	gtk_container_add(GTK_CONTAINER(align), sw->netk_pager);
+	
+	gtk_box_pack_start(GTK_BOX(sw->box), align, 
+		    	       TRUE, TRUE, 2);
     }
     else
     {
@@ -1355,7 +1382,9 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 
     if (sw->graphical)
     {
+	GtkWidget *align  = sw->netk_pager->parent;
 	gtk_widget_destroy(sw->netk_pager);
+	gtk_widget_destroy(align);
 	sw->netk_pager = NULL;
     }
     else
@@ -1369,26 +1398,17 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
     
     if (graphical)
     {
-	int s;
-	GtkOrientation gor = (settings.orientation == VERTICAL) ? 
-	    			GTK_ORIENTATION_VERTICAL : 
-	    			GTK_ORIENTATION_HORIZONTAL;
+	GtkWidget *align;
 	
-	sw->netk_pager = netk_pager_new(sw->screen);
-	netk_pager_set_n_rows(NETK_PAGER(sw->netk_pager), 1);
-	netk_pager_set_orientation(NETK_PAGER(sw->netk_pager), gor);
-	gtk_widget_show(sw->netk_pager);
-	
-	gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
-			   TRUE, FALSE, 2);
-	gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 2);
-	
-	s = icon_size[settings.size];
+	sw->netk_pager = create_netk_pager(sw->screen);
 
-	if (settings.orientation == HORIZONTAL)
-	    gtk_widget_set_size_request(sw->netk_pager, -1, s);
-	else
-	    gtk_widget_set_size_request(sw->netk_pager, s, -1);
+	align = gtk_alignment_new(0.5, 0.5, 0, 0);
+	gtk_widget_show(align);
+	gtk_container_add(GTK_CONTAINER(align), sw->netk_pager);
+	
+	gtk_box_pack_start(GTK_BOX(sw->box), align, 
+			   TRUE, TRUE, 2);
+	gtk_box_reorder_child(GTK_BOX(sw->box), align, 2);
     }
     else
     {
@@ -1396,7 +1416,7 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 	
 	gtk_box_pack_start(GTK_BOX(sw->box), sw->cde_pager->box, 
 			   TRUE, TRUE, 2);
-	gtk_box_reorder_child(GTK_BOX(sw->box), sw->cde_pager->box, 1);
+	gtk_box_reorder_child(GTK_BOX(sw->box), sw->cde_pager->box, 2);
     }
 
     for (li = sw->callbacks; li; li = li->next)

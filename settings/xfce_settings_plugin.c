@@ -63,7 +63,7 @@ McsPluginInitResult mcs_plugin_init(McsPlugin *mp)
     mp->plugin_name = g_strdup(CHANNEL);
     mp->caption = g_strdup(_("XFce panel"));
     mp->run_dialog = run_xfce_settings_dialog;
-    mp->icon = gdk_pixbuf_new_from_file(DATADIR "/icons/xfce_logo.jpg", NULL);
+    mp->icon = gdk_pixbuf_new_from_file(DATADIR "/icons/xfce_icon.xpm", NULL);
 
     return MCS_PLUGIN_INIT_OK;
 }
