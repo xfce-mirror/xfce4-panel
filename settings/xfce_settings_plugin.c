@@ -40,19 +40,24 @@
 #include <libxfce4mcs/mcs-common.h>
 #include <libxfce4mcs/mcs-manager.h>
 #include <xfce-mcs-manager/manager-plugin.h>
-#include <libxfcegui4/icons.h>
+#include <libxfcegui4/xfce-icontheme.h>
 
 #include "xfce_settings.h"
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
 
-#define DEFAULT_THEME "Curve"
 
+#define DEFAULT_THEME   "Rodent"
 #define STREQUAL(s1,s2) !strcmp(s1, s2)
 
+
 static McsManager *mcs_manager = NULL;
+static XfceIconTheme *icon_theme = NULL;
+static int theme_cb = 0;
 
 static void xfce_set_options (McsManager * sm);
+static void theme_changed (XfceIconTheme *theme, McsPlugin *mp);
+
 
 McsPluginInitResult
 mcs_plugin_init (McsPlugin * mp)
@@ -66,7 +71,11 @@ mcs_plugin_init (McsPlugin * mp)
     mp->plugin_name = g_strdup (CHANNEL);
     mp->caption = g_strdup (_("Xfce Panel"));
     mp->run_dialog = run_xfce_settings_dialog;
-    mp->icon = xfce_themed_icon_load ("xfce4-panel", 48);
+
+    icon_theme = xfce_icon_theme_get_for_screen (gdk_screen_get_default ());
+    mp->icon = xfce_icon_theme_load (icon_theme, "xfce4-panel", 48);
+    theme_cb = g_signal_connect (icon_theme, "changed", 
+                                 G_CALLBACK (theme_changed), mp);
 
     return MCS_PLUGIN_INIT_OK;
 }
@@ -300,5 +309,29 @@ xfce_set_options (McsManager * sm)
     xfce_write_options (sm);
 }
 
+static void
+theme_changed (XfceIconTheme *icontheme, McsPlugin *mp)
+{
+    GdkPixbuf *pb;
+
+    pb = xfce_icon_theme_load (icontheme, "xfce4-panel", 48);
+
+    if (pb)
+    {
+        if (mp->icon)
+            g_object_unref (mp->icon);
+
+        mp->icon = pb;
+    }
+}
+
 /* macro defined in manager-plugin.h */
 MCS_PLUGIN_CHECK_INIT
+
+G_MODULE_EXPORT void
+g_module_unload (GModule *gm)
+{
+    g_signal_handler_disconnect (icon_theme, theme_cb);
+
+    g_object_unref (icon_theme);
+}

@@ -45,11 +45,9 @@
 #include "item.h"
 #include "item_dialog.h"
 #include "settings.h"
-#include "xfcombo.h"
 
-#define BORDER 6
-
-#define PREVIEW_SIZE 48
+#define BORDER          6
+#define PREVIEW_SIZE    48
 
 /* Make sure translations are taken from the panel and not from some plugin */
 #ifdef ENABLE_NLS
@@ -120,33 +118,6 @@ add_spacer (GtkBox * box, int size)
 */
 
 static void
-combo_completion_cb (xfc_combo_info_t * info, CommandOptions * opts)
-{
-    const char *cmd;
-    GtkToggleButton *tb;
-    gboolean in_term;
-
-    cmd = gtk_entry_get_text (GTK_ENTRY (opts->command_entry));
-
-    tb = GTK_TOGGLE_BUTTON (opts->term_checkbutton);
-    in_term = history_check_in_terminal (cmd);
-    gtk_toggle_button_set_active (tb, in_term);
-
-    if (opts->on_change)
-    {
-	gboolean use_sn = FALSE;
-
-	if (opts->sn_checkbutton)
-	{
-	    tb = GTK_TOGGLE_BUTTON (opts->sn_checkbutton);
-	    use_sn = gtk_toggle_button_get_active (tb);
-	}
-
-	opts->on_change (cmd, in_term, use_sn, opts->data);
-    }
-}
-
-static void
 command_browse_cb (GtkWidget * w, CommandOptions * opts)
 {
     char *file;
@@ -159,10 +130,7 @@ command_browse_cb (GtkWidget * w, CommandOptions * opts)
 
     if (file)
     {
-	if (opts->info)
-	    completion_combo_set_text (opts->info, file);
-	else
-	    gtk_entry_set_text (GTK_ENTRY (opts->command_entry), file);
+        gtk_entry_set_text (GTK_ENTRY (opts->command_entry), file);
 
 	gtk_editable_set_position (GTK_EDITABLE (opts->command_entry), -1);
 
@@ -304,22 +272,7 @@ create_command_options (GtkSizeGroup * sg)
 
     gtk_size_group_add_widget (sg, w);
 
-    /* only available when compiled with libdbh support and 
-     * libxfce4_combo module is installed 
-     * Disabled, doesn't work properly */
-    opts->info =
-	create_completion_combo ((ComboCallback) combo_completion_cb, opts);
-
-    if (opts->info)
-    {
-	DBG ("using completion combo");
-	opts->command_entry = GTK_WIDGET (opts->info->entry);
-	w = GTK_WIDGET (opts->info->combo);
-    }
-    else
-    {
-	opts->command_entry = w = gtk_entry_new ();
-    }
+    opts->command_entry = w = gtk_entry_new ();
 
     gtk_widget_show (w);
     gtk_box_pack_start (GTK_BOX (hbox), w, TRUE, TRUE, 0);
@@ -412,9 +365,6 @@ destroy_command_options (CommandOptions * opts)
 	opts->on_change (cmd, in_term, use_sn, opts->data);
     }
 
-    if (opts->info)
-	destroy_completion_combo (opts->info);
-
     g_free (opts);
 }
 
@@ -424,14 +374,7 @@ command_options_set_command (CommandOptions * opts, const char *command,
 {
     const char *cmd = (command != NULL) ? command : "";
 
-    if (opts->info)
-    {
-	completion_combo_set_text (opts->info, cmd);
-    }
-    else
-    {
-	gtk_entry_set_text (GTK_ENTRY (opts->command_entry), cmd);
-    }
+    gtk_entry_set_text (GTK_ENTRY (opts->command_entry), cmd);
 
     gtk_editable_set_position (GTK_EDITABLE (opts->command_entry), -1);
 
@@ -497,11 +440,10 @@ update_icon_preview (int id, const char *path, IconOptions * opts)
     int w, h;
     GdkPixbuf *pb = NULL;
 
-    if (id == EXTERN_ICON && path &&
-	g_file_test (path, G_FILE_TEST_EXISTS) &&
-	!g_file_test (path, G_FILE_TEST_IS_DIR))
+    if (id == EXTERN_ICON)
     {
-	pb = gdk_pixbuf_new_from_file (path, NULL);
+        if (path)
+            pb = gdk_pixbuf_new_from_file (path, NULL);
     }
     else
     {
@@ -826,10 +768,13 @@ icon_options_set_icon (IconOptions * opts, int id, const char *path)
 				 (id == EXTERN_ICON) ? 0 : id);
     g_signal_handler_unblock (opts->icon_menu, opts->id_sig);
 
-    if (id == EXTERN_ICON)
+    if (id == EXTERN_ICON || id == UNKNOWN_ICON)
     {
-	gtk_entry_set_text (GTK_ENTRY (opts->icon_entry), path);
-	gtk_editable_set_position (GTK_EDITABLE (opts->icon_entry), -1);
+        if (path)
+        {
+            gtk_entry_set_text (GTK_ENTRY (opts->icon_entry), path);
+            gtk_editable_set_position (GTK_EDITABLE (opts->icon_entry), -1);
+        }
 
 	gtk_widget_set_sensitive (opts->icon_entry, TRUE);
     }

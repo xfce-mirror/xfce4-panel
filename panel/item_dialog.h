@@ -21,13 +21,11 @@
 #define __XFCE_ITEM_DIALOG_H__
 
 #include <panel/item.h>
-#include <panel/xfcombo.h>
 
 /* CommandOptions
  * --------------
  * For use in property dialogs. Consists of:
- * - Entry to hold command. Uses completion combo from xfce4-modules
- *   if available.
+ * - Entry to hold command. 
  * - Checkbutton to run in terminal.
  * - Checkbutton to use startup notification (if available at compile time).
  *
@@ -42,8 +40,6 @@ struct _CommandOptions
 
     /* use the functions declared below to change the contents of 
      * the members of this struct */
-
-    xfc_combo_info_t *info;
 
     GtkWidget *command_entry;
     GtkWidget *term_checkbutton;

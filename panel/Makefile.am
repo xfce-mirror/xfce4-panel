@@ -29,9 +29,7 @@ xfce4_panel_SOURCES =						\
 	settings.h 						\
 	xfce.h 							\
 	xfce_support.c 						\
-	xfce_support.h						\
-	xfcombo.c 						\
-	xfcombo.h
+	xfce_support.h
 
 xfce4_panelincludedir = $(includedir)/xfce4/panel
 

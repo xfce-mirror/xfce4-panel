@@ -34,28 +34,9 @@ static XfceIconTheme *global_icon_theme = NULL;
 
 const char *icon_names[NUM_ICONS];
 
-/* icon themes */
-/* TODO: Someone please get me a list of names that give a fully themed panel 
- * for all major icon themes.
-static char *xfce_icon_names[][4] = {
-    {"xfce-unknown", "gnome-fs-executable", "exec", NULL},
-    {"xfce-edit", "gedit-icon", "edit", NULL},
-    {"xfce-filemanager", "file-manager", "folder", NULL},
-    {"xfce-utils", "gnome-util", "utilities", NULL},
-    {"xfce-games", "gnome-joystick", "games", NULL},
-    {"xfce-man", "gnome-help", "help", NULL},
-    {"xfce-multimedia", "gnome-multimedia", "multimedia", NULL},
-    {"xfce-internet", "gnome-globe", "web-browser", NULL},
-    {"xfce-graphics", "gnome-graphics", "graphics", NULL},
-    {"xfce-print", "gnome-dev-printer", "printer", NULL},
-    {"xfce-schedule", "gnome-month", "productivity", NULL},
-    {"xfce-sound", "gnome-audio", "sound", NULL},
-    {"xfce-terminal", "gnome-terminal", "terminal", NULL},
-};
- */
 
 static void
-icon_theme_changed (XfceIconTheme * icontheme)
+theme_changed (XfceIconTheme * icontheme)
 {
     char *theme;
 
@@ -87,14 +68,15 @@ icons_init (void)
     icon_names[++i] = _("Sound");
     icon_names[++i] = _("Terminal");
 
-    global_icon_theme = xfce_icon_theme_get_for_screen (NULL);
+    global_icon_theme = 
+        xfce_icon_theme_get_for_screen (gdk_screen_get_default());
 }
 
 void
 icon_theme_init (void)
 {
     g_signal_connect (global_icon_theme, "changed",
-		      G_CALLBACK (icon_theme_changed), NULL);
+		      G_CALLBACK (theme_changed), NULL);
 }
 
 GdkPixbuf *

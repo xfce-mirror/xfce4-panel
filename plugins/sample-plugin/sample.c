@@ -576,9 +576,14 @@ xfce_control_class_init (ControlClass * cc)
     {
 	GdkPixbuf *pixbuf;
 
-	pixbuf = xfce_themed_icon_load ("sampleicon.png", 48);
-	control_class_set_icon (cc, pixbuf);
-	g_object_unref (pixbuf);
+	pixbuf = xfce_icon_theme_load (xfce_icon_theme_get_for_screen (NULL),
+                                       "sampleicon.png", 48);
+
+        if (pixbuf)
+        {
+            control_class_set_icon (cc, pixbuf);
+            g_object_unref (pixbuf);
+        }
     }
 }
 

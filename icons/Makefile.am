@@ -12,7 +12,7 @@ hicolor48_DATA = \
 	xfce-mail.png \
 	xfce-man.png \
 	xfce-multimedia.png \
-	xfce-print.png \
+	xfce-printer.png \
 	xfce-schedule.png \
 	xfce-sound.png \
 	xfce-terminal.png \

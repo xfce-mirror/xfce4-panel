@@ -1432,6 +1432,8 @@ panel_parse_xml (xmlNodePtr node)
 	g_free (value);
     }
 
+    panel.priv->monitor = -1;
+    
     /* child nodes */
     for (child = node->children; child; child = child->next)
     {
@@ -1563,7 +1565,7 @@ panel_parse_xml (xmlNodePtr node)
 	}
     }
 
-    if (panel.position.x == -1 || panel.position.y == -1)
+    if (panel.priv->monitor == -1)
     {
 	DBG (" ++ Center panel on 1st monitor\n");
 

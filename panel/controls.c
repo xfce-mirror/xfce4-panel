@@ -1,6 +1,6 @@
 /*  $Id$
  *  
- *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -58,9 +58,9 @@
 #define SOEXT 		("." G_MODULE_SUFFIX)
 #define SOEXT_LEN 	(strlen (SOEXT))
 
-#define API_VERSION 5
+#define API_VERSION     5
 
-#define UNLOAD_TIMEOUT 30000	/* 30 secs */
+#define UNLOAD_TIMEOUT  30000	/* 30 secs */
 
 /* Make sure translations are taken from the panel and not from some plugin */
 #ifdef ENABLE_NLS
@@ -104,7 +104,7 @@ wait_for_unloading (void)
     while (unloading)
     {
 	DBG ("unloading in progress");
-	g_usleep (200 * 1000);
+	g_usleep (200 * 1000);  /* 200 msec */
     }
 
 }

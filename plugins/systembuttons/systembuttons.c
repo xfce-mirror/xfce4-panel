@@ -111,12 +111,12 @@ enum
 
 typedef struct
 {
-    gboolean show_two;
-    int button_types[2];	/* 0, 1, 2 or 3 for lock, exit, setup and info */
+    int button_types[2];   /* 0, 1, 2 or 3 for lock, exit, setup and info */
+    gboolean hide_two;
 
     GtkWidget *box;
     GtkWidget *buttons[2];
-    GList *callbacks;		/* save callbacks for when we change buttons */
+    GList *callbacks;	   /* save callbacks for when we change buttons */
     int cb_ids[2];
 }
 t_systembuttons;
@@ -126,9 +126,9 @@ typedef struct
     Control *control;
     t_systembuttons *sb;
 
-    GtkWidget *two_checkbutton;
-    GtkWidget *option_menu_hbox[2];
     GtkWidget *option_menus[2];
+    GtkWidget *label_two;
+    GtkWidget *hide_checkbutton;
 }
 t_systembuttons_dialog;
 
@@ -267,7 +267,7 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 
     gtk_widget_show (sb->buttons[0]);
 
-    if (sb->show_two)
+    if (!sb->hide_two)
 	gtk_widget_show (sb->buttons[1]);
     else
 	gtk_widget_hide (sb->buttons[1]);
@@ -280,8 +280,6 @@ static t_systembuttons *
 systembuttons_new (void)
 {
     t_systembuttons *sb = g_new0 (t_systembuttons, 1);
-
-    sb->show_two = TRUE;
 
     sb->button_types[0] = 0;
     create_systembutton (sb, 0, 0);
@@ -338,7 +336,7 @@ systembuttons_set_size (Control * control, int size)
 
     s = w = h = icon_size[size] + border_width;
 
-    n = sb->show_two ? 2 : 1;
+    n = sb->hide_two ? 1 : 2;
 
     if (settings.orientation == HORIZONTAL)
     {
@@ -417,12 +415,12 @@ systembuttons_read_config (Control * control, xmlNodePtr node)
 
 	if (n == 0)
 	{
-	    sb->show_two = FALSE;
+	    sb->hide_two = TRUE;
 	    gtk_widget_hide (sb->buttons[1]);
 	}
 	else
 	{
-	    sb->show_two = TRUE;
+	    sb->hide_two = FALSE;
 	    gtk_widget_show (sb->buttons[1]);
 	}
     }
@@ -445,7 +443,7 @@ systembuttons_write_config (Control * control, xmlNodePtr node)
 
     xmlSetProp (node, (const xmlChar *) "button2", prop);
 
-    sprintf (prop, "%d", sb->show_two ? 1 : 0);
+    sprintf (prop, "%d", sb->hide_two ? 0 : 1);
 
     xmlSetProp (node, (const xmlChar *) "showtwo", prop);
 }
@@ -454,24 +452,21 @@ systembuttons_write_config (Control * control, xmlNodePtr node)
 static void
 checkbutton_changed (GtkToggleButton * tb, t_systembuttons_dialog * sbd)
 {
-    gboolean show_two;
+    gboolean hide_two;
 
-    show_two = gtk_toggle_button_get_active (tb);
+    hide_two = gtk_toggle_button_get_active (tb);
 
-    if (show_two != sbd->sb->show_two)
+    if (hide_two != sbd->sb->hide_two)
     {
-	sbd->sb->show_two = show_two;
+	sbd->sb->hide_two = hide_two;
 
-	if (show_two)
-	{
-	    gtk_widget_show (sbd->sb->buttons[1]);
-	    gtk_widget_show (sbd->option_menu_hbox[1]);
-	}
-	else
-	{
-	    gtk_widget_hide (sbd->sb->buttons[1]);
-	    gtk_widget_hide (sbd->option_menu_hbox[1]);
-	}
+        if (!hide_two)
+            gtk_widget_show (sbd->sb->buttons[1]);
+        else
+            gtk_widget_hide (sbd->sb->buttons[1]);
+        
+        gtk_widget_set_sensitive (sbd->label_two, !hide_two);
+        gtk_widget_set_sensitive (sbd->option_menus[1], !hide_two);
 
 	systembuttons_set_size (sbd->control, settings.size);
     }
@@ -513,30 +508,9 @@ systembuttons_create_options (Control * control, GtkContainer * container,
     sbd->sb = sb;
 
     /* add widgets */
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_widget_show (vbox);
     gtk_container_add (container, vbox);
-
-    /* show two checkbutton */
-    hbox = gtk_hbox_new (FALSE, 4);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-
-    label = gtk_label_new (_("Show two buttons:"));
-    gtk_widget_show (label);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    gtk_size_group_add_widget (sg1, label);
-
-    sbd->two_checkbutton = gtk_check_button_new ();
-    gtk_widget_show (sbd->two_checkbutton);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sbd->two_checkbutton),
-				  sbd->sb->show_two);
-    gtk_box_pack_start (GTK_BOX (hbox), sbd->two_checkbutton, FALSE, FALSE,
-			0);
-
-    g_signal_connect (sbd->two_checkbutton, "toggled",
-		      G_CALLBACK (checkbutton_changed), sbd);
 
     /* set names to use in option menus */
     names[0] = _("Lock");
@@ -567,7 +541,7 @@ systembuttons_create_options (Control * control, GtkContainer * container,
     }
 
     /* buttons option menus */
-    hbox = sbd->option_menu_hbox[0] = gtk_hbox_new (FALSE, 4);
+    hbox = gtk_hbox_new (FALSE, 6);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
@@ -582,21 +556,33 @@ systembuttons_create_options (Control * control, GtkContainer * container,
     gtk_box_pack_start (GTK_BOX (hbox), om, FALSE, FALSE, 0);
     gtk_size_group_add_widget (sg2, om);
 
-    hbox = sbd->option_menu_hbox[1] = gtk_hbox_new (FALSE, 4);
-    if (sb->show_two)
-	gtk_widget_show (hbox);
+    hbox = gtk_hbox_new (FALSE, 6);
+    gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Button 2:"));
+    label = sbd->label_two = gtk_label_new (_("Button 2:"));
     gtk_widget_show (label);
     gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_size_group_add_widget (sg1, label);
+    gtk_widget_set_sensitive (label, !sb->hide_two);
 
     om = sbd->option_menus[1];
     gtk_widget_show (om);
     gtk_box_pack_start (GTK_BOX (hbox), om, FALSE, FALSE, 0);
     gtk_size_group_add_widget (sg2, om);
+    gtk_widget_set_sensitive (om, !sb->hide_two);
+
+    /* checkbox */
+    sbd->hide_checkbutton = gtk_check_button_new_with_mnemonic (_("_Hide"));
+    gtk_widget_show (sbd->hide_checkbutton);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sbd->hide_checkbutton),
+				  sbd->sb->hide_two);
+    gtk_box_pack_start (GTK_BOX (hbox), sbd->hide_checkbutton, FALSE, FALSE,
+			0);
+
+    g_signal_connect (sbd->hide_checkbutton, "toggled",
+		      G_CALLBACK (checkbutton_changed), sbd);
 
     /* dialog buttons */
     g_signal_connect_swapped (done, "clicked", G_CALLBACK (g_free), sbd);

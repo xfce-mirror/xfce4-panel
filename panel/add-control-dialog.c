@@ -1,6 +1,6 @@
 /*  $Id$
  *  
- *  Copyright (C) 2004 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -153,6 +153,7 @@ treeview_dblclick (GtkWidget * tv, GdkEventButton * evt, ControlList * list)
     if (evt->type == GDK_2BUTTON_PRESS)
     {
 	dlg = gtk_widget_get_toplevel (tv);
+        
 	if (dlg && GTK_WIDGET_TOPLEVEL (dlg))
 	{
 	    dialog_response (dlg, GTK_RESPONSE_OK, list);
@@ -209,6 +210,8 @@ add_header (GtkBox * box)
     header = xfce_create_header (pb, _("Add new item"));
     gtk_widget_show (header);
     gtk_box_pack_start (box, header, FALSE, FALSE, 0);
+
+    g_object_unref (pb);
 }
 
 static void

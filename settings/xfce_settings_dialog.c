@@ -41,8 +41,7 @@
 #include "xfce_settings_dialog.h"
 
 #define STREQUAL(s1,s2) !strcmp(s1, s2)
-
-#define BORDER 5
+#define BORDER 6
 
 enum
 { LEFT, RIGHT, TOP, BOTTOM };
@@ -50,19 +49,7 @@ enum
 enum
 { HORIZONTAL, VERTICAL };
 
-
 static McsManager *mcs_manager;
-
-/*  Global settings
- *  ---------------
- *  size: option menu
- *  panel orientation: option menu
- *  popup position: option menu
-*/
-static GtkWidget *orientation_menu;
-static GtkWidget *size_menu;
-static GtkWidget *popup_position_menu;
-
 static gboolean is_running = FALSE;
 static GtkWidget *dialog = NULL;
 
@@ -79,6 +66,7 @@ add_spacer (GtkBox * box, int size)
 }
 
 /* size */
+
 static void
 size_menu_changed (GtkOptionMenu * menu)
 {
@@ -92,10 +80,11 @@ size_menu_changed (GtkOptionMenu * menu)
 static void
 add_size_menu (GtkWidget * option_menu)
 {
-    GtkWidget *menu = gtk_menu_new ();
-    GtkWidget *item;
+    GtkWidget *menu, *item;
     McsSetting *setting;
 
+    menu = gtk_menu_new ();
+    
     item = gtk_menu_item_new_with_label (_("Small"));
     gtk_widget_show (item);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -128,13 +117,15 @@ add_size_menu (GtkWidget * option_menu)
 		      NULL);
 }
 
-/* Panel Orientation */
+/* orientation */
+
 static void
-orientation_changed (GtkOptionMenu * menu)
+orientation_changed (GtkOptionMenu * menu, GtkOptionMenu *popup_menu)
 {
-    int n = gtk_option_menu_get_history (menu);
-    int pos;
+    int n, pos;
     McsSetting *setting;
+
+    n = gtk_option_menu_get_history (menu);
 
     setting =
 	mcs_manager_setting_lookup (mcs_manager, "orientation", CHANNEL);
@@ -144,50 +135,44 @@ orientation_changed (GtkOptionMenu * menu)
 
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_ORIENTATION],
 			 CHANNEL, n);
-/*    TODO: find out why this crashed the panel
- *    the error is in libxfce4mcs
- *    
- *    mcs_manager_notify(mcs_manager, CHANNEL);
- *
- *    gdk_flush();
- *    g_usleep(10);
-*/
 
+    /* also change popup position */
     setting =
 	mcs_manager_setting_lookup (mcs_manager, "popupposition", CHANNEL);
 
-    if (!setting)
-	return;
-
-    pos = setting->data.v_int;
-
-    /* this seems more logical */
-    switch (pos)
+    if (setting)
     {
-	case LEFT:
-	    pos = TOP;
-	    break;
-	case RIGHT:
-	    pos = BOTTOM;
-	    break;
-	case TOP:
-	    pos = LEFT;
-	    break;
-	case BOTTOM:
-	    pos = RIGHT;
-	    break;
-    }
+        pos = setting->data.v_int;
 
-    gtk_option_menu_set_history (GTK_OPTION_MENU (popup_position_menu), pos);
+        switch (pos)
+        {
+            case LEFT:
+                pos = TOP;
+                break;
+            case RIGHT:
+                pos = BOTTOM;
+                break;
+            case TOP:
+                pos = LEFT;
+                break;
+            case BOTTOM:
+                pos = RIGHT;
+                break;
+        }
+
+        gtk_option_menu_set_history (GTK_OPTION_MENU (popup_menu), pos);
+    }
 }
 
 static void
-add_orientation_menu (GtkWidget * option_menu)
+add_orientation_menu (GtkWidget * option_menu, GtkWidget *popup_menu)
 {
-    GtkWidget *menu = gtk_menu_new ();
+    GtkWidget *menu;
     GtkWidget *item;
     McsSetting *setting;
 
+    menu = gtk_menu_new ();
+    
     item = gtk_menu_item_new_with_label (_("Horizontal"));
     gtk_widget_show (item);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -210,10 +195,11 @@ add_orientation_menu (GtkWidget * option_menu)
     }
 
     g_signal_connect (option_menu, "changed",
-		      G_CALLBACK (orientation_changed), NULL);
+		      G_CALLBACK (orientation_changed), popup_menu);
 }
 
 /* popup position */
+
 static void
 popup_position_changed (GtkOptionMenu * menu)
 {
@@ -227,10 +213,12 @@ popup_position_changed (GtkOptionMenu * menu)
 static void
 add_popup_position_menu (GtkWidget * option_menu)
 {
-    GtkWidget *menu = gtk_menu_new ();
+    GtkWidget *menu;
     GtkWidget *item;
     McsSetting *setting;
 
+    menu = gtk_menu_new ();
+    
     item = gtk_menu_item_new_with_label (_("Left"));
     gtk_widget_show (item);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
@@ -267,7 +255,7 @@ add_popup_position_menu (GtkWidget * option_menu)
 static void
 add_style_box (GtkBox * box, GtkSizeGroup * sg)
 {
-    GtkWidget *vbox, *hbox, *label;
+    GtkWidget *vbox, *hbox, *label, *omenu, *popup_menu;
 
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
@@ -284,10 +272,10 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    size_menu = gtk_option_menu_new ();
-    gtk_widget_show (size_menu);
-    add_size_menu (size_menu);
-    gtk_box_pack_start (GTK_BOX (hbox), size_menu, TRUE, TRUE, 0);
+    omenu = gtk_option_menu_new ();
+    gtk_widget_show (omenu);
+    add_size_menu (omenu);
+    gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
 
     /* panel orientation */
     hbox = gtk_hbox_new (FALSE, BORDER);
@@ -300,10 +288,13 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    orientation_menu = gtk_option_menu_new ();
-    gtk_widget_show (orientation_menu);
-    add_orientation_menu (orientation_menu);
-    gtk_box_pack_start (GTK_BOX (hbox), orientation_menu, TRUE, TRUE, 0);
+    /* needed here already */
+    popup_menu = gtk_option_menu_new ();
+    
+    omenu = gtk_option_menu_new ();
+    gtk_widget_show (omenu);
+    add_orientation_menu (omenu, popup_menu);
+    gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
 
     /* popup button */
     hbox = gtk_hbox_new (FALSE, BORDER);
@@ -316,13 +307,14 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    popup_position_menu = gtk_option_menu_new ();
-    gtk_widget_show (popup_position_menu);
-    add_popup_position_menu (popup_position_menu);
-    gtk_box_pack_start (GTK_BOX (hbox), popup_position_menu, TRUE, TRUE, 0);
+    omenu = popup_menu;
+    gtk_widget_show (omenu);
+    add_popup_position_menu (omenu);
+    gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
 }
 
 /* layer */
+
 static void
 layer_changed (GtkToggleButton * tb)
 {
@@ -378,6 +370,7 @@ add_layer_box (GtkBox * box, GtkSizeGroup * sg)
 }
 
 /* autohide */
+
 static void
 autohide_changed (GtkToggleButton * tb)
 {
@@ -423,6 +416,7 @@ add_autohide_box (GtkBox * box, GtkSizeGroup * sg)
 }
 
 /* the dialog */
+
 static void
 dialog_delete (GtkWidget * dialog)
 {
@@ -458,9 +452,10 @@ run_xfce_settings_dialog (McsPlugin * mp)
 					  NULL);
 
     gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
-    gtk_window_stick (GTK_WINDOW (dialog));
     gtk_window_set_icon (GTK_WINDOW (dialog), mp->icon);
 
+    gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+    
     g_signal_connect (dialog, "response", G_CALLBACK (dialog_delete), NULL);
     g_signal_connect (dialog, "delete_event", G_CALLBACK (dialog_delete),
 		      NULL);
@@ -473,7 +468,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
     gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, TRUE, 0);
     g_object_unref (pb);
 
-    add_spacer (GTK_BOX (vbox), BORDER);
+    add_spacer (GTK_BOX (vbox), 2 * BORDER);
 
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
@@ -490,7 +485,12 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     add_style_box (GTK_BOX (vbox), sg);
 
-    /* autohide */
+    add_spacer (GTK_BOX (vbox), BORDER);
+
+    g_object_unref (sg);
+    sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+
+    /* Behaviour */
     vbox = GTK_DIALOG (dialog)->vbox;
 
     frame = xfce_framebox_new (_("Behaviour"), TRUE);
@@ -506,6 +506,8 @@ run_xfce_settings_dialog (McsPlugin * mp)
     add_autohide_box (GTK_BOX (vbox), sg);
 
     g_object_unref (sg);
+
+    add_spacer (GTK_BOX (vbox), BORDER);
 
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_widget_show (dialog);
