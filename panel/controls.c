@@ -52,6 +52,7 @@
 #include "groups.h"
 #include "plugins.h"
 #include "controls_dialog.h"
+#include "add-control-dialog.h"
 #include "settings.h"
 
 #define SOEXT 		("." G_MODULE_SUFFIX)

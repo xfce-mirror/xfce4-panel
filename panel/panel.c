@@ -42,6 +42,7 @@
 #include "groups.h"
 #include "controls.h"
 #include "controls_dialog.h"
+#include "add-control-dialog.h"
 #include "popup.h"
 #include "settings.h"
 #include "mcs_client.h"
@@ -87,7 +88,6 @@ static int screen_width = 0;
 static int screen_height = 0;
 
 /* (re)positioning */
-
 struct XineramaScreen
 {
     int xmin, ymin;
@@ -95,17 +95,6 @@ struct XineramaScreen
 };
 
 struct XineramaScreen xinerama_scr = { 0 };
-
-typedef enum
-{
-    FLOATING,
-    EDGE,
-    CENTER,
-    CORNER
-}
-XfcePositionState;
-
-static XfcePositionState pos_state = FLOATING;
 
 static GtkRequisition panel_req = { 0 };
 
@@ -160,17 +149,22 @@ static void
 update_xinerama_coordinates (Panel * p)
 {
     int x, y;
+    DesktopMargins margins = { 0 };
 
     g_return_if_fail (dpy != NULL);
-
+    
+    netk_get_desktop_margins (xscreen, &margins);
+    
     gtk_window_get_position (GTK_WINDOW (p->toplevel), &x, &y);
     x += p->toplevel->allocation.width / 2;
     y += p->toplevel->allocation.height / 2;
 
-    xinerama_scr.xmin = MyDisplayX (x, y);
-    xinerama_scr.xmax = MyDisplayMaxX (dpy, scr, x, y);
-    xinerama_scr.ymin = MyDisplayY (x, y);
-    xinerama_scr.ymax = MyDisplayMaxY (dpy, scr, x, y);
+    xinerama_scr.xmin = MAX (MyDisplayX (x, y), margins.left);
+    xinerama_scr.xmax = MIN (MyDisplayMaxX (dpy, scr, x, y), 
+	    		     screen_width - margins.right);
+    xinerama_scr.ymin = MAX (MyDisplayY (x, y), margins.top);
+    xinerama_scr.ymax = MIN (MyDisplayMaxY (dpy, scr, x, y), 
+	    		     screen_height - margins.bottom);
 
     DBG ("screen: %d,%d+%dx%d",
 	 xinerama_scr.xmin, xinerama_scr.ymin,
@@ -189,99 +183,79 @@ update_xinerama_coordinates (Panel * p)
 static void
 update_position (Panel * p, int *x, int *y)
 {
+    int xcenter, ycenter;
+    
     if (!p || !p->toplevel)
 	return;
 
-   pos_state = FLOATING;
-
     DBG ("desired position: %d,%d", *x, *y);
 
-    /* NOTE: using an 'error' margin of 2 */
-    
+    xcenter = xinerama_scr.xmin +
+	(xinerama_scr.xmax - xinerama_scr.xmin) / 2 -
+	panel_req.width / 2;
+
+    ycenter = xinerama_scr.ymin +
+	(xinerama_scr.ymax - xinerama_scr.ymin) / 2 -
+	panel_req.height / 2;
+
     if (settings.orientation == HORIZONTAL)
     {
-	if (*y + panel_req.height > xinerama_scr.ymax - 2)
-	{
-	    *y = xinerama_scr.ymax - panel_req.height;
-	    pos_state = EDGE;
-	}
-
-	if (*y < xinerama_scr.ymin + 2)
+	if (*y < ycenter)
 	{
 	    *y = xinerama_scr.ymin;
-	    pos_state = EDGE;
+	}
+	else
+	{
+	    *y = xinerama_scr.ymax - panel_req.height;
 	}
 
-	if (pos_state == EDGE)
+	if (xcenter > xinerama_scr.xmin &&
+	    *x > xcenter - 20 && *x < xcenter + 20)
 	{
-	    if (*x + panel_req.width > xinerama_scr.xmax - 2)
-	    {
-		*x = xinerama_scr.xmax - panel_req.width;
-		pos_state = CORNER;
-	    }
-
-	    if (*x < xinerama_scr.xmin + 2)
-	    {
-		*x = xinerama_scr.xmin;
-		pos_state = CORNER;
-	    }
+	    *x = xcenter;
+	}
+	else if (*x + panel_req.width > xinerama_scr.xmax - 20)
+	{
+	    *x = xinerama_scr.xmax - panel_req.width;
+	}
+	else if (*x < xinerama_scr.xmin + 20)
+	{
+	    *x = xinerama_scr.xmin;
 	}
 
-	if (pos_state == EDGE)
+	if (*x < xinerama_scr.xmin)
 	{
-	    int xcenter = xinerama_scr.xmin +
-		(xinerama_scr.xmax - xinerama_scr.xmin) / 2 -
-		panel_req.width / 2;
-
-	    if (xcenter > xinerama_scr.xmin &&
-		*x > xcenter - 2 && *x < xcenter + 2)
-	    {
-		*x = xcenter;
-		pos_state = CENTER;
-	    }
+	    *x = xinerama_scr.xmin;
 	}
     }
     else
     {
-	if (*x + panel_req.width > xinerama_scr.xmax - 2)
-	{
-	    *x = xinerama_scr.xmax - panel_req.width;
-	    pos_state = EDGE;
-	}
-
-	if (*x < xinerama_scr.xmin + 2)
+	if (*x < xcenter)
 	{
 	    *x = xinerama_scr.xmin;
-	    pos_state = EDGE;
+	}
+	else
+	{
+	    *x = xinerama_scr.xmax - panel_req.width;
 	}
 
-	if (pos_state == EDGE)
+	if (ycenter > xinerama_scr.ymin &&
+	    *y > ycenter - 20 && *y < ycenter + 20)
 	{
-	    if (*y + panel_req.height > xinerama_scr.ymax - 2)
-	    {
-		*y = xinerama_scr.ymax - panel_req.height;
-		pos_state = CORNER;
-	    }
-
-	    if (*y < xinerama_scr.ymin + 2)
-	    {
-		*y = xinerama_scr.ymin;
-		pos_state = CORNER;
-	    }
+	    *y = ycenter;
+	}
+	else if (*y + panel_req.height > xinerama_scr.ymax - 20)
+	{
+	    *y = xinerama_scr.ymax - panel_req.height;
+	}
+	else if (*y < xinerama_scr.ymin + 20)
+	{
+	    *y = xinerama_scr.ymin;
 	}
 
-	if (pos_state == EDGE)
+	if (*y < xinerama_scr.ymin)
 	{
-	    int ycenter = xinerama_scr.ymin +
-		(xinerama_scr.ymax - xinerama_scr.ymin) / 2 -
-		panel_req.height / 2;
-
-	    if (ycenter > xinerama_scr.ymin &&
-		*y > ycenter - 2 && *y < ycenter + 2)
-	    {
-		*y = ycenter;
-		pos_state = CENTER;
-	    }
+	    *y = xinerama_scr.ymin;
 	}
     }
 
@@ -289,46 +263,21 @@ update_position (Panel * p, int *x, int *y)
 }
 
 static void
+panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
+{
+    update_position (panel, x, y);
+}
+
+static void
 panel_reallocate (Panel * p, GtkRequisition * previous)
 {
     GtkRequisition new;
-    int xold, yold, xnew, ynew, xcenter, ycenter;
+    int xold, yold, xnew, ynew;
 
     gtk_widget_size_request (p->toplevel, &new);
 
     xold = xnew = p->position.x;
     yold = ynew = p->position.y;
-
-    xcenter = xinerama_scr.xmin + (xinerama_scr.xmax - xinerama_scr.xmin) / 2;
-    ycenter = xinerama_scr.ymin + (xinerama_scr.ymax - xinerama_scr.ymin) / 2;
-
-    /* initial new coordinates depend on centering */
-    if (pos_state == CENTER)
-    {
-	if (settings.orientation == HORIZONTAL)
-	{
-	    xnew = xcenter - new.width / 2;
-	}
-	else
-	{
-	    ynew = ycenter - new.height / 2;
-	}
-    }
-
-    /* only right and bottom edge/corner can change */
-    /* use an 'error' margin of 2 */
-    if (pos_state == EDGE || pos_state == CORNER)
-    {
-	if (xold + previous->width > xinerama_scr.xmax - 2)
-	{
-	    xnew = xinerama_scr.xmax - new.width;
-	}
-
-	if (yold + previous->height > xinerama_scr.ymax - 2)
-	{
-	    ynew = xinerama_scr.ymax - new.height;
-	}
-    }
 
     panel_req = new;
 
@@ -343,8 +292,6 @@ panel_reallocate (Panel * p, GtkRequisition * previous)
 
 	/* Need to save position here... */
 	write_panel_config ();
-
-	/* FIXME: to we need to update the arrow direction here? */
     }
 }
 
@@ -436,7 +383,6 @@ get_handle_menu (void)
 {
     static GtkMenu *menu = NULL;
     static GtkItemFactory *ifactory;
-    GtkWidget *submenu, *item;
 
     if (!menu)
     {
@@ -535,12 +481,17 @@ handle_new (Panel * p)
     GtkWidget *mh;
 
     mh = xfce_movehandler_new (panel.toplevel);
+    xfce_movehandler_set_move_func (XFCE_MOVEHANDLER (mh),
+	    			     (XfceMoveFunc) panel_move_func, p);
     gtk_widget_show (mh);
 
     gtk_widget_set_name (mh, "xfce_panel");
 
     g_signal_connect (mh, "button-press-event",
 		      G_CALLBACK (handler_pressed_cb), p);
+
+    g_signal_connect_swapped (mh, "move-start", 
+	    		      G_CALLBACK (update_xinerama_coordinates), p);
 
     g_signal_connect (mh, "move-end", G_CALLBACK (handler_move_end_cb), p);
 
@@ -570,11 +521,6 @@ panel_set_hidden (Panel * p, gboolean hide)
 
     if (hide)
     {
-	/* Only hide when the panel is on the edge of the screen 
-	 * Thanks to Eduard Rocatello for pointing this out */
-	if (pos_state == FLOATING)
-	    return;
-
 	/* Depending on orientation, resize */
 	if (settings.orientation == VERTICAL)
 	{
