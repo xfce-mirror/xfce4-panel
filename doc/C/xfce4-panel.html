@@ -1,13 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>XFce 4 Panel</title><link rel="stylesheet" href="../xfce.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.58.1"><link rel="home" href="#xfce4-panel" title="XFce 4 Panel"><link rel="next" href="#panel-intro" title="Introduction"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="en"><div class="titlepage"><div><h1 class="title"><a name="xfce4-panel"></a>XFce 4 Panel</h1></div><div><div class="authorgroup"><div class="author"><h3 class="author">Jasper Huijsmans</h3><div class="affiliation"><div class="address"><p><tt>&lt;<a href="mailto:huysmans@users.sourceforge.net">huysmans@users.sourceforge.net</a>&gt;</tt></p></div></div></div></div></div><div><span xmlns="http://www.w3.org/TR/xhtml1/transitional" class="releaseinfo">This manual describes <b xmlns=""><tt>xfce4-panel</tt></b> version 3.90
-  <br></br></span></div><div><p class="copyright">Copyright © 2003 Jasper Huijsmans</p></div><div><div class="revhistory"><table border="1" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr><tr><td align="left">Revision 0.3</td><td align="left">February 2003</td><td align="left">jbh</td></tr></table></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><a href="#panel-intro">Introduction</a></dt><dt><a href="#panel-getting-started">Getting Started</a></dt><dt><a href="#panel-items">Panel Items</a></dt><dd><dl><dt><a href="#laucher-item">Laucher</a></dt><dt><a href="#clock-item">XFce Clock</a></dt><dt><a href="#mailcheck-item">Mail Check</a></dt><dt><a href="#switcher-item">Desktop Switcher and Graphical Pager</a></dt><dt><a href="#systembuttons-item">System Buttons</a></dt></dl></dd><dt><a href="#subpanels">Panel menus</a></dt><dt><a href="#panel-settings">Panel Preferences</a></dt><dd><dl><dt><a href="#panel-apearance">Appearance</a></dt><dt><a href="#panel-position">Position</a></dt></dl></dd><dt><a href="#panel-copyright">About xfce4-panel</a></dt></dl></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-intro"></a>Introduction</h2></div></div><p>The XFce 4 panel is part of the <a href="http://www.xfce.org" target="_top">XFce 4 Desktop Environment</a> and features program 
-    lauchers, a desktop switcher and more. The actual command to 
-    run is <b><tt>xfce4-panel</tt></b>. Many aspects of the panel can be configured through 
-    graphical dialogs.
+  <br></br></span></div><div><p class="copyright">Copyright © 2003 Jasper Huijsmans</p></div><div><div class="revhistory"><table border="1" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="3"><b>Revision History</b></th></tr><tr><td align="left">Revision 0.4</td><td align="left">May 2003</td><td align="left">jbh</td></tr><tr><td align="left">Revision 0.3</td><td align="left">February 2003</td><td align="left">jbh</td></tr></table></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><a href="#panel-intro">Introduction</a></dt><dt><a href="#panel-getting-started">Getting Started</a></dt><dt><a href="#panel-items">Panel Items</a></dt><dd><dl><dt><a href="#launcher-item">Launcher</a></dt><dt><a href="#clock-item">XFce Clock</a></dt><dt><a href="#mailcheck-item">Mail Check</a></dt><dt><a href="#switcher-item">Desktop Switcher and Graphical Pager</a></dt><dt><a href="#systembuttons-item">System Buttons</a></dt></dl></dd><dt><a href="#subpanels">Panel Menus</a></dt><dt><a href="#panel-settings">Panel Preferences</a></dt><dd><dl><dt><a href="#panel-apearance">Appearance</a></dt><dt><a href="#panel-position">Position</a></dt></dl></dd><dt><a href="#panel-copyright">About xfce4-panel</a></dt></dl></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-intro"></a>Introduction</h2></div></div><p>The XFce 4 panel is part of the <a href="http://www.xfce.org" target="_top">XFce 4 Desktop Environment</a> and features program 
+    launchers, panel menus, a clock, a desktop switcher and more. The actual 
+    command to run is <b><tt>xfce4-panel</tt></b>. Many aspects of the panel can be configured 
+    through graphical dialogs.
   </p><p>If you are familiar with previous versions of XFce you will find many
     new features. Most visible are probably the vertical panel mode, the icon
     themes, the new graphical pager and the configurable position of the
-    subpanel popup buttons. The way preferences are handled has changed 
+    panel menu popup buttons. The way preferences are handled has changed 
     completely, so it may take some time to get used to. This manual should 
     provide you with all necessary information on how to adjust the panel to 
     your liking.
@@ -17,29 +17,31 @@
 	    launchers, a new mail monitor, a clock and a desktop pager.
 	    Also shows an opened panel menu.
 	  "></div></div></div><p>The figure shows the default panel configuration with one open
-    subpanel and the mouse hovering over the setup button, making it show
+    panel menu and the mouse hovering over the setup button, making it show
     a tooltip.
   </p><p>There is a move handle on each side of the panel which
     you can use to drag the panel anywhere on the screen. Right clicking
-    (or Shift-click) shows a popup menu ... Go on, try it ;-)
+    (or Shift-click) on one of them shows a popup menu ... Go on, try it ;-)
   </p><div class="figure"><a name="handle-popup-fig"></a><p class="title"><b>Figure 2. Move handle popup menu</b></p><div class="screenshot"><div class="mediaobject"><img src="images/handle-popup.png" alt="Shows move handle popup menu."></div></div></div><p>The area between the move handles contains panel items. The available 
-    items are are described in <a href="#panel-items" title="Panel Items">the section called &#8220;Panel Items&#8221;</a>. Most items 
-    perform an action when clicked. 
-  </p><p>Right-clicking will open a popup menu. You can change the properties,
-    remove and item or add a new item. Items can also be added from the
-    right-click menu on one of the move handles (see above). From the menu you
-    can choose the type of item you want to add. A properties dialog will open
-    for the newly added panel item, so you can change the item's options.
-  </p><div class="figure"><a name="item-popup-fig"></a><p class="title"><b>Figure 3. Item popup menu</b></p><div class="screenshot"><div class="mediaobject"><img src="images/item-popup.png" alt="Shows item popup menu."></div></div></div><p>Global panel preferences can be changed from the XFce settings 
-    manager, which can be started either from the 'Setup' button on the panel 
-    or from the right-click menu on the move handles. See 
-    <a href="#panel-settings" title="Panel Preferences">the section called &#8220;Panel Preferences&#8221;</a>.
-  </p></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-items"></a>Panel Items</h2></div></div><p>The properties dialog can be opened from the right-click menu on
-    the item. Each type of panel item has its own configuration dialog.
-    Every dialog offers at least these options:</p><div class="itemizedlist"><ul type="disc"><li>Change the position of the item on the panel.</li><li>When you change anything on in the dialog, the 
-      <b>Revert</b> button will be activated and you can 
-      always go back to the initial settings and the original panel item.
-    </li><li>Remove the item.</li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="laucher-item"></a>Laucher</h3></div></div><p>The most common panel item is the laucher item. It allows you to
+    items are are described in the &quot;<a href="#panel-items" target="_top">Panel Items</a>&quot; section. Most items perform an 
+    action when clicked. 
+  </p><p>Right-clicking will open a popup menu. from which you can open a
+    properties dialog, remove the item or add a new item. Items can also be 
+    added from the right-click menu on one of the move handles (see above). 
+    A submenu shows a list of available item types that you can choose from. A 
+    properties dialog will open for the newly added panel item, so you can 
+    change the item's options.
+  </p><div class="figure"><a name="item-popup-fig"></a><p class="title"><b>Figure 3. Item popup menu</b></p><div class="screenshot"><div class="mediaobject"><img src="images/item-popup.png" alt="Shows item popup menu."></div></div></div><p>Global panel preferences can be changed from the XFce 4 Settings 
+    Manager, which can be started either from the 'Setup' button on the panel 
+    or from the right-click menu on the move handles. See &quot;<a href="#panel-settings" target="_top">Global Preferences</a>&quot; for an explanation of 
+    the available options.
+  </p></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-items"></a>Panel Items</h2></div></div><p>The properties dialog for a panel item can be opened from the 
+    right-click menu on the item. Each type of panel item has its own 
+    configuration dialog. Every dialog offers at least these options:
+  </p><div class="itemizedlist"><ul type="disc"><li>Change the position of the item on the panel.</li><li>Revert changes. When you change anything on in the dialog, the
+      <b>Revert</b> button will be enabled so you can 
+      always go back to the initial settings.
+    </li><li>Remove the item.</li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="launcher-item"></a>Launcher</h3></div></div><p>The most common panel item is the launcher item. It allows you to
       start programs from the panel. The properties dialog offers the
       following options:
     </p><div class="variablelist"><dl><dt><span class="term">Command</span></dt><dd>You can type the command to run or browse the file system
@@ -49,21 +51,22 @@
 	  hourglass while the program is loading. But, the apllication has
 	  to support that and not many program do at the moment. Programs
 	  build with Gtk 2.2, should support it.
-	</dd><dt><span class="term">Icon</span></dt><dd>The panel provides a number of standard icons, that may be
+	</dd><dt><span class="term">Icon</span></dt><dd>The panel provides a number of standard icons that can be
 	  used. These icons will also follow the icon theme you choose from
-	  the panel settings dialog. Of course you can also choose a custom
-	  icon, either by browsing the file system from the 
+	  the <a href="#panel-settings" target="_top">global preferences
+	    dialog</a>. Of course you can also choose a custom icon, 
+	  either by browsing the file system from the 
 	  '<b>...</b>' button or by dropping an image on the
 	  preview area from a file manager.
-	</dd><dt><span class="term">Tooltip</span></dt><dd>This is simply the tooltip the panel item will show if you
-	  hold the mouse over it.
+	</dd><dt><span class="term">Tooltip</span></dt><dd>The panel item will show this tooltip if you hold the mouse 
+	  over it.
 	</dd><dt><span class="term">Menu</span></dt><dd>A launcher can have a panel menu attached to it. When this
-	  option is selected a button with an arrow will appear next to the
-	  item. See <a href="#subpanels" title="Panel menus">the section called &#8220;Panel menus&#8221;</a> for more info on panel menus.
-	  The position of the menu button can be changed from the global
-	  settings dialog.
-	</dd></dl></div><div class="figure"><a name="launcher-fig"></a><p class="title"><b>Figure 4. Launcher item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/launcher-properties.png" alt="Shows properties dialog for laucher item."></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="clock-item"></a>XFce Clock</h3></div></div><p>The Xfce clock has a number of options that determine the way it
-      looks. There are three clock types available, analog, digital and LED.
+	  option is selected a small button with an arrow will appear next to 
+	  the item. Look <a href="#subpanels" target="_top">here</a> for more info 
+	  on panel menus. The position of the menu button can be changed from 
+	  the global settings dialog.
+	</dd></dl></div><div class="figure"><a name="launcher-fig"></a><p class="title"><b>Figure 4. Launcher item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/launcher-properties.png" alt="Shows properties dialog for launcher item."></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="clock-item"></a>XFce Clock</h3></div></div><p>The Xfce Clock has a number of options to change the way it looks. 
+      There are three clock types available: analog, digital and LED.
       There is an option to show seconds and for the digital and LED clock
       types you can choose whether the clock will be in 24 hour mode, 12
       hour mode, or 12 hour mode with AM/PM indication. The clock shows the
@@ -73,13 +76,13 @@
       want, as long as it is in mbox format. The mailbox icon will follow
       your icon theme. You can choose the location of the mailbox, the
       command to run when you click on the button and the interval between
-      checks. The command has the same options as the laucher item command
-      (see <a href="#laucher-item" target="_top">above</a>).
+      checks. The command has the same options as the launcher item command
+      (see <a href="#launcher-item" target="_top">above</a>).
     </p><div class="figure"><a name="mailcheck-fig"></a><p class="title"><b>Figure 6. Mailcheck item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/mailcheck-properties.png" alt="Shows properties dialog for mailcheck item."></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="switcher-item"></a>Desktop Switcher and Graphical Pager</h3></div></div><p>The panel provides two items that deal with virtual desktops. A 
       CDE-like desktop switcher, that shows buttons with the desktop name 
       and a graphical pager that shows a miniature view of the desktops and
       even allows you to move windows to another workspace by dragging the
-      mini-window in the pager. The graphical pager even allows you to
+      mini-window in the pager. The graphical pager also allows you to
       change workspaces by using the mouse scrollwheel, when you hold the
       mouse over it.</p><div class="figure"><a name="nooptions-fig"></a><p class="title"><b>Figure 7. Item without options</b></p><div class="screenshot"><div class="mediaobject"><img src="images/nooptions-properties.png" alt="Shows properties dialog for item without options.
 	    "></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="systembuttons-item"></a>System Buttons</h3></div></div><p>A systembuttons item shows one or two buttons wich can perform
@@ -97,33 +100,36 @@
 	  XFce components as well as some system settings, such as mouse
 	  behaviour and user interface settings.
 	</dd></dl></div><div class="figure"><a name="systembuttons-fig"></a><p class="title"><b>Figure 8. Systembuttons item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/systembuttons-properties.png" alt="Shows properties dialog for systembuttons item.
-	    "></div></div></div></div><p> </p></div><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="subpanels"></a>Panel menus</h2></div></div><p>Panel launcher items can have a menu associated with it, which can
+	    "></div></div></div></div><p> </p></div><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="subpanels"></a>Panel Menus</h2></div></div><p>Panel launcher items can have a menu associated with it, which can
     be opened by clicking on the small arrow button next to the item. The
     actual position of these popup buttons is configurable from the global
-    settings dialog.
-  </p><p>Use the 'Add laucher' item at the top of a panel menu to add
+    preferences dialog.
+  </p><p>Use the 'Add launcher' item at the top of a panel menu to add
     a new item or drag an executable to this item from a file manager.  
     To remove items from a subpanel use the 'Remove' button in the item 
     properties dialog. 
+  </p><p>A special feature of panel menus is that they can be detached from the
+    panel and live in their own window. To detach a menu click on the small
+    line at the bottom of the menu (see the <a href="#default-panel-fig" target="_top">screenshot</a> of the default panel).
   </p><p>The properties dialog for a menu item is opened immediately
     when clicking the right mouse button (or Shift+left click). The dialog 
-    itself is very similar to the dialog for Launcher type panel items.
+    itself is very similar to the dialog for launcher type panel items.
   </p><div class="figure"><a name="menuitem-fig"></a><p class="title"><b>Figure 9. Menu Item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/menuitem-properties.png" alt="Shows properties dialog for menu items.
-	  "></div></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-settings"></a>Panel Preferences</h2></div></div><p>The properties dialog for the XFce panel can be opened from
-  the XFce settings manager, which can be started from the panel using
+	  "></div></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-settings"></a>Panel Preferences</h2></div></div><p>The properties dialog for the XFce 4 Panel can be opened from
+  the XFce 4 Settings Manager, which can be started from the panel using
   the setup button as shown in <a href="#default-panel-fig" title="Figure 1. Default XFce panel">Figure 1</a>
   or from the right-click menu on the panel handles. The latter menu
-  also provides direct access to the panel properties dialog.</p><div class="figure"><a name="panel-settings-fig"></a><p class="title"><b>Figure 10. Panel Settings</b></p><div class="screenshot"><div class="mediaobject"><img src="images/panel-settings.png" alt="Shows properties dialog for global panel settings.
+  also provides direct access to the panel properties dialog.</p><div class="figure"><a name="panel-settings-fig"></a><p class="title"><b>Figure 10. Panel Settings</b></p><div class="screenshot"><div class="mediaobject"><img src="images/panel-settings.png" alt="Shows properties dialog for global panel preferences.
 	  "></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="panel-apearance"></a>Appearance</h3></div></div><div class="variablelist"><dl><dt><span class="term">Size</span></dt><dd><p>There are four panel sizes available: tiny, small,
 	    medium and large. Small is the default.
-	  </p></dd><dt><span class="term">Orientation</span></dt><dd><p>An exciting new feature of the XFce 4 panel is the
+	  </p></dd><dt><span class="term">Orientation</span></dt><dd><p>An exciting new feature of the XFce 4 Panel is the
 	    ability to put it in a vertical orientation as well as
 	    the standard horizontal layout.
-	  </p></dd><dt><span class="term">Popup position</span></dt><dd><p>This option change the position of the button that opens 
-	    a subpanel. It can be above, below, to the left or to the 
+	  </p></dd><dt><span class="term">Popup position</span></dt><dd><p>This option change the position of the buttons that open 
+	    a panel menu. It can be above, below, to the left or to the 
 	    right of the panel item.
 	  </p></dd><dt><span class="term">Icon theme</span></dt><dd><p>Also new in XFce 4 are icon themes for the panel. The
-	    predefined icons for laucher icons and the icons of other 
+	    predefined icons for launcher items and the icons of other 
 	    types of panel items follow the panel icon theme.
 	  </p></dd></dl></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="panel-position"></a>Position</h3></div></div><div class="variablelist"><dl><dt><span class="term">Layer</span></dt><dd><p>The panel layer determines its behaviour relative to
 	    other windows. The panel can be always below or above other
@@ -131,12 +137,14 @@
 	    panel will be on top.
 	  </p></dd><dt><span class="term">Centering</span></dt><dd><p>It is very easy to move the panel around the screen. The 
 	    settings dialog provides an easy way to center the panel on 
-	    one of the four edges of the screen.
+	    one of the four edges of the screen. Note that the panel will also
+	    'snap' to the edge centers as well as the screen corners when you
+	    drag it close enough to those positions.
 	  </p></dd><dt><span class="term">Behaviour</span></dt><dd><p>If you choose autohide, the panel will collapse to a thin bar. 
 	    Moving the mouse over it will unhide the panel. This works best 
 	    when the panel is on the edge of the screen (this makes the target
 	    much easier to hit).
-	  </p></dd></dl></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-copyright"></a>About xfce4-panel</h2></div></div><p><b><tt>xfce4-panel</tt></b> was written by Jasper Huijsmans 
+	  </p></dd></dl></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-copyright"></a>About <b><tt>xfce4-panel</tt></b></h2></div></div><p><b><tt>xfce4-panel</tt></b> was written by Jasper Huijsmans 
     (<tt>&lt;<a href="mailto:huysmans@users.sourceforge.net">huysmans@users.sourceforge.net</a>&gt;</tt>). To find more 
     information, please visit the 
     <a href="http://www.xfce.org" target="_top">XFce web site</a>. 

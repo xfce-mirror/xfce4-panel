@@ -61,6 +61,11 @@ maintainers, etc. Commented out by default.
 
   <revhistory>
     <revision>
+      <revnumber>0.4</revnumber> 
+      <date>May 2003</date>
+      <authorinitials>jbh</authorinitials>
+    </revision>
+    <revision>
       <revnumber>0.3</revnumber> 
       <date>February 2003</date>
       <authorinitials>jbh</authorinitials>
@@ -80,15 +85,15 @@ maintainers, etc. Commented out by default.
 
   <para>The XFce 4 panel is part of the <ulink url="http://www.xfce.org" 
       type="html">XFce 4 Desktop Environment</ulink> and features program 
-    lauchers, a desktop switcher and more. The actual command to 
-    run is &app;. Many aspects of the panel can be configured through 
-    graphical dialogs.
+    launchers, panel menus, a clock, a desktop switcher and more. The actual 
+    command to run is &app;. Many aspects of the panel can be configured 
+    through graphical dialogs.
   </para>
 
   <para>If you are familiar with previous versions of XFce you will find many
     new features. Most visible are probably the vertical panel mode, the icon
     themes, the new graphical pager and the configurable position of the
-    subpanel popup buttons. The way preferences are handled has changed 
+    panel menu popup buttons. The way preferences are handled has changed 
     completely, so it may take some time to get used to. This manual should 
     provide you with all necessary information on how to adjust the panel to 
     your liking.
@@ -129,13 +134,13 @@ maintainers, etc. Commented out by default.
   </figure>
 
   <para>The figure shows the default panel configuration with one open
-    subpanel and the mouse hovering over the setup button, making it show
+    panel menu and the mouse hovering over the setup button, making it show
     a tooltip.
   </para>
 
   <para>There is a move handle on each side of the panel which
     you can use to drag the panel anywhere on the screen. Right clicking
-    (or Shift-click) shows a popup menu ... Go on, try it ;-)
+    (or Shift-click) on one of them shows a popup menu ... Go on, try it ;-)
   </para>
 
   <figure id="handle-popup-fig">
@@ -158,15 +163,17 @@ maintainers, etc. Commented out by default.
   </figure>
 
   <para>The area between the move handles contains panel items. The available 
-    items are are described in <xref linkend="panel-items"/>. Most items 
-    perform an action when clicked. 
+    items are are described in the "<ulink 
+      url="#panel-items">Panel Items</ulink>" section. Most items perform an 
+    action when clicked. 
   </para>
 
-  <para>Right-clicking will open a popup menu. You can change the properties,
-    remove and item or add a new item. Items can also be added from the
-    right-click menu on one of the move handles (see above). From the menu you
-    can choose the type of item you want to add. A properties dialog will open
-    for the newly added panel item, so you can change the item's options.
+  <para>Right-clicking will open a popup menu. from which you can open a
+    properties dialog, remove the item or add a new item. Items can also be 
+    added from the right-click menu on one of the move handles (see above). 
+    A submenu shows a list of available item types that you can choose from. A 
+    properties dialog will open for the newly added panel item, so you can 
+    change the item's options.
   </para>
 
   <figure id="item-popup-fig">
@@ -188,10 +195,11 @@ maintainers, etc. Commented out by default.
     </screenshot>
   </figure>
 
-  <para>Global panel preferences can be changed from the XFce settings 
-    manager, which can be started either from the 'Setup' button on the panel 
-    or from the right-click menu on the move handles. See 
-    <xref linkend="panel-settings"/>.
+  <para>Global panel preferences can be changed from the XFce 4 Settings 
+    Manager, which can be started either from the 'Setup' button on the panel 
+    or from the right-click menu on the move handles. See "<ulink 
+      url="#panel-settings">Global Preferences</ulink>" for an explanation of 
+    the available options.
   </para>
 
 </sect1>
@@ -202,24 +210,25 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-items">
   <title>Panel Items</title>
 
-  <para>The properties dialog can be opened from the right-click menu on
-    the item. Each type of panel item has its own configuration dialog.
-    Every dialog offers at least these options:</para>
+  <para>The properties dialog for a panel item can be opened from the 
+    right-click menu on the item. Each type of panel item has its own 
+    configuration dialog. Every dialog offers at least these options:
+  </para>
 
   <itemizedlist>
     <listitem>Change the position of the item on the panel.</listitem>
-    <listitem>When you change anything on in the dialog, the 
-      <guibutton>Revert</guibutton> button will be activated and you can 
-      always go back to the initial settings and the original panel item.
+    <listitem>Revert changes. When you change anything on in the dialog, the
+      <guibutton>Revert</guibutton> button will be enabled so you can 
+      always go back to the initial settings.
     </listitem>
     <listitem>Remove the item.</listitem>
   </itemizedlist>
 
 
-  <sect2 id="laucher-item">
-    <title>Laucher</title>
+  <sect2 id="launcher-item">
+    <title>Launcher</title>
 
-    <para>The most common panel item is the laucher item. It allows you to
+    <para>The most common panel item is the launcher item. It allows you to
       start programs from the panel. The properties dialog offers the
       following options:
     </para>
@@ -236,29 +245,33 @@ maintainers, etc. Commented out by default.
 	  build with Gtk 2.2, should support it.
 	</listitem>
       </varlistentry>
+      
       <varlistentry>
 	<term>Icon</term>
-	<listitem>The panel provides a number of standard icons, that may be
+	<listitem>The panel provides a number of standard icons that can be
 	  used. These icons will also follow the icon theme you choose from
-	  the panel settings dialog. Of course you can also choose a custom
-	  icon, either by browsing the file system from the 
+	  the <ulink url="#panel-settings">global preferences
+	    dialog</ulink>. Of course you can also choose a custom icon, 
+	  either by browsing the file system from the 
 	  '<guibutton>...</guibutton>' button or by dropping an image on the
 	  preview area from a file manager.
 	</listitem>
       </varlistentry>
+      
       <varlistentry>
 	<term>Tooltip</term>
-	<listitem>This is simply the tooltip the panel item will show if you
-	  hold the mouse over it.
+	<listitem>The panel item will show this tooltip if you hold the mouse 
+	  over it.
 	</listitem>
       </varlistentry>
+      
       <varlistentry>
 	<term>Menu</term>
 	<listitem>A launcher can have a panel menu attached to it. When this
-	  option is selected a button with an arrow will appear next to the
-	  item. See <xref linkend="subpanels"/> for more info on panel menus.
-	  The position of the menu button can be changed from the global
-	  settings dialog.
+	  option is selected a small button with an arrow will appear next to 
+	  the item. Look <ulink url="#subpanels">here</ulink> for more info 
+	  on panel menus. The position of the menu button can be changed from 
+	  the global settings dialog.
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -278,7 +291,7 @@ maintainers, etc. Commented out by default.
 	  </imageobject> 
 	  --> 
 	  <textobject>
-	    <phrase>Shows properties dialog for laucher item.</phrase>
+	    <phrase>Shows properties dialog for launcher item.</phrase>
 	  </textobject>
 	</mediaobject>
       </screenshot>
@@ -290,8 +303,8 @@ maintainers, etc. Commented out by default.
   <sect2 id="clock-item">
     <title>XFce Clock</title>
 
-    <para>The Xfce clock has a number of options that determine the way it
-      looks. There are three clock types available, analog, digital and LED.
+    <para>The Xfce Clock has a number of options to change the way it looks. 
+      There are three clock types available: analog, digital and LED.
       There is an option to show seconds and for the digital and LED clock
       types you can choose whether the clock will be in 24 hour mode, 12
       hour mode, or 12 hour mode with AM/PM indication. The clock shows the
@@ -330,8 +343,8 @@ maintainers, etc. Commented out by default.
       want, as long as it is in mbox format. The mailbox icon will follow
       your icon theme. You can choose the location of the mailbox, the
       command to run when you click on the button and the interval between
-      checks. The command has the same options as the laucher item command
-      (see <ulink url="#laucher-item" type="html">above</ulink>).
+      checks. The command has the same options as the launcher item command
+      (see <ulink url="#launcher-item" type="html">above</ulink>).
     </para>
       
     <figure id="mailcheck-fig">
@@ -365,7 +378,7 @@ maintainers, etc. Commented out by default.
       CDE-like desktop switcher, that shows buttons with the desktop name 
       and a graphical pager that shows a miniature view of the desktops and
       even allows you to move windows to another workspace by dragging the
-      mini-window in the pager. The graphical pager even allows you to
+      mini-window in the pager. The graphical pager also allows you to
       change workspaces by using the mouse scrollwheel, when you hold the
       mouse over it.</para>
     
@@ -463,23 +476,29 @@ maintainers, etc. Commented out by default.
 </sect1>
 
 <sect1 id="subpanels">
-  <title>Panel menus</title>
+  <title>Panel Menus</title>
 
   <para>Panel launcher items can have a menu associated with it, which can
     be opened by clicking on the small arrow button next to the item. The
     actual position of these popup buttons is configurable from the global
-    settings dialog.
+    preferences dialog.
   </para>
 
-  <para>Use the 'Add laucher' item at the top of a panel menu to add
+  <para>Use the 'Add launcher' item at the top of a panel menu to add
     a new item or drag an executable to this item from a file manager.  
     To remove items from a subpanel use the 'Remove' button in the item 
     properties dialog. 
   </para>
 
+  <para>A special feature of panel menus is that they can be detached from the
+    panel and live in their own window. To detach a menu click on the small
+    line at the bottom of the menu (see the <ulink
+      url="#default-panel-fig">screenshot</ulink> of the default panel).
+  </para>
+
   <para>The properties dialog for a menu item is opened immediately
     when clicking the right mouse button (or Shift+left click). The dialog 
-    itself is very similar to the dialog for Launcher type panel items.
+    itself is very similar to the dialog for launcher type panel items.
   </para>
 
   <figure id="menuitem-fig">
@@ -512,8 +531,8 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-settings">
   <title>Panel Preferences</title>
 
-  <para>The properties dialog for the XFce panel can be opened from
-  the XFce settings manager, which can be started from the panel using
+  <para>The properties dialog for the XFce 4 Panel can be opened from
+  the XFce 4 Settings Manager, which can be started from the panel using
   the setup button as shown in <xref linkend="default-panel-fig"/>
   or from the right-click menu on the panel handles. The latter menu
   also provides direct access to the panel properties dialog.</para>
@@ -533,7 +552,7 @@ maintainers, etc. Commented out by default.
 	</imageobject> 
 	--> 
 	<textobject>
-	  <phrase>Shows properties dialog for global panel settings.
+	  <phrase>Shows properties dialog for global panel preferences.
 	  </phrase>
 	</textobject>
       </mediaobject>
@@ -555,7 +574,7 @@ maintainers, etc. Commented out by default.
       <varlistentry>
 	<term>Orientation</term> 
 	<listitem>
-	  <para>An exciting new feature of the XFce 4 panel is the
+	  <para>An exciting new feature of the XFce 4 Panel is the
 	    ability to put it in a vertical orientation as well as
 	    the standard horizontal layout.
 	  </para>
@@ -564,8 +583,8 @@ maintainers, etc. Commented out by default.
       <varlistentry>
 	<term>Popup position</term> 
 	<listitem>
-	  <para>This option change the position of the button that opens 
-	    a subpanel. It can be above, below, to the left or to the 
+	  <para>This option change the position of the buttons that open 
+	    a panel menu. It can be above, below, to the left or to the 
 	    right of the panel item.
 	  </para>
 	</listitem>
@@ -574,7 +593,7 @@ maintainers, etc. Commented out by default.
 	<term>Icon theme</term> 
 	<listitem>
 	  <para>Also new in XFce 4 are icon themes for the panel. The
-	    predefined icons for laucher icons and the icons of other 
+	    predefined icons for launcher items and the icons of other 
 	    types of panel items follow the panel icon theme.
 	  </para>
 	</listitem>
@@ -597,15 +616,19 @@ maintainers, etc. Commented out by default.
 	  </para>
 	</listitem>
       </varlistentry> 
+      
       <varlistentry>
 	<term>Centering</term> 
 	<listitem>
 	  <para>It is very easy to move the panel around the screen. The 
 	    settings dialog provides an easy way to center the panel on 
-	    one of the four edges of the screen.
+	    one of the four edges of the screen. Note that the panel will also
+	    'snap' to the edge centers as well as the screen corners when you
+	    drag it close enough to those positions.
 	  </para>
 	</listitem>
       </varlistentry>
+      
       <varlistentry>
 	<term>Behaviour</term> 
 	<listitem>
@@ -626,7 +649,7 @@ maintainers, etc. Commented out by default.
   <para>&nbsp;</para>
   
 <sect1 id="panel-copyright">
-  <title>About xfce4-panel</title>
+  <title>About &app;</title>
 
   <para>&app; was written by Jasper Huijsmans 
     (<email>huysmans@users.sourceforge.net</email>). To find more 
