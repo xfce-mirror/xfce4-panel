@@ -419,8 +419,7 @@ remove_control (void)
 	pp = groups_get_popup (popup_control->index);
 
 	if (!(popup_control->with_popup) || !pp || pp->items == NULL ||
-	    confirm (_("Removing the item will also remove its popup menu.\n\n"
-		       "Do you want to remove the item?"),
+	    confirm (_("Removing the item will also remove its popup menu."),
 		     GTK_STOCK_REMOVE, NULL))
 	{
 	    groups_remove (popup_control->index);
@@ -460,6 +459,10 @@ add_control (GtkWidget * w, ControlClassInfo *info)
 	controls_dialog (control);
 
 	write_panel_config ();
+    }
+    else
+    {
+	control_free (control);
     }
 
     popup_control = NULL;
