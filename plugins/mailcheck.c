@@ -167,8 +167,8 @@ module_configure (PanelModule * pm)
   
   dialog = gtk_dialog_new_with_buttons (_("Mail check options"), NULL,
 					GTK_DIALOG_MODAL,
-					GTK_STOCK_APPLY, GTK_RESPONSE_OK,
 					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_APPLY, GTK_RESPONSE_OK,
 					NULL);
   
   gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);

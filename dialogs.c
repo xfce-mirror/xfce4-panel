@@ -325,21 +325,23 @@ edit_item_dlg (PanelItem * pi)
     {
       dialog = gtk_dialog_new_with_buttons (_("Edit item"), NULL,
 					    GTK_DIALOG_MODAL,
-					    GTK_STOCK_APPLY,
-					    RESPONSE_CHANGE,
+					    GTK_STOCK_CANCEL,
+					    RESPONSE_CHANGE, 
 					    GTK_STOCK_REMOVE,
 					    RESPONSE_REMOVE,
-					    GTK_STOCK_CANCEL,
-					    RESPONSE_CHANGE, NULL);
+					    GTK_STOCK_APPLY,
+					    RESPONSE_CHANGE,
+					    NULL);
     }
   else
     {
       dialog = gtk_dialog_new_with_buttons (_("Edit item"), NULL,
 					    GTK_DIALOG_MODAL,
+					    GTK_STOCK_CANCEL,
+					    RESPONSE_CHANGE, 
 					    GTK_STOCK_APPLY,
 					    RESPONSE_CHANGE,
-					    GTK_STOCK_CANCEL,
-					    RESPONSE_CHANGE, NULL);
+					    NULL);
     }
 
   n = pi->in_menu ? g_list_length (pi->pp->items) : 0;
@@ -374,10 +376,11 @@ add_item_dialog (PanelPopup * pp)
 
   dialog = gtk_dialog_new_with_buttons (_("Add item"), NULL,
 					GTK_DIALOG_MODAL,
+					GTK_STOCK_CANCEL,
+					RESPONSE_CHANGE, 
 					GTK_STOCK_ADD,
 					RESPONSE_CHANGE,
-					GTK_STOCK_CANCEL,
-					RESPONSE_CHANGE, NULL);
+					NULL);
 
   pi = panel_item_new (pp);
   pi->pos = 0;
@@ -441,23 +444,17 @@ module_id_changed (void)
     }
   else if (new_id <= BUILTIN_MODULES)
     {
-      mdf.current = (PanelModule *) g_list_nth (mdf.modules, new_id - 1);
+      mdf.current = (PanelModule *) g_list_nth (mdf.modules, new_id - 1)->data;
     }
   else
     {
-      mdf.current = (PanelModule *) g_list_nth (mdf.modules, new_id - 1);
+      mdf.current = (PanelModule *) g_list_nth (mdf.modules, new_id - 1)->data;
     }
 
   if (mdf.current && mdf.current->configure)
-    gtk_widget_set_sensitive (mdf.configure_button, TRUE);
-  else
     {
-      if (!mdf.current) 
-	g_print ("No module!");
-      else
-	g_print ("module has no configuration: %s\n", mdf.current->name);
+      gtk_widget_set_sensitive (mdf.configure_button, TRUE);
     }
-
 }
 
 static char *
@@ -485,11 +482,11 @@ get_module_name_from_file (const char *file)
 }
 
 static void
-create_module_option_menu (PanelModule * module)
+create_module_option_menu (void)
 {
   GtkWidget *menu = gtk_menu_new ();
   GtkWidget *mi;
-  int i, pos, index = 0;
+  int i;
   const char *home, *file;
   char dirname[MAXSTRLEN + 1];
   GList *module_names = NULL;
@@ -504,7 +501,7 @@ create_module_option_menu (PanelModule * module)
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
   
   /* builtins */
-  for (i = 0, pos = 1; i < BUILTIN_MODULES; i++, pos++)
+  for (i = 0; i < BUILTIN_MODULES; i++)
     {
       PanelModule *pm = panel_module_new ();
       GtkWidget *eventbox = gtk_event_box_new ();
@@ -512,9 +509,6 @@ create_module_option_menu (PanelModule * module)
       pm->id = i;
       create_panel_module (pm, eventbox);
 
-      if (module && pm->id == module->id)
-	index = pos;
-      
       mdf.modules = g_list_append (mdf.modules, pm);
       
       mi = gtk_menu_item_new_with_label (builtin_module_names[i]);
@@ -522,12 +516,11 @@ create_module_option_menu (PanelModule * module)
       gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     }
 
-  /* separator */
+  /* separator 
   mi = gtk_separator_menu_item_new ();
   gtk_widget_show (mi);
   gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-  pos++;
-
+*/
   /* plugins */
   home = g_getenv ("HOME");
   for (i = 0; i < 3; i++)
@@ -581,11 +574,6 @@ create_module_option_menu (PanelModule * module)
 	      mdf.modules = g_list_append (mdf.modules, pm);
 	      module_names = g_list_append (module_names, pm->name);
 
-	      if (module && index == 0 && !strcmp (pm->name, module->name))
-		index = pos;
-	      
-	      pos++;
-
 	      if (pm->caption)
 		mi = gtk_menu_item_new_with_label (pm->caption);
 	      else
@@ -603,16 +591,13 @@ create_module_option_menu (PanelModule * module)
 
   mdf.module_option_menu = gtk_option_menu_new ();
   gtk_option_menu_set_menu (GTK_OPTION_MENU (mdf.module_option_menu), menu);
+}
 
-  if (index != 0)
-    {
-      gtk_option_menu_set_history (GTK_OPTION_MENU (mdf.module_option_menu), 
-				   index);
-      module_id_changed ();
-    }
-    
-  g_signal_connect_swapped (idf.icon_option_menu, "changed",
-			    G_CALLBACK (module_id_changed), NULL);
+static void
+configure_click_cb (void)
+{
+  if (mdf.current && mdf.current->configure)
+    mdf.current->configure (mdf.current);
 }
 
 static void
@@ -622,6 +607,8 @@ create_module_dialog_frame (PanelModule * pm)
   GtkWidget *label;
   GtkWidget *hbox;
   GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+  GList *modules;
+  int i;
 
   mdf.frame = gtk_frame_new (NULL);
   gtk_frame_set_shadow_type (GTK_FRAME (mdf.frame), GTK_SHADOW_NONE);
@@ -637,7 +624,7 @@ create_module_dialog_frame (PanelModule * pm)
   gtk_size_group_add_widget (sg, label);
   gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-  create_module_option_menu (pm);
+  create_module_option_menu ();
   gtk_box_pack_start (GTK_BOX (hbox), mdf.module_option_menu, TRUE, TRUE, 0);
 
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
@@ -654,6 +641,30 @@ create_module_dialog_frame (PanelModule * pm)
 
   gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
+  /* option menu id 0 is empty */
+  for (i = 1, modules = mdf.modules; modules; modules = modules->next, i++)
+    {
+      PanelModule * module = (PanelModule *) modules->data;
+      
+      if (!module || !pm || pm->id != module->id)
+	continue;
+      
+      if (!module->id == EXTERN_MODULE || 
+	  (module->name && pm->name && strequal (module->name, pm->name)))
+	{
+	  gtk_option_menu_set_history (GTK_OPTION_MENU (mdf.module_option_menu), 
+				       i);
+	  module_id_changed ();
+	  break;
+	}
+    }
+  
+  /* signals */
+  g_signal_connect_swapped (mdf.module_option_menu, "changed",
+			    G_CALLBACK (module_id_changed), NULL);
+    
+  g_signal_connect_swapped (mdf.configure_button, "clicked",
+			    G_CALLBACK (configure_click_cb), NULL);
 
   gtk_widget_show_all (mdf.frame);
 }
@@ -692,10 +703,11 @@ edit_item_or_module_dlg (PanelGroup * pg)
 
   dialog = gtk_dialog_new_with_buttons (_("Change item"), NULL,
 					GTK_DIALOG_MODAL,
+					GTK_STOCK_CANCEL,
+					RESPONSE_CHANGE, 
 					GTK_STOCK_APPLY,
 					RESPONSE_CHANGE,
-					GTK_STOCK_CANCEL,
-					RESPONSE_CHANGE, NULL);
+					NULL);
 
 
   if (!pg->item)
