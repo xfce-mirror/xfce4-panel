@@ -61,7 +61,7 @@ hide_popup (PanelPopup * pp)
 }
 
 static void
-show_popup (PanelPopup * pp)
+position_popup (PanelPopup * pp) 
 {
     GtkRequisition req;
     GdkWindow *p;
@@ -69,32 +69,8 @@ show_popup (PanelPopup * pp)
     int w, h;
     gboolean vertical = settings.orientation == VERTICAL;
     int pos = settings.popup_position;
-    GtkAllocation alloc1 = { 0, }, alloc2 =
-    {
-    0,};
-
-    if (open_popup)
-	hide_popup (open_popup);
-
-    if (!pp->detached)
-	open_popup = pp;
-
-    if (pp->items && !pp->detached)
-	gtk_widget_show (pp->tearoff_button);
-    else
-	gtk_widget_hide (pp->tearoff_button);
-
-    if (disable_user_config || g_list_length (pp->items) >= NBITEMS)
-    {
-	gtk_widget_hide (pp->addtomenu_item->button);
-	gtk_widget_hide (pp->separator);
-    }
-    else
-    {
-	gtk_widget_show (pp->addtomenu_item->button);
-	gtk_widget_show (pp->separator);
-    }
-
+    GtkAllocation alloc1 = {0,}, alloc2 = {0,};
+ 
     alloc1 = pp->button->allocation;
     xbutton = alloc1.x;
     ybutton = alloc1.y;
@@ -114,7 +90,7 @@ show_popup (PanelPopup * pp)
     alloc2.height = req.height;
     gtk_widget_size_allocate (pp->window, &alloc2);
 
-    gtk_widget_realize (pp->window);
+    /*gtk_widget_realize (pp->window);*/
 
     /* this is necessary, because the icons are resized on allocation */
     gtk_widget_size_request (pp->window, &req);
@@ -191,12 +167,50 @@ show_popup (PanelPopup * pp)
     gtk_widget_show (pp->window);
 }
 
+static void
+show_popup (PanelPopup * pp)
+{
+    if (open_popup)
+	hide_popup (open_popup);
+
+    if (!pp->detached)
+	open_popup = pp;
+
+    if (pp->items && !pp->detached)
+	gtk_widget_show (pp->tearoff_button);
+    else
+	gtk_widget_hide (pp->tearoff_button);
+
+    if (disable_user_config || g_list_length (pp->items) >= NBITEMS)
+    {
+	gtk_widget_hide (pp->addtomenu_item->button);
+	gtk_widget_hide (pp->separator);
+    }
+    else
+    {
+	gtk_widget_show (pp->addtomenu_item->button);
+	gtk_widget_show (pp->separator);
+    }
+
+    position_popup(pp);
+}
+
 void
 hide_current_popup_menu (void)
 {
     if (open_popup)
 	hide_popup (open_popup);
 }
+
+void
+reposition_current_popup (void) 
+{
+    if (!open_popup)
+	return;
+    
+    position_popup(open_popup);
+}
+
 
 void
 toggle_popup (GtkWidget * button, PanelPopup * pp)

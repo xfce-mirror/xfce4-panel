@@ -1074,16 +1074,6 @@ create_menu_item_dialog (Item * mi)
     return dlg;
 }
 
-static void
-reposition_popup (PanelPopup * pp)
-{
-    if (pp->detached)
-        return;
-
-    gtk_button_clicked (GTK_BUTTON (pp->button));
-    gtk_button_clicked (GTK_BUTTON (pp->button));
-}
-
 void
 edit_menu_item_dialog (Item * mi)
 {
@@ -1113,7 +1103,7 @@ edit_menu_item_dialog (Item * mi)
 	pp->items = g_list_remove (pp->items, mi);
 	item_free (mi);
 
-	reposition_popup (pp);
+	reposition_current_popup ();
     }
 
     gtk_widget_destroy (dlg);
@@ -1133,7 +1123,7 @@ add_menu_item_dialog (PanelPopup * pp)
     mi->pos = 0;
 
     panel_popup_add_item (pp, mi);
-    reposition_popup (pp);
+    reposition_current_popup ();
 
     edit_menu_item_dialog (mi);
 }
