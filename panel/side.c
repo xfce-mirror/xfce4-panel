@@ -198,14 +198,32 @@ MoveHandle *create_move_handle(int side)
     mh->button = gtk_button_new();
     if(settings.style == NEW_STYLE)
         gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
-    add_tooltip(mh->button, _("Iconify panel"));
     gtk_widget_show(mh->button);
 
-    pb = get_system_pixbuf(ICONIFY_ICON);
-    im = gtk_image_new_from_pixbuf(pb);
-    g_object_unref(pb);
-    gtk_widget_show(im);
-    gtk_container_add(GTK_CONTAINER(mh->button), im);
+    if (side == LEFT)
+    {
+	pb = get_system_pixbuf(ICONIFY_ICON);
+	im = gtk_image_new_from_pixbuf(pb);
+	g_object_unref(pb);
+	gtk_widget_show(im);
+	gtk_container_add(GTK_CONTAINER(mh->button), im);
+
+	add_tooltip(mh->button, _("Iconify panel"));
+	
+	g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
+    }
+    else
+    {
+	pb = get_system_pixbuf(CLOSE_ICON);
+	im = gtk_image_new_from_pixbuf(pb);
+	g_object_unref(pb);
+	gtk_widget_show(im);
+	gtk_container_add(GTK_CONTAINER(mh->button), im);
+
+	add_tooltip(mh->button, _("Quit..."));
+	
+	g_signal_connect(mh->button, "clicked", G_CALLBACK(close_cb), NULL);
+    }
 
     if(settings.style == NEW_STYLE)
         gtk_widget_set_name(im, "gxfce_color1");
@@ -242,7 +260,6 @@ MoveHandle *create_move_handle(int side)
     move_handle_arrange(mh, settings.popup_position);
 
     /* signals */
-    g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
     attach_move_callbacks(mh->eventbox);
 
     return mh;
@@ -300,12 +317,12 @@ void panel_group_arrange(PanelGroup * pg, int position)
     
     if(start)
     {
-        gtk_box_pack_start(GTK_BOX(pg->box), pg->top, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(pg->box), pg->top, FALSE, TRUE, 0);
         gtk_box_pack_start(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
     }
     else
     {
-	gtk_box_pack_end(GTK_BOX(pg->box), pg->top, TRUE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(pg->box), pg->top, FALSE, TRUE, 0);
 	gtk_box_pack_end(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
     }
 }

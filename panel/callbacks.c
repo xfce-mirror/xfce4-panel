@@ -46,6 +46,13 @@ void iconify_cb(void)
     gtk_window_iconify(GTK_WINDOW(toplevel));
 }
 
+void close_cb(void)
+{
+    hide_current_popup_menu();
+
+    quit(FALSE);
+}
+
 /*  Central panel callbacks
  *  -----------------------
 */

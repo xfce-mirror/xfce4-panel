@@ -24,6 +24,7 @@
 
 /* global */
 void iconify_cb(void);
+void close_cb(void);
 
 /* central panel */
 void screen_button_click(GtkWidget * b, ScreenButton * sb);
