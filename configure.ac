@@ -1,6 +1,6 @@
 AC_INIT(panel/xfce.c)
 
-VERSION=`date +%Y%m%d`
+VERSION=`date +%y%m%d`
 AM_INIT_AUTOMAKE(xfce4, $VERSION)
 AM_MAINTAINER_MODE
 
