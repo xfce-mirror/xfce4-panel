@@ -394,6 +394,7 @@ add_autohide_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
 
     label = gtk_label_new (_("Autohide:"));
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_size_group_add_widget (sg, label);
@@ -483,9 +484,6 @@ run_xfce_settings_dialog (McsPlugin * mp)
     add_style_box (GTK_BOX (vbox), sg);
 
     add_spacer (GTK_BOX (vbox), BORDER);
-
-    g_object_unref (sg);
-    sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
     /* Behaviour */
     vbox = GTK_DIALOG (dialog)->vbox;

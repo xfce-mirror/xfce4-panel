@@ -365,7 +365,7 @@ maintainers, etc. Commented out by default.
   </sect2>
 
   <sect2 id="mailcheck-item">
-    <title>Mail Check</title>
+    <title>Mail checker</title>
 
     <para>The mail checker monitors a mailbox for incoming mail. The
       mailbox can be in mbox or Maildir format. For advanced usage you can
@@ -382,7 +382,7 @@ maintainers, etc. Commented out by default.
     </para>
       
     <figure id="mailcheck-fig">
-      <title>Mailcheck item</title> 
+      <title>Mail checker item</title> 
       <screenshot>
 	<mediaobject>
 	  <imageobject>
@@ -415,29 +415,25 @@ maintainers, etc. Commented out by default.
       mini-window in the pager. The graphical pager also allows you to
       change workspaces by using the mouse scrollwheel.
     </para>
+
+    <para>For the graphical pager you can set the number of rows to use, or
+      columns when the panel is in vertical mode.</para>
     
-    <figure id="nooptions-fig">
-      <title>Item without options</title> 
+    <figure id="pager-fig">
+      <title>Graphical pager</title> 
       <screenshot>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="images/nooptions-properties.png" 
+	    <imagedata fileref="images/pager-properties.png" 
 		       format="PNG"/>
 	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/nooptions-properties.eps" 
-		       format="EPS"/>
-	  </imageobject> 
-	  --> 
 	  <textobject>
-	    <phrase>Shows properties dialog for item without options.
+	    <phrase>Shows properties dialog for the graphical pager.
 	    </phrase>
 	  </textobject>
 	</mediaobject>
       </screenshot>
     </figure>
-
 
   </sect2>
 
@@ -509,6 +505,28 @@ maintainers, etc. Commented out by default.
     <para>Note that it may be a bit hard to popup the right-click menu, 
       because you only have a small area to click on.
     </para>
+
+    <figure id="nooptions-fig">
+      <title>Item without options</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/nooptions-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/nooptions-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Shows properties dialog for item without options.
+	    </phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
     
   </sect2>
 
