@@ -206,7 +206,7 @@ static GtkWidget *create_panel_window(void)
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
 
-    set_window_type_dock(w);
+/*    set_window_type_dock(w);*/
 
     gtk_container_set_border_width(GTK_CONTAINER(w), 0);
 
