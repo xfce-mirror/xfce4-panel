@@ -35,7 +35,6 @@
 #include "controls.h"
 #include "controls_dialog.h"
 #include "add-control-dialog.h"
-#include "popup.h"
 #include "item-control.h"
 #include "settings.h"
 #include "mcs_client.h"
@@ -1159,6 +1158,8 @@ create_panel (void)
 
     p->priv = g_new0 (PanelPrivate, 1);
 
+    icons_init ();
+    
     /* toplevel window */
     p->toplevel = create_panel_window (p);
 
@@ -1175,8 +1176,6 @@ create_panel (void)
     /* If there is a settings manager it takes precedence */
     mcs_watch_xfce_channel ();
 
-    icon_theme_init ();
-    
     /* backwards compat */
     p->priv->settings = settings;
 
@@ -1578,27 +1577,13 @@ panel_parse_xml (xmlNodePtr node)
 	g_free (value);
     }
 
-#if 0
-    value = xmlGetProp (node, (const xmlChar *) "layer");
-
-    if (value)
-    {
-	n = (int) strtol (value, NULL, 0);
-
-	settings.layer = n == 1 ? 1 : 0;
-
-	g_free (value);
-    }
-#endif
-
     value = xmlGetProp (node, (const xmlChar *) "size");
 
     if (value)
     {
 	n = (int) strtol (value, NULL, 0);
 
-	if (n >= TINY && n <= LARGE)
-	    settings.size = n;
+        settings.size = CLAMP (n, TINY, LARGE);
 
 	g_free (value);
     }
@@ -1609,17 +1594,7 @@ panel_parse_xml (xmlNodePtr node)
     {
 	n = (int) strtol (value, NULL, 0);
 
-	if (n >= LEFT && n <= BOTTOM)
-	    settings.popup_position = n;
-
-	g_free (value);
-    }
-
-    value = xmlGetProp (node, (const xmlChar *) "icontheme");
-
-    if (value)
-    {
-	settings.theme = g_strdup (value);
+        settings.popup_position = CLAMP (n, LEFT, BOTTOM);
 
 	g_free (value);
     }
@@ -1641,8 +1616,7 @@ panel_parse_xml (xmlNodePtr node)
 
 		n = (int) strtol (value, NULL, 0);
 
-		if (n >= 0 && n < num_screens)
-		    panel.priv->monitor = n;
+                panel.priv->monitor = CLAMP (n, 0, num_screens);
 
 		g_free (value);
 
@@ -1652,8 +1626,7 @@ panel_parse_xml (xmlNodePtr node)
 		{
 		    n = (int) strtol (value, NULL, 0);
 
-		    if (n >= LEFT && n <= BOTTOM)
-			panel.priv->side = n;
+                    panel.priv->side = CLAMP (n, LEFT, BOTTOM);
 
 		    g_free (value);
 		}
@@ -1664,8 +1637,8 @@ panel_parse_xml (xmlNodePtr node)
 		{
 		    n = (int) strtol (value, NULL, 0);
 
-		    if (n > XFCE_POS_STATE_NONE && n <= XFCE_POS_STATE_END)
-			panel.priv->pos_state = n;
+                    panel.priv->pos_state = CLAMP (n, XFCE_POS_STATE_NONE,
+                                                   XFCE_POS_STATE_END);
 
 		    g_free (value);
 		}
@@ -1676,7 +1649,10 @@ panel_parse_xml (xmlNodePtr node)
 
 		    if (value)
 		    {
-			panel.priv->offset = (int) strtol (value, NULL, 0);
+                        n = (int) strtol (value, NULL, 0);
+                        
+                        if (n > 0)
+                            panel.priv->offset = n;
 
 			g_free (value);
 		    }
@@ -1784,19 +1760,11 @@ panel_write_xml (xmlNodePtr root)
     snprintf (value, 2, "%d", settings.orientation);
     xmlSetProp (node, "orientation", value);
 
-#if 0
-    snprintf (value, 2, "%d", settings.layer);
-    xmlSetProp (node, "layer", value);
-#endif
-    
     snprintf (value, 2, "%d", settings.size);
     xmlSetProp (node, "size", value);
 
     snprintf (value, 2, "%d", settings.popup_position);
     xmlSetProp (node, "popupposition", value);
-
-    if (settings.theme)
-	xmlSetProp (node, "icontheme", settings.theme);
 
     child = xmlNewTextChild (node, NULL, "Position", NULL);
 

@@ -39,7 +39,7 @@
 
 #include "xfce.h"
 #include "item.h"
-#include "popup.h"
+#include "item-control.h"
 #include "item_dialog.h"
 #include "settings.h"
 

@@ -121,8 +121,7 @@ notify_cb (const char *name, const char *channel_name,
     }
 }
 
-G_MODULE_EXPORT /* EXPORT:client_event_filter */
-GdkFilterReturn
+static GdkFilterReturn
 client_event_filter (GdkXEvent * xevent, GdkEvent * event, gpointer data)
 {
     if (mcs_client_process_event (client, (XEvent *) xevent))
@@ -184,6 +183,9 @@ mcs_stop_watch (void)
 
 	client = NULL;
     }
+
+    g_hash_table_destroy (settings_hash);
+    settings_hash = NULL;
 }
 
 /* this function is exported to allow access to other channels */

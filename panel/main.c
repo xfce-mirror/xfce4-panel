@@ -55,7 +55,7 @@
 #include "mcs_client.h"
 #include "controls_dialog.h"
 #include "item_dialog.h"
-#include "popup.h"
+#include "item-control.h"
 
 #define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%u"
 
@@ -468,11 +468,7 @@ main (int argc, char **argv)
     g_free (old);
     g_free (new);
     
-    /* icon framework: names and id's */
-    icons_init ();
-
     create_panel ();
-
 
     client_session = client_session_new (argc, argv, NULL /* data */ ,
 					 SESSION_RESTART_IF_RUNNING, 40);

@@ -48,7 +48,6 @@
 
 #include "xfce.h"
 #include "item.h"
-#include "popup.h"
 #include "item-control.h"
 #include "plugins.h"
 #include "controls_dialog.h"

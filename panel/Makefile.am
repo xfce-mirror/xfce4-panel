@@ -28,8 +28,6 @@ xfce4_panel_SOURCES =						\
 	panel.c 						\
 	panel.h 						\
 	plugins.h 						\
-	popup.c 						\
-	popup.h 						\
 	settings.c 						\
 	settings.h 						\
 	xfce.h 							\

@@ -37,7 +37,6 @@
 #include "xfce.h"
 #include "controls_dialog.h"
 #include "panel.h"
-#include "popup.h"
 #include "settings.h"
 #include "item-control.h"
 

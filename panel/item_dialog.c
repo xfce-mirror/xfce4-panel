@@ -41,7 +41,6 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
-#include "popup.h"
 #include "item.h"
 #include "item-control.h"
 #include "item_dialog.h"

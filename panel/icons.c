@@ -76,12 +76,7 @@ icons_init (void)
 
     global_icon_theme = 
         xfce_icon_theme_get_for_screen (gdk_screen_get_default());
-}
 
-G_MODULE_EXPORT /* EXPORT:icon_theme_init */
-void
-icon_theme_init (void)
-{
     g_signal_connect (global_icon_theme, "changed",
 		      G_CALLBACK (theme_changed), NULL);
 }

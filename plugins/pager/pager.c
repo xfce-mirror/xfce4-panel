@@ -31,7 +31,6 @@
 #include <libxfcegui4/libxfcegui4.h>
 
 #include <panel/xfce.h>
-#include <panel/popup.h>
 #include <panel/settings.h>
 #include <panel/plugins.h>
 #include <panel/mcs_client.h>

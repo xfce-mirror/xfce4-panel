@@ -51,8 +51,6 @@ G_MODULE_IMPORT const char *icon_names[NUM_ICONS];
 
 G_MODULE_IMPORT void icons_init (void);
 
-G_MODULE_IMPORT void icon_theme_init (void);
-
 G_MODULE_IMPORT GdkPixbuf *get_pixbuf_by_id (int id);
 
 G_MODULE_IMPORT GdkPixbuf *get_panel_pixbuf (void);

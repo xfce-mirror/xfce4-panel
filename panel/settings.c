@@ -38,7 +38,7 @@
 
 #include "xfce.h"
 #include "settings.h"
-#include "popup.h"
+#include "item-control.h"
 #include "item.h"
 
 #define ROOT	"Xfce"
