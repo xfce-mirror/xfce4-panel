@@ -256,12 +256,12 @@ static void show_popup(PanelPopup * pp)
 	if (pos == BOTTOM && y + req1.height + req2.height <= h)
 	{
 	    x = x + req1.width / 2 - req2.width / 2;
-	    y = y + req1.width;
+	    y = y + req1.height;
 	}
 	else if (pos == TOP && y - req2.height < 0)
 	{
 	    x = x + req1.width / 2 - req2.width / 2;
-	    y = y + req1.width;
+	    y = y + req1.height;
 	}
 	else
 	{
