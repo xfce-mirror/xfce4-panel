@@ -129,7 +129,7 @@ static void button_update_image(GtkWidget *button, int type)
 
 static void button_set_tip(GtkWidget *button, int type)
 {
-    static char *tips[4];
+    static const char *tips[4];
     static gboolean need_init = TRUE;
 
     if (need_init)
@@ -508,7 +508,7 @@ void systembuttons_add_options(Control * control, GtkContainer * container,
                       	       GtkWidget * revert, GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label, *om = NULL;
-    char *names[4];
+    const char *names[4];
     int i, j;
     t_systembuttons *sb;
     t_systembuttons_dialog *sbd;

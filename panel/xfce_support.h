@@ -32,7 +32,7 @@ char **get_theme_dirs(void);
 void write_backup_file(const char *path);
 
 /* tooltips */
-void add_tooltip(GtkWidget * widget, char *tip);
+void add_tooltip(GtkWidget * widget, const char *tip);
 
 /* x atoms and properties */
 void set_window_type_dock(GtkWidget *win, gboolean set);

@@ -234,7 +234,7 @@ void write_backup_file(const char *path)
 */
 static GtkTooltips *tooltips = NULL;
 
-void add_tooltip(GtkWidget * widget, char *tip)
+void add_tooltip(GtkWidget * widget, const char *tip)
 {
     if(!tooltips)
         tooltips = gtk_tooltips_new();
