@@ -22,7 +22,7 @@
         <Item>
           <Caption>Nautilus</Caption>
           <Command term="0" sn="0">nautilus --no-desktop</Command>
-	  <Tooltip>Bestandsbeheer met Nautlius</Tooltip>
+	  <Tooltip>Bestandsbeheer met Nautilus</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
@@ -35,7 +35,7 @@
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">mozilla -splash</Command>
+        <Command term="0" sn="0">mozilla</Command>
         <Tooltip>Mozilla Web Browser</Tooltip>
         <Icon id="7"/>
       </Control>
@@ -44,7 +44,7 @@
       <Popup/>
       <Control id="-1" filename="libmailcheck.so">
         <Mailcheck interval="30">
-          <Command term="0" sn="0">mozilla -mail -splash</Command>
+          <Command term="0" sn="0">mozilla -mail</Command>
         </Mailcheck>
       </Control>
     </Group>
@@ -72,13 +72,13 @@
       <Popup>
         <Item>
           <Caption>Screensaver</Caption>
-          <Command term="0" sn="0">xscreensaver-demo</Command>
+          <Command term="0" sn="1">xscreensaver-demo</Command>
           <Tooltip>Screensaver</Tooltip>
           <Icon id="3"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
-        <Command term="0" sn="1">xfce-setting-show</Command>
+        <Command term="0" sn="0">xfce-setting-show</Command>
         <Tooltip>Settings</Tooltip>
         <Icon id="3"/>
       </Control>
@@ -87,7 +87,7 @@
       <Popup>
         <Item>
           <Caption>Printer Management</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
+          <Command term="0" sn="1">xfprint-manager</Command>
           <Tooltip>Printerbeheer</Tooltip>
           <Icon id="9"/>
         </Item>

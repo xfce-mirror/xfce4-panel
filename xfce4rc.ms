@@ -35,7 +35,7 @@
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">mozilla -splash</Command>
+        <Command term="0" sn="0">mozilla</Command>
         <Tooltip>Pelayar Web Mozilla</Tooltip>
         <Icon id="7"/>
       </Control>
@@ -44,7 +44,7 @@
       <Popup/>
       <Control id="-1" filename="libmailcheck.so">
         <Mailcheck interval="30">
-          <Command term="0" sn="0">mozilla -mail -splash</Command>
+          <Command term="0" sn="0">mozilla -mail</Command>
         </Mailcheck>
       </Control>
     </Group>
@@ -72,7 +72,7 @@
       <Popup>
         <Item>
           <Caption>Screensaver</Caption>
-          <Command term="0" sn="0">xscreensaver-demo</Command>
+          <Command term="0" sn="1">xscreensaver-demo</Command>
           <Tooltip>Screensaver</Tooltip>
           <Icon id="3"/>
         </Item>
@@ -87,7 +87,7 @@
       <Popup>
         <Item>
           <Caption>Pengurusan Percetakan</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
+          <Command term="0" sn="1">xfprint-manager</Command>
           <Tooltip>Pengurusan Percetakan</Tooltip>
           <Icon id="9"/>
         </Item>
