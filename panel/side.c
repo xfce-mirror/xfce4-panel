@@ -306,7 +306,7 @@ void panel_group_arrange(PanelGroup * pg, int position)
     {
 	if ((vertical && position == RIGHT) || (!vertical && position == BOTTOM))
 	    start = FALSE;
-	else if (pg->side == RIGHT && position == BOTTOM)
+	else if (pg->side == RIGHT && (position == BOTTOM || position == TOP))
 	    start = FALSE;
     }
     else
