@@ -2,6 +2,8 @@
  *
  *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
+ *  - 2004 Add Maildir support Julien NOEL (dev@no-l.org)
+ *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2 of the License, or
@@ -47,6 +49,8 @@
 #include <panel/settings.h>
 #include <panel/plugins.h>
 #include <panel/item_dialog.h>
+
+#include <dirent.h>
 
 #define MAILCHECK_ROOT "Mailcheck"
 
@@ -291,7 +295,7 @@ exec_newmail_cmd (const char *cmd)
 static gboolean
 check_mail (t_mailcheck * mailcheck)
 {
-    int mail;
+    int mail = NO_MAIL;
     struct stat s;
 
     DBG ("Checking mail ... ");
@@ -304,16 +308,73 @@ check_mail (t_mailcheck * mailcheck)
     }
     else
     {
-	if (stat (mailcheck->mbox, &s) < 0)
+	if (stat (mailcheck->mbox, &s) < 0) 
+	{
 	    mail = NO_MAIL;
-	else if (!s.st_size)
+	}
+	else if (S_ISREG(s.st_mode))
+	{
+	    DBG("mbox format");
+
+	    if (!s.st_size)
+		mail = NO_MAIL;
+ 	    else if (s.st_mtime <= s.st_atime)
+		mail = OLD_MAIL;
+ 	    else
+		mail = NEW_MAIL;
+
+ 	} 
+	else if (S_ISDIR (s.st_mode)) 
+	{
+	    DIR *dr;
+	    struct dirent *de;
+	    char *c_list[] = {"tmp","cur","new"};
+	    char *c_tmp;
+	    int  i_tmp;
+	    
+	    /* mailbox is a maildir */
+	    DBG("maildir format");
+
 	    mail = NO_MAIL;
-	else if (s.st_mtime <= s.st_atime)
-	    mail = OLD_MAIL;
-	else
-	    mail = NEW_MAIL;
+
+	    /* Verify the Maildir integrity */
+	    for (i_tmp = 0;  i_tmp < 3; i_tmp++) 
+	    {
+		c_tmp = g_build_filename(mailcheck->mbox, c_list[i_tmp], NULL);
+
+		if (stat (c_tmp, &s) >= 0 && S_ISDIR(s.st_mode)) 
+		{
+		    dr = opendir(c_tmp);
+		    
+		    if (dr != NULL) 
+		    {
+			while ((de = readdir(dr))) 
+			{
+			    if (strlen(de->d_name) >= 1 && 
+				de->d_name[0] != '.') 
+			    {
+				if (i_tmp < 2)
+				{
+				    mail = OLD_MAIL;
+				    break;
+				}
+				else 
+				{
+				    mail = NEW_MAIL;
+				    break;
+				}
+			    }
+			}
+
+			closedir(dr);
+		    }
+		}
+	    }
+	}
     }
 
+    DBG("Done");
+    
     if (mail != mailcheck->status)
     {
 	if (mail == NEW_MAIL && mailcheck->status != NEW_MAIL &&
@@ -348,7 +409,7 @@ run_mailcheck (t_mailcheck * mc)
     }
 }
 
-void
+static void
 mailcheck_read_config (Control * control, xmlNodePtr node)
 {
     xmlChar *value;
@@ -451,7 +512,7 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
     mailcheck_set_tip (mc);
 }
 
-void
+static void
 mailcheck_write_config (Control * control, xmlNodePtr parent)
 {
     xmlNodePtr root, node;
@@ -537,7 +598,7 @@ mailcheck_new (void)
     return mailcheck;
 }
 
-void
+static void
 mailcheck_free (Control * control)
 {
     t_mailcheck *mailcheck = (t_mailcheck *) control->data;
@@ -616,7 +677,6 @@ mailcheck_apply_options (MailDialog * md)
 {
     const char *tmp;
     t_mailcheck *mc = md->mc;
-    char *cmd;
 
     g_free (mc->command); 
 
@@ -825,7 +885,7 @@ add_interval_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 }
 
 /* the dialog */
-void
+static void
 mailcheck_create_options (Control * control, GtkContainer * container,
 			  GtkWidget * done)
 {
@@ -861,7 +921,7 @@ mailcheck_create_options (Control * control, GtkContainer * container,
 }
 
 /* create panel control */
-gboolean
+static gboolean
 create_mailcheck_control (Control * control)
 {
     t_mailcheck *mailcheck = mailcheck_new ();
