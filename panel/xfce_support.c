@@ -595,8 +595,7 @@ typedef struct
     guint timeout_id;
 } 
 StartupTimeoutData;
-
-StartupTimeoutData *startup_timeout_data = NULL;
+static StartupTimeoutData *startup_timeout_data = NULL;
 
 static void sn_error_trap_push (SnDisplay *display, Display   *xdisplay)
 {
