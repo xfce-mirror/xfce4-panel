@@ -698,14 +698,14 @@ maintainers, etc. Commented out by default.
 
     <variablelist>
       <varlistentry>
-	<term>${XDG_DATA_HOME}</term>
+	<term>${XDG_CONFIG_HOME}</term>
 	<listitem><para>The first base directory to look for configuration 
 	  files. By default this is set to <filename
 	    role="directory">~/.config/</filename>.</para></listitem>
       </varlistentry>
 
       <varlistentry>
-	<term>${XDG_DATA_DIRS}</term>
+	<term>${XDG_CONFIG_DIRS}</term>
 	<listitem><para>A list of system directories that contain configuration
 	  data. By default the panel will look in <filename 
 	    role="directory">${sysconfdir}/xdg/</filename> and 
