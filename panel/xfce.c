@@ -169,17 +169,15 @@ static void create_panel_contents(void)
     
     /* create the other widgets */
     
+    central_frame = gtk_frame_new(NULL);
+    if(settings.style == OLD_STYLE)
+	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+    g_object_ref(central_frame);
+    central_frame_created = TRUE;
+
     if(settings.show_central)
     {
-	central_frame = gtk_frame_new(NULL);
-	
-	if(settings.style == OLD_STYLE)
-	    gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
-    
         gtk_widget_show(central_frame);
-	g_object_ref(central_frame);
-
-	central_frame_created = TRUE;
     }
     
     /* pack the widgets into the main frame */
@@ -190,12 +188,9 @@ static void create_panel_contents(void)
 
     gtk_box_pack_start(GTK_BOX(panel_box), left_box, TRUE, TRUE, 0);
 
-    if (settings.show_central)
-    {
-	gtk_box_pack_start(GTK_BOX(panel_box), central_frame, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(panel_box), central_frame, TRUE, TRUE, 0);
 
-	gtk_container_add(GTK_CONTAINER(central_frame), central_box);
-    }
+    gtk_container_add(GTK_CONTAINER(central_frame), central_box);
 
     gtk_box_pack_start(GTK_BOX(panel_box), right_box, TRUE, TRUE, 0);
 }
@@ -233,8 +228,7 @@ void panel_set_orientation(int orientation)
     side_panel_pack(LEFT, GTK_BOX(left_box));
     side_panel_pack(RIGHT, GTK_BOX(right_box));
     
-    if (settings.show_central)
-	central_panel_init(GTK_BOX(central_box));
+    central_panel_init(GTK_BOX(central_box));
 
     panel_set_position();
 }
@@ -285,7 +279,6 @@ void panel_set_style(int style)
     else
         gtk_frame_set_shadow_type(GTK_FRAME(central_frame),
                                   GTK_SHADOW_ETCHED_IN);
-
     side_panel_set_style(LEFT, style);
     central_panel_set_style(style);
     side_panel_set_style(RIGHT, style);

@@ -224,7 +224,7 @@ static unsigned char digits_bits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-#define MY_CLOCK_DEFAULT_SIZE 30
+#define MY_CLOCK_DEFAULT_SIZE 50
 
 #ifndef M_PI
 #define M_PI 3.141592654
@@ -1016,10 +1016,10 @@ static void xfce_clock_draw_analog(GtkWidget * widget)
     yc = widget->allocation.height / 2 + 1;
 
     /* 
-     * Here we decide arbitrary that if the clock widget is smaller than its 
-     * default size, we don't draw the shadow.
+     * Here we decide arbitrary that if the clock widget is smaller than 
+     * 20 pixels, we don't draw the shadow.
      */
-    if (MAX (xc, yc) >= MY_CLOCK_DEFAULT_SIZE)
+    if (MAX (xc, yc) >= 20)
     {
 	draw_ticks(widget, widget->style->dark_gc[GTK_STATE_NORMAL], xc, yc);
 	draw_hrs_pointer(widget, widget->style->dark_gc[GTK_STATE_NORMAL], xc, yc);

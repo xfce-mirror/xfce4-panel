@@ -126,7 +126,6 @@ static t_clock *clock_new(void)
     gtk_container_add(GTK_CONTAINER(clock->frame), clock->eventbox);
     gtk_widget_show(clock->eventbox);
 
-
     gtk_container_add(GTK_CONTAINER(clock->eventbox), clock->clock);
 
     gtk_widget_show(clock->clock);
