@@ -88,6 +88,7 @@ typedef struct
 }
 ClockDialog;
 
+#include <langinfo.h>
 /* creation and destruction */
 gboolean
 clock_date_tooltip (GtkWidget * widget)
@@ -96,6 +97,7 @@ clock_date_tooltip (GtkWidget * widget)
     struct tm *tm;
     static gint mday = -1;
     char date_s[255];
+    char *utf8date;
 
     g_return_val_if_fail (widget != NULL, FALSE);
     g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
@@ -106,9 +108,27 @@ clock_date_tooltip (GtkWidget * widget)
     if (mday != tm->tm_mday)
     {
 	mday = tm->tm_mday;
-	strftime (date_s, 255, "%A, %-d %B %Y", tm);
-	add_tooltip (widget, date_s);
+	/* Use format characters from strftime(3)
+	 * to get the proper string for your locale.
+	 * I used these:
+	 * %A  : full weekday name
+	 * %-d : day of the month, without prefixed 0
+	 * %B  : full month name
+	 * %Y  : four digit year
+	 */
+	strftime (date_s, 255, _("%A, %-d %B %Y"), tm);
+
+	/* Conversion to utf8
+	 * patch by Oliver M. Bolzer <oliver@fakeroot.net>
+	 */
+	utf8date = g_locale_to_utf8 (date_s, -1, NULL, NULL, NULL);
+	if (utf8date)
+	{
+	    add_tooltip (widget, utf8date);
+	    g_free (utf8date);
+	}
     }
+
     return TRUE;
 }
 
