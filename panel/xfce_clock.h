@@ -22,7 +22,6 @@
 #ifndef __XFCE_CLOCK_H__
 #define __XFCE_CLOCK_H__
 
-
 #include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
 
@@ -51,7 +50,6 @@ extern "C"
 
     typedef enum
     {
-	DIGIT_TINY,
         DIGIT_SMALL,
         DIGIT_MEDIUM,
         DIGIT_LARGE,
@@ -64,15 +62,10 @@ extern "C"
 
         GtkWidget widget;       /* parent */
 
-        GdkBitmap *digits_bmap;
-
         /* Dimensions of clock components */
         gint radius;
         gint internal;
         gint pointer_width;
-
-        /* ID of update timer, or 0 if none */
-        guint32 timer;
 
         gfloat hrs_angle;
         gfloat min_angle;
@@ -84,6 +77,18 @@ extern "C"
         gboolean display_am_pm;
         gboolean display_secs;
         XfceClockLedSize led_size;
+	
+	/* Private data */
+	
+        GdkBitmap *digits_bmap;
+        /* ID of update timer, or 0 if none */
+        guint32 timer;
+        
+        guint old_hour;
+	guint old_minute;
+	guint old_second;
+	
+	
     };
 
     struct _XfceClockClass
