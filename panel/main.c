@@ -54,6 +54,7 @@
 #include "mcs_client.h"
 #include "controls_dialog.h"
 #include "item_dialog.h"
+#include "popup.h"
 
 /* signal handling */
 typedef enum
@@ -158,6 +159,8 @@ restart (void)
     x = panel.position.x;
     y = panel.position.y;
 */
+    hide_current_popup_menu();
+
     save_panel ();
 
     if (panel.toplevel)
