@@ -490,6 +490,8 @@ panel_popup_free (PanelPopup * pp)
     /* only items contain non-gtk elements to be freed */
     GList *li;
 
+    gtk_widget_destroy (pp->window);
+    
     for (li = pp->items; li && li->data; li = li->next)
     {
 	Item *mi = li->data;
