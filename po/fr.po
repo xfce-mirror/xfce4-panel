@@ -23,11 +23,11 @@ msgid ""
 msgstr ""
 "Supprimer une entrée va supprimer le menu associé.\n"
 "\n"
-"Voulez-vous supprimer cet entrée ?"
+"Voulez-vous supprimer cette entrée ?"
 
 #: panel/controls.c:278 panel/panel.c:115
 msgid "/_Properties..."
-msgstr ""
+msgstr "/_Propriétés..."
 
 #: panel/controls.c:279
 msgid "/_Remove"
@@ -139,15 +139,15 @@ msgstr "Sélection de l'icône"
 
 #: panel/item_dialog.c:309
 msgid "Icon:"
-msgstr "Icône :"
+msgstr "Icône:"
 
 #: panel/item_dialog.c:353
 msgid "Select command"
-msgstr "Sélection de la commande :"
+msgstr "Sélection de la commande:"
 
 #: panel/item_dialog.c:378
 msgid "Command:"
-msgstr "Commande :"
+msgstr "Commande:"
 
 #: panel/item_dialog.c:410 plugins/mailcheck/mailcheck.c:628
 msgid "Run in _terminal"
@@ -155,15 +155,15 @@ msgstr "Exécuter dans un _terminal"
 
 #: panel/item_dialog.c:415 plugins/mailcheck/mailcheck.c:637
 msgid "Use startup _notification"
-msgstr ""
+msgstr "Utiliser la _notification de démarrage"
 
 #: panel/item_dialog.c:441
 msgid "Caption:"
-msgstr "Légende :"
+msgstr "Légende:"
 
 #: panel/item_dialog.c:479
 msgid "Tooltip:"
-msgstr "Bulle d'aide :"
+msgstr "Bulle d'aide:"
 
 #: panel/item_dialog.c:614
 msgid "Icon Preview"
@@ -195,7 +195,7 @@ msgid ""
 "http://www.xfce.org\n"
 msgstr ""
 "%s, version %s\n"
-"Partie  de l'environnement de bureau XFce\n"
+"Élément  de l'environnement de bureau XFce\n"
 "http://www.xfce.org\n"
 
 #: panel/main.c:179
@@ -293,23 +293,23 @@ msgstr "Bas"
 
 #: settings/xfce_settings_dialog.c:364
 msgid "Panel size:"
-msgstr "Taille du panneau :"
+msgstr "Taille du panneau:"
 
 #: settings/xfce_settings_dialog.c:380
 msgid "Panel orientation:"
-msgstr "Orientation du panneau :"
+msgstr "Orientation du panneau:"
 
 #: settings/xfce_settings_dialog.c:397
 msgid "Popup position:"
-msgstr "Position du popup :"
+msgstr "Position du popup:"
 
 #: settings/xfce_settings_dialog.c:414
 msgid "Icon theme:"
-msgstr "Thème d'icône :"
+msgstr "Thème d'icône:"
 
 #: settings/xfce_settings_dialog.c:482
 msgid "Panel layer:"
-msgstr "Niveau du panneau :"
+msgstr "Niveau du panneau:"
 
 #: settings/xfce_settings_dialog.c:502
 msgid "Normal"
@@ -317,7 +317,7 @@ msgstr "Normal"
 
 #: settings/xfce_settings_dialog.c:521
 msgid "Center the panel:"
-msgstr "Centrer le panneau :"
+msgstr "Centrer le panneau:"
 
 #: settings/xfce_settings_dialog.c:545
 msgid "Set"
@@ -413,7 +413,7 @@ msgstr "Décembre"
 
 #: plugins/clock/clock.c:327
 msgid "Clock type:"
-msgstr "Type d'horloge :"
+msgstr "Type d'horloge:"
 
 #: plugins/clock/clock.c:340
 msgid "Analog"
@@ -429,24 +429,23 @@ msgstr "LED"
 
 #: plugins/clock/clock.c:410
 msgid "Hour mode:"
-msgstr ""
+msgstr "Mode horaire:"
 
 #: plugins/clock/clock.c:417
-#, fuzzy
 msgid "24 hour"
-msgstr "Mode 24 heures"
+msgstr "24 heures"
 
 #: plugins/clock/clock.c:423
 msgid "12 hour"
-msgstr ""
+msgstr "12 heures"
 
 #: plugins/clock/clock.c:429
 msgid "AM/PM"
-msgstr ""
+msgstr "AM/PM"
 
 #: plugins/clock/clock.c:468
 msgid "Show seconds:"
-msgstr "Afficher les secondes"
+msgstr "Afficher les secondes:"
 
 #: plugins/clock/clock.c:579
 msgid "Xfce Clock"
@@ -454,11 +453,11 @@ msgstr "Horloge Xfce"
 
 #: plugins/mailcheck/mailcheck.c:496
 msgid "Mail box:"
-msgstr "Boîte aux lettres :"
+msgstr "Boîte aux lettres:"
 
 #: plugins/mailcheck/mailcheck.c:583
 msgid "Mail command:"
-msgstr "Commande de courrier :"
+msgstr "Commande de courrier:"
 
 #: plugins/mailcheck/mailcheck.c:595
 msgid "Command to run when the button on the panel is clicked"
@@ -466,16 +465,15 @@ msgstr "Commande à exécuter lorsque le bouton est activé"
 
 #: plugins/mailcheck/mailcheck.c:668
 msgid "Interval (sec):"
-msgstr "Intervale (sec.) :"
+msgstr "Intervale (sec.):"
 
 #: plugins/mailcheck/mailcheck.c:747
 msgid "Mail check"
 msgstr "Contrôle de courrier"
 
 #: plugins/pager/pager.c:312
-#, fuzzy
 msgid "Graphical pager"
-msgstr "Utiliser le changeur de bureaux graphique"
+msgstr "Changeur de bureaux graphique"
 
 #: plugins/switcher/switcher.c:675
 msgid "Desktop switcher"
@@ -487,9 +485,9 @@ msgid ""
 "\n"
 "Ask your system administrator for more information"
 msgstr ""
-"Accès à la configuration du système a été désactivé.\n"
+"L'accès à la configuration du système a été désactivé.\n"
 "\n"
-"Contacter votre administrateur système pour plus  d'informations"
+"Contactez votre administrateur système pour plus d'informations"
 
 #: plugins/systembuttons/systembuttons.c:135
 msgid "Lock the screen"
@@ -521,54 +519,12 @@ msgstr "Vérouiller"
 
 #: plugins/systembuttons/systembuttons.c:587
 msgid "Button 1:"
-msgstr "Bouton 1 :"
+msgstr "Bouton 1:"
 
 #: plugins/systembuttons/systembuttons.c:603
 msgid "Button 2:"
-msgstr "Bouton 2 :"
+msgstr "Bouton 2:"
 
 #: plugins/systembuttons/systembuttons.c:647
 msgid "System buttons"
 msgstr "Boutons système"
-
-#~ msgid "Credits"
-#~ msgstr "Crédits"
-
-#~ msgid "License"
-#~ msgstr "License"
-
-#~ msgid "/_Panel settings"
-#~ msgstr "/_Paramètres du panneau"
-
-#~ msgid "Trashcan: 0 files"
-#~ msgstr "Corbeille: 0 fichier"
-
-#~ msgid "Trashcan: %d files / %d %s"
-#~ msgstr "Corbeille : %d fichiers / %d %s"
-
-#~ msgid "Trash can"
-#~ msgstr "Corbeille"
-
-#~ msgid "XFce 4"
-#~ msgstr "XFce 4"
-
-#~ msgid "By Olivier Fourdan (c) 1997-2003"
-#~ msgstr "Par Olivier Fourdan (c) 1997-2003"
-
-#~ msgid "Toggle AM PM mode :"
-#~ msgstr "Basculer mode AM/PM :"
-
-#~ msgid "/_Edit ..."
-#~ msgstr "/_Éditer ..."
-
-#~ msgid "Traditional"
-#~ msgstr "Traditionnel"
-
-#~ msgid "Modern"
-#~ msgstr "Moderne"
-
-#~ msgid "Panel style:"
-#~ msgstr "Style de panneau :"
-
-#~ msgid "Show minibuttons"
-#~ msgstr "Afficher les mini-boutons"
