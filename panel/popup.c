@@ -206,7 +206,6 @@ void create_addtomenu_item(MenuItem * mi)
 {
     mi->button = gtk_button_new();
     gtk_button_set_relief(GTK_BUTTON(mi->button), GTK_RELIEF_NONE);
-    gtk_widget_set_size_request(mi->button, -1, icon_size[settings.size]);
 
     mi->hbox = gtk_hbox_new(FALSE, 8);
     gtk_container_add(GTK_CONTAINER(mi->button), mi->hbox);
@@ -232,6 +231,9 @@ void create_addtomenu_item(MenuItem * mi)
 
     g_signal_connect(mi->button, "clicked", G_CALLBACK(addtomenu_item_click_cb),
                      mi->parent);
+
+    menu_item_set_popup_size(mi, settings.popup_size);
+    menu_item_set_style(mi, settings.style);
 }
 
 void create_menu_item(MenuItem * mi)
@@ -298,7 +300,7 @@ static void set_popup_window_properties(GtkWidget * win)
     gtk_window_set_decorated(window, FALSE);
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
-    gtk_window_set_title(window, " ");
+    gtk_window_set_title(window, _("Menu"));
     gtk_window_set_transient_for(window, GTK_WINDOW(toplevel));
     gtk_window_set_type_hint(window, GDK_WINDOW_TYPE_HINT_MENU);
 
@@ -520,17 +522,15 @@ void panel_popup_set_style(PanelPopup * pp, int style)
     {
         gtk_button_set_relief(GTK_BUTTON(pp->button), GTK_RELIEF_NORMAL);
         gtk_widget_set_name(pp->button, "gxfce_color1");
-        gtk_frame_set_shadow_type(GTK_FRAME(pp->addtomenu_item->frame),
-                                  GTK_SHADOW_IN);
     }
     else
     {
         gtk_button_set_relief(GTK_BUTTON(pp->button), GTK_RELIEF_NONE);
         gtk_widget_set_name(pp->button, "gxfce_popup_button");
-        gtk_frame_set_shadow_type(GTK_FRAME(pp->addtomenu_item->frame),
-                                  GTK_SHADOW_NONE);
     }
 
+    menu_item_set_style(pp->addtomenu_item, style);
+    
     for(li = pp->items; li && li->data; li = li->next)
     {
         MenuItem *mi = (MenuItem *) li->data;
@@ -563,12 +563,9 @@ void panel_popup_set_theme(PanelPopup * pp, const char *theme)
 void panel_popup_set_popup_size(PanelPopup * pp, int size)
 {
     GList *li;
-    int s = popup_icon_size[size];
 
-    gtk_widget_set_size_request(pp->addtomenu_item->frame, s, s);
-
-    gtk_widget_set_size_request(pp->addtomenu_item->button, -1, s + 4);
-
+    menu_item_set_popup_size(pp->addtomenu_item, size);
+    
     for(li = pp->items; li && li->data; li = li->next)
     {
         MenuItem *mi = (MenuItem *) li->data;
