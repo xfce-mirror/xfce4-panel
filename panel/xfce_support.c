@@ -24,6 +24,8 @@
  * --------------
  * miscellaneous support functions that can be used by
  * all modules (and external plugins).
+ *
+ * FIXME should probably be (part of) a library
  */
 
 #ifdef HAVE_CONFIG_H
@@ -224,38 +226,10 @@ G_MODULE_EXPORT /* EXPORT:add_tooltip */
 void
 add_tooltip (GtkWidget * widget, const char *tip)
 {
-    if (!tooltips)
+    if (G_UNLIKELY (!tooltips))
 	tooltips = gtk_tooltips_new ();
 
     gtk_tooltips_set_tip (tooltips, widget, tip, NULL);
-}
-
-G_MODULE_EXPORT /* EXPORT:set_window_skip */
-void
-set_window_skip (GtkWidget * win)
-{
-#if GTK_CHECK_VERSION(2, 2, 0)
-    g_object_set (G_OBJECT (win), "skip_taskbar_hint", TRUE, NULL);
-    g_object_set (G_OBJECT (win), "skip_pager_hint", TRUE, NULL);
-#else
-    Screen *xscreen;
-    Window xid;
-    static Atom xa_SKIP_PAGER = 0;
-    static Atom xa_SKIP_TASKBAR = 0;
-
-    if (!xa_SKIP_PAGER)
-    {
-	xa_SKIP_PAGER = XInternAtom (GDK_DISPLAY (),
-				     "_NET_WM_STATE_SKIP_PAGER", False);
-	xa_SKIP_TASKBAR = XInternAtom (GDK_DISPLAY (),
-				       "_NET_WM_STATE_SKIP_TASKBAR", False);
-    }
-
-    xscreen = DefaultScreenOfDisplay (GDK_DISPLAY ());
-    xid = GDK_WINDOW_XID (win->window);
-
-    netk_change_state (xscreen, xid, TRUE, xa_SKIP_PAGER, xa_SKIP_TASKBAR);
-#endif
 }
 
 /*  DND

@@ -30,6 +30,7 @@
 #include <libxfcegui4/libnetk.h>
 
 #include "xfce-panel-window.h"
+#include "xfce-itembar.h"
 
 #include "xfce.h"
 #include "controls.h"
@@ -1072,50 +1073,19 @@ create_panel_window (Panel * p)
 static void
 create_panel_framework (Panel * p)
 {
-    gboolean vertical = (settings.orientation == VERTICAL);
-
-    /* create all widgets that depend on orientation */
-    if (vertical)
-	p->group_box = gtk_vbox_new (FALSE, 0);
-    else
-	p->group_box = gtk_hbox_new (FALSE, 0);
-
-    gtk_widget_show (p->group_box);
-
-    gtk_container_add (GTK_CONTAINER (p->toplevel), p->group_box);
+    GtkOrientation orientation = 
+        (p->priv->settings.orientation == VERTICAL) ?
+                GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
 
     xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (p->toplevel),
-                                       vertical ? GTK_ORIENTATION_VERTICAL :
-                                                  GTK_ORIENTATION_HORIZONTAL);
+                                       orientation);
+
+    p->group_box = xfce_itembar_new (orientation);
+    gtk_widget_show (p->group_box);
+    gtk_container_add (GTK_CONTAINER (p->toplevel), p->group_box);
 }
 
 /* housekeeping for panel controls */
-
-static void
-panel_pack_controls (Panel *p)
-{
-    GSList *l;
-
-    for (l = p->priv->controls; l != NULL; l = l->next)
-    {
-        Control *control = l->data;
-        
-        control_pack (control, GTK_BOX (p->group_box));
-    }
-}
-
-static void
-panel_unpack_controls (Panel *p)
-{
-    GSList *l;
-
-    for (l = p->priv->controls; l != NULL; l = l->next)
-    {
-        Control *control = l->data;
-        
-        control_unpack (control);
-    }
-}
 
 G_MODULE_EXPORT /* EXPORT:panel_cleanup */
 void
@@ -1255,7 +1225,8 @@ panel_move_control (int from, int to)
     li = g_slist_nth (panel.priv->controls, from);
     control = li->data;
 
-    gtk_box_reorder_child (GTK_BOX (panel.group_box), control->base, to);
+    xfce_itembar_reorder_child (XFCE_ITEMBAR (panel.group_box), 
+                                XFCE_ITEM (control->base), to);
 
     panel.priv->controls = g_slist_delete_link (panel.priv->controls, li);
     panel.priv->controls = g_slist_insert (panel.priv->controls, control, to);
@@ -1314,7 +1285,7 @@ panel_add_control (Control * control, int index)
 	index = len;
 
     control->index = index;
-    control_pack (control, GTK_BOX (panel.group_box));
+    control_pack (control, panel.group_box);
     panel.priv->controls = g_slist_append (panel.priv->controls, control);
 
     if (index >= 0 && index < len)
@@ -1345,7 +1316,6 @@ panel_set_orientation (int orientation)
 {
     gboolean hidden;
     int pos;
-    GSList *l;
 
     panel.priv->settings.orientation = orientation;
 
@@ -1367,20 +1337,16 @@ panel_set_orientation (int orientation)
 
     gtk_widget_hide (panel.toplevel);
 
-    /* save panel controls */
-    panel_unpack_controls (&panel);
-
-    /* no need to recreate the window */
-    gtk_widget_destroy (panel.group_box);
-    create_panel_framework (&panel);
-
-    for (l = panel.priv->controls; l != NULL; l = l->next)
-    {
-        Control *control = l->data;
-
-        control_set_orientation (control, orientation);
-    }
-
+    xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (panel.toplevel),
+                                       orientation == VERTICAL ?
+                                                GTK_ORIENTATION_VERTICAL :
+                                                GTK_ORIENTATION_HORIZONTAL);
+    
+    xfce_itembar_set_orientation (XFCE_ITEMBAR (panel.group_box),
+                                  orientation == VERTICAL ?
+                                        GTK_ORIENTATION_VERTICAL :
+                                        GTK_ORIENTATION_HORIZONTAL);
+    
     /* change popup position to make it look better 
      * done here, because it's needed for size calculation 
      * the setttings dialog will also change, we just 
@@ -1403,8 +1369,6 @@ panel_set_orientation (int orientation)
 	    break;
     }
     panel_set_popup_position (pos);
-
-    panel_pack_controls (&panel);
 
     gtk_widget_size_request (panel.toplevel, &panel.priv->req);
 
@@ -1823,7 +1787,7 @@ old_groups_set_from_xml (int side, xmlNodePtr node)
 	else
 	{
 	    control = control_new (i);
-	    control_pack (control, GTK_BOX (panel.group_box));
+	    control_pack (control, panel.group_box);
             panel.priv->controls = g_slist_append (panel.priv->controls,
                                                    control);
 	}
@@ -1881,7 +1845,7 @@ groups_set_from_xml (xmlNodePtr node)
         Control *control;
 
 	control = control_new (i);
-	control_pack (control, GTK_BOX (panel.group_box));
+	control_pack (control, panel.group_box);
 	panel.priv->controls = g_slist_append (panel.priv->controls, control);
 
 	for (child = node->children; child; child = child->next)

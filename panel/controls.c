@@ -46,6 +46,9 @@
 
 #include <libxfce4util/libxfce4util.h>
 
+#include "xfce-item.h"
+#include "xfce-itembar.h"
+
 #include "xfce.h"
 #include "item.h"
 #include "item-control.h"
@@ -865,6 +868,15 @@ create_control (Control * control, int id, const char *filename)
     return FALSE;
 }
 
+static void
+control_orientation_changed (XfceItem *item, GtkOrientation orientation, 
+                             Control *control)
+{
+    control_set_orientation (control, 
+                             orientation == GTK_ORIENTATION_HORIZONTAL ?
+                                HORIZONTAL : VERTICAL);
+}
+
 G_MODULE_EXPORT /* EXPORT:control_new */
 Control *
 control_new (int index)
@@ -874,14 +886,49 @@ control_new (int index)
     control->index = index;
     control->with_popup = FALSE;
 
-    control->base = gtk_event_box_new ();
+    control->base = xfce_item_new ();
     gtk_widget_show (control->base);
+    xfce_item_set_homogeneous (XFCE_ITEM (control->base), FALSE);
 
     /* protect against destruction when unpacking */
     g_object_ref (control->base);
     gtk_object_sink (GTK_OBJECT (control->base));
 
+    g_signal_connect (control->base, "orientation-changed", 
+                      G_CALLBACK (control_orientation_changed), control);
+    
     return control;
+}
+
+G_MODULE_EXPORT /* EXPORT: control_swap_base */
+void
+control_swap_base (Control *control, GtkWidget *newbase)
+{
+    GtkWidget *parent;
+    int n = 0;
+
+    g_return_if_fail (XFCE_IS_ITEM (newbase));
+    
+    parent = control->base->parent;
+
+    if (parent)
+    {
+        n = xfce_itembar_get_item_index (XFCE_ITEMBAR (parent),
+                                         XFCE_ITEM (control->base));
+    }
+
+    gtk_widget_destroy (control->base);
+    control->base = newbase;
+
+    gtk_widget_show (control->base);
+    g_object_ref (control->base);
+    gtk_object_sink (GTK_OBJECT (control->base));
+
+    if (parent)
+    {
+        xfce_itembar_insert (XFCE_ITEMBAR (parent), 
+                             XFCE_ITEM (control->base), n-1);
+    }
 }
 
 G_MODULE_EXPORT /* EXPORT:control_free */
@@ -901,9 +948,9 @@ control_free (Control * control)
 
 G_MODULE_EXPORT /* EXPORT:control_pack */
 void
-control_pack (Control * control, GtkBox * box)
+control_pack (Control * control, GtkWidget * box)
 {
-    gtk_box_pack_start (box, control->base, TRUE, TRUE, 0);
+    xfce_itembar_append (XFCE_ITEMBAR (box), XFCE_ITEM (control->base));
 }
 
 G_MODULE_EXPORT /* EXPORT:control_unpack */

@@ -34,9 +34,6 @@ G_MODULE_IMPORT void write_backup_file (const char *path);
 /* tooltips */
 G_MODULE_IMPORT void add_tooltip (GtkWidget * widget, const char *tip);
 
-/* x atoms and properties */
-G_MODULE_IMPORT void set_window_skip (GtkWidget * win);
-
 /* dnd */
 G_MODULE_IMPORT void dnd_set_drag_dest (GtkWidget * widget);
 

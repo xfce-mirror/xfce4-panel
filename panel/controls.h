@@ -30,8 +30,8 @@ typedef gboolean (*CreateControlFunc) (Control * control);
 struct _ControlClass
 {
     int id;
-    const char *name;		/* unique name */
-    const char *caption;	/* translated, human readable */
+    const char *name;           /* unique name */
+    const char *caption;        /* translated, human readable */
 
     /* for plugins */
     GModule *gmodule;
@@ -44,10 +44,10 @@ struct _ControlClass
     void (*read_config) (Control * control, xmlNodePtr node);
     void (*write_config) (Control * control, xmlNodePtr node);
     void (*attach_callback) (Control * control, const char *signal,
-			     GCallback callback, gpointer data);
+                             GCallback callback, gpointer data);
 
     void (*create_options) (Control * control, GtkContainer * container,
-			    GtkWidget * done);
+                            GtkWidget * done);
 
     /* global preferences */
     void (*set_orientation) (Control * control, int orientation);
@@ -78,13 +78,14 @@ typedef struct
     char *name;
     char *caption;
     GdkPixbuf *icon;
-    gboolean can_be_added;	/* not unique or not already added */
+    gboolean can_be_added;      /* not unique or not already added */
 }
 ControlInfo;
 
 G_MODULE_IMPORT GSList *get_control_info_list (void);
 
-G_MODULE_IMPORT void insert_control (Panel * panel, const char *name, int position);
+G_MODULE_IMPORT void insert_control (Panel * panel, const char *name,
+                                     int position);
 
 /* control classes */
 G_MODULE_IMPORT void control_class_list_init (void);
@@ -94,37 +95,46 @@ G_MODULE_IMPORT void control_class_list_cleanup (void);
 /* NOTE:
  * Use next functions only on classes that have at least 
  * their name field initialized */
-G_MODULE_IMPORT void control_class_set_icon (ControlClass * cclass, GdkPixbuf * icon);
+G_MODULE_IMPORT void control_class_set_icon (ControlClass * cclass,
+                                             GdkPixbuf * icon);
 
-G_MODULE_IMPORT void control_class_set_unique (ControlClass * cclass, gboolean unique);
+G_MODULE_IMPORT void control_class_set_unique (ControlClass * cclass,
+                                               gboolean unique);
 
 G_MODULE_IMPORT void control_class_set_unloadable (ControlClass * cclass,
-				   gboolean unloadable);
+                                                   gboolean unloadable);
 
 /* controls */
 G_MODULE_IMPORT Control *control_new (int index);
 
-G_MODULE_IMPORT gboolean create_control (Control * control, int id, const char *filename);
+G_MODULE_IMPORT void control_swap_base (Control * control,
+                                        GtkWidget * newbase);
+
+G_MODULE_IMPORT gboolean create_control (Control * control, int id,
+                                         const char *filename);
 
 G_MODULE_IMPORT void control_free (Control * control);
 
-G_MODULE_IMPORT gboolean control_set_from_xml (Control * control, xmlNodePtr node);
+G_MODULE_IMPORT gboolean control_set_from_xml (Control * control,
+                                               xmlNodePtr node);
 
 G_MODULE_IMPORT void control_write_xml (Control * control, xmlNodePtr parent);
 
-G_MODULE_IMPORT void control_pack (Control * control, GtkBox * box);
+G_MODULE_IMPORT void control_pack (Control * control, GtkWidget * box);
 
 G_MODULE_IMPORT void control_unpack (Control * control);
 
 G_MODULE_IMPORT void control_attach_callbacks (Control * control);
 
-G_MODULE_IMPORT void control_create_options (Control * control, GtkContainer * container,
-			     GtkWidget * done);
+G_MODULE_IMPORT void control_create_options (Control * control,
+                                             GtkContainer * container,
+                                             GtkWidget * done);
 
 /* global settings */
 G_MODULE_IMPORT void control_set_settings (Control * control);
 
-G_MODULE_IMPORT void control_set_orientation (Control * control, int orientation);
+G_MODULE_IMPORT void control_set_orientation (Control * control,
+                                              int orientation);
 
 G_MODULE_IMPORT void control_set_size (Control * control, int size);
 
