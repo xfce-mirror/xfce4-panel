@@ -27,13 +27,22 @@ AC_CHECK_LIB(Xpm, main,, AC_MSG_ERROR([libXpm is missing from your system: Make 
 
 AC_CHECK_FUNCS(setlocale strchr strrchr strstr)
 
-AC_ARG_ENABLE(plugins, 
-	      [  --disable-plugins  	Don't build plugins], 
+AC_ARG_ENABLE(plugins,
+	      [  --disable-plugins  	Don't build plugins],
 	      [ case "${enableval}" in
 	          no) MY_SUBDIRS="icons panel themes" ;;
 		  *)  MY_SUBDIRS="icons panel plugins themes" ;;
-	    	esac], 
+	    	esac],
 	      [ MY_SUBDIRS="icons panel plugins themes" ])
+
+dnl
+dnl  Debugging mode
+dnl
+DEBUG=0
+AC_ARG_ENABLE(debug,
+		[  --enable-debug          debug mode (default disabled)],
+		[ AC_DEFINE(DEBUG, 1, "Mode debug") ],)
+
 
 AC_SUBST(MY_SUBDIRS)
 
