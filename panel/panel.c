@@ -519,7 +519,10 @@ lock_screen (void)
 static void
 restart_panel (void)
 {
+    /* signal handlers are under thread lock */
+    gdk_threads_leave ();
     restart ();
+    gdk_threads_enter ();
 }
 
 static void
