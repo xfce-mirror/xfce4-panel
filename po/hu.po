@@ -1,31 +1,31 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# translation of xfce4-panel.po to Hungarian
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <edscott@imp.mx>, 2003.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Gergely Banos, Gabor Zele <zegab@axelero.hu>, 2003
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: xfce4-panel\n"
 "POT-Creation-Date: 2003-07-10 10:18+0200\n"
-"PO-Revision-Date: 2003-07-08 20:52+0100\n"
-"Last-Translator: Yongtao Yang <yongtao.yang@telia.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2003-07-14 11:25+0200\n"
+"Last-Translator: Gergely Banos, Gabor Zele <zegab@axelero.hu>\n"
+"Language-Team: Hungarian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"X-Generator: KBabel 1.1\n"
 
 #: panel/xfce_support.c:648
 msgid "Select file"
-msgstr "选择文件"
+msgstr "Fájl kiválasztása"
 
 #: panel/controls_dialog.c:246
 msgid "Change item"
-msgstr "改变条目"
+msgstr "Elem módosítása"
 
 #: panel/controls_dialog.c:278 panel/item_dialog.c:650
 msgid "Position:"
-msgstr "位置"
+msgstr "Sorrend:"
 
 #: panel/controls_dialog.c:323 panel/controls.c:272
 msgid ""
@@ -33,90 +33,90 @@ msgid ""
 "\n"
 "Do you want to remove the item?"
 msgstr ""
-"删除一个条目将同时删除其弹出菜单。\n"
+"Egy ikon törlésekor az előugró menüje is törlődik!\n"
 "\n"
-"你希望删除该条目吗?"
+"Le szeretné törölni az ikont?"
 
 #: panel/item_dialog.c:317
 msgid "Other Icon"
-msgstr "其它图标"
+msgstr "Egyéb ikon"
 
 #: panel/item_dialog.c:342
 msgid "Select icon"
-msgstr "选择图标"
+msgstr "Válasszon ikont"
 
 #: panel/item_dialog.c:381
 msgid "Icon:"
-msgstr "图标:"
+msgstr "Ikon:"
 
 #: panel/item_dialog.c:430
 msgid "Select command"
-msgstr "选择命令"
+msgstr "Válasszon parancsot"
 
 #: panel/item_dialog.c:458
 msgid "Command:"
-msgstr "命令:"
+msgstr "Parancs:"
 
 #: panel/item_dialog.c:495 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
-msgstr "在终端中运行(_T)"
+msgstr "Futtatás _parancssorban"
 
 #: panel/item_dialog.c:500 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
-msgstr "使用启动提示(_N)"
+msgstr "_Indításjelzés használata"
 
 #: panel/item_dialog.c:527
 msgid "Caption:"
-msgstr "标题:"
+msgstr "Felirat:"
 
 #: panel/item_dialog.c:560
 msgid "Tooltip:"
-msgstr "工具提示:"
+msgstr "Előugró üzenet:"
 
 #: panel/item_dialog.c:596
 msgid "Menu:"
-msgstr "菜单:"
+msgstr "Menü:"
 
 #: panel/item_dialog.c:603
 msgid "Attach menu to launcher"
-msgstr "将菜单附加到启动器"
+msgstr "Előugró menü"
 
 #: panel/item_dialog.c:745
 msgid "Icon Preview"
-msgstr "图标预览"
+msgstr "Ikon előnézet"
 
 #: panel/item_dialog.c:749
 msgid "Drag file onto this frame to change the icon"
-msgstr "拖拽文件到该框架中以改变图标"
+msgstr "Húzzon egy fájlt erre a területre az ikon megváltoztatásához!"
 
 #: panel/item_dialog.c:1032
 msgid "Change menu item"
-msgstr "改变菜单条目"
+msgstr "Menüpont megváltoztatása"
 
 #. add buttons
 #: panel/item_dialog.c:1035
 msgid "Remove"
-msgstr "删除"
+msgstr "Eltávolítás"
 
 #: panel/item.c:360
 msgid "Click mouse button 3 to change item"
-msgstr "点击鼠标右键以改变条目"
+msgstr "Kattintson a 3. egérgombbal az elem megváltoztatásához!"
 
 #: panel/item.c:383
 msgid "Add launcher"
-msgstr "添加启动器"
+msgstr "Indítógomb hozzáadása"
 
 #: panel/item.c:388
 msgid "Add new item"
-msgstr "添加新条目"
+msgstr "Új elem hozzáadása"
 
 #: panel/item.c:518
 msgid "Launcher"
-msgstr "启动器"
+msgstr "Indítógomb"
 
 #: panel/main.c:129
 msgid "Are you sure you want to exit?"
-msgstr "你确定要退出吗?"
+msgstr "Biztosan ki szeretne lépni?"
 
 #: panel/main.c:259
 #, c-format
@@ -125,8 +125,8 @@ msgid ""
 "Part of the XFce Desktop Environment\n"
 "http://www.xfce.org\n"
 msgstr ""
-"%s, 版本 %s\n"
-"XFce桌面环境的组成部分\n"
+"%s, verzió: %s\n"
+"Az XFce Grafikus Felhasználói felület része\n"
 "http://www.xfce.org\n"
 
 #: panel/main.c:275
@@ -135,336 +135,335 @@ msgid ""
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"你的窗口管理器似乎不支持http://www.freedesktop.org所定义的新的窗口管理器提"
-"示 \n"
-"某些XFce的功能可能无法正常运行。"
+"Az Ön ablakkezelője nem támogatja a http://www.freedesktop.org honlapon "
+"definiált ajánlásokat. \n"
+"Lehetséges, hogy bizonyos funkciók nem fognak megfelelően működni."
 
 #: panel/controls.c:320 panel/panel.c:123
 msgid "/Add _new item"
-msgstr "/添加新条目(_N)"
+msgstr "/Új elem _hozzáadása"
 
 #: panel/controls.c:322 panel/panel.c:125
 msgid "/_Properties..."
-msgstr "/属性(_P)..."
+msgstr "/_Beállítások..."
 
 #: panel/controls.c:323
 msgid "/_Remove"
-msgstr "/删除(_R)"
+msgstr "/_Eltávolítás"
 
 #: panel/controls.c:655
 msgid "This item has no configuration options"
-msgstr "该条目没有配置选项"
+msgstr "Ennek az elemnek nincsenek beállításai"
 
 #: panel/panel.c:121
 msgid "/XFce Panel"
-msgstr "/XFce启动面板"
+msgstr "/XFce indítópult"
 
 #: panel/panel.c:126
 msgid "/_Settings manager"
-msgstr "/配置管理器(_S)"
+msgstr "/_Vezérlőpult"
 
 #: panel/panel.c:128
 msgid "/_About XFce"
-msgstr "/关于XFce(_A)"
+msgstr "/Az _XFce névjegye"
 
 #: panel/panel.c:129
 msgid "/_Help"
-msgstr "/帮助(_H)"
+msgstr "/_Súgó"
 
 #: panel/panel.c:131
 msgid "/_Lock screen"
-msgstr "/锁住屏幕(_L)"
+msgstr "/Képernyő _zárolása"
 
 #: panel/panel.c:132
 msgid "/E_xit"
-msgstr "/退出(_X)"
+msgstr "/_Kilépés"
 
 #: panel/panel.c:469 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:641
 msgid "XFce Panel"
-msgstr "XFce面板"
+msgstr "XFce Indítópult"
 
 #: panel/icons.c:73
 msgid "Default"
-msgstr "默认"
+msgstr "Alapértelmezett"
 
 #: panel/icons.c:74
 msgid "Editor"
-msgstr "编辑器"
+msgstr "Szerkesztő"
 
 #: panel/icons.c:75
 msgid "File management"
-msgstr "文件管理"
+msgstr "Fájlkezelés"
 
 #: panel/icons.c:76
 msgid "Utilities"
-msgstr "公用程序"
+msgstr "Segédprogramok"
 
 #: panel/icons.c:77
 msgid "Games"
-msgstr "游戏"
+msgstr "Játékok"
 
 #: panel/icons.c:78
 msgid "Help browser"
-msgstr "帮助浏览器"
+msgstr "Súgó"
 
 #: panel/icons.c:79
 msgid "Multimedia"
-msgstr "多媒体"
+msgstr "Multimédia"
 
 #: panel/icons.c:80
 msgid "Network"
-msgstr "网络"
+msgstr "Hálózat"
 
 #: panel/icons.c:81
 msgid "Graphics"
-msgstr "图形"
+msgstr "Grafika"
 
 #: panel/icons.c:82
 msgid "Printer"
-msgstr "打印机"
+msgstr "Nyomtató"
 
 #: panel/icons.c:83
 msgid "Productivity"
-msgstr "生产力"
+msgstr "Munka"
 
 #: panel/icons.c:84
 msgid "Sound"
-msgstr "声音"
+msgstr "Hang"
 
 #: panel/icons.c:85
 msgid "Terminal"
-msgstr "终端"
+msgstr "Terminál"
 
 #: panel/mcs_client.c:208
 msgid "Settings manager not available"
-msgstr "配置管理器不可用"
+msgstr "A vezérlőpult nem elérhető"
 
 #: panel/popup.c:255
 msgid "Menu"
-msgstr "菜单"
+msgstr "Menü:"
 
 #: settings/xfce_settings_dialog.c:119
 msgid "Tiny"
-msgstr "极小"
+msgstr "Apró"
 
 #: settings/xfce_settings_dialog.c:123
 msgid "Small"
-msgstr "小"
+msgstr "Kicsi"
 
 #: settings/xfce_settings_dialog.c:127
 msgid "Medium"
-msgstr "中"
+msgstr "Közepes"
 
 #: settings/xfce_settings_dialog.c:131
 msgid "Large"
-msgstr "大"
+msgstr "Nagy"
 
 #: settings/xfce_settings_dialog.c:182
 msgid "Horizontal"
-msgstr "水平"
+msgstr "Vízszintes"
 
 #: settings/xfce_settings_dialog.c:186
 msgid "Vertical"
-msgstr "竖直"
+msgstr "Függőleges"
 
 #: settings/xfce_settings_dialog.c:218 settings/xfce_settings_dialog.c:448
 msgid "Left"
-msgstr "左侧"
+msgstr "Bal"
 
 #: settings/xfce_settings_dialog.c:222 settings/xfce_settings_dialog.c:449
 msgid "Right"
-msgstr "右侧"
+msgstr "Jobb"
 
 #: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:447
 #: settings/xfce_settings_dialog.c:503
 msgid "Top"
-msgstr "顶部"
+msgstr "Felül"
 
 #: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:446
 #: settings/xfce_settings_dialog.c:511
 msgid "Bottom"
-msgstr "底部"
+msgstr "Alul"
 
 #: settings/xfce_settings_dialog.c:366
 msgid "Panel size:"
-msgstr "面板大小:"
+msgstr "Méret:"
 
 #: settings/xfce_settings_dialog.c:382
 msgid "Panel orientation:"
-msgstr "面板方向:"
+msgstr "Tájolás:"
 
 #: settings/xfce_settings_dialog.c:399
 msgid "Popup position:"
-msgstr "弹出菜单位置:"
+msgstr "Előugrás helye:"
 
 #: settings/xfce_settings_dialog.c:416
 msgid "Icon theme:"
-msgstr "图标主题:"
+msgstr "Ikon téma:"
 
 #: settings/xfce_settings_dialog.c:487
 msgid "Panel layer:"
-msgstr "面板所在图层:"
+msgstr "Réteg:"
 
 #: settings/xfce_settings_dialog.c:507
 msgid "Normal"
-msgstr "正常"
+msgstr "Normál"
 
 #: settings/xfce_settings_dialog.c:527
 msgid "Center the panel:"
-msgstr "面板居中:"
+msgstr "Középre helyezés:"
 
 #: settings/xfce_settings_dialog.c:551
 msgid "Set"
-msgstr "配置"
+msgstr "Beállítás"
 
 #: settings/xfce_settings_dialog.c:587
 msgid "Autohide:"
-msgstr "自动隐藏"
+msgstr "Automatikus rejtés:"
 
 #: settings/xfce_settings_dialog.c:655
 msgid "XFce Panel Settings"
-msgstr "XFce面板配置"
+msgstr "XFce Indtópult Beállítások"
 
 #. Appearance
 #: settings/xfce_settings_dialog.c:667
 msgid "Appearance"
-msgstr "外观"
+msgstr "Megjelenés"
 
 #. Position
 #: settings/xfce_settings_dialog.c:688
 msgid "Position"
-msgstr "位置"
+msgstr "Elhelyezés"
 
 #. autohide
 #: settings/xfce_settings_dialog.c:704
 msgid "Behaviour"
-msgstr "行为"
+msgstr "Viselkedés"
 
 #: plugins/clock/clock.c:57
 msgid "Sunday"
-msgstr "星期天"
+msgstr "Vasárnap"
 
 #: plugins/clock/clock.c:58
 msgid "Monday"
-msgstr "星期一"
+msgstr "Hétfő"
 
 #: plugins/clock/clock.c:59
 msgid "Tuesday"
-msgstr "星期二"
+msgstr "Kedd"
 
 #: plugins/clock/clock.c:60
 msgid "Wednesday"
-msgstr "星期三"
+msgstr "Szerda"
 
 #: plugins/clock/clock.c:61
 msgid "Thursday"
-msgstr "星期四"
+msgstr "Csütörtök"
 
 #: plugins/clock/clock.c:62
 msgid "Friday"
-msgstr "星期五"
+msgstr "Péntek"
 
 #: plugins/clock/clock.c:63
 msgid "Saturday"
-msgstr "星期六"
+msgstr "Szombat"
 
 #: plugins/clock/clock.c:67
 msgid "January"
-msgstr "一月"
+msgstr "Január"
 
 #: plugins/clock/clock.c:68
 msgid "February"
-msgstr "二月"
+msgstr "Február"
 
 #: plugins/clock/clock.c:69
 msgid "March"
-msgstr "三月"
+msgstr "Március"
 
 #: plugins/clock/clock.c:70
 msgid "April"
-msgstr "四月"
+msgstr "Április"
 
 #: plugins/clock/clock.c:71
 msgid "May"
-msgstr "五月"
+msgstr "Május"
 
 #: plugins/clock/clock.c:72
 msgid "June"
-msgstr "六月"
+msgstr "Június"
 
 #: plugins/clock/clock.c:73
 msgid "July"
-msgstr "七月"
+msgstr "Július"
 
 #: plugins/clock/clock.c:74
 msgid "August"
-msgstr "八月"
+msgstr "Augusztus"
 
 #: plugins/clock/clock.c:75
 msgid "September"
-msgstr "Wrzesień"
+msgstr "Szeptember"
 
 #: plugins/clock/clock.c:76
 msgid "October"
-msgstr "十月"
+msgstr "Október"
 
 #: plugins/clock/clock.c:77
 msgid "November"
-msgstr "十一月"
+msgstr "November"
 
 #: plugins/clock/clock.c:78
 msgid "December"
-msgstr "十二月"
+msgstr "December"
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"
-msgstr "钟表类型:"
+msgstr "Óra típusa:"
 
 #: plugins/clock/clock.c:363
 msgid "Analog"
-msgstr "模拟式"
+msgstr "Analóg"
 
 #: plugins/clock/clock.c:367
 msgid "Digital"
-msgstr "数字式"
+msgstr "Digitális"
 
 #: plugins/clock/clock.c:371
 msgid "LED"
-msgstr "数字液晶显示"
+msgstr "LED"
 
 #: plugins/clock/clock.c:433
 msgid "Hour mode:"
-msgstr "Tryb godzin"
+msgstr "Kijelző módja:"
 
 #: plugins/clock/clock.c:440
 msgid "24 hour"
-msgstr "24小时"
+msgstr "24 órás"
 
 #: plugins/clock/clock.c:446
 msgid "12 hour"
-msgstr "12小时"
+msgstr "12 órás"
 
 #: plugins/clock/clock.c:452
 msgid "AM/PM"
-msgstr "AM/PM"
+msgstr "De/Du"
 
 #: plugins/clock/clock.c:490
 msgid "Show seconds:"
-msgstr "显示秒:"
+msgstr "Másodpercek kijelzése:"
 
 #: plugins/clock/clock.c:599
 msgid "Xfce Clock"
-msgstr "XFce时钟"
+msgstr "XFce óra"
 
 #: plugins/pager/pager.c:277
-#, fuzzy
 msgid "Graphical pager"
-msgstr "图形化的窗口切换器"
+msgstr "Grafikus munkaterület váltó"
 
 #: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
-msgstr "桌面切换器"
+msgstr "Munkaterület váltó"
 
 #: plugins/systembuttons/systembuttons.c:60
 msgid ""
@@ -472,83 +471,70 @@ msgid ""
 "\n"
 "Ask your system administrator for more information"
 msgstr ""
-"配置系统的使用已被禁止。\n"
+"Nem lehet hozzáférni a beállításokhoz.\n"
 "\n"
-"请向你的系统管理员咨询以得到更多的信息"
+"Forduljon a rendszergazdához!"
 
 #: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
-msgstr "锁住屏幕"
+msgstr "Képernyő zárolása"
 
 #: plugins/systembuttons/systembuttons.c:149
 #: plugins/systembuttons/systembuttons.c:586
 msgid "Exit"
-msgstr "退出"
+msgstr "Kilépés"
 
 #: plugins/systembuttons/systembuttons.c:150
 #: plugins/systembuttons/systembuttons.c:587
 msgid "Setup"
-msgstr "设置"
+msgstr "Beállítások"
 
 #: plugins/systembuttons/systembuttons.c:151
 #: plugins/systembuttons/systembuttons.c:588
 msgid "Info"
-msgstr "信息"
+msgstr "Információ"
 
 #: plugins/systembuttons/systembuttons.c:568
 msgid "Show two buttons:"
-msgstr "显示两个按钮"
+msgstr "Két gomb megjelenítése:"
 
 #. set names to use in option menus
 #: plugins/systembuttons/systembuttons.c:585
 msgid "Lock"
-msgstr "锁住"
+msgstr "Zárolás"
 
 #: plugins/systembuttons/systembuttons.c:617
 msgid "Button 1:"
-msgstr "按钮1:"
+msgstr "1-es gomb:"
 
 #: plugins/systembuttons/systembuttons.c:633
 msgid "Button 2:"
-msgstr "按钮2:"
+msgstr "2-es gomb:"
 
 #: plugins/systembuttons/systembuttons.c:668
 msgid "System buttons"
-msgstr "系统按钮"
+msgstr "Rendszer-gombok"
 
 #: plugins/separator/separator.c:153
 msgid "Separator"
-msgstr "分隔线"
+msgstr "Elválasztó"
 
 #: plugins/mailcheck/mailcheck.c:539
 msgid "Mail box:"
-msgstr "邮件箱:"
+msgstr "Postafiók:"
 
 #: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
-msgstr "邮件命令:"
+msgstr "Levelező program:"
 
 #: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
-msgstr "在面板上点击该按钮时所执行的命令"
+msgstr "A panelen lévő gomb megnyomására elinduló program"
 
 #: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
-msgstr "间隔(秒):"
+msgstr "Frissítés (mp):"
 
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
-msgstr "检查邮件"
-
-#~ msgid "_Revert"
-#~ msgstr "恢复(_R)"
-
-#~ msgid "_Done"
-#~ msgstr "完成(_D)"
-
-#~ msgid "Type:"
-#~ msgstr "类型:"
-
-#, fuzzy
-#~ msgid "Add item"
-#~ msgstr "添加新条目"
+msgstr "Új levelek keresése"
