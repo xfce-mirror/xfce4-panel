@@ -990,9 +990,6 @@ create_panel_framework (Panel * p)
 				   (gpointer *) & (p->toplevel));
     }
 
-    /* this is necessary after a SIGUSR */
-    gtk_window_stick (GTK_WINDOW (p->toplevel));
-
     /* Connect signalers to window for autohide */
     g_signal_connect (p->toplevel, "enter-notify-event",
 		      G_CALLBACK (panel_enter), p);
@@ -1235,6 +1232,15 @@ panel_set_layer (int layer)
     
     if (panel.priv->is_created)
     {
+	set_window_layer (panel.toplevel, layer);
+
+	if (layer == ABOVE)
+	    gtk_window_present (GTK_WINDOW (panel.toplevel));
+	
+	update_partial_struts (&panel, panel.position.x, panel.position.y);
+	
+#if 0
+	/* dock type hint */
 	gboolean autohide = panel.priv->settings.autohide;
 
 	if (autohide)
@@ -1256,11 +1262,11 @@ panel_set_layer (int layer)
 	
 	/* make sure it is really shown before setting struts */
 	gtk_widget_show_now (panel.toplevel);
-
+	
 	if (autohide)
 	    panel_set_autohide (TRUE);
 
-	update_partial_struts (&panel, panel.position.x, panel.position.y);
+#endif
     }
 }
 
@@ -1538,16 +1544,20 @@ panel_parse_xml (xmlNodePtr node)
 	    value = xmlGetProp (child, (const xmlChar *) "x");
 
 	    if (value)
+	    {
 		panel.position.x = (int) strtol (value, NULL, 0);
 
-	    g_free (value);
+		g_free (value);
+	    }
 
 	    value = xmlGetProp (child, (const xmlChar *) "y");
 
 	    if (value)
+	    {
 		panel.position.y = (int) strtol (value, NULL, 0);
 
-	    g_free (value);
+		g_free (value);
+	    }
 	}
     }
 }
@@ -1577,6 +1587,21 @@ panel_write_xml (xmlNodePtr root)
 	xmlSetProp (node, "icontheme", settings.theme);
 
     child = xmlNewTextChild (node, NULL, "Position", NULL);
+
+    snprintf (value, 5, "%d", panel.priv->monitor);
+    xmlSetProp (child, "monitor", value);
+
+    snprintf (value, 5, "%d", panel.priv->side);
+    xmlSetProp (child, "side", value);
+
+    snprintf (value, 5, "%d", panel.priv->pos_state);
+    xmlSetProp (child, "posstate", value);
+
+    if (panel.priv->pos_state == XFCE_POS_STATE_NONE)
+    {
+	snprintf (value, 5, "%d", panel.priv->offset);
+	xmlSetProp (child, "offset", value);
+    }
 
     snprintf (value, 5, "%d", panel.position.x);
     xmlSetProp (child, "x", value);
