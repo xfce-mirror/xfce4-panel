@@ -1,19 +1,67 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Using the panel</title><meta name="generator" content="DocBook XSL Stylesheets V1.58.1"><link rel="home" href="xfce4-panel.html" title="XFce Panel Manual V0.2"><link rel="up" href="xfce4-panel.html" title="XFce Panel Manual V0.2"><link rel="previous" href="panel-getting-started.html" title="Getting Started"><link rel="next" href="panel-settings.html" title="Panel Preferences"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Using the panel</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="panel-getting-started.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="panel-settings.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-use"></a>Using the panel</h2></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="panel-items"></a>Panel Items</h3></div></div><p>Most items perform an action when clicked. Right-clicking will
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Panel components</title><meta name="generator" content="DocBook XSL Stylesheets V1.58.1"><link rel="home" href="xfce4-panel.html" title="XFce Panel Manual V0.3"><link rel="up" href="xfce4-panel.html" title="XFce Panel Manual V0.3"><link rel="previous" href="panel-getting-started.html" title="Getting Started"><link rel="next" href="panel-settings.html" title="Panel Preferences"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Panel components</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="panel-getting-started.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="panel-settings.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a name="panel-use"></a>Panel components</h2></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="panel-items"></a>Panel Items</h3></div></div><p>Most items perform an action when clicked. Right-clicking will
       open a popup menu. You can add panel items from the right-click menu 
       on another item or one of the move handles. To remove panel items use
       the right-click menu or the 'Remove' button in the item properties 
       dialog. 
     </p><div class="figure"><a name="item-popup-fig"></a><p class="title"><b>Figure 3. Item popup menu</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/item-popup.png" alt="Shows item popup menu."></div></div></div><p>The properties dialog can be opened from the right-click menu on
       the item. Each type of panel item has its own configuration dialog.
-      You can also change to another item type in this dialog, e.g. turn
-      a launcher icon into a clock or vice versa.
-    </p><p> </p><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="laucher-item"></a>Laucher</h4></div></div><div class="figure"><a name="launcher-fig"></a><p class="title"><b>Figure 4. Launcher item</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/launcher-properties.png" alt="Shows properties dialog for laucher item."></div></div></div><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="clock-item"></a>XFce Clock</h4></div></div><div class="figure"><a name="clock-fig"></a><p class="title"><b>Figure 5. Clock item</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/clock-properties.png" alt="Shows properties dialog for clock item."></div></div></div><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="mailcheck-item"></a>Mail Check</h4></div></div><div class="figure"><a name="mailcheck-fig"></a><p class="title"><b>Figure 6. Mailcheck item</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/mailcheck-properties.png" alt="Shows properties dialog for mailcheck item."></div></div></div><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="switcher-item"></a>Desktop Switcher</h4></div></div><div class="figure"><a name="nooptions-fig"></a><p class="title"><b>Figure 7. Item without options</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/nooptions-properties.png" alt="Shows properties dialog for item without options.
-	      "></div></div></div><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="pager-item"></a>Graphical Pager</h4></div></div><p>Like the desktop switcher, this module doesn't have an options
-	to set, so the dialog will look like 
-	<a href="panel-use.html#nooptions-fig" title="Figure 7. Item without options">Figure 7</a>.
-      </p><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="systembuttons-item"></a>System Buttons</h4></div></div><div class="figure"><a name="systembuttons-fig"></a><p class="title"><b>Figure 8. Item without options</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/systembuttons-properties.png" alt="Shows properties dialog for systembuttons item.
-	      "></div></div></div><p> </p></div><p> </p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="subpanels"></a>Subpanels</h3></div></div><p>Panel items can have a subpanel associated with it, which can
+      Every dialog offers at least these options:</p><div class="itemizedlist"><ul type="disc"><li>Change to another item type, e.g. turn a launcher icon into a 
+	clock or vice versa.</li><li>Change the position of the item on the panel.</li><li>When you change anything on in the dialog, the 
+	<b>Revert</b> button will be activated and you can 
+	always go back to the initial settings and the original panel item.
+      </li><li>Remove the item.</li></ul></div><p> </p><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="laucher-item"></a>Laucher</h4></div></div><div class="figure"><a name="launcher-fig"></a><p class="title"><b>Figure 4. Launcher item</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/launcher-properties.png" alt="Shows properties dialog for laucher item."></div></div></div><p>The most common panel item is the laucher item. It allows you to
+	start programs from the panel. The properties dialog offers the
+	following options:
+      </p><div class="variablelist"><dl><dt><span class="term">Command</span></dt><dd>You can type the command to run or browse the file system
+	    by pressing the '<b>...</b>' button. There is an
+	    option to start in a terminal and one to use startup notification.
+	    This last option means that the window manager can show an
+	    hourglass while the program is loading. But, the apllication has
+	    to support that and not many program do at the moment. Programs
+	    build with Gtk 2.2, should support it.
+	  </dd><dt><span class="term">Icon</span></dt><dd>The panel provides a number of standard icons, that may be
+	    used. These icons will also follow the icon theme you choose from
+	    the panel settings dialog. Of course you can also choose a custom
+	    icon, either by browsing the file system from the 
+	    '<b>...</b>' button or by dropping an image on the
+	    preview area from a file manager.
+	  </dd><dt><span class="term">Tooltip</span></dt><dd>This is simply the tooltip the panel item will show if you
+	    hold the mouse over it.
+	  </dd></dl></div><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="clock-item"></a>XFce Clock</h4></div></div><div class="figure"><a name="clock-fig"></a><p class="title"><b>Figure 5. Clock item</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/clock-properties.png" alt="Shows properties dialog for clock item."></div></div></div><p>The Xfce clock has a number of options that determine the way it
+	looks. There are three clock types available, analog, digital and LED.
+	There is an option to show seconds and for the digital and LED clock
+	types you can choose whether the clock will be in 24 hour mode, 12
+	hour mode, or 12 hour mode with AM/PM indication. The clock shows the
+	current date as a tooltip. Clicking on the clock will not perform any
+	action.
+      </p><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="mailcheck-item"></a>Mail Check</h4></div></div><div class="figure"><a name="mailcheck-fig"></a><p class="title"><b>Figure 6. Mailcheck item</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/mailcheck-properties.png" alt="Shows properties dialog for mailcheck item."></div></div></div><p>The mailcheck item monitors your inbox, or any other mailbox you
+	want, as long as it is in mbox format. The mailbox icon will follow
+	your icon theme. You can choose the location of the mailbox, the
+	command to run when you click on the button and the interval between
+	checks. The command has the same options as the laucher item command
+	(see <a href="#laucher-item" target="_top">above</a>).
+      </p><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="switcher-item"></a>Desktop Switcher and Graphical Pager</h4></div></div><div class="figure"><a name="nooptions-fig"></a><p class="title"><b>Figure 7. Item without options</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/nooptions-properties.png" alt="Shows properties dialog for item without options.
+	      "></div></div></div><p>The panel provides two items that deal with virtual desktops. A 
+	CDE-like desktop switcher, that shows buttons with the desktop name 
+	and a graphical pager that shows a miniature view of the desktops and
+	even allows you to move windows to another workspace by dragging the
+	mini-window in the pager.</p><p> </p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a name="systembuttons-item"></a>System Buttons</h4></div></div><div class="figure"><a name="systembuttons-fig"></a><p class="title"><b>Figure 8. Systembuttons item</b></p><div class="screenshot"><div class="mediaobject"><img src="../images/systembuttons-properties.png" alt="Shows properties dialog for systembuttons item.
+	      "></div></div></div><p>A systembuttons item shows one or two buttons wich can perform
+	special system actions. The buttons follow your panel icon theme.
+	There are four buttons available:</p><div class="variablelist"><dl><dt><span class="term">Lock</span></dt><dd>Runs the <b><tt>xfrun4</tt></b> script that
+	    will attempt to lock the screen using either xscreensaver or if
+	    that fails xlock.
+	  </dd><dt><span class="term">Exit</span></dt><dd>This will exit the panel and usually also end your X
+	    session, when you used <b><tt>startxfce4</tt></b> or 
+	    put the panel at the end of your X startup file.
+	  </dd><dt><span class="term">Info</span></dt><dd>The info button will show the 
+	    <span class="emphasis"><em>About XFce 4</em></span> dialog.
+	  </dd><dt><span class="term">Setup</span></dt><dd>Pressing the setup button will open the XFce settings
+	    manager dialog, from which you have acces to the settings for all
+	    XFce components as well as some system settings, such as mouse
+	    behaviour and user interface settings.
+	  </dd></dl></div><p> </p></div><p> </p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a name="subpanels"></a>Subpanels</h3></div></div><p>Panel items can have a subpanel associated with it, which can
       be opened by clicking on the button next to the item. 
     </p><p>Use the 'Add laucher' item at the top of a subpanel to add
     an item to a subpanel or drag an executable to this item from a

@@ -3,7 +3,7 @@
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY copyright SYSTEM "copyright.xml"> 
   <!ENTITY appversion "4.0"> 
-  <!ENTITY manrevision "0.2"> 
+  <!ENTITY manrevision "0.3"> 
   <!ENTITY date "February 2003"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
@@ -61,12 +61,7 @@ maintainers, etc. Commented out by default.
 
   <revhistory>
     <revision>
-      <revnumber>0.1</revnumber> 
-      <date>February 2003</date>
-      <authorinitials>jbh</authorinitials>
-    </revision>
-    <revision>
-      <revnumber>0.2</revnumber> 
+      <revnumber>0.3</revnumber> 
       <date>February 2003</date>
       <authorinitials>jbh</authorinitials>
     </revision>
@@ -168,7 +163,7 @@ maintainers, etc. Commented out by default.
 </sect1>
 
 <sect1 id="panel-use">
-  <title>Using the panel</title>
+  <title>Panel components</title>
 
   <sect2 id="panel-items">
     <title>Panel Items</title>
@@ -201,9 +196,18 @@ maintainers, etc. Commented out by default.
 
     <para>The properties dialog can be opened from the right-click menu on
       the item. Each type of panel item has its own configuration dialog.
-      You can also change to another item type in this dialog, e.g. turn
-      a launcher icon into a clock or vice versa.
-    </para>
+      Every dialog offers at least these options:</para>
+
+    <itemizedlist>
+      <listitem>Change to another item type, e.g. turn a launcher icon into a 
+	clock or vice versa.</listitem>
+      <listitem>Change the position of the item on the panel.</listitem>
+      <listitem>When you change anything on in the dialog, the 
+	<guibutton>Revert</guibutton> button will be activated and you can 
+	always go back to the initial settings and the original panel item.
+      </listitem>
+      <listitem>Remove the item.</listitem>
+    </itemizedlist>
 
     <para>&nbsp;</para>
 
@@ -231,6 +235,41 @@ maintainers, etc. Commented out by default.
 	</screenshot>
       </figure>
 
+      <para>The most common panel item is the laucher item. It allows you to
+	start programs from the panel. The properties dialog offers the
+	following options:
+      </para>
+
+      <variablelist>
+	<varlistentry>
+	  <term>Command</term>
+	  <listitem>You can type the command to run or browse the file system
+	    by pressing the '<guibutton>...</guibutton>' button. There is an
+	    option to start in a terminal and one to use startup notification.
+	    This last option means that the window manager can show an
+	    hourglass while the program is loading. But, the apllication has
+	    to support that and not many program do at the moment. Programs
+	    build with Gtk 2.2, should support it.
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Icon</term>
+	  <listitem>The panel provides a number of standard icons, that may be
+	    used. These icons will also follow the icon theme you choose from
+	    the panel settings dialog. Of course you can also choose a custom
+	    icon, either by browsing the file system from the 
+	    '<guibutton>...</guibutton>' button or by dropping an image on the
+	    preview area from a file manager.
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Tooltip</term>
+	  <listitem>This is simply the tooltip the panel item will show if you
+	    hold the mouse over it.
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+      
       <para>&nbsp;</para>
 
     </sect3>
@@ -259,6 +298,15 @@ maintainers, etc. Commented out by default.
 	</screenshot>
       </figure>
 
+      <para>The Xfce clock has a number of options that determine the way it
+	looks. There are three clock types available, analog, digital and LED.
+	There is an option to show seconds and for the digital and LED clock
+	types you can choose whether the clock will be in 24 hour mode, 12
+	hour mode, or 12 hour mode with AM/PM indication. The clock shows the
+	current date as a tooltip. Clicking on the clock will not perform any
+	action.
+      </para>
+      
       <para>&nbsp;</para>
 
     </sect3>
@@ -287,12 +335,20 @@ maintainers, etc. Commented out by default.
 	</screenshot>
       </figure>
 
+      <para>The mailcheck item monitors your inbox, or any other mailbox you
+	want, as long as it is in mbox format. The mailbox icon will follow
+	your icon theme. You can choose the location of the mailbox, the
+	command to run when you click on the button and the interval between
+	checks. The command has the same options as the laucher item command
+	(see <ulink url="#laucher-item" type="html">above</ulink>).
+      </para>
+	
       <para>&nbsp;</para>
 
     </sect3>
 
     <sect3 id="switcher-item">
-      <title>Desktop Switcher</title>
+      <title>Desktop Switcher and Graphical Pager</title>
 
       <figure id="nooptions-fig">
 	<title>Item without options</title> 
@@ -316,17 +372,11 @@ maintainers, etc. Commented out by default.
 	</screenshot>
       </figure>
 
-      <para>&nbsp;</para>
-
-    </sect3>
-
-    <sect3 id="pager-item">
-      <title>Graphical Pager</title>
-
-      <para>Like the desktop switcher, this module doesn't have an options
-	to set, so the dialog will look like 
-	<xref linkend="nooptions-fig"/>.
-      </para>
+      <para>The panel provides two items that deal with virtual desktops. A 
+	CDE-like desktop switcher, that shows buttons with the desktop name 
+	and a graphical pager that shows a miniature view of the desktops and
+	even allows you to move windows to another workspace by dragging the
+	mini-window in the pager.</para>
       
       <para>&nbsp;</para>
 
@@ -336,7 +386,7 @@ maintainers, etc. Commented out by default.
       <title>System Buttons</title>
 
       <figure id="systembuttons-fig">
-	<title>Item without options</title> 
+	<title>Systembuttons item</title> 
 	<screenshot>
 	  <mediaobject>
 	    <imageobject>
@@ -357,6 +407,41 @@ maintainers, etc. Commented out by default.
 	</screenshot>
       </figure>
 
+      <para>A systembuttons item shows one or two buttons wich can perform
+	special system actions. The buttons follow your panel icon theme.
+	There are four buttons available:</para>
+
+      <variablelist>
+	<varlistentry>
+	  <term>Lock</term>
+	  <listitem>Runs the <application>xfrun4</application> script that
+	    will attempt to lock the screen using either xscreensaver or if
+	    that fails xlock.
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Exit</term>
+	  <listitem>This will exit the panel and usually also end your X
+	    session, when you used <application>startxfce4</application> or 
+	    put the panel at the end of your X startup file.
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Info</term>
+	  <listitem>The info button will show the 
+	    <emphasis>About XFce 4</emphasis> dialog.
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Setup</term>
+	  <listitem>Pressing the setup button will open the XFce settings
+	    manager dialog, from which you have acces to the settings for all
+	    XFce components as well as some system settings, such as mouse
+	    behaviour and user interface settings.
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+      
       <para>&nbsp;</para>
 
     </sect3>
