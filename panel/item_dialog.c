@@ -80,7 +80,8 @@ static GtkWidget *menudialog = NULL;	/* keep track of this for signal
 
 static GtkTargetEntry entry[] = {
     {"text/uri-list", 0, 0},
-    {"STRING", 0, 1}
+    {"UTF8_STRING", 0, 1},
+    {"STRING", 0, 2}
 };
 
 static const char *keys[] = {
@@ -193,7 +194,7 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
     gchar *temp = NULL;
     gchar *buf = NULL;
     gchar *exec = NULL;
-    gchar **execp = NULL;
+    gchar *execp = NULL;
     XfceDesktopEntry *dentry;
 
     if (sd->data)
@@ -220,22 +221,25 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 				   xfce_desktop_entry_new (filename, keys,
 							   7)))
 	{
-
-	    if (xfce_desktop_entry_get_string (dentry, "Exec", FALSE, &exec)
-		&& exec)
-	    {
-		if (g_strrstr (exec, "%") != NULL)
-		{
-		    execp = g_strsplit (exec, "%", 0);
-		    g_free (exec);
-		    exec = g_strdup (execp[0]);
-		    g_strfreev (execp);
-		}
-		command_options_set_command (opts, exec, FALSE, FALSE);
-	    }
-
-	    g_object_unref (dentry);
+            xfce_desktop_entry_get_string (dentry, "Exec", FALSE, &exec);
+            g_object_unref (dentry);
+            g_free (filename);
 	}
+        else
+        {
+            exec = filename;
+        }
+
+        if (exec)
+        {
+            if ((execp = g_strrstr (exec, " %")) != NULL)
+            {
+                execp[0] = '\0';
+            }
+            
+            command_options_set_command (opts, exec, FALSE, FALSE);
+            g_free (exec);
+        }
     }
 
     gtk_drag_finish (context, sd->data != NULL, FALSE, time);
