@@ -53,7 +53,7 @@ add_container (GtkBox * box, GtkWidget * close, Control * control)
 
     align = gtk_alignment_new (0, 0, 1, 1);
     gtk_widget_show (align);
-    gtk_container_set_border_width (GTK_CONTAINER (align), 2 * BORDER - 2);
+    gtk_container_set_border_width (GTK_CONTAINER (align), BORDER);
     gtk_box_pack_start (box, align, TRUE, TRUE, 0);
 
     control_create_options (control, GTK_CONTAINER (align), close);
@@ -82,7 +82,7 @@ add_position_option (GtkBox * box, Control * control)
     int n;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (hbox), 2 * BORDER - 2);
+    gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
 

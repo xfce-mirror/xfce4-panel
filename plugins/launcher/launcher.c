@@ -51,6 +51,8 @@
 #define NUM_CATEGORIES   (XFCE_N_BUILTIN_ICON_CATEGORIES - 4)
 
 
+static XfceIconTheme *launcher_theme = NULL;
+
 /* typedefs */
 typedef struct _Entry Entry;
 typedef struct _Launcher Launcher;
@@ -81,8 +83,6 @@ struct _Launcher
     GtkWidget *iconbutton;
 };
 
-static XfceIconTheme *global_icon_theme = NULL;
-
 /* prototypes */
 static Launcher *launcher_new (void);
 
@@ -109,11 +109,11 @@ launcher_load_pixbuf (const char *file, int size)
         if (g_path_is_absolute (file))
             pb = xfce_pixbuf_new_from_file_at_size (file, size, size, NULL);
         else
-            pb = xfce_icon_theme_load (global_icon_theme, file, size);
+            pb = xfce_icon_theme_load (launcher_theme, file, size);
     }
 
     if (!pb)
-        pb = xfce_icon_theme_load_category (global_icon_theme, 0, size);
+        pb = xfce_icon_theme_load_category (launcher_theme, 0, size);
 
     return pb;
 }
@@ -341,17 +341,6 @@ xfce_control_class_init (ControlClass * cc)
 
 /* Macro that checks panel API version */
 XFCE_PLUGIN_CHECK_INIT
-
-/* destroy icon theme when unloading */
-G_MODULE_EXPORT void
-g_module_unload (GModule *gm)
-{
-    if (global_icon_theme)
-    {
-        g_object_unref (global_icon_theme);
-        global_icon_theme = NULL;
-    }
-}
 
 /* Launcher: plugin implementation *
  * ------------------------------- */
@@ -635,13 +624,10 @@ launcher_new (void)
                       G_CALLBACK (gtk_widget_destroyed), 
                       &(launcher->iconbutton));
 
-    if (G_UNLIKELY (global_icon_theme == NULL))
-    {
-        global_icon_theme = 
-            xfce_icon_theme_get_for_screen (
-                    gtk_widget_get_screen (launcher->box));
-    }
-    
+    if (G_UNLIKELY (!launcher_theme))
+        launcher_theme = xfce_icon_theme_get_for_screen (
+                gtk_widget_get_screen (launcher->iconbutton));
+
     return launcher;
 }
 
@@ -767,7 +753,7 @@ update_entry_icon (EntryDialog *ed)
 {
     const char *text;
     GdkPixbuf *pb;
-    
+
     text = gtk_entry_get_text (GTK_ENTRY (ed->icon_file));
         
     if (!text || !strlen (text))
@@ -779,7 +765,7 @@ update_entry_icon (EntryDialog *ed)
             ed->entry->icon = NULL;
         }
 
-        pb = xfce_icon_theme_load_category (global_icon_theme, 0,                                                           DLG_ICON_SIZE);
+        pb = xfce_icon_theme_load_category (launcher_theme, 0, DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ed->icon_img), pb);
         g_object_unref (pb);
     }
@@ -963,8 +949,7 @@ icon_menu_activated (GtkWidget *mi, EntryDialog *ed)
 
     n = CLAMP (n, 0, NUM_CATEGORIES);
 
-    cat = xfce_icon_theme_lookup_category (global_icon_theme, n, 
-                                           DLG_ICON_SIZE);
+    cat = xfce_icon_theme_lookup_category (launcher_theme, n, DLG_ICON_SIZE);
     
     if (!(start = strrchr (cat, G_DIR_SEPARATOR)))
         start = cat;
@@ -1017,11 +1002,7 @@ icon_menu_browse (GtkWidget *mi, EntryDialog *ed)
         gtk_editable_set_position (GTK_EDITABLE (ed->icon_file), -1);
         update_entry_icon (ed);
 
-        pb = xfce_pixbuf_new_from_file_at_size (file, DLG_ICON_SIZE,
-                                                DLG_ICON_SIZE, NULL);
-        if (!pb)
-            pb = xfce_icon_theme_load_category (global_icon_theme, 0, 
-                                                DLG_ICON_SIZE);
+        pb = launcher_load_pixbuf (file, DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ed->icon_img), pb);
         g_object_unref (pb);
     }
@@ -1052,8 +1033,7 @@ create_icon_category_menu (EntryDialog *ed)
         g_signal_connect (mi, "activate", 
                           G_CALLBACK (icon_menu_activated), ed);
 
-        pb = xfce_icon_theme_load_category (global_icon_theme, i, 
-                                            MENU_ICON_SIZE);
+        pb = xfce_icon_theme_load_category (launcher_theme, i, MENU_ICON_SIZE);
         img = gtk_image_new_from_pixbuf (pb);
         gtk_widget_show (img);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
@@ -1299,6 +1279,75 @@ treeview_destroyed (GtkWidget * tv)
 
     store = gtk_tree_view_get_model (GTK_TREE_VIEW (tv));
     gtk_list_store_clear (GTK_LIST_STORE (store));
+}
+
+static void
+launcher_dialog_add_entry_after (LauncherDialog *ld, GtkTreeIter *prev_iter, 
+                                 Entry *new_e)
+{
+    Entry *e = NULL;
+    GList *l;
+    int n;
+    GtkTreeIter iter;
+    GtkTreeModel *model;
+    GtkTreePath *path;
+    
+    g_return_if_fail (new_e != NULL);
+
+    if (g_list_length (ld->launcher->items) == 6)
+    {
+        GtkRequisition req;
+
+        gtk_widget_size_request (ld->tree, &req);
+
+        gtk_widget_set_size_request (ld->tree, -1, req.height);
+
+        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (ld->scroll),
+                                        GTK_POLICY_NEVER, 
+                                        GTK_POLICY_ALWAYS);
+    }
+
+    model = gtk_tree_view_get_model (GTK_TREE_VIEW (ld->tree));
+    
+    if (prev_iter)
+        gtk_tree_model_get (model, prev_iter, 0, &e, -1);
+    
+    if (!e)
+    {
+        ld->launcher->items = g_list_append (ld->launcher->items, new_e);
+        gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+        gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, new_e, -1);
+    }
+    else
+    {
+        if (e == ld->launcher->entry)
+        {
+            ld->launcher->items = g_list_prepend (ld->launcher->items, new_e);
+        }
+        else
+        {
+            for (n = 1, l = ld->launcher->items; l != NULL; l = l->next, ++n)
+            {
+                if (e == (Entry *)l->data)
+                {
+                    ld->launcher->items = 
+                        g_list_insert (ld->launcher->items, new_e, n);
+
+                    break;
+                }
+            }
+        }
+
+        gtk_list_store_insert_after (GTK_LIST_STORE (model), &iter, 
+                                     prev_iter);
+        gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, new_e, -1);
+    }
+
+    path = gtk_tree_model_get_path (model, &iter);
+    gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, FALSE);
+    gtk_tree_path_free (path);
+
+    gtk_widget_show (ld->launcher->arrowbutton);
 }
 
 static gboolean
@@ -1671,57 +1720,15 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
     }
     else if (b == ld->add)
     {
-        GList *l;
-        int n;
         Entry *e2;
-        
-        iter2 = iter;
         
         e2 = g_new0 (Entry, 1);
         e2->name = g_strdup (_("New item"));
         e2->comment = g_strdup (_("This item has not yet been configured"));
         e2->icon = g_strdup ("xfce-unknown");
         
-        if (e == ld->launcher->entry)
-        {
-            ld->launcher->items = g_list_prepend (ld->launcher->items, e2);
-        }
-        else
-        {
-            for (n = 1, l = ld->launcher->items; l != NULL; l = l->next, ++n)
-            {
-                if (e == (Entry *)l->data)
-                {
-                    ld->launcher->items = 
-                        g_list_insert (ld->launcher->items, e2, n);
+        launcher_dialog_add_entry_after (ld, &iter, e2);
 
-                    break;
-                }
-            }
-        }
-
-        if (g_list_length (ld->launcher->items) == 7)
-        {
-            GtkRequisition req;
-
-            gtk_widget_size_request (ld->tree, &req);
-
-            gtk_widget_set_size_request (ld->tree, -1, req.height);
-
-            gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (ld->scroll),
-                                            GTK_POLICY_NEVER, 
-                                            GTK_POLICY_ALWAYS);
-        }
-
-        gtk_list_store_insert_after (GTK_LIST_STORE (model), &iter, &iter2);
-        gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, e2, -1);
-
-        path = gtk_tree_model_get_path (model, &iter);
-        gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, FALSE);
-        gtk_tree_path_free (path);
-
-        gtk_widget_show (ld->launcher->arrowbutton);
-        
         if (G_UNLIKELY (!ld->dlg))
             ld->dlg = gtk_widget_get_toplevel (ld->tree);
 
@@ -1794,21 +1801,21 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
     gtk_widget_show (img);
     gtk_container_add (GTK_CONTAINER (b), img);
 
-    ld->edit = b = gtk_button_new_from_stock (GTK_STOCK_EDIT);
+    ld->edit = b = gtk_button_new_with_mnemonic (_("_Edit"));
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), b, TRUE, TRUE, 0);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
     ld->add = b = gtk_button_new_from_stock (GTK_STOCK_ADD);
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), b, TRUE, TRUE, 0);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
     ld->remove = b = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), b, TRUE, TRUE, 0);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
@@ -1863,16 +1870,198 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
 }
 
 /* dnd */
-static void 
-entry_dialog_data_received (GtkWidget *tv, GList *data, gpointer user_data)
+static char *
+file_uri_to_local (const char *uri)
 {
-    /*EntryDialog *ed = user_data;*/
+    const char *s;
+
+    s = uri;
+    
+    if (!strncmp (s, "file:", 5))
+    {
+        s += 5;
+        
+        if (!strncmp (s, "//", 2))
+            s += 2;
+    }
+
+    /* decode %-stuff */
+
+    return g_strdup (s);
+}
+
+static const char *dentry_keys [] = {
+    "Name",
+    "GenericName",
+    "Comment",
+    "Exec",
+    "Icon",
+    "Terminal",
+    "StartupNotify",
+    "OnlyShowIn"
+};
+
+static Entry *
+create_entry_from_desktop_file (const char *path)
+{
+    XfceDesktopEntry *dentry;
+    Entry *e = g_new0 (Entry, 1);
+
+    if ((dentry = xfce_desktop_entry_new (path, dentry_keys, 
+                                          G_N_ELEMENTS (dentry_keys))))
+    {
+        char *value;
+
+        xfce_desktop_entry_get_string (dentry, "OnlyShowIn", FALSE, 
+                                       &value);
+
+        if (value && !strcmp ("XFCE", value))
+        {
+            g_free (value);
+            xfce_desktop_entry_get_string (dentry, "GenericName", FALSE,
+                                           &(e->name));            
+        }
+
+        if (!e->name)
+        {
+            xfce_desktop_entry_get_string (dentry, "Name", FALSE,
+                                           &(e->name));            
+        }
+        
+        xfce_desktop_entry_get_string (dentry, "Comment", FALSE,
+                                       &(e->comment));
+        
+        xfce_desktop_entry_get_string (dentry, "Icon", FALSE,
+                                       &(e->icon));
+
+        xfce_desktop_entry_get_string (dentry, "Exec", FALSE,
+                                       &(e->exec));
+
+        xfce_desktop_entry_get_string (dentry, "Terminal", FALSE,
+                                       &value);
+
+        if (value && 
+            (!strcmp ("1", value) || !strcmp ("true", value)))
+        {
+            e->terminal = TRUE;
+        }
+        
+        g_free (value);
+
+        xfce_desktop_entry_get_string (dentry, "StartupNotify", FALSE,
+                                       &value);
+
+        if (value && 
+            (!strcmp ("1", value) || !strcmp ("true", value)))
+        {
+            e->startup = TRUE;
+        }
+        
+        g_free (value);
+
+        g_object_unref (dentry);
+    }
+    else
+    {
+        g_free (e);
+        e = NULL;
+    }
+
+    return e;
+}
+
+static Entry *
+create_entry_from_file (const char *path)
+{
+    Entry *e = NULL;
+    
+    if (g_str_has_suffix (path, ".desktop"))
+    {
+        e = create_entry_from_desktop_file (path);
+    }
+    else 
+    {
+        const char *start, *end;
+        char *utf8;
+        
+        
+        if (!g_utf8_validate (path, -1, NULL))
+            utf8 = g_locale_to_utf8 (path, -1, NULL, NULL, NULL);
+        else
+            utf8 = g_strdup (path);
+    
+        
+        e = g_new0 (Entry, 1);
+        
+        e->exec = g_strdup (path);
+        
+        if (!(start = strrchr (utf8, G_DIR_SEPARATOR)))
+            start = utf8;
+        else
+            start++;
+        end = strrchr (start, '.');
+        e->name = g_strndup (start, end ? end - start : strlen (start));
+        e->icon = g_strup (e->name);
+
+        g_free (utf8);
+    }
+
+    return e;
+}
+
+static void 
+entry_dialog_data_received (GtkWidget *widget, GList *data, gpointer user_data)
+{
+    EntryDialog *ed = user_data;
+    Entry *e = NULL;
+
+    if (data && data->data)
+    {
+        if (g_str_has_suffix ((char *)data->data, ".desktop"))
+        {
+            e = create_entry_from_desktop_file ((char *)data->data);
+        }
+        else
+        {
+            /* do stuff based on the widget the file was dropped on */
+        }
+
+        if (e)
+        {
+            GdkPixbuf *pb;
+            
+            gtk_entry_set_text (GTK_ENTRY (ed->exec_name), e->name);
+            gtk_entry_set_text (GTK_ENTRY (ed->exec_comment), e->comment);
+            gtk_entry_set_text (GTK_ENTRY (ed->icon_file), e->icon);
+            gtk_entry_set_text (GTK_ENTRY (ed->exec), e->exec);
+            gtk_toggle_button_set_active (
+                    GTK_TOGGLE_BUTTON (ed->exec_terminal), e->terminal);
+            gtk_toggle_button_set_active (
+                    GTK_TOGGLE_BUTTON (ed->exec_startup), e->startup);
+
+            pb = launcher_load_pixbuf (e->icon, DLG_ICON_SIZE);
+            gtk_image_set_from_pixbuf (GTK_IMAGE (ed->icon_img), pb);
+            g_object_unref (pb);
+        }
+    }
 }
         
 static void 
 launcher_dialog_data_received (GtkWidget *tv, GList *data, gpointer user_data)
 {
-    /*LauncherDialog *ld = user_data;*/
+    LauncherDialog *ld = user_data;
+    GList *l;
+
+    for (l = data; l != NULL; l = l->next)
+    {
+        char *path = file_uri_to_local ((char *)l->data);
+        Entry *e = create_entry_from_file (path);
+
+        g_free (path);
+        
+        if (e)
+            launcher_dialog_add_entry_after (ld, NULL, e);
+    }
 }
         
 

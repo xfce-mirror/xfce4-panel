@@ -182,7 +182,7 @@ addtomenu_item_drop_cb (GtkWidget * widget,
 
             s = (char *) fnp->data;
 
-            if (!strncmp (s, "file", 5))
+            if (!strncmp (s, "file:", 5))
             {
                 s += 5;
 
