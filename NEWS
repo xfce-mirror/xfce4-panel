@@ -1,124 +1,59 @@
-Noteworthy updates to the xfce4 panel should be recorded here.
+NEWS for xfce4-panel
+====================
 
-* 2004-09-11 Jasper Huijsmans <jasper@xfce.org>
+4.1.91 (4.2 BETA2)
+==================
+- Several translation updates (Jean-Francois)
 
-Use basedit spec to locate config file. Rename xfce4rc to contents.xml.
+- Fix multihead support (Jasper)
 
-* 2004-09-06 Jasper Huijsmans <jasper@xfce.org>
+- Translucent panel when set on top. Needs xfwm4 with composite support and
+  XOrg >= 6.8.0 with composite extension enabled. (Olivier)
 
-Change the fallback (default) icons to the ones from the Rodent theme by
-Francois, very pretty.
 
-* 2004-07-26 Benedikt Meurer <benny@xfce.org>
+4.1.90 (4.2 BETA1)
+==================
+- Use basedir spec to locate config file. (Jasper)
 
-Add support for new KIOSK mode. Much better than env variables.
+- Rename xfce4rc to contents.xml. (Jasper)
 
-* 2004-07-21 Jasper Huijsmans <jasper@xfce.org>
+- Change the fallback (default) icons to the ones from the Rodent theme 
+  by Francois, very pretty. (Jasper)
 
-Fix autohide and right-click menu interaction.
+- Add support for new KIOSK mode. Much better than env variables. (Benedikt)
 
-* 2004-06-18 Jasper Huijsmans <jasper@xfce.org>
+- Fix autohide and right-click menu interaction. (Jasper)
 
-  - Icon theme support : no more panel-specific themes, the panel will now
-    follow the icon theme set in the user interface dialog.
-  - Set partial struts and use a docktype window
+- Icon theme support : no more panel-specific themes, the panel will now
+  follow the icon theme set in the user interface dialog. (Jasper)
 
-* 2004-05-01  Jasper Huijsmans <jasper@xfce.org>
+- Set partial struts (Jasper)
 
-Add multihead support. The user needs to set DISPLAY properly to start a new
-panel on another screen.
+- Add multihead support. The user needs to set DISPLAY properly to start a 
+  new panel on another screen. (Jasper)
 
-* 2004-04-23  Jasper Huijsmans <jasper@xfce.org>
+- Update list of module list when opening dialog: remove uninstalled modules
+  (when not in use) and add newly installed ones. Based on idea of Scott 
+  Barron. (Jasper)
 
-Update list of module list when opening dialog: remove uninstalled modules
-(when not in use) and add newly installed ones. Based on idea of Scott Barron.
+- Use a dialog to add items to the panel, instead of a submenu. (Jasper)
 
-* 2004-04-09  Jasper Huijsmans <jasper@xfce.org>
+- Reduce handle width to show only one line of dots. (Jasper)
 
-Use a dialog to add items to the panel, instead of a submenu.
+- Split out the code for choosing a command and choosing an icon from
+  item_dialog.c. to make it available for use in other dialogs (plugins). The
+  mailcheck plugin makes use of it and of course the launcher dialog. (Jasper)
 
-* 2004-04-02  Jasper Huijsmans <jasper@xfce.org>
+- Implement module unloading. Add uniqueness setting to plugins. (Jasper)
 
-- Reduce handle width to show only one line of dots
-- disable completion combo, because it doesn't work on new installs
-- put 'Properties...' and 'Remove' in a submenu of panel item right-click
-  menus. May prevent some accidental removals.
+- Add pop3 email checking: Use 'pop3://username:password@host' as mailbox.
+  (Olivier)
 
-* 2004-01-18  Jasper Huijsmans <jasper@xfce.org>
+- Properly update arrow direction. Use this info to position the menus. Much
+  better. (Jasper)
 
-Split out the code for choosing a command and choosing an icon from
-item_dialog.c. to make it available for use in other dialogs (plugins). The
-mailcheck plugin makes use of it and of course the item dialog.
+- Add xrandr awareness. (Jasper)
 
-As a consequence the item dialog was redesigned a little. Doesn't look too bad
-IMHO.
-
-* 2004-01-10  Jasper Huijsmans <jasper@xfce.org>
-
-Add support for the completion combo from xfce4-modules, if libdbh is
-available at configure time.
-
-* 2004-01-07  Jasper Huijsmans <jasper@xfce.org>
-
-Implement module unloading. Add uniqueness setting to plugins.
-
-* 2003-12-15  Olivier Fourdan <fourdan@xfce.org>
-
-Add pop3 email checking: Use 'pop3://username:password@host' as mailbox.
-
-* 2003-12-03  Jasper Huijsmans <jasper@xfce.org>
-
-Properly update arrow direction. Use this info to position the menus. Much
-better.
-
-* 2003-11-07  Jasper Huijsmans <jasper@xfce.org>
-
-French documentation. Awesome.
-
-* 2003-10-25  Jasper Huijsmans <jasper@xfce.org>
-
-Add xrandr awareness.
-
-* 2003-10-10  Jasper Huijsmans <jasper@xfce.org>
-
-Add xinerama aware smart positioning. Keeps panel inside the screen and, if it
-was before, centered. Only autohide when panel is on one of the the screen 
-edges.
-
-* 2003-09-30  Jasper Huijsmans <huysmans@users.sourceforge.net>
-
-Fix crash when config file is corrupted. Still no clue about why the
-corruption occurs in the first place :( 
-
-* 2003-09-14  Jasper Huijsmans <huysmans@users.sourceforge.net>
-
-Documentation updated to new default configuration and other improvements.
-
-* 2003-08-07  Jasper Huijsmans <huysmans@users.sourceforge.net>
-
-Important i18n fix in xfce_support.c. Dialogs are now properly translated.
-
-* 2003-07-25  Jasper Huijsmans <huysmans@users.sourceforge.net>
-
-Improved autohide handling and reorientation.
-
-* 2003-07-18  Olivier Fourdan <fourdan@xfce.org>
-
-Update default configuration
-
-* 2003-07-18  Jasper Huijsmans <huysmans@users.sourceforge.net>
-
-Update plugin API to prevent old plugins from crashing the panel.
-
-* 2003-07-09  Jasper Huijsmans <huysmans@users.sourceforge.net>
-
-Removed 'revert' functionality from the panel. This changes plugin API. All
-plugins must be recompiled and plugins providing options need to update to use
-the new API.
-
-* 2003-06-17  Benedikt Meurer <Benedikt.Meurer@unix-ag.uni-siegen.de>
-
-Added async-exec patch to improve the responsiveness of the UI.
-
+- Add xinerama aware smart positioning. (Jasper)
 
 

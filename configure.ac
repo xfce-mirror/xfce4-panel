@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.1.90])
+AM_INIT_AUTOMAKE([xfce4-panel], [4.1.91])
 
 AM_CONFIG_HEADER([config.h])
 
