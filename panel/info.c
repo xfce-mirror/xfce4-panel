@@ -113,27 +113,25 @@ GtkWidget *create_scrolled_text_view(const char *file)
     return frame;
 }
 
-static GtkWidget *create_info_header(void)
+static void add_info_header(GtkWidget *vbox)
 {
-    GtkWidget *vbox1, *vbox2;
+    GtkWidget *vbox2;
     GdkPixbuf *logo_pb;
     GtkWidget *logo_im;
     GtkWidget *frame;
     GtkWidget *label;
 
-    vbox1 = gtk_vbox_new(FALSE, BORDER);
-    gtk_widget_show(vbox1);
-
     logo_pb = gdk_pixbuf_new_from_xpm_data((const char **)xfce_slogan);
     logo_im = gtk_image_new_from_pixbuf(logo_pb);
     g_object_unref(logo_pb);
     gtk_widget_show(logo_im);
-    gtk_box_pack_start(GTK_BOX(vbox1), logo_im, FALSE, FALSE, BORDER);
+    gtk_box_pack_start(GTK_BOX(vbox), logo_im, FALSE, FALSE, 0);
 
     frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_IN);
+    gtk_container_set_border_width(GTK_CONTAINER(frame), BORDER);
     gtk_widget_show(frame);
-    gtk_box_pack_start(GTK_BOX(vbox1), frame, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), frame, FALSE, FALSE, 0);
 
     vbox2 = gtk_vbox_new(FALSE, BORDER);
     gtk_container_set_border_width(GTK_CONTAINER(vbox2), BORDER);
@@ -149,8 +147,6 @@ static GtkWidget *create_info_header(void)
     gtk_widget_show(label);
     gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
     gtk_box_pack_start(GTK_BOX(vbox2), label, FALSE, FALSE, 0);
-
-    return vbox1;
 }
 
 static void add_info_page(GtkNotebook * notebook)
@@ -184,7 +180,7 @@ static void add_info_page(GtkNotebook * notebook)
 
     {
         GtkTextBuffer *tb = gtk_text_buffer_new(NULL);
-        char *info_text = (""
+        char *info_text = ("\n"
 "XFce is a collection of programs that together provide a full-featured\n"
 "desktop enviroment. The following programs are part of XFce:\n"
 "\n"
@@ -266,8 +262,7 @@ static void add_license_page(GtkNotebook * notebook)
 void info_panel_dialog(void)
 {
     GtkWidget *info;
-    GtkWidget *vbox;
-    GtkWidget *header;
+    GtkWidget *vbox, *vbox2;
     GtkWidget *notebook;
     GtkWidget *buttonbox;
     GtkWidget *info_ok_button;
@@ -278,15 +273,18 @@ void info_panel_dialog(void)
 
     /* Make the info dialog sticky */
     gtk_window_stick(GTK_WINDOW(info));
-    gtk_container_set_border_width(GTK_CONTAINER(info), BORDER);
 
-    vbox = gtk_vbox_new(FALSE, BORDER);
-    gtk_widget_show(vbox);
-    gtk_container_add(GTK_CONTAINER(info), vbox);
+    vbox2 = gtk_vbox_new(FALSE, 0);
+    gtk_widget_show(vbox2);
+    gtk_container_add(GTK_CONTAINER(info), vbox2);
 
     /* header with logo */
-    header = create_info_header();
-    gtk_box_pack_start(GTK_BOX(vbox), header, FALSE, FALSE, 0);
+    add_info_header(vbox2);
+
+    vbox = gtk_vbox_new(FALSE, BORDER);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), BORDER);
+    gtk_widget_show(vbox);
+    gtk_box_pack_start(GTK_BOX(vbox2), vbox, TRUE, TRUE, 0);
 
     /* the notebook */
     notebook = gtk_notebook_new();
