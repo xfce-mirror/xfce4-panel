@@ -1,8 +1,8 @@
 <?xml version='1.0'?> 
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-  <!ENTITY manrevision "1.1"> 
-  <!ENTITY date "Sep 2004"> 
+  <!ENTITY manrevision "1.2"> 
+  <!ENTITY date "November 2004"> 
   <!ENTITY appversion "4.2"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
@@ -737,12 +737,21 @@ maintainers, etc. Commented out by default.
 	    url="#panel-kiosk">next section</ulink> for an explanation.
 	</para></listitem>
       </varlistentry>
+
+      <varlistentry>
+	<term>&lt;basedir&gt;/xfce4/transparency</term>
+	<listitem>
+	  <para>Transparency configuration. Further explanation is given in
+	    <ulink url="#panel-transparency">this section</ulink> below.
+	  </para>
+	</listitem>
+      </varlistentry>
     </variablelist>
 
     <para>None of the configuration files, except 
-      <filename>kioskrc</filename>, are designed to be edited by hand; 
-      in fact the changes will be overwritten if you edit them while the 
-      panel and the settings manager are running.
+      <filename>kioskrc</filename> and <filename>transparency</filename>, are 
+      designed to be edited by hand; in fact the changes will be overwritten 
+      if you edit them while the panel and the settings manager are running.
     </para>
 
   </sect2>
@@ -770,6 +779,39 @@ CustomizePanel=%powerusers,foo
     </para>
     
   </sect2>
+
+  <sect2 id="panel-transparency">
+    <title>Transparency</title>
+
+    <para>Please, note that transparency only works with an X server that
+      supports the XComposite extension, like XOrg &gt;= 6.8.0 and the
+      composite extension has been enabled in the configuration file and
+      the window manager supports it (e.g. 
+      <application>xfwm4</application> has to be compiled with 
+      <option>--enable-composite</option>).
+    </para>
+
+    <para>By default the panel will be transparent unless the autohide option
+      has been set. When the mouse moves over the panel, the transparency will
+      be temporarily removed.
+    </para>
+
+    <para>You can create the file
+      <filename>&lt;basedir&gt;/xfce4/transparency</filename> if
+      you want to change the transparency value for the panel (or
+      the iconbox). Create the file and add a line with the format
+      <emphasis><option>panel=&lt;value&gt;</option></emphasis>, where
+      value is a number between 0 and 100. Setting it to 0 effectively turns
+      transparency off.
+    </para>
+    
+    <para>For example, a transparency file may look like this:</para>
+    
+<programlisting>panel=25
+iconbox=0</programlisting>	    
+    
+  </sect2>
+  
 </sect1>
   
   <!-- extra space -->

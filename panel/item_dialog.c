@@ -552,7 +552,7 @@ icon_browse_cb (GtkWidget * w, IconOptions * opts)
 
     text = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
 
-    file = select_file_with_preview (_("Select command"), text,
+    file = select_file_with_preview (NULL, text,
 				     gtk_widget_get_toplevel (opts->base));
 
     if (file && g_file_test (file, G_FILE_TEST_EXISTS) &&

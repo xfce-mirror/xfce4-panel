@@ -44,6 +44,7 @@
 #define HIDDEN_SIZE	3
 #define HANDLE_WIDTH	10
 #define SNAP_WIDTH	25
+#define OPAQUE          0xffffffff
 
 
 /* typedefs *
@@ -66,6 +67,11 @@ struct _PanelPrivate
     gboolean is_created;
     int block_autohide;
 };
+
+
+/* static globals *
+ * -------------- */
+static guint transparency = 0xc0000000;
 
 
 /* exported globals *
@@ -116,11 +122,55 @@ static void init_settings (Panel * p);
  * ------------------------------------------ */
 
 static void
+get_opacity_setting (void)
+{
+    char *file = 
+        xfce_resource_lookup (XFCE_RESOURCE_CONFIG,
+                              "xfce4" G_DIR_SEPARATOR_S "transparency");
+
+    if (file)
+    {
+        FILE *fp;
+        
+        if ((fp = fopen (file, "r")) != NULL)
+        {
+            char line[255];
+            guint trans;
+
+            while (fgets(line, sizeof (line), fp))
+            {
+                if (sscanf (line, "panel=%u", &trans) > 0)
+                {
+                    trans = CLAMP (trans, 0, 80);
+
+                    transparency = OPAQUE - rint ((double)trans * OPAQUE / 100);
+
+                    DBG ("transparency: %u\n", trans);
+                    DBG ("opacity: 0x%x\n", transparency);
+
+                    break;
+                }
+            }
+        }
+        
+        g_free (file);
+    }
+}
+
+static void
 set_opacity (Panel * p, gboolean translucent)
 {
+    static gboolean initialized = FALSE;
     guint opacity;
 
-    opacity = (translucent ? 0xc0000000 : 0xffffffff);
+    if (G_UNLIKELY (!initialized))
+    {
+        get_opacity_setting ();
+        
+        initialized = TRUE;
+    }
+    
+    opacity = (translucent ? transparency : OPAQUE);
     gdk_error_trap_push ();
 
     gdk_property_change (p->toplevel->window,
