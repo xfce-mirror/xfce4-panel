@@ -1,6 +1,7 @@
 #!/bin/sh
 
-aclocal --verbose \
+libtoolize --copy --force \
+  && aclocal --verbose \
   && autoheader \
   && automake --add-missing --copy --include-deps --foreign --gnu --verbose \
   && autoconf \
