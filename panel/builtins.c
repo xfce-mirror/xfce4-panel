@@ -25,9 +25,10 @@
 #include <sys/stat.h>
 #include <time.h>
 
+#include <xfce_iconbutton.h>
+
 #include "builtins.h"
 #include "controls.h"
-#include "iconbutton.h"
 #include "xfce_support.h"
 #include "icons.h"
 #include "iconbutton.h"
@@ -236,63 +237,52 @@ void create_exit(PanelControl * pc)
 /*  Config module
  *  -------------
 */
-static IconButton *config_new(void)
+static GtkWidget *config_new(void)
 {
-    IconButton *button;
-    GtkWidget *b;
+    GtkWidget *button;
     GdkPixbuf *pb = NULL;
 
     pb = get_system_pixbuf(MINIPALET_ICON);
-    button = icon_button_new(pb);
+    button = xfce_iconbutton_new_from_pixbuf(pb);
     g_object_unref(pb);
+    gtk_widget_show(button);
 
-    b = icon_button_get_button(button);
+    gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
 
-    add_tooltip(b, _("Setup..."));
+    add_tooltip(button, _("Setup..."));
 
-    g_signal_connect_swapped(b, "clicked", G_CALLBACK(mini_palet_cb), NULL);
+    g_signal_connect_swapped(button, "clicked", G_CALLBACK(mini_palet_cb), NULL);
 
     return button;
 }
 
-static void config_free(PanelControl * pc)
-{
-    IconButton *b = (IconButton *) pc->data;
-
-    icon_button_free(b);
-}
-
 static void config_set_size(PanelControl * pc, int size)
 {
-    IconButton *b = (IconButton *) pc->data;
-
-    icon_button_set_size(b, size);
+    int s = icon_size[size] + border_width;
+    
+    gtk_widget_set_size_request(pc->main, s, s);
 }
 
 static void config_set_theme(PanelControl * pc, const char *theme)
 {
     GdkPixbuf *pb;
-    IconButton *b = (IconButton *) pc->data;
-
+    int s = icon_size[settings.size] + border_width;
+    
     pb = get_system_pixbuf(MINIPALET_ICON);
-    icon_button_set_pixbuf(b, pb);
+    xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(pc->main), pb);
     g_object_unref(pb);
+    
+    gtk_widget_set_size_request(pc->main, s, s);
 }
 
 void create_config(PanelControl * pc)
 {
-    IconButton *config = config_new();
-    GtkWidget *b = icon_button_get_button(config);
+    GtkWidget *b = config_new();
 
     gtk_container_add(GTK_CONTAINER(pc->base), b);
     pc->caption = g_strdup(_("Setup"));
-    pc->data = (gpointer) config;
+    pc->data = (gpointer) b;
     pc->main = b;
-
-    pc->interval = 0;
-    pc->update = NULL;
-
-    pc->free = (gpointer) config_free;
 
     pc->set_size = (gpointer) config_set_size;
     pc->set_theme = (gpointer) config_set_theme;

@@ -30,28 +30,35 @@ struct _PanelControl
     int side;
     int index;
 
-    GtkContainer *container;    /* pointer to parent container */
-    GtkWidget *base;            /* base container for control */
-
     int id;
     char *filename;
     char *dir;
-    
-    /* provided by control */
     GModule *gmodule;
+    
+    /* pointer to parent container */
+    GtkContainer *container;
 
-    char *caption;
+    /* created by system to make sure we always have a widget */
+    GtkWidget *base;
+
+    /* provided by control */
+    
+    char *caption; /* used in dialogs; also serves as unique identifier */
     GtkWidget *main;
-    gpointer data;
+
+    gpointer data; /* this is the real panel control structure */
+
+    gboolean no_popup; /* module can hide it's popup menu */
 
     void (*read_config) (PanelControl * pc, xmlNodePtr node);
     void (*write_config) (PanelControl * pc, xmlNodePtr node);
 
-    void (*free) (PanelControl *);
+    void (*free) (PanelControl *pc);
 
+    /* dynamic modules */
     int interval;
     int timeout_id;
-    gboolean(*update) (PanelControl * pc);
+    gboolean (*update) (PanelControl * pc);
 
     /* global settings */
     void (*set_orientation) (PanelControl *pc, int orientation);
@@ -61,6 +68,7 @@ struct _PanelControl
 
     /* config dialog */
     int callback_id;            /* right click callback */
+    void (*connect_callback)(PanelControl *pc, GCallback func);
     void (*add_options) (PanelControl * pc, GtkContainer * container,
                          GtkWidget * revert, GtkWidget * done);
 };
@@ -91,6 +99,8 @@ void panel_control_set_style(PanelControl * pc, int style);
 void panel_control_set_theme(PanelControl * pc, const char *theme);
 
 /* config dialog */
+void panel_control_connect_callback(PanelControl *pc, GCallback func);
+
 void panel_control_add_options(PanelControl * pc, GtkContainer * container,
                                GtkWidget * revert, GtkWidget * done);
 
