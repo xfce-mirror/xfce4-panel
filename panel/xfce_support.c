@@ -651,292 +651,31 @@ select_file_with_preview (const char *title, const char *path,
  *  ------------------
 */
 
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-
-typedef struct
-{
-    GSList *contexts;
-    guint timeout_id;
-}
-StartupTimeoutData;
-static StartupTimeoutData *startup_timeout_data = NULL;
-
-static void
-sn_error_trap_push (SnDisplay * display, Display * xdisplay)
-{
-    gdk_error_trap_push ();
-}
-
-static void
-sn_error_trap_pop (SnDisplay * display, Display * xdisplay)
-{
-    gdk_error_trap_pop ();
-}
-
-extern char **environ;
-
-static gchar **
-make_spawn_environment_for_sn_context (SnLauncherContext *
-				       sn_context, char **envp)
-{
-    gchar **retval = NULL;
-    int i, j;
-    int desktop_startup_id_len;
-
-    if (envp == NULL)
-    {
-	envp = environ;
-    }
-    for (i = 0; envp[i]; i++);
-
-    retval = g_new (gchar *, i + 2);
-
-    desktop_startup_id_len = strlen ("DESKTOP_STARTUP_ID");
-
-    for (i = 0, j = 0; envp[i]; i++)
-    {
-	if (strncmp (envp[i], "DESKTOP_STARTUP_ID", desktop_startup_id_len) !=
-	    0)
-	{
-	    retval[j] = g_strdup (envp[i]);
-	    ++j;
-	}
-    }
-    retval[j] =
-	g_strdup_printf ("DESKTOP_STARTUP_ID=%s",
-			 sn_launcher_context_get_startup_id (sn_context));
-    ++j;
-    retval[j] = NULL;
-
-    return retval;
-}
-
-static gboolean
-startup_timeout (void *data)
-{
-    StartupTimeoutData *std = data;
-    GSList *tmp;
-    GTimeVal now;
-    int min_timeout;
-
-    min_timeout = STARTUP_TIMEOUT;
-
-    g_get_current_time (&now);
-
-    tmp = std->contexts;
-    while (tmp != NULL)
-    {
-	SnLauncherContext *sn_context = tmp->data;
-	GSList *next = tmp->next;
-	long tv_sec, tv_usec;
-	double elapsed;
-
-	sn_launcher_context_get_last_active_time (sn_context, &tv_sec,
-						  &tv_usec);
-
-	elapsed =
-	    ((((double) now.tv_sec - tv_sec) * G_USEC_PER_SEC +
-	      (now.tv_usec - tv_usec))) / 1000.0;
-
-	if (elapsed >= STARTUP_TIMEOUT)
-	{
-	    std->contexts = g_slist_remove (std->contexts, sn_context);
-	    sn_launcher_context_complete (sn_context);
-	    sn_launcher_context_unref (sn_context);
-	}
-	else
-	{
-	    min_timeout = MIN (min_timeout, (STARTUP_TIMEOUT - elapsed));
-	}
-
-	tmp = next;
-    }
-
-    if (std->contexts == NULL)
-    {
-	std->timeout_id = 0;
-    }
-    else
-    {
-	std->timeout_id = g_timeout_add (min_timeout, startup_timeout, std);
-    }
-
-    return FALSE;
-}
-
-static void
-add_startup_timeout (SnLauncherContext * sn_context)
-{
-    if (startup_timeout_data == NULL)
-    {
-	startup_timeout_data = g_new (StartupTimeoutData, 1);
-	startup_timeout_data->contexts = NULL;
-	startup_timeout_data->timeout_id = 0;
-    }
-
-    sn_launcher_context_ref (sn_context);
-    startup_timeout_data->contexts =
-	g_slist_prepend (startup_timeout_data->contexts, sn_context);
-
-    if (startup_timeout_data->timeout_id == 0)
-    {
-	startup_timeout_data->timeout_id =
-	    g_timeout_add (STARTUP_TIMEOUT, startup_timeout,
-			   startup_timeout_data);
-    }
-}
-
-void
-free_startup_timeout (void)
-{
-    StartupTimeoutData *std = startup_timeout_data;
-
-    if (!std)
-    {
-	/* No startup notification used, return silently */
-	return;
-    }
-
-    g_slist_foreach (std->contexts, (GFunc) sn_launcher_context_unref, NULL);
-    g_slist_free (std->contexts);
-
-    if (std->timeout_id != 0)
-    {
-	g_source_remove (std->timeout_id);
-	std->timeout_id = 0;
-    }
-
-    g_free (std);
-    startup_timeout_data = NULL;
-}
-
-#endif /* HAVE_LIBSTARTUP_NOTIFICATION */
-
 static void
 real_exec_cmd (const char *cmd, gboolean in_terminal,
 	       gboolean use_sn, gboolean silent)
 {
-    gchar *execute = NULL;
     GError *error = NULL;
-    gboolean success = TRUE;
-    gchar **free_envp = NULL;
-    gchar **envp = environ;
-    gchar **argv = NULL;
-    gboolean retval;
-
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    SnLauncherContext *sn_context = NULL;
-    SnDisplay *sn_display = NULL;
-#endif
-
-    if (g_path_is_absolute (cmd) && g_file_test (cmd, G_FILE_TEST_IS_DIR))
+    
+    if (!xfce_exec (cmd, in_terminal, use_sn, &error))
     {
-	if (in_terminal)
-	{
-	    execute = g_strdup_printf ("xfterm4 %s", cmd);
-	}
-	else
-	{
-	    execute = g_strdup_printf ("xftree4 %s", cmd);
-	}
-    }
-    else if (in_terminal)
-    {
-	execute = g_strdup_printf ("xfterm4 -e %s", cmd);
-    }
-    else
-    {
-	execute = g_strdup (cmd);
-    }
-
-    if (!g_shell_parse_argv (execute, NULL, &argv, &error))
-    {
-	g_free (execute);
 	if (error)
 	{
-	    g_warning ("%s: %s\n", PACKAGE, error->message);
-	    g_error_free (error);
-	}
-	return;
-    }
-
-    free_envp = NULL;
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    if (use_sn)
-    {
-	sn_display =
-	    sn_display_new (gdk_display, sn_error_trap_push,
-			    sn_error_trap_pop);
-	if (sn_display != NULL)
-	{
-	    sn_context =
-		sn_launcher_context_new (sn_display,
-					 DefaultScreen (gdk_display));
-	    if ((sn_context != NULL) &&
-		!sn_launcher_context_get_initiated (sn_context))
+	    char *msg = g_strcompress (error->message);
+	    
+	    if (silent)
 	    {
-		sn_launcher_context_set_binary_name (sn_context, execute);
-		sn_launcher_context_initiate (sn_context,
-					      g_get_prgname ()?
-					      g_get_prgname () : "unknown",
-					      argv[0], CurrentTime);
-		free_envp =
-		    make_spawn_environment_for_sn_context (sn_context, NULL);
-	    }
-	}
-    }
-#endif
-
-    g_free (execute);
-
-    if (silent)
-    {
-	retval =
-	    g_spawn_async (NULL, argv, free_envp ? free_envp : envp,
-			   G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
-	if (!retval)
-	{
-	    if (error)
-	    {
-		g_warning ("%s: %s\n", PACKAGE, error->message);
-		g_error_free (error);
-	    }
-	    success = FALSE;
-	}
-    }
-    else
-    {
-	success =
-	    exec_command_full_with_envp (argv, free_envp ? free_envp : envp);
-    }
-
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    if (use_sn)
-    {
-	if (sn_context != NULL)
-	{
-	    if (!success)
-	    {
-		sn_launcher_context_complete (sn_context);	/* end sequence */
+		g_warning ("%s", msg);
 	    }
 	    else
 	    {
-		add_startup_timeout (sn_context);
-		sn_launcher_context_unref (sn_context);
+		xfce_warn ("%s", msg);
 	    }
-	}
-	if (free_envp)
-	{
-	    g_strfreev (free_envp);
-	    free_envp = NULL;
-	}
-	if (sn_display)
-	{
-	    sn_display_unref (sn_display);
+
+	    g_free (msg);
+	    g_error_free (error);
 	}
     }
-#endif /* HAVE_LIBSTARTUP_NOTIFICATION */
-    g_strfreev (argv);
 }
 
 /*

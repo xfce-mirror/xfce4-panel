@@ -1,7 +1,7 @@
 /*  xfce_support.h
  *  
  *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
- *  startup notification added by Olivier fourdan based on gnome-desktop
+ *  startup notification added by Olivier Fourdan based on gnome-desktop
  *  developed by Elliot Lee <sopwith@redhat.com> and Sid Vicious
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -60,10 +60,6 @@ char *select_file_name (const char *title, const char *path,
 			GtkWidget * parent);
 char *select_file_with_preview (const char *title, const char *path,
 				GtkWidget * parent);
-
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-void free_startup_timeout (void);
-#endif
 
 /* executing programs */
 void exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn);

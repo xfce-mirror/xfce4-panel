@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.1.1])
+AM_INIT_AUTOMAKE([xfce4-panel], [4.1.2])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -40,7 +40,7 @@ BM_LIBX11_REQUIRE
 
 dnl Check for required packages
 BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.0.0])
-BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.0.0])
+BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.1.8])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 
 dnl Check for dbh installed

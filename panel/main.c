@@ -124,10 +124,6 @@ quit (gboolean force)
 
     save_panel ();
 
-#ifdef HAVE_LIBSTARTUP_NOTIFICATION
-    free_startup_timeout ();
-#endif
-
     panel_cleanup ();
 
     if (gtk_main_level ())
