@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 VERSION\n"
-"POT-Creation-Date: 2003-05-04 23:58+0200\n"
+"POT-Creation-Date: 2003-05-12 12:38+0200\n"
 "PO-Revision-Date: 24-01-03 12:43:34+0100\n"
 "Last-Translator: Jasper Huijsmans <huysmans@sourceforge.net>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -23,11 +23,11 @@ msgstr "Bestand selecteren"
 msgid "Change item"
 msgstr "Item aanpassen"
 
-#: panel/controls_dialog.c:271 panel/item_dialog.c:916
+#: panel/controls_dialog.c:271 panel/item_dialog.c:980
 msgid "_Revert"
 msgstr "_Herstellen"
 
-#: panel/controls_dialog.c:276 panel/item_dialog.c:922
+#: panel/controls_dialog.c:276 panel/item_dialog.c:986
 msgid "_Done"
 msgstr "_Sluiten"
 
@@ -35,7 +35,7 @@ msgstr "_Sluiten"
 msgid "Type:"
 msgstr "Type:"
 
-#: panel/controls_dialog.c:315 panel/item_dialog.c:545
+#: panel/controls_dialog.c:315 panel/item_dialog.c:593
 msgid "Position:"
 msgstr "Positie:"
 
@@ -49,73 +49,77 @@ msgstr ""
 "\n"
 "Wilt u het item verwijderen?"
 
-#: panel/item_dialog.c:260
+#: panel/item_dialog.c:267
 msgid "Other Icon"
 msgstr "Ander pictogram"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:292
 msgid "Select icon"
 msgstr "Pictogram selecteren"
 
-#: panel/item_dialog.c:322
+#: panel/item_dialog.c:329
 msgid "Icon:"
 msgstr "Pictogram:"
 
-#: panel/item_dialog.c:367
+#: panel/item_dialog.c:374
 msgid "Select command"
 msgstr "Commando selecteren"
 
-#: panel/item_dialog.c:394
+#: panel/item_dialog.c:401
 msgid "Command:"
 msgstr "Commando:"
 
-#: panel/item_dialog.c:426 plugins/mailcheck/mailcheck.c:670
+#: panel/item_dialog.c:433 plugins/mailcheck/mailcheck.c:670
 msgid "Run in _terminal"
 msgstr "Uitvoeren in _terminal"
 
-#: panel/item_dialog.c:431 plugins/mailcheck/mailcheck.c:678
+#: panel/item_dialog.c:438 plugins/mailcheck/mailcheck.c:678
 msgid "Use startup _notification"
 msgstr "Opstart-_notificatie gebruiken"
 
-#: panel/item_dialog.c:458
+#: panel/item_dialog.c:465
 msgid "Caption:"
 msgstr "Naam:"
 
-#: panel/item_dialog.c:497
+#: panel/item_dialog.c:504
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:637
+#: panel/item_dialog.c:540
+msgid "Subpanel:"
+msgstr "Subpanel:"
+
+#: panel/item_dialog.c:692
 msgid "Icon Preview"
 msgstr "Voorbeeld"
 
-#: panel/item_dialog.c:641
+#: panel/item_dialog.c:696
 msgid "Drag file onto this frame to change the icon"
 msgstr "Sleep bestand naar dit frame om pictogram te wijzigen"
 
 #. create dialog
-#: panel/item_dialog.c:903
+#: panel/item_dialog.c:967
 msgid "Change menu item"
 msgstr "Menu item veranderen"
 
 #. add buttons
-#: panel/item_dialog.c:910
+#: panel/item_dialog.c:974
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: panel/item.c:337
+#: panel/item.c:352
 msgid "Click mouse button 3 to change item"
 msgstr "Klik muisknop 3 om item te bewerken"
 
-#: panel/item.c:359
+#: panel/item.c:374
 msgid "Add launcher"
 msgstr "Toevoegen"
 
-#: panel/item.c:363
+#: panel/item.c:378
 msgid "Add new item"
 msgstr "Nieuw item toevoegen"
 
-#: panel/item.c:490
+#: panel/item.c:508
 msgid "Launcher"
 msgstr "Starter"
 
@@ -536,6 +540,6 @@ msgstr "Commando voor de knop op het paneel"
 msgid "Interval (sec):"
 msgstr "Interval (sec):"
 
-#: plugins/mailcheck/mailcheck.c:786
+#: plugins/mailcheck/mailcheck.c:787
 msgid "Mail check"
 msgstr "Mail check"

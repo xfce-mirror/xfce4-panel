@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFCE4\n"
-"POT-Creation-Date: 2003-05-04 23:58+0200\n"
+"POT-Creation-Date: 2003-05-12 12:38+0200\n"
 "PO-Revision-Date: 2003-02-09 16:40+0200\n"
 "Last-Translator: Ilkka Ollakka <ilkka.j.ollakka@students.oamk.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr "Valitse tiedosto"
 msgid "Change item"
 msgstr "Muuta osaa"
 
-#: panel/controls_dialog.c:271 panel/item_dialog.c:916
+#: panel/controls_dialog.c:271 panel/item_dialog.c:980
 msgid "_Revert"
 msgstr "P_alauta"
 
-#: panel/controls_dialog.c:276 panel/item_dialog.c:922
+#: panel/controls_dialog.c:276 panel/item_dialog.c:986
 msgid "_Done"
 msgstr "_Valmis"
 
@@ -35,7 +35,7 @@ msgstr "_Valmis"
 msgid "Type:"
 msgstr "Malli:"
 
-#: panel/controls_dialog.c:315 panel/item_dialog.c:545
+#: panel/controls_dialog.c:315 panel/item_dialog.c:593
 msgid "Position:"
 msgstr "Paikka:"
 
@@ -49,73 +49,77 @@ msgstr ""
 "\n"
 "Haluatko poistaa osan?"
 
-#: panel/item_dialog.c:260
+#: panel/item_dialog.c:267
 msgid "Other Icon"
 msgstr "Muu kuvake"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:292
 msgid "Select icon"
 msgstr "Valitse kuvake"
 
-#: panel/item_dialog.c:322
+#: panel/item_dialog.c:329
 msgid "Icon:"
 msgstr "Kuvake:"
 
-#: panel/item_dialog.c:367
+#: panel/item_dialog.c:374
 msgid "Select command"
 msgstr "Valitse komento"
 
-#: panel/item_dialog.c:394
+#: panel/item_dialog.c:401
 msgid "Command:"
 msgstr "Komento:"
 
-#: panel/item_dialog.c:426 plugins/mailcheck/mailcheck.c:670
+#: panel/item_dialog.c:433 plugins/mailcheck/mailcheck.c:670
 msgid "Run in _terminal"
 msgstr "Aja Päätteessä"
 
-#: panel/item_dialog.c:431 plugins/mailcheck/mailcheck.c:678
+#: panel/item_dialog.c:438 plugins/mailcheck/mailcheck.c:678
 msgid "Use startup _notification"
 msgstr ""
 
-#: panel/item_dialog.c:458
+#: panel/item_dialog.c:465
 msgid "Caption:"
 msgstr "Valikkoteksti:"
 
-#: panel/item_dialog.c:497
+#: panel/item_dialog.c:504
 msgid "Tooltip:"
 msgstr "Kuvaus:"
 
-#: panel/item_dialog.c:637
+#: panel/item_dialog.c:540
+msgid "Subpanel:"
+msgstr ""
+
+#: panel/item_dialog.c:692
 msgid "Icon Preview"
 msgstr "Kuvakkeen esikatselu"
 
-#: panel/item_dialog.c:641
+#: panel/item_dialog.c:696
 msgid "Drag file onto this frame to change the icon"
 msgstr "Raahaa tiedosto tähän kehykseen vaihtaaksesi kuvaketta"
 
 #. create dialog
-#: panel/item_dialog.c:903
+#: panel/item_dialog.c:967
 msgid "Change menu item"
 msgstr "Vaihda valikon osaa"
 
 #. add buttons
-#: panel/item_dialog.c:910
+#: panel/item_dialog.c:974
 msgid "Remove"
 msgstr "Poista"
 
-#: panel/item.c:337
+#: panel/item.c:352
 msgid "Click mouse button 3 to change item"
 msgstr "Paina hiiren 3-napilla vaihtaaksesi osan"
 
-#: panel/item.c:359
+#: panel/item.c:374
 msgid "Add launcher"
 msgstr "Lisää käynnistin"
 
-#: panel/item.c:363
+#: panel/item.c:378
 msgid "Add new item"
 msgstr "Lisää uusi osa"
 
-#: panel/item.c:490
+#: panel/item.c:508
 msgid "Launcher"
 msgstr "Käynnistin"
 
@@ -538,7 +542,7 @@ msgstr "Komento joka ajetaan kun kuvaketta painetaan"
 msgid "Interval (sec):"
 msgstr "Väli (sekuntia):"
 
-#: plugins/mailcheck/mailcheck.c:786
+#: plugins/mailcheck/mailcheck.c:787
 msgid "Mail check"
 msgstr "Postin tarkistus"
 

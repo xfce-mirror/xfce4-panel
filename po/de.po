@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
-"POT-Creation-Date: 2003-05-04 23:58+0200\n"
+"POT-Creation-Date: 2003-05-12 12:38+0200\n"
 "PO-Revision-Date: 2003-03-28 11:18+0100\n"
 "Last-Translator: Moritz Heiber <mistermoe@hackerboard.de>\n"
 "Language-Team: none <none@none>\n"
@@ -22,11 +22,11 @@ msgstr "Datei auswählen"
 msgid "Change item"
 msgstr "Objekt verändern"
 
-#: panel/controls_dialog.c:271 panel/item_dialog.c:916
+#: panel/controls_dialog.c:271 panel/item_dialog.c:980
 msgid "_Revert"
 msgstr "Rückgängig"
 
-#: panel/controls_dialog.c:276 panel/item_dialog.c:922
+#: panel/controls_dialog.c:276 panel/item_dialog.c:986
 msgid "_Done"
 msgstr "_Fertig"
 
@@ -34,7 +34,7 @@ msgstr "_Fertig"
 msgid "Type:"
 msgstr "Typ:"
 
-#: panel/controls_dialog.c:315 panel/item_dialog.c:545
+#: panel/controls_dialog.c:315 panel/item_dialog.c:593
 msgid "Position:"
 msgstr "Position:"
 
@@ -48,73 +48,77 @@ msgstr ""
 "\n"
 "Wollen sie das Objekt entfernen?"
 
-#: panel/item_dialog.c:260
+#: panel/item_dialog.c:267
 msgid "Other Icon"
 msgstr "Anderes Icon"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:292
 msgid "Select icon"
 msgstr "Icon auswählen"
 
-#: panel/item_dialog.c:322
+#: panel/item_dialog.c:329
 msgid "Icon:"
 msgstr "Icon:"
 
-#: panel/item_dialog.c:367
+#: panel/item_dialog.c:374
 msgid "Select command"
 msgstr "Kommando auswählen"
 
-#: panel/item_dialog.c:394
+#: panel/item_dialog.c:401
 msgid "Command:"
 msgstr "Kommando:"
 
-#: panel/item_dialog.c:426 plugins/mailcheck/mailcheck.c:670
+#: panel/item_dialog.c:433 plugins/mailcheck/mailcheck.c:670
 msgid "Run in _terminal"
 msgstr "In _Terminal ausführen"
 
-#: panel/item_dialog.c:431 plugins/mailcheck/mailcheck.c:678
+#: panel/item_dialog.c:438 plugins/mailcheck/mailcheck.c:678
 msgid "Use startup _notification"
 msgstr "Benutze Startup _Notifikation"
 
-#: panel/item_dialog.c:458
+#: panel/item_dialog.c:465
 msgid "Caption:"
 msgstr "Bezeichnung:"
 
-#: panel/item_dialog.c:497
+#: panel/item_dialog.c:504
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:637
+#: panel/item_dialog.c:540
+msgid "Subpanel:"
+msgstr ""
+
+#: panel/item_dialog.c:692
 msgid "Icon Preview"
 msgstr "Icon Vorschau"
 
-#: panel/item_dialog.c:641
+#: panel/item_dialog.c:696
 msgid "Drag file onto this frame to change the icon"
 msgstr "Dateien auf diesen Rahmen ziehen um das Icon zu verändern"
 
 #. create dialog
-#: panel/item_dialog.c:903
+#: panel/item_dialog.c:967
 msgid "Change menu item"
 msgstr "Menüobjekt verändern"
 
 #. add buttons
-#: panel/item_dialog.c:910
+#: panel/item_dialog.c:974
 msgid "Remove"
 msgstr "Entfernen"
 
-#: panel/item.c:337
+#: panel/item.c:352
 msgid "Click mouse button 3 to change item"
 msgstr "Maustaste 3 zum verändern des Objekts benutzen"
 
-#: panel/item.c:359
+#: panel/item.c:374
 msgid "Add launcher"
 msgstr "Starter hinzufügen"
 
-#: panel/item.c:363
+#: panel/item.c:378
 msgid "Add new item"
 msgstr "Neues Objekt hinzufügen"
 
-#: panel/item.c:490
+#: panel/item.c:508
 msgid "Launcher"
 msgstr "Starter"
 
@@ -539,7 +543,7 @@ msgstr "Kommando, welches beim Klicken auf das Panel ausgeführt wird"
 msgid "Interval (sec):"
 msgstr "Intervall (sek):"
 
-#: plugins/mailcheck/mailcheck.c:786
+#: plugins/mailcheck/mailcheck.c:787
 msgid "Mail check"
 msgstr "Mailcheck"
 

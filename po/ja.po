@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-04 23:58+0200\n"
+"POT-Creation-Date: 2003-05-12 12:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zhao Ji <zhao-ji@awz.ne.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr "ファイル選択"
 msgid "Change item"
 msgstr "項目変更"
 
-#: panel/controls_dialog.c:271 panel/item_dialog.c:916
+#: panel/controls_dialog.c:271 panel/item_dialog.c:980
 msgid "_Revert"
 msgstr "元に戻す"
 
-#: panel/controls_dialog.c:276 panel/item_dialog.c:922
+#: panel/controls_dialog.c:276 panel/item_dialog.c:986
 msgid "_Done"
 msgstr "実行"
 
@@ -35,7 +35,7 @@ msgstr "実行"
 msgid "Type:"
 msgstr "タイプ:"
 
-#: panel/controls_dialog.c:315 panel/item_dialog.c:545
+#: panel/controls_dialog.c:315 panel/item_dialog.c:593
 msgid "Position:"
 msgstr "ポジション:"
 
@@ -49,73 +49,77 @@ msgstr ""
 "\n"
 "このメニュー項目を削除してもよろしいですか？"
 
-#: panel/item_dialog.c:260
+#: panel/item_dialog.c:267
 msgid "Other Icon"
 msgstr "その他のアイコン"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:292
 msgid "Select icon"
 msgstr "アイコン選択"
 
-#: panel/item_dialog.c:322
+#: panel/item_dialog.c:329
 msgid "Icon:"
 msgstr "アイコン:"
 
-#: panel/item_dialog.c:367
+#: panel/item_dialog.c:374
 msgid "Select command"
 msgstr "コマンド選択"
 
-#: panel/item_dialog.c:394
+#: panel/item_dialog.c:401
 msgid "Command:"
 msgstr "コマンド"
 
-#: panel/item_dialog.c:426 plugins/mailcheck/mailcheck.c:670
+#: panel/item_dialog.c:433 plugins/mailcheck/mailcheck.c:670
 msgid "Run in _terminal"
 msgstr "ターミナル内部で実行(_t)"
 
-#: panel/item_dialog.c:431 plugins/mailcheck/mailcheck.c:678
+#: panel/item_dialog.c:438 plugins/mailcheck/mailcheck.c:678
 msgid "Use startup _notification"
 msgstr "起動通知を使う (_n)"
 
-#: panel/item_dialog.c:458
+#: panel/item_dialog.c:465
 msgid "Caption:"
 msgstr "キャプション:"
 
-#: panel/item_dialog.c:497
+#: panel/item_dialog.c:504
 msgid "Tooltip:"
 msgstr "ツール チップ:"
 
-#: panel/item_dialog.c:637
+#: panel/item_dialog.c:540
+msgid "Subpanel:"
+msgstr ""
+
+#: panel/item_dialog.c:692
 msgid "Icon Preview"
 msgstr "アイコン確認"
 
-#: panel/item_dialog.c:641
+#: panel/item_dialog.c:696
 msgid "Drag file onto this frame to change the icon"
 msgstr "項目変更のために、ここへファイルをドラッグしてください"
 
 #. create dialog
-#: panel/item_dialog.c:903
+#: panel/item_dialog.c:967
 msgid "Change menu item"
 msgstr "メニュー項目の変更"
 
 #. add buttons
-#: panel/item_dialog.c:910
+#: panel/item_dialog.c:974
 msgid "Remove"
 msgstr "削除"
 
-#: panel/item.c:337
+#: panel/item.c:352
 msgid "Click mouse button 3 to change item"
 msgstr "項目変更するために、マウスの右ボタンをクリックして下さい"
 
-#: panel/item.c:359
+#: panel/item.c:374
 msgid "Add launcher"
 msgstr "ランチャ追加"
 
-#: panel/item.c:363
+#: panel/item.c:378
 msgid "Add new item"
 msgstr "項目追加"
 
-#: panel/item.c:490
+#: panel/item.c:508
 msgid "Launcher"
 msgstr "ランチャ"
 
@@ -533,6 +537,6 @@ msgstr "ボタンを押されると、実行されるコマンド"
 msgid "Interval (sec):"
 msgstr "間隔 (sec):"
 
-#: plugins/mailcheck/mailcheck.c:786
+#: plugins/mailcheck/mailcheck.c:787
 msgid "Mail check"
 msgstr "メール確認"
