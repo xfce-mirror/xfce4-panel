@@ -537,7 +537,6 @@ void clock_add_options(Control * control, GtkContainer * container,
 
     /* the options box */
     vbox = gtk_vbox_new(FALSE, BORDER);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), BORDER);
     gtk_widget_show(vbox);
 
     add_type_box(vbox, sg, cd);
