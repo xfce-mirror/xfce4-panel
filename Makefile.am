@@ -5,6 +5,7 @@ conf_DATA = 								\
 	xfce4rc 							\
 	xfce4rc.nl 							\
 	xfce4rc.ca							\
+	xfce4rc.vi							\
 	xfce4rc.hu
 
 EXTRA_DIST = 								\
