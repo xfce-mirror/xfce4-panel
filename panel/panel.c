@@ -714,7 +714,12 @@ panel_center (int side)
 
     hidden = panel.hidden;
     if (hidden)
+    {
 	panel_set_autohide(FALSE);
+
+	while(gtk_events_pending())
+	    gtk_main_iteration();
+    }
     
     xscreen = DefaultScreenOfDisplay (GDK_DISPLAY ());
     netk_get_desktop_margins (xscreen, &margins);
@@ -770,8 +775,13 @@ panel_set_position (void)
     
 	hidden = panel.hidden;
 	if (hidden)
+	{
 	    panel_set_autohide(FALSE);
 
+	    while(gtk_events_pending())
+		gtk_main_iteration();
+	}
+	    
         w = screen_width;
         h = screen_height;
 
