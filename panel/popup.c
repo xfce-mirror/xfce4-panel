@@ -278,11 +278,18 @@ static GtkTargetEntry entry[] = {
     {"STRING", 0, 1}
 };
 
-static void popup_drag_cb(GtkWidget * widget, GdkDragContext * context,
-                          gint x, gint y, GtkSelectionData * data,
-                          guint info, guint time, PanelPopup *pp)
+static gboolean drag_motion(GtkWidget *widget, GdkDragContext *context,
+                            int	x, int y, guint time, PanelPopup *pp)
 {
-    toggle_popup(pp->button, pp);
+    if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(pp->button)))
+    {
+	DBG("open popup\n");
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pp->button), TRUE);
+    }
+    else
+	DBG("already open\n");
+
+    return TRUE;
 }
 
 PanelPopup *create_panel_popup(void)
@@ -320,8 +327,8 @@ PanelPopup *create_panel_popup(void)
 
     gtk_drag_dest_set (pp->button, GTK_DEST_DEFAULT_ALL, entry, 2, 
 	    		GDK_ACTION_COPY);
-    g_signal_connect(pp->button, "drag-data-received", 
-	    	     G_CALLBACK(popup_drag_cb), pp);
+    g_signal_connect(pp->button, "drag-motion", 
+	    	     G_CALLBACK(drag_motion), pp);
 
     /* the menu */
     pp->hgroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
