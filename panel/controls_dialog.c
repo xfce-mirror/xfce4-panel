@@ -34,6 +34,7 @@
 #include "controls.h"
 #include "xfce_support.h"
 #include "xfce.h"
+#include "settings.h"
 
 GtkContainer *container;        /* container on the panel to hold the 
                                    panel control */

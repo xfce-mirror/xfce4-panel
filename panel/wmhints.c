@@ -24,6 +24,7 @@
 #include "xfce.h"
 #include "wmhints.h"
 #include "dialogs.h"
+#include "xfce_support.h"
 
 gboolean atoms_created = FALSE;
 

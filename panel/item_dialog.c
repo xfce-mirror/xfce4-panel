@@ -21,6 +21,7 @@
 #include "item_dialog.h"
 #include "xfce_support.h"
 #include "controls.h"
+#include "settings.h"
 #include "item.h"
 #include "side.h"
 #include "popup.h"

@@ -46,9 +46,11 @@
 */
 
 #include "controls.h"
+#include "item.h"
 #include "builtins.h"
 #include "xfce_support.h"
 #include "callbacks.h"
+#include "side.h"
 
 /*  Plugins
  *  -------

@@ -23,6 +23,7 @@
  * all modules (and external plugins).
  */
 
+#include <ctype.h>
 #include "global.h"
 #include "xfce_support.h"
 
@@ -531,7 +532,7 @@ char *select_file_name(const char *title, const char *path, GtkWidget * parent)
 */
 
 /* '~' doesn't get expanded by g_spawn_* */
-static void *expand_path(void)
+static void expand_path(void)
 {
     static gboolean first = TRUE;
 
@@ -547,7 +548,7 @@ static void *expand_path(void)
 
 
         if(!path || !strlen(path))
-            return NULL;
+            return;
 
         c = path;
         s = newpath;

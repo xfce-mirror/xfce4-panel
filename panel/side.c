@@ -34,6 +34,7 @@
 #include "side.h"
 
 #include "xfce.h"
+#include "xfce_support.h"
 #include "popup.h"
 #include "item.h"
 #include "controls.h"
@@ -122,12 +123,12 @@ static void move_handle_arrange(MoveHandle * mh, int position)
     }
 }
 
-move_handle_pack(MoveHandle * mh, GtkContainer * container)
+void move_handle_pack(MoveHandle * mh, GtkContainer * container)
 {
     gtk_container_add(container, mh->base);
 }
 
-move_handle_unpack(MoveHandle * mh, GtkContainer * container)
+void move_handle_unpack(MoveHandle * mh, GtkContainer * container)
 {
     gtk_container_add(container, mh->base);
 }

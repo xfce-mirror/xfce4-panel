@@ -201,11 +201,7 @@ static void xfce_clock_init(XfceClock * clock)
 
 GtkWidget *xfce_clock_new(void)
 {
-    XfceClock *clock;
-
-    clock = (XfceClock *) gtk_type_new(xfce_clock_get_type());
-
-    return GTK_WIDGET(clock);
+    return GTK_WIDGET (g_object_new (xfce_clock_get_type (), NULL));
 }
 
 static void xfce_clock_destroy(GtkObject * object)
@@ -217,12 +213,16 @@ static void xfce_clock_destroy(GtkObject * object)
 
     clock = XFCE_CLOCK(object);
 
-    if(GDK_IS_DRAWABLE(clock->digits_bmap))
+    if(clock->digits_bmap)
+    {
         gdk_bitmap_unref(clock->digits_bmap);
-
+	clock->digits_bmap = NULL;
+    }
     if(clock->timer)
+    {
         gtk_timeout_remove(clock->timer);
-
+	clock->timer = 0;
+    }
     if(GTK_OBJECT_CLASS(parent_class)->destroy)
         (*GTK_OBJECT_CLASS(parent_class)->destroy) (object);
 }
@@ -351,8 +351,8 @@ void xfce_clock_set_led_size(XfceClock * clock, XfceClockLedSize size)
 
 XfceClockLedSize xfce_clock_get_led_size(XfceClock * clock)
 {
-    g_return_if_fail(clock != NULL);
-    g_return_if_fail(XFCE_IS_CLOCK(clock));
+    g_return_val_if_fail(clock != NULL, 0);
+    g_return_val_if_fail(XFCE_IS_CLOCK(clock), 0);
     return (clock->led_size);
 }
 

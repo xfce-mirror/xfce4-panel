@@ -24,6 +24,7 @@
 #include "callbacks.h"
 #include "icons.h"
 #include "settings.h"
+#include "wmhints.h"
 
 /*  Menu items  
  *  ----------

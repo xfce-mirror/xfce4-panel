@@ -25,6 +25,7 @@
 
 #include "xfce.h"
 #include "xfce_support.h"
+#include "wmhints.h"
 #include "callbacks.h"
 #include "settings.h"
 #include "side.h"

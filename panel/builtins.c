@@ -116,7 +116,6 @@ static t_clock *clock_new(void)
     t_clock *clock = g_new(t_clock, 1);
     
     clock->clock = xfce_clock_new();
-    g_object_ref(G_OBJECT(clock->clock));
 
     clock->frame = gtk_frame_new(NULL);
     gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
@@ -218,9 +217,9 @@ void update_clock_size(XfceClock *clock, int size)
 void clock_set_size(PanelControl * pc, int size)
 {
     int s = icon_size[size];
-    int w = s;
     t_clock *clock = (t_clock *) pc->data;
     XfceClock *tmp = XFCE_CLOCK(clock->clock);
+
     switch (size)
     {
         case 0:
@@ -412,7 +411,6 @@ static GtkWidget *create_clock_24hrs_button(t_clock * clock, PanelControl* pc)
 
 static void clock_secs_mode_changed(GtkToggleButton * tb, t_clock * clock)
 {
-    XfceClock *tmp = XFCE_CLOCK(clock->clock);
     XFCE_CLOCK(clock->clock)->display_secs = gtk_toggle_button_get_active(tb);
 
     xfce_clock_show_secs(XFCE_CLOCK(clock->clock),
@@ -512,7 +510,7 @@ static void clock_revert(t_clock *clock)
 /* Write the configuration at exit */
 void clock_write_config(PanelControl *pc, xmlNodePtr parent)
 {
-    xmlNodePtr root, node;
+    xmlNodePtr root;
     char value[MAXSTRLEN+1];
 
     t_clock *cl = (t_clock *) pc->data;
@@ -536,7 +534,6 @@ void clock_write_config(PanelControl *pc, xmlNodePtr parent)
 void clock_read_config(PanelControl *pc, xmlNodePtr node)
 {
     xmlChar *value;
-    int n;
 
     t_clock *cl = (t_clock *)pc->data;
 
@@ -561,7 +558,7 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
         g_free(value);
     }
 #else
-    if (value = xmlGetProp(node, (const xmlChar *)"Clock_type"))
+    if ((value = xmlGetProp(node, (const xmlChar *)"Clock_type")))
     {
 	XFCE_CLOCK(cl->clock)->mode = atoi(value);
         g_free(value);
@@ -569,17 +566,17 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
     gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_NONE);
 #endif
 
-    if ( value = xmlGetProp(node, (const xmlChar *)"Toggle_military"))
+    if ((value = xmlGetProp(node, (const xmlChar *)"Toggle_military")))
     {
 	XFCE_CLOCK(cl->clock)->military_time = atoi(value);
 	g_free(value);
     }
-    if ( value = xmlGetProp(node, (const xmlChar *)"Toggle_am_pm"))
+    if ((value = xmlGetProp(node, (const xmlChar *)"Toggle_am_pm")))
     {
 	XFCE_CLOCK(cl->clock)->display_am_pm = atoi(value);
         g_free(value);
     }
-    if ( value = xmlGetProp(node, (const xmlChar *)"Toggle_secs"))
+    if ((value = xmlGetProp(node, (const xmlChar *)"Toggle_secs")))
     {
 	XFCE_CLOCK(cl->clock)->display_secs = atoi(value);
         g_free(value);
