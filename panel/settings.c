@@ -284,9 +284,15 @@ write_final_panel_config (void)
     
     tmprc = g_strconcat (xfcerc, ".active", NULL);
 
-    if (!g_file_test (xfcerc, G_FILE_TEST_EXISTS))
+    if (!g_file_test (tmprc, G_FILE_TEST_EXISTS))
     {
-        g_critical ("No current config file available");
+        write_panel_config ();
+        
+        if (!g_file_test (tmprc, G_FILE_TEST_EXISTS))
+        {
+            g_critical ("No current config file available");
+            return;
+        }
     }
     
     if (g_file_test (xfcerc, G_FILE_TEST_EXISTS))
