@@ -160,7 +160,7 @@ get_theme_dirs (void)
 	dirs = g_new (gchar *, 2);
 
 	dirs[0] = g_build_filename (DATADIR, "themes", NULL);
-	dirs[2] = NULL;
+	dirs[1] = NULL;
     }
     else
     {
@@ -982,6 +982,7 @@ schedule_exec(const gchar *cmd, gboolean in_terminal, gboolean use_sn,
 void
 exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
+    g_return_if_fail (cmd != NULL);
     schedule_exec(cmd, in_terminal, use_sn, FALSE);
 }
 
@@ -989,5 +990,6 @@ exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 void
 exec_cmd_silent (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
+    g_return_if_fail (cmd != NULL);
     schedule_exec(cmd, in_terminal, use_sn, TRUE);
 }

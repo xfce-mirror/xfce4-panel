@@ -25,6 +25,8 @@
 #undef GDK_MULTIHEAD_SAFE
 #endif
 
+#include <math.h>
+
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/libxfcegui4.h>
 
@@ -83,22 +85,14 @@ static void
 netk_pager_update_size (GtkWidget * pager, NetkScreen * screen)
 {
     int s = icon_size[settings.size] + border_width;
-    int count = netk_screen_get_workspace_count (screen);
-    int w;
 
     if (settings.orientation == HORIZONTAL)
     {
-	w = count * (int) ((double) (gdk_screen_width () * s) /
-			   (double) (gdk_screen_height ()));
-
-	gtk_widget_set_size_request (pager, w, s);
+	gtk_widget_set_size_request (pager, -1, s);
     }
     else
     {
-	w = count * (int) ((double) (gdk_screen_height () * s) /
-			   (double) (gdk_screen_width ()));
-
-	gtk_widget_set_size_request (pager, s, w);
+	gtk_widget_set_size_request (pager, s, -1);
     }
 }
 
