@@ -218,12 +218,16 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event, GtkMenu * menu)
     return FALSE;
 }
 
-static gboolean
-handler_released_cb (GtkWidget * h, GdkEventButton * event, gpointer data)
+static void
+handler_move_end_cb (GtkWidget * h, gpointer data)
 {
-    gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x, &panel.position.y);
-    /* let default handler run */
-    return FALSE;
+    gtk_window_get_position (GTK_WINDOW (panel.toplevel), 
+	    		     &panel.position.x, &panel.position.y);
+
+    DBG("Move end: (x,y) = (%d,%d)", panel.position.x, panel.position.y);
+
+    /* TODO: adjust arrow direction based on which quarter of the screen we
+     * are (Xinerama aware, of course ;) */
 }
 
 GtkWidget *
@@ -242,8 +246,8 @@ handle_new (void)
     g_signal_connect (mh, "button-press-event",
                       G_CALLBACK (handler_pressed_cb), menu);
 
-    g_signal_connect (mh, "button-release-event",
-                      G_CALLBACK (handler_released_cb), NULL);
+    g_signal_connect (mh, "move-end",
+                      G_CALLBACK (handler_move_end_cb), NULL);
 
     /* protect against destruction when removed from box */
     g_object_ref (mh);
@@ -343,8 +347,10 @@ panel_hide_timeout (Panel * p)
 
     if (!p->hidden)
     {
+#if 0
         gtk_window_get_position (GTK_WINDOW (p->toplevel), &(p->position.x),
                                  &(p->position.y));
+#endif
 
 	panel_set_hidden (p, TRUE);
     }

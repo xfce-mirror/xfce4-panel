@@ -59,7 +59,8 @@ mcs_position_setting (int pos)
 
     if (pos == XFCE_POSITION_SAVE)
     {
-        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &x, &y);
+        x = panel.position.x;
+	y = panel.position.y;
         return;
     }
 

@@ -74,6 +74,7 @@ static gboolean session_managed = FALSE;
 static void 
 save_panel(void)
 {
+#if 0
     gboolean hidden = settings.autohide;
     
     if (panel.toplevel)
@@ -94,7 +95,7 @@ save_panel(void)
 
     if (hidden && panel.toplevel)
 	panel_set_autohide(TRUE);
-    
+#endif    
     write_panel_config ();
 }
     
