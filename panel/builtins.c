@@ -553,6 +553,11 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
         g_free(value);
     }
 #else
+    if ( value = xmlGetProp(node, (const xmlChar *)"Clock_type"))
+    {
+	XFCE_CLOCK(cl->clock)->mode = atoi(value);
+        g_free(value);
+    }
     gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_NONE);
 #endif
 
