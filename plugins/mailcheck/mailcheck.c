@@ -32,6 +32,9 @@
 
 #include <gtk/gtk.h>
 
+#include <netdb.h>
+#include <sys/socket.h>
+
 #include <libxfce4util/i18n.h>
 #include <libxfce4util/debug.h>
 #include <libxfcegui4/xfce_iconbutton.h>
@@ -53,6 +56,11 @@ typedef struct
     gboolean term;
     gboolean use_sn;
     int interval;
+
+    gboolean pop3;
+    char pop3_username[256];
+    char pop3_password[256];
+    char pop3_hostname[256];
 
     int timeout_id;
     int status;
@@ -134,6 +142,140 @@ set_mail_icon (t_mailcheck * mc)
     return FALSE;
 }
 
+/* POP3 routines */
+
+static int
+pop3_read_response(int fd, char* buff, int size)
+{
+  int bytes_read=0;
+  int state=0;
+  
+  while(bytes_read < size && state != 2)
+    {
+      
+      bytes_read += read(fd, &buff[bytes_read], sizeof(char));
+      
+    switch(state)
+      {
+      case 0:
+      if(buff[bytes_read-1] == '\r')
+        state = 1;
+      break;
+      case 1:
+	if(buff[bytes_read-1] == '\n')
+	  state = 2;
+	else
+        state = 0;
+	break;
+      }
+    }
+
+  if(state == 2)
+    buff[bytes_read-2*sizeof(char)] = '\0';
+  
+  if(strncmp(buff, "+OK", 3*sizeof(char)) == 0)
+    return 1;
+  else
+    return 0;
+
+}
+
+static int
+pop3_send_command(int fd, char* buff)
+{
+
+  return write(fd, buff, strlen(buff));
+
+}
+
+static int
+pop3_check_mail(char *username, char *password, char *hostname)
+{
+
+  struct sockaddr_in sa;
+  struct hostent *hp;
+  int msg_count;
+  char buff[1024];
+  char command[256];
+  int port = 110;
+  int sd;
+  int i;
+  
+  /* Lookup hostname */
+  hp = gethostbyname(hostname);
+  if(hp == NULL)
+    return NO_MAIL;
+  
+  sa.sin_port = htons(port);
+  sa.sin_family = hp->h_addrtype;
+
+  /* Create the socket */
+  sd = socket(AF_INET, SOCK_STREAM, 0);
+  if(sd == -1)
+    return NO_MAIL;
+  
+  /* Try each address until we get one that works */
+  for(i=0;;i++)
+    {
+      
+      if(hp->h_addr_list[i] == NULL)
+	{
+	  close(sd);
+	  return NO_MAIL;
+	}
+      
+      memcpy((char *)&sa.sin_addr, hp->h_addr_list[i], hp->h_length);
+      
+      if( connect(sd, (struct sockaddr *)&sa, sizeof(sa)) == 0)
+	break;
+      
+    }
+
+  if( !pop3_read_response(sd, buff, 1024) )
+    {
+      close(sd);
+      return NO_MAIL;
+    }
+  
+  g_snprintf(command, 256, "USER %s\r\n", username);
+  pop3_send_command(sd, command);
+  if( !pop3_read_response(sd, buff, 1024) )
+    {
+      pop3_send_command(sd, "QUIT\r\n");
+      close(sd);
+      return NO_MAIL;
+    }
+  
+  g_snprintf(command, 256, "PASS %s\r\n", password);
+  pop3_send_command(sd, command);
+  if( !pop3_read_response(sd, buff, 1024) )
+    {
+      pop3_send_command(sd, "QUIT\r\n");
+      close(sd);
+      return NO_MAIL;
+    }
+  
+  pop3_send_command(sd, "STAT\r\n");
+  if( !pop3_read_response(sd, buff, 1024) )
+    {
+      pop3_send_command(sd, "QUIT\r\n");
+      close(sd);
+      return NO_MAIL;
+    }
+  
+  sscanf(buff, "+OK %d", &msg_count);
+  
+  pop3_send_command(sd, "QUIT\r\n");
+  
+  close(sd);
+  
+  if(msg_count > 0)
+    return NEW_MAIL;
+  else
+    return NO_MAIL;
+
+}
+
 static gboolean
 check_mail (t_mailcheck * mailcheck)
 {
@@ -141,23 +283,32 @@ check_mail (t_mailcheck * mailcheck)
     struct stat s;
 
     DBG("Checking mail ... ");
-    
-    if (stat (mailcheck->mbox, &s) < 0)
-	mail = NO_MAIL;
-    else if (!s.st_size)
-	mail = NO_MAIL;
-    else if (s.st_mtime <= s.st_atime)
-	mail = OLD_MAIL;
+ 
+    if(mailcheck->pop3 == TRUE)
+      {
+	mail = pop3_check_mail(mailcheck->pop3_username,
+			       mailcheck->pop3_password,
+			       mailcheck->pop3_hostname);
+      }
     else
-	mail = NEW_MAIL;
+      {
+	if (stat (mailcheck->mbox, &s) < 0)
+	  mail = NO_MAIL;
+	else if (!s.st_size)
+	  mail = NO_MAIL;
+	else if (s.st_mtime <= s.st_atime)
+	  mail = OLD_MAIL;
+	else
+	  mail = NEW_MAIL;
+      }
 
     if (mail != mailcheck->status)
-    {
+      {
 	mailcheck->status = mail;
 
 	g_idle_add ((GSourceFunc) set_mail_icon, mailcheck);
-    }
-
+      }
+    
     DBG("Done\n");
     
     /* keep the g_timeout running */
@@ -215,11 +366,19 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 	if (xmlStrEqual (node->name, (const xmlChar *) "Mbox"))
 	{
 	    value = DATA (node);
-
 	    if (value)
 	    {
 		g_free (mc->mbox);
 		mc->mbox = (char *) value;
+		
+		if (strncmp(mc->mbox, "pop3://", 7*sizeof(char)) == 0 )
+		  {
+		    mc->pop3 = TRUE;
+		    sscanf(mc->mbox, "pop3://%[^:]:%[^@]@%s",
+			   mc->pop3_username,
+			   mc->pop3_password,
+			   mc->pop3_hostname);
+		  }
 	    }
 	}
 	else if (xmlStrEqual (node->name, (const xmlChar *) "Command"))
@@ -283,10 +442,10 @@ mailcheck_write_config (Control * control, xmlNodePtr parent)
 
     node = xmlNewTextChild (root, NULL, "Command", mc->command);
 
-    snprintf (value, 2, "%d", mc->term);
+    g_snprintf (value, 2, "%d", mc->term);
     xmlSetProp (node, "term", value);
 
-    snprintf (value, 2, "%d", mc->use_sn);
+    g_snprintf (value, 2, "%d", mc->use_sn);
     xmlSetProp (node, "sn", value);
 }
 
