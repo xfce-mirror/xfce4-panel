@@ -292,31 +292,27 @@ systembuttons_attach_callback (Control * control, const char *signal,
 static void
 systembuttons_set_size (Control * control, int size)
 {
-    int s, w, h;
+    int s, w, h, n;
     t_systembuttons *sb = control->data;
 
     arrange_systembuttons (sb, settings.orientation);
     gtk_container_add (GTK_CONTAINER (control->base), sb->box);
 
-    s = icon_size[size] + border_width;
+    s = w = h = icon_size[size] + border_width;
 
     if (settings.orientation == HORIZONTAL)
     {
-	h = s;
-
 	if (settings.size > SMALL)
 	    w = s / 2;
 	else
-	    w = -1;
+	    w = 0.75 * n * s;
     }
     else
     {
-	w = s;
-
 	if (settings.size > SMALL)
 	    h = s / 2;
 	else
-	    h = -1;
+	    h = 0.75 * n * s;
     }
 
     gtk_widget_set_size_request (sb->box, w, h);
