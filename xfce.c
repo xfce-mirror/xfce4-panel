@@ -1,357 +1,526 @@
-#include <gtk/gtk.h>
+/*  xfce.c
+ *
+ *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Library General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
+/* xfce.c 
+ * 
+ * Contains 'main' function, quit and restart functions, some utility functions
+ * and panel function.
+ */
 
 #include "xfce.h"
+
 #include "central.h"
 #include "side.h"
-#include "popup.h"
-#include "item.h"
-#include "module.h"
-#include "settings.h"
-#include "icons.h"
 #include "wmhints.h"
-#include "move.h"
-#include "callbacks.h"
+#include "icons.h"
 
-/* the xfce panel */
-XfcePanel panel;
-GtkTooltips *tooltips;
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-/*****************************************************************************/
-void
-panel_init (void)
+   Utility functions  
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+int icon_size(int size)
 {
-  panel.x = -1;
-  panel.y = -1;
-  panel.size = -1;
-  panel.popup_size = -1;
-  panel.style = -1;
-  panel.num_screens = -1;
-  panel.num_groups_left = -1;
-  panel.num_groups_right = -1;
-
-  panel.current_screen = 0;
-  panel.window = NULL;
-  panel.frame = NULL;
-  panel.hbox = NULL;
-  panel.central_panel = central_panel_new ();
-  panel.left_panel = side_panel_new (LEFT);
-  panel.right_panel = side_panel_new (RIGHT);
-
-  get_settings (&panel);
-
-  tooltips = gtk_tooltips_new ();
-
-  watch_root_properties ();
+    if(size == SMALL)
+        return SMALL_PANEL_ICONS;
+    else if(size == LARGE)
+        return LARGE_PANEL_ICONS;
+    else
+        return MEDIUM_PANEL_ICONS;
 }
 
-static void
-panel_set_position (void)
+int popup_size(int size)
 {
-  GtkRequisition req;
+    if(size == SMALL)
+        return SMALL_POPUP_ICONS;
+    else if(size == LARGE)
+        return LARGE_POPUP_ICONS;
+    else
+        return MEDIUM_POPUP_ICONS;
+}
 
-  if (panel.x == -1 || panel.y == -1)
+int top_height(int size)
+{
+    if(size == SMALL)
+        return SMALL_TOPHEIGHT;
+    else if(size == LARGE)
+        return LARGE_TOPHEIGHT;
+    else
+        return MEDIUM_TOPHEIGHT;
+}
+
+static GtkTooltips *tooltips = NULL;
+
+void add_tooltip(GtkWidget * widget, char *tip)
+{
+    if(!tooltips)
+        tooltips = gtk_tooltips_new();
+
+    gtk_tooltips_set_tip(tooltips, widget, tip, NULL);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+   Main program
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+void quit(void)
+{
+    gtk_main_quit();
+
+    panel_cleanup();
+}
+
+void restart(void)
+{
+    quit();
+
+    xfce_run();
+}
+
+void xfce_init(void)
+{
+    check_net_support();
+
+    create_builtin_pixbufs();
+}
+
+void xfce_run(void)
+{
+    panel_init();
+    side_panel_init(LEFT);
+    central_panel_init();
+    side_panel_init(RIGHT);
+    get_panel_config();
+
+    create_xfce_panel();
+
+    watch_root_properties();
+    
+    gtk_main();
+}
+
+int main(int argc, char **argv)
+{
+    gtk_init(&argc, &argv);
+
+    xfce_init();
+
+    xfce_run();
+
+    return (0);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+   Panel functions
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+Settings settings;
+GtkWidget *toplevel = NULL;
+GtkWidget *central_frame = NULL;
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  creation and destruction */
+
+void panel_init(void)
+{
+    settings.x = -1;
+    settings.y = -1;
+    settings.size = MEDIUM;
+    settings.popup_size = MEDIUM;
+    settings.style = NEW_STYLE;
+    settings.icon_theme = NULL;
+    settings.num_left = 5;
+    settings.num_right = 5;
+    settings.num_screens = 4;
+    settings.current = 0;
+    settings.lock_command = NULL;
+    settings.exit_command = NULL;
+}
+
+/*---------------------------------------------------------------------------*/
+
+static GtkWidget *create_panel_window(void)
+{
+    GtkWidget *w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    GtkWindow *window = GTK_WINDOW(w);
+    GdkPixbuf *pb;
+
+    gtk_window_set_title(window, _("XFce Main Panel"));
+    gtk_window_set_decorated(window, FALSE);
+    gtk_window_set_resizable(window, FALSE);
+    gtk_window_stick(window);
+
+    pb = get_pixbuf_from_id(XFCE_ICON);
+    gtk_window_set_icon(window, pb);
+    g_object_unref(pb);
+
+    return w;
+}
+
+static void set_panel_position(GtkWidget * window)
+{
+    GtkRequisition req;
+    int w = gdk_screen_width();
+    int h = gdk_screen_height();
+
+    gtk_widget_size_request(window, &req);
+
+    if(settings.x == -1 || settings.y == -1)
     {
-      gtk_widget_size_request (panel.window, &req);
-
-      panel.x = gdk_screen_width () / 2 - req.width / 2;
-      panel.y = gdk_screen_height () - req.height;
+        settings.x = w / 2 - req.width / 2;
+        settings.y = h - req.height;
+    }
+    else
+    {
+        if(settings.x < 0)
+            settings.x = 0;
+        if(settings.x > w - req.width)
+            settings.x = w - req.width;
+        if(settings.y < 0)
+            settings.y = 0;
+        if(settings.y > h - req.height)
+            settings.y = h - req.height;
     }
 
-  gtk_window_move (GTK_WINDOW (panel.window), panel.x, panel.y);
+    gtk_window_move(GTK_WINDOW(window), settings.x, settings.y);
 }
 
-void
-create_xfce_panel (void)
+static void set_panel_settings(void)
 {
-  GdkPixbuf *pb;
+    int n;
 
-  panel.window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (panel.window), _("XFce Main Panel"));
-  gtk_window_set_wmclass (GTK_WINDOW (panel.window),
-			  _("XFce4 Panel"), _("XFce4 Panel"));
-  gtk_window_set_decorated (GTK_WINDOW (panel.window), FALSE);
-  gtk_window_set_resizable (GTK_WINDOW (panel.window), FALSE);
-  gtk_window_set_default_size (GTK_WINDOW (panel.window), 0, 0);
+    panel_set_size(settings.size);
+    panel_set_popup_size(settings.popup_size);
+    panel_set_style(settings.style);
+    panel_set_icon_theme(settings.icon_theme);
 
-  gtk_window_stick (GTK_WINDOW (panel.window));
+    side_panel_set_num_groups(LEFT, settings.num_left);
+    side_panel_set_num_groups(RIGHT, settings.num_right);
 
-  pb = get_pixbuf_from_id (XFCE_ICON);
-  gtk_window_set_icon (GTK_WINDOW (panel.window), pb);
-  g_object_unref (pb);
+    n = get_net_number_of_desktops();
 
-  gtk_window_set_position (GTK_WINDOW (panel.window), GTK_WIN_POS_CENTER);
+    if(n > settings.num_screens)
+        settings.num_screens = n;
 
-  panel.frame = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (panel.frame), GTK_SHADOW_OUT);
-  gtk_container_add (GTK_CONTAINER (panel.window), panel.frame);
-  gtk_widget_show (panel.frame);
+    central_panel_set_num_screens(settings.num_screens);
 
-  panel.hbox = gtk_hbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (panel.frame), panel.hbox);
-  gtk_widget_show (panel.hbox);
+    if(n < settings.num_screens)
+        request_net_number_of_desktops(settings.num_screens);
 
-  add_side_panel (&panel, LEFT);
-  add_central_panel (&panel);
-  add_side_panel (&panel, RIGHT);
+    n = get_net_current_desktop();
 
-  /* signals */
-  g_signal_connect (panel.window, "delete-event",
-		    G_CALLBACK (panel_delete_cb), NULL);
-
-  /* apply configuration */
-  panel_set_size (panel.size);
-  panel_set_style (panel.style);
-  panel_set_popup_size (panel.popup_size);
-
-  central_panel_set_screens (panel.central_panel, panel.num_screens);
-  panel_set_left_groups (panel.num_groups_left);
-  panel_set_right_groups (panel.num_groups_right);
-
-  panel.current_screen = net_current_desktop_get ();
-  if (panel.current_screen > 0)
-    central_panel_set_current (panel.central_panel, panel.current_screen);
-
-  panel_set_position ();
-
-  gtk_widget_show (panel.window);
-  CreateDrawGC (panel.window->window);
-}
-
-void
-panel_cleanup (void)
-{
-  side_panel_free (panel.left_panel);
-  side_panel_free (panel.right_panel);
-  central_panel_free (panel.central_panel);
-}
-
-/*****************************************************************************/
-
-void
-panel_set_as_move_handle (GtkWidget * widget)
-{
-  attach_move_callbacks (widget, panel.window);
-}
-
-void
-set_transient_for_panel (GtkWidget * widget)
-{
-  if (GTK_IS_WINDOW (widget))
-    gtk_window_set_transient_for (GTK_WINDOW (widget),
-				  GTK_WINDOW (panel.window));
-}
-
-void
-iconify_panel (void)
-{
-  gtk_window_iconify (GTK_WINDOW (panel.window));
-}
-
-void
-panel_set_tooltip (GtkWidget * widget, const char *tip)
-{
-  gtk_tooltips_set_tip (tooltips, widget, tip, NULL);
-}
-
-int
-icon_size (int size)
-{
-  switch (size)
+    if(n > 0)
     {
-    case SMALL:
-      return SMALL_PANEL_ICONS;
-      break;
-    case LARGE:
-      return LARGE_PANEL_ICONS;
-      break;
-    default:
-      return MEDIUM_PANEL_ICONS;
-    }
-}
-
-int
-popup_icon_size (int size)
-{
-  switch (size)
-    {
-    case SMALL:
-      return SMALL_POPUP_ICONS;
-      break;
-    case LARGE:
-      return LARGE_POPUP_ICONS;
-      break;
-    default:
-      return MEDIUM_POPUP_ICONS;
-    }
-}
-
-int
-top_height (int size)
-{
-  switch (size)
-    {
-    case SMALL:
-      return SMALL_TOPHEIGHT;
-      break;
-    case LARGE:
-      return LARGE_TOPHEIGHT;
-      break;
-    default:
-      return MEDIUM_TOPHEIGHT;
-    }
-}
-
-/*****************************************************************************/
-/* xsettings */
-void
-panel_set_size (int size)
-{
-  side_panel_set_size (panel.left_panel, size);
-  central_panel_set_size (panel.central_panel, size);
-  side_panel_set_size (panel.right_panel, size);
-
-  panel.size = size;
-}
-
-void
-panel_set_style (int style)
-{
-  side_panel_set_style (panel.left_panel, style);
-  central_panel_set_style (panel.central_panel, style);
-  side_panel_set_style (panel.right_panel, style);
-
-  panel.style = style;
-}
-
-void
-panel_set_popup_size (int size)
-{
-  side_panel_set_popup_size (panel.left_panel, size);
-  side_panel_set_popup_size (panel.right_panel, size);
-
-  panel.popup_size = size;
-}
-
-void
-panel_set_left_groups (int n)
-{
-  side_panel_set_groups (panel.left_panel, n);
-
-  panel.num_groups_left = n;
-}
-
-void
-panel_set_right_groups (int n)
-{
-  side_panel_set_groups (panel.right_panel, n);
-
-  panel.num_groups_right = n;
-}
-
-/*****************************************************************************/
-
-static void
-xfce_init (int argc, char **argv)
-{
-  create_atoms ();
-  net_wm_support_check ();
-  create_pixbufs ();
-  set_module_names ();
-}
-
-static void
-xfce_run (void)
-{
-  panel_init ();
-
-  create_xfce_panel ();
-  gtk_main ();
-}
-
-void
-quit (void)
-{
-  gtk_main_quit ();
-
-  panel_cleanup ();
-  gtk_widget_destroy (panel.window);
-}
-
-void
-restart (void)
-{
-  gtk_main_quit ();
-
-  panel_cleanup ();
-  gtk_widget_destroy (panel.window);
-
-  g_printerr ("Restarting panel\n");
-  xfce_run ();
-}
-
-int
-main (int argc, char **argv)
-{
-  gtk_init (&argc, &argv);
-  xfce_init (argc, argv);
-
-  xfce_run ();
-
-  return 0;
-}
-
-/*****************************************************************************/
-
-void
-change_current_desktop (int n)
-{
-  if (panel.current_screen != n)
-    {
-      if (n < 0)
-	n = 0;
-
-      if (n > panel.num_screens - 1)
-	n = panel.num_screens - 1;
-
-      net_current_desktop_set (n);
-    }
-  else
-    central_panel_set_current (panel.central_panel, panel.current_screen);
-}
-
-void
-change_number_of_desktops (int n)
-{
-  if (panel.num_screens != n)
-    net_number_of_desktops_set (n);
-}
-
-void
-change_desktop_name (int n, char *name)
-{
-}
-
-void
-current_desktop_changed (int n)
-{
-  if (panel.current_screen != n)
-    {
-      central_panel_set_current (panel.central_panel, n);
-      panel.current_screen = n;
+        settings.current = n;
+        central_panel_set_current(n);
     }
 }
 
-void
-number_of_desktops_changed (int n)
+void create_xfce_panel(void)
 {
-  if (panel.num_screens != n)
-    {
-      central_panel_set_screens (panel.central_panel, n);
-      panel.num_screens = n;
-    }
+    GtkWidget *window;
+    GtkWidget *frame1, *frame2;
+    GtkWidget *hbox1, *hbox2, *hbox3, *hbox4;
+
+    window = create_panel_window();
+
+    toplevel = window;
+
+    frame1 = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(frame1), GTK_SHADOW_OUT);
+    gtk_container_add(GTK_CONTAINER(window), frame1);
+    gtk_widget_show(frame1);
+
+    hbox1 = gtk_hbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(frame1), hbox1);
+    gtk_widget_show(hbox1);
+
+    hbox2 = gtk_hbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(hbox1), hbox2);
+    gtk_widget_show(hbox2);
+
+    frame2 = gtk_frame_new(NULL);
+    gtk_container_add(GTK_CONTAINER(hbox1), frame2);
+    gtk_widget_show(frame2);
+
+    central_frame = frame2;
+
+    hbox3 = gtk_hbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(frame2), hbox3);
+    gtk_widget_show(hbox3);
+
+    hbox4 = gtk_hbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(hbox1), hbox4);
+    gtk_widget_show(hbox4);
+
+    add_side_panel(LEFT, GTK_BOX(hbox2));
+    add_central_panel(GTK_BOX(hbox3));
+    add_side_panel(RIGHT, GTK_BOX(hbox4));
+
+    set_panel_settings();
+    set_panel_position(window);
+
+    gtk_widget_show(window);
 }
 
-void
-desktop_name_changed (int n, char *name)
+/*---------------------------------------------------------------------------*/
+
+void panel_cleanup(void)
 {
+    write_panel_config();
+
+    side_panel_cleanup(LEFT);
+    central_panel_cleanup();
+    side_panel_cleanup(RIGHT);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  settings */
+
+void panel_set_size(int size)
+{
+    side_panel_set_size(LEFT, size);
+    central_panel_set_size(size);
+    side_panel_set_size(RIGHT, size);
+
+    settings.size = size;
+}
+
+void panel_set_popup_size(int size)
+{
+    side_panel_set_popup_size(LEFT, size);
+    side_panel_set_popup_size(RIGHT, size);
+
+    settings.popup_size = size;
+}
+
+void panel_set_style(int style)
+{
+    if (style == OLD_STYLE)
+	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+    else
+	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_ETCHED_IN);
+    
+    side_panel_set_style(LEFT, style);
+    central_panel_set_style(style);
+    side_panel_set_style(RIGHT, style);
+
+    settings.style = style;
+}
+
+void panel_set_icon_theme(const char *theme)
+{
+    char *tmp;
+
+    side_panel_set_icon_theme(LEFT, theme);
+    central_panel_set_icon_theme(theme);
+    side_panel_set_icon_theme(RIGHT, theme);
+
+    tmp = settings.icon_theme;
+    settings.icon_theme = g_strdup(theme);
+    g_free(tmp);
+}
+
+void panel_set_num_left(int n)
+{
+    side_panel_set_num_groups(LEFT, n);
+    settings.num_left = n;
+}
+
+void panel_set_num_right(int n)
+{
+    side_panel_set_num_groups(RIGHT, n);
+    settings.num_right = n;
+}
+
+void panel_set_current(int n)
+{
+    settings.current = n;
+    central_panel_set_current(n);
+}
+
+void panel_set_num_screens(int n)
+{
+    settings.num_screens = n;
+    central_panel_set_num_screens(n);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  configuration */
+
+void panel_parse_xml(xmlNodePtr node)
+{
+    xmlChar *value;
+    xmlNodePtr child;
+
+    /* properties */
+    value = xmlGetProp(node, (const xmlChar *)"size");
+
+    if(value)
+        settings.size = atoi(value);
+
+    g_free(value);
+
+    value = xmlGetProp(node, (const xmlChar *)"popupsize");
+
+    if(value)
+        settings.popup_size = atoi(value);
+
+    g_free(value);
+
+    value = xmlGetProp(node, (const xmlChar *)"style");
+
+    if(value)
+        settings.style = atoi(value);
+
+    g_free(value);
+
+    value = xmlGetProp(node, (const xmlChar *)"icontheme");
+
+    if(value)
+        settings.icon_theme = g_strdup(value);
+
+    g_free(value);
+
+
+    value = xmlGetProp(node, (const xmlChar *)"left");
+
+    if(value)
+        settings.num_left = atoi(value);
+
+    g_free(value);
+
+    value = xmlGetProp(node, (const xmlChar *)"right");
+
+    if(value)
+        settings.num_right = atoi(value);
+
+    g_free(value);
+
+    value = xmlGetProp(node, (const xmlChar *)"screens");
+
+    if(value)
+        settings.num_screens = atoi(value);
+
+    g_free(value);
+
+    /* child nodes */
+    for(child = node->children; child; child = child->next)
+    {
+        if(xmlStrEqual(child->name, (const xmlChar *)"Position"))
+        {
+            value = xmlGetProp(child, (const xmlChar *)"x");
+
+            if(value)
+                settings.x = atoi(value);
+
+            g_free(value);
+
+            value = xmlGetProp(child, (const xmlChar *)"y");
+
+            if(value)
+                settings.y = atoi(value);
+
+            g_free(value);
+        }
+        if(xmlStrEqual(child->name, (const xmlChar *)"Lock"))
+        {
+            value = DATA(child);
+
+            if(value)
+                settings.lock_command = (char *)value;
+        }
+        if(xmlStrEqual(child->name, (const xmlChar *)"Exit"))
+        {
+            value = DATA(child);
+
+            if(value)
+                settings.exit_command = (char *)value;
+        }
+    }
+
+    /* check the values */
+    if(settings.style < OLD_STYLE || settings.style > NEW_STYLE)
+        settings.style = NEW_STYLE;
+    if(settings.size < SMALL || settings.size > LARGE)
+        settings.size = MEDIUM;
+    if(settings.popup_size < SMALL || settings.popup_size > LARGE)
+        settings.popup_size = MEDIUM;
+    if(settings.num_left < 1 || settings.num_left > NBGROUPS)
+        settings.num_left = 5;
+    if(settings.num_right < 1 || settings.num_right > NBGROUPS)
+        settings.num_right = 5;
+    if(settings.num_screens < 1 || settings.num_screens > NBSCREENS)
+        settings.num_screens = 4;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+void panel_write_xml(xmlNodePtr root)
+{
+    xmlNodePtr node;
+    xmlNodePtr child;
+    char value[MAXSTRLEN + 1];
+    
+    node = xmlNewTextChild(root, NULL, "Panel", NULL);
+    
+    snprintf(value, 2, "%d", settings.size);
+    xmlSetProp(node, "size", value);
+    
+    snprintf(value, 2, "%d", settings.popup_size);
+    xmlSetProp(node, "popupsize", value);
+    
+    snprintf(value, 2, "%d", settings.style);
+    xmlSetProp(node, "style", value);
+    
+    if (settings.icon_theme)
+	xmlSetProp(node, "icontheme", settings.icon_theme);
+    
+    snprintf(value, 2, "%d", settings.num_left);
+    xmlSetProp(node, "left", value);
+    
+    snprintf(value, 2, "%d", settings.num_right);
+    xmlSetProp(node, "right", value);
+    
+    snprintf(value, 2, "%d", settings.num_screens);
+    xmlSetProp(node, "screens", value);
+    
+    child = xmlNewTextChild(node, NULL, "Position", NULL);
+    
+    snprintf(value, 5, "%d", settings.x);
+    xmlSetProp(child, "x", value);
+    
+    snprintf(value, 5, "%d", settings.y);
+    xmlSetProp(child, "y", value);
+    
+    if (settings.lock_command)
+    {
+	child = xmlNewTextChild(node, NULL, "Lock", settings.lock_command);
+    }
+
+    if (settings.exit_command)
+    {
+	child = xmlNewTextChild(node, NULL, "Exit", settings.exit_command);
+    }
 }

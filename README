@@ -1,5 +1,5 @@
 README for xfce version 4.x
----------------------------
+===========================
 
 WHAT IS IT ?
 ------------
@@ -11,58 +11,52 @@ this new and improved toolkit (see http://www.gtk.org).
 WHAT'S NEW ?
 ------------
 Apart from the toolkit changes the underlying framework of the panel has also
-changed completely. All interactions with the window manager take place through
-the new window manager hints as defined on http://www.freedesktop.org. This
-means that you will need a compliant window manager for xfce to function
-properly (preferably xfwm4 ;-).
+changed completely. 
+
+All interactions with the window manager take place through the new window
+manager hints as defined on http://www.freedesktop.org. This means that you will
+need a compliant window manager for xfce to function properly (preferably xfwm4
+;-).
+
+The panel can now hold normal buttons and dynamic modules.
 
 INFO FOR DEVELOPERS
--------------------
-This section gives an overview of the internal design of the panel to assist
-anyone who wants to read the code.
-Several structures are defined to describe the different parts of the panel.
+===================
+If you are interested in helping with the development of xfce4 the best place to
+start reading is global.h which hold the type definitions of the different
+data structures used.
 
-The panel consists of three subpanels: two side panels (left and right) and a
-central panel. The central panel contains the desktop switcher and four small
-butons. The side panels consist of several panel groups.
+The panel design is a hierarchy of components:
 
-A panel group in turn consists of a top and a bottom widget. The top widget is
-usually a popup button, except for the outer groups on both panels where it is a
-move handle. The bottom widget is either a normal panel item (icon button with
-run action) or a module. 
+- Panel (file xfce.c): Global settings and panel framework.
 
-A module can be a builtin module or an external plugin. It usually is an
-indicator of some sort, e.g. a clock, a trashcan and a mail checker. For 
-demonstration purposes xfce comes with a builtin clock and trashcan and a sample
-plugin mailchecker. plugins are loaded throught the gmodule interface.
+- Central panel (file central.c): Minibuttons and desktop switcher.
 
-The panel defines a sort of API where commands are passed on through the
-hierarchy of structures.
+- Side panels (file side.c): Left and right panel containing several panel groups.
+  A panel group consists of a top widget and a bottom widget. The top widget is 
+  usually a popup button, but for the outermost groups it is a move handle. The
+  bottom widget is either a panel item (a button with an icon) or a panel module
+  (dynamically updated).
 
-*** UNFINISHED PART ***
-Popup menus are not yet implemented.
+- Panel popup (file popup.c): Popup button and popup menu containing menu items.
 
-Currently there is no configuration framework yet. There are functions to change
-the size of the panel (small, medium or large) and the style (new or old). The
-number of desktops can be set in settings.c for now. 
+- Panel item (file item.c): Tradioanl panel item consisting of an icon button,
+  which starts an application.
 
-The panel can switch desktops and, even nicer, reacts to changes made by other
-programs, both for the current desktop and the number of desktops.
+- Panel module (files module.c and builtins.c): New panel control, which is 
+  dynamically updated. Modules can be builtin or external using the gmodule 
+  interface.
 
-C STRUCTURE HIERARCHY
----------------------
-This only defines the relation between structures. Their members are omitted.
-You can find them in their corresponding header files.
+Other files:
+- callbacks.c: most callback functions are defined here.
 
-XfcePanel panel
-	SidePanel *left_panel
-  		PanelGroup *groups [NBGROUPS]
-			MoveHandle handle / PanelPopup popup
-			PanelItem item / PanelModule module
-	CentralPanel central_panel
-		ScreenButton *screen_buttons [NBSCREENS]
-	SidePanel right_panel
-  		PanelGroup *groups [NBGROUPS]
-			MoveHandle handle / PanelPopup popup
-			PanelItem item / PanelModule module
+- dialogs.c: convenience dialogs and panel configuration dialogs.
+
+- dnd.c: general dnd convenience functions.
+
+- move.c: moveing the panel around.
+
+- settings.c: reading and writing panel configuration.
+
+- wmhints.c: window manager hints
 

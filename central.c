@@ -1,485 +1,605 @@
-#include <gtk/gtk.h>
+/*  central.c
+ *
+ *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Library General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
+/* central.c
+ *
+ * Contains functions for the central part of the panel, which consists of the
+ * desktop switcher and four mini-buttons.
+ *
+ */
+
+#include "central.h"
 
 #include "xfce.h"
-#include "central.h"
+#include "wmhints.h"
 #include "callbacks.h"
 #include "icons.h"
 
-/*****************************************************************************/
-/* colors used for screen buttons in OLD_STYLE */
-static char *screen_class[] = { 
-  "gxfce_color2",
-  "gxfce_color5",
-  "gxfce_color4",
-  "gxfce_color6"
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* structures */
+
+struct _ScreenButton
+{
+    int index;
+    char *name;
+
+    int callback_id;
+
+    GtkWidget *frame;
+    GtkWidget *button;
+    GtkWidget *label;
 };
 
-CentralPanel *
-central_panel_new (void)
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* colors used for screen buttons in OLD_STYLE */
+
+static char *default_screen_names[] = {
+    N_("One"),
+    N_("Two"),
+    N_("Three"),
+    N_("Four"),
+    N_("Five"),
+    N_("Six"),
+    N_("Seven"),
+    N_("Eight"),
+    N_("Nine"),
+    N_("Ten"),
+    N_("Eleven"),
+    N_("Twelve")
+};
+
+static char *screen_class[] = {
+    "gxfce_color2",
+    "gxfce_color5",
+    "gxfce_color4",
+    "gxfce_color6"
+};
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+   Central panel  
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+GtkWidget *minibuttons[4];
+GtkWidget *left_table;
+GtkWidget *right_table;
+
+GtkWidget *desktop_table;
+ScreenButton *screen_buttons[NBSCREENS];
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/*  creation and destruction */
+
+void central_panel_init()
 {
-  int i;
-  CentralPanel *cp = g_new (CentralPanel, 1);
+    int i;
 
-  cp->frame = NULL;
-  cp->hbox = NULL;
+    for(i = 0; i < 4; i++)
+        minibuttons[i] = NULL;
 
-  cp->left_table = NULL;
-  cp->left_buttons[0] = NULL;
-  cp->left_buttons[1] = NULL;
+    left_table = NULL;
+    right_table = NULL;
+    desktop_table = NULL;
 
-  cp->right_table = NULL;
-  cp->right_buttons[0] = NULL;
-  cp->right_buttons[1] = NULL;
+    for(i = 0; i < NBSCREENS; i++)
+        screen_buttons[i] = screen_button_new(i);
+}
 
-  cp->desktop_table = NULL;
+/*---------------------------------------------------------------------------*/
 
-  for (i = 0; i < NBSCREENS; i++)
+static void create_minibuttons(void)
+{
+    GdkPixbuf *pb[4];
+    GtkWidget *im;
+    GtkWidget *button;
+    int i;
+
+    pb[0] = get_pixbuf_from_id(MINILOCK_ICON);
+    pb[1] = get_pixbuf_from_id(MINIINFO_ICON);
+    pb[2] = get_pixbuf_from_id(MINIPALET_ICON);
+    pb[3] = get_pixbuf_from_id(MINIPOWER_ICON);
+
+    for(i = 0; i < 4; i++)
     {
-      cp->screen_buttons[i] = NULL;
-      cp->screen_names[i] = NULL;
+        button = gtk_button_new();
+        gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
+        gtk_widget_show(button);
+
+        im = gtk_image_new_from_pixbuf(pb[i]);
+        gtk_widget_show(im);
+        g_object_unref(pb[i]);
+        gtk_container_add(GTK_CONTAINER(button), im);
+
+        minibuttons[i] = button;
     }
+
+    /* fixed tooltips, since the user can't change the icon anyway */
+    add_tooltip(minibuttons[0], _("Lock the screen"));
+    add_tooltip(minibuttons[1], _("Info..."));
+    add_tooltip(minibuttons[2], _("Setup..."));
+    add_tooltip(minibuttons[3], _("Mouse 1: Exit\nMouse 3: Restart"));
+
+    /* signals */
+    g_signal_connect_swapped(minibuttons[0], "clicked",
+                             G_CALLBACK(mini_lock_cb), NULL);
+
+    g_signal_connect_swapped(minibuttons[1], "clicked",
+                             G_CALLBACK(mini_info_cb), NULL);
+
+    g_signal_connect_swapped(minibuttons[2], "clicked",
+                             G_CALLBACK(mini_palet_cb), NULL);
+
+    /* make left _and_ right mouse buttons work for mini power icon */
+    g_signal_connect(minibuttons[3], "button-press-event",
+                     G_CALLBACK(gtk_button_pressed), NULL);
+    g_signal_connect(minibuttons[3], "button-release-event",
+                     G_CALLBACK(mini_power_cb), NULL);
+}
+
+static void add_mini_table(int side, GtkBox * hbox)
+{
+    GtkWidget *table;
+    int first;
+
+    table = gtk_table_new(2, 2, FALSE);
+    gtk_widget_show(table);
+
+    if(side == LEFT)
+    {
+        left_table = table;
+        first = 0;
+    }
+    else
+    {
+        right_table = table;
+        first = 2;
+    }
+
+    /* by default put buttons in 1st column in 2 rows */
+    gtk_table_attach(GTK_TABLE(table), minibuttons[first],
+                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+    gtk_table_attach(GTK_TABLE(table), minibuttons[first + 1],
+                     0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+
+    gtk_box_pack_start(hbox, table, TRUE, TRUE, 0);
+}
+
+static void add_desktop_table(GtkBox * hbox)
+{
+    GtkWidget *table;
+    int i;
+
+    table = gtk_table_new(2, NBSCREENS, FALSE);
+    gtk_widget_show(table);
+
+    desktop_table = table;
+
+    for(i = 0; i < NBSCREENS; i++)
+    {
+        ScreenButton *sb = screen_buttons[i];
+
+        add_screen_button(sb, table);
+    }
+
+    gtk_box_pack_start(hbox, table, TRUE, TRUE, 0);
+}
+
+void add_central_panel(GtkBox * hbox)
+{
+    create_minibuttons();
+    add_mini_table(LEFT, hbox);
+    add_desktop_table(hbox);
+    add_mini_table(RIGHT, hbox);
+}
+
+/*---------------------------------------------------------------------------*/
+
+void central_panel_cleanup()
+{
+    int i;
+
+    for(i = 0; i < NBSCREENS; i++)
+        screen_button_free(screen_buttons[i]);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* global settings */
+
+static void reorder_minitable(int side, int size)
+{
+    GtkWidget *table;
+    int n;
+    GList *child;
+    GtkTableChild *tc;
+    int hpos, vpos;
+
+    if(side == LEFT)
+    {
+        table = left_table;
+        n = 1;
+    }
+    else
+    {
+        table = right_table;
+        n = 3;
+    }
+
+    /* when size == SMALL put second button in second column first row
+     * otherwise put second button in first column second row */
+    for(child = GTK_TABLE(table)->children;
+        child && child->data; child = child->next)
+    {
+        tc = (GtkTableChild *) child->data;
+
+        if(tc->widget == minibuttons[n])
+            break;
+    }
+
+    if(size == SMALL)
+    {
+        hpos = 1;
+        vpos = 0;
+    }
+    else
+    {
+        hpos = 0;
+        vpos = 1;
+    }
+
+    tc->left_attach = hpos;
+    tc->right_attach = hpos + 1;
+    tc->top_attach = vpos;
+    tc->bottom_attach = vpos + 1;
+
+}
+
+static void reorder_desktop_table(int size)
+{
+    GtkWidget *table;
+    GList *child;
+    GtkTableChild *tc;
+    int hpos, vpos;
+
+    table = desktop_table;
+
+    for(child = GTK_TABLE(table)->children; child && child->data;
+        child = child->next)
+    {
+        ScreenButton *sb;
+        int i;
+
+        tc = (GtkTableChild *) child->data;
+
+        for(i = 0; i < NBSCREENS; i++)
+        {
+            sb = screen_buttons[i];
+
+            if(tc->widget == sb->frame)
+                break;
+        }
+
+        if((i % 2) == 0)
+        {
+            if(size == SMALL)
+            {
+                hpos = i;
+                vpos = 0;
+            }
+            else
+            {
+                hpos = i / 2;
+                vpos = 0;
+            }
+        }
+        else
+        {
+            if(size == SMALL)
+            {
+                hpos = i;
+                vpos = 0;
+            }
+            else
+            {
+                hpos = (i - 1) / 2;
+                vpos = 1;
+            }
+        }
+
+        tc->left_attach = hpos;
+        tc->right_attach = hpos + 1;
+        tc->top_attach = vpos;
+        tc->bottom_attach = vpos + 1;
+    }
+}
+
+void central_panel_set_size(int size)
+{
+    GtkRequisition req;
+    int w, h, i;
+
+    /* mini tables */
+    reorder_minitable(LEFT, size);
+    reorder_minitable(RIGHT, size);
+
+    /* screen buttons */
+    for(i = 0; i < NBSCREENS; i++)
+    {
+        ScreenButton *sb = screen_buttons[i];
+
+        screen_button_set_size(sb, size);
+    }
+
+    /* desktop table */
+    reorder_desktop_table(size);
+
+    /* set all minibuttons to the same size */
+    for(i = 0; i < 4; i++)
+        gtk_widget_set_size_request(minibuttons[i], -1, -1);
+
+    w = h = 0;
+
+    for(i = 0; i < 4; i++)
+    {
+        gtk_widget_size_request(minibuttons[i], &req);
+
+        if(req.width > w)
+            w = req.width;
+        if(req.height > h)
+            h = req.height;
+    }
+
+    for(i = 0; i < 4; i++)
+        gtk_widget_set_size_request(minibuttons[i], w, h);
+}
+
+/*---------------------------------------------------------------------------*/
+
+void central_panel_set_style(int style)
+{
+    int i;
+
+    for(i = 0; i < NBSCREENS; i++)
+    {
+        ScreenButton *sb = screen_buttons[i];
+
+        screen_button_set_style(sb, style);
+    }
+}
+
+void central_panel_set_icon_theme(const char *theme)
+{
+}
+
+void central_panel_set_current(int n)
+{
+    int i;
+
+    if(n < 0)
+        return;
+
+    if(n > NBSCREENS)
+    {
+        /* try to force our maximum number of desktops */
+        request_net_number_of_desktops(NBSCREENS);
+        request_net_current_desktop(NBSCREENS);
+        return;
+    }
+
+    if(n > settings.num_screens)
+        central_panel_set_num_screens(n);
+
+    for(i = 0; i < NBSCREENS; i++)
+    {
+        ScreenButton *sb = screen_buttons[i];
+
+        /* Prevent signal handler to run; we're being called
+         * as a reaction to a change by another program
+         */
+        g_signal_handler_block(sb->button, sb->callback_id);
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sb->button), i == n);
+        g_signal_handler_unblock(sb->button, sb->callback_id);
+    }
+}
+
+void central_panel_set_num_screens(int n)
+{
+    int i;
+
+    for(i = 0; i < NBSCREENS; i++)
+    {
+        ScreenButton *sb = screen_buttons[i];
+
+        if(i < n)
+            gtk_widget_show(sb->frame);
+        else
+            gtk_widget_hide(sb->frame);
+    }
+
+    if(n == 1)
+        gtk_widget_hide(desktop_table);
+    else
+        gtk_widget_show(desktop_table);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+/* configuration */
+
+void central_panel_parse_xml(xmlNodePtr node)
+{
+    xmlNodePtr child;
+    xmlChar *value;
+    int i;
+
+    child = node->children;
+
+    for(i = 0; i < NBSCREENS; i++)
+    {
+        ScreenButton *sb = screen_buttons[i];
+
+        if(!child || !xmlStrEqual(child->name, (const xmlChar *)"Screen"))
+        {
+            sb->name = g_strdup(default_screen_names[i]);
+            continue;
+        }
+
+        value = DATA(child);
+
+        if(value)
+            sb->name = (char *)value;
+        else
+            sb->name = g_strdup(default_screen_names[i]);
+
+        if(child)
+            child = child->next;
+    }
+}
+
+void central_panel_write_xml(xmlNodePtr root)
+{
+    xmlNodePtr node;
+    int i;
     
-  cp->lock_command = NULL;
-  cp->xmlnode = NULL;
-
-  return cp;
-}
-
-static void
-create_left_table (CentralPanel * cp)
-{
-  GtkWidget *im;
-  GdkPixbuf *pb;
-
-  cp->left_table = gtk_table_new (2, 2, FALSE);
-
-  cp->left_buttons[0] = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (cp->left_buttons[0]), GTK_RELIEF_NONE);
-  cp->left_buttons[1] = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (cp->left_buttons[1]), GTK_RELIEF_NONE);
-
-  pb = get_pixbuf_from_id (MINILOCK_ICON);
-  im = gtk_image_new_from_pixbuf (pb);
-  g_object_unref (pb);
-  gtk_container_add (GTK_CONTAINER (cp->left_buttons[0]), im);
-
-  pb = get_pixbuf_from_id (MINIINFO_ICON);
-  im = gtk_image_new_from_pixbuf (pb);
-  g_object_unref (pb);
-  gtk_container_add (GTK_CONTAINER (cp->left_buttons[1]), im);
-
-  /* by default put buttons in 1st column in 2 rows */
-  gtk_table_attach (GTK_TABLE (cp->left_table), cp->left_buttons[0],
-		    0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-  gtk_table_attach (GTK_TABLE (cp->left_table), cp->left_buttons[1],
-		    0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
-
-  gtk_widget_show_all (cp->left_table);
-}
-
-static void
-create_right_table (CentralPanel * cp)
-{
-  GtkWidget *im;
-  GdkPixbuf *pb;
-
-  cp->right_table = gtk_table_new (2, 2, FALSE);
-
-  cp->right_buttons[0] = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (cp->right_buttons[0]), GTK_RELIEF_NONE);
-  cp->right_buttons[1] = gtk_button_new ();
-  gtk_button_set_relief (GTK_BUTTON (cp->right_buttons[1]), GTK_RELIEF_NONE);
-
-  pb = get_pixbuf_from_id (MINIPALET_ICON);
-  im = gtk_image_new_from_pixbuf (pb);
-  g_object_unref (pb);
-  gtk_container_add (GTK_CONTAINER (cp->right_buttons[0]), im);
-
-  pb = get_pixbuf_from_id (MINIPOWER_ICON);
-  im = gtk_image_new_from_pixbuf (pb);
-  g_object_unref (pb);
-  gtk_container_add (GTK_CONTAINER (cp->right_buttons[1]), im);
-
-  /* by default put buttons in 1st column in 2 rows */
-  gtk_table_attach (GTK_TABLE (cp->right_table), cp->right_buttons[0],
-		    0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-  gtk_table_attach (GTK_TABLE (cp->right_table), cp->right_buttons[1],
-		    0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
-
-  gtk_widget_show_all (cp->right_table);
-}
-
-static void
-create_desktop_table (CentralPanel * cp)
-{
-  int i;
-
-  cp->desktop_table = gtk_table_new (2, NBSCREENS, FALSE);
-
-  for (i = 0; i < NBSCREENS; i++)
-    {
-      ScreenButton *sb = cp->screen_buttons[i] = screen_button_new ();
-
-      sb->frame = gtk_frame_new (NULL);
-      gtk_frame_set_shadow_type (GTK_FRAME (sb->frame), GTK_SHADOW_IN);
-
-      sb->button = gtk_toggle_button_new ();
-      gtk_button_set_relief (GTK_BUTTON (sb->button), GTK_RELIEF_HALF);
-      gtk_widget_set_size_request (sb->button, SCREEN_BUTTON_WIDTH, -1);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->button), i == 0);
-      gtk_container_add (GTK_CONTAINER (sb->frame), sb->button);
-
-      sb->label = gtk_label_new (cp->screen_names[i]);
-      gtk_misc_set_alignment (GTK_MISC (sb->label), 0.1, 0.5);
-      gtk_container_add (GTK_CONTAINER (sb->button), sb->label);
-
-      /* pack buttons alternating first and second row */
-      if ((i % 2) == 0)
-	{
-	  gtk_table_attach (GTK_TABLE (cp->desktop_table), sb->frame,
-			    i, i + 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-	}
-      else
-	{
-	  int pos = i - 1;
-
-	  gtk_table_attach (GTK_TABLE (cp->desktop_table), sb->frame,
-			    pos, pos + 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
-	}
-	
-      /* signals */
-      /* we need the callback id to be able to block the handler to 
-	 prevent a race condition when changing screens */
-      sb->callback_id = 
-	g_signal_connect_swapped (sb->button, "clicked", 
-				  G_CALLBACK (change_current_desktop), 
-				  GINT_TO_POINTER (i));
-	
-      g_signal_connect (sb->button, "button-press-event",
-			G_CALLBACK (screen_button_pressed_cb), sb);
-    }
-
-  gtk_widget_show_all (cp->desktop_table);
-}
-
-void
-add_central_panel (XfcePanel * p)
-{
-  create_central_panel (p->central_panel);
-
-  gtk_box_pack_start (GTK_BOX (p->hbox), p->central_panel->frame,
-		      TRUE, TRUE, 0);
-}
-
-void
-create_central_panel (CentralPanel * cp)
-{
-  cp->frame = gtk_frame_new (NULL);
-  gtk_frame_set_shadow_type (GTK_FRAME (cp->frame), GTK_SHADOW_OUT);
-  gtk_container_set_border_width (GTK_CONTAINER (cp->frame), 1);
-
-  cp->hbox = gtk_hbox_new (FALSE, 0);
-  gtk_container_add (GTK_CONTAINER (cp->frame), cp->hbox);
-
-  create_left_table (cp);
-  gtk_box_pack_start (GTK_BOX (cp->hbox), cp->left_table, FALSE, FALSE, 0);
-
-  create_desktop_table (cp);
-  gtk_box_pack_start (GTK_BOX (cp->hbox), cp->desktop_table, TRUE, TRUE, 0);
-
-  create_right_table (cp);
-  gtk_box_pack_start (GTK_BOX (cp->hbox), cp->right_table, FALSE, FALSE, 0);
-
-  gtk_widget_show (cp->hbox);
-  gtk_widget_show (cp->frame);
-  
-  /* signals */
-  /* left minibuttons */
-  if (!cp->lock_command)
-    cp->lock_command = g_strdup ("xflock");
-  /* fixed tooltip, since the user can't change the icon anyway */
-  panel_set_tooltip (cp->left_buttons[0], _("Lock the screen"));
-  g_signal_connect_swapped (cp->left_buttons[0], "clicked",
-		    G_CALLBACK (mini_lock_cb), cp->lock_command);
-  
-  panel_set_tooltip (cp->left_buttons[1], _("Info..."));
-  g_signal_connect_swapped (cp->left_buttons[1], "clicked",
-			    G_CALLBACK (mini_info_cb), NULL);
-			    
-  /* right minibuttons */
-  panel_set_tooltip (cp->right_buttons[0], _("Setup..."));
-  g_signal_connect_swapped (cp->right_buttons[0], "clicked",
-			    G_CALLBACK (mini_palet_cb), NULL);
-
-  panel_set_tooltip (cp->right_buttons[1], 
-		     _("Mouse 1: Exit\nMouse 3: Restart"));
-  /* make left _and_ right button work */
-  g_signal_connect_swapped (cp->right_buttons[1], "button-press-event",
-			    G_CALLBACK (gtk_button_pressed), 
-			    cp->right_buttons[1]);
-  g_signal_connect (cp->right_buttons[1], "button-release-event",
-		    G_CALLBACK (mini_power_cb), NULL);
-}
-
-static int
-get_screen_button_height (int size)
-{
-  if (size == SMALL)
-    return SMALL_PANEL_ICONS;
-  else if (size == LARGE)
-    return (LARGE_TOPHEIGHT + LARGE_PANEL_ICONS) / 2 - 6;
-  else
-    return (MEDIUM_TOPHEIGHT + MEDIUM_PANEL_ICONS) / 2 - 5;    
-}
-
-static int
-get_screen_button_width (int size)
-{
-  if (size == SMALL)
-    return SCREEN_BUTTON_WIDTH / 2;
-  else
-    return SCREEN_BUTTON_WIDTH;
-}
-
-void
-central_panel_set_size (CentralPanel * cp, int size)
-{
-  GtkRequisition req;
-  GList *child;
-  GtkTableChild *tc;
-  int hpos, vpos;
-  int h, w;
-
-  /* left table 
-     when SMALL put second button in first column first row
-     else put second button in second column second row
-   */
-  for (child = GTK_TABLE (cp->left_table)->children;
-       child && child->data; child = child->next)
-    {
-      tc = (GtkTableChild *) child->data;
-      
-      if (tc->widget == cp->left_buttons [1])
-	break;
-    }
-
-  if (size == SMALL)
-    {
-      hpos = 1;
-      vpos = 0;
-    }
-  else
-    {
-      hpos = 0;
-      vpos = 1;
-    }
-  
-  tc->left_attach = hpos;
-  tc->right_attach = hpos + 1;
-  tc->top_attach = vpos;
-  tc->bottom_attach = vpos + 1;
-
-  /* right table
-     when SMALL put second button in second column first row
-     else put second button in first column second row
-   */
-  for (child = GTK_TABLE (cp->right_table)->children;
-       child && child->data; child = child->next)
-    {
-      tc = (GtkTableChild *) child->data;
-      
-      if (tc->widget == cp->right_buttons [1])
-	break;
-    }
-   
-  if (size == SMALL)
-    {
-      hpos = 1;
-      vpos = 0;
-    }
-  else
-    {
-      hpos = 0;
-      vpos = 1;
-    }
-  
-  tc->left_attach = hpos;
-  tc->right_attach = hpos + 1;
-  tc->top_attach = vpos;
-  tc->bottom_attach = vpos + 1;
-
-  /* desktop table */
-  h = get_screen_button_height (size);
-  w = get_screen_button_width (size);
-
-  for (child = GTK_TABLE (cp->desktop_table)->children;
-       child && child->data; child = child->next)
-    {
-      ScreenButton *sb;
-      int i;
-
-      for (i = 0; i < NBSCREENS; i++)
-	{
-	  sb = cp->screen_buttons[i];
-	  gtk_widget_set_size_request (sb->button, w, h);
-	}
-	
-      tc = (GtkTableChild *) child->data;
-
-      for (i = 0; i < NBSCREENS; i++)
-	{
-	  sb = cp->screen_buttons[i];
-	  
-	  if (tc->widget == sb->frame)
-	    break;
-	}
-	
-      if ((i % 2)==0)
-	{
-	  if (size == SMALL)
-	    {
-	      hpos = i;
-	      vpos = 0;
-	    }
-	  else
-	    {
-	      hpos = i / 2;
-	      vpos = 0;
-	    }
-	}
-      else
-	{
-	  if (size == SMALL)
-	    {
-	      hpos = i;
-	      vpos = 0;
-	    }
-	  else
-	    {
-	      hpos = (i - 1) / 2;
-	      vpos = 1;
-	    }
-	}
-      
-      tc->left_attach = hpos;
-      tc->right_attach = hpos + 1;
-      tc->top_attach = vpos;
-      tc->bottom_attach = vpos + 1;
-    }
+    node = xmlNewTextChild(root, NULL, "Central", NULL);
     
-  gtk_widget_set_size_request (cp->left_buttons[0], -1, -1);
-  gtk_widget_set_size_request (cp->left_buttons[1], -1, -1);
-  gtk_widget_set_size_request (cp->right_buttons[0], -1, -1);
-  gtk_widget_set_size_request (cp->right_buttons[1], -1, -1);
-
-  /* largest minibutton */
-  gtk_widget_size_request (cp->right_buttons[0], &req);
-    
-  w = req.width;
-  h = req.height;
-  
-  gtk_widget_set_size_request (cp->left_buttons[0], w, h);
-  gtk_widget_set_size_request (cp->left_buttons[1], w, h);
-  gtk_widget_set_size_request (cp->right_buttons[1], w, h);
-}
-
-void
-central_panel_set_style (CentralPanel * cp, int style)
-{
-  int i;
-  
-  if (style == OLD_STYLE)
+    for (i = 0; i < NBSCREENS; i++)
     {
-      gtk_frame_set_shadow_type (GTK_FRAME (cp->frame), GTK_SHADOW_OUT);
-      
-      for (i = 0; i < NBSCREENS; i++)
-	{
-	  gtk_widget_set_name (cp->screen_buttons[i]->button, 
-			       screen_class[i % 4]);
-	}
-    }
-  else
-    {
-      gtk_frame_set_shadow_type (GTK_FRAME (cp->frame), GTK_SHADOW_ETCHED_IN);
-      
-      for (i = 0; i < NBSCREENS; i++)
-	{
-	  gtk_widget_set_name (cp->screen_buttons[i]->button, 
-			       "gxfce_color4");
-	}
+	ScreenButton *sb = screen_buttons[i];
+	
+	xmlNewTextChild(node, NULL, "Screen", sb->name);
     }
 }
 
-void
-central_panel_set_screens (CentralPanel * cp, int n)
-{
-  int i;
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-  for (i = 0; i < NBSCREENS; i++)
+   Screen buttons
+
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+ScreenButton *screen_button_new(int index)
+{
+    ScreenButton *sb = g_new(ScreenButton, 1);
+
+    sb->index = index;
+    sb->name = NULL;
+    sb->callback_id = 0;
+
+    sb->frame = NULL;
+    sb->button = NULL;
+    sb->label = NULL;
+
+    return sb;
+};
+
+void add_screen_button(ScreenButton * sb, GtkWidget * table)
+{
+    int pos;
+
+    sb->frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(sb->frame), GTK_SHADOW_IN);
+    gtk_widget_show(sb->frame);
+
+    sb->button = gtk_toggle_button_new();
+    gtk_button_set_relief(GTK_BUTTON(sb->button), GTK_RELIEF_HALF);
+    gtk_widget_set_size_request(sb->button, SCREEN_BUTTON_WIDTH, -1);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sb->button), sb->index == 0);
+    gtk_container_add(GTK_CONTAINER(sb->frame), sb->button);
+    gtk_widget_show(sb->button);
+
+    sb->label = gtk_label_new(sb->name);
+    gtk_misc_set_alignment(GTK_MISC(sb->label), 0.1, 0.5);
+    gtk_container_add(GTK_CONTAINER(sb->button), sb->label);
+    gtk_widget_show(sb->label);
+
+    /* pack buttons alternating first and second row */
+    if((sb->index % 2) == 0)
     {
-      ScreenButton *sb = cp->screen_buttons[i];
+        pos = sb->index;
 
-      if (i < n)
-	gtk_widget_show (sb->frame);
-      else
-	gtk_widget_hide (sb->frame);
+        gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1, GTK_EXPAND,
+                         GTK_EXPAND, 0, 0);
     }
-}
-
-void
-central_panel_free (CentralPanel * cp)
-{
-  int i;
-
-  /* the gtk widgets are destroyed by gtk,
-     so we only have to get rid of our own
-     structures.
-   */
-
-  for (i = 0; i < NBSCREENS; i++)
-    screen_button_free (cp->screen_buttons[i]);
-
-  g_free (cp);
-}
-
-void 
-central_panel_set_current (CentralPanel * cp, int n)
-{
-  int i;
-  
-  for (i = 0; i < NBSCREENS; i++)
+    else
     {
-      ScreenButton *sb = cp->screen_buttons[i];
-      
-      g_signal_handler_block (sb->button, sb->callback_id);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->button), i == n);
-      g_signal_handler_unblock (sb->button, sb->callback_id);
+        pos = sb->index - 1;
+
+        gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 1, 2,
+                         GTK_EXPAND, GTK_EXPAND, 0, 0);
     }
+
+    /* signals */
+    /* we need the callback id to be able to block the handler to 
+       prevent a race condition when changing screens */
+    sb->callback_id =
+        g_signal_connect_swapped(sb->button, "clicked",
+                                 G_CALLBACK(request_net_current_desktop),
+                                 GINT_TO_POINTER(sb->index));
+
+    g_signal_connect(sb->button, "button-press-event",
+                     G_CALLBACK(screen_button_pressed_cb), sb);
 }
 
-/*****************************************************************************/
-
-ScreenButton *
-screen_button_new (void)
+void screen_button_destroy(ScreenButton * sb)
 {
-  ScreenButton *sb = g_new (ScreenButton, 1);
-
-  sb->frame = NULL;
-  sb->button = NULL;
-  sb->label = NULL;
-  sb->callback_id = 0;
-  
-  return sb;
+    gtk_container_remove(GTK_CONTAINER(desktop_table), sb->frame);
+    gtk_widget_destroy(sb->frame);
+    sb->frame = NULL;
 }
 
-void
-screen_button_free (ScreenButton * sb)
+void screen_button_free(ScreenButton * sb)
 {
-  /* the gtk widgets are destroyed by gtk,
-     so we only have to get rid of our own
-     structures.
-   */
-
-  g_free (sb);
+    g_free(sb->name);
+    g_free(sb);
 }
 
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+void screen_button_set_size(ScreenButton * sb, int size)
+{
+    int w, h;
+
+    /* NOTE:
+     * calculation of height is very arbitrary. I just put here what looks good
+     * on my screen. Should probably be something a little more intelligent. */
+    if(size == SMALL)
+    {
+        w = SCREEN_BUTTON_WIDTH / 2;
+        h = SMALL_PANEL_ICONS;
+    }
+    else if(size == LARGE)
+    {
+        w = SCREEN_BUTTON_WIDTH;
+        h = (LARGE_TOPHEIGHT + LARGE_PANEL_ICONS) / 2 - 6;
+    }
+    else
+    {
+        w = SCREEN_BUTTON_WIDTH;
+        h = (MEDIUM_TOPHEIGHT + MEDIUM_PANEL_ICONS) / 2 - 5;
+    }
+
+    gtk_widget_set_size_request(sb->button, w, h);
+}
+
+void screen_button_set_style(ScreenButton * sb, int style)
+{
+    if(style == OLD_STYLE)
+        gtk_widget_set_name(sb->button, screen_class[sb->index % 4]);
+    else
+        gtk_widget_set_name(sb->button, "gxfce_color4");
+}

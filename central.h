@@ -1,52 +1,52 @@
+/*  central.h
+ *
+ *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+ *
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Library General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
 #ifndef __XFCE_CENTRAL_H__
 #define __XFCE_CENTRAL_H__
 
-#include <gtk/gtk.h>
-#include "xfce.h"
+#include "global.h"
 
-struct _CentralPanel
-{
-  char *screen_names[NBSCREENS];
-  char *lock_command;
-  char *lock_tip;
+/* central panel */
+void central_panel_init(void);
+void add_central_panel(GtkBox * box);
+void central_panel_cleanup(void);
 
-  GtkWidget *frame;
-  GtkWidget *hbox;
+/* global settings */
+void central_panel_set_size(int size);
+void central_panel_set_style(int style);
+void central_panel_set_icon_theme(const char *theme);
 
-  GtkWidget *left_table;
-  GtkWidget *left_buttons[2];
+void central_panel_set_current(int n);
 
-  GtkWidget *right_table;
-  GtkWidget *right_buttons[2];
+void central_panel_set_num_screens(int n);
 
-  GtkWidget *desktop_table;
-  ScreenButton *screen_buttons[NBSCREENS];
-  
-  gpointer xmlnode;
-};
+/* screen buttons */
+ScreenButton *screen_button_new(int index);
+void add_screen_button(ScreenButton * sb, GtkWidget * table);
+void screen_button_free(ScreenButton * sb);
 
-struct _ScreenButton
-{
-  GtkWidget *frame;
-  GtkWidget *button;
-  GtkWidget *label;
-  int callback_id;
-};
+/* settings */
+void screen_button_set_size(ScreenButton * sb, int size);
+void screen_button_set_style(ScreenButton * sb, int style);
 
-/*****************************************************************************/
-
-CentralPanel *central_panel_new (void);
-void add_central_panel (XfcePanel * p);
-void create_central_panel (CentralPanel * cp);
-void central_panel_set_size (CentralPanel * cp, int size);
-void central_panel_set_style (CentralPanel * cp, int style);
-void central_panel_set_screens (CentralPanel * cp, int n);
-void central_panel_free (CentralPanel * cp);
-void central_panel_set_current (CentralPanel * cp, int n);
-
-/*****************************************************************************/
-
-ScreenButton *screen_button_new (void);
-void screen_button_free (ScreenButton * sb);
+/* central panel configuration */
+void central_panel_parse_xml(xmlNodePtr node);
+void central_panel_write_xml(xmlNodePtr root);
 
 #endif /* __XFCE_CENTRAL_H__ */

@@ -25,12 +25,14 @@
 
 typedef struct _cursoroffset
 {
-  gint x, y;
+    gint x, y;
 }
 CursorOffset;
 
+/*
 void CreateDrawGC (GdkWindow *w);
 void FreeDrawGC (void);
-void attach_move_callbacks (GtkWidget *handle, GtkWidget *window);
+*/
+void attach_move_callbacks(GtkWidget * handle);
 
 #endif

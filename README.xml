@@ -1,25 +1,29 @@
 Proposal for xml config file for xfce
 -------------------------------------
-namespace: xfce:"http://www.xfce.org/xfce"
-root: Panel
+See example.xfce4rc for an example
 
-name: Panel
-parent: none
-properties: size (int), popupsize (int), style (int), icontheme (string)
+namespace: xfce:"http://www.xfce.org/xfce" (not implemented)
+
+==============================================================================
+root: Xfce
 children:
-  Position
+  Panel
   Central
   Left
   Right
 
-name: Position
-parent: Panel  
-properties: x (int), y (int)
-content: none
-children: none
+==============================================================================
+name: Panel
+parent: Xfce
+properties: size (int), popupsize (int), style (int), icontheme (string),
+	    left (int), right (int), screens (int)
+children:
+  Position
+  Lock
+  Exit
 
 name: Central
-parent: Panel  
+parent: Xfce  
 properties: none
 content: none
 children:
@@ -28,44 +32,46 @@ children:
   Power
 
 name: Left
-parent: Panel  
+parent: Xfce  
 properties: visible
 content: none
 children:
   Group
 
 name Right
-parent: Panel  
+parent: Xfce  
 properties: visible
 content: none
 children:
   Group
 
-name: Screens
-parent: Central
-properties: visible (int)
+==============================================================================
+name: Position
+parent: Panel  
+properties: x (int), y (int)
 content: none
-children:
-  Screen
-
-name: Screen
-parent: Screens
-properties: none
-content: screen name
 children: none
 
 name: Lock
-parent: Central
+parent: Panel
 properties: none
 content: lock command
 children: none
 
-name: Power
-parent: Central
-properties: ?
-content: ? something to quit the session
+name: Exit
+parent: Panel
+properties: none
+content: command run at exit
 children: none
 
+------------------------------------------------------------------------------
+name: Screen
+parent: Central
+properties: none
+content: screen name
+children: none
+
+------------------------------------------------------------------------------
 name: Group
 parent: Left, Right
 properties: none
@@ -75,6 +81,7 @@ children:
   Item
   Module
 
+==============================================================================
 name: Popup
 parent: Group
 properties: none
@@ -82,6 +89,13 @@ content: none
 children:
   Item
 
+name: Module
+parent: Group
+properties: id (int)
+content: module name
+children: none
+
+------------------------------------------------------------------------------
 name: Item
 parent: Group, Popup
 properties: none
@@ -91,14 +105,8 @@ children:
   Command
   Tooltip
   Icon
-:close
 
-name: Module
-parent: Group
-properties: id (int)
-content: module name
-children: none
-
+==============================================================================
 name: Caption
 parent: Item  
 properties: none
@@ -123,6 +131,3 @@ properties: id (int)
 content: path to icon
 children: none
 
-
-Example
--------

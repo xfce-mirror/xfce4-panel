@@ -1,6 +1,6 @@
-OBJS = xfce.o central.o side.o \
-       popup.o item.o module.o settings.o icons.o wmhints.o \
-       builtins.o move.o dialogs.o callbacks.o
+OBJS = xfce.o central.o side.o dnd.o \
+       popup.o item.o module.o icons.o wmhints.o \
+       builtins.o move.o dialogs.o callbacks.o settings.o
 PROG = xfce2
 
 
@@ -17,9 +17,6 @@ all: $(PROG) sub
 
 $(PROG): $(OBJS)
 	$(CC) $(GTK_LIBS) -o $(PROG) $(OBJS)
-
-mailcheck.o:
-	$(CC) -fPIC $(GTK_CFLAGS) -c mailcheck.c -o mailcheck.o
 
 sub:
 	(cd plugins; make)

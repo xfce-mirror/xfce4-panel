@@ -1,6 +1,6 @@
-/*  wmhints.h
- *
- *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
+/*  dnd.c
+ *  
+ *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -10,24 +10,35 @@
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+*/
 
-#ifndef __XFCE_WMHINTS_H__
-#define __XFCE_WMHINTS_H__
+#include "xfce.h"
 
-void check_net_support(void);
+#include "dnd.h"
 
-void watch_root_properties(void);
+enum
+{
+    TARGET_STRING,
+    TARGET_ROOTWIN,
+    TARGET_URL
+};
 
-void request_net_current_desktop(int n);
-void request_net_number_of_desktops(int n);
+static GtkTargetEntry target_table[] = {
+    {"text/uri-list", 0, TARGET_URL},
+    {"STRING", 0, TARGET_STRING}
+};
 
-int get_net_current_desktop(void);
-int get_net_number_of_desktops(void);
+static guint n_targets = sizeof(target_table) / sizeof(target_table[0]);
 
-#endif /* __XFCE_WMHINTS_H__ */
+/*****************************************************************************/
+
+void dnd_set_drag_dest(GtkWidget * widget)
+{
+    gtk_drag_dest_set(widget, GTK_DEST_DEFAULT_ALL,
+                      target_table, n_targets, GDK_ACTION_COPY);
+}
