@@ -771,6 +771,24 @@ G_MODULE_EXPORT /* EXPORT:icon_options_set_icon */
 void
 icon_options_set_icon (IconOptions * opts, int id, const char *path)
 {
+    const char *icon_path = NULL;
+
+    if (opts->icon_id == EXTERN_ICON)
+        icon_path = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
+
+    if (id == opts->icon_id)
+    {
+        if (id != EXTERN_ICON)
+        {
+            return;
+        }
+        else if (path && icon_path && 
+                 strlen(icon_path) && !strcmp(path,icon_path))
+        {
+            return;
+        }
+    }
+    
     g_signal_handler_block (opts->icon_menu, opts->id_sig);
     gtk_option_menu_set_history (GTK_OPTION_MENU (opts->icon_menu),
 				 (id == EXTERN_ICON) ? 0 : id);
@@ -788,11 +806,6 @@ icon_options_set_icon (IconOptions * opts, int id, const char *path)
     }
     else
     {
-	const char *icon_path = NULL;
-
-	if (opts->icon_id == EXTERN_ICON)
-	    icon_path = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
-
 	if (icon_path && strlen (icon_path))
 	{
 	    g_free (opts->saved_path);
@@ -879,6 +892,10 @@ static inline void
 add_icon_options (GtkBox * box, ItemDialog * idlg, GtkSizeGroup * sg)
 {
     idlg->icon_opts = create_icon_options (sg, TRUE);
+    
+    /* TODO: This check should probably be in item.c */
+    if (idlg->item->icon_id == 0)
+        idlg->item->icon_id = EXTERN_ICON;
 
     icon_options_set_icon (idlg->icon_opts, idlg->item->icon_id,
 			   idlg->item->icon_path);
@@ -1257,6 +1274,8 @@ edit_menu_item_dialog (Item * mi)
     }
 
     gtk_widget_destroy (menudialog);
+
+    menudialog = NULL;
 
     write_panel_config ();
 }
