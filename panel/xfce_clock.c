@@ -171,8 +171,7 @@ static void xfce_clock_realize(GtkWidget * widget)
     {
         clock->digits_bmap = gdk_bitmap_create_from_data(widget->window, digits_bits, digits_width, digits_height);
     }
-    
-    if(!(clock->timer))
+    if (!(clock->timer))
     {
         clock->timer = gtk_timeout_add(clock->interval, (GtkFunction) xfce_clock_timer, (gpointer) clock);
     }
@@ -249,7 +248,7 @@ void xfce_clock_show_ampm(XfceClock * clock, gboolean show)
     g_return_if_fail(XFCE_IS_CLOCK(clock));
 
     clock->display_am_pm = show;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -262,7 +261,7 @@ void xfce_clock_ampm_toggle(XfceClock * clock)
         clock->display_am_pm = 0;
     else
         clock->display_am_pm = 1;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -278,7 +277,7 @@ void xfce_clock_show_secs(XfceClock * clock, gboolean show)
     g_return_if_fail(clock != NULL);
     g_return_if_fail(XFCE_IS_CLOCK(clock));
     clock->display_secs = show;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -291,7 +290,7 @@ void xfce_clock_secs_toggle(XfceClock * clock)
         clock->display_secs = 0;
     else
         clock->display_secs = 1;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -307,7 +306,7 @@ void xfce_clock_show_military(XfceClock * clock, gboolean show)
     g_return_if_fail(clock != NULL);
     g_return_if_fail(XFCE_IS_CLOCK(clock));
     clock->military_time = show;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -323,7 +322,7 @@ void xfce_clock_military_toggle(XfceClock * clock)
     }
     else
         clock->military_time = 1;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -361,7 +360,7 @@ void xfce_clock_set_led_size(XfceClock * clock, XfceClockLedSize size)
     g_return_if_fail(clock != NULL);
     g_return_if_fail(XFCE_IS_CLOCK(clock));
     clock->led_size = size;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)) && (clock->mode == XFCE_CLOCK_LEDS))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)) && (clock->mode == XFCE_CLOCK_LEDS))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -404,7 +403,7 @@ void xfce_clock_set_digit_size(XfceClock * clock, XfceClockMode mode)
     g_return_if_fail(clock != NULL);
     g_return_if_fail(XFCE_IS_CLOCK(clock));
     clock->mode = mode;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -413,7 +412,7 @@ void xfce_clock_set_mode(XfceClock * clock, XfceClockMode mode)
     g_return_if_fail(clock != NULL);
     g_return_if_fail(XFCE_IS_CLOCK(clock));
     clock->mode = mode;
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -433,7 +432,7 @@ void xfce_clock_toggle_mode(XfceClock * clock)
         default:
             clock->mode = XFCE_CLOCK_ANALOG;
     }
-    if(GTK_WIDGET_MAPPED(GTK_WIDGET(clock)))
+    if(GTK_WIDGET_REALIZED(GTK_WIDGET(clock)))
         xfce_clock_draw(GTK_WIDGET(clock), NULL);
 }
 
@@ -582,7 +581,7 @@ static void xfce_clock_size_allocate(GtkWidget * widget,
     widget->allocation = *allocation;
     clock = XFCE_CLOCK(widget);
 
-    if(GTK_WIDGET_MAPPED(widget))
+    if(GTK_WIDGET_REALIZED(widget))
         gdk_window_move_resize(widget->window, allocation->x, allocation->y,
                                allocation->width, allocation->height);
 
