@@ -525,7 +525,7 @@ uninstall-info: uninstall-info-recursive
 	uninstall-info-am
 
 
-html:
+html: $(srcdir)/xfce4-panel.xml
 	xsltproc $(srcdir)/../xfce-nochunk.xsl $(srcdir)/xfce4-panel.xml
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -11,6 +11,6 @@ doc_DATA= \
 
 EXTRA_DIST = $(noinst_DATA) $(doc_DATA)
 
-html:
+html: $(srcdir)/xfce4-panel.xml
 	xsltproc $(srcdir)/../xfce-nochunk.xsl $(srcdir)/xfce4-panel.xml
 
