@@ -46,10 +46,10 @@
 #define NBITEMS 16
 
 /* minibuttons */
-#define MINI_SIZE 24
+#define MINI_SIZE 16
 
-#define TINY_PANEL_ICONS 25
-#define SMALL_PANEL_ICONS 30
+#define TINY_PANEL_ICONS 20
+#define SMALL_PANEL_ICONS 25
 #define MEDIUM_PANEL_ICONS 45
 #define LARGE_PANEL_ICONS 60
 
