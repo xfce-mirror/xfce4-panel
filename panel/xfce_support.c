@@ -316,12 +316,12 @@ void set_window_layer(GtkWidget *win, int layer)
     switch (layer)
     {
 	case ABOVE:
+	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
 	    netk_change_state(xscreen, xid, TRUE, xa_ABOVE, None);
-	    netk_change_state(xscreen, xid, FALSE, xa_BELOW, None);
 	    break;
 	case BELOW:
+	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
 	    netk_change_state(xscreen, xid, TRUE, xa_BELOW, None);
-	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, None);
 	    break;
 	default:
 	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);

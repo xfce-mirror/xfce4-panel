@@ -94,9 +94,6 @@ static GtkWidget *create_panel_window(void)
     g_signal_connect(w, "destroy-event", G_CALLBACK(panel_destroy_cb), NULL);
     g_signal_connect(w, "delete-event", G_CALLBACK(panel_delete_cb), NULL);
 
-    if(settings.layer == ABOVE)
-        set_window_type_dock(w, TRUE);
-
     return w;
 }
 
@@ -203,6 +200,7 @@ void create_panel(void)
     panel_set_position();
     
     gtk_widget_show(toplevel);
+    set_window_layer(toplevel, settings.layer);
 }
 
 void panel_add_control(void)
@@ -258,7 +256,7 @@ void panel_set_layer(int layer)
 
     set_window_layer(toplevel, layer);
 
-    groups_set_layer(layer);
+/*    groups_set_layer(layer);*/
 }
 
 void panel_set_size(int size)
