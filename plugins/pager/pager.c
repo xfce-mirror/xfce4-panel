@@ -55,6 +55,7 @@ typedef struct
 
     /* graphical pager */
     GtkWidget *netk_pager;
+    int rows;
 
     /* callback(s) we have to save for reorientation */
     GList *callbacks;
@@ -104,7 +105,6 @@ create_netk_pager (NetkScreen * screen)
 	GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
 
     pager = netk_pager_new (screen);
-    netk_pager_set_n_rows (NETK_PAGER (pager), 1);
     netk_pager_set_orientation (NETK_PAGER (pager), gor);
     gtk_widget_show (pager);
 
@@ -167,6 +167,7 @@ arrange_pager (t_pager * pager)
 	gtk_widget_destroy(pager->netk_pager);
     
     pager->netk_pager = create_netk_pager (pager->screen);
+    netk_pager_set_n_rows (NETK_PAGER (pager->netk_pager), pager->rows);
 
     /* packing the widgets */
     gtk_container_add (GTK_CONTAINER (pager->base), pager->netk_pager);
@@ -206,6 +207,8 @@ pager_new (NetkScreen * screen)
     pager->base = gtk_alignment_new (0.5, 0.5, 0, 0); 
     gtk_widget_show (pager->base); 
 
+    pager->rows = 1;
+
     /* this creates all widgets */
     arrange_pager (pager);
 
@@ -237,6 +240,87 @@ pager_free (Control * control)
     g_list_free (pager->callbacks);
 
     g_free (pager);
+}
+
+/* configuration */
+
+static void
+pager_read_config (Control *control, xmlNodePtr node)
+{
+    xmlChar *value;
+    int n, max;
+    t_pager *pager = control->data;
+
+    value = xmlGetProp (node, (const xmlChar *) "rows");
+
+    max = netk_screen_get_workspace_count (pager->screen);
+    
+    if (value)
+    {
+	n = strtol (value, NULL, 0);
+	g_free (value);
+
+	if (n > 0 && n <= max)
+	{
+	    netk_pager_set_n_rows (NETK_PAGER (pager->netk_pager), n);
+	    pager->rows = n;
+	}
+    }
+}
+
+static void
+pager_write_config (Control *control, xmlNodePtr node)
+{
+    char prop[3];
+    t_pager *pager = control->data;
+
+    sprintf (prop, "%d", pager->rows);
+
+    xmlSetProp (node, (const xmlChar *) "rows", prop);
+}
+
+/* property dialog */
+static void
+rows_changed (GtkSpinButton *spin, t_pager *pager)
+{
+    int rows = gtk_spin_button_get_value_as_int (spin);
+
+    if (rows != pager->rows)
+    {
+	pager->rows = rows;
+
+	netk_pager_set_n_rows (NETK_PAGER (pager->netk_pager), pager->rows);
+    }
+}
+
+static void
+pager_create_options (Control *control, GtkContainer *container, 
+		      GtkWidget *close)
+{
+    GtkWidget *hbox, *label, *spin;
+    int max;
+    t_pager *pager = control->data;
+
+    hbox = gtk_hbox_new (FALSE, 6);
+    gtk_widget_show (hbox);
+    gtk_container_add (container, hbox);
+
+    if (settings.orientation == HORIZONTAL)
+	label = gtk_label_new (_("Number of rows:"));
+    else
+	label = gtk_label_new (_("Number of columns:"));
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    max = netk_screen_get_workspace_count (pager->screen);
+    
+    spin = gtk_spin_button_new_with_range (1, max, 1);
+    gtk_widget_show (spin);
+    gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), pager->rows);
+    
+    g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed), pager);
 }
 
 /*  Switcher panel control
@@ -277,6 +361,10 @@ xfce_control_class_init (ControlClass * cc)
 
     cc->set_orientation = pager_set_orientation;
     cc->set_size = pager_set_size;
+
+    cc->read_config = pager_read_config;
+    cc->write_config = pager_write_config;
+    cc->create_options = pager_create_options;
 }
 
 XFCE_PLUGIN_CHECK_INIT
