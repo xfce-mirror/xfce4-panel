@@ -711,6 +711,12 @@ static char *category_icons [] = {
     N_("Windows programs")
 };
 
+static void entry_dialog_data_received (GtkWidget *w, GList *data, 
+                                        gpointer user_data);
+        
+static void launcher_dialog_data_received (GtkWidget *tv, GList *data, 
+                                           gpointer user_data);
+        
 /* entry dialog */
 static void
 update_entry_info (EntryDialog *ed)
@@ -1238,6 +1244,10 @@ entry_properties_dialog (Entry *entry, GtkWindow *parent)
     
     g_object_unref (sg);
     
+    dnd_set_drag_dest (ed->dlg);
+    dnd_set_callback (ed->dlg, DROP_CALLBACK (entry_dialog_data_received), 
+                      ed);
+    
     gtk_dialog_run (GTK_DIALOG (ed->dlg));
 
     gtk_widget_hide (ed->dlg);
@@ -1465,6 +1475,9 @@ launcher_dialog_add_item_tree (LauncherDialog *ld, GtkBox *box)
 
     g_object_unref (G_OBJECT (store));
 
+    dnd_set_drag_dest (tv);
+    dnd_set_callback (tv, DROP_CALLBACK (launcher_dialog_data_received), ld);
+    
     /* create the view */
     col = gtk_tree_view_column_new ();
     gtk_tree_view_append_column (GTK_TREE_VIEW (tv), col);
@@ -1849,8 +1862,23 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
     launcher_dialog_add_item_tree (ld, GTK_BOX (vbox));
 }
 
+/* dnd */
+static void 
+entry_dialog_data_received (GtkWidget *tv, GList *data, gpointer user_data)
+{
+    /*EntryDialog *ed = user_data;*/
+}
+        
+static void 
+launcher_dialog_data_received (GtkWidget *tv, GList *data, gpointer user_data)
+{
+    /*LauncherDialog *ld = user_data;*/
+}
+        
+
 /* xml handling *
  * ------------ */
+
 static Entry*
 create_entry_from_xml (xmlNodePtr node)
 {

@@ -323,16 +323,10 @@ set_window_skip (GtkWidget * win)
 /*  DND
  *  ---
 */
-enum
-{
-    TARGET_STRING,
-    TARGET_ROOTWIN,
-    TARGET_URL
-};
-
 static GtkTargetEntry target_table[] = {
-    {"text/uri-list", 0, TARGET_URL},
-    {"STRING", 0, TARGET_STRING}
+    {"text/uri-list", 0, 0},
+    {"UTF8_STRING", 0, 1},
+    {"STRING", 0, 2}
 };
 
 static guint n_targets = sizeof (target_table) / sizeof (target_table[0]);

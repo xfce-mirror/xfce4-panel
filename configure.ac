@@ -5,14 +5,22 @@ dnl
 dnl 2003 Benedikt Meurer <benedikt.meurer@unix-ag.uni-siegen.de>
 dnl
 
+dnl version info
+m4_define([xfce4_panel_version],[4.3.2])
 m4_define([libxfce4panel_verinfo], [1:0:0])
 
-AC_INIT([panel/main.c])
+dnl init autoconf
+AC_COPYRIGHT([Copyright (c) 2002-2005
+        The Xfce development team. All rights reserved.
 
-AM_INIT_AUTOMAKE([xfce4-panel], [4.3.2])
+Written for Xfce by Jasper Huijsmans <jasper@xfce.org>.])
+AC_INIT([xfce4-panel], [xfce4_panel_version()], [xfce4-dev@xfce.org])
+AC_PREREQ([2.50])
 
+dnl init automake
+XFCE4_PANEL_VERSION=xfce4_panel_version()
+AM_INIT_AUTOMAKE([xfce4-panel], [$XFCE4_PANEL_VERSION])
 AM_CONFIG_HEADER([config.h])
-
 AM_MAINTAINER_MODE
 
 dnl Check for UNIX variants
@@ -39,34 +47,28 @@ AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h netinet/in.h])
 AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support
-BM_I18N([xfce4-panel], [ar az be bg ca cs de en_GB es es_MX et eu fa fr fi
-		        gu he hi hu it ja lt ms nl ko nb_NO pa pl pt_BR	
-			pt_PT ro ru sv sk ta tr uk vi zh_CN zh_TW])
+XDT_I18N([ar az be bg ca cs de en_GB es es_MX et eu fa fr fi gu he hi hu it \
+	  ja lt ms nl ko nb_NO pa pl pt_BR pt_PT ro ru sv sk ta tr uk vi \
+	  zh_CN zh_TW])
 
 dnl Check for X11 installed
-BM_LIBX11_REQUIRE
+XDT_CHECK_LIBX11_REQUIRE
+XDT_CHECK_LIBSM
 
 dnl Check for required packages
-BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.2.0])
-BM_DEPEND([LIBXFCE4UTIL], [libxfce4util-1.0], [4.2.0])
-BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [4.2.0])
-BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
-
-dnl disable threading, too much trouble for too little gain
-dnl BM_DEPEND([GTHREAD], [gthread-2.0], [2.0.6])
-
-dnl Check for dbh installed for completion combo
-dnl disable for now, doesn't work for new install, only after
-dnl  combo has been used in xffm or xfrun.
-dnl BM_DEPEND_CHECK([LIBDBH], [dbh-1.0], [1.0],
-dnl  [dbh], [DBH library], [yes])
-
-dnl Configure the mcs plugin
-XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.2.0])
+XDT_CHECK_PACKAGE([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.2.0])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.2.0])
+XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.2.0])
+XDT_CHECK_PACKAGE([LIBXML], [libxml-2.0], [2.4.0])
 
 dnl Check for optional packages
-BM_DEPEND_CHECK([LIBSTARTUP_NOTIFICATION], [libstartup-notification-1.0],
-  [0.5], [startup-notification], [startup notification library], [yes])
+XDT_CHECK_OPTIONAL_PACKAGE([LIBSTARTUP_NOTIFICATION],
+			   [libstartup-notification-1.0], [0.5],
+			   [startup-notification], 
+			   [startup notification library], [yes])
+
+dnl Configure the mcs plugin
+XDT_XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.2.0])
 
 dnl Check for debugging support
 BM_DEBUG_SUPPORT
