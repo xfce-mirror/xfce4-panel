@@ -720,9 +720,6 @@ void panel_write_xml(xmlNodePtr root)
     snprintf(value, 3, "%d", settings.num_groups);
     xmlSetProp(node, "groups", value);
 
-    if (toplevel)
-	gtk_window_get_position(GTK_WINDOW(toplevel), &position.x, &position.y);
-
     child = xmlNewTextChild(node, NULL, "Position", NULL);
 
     snprintf(value, 5, "%d", position.x);

@@ -37,7 +37,7 @@
 #include "groups.h"
 #include "settings.h"
 
-static GSList *control_list = NULL;       /* list of control controles */
+static GSList *control_list = NULL;       /* list of available controls */
 
 static GtkWidget *container;            /* container on the panel to hold the 
 				           panel control */

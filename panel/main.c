@@ -48,6 +48,9 @@ static gboolean session_managed = FALSE;
 
 static void save_yourself(gpointer data, int save_style, gboolean shutdown, int interact_style, gboolean fast)
 {
+    if (toplevel)
+	gtk_window_get_position(GTK_WINDOW(toplevel), &position.x, &position.y);
+
     write_panel_config();
 }
 
@@ -74,6 +77,9 @@ void quit(gboolean force)
 	}
     }
     
+    if (toplevel)
+	gtk_window_get_position(GTK_WINDOW(toplevel), &position.x, &position.y);
+
     gtk_widget_hide(toplevel);
 
     write_panel_config();
@@ -95,6 +101,9 @@ void quit(gboolean force)
 void restart(void)
 {
     int x, y;
+
+    if (toplevel)
+	gtk_window_get_position(GTK_WINDOW(toplevel), &position.x, &position.y);
 
     /* somehow the position gets lost here ... 
      * FIXME: find out why, may be a real bug */
