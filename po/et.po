@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-21 13:35+0200\n"
+"POT-Creation-Date: 2004-10-11 18:28+0200\n"
 "PO-Revision-Date: 2004-02-03 10:04+0200\n"
 "Last-Translator: Peeter Vois <Peeter.Vois@mail.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:514
+#: panel/xfce_support.c:516
 msgid "Select file"
 msgstr "Vali fail"
 
@@ -99,7 +99,7 @@ msgstr "Lisa uus asi"
 msgid "Are you sure you want to exit?"
 msgstr "Oled sa kindel, et soovid väljuda?"
 
-#: panel/main.c:398
+#: panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -122,12 +122,12 @@ msgstr ""
 " Litsentseeritud GNU GPL litsentsi all.\n"
 "\n"
 
-#: panel/main.c:472
+#: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Õnnelikult käivitunud ilma sessiooni managerita"
 
-#: panel/main.c:477
+#: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Õnnelikult käivitunud koos sessiooni manageriga"
@@ -137,11 +137,11 @@ msgstr "%s: Õnnelikult käivitunud koos sessiooni manageriga"
 msgid "Could not create panel item \"%s\"."
 msgstr "Ei suuda luua paneeli asja \"%s\"."
 
-#: panel/controls.c:723 panel/panel.c:562
+#: panel/controls.c:723 panel/panel.c:579
 msgid "_Properties..."
 msgstr "_Omadused..."
 
-#: panel/controls.c:737 panel/panel.c:552
+#: panel/controls.c:737 panel/panel.c:569
 msgid "Add _new item"
 msgstr "Lisa _uus asi"
 
@@ -149,28 +149,28 @@ msgstr "Lisa _uus asi"
 msgid "This item has no configuration options"
 msgstr "Sellel asjal ei ole midagi sättida"
 
-#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:448
+#: panel/panel.c:560 panel/panel.c:961 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:449
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
-#: panel/panel.c:567
+#: panel/panel.c:584
 msgid "_About Xfce"
 msgstr "_Xfce-st"
 
-#: panel/panel.c:572
+#: panel/panel.c:589
 msgid "_Help"
 msgstr "_Abi"
 
-#: panel/panel.c:581
+#: panel/panel.c:598
 msgid "_Lock screen"
 msgstr "_Lukusta ekraan"
 
-#: panel/panel.c:586
+#: panel/panel.c:603
 msgid "_Restart"
 msgstr "_Käivita uuesti"
 
-#: panel/panel.c:595
+#: panel/panel.c:612
 msgid "E_xit"
 msgstr "V_älja"
 
@@ -294,15 +294,15 @@ msgstr "Alati kõige peal:"
 msgid "Autohide:"
 msgstr "Automaatne varjamine:"
 
-#: settings/xfce_settings_dialog.c:465
+#: settings/xfce_settings_dialog.c:466
 msgid "Xfce Panel Settings"
 msgstr "Xfce paneeli seaded"
 
-#: settings/xfce_settings_dialog.c:475
+#: settings/xfce_settings_dialog.c:476
 msgid "Appearance"
 msgstr "Väljanägemine"
 
-#: settings/xfce_settings_dialog.c:493
+#: settings/xfce_settings_dialog.c:491
 msgid "Behaviour"
 msgstr "Käitumine"
 
@@ -318,43 +318,43 @@ msgstr "Käitumine"
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:423
+#: plugins/clock/clock.c:429
 msgid "Clock type:"
 msgstr "Kella tüüp:"
 
-#: plugins/clock/clock.c:436
+#: plugins/clock/clock.c:442
 msgid "Analog"
 msgstr "Analoog"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:446
 msgid "Digital"
 msgstr "Digitaal"
 
-#: plugins/clock/clock.c:444
+#: plugins/clock/clock.c:450
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:506
+#: plugins/clock/clock.c:512
 msgid "Hour mode:"
 msgstr "Režiim:"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:519
 msgid "24 hour"
 msgstr "24 tundi"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:525
 msgid "12 hour"
 msgstr "12 tundi"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:531
 msgid "AM/PM"
 msgstr "EL/PL"
 
-#: plugins/clock/clock.c:563
+#: plugins/clock/clock.c:569
 msgid "Show seconds:"
 msgstr "Näita sekundeid"
 
-#: plugins/clock/clock.c:676
+#: plugins/clock/clock.c:682
 msgid "Xfce Clock"
 msgstr "Xfce kell"
 

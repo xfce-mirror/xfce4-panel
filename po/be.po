@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-21 13:35+0200\n"
+"POT-Creation-Date: 2004-10-11 18:28+0200\n"
 "PO-Revision-Date: 2004-09-12 03:12+0300\n"
 "Last-Translator: Ales Nyakhaychyk <nab@mail.by>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:514
+#: panel/xfce_support.c:516
 msgid "Select file"
 msgstr "Вылучыць файл"
 
@@ -101,7 +101,7 @@ msgstr "Дадаць новы элемэнт"
 msgid "Are you sure you want to exit?"
 msgstr "Вы насамрэч жадаеце выйсьці?"
 
-#: panel/main.c:398
+#: panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -124,12 +124,12 @@ msgstr ""
 " Распаўсюджваецца на ўмовах GNU GPL.\n"
 "\n"
 
-#: panel/main.c:472
+#: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: пасьпяхова запушчана без падтрымкі кіраваньня сэансам"
 
-#: panel/main.c:477
+#: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: пасьпяхова запушчана з падтрымкай кіраваньня сэансам"
@@ -139,11 +139,11 @@ msgstr "%s: пасьпяхова запушчана з падтрымкай кі
 msgid "Could not create panel item \"%s\"."
 msgstr "Немагчыма стварыць элемэнт панэлі \"%s\"."
 
-#: panel/controls.c:723 panel/panel.c:562
+#: panel/controls.c:723 panel/panel.c:579
 msgid "_Properties..."
 msgstr "_Уласьцівасьці..."
 
-#: panel/controls.c:737 panel/panel.c:552
+#: panel/controls.c:737 panel/panel.c:569
 msgid "Add _new item"
 msgstr "Дадаць _новы элемэнт"
 
@@ -151,28 +151,28 @@ msgstr "Дадаць _новы элемэнт"
 msgid "This item has no configuration options"
 msgstr "Гэты элемэнт ня мае выбараў наладкі"
 
-#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:448
+#: panel/panel.c:560 panel/panel.c:961 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:449
 msgid "Xfce Panel"
 msgstr "Панэля XFce"
 
-#: panel/panel.c:567
+#: panel/panel.c:584
 msgid "_About Xfce"
 msgstr "_Аб XFce"
 
-#: panel/panel.c:572
+#: panel/panel.c:589
 msgid "_Help"
 msgstr "_Даведка"
 
-#: panel/panel.c:581
+#: panel/panel.c:598
 msgid "_Lock screen"
 msgstr "За_мкнуць экран"
 
-#: panel/panel.c:586
+#: panel/panel.c:603
 msgid "_Restart"
 msgstr "Пераза_пусьціць"
 
-#: panel/panel.c:595
+#: panel/panel.c:612
 msgid "E_xit"
 msgstr "Вы_йсьці"
 
@@ -296,15 +296,15 @@ msgstr "Заўсёды зьверху:"
 msgid "Autohide:"
 msgstr "Аўтахаваньне:"
 
-#: settings/xfce_settings_dialog.c:465
+#: settings/xfce_settings_dialog.c:466
 msgid "Xfce Panel Settings"
 msgstr "Наладкі панэлі XFce"
 
-#: settings/xfce_settings_dialog.c:475
+#: settings/xfce_settings_dialog.c:476
 msgid "Appearance"
 msgstr "Вонкавы выгляд"
 
-#: settings/xfce_settings_dialog.c:493
+#: settings/xfce_settings_dialog.c:491
 msgid "Behaviour"
 msgstr "Паводзіны"
 
@@ -320,43 +320,43 @@ msgstr "Паводзіны"
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:423
+#: plugins/clock/clock.c:429
 msgid "Clock type:"
 msgstr "Від гадзіньніка:"
 
-#: plugins/clock/clock.c:436
+#: plugins/clock/clock.c:442
 msgid "Analog"
 msgstr "аналягавы"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:446
 msgid "Digital"
 msgstr "лічбавы"
 
-#: plugins/clock/clock.c:444
+#: plugins/clock/clock.c:450
 msgid "LED"
 msgstr "сьветладыёдны"
 
-#: plugins/clock/clock.c:506
+#: plugins/clock/clock.c:512
 msgid "Hour mode:"
 msgstr "Рэжым гадзін:"
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:519
 msgid "24 hour"
 msgstr "24 гадзіны"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:525
 msgid "12 hour"
 msgstr "12 гадзін"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:531
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:563
+#: plugins/clock/clock.c:569
 msgid "Show seconds:"
 msgstr "Паказваць сэкунды:"
 
-#: plugins/clock/clock.c:676
+#: plugins/clock/clock.c:682
 msgid "Xfce Clock"
 msgstr "Гадзіньнік Xfce"
 

@@ -7,16 +7,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2004-09-21 13:35+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-10-11 18:28+0200\n"
 "PO-Revision-Date: 2004-09-28 01:05-0700\n"
 "Last-Translator: Yongtao Yang <yongtao.yang@telia.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:514
+#: panel/xfce_support.c:516
 msgid "Select file"
 msgstr "选择文件"
 
@@ -101,7 +101,7 @@ msgstr "添加新条目"
 msgid "Are you sure you want to exit?"
 msgstr "你确定要退出吗?"
 
-#: panel/main.c:398
+#: panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -124,12 +124,12 @@ msgstr ""
 " 以 GNU GPL 许可证发布。\n"
 "\n"
 
-#: panel/main.c:472
+#: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s：不带会话管理方式启动成功"
 
-#: panel/main.c:477
+#: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s：带会话管理方式启动成功"
@@ -139,11 +139,11 @@ msgstr "%s：带会话管理方式启动成功"
 msgid "Could not create panel item \"%s\"."
 msgstr "无法创建条目 “%s ”。"
 
-#: panel/controls.c:723 panel/panel.c:562
+#: panel/controls.c:723 panel/panel.c:579
 msgid "_Properties..."
 msgstr "属性(_P)..."
 
-#: panel/controls.c:737 panel/panel.c:552
+#: panel/controls.c:737 panel/panel.c:569
 msgid "Add _new item"
 msgstr "添加新条目(_N)"
 
@@ -151,28 +151,28 @@ msgstr "添加新条目(_N)"
 msgid "This item has no configuration options"
 msgstr "该条目没有配置选项"
 
-#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:448
+#: panel/panel.c:560 panel/panel.c:961 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:449
 msgid "Xfce Panel"
 msgstr "Xfce面板"
 
-#: panel/panel.c:567
+#: panel/panel.c:584
 msgid "_About Xfce"
 msgstr "关于Xfce(_A)"
 
-#: panel/panel.c:572
+#: panel/panel.c:589
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: panel/panel.c:581
+#: panel/panel.c:598
 msgid "_Lock screen"
 msgstr "锁住屏幕(_L)"
 
-#: panel/panel.c:586
+#: panel/panel.c:603
 msgid "_Restart"
 msgstr "重新启动(_R)"
 
-#: panel/panel.c:595
+#: panel/panel.c:612
 msgid "E_xit"
 msgstr "退出(_X)"
 
@@ -296,15 +296,15 @@ msgstr "总是在顶层："
 msgid "Autohide:"
 msgstr "自动隐藏："
 
-#: settings/xfce_settings_dialog.c:465
+#: settings/xfce_settings_dialog.c:466
 msgid "Xfce Panel Settings"
 msgstr "Xfce面板配置"
 
-#: settings/xfce_settings_dialog.c:475
+#: settings/xfce_settings_dialog.c:476
 msgid "Appearance"
 msgstr "外观"
 
-#: settings/xfce_settings_dialog.c:493
+#: settings/xfce_settings_dialog.c:491
 msgid "Behaviour"
 msgstr "行为"
 
@@ -320,43 +320,43 @@ msgstr "行为"
 msgid "%A, %d %B %Y"
 msgstr ""
 
-#: plugins/clock/clock.c:423
+#: plugins/clock/clock.c:429
 msgid "Clock type:"
 msgstr "钟表类型:"
 
-#: plugins/clock/clock.c:436
+#: plugins/clock/clock.c:442
 msgid "Analog"
 msgstr "模拟式"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:446
 msgid "Digital"
 msgstr "数字式"
 
-#: plugins/clock/clock.c:444
+#: plugins/clock/clock.c:450
 msgid "LED"
 msgstr "数字液晶显示"
 
-#: plugins/clock/clock.c:506
+#: plugins/clock/clock.c:512
 msgid "Hour mode:"
 msgstr "小时显示模式："
 
-#: plugins/clock/clock.c:513
+#: plugins/clock/clock.c:519
 msgid "24 hour"
 msgstr "24小时"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:525
 msgid "12 hour"
 msgstr "12小时"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:531
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:563
+#: plugins/clock/clock.c:569
 msgid "Show seconds:"
 msgstr "显示秒:"
 
-#: plugins/clock/clock.c:676
+#: plugins/clock/clock.c:682
 msgid "Xfce Clock"
 msgstr "Xfce时钟"
 
@@ -454,7 +454,3 @@ msgstr "间隔(秒):"
 #: plugins/mailcheck/mailcheck.c:965
 msgid "Mail checker"
 msgstr "邮件检查程序"
-
-
-
-
