@@ -294,7 +294,7 @@ update_xinerama_coordinates (Panel * p, int x, int y)
 static void
 restrict_position (Panel * p, int *x, int *y)
 {
-    int xcenter, ycenter;
+    int xcenter, ycenter, snapwidth;
 
     if (!p || !p->toplevel)
 	return;
@@ -313,6 +313,9 @@ restrict_position (Panel * p, int *x, int *y)
 
     if (p->priv->settings.orientation == HORIZONTAL)
     {
+        snapwidth = MIN (SNAP_WIDTH, (p->priv->monitor_geometry.width 
+                                      - p->priv->req.width) / 2);
+        
 	if (*y < ycenter)
 	{
 	    *y = p->priv->monitor_geometry.y;
@@ -328,7 +331,7 @@ restrict_position (Panel * p, int *x, int *y)
 	}
 
 	/* center */
-	if (*x > xcenter - SNAP_WIDTH && *x < xcenter + SNAP_WIDTH)
+	if (*x > xcenter - snapwidth && *x < xcenter + snapwidth)
 	{
 	    *x = xcenter;
 
@@ -336,7 +339,7 @@ restrict_position (Panel * p, int *x, int *y)
 	}
 	/* right edge */
 	else if (*x + p->priv->req.width > p->priv->monitor_geometry.x
-		 + p->priv->monitor_geometry.width - SNAP_WIDTH)
+		 + p->priv->monitor_geometry.width - snapwidth)
 	{
 	    *x = p->priv->monitor_geometry.x
 		+ p->priv->monitor_geometry.width - p->priv->req.width;
@@ -345,7 +348,7 @@ restrict_position (Panel * p, int *x, int *y)
 	}
 
 	/* left edge */
-	if (*x < p->priv->monitor_geometry.x + SNAP_WIDTH)
+	if (*x < p->priv->monitor_geometry.x + snapwidth)
 	{
 	    *x = p->priv->monitor_geometry.x;
 
@@ -356,6 +359,9 @@ restrict_position (Panel * p, int *x, int *y)
     }
     else
     {
+        snapwidth = MIN (SNAP_WIDTH, (p->priv->monitor_geometry.height 
+                                      - p->priv->req.height) / 2);
+        
 	if (*x < xcenter)
 	{
 	    *x = p->priv->monitor_geometry.x;
@@ -371,7 +377,7 @@ restrict_position (Panel * p, int *x, int *y)
 	}
 
 	/* center */
-	if (*y > ycenter - SNAP_WIDTH && *y < ycenter + SNAP_WIDTH)
+	if (*y > ycenter - snapwidth && *y < ycenter + snapwidth)
 	{
 	    *y = ycenter;
 
@@ -379,7 +385,7 @@ restrict_position (Panel * p, int *x, int *y)
 	}
 	/* bottom edge */
 	else if (*y + p->priv->req.height > p->priv->monitor_geometry.y
-		 + p->priv->monitor_geometry.height - SNAP_WIDTH)
+		 + p->priv->monitor_geometry.height - snapwidth)
 	{
 	    *y = p->priv->monitor_geometry.y
 		+ p->priv->monitor_geometry.height - p->priv->req.height;
@@ -388,7 +394,7 @@ restrict_position (Panel * p, int *x, int *y)
 	}
 
 	/* top edge */
-	if (*y < p->priv->monitor_geometry.y + SNAP_WIDTH)
+	if (*y < p->priv->monitor_geometry.y + snapwidth)
 	{
 	    *y = p->priv->monitor_geometry.y;
 
