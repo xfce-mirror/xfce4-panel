@@ -76,7 +76,110 @@ static int scr = 0;
 static int screen_width = 0;
 static int screen_height = 0;
 
+/* positioning */
+struct XineramaScreen
+{
+    int xmin, ymin;
+    int xmax, ymax;
+};
+
+struct XineramaScreen xinerama_scr = {0};
+
+GtkRequisition panel_req = {0};
+
+/* prototypes */
+static void update_xinerama_coordinates (Panel *p);
 static void panel_set_hidden (Panel * p, gboolean hide);
+static void panel_reallocate (Panel *p, GtkRequisition *previous);
+
+/* Xinerama fu */
+static void 
+update_xinerama_coordinates (Panel *p)
+{
+    int x, y;
+    
+    g_return_if_fail(dpy != NULL);
+
+    
+    x = p->toplevel->allocation.x + p->toplevel->allocation.width / 2;
+    y = p->toplevel->allocation.y + p->toplevel->allocation.height / 2;
+
+    xinerama_scr.xmin = MyDisplayX (x, y);
+    xinerama_scr.xmax = MyDisplayMaxX (dpy, scr, x, y);
+    xinerama_scr.ymin = MyDisplayY (x, y);
+    xinerama_scr.ymax = MyDisplayMaxY (dpy, scr, x, y);
+
+    DBG ("screen limits: (%d,%d) -> (%d,%d)", 
+	 xinerama_scr.xmin,xinerama_scr.ymin,
+	 xinerama_scr.xmax,xinerama_scr.ymax);
+}
+
+static void 
+panel_reallocate (Panel *p, GtkRequisition *previous)
+{
+    GtkRequisition new;
+    int xold, yold, xnew, ynew, xcenter, ycenter;
+    gboolean x_is_centered, y_is_centered;
+
+    gtk_widget_size_request(p->toplevel, &new);
+    
+    xold = p->position.x;
+    yold = p->position.y;
+
+    xcenter = xinerama_scr.xmin + (xinerama_scr.xmax - xinerama_scr.xmin) / 2;
+    x_is_centered = (xcenter == xold + previous->width / 2);
+    
+    ycenter = xinerama_scr.ymin + (xinerama_scr.ymax - xinerama_scr.ymin) / 2;
+    y_is_centered = (ycenter == yold + previous->height / 2);
+
+    /* initial new coordinates depend on centering */
+    if (x_is_centered)
+	xnew = xcenter - new.width / 2;
+    else
+	xnew = xold;
+    
+    if (y_is_centered)
+	ynew = ycenter - new.height / 2;
+    else
+	ynew = yold;
+    
+    /* if panel over right edge or panel previously on
+     * right edge then move to right edge */
+    if (xnew + new.width > xinerama_scr.xmax ||
+	xold + previous->width == xinerama_scr.xmax)
+    {
+	xnew = xinerama_scr.xmax - new.width;
+    }
+
+    /* if panel over bottom edge or panel previously on
+     * bottom edge then move to bottom edge */
+    if (ynew + new.height > xinerama_scr.ymax ||
+	yold + previous->height == xinerama_scr.ymax)
+    {
+	ynew = xinerama_scr.ymax - new.height;
+    }
+
+    if (xnew < xinerama_scr.xmin)
+	xnew = xinerama_scr.xmin;
+
+    if (ynew < xinerama_scr.ymin)
+	ynew = xinerama_scr.ymin;
+    
+    DBG("%d,%d+%dx%d -> %d,%d+%dx%d", 
+	xold, yold, previous->width, previous->height,
+	xnew, ynew, new.width, new.height);
+
+    if (xnew != xold || ynew != yold)
+    {
+	gtk_window_move (GTK_WINDOW(p->toplevel), xnew, ynew);
+
+	p->position.x = xnew;
+	p->position.y = ynew;
+
+	/* Need to save position here... */
+	write_panel_config ();
+    }
+}
 
 /*  Move handle menu
  *  ----------------
@@ -215,6 +318,8 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
 static void
 handler_move_end_cb (GtkWidget * h, gpointer data)
 {
+    int x, y;
+    
     gtk_window_get_position (GTK_WINDOW (panel.toplevel),
 			     &panel.position.x, &panel.position.y);
 
@@ -223,6 +328,32 @@ handler_move_end_cb (GtkWidget * h, gpointer data)
     /* TODO: adjust arrow direction based on which quarter of the screen we
      * are (Xinerama aware, of course ;) */
 
+    update_xinerama_coordinates(&panel);
+
+    /* keep panel inside the screen */
+
+    x = panel.position.x;
+    y = panel.position.y;
+    
+    if (panel.position.x + panel_req.width > xinerama_scr.xmax)
+	x = xinerama_scr.xmax - panel_req.width;
+
+    if (panel.position.x < xinerama_scr.xmin)
+	x = xinerama_scr.xmin;
+    
+    if (panel.position.y + panel_req.height > xinerama_scr.ymax)
+	y = xinerama_scr.ymax - panel_req.height;
+
+    if (panel.position.y < xinerama_scr.ymin)
+	y = xinerama_scr.ymin;
+
+    if (x != panel.position.x || y != panel.position.y)
+    {
+	gtk_window_move (GTK_WINDOW(panel.toplevel), x, y);
+	panel.position.x = x;
+	panel.position.y = y;
+    }
+    
     /* Need to save position here... */
     write_panel_config ();
 }
@@ -271,10 +402,11 @@ panel_set_hidden (Panel * p, gboolean hide)
     /* xinerama aware screen coordinates */
     if (pos.x < minx || pos.x >= maxx || pos.y < miny || pos.y >= maxy)
     {
-	minx = MyDisplayX (pos.x, pos.y);
-	maxx = MyDisplayMaxX (dpy, scr, pos.x, pos.y);
-	miny = MyDisplayY (pos.x, pos.y);
-	maxy = MyDisplayMaxY (dpy, scr, pos.x, pos.y);
+	update_xinerama_coordinates (p);
+	minx = xinerama_scr.xmin;
+	maxx = xinerama_scr.xmax;
+	miny = xinerama_scr.ymin;
+	maxy = xinerama_scr.ymax;
 
 	centerx = minx + (maxx - minx) / 2;
 	centery = miny + (maxy - miny) / 2;
@@ -288,9 +420,15 @@ panel_set_hidden (Panel * p, gboolean hide)
     /* Handle the resize */
     if (hide)
     {
+	/* Only hide when the panel is on the edge of the screen 
+	 * Thanks to Eduard Rocatelli for pointing this out */
+	
 	/* Depending on orientation, resize */
 	if (settings.orientation == VERTICAL)
 	{
+	    if (pos.x > minx && pos.x + req.width < maxx)
+		return;
+
 	    if (pos.x < centerx)
 		x = pos.x;
 	    else
@@ -302,6 +440,9 @@ panel_set_hidden (Panel * p, gboolean hide)
 	}
 	else
 	{
+	    if (pos.y > miny && pos.y + req.height < maxy)
+		return;
+
 	    if (pos.y < centery)
 		y = pos.y;
 	    else
@@ -321,13 +462,13 @@ panel_set_hidden (Panel * p, gboolean hide)
     }
 
     /* keep inside the screen */
-    if (x < 0)
-	x = 0;
+    if (x < minx)
+	x = minx;
     else if (x > maxx - HIDDEN_SIZE)
 	x = maxx - HIDDEN_SIZE;
 
-    if (y < 0)
-	y = 0;
+    if (y < miny)
+	y = miny;
     else if (y > maxy - HIDDEN_SIZE)
 	y = maxy - HIDDEN_SIZE;
     
@@ -476,6 +617,24 @@ panel_delete_cb (GtkWidget * window, GdkEvent * ev, gpointer data)
     return TRUE;
 }
 
+static void
+panel_allocate_cb (GtkWidget * window, GtkAllocation *allocation, Panel *p)
+{
+    DBG ("%d x %d -> %d x %d",
+	 panel_req.width, panel_req.height,
+	 allocation->width, allocation->height);
+
+    if (panel_req.width != allocation->width ||
+	panel_req.height != allocation->height)
+    {
+	if (!(panel_req.width == 0 && panel_req.height == 0))
+	    panel_reallocate (p, &panel_req);
+
+	panel_req.width = allocation->width;
+	panel_req.height = allocation->height;
+    }
+}
+
 static GtkWidget *
 create_panel_window (void)
 {
@@ -495,7 +654,10 @@ create_panel_window (void)
     gtk_window_set_icon (window, pb);
     g_object_unref (pb);
 
-    g_signal_connect (w, "delete-event", G_CALLBACK (panel_delete_cb), NULL);
+    g_signal_connect (w, "delete-event", G_CALLBACK (panel_delete_cb), 
+	    	      NULL);
+    g_signal_connect (w, "size-allocate", G_CALLBACK (panel_allocate_cb), 
+	    	      &panel);
 
     return w;
 }
@@ -646,6 +808,8 @@ create_panel (void)
     panel.position.y = y;
     panel_set_position ();
 
+    update_xinerama_coordinates(&panel);
+    
     if (hidden)
 	panel_set_autohide(TRUE);
 }
@@ -713,10 +877,19 @@ panel_set_orientation (int orientation)
     groups_pack (GTK_BOX (panel.group_box));
     groups_set_orientation (orientation);
 
+    /* reset panel requisition to prevent 'size-allocate' 
+     * handler from wrongly adjusting the position */
+    panel_req.width = panel_req.height = 0;
+
+    
+    /* TODO: find out why position doesn't get properly set in 
+     * set_size function */
     panel.position.x = panel.position.y = -1;
-    /* also sets position */
     panel_set_size (settings.size);
 
+    panel.position.x = panel.position.y = -1;
+    panel_set_position();
+    
     gtk_widget_show(panel.toplevel);
     set_window_layer (panel.toplevel, settings.layer);
     set_window_skip (panel.toplevel);
@@ -737,7 +910,7 @@ panel_set_layer (int layer)
 
     set_window_layer (panel.toplevel, layer);
     
-    if (layer == TOP)
+    if (layer == ABOVE)
 	gtk_window_present(GTK_WINDOW(panel.toplevel));
 }
 
@@ -754,8 +927,6 @@ panel_set_size (int size)
     groups_set_size (size);
     handle_set_size (panel.handles[LEFT], size);
     handle_set_size (panel.handles[RIGHT], size);
-
-    panel_set_position ();
 }
 
 void

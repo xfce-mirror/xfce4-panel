@@ -1,43 +1,30 @@
-TODO list for xfce4
-===================
-
-Major features for 4.0
-----------------------
-* provide good default configuration
-
-
-After 4.0 
-------------------------------------
-* make panel a gtk widget
+TODO
+----
+* gtk widgets (panel, controls)
   - include move handles (steal code form GtkHandlebox)
   - use properties and signals for settings
-
-* do something smart with the panel behaviour depending on its position
-  - hiding
-  - popup arrow direction
-  - idea: keep panel on same alignment percentage (O% left aligned, 50%
-    centered, 100% right aligned).
-  - be a bit smarter when changing panel size (eg, keep at edge).
-
-* Allow multiple panels?
-  - seriously look at mcs plugin. Most settings should become per panel
-    instead of global.
-
-* make controls / control classes a widget or gobject
-  - use refcounting on classes to load / unload modules
-  - perhaps using a timeout
   - perhaps use interfaces or derived widgets for controls
-  
+* unload unused plugins
+* plugin library
+  - with API docs
+* smarter resize/move
+  - popup arrow direction
+  - keep panel on same x/y alignment
+* multiple panels
+  - Most settings should become per panel
+* use icon theme spec
+* drag to add/remove
+* drag to move
+* taskbar == panel instance?
+* Move the exec_cmd stuff to libxfce4util/libxfcegui4
+
+Ideas
+-----
 * plugins:
   - dockapps support
   - iconbox / task list
-  
-* write API docs for plugin writers
+* Move to glib xml parsing. More work, but more speed / 
+  reduced memory usage
+* 2 plugins side by side 
+   (like systembuttons)
 
-* new dialog for panel controls (treeview with dialog area)
-  adding/removing controls from here.
-  
-* Move to glib xml parsing. More work, but more speed / reduced memory usage
-
-* IMPORTANT: Move the exec_cmd stuff to libxfce4util/libxfcegui4 and
-  unify the interface!
