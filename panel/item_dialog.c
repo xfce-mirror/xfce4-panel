@@ -79,6 +79,21 @@ int icon_id;
 static char *icon_path = NULL;
 int pos;
 
+/* reindex menuitems */
+static void reindex_items(GList *items)
+{
+    MenuItem *item;
+    GList *li;
+    int i;
+
+    for (i = 0, li = items; li; i++, li = li->next)
+    {
+	item = li->data;
+
+	item->pos = i;
+    }
+}
+
 /*  Save options for revert 
  *  -----------------------
 */
@@ -470,9 +485,16 @@ static GtkWidget *create_tooltip_option(GtkSizeGroup * sg)
 static void pos_changed(GtkSpinButton * spin, gpointer data)
 {
     int n = gtk_spin_button_get_value_as_int(spin);
+    PanelPopup *pp = mitem->parent;
 
+    if (n == mitem->pos)
+	return;
+    
+    pp->items = g_list_remove(pp->items, mitem);
     mitem->pos = n - 1;
-
+    pp->items = g_list_insert(pp->items, mitem, mitem->pos);
+    reindex_items(mitem->parent->items);
+    
     menu_item_apply_options();
     gtk_widget_set_sensitive(revert_button, TRUE);
 }
@@ -789,6 +811,8 @@ static void menu_item_apply_options(void)
 
 void menu_item_revert_options(void)
 {
+    PanelPopup *pp = mitem->parent;
+
     g_free(mitem->command);
     mitem->command = g_strdup(backup.command);
 
@@ -805,12 +829,15 @@ void menu_item_revert_options(void)
     g_free(mitem->icon_path);
     mitem->icon_path = g_strdup(backup.icon_path);
 
+    pp->items = g_list_remove(pp->items, mitem);
     mitem->pos = backup.pos;
+    pp->items = g_list_insert(pp->items, mitem, mitem->pos);
+    reindex_items(mitem->parent->items);
+
+    gtk_box_reorder_child(GTK_BOX(mitem->parent->item_vbox), mitem->button, 
+	    		  mitem->pos);
 
     menu_item_apply_config(mitem);
-
-    gtk_box_reorder_child(GTK_BOX(mitem->parent->item_vbox), mitem->button,
-                          mitem->pos);
 
     /* revert the widgets */
     if(mitem->command)
@@ -951,20 +978,6 @@ static void reposition_popup(PanelPopup * pp)
     gtk_button_clicked(GTK_BUTTON(pp->button));
 }
 
-static void reindex_items(GList *items)
-{
-    MenuItem *item;
-    GList *li;
-    int i;
-
-    for (i = 0, li = items; li; i++, li = li->next)
-    {
-	item = li->data;
-
-	item->pos = i;
-    }
-}
-
 void edit_menu_item_dialog(MenuItem * mi)
 {
     GtkWidget *dlg;
@@ -1005,8 +1018,6 @@ void edit_menu_item_dialog(MenuItem * mi)
         break;
     }
 
-    reindex_items(pp->items);
-    
     gtk_widget_destroy(dlg);
     num_items = 0;
 
