@@ -100,10 +100,10 @@ add_new (void)
 {
     Control *control;
 
-    panel_set_hidden(&panel, FALSE);
-
     panel_add_control ();
     panel_set_position ();
+
+    panel_set_hidden(&panel, FALSE);
 
     control = groups_get_control (settings.num_groups - 1);
 
