@@ -1,6 +1,6 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Xfce 4 Panel</title><link rel="stylesheet" href="../xfce.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.66.0"><link rel="start" href="#xfce4-panel" title="Xfce 4 Panel"><link rel="next" href="#panel-intro" title="Introduction"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="xfce4-panel"></a>Xfce 4 Panel</h1></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Jasper</span> <span class="surname">Huijsmans</span></h3><div class="affiliation"><div class="address"><p><tt class="email">&lt;<a href="mailto:jasper@xfce.org">jasper@xfce.org</a>&gt;</tt></p></div></div></div></div></div><div><span xmlns="http://www.w3.org/TR/xhtml1/transitional" class="releaseinfo">This manual describes <b xmlns="" class="application"><tt>xfce4-panel</tt></b> version 4.2. 
     Last updated: Sep 2004
-  <br></br></span></div><div><p class="copyright">Copyright © 2004 Jasper Huijsmans</p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#panel-intro">Introduction</a></span></dt><dt><span class="sect1"><a href="#panel-getting-started">Getting Started</a></span></dt><dt><span class="sect1"><a href="#panel-items">Panel Items</a></span></dt><dd><dl><dt><span class="sect2"><a href="#launcher-item">Launcher</a></span></dt><dt><span class="sect2"><a href="#clock-item">Xfce Clock</a></span></dt><dt><span class="sect2"><a href="#mailcheck-item">Mail Check</a></span></dt><dt><span class="sect2"><a href="#switcher-item">Desktop Switcher and Graphical Pager</a></span></dt><dt><span class="sect2"><a href="#systembuttons-item">System Buttons</a></span></dt><dt><span class="sect2"><a href="#separator-item">Separator</a></span></dt></dl></dd><dt><span class="sect1"><a href="#subpanels">Panel Menus</a></span></dt><dt><span class="sect1"><a href="#panel-settings">Panel Preferences</a></span></dt><dd><dl><dt><span class="sect2"><a href="#panel-apearance">Appearance</a></span></dt><dt><span class="sect2"><a href="#panel-behaviour">Behaviour</a></span></dt></dl></dd><dt><span class="sect1"><a href="#panel-files">Advanced: Files and Environment Variables</a></span></dt><dt><span class="sect1"><a href="#panel-kiosk">Advanced: Kiosk Mode</a></span></dt><dt><span class="sect1"><a href="#panel-copyright">About <b class="application"><tt>xfce4-panel</tt></b></a></span></dt></dl></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-intro"></a>Introduction</h2></div></div></div><p>
+  <br></br></span></div><div><p class="copyright">Copyright © 2004 Jasper Huijsmans</p></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#panel-intro">Introduction</a></span></dt><dt><span class="sect1"><a href="#panel-getting-started">Getting Started</a></span></dt><dt><span class="sect1"><a href="#panel-items">Panel Items</a></span></dt><dd><dl><dt><span class="sect2"><a href="#launcher-item">Launcher</a></span></dt><dt><span class="sect2"><a href="#clock-item">Xfce Clock</a></span></dt><dt><span class="sect2"><a href="#mailcheck-item">Mail Check</a></span></dt><dt><span class="sect2"><a href="#switcher-item">Desktop Switcher and Graphical Pager</a></span></dt><dt><span class="sect2"><a href="#systembuttons-item">System Buttons</a></span></dt><dt><span class="sect2"><a href="#separator-item">Separator</a></span></dt></dl></dd><dt><span class="sect1"><a href="#subpanels">Panel Menus</a></span></dt><dt><span class="sect1"><a href="#panel-settings">Panel Preferences</a></span></dt><dd><dl><dt><span class="sect2"><a href="#panel-apearance">Appearance</a></span></dt><dt><span class="sect2"><a href="#panel-behaviour">Behaviour</a></span></dt></dl></dd><dt><span class="sect1"><a href="#panel-advanced">Advanced</a></span></dt><dd><dl><dt><span class="sect2"><a href="#panel-files">Files and Environment Variables</a></span></dt><dt><span class="sect2"><a href="#panel-kiosk">Kiosk Mode</a></span></dt></dl></dd><dt><span class="sect1"><a href="#panel-copyright">About <b class="application"><tt>xfce4-panel</tt></b></a></span></dt></dl></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-intro"></a>Introduction</h2></div></div></div><p>
     The Xfce 4 panel is part of the <a href="http://www.xfce.org" target="_top">Xfce 4 Desktop Environment</a> and features program 
     launchers, panel menus, a clock, a desktop switcher and more. Many 
     aspects of the panel can be configured through graphical dialogs. This 
@@ -56,27 +56,23 @@
   </p><div class="itemizedlist"><ul type="disc"><li>Change the position of the item on the panel.</li><li>Remove the item. </li><li>Close the dialog. </li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="launcher-item"></a>Launcher</h3></div></div></div><p>The most common panel item is the launcher item. It allows you to
       start programs from the panel. The properties dialog offers the
       following options:
-    </p><div class="variablelist"><dl><dt><span class="term">Icon</span></dt><dd>The icons used by the panel will follow the icon theme
+    </p><div class="variablelist"><dl><dt><span class="term">Icon</span></dt><dd><p>The icons used by the panel will follow the icon theme
 	  you choose from the 
 	  <a href="xfce-mcs-plugins.html#ui-settings" target="_top">user interface
 	  settings dialog</a>. Of course you can also choose a custom
 	  icon, either by browsing the file system from the button next
 	  to the entry or by dragging an image on the preview area from
-	  a file manager.
-	</dd><dt><span class="term">Command</span></dt><dd>You can type the command to run or browse the file system. 
-	  There is an option to start in a terminal and one to use startup
-	  notification. This last option means that the window manager can
-	  show an hourglass while the program is loading. But, the application
-	  has to support that and not many program do at the moment. Programs
-	  build with Gtk 2.2, should support it.
-	</dd><dt><span class="term">Tooltip</span></dt><dd>The panel item will show this tooltip if you hold the mouse 
-	  over it.
-	</dd><dt><span class="term">Menu</span></dt><dd>A launcher can have a panel menu attached to it. When this
-	  option is selected a small button with an arrow will appear next to 
-	  the item. Look <a href="#subpanels" target="_top">here</a> for more info 
-	  on panel menus. The position of the menu button can be changed from 
-	  the global settings dialog.
-	</dd></dl></div><div class="figure"><a name="launcher-fig"></a><p class="title"><b>Figure 5. Launcher item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/launcher-properties.png" alt="Shows properties dialog for launcher item."></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="clock-item"></a>Xfce Clock</h3></div></div></div><p>The Xfce Clock has a number of options to change the way it looks. 
+	  a file manager.</p></dd><dt><span class="term">Command</span></dt><dd><p>You can type the command to run or browse the file 
+	  system. There is an option to start in a terminal and one to use 
+	  startup notification. This last option means that the window manager 
+	  can show an hourglass while the program is loading. But, the 
+	  application has to support it as well. Programs build with Gtk 2.2
+	  should support it.</p></dd><dt><span class="term">Tooltip</span></dt><dd><p>The panel item will show this tooltip if you hold the 
+	    mouse over it.</p></dd><dt><span class="term">Menu</span></dt><dd><p>A launcher can have a panel menu attached to it. When 
+	  this option is selected a small button with an arrow will appear 
+	  next to the item. Look <a href="#subpanels" target="_top">here</a> for more 
+	  info on panel menus. The position of the menu button can be changed 
+	  from the global settings dialog.</p></dd></dl></div><div class="figure"><a name="launcher-fig"></a><p class="title"><b>Figure 5. Launcher item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/launcher-properties.png" alt="Shows properties dialog for launcher item."></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="clock-item"></a>Xfce Clock</h3></div></div></div><p>The Xfce Clock has a number of options to change the way it looks. 
       There are three clock types available: analog, digital and LED.
       There is an option to show seconds and for the digital and LED clock
       types you can choose whether the clock will be in 24 hour mode, 12
@@ -102,17 +98,14 @@
     </p><div class="figure"><a name="nooptions-fig"></a><p class="title"><b>Figure 8. Item without options</b></p><div class="screenshot"><div class="mediaobject"><img src="images/nooptions-properties.png" alt="Shows properties dialog for item without options.
 	    "></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="systembuttons-item"></a>System Buttons</h3></div></div></div><p>A systembuttons item shows one or two buttons which can perform
       special system actions. The buttons follow your panel icon theme.
-      There are four buttons available:</p><div class="variablelist"><dl><dt><span class="term">Lock</span></dt><dd>Runs the <b class="application"><tt>xflock4</tt></b> script that
+      There are four buttons available:</p><div class="variablelist"><dl><dt><span class="term">Lock</span></dt><dd><p>Runs the <b class="application"><tt>xflock4</tt></b> script that
 	  will attempt to lock the screen using either xscreensaver or if
-	  that fails xlock.
-	</dd><dt><span class="term">Exit</span></dt><dd>This will popup a logout dialog to end your Xfce session.
-	</dd><dt><span class="term">Info</span></dt><dd>The info button will show the 
-	  <span class="emphasis"><em>About Xfce 4</em></span> dialog.
-	</dd><dt><span class="term">Setup</span></dt><dd>Pressing the setup button will open the Xfce settings
+	  that fails xlock.</p></dd><dt><span class="term">Exit</span></dt><dd><p>This will popup a logout dialog to end your Xfce 
+	  session.</p></dd><dt><span class="term">Info</span></dt><dd><p>The info button will show the 
+	  <span class="emphasis"><em>About Xfce 4</em></span> dialog.</p></dd><dt><span class="term">Setup</span></dt><dd><p>Pressing the setup button will open the Xfce settings
 	  manager dialog, from which you have access to the settings for all
 	  Xfce components as well as some system settings, such as mouse
-	  behaviour and user interface settings.
-	</dd></dl></div><div class="figure"><a name="systembuttons-fig"></a><p class="title"><b>Figure 9. Systembuttons item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/systembuttons-properties.png" alt="Shows properties dialog for systembuttons item.
+	  behaviour and user interface settings.</p></dd></dl></div><div class="figure"><a name="systembuttons-fig"></a><p class="title"><b>Figure 9. Systembuttons item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/systembuttons-properties.png" alt="Shows properties dialog for systembuttons item.
 	    "></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="separator-item"></a>Separator</h3></div></div></div><p>This item simply adds a separator line to the panel. It has no
       options to set except its position.
     </p><p>Note that it may be a bit hard to popup the right-click menu, 
@@ -149,35 +142,37 @@
 	    cover the panel area.
 	  </p></dd><dt><span class="term">Autohide</span></dt><dd><p>If you choose autohide, the panel will collapse to a thin bar. 
 	    Moving the mouse over it will unhide the panel.
-	  </p></dd></dl></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-files"></a>Advanced: Files and Environment Variables</h2></div></div></div><p>The Xfce 4 Panel uses one configuration file for the panel contents
-    and another one for the global settings. Neither one of these files should
-    be edited by hand, and in fact the changes will be overwritten if you edit
-    them while the panel and the settings manager are running.
-  </p><p>Xfce now uses the Basedir Specification as defined on <a href="http://freedesktop.org" target="_top">Freedesktop.org</a> to locate its data
-    and configuration files. This means that file locations will be specified 
-    as a path relative to the directories described in the specification.
-  </p><div class="variablelist"><dl><dt><span class="term">${XDG_DATA_HOME}</span></dt><dd>The first base directory to look for configuration files. If
-	empty this defaults to <tt class="filename">~/.config/</tt>.</dd><dt><span class="term">${XDG_DATA_DIRS}</span></dt><dd>A list of system directories that contain configuration
-	data. If empty the panel will look in <tt class="filename">${sysconfdir}/xdg/</tt> and 
-	<tt class="filename">/etc/xdg/</tt>. The value of
-	${sysconfdir} depends on how the program was build and will often be
-	<tt class="filename">/etc/</tt> for binary packages.
-      </dd><dt><span class="term">xfce4/panel/contents.xml</span></dt><dd>This is the location of the xml configuration file
-	that describes the contents of the panel, relative to the base
-	directories metioned above.</dd><dt><span class="term">xfce4/mcs_settings/panel.xml</span></dt><dd>This is the relative location of the global panel
-	settings. This file is managed by the settings manager, rather than by
-	the panel itself.</dd><dt><span class="term">xfce4/kioskrc</span></dt><dd>Kiosk Mode configuration file. See <a href="#panel-kiosk" target="_top">next section</a> for an explanation.
-      </dd></dl></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-kiosk"></a>Advanced: Kiosk Mode</h2></div></div></div><p>The panel now has support for Kiosk Mode, that will prevent users from
-    making changes to their panel configuration. To use it you have to edit or 
-    create the file <tt class="filename">${sysconfdir}/xdg/xfce4/kioskrc</tt>.
-  </p><p>The best way to explain the format is by using an example. The
-    xfce4-panel section of your kioskrc might look like this:
-  </p><table border="0" bgcolor="#E0E0E0" width="100%"><tr><td><pre class="programlisting">
+	  </p></dd></dl></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-advanced"></a>Advanced</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-files"></a>Files and Environment Variables</h3></div></div></div><p>Xfce now uses the Basedir Specification as defined on <a href="http://freedesktop.org" target="_top">Freedesktop.org</a> to locate its 
+      data and configuration files. This means that file locations will
+      be specified as a path relative to the directories described in
+      the specification.
+    </p><div class="variablelist"><dl><dt><span class="term">${XDG_DATA_HOME}</span></dt><dd><p>The first base directory to look for configuration 
+	  files. By default this is set to <tt class="filename">~/.config/</tt>.</p></dd><dt><span class="term">${XDG_DATA_DIRS}</span></dt><dd><p>A list of system directories that contain configuration
+	  data. By default the panel will look in <tt class="filename">${sysconfdir}/xdg/</tt> and 
+	  <tt class="filename">/etc/xdg/</tt>. The value of
+	  ${sysconfdir} depends on how the program was build and will often be
+	  <tt class="filename">/etc/</tt> for binary
+	  packages.</p></dd><dt><span class="term">xfce4/panel/contents.xml</span></dt><dd><p>This is the location of the xml configuration file
+	  that describes the contents of the panel, relative to the base
+	  directories metioned above.</p></dd><dt><span class="term">xfce4/mcs_settings/panel.xml</span></dt><dd><p>This is the relative location of the global panel
+	  settings. This file is managed by the settings manager, rather than 
+	  by the panel itself.</p></dd><dt><span class="term">xfce4/kioskrc</span></dt><dd><p>Kiosk Mode configuration file. See <a href="#panel-kiosk" target="_top">next section</a> for an explanation.
+	</p></dd></dl></div><p>None of the configuration files, except 
+      <tt class="filename">kioskrc</tt>, should be edited by hand; in fact
+      the changes will be overwritten if you edit them while the panel
+      and the settings manager are running.
+    </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-kiosk"></a>Kiosk Mode</h3></div></div></div><p>The panel now has support for Kiosk Mode, that will prevent users 
+      from making changes to their panel configuration. To use it you have to 
+      edit or create the file 
+      <tt class="filename">${sysconfdir}/xdg/xfce4/kioskrc</tt>.
+    </p><p>The best way to explain the format of this file is by using an 
+      example. The xfce4-panel section of your kioskrc might look like this:
+    </p><table border="0" bgcolor="#E0E0E0" width="100%"><tr><td><pre class="programlisting">
 [xfce4-panel]
 CustomizePanel=%powerusers,foo
 </pre></td></tr></table><p>This allows only users in the group powerusers and the user foo to 
-    customize their panels.
-  </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-copyright"></a>About <b class="application"><tt>xfce4-panel</tt></b></h2></div></div></div><p><b class="application"><tt>xfce4-panel</tt></b> was written by Jasper Huijsmans 
+      customize their panels.
+    </p></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-copyright"></a>About <b class="application"><tt>xfce4-panel</tt></b></h2></div></div></div><p><b class="application"><tt>xfce4-panel</tt></b> was written by Jasper Huijsmans 
     (<tt class="email">&lt;<a href="mailto:jasper@xfce.org">jasper@xfce.org</a>&gt;</tt>). To find more information, please visit 
     the <a href="http://www.xfce.org" target="_top">Xfce web site</a>. 
   </p><p>To report a bug or make a suggestion regarding this application or
