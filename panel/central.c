@@ -68,9 +68,20 @@ static char *get_default_screen_name(int index)
 void init_screen_names(void)
 {
     int i;
+    static gboolean first = TRUE;
 
+    if (!first)
+	return;
+    
     for(i = 0; i < NBSCREENS; i++)
-        screen_names[i] = NULL;
+    {
+	if (i < settings.num_screens)
+	    screen_names[i] = get_default_screen_name(i);
+	else
+	    screen_names[i] = NULL;
+    }
+
+    first = FALSE;
 }
 
 /*  Callbacks
@@ -246,6 +257,7 @@ static void screen_button_set_style(ScreenButton * sb, int style)
 ScreenButton *create_screen_button(int index)
 {
     ScreenButton *sb = g_new(ScreenButton, 1);
+    char *name;
 
     sb->index = index;
     sb->callback_id = 0;
@@ -272,6 +284,8 @@ ScreenButton *create_screen_button(int index)
     gtk_misc_set_alignment(GTK_MISC(sb->label), 0.1, 0.5);
     gtk_container_add(GTK_CONTAINER(sb->button), sb->label);
     gtk_widget_show(sb->label);
+
+    screen_button_update_name(sb);
 
     /* signals */
     /* we need the callback id to be able to block the handler to
@@ -457,14 +471,9 @@ static void add_desktop_table(GtkBox * hbox)
 void central_panel_init(GtkBox * box)
 {
     int i;
-    static gboolean need_init = TRUE;
     gboolean newstyle = settings.style == NEW_STYLE;
 
-    if (need_init)
-    {
-	init_screen_names();
-	need_init = FALSE;
-    }
+    init_screen_names();
 
     central_frame = gtk_frame_new(NULL);
     gtk_widget_show(central_frame);
@@ -535,6 +544,8 @@ void central_panel_set_from_xml(xmlNodePtr node)
     xmlChar *value;
     int i;
 
+    init_screen_names();
+
     if(node)
         child = node->children;
 
@@ -542,17 +553,16 @@ void central_panel_set_from_xml(xmlNodePtr node)
     {
         ScreenButton *sb = screen_buttons[i];
 
-        if(!child || !xmlStrEqual(child->name, (const xmlChar *)"Screen"))
-            value = NULL;
-        else
-            value = DATA(child);
+        if(child && xmlStrEqual(child->name, (const xmlChar *)"Screen"))
+	{
+	    g_free(screen_names[i]);
+	    screen_names[i] = (char *) DATA(child);
 
-        if(value)
-            screen_names[i] = (char *)value;
-        else
-            screen_names[i] = get_default_screen_name(i);
+	    if (sb)
+		screen_button_update_name(sb);
+	}
 
-        if(i < settings.num_screens)
+	if(sb)
             screen_button_update_name(sb);
 
         if(child)
@@ -903,6 +913,8 @@ void central_panel_move(GtkBox * box, int n)
 
 void central_panel_show(void)
 {
+    int i;
+    
     gtk_widget_show(central_frame);
 }
 
