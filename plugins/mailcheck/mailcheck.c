@@ -268,10 +268,6 @@ mailcheck_new (void)
 	mailcheck->mbox = g_strconcat ("/var/spool/mail/", logname, NULL);
     }
 
-    mailcheck->command = g_strdup ("pine");
-    mailcheck->term = TRUE;
-    mailcheck->use_sn = FALSE;
-
     mailcheck->button =
 	xfce_iconbutton_new_from_pixbuf (mailcheck->nomail_pb);
     gtk_widget_show (mailcheck->button);
