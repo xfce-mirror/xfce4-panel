@@ -911,6 +911,8 @@ mailcheck_create_options (Control * control, GtkContainer * container,
     GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
     MailDialog *md;
 
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     md = g_new0 (MailDialog, 1);
 
     md->mc = (t_mailcheck *) control->data;
@@ -957,6 +959,8 @@ create_mailcheck_control (Control * control)
 G_MODULE_EXPORT void
 xfce_control_class_init (ControlClass * cc)
 {
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     cc->name = "mailcheck";
     cc->caption = _("Mail checker");
 

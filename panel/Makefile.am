@@ -84,5 +84,5 @@ if HAVE_CYGWIN
 panel.def: $(xfce4_panel_SOURCES) create-def-file.sh
 	sh create-def-file.sh $(xfce4_panel_SOURCES)
 
-EXTRA_DIST += $(devel_DATA) create-def-file.sh
+EXTRA_DIST = $(devel_DATA) create-def-file.sh
 endif

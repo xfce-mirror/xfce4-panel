@@ -89,6 +89,5 @@ plugins/pager/Makefile
 plugins/sample-plugin/Makefile
 plugins/separator/Makefile
 settings/Makefile
-themes/Makefile
 ])
 

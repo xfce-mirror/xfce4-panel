@@ -12,7 +12,8 @@ libpager_la_SOURCES = 							\
 libpager_la_CFLAGS =							\
 	-I$(top_srcdir)							\
 	@LIBXFCEGUI4_CFLAGS@						\
-	@LIBXML_CFLAGS@
+	@LIBXML_CFLAGS@							\
+	-DLOCALEDIR=\"$(localedir)\"
 
 libpager_la_LIBADD =							\
 	@LIBS@

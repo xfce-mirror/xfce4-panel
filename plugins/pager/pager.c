@@ -301,6 +301,8 @@ pager_create_options (Control * control, GtkContainer * container,
     int max;
     t_pager *pager = control->data;
 
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     hbox = gtk_hbox_new (FALSE, 6);
     gtk_widget_show (hbox);
     gtk_container_add (container, hbox);
@@ -352,6 +354,8 @@ create_pager_control (Control * control)
 G_MODULE_EXPORT void
 xfce_control_class_init (ControlClass * cc)
 {
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     cc->name = "pager";
     cc->caption = _("Graphical pager");
 

@@ -238,7 +238,8 @@ libseparator_la_SOURCES = \
 libseparator_la_CFLAGS = \
 	-I$(top_srcdir)							\
 	@LIBXFCEGUI4_CFLAGS@						\
-	@LIBXML_CFLAGS@
+	@LIBXML_CFLAGS@							\
+	-DLOCALEDIR=\"$(localedir)\"
 
 libseparator_la_LIBADD = \
 	@LIBS@\

@@ -12,7 +12,8 @@ libsystembuttons_la_SOURCES = 						\
 libsystembuttons_la_CFLAGS =						\
 	-I$(top_srcdir)							\
 	@LIBXFCEGUI4_CFLAGS@						\
-	@LIBXML_CFLAGS@
+	@LIBXML_CFLAGS@							\
+	-DLOCALEDIR=\"$(localedir)\"
 
 libsystembuttons_la_LIBADD =						\
 	@LIBS@

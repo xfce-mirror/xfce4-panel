@@ -101,9 +101,6 @@ G_MODULE_IMPORT void control_class_set_unique (ControlClass * cclass, gboolean u
 G_MODULE_IMPORT void control_class_set_unloadable (ControlClass * cclass,
 				   gboolean unloadable);
 
-/* add controls menu */
-G_MODULE_IMPORT GtkWidget *get_controls_submenu (void);
-
 /* controls */
 G_MODULE_IMPORT Control *control_new (int index);
 

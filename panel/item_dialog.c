@@ -50,12 +50,6 @@
 #define BORDER          6
 #define PREVIEW_SIZE    48
 
-/* Make sure translations are taken from the panel and not from some plugin */
-#ifdef ENABLE_NLS
-#undef _
-#define _(s) dgettext (PACKAGE, s)
-#endif
-
 typedef struct _ItemDialog ItemDialog;
 
 struct _ItemDialog
@@ -1051,6 +1045,8 @@ create_item_dialog (Control * control, Item * item,
     GtkWidget *vbox;
     GtkSizeGroup *sg;
 
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     idlg = g_new0 (ItemDialog, 1);
 
     if (control)
@@ -1189,6 +1185,8 @@ edit_menu_item_dialog (Item * mi)
     GtkWidget *remove, *close, *header;
     GtkDialog *dlg;
     int response, num_items;
+
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     menudialog = gtk_dialog_new ();
     dlg = GTK_DIALOG (menudialog);

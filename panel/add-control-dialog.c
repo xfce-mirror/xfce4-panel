@@ -30,12 +30,6 @@
 
 #include "add-control-dialog.h"
 
-/* Make sure translations are taken from the panel and not from some plugin */
-#ifdef ENABLE_NLS
-#undef _
-#define _(s) dgettext (PACKAGE, s)
-#endif
-
 typedef struct
 {
     Panel *panel;
@@ -84,6 +78,8 @@ add_control_dialog (Panel * panel, int position)
 	gtk_window_present (GTK_WINDOW (the_dialog));
 	return;
     }
+
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     panel_block_autohide (panel);
 

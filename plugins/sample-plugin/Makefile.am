@@ -10,7 +10,8 @@ libsample_la_SOURCES = 						\
 libsample_la_CFLAGS =						\
 	-I$(top_srcdir)						\
 	@LIBXFCEGUI4_CFLAGS@					\
-	@LIBXML_CFLAGS@
+	@LIBXML_CFLAGS@						\
+	-DLOCALEDIR=\"$(localedir)\"
 
 libsample_la_LIBADD =						\
 	@LIBS@

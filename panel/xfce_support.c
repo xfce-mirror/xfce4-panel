@@ -555,6 +555,8 @@ G_MODULE_EXPORT /* EXPORT:select_file_name */
 char *
 select_file_name (const char *title, const char *path, GtkWidget * parent)
 {
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     return real_select_file (title, path, parent, FALSE);
 }
 
@@ -563,6 +565,8 @@ char *
 select_file_with_preview (const char *title, const char *path,
 			  GtkWidget * parent)
 {
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     return real_select_file (title, path, parent, TRUE);
 }
 

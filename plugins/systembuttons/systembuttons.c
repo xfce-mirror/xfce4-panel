@@ -497,6 +497,8 @@ systembuttons_create_options (Control * control, GtkContainer * container,
     t_systembuttons_dialog *sbd;
     GtkSizeGroup *sg1, *sg2;
 
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     sg1 = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
     sg2 = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
@@ -608,6 +610,8 @@ create_systembuttons_control (Control * control)
 G_MODULE_EXPORT void
 xfce_control_class_init (ControlClass * cc)
 {
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     cc->name = "systembuttons";
     cc->caption = _("System buttons");
 

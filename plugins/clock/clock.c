@@ -623,12 +623,12 @@ clock_create_options (Control * control, GtkContainer * container,
     GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
     ClockDialog *cd;
 
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     cd = g_new0 (ClockDialog, 1);
 
     cd->clock = control->data;
     cd->dialog = gtk_widget_get_toplevel (done);
-
-/*    clock_create_backup (cd);*/
 
     g_signal_connect_swapped (cd->dialog, "destroy-event",
 			      G_CALLBACK (g_free), cd);
@@ -670,6 +670,8 @@ create_clock_control (Control * control)
 G_MODULE_EXPORT void
 xfce_control_class_init (ControlClass * cc)
 {
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     cc->name = "clock";
     cc->caption = _("Xfce Clock");
 

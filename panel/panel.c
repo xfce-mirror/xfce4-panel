@@ -46,12 +46,6 @@
 #define SNAP_WIDTH	25
 
 
-/* Make sure translations are taken from the panel and not from some plugin */
-#ifdef ENABLE_NLS
-#undef _
-#define _(s) dgettext (PACKAGE, s)
-#endif
-
 /* typedefs *
  * -------- */
 
@@ -541,6 +535,8 @@ get_handle_menu (void)
     if (!menu)
     {
 	GtkWidget *mi;
+
+        xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
 	menu = gtk_menu_new ();
 

@@ -13,7 +13,8 @@ libswitcher_la_CFLAGS =							\
 	-I$(top_srcdir)							\
 	@LIBX11_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
-	@LIBXML_CFLAGS@
+	@LIBXML_CFLAGS@							\
+	-DLOCALEDIR=\"$(localedir)\"
 
 libswitcher_la_LIBADD =							\
 	@LIBS@

@@ -62,12 +62,6 @@
 
 #define UNLOAD_TIMEOUT  30000	/* 30 secs */
 
-/* Make sure translations are taken from the panel and not from some plugin */
-#ifdef ENABLE_NLS
-#undef _
-#define _(s) dgettext (PACKAGE, s)
-#endif
-
 typedef struct _ControlClassInfo ControlClassInfo;
 
 struct _ControlClassInfo
@@ -755,38 +749,6 @@ add_control (GtkWidget * w, ControlClassInfo * info)
 	panel_set_autohide (TRUE);
 }
 
-G_MODULE_EXPORT /* EXPORT:get_controls_submenu */
-GtkWidget *
-get_controls_submenu (void)
-{
-    static GtkWidget *menu = NULL;
-    GSList *li;
-
-    if (menu)
-	gtk_widget_destroy (menu);
-
-    menu = gtk_menu_new ();
-
-    for (li = control_class_info_list; li != NULL; li = li->next)
-    {
-	ControlClassInfo *info = li->data;
-	GtkWidget *item;
-
-	DBG ("info: %s (%s)", info->caption, info->name);
-
-	item = gtk_menu_item_new_with_label (info->caption);
-	gtk_widget_show (item);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-	g_signal_connect (item, "activate", G_CALLBACK (add_control), info);
-
-	if (info->unique && info->refcount > 0)
-	    gtk_widget_set_sensitive (item, FALSE);
-    }
-
-    return menu;
-}
-
 static GtkWidget *
 get_control_menu (void)
 {
@@ -795,6 +757,8 @@ get_control_menu (void)
 
     if (!menu)
     {
+        xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
 	menu = gtk_menu_new ();
 
 	/* replaced with actual name */

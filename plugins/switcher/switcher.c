@@ -692,6 +692,8 @@ create_switcher_control (Control * control)
 G_MODULE_EXPORT void
 xfce_control_class_init (ControlClass * cc)
 {
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     cc->name = "switcher";
     cc->caption = _("Desktop switcher");
 

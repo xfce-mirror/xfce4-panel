@@ -13,7 +13,8 @@ libmailcheck_la_CFLAGS =						\
 	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBXFCEGUI4_CFLAGS@						\
-	@LIBXML_CFLAGS@
+	@LIBXML_CFLAGS@							\
+	-DLOCALEDIR=\"$(localedir)\"
 
 libmailcheck_la_LIBADD =						\
 	@LIBS@

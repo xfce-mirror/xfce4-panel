@@ -63,12 +63,6 @@
     "style \"popupbutton\" { GtkWidget::focus-padding = 0 }\n" \
     "class \"XfceTogglebutton\" style \"popupbutton\"\n"
 
-/* Make sure translations are taken from the panel and not from some plugin */
-#ifdef ENABLE_NLS
-#undef _
-#define _(s) dgettext (PACKAGE, s)
-#endif
-
 /* signal handling */
 typedef enum
 {

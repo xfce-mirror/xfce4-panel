@@ -307,6 +307,8 @@ create_panel_popup (void)
     GtkArrowType at;
     gboolean vertical = settings.orientation == VERTICAL;
 
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     /* the button */
     if (vertical)
     {

@@ -42,12 +42,6 @@
 
 #define BORDER 6
 
-/* Make sure translations are taken from the panel and not from some plugin */
-#ifdef ENABLE_NLS
-#undef _
-#define _(s) dgettext (PACKAGE, s)
-#endif
-
 static GtkWidget *cdialog = NULL;
 
 /* container for control options */
@@ -145,6 +139,8 @@ controls_dialog (Control * control)
 	return;
     }
 
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+
     cdialog = gtk_dialog_new ();
     dlg = GTK_DIALOG (cdialog);
 
@@ -187,34 +183,38 @@ controls_dialog (Control * control)
 
     add_spacer (GTK_BOX (dlg->vbox), BORDER);
 
-    /* run dialog until 'Close' or 'Remove' */
-retry:
-    response = GTK_RESPONSE_NONE;
-
-    gtk_widget_grab_default (close);
-    gtk_widget_grab_focus (close);
-
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    response = gtk_dialog_run (dlg);
-
-    if (response == GTK_RESPONSE_CANCEL)
+    
+    /* run dialog until 'Close' or 'Remove' */
+    while (1)
     {
-	PanelPopup *pp;
+        response = GTK_RESPONSE_NONE;
 
-	gtk_widget_hide (cdialog);
+        gtk_widget_grab_default (close);
+        gtk_widget_grab_focus (close);
 
-	pp = groups_get_popup (control->index);
+        response = gtk_dialog_run (dlg);
 
-	if (!(control->with_popup) || !pp || pp->items == NULL ||
-	    xfce_confirm (_("Removing the item will also remove "
-			    "its popup menu."), GTK_STOCK_REMOVE, NULL))
-	{
-	    groups_remove (control->index);
-	}
-	else
-	{
-	    goto retry;
-	}
+        gtk_widget_hide (cdialog);
+
+        if (response == GTK_RESPONSE_CANCEL)
+        {
+            PanelPopup *pp;
+
+            pp = groups_get_popup (control->index);
+
+            if (!(control->with_popup) || !pp || pp->items == NULL ||
+                xfce_confirm (_("Removing the item will also remove "
+                                "its popup menu."), GTK_STOCK_REMOVE, NULL))
+            {
+                groups_remove (control->index);
+                break;
+            }
+        }
+        else
+        {
+            break;
+        }
     }
 
     gtk_widget_destroy (cdialog);
