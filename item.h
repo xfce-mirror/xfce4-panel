@@ -27,6 +27,7 @@ struct _PanelItem
     PanelGroup *parent;
 
     char *command;
+    gboolean in_terminal;
     char *tooltip;
 
     int id;

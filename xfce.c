@@ -23,6 +23,8 @@
  * and panel function.
  */
 
+#include <signal.h>
+
 #include "xfce.h"
 
 #include "central.h"
@@ -82,6 +84,11 @@ void add_tooltip(GtkWidget * widget, char *tip)
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
+void sighandler(int sig)
+{
+    quit();
+}
+
 void quit(void)
 {
     gtk_main_quit();
@@ -101,6 +108,9 @@ void xfce_init(void)
     check_net_support();
 
     create_builtin_pixbufs();
+    
+    signal(SIGTERM, &sighandler);
+    signal(SIGINT, &sighandler);
 }
 
 void xfce_run(void)

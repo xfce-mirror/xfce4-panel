@@ -33,6 +33,7 @@ PanelItem *panel_item_new(PanelGroup * pg)
     pi->parent = pg;
 
     pi->command = NULL;
+    pi->in_terminal = FALSE;
     pi->tooltip = NULL;
 
     pi->id = UNKNOWN_ICON;
@@ -80,7 +81,7 @@ void create_panel_item(PanelItem * pi)
     if(pi->command && strlen(pi->command))
     {
         g_signal_connect(pi->button, "clicked",
-                         G_CALLBACK(item_click_cb), pi->command);
+                         G_CALLBACK(panel_item_click_cb), pi);
 
         if(pi->tooltip && strlen(pi->tooltip))
             add_tooltip(pi->button, pi->tooltip);
@@ -90,7 +91,7 @@ void create_panel_item(PanelItem * pi)
         dnd_set_drag_dest(pi->button);
 
         g_signal_connect(pi->button, "drag_data_received",
-                         G_CALLBACK(item_drop_cb), pi->command);
+                         G_CALLBACK(panel_item_drop_cb), pi);
     }
     else
         add_tooltip(pi->button, _("Click Mouse 3 to change item"));
@@ -165,10 +166,20 @@ void panel_item_parse_xml(xmlNodePtr node, PanelItem * pi)
     {
         if(xmlStrEqual(child->name, (const xmlChar *)"Command"))
         {
+	    int n = -1;
+	    
             value = DATA(child);
 
             if(value)
                 pi->command = (char *)value;
+	    
+	    value = xmlGetProp(child, "term");
+	    
+	    if (value)
+		n = atoi(value);
+	    
+	    if (n == 1)
+		pi->in_terminal = TRUE;
         }
         else if(xmlStrEqual(child->name, (const xmlChar *)"Tooltip"))
         {
@@ -210,7 +221,10 @@ void panel_item_write_xml(xmlNodePtr root, PanelItem *pi)
     
     node = xmlNewTextChild(root, NULL, "Item", NULL);
     
-    xmlNewTextChild(node, NULL, "Command", pi->command);
+    child = xmlNewChild(node, NULL, "Command", pi->command);
+    
+    snprintf(value, 2, "%d", pi->in_terminal);
+    xmlSetProp(child, "term", value);
     
     if (pi->tooltip)
 	xmlNewTextChild(node, NULL, "Tooltip", pi->tooltip);

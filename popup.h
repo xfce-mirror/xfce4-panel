@@ -49,6 +49,7 @@ struct _PanelPopup
 struct _MenuItem
 {
     char *command;
+    gboolean in_terminal;
     char *caption;
     char *tooltip;
 

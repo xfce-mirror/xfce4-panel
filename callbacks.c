@@ -42,13 +42,19 @@ void hide_current_popup_menu(void);
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
-void exec_cmd(const char *cmd)
+void exec_cmd(const char *cmd, gboolean in_terminal)
 {
     GError *error = NULL;       /* this must be NULL to prevent crash :( */
+    char execute[MAXSTRLEN + 1];
 
     if(!cmd)
         return;
 
+    if (in_terminal)
+	snprintf(execute, MAXSTRLEN, "xfterm -e /bin/sh -c %s", cmd);
+    else
+	snprintf(execute, MAXSTRLEN, "/bin/sh -c %s", cmd);
+    
     if(!g_spawn_command_line_async(cmd, &error))
     {
         char *msg;
@@ -275,7 +281,7 @@ void mini_lock_cb(char *cmd)
 
     hide_current_popup_menu();
 
-    exec_cmd(cmd);
+    exec_cmd(cmd, FALSE);
 }
 
 void mini_info_cb(void)
@@ -309,7 +315,7 @@ void mini_power_cb(GtkButton * b, GdkEventButton * ev, char *cmd)
 
     if(ev->button == 1)
     {
-        exec_cmd(cmd);
+        exec_cmd(cmd, FALSE);
         quit();
     }
     else
@@ -461,14 +467,14 @@ gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
-   Item callbacks (panel and menu items)
+   Panel item callbacks
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 void
-item_drop_cb(GtkWidget * widget, GdkDragContext * context,
+panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
              gint x, gint y, GtkSelectionData * data,
-             guint info, guint time, char *command)
+             guint info, guint time, PanelItem *pi)
 {
     GList *fnames, *fnp;
     guint count;
@@ -481,7 +487,7 @@ item_drop_cb(GtkWidget * widget, GdkDragContext * context,
     {
         execute = (char *)g_new0(char, MAXSTRLEN);
 
-        strcpy(execute, command);
+        strcpy(execute, pi->command);
 
         for(fnp = fnames; fnp; fnp = fnp->next, count--)
         {
@@ -489,7 +495,7 @@ item_drop_cb(GtkWidget * widget, GdkDragContext * context,
             strncat(execute, (char *)(fnp->data), MAXSTRLEN - strlen(execute));
         }
 
-        exec_cmd(execute);
+        exec_cmd(execute, pi->in_terminal);
         g_free(execute);
 
         hide_current_popup_menu();
@@ -499,10 +505,10 @@ item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                     time);
 }
 
-void item_click_cb(GtkButton * b, char *command)
+void panel_item_click_cb(GtkButton * b, PanelItem *pi)
 {
     hide_current_popup_menu();
-    exec_cmd(command);
+    exec_cmd(pi->command, pi->in_terminal);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -567,5 +573,45 @@ gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi)
     edit_menu_item_dialog(mi);
 
     return TRUE;
+}
+
+void
+menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
+             gint x, gint y, GtkSelectionData * data,
+             guint info, guint time, MenuItem *mi)
+{
+    GList *fnames, *fnp;
+    guint count;
+    char *execute;
+
+    fnames = gnome_uri_list_extract_filenames((char *)data->data);
+    count = g_list_length(fnames);
+
+    if(count > 0)
+    {
+        execute = (char *)g_new0(char, MAXSTRLEN);
+
+        strcpy(execute, mi->command);
+
+        for(fnp = fnames; fnp; fnp = fnp->next, count--)
+        {
+            strcat(execute, " ");
+            strncat(execute, (char *)(fnp->data), MAXSTRLEN - strlen(execute));
+        }
+
+        exec_cmd(execute, mi->in_terminal);
+        g_free(execute);
+
+        hide_current_popup_menu();
+    }
+    gnome_uri_list_free_strings(fnames);
+    gtk_drag_finish(context, (count > 0), (context->action == GDK_ACTION_MOVE),
+                    time);
+}
+
+void menu_item_click_cb(GtkButton * b, MenuItem *mi)
+{
+    hide_current_popup_menu();
+    exec_cmd(mi->command, mi->in_terminal);
 }
 

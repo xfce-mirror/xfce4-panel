@@ -246,6 +246,7 @@ MenuItem *menu_item_new(PanelPopup * pp)
     mi->pos = 0;
 
     mi->command = NULL;
+    mi->in_terminal = FALSE;
     mi->caption = NULL;
     mi->tooltip = NULL;
 
@@ -334,8 +335,8 @@ void create_menu_item(MenuItem * mi)
 
     if(mi->command && strlen(mi->command))
     {
-        g_signal_connect(mi->button, "clicked", G_CALLBACK(item_click_cb),
-                         mi->command);
+        g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb),
+                         mi);
 
         if(mi->tooltip && strlen(mi->tooltip))
             add_tooltip(mi->button, mi->tooltip);
@@ -345,7 +346,7 @@ void create_menu_item(MenuItem * mi)
         dnd_set_drag_dest(mi->button);
 
         g_signal_connect(mi->button, "drag_data_received",
-                         G_CALLBACK(item_drop_cb), mi->command);
+                         G_CALLBACK(menu_item_drop_cb), mi);
     }
     else
         add_tooltip(mi->button, _("Click Mouse 3 to change item"));
@@ -414,10 +415,20 @@ void menu_item_parse_xml(xmlNodePtr node, MenuItem * mi)
         }
         else if(xmlStrEqual(child->name, (const xmlChar *)"Command"))
         {
+	    int n = -1;
+	    
             value = DATA(child);
 
             if(value)
                 mi->command = (char *)value;
+	    
+	    value = xmlGetProp(child, "term");
+	    
+	    if (value)
+		n = atoi(value);
+	    
+	    if (n == 1)
+		mi->in_terminal = TRUE;
         }
         else if(xmlStrEqual(child->name, (const xmlChar *)"Tooltip"))
         {
@@ -460,7 +471,11 @@ void menu_item_write_xml(xmlNodePtr root, MenuItem *mi)
     node = xmlNewTextChild(root, NULL, "Item", NULL);
     
     xmlNewTextChild(node, NULL, "Caption", mi->caption);
-    xmlNewTextChild(node, NULL, "Command", mi->command);
+    
+    child = xmlNewChild(node, NULL, "Command", mi->command);
+    
+    snprintf(value, 2, "%d", mi->in_terminal);
+    xmlSetProp(child, "term", value);
     
     if (mi->tooltip)
 	xmlNewTextChild(node, NULL, "Tooltip", mi->tooltip);

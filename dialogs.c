@@ -145,6 +145,7 @@ struct _ItemFrame
 
     GtkWidget *command_entry;
     GtkWidget *command_browse_button;
+    GtkWidget *term_check_button;
 
     GtkWidget *caption_entry;
     GtkWidget *tooltip_entry;
@@ -173,6 +174,7 @@ static ItemFrame *item_frame_new(gboolean is_menuitem)
     iframe->frame = NULL;
     iframe->command_entry = NULL;
     iframe->command_browse_button = NULL;
+    iframe->term_check_button = NULL;
     iframe->caption_entry = NULL;
     iframe->tooltip_entry = NULL;
     iframe->icon_option_menu = NULL;
@@ -274,6 +276,19 @@ static void create_icon_option_menu(void)
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /* icon preview */
 
+static void new_extern_icon(const char *path)
+{
+    g_return_if_fail(path && g_file_test(path, G_FILE_TEST_EXISTS));
+
+    g_free(iframe->icon_path);
+    iframe->icon_path = g_strdup(path);
+
+    /* this takes care of setting the preview */
+    iframe->icon_id = NUM_ICONS;        /* something it definitely is not now */
+    gtk_option_menu_set_history(GTK_OPTION_MENU(iframe->icon_option_menu), 0);
+    icon_id_changed();
+}
+
 static void
 icon_drop_cb(GtkWidget * widget, GdkDragContext * context,
              gint x, gint y, GtkSelectionData * data,
@@ -291,12 +306,7 @@ icon_drop_cb(GtkWidget * widget, GdkDragContext * context,
 
         icon = (char *)fnames->data;
 
-        g_free(iframe->icon_path);
-        iframe->icon_path = g_strdup(icon);
-        /* this takes care of setting the preview */
-        iframe->icon_id = NUM_ICONS;
-        gtk_option_menu_set_history(GTK_OPTION_MENU(iframe->icon_option_menu), 0);
-        icon_id_changed();
+        new_extern_icon(icon);
     }
 
     gnome_uri_list_free_strings(fnames);
@@ -338,8 +348,21 @@ void browse_cb(GtkWidget * b, GtkEntry * entry)
 
     file = select_file_name(NULL, path, dialog);
 
-    if(file)
-        gtk_entry_set_text(entry, file);
+    if(file && strlen(file))
+    {
+        if(b == iframe->icon_browse_button)
+        {
+            if(g_file_test(file, G_FILE_TEST_EXISTS))
+            {
+                new_extern_icon(file);
+                gtk_entry_set_text(entry, file);
+            }
+        }
+        else
+        {
+            gtk_entry_set_text(entry, file);
+        }
+    }
 
     g_free(file);
     g_free(path);
@@ -385,6 +408,19 @@ static void create_item_frame(void)
 
     g_signal_connect(iframe->command_browse_button, "clicked", G_CALLBACK(browse_cb),
                      iframe->command_entry);
+
+    /* terminal */
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new("");
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    iframe->term_check_button =
+        gtk_check_button_new_with_mnemonic(_("Run in _terminal"));
+    gtk_box_pack_start(GTK_BOX(hbox), iframe->term_check_button, FALSE, FALSE, 0);
+    gtk_widget_show(iframe->term_check_button);
 
     /* icon */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -864,6 +900,9 @@ static GtkWidget *create_panel_control_dialog(PanelItem * pi, PanelModule * pm)
         gtk_entry_set_text(GTK_ENTRY(iframe->icon_entry), pi->path);
     if(pi && pi->command)
         gtk_entry_set_text(GTK_ENTRY(iframe->command_entry), pi->command);
+    if(pi && pi->in_terminal)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(iframe->term_check_button),
+                                     TRUE);
     if(pi && pi->tooltip)
         gtk_entry_set_text(GTK_ENTRY(iframe->tooltip_entry), pi->tooltip);
 
@@ -898,6 +937,17 @@ static GtkWidget *create_panel_control_dialog(PanelItem * pi, PanelModule * pm)
    dialogs
 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+static void reposition_popup(PanelPopup * pp)
+{
+    if(pp->detached)
+        return;
+
+    gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(pp->button));
+
+    toggle_popup(pp->button, pp);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pp->button), TRUE);
+}
 
 void add_menu_item_dialog(PanelPopup * pp)
 {
@@ -936,6 +986,9 @@ void add_menu_item_dialog(PanelPopup * pp)
 
         mi->command =
             gtk_editable_get_chars(GTK_EDITABLE(iframe->command_entry), 0, -1);
+        mi->in_terminal =
+            gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
+                                         (iframe->term_check_button));
         mi->caption =
             gtk_editable_get_chars(GTK_EDITABLE(iframe->caption_entry), 0, -1);
         mi->tooltip =
@@ -959,10 +1012,7 @@ void add_menu_item_dialog(PanelPopup * pp)
         menu_item_set_popup_size(mi, settings.size);
         menu_item_set_style(mi, settings.style);
 
-        gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(pp->button));
-
-        toggle_popup(pp->button, pp);
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pp->button), TRUE);
+        reposition_popup(pp);
     }
 
     /* clean up */
@@ -1012,6 +1062,9 @@ void edit_menu_item_dialog(MenuItem * mi)
         gtk_entry_set_text(GTK_ENTRY(iframe->icon_entry), mi->icon_path);
     if(mi->command)
         gtk_entry_set_text(GTK_ENTRY(iframe->command_entry), mi->command);
+    if(mi->in_terminal)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(iframe->term_check_button),
+                                     TRUE);
     if(mi->caption)
         gtk_entry_set_text(GTK_ENTRY(iframe->caption_entry), mi->caption);
     if(mi->tooltip)
@@ -1029,12 +1082,16 @@ void edit_menu_item_dialog(MenuItem * mi)
         PanelPopup *pp = mi->parent;
 
         gtk_container_remove(GTK_CONTAINER(mi->parent->vbox), mi->button);
+        pp->items = g_list_remove(pp->items, mi);
         menu_item_free(mi);
 
         mi = menu_item_new(pp);
 
         mi->command =
             gtk_editable_get_chars(GTK_EDITABLE(iframe->command_entry), 0, -1);
+        mi->in_terminal =
+            gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
+                                         (iframe->term_check_button));
         mi->caption =
             gtk_editable_get_chars(GTK_EDITABLE(iframe->caption_entry), 0, -1);
         mi->tooltip =
@@ -1047,7 +1104,7 @@ void edit_menu_item_dialog(MenuItem * mi)
             mi->pos =
                 gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON
                                                  (iframe->spinbutton)) - 1;
-
+        pp->items = g_list_insert(pp->items, mi, mi->pos);
 
         create_menu_item(mi);
         gtk_box_pack_start(GTK_BOX(pp->vbox), mi->button, TRUE, TRUE, 0);
@@ -1057,10 +1114,7 @@ void edit_menu_item_dialog(MenuItem * mi)
         menu_item_set_popup_size(mi, settings.size);
         menu_item_set_style(mi, settings.style);
 
-        gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(pp->button));
-
-        toggle_popup(pp->button, pp);
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pp->button), TRUE);
+        reposition_popup(pp);
     }
     else if(response == RESPONSE_REMOVE)
     {
@@ -1071,10 +1125,7 @@ void edit_menu_item_dialog(MenuItem * mi)
         gtk_container_remove(GTK_CONTAINER(mi->parent->vbox), mi->button);
         menu_item_free(mi);
 
-        gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(pp->button));
-
-        toggle_popup(pp->button, pp);
-        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(pp->button), TRUE);
+        reposition_popup(pp);
     }
 
     /* clean up */
@@ -1131,6 +1182,9 @@ void edit_panel_control_dialog(PanelGroup * pg)
             pi = pg->item = panel_item_new(pg);
             pi->command =
                 gtk_editable_get_chars(GTK_EDITABLE(iframe->command_entry), 0, -1);
+            pi->in_terminal =
+                gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON
+                                             (iframe->term_check_button));
             pi->tooltip =
                 gtk_editable_get_chars(GTK_EDITABLE(iframe->tooltip_entry), 0, -1);
             pi->id = iframe->icon_id;

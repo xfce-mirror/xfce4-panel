@@ -21,7 +21,6 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-#include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 

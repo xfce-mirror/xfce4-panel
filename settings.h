@@ -28,6 +28,6 @@ void get_panel_config(void);
 
 extern xmlDocPtr xmlconfig;
 
-#define DATA(node) xmlNodeListGetString(xmlconfig, node->children, 0)
+#define DATA(node) xmlNodeListGetString(xmlconfig, node->children, 1)
 
 #endif /* __XFCE_XMLCONFIG_H__ */

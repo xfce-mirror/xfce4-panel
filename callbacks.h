@@ -24,7 +24,7 @@
 
 /*****************************************************************************/
 
-void exec_cmd(const char *cmd);
+void exec_cmd(const char *cmd, gboolean in_terminal);
 GList *gnome_uri_list_extract_filenames(const gchar * uri_list);
 void gnome_uri_list_free_strings(GList * list);
 
@@ -60,18 +60,26 @@ gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp);
 
 /*****************************************************************************/
 
+void panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
+                        gint x, gint y, GtkSelectionData * data,
+                        guint info, guint time, PanelItem *pi);
+
+void panel_item_click_cb(GtkButton * b, PanelItem *pi);
+
+/*****************************************************************************/
+
 void addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                             gint x, gint y, GtkSelectionData * data,
                             guint info, guint time, PanelPopup * pp);
 
 void addtomenu_item_click_cb(GtkButton * b, PanelPopup * pp);
 
-void item_drop_cb(GtkWidget * widget, GdkDragContext * context,
-                  gint x, gint y, GtkSelectionData * data,
-                  guint info, guint time, char *command);
-
-void item_click_cb(GtkButton * b, char *command);
-
 gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi);
+
+void menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
+                        gint x, gint y, GtkSelectionData * data,
+                        guint info, guint time, MenuItem *mi);
+
+void menu_item_click_cb(GtkButton * b, MenuItem *mi);
 
 #endif /* __XFCE_CALLBACKS_H__ */
