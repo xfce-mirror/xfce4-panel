@@ -2,6 +2,7 @@
  *
  *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
  *                     Xavier Maillard (zedek@fxgsproject.org)
+ *                     Olivier Fourdan
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -118,12 +119,6 @@ static t_clock *clock_new(void)
     clock->frame = gtk_frame_new(NULL);
     gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
 
-    /* Cosmetic change */
-    /* if(xfce_clock_get_mode(XFCE_CLOCK(clock->clock)) == XFCE_CLOCK_ANALOG )
-	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
-    else
-	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
-    */
     gtk_widget_show(clock->frame);
 
     clock->eventbox = gtk_event_box_new();
@@ -199,64 +194,68 @@ void clock_free(PanelControl * pc)
     g_free(clock);
 }
 
+/* XXXXX: this is the ugliest code I ever written :)
+   I'm pretty sure there are missing cases but you have to complain to
+   let me know :p
+*/
 void clock_set_size(PanelControl * pc, int size)
 {
     int s = icon_size[size];
     int w;
     t_clock *clock = (t_clock *) pc->data;
     XfceClock *tmp = XFCE_CLOCK(clock->clock);
-    DBG("Entering clock_set_size\n");
-    DBG("s is %d\n",s);
-    /*if(settings.orientation ==
-      settings.popup_position*/
 
-    DBG("icon_size[size] is icon_size[%d]=%d\n",
-	   size,
-	   icon_size[size]);
-    DBG("Just before gtk_widget_set_size_request()\n");
     switch (xfce_clock_get_mode(tmp))
     {
     case XFCE_CLOCK_LEDS:
 	w = icon_size[size];
-
+/* XXXXX: values are taken from my point of view (subjective)
+   I took values that IMHO seem to be best :)
+*/
 	if( settings.orientation == VERTICAL && (settings.popup_position == LEFT || settings.popup_position == RIGHT) )
 	{
-
-	    DBG("Right/Left popup\n");
 	    if(size <= SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))
 		w = w + 35;
 	}
 	else if ( settings.orientation == VERTICAL && (settings.popup_position == BOTTOM || settings.popup_position == TOP) )
 	{
-
-	    DBG("Top/Bottom popup\n");
 	    if( size <= SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
 
 	}
 	else if ( settings.orientation == HORIZONTAL && (settings.popup_position == LEFT || settings.popup_position == RIGHT) )
 	{
-	    DBG("Right/Left popup\n");
 	    if( size == SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
 	    if( size == TINY && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
 
 	}
 	else if ( settings.orientation == HORIZONTAL && (settings.popup_position == TOP || settings.popup_position == BOTTOM) )
 	{
-	    DBG("Right/Left popup\n");
 	    if( size == SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 30;
 	    if( size == TINY && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
 
 	}
-	DBG("Using custom width of %d\n", w);
-
-
 	break;
     default:
-	w = -1;
+	w = s;
 	break;
     }
-    DBG("Before size_request, w is %d\n",w);
-    gtk_widget_set_size_request(clock->frame, w, s);
+
+    /* XXXXXX: Here we have 2 solutions :
+       1.set width=height=w but in that case, we can get a really big
+    clock compared to the panel size (and so compared to the buttons
+    size
+       2.set width=w and height=icon_size[size], in that case the
+    clock seems (an so the panel) seems much more closed to the
+    reality (sic) that's to say : tiny is really tiny, small is really
+    small...
+
+    This is a problem for me to choose between them. Maybe with more
+    accurate w values, we can get something much more pretty but who
+    knows ?
+    */
+
+    /* Force the first packed object to set its needed sizes */
+    gtk_widget_set_size_request(clock->frame, w, w);
 }
 
 /* FIXME: have to have a look into it as I don't really know if that
@@ -324,7 +323,11 @@ static void clock_update_options_box(t_clock *clock)
 
 }
 
-
+/* Update the clock size whenever a config settings has changed */
+static void update_size(GtkToggleButton * tb, PanelControl* pc)
+{
+    clock_set_size(pc,settings.size);
+}
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static void clock_type_changed(GtkOptionMenu * omi, t_clock * clock)
 {
@@ -344,7 +347,7 @@ static void clock_type_changed(GtkOptionMenu * omi, t_clock * clock)
 }
 
 
-static GtkWidget *create_clock_type_option_menu(t_clock * clock)
+static GtkWidget *create_clock_type_option_menu(t_clock * clock, PanelControl* pc)
 {
     GtkWidget *menu, *mi, *omi;
 
@@ -373,7 +376,7 @@ static GtkWidget *create_clock_type_option_menu(t_clock * clock)
                                 XFCE_CLOCK(clock->clock)->mode);
 
     g_signal_connect(om, "changed", G_CALLBACK(clock_type_changed), clock);
-
+    g_signal_connect(om, "changed", G_CALLBACK(update_size), pc);
     return om;
 }
 
@@ -395,10 +398,11 @@ static void clock_hour_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
+     gtk_widget_set_size_request(clock->frame,settings.size,settings.size);
 
 }
 
-static GtkWidget *create_clock_24hrs_button(t_clock * clock)
+static GtkWidget *create_clock_24hrs_button(t_clock * clock, PanelControl* pc)
 {
     GtkWidget *cb;
     cb = gtk_check_button_new();
@@ -411,7 +415,7 @@ static GtkWidget *create_clock_24hrs_button(t_clock * clock)
 			     XFCE_CLOCK(clock->clock)->military_time);
 
     g_signal_connect(cb, "toggled", G_CALLBACK(clock_hour_mode_changed), clock);
-
+    g_signal_connect(cb, "toggled", G_CALLBACK(update_size), pc);
 
     return cb;
 }
@@ -427,9 +431,10 @@ static void clock_secs_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
+     gtk_widget_set_size_request(clock->frame,settings.size,settings.size);
 }
 
-static GtkWidget *create_clock_secs_button(t_clock * clock)
+static GtkWidget *create_clock_secs_button(t_clock * clock, PanelControl* pc)
 {
     GtkWidget *cb;
 
@@ -442,6 +447,7 @@ static GtkWidget *create_clock_secs_button(t_clock * clock)
 			 XFCE_CLOCK(clock->clock)->display_secs);
 
     g_signal_connect(cb, "toggled", G_CALLBACK(clock_secs_mode_changed), clock);
+    g_signal_connect(cb, "toggled", G_CALLBACK(update_size), pc);
 
     return cb;
 }
@@ -457,9 +463,10 @@ static void clock_ampm_mode_changed(GtkToggleButton * tb, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
 	*/
     gtk_widget_set_sensitive( revert_button, TRUE );
+    gtk_widget_set_size_request(clock->frame,settings.size,settings.size);
 }
 
-static GtkWidget *create_clock_ampm_button(t_clock * clock)
+static GtkWidget *create_clock_ampm_button(t_clock * clock, PanelControl* pc)
 {
     GtkWidget *cb;
     cb = gtk_check_button_new();
@@ -472,7 +479,7 @@ static GtkWidget *create_clock_ampm_button(t_clock * clock)
     xfce_clock_show_ampm( XFCE_CLOCK(clock->clock), XFCE_CLOCK(clock->clock)->display_am_pm );
 
     g_signal_connect(cb, "toggled", G_CALLBACK(clock_ampm_mode_changed), clock);
-
+    g_signal_connect(cb, "toggled", G_CALLBACK(update_size), pc);
     return cb;
 }
 
@@ -576,6 +583,8 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
         g_free(value);
     }
 
+    /* Try to resize the clock to fit the user settings */
+    clock_set_size(pc, settings.size);
 }
 
 static void clock_apply_configuration(PanelControl * pc)
@@ -620,7 +629,7 @@ void clock_add_options(PanelControl * pc, GtkContainer * container,
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    om = create_clock_type_option_menu(clock);
+    om = create_clock_type_option_menu(clock,pc);
     gtk_widget_show(om);
     gtk_box_pack_start(GTK_BOX(hbox), om, FALSE, FALSE, 0);
 
@@ -634,7 +643,7 @@ void clock_add_options(PanelControl * pc, GtkContainer * container,
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    checkbutton = create_clock_24hrs_button(clock);
+    checkbutton = create_clock_24hrs_button(clock,pc);
     gtk_widget_show(checkbutton);
     gtk_box_pack_start(GTK_BOX(hbox), checkbutton, FALSE, FALSE, 0);
 
@@ -648,7 +657,7 @@ void clock_add_options(PanelControl * pc, GtkContainer * container,
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    ampmbutton = create_clock_ampm_button(clock);
+    ampmbutton = create_clock_ampm_button(clock,pc);
     gtk_widget_show(ampmbutton);
     gtk_box_pack_start(GTK_BOX(hbox), ampmbutton, FALSE, FALSE, 0);
 
@@ -662,7 +671,7 @@ void clock_add_options(PanelControl * pc, GtkContainer * container,
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    secsbutton = create_clock_secs_button(clock);
+    secsbutton = create_clock_secs_button(clock,pc);
     gtk_widget_show(secsbutton);
     gtk_box_pack_start(GTK_BOX(hbox), secsbutton, FALSE, FALSE, 0);
 
@@ -703,6 +712,13 @@ void create_clock(PanelControl * pc)
     pc->add_options = (gpointer) clock_add_options;
 
     /* Add tooltip to show up the current date */
+    /*
+      FIXME: this is a bug in fact. The tooltipe never gets updated.
+       This is a problem if the panel is not reloaded once a day
+    because the current day may be totally wrong. I know the way to
+    fix it but as it's not really critical, I let it down for the
+    moment
+    */
     clock_date_tooltip (clock->eventbox);
 
 }
