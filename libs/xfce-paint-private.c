@@ -125,7 +125,7 @@ xfce_paint_handle (GtkWidget * widget, GdkRectangle * area,
                               widget->window,
                               GTK_WIDGET_STATE (widget),
                               GTK_SHADOW_OUT,
-                              area, widget, "panel_window",
+                              area, widget, "handlebox",
                               x, y, width, height,
                               orientation);
             break;
