@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -44,9 +44,11 @@
 
 #define BORDER 5
 
-enum { LEFT, RIGHT, TOP, BOTTOM };
+enum
+{ LEFT, RIGHT, TOP, BOTTOM };
 
-enum { HORIZONTAL, VERTICAL };
+enum
+{ HORIZONTAL, VERTICAL };
 
 
 static McsManager *mcs_manager;
@@ -81,9 +83,9 @@ static void
 size_menu_changed (GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history (menu);
-    
+
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_SIZE],
-	    		 CHANNEL, n);
+			 CHANNEL, n);
     mcs_manager_notify (mcs_manager, CHANNEL);
 }
 
@@ -113,9 +115,9 @@ add_size_menu (GtkWidget * option_menu)
     gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
 
     setting = mcs_manager_setting_lookup (mcs_manager,
-	    				  xfce_settings_names[XFCE_SIZE],
+					  xfce_settings_names[XFCE_SIZE],
 					  CHANNEL);
-    
+
     if (setting)
     {
 	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu),
@@ -133,15 +135,15 @@ orientation_changed (GtkOptionMenu * menu)
     int n = gtk_option_menu_get_history (menu);
     int pos;
     McsSetting *setting;
-    
-    setting = 
+
+    setting =
 	mcs_manager_setting_lookup (mcs_manager, "orientation", CHANNEL);
-    
+
     if (!setting || n == setting->data.v_int)
 	return;
 
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_ORIENTATION],
-	    		 CHANNEL, n);
+			 CHANNEL, n);
 /*    TODO: find out why this crashed the panel
  *    the error is in libxfce4mcs
  *    
@@ -151,9 +153,9 @@ orientation_changed (GtkOptionMenu * menu)
  *    g_usleep(10);
 */
 
-    setting = 
+    setting =
 	mcs_manager_setting_lookup (mcs_manager, "popupposition", CHANNEL);
-    
+
     if (!setting)
 	return;
 
@@ -195,15 +197,15 @@ add_orientation_menu (GtkWidget * option_menu)
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
     gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
-    
-    setting = 
+
+    setting =
 	mcs_manager_setting_lookup (mcs_manager,
 				    xfce_settings_names[XFCE_ORIENTATION],
 				    CHANNEL);
-    
+
     if (setting)
     {
-	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), 
+	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu),
 				     setting->data.v_int);
     }
 
@@ -216,9 +218,9 @@ static void
 popup_position_changed (GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history (menu);
-    
+
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_POPUPPOSITION],
-	    		 CHANNEL, n);
+			 CHANNEL, n);
     mcs_manager_notify (mcs_manager, CHANNEL);
 }
 
@@ -246,15 +248,15 @@ add_popup_position_menu (GtkWidget * option_menu)
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
     gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
-    
-    setting = 
+
+    setting =
 	mcs_manager_setting_lookup (mcs_manager,
 				    xfce_settings_names[XFCE_POPUPPOSITION],
 				    CHANNEL);
-    
+
     if (setting)
     {
-	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), 
+	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu),
 				     setting->data.v_int);
     }
 
@@ -331,7 +333,7 @@ layer_changed (GtkToggleButton * tb)
     int layer = gtk_toggle_button_get_active (tb) ? 0 : 1;
 
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_LAYER],
-	    		 CHANNEL, layer);
+			 CHANNEL, layer);
     mcs_manager_notify (mcs_manager, CHANNEL);
 }
 
@@ -356,10 +358,10 @@ add_layer_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_widget_show (cb);
     gtk_box_pack_start (GTK_BOX (hbox), cb, FALSE, FALSE, 0);
 
-    setting = mcs_manager_setting_lookup (mcs_manager, 
-	    				  xfce_settings_names[XFCE_LAYER],
+    setting = mcs_manager_setting_lookup (mcs_manager,
+					  xfce_settings_names[XFCE_LAYER],
 					  CHANNEL);
-    
+
     if (setting)
     {
 	/* We no longer use layers, but make the panel a docktype window 
@@ -371,7 +373,7 @@ add_layer_box (GtkBox * box, GtkSizeGroup * sg)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
 				      setting->data.v_int == 0);
     }
-    
+
     g_signal_connect (cb, "toggled", G_CALLBACK (layer_changed), NULL);
 }
 
@@ -384,12 +386,12 @@ autohide_changed (GtkToggleButton * tb)
     hide = gtk_toggle_button_get_active (tb) ? 1 : 0;
 
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_AUTOHIDE],
-	    		 CHANNEL, hide);
+			 CHANNEL, hide);
     mcs_manager_notify (mcs_manager, CHANNEL);
 }
 
 static void
-add_autohide_box (GtkBox *box, GtkSizeGroup *sg)
+add_autohide_box (GtkBox * box, GtkSizeGroup * sg)
 {
     GtkWidget *hbox, *label, *check;
     McsSetting *setting;
@@ -408,9 +410,9 @@ add_autohide_box (GtkBox *box, GtkSizeGroup *sg)
     gtk_box_pack_start (GTK_BOX (hbox), check, FALSE, FALSE, 0);
 
     setting = mcs_manager_setting_lookup (mcs_manager,
-	    				  xfce_settings_names[XFCE_AUTOHIDE],
+					  xfce_settings_names[XFCE_AUTOHIDE],
 					  CHANNEL);
-    
+
     if (setting)
     {
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
@@ -446,7 +448,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     is_running = TRUE;
 
-    xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     mcs_manager = mp->manager;
 

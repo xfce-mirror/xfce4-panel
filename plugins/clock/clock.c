@@ -1,8 +1,8 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
- *                     Xavier Maillard (zedek@fxgsproject.org)
- *                     Olivier Fourdan (fourdan@xfce.org)
+ *  Copyright 2002,2004 Jasper Huijsmans(jasper@xfce.org)
+ *                      Olivier Fourdan (fourdan@xfce.org)
+ *                      Xavier Maillard (zedek@fxgsproject.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -147,7 +147,7 @@ popup_xfcalendar (GtkWidget * widget, guint32 time)
     {
 	start_time = time;
 	exec_cmd_silent ("xfcalendar", FALSE, FALSE);
-	g_timeout_add (1000, (GSourceFunc)retry_popup_xfcalendar, widget);
+	g_timeout_add (1000, (GSourceFunc) retry_popup_xfcalendar, widget);
     }
 
     return FALSE;

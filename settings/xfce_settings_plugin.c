@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -57,7 +57,7 @@ static void xfce_set_options (McsManager * sm);
 McsPluginInitResult
 mcs_plugin_init (McsPlugin * mp)
 {
-    xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     mcs_manager = mp->manager;
 
@@ -73,19 +73,18 @@ mcs_plugin_init (McsPlugin * mp)
 
 /* GMarkup parser for old style config file */
 static void
-old_xml_start_element (GMarkupParseContext  *context,
-                       const gchar          *element_name,
-                       const gchar         **attribute_names,
-                       const gchar         **attribute_values,
-                       gpointer              user_data,
-                       GError              **error)
+old_xml_start_element (GMarkupParseContext * context,
+		       const gchar * element_name,
+		       const gchar ** attribute_names,
+		       const gchar ** attribute_values,
+		       gpointer user_data, GError ** error)
 {
     int i, j;
     McsSetting opt;
-    
+
     if (!STREQUAL (element_name, "Settings"))
 	return;
-    
+
     opt.channel_name = CHANNEL;
     opt.last_change_serial = 0;
 
@@ -104,7 +103,7 @@ old_xml_start_element (GMarkupParseContext  *context,
 
 	if (!opt.name)
 	    continue;
-	
+
 	switch (i)
 	{
 	    case XFCE_ORIENTATION:
@@ -126,14 +125,14 @@ old_xml_start_element (GMarkupParseContext  *context,
 		opt.type = MCS_TYPE_INT;
 		break;
 	}
-	
+
 	if (opt.type == MCS_TYPE_INT)
 	{
 	    opt.data.v_int = (int) strtol (attribute_values[j], NULL, 0);
 	}
 	else
 	{
-	    opt.data.v_string = (char*)attribute_values[j];
+	    opt.data.v_string = (char *) attribute_values[j];
 	}
 
 	mcs_manager_set_setting (mcs_manager, &opt, CHANNEL);
@@ -155,10 +154,10 @@ old_xml_read_options (const char *path)
 	g_error_free (error);
 	return;
     }
-    
+
     parser = g_new0 (GMarkupParser, 1);
     parser->start_element = old_xml_start_element;
-    
+
     context = g_markup_parse_context_new (parser, 0, NULL, NULL);
 
     if (!g_markup_parse_context_parse (context, contents, len, &error))
@@ -166,7 +165,7 @@ old_xml_read_options (const char *path)
 	g_warning ("%s", error->message);
 	g_error_free (error);
     }
-    
+
     g_markup_parse_context_free (context);
     g_free (parser);
 }
@@ -175,12 +174,12 @@ void
 xfce_write_options (McsManager * sm)
 {
     char *file, *dir;
-    
+
     /* this initializes base directory, but not settings dir */
     dir = xfce_get_userfile ("settings", NULL);
     file = g_build_filename (dir, "panel.xml", NULL);
-    
-    if (!g_file_test (dir, G_FILE_TEST_IS_DIR) 
+
+    if (!g_file_test (dir, G_FILE_TEST_IS_DIR)
 	&& mkdir (dir, S_IRUSR | S_IWUSR | S_IXUSR) < 0)
     {
 	g_critical ("Couldn't create directory %s", dir);
@@ -202,7 +201,7 @@ xfce_init_options (void)
     int i;
     McsSetting opt;
     McsSetting *setting;
-    
+
     opt.channel_name = CHANNEL;
     opt.last_change_serial = 0;
 
@@ -211,10 +210,10 @@ xfce_init_options (void)
 	opt.name = xfce_settings_names[i];
 
 	setting = mcs_manager_setting_lookup (mcs_manager, opt.name, CHANNEL);
-	
+
 	if (setting)
 	    continue;
-	
+
 	switch (i)
 	{
 	    case XFCE_ORIENTATION:
@@ -242,7 +241,7 @@ xfce_init_options (void)
 		opt.data.v_int = 0;
 		break;
 	}
-	
+
 	mcs_manager_set_setting (mcs_manager, &opt, CHANNEL);
     }
 }
@@ -254,11 +253,11 @@ xfce_set_options (McsManager * sm)
     gboolean found = FALSE;
 
     file = xfce_get_userfile ("settings", "panel.xml", NULL);
-    
+
     if (g_file_test (file, G_FILE_TEST_EXISTS))
     {
-	mcs_manager_add_channel_from_file(sm, CHANNEL, file);
-	
+	mcs_manager_add_channel_from_file (sm, CHANNEL, file);
+
 	found = TRUE;
     }
     else
@@ -273,7 +272,7 @@ xfce_set_options (McsManager * sm)
 	mcs_manager_add_channel (sm, CHANNEL);
 
 	DBG ("reading old style options");
-	
+
 	old_xml_read_options (file);
 
 	found = TRUE;
@@ -287,16 +286,16 @@ xfce_set_options (McsManager * sm)
 
     if (!found && g_file_test (file, G_FILE_TEST_EXISTS))
     {
-	mcs_manager_add_channel_from_file(sm, CHANNEL, file);
-	
+	mcs_manager_add_channel_from_file (sm, CHANNEL, file);
+
 	found = TRUE;
     }
-    
+
     g_free (file);
 
     /* set values if not already set */
     xfce_init_options ();
-    
+
     mcs_manager_notify (sm, CHANNEL);
     xfce_write_options (sm);
 }

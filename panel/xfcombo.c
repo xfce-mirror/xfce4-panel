@@ -1,4 +1,4 @@
-/*  xfce4
+/*  $Id$
  *
  *  Copyright (C) 2004 Edscott Wilson Garcia <edscott@users.sourceforge.net>
  *  Copyright (C) 2004 Jasper Huijsmans (jasper@xfce.org)
@@ -57,35 +57,35 @@ struct _CompletionCombo
     xfc_combo_functions_t *fun;
 
     xfc_combo_info_t *info;
-    
+
     gboolean widget_destroyed;
-    
+
     /* callbacks */
-    void (*cancel)(CompletionCombo *combo, gpointer data);
+    void (*cancel) (CompletionCombo * combo, gpointer data);
     gpointer cancel_data;
-    void (*activate)(CompletionCombo *combo, gpointer data);
+    void (*activate) (CompletionCombo * combo, gpointer data);
     gpointer activate_data;
-    void (*complete)(CompletionCombo *combo, gpointer data);
+    void (*complete) (CompletionCombo * combo, gpointer data);
     gpointer complete_data;
 };
 
-CompletionCombo *completion_combo_new (GtkCombo *combo);
+CompletionCombo *completion_combo_new (GtkCombo * combo);
 
-void completion_combo_destroy (CompletionCombo *combo);
+void completion_combo_destroy (CompletionCombo * combo);
 
-void completion_combo_set_cancel_callback (CompletionCombo *combo,
-					   void (*callback)(CompletionCombo*,
-					       		    gpointer),
+void completion_combo_set_cancel_callback (CompletionCombo * combo,
+					   void (*callback) (CompletionCombo
+							     *, gpointer),
 					   gpointer data);
 
-void completion_combo_set_activate_callback (CompletionCombo *combo,
-					     void (*callback)(CompletionCombo*,
-					       		      gpointer),
+void completion_combo_set_activate_callback (CompletionCombo * combo,
+					     void (*callback) (CompletionCombo
+							       *, gpointer),
 					     gpointer data);
 
-void completion_combo_set_complete_callback (CompletionCombo *combo,
-					     void (*callback)(CompletionCombo*,
-					       		      gpointer),
+void completion_combo_set_complete_callback (CompletionCombo * combo,
+					     void (*callback) (CompletionCombo
+							       *, gpointer),
 					     gpointer data);
 
 #define CC_SET_COMBO(combo,token)					\
@@ -127,12 +127,12 @@ completion_combo_new (void)
     CompletionCombo *cc;
     gpointer symbol;
 
-    cc = g_new0 (CompletionCombo,1);
+    cc = g_new0 (CompletionCombo, 1);
 
-    cc->combo = gtk_combo_new();
+    cc->combo = gtk_combo_new ();
     cc->entry = GTK_COMBO (cc->combo)->entry;
 
-    cc->gmodule = get_combo_module();
+    cc->gmodule = get_combo_module ();
 
     if (!g_module_find_symbol (cc->gmodule, "module_init", &symbol))
     {
@@ -149,39 +149,39 @@ completion_combo_new (void)
     }
 
     cc->info = cc->fun->xfc_init_combo (GTK_COMBO (cc->combo));
-    
+
     /* set all user data to the CompletionCombo */
     cc->info->cancel_user_data = cc->info->activate_user_data =
 	cc->fun->extra_key_data = cc;
-    
+
     cc->info->cancel_func = completion_combo_cancel;
     cc->info->activate_function = completion_combo_activate;
     cc->fun->extra_key_completion = completion_combo_complete;
-    
+
     return cc;
 
-failed:
+  failed:
     gtk_widget_destroy (cc->combo);
     g_free (cc);
 
     return NULL;
 }
 
-void completion_combo_destroy (CompletionCombo *combo);
+void completion_combo_destroy (CompletionCombo * combo);
 
-void completion_combo_set_cancel_callback (CompletionCombo *combo,
-					   void (*callback)(CompletionCombo*,
-					       		    gpointer),
+void completion_combo_set_cancel_callback (CompletionCombo * combo,
+					   void (*callback) (CompletionCombo
+							     *, gpointer),
 					   gpointer data);
 
-void completion_combo_set_activate_callback (CompletionCombo *combo,
-					     void (*callback)(CompletionCombo*,
-					       		      gpointer),
+void completion_combo_set_activate_callback (CompletionCombo * combo,
+					     void (*callback) (CompletionCombo
+							       *, gpointer),
 					     gpointer data);
 
-void completion_combo_set_complete_callback (CompletionCombo *combo,
-					     void (*callback)(CompletionCombo*,
-					       		      gpointer),
+void completion_combo_set_complete_callback (CompletionCombo * combo,
+					     void (*callback) (CompletionCombo
+							       *, gpointer),
 					     gpointer data);
 #endif
 static int refcount = 0;
@@ -195,7 +195,7 @@ unload_xfc (void)
     xfc_fun = NULL;
 
     DBG ("unloading module \"libxfce4_combo\"");
-    
+
     if (!g_module_close (xfc_cm))
     {
 	g_warning ("Failed to unload module \"libxfce4_combo\"");
@@ -234,18 +234,18 @@ load_xfc (void)
     module_init = symbol;
 
     xfc_fun = module_init ();
- 
+
     DBG ("module %s successfully loaded", library);
-    
+
     g_free (library);
     g_free (module);
-    
+
     return xfc_fun;
-    
-failed:
+
+  failed:
     g_free (library);
     g_free (module);
-    
+
     return NULL;
 }
 
@@ -261,7 +261,7 @@ save_flags (gchar * in_cmd, gboolean interm, gboolean hold)
     int *flags;
     GString *gs;
     gchar *file;
-    
+
     file = xfce_get_userfile ("xffm", RUN_FLAG_FILE, NULL);
 
     if ((runflags = DBH_open (file)) == NULL)
@@ -273,17 +273,17 @@ save_flags (gchar * in_cmd, gboolean interm, gboolean hold)
 	    return;
 	}
     }
-    
+
     g_free (file);
-    
+
     gs = g_string_new (in_cmd);
     sprintf ((char *) DBH_KEY (runflags), "%10u", g_string_hash (gs));
     g_string_free (gs, TRUE);
-    
+
     flags = (int *) runflags->data;
     flags[0] = interm;
     flags[1] = hold;
-    
+
     DBH_set_recordsize (runflags, 2 * sizeof (int));
     DBH_update (runflags);
     DBH_close (runflags);
@@ -299,7 +299,7 @@ recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold)
     int *flags;
     GString *gs;
     char *file;
-    
+
     file = xfce_get_userfile ("xffm", RUN_FLAG_FILE, NULL);
 
     if ((runflags = DBH_open (file)) == NULL)
@@ -308,13 +308,13 @@ recover_flags (gchar * in_cmd, gboolean * interm, gboolean * hold)
 	*interm = *hold = FALSE;
 	return;
     }
-    
+
     g_free (file);
-    
+
     gs = g_string_new (in_cmd);
     sprintf ((char *) DBH_KEY (runflags), "%10u", g_string_hash (gs));
     g_string_free (gs, TRUE);
-    
+
     flags = (int *) runflags->data;
     DBH_load (runflags);
     *interm = (flags[0] != 0);
@@ -336,7 +336,7 @@ extra_key_completion (gpointer data)
     if (callback)
     {
 	gpointer data;
-	
+
 	data = g_object_get_data (G_OBJECT (info->combo), "data");
 
 	callback (info, data);
@@ -358,47 +358,46 @@ create_completion_combo (ComboCallback completion_cb, gpointer data)
 	xfc_fun = load_xfc ();
 	refcount = 0;
     }
-    
+
     if (xfc_fun != NULL)
     {
 	GtkWidget *command_combo;
 	char *f;
 
 	refcount++;
-	
+
 	DBG ("refcount: %d", refcount);
 
 	command_combo = gtk_combo_new ();
 
 	if (completion_cb)
 	{
-	    g_object_set_data (G_OBJECT (command_combo), "callback", 
-		    	       completion_cb);
+	    g_object_set_data (G_OBJECT (command_combo), "callback",
+			       completion_cb);
 
 	    if (data)
 	    {
-		g_object_set_data (G_OBJECT (command_combo), "data", 
-				   data);
+		g_object_set_data (G_OBJECT (command_combo), "data", data);
 	    }
 	}
 
 	combo_info = xfc_fun->xfc_init_combo ((GtkCombo *) command_combo);
 
 	combo_info->activate_func = NULL;
-	
+
 	f = xfce_get_userfile ("xffm", RUN_DBH_FILE, NULL);
-	
+
 	xfc_fun->extra_key_completion = NULL;
 	xfc_fun->extra_key_data = NULL;
-	
+
 	if (access (f, F_OK) == 0)
 	{
 	    xfc_fun->xfc_read_history (combo_info, f);
 	    xfc_fun->xfc_set_combo (combo_info, NULL);
 	}
-	
+
 	g_free (f);
-	
+
 	xfc_fun->extra_key_completion = extra_key_completion;
 	xfc_fun->extra_key_data = combo_info;
     }
@@ -406,8 +405,8 @@ create_completion_combo (ComboCallback completion_cb, gpointer data)
     return combo_info;
 }
 
-void 
-destroy_completion_combo (xfc_combo_info_t *info)
+void
+destroy_completion_combo (xfc_combo_info_t * info)
 {
     if (xfc_fun)
     {
@@ -423,23 +422,23 @@ destroy_completion_combo (xfc_combo_info_t *info)
     }
 }
 
-void 
-completion_combo_set_text (xfc_combo_info_t *info, const char *text)
+void
+completion_combo_set_text (xfc_combo_info_t * info, const char *text)
 {
     if (xfc_fun)
-	xfc_fun->xfc_set_entry (info, (char *)text);
+	xfc_fun->xfc_set_entry (info, (char *) text);
 }
 
-gboolean 
+gboolean
 history_check_in_terminal (const char *command)
 {
     gboolean interm, hold;
 
-    recover_flags ((char *)command, &interm, &hold);
-    
+    recover_flags ((char *) command, &interm, &hold);
+
     return interm;
 }
-#else 
+#else
 /* ! HAVE_LIBDBH 
  *
  * These are just stubs to keep the compiler happy ;-) 
@@ -451,22 +450,22 @@ create_completion_combo (ComboCallback completion_cb, gpointer cb)
     return NULL;
 }
 
-void 
-destroy_completion_combo (xfc_combo_info_t *info)
+void
+destroy_completion_combo (xfc_combo_info_t * info)
 {
     /* */
 }
 
-void 
-completion_combo_set_text (xfc_combo_info_t *info, const char *text)
+void
+completion_combo_set_text (xfc_combo_info_t * info, const char *text)
 {
     /* */
 }
 
-gboolean history_check_in_terminal (const char *command)
+gboolean
+history_check_in_terminal (const char *command)
 {
     return FALSE;
 }
 
 #endif /* HAVE_LIBDBH */
-

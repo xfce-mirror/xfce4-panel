@@ -1,6 +1,6 @@
-/*  controls_dialog.h
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -52,11 +52,11 @@ static GtkWidget *cdialog = NULL;
 /* container for control options */
 
 static void
-add_container (GtkBox * box, GtkWidget *close, Control *control)
+add_container (GtkBox * box, GtkWidget * close, Control * control)
 {
     GtkWidget *align;
 
-    align = gtk_alignment_new (0,0,1,1);
+    align = gtk_alignment_new (0, 0, 1, 1);
     gtk_widget_show (align);
     gtk_container_set_border_width (GTK_CONTAINER (align), BORDER);
     gtk_box_pack_start (box, align, TRUE, TRUE, 0);
@@ -67,7 +67,7 @@ add_container (GtkBox * box, GtkWidget *close, Control *control)
 /* position */
 
 static void
-pos_changed (GtkSpinButton * spin, Control *control)
+pos_changed (GtkSpinButton * spin, Control * control)
 {
     int n;
 
@@ -81,11 +81,11 @@ pos_changed (GtkSpinButton * spin, Control *control)
 }
 
 static void
-add_position_option (GtkBox *box, Control *control)
+add_position_option (GtkBox * box, Control * control)
 {
     GtkWidget *pos_spin, *hbox, *label;
     int n;
-    
+
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
     gtk_widget_show (hbox);
@@ -97,15 +97,15 @@ add_position_option (GtkBox *box, Control *control)
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     n = groups_get_n_controls ();
-    
+
     if (n > 1)
     {
 	pos_spin = gtk_spin_button_new_with_range (1, n, 1);
-	
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin), 
+
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin),
 				   control->index + 1);
 
-	g_signal_connect (pos_spin, "value-changed", 
+	g_signal_connect (pos_spin, "value-changed",
 			  G_CALLBACK (pos_changed), control);
     }
     else
@@ -119,11 +119,12 @@ add_position_option (GtkBox *box, Control *control)
 
 /* main dialog */
 
-static void add_spacer (GtkBox *box, int size)
+static void
+add_spacer (GtkBox * box, int size)
 {
     GtkWidget *align;
 
-    align = gtk_alignment_new (0,0,0,0);
+    align = gtk_alignment_new (0, 0, 0, 0);
     gtk_widget_set_size_request (align, size, size);
     gtk_widget_show (align);
     gtk_box_pack_start (box, align, FALSE, FALSE, 0);
@@ -147,7 +148,7 @@ controls_dialog (Control * control)
 
     /* keep gcc3 happy -- warns about this: (gpointer *)&cdialog; */
     ptr = &cdialog;
-    g_object_add_weak_pointer (G_OBJECT (cdialog), (gpointer *)ptr);
+    g_object_add_weak_pointer (G_OBJECT (cdialog), (gpointer *) ptr);
 
     gtk_dialog_set_has_separator (dlg, FALSE);
 
@@ -166,14 +167,14 @@ controls_dialog (Control * control)
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 
     header = xfce_create_header (NULL, control->cclass->caption);
-    gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child), 
-	    			    BORDER);
+    gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child),
+				    BORDER);
     gtk_widget_set_size_request (header, -1, 32);
     gtk_widget_show (header);
     gtk_box_pack_start (GTK_BOX (dlg->vbox), header, FALSE, TRUE, 0);
 
     add_spacer (GTK_BOX (dlg->vbox), BORDER);
-    
+
     /* position */
     add_position_option (GTK_BOX (dlg->vbox), control);
 
@@ -204,8 +205,7 @@ retry:
 
 	if (!(control->with_popup) || !pp || pp->items == NULL ||
 	    xfce_confirm (_("Removing the item will also remove "
-		            "its popup menu."),
-		          GTK_STOCK_REMOVE, NULL))
+			    "its popup menu."), GTK_STOCK_REMOVE, NULL))
 	{
 	    groups_remove (control->index);
 	}

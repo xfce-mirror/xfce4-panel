@@ -1,8 +1,9 @@
-/*  xfce_support.c
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
- *  startup notification added by Olivier fourdan based on gnome-desktop
- *  developed by Elliot Lee <sopwith@redhat.com> and Sid Vicious
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
+ *  
+ *  Startup notification added by Olivier fourdan based on gnome-desktop
+ *  developed by Elliot Lee <sopwith@redhat.com> and Sid Vicious.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -82,9 +83,9 @@ get_save_file (const gchar * name)
 
 	fmt = g_strconcat (name, ".%u", NULL);
 	realname = g_strdup_printf (fmt, scr);
-	
+
 	file = xfce_get_userfile (realname, NULL);
-	
+
 	g_free (fmt);
 	g_free (realname);
     }
@@ -120,14 +121,14 @@ static gchar *
 get_localized_system_rcfile (const gchar * name)
 {
     char *sysrcfile, *result;
-    char buffer [PATH_MAX];
+    char buffer[PATH_MAX];
 
-    snprintf(buffer, PATH_MAX, "%s.%%l", name);
+    snprintf (buffer, PATH_MAX, "%s.%%l", name);
 
     sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, buffer, NULL);
 
-    result = xfce_get_path_localized (buffer, PATH_MAX, sysrcfile, NULL, 
-	    		     	      G_FILE_TEST_EXISTS);
+    result = xfce_get_path_localized (buffer, PATH_MAX, sysrcfile, NULL,
+				      G_FILE_TEST_EXISTS);
 
     g_free (sysrcfile);
 
@@ -314,8 +315,8 @@ void
 set_window_skip (GtkWidget * win)
 {
 #if GTK_CHECK_VERSION(2, 2, 0)
-    g_object_set (G_OBJECT(win), "skip_taskbar_hint", TRUE, NULL);
-    g_object_set (G_OBJECT(win), "skip_pager_hint", TRUE, NULL);
+    g_object_set (G_OBJECT (win), "skip_taskbar_hint", TRUE, NULL);
+    g_object_set (G_OBJECT (win), "skip_pager_hint", TRUE, NULL);
 #else
     Screen *xscreen;
     Window xid;
@@ -662,13 +663,13 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
 	       gboolean use_sn, gboolean silent)
 {
     GError *error = NULL;
-    
+
     if (!xfce_exec (cmd, in_terminal, use_sn, &error))
     {
 	if (error)
 	{
 	    char *msg = g_strcompress (error->message);
-	    
+
 	    if (silent)
 	    {
 		g_warning ("%s", msg);

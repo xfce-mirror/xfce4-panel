@@ -42,7 +42,7 @@
 #include "popup.h"
 
 /* defined in controls.c */
-extern void control_class_unref (ControlClass *cclass);
+extern void control_class_unref (ControlClass * cclass);
 
 static GSList *group_list = NULL;
 static GtkArrowType popup_arrow_type = GTK_ARROW_UP;
@@ -57,7 +57,7 @@ struct _PanelGroup
 {
     int index;
 
-    GtkWidget *base;	/* container to pack into panel */
+    GtkWidget *base;		/* container to pack into panel */
     GtkWidget *box;
 
     PanelPopup *popup;
@@ -311,8 +311,7 @@ groups_set_from_xml (xmlNodePtr node)
 	    {
 		popup_node = child;
 	    }
-	    else if (xmlStrEqual
-		     (child->name, (const xmlChar *) "Control"))
+	    else if (xmlStrEqual (child->name, (const xmlChar *) "Control"))
 	    {
 		/* TODO: make this part of control creation */
 		if (popup_node)
@@ -322,8 +321,8 @@ groups_set_from_xml (xmlNodePtr node)
 		    gtk_widget_hide (group->popup->button);
 		    panel_popup_set_from_xml (group->popup, popup_node);
 		}
-		
-		control_created = 
+
+		control_created =
 		    control_set_from_xml (group->control, child);
 
 		break;
@@ -538,16 +537,16 @@ groups_remove (int index)
 
     li = g_slist_nth (group_list, index);
     /* Paranoid, should not happen here */
-    if (!li) 
-        return;
- 
+    if (!li)
+	return;
+
     group = li->data;
 
     DBG ("unref class %s", group->control->cclass->caption);
     control_class_unref (group->control->cclass);
-    
+
     panel_group_unpack (group);
-    
+
     group_list = g_slist_delete_link (group_list, li);
 
     panel_group_free (group);
@@ -569,8 +568,8 @@ groups_show_popup (int index, gboolean show)
     PanelGroup *group;
 
     li = g_slist_nth (group_list, index);
-    if (!li) 
-        return;
+    if (!li)
+	return;
 
     group = li->data;
 
@@ -579,7 +578,7 @@ groups_show_popup (int index, gboolean show)
 	group->popup = create_panel_popup ();
 	panel_group_arrange (group);
     }
-    
+
     if (group->popup)
     {
 	if (show)
@@ -590,7 +589,7 @@ groups_show_popup (int index, gboolean show)
 }
 
 void
-groups_add_control (Control *control, int index)
+groups_add_control (Control * control, int index)
 {
     int len;
     PanelGroup *group = NULL;

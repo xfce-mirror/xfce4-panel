@@ -1,6 +1,6 @@
-/*  controls.h
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -78,13 +78,13 @@ typedef struct
     char *name;
     char *caption;
     GdkPixbuf *icon;
-    gboolean can_be_added; /* not unique or not already added */
+    gboolean can_be_added;	/* not unique or not already added */
 }
 ControlInfo;
 
 GSList *get_control_info_list (void);
 
-void insert_control (Panel *panel, const char *name, int position);
+void insert_control (Panel * panel, const char *name, int position);
 
 /* control classes */
 void control_class_list_init (void);
@@ -94,11 +94,12 @@ void control_class_list_cleanup (void);
 /* NOTE:
  * Use next functions only on classes that have at least 
  * their name field initialized */
-void control_class_set_icon (ControlClass *cclass, GdkPixbuf *icon);
+void control_class_set_icon (ControlClass * cclass, GdkPixbuf * icon);
 
-void control_class_set_unique (ControlClass *cclass, gboolean unique);
+void control_class_set_unique (ControlClass * cclass, gboolean unique);
 
-void control_class_set_unloadable (ControlClass *cclass, gboolean unloadable);
+void control_class_set_unloadable (ControlClass * cclass,
+				   gboolean unloadable);
 
 /* add controls menu */
 GtkWidget *get_controls_submenu (void);

@@ -1,6 +1,6 @@
-/*  icons.h
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -46,22 +46,13 @@ enum
 
 extern const char *icon_names[NUM_ICONS];
 
-/* system icons */
-enum
-{
-    MINILOCK_ICON,
-    MINIINFO_ICON,
-    MINIPALET_ICON,
-    MINIPOWER_ICON,
-    MINIBUTTONS
-};
-
 #define UNKNOWN_ICON DEFAULT_ICON
 
 void icons_init (void);
 
+void icon_theme_init (void);
+
 GdkPixbuf *get_pixbuf_by_id (int id);
-GdkPixbuf *get_minibutton_pixbuf (int id);
 
 GdkPixbuf *get_panel_pixbuf (void);
 

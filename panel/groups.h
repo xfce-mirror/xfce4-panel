@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -53,7 +53,7 @@ PanelPopup *groups_get_popup (int index);
 void groups_move (int from, int to);
 void groups_remove (int index);
 void groups_show_popup (int index, gboolean show);
-void groups_add_control (Control *control, int index);
+void groups_add_control (Control * control, int index);
 
 int groups_get_n_controls (void);
 

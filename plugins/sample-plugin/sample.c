@@ -75,14 +75,14 @@ sample_read_config (Control * control, xmlNodePtr node)
     xmlChar *value;
     int n;
     t_sample *sample;
-    
+
     if (!node || !node->children)
 	return;
 
     sample = (t_sample *) control->data;
 
     /* xml properties ... */
-    
+
     value = xmlGetProp (node, (const xmlChar *) "sampleint");
 
     if (value)
@@ -100,18 +100,18 @@ sample_read_config (Control * control, xmlNodePtr node)
     if (value)
     {
 	g_free (sample->stringval);
-	sample->stringval = (char *)value;
+	sample->stringval = (char *) value;
     }
 
     /* xml elements (child nodes) */
-    
+
     for (node = node->children; node; node = node->next)
     {
 	if (xmlStrEqual (node->name, (const xmlChar *) "samplenode1"))
 	{
 	    /* this macro is defined in <xfce4/settings.h> */
 	    value = DATA (node);
-	    
+
 	    if (value)
 	    {
 		g_free (sample->elementval1);
@@ -146,7 +146,7 @@ sample_write_config (Control * control, xmlNodePtr parent)
 {
     char value[5];
     t_sample *sample;
-    
+
     sample = (t_sample *) control->data;
 
     g_snprintf (value, 4, "%d", sample->intval);
@@ -172,9 +172,9 @@ sample_write_config (Control * control, xmlNodePtr parent)
  * receive events, at least one. This is used, for example to connect the
  * right-click menu.
  **/
-static void 
+static void
 sample_attach_callback (Control * control, const char *signal,
-			   GCallback callback, gpointer data)
+			GCallback callback, gpointer data)
 {
     t_sample *sample = control->data;
 
@@ -246,7 +246,7 @@ static void
 sample_set_theme (Control * control, const char *theme)
 {
     t_sample *sample;
-    
+
     sample = (t_sample *) control->data;
 
     /* update the icons */
@@ -318,7 +318,7 @@ sample_apply_options (SampleDialog * sd)
     }
 
     tmp = gtk_entry_get_text (GTK_ENTRY (sd->ev1_entry));
-    
+
     if (tmp && *tmp)
     {
 	g_free (sample->elementval1);
@@ -326,7 +326,7 @@ sample_apply_options (SampleDialog * sd)
     }
 
     tmp = gtk_entry_get_text (GTK_ENTRY (sd->ev2_entry));
-    
+
     if (tmp && *tmp)
     {
 	g_free (sample->elementval2);
@@ -379,7 +379,7 @@ int_changed (GtkSpinButton * spin, SampleDialog * sd)
  **/
 static void
 sample_create_options (Control * control, GtkContainer * container,
-			  GtkWidget * done)
+		       GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label;
     GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -393,12 +393,12 @@ sample_create_options (Control * control, GtkContainer * container,
     sd->dialog = gtk_widget_get_toplevel (done);
 
     /* don't set a border width, the dialog will take care of that */
-    
+
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
 
     /* spin button */
-    
+
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
@@ -417,7 +417,7 @@ sample_create_options (Control * control, GtkContainer * container,
 
     g_signal_connect (sd->int_spin, "value-changed",
 		      G_CALLBACK (int_changed), sd);
-    
+
     /* entries */
 
     hbox = gtk_hbox_new (FALSE, BORDER);
@@ -435,10 +435,10 @@ sample_create_options (Control * control, GtkContainer * container,
     gtk_widget_show (sd->string_entry);
     gtk_box_pack_start (GTK_BOX (hbox), sd->string_entry, TRUE, TRUE, 0);
 
-    g_signal_connect (sd->string_entry, "focus-out", 
-	    	      G_CALLBACK (entry_lost_focus), sd);
-    
-    
+    g_signal_connect (sd->string_entry, "focus-out",
+		      G_CALLBACK (entry_lost_focus), sd);
+
+
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
@@ -454,10 +454,10 @@ sample_create_options (Control * control, GtkContainer * container,
     gtk_widget_show (sd->ev1_entry);
     gtk_box_pack_start (GTK_BOX (hbox), sd->ev1_entry, TRUE, TRUE, 0);
 
-    g_signal_connect (sd->ev1_entry, "focus-out", 
-	    	      G_CALLBACK (entry_lost_focus), sd);
-    
-    
+    g_signal_connect (sd->ev1_entry, "focus-out",
+		      G_CALLBACK (entry_lost_focus), sd);
+
+
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
@@ -473,10 +473,10 @@ sample_create_options (Control * control, GtkContainer * container,
     gtk_widget_show (sd->ev2_entry);
     gtk_box_pack_start (GTK_BOX (hbox), sd->ev2_entry, TRUE, TRUE, 0);
 
-    g_signal_connect (sd->ev2_entry, "focus-out", 
-	    	      G_CALLBACK (entry_lost_focus), sd);
-    
-    
+    g_signal_connect (sd->ev2_entry, "focus-out",
+		      G_CALLBACK (entry_lost_focus), sd);
+
+
     /* update settings when dialog is closed */
 
     g_signal_connect_swapped (done, "clicked",
@@ -534,7 +534,7 @@ xfce_control_class_init (ControlClass * cc)
      */
     cc->name = "sample";
     cc->caption = "Sample";
-    
+
     cc->create_control = (CreateControlFunc) create_sample_control;
 
     cc->attach_callback = sample_attach_callback;

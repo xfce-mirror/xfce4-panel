@@ -1,7 +1,8 @@
-/*  xfce_support.h
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
- *  startup notification added by Olivier Fourdan based on gnome-desktop
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
+ *  
+ *  Startup notification added by Olivier Fourdan based on gnome-desktop
  *  developed by Elliot Lee <sopwith@redhat.com> and Sid Vicious
  *
  *  This program is free software; you can redistribute it and/or modify

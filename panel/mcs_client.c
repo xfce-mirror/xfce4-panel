@@ -46,8 +46,6 @@
 
 static McsClient *client = NULL;
 
-static int settings_cb_id = 0;
-
 /* settings hash table */
 static GHashTable *settings_hash = NULL;
 
@@ -87,7 +85,7 @@ update_setting (const char *name, McsSetting * setting)
 	set_int = g_hash_table_lookup (settings_hash, name);
 
 	DBG ("Set %s : %d", name, setting->data.v_int);
-	
+
 	if (set_int)
 	    set_int (setting->data.v_int);
     }
@@ -96,7 +94,7 @@ update_setting (const char *name, McsSetting * setting)
 	set_string = g_hash_table_lookup (settings_hash, name);
 
 	DBG ("Set %s : %s", name, setting->data.v_string);
-	
+
 	if (set_string)
 	    set_string (setting->data.v_string);
     }
@@ -145,47 +143,12 @@ watch_cb (Window window, Bool is_start, long mask, void *cb_data)
 	gdk_window_remove_filter (gdkwin, client_event_filter, NULL);
 }
 
-/* icon theme */
-#if GTK_CHECK_VERSION (2,4,0)
-static void
-icontheme_cb (GtkIconTheme *icontheme)
-{
-    char *theme;
-
-    g_object_get (gtk_settings_get_default(), "gtk-icon-theme-name",
-		  &theme, NULL);
-
-    DBG ("Theme: %s\n", theme);
-    panel_set_theme (theme);
-
-    g_free (theme);
-}
-#else /* gtk < 2.4 */
-static void
-settings_notify_cb (GtkSettings *gsettings, GParamSpec *pspec)
-{
-    if (strequal (pspec->name, "gtk-icon-theme-name"))
-    {
-	char *theme;
-
-	g_object_get (G_OBJECT (gsettings), "gtk-icon-theme-name",
-		      &theme, NULL);
-
-	panel_set_theme (theme);
-    
-	g_free (theme);
-    }
-}
-#endif
-
 /* connecting and disconnecting */
 void
 mcs_watch_xfce_channel (void)
 {
     Display *dpy = GDK_DISPLAY ();
     int screen = DefaultScreen (dpy);
-    GtkSettings *gsettings = gtk_settings_get_default ();
-    char *theme;
 
     if (!settings_hash)
 	init_settings_hash ();
@@ -207,25 +170,6 @@ mcs_watch_xfce_channel (void)
     }
 
     mcs_client_add_channel (client, CHANNEL);
-
-    theme = NULL;
-    g_object_get (G_OBJECT (gsettings), "gtk-icon-theme-name", &theme, NULL);
-    
-    if (theme)
-    {
-        xfce_set_icon_theme (theme);
-        panel_set_theme (theme);
-        g_free (theme);
-    }
-    
-#if GTK_CHECK_VERSION (2,4,0)
-    settings_cb_id = 
-	g_signal_connect (gtk_icon_theme_get_default (), "changed", 
-			  G_CALLBACK (icontheme_cb), NULL);
-#else
-    settings_cb_id = g_signal_connect (gsettings, "notify", 
-	    			       G_CALLBACK (settings_notify_cb), NULL);
-#endif
 }
 
 void
@@ -234,20 +178,8 @@ mcs_stop_watch (void)
     if (client)
     {
 	mcs_client_destroy (client);
-	
-	client = NULL;
-    }
 
-    if (settings_cb_id)
-    {
-#if GTK_CHECK_VERSION (2,4,0)
-	g_signal_handler_disconnect (gtk_icon_theme_get_default (), 
-				     settings_cb_id);
-#else
-	g_signal_handler_disconnect (gtk_settings_get_default (), 
-				     settings_cb_id);
-#endif
-	settings_cb_id = 0;
+	client = NULL;
     }
 }
 

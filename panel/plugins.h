@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,17 +27,14 @@
 
 #define XFCE_PLUGIN_API_VERSION 5
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif				/* __cplusplus */
+G_BEGIN_DECLS
 
 /* prototype for plugin init function 
  * (must be implemented by plugin) */
-    G_MODULE_EXPORT void xfce_control_class_init (ControlClass * control);
+G_MODULE_EXPORT void xfce_control_class_init (ControlClass * control);
 
 /* plugin version check function (implemented by xfce4 in controls.c) */
-    gchar *xfce_plugin_check_version (gint version);
+gchar *xfce_plugin_check_version (gint version);
 
 /* nifty idea, I think from dia:
  * every module just has to include this header and put 
@@ -46,15 +43,13 @@ extern "C"
  * be checked on opening the GModule.
 */
 #define XFCE_PLUGIN_CHECK_INIT \
-G_MODULE_EXPORT const gchar *g_module_check_init(GModule *gmodule); \
-const gchar * \
-g_module_check_init(GModule *gmodule) \
-{ \
-  return xfce_plugin_check_version(XFCE_PLUGIN_API_VERSION); \
-}
+	G_MODULE_EXPORT const gchar *g_module_check_init(GModule *gmodule); \
+	const gchar * \
+	g_module_check_init(GModule *gmodule) \
+	{ \
+  	    return xfce_plugin_check_version(XFCE_PLUGIN_API_VERSION); \
+	}
 
-#ifdef __cplusplus
-}
-#endif				/* __cplusplus */
+G_END_DECLS
 
 #endif				/* _XFCE_PLUGIN_H */

@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2003 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2003-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -39,35 +39,35 @@ struct _CommandOptions
 {
     /* add this to your dialog */
     GtkWidget *base;
-    
+
     /* use the functions declared below to change the contents of 
      * the members of this struct */
-    
+
     xfc_combo_info_t *info;
 
     GtkWidget *command_entry;
     GtkWidget *term_checkbutton;
     GtkWidget *sn_checkbutton;
-    
-    void (*on_change) (const char *command, gboolean in_term, gboolean use_sn, 
-	    	       gpointer data);
+
+    void (*on_change) (const char *command, gboolean in_term, gboolean use_sn,
+		       gpointer data);
     gpointer data;
 };
 
-CommandOptions * create_command_options (GtkSizeGroup *sg);
+CommandOptions *create_command_options (GtkSizeGroup * sg);
 
-void destroy_command_options (CommandOptions *opts);
+void destroy_command_options (CommandOptions * opts);
 
-void command_options_set_command (CommandOptions *opts, const char *command, 
-			  	  gboolean in_term, gboolean use_sn);
+void command_options_set_command (CommandOptions * opts, const char *command,
+				  gboolean in_term, gboolean use_sn);
 
-void command_options_set_callback (CommandOptions *opts, 
-				   void (*callback)(const char *, gboolean, 
-				  	            gboolean, gpointer),
+void command_options_set_callback (CommandOptions * opts,
+				   void (*callback) (const char *, gboolean,
+						     gboolean, gpointer),
 				   gpointer data);
 
-void command_options_get_command  (CommandOptions *opts, char **command, 
-				   gboolean *in_term, gboolean *use_sn);
+void command_options_get_command (CommandOptions * opts, char **command,
+				  gboolean * in_term, gboolean * use_sn);
 
 
 /* IconOptions
@@ -89,7 +89,7 @@ struct _IconOptions
 
     /* use the functions declared below to change the contents of 
      * the members of this struct */
-    
+
     GtkWidget *icon_menu;
     GtkWidget *icon_entry;
     GtkWidget *image;
@@ -98,23 +98,23 @@ struct _IconOptions
     int id_sig;
     int icon_id;
     char *saved_path;
-    
+
     /* callback */
     void (*on_change) (int icon_id, const char *icon_path, gpointer data);
     gpointer data;
 };
 
-IconOptions * create_icon_options (GtkSizeGroup *sg, gboolean use_builtins);
+IconOptions *create_icon_options (GtkSizeGroup * sg, gboolean use_builtins);
 
-void destroy_icon_options (IconOptions *opts);
+void destroy_icon_options (IconOptions * opts);
 
-void icon_options_set_icon (IconOptions *opts, int id, const char *path);
+void icon_options_set_icon (IconOptions * opts, int id, const char *path);
 
-void icon_options_set_callback (IconOptions *opts, 
-				void (*callback)(int, const char *, gpointer),
-				gpointer data);
+void icon_options_set_callback (IconOptions * opts,
+				void (*callback) (int, const char *,
+						  gpointer), gpointer data);
 
-void icon_options_get_icon  (IconOptions *opts, int *id, char **path);
+void icon_options_get_icon (IconOptions * opts, int *id, char **path);
 
 
 /* PanelItem and MenuItem dialogs

@@ -1,4 +1,4 @@
-/*  xfce4
+/*  $Id$
  *
  *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
@@ -66,13 +66,13 @@ struct _ItemDialog
 
     GtkContainer *container;
     GtkWidget *close;
-    
+
     /* command */
     CommandOptions *cmd_opts;
 
     /* icon */
     IconOptions *icon_opts;
-    
+
     /* Name and Tooltip */
     GtkWidget *caption_entry;
     GtkWidget *tip_entry;
@@ -103,12 +103,12 @@ static const char *keys[] = {
 
 /* useful widgets */
 
-static void 
-add_spacer (GtkBox *box, int size)
+static void
+add_spacer (GtkBox * box, int size)
 {
     GtkWidget *align;
 
-    align = gtk_alignment_new (0,0,0,0);
+    align = gtk_alignment_new (0, 0, 0, 0);
     gtk_widget_set_size_request (align, size, size);
     gtk_widget_show (align);
     gtk_box_pack_start (box, align, FALSE, FALSE, 0);
@@ -120,18 +120,18 @@ add_spacer (GtkBox *box, int size)
 */
 
 static void
-combo_completion_cb (xfc_combo_info_t *info, CommandOptions *opts)
+combo_completion_cb (xfc_combo_info_t * info, CommandOptions * opts)
 {
     const char *cmd;
     GtkToggleButton *tb;
     gboolean in_term;
 
-    cmd = gtk_entry_get_text (GTK_ENTRY(opts->command_entry));
+    cmd = gtk_entry_get_text (GTK_ENTRY (opts->command_entry));
 
     tb = GTK_TOGGLE_BUTTON (opts->term_checkbutton);
     in_term = history_check_in_terminal (cmd);
     gtk_toggle_button_set_active (tb, in_term);
-    
+
     if (opts->on_change)
     {
 	gboolean use_sn = FALSE;
@@ -141,21 +141,21 @@ combo_completion_cb (xfc_combo_info_t *info, CommandOptions *opts)
 	    tb = GTK_TOGGLE_BUTTON (opts->sn_checkbutton);
 	    use_sn = gtk_toggle_button_get_active (tb);
 	}
-	
+
 	opts->on_change (cmd, in_term, use_sn, opts->data);
     }
 }
 
-static void 
-command_browse_cb (GtkWidget *w, CommandOptions *opts)
+static void
+command_browse_cb (GtkWidget * w, CommandOptions * opts)
 {
     char *file;
     const char *text;
- 
+
     text = gtk_entry_get_text (GTK_ENTRY (opts->command_entry));
 
-    file = select_file_name (_("Select command"), text, 
-	    		     gtk_widget_get_toplevel (opts->base));
+    file = select_file_name (_("Select command"), text,
+			     gtk_widget_get_toplevel (opts->base));
 
     if (file)
     {
@@ -163,54 +163,54 @@ command_browse_cb (GtkWidget *w, CommandOptions *opts)
 	    completion_combo_set_text (opts->info, file);
 	else
 	    gtk_entry_set_text (GTK_ENTRY (opts->command_entry), file);
-	
+
 	gtk_editable_set_position (GTK_EDITABLE (opts->command_entry), -1);
-    
+
 	if (opts->on_change)
 	{
 	    GtkToggleButton *tb;
 	    gboolean in_term, use_sn = FALSE;
-	    
+
 	    tb = GTK_TOGGLE_BUTTON (opts->term_checkbutton);
 	    in_term = gtk_toggle_button_get_active (tb);
-	    
+
 	    if (opts->sn_checkbutton)
 	    {
 		tb = GTK_TOGGLE_BUTTON (opts->sn_checkbutton);
 		use_sn = gtk_toggle_button_get_active (tb);
 	    }
-	
-	    
+
+
 	    opts->on_change (file, in_term, use_sn, opts->data);
 	}
-	
+
 	g_free (file);
     }
 }
 
 static void
-command_toggle_cb (GtkWidget *w, CommandOptions *opts)
+command_toggle_cb (GtkWidget * w, CommandOptions * opts)
 {
     if (opts->on_change)
     {
 	GtkToggleButton *tb;
 	gboolean in_term, use_sn = FALSE;
 	const char *cmd;
-	
+
 	cmd = gtk_entry_get_text (GTK_ENTRY (opts->command_entry));
 
-	if (!cmd || !strlen(cmd))
+	if (!cmd || !strlen (cmd))
 	    cmd = NULL;
-	
+
 	tb = GTK_TOGGLE_BUTTON (opts->term_checkbutton);
 	in_term = gtk_toggle_button_get_active (tb);
-	
+
 	if (opts->sn_checkbutton)
 	{
 	    tb = GTK_TOGGLE_BUTTON (opts->sn_checkbutton);
 	    use_sn = gtk_toggle_button_get_active (tb);
 	}
-	
+
 	opts->on_change (cmd, in_term, use_sn, opts->data);
     }
 }
@@ -279,19 +279,19 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 }
 
 CommandOptions *
-create_command_options (GtkSizeGroup *sg)
+create_command_options (GtkSizeGroup * sg)
 {
     GtkWidget *w, *vbox, *hbox, *image;
     CommandOptions *opts;
 
     if (!sg)
 	sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-    
+
     opts = g_new0 (CommandOptions, 1);
-    
+
     opts->base = vbox = gtk_vbox_new (FALSE, 0);
     gtk_widget_show (vbox);
- 
+
     /* entry */
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -303,12 +303,12 @@ create_command_options (GtkSizeGroup *sg)
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
 
     gtk_size_group_add_widget (sg, w);
-    
+
     /* only available when compiled with libdbh support and 
      * libxfce4_combo module is installed 
      * Disabled, doesn't work properly */
-    opts->info = 
-	create_completion_combo ((ComboCallback)combo_completion_cb, opts);
+    opts->info =
+	create_completion_combo ((ComboCallback) combo_completion_cb, opts);
 
     if (opts->info)
     {
@@ -332,18 +332,17 @@ create_command_options (GtkSizeGroup *sg)
     gtk_widget_show (image);
     gtk_container_add (GTK_CONTAINER (w), image);
 
-    g_signal_connect (w, "clicked", G_CALLBACK (command_browse_cb), 
-	    	      opts);
+    g_signal_connect (w, "clicked", G_CALLBACK (command_browse_cb), opts);
 
     /* xfce4-appfinder support (desktop files / menu spec) */
-    gtk_drag_dest_set (opts->base, GTK_DEST_DEFAULT_ALL, entry, 2, 
-	    	       GDK_ACTION_COPY);
-    g_signal_connect (opts->base, "drag-data-received", 
-	    	      G_CALLBACK (drag_drop_cb), opts);
-    
-    g_signal_connect (opts->command_entry, "drag-data-received", 
-	    	      G_CALLBACK (drag_drop_cb), opts);
-    
+    gtk_drag_dest_set (opts->base, GTK_DEST_DEFAULT_ALL, entry, 2,
+		       GDK_ACTION_COPY);
+    g_signal_connect (opts->base, "drag-data-received",
+		      G_CALLBACK (drag_drop_cb), opts);
+
+    g_signal_connect (opts->command_entry, "drag-data-received",
+		      G_CALLBACK (drag_drop_cb), opts);
+
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
@@ -353,16 +352,15 @@ create_command_options (GtkSizeGroup *sg)
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
 
     gtk_size_group_add_widget (sg, w);
-    
+
     /* terminal */
-    opts->term_checkbutton = w = 
+    opts->term_checkbutton = w =
 	gtk_check_button_new_with_mnemonic (_("Run in _terminal"));
     gtk_widget_show (w);
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
 
-    g_signal_connect (w, "toggled", G_CALLBACK (command_toggle_cb), 
-	    	      opts);
-    
+    g_signal_connect (w, "toggled", G_CALLBACK (command_toggle_cb), opts);
+
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -373,36 +371,35 @@ create_command_options (GtkSizeGroup *sg)
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
 
     gtk_size_group_add_widget (sg, w);
-    
-    opts->sn_checkbutton = w = 
+
+    opts->sn_checkbutton = w =
 	gtk_check_button_new_with_mnemonic (_("Use startup _notification"));
     gtk_widget_show (w);
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
 
-    g_signal_connect (w, "toggled", G_CALLBACK (command_toggle_cb), 
-	    	      opts);
+    g_signal_connect (w, "toggled", G_CALLBACK (command_toggle_cb), opts);
 #endif
 
-    g_signal_connect_swapped (opts->base, "destroy", 
-	    		      G_CALLBACK (destroy_command_options), opts);
-    
+    g_signal_connect_swapped (opts->base, "destroy",
+			      G_CALLBACK (destroy_command_options), opts);
+
     return opts;
 }
 
-void 
-destroy_command_options (CommandOptions *opts)
+void
+destroy_command_options (CommandOptions * opts)
 {
     if (opts->on_change)
     {
 	GtkToggleButton *tb;
 	gboolean in_term, use_sn = FALSE;
 	const char *cmd;
-	
+
 	cmd = gtk_entry_get_text (GTK_ENTRY (opts->command_entry));
 
-	if (!cmd || !strlen(cmd))
+	if (!cmd || !strlen (cmd))
 	    cmd = NULL;
-	
+
 	tb = GTK_TOGGLE_BUTTON (opts->term_checkbutton);
 	in_term = gtk_toggle_button_get_active (tb);
 
@@ -411,7 +408,7 @@ destroy_command_options (CommandOptions *opts)
 	    tb = GTK_TOGGLE_BUTTON (opts->sn_checkbutton);
 	    use_sn = gtk_toggle_button_get_active (tb);
 	}
-	
+
 	opts->on_change (cmd, in_term, use_sn, opts->data);
     }
 
@@ -421,12 +418,12 @@ destroy_command_options (CommandOptions *opts)
     g_free (opts);
 }
 
-void 
-command_options_set_command (CommandOptions *opts, const char *command, 
+void
+command_options_set_command (CommandOptions * opts, const char *command,
 			     gboolean in_term, gboolean use_sn)
 {
     const char *cmd = (command != NULL) ? command : "";
-    
+
     if (opts->info)
     {
 	completion_combo_set_text (opts->info, cmd);
@@ -435,42 +432,42 @@ command_options_set_command (CommandOptions *opts, const char *command,
     {
 	gtk_entry_set_text (GTK_ENTRY (opts->command_entry), cmd);
     }
-    
+
     gtk_editable_set_position (GTK_EDITABLE (opts->command_entry), -1);
-    
+
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (opts->term_checkbutton),
-	    			  in_term);
+				  in_term);
 
     if (opts->sn_checkbutton)
     {
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (opts->sn_checkbutton),
-				      use_sn);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+				      (opts->sn_checkbutton), use_sn);
     }
-    
+
     if (opts->on_change)
 	opts->on_change (command, in_term, use_sn, opts->data);
 }
 
-void 
-command_options_set_callback (CommandOptions *opts, 
-			      void (*callback)(const char *, gboolean, 
-				  	       gboolean, gpointer),
+void
+command_options_set_callback (CommandOptions * opts,
+			      void (*callback) (const char *, gboolean,
+						gboolean, gpointer),
 			      gpointer data)
 {
     opts->on_change = callback;
     opts->data = data;
 }
 
-void 
-command_options_get_command  (CommandOptions *opts, char **command, 
-			      gboolean *in_term, gboolean *use_sn)
+void
+command_options_get_command (CommandOptions * opts, char **command,
+			     gboolean * in_term, gboolean * use_sn)
 {
     const char *tmp;
     GtkToggleButton *tb;
 
     tmp = gtk_entry_get_text (GTK_ENTRY (opts->command_entry));
 
-    if (tmp && strlen(tmp))
+    if (tmp && strlen (tmp))
 	*command = g_strdup (tmp);
     else
 	*command = NULL;
@@ -495,13 +492,13 @@ command_options_get_command  (CommandOptions *opts, char **command,
 */
 
 static void
-update_icon_preview (int id, const char *path, IconOptions *opts)
+update_icon_preview (int id, const char *path, IconOptions * opts)
 {
     int w, h;
     GdkPixbuf *pb = NULL;
 
-    if (id == EXTERN_ICON && path && 
-	g_file_test (path, G_FILE_TEST_EXISTS) && 
+    if (id == EXTERN_ICON && path &&
+	g_file_test (path, G_FILE_TEST_EXISTS) &&
 	!g_file_test (path, G_FILE_TEST_IS_DIR))
     {
 	pb = gdk_pixbuf_new_from_file (path, NULL);
@@ -520,7 +517,7 @@ update_icon_preview (int id, const char *path, IconOptions *opts)
     if (w > PREVIEW_SIZE || h > PREVIEW_SIZE)
     {
 	GdkPixbuf *newpb;
-	
+
 	if (w > h)
 	{
 	    h = (int) (((double) PREVIEW_SIZE / (double) w) * (double) h);
@@ -536,25 +533,25 @@ update_icon_preview (int id, const char *path, IconOptions *opts)
 	g_object_unref (pb);
 	pb = newpb;
     }
-    
+
     gtk_image_set_from_pixbuf (GTK_IMAGE (opts->image), pb);
     g_object_unref (pb);
 }
 
 static void
-icon_id_changed (GtkOptionMenu *om, IconOptions *opts)
+icon_id_changed (GtkOptionMenu * om, IconOptions * opts)
 {
     int id;
     char *path = NULL;
 
     id = gtk_option_menu_get_history (om);
-    
+
     if (id == 0)
 	id = EXTERN_ICON;
-    
+
     if (id == opts->icon_id)
 	return;
-    
+
     if (id == EXTERN_ICON && opts->saved_path)
 	path = opts->saved_path;
 
@@ -568,7 +565,7 @@ create_icon_option_menu (void)
     int i;
 
     menu = gtk_menu_new ();
-    
+
     mi = gtk_menu_item_new_with_label (_("Other Icon"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -587,8 +584,8 @@ create_icon_option_menu (void)
 }
 
 gboolean
-icon_entry_lost_focus (GtkEntry * entry, GdkEventFocus * event, 
-		       IconOptions *opts)
+icon_entry_lost_focus (GtkEntry * entry, GdkEventFocus * event,
+		       IconOptions * opts)
 {
     const char *temp = gtk_entry_get_text (entry);
 
@@ -599,19 +596,19 @@ icon_entry_lost_focus (GtkEntry * entry, GdkEventFocus * event,
     return FALSE;
 }
 
-static void 
-icon_browse_cb (GtkWidget *w, IconOptions *opts)
+static void
+icon_browse_cb (GtkWidget * w, IconOptions * opts)
 {
     char *file;
     const char *text;
     GdkPixbuf *test = NULL;
- 
+
     text = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
 
-    file = select_file_with_preview (_("Select command"), text, 
-	    		             gtk_widget_get_toplevel (opts->base));
+    file = select_file_with_preview (_("Select command"), text,
+				     gtk_widget_get_toplevel (opts->base));
 
-    if (file && g_file_test (file, G_FILE_TEST_EXISTS) && 
+    if (file && g_file_test (file, G_FILE_TEST_EXISTS) &&
 	!g_file_test (file, G_FILE_TEST_IS_DIR))
     {
 	test = gdk_pixbuf_new_from_file (file, NULL);
@@ -619,11 +616,11 @@ icon_browse_cb (GtkWidget *w, IconOptions *opts)
 	if (test)
 	{
 	    g_object_unref (test);
-	    
+
 	    icon_options_set_icon (opts, EXTERN_ICON, file);
 	}
     }
-    
+
     g_free (file);
 }
 
@@ -631,15 +628,15 @@ static void
 xtm_cb (GtkWidget * b, GtkEntry * entry)
 {
     gchar *argv[2] = { "xfmime-edit", NULL };
-    
-    g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, 
-	    	   NULL, NULL, NULL, NULL);
+
+    g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
+		   NULL, NULL, NULL, NULL);
 }
 
 static void
 icon_drop_cb (GtkWidget * widget, GdkDragContext * context,
 	      gint x, gint y, GtkSelectionData * data,
-	      guint info, guint time, IconOptions *opts)
+	      guint info, guint time, IconOptions * opts)
 {
     GList *fnames;
     guint count;
@@ -669,7 +666,7 @@ icon_drop_cb (GtkWidget * widget, GdkDragContext * context,
 }
 
 static GtkWidget *
-create_icon_preview_frame (IconOptions *opts)
+create_icon_preview_frame (IconOptions * opts)
 {
     GtkWidget *frame;
     GtkWidget *eventbox;
@@ -697,13 +694,13 @@ create_icon_preview_frame (IconOptions *opts)
 }
 
 IconOptions *
-create_icon_options (GtkSizeGroup *sg, gboolean use_builtins)
+create_icon_options (GtkSizeGroup * sg, gboolean use_builtins)
 {
     GtkWidget *w, *vbox, *hbox, *image;
     IconOptions *opts;
 
     opts = g_new0 (IconOptions, 1);
-    
+
     opts->base = hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
 
@@ -711,10 +708,10 @@ create_icon_options (GtkSizeGroup *sg, gboolean use_builtins)
     w = create_icon_preview_frame (opts);
     gtk_widget_show (w);
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, TRUE, 0);
-    
+
     if (sg)
 	gtk_size_group_add_widget (sg, w);
-    
+
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
@@ -726,10 +723,10 @@ create_icon_options (GtkSizeGroup *sg, gboolean use_builtins)
 	gtk_widget_show (w);
 	gtk_box_pack_start (GTK_BOX (vbox), w, TRUE, TRUE, 0);
 
-	opts->id_sig = g_signal_connect (w, "changed", 
+	opts->id_sig = g_signal_connect (w, "changed",
 					 G_CALLBACK (icon_id_changed), opts);
     }
-    
+
     /* icon entry */
     opts->icon_entry = w = gtk_entry_new ();
     gtk_widget_show (w);
@@ -750,7 +747,7 @@ create_icon_options (GtkSizeGroup *sg, gboolean use_builtins)
 	gtk_widget_show (hbox);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
     }
-    
+
     g_signal_connect (w, "focus-out-event",
 		      G_CALLBACK (icon_entry_lost_focus), opts);
 
@@ -787,14 +784,14 @@ create_icon_options (GtkSizeGroup *sg, gboolean use_builtins)
 	}
     }
 
-    g_signal_connect_swapped (opts->base, "destroy", 
-	    		      G_CALLBACK (destroy_icon_options), opts);
-    
+    g_signal_connect_swapped (opts->base, "destroy",
+			      G_CALLBACK (destroy_icon_options), opts);
+
     return opts;
 }
 
-void 
-destroy_icon_options (IconOptions *opts)
+void
+destroy_icon_options (IconOptions * opts)
 {
     if (opts->on_change)
     {
@@ -806,9 +803,9 @@ destroy_icon_options (IconOptions *opts)
 	if (id == 0)
 	{
 	    id = EXTERN_ICON;
-	    
+
 	    icon_path = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
-	    
+
 	    if (!icon_path || !strlen (icon_path))
 		icon_path = NULL;
 	}
@@ -821,25 +818,25 @@ destroy_icon_options (IconOptions *opts)
     g_free (opts);
 }
 
-void 
-icon_options_set_icon (IconOptions *opts, int id, const char *path)
+void
+icon_options_set_icon (IconOptions * opts, int id, const char *path)
 {
     g_signal_handler_block (opts->icon_menu, opts->id_sig);
-    gtk_option_menu_set_history (GTK_OPTION_MENU (opts->icon_menu), 
-	    			 (id == EXTERN_ICON) ? 0 : id);
+    gtk_option_menu_set_history (GTK_OPTION_MENU (opts->icon_menu),
+				 (id == EXTERN_ICON) ? 0 : id);
     g_signal_handler_unblock (opts->icon_menu, opts->id_sig);
 
     if (id == EXTERN_ICON)
     {
 	gtk_entry_set_text (GTK_ENTRY (opts->icon_entry), path);
 	gtk_editable_set_position (GTK_EDITABLE (opts->icon_entry), -1);
-    
+
 	gtk_widget_set_sensitive (opts->icon_entry, TRUE);
     }
-    else 
+    else
     {
 	const char *icon_path = NULL;
-    
+
 	if (opts->icon_id == EXTERN_ICON)
 	    icon_path = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
 
@@ -854,24 +851,24 @@ icon_options_set_icon (IconOptions *opts, int id, const char *path)
     }
 
     opts->icon_id = id;
-    
+
     update_icon_preview (id, path, opts);
 
     if (opts->on_change)
 	opts->on_change (id, path, opts->data);
 }
 
-void 
-icon_options_set_callback (IconOptions *opts, 
-			   void (*callback)(int, const char *, gpointer),
+void
+icon_options_set_callback (IconOptions * opts,
+			   void (*callback) (int, const char *, gpointer),
 			   gpointer data)
 {
     opts->on_change = callback;
     opts->data = data;
 }
 
-void 
-icon_options_get_icon  (IconOptions *opts, int *id, char **path)
+void
+icon_options_get_icon (IconOptions * opts, int *id, char **path)
 {
     *id = gtk_option_menu_get_history (GTK_OPTION_MENU (opts->icon_menu));
 
@@ -882,9 +879,9 @@ icon_options_get_icon  (IconOptions *opts, int *id, char **path)
 	const char *icon_path;
 
 	*id = EXTERN_ICON;
-	
+
 	icon_path = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
-	
+
 	if (icon_path && strlen (icon_path))
 	    *path = g_strdup (icon_path);
     }
@@ -908,28 +905,28 @@ icon_options_changed (int id, const char *path, gpointer data)
 	item->icon_path = g_strdup (path);
     else
 	item->icon_path = NULL;
-    
+
     item_apply_config (item);
 }
 
 static inline void
-add_command_options (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
+add_command_options (GtkBox * box, ItemDialog * idlg, GtkSizeGroup * sg)
 {
     idlg->cmd_opts = create_command_options (sg);
-    
-    command_options_set_command (idlg->cmd_opts, idlg->item->command, 
-	    			 idlg->item->in_terminal, idlg->item->use_sn);
+
+    command_options_set_command (idlg->cmd_opts, idlg->item->command,
+				 idlg->item->in_terminal, idlg->item->use_sn);
 
     gtk_box_pack_start (box, idlg->cmd_opts->base, FALSE, TRUE, 0);
 }
 
 static inline void
-add_icon_options (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
+add_icon_options (GtkBox * box, ItemDialog * idlg, GtkSizeGroup * sg)
 {
     idlg->icon_opts = create_icon_options (sg, TRUE);
 
-    icon_options_set_icon (idlg->icon_opts, idlg->item->icon_id, 
-	    		   idlg->item->icon_path);
+    icon_options_set_icon (idlg->icon_opts, idlg->item->icon_id,
+			   idlg->item->icon_path);
 
     icon_options_set_callback (idlg->icon_opts, icon_options_changed, idlg);
 
@@ -937,11 +934,12 @@ add_icon_options (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
 }
 
 static gboolean
-caption_entry_lost_focus (GtkWidget *entry, GdkEventFocus *event, Item *item)
+caption_entry_lost_focus (GtkWidget * entry, GdkEventFocus * event,
+			  Item * item)
 {
     const char *tmp;
 
-    tmp = gtk_entry_get_text (GTK_ENTRY(entry));
+    tmp = gtk_entry_get_text (GTK_ENTRY (entry));
 
     if (tmp && strlen (tmp))
     {
@@ -956,7 +954,7 @@ caption_entry_lost_focus (GtkWidget *entry, GdkEventFocus *event, Item *item)
 }
 
 static inline void
-add_caption_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
+add_caption_option (GtkBox * box, ItemDialog * idlg, GtkSizeGroup * sg)
 {
     GtkWidget *hbox;
     GtkWidget *label;
@@ -976,7 +974,7 @@ add_caption_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
     gtk_box_pack_start (GTK_BOX (hbox), idlg->caption_entry, TRUE, TRUE, 0);
 
     if (idlg->item->caption)
-	gtk_entry_set_text (GTK_ENTRY (idlg->caption_entry), 
+	gtk_entry_set_text (GTK_ENTRY (idlg->caption_entry),
 			    idlg->item->caption);
 
     /* only set label on focus out */
@@ -985,7 +983,7 @@ add_caption_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
 }
 
 static inline void
-add_tooltip_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
+add_tooltip_option (GtkBox * box, ItemDialog * idlg, GtkSizeGroup * sg)
 {
     GtkWidget *hbox;
     GtkWidget *label;
@@ -1009,17 +1007,17 @@ add_tooltip_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
 }
 
 static void
-popup_menu_changed (GtkToggleButton * tb, Control *control)
+popup_menu_changed (GtkToggleButton * tb, Control * control)
 {
     Item *item = control->data;
-    
+
     item->with_popup = gtk_toggle_button_get_active (tb);
 
     groups_show_popup (control->index, item->with_popup);
 }
 
 static inline void
-add_menu_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
+add_menu_option (GtkBox * box, ItemDialog * idlg, GtkSizeGroup * sg)
 {
     idlg->menu_checkbutton =
 	gtk_check_button_new_with_label (_("Attach menu to launcher"));
@@ -1033,31 +1031,31 @@ add_menu_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
 }
 
 static void
-item_dialog_closed (GtkWidget *w, ItemDialog *idlg)
+item_dialog_closed (GtkWidget * w, ItemDialog * idlg)
 {
     Item *item;
     const char *temp;
 
     item = idlg->item;
-    
+
     /* command */
     g_free (item->command);
     item->command = NULL;
 
     command_options_get_command (idlg->cmd_opts, &(item->command),
-	    			 &(item->in_terminal), &(item->use_sn));
+				 &(item->in_terminal), &(item->use_sn));
 
     /* icon */
     g_free (item->icon_path);
     item->icon_path = NULL;
 
-    icon_options_get_icon (idlg->icon_opts, &(item->icon_id), 
-	    		   &(item->icon_path));
-    
+    icon_options_get_icon (idlg->icon_opts, &(item->icon_id),
+			   &(item->icon_path));
+
     /* tooltip */
     g_free (item->tooltip);
     item->tooltip = NULL;
-    
+
     temp = gtk_entry_get_text (GTK_ENTRY (idlg->tip_entry));
 
     if (temp && *temp)
@@ -1070,7 +1068,7 @@ item_dialog_closed (GtkWidget *w, ItemDialog *idlg)
 	item->caption = NULL;
 
 	temp = gtk_entry_get_text (GTK_ENTRY (idlg->caption_entry));
-	
+
 	if (temp && *temp)
 	    item->caption = g_strdup (temp);
     }
@@ -1079,7 +1077,7 @@ item_dialog_closed (GtkWidget *w, ItemDialog *idlg)
 }
 
 static void
-destroy_item_dialog (ItemDialog *idlg)
+destroy_item_dialog (ItemDialog * idlg)
 {
     /* TODO: check if these are still here */
     command_options_set_callback (idlg->cmd_opts, NULL, NULL);
@@ -1089,8 +1087,8 @@ destroy_item_dialog (ItemDialog *idlg)
 }
 
 static void
-create_item_dialog (Control *control, Item *item, 
-		    GtkContainer *container, GtkWidget *close)
+create_item_dialog (Control * control, Item * item,
+		    GtkContainer * container, GtkWidget * close)
 {
     ItemDialog *idlg;
     GtkWidget *vbox;
@@ -1101,25 +1099,25 @@ create_item_dialog (Control *control, Item *item,
     if (control)
     {
 	idlg->control = control;
-	idlg->item = (Item *)control->data;
+	idlg->item = (Item *) control->data;
     }
     else
     {
 	idlg->item = item;
     }
-    
+
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
     gtk_container_add (container, vbox);
 
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-    
+
     add_icon_options (GTK_BOX (vbox), idlg, sg);
     add_spacer (GTK_BOX (vbox), BORDER);
 
     add_command_options (GTK_BOX (vbox), idlg, sg);
     add_spacer (GTK_BOX (vbox), BORDER);
-    
+
     if (!control)
     {
 	add_caption_option (GTK_BOX (vbox), idlg, sg);
@@ -1134,12 +1132,12 @@ create_item_dialog (Control *control, Item *item,
     }
 
     add_spacer (GTK_BOX (vbox), BORDER);
-    
-    g_signal_connect (close, "clicked", 
-	    	      G_CALLBACK (item_dialog_closed), idlg);
 
-    g_signal_connect_swapped (container, "destroy", 
-	    	      	      G_CALLBACK (destroy_item_dialog), idlg);
+    g_signal_connect (close, "clicked",
+		      G_CALLBACK (item_dialog_closed), idlg);
+
+    g_signal_connect_swapped (container, "destroy",
+			      G_CALLBACK (destroy_item_dialog), idlg);
 }
 
 /* panel and menu item API 
@@ -1148,7 +1146,7 @@ create_item_dialog (Control *control, Item *item,
 
 /* panel control */
 
-void 
+void
 panel_item_create_options (Control * control, GtkContainer * container,
 			   GtkWidget * done)
 {
@@ -1173,7 +1171,7 @@ reindex_items (GList * items)
 }
 
 static void
-pos_changed (GtkSpinButton * spin, Item *item)
+pos_changed (GtkSpinButton * spin, Item * item)
 {
     int n = gtk_spin_button_get_value_as_int (spin) - 1;
     PanelPopup *pp = item->parent;
@@ -1185,19 +1183,18 @@ pos_changed (GtkSpinButton * spin, Item *item)
     pp->items = g_list_insert (pp->items, item, n);
     reindex_items (pp->items);
 
-    gtk_box_reorder_child (GTK_BOX (pp->item_vbox), item->button,
-			   item->pos);
+    gtk_box_reorder_child (GTK_BOX (pp->item_vbox), item->button, item->pos);
 }
 
 static void
-add_position_option (GtkBox *box, Item *item, int num_items)
+add_position_option (GtkBox * box, Item * item, int num_items)
 {
     GtkWidget *hbox;
     GtkWidget *label;
     GtkWidget *pos_spin;
 
     g_return_if_fail (num_items > 1);
-    
+
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
     gtk_widget_show (hbox);
@@ -1212,22 +1209,22 @@ add_position_option (GtkBox *box, Item *item, int num_items)
     gtk_widget_show (pos_spin);
     gtk_box_pack_start (GTK_BOX (hbox), pos_spin, FALSE, FALSE, 0);
 
-    gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin), 
-	    		       (gfloat) item->pos + 1);
-    
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin),
+			       (gfloat) item->pos + 1);
+
     g_signal_connect (pos_spin, "value-changed", G_CALLBACK (pos_changed),
 		      item);
 }
 
 static gboolean
-menu_dialog_delete (GtkWidget *dlg)
+menu_dialog_delete (GtkWidget * dlg)
 {
     gtk_dialog_response (GTK_DIALOG (dlg), GTK_RESPONSE_OK);
 
     return TRUE;
 }
 
-void 
+void
 edit_menu_item_dialog (Item * mi)
 {
     GtkWidget *remove, *close, *header;
@@ -1236,12 +1233,12 @@ edit_menu_item_dialog (Item * mi)
 
     menudialog = gtk_dialog_new ();
     dlg = GTK_DIALOG (menudialog);
-    
+
     gtk_window_set_title (GTK_WINDOW (dlg), _("Change menu item"));
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 
     gtk_dialog_set_has_separator (dlg, FALSE);
-    
+
     /* add buttons */
     remove = xfce_create_mixed_button (GTK_STOCK_REMOVE, _("_Remove"));
     gtk_widget_show (remove);
@@ -1252,18 +1249,18 @@ edit_menu_item_dialog (Item * mi)
     gtk_widget_show (close);
     gtk_dialog_add_action_widget (dlg, close, GTK_RESPONSE_OK);
 
-    gtk_button_box_set_child_secondary (GTK_BUTTON_BOX(dlg->action_area),
+    gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (dlg->action_area),
 					remove, TRUE);
 
     header = xfce_create_header (NULL, _("Launcher"));
-    gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child), 
-	    			    BORDER);
+    gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child),
+				    BORDER);
     gtk_widget_set_size_request (header, -1, 32);
     gtk_widget_show (header);
     gtk_box_pack_start (GTK_BOX (dlg->vbox), header, FALSE, TRUE, 0);
 
     add_spacer (GTK_BOX (dlg->vbox), BORDER);
-    
+
     /* position */
     num_items = g_list_length (mi->parent->items);
 
@@ -1279,9 +1276,9 @@ edit_menu_item_dialog (Item * mi)
 
     add_spacer (GTK_BOX (dlg->vbox), BORDER);
 
-    g_signal_connect (dlg, "delete-event", G_CALLBACK (menu_dialog_delete), 
-	    	      NULL);
-    
+    g_signal_connect (dlg, "delete-event", G_CALLBACK (menu_dialog_delete),
+		      NULL);
+
     gtk_widget_grab_focus (close);
     gtk_widget_grab_default (close);
 
@@ -1291,19 +1288,19 @@ edit_menu_item_dialog (Item * mi)
     if (response == GTK_RESPONSE_CANCEL)
     {
 	PanelPopup *pp = mi->parent;
-	
+
 	gtk_container_remove (GTK_CONTAINER (pp->item_vbox), mi->button);
 	pp->items = g_list_remove (pp->items, mi);
 	item_free (mi);
 	reindex_items (pp->items);
     }
-    
+
     gtk_widget_destroy (menudialog);
 
     write_panel_config ();
 }
 
-void 
+void
 add_menu_item_dialog (PanelPopup * pp)
 {
     Item *mi = menu_item_new (pp);
@@ -1322,4 +1319,3 @@ destroy_menu_dialog (void)
     if (menudialog)
 	gtk_dialog_response (GTK_DIALOG (menudialog), GTK_RESPONSE_OK);
 }
-

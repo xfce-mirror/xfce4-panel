@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,22 +17,52 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-/*  systembuttons.c : xfce4 panel plugin that shows one or two 
- *  'system buttons'. These are the same buttons also present on 
- *  both sides of the switcher plugin: 
- *  lock, exit, setup and info.
- */
-
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/xfce_iconbutton.h>
+#include <libxfcegui4/xfce-icontheme.h>
 
 #include <panel/mcs_client.h>
 #include <panel/plugins.h>
 #include <panel/xfce.h>
+
+
+/* icons *
+ * ----- */
+
+enum
+{
+    MINILOCK_ICON,
+    MINIINFO_ICON,
+    MINIPALET_ICON,
+    MINIPOWER_ICON,
+    MINIBUTTONS
+};
+
+/* TODO: add kde names */
+static char *minibutton_names[][3] = {
+    {"xfce-system-lock", "gnome-lockscreen", NULL},
+    {"xfce-system-info", "gnome-info", NULL},
+    {"xfce-system-settings", "gnome-settings", NULL},
+    {"xfce-system-exit", "gnome-logout", NULL},
+};
+
+static GdkPixbuf *
+get_minibutton_pixbuf (int id)
+{
+    GdkPixbuf *pb;
+
+    pb = themed_pixbuf_from_name_list (minibutton_names[id], 16);
+
+    if (!pb)
+	return get_pixbuf_by_id (UNKNOWN_ICON);
+
+    return pb;
+}
+
 
 /* callbacks */
 static void
@@ -82,11 +112,11 @@ enum
 typedef struct
 {
     gboolean show_two;
-    int button_types[2];   /* 0, 1, 2 or 3 for lock, exit, setup and info */
+    int button_types[2];	/* 0, 1, 2 or 3 for lock, exit, setup and info */
 
     GtkWidget *box;
     GtkWidget *buttons[2];
-    GList *callbacks;	   /* save callbacks for when we change buttons */
+    GList *callbacks;		/* save callbacks for when we change buttons */
     int cb_ids[2];
 }
 t_systembuttons;
@@ -148,10 +178,10 @@ button_set_tip (GtkWidget * button, int type)
 
 /* creation and destruction */
 static int
-connect_callback(GtkWidget *button, int type)
+connect_callback (GtkWidget * button, int type)
 {
     GCallback callback = NULL;
-    
+
     switch (type)
     {
 	case LOCK:
@@ -167,12 +197,12 @@ connect_callback(GtkWidget *button, int type)
 	    callback = G_CALLBACK (mini_info_cb);
 	    break;
     }
-  
+
     return g_signal_connect (button, "clicked", callback, NULL);
 }
 
 static void
-create_systembutton (t_systembuttons *sb, int n, int type)
+create_systembutton (t_systembuttons * sb, int n, int type)
 {
     GtkWidget *button;
 
@@ -183,10 +213,10 @@ create_systembutton (t_systembuttons *sb, int n, int type)
     button_set_tip (button, type);
     button_update_image (button, type);
 
-    sb->cb_ids[n] = connect_callback(button, type);
+    sb->cb_ids[n] = connect_callback (button, type);
     sb->buttons[n] = button;
 
-    if (G_UNLIKELY (type == SETUP && disable_user_config))
+    if (G_UNLIKELY (disable_user_config && type == SETUP))
 	gtk_widget_set_sensitive (button, FALSE);
 }
 
@@ -199,11 +229,16 @@ systembuttons_change_type (t_systembuttons * sb, int n, int type)
 
     button = sb->buttons[n];
 
-    g_signal_handler_disconnect(sb->buttons[n], sb->cb_ids[n]);
+    g_signal_handler_disconnect (sb->buttons[n], sb->cb_ids[n]);
 
-    sb->cb_ids[n] = connect_callback(button, type);
-    button_set_tip(button, type);
-    button_update_image(button, type);
+    sb->cb_ids[n] = connect_callback (button, type);
+    button_set_tip (button, type);
+    button_update_image (button, type);
+
+    if (G_UNLIKELY (disable_user_config && type == SETUP))
+	gtk_widget_set_sensitive (button, FALSE);
+    else
+	gtk_widget_set_sensitive (button, TRUE);
 }
 
 static void
@@ -230,15 +265,15 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 
     gtk_widget_show (sb->box);
 
-    gtk_widget_show(sb->buttons[0]);
+    gtk_widget_show (sb->buttons[0]);
 
     if (sb->show_two)
-	gtk_widget_show(sb->buttons[1]);
+	gtk_widget_show (sb->buttons[1]);
     else
-	gtk_widget_hide(sb->buttons[1]);
-    
-    gtk_box_pack_start(GTK_BOX(sb->box), sb->buttons[0], TRUE, TRUE, 0);
-    gtk_box_pack_start(GTK_BOX(sb->box), sb->buttons[1], TRUE, TRUE, 0);
+	gtk_widget_hide (sb->buttons[1]);
+
+    gtk_box_pack_start (GTK_BOX (sb->box), sb->buttons[0], TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (sb->box), sb->buttons[1], TRUE, TRUE, 0);
 }
 
 static t_systembuttons *
@@ -304,7 +339,7 @@ systembuttons_set_size (Control * control, int size)
     s = w = h = icon_size[size] + border_width;
 
     n = sb->show_two ? 2 : 1;
-    
+
     if (settings.orientation == HORIZONTAL)
     {
 	if (settings.size > SMALL)
@@ -391,9 +426,9 @@ systembuttons_read_config (Control * control, xmlNodePtr node)
 	    gtk_widget_show (sb->buttons[1]);
 	}
     }
- 
+
     /* Try to resize the systembuttons to fit the user settings */
-    systembuttons_set_size (control, settings.size);    
+    systembuttons_set_size (control, settings.size);
 }
 
 static void
@@ -458,7 +493,7 @@ buttons_changed (GtkOptionMenu * om, t_systembuttons_dialog * sbd)
 
 void
 systembuttons_create_options (Control * control, GtkContainer * container,
-			   GtkWidget * done)
+			      GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label, *om = NULL;
     const char *names[4];

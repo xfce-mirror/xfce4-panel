@@ -1,6 +1,6 @@
-/*  popup.c
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -72,12 +72,14 @@ position_popup (PanelPopup * pp)
     int xbutton, ybutton, xparent, yparent, x, y;
     int w, h;
     gboolean vertical = settings.orientation == VERTICAL;
-    GtkAllocation alloc1 = {0}, alloc2 = {0};
+    GtkAllocation alloc1 = { 0 }, alloc2 =
+    {
+    0};
     GtkArrowType at;
 
     if (!pp)
 	return;
-    
+
     if (pp->detached)
 	return;
 
@@ -123,8 +125,10 @@ position_popup (PanelPopup * pp)
 
     if (vertical)
     {
-	/* left if buttons left or if menu doesn't fit right, but does fit left */
-	if ((at == GTK_ARROW_LEFT || x + req.width + alloc1.width > w) && x - req.width >= 0)
+	/* left if buttons left or if menu doesn't fit right, 
+         * but does fit left */
+	if ((at == GTK_ARROW_LEFT || x + req.width + alloc1.width > w)
+	    && x - req.width >= 0)
 	{
 	    x = x - req.width;
 	}
@@ -140,8 +144,9 @@ position_popup (PanelPopup * pp)
     }
     else
     {
-	/* down if buttons on bottom or up doesn't fit and down doe */
-	if ((at == GTK_ARROW_DOWN || y - req.height < 0) && y + alloc1.height + req.height <= h)
+	/* down if buttons on bottom or up doesn't fit and down does */
+	if ((at == GTK_ARROW_DOWN || y - req.height < 0)
+	    && y + alloc1.height + req.height <= h)
 	{
 	    y = y + alloc1.height;
 	}
@@ -168,7 +173,7 @@ show_popup (PanelPopup * pp)
 {
     if (!pp)
 	return;
-    
+
     if (open_popup)
 	hide_popup (open_popup);
 
@@ -387,7 +392,7 @@ panel_popup_pack (PanelPopup * pp, GtkBox * box)
 {
     if (!pp)
 	return;
-    
+
     gtk_box_pack_start (box, pp->button, FALSE, FALSE, 0);
 }
 
@@ -398,7 +403,7 @@ panel_popup_unpack (PanelPopup * pp)
 
     if (!pp)
 	return;
-    
+
     container = pp->button->parent;
 
     gtk_container_remove (GTK_CONTAINER (container), pp->button);
@@ -451,7 +456,7 @@ panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node)
 
     if (!pp)
 	return;
-    
+
     for (i = 0, child = node->children; child; i++, child = child->next)
     {
 	Item *mi;
@@ -477,7 +482,7 @@ panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root)
 
     if (!pp || !pp->items)
 	return;
-    
+
     node = xmlNewTextChild (root, NULL, "Popup", NULL);
 
     for (li = pp->items; li; li = li->next)
@@ -500,7 +505,7 @@ panel_popup_free (PanelPopup * pp)
 	return;
 
     gtk_widget_destroy (pp->window);
-    
+
     for (li = pp->items; li && li->data; li = li->next)
     {
 	Item *mi = li->data;
@@ -520,7 +525,7 @@ panel_popup_set_size (PanelPopup * pp, int size)
 
     if (!pp)
 	return;
-    
+
     w = icon_size[size] + border_width;
     h = top_height[size];
 
@@ -547,7 +552,7 @@ panel_popup_set_popup_position (PanelPopup * pp, int position)
 
     if (!pp)
 	return;
-    
+
     panel_popup_set_size (pp, settings.size);
 }
 
@@ -556,7 +561,7 @@ panel_popup_set_layer (PanelPopup * pp, int layer)
 {
     if (!pp)
 	return;
-    
+
     set_window_layer (pp->window, layer);
 }
 
@@ -567,7 +572,7 @@ panel_popup_set_theme (PanelPopup * pp, const char *theme)
 
     if (!pp)
 	return;
-    
+
     for (li = pp->items; li && li->data; li = li->next)
     {
 	Item *mi = li->data;

@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -46,7 +46,7 @@ struct _Panel
     int unhide_timeout;
 
     Position position;
-    
+
     GtkWidget *toplevel;
 
     GtkWidget *main_frame;
@@ -80,11 +80,11 @@ void panel_parse_xml (xmlNodePtr node);
 void panel_write_xml (xmlNodePtr root);
 
 /* for menus, to prevent problems with autohide */
-void panel_register_open_menu (GtkWidget *menu);
+void panel_register_open_menu (GtkWidget * menu);
 
-void panel_block_autohide (Panel *panel);
+void panel_block_autohide (Panel * panel);
 
-void panel_unblock_autohide (Panel *panel);
+void panel_unblock_autohide (Panel * panel);
 
 int panel_get_side (void);
 

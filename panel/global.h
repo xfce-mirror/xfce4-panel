@@ -1,6 +1,6 @@
-/*  global.h
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -83,9 +83,9 @@ extern int popup_icon_size[PANEL_SIZES];
 /* types for panel controls */
 enum
 {
-    ICON = -2,		/* special case: the traditional laucher item */
-    PLUGIN = -1,	/* external plugin */
-    NUM_BUILTINS	/* no more builtins! yay! */
+    ICON = -2,			/* special case: the traditional laucher item */
+    PLUGIN = -1,		/* external plugin */
+    NUM_BUILTINS		/* no more builtins! yay! */
 };
 
 /* global settings */

@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *  
- *  Copyright (C) 2002-2003 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ item_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 
 	if (item->in_terminal)
 	    g_string_append_c (execute, '"');
-	
+
 	g_string_append (execute, item->command);
 
 	for (fnp = fnames; fnp; fnp = fnp->next, count--)
@@ -118,7 +118,7 @@ item_click_cb (GtkButton * b, Item * item)
 }
 
 static gboolean
-item_middle_click (GtkWidget *w, GdkEventButton *ev, Item *item)
+item_middle_click (GtkWidget * w, GdkEventButton * ev, Item * item)
 {
     if (ev->button == 2)
     {
@@ -540,7 +540,8 @@ create_menu_item (Item * mi)
 void
 menu_item_set_popup_size (Item * mi, int size)
 {
-    gtk_widget_set_size_request (mi->button, -1, popup_icon_size[size] + border_width);
+    gtk_widget_set_size_request (mi->button, -1,
+				 popup_icon_size[size] + border_width);
 }
 
 /*  Panel item
@@ -560,10 +561,10 @@ panel_item_new (void)
     item_apply_config (pi);
 
     g_signal_connect (pi->button, "clicked", G_CALLBACK (item_click_cb), pi);
-    
+
     g_signal_connect (pi->button, "button-press-event",
 		      G_CALLBACK (panel_item_press), pi);
-    
+
     g_signal_connect (pi->button, "button-press-event",
 		      G_CALLBACK (item_middle_click), pi);
 

@@ -30,16 +30,18 @@
 #include "add-control-dialog.h"
 
 /* Make sure translations are taken from the panel and not from some plugin */
+#ifdef ENABLE_NLS
 #undef _
 #define _(s) dgettext (PACKAGE, s)
+#endif
 
 typedef struct
 {
     Panel *panel;
     int position;
-    
+
     GtkWidget *add_button;
-    
+
     GSList *infolist;
     ControlInfo *current;
 }
@@ -49,10 +51,11 @@ ControlList;
 static GtkWidget *the_dialog = NULL;
 
 /* prototypes */
-static void dialog_response (GtkWidget *dlg, int response, ControlList *list);
+static void dialog_response (GtkWidget * dlg, int response,
+			     ControlList * list);
 
-static gboolean treeview_dblclick (GtkWidget *tv, GdkEventButton *evt, 
-			     	   ControlList *list);
+static gboolean treeview_dblclick (GtkWidget * tv, GdkEventButton * evt,
+				   ControlList * list);
 
 static void dialog_destroyed (ControlList * list);
 
@@ -81,7 +84,7 @@ add_control_dialog (Panel * panel, int position)
     }
 
     panel_block_autohide (panel);
-    
+
     dlg = gtk_dialog_new_with_buttons (_("Add new item"),
 				       GTK_WINDOW (panel->toplevel),
 				       GTK_DIALOG_DESTROY_WITH_PARENT |
@@ -89,8 +92,8 @@ add_control_dialog (Panel * panel, int position)
 
     cancel = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
     gtk_widget_show (cancel);
-    gtk_dialog_add_action_widget (GTK_DIALOG (dlg), cancel, 
-	    			  GTK_RESPONSE_CANCEL);
+    gtk_dialog_add_action_widget (GTK_DIALOG (dlg), cancel,
+				  GTK_RESPONSE_CANCEL);
 
     add = gtk_button_new_from_stock (GTK_STOCK_ADD);
     GTK_WIDGET_SET_FLAGS (add, GTK_CAN_DEFAULT);
@@ -125,12 +128,12 @@ add_control_dialog (Panel * panel, int position)
     gtk_widget_show (dlg);
 }
 
-static void 
-dialog_response (GtkWidget *dlg, int response, ControlList *list)
+static void
+dialog_response (GtkWidget * dlg, int response, ControlList * list)
 {
 
     gtk_widget_hide (dlg);
-    
+
     if (response == GTK_RESPONSE_OK)
     {
 	insert_control (list->panel, list->current->name, list->position);
@@ -185,7 +188,7 @@ dialog_destroyed (ControlList * list)
 }
 
 static void
-add_spacer (GtkBox *box, int size)
+add_spacer (GtkBox * box, int size)
 {
     GtkWidget *align;
 
@@ -193,7 +196,7 @@ add_spacer (GtkBox *box, int size)
     gtk_widget_show (align);
     gtk_widget_set_size_request (align, size, size);
     gtk_box_pack_start (box, align, FALSE, FALSE, 0);
-}    
+}
 
 static void
 add_header (GtkBox * box)
@@ -229,7 +232,7 @@ cursor_changed (GtkTreeView * tv, ControlList * list)
     gtk_tree_selection_get_selected (sel, &model, &iter);
 
     gtk_tree_model_get (model, &iter, 0, &info, -1);
-    
+
     list->current = info;
 
     if (info->can_be_added)
@@ -260,8 +263,8 @@ render_text (GtkTreeViewColumn * col, GtkCellRenderer * cell,
 
     insensitive = !(info->can_be_added);
 
-    g_object_set (cell, "text", info->caption, "foreground-set", insensitive, 
-	    	  NULL);
+    g_object_set (cell, "text", info->caption, "foreground-set", insensitive,
+		  NULL);
 }
 
 static ControlList *
@@ -306,19 +309,19 @@ add_control_list (GtkBox * box)
 
     cell = gtk_cell_renderer_pixbuf_new ();
     gtk_tree_view_column_pack_start (col, cell, FALSE);
-    gtk_tree_view_column_set_cell_data_func (col, cell, 
-	    			             (GtkTreeCellDataFunc) render_icon,
-					     NULL, NULL);
+    gtk_tree_view_column_set_cell_data_func (col, cell,
+					     (GtkTreeCellDataFunc)
+					     render_icon, NULL, NULL);
 
     cell = gtk_cell_renderer_text_new ();
     gtk_tree_view_column_pack_start (col, cell, TRUE);
-    gtk_tree_view_column_set_cell_data_func (col, cell, 
-	    			             (GtkTreeCellDataFunc) render_text,
-					     tv, NULL);
+    gtk_tree_view_column_set_cell_data_func (col, cell,
+					     (GtkTreeCellDataFunc)
+					     render_text, tv, NULL);
 
     color = tv->style->fg[GTK_STATE_INSENSITIVE];
     g_object_set (cell, "foreground-gdk", &color, NULL);
-    
+
     /* fill model */
     list = g_new0 (ControlList, 1);
 
@@ -339,10 +342,11 @@ add_control_list (GtkBox * box)
     gtk_tree_view_set_cursor (GTK_TREE_VIEW (tv), path, NULL, FALSE);
     gtk_tree_path_free (path);
 
-    g_signal_connect (tv, "cursor_changed", G_CALLBACK (cursor_changed), list);
-    
-    g_signal_connect (tv, "button-press-event", 
-	    	      G_CALLBACK (treeview_dblclick), list);
+    g_signal_connect (tv, "cursor_changed", G_CALLBACK (cursor_changed),
+		      list);
+
+    g_signal_connect (tv, "button-press-event",
+		      G_CALLBACK (treeview_dblclick), list);
 
     gtk_widget_set_size_request (tv, 300, 300);
 

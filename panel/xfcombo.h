@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2004 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -73,16 +73,15 @@ struct _xfc_combo_info_t
 
 #endif /* HAVE_LIBDBH */
 
-typedef void (*ComboCallback) (xfc_combo_info_t *info, gpointer data);
+typedef void (*ComboCallback) (xfc_combo_info_t * info, gpointer data);
 
-xfc_combo_info_t *create_completion_combo (ComboCallback completion_cb, 
-    					   gpointer data);
+xfc_combo_info_t *create_completion_combo (ComboCallback completion_cb,
+					   gpointer data);
 
-void destroy_completion_combo (xfc_combo_info_t *info);
+void destroy_completion_combo (xfc_combo_info_t * info);
 
-void completion_combo_set_text (xfc_combo_info_t *info, const char *text);
+void completion_combo_set_text (xfc_combo_info_t * info, const char *text);
 
 gboolean history_check_in_terminal (const char *command);
 
 #endif /* _XFCOMBO_H */
-

@@ -22,6 +22,7 @@
 #endif
 
 #include <libxfce4util/libxfce4util.h>
+#include <libxfcegui4/xfce-icontheme.h>
 
 #include "xfce.h"
 
@@ -29,12 +30,13 @@
 #define gdk_pixbuf_new_from_inline gdk_pixbuf_new_from_stream
 #endif
 
+static XfceIconTheme *global_icon_theme = NULL;
+
 const char *icon_names[NUM_ICONS];
 
 /* icon themes */
 /* TODO: Someone please get me a list of names that give a fully themed panel 
  * for all major icon themes.
- */
 static char *xfce_icon_names[][4] = {
     {"xfce-unknown", "gnome-fs-executable", "exec", NULL},
     {"xfce-edit", "gedit-icon", "edit", NULL},
@@ -50,15 +52,21 @@ static char *xfce_icon_names[][4] = {
     {"xfce-sound", "gnome-audio", "sound", NULL},
     {"xfce-terminal", "gnome-terminal", "terminal", NULL},
 };
+ */
 
-/* icons for the panel */
-/* TODO: add kde names */
-static char *minibutton_names[][3] = {
-    {"xfce-system-lock", "gnome-lockscreen", NULL},
-    {"xfce-system-info", "gnome-info", NULL},
-    {"xfce-system-settings", "gnome-settings", NULL},
-    {"xfce-system-exit", "gnome-logout", NULL},
-};
+static void
+icon_theme_changed (XfceIconTheme * icontheme)
+{
+    char *theme;
+
+    g_object_get (gtk_settings_get_default (), "gtk-icon-theme-name",
+		  &theme, NULL);
+
+    DBG ("Theme: %s\n", theme);
+    panel_set_theme (theme);
+
+    g_free (theme);
+}
 
 void
 icons_init (void)
@@ -78,88 +86,157 @@ icons_init (void)
     icon_names[++i] = _("Productivity");
     icon_names[++i] = _("Sound");
     icon_names[++i] = _("Terminal");
+
+    global_icon_theme = xfce_icon_theme_get_for_screen (NULL);
+}
+
+void
+icon_theme_init (void)
+{
+    g_signal_connect (global_icon_theme, "changed",
+		      G_CALLBACK (icon_theme_changed), NULL);
 }
 
 GdkPixbuf *
 themed_pixbuf_from_name_list (char **namelist, int size)
 {
-    GdkPixbuf *pb = NULL, *fallback = NULL;
-    
+    GdkPixbuf *pb;
+    char *icon = NULL, *fallback = NULL;
+
     for (; namelist[0] != NULL; ++namelist)
     {
-	char *iconname = xfce_themed_icon_lookup (namelist[0], size);
+	icon = xfce_icon_theme_lookup (global_icon_theme, namelist[0], size);
 
-	if (iconname)
+	if (icon && (strstr (icon, "hicolor") || strstr (icon, "pixmaps")))
 	{
-	    gboolean is_fallback = FALSE;
-	    
-	    is_fallback = strstr (iconname, "/hicolor/") != NULL 
-			  || strstr (iconname, "/pixmaps/") != NULL;
-
-	    DBG ("Icon: %s %s\n", iconname, is_fallback ? "(fallback)" : "");
-
-	    if (is_fallback)
-	    {
-		if (!fallback)
-		{
-		    fallback = 
-			xfce_pixbuf_new_from_file_at_size (iconname,
-							   size, size, NULL);
-		}
-	    }
+	    if (!fallback)
+		fallback = icon;
 	    else
-	    {
-		pb = xfce_pixbuf_new_from_file_at_size (iconname, 
-							size, size, NULL);
-	    
-		if (pb)
-		    break;
-	    }
+		g_free (icon);
 
-	    g_free (iconname);
+	    icon = NULL;
 	}
+
+	if (icon)
+	    break;
     }
 
-    if (pb)
+    if (icon)
     {
-	if (fallback)
-	    g_object_unref (fallback);
-
-	return pb;
+	pb = gdk_pixbuf_new_from_file (icon, NULL);
+    }
+    else if (fallback)
+    {
+	pb = gdk_pixbuf_new_from_file (fallback, NULL);
+    }
+    else
+    {
+	pb = xfce_icon_theme_load_category (global_icon_theme,
+					    XFCE_ICON_CATEGORY_UNKNOWN, size);
     }
 
-    return fallback;
-}
-
-GdkPixbuf *
-get_pixbuf_by_id (int id)
-{
-    GdkPixbuf *pb;
-    
-    if (id < UNKNOWN_ICON || id >= NUM_ICONS)
-	id = UNKNOWN_ICON;
-
-    pb = themed_pixbuf_from_name_list (xfce_icon_names [id], 
-	    			icon_size[settings.size]);
-    
-    if (!pb && id != UNKNOWN_ICON)
-	return get_pixbuf_by_id (UNKNOWN_ICON);
+    g_free (icon);
+    g_free (fallback);
 
     return pb;
 }
 
 GdkPixbuf *
-get_minibutton_pixbuf (int id)
+get_pixbuf_by_id (int id)
 {
-    GdkPixbuf *pb;
+    char *icon = NULL;
+    GdkPixbuf *pb = NULL;
 
-    if (id < 0 || id >= MINIBUTTONS)
-	return get_pixbuf_by_id (UNKNOWN_ICON);
+    switch (id)
+    {
+	case EDIT_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_EDITOR,
+						 icon_size[settings.size]);
+	    break;
+	case FILE1_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_FILEMAN,
+						 icon_size[settings.size]);
+	    break;
+	case FILE2_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_UTILITY,
+						 icon_size[settings.size]);
+	    break;
+	case GAMES_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_GAME,
+						 icon_size[settings.size]);
+	    break;
+	case MAN_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_HELP,
+						 icon_size[settings.size]);
+	    break;
+	case MULTIMEDIA_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_MULTIMEDIA,
+						 icon_size[settings.size]);
+	    break;
+	case NETWORK_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_NETWORK,
+						 icon_size[settings.size]);
+	    break;
+	case PAINT_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_GRAPHICS,
+						 icon_size[settings.size]);
+	    break;
+	case PRINT_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_PRINTER,
+						 icon_size[settings.size]);
+	    break;
+	case SCHEDULE_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_PRODUCTIVITY,
+						 icon_size[settings.size]);
+	    break;
+	case SOUND_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_SOUND,
+						 icon_size[settings.size]);
+	    break;
+	case TERMINAL_ICON:
+	    icon =
+		xfce_icon_theme_lookup_category (global_icon_theme,
+						 XFCE_ICON_CATEGORY_TERMINAL,
+						 icon_size[settings.size]);
+	    break;
+    }
 
-    pb = themed_pixbuf_from_name_list (minibutton_names [id], 16);
-    
-    if (!pb)
-	return get_pixbuf_by_id (UNKNOWN_ICON);
+    if (!icon)
+    {
+	icon =
+	    xfce_icon_theme_lookup_category (global_icon_theme,
+					     XFCE_ICON_CATEGORY_UNKNOWN,
+					     icon_size[settings.size]);
+    }
+
+    if (icon)
+    {
+	pb = gdk_pixbuf_new_from_file (icon, NULL);
+
+	g_free (icon);
+    }
 
     return pb;
 }
@@ -167,15 +244,29 @@ get_minibutton_pixbuf (int id)
 GdkPixbuf *
 get_pixbuf_from_file (const char *path)
 {
-    GdkPixbuf *pb;
+    char *icon = NULL;
+    GdkPixbuf *pb = NULL;
 
     if (!g_file_test (path, G_FILE_TEST_EXISTS))
-	return get_pixbuf_by_id (UNKNOWN_ICON);
+    {
+	icon = xfce_icon_theme_lookup (global_icon_theme, path,
+				       icon_size[settings.size]);
+    }
 
-    pb = xfce_themed_icon_load (path, icon_size[settings.size]);
+    if (!icon)
+    {
+	icon =
+	    xfce_icon_theme_lookup_category (global_icon_theme,
+					     XFCE_ICON_CATEGORY_UNKNOWN,
+					     icon_size[settings.size]);
+    }
 
-    if (!pb)
-	return get_pixbuf_by_id (UNKNOWN_ICON);
+    if (icon)
+    {
+	pb = gdk_pixbuf_new_from_file (icon, NULL);
+
+	g_free (icon);
+    }
 
     return pb;
 }
@@ -183,7 +274,19 @@ get_pixbuf_from_file (const char *path)
 GdkPixbuf *
 get_panel_pixbuf (void)
 {
-    return xfce_themed_icon_load ("xfce4-panel", 48);
+    char *icon = NULL;
+    GdkPixbuf *pb = NULL;
+
+    icon = xfce_icon_theme_lookup (global_icon_theme, "xfce4-panel", 48);
+
+    if (icon)
+    {
+	pb = gdk_pixbuf_new_from_file (icon, NULL);
+
+	g_free (icon);
+    }
+
+    return pb;
 }
 
 GdkPixbuf *
@@ -228,29 +331,23 @@ get_scaled_pixbuf (GdkPixbuf * pb, int size)
 GdkPixbuf *
 get_themed_pixbuf (const char *name)
 {
+    char *icon = NULL;
     GdkPixbuf *pb = NULL;
-    gchar *p, *rootname = g_strdup(name);
 
-    if ((p=g_strrstr(rootname, "."))) 
+    icon = xfce_icon_theme_lookup (global_icon_theme, name, 48);
+
+    if (!icon)
     {
-	if (strlen(rootname) - (p-rootname) <= 5)
-	    *p = 0;
+	icon =
+	    xfce_icon_theme_lookup_category (global_icon_theme,
+					     XFCE_ICON_CATEGORY_UNKNOWN, 48);
     }
 
-    pb = xfce_themed_icon_load (rootname, 48);
-    g_free(rootname);
-
-    if (!pb)
+    if (icon)
     {
-	int size = settings.size;
+	pb = gdk_pixbuf_new_from_file (icon, NULL);
 
-	/* usually the pixbuf will be scaled afterwards, so we want to get a
-	 * decent size, even for a 'missing' icon ;-) */
-	settings.size = LARGE;
-	pb = get_pixbuf_by_id (UNKNOWN_ICON);
-	settings.size = size;
-	
-	g_warning ("Couldn't find icon: %s\n", name);
+	g_free (icon);
     }
 
     return pb;

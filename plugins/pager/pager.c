@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -164,8 +164,8 @@ arrange_pager (t_pager * pager)
     GList *li;
 
     if (pager->netk_pager)
-	gtk_widget_destroy(pager->netk_pager);
-    
+	gtk_widget_destroy (pager->netk_pager);
+
     pager->netk_pager = create_netk_pager (pager->screen);
     netk_pager_set_n_rows (NETK_PAGER (pager->netk_pager), pager->rows);
 
@@ -204,8 +204,8 @@ pager_new (NetkScreen * screen)
 
     pager->screen = screen;
 
-    pager->base = gtk_alignment_new (0.5, 0.5, 0, 0); 
-    gtk_widget_show (pager->base); 
+    pager->base = gtk_alignment_new (0.5, 0.5, 0, 0);
+    gtk_widget_show (pager->base);
 
     pager->rows = 1;
 
@@ -245,7 +245,7 @@ pager_free (Control * control)
 /* configuration */
 
 static void
-pager_read_config (Control *control, xmlNodePtr node)
+pager_read_config (Control * control, xmlNodePtr node)
 {
     xmlChar *value;
     int n, max;
@@ -254,7 +254,7 @@ pager_read_config (Control *control, xmlNodePtr node)
     value = xmlGetProp (node, (const xmlChar *) "rows");
 
     max = netk_screen_get_workspace_count (pager->screen);
-    
+
     if (value)
     {
 	n = strtol (value, NULL, 0);
@@ -269,7 +269,7 @@ pager_read_config (Control *control, xmlNodePtr node)
 }
 
 static void
-pager_write_config (Control *control, xmlNodePtr node)
+pager_write_config (Control * control, xmlNodePtr node)
 {
     char prop[3];
     t_pager *pager = control->data;
@@ -281,7 +281,7 @@ pager_write_config (Control *control, xmlNodePtr node)
 
 /* property dialog */
 static void
-rows_changed (GtkSpinButton *spin, t_pager *pager)
+rows_changed (GtkSpinButton * spin, t_pager * pager)
 {
     int rows = gtk_spin_button_get_value_as_int (spin);
 
@@ -294,8 +294,8 @@ rows_changed (GtkSpinButton *spin, t_pager *pager)
 }
 
 static void
-pager_create_options (Control *control, GtkContainer *container, 
-		      GtkWidget *close)
+pager_create_options (Control * control, GtkContainer * container,
+		      GtkWidget * close)
 {
     GtkWidget *hbox, *label, *spin;
     int max;
@@ -313,14 +313,15 @@ pager_create_options (Control *control, GtkContainer *container,
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     max = netk_screen_get_workspace_count (pager->screen);
-    
+
     spin = gtk_spin_button_new_with_range (1, max, 1);
     gtk_widget_show (spin);
     gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
 
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), pager->rows);
-    
-    g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed), pager);
+
+    g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed),
+		      pager);
 }
 
 /*  Switcher panel control

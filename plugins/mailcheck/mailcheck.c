@@ -1,6 +1,6 @@
-/*  mailcheck.c
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  - 2004 Add Maildir support Julien NOEL (dev@no-l.org)
  *
@@ -104,8 +104,8 @@ get_mail_pixbuf (void)
 {
     GdkPixbuf *pb;
 
-    pb = themed_pixbuf_from_name_list (mailcheck_icon_names, 
-	    			       icon_size [settings.size]);
+    pb = themed_pixbuf_from_name_list (mailcheck_icon_names,
+				       icon_size[settings.size]);
 
     if (G_UNLIKELY (!pb))
     {
@@ -117,7 +117,7 @@ get_mail_pixbuf (void)
 }
 
 static void
-reset_mailcheck_icons (t_mailcheck *mc)
+reset_mailcheck_icons (t_mailcheck * mc)
 {
     if (mc->newmail_pb)
 	g_object_unref (mc->newmail_pb);
@@ -133,9 +133,7 @@ reset_mailcheck_icons (t_mailcheck *mc)
     g_return_if_fail (mc->newmail_pb != NULL);
 
     mc->nomail_pb = gdk_pixbuf_copy (mc->newmail_pb);
-    gdk_pixbuf_saturate_and_pixelate (mc->nomail_pb,
-	    			      mc->nomail_pb, 
-				      0, TRUE);
+    gdk_pixbuf_saturate_and_pixelate (mc->nomail_pb, mc->nomail_pb, 0, TRUE);
 
     mc->oldmail_pb = mc->nomail_pb;
     g_object_ref (mc->oldmail_pb);
@@ -336,57 +334,58 @@ check_mail (t_mailcheck * mailcheck)
     }
     else
     {
-	if (stat (mailcheck->mbox, &s) < 0) 
+	if (stat (mailcheck->mbox, &s) < 0)
 	{
 	    mail = NO_MAIL;
 	}
-	else if (S_ISREG(s.st_mode))
+	else if (S_ISREG (s.st_mode))
 	{
-	    DBG("mbox format");
+	    DBG ("mbox format");
 
 	    if (!s.st_size)
 		mail = NO_MAIL;
- 	    else if (s.st_mtime <= s.st_atime)
+	    else if (s.st_mtime <= s.st_atime)
 		mail = OLD_MAIL;
- 	    else
+	    else
 		mail = NEW_MAIL;
 
- 	} 
-	else if (S_ISDIR (s.st_mode)) 
+	}
+	else if (S_ISDIR (s.st_mode))
 	{
 	    DIR *dr;
 	    struct dirent *de;
-	    char *c_list[] = {"tmp","cur","new"};
+	    char *c_list[] = { "tmp", "cur", "new" };
 	    char *c_tmp;
-	    int  i_tmp;
-	    
+	    int i_tmp;
+
 	    /* mailbox is a maildir */
-	    DBG("maildir format");
+	    DBG ("maildir format");
 
 	    mail = NO_MAIL;
 
 	    /* Verify the Maildir integrity */
-	    for (i_tmp = 0;  i_tmp < 3; i_tmp++) 
+	    for (i_tmp = 0; i_tmp < 3; i_tmp++)
 	    {
-		c_tmp = g_build_filename(mailcheck->mbox, c_list[i_tmp], NULL);
+		c_tmp =
+		    g_build_filename (mailcheck->mbox, c_list[i_tmp], NULL);
 
-		if (stat (c_tmp, &s) >= 0 && S_ISDIR(s.st_mode)) 
+		if (stat (c_tmp, &s) >= 0 && S_ISDIR (s.st_mode))
 		{
-		    dr = opendir(c_tmp);
-		    
-		    if (dr != NULL) 
+		    dr = opendir (c_tmp);
+
+		    if (dr != NULL)
 		    {
-			while ((de = readdir(dr))) 
+			while ((de = readdir (dr)))
 			{
-			    if (strlen(de->d_name) >= 1 && 
-				de->d_name[0] != '.') 
+			    if (strlen (de->d_name) >= 1 &&
+				de->d_name[0] != '.')
 			    {
 				if (i_tmp < 2)
 				{
 				    mail = OLD_MAIL;
 				    break;
 				}
-				else 
+				else
 				{
 				    mail = NEW_MAIL;
 				    break;
@@ -394,15 +393,15 @@ check_mail (t_mailcheck * mailcheck)
 			    }
 			}
 
-			closedir(dr);
+			closedir (dr);
 		    }
 		}
 	    }
 	}
     }
 
-    DBG("Done");
-    
+    DBG ("Done");
+
     if (mail != mailcheck->status)
     {
 	if (mail == NEW_MAIL && mailcheck->status != NEW_MAIL &&
@@ -518,7 +517,7 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 
 		g_free (value);
 	    }
-	    
+
 	    value = xmlGetProp (node, "sn");
 
 	    if (value)
@@ -594,7 +593,7 @@ mailcheck_new (void)
     mailcheck->timeout_id = 0;
 
     reset_mailcheck_icons (mailcheck);
-    
+
     mailcheck->newmail_command = g_strdup ("");
 
     mail = g_getenv ("MAIL");
@@ -649,7 +648,7 @@ mailcheck_set_theme (Control * control, const char *theme)
     t_mailcheck *mailcheck = (t_mailcheck *) control->data;
 
     reset_mailcheck_icons (mailcheck);
-    
+
     if (mailcheck->status == NO_MAIL)
     {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mailcheck->button),
@@ -698,10 +697,10 @@ mailcheck_apply_options (MailDialog * md)
     const char *tmp;
     t_mailcheck *mc = md->mc;
 
-    g_free (mc->command); 
+    g_free (mc->command);
 
     command_options_get_command (md->cmd_opts, &(mc->command), &(mc->term),
-	    			 &(mc->use_sn));
+				 &(mc->use_sn));
 
     tmp = gtk_entry_get_text (GTK_ENTRY (md->mbox_entry));
 
@@ -725,7 +724,7 @@ mailcheck_apply_options (MailDialog * md)
 
     mailcheck_set_tip (mc);
 
-    run_mailcheck (mc); 
+    run_mailcheck (mc);
 }
 
 /* mbox */
@@ -859,16 +858,15 @@ static void
 add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 {
     md->cmd_opts = create_command_options (sg);
-    
-    command_options_set_command (md->cmd_opts, md->mc->command, 
-	    			 md->mc->term, md->mc->use_sn);
+
+    command_options_set_command (md->cmd_opts, md->mc->command,
+				 md->mc->term, md->mc->use_sn);
 
     gtk_box_pack_start (GTK_BOX (vbox), md->cmd_opts->base, FALSE, TRUE, 0);
 
     gtk_tooltips_set_tip (tooltips, md->cmd_opts->command_entry,
 			  _("Command to run when the button "
-			    "on the panel is clicked"),
- 			  NULL);
+			    "on the panel is clicked"), NULL);
 }
 
 /* interval */

@@ -1,4 +1,4 @@
-/*  xfce4
+/*  $Id$
  *
  *  Copyright (c) 2002-2004 Jasper Huijsmans <jasper@xfce.org>
  *  Copyright (c) 2003 Benedikt Meurer <benedikt.meurer@xfce.org>
@@ -122,8 +122,8 @@ quit (gboolean force)
 	    logout_session (client_session);
 	    return;
 	}
-	else if (!xfce_confirm (_("Are you sure you want to exit?"), 
-		    		GTK_STOCK_QUIT, NULL))
+	else if (!xfce_confirm (_("Are you sure you want to exit?"),
+				GTK_STOCK_QUIT, NULL))
 	{
 	    return;
 	}
@@ -334,9 +334,8 @@ main (int argc, char **argv)
 		   " Version %s\n\n"
 		   " Part of the Xfce Desktop Environment\n"
 		   " http://www.xfce.org\n\n"
-		   " Licensed under the GNU GPL.\n\n"), 
-		 VERSION);
-	
+		   " Licensed under the GNU GPL.\n\n"), VERSION);
+
 	return 0;
     }
 
@@ -355,8 +354,8 @@ main (int argc, char **argv)
     }
 
     /* so clients are started on the correct screen */
-    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default()),
-                 TRUE);
+    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default ()),
+		 TRUE);
 #ifdef HAVE_SIGACTION
     act.sa_handler = sighandler;
     sigemptyset (&act.sa_mask);
@@ -380,7 +379,7 @@ main (int argc, char **argv)
 
     /* hack to prevent arrow buttons from being cropped */
     gtk_rc_parse_string (RC_STRING);
-    
+
     /* icon framework: names and id's */
     icons_init ();
 
@@ -394,20 +393,20 @@ main (int argc, char **argv)
     client_session->die = die;
 
     session_managed = session_init (client_session);
-    
+
 #if DEBUG
     if (!session_managed)
     {
-	g_message (_("%s: Successfully started without session management"), 
+	g_message (_("%s: Successfully started without session management"),
 		   PACKAGE);
     }
     else
     {
-	g_message (_("%s: Successfully started with session management"), 
+	g_message (_("%s: Successfully started with session management"),
 		   PACKAGE);
     }
 #endif
-    
+
     /* signal state */
     g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
 

@@ -1,6 +1,6 @@
-/*  settings.c
+/*  $Id$
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -63,13 +63,13 @@ check_disable_user_config (void)
     xfce_kiosk_free (kiosk);
 
     if (var != NULL)
-      {
-        g_warning ("Deprecated XFCE_DISABLE_USER_CONFIG environment variable "
-                   "found. Please use the new KIOSK mode instead.");
-      }
+    {
+	g_warning ("Deprecated XFCE_DISABLE_USER_CONFIG environment variable "
+		   "found. Please use the new KIOSK mode instead.");
+    }
 
     if (!result)
-      return TRUE;
+	return TRUE;
 
     return (var && !strequal (var, "0"));
 }
@@ -243,24 +243,24 @@ write_panel_config (void)
 	goto out;
     }
 
-    if (g_file_test (xfcerc, G_FILE_TEST_EXISTS) && unlink(xfcerc))
+    if (g_file_test (xfcerc, G_FILE_TEST_EXISTS) && unlink (xfcerc))
     {
 	g_critical ("Could not remove old xfce4rc");
 	goto out;
     }
 
-    if(link(tmprc, xfcerc))
+    if (link (tmprc, xfcerc))
     {
 	g_critical ("Could not link new xfce4rc");
 	goto out;
     }
 
-    if (unlink(tmprc))
+    if (unlink (tmprc))
     {
 	g_warning ("Could not remove temporary file xfce4rc.tmp");
     }
-  
-out:
+
+  out:
     g_free (tmprc);
     g_free (xfcerc);
     xmlFreeDoc (xmlconfig);

@@ -22,9 +22,9 @@
 
 #include <panel/global.h>
 
-G_BEGIN_DECLS
+G_BEGIN_DECLS 
 
-void add_control_dialog (Panel *panel, int position);
+void add_control_dialog (Panel * panel, int position);
 
 G_END_DECLS
 
