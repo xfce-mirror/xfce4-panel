@@ -33,6 +33,7 @@
 
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/dialogs.h>
+#include <libxfcegui4/xfce_framebox.h>
 
 #include "xfce_settings.h"
 #include "xfce_settings_plugin.h"
@@ -574,14 +575,14 @@ autohide_changed (GtkToggleButton * tb)
 }
 
 static void
-add_autohide_box (GtkContainer * frame)
+add_autohide_box (GtkWidget * frame)
 {
     GtkWidget *hbox, *label, *check;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
     gtk_widget_show (hbox);
-    gtk_container_add (frame, hbox);
+    xfce_framebox_add (XFCE_FRAMEBOX (frame), hbox);
 
     label = gtk_label_new (_("Autohide:"));
     gtk_widget_show (label);
@@ -658,14 +659,14 @@ run_xfce_settings_dialog (McsPlugin * mp)
     gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 
     /* Appearance */
-    frame = gtk_frame_new (_("Appearance"));
+    frame = xfce_framebox_new (_("Appearance"), TRUE);
     gtk_widget_show (frame);
     gtk_box_pack_start (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
 
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
     gtk_widget_show (vbox);
-    gtk_container_add (GTK_CONTAINER (frame), vbox);
+    xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
@@ -679,14 +680,14 @@ run_xfce_settings_dialog (McsPlugin * mp)
     gtk_box_pack_start (GTK_BOX (hbox), vbox2, FALSE, FALSE, 0);
 
     /* Position */
-    frame = gtk_frame_new (_("Position"));
+    frame = xfce_framebox_new (_("Position"), TRUE);
     gtk_widget_show (frame);
     gtk_box_pack_start (GTK_BOX (vbox2), frame, FALSE, FALSE, 0);
 
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
     gtk_widget_show (vbox);
-    gtk_container_add (GTK_CONTAINER (frame), vbox);
+    xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
@@ -695,11 +696,11 @@ run_xfce_settings_dialog (McsPlugin * mp)
     g_object_unref (sg);
 
     /* autohide */
-    frame = gtk_frame_new (_("Behaviour"));
+    frame = xfce_framebox_new (_("Behaviour"), TRUE);
     gtk_widget_show (frame);
     gtk_box_pack_start (GTK_BOX (vbox2), frame, TRUE, TRUE, 0);
 
-    add_autohide_box (GTK_CONTAINER (frame));
+    add_autohide_box (frame);
 
     gtk_widget_show (dialog);
 }

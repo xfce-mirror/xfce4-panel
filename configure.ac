@@ -39,7 +39,7 @@ BM_LIBX11_REQUIRE
 
 dnl Check for required packages
 BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [0.0.3])
-BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [0.0.17])
+BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [3.91.0])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 
 dnl Configure the mcs plugin
