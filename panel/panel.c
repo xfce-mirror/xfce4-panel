@@ -151,6 +151,8 @@ get_opacity_setting (void)
                     break;
                 }
             }
+
+            fclose (fp);
         }
         
         g_free (file);
@@ -169,6 +171,9 @@ set_opacity (Panel * p, gboolean translucent)
         
         initialized = TRUE;
     }
+
+    if (!transparency)
+        return;
     
     opacity = (translucent ? transparency : OPAQUE);
     gdk_error_trap_push ();
