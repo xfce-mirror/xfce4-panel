@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-07 14:40+0100\n"
+"POT-Creation-Date: 2005-03-08 16:53+0100\n"
 "PO-Revision-Date: 2005-03-02 12:05+0530\n"
 "Last-Translator: Ankit Patel <ankit@redhat.com>\n"
 "Language-Team: Gujarati <gu@li.org>\n"
@@ -20,93 +20,93 @@ msgstr ""
 "\n"
 "\n"
 
-#: ../panel/xfce_support.c:463
+#: panel/xfce_support.c:307
 msgid "Select file"
 msgstr "ફાઈલ પસંદ કરો"
 
-#: ../panel/settings.c:180
+#: panel/settings.c:268
 msgid "No data was found. The panel will be empty."
 msgstr "કોઈ માહિતી મળી નથી. પેનલ ખાલી હશે."
 
-#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1136
-#: ../settings/xftaskbar_plugin.c:393
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1136
+#: settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "જગ્યા:"
 
-#: ../panel/controls_dialog.c:155
+#: panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "વસ્તુ ગુણધર્મો"
 
-#: ../panel/controls_dialog.c:210 ../panel/controls.c:714
+#: panel/controls_dialog.c:210 panel/controls.c:714
 msgid "Removing the item will also remove its popup menu."
 msgstr "વસ્તુને દૂર કરવાનું તેનું પોપઅપ મેનુ પણ દૂર કરશે."
 
-#: ../panel/item_dialog.c:123
+#: panel/item_dialog.c:123
 msgid "Select command"
 msgstr "આદેશ પસંદ કરો"
 
-#: ../panel/item_dialog.c:260
+#: panel/item_dialog.c:260
 msgid "Command:"
 msgstr "આદેશ:"
 
-#: ../panel/item_dialog.c:306
+#: panel/item_dialog.c:306
 msgid "Run in _terminal"
 msgstr "ટર્મિનલમાં ચલાવો (_t)"
 
-#: ../panel/item_dialog.c:324
+#: panel/item_dialog.c:324
 msgid "Use startup _notification"
 msgstr "શરુઆતના સૂચનો વાપરો (_n)"
 
-#: ../panel/item_dialog.c:510
+#: panel/item_dialog.c:510
 msgid "Other Icon"
 msgstr "બીજું ચિહ્ન"
 
-#: ../panel/item_dialog.c:621
+#: panel/item_dialog.c:621
 msgid "Drag file onto this frame to change the icon"
 msgstr "ચિહ્નને બદલવા માટે આ ચોકઠામાં ફાઈલને ખેંચો"
 
-#: ../panel/item_dialog.c:933
+#: panel/item_dialog.c:933
 msgid "Caption:"
 msgstr "કેપ્શન:"
 
-#: ../panel/item_dialog.c:962
+#: panel/item_dialog.c:962
 msgid "Tooltip:"
 msgstr "સાધનમદદ:"
 
-#: ../panel/item_dialog.c:988
+#: panel/item_dialog.c:988
 msgid "Attach menu to launcher"
 msgstr "મેનુને લોન્ચરમાં જોડો"
 
-#: ../panel/item_dialog.c:1173
+#: panel/item_dialog.c:1173
 msgid "Change menu item"
 msgstr "મેનુ વસ્તુ બદલો"
 
 #. add buttons
-#: ../panel/item_dialog.c:1179 ../panel/controls.c:751
+#: panel/item_dialog.c:1179 panel/controls.c:751
 msgid "_Remove"
 msgstr "દૂર કરો (_R)"
 
-#: ../panel/item_dialog.c:1191
+#: panel/item_dialog.c:1191
 msgid "Launcher"
 msgstr "લોન્ચર"
 
-#: ../panel/item.c:618
+#: panel/item.c:619
 msgid "Click mouse button 3 to change item"
 msgstr "વસ્તુ બદલવા માટે માઉસ બટન ૩ ક્લિક કરો"
 
-#: ../panel/item.c:643
+#: panel/item.c:644
 msgid "Add launcher"
 msgstr "લોન્ચર ઉમેરો"
 
-#: ../panel/item.c:648
+#: panel/item.c:649
 msgid "Add new item"
 msgstr "નવી વસ્તુ ઉમેરો"
 
-#: ../panel/main.c:120
+#: panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "શું તમે ખરેખર બહાર નીકળવા માંગો છો?"
 
-#: ../panel/main.c:401
+#: panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -129,120 +129,122 @@ msgstr ""
 " GNU GPL હેઠળ લાઈસન્સ મળેલ છે.\n"
 "\n"
 
-#: ../panel/main.c:484
+#: panel/main.c:484
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: સત્ર વ્યવસ્થા વગર સફળતાપૂર્વક શરુ કરેલ છે"
 
-#: ../panel/main.c:489
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: સત્ર વ્યવસ્થા સાથે સફળતાપૂર્વક શરુ કરેલ છે"
 
-#: ../panel/controls.c:668
+#: panel/controls.c:668
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "પેનલ વસ્તુ \"%s\" બનાવી શક્યા નથી."
 
-#: ../panel/controls.c:746 ../panel/panel.c:714 ../iconbox/iconbox.c:618
+#: panel/controls.c:746 panel/panel.c:715 iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "ગુણધર્મો (_P)..."
 
-#: ../panel/controls.c:760 ../panel/panel.c:704
+#: panel/controls.c:760 panel/panel.c:705
 msgid "Add _new item"
 msgstr "નવી વસ્તુ ઉમેરો (_n)"
 
-#: ../panel/controls.c:1088
+#: panel/controls.c:1087
 msgid "This item has no configuration options"
 msgstr "આ વસ્તુ પાસે કોઈ રુપરેખાંકન વિકલ્પો નથી"
 
-#: ../panel/panel.c:695 ../panel/panel.c:1047
-#: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:392
+#: panel/panel.c:696 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:392
 msgid "Xfce Panel"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel.c:719
+#: panel/panel.c:720
 msgid "_About Xfce"
 msgstr "Xfce વિશે (_A)"
 
-#: ../panel/panel.c:724
+#: panel/panel.c:725
 msgid "_Help"
 msgstr "મદદ (_H)"
 
-#: ../panel/panel.c:733
+#: panel/panel.c:734
 msgid "_Lock screen"
 msgstr "સ્ક્રીનને તાળુ લગાવો (_L)"
 
-#: ../panel/panel.c:738
+#: panel/panel.c:739
 msgid "_Restart"
 msgstr "ફરીથી શરુ કરો (_R)"
 
-#: ../panel/panel.c:747 ../iconbox/iconbox.c:628
+#: panel/panel.c:748 iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "બહાર નીકળો (_x)"
 
-#: ../panel/icons.c:63
+#: panel/icons.c:63
 msgid "Default"
 msgstr "મૂળભુત"
 
-#: ../panel/icons.c:64
+#: panel/icons.c:64
 msgid "Editor"
 msgstr "સંપાદક"
 
-#: ../panel/icons.c:65
+#: panel/icons.c:65
 msgid "File management"
 msgstr "ફાઈલ વ્યવસ્થા"
 
-#: ../panel/icons.c:66
+#: panel/icons.c:66
 msgid "Utilities"
 msgstr "ઉપયોગિતાઓ"
 
-#: ../panel/icons.c:67
+#: panel/icons.c:67
 msgid "Games"
 msgstr "રમતો"
 
-#: ../panel/icons.c:68
+#: panel/icons.c:68
 msgid "Help browser"
 msgstr "મદદ શોધક"
 
-#: ../panel/icons.c:69
+#: panel/icons.c:69
 msgid "Multimedia"
 msgstr "મલ્ટીમિડીયા"
 
-#: ../panel/icons.c:70
+#: panel/icons.c:70
 msgid "Network"
 msgstr "નેટવર્ક"
 
-#: ../panel/icons.c:71
+#: panel/icons.c:71
 msgid "Graphics"
 msgstr "ગ્રાફિક્સ"
 
-#: ../panel/icons.c:72
+#: panel/icons.c:72
 msgid "Printer"
 msgstr "પ્રિન્ટર"
 
-#: ../panel/icons.c:73
+#: panel/icons.c:73
 msgid "Productivity"
 msgstr "ઉત્પાદકતા"
 
-#: ../panel/icons.c:74
+#: panel/icons.c:74
 msgid "Sound"
 msgstr "ધ્વનિ"
 
-#: ../panel/icons.c:75 ../config/contents.xml.in.h:11
-msgid "Terminal"
+#. Translation with context.
+#. * Translators only need to translate 'Terminal'
+#: panel/icons.c:77
+#, fuzzy
+msgid "icons|Terminal"
 msgstr "ટર્મિનલ"
 
-#: ../panel/mcs_client.c:168
+#: panel/mcs_client.c:168
 msgid "Settings manager not available"
 msgstr "સુયોજનો વ્યવસ્થાપક ઉપ્લબ્ધ નથી"
 
-#: ../taskbar/xftaskbar.c:513
+#: taskbar/xftaskbar.c:510
 msgid "There is already a system tray running on this screen"
 msgstr "ત્યાં પહેલાથી જ સિસ્ટમ ટ્રે સ્ક્રીન પર ચાલી રહેલી છે"
 
-#: ../taskbar/xftaskbar.c:519
+#: taskbar/xftaskbar.c:516
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "સિસ્ટમ ટ્રેની નોંધણી કરવા સમર્થ નથી: %s"
@@ -255,234 +257,234 @@ msgstr "સિસ્ટમ ટ્રેની નોંધણી કરવા �
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../taskbar/xftaskbar.c:619
+#: taskbar/xftaskbar.c:616
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../taskbar/xftaskbar.c:640
+#: taskbar/xftaskbar.c:637
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: ../taskbar/xftaskbar.c:913 ../settings/xftaskbar_plugin.c:696
-#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
+#: taskbar/xftaskbar.c:910 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr "સ્થિતિદર્શક પટ્ટી"
 
-#: ../taskbar/xftaskbar.c:1045
+#: taskbar/xftaskbar.c:1025
 msgid "Cannot create MCS client channel"
 msgstr "MCS ક્લાઈન્ટ ચેનલ બનાવી શકતા નથી"
 
-#: ../iconbox/iconbox.c:568
+#: iconbox/iconbox.c:568
 msgid "Xfce Iconbox"
 msgstr "Xfce ચિહ્નબોક્સ"
 
-#: ../iconbox/iconbox.c:576
+#: iconbox/iconbox.c:576
 msgid "Developer"
 msgstr "વિકાસકર્તા"
 
-#: ../iconbox/iconbox.c:612
+#: iconbox/iconbox.c:612
 msgid "_About"
 msgstr "વિશે (_A)"
 
-#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
-#: ../settings/xftaskbar_plugin.c:511
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "નાનુ"
 
-#: ../settings/xfce_settings_dialog.c:91
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "મધ્યમ"
 
-#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
-#: ../settings/xftaskbar_plugin.c:532
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "મોટુ"
 
-#: ../settings/xfce_settings_dialog.c:99
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "વિશાળ"
 
-#: ../settings/xfce_settings_dialog.c:175
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "આડુ"
 
-#: ../settings/xfce_settings_dialog.c:179
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "ઊભુ"
 
-#: ../settings/xfce_settings_dialog.c:221
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "ડાબુ"
 
-#: ../settings/xfce_settings_dialog.c:225
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "જમણુ"
 
-#: ../settings/xfce_settings_dialog.c:229
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "ઉપર"
 
-#: ../settings/xfce_settings_dialog.c:233
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "નીચે"
 
-#: ../settings/xfce_settings_dialog.c:268
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "પેનલ માપ:"
 
-#: ../settings/xfce_settings_dialog.c:284
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "પેનલની દિશા:"
 
-#: ../settings/xfce_settings_dialog.c:303
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "પોપઅપ સ્થિતિ:"
 
-#: ../settings/xfce_settings_dialog.c:339
+#: settings/xfce_settings_dialog.c:339
 msgid "Autohide:"
 msgstr "આપોઆપ છુપાવો:"
 
-#: ../settings/xfce_settings_dialog.c:409
+#: settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel Settings"
 msgstr "Xfce પેનલ સુયોજનો"
 
-#: ../settings/xfce_settings_dialog.c:419
+#: settings/xfce_settings_dialog.c:419
 msgid "Appearance"
 msgstr "દેખાવ"
 
 #. show only hidden
-#: ../settings/xfce_settings_dialog.c:434 ../settings/iconbox_plugin.c:685
+#: settings/xfce_settings_dialog.c:434 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "વર્તણૂક"
 
 #. position
-#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
 msgid "Position"
 msgstr "સ્થિતિ"
 
-#: ../settings/xftaskbar_plugin.c:399
+#: settings/xftaskbar_plugin.c:399
 msgid "_Top"
 msgstr "ઉપર (_T)"
 
-#: ../settings/xftaskbar_plugin.c:409
+#: settings/xftaskbar_plugin.c:409
 msgid "_Bottom"
 msgstr "નીચે (_B)"
 
-#: ../settings/xftaskbar_plugin.c:422
+#: settings/xftaskbar_plugin.c:422
 msgid "Alignment:"
 msgstr "ગોઠવણી:"
 
-#: ../settings/xftaskbar_plugin.c:429
+#: settings/xftaskbar_plugin.c:429
 msgid "_Left"
 msgstr "ડાબુ (_L)"
 
-#: ../settings/xftaskbar_plugin.c:439
+#: settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr "કેન્દ્ર (_C)"
 
-#: ../settings/xftaskbar_plugin.c:447
+#: settings/xftaskbar_plugin.c:447
 msgid "_Right"
 msgstr "જમણુ (_R)"
 
 #. size
-#: ../settings/xftaskbar_plugin.c:464
+#: settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr "માપ"
 
-#: ../settings/xftaskbar_plugin.c:474
+#: settings/xftaskbar_plugin.c:474
 msgid "Height:"
 msgstr "ઊંચાઈ :"
 
-#: ../settings/xftaskbar_plugin.c:505
+#: settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr "પહોળાઈ:"
 
-#: ../settings/xftaskbar_plugin.c:541
+#: settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr "બંધબેસતું સંકોચો (_S)"
 
 #. Autohide
-#: ../settings/xftaskbar_plugin.c:561
+#: settings/xftaskbar_plugin.c:561
 msgid "Autohide"
 msgstr "આપોઆપ સંતાડો"
 
-#: ../settings/xftaskbar_plugin.c:566
+#: settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr "સ્થિતિદર્શક પટ્ટી આપોઆપ સંતાડો (_h)"
 
 #. tasklist
-#: ../settings/xftaskbar_plugin.c:583
+#: settings/xftaskbar_plugin.c:583
 msgid "Tasklist"
 msgstr "બાબતયાદી"
 
-#: ../settings/xftaskbar_plugin.c:592
+#: settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr "ક્રિયાયાદી બતાવો"
 
-#: ../settings/xftaskbar_plugin.c:604
+#: settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr "બધી કામ કરવાની જગ્યાઓમાંથી બાબતો બતાવો (_a)"
 
-#: ../settings/xftaskbar_plugin.c:613
+#: settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
 msgstr "હંમેશા જૂથની બાબતો (_g)"
 
-#: ../settings/xftaskbar_plugin.c:621
+#: settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr "કાર્યક્રમ નામો બતાવો (_n)"
 
 #. pager
-#: ../settings/xftaskbar_plugin.c:629
+#: settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr "પેજર"
 
-#: ../settings/xftaskbar_plugin.c:634
+#: settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr "સ્થિતિદર્શક પટ્ટીમાં પેજર બતાવો (_p)"
 
 #. status area
-#: ../settings/xftaskbar_plugin.c:641
+#: settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr "સ્થિતિ વિસ્તાર"
 
-#: ../settings/xftaskbar_plugin.c:650
+#: settings/xftaskbar_plugin.c:650
 msgid "Show _notification icons"
 msgstr "સૂચક ચિહ્નો બતાવો (_n)"
 
-#: ../settings/xftaskbar_plugin.c:657
+#: settings/xftaskbar_plugin.c:657
 msgid "Show _time"
 msgstr "સમય બતાવો (_t)"
 
-#: ../settings/xftaskbar_plugin.c:718
+#: settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr "સામાન્ય"
 
-#: ../settings/xftaskbar_plugin.c:729
+#: settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr "કમ્પોનન્ટો"
 
-#: ../settings/iconbox_plugin.c:629
+#: settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr "ચિહ્ન માપ"
 
-#: ../settings/iconbox_plugin.c:691
+#: settings/iconbox_plugin.c:691
 msgid "_Show only minimized applications"
 msgstr "માત્ર ન્યૂનતમ કરેલ કાર્યક્રમો જ બતાવો (_S)"
 
-#: ../settings/iconbox_plugin.c:754
+#: settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr "પારદર્શકતા"
 
-#: ../settings/iconbox_plugin.c:762
+#: settings/iconbox_plugin.c:762
 msgid "None"
 msgstr "કંઈ નહિં"
 
-#: ../settings/iconbox_plugin.c:777
+#: settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr "સંપૂર્ણ"
 
-#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
-#: ../settings/iconbox_plugin.c:992
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
 msgid "Iconbox"
 msgstr "ચિહ્નબોક્સ"
 
@@ -494,67 +496,67 @@ msgstr "ચિહ્નબોક્સ"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../plugins/clock/clock.c:201
+#: plugins/clock/clock.c:191
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:428
+#: plugins/clock/clock.c:421
 msgid "Clock type:"
 msgstr "ઘડિયાળનો પ્રકાર:"
 
-#: ../plugins/clock/clock.c:441
+#: plugins/clock/clock.c:434
 msgid "Analog"
 msgstr "એનાલોગ"
 
-#: ../plugins/clock/clock.c:445
+#: plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "ડિજીટલ"
 
-#: ../plugins/clock/clock.c:449
+#: plugins/clock/clock.c:442
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:511
+#: plugins/clock/clock.c:504
 msgid "Hour mode:"
 msgstr "કલાકની સ્થિતિ:"
 
-#: ../plugins/clock/clock.c:518
+#: plugins/clock/clock.c:511
 msgid "24 hour"
 msgstr "24 hour"
 
-#: ../plugins/clock/clock.c:524
+#: plugins/clock/clock.c:517
 msgid "12 hour"
 msgstr "12 hour"
 
-#: ../plugins/clock/clock.c:530
+#: plugins/clock/clock.c:523
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: ../plugins/clock/clock.c:568
+#: plugins/clock/clock.c:561
 msgid "Show seconds:"
 msgstr "સેકન્ડો બતાવો:"
 
-#: ../plugins/clock/clock.c:681
+#: plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Xfce ઘડિયાળ"
 
-#: ../plugins/pager/pager.c:313
+#: plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "હરોળોની સંખ્યા:"
 
-#: ../plugins/pager/pager.c:315
+#: plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "સ્તંભોની સંખ્યા:"
 
-#: ../plugins/pager/pager.c:372
+#: plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "ગ્રાફિકલ પેજર"
 
-#: ../plugins/switcher/switcher.c:698
+#: plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "ડેસ્કટોપ બદલનાર"
 
-#: ../plugins/systembuttons/systembuttons.c:85
+#: plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -564,141 +566,157 @@ msgstr ""
 "\n"
 "વધુ જાણકારી માટે તમારા સિસ્ટમ સંચાલકને પૂછો"
 
-#: ../plugins/systembuttons/systembuttons.c:170
+#: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "સ્ક્રીનને તાળુ લગાવો"
 
-#: ../plugins/systembuttons/systembuttons.c:171
-#: ../plugins/systembuttons/systembuttons.c:519
+#: plugins/systembuttons/systembuttons.c:171
+#: plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "બહાર નીકળો"
 
-#: ../plugins/systembuttons/systembuttons.c:172
-#: ../plugins/systembuttons/systembuttons.c:520
+#: plugins/systembuttons/systembuttons.c:172
+#: plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "સુયોજન"
 
-#: ../plugins/systembuttons/systembuttons.c:173
-#: ../plugins/systembuttons/systembuttons.c:521
+#: plugins/systembuttons/systembuttons.c:173
+#: plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "જાણકારી"
 
 #. set names to use in option menus
-#: ../plugins/systembuttons/systembuttons.c:518
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "તાળુ લગાવો"
 
-#: ../plugins/systembuttons/systembuttons.c:550
+#: plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "બટન ૧:"
 
-#: ../plugins/systembuttons/systembuttons.c:565
+#: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "બટન ૨:"
 
 #. checkbox
-#: ../plugins/systembuttons/systembuttons.c:579
+#: plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "છુપાવો (_H)"
 
-#: ../plugins/systembuttons/systembuttons.c:617
+#: plugins/systembuttons/systembuttons.c:617
 msgid "System buttons"
 msgstr "સિસ્ટમ બટનો"
 
-#: ../plugins/separator/separator.c:65
+#: plugins/separator/separator.c:65
 msgid "Separator"
 msgstr "વિભાજક"
 
-#: ../plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "મેઈલ બોક્સ:"
 
-#: ../plugins/mailcheck/mailcheck.c:875
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "નવો મેઈલ આદેશ:"
 
-#: ../plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "જ્યારે નવા મેઈલ આવે ત્યારે ચલાવવાનો આદેશ"
 
-#: ../plugins/mailcheck/mailcheck.c:919
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "જ્યારે આ પેનલ પરનું બટન ક્લિક થાય ત્યારે ચલાવવાનો આદેશ"
 
-#: ../plugins/mailcheck/mailcheck.c:940
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "અંતરાલ (સેકન્ડ):"
 
-#: ../plugins/mailcheck/mailcheck.c:1017
+#: plugins/mailcheck/mailcheck.c:1017
 msgid "Mail checker"
 msgstr "મેઈલ ચકાસનાર"
 
-#: ../settings/xfce-panel-settings.desktop.in.h:1
+#: settings/xfce-panel-settings.desktop.in.h:1
 msgid "Panel Settings"
 msgstr "પેનલ સુયોજનો"
 
-#: ../settings/xfce-panel-settings.desktop.in.h:2
+#: settings/xfce-panel-settings.desktop.in.h:2
 msgid "Xfce 4 Panel Settings"
 msgstr "Xfce 4 પેનલ સુયોજનો"
 
-#: ../settings/xfce-iconbox-settings.desktop.in.h:1
+#: settings/xfce-iconbox-settings.desktop.in.h:1
 msgid "Iconbox Settings"
 msgstr "ચિહ્નબોક્સ સુયોજનો"
 
-#: ../settings/xfce-iconbox-settings.desktop.in.h:2
+#: settings/xfce-iconbox-settings.desktop.in.h:2
 msgid "Xfce 4 Iconbox Settings"
 msgstr "Xfce 4 ચિહ્નબોક્સ સુયોજનો"
 
-#: ../settings/xfce-taskbar-settings.desktop.in.h:1
+#: settings/xfce-taskbar-settings.desktop.in.h:1
 msgid "Taskbar Settings"
 msgstr "ક્રિયાપટ્ટી સુયોજનો"
 
-#: ../settings/xfce-taskbar-settings.desktop.in.h:2
+#: settings/xfce-taskbar-settings.desktop.in.h:2
 msgid "Xfce 4 Taskbar Settings"
 msgstr "Xfce 4 કાર્યપટ્ટી સુયોજનો"
 
-#: ../config/contents.xml.in.h:1
+#: config/contents.xml.in.h:1
+msgid "Appfinder"
+msgstr ""
+
+#: config/contents.xml.in.h:2
 msgid "Drag file to print"
 msgstr ""
 
-#: ../config/contents.xml.in.h:2
+#: config/contents.xml.in.h:3
 #, fuzzy
 msgid "File manager"
 msgstr "ફાઈલ વ્યવસ્થા"
 
-#: ../config/contents.xml.in.h:3
+#: config/contents.xml.in.h:4
 msgid "Find and run applications"
 msgstr ""
 
-#: ../config/contents.xml.in.h:4
+#: config/contents.xml.in.h:5
+msgid "Konqueror"
+msgstr ""
+
+#: config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
 msgstr ""
 
-#: ../config/contents.xml.in.h:5
+#: config/contents.xml.in.h:7
 msgid "Manual"
 msgstr ""
 
-#: ../config/contents.xml.in.h:6
+#: config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
 msgstr ""
 
-#: ../config/contents.xml.in.h:7
+#: config/contents.xml.in.h:9
 msgid "Music player"
 msgstr ""
 
-#: ../config/contents.xml.in.h:8
+#: config/contents.xml.in.h:10
+msgid "Nautilus"
+msgstr ""
+
+#: config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
 msgstr ""
 
-#: ../config/contents.xml.in.h:9
+#: config/contents.xml.in.h:12
 #, fuzzy
 msgid "Printer Management"
 msgstr "ફાઈલ વ્યવસ્થા"
 
-#: ../config/contents.xml.in.h:10
+#: config/contents.xml.in.h:13
 #, fuzzy
 msgid "Settings"
 msgstr "પેનલ સુયોજનો"
+
+#: config/contents.xml.in.h:14
+msgid "Terminal"
+msgstr "ટર્મિનલ"
 
 #~ msgid "Menu"
 #~ msgstr "મેનુ"

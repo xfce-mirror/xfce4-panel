@@ -60,7 +60,7 @@ icons_init (void)
 {
     int i = 0;
 
-    icon_names[0] = _("Default");
+    icon_names[0]   = _("Default");
     icon_names[++i] = _("Editor");
     icon_names[++i] = _("File management");
     icon_names[++i] = _("Utilities");
@@ -72,7 +72,9 @@ icons_init (void)
     icon_names[++i] = _("Printer");
     icon_names[++i] = _("Productivity");
     icon_names[++i] = _("Sound");
-    icon_names[++i] = _("Terminal");
+    /* Translation with context. 
+     * Translators only need to translate 'Terminal' */
+    icon_names[++i] = Q_("icons|Terminal");
 
     global_icon_theme = 
         xfce_icon_theme_get_for_screen (gdk_screen_get_default());
