@@ -173,7 +173,6 @@ get_control_class_info (ControlClass *cc)
     if (info_to_add && 
 	g_ascii_strcasecmp (info_to_add->class->name, cc->name) == 0)
     {
-	DBG ("class is from info_to_add");
 	info = info_to_add;
     }
     else
@@ -417,14 +416,12 @@ unload_modules (void)
     {
 	ControlClassInfo *info = li->data;
 
-	DBG ("info: %s (%d items)", info->caption, info->refcount);
-	
 	if (info->unloadable && 
 	    info->class->id == PLUGIN && 
 	    info->refcount == 0 && 
 	    info->class->gmodule != NULL)
 	{
-	    DBG ("info: unload %s", info->caption);
+	    DBG ("unload %s", info->caption);
 
 	    g_module_close (info->class->gmodule);
 	    info->class->gmodule = NULL;
@@ -526,8 +523,6 @@ control_class_unref (ControlClass *cclass)
 
     info = get_control_class_info (cclass);
 
-    DBG ("decrease refcount: %s (%d)", info->caption, info->refcount);
-    
     if (info && info->refcount > 0)
 	info->refcount--;
 }

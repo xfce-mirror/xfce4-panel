@@ -1,4 +1,4 @@
-/*  xfce4
+/*  $Id$
  *
  *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
@@ -15,11 +15,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-*/
-
-/*
-    04/11/2003 - Erik Touve - etouve@earthlink.net
-    Autohide code added.  Put Panel behind a struct.
 */
 
 #ifdef HAVE_CONFIG_H
@@ -43,25 +38,46 @@
 #include "settings.h"
 #include "mcs_client.h"
 
-#define HIDE_TIMEOUT   500
-#define UNHIDE_TIMEOUT 100
-#define HIDDEN_SIZE 3
+#define HIDE_TIMEOUT	500
+#define UNHIDE_TIMEOUT	100
+#define HIDDEN_SIZE	3
+#define HANDLE_WIDTH	10
+#define SNAP_WIDTH	25
 
-#define HANDLE_WIDTH 10
 
-#define SNAP_WIDTH 25
+/* typedefs *
+ * -------- */
 
-/* globals */
+struct _PanelPrivate
+{
+    Settings settings;
 
+    GdkScreen *screen;
+    int monitor;
+    GdkRectangle monitor_geometry;
+
+    int side;
+    XfcePositionState pos_state;
+    int offset;
+
+    GtkRequisition req;
+    
+    gboolean is_created;
+};
+
+
+/* exported globals *
+ * ---------------- */
+
+/* FIXME: get rid of these */
 Settings settings;
 Panel panel;
 
-/*  Panel dimensions 
- *  ----------------
- *  These sizes are exported to all other modules.
- *  Arrays are indexed by symbolic sizes TINY, SMALL, MEDIUM, LARGE
- *  (see global.h).
-*/
+/**
+ * These sizes are exported to all other modules.
+ * Arrays are indexed by symbolic sizes TINY, SMALL, MEDIUM, LARGE
+ * (see global.h).
+ **/
 int icon_size[] = { 24, 30, 45, 60 };
 
 int border_width = 4;
@@ -70,74 +86,48 @@ int top_height[] = { 14, 16, 18, 20 };
 
 int popup_icon_size[] = { 22, 26, 26, 32 };
 
-/* lock settings update when panel is not yet (re)build */
-static gboolean panel_created = FALSE;
 
-/* original screen sizes, used if screen is not the same
- * size as in previous session */
-static int old_screen_width = 0;
-static int old_screen_height = 0;
+/* static prototypes *
+ * ----------------- */
 
-/* screen properties */
-static Display *dpy = NULL;
-static Screen *xscreen = NULL;
-static int scr = 0;
-static int screen_width = 0;
-static int screen_height = 0;
+static void update_arrow_direction (Panel *p);
 
-/* (re)positioning */
-struct XineramaScreen
-{
-    int xmin, ymin;
-    int xmax, ymax;
-};
-
-static struct XineramaScreen xinerama_scr = { 0 };
-
-static GtkRequisition panel_req = { 0 };
-
-/* prototypes */
-
-static void update_arrow_direction (int x, int y);
 static void update_xinerama_coordinates (Panel * p, int x, int y);
-static void update_position (Panel * p, int *x, int *y);
-static void panel_reallocate (Panel * p, GtkRequisition * previous);
+
+static void restrict_position (Panel * p, int *x, int *y);
+
+static void panel_reallocate (Panel * p);
+
 static void panel_set_hidden (Panel * p, gboolean hide);
-static void init_settings ();
+
+static void init_settings (Panel *p);
 
 
 /**
  * update_arrow_direction
+ * @panel : a #Panel
  * 
- * adjust arrow direction based on which quarter of the screen we
+ * Adjust arrow direction based on which side of the screen we
  * are (Xinerama aware, of course ;) 
  **/
 static void
-update_arrow_direction (int x, int y)
+update_arrow_direction (Panel *p)
 {
-    int center;
     GtkArrowType type;
 
-    if (settings.orientation == HORIZONTAL)
+    switch (p->priv->side)
     {
-	center = xinerama_scr.ymin +
-	    (xinerama_scr.ymax - xinerama_scr.ymin) / 2 -
-	    panel_req.height / 2;
-
-	if (y > center)
-	    type = GTK_ARROW_UP;
-	else
-	    type = GTK_ARROW_DOWN;
-    }
-    else
-    {
-	center = xinerama_scr.xmin +
-	    (xinerama_scr.xmax - xinerama_scr.xmin) / 2 - panel_req.width / 2;
-
-	if (x > center)
-	    type = GTK_ARROW_LEFT;
-	else
+	case LEFT:
 	    type = GTK_ARROW_RIGHT;
+	    break;
+	case RIGHT:
+	    type = GTK_ARROW_LEFT;
+	    break;
+	case TOP:
+	    type = GTK_ARROW_DOWN;
+	    break;
+	default:
+	    type = GTK_ARROW_UP;
     }
 
     groups_set_arrow_direction (type);
@@ -146,158 +136,216 @@ update_arrow_direction (int x, int y)
 static void
 update_xinerama_coordinates (Panel * p, int x, int y)
 {
-    GdkRectangle rect;
-    gint monitor_nbr;
-    GdkScreen *gscrn;
+    int monitor;
+    
+    monitor = gdk_screen_get_monitor_at_point (p->priv->screen, x, y);
 
-    g_return_if_fail (dpy != NULL);
-        
-    gscrn = gtk_widget_get_screen (GTK_WIDGET (p->toplevel));
-    monitor_nbr = gdk_screen_get_monitor_at_point (gscrn, x, y);
-    gdk_screen_get_monitor_geometry (gscrn, monitor_nbr, &rect);
+    if (monitor != p->priv->monitor)
+    {
+	p->priv->monitor = monitor;
 
-    xinerama_scr.xmin = rect.x;
-    xinerama_scr.xmax = rect.x + rect.width;
-    xinerama_scr.ymin = rect.y;
-    xinerama_scr.ymax = rect.y + rect.height;
+	gdk_screen_get_monitor_geometry (p->priv->screen, p->priv->monitor, 
+					 &(p->priv->monitor_geometry));
 
-    DBG ("screen: %d,%d+%dx%d",
-	 xinerama_scr.xmin, xinerama_scr.ymin,
-	 xinerama_scr.xmax - xinerama_scr.xmin,
-	 xinerama_scr.ymax - xinerama_scr.ymin);
+	DBG ("\n  monitor: %d\n  geometry: %d,%d %dx%d", 
+	     p->priv->monitor,
+	     p->priv->monitor_geometry.x, 
+	     p->priv->monitor_geometry.y,
+	     p->priv->monitor_geometry.width, 
+	     p->priv->monitor_geometry.height);
+    }
 }
 
 /**
- * update_position
+ * restrict_position
  * 
  * - keep inside the screen
  * - update position status (see above)
  *   
- * Assumes panel_req and xinerama_scr are up-to-date.
+ * Assumes private panel info is up-to-date.
  **/
 static void
-update_position (Panel * p, int *x, int *y)
+restrict_position (Panel * p, int *x, int *y)
 {
     int xcenter, ycenter;
     
     if (!p || !p->toplevel)
 	return;
 
-    DBG ("desired position: %d,%d", *x, *y);
+    DBG ("\n  desired position: %d,%d\n  size: %d x %d", *x, *y,
+	 p->priv->req.width, p->priv->req.height);
 
-    xcenter = xinerama_scr.xmin +
-	(xinerama_scr.xmax - xinerama_scr.xmin) / 2 -
-	panel_req.width / 2;
+    xcenter = p->priv->monitor_geometry.x 
+	+ p->priv->monitor_geometry.width / 2
+	- p->priv->req.width / 2;
 
-    ycenter = xinerama_scr.ymin +
-	(xinerama_scr.ymax - xinerama_scr.ymin) / 2 -
-	panel_req.height / 2;
+    ycenter = p->priv->monitor_geometry.y 
+	+ p->priv->monitor_geometry.height / 2
+	- p->priv->req.height / 2;
 
-    if (settings.orientation == HORIZONTAL)
+    p->priv->pos_state = XFCE_POS_STATE_NONE;
+    p->priv->offset = 0;
+    
+    if (p->priv->settings.orientation == HORIZONTAL)
     {
 	if (*y < ycenter)
 	{
-	    *y = xinerama_scr.ymin;
+	    *y = p->priv->monitor_geometry.y;
+	    
+	    p->priv->side = TOP;
 	}
 	else
 	{
-	    *y = xinerama_scr.ymax - panel_req.height;
+	    *y = p->priv->monitor_geometry.y
+		+ p->priv->monitor_geometry.height
+		- p->priv->req.height;
+	    
+	    p->priv->side = BOTTOM;
 	}
 
-	/* only center if left side will be on the screen */
-	if (xcenter > xinerama_scr.xmin &&
-	    *x > xcenter - SNAP_WIDTH && *x < xcenter + SNAP_WIDTH)
+	/* center */
+	if (*x > xcenter - SNAP_WIDTH && *x < xcenter + SNAP_WIDTH)
 	{
 	    *x = xcenter;
+	    
+	    p->priv->pos_state = XFCE_POS_STATE_CENTER;
 	}
-	else if (*x + panel_req.width > xinerama_scr.xmax - SNAP_WIDTH)
+	/* right edge */
+	else if (*x + p->priv->req.width > p->priv->monitor_geometry.x
+		 + p->priv->monitor_geometry.width - SNAP_WIDTH)
 	{
-	    *x = xinerama_scr.xmax - panel_req.width;
+	    *x = p->priv->monitor_geometry.x 
+		+ p->priv->monitor_geometry.width 
+		- p->priv->req.width;
+	    
+	    p->priv->pos_state = XFCE_POS_STATE_END;
 	}
-	else if (*x < xinerama_scr.xmin + SNAP_WIDTH)
+	
+	/* left edge */
+	if (*x < p->priv->monitor_geometry.x + SNAP_WIDTH)
 	{
-	    *x = xinerama_scr.xmin;
+	    *x = p->priv->monitor_geometry.x;
+
+	    p->priv->pos_state = XFCE_POS_STATE_START;
 	}
+
+	p->priv->offset = *x - p->priv->monitor_geometry.x;
     }
     else
     {
 	if (*x < xcenter)
 	{
-	    *x = xinerama_scr.xmin;
+	    *x = p->priv->monitor_geometry.x;
+
+	    p->priv->side = LEFT;
 	}
 	else
 	{
-	    *x = xinerama_scr.xmax - panel_req.width;
+	    *x = p->priv->monitor_geometry.x
+		+ p->priv->monitor_geometry.width
+		- p->priv->req.width;
+
+	    p->priv->side = RIGHT;
 	}
 
-	/* only center if top side will be on the screen */
-	if (ycenter > xinerama_scr.ymin &&
-	    *y > ycenter - SNAP_WIDTH && *y < ycenter + SNAP_WIDTH)
+	/* center */
+	if (*y > ycenter - SNAP_WIDTH && *y < ycenter + SNAP_WIDTH)
 	{
 	    *y = ycenter;
+
+	    p->priv->pos_state = XFCE_POS_STATE_CENTER;
 	}
-	else if (*y + panel_req.height > xinerama_scr.ymax - SNAP_WIDTH)
+	/* bottom edge */
+	else if (*y + p->priv->req.height > p->priv->monitor_geometry.y
+		 + p->priv->monitor_geometry.height - SNAP_WIDTH)
 	{
-	    *y = xinerama_scr.ymax - panel_req.height;
+	    *y = p->priv->monitor_geometry.y
+		+ p->priv->monitor_geometry.height 
+		- p->priv->req.height;
+
+	    p->priv->pos_state = XFCE_POS_STATE_END;
 	}
-	else if (*y < xinerama_scr.ymin + SNAP_WIDTH)
+	
+	/* top edge */
+	if (*y < p->priv->monitor_geometry.y + SNAP_WIDTH)
 	{
-	    *y = xinerama_scr.ymin;
+	    *y = p->priv->monitor_geometry.y;
+
+	    p->priv->pos_state = XFCE_POS_STATE_START;
 	}
+
+	p->priv->offset = *y - p->priv->monitor_geometry.y;
     }
 
-    DBG ("new position: %d,%d", *x, *y);
+    DBG ("\n  new position: %d,%d\n  side: %s\n  state: %s", *x, *y,
+	 p->priv->side == LEFT ? "left" : p->priv->side == RIGHT ? "right" :
+	 	p->priv->side == TOP ? "top" : "bottom",
+	 p->priv->pos_state == XFCE_POS_STATE_CENTER ? "center" :
+	 	p->priv->pos_state == XFCE_POS_STATE_START ? "start" :
+		p->priv->pos_state == XFCE_POS_STATE_END ? "end" : "none");
 }
 
 static void
 panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
 {
     static int num_screens = 0;
+    int side;
 
     if (G_UNLIKELY(num_screens == 0))
     {
-	GdkScreen *gscrn;
-
-        gscrn = gtk_widget_get_screen (GTK_WIDGET (panel->toplevel));
-        num_screens = gdk_screen_get_n_monitors (gscrn);
+        num_screens = gdk_screen_get_n_monitors (panel->priv->screen);
     }
     
     if (G_UNLIKELY(num_screens > 1))
     {
 	int xcenter, ycenter;
 	
-	xcenter = *x + panel_req.width / 2;
-	ycenter = *y + panel_req.height / 2;
+	xcenter = *x + panel->priv->req.width / 2;
+	ycenter = *y + panel->priv->req.height / 2;
 
-	if (xcenter < xinerama_scr.xmin || ycenter < xinerama_scr.ymax
-	    || xcenter > xinerama_scr.xmax || ycenter > xinerama_scr.ymax)
-	{
-	    update_xinerama_coordinates (panel, xcenter, ycenter);
-	}
+	update_xinerama_coordinates (panel, xcenter, ycenter);
     }
     
-    update_position (panel, x, y);
+    side = panel->priv->side;
+    
+    restrict_position (panel, x, y);
+    
+    if (side != panel->priv->side)
+	update_arrow_direction (panel);
 }
 
 static void
-panel_reallocate (Panel * p, GtkRequisition * previous)
+panel_reallocate (Panel * p)
 {
-    GtkRequisition new;
-    int xold, yold, xnew, ynew;
+    int xnew, ynew;
 
-    gtk_widget_size_request (p->toplevel, &new);
+    DBG ("reallocate");
 
-    xold = p->position.x;
-    yold = p->position.y;
-
-    xnew = xold - (new.width - previous->width) / 2;
-    ynew = yold - (new.height - previous->height) / 2;
+    gtk_widget_size_request (p->toplevel, &(p->priv->req));
     
-    panel_req = new;
+    xnew = p->position.x;
+    ynew = p->position.y;
 
-    update_position (p, &xnew, &ynew);
+    /* keep centered */
+    if (p->priv->pos_state == XFCE_POS_STATE_CENTER)
+    {
+	if (p->priv->settings.orientation == HORIZONTAL)
+	{
+	    xnew = p->priv->monitor_geometry.x
+		+ p->priv->monitor_geometry.width / 2
+		- p->priv->req.width / 2;
+	}
+	else
+	{
+	    ynew = p->priv->monitor_geometry.y
+		+ p->priv->monitor_geometry.height / 2
+		- p->priv->req.height / 2;
+	}
+    }
+    
+    restrict_position (p, &xnew, &ynew);
 
-    if (xnew != xold || ynew != yold)
+    if (xnew != p->position.x || ynew != p->position.y)
     {
 	gtk_window_move (GTK_WINDOW (p->toplevel), xnew, ynew);
 
@@ -483,13 +531,13 @@ handler_move_end_cb (GtkWidget * h, Panel * p)
 
     DBG ("move end: %d,%d", p->position.x, p->position.y);
 
-    update_xinerama_coordinates (p, p->position.x + panel_req.width / 2,
-	    			 p->position.y + panel_req.height / 2);
+    update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
+	    			 p->position.y + p->priv->req.height / 2);
 
-    x = panel.position.x;
-    y = panel.position.y;
+    x = p->position.x;
+    y = p->position.y;
 
-    update_position (p, &x, &y);
+    restrict_position (p, &x, &y);
 
     if (x != p->position.x || y != p->position.y)
     {
@@ -497,18 +545,17 @@ handler_move_end_cb (GtkWidget * h, Panel * p)
 	p->position.x = x;
 	p->position.y = y;
 
-	/* Need to save position here... */
-	write_panel_config ();
+	update_arrow_direction (p);
     }
 
-    update_arrow_direction (x, y);
+    write_panel_config ();
 }
 
 static void
 handler_move_start (Panel *p)
 {
-    update_xinerama_coordinates (p, p->position.x + panel_req.width / 2,
-	    			 p->position.y + panel_req.height / 2);
+    update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
+	    			 p->position.y + p->priv->req.height / 2);
 }
 
 GtkWidget *
@@ -547,58 +594,67 @@ extern PanelPopup *open_popup;
 static void
 panel_set_hidden (Panel * p, gboolean hide)
 {
-    Position pos = p->position;
     int x, y, w, h;
 
-    x = pos.x;
-    y = pos.y;
-    w = panel_req.width;
-    h = panel_req.height;
+    /* set flag before moving when hiding */
+    if (hide)
+	p->hidden = hide;
+
+    x = p->position.x;
+    y = p->position.y;
+    w = p->priv->req.width;
+    h = p->priv->req.height;
 
     if (hide)
     {
 	/* Depending on orientation, resize */
-	if (settings.orientation == VERTICAL)
+	switch (p->priv->side)
 	{
-	    if (pos.x - xinerama_scr.xmin < xinerama_scr.xmax - pos.x)
-		x = xinerama_scr.xmin;
-	    else
-		x = xinerama_scr.xmax - HIDDEN_SIZE;
-
-	    w = HIDDEN_SIZE;
-	}
-	else
-	{
-	    if (pos.y - xinerama_scr.ymin < xinerama_scr.ymax - pos.y)
-		y = xinerama_scr.ymin;
-	    else
-		y = xinerama_scr.ymax - HIDDEN_SIZE;
-
-	    h = HIDDEN_SIZE;
+	    case LEFT:
+		x = p->priv->monitor_geometry.x;
+		w = HIDDEN_SIZE;
+		break;
+	    case RIGHT:
+		x = p->priv->monitor_geometry.x
+		    + p->priv->monitor_geometry.width 
+		    - HIDDEN_SIZE;
+		w = HIDDEN_SIZE;
+		break;
+	    case TOP:
+		y = p->priv->monitor_geometry.y;
+		h = HIDDEN_SIZE;
+		break;
+	    default:
+		y = p->priv->monitor_geometry.y
+		    + p->priv->monitor_geometry.height 
+		    - HIDDEN_SIZE;
+		h = HIDDEN_SIZE;
 	}
     }
-    else			/* unhide */
-    {
-	w = -1;
-	h = -1;
-    }
 
+    /* prevent annoying resizing / flickering */
+    g_object_freeze_notify (G_OBJECT (p->toplevel));
+    
     if (hide)
+    {
 	gtk_widget_hide (p->main_frame);
+	gtk_widget_set_size_request (p->toplevel, w, h);
+    }
     else
+    {
 	gtk_widget_show (p->main_frame);
+	gtk_widget_set_size_request (p->toplevel, -1, -1);
+    }
+    
+    DBG ("%s: (%d,%d) %dx%d", hide ? "hide" : "unhide", x, y, w, h);
 
-    p->hidden = hide;
+    gdk_window_move_resize (p->toplevel->window, x, y, w, h);
 
-    gtk_widget_set_size_request (p->toplevel, w, h);
+    g_object_thaw_notify (G_OBJECT (p->toplevel));
 
-    while (gtk_events_pending ())
-	gtk_main_iteration ();
-
-    DBG ("move: %d,%d\n", x, y);
-
-    /* gtk_window_present(GTK_WINDOW(p->toplevel)); */
-    gtk_window_move (GTK_WINDOW (p->toplevel), x, y);
+    /* set flag after moving when unhiding */
+    if (!hide)
+	p->hidden = hide;
 }
 
 gboolean
@@ -723,58 +779,48 @@ panel_allocate_cb (GtkWidget * window, GtkAllocation * allocation, Panel * p)
     if (p->hidden)
 	return;
 
-    if (panel_req.width != allocation->width ||
-	panel_req.height != allocation->height)
+    if (allocation->width != p->priv->req.width
+	|| allocation->height != p->priv->req.height)
     {
-	if (!(panel_req.width == 0 && panel_req.height == 0))
-	{
-	    GtkRequisition prev = panel_req;
-
-	    panel_req.width = allocation->width;
-	    panel_req.height = allocation->height;
-
-	    panel_reallocate (p, &prev);
-	}
-	else
-	{
-	    panel_req.width = allocation->width;
-	    panel_req.height = allocation->height;
-	}
+	panel_reallocate (p);
     }
 }
 
 static void
 screen_size_changed (GdkScreen * screen, Panel * p)
 {
-    double xalign, yalign;
-    int width, height, x, y;
+    gboolean hidden = p->priv->settings.autohide;
 
-    width = xinerama_scr.xmax - xinerama_scr.xmin;
-    height = xinerama_scr.ymax - xinerama_scr.ymin;
+    if (hidden)
+	panel_set_hidden (p, FALSE);
+    
+    gdk_screen_get_monitor_geometry (screen, p->priv->monitor,
+	    			     &(p->priv->monitor_geometry));
+    
+    /* keep centered */
+    if (p->priv->pos_state == XFCE_POS_STATE_CENTER)
+    {
+	if (p->priv->settings.orientation == HORIZONTAL)
+	{
+	    p->position.x = p->priv->monitor_geometry.x
+		+ p->priv->monitor_geometry.width / 2
+		- p->priv->req.width;
+	}
+	else
+	{
+	    p->position.y = p->priv->monitor_geometry.y
+		+ p->priv->monitor_geometry.height / 2
+		- p->priv->req.height;
+	}
+    }
+    
+    restrict_position (p, &p->position.x, &p->position.y);
 
-    xalign = (double) p->position.x / (width - panel_req.width);
-    yalign = (double) p->position.y / (height - panel_req.height);
+    gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
 
-    DBG ("relative position: %.2f x %.2f", xalign, yalign);
-
-    update_xinerama_coordinates (p, p->position.x + panel_req.width / 2,
-	    			 p->position.y + panel_req.height / 2);
-
-    width = xinerama_scr.xmax - xinerama_scr.xmin;
-    height = xinerama_scr.ymax - xinerama_scr.ymin;
-
-    DBG ("new screen size: %dx%d", width, height);
-
-    x = rint (xalign * (width - panel_req.width));
-    y = rint (yalign * (height - panel_req.height));
-
-    update_position (p, &x, &y);
-
-    gtk_window_move (GTK_WINDOW (p->toplevel), x, y);
-
-    p->position.x = x;
-    p->position.y = y;
-
+    if (hidden)
+	panel_set_hidden (p, TRUE);
+    
     write_panel_config ();
 }
 
@@ -799,6 +845,8 @@ create_panel_window (Panel * p)
 
     g_signal_connect (w, "delete-event", G_CALLBACK (panel_delete_cb), p);
 
+    g_object_set_data (G_OBJECT (w), "panel", p);
+    
     return w;
 }
 
@@ -876,7 +924,16 @@ panel_cleanup (void)
 static gboolean
 connect_auto_resize (Panel *p)
 {
-    gtk_widget_size_request (p->toplevel, &panel_req);
+    /* Certain plugins change size after the panel is shown,
+     * e.g. the pager, so here we re-evaluate size and position. */
+    gtk_widget_size_request (p->toplevel, &p->priv->req);
+
+    restrict_position (p, &(p->position.x), &(p->position.y));
+    gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
+    
+    if (p->priv->settings.autohide)
+	panel_set_autohide (TRUE);
+
     g_signal_connect (p->toplevel, "size-allocate", 
 	    	      G_CALLBACK (panel_allocate_cb), p);
     return FALSE;
@@ -885,98 +942,65 @@ connect_auto_resize (Panel *p)
 void
 create_panel (void)
 {
-    static gboolean need_init = TRUE;
-    int hidden;
+    Panel *p;
 
-    /* necessary for initial settings to do the right thing */
-    panel_created = FALSE;
+    /* FIXME: get rid of global panel variable */
+    p = &panel;
+    
+    p->toplevel = NULL;
 
-    if (need_init)
-    {
-	/* set for later use */
-	/* TODO: for gtk 2.2 we could use gtk_widget_get_display() et al. */
-	dpy = gdk_display;
-	scr = DefaultScreen (dpy);
-	xscreen = DefaultScreenOfDisplay (dpy);
-	screen_width = gdk_screen_width ();
-	screen_height = gdk_screen_height ();
+    p->position.x = -1;
+    p->position.y = -1;
 
-	panel.toplevel = NULL;
+    p->hidden = FALSE;
+    p->hide_timeout = 0;
+    p->unhide_timeout = 0;
 
-	panel.position.x = -1;
-	panel.position.y = -1;
+    p->priv = g_new0 (PanelPrivate, 1);
 
-	panel.hidden = FALSE;
-	panel.hide_timeout = 0;
-	panel.unhide_timeout = 0;
+    /* fill in the 'settings' structure */
+    init_settings (p);
+    get_global_prefs ();
 
-	/* fill in the 'settings' structure */
-	init_settings ();
-	get_global_prefs ();
+    /* If there is a settings manager it takes precedence */
+    mcs_watch_xfce_channel ();
 
-	/* If there is a settings manager it takes precedence */
-	mcs_watch_xfce_channel ();
-
-	need_init = FALSE;
-    }
-
-    /* unhide panel initially */
-    hidden = settings.autohide;
-    settings.autohide = FALSE;
+    /* backwards compat */
+    p->priv->settings = settings;
 
     /* panel framework */
-    create_panel_framework (&panel);
+    create_panel_framework (p);
 
-    groups_init (GTK_BOX (panel.group_box));
+    p->priv->screen = gtk_widget_get_screen (p->toplevel);
+    p->priv->monitor = -1;
+    update_xinerama_coordinates (p, p->position.x, p->position.y);    
+
+    groups_init (GTK_BOX (p->group_box));
 
     /* read and apply configuration 
      * This function creates the panel items and popup menus */
     get_panel_config ();
 
-    gtk_widget_size_request (panel.toplevel, &panel_req);
+    gtk_widget_size_request (p->toplevel, &p->priv->req);
 
-    if (old_screen_width > 0)
-    {
-	double xscale, yscale;
-
-	xscale = (double) panel.position.x / 
-	    (double) (old_screen_width - panel_req.width);
-	
-	yscale = (double) panel.position.y / 
-	    (double) (old_screen_height - panel_req.height);
-	
-	panel.position.x = rint (xscale * (screen_width - panel_req.width));
-	panel.position.y = rint (yscale * (screen_height - panel_req.height));
-
-	old_screen_width = old_screen_height = 0;
-    }
-	
-    update_xinerama_coordinates (&panel, 
-	    			 panel.position.x + panel_req.width / 2,
-	    			 panel.position.y + panel_req.height / 2);
+    update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
+	    			 p->position.y + p->priv->req.height / 2);
     
-    panel_created = TRUE;
+    p->priv->is_created = TRUE;
 
-    panel_set_position ();
+    restrict_position (p, &(p->position.x), &(p->position.y));
+    gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
     
-    gtk_widget_show_now (panel.toplevel);
-    set_window_layer (panel.toplevel, settings.layer);
-    set_window_skip (panel.toplevel);
+    gtk_widget_show_now (p->toplevel);
+    set_window_layer (p->toplevel, p->priv->settings.layer);
+    set_window_skip (p->toplevel);
 
-    /* this must be before set_autohide() and after set_position()
-     * otherwise the initial position will be messed up */
-
-    if (hidden)
-	panel_set_autohide (TRUE);
-
-#if GTK_CHECK_VERSION(2,2,0)
-    g_signal_connect (G_OBJECT (gdk_screen_get_default ()), "size-changed",
-		      G_CALLBACK (screen_size_changed), &panel);
-#endif
+    g_signal_connect (p->priv->screen, "size-changed",
+		      G_CALLBACK (screen_size_changed), p);
 
     /* delay automatic resizing, so that plugins (e.g. pager) may first
      * get their full size */
-    g_idle_add ((GSourceFunc) connect_auto_resize, &panel);
+    g_idle_add ((GSourceFunc) connect_auto_resize, p);
 }
 
 /*  Panel settings
@@ -988,9 +1012,12 @@ panel_set_orientation (int orientation)
     gboolean hidden;
     int pos;
 
-    settings.orientation = orientation;
+    panel.priv->settings.orientation = orientation;
 
-    if (!panel_created)
+    /* backwards compat */
+    settings = panel.priv->settings;
+    
+    if (!panel.priv->is_created)
 	return;
 
     hide_current_popup_menu ();
@@ -1038,18 +1065,19 @@ panel_set_orientation (int orientation)
 
     /* approximate reset panel requisition to prevent 'size-allocate' 
      * handler from wrongly adjusting the position */
-    panel_req.width = panel_req.height = 0;
+    panel.priv->req.width = panel.priv->req.height = 0;
 
     /* TODO: find out why position doesn't get properly set in 
      * set_size function */
     panel.position.x = panel.position.y = -1;
     panel_set_size (settings.size);
 
-    gtk_widget_size_request (panel.toplevel, &panel_req);
+    gtk_widget_size_request (panel.toplevel, &panel.priv->req);
+    
     if (orientation == HORIZONTAL)
 	panel_center (BOTTOM);
     else
-	panel_center (LEFT);
+	panel_center (RIGHT);
 
     gtk_widget_show_now (panel.toplevel);
     set_window_layer (panel.toplevel, settings.layer);
@@ -1067,9 +1095,12 @@ panel_set_orientation (int orientation)
 void
 panel_set_layer (int layer)
 {
-    settings.layer = layer;
+    panel.priv->settings.layer = layer;
 
-    if (!panel_created)
+    /* backwards compat */
+    settings = panel.priv->settings;
+    
+    if (!panel.priv->is_created)
 	return;
 
     set_window_layer (panel.toplevel, layer);
@@ -1081,9 +1112,12 @@ panel_set_layer (int layer)
 void
 panel_set_size (int size)
 {
-    settings.size = size;
+    panel.priv->settings.size = size;
 
-    if (!panel_created)
+    /* backwards compat */
+    settings = panel.priv->settings;
+    
+    if (!panel.priv->is_created)
 	return;
 
     hide_current_popup_menu ();
@@ -1096,15 +1130,18 @@ panel_set_size (int size)
 void
 panel_set_popup_position (int position)
 {
-    settings.popup_position = position;
+    panel.priv->settings.popup_position = position;
 
-    if (!panel_created)
+    /* backwards compat */
+    settings = panel.priv->settings;
+    
+    if (!panel.priv->is_created)
 	return;
 
     hide_current_popup_menu ();
 
     groups_set_popup_position (position);
-    update_arrow_direction (panel.position.x, panel.position.y);
+    update_arrow_direction (&panel);
 
     /* this is necessary to get the right proportions */
     panel_set_size (settings.size);
@@ -1113,16 +1150,19 @@ panel_set_popup_position (int position)
 void
 panel_set_theme (const char *theme)
 {
-    g_free (settings.theme);
-    settings.theme = g_strdup (theme);
-	xfce_set_icon_theme(theme);
+    g_free (panel.priv->settings.theme);
+    panel.priv->settings.theme = g_strdup (theme);
+    xfce_set_icon_theme(theme);
 
+    /* backwards compat */
+    settings = panel.priv->settings;
+    
 #if GTK_CHECK_VERSION(2, 4, 0)
     gtk_settings_set_string_property (gtk_settings_get_default (),
     		"gtk-icon-theme-name", theme, "panel.c:1108");
 #endif
 
-    if (!panel_created)
+    if (!panel.priv->is_created)
 	return;
 
     groups_set_theme (theme);
@@ -1140,38 +1180,44 @@ panel_set_settings (void)
 void
 panel_center (int side)
 {
-    int w, h;
-    DesktopMargins margins;
-
-    w = screen_width;
-    h = screen_height;
-
-    netk_get_desktop_margins (xscreen, &margins);
-
+    panel.priv->side = side;
+    
     switch (side)
     {
 	case LEFT:
-	    panel.position.x = margins.left;
-	    panel.position.y = h / 2 - panel_req.height / 2;
+	    panel.position.x = panel.priv->monitor_geometry.x;
+	    panel.position.y = panel.priv->monitor_geometry.y
+		+ panel.priv->monitor_geometry.height / 2 
+		- panel.priv->req.height / 2;
 	    break;
 	case RIGHT:
-	    panel.position.x = w - panel_req.width - margins.right;
-	    panel.position.y = h / 2 - panel_req.height / 2;
+	    panel.position.x = panel.priv->monitor_geometry.x
+		+ panel.priv->monitor_geometry.width 
+		- panel.priv->req.width;
+	    panel.position.y = panel.priv->monitor_geometry.y
+		+ panel.priv->monitor_geometry.height / 2 
+		- panel.priv->req.height / 2;
 	    break;
 	case TOP:
-	    panel.position.x = w / 2 - panel_req.width / 2;
-	    panel.position.y = margins.top;
+	    panel.position.x = panel.priv->monitor_geometry.x
+		+ panel.priv->monitor_geometry.width / 2 
+		- panel.priv->req.width / 2;
+	    panel.position.y = panel.priv->monitor_geometry.y;
 	    break;
 	default:
-	    panel.position.x = w / 2 - panel_req.width / 2;
-	    panel.position.y = h - panel_req.height - margins.bottom;
+	    panel.position.x = panel.priv->monitor_geometry.x
+		+ panel.priv->monitor_geometry.width / 2 
+		- panel.priv->req.width / 2;
+	    panel.position.y = panel.priv->monitor_geometry.y
+		+ panel.priv->monitor_geometry.height 
+		- panel.priv->req.height;
     }
 
-    if (panel.position.x < 0)
-	panel.position.x = 0;
+    if (panel.position.x < panel.priv->monitor_geometry.x)
+	panel.position.x = panel.priv->monitor_geometry.x;
 
-    if (panel.position.y < 0)
-	panel.position.y = 0;
+    if (panel.position.y < panel.priv->monitor_geometry.y)
+	panel.position.y = panel.priv->monitor_geometry.y;
 
     panel_set_position ();
 }
@@ -1181,7 +1227,7 @@ panel_set_position (void)
 {
     gboolean hidden = settings.autohide;
 
-    if (!panel_created)
+    if (!panel.priv->is_created)
 	return;
 
     if (hidden)
@@ -1191,18 +1237,18 @@ panel_set_position (void)
 	panel_set_autohide (FALSE);
     }
 
-    gtk_widget_size_request (panel.toplevel, &panel_req);
+    gtk_widget_size_request (panel.toplevel, &panel.priv->req);
 
     if (panel.position.x == -1 && panel.position.y == -1)
     {
 	if (settings.orientation == HORIZONTAL)
 	    panel_center (BOTTOM);
 	else
-	    panel_center (LEFT);
+	    panel_center (RIGHT);
     }
     else
     {
-	update_position (&panel, &panel.position.x, &panel.position.y);
+	restrict_position (&panel, &panel.position.x, &panel.position.y);
 
 	DBG ("move: %d,%d", panel.position.x, panel.position.y);
 
@@ -1212,7 +1258,7 @@ panel_set_position (void)
 	/* Need to save position here... */
 	write_panel_config ();
 
-	update_arrow_direction (panel.position.x, panel.position.y);
+	update_arrow_direction (&panel);
     }
 
     if (hidden)
@@ -1222,9 +1268,12 @@ panel_set_position (void)
 void
 panel_set_autohide (gboolean hide)
 {
-    settings.autohide = hide;
+    panel.priv->settings.autohide = hide;
 
-    if (!panel_created)
+    /* backwards compat */
+    settings = panel.priv->settings;
+    
+    if (!panel.priv->is_created)
 	return;
 
     if (hide)
@@ -1245,19 +1294,20 @@ panel_set_autohide (gboolean hide)
  *  ------------------
 */
 static void
-init_settings (void)
+init_settings (Panel *p)
 {
-    settings.orientation = HORIZONTAL;
-    settings.layer = ABOVE;
+    p->priv->settings.orientation = HORIZONTAL;
+    p->priv->settings.layer = ABOVE;
 
-    settings.size = SMALL;
-    settings.popup_position = RIGHT;
+    p->priv->settings.size = SMALL;
+    p->priv->settings.popup_position = RIGHT;
 
-    settings.autohide = FALSE;
+    p->priv->settings.autohide = FALSE;
 
-    settings.theme = NULL;
-
-    settings.num_groups = 9;
+    p->priv->settings.theme = NULL;
+    
+    /* backwards compat */
+    settings = p->priv->settings;
 }
 
 void
@@ -1272,7 +1322,9 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	settings.orientation = (int) strtol (value, NULL, 0);
+	n = (int) strtol (value, NULL, 0);
+	
+	settings.orientation = (n == VERTICAL) ? VERTICAL : HORIZONTAL;
 	g_free (value);
     }
 
@@ -1292,7 +1344,11 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	settings.size = (int) strtol (value, NULL, 0);
+	n = (int) strtol (value, NULL, 0);
+
+	if (n >= TINY && n <= LARGE)
+	    settings.size = n;
+	
 	g_free (value);
     }
 
@@ -1300,48 +1356,26 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
-	settings.popup_position = (int) strtol (value, NULL, 0);
+	n = (int) strtol (value, NULL, 0);
+	
+	if (n >= LEFT && n <= BOTTOM)
+	    settings.popup_position = n;
+	
 	g_free (value);
     }
 
     value = xmlGetProp (node, (const xmlChar *) "icontheme");
 
     if (value)
+    {
 	settings.theme = g_strdup (value);
 
-    g_free (value);
-
-    value = xmlGetProp (node, (const xmlChar *) "groups");
-
-    if (value)
-    {
-	settings.num_groups = (int) strtol (value, NULL, 0);
 	g_free (value);
-    }
-    else
-    {
-	value = xmlGetProp (node, (const xmlChar *) "left");
-
-	if (value)
-	{
-	    settings.num_groups = (int) strtol (value, NULL, 0);
-	    g_free (value);
-
-	    value = xmlGetProp (node, (const xmlChar *) "right");
-
-	    if (value)
-	    {
-		settings.num_groups += (int) strtol (value, NULL, 0);
-		g_free (value);
-	    }
-	}
     }
 
     /* child nodes */
     for (child = node->children; child; child = child->next)
     {
-	int w, h;
-
 	if (xmlStrEqual (child->name, (const xmlChar *) "Position"))
 	{
 	    value = xmlGetProp (child, (const xmlChar *) "x");
@@ -1357,39 +1391,8 @@ panel_parse_xml (xmlNodePtr node)
 		panel.position.y = (int) strtol (value, NULL, 0);
 
 	    g_free (value);
-
-	    if (panel.position.x < 0 || panel.position.y < 0)
-		break;
-
-	    value = xmlGetProp (child, (const xmlChar *) "screenwidth");
-
-	    if (value)
-		w = (int) strtol (value, NULL, 0);
-	    else
-		break;
-
-	    value = xmlGetProp (child, (const xmlChar *) "screenheight");
-
-	    if (value)
-		h = (int) strtol (value, NULL, 0);
-	    else
-		break;
-
-	    /* this doesn't actually work completely, we need to
-	     * save the panel width as well to do it right */
-	    if (w != screen_width || h != screen_height)
-	    {
-		old_screen_width = w;
-		old_screen_height = h;
-	    }
 	}
     }
-
-    /* check the values */
-    if (settings.orientation < HORIZONTAL || settings.orientation > VERTICAL)
-	settings.orientation = HORIZONTAL;
-    if (settings.size < TINY || settings.size > LARGE)
-	settings.size = SMALL;
 }
 
 void
@@ -1416,9 +1419,6 @@ panel_write_xml (xmlNodePtr root)
     if (settings.theme)
 	xmlSetProp (node, "icontheme", settings.theme);
 
-    snprintf (value, 3, "%d", settings.num_groups);
-    xmlSetProp (node, "groups", value);
-
     child = xmlNewTextChild (node, NULL, "Position", NULL);
 
     snprintf (value, 5, "%d", panel.position.x);
@@ -1426,12 +1426,4 @@ panel_write_xml (xmlNodePtr root)
 
     snprintf (value, 5, "%d", panel.position.y);
     xmlSetProp (child, "y", value);
-
-    /* save screen width and hide, so we can use a relative position
-     * the user logs in on different computers */
-    snprintf (value, 5, "%d", screen_width);
-    xmlSetProp (child, "screenwidth", value);
-
-    snprintf (value, 5, "%d", screen_height);
-    xmlSetProp (child, "screenheight", value);
 }

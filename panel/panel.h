@@ -1,6 +1,6 @@
-/*  xfce4
+/*  $Id$
  *
- *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,10 +21,19 @@
 #define __XFCE_PANEL_H
 
 #include <libxml/tree.h>
-
 #include <panel/global.h>
 
-/* Panel */
+typedef struct _PanelPrivate PanelPrivate;
+
+typedef enum
+{
+    XFCE_POS_STATE_NONE,
+    XFCE_POS_STATE_CENTER,
+    XFCE_POS_STATE_START,
+    XFCE_POS_STATE_END
+}
+XfcePositionState;
+
 struct _Position
 {
     int x, y;
@@ -37,12 +46,15 @@ struct _Panel
     int unhide_timeout;
 
     Position position;
+    
     GtkWidget *toplevel;
 
     GtkWidget *main_frame;
     GtkWidget *panel_box;
     GtkWidget *handles[2];
     GtkWidget *group_box;
+
+    PanelPrivate *priv;
 };
 
 /* panel functions */
