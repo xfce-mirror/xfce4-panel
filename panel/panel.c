@@ -910,7 +910,6 @@ create_panel_window (Panel * p)
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);
 
-    gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DOCK);
     gtk_window_set_skip_taskbar_hint (window, TRUE);
     gtk_window_set_skip_pager_hint (window, TRUE);
 
@@ -1068,9 +1067,9 @@ create_panel (void)
     restrict_position (p, &(p->position.x), &(p->position.y));
     gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
     
+    panel_set_layer (p->priv->settings.layer);
+
     gtk_widget_show_now (p->toplevel);
-/*    set_window_layer (p->toplevel, p->priv->settings.layer); 
-    set_window_skip (p->toplevel);*/
 
     g_signal_connect (p->priv->screen, "size-changed",
 		      G_CALLBACK (screen_size_changed), p);
@@ -1157,8 +1156,6 @@ panel_set_orientation (int orientation)
 	panel_center (RIGHT);
 
     gtk_widget_show_now (panel.toplevel);
-    set_window_layer (panel.toplevel, settings.layer);
-    set_window_skip (panel.toplevel);
 
     /* FIXME: the window doesn't always get moved properly by gtk
      * when hidden. */
@@ -1171,6 +1168,10 @@ panel_set_orientation (int orientation)
     update_partial_struts (&panel, panel.position.x, panel.position.y);
 }
 
+/* We no longer use layers, but make the panel a docktype window or not.
+ *
+ * For historical reasons we set the dock type hint if the layer is 0.
+ */
 void
 panel_set_layer (int layer)
 {
@@ -1179,13 +1180,35 @@ panel_set_layer (int layer)
     /* backwards compat */
     settings = panel.priv->settings;
     
-    if (!panel.priv->is_created)
-	return;
+    if (panel.priv->is_created)
+    {
+	gboolean visible = GTK_WIDGET_VISIBLE (panel.toplevel);
 
-    set_window_layer (panel.toplevel, layer);
+	if (visible)
+	{
+	    gtk_widget_hide (panel.toplevel);
+	    gtk_widget_unrealize (panel.toplevel);
+	}
+	
+	gtk_window_set_type_hint (GTK_WINDOW (panel.toplevel), 
+				  layer == 0 ? GDK_WINDOW_TYPE_HINT_DOCK 
+				             : GDK_WINDOW_TYPE_HINT_NORMAL);
 
-    if (layer == ABOVE)
-	gtk_window_present (GTK_WINDOW (panel.toplevel));
+	/* position and properties are lost by unrealizing */
+	gtk_window_move (GTK_WINDOW (panel.toplevel), 
+			 panel.position.x, panel.position.y);
+	gtk_window_set_skip_taskbar_hint (GTK_WINDOW (panel.toplevel), TRUE);
+	gtk_window_set_skip_pager_hint (GTK_WINDOW (panel.toplevel), TRUE);
+	gtk_window_stick (GTK_WINDOW (panel.toplevel));
+	
+	if (visible)
+	{
+	    if (layer == 0)
+		gtk_window_present (GTK_WINDOW (panel.toplevel));
+	    else
+		gtk_widget_show (panel.toplevel);
+	}
+    }
 }
 
 void
@@ -1378,7 +1401,7 @@ static void
 init_settings (Panel *p)
 {
     p->priv->settings.orientation = HORIZONTAL;
-    p->priv->settings.layer = ABOVE;
+    p->priv->settings.layer = 0;
 
     p->priv->settings.size = SMALL;
     p->priv->settings.popup_position = RIGHT;
@@ -1415,8 +1438,7 @@ panel_parse_xml (xmlNodePtr node)
     {
 	n = (int) strtol (value, NULL, 0);
 
-	if (n >= ABOVE && n <= BELOW)
-	    settings.layer = n;
+	settings.layer = n == 1 ? 1 : 0;
 
 	g_free (value);
     }

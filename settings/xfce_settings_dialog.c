@@ -61,8 +61,6 @@ static GtkWidget *orientation_menu;
 static GtkWidget *size_menu;
 static GtkWidget *popup_position_menu;
 
-/*static GtkWidget *layer_menu;*/
-
 static gboolean is_running = FALSE;
 static GtkWidget *dialog = NULL;
 
@@ -322,12 +320,15 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_box_pack_start (GTK_BOX (hbox), popup_position_menu, TRUE, TRUE, 0);
 }
 
-#if 0
-/* layer and popup position */
+/* layer */
 static void
-layer_changed (GtkWidget * om, gpointer data)
+layer_changed (GtkToggleButton * tb)
 {
-    int layer = gtk_option_menu_get_history (GTK_OPTION_MENU (om));
+    /* We no longer use layers, but make the panel a docktype window or not.
+     *
+     * For historical reasons we set the dock type hint if the layer is 0.
+     */
+    int layer = gtk_toggle_button_get_active (tb) ? 0 : 1;
 
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_LAYER],
 	    		 CHANNEL, layer);
@@ -337,7 +338,7 @@ layer_changed (GtkWidget * om, gpointer data)
 static void
 add_layer_box (GtkBox * box, GtkSizeGroup * sg)
 {
-    GtkWidget *hbox, *label, *menu;
+    GtkWidget *hbox, *label, *cb;
     McsSetting *setting;
 
     /* checkbutton */
@@ -345,34 +346,15 @@ add_layer_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_widget_show (hbox);
     gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new (_("Panel layer:"));
+    label = gtk_label_new (_("Always on top:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-    layer_menu = gtk_option_menu_new ();
-    gtk_widget_show (layer_menu);
-    gtk_box_pack_start (GTK_BOX (hbox), layer_menu, TRUE, TRUE, 0);
-
-    menu = gtk_menu_new ();
-    gtk_option_menu_set_menu (GTK_OPTION_MENU (layer_menu), menu);
-
-    {
-	GtkWidget *mi;
-
-	mi = gtk_menu_item_new_with_label (_("Top"));
-	gtk_widget_show (mi);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-	mi = gtk_menu_item_new_with_label (_("Normal"));
-	gtk_widget_show (mi);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-	mi = gtk_menu_item_new_with_label (_("Bottom"));
-	gtk_widget_show (mi);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    }
+    cb = gtk_check_button_new ();
+    gtk_widget_show (cb);
+    gtk_box_pack_start (GTK_BOX (hbox), cb, FALSE, FALSE, 0);
 
     setting = mcs_manager_setting_lookup (mcs_manager, 
 	    				  xfce_settings_names[XFCE_LAYER],
@@ -380,14 +362,18 @@ add_layer_box (GtkBox * box, GtkSizeGroup * sg)
     
     if (setting)
     {
-	gtk_option_menu_set_history (GTK_OPTION_MENU (layer_menu), 
-				     setting->data.v_int);
+	/* We no longer use layers, but make the panel a docktype window 
+	 * or not.
+	 *
+	 * For historical reasons we set the dock type hint if the layer 
+	 * is 0.
+	 */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
+				      setting->data.v_int == 0);
     }
-
-    g_signal_connect (layer_menu, "changed", G_CALLBACK (layer_changed),
-		      NULL);
+    
+    g_signal_connect (cb, "toggled", G_CALLBACK (layer_changed), NULL);
 }
-#endif
 
 /* autohide */
 static void
@@ -513,7 +499,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
     gtk_widget_show (vbox);
     xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
-/*    add_layer_box (GTK_BOX (vbox), sg);*/
+    add_layer_box (GTK_BOX (vbox), sg);
 
     add_autohide_box (GTK_BOX (vbox), sg);
 
