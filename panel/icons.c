@@ -35,14 +35,6 @@ static GtkIconTheme *icon_theme = NULL;
 const char *icon_names[NUM_ICONS];
 
 /* icon themes */
-static char *icon_suffix[] = {
-    "svg",			/* librsvg provides a gdk_pixbuf loader for svg files */
-    "svg.gz",			/* librsvg provides a gdk_pixbuf loader for svg files */
-    "png",
-    "xpm",
-    NULL
-};
-
 static char *xfce_icon_names[] = {
     "unknown",
     "edit",

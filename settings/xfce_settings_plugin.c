@@ -48,34 +48,21 @@
 
 #define DEFAULT_THEME "Curve"
 
-#define strequal(s1,s2) !strcmp(s1, s2)
+#define STREQUAL(s1,s2) !strcmp(s1, s2)
 
 McsSetting xfce_options[XFCE_OPTIONS];
 
 static McsManager *mcs_manager = NULL;
 
 static void xfce_init_options (void);
-static void xfce_create_channel (McsManager * sm);
 
 McsPluginInitResult
 mcs_plugin_init (McsPlugin * mp)
 {
-#if 0
-#ifdef ENABLE_NLS
-    /* This is required for UTF-8 at least - Please don't remove it */
-    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-#endif
-    textdomain (GETTEXT_PACKAGE);
-#endif
-#else
     xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
-#endif
 
     mcs_manager = mp->manager;
 
-    xfce_create_channel (mp->manager);
     xfce_set_options (mp->manager);
 
     mp->plugin_name = g_strdup (CHANNEL);
@@ -84,12 +71,6 @@ mcs_plugin_init (McsPlugin * mp)
     mp->icon = inline_icon_at_size (panel_icon_data, 48, 48);
 
     return MCS_PLUGIN_INIT_OK;
-}
-
-static void
-xfce_create_channel (McsManager * sm)
-{
-    mcs_manager_add_channel (sm, CHANNEL);
 }
 
 static void
@@ -104,42 +85,36 @@ xfce_init_options (void)
 
 	opt->channel_name = CHANNEL;
 	opt->last_change_serial = 0;
+	opt->name = xfce_settings_names[i];
 
 	switch (i)
 	{
 	    case XFCE_ORIENTATION:
-		opt->name = "orientation";
 		opt->type = MCS_TYPE_INT;
 		opt->data.v_int = 0;
 		break;
 	    case XFCE_LAYER:
-		opt->name = "layer";
 		opt->type = MCS_TYPE_INT;
 		opt->data.v_int = 0;
 		break;
 	    case XFCE_SIZE:
-		opt->name = "size";
 		opt->type = MCS_TYPE_INT;
 		opt->data.v_int = 1;
 		break;
 	    case XFCE_POPUPPOSITION:
-		opt->name = "popupposition";
 		opt->type = MCS_TYPE_INT;
 		opt->data.v_int = 1;
 		break;
 	    case XFCE_THEME:
-		opt->name = "theme";
 		opt->type = MCS_TYPE_STRING;
 		opt->data.v_string = g_strdup (DEFAULT_THEME);
 		break;
 	    case XFCE_POSITION:
-		opt->name = "position";
 		opt->type = MCS_TYPE_INT;
 		opt->data.v_int = XFCE_POSITION_NONE;
 		mcs_manager_set_setting (mcs_manager, opt, CHANNEL);
 		break;
 	    case XFCE_AUTOHIDE:
-		opt->name = "autohide";
 		opt->type = MCS_TYPE_INT;
 		opt->data.v_int = 0;
 		mcs_manager_set_setting (mcs_manager, opt, CHANNEL);
@@ -153,7 +128,7 @@ xfce_init_options (void)
 #define XMLDATA(doc,node) xmlNodeListGetString(doc, node->children, 1)
 
 static void
-xfce_parse_xml (xmlNodePtr node)
+old_xfce_parse_xml (xmlNodePtr node)
 {
     xmlChar *value;
     int i;
@@ -183,45 +158,16 @@ xfce_parse_xml (xmlNodePtr node)
     }
 }
 
-static char *
-get_read_config_file (void)
-{
-    char *path;
-
-    path = xfce_get_userfile ("settings", "xfce-settings.xml", NULL);
-
-    if (g_file_test (path, G_FILE_TEST_EXISTS))
-	return path;
-    else
-	g_free (path);
-
-    path = g_build_filename (SYSCONFDIR, "xfce4", "settings",
-			     "xfce-settings.xml", NULL);
-
-    if (g_file_test (path, G_FILE_TEST_EXISTS))
-	return (path);
-    else
-	g_free (path);
-
-    return (NULL);
-}
-
 static void
-xfce_read_options (void)
+old_xfce_read_options (const char *path)
 {
     xmlDocPtr doc;
     xmlNodePtr node;
-    char *path;
-
-    xfce_init_options ();
-
-    path = get_read_config_file ();
 
     if (!path)
 	return;
 
     doc = xmlParseFile (path);
-    g_free (path);
 
     node = xmlDocGetRootElement (doc);
 
@@ -229,7 +175,7 @@ xfce_read_options (void)
     {
 	if (xmlStrEqual (node->name, (const xmlChar *) "Settings"))
 	{
-	    xfce_parse_xml (node);
+	    old_xfce_parse_xml (node);
 
 	    break;
 	}
@@ -241,6 +187,15 @@ xfce_read_options (void)
 void
 xfce_write_options (McsManager * sm)
 {
+    char *file;
+    
+    file = xfce_get_userfile ("settings", "panel.xml", NULL);
+	
+    mcs_manager_save_channel_to_file (sm, CHANNEL, file);
+
+    g_free (file);
+
+#if 0
     xmlDocPtr doc;
     xmlNodePtr node;
     char value[3];
@@ -290,6 +245,7 @@ xfce_write_options (McsManager * sm)
     xmlSaveFormatFile (rcfile, doc, 1);
     xmlFreeDoc (doc);
     g_free (rcfile);
+#endif
 }
 
 void
@@ -300,13 +256,73 @@ xfce_set_options (McsManager * sm)
 
     if (first)
     {
-	xfce_read_options ();
+	char *file;
+	gboolean found = FALSE;
+
+	xfce_init_options ();
+
+	file = xfce_get_userfile ("settings", "panel.xml", NULL);
+	
+	if (g_file_test (file, G_FILE_TEST_EXISTS))
+	{
+	    mcs_manager_add_channel_from_file(sm, CHANNEL, file);
+	    
+	    found = TRUE;
+	}
+	else
+	{
+	    g_free (file);
+
+	    file = xfce_get_userfile ("settings", "xfce-settings.xml", NULL);
+	}
+
+	if (!found && g_file_test (file, G_FILE_TEST_EXISTS))
+	{
+	    mcs_manager_add_channel (sm, CHANNEL);
+	    old_xfce_read_options (file);
+
+	    found = TRUE;
+	}
+	else
+	{
+	    g_free (file);
+
+	    file = g_build_filename (SYSCONFDIR, "xfce4", "panel.xml", NULL);
+	}
+
+	if (!found && g_file_test (file, G_FILE_TEST_EXISTS))
+	{
+	    mcs_manager_add_channel_from_file(sm, CHANNEL, file);
+	    
+	    found = TRUE;
+	}
+	
+	g_free (file);
+
+	for (i = 0; i < XFCE_OPTIONS - 1; i++)
+	{
+	    McsSetting *setting;
+	    
+	    setting = mcs_manager_setting_lookup (sm, xfce_settings_names[i],
+						  CHANNEL);
+	    if (setting)
+	    {
+		xfce_options[i] = *setting;
+	    }
+	    else
+	    {
+		mcs_manager_set_setting (sm, &xfce_options[i], CHANNEL);
+	    }
+	}
+
 	first = FALSE;
     }
-
-    for (i = 0; i < XFCE_OPTIONS - 1; i++)
+    else
     {
-	mcs_manager_set_setting (sm, &xfce_options[i], CHANNEL);
+	for (i = 0; i < XFCE_OPTIONS - 1; i++)
+	{
+	    mcs_manager_set_setting (sm, &xfce_options[i], CHANNEL);
+	}
     }
 
     mcs_manager_notify (sm, CHANNEL);

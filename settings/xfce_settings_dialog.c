@@ -39,17 +39,14 @@
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
 
-#define strequals(s1,s2) !strcmp(s1, s2)
+#define STREQUAL(s1,s2) !strcmp(s1, s2)
 
 #define BORDER 5
 
-/* panel sides / popup orientation */
-enum
-{ LEFT, RIGHT, TOP, BOTTOM };
+enum { LEFT, RIGHT, TOP, BOTTOM };
 
-/* panel orientation */
-enum
-{ HORIZONTAL, VERTICAL };
+enum { HORIZONTAL, VERTICAL };
+
 
 static McsManager *mcs_manager;
 
@@ -67,7 +64,6 @@ static GtkWidget *popup_position_menu;
 static GtkWidget *theme_menu;
 
 static GtkWidget *layer_menu;
-static GtkWidget *pos_button;
 
 GtkShadowType main_shadow = GTK_SHADOW_NONE;
 GtkShadowType header_shadow = GTK_SHADOW_NONE;
@@ -76,21 +72,14 @@ GtkShadowType option_shadow = GTK_SHADOW_NONE;
 static gboolean is_running = FALSE;
 static GtkWidget *dialog = NULL;
 
-/* stop gcc from complaining when using -Wall:
- * this variable will not be used, but I want the 
- * definition of names to be available in the 
- * xfce-settings.h header for other modules */
-char **names = xfce_settings_names;
-
 /* useful widgets */
-#define SKIP BORDER
 
 static void
-add_spacer (GtkBox * box)
+add_spacer (GtkBox * box, int size)
 {
     GtkWidget *eventbox = gtk_alignment_new (0, 0, 0, 0);
 
-    gtk_widget_set_size_request (eventbox, SKIP, SKIP);
+    gtk_widget_set_size_request (eventbox, size, size);
     gtk_widget_show (eventbox);
     gtk_box_pack_start (box, eventbox, FALSE, TRUE, 0);
 }
@@ -273,14 +262,16 @@ find_themes (void)
 	    while ((file = g_dir_read_name (gdir)))
 	    {
 		char *path = g_build_filename (*d, file, NULL);
+		char *index = g_build_filename (path, "index.theme", NULL);
 
 		if (!g_list_find_custom (list, file, (GCompareFunc) strcmp) &&
-		    g_file_test (path, G_FILE_TEST_IS_DIR))
+		    g_file_test (index, G_FILE_TEST_EXISTS))
 		{
 		    list = g_list_append (list, g_strdup (file));
 		}
 
 		g_free (path);
+		g_free (index);
 	    }
 
 	    g_dir_close (gdir);
@@ -320,7 +311,7 @@ theme_changed (GtkOptionMenu * option_menu)
 
     theme = gtk_label_get_text (GTK_LABEL (label));
 
-    if (strequals (theme, setting->data.v_string))
+    if (STREQUAL (theme, setting->data.v_string))
 	return;
 
     g_free (setting->data.v_string);
@@ -450,6 +441,7 @@ layer_changed (GtkWidget * om, gpointer data)
     mcs_manager_notify (mcs_manager, CHANNEL);
 }
 
+#if 0
 static char *position_names[] = {
     N_("Bottom"),
     N_("Top"),
@@ -476,21 +468,17 @@ position_clicked (GtkWidget * button, GtkOptionMenu * om)
     mcs_manager_set_setting (mcs_manager, setting, CHANNEL);
     mcs_manager_notify (mcs_manager, CHANNEL);
 }
+#endif
 
 static void
 add_position_box (GtkBox * box, GtkSizeGroup * sg)
 {
-    GtkWidget *vbox, *hbox, *label, *optionmenu, *menu;
-    int i;
-
-    vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_widget_show (vbox);
-    gtk_box_pack_start (box, vbox, TRUE, TRUE, 0);
+    GtkWidget *hbox, *label, *menu;
 
     /* checkbutton */
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
+    gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
 
     label = gtk_label_new (_("Panel layer:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
@@ -500,7 +488,7 @@ add_position_box (GtkBox * box, GtkSizeGroup * sg)
 
     layer_menu = gtk_option_menu_new ();
     gtk_widget_show (layer_menu);
-    gtk_box_pack_start (GTK_BOX (hbox), layer_menu, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), layer_menu, TRUE, TRUE, 0);
 
     menu = gtk_menu_new ();
     gtk_option_menu_set_menu (GTK_OPTION_MENU (layer_menu), menu);
@@ -527,6 +515,7 @@ add_position_box (GtkBox * box, GtkSizeGroup * sg)
     g_signal_connect (layer_menu, "changed", G_CALLBACK (layer_changed),
 		      NULL);
 
+#if 0
     /* centering */
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -563,6 +552,7 @@ add_position_box (GtkBox * box, GtkSizeGroup * sg)
 
     g_signal_connect (pos_button, "clicked", G_CALLBACK (position_clicked),
 		      optionmenu);
+#endif
 }
 
 /* autohide */
@@ -583,18 +573,18 @@ autohide_changed (GtkToggleButton * tb)
 }
 
 static void
-add_autohide_box (GtkWidget * frame)
+add_autohide_box (GtkBox *box, GtkSizeGroup *sg)
 {
     GtkWidget *hbox, *label, *check;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
     gtk_widget_show (hbox);
-    xfce_framebox_add (XFCE_FRAMEBOX (frame), hbox);
+    gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
 
     label = gtk_label_new (_("Autohide:"));
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_size_group_add_widget (sg, label);
 
     check = gtk_check_button_new ();
     gtk_widget_show (check);
@@ -621,8 +611,16 @@ dialog_delete (GtkWidget * dialog)
 void
 run_xfce_settings_dialog (McsPlugin * mp)
 {
-    GtkWidget *header, *hbox, *frame, *vbox, *vbox2;
+    GtkWidget *header, *frame, *vbox;
     GtkSizeGroup *sg;
+    GdkPixbuf *pb;
+    static char **names;
+
+    /* stop gcc from complaining when using -Wall:
+     * this variable will not be used, but I want the 
+     * definition of names to be available in the 
+     * xfce-settings.h header for other modules */
+    names = xfce_settings_names;
 
     if (is_running)
     {
@@ -632,17 +630,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     is_running = TRUE;
 
-#if 0
-#ifdef ENABLE_NLS
-    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
-    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-#endif
-    textdomain (GETTEXT_PACKAGE);
-#endif
-#else
     xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
-#endif
 
     mcs_manager = mp->manager;
 
@@ -652,6 +640,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
 					  NULL);
 
     gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+    gtk_window_stick (GTK_WINDOW (dialog));
     gtk_window_set_icon (GTK_WINDOW (dialog), mp->icon);
 
     g_signal_connect (dialog, "response", G_CALLBACK (dialog_delete), NULL);
@@ -660,60 +649,45 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     /* pretty header */
     vbox = GTK_DIALOG (dialog)->vbox;
-    header = create_header (mp->icon, _("XFce Panel Settings"));
+
+    pb = gdk_pixbuf_scale_simple (mp->icon, 32, 32, GDK_INTERP_HYPER);
+    header = create_header (pb, _("XFce Panel Settings"));
     gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, TRUE, 0);
+    g_object_unref (pb);
 
-    add_spacer (GTK_BOX (vbox));
-
-    /* hbox */
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER + 1);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
-
-    /* Appearance */
-    frame = xfce_framebox_new (_("Appearance"), TRUE);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (hbox), frame, FALSE, FALSE, 0);
-
-    vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
-    gtk_widget_show (vbox);
-    xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
+    add_spacer (GTK_BOX (vbox), BORDER);
 
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+
+    /* Appearance */
+    vbox = GTK_DIALOG (dialog)->vbox;
+
+    frame = xfce_framebox_new (_("Appearance"), TRUE);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
+
+    vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
     add_style_box (GTK_BOX (vbox), sg);
 
-    g_object_unref (sg);
+    /* autohide */
+    vbox = GTK_DIALOG (dialog)->vbox;
 
-    /* second column */
-    vbox2 = gtk_vbox_new (FALSE, BORDER);
-    gtk_widget_show (vbox2);
-    gtk_box_pack_start (GTK_BOX (hbox), vbox2, FALSE, FALSE, 0);
-
-    /* Position */
-    frame = xfce_framebox_new (_("Position"), TRUE);
+    frame = xfce_framebox_new (_("Behaviour"), TRUE);
     gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (vbox2), frame, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 
     vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
     gtk_widget_show (vbox);
     xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
-    sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
     add_position_box (GTK_BOX (vbox), sg);
 
+    add_autohide_box (GTK_BOX (vbox), sg);
+
     g_object_unref (sg);
-
-    /* autohide */
-    frame = xfce_framebox_new (_("Behaviour"), TRUE);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (vbox2), frame, TRUE, TRUE, 0);
-
-    add_autohide_box (frame);
 
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_widget_show (dialog);
