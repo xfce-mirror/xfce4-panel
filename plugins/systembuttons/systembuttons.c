@@ -89,18 +89,18 @@ typedef struct
     int button_types[2];	/* 0, 1, 2 or 3 for lock, exit, setup and info */
 
     GtkWidget *box;
+    GtkWidget *buttons[2];
+#if 0
     GtkWidget *buttonbox;
     GtkWidget *align[2];	/* containers for the actual buttons */
-
+#endif
     GList *callbacks;		/* save callbacks for when we change buttons */
+    int cb_ids[2];
 }
 t_systembuttons;
 
 typedef struct
 {
-    int backup_show_two;
-    int backup_button_types[2];
-
     Control *control;
     t_systembuttons *sb;
 
@@ -155,19 +155,11 @@ button_set_tip (GtkWidget * button, int type)
 }
 
 /* creation and destruction */
-static GtkWidget *
-create_systembutton (int type)
+static int
+connect_callback(GtkWidget *button, int type)
 {
-    GtkWidget *button;
     GCallback callback = NULL;
-
-    button = xfce_iconbutton_new ();
-    gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-    gtk_widget_show (button);
-
-    button_set_tip (button, type);
-    button_update_image (button, type);
-
+    
     switch (type)
     {
 	case LOCK:
@@ -183,10 +175,24 @@ create_systembutton (int type)
 	    callback = G_CALLBACK (mini_info_cb);
 	    break;
     }
+  
+    return g_signal_connect (button, "clicked", callback, NULL);
+}
 
-    g_signal_connect (button, "clicked", callback, NULL);
+static void
+create_systembutton (t_systembuttons *sb, int n, int type)
+{
+    GtkWidget *button;
 
-    return button;
+    button = xfce_iconbutton_new ();
+    gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+    gtk_widget_show (button);
+
+    button_set_tip (button, type);
+    button_update_image (button, type);
+
+    sb->cb_ids[n] = connect_callback(button, type);
+    sb->buttons[n] = button;
 }
 
 static void
@@ -197,18 +203,13 @@ systembuttons_change_type (t_systembuttons * sb, int n, int type)
 
     sb->button_types[n] = type;
 
-    button = gtk_bin_get_child (GTK_BIN (sb->align[n]));
-    gtk_widget_destroy (button);
+    button = sb->buttons[n];
 
-    button = create_systembutton (type);
-    gtk_container_add (GTK_CONTAINER (sb->align[n]), button);
+    g_signal_handler_disconnect(sb->buttons[n], sb->cb_ids[n]);
 
-    for (li = sb->callbacks; li; li = li->next)
-    {
-	SignalCallback *cb = li->data;
-
-	g_signal_connect (button, cb->signal, cb->callback, cb->data);
-    }
+    sb->cb_ids[n] = connect_callback(button, type);
+    button_set_tip(button, type);
+    button_update_image(button, type);
 }
 
 static void
@@ -219,67 +220,40 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 
     if (sb->box)
     {
-	gtk_container_remove (GTK_CONTAINER (sb->buttonbox), sb->align[0]);
-	gtk_container_remove (GTK_CONTAINER (sb->buttonbox), sb->align[1]);
+	gtk_container_remove (GTK_CONTAINER (sb->box), sb->buttons[0]);
+	gtk_container_remove (GTK_CONTAINER (sb->box), sb->buttons[1]);
 
 	gtk_widget_destroy (sb->box);
     }
 
     /* we need some extra spacing when the panel size <= SMALL
      * hence the strange code below :) */
-    if ((orientation == HORIZONTAL && settings.size > SMALL) ||
-	(orientation == VERTICAL && settings.size <= SMALL))
+    if (orientation == HORIZONTAL)
     {
 	if (settings.size > SMALL)
-	{
 	    sb->box = gtk_vbox_new (TRUE, 0);
-	    sb->buttonbox = sb->box;
-	}
 	else
-	{
-	    sb->box = gtk_vbox_new (FALSE, 0);
-	    sb->buttonbox = gtk_vbox_new (TRUE, 0);
-	}
+	    sb->box = gtk_hbox_new (TRUE, 0);
     }
     else
     {
 	if (settings.size > SMALL)
-	{
-	    sb->box = gtk_hbox_new (FALSE, 0);
-	    sb->buttonbox = sb->box;
-	}
+	    sb->box = gtk_hbox_new (TRUE, 0);
 	else
-	{
-	    sb->box = gtk_hbox_new (FALSE, 0);
-	    sb->buttonbox = gtk_hbox_new (TRUE, 0);
-	}
+	    sb->box = gtk_hbox_new (TRUE, 0);
     }
 
     gtk_widget_show (sb->box);
-    gtk_widget_show (sb->buttonbox);
 
-    spacing = border_width / 2;
+    gtk_widget_show(sb->buttons[0]);
 
-    if (settings.size <= SMALL)
-    {
-	align = gtk_alignment_new (0, 0, 0, 0);
-	gtk_widget_set_size_request (align, spacing, spacing);
-	gtk_widget_show (align);
-	gtk_box_pack_start (GTK_BOX (sb->box), align, FALSE, FALSE, 0);
-
-	gtk_box_pack_start (GTK_BOX (sb->box), sb->buttonbox, TRUE, TRUE, 0);
-    }
-
-    gtk_box_pack_start (GTK_BOX (sb->buttonbox), sb->align[0], TRUE, TRUE, 0);
-    gtk_box_pack_start (GTK_BOX (sb->buttonbox), sb->align[1], TRUE, TRUE, 0);
-
-    if (settings.size <= SMALL)
-    {
-	align = gtk_alignment_new (0, 0, 0, 0);
-	gtk_widget_set_size_request (align, spacing, spacing);
-	gtk_widget_show (align);
-	gtk_box_pack_start (GTK_BOX (sb->box), align, FALSE, FALSE, 0);
-    }
+    if (sb->show_two)
+	gtk_widget_show(sb->buttons[1]);
+    else
+	gtk_widget_hide(sb->buttons[1]);
+    
+    gtk_box_pack_start(GTK_BOX(sb->box), sb->buttons[0], TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(sb->box), sb->buttons[1], TRUE, TRUE, 0);
 }
 
 static t_systembuttons *
@@ -290,22 +264,14 @@ systembuttons_new (void)
 
     sb->show_two = TRUE;
 
-    sb->align[0] = gtk_alignment_new (0, 0, 1, 1);
-    gtk_widget_show (sb->align[0]);
-
     sb->button_types[0] = 0;
-    button = create_systembutton (0);
-    gtk_container_add (GTK_CONTAINER (sb->align[0]), button);
-
-    sb->align[1] = gtk_alignment_new (0, 0, 1, 1);
-    gtk_widget_show (sb->align[1]);
+    create_systembutton (sb,0,0);
 
     sb->button_types[1] = 1;
-    button = create_systembutton (1);
-    gtk_container_add (GTK_CONTAINER (sb->align[1]), button);
+    create_systembutton (sb,1,1);
 
-    g_object_ref (sb->align[0]);
-    g_object_ref (sb->align[1]);
+    g_object_ref (sb->buttons[0]);
+    g_object_ref (sb->buttons[1]);
 
     arrange_systembuttons (sb, settings.orientation);
 
@@ -338,11 +304,8 @@ systembuttons_attach_callback (Control * control, const char *signal,
 
     sb->callbacks = g_list_append (sb->callbacks, cb);
 
-    button = gtk_bin_get_child (GTK_BIN (sb->align[0]));
-    g_signal_connect (button, signal, callback, data);
-
-    button = gtk_bin_get_child (GTK_BIN (sb->align[1]));
-    g_signal_connect (button, signal, callback, data);
+    g_signal_connect (sb->buttons[0], signal, callback, data);
+    g_signal_connect (sb->buttons[1], signal, callback, data);
 }
 
 /* global prefs */
@@ -359,20 +322,19 @@ systembuttons_set_size (Control * control, int size)
     s1 = icon_size[size] + border_width;
     s2 = s1 * 0.75;
 
-    if ((settings.orientation == VERTICAL && size <= SMALL) ||
-	(settings.orientation == HORIZONTAL && size > SMALL))
+    if (settings.orientation == VERTICAL)
     {
 	if (size > SMALL)
-	    gtk_widget_set_size_request (sb->buttonbox, s2, s1);
+	    gtk_widget_set_size_request (sb->box, s1, s2);
 	else
-	    gtk_widget_set_size_request (sb->buttonbox, s2, s1 * n * 0.75);
+	    gtk_widget_set_size_request (sb->box, s1, s1 * n * 0.75);
     }
     else
     {
 	if (size > SMALL)
-	    gtk_widget_set_size_request (sb->buttonbox, s1, s2);
+	    gtk_widget_set_size_request (sb->box, s2, s1);
 	else
-	    gtk_widget_set_size_request (sb->buttonbox, s1 * n * 0.75, s2);
+	    gtk_widget_set_size_request (sb->box, s1 * n * 0.75, s1);
     }
 }
 
@@ -388,16 +350,12 @@ systembuttons_set_orientation (Control * control, int orientation)
 static void
 systembuttons_set_theme (Control * control, const char *theme)
 {
-    GtkWidget *button;
     t_systembuttons *sb;
 
     sb = control->data;
 
-    button = gtk_bin_get_child (GTK_BIN (sb->align[0]));
-    button_update_image (button, sb->button_types[0]);
-
-    button = gtk_bin_get_child (GTK_BIN (sb->align[1]));
-    button_update_image (button, sb->button_types[1]);
+    button_update_image (sb->buttons[0], sb->button_types[0]);
+    button_update_image (sb->buttons[1], sb->button_types[1]);
 }
 
 /* settings */
@@ -440,12 +398,12 @@ systembuttons_read_config (Control * control, xmlNodePtr node)
 	if (n == 0)
 	{
 	    sb->show_two = FALSE;
-	    gtk_widget_hide (sb->align[1]);
+	    gtk_widget_hide (sb->buttons[1]);
 	}
 	else
 	{
 	    sb->show_two = TRUE;
-	    gtk_widget_show (sb->align[1]);
+	    gtk_widget_show (sb->buttons[1]);
 	}
     }
  
@@ -486,12 +444,12 @@ checkbutton_changed (GtkToggleButton * tb, t_systembuttons_dialog * sbd)
 
 	if (show_two)
 	{
-	    gtk_widget_show (sbd->sb->align[1]);
+	    gtk_widget_show (sbd->sb->buttons[1]);
 	    gtk_widget_show (sbd->option_menu_hbox[1]);
 	}
 	else
 	{
-	    gtk_widget_hide (sbd->sb->align[1]);
+	    gtk_widget_hide (sbd->sb->buttons[1]);
 	    gtk_widget_hide (sbd->option_menu_hbox[1]);
 	}
 
@@ -513,23 +471,6 @@ buttons_changed (GtkOptionMenu * om, t_systembuttons_dialog * sbd)
     systembuttons_change_type (sbd->sb, i, n);
 }
 
-#if 0
-static void
-systembuttons_revert_configuration (t_systembuttons_dialog * sbd)
-{
-    GtkOptionMenu *om;
-
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sbd->two_checkbutton),
-				  sbd->backup_show_two);
-
-    om = GTK_OPTION_MENU (sbd->option_menus[0]);
-    gtk_option_menu_set_history (om, sbd->backup_button_types[0]);
-
-    om = GTK_OPTION_MENU (sbd->option_menus[1]);
-    gtk_option_menu_set_history (om, sbd->backup_button_types[1]);
-}
-#endif
-
 void
 systembuttons_create_options (Control * control, GtkContainer * container,
 			   GtkWidget * done)
@@ -547,10 +488,6 @@ systembuttons_create_options (Control * control, GtkContainer * container,
     /* initialize dialog structure */
     sb = control->data;
     sbd = g_new0 (t_systembuttons_dialog, 1);
-
-    sbd->backup_show_two = sb->show_two;
-    sbd->backup_button_types[0] = sb->button_types[0];
-    sbd->backup_button_types[1] = sb->button_types[1];
 
     sbd->control = control;
     sbd->sb = sb;
