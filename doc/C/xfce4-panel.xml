@@ -78,9 +78,9 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-intro">
   <title>Introduction</title>
 
-  <para>The XFce panel is part of the <ulink url="http://www.xfce.org" 
-      type="html">XFce Desktop Environment</ulink> and features program 
-    lauchers, subpanels, a desktop switcher and more. The actual command to 
+  <para>The XFce 4 panel is part of the <ulink url="http://www.xfce.org" 
+      type="html">XFce 4 Desktop Environment</ulink> and features program 
+    lauchers, a desktop switcher and more. The actual command to 
     run is &app;. Many aspects of the panel can be configured through 
     graphical dialogs.
   </para>
@@ -121,7 +121,7 @@ maintainers, etc. Commented out by default.
 	<textobject>
 	  <phrase>Shows XFce panel default configuration. Contains several
 	    launchers, a new mail monitor, a clock and a desktop pager.
-	    Also shows an opened subpanel.
+	    Also shows an opened panel menu.
 	  </phrase>
 	</textobject>
       </mediaobject>
@@ -135,7 +135,7 @@ maintainers, etc. Commented out by default.
 
   <para>There is a move handle on each side of the panel which
     you can use to drag the panel anywhere on the screen. Right clicking
-    (or Shift-click) shows a popup menu. Go on, try it ;-)
+    (or Shift-click) shows a popup menu ... Go on, try it ;-)
   </para>
 
   <figure id="handle-popup-fig">
@@ -164,7 +164,9 @@ maintainers, etc. Commented out by default.
 
   <para>Right-clicking will open a popup menu. You can change the properties,
     remove and item or add a new item. Items can also be added from the
-    right-click menu on one of the move handles (see above).
+    right-click menu on one of the move handles (see above). From the menu you
+    can choose the type of item you want to add. A properties dialog will open
+    for the newly added panel item, so you can change the item's options.
   </para>
 
   <figure id="item-popup-fig">
@@ -205,8 +207,6 @@ maintainers, etc. Commented out by default.
     Every dialog offers at least these options:</para>
 
   <itemizedlist>
-    <listitem>Change to another item type, e.g. turn a launcher icon into a 
-      clock or vice versa.</listitem>
     <listitem>Change the position of the item on the panel.</listitem>
     <listitem>When you change anything on in the dialog, the 
       <guibutton>Revert</guibutton> button will be activated and you can 
@@ -250,6 +250,15 @@ maintainers, etc. Commented out by default.
 	<term>Tooltip</term>
 	<listitem>This is simply the tooltip the panel item will show if you
 	  hold the mouse over it.
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>Menu</term>
+	<listitem>A launcher can have a panel menu attached to it. When this
+	  option is selected a button with an arrow will appear next to the
+	  item. See <xref linkend="subpanels"/> for more info on panel menus.
+	  The position of the menu button can be changed from the global
+	  settings dialog.
 	</listitem>
       </varlistentry>
     </variablelist>
@@ -454,22 +463,24 @@ maintainers, etc. Commented out by default.
 </sect1>
 
 <sect1 id="subpanels">
-  <title>Subpanels</title>
+  <title>Panel menus</title>
 
-  <para>Panel items can have a subpanel associated with it, which can
+  <para>Panel launcher items can have a menu associated with it, which can
     be opened by clicking on the small arrow button next to the item. The
     actual position of these popup buttons is configurable from the global
     settings dialog.
   </para>
 
-  <para>Use the 'Add laucher' item at the top of a subpanel to add
-  an item to a subpanel or drag an executable to this item from a
-  file manager.  To remove items from a subpanel use the 'Remove'
-  button in the item properties dialog. </para>
+  <para>Use the 'Add laucher' item at the top of a panel menu to add
+    a new item or drag an executable to this item from a file manager.  
+    To remove items from a subpanel use the 'Remove' button in the item 
+    properties dialog. 
+  </para>
 
-  <para>The properties dialog for a subpanel item is opened immediately
-  when clicking the right mouse button. The dialog itself is very
-  similar to the dialog for Launcher type panel items.</para>
+  <para>The properties dialog for a menu item is opened immediately
+    when clicking the right mouse button (or Shift+left click). The dialog 
+    itself is very similar to the dialog for Launcher type panel items.
+  </para>
 
   <figure id="menuitem-fig">
     <title>Menu Item</title> 
