@@ -1,3 +1,58 @@
+2002-09-14 08:40  zedek
+
+	* AUTHORS: updated my informations (addedd email)
+
+2002-09-14 08:35  zedek
+
+	* panel/builtins.c: First commit to support the new clock module.
+
+2002-09-14 08:09  zedek
+
+	* panel/Makefile.am: Added xfce_clock file to the compilation
+	source list
+
+2002-09-14 08:07  zedek
+
+	* panel/: xfce_clock.c, xfce_clock.h: First commit for the clock
+	module
+
+2002-09-10 22:59  huysmans
+
+	* panel/dialogs.c: fix problem with saving popup size
+
+2002-09-06 21:54  huysmans
+
+	* panel/central.c: Fix bug in screen button handling
+
+2002-09-06 21:02  huysmans
+
+	* panel/wmhints.c: Hopefully fix bug in panel-on-top option
+
+2002-09-06 12:27  huysmans
+
+	* panel/: builtins.c, item_dialog.c, popup.c: fix small bugs in
+	popup menu
+
+2002-09-06 11:51  xfce
+
+	* panel/controls.c: Fix crash at quit (g_free on GTK unref'd object
+	is a bad idea, gtk+ does that itself).
+
+2002-09-05 21:22  huysmans
+
+	* panel/xfce.c: Fix bug that showed central panel, even if option
+	was FALSE
+
+2002-09-05 20:22  huysmans
+
+	* Makefile.am, Makefile.in, xfce4.spec.in: fix spec file and update
+	rpm build command (reported by R.P. Herrold)
+
+2002-09-04 20:05  huysmans
+
+	* ChangeLog, Makefile.am, Makefile.in: update ChangeLog and
+	Makefile.am
+
 2002-09-04 19:59  huysmans
 
 	* AUTHORS, ChangeLog, Makefile.in, README, README.xml, TODO,
