@@ -61,13 +61,15 @@ void create_panel_item(PanelItem * pi)
 
     pi->button = gtk_button_new();
     gtk_button_set_relief(GTK_BUTTON(pi->button), GTK_RELIEF_NONE);
+    
+    /* protect against destruction when unpacking */
+    g_object_ref(pi->button);
 
     if(pi->id == EXTERN_ICON && pi->path)
         pi->pb = get_pixbuf_from_file(pi->path);
     else
         pi->pb = get_pixbuf_by_id(pi->id);
 
-    gtk_container_set_border_width(GTK_CONTAINER(pi->button), 2);
     pb = get_scaled_pixbuf(pi->pb, MEDIUM_PANEL_ICONS - 4);
 
     pi->image = gtk_image_new_from_pixbuf(pb);
@@ -100,7 +102,7 @@ void create_panel_item(PanelItem * pi)
 
 void panel_item_pack(PanelItem * pi, GtkBox * box)
 {
-    gtk_box_pack_start(box, pi->button, FALSE, FALSE, 0);
+    gtk_box_pack_start(box, pi->button, TRUE, TRUE, 0);
 }
 
 void panel_item_unpack(PanelItem * pi, GtkContainer * container)
@@ -124,7 +126,7 @@ void panel_item_set_size(PanelItem * pi, int size)
     GdkPixbuf *pb;
     int width, height, bw;
 
-    bw = size == SMALL ? 0 : 2;
+    bw = size == SMALL ? 0 : 0;
     width = icon_size(size);
     height = icon_size(size);
 

@@ -237,7 +237,7 @@ static void reorder_minitable(int side, int size)
             break;
     }
 
-    if(size == SMALL)
+    if(size == SMALL || size == TINY)
     {
         hpos = 1;
         vpos = 0;
@@ -282,7 +282,7 @@ static void reorder_desktop_table(int size)
 
         if((i % 2) == 0)
         {
-            if(size == SMALL)
+            if(size <= SMALL)
             {
                 hpos = i;
                 vpos = 0;
@@ -295,7 +295,7 @@ static void reorder_desktop_table(int size)
         }
         else
         {
-            if(size == SMALL)
+            if(size <= SMALL)
             {
                 hpos = i;
                 vpos = 0;
@@ -561,20 +561,23 @@ void screen_button_set_size(ScreenButton * sb, int size)
     /* NOTE:
      * calculation of height is very arbitrary. I just put here what looks good
      * on my screen. Should probably be something a little more intelligent. */
-    if(size == SMALL)
-    {
-        w = SCREEN_BUTTON_WIDTH / 2;
-        h = -1;
-    }
-    else if(size == LARGE)
-    {
-        w = SCREEN_BUTTON_WIDTH;
-        h = (LARGE_TOPHEIGHT + LARGE_PANEL_ICONS) / 2 - 6;
-    }
-    else
-    {
-        w = SCREEN_BUTTON_WIDTH;
-        h = (MEDIUM_TOPHEIGHT + MEDIUM_PANEL_ICONS) / 2 - 5;
+	switch (size)
+	{
+		case TINY:
+			w = SCREEN_BUTTON_WIDTH / 2;
+			h = icon_size(TINY);
+			break;
+		case SMALL:
+			w = SCREEN_BUTTON_WIDTH / 2;
+			h = -1;
+			break;
+		case LARGE:
+			w = SCREEN_BUTTON_WIDTH;
+			h = (LARGE_TOPHEIGHT + LARGE_PANEL_ICONS) / 2 - 6;
+			break;
+		default:
+			w = SCREEN_BUTTON_WIDTH;
+			h = (MEDIUM_TOPHEIGHT + MEDIUM_PANEL_ICONS) / 2 - 5;
     }
 
     gtk_widget_set_size_request(sb->button, w, h);

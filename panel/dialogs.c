@@ -246,6 +246,10 @@ static void add_size_menu(GtkWidget * option_menu, int size)
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
 
+    item = gtk_menu_item_new_with_label(_("Tiny"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
     item = gtk_menu_item_new_with_label(_("Small"));
     gtk_widget_show(item);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);

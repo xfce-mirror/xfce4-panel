@@ -531,7 +531,7 @@ void panel_parse_xml(xmlNodePtr node)
     /* check the values */
     if(settings.style < OLD_STYLE || settings.style > NEW_STYLE)
         settings.style = NEW_STYLE;
-    if(settings.size < SMALL || settings.size > LARGE)
+    if(settings.size < TINY || settings.size > LARGE)
         settings.size = MEDIUM;
     if(settings.popup_size < SMALL || settings.popup_size > LARGE)
         settings.popup_size = MEDIUM;

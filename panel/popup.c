@@ -27,11 +27,8 @@
 #define MAXITEMS 10
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Popup menus 
-
+  Popup menus 
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 PanelPopup *panel_popup_new(void)
 {
     PanelPopup *pp = g_new(PanelPopup, 1);
@@ -69,6 +66,9 @@ void add_panel_popup(PanelPopup * pp, GtkBox * box)
     gtk_container_add(GTK_CONTAINER(pp->button), pp->image);
 
     gtk_widget_show_all(pp->button);
+    
+    /* protect against destruction when unpacking */
+    g_object_ref(pp->button);
 
     gtk_box_pack_start(box, pp->button, FALSE, FALSE, 0);
 
@@ -143,7 +143,42 @@ void panel_popup_free(PanelPopup * pp)
 
 void panel_popup_set_size(PanelPopup * pp, int size)
 {
-    gtk_widget_set_size_request(pp->button, icon_size(size) + 4, top_height(size));
+    if (size == TINY)
+    {
+	int h = icon_size(size);
+	int w = h / 2;
+	GdkPixbuf *pb;
+	
+	pb = get_scaled_pixbuf(pp->up, w - 4);
+	g_object_unref(pp->up);
+	pp->up = pb;
+	
+	pb = get_scaled_pixbuf(pp->down, w - 4);
+	g_object_unref(pp->down);
+	pp->down = pb;
+	
+	if (!pp->detached)
+	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
+	else
+	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
+	
+	gtk_widget_set_size_request(pp->button, w , h);
+    }
+    else
+    {
+	g_object_unref(pp->up);
+	pp->up = get_system_pixbuf(UP_ICON);
+	
+	g_object_unref(pp->down);
+	pp->down = get_system_pixbuf(DOWN_ICON);
+	
+	if (!pp->detached)
+	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);
+	else
+	    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
+	
+	gtk_widget_set_size_request(pp->button, icon_size(size) + 4, top_height(size));
+    }
 }
 
 void panel_popup_set_style(PanelPopup * pp, int style)

@@ -45,6 +45,7 @@
 #define NBGROUPS 6
 #define NBITEMS 16
 
+#define TINY_PANEL_ICONS 25
 #define SMALL_PANEL_ICONS 30
 #define MEDIUM_PANEL_ICONS 45
 #define LARGE_PANEL_ICONS 60
@@ -71,7 +72,7 @@ enum
 
 /* panel sizes */
 enum
-{ SMALL, MEDIUM, LARGE };
+{ TINY, SMALL, MEDIUM, LARGE };
 
 #define DEFAULT_SIZE MEDIUM
 

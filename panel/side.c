@@ -29,6 +29,21 @@
 PanelGroup left_groups[NBGROUPS];
 PanelGroup right_groups[NBGROUPS];
 
+struct _MoveHandle
+{
+    int side;
+
+    GtkWidget *main_frame;
+    GtkWidget *box;
+
+    GtkWidget *button;
+    GtkWidget *iconify_im;
+
+    GtkWidget *frame;
+    GtkWidget *eventbox;
+    GtkWidget *handle_im;
+};
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
 void side_panel_init(int side)
@@ -118,9 +133,9 @@ void side_panel_set_num_groups(int side, int n)
     for(i = 0; i < NBGROUPS; i++, pg++)
     {
         if(i < n)
-            gtk_widget_show(pg->vbox);
+            gtk_widget_show(pg->frame);
         else
-            gtk_widget_hide(pg->vbox);
+            gtk_widget_hide(pg->frame);
     }
 }
 
@@ -175,11 +190,13 @@ void panel_group_init(PanelGroup * pg, int side, int index)
 {
     pg->side = side;
     pg->index = index;
+    pg->size = MEDIUM;
 
-    pg->vbox = NULL;
+    pg->frame = NULL;
+    pg->box = NULL;
 
     if(pg->index == 0)
-        pg->handle = move_handle_new();
+        pg->handle = move_handle_new(side);
     else
         pg->popup = panel_popup_new();
 
@@ -190,21 +207,28 @@ void panel_group_init(PanelGroup * pg, int side, int index)
 
 void add_panel_group(PanelGroup * pg, GtkBox * hbox)
 {
-    pg->vbox = gtk_vbox_new(FALSE, 0);
-    gtk_widget_show(pg->vbox);
+    pg->frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(pg->frame), GTK_SHADOW_NONE);
+    gtk_widget_show(pg->frame);
+
+    pg->box = gtk_vbox_new(FALSE, 0);
+    gtk_widget_show(pg->box);
+    gtk_container_add(GTK_CONTAINER(pg->frame), pg->box);
 
     if(pg->index == 0)
-        add_move_handle(pg->handle, pg->side, pg->vbox);
+        add_move_handle(pg->handle, pg->box);
     else
-        add_panel_popup(pg->popup, GTK_BOX(pg->vbox));
+        add_panel_popup(pg->popup, GTK_BOX(pg->box));
 
     if(pg->type == ICON)
     {
         create_panel_item(pg->item);
-        panel_item_pack(pg->item, GTK_BOX(pg->vbox));
+        panel_item_pack(pg->item, GTK_BOX(pg->box));
     }
     else if(create_panel_module(pg->module))
-        panel_module_pack(pg->module, GTK_BOX(pg->vbox));
+    {
+        panel_module_pack(pg->module, GTK_BOX(pg->box));
+    }
     else
     {
         panel_module_free(pg->module);
@@ -212,13 +236,13 @@ void add_panel_group(PanelGroup * pg, GtkBox * hbox)
         pg->type = ICON;
         pg->item = panel_item_unknown_new(pg);
         create_panel_item(pg->item);
-        panel_item_pack(pg->item, GTK_BOX(pg->vbox));
+        panel_item_pack(pg->item, GTK_BOX(pg->box));
     }
 
     if(pg->side == LEFT)
-        gtk_box_pack_start(hbox, pg->vbox, TRUE, TRUE, 0);
+        gtk_box_pack_start(hbox, pg->frame, TRUE, TRUE, 0);
     else
-        gtk_box_pack_end(hbox, pg->vbox, TRUE, TRUE, 0);
+        gtk_box_pack_end(hbox, pg->frame, TRUE, TRUE, 0);
 }
 
 void panel_group_cleanup(PanelGroup * pg)
@@ -242,15 +266,90 @@ void panel_group_cleanup(PanelGroup * pg)
 
 void panel_group_set_size(PanelGroup * pg, int size)
 {
-    if(pg->index == 0)
-        move_handle_set_size(pg->handle, size);
+    GtkWidget *newbox;
+
+    /* obtain a reference to the widget we will be reordering
+     * to prevent them from being destroyed when removing them
+     * from their container
+     */
+    if(size == TINY)
+        newbox = gtk_hbox_new(FALSE, 0);
     else
-        panel_popup_set_size(pg->popup, size);
+        newbox = gtk_vbox_new(FALSE, 0);
+
+    gtk_widget_show(newbox);
+
+    /* remove widgets from box */
+    if(pg->index == 0)
+        gtk_container_remove(GTK_CONTAINER(pg->box), pg->handle->main_frame);
+    else
+        gtk_container_remove(GTK_CONTAINER(pg->box), pg->popup->button);
 
     if(pg->type == ICON)
-        panel_item_set_size(pg->item, size);
+        gtk_container_remove(GTK_CONTAINER(pg->box), pg->item->button);
     else
-        panel_module_set_size(pg->module, size);
+        panel_module_unpack(pg->module, GTK_CONTAINER(pg->box));
+
+    gtk_container_remove(GTK_CONTAINER(pg->frame), pg->box);
+    /*gtk_widget_destroy(pg->box); */
+
+    pg->box = newbox;
+    gtk_container_add(GTK_CONTAINER(pg->frame), newbox);
+
+    if(size == TINY)
+    {
+        if(pg->index == 0 && pg->side == LEFT)
+        {
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->main_frame, FALSE, FALSE, 0);
+            move_handle_set_size(pg->handle, size);
+        }
+
+        if(pg->type == ICON)
+        {
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->item->button, TRUE, TRUE, 0);
+            panel_item_set_size(pg->item, size);
+        }
+        else
+        {
+            panel_module_pack(pg->module, GTK_BOX(pg->box));
+            panel_module_set_size(pg->module, size);
+        }
+
+        if(pg->index != 0)
+        {
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->popup->button, FALSE, FALSE, 0);
+            panel_popup_set_size(pg->popup, size);
+        }
+        else if(pg->side == RIGHT)
+        {
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->main_frame, FALSE, FALSE, 0);
+            move_handle_set_size(pg->handle, size);
+        }
+    }
+    else
+    {
+        if(pg->index == 0)
+        {
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->handle->main_frame, FALSE, FALSE, 0);
+            move_handle_set_size(pg->handle, size);
+        }
+        else
+        {
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->popup->button, FALSE, FALSE, 0);
+            panel_popup_set_size(pg->popup, size);
+        }
+
+        if(pg->type == ICON)
+        {
+            gtk_box_pack_start(GTK_BOX(pg->box), pg->item->button, TRUE, TRUE, 0);
+            panel_item_set_size(pg->item, size);
+        }
+        else
+        {
+            panel_module_pack(pg->module, GTK_BOX(pg->box));
+            panel_module_set_size(pg->module, size);
+        }
+    }
 }
 
 void panel_group_set_popup_size(PanelGroup * pg, int size)
@@ -310,41 +409,32 @@ void panel_group_parse_xml(xmlNodePtr node, PanelGroup * pg)
     }
 }
 
-void panel_group_write_xml(xmlNodePtr root, PanelGroup *pg)
+void panel_group_write_xml(xmlNodePtr root, PanelGroup * pg)
 {
     xmlNodePtr node;
-    
+
     node = xmlNewTextChild(root, NULL, "Group", NULL);
-    
-    if (pg->index != 0)
-	panel_popup_write_xml(node, pg->popup);
-    
-    if (pg->type == ICON)
-	panel_item_write_xml(node, pg->item);
+
+    if(pg->index != 0)
+        panel_popup_write_xml(node, pg->popup);
+
+    if(pg->type == ICON)
+        panel_item_write_xml(node, pg->item);
     else
-	panel_module_write_xml(node, pg->module);
+        panel_module_write_xml(node, pg->module);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /* move handles */
 
-struct _MoveHandle
-{
-    GtkWidget *hbox;
-
-    GtkWidget *button;
-    GtkWidget *iconify_im;
-
-    GtkWidget *frame;
-    GtkWidget *eventbox;
-    GtkWidget *handle_im;
-};
-
-MoveHandle *move_handle_new(void)
+MoveHandle *move_handle_new(int side)
 {
     MoveHandle *mh = g_new(MoveHandle, 1);
 
-    mh->hbox = NULL;
+    mh->side = side;
+
+    mh->frame = NULL;
+    mh->box = NULL;
 
     mh->button = NULL;
     mh->iconify_im = NULL;
@@ -356,17 +446,24 @@ MoveHandle *move_handle_new(void)
     return mh;
 }
 
-void add_move_handle(MoveHandle * mh, int side, GtkWidget * vbox)
+void add_move_handle(MoveHandle * mh, GtkWidget * vbox)
 {
     GdkPixbuf *pb;
     GtkWidget *im;
 
-    mh->hbox = gtk_hbox_new(FALSE, 0);
-    gtk_widget_show(mh->hbox);
+    mh->main_frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(mh->main_frame), GTK_SHADOW_NONE);
+    gtk_widget_show(mh->main_frame);
+    /* protect against destruction when unpacking */
+    g_object_ref(mh->main_frame);
+
+    mh->box = gtk_hbox_new(FALSE, 0);
+    gtk_widget_show(mh->box);
+    gtk_container_add(GTK_CONTAINER(mh->main_frame), mh->box);
 
     mh->button = gtk_button_new();
     gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
-    gtk_widget_set_size_request(mh->button, 16, MEDIUM_TOPHEIGHT);
+    gtk_widget_set_size_request(mh->button, MEDIUM_TOPHEIGHT, MEDIUM_TOPHEIGHT);
     add_tooltip(mh->button, _("Iconify panel"));
     gtk_widget_show(mh->button);
 
@@ -395,22 +492,22 @@ void add_move_handle(MoveHandle * mh, int side, GtkWidget * vbox)
     gtk_container_add(GTK_CONTAINER(mh->frame), im);
     gtk_widget_show(im);
 
-    if(side == LEFT)
+    if(mh->side == LEFT)
     {
-        gtk_box_pack_start(GTK_BOX(mh->hbox), mh->button, FALSE, FALSE, 0);
-        gtk_box_pack_start(GTK_BOX(mh->hbox), mh->eventbox, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
+        gtk_box_pack_start(GTK_BOX(mh->box), mh->eventbox, FALSE, FALSE, 0);
     }
     else
     {
-        gtk_box_pack_end(GTK_BOX(mh->hbox), mh->button, FALSE, FALSE, 0);
-        gtk_box_pack_end(GTK_BOX(mh->hbox), mh->eventbox, FALSE, FALSE, 0);
+        gtk_box_pack_end(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
+        gtk_box_pack_end(GTK_BOX(mh->box), mh->eventbox, FALSE, FALSE, 0);
     }
 
     /* signals */
     g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
     attach_move_callbacks(mh->eventbox);
 
-    gtk_box_pack_start(GTK_BOX(vbox), mh->hbox, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), mh->main_frame, FALSE, FALSE, 0);
 }
 
 void move_handle_free(MoveHandle * mh)
@@ -422,11 +519,51 @@ void move_handle_free(MoveHandle * mh)
 
 void move_handle_set_size(MoveHandle * mh, int size)
 {
+    GtkWidget *newbox;
     int h = top_height(size);
     int w = icon_size(size);
 
-    gtk_widget_set_size_request(mh->eventbox, w + 8 - 16, h);
-    gtk_widget_set_size_request(mh->button, 16, h);
+    gtk_container_remove(GTK_CONTAINER(mh->box), mh->button);
+    gtk_container_remove(GTK_CONTAINER(mh->box), mh->eventbox);
+    
+    gtk_container_remove(GTK_CONTAINER(mh->main_frame), mh->box);
+    
+    if(size == TINY)
+    {
+	int h1 = 2 * (w + 4) / 3;
+	int h2 = w + 4 - h1;
+	
+	newbox = gtk_vbox_new(FALSE, 0);
+	gtk_widget_show(newbox);
+	
+	gtk_box_pack_start(GTK_BOX(newbox), mh->button, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
+	
+	gtk_widget_set_size_request(mh->eventbox, h2, h1);
+	gtk_widget_set_size_request(mh->button, h2, h2);
+    }
+    else
+    {
+	newbox = gtk_hbox_new(FALSE, 0);
+	gtk_widget_show(newbox);
+	
+	if (mh->side == LEFT)
+	{
+	    gtk_box_pack_start(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
+	    gtk_box_pack_start(GTK_BOX(newbox), mh->eventbox, TRUE, TRUE, 0);
+	}
+	else
+	{
+	    gtk_box_pack_end(GTK_BOX(newbox), mh->button, FALSE, FALSE, 0);
+	    gtk_box_pack_end(GTK_BOX(newbox), mh->eventbox, FALSE, FALSE, 0);
+	}
+	
+	gtk_widget_set_size_request(mh->eventbox, w + 8 - h, h);
+	gtk_widget_set_size_request(mh->button, h, h);
+    }
+    
+    mh->box = newbox;
+    gtk_container_add(GTK_CONTAINER(mh->main_frame), mh->box);
 }
 
 void move_handle_set_style(MoveHandle * mh, int style)

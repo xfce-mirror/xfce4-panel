@@ -191,15 +191,16 @@ static void icon_browse_cb(GtkWidget * b, GtkEntry * entry)
     }
 }
 
-gboolean icon_entry_lost_focus(GtkEntry *entry, GdkEventFocus *event, gpointer data)
+gboolean icon_entry_lost_focus(GtkEntry * entry, GdkEventFocus * event,
+                               gpointer data)
 {
-	const char *temp = gtk_entry_get_text(entry);
-	
-	if (temp)
-		change_icon(EXTERN_ICON, temp);
-	
-	/* we must return FALSE or gtk will crash :-( */
-	return FALSE;
+    const char *temp = gtk_entry_get_text(entry);
+
+    if(temp)
+        change_icon(EXTERN_ICON, temp);
+
+    /* we must return FALSE or gtk will crash :-( */
+    return FALSE;
 }
 
 static GtkWidget *create_icon_options_box(gboolean is_menu_item)
@@ -276,8 +277,8 @@ static GtkWidget *create_icon_options_box(gboolean is_menu_item)
     gtk_widget_show(icon_entry);
     gtk_box_pack_start(GTK_BOX(hbox), icon_entry, TRUE, TRUE, 0);
 
-	g_signal_connect(icon_entry, "focus-out-event", G_CALLBACK(icon_entry_lost_focus),
-                     NULL);
+    g_signal_connect(icon_entry, "focus-out-event",
+                     G_CALLBACK(icon_entry_lost_focus), NULL);
 
 
     icon_browse_button = gtk_button_new_with_label(" ... ");
@@ -563,7 +564,7 @@ static void add_module_pages(GtkNotebook * nb)
         gtk_container_set_border_width(GTK_CONTAINER(frame), 10);
         gtk_widget_show(frame);
 
-		panel_module_add_options(pm, GTK_CONTAINER(frame));
+        panel_module_add_options(pm, GTK_CONTAINER(frame));
 
         gtk_notebook_append_page(nb, frame, NULL);
     }
@@ -669,12 +670,12 @@ void edit_panel_group_dialog(PanelGroup * pg)
         if(pm)
         {
             panel_module_stop(pm);
-            panel_module_unpack(pm, GTK_CONTAINER(pg->vbox));
+            panel_module_unpack(pm, GTK_CONTAINER(pg->box));
             panel_module_free(pm);
         }
         else
         {
-            panel_item_unpack(pi, GTK_CONTAINER(pg->vbox));
+            panel_item_unpack(pi, GTK_CONTAINER(pg->box));
             gtk_widget_destroy(pi->button);
             panel_item_free(pi);
         }
@@ -702,7 +703,7 @@ void edit_panel_group_dialog(PanelGroup * pg)
                 pi->path = g_strdup(temp);
 
             create_panel_item(pi);
-            panel_item_pack(pi, GTK_BOX(pg->vbox));
+            panel_item_pack(pi, GTK_BOX(pg->box));
 
             panel_item_set_size(pi, settings.size);
         }
@@ -717,18 +718,26 @@ void edit_panel_group_dialog(PanelGroup * pg)
             pm->name = current_module->name ? g_strdup(current_module->name) : NULL;
 
             create_panel_module(pm);
-            panel_module_pack(pm, GTK_BOX(pg->vbox));
+            panel_module_pack(pm, GTK_BOX(pg->box));
 
             panel_module_set_size(pm, settings.size);
             panel_module_set_style(pm, settings.style);
 
             panel_module_start(pm);
         }
+
+        panel_group_set_size(pg, settings.size);
     }
 
     /* clean up */
     gtk_widget_destroy(dlg);
     dlg = NULL;
+
+    if (icon_path)
+    {
+	g_free(icon_path);
+	icon_path = NULL;
+    }
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -766,8 +775,8 @@ GtkWidget *create_menu_item_dialog(MenuItem * mi)
                                           RESPONSE_CHANGE, NULL);
     }
 
-	gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
-	
+    gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
+
     main_vbox = GTK_DIALOG(dlg)->vbox;
 
     frame = gtk_frame_new(NULL);
@@ -788,19 +797,19 @@ GtkWidget *create_menu_item_dialog(MenuItem * mi)
 
     if(mi)
     {
-		if (mi->command)
-			gtk_entry_set_text(GTK_ENTRY(command_entry), mi->command);
-		
+        if(mi->command)
+            gtk_entry_set_text(GTK_ENTRY(command_entry), mi->command);
+
         gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
                                      mi->in_terminal);
 
         change_icon(mi->icon_id, mi->icon_path);
 
-		if (mi->caption)
-			gtk_entry_set_text(GTK_ENTRY(caption_entry), mi->caption);
-		
-		if (mi->tooltip)
-			gtk_entry_set_text(GTK_ENTRY(tip_entry), mi->tooltip);
+        if(mi->caption)
+            gtk_entry_set_text(GTK_ENTRY(caption_entry), mi->caption);
+
+        if(mi->tooltip)
+            gtk_entry_set_text(GTK_ENTRY(tip_entry), mi->tooltip);
 
         if(num_items > 1)
             gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin),
@@ -876,12 +885,18 @@ void edit_menu_item_dialog(MenuItem * mi)
 
         if(response == RESPONSE_CHANGE)
             add_new_menu_item(pp);
-		else
-			reposition_popup(pp);
+        else
+            reposition_popup(pp);
     }
 
     gtk_widget_destroy(dlg);
     num_items = 0;
+
+    if (icon_path)
+    {
+	g_free(icon_path);
+	icon_path = NULL;
+    }
 }
 
 void add_menu_item_dialog(PanelPopup * pp)
@@ -902,4 +917,10 @@ void add_menu_item_dialog(PanelPopup * pp)
 
     gtk_widget_destroy(dlg);
     num_items = 0;
+    
+    if (icon_path)
+    {
+	g_free(icon_path);
+	icon_path = NULL;
+    }
 }

@@ -26,8 +26,11 @@ struct _PanelGroup
 {
     int side;
     int index;
+    int size;
 
-    GtkWidget *vbox;
+    GtkWidget *frame;           /* main container */
+
+    GtkWidget *box;             /* hbox or vbox depending on size */
 
     MoveHandle *handle;
     PanelPopup *popup;
@@ -69,8 +72,8 @@ void panel_group_write_xml(xmlNodePtr root, PanelGroup * pg);
 /*****************************************************************************/
 /* move handle */
 
-MoveHandle *move_handle_new(void);
-void add_move_handle(MoveHandle * mh, int side, GtkWidget * vbox);
+MoveHandle *move_handle_new(int side);
+void add_move_handle(MoveHandle * mh, GtkWidget * vbox);
 void move_handle_free(MoveHandle * mh);
 
 void move_handle_set_size(MoveHandle * mh, int size);
