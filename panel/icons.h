@@ -22,6 +22,7 @@
 
 #include "global.h"
 
+/* launcher and menu icons */
 enum
 {
     EXTERN_ICON = -1,
@@ -39,13 +40,32 @@ enum
     SCHEDULE_ICON,
     SOUND_ICON,
     TERMINAL_ICON,
-    NUM_ICONS,
+    NUM_ICONS
+}
+
+char *icon_names = {
+    N_("Default"),
+    N_("Editor"),
+    N_("File management"),
+    N_("Utilities"),
+    N_("Games"),
+    N_("Help browser"),
+    N_("Multimedia"),
+    N_("Network"),
+    N_("Graphics"),
+    N_("Printer"),
+    N_("Productvity"),
+    N_("Sound"),
+    N_("Terminal")
+}
+/* system icons */
+enum
+{
     /* icons for the panel */
     MINILOCK_ICON,
     MINIINFO_ICON,
     MINIPALET_ICON,
     MINIPOWER_ICON,
-    MINI_ICONS,
     HANDLE_ICON,
     ADDICON_ICON,
     CLOSE_ICON,
@@ -55,35 +75,37 @@ enum
     /* program icons */
     DIAG_ICON,
     MENU_ICON,
-    XFCE_ICON
+    XFCE_ICON,
+    SYS_ICONS
 };
 
-char *icon_names[NUM_ICONS];
+/* module icons */
+enum
+{
+    /* thrash module icons */
+    TRASH_EMPTY_ICON,
+    TRASH_FULL_ICON,
+    MODULE_ICONS
+    /* ppp module icons 
+    PPP_OFF_ICON,
+    PPP_ON_ICON,
+    PPP_CONNECTING_ICON,*/
+}
 
 #define UNKNOWN_ICON DEFAULT_ICON
 
-enum
-{
-    TRASH_EMPTY_ICON,
-    TRASH_FULL_ICON,
-    TRASH_ICONS
-};
-
-enum
-{
-    PPP_OFF_ICON,
-    PPP_ON_ICON,
-    PPP_CONNECTING_ICON,
-    PPP_ICONS
-};
-
 void create_builtin_pixbufs(void);
 
-GdkPixbuf *get_pixbuf_from_id(int id);
-GdkPixbuf *get_themed_pixbuf_from_id(int id, const char *theme);
+GdkPixbuf *get_pixbuf_by_id(int id);
+GdkPixbuf *get_pixbuf_from_file(const char *path);
 
-/* for modules */
-GdkPixbuf *get_trash_pixbuf(int id);
-GdkPixbuf *get_themed_trash_pixbuf(int id, const char *theme);
+GdkPixbuf *get_system_pixbuf(int id);
+
+GdkPixbuf *get_module_pixbuf(int id);
+
+GdkPixbuf *get_scaled_pixbuf(const GdkPixbuf *pb, int size);
+
+/* for plugins */
+GdkPixbuf *get_themed_pixbuf(const char *name);
 
 #endif /* __XFCE_ICONS_H__ */

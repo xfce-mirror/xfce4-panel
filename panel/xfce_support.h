@@ -1,4 +1,4 @@
-/*  dnd.h
+/*  xfce_support.h
  *  
  *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
  *
@@ -17,11 +17,32 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#ifndef __XFCE_DND_H__
-#define __XFCE_DND_H__
+#ifndef __XFCE_SUPPORT_H__
+#define __XFCE_SUPPORT_H__
 
-#include "global.h"
+/* files and directories */
+char *get_save_dir(void);
+char *get_save_file(void);
+char *get_read_dir(void);
+char *get_read_file(void);
+char **get_plugin_dirs(void);
+char **get_theme_dirs(void);
 
+/* gtk */
+GtkWidget *mixed_button_new(const char *stock, const char *message);
+
+/* dnd */
 void dnd_set_drag_dest(GtkWidget * widget);
+void gnome_uri_list_free_strings(GList * list);
+GList *gnome_uri_list_extract_uris(const gchar * uri_list);
+GList *gnome_uri_list_extract_filenames(const gchar * uri_list);
 
-#endif /* __XFCE_DND_H__ */
+/* dialogs */
+void report_error(const char *text);
+void show_info(const char *text);
+char *select_file_name(const char *title, const char *path, GtkWidget * parent);
+
+/* executing programs */
+void exec_cmd(const char *cmd, gboolean in_terminal);
+
+#endif /* __XFCE_SUPPORT_H__ */

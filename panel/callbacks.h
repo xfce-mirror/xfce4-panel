@@ -24,12 +24,6 @@
 
 /*****************************************************************************/
 
-void exec_cmd(const char *cmd, gboolean in_terminal);
-GList *gnome_uri_list_extract_filenames(const gchar * uri_list);
-void gnome_uri_list_free_strings(GList * list);
-
-/*****************************************************************************/
-
 gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, gpointer data);
 gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data);
 

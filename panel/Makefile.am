@@ -23,13 +23,15 @@ popup.h \
 settings.h \
 side.h \
 wmhints.h \
-xfce.c 
+xfce.c \
+xfce_support.c
 
 pkginclude_HEADERS = \
 icons.h \
 item.h \
 module.h \
 xfce.h \
+xfce_support.h \
 global.h
 
 xfce4_CFLAGS = @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ -DG_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DSYSCONFDIR=\"$(sysconfdir)\"

@@ -22,10 +22,6 @@
 
 #include "global.h"
 
-void report_error(const char *text);
-
-void show_info(const char *text);
-
 void screen_button_dialog(ScreenButton * sb);
 
 void edit_menu_item_dialog(MenuItem * mi);
