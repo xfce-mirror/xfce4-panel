@@ -229,9 +229,6 @@ void create_panel_control(PanelControl * pc)
         case PLUGIN:
             create_plugin(pc);
             break;
-        case TRASH:
-            create_trash(pc);
-            break;
         case EXIT:
             create_exit(pc);
             break;

@@ -65,6 +65,7 @@ panel/Makefile
 plugins/Makefile
 plugins/mailcheck/Makefile
 plugins/clock/Makefile
+plugins/trash/Makefile
 themes/Makefile
 themes/Curve/Makefile
 themes/Gnome/Makefile

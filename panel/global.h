@@ -101,8 +101,8 @@ enum
 {
     ICON = -2,
     PLUGIN = -1,
-    DUMMY, /* used to be the clock */
-    TRASH,
+    DUMMY_CLOCK, 
+    DUMMY_TRASH,
     EXIT,
     CONFIG,
     NUM_BUILTINS
