@@ -157,7 +157,7 @@ get_read_file (const char * name)
         for (n = 0; d[n] != NULL; ++n)
             /**/ ;
 
-        p = paths = g_new0 (char*, n);
+        p = paths = g_new0 (char*, n + 1);
 
         for (n = 0; d[n] != NULL; ++n)
             paths[n] = g_build_filename (d[n], "xfce4", "panel", name, NULL);
