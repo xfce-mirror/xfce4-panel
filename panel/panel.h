@@ -25,6 +25,11 @@
 #include <panel/global.h>
 
 /* Panel */
+struct _Position
+{
+    int x, y;
+};
+
 struct _Panel
 {
     gboolean hidden;

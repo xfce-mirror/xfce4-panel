@@ -90,11 +90,6 @@ enum
 
 /* global settings */
 
-struct _Position
-{
-    int x, y;
-};
-
 struct _Settings
 {
     int orientation;

@@ -82,6 +82,7 @@ plugins/clock/Makefile
 plugins/switcher/Makefile
 plugins/systembuttons/Makefile
 plugins/pager/Makefile
+plugins/sample-plugin/Makefile
 plugins/separator/Makefile
 settings/Makefile
 themes/Makefile

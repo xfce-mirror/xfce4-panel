@@ -4,4 +4,5 @@ SUBDIRS =								\
 	switcher							\
 	systembuttons							\
 	pager								\
+	sample-plugin							\
 	separator

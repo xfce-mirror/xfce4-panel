@@ -1,6 +1,6 @@
 /*  icons.c
  *  
- *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  Copyright (C) 2002,2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -89,7 +89,8 @@ get_pixbuf_by_id (int id)
     if (id < UNKNOWN_ICON || id >= NUM_ICONS)
 	id = UNKNOWN_ICON;
 
-    return xfce_load_themed_icon (xfce_icon_names[id], icon_size[settings.size]);
+    return xfce_load_themed_icon (xfce_icon_names[id], 
+	    			  icon_size[settings.size]);
 }
 
 GdkPixbuf *
@@ -194,10 +195,8 @@ _get_themed_pixbuf (const char *name, const char *theme)
      * default theme, unknown icon */
     if (!pb && strequal (name, xfce_icon_names[UNKNOWN_ICON]))
     {
-	g_printerr ("\n** ERROR **: xfce: unable to find any icons! "
-		    "Please check your installation.\n\n");
-
-	quit (TRUE);
+	/* this aborts the program */
+	g_error ("Unable to find any icons! Please check your installation.");
     }
 
     return pb;
@@ -216,7 +215,7 @@ get_themed_pixbuf (const char *name)
     if (!pb)
     {
 	pb = get_pixbuf_by_id (UNKNOWN_ICON);
-	g_printerr ("xfce: couldn't find icon: %s\n", name);
+	g_warning ("Couldn't find icon: %s\n", name);
     }
 
     return pb;
