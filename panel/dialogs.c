@@ -393,7 +393,7 @@ static char **find_icon_themes(void)
         {
             while((file = g_dir_read_name(gdir)))
             {
-                char *path = g_build_filename(dirs[i], file);
+                char *path = g_build_filename(*d, file);
 
                 if(!g_list_find_custom(list, file, (GCompareFunc) strcmp) &&
                    g_file_test(path, G_FILE_TEST_IS_DIR))
