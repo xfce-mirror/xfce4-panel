@@ -219,6 +219,8 @@ void panel_set_orientation(int orientation)
 {
     settings.orientation = orientation;
 
+    settings.x = settings.y = -1;
+
     /* only keep side panels. We just rebuild the central panel
      * if necessary */
     side_panel_unpack(LEFT);
@@ -631,8 +633,22 @@ void panel_parse_xml(xmlNodePtr node)
         settings.num_screens = 4;
 
     /* some things just look awful with old style */
-    if(settings.popup_position == LEFT || settings.popup_position == RIGHT)
-        settings.style = NEW_STYLE;
+    if(settings.orientation == HORIZONTAL)
+    {
+	if (settings.popup_position == LEFT || 
+	    settings.popup_position == RIGHT)
+	{
+	    settings.style = NEW_STYLE;
+	}
+    }
+    else
+    {
+	if (settings.popup_position == TOP || 
+	    settings.popup_position == BOTTOM)
+	{
+	    settings.style = NEW_STYLE;
+	}
+    }
 }
 
 void panel_write_xml(xmlNodePtr root)

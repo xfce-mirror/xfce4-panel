@@ -110,7 +110,7 @@ static void move_handle_arrange(MoveHandle * mh, int position)
     gtk_widget_show(mh->box);
     gtk_container_add(GTK_CONTAINER(mh->base), mh->box);
 
-    if(horizontal && mh->side == RIGHT)
+    if(mh->side == RIGHT && (horizontal || settings.orientation == VERTICAL))
     {
         gtk_box_pack_end(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
         gtk_box_pack_end(GTK_BOX(mh->box), mh->eventbox, TRUE, TRUE, 0);
@@ -264,6 +264,9 @@ struct _PanelGroup
 
 void panel_group_arrange(PanelGroup * pg, int position)
 {
+    gboolean vertical = settings.orientation == VERTICAL;
+    gboolean start = TRUE;
+    
     if(pg->box)
     {
         gtk_container_remove(GTK_CONTAINER(pg->box), pg->top);
@@ -281,31 +284,29 @@ void panel_group_arrange(PanelGroup * pg, int position)
     gtk_widget_show(pg->box);
     gtk_container_add(GTK_CONTAINER(pg->base), pg->box);
 
-    if(position == LEFT || position == TOP)
+    /* find all cases for which we must use .._pack_end() */
+    if (pg->index == 0)
     {
-        if(pg->index == 0 && position == LEFT && pg->side == RIGHT)
-        {
-            gtk_box_pack_end(GTK_BOX(pg->box), pg->top, FALSE, FALSE, 0);
-            gtk_box_pack_end(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
-        }
-        else
-        {
-            gtk_box_pack_start(GTK_BOX(pg->box), pg->top, FALSE, FALSE, 0);
-            gtk_box_pack_start(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
-        }
+	if ((vertical && position == RIGHT) || (!vertical && position == BOTTOM))
+	    start = FALSE;
+	else if (pg->side == RIGHT && position == BOTTOM)
+	    start = FALSE;
     }
     else
     {
-        if(pg->index == 0 && position == RIGHT && pg->side == LEFT)
-        {
-            gtk_box_pack_start(GTK_BOX(pg->box), pg->top, TRUE, TRUE, 0);
-            gtk_box_pack_start(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
-        }
-        else
-        {
-            gtk_box_pack_end(GTK_BOX(pg->box), pg->top, TRUE, TRUE, 0);
-            gtk_box_pack_end(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
-        }
+	if (position == RIGHT || position == BOTTOM)
+	    start = FALSE;
+    }
+    
+    if(start)
+    {
+        gtk_box_pack_start(GTK_BOX(pg->box), pg->top, TRUE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
+    }
+    else
+    {
+	gtk_box_pack_end(GTK_BOX(pg->box), pg->top, TRUE, TRUE, 0);
+	gtk_box_pack_end(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
     }
 }
 
@@ -408,9 +409,16 @@ void side_panel_pack(int side, GtkBox *box)
 
     boxes[side] = box;
 
-    for(i = 0; i < num; i++)
+    for(i = 0; i < NBGROUPS; i++)
     {
-        panel_group_pack(groups[side][i], box);
+        if(groups[side][i])
+	{
+	    panel_group_pack(groups[side][i], box);
+	    panel_group_arrange(groups[side][i], settings.popup_position);
+
+	    if(i == 0)
+		move_handle_arrange(handles[side], settings.popup_position);
+	}
     }
 }
 

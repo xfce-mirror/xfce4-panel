@@ -210,9 +210,6 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
                              GTK_EXPAND, GTK_EXPAND, 0, 0);
 	}
     }
-
-    /* Reorder the table to fix a bad display bug 
-    reorder_desktop_table(settings.size);*/
 }
 
 void screen_button_free(ScreenButton * sb)
