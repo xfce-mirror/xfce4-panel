@@ -908,10 +908,10 @@ static void draw_hrs_pointer(GtkWidget * widget, GdkGC * gc, gint xc, gint yc)
 
     points[0].x = xc + s * width;
     points[0].y = yc + c * width;
-    points[1].x = xc + 3.0 * c * clock->radius / 5.0 + s * 0.5;
-    points[1].y = yc - 3.0 * s * clock->radius / 5.0 + c * 0.5;
-    points[2].x = xc + 3.0 * c * clock->radius / 5.0 - s * 0.5;
-    points[2].y = yc - 3.0 * s * clock->radius / 5.0 - c * 0.5;
+    points[1].x = xc + 2.0 * c * clock->radius / 5.0 + s * 0.5;
+    points[1].y = yc - 2.0 * s * clock->radius / 5.0 + c * 0.5;
+    points[2].x = xc + 2.0 * c * clock->radius / 5.0 - s * 0.5;
+    points[2].y = yc - 2.0 * s * clock->radius / 5.0 - c * 0.5;
     points[3].x = xc - s * width;
     points[3].y = yc - c * width;
     points[4].x = xc - c * width;
