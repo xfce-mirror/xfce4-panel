@@ -159,21 +159,13 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-icondir = $(pkgdatadir)/icons
-
-icon_DATA = \
-	diag_icon.xpm							\
-	menu_icon.xpm 							\
-	xfce_icon.xpm 
-
-
-EXTRA_DIST = $(icon_DATA)
+noinst_DATA = xfce4-panel-icon.h xfce4-panel.png
 subdir = icons
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 DIST_SOURCES =
-DATA = $(icon_DATA)
+DATA = $(noinst_DATA)
 
 DIST_COMMON = Makefile.am Makefile.in
 all: all-am
@@ -194,24 +186,6 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-iconDATA_INSTALL = $(INSTALL_DATA)
-install-iconDATA: $(icon_DATA)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(icondir)
-	@list='$(icon_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(iconDATA_INSTALL) $$d$$p $(DESTDIR)$(icondir)/$$f"; \
-	  $(iconDATA_INSTALL) $$d$$p $(DESTDIR)$(icondir)/$$f; \
-	done
-
-uninstall-iconDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(icon_DATA)'; for p in $$list; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(icondir)/$$f"; \
-	  rm -f $(DESTDIR)$(icondir)/$$f; \
-	done
 tags: TAGS
 TAGS:
 
@@ -255,7 +229,6 @@ check: check-am
 all-am: Makefile $(DATA)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(icondir)
 
 install: install-am
 install-exec: install-exec-am
@@ -297,7 +270,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-iconDATA
+install-data-am:
 
 install-exec-am:
 
@@ -323,18 +296,24 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-iconDATA uninstall-info-am
+uninstall-am: uninstall-info-am
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
 	dvi-am info info-am install install-am install-data \
-	install-data-am install-exec install-exec-am install-iconDATA \
-	install-info install-info-am install-man install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
+	install-data-am install-exec install-exec-am install-info \
+	install-info-am install-man install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic \
 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
-	uninstall-iconDATA uninstall-info-am
+	uninstall-info-am
 
+
+xfce4-panel-icon.h: $(srcdir)/xfce4-panel.png
+	gdk-pixbuf-csource --raw --build-list 				\
+	panel_icon_data $(srcdir)/xfce4-panel.png > xfce4-panel-icon.h
+
+all: xfce4-panel-icon.h
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

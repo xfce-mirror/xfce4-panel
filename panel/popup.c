@@ -256,7 +256,7 @@ set_popup_window_properties (GtkWidget * win)
     gtk_window_set_transient_for (window, GTK_WINDOW (panel.toplevel));
     gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_MENU);
 
-    pb = get_system_pixbuf (MENU_ICON);
+    pb = get_panel_pixbuf ();
     gtk_window_set_icon (window, pb);
     g_object_unref (pb);
 

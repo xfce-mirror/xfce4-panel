@@ -474,7 +474,7 @@ create_panel_window (void)
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);
 
-    pb = get_system_pixbuf (XFCE_ICON);
+    pb = get_panel_pixbuf ();
     gtk_window_set_icon (window, pb);
     g_object_unref (pb);
 

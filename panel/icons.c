@@ -24,11 +24,11 @@
 #include <libxfce4util/i18n.h>
 
 #include "xfce.h"
+#include "icons/xfce4-panel-icon.h"
 
-/* program icons */
-#include "icons/diag_icon.xpm"
-#include "icons/menu_icon.xpm"
-#include "icons/xfce_icon.xpm"
+#ifdef HAVE_GDK_PIXBUF_NEW_FROM_STREAM
+#define gdk_pixbuf_new_from_inline gdk_pixbuf_new_from_stream
+#endif
 
 const char *icon_names[NUM_ICONS];
 
@@ -115,17 +115,11 @@ get_pixbuf_from_file (const char *path)
 }
 
 GdkPixbuf *
-get_system_pixbuf (int id)
+get_panel_pixbuf (void)
 {
     GdkPixbuf *pb = NULL;
 
-    /* APP ICONS */
-    if (id == DIAG_ICON)
-        pb = gdk_pixbuf_new_from_xpm_data ((const char **)diag_icon_xpm);
-    else if (id == MENU_ICON)
-        pb = gdk_pixbuf_new_from_xpm_data ((const char **)menu_icon_xpm);
-    else if (id == XFCE_ICON)
-        pb = gdk_pixbuf_new_from_xpm_data ((const char **)xfce_icon_xpm);
+    pb = gdk_pixbuf_new_from_inline(-1, panel_icon_data, FALSE, NULL);
 
     if (!pb)
         pb = get_pixbuf_by_id (UNKNOWN_ICON);

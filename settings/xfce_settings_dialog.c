@@ -634,6 +634,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+    gtk_window_set_icon(GTK_WINDOW (dialog), mp->icon);
 
     g_signal_connect (dialog, "response", G_CALLBACK (dialog_delete), NULL);
     g_signal_connect (dialog, "delete_event", G_CALLBACK (dialog_delete), NULL);

@@ -56,20 +56,14 @@ enum
     MINIBUTTONS
 };
 
-enum
-{
-    DIAG_ICON,
-    MENU_ICON,
-    XFCE_ICON,
-};
-
 #define UNKNOWN_ICON DEFAULT_ICON
 
 void icons_init (void);
 
 GdkPixbuf *get_pixbuf_by_id (int id);
 GdkPixbuf *get_minibutton_pixbuf (int id);
-GdkPixbuf *get_system_pixbuf (int id);
+
+GdkPixbuf *get_panel_pixbuf (void);
 
 GdkPixbuf *get_pixbuf_from_file (const char *path);
 

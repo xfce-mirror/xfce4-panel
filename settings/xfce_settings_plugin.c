@@ -38,12 +38,13 @@
 #include <libxfce4util/i18n.h>
 #include <libxfce4util/util.h>
 #include <xfce-mcs-manager/manager-plugin.h>
+#include <libxfcegui4/icons.h>
 
 #include "xfce_settings.h"
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
 
-#include <icons/xfce_icon.xpm>
+#include "icons/xfce4-panel-icon.h"
 
 #define DEFAULT_THEME "Curve"
 
@@ -74,7 +75,7 @@ mcs_plugin_init (McsPlugin * mp)
     mp->plugin_name = g_strdup (CHANNEL);
     mp->caption = g_strdup (_("XFce Panel"));
     mp->run_dialog = run_xfce_settings_dialog;
-    mp->icon = gdk_pixbuf_new_from_xpm_data ((const char **)xfce_icon_xpm);
+    mp->icon = inline_icon_at_size(panel_icon_data, 48, 48);
 
     return MCS_PLUGIN_INIT_OK;
 }
