@@ -432,7 +432,6 @@ run_xfce_settings_dialog (McsPlugin * mp)
 {
     GtkWidget *header, *frame, *vbox;
     GtkSizeGroup *sg;
-    GdkPixbuf *pb;
 
     if (is_running)
     {
