@@ -42,8 +42,9 @@
 #include "item_dialog.h"
 #include "settings.h"
 
-/* make sure translations are taken from the panel not some plugin */
-#define dg_(s)	dgettext (PACKAGE, s)
+/* Make sure translations are taken from the panel and not from some plugin */
+#undef _
+#define _(s) dgettext (PACKAGE, s)
 
 static gboolean popup_from_timeout = FALSE;
 static int popup_timeout_id = 0;
@@ -466,7 +467,7 @@ item_apply_config (Item * item)
     }
     else
     {
-	add_tooltip (item->button, dg_("Click mouse button 3 to change item"));
+	add_tooltip (item->button, _("Click mouse button 3 to change item"));
     }
 }
 
@@ -489,12 +490,12 @@ void
 create_addtomenu_item (Item * mi)
 {
     mi->button =
-	xfce_menubutton_new_with_stock_icon (dg_("Add launcher"),
+	xfce_menubutton_new_with_stock_icon (_("Add launcher"),
 					     GTK_STOCK_ADD);
     gtk_widget_show (mi->button);
     gtk_button_set_relief (GTK_BUTTON (mi->button), GTK_RELIEF_NONE);
 
-    add_tooltip (mi->button, dg_("Add new item"));
+    add_tooltip (mi->button, _("Add new item"));
 
     /* signals */
     dnd_set_drag_dest (mi->button);

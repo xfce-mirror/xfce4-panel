@@ -29,6 +29,10 @@
 
 #include "add-control-dialog.h"
 
+/* Make sure translations are taken from the panel and not from some plugin */
+#undef _
+#define _(s) dgettext (PACKAGE, s)
+
 typedef struct
 {
     Panel *panel;

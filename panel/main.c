@@ -62,8 +62,9 @@
     "style \"popupbutton\" { GtkWidget::focus-padding = 0 }\n" \
     "class \"XfceTogglebutton\" style \"popupbutton\"\n"
 
-/* make sure translations are taken from the panel not some plugin */
-#define dg_(s)	dgettext (PACKAGE, s)
+/* Make sure translations are taken from the panel and not from some plugin */
+#undef _
+#define _(s) dgettext (PACKAGE, s)
 
 /* signal handling */
 typedef enum
@@ -119,7 +120,7 @@ quit (gboolean force)
 	    logout_session (client_session);
 	    return;
 	}
-	else if (!xfce_confirm (dg_("Are you sure you want to exit?"), 
+	else if (!xfce_confirm (_("Are you sure you want to exit?"), 
 		    		GTK_STOCK_QUIT, NULL))
 	{
 	    return;
@@ -326,7 +327,7 @@ main (int argc, char **argv)
 	(strequal (argv[1], "-v") || strequal (argv[1], "--version") ||
 	 strequal (argv[1], "-h") || strequal (argv[1], "--help")))
     {
-	g_print (dg_("\n"
+	g_print (_("\n"
 		   " The Xfce Panel\n"
 		   " Version %s\n\n"
 		   " Part of the Xfce Desktop Environment\n"
@@ -395,12 +396,12 @@ main (int argc, char **argv)
 #if DEBUG
     if (!session_managed)
     {
-	g_message (dg_("%s: Successfully started without session management"), 
+	g_message (_("%s: Successfully started without session management"), 
 		   PACKAGE);
     }
     else
     {
-	g_message (dg_("%s: Successfully started with session management"), 
+	g_message (_("%s: Successfully started with session management"), 
 		   PACKAGE);
     }
 #endif

@@ -45,8 +45,9 @@
 #define SNAP_WIDTH	25
 
 
-/* make sure translations are taken from the panel not some plugin */
-#define dg_(s)	dgettext (PACKAGE, s)
+/* Make sure translations are taken from the panel and not from some plugin */
+#undef _
+#define _(s) dgettext (PACKAGE, s)
 
 /* typedefs *
  * -------- */
@@ -554,7 +555,7 @@ get_handle_menu (void)
 	
 	menu = gtk_menu_new ();
 
-	mi = gtk_menu_item_new_with_label(dg_("Xfce Panel"));
+	mi = gtk_menu_item_new_with_label(_("Xfce Panel"));
 	gtk_widget_show (mi);
 	gtk_widget_set_sensitive (mi, FALSE);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -563,7 +564,7 @@ get_handle_menu (void)
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic(dg_("Add _new item"));
+	mi = gtk_menu_item_new_with_mnemonic(_("Add _new item"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (run_add_control_dialog), 
 			  NULL);
@@ -573,17 +574,17 @@ get_handle_menu (void)
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic (dg_("_Properties..."));
+	mi = gtk_menu_item_new_with_mnemonic (_("_Properties..."));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (edit_prefs), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-	mi = gtk_menu_item_new_with_mnemonic (dg_("_About Xfce"));
+	mi = gtk_menu_item_new_with_mnemonic (_("_About Xfce"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (do_info), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic (dg_("_Help"));
+	mi = gtk_menu_item_new_with_mnemonic (_("_Help"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (do_help), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -592,12 +593,12 @@ get_handle_menu (void)
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic (dg_("_Lock screen"));
+	mi = gtk_menu_item_new_with_mnemonic (_("_Lock screen"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (lock_screen), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic (dg_("_Restart"));
+	mi = gtk_menu_item_new_with_mnemonic (_("_Restart"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (restart_panel), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -606,7 +607,7 @@ get_handle_menu (void)
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic (dg_("E_xit"));
+	mi = gtk_menu_item_new_with_mnemonic (_("E_xit"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (exit_panel), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -956,7 +957,7 @@ create_panel_window (Panel * p)
     w = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     window = GTK_WINDOW (w);
 
-    gtk_window_set_title (window, dg_("Xfce Panel"));
+    gtk_window_set_title (window, _("Xfce Panel"));
     gtk_window_set_decorated (window, FALSE);
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);

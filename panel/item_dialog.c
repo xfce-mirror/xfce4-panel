@@ -51,8 +51,9 @@
 
 #define PREVIEW_SIZE 48
 
-/* make sure translations are taken from the panel not some plugin */
-#define dg_(s)	dgettext (PACKAGE, s)
+/* Make sure translations are taken from the panel and not from some plugin */
+#undef _
+#define _(s) dgettext (PACKAGE, s)
 
 typedef struct _ItemDialog ItemDialog;
 
@@ -151,7 +152,7 @@ command_browse_cb (GtkWidget *w, CommandOptions *opts)
  
     text = gtk_entry_get_text (GTK_ENTRY (opts->command_entry));
 
-    file = select_file_name (dg_("Select command"), text, 
+    file = select_file_name (_("Select command"), text, 
 	    		     gtk_widget_get_toplevel (opts->base));
 
     if (file)
@@ -294,7 +295,7 @@ create_command_options (GtkSizeGroup *sg)
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 
-    w = gtk_label_new (dg_("Command:"));
+    w = gtk_label_new (_("Command:"));
     gtk_misc_set_alignment (GTK_MISC (w), 0, 0.5);
     gtk_widget_show (w);
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
@@ -353,7 +354,7 @@ create_command_options (GtkSizeGroup *sg)
     
     /* terminal */
     opts->term_checkbutton = w = 
-	gtk_check_button_new_with_mnemonic (dg_("Run in _terminal"));
+	gtk_check_button_new_with_mnemonic (_("Run in _terminal"));
     gtk_widget_show (w);
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
 
@@ -372,7 +373,7 @@ create_command_options (GtkSizeGroup *sg)
     gtk_size_group_add_widget (sg, w);
     
     opts->sn_checkbutton = w = 
-	gtk_check_button_new_with_mnemonic (dg_("Use startup _notification"));
+	gtk_check_button_new_with_mnemonic (_("Use startup _notification"));
     gtk_widget_show (w);
     gtk_box_pack_start (GTK_BOX (hbox), w, FALSE, FALSE, 0);
 
@@ -566,7 +567,7 @@ create_icon_option_menu (void)
 
     menu = gtk_menu_new ();
     
-    mi = gtk_menu_item_new_with_label (dg_("Other Icon"));
+    mi = gtk_menu_item_new_with_label (_("Other Icon"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -605,7 +606,7 @@ icon_browse_cb (GtkWidget *w, IconOptions *opts)
  
     text = gtk_entry_get_text (GTK_ENTRY (opts->icon_entry));
 
-    file = select_file_with_preview (dg_("Select command"), text, 
+    file = select_file_with_preview (_("Select command"), text, 
 	    		             gtk_widget_get_toplevel (opts->base));
 
     if (file && g_file_test (file, G_FILE_TEST_EXISTS) && 
@@ -676,7 +677,7 @@ create_icon_preview_frame (IconOptions *opts)
     gtk_widget_show (frame);
 
     eventbox = gtk_event_box_new ();
-    add_tooltip (eventbox, dg_("Drag file onto this frame to change the icon"));
+    add_tooltip (eventbox, _("Drag file onto this frame to change the icon"));
     gtk_widget_show (eventbox);
     gtk_container_add (GTK_CONTAINER (frame), eventbox);
 
@@ -962,7 +963,7 @@ add_caption_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
     gtk_widget_show (hbox);
     gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new (dg_("Caption:"));
+    label = gtk_label_new (_("Caption:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_size_group_add_widget (sg, label);
     gtk_widget_show (label);
@@ -991,7 +992,7 @@ add_tooltip_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
     gtk_widget_show (hbox);
     gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new (dg_("Tooltip:"));
+    label = gtk_label_new (_("Tooltip:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_size_group_add_widget (sg, label);
     gtk_widget_show (label);
@@ -1019,7 +1020,7 @@ static inline void
 add_menu_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
 {
     idlg->menu_checkbutton =
-	gtk_check_button_new_with_label (dg_("Attach menu to launcher"));
+	gtk_check_button_new_with_label (_("Attach menu to launcher"));
     gtk_widget_show (idlg->menu_checkbutton);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (idlg->menu_checkbutton),
 				  idlg->item->with_popup);
@@ -1200,7 +1201,7 @@ add_position_option (GtkBox *box, Item *item, int num_items)
     gtk_widget_show (hbox);
     gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (dg_("Position:"));
+    label = gtk_label_new (_("Position:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -1234,13 +1235,13 @@ edit_menu_item_dialog (Item * mi)
     menudialog = gtk_dialog_new ();
     dlg = GTK_DIALOG (menudialog);
     
-    gtk_window_set_title (GTK_WINDOW (dlg), dg_("Change menu item"));
+    gtk_window_set_title (GTK_WINDOW (dlg), _("Change menu item"));
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 
     gtk_dialog_set_has_separator (dlg, FALSE);
     
     /* add buttons */
-    remove = xfce_create_mixed_button (GTK_STOCK_REMOVE, dg_("_Remove"));
+    remove = xfce_create_mixed_button (GTK_STOCK_REMOVE, _("_Remove"));
     gtk_widget_show (remove);
     gtk_dialog_add_action_widget (dlg, remove, GTK_RESPONSE_CANCEL);
 
@@ -1252,7 +1253,7 @@ edit_menu_item_dialog (Item * mi)
     gtk_button_box_set_child_secondary (GTK_BUTTON_BOX(dlg->action_area),
 					remove, TRUE);
 
-    header = xfce_create_header (NULL, dg_("Launcher"));
+    header = xfce_create_header (NULL, _("Launcher"));
     gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child), 
 	    			    BORDER);
     gtk_widget_set_size_request (header, -1, 32);

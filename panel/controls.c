@@ -62,8 +62,9 @@
 
 #define UNLOAD_TIMEOUT 30000 /* 30 secs */
 
-/* make sure translations are taken from the panel not some plugin */
-#define dg_(s)	dgettext (PACKAGE, s)
+/* Make sure translations are taken from the panel and not from some plugin */
+#undef _
+#define _(s) dgettext (PACKAGE, s)
 
 typedef struct _ControlClassInfo ControlClassInfo;
 
@@ -792,12 +793,12 @@ get_control_menu (void)
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic (dg_("_Properties..."));
+	mi = gtk_menu_item_new_with_mnemonic (_("_Properties..."));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (edit_control), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-	mi = gtk_menu_item_new_with_mnemonic (dg_("_Remove"));
+	mi = gtk_menu_item_new_with_mnemonic (_("_Remove"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (remove_control), NULL);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -806,7 +807,7 @@ get_control_menu (void)
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_mnemonic(dg_("Add _new item"));
+	mi = gtk_menu_item_new_with_mnemonic(_("Add _new item"));
 	gtk_widget_show (mi);
 	g_signal_connect (mi, "activate", G_CALLBACK (run_add_control_dialog), 
 			  NULL);

@@ -41,8 +41,9 @@
 
 #define BORDER 6
 
-/* make sure translations are taken from the panel not some plugin */
-#define dg_(s)	dgettext (PACKAGE, s)
+/* Make sure translations are taken from the panel and not from some plugin */
+#undef _
+#define _(s) dgettext (PACKAGE, s)
 
 static GtkWidget *cdialog = NULL;
 
@@ -88,7 +89,7 @@ add_position_option (GtkBox *box, Control *control)
     gtk_widget_show (hbox);
     gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (dg_("Position:"));
+    label = gtk_label_new (_("Position:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -148,7 +149,7 @@ controls_dialog (Control * control)
 
     gtk_dialog_set_has_separator (dlg, FALSE);
 
-    gtk_window_set_title (GTK_WINDOW (dlg), dg_("Item properties"));
+    gtk_window_set_title (GTK_WINDOW (dlg), _("Item properties"));
 
     button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
     gtk_widget_show (button);
@@ -200,7 +201,7 @@ retry:
 	pp = groups_get_popup (control->index);
 
 	if (!(control->with_popup) || !pp || pp->items == NULL ||
-	    xfce_confirm (dg_("Removing the item will also remove "
+	    xfce_confirm (_("Removing the item will also remove "
 		            "its popup menu."),
 		          GTK_STOCK_REMOVE, NULL))
 	{
