@@ -145,7 +145,24 @@ static xmlDocPtr read_xml_file(void)
     xmlKeepBlanksDefault(0);
 
     rcfile = localized_rcfile();
-    doc = xmlParseFile(rcfile);
+    
+    if (rcfile)
+	doc = xmlParseFile(rcfile);
+    else
+    {
+	xmlNodePtr root;
+	
+	doc = xmlNewDoc("1.0");
+	doc->children = xmlNewDocRawNode(xmlconfig, NULL, ROOT, NULL);
+
+	root = (xmlNodePtr) doc->children;
+	xmlDocSetRootElement(doc, root);
+	
+	xmlNewTextChild(root, NULL, "Panel", NULL);
+	xmlNewTextChild(root, NULL, "Central", NULL);
+	xmlNewTextChild(root, NULL, "Left", NULL);
+	xmlNewTextChild(root, NULL, "Right", NULL);
+    }
 
     g_free(rcfile);
     return doc;
