@@ -1,58 +1,19 @@
 <?xml version="1.0"?>
 <Xfce>
-  <Panel orientation="0" layer="0" size="1" popupposition="1" icontheme="Curve" groups="14">
+  <Panel orientation="0" layer="0" size="1" popupposition="1" icontheme="Curve" groups="15">
   </Panel>
   <Groups>
     <Group>
       <Popup>
         <Item>
-          <Caption>Run...</Caption>
-          <Command term="0" sn="1">xfrun4</Command>
-          <Tooltip>Run program</Tooltip>
-          <Icon id="3"/>
-        </Item>
-        <Item>
-          <Caption>Samba Network</Caption>
-          <Command term="0" sn="1">xfsamba4</Command>
-          <Tooltip>xffm - SMB network view</Tooltip>
-          <Icon id="7"/>
-        </Item>
-        <Item>
-          <Caption>CDROM</Caption>
-          <Command term="0" sn="1">xfmountdev4 /mnt/cdrom</Command>
-          <Tooltip>Mount CDROM</Tooltip>
-          <Icon id="2"/>
-        </Item>
-        <Item>
-          <Caption>Floppy</Caption>
-          <Command term="0" sn="1">xfmountdev4 /mnt/floppy</Command>
-          <Tooltip>Mount floppy</Tooltip>
-          <Icon id="2"/>
+          <Caption>Terminal</Caption>
+          <Command term="0" sn="0">xfterm4</Command>
+          <Tooltip>Terminal</Tooltip>
+          <Icon id="12"/>
         </Item>
       </Popup>
-      <Control id="-2" popup="1">
-        <Command term="0" sn="0">xffm</Command>
-        <Tooltip>File manager (xffm)</Tooltip>
-        <Icon id="2"/>
-      </Control>
-    </Group>
-    <Group>
-      <Popup>
-        <Item>
-          <Caption>XFce Settings</Caption>
-          <Command term="0" sn="0">xfce-setting-show</Command>
-          <Tooltip>XFce Settings Manager</Tooltip>
-          <Icon id="3"/>
-        </Item>
-        <Item>
-          <Caption>Screensaver ...</Caption>
-          <Command term="0" sn="1">xscreensaver-demo</Command>
-          <Tooltip>Screensaver options</Tooltip>
-          <Icon id="4"/>
-        </Item>
-      </Popup>
-      <Control id="-2" popup="1">
-        <Command term="0" sn="0">xfterm4</Command>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="1">xfterm4</Command>
         <Tooltip>Terminal</Tooltip>
         <Icon id="12"/>
       </Control>
@@ -60,70 +21,59 @@
     <Group>
       <Popup>
         <Item>
-          <Caption>NEdit</Caption>
-          <Command term="0" sn="0">nedit</Command>
-          <Tooltip>Advanced Editor</Tooltip>
-          <Icon id="1"/>
+          <Caption>Konqueror</Caption>
+          <Command term="0" sn="0">konqueror</Command>
+          <Tooltip>Konqueror File Manager</Tooltip>
+          <Icon id="2"/>
         </Item>
         <Item>
-          <Caption>OpenOffice.org</Caption>
-          <Command term="0" sn="0">soffice</Command>
-	  <Tooltip>Wordprocessor, spreadsheet, presentations, ...</Tooltip>
-          <Icon id="10"/>
-        </Item>
-        <Item>
-          <Caption>AbiWord</Caption>
-          <Command term="0" sn="1">abiword</Command>
-          <Tooltip>Wordprocessor</Tooltip>
-          <Icon id="1"/>
-        </Item>
-        <Item>
-          <Caption>GNumeric</Caption>
-          <Command term="0" sn="1">gnumeric</Command>
-          <Tooltip>Spreadsheet</Tooltip>
-          <Icon id="10"/>
-        </Item>
-        <Item>
-          <Caption>Emacs</Caption>
-          <Command term="0" sn="0">emacs</Command>
-          <Tooltip>Programmer's editor and more</Tooltip>
-          <Icon id="1"/>
+          <Caption>Nautilus</Caption>
+          <Command term="0" sn="0">nautilus</Command>
+          <Tooltip>Nautlius File Manager</Tooltip>
+          <Icon id="2"/>
         </Item>
       </Popup>
       <Control id="-2" popup="1">
-        <Command term="0" sn="0">gvim</Command>
-        <Tooltip>Editor (gvim)</Tooltip>
-        <Icon id="1"/>
+        <Command term="0" sn="1">xffm</Command>
+        <Tooltip>File manager</Tooltip>
+        <Icon id="2"/>
       </Control>
     </Group>
     <Group>
       <Popup>
         <Item>
-          <Caption>MPlayer</Caption>
-          <Command term="0" sn="0">gmplayer</Command>
-          <Tooltip>Movie player</Tooltip>
-          <Icon id="6"/>
-        </Item>
-        <Item>
-          <Caption>XMMS</Caption>
-          <Command term="0" sn="0">xmms</Command>
-          <Tooltip>Sound player</Tooltip>
-          <Icon id="11"/>
+          <Caption>Galeon Web browser</Caption>
+          <Command term="0" sn="0">galeon</Command>
+          <Tooltip>Galeon</Tooltip>
+          <Icon id="7"/>
         </Item>
       </Popup>
-      <Control id="-2" popup="1">
-        <Command term="0" sn="1">gimp</Command>
-        <Tooltip>Gimp image manipulation</Tooltip>
-        <Icon id="8"/>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="1">mozilla</Command>
+        <Tooltip>Mozilla Web Browser</Tooltip>
+        <Icon id="7"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libmailcheck.so">
+        <Mailcheck interval="30">
+          <Mbox>/var/spool/mail/ofourdan</Mbox>
+          <Command term="0" sn="0">mozilla -mail</Command>
+        </Mailcheck>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="0">xmms</Command>
+        <Tooltip>Music player</Tooltip>
+        <Icon id="6"/>
       </Control>
     </Group>
     <Group>
       <Popup/>
       <Control id="-1" filename="libseparator.so"/>
-    </Group>
-    <Group>
-      <Popup/>
-      <Control id="-1" filename="libsystembuttons.so" button1="3" button2="2" showtwo="1"/>
     </Group>
     <Group>
       <Popup/>
@@ -131,41 +81,27 @@
     </Group>
     <Group>
       <Popup/>
-      <Control id="-1" filename="libsystembuttons.so" button1="0" button2="1" showtwo="1"/>
-    </Group>
-    <Group>
-      <Popup/>
       <Control id="-1" filename="libseparator.so"/>
-    </Group>
-    <Group>
-      <Popup>
-        <Item>
-          <Caption>FTP client</Caption>
-          <Command term="0" sn="1">gftp</Command>
-          <Tooltip>gFtp</Tooltip>
-          <Icon id="3"/>
-        </Item>
-        <Item>
-          <Caption>Dillo</Caption>
-          <Command term="0" sn="0">dillo</Command>
-          <Tooltip>Fast Web Browser</Tooltip>
-          <Icon id="7"/>
-        </Item>
-      </Popup>
-      <Control id="-2" popup="1">
-        <Command term="0" sn="0">mozilla</Command>
-        <Tooltip>Mozilla browser suite</Tooltip>
-        <Icon id="7"/>
-      </Control>
-    </Group>
-    <Group>
-      <Popup/>
-      <Control id="-1" filename="libmailcheck.so"/>
     </Group>
     <Group>
       <Popup/>
       <Control id="-2" popup="0">
-        <Command term="0" sn="0">xfprint-manager</Command>
+        <Command term="0" sn="1">xfce-setting-show</Command>
+        <Tooltip>Settings</Tooltip>
+        <Icon id="3"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup>
+        <Item>
+          <Caption>Printer Management</Caption>
+          <Command term="0" sn="0">xfprint-manager</Command>
+          <Tooltip>Printer Management</Tooltip>
+          <Icon id="9"/>
+        </Item>
+      </Popup>
+      <Control id="-2" popup="1">
+        <Command term="0" sn="1">xfprint4</Command>
         <Tooltip>Drag file to print</Tooltip>
         <Icon id="9"/>
       </Control>
@@ -174,14 +110,26 @@
       <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfhelp4</Command>
-        <Tooltip>XFce 4 Manual</Tooltip>
+        <Tooltip>Manual</Tooltip>
         <Icon id="5"/>
       </Control>
     </Group>
     <Group>
       <Popup/>
+      <Control id="-1" filename="libseparator.so"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libsystembuttons.so" button1="1" button2="1" showtwo="0"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libseparator.so"/>
+    </Group>
+    <Group>
+      <Popup/>
       <Control id="-1" filename="libclock.so">
-        <XfceClock Clock_type="1" Toggle_military="0" Toggle_am_pm="1" Toggle_secs="0"/>
+        <XfceClock Clock_type="2" Toggle_military="1" Toggle_am_pm="1" Toggle_secs="0"/>
       </Control>
     </Group>
   </Groups>
