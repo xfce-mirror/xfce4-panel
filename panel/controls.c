@@ -393,6 +393,8 @@ void panel_control_set_size(PanelControl * pc, int size)
 
     if(pc->set_size)
         pc->set_size(pc, size);
+    else
+	gtk_widget_set_size_request(pc->base, s, s);
 }
 
 void panel_control_set_style(PanelControl * pc, int style)

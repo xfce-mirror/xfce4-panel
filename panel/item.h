@@ -36,7 +36,7 @@ struct _PanelItem
     int icon_id;
     char *icon_path;            /* if id==EXTERN_ICON */
 
-    IconButton *button;
+    GtkWidget *button;
 };
 
 void panel_item_apply_config(PanelItem * pi);

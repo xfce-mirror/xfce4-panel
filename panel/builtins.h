@@ -22,10 +22,6 @@
 
 #include "global.h"
 
-void create_clock(PanelControl * pc);
-
-void create_trash(PanelControl * pc);
-
 void create_exit(PanelControl * pc);
 
 void create_config(PanelControl * pc);

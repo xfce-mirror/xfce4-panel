@@ -1,6 +1,6 @@
 /*  mailcheck.c
  *
- *  Copyright (C) Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
+ *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -20,11 +20,12 @@
 #include <sys/stat.h>
 #include <gtk/gtk.h>
 
+#include <xfce_iconbutton.h>
+
 #include "global.h"
 #include "xfce_support.h"
 #include "icons.h"
 #include "controls.h"
-#include "iconbutton.h"
 #include "settings.h"
 
 /* mailcheck icons */
@@ -55,7 +56,6 @@ enum
 /* control data structure */
 typedef struct
 {
-    int size;                   /* local copy of settings.size */
     int status;
     int interval;
     char *mbox;
@@ -68,7 +68,7 @@ typedef struct
     gboolean term;
     char *tooltip;
 
-    IconButton *button;
+    GtkWidget *button;
 }
 t_mailcheck;
 
@@ -122,8 +122,7 @@ static void mailcheck_set_tip(t_mailcheck *mc)
 
     if (mc->tooltip)
     {
-	gtk_tooltips_set_tip(tooltips, icon_button_get_button(mc->button),
-			     mc->tooltip, NULL);
+	gtk_tooltips_set_tip(tooltips, mc->button, mc->tooltip, NULL);
     }
     else
     {
@@ -131,8 +130,7 @@ static void mailcheck_set_tip(t_mailcheck *mc)
 
 	*tip = g_ascii_toupper(*tip);
 	
-	gtk_tooltips_set_tip(tooltips, icon_button_get_button(mc->button),
-			     tip, NULL);
+	gtk_tooltips_set_tip(tooltips, mc->button, tip, NULL);
 
 	g_free(tip);
     }
@@ -256,7 +254,6 @@ static t_mailcheck *mailcheck_new(void)
     mailcheck = g_new(t_mailcheck, 1);
 
     mailcheck->status = NO_MAIL;
-    mailcheck->size = settings.size;
     mailcheck->interval = 30;
     mailcheck->mbox = NULL;
     mailcheck->command = NULL;
@@ -279,9 +276,11 @@ static t_mailcheck *mailcheck_new(void)
     mailcheck->command = g_strdup("pine");
     mailcheck->term = TRUE;
 
-    mailcheck->button = icon_button_new(mailcheck->nomail_pb);
+    mailcheck->button = xfce_iconbutton_new_from_pixbuf(mailcheck->nomail_pb);
+    gtk_widget_show(mailcheck->button);
+    gtk_button_set_relief(GTK_BUTTON(mailcheck->button), GTK_RELIEF_NONE);
 
-    g_signal_connect_swapped(icon_button_get_button(mailcheck->button), 
+    g_signal_connect_swapped(mailcheck->button, 
 	    		     "clicked", G_CALLBACK(run_mail_command), 
 			     mailcheck);
 
@@ -293,8 +292,6 @@ static t_mailcheck *mailcheck_new(void)
 void mailcheck_free(PanelControl * pc)
 {
     t_mailcheck *mailcheck = (t_mailcheck *) pc->data;
-
-    icon_button_free(mailcheck->button);
 
     g_free(mailcheck->mbox);
     g_free(mailcheck->command);
@@ -326,21 +323,14 @@ static gboolean check_mail(PanelControl * pc)
         mailcheck->status = mail;
 
         if(mail == NO_MAIL)
-            icon_button_set_pixbuf(mailcheck->button, mailcheck->nomail_pb);
+            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->nomail_pb);
         else if(mail == OLD_MAIL)
-            icon_button_set_pixbuf(mailcheck->button, mailcheck->oldmail_pb);
+            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->oldmail_pb);
         else
-            icon_button_set_pixbuf(mailcheck->button, mailcheck->newmail_pb);
+            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->newmail_pb);
     }
 
     return TRUE;
-}
-
-void mailcheck_set_size(PanelControl * pc, int size)
-{
-    t_mailcheck *mailcheck = (t_mailcheck *) pc->data;
-
-    icon_button_set_size(mailcheck->button, size);
 }
 
 /*  Options dialog
@@ -599,7 +589,7 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
 void module_init(PanelControl * pc)
 {
     t_mailcheck *mailcheck = mailcheck_new();
-    GtkWidget *b = icon_button_get_button(mailcheck->button);
+    GtkWidget *b = mailcheck->button;
 
     gtk_container_add(GTK_CONTAINER(pc->base), b);
 
@@ -614,8 +604,6 @@ void module_init(PanelControl * pc)
 
     pc->read_config = mailcheck_read_config;
     pc->write_config = mailcheck_write_config;
-
-    pc->set_size = (gpointer) mailcheck_set_size;
 
     pc->add_options = (gpointer) mailcheck_add_options;
 }

@@ -23,12 +23,13 @@
 #include <sys/stat.h>
 #include <time.h>
 
+#include <xfce_iconbutton.h>
+
 #include "global.h"
 #include "debug.h"
 
 #include "controls.h"
 #include "icons.h"
-#include "iconbutton.h"
 #include "xfce_support.h"
 
 /* panel control configuration
@@ -55,7 +56,7 @@ typedef struct
     GdkPixbuf *empty_pb;
     GdkPixbuf *full_pb;
 
-    IconButton *button;
+    GtkWidget *button;
 }
 t_trash;
 
@@ -96,9 +97,11 @@ static t_trash *trash_new(void)
     trash->empty_pb = get_module_pixbuf(TRASH_EMPTY_ICON);
     trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
 
-    trash->button = icon_button_new(trash->empty_pb);
+    trash->button = xfce_iconbutton_new_from_pixbuf(trash->empty_pb);
+    gtk_widget_show(trash->button);
+    gtk_button_set_relief(GTK_BUTTON(trash->button), GTK_RELIEF_NONE);
 
-    b = icon_button_get_button(trash->button);
+    b = trash->button;
 
     add_tooltip(b, _("Trashcan: 0 files"));
 
@@ -133,9 +136,8 @@ static gboolean check_trash(PanelControl * pc)
         {
             trash->empty = TRUE;
             changed = TRUE;
-            icon_button_set_pixbuf(trash->button, trash->empty_pb);
-            add_tooltip(icon_button_get_button(trash->button),
-                        _("Trashcan: 0 files"));
+            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(trash->button), trash->empty_pb);
+            add_tooltip(trash->button, _("Trashcan: 0 files"));
         }
     }
     else
@@ -151,7 +153,7 @@ static gboolean check_trash(PanelControl * pc)
         {
             trash->empty = FALSE;
             changed = TRUE;
-            icon_button_set_pixbuf(trash->button, trash->full_pb);
+            xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(trash->button), trash->full_pb);
         }
 
         while(file)
@@ -175,7 +177,7 @@ static gboolean check_trash(PanelControl * pc)
             sprintf(text, _("Trashcan: %d files / %d MB"), number,
                     size / (1024 * 1024));
 
-        add_tooltip(icon_button_get_button(trash->button), text);
+        add_tooltip(trash->button, text);
     }
 
     if(dir)
@@ -190,19 +192,10 @@ static void trash_free(PanelControl * pc)
 
     g_free(trash->dirname);
 
-    icon_button_free(trash->button);
-
     g_object_unref(trash->empty_pb);
     g_object_unref(trash->full_pb);
 
     g_free(trash);
-}
-
-static void trash_set_size(PanelControl * pc, int size)
-{
-    t_trash *trash = (t_trash *) pc->data;
-
-    icon_button_set_size(trash->button, size);
 }
 
 static void trash_set_theme(PanelControl * pc, const char *theme)
@@ -216,9 +209,9 @@ static void trash_set_theme(PanelControl * pc, const char *theme)
     trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
 
     if(trash->empty)
-        icon_button_set_pixbuf(trash->button, trash->empty_pb);
+        xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(trash->button), trash->empty_pb);
     else
-        icon_button_set_pixbuf(trash->button, trash->full_pb);
+        xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(trash->button), trash->full_pb);
 }
 
 /*  create trash panel control
@@ -228,7 +221,7 @@ static void trash_set_theme(PanelControl * pc, const char *theme)
 void module_init(PanelControl * pc)
 {
     t_trash *trash = trash_new();
-    GtkWidget *b = icon_button_get_button(trash->button);
+    GtkWidget *b = trash->button;
 
     gtk_container_add(GTK_CONTAINER(pc->base), b);
 
@@ -241,7 +234,6 @@ void module_init(PanelControl * pc)
 
     pc->free = (gpointer) trash_free;
 
-    pc->set_size = (gpointer) trash_set_size;
     pc->set_theme = (gpointer) trash_set_theme;
 }
 

@@ -17,11 +17,12 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <xfce_iconbutton.h>
+
 #include "item.h"
 
 #include "item_dialog.h"
 #include "controls.h"
-#include "iconbutton.h"
 #include "xfce.h"
 #include "xfce_support.h"
 #include "callbacks.h"
@@ -40,22 +41,15 @@ void panel_item_apply_config(PanelItem * pi)
     else
         tmp = get_pixbuf_by_id(pi->icon_id);
 
-    icon_button_set_pixbuf(pi->button, tmp);
+    xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(pi->button), tmp);
     g_object_unref(tmp);
 
     if(pi->tooltip)
-        add_tooltip(icon_button_get_button(pi->button), pi->tooltip);
+        add_tooltip(pi->button, pi->tooltip);
 }
 
 /*  global settings
 */
-static void panel_item_set_size(PanelControl * pc, int size)
-{
-    PanelItem *pi = (PanelItem *) pc->data;
-
-    icon_button_set_size(pi->button, size);
-}
-
 static void panel_item_set_theme(PanelControl * pc, const char *theme)
 {
     PanelItem *pi = (PanelItem *) pc->data;
@@ -68,7 +62,6 @@ static void panel_item_set_theme(PanelControl * pc, const char *theme)
 static PanelItem *panel_item_new(void)
 {
     PanelItem *pi = g_new(PanelItem, 1);
-    GtkWidget *w;
 
     pi->command = NULL;
     pi->in_terminal = FALSE;
@@ -77,17 +70,19 @@ static PanelItem *panel_item_new(void)
     pi->icon_id = UNKNOWN_ICON;
     pi->icon_path = NULL;
 
-    pi->button = icon_button_new(NULL);
+    pi->button = xfce_iconbutton_new();
+    gtk_widget_show(pi->button);
+    gtk_button_set_relief(GTK_BUTTON(pi->button), GTK_RELIEF_NONE);
 
-    w = icon_button_get_button(pi->button);
+    add_tooltip(pi->button, _("Click Mouse 3 to change item"));
 
-    add_tooltip(w, _("Click Mouse 3 to change item"));
+    g_signal_connect(pi->button, "clicked", G_CALLBACK(panel_item_click_cb), pi);
 
-    g_signal_connect(w, "clicked", G_CALLBACK(panel_item_click_cb), pi);
-
-    dnd_set_drag_dest(w);
-    g_signal_connect(w, "drag-data-received", G_CALLBACK(panel_item_drop_cb),
+    dnd_set_drag_dest(pi->button);
+    g_signal_connect(pi->button, "drag-data-received", G_CALLBACK(panel_item_drop_cb),
                      pi);
+
+    panel_item_apply_config(pi);
 
     return pi;
 }
@@ -167,8 +162,6 @@ static void panel_item_free(PanelControl * pc)
     g_free(pi->icon_path);
     g_free(pi->tooltip);
 
-    icon_button_free(pi->button);
-
     g_free(pi);
 }
 
@@ -199,15 +192,14 @@ static void panel_item_write_config(PanelControl * pc, xmlNodePtr root)
 void create_panel_item(PanelControl * pc)
 {
     PanelItem *pi = panel_item_new();
-    GtkWidget *w = icon_button_get_button(pi->button);
 
-    gtk_container_add(GTK_CONTAINER(pc->base), w);
+    gtk_container_add(GTK_CONTAINER(pc->base), pi->button);
 
     /* fill the PanelControl structure */
     pc->id = ICON;
 
     pc->caption = g_strdup(_("Icon"));
-    pc->main = w;
+    pc->main = pi->button;
     pc->data = (gpointer) pi;
 
     pc->read_config = panel_item_read_config;
@@ -215,7 +207,6 @@ void create_panel_item(PanelControl * pc)
 
     pc->free = panel_item_free;
 
-    pc->set_size = panel_item_set_size;
     pc->set_theme = panel_item_set_theme;
 
     pc->add_options = panel_item_add_options;

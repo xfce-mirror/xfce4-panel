@@ -6,7 +6,6 @@ central.c \
 controls.c \
 controls_dialog.c \
 dialogs.c \
-iconbutton.c \
 icons.c \
 info.c \
 item.c \
@@ -31,7 +30,6 @@ xfce.c \
 xfce_support.c
 
 pkginclude_HEADERS = \
-iconbutton.h \
 icons.h \
 item.h \
 controls.h \
