@@ -40,6 +40,9 @@ static void item_drop_cb(GtkWidget * widget, GdkDragContext * context, gint x, g
     guint count;
     char *execute;
 
+    if (!item || !(item->command))
+	return;
+    
     fnames = gnome_uri_list_extract_filenames((char *)data->data);
     count = g_list_length(fnames);
 
