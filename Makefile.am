@@ -12,6 +12,7 @@ conf_DATA = 								\
 	contents.xml.hu							\
 	contents.xml.it							\
 	contents.xml.ko							\
+	contents.xml.lt							\
 	contents.xml.ms							\
 	contents.xml.nl							\
 	contents.xml.ro							\
