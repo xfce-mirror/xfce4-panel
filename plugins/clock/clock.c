@@ -180,7 +180,7 @@ clock_date_tooltip (GtkWidget * widget)
     struct tm *tm;
     static gint mday = -1;
     char date_s[255];
-    char *utf8date;
+    char *utf8date = NULL;
 
     g_return_val_if_fail (widget != NULL, FALSE);
     g_return_val_if_fail (GTK_IS_WIDGET (widget), FALSE);
@@ -204,12 +204,18 @@ clock_date_tooltip (GtkWidget * widget)
 	/* Conversion to utf8
 	 * patch by Oliver M. Bolzer <oliver@fakeroot.net>
 	 */
-	utf8date = g_locale_to_utf8 (date_s, -1, NULL, NULL, NULL);
+        if (!g_utf8_validate (date_s))
+            utf8date = g_locale_to_utf8 (date_s, -1, NULL, NULL, NULL);
+        
 	if (utf8date)
 	{
 	    add_tooltip (widget, utf8date);
 	    g_free (utf8date);
 	}
+        else
+        {
+            add_tooltip (widget, date_s);
+        }
     }
 
     return TRUE;
