@@ -395,6 +395,9 @@ systembuttons_read_config (Control * control, xmlNodePtr node)
 	    gtk_widget_show (sb->align[1]);
 	}
     }
+ 
+    /* Try to resize the systembuttons to fit the user settings */
+    systembuttons_set_size (control, settings.size);    
 }
 
 static void
