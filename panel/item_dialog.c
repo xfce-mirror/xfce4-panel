@@ -24,6 +24,7 @@
 #include <libxfce4util/i18n.h>
 
 #include "xfce.h"
+#include "groups.h"
 #include "popup.h"
 #include "item.h"
 #include "item_dialog.h"
@@ -50,6 +51,7 @@ enum
 { RESPONSE_REVERT, RESPONSE_DONE, RESPONSE_REMOVE };
 
 /* the item is a menu item or a panel control */
+Control *config_control = NULL;
 Item *config_item = NULL;
 int num_items = 0;
 
@@ -67,6 +69,9 @@ static GtkWidget *icon_entry;
 static GtkWidget *icon_browse_button;
 static GtkWidget *tip_entry;
 static GtkWidget *preview_image;
+
+/* for panel launchers */
+static GtkWidget *popup_checkbutton;
 
 /* for menu items */
 static GtkWidget *caption_entry;
@@ -113,6 +118,7 @@ struct ItemBackup
     char *icon_path;
 
     int pos;
+    gboolean with_popup;
 };
 
 struct ItemBackup backup;
@@ -131,6 +137,7 @@ init_backup (void)
     backup.icon_path = NULL;
 
     backup.pos = 0;
+    backup.with_popup = TRUE;
 }
 
 void
@@ -507,6 +514,47 @@ create_tooltip_option (GtkSizeGroup * sg)
     return vbox;
 }
 
+/* show subpanel */
+static void
+popup_changed(GtkToggleButton *tb, gpointer data)
+{
+   config_item->with_popup = gtk_toggle_button_get_active(tb);
+
+   if (config_item->with_popup != config_control->with_popup)
+   {
+       config_control->with_popup = config_item->with_popup;
+
+       groups_show_popup(config_control->index, config_control->with_popup);
+   }
+}
+
+static GtkWidget *
+create_popup_option(GtkSizeGroup *sg)
+{
+    GtkWidget *hbox;
+    GtkWidget *label;
+
+    hbox = gtk_hbox_new (FALSE, 4);
+    gtk_widget_show (hbox);
+
+    label = gtk_label_new (_("Subpanel:"));
+    gtk_size_group_add_widget (sg, label);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    popup_checkbutton = gtk_check_button_new();
+    gtk_widget_show(popup_checkbutton);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(popup_checkbutton), 
+	    			 config_item->with_popup);
+    gtk_box_pack_start (GTK_BOX (hbox), popup_checkbutton, FALSE, TRUE, 0);
+
+    g_signal_connect(popup_checkbutton, "toggled", G_CALLBACK(popup_changed), 
+	    	     NULL);
+    
+    return hbox;
+}
+
 /* Change menu item position
  * -------------------------
 */
@@ -590,6 +638,13 @@ create_item_options_box (void)
     box = create_tooltip_option (sg);
     gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
 
+    /* subpanel (panel item) */
+    if (config_item->type == PANELITEM)
+    {
+	box = create_popup_option(sg);
+        gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 2);
+    }
+    
     /* position (menu item) */
     if (config_item->type == MENUITEM && num_items > 1)
     {
@@ -758,6 +813,14 @@ item_revert_options (void)
 
     item_apply_config (config_item);
 
+    if (config_item->type == PANELITEM)
+    {
+	config_item->with_popup = backup.with_popup;
+
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(popup_checkbutton), 
+		    		     config_item->with_popup);
+    }
+    
     /* revert the widgets */
     if (config_item->command)
         gtk_entry_set_text (GTK_ENTRY (command_entry), config_item->command);
@@ -872,6 +935,7 @@ void
 panel_item_add_options (Control * control, GtkContainer * container,
                         GtkWidget * revert, GtkWidget * done)
 {
+    config_control = control;
     config_item = control->data;
 
     dialog = gtk_widget_get_toplevel (done);

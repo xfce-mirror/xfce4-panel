@@ -42,6 +42,9 @@ struct _Item
     /* for menu items */
     PanelPopup *parent;
     int pos;
+
+    /* for panel launchers */
+    gboolean with_popup;
 };
 
 /* special menu item */

@@ -773,6 +773,7 @@ create_mailcheck_control (Control * control)
     gtk_container_add (GTK_CONTAINER (control->base), b);
 
     control->data = (gpointer) mailcheck;
+    control->with_popup = FALSE;
 
     run_mailcheck (mailcheck);
 

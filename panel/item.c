@@ -28,6 +28,7 @@
 #include "xfce.h"
 #include "item.h"
 #include "popup.h"
+#include "groups.h"
 #include "item_dialog.h"
 #include "settings.h"
 
@@ -160,6 +161,14 @@ item_read_config (Item * item, xmlNodePtr node)
     xmlNodePtr child;
     xmlChar *value;
 
+    value = xmlGetProp(node, "popup");
+
+    if (value)
+    {
+	item->with_popup = atoi(value) == 1 ? TRUE : FALSE;
+	g_free(value);
+    }
+    
     for (child = node->children; child; child = child->next)
     {
         if (xmlStrEqual (child->name, (const xmlChar *)"Caption"))
@@ -271,6 +280,12 @@ item_write_config (Item * item, xmlNodePtr node)
 
     snprintf (value, 3, "%d", item->icon_id);
     xmlSetProp (child, "id", value);
+	
+    if (item->type == PANELITEM)
+    {
+	snprintf (value, 3, "%d", item->with_popup);
+	xmlSetProp (node, "popup", value);
+    }
 }
 
 void
@@ -417,6 +432,7 @@ panel_item_new (void)
     pi->button = xfce_iconbutton_new ();
     gtk_widget_show (pi->button);
     gtk_button_set_relief (GTK_BUTTON (pi->button), GTK_RELIEF_NONE);
+    pi->with_popup = TRUE;
 
     item_apply_config (pi);
 
@@ -453,6 +469,8 @@ panel_item_read_config (Control * control, xmlNodePtr node)
     item_read_config (pi, node);
 
     item_apply_config (pi);
+    control->with_popup = pi->with_popup;
+    groups_show_popup(control->index, pi->with_popup);
 }
 
 static void
