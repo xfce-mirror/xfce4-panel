@@ -562,9 +562,6 @@ void central_panel_set_from_xml(xmlNodePtr node)
 		screen_button_update_name(sb);
 	}
 
-	if(sb)
-            screen_button_update_name(sb);
-
         if(child)
             child = child->next;
     }
