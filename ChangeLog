@@ -1,3 +1,41 @@
+2003-01-12 23:41  huysmans
+
+	* panel/: Makefile.in, item_dialog.c: Fix panel crash when removing
+	menu items
+
+2003-01-12 23:20  huysmans
+
+	* panel/callbacks.c: Fix bug in mouse press handling that stopped
+	the menu from working
+
+2003-01-12 21:33  xfce
+
+	* Makefile.in, aclocal.m4, configure, configure.ac, xfce4.spec.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	plugins/trash/Makefile.in, settings/Makefile.am,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Add a check for availability of
+	xfce-mcs-manager
+
+2003-01-12 20:50  huysmans
+
+	* panel/: callbacks.c, controls.c, handle.c: Use SHIFT-button1 as
+	equivalent for right-click
+
+2003-01-11 19:58  huysmans
+
+	* panel/: Makefile.am, Makefile.in: Rename binary to xfce4-panel
+
+2003-01-11 17:31  huysmans
+
+	* ChangeLog, configure, configure.ac, panel/mcs_client.c,
+	settings/Makefile.am, settings/Makefile.in: Update to use new
+	settings manager plugin path
+
 2003-01-11 13:08  huysmans
 
 	* ChangeLog, Makefile.in, aclocal.m4, configure, configure.ac,

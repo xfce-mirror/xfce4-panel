@@ -1002,7 +1002,7 @@ void edit_menu_item_dialog(MenuItem * mi)
         break;
     }
 
-    reindex_items(mi->parent->items);
+    reindex_items(pp->items);
     
     gtk_widget_destroy(dlg);
     num_items = 0;
