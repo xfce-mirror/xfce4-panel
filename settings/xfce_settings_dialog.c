@@ -152,9 +152,14 @@ orientation_changed (GtkOptionMenu * menu)
 
     setting->data.v_int = n;
     mcs_manager_set_setting (mcs_manager, setting, CHANNEL);
-
-    gdk_flush();
-    g_usleep(10);
+/*    TODO: find out why this crashed the panel
+ *    the error is in libxfce4mcs
+ *    
+ *    mcs_manager_notify(mcs_manager, CHANNEL);
+ *
+ *    gdk_flush();
+ *    g_usleep(10);
+*/
 
     /* this seems more logical */
     switch (pos)
