@@ -7,6 +7,7 @@ conf_DATA = 								\
 	contents.xml.az							\
 	contents.xml.ca							\
 	contents.xml.eu							\
+	contents.xml.fi							\
 	contents.xml.fr							\
 	contents.xml.he							\
 	contents.xml.hu							\
