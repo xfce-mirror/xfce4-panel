@@ -223,9 +223,15 @@ xfce_read_options (void)
     doc = xmlParseFile (path);
     g_free (path);
 
+    if (!doc)
+	return;
+    
     node = xmlDocGetRootElement (doc);
 
-    for (node = node->children; node; node = node->next)
+    if (node)
+	node = node->children;
+    
+    for (; node; node = node->next)
     {
 	if (xmlStrEqual (node->name, (const xmlChar *) "Settings"))
 	{
