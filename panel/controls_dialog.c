@@ -156,7 +156,10 @@ void clear_controls_list(void)
         pc = (PanelControl *) current->data;
 
         if(pc)
+	{
+	    gtk_widget_destroy(pc->base);
             panel_control_free(pc);
+	}
     }
 
     controls = NULL;
