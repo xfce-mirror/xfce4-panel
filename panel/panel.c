@@ -1237,6 +1237,8 @@ panel_move_control (int from, int to)
 
 	control->index = i;
     }
+
+    write_panel_config ();
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_remove_control */
@@ -1271,6 +1273,8 @@ panel_remove_control (int index)
 
 	control->index = i;
     }
+
+    write_panel_config ();
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_add_control */
@@ -1297,6 +1301,8 @@ panel_add_control (Control * control, int index)
     }
 
     settings.num_groups++;
+
+    write_panel_config ();
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_get_n_controls */

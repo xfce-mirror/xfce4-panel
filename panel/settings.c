@@ -276,23 +276,11 @@ write_final_panel_config (void)
 
     xfcerc = get_save_file ("contents.xml");
     
-    if (!xfcerc)
-    {
-        g_critical ("Could not write config file");
-        return;
-    }
-    
     tmprc = g_strconcat (xfcerc, ".active", NULL);
 
     if (!g_file_test (tmprc, G_FILE_TEST_EXISTS))
     {
-        write_panel_config ();
-        
-        if (!g_file_test (tmprc, G_FILE_TEST_EXISTS))
-        {
-            g_critical ("No current config file available");
-            return;
-        }
+        goto out;
     }
     
     if (g_file_test (xfcerc, G_FILE_TEST_EXISTS))
