@@ -1,20 +1,20 @@
 # Xfce4-panel German translation
 # Copyright (C) 2003 Olivier Fourdan
 # This file is distributed under the same license as the xfce4-panel package.
-# Moritz Heiber <moe@xfce.org>, 2003
+# Moritz Heiber <moe@xfce.org>, 2003, 2004, 2005
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
-"PO-Revision-Date: 2004-09-18 00:19+0100\n"
+"POT-Creation-Date: 2005-01-02 11:01+0100\n"
+"PO-Revision-Date: 2005-01-05 00:19+0100\n"
 "Last-Translator: Moritz Heiber <moe@xfce.org>\n"
 "Language-Team: none <none@none>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:557
 msgid "Select file"
 msgstr "Datei auswählen"
 
@@ -22,7 +22,7 @@ msgstr "Datei auswählen"
 msgid "No data was found. The panel will be empty."
 msgstr "Keine Daten gefunden. Das Panel wird leer sein"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Position:"
 
@@ -30,56 +30,56 @@ msgstr "Position:"
 msgid "Item properties"
 msgstr "Eigenschaften"
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Das Entfernen des Objektes entfernt auch sein Menü."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Kommando auswählen"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:268
 msgid "Command:"
 msgstr "Kommando:"
 
-#: panel/item_dialog.c:307
+#: panel/item_dialog.c:311
 msgid "Run in _terminal"
 msgstr "In _Terminal ausführen"
 
-#: panel/item_dialog.c:325
+#: panel/item_dialog.c:329
 msgid "Use startup _notification"
 msgstr "Benutze Startup _Notifikation"
 
-#: panel/item_dialog.c:511
+#: panel/item_dialog.c:515
 msgid "Other Icon"
 msgstr "Anderes Icon"
 
-#: panel/item_dialog.c:622
+#: panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
 msgstr "Dateien auf diesen Rahmen ziehen, um das Icon zu verändern"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "Bezeichnung:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "Menü für Starter"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "Menüobjekt verändern"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1221 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Entfernen"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1233 panel/item.c:668
 msgid "Launcher"
 msgstr "Starter"
 
@@ -99,7 +99,7 @@ msgstr "Neues Objekt hinzufügen"
 msgid "Are you sure you want to exit?"
 msgstr "Sind Sie sicher, dass Sie Xfce beenden wollen?"
 
-#: panel/main.c:401
+#: panel/main.c:402
 #, c-format
 msgid ""
 "\n"
@@ -121,55 +121,55 @@ msgstr ""
 "\n"
 "Lizensiert unter GNU GPL.\n"
 
-#: panel/main.c:488
+#: panel/main.c:489
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Erfolgreich ohne Sessionmanagement gestartet"
 
-#: panel/main.c:493
+#: panel/main.c:494
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Erfolgreich mit Sessionmanagement gestartet"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Konnte Panelobjekt \"%s\" nicht erzeugen."
 
-#: panel/controls.c:723 panel/panel.c:585
+#: panel/controls.c:743 panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Eigenschaften..."
 
-#: panel/controls.c:737 panel/panel.c:575
+#: panel/controls.c:757 panel/panel.c:637
 msgid "Add _new item"
 msgstr "Neues _Objekt hinzufügen"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Dieses Objekt hat keine Optionen"
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: panel/panel.c:590
+#: panel/panel.c:652
 msgid "_About Xfce"
 msgstr "_Über Xfce"
 
-#: panel/panel.c:595
+#: panel/panel.c:657
 msgid "_Help"
 msgstr "_Hilfe"
 
-#: panel/panel.c:604
+#: panel/panel.c:666
 msgid "_Lock screen"
 msgstr "_Desktop sperren"
 
-#: panel/panel.c:609
+#: panel/panel.c:671
 msgid "_Restart"
 msgstr "_Neu starten"
 
-#: panel/panel.c:618
+#: panel/panel.c:680
 msgid "E_xit"
 msgstr "B_eenden"
 
@@ -233,55 +233,55 @@ msgstr "Einstellungsmanager nicht verfügbar"
 msgid "Menu"
 msgstr "Menü"
 
-#: settings/xfce_settings_dialog.c:88
+#: settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "Klein"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Mittel"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "Groß"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Riesig"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Links"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Rechts"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Oben"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Unten"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Panelgröße:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Ausrichtung des Panels"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Popup Position"
 
@@ -289,19 +289,19 @@ msgstr "Popup Position"
 msgid "Always on top:"
 msgstr "Immer obenauf"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Autom. Ausblenden:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce Paneleinstellungen"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Aussehen"
 
-#: settings/xfce_settings_dialog.c:491
+#: settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "Verhalten"
 
@@ -357,15 +357,15 @@ msgstr "Sekunden anzeigen:"
 msgid "Xfce Clock"
 msgstr "Xfce Uhr"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Anzahl der Zeilen:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Anzahl der Spalten:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Grafischer Pager"
 
@@ -418,7 +418,7 @@ msgstr "Button 2:"
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
-msgstr "_Hilfe"
+msgstr "_Verstecken"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -428,26 +428,26 @@ msgstr "Systembuttons"
 msgid "Separator"
 msgstr "Trennlinie"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Mailbox:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Neues Mailkommando"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Dieses Kommando bei neuer Mail ausführen"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Kommando, welches beim Klicken auf das Panel ausgeführt wird"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Intervall (Sek.):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Mailchecker"
