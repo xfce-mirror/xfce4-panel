@@ -1,8 +1,9 @@
 SUBDIRS =								\
 	clock								\
 	mailcheck							\
-	switcher							\
-	systembuttons							\
 	pager								\
 	sample-plugin							\
-	separator
+	separator							\
+	switcher							\
+	systembuttons							\
+	systray
