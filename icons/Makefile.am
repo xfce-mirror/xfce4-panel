@@ -30,7 +30,5 @@ trash_full.xpm \
 unknown.xpm \
 up.xpm \
 xfce_icon.xpm \
-xfce_slogan.xpm \
-digits.xbm
-
+xfce_slogan.xpm
 EXTRA_DIST = $(noinst_DATA)
