@@ -90,6 +90,8 @@ typedef struct
     GtkWidget *frame;
     GtkWidget *eventbox;
     GtkWidget *clock;           /* our XfceClock widget */
+
+    int timeout_id; /* update the date tooltip */
 }
 t_clock;
 
@@ -148,6 +150,10 @@ static void clock_free(PanelControl * pc)
         gtk_widget_destroy(clock->eventbox);
     if(GTK_IS_WIDGET(clock->frame))
         gtk_widget_destroy(clock->frame);
+
+    if (clock->timeout_id)
+	g_source_remove(clock->timeout_id);
+    
     g_free(clock);
 }
 
@@ -661,14 +667,11 @@ void module_init(PanelControl * pc)
     pc->set_style = (gpointer) clock_set_style;
 
     /* Add tooltip to show up the current date */
-    /*
-      FIXME: this is a bug in fact. The tooltipe never gets updated.
-       This is a problem if the panel is not reloaded once a day
-    because the current day may be totally wrong. I know the way to
-    fix it but as it's not really critical, I let it down for the
-    moment
-    */
     clock_date_tooltip (clock->eventbox);
+
+    clock->timeout_id = 
+	g_timeout_add(60000, (GSourceFunc)clock_date_tooltip, clock->eventbox);
+    
     gtk_widget_set_size_request(pc->base, -1, -1);
     clock_set_size(pc, settings.size); 
 }
