@@ -304,7 +304,7 @@ history_check_in_terminal (const char *command)
 */
 
 xfc_combo_info_t *
-create_completion_combo (ComboCallback completion_cb)
+create_completion_combo (ComboCallback completion_cb, gpointer cb)
 {
     return NULL;
 }
