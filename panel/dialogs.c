@@ -989,6 +989,12 @@ static void reposition_popup(PanelPopup * pp)
     if(pp->detached)
         return;
 
+    /* All I want to do here is close and reopen the menu; I tried all
+     * the obvious ways, but this is the only way it works for me
+     *
+     * It seems like three times the same thing, which shouldn't work
+     * ... but it does (for me)
+     */
     gtk_toggle_button_toggled(GTK_TOGGLE_BUTTON(pp->button));
 
     toggle_popup(pp->button, pp);
@@ -1057,6 +1063,9 @@ void add_menu_item_dialog(PanelPopup * pp)
 
         menu_item_set_popup_size(mi, settings.size);
         menu_item_set_style(mi, settings.style);
+	
+	if (settings.icon_theme)
+	    menu_item_set_icon_theme(mi, settings.icon_theme);
 
         reposition_popup(pp);
     }
@@ -1164,6 +1173,9 @@ void edit_menu_item_dialog(MenuItem * mi)
         menu_item_set_popup_size(mi, settings.size);
         menu_item_set_style(mi, settings.style);
 
+	if (settings.icon_theme)
+	    menu_item_set_icon_theme(mi, settings.icon_theme);
+
         reposition_popup(pp);
     }
     else if(response == RESPONSE_REMOVE)
@@ -1244,6 +1256,9 @@ void edit_panel_control_dialog(PanelGroup * pg)
             panel_item_pack(pi, GTK_BOX(pg->vbox));
 
             panel_item_set_size(pi, settings.size);
+	    
+	    if (settings.icon_theme)
+		panel_item_set_icon_theme(pi, settings.icon_theme);
         }
         else
         {
