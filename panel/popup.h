@@ -42,7 +42,7 @@ struct _PanelPopup
     GtkWidget *tearoff_button;
 
     GtkWidget *item_vbox;
-    GList *items;               /* type Item */
+    GList *items;		/* type Item */
 };
 
 /* Panel popups */

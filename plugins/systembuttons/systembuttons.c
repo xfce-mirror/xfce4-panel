@@ -56,9 +56,10 @@ mini_palet_cb (void)
 {
     if (disable_user_config)
     {
-        xfce_info (_("Access to the configuration system has been disabled.\n\n"
-                     "Ask your system administrator for more information"));
-        return;
+	xfce_info (_
+		   ("Access to the configuration system has been disabled.\n\n"
+		    "Ask your system administrator for more information"));
+	return;
     }
 
     mcs_dialog ("all");
@@ -85,13 +86,13 @@ enum
 typedef struct
 {
     gboolean show_two;
-    int button_types[2];        /* 0, 1, 2 or 3 for lock, exit, setup and info */
+    int button_types[2];	/* 0, 1, 2 or 3 for lock, exit, setup and info */
 
     GtkWidget *box;
     GtkWidget *buttonbox;
-    GtkWidget *align[2];        /* containers for the actual buttons */
+    GtkWidget *align[2];	/* containers for the actual buttons */
 
-    GList *callbacks;           /* save callbacks for when we change buttons */
+    GList *callbacks;		/* save callbacks for when we change buttons */
 }
 t_systembuttons;
 
@@ -119,18 +120,18 @@ button_update_image (GtkWidget * button, int type)
 
     switch (type)
     {
-        case LOCK:
-            pb = get_minibutton_pixbuf (MINILOCK_ICON);
-            break;
-        case EXIT:
-            pb = get_minibutton_pixbuf (MINIPOWER_ICON);
-            break;
-        case SETUP:
-            pb = get_minibutton_pixbuf (MINIPALET_ICON);
-            break;
-        case INFO:
-            pb = get_minibutton_pixbuf (MINIINFO_ICON);
-            break;
+	case LOCK:
+	    pb = get_minibutton_pixbuf (MINILOCK_ICON);
+	    break;
+	case EXIT:
+	    pb = get_minibutton_pixbuf (MINIPOWER_ICON);
+	    break;
+	case SETUP:
+	    pb = get_minibutton_pixbuf (MINIPALET_ICON);
+	    break;
+	case INFO:
+	    pb = get_minibutton_pixbuf (MINIINFO_ICON);
+	    break;
     }
 
     xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (button), pb);
@@ -146,10 +147,10 @@ button_set_tip (GtkWidget * button, int type)
 
     if (need_init)
     {
-        tips[0] = _("Lock the screen");
-        tips[1] = _("Exit");
-        tips[2] = _("Setup");
-        tips[3] = _("Info");
+	tips[0] = _("Lock the screen");
+	tips[1] = _("Exit");
+	tips[2] = _("Setup");
+	tips[3] = _("Info");
     }
 
     add_tooltip (button, tips[type]);
@@ -171,18 +172,18 @@ create_systembutton (int type)
 
     switch (type)
     {
-        case LOCK:
-            callback = G_CALLBACK (mini_lock_cb);
-            break;
-        case EXIT:
-            callback = G_CALLBACK (mini_power_cb);
-            break;
-        case SETUP:
-            callback = G_CALLBACK (mini_palet_cb);
-            break;
-        case INFO:
-            callback = G_CALLBACK (mini_info_cb);
-            break;
+	case LOCK:
+	    callback = G_CALLBACK (mini_lock_cb);
+	    break;
+	case EXIT:
+	    callback = G_CALLBACK (mini_power_cb);
+	    break;
+	case SETUP:
+	    callback = G_CALLBACK (mini_palet_cb);
+	    break;
+	case INFO:
+	    callback = G_CALLBACK (mini_info_cb);
+	    break;
     }
 
     g_signal_connect (button, "clicked", callback, NULL);
@@ -206,9 +207,9 @@ systembuttons_change_type (t_systembuttons * sb, int n, int type)
 
     for (li = sb->callbacks; li; li = li->next)
     {
-        SignalCallback *cb = li->data;
+	SignalCallback *cb = li->data;
 
-        g_signal_connect (button, cb->signal, cb->callback, cb->data);
+	g_signal_connect (button, cb->signal, cb->callback, cb->data);
     }
 }
 
@@ -220,40 +221,40 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 
     if (sb->box)
     {
-        gtk_container_remove (GTK_CONTAINER (sb->buttonbox), sb->align[0]);
-        gtk_container_remove (GTK_CONTAINER (sb->buttonbox), sb->align[1]);
+	gtk_container_remove (GTK_CONTAINER (sb->buttonbox), sb->align[0]);
+	gtk_container_remove (GTK_CONTAINER (sb->buttonbox), sb->align[1]);
 
-        gtk_widget_destroy (sb->box);
+	gtk_widget_destroy (sb->box);
     }
 
     /* we need some extra spacing when the panel size <= SMALL
      * hence the strange code below :) */
     if ((orientation == HORIZONTAL && settings.size > SMALL) ||
-        (orientation == VERTICAL && settings.size <= SMALL))
+	(orientation == VERTICAL && settings.size <= SMALL))
     {
-        if (settings.size > SMALL)
-        {
-            sb->box = gtk_vbox_new (TRUE, 0);
-            sb->buttonbox = sb->box;
-        }
-        else
-        {
-            sb->box = gtk_vbox_new (FALSE, 0);
-            sb->buttonbox = gtk_vbox_new (TRUE, 0);
-        }
+	if (settings.size > SMALL)
+	{
+	    sb->box = gtk_vbox_new (TRUE, 0);
+	    sb->buttonbox = sb->box;
+	}
+	else
+	{
+	    sb->box = gtk_vbox_new (FALSE, 0);
+	    sb->buttonbox = gtk_vbox_new (TRUE, 0);
+	}
     }
     else
     {
-        if (settings.size > SMALL)
-        {
-            sb->box = gtk_hbox_new (FALSE, 0);
-            sb->buttonbox = sb->box;
-        }
-        else
-        {
-            sb->box = gtk_hbox_new (FALSE, 0);
-            sb->buttonbox = gtk_hbox_new (TRUE, 0);
-        }
+	if (settings.size > SMALL)
+	{
+	    sb->box = gtk_hbox_new (FALSE, 0);
+	    sb->buttonbox = sb->box;
+	}
+	else
+	{
+	    sb->box = gtk_hbox_new (FALSE, 0);
+	    sb->buttonbox = gtk_hbox_new (TRUE, 0);
+	}
     }
 
     gtk_widget_show (sb->box);
@@ -263,12 +264,12 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 
     if (settings.size <= SMALL)
     {
-        align = gtk_alignment_new (0, 0, 0, 0);
-        gtk_widget_set_size_request (align, spacing, spacing);
-        gtk_widget_show (align);
-        gtk_box_pack_start (GTK_BOX (sb->box), align, FALSE, FALSE, 0);
+	align = gtk_alignment_new (0, 0, 0, 0);
+	gtk_widget_set_size_request (align, spacing, spacing);
+	gtk_widget_show (align);
+	gtk_box_pack_start (GTK_BOX (sb->box), align, FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (sb->box), sb->buttonbox, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (sb->box), sb->buttonbox, TRUE, TRUE, 0);
     }
 
     gtk_box_pack_start (GTK_BOX (sb->buttonbox), sb->align[0], TRUE, TRUE, 0);
@@ -276,10 +277,10 @@ arrange_systembuttons (t_systembuttons * sb, int orientation)
 
     if (settings.size <= SMALL)
     {
-        align = gtk_alignment_new (0, 0, 0, 0);
-        gtk_widget_set_size_request (align, spacing, spacing);
-        gtk_widget_show (align);
-        gtk_box_pack_start (GTK_BOX (sb->box), align, FALSE, FALSE, 0);
+	align = gtk_alignment_new (0, 0, 0, 0);
+	gtk_widget_set_size_request (align, spacing, spacing);
+	gtk_widget_show (align);
+	gtk_box_pack_start (GTK_BOX (sb->box), align, FALSE, FALSE, 0);
     }
 }
 
@@ -326,7 +327,7 @@ systembuttons_free (Control * control)
 
 static void
 systembuttons_attach_callback (Control * control, const char *signal,
-                               GCallback callback, gpointer data)
+			       GCallback callback, gpointer data)
 {
     t_systembuttons *sb = (t_systembuttons *) control->data;
     SignalCallback *cb;
@@ -354,45 +355,45 @@ systembuttons_read_config (Control * control, xmlNodePtr node)
     int n;
     t_systembuttons *sb = (t_systembuttons *) control->data;
 
-    value = xmlGetProp (node, (const xmlChar *)"button1");
+    value = xmlGetProp (node, (const xmlChar *) "button1");
 
     if (value)
     {
-        n = atoi (value);
-        g_free (value);
+	n = atoi (value);
+	g_free (value);
 
-        if (n != sb->button_types[0])
-            systembuttons_change_type (sb, 0, n);
+	if (n != sb->button_types[0])
+	    systembuttons_change_type (sb, 0, n);
     }
 
-    value = xmlGetProp (node, (const xmlChar *)"button2");
+    value = xmlGetProp (node, (const xmlChar *) "button2");
 
     if (value)
     {
-        n = atoi (value);
-        g_free (value);
+	n = atoi (value);
+	g_free (value);
 
-        if (n != sb->button_types[1])
-            systembuttons_change_type (sb, 1, n);
+	if (n != sb->button_types[1])
+	    systembuttons_change_type (sb, 1, n);
     }
 
-    value = xmlGetProp (node, (const xmlChar *)"showtwo");
+    value = xmlGetProp (node, (const xmlChar *) "showtwo");
 
     if (value)
     {
-        n = atoi (value);
-        g_free (value);
+	n = atoi (value);
+	g_free (value);
 
-        if (n == 0)
-        {
-            sb->show_two = FALSE;
-            gtk_widget_hide (sb->align[1]);
-        }
-        else
-        {
-            sb->show_two = TRUE;
-            gtk_widget_show (sb->align[1]);
-        }
+	if (n == 0)
+	{
+	    sb->show_two = FALSE;
+	    gtk_widget_hide (sb->align[1]);
+	}
+	else
+	{
+	    sb->show_two = TRUE;
+	    gtk_widget_show (sb->align[1]);
+	}
     }
 }
 
@@ -404,15 +405,15 @@ systembuttons_write_config (Control * control, xmlNodePtr node)
 
     sprintf (prop, "%d", sb->button_types[0]);
 
-    xmlSetProp (node, (const xmlChar *)"button1", prop);
+    xmlSetProp (node, (const xmlChar *) "button1", prop);
 
     sprintf (prop, "%d", sb->button_types[1]);
 
-    xmlSetProp (node, (const xmlChar *)"button2", prop);
+    xmlSetProp (node, (const xmlChar *) "button2", prop);
 
     sprintf (prop, "%d", sb->show_two ? 1 : 0);
 
-    xmlSetProp (node, (const xmlChar *)"showtwo", prop);
+    xmlSetProp (node, (const xmlChar *) "showtwo", prop);
 }
 
 /* global prefs */
@@ -430,19 +431,19 @@ systembuttons_set_size (Control * control, int size)
     s2 = s1 * 0.75;
 
     if ((settings.orientation == VERTICAL && size <= SMALL) ||
-        (settings.orientation == HORIZONTAL && size > SMALL))
+	(settings.orientation == HORIZONTAL && size > SMALL))
     {
-        if (size > SMALL)
-            gtk_widget_set_size_request (sb->buttonbox, s2, s1);
-        else
-            gtk_widget_set_size_request (sb->buttonbox, s2, s1 * n * 0.75);
+	if (size > SMALL)
+	    gtk_widget_set_size_request (sb->buttonbox, s2, s1);
+	else
+	    gtk_widget_set_size_request (sb->buttonbox, s2, s1 * n * 0.75);
     }
     else
     {
-        if (size > SMALL)
-            gtk_widget_set_size_request (sb->buttonbox, s1, s2);
-        else
-            gtk_widget_set_size_request (sb->buttonbox, s1 * n * 0.75, s2);
+	if (size > SMALL)
+	    gtk_widget_set_size_request (sb->buttonbox, s1, s2);
+	else
+	    gtk_widget_set_size_request (sb->buttonbox, s1 * n * 0.75, s2);
     }
 }
 
@@ -480,22 +481,22 @@ checkbutton_changed (GtkToggleButton * tb, t_systembuttons_dialog * sbd)
 
     if (show_two != sbd->sb->show_two)
     {
-        sbd->sb->show_two = show_two;
+	sbd->sb->show_two = show_two;
 
-        if (show_two)
-        {
-            gtk_widget_show (sbd->sb->align[1]);
-            gtk_widget_show (sbd->option_menu_hbox[1]);
-        }
-        else
-        {
-            gtk_widget_hide (sbd->sb->align[1]);
-            gtk_widget_hide (sbd->option_menu_hbox[1]);
-        }
+	if (show_two)
+	{
+	    gtk_widget_show (sbd->sb->align[1]);
+	    gtk_widget_show (sbd->option_menu_hbox[1]);
+	}
+	else
+	{
+	    gtk_widget_hide (sbd->sb->align[1]);
+	    gtk_widget_hide (sbd->option_menu_hbox[1]);
+	}
 
-        gtk_widget_set_sensitive (sbd->revert, TRUE);
+	gtk_widget_set_sensitive (sbd->revert, TRUE);
 
-        systembuttons_set_size (sbd->control, settings.size);
+	systembuttons_set_size (sbd->control, settings.size);
     }
 }
 
@@ -508,7 +509,7 @@ buttons_changed (GtkOptionMenu * om, t_systembuttons_dialog * sbd)
     i = (GTK_WIDGET (om) == sbd->option_menus[0]) ? 0 : 1;
 
     if (n == sbd->sb->button_types[i])
-        return;
+	return;
 
     systembuttons_change_type (sbd->sb, i, n);
 
@@ -521,7 +522,7 @@ systembuttons_revert_configuration (t_systembuttons_dialog * sbd)
     GtkOptionMenu *om;
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sbd->two_checkbutton),
-                                  sbd->backup_show_two);
+				  sbd->backup_show_two);
 
     om = GTK_OPTION_MENU (sbd->option_menus[0]);
     gtk_option_menu_set_history (om, sbd->backup_button_types[0]);
@@ -532,7 +533,7 @@ systembuttons_revert_configuration (t_systembuttons_dialog * sbd)
 
 void
 systembuttons_add_options (Control * control, GtkContainer * container,
-                           GtkWidget * revert, GtkWidget * done)
+			   GtkWidget * revert, GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label, *om = NULL;
     const char *names[4];
@@ -575,11 +576,12 @@ systembuttons_add_options (Control * control, GtkContainer * container,
     sbd->two_checkbutton = gtk_check_button_new ();
     gtk_widget_show (sbd->two_checkbutton);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sbd->two_checkbutton),
-                                  sbd->sb->show_two);
-    gtk_box_pack_start (GTK_BOX (hbox), sbd->two_checkbutton, FALSE, FALSE, 0);
+				  sbd->sb->show_two);
+    gtk_box_pack_start (GTK_BOX (hbox), sbd->two_checkbutton, FALSE, FALSE,
+			0);
 
     g_signal_connect (sbd->two_checkbutton, "toggled",
-                      G_CALLBACK (checkbutton_changed), sbd);
+		      G_CALLBACK (checkbutton_changed), sbd);
 
     /* set names to use in option menus */
     names[0] = _("Lock");
@@ -590,22 +592,23 @@ systembuttons_add_options (Control * control, GtkContainer * container,
     /* two identical option menus */
     for (i = 0; i < 2; i++)
     {
-        GtkWidget *menu;
-        GtkWidget *mi;
+	GtkWidget *menu;
+	GtkWidget *mi;
 
-        om = sbd->option_menus[i] = gtk_option_menu_new ();
-        menu = gtk_menu_new ();
-        gtk_option_menu_set_menu (GTK_OPTION_MENU (om), menu);
+	om = sbd->option_menus[i] = gtk_option_menu_new ();
+	menu = gtk_menu_new ();
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (om), menu);
 
-        for (j = 0; j < 4; j++)
-        {
-            mi = gtk_menu_item_new_with_label (names[j]);
-            gtk_widget_show (mi);
-            gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-        }
+	for (j = 0; j < 4; j++)
+	{
+	    mi = gtk_menu_item_new_with_label (names[j]);
+	    gtk_widget_show (mi);
+	    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	}
 
-        gtk_option_menu_set_history (GTK_OPTION_MENU (om), sb->button_types[i]);
-        g_signal_connect (om, "changed", G_CALLBACK (buttons_changed), sbd);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (om),
+				     sb->button_types[i]);
+	g_signal_connect (om, "changed", G_CALLBACK (buttons_changed), sbd);
     }
 
     /* buttons option menus */
@@ -626,7 +629,7 @@ systembuttons_add_options (Control * control, GtkContainer * container,
 
     hbox = sbd->option_menu_hbox[1] = gtk_hbox_new (FALSE, 4);
     if (sb->show_two)
-        gtk_widget_show (hbox);
+	gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
     label = gtk_label_new (_("Button 2:"));
@@ -642,8 +645,8 @@ systembuttons_add_options (Control * control, GtkContainer * container,
 
     /* dialog buttons */
     g_signal_connect_swapped (revert, "clicked",
-                              G_CALLBACK (systembuttons_revert_configuration),
-                              sbd);
+			      G_CALLBACK (systembuttons_revert_configuration),
+			      sbd);
 
     g_signal_connect_swapped (done, "clicked", G_CALLBACK (g_free), sbd);
 }

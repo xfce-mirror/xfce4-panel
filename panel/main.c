@@ -71,39 +71,39 @@ static SignalState sigstate = NOSIGNAL;
 static SessionClient *client_session;
 static gboolean session_managed = FALSE;
 
-static void 
-save_panel(void)
+static void
+save_panel (void)
 {
 #if 0
     gboolean hidden = settings.autohide;
-    
+
     if (panel.toplevel)
     {
 	if (hidden)
 	{
-	    panel_set_autohide(FALSE);
+	    panel_set_autohide (FALSE);
 
-	    while (gtk_events_pending())
-		gtk_main_iteration();
+	    while (gtk_events_pending ())
+		gtk_main_iteration ();
 	}
-	
-        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
-                                 &panel.position.y);
+
+	gtk_window_get_position (GTK_WINDOW (panel.toplevel),
+				 &panel.position.x, &panel.position.y);
 
 	gtk_widget_hide (panel.toplevel);
     }
 
     if (hidden && panel.toplevel)
-	panel_set_autohide(TRUE);
-#endif    
+	panel_set_autohide (TRUE);
+#endif
     write_panel_config ();
 }
-    
+
 static void
 save_yourself (gpointer data, int save_style, gboolean shutdown,
-               int interact_style, gboolean fast)
+	       int interact_style, gboolean fast)
 {
-    save_panel();
+    save_panel ();
 }
 
 static void
@@ -120,21 +120,21 @@ quit (gboolean force)
 {
     if (!force)
     {
-        if (session_managed)
-        {
-            logout_session (client_session);
-            return;
-        }
-        else if (!confirm
-                 (_("Are you sure you want to exit?"), GTK_STOCK_QUIT, NULL))
-        {
-            return;
-        }
+	if (session_managed)
+	{
+	    logout_session (client_session);
+	    return;
+	}
+	else if (!confirm
+		 (_("Are you sure you want to exit?"), GTK_STOCK_QUIT, NULL))
+	{
+	    return;
+	}
     }
 
     mcs_stop_watch ();
 
-    save_panel();
+    save_panel ();
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     free_startup_timeout ();
@@ -143,7 +143,7 @@ quit (gboolean force)
     panel_cleanup ();
 
     if (gtk_main_level ())
-        gtk_main_quit ();
+	gtk_main_quit ();
 
     exit (0);
 }
@@ -178,22 +178,23 @@ restart (void)
 /*  Main program
  *  ------------
 */
-static gboolean check_signal_state(void)
+static gboolean
+check_signal_state (void)
 {
     static gboolean restarting = FALSE;
-    
+
     if (sigstate != NOSIGNAL)
     {
 	if (sigstate == RESTART && !restarting)
 	{
 	    restarting = TRUE;
 	    sigstate = NOSIGNAL;
-	    restart();
+	    restart ();
 	    restarting = FALSE;
 	}
 	else if (sigstate == QUIT)
 	{
-	    quit(TRUE);
+	    quit (TRUE);
 	}
     }
 
@@ -211,16 +212,16 @@ sighandler (int sig)
      */
     switch (sig)
     {
-        case SIGUSR1:
-            sigstate = RESTART;
-            break;
+	case SIGUSR1:
+	    sigstate = RESTART;
+	    break;
 
-        case SIGINT:
-            /* hack: prevent the panel from saving config on ^C */
-            disable_user_config = TRUE;
-            /* fall through */
+	case SIGINT:
+	    /* hack: prevent the panel from saving config on ^C */
+	    disable_user_config = TRUE;
+	    /* fall through */
 
-        default:
+	default:
 	    sigstate = QUIT;
     }
 }
@@ -246,39 +247,39 @@ main (int argc, char **argv)
     gtk_init (&argc, &argv);
 
     if (argc == 2 &&
-        (strequal (argv[1], "-v") || strequal (argv[1], "--version") ||
-         strequal (argv[1], "-h") || strequal (argv[1], "--help")))
+	(strequal (argv[1], "-v") || strequal (argv[1], "--version") ||
+	 strequal (argv[1], "-h") || strequal (argv[1], "--help")))
     {
-        g_print (_("%s, version %s\n"
-                   "Part of the XFce Desktop Environment\n"
-                   "http://www.xfce.org\n"), PACKAGE, VERSION);
-        return (0);
+	g_print (_("%s, version %s\n"
+		   "Part of the XFce Desktop Environment\n"
+		   "http://www.xfce.org\n"), PACKAGE, VERSION);
+	return (0);
     }
 
     for (i = 0; i < 5; i++)
     {
-        if ((net_wm_support = check_net_wm_support ()) == TRUE)
-            break;
+	if ((net_wm_support = check_net_wm_support ()) == TRUE)
+	    break;
 
-        g_usleep (2000 * 1000);
+	g_usleep (2000 * 1000);
     }
 
     if (!net_wm_support)
     {
-        xfce_err (_("Your window manager does not seem to support "
-                    "the new window manager hints as defined on "
-                    "http://www.freedesktop.org. \n"
-                    "Some XFce features may not work as intended."));
+	xfce_err (_("Your window manager does not seem to support "
+		    "the new window manager hints as defined on "
+		    "http://www.freedesktop.org. \n"
+		    "Some XFce features may not work as intended."));
     }
 
     client_session = client_session_new (argc, argv, NULL /* data */ ,
-                                         SESSION_RESTART_IF_RUNNING, 40);
+					 SESSION_RESTART_IF_RUNNING, 40);
 
     client_session->save_yourself = save_yourself;
     client_session->die = die;
 
     if (!(session_managed = session_init (client_session)))
-        g_message ("%s: Running without session manager", PACKAGE);
+	g_message ("%s: Running without session manager", PACKAGE);
 
 #ifdef HAVE_SIGACTION
     act.sa_handler = sighandler;
@@ -303,8 +304,8 @@ main (int argc, char **argv)
     create_panel ();
 
     /* signal state */
-    g_timeout_add(500, (GSourceFunc)check_signal_state, NULL);
-    
+    g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
+
     gtk_main ();
 
     return 0;

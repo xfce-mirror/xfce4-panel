@@ -49,6 +49,6 @@ void groups_set_theme (const char *theme);
 
 /* add/remove */
 void groups_set_num_groups (int n);
-void groups_add_control(int id, const char *filename, int index);
+void groups_add_control (int id, const char *filename, int index);
 
 #endif /* __XFCE_GROUPS_H__ */

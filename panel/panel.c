@@ -77,7 +77,7 @@ static int screen_width = 0;
 static int screen_height = 0;
 
 static void panel_set_hidden (Panel * p, gboolean hide);
-    
+
 /*  Move handle menu
  *  ----------------
 */
@@ -153,23 +153,22 @@ get_handle_menu (void)
     {
 	GtkItemFactoryEntry *entries;
 	int n_entries;
-	
-        ifactory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
 
-        gtk_item_factory_set_translate_func (ifactory,
-                                             (GtkTranslateFunc) translate_menu,
-                                             NULL, NULL);
-        gtk_item_factory_create_items (ifactory, G_N_ELEMENTS (panel_items),
-                                       panel_items, NULL);
-	
+	ifactory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
+
+	gtk_item_factory_set_translate_func (ifactory,
+					     (GtkTranslateFunc)
+					     translate_menu, NULL, NULL);
+	gtk_item_factory_create_items (ifactory, G_N_ELEMENTS (panel_items),
+				       panel_items, NULL);
+
 	n_entries = get_controls_menu_entries (&entries, "/Add new item");
 
-        gtk_item_factory_create_items (ifactory, n_entries,
-                                       entries, NULL);
+	gtk_item_factory_create_items (ifactory, n_entries, entries, NULL);
 
 /*	free_controls_menu_entries(entries, n_entries); */
-	
-        menu = GTK_MENU (gtk_item_factory_get_widget (ifactory, "<popup>"));
+
+	menu = GTK_MENU (gtk_item_factory_get_widget (ifactory, "<popup>"));
     }
 
     return menu;
@@ -186,9 +185,9 @@ handle_set_size (GtkWidget * mh, int size)
     gboolean vertical = settings.orientation == VERTICAL;
 
     if (vertical)
-        gtk_widget_set_size_request (mh, w, h);
+	gtk_widget_set_size_request (mh, w, h);
     else
-        gtk_widget_set_size_request (mh, h, w);
+	gtk_widget_set_size_request (mh, h, w);
 }
 
 static gboolean
@@ -197,16 +196,16 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
     hide_current_popup_menu ();
 
     if (event->button == 3 ||
-        (event->button == 1 && event->state & GDK_SHIFT_MASK))
+	(event->button == 1 && event->state & GDK_SHIFT_MASK))
     {
 	GtkMenu *menu;
 
 	menu = get_handle_menu ();
 
-        gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button,
-                        event->time);
+	gtk_menu_popup (menu, NULL, NULL, NULL, NULL, event->button,
+			event->time);
 
-        return TRUE;
+	return TRUE;
     }
 
     /* let default handler run */
@@ -216,10 +215,10 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
 static void
 handler_move_end_cb (GtkWidget * h, gpointer data)
 {
-    gtk_window_get_position (GTK_WINDOW (panel.toplevel), 
-	    		     &panel.position.x, &panel.position.y);
+    gtk_window_get_position (GTK_WINDOW (panel.toplevel),
+			     &panel.position.x, &panel.position.y);
 
-    DBG("Move end: (x,y) = (%d,%d)", panel.position.x, panel.position.y);
+    DBG ("Move end: (x,y) = (%d,%d)", panel.position.x, panel.position.y);
 
     /* TODO: adjust arrow direction based on which quarter of the screen we
      * are (Xinerama aware, of course ;) */
@@ -236,10 +235,9 @@ handle_new (void)
     gtk_widget_set_name (mh, "xfce_panel");
 
     g_signal_connect (mh, "button-press-event",
-                      G_CALLBACK (handler_pressed_cb), NULL);
+		      G_CALLBACK (handler_pressed_cb), NULL);
 
-    g_signal_connect (mh, "move-end",
-                      G_CALLBACK (handler_move_end_cb), NULL);
+    g_signal_connect (mh, "move-end", G_CALLBACK (handler_move_end_cb), NULL);
 
     /* protect against destruction when removed from box */
     g_object_ref (mh);
@@ -260,8 +258,9 @@ panel_set_hidden (Panel * p, gboolean hide)
     GtkRequisition req;
     int x, y;
     Position pos;
-    static int minx = 0, maxx = 0, miny = 0, maxy = 0, centerx = 0, centery=0;
-    
+    static int minx = 0, maxx = 0, miny = 0, maxy = 0, centerx = 0, centery =
+	0;
+
     /* Get the size */
     gtk_widget_size_request (p->toplevel, &req);
     pos = p->position;
@@ -269,10 +268,10 @@ panel_set_hidden (Panel * p, gboolean hide)
     /* xinerama aware screen coordinates */
     if (pos.x < minx || pos.x > maxx || pos.y < miny || pos.y > maxy)
     {
-	minx = MyDisplayX(pos.x, pos.y);
-	maxx = MyDisplayMaxX(dpy, scr, pos.x, pos.y);
-	miny = MyDisplayY(pos.x, pos.y);
-	maxy = MyDisplayMaxY(dpy, scr, pos.x, pos.y);
+	minx = MyDisplayX (pos.x, pos.y);
+	maxx = MyDisplayMaxX (dpy, scr, pos.x, pos.y);
+	miny = MyDisplayY (pos.x, pos.y);
+	maxy = MyDisplayMaxY (dpy, scr, pos.x, pos.y);
 
 	centerx = minx + (maxx - minx) / 2;
 	centery = miny + (maxy - miny) / 2;
@@ -281,50 +280,50 @@ panel_set_hidden (Panel * p, gboolean hide)
     /* Handle the resize */
     if (hide)
     {
-        /* Depending on orientation, resize */
-        if (settings.orientation == VERTICAL)
-        {
-            if (pos.x < centerx)
-                x = pos.x;
-            else
-                x = pos.x + req.width - HIDDEN_SIZE;
+	/* Depending on orientation, resize */
+	if (settings.orientation == VERTICAL)
+	{
+	    if (pos.x < centerx)
+		x = pos.x;
+	    else
+		x = pos.x + req.width - HIDDEN_SIZE;
 
-            y = pos.y;
+	    y = pos.y;
 
-            req.width = HIDDEN_SIZE;
-        }
-        else
-        {
-            if (pos.y < centery)
-                y = pos.y;
-            else
-                y = pos.y + req.height - HIDDEN_SIZE;
+	    req.width = HIDDEN_SIZE;
+	}
+	else
+	{
+	    if (pos.y < centery)
+		y = pos.y;
+	    else
+		y = pos.y + req.height - HIDDEN_SIZE;
 
-            x = pos.x;
+	    x = pos.x;
 
-            req.height = HIDDEN_SIZE;
-        }
+	    req.height = HIDDEN_SIZE;
+	}
     }
     else
     {
-        req.width = -1;
-        req.height = -1;
-        x = pos.x;
-        y = pos.y;
+	req.width = -1;
+	req.height = -1;
+	x = pos.x;
+	y = pos.y;
     }
 
 /*    g_print("(x=%d,y=%d) => (x=%d,y=%d)\n", pos.x, pos.y, x, y);*/
     if (hide)
-        gtk_widget_hide (p->main_frame);
+	gtk_widget_hide (p->main_frame);
     else
-        gtk_widget_show (p->main_frame);
+	gtk_widget_show (p->main_frame);
 
     p->hidden = hide;
 
     gtk_widget_set_size_request (p->toplevel, req.width, req.height);
-    
-    while(gtk_events_pending())
-	gtk_main_iteration();
+
+    while (gtk_events_pending ())
+	gtk_main_iteration ();
 
     /* gtk_window_present(GTK_WINDOW(p->toplevel)); */
     gtk_window_move (GTK_WINDOW (p->toplevel), x, y);
@@ -335,13 +334,13 @@ panel_hide_timeout (Panel * p)
 {
     /* keep trying while a subpanel is open */
     if (open_popup)
-        return TRUE;
+	return TRUE;
 
     if (!p->hidden)
     {
 #if 0
-        gtk_window_get_position (GTK_WINDOW (p->toplevel), &(p->position.x),
-                                 &(p->position.y));
+	gtk_window_get_position (GTK_WINDOW (p->toplevel), &(p->position.x),
+				 &(p->position.y));
 #endif
 
 	panel_set_hidden (p, TRUE);
@@ -355,7 +354,7 @@ panel_unhide_timeout (Panel * p)
 {
     if (p->hidden)
 	panel_set_hidden (p, FALSE);
-    
+
     return FALSE;
 }
 
@@ -366,23 +365,23 @@ panel_enter (GtkWindow * w, GdkEventCrossing * event, gpointer data)
 
     if (!(settings.autohide))
     {
-        return FALSE;
+	return FALSE;
     }
 
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-        if (p->hide_timeout)
-        {
-            g_source_remove (p->hide_timeout);
-            p->hide_timeout = 0;
-        }
+	if (p->hide_timeout)
+	{
+	    g_source_remove (p->hide_timeout);
+	    p->hide_timeout = 0;
+	}
 
-        if (!p->unhide_timeout)
-        {
-            p->unhide_timeout =
-                g_timeout_add (UNHIDE_TIMEOUT,
-                               (GSourceFunc) panel_unhide_timeout, p);
-        }
+	if (!p->unhide_timeout)
+	{
+	    p->unhide_timeout =
+		g_timeout_add (UNHIDE_TIMEOUT,
+			       (GSourceFunc) panel_unhide_timeout, p);
+	}
     }
 
     return FALSE;
@@ -395,23 +394,23 @@ panel_leave (GtkWidget * w, GdkEventCrossing * event, gpointer data)
 
     if (!(settings.autohide))
     {
-        return FALSE;
+	return FALSE;
     }
 
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-        if (p->unhide_timeout)
-        {
-            g_source_remove (p->unhide_timeout);
-            p->unhide_timeout = 0;
-        }
+	if (p->unhide_timeout)
+	{
+	    g_source_remove (p->unhide_timeout);
+	    p->unhide_timeout = 0;
+	}
 
-        if (!p->hide_timeout)
-        {
-            p->hide_timeout =
-                g_timeout_add (HIDE_TIMEOUT, (GSourceFunc) panel_hide_timeout,
-                               p);
-        }
+	if (!p->hide_timeout)
+	{
+	    p->hide_timeout =
+		g_timeout_add (HIDE_TIMEOUT, (GSourceFunc) panel_hide_timeout,
+			       p);
+	}
     }
 
     return FALSE;
@@ -425,7 +424,7 @@ static GtkTargetEntry entry[] = {
 
 static gboolean
 drag_motion (GtkWidget * widget, GdkDragContext * context,
-             int x, int y, guint time, Panel * p)
+	     int x, int y, guint time, Panel * p)
 {
     if (!p->hidden)
 	return TRUE;
@@ -489,9 +488,9 @@ create_panel_framework (Panel * p)
     /* toplevel window */
     if (!p->toplevel)
     {
-        p->toplevel = create_panel_window ();
-        g_object_add_weak_pointer (G_OBJECT (p->toplevel),
-                                   (gpointer *) & (p->toplevel));
+	p->toplevel = create_panel_window ();
+	g_object_add_weak_pointer (G_OBJECT (p->toplevel),
+				   (gpointer *) & (p->toplevel));
     }
 
     /* this is necessary after a SIGHUP */
@@ -499,15 +498,16 @@ create_panel_framework (Panel * p)
 
     /* Connect signalers to window for autohide */
     g_signal_connect (GTK_WINDOW (p->toplevel), "enter-notify-event",
-                      G_CALLBACK (panel_enter), &panel);
+		      G_CALLBACK (panel_enter), &panel);
 
     g_signal_connect (GTK_WINDOW (p->toplevel), "leave-notify-event",
-                      G_CALLBACK (panel_leave), &panel);
+		      G_CALLBACK (panel_leave), &panel);
 
     gtk_drag_dest_set (p->toplevel, GTK_DEST_DEFAULT_ALL, entry, 2,
-                       GDK_ACTION_COPY);
-    g_signal_connect (p->toplevel, "drag-motion", G_CALLBACK (drag_motion), p);
-    
+		       GDK_ACTION_COPY);
+    g_signal_connect (p->toplevel, "drag-motion", G_CALLBACK (drag_motion),
+		      p);
+
     /* main frame */
     p->main_frame = gtk_frame_new (NULL);
     gtk_frame_set_shadow_type (GTK_FRAME (p->main_frame), GTK_SHADOW_OUT);
@@ -518,13 +518,13 @@ create_panel_framework (Panel * p)
     /* create all widgets that depend on orientation */
     if (vertical)
     {
-        p->panel_box = gtk_vbox_new (FALSE, 0);
-        p->group_box = gtk_vbox_new (FALSE, 0);
+	p->panel_box = gtk_vbox_new (FALSE, 0);
+	p->group_box = gtk_vbox_new (FALSE, 0);
     }
     else
     {
-        p->panel_box = gtk_hbox_new (FALSE, 0);
-        p->group_box = gtk_hbox_new (FALSE, 0);
+	p->panel_box = gtk_hbox_new (FALSE, 0);
+	p->group_box = gtk_hbox_new (FALSE, 0);
     }
 
     /* show them */
@@ -537,11 +537,11 @@ create_panel_framework (Panel * p)
 
     /* pack the widgets into the main frame */
     gtk_container_add (GTK_CONTAINER (p->main_frame), p->panel_box);
-    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[LEFT], FALSE, FALSE,
-                        0);
+    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[LEFT], FALSE,
+			FALSE, 0);
     gtk_box_pack_start (GTK_BOX (p->panel_box), p->group_box, TRUE, TRUE, 0);
-    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[RIGHT], FALSE, FALSE,
-                        0);
+    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[RIGHT], FALSE,
+			FALSE, 0);
 }
 
 void
@@ -563,30 +563,30 @@ create_panel (void)
 
     if (need_init)
     {
-        /* set for later use */
+	/* set for later use */
 	/* TODO: for gtk 2.2 we could use gtk_widget_get_display() et al. */
 	dpy = gdk_display;
-	scr = DefaultScreen(dpy); 
-        screen_width = gdk_screen_width ();
-        screen_height = gdk_screen_height ();
+	scr = DefaultScreen (dpy);
+	screen_width = gdk_screen_width ();
+	screen_height = gdk_screen_height ();
 
-        panel.toplevel = NULL;
+	panel.toplevel = NULL;
 
-        panel.position.x = -1;
-        panel.position.y = -1;
+	panel.position.x = -1;
+	panel.position.y = -1;
 
-        panel.hidden = FALSE;
-        panel.hide_timeout = 0;
-        panel.unhide_timeout = 0;
+	panel.hidden = FALSE;
+	panel.hide_timeout = 0;
+	panel.unhide_timeout = 0;
 
-        /* fill in the 'settings' structure */
-        init_settings ();
-        get_global_prefs ();
+	/* fill in the 'settings' structure */
+	init_settings ();
+	get_global_prefs ();
 
-        /* If there is a settings manager it takes precedence */
-        mcs_watch_xfce_channel ();
+	/* If there is a settings manager it takes precedence */
+	mcs_watch_xfce_channel ();
 
-        need_init = FALSE;
+	need_init = FALSE;
     }
 
     /* panel framework */
@@ -623,7 +623,7 @@ create_panel (void)
 void
 panel_add_control (void)
 {
-    groups_set_num_groups (settings.num_groups+1);
+    groups_set_num_groups (settings.num_groups + 1);
 }
 
 /*  Panel settings
@@ -633,23 +633,23 @@ void
 panel_set_orientation (int orientation)
 {
     gboolean hidden;
-    
+
     settings.orientation = orientation;
 
     if (!panel_created)
-        return;
+	return;
 
     hide_current_popup_menu ();
 
     hidden = settings.autohide;
     if (hidden)
     {
-	panel_set_autohide(FALSE);
+	panel_set_autohide (FALSE);
 
-	while (gtk_events_pending())
-	    gtk_main_iteration();
+	while (gtk_events_pending ())
+	    gtk_main_iteration ();
     }
-    
+
     /* save panel controls */
     groups_unpack ();
 
@@ -662,9 +662,9 @@ panel_set_orientation (int orientation)
 
     panel.position.x = panel.position.y = -1;
     panel_set_position ();
-    
+
     if (hidden)
-	panel_set_autohide(TRUE);
+	panel_set_autohide (TRUE);
 }
 
 void
@@ -673,7 +673,7 @@ panel_set_layer (int layer)
     settings.layer = layer;
 
     if (!panel_created)
-        return;
+	return;
 
     set_window_layer (panel.toplevel, layer);
 }
@@ -684,7 +684,7 @@ panel_set_size (int size)
     settings.size = size;
 
     if (!panel_created)
-        return;
+	return;
 
     hide_current_popup_menu ();
 
@@ -701,7 +701,7 @@ panel_set_popup_position (int position)
     settings.popup_position = position;
 
     if (!panel_created)
-        return;
+	return;
 
     hide_current_popup_menu ();
 
@@ -718,7 +718,7 @@ panel_set_theme (const char *theme)
     settings.theme = g_strdup (theme);
 
     if (!panel_created)
-        return;
+	return;
 
     groups_set_theme (theme);
 }
@@ -731,7 +731,7 @@ panel_set_num_groups (int n)
     settings.num_groups = n;
 
     if (!panel_created)
-        return;
+	return;
 
     groups_set_num_groups (n);
 }
@@ -762,12 +762,12 @@ panel_center (int side)
     hidden = settings.autohide;
     if (hidden)
     {
-	panel_set_autohide(FALSE);
+	panel_set_autohide (FALSE);
 
-	while(gtk_events_pending())
-	    gtk_main_iteration();
+	while (gtk_events_pending ())
+	    gtk_main_iteration ();
     }
-    
+
     gtk_widget_size_request (panel.toplevel, &req);
 
     xscreen = DefaultScreenOfDisplay (GDK_DISPLAY ());
@@ -775,33 +775,33 @@ panel_center (int side)
 
     switch (side)
     {
-        case LEFT:
-            panel.position.x = margins.left;
-            panel.position.y = h / 2 - req.height / 2;
-            break;
-        case RIGHT:
-            panel.position.x = w - req.width - margins.right;
-            panel.position.y = h / 2 - req.height / 2;
-            break;
-        case TOP:
-            panel.position.x = w / 2 - req.width / 2;
-            panel.position.y = margins.top;
-            break;
-        default:
-            panel.position.x = w / 2 - req.width / 2;
-            panel.position.y = h - req.height - margins.bottom;
+	case LEFT:
+	    panel.position.x = margins.left;
+	    panel.position.y = h / 2 - req.height / 2;
+	    break;
+	case RIGHT:
+	    panel.position.x = w - req.width - margins.right;
+	    panel.position.y = h / 2 - req.height / 2;
+	    break;
+	case TOP:
+	    panel.position.x = w / 2 - req.width / 2;
+	    panel.position.y = margins.top;
+	    break;
+	default:
+	    panel.position.x = w / 2 - req.width / 2;
+	    panel.position.y = h - req.height - margins.bottom;
     }
 
     if (panel.position.x < 0)
-        panel.position.x = 0;
+	panel.position.x = 0;
 
     if (panel.position.y < 0)
-        panel.position.y = 0;
+	panel.position.y = 0;
 
     panel_set_position ();
 
     if (hidden)
-	panel_set_autohide(TRUE);
+	panel_set_autohide (TRUE);
 }
 
 void
@@ -809,52 +809,52 @@ panel_set_position (void)
 {
     if (panel.position.x == -1 && panel.position.y == -1)
     {
-        if (settings.orientation == HORIZONTAL)
-            panel_center (BOTTOM);
-        else
-            panel_center (LEFT);
+	if (settings.orientation == HORIZONTAL)
+	    panel_center (BOTTOM);
+	else
+	    panel_center (LEFT);
     }
     else
     {
-        GtkRequisition req;
-        int w, h;
+	GtkRequisition req;
+	int w, h;
 	gboolean hidden;
-    
+
 	hidden = settings.autohide;
 	if (hidden)
 	{
-	    DBG("unhide panel before repositioning\n");
-	    
-	    panel_set_autohide(FALSE);
+	    DBG ("unhide panel before repositioning\n");
 
-	    while(gtk_events_pending())
-		gtk_main_iteration();
+	    panel_set_autohide (FALSE);
+
+	    while (gtk_events_pending ())
+		gtk_main_iteration ();
 	}
-	    
-        w = screen_width;
-        h = screen_height;
 
-        gtk_widget_size_request (panel.toplevel, &req);
+	w = screen_width;
+	h = screen_height;
 
-        if (panel.position.x + req.width > w && req.width <= w)
-            panel.position.x = w - req.width;
+	gtk_widget_size_request (panel.toplevel, &req);
 
-        if (panel.position.y + req.height > h && req.height <= h)
-            panel.position.y = h - req.height;
+	if (panel.position.x + req.width > w && req.width <= w)
+	    panel.position.x = w - req.width;
 
-        if (panel.position.x < 0)
-            panel.position.x = 0;
+	if (panel.position.y + req.height > h && req.height <= h)
+	    panel.position.y = h - req.height;
 
-        if (panel.position.y < 0)
-            panel.position.y = 0;
+	if (panel.position.x < 0)
+	    panel.position.x = 0;
 
-        DBG ("position: (%d, %d)\n", panel.position.x, panel.position.y);
+	if (panel.position.y < 0)
+	    panel.position.y = 0;
 
-        gtk_window_move (GTK_WINDOW (panel.toplevel), panel.position.x,
-                         panel.position.y);
-	
+	DBG ("position: (%d, %d)\n", panel.position.x, panel.position.y);
+
+	gtk_window_move (GTK_WINDOW (panel.toplevel), panel.position.x,
+			 panel.position.y);
+
 	if (hidden)
-	    panel_set_autohide(TRUE);
+	    panel_set_autohide (TRUE);
     }
 }
 
@@ -896,134 +896,134 @@ panel_parse_xml (xmlNodePtr node)
     int n;
 
     /* properties */
-    value = xmlGetProp (node, (const xmlChar *)"orientation");
+    value = xmlGetProp (node, (const xmlChar *) "orientation");
 
     if (value)
     {
-        settings.orientation = atoi (value);
-        g_free (value);
+	settings.orientation = atoi (value);
+	g_free (value);
     }
 
-    value = xmlGetProp (node, (const xmlChar *)"layer");
+    value = xmlGetProp (node, (const xmlChar *) "layer");
 
     if (value)
     {
-        n = atoi (value);
+	n = atoi (value);
 
-        if (n >= ABOVE && n <= BELOW)
-            settings.layer = n;
+	if (n >= ABOVE && n <= BELOW)
+	    settings.layer = n;
 
-        g_free (value);
+	g_free (value);
     }
 
-    value = xmlGetProp (node, (const xmlChar *)"size");
+    value = xmlGetProp (node, (const xmlChar *) "size");
 
     if (value)
     {
-        settings.size = atoi (value);
-        g_free (value);
+	settings.size = atoi (value);
+	g_free (value);
     }
 
-    value = xmlGetProp (node, (const xmlChar *)"popupposition");
+    value = xmlGetProp (node, (const xmlChar *) "popupposition");
 
     if (value)
     {
-        settings.popup_position = atoi (value);
-        g_free (value);
+	settings.popup_position = atoi (value);
+	g_free (value);
     }
 
-    value = xmlGetProp (node, (const xmlChar *)"icontheme");
+    value = xmlGetProp (node, (const xmlChar *) "icontheme");
 
     if (value)
-        settings.theme = g_strdup (value);
+	settings.theme = g_strdup (value);
 
     g_free (value);
 
-    value = xmlGetProp (node, (const xmlChar *)"groups");
+    value = xmlGetProp (node, (const xmlChar *) "groups");
 
     if (value)
     {
-        settings.num_groups = atoi (value);
-        g_free (value);
+	settings.num_groups = atoi (value);
+	g_free (value);
     }
     else
     {
-        value = xmlGetProp (node, (const xmlChar *)"left");
+	value = xmlGetProp (node, (const xmlChar *) "left");
 
-        if (value)
-        {
-            settings.num_groups = atoi (value);
-            g_free (value);
+	if (value)
+	{
+	    settings.num_groups = atoi (value);
+	    g_free (value);
 
-            value = xmlGetProp (node, (const xmlChar *)"right");
+	    value = xmlGetProp (node, (const xmlChar *) "right");
 
-            if (value)
-            {
-                settings.num_groups += atoi (value);
-                g_free (value);
-            }
-        }
+	    if (value)
+	    {
+		settings.num_groups += atoi (value);
+		g_free (value);
+	    }
+	}
     }
 
     /* child nodes */
     for (child = node->children; child; child = child->next)
     {
-        int w, h;
+	int w, h;
 
-        if (xmlStrEqual (child->name, (const xmlChar *)"Position"))
-        {
-            value = xmlGetProp (child, (const xmlChar *)"x");
+	if (xmlStrEqual (child->name, (const xmlChar *) "Position"))
+	{
+	    value = xmlGetProp (child, (const xmlChar *) "x");
 
-            if (value)
-                panel.position.x = atoi (value);
+	    if (value)
+		panel.position.x = atoi (value);
 
-            g_free (value);
+	    g_free (value);
 
-            value = xmlGetProp (child, (const xmlChar *)"y");
+	    value = xmlGetProp (child, (const xmlChar *) "y");
 
-            if (value)
-                panel.position.y = atoi (value);
+	    if (value)
+		panel.position.y = atoi (value);
 
-            g_free (value);
+	    g_free (value);
 
-            if (panel.position.x < 0 || panel.position.y < 0)
-                break;
+	    if (panel.position.x < 0 || panel.position.y < 0)
+		break;
 
-            value = xmlGetProp (child, (const xmlChar *)"screenwidth");
+	    value = xmlGetProp (child, (const xmlChar *) "screenwidth");
 
-            if (value)
-                w = atoi (value);
-            else
-                break;
+	    if (value)
+		w = atoi (value);
+	    else
+		break;
 
-            value = xmlGetProp (child, (const xmlChar *)"screenheight");
+	    value = xmlGetProp (child, (const xmlChar *) "screenheight");
 
-            if (value)
-                h = atoi (value);
-            else
-                break;
+	    if (value)
+		h = atoi (value);
+	    else
+		break;
 
-            /* this doesn't actually work completely, we need to
-             * save the panel width as well to do it right */
-            if (w != screen_width || h != screen_height)
-            {
-                panel.position.x =
-                    (int)((double)(panel.position.x * screen_width) /
-                          (double)w);
-                panel.position.y =
-                    (int)((double)(panel.position.y * screen_height) /
-                          (double)h);
-            }
-        }
+	    /* this doesn't actually work completely, we need to
+	     * save the panel width as well to do it right */
+	    if (w != screen_width || h != screen_height)
+	    {
+		panel.position.x =
+		    (int) ((double) (panel.position.x * screen_width) /
+			   (double) w);
+		panel.position.y =
+		    (int) ((double) (panel.position.y * screen_height) /
+			   (double) h);
+	    }
+	}
     }
 
     /* check the values */
     if (settings.orientation < HORIZONTAL || settings.orientation > VERTICAL)
-        settings.orientation = HORIZONTAL;
+	settings.orientation = HORIZONTAL;
     if (settings.size < TINY || settings.size > LARGE)
-        settings.size = SMALL;
+	settings.size = SMALL;
     if (settings.num_groups < 1 || settings.num_groups > 2 * NBGROUPS)
-        settings.num_groups = 10;
+	settings.num_groups = 10;
 }
 
 void
@@ -1048,7 +1048,7 @@ panel_write_xml (xmlNodePtr root)
     xmlSetProp (node, "popupposition", value);
 
     if (settings.theme)
-        xmlSetProp (node, "icontheme", settings.theme);
+	xmlSetProp (node, "icontheme", settings.theme);
 
     snprintf (value, 3, "%d", settings.num_groups);
     xmlSetProp (node, "groups", value);

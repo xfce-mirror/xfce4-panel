@@ -55,38 +55,38 @@ mcs_position_setting (int pos)
     static int x, y;
 
     if (pos == XFCE_POSITION_NONE || !panel.toplevel)
-        return;
+	return;
 
     if (pos == XFCE_POSITION_SAVE)
     {
-        x = panel.position.x;
+	x = panel.position.x;
 	y = panel.position.y;
-        return;
+	return;
     }
 
     if (pos == XFCE_POSITION_RESTORE)
     {
-        panel.position.x = x;
-        panel.position.y = y;
-        panel_set_position ();
+	panel.position.x = x;
+	panel.position.y = y;
+	panel_set_position ();
 
-        return;
+	return;
     }
 
     switch (pos)
     {
-        case XFCE_POSITION_BOTTOM:
-            panel_center (BOTTOM);
-            break;
-        case XFCE_POSITION_TOP:
-            panel_center (TOP);
-            break;
-        case XFCE_POSITION_LEFT:
-            panel_center (LEFT);
-            break;
-        case XFCE_POSITION_RIGHT:
-            panel_center (RIGHT);
-            break;
+	case XFCE_POSITION_BOTTOM:
+	    panel_center (BOTTOM);
+	    break;
+	case XFCE_POSITION_TOP:
+	    panel_center (TOP);
+	    break;
+	case XFCE_POSITION_LEFT:
+	    panel_center (LEFT);
+	    break;
+	case XFCE_POSITION_RIGHT:
+	    panel_center (RIGHT);
+	    break;
     }
 }
 
@@ -113,8 +113,8 @@ init_settings_hash (void)
 
     for (i = 0; i < XFCE_OPTIONS; i++)
     {
-        g_hash_table_insert (settings_hash,
-                             xfce_settings_names[i], settings_callbacks[i]);
+	g_hash_table_insert (settings_hash,
+			     xfce_settings_names[i], settings_callbacks[i]);
     }
 }
 
@@ -127,38 +127,38 @@ update_setting (const char *name, McsSetting * setting)
 
     if (setting->type == MCS_TYPE_INT)
     {
-        set_int = g_hash_table_lookup (settings_hash, name);
+	set_int = g_hash_table_lookup (settings_hash, name);
 
-        if (set_int)
-            set_int (setting->data.v_int);
+	if (set_int)
+	    set_int (setting->data.v_int);
     }
     else if (setting->type == MCS_TYPE_STRING)
     {
-        set_string = g_hash_table_lookup (settings_hash, name);
+	set_string = g_hash_table_lookup (settings_hash, name);
 
-        if (set_string)
-            set_string (setting->data.v_string);
+	if (set_string)
+	    set_string (setting->data.v_string);
     }
 }
 
 /* event handling */
 static void
 notify_cb (const char *name, const char *channel_name,
-           McsAction action, McsSetting * setting, void *data)
+	   McsAction action, McsSetting * setting, void *data)
 {
     if (g_ascii_strcasecmp (CHANNEL, channel_name))
-        return;
+	return;
 
     switch (action)
     {
-        case MCS_ACTION_NEW:
-            /* fall through */
-        case MCS_ACTION_CHANGED:
-            update_setting (name, setting);
-            break;
-        case MCS_ACTION_DELETED:
-            /* We don't use this now. Perhaps revert to default? */
-            break;
+	case MCS_ACTION_NEW:
+	    /* fall through */
+	case MCS_ACTION_CHANGED:
+	    update_setting (name, setting);
+	    break;
+	case MCS_ACTION_DELETED:
+	    /* We don't use this now. Perhaps revert to default? */
+	    break;
     }
 }
 
@@ -166,9 +166,9 @@ GdkFilterReturn
 client_event_filter (GdkXEvent * xevent, GdkEvent * event, gpointer data)
 {
     if (mcs_client_process_event (client, (XEvent *) xevent))
-        return GDK_FILTER_REMOVE;
+	return GDK_FILTER_REMOVE;
     else
-        return GDK_FILTER_CONTINUE;
+	return GDK_FILTER_CONTINUE;
 }
 
 static void
@@ -179,9 +179,9 @@ watch_cb (Window window, Bool is_start, long mask, void *cb_data)
     gdkwin = gdk_window_lookup (window);
 
     if (is_start)
-        gdk_window_add_filter (gdkwin, client_event_filter, NULL);
+	gdk_window_add_filter (gdkwin, client_event_filter, NULL);
     else
-        gdk_window_remove_filter (gdkwin, client_event_filter, NULL);
+	gdk_window_remove_filter (gdkwin, client_event_filter, NULL);
 }
 
 /* connecting and disconnecting */
@@ -192,22 +192,22 @@ mcs_watch_xfce_channel (void)
     int screen = DefaultScreen (dpy);
 
     if (!settings_hash)
-        init_settings_hash ();
+	init_settings_hash ();
 
     client = NULL;
 
     if (!mcs_client_check_manager (dpy, screen, "xfce-mcs-manager"))
-        g_warning ("%s: MCS settings manager not running!", PACKAGE);
+	g_warning ("%s: MCS settings manager not running!", PACKAGE);
     else
-        client = mcs_client_new (dpy, screen, notify_cb, watch_cb, NULL);
+	client = mcs_client_new (dpy, screen, notify_cb, watch_cb, NULL);
 
     if (!client)
     {
-        g_warning ("%s: could not connect to settings manager", PACKAGE);
+	g_warning ("%s: could not connect to settings manager", PACKAGE);
 
-        xfce_warn (_("Settings manager not available"));
+	xfce_warn (_("Settings manager not available"));
 
-        return;
+	return;
     }
 
     mcs_client_add_channel (client, CHANNEL);
@@ -217,7 +217,7 @@ void
 mcs_stop_watch (void)
 {
     if (client)
-        mcs_client_destroy (client);
+	mcs_client_destroy (client);
 
     client = NULL;
 }
@@ -227,12 +227,12 @@ void
 mcs_dialog (const char *channel)
 {
     if (!client)
-        return;
+	return;
 
     if (channel)
-        mcs_client_show (GDK_DISPLAY (), DefaultScreen (GDK_DISPLAY ()),
-                         channel);
+	mcs_client_show (GDK_DISPLAY (), DefaultScreen (GDK_DISPLAY ()),
+			 channel);
     else
-        mcs_client_show (GDK_DISPLAY (), DefaultScreen (GDK_DISPLAY ()),
-                         CHANNEL);
+	mcs_client_show (GDK_DISPLAY (), DefaultScreen (GDK_DISPLAY ()),
+			 CHANNEL);
 }

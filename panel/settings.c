@@ -72,8 +72,8 @@ read_xml_file (void)
 
     if (rcfile)
     {
-        doc = xmlParseFile (rcfile);
-        g_free (rcfile);
+	doc = xmlParseFile (rcfile);
+	g_free (rcfile);
     }
 
     return doc;
@@ -86,32 +86,32 @@ get_xml_root (void)
 
     /* global xmlDocPtr */
     if (!xmlconfig)
-        xmlconfig = read_xml_file ();
+	xmlconfig = read_xml_file ();
 
     if (!xmlconfig)
     {
-        g_message ("%s: No config file found", PACKAGE);
-        return NULL;
+	g_message ("%s: No config file found", PACKAGE);
+	return NULL;
     }
 
     node = xmlDocGetRootElement (xmlconfig);
 
     if (!node)
     {
-        g_warning ("%s: empty document: %s\n", PACKAGE, xmlconfig->name);
+	g_warning ("%s: empty document: %s\n", PACKAGE, xmlconfig->name);
 
-        xmlFreeDoc (xmlconfig);
-        xmlconfig = NULL;
-        return NULL;
+	xmlFreeDoc (xmlconfig);
+	xmlconfig = NULL;
+	return NULL;
     }
 
-    if (!xmlStrEqual (node->name, (const xmlChar *)ROOT))
+    if (!xmlStrEqual (node->name, (const xmlChar *) ROOT))
     {
-        g_warning ("%s: wrong document type: %s\n", PACKAGE, xmlconfig->name);
+	g_warning ("%s: wrong document type: %s\n", PACKAGE, xmlconfig->name);
 
-        xmlFreeDoc (xmlconfig);
-        xmlconfig = NULL;
-        return NULL;
+	xmlFreeDoc (xmlconfig);
+	xmlconfig = NULL;
+	return NULL;
     }
 
     return node;
@@ -125,17 +125,17 @@ get_global_prefs (void)
     node = get_xml_root ();
 
     if (!node)
-        return;
+	return;
 
     /* Now parse the xml tree */
     for (node = node->children; node; node = node->next)
     {
-        if (xmlStrEqual (node->name, (const xmlChar *)"Panel"))
-        {
-            panel_parse_xml (node);
+	if (xmlStrEqual (node->name, (const xmlChar *) "Panel"))
+	{
+	    panel_parse_xml (node);
 
-            break;
-        }
+	    break;
+	}
     }
 
     /* leave the xmldoc open for get_panel_config() */
@@ -152,25 +152,25 @@ get_panel_config (void)
 
     if (!node)
     {
-        /* create empty items */
-        groups_set_from_xml (NULL);
-        return;
+	/* create empty items */
+	groups_set_from_xml (NULL);
+	return;
     }
 
     /* Now parse the xml tree */
     for (node = node->children; node; node = node->next)
     {
-        if (xmlStrEqual (node->name, (const xmlChar *)"Groups"))
-        {
-            groups_set_from_xml (node);
-            break;
-        }
+	if (xmlStrEqual (node->name, (const xmlChar *) "Groups"))
+	{
+	    groups_set_from_xml (node);
+	    break;
+	}
 
-        /* old format */
-        if (xmlStrEqual (node->name, (const xmlChar *)"Left"))
-            old_groups_set_from_xml (LEFT, node);
-        else if (xmlStrEqual (node->name, (const xmlChar *)"Right"))
-            old_groups_set_from_xml (RIGHT, node);
+	/* old format */
+	if (xmlStrEqual (node->name, (const xmlChar *) "Left"))
+	    old_groups_set_from_xml (LEFT, node);
+	else if (xmlStrEqual (node->name, (const xmlChar *) "Right"))
+	    old_groups_set_from_xml (RIGHT, node);
     }
 
     xmlFreeDoc (xmlconfig);
@@ -188,27 +188,27 @@ write_panel_config (void)
     disable_user_config = check_disable_user_config ();
 
     if (disable_user_config)
-        return;
+	return;
 
     rcfile = get_save_file (XFCERC);
 
     if (g_file_test (rcfile, G_FILE_TEST_EXISTS))
     {
-        if (backup)
-        {
-            write_backup_file (rcfile);
-            backup = FALSE;
-        }
+	if (backup)
+	{
+	    write_backup_file (rcfile);
+	    backup = FALSE;
+	}
 
     }
     else
     {
-        dir = g_path_get_dirname (rcfile);
+	dir = g_path_get_dirname (rcfile);
 
-        if (!g_file_test (dir, G_FILE_TEST_IS_DIR))
-            mkdir (dir, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+	if (!g_file_test (dir, G_FILE_TEST_IS_DIR))
+	    mkdir (dir, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 
-        g_free (dir);
+	g_free (dir);
     }
 
     xmlconfig = xmlNewDoc ("1.0");

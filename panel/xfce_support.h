@@ -44,12 +44,12 @@ void set_window_skip (GtkWidget * win);
 void dnd_set_drag_dest (GtkWidget * widget);
 
 typedef void (*DropCallback) (GtkWidget * widget, GList * drop_data,
-                              gpointer data);
+			      gpointer data);
 
 #define DROP_CALLBACK(f) (DropCallback)f
 
 void dnd_set_callback (GtkWidget * widget, DropCallback function,
-                       gpointer data);
+		       gpointer data);
 
 void gnome_uri_list_free_strings (GList * list);
 GList *gnome_uri_list_extract_uris (const gchar * uri_list);
@@ -57,9 +57,9 @@ GList *gnome_uri_list_extract_filenames (const gchar * uri_list);
 
 /* file open dialog */
 char *select_file_name (const char *title, const char *path,
-                        GtkWidget * parent);
+			GtkWidget * parent);
 char *select_file_with_preview (const char *title, const char *path,
-                                GtkWidget * parent);
+				GtkWidget * parent);
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
 void free_startup_timeout (void);

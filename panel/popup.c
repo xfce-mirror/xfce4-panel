@@ -46,7 +46,7 @@ static void
 hide_popup (PanelPopup * pp)
 {
     if (open_popup == pp)
-        open_popup = NULL;
+	open_popup = NULL;
 
     xfce_togglebutton_set_active (XFCE_TOGGLEBUTTON (pp->button), FALSE);
 
@@ -54,9 +54,9 @@ hide_popup (PanelPopup * pp)
 
     if (pp->detached)
     {
-        pp->detached = FALSE;
-        gtk_widget_show (pp->tearoff_button);
-        gtk_window_set_decorated (GTK_WINDOW (pp->window), FALSE);
+	pp->detached = FALSE;
+	gtk_widget_show (pp->tearoff_button);
+	gtk_window_set_decorated (GTK_WINDOW (pp->window), FALSE);
     }
 }
 
@@ -74,25 +74,25 @@ show_popup (PanelPopup * pp)
     0,};
 
     if (open_popup)
-        hide_popup (open_popup);
+	hide_popup (open_popup);
 
     if (!pp->detached)
-        open_popup = pp;
+	open_popup = pp;
 
     if (pp->items && !pp->detached)
-        gtk_widget_show (pp->tearoff_button);
+	gtk_widget_show (pp->tearoff_button);
     else
-        gtk_widget_hide (pp->tearoff_button);
+	gtk_widget_hide (pp->tearoff_button);
 
     if (disable_user_config || g_list_length (pp->items) >= NBITEMS)
     {
-        gtk_widget_hide (pp->addtomenu_item->button);
-        gtk_widget_hide (pp->separator);
+	gtk_widget_hide (pp->addtomenu_item->button);
+	gtk_widget_hide (pp->separator);
     }
     else
     {
-        gtk_widget_show (pp->addtomenu_item->button);
-        gtk_widget_show (pp->separator);
+	gtk_widget_show (pp->addtomenu_item->button);
+	gtk_widget_show (pp->separator);
     }
 
     alloc1 = pp->button->allocation;
@@ -106,7 +106,7 @@ show_popup (PanelPopup * pp)
     h = gdk_screen_height ();
 
     if (!GTK_WIDGET_REALIZED (pp->window))
-        gtk_widget_realize (pp->window);
+	gtk_widget_realize (pp->window);
 
     gtk_widget_size_request (pp->window, &req);
 
@@ -137,57 +137,57 @@ show_popup (PanelPopup * pp)
 
     if (vertical)
     {
-        /* left if buttons left ... */
-        if (pos == LEFT && x - req.width >= 0)
-        {
-            x = x - req.width;
-            y = y + alloc1.height - req.height;
-        }
-        /* .. or if menu doesn't fit right, but does fit left */
-        else if (x + req.width + alloc1.width > w && x - req.width >= 0)
-        {
-            x = x - req.width;
-            y = y + alloc1.height - req.height;
-        }
-        else                    /* right */
-        {
-            x = x + alloc1.width;
-            y = y + alloc1.height - req.height;
-        }
+	/* left if buttons left ... */
+	if (pos == LEFT && x - req.width >= 0)
+	{
+	    x = x - req.width;
+	    y = y + alloc1.height - req.height;
+	}
+	/* .. or if menu doesn't fit right, but does fit left */
+	else if (x + req.width + alloc1.width > w && x - req.width >= 0)
+	{
+	    x = x - req.width;
+	    y = y + alloc1.height - req.height;
+	}
+	else			/* right */
+	{
+	    x = x + alloc1.width;
+	    y = y + alloc1.height - req.height;
+	}
 
-        /* check if it fits upwards */
-        if (y < 0)
-            y = 0;
+	/* check if it fits upwards */
+	if (y < 0)
+	    y = 0;
     }
     else
     {
-        /* down if buttons on bottom ... */
-        if (pos == BOTTOM && y + alloc1.height + req.height <= h)
-        {
-            x = x + alloc1.width / 2 - req.width / 2;
-            y = y + alloc1.height;
-        }
-        /* ... or up doesn't fit and down does */
-        else if (y - req.height < 0 && y + alloc1.height + req.height <= h)
-        {
-            x = x + alloc1.width / 2 - req.width / 2;
-            y = y + alloc1.height;
-        }
-        else
-        {
-            x = x + alloc1.width / 2 - req.width / 2;
-            y = y - req.height;
-        }
+	/* down if buttons on bottom ... */
+	if (pos == BOTTOM && y + alloc1.height + req.height <= h)
+	{
+	    x = x + alloc1.width / 2 - req.width / 2;
+	    y = y + alloc1.height;
+	}
+	/* ... or up doesn't fit and down does */
+	else if (y - req.height < 0 && y + alloc1.height + req.height <= h)
+	{
+	    x = x + alloc1.width / 2 - req.width / 2;
+	    y = y + alloc1.height;
+	}
+	else
+	{
+	    x = x + alloc1.width / 2 - req.width / 2;
+	    y = y - req.height;
+	}
 
-        /* check if it fits to the left and the right */
-        if (x < 0)
-            x = 0;
-        else if (x + req.width > w)
-            x = w - req.width;
+	/* check if it fits to the left and the right */
+	if (x < 0)
+	    x = 0;
+	else if (x + req.width > w)
+	    x = w - req.width;
     }
 
     gtk_window_move (GTK_WINDOW (pp->window), x, y);
-    gtk_window_stick (GTK_WINDOW(pp->window));
+    gtk_window_stick (GTK_WINDOW (pp->window));
     gtk_widget_show (pp->window);
 }
 
@@ -195,7 +195,7 @@ void
 hide_current_popup_menu (void)
 {
     if (open_popup)
-        hide_popup (open_popup);
+	hide_popup (open_popup);
 }
 
 void
@@ -204,9 +204,9 @@ toggle_popup (GtkWidget * button, PanelPopup * pp)
     hide_current_popup_menu ();
 
     if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
-        show_popup (pp);
+	show_popup (pp);
     else
-        hide_popup (pp);
+	hide_popup (pp);
 }
 
 void
@@ -233,11 +233,11 @@ popup_key_pressed (GtkWidget * window, GdkEventKey * ev, PanelPopup * pp)
 {
     if (ev->keyval == GDK_Escape)
     {
-        hide_popup (pp);
-        return TRUE;
+	hide_popup (pp);
+	return TRUE;
     }
     else
-        return FALSE;
+	return FALSE;
 }
 
 /*  Popup menus 
@@ -273,15 +273,15 @@ static GtkTargetEntry entry[] = {
 
 static gboolean
 drag_motion (GtkWidget * widget, GdkDragContext * context,
-             int x, int y, guint time, PanelPopup * pp)
+	     int x, int y, guint time, PanelPopup * pp)
 {
     if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (pp->button)))
     {
-        DBG ("open popup\n");
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pp->button), TRUE);
+	DBG ("open popup\n");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pp->button), TRUE);
     }
     else
-        DBG ("already open\n");
+	DBG ("already open\n");
 
     return TRUE;
 }
@@ -297,17 +297,17 @@ create_panel_popup (void)
     /* the button */
     if (vertical)
     {
-        if (settings.popup_position == LEFT)
-            at = GTK_ARROW_LEFT;
-        else
-            at = GTK_ARROW_RIGHT;
+	if (settings.popup_position == LEFT)
+	    at = GTK_ARROW_LEFT;
+	else
+	    at = GTK_ARROW_RIGHT;
     }
     else
     {
-        if (settings.popup_position == BOTTOM)
-            at = GTK_ARROW_DOWN;
-        else
-            at = GTK_ARROW_UP;
+	if (settings.popup_position == BOTTOM)
+	    at = GTK_ARROW_DOWN;
+	else
+	    at = GTK_ARROW_UP;
     }
 
     pp->button = xfce_togglebutton_new (at);
@@ -316,13 +316,14 @@ create_panel_popup (void)
     gtk_widget_set_name (pp->button, "xfce_popup_button");
 
     xfce_togglebutton_set_relief (XFCE_TOGGLEBUTTON (pp->button),
-                                  GTK_RELIEF_NONE);
+				  GTK_RELIEF_NONE);
 
     g_signal_connect (pp->button, "toggled", G_CALLBACK (toggle_popup), pp);
 
     gtk_drag_dest_set (pp->button, GTK_DEST_DEFAULT_ALL, entry, 2,
-                       GDK_ACTION_COPY);
-    g_signal_connect (pp->button, "drag-motion", G_CALLBACK (drag_motion), pp);
+		       GDK_ACTION_COPY);
+    g_signal_connect (pp->button, "drag-motion", G_CALLBACK (drag_motion),
+		      pp);
 
     /* the menu */
     pp->hgroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -340,7 +341,7 @@ create_panel_popup (void)
     pp->addtomenu_item = menu_item_new (pp);
     create_addtomenu_item (pp->addtomenu_item);
     gtk_box_pack_start (GTK_BOX (pp->vbox), pp->addtomenu_item->button, TRUE,
-                        TRUE, 0);
+			TRUE, 0);
 
     pp->separator = gtk_hseparator_new ();
     gtk_box_pack_start (GTK_BOX (pp->vbox), pp->separator, FALSE, FALSE, 0);
@@ -353,19 +354,20 @@ create_panel_popup (void)
 
     pp->tearoff_button = gtk_button_new ();
     gtk_button_set_relief (GTK_BUTTON (pp->tearoff_button), GTK_RELIEF_NONE);
-    gtk_box_pack_start (GTK_BOX (pp->vbox), pp->tearoff_button, FALSE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (pp->vbox), pp->tearoff_button, FALSE, TRUE,
+			0);
     sep = gtk_hseparator_new ();
     gtk_container_add (GTK_CONTAINER (pp->tearoff_button), sep);
 
     /* signals */
-    g_signal_connect (pp->tearoff_button, "clicked", G_CALLBACK (tearoff_popup),
-                      pp);
+    g_signal_connect (pp->tearoff_button, "clicked",
+		      G_CALLBACK (tearoff_popup), pp);
 
     g_signal_connect (pp->window, "delete-event", G_CALLBACK (delete_popup),
-                      pp);
+		      pp);
 
     g_signal_connect (pp->window, "key-press-event",
-                      G_CALLBACK (popup_key_pressed), pp);
+		      G_CALLBACK (popup_key_pressed), pp);
 
     /* apparently this is necessary to make the popup show correctly */
     pp->detached = FALSE;
@@ -404,9 +406,9 @@ panel_popup_add_item (PanelPopup * pp, Item * mi)
 
     for (i = 0, li = pp->items; li && li->data; i++, li = li->next)
     {
-        Item *item = li->data;
+	Item *item = li->data;
 
-        item->pos = i;
+	item->pos = i;
     }
 }
 
@@ -424,9 +426,9 @@ panel_popup_remove_item (PanelPopup * pp, Item * mi)
 
     for (i = 0, li = pp->items; li && li->data; i++, li = li->next)
     {
-        Item *item = li->data;
+	Item *item = li->data;
 
-        item->pos = i;
+	item->pos = i;
     }
 }
 
@@ -438,18 +440,18 @@ panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node)
 
     for (i = 0, child = node->children; child; i++, child = child->next)
     {
-        Item *mi;
+	Item *mi;
 
-        if (!xmlStrEqual (child->name, (const xmlChar *)"Item"))
-            continue;
+	if (!xmlStrEqual (child->name, (const xmlChar *) "Item"))
+	    continue;
 
-        mi = menu_item_new (pp);
-        item_read_config (mi, child);
-        create_menu_item (mi);
+	mi = menu_item_new (pp);
+	item_read_config (mi, child);
+	create_menu_item (mi);
 
-        mi->pos = i;
+	mi->pos = i;
 
-        panel_popup_add_item (pp, mi);
+	panel_popup_add_item (pp, mi);
     }
 }
 
@@ -463,11 +465,11 @@ panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root)
 
     for (li = pp->items; li; li = li->next)
     {
-        Item *mi = li->data;
+	Item *mi = li->data;
 
-        child = xmlNewTextChild (node, NULL, "Item", NULL);
+	child = xmlNewTextChild (node, NULL, "Item", NULL);
 
-        item_write_config (mi, child);
+	item_write_config (mi, child);
     }
 }
 
@@ -479,9 +481,9 @@ panel_popup_free (PanelPopup * pp)
 
     for (li = pp->items; li && li->data; li = li->next)
     {
-        Item *mi = li->data;
+	Item *mi = li->data;
 
-        item_free (mi);
+	item_free (mi);
     }
 
     g_free (pp);
@@ -498,18 +500,18 @@ panel_popup_set_size (PanelPopup * pp, int size)
     h = top_height[size];
 
     if (pos == LEFT || pos == RIGHT)
-        gtk_widget_set_size_request (pp->button, h, w);
+	gtk_widget_set_size_request (pp->button, h, w);
     else
-        gtk_widget_set_size_request (pp->button, w, h);
+	gtk_widget_set_size_request (pp->button, w, h);
 
     /* decide on popup size based on panel size */
     menu_item_set_popup_size (pp->addtomenu_item, size);
 
     for (li = pp->items; li && li->data; li = li->next)
     {
-        Item *mi = li->data;
+	Item *mi = li->data;
 
-        menu_item_set_popup_size (mi, size);
+	menu_item_set_popup_size (mi, size);
     }
 
 }
@@ -524,17 +526,17 @@ panel_popup_set_popup_position (PanelPopup * pp, int position)
 
     if (vertical)
     {
-        if (settings.popup_position == LEFT)
-            at = GTK_ARROW_LEFT;
-        else
-            at = GTK_ARROW_RIGHT;
+	if (settings.popup_position == LEFT)
+	    at = GTK_ARROW_LEFT;
+	else
+	    at = GTK_ARROW_RIGHT;
     }
     else
     {
-        if (settings.popup_position == BOTTOM)
-            at = GTK_ARROW_DOWN;
-        else
-            at = GTK_ARROW_UP;
+	if (settings.popup_position == BOTTOM)
+	    at = GTK_ARROW_DOWN;
+	else
+	    at = GTK_ARROW_UP;
     }
 
     xfce_togglebutton_set_arrow_type (XFCE_TOGGLEBUTTON (pp->button), at);
@@ -554,8 +556,8 @@ panel_popup_set_theme (PanelPopup * pp, const char *theme)
 
     for (li = pp->items; li && li->data; li = li->next)
     {
-        Item *mi = li->data;
+	Item *mi = li->data;
 
-        item_set_theme (mi, theme);
+	item_set_theme (mi, theme);
     }
 }

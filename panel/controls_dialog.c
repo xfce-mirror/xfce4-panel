@@ -20,8 +20,7 @@
 /*  panel control dialog
  *  --------------------
  *  The dialog consists of three parts:
- *  - Option menu to choose the type of control (icon or one of the available
- *    modules);
+ *  - Spinbox with the position on the panel;
  *  - Notebook containing the options that can be changed. This is provided
  *    by the panel controls. Changes must auto-apply if possible. 
  *  - Buttons: 'Revert' and 'Done'
@@ -41,13 +40,13 @@
 #include "popup.h"
 #include "settings.h"
 
-static GSList *control_list = NULL;     /* list of available controls */
+static GSList *control_list = NULL;	/* list of available controls */
 
-static GtkWidget *container;    /* container on the panel to hold the 
-                                   panel control */
-static Control *old_control = NULL;     /* original panel control */
-static Control *current_control = NULL; /* current control == old_control, 
-                                           if type is not changed */
+static GtkWidget *container;	/* container on the panel to hold the 
+				   panel control */
+static Control *old_control = NULL;	/* original panel control */
+static Control *current_control = NULL;	/* current control == old_control, 
+					   if type is not changed */
 static GtkWidget *type_option_menu;
 static GtkWidget *pos_spin;
 static GtkWidget *notebook;
@@ -73,26 +72,26 @@ create_control_list (Control * control)
     /* then one for each other control class */
     for (i = 0, li = class_list; li; li = li->next, i++)
     {
-        ControlClass *cc = li->data;
-        Control *new_control;
+	ControlClass *cc = li->data;
+	Control *new_control;
 
-        if (cc == control->cclass)
-            continue;
+	if (cc == control->cclass)
+	    continue;
 
-        new_control = control_new (control->index);
-        new_control->cclass = cc;
-        
+	new_control = control_new (control->index);
+	new_control->cclass = cc;
+
 	if (!cc->create_control (new_control))
 	{
 	    new_control->cclass = NULL;
-	    control_free(new_control);
+	    control_free (new_control);
 	    continue;
-	}	
+	}
 
-        control_attach_callbacks (new_control);
-        control_set_settings (new_control);
+	control_attach_callbacks (new_control);
+	control_set_settings (new_control);
 
-        control_list = g_slist_append (control_list, new_control);
+	control_list = g_slist_append (control_list, new_control);
     }
 #endif
 }
@@ -107,9 +106,9 @@ clear_control_list (void)
 
     for (li = control_list; li; li = li->next)
     {
-        Control *control = li->data;
+	Control *control = li->data;
 
-        control_free (control);
+	control_free (control);
     }
 
     g_slist_free (control_list);
@@ -130,7 +129,7 @@ type_option_changed (GtkOptionMenu * om)
     control = li->data;
 
     if (control == current_control)
-        return;
+	return;
 
     control_unpack (current_control);
     control_pack (control, GTK_BOX (container));
@@ -159,11 +158,11 @@ create_type_option_menu (void)
 
     for (li = control_list; li; li = li->next)
     {
-        control = li->data;
+	control = li->data;
 
-        mi = gtk_menu_item_new_with_label (control->cclass->caption);
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	mi = gtk_menu_item_new_with_label (control->cclass->caption);
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     }
 
     gtk_option_menu_set_menu (GTK_OPTION_MENU (om), menu);
@@ -188,15 +187,15 @@ add_notebook (GtkBox * box)
     /* add page for every control in control_list */
     for (li = control_list; li; li = li->next)
     {
-        Control *control = li->data;
+	Control *control = li->data;
 
-        frame = gtk_frame_new (NULL);
-        gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
-        gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
-        gtk_widget_show (frame);
-        gtk_notebook_append_page (GTK_NOTEBOOK (notebook), frame, NULL);
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+	gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
+	gtk_widget_show (frame);
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), frame, NULL);
 
-        control_add_options (control, GTK_CONTAINER (frame), revert, done);
+	control_add_options (control, GTK_CONTAINER (frame), revert, done);
     }
 
     gtk_box_pack_start (box, notebook, TRUE, TRUE, 0);
@@ -215,14 +214,14 @@ pos_changed (GtkSpinButton * spin)
 
     if (n != current_control->index)
     {
-        groups_move (current_control->index, n);
-        current_control->index = n;
+	groups_move (current_control->index, n);
+	current_control->index = n;
 
-        changed = TRUE;
+	changed = TRUE;
     }
 
     if (changed)
-        gtk_widget_set_sensitive (revert, TRUE);
+	gtk_widget_set_sensitive (revert, TRUE);
 }
 
 static void
@@ -233,10 +232,10 @@ controls_dialog_revert (void)
 #endif
     if (backup_index != current_control->index)
     {
-        groups_move (current_control->index, backup_index);
+	groups_move (current_control->index, backup_index);
 
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin),
-                                   backup_index + 1);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin),
+				   backup_index + 1);
     }
 }
 
@@ -263,7 +262,7 @@ controls_dialog (Control * control)
     container = control->base->parent;
 
     dlg = gtk_dialog_new_with_buttons (_("Change item"), NULL,
-                                       GTK_DIALOG_MODAL, NULL);
+				       GTK_DIALOG_MODAL, NULL);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 
@@ -284,7 +283,7 @@ controls_dialog (Control * control)
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 
     g_signal_connect (revert, "clicked",
-                      G_CALLBACK (controls_dialog_revert), NULL);
+		      G_CALLBACK (controls_dialog_revert), NULL);
 
     main_vbox = GTK_DIALOG (dlg)->vbox;
 
@@ -329,7 +328,7 @@ controls_dialog (Control * control)
     gtk_box_pack_start (GTK_BOX (hbox), pos_spin, FALSE, FALSE, 0);
 
     g_signal_connect (pos_spin, "value-changed", G_CALLBACK (pos_changed),
-                      NULL);
+		      NULL);
 
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
@@ -344,37 +343,37 @@ controls_dialog (Control * control)
     /* run dialog until 'Done' */
     while (1)
     {
-        response = GTK_RESPONSE_NONE;
+	response = GTK_RESPONSE_NONE;
 
-        gtk_widget_set_sensitive (revert, FALSE);
-        gtk_widget_grab_default (done);
-        gtk_widget_grab_focus (done);
+	gtk_widget_set_sensitive (revert, FALSE);
+	gtk_widget_grab_default (done);
+	gtk_widget_grab_focus (done);
 
-        response = gtk_dialog_run (GTK_DIALOG (dlg));
+	response = gtk_dialog_run (GTK_DIALOG (dlg));
 
-        if (response == RESPONSE_REMOVE)
-        {
+	if (response == RESPONSE_REMOVE)
+	{
 	    PanelPopup *popup;
-	    
-            gtk_widget_hide (dlg);
 
-	    popup = groups_get_popup(control->index);
+	    gtk_widget_hide (dlg);
 
-            if (!(control->with_popup) || popup->items == NULL ||
-                confirm (_
-                         ("Removing an item will also remove its popup menu.\n\n"
-                          "Do you want to remove the item?"), GTK_STOCK_REMOVE,
-                         NULL))
-            {
-                break;
-            }
+	    popup = groups_get_popup (control->index);
 
-            gtk_widget_show (dlg);
-        }
-        else if (response != RESPONSE_REVERT)
-        {
-            break;
-        }
+	    if (!(control->with_popup) || popup->items == NULL ||
+		confirm (_
+			 ("Removing an item will also remove its popup menu.\n\n"
+			  "Do you want to remove the item?"),
+			 GTK_STOCK_REMOVE, NULL))
+	    {
+		break;
+	    }
+
+	    gtk_widget_show (dlg);
+	}
+	else if (response != RESPONSE_REVERT)
+	{
+	    break;
+	}
     }
 
     gtk_widget_destroy (dlg);
@@ -383,192 +382,9 @@ controls_dialog (Control * control)
 
     if (response == RESPONSE_REMOVE)
     {
-        groups_remove (current_control->index);
+	groups_remove (current_control->index);
     }
 
     write_panel_config ();
 }
 
-#if 0
-/*  Add new control
- *  ---------------
-*/
-static GtkWidget *newcontrol_treeview = NULL;
-GSList *class_list = NULL;
-
-static void
-create_class_store(GtkListStore *store)
-{
-    GSList *li;
-    GtkTreeIter iter;
-    
-    class_list = get_control_class_list();
-
-    for (li = class_list; li; li = li->next)
-    {
-	gtk_list_store_append(store, &iter);
-	gtk_list_store_set(store, &iter, 0, li->data, -1);
-    }
-}
-
-static void
-render_class_name (GtkTreeViewColumn *tree_column, GtkCellRenderer *cell,
-		   GtkTreeModel *tree_model, GtkTreeIter *iter, gpointer data)
-{
-    ControlClass *cc;
-
-    gtk_tree_model_get(tree_model, iter, 0, &cc, -1);
-
-    g_object_set(cell, "text", cc->caption, NULL);
-}
-
-static void 
-add_types_treeview(GtkWidget *vbox)
-{
-    GtkWidget *treeview;
-    GtkWidget *treeview_scroll;
-    GtkListStore *store;
-    GtkCellRenderer *renderer;
-    GtkTreeModel *model;
-    char *markup;
-    GtkWidget *label;
-
-    treeview_scroll = gtk_scrolled_window_new (NULL, NULL);
-    gtk_widget_show (treeview_scroll);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (treeview_scroll), 
-	    			    GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);
-    gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW (treeview_scroll),
-	    				GTK_SHADOW_IN);
-    gtk_box_pack_start(GTK_BOX(vbox), treeview_scroll, TRUE, TRUE, 0);
-
-    store = gtk_list_store_new (1, G_TYPE_POINTER);
-    
-    treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
-    gtk_widget_show(treeview);
-    gtk_container_add(GTK_CONTAINER(treeview_scroll), treeview);
-
-    newcontrol_treeview = treeview;
-
-    gtk_tree_view_set_rules_hint(GTK_TREE_VIEW(treeview), TRUE);
-    gtk_tree_view_set_headers_visible(GTK_TREE_VIEW(treeview), FALSE);
-
-    renderer = gtk_cell_renderer_text_new();
-    gtk_tree_view_insert_column_with_data_func (GTK_TREE_VIEW(treeview), 
-	    					-1, "Name", 
-	    					renderer, render_class_name,
-						NULL, NULL);
-    create_class_store(store);
-    g_object_unref (G_OBJECT (store));
-}
-
-static GtkWidget *
-create_add_control_dialog(void)
-{
-    GtkWidget *dialog, *mainvbox, *header, *label, *vbox, *spacer;
-    char *markup;
-
-    dialog = gtk_dialog_new_with_buttons(_("Add item"), NULL,
-	    				 GTK_DIALOG_NO_SEPARATOR,
-					 GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					 GTK_STOCK_ADD, GTK_RESPONSE_OK,
-					 NULL);
-
-    gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_OK);
-
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    mainvbox = GTK_DIALOG(dialog)->vbox;
-    gtk_container_set_border_width(GTK_CONTAINER(mainvbox), 0);
-
-    header = create_header(NULL, _("Select Item Type"));
-    gtk_widget_show(header);
-    gtk_box_pack_start(GTK_BOX(mainvbox), header, FALSE, TRUE, 0);
-    gtk_widget_set_size_request(header, -1, 36);
-    
-    spacer = gtk_alignment_new(0,0,0,0);
-    gtk_widget_show(spacer);
-    gtk_widget_set_size_request(spacer, 12, 12);
-    gtk_box_pack_start(GTK_BOX(mainvbox), spacer, FALSE, FALSE, 0);
-    
-    vbox = gtk_vbox_new(FALSE, 5);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), 6);
-    gtk_widget_show(vbox);
-    gtk_box_pack_start(GTK_BOX(mainvbox), vbox, TRUE, TRUE, 0);
-    gtk_widget_set_size_request(vbox, -1, 200);
-
-    add_types_treeview(vbox);
-    
-    label = gtk_label_new(NULL);
-    gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-    
-    markup = g_strdup_printf("<i>%s</i>", 
-	    		     _("Select an item type from the list"));
-    gtk_label_set_markup(GTK_LABEL(label), markup);
-    g_free(markup);
-
-    spacer = gtk_alignment_new(0,0,0,0);
-    gtk_widget_show(spacer);
-    gtk_widget_set_size_request(spacer, 12, 12);
-    gtk_box_pack_start(GTK_BOX(mainvbox), spacer, FALSE, FALSE, 0);
-    
-    return dialog;
-}
-
-static ControlClass *
-get_class_from_treeview(GtkWidget *treeview)
-{
-    GtkTreeSelection *sel;
-    GtkTreeModel *model;
-    GtkTreeIter iter;
-    ControlClass *cc = NULL;
-
-    sel = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeview));
-    if (gtk_tree_selection_get_selected(sel, &model, &iter))
-    {
-	gtk_tree_model_get(model, &iter, 0, &cc, -1);
-    }
-    else
-    {
-	/* return first item */
-	cc =  class_list->data;
-    }
-
-    return cc;
-}
-
-void
-controls_add_dialog(int index)
-{
-
-    GtkWidget *dlg;
-    int response;
-
-    dlg = create_add_control_dialog();
-
-    response = GTK_RESPONSE_NONE;
-    response = gtk_dialog_run (GTK_DIALOG(dlg));
-
-    if (response == GTK_RESPONSE_OK)
-    {
-	Control *newcontrol;
-	ControlClass *cc;
-
-	cc = get_class_from_treeview(newcontrol_treeview);
-	gtk_widget_destroy(dlg);
-
-	groups_add_control(cc->id, cc->filename, index);
-	
-	newcontrol = groups_get_control (index >= 0 ? index :
-					 settings.num_groups - 1);
-
-	controls_dialog(newcontrol);
-
-	write_panel_config ();
-    }
-    else
-    {
-	gtk_widget_destroy(dlg);
-    }
-}
-#endif

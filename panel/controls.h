@@ -30,8 +30,8 @@ typedef gboolean (*CreateControlFunc) (Control * control);
 struct _ControlClass
 {
     int id;
-    const char *name;           /* unique name */
-    const char *caption;        /* translated, human readable */
+    const char *name;		/* unique name */
+    const char *caption;	/* translated, human readable */
 
     /* for plugins */
     GModule *gmodule;
@@ -44,10 +44,10 @@ struct _ControlClass
     void (*read_config) (Control * control, xmlNodePtr node);
     void (*write_config) (Control * control, xmlNodePtr node);
     void (*attach_callback) (Control * control, const char *signal,
-                             GCallback callback, gpointer data);
+			     GCallback callback, gpointer data);
 
     void (*add_options) (Control * control, GtkContainer * container,
-                         GtkWidget * revert, GtkWidget * done);
+			 GtkWidget * revert, GtkWidget * done);
 
     /* global preferences */
     void (*set_orientation) (Control * control, int orientation);
@@ -77,8 +77,9 @@ void control_class_list_cleanup (void);
 GSList *get_control_class_list (void);
 
 /* add controls menu */
-void free_controls_menu_entries(GtkItemFactoryEntry *entries, int n);
-int get_controls_menu_entries(GtkItemFactoryEntry **entries, const char *base);
+void free_controls_menu_entries (GtkItemFactoryEntry * entries, int n);
+int get_controls_menu_entries (GtkItemFactoryEntry ** entries,
+			       const char *base);
 
 /* controls */
 Control *control_new (int index);
@@ -94,7 +95,7 @@ void control_unpack (Control * control);
 void control_attach_callbacks (Control * control);
 
 void control_add_options (Control * control, GtkContainer * container,
-                          GtkWidget * revert, GtkWidget * done);
+			  GtkWidget * revert, GtkWidget * done);
 
 /* global settings */
 void control_set_settings (Control * control);

@@ -131,16 +131,16 @@ screen_button_update_label (ScreenButton * sb, const char *name)
 
     switch (settings.size)
     {
-        case TINY:
-            markup = g_strconcat ("<span size=\"smaller\">",
-                                  name, "</span>", NULL);
-            break;
-        case LARGE:
-            markup = g_strconcat ("<span size=\"larger\">",
-                                  name, "</span>", NULL);
-            break;
-        default:
-            markup = g_strdup (name);
+	case TINY:
+	    markup = g_strconcat ("<span size=\"smaller\">",
+				  name, "</span>", NULL);
+	    break;
+	case LARGE:
+	    markup = g_strconcat ("<span size=\"larger\">",
+				  name, "</span>", NULL);
+	    break;
+	default:
+	    markup = g_strdup (name);
     }
 
     gtk_label_set_markup (GTK_LABEL (sb->label), markup);
@@ -148,19 +148,20 @@ screen_button_update_label (ScreenButton * sb, const char *name)
 }
 
 static gboolean
-screen_button_pressed_cb (GtkButton * b, GdkEventButton * ev, ScreenButton * sb)
+screen_button_pressed_cb (GtkButton * b, GdkEventButton * ev,
+			  ScreenButton * sb)
 {
     hide_current_popup_menu ();
 
     if (ev->button == 1)
     {
-        netk_workspace_activate (sb->workspace);
-        return TRUE;
+	netk_workspace_activate (sb->workspace);
+	return TRUE;
     }
 
     if (ev->button == 3 && disable_user_config)
     {
-        return TRUE;
+	return TRUE;
     }
 
     return FALSE;
@@ -179,30 +180,31 @@ screen_button_update_size (ScreenButton * sb)
 
     /* don't let screen buttons get too large in vertical mode */
     if (settings.orientation == VERTICAL && settings.size > SMALL)
-        w = screen_button_width[MEDIUM] * 3 / 4;
+	w = screen_button_width[MEDIUM] * 3 / 4;
     else
-        w = screen_button_width[settings.size];
+	w = screen_button_width[settings.size];
 
     switch (settings.size)
     {
-        case TINY:
-            h = icon_size[TINY];
-            break;
-        case SMALL:
-            h = -1;
-            break;
-        case LARGE:
-            h = (top_height[LARGE] + icon_size[LARGE]) / 2 - 6;
-            break;
-        default:
-            h = (top_height[MEDIUM] + icon_size[MEDIUM]) / 2 - 5;
-            break;
+	case TINY:
+	    h = icon_size[TINY];
+	    break;
+	case SMALL:
+	    h = -1;
+	    break;
+	case LARGE:
+	    h = (top_height[LARGE] + icon_size[LARGE]) / 2 - 6;
+	    break;
+	default:
+	    h = (top_height[MEDIUM] + icon_size[MEDIUM]) / 2 - 5;
+	    break;
     }
 
     h = -1;
     gtk_widget_set_size_request (sb->button, w, h);
 
-    screen_button_update_label (sb, gtk_label_get_text (GTK_LABEL (sb->label)));
+    screen_button_update_label (sb,
+				gtk_label_get_text (GTK_LABEL (sb->label)));
 }
 
 /* creation and destruction */
@@ -226,12 +228,12 @@ create_screen_button (int index, const char *name, NetkScreen * screen)
     realname = netk_workspace_get_name (sb->workspace);
 
     if (!realname || !strlen (realname))
-        realname = name;
+	realname = name;
 
     sb->cb_id = g_signal_connect (sb->workspace, "name-changed",
-                                  G_CALLBACK (ws_name_changed), sb);
+				  G_CALLBACK (ws_name_changed), sb);
 
-    sb->frame = gtk_alignment_new (0, 0, 1, 1); /* gtk_frame_new(NULL); */
+    sb->frame = gtk_alignment_new (0, 0, 1, 1);	/* gtk_frame_new(NULL); */
     gtk_widget_show (sb->frame);
 
     sb->button = gtk_toggle_button_new ();
@@ -247,10 +249,10 @@ create_screen_button (int index, const char *name, NetkScreen * screen)
 
     screen_button_update_size (sb);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->button),
-                                  sb->index == 0);
+				  sb->index == 0);
 
     g_signal_connect (sb->button, "button-press-event",
-                      G_CALLBACK (screen_button_pressed_cb), sb);
+		      G_CALLBACK (screen_button_pressed_cb), sb);
 
     return sb;
 }
@@ -280,46 +282,46 @@ cde_pager_update_size (CdePager * pager)
 
     for (li = pager->buttons; li; li = li->next)
     {
-        ScreenButton *sb = li->data;
+	ScreenButton *sb = li->data;
 
-        screen_button_update_size (sb);
+	screen_button_update_size (sb);
     }
 
     /* check if we can rearrange the buttons (== horizontal mode) */
     if (!pager->buttonboxes[1])
-        return;
+	return;
 
     if (settings.size > SMALL)
-        gtk_widget_show (pager->buttonboxes[1]);
+	gtk_widget_show (pager->buttonboxes[1]);
     else
-        gtk_widget_hide (pager->buttonboxes[1]);
+	gtk_widget_hide (pager->buttonboxes[1]);
 
     /* remove the buttons ... */
     for (li = pager->buttons; li; li = li->next)
     {
-        ScreenButton *sb = li->data;
+	ScreenButton *sb = li->data;
 
-        g_object_ref (sb->frame);
-        gtk_container_remove (GTK_CONTAINER (sb->frame->parent), sb->frame);
+	g_object_ref (sb->frame);
+	gtk_container_remove (GTK_CONTAINER (sb->frame->parent), sb->frame);
     }
 
     /* ... and put them back again */
     for (li = pager->buttons; li; li = li->next)
     {
-        ScreenButton *sb = li->data;
+	ScreenButton *sb = li->data;
 
-        if (settings.size <= SMALL || sb->index % 2 == 0)
-        {
-            gtk_box_pack_start (GTK_BOX (pager->buttonboxes[0]), sb->frame,
-                                TRUE, TRUE, 0);
-        }
-        else
-        {
-            gtk_box_pack_start (GTK_BOX (pager->buttonboxes[1]), sb->frame,
-                                TRUE, TRUE, 0);
-        }
+	if (settings.size <= SMALL || sb->index % 2 == 0)
+	{
+	    gtk_box_pack_start (GTK_BOX (pager->buttonboxes[0]), sb->frame,
+				TRUE, TRUE, 0);
+	}
+	else
+	{
+	    gtk_box_pack_start (GTK_BOX (pager->buttonboxes[1]), sb->frame,
+				TRUE, TRUE, 0);
+	}
 
-        g_object_unref (sb->frame);
+	g_object_unref (sb->frame);
     }
 }
 
@@ -330,9 +332,9 @@ cde_pager_attach_callback (CdePager * pager, SignalCallback * sc)
 
     for (li = pager->buttons; li; li = li->next)
     {
-        ScreenButton *sb = li->data;
+	ScreenButton *sb = li->data;
 
-        g_signal_connect (sb->button, sc->signal, sc->callback, sc->data);
+	g_signal_connect (sb->button, sc->signal, sc->callback, sc->data);
     }
 }
 
@@ -346,16 +348,16 @@ cde_pager_add_button (CdePager * pager, GList * callbacks, GPtrArray * names)
 
     index = g_list_length (pager->buttons);
     active =
-        netk_workspace_get_number (netk_screen_get_active_workspace
-                                   (pager->screen));
+	netk_workspace_get_number (netk_screen_get_active_workspace
+				   (pager->screen));
 
     for (i = names->len; i < index + 1; i++)
     {
-        char tmp[3];
+	char tmp[3];
 
-        sprintf (tmp, "%d", i + 1);
+	sprintf (tmp, "%d", i + 1);
 
-        g_ptr_array_add (names, g_strdup (tmp));
+	g_ptr_array_add (names, g_strdup (tmp));
     }
 
     name = g_ptr_array_index (names, index);
@@ -364,23 +366,23 @@ cde_pager_add_button (CdePager * pager, GList * callbacks, GPtrArray * names)
     pager->buttons = g_list_append (pager->buttons, sb);
 
     if (settings.orientation == VERTICAL || settings.size <= SMALL ||
-        index % 2 == 0)
+	index % 2 == 0)
     {
-        screen_button_pack (sb, GTK_BOX (pager->buttonboxes[0]));
+	screen_button_pack (sb, GTK_BOX (pager->buttonboxes[0]));
     }
     else
     {
-        screen_button_pack (sb, GTK_BOX (pager->buttonboxes[1]));
+	screen_button_pack (sb, GTK_BOX (pager->buttonboxes[1]));
     }
 
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->button),
-                                  index == active);
+				  index == active);
 
     for (li = callbacks; li; li = li->next)
     {
-        SignalCallback *sc = li->data;
+	SignalCallback *sc = li->data;
 
-        g_signal_connect (sb->button, sc->signal, sc->callback, sc->data);
+	g_signal_connect (sb->button, sc->signal, sc->callback, sc->data);
     }
 }
 
@@ -407,10 +409,10 @@ cde_pager_set_active (CdePager * pager, NetkWorkspace * ws)
 
     for (li = pager->buttons; li; li = li->next)
     {
-        ScreenButton *sb = li->data;
+	ScreenButton *sb = li->data;
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->button),
-                                      sb->workspace == ws);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (sb->button),
+				      sb->workspace == ws);
     }
 }
 
@@ -427,39 +429,39 @@ create_cde_pager (NetkScreen * screen, GPtrArray * names)
 
     if (settings.orientation == HORIZONTAL)
     {
-        GtkWidget *spacer;
+	GtkWidget *spacer;
 
-        pager->box = gtk_vbox_new (FALSE, 0);
-        gtk_widget_show (pager->box);
+	pager->box = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (pager->box);
 
-        spacer = gtk_alignment_new (0, 0, 0, 0);
-        gtk_widget_show (spacer);
-        gtk_box_pack_start (GTK_BOX (pager->box), spacer, TRUE, TRUE, 0);
+	spacer = gtk_alignment_new (0, 0, 0, 0);
+	gtk_widget_show (spacer);
+	gtk_box_pack_start (GTK_BOX (pager->box), spacer, TRUE, TRUE, 0);
 
-        pager->buttonboxes[0] = gtk_hbox_new (TRUE, 2);
-        gtk_widget_show (pager->buttonboxes[0]);
-        gtk_box_pack_start (GTK_BOX (pager->box), pager->buttonboxes[0],
-                            FALSE, FALSE, 2);
+	pager->buttonboxes[0] = gtk_hbox_new (TRUE, 2);
+	gtk_widget_show (pager->buttonboxes[0]);
+	gtk_box_pack_start (GTK_BOX (pager->box), pager->buttonboxes[0],
+			    FALSE, FALSE, 2);
 
-        pager->buttonboxes[1] = gtk_hbox_new (TRUE, 2);
-        gtk_widget_show (pager->buttonboxes[1]);
-        gtk_box_pack_start (GTK_BOX (pager->box), pager->buttonboxes[1],
-                            FALSE, FALSE, 0);
+	pager->buttonboxes[1] = gtk_hbox_new (TRUE, 2);
+	gtk_widget_show (pager->buttonboxes[1]);
+	gtk_box_pack_start (GTK_BOX (pager->box), pager->buttonboxes[1],
+			    FALSE, FALSE, 0);
 
-        spacer = gtk_alignment_new (0, 0, 0, 0);
-        gtk_widget_show (spacer);
-        gtk_box_pack_start (GTK_BOX (pager->box), spacer, TRUE, TRUE, 0);
+	spacer = gtk_alignment_new (0, 0, 0, 0);
+	gtk_widget_show (spacer);
+	gtk_box_pack_start (GTK_BOX (pager->box), spacer, TRUE, TRUE, 0);
     }
     else
     {
-        pager->box = pager->buttonboxes[0] = gtk_vbox_new (TRUE, 2);
-        gtk_widget_show (pager->box);
+	pager->box = pager->buttonboxes[0] = gtk_vbox_new (TRUE, 2);
+	gtk_widget_show (pager->box);
     }
 
     for (i = 0; i < n; i++)
     {
-        /* no callbacks yet */
-        cde_pager_add_button (pager, NULL, names);
+	/* no callbacks yet */
+	cde_pager_add_button (pager, NULL, names);
     }
 
     return pager;
@@ -472,9 +474,9 @@ cde_pager_free (CdePager * pager)
 
     for (li = pager->buttons; li; li = li->next)
     {
-        ScreenButton *sb = li->data;
+	ScreenButton *sb = li->data;
 
-        screen_button_free (sb);
+	screen_button_free (sb);
     }
 
     g_list_free (pager->buttons);
@@ -517,7 +519,7 @@ switcher_set_orientation (Control * control, int orientation)
 */
 static void
 switcher_attach_callback (Control * control, const char *signal,
-                          GCallback callback, gpointer data)
+			  GCallback callback, gpointer data)
 {
     SignalCallback *sc;
     t_switcher *sw;
@@ -539,23 +541,23 @@ arrange_switcher (t_switcher * sw)
     /* destroy existing widgets */
     if (sw->box)
     {
-        cde_pager_free (sw->cde_pager);
+	cde_pager_free (sw->cde_pager);
 
-        gtk_widget_destroy (sw->box);
+	gtk_widget_destroy (sw->box);
     }
 
     /* then create new ones */
     if (vertical)
     {
-        sw->box = gtk_vbox_new (FALSE, 1);
-        sw->separators[0] = gtk_hseparator_new ();
-        sw->separators[1] = gtk_hseparator_new ();
+	sw->box = gtk_vbox_new (FALSE, 1);
+	sw->separators[0] = gtk_hseparator_new ();
+	sw->separators[1] = gtk_hseparator_new ();
     }
     else
     {
-        sw->box = gtk_hbox_new (FALSE, 0);
-        sw->separators[0] = gtk_vseparator_new ();
-        sw->separators[1] = gtk_vseparator_new ();
+	sw->box = gtk_hbox_new (FALSE, 0);
+	sw->separators[0] = gtk_vseparator_new ();
+	sw->separators[1] = gtk_vseparator_new ();
     }
 
     sw->cde_pager = create_cde_pager (sw->screen, sw->screen_names);
@@ -578,9 +580,9 @@ arrange_switcher (t_switcher * sw)
     /* attach callbacks */
     for (li = sw->callbacks; li; li = li->next)
     {
-        SignalCallback *cb = li->data;
+	SignalCallback *cb = li->data;
 
-        cde_pager_attach_callback (sw->cde_pager, cb);
+	cde_pager_attach_callback (sw->cde_pager, cb);
     }
 }
 
@@ -597,14 +599,14 @@ switcher_set_current_screen (NetkScreen * screen, t_switcher * sw)
 
 static void
 switcher_screen_created (NetkScreen * screen, NetkWorkspace * ws,
-                         t_switcher * sw)
+			 t_switcher * sw)
 {
     cde_pager_add_button (sw->cde_pager, sw->callbacks, sw->screen_names);
 }
 
 static void
 switcher_screen_destroyed (NetkScreen * screen, NetkWorkspace * ws,
-                           t_switcher * sw)
+			   t_switcher * sw)
 {
     cde_pager_remove_button (sw->cde_pager);
 }
@@ -617,7 +619,7 @@ switcher_new (NetkScreen * screen)
     sw->screen = screen;
 
     sw->screen_names =
-        g_ptr_array_sized_new (netk_screen_get_workspace_count (screen));
+	g_ptr_array_sized_new (netk_screen_get_workspace_count (screen));
 
     sw->frame = gtk_alignment_new (0.5, 0.5, 0.8, 0.8);
     gtk_widget_show (sw->frame);
@@ -626,16 +628,16 @@ switcher_new (NetkScreen * screen)
     arrange_switcher (sw);
 
     sw->ws_changed_id =
-        g_signal_connect (sw->screen, "active-workspace-changed",
-                          G_CALLBACK (switcher_set_current_screen), sw);
+	g_signal_connect (sw->screen, "active-workspace-changed",
+			  G_CALLBACK (switcher_set_current_screen), sw);
 
     sw->ws_created_id =
-        g_signal_connect (sw->screen, "workspace-created",
-                          G_CALLBACK (switcher_screen_created), sw);
+	g_signal_connect (sw->screen, "workspace-created",
+			  G_CALLBACK (switcher_screen_created), sw);
 
     sw->ws_destroyed_id =
-        g_signal_connect (sw->screen, "workspace-destroyed",
-                          G_CALLBACK (switcher_screen_destroyed), sw);
+	g_signal_connect (sw->screen, "workspace-destroyed",
+			  G_CALLBACK (switcher_screen_destroyed), sw);
 
     return sw;
 }
@@ -655,7 +657,7 @@ switcher_free (Control * control)
     cde_pager_free (sw->cde_pager);
 
     for (li = sw->callbacks; li; li = li->next)
-        g_free (li->data);
+	g_free (li->data);
 
     g_list_free (sw->callbacks);
 

@@ -61,7 +61,7 @@ compare_classes (gconstpointer class_a, gconstpointer class_b)
     g_assert (class_b != NULL);
 
     return (g_ascii_strcasecmp (CONTROL_CLASS (class_a)->name,
-                                CONTROL_CLASS (class_b)->name));
+				CONTROL_CLASS (class_b)->name));
 }
 
 static gint
@@ -74,10 +74,10 @@ lookup_classes_by_filename (gconstpointer class, gconstpointer filename)
     g_assert (filename != NULL);
 
     if (CONTROL_CLASS (class)->gmodule)
-        fn = g_path_get_basename (g_module_name
-                                  (CONTROL_CLASS (class)->gmodule));
+	fn = g_path_get_basename (g_module_name
+				  (CONTROL_CLASS (class)->gmodule));
     else
-        return -1;
+	return -1;
 
     result = g_ascii_strcasecmp (fn, filename);
     g_free (fn);
@@ -91,8 +91,8 @@ control_class_free (ControlClass * cc)
 {
     if (cc->id == PLUGIN)
     {
-        g_module_close (cc->gmodule);
-        g_free (cc->filename);
+	g_module_close (cc->gmodule);
+	g_free (cc->filename);
     }
 
     g_free (cc);
@@ -110,9 +110,9 @@ gchar *
 xfce_plugin_check_version (gint version)
 {
     if (version != API_VERSION)
-        return "Incompatible plugin version";
+	return "Incompatible plugin version";
     else
-        return NULL;
+	return NULL;
 }
 
 static void
@@ -131,33 +131,34 @@ load_plugin (gchar * path)
 
     if (gm && g_module_symbol (gm, "xfce_control_class_init", &tmp))
     {
-        init = tmp;
-        init (cc);
+	init = tmp;
+	init (cc);
 
-        if (g_slist_find_custom (control_class_list, cc, compare_classes))
-        {
-            g_message ("%s: module %s has already been loaded",
-                       PACKAGE, cc->name);
-            control_class_free (cc);
-        }
-        else
-        {
-            g_message ("%s: module %s successfully loaded", PACKAGE, cc->name);
-            control_class_list = g_slist_append (control_class_list, cc);
-            cc->filename = g_path_get_basename (path);
-        }
+	if (g_slist_find_custom (control_class_list, cc, compare_classes))
+	{
+	    g_message ("%s: module %s has already been loaded",
+		       PACKAGE, cc->name);
+	    control_class_free (cc);
+	}
+	else
+	{
+	    g_message ("%s: module %s successfully loaded", PACKAGE,
+		       cc->name);
+	    control_class_list = g_slist_append (control_class_list, cc);
+	    cc->filename = g_path_get_basename (path);
+	}
     }
     else if (gm)
     {
-        g_warning ("%s: incompatible module %s", PACKAGE, path);
-        g_module_close (gm);
-        g_free (cc);
+	g_warning ("%s: incompatible module %s", PACKAGE, path);
+	g_module_close (gm);
+	g_free (cc);
     }
     else
     {
-        g_warning ("%s: module %s cannot be opened (%s)",
-                   PACKAGE, path, g_module_error ());
-        g_free (cc);
+	g_warning ("%s: module %s cannot be opened (%s)",
+		   PACKAGE, path, g_module_error ());
+	g_free (cc);
     }
 }
 
@@ -168,21 +169,21 @@ load_plugin_dir (const char *dir)
     const char *file;
 
     if (!gdir)
-        return;
+	return;
 
     while ((file = g_dir_read_name (gdir)))
     {
-        const char *s = file;
+	const char *s = file;
 
-        s += strlen (file) - SOEXT_LEN;
+	s += strlen (file) - SOEXT_LEN;
 
-        if (strequal (s, SOEXT))
-        {
-            char *path = g_build_filename (dir, file, NULL);
+	if (strequal (s, SOEXT))
+	{
+	    char *path = g_build_filename (dir, file, NULL);
 
-            load_plugin (path);
-            g_free (path);
-        }
+	    load_plugin (path);
+	    g_free (path);
+	}
     }
 
     g_dir_close (gdir);
@@ -199,7 +200,7 @@ add_plugin_classes (void)
     dirs = get_plugin_dirs ();
 
     for (d = dirs; *d; d++)
-        load_plugin_dir (*d);
+	load_plugin_dir (*d);
 
     g_strfreev (dirs);
 }
@@ -228,9 +229,9 @@ control_class_list_cleanup (void)
 
     for (li = control_class_list; li; li = li->next)
     {
-        ControlClass *cc = li->data;
+	ControlClass *cc = li->data;
 
-        control_class_free (cc);
+	control_class_free (cc);
     }
 
     g_slist_free (control_class_list);
@@ -252,7 +253,7 @@ static void
 edit_control (void)
 {
     if (popup_control)
-        controls_dialog (popup_control);
+	controls_dialog (popup_control);
 
     popup_control = NULL;
 }
@@ -264,22 +265,22 @@ remove_control (void)
     {
 	PanelPopup *pp;
 
-	pp = groups_get_popup(popup_control->index);
-	
-        if (!(popup_control->with_popup) || pp->items == NULL ||
-            confirm (_("Removing an item will also remove its popup menu.\n\n"
-                       "Do you want to remove the item?"),
-                     GTK_STOCK_REMOVE, NULL))
-        {
-            groups_remove (popup_control->index);
-        }
+	pp = groups_get_popup (popup_control->index);
+
+	if (!(popup_control->with_popup) || pp->items == NULL ||
+	    confirm (_("Removing an item will also remove its popup menu.\n\n"
+		       "Do you want to remove the item?"),
+		     GTK_STOCK_REMOVE, NULL))
+	{
+	    groups_remove (popup_control->index);
+	}
     }
 
     popup_control = NULL;
 }
 
 static void
-add_control (gpointer data, int n, GtkWidget *w)
+add_control (gpointer data, int n, GtkWidget * w)
 {
     gboolean hidden = settings.autohide;
     ControlClass *cc;
@@ -288,30 +289,30 @@ add_control (gpointer data, int n, GtkWidget *w)
 
     if (hidden)
     {
-	DBG("unhide before adding new item");
-	panel_set_autohide(FALSE);
+	DBG ("unhide before adding new item");
+	panel_set_autohide (FALSE);
 
-	while (gtk_events_pending())
-	    gtk_main_iteration();
+	while (gtk_events_pending ())
+	    gtk_main_iteration ();
     }
 
-    cc = g_slist_nth(control_class_list, n-1)->data;
+    cc = g_slist_nth (control_class_list, n - 1)->data;
 
     index = popup_control ? popup_control->index : -1;
-    
-    groups_add_control(cc->id, cc->filename, index);
-    
-    control = groups_get_control (index >= 0 ? index :
-				     settings.num_groups - 1);
 
-    controls_dialog(control);
+    groups_add_control (cc->id, cc->filename, index);
+
+    control = groups_get_control (index >= 0 ? index :
+				  settings.num_groups - 1);
+
+    controls_dialog (control);
 
     write_panel_config ();
- 
+
     popup_control = NULL;
-    
+
     if (hidden)
-	panel_set_autohide(TRUE);
+	panel_set_autohide (TRUE);
 }
 
 static GtkItemFactoryEntry control_items[] = {
@@ -333,39 +334,39 @@ translate_menu (const char *msg)
 }
 
 void
-free_controls_menu_entries(GtkItemFactoryEntry *entries, int n)
+free_controls_menu_entries (GtkItemFactoryEntry * entries, int n)
 {
     int i;
 
     for (i = 0; i < n; i++)
     {
-	g_free((entries+i)->path);
+	g_free ((entries + i)->path);
     }
 
-    g_free(entries);
+    g_free (entries);
 }
 
 
 int
-get_controls_menu_entries(GtkItemFactoryEntry **entries, const char *base)
+get_controls_menu_entries (GtkItemFactoryEntry ** entries, const char *base)
 {
     GSList *li;
     int i, n;
     GtkItemFactoryEntry *entry;
 
-    n = g_slist_length(control_class_list);
-    *entries = g_new0(GtkItemFactoryEntry, n);
-    
-    for (entry = *entries, li = control_class_list, i = 1; 
-	    li; li = li->next, entry++, i++)
+    n = g_slist_length (control_class_list);
+    *entries = g_new0 (GtkItemFactoryEntry, n);
+
+    for (entry = *entries, li = control_class_list, i = 1;
+	 li; li = li->next, entry++, i++)
     {
 	ControlClass *cc = li->data;
-	entry->path = g_strconcat(base, "/", cc->caption, NULL);
+	entry->path = g_strconcat (base, "/", cc->caption, NULL);
 	entry->callback = add_control;
 	entry->callback_action = i;
 	entry->item_type = "<Item>";
     }
-    
+
     return n;
 }
 
@@ -379,22 +380,21 @@ get_control_menu (void)
     {
 	GtkItemFactoryEntry *entries;
 	int n_entries;
-	
-        factory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
 
-        gtk_item_factory_set_translate_func (factory,
-                                             (GtkTranslateFunc) translate_menu,
-                                             NULL, NULL);
-        gtk_item_factory_create_items (factory, G_N_ELEMENTS (control_items),
-                                       control_items, NULL);
+	factory = gtk_item_factory_new (GTK_TYPE_MENU, "<popup>", NULL);
+
+	gtk_item_factory_set_translate_func (factory,
+					     (GtkTranslateFunc)
+					     translate_menu, NULL, NULL);
+	gtk_item_factory_create_items (factory, G_N_ELEMENTS (control_items),
+				       control_items, NULL);
 
 	n_entries = get_controls_menu_entries (&entries, "/Add new item");
 
-        gtk_item_factory_create_items (factory, n_entries,
-                                       entries, NULL);
+	gtk_item_factory_create_items (factory, n_entries, entries, NULL);
 
 /*	free_controls_menu_entries(entries, n_entries);*/
-        menu = gtk_item_factory_get_widget (factory, "<popup>");
+	menu = gtk_item_factory_get_widget (factory, "<popup>");
     }
 
     return menu;
@@ -404,28 +404,28 @@ static gboolean
 control_press_cb (GtkWidget * b, GdkEventButton * ev, Control * control)
 {
     if (disable_user_config)
-        return FALSE;
+	return FALSE;
 
     if (ev->button == 3 || (ev->button == 1 && (ev->state & GDK_SHIFT_MASK)))
     {
-        GtkWidget *menu;
+	GtkWidget *menu;
 
-        hide_current_popup_menu ();
+	hide_current_popup_menu ();
 
-        gtk_widget_grab_focus (b);
+	gtk_widget_grab_focus (b);
 
-        popup_control = control;
+	popup_control = control;
 
-        menu = get_control_menu ();
+	menu = get_control_menu ();
 
-        gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
-                        ev->button, ev->time);
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
+			ev->button, ev->time);
 
-        return TRUE;
+	return TRUE;
     }
     else
     {
-        return FALSE;
+	return FALSE;
     }
 }
 
@@ -439,10 +439,10 @@ create_plugin (Control * control, const char *filename)
     ControlClass *cc;
 
     li = g_slist_find_custom (control_class_list, filename,
-                              lookup_classes_by_filename);
+			      lookup_classes_by_filename);
 
     if (!li)
-        return FALSE;
+	return FALSE;
 
     cc = control->cclass = li->data;
 
@@ -465,12 +465,12 @@ create_control (Control * control, int id, const char *filename)
 
     switch (id)
     {
-        case PLUGIN:
-            if (!create_plugin (control, filename))
-                create_launcher (control);
-            break;
-        default:
-            create_launcher (control);
+	case PLUGIN:
+	    if (!create_plugin (control, filename))
+		create_launcher (control);
+	    break;
+	default:
+	    create_launcher (control);
     }
 
     /* the control class is set in the create_* functions above */
@@ -479,10 +479,10 @@ create_control (Control * control, int id, const char *filename)
     /* these are required for proper operation */
     if (!gtk_bin_get_child (GTK_BIN (control->base)))
     {
-        if (cc && cc->free)
-            cc->free (control);
+	if (cc && cc->free)
+	    cc->free (control);
 
-        create_launcher (control);
+	create_launcher (control);
     }
 
     control_attach_callbacks (control);
@@ -513,7 +513,7 @@ control_free (Control * control)
     ControlClass *cc = control->cclass;
 
     if (cc && cc->free)
-        cc->free (control);
+	cc->free (control);
 
     gtk_widget_destroy (control->base);
     g_object_unref (control->base);
@@ -530,7 +530,8 @@ control_pack (Control * control, GtkBox * box)
 void
 control_unpack (Control * control)
 {
-    gtk_container_remove (GTK_CONTAINER (control->base->parent), control->base);
+    gtk_container_remove (GTK_CONTAINER (control->base->parent),
+			  control->base);
 }
 
 void
@@ -539,10 +540,10 @@ control_attach_callbacks (Control * control)
     ControlClass *cc = control->cclass;
 
     cc->attach_callback (control, "button-press-event",
-                         G_CALLBACK (control_press_cb), control);
+			 G_CALLBACK (control_press_cb), control);
 
     g_signal_connect (control->base, "button-press-event",
-                      G_CALLBACK (control_press_cb), control);
+		      G_CALLBACK (control_press_cb), control);
 }
 
 /*  Controls configuration
@@ -556,7 +557,7 @@ control_read_config (Control * control, xmlNodePtr node)
     ControlClass *cc = control->cclass;
 
     if (cc && cc->read_config)
-        cc->read_config (control, node);
+	cc->read_config (control, node);
 }
 
 static void
@@ -565,7 +566,7 @@ control_write_config (Control * control, xmlNodePtr node)
     ControlClass *cc = control->cclass;
 
     if (cc && cc->write_config)
-        cc->write_config (control, node);
+	cc->write_config (control, node);
 }
 
 /* control configuration */
@@ -578,21 +579,21 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 
     if (!node)
     {
-        create_control (control, ICON, NULL);
-        return;
+	create_control (control, ICON, NULL);
+	return;
     }
 
     /* get id and filename */
-    value = xmlGetProp (node, (const xmlChar *)"id");
+    value = xmlGetProp (node, (const xmlChar *) "id");
 
     if (value)
     {
-        id = atoi (value);
-        g_free (value);
+	id = atoi (value);
+	g_free (value);
     }
 
     if (id == PLUGIN)
-        filename = (char *)xmlGetProp (node, (const xmlChar *)"filename");
+	filename = (char *) xmlGetProp (node, (const xmlChar *) "filename");
 
     /* create a default control of specified type */
     create_control (control, id, filename);
@@ -603,7 +604,7 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 
     /* hide popup? also check if added to the panel */
     if (!control->with_popup && control->base->parent)
-        groups_show_popup (control->index, FALSE);
+	groups_show_popup (control->index, FALSE);
 }
 
 void
@@ -619,7 +620,7 @@ control_write_xml (Control * control, xmlNodePtr parent)
     xmlSetProp (node, "id", value);
 
     if (cc->filename)
-        xmlSetProp (node, "filename", cc->filename);
+	xmlSetProp (node, "filename", cc->filename);
 
     /* allow the control to write its configuration */
     control_write_config (control, node);
@@ -628,34 +629,34 @@ control_write_xml (Control * control, xmlNodePtr parent)
 /* options dialog */
 void
 control_add_options (Control * control, GtkContainer * container,
-                     GtkWidget * revert, GtkWidget * done)
+		     GtkWidget * revert, GtkWidget * done)
 {
     ControlClass *cc = control->cclass;
 
     if (cc && cc->add_options)
     {
-        cc->add_options (control, container, revert, done);
+	cc->add_options (control, container, revert, done);
     }
     else
     {
-        GtkWidget *hbox, *image, *label;
+	GtkWidget *hbox, *image, *label;
 
-        hbox = gtk_hbox_new (FALSE, 6);
-        gtk_widget_show (hbox);
-        gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
+	hbox = gtk_hbox_new (FALSE, 6);
+	gtk_widget_show (hbox);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), 6);
 
-        image =
-            gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO,
-                                      GTK_ICON_SIZE_LARGE_TOOLBAR);
-        gtk_widget_show (image);
-        gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+	image =
+	    gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO,
+				      GTK_ICON_SIZE_LARGE_TOOLBAR);
+	gtk_widget_show (image);
+	gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
 
-        label = gtk_label_new (_("This item has no configuration options"));
-        gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-        gtk_widget_show (label);
-        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+	label = gtk_label_new (_("This item has no configuration options"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+	gtk_widget_show (label);
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
-        gtk_container_add (container, hbox);
+	gtk_container_add (container, hbox);
     }
 }
 
@@ -676,7 +677,7 @@ control_set_orientation (Control * control, int orientation)
     ControlClass *cc = control->cclass;
 
     if (cc && cc->set_orientation)
-        cc->set_orientation (control, orientation);
+	cc->set_orientation (control, orientation);
 }
 
 void
@@ -685,12 +686,12 @@ control_set_size (Control * control, int size)
     ControlClass *cc = control->cclass;
 
     if (cc && cc->set_size)
-        cc->set_size (control, size);
+	cc->set_size (control, size);
     else
     {
-        int s = icon_size[size] + border_width;
+	int s = icon_size[size] + border_width;
 
-        gtk_widget_set_size_request (control->base, s, s);
+	gtk_widget_set_size_request (control->base, s, s);
     }
 }
 
@@ -700,5 +701,5 @@ control_set_theme (Control * control, const char *theme)
     ControlClass *cc = control->cclass;
 
     if (cc && cc->set_theme)
-        cc->set_theme (control, theme);
+	cc->set_theme (control, theme);
 }

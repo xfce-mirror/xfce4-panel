@@ -30,7 +30,7 @@
 #ifdef __cplusplus
 extern "C"
 {
-#endif                          /* __cplusplus */
+#endif				/* __cplusplus */
 
 /* prototype for plugin init function 
  * (must be implemented by plugin) */
@@ -55,6 +55,6 @@ g_module_check_init(GModule *gmodule) \
 
 #ifdef __cplusplus
 }
-#endif                          /* __cplusplus */
+#endif				/* __cplusplus */
 
-#endif                          /* _XFCE_PLUGIN_H */
+#endif				/* _XFCE_PLUGIN_H */

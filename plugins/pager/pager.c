@@ -91,17 +91,17 @@ netk_pager_update_size (GtkWidget * pager, NetkScreen * screen)
 
     if (settings.orientation == HORIZONTAL)
     {
-        w = count * (int)((double)(gdk_screen_width () * s) /
-                          (double)(gdk_screen_height ()));
+	w = count * (int) ((double) (gdk_screen_width () * s) /
+			   (double) (gdk_screen_height ()));
 
-        gtk_widget_set_size_request (pager, w, s);
+	gtk_widget_set_size_request (pager, w, s);
     }
     else
     {
-        w = count * (int)((double)(gdk_screen_height () * s) /
-                          (double)(gdk_screen_width ()));
+	w = count * (int) ((double) (gdk_screen_height () * s) /
+			   (double) (gdk_screen_width ()));
 
-        gtk_widget_set_size_request (pager, s, w);
+	gtk_widget_set_size_request (pager, s, w);
     }
 }
 
@@ -110,7 +110,7 @@ create_netk_pager (NetkScreen * screen)
 {
     GtkWidget *pager;
     GtkOrientation gor = (settings.orientation == VERTICAL) ?
-        GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
+	GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL;
 
     pager = netk_pager_new (screen);
     netk_pager_set_n_rows (NETK_PAGER (pager), 1);
@@ -158,7 +158,7 @@ pager_set_orientation (Control * control, int orientation)
 */
 static void
 pager_attach_callback (Control * control, const char *signal,
-                       GCallback callback, gpointer data)
+		       GCallback callback, gpointer data)
 {
     SignalCallback *sc;
     t_pager *pager;
@@ -180,21 +180,21 @@ arrange_pager (t_pager * pager)
     /* destroy existing widgets */
     if (pager->box)
     {
-        gtk_widget_destroy (pager->box);
+	gtk_widget_destroy (pager->box);
     }
 
     /* then create new ones */
     if (vertical)
     {
-        pager->box = gtk_vbox_new (FALSE, 1);
-        pager->separators[0] = gtk_hseparator_new ();
-        pager->separators[1] = gtk_hseparator_new ();
+	pager->box = gtk_vbox_new (FALSE, 1);
+	pager->separators[0] = gtk_hseparator_new ();
+	pager->separators[1] = gtk_hseparator_new ();
     }
     else
     {
-        pager->box = gtk_hbox_new (FALSE, 0);
-        pager->separators[0] = gtk_vseparator_new ();
-        pager->separators[1] = gtk_vseparator_new ();
+	pager->box = gtk_hbox_new (FALSE, 0);
+	pager->separators[0] = gtk_vseparator_new ();
+	pager->separators[1] = gtk_vseparator_new ();
     }
 
     pager->netk_pager = create_netk_pager (pager->screen);
@@ -208,42 +208,43 @@ arrange_pager (t_pager * pager)
     /* packing the widgets */
     gtk_container_add (GTK_CONTAINER (pager->base), pager->box);
 
-    gtk_box_pack_start (GTK_BOX (pager->box), pager->separators[0], TRUE, TRUE,
-                        2);
+    gtk_box_pack_start (GTK_BOX (pager->box), pager->separators[0], TRUE,
+			TRUE, 2);
 
     {
-        GtkWidget *align;
+	GtkWidget *align;
 
-        align = gtk_alignment_new (0.5, 0.5, 0, 0);
-        gtk_widget_show (align);
-        gtk_container_add (GTK_CONTAINER (align), pager->netk_pager);
+	align = gtk_alignment_new (0.5, 0.5, 0, 0);
+	gtk_widget_show (align);
+	gtk_container_add (GTK_CONTAINER (align), pager->netk_pager);
 
-        gtk_box_pack_start (GTK_BOX (pager->box), align, TRUE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (pager->box), align, TRUE, TRUE, 2);
     }
 
-    gtk_box_pack_start (GTK_BOX (pager->box), pager->separators[1], TRUE, TRUE,
-                        2);
+    gtk_box_pack_start (GTK_BOX (pager->box), pager->separators[1], TRUE,
+			TRUE, 2);
 
     /* attach callbacks */
     for (li = pager->callbacks; li; li = li->next)
     {
-        SignalCallback *cb = li->data;
+	SignalCallback *cb = li->data;
 
-        g_signal_connect (pager->netk_pager,
-                          cb->signal, cb->callback, cb->data);
+	g_signal_connect (pager->netk_pager,
+			  cb->signal, cb->callback, cb->data);
     }
 }
 
 /* callbacks */
 static void
-pager_screen_created (NetkScreen * screen, NetkWorkspace * ws, t_pager * pager)
+pager_screen_created (NetkScreen * screen, NetkWorkspace * ws,
+		      t_pager * pager)
 {
     netk_pager_update_size (pager->netk_pager, pager->screen);
 }
 
 static void
 pager_screen_destroyed (NetkScreen * screen, NetkWorkspace * ws,
-                        t_pager * pager)
+			t_pager * pager)
 {
     netk_pager_update_size (pager->netk_pager, pager->screen);
 }
@@ -262,12 +263,12 @@ pager_new (NetkScreen * screen)
     arrange_pager (pager);
 
     pager->ws_created_id =
-        g_signal_connect (pager->screen, "workspace-created",
-                          G_CALLBACK (pager_screen_created), pager);
+	g_signal_connect (pager->screen, "workspace-created",
+			  G_CALLBACK (pager_screen_created), pager);
 
     pager->ws_destroyed_id =
-        g_signal_connect (pager->screen, "workspace-destroyed",
-                          G_CALLBACK (pager_screen_destroyed), pager);
+	g_signal_connect (pager->screen, "workspace-destroyed",
+			  G_CALLBACK (pager_screen_destroyed), pager);
 
     return pager;
 }
@@ -284,7 +285,7 @@ pager_free (Control * control)
     g_signal_handler_disconnect (pager->screen, pager->ws_destroyed_id);
 
     for (li = pager->callbacks; li; li = li->next)
-        g_free (li->data);
+	g_free (li->data);
 
     g_list_free (pager->callbacks);
 

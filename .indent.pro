@@ -1,13 +1,4 @@
--bad
--bap
+-gnu
 -i4
--lp
 -bli0
 -cli4
--nut
--psl
--nbbo
--ncs
--pcs
--nprs
--l80
