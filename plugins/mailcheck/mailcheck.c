@@ -183,7 +183,7 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 
                 g_free (value);
             }
-            value = xmlGetProp (node, "term");
+            value = xmlGetProp (node, "sn");
 
             if (value)
             {
