@@ -25,6 +25,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <signal.h>
 
 #include <gtk/gtk.h>
 #include <libxfcegui4/libxfcegui4.h>
@@ -36,13 +37,14 @@
 #include "iconbox-settings.h"
 
 
-#define N_ICONBOX_CONNECTIONS   4
-#define N_ICON_CONNECTIONS      4
+#define N_ICONBOX_CONNECTIONS  4
+#define N_ICON_CONNECTIONS     4
 
-#define DEFAULT_DIRECTION  GTK_DIR_LEFT
-#define DEFAULT_SIDE       GTK_SIDE_BOTTOM
-#define DEFAULT_SIZE       48
+#define DEFAULT_JUSTIFICATION  GTK_JUSTIFY_LEFT
+#define DEFAULT_SIDE           GTK_SIDE_BOTTOM
+#define DEFAULT_SIZE           48
 
+#define IS_HORIZONTAL(s) (s == GTK_SIDE_TOP || s == GTK_SIDE_BOTTOM)
 
 /* the iconbox */
 struct _Iconbox
@@ -68,11 +70,11 @@ struct _Iconbox
 
     GSList *iconlist;
 
-    GtkDirectionType direction;
+    GtkJustification justification;
     GtkSideType side;
     int icon_size;
     gboolean only_hidden;
-    gboolean all_tasks;
+    gboolean all_workspaces;
     gboolean hide;
 };
 
@@ -83,10 +85,11 @@ struct _Icon
 {
     NetkWindow *window;
     int connections[N_ICON_CONNECTIONS];
-    gboolean skip;
 
+    Iconbox *ib;
+    gboolean skip;
+    
     GdkPixbuf *pb;
-    int size;
 
     GtkWidget *button;
     GtkWidget *image;
@@ -109,19 +112,21 @@ icon_update_image (Icon *icon)
     w = gdk_pixbuf_get_width (icon->pb);
     h = gdk_pixbuf_get_height (icon->pb);
 
-    if (w > icon->size || h > icon->size)
+    if (w > icon->ib->icon_size || h > icon->ib->icon_size ||
+        ABS (w - icon->ib->icon_size) > 10 || 
+        ABS (h - icon->ib->icon_size) > 10)
     {
         if (w > h)
         {
-            h = h * rint ((double) icon->size / (double) w);
+            h = rint ((double) h * icon->ib->icon_size / (double) w);
 
-            w = icon->size;
+            w = icon->ib->icon_size;
         }
         else
         {
-            w = w * rint ((double) icon->size / (double) h);
+            w = rint ((double) w * icon->ib->icon_size / (double) h);
 
-            h = icon->size;
+            h = icon->ib->icon_size;
         }
 
         scaled = gdk_pixbuf_scale_simple (icon->pb, w, h, 
@@ -166,13 +171,50 @@ icon_update_image (Icon *icon)
         g_object_unref (scaled);
 }
 
+static void 
+update_visibility (Icon *icon, NetkWorkspace *optional_active_ws)
+{
+    NetkWorkspace *ws;
+
+    if (icon->skip)
+    {
+        return;
+    }
+    
+    if (icon->ib->only_hidden && !netk_window_is_minimized (icon->window))
+    {
+        gtk_widget_hide (icon->button);
+        return;
+    }
+    
+    if (optional_active_ws)
+    {
+        ws = optional_active_ws;
+    }
+    else
+    {
+        ws = netk_screen_get_active_workspace 
+                (netk_window_get_screen (icon->window));
+    }
+    
+    if (ws == netk_window_get_workspace (icon->window) ||
+        netk_window_is_sticky (icon->window))
+    {
+        gtk_widget_show (icon->button);
+    }
+    else
+    {
+        gtk_widget_hide (icon->button);
+    }
+}
+
 /* callbacks */
 static gboolean
 icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
 {
     Icon *icon = (Icon *)data;
 
-    if (ev->button == 1 || !(ev->state & GDK_SHIFT_MASK))
+    if (ev->button == 1 && !(ev->state & GDK_SHIFT_MASK))
     {
         if (netk_window_is_active (icon->window))
             netk_window_minimize (icon->window);
@@ -199,26 +241,19 @@ icon_state_changed (NetkWindow *window, NetkWindowState changed_mask,
     Icon *icon = (Icon *)data;
 
     if (changed_mask & NETK_WINDOW_STATE_MINIMIZED)
+    {
+        update_visibility (icon, NULL);
+
         icon_update_image (icon);
+    }
 }
 
 static void
 icon_workspace_changed (NetkWindow *window, gpointer data)
 {
     Icon *icon = (Icon *)data;
-    NetkWorkspace *ws;
 
-    ws = netk_screen_get_active_workspace (netk_window_get_screen (window));
-
-    if (!icon->skip && (ws == netk_window_get_workspace (window) ||
-                        netk_window_is_sticky (window)))
-    {
-        gtk_widget_show (icon->button);
-    }
-    else
-    {
-        gtk_widget_hide (icon->button);
-    }
+    update_visibility (icon, NULL);
 }
 
 static void
@@ -257,18 +292,18 @@ icon_destroy (Icon *icon)
 }
 
 static Icon *
-icon_new (NetkWindow *window, int size)
+icon_new (NetkWindow *window, Iconbox *ib)
 {
     Icon *icon = g_new0 (Icon, 1);
     int i = 0;
     NetkWindowType type;
 
+    icon->ib = ib;
+        
     icon->window = window;    
     icon->pb = netk_window_get_icon (window);
     if (icon->pb)
         g_object_ref (icon->pb);
-
-    icon->size = size;
 
     icon->button = gtk_toggle_button_new ();
     gtk_button_set_relief (GTK_BUTTON (icon->button), GTK_RELIEF_NONE);
@@ -298,22 +333,21 @@ icon_new (NetkWindow *window, int size)
     
     g_assert (i == N_ICON_CONNECTIONS);
     
+    type = netk_window_get_window_type (window);
+    
+    if (!(type == NETK_WINDOW_NORMAL || type == NETK_WINDOW_UTILITY) ||
+        netk_window_is_skip_tasklist (window))
+    {
+        icon->skip = TRUE;
+        return icon;
+    }
+
     icon_update_image (icon);
 
     gtk_tooltips_set_tip (icon_tooltips, icon->button, 
                           netk_window_get_name (window), NULL);
 
-    type = netk_window_get_window_type (window);
-    
-    if ((type == NETK_WINDOW_NORMAL || type == NETK_WINDOW_UTILITY) &&
-        !netk_window_is_skip_tasklist (window))
-    {
-        gtk_widget_show (icon->button);
-    }
-    else
-    {
-        icon->skip = TRUE;
-    }
+    update_visibility (icon, NULL);
 
     return icon;
 }
@@ -346,15 +380,7 @@ iconbox_active_workspace_changed (NetkScreen *screen, gpointer data)
     {
         Icon *icon = l->data;
         
-        if (!icon->skip && (ws == netk_window_get_workspace (icon->window) ||
-                            netk_window_is_sticky (icon->window)))
-        {
-            gtk_widget_show (icon->button);
-        }
-        else
-        {
-            gtk_widget_hide (icon->button);
-        }
+        update_visibility (icon, ws);
     }
 }
 
@@ -364,11 +390,11 @@ iconbox_window_opened (NetkScreen *screen, NetkWindow *window, gpointer data)
     Iconbox *ib = (Iconbox *)data;
     Icon *icon;
 
-    icon = icon_new (window, ib->icon_size);
+    icon = icon_new (window, ib);
 
     ib->iconlist = g_slist_append (ib->iconlist, icon);
 
-    if (ib->direction == GTK_DIR_RIGHT || ib->direction == GTK_DIR_DOWN)
+    if (ib->justification != GTK_JUSTIFY_RIGHT)
         gtk_box_pack_start (GTK_BOX (ib->box), icon->button, FALSE, FALSE, 0);
     else
         gtk_box_pack_end (GTK_BOX (ib->box), icon->button, FALSE, FALSE, 0);
@@ -495,10 +521,13 @@ static void
 iconbox_resize_function (GtkWidget *win, Iconbox *ib, GtkAllocation *old, 
                          GtkAllocation *new, int *x, int *y)
 {
-    if(ib->direction == GTK_DIR_UP)
-        *y = *y - new->height + old->height;
-    else if (ib->direction == GTK_DIR_LEFT)
-        *x = *x - new->width + old->width;
+    if(ib->justification == GTK_JUSTIFY_RIGHT)
+    {
+        if (ib->side == GTK_SIDE_LEFT || ib->side == GTK_SIDE_RIGHT)
+            *y = *y - new->height + old->height;
+        else
+            *x = *x - new->width + old->width;
+    }
 
     ib->width = new->width;
     ib->height = new->height;
@@ -521,16 +550,13 @@ create_iconbox (void)
     
     ib->gdk_screen = gtk_widget_get_screen (ib->win);
 
-    ib->scr = gdk_screen_get_number (ib->gdk_screen);
-    ib->dpy =
-        gdk_x11_display_get_xdisplay (gdk_screen_get_display (ib->gdk_screen));
-    
-    ib->netk_screen = netk_screen_get (ib->scr);
+    ib->netk_screen = 
+        netk_screen_get (gdk_screen_get_number (ib->gdk_screen));
 
     if (!icon_tooltips)
         icon_tooltips = gtk_tooltips_new ();
     
-    ib->direction = DEFAULT_DIRECTION;
+    ib->justification = DEFAULT_JUSTIFICATION;
     ib->side      = DEFAULT_SIDE;
     ib->icon_size = DEFAULT_SIZE;
     
@@ -541,20 +567,29 @@ create_iconbox (void)
 static void
 iconbox_read_settings (Iconbox *ib)
 {
-    ib->mcs_client = iconbox_connect_mcs_client (ib);
+    ib->mcs_client = iconbox_connect_mcs_client (ib->gdk_screen, ib);
     
-    if (ib->direction == GTK_DIR_RIGHT || ib->direction == GTK_DIR_DOWN)
+    switch (ib->justification)
     {
-        xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
-                                            XFCE_HANDLE_STYLE_START);
-    }
-    else
-    {
-        xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
-                                            XFCE_HANDLE_STYLE_END);
+        case GTK_JUSTIFY_LEFT:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_END);
+            break;
+        case GTK_JUSTIFY_RIGHT:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_START);
+            break;
+        case GTK_JUSTIFY_CENTER:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_BOTH);
+            break;
+        case GTK_JUSTIFY_FILL:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_NONE);
+            break;
     }
     
-    if (ib->direction == GTK_DIR_RIGHT || ib->direction == GTK_DIR_LEFT)
+    if (ib->side == GTK_SIDE_TOP || ib->side == GTK_SIDE_BOTTOM)
     {
         ib->box = gtk_hbox_new (TRUE, 0);
         xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (ib->win),
@@ -576,7 +611,7 @@ iconbox_read_settings (Iconbox *ib)
 }
 
 static void
-iconbox_set_initial_position (Iconbox *ib)
+iconbox_set_position (Iconbox *ib)
 {
     GdkRectangle r;
     GtkRequisition req;
@@ -587,56 +622,82 @@ iconbox_set_initial_position (Iconbox *ib)
 
     gdk_screen_get_monitor_geometry (ib->gdk_screen, ib->monitor, &r);
 
-    switch (ib->direction)
+    if (ib->side == GTK_SIDE_TOP || ib->side == GTK_SIDE_BOTTOM)
     {
-        case GTK_DIR_UP:
-            ib->y = r.y + r.height - ib->height - ib->offset;
-            break;
-        case GTK_DIR_DOWN:
-            ib->y = r.y + ib->offset;
-            break;
-        case GTK_DIR_LEFT:
-            ib->x = r.x + r.width - ib->width - ib->offset;
-            break;
-        default:
-            ib->x = r.x + ib->offset;
-            
-    }
+        switch (ib->justification)
+        {
+            case GTK_JUSTIFY_RIGHT:
+                ib->x = r.x + r.width - ib->width - ib->offset;
+                break;
+            case GTK_JUSTIFY_LEFT:
+                ib->x = r.x + ib->offset;
+                break;
+            case GTK_JUSTIFY_CENTER:
+                ib->x = r.x + (r.width - ib->width) / 2;
+                break;
+            case GTK_JUSTIFY_FILL:
+                ib->x = r.x;
+                break;
+        }
 
-    switch (ib->side)
-    {
-        case GTK_SIDE_LEFT:
-            ib->x = r.x;
-            break;
-        case GTK_SIDE_RIGHT:
-            ib->x = r.x + r.width - ib->width;
-            break;
-        case GTK_SIDE_TOP:
-            ib->y = r.y;
-            break;
-        default:
+        if (ib->side == GTK_SIDE_BOTTOM)
             ib->y = r.y + r.height- ib->height;
+        else
+            ib->y = r.y;
+    }
+    else
+    {
+        switch (ib->justification)
+        {
+            case GTK_JUSTIFY_RIGHT:
+                ib->y = r.y + r.height - ib->height - ib->offset;
+                break;
+            case GTK_JUSTIFY_LEFT:
+                ib->y = r.y + ib->offset;
+                break;
+            case GTK_JUSTIFY_CENTER:
+                ib->y = r.y + (r.height - ib->height) / 2;
+                break;
+            case GTK_JUSTIFY_FILL:
+                ib->y = r.y;
+                break;
+        }
+
+        if (ib->side == GTK_SIDE_RIGHT)
+            ib->x = r.x + r.width - ib->width;
+        else
+            ib->x = r.x;
     }
 
     gtk_window_move (GTK_WINDOW (ib->win), ib->x, ib->y);
 }
 
 /* session management */
-static void 
-quit (Iconbox *ib)
+static void
+save (gpointer data, int save_style, gboolean shutdown, int interact_style, 
+      gboolean fast)
+{
+    Iconbox *ib = (Iconbox *)data;
+    
+    /* save offset */
+}
+
+static void
+quit (gpointer client_data)
 {
     gtk_main_quit ();
 }
 
 static void
-save (Iconbox *ib)
+connect_to_session_manager (int argc, char **argv, Iconbox *ib)
 {
-    /* save offset */
-}
+    ib->session_client =
+        client_session_new (argc, argv, ib, SESSION_RESTART_IF_RUNNING, 30);
 
-static void
-iconbox_connect_to_session_manager (Iconbox *ib)
-{
+    ib->session_client->save_yourself = save;
+    ib->session_client->die = quit;
+
+    session_init (ib->session_client);
 }
 
 /* signal handler */
@@ -654,10 +715,40 @@ static gboolean
 check_signal_state (void)
 {
     if (sig_quit)
+    {
+        sig_quit = FALSE;
         gtk_main_quit ();
+    }
 
     /* keep running */
     return TRUE;
+}
+
+static void
+connect_signal_handler (void)
+{
+#ifdef HAVE_SIGACTION
+    struct sigaction act;
+    
+    act.sa_handler = sighandler;
+    sigemptyset (&act.sa_mask);
+#ifdef SA_RESTART
+    act.sa_flags = SA_RESTART;
+#else
+    act.sa_flags = 0;
+#endif
+    sigaction (SIGHUP, &act, NULL);
+    sigaction (SIGUSR1, &act, NULL);
+    sigaction (SIGUSR2, &act, NULL);
+    sigaction (SIGINT, &act, NULL);
+    sigaction (SIGTERM, &act, NULL);
+#else
+    signal (SIGHUP, sighandler);
+    signal (SIGUSR1, sighandler);
+    signal (SIGUSR2, sighandler);
+    signal (SIGINT, sighandler);
+    signal (SIGTERM, sighandler);
+#endif
 }
 
 /* cleanup */
@@ -698,17 +789,15 @@ main (int argc, char **argv)
     ib = create_iconbox ();
 
     iconbox_read_settings (ib);
-
-    iconbox_connect_to_session_manager (ib);
-
     iconbox_init_icons (ib);
-    
-    iconbox_set_initial_position (ib);
-    
+    iconbox_set_position (ib);
     gtk_widget_show (ib->win);
     
+    connect_signal_handler ();
     g_timeout_add (500, (GSourceFunc)check_signal_state, NULL);
     
+    connect_to_session_manager (argc, argv, ib);
+
     gtk_main ();
 
     cleanup_iconbox (ib);
@@ -718,31 +807,162 @@ main (int argc, char **argv)
 
 /* public interface */
 void
-iconbox_set_direction (Iconbox * ib, GtkDirectionType direction)
+iconbox_set_justification (Iconbox * ib, GtkJustification justification)
 {
+    g_return_if_fail (ib != NULL);
+    
+    if (justification == ib->justification)
+        return;
+
+    ib->justification = justification;
+    
+    switch (ib->justification)
+    {
+        case GTK_JUSTIFY_LEFT:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_END);
+            break;
+        case GTK_JUSTIFY_RIGHT:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_START);
+            break;
+        case GTK_JUSTIFY_CENTER:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_BOTH);
+            break;
+        case GTK_JUSTIFY_FILL:
+            xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (ib->win),
+                                                XFCE_HANDLE_STYLE_NONE);
+            break;
+    }
+
+    ib->offset = 0;
+    iconbox_set_position (ib);
 }
 
 void
 iconbox_set_side (Iconbox * ib, GtkSideType side)
 {
+    GtkWidget *oldbox;
+    
+    g_return_if_fail (ib != NULL);
+
+    if (side == ib->side)
+        return;
+
+    ib->side = side;
+    oldbox = ib->box;
+    
+    if (!oldbox)
+        return;
+    
+    if (IS_HORIZONTAL (ib->side))
+    {
+        if (!GTK_IS_HBOX (oldbox))
+        {
+            ib->box = gtk_hbox_new (TRUE, 0);
+            xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (ib->win),
+                                               GTK_ORIENTATION_HORIZONTAL);
+            gtk_widget_set_size_request (ib->box, -1, ib->icon_size + 8);
+        }
+        else
+        {
+            oldbox = NULL;
+        }
+    }
+    else
+    {
+        if (!GTK_IS_VBOX (oldbox))
+        {
+            ib->box = gtk_vbox_new (TRUE, 0);
+            xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (ib->win),
+                                               GTK_ORIENTATION_VERTICAL);
+            gtk_widget_set_size_request (ib->box, ib->icon_size + 8, -1);
+        }
+        else
+        {
+            oldbox = NULL;
+        }
+    }
+    
+    if (oldbox)
+    {
+        GSList *l;
+        
+        for (l = ib->iconlist; l != NULL; l = l->next)
+        {
+            Icon *icon = l->data;
+            GtkWidget *w = icon->button;
+
+            g_object_ref (w);
+            gtk_container_remove (GTK_CONTAINER (oldbox), w);
+            
+            if (ib->justification != GTK_JUSTIFY_RIGHT)
+                gtk_box_pack_start (GTK_BOX (ib->box), w, FALSE, FALSE, 0);
+            else
+                gtk_box_pack_start (GTK_BOX (ib->box), w, FALSE, FALSE, 0);
+
+            g_object_unref (w);
+        }
+        
+        gtk_widget_destroy (oldbox);
+        gtk_widget_show (ib->box);
+        gtk_container_add (GTK_CONTAINER (ib->win), ib->box);
+    }
+
+    iconbox_set_position (ib);
 }
 
 void
 iconbox_set_icon_size (Iconbox * ib, int size)
 {
+    GSList *l;
+    
+    g_return_if_fail (ib != NULL);
+
+    if (size == ib->icon_size)
+        return;
+
+    ib->icon_size = size;
+
+    if (ib->box)
+    {
+        if (IS_HORIZONTAL (ib->side))
+            gtk_widget_set_size_request (ib->box, -1, ib->icon_size + 8);
+        else
+            gtk_widget_set_size_request (ib->box, ib->icon_size + 8, -1);
+    }
+
+    for (l = ib->iconlist; l != NULL; l = l->next)
+    {
+        Icon *icon = l->data;
+
+        icon_update_image (icon);
+    }
 }
 
 void
 iconbox_set_show_only_hidden (Iconbox * ib, gboolean only_hidden)
 {
+    GSList *l;
+    
+    g_return_if_fail (ib != NULL);
+
+    if (only_hidden == ib->only_hidden)
+        return;
+
+    ib->only_hidden = only_hidden;
+
+    for (l = ib->iconlist; l != NULL; l = l->next)
+    {
+        Icon *icon = l->data;        
+
+        update_visibility (icon, NULL);
+    }
 }
 
-void
-iconbox_set_show_all_workspaces (Iconbox * ib, gboolean all_workspaces)
+McsClient *
+iconbox_get_mcs_client (Iconbox *ib)
 {
-}
-
-void
-iconbox_set_hide_when_empty (Iconbox * ib, gboolean hide)
-{
+    return ib->mcs_client;
 }

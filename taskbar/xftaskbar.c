@@ -825,6 +825,12 @@ check_signal_state (void)
     return TRUE;
 }
 
+static void
+quit (gpointer client_data)
+{
+    gtk_main_quit ();
+}
+
 int
 main (int argc, char **argv)
 {
@@ -1043,6 +1049,10 @@ main (int argc, char **argv)
 
     g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
 
+    client_session->die = quit;
+
+    session_init (client_session);
+    
     gtk_main ();
 
     if (taskbar->tray_registered)

@@ -23,7 +23,7 @@
 
 typedef struct _Iconbox Iconbox;
 
-void iconbox_set_direction (Iconbox *ib, GtkDirectionType direction);
+void iconbox_set_justification (Iconbox *ib, GtkJustification justification);
 
 void iconbox_set_side (Iconbox *ib, GtkSideType side);
 
@@ -31,7 +31,5 @@ void iconbox_set_icon_size (Iconbox *ib, int size);
 
 void iconbox_set_show_only_hidden (Iconbox *ib, gboolean only_hidden);
 
-void iconbox_set_show_all_workspaces (Iconbox *ib, gboolean all_workspaces);
-
-void iconbox_set_hide_when_empty (Iconbox *ib, gboolean hide);
+McsClient *iconbox_get_mcs_client (Iconbox *ib);
 

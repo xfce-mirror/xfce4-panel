@@ -23,7 +23,7 @@
 
 #include "iconbox.h"
 
-McsClient *iconbox_connect_mcs_client (Iconbox *ib);
+McsClient *iconbox_connect_mcs_client (GdkScreen *screen, Iconbox *ib);
 
 void iconbox_disconnect_mcs_client (McsClient *client);
 

@@ -30,6 +30,7 @@ libxfce4settings_la_CFLAGS =						\
 libxfce4settings_la_LIBADD =						\
 	@XFCE_MCS_MANAGER_LIBS@
 
+# taskbar
 xftaskbar_plugindir = $(libdir)/xfce4/mcs-plugins
 
 xftaskbar_plugin_LTLIBRARIES = xftaskbar_plugin.la
@@ -54,10 +55,37 @@ xftaskbar_plugin_la_CFLAGS = 						\
 xftaskbar_plugin_la_LIBADD = 						\
 	@XFCE_MCS_MANAGER_LIBS@
 
+# iconbox
+iconbox_plugindir = $(libdir)/xfce4/mcs-plugins
+
+iconbox_plugin_LTLIBRARIES = iconbox_plugin.la
+
+iconbox_plugin_la_LDFLAGS =						\
+	-avoid-version							\
+	-module
+
+if HAVE_CYGWIN
+iconbox_plugin_la_LDFLAGS +=                                          \
+	-no-undefined                                                   \
+	-export-symbols $(datadir)/xfce4/devel/mcs-manager.def
+endif
+
+iconbox_plugin_la_SOURCES =						\
+	iconbox_plugin.c
+
+iconbox_plugin_la_CFLAGS = 						\
+	@XFCE_MCS_MANAGER_CFLAGS@ 					\
+	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"				
+
+iconbox_plugin_la_LIBADD = 						\
+	@XFCE_MCS_MANAGER_LIBS@
+
+# .desktop files
 appsdir = $(datadir)/applications
 apps_DATA = 								\
 	xfce-panel-settings.desktop					\
-	xfce-taskbar-settings.desktop
+	xfce-taskbar-settings.desktop					\
+	xfce-iconbox-settings.desktop
 
 EXTRA_DIST = $(apps_DATA)
 
