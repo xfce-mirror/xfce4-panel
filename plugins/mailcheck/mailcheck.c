@@ -117,6 +117,47 @@ get_mail_pixbuf (void)
 }
 
 static void
+_dimm_icon (GdkPixbuf * pixbuf)
+{
+    int x, y, pixel_stride, row_stride;
+    guchar *row, *pixels;
+    int w, h;
+
+    if (!pixbuf)
+        return;
+        
+    if (!gdk_pixbuf_get_has_alpha (pixbuf))
+    {
+        gdk_pixbuf_saturate_and_pixelate (pixbuf, pixbuf, 0, TRUE);
+        return;
+    }
+
+    w = gdk_pixbuf_get_width (pixbuf);
+    h = gdk_pixbuf_get_height (pixbuf);
+
+    pixel_stride = 4;
+
+    row = gdk_pixbuf_get_pixels (pixbuf);
+    row_stride = gdk_pixbuf_get_rowstride (pixbuf);
+
+    for (y = 0; y < h; y++)
+    {
+        pixels = row;
+
+        for (x = 0; x < w; x++)
+        {
+            pixels[3] /= 2;
+
+            pixels += pixel_stride;
+        }
+
+        row += row_stride;
+    }
+
+    gdk_pixbuf_saturate_and_pixelate (pixbuf, pixbuf, 0, TRUE);
+}
+
+static void
 reset_mailcheck_icons (t_mailcheck * mc)
 {
     if (mc->newmail_pb)
@@ -133,7 +174,7 @@ reset_mailcheck_icons (t_mailcheck * mc)
     g_return_if_fail (mc->newmail_pb != NULL);
 
     mc->nomail_pb = gdk_pixbuf_copy (mc->newmail_pb);
-    gdk_pixbuf_saturate_and_pixelate (mc->nomail_pb, mc->nomail_pb, 0, TRUE);
+    _dimm_icon (mc->nomail_pb);
 
     mc->oldmail_pb = mc->nomail_pb;
     g_object_ref (mc->oldmail_pb);
