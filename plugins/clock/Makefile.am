@@ -10,7 +10,6 @@ libclock_la_SOURCES =							\
 	clock.c
 
 libclock_la_CFLAGS =							\
-	-I$(top_srcdir)							\
 	-I$(top_srcdir)/panel						\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXML_CFLAGS@

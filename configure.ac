@@ -3,11 +3,11 @@ dnl
 dnl xfce4 - panel for the XFce Desktop environment
 dnl
 
-AC_INIT(panel/main.c)
+AC_INIT([panel/main.c])
 
-AM_CONFIG_HEADER(config.h)
+AM_CONFIG_HEADER([config.h])
 
-AM_INIT_AUTOMAKE(xfce4, 0.1)
+AM_INIT_AUTOMAKE([xfce4], [0.1])
 
 AM_MAINTAINER_MODE
 
@@ -23,8 +23,8 @@ AC_PROG_LIBTOOL
 
 dnl Check for standard header files
 AC_HEADER_STDC
-AC_CHECK_HEADERS(signal.h stddef.h sys/wait.h time.h)
-AC_CHECK_FUNCS(sigaction)
+AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h])
+AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support
 BM_I18N([xfce4-panel], [de es es_MX fr fi nl ja])
@@ -34,11 +34,10 @@ BM_LIBX11_REQUIRE
 
 dnl AC_CHECK_LIB(Xext, main,, AC_MSG_ERROR([The X Window System installed on this machine does not support the shape extension]), $X_CFLAGS $X_PRE_LIBS $X_EXTRA_LIBS $X_LIBS)
 
-BM_DEPEND(LIBXFCE4MCS_CLIENT, libxfce4mcs-client-1.0, 0.0.3)
-BM_DEPEND(LIBXFCE4UTIL, libxfce4util-1.0, 0.0)
-BM_DEPEND(LIBXFCEGUI4, libxfcegui4-1.0, 0.0.17)
-BM_DEPEND(LIBXML, libxml-2.0, 2.4.0)
-BM_DEPEND(XFCE_MCS_MANAGER, xfce-mcs-manager, 0.1)
+BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [0.0.3])
+BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [0.0.17])
+BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
+BM_DEPEND([XFCE_MCS_MANAGER], [xfce-mcs-manager], [0.1])
 
 BM_DEPEND_CHECK(LIBSTARTUP_NOTIFICATION, libstartup-notification-1.0, 0.4,
   [startup-notification], [startup notification library])
