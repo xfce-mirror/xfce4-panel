@@ -1,0 +1,540 @@
+# Ukrainian translation of xfce4-panel.
+# Copyright (C) Free Software Foundation
+# This file is distributed under the same license as the xfce4-panel package.
+# Maxim Dziumanenko <mvd@mylinux.com.ua>, 2003.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel\n"
+"POT-Creation-Date: 2003-09-22 21:31+0200\n"
+"PO-Revision-Date: 2003-10-22 12:31+0200\n"
+"Last-Translator: axim Dziumanenko <mvd@mylinux.com.ua>\n"
+"Language-Team: Ukrainian <uk@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: panel/xfce_support.c:597
+msgid "Select file"
+msgstr "Вибір файлу"
+
+#: panel/controls_dialog.c:254
+msgid "Change item"
+msgstr "Редагування об'єкта"
+
+#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+msgid "Position:"
+msgstr "Позиція:"
+
+#: panel/controls_dialog.c:331 panel/controls.c:272
+msgid ""
+"Removing an item will also remove its popup menu.\n"
+"\n"
+"Do you want to remove the item?"
+msgstr ""
+"При видаленні об'єкта призведе до видалення його підменю.\n"
+"\n"
+"Ви впевнені, що бажаєте видалити об'єкт?"
+
+#: panel/item_dialog.c:320
+msgid "Other Icon"
+msgstr "Інша піктограма"
+
+#: panel/item_dialog.c:345
+msgid "Select icon"
+msgstr "Вибір піктограми"
+
+#: panel/item_dialog.c:384
+msgid "Icon:"
+msgstr "Піктограма:"
+
+#: panel/item_dialog.c:433
+msgid "Select command"
+msgstr "Вибір команди"
+
+#: panel/item_dialog.c:461
+msgid "Command:"
+msgstr "Команда"
+
+#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+msgid "Run in _terminal"
+msgstr "Запустити у _терміналі"
+
+#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+msgid "Use startup _notification"
+msgstr "Використовувати _сповіщення про запуск"
+
+#: panel/item_dialog.c:530
+msgid "Caption:"
+msgstr "Назва:"
+
+#: panel/item_dialog.c:563
+msgid "Tooltip:"
+msgstr "Підказка:"
+
+#: panel/item_dialog.c:599
+msgid "Menu:"
+msgstr "Меню:"
+
+#: panel/item_dialog.c:606
+msgid "Attach menu to launcher"
+msgstr "Додати меню до об'єкта"
+
+#: panel/item_dialog.c:738
+msgid "Icon Preview"
+msgstr "Перегляд піктограми"
+
+#: panel/item_dialog.c:742
+msgid "Drag file onto this frame to change the icon"
+msgstr "Перетягніть сюди файл, щоб змінити піктограму"
+
+#: panel/item_dialog.c:930
+msgid "Change menu item"
+msgstr "Зміна елементу меню"
+
+#. add buttons
+#: panel/item_dialog.c:933
+msgid "Remove"
+msgstr "Видалити"
+
+#: panel/item.c:441
+msgid "Click mouse button 3 to change item"
+msgstr "Клацніть середньою кнопкою миші щоб змінити об'єкт"
+
+#: panel/item.c:464
+msgid "Add launcher"
+msgstr "Додати запуск"
+
+#: panel/item.c:469
+msgid "Add new item"
+msgstr "Додати новий об'єкт"
+
+#: panel/item.c:601
+msgid "Launcher"
+msgstr "Запуск"
+
+#: panel/main.c:132
+msgid "Are you sure you want to exit?"
+msgstr "Ви впевнені що хочете вийти?"
+
+#: panel/main.c:268
+#, c-format
+msgid ""
+"%s, version %s\n"
+"Part of the XFce Desktop Environment\n"
+"http://www.xfce.org\n"
+msgstr ""
+"%s, версія %s\n"
+"Частина робочого середовища XFce\n"
+"http://www.xfce.org\n"
+
+#: panel/main.c:284
+msgid ""
+"Your window manager does not seem to support the new window manager hints as "
+"defined on http://www.freedesktop.org. \n"
+"Some XFce features may not work as intended."
+msgstr ""
+"Ваш віконний менеджер не підтримує нові можливості, які визначено на "
+"http://www.freedesktop.org.\n"
+"Деякі можливості XFce можуть не робити відповідним чином."
+
+#: panel/controls.c:320 panel/panel.c:123
+msgid "/Add _new item"
+msgstr "/Додати _новий об'єкт"
+
+#: panel/controls.c:322 panel/panel.c:125
+msgid "/_Properties..."
+msgstr "/В_ластивості"
+
+#: panel/controls.c:323
+msgid "/_Remove"
+msgstr "/Ви_далити"
+
+#: panel/controls.c:655
+msgid "This item has no configuration options"
+msgstr "Об'єкт не має параметрів налаштування"
+
+#: panel/panel.c:121
+msgid "/XFce Panel"
+msgstr "/Панель XFce"
+
+#: panel/panel.c:126
+msgid "/_Settings manager"
+msgstr "/Менеджер _параметрів"
+
+#: panel/panel.c:128
+msgid "/_About XFce"
+msgstr "/_Про XFce"
+
+#: panel/panel.c:129
+msgid "/_Help"
+msgstr "/_Довідка"
+
+#: panel/panel.c:131
+msgid "/_Lock screen"
+msgstr "/_Блокувати екран"
+
+#: panel/panel.c:132
+msgid "/E_xit"
+msgstr "/Ви_йти"
+
+#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: settings/xfce_settings_dialog.c:649
+msgid "XFce Panel"
+msgstr "Панель XFce"
+
+#: panel/icons.c:73
+msgid "Default"
+msgstr "Типова"
+
+#: panel/icons.c:74
+msgid "Editor"
+msgstr "Редактор"
+
+#: panel/icons.c:75
+msgid "File management"
+msgstr "Менеджер файлів"
+
+#: panel/icons.c:76
+msgid "Utilities"
+msgstr "Утиліти"
+
+#: panel/icons.c:77
+msgid "Games"
+msgstr "Ігри"
+
+#: panel/icons.c:78
+msgid "Help browser"
+msgstr "Перегляд довідки"
+
+#: panel/icons.c:79
+msgid "Multimedia"
+msgstr "Мультимедія"
+
+#: panel/icons.c:80
+msgid "Network"
+msgstr "Мережа"
+
+#: panel/icons.c:81
+msgid "Graphics"
+msgstr "Графіка"
+
+#: panel/icons.c:82
+msgid "Printer"
+msgstr "Принтер"
+
+#: panel/icons.c:83
+msgid "Productivity"
+msgstr "Продуктивність"
+
+#: panel/icons.c:84
+msgid "Sound"
+msgstr "Звук"
+
+#: panel/icons.c:85
+msgid "Terminal"
+msgstr "Термінал"
+
+#: panel/mcs_client.c:208
+msgid "Settings manager not available"
+msgstr "Менеджер параметрів відсутній"
+
+#: panel/popup.c:263
+msgid "Menu"
+msgstr "Меню"
+
+#: settings/xfce_settings_dialog.c:119
+msgid "Tiny"
+msgstr "Малесенький"
+
+#: settings/xfce_settings_dialog.c:123
+msgid "Small"
+msgstr "Маленький"
+
+#: settings/xfce_settings_dialog.c:127
+msgid "Medium"
+msgstr "Середній"
+
+#: settings/xfce_settings_dialog.c:131
+msgid "Large"
+msgstr "Великий"
+
+#: settings/xfce_settings_dialog.c:190
+msgid "Horizontal"
+msgstr "Горизонтальне"
+
+#: settings/xfce_settings_dialog.c:194
+msgid "Vertical"
+msgstr "Вертикальне"
+
+#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
+msgid "Left"
+msgstr "Зліва"
+
+#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
+msgid "Right"
+msgstr "Справа"
+
+#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:511
+msgid "Top"
+msgstr "Згори"
+
+#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:519
+msgid "Bottom"
+msgstr "Знизу"
+
+#: settings/xfce_settings_dialog.c:374
+msgid "Panel size:"
+msgstr "Розмір панелі:"
+
+#: settings/xfce_settings_dialog.c:390
+msgid "Panel orientation:"
+msgstr "Розташування панелі:"
+
+#: settings/xfce_settings_dialog.c:407
+msgid "Popup position:"
+msgstr "Кнопка меню:"
+
+#: settings/xfce_settings_dialog.c:424
+msgid "Icon theme:"
+msgstr "Тема піктограм:"
+
+#: settings/xfce_settings_dialog.c:495
+msgid "Panel layer:"
+msgstr "Шар панелі:"
+
+#: settings/xfce_settings_dialog.c:515
+msgid "Normal"
+msgstr "Звичайний"
+
+#: settings/xfce_settings_dialog.c:535
+msgid "Center the panel:"
+msgstr "Центрування панелі:"
+
+#: settings/xfce_settings_dialog.c:559
+msgid "Set"
+msgstr "Встановити"
+
+#: settings/xfce_settings_dialog.c:595
+msgid "Autohide:"
+msgstr "Автоматично приховувати:"
+
+#: settings/xfce_settings_dialog.c:663
+msgid "XFce Panel Settings"
+msgstr "Параметри панелі XFce"
+
+#. Appearance
+#: settings/xfce_settings_dialog.c:675
+msgid "Appearance"
+msgstr "Зовнішній вигляд"
+
+#. Position
+#: settings/xfce_settings_dialog.c:696
+msgid "Position"
+msgstr "Розташування"
+
+#. autohide
+#: settings/xfce_settings_dialog.c:712
+msgid "Behaviour"
+msgstr "Поведінка"
+
+#: plugins/clock/clock.c:57
+msgid "Sunday"
+msgstr "Неділя"
+
+#: plugins/clock/clock.c:58
+msgid "Monday"
+msgstr "Понеділок"
+
+#: plugins/clock/clock.c:59
+msgid "Tuesday"
+msgstr "Вівторок"
+
+#: plugins/clock/clock.c:60
+msgid "Wednesday"
+msgstr "Середа"
+
+#: plugins/clock/clock.c:61
+msgid "Thursday"
+msgstr "Четвер"
+
+#: plugins/clock/clock.c:62
+msgid "Friday"
+msgstr "П'ятниця"
+
+#: plugins/clock/clock.c:63
+msgid "Saturday"
+msgstr "Субота"
+
+#: plugins/clock/clock.c:67
+msgid "January"
+msgstr "січня"
+
+#: plugins/clock/clock.c:68
+msgid "February"
+msgstr "лютого"
+
+#: plugins/clock/clock.c:69
+msgid "March"
+msgstr "березня"
+
+#: plugins/clock/clock.c:70
+msgid "April"
+msgstr "квітня"
+
+#: plugins/clock/clock.c:71
+msgid "May"
+msgstr "травня"
+
+#: plugins/clock/clock.c:72
+msgid "June"
+msgstr "червня"
+
+#: plugins/clock/clock.c:73
+msgid "July"
+msgstr "липня"
+
+#: plugins/clock/clock.c:74
+msgid "August"
+msgstr "серпня"
+
+#: plugins/clock/clock.c:75
+msgid "September"
+msgstr "вересня"
+
+#: plugins/clock/clock.c:76
+msgid "October"
+msgstr "жовтня"
+
+#: plugins/clock/clock.c:77
+msgid "November"
+msgstr "листопада"
+
+#: plugins/clock/clock.c:78
+msgid "December"
+msgstr "грудня"
+
+#: plugins/clock/clock.c:350
+msgid "Clock type:"
+msgstr "Тип годинника:"
+
+#: plugins/clock/clock.c:363
+msgid "Analog"
+msgstr "Аналоговий"
+
+#: plugins/clock/clock.c:367
+msgid "Digital"
+msgstr "Цифровий"
+
+#: plugins/clock/clock.c:371
+msgid "LED"
+msgstr "Рідинно-кристалічний"
+
+#: plugins/clock/clock.c:433
+msgid "Hour mode:"
+msgstr "Режим годинника:"
+
+#: plugins/clock/clock.c:440
+msgid "24 hour"
+msgstr "24 години"
+
+#: plugins/clock/clock.c:446
+msgid "12 hour"
+msgstr "12 годин"
+
+#: plugins/clock/clock.c:452
+msgid "AM/PM"
+msgstr "AM/PM"
+
+#: plugins/clock/clock.c:490
+msgid "Show seconds:"
+msgstr "Показувати секунди:"
+
+#: plugins/clock/clock.c:599
+msgid "Xfce Clock"
+msgstr "Годинник Xfce"
+
+#: plugins/pager/pager.c:277
+msgid "Graphical pager"
+msgstr "Графічний пейджер"
+
+#: plugins/switcher/switcher.c:696
+msgid "Desktop switcher"
+msgstr "Перемикач робочих стільниць"
+
+#: plugins/systembuttons/systembuttons.c:60
+msgid ""
+"Access to the configuration system has been disabled.\n"
+"\n"
+"Ask your system administrator for more information"
+msgstr ""
+"Доступ до параметрів системи заборонено.\n"
+"\n"
+"Зверніться до системного адміністратора."
+
+#: plugins/systembuttons/systembuttons.c:148
+msgid "Lock the screen"
+msgstr "Блокувати екран"
+
+#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:518
+msgid "Exit"
+msgstr "Вийти"
+
+#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:519
+msgid "Setup"
+msgstr "Налаштування"
+
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:520
+msgid "Info"
+msgstr "Інформація"
+
+#: plugins/systembuttons/systembuttons.c:500
+msgid "Show two buttons:"
+msgstr "Показувати дві кнопки:"
+
+#. set names to use in option menus
+#: plugins/systembuttons/systembuttons.c:517
+msgid "Lock"
+msgstr "Блокування"
+
+#: plugins/systembuttons/systembuttons.c:549
+msgid "Button 1:"
+msgstr "Кнопка 1:"
+
+#: plugins/systembuttons/systembuttons.c:565
+msgid "Button 2:"
+msgstr "Кнопка 2:"
+
+#: plugins/systembuttons/systembuttons.c:600
+msgid "System buttons"
+msgstr "Системні кнопки"
+
+#: plugins/separator/separator.c:153
+msgid "Separator"
+msgstr "Розділювач"
+
+#: plugins/mailcheck/mailcheck.c:539
+msgid "Mail box:"
+msgstr "Поштова скринька:"
+
+#: plugins/mailcheck/mailcheck.c:623
+msgid "Mail command:"
+msgstr "Команда:"
+
+#: plugins/mailcheck/mailcheck.c:637
+msgid "Command to run when the button on the panel is clicked"
+msgstr "Виконати команду при натиску кнопки на панелі"
+
+#: plugins/mailcheck/mailcheck.c:706
+msgid "Interval (sec):"
+msgstr "Інтервал (сек):"
+
+#: plugins/mailcheck/mailcheck.c:778
+msgid "Mail check"
+msgstr "Перевірка почти"
