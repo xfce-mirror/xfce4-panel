@@ -758,6 +758,12 @@ void run_xfce_settings_dialog(McsPlugin *mp)
 
     is_running = TRUE;
 
+#ifdef ENABLE_NLS
+    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
+#endif
+
     mcs_manager = mp->manager;
 
     xfce_create_backup();
