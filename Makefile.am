@@ -2,9 +2,9 @@
 
 
 EXTRA_DIST = 								\
-	intltool-extract.in						\
-	intltool-merge.in						\
-	intltool-update.in						\
+	xml-i18n-extract.in						\
+	xml-i18n-merge.in						\
+	xml-i18n-update.in						\
 	AUTHORS								\
 	COPYING								\
 	ChangeLog							\
@@ -15,7 +15,6 @@ EXTRA_DIST = 								\
 	README								\
 	README.Kiosk							\
 	TODO								\
-	xfce4-panel.spec						\
 	.indent.pro
 
 SUBDIRS =								\
@@ -31,9 +30,9 @@ SUBDIRS =								\
 	plugins
 
 DISTCLEANFILES =							\
-	intltool-extract						\
-	intltool-merge							\
-	intltool-update							\
+	xml-i18n-extract						\
+	xml-i18n-merge							\
+	xml-i18n-update							\
 	xfce4-panel.spec
 	
 distclean-local:

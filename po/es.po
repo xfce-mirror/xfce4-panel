@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-27 15:46+0100\n"
+"POT-Creation-Date: 2005-03-07 14:40+0100\n"
 "PO-Revision-Date: 2004-01-13 00:00+0100\n"
 "Last-Translator: Edscott Wilson García <edscott@xfce.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,93 +16,93 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:551
+#: ../panel/xfce_support.c:463
 msgid "Select file"
 msgstr "Seleccionar archivo"
 
-#: panel/settings.c:179
+#: ../panel/settings.c:180
 msgid "No data was found. The panel will be empty."
 msgstr "No se encontró información. El panel estará vacío"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1174
-#: settings/xftaskbar_plugin.c:393
+#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1136
+#: ../settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Posición"
 
-#: panel/controls_dialog.c:155
+#: ../panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "Propiedades del elemento"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
+#: ../panel/controls_dialog.c:210 ../panel/controls.c:714
 msgid "Removing the item will also remove its popup menu."
 msgstr "Quitar el elemento también quitará su menú emergente."
 
-#: panel/item_dialog.c:124
+#: ../panel/item_dialog.c:123
 msgid "Select command"
 msgstr "Seleccionar comando"
 
-#: panel/item_dialog.c:261
+#: ../panel/item_dialog.c:260
 msgid "Command:"
 msgstr "Comando:"
 
-#: panel/item_dialog.c:307
+#: ../panel/item_dialog.c:306
 msgid "Run in _terminal"
 msgstr "Ejecutar en _terminal"
 
-#: panel/item_dialog.c:325
+#: ../panel/item_dialog.c:324
 msgid "Use startup _notification"
 msgstr "Usar notificación de arranque"
 
-#: panel/item_dialog.c:511
+#: ../panel/item_dialog.c:510
 msgid "Other Icon"
 msgstr "Otro Ícono"
 
-#: panel/item_dialog.c:622
+#: ../panel/item_dialog.c:621
 msgid "Drag file onto this frame to change the icon"
 msgstr "Arrastre el fichero a este marco para cambiar el icono"
 
-#: panel/item_dialog.c:934
+#: ../panel/item_dialog.c:933
 msgid "Caption:"
 msgstr "Etiqueta:"
 
-#: panel/item_dialog.c:963
+#: ../panel/item_dialog.c:962
 msgid "Tooltip:"
 msgstr "Etiqueta emergente"
 
-#: panel/item_dialog.c:991
+#: ../panel/item_dialog.c:988
 msgid "Attach menu to launcher"
 msgstr "Anexarle un menú al lanzador"
 
-#: panel/item_dialog.c:1211
+#: ../panel/item_dialog.c:1173
 msgid "Change menu item"
 msgstr "Cambiar elemento del menú"
 
 #. add buttons
-#: panel/item_dialog.c:1217 panel/controls.c:748
+#: ../panel/item_dialog.c:1179 ../panel/controls.c:751
 msgid "_Remove"
 msgstr "_Eliminar"
 
-#: panel/item_dialog.c:1229 panel/item.c:738
+#: ../panel/item_dialog.c:1191
 msgid "Launcher"
 msgstr "Lanzador"
 
-#: panel/item.c:566
+#: ../panel/item.c:618
 msgid "Click mouse button 3 to change item"
 msgstr "Pinche el botón 3 del ratón para cambiar elemento"
 
-#: panel/item.c:591
+#: ../panel/item.c:643
 msgid "Add launcher"
 msgstr "Añadir lanzador"
 
-#: panel/item.c:596
+#: ../panel/item.c:648
 msgid "Add new item"
 msgstr "Añadir nuevo elemento"
 
-#: panel/main.c:121
+#: ../panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "¿Está seguro de querer salir?"
 
-#: panel/main.c:402
+#: ../panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -124,123 +124,120 @@ msgstr ""
 " Bajo licencia GNU GPL.\n"
 "\n"
 
-#: panel/main.c:489
+#: ../panel/main.c:484
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Se inició de manera correcta sin gerente de sessión"
 
-#: panel/main.c:494
+#: ../panel/main.c:489
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Se inició de manera correcta con gerente de sessión"
 
-#: panel/controls.c:666
+#: ../panel/controls.c:668
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "No se pudo crear el elemento de panel \"%s\"."
 
-#: panel/controls.c:743 panel/panel.c:675 iconbox/iconbox.c:617
+#: ../panel/controls.c:746 ../panel/panel.c:714 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "_Propiedades..."
 
-#: panel/controls.c:757 panel/panel.c:665
+#: ../panel/controls.c:760 ../panel/panel.c:704
 msgid "Add _new item"
 msgstr "Añadir _nuevo elemento"
 
-#: panel/controls.c:1040
+#: ../panel/controls.c:1088
 msgid "This item has no configuration options"
 msgstr "Este elemento no tiene opciones de configuración"
 
-#: panel/panel.c:656 panel/panel.c:1012 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:450
+#: ../panel/panel.c:695 ../panel/panel.c:1047
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:392
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: panel/panel.c:680
+#: ../panel/panel.c:719
 msgid "_About Xfce"
 msgstr "_Acerca de Xfce"
 
-#: panel/panel.c:685
+#: ../panel/panel.c:724
 msgid "_Help"
 msgstr "Ayuda"
 
-#: panel/panel.c:694
+#: ../panel/panel.c:733
 msgid "_Lock screen"
 msgstr "B_loquear pantalla"
 
-#: panel/panel.c:699
+#: ../panel/panel.c:738
 msgid "_Restart"
 msgstr "_Recomenzar"
 
-#: panel/panel.c:708 iconbox/iconbox.c:627
+#: ../panel/panel.c:747 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "Salir"
 
-#: panel/icons.c:63
+#: ../panel/icons.c:63
 msgid "Default"
 msgstr "Por defecto"
 
-#: panel/icons.c:64
+#: ../panel/icons.c:64
 msgid "Editor"
 msgstr "Editor"
 
-#: panel/icons.c:65
+#: ../panel/icons.c:65
 msgid "File management"
 msgstr "Administración de archivos"
 
-#: panel/icons.c:66
+#: ../panel/icons.c:66
 msgid "Utilities"
 msgstr "Utilerías"
 
-#: panel/icons.c:67
+#: ../panel/icons.c:67
 msgid "Games"
 msgstr "Juegos"
 
-#: panel/icons.c:68
+#: ../panel/icons.c:68
 msgid "Help browser"
 msgstr "Navegador de ayuda"
 
-#: panel/icons.c:69
+#: ../panel/icons.c:69
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: panel/icons.c:70
+#: ../panel/icons.c:70
 msgid "Network"
 msgstr "Red"
 
-#: panel/icons.c:71
+#: ../panel/icons.c:71
 msgid "Graphics"
 msgstr "Gráficos"
 
-#: panel/icons.c:72
+#: ../panel/icons.c:72
 msgid "Printer"
 msgstr "Impresora"
 
-#: panel/icons.c:73
+#: ../panel/icons.c:73
 msgid "Productivity"
 msgstr "Productividad"
 
-#: panel/icons.c:74
+#: ../panel/icons.c:74
 msgid "Sound"
 msgstr "Sonido"
 
-#: panel/icons.c:75
+#: ../panel/icons.c:75 ../config/contents.xml.in.h:11
 msgid "Terminal"
 msgstr "Terminal"
 
-#: panel/mcs_client.c:170
+#: ../panel/mcs_client.c:168
 msgid "Settings manager not available"
 msgstr "Administrador de sesión no está disponible"
 
-#: panel/popup.c:267
-msgid "Menu"
-msgstr "Menú"
-
-#: taskbar/xftaskbar.c:510
+#: ../taskbar/xftaskbar.c:513
 msgid "There is already a system tray running on this screen"
 msgstr "Ya hay una bandeja de iconos funcionando en esta pantalla"
 
-#: taskbar/xftaskbar.c:516
+#: ../taskbar/xftaskbar.c:519
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "Es imposible registrar la bandeja de iconos: %s"
@@ -253,245 +250,241 @@ msgstr "Es imposible registrar la bandeja de iconos: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: taskbar/xftaskbar.c:612
+#: ../taskbar/xftaskbar.c:619
 #, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: taskbar/xftaskbar.c:633
+#: ../taskbar/xftaskbar.c:640
 msgid "%H:%M"
 msgstr ""
 
-#: taskbar/xftaskbar.c:906 settings/xftaskbar_plugin.c:696
-#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+#: ../taskbar/xftaskbar.c:913 ../settings/xftaskbar_plugin.c:696
+#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr "Barra de Tareas"
 
-#: taskbar/xftaskbar.c:1022
+#: ../taskbar/xftaskbar.c:1045
 msgid "Cannot create MCS client channel"
 msgstr "No se puede crear el canal MCS cliente"
 
-#: iconbox/iconbox.c:567
+#: ../iconbox/iconbox.c:568
 msgid "Xfce Iconbox"
 msgstr ""
 
-#: iconbox/iconbox.c:575
+#: ../iconbox/iconbox.c:576
 msgid "Developer"
 msgstr ""
 
-#: iconbox/iconbox.c:611
+#: ../iconbox/iconbox.c:612
 #, fuzzy
 msgid "_About"
 msgstr "_Acerca de Xfce"
 
-#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
-#: settings/xftaskbar_plugin.c:511
+#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
+#: ../settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Pequeño"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Mediano"
 
-#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
-#: settings/xftaskbar_plugin.c:532
+#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
+#: ../settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Grande"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Enorme"
 
-#: settings/xfce_settings_dialog.c:175
+#: ../settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: settings/xfce_settings_dialog.c:179
+#: ../settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Vertical"
 
-#: settings/xfce_settings_dialog.c:221
+#: ../settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Izquierda"
 
-#: settings/xfce_settings_dialog.c:225
+#: ../settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Derecha"
 
-#: settings/xfce_settings_dialog.c:229
+#: ../settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Arriba"
 
-#: settings/xfce_settings_dialog.c:233
+#: ../settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Abajo"
 
-#: settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Tamaño del panel:"
 
-#: settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Orientación del panel:"
 
-#: settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Posición del menú emergente:"
 
-#: settings/xfce_settings_dialog.c:343
-msgid "Always on top:"
-msgstr "Siempre arriba:"
-
-#: settings/xfce_settings_dialog.c:397
+#: ../settings/xfce_settings_dialog.c:339
 msgid "Autohide:"
 msgstr "Ocultar automáticamente:"
 
-#: settings/xfce_settings_dialog.c:467
+#: ../settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel Settings"
 msgstr "Configuración del panel de Xfce"
 
-#: settings/xfce_settings_dialog.c:477
+#: ../settings/xfce_settings_dialog.c:419
 msgid "Appearance"
 msgstr "Apariencia"
 
 #. show only hidden
-#: settings/xfce_settings_dialog.c:492 settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:434 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Comportamiento"
 
 #. position
-#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
 msgid "Position"
 msgstr "Posición"
 
-#: settings/xftaskbar_plugin.c:399
+#: ../settings/xftaskbar_plugin.c:399
 msgid "_Top"
 msgstr "Arriba"
 
-#: settings/xftaskbar_plugin.c:409
+#: ../settings/xftaskbar_plugin.c:409
 msgid "_Bottom"
 msgstr "Abajo"
 
-#: settings/xftaskbar_plugin.c:422
+#: ../settings/xftaskbar_plugin.c:422
 #, fuzzy
 msgid "Alignment:"
 msgstr "Alineación"
 
-#: settings/xftaskbar_plugin.c:429
+#: ../settings/xftaskbar_plugin.c:429
 msgid "_Left"
 msgstr "Izquierda"
 
-#: settings/xftaskbar_plugin.c:439
+#: ../settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr "Centro"
 
-#: settings/xftaskbar_plugin.c:447
+#: ../settings/xftaskbar_plugin.c:447
 msgid "_Right"
 msgstr "Derecha"
 
 #. size
-#: settings/xftaskbar_plugin.c:464
+#: ../settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr "Tamaño"
 
-#: settings/xftaskbar_plugin.c:474
+#: ../settings/xftaskbar_plugin.c:474
 #, fuzzy
 msgid "Height:"
 msgstr "Altura :"
 
-#: settings/xftaskbar_plugin.c:505
+#: ../settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr "Ancho:"
 
-#: settings/xftaskbar_plugin.c:541
+#: ../settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr ""
 
 #. Autohide
-#: settings/xftaskbar_plugin.c:561
+#: ../settings/xftaskbar_plugin.c:561
 msgid "Autohide"
 msgstr "Esconder automáticamente"
 
-#: settings/xftaskbar_plugin.c:566
+#: ../settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr "Esconder automáticamente la barra de tareas"
 
 #. tasklist
-#: settings/xftaskbar_plugin.c:583
+#: ../settings/xftaskbar_plugin.c:583
 #, fuzzy
 msgid "Tasklist"
 msgstr "Tareas"
 
-#: settings/xftaskbar_plugin.c:592
+#: ../settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:604
+#: ../settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr "Mostrar tareas de todos los escritorios virtuales"
 
-#: settings/xftaskbar_plugin.c:613
+#: ../settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
 msgstr "Siempre agrupar tareas"
 
-#: settings/xftaskbar_plugin.c:621
+#: ../settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr "Mostrar nombres de aplicaciones"
 
 #. pager
-#: settings/xftaskbar_plugin.c:629
+#: ../settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr "Paginador"
 
-#: settings/xftaskbar_plugin.c:634
+#: ../settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr "Mostrar paginador en la barra de tareas"
 
 #. status area
-#: settings/xftaskbar_plugin.c:641
+#: ../settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:650
+#: ../settings/xftaskbar_plugin.c:650
 #, fuzzy
 msgid "Show _notification icons"
 msgstr "Mostrar nombres de aplicaciones"
 
-#: settings/xftaskbar_plugin.c:657
+#: ../settings/xftaskbar_plugin.c:657
 msgid "Show _time"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:718
+#: ../settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:729
+#: ../settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr ""
 
-#: settings/iconbox_plugin.c:629
+#: ../settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr ""
 
-#: settings/iconbox_plugin.c:691
+#: ../settings/iconbox_plugin.c:691
 #, fuzzy
 msgid "_Show only minimized applications"
 msgstr "Mostrar nombres de aplicaciones"
 
-#: settings/iconbox_plugin.c:754
+#: ../settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr ""
 
-#: settings/iconbox_plugin.c:762
+#: ../settings/iconbox_plugin.c:762
 msgid "None"
 msgstr ""
 
-#: settings/iconbox_plugin.c:777
+#: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
 
-#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
-#: settings/iconbox_plugin.c:992
+#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
+#: ../settings/iconbox_plugin.c:992
 msgid "Iconbox"
 msgstr ""
 
@@ -503,67 +496,67 @@ msgstr ""
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:202
+#: ../plugins/clock/clock.c:201
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:429
+#: ../plugins/clock/clock.c:428
 msgid "Clock type:"
 msgstr "Tipo de reloj:"
 
-#: plugins/clock/clock.c:442
+#: ../plugins/clock/clock.c:441
 msgid "Analog"
 msgstr "Analógico"
 
-#: plugins/clock/clock.c:446
+#: ../plugins/clock/clock.c:445
 msgid "Digital"
 msgstr "Dígital"
 
-#: plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:449
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:512
+#: ../plugins/clock/clock.c:511
 msgid "Hour mode:"
 msgstr "Modo Horario:"
 
-#: plugins/clock/clock.c:519
+#: ../plugins/clock/clock.c:518
 msgid "24 hour"
 msgstr "24 horas"
 
-#: plugins/clock/clock.c:525
+#: ../plugins/clock/clock.c:524
 msgid "12 hour"
 msgstr "12 horas"
 
-#: plugins/clock/clock.c:531
+#: ../plugins/clock/clock.c:530
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:569
+#: ../plugins/clock/clock.c:568
 msgid "Show seconds:"
 msgstr "Mostrar segundos:"
 
-#: plugins/clock/clock.c:682
+#: ../plugins/clock/clock.c:681
 msgid "Xfce Clock"
 msgstr "Reloj de Xfce"
 
-#: plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "Número de filas:"
 
-#: plugins/pager/pager.c:316
+#: ../plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "Número de columnas"
 
-#: plugins/pager/pager.c:373
+#: ../plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "Paginador gráfico"
 
-#: plugins/switcher/switcher.c:698
+#: ../plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "Cambiador de escritorio"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -573,104 +566,153 @@ msgstr ""
 "\n"
 "Para más información consulte con su administrador de sistemas"
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "Bloquear la pantalla"
 
-#: plugins/systembuttons/systembuttons.c:171
-#: plugins/systembuttons/systembuttons.c:519
+#: ../plugins/systembuttons/systembuttons.c:171
+#: ../plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "Salir"
 
-#: plugins/systembuttons/systembuttons.c:172
-#: plugins/systembuttons/systembuttons.c:520
+#: ../plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "Configuración"
 
-#: plugins/systembuttons/systembuttons.c:173
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:173
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "Información"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:518
+#: ../plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "Bloquear"
 
-#: plugins/systembuttons/systembuttons.c:550
+#: ../plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "Botón 1:"
 
-#: plugins/systembuttons/systembuttons.c:565
+#: ../plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "Botón 2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:579
+#: ../plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "Ocultar"
 
-#: plugins/systembuttons/systembuttons.c:616
+#: ../plugins/systembuttons/systembuttons.c:617
 msgid "System buttons"
 msgstr "Botones de sistema"
 
-#: plugins/separator/separator.c:155
+#: ../plugins/separator/separator.c:65
 msgid "Separator"
 msgstr "Separador"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: ../plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Buzón de correo:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: ../plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Nuevo commando de correo:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: ../plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Comando a ejecutar cuando llega correo"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: ../plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Comando a ejecutar cuando se pinche en el botón del panel"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: ../plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Intervalo (seg):"
 
-#: plugins/mailcheck/mailcheck.c:1016
+#: ../plugins/mailcheck/mailcheck.c:1017
 msgid "Mail checker"
 msgstr "Revisador de correo"
 
-#: settings/xfce-panel-settings.desktop.in.h:1
+#: ../settings/xfce-panel-settings.desktop.in.h:1
 #, fuzzy
 msgid "Panel Settings"
 msgstr "Configuración del panel de Xfce"
 
-#: settings/xfce-panel-settings.desktop.in.h:2
+#: ../settings/xfce-panel-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Panel Settings"
 msgstr "Configuración del panel de Xfce"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:1
+#: ../settings/xfce-iconbox-settings.desktop.in.h:1
 #, fuzzy
 msgid "Iconbox Settings"
 msgstr "Configuración del panel de Xfce"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:2
+#: ../settings/xfce-iconbox-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Iconbox Settings"
 msgstr "Configuración del panel de Xfce"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:1
+#: ../settings/xfce-taskbar-settings.desktop.in.h:1
 #, fuzzy
 msgid "Taskbar Settings"
 msgstr "Barra de Tareas"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:2
+#: ../settings/xfce-taskbar-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Taskbar Settings"
 msgstr "Configuración del panel de Xfce"
+
+#: ../config/contents.xml.in.h:1
+msgid "Drag file to print"
+msgstr ""
+
+#: ../config/contents.xml.in.h:2
+#, fuzzy
+msgid "File manager"
+msgstr "Administración de archivos"
+
+#: ../config/contents.xml.in.h:3
+msgid "Find and run applications"
+msgstr ""
+
+#: ../config/contents.xml.in.h:4
+msgid "Konqueror File Manager"
+msgstr ""
+
+#: ../config/contents.xml.in.h:5
+msgid "Manual"
+msgstr ""
+
+#: ../config/contents.xml.in.h:6
+msgid "Mozilla Web Browser"
+msgstr ""
+
+#: ../config/contents.xml.in.h:7
+msgid "Music player"
+msgstr ""
+
+#: ../config/contents.xml.in.h:8
+msgid "Nautilus File Manager"
+msgstr ""
+
+#: ../config/contents.xml.in.h:9
+#, fuzzy
+msgid "Printer Management"
+msgstr "Administración de archivos"
+
+#: ../config/contents.xml.in.h:10
+#, fuzzy
+msgid "Settings"
+msgstr "Configuración del panel de Xfce"
+
+#~ msgid "Menu"
+#~ msgstr "Menú"
+
+#~ msgid "Always on top:"
+#~ msgstr "Siempre arriba:"
 
 #~ msgid "Notification area"
 #~ msgstr "Área de notificación"

@@ -357,8 +357,17 @@ G_MODULE_EXPORT /* EXPORT:item_read_config */
 void
 item_read_config (Item * item, xmlNodePtr node)
 {
+    const gchar *locale;
     xmlNodePtr child;
-    xmlChar *value;
+    xmlChar   *value;
+    xmlChar   *lang;
+    gboolean   caption_found = FALSE;
+    guint      caption_match = XFCE_LOCALE_NO_MATCH;
+    gboolean   tooltip_found = FALSE;
+    guint      tooltip_match = XFCE_LOCALE_NO_MATCH;
+    guint      match;
+
+    locale = setlocale (LC_MESSAGES, NULL);
 
     value = xmlGetProp (node, "popup");
 
@@ -374,8 +383,29 @@ item_read_config (Item * item, xmlNodePtr node)
 	{
 	    value = DATA (child);
 
-	    if (value)
-		item->caption = (char *) value;
+	    if (value != NULL)
+            {
+                lang = xmlNodeGetLang (child);
+            
+                if (lang != NULL)
+                {
+                    match = xfce_locale_match (locale, (const gchar *) lang);
+                    xmlFree (lang);
+                }
+                else
+                {
+                    match = XFCE_LOCALE_NO_MATCH;
+                }
+
+                if (match > caption_match || !caption_found)
+                {
+		    item->caption = g_strdup ((const char *) value);
+                    caption_match = match;
+                    caption_found = TRUE;
+                }
+
+                xmlFree (value);
+            }
 	}
 	else if (xmlStrEqual (child->name, (const xmlChar *) "Command"))
 	{
@@ -426,8 +456,28 @@ item_read_config (Item * item, xmlNodePtr node)
 	{
 	    value = DATA (child);
 
-	    if (value)
-		item->tooltip = (char *) value;
+	    if (value != NULL)
+            {
+                lang = xmlNodeGetLang (child);
+                if (lang != NULL)
+                {
+                    match = xfce_locale_match (locale, (const gchar *) lang);
+                    xmlFree (lang);
+                }
+                else
+                {
+                    match = XFCE_LOCALE_NO_MATCH;
+                }
+
+                if (match > tooltip_match || !tooltip_found)
+                {
+                    item->tooltip = g_strdup ((const char *) value);
+                    tooltip_match = match;
+                    tooltip_found = TRUE;
+                }
+
+                xmlFree (value);
+            }
 	}
 	else if (xmlStrEqual (child->name, (const xmlChar *) "Icon"))
 	{
