@@ -1,3 +1,20 @@
+2003-01-17 11:24  huysmans
+
+	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,
+	panel/handle.c, plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
+	settings/Makefile.in, settings/xfce_settings_dialog.c,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Use same border
+	width gtk uses in dialog action area. Some reordering in the panel
+	dialog. Looks better IMO.
+
+2003-01-13 11:17  huysmans
+
+	* ChangeLog, panel/item_dialog.c: Really fix crash in menu
+
 2003-01-12 23:41  huysmans
 
 	* panel/: Makefile.in, item_dialog.c: Fix panel crash when removing

@@ -34,6 +34,8 @@
 #include "groups.h"
 #include "settings.h"
 
+#define BORDER 6
+
 static GSList *control_list = NULL;       /* list of control controles */
 
 static GtkWidget *container;            /* container on the panel to hold the 
@@ -219,17 +221,64 @@ static void controls_dialog_revert(void)
 
 enum { RESPONSE_DONE, RESPONSE_REVERT, RESPONSE_REMOVE };
 
+static gboolean is_running = FALSE;
+
+static void dialog_delete(GtkWidget *dialog)
+{
+    is_running = FALSE;
+
+    gtk_widget_destroy(dialog);
+
+    clear_control_list();
+
+    write_panel_config();
+}
+
+static void dialog_response(GtkWidget *dialog, int response)
+{
+    gtk_widget_set_sensitive(revert, FALSE);
+    gtk_widget_grab_default(done);
+    gtk_widget_grab_focus(done);
+
+    if (response == RESPONSE_REMOVE &&
+	confirm(_("Removing an item will also remove its popup menu.\n\n"
+		  "Do you want to remove the item?"), 
+		GTK_STOCK_REMOVE, NULL))
+    {
+	groups_remove(current_control->index);
+    }
+
+    /* revert or close ? */
+    if (response == RESPONSE_REVERT)
+    {
+	controls_dialog_revert();
+    }
+    else
+    {
+	dialog_delete(dialog);
+    }
+}
+
 void controls_dialog(Control * control)
 {
-    GtkWidget *dlg;
+    static GtkWidget *dlg = NULL;
     GtkWidget *button;
     GtkWidget *vbox;
     GtkWidget *hbox;
     GtkWidget *label;
     GtkWidget *separator;
     GtkWidget *main_vbox;
-    int response;
-    GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+    GtkSizeGroup *sg;
+    
+    if (is_running)
+    {
+	gtk_window_present(GTK_WINDOW(dlg));
+	return;
+    }
+    
+    is_running = TRUE;
+
+    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
     old_control = current_control = control;
     backup_index = control->index;
@@ -238,7 +287,7 @@ void controls_dialog(Control * control)
     container = control->base->parent;
 
     dlg = gtk_dialog_new_with_buttons(_("Change item"), GTK_WINDOW(toplevel),
-                                      GTK_DIALOG_MODAL, NULL);
+                                      0, NULL);
 
     gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
 
@@ -260,8 +309,8 @@ void controls_dialog(Control * control)
     
     main_vbox = GTK_DIALOG(dlg)->vbox;
 
-    vbox = gtk_vbox_new(FALSE, 7);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), 8);
+    vbox = gtk_vbox_new(FALSE, BORDER);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), BORDER);
     gtk_widget_show(vbox);
     gtk_box_pack_start(GTK_BOX(main_vbox), vbox, FALSE, FALSE, 0);
     
@@ -269,7 +318,7 @@ void controls_dialog(Control * control)
     create_control_list(control);
 
     /* option menu */
-    hbox = gtk_hbox_new(FALSE, 8);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
 
     label = gtk_label_new(_("Type:"));
@@ -285,7 +334,7 @@ void controls_dialog(Control * control)
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
     
     /* position */
-    hbox = gtk_hbox_new(FALSE, 8);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
 
     label = gtk_label_new(_("Position:"));
@@ -311,41 +360,14 @@ void controls_dialog(Control * control)
     /* notebook */
     add_notebook(GTK_BOX(main_vbox));
 
-    /* run dialog until 'Done' */
-    while(1)
-    {
-        response = GTK_RESPONSE_NONE;
+    gtk_widget_set_sensitive(revert, FALSE);
+    gtk_widget_grab_default(done);
+    gtk_widget_grab_focus(done);
 
-        gtk_widget_set_sensitive(revert, FALSE);
-	gtk_widget_grab_default(done);
-	gtk_widget_grab_focus(done);
-
-        response = gtk_dialog_run(GTK_DIALOG(dlg));
-
-	if (response == RESPONSE_REMOVE)
-	{
-	    if (confirm(_("Removing an item will also remove its popup menu.\n\n"
-			  "Do you want to remove the item?"), 
-			GTK_STOCK_REMOVE, NULL))
-	    {
-		break;
-	    }
-	}
-	else if (response != RESPONSE_REVERT)
-	{
-	    break;
-	}
-    }
+    /* connect callbacks */
+    g_signal_connect(dlg, "response", G_CALLBACK(dialog_response), NULL);
+    g_signal_connect(dlg, "delete-event", G_CALLBACK(dialog_delete), NULL);
     
-    gtk_widget_destroy(dlg);
-
-    clear_control_list();
-
-    if (response == RESPONSE_REMOVE)
-    {
-	groups_remove(current_control->index);
-    }
-
-    write_panel_config();
+    gtk_widget_show(dlg);
 }
 

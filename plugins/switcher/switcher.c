@@ -33,6 +33,8 @@ typedef struct
     int index;
     NetkWorkspace *workspace;
         
+    int cb_id;
+
     GtkWidget *frame;
     GtkWidget *button;
     GtkWidget *label;
@@ -104,182 +106,6 @@ SignalCallback *signal_callback_new(const char *signal,
     sc->data = data;
 
     return sc;
-}
-
-/* request number of desktops */
-static void set_num_screens(int n)
-{
-    static Atom xa_NET_NUMBER_OF_DESKTOPS = 0;
-    XClientMessageEvent sev;
-
-    if(!xa_NET_NUMBER_OF_DESKTOPS)
-    {
-	xa_NET_NUMBER_OF_DESKTOPS = 
-	    XInternAtom(GDK_DISPLAY(), "_NET_NUMBER_OF_DESKTOPS", False);
-    }
-
-    sev.type = ClientMessage;
-    sev.display = GDK_DISPLAY();
-    sev.format = 32;
-    sev.window = GDK_ROOT_WINDOW();
-    sev.message_type = xa_NET_NUMBER_OF_DESKTOPS;
-    sev.data.l[0] = n;
-
-    gdk_error_trap_push();
-
-    XSendEvent(GDK_DISPLAY(), GDK_ROOT_WINDOW(), False,
-               SubstructureNotifyMask | SubstructureRedirectMask,
-               (XEvent *) & sev);
-
-    gdk_flush();
-    gdk_error_trap_pop();
-}
-
-/*  desktop names
- *  -------------
- *  netk_workspace doesn't handle this at the moment
- *  so we need to provide this functionaility ourselves
-*/
-static void cde_pager_set_names(CdePager *pager, GPtrArray *names);
-
-static Atom xa_NET_DESKTOP_NAMES = 0;
-
-static void set_screen_names(GPtrArray *names)
-{
-    int i, len;
-    guchar *data, *s;
-
-    if (names->len == 0)
-	return;
-    
-    len = 0;
-    for (i = 0; i < names->len; i++)
-    {
-	char *name = g_ptr_array_index(names, i);
-	int tmplen = strlen(name);
-
-	if (tmplen > 0)
-	    len +=  tmplen + 1;
-    }
-    
-    data = g_new0(char, len);
-
-    s = data;
-    for (i = 0; i < names->len; i++)
-    {
-	char *name = g_ptr_array_index(names, i);
-	
-	if (!strlen(name))
-	    continue;
-
-	sprintf(s, "%s", name);
-	s += strlen(name) + 1;
-    }
-    
-    gdk_error_trap_push();
-    gdk_property_change(gdk_get_default_root_window(), 
-	    		gdk_x11_xatom_to_atom(xa_NET_DESKTOP_NAMES),
-			gdk_atom_intern("UTF8_STRING", FALSE),
-			8, /* FIXME: is this correct ? */
-			GDK_PROP_MODE_REPLACE,
-			data,
-			len ? len -1 : 0);
-    gdk_flush();
-    gdk_error_trap_pop();
-
-    g_free(data);
-}
-
-static void update_screen_names(t_switcher *sw)
-{
-    char **name_list;
-    
-    if (!xa_NET_DESKTOP_NAMES)
-	xa_NET_DESKTOP_NAMES = XInternAtom(GDK_DISPLAY(), 
-					   "_NET_DESKTOP_NAMES", False);
-
-    name_list = netk_get_utf8_list(GDK_ROOT_WINDOW(), xa_NET_DESKTOP_NAMES);
-
-    if (name_list)
-    {
-	int i, n;
-	char **p = name_list;
-	
-	n = netk_screen_get_workspace_count(sw->screen);
-	
-	for (i = 0; i < n || *p; i++)
-	{
-	    if (i < sw->screen_names->len)
-	    {
-		if (*p)
-		{
-		    g_free(sw->screen_names->pdata[i]);
-		    sw->screen_names->pdata[i] = g_strdup(*p);
-		}
-	    }
-	    else
-	    {
-		if (*p)
-		{
-		    g_ptr_array_add(sw->screen_names, g_strdup(*p));
-		}
-		else
-		{
-		    char tmp[3];
-
-		    sprintf(tmp, "%d", i+1);
-		    
-		    g_ptr_array_add(sw->screen_names, g_strdup(tmp));
-		}
-	    }
-
-	    if (p && *p)
-		p++;
-	}
-
-	g_strfreev(name_list);
-
-	if (sw->cde_pager)
-	    cde_pager_set_names(sw->cde_pager, sw->screen_names);
-    }
-}
-
-static GdkFilterReturn desktop_names_filter(GdkXEvent * xevent, 
-					    GdkEvent * event, gpointer data)
-{
-    XEvent *xev = (XEvent *) xevent;
-
-    if(xev->type == PropertyNotify)
-    {
-	if (!xa_NET_DESKTOP_NAMES)
-	    xa_NET_DESKTOP_NAMES = XInternAtom(GDK_DISPLAY(), 
-					       "_NET_DESKTOP_NAMES", False);
-
-	if (((XPropertyEvent *)xev)->atom == xa_NET_DESKTOP_NAMES)
-	    update_screen_names(data);
-    }
-    
-    return GDK_FILTER_CONTINUE;
-}
-
-static void watch_screen_names(t_switcher *sw)
-{
-    GdkWindow *w;
-    
-    w = gdk_get_default_root_window();
-
-    gdk_window_add_filter(w, desktop_names_filter, sw);
-    gdk_window_set_events(w, gdk_window_get_events(w) | 
-	    			GDK_PROPERTY_CHANGE_MASK);
-}
-
-static void remove_watch_screen_names(t_switcher *sw)
-{
-    GdkWindow *w;
-    
-    w = gdk_get_default_root_window();
-
-    gdk_window_remove_filter(w, desktop_names_filter, sw);
 }
 
 /*  screenbuttons
@@ -404,26 +230,40 @@ static void screen_button_modify_style(ScreenButton *sb)
 }
 #endif
 
+static void ws_name_changed(NetkWorkspace *ws, ScreenButton *sb)
+{
+    const char *name = netk_workspace_get_name(ws);
+
+    gtk_label_set_text(GTK_LABEL(sb->label), name);
+}
+
 ScreenButton *create_screen_button(int index, const char *name, 
 				   NetkScreen *screen)
 {
-    ScreenButton *sb = g_new(ScreenButton, 1);
+    const char *realname;
+    ScreenButton *sb = g_new0(ScreenButton, 1);
 
     sb->index = index;
 
     sb->workspace = netk_screen_get_workspace(screen, index);
+    realname = netk_workspace_get_name(sb->workspace);
 
+    if (!realname || !strlen(realname))
+	realname = name;
+    
+    sb->cb_id = g_signal_connect(sb->workspace, "name-changed", 
+	    	     		 G_CALLBACK(ws_name_changed), sb);
+    
     sb->frame = gtk_alignment_new(0,0,1,1);/* gtk_frame_new(NULL);*/
     gtk_widget_show(sb->frame);
-/*    gtk_frame_set_shadow_type(GTK_FRAME(sb->frame), GTK_SHADOW_IN);
-*/
+    
     sb->button = gtk_toggle_button_new();
     gtk_button_set_relief(GTK_BUTTON(sb->button), GTK_RELIEF_HALF);
     gtk_widget_set_name(sb->button, screen_class[sb->index % 4]);
     gtk_widget_show(sb->button);
     gtk_container_add(GTK_CONTAINER(sb->frame), sb->button);
 
-    sb->label = gtk_label_new(name);
+    sb->label = gtk_label_new(realname);
 /*    gtk_misc_set_alignment(GTK_MISC(sb->label), 0.1, 0.5);*/
     gtk_widget_show(sb->label); 
     gtk_container_add(GTK_CONTAINER(sb->button), sb->label);
@@ -434,8 +274,6 @@ ScreenButton *create_screen_button(int index, const char *name,
     g_signal_connect(sb->button, "button-press-event",
                      G_CALLBACK(screen_button_pressed_cb), sb);
 
-/*    screen_button_modify_style(sb);*/
-    
     return sb;
 }
 
@@ -446,6 +284,7 @@ void screen_button_pack(ScreenButton * sb, GtkBox *box)
 
 void screen_button_free(ScreenButton * sb)
 {
+    g_signal_handler_disconnect(sb->workspace, sb->cb_id);
     g_free(sb);
 }
 
@@ -454,21 +293,6 @@ void screen_button_free(ScreenButton * sb)
  *  it's not completely stand-alone now, but perhaps we should make it a
  *  separate widget (?)
 */
-static void cde_pager_set_names(CdePager *pager, GPtrArray *names)
-{
-    int i, n;
-    GList *li;
-
-    n = netk_screen_get_workspace_count(pager->screen);
-    
-    for (i = 0, li = pager->buttons; li && i < n; i++, li = li->next)
-    {
-	ScreenButton *sb = li->data;
-
-	screen_button_update_label(sb, g_ptr_array_index(names, i));
-    }
-}
-
 static void cde_pager_update_size(CdePager *pager)
 {
     GList *li;
@@ -537,7 +361,6 @@ static void cde_pager_add_button(CdePager *pager, GList *callbacks,
     int i, index, active;
     GList *li;
     char *name;
-    gboolean names_added = FALSE;
 
     index = g_list_length(pager->buttons);
     active = 
@@ -551,11 +374,7 @@ static void cde_pager_add_button(CdePager *pager, GList *callbacks,
 	sprintf(tmp, "%d", i+1);
 
 	g_ptr_array_add(names, g_strdup(tmp));
-	names_added = TRUE;
     }
-    
-    if (names_added)
-	set_screen_names(names);
     
     name = g_ptr_array_index(names, index);
     sb = create_screen_button(index, name, pager->screen);
@@ -944,12 +763,9 @@ static void switcher_set_orientation(Control *control, int orientation)
 */
 static void switcher_read_config(Control *control, xmlNodePtr node)
 {
-    xmlNodePtr  child = NULL;
     xmlChar *value;
-    GList *li;
     int i;
     t_switcher *sw;
-    gboolean names_updated = FALSE;
 
     if(!node)
 	return;
@@ -1000,64 +816,10 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 	    gtk_box_reorder_child(GTK_BOX(sw->box), align, 2);
 	}
     }
-
-    value = xmlGetProp(node, "numscreens");
-
-    if (value)
-    {
-	i = atoi(value);
-	g_free(value);
-
-	if (i > 0)
-	{
-	    set_num_screens(i);
-	}
-    }
-
-    /* desktop names */
-    if (!sw->graphical)
-	li = sw->cde_pager->buttons;
-    else
-	li = NULL;
-    
-    for(i = 0, child = node->children; child; i++, child = child->next)
-    {
-        ScreenButton *sb = NULL;
-	
-        if(child && xmlStrEqual(child->name, (const xmlChar *)"Screen"))
-	{
-	    if (li)
-	    {
-		sb = li->data;
-		li = li->next;
-	    }
-	
-	    value = DATA(child);
-
-	    if (value && strlen(value))
-	    {
-		if (i < sw->screen_names->len)
-		{
-		    g_free(sw->screen_names->pdata[i]);
-		    sw->screen_names->pdata[i] = value;
-		}
-		else
-		{
-		    g_ptr_array_add(sw->screen_names, value);
-		}
-
-		names_updated = TRUE;
-	    }
-	}
-    }
-
-    if (names_updated)
-	set_screen_names(sw->screen_names);
 }
 
 static void switcher_write_config(Control *control, xmlNodePtr node)
 {
-    int i;
     char prop[3];
     t_switcher *sw;
 
@@ -1068,17 +830,6 @@ static void switcher_write_config(Control *control, xmlNodePtr node)
     
     snprintf(prop, 3, "%d", sw->graphical ? 1 : 0);
     xmlSetProp(node, "graphical", prop);
-    
-    snprintf(prop, 3, "%d", netk_screen_get_workspace_count(sw->screen));
-    xmlSetProp(node, "numscreens", prop);
-    
-    for(i = 0; i < sw->screen_names->len; i++)
-    {
-	char *name = g_ptr_array_index(sw->screen_names, i);
-	
-	if (strlen(name))
-	    xmlNewTextChild(node, NULL, "Screen", name);
-    }
 }
 
 static void switcher_attach_callback(Control *control, const char *signal, 
@@ -1249,11 +1000,6 @@ t_switcher *switcher_new(NetkScreen *screen)
     sw->screen_names = 
 	g_ptr_array_sized_new(netk_screen_get_workspace_count(screen));
 
-    /* first check if there are names set on the root window;
-     * then update them with our values */
-    update_screen_names(sw);
-    set_screen_names(sw->screen_names);
-    
     sw->show_minibuttons = TRUE;
     sw->show_names = TRUE;
     sw->graphical = FALSE;
@@ -1276,8 +1022,6 @@ t_switcher *switcher_new(NetkScreen *screen)
 	g_signal_connect(sw->screen, "workspace-destroyed",
 		         G_CALLBACK(switcher_screen_destroyed), sw);
 
-    watch_screen_names(sw);
-
     return sw;
 }
 
@@ -1292,8 +1036,6 @@ static void switcher_free(Control *control)
     g_signal_handler_disconnect(sw->screen, sw->ws_created_id);
     g_signal_handler_disconnect(sw->screen, sw->ws_destroyed_id);
     
-    remove_watch_screen_names(sw);
-
     if (!sw->graphical)
 	cde_pager_free(sw->cde_pager);
 
@@ -1332,6 +1074,7 @@ static void switcher_dialog_done(GtkWidget *b, t_switcher_dialog *sd)
 
 static void workspace_dialog(GtkWidget *b, t_switcher_dialog *sd)
 {
+    g_spawn_command_line_async("xfce-setting-show workspaces", NULL);
 }
 
 static void show_minibuttons_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
