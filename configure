@@ -1013,6 +1013,7 @@ Optional Features:
   --disable-dependency-tracking Speeds up one-time builds
   --enable-dependency-tracking  Do not reject slow dependency extractors
   --disable-plugins  	Don't build plugins
+  --enable-debug          debug mode (default disabled)
   --enable-static=PKGS  build static libraries default=no
   --enable-shared=PKGS  build shared libraries default=yes
   --enable-fast-install=PKGS  optimize for fast installation default=yes
@@ -4872,6 +4873,18 @@ else
    MY_SUBDIRS="icons panel plugins themes"
 fi;
 
+DEBUG=0
+# Check whether --enable-debug or --disable-debug was given.
+if test "${enable_debug+set}" = set; then
+  enableval="$enable_debug"
+
+cat >>confdefs.h <<\_ACEOF
+#define DEBUG 1
+_ACEOF
+
+fi;
+
+
 
 
 ## Versions of dependencies
@@ -6089,7 +6102,7 @@ test "x$enable_libtool_lock" != xno && enable_libtool_lock=yes
 case $host in
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 6092 "configure"' > conftest.$ac_ext
+  echo '#line 6105 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -6607,7 +6620,7 @@ chmod -w .
 save_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -o out/conftest2.$ac_objext"
 compiler_c_o=no
-if { (eval echo configure:6610: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>out/conftest.err; } && test -s out/conftest2.$ac_objext; then
+if { (eval echo configure:6623: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>out/conftest.err; } && test -s out/conftest2.$ac_objext; then
   # The compiler can only warn and ignore the option if not recognized
   # So say no if there are warnings
   if test -s out/conftest.err; then
@@ -8352,7 +8365,7 @@ else
     lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 8355 "configure"
+#line 8368 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -8450,7 +8463,7 @@ else
     lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 8453 "configure"
+#line 8466 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
