@@ -193,9 +193,9 @@ void exit_add_options(PanelControl * pc, GtkContainer * container,
     GtkWidget *vbox, *hbox, *label, *checkbox;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    revert_button = revert;
-
     t_exit *exit = (t_exit *)pc->data;
+
+    revert_button = revert;
 
     backup_lock = exit->with_lock;
     
