@@ -155,15 +155,15 @@ get_plugin_dirs (void)
     {
 	dirs = g_new (gchar *, 2);
 
-	dirs[0] = g_build_filename (LIBDIR, "panel-plugins", NULL);
+	dirs[0] = g_build_filename (LIBDIR, PLUGINDIR, NULL);
 	dirs[1] = NULL;
     }
     else
     {
 	dirs = g_new (gchar *, 3);
 
-	dirs[0] = xfce_get_userfile ("panel-plugins", NULL);
-	dirs[1] = g_build_filename (LIBDIR, "panel-plugins", NULL);
+	dirs[0] = xfce_get_userfile (PLUGINDIR, NULL);
+	dirs[1] = g_build_filename (LIBDIR, PLUGINDIR, NULL);
 	dirs[2] = NULL;
     }
 
@@ -179,15 +179,15 @@ get_theme_dirs (void)
     {
 	dirs = g_new (gchar *, 2);
 
-	dirs[0] = g_build_filename (DATADIR, "themes", NULL);
+	dirs[0] = g_build_filename (DATADIR, THEMEDIR, NULL);
 	dirs[1] = NULL;
     }
     else
     {
 	dirs = g_new (gchar *, 3);
 
-	dirs[0] = xfce_get_userfile ("themes", NULL);
-	dirs[1] = g_build_filename (DATADIR, "themes", NULL);
+	dirs[0] = xfce_get_userfile (THEMEDIR, NULL);
+	dirs[1] = g_build_filename (DATADIR, THEMEDIR, NULL);
 	dirs[2] = NULL;
     }
 

@@ -35,8 +35,8 @@
 #define SYSRCDIR   "xfce4"
 #define XFCERC     "xfce4rc"
 
-#define PLUGINDIR  "plugins"
-#define THEMEDIR   "themes"
+#define PLUGINDIR  "panel-plugins"
+#define THEMEDIR   "icons"
 
 /* limits to the panel size */
 #define NBSCREENS 12

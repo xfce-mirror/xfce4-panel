@@ -22,7 +22,7 @@
 #endif
 
 #include <libxfce4util/i18n.h>
-#include <libxfcegui4/xgtkicontheme.h>
+#include <libxfcegui4/icons.h>
 
 #include "xfce.h"
 #include "icons/xfce4-panel-icon.h"
@@ -31,7 +31,6 @@
 #define gdk_pixbuf_new_from_inline gdk_pixbuf_new_from_stream
 #endif
 
-static GtkIconTheme *icon_theme = NULL;
 const char *icon_names[NUM_ICONS];
 
 /* icon themes */
@@ -83,9 +82,6 @@ void
 icons_init (void)
 {
     set_icon_names ();
-
-    icon_theme = gtk_icon_theme_get_default ();
-    gtk_icon_theme_prepend_search_path (icon_theme, DATADIR "/themes");
 }
 
 GdkPixbuf *
@@ -94,7 +90,7 @@ get_pixbuf_by_id (int id)
     if (id < UNKNOWN_ICON || id >= NUM_ICONS)
 	id = UNKNOWN_ICON;
 
-    return gtk_icon_theme_load_icon (icon_theme, xfce_icon_names[id], 48, 0, NULL);
+    return xfce_load_themed_icon (xfce_icon_names[id], 48);
 }
 
 GdkPixbuf *
@@ -134,7 +130,7 @@ get_minibutton_pixbuf (int id)
     if (id < 0 || id >= MINIBUTTONS)
 	return get_pixbuf_by_id (UNKNOWN_ICON);
 
-    pb = gtk_icon_theme_load_icon (icon_theme, minibutton_names[id], 24, 0, NULL);
+    pb = xfce_load_themed_icon (minibutton_names[id], 22);
 
     if (!pb)
 	pb = get_pixbuf_by_id (UNKNOWN_ICON);
@@ -192,7 +188,7 @@ _get_themed_pixbuf (const char *name, const char *theme)
 			*p = 0;
 	}
 
-    pb = gtk_icon_theme_load_icon (icon_theme, rootname, 48, 0, NULL);
+    pb = xfce_load_themed_icon (rootname, 48);
     g_free(rootname);
 
     /* prevent race condition when we can't find our fallback icon:
