@@ -3,43 +3,41 @@
 # Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER.
 # Jon Latorre Martinez <edscott@imp.mx>, 2003.
 # Jon Latorre Martinez <patataman@airtel.net>, 2003.
+# Piarres Beobide Egaña <pi@beobide.net>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-09-07 15:17+0200\n"
-"PO-Revision-Date: 1996-01-30 03:42+0100\n"
-"Last-Translator: Jon Latorre Martinez <patataman@airtel.net>\n"
-"Language-Team: euskera <eu@li.org>\n"
+"PO-Revision-Date: 2004-09-13 15:35+0200\n"
+"Last-Translator: Piarres Beobide Egaña <pi@beobide.net>\n"
+"Language-Team: Euskara <librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: panel/xfce_support.c:604
 msgid "Select file"
-msgstr "Fitxateguia aukeratu"
+msgstr "Fitxategia aukeratu"
 
 #: panel/settings.c:172
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "Ez da datarik aurkitu. Panela hutsik egongo da."
 
 #: panel/controls_dialog.c:94 panel/item_dialog.c:1148
 msgid "Position:"
-msgstr "Posizioa"
+msgstr "Kokalekua:"
 
 #: panel/controls_dialog.c:155
-#, fuzzy
 msgid "Item properties"
-msgstr "/_Propietateak"
+msgstr "Elementu _Propietateak"
 
 #: panel/controls_dialog.c:207 panel/controls.c:695
-#, fuzzy
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Elementua kerntzean menua ere kenduko du\n"
-"\n"
-"Elementua kendu nahi al duzu?"
+msgstr "Elementua ezabatzeak popup menua ere kenduko du."
 
 #: panel/item_dialog.c:128 panel/item_dialog.c:550
 msgid "Select command"
@@ -83,9 +81,8 @@ msgstr "Menuaren elementua aldatu"
 
 #. add buttons
 #: panel/item_dialog.c:1188 panel/controls.c:806
-#, fuzzy
 msgid "_Remove"
-msgstr "/_Ezabatu"
+msgstr "_Ezabatu"
 
 #: panel/item_dialog.c:1200 panel/item.c:638
 msgid "Launcher"
@@ -108,7 +105,7 @@ msgid "Are you sure you want to exit?"
 msgstr "Ziur irten nahi duzula?"
 
 #: panel/main.c:332
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -120,34 +117,37 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"%s, bertsioa%s\n"
+"\n"
+" Xfce Panela\n"
+"%s bertsioa\n"
 "XFCE-ren mahaigainaren zatia\n"
 "http://www.xfce.org\n"
+"\n"
+" GNU GPL Lizentzipean.\n"
+"\n"
 
 #: panel/main.c:400
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: saio kudeatzaile gabe arrakastatsuki abiarazia"
 
 #: panel/main.c:405
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: saio kudeatzailea erabiliaz arrakastatsuki abiarazia"
 
 #: panel/controls.c:650 panel/controls.c:740
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "Ezin da \"%s\" panel elementua sortu."
 
 #: panel/controls.c:801 panel/panel.c:559
-#, fuzzy
 msgid "_Properties..."
-msgstr "/_Propietateak"
+msgstr "_Propietateak"
 
 #: panel/controls.c:815 panel/panel.c:549
-#, fuzzy
 msgid "Add _new item"
-msgstr "/Elementu berria gehitu"
+msgstr "Elementu _berria gehitu"
 
 #: panel/controls.c:1089
 msgid "This item has no configuration options"
@@ -159,29 +159,24 @@ msgid "Xfce Panel"
 msgstr "Xfce Panela"
 
 #: panel/panel.c:564
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/_Xfce-i buruz"
+msgstr "_Xfce-i buruz"
 
 #: panel/panel.c:569
-#, fuzzy
 msgid "_Help"
-msgstr "/Laguntza"
+msgstr "_Laguntza"
 
 #: panel/panel.c:578
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/Pantai_La blokeatu"
+msgstr "_PantaiLa blokeatu"
 
 #: panel/panel.c:583
-#, fuzzy
 msgid "_Restart"
-msgstr "_Deshacer"
+msgstr "_Desegin"
 
 #: panel/panel.c:592
-#, fuzzy
 msgid "E_xit"
-msgstr "/Irten"
+msgstr "I_rten"
 
 #: panel/icons.c:57
 msgid "Default"
@@ -237,7 +232,7 @@ msgstr "Terminala"
 
 #: panel/mcs_client.c:167
 msgid "Settings manager not available"
-msgstr "Saio administratzailea ez dago erabilgarri"
+msgstr "Saio kudeatzailea ez dago erabilgarri"
 
 #: panel/popup.c:260
 msgid "Menu"
@@ -257,7 +252,7 @@ msgstr "Handia"
 
 #: settings/xfce_settings_dialog.c:100
 msgid "Huge"
-msgstr ""
+msgstr "Itzela"
 
 #: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
@@ -297,15 +292,15 @@ msgstr "Bapateko mezuen kokalekua:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Beti gainean:"
 
 #: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
-msgstr "Automatikoki ezkutatu"
+msgstr "Automatikoki ezkutatu:"
 
 #: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
-msgstr "Xfce-ko panelaren konfigurazioa"
+msgstr "Xfce Panelaren Ezarpenak"
 
 #: settings/xfce_settings_dialog.c:478
 msgid "Appearance"
@@ -313,7 +308,7 @@ msgstr "Itxura"
 
 #: settings/xfce_settings_dialog.c:496
 msgid "Behaviour"
-msgstr "Konportamendua"
+msgstr "Portamoldea"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -325,7 +320,7 @@ msgstr "Konportamendua"
 #.
 #: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%A, %Y %B %d"
 
 #: plugins/clock/clock.c:423
 msgid "Clock type:"
@@ -369,11 +364,11 @@ msgstr "Xfce-ren erlojua"
 
 #: plugins/pager/pager.c:309
 msgid "Number of rows:"
-msgstr ""
+msgstr "Lerro kopurua:"
 
 #: plugins/pager/pager.c:311
 msgid "Number of columns:"
-msgstr ""
+msgstr "Zutabe kopurua:"
 
 #: plugins/pager/pager.c:356
 msgid "Graphical pager"
@@ -427,13 +422,12 @@ msgstr "2 botoia:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:577
-#, fuzzy
 msgid "_Hide"
-msgstr "/Laguntza"
+msgstr "_Ezkutatu"
 
 #: plugins/systembuttons/systembuttons.c:612
 msgid "System buttons"
-msgstr "Sistemaren botoiak"
+msgstr "Sistema botoiak"
 
 #: plugins/separator/separator.c:153
 msgid "Separator"
@@ -444,14 +438,12 @@ msgid "Mail box:"
 msgstr "Posta zorroa:"
 
 #: plugins/mailcheck/mailcheck.c:824
-#, fuzzy
 msgid "New mail command:"
-msgstr "Posta programak:"
+msgstr "Posta berri komandoa:"
 
 #: plugins/mailcheck/mailcheck.c:838
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Paneleko botoia sakatzean exekutatu behar dena"
+msgstr "Posta berriak ailatzean exekutatu behar den komandoa"
 
 #: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
@@ -462,9 +454,8 @@ msgid "Interval (sec):"
 msgstr "Interbaloa (seg):"
 
 #: plugins/mailcheck/mailcheck.c:961
-#, fuzzy
 msgid "Mail checker"
-msgstr "Posta begiratu"
+msgstr "Posta egiaztatzailea"
 
 #~ msgid "Remove"
 #~ msgstr "Ezabatu"
@@ -642,3 +633,4 @@ msgstr "Posta begiratu"
 
 #~ msgid "Show minibuttons"
 #~ msgstr "Mostrar minibotones"
+
