@@ -187,6 +187,7 @@ show_popup (PanelPopup * pp)
     }
 
     gtk_window_move (GTK_WINDOW (pp->window), x, y);
+    gtk_window_stick (pp->window);
     gtk_widget_show (pp->window);
 }
 
