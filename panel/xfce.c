@@ -136,7 +136,7 @@ void xfce_run(void)
 
 int main(int argc, char **argv)
 {
-    pid_t pid = fork();
+/*    pid_t pid = fork();
 
     if(pid < 0)
     {
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
     {
         _exit(0);
     }
-
+*/
     gtk_init(&argc, &argv);
 
     xfce_init();
@@ -331,23 +331,25 @@ void panel_cleanup(void)
 
 void panel_set_size(int size)
 {
+    settings.size = size;
+
     side_panel_set_size(LEFT, size);
     central_panel_set_size(size);
     side_panel_set_size(RIGHT, size);
-
-    settings.size = size;
 }
 
 void panel_set_popup_size(int size)
 {
+    settings.popup_size = size;
+
     side_panel_set_popup_size(LEFT, size);
     side_panel_set_popup_size(RIGHT, size);
-
-    settings.popup_size = size;
 }
 
 void panel_set_style(int style)
 {
+    settings.style = style;
+
     if(style == OLD_STYLE)
         gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
     else
@@ -356,33 +358,30 @@ void panel_set_style(int style)
     side_panel_set_style(LEFT, style);
     central_panel_set_style(style);
     side_panel_set_style(RIGHT, style);
-
-    settings.style = style;
 }
 
 void panel_set_icon_theme(const char *theme)
 {
-    char *tmp;
+    char *tmp = settings.icon_theme;
+	
+    settings.icon_theme = g_strdup(theme);
+    g_free(tmp);
 
     side_panel_set_icon_theme(LEFT, theme);
     central_panel_set_icon_theme(theme);
     side_panel_set_icon_theme(RIGHT, theme);
-
-    tmp = settings.icon_theme;
-    settings.icon_theme = g_strdup(theme);
-    g_free(tmp);
 }
 
 void panel_set_num_left(int n)
 {
-    side_panel_set_num_groups(LEFT, n);
     settings.num_left = n;
+    side_panel_set_num_groups(LEFT, n);
 }
 
 void panel_set_num_right(int n)
 {
-    side_panel_set_num_groups(RIGHT, n);
     settings.num_right = n;
+    side_panel_set_num_groups(RIGHT, n);
 }
 
 void panel_set_current(int n)
