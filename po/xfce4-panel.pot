@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-02-01 14:14+0100\n"
+"POT-Creation-Date: 2003-02-02 21:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,26 +15,26 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/controls.c:278 panel/controls_dialog.c:333
+#: panel/controls.c:279 panel/controls_dialog.c:333
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
 "Do you want to remove the item?"
 msgstr ""
 
-#: panel/controls.c:306
+#: panel/controls.c:307 panel/panel.c:113
 msgid "/_Properties..."
 msgstr ""
 
-#: panel/controls.c:307
+#: panel/controls.c:308
 msgid "/_Remove"
 msgstr ""
 
-#: panel/controls.c:309 panel/panel.c:111
+#: panel/controls.c:310 panel/panel.c:111
 msgid "/Add _new item"
 msgstr ""
 
-#: panel/controls.c:580
+#: panel/controls.c:581
 msgid "This item has no configuration options"
 msgstr ""
 
@@ -43,12 +43,10 @@ msgid "Change item"
 msgstr ""
 
 #: panel/controls_dialog.c:252 panel/item_dialog.c:858
-#: settings/xfce_settings_dialog.c:689
 msgid "_Revert"
 msgstr ""
 
 #: panel/controls_dialog.c:256 panel/item_dialog.c:863
-#: settings/xfce_settings_dialog.c:694
 msgid "_Done"
 msgstr ""
 
@@ -120,8 +118,8 @@ msgstr ""
 msgid "Copyright 2002-2003 by Olivier Fourdan"
 msgstr ""
 
-#: panel/info.c:160 panel/info.c:272 plugins/systembuttons/systembuttons.c:138
-#: plugins/systembuttons/systembuttons.c:490
+#: panel/info.c:160 panel/info.c:272 plugins/systembuttons/systembuttons.c:140
+#: plugins/systembuttons/systembuttons.c:560
 msgid "Info"
 msgstr ""
 
@@ -169,7 +167,7 @@ msgstr ""
 msgid "Command:"
 msgstr ""
 
-#: panel/item_dialog.c:401 plugins/mailcheck/mailcheck.c:574
+#: panel/item_dialog.c:401 plugins/mailcheck/mailcheck.c:591
 msgid "Run in _terminal"
 msgstr ""
 
@@ -226,10 +224,6 @@ msgstr ""
 msgid "/XFce Panel"
 msgstr ""
 
-#: panel/panel.c:113
-msgid "/_Panel settings"
-msgstr ""
-
 #: panel/panel.c:114
 msgid "/_Settings manager"
 msgstr ""
@@ -250,7 +244,8 @@ msgstr ""
 msgid "/E_xit"
 msgstr ""
 
-#: panel/panel.c:228 settings/xfce_settings_plugin.c:66
+#: panel/panel.c:228 settings/xfce_settings_dialog.c:580
+#: settings/xfce_settings_plugin.c:66
 msgid "XFce Panel"
 msgstr ""
 
@@ -262,89 +257,89 @@ msgstr ""
 msgid "Select file"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:197
+#: settings/xfce_settings_dialog.c:126
 msgid "Tiny"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:201
+#: settings/xfce_settings_dialog.c:130
 msgid "Small"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:205
+#: settings/xfce_settings_dialog.c:134
 msgid "Medium"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:209
+#: settings/xfce_settings_dialog.c:138
 msgid "Large"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:260
+#: settings/xfce_settings_dialog.c:187
 msgid "Horizontal"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:264
+#: settings/xfce_settings_dialog.c:191
 msgid "Vertical"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:297 settings/xfce_settings_dialog.c:525
+#: settings/xfce_settings_dialog.c:221 settings/xfce_settings_dialog.c:442
 msgid "Left"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:301 settings/xfce_settings_dialog.c:526
+#: settings/xfce_settings_dialog.c:225 settings/xfce_settings_dialog.c:443
 msgid "Right"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:305 settings/xfce_settings_dialog.c:524
-#: settings/xfce_settings_dialog.c:579
+#: settings/xfce_settings_dialog.c:229 settings/xfce_settings_dialog.c:441
+#: settings/xfce_settings_dialog.c:495
 msgid "Top"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:309 settings/xfce_settings_dialog.c:523
-#: settings/xfce_settings_dialog.c:587
+#: settings/xfce_settings_dialog.c:233 settings/xfce_settings_dialog.c:440
+#: settings/xfce_settings_dialog.c:503
 msgid "Bottom"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:442
+#: settings/xfce_settings_dialog.c:361
 msgid "Panel size:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:458
+#: settings/xfce_settings_dialog.c:377
 msgid "Panel orientation:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:475
+#: settings/xfce_settings_dialog.c:394
 msgid "Popup position:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:492
+#: settings/xfce_settings_dialog.c:411
 msgid "Icon theme:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:563
+#: settings/xfce_settings_dialog.c:479
 msgid "Panel layer:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:583
+#: settings/xfce_settings_dialog.c:499
 msgid "Normal"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:602
+#: settings/xfce_settings_dialog.c:518
 msgid "Center the panel:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:626
+#: settings/xfce_settings_dialog.c:542
 msgid "Set"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:683 settings/xfce_settings_dialog.c:704
+#: settings/xfce_settings_dialog.c:593
 msgid "XFce Panel Settings"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:722
+#: settings/xfce_settings_dialog.c:611
 msgid "Appearance"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:740
+#: settings/xfce_settings_dialog.c:629
 msgid "Position"
 msgstr ""
 
@@ -424,39 +419,39 @@ msgstr ""
 msgid "December"
 msgstr ""
 
-#: plugins/clock/clock.c:324
+#: plugins/clock/clock.c:327
 msgid "Clock type:"
 msgstr ""
 
-#: plugins/clock/clock.c:337
+#: plugins/clock/clock.c:340
 msgid "Analog"
 msgstr ""
 
-#: plugins/clock/clock.c:341
+#: plugins/clock/clock.c:344
 msgid "Digital"
 msgstr ""
 
-#: plugins/clock/clock.c:345
+#: plugins/clock/clock.c:348
 msgid "LED"
 msgstr ""
 
-#: plugins/clock/clock.c:407
+#: plugins/clock/clock.c:410
 msgid "Hour mode:"
 msgstr ""
 
-#: plugins/clock/clock.c:414
+#: plugins/clock/clock.c:417
 msgid "24 hour"
 msgstr ""
 
-#: plugins/clock/clock.c:420
+#: plugins/clock/clock.c:423
 msgid "12 hour"
 msgstr ""
 
-#: plugins/clock/clock.c:426
+#: plugins/clock/clock.c:429
 msgid "AM/PM"
 msgstr ""
 
-#: plugins/clock/clock.c:467
+#: plugins/clock/clock.c:468
 msgid "Show seconds:"
 msgstr ""
 
@@ -464,23 +459,23 @@ msgstr ""
 msgid "Xfce Clock"
 msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:509
+#: plugins/mailcheck/mailcheck.c:470
 msgid "Mail box:"
 msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:537
+#: plugins/mailcheck/mailcheck.c:550
 msgid "Mail command:"
 msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:545
+#: plugins/mailcheck/mailcheck.c:562
 msgid "Command to run when the button on the panel is clicked"
 msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:588
+#: plugins/mailcheck/mailcheck.c:616
 msgid "Interval (sec):"
 msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:645
+#: plugins/mailcheck/mailcheck.c:695
 msgid "Mail check"
 msgstr ""
 
@@ -499,51 +494,37 @@ msgid ""
 "Ask your system administrator for more information"
 msgstr ""
 
-#: plugins/systembuttons/systembuttons.c:135
+#: plugins/systembuttons/systembuttons.c:137
 msgid "Lock the screen"
 msgstr ""
 
-#: plugins/systembuttons/systembuttons.c:136
-#: plugins/systembuttons/systembuttons.c:488
+#: plugins/systembuttons/systembuttons.c:138
+#: plugins/systembuttons/systembuttons.c:558
 msgid "Exit"
 msgstr ""
 
-#: plugins/systembuttons/systembuttons.c:137
-#: plugins/systembuttons/systembuttons.c:489
+#: plugins/systembuttons/systembuttons.c:139
+#: plugins/systembuttons/systembuttons.c:559
 msgid "Setup"
 msgstr ""
 
-#: plugins/systembuttons/systembuttons.c:471
+#: plugins/systembuttons/systembuttons.c:541
 msgid "Show two buttons:"
 msgstr ""
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:487
+#: plugins/systembuttons/systembuttons.c:557
 msgid "Lock"
 msgstr ""
 
-#: plugins/systembuttons/systembuttons.c:518
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Button 1:"
 msgstr ""
 
-#: plugins/systembuttons/systembuttons.c:534
+#: plugins/systembuttons/systembuttons.c:604
 msgid "Button 2:"
 msgstr ""
 
-#: plugins/systembuttons/systembuttons.c:578
+#: plugins/systembuttons/systembuttons.c:648
 msgid "System buttons"
-msgstr ""
-
-#: plugins/trash/trash.c:133 plugins/trash/trash.c:166
-msgid "Trashcan: 0 files"
-msgstr ""
-
-#: plugins/trash/trash.c:199 plugins/trash/trash.c:202
-#: plugins/trash/trash.c:205
-#, c-format
-msgid "Trashcan: %d files / %d %s"
-msgstr ""
-
-#: plugins/trash/trash.c:298
-msgid "Trash can"
 msgstr ""
