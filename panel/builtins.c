@@ -260,8 +260,7 @@ static int clock_guess_best_width_horiz(PanelControl * pc)
 		w = 57;
 	}
 	break;
-    default:
-	;
+
     }
 
     return w;
@@ -319,8 +318,6 @@ static int clock_guess_best_width_vert(PanelControl * pc)
 		w = 57;
 	}
 	break;
-    default:
-	;
     }
 
     return w;
@@ -333,7 +330,7 @@ static int clock_guess_best_width_vert(PanelControl * pc)
 void clock_set_size(PanelControl * pc, int size)
 {
     int s = icon_size[size];
-    int w;
+    int w = s;
     t_clock *clock = (t_clock *) pc->data;
     XfceClock *tmp = XFCE_CLOCK(clock->clock);
 
@@ -372,6 +369,7 @@ void clock_set_size(PanelControl * pc, int size)
     */
 
     /* Force the first packed object to set its needed sizes */
+    DBG("w is %d\n", w);
     gtk_widget_set_size_request(clock->frame, w, s);
 }
 
