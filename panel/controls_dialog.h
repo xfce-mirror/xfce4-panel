@@ -22,6 +22,6 @@
 
 #include "global.h"
 
-void controls_dialog(Control * control);
+void controls_dialog (Control * control);
 
 #endif /* __XFCE_CONTROLS_DIALOG_H__ */

@@ -46,23 +46,23 @@ struct _PanelPopup
 };
 
 /* Panel popups */
-PanelPopup *create_panel_popup(void);
-void panel_popup_free(PanelPopup * pp);
+PanelPopup *create_panel_popup (void);
+void panel_popup_free (PanelPopup * pp);
 
-void panel_popup_pack(PanelPopup * pp, GtkBox * box);
-void panel_popup_unpack(PanelPopup * pp);
+void panel_popup_pack (PanelPopup * pp, GtkBox * box);
+void panel_popup_unpack (PanelPopup * pp);
 
-void panel_popup_add_item(PanelPopup * pp, Item * mi);
-void panel_popup_remove_item(PanelPopup * pp, Item * mi);
+void panel_popup_add_item (PanelPopup * pp, Item * mi);
+void panel_popup_remove_item (PanelPopup * pp, Item * mi);
 
-void panel_popup_set_size(PanelPopup * pp, int size);
-void panel_popup_set_popup_position(PanelPopup * pp, int position);
-void panel_popup_set_layer(PanelPopup * pp, int layer);
-void panel_popup_set_theme(PanelPopup * pp, const char *theme);
+void panel_popup_set_size (PanelPopup * pp, int size);
+void panel_popup_set_popup_position (PanelPopup * pp, int position);
+void panel_popup_set_layer (PanelPopup * pp, int layer);
+void panel_popup_set_theme (PanelPopup * pp, const char *theme);
 
-void hide_current_popup_menu(void);
+void hide_current_popup_menu (void);
 
-void panel_popup_set_from_xml(PanelPopup * pp, xmlNodePtr node);
-void panel_popup_write_xml(PanelPopup * pp, xmlNodePtr root);
+void panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node);
+void panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root);
 
 #endif /* __XFCE_POPUP_H__ */

@@ -61,7 +61,8 @@ static char *minibutton_names[] = {
     "minipower",
 };
 
-static void set_icon_names()
+static void
+set_icon_names ()
 {
     int i = 0;
 
@@ -80,92 +81,98 @@ static void set_icon_names()
     icon_names[++i] = _("Terminal");
 }
 
-void icons_init(void)
+void
+icons_init (void)
 {
-    set_icon_names();
+    set_icon_names ();
 }
 
-GdkPixbuf *get_pixbuf_by_id(int id)
+GdkPixbuf *
+get_pixbuf_by_id (int id)
 {
-    if(id < UNKNOWN_ICON || id >= NUM_ICONS)
+    if (id < UNKNOWN_ICON || id >= NUM_ICONS)
         id = UNKNOWN_ICON;
 
-    return get_themed_pixbuf(xfce_icon_names[id]);
+    return get_themed_pixbuf (xfce_icon_names[id]);
 }
 
-GdkPixbuf *get_pixbuf_from_file(const char *path)
+GdkPixbuf *
+get_pixbuf_from_file (const char *path)
 {
     GdkPixbuf *pb = NULL;
 
-    if(!g_file_test(path, G_FILE_TEST_EXISTS))
-        return get_pixbuf_by_id(UNKNOWN_ICON);
+    if (!g_file_test (path, G_FILE_TEST_EXISTS))
+        return get_pixbuf_by_id (UNKNOWN_ICON);
 
-    pb = gdk_pixbuf_new_from_file(path, NULL);
+    pb = gdk_pixbuf_new_from_file (path, NULL);
 
-    if(pb && GDK_IS_PIXBUF(pb))
+    if (pb && GDK_IS_PIXBUF (pb))
         return pb;
     else
-        return get_pixbuf_by_id(UNKNOWN_ICON);
+        return get_pixbuf_by_id (UNKNOWN_ICON);
 }
 
-GdkPixbuf *get_system_pixbuf(int id)
+GdkPixbuf *
+get_system_pixbuf (int id)
 {
     GdkPixbuf *pb = NULL;
 
     /* APP ICONS */
     if (id == DIAG_ICON)
-	pb = gdk_pixbuf_new_from_xpm_data((const char **)diag_icon_xpm);
+        pb = gdk_pixbuf_new_from_xpm_data ((const char **)diag_icon_xpm);
     else if (id == MENU_ICON)
-        pb = gdk_pixbuf_new_from_xpm_data((const char **)menu_icon_xpm);
+        pb = gdk_pixbuf_new_from_xpm_data ((const char **)menu_icon_xpm);
     else if (id == XFCE_ICON)
-        pb = gdk_pixbuf_new_from_xpm_data((const char **)xfce_icon_xpm);
+        pb = gdk_pixbuf_new_from_xpm_data ((const char **)xfce_icon_xpm);
 
     if (!pb)
-	pb = get_pixbuf_by_id(UNKNOWN_ICON);
+        pb = get_pixbuf_by_id (UNKNOWN_ICON);
 
     return pb;
 }
 
-GdkPixbuf *get_minibutton_pixbuf(int id)
+GdkPixbuf *
+get_minibutton_pixbuf (int id)
 {
     GdkPixbuf *pb;
 
-    if(id < 0 || id >= MINIBUTTONS)
-        return get_pixbuf_by_id(UNKNOWN_ICON);
+    if (id < 0 || id >= MINIBUTTONS)
+        return get_pixbuf_by_id (UNKNOWN_ICON);
 
-    pb = get_themed_pixbuf(minibutton_names[id]);
+    pb = get_themed_pixbuf (minibutton_names[id]);
 
-    if(!pb)
-        pb = get_pixbuf_by_id(UNKNOWN_ICON);
+    if (!pb)
+        pb = get_pixbuf_by_id (UNKNOWN_ICON);
 
     return pb;
 }
 
-GdkPixbuf *get_scaled_pixbuf(GdkPixbuf * pb, int size)
+GdkPixbuf *
+get_scaled_pixbuf (GdkPixbuf * pb, int size)
 {
     int w, h, neww, newh;
     GdkPixbuf *newpb;
 
-    if(!pb || !GDK_IS_PIXBUF(pb))
+    if (!pb || !GDK_IS_PIXBUF (pb))
     {
-        GdkPixbuf *tmp = get_pixbuf_by_id(UNKNOWN_ICON);
+        GdkPixbuf *tmp = get_pixbuf_by_id (UNKNOWN_ICON);
 
-        newpb = get_scaled_pixbuf(tmp, size);
-        g_object_unref(tmp);
+        newpb = get_scaled_pixbuf (tmp, size);
+        g_object_unref (tmp);
 
         return newpb;
     }
 
-    w = gdk_pixbuf_get_width(pb);
-    h = gdk_pixbuf_get_height(pb);
+    w = gdk_pixbuf_get_width (pb);
+    h = gdk_pixbuf_get_height (pb);
 
-    if(size > w && size > h)
+    if (size > w && size > h)
     {
         newpb = pb;
-        g_object_ref(newpb);
+        g_object_ref (newpb);
         return newpb;
     }
-    else if(h > w)
+    else if (h > w)
     {
         newh = size;
         neww = ((double)w * (double)size / (double)h);
@@ -176,74 +183,78 @@ GdkPixbuf *get_scaled_pixbuf(GdkPixbuf * pb, int size)
         newh = ((double)h * (double)size / (double)w);
     }
 
-    return gdk_pixbuf_scale_simple(pb, neww, newh, GDK_INTERP_BILINEAR);
+    return gdk_pixbuf_scale_simple (pb, neww, newh, GDK_INTERP_BILINEAR);
 }
 
-static GdkPixbuf *_get_themed_pixbuf(const char *name, const char *theme)
+static GdkPixbuf *
+_get_themed_pixbuf (const char *name, const char *theme)
 {
     GdkPixbuf *pb = NULL;
     char **icon_paths, **p;
     const char *real_theme;
     char *path = NULL;
 
-    if(theme)
-	real_theme = theme;
+    if (theme)
+        real_theme = theme;
     else
         real_theme = DEFAULT_THEME;
-    
-    icon_paths = get_theme_dirs();
 
-    for(p = icon_paths; *p; p++)
+    icon_paths = get_theme_dirs ();
+
+    for (p = icon_paths; *p; p++)
     {
         char **suffix;
 
-        for(suffix = icon_suffix; *suffix; suffix++)
+        for (suffix = icon_suffix; *suffix; suffix++)
         {
-            path = g_strconcat(*p, "/", real_theme, "/", name, ".", *suffix, NULL);
+            path =
+                g_strconcat (*p, "/", real_theme, "/", name, ".", *suffix,
+                             NULL);
 
-            if(g_file_test(path, G_FILE_TEST_EXISTS))
-                pb = gdk_pixbuf_new_from_file(path, NULL);
+            if (g_file_test (path, G_FILE_TEST_EXISTS))
+                pb = gdk_pixbuf_new_from_file (path, NULL);
 
-            g_free(path);
+            g_free (path);
 
-            if(pb)
+            if (pb)
                 break;
         }
 
-        if(pb)
+        if (pb)
             break;
     }
 
-    g_strfreev(icon_paths);
+    g_strfreev (icon_paths);
 
     /* prevent race condition when we can't find our fallback icon:
      * default theme, unknown icon */
-    if (!pb && strequal(real_theme, DEFAULT_THEME) && 
-	    strequal(name, xfce_icon_names[UNKNOWN_ICON]))
+    if (!pb && strequal (real_theme, DEFAULT_THEME) &&
+        strequal (name, xfce_icon_names[UNKNOWN_ICON]))
     {
-	g_printerr("\n** ERROR **: xfce: unable to find any icons! "
-		   "Please check your installation.\n\n");
+        g_printerr ("\n** ERROR **: xfce: unable to find any icons! "
+                    "Please check your installation.\n\n");
 
-	quit(TRUE);
+        quit (TRUE);
     }
-    
+
     return pb;
 }
 
-GdkPixbuf *get_themed_pixbuf(const char *name)
+GdkPixbuf *
+get_themed_pixbuf (const char *name)
 {
     GdkPixbuf *pb = NULL;
 
-    pb = _get_themed_pixbuf(name, settings.theme);
+    pb = _get_themed_pixbuf (name, settings.theme);
 
-    if (!pb && settings.theme && !strequal(DEFAULT_THEME, settings.theme))
-	pb = _get_themed_pixbuf(name, DEFAULT_THEME);
+    if (!pb && settings.theme && !strequal (DEFAULT_THEME, settings.theme))
+        pb = _get_themed_pixbuf (name, DEFAULT_THEME);
 
     if (!pb)
     {
-	pb = get_pixbuf_by_id(UNKNOWN_ICON);
-	g_printerr("xfce: couldn't find icon: %s\n", name);
+        pb = get_pixbuf_by_id (UNKNOWN_ICON);
+        g_printerr ("xfce: couldn't find icon: %s\n", name);
     }
-    
+
     return pb;
 }

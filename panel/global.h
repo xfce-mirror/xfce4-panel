@@ -82,9 +82,9 @@ extern int popup_icon_size[PANEL_SIZES];
 /* types for panel controls */
 enum
 {
-    ICON = -2,   /* special case: the traditional laucher item */
-    PLUGIN = -1, /* external plugin */
-    NUM_BUILTINS /* no more builtins! yay! */
+    ICON = -2,                  /* special case: the traditional laucher item */
+    PLUGIN = -1,                /* external plugin */
+    NUM_BUILTINS                /* no more builtins! yay! */
 };
 
 /* typedefs */

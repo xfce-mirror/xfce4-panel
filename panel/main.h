@@ -20,7 +20,7 @@
 #ifndef __XFCE_MAIN_H__
 #define __XFCE_MAIN_H__
 
-void quit(gboolean force);
-void restart(void);
+void quit (gboolean force);
+void restart (void);
 
 #endif /* __XFCE_MAIN_H__ */

@@ -29,4 +29,3 @@
 #include <debug.h>
 
 #endif /* __XFCE4_H */
-

@@ -22,6 +22,6 @@
 
 #include <xfce-mcs-manager/manager-plugin.h>
 
-void run_xfce_settings_dialog(McsPlugin *mp);
+void run_xfce_settings_dialog (McsPlugin * mp);
 
 #endif /*  __XFCE_SETTINGS_DIALOG_H */

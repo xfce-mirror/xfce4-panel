@@ -25,11 +25,10 @@
 
 #include "xfce_settings.h"
 
-void xfce_write_options(McsManager *sm);
+void xfce_write_options (McsManager * sm);
 
-void xfce_set_options(McsManager *sm);
+void xfce_set_options (McsManager * sm);
 
 extern McsSetting xfce_options[XFCE_OPTIONS];
 
 #endif /* __XFCE_SETTINGS_PLUGIN_H */
-

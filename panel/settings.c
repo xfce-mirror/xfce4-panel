@@ -49,86 +49,90 @@ xmlDocPtr xmlconfig = NULL;
 /*  Configuration
  *  -------------
 */
-static gboolean check_disable_user_config(void)
+static gboolean
+check_disable_user_config (void)
 {
-    const char *var = g_getenv("XFCE_DISABLE_USER_CONFIG");
+    const char *var = g_getenv ("XFCE_DISABLE_USER_CONFIG");
 
-    return (var && !strequal(var, "0"));
+    return (var && !strequal (var, "0"));
 }
 
 /*  Reading xml
  *  -----------
 */
-static xmlDocPtr read_xml_file(void)
+static xmlDocPtr
+read_xml_file (void)
 {
     char *rcfile;
     xmlDocPtr doc = NULL;
 
-    xmlKeepBlanksDefault(0);
+    xmlKeepBlanksDefault (0);
 
-    rcfile = get_read_file(XFCERC);
+    rcfile = get_read_file (XFCERC);
 
-    if(rcfile)
+    if (rcfile)
     {
-        doc = xmlParseFile(rcfile);
-	g_free(rcfile);
+        doc = xmlParseFile (rcfile);
+        g_free (rcfile);
     }
-    
+
     return doc;
 }
 
-static xmlNodePtr get_xml_root(void)
+static xmlNodePtr
+get_xml_root (void)
 {
     xmlNodePtr node = NULL;
-    
+
     /* global xmlDocPtr */
-    if(!xmlconfig)
-        xmlconfig = read_xml_file();
+    if (!xmlconfig)
+        xmlconfig = read_xml_file ();
 
     if (!xmlconfig)
     {
-	g_message("%s: No config file found", PACKAGE);
-	return NULL;
+        g_message ("%s: No config file found", PACKAGE);
+        return NULL;
     }
 
-    node = xmlDocGetRootElement(xmlconfig);
+    node = xmlDocGetRootElement (xmlconfig);
 
-    if(!node)
+    if (!node)
     {
-        g_warning("%s: empty document: %s\n", PACKAGE, xmlconfig->name);
+        g_warning ("%s: empty document: %s\n", PACKAGE, xmlconfig->name);
 
-        xmlFreeDoc(xmlconfig);
-	xmlconfig = NULL;
-	return NULL;
+        xmlFreeDoc (xmlconfig);
+        xmlconfig = NULL;
+        return NULL;
     }
 
-    if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
+    if (!xmlStrEqual (node->name, (const xmlChar *)ROOT))
     {
-        g_warning("%s: wrong document type: %s\n", PACKAGE, xmlconfig->name);
+        g_warning ("%s: wrong document type: %s\n", PACKAGE, xmlconfig->name);
 
-        xmlFreeDoc(xmlconfig);
-	xmlconfig = NULL;
-	return NULL;
+        xmlFreeDoc (xmlconfig);
+        xmlconfig = NULL;
+        return NULL;
     }
 
     return node;
 }
 
-void get_global_prefs(void)
+void
+get_global_prefs (void)
 {
     xmlNodePtr node;
 
-    node = get_xml_root();
+    node = get_xml_root ();
 
     if (!node)
-	return;
-    
+        return;
+
     /* Now parse the xml tree */
-    for(node = node->children; node; node = node->next)
+    for (node = node->children; node; node = node->next)
     {
-        if(xmlStrEqual(node->name, (const xmlChar *)"Panel"))
+        if (xmlStrEqual (node->name, (const xmlChar *)"Panel"))
         {
-            panel_parse_xml(node);
+            panel_parse_xml (node);
 
             break;
         }
@@ -137,86 +141,88 @@ void get_global_prefs(void)
     /* leave the xmldoc open for get_panel_config() */
 }
 
-void get_panel_config(void)
+void
+get_panel_config (void)
 {
     xmlNodePtr node;
 
-    disable_user_config = check_disable_user_config();
+    disable_user_config = check_disable_user_config ();
 
-    node = get_xml_root();
+    node = get_xml_root ();
 
     if (!node)
     {
-	/* create empty items */
-	groups_set_from_xml(NULL);
-	return;
+        /* create empty items */
+        groups_set_from_xml (NULL);
+        return;
     }
-    
+
     /* Now parse the xml tree */
-    for(node = node->children; node; node = node->next)
+    for (node = node->children; node; node = node->next)
     {
-	if (xmlStrEqual(node->name, (const xmlChar *)"Groups"))
-	{
-	    groups_set_from_xml(node);
-	    break;
-	}
+        if (xmlStrEqual (node->name, (const xmlChar *)"Groups"))
+        {
+            groups_set_from_xml (node);
+            break;
+        }
 
-	/* old format */
-        if (xmlStrEqual(node->name, (const xmlChar *)"Left"))
-            old_groups_set_from_xml(LEFT, node);
-        else if (xmlStrEqual(node->name, (const xmlChar *)"Right"))
-            old_groups_set_from_xml(RIGHT, node);
+        /* old format */
+        if (xmlStrEqual (node->name, (const xmlChar *)"Left"))
+            old_groups_set_from_xml (LEFT, node);
+        else if (xmlStrEqual (node->name, (const xmlChar *)"Right"))
+            old_groups_set_from_xml (RIGHT, node);
     }
 
-    xmlFreeDoc(xmlconfig);
+    xmlFreeDoc (xmlconfig);
     xmlconfig = NULL;
 }
 
-void write_panel_config(void)
+void
+write_panel_config (void)
 {
     char *dir;
     char *rcfile;
     xmlNodePtr root;
     static gboolean backup = TRUE;
 
-    disable_user_config = check_disable_user_config();
+    disable_user_config = check_disable_user_config ();
 
-    if(disable_user_config)
+    if (disable_user_config)
         return;
 
-    rcfile = get_save_file(XFCERC);
+    rcfile = get_save_file (XFCERC);
 
-    if(g_file_test(rcfile, G_FILE_TEST_EXISTS))
+    if (g_file_test (rcfile, G_FILE_TEST_EXISTS))
     {
-	if (backup)
-	{
-	    write_backup_file(rcfile);
-	    backup = FALSE;
-	}
-	
+        if (backup)
+        {
+            write_backup_file (rcfile);
+            backup = FALSE;
+        }
+
     }
     else
     {
-        dir = g_path_get_dirname(rcfile);
+        dir = g_path_get_dirname (rcfile);
 
-        if(!g_file_test(dir, G_FILE_TEST_IS_DIR))
-            mkdir(dir, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+        if (!g_file_test (dir, G_FILE_TEST_IS_DIR))
+            mkdir (dir, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
 
-        g_free(dir);
+        g_free (dir);
     }
 
-    xmlconfig = xmlNewDoc("1.0");
-    xmlconfig->children = xmlNewDocRawNode(xmlconfig, NULL, ROOT, NULL);
+    xmlconfig = xmlNewDoc ("1.0");
+    xmlconfig->children = xmlNewDocRawNode (xmlconfig, NULL, ROOT, NULL);
 
     root = (xmlNodePtr) xmlconfig->children;
-    xmlDocSetRootElement(xmlconfig, root);
+    xmlDocSetRootElement (xmlconfig, root);
 
-    panel_write_xml(root);
-    
-    groups_write_xml(root);
+    panel_write_xml (root);
 
-    xmlSaveFormatFile(rcfile, xmlconfig, 1);
+    groups_write_xml (root);
 
-    xmlFreeDoc(xmlconfig);
+    xmlSaveFormatFile (rcfile, xmlconfig, 1);
+
+    xmlFreeDoc (xmlconfig);
     xmlconfig = NULL;
 }

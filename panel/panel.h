@@ -23,28 +23,27 @@
 #include <libxml/tree.h>
 
 /* panel functions */
-void create_panel(void);
-void panel_cleanup(void);
-void panel_add_control(void);
+void create_panel (void);
+void panel_cleanup (void);
+void panel_add_control (void);
 
 /* apply panel settings */
-void panel_set_settings(void);
+void panel_set_settings (void);
 
-void panel_center(int side);
-void panel_set_position(void);
+void panel_center (int side);
+void panel_set_position (void);
 
-void panel_set_orientation(int orientation);
-void panel_set_layer(int layer);
+void panel_set_orientation (int orientation);
+void panel_set_layer (int layer);
 
-void panel_set_size(int size);
-void panel_set_popup_position(int position);
-void panel_set_theme(const char *theme);
+void panel_set_size (int size);
+void panel_set_popup_position (int position);
+void panel_set_theme (const char *theme);
 
-void panel_set_num_groups(int n);
+void panel_set_num_groups (int n);
 
 /* panel data */
-void panel_parse_xml(xmlNodePtr node);
-void panel_write_xml(xmlNodePtr root);
+void panel_parse_xml (xmlNodePtr node);
+void panel_write_xml (xmlNodePtr root);
 
 #endif /* __XFCE_PANEL_H */
-

@@ -23,7 +23,8 @@
 #define CHANNEL "xfce"
 
 /* IMPORTANT: keep this in sync with mcs_client.c */
-enum {
+enum
+{
     XFCE_ORIENTATION,
     XFCE_LAYER,
     XFCE_SIZE,
@@ -33,7 +34,8 @@ enum {
     XFCE_OPTIONS
 };
 
-enum {
+enum
+{
     XFCE_POSITION_BOTTOM,
     XFCE_POSITION_TOP,
     XFCE_POSITION_LEFT,
@@ -43,7 +45,7 @@ enum {
     XFCE_POSITION_NONE,
 };
 
-static char *xfce_settings_names [] = {
+static char *xfce_settings_names[] = {
     "orientation",
     "layer",
     "size",
@@ -53,4 +55,3 @@ static char *xfce_settings_names [] = {
 };
 
 #endif /* __XFCE_SETTINGS_H */
-

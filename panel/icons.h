@@ -25,7 +25,7 @@
 /* launcher and menu icons */
 enum
 {
-    STOCK_ICON = -2, /* used in popup menu */
+    STOCK_ICON = -2,            /* used in popup menu */
     EXTERN_ICON = -1,
     /* general icons */
     DEFAULT_ICON,
@@ -56,7 +56,7 @@ enum
     MINIBUTTONS
 };
 
-enum 
+enum
 {
     DIAG_ICON,
     MENU_ICON,
@@ -65,17 +65,17 @@ enum
 
 #define UNKNOWN_ICON DEFAULT_ICON
 
-void icons_init(void);
+void icons_init (void);
 
-GdkPixbuf *get_pixbuf_by_id(int id);
-GdkPixbuf *get_minibutton_pixbuf(int id);
-GdkPixbuf *get_system_pixbuf(int id);
+GdkPixbuf *get_pixbuf_by_id (int id);
+GdkPixbuf *get_minibutton_pixbuf (int id);
+GdkPixbuf *get_system_pixbuf (int id);
 
-GdkPixbuf *get_pixbuf_from_file(const char *path);
+GdkPixbuf *get_pixbuf_from_file (const char *path);
 
-GdkPixbuf *get_scaled_pixbuf(GdkPixbuf * pb, int size);
+GdkPixbuf *get_scaled_pixbuf (GdkPixbuf * pb, int size);
 
 /* for plugins */
-GdkPixbuf *get_themed_pixbuf(const char *name);
+GdkPixbuf *get_themed_pixbuf (const char *name);
 
 #endif /* __XFCE_ICONS_H__ */

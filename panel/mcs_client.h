@@ -20,10 +20,10 @@
 #ifndef __XFCE_MCSCLIENT_H
 #define __XFCE_MCSCLIENT_H
 
-void mcs_watch_xfce_channel(void);
+void mcs_watch_xfce_channel (void);
 
-void mcs_stop_watch(void);
+void mcs_stop_watch (void);
 
-void mcs_dialog(const char *channel);
+void mcs_dialog (const char *channel);
 
 #endif /* __XFCE_MCSCLIENT_H */

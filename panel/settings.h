@@ -23,11 +23,11 @@
 #include <libxml/tree.h>
 #include "global.h"
 
-void write_panel_config(void);
+void write_panel_config (void);
 
-void get_global_prefs(void);
+void get_global_prefs (void);
 
-void get_panel_config(void);
+void get_panel_config (void);
 
 extern xmlDocPtr xmlconfig;
 

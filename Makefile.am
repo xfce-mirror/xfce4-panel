@@ -4,7 +4,7 @@ confdir = $(sysconfdir)/xfce4
 
 conf_DATA = xfce4rc
 
-EXTRA_DIST = xfce4rc.in xfce4.spec.in
+EXTRA_DIST = xfce4rc.in xfce4.spec.in HACKING
 
 SUBDIRS = po doc icons panel settings plugins themes
 

@@ -34,10 +34,10 @@ extern "C"
 
 /* prototype for plugin init function 
  * (must be implemented by plugin) */
-G_MODULE_EXPORT void xfce_control_class_init(ControlClass *control);
+    G_MODULE_EXPORT void xfce_control_class_init (ControlClass * control);
 
 /* plugin version check function (implemented by xfce4 in controls.c) */
-gchar *xfce_plugin_check_version(gint version);
+    gchar *xfce_plugin_check_version (gint version);
 
 /* nifty idea, I think from dia:
  * every module just has to include this header and put 

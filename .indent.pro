@@ -1,0 +1,13 @@
+-bad
+-bap
+-i4
+-lp
+-bli0
+-cli4
+-nut
+-psl
+-nbbo
+-ncs
+-pcs
+-nprs
+-l80

@@ -45,30 +45,29 @@ struct _Item
 };
 
 /* special menu item */
-void create_addtomenu_item(Item * mi);
-    
+void create_addtomenu_item (Item * mi);
+
 /* menu items */
-Item *menu_item_new(PanelPopup * pp);
+Item *menu_item_new (PanelPopup * pp);
 
-void create_menu_item(Item * mi);
+void create_menu_item (Item * mi);
 
-void menu_item_set_popup_size(Item *item, int size);
+void menu_item_set_popup_size (Item * item, int size);
 
 /*  panel control interface for panel items */
-void create_panel_item(Control * control);
+void create_panel_item (Control * control);
 
-void panel_item_class_init(ControlClass *cc);
+void panel_item_class_init (ControlClass * cc);
 
 /* common functions */
-void item_free(Item * item);
+void item_free (Item * item);
 
-void item_set_theme(Item *item, const char *theme);
+void item_set_theme (Item * item, const char *theme);
 
-void item_apply_config(Item *item);
+void item_apply_config (Item * item);
 
-void item_read_config(Item *item, xmlNodePtr node);
+void item_read_config (Item * item, xmlNodePtr node);
 
-void item_write_config(Item *item, xmlNodePtr node);
+void item_write_config (Item * item, xmlNodePtr node);
 
 #endif /* __XFCE_ITEMS_H */
-
