@@ -242,12 +242,17 @@ void clock_set_style(PanelControl * pc, int style)
         gtk_widget_set_name(clock->frame, "gxfce_color2");
 	gtk_widget_set_name(clock->clock, "gxfce_color2");
         gtk_widget_set_name(clock->eventbox, "gxfce_color2");
+	if(XFCE_CLOCK(clock->clock)->mode == XFCE_CLOCK_ANALOG)
+            gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
+	else
+	    gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
     }
     else
     {
         gtk_widget_set_name(clock->frame, "gxfce_color4");
 	gtk_widget_set_name(clock->clock, "gxfce_color4");
         gtk_widget_set_name(clock->eventbox, "gxfce_color4");
+	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
     }
 }
 
