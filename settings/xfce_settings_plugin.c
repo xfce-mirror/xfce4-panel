@@ -29,6 +29,8 @@
 #include <string.h>
 #endif
 
+#include <sys/stat.h>
+
 #include <stdlib.h>
 
 #include <gtk/gtk.h>
@@ -174,12 +176,23 @@ old_xml_read_options (const char *path)
 void
 xfce_write_options (McsManager * sm)
 {
-    char *file;
+    char *file, *dir;
     
-    file = xfce_get_userfile ("settings", "panel.xml", NULL);
-	
-    mcs_manager_save_channel_to_file (sm, CHANNEL, file);
+    /* this initializes base directory, but not settings dir */
+    dir = xfce_get_userfile ("settings", NULL);
+    file = g_build_filename (dir, "panel.xml", NULL);
+    
+    if (!g_file_test (dir, G_FILE_TEST_IS_DIR) 
+	&& mkdir (dir, S_IRUSR | S_IWUSR | S_IXUSR) < 0)
+    {
+	g_critical ("Couldn't create directory %s", dir);
+    }
+    else
+    {
+	mcs_manager_save_channel_to_file (sm, CHANNEL, file);
+    }
 
+    g_free (dir);
     g_free (file);
 }
 
