@@ -1,30 +1,39 @@
 TODO
 ----
+* [DONE] unload unused plugins 
+* plugin library
+  - with API docs
+* smarter resize/move
+  - [DONE] popup arrow direction
+  - [DONE] keep panel on same x/y alignment
+  - save 'centered' state to better keep the panel aligned?
+* [DONE] use icon theme spec
+* [DONE] Move the exec_cmd stuff to libxfce4util/libxfcegui4
+* [DONE] Move to glib xml parsing. More work, but more speed / 
+  reduced memory usage
+* multiple panels
+  - Most settings should become per panel
+  - multiscreen
+  - taskbar == panel instance?
+* beter DND support
+  - add/remove
+  - move
 * gtk widgets (panel, controls)
   - include move handles (steal code form GtkHandlebox)
   - use properties and signals for settings
   - perhaps use interfaces or derived widgets for controls
-* unload unused plugins
-* plugin library
-  - with API docs
-* smarter resize/move
-  - popup arrow direction
-  - keep panel on same x/y alignment
-* multiple panels
-  - Most settings should become per panel
-* use icon theme spec
-* drag to add/remove
-* drag to move
-* taskbar == panel instance?
-* Move the exec_cmd stuff to libxfce4util/libxfcegui4
 
 Ideas
 -----
 * plugins:
   - dockapps support
   - iconbox / task list
-* Move to glib xml parsing. More work, but more speed / 
-  reduced memory usage
 * 2 plugins side by side 
    (like systembuttons)
-
+* change icon themes to use a mapping between categories and icon names that
+  can be looked up using the icon theme spec?
+  e.g.:
+  [Xfce panel icon theme]
+  network=gnome-network
+  file1=xdg:folder
+  ...

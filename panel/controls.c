@@ -91,6 +91,17 @@ static int unloading = 0;
 /* not static, must be available in panel.c for handle menu */
 Control *popup_control = NULL;
 
+/* convenience function */
+static void
+wait_for_unloading (void)
+{
+    while (unloading)
+    {
+	DBG ("unloading in progress");
+	g_usleep (200*1000);
+    }
+    
+}
 
 /*  ControlClass and ControlClassInfo 
  *  ---------------------------------
@@ -189,12 +200,8 @@ control_class_info_create_control (ControlClassInfo *info, Control *control)
 	return TRUE;
     }
     
-    while (unloading)
-    {
-	DBG ("unloading in progress");
-	g_usleep (200*1000);
-    }
-    
+    wait_for_unloading();
+
     if (info->class->id == PLUGIN && info->refcount == 0 && 
 	info->class->gmodule == NULL)
     {
@@ -269,17 +276,13 @@ load_plugin (gchar * path)
 	if (g_slist_find_custom (control_class_info_list, 
 		    		 cc->name, compare_class_info_by_name))
 	{
-	    DBG ("\talready loaded");
-	    
 	    control_class_free (cc);
 	    control_class_info_free (info);
 	}
 	else
 	{
-	    DBG ("\tok");
-	    
 	    control_class_info_list = 
-		g_slist_prepend (control_class_info_list, info);
+		g_slist_append (control_class_info_list, info);
 	
 	    cc->filename = g_path_get_basename (path);
 	    info->path = g_strdup (path);
@@ -332,12 +335,50 @@ add_plugin_classes (void)
 {
     char **dirs, **d;
 
+    wait_for_unloading ();
+    unloading++;
+    
     dirs = get_plugin_dirs ();
 
     for (d = dirs; *d; d++)
 	load_plugin_dir (*d);
 
+    unloading--;
     g_strfreev (dirs);
+}
+
+static void 
+clean_plugin_classes (void)
+{
+    GSList *li, *prev;
+
+    prev = control_class_info_list;
+    
+    for (li = control_class_info_list->next; li; li = li->next)
+    {
+	ControlClassInfo *info = li->data;
+	
+	if (g_file_test (info->path, G_FILE_TEST_EXISTS)
+	    || info->refcount > 0)
+	{
+	    DBG ("plugin %s exists, %d in use", info->caption, info->refcount);
+	    prev = li;
+	}
+	else
+	{
+	    GSList *tmp;
+	    
+	    DBG ("plugin %s (%s) was removed", info->name, info->path);
+	    
+	    tmp = li;
+	    li = prev;
+	    li->next = tmp->next;
+	    g_slist_free_1 (tmp);
+
+	    control_class_free (info->class);
+	    control_class_info_free (info);
+	}
+    }
 }
 
 /*  builtin launcher class */
@@ -356,7 +397,7 @@ add_launcher_class (void)
     info->name = g_strdup (cc->name);
     info->caption = g_strdup (cc->caption);
 
-    control_class_info_list = g_slist_append (control_class_info_list, info);
+    control_class_info_list = g_slist_append (NULL, info);
 }
 
 /* module unloading timeout */
@@ -404,9 +445,6 @@ control_class_list_init (void)
     add_launcher_class ();
     add_plugin_classes ();
 
-    /* reverse to get correct order */
-    control_class_info_list = g_slist_reverse (control_class_info_list);
-
     unload_id = 
 	g_timeout_add (UNLOAD_TIMEOUT, (GSourceFunc) unload_modules, NULL);
 }
@@ -421,6 +459,7 @@ control_class_list_cleanup (void)
     if (unload_id)
     {
 	g_source_remove (unload_id);
+	unload_id = 0;
     }
     
     for (li = control_class_info_list; li; li = li->next)
@@ -497,13 +536,21 @@ control_class_unref (ControlClass *cclass)
 GSList *
 get_control_info_list (void)
 {
-    GSList *li;
-    GSList *infolist = NULL;
+    GSList *li, *infolist = NULL;
 
+    /* good place to remove plugins that are not in use and were
+     * uninstalled after the panel was started */
+    clean_plugin_classes ();
+	
+    /* update module list */
+    add_plugin_classes ();
+    
     for (li = control_class_info_list; li; li = li->next)
     {
 	ControlClassInfo *info = li->data;
-	ControlInfo *ci = g_new0 (ControlInfo, 1);
+	ControlInfo *ci;
+	
+	ci = g_new0 (ControlInfo, 1);
 
 	ci->name = g_strdup (info->name);
 	ci->caption = g_strdup (info->caption);
