@@ -1,6 +1,18 @@
 NEWS for xfce4-panel
 ====================
 
+4.1.99.3 (4.2-RC3)
+==================
+- Fix type mismatch when writing backup files. Fixes infinite loop on non-x86.
+  Patch by Michele Baldessari <michele@pupazzo.org> (Jasper)
+
+- Fix edge snapping for very big panels (Jasper)
+
+- Properly setting dock type hint (Olivier)
+
+- Translation updates (Jean-Francois)
+
+
 4.1.99.2 (4.2-RC2)
 ==================
 - Increase plugin API version. Plugins build against a panel older than RC1
