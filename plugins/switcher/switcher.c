@@ -945,6 +945,7 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 
 	if (i == 1)
 	{
+	    int s;
 	    GtkOrientation gor = (settings.orientation == VERTICAL) ? 
 				 GTK_ORIENTATION_VERTICAL : 
 				 GTK_ORIENTATION_HORIZONTAL;
@@ -963,6 +964,13 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 	    gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
 		    	       TRUE, TRUE, 2);
 	    gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 1);
+	
+	    s = icon_size[settings.size];
+
+	    if (settings.orientation == HORIZONTAL)
+		gtk_widget_set_size_request(sw->netk_pager, -1, s);
+	    else
+		gtk_widget_set_size_request(sw->netk_pager, s, -1);
 	}
     }
 
@@ -1361,6 +1369,7 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
     
     if (graphical)
     {
+	int s;
 	GtkOrientation gor = (settings.orientation == VERTICAL) ? 
 	    			GTK_ORIENTATION_VERTICAL : 
 	    			GTK_ORIENTATION_HORIZONTAL;
@@ -1373,6 +1382,13 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 	gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
 			   TRUE, TRUE, 2);
 	gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 1);
+	
+	s = icon_size[settings.size];
+
+	if (settings.orientation == HORIZONTAL)
+	    gtk_widget_set_size_request(sw->netk_pager, -1, s);
+	else
+	    gtk_widget_set_size_request(sw->netk_pager, s, -1);
     }
     else
     {
