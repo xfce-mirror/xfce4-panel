@@ -175,6 +175,7 @@ static void show_popup(PanelPopup * pp)
     int w, h;
     gboolean vertical = settings.orientation == VERTICAL;
     int pos = settings.popup_position;
+    GtkAllocation alloc;
 
     if(open_popup)
         hide_popup(open_popup);
@@ -200,13 +201,10 @@ static void show_popup(PanelPopup * pp)
 
     gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
 
-/*    if(!GTK_WIDGET_REALIZED(pp->button))
-        gtk_widget_realize(pp->button);
-*/
-    gtk_widget_size_request(pp->button, &req1);
-    xbutton = pp->button->allocation.x;
-    ybutton = pp->button->allocation.y;
-
+    alloc = pp->button->allocation;
+    xbutton = alloc.x;
+    ybutton = alloc.y;
+    
     p = gtk_widget_get_parent_window(pp->button);
     gdk_window_get_root_origin(p, &xparent, &yparent);
 
@@ -237,20 +235,20 @@ static void show_popup(PanelPopup * pp)
     if (vertical)
     {
 	/* left or right */
-	if (pos == RIGHT && x + req1.width + req2.width <= w)
+	if (pos == RIGHT && x + alloc.width + req2.width <= w)
 	{
-	    x = x + req1.width;
-	    y = y + req1.height - req2.height;
+	    x = x + alloc.width;
+	    y = y + alloc.height - req2.height;
 	}
-	else if (pos == LEFT && x - req2.width < 0)
+	else if (x - req2.width < 0)
 	{
-	    x = x + req1.width;
-	    y = y + req1.height - req2.height;
+	    x = x + alloc.width;
+	    y = y + alloc.height - req2.height;
 	}
 	else
 	{
 	    x = x - req2.width;
-	    y = y + req1.height - req2.height;
+	    y = y + alloc.height - req2.height;
 	}
 
 	/* check if it fits upwards */
@@ -260,19 +258,19 @@ static void show_popup(PanelPopup * pp)
     else
     {
 	/* up or down */
-	if (pos == BOTTOM && y + req1.height + req2.height <= h)
+	if (pos == BOTTOM && y + alloc.height + req2.height <= h)
 	{
-	    x = x + req1.width / 2 - req2.width / 2;
-	    y = y + req1.height;
+	    x = x + alloc.width / 2 - req2.width / 2;
+	    y = y + alloc.height;
 	}
-	else if (pos == TOP && y - req2.height < 0)
+	else if (y - req2.height < 0)
 	{
-	    x = x + req1.width / 2 - req2.width / 2;
-	    y = y + req1.height;
+	    x = x + alloc.width / 2 - req2.width / 2;
+	    y = y + alloc.height;
 	}
 	else
 	{
-	    x = x + req1.width / 2 - req2.width / 2;
+	    x = x + alloc.width / 2 - req2.width / 2;
 	    y = y - req2.height;
 	}
 
