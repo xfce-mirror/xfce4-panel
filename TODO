@@ -24,6 +24,9 @@ Major features for 4.0
   new account for panel orientation
 * Idem for panel positioning and style
   settings.
+* Update module API for variable sized modules
+  void set_orientation(PanelControl *pc, int orientation);
+  void minimum_size(PanelControl *pc, int size, int *width, int *height);
 
 Nice to have for 4.0
 --------------------
