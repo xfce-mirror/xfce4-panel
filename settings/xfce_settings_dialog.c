@@ -821,11 +821,7 @@ static void dialog_response(GtkWidget *dialog, int response)
 
 void run_xfce_settings_dialog(McsPlugin *mp)
 {
-    GtkWidget *header, *frame, *vbox, *button;
-/*    GtkWidget *notebook, *label;
-    char *markup;*/
-
-    mcs_manager = mp->manager;
+    GtkWidget *button, *header, *hbox, *vbox, *sep;
 
     if(is_running)
     {
@@ -835,14 +831,12 @@ void run_xfce_settings_dialog(McsPlugin *mp)
 
     is_running = TRUE;
 
+    mcs_manager = mp->manager;
+
     xfce_create_backup();
 
-    /* we may have to recreate the panel so save the changes now */
-    dialog =
-        gtk_dialog_new_with_buttons(_("XFce Panel Preferences"),
-                                    NULL,
-                                    GTK_DIALOG_NO_SEPARATOR,
-                                    NULL);
+    dialog = gtk_dialog_new_with_buttons(_("XFce Panel Preferences"),
+                                    	 NULL, GTK_DIALOG_NO_SEPARATOR, NULL);
 
     gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
 
@@ -855,84 +849,53 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
 
-    /* pretty header */
-    header = create_header(mp->icon, _("Panel settings"));
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), header, 
-	    	       TRUE, TRUE, 0);
+    g_signal_connect(dialog, "response", G_CALLBACK(dialog_response), dialog);
+    g_signal_connect_swapped(dialog, "delete_event", 
+	    		     G_CALLBACK(dialog_delete), dialog);
     
-    /* main notebook 
-    notebook = gtk_notebook_new();
-    gtk_widget_show(notebook);
-    gtk_container_set_border_width(GTK_CONTAINER(notebook), 5);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), notebook,
+    /* pretty header */
+    vbox = GTK_DIALOG(dialog)->vbox;
+    header = create_header(mp->icon, _("XFce Panel Settings"));
+    gtk_box_pack_start(GTK_BOX(vbox), header, TRUE, TRUE, 0);
+    add_spacer(GTK_BOX(vbox));
+ 
+    /* hbox */
+    hbox = gtk_hbox_new(FALSE, 8);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
                        TRUE, TRUE, 0);
-*/
-    /* first notebook page */
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
-    gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
-    gtk_widget_show(frame);
 
-/*    markup = g_strconcat("<span> ", _("General"), " </span>", NULL);
-    label = gtk_label_new(NULL);
-    gtk_label_set_markup(GTK_LABEL(label), markup);
-    g_free(markup);
-    gtk_widget_show(label);
-*/
-/*    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
-*/
-    vbox = gtk_vbox_new(FALSE, 2);
-    gtk_widget_show(vbox);
-    gtk_container_add(GTK_CONTAINER(frame), vbox);
-
-    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-
-/*    add_header(_("Panel controls"), GTK_BOX(vbox));
-    add_controls_box(GTK_BOX(vbox));
-    add_spacer(GTK_BOX(vbox));
-*/
-    add_header(_("Position"), GTK_BOX(vbox));
-    add_position_box(GTK_BOX(vbox));
-    add_spacer(GTK_BOX(vbox));
-
-/*    g_object_unref(sg);
-*/
-    /* second notebook page */
-/*    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
-    gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
-    gtk_widget_show(frame);
-
-    markup = g_strconcat("<span> ", _("Appearance"), " </span>", NULL);
-    label = gtk_label_new(NULL);
-    gtk_label_set_markup(GTK_LABEL(label), markup);
-    g_free(markup);
-    gtk_widget_show(label);
-
-    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
-
-    vbox = gtk_vbox_new(FALSE, 2);
-    gtk_widget_show(vbox);
-    gtk_container_add(GTK_CONTAINER(frame), vbox);
-
-    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-*/
     /* Appearance */
+    vbox = gtk_vbox_new(FALSE, 8);
+    gtk_widget_show(vbox);
+    gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
+
+    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+
     add_header(_("Appearance"), GTK_BOX(vbox));
     add_style_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 
     g_object_unref(sg);
 
-/*    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), lastpage);
-*/    
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), frame,
-                       TRUE, TRUE, 0);
+    /* Separator */
+    sep = gtk_vseparator_new();
+    gtk_widget_show(sep);
+    gtk_box_pack_start(GTK_BOX(hbox), sep, TRUE, TRUE, 0);
     
-    g_signal_connect(dialog, "response", G_CALLBACK(dialog_response), dialog);
-    g_signal_connect_swapped(dialog, "delete_event", 
-	    		     G_CALLBACK(dialog_delete), dialog);
-    
+    /* Position */
+    vbox = gtk_vbox_new(FALSE, 8);
+    gtk_widget_show(vbox);
+    gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
+
+    sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
+
+    add_header(_("Position"), GTK_BOX(vbox));
+    add_position_box(GTK_BOX(vbox));
+/*    add_spacer(GTK_BOX(vbox));*/
+
+    g_object_unref(sg);
+
     gtk_widget_show(dialog);
 }
 
