@@ -320,6 +320,17 @@ panel_set_hidden (Panel * p, gboolean hide)
 	y = pos.y;
     }
 
+    /* keep inside the screen */
+    if (x < 0)
+	x = 0;
+    else if (x > maxx - HIDDEN_SIZE)
+	x = maxx - HIDDEN_SIZE;
+
+    if (y < 0)
+	y = 0;
+    else if (y > maxy - HIDDEN_SIZE)
+	y = maxy - HIDDEN_SIZE;
+    
     DBG("\n\tMove panel: (x=%d,y=%d) => (x=%d,y=%d)\n", pos.x, pos.y, x, y);
 
     if (hide)
