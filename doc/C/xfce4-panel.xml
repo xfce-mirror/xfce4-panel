@@ -1,10 +1,9 @@
 <?xml version='1.0'?> 
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
-  <!ENTITY copyright SYSTEM "copyright.xml"> 
-  <!ENTITY manrevision "0.99"> 
-  <!ENTITY date "Aug 2004"> 
-  <!ENTITY appversion "4.1.x"> 
+  <!ENTITY manrevision "1.1"> 
+  <!ENTITY date "Sep 2004"> 
+  <!ENTITY appversion "4.2"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
 
@@ -41,7 +40,7 @@
     <author>
       <firstname>Jasper</firstname> <surname>Huijsmans</surname>
       <affiliation>
-	<address><email>huysmans@users.sourceforge.net</email></address>
+	<address><email>jasper@xfce.org</email></address>
       </affiliation>
     </author>
 
@@ -89,11 +88,10 @@ maintainers, etc. Commented out by default.
   <para>
     The Xfce 4 panel is part of the <ulink url="http://www.xfce.org" 
       type="html">Xfce 4 Desktop Environment</ulink> and features program 
-    launchers, panel menus, a clock, a desktop switcher and more. The actual 
-    command to run is &app;. Many aspects of the panel can be configured 
-    through graphical dialogs. This manual should 
-    provide you with all necessary information on how to adjust the panel to 
-    your liking.
+    launchers, panel menus, a clock, a desktop switcher and more. Many 
+    aspects of the panel can be configured through graphical dialogs. This 
+    manual should provide you with all necessary information on how to adjust 
+    the panel to your liking.
   </para>
 
 </sect1>
@@ -104,7 +102,13 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-getting-started">
   <title>Getting Started</title>
   
-  <para>When you start the panel you will see a bar apearing at the bottom
+  <para>You will usually start the panel as part of your Xfce session, using
+    the <application>startxfce4</application> script. The command that will be
+    run for the panel is &app;.
+  </para>
+
+  <para>
+    When you start the panel you will see a bar appearing at the bottom
     of your screen, looking like this:
   </para>
 
@@ -121,9 +125,9 @@ maintainers, etc. Commented out by default.
 	</imageobject> 
 	--> 
 	<textobject>
-	  <phrase>Shows Xfce panel default configuration. Contains several
-	    launchers, a new mail monitor, a clock and a desktop pager.
-	    Also shows an opened panel menu.
+	  <phrase>The Xfce Panel default configuration: several launchers, 
+	    a new mail monitor, a clock and a desktop pager; also includes
+	    an opened panel menu.
 	  </phrase>
 	</textobject>
       </mediaobject>
@@ -131,14 +135,19 @@ maintainers, etc. Commented out by default.
   </figure>
 
   <para>
-    The figure shows the default panel configuration with one open
-    panel menu and the mouse hovering over a launcher button, making it show
-    a tooltip.
+    The figure shows the default panel configuration with one open panel 
+    menu. Hovering the mouse over an item will show a tooltip. The Xfce 
+    Panel makes extensive use of left and right mouse buttons. Left clicking
+    performs the default action of an item, while right-clicking usually
+    brings up a context menu. Shift + left click may commonly be used 
+    instead of a right-click. Note that this manual assumes the use of a
+    right-handed mouse.
   </para>
 
   <para>There is a move handle on each side of the panel. You can use it to
-    drag the panel anywhere on the screen. Clicking with the right mouse
-    button (or Shift + left click) on one of them shows a popup menu ... 
+    drag the panel anywhere on the edges of the screen. Dragging over half
+    of the screen will move the panel to the opposite screen edge. Clicking 
+    with the right mouse button on one of them shows a popup menu ... 
     Go on, try it ;-)
   </para>
 
@@ -155,7 +164,7 @@ maintainers, etc. Commented out by default.
 	</imageobject> 
 	--> 
 	<textobject>
-	  <phrase>Shows move handle popup menu.</phrase>
+	  <phrase>Move handle popup menu.</phrase>
 	</textobject>
       </mediaobject>
     </screenshot>
@@ -164,16 +173,10 @@ maintainers, etc. Commented out by default.
   <para>The area between the move handles contains panel items. The available 
     items are are described in the 
     "<ulink url="#panel-items">Panel Items</ulink>" section. Most items 
-    perform an action when clicked. Configuration of panel items is done from
-    a right-click popup menu.
-  </para>
-
-  <para>Right-clicking on an item will popup a menu from which you can open a
-    properties dialog, remove the item or add a new item. Items can also be 
-    added from the right-click menu on one of the move handles (see above). 
-    A submenu shows a list of available item types that you can choose from.
-    When you add a new item, the panel will imediately open its properties
-    dialog, so you can change the item's options and position on the panel.
+    perform an action when clicked. Right-clicking on an item will popup a 
+    menu from which you can open a properties dialog, remove the item or 
+    add a new item. Items can also be added from the right-click menu on one 
+    of the move handles (see above). 
   </para>
 
   <figure id="item-popup-fig">
@@ -189,7 +192,32 @@ maintainers, etc. Commented out by default.
 	</imageobject> 
 	--> 
 	<textobject>
-	  <phrase>Shows item popup menu.</phrase>
+	  <phrase>Item popup menu.</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>When you want to add an item, a dialog is opened showing all
+    available panel items. Some items can appear only once in the panel,
+    e.g. the system tray, and they will appear greyed out when one is
+    already present.
+  </para>
+  
+  <figure id="add-item-dialog-fig">
+    <title>Add item dialog</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/add-item-dialog.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/add-item-dialog.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Dialog with available panel items</phrase>
 	</textobject>
       </mediaobject>
     </screenshot>
@@ -197,8 +225,8 @@ maintainers, etc. Commented out by default.
 
   <para>
     Global panel preferences can be changed from the Xfce 4 Settings 
-    Manager, which can be started either from a panel laucher, or by choosing 
-    the 'Properties...' entry from the right-click menu on the move handles. 
+    Manager, which can be started either from a panel launcher, or by running
+    <application>xfce-settings-show</application>.
     See "<ulink url="#panel-settings">Panel Preferences</ulink>" for an 
     explanation of the available options.
   </para>
@@ -213,8 +241,8 @@ maintainers, etc. Commented out by default.
 
   <para>
     The Xfce 4 panel has the possibility to load external plugins as well
-    as builtin ones. In this section we will only decribe panel items that are
-    installed with the panel.
+    as builtin ones. In this section we will only describe panel items that 
+    are installed with the panel.
   </para>
   
   <para>
@@ -226,6 +254,7 @@ maintainers, etc. Commented out by default.
   <itemizedlist>
     <listitem>Change the position of the item on the panel.</listitem>
     <listitem>Remove the item. </listitem>
+    <listitem>Close the dialog. </listitem>
   </itemizedlist>
 
 
@@ -239,6 +268,18 @@ maintainers, etc. Commented out by default.
 
     <variablelist>
       <varlistentry>
+	<term>Icon</term>
+	<listitem>The icons used by the panel will follow the icon theme
+	  you choose from the 
+	  <ulink url="xfce-mcs-plugins#ui-settings">user interface
+	  settings dialog</ulink>. Of course you can also choose a custom
+	  icon, either by browsing the file system from the button next
+	  to the entry or by dragging an image on the preview area from
+	  a file manager.
+	</listitem>
+      </varlistentry>
+      
+      <varlistentry>
 	<term>Command</term>
 	<listitem>You can type the command to run or browse the file system. 
 	  There is an option to start in a terminal and one to use startup
@@ -246,13 +287,6 @@ maintainers, etc. Commented out by default.
 	  show an hourglass while the program is loading. But, the application
 	  has to support that and not many program do at the moment. Programs
 	  build with Gtk 2.2, should support it.
-	</listitem>
-      </varlistentry>
-      
-      <varlistentry>
-	<term>Icon</term>
-	<listitem>The icons used by the panel will follow the icon theme you choose from
-	  the <ulink url="xfce-mcs-plugins#ui-settings">user interface settings dialog</ulink>. Of course you can also choose a custom icon, either by browsing the file system from the button next to the entry or by dropping an image on the preview area from a file manager.
 	</listitem>
       </varlistentry>
       
@@ -337,12 +371,18 @@ maintainers, etc. Commented out by default.
   <sect2 id="mailcheck-item">
     <title>Mail Check</title>
 
-    <para>The mailcheck item monitors your inbox, or any other mailbox you
-      want, as long as it is in mbox format. The mailbox icon will follow
+    <para>The mail checker monitors a mailbox for incoming mail. The
+      mailbox can be in mbox or Maildir format. For advanced usage you can
+      also provide a remote POP3 mailbox if you use the following format for
+      the mailbox entry: <option>pop3://user:password@server</option>.
+    </para>
+
+    <para>The mailbox icon will follow
       your icon theme. You can choose the location of the mailbox, the
       command to run when you click on the button and the interval between
       checks. The command has the same options as the launcher item command
       (see <ulink url="#launcher-item" type="html">above</ulink>).
+      You can also choose a command to run when new mail arrives.
     </para>
       
     <figure id="mailcheck-fig">
@@ -360,7 +400,7 @@ maintainers, etc. Commented out by default.
 	  </imageobject> 
 	  --> 
 	  <textobject>
-	    <phrase>Shows properties dialog for mailcheck item.</phrase>
+	    <phrase>Shows properties dialog for mail checker item.</phrase>
 	  </textobject>
 	</mediaobject>
       </screenshot>
@@ -377,8 +417,8 @@ maintainers, etc. Commented out by default.
       and a graphical pager that shows a miniature view of the desktops and
       even allows you to move windows to another workspace by dragging the
       mini-window in the pager. The graphical pager also allows you to
-      change workspaces by using the mouse scrollwheel, when you hold the
-      mouse over it.</para>
+      change workspaces by using the mouse scrollwheel.
+    </para>
     
     <figure id="nooptions-fig">
       <title>Item without options</title> 
@@ -408,23 +448,21 @@ maintainers, etc. Commented out by default.
   <sect2 id="systembuttons-item">
     <title>System Buttons</title>
 
-    <para>A systembuttons item shows one or two buttons wich can perform
+    <para>A systembuttons item shows one or two buttons which can perform
       special system actions. The buttons follow your panel icon theme.
       There are four buttons available:</para>
 
     <variablelist>
       <varlistentry>
 	<term>Lock</term>
-	<listitem>Runs the <application>xfrun4</application> script that
+	<listitem>Runs the <application>xflock4</application> script that
 	  will attempt to lock the screen using either xscreensaver or if
 	  that fails xlock.
 	</listitem>
       </varlistentry>
       <varlistentry>
 	<term>Exit</term>
-	<listitem>This will exit the panel and usually also end your X
-	  session (when you used <application>startxfce4</application> or 
-	  put the panel at the end of your X startup file).
+	<listitem>This will popup a logout dialog to end your Xfce session.
 	</listitem>
       </varlistentry>
       <varlistentry>
@@ -436,7 +474,7 @@ maintainers, etc. Commented out by default.
       <varlistentry>
 	<term>Setup</term>
 	<listitem>Pressing the setup button will open the Xfce settings
-	  manager dialog, from which you have acces to the settings for all
+	  manager dialog, from which you have access to the settings for all
 	  Xfce components as well as some system settings, such as mouse
 	  behaviour and user interface settings.
 	</listitem>
@@ -492,13 +530,13 @@ maintainers, etc. Commented out by default.
   <para>Panel launcher items can have a menu associated with it, which can
     be opened by clicking on the small arrow button next to the item. The
     actual position of these popup buttons is configurable from the global
-    preferences dialog. You can also open the menu by pressing the laucher
+    preferences dialog. You can also open the menu by pressing the launcher
     button and holding it down. After a short delay the menu will open.
   </para>
 
   <para>Use the 'Add launcher' item at the top of a panel menu to add
     a new item or drag an executable to this item from a file manager.  
-    To remove items from a subpanel use the 'Remove' button in the item 
+    To remove items from a panel menu use the 'Remove' button in the  
     properties dialog. 
   </para>
 
@@ -509,8 +547,8 @@ maintainers, etc. Commented out by default.
   </para>
 
   <para>The properties dialog for a menu item is opened immediately
-    when clicking the right mouse button (or Shift+left click). The dialog 
-    itself is very similar to the dialog for launcher type panel items.
+    when clicking the right mouse button. The dialog itself is very similar 
+    to the dialog for launcher type panel items.
   </para>
 
   <figure id="menuitem-fig">
@@ -544,9 +582,9 @@ maintainers, etc. Commented out by default.
   <title>Panel Preferences</title>
 
   <para>The properties dialog for the Xfce 4 Panel can be opened from
-  the Xfce 4 Settings Manager, which can be started from a panel launcher. 
-  The panel right-clic menu also provides direct access to the panel 
-  properties dialog.</para>
+    the Xfce 4 Settings Manager or from the right-click menu on one of the
+    panel move handles.
+  </para>
 
   <figure id="panel-settings-fig">
     <title>Panel Settings</title> 
@@ -578,16 +616,15 @@ maintainers, etc. Commented out by default.
 	<term>Size</term> 
 	<listitem>
 	  <para>There are four panel sizes available: small, 
-	    medium big and huge. Small is the default.
+	    medium big and huge. Medium is the default.
 	  </para>
 	</listitem>
       </varlistentry> 
       <varlistentry>
 	<term>Orientation</term> 
 	<listitem>
-	  <para>An exciting new feature of the Xfce 4 Panel is the
-	    ability to put it in a vertical orientation as well as
-	    the standard horizontal layout.
+	  <para>The Xfce 4 Panel can be set to a vertical orientation as well 
+	    as the standard horizontal layout.
 	  </para>
 	</listitem>
       </varlistentry> 
@@ -596,7 +633,7 @@ maintainers, etc. Commented out by default.
 	<listitem>
 	  <para>This option change the position of the buttons that open 
 	    a panel menu. It can be above, below, to the left or to the 
-	    right of the panel item.
+	    right of their associated panel item.
 	  </para>
 	</listitem>
       </varlistentry> 
@@ -612,10 +649,12 @@ maintainers, etc. Commented out by default.
       <varlistentry>
 	<term>Always on top</term> 
 	<listitem>
-      <para>If you choose always on top option, the panel frame will always appear above other windows, and maximized windows won't cover the panel area.</para>
+	  <para>If you choose the always on top option, the panel frame will 
+	    always appear above other windows, and maximized windows won't 
+	    cover the panel area.
+	  </para>
 	</listitem>
-		</varlistentry>
-
+      </varlistentry>
 
       <varlistentry>
 	<term>Autohide</term> 
@@ -637,9 +676,8 @@ maintainers, etc. Commented out by default.
   <title>About &app;</title>
 
   <para>&app; was written by Jasper Huijsmans 
-    (<email>huysmans@users.sourceforge.net</email>). To find more 
-    information, please visit the 
-    <ulink url="http://www.xfce.org" type="http">Xfce web site</ulink>. 
+    (<email>jasper@xfce.org</email>). To find more information, please visit 
+    the <ulink url="http://www.xfce.org" type="http">Xfce web site</ulink>. 
   </para>
 
   <para>To report a bug or make a suggestion regarding this application or

@@ -54,10 +54,12 @@ xmlDocPtr xmlconfig = NULL;
 static gboolean
 check_disable_user_config (void)
 {
-    const char *var = g_getenv ("XFCE_DISABLE_USER_CONFIG");
+    const char *var;
     XfceKiosk *kiosk;
     gboolean result;
 
+    var = g_getenv ("XFCE_DISABLE_USER_CONFIG");
+    
     kiosk = xfce_kiosk_new ("xfce4-panel");
     result = xfce_kiosk_query (kiosk, "CustomizePanel");
     xfce_kiosk_free (kiosk);
@@ -83,9 +85,11 @@ read_xml_file (void)
     char *rcfile;
     xmlDocPtr doc = NULL;
 
+    disable_user_config = check_disable_user_config ();
+
     xmlKeepBlanksDefault (0);
 
-    rcfile = get_read_file (XFCERC);
+    rcfile = get_read_file ("contents.xml");
 
     if (rcfile)
     {
@@ -163,8 +167,6 @@ get_panel_config (void)
 {
     xmlNodePtr node;
 
-    disable_user_config = check_disable_user_config ();
-
     node = get_xml_root ();
 
     if (!node)
@@ -196,7 +198,7 @@ get_panel_config (void)
 void
 write_panel_config (void)
 {
-    char *dir, *xfcerc, *tmprc;
+    char *xfcerc, *tmprc, *path;
     xmlNodePtr root;
     static gboolean backup = TRUE;
 
@@ -205,7 +207,16 @@ write_panel_config (void)
     if (disable_user_config)
 	return;
 
-    xfcerc = get_save_file (XFCERC);
+    path = g_build_filename ("xfce4", "panel", "contents.xml", NULL);
+    xfcerc = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
+    g_free (path);
+    
+    if (!xfcerc)
+    {
+        g_critical ("Could not write config file");
+        return;
+    }
+    
     tmprc = g_strconcat (xfcerc, ".tmp", NULL);
 
     if (g_file_test (xfcerc, G_FILE_TEST_EXISTS))
@@ -215,18 +226,8 @@ write_panel_config (void)
 	    write_backup_file (xfcerc);
 	    backup = FALSE;
 	}
-
     }
-    else
-    {
-	dir = g_path_get_dirname (xfcerc);
-
-	if (!g_file_test (dir, G_FILE_TEST_IS_DIR))
-	    mkdir (dir, S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-
-	g_free (dir);
-    }
-
+    
     xmlconfig = xmlNewDoc ("1.0");
     xmlconfig->children = xmlNewDocRawNode (xmlconfig, NULL, ROOT, NULL);
 

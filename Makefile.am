@@ -1,20 +1,20 @@
 @SET_MAKE@
 
-confdir = $(sysconfdir)/xfce4
+confdir = $(sysconfdir)/xdg/xfce4/panel
 conf_DATA = 								\
-	xfce4rc 							\
-	xfce4rc.ar							\
-	xfce4rc.az 							\
-	xfce4rc.ca							\
-	xfce4rc.he							\
-	xfce4rc.hu							\
-	xfce4rc.it							\
-	xfce4rc.ms							\
-	xfce4rc.nl 							\
-	xfce4rc.ro							\
-	xfce4rc.ru							\
-	xfce4rc.sk							\
-	xfce4rc.vi
+	contents.xml 							\
+	contents.xml.ar							\
+	contents.xml.az							\
+	contents.xml.ca							\
+	contents.xml.he							\
+	contents.xml.hu							\
+	contents.xml.it							\
+	contents.xml.ms							\
+	contents.xml.nl							\
+	contents.xml.ro							\
+	contents.xml.ru							\
+	contents.xml.sk							\
+	contents.xml.vi
 
 EXTRA_DIST = 								\
 	HACKING								\
@@ -29,8 +29,7 @@ SUBDIRS =								\
 	icons								\
 	panel								\
 	settings							\
-	plugins								\
-	themes
+	plugins	
 
 distclean-local:
 	rm -rf xfce4.spec *.cache *~

@@ -341,18 +341,17 @@ load_plugin_dir (const char *dir)
 static void
 add_plugin_classes (void)
 {
-    char **dirs, **d;
+    char *dir;
 
     wait_for_unloading ();
     unloading++;
 
-    dirs = get_plugin_dirs ();
+    dir = g_build_filename (LIBDIR, PLUGINDIR, NULL);
 
-    for (d = dirs; *d; d++)
-	load_plugin_dir (*d);
+    load_plugin_dir (dir);
 
     unloading--;
-    g_strfreev (dirs);
+    g_free (dir);
 }
 
 static void

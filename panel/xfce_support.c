@@ -59,78 +59,65 @@ extern char **environ;
 /*  Files and directories
  *  ---------------------
 */
-gchar *
+char *
 get_save_dir (void)
 {
-    return (g_strdup (xfce_get_userdir ()));
+    char *dir;
+
+    dir = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
+                                       "xfce4" G_DIR_SEPARATOR_S "panel", 
+                                       FALSE);
+
+    if (!xfce_mkdirhier (dir, 0700, NULL))
+    {
+        g_free (dir);
+        dir = g_strdup (xfce_get_homedir());
+    }
+
+    return dir;
 }
 
-gchar *
-get_save_file (const gchar * name)
+char *
+get_save_file (const char * name)
 {
     int scr;
-    char *file = NULL;
+    char *path, *file = NULL;
 
     scr = DefaultScreen (gdk_display);
 
     if (scr == 0)
     {
-	file = xfce_get_userfile (name, NULL);
+        path = g_build_filename ("xfce4", "panel", name, NULL);
     }
     else
     {
-	char *fmt, *realname;
+	char *realname;
 
-	fmt = g_strconcat (name, ".%u", NULL);
-	realname = g_strdup_printf (fmt, scr);
+	realname = g_strdup_printf ("%s.%u", name, scr);
 
-	file = xfce_get_userfile (realname, NULL);
-
-	g_free (fmt);
+        path = g_build_filename ("xfce4", "panel", realname, NULL);
+        
 	g_free (realname);
     }
 
+    file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
+    g_free (path);
+    
     return file;
 }
 
-gchar **
-get_read_dirs (void)
+static char *
+get_localized_rcfile (const char *path)
 {
-    gchar **dirs;
-
-    if (disable_user_config)
-    {
-	dirs = g_new (gchar *, 2);
-
-	dirs[0] = g_build_filename (SYSCONFDIR, SYSRCDIR, NULL);
-	dirs[1] = NULL;
-    }
-    else
-    {
-	dirs = g_new (gchar *, 3);
-
-	dirs[0] = get_save_dir ();
-	dirs[1] = g_build_filename (SYSCONFDIR, SYSRCDIR, NULL);
-	dirs[2] = NULL;
-    }
-
-    return dirs;
-}
-
-static gchar *
-get_localized_system_rcfile (const gchar * name)
-{
-    char *sysrcfile, *result;
+    char *fmt, *result;
     char buffer[PATH_MAX];
 
-    snprintf (buffer, PATH_MAX, "%s.%%l", name);
+    fmt = g_strconcat (path, ".%l", NULL);
 
-    sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, buffer, NULL);
-
-    result = xfce_get_path_localized (buffer, PATH_MAX, sysrcfile, NULL,
+    result = xfce_get_path_localized (buffer, PATH_MAX, fmt, NULL,
 				      G_FILE_TEST_EXISTS);
 
-    g_free (sysrcfile);
+    g_free (fmt);
 
     if (result)
     {
@@ -138,103 +125,84 @@ get_localized_system_rcfile (const gchar * name)
 	return g_strdup (buffer);
     }
 
-    sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, name, NULL);
-
-    if (g_file_test (sysrcfile, G_FILE_TEST_EXISTS))
+    if (g_file_test (path, G_FILE_TEST_EXISTS))
     {
-	DBG ("file: %s", sysrcfile);
-	return sysrcfile;
+	DBG ("file: %s", path);
+	return g_strdup (path);
     }
-
-    g_free (sysrcfile);
 
     return NULL;
 }
 
-gchar *
-get_read_file (const gchar * name)
+char *
+get_read_file (const char * name)
 {
-    if (!disable_user_config)
+    char **paths, **p, *file = NULL;
+
+    if (G_UNLIKELY (disable_user_config))
     {
-	gchar *file = get_save_file (name);
+	p = paths = g_new (char *, 2);
 
-	if (g_file_test (file, G_FILE_TEST_EXISTS))
-	    return (file);
-	else
-	    g_free (file);
-    }
-
-    /* fall through */
-    return get_localized_system_rcfile (name);
-}
-
-gchar **
-get_plugin_dirs (void)
-{
-    gchar **dirs;
-
-    if (disable_user_config)
-    {
-	dirs = g_new (gchar *, 2);
-
-	dirs[0] = g_build_filename (LIBDIR, PLUGINDIR, NULL);
-	dirs[1] = NULL;
+	paths[0] = g_build_filename (SYSCONFDIR, "xdg", "xfce4", "panel", 
+                                     name, NULL);
+	paths[1] = NULL;
     }
     else
     {
-	dirs = g_new (gchar *, 3);
+        int n;
+        char **d;
+        
+        d = xfce_resource_dirs (XFCE_RESOURCE_CONFIG);
 
-	dirs[0] = xfce_get_userfile (PLUGINDIR, NULL);
-	dirs[1] = g_build_filename (LIBDIR, PLUGINDIR, NULL);
-	dirs[2] = NULL;
+        for (n = 0; d[n] != NULL; ++n)
+            /**/ ;
+
+        p = paths = g_new0 (char*, n);
+
+        for (n = 0; d[n] != NULL; ++n)
+            paths[n] = g_build_filename (d[n], "xfce4", "panel", name, NULL);
+            
+        g_strfreev (d);
+
+        /* first entry is not localized ($XDG_CONFIG_HOME)
+         * unless disable_user_config == TRUE */
+        if (g_file_test (*p, G_FILE_TEST_EXISTS))
+            file = g_strdup (*p);
+
+        p++;
     }
+    
+    for (; file == NULL && *p != NULL; ++p)
+        file = get_localized_rcfile (*p);
 
-    return (dirs);
-}
+    g_strfreev (paths);
 
-gchar **
-get_theme_dirs (void)
-{
-    gchar **dirs;
-
-    if (disable_user_config)
-    {
-	dirs = g_new (gchar *, 2);
-
-	dirs[0] = g_build_filename (DATADIR, THEMEDIR, NULL);
-	dirs[1] = NULL;
-    }
-    else
-    {
-	dirs = g_new (gchar *, 3);
-
-	dirs[0] = xfce_get_userfile (THEMEDIR, NULL);
-	dirs[1] = g_build_filename (DATADIR, THEMEDIR, NULL);
-	dirs[2] = NULL;
-    }
-
-    return (dirs);
+    return file;
 }
 
 void
-write_backup_file (const gchar * path)
+write_backup_file (const char * path)
 {
     FILE *fp;
     FILE *bakfp;
-    char bakfile[MAXSTRLEN + 1];
+    char bakfile[MAXSTRLEN + 1], c;
 
     snprintf (bakfile, MAXSTRLEN, "%s.bak", path);
 
-    if ((bakfp = fopen (bakfile, "w")) && (fp = fopen (path, "r")))
+    if (!(bakfp = fopen (bakfile, "w")))
+        return;
+    
+    if (!(fp = fopen (path, "r")))
     {
-	int c;
-
-	while ((c = fgetc (fp)) != EOF)
-	    putc (c, bakfp);
-
-	fclose (fp);
-	fclose (bakfp);
+        fclose (bakfp);
+        return;
     }
+    
+    while ((c = getc (fp)) != EOF)
+        putc (c, bakfp);
+
+    fclose (fp);
+    fclose (bakfp);
 }
 
 /*  Tooltips
@@ -415,10 +383,10 @@ gnome_uri_list_free_strings (GList * list)
  * that have been splitted from @uri-list.
  */
 GList *
-gnome_uri_list_extract_uris (const gchar * uri_list)
+gnome_uri_list_extract_uris (const char * uri_list)
 {
-    const gchar *p, *q;
-    gchar *retval;
+    const char *p, *q;
+    char *retval;
     GList *result = NULL;
 
     g_return_val_if_fail (uri_list != NULL, NULL);
@@ -474,7 +442,7 @@ gnome_uri_list_extract_uris (const gchar * uri_list)
  * will discard any non-file uri from the result value.
  */
 GList *
-gnome_uri_list_extract_filenames (const gchar * uri_list)
+gnome_uri_list_extract_filenames (const char * uri_list)
 {
     GList *tmp_list, *node, *result;
 
@@ -485,7 +453,7 @@ gnome_uri_list_extract_filenames (const gchar * uri_list)
     tmp_list = result;
     while (tmp_list)
     {
-	gchar *s = (char *) tmp_list->data;
+	char *s = (char *) tmp_list->data;
 
 	node = tmp_list;
 	tmp_list = tmp_list->next;
@@ -692,7 +660,7 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
 typedef struct _ActionCommand ActionCommand;
 struct _ActionCommand
 {
-    gchar *cmd;
+    char *cmd;
     gboolean in_terminal;
     gboolean use_sn;
     gboolean silent;
@@ -711,7 +679,7 @@ delayed_exec (ActionCommand * command)
 }
 
 static void
-schedule_exec (const gchar * cmd, gboolean in_terminal, gboolean use_sn,
+schedule_exec (const char * cmd, gboolean in_terminal, gboolean use_sn,
 	       gboolean silent)
 {
     ActionCommand *command;

@@ -55,8 +55,14 @@ static McsManager *mcs_manager = NULL;
 static XfceIconTheme *icon_theme = NULL;
 static int theme_cb = 0;
 
+static void ensure_base_dir_spec (XfceResourceType type, 
+                                  const char *old_subdir, 
+                                  const char *old_file,
+                                  const char *new_subdir, 
+                                  const char *new_file);
 static void xfce_set_options (McsManager * sm);
-static void theme_changed (XfceIconTheme *theme, McsPlugin *mp);
+static void theme_changed (XfceIconTheme *theme, 
+                           McsPlugin *mp);
 
 
 McsPluginInitResult
@@ -64,6 +70,14 @@ mcs_plugin_init (McsPlugin * mp)
 {
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
+    ensure_base_dir_spec (XFCE_RESOURCE_CONFIG, 
+                          "settings", "panel.xml",
+                          "mcs_settings", "panel.xml");
+    
+    ensure_base_dir_spec (XFCE_RESOURCE_CONFIG, 
+                          "settings", "xfce-settings.xml",
+                          "mcs_settings", "xfce-settings.xml");
+    
     mcs_manager = mp->manager;
 
     xfce_set_options (mp->manager);
@@ -78,6 +92,75 @@ mcs_plugin_init (McsPlugin * mp)
                                  G_CALLBACK (theme_changed), mp);
 
     return MCS_PLUGIN_INIT_OK;
+}
+
+/* Base Dir Spec compliance */
+static void
+ensure_base_dir_spec (XfceResourceType type, 
+                      const char *old_subdir, const char *old_file,
+                      const char *new_subdir, const char *new_file)
+{
+    char  *old, *new, *path, c;
+    FILE *r, *w;
+    GError *error = NULL;
+
+    new = g_build_filename ("xfce4", new_subdir, NULL);
+    path = xfce_resource_save_location (type, new, FALSE);
+    g_free (new);
+
+    if (!xfce_mkdirhier (path, 0700, &error))
+    {
+        g_printerr ("%s\n", error->message);
+        g_error_free (error);
+        goto path_failed;
+    }
+
+    new = g_build_filename (path, new_file, NULL);
+    
+    if (g_file_test (new, G_FILE_TEST_EXISTS))
+    {
+        DBG ("New file exists: %s\n", new);
+        goto new_exists;
+    }
+    
+    old = g_build_filename (xfce_get_userdir (), old_subdir, old_file, NULL);
+    
+    if (!g_file_test (old, G_FILE_TEST_EXISTS))
+    {
+        DBG ("No old config file was found: %s\n", old);
+        goto old_failed;
+    }
+
+    if (!(r = fopen (old, "r")))
+    {
+        g_printerr ("Could not open file for reading: %s\n", old);
+        goto r_failed;
+    }
+
+    if (!(w = fopen (new, "w")))
+    {
+        g_printerr ("Could not open file for writing: %s\n", new);
+        goto w_failed;
+    }
+
+    while ((c = getc (r)) != EOF)
+        putc (c, w);
+
+    fclose (w);
+    
+w_failed:
+    fclose (r);
+
+r_failed:
+
+old_failed:
+    g_free (old);
+
+new_exists:
+    g_free (new);
+    
+path_failed:
+    g_free (path);
 }
 
 /* GMarkup parser for old style config file */
@@ -182,23 +265,22 @@ old_xml_read_options (const char *path)
 void
 xfce_write_options (McsManager * sm)
 {
-    char *file, *dir;
+    char *file, *path;
 
-    /* this initializes base directory, but not settings dir */
-    dir = xfce_get_userfile ("settings", NULL);
-    file = g_build_filename (dir, "panel.xml", NULL);
+    path = g_build_filename ("xfce4", "mcs_settings", "panel.xml", NULL);
+    
+    file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
 
-    if (!g_file_test (dir, G_FILE_TEST_IS_DIR)
-	&& mkdir (dir, S_IRUSR | S_IWUSR | S_IXUSR) < 0)
+    if (!file)
     {
-	g_critical ("Couldn't create directory %s", dir);
+	g_critical ("Couldn't create file %s", file);
     }
     else
     {
 	mcs_manager_save_channel_to_file (sm, CHANNEL, file);
     }
 
-    g_free (dir);
+    g_free (path);
     g_free (file);
 }
 
@@ -258,49 +340,44 @@ xfce_init_options (void)
 static void
 xfce_set_options (McsManager * sm)
 {
-    char *file;
-    gboolean found = FALSE;
+    char *file, *newpath, *oldpath, **dirs, **d;
 
-    file = xfce_get_userfile ("settings", "panel.xml", NULL);
-
-    if (g_file_test (file, G_FILE_TEST_EXISTS))
+    dirs = xfce_resource_dirs (XFCE_RESOURCE_CONFIG);
+    
+    newpath = g_build_filename ("xfce4", "mcs_settings", "panel.xml", NULL);
+    oldpath = g_build_filename ("xfce4", "mcs_settings", "xfce-settings.xml", 
+                                NULL);
+    
+    for (d = dirs; *d != NULL; ++d)
     {
-	mcs_manager_add_channel_from_file (sm, CHANNEL, file);
+        file = g_build_filename (*d, newpath, NULL);
+        
+        if (g_file_test (file, G_FILE_TEST_EXISTS))
+        {
+            mcs_manager_add_channel_from_file (sm, CHANNEL, file);
+            g_free (file);
+            break;
+        }
+        
+        g_free (file);
+        
+        file = g_build_filename (*d, oldpath, NULL);
+        
+        if (g_file_test (file, G_FILE_TEST_EXISTS))
+        {
+            DBG ("reading old style options");
+            old_xml_read_options (file);
 
-	found = TRUE;
-    }
-    else
-    {
-	g_free (file);
-
-	file = xfce_get_userfile ("settings", "xfce-settings.xml", NULL);
-    }
-
-    if (!found && g_file_test (file, G_FILE_TEST_EXISTS))
-    {
-	mcs_manager_add_channel (sm, CHANNEL);
-
-	DBG ("reading old style options");
-
-	old_xml_read_options (file);
-
-	found = TRUE;
-    }
-    else
-    {
-	g_free (file);
-
-	file = g_build_filename (SYSCONFDIR, "xfce4", "panel.xml", NULL);
-    }
-
-    if (!found && g_file_test (file, G_FILE_TEST_EXISTS))
-    {
-	mcs_manager_add_channel_from_file (sm, CHANNEL, file);
-
-	found = TRUE;
+            g_free (file);
+            break;
+        }
+        
+        g_free (file);
     }
 
-    g_free (file);
+    g_strfreev (dirs);
+    g_free (newpath);
+    g_free (oldpath);
 
     /* set values if not already set */
     xfce_init_options ();

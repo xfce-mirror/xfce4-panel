@@ -313,6 +313,75 @@ xfce_panel_set_xselection (void)
     }
 }
 
+/* Base Dir Spec compliance */
+static void
+ensure_base_dir_spec (XfceResourceType type, 
+                      const char *old_subdir, const char *old_file,
+                      const char *new_subdir, const char *new_file)
+{
+    char  *old, *new, *path, c;
+    FILE *r, *w;
+    GError *error = NULL;
+
+    new = g_build_filename ("xfce4", new_subdir, NULL);
+    path = xfce_resource_save_location (type, new, FALSE);
+    g_free (new);
+
+    if (!xfce_mkdirhier (path, 0700, &error))
+    {
+        g_printerr ("%s\n", error->message);
+        g_error_free (error);
+        goto path_failed;
+    }
+
+    new = g_build_filename (path, new_file, NULL);
+    
+    if (g_file_test (new, G_FILE_TEST_EXISTS))
+    {
+        DBG ("New file exists: %s\n", new);
+        goto new_exists;
+    }
+    
+    old = g_build_filename (xfce_get_userdir (), old_subdir, old_file, NULL);
+    
+    if (!g_file_test (old, G_FILE_TEST_EXISTS))
+    {
+        DBG ("No old config file was found: %s\n", old);
+        goto old_failed;
+    }
+
+    if (!(r = fopen (old, "r")))
+    {
+        g_printerr ("Could not open file for reading: %s\n", old);
+        goto r_failed;
+    }
+
+    if (!(w = fopen (new, "w")))
+    {
+        g_printerr ("Could not open file for writing: %s\n", new);
+        goto w_failed;
+    }
+
+    while ((c = getc (r)) != EOF)
+        putc (c, w);
+
+    fclose (w);
+    
+w_failed:
+    fclose (r);
+
+r_failed:
+
+old_failed:
+    g_free (old);
+
+new_exists:
+    g_free (new);
+    
+path_failed:
+    g_free (path);
+}
+
 /*  Main program
  *  ------------
 */
@@ -380,6 +449,12 @@ main (int argc, char **argv)
     /* hack to prevent arrow buttons from being cropped */
     gtk_rc_parse_string (RC_STRING);
 
+    /* copy files from old location when no Base Dir Spec compliant
+     * directories are found */
+    ensure_base_dir_spec (XFCE_RESOURCE_CONFIG, 
+                          "", "xfce4rc", 
+                          "panel", "contents.xml");
+    
     /* icon framework: names and id's */
     icons_init ();
 

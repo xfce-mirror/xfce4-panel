@@ -26,10 +26,7 @@
 /* files and directories */
 char *get_save_dir (void);
 char *get_save_file (const char *name);
-char **get_read_dirs (void);
 char *get_read_file (const char *name);
-char **get_plugin_dirs (void);
-char **get_theme_dirs (void);
 void write_backup_file (const char *path);
 
 /* tooltips */
