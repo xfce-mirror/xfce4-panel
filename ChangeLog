@@ -1,3 +1,70 @@
+2003-05-14 07:50  huysmans
+
+	* po/: fi.gmo, fi.po: update finnish translations
+
+2003-05-13 23:08  huysmans
+
+	* doc/C/: xfce4-panel.html, xfce4-panel.xml,
+	images/clock-properties.png, images/default_panel.png,
+	images/handle-popup.png, images/item-popup.png,
+	images/launcher-properties.png, images/mailcheck-properties.png,
+	images/menuitem-properties.png, images/nooptions-properties.png,
+	images/systembuttons-properties.png: update docs
+
+2003-05-13 21:32  huysmans
+
+	* panel/xfce_support.c: Fix icons with spaces problem. User now
+	must manually escape commands.
+
+2003-05-13 19:12  huysmans
+
+	* configure, configure.ac, po/ca.gmo, po/ca.po: Add catalan
+	translations
+
+2003-05-13 13:49  huysmans
+
+	* Makefile.am, Makefile.in, configure, configure.ac,
+	doc/Makefile.am, doc/Makefile.in, doc/xfce-nochunk.xsl,
+	doc/C/Makefile.am, doc/C/Makefile.in, doc/C/xfce4-panel.html,
+	doc/C/xfce4-panel.xml, doc/C/images/Makefile.am,
+	doc/C/images/Makefile.in, doc/C/images/clock-properties.png,
+	doc/C/images/default_panel.png, doc/C/images/handle-popup.png,
+	doc/C/images/item-popup.png, doc/C/images/launcher-properties.png,
+	doc/C/images/mailcheck-properties.png,
+	doc/C/images/menuitem-properties.png,
+	doc/C/images/nooptions-properties.png,
+	doc/C/images/panel-settings.png,
+	doc/C/images/systembuttons-properties.png: Move docs to new
+	location
+
+2003-05-13 11:44  huysmans
+
+	* panel/: item_dialog.c, item_dialog.h: Menu item dialog now has
+	the same layout as panel item dialogs
+
+2003-05-13 11:01  huysmans
+
+	* ChangeLog, configure, configure.ac, xfce4.spec.in,
+	panel/Makefile.am, panel/Makefile.in, plugins/clock/Makefile.am,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.am,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.am,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.am,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.am,
+	plugins/systembuttons/Makefile.in, po/Makefile.in.in, po/de.gmo,
+	po/de.po, po/es.gmo, po/es.po, po/es_MX.gmo, po/es_MX.po,
+	po/fi.gmo, po/fi.po, po/fr.gmo, po/fr.po, po/ja.gmo, po/ja.po,
+	po/nl.gmo, po/nl.po, po/pl.gmo, po/pl.po, po/xfce4-panel.pot,
+	po/zh_CN.gmo, po/zh_CN.po, settings/Makefile.am,
+	settings/Makefile.in, themes/Crystal/Makefile.am,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.am,
+	themes/Curve/Makefile.in, themes/FreeIcons/Makefile.am,
+	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.am,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.am,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.am,
+	themes/XFce/Makefile.in: Fix distcheck target. Rename package to
+	xfce4-panel. Set version to 3.90 (betas will be 3.90, 3.91, 3.92,
+	etc.)
+
 2003-05-13 09:06  huysmans
 
 	* xfce4.spec.in: spec file tweaks
@@ -61,17 +128,15 @@
 2003-05-03 11:43  huysmans
 
 	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
-	ltcf-c.sh, ltconfig, ltmain.sh, doc/Makefile.in,
-	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
-	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
-	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
-	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
-	plugins/systembuttons/Makefile.in, po/zh_CN.gmo, po/zh_CN.po,
-	settings/Makefile.in, themes/Makefile.in,
-	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
-	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
-	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add chinese
-	translations
+	ltcf-c.sh, ltconfig, ltmain.sh, doc/Makefile.in, icons/Makefile.in,
+	panel/Makefile.in, plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	po/zh_CN.gmo, po/zh_CN.po, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Add chinese translations
 
 2003-05-03 11:12  huysmans
 
@@ -82,7 +147,6 @@
 
 	* ChangeLog, Makefile.in, aclocal.m4, config.guess, config.h.in,
 	config.sub, configure, ltmain.sh, doc/Makefile.in,
-	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
 	icons/Makefile.in, panel/Makefile.in, panel/xfce_support.c,
 	plugins/Makefile.in, plugins/clock/Makefile.am,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.am,
@@ -99,12 +163,8 @@
 2003-05-02 19:12  bmeurer
 
 	* Makefile.in, aclocal.m4, configure, configure.ac,
-	doc/Makefile.in, doc/html/Makefile.in,
-	doc/html/panel-copyright.html, doc/html/panel-getting-started.html,
-	doc/html/panel-settings.html, doc/html/panel-use.html,
-	doc/html/xfce4-panel.html, doc/images/Makefile.in,
-	doc/xml/Makefile.in, doc/xml/xfce.xsl, icons/Makefile.in,
-	m4/depends.m4, panel/Makefile.in, panel/xfce4-panel-1.0.pc.in,
+	doc/Makefile.in, icons/Makefile.in, m4/depends.m4,
+	panel/Makefile.in, panel/xfce4-panel-1.0.pc.in,
 	plugins/Makefile.in, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
@@ -140,11 +200,6 @@
 	* configure, configure.ac, panel/xfce4-panel-1.0.pc.in: Added
 	themedir variable to pkg-config file and increased version to
 	0.10.2
-
-2003-04-30 14:27  huysmans
-
-	* doc/: html/panel-settings.html, images/panel-settings.png,
-	xml/xfce4-panel.xml: Add autohide feature to docs
 
 2003-04-30 13:37  huysmans
 
@@ -271,7 +326,6 @@
 2003-04-20 22:51  bmeurer
 
 	* Makefile.in, configure, configure.ac, doc/Makefile.in,
-	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.am, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
@@ -308,8 +362,7 @@
 2003-04-19 23:31  bmeurer
 
 	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
-	doc/Makefile.in, doc/html/Makefile.in, doc/images/Makefile.in,
-	doc/xml/Makefile.in, icons/Makefile.in, m4/X11.m4, m4/rpath.m4,
+	doc/Makefile.in, icons/Makefile.in, m4/X11.m4, m4/rpath.m4,
 	panel/Makefile.am, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/mailcheck/mailcheck.c, plugins/pager/Makefile.in,
@@ -407,16 +460,14 @@
 2003-04-09 22:40  bmeurer
 
 	* Makefile.in, aclocal.m4, config.guess, config.sub, configure,
-	depcomp, ltconfig, doc/Makefile.in, doc/html/Makefile.in,
-	doc/images/Makefile.in, doc/xml/Makefile.in, icons/Makefile.in,
-	m4/debug.m4, panel/Makefile.in, plugins/Makefile.in,
-	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
-	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
-	plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	themes/Makefile.in, themes/Crystal/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
-	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Improved
-	debug.m4:
+	depcomp, ltconfig, doc/Makefile.in, icons/Makefile.in, m4/debug.m4,
+	panel/Makefile.in, plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Improved debug.m4:
 	
 		1) --disable-debug no longer disables assert()'s
 		2) --enable-profiling now enables profiling code
@@ -436,7 +487,6 @@
 
 	* Makefile.in, aclocal.m4, config.guess, config.sub, configure,
 	depcomp, ltcf-c.sh, ltconfig, ltmain.sh, doc/Makefile.in,
-	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
 	icons/Makefile.in, m4/depends.m4, panel/Makefile.in,
 	plugins/Makefile.in, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
@@ -479,16 +529,14 @@
 
 	* .indent.pro, HACKING, Makefile.am, Makefile.in, aclocal.m4,
 	config.guess, config.sub, configure, depcomp, ltcf-c.sh, ltconfig,
-	ltmain.sh, doc/Makefile.in, doc/html/Makefile.in,
-	doc/images/Makefile.in, doc/xml/Makefile.in, icons/Makefile.in,
-	panel/Makefile.in, panel/controls.c, panel/controls.h,
-	panel/controls_dialog.c, panel/controls_dialog.h, panel/global.h,
-	panel/groups.c, panel/groups.h, panel/icons.c, panel/icons.h,
-	panel/item.c, panel/item.h, panel/item_dialog.c,
-	panel/item_dialog.h, panel/main.c, panel/main.h,
-	panel/mcs_client.c, panel/mcs_client.h, panel/panel.c,
-	panel/panel.h, panel/plugins.h, panel/popup.c, panel/popup.h,
-	panel/settings.c, panel/settings.h, panel/xfce.h,
+	ltmain.sh, doc/Makefile.in, icons/Makefile.in, panel/Makefile.in,
+	panel/controls.c, panel/controls.h, panel/controls_dialog.c,
+	panel/controls_dialog.h, panel/global.h, panel/groups.c,
+	panel/groups.h, panel/icons.c, panel/icons.h, panel/item.c,
+	panel/item.h, panel/item_dialog.c, panel/item_dialog.h,
+	panel/main.c, panel/main.h, panel/mcs_client.c, panel/mcs_client.h,
+	panel/panel.c, panel/panel.h, panel/plugins.h, panel/popup.c,
+	panel/popup.h, panel/settings.c, panel/settings.h, panel/xfce.h,
 	panel/xfce_support.c, panel/xfce_support.h, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/clock/clock.c,
 	plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
@@ -530,9 +578,8 @@
 	config.guess, config.h.in, config.sub, configure, configure.ac,
 	depcomp, example.xfce4rc.in, install-sh, ltcf-c.sh, ltconfig,
 	ltmain.sh, missing, mkinstalldirs, xfce4.spec.in, xfce4rc.in,
-	doc/Makefile.in, doc/html/Makefile.in, doc/images/Makefile.in,
-	doc/xml/Makefile.in, icons/Makefile.am, icons/Makefile.in,
-	m4/X11.m4, m4/debug.m4, m4/depends.m4, m4/i18n.m4, m4/rpath.m4,
+	doc/Makefile.in, icons/Makefile.am, icons/Makefile.in, m4/X11.m4,
+	m4/debug.m4, m4/depends.m4, m4/i18n.m4, m4/rpath.m4,
 	panel/Makefile.am, panel/Makefile.in, panel/item_dialog.c,
 	panel/main.c, panel/xfce_support.c, panel/xfce_support.h,
 	plugins/Makefile.am, plugins/Makefile.in,
@@ -634,9 +681,7 @@
 
 2003-03-05 13:58  huysmans
 
-	* ChangeLog, TODO, doc/html/panel-use.html,
-	doc/html/xfce4-panel.html, doc/xml/xfce4-panel.xml: Small
-	documentation update
+	* ChangeLog, TODO: Small documentation update
 
 2003-03-02 18:10  xfce
 
@@ -647,7 +692,6 @@
 
 	* Makefile.in, aclocal.m4, config.guess, config.h.in, config.sub,
 	configure, ltcf-c.sh, ltconfig, ltmain.sh, doc/Makefile.in,
-	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
@@ -663,8 +707,7 @@
 2003-02-28 19:42  xfce
 
 	* Makefile.in, aclocal.m4, config.guess, configure, ltmain.sh,
-	doc/Makefile.in, doc/html/Makefile.in, doc/images/Makefile.in,
-	doc/xml/Makefile.in, icons/Makefile.in, panel/Makefile.in,
+	doc/Makefile.in, icons/Makefile.in, panel/Makefile.in,
 	plugins/Makefile.in, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
 	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
@@ -677,16 +720,14 @@
 2003-02-28 11:53  bmeurer
 
 	* configure, Makefile.in, aclocal.m4, config.guess, configure.ac,
-	ltcf-c.sh, ltconfig, ltmain.sh, doc/html/Makefile.in,
-	doc/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
-	icons/Makefile.in, panel/Makefile.in, plugins/clock/Makefile.in,
-	plugins/Makefile.in, plugins/mailcheck/Makefile.in,
-	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
-	plugins/systembuttons/Makefile.in, settings/Makefile.in,
-	themes/Makefile.in, themes/Crystal/Makefile.in,
-	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
-	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Fixes
-	xfce-mcs-manager issue.
+	ltcf-c.sh, ltconfig, ltmain.sh, doc/Makefile.in, icons/Makefile.in,
+	panel/Makefile.in, plugins/clock/Makefile.in, plugins/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Fixes xfce-mcs-manager issue.
 
 2003-02-27 22:48  xfce
 
@@ -704,9 +745,8 @@
 2003-02-26 08:17  xfce
 
 	* Makefile.in, aclocal.m4, config.guess, config.sub, configure,
-	ltmain.sh, doc/Makefile.in, doc/html/Makefile.in,
-	doc/images/Makefile.in, doc/xml/Makefile.in, icons/Makefile.in,
-	panel/Makefile.in, panel/xfce_support.c, plugins/Makefile.in,
+	ltmain.sh, doc/Makefile.in, icons/Makefile.in, panel/Makefile.in,
+	panel/xfce_support.c, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
 	plugins/systembuttons/Makefile.in, settings/Makefile.in,
@@ -729,8 +769,6 @@
 2003-02-25 11:54  huysmans
 
 	* Makefile.in, aclocal.m4, configure, doc/Makefile.in,
-	doc/html/Makefile.in, doc/images/Makefile.in,
-	doc/images/panel-settings.png, doc/xml/Makefile.in,
 	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
 	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
 	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
@@ -755,42 +793,14 @@
 	* panel/popup.c: Use gdk_window_move to position subpanel. gtk does
 	not ignore margins
 
-2003-02-23 14:52  huysmans
-
-	* doc/: html/panel-copyright.html, html/panel-getting-started.html,
-	html/panel-settings.html, html/panel-use.html,
-	html/xfce4-panel.html, xml/xfce4-panel.xml: Add some text to panel
-	item screenshots
-
-2003-02-22 12:10  huysmans
-
-	* doc/: html/panel-getting-started.html, html/panel-settings.html,
-	html/panel-use.html, html/xfce4-panel.html, xml/xfce4-panel.xml:
-	Small doc update
-
 2003-02-22 11:30  huysmans
 
-	* ChangeLog, doc/images/Makefile.am, doc/images/Makefile.in:
-	Actually install doc images ...
+	* ChangeLog: Actually install doc images ...
 
 2003-02-18 22:56  xfce
 
 	* panel/panel.c: Use xflock4 instead of xflock (same file, just a
 	name change for xfce4)
-
-2003-02-17 21:06  huysmans
-
-	* doc/xml/: Makefile.am, Makefile.in: Update Makefiles
-
-2003-02-17 20:24  huysmans
-
-	* doc/: html/GPL.html, html/Makefile.am, html/Makefile.in,
-	html/copyright.html, html/index.html, html/ln-legalnotice.html,
-	html/panel-copyright.html, html/panel-getting-started.html,
-	html/panel-settings.html, html/panel-use.html, html/settings.html,
-	html/xfce4-panel.html, xml/GPL.xml, xml/copyright.xml,
-	xml/xfce.xsl, xml/xfce4-panel.xml: Rename some docs. Don't call the
-	root file index.html.
 
 2003-02-17 14:20  huysmans
 
@@ -799,43 +809,18 @@
 
 2003-02-17 14:14  huysmans
 
-	* Makefile.am, Makefile.in, doc/xml/xfce4-panel.xml,
-	icons/Makefile.am, icons/Makefile.in, icons/xfce_slogan.xpm,
-	panel/Makefile.am, panel/Makefile.in, panel/info.c, panel/info.h,
-	panel/panel.c, plugins/systembuttons/systembuttons.c, po/ChangeLog,
+	* Makefile.am, Makefile.in, icons/Makefile.am, icons/Makefile.in,
+	icons/xfce_slogan.xpm, panel/Makefile.am, panel/Makefile.in,
+	panel/info.c, panel/info.h, panel/panel.c,
+	plugins/systembuttons/systembuttons.c, po/ChangeLog,
 	po/POTFILES.in, po/de.gmo, po/de.po, po/es.gmo, po/es.po,
 	po/es_MX.gmo, po/es_MX.po, po/fi.gmo, po/fi.po, po/fr.gmo,
 	po/fr.po, po/nl.gmo, po/nl.po, po/xfce4-panel.pot: Remove info
 	panel. Use xfce4-about instead.
 
-2003-02-16 17:43  huysmans
-
-	* doc/html/: Makefile.am, Makefile.in: Add missing files to
-	Makefile
-
-2003-02-16 16:56  huysmans
-
-	* doc/: html/panel-use.html, html/settings.html,
-	images/handle-popup.png, images/item-popup.png,
-	xml/xfce4-panel.xml: Add screenshots of popup menus
-
-2003-02-16 16:16  huysmans
-
-	* doc/: html/GPL.html, html/copyright.html, html/index.html,
-	html/ln-legalnotice.html, html/panel-getting-started.html,
-	html/panel-prefs.html, html/panel-use.html, html/settings.html,
-	images/clock-properties.png, images/launcher-properties.png,
-	images/mailcheck-properties.png, images/menuitem-properties.png,
-	images/nooptions-properties.png, images/panel-settings.png,
-	images/systembuttons-properties.png, xml/xfce4-panel.xml: Added
-	lots of informative screenshots to the docs.
-
 2003-02-15 20:28  huysmans
 
 	* ChangeLog, configure, configure.ac, example.xfce4rc.in,
-	doc/html/index.html, doc/html/panel-getting-started.html,
-	doc/html/panel-prefs.html, doc/html/panel-use.html,
-	doc/images/default_panel.png, doc/xml/xfce4-panel.xml,
 	panel/controls.c, plugins/Makefile.am, plugins/Makefile.in,
 	plugins/clock/Makefile.am, plugins/clock/Makefile.in,
 	plugins/mailcheck/Makefile.am, plugins/mailcheck/Makefile.in,
@@ -896,13 +881,6 @@
 
 	* panel/: controls.c, panel.c: Fix menu translation functions
 
-2003-02-11 23:34  huysmans
-
-	* doc/: html/index.html, html/ln-legalnotice.html,
-	html/panel-getting-started.html, html/panel-prefs.html,
-	html/panel-use.html, xml/xfce4-panel.xml: Add a little more
-	structure and text to the documentation
-
 2003-02-11 20:48  xfce
 
 	* ChangeLog: Update ChangeLog
@@ -938,8 +916,7 @@
 2003-02-10 12:51  xfce
 
 	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
-	doc/Makefile.in, doc/html/Makefile.in, doc/images/Makefile.in,
-	doc/xml/Makefile.in, icons/Makefile.in, panel/Makefile.am,
+	doc/Makefile.in, icons/Makefile.in, panel/Makefile.am,
 	panel/Makefile.in, panel/info.c, panel/item.c, panel/item.h,
 	panel/item_dialog.c, panel/panel.c, panel/xfce_support.c,
 	panel/xfce_support.h, plugins/Makefile.in,
@@ -961,17 +938,9 @@
 2003-02-04 11:00  huysmans
 
 	* Makefile.am, Makefile.in, configure, configure.ac,
-	example.xfce4rc.in, doc/Makefile.am, doc/Makefile.in,
-	doc/html/GPL.html, doc/html/Makefile.am, doc/html/Makefile.in,
-	doc/html/copyright.html, doc/html/index.html,
-	doc/html/ln-legalnotice.html, doc/html/panel-getting-started.html,
-	doc/html/panel-prefs.html, doc/html/panel-use.html,
-	doc/images/Makefile.am, doc/images/Makefile.in,
-	doc/images/default_panel.png, doc/xml/GPL.xml, doc/xml/Makefile.am,
-	doc/xml/Makefile.in, doc/xml/copyright.xml, doc/xml/xfce.xsl,
-	doc/xml/xfce4-panel.xml, po/de.gmo, po/es.gmo, po/fi.gmo,
-	po/fr.gmo, po/nl.gmo: Add documentation framework and some
-	preliminary text
+	example.xfce4rc.in, doc/Makefile.am, doc/Makefile.in, po/de.gmo,
+	po/es.gmo, po/fi.gmo, po/fr.gmo, po/nl.gmo: Add documentation
+	framework and some preliminary text
 
 2003-02-03 19:44  huysmans
 
