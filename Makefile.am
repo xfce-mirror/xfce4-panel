@@ -1,7 +1,7 @@
 @SET_MAKE@
 
 confdir = $(sysconfdir)/xfce4
-conf_DATA = xfce4rc xfce4rc.nl xfcerc.ca
+conf_DATA = xfce4rc xfce4rc.nl xfce4rc.ca
 
 EXTRA_DIST = 								\
 	HACKING								\
