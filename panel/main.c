@@ -319,7 +319,6 @@ main (int argc, char **argv)
 #ifdef HAVE_SIGACTION
     struct sigaction act;
 #endif
-    int i;
 
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 

@@ -196,15 +196,10 @@ update_xinerama_coordinates (Panel * p)
 static void
 update_position (Panel * p, int *x, int *y)
 {
-    int xthick, ythick;
-
     if (!p || !p->toplevel)
 	return;
 
-    xthick = p->toplevel->style->xthickness + FRAME_IPADDING;
-    ythick = p->toplevel->style->ythickness + FRAME_IPADDING;
-
-    pos_state = FLOATING;
+   pos_state = FLOATING;
 
     DBG ("desired position: %d,%d", *x, *y);
 
@@ -213,13 +208,13 @@ update_position (Panel * p, int *x, int *y)
     {
 	if (*y + panel_req.height > xinerama_scr.ymax - 2)
 	{
-	    *y = xinerama_scr.ymax - panel_req.height + ythick;
+	    *y = xinerama_scr.ymax - panel_req.height;
 	    pos_state = EDGE;
 	}
 
 	if (*y < xinerama_scr.ymin + 2)
 	{
-	    *y = xinerama_scr.ymin - ythick;
+	    *y = xinerama_scr.ymin;
 	    pos_state = EDGE;
 	}
 
@@ -227,13 +222,13 @@ update_position (Panel * p, int *x, int *y)
 	{
 	    if (*x + panel_req.width > xinerama_scr.xmax - 2)
 	    {
-		*x = xinerama_scr.xmax - panel_req.width + xthick;
+		*x = xinerama_scr.xmax - panel_req.width;
 		pos_state = CORNER;
 	    }
 
 	    if (*x < xinerama_scr.xmin + 2)
 	    {
-		*x = xinerama_scr.xmin - xthick;
+		*x = xinerama_scr.xmin;
 		pos_state = CORNER;
 	    }
 	}
@@ -244,7 +239,7 @@ update_position (Panel * p, int *x, int *y)
 		(xinerama_scr.xmax - xinerama_scr.xmin) / 2 -
 		panel_req.width / 2;
 
-	    if (xcenter > xinerama_scr.xmin - xthick &&
+	    if (xcenter > xinerama_scr.xmin &&
 		*x > xcenter - 2 && *x < xcenter + 2)
 	    {
 		*x = xcenter;
@@ -256,13 +251,13 @@ update_position (Panel * p, int *x, int *y)
     {
 	if (*x + panel_req.width > xinerama_scr.xmax - 2)
 	{
-	    *x = xinerama_scr.xmax - panel_req.width + xthick;
+	    *x = xinerama_scr.xmax - panel_req.width;
 	    pos_state = EDGE;
 	}
 
 	if (*x < xinerama_scr.xmin + 2)
 	{
-	    *x = xinerama_scr.xmin - xthick;
+	    *x = xinerama_scr.xmin;
 	    pos_state = EDGE;
 	}
 
@@ -270,13 +265,13 @@ update_position (Panel * p, int *x, int *y)
 	{
 	    if (*y + panel_req.height > xinerama_scr.ymax - 2)
 	    {
-		*y = xinerama_scr.ymax - panel_req.height + ythick;
+		*y = xinerama_scr.ymax - panel_req.height;
 		pos_state = CORNER;
 	    }
 
 	    if (*y < xinerama_scr.ymin + 2)
 	    {
-		*y = xinerama_scr.ymin - ythick;
+		*y = xinerama_scr.ymin;
 		pos_state = CORNER;
 	    }
 	}
@@ -287,7 +282,7 @@ update_position (Panel * p, int *x, int *y)
 		(xinerama_scr.ymax - xinerama_scr.ymin) / 2 -
 		panel_req.height / 2;
 
-	    if (ycenter > xinerama_scr.ymin - ythick &&
+	    if (ycenter > xinerama_scr.ymin &&
 		*y > ycenter - 2 && *y < ycenter + 2)
 	    {
 		*y = ycenter;
