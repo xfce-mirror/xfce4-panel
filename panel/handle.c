@@ -253,15 +253,16 @@ Handle *handle_new(int side)
 
     gtk_widget_set_name(mh->eventbox, "xfce_panel");
 
-/*    mh->frame = gtk_frame_new(NULL);
+    mh->frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(mh->frame), GTK_SHADOW_NONE);
     gtk_widget_show(mh->frame);
     gtk_container_add(GTK_CONTAINER(mh->eventbox), mh->frame);
-*/
+
     pb = get_system_pixbuf(HANDLE_ICON);
     im = gtk_image_new_from_pixbuf(pb);
     g_object_unref(pb);
     gtk_widget_show(im);
-    gtk_container_add(GTK_CONTAINER(mh->eventbox), im);
+    gtk_container_add(GTK_CONTAINER(mh->frame), im);
 
     gtk_widget_set_name(im, "xfce_panel");
 

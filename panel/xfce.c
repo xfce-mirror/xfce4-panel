@@ -170,8 +170,8 @@ static void create_panel_contents(void)
     /* show them */
     gtk_widget_show(main_box);
     gtk_widget_show(panel_box);
-    gtk_widget_show(sep1);
-    gtk_widget_show(sep2);
+/*    gtk_widget_show(sep1);
+    gtk_widget_show(sep2);*/
     gtk_widget_show(left_box);
     gtk_widget_show(right_box);
     gtk_widget_show(central_box);
