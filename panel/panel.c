@@ -405,7 +405,7 @@ do_help (void)
 }
 
 static GtkItemFactoryEntry panel_items[] = {
-    {N_("/XFce Panel"), NULL, NULL, 0, "<Title>"},
+    {N_("/Xfce Panel"), NULL, NULL, 0, "<Title>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
     {N_("/Add _new item"), NULL, run_add_control_dialog, 0, "<Item>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
@@ -633,6 +633,8 @@ panel_hide_timeout (Panel * p)
     {
 	panel_set_hidden (p, TRUE);
     }
+    else
+	DBG ("already hidden");
 
     return FALSE;
 }
