@@ -32,6 +32,7 @@
 #endif
 
 #include <libxfce4util/i18n.h>
+#include <libxfce4util/debug.h>
 
 #include "xfce.h"
 #include "groups.h"
@@ -192,7 +193,7 @@ old_groups_set_from_xml (int side, xmlNodePtr node)
     if (node)
 	node = node->children;
 
-    for (i = last_group; i < settings.num_groups || li; i++)
+    for (i = last_group; /*i < settings.num_groups ||*/ li || node; i++)
     {
 	gboolean control_created = FALSE;
 
@@ -261,7 +262,9 @@ groups_set_from_xml (xmlNodePtr node)
     if (node)
 	node = node->children;
 
-    for (i = 0; i < settings.num_groups || li; i++)
+    DBG("expected number of panel items: %d", settings.num_groups);
+    
+    for (i = 0; /* i < settings.num_groups || */ li || node; i++)
     {
 	gboolean control_created = FALSE;
 
@@ -309,6 +312,10 @@ groups_set_from_xml (xmlNodePtr node)
 	if (li)
 	    li = li->next;
     }
+
+    settings.num_groups = g_slist_length (group_list);
+    
+    DBG("actual number of panel items: %d", settings.num_groups);
 }
 
 void

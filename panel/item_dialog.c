@@ -821,7 +821,6 @@ static void
 item_create_options (GtkContainer * container)
 {
     GtkWidget *vbox;
-    GtkWidget *box;
     GtkWidget *main_hbox;
     GtkWidget *options_box;
     GtkWidget *preview_frame;

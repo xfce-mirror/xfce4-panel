@@ -1014,6 +1014,7 @@ panel_parse_xml (xmlNodePtr node)
 
     if (value)
     {
+	DBG ("number of groups: %s", value);
 	settings.num_groups = atoi (value);
 	g_free (value);
     }
@@ -1093,8 +1094,8 @@ panel_parse_xml (xmlNodePtr node)
 	settings.orientation = HORIZONTAL;
     if (settings.size < TINY || settings.size > LARGE)
 	settings.size = SMALL;
-    if (settings.num_groups < 1 || settings.num_groups > 2 * NBGROUPS)
-	settings.num_groups = 10;
+/*    if (settings.num_groups < 1 || settings.num_groups > 2 * NBGROUPS)
+	settings.num_groups = 2*NBGROUPS; */
 }
 
 void
