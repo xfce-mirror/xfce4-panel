@@ -3,14 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-10-29 11:29+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2004-12-04 01:04+0100\n"
+"Last-Translator: Eskild Hustvedt <eskild@goldenfiles.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,26 +21,24 @@ msgstr "Velg fil"
 
 #: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "Ingen data ble funnet. Panelet vil være tomt."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89
+#: panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "Posisjon:"
 
 #: panel/controls_dialog.c:155
-#, fuzzy
 msgid "Item properties"
-msgstr "/_Egenskaper.."
+msgstr "Elementegenskaper"
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
-#, fuzzy
+#: panel/controls_dialog.c:209
+#: panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Fjerning av et element vil også fjerne dets popup meny.\n"
-"\n"
-"Vil du fjerne elementet?"
+msgstr "Fjerning av et element vil også fjerne popup menyen til elementet."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:123
+#: panel/item_dialog.c:551
 msgid "Select command"
 msgstr "Velg kommando"
 
@@ -82,12 +79,13 @@ msgid "Change menu item"
 msgstr "Endre meny element"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
-#, fuzzy
+#: panel/item_dialog.c:1200
+#: panel/controls.c:728
 msgid "_Remove"
-msgstr "/_Fjern"
+msgstr "_Fjern"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1212
+#: panel/item.c:668
 msgid "Launcher"
 msgstr "Programstarter"
 
@@ -108,7 +106,7 @@ msgid "Are you sure you want to exit?"
 msgstr "Er du sikker på at du vil avslutte?"
 
 #: panel/main.c:401
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -120,31 +118,39 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"%s, versjon %s\n"
-"Del av Xfce skrivebordsmiljøet\n"
-"http://www.xfce.org\n"
+"\n"
+"  Xfce Panelet\n"
+"  Versjon %s\n"
+"\n"
+"  En del av Xfce skrivebordsmiljøet\n"
+"  http://www.xfce.org\n"
+"\n"
+"  Lisensert under GNU GPL\n"
+"\n"
 
 #: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: Vellykket start uten økthåndering"
 
 #: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: Vellykket start med økthåndtering"
 
 #: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "Kunne ikke opprette panelelement «%s»."
 
-#: panel/controls.c:723 panel/panel.c:585
+#: panel/controls.c:723
+#: panel/panel.c:585
 #, fuzzy
 msgid "_Properties..."
 msgstr "/_Egenskaper.."
 
-#: panel/controls.c:737 panel/panel.c:575
+#: panel/controls.c:737
+#: panel/panel.c:575
 #, fuzzy
 msgid "Add _new item"
 msgstr "/Legg til _nytt element"
@@ -153,7 +159,9 @@ msgstr "/Legg til _nytt element"
 msgid "This item has no configuration options"
 msgstr "Dette elementet har konfigurasjons alternativer"
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
+#: panel/panel.c:566
+#: panel/panel.c:980
+#: settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:449
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
@@ -257,7 +265,7 @@ msgstr "Stor"
 
 #: settings/xfce_settings_dialog.c:100
 msgid "Huge"
-msgstr ""
+msgstr "Veldig stor"
 
 #: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
@@ -297,7 +305,7 @@ msgstr "Sprettopp posisjon:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Alltid øverst"
 
 #: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
@@ -316,13 +324,9 @@ msgid "Behaviour"
 msgstr "Oppførsel"
 
 #. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
 #. * I used these:
-#. * %A  : full weekday name
 #. * %d  : day of the month
-#. * %B  : full month name
 #. * %Y  : four digit year
-#.
 #: plugins/clock/clock.c:202
 #, fuzzy
 msgid "%A, %d %B %Y"
@@ -370,11 +374,11 @@ msgstr "Xfce klokke"
 
 #: plugins/pager/pager.c:311
 msgid "Number of rows:"
-msgstr ""
+msgstr "Antall rader:"
 
 #: plugins/pager/pager.c:313
 msgid "Number of columns:"
-msgstr ""
+msgstr "Antall kolonner:"
 
 #: plugins/pager/pager.c:360
 msgid "Graphical pager"
@@ -467,65 +471,3 @@ msgstr "Intervall (sek):"
 msgid "Mail checker"
 msgstr "E-post sjekk"
 
-#~ msgid "Remove"
-#~ msgstr "Fjern"
-
-#~ msgid "Show two buttons:"
-#~ msgstr "Vis to knapper:"
-
-#~ msgid "Change item"
-#~ msgstr "Endre element"
-
-#~ msgid "Menu:"
-#~ msgstr "Meny:"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Xfce Panel"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/Legg til _nytt element"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/_Egenskaper.."
-
-#~ msgid "Select icon"
-#~ msgstr "Velg ikon"
-
-#~ msgid "Icon:"
-#~ msgstr "Ikon:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Ikon forhåndsvisning"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "Vinduhåndtereren din ser ikke ut til å støtte de vinduhånteringshintene "
-#~ "som er definert av http://www.freedesktop.org. \n"
-#~ "Noen Xfce egenskaper virker kanskje ikke som påtenkt."
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/_Instillings håndterer"
-
-#~ msgid "Tiny"
-#~ msgstr "Knøttliten"
-
-#~ msgid "Icon theme:"
-#~ msgstr "Ikon tema:"
-
-#~ msgid "Panel layer:"
-#~ msgstr "Panel lag:"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Center the panel:"
-#~ msgstr "Sentrer panelet:"
-
-#~ msgid "Set"
-#~ msgstr "Sett"
-
-#~ msgid "Position"
-#~ msgstr "Posisjon"
