@@ -102,9 +102,9 @@ get_localized_system_rcfile (const gchar * name)
 
     sysrcfile = g_build_filename (SYSCONFDIR, SYSRCDIR, name, NULL);
 
-    result = xfce_get_file_localized(sysrcfile);
+    result = xfce_get_file_localized (sysrcfile);
 
-    g_free(sysrcfile);
+    g_free (sysrcfile);
 
     return result;
 }
@@ -829,16 +829,16 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
     SnDisplay *sn_display = NULL;
 #endif
 
-    if (g_path_is_absolute(cmd) && g_file_test (cmd, G_FILE_TEST_IS_DIR))
+    if (g_path_is_absolute (cmd) && g_file_test (cmd, G_FILE_TEST_IS_DIR))
     {
-        if (in_terminal)
-        {
+	if (in_terminal)
+	{
 	    execute = g_strdup_printf ("xfterm4 %s", cmd);
-        }
-        else
-        {
+	}
+	else
+	{
 	    execute = g_strdup_printf ("xftree4 %s", cmd);
-        }
+	}
     }
     else if (in_terminal)
     {
@@ -946,44 +946,44 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
 typedef struct _ActionCommand ActionCommand;
 struct _ActionCommand
 {
-	gchar		*cmd;
-	gboolean	in_terminal;
-	gboolean	use_sn;
-	gboolean	silent;
+    gchar *cmd;
+    gboolean in_terminal;
+    gboolean use_sn;
+    gboolean silent;
 };
 
 static gboolean
-delayed_exec(ActionCommand *command)
+delayed_exec (ActionCommand * command)
 {
-	real_exec_cmd(command->cmd, command->in_terminal, command->use_sn,
-			command->silent);
+    real_exec_cmd (command->cmd, command->in_terminal, command->use_sn,
+		   command->silent);
 
-	g_free(command->cmd);
-	g_free(command);
+    g_free (command->cmd);
+    g_free (command);
 
-	return(FALSE);
+    return (FALSE);
 }
 
 static void
-schedule_exec(const gchar *cmd, gboolean in_terminal, gboolean use_sn,
-	      gboolean silent)
+schedule_exec (const gchar * cmd, gboolean in_terminal, gboolean use_sn,
+	       gboolean silent)
 {
-	ActionCommand *command;
+    ActionCommand *command;
 
-	command = g_new(ActionCommand, 1);
-	command->cmd = g_strdup(cmd);
-	command->in_terminal = in_terminal;
-	command->use_sn = use_sn;
-	command->silent = silent;
+    command = g_new (ActionCommand, 1);
+    command->cmd = g_strdup (cmd);
+    command->in_terminal = in_terminal;
+    command->use_sn = use_sn;
+    command->silent = silent;
 
-	(void)g_idle_add((GSourceFunc)delayed_exec, (gpointer)command);
+    (void) g_idle_add ((GSourceFunc) delayed_exec, (gpointer) command);
 }
 
 void
 exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
     g_return_if_fail (cmd != NULL);
-    schedule_exec(cmd, in_terminal, use_sn, FALSE);
+    schedule_exec (cmd, in_terminal, use_sn, FALSE);
 }
 
 /* without error reporting dialog */
@@ -991,5 +991,5 @@ void
 exec_cmd_silent (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
     g_return_if_fail (cmd != NULL);
-    schedule_exec(cmd, in_terminal, use_sn, TRUE);
+    schedule_exec (cmd, in_terminal, use_sn, TRUE);
 }

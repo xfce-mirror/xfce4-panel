@@ -83,10 +83,10 @@ item_click_cb (GtkButton * b, Item * item)
 {
     if (item->type == PANELITEM && popup_from_timeout)
 	return;
-    
+
     if (popup_timeout_id > 0)
     {
-	g_source_remove(popup_timeout_id);
+	g_source_remove (popup_timeout_id);
 	popup_timeout_id = 0;
     }
 
@@ -166,17 +166,17 @@ menu_item_press (GtkButton * b, GdkEventButton * ev, Item * mi)
 
 /*  Panel item callbacks
  *  --------------------
-*/  
+*/
 static gboolean
-popup_menu_timeout(Item * item)
+popup_menu_timeout (Item * item)
 {
     GtkWidget *box;
     GList *li;
 
     popup_timeout_id = 0;
-    
+
     /* FIXME: items should know about their parent */
-    
+
     /* Explanantion of code below:
      * 
      * For a panel item with menu we have a GtkBox containing a control 
@@ -190,25 +190,25 @@ popup_menu_timeout(Item * item)
      * toggle button.
      *
      * There, that's it.
-     */ 
-    box=item->button->parent->parent;
+     */
+    box = item->button->parent->parent;
 
-    for (li = GTK_BOX(box)->children; li; li = li->next)
+    for (li = GTK_BOX (box)->children; li; li = li->next)
     {
-	GtkWidget *w = ((GtkBoxChild*)li->data)->widget;
-	
-	if (!GTK_IS_WIDGET(w))
+	GtkWidget *w = ((GtkBoxChild *) li->data)->widget;
+
+	if (!GTK_IS_WIDGET (w))
 	    continue;
-	
+
 	if (w != item->button->parent)
 	{
-	    if (!gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(w)))
+	    if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)))
 	    {
 		popup_from_timeout = TRUE;
 
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(w), TRUE);
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), TRUE);
 	    }
-	    
+
 	    break;
 	}
     }
@@ -218,7 +218,7 @@ popup_menu_timeout(Item * item)
 
 static gboolean
 panel_item_press (GtkButton * b, GdkEventButton * ev, Item * item)
-{    
+{
     popup_from_timeout = FALSE;
 
     if (!item->with_popup)
@@ -226,8 +226,8 @@ panel_item_press (GtkButton * b, GdkEventButton * ev, Item * item)
 
     if (ev->button == 1 && !(ev->state & GDK_SHIFT_MASK))
     {
-	popup_timeout_id = g_timeout_add(400, (GSourceFunc)popup_menu_timeout, 
-					 item);
+	popup_timeout_id =
+	    g_timeout_add (400, (GSourceFunc) popup_menu_timeout, item);
     }
 
     return FALSE;
@@ -528,8 +528,8 @@ panel_item_new (void)
     item_apply_config (pi);
 
     g_signal_connect (pi->button, "clicked", G_CALLBACK (item_click_cb), pi);
-    g_signal_connect (pi->button, "button-press-event", 
-	    	      G_CALLBACK (panel_item_press), pi);
+    g_signal_connect (pi->button, "button-press-event",
+		      G_CALLBACK (panel_item_press), pi);
 
     dnd_set_drag_dest (pi->button);
     g_signal_connect (pi->button, "drag-data-received",
@@ -562,7 +562,6 @@ panel_item_read_config (Control * control, xmlNodePtr node)
     item_read_config (pi, node);
 
     item_apply_config (pi);
-    control->with_popup = pi->with_popup;
     groups_show_popup (control->index, pi->with_popup);
 }
 
@@ -588,6 +587,7 @@ create_panel_item (Control * control)
 {
     Item *pi = panel_item_new ();
 
+    control->with_popup = TRUE;
     gtk_container_add (GTK_CONTAINER (control->base), pi->button);
 
     control->data = (gpointer) pi;

@@ -43,9 +43,8 @@ struct _Panel
 /* panel functions */
 void create_panel (void);
 void panel_cleanup (void);
-void panel_add_control (void);
 
-/* apply panel settings */
+/* global settings */
 void panel_set_settings (void);
 
 void panel_center (int side);
@@ -59,8 +58,6 @@ void panel_set_popup_position (int position);
 void panel_set_theme (const char *theme);
 
 void panel_set_autohide (gboolean hide);
-
-void panel_set_num_groups (int n);
 
 /* panel data */
 void panel_parse_xml (xmlNodePtr node);

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-09-22 21:31+0200\n"
+"POT-Creation-Date: 2003-12-04 09:37+0100\n"
 "PO-Revision-Date: 2003-07-05 16:17+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: ca <LL@li.org>\n"
@@ -22,11 +22,11 @@ msgstr "Seleccioneu el fitxer"
 msgid "Change item"
 msgstr "Canviar element"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:681
 msgid "Position:"
 msgstr "Posició:"
 
-#: panel/controls_dialog.c:331 panel/controls.c:272
+#: panel/controls_dialog.c:342 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -36,64 +36,64 @@ msgstr ""
 "\n"
 "Vols suprimir l'element?"
 
-#: panel/item_dialog.c:320
+#: panel/item_dialog.c:321
 msgid "Other Icon"
 msgstr "Una altra icona"
 
-#: panel/item_dialog.c:345
+#: panel/item_dialog.c:346
 msgid "Select icon"
 msgstr "Seleccioneu una icona"
 
-#: panel/item_dialog.c:384
+#: panel/item_dialog.c:396
 msgid "Icon:"
 msgstr "Icona:"
 
-#: panel/item_dialog.c:433
+#: panel/item_dialog.c:467
 msgid "Select command"
 msgstr "Seleccioneu ordre"
 
-#: panel/item_dialog.c:461
+#: panel/item_dialog.c:495
 msgid "Command:"
 msgstr "Ordre:"
 
-#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Executar en un _terminal"
 
-#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Utilitzeu _notificació d'inicialització"
 
-#: panel/item_dialog.c:530
+#: panel/item_dialog.c:564
 msgid "Caption:"
 msgstr "Llegenda:"
 
-#: panel/item_dialog.c:563
+#: panel/item_dialog.c:597
 msgid "Tooltip:"
 msgstr "Rètol indicador:"
 
-#: panel/item_dialog.c:599
+#: panel/item_dialog.c:633
 msgid "Menu:"
 msgstr "Menú:"
 
-#: panel/item_dialog.c:606
+#: panel/item_dialog.c:640
 msgid "Attach menu to launcher"
 msgstr "Afegir un menú al llançador"
 
-#: panel/item_dialog.c:738
+#: panel/item_dialog.c:773
 msgid "Icon Preview"
 msgstr "Previsualització d'icona"
 
-#: panel/item_dialog.c:742
+#: panel/item_dialog.c:777
 msgid "Drag file onto this frame to change the icon"
 msgstr "Arrossega el fitxer dins d'aquest marc per canviar la icona"
 
-#: panel/item_dialog.c:930
+#: panel/item_dialog.c:965
 msgid "Change menu item"
 msgstr "Canvia l'element del menú"
 
 #. add buttons
-#: panel/item_dialog.c:933
+#: panel/item_dialog.c:968
 msgid "Remove"
 msgstr "Elimina"
 
@@ -113,11 +113,11 @@ msgstr "Afegir un nou element"
 msgid "Launcher"
 msgstr "Llançador"
 
-#: panel/main.c:132
+#: panel/main.c:117
 msgid "Are you sure you want to exit?"
 msgstr "Esteu segur que voleu sortir?"
 
-#: panel/main.c:268
+#: panel/main.c:329
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -128,7 +128,7 @@ msgstr ""
 "Part del Entorn d'Escriptori XFce\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:284
+#: panel/main.c:361
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -138,11 +138,11 @@ msgstr ""
 "finestras tal com estan definits a http://www..freedesktop.org. \n"
 "Algunes funcionalitats poden no funcionar tal com es van preveure."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/Afegir _nou element"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/_Propietats..."
 
@@ -154,31 +154,36 @@ msgstr "/_Elimina"
 msgid "This item has no configuration options"
 msgstr "Aquest element no té opcions de configuració"
 
-#: panel/panel.c:121
+#: panel/panel.c:410
 msgid "/XFce Panel"
 msgstr "/Plafó XFce"
 
-#: panel/panel.c:126
-msgid "/_Settings manager"
-msgstr "/_Gestor d'ajustaments"
-
-#: panel/panel.c:128
+#: panel/panel.c:415
 msgid "/_About XFce"
 msgstr "/_Quant a XFce"
 
-#: panel/panel.c:129
+#: panel/panel.c:416
 msgid "/_Help"
 msgstr "/_Ajuda"
 
-#: panel/panel.c:131
+#: panel/panel.c:419
+msgid "/_Settings manager"
+msgstr "/_Gestor d'ajustaments"
+
+#: panel/panel.c:422
 msgid "/_Lock screen"
 msgstr "/_Bloqueja la pantalla"
 
-#: panel/panel.c:132
+#: panel/panel.c:423
+#, fuzzy
+msgid "/_Restart"
+msgstr "_Reverteix"
+
+#: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/S_urt"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "Plafó XFce"
@@ -239,7 +244,7 @@ msgstr "Terminal"
 msgid "Settings manager not available"
 msgstr "El gestor d'ajustaments no està disponible"
 
-#: panel/popup.c:263
+#: panel/popup.c:261
 msgid "Menu"
 msgstr "Menú"
 
@@ -340,123 +345,59 @@ msgstr "Posició"
 msgid "Behaviour"
 msgstr "Comportament"
 
-#: plugins/clock/clock.c:57
-msgid "Sunday"
-msgstr "Diumenge"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %-d : day of the month, without prefixed 0
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:119
+msgid "%A, %-d %B %Y"
+msgstr ""
 
-#: plugins/clock/clock.c:58
-msgid "Monday"
-msgstr "Dilluns"
-
-#: plugins/clock/clock.c:59
-msgid "Tuesday"
-msgstr "Dimarts"
-
-#: plugins/clock/clock.c:60
-msgid "Wednesday"
-msgstr "Dimecres"
-
-#: plugins/clock/clock.c:61
-msgid "Thursday"
-msgstr "Dijous"
-
-#: plugins/clock/clock.c:62
-msgid "Friday"
-msgstr "Divendres"
-
-#: plugins/clock/clock.c:63
-msgid "Saturday"
-msgstr "Dissabte"
-
-#: plugins/clock/clock.c:67
-msgid "January"
-msgstr "Gener"
-
-#: plugins/clock/clock.c:68
-msgid "February"
-msgstr "Febrer"
-
-#: plugins/clock/clock.c:69
-msgid "March"
-msgstr "Març"
-
-#: plugins/clock/clock.c:70
-msgid "April"
-msgstr "Abril"
-
-#: plugins/clock/clock.c:71
-msgid "May"
-msgstr "Maig"
-
-#: plugins/clock/clock.c:72
-msgid "June"
-msgstr "Juny"
-
-#: plugins/clock/clock.c:73
-msgid "July"
-msgstr "Juliol"
-
-#: plugins/clock/clock.c:74
-msgid "August"
-msgstr "Agost"
-
-#: plugins/clock/clock.c:75
-msgid "September"
-msgstr "Setembre"
-
-#: plugins/clock/clock.c:76
-msgid "October"
-msgstr "Octubre"
-
-#: plugins/clock/clock.c:77
-msgid "November"
-msgstr "Novembre"
-
-#: plugins/clock/clock.c:78
-msgid "December"
-msgstr "Decembre"
-
-#: plugins/clock/clock.c:350
+#: plugins/clock/clock.c:336
 msgid "Clock type:"
 msgstr "Tipus de rellotge:"
 
-#: plugins/clock/clock.c:363
+#: plugins/clock/clock.c:349
 msgid "Analog"
 msgstr "Analògic"
 
-#: plugins/clock/clock.c:367
+#: plugins/clock/clock.c:353
 msgid "Digital"
 msgstr "Digital"
 
-#: plugins/clock/clock.c:371
+#: plugins/clock/clock.c:357
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:419
 msgid "Hour mode:"
 msgstr "Format d'hora:"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:426
 msgid "24 hour"
 msgstr "24 hores"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:432
 msgid "12 hour"
 msgstr "12 hores"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:438
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:490
+#: plugins/clock/clock.c:476
 msgid "Show seconds:"
 msgstr "Mostra els segons:"
 
-#: plugins/clock/clock.c:599
+#: plugins/clock/clock.c:585
 msgid "Xfce Clock"
 msgstr "Rellotge XFce"
 
-#: plugins/pager/pager.c:277
+#: plugins/pager/pager.c:271
 msgid "Graphical pager"
 msgstr "Paginador gràfic"
 
@@ -538,11 +479,65 @@ msgstr "Interval (seg):"
 msgid "Mail check"
 msgstr "Comprovació de correu"
 
+#~ msgid "Sunday"
+#~ msgstr "Diumenge"
+
+#~ msgid "Monday"
+#~ msgstr "Dilluns"
+
+#~ msgid "Tuesday"
+#~ msgstr "Dimarts"
+
+#~ msgid "Wednesday"
+#~ msgstr "Dimecres"
+
+#~ msgid "Thursday"
+#~ msgstr "Dijous"
+
+#~ msgid "Friday"
+#~ msgstr "Divendres"
+
+#~ msgid "Saturday"
+#~ msgstr "Dissabte"
+
+#~ msgid "January"
+#~ msgstr "Gener"
+
+#~ msgid "February"
+#~ msgstr "Febrer"
+
+#~ msgid "March"
+#~ msgstr "Març"
+
+#~ msgid "April"
+#~ msgstr "Abril"
+
+#~ msgid "May"
+#~ msgstr "Maig"
+
+#~ msgid "June"
+#~ msgstr "Juny"
+
+#~ msgid "July"
+#~ msgstr "Juliol"
+
+#~ msgid "August"
+#~ msgstr "Agost"
+
+#~ msgid "September"
+#~ msgstr "Setembre"
+
+#~ msgid "October"
+#~ msgstr "Octubre"
+
+#~ msgid "November"
+#~ msgstr "Novembre"
+
+#~ msgid "December"
+#~ msgstr "Decembre"
+
 #~ msgid "_Done"
 #~ msgstr "_Fet"
-
-#~ msgid "_Revert"
-#~ msgstr "_Reverteix"
 
 #~ msgid "Type:"
 #~ msgstr "Tipus:"

@@ -47,7 +47,7 @@ struct _ControlClass
 			     GCallback callback, gpointer data);
 
     void (*create_options) (Control * control, GtkContainer * container,
-			 GtkWidget * done);
+			    GtkWidget * done);
 
     /* global preferences */
     void (*set_orientation) (Control * control, int orientation);
@@ -95,7 +95,7 @@ void control_unpack (Control * control);
 void control_attach_callbacks (Control * control);
 
 void control_create_options (Control * control, GtkContainer * container,
-			  GtkWidget * done);
+			     GtkWidget * done);
 
 /* global settings */
 void control_set_settings (Control * control);

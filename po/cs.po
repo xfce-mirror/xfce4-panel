@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"POT-Creation-Date: 2003-12-04 09:37+0100\n"
 "PO-Revision-Date: 2003-15-11 HO:MI+ZONE\n"
 "Last-Translator: Lukas Konarovsky <daeltar@daeltar.org>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr "Vyber soubor"
 msgid "Change item"
 msgstr "Změn položku"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:681
 msgid "Position:"
 msgstr "Pozice:"
 
@@ -37,64 +37,64 @@ msgstr ""
 "\n"
 "Chcete ji skutečně odstranit?"
 
-#: panel/item_dialog.c:320
+#: panel/item_dialog.c:321
 msgid "Other Icon"
 msgstr "Jiná ikona"
 
-#: panel/item_dialog.c:345
+#: panel/item_dialog.c:346
 msgid "Select icon"
 msgstr "Vyber ikonu"
 
-#: panel/item_dialog.c:384
+#: panel/item_dialog.c:396
 msgid "Icon:"
 msgstr "Ikona:"
 
-#: panel/item_dialog.c:433
+#: panel/item_dialog.c:467
 msgid "Select command"
 msgstr "Vyber příkaz"
 
-#: panel/item_dialog.c:461
+#: panel/item_dialog.c:495
 msgid "Command:"
 msgstr "Příkaz:"
 
-#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Spusť v _terminálu"
 
-#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Použij startup _notification"
 
-#: panel/item_dialog.c:530
+#: panel/item_dialog.c:564
 msgid "Caption:"
 msgstr "Nadpis:"
 
-#: panel/item_dialog.c:563
+#: panel/item_dialog.c:597
 msgid "Tooltip:"
 msgstr "Popisek:"
 
-#: panel/item_dialog.c:599
+#: panel/item_dialog.c:633
 msgid "Menu:"
 msgstr "Menu:"
 
-#: panel/item_dialog.c:606
+#: panel/item_dialog.c:640
 msgid "Attach menu to launcher"
 msgstr "Pridej menu k spušteči"
 
-#: panel/item_dialog.c:738
+#: panel/item_dialog.c:773
 msgid "Icon Preview"
 msgstr "Náhled ikony"
 
-#: panel/item_dialog.c:742
+#: panel/item_dialog.c:777
 msgid "Drag file onto this frame to change the icon"
 msgstr "Táhni soubor na tento rám ke změně ikony"
 
-#: panel/item_dialog.c:930
+#: panel/item_dialog.c:965
 msgid "Change menu item"
 msgstr "Změn položku menu"
 
 #. add buttons
-#: panel/item_dialog.c:933
+#: panel/item_dialog.c:968
 msgid "Remove"
 msgstr "Odstraň"
 
@@ -114,11 +114,11 @@ msgstr "Přidej novou položku"
 msgid "Launcher"
 msgstr "Spoušteč"
 
-#: panel/main.c:115
+#: panel/main.c:117
 msgid "Are you sure you want to exit?"
 msgstr "Jste si jisti, že chcete ukončit XFce?"
 
-#: panel/main.c:243
+#: panel/main.c:329
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -129,21 +129,21 @@ msgstr ""
 "Část XFce Desktop Environment\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:259
+#: panel/main.c:361
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Váš window manager jak se zdá nepodporuje window manager hints jak "
-"je definováno na http://www.freedesktop.org. \n"
+"Váš window manager jak se zdá nepodporuje window manager hints jak je "
+"definováno na http://www.freedesktop.org. \n"
 "Některé z vlastností XFce nemusí fungovat jek bylo zamýšleno."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/Přidat _novou položku"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/_Vlastnosti..."
 
@@ -155,31 +155,35 @@ msgstr "/_Odstranit"
 msgid "This item has no configuration options"
 msgstr "Tato položka nemá žádná nasatvitelné vlastnosti"
 
-#: panel/panel.c:121
+#: panel/panel.c:410
 msgid "/XFce Panel"
 msgstr "/XFce Panel"
 
-#: panel/panel.c:126
-msgid "/_Settings manager"
-msgstr "/_Settings manager"
-
-#: panel/panel.c:128
+#: panel/panel.c:415
 msgid "/_About XFce"
 msgstr "/_O desktopu XFce"
 
-#: panel/panel.c:129
+#: panel/panel.c:416
 msgid "/_Help"
 msgstr "/_Nápověda"
 
-#: panel/panel.c:131
+#: panel/panel.c:419
+msgid "/_Settings manager"
+msgstr "/_Settings manager"
+
+#: panel/panel.c:422
 msgid "/_Lock screen"
 msgstr "/_Zamknout obrazovku"
 
-#: panel/panel.c:132
+#: panel/panel.c:423
+msgid "/_Restart"
+msgstr ""
+
+#: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/_Konec"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce Panel"
@@ -240,7 +244,7 @@ msgstr "Terminál"
 msgid "Settings manager not available"
 msgstr "Správce nastavení není dostupný"
 
-#: panel/popup.c:263
+#: panel/popup.c:261
 msgid "Menu"
 msgstr "Menu"
 
@@ -341,119 +345,55 @@ msgstr "Pozice"
 msgid "Behaviour"
 msgstr "Chování"
 
-#: plugins/clock/clock.c:57
-msgid "Sunday"
-msgstr "Neděle"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %-d : day of the month, without prefixed 0
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:119
+msgid "%A, %-d %B %Y"
+msgstr ""
 
-#: plugins/clock/clock.c:58
-msgid "Monday"
-msgstr "Pondělí"
-
-#: plugins/clock/clock.c:59
-msgid "Tuesday"
-msgstr "Úterý"
-
-#: plugins/clock/clock.c:60
-msgid "Wednesday"
-msgstr "Středa"
-
-#: plugins/clock/clock.c:61
-msgid "Thursday"
-msgstr "Čtvrtek"
-
-#: plugins/clock/clock.c:62
-msgid "Friday"
-msgstr "Pátek"
-
-#: plugins/clock/clock.c:63
-msgid "Saturday"
-msgstr "Sobota"
-
-#: plugins/clock/clock.c:67
-msgid "January"
-msgstr "Leden"
-
-#: plugins/clock/clock.c:68
-msgid "February"
-msgstr "Únor"
-
-#: plugins/clock/clock.c:69
-msgid "March"
-msgstr "Březen"
-
-#: plugins/clock/clock.c:70
-msgid "April"
-msgstr "Duben"
-
-#: plugins/clock/clock.c:71
-msgid "May"
-msgstr "Květen"
-
-#: plugins/clock/clock.c:72
-msgid "June"
-msgstr "Červen"
-
-#: plugins/clock/clock.c:73
-msgid "July"
-msgstr "Červenec"
-
-#: plugins/clock/clock.c:74
-msgid "August"
-msgstr "Srpen"
-
-#: plugins/clock/clock.c:75
-msgid "September"
-msgstr "Září"
-
-#: plugins/clock/clock.c:76
-msgid "October"
-msgstr "Říjen"
-
-#: plugins/clock/clock.c:77
-msgid "November"
-msgstr "Listopad"
-
-#: plugins/clock/clock.c:78
-msgid "December"
-msgstr "Prosinec"
-
-#: plugins/clock/clock.c:350
+#: plugins/clock/clock.c:336
 msgid "Clock type:"
 msgstr "Typ hodin:"
 
-#: plugins/clock/clock.c:363
+#: plugins/clock/clock.c:349
 msgid "Analog"
 msgstr "Analogové"
 
-#: plugins/clock/clock.c:367
+#: plugins/clock/clock.c:353
 msgid "Digital"
 msgstr "Digitální"
 
-#: plugins/clock/clock.c:371
+#: plugins/clock/clock.c:357
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:419
 msgid "Hour mode:"
 msgstr "Hodinový mód:"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:426
 msgid "24 hour"
 msgstr "24 hodinový"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:432
 msgid "12 hour"
 msgstr "12 hodinový"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:438
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:490
+#: plugins/clock/clock.c:476
 msgid "Show seconds:"
 msgstr "Ukázat sekundy:"
 
-#: plugins/clock/clock.c:599
+#: plugins/clock/clock.c:585
 msgid "Xfce Clock"
 msgstr "Xfce Hodiny"
 
@@ -538,3 +478,60 @@ msgstr "Inerval (sec)"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Konrola pošty"
+
+#~ msgid "Sunday"
+#~ msgstr "Neděle"
+
+#~ msgid "Monday"
+#~ msgstr "Pondělí"
+
+#~ msgid "Tuesday"
+#~ msgstr "Úterý"
+
+#~ msgid "Wednesday"
+#~ msgstr "Středa"
+
+#~ msgid "Thursday"
+#~ msgstr "Čtvrtek"
+
+#~ msgid "Friday"
+#~ msgstr "Pátek"
+
+#~ msgid "Saturday"
+#~ msgstr "Sobota"
+
+#~ msgid "January"
+#~ msgstr "Leden"
+
+#~ msgid "February"
+#~ msgstr "Únor"
+
+#~ msgid "March"
+#~ msgstr "Březen"
+
+#~ msgid "April"
+#~ msgstr "Duben"
+
+#~ msgid "May"
+#~ msgstr "Květen"
+
+#~ msgid "June"
+#~ msgstr "Červen"
+
+#~ msgid "July"
+#~ msgstr "Červenec"
+
+#~ msgid "August"
+#~ msgstr "Srpen"
+
+#~ msgid "September"
+#~ msgstr "Září"
+
+#~ msgid "October"
+#~ msgstr "Říjen"
+
+#~ msgid "November"
+#~ msgstr "Listopad"
+
+#~ msgid "December"
+#~ msgstr "Prosinec"

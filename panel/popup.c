@@ -48,6 +48,9 @@ hide_popup (PanelPopup * pp)
     if (open_popup == pp)
 	open_popup = NULL;
 
+    if (!pp)
+	return;
+    
     xfce_togglebutton_set_active (XFCE_TOGGLEBUTTON (pp->button), FALSE);
 
     gtk_widget_hide (pp->window);
@@ -61,16 +64,18 @@ hide_popup (PanelPopup * pp)
 }
 
 static void
-position_popup (PanelPopup * pp) 
+position_popup (PanelPopup * pp)
 {
     GtkRequisition req;
     GdkWindow *p;
     int xbutton, ybutton, xparent, yparent, x, y;
     int w, h;
     gboolean vertical = settings.orientation == VERTICAL;
-    int pos = settings.popup_position;
-    GtkAllocation alloc1 = {0,}, alloc2 = {0,};
+    GtkAllocation alloc1 = {0}, alloc2 = {0};
     GtkArrowType at;
+
+    if (!pp)
+	return;
     
     if (pp->detached)
 	return;
@@ -85,8 +90,8 @@ position_popup (PanelPopup * pp)
     w = gdk_screen_width ();
     h = gdk_screen_height ();
 
-    at = xfce_togglebutton_get_arrow_type (XFCE_TOGGLEBUTTON(pp->button));
-    
+    at = xfce_togglebutton_get_arrow_type (XFCE_TOGGLEBUTTON (pp->button));
+
     if (!GTK_WIDGET_REALIZED (pp->window))
 	gtk_widget_realize (pp->window);
 
@@ -174,6 +179,9 @@ position_popup (PanelPopup * pp)
 static void
 show_popup (PanelPopup * pp)
 {
+    if (!pp)
+	return;
+    
     if (open_popup)
 	hide_popup (open_popup);
 
@@ -196,7 +204,7 @@ show_popup (PanelPopup * pp)
 	gtk_widget_show (pp->separator);
     }
 
-    position_popup(pp);
+    position_popup (pp);
 }
 
 void
@@ -337,9 +345,9 @@ create_panel_popup (void)
     pp->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     set_popup_window_properties (pp->window);
 
-    g_signal_connect_swapped(pp->window, "size-allocate", 
-	    		     G_CALLBACK(position_popup), pp);
-    
+    g_signal_connect_swapped (pp->window, "size-allocate",
+			      G_CALLBACK (position_popup), pp);
+
     pp->frame = gtk_frame_new (NULL);
     gtk_frame_set_shadow_type (GTK_FRAME (pp->frame), GTK_SHADOW_OUT);
     gtk_container_add (GTK_CONTAINER (pp->window), pp->frame);
@@ -391,13 +399,21 @@ create_panel_popup (void)
 void
 panel_popup_pack (PanelPopup * pp, GtkBox * box)
 {
+    if (!pp)
+	return;
+    
     gtk_box_pack_start (box, pp->button, FALSE, FALSE, 0);
 }
 
 void
 panel_popup_unpack (PanelPopup * pp)
 {
-    GtkWidget *container = pp->button->parent;
+    GtkWidget *container;
+
+    if (!pp)
+	return;
+    
+    container = pp->button->parent;
 
     gtk_container_remove (GTK_CONTAINER (container), pp->button);
 }
@@ -447,6 +463,9 @@ panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node)
     xmlNodePtr child;
     int i;
 
+    if (!pp)
+	return;
+    
     for (i = 0, child = node->children; child; i++, child = child->next)
     {
 	Item *mi;
@@ -470,6 +489,9 @@ panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root)
     xmlNodePtr node, child;
     GList *li;
 
+    if (!pp || !pp->items)
+	return;
+    
     node = xmlNewTextChild (root, NULL, "Popup", NULL);
 
     for (li = pp->items; li; li = li->next)
@@ -488,6 +510,9 @@ panel_popup_free (PanelPopup * pp)
     /* only items contain non-gtk elements to be freed */
     GList *li;
 
+    if (!pp)
+	return;
+
     for (li = pp->items; li && li->data; li = li->next)
     {
 	Item *mi = li->data;
@@ -505,6 +530,9 @@ panel_popup_set_size (PanelPopup * pp, int size)
     int w, h;
     GList *li;
 
+    if (!pp)
+	return;
+    
     w = icon_size[size] + border_width;
     h = top_height[size];
 
@@ -529,12 +557,18 @@ panel_popup_set_popup_position (PanelPopup * pp, int position)
 {
     settings.popup_position = position;
 
+    if (!pp)
+	return;
+    
     panel_popup_set_size (pp, settings.size);
 }
 
 void
 panel_popup_set_layer (PanelPopup * pp, int layer)
 {
+    if (!pp)
+	return;
+    
     set_window_layer (pp->window, layer);
 }
 
@@ -543,6 +577,9 @@ panel_popup_set_theme (PanelPopup * pp, const char *theme)
 {
     GList *li;
 
+    if (!pp)
+	return;
+    
     for (li = pp->items; li && li->data; li = li->next)
     {
 	Item *mi = li->data;
@@ -556,7 +593,6 @@ panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type)
 {
     if (!pp || !pp->button)
 	return;
-	    
-    xfce_togglebutton_set_arrow_type (XFCE_TOGGLEBUTTON (pp->button), 
-				      type);
+
+    xfce_togglebutton_set_arrow_type (XFCE_TOGGLEBUTTON (pp->button), type);
 }

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 1.0.0\n"
-"POT-Creation-Date: 2003-11-03 19:52+0100\n"
+"POT-Creation-Date: 2003-12-04 09:37+0100\n"
 "PO-Revision-Date: 2003-11-20 08:52+0100\n"
 "Last-Translator: Eduard Roccatello <master@spine-group.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -23,7 +23,7 @@ msgstr "Selezione file"
 msgid "Change item"
 msgstr "Cambia oggetto"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:681
 msgid "Position:"
 msgstr "Posizione:"
 
@@ -37,64 +37,64 @@ msgstr ""
 "\n"
 "Vuoi veramente rimuoverlo?"
 
-#: panel/item_dialog.c:320
+#: panel/item_dialog.c:321
 msgid "Other Icon"
 msgstr "Altra icona"
 
-#: panel/item_dialog.c:345
+#: panel/item_dialog.c:346
 msgid "Select icon"
 msgstr "Seleziona un'icona"
 
-#: panel/item_dialog.c:384
+#: panel/item_dialog.c:396
 msgid "Icon:"
 msgstr "Icona:"
 
-#: panel/item_dialog.c:433
+#: panel/item_dialog.c:467
 msgid "Select command"
 msgstr "Seleziona comando"
 
-#: panel/item_dialog.c:461
+#: panel/item_dialog.c:495
 msgid "Command:"
 msgstr "Comando:"
 
-#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Avvia nel _terminale"
 
-#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "_Notifica in avvio"
 
-#: panel/item_dialog.c:530
+#: panel/item_dialog.c:564
 msgid "Caption:"
 msgstr "Etichetta:"
 
-#: panel/item_dialog.c:563
+#: panel/item_dialog.c:597
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:599
+#: panel/item_dialog.c:633
 msgid "Menu:"
 msgstr "Menu:"
 
-#: panel/item_dialog.c:606
+#: panel/item_dialog.c:640
 msgid "Attach menu to launcher"
 msgstr "Aggiungi menu al launcher"
 
-#: panel/item_dialog.c:739
+#: panel/item_dialog.c:773
 msgid "Icon Preview"
 msgstr "Anteprima icona"
 
-#: panel/item_dialog.c:743
+#: panel/item_dialog.c:777
 msgid "Drag file onto this frame to change the icon"
 msgstr "Trascina i file in questo riquadro per cambiare icona"
 
-#: panel/item_dialog.c:931
+#: panel/item_dialog.c:965
 msgid "Change menu item"
 msgstr "Cambia oggetto del menu"
 
 #. add buttons
-#: panel/item_dialog.c:934
+#: panel/item_dialog.c:968
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -114,11 +114,11 @@ msgstr "Aggiungi nuovo oggetto"
 msgid "Launcher"
 msgstr "Launcher"
 
-#: panel/main.c:116
+#: panel/main.c:117
 msgid "Are you sure you want to exit?"
 msgstr "Sei sicuro di voler uscire?"
 
-#: panel/main.c:312
+#: panel/main.c:329
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -129,21 +129,21 @@ msgstr ""
 "Parte di XFce Desktop Environment\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:342
+#: panel/main.c:361
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"Il tuo window manager non sembra supportare alcune delle specifiche "
-"definite da http://www.freedesktop.org. \n"
+"Il tuo window manager non sembra supportare alcune delle specifiche definite "
+"da http://www.freedesktop.org. \n"
 "Alcune caratteristiche di XFce potrebbero non funzionare correttamente."
 
-#: panel/controls.c:320 panel/panel.c:228
+#: panel/controls.c:320 panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/Aggiungi un _nuovo oggetto"
 
-#: panel/controls.c:322 panel/panel.c:230
+#: panel/controls.c:322 panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/_Proprieta`..."
 
@@ -155,31 +155,35 @@ msgstr "/_Rimuovi"
 msgid "This item has no configuration options"
 msgstr "Questo oggetto non ha opzioni"
 
-#: panel/panel.c:226
+#: panel/panel.c:410
 msgid "/XFce Panel"
 msgstr "/XFce Panel"
 
-#: panel/panel.c:231
-msgid "/_Settings manager"
-msgstr "/Gestione impo_stazioni"
-
-#: panel/panel.c:233
+#: panel/panel.c:415
 msgid "/_About XFce"
 msgstr "/_About XFce"
 
-#: panel/panel.c:234
+#: panel/panel.c:416
 msgid "/_Help"
 msgstr "/_Aiuto"
 
-#: panel/panel.c:236
+#: panel/panel.c:419
+msgid "/_Settings manager"
+msgstr "/Gestione impo_stazioni"
+
+#: panel/panel.c:422
 msgid "/_Lock screen"
 msgstr "/_Blocca schermo"
 
-#: panel/panel.c:237
+#: panel/panel.c:423
+msgid "/_Restart"
+msgstr ""
+
+#: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/_Esci"
 
-#: panel/panel.c:692 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce Panel"
@@ -240,7 +244,7 @@ msgstr "Terminale"
 msgid "Settings manager not available"
 msgstr "Il gestione delle impostazioni non e` disponibile"
 
-#: panel/popup.c:263
+#: panel/popup.c:261
 msgid "Menu"
 msgstr "Menu"
 
@@ -341,119 +345,55 @@ msgstr "Posizione"
 msgid "Behaviour"
 msgstr "Comportamento"
 
-#: plugins/clock/clock.c:57
-msgid "Sunday"
-msgstr "Domenica"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %-d : day of the month, without prefixed 0
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:119
+msgid "%A, %-d %B %Y"
+msgstr ""
 
-#: plugins/clock/clock.c:58
-msgid "Monday"
-msgstr "Lunedi`"
-
-#: plugins/clock/clock.c:59
-msgid "Tuesday"
-msgstr "Martedi`"
-
-#: plugins/clock/clock.c:60
-msgid "Wednesday"
-msgstr "Mercoledi`"
-
-#: plugins/clock/clock.c:61
-msgid "Thursday"
-msgstr "Giovedi`"
-
-#: plugins/clock/clock.c:62
-msgid "Friday"
-msgstr "Venerdi`"
-
-#: plugins/clock/clock.c:63
-msgid "Saturday"
-msgstr "Sabato"
-
-#: plugins/clock/clock.c:67
-msgid "January"
-msgstr "Gennaio"
-
-#: plugins/clock/clock.c:68
-msgid "February"
-msgstr "Febbraio"
-
-#: plugins/clock/clock.c:69
-msgid "March"
-msgstr "Marzo"
-
-#: plugins/clock/clock.c:70
-msgid "April"
-msgstr "Aprile"
-
-#: plugins/clock/clock.c:71
-msgid "May"
-msgstr "Maggio"
-
-#: plugins/clock/clock.c:72
-msgid "June"
-msgstr "Giugno"
-
-#: plugins/clock/clock.c:73
-msgid "July"
-msgstr "Luglio"
-
-#: plugins/clock/clock.c:74
-msgid "August"
-msgstr "Agosto"
-
-#: plugins/clock/clock.c:75
-msgid "September"
-msgstr "Settembre"
-
-#: plugins/clock/clock.c:76
-msgid "October"
-msgstr "Ottobre"
-
-#: plugins/clock/clock.c:77
-msgid "November"
-msgstr "Novembre"
-
-#: plugins/clock/clock.c:78
-msgid "December"
-msgstr "Dicembre"
-
-#: plugins/clock/clock.c:350
+#: plugins/clock/clock.c:336
 msgid "Clock type:"
 msgstr "Tipo di orologio:"
 
-#: plugins/clock/clock.c:363
+#: plugins/clock/clock.c:349
 msgid "Analog"
 msgstr "Analogico"
 
-#: plugins/clock/clock.c:367
+#: plugins/clock/clock.c:353
 msgid "Digital"
 msgstr "Digitale"
 
-#: plugins/clock/clock.c:371
+#: plugins/clock/clock.c:357
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:419
 msgid "Hour mode:"
 msgstr "Modo d'ora"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:426
 msgid "24 hour"
 msgstr "24 ore"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:432
 msgid "12 hour"
 msgstr "12 ore"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:438
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:490
+#: plugins/clock/clock.c:476
 msgid "Show seconds:"
 msgstr "Mostra i secondi:"
 
-#: plugins/clock/clock.c:599
+#: plugins/clock/clock.c:585
 msgid "Xfce Clock"
 msgstr "Orologio di XFce"
 
@@ -538,3 +478,60 @@ msgstr "Intervallo (sec):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Controllo posta"
+
+#~ msgid "Sunday"
+#~ msgstr "Domenica"
+
+#~ msgid "Monday"
+#~ msgstr "Lunedi`"
+
+#~ msgid "Tuesday"
+#~ msgstr "Martedi`"
+
+#~ msgid "Wednesday"
+#~ msgstr "Mercoledi`"
+
+#~ msgid "Thursday"
+#~ msgstr "Giovedi`"
+
+#~ msgid "Friday"
+#~ msgstr "Venerdi`"
+
+#~ msgid "Saturday"
+#~ msgstr "Sabato"
+
+#~ msgid "January"
+#~ msgstr "Gennaio"
+
+#~ msgid "February"
+#~ msgstr "Febbraio"
+
+#~ msgid "March"
+#~ msgstr "Marzo"
+
+#~ msgid "April"
+#~ msgstr "Aprile"
+
+#~ msgid "May"
+#~ msgstr "Maggio"
+
+#~ msgid "June"
+#~ msgstr "Giugno"
+
+#~ msgid "July"
+#~ msgstr "Luglio"
+
+#~ msgid "August"
+#~ msgstr "Agosto"
+
+#~ msgid "September"
+#~ msgstr "Settembre"
+
+#~ msgid "October"
+#~ msgstr "Ottobre"
+
+#~ msgid "November"
+#~ msgstr "Novembre"
+
+#~ msgid "December"
+#~ msgstr "Dicembre"

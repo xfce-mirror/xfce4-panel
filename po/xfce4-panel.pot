@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-11-03 19:52+0100\n"
+"POT-Creation-Date: 2003-12-04 09:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Change item"
 msgstr ""
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:681
 msgid "Position:"
 msgstr ""
 
@@ -34,64 +34,64 @@ msgid ""
 "Do you want to remove the item?"
 msgstr ""
 
-#: panel/item_dialog.c:320
+#: panel/item_dialog.c:321
 msgid "Other Icon"
 msgstr ""
 
-#: panel/item_dialog.c:345
+#: panel/item_dialog.c:346
 msgid "Select icon"
 msgstr ""
 
-#: panel/item_dialog.c:384
+#: panel/item_dialog.c:396
 msgid "Icon:"
 msgstr ""
 
-#: panel/item_dialog.c:433
+#: panel/item_dialog.c:467
 msgid "Select command"
 msgstr ""
 
-#: panel/item_dialog.c:461
+#: panel/item_dialog.c:495
 msgid "Command:"
 msgstr ""
 
-#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr ""
 
-#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr ""
 
-#: panel/item_dialog.c:530
+#: panel/item_dialog.c:564
 msgid "Caption:"
 msgstr ""
 
-#: panel/item_dialog.c:563
+#: panel/item_dialog.c:597
 msgid "Tooltip:"
 msgstr ""
 
-#: panel/item_dialog.c:599
+#: panel/item_dialog.c:633
 msgid "Menu:"
 msgstr ""
 
-#: panel/item_dialog.c:606
+#: panel/item_dialog.c:640
 msgid "Attach menu to launcher"
 msgstr ""
 
-#: panel/item_dialog.c:739
+#: panel/item_dialog.c:773
 msgid "Icon Preview"
 msgstr ""
 
-#: panel/item_dialog.c:743
+#: panel/item_dialog.c:777
 msgid "Drag file onto this frame to change the icon"
 msgstr ""
 
-#: panel/item_dialog.c:931
+#: panel/item_dialog.c:965
 msgid "Change menu item"
 msgstr ""
 
 #. add buttons
-#: panel/item_dialog.c:934
+#: panel/item_dialog.c:968
 msgid "Remove"
 msgstr ""
 
@@ -111,11 +111,11 @@ msgstr ""
 msgid "Launcher"
 msgstr ""
 
-#: panel/main.c:116
+#: panel/main.c:117
 msgid "Are you sure you want to exit?"
 msgstr ""
 
-#: panel/main.c:312
+#: panel/main.c:329
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -123,18 +123,18 @@ msgid ""
 "http://www.xfce.org\n"
 msgstr ""
 
-#: panel/main.c:342
+#: panel/main.c:361
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
 
-#: panel/controls.c:320 panel/panel.c:228
+#: panel/controls.c:320 panel/panel.c:412
 msgid "/Add _new item"
 msgstr ""
 
-#: panel/controls.c:322 panel/panel.c:230
+#: panel/controls.c:322 panel/panel.c:414
 msgid "/_Properties..."
 msgstr ""
 
@@ -146,31 +146,35 @@ msgstr ""
 msgid "This item has no configuration options"
 msgstr ""
 
-#: panel/panel.c:226
+#: panel/panel.c:410
 msgid "/XFce Panel"
 msgstr ""
 
-#: panel/panel.c:231
-msgid "/_Settings manager"
-msgstr ""
-
-#: panel/panel.c:233
+#: panel/panel.c:415
 msgid "/_About XFce"
 msgstr ""
 
-#: panel/panel.c:234
+#: panel/panel.c:416
 msgid "/_Help"
 msgstr ""
 
-#: panel/panel.c:236
+#: panel/panel.c:419
+msgid "/_Settings manager"
+msgstr ""
+
+#: panel/panel.c:422
 msgid "/_Lock screen"
 msgstr ""
 
-#: panel/panel.c:237
+#: panel/panel.c:423
+msgid "/_Restart"
+msgstr ""
+
+#: panel/panel.c:425
 msgid "/E_xit"
 msgstr ""
 
-#: panel/panel.c:692 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr ""
@@ -231,7 +235,7 @@ msgstr ""
 msgid "Settings manager not available"
 msgstr ""
 
-#: panel/popup.c:263
+#: panel/popup.c:261
 msgid "Menu"
 msgstr ""
 
@@ -332,119 +336,55 @@ msgstr ""
 msgid "Behaviour"
 msgstr ""
 
-#: plugins/clock/clock.c:57
-msgid "Sunday"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %-d : day of the month, without prefixed 0
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:119
+msgid "%A, %-d %B %Y"
 msgstr ""
 
-#: plugins/clock/clock.c:58
-msgid "Monday"
-msgstr ""
-
-#: plugins/clock/clock.c:59
-msgid "Tuesday"
-msgstr ""
-
-#: plugins/clock/clock.c:60
-msgid "Wednesday"
-msgstr ""
-
-#: plugins/clock/clock.c:61
-msgid "Thursday"
-msgstr ""
-
-#: plugins/clock/clock.c:62
-msgid "Friday"
-msgstr ""
-
-#: plugins/clock/clock.c:63
-msgid "Saturday"
-msgstr ""
-
-#: plugins/clock/clock.c:67
-msgid "January"
-msgstr ""
-
-#: plugins/clock/clock.c:68
-msgid "February"
-msgstr ""
-
-#: plugins/clock/clock.c:69
-msgid "March"
-msgstr ""
-
-#: plugins/clock/clock.c:70
-msgid "April"
-msgstr ""
-
-#: plugins/clock/clock.c:71
-msgid "May"
-msgstr ""
-
-#: plugins/clock/clock.c:72
-msgid "June"
-msgstr ""
-
-#: plugins/clock/clock.c:73
-msgid "July"
-msgstr ""
-
-#: plugins/clock/clock.c:74
-msgid "August"
-msgstr ""
-
-#: plugins/clock/clock.c:75
-msgid "September"
-msgstr ""
-
-#: plugins/clock/clock.c:76
-msgid "October"
-msgstr ""
-
-#: plugins/clock/clock.c:77
-msgid "November"
-msgstr ""
-
-#: plugins/clock/clock.c:78
-msgid "December"
-msgstr ""
-
-#: plugins/clock/clock.c:350
+#: plugins/clock/clock.c:336
 msgid "Clock type:"
 msgstr ""
 
-#: plugins/clock/clock.c:363
+#: plugins/clock/clock.c:349
 msgid "Analog"
 msgstr ""
 
-#: plugins/clock/clock.c:367
+#: plugins/clock/clock.c:353
 msgid "Digital"
 msgstr ""
 
-#: plugins/clock/clock.c:371
+#: plugins/clock/clock.c:357
 msgid "LED"
 msgstr ""
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:419
 msgid "Hour mode:"
 msgstr ""
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:426
 msgid "24 hour"
 msgstr ""
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:432
 msgid "12 hour"
 msgstr ""
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:438
 msgid "AM/PM"
 msgstr ""
 
-#: plugins/clock/clock.c:490
+#: plugins/clock/clock.c:476
 msgid "Show seconds:"
 msgstr ""
 
-#: plugins/clock/clock.c:599
+#: plugins/clock/clock.c:585
 msgid "Xfce Clock"
 msgstr ""
 

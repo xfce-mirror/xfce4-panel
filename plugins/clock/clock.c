@@ -1,4 +1,4 @@
-/*  clock.c
+/*  xfce4
  *
  *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
  *                     Xavier Maillard (zedek@fxgsproject.org)
@@ -48,6 +48,7 @@
 #include <panel/controls.h>
 #include <panel/icons.h>
 #include <panel/plugins.h>
+#include <panel/groups.h>
 
 #define BORDER 6
 
@@ -88,7 +89,73 @@ typedef struct
 }
 ClockDialog;
 
-#include <langinfo.h>
+/* start xfcalendar or send a client message
+ * NOTE: keep message format in sync with xfcalendar */
+static void
+send_client_message (GdkWindow *sender, Window xid, const char *msg)
+{
+    GdkEventClient gev;
+
+    gev.type = GDK_CLIENT_EVENT;
+    gev.window = sender;
+    gev.send_event = TRUE;
+    gev.message_type = gdk_atom_intern ("_XFCE_CALENDAR_TOGGLE_HERE", FALSE);
+    gev.data_format = 8;
+    strcpy (gev.data.b, msg);
+
+    gdk_event_send_client_message ((GdkEvent *) & gev, (GdkNativeWindow) xid);
+    gdk_flush ();
+}
+
+static gboolean
+on_button_press_event_cb(GtkWidget *widget,
+                         GdkEventButton *event, Control *control)
+{
+  GdkAtom atom;
+  Window xwindow;
+
+  if (event->button == 1)
+  {
+      /** send message to xfcalendar if it is running */
+      atom = gdk_atom_intern("_XFCE_CALENDAR_RUNNING", FALSE);
+      if ((xwindow = XGetSelectionOwner(GDK_DISPLAY(),
+                                        gdk_x11_atom_to_xatom(atom))) != None)
+      {
+	  char msg[20];
+	  const char *fmt = "%lx:%s";
+	  Window xid = GDK_WINDOW_XID (control->base->window);
+	  
+	  /* popup in the same direction as menus */
+	  switch (groups_get_arrow_direction())
+	  {
+	      case GTK_ARROW_UP:
+		  sprintf(msg, fmt, xid, "up");
+		  break;
+	      case GTK_ARROW_DOWN:
+		  sprintf(msg, fmt, xid, "down");
+		  break;
+	      case GTK_ARROW_LEFT:
+		  sprintf(msg, fmt, xid, "left");
+		  break;
+	      case GTK_ARROW_RIGHT:
+		  sprintf(msg, fmt, xid, "right");
+		  break;
+	      default:
+		  return FALSE;
+	  }
+
+	  send_client_message (control->base->window, xwindow, msg);
+          return TRUE;
+      }        
+      else
+      {
+	  exec_cmd_silent ("xfcalendar", FALSE, FALSE);
+      }
+  }
+
+  return FALSE;
+}
+
 /* creation and destruction */
 gboolean
 clock_date_tooltip (GtkWidget * widget)
@@ -151,6 +218,10 @@ clock_new (void)
     clock->timeout_id =
 	g_timeout_add (60000, (GSourceFunc) clock_date_tooltip,
 		       clock->eventbox);
+
+    /* callback for calendar popup */
+    g_signal_connect(G_OBJECT(clock->eventbox), "button-press-event",
+                     G_CALLBACK(on_button_press_event_cb), clock);
 
     return clock;
 }
@@ -577,6 +648,8 @@ create_clock_control (Control * control)
 
     return TRUE;
 }
+
+/* calculate position of calendar popup */
 
 G_MODULE_EXPORT void
 xfce_control_class_init (ControlClass * cc)

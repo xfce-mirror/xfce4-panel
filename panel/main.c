@@ -57,7 +57,7 @@
 #include "item_dialog.h"
 #include "popup.h"
 
-#define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%d"
+/*#define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%d"*/
 
 /* signal handling */
 typedef enum
@@ -133,10 +133,10 @@ quit (gboolean force)
     if (gtk_main_level ())
 	gtk_main_quit ();
 
-    DBG("sigstate: %d", sigstate);
+    DBG ("sigstate: %d", sigstate);
     if (sigstate != RESTART)
     {
-	g_message("%s: Exit", PACKAGE);
+	g_message ("%s: Exit", PACKAGE);
 	exit (0);
     }
 }
@@ -146,14 +146,14 @@ restart (void)
 {
     /* don't really quit */
     sigstate = RESTART;
-    
+
     /* calls gtk_main_quit() */
-    quit(TRUE);
+    quit (TRUE);
 
     /* progname is saved on startup 
      * TODO: do we need to pass on arguments? */
-    g_message("%s: restarting %s ...", PACKAGE, progname);
-    execlp(progname,progname,NULL);
+    g_message ("%s: restarting %s ...", PACKAGE, progname);
+    execlp (progname, progname, NULL);
 }
 
 /*  Signals
@@ -167,14 +167,14 @@ check_signal_state (void)
     if (sigstate != NOSIGNAL)
     {
 	/* close open dialogs */
-	destroy_controls_dialog();
-	destroy_menu_dialog();
-	
+	destroy_controls_dialog ();
+	destroy_menu_dialog ();
+
 	if (sigstate == RESTART && !restarting)
 	{
 	    restarting = TRUE;
-	    
-	    restart();
+
+	    restart ();
 	}
 	else if (sigstate == QUIT)
 	{
@@ -208,7 +208,7 @@ sighandler (int sig)
 	case SIGUSR2:
 	    sigstate = QUIT_CONFIRM;
 	    break;
-	    
+
 	case SIGINT:
 	    /* hack: prevent the panel from saving config on ^C */
 	    disable_user_config = TRUE;
@@ -238,7 +238,8 @@ xfce_panel_is_running (void)
 
     if (!selection_atom)
     {
-	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);
+/*	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);*/
+	selection_name = g_strdup ("XFCE_PANEL_SELECTION");
 	selection_atom = XInternAtom (gdk_display, selection_name, False);
 	g_free (selection_name);
     }
@@ -259,7 +260,7 @@ xfce_panel_set_xselection (void)
 
     display = GDK_DISPLAY ();
     scr = DefaultScreen (display);
-    
+
     TRACE ("claiming xfdesktop manager selection for screen %d", scr);
 
     invisible = gtk_invisible_new ();
@@ -267,7 +268,8 @@ xfce_panel_set_xselection (void)
 
     if (!selection_atom)
     {
-	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);
+/*	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);*/
+	selection_name = g_strdup ("XFCE_PANEL_SELECTION");
 	selection_atom = XInternAtom (display, selection_name, False);
 	g_free (selection_name);
     }
@@ -298,7 +300,7 @@ xfce_panel_set_xselection (void)
 	xev.data.l[3] = 0;	/* manager specific data */
 	xev.data.l[4] = 0;	/* manager specific data */
 
-	XSendEvent (display, GDK_ROOT_WINDOW(), False,
+	XSendEvent (display, GDK_ROOT_WINDOW (), False,
 		    StructureNotifyMask, (XEvent *) & xev);
     }
     else
@@ -320,7 +322,7 @@ main (int argc, char **argv)
     gboolean net_wm_support;
     int i;
 
-    xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
+    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     if (argc == 2 &&
 	(strequal (argv[1], "-v") || strequal (argv[1], "--version") ||
@@ -335,8 +337,8 @@ main (int argc, char **argv)
     gtk_init (&argc, &argv);
 
     progname = argv[0];
-    
-    if (xfce_panel_is_running())
+
+    if (xfce_panel_is_running ())
     {
 	g_message ("%s is already running", PACKAGE);
 	return 0;
@@ -345,7 +347,7 @@ main (int argc, char **argv)
     {
 	xfce_panel_set_xselection ();
     }
-    
+
     net_wm_support = FALSE;
 
     for (i = 0; i < 5; i++)

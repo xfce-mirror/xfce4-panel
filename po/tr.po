@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
-"POT-Creation-Date: 2003-09-22 21:31+0200\n"
+"POT-Creation-Date: 2003-12-04 09:37+0100\n"
 "PO-Revision-Date: 2003-07-16 20:51+0300\n"
 "Last-Translator: Erçin EKER <erc.caldera@gmx.net>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -23,11 +23,11 @@ msgstr "Dosya seç"
 msgid "Change item"
 msgstr "Nesneyi değiştir"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:681
 msgid "Position:"
 msgstr "Konum:"
 
-#: panel/controls_dialog.c:331 panel/controls.c:272
+#: panel/controls_dialog.c:342 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -37,64 +37,64 @@ msgstr ""
 "\n"
 "Yinede bileşeni kaldırmak istiyor musunuz?"
 
-#: panel/item_dialog.c:320
+#: panel/item_dialog.c:321
 msgid "Other Icon"
 msgstr "Diğer Simge"
 
-#: panel/item_dialog.c:345
+#: panel/item_dialog.c:346
 msgid "Select icon"
 msgstr "Simge seçin"
 
-#: panel/item_dialog.c:384
+#: panel/item_dialog.c:396
 msgid "Icon:"
 msgstr "Simge:"
 
-#: panel/item_dialog.c:433
+#: panel/item_dialog.c:467
 msgid "Select command"
 msgstr "Komut seç"
 
-#: panel/item_dialog.c:461
+#: panel/item_dialog.c:495
 msgid "Command:"
 msgstr "Komut:"
 
-#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "_Terminalde çalıştır"
 
-#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Başlangıç _uyarısı kullan"
 
-#: panel/item_dialog.c:530
+#: panel/item_dialog.c:564
 msgid "Caption:"
 msgstr "Başlık:"
 
-#: panel/item_dialog.c:563
+#: panel/item_dialog.c:597
 msgid "Tooltip:"
 msgstr "İpucu:"
 
-#: panel/item_dialog.c:599
+#: panel/item_dialog.c:633
 msgid "Menu:"
 msgstr "Menü:"
 
-#: panel/item_dialog.c:606
+#: panel/item_dialog.c:640
 msgid "Attach menu to launcher"
 msgstr "Başlatıcıya menü ekle"
 
-#: panel/item_dialog.c:738
+#: panel/item_dialog.c:773
 msgid "Icon Preview"
 msgstr "Simge Önizlemesi"
 
-#: panel/item_dialog.c:742
+#: panel/item_dialog.c:777
 msgid "Drag file onto this frame to change the icon"
 msgstr "Simgeyi değiştirmek için bu pencereye bir dosya sürükleyin"
 
-#: panel/item_dialog.c:930
+#: panel/item_dialog.c:965
 msgid "Change menu item"
 msgstr "Menü nesnesini değiştir"
 
 #. add buttons
-#: panel/item_dialog.c:933
+#: panel/item_dialog.c:968
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -114,11 +114,11 @@ msgstr "Yeni nesne ekle"
 msgid "Launcher"
 msgstr "Başlatıcı"
 
-#: panel/main.c:132
+#: panel/main.c:117
 msgid "Are you sure you want to exit?"
 msgstr "Çıkmak istediğinizden emin misiniz?"
 
-#: panel/main.c:268
+#: panel/main.c:329
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -129,7 +129,7 @@ msgstr ""
 "XFce Masaüstü Ortamının bir bileşeni\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:284
+#: panel/main.c:361
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -139,11 +139,11 @@ msgstr ""
 "ipuçlarını desteklemiyor görünüyor. \n"
 "Bazı XFce özellikleri çalışmayabilir."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/Yeni nesne _ekle"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/_Özellikler..."
 
@@ -155,31 +155,35 @@ msgstr "/_Kaldır"
 msgid "This item has no configuration options"
 msgstr "Bu nesne ayarlanabilir seçenek sunmuyor"
 
-#: panel/panel.c:121
+#: panel/panel.c:410
 msgid "/XFce Panel"
 msgstr "/XFce Paneli"
 
-#: panel/panel.c:126
-msgid "/_Settings manager"
-msgstr "/_Ayar yöneticisi"
-
-#: panel/panel.c:128
+#: panel/panel.c:415
 msgid "/_About XFce"
 msgstr "/XFce _Hakkında"
 
-#: panel/panel.c:129
+#: panel/panel.c:416
 msgid "/_Help"
 msgstr "/_Yardım"
 
-#: panel/panel.c:131
+#: panel/panel.c:419
+msgid "/_Settings manager"
+msgstr "/_Ayar yöneticisi"
+
+#: panel/panel.c:422
 msgid "/_Lock screen"
 msgstr "/Ekranı _kilitle"
 
-#: panel/panel.c:132
+#: panel/panel.c:423
+msgid "/_Restart"
+msgstr ""
+
+#: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/_Çık"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFce Paneli"
@@ -240,7 +244,7 @@ msgstr "Terminal"
 msgid "Settings manager not available"
 msgstr "Ayar yöneticisi kullanılamıyor"
 
-#: panel/popup.c:263
+#: panel/popup.c:261
 msgid "Menu"
 msgstr "Menü"
 
@@ -341,123 +345,59 @@ msgstr "Konum"
 msgid "Behaviour"
 msgstr "Davranış"
 
-#: plugins/clock/clock.c:57
-msgid "Sunday"
-msgstr "Pazar"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %-d : day of the month, without prefixed 0
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:119
+msgid "%A, %-d %B %Y"
+msgstr ""
 
-#: plugins/clock/clock.c:58
-msgid "Monday"
-msgstr "Pazartesi"
-
-#: plugins/clock/clock.c:59
-msgid "Tuesday"
-msgstr "Salı"
-
-#: plugins/clock/clock.c:60
-msgid "Wednesday"
-msgstr "Çarşamba"
-
-#: plugins/clock/clock.c:61
-msgid "Thursday"
-msgstr "Perşembe"
-
-#: plugins/clock/clock.c:62
-msgid "Friday"
-msgstr "Cuma"
-
-#: plugins/clock/clock.c:63
-msgid "Saturday"
-msgstr "Cumartesi"
-
-#: plugins/clock/clock.c:67
-msgid "January"
-msgstr "Ocak"
-
-#: plugins/clock/clock.c:68
-msgid "February"
-msgstr "Şubat"
-
-#: plugins/clock/clock.c:69
-msgid "March"
-msgstr "Mart"
-
-#: plugins/clock/clock.c:70
-msgid "April"
-msgstr "Nisan"
-
-#: plugins/clock/clock.c:71
-msgid "May"
-msgstr "Mayıs"
-
-#: plugins/clock/clock.c:72
-msgid "June"
-msgstr "Haziran"
-
-#: plugins/clock/clock.c:73
-msgid "July"
-msgstr "Temmuz"
-
-#: plugins/clock/clock.c:74
-msgid "August"
-msgstr "Ağustos"
-
-#: plugins/clock/clock.c:75
-msgid "September"
-msgstr "Eylül"
-
-#: plugins/clock/clock.c:76
-msgid "October"
-msgstr "Ekim"
-
-#: plugins/clock/clock.c:77
-msgid "November"
-msgstr "Kasım"
-
-#: plugins/clock/clock.c:78
-msgid "December"
-msgstr "Aralık"
-
-#: plugins/clock/clock.c:350
+#: plugins/clock/clock.c:336
 msgid "Clock type:"
 msgstr "Saat türü:"
 
-#: plugins/clock/clock.c:363
+#: plugins/clock/clock.c:349
 msgid "Analog"
 msgstr "Analog"
 
-#: plugins/clock/clock.c:367
+#: plugins/clock/clock.c:353
 msgid "Digital"
 msgstr "Sayısal"
 
-#: plugins/clock/clock.c:371
+#: plugins/clock/clock.c:357
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:419
 msgid "Hour mode:"
 msgstr "Saat biçimi:"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:426
 msgid "24 hour"
 msgstr "24 saat"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:432
 msgid "12 hour"
 msgstr "12 saat"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:438
 msgid "AM/PM"
 msgstr "ÖÖ/ÖS"
 
-#: plugins/clock/clock.c:490
+#: plugins/clock/clock.c:476
 msgid "Show seconds:"
 msgstr "Saniyeyi göster:"
 
-#: plugins/clock/clock.c:599
+#: plugins/clock/clock.c:585
 msgid "Xfce Clock"
 msgstr "Xfce Saati"
 
-#: plugins/pager/pager.c:277
+#: plugins/pager/pager.c:271
 msgid "Graphical pager"
 msgstr "Grafik sayfalayıcı"
 
@@ -538,3 +478,60 @@ msgstr "Gecikme (sn):"
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Posta denetimi"
+
+#~ msgid "Sunday"
+#~ msgstr "Pazar"
+
+#~ msgid "Monday"
+#~ msgstr "Pazartesi"
+
+#~ msgid "Tuesday"
+#~ msgstr "Salı"
+
+#~ msgid "Wednesday"
+#~ msgstr "Çarşamba"
+
+#~ msgid "Thursday"
+#~ msgstr "Perşembe"
+
+#~ msgid "Friday"
+#~ msgstr "Cuma"
+
+#~ msgid "Saturday"
+#~ msgstr "Cumartesi"
+
+#~ msgid "January"
+#~ msgstr "Ocak"
+
+#~ msgid "February"
+#~ msgstr "Şubat"
+
+#~ msgid "March"
+#~ msgstr "Mart"
+
+#~ msgid "April"
+#~ msgstr "Nisan"
+
+#~ msgid "May"
+#~ msgstr "Mayıs"
+
+#~ msgid "June"
+#~ msgstr "Haziran"
+
+#~ msgid "July"
+#~ msgstr "Temmuz"
+
+#~ msgid "August"
+#~ msgstr "Ağustos"
+
+#~ msgid "September"
+#~ msgstr "Eylül"
+
+#~ msgid "October"
+#~ msgstr "Ekim"
+
+#~ msgid "November"
+#~ msgstr "Kasım"
+
+#~ msgid "December"
+#~ msgstr "Aralık"

@@ -39,8 +39,7 @@
 #include "popup.h"
 
 static GSList *group_list = NULL;
-static GSList *removed_list = NULL;
-
+static GtkArrowType popup_arrow_type = GTK_ARROW_UP;
 static GtkBox *groupbox;
 
 /*  Panel group
@@ -66,7 +65,7 @@ panel_group_arrange (PanelGroup * pg)
 
     if (pg->box)
     {
-	if (pg->popup)
+	if (pg->popup && pg->popup->button->parent)
 	    panel_popup_unpack (pg->popup);
 	if (pg->control)
 	    control_unpack (pg->control);
@@ -170,9 +169,7 @@ groups_cleanup (void)
     control_class_list_cleanup ();
 
     g_slist_free (group_list);
-    g_slist_free (removed_list);
     group_list = NULL;
-    removed_list = NULL;
 }
 
 void
@@ -193,7 +190,7 @@ old_groups_set_from_xml (int side, xmlNodePtr node)
     if (node)
 	node = node->children;
 
-    for (i = last_group; /*i < settings.num_groups ||*/ li || node; i++)
+    for (i = last_group; /*i < settings.num_groups || */ li || node; i++)
     {
 	gboolean control_created = FALSE;
 
@@ -211,7 +208,6 @@ old_groups_set_from_xml (int side, xmlNodePtr node)
 	    group_list = g_slist_append (group_list, group);
 
 	    group->popup = create_panel_popup ();
-
 	    group->control = control_new (i);
 
 	    panel_group_arrange (group);
@@ -253,69 +249,47 @@ groups_set_from_xml (xmlNodePtr node)
 {
     xmlNodePtr child;
     int i;
-    GSList *li;
     PanelGroup *group;
-
-    li = group_list;
 
     /* children are "Group" nodes */
     if (node)
 	node = node->children;
 
-    DBG("expected number of panel items: %d", settings.num_groups);
-    
-    for (i = 0; /* i < settings.num_groups || */ li || node; i++)
+    for (i = 0; node; i++, node = node->next)
     {
 	gboolean control_created = FALSE;
 
-	if (li)
+	group = create_panel_group (i);
+	panel_group_pack (group, groupbox);
+	group_list = g_slist_append (group_list, group);
+
+	group->control = control_new (i);
+
+	panel_group_arrange (group);
+
+	for (child = node->children; child; child = child->next)
 	{
-	    group = li->data;
-	}
-	else
-	{
-	    group = create_panel_group (i);
-	    panel_group_pack (group, groupbox);
-	    group_list = g_slist_append (group_list, group);
-
-	    group->popup = create_panel_popup ();
-
-	    group->control = control_new (i);
-
-	    panel_group_arrange (group);
-	}
-
-	if (node)
-	{
-	    for (child = node->children; child; child = child->next)
+	    /* create popup items and panel control */
+	    if (xmlStrEqual (child->name, (const xmlChar *) "Popup"))
 	    {
-		/* create popup items and panel control */
-		if (xmlStrEqual (child->name, (const xmlChar *) "Popup"))
-		{
-		    panel_popup_set_from_xml (group->popup, child);
-		}
-		else if (xmlStrEqual
-			 (child->name, (const xmlChar *) "Control"))
-		{
-		    control_set_from_xml (group->control, child);
-		    control_created = TRUE;
-		}
+		group->popup = create_panel_popup ();
+		panel_group_arrange (group);
+		gtk_widget_hide (group->popup->button);
+		panel_popup_set_from_xml (group->popup, child);
+	    }
+	    else if (xmlStrEqual
+		     (child->name, (const xmlChar *) "Control"))
+	    {
+		control_set_from_xml (group->control, child);
+		control_created = TRUE;
 	    }
 	}
 
 	if (!control_created)
 	    control_set_from_xml (group->control, NULL);
-
-	if (node)
-	    node = node->next;
-
-	if (li)
-	    li = li->next;
     }
 
     settings.num_groups = g_slist_length (group_list);
-    
-    DBG("actual number of panel items: %d", settings.num_groups);
 }
 
 void
@@ -333,7 +307,9 @@ groups_write_xml (xmlNodePtr root)
 
 	child = xmlNewTextChild (node, NULL, "Group", NULL);
 
-	panel_popup_write_xml (group->popup, child);
+	if (group->control->with_popup && group->popup)
+	    panel_popup_write_xml (group->popup, child);
+
 	control_write_xml (group->control, child);
     }
 }
@@ -488,10 +464,19 @@ groups_show_popup (int index, gboolean show)
     li = g_slist_nth (group_list, index);
     group = li->data;
 
-    if (show)
-	gtk_widget_show (group->popup->button);
-    else
-	gtk_widget_hide (group->popup->button);
+    if (show && group->control->with_popup && !group->popup)
+    {
+	group->popup = create_panel_popup ();
+	panel_group_arrange (group);
+    }
+    
+    if (group->popup)
+    {
+	if (show)
+	    gtk_widget_show (group->popup->button);
+	else
+	    gtk_widget_hide (group->popup->button);
+    }
 }
 
 /* settings */
@@ -568,11 +553,13 @@ groups_set_theme (const char *theme)
     }
 }
 
-void 
+void
 groups_set_arrow_direction (GtkArrowType type)
 {
     GSList *li;
     PanelGroup *group;
+
+    popup_arrow_type = type;
 
     for (li = group_list; li; li = li->next)
     {
@@ -580,6 +567,12 @@ groups_set_arrow_direction (GtkArrowType type)
 
 	panel_popup_set_arrow_type (group->popup, type);
     }
+}
+
+GtkArrowType
+groups_get_arrow_direction (void)
+{
+    return popup_arrow_type;
 }
 
 void
@@ -597,8 +590,6 @@ groups_add_control (int id, const char *filename, int index)
     panel_group_pack (group, groupbox);
     group_list = g_slist_append (group_list, group);
 
-    group->popup = create_panel_popup ();
-
     group->control = control_new (index);
     create_control (group->control, id, filename);
 
@@ -608,68 +599,11 @@ groups_add_control (int id, const char *filename, int index)
 	groups_move (len, index);
 
     if (!group->control->with_popup)
+    {
+	group->popup = create_panel_popup ();
 	groups_show_popup (index, FALSE);
+    }
 
     settings.num_groups++;
 }
 
-void
-groups_set_num_groups (int n)
-{
-    int i, len;
-    GSList *li;
-    PanelGroup *group = NULL;
-
-    len = g_slist_length (group_list);
-
-    /* nothing to do */
-    if (n == len)
-	return;
-
-    /* add group(s) */
-    if (n > len)
-    {
-	for (i = len; i < n; i++)
-	{
-	    if (removed_list)
-	    {
-		group = removed_list->data;
-		removed_list =
-		    g_slist_delete_link (removed_list, removed_list);
-
-		panel_group_pack (group, groupbox);
-		group_list = g_slist_append (group_list, group);
-
-		panel_group_arrange (group);
-		settings.num_groups++;
-	    }
-	    else
-	    {
-		groups_add_control (ICON, NULL, i);
-	    }
-
-	    gtk_widget_show (group->base);
-	}
-
-	return;
-    }
-
-    /* removing group(s) */
-    li = g_slist_nth (group_list, n);
-
-    for (i = n; i < len; i++)
-    {
-	GSList *li2;
-
-	group = li->data;
-	panel_group_unpack (group);
-
-	/* this sets the list to the next group */
-	li2 = li;
-	li = li->next;
-
-	group_list = g_slist_remove_link (group_list, li2);
-	removed_list = g_slist_prepend (removed_list, group);
-	settings.num_groups--;
-    }
-}

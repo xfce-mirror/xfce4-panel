@@ -40,8 +40,8 @@
 #include "popup.h"
 #include "settings.h"
 
-static GtkWidget *controlsdialog = NULL; /* keep track of it for 
-					     signal handling */
+static GtkWidget *controlsdialog = NULL;	/* keep track of it for 
+						   signal handling */
 
 static GSList *control_list = NULL;	/* list of available controls */
 
@@ -116,7 +116,7 @@ clear_control_list (void)
     control_list = NULL;
 }
 
-#if 0 /* NEVER USED */
+#if 0				/* NEVER USED */
 /*  Type options menu
  *  -----------------
 */
@@ -148,7 +148,7 @@ type_option_changed (GtkOptionMenu * om)
 }
 #endif
 
-#if 0 /* NEVER USED */
+#if 0				/* NEVER USED */
 static GtkWidget *
 create_type_option_menu (void)
 {
@@ -246,18 +246,20 @@ controls_dialog (Control * control)
     /* Keep track of the panel container */
     container = control->base->parent;
 
-    controlsdialog = dlg = gtk_dialog_new();
+    controlsdialog = dlg = gtk_dialog_new ();
 
     dlg_ptr = &controlsdialog;
-    g_object_add_weak_pointer(G_OBJECT(dlg), (gpointer*)dlg_ptr);
-    
-    gtk_window_set_title(GTK_WINDOW(dlg), _("Change item"));
+    g_object_add_weak_pointer (G_OBJECT (dlg), (gpointer *) dlg_ptr);
+
+    gtk_window_set_title (GTK_WINDOW (dlg), _("Change item"));
 
     button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (GTK_DIALOG (dlg), button, RESPONSE_REMOVE);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
-    gtk_button_box_set_child_secondary(GTK_BUTTON_BOX (GTK_DIALOG(dlg)->action_area), button, TRUE);
+    gtk_button_box_set_child_secondary (GTK_BUTTON_BOX
+					(GTK_DIALOG (dlg)->action_area),
+					button, TRUE);
 
     done = button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
     gtk_widget_show (button);
@@ -268,7 +270,7 @@ controls_dialog (Control * control)
     gtk_button_box_set_layout (GTK_BUTTON_BOX (GTK_DIALOG(dlg)->action_area),
                                GTK_BUTTONBOX_END);
 */
-    
+
     main_vbox = GTK_DIALOG (dlg)->vbox;
 
     vbox = gtk_vbox_new (FALSE, 7);
@@ -292,7 +294,7 @@ controls_dialog (Control * control)
     if (settings.num_groups > 1)
     {
 	pos_spin = gtk_spin_button_new_with_range (1, settings.num_groups, 1);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin), 
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin),
 				   backup_index + 1);
 
 	g_signal_connect (pos_spin, "value-changed", G_CALLBACK (pos_changed),
@@ -301,10 +303,11 @@ controls_dialog (Control * control)
     else
     {
 	char postext[2];
-	sprintf(postext, "%d", 1);
-	pos_spin = gtk_label_new(postext);
+
+	sprintf (postext, "%d", 1);
+	pos_spin = gtk_label_new (postext);
     }
-    
+
     gtk_widget_show (pos_spin);
     gtk_box_pack_start (GTK_BOX (hbox), pos_spin, FALSE, FALSE, 0);
 
@@ -326,7 +329,7 @@ controls_dialog (Control * control)
 	gtk_widget_grab_default (done);
 	gtk_widget_grab_focus (done);
 
-        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+	gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 	response = gtk_dialog_run (GTK_DIALOG (dlg));
 
 	if (response == RESPONSE_REMOVE)
@@ -337,7 +340,7 @@ controls_dialog (Control * control)
 
 	    popup = groups_get_popup (control->index);
 
-	    if (!(control->with_popup) || popup->items == NULL ||
+	    if (!(control->with_popup) || !popup || popup->items == NULL ||
 		confirm (_
 			 ("Removing an item will also remove its popup menu.\n\n"
 			  "Do you want to remove the item?"),
@@ -346,7 +349,7 @@ controls_dialog (Control * control)
 		break;
 	    }
 
-            gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+	    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 	    gtk_widget_show (dlg);
 	}
 	else
@@ -368,9 +371,8 @@ controls_dialog (Control * control)
 }
 
 void
-destroy_controls_dialog(void)
+destroy_controls_dialog (void)
 {
     if (controlsdialog)
-	gtk_dialog_response(GTK_DIALOG(controlsdialog), GTK_RESPONSE_OK);
+	gtk_dialog_response (GTK_DIALOG (controlsdialog), GTK_RESPONSE_OK);
 }
-

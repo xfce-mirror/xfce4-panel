@@ -268,7 +268,7 @@ remove_control (void)
 
 	pp = groups_get_popup (popup_control->index);
 
-	if (!(popup_control->with_popup) || pp->items == NULL ||
+	if (!(popup_control->with_popup) || !pp || pp->items == NULL ||
 	    confirm (_("Removing an item will also remove its popup menu.\n\n"
 		       "Do you want to remove the item?"),
 		     GTK_STOCK_REMOVE, NULL))
@@ -362,6 +362,7 @@ get_controls_menu_entries (GtkItemFactoryEntry ** entries, const char *base)
 	 li; li = li->next, entry++, i++)
     {
 	ControlClass *cc = li->data;
+
 	entry->path = g_strconcat (base, "/", cc->caption, NULL);
 	entry->callback = add_control;
 	entry->callback_action = i;
@@ -496,7 +497,7 @@ control_new (int index)
     Control *control = g_new0 (Control, 1);
 
     control->index = index;
-    control->with_popup = TRUE;
+    control->with_popup = FALSE;
 
     control->base = gtk_event_box_new ();
     gtk_widget_show (control->base);
@@ -600,12 +601,12 @@ control_set_from_xml (Control * control, xmlNodePtr node)
     create_control (control, id, filename);
     g_free (filename);
 
+    /* hide popup? also check if added to the panel */
+    if (control->with_popup && control->base->parent)
+	groups_show_popup (control->index, TRUE);
+
     /* allow the control to read its configuration */
     control_read_config (control, node);
-
-    /* hide popup? also check if added to the panel */
-    if (!control->with_popup && control->base->parent)
-	groups_show_popup (control->index, FALSE);
 }
 
 void
@@ -630,7 +631,7 @@ control_write_xml (Control * control, xmlNodePtr parent)
 /* options dialog */
 void
 control_create_options (Control * control, GtkContainer * container,
-		     GtkWidget * done)
+			GtkWidget * done)
 {
     ControlClass *cc = control->cclass;
 

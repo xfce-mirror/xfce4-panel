@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
-"POT-Creation-Date: 2003-09-22 21:31+0200\n"
+"POT-Creation-Date: 2003-12-04 09:37+0100\n"
 "PO-Revision-Date: 2003-05-27 12:30+0900\n"
 "Last-Translator: Zhao Ji <zhao-ji@awz.ne.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,11 @@ msgstr "ファイル選択"
 msgid "Change item"
 msgstr "項目変更"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:681
 msgid "Position:"
 msgstr "位置:"
 
-#: panel/controls_dialog.c:331 panel/controls.c:272
+#: panel/controls_dialog.c:342 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -37,65 +37,65 @@ msgstr ""
 "\n"
 "このメニュー項目を削除してもよろしいですか？"
 
-#: panel/item_dialog.c:320
+#: panel/item_dialog.c:321
 msgid "Other Icon"
 msgstr "その他のアイコン"
 
-#: panel/item_dialog.c:345
+#: panel/item_dialog.c:346
 msgid "Select icon"
 msgstr "アイコン選択"
 
-#: panel/item_dialog.c:384
+#: panel/item_dialog.c:396
 msgid "Icon:"
 msgstr "アイコン:"
 
-#: panel/item_dialog.c:433
+#: panel/item_dialog.c:467
 msgid "Select command"
 msgstr "コマンド選択"
 
-#: panel/item_dialog.c:461
+#: panel/item_dialog.c:495
 msgid "Command:"
 msgstr "コマンド"
 
-#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "ターミナル内部で実行(_t)"
 
-#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "起動通知を使う (_n)"
 
-#: panel/item_dialog.c:530
+#: panel/item_dialog.c:564
 msgid "Caption:"
 msgstr "キャプション:"
 
-#: panel/item_dialog.c:563
+#: panel/item_dialog.c:597
 msgid "Tooltip:"
 msgstr "ツール チップ:"
 
-#: panel/item_dialog.c:599
+#: panel/item_dialog.c:633
 #, fuzzy
 msgid "Menu:"
 msgstr "メニュー"
 
-#: panel/item_dialog.c:606
+#: panel/item_dialog.c:640
 msgid "Attach menu to launcher"
 msgstr "メニューをランチャーへ追加"
 
-#: panel/item_dialog.c:738
+#: panel/item_dialog.c:773
 msgid "Icon Preview"
 msgstr "アイコン確認"
 
-#: panel/item_dialog.c:742
+#: panel/item_dialog.c:777
 msgid "Drag file onto this frame to change the icon"
 msgstr "項目変更のために、ここへファイルをドラッグしてください"
 
-#: panel/item_dialog.c:930
+#: panel/item_dialog.c:965
 msgid "Change menu item"
 msgstr "メニュー項目の変更"
 
 #. add buttons
-#: panel/item_dialog.c:933
+#: panel/item_dialog.c:968
 msgid "Remove"
 msgstr "削除"
 
@@ -115,11 +115,11 @@ msgstr "項目追加"
 msgid "Launcher"
 msgstr "ランチャ"
 
-#: panel/main.c:132
+#: panel/main.c:117
 msgid "Are you sure you want to exit?"
 msgstr "本当に終了してもいいですか？"
 
-#: panel/main.c:268
+#: panel/main.c:329
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -127,7 +127,7 @@ msgid ""
 "http://www.xfce.org\n"
 msgstr ""
 
-#: panel/main.c:284
+#: panel/main.c:361
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -137,11 +137,11 @@ msgstr ""
 "ヒントをサポートしていません。\n"
 "XFceの特徴は、いくつか意図する通りに動かないかもしれません。"
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/項目追加 (_n)"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/プロパティ(_P)"
 
@@ -153,31 +153,36 @@ msgstr "/削除 (_R)"
 msgid "This item has no configuration options"
 msgstr "この項目に、オプション設定は存在しません"
 
-#: panel/panel.c:121
+#: panel/panel.c:410
 msgid "/XFce Panel"
 msgstr ""
 
-#: panel/panel.c:126
-msgid "/_Settings manager"
-msgstr "/設定マネージャ (_S)"
-
-#: panel/panel.c:128
+#: panel/panel.c:415
 msgid "/_About XFce"
 msgstr "/XFceについて (_A)"
 
-#: panel/panel.c:129
+#: panel/panel.c:416
 msgid "/_Help"
 msgstr "/ヘルプ (_H)"
 
-#: panel/panel.c:131
+#: panel/panel.c:419
+msgid "/_Settings manager"
+msgstr "/設定マネージャ (_S)"
+
+#: panel/panel.c:422
 msgid "/_Lock screen"
 msgstr "/画面ロック (_L)"
 
-#: panel/panel.c:132
+#: panel/panel.c:423
+#, fuzzy
+msgid "/_Restart"
+msgstr "元に戻す(_R)"
+
+#: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/終了 (_x)"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel"
 msgstr "XFceパネル"
@@ -238,7 +243,7 @@ msgstr "ターミナル"
 msgid "Settings manager not available"
 msgstr "設定マネージャが利用不可能です"
 
-#: panel/popup.c:263
+#: panel/popup.c:261
 msgid "Menu"
 msgstr "メニュー"
 
@@ -339,123 +344,59 @@ msgstr "位置"
 msgid "Behaviour"
 msgstr ""
 
-#: plugins/clock/clock.c:57
-msgid "Sunday"
-msgstr "日曜"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %-d : day of the month, without prefixed 0
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:119
+msgid "%A, %-d %B %Y"
+msgstr ""
 
-#: plugins/clock/clock.c:58
-msgid "Monday"
-msgstr "月曜"
-
-#: plugins/clock/clock.c:59
-msgid "Tuesday"
-msgstr "火曜"
-
-#: plugins/clock/clock.c:60
-msgid "Wednesday"
-msgstr "水曜"
-
-#: plugins/clock/clock.c:61
-msgid "Thursday"
-msgstr "木曜"
-
-#: plugins/clock/clock.c:62
-msgid "Friday"
-msgstr "金曜"
-
-#: plugins/clock/clock.c:63
-msgid "Saturday"
-msgstr "土曜"
-
-#: plugins/clock/clock.c:67
-msgid "January"
-msgstr " 1月"
-
-#: plugins/clock/clock.c:68
-msgid "February"
-msgstr " 2月"
-
-#: plugins/clock/clock.c:69
-msgid "March"
-msgstr " 3月"
-
-#: plugins/clock/clock.c:70
-msgid "April"
-msgstr " 4月"
-
-#: plugins/clock/clock.c:71
-msgid "May"
-msgstr " 5月"
-
-#: plugins/clock/clock.c:72
-msgid "June"
-msgstr " 6月"
-
-#: plugins/clock/clock.c:73
-msgid "July"
-msgstr " 7月"
-
-#: plugins/clock/clock.c:74
-msgid "August"
-msgstr " 8月"
-
-#: plugins/clock/clock.c:75
-msgid "September"
-msgstr " 9月"
-
-#: plugins/clock/clock.c:76
-msgid "October"
-msgstr "10月"
-
-#: plugins/clock/clock.c:77
-msgid "November"
-msgstr "11月"
-
-#: plugins/clock/clock.c:78
-msgid "December"
-msgstr "12月"
-
-#: plugins/clock/clock.c:350
+#: plugins/clock/clock.c:336
 msgid "Clock type:"
 msgstr "時計のタイプ:"
 
-#: plugins/clock/clock.c:363
+#: plugins/clock/clock.c:349
 msgid "Analog"
 msgstr "アナログ"
 
-#: plugins/clock/clock.c:367
+#: plugins/clock/clock.c:353
 msgid "Digital"
 msgstr "デヂタル"
 
-#: plugins/clock/clock.c:371
+#: plugins/clock/clock.c:357
 msgid "LED"
 msgstr "ＬＥＤ"
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:419
 msgid "Hour mode:"
 msgstr "時間制:"
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:426
 msgid "24 hour"
 msgstr "24時間制"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:432
 msgid "12 hour"
 msgstr "12時間制"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:438
 msgid "AM/PM"
 msgstr "午前/午後"
 
-#: plugins/clock/clock.c:490
+#: plugins/clock/clock.c:476
 msgid "Show seconds:"
 msgstr "秒表示:"
 
-#: plugins/clock/clock.c:599
+#: plugins/clock/clock.c:585
 msgid "Xfce Clock"
 msgstr "XFce時計"
 
-#: plugins/pager/pager.c:277
+#: plugins/pager/pager.c:271
 msgid "Graphical pager"
 msgstr "グラフィカル・ページャ"
 
@@ -537,11 +478,65 @@ msgstr "間隔 (sec):"
 msgid "Mail check"
 msgstr "メール確認"
 
+#~ msgid "Sunday"
+#~ msgstr "日曜"
+
+#~ msgid "Monday"
+#~ msgstr "月曜"
+
+#~ msgid "Tuesday"
+#~ msgstr "火曜"
+
+#~ msgid "Wednesday"
+#~ msgstr "水曜"
+
+#~ msgid "Thursday"
+#~ msgstr "木曜"
+
+#~ msgid "Friday"
+#~ msgstr "金曜"
+
+#~ msgid "Saturday"
+#~ msgstr "土曜"
+
+#~ msgid "January"
+#~ msgstr " 1月"
+
+#~ msgid "February"
+#~ msgstr " 2月"
+
+#~ msgid "March"
+#~ msgstr " 3月"
+
+#~ msgid "April"
+#~ msgstr " 4月"
+
+#~ msgid "May"
+#~ msgstr " 5月"
+
+#~ msgid "June"
+#~ msgstr " 6月"
+
+#~ msgid "July"
+#~ msgstr " 7月"
+
+#~ msgid "August"
+#~ msgstr " 8月"
+
+#~ msgid "September"
+#~ msgstr " 9月"
+
+#~ msgid "October"
+#~ msgstr "10月"
+
+#~ msgid "November"
+#~ msgstr "11月"
+
+#~ msgid "December"
+#~ msgstr "12月"
+
 #~ msgid "_Done"
 #~ msgstr "実行(_D)"
-
-#~ msgid "_Revert"
-#~ msgstr "元に戻す(_R)"
 
 #~ msgid "Type:"
 #~ msgstr "タイプ:"

@@ -35,6 +35,7 @@ void groups_register_control (Control * control);
 Control *groups_get_control (int index);
 PanelPopup *groups_get_popup (int index);
 
+void groups_add_control (int id, const char *filename, int index);
 void groups_move (int from, int to);
 void groups_remove (int index);
 void groups_show_popup (int index, gboolean show);
@@ -48,9 +49,6 @@ void groups_set_popup_position (int position);
 void groups_set_theme (const char *theme);
 
 void groups_set_arrow_direction (GtkArrowType type);
-
-/* add/remove */
-void groups_set_num_groups (int n);
-void groups_add_control (int id, const char *filename, int index);
+GtkArrowType groups_get_arrow_direction (void);
 
 #endif /* __XFCE_GROUPS_H__ */
