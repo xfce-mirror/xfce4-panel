@@ -1,4 +1,4 @@
-Crystal48x48dir = $(datadir)/xfce4/themes/Crystal/48x48/emblems
+Crystal48x48dir = $(datadir)/xfce4/icons/Crystal/48x48/emblems
 
 Crystal48x48_DATA = \
 	edit.png			\

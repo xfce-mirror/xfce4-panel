@@ -1,4 +1,4 @@
-XFcedir = $(datadir)/xfce4/themes/XFce
+XFcedir = $(datadir)/xfce4/icons/XFce
 
 XFce_DATA = \
 	index.theme

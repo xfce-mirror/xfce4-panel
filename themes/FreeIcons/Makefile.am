@@ -1,4 +1,4 @@
-FreeIconsdir = $(datadir)/xfce4/themes/FreeIcons
+FreeIconsdir = $(datadir)/xfce4/icons/FreeIcons
 
 FreeIcons_DATA = \
 	README			\

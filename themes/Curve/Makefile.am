@@ -1,4 +1,4 @@
-Curvedir = $(datadir)/xfce4/themes/Curve
+Curvedir = $(datadir)/xfce4/icons/Curve
 
 Curve_DATA = \
 	README			\

@@ -1,4 +1,4 @@
-Noia48x48dir = $(datadir)/xfce4/themes/Noia/48x48/emblems
+Noia48x48dir = $(datadir)/xfce4/icons/Noia/48x48/emblems
 
 Noia48x48_DATA = \
 	edit.png			\

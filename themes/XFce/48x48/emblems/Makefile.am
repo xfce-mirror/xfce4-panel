@@ -1,4 +1,4 @@
-XFce48x48dir = $(datadir)/xfce4/themes/XFce/48x48/emblems
+XFce48x48dir = $(datadir)/xfce4/icons/XFce/48x48/emblems
 
 XFce48x48_DATA = \
 	edit.xpm			\

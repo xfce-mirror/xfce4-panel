@@ -1,4 +1,4 @@
-XFce53x53dir = $(datadir)/xfce4/themes/XFce/53x53/emblems
+XFce53x53dir = $(datadir)/xfce4/icons/XFce/53x53/emblems
 
 XFce53x53_DATA = \
 	trash_empty.xpm			\

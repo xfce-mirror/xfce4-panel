@@ -1,4 +1,4 @@
-Noiadir = $(datadir)/xfce4/themes/Noia
+Noiadir = $(datadir)/xfce4/icons/Noia
 
 Noia_DATA = \
 	README			\

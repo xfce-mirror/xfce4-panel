@@ -1,4 +1,4 @@
-Noia22x22dir = $(datadir)/xfce4/themes/Noia/22x22/emblems
+Noia22x22dir = $(datadir)/xfce4/icons/Noia/22x22/emblems
 
 Noia22x22_DATA = \
 	miniinfo.png			\

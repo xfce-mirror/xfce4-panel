@@ -1,4 +1,4 @@
-Crystal22x22dir = $(datadir)/xfce4/themes/Crystal/22x22/emblems
+Crystal22x22dir = $(datadir)/xfce4/icons/Crystal/22x22/emblems
 
 Crystal22x22_DATA = \
 	miniinfo.png			\

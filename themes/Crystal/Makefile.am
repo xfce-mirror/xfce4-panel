@@ -1,4 +1,4 @@
-Crystaldir = $(datadir)/xfce4/themes/Crystal
+Crystaldir = $(datadir)/xfce4/icons/Crystal
 
 Crystal_DATA = \
 	README			\

@@ -1,4 +1,4 @@
-FreeIcons24x24dir = $(datadir)/xfce4/themes/FreeIcons/24x24/emblems
+FreeIcons24x24dir = $(datadir)/xfce4/icons/FreeIcons/24x24/emblems
 
 FreeIcons24x24_DATA = \
 	miniinfo.png			\

@@ -1,4 +1,4 @@
-Gnome48x48dir = $(datadir)/xfce4/themes/Gnome/48x48/emblems
+Gnome48x48dir = $(datadir)/xfce4/icons/gnome/48x48/emblems
 
 Gnome48x48_DATA = \
 	edit.png			\

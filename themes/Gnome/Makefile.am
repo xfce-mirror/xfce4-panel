@@ -1,4 +1,4 @@
-Gnomedir = $(datadir)/xfce4/themes/Gnome
+Gnomedir = $(datadir)/xfce4/icons/gnome
 
 Gnome_DATA = \
 	index.theme

@@ -1,4 +1,4 @@
-FreeIcons48x48dir = $(datadir)/xfce4/themes/FreeIcons/48x48/emblems
+FreeIcons48x48dir = $(datadir)/xfce4/icons/FreeIcons/48x48/emblems
 
 FreeIcons48x48_DATA = \
 	edit.png			\

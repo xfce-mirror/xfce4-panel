@@ -1,4 +1,4 @@
-Curve48x48dir = $(datadir)/xfce4/themes/Curve/48x48/emblems
+Curve48x48dir = $(datadir)/xfce4/icons/Curve/48x48/emblems
 
 Curve48x48_DATA = \
 	edit.png			\

@@ -1,4 +1,4 @@
-Curve22x22dir = $(datadir)/xfce4/themes/Curve/22x22/emblems
+Curve22x22dir = $(datadir)/xfce4/icons/Curve/22x22/emblems
 
 Curve22x22_DATA = \
 	miniinfo.png			\
