@@ -202,6 +202,9 @@ void old_groups_set_from_xml(int side, xmlNodePtr node)
 
 	group = li->data;
 	
+	if (side == LEFT && !node)
+	    break;
+
         if(node)
         {
             for(child = node->children; child; child = child->next)
