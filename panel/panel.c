@@ -444,16 +444,16 @@ panel_set_position (Panel * p)
 	}
     }
 
-    DBG ("++ position: %d, %d\n", 
+    DBG (" ++ position: %d, %d\n", 
 	 p->position.x, p->position.y);
-    DBG ("   monitor: %d\n", 
+    DBG ("    monitor: %d\n", 
 	 p->priv->monitor);
-    DBG ("   side: %s\n", 
+    DBG ("    side: %s\n", 
 	 p->priv->side==LEFT ? "left" :
 		p->priv->side==RIGHT ? "right" :
 		p->priv->side==TOP ? "top" :
 		"bottom");
-    DBG ("   state: %s\n", 
+    DBG ("    state: %s\n", 
 	 p->priv->pos_state==XFCE_POS_STATE_CENTER ? "center" :
 	 	p->priv->pos_state==XFCE_POS_STATE_START ? "start" :
 	 	p->priv->pos_state==XFCE_POS_STATE_END ? "end" :
@@ -1055,11 +1055,14 @@ create_panel (void)
      * This function creates the panel items and popup menus */
     get_panel_config ();
 
+    if (!GTK_WIDGET_REALIZED (p->toplevel))
+	gtk_widget_realize (p->toplevel);
+
     p->priv->is_created = TRUE;
 
-    gtk_widget_size_request (p->toplevel, &p->priv->req);
-
     panel_set_position (p);
+
+    DBG (" ++ position: %d, %d\n", panel.position.x, panel.position.y);
     
     update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
 	    			 p->position.y + p->priv->req.height / 2);
@@ -1071,12 +1074,12 @@ create_panel (void)
 
     /* size sometimes changes after showing toplevel */
     panel_set_position (p);
-    
+
     /* recalculate pos_state for old API where only x and y coordinates are
      * read from the config file */
     restrict_position (p, &(p->position.x), &(p->position.y));
     gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
-    
+
     if (p->priv->settings.autohide)
 	panel_set_autohide (TRUE);
 
@@ -1495,17 +1498,7 @@ panel_parse_xml (xmlNodePtr node)
 		    g_free (value);
 		}
 
-		if (panel.position.x == -1 || panel.position.y == -1)
-		{
-		    panel.priv->monitor = 0;
-		    panel.priv->side = BOTTOM;
-		    panel.priv->pos_state = XFCE_POS_STATE_CENTER;
-
-		    gdk_screen_get_monitor_geometry (panel.priv->screen,
-			    panel.priv->monitor, 
-			    &(panel.priv->monitor_geometry));
-		}
-		else
+		if (panel.position.x != -1 && panel.position.y != -1)
 		{
 		    panel.priv->monitor = 
 			gdk_screen_get_monitor_at_point (panel.priv->screen, 
@@ -1551,6 +1544,19 @@ panel_parse_xml (xmlNodePtr node)
 		}
 	    }
 	}
+    }
+    
+    if (panel.position.x == -1 || panel.position.y == -1)
+    {
+	DBG (" ++ Center panel on 1st monitor\n");
+	
+	panel.priv->monitor = 0;
+	panel.priv->side = BOTTOM;
+	panel.priv->pos_state = XFCE_POS_STATE_CENTER;
+
+	gdk_screen_get_monitor_geometry (panel.priv->screen,
+		panel.priv->monitor, 
+		&(panel.priv->monitor_geometry));
     }
 }
 
