@@ -28,7 +28,7 @@ AC_PROG_LIBTOOL
 
 dnl Check for standard header files
 AC_HEADER_STDC
-AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h])
+AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h netinet/in.h])
 AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support

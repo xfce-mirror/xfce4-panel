@@ -28,6 +28,10 @@
 #include <sys/wait.h>
 #endif
 
+#ifdef HAVE_NETINET_IN_H
+#include <netinet/in.h>
+#endif
+
 #include <stdio.h>
 
 #include <gtk/gtk.h>
