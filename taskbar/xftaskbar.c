@@ -1006,9 +1006,6 @@ main (int argc, char **argv)
         client_session_new (argc, argv, NULL /* data */ ,
                             SESSION_RESTART_IF_RUNNING, 30);
 
-    /* size and position */
-    taskbar_position (taskbar);
-
     /* settings */
     client =
         mcs_client_new (taskbar->dpy, taskbar->scr, notify_cb, watch_cb,
@@ -1023,6 +1020,10 @@ main (int argc, char **argv)
         taskbar_toggle_tray (taskbar);
         taskbar_toggle_time (taskbar);
     }
+
+    /* size and position */
+    gtk_widget_realize (taskbar->win);
+    taskbar_position (taskbar);
 
     gtk_widget_show (taskbar->win);
 
