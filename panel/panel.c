@@ -617,7 +617,8 @@ create_panel (void)
      * otherwise the initial position will be messed up */
     panel_created = TRUE;
 
-    panel_set_autohide (settings.autohide);
+    if (settings.autohide)
+	panel_set_autohide(TRUE);
 }
 
 void
@@ -633,6 +634,7 @@ void
 panel_set_orientation (int orientation)
 {
     gboolean hidden;
+    int pos;
 
     settings.orientation = orientation;
 
@@ -645,10 +647,35 @@ panel_set_orientation (int orientation)
     if (hidden)
     {
 	panel_set_autohide (FALSE);
-
+	
 	while (gtk_events_pending ())
 	    gtk_main_iteration ();
     }
+
+    gtk_widget_hide(panel.toplevel);
+    
+    /* change popup position to make it look better 
+     * done here, because it's needed for size calculation 
+     * the setttings dialog will also change, we just 
+     * anticipate that ;-)
+     */
+    pos = settings.popup_position;
+    switch (pos)
+    {
+	case LEFT:
+	    pos = BOTTOM;
+	    break;
+	case RIGHT:
+	    pos = TOP;
+	    break;
+	case TOP:
+	    pos = RIGHT;
+	    break;
+	case BOTTOM:
+	    pos = LEFT;
+	    break;
+    }
+    panel_set_popup_position(pos);
 
     /* save panel controls */
     groups_unpack ();
@@ -660,11 +687,22 @@ panel_set_orientation (int orientation)
     groups_pack (GTK_BOX (panel.group_box));
     groups_set_orientation (orientation);
 
-    panel.position.x = panel.position.y = -1;
-    panel_set_position ();
+    while (gtk_events_pending ())
+	gtk_main_iteration ();
 
+    panel.position.x = panel.position.y = -1;
+    /* also sets position */
+    panel_set_size (settings.size);
+
+    while (gtk_events_pending ())
+	gtk_main_iteration ();
+
+    gtk_widget_show(panel.toplevel);
+    
     if (hidden)
-	panel_set_autohide (TRUE);
+	panel_set_autohide(TRUE);
+
+    DBG("done");
 }
 
 void
@@ -676,6 +714,9 @@ panel_set_layer (int layer)
 	return;
 
     set_window_layer (panel.toplevel, layer);
+    
+    if (layer == TOP)
+	gtk_window_present(GTK_WINDOW(panel.toplevel));
 }
 
 void
@@ -866,7 +907,18 @@ panel_set_autohide (gboolean hide)
     if (!panel_created)
 	return;
 
-    panel_set_hidden (&panel, hide);
+    if (hide)
+    {
+	DBG("add hide timeout");
+
+	panel.hide_timeout = g_timeout_add (1000, 
+					    (GSourceFunc) panel_hide_timeout, 
+					    &panel);
+    }
+    else
+    {
+	panel_set_hidden (&panel, hide);
+    }
 }
 
 /*  Global preferences

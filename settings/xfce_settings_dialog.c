@@ -153,6 +153,9 @@ orientation_changed (GtkOptionMenu * menu)
     setting->data.v_int = n;
     mcs_manager_set_setting (mcs_manager, setting, CHANNEL);
 
+    gdk_flush();
+    g_usleep(10);
+
     /* this seems more logical */
     switch (pos)
     {

@@ -1021,7 +1021,6 @@ panel_item_create_options (Control * control, GtkContainer * container,
 GtkWidget *
 create_menu_item_dialog (Item * mi)
 {
-    const char *title;
     GtkWidget *dlg;
     GtkWidget *main_vbox;
     GtkWidget *frame;
