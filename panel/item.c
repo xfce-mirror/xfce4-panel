@@ -200,6 +200,8 @@ popup_menu_timeout (Item * item)
 
     popup_timeout_id = 0;
 
+    gdk_threads_enter ();
+
     /* FIXME: items should know about their parent */
 
     /* Explanantion of code below:
@@ -237,6 +239,8 @@ popup_menu_timeout (Item * item)
 	    break;
 	}
     }
+
+    gdk_threads_leave ();
 
     return FALSE;
 }

@@ -795,7 +795,9 @@ panel_hide_timeout (Panel * p)
 
     if (!p->hidden)
     {
+	gdk_threads_enter ();
 	panel_set_hidden (p, TRUE);
+	gdk_threads_leave ();
     }
     else
 	DBG ("already hidden");
@@ -807,7 +809,11 @@ static gboolean
 panel_unhide_timeout (Panel * p)
 {
     if (p->hidden)
+    {
+	gdk_threads_enter ();
 	panel_set_hidden (p, FALSE);
+	gdk_threads_leave ();
+    }
 
     return FALSE;
 }
