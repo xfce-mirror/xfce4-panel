@@ -7,7 +7,10 @@ liblauncher_la_LDFLAGS =							\
 	-module
 
 liblauncher_la_SOURCES = 						\
-	launcher.c
+	launcher.h							\
+	launcher.c							\
+	launcher-dialog.h						\
+	launcher-dialog.c
 
 liblauncher_la_CFLAGS =							\
 	-I$(top_srcdir)							\
