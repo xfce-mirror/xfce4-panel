@@ -27,6 +27,8 @@ gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, gpointer data);
 
 gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data);
 
+gboolean main_frame_destroy_cb(GtkWidget * frame, GdkEvent * ev, gpointer data);
+
 void iconify_cb(void);
 
 /* central panel */

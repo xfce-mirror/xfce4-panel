@@ -107,6 +107,7 @@ void set_transient_for_dialog(GtkWidget * window)
  *  popup size: option menu
  *  popup position: option menu
  *  style: option menu (should be radio buttons according to GNOME HIG)
+ *  panel orientation: option menu
  *  icon theme: option menu
  *  left : spinbutton
  *  right: spinbutton
@@ -122,6 +123,7 @@ static GtkWidget *size_menu;
 static GtkWidget *popup_menu;
 static GtkWidget *orientation_menu;
 static GtkWidget *style_menu;
+static GtkWidget *panel_orientation_menu;
 static GtkWidget *theme_menu;
 static GtkWidget *left_spin;
 static GtkWidget *right_spin;
@@ -157,6 +159,7 @@ static void create_backup(void)
     backup.popup_size = settings.popup_size;
     backup.popup_position = settings.popup_position;
     backup.style = settings.style;
+    backup.orientation = settings.orientation;
     backup.theme = g_strdup(settings.theme);
     backup.num_left = settings.num_left;
     backup.num_right = settings.num_right;
@@ -174,8 +177,11 @@ static void restore_backup(void)
 
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
+
+    /*
+     * This is not working properly just yet.
     gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu), 
-	    			backup.popup_position);
+	    			backup.orientation); */
     gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), backup.style);
     gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
                                 backup_theme_index);
@@ -402,6 +408,47 @@ static void add_style_menu(GtkWidget * option_menu, int style)
         gtk_widget_set_sensitive(option_menu, FALSE);
 }
 
+
+/*
+ * Panel Orientation
+ */
+
+static void panel_orientation_changed(GtkOptionMenu * menu)
+{
+    int n = gtk_option_menu_get_history(menu);
+
+    if(n == settings.orientation)
+        return;
+
+    panel_set_orientation(n);
+
+    panel_reorient();
+    
+    // gtk_widget_set_sensitive(revert, TRUE);
+}
+
+static void add_panel_orientation_menu(GtkWidget * option_menu, int orientation)
+{
+    GtkWidget *menu = gtk_menu_new();
+    GtkWidget *item;
+
+    item = gtk_menu_item_new_with_label(_("Horizontal"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    item = gtk_menu_item_new_with_label(_("Vertical"));
+    gtk_widget_show(item);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+
+    gtk_option_menu_set_menu(GTK_OPTION_MENU(option_menu), menu);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), orientation);
+
+    g_signal_connect(option_menu, "changed", 
+            G_CALLBACK(panel_orientation_changed), NULL);
+
+}
+
+
 /*  popup orientation
 */
 static void orientation_changed(GtkOptionMenu * menu)
@@ -601,6 +648,23 @@ static void add_style_box(GtkBox * box)
     gtk_widget_show(style_menu);
     add_style_menu(style_menu, settings.style);
     gtk_box_pack_start(GTK_BOX(hbox), style_menu, TRUE, TRUE, 0);
+
+    /* panel orientation */
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Panel Orientation:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    panel_orientation_menu = gtk_option_menu_new();
+    gtk_widget_show(panel_orientation_menu);
+    add_panel_orientation_menu(panel_orientation_menu, settings.orientation);
+    gtk_box_pack_start(GTK_BOX(hbox), panel_orientation_menu, TRUE, TRUE, 0);
+    
 
     /* popup orientation */
     hbox = gtk_hbox_new(FALSE, 4);

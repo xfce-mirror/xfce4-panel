@@ -57,6 +57,15 @@ gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
     return TRUE;
 }
 
+gboolean main_frame_destroy_cb(GtkWidget * frame, GdkEvent * ev, gpointer data)
+{
+    side_panel_cleanup(LEFT);
+    central_panel_cleanup();
+    side_panel_cleanup(RIGHT);
+
+    return TRUE;
+}
+
 void iconify_cb(void)
 {
     hide_current_popup_menu();

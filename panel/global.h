@@ -67,6 +67,10 @@ enum
 enum
 { OLD_STYLE, NEW_STYLE };
 
+/* panel orientation */
+enum
+{ HORIZONTAL, VERTICAL };
+
 /*  Panel sizes
  *  -----------
  *  settings.size is a symbolic size given by an enum. The actual sizes 
@@ -121,6 +125,7 @@ struct _Settings
     int popup_position;
 
     int style;
+    int orientation;
     char *theme;
     gboolean on_top;
 

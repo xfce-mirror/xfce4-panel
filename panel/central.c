@@ -183,15 +183,20 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
 {
     int pos = sb->index;
 
-    if (pos % 2 == 0 || settings.size <= SMALL)
-    {
-	gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1,
+    if (settings.orientation == VERTICAL) {
+        gtk_table_attach(GTK_TABLE(table), sb->frame, 0, 1, pos, pos + 1, 
                          GTK_EXPAND, GTK_EXPAND, 0, 0);
-    }
-    else
-    {
-	gtk_table_attach(GTK_TABLE(table), sb->frame, pos - 1, pos, 1, 2,
-                         GTK_EXPAND, GTK_EXPAND, 0, 0);
+    } else {
+        if (pos % 2 == 0 || settings.size <= SMALL)
+        {
+            gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1,
+                             GTK_EXPAND, GTK_EXPAND, 0, 0);
+        }
+        else
+        {
+            gtk_table_attach(GTK_TABLE(table), sb->frame, pos - 1, pos, 1, 2,
+                                 GTK_EXPAND, GTK_EXPAND, 0, 0);
+        }
     }
 }
 
@@ -267,21 +272,39 @@ static void add_mini_table(int side, GtkBox * hbox)
 
     if (settings.size > SMALL)
     {
-	gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-			 0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-	gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first + 1],
-			 0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        if (settings.orientation == VERTICAL) {
+            gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
+                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+            gtk_table_attach(GTK_TABLE(mini_tables[side]),
+                     minibuttons[first + 1],
+                     1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        } else {
+            gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
+                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+            gtk_table_attach(GTK_TABLE(mini_tables[side]), 
+                     minibuttons[first + 1],
+                     0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        }
 
-	gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);
+        gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);
     }
     else
     {
-	gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
-			 0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
-	gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first + 1],
-			 1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        if (settings.orientation == VERTICAL) {
+            gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
+                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+            gtk_table_attach(GTK_TABLE(mini_tables[side]), 
+                     minibuttons[first + 1],
+                     0, 1, 1, 2, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        } else {
+            gtk_table_attach(GTK_TABLE(mini_tables[side]), minibuttons[first],
+                     0, 1, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+            gtk_table_attach(GTK_TABLE(mini_tables[side]),
+                     minibuttons[first + 1],
+                     1, 2, 0, 1, GTK_SHRINK, GTK_EXPAND, 0, 0);
+        }
 
-	gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);
+        gtk_box_pack_start(hbox, mini_tables[side], TRUE, TRUE, 0);
     }
 }
 
@@ -290,7 +313,11 @@ static void add_desktop_table(GtkBox * hbox)
     GtkWidget *table;
     int i;
 
-    table = gtk_table_new(2, NBSCREENS, FALSE);
+    if (settings.orientation == VERTICAL) {
+        table = gtk_table_new(NBSCREENS, 2, FALSE);
+    } else {
+        table = gtk_table_new(2, NBSCREENS, FALSE);
+    }
 
     if(settings.show_desktop_buttons)
         gtk_widget_show(table);
@@ -399,6 +426,10 @@ static void reorder_minitable(int side, int size)
 
     /* when size == SMALL put second button in second column first row
      * otherwise put second button in first column second row */
+
+    /* Botsie: I didn't understand the bit above -- but in vertical mode
+     * we do the exact opposite */
+    
     for(child = GTK_TABLE(table)->children;
         child && child->data; child = child->next)
     {
@@ -410,13 +441,23 @@ static void reorder_minitable(int side, int size)
 
     if(size == SMALL || size == TINY)
     {
-        hpos = 1;
-        vpos = 0;
+        if (settings.orientation == VERTICAL) {
+            hpos = 0;
+            vpos = 1;
+        } else {
+            hpos = 1;
+            vpos = 0;
+        }
     }
     else
     {
-        hpos = 0;
-        vpos = 1;
+        if (settings.orientation == VERTICAL) {
+            hpos = 1;
+            vpos = 0;
+        } else {
+            hpos = 0;
+            vpos = 1;
+        }
     }
 
     tc->left_attach = hpos;
@@ -451,30 +492,35 @@ static void reorder_desktop_table(int size)
                 break;
         }
 
-        if((i % 2) == 0)
-        {
-            if(size <= SMALL)
+        if (settings.orientation == VERTICAL) {
+            hpos = 0;
+            vpos = i;
+        } else {
+            if((i % 2) == 0)
             {
-                hpos = i;
-                vpos = 0;
+                if(size <= SMALL)
+                {
+                    hpos = i;
+                    vpos = 0;
+                }
+                else
+                {
+                    hpos = i / 2;
+                    vpos = 0;
+                }
             }
             else
             {
-                hpos = i / 2;
-                vpos = 0;
-            }
-        }
-        else
-        {
-            if(size <= SMALL)
-            {
-                hpos = i;
-                vpos = 0;
-            }
-            else
-            {
-                hpos = (i - 1) / 2;
-                vpos = 1;
+                if(size <= SMALL)
+                {
+                    hpos = i;
+                    vpos = 0;
+                }
+                else
+                {
+                    hpos = (i - 1) / 2;
+                    vpos = 1;
+                }
             }
         }
 

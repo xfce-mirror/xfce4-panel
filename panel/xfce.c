@@ -57,13 +57,16 @@ int screen_button_width[] = { 30, 40, 80, 80 };
 /*  Panel framework
  *  ---------------
  *  - window
- *  - hbox
- *    - hbox 	: left panel
- *    - frame
- *      - hbox 	: central panel
- *    - hbox 	: right panel
+ *      - frame
+ *          - hbox
+ *              - hbox 	: left panel
+ *              - frame
+ *                  - hbox 	: central panel
+ *              - hbox 	: right panel
 */
 GtkWidget *toplevel = NULL;
+GtkWidget *main_frame = NULL;
+GtkWidget *main_hbox = NULL;
 GtkWidget *left_hbox = NULL;
 GtkWidget *right_hbox = NULL;
 GtkWidget *central_frame = NULL;
@@ -95,27 +98,33 @@ static GtkWidget *create_panel_window(void)
     return w;
 }
 
-void panel_init(void)
+void panel_contents_init()
 {
-    GtkWidget *window;
-    GtkWidget *frame;
-    GtkWidget *hbox;
+    main_frame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(main_frame), GTK_SHADOW_OUT);
+    gtk_container_set_border_width(GTK_CONTAINER(main_frame), 0);
+    gtk_widget_show(main_frame);
 
-    toplevel = create_panel_window();
+    g_signal_connect(main_frame, "destroy-event", 
+            G_CALLBACK(main_frame_destroy_cb), NULL);
+    
+    gtk_container_add(GTK_CONTAINER(toplevel), main_frame);
 
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
-    gtk_container_set_border_width(GTK_CONTAINER(frame), 0);
-    gtk_widget_show(frame);
-    gtk_container_add(GTK_CONTAINER(toplevel), frame);
+    if (settings.orientation == VERTICAL) {
+        main_hbox = gtk_vbox_new(FALSE, 0);
+    } else {
+        main_hbox = gtk_hbox_new(FALSE, 0);
+    }
+    gtk_widget_show(main_hbox);
+    gtk_container_add(GTK_CONTAINER(main_frame), main_hbox);
 
-    hbox = gtk_hbox_new(FALSE, 0);
-    gtk_widget_show(hbox);
-    gtk_container_add(GTK_CONTAINER(frame), hbox);
-
-    left_hbox = gtk_hbox_new(FALSE, 0);
+    if (settings.orientation == VERTICAL) {
+        left_hbox = gtk_vbox_new(FALSE, 0);
+    } else {
+        left_hbox = gtk_hbox_new(FALSE, 0);
+    }
     gtk_widget_show(left_hbox);
-    gtk_container_add(GTK_CONTAINER(hbox), left_hbox);
+    gtk_container_add(GTK_CONTAINER(main_hbox), left_hbox);
 
     central_frame = gtk_frame_new(NULL);
     if(settings.style == OLD_STYLE)
@@ -124,15 +133,30 @@ void panel_init(void)
     if (settings.show_central)
 	gtk_widget_show(central_frame);
 
-    gtk_container_add(GTK_CONTAINER(hbox), central_frame);
+    gtk_container_add(GTK_CONTAINER(main_hbox), central_frame);
 
-    central_hbox = gtk_hbox_new(FALSE, 0);
+    if (settings.orientation == VERTICAL) {
+        central_hbox = gtk_vbox_new(FALSE, 0);
+    } else {
+        central_hbox = gtk_hbox_new(FALSE, 0);
+    }
     gtk_widget_show(central_hbox);
     gtk_container_add(GTK_CONTAINER(central_frame), central_hbox);
 
-    right_hbox = gtk_hbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(hbox), right_hbox);
+    if (settings.orientation == VERTICAL) {
+        right_hbox = gtk_vbox_new(FALSE, 0);
+    } else {
+        right_hbox = gtk_hbox_new(FALSE, 0);
+    }
+    gtk_container_add(GTK_CONTAINER(main_hbox), right_hbox);
     gtk_widget_show(right_hbox);
+}
+
+void panel_init(void)
+{
+
+    toplevel = create_panel_window();
+    panel_contents_init();
 }
 
 void panel_cleanup(void)
@@ -143,9 +167,6 @@ void panel_cleanup(void)
     if (GTK_IS_WIDGET(toplevel))
 	    gtk_widget_destroy(toplevel);
     
-    side_panel_cleanup(LEFT);
-    central_panel_cleanup();
-    side_panel_cleanup(RIGHT);
 }
 
 /*  Panel settings
@@ -158,6 +179,12 @@ void panel_set_size(int size)
     side_panel_set_size(LEFT, size);
     central_panel_set_size(size);
     side_panel_set_size(RIGHT, size);
+}
+
+void panel_set_orientation(int orientation)
+{
+    settings.orientation = orientation;
+    // panel_set_size(settings.size);
 }
 
 void panel_set_popup_size(int size)
@@ -277,6 +304,7 @@ void init_settings(void)
     settings.popup_size = MEDIUM;
     settings.popup_position = TOP;
     settings.style = NEW_STYLE;
+    settings.orientation = HORIZONTAL;
     settings.theme = NULL;
     settings.on_top = TRUE;
 
@@ -301,6 +329,7 @@ void panel_set_settings(void)
     panel_set_popup_position(settings.popup_position);
 
     panel_set_style(settings.style);
+    panel_set_orientation(settings.orientation);
     panel_set_theme(settings.theme);
 
     side_panel_set_num_groups(LEFT, settings.num_left);
@@ -392,6 +421,13 @@ void panel_parse_xml(xmlNodePtr node)
 
     g_free(value);
 
+    value = xmlGetProp(node, (const xmlChar *)"orientation");
+
+    if(value)
+        settings.orientation = atoi(value);
+
+    g_free(value);
+    
     value = xmlGetProp(node, (const xmlChar *)"icontheme");
 
     if(value)
@@ -514,6 +550,8 @@ void panel_parse_xml(xmlNodePtr node)
     /* check the values */
     if(settings.style < OLD_STYLE || settings.style > NEW_STYLE)
         settings.style = NEW_STYLE;
+    if(settings.orientation < HORIZONTAL || settings.orientation > VERTICAL)
+        settings.orientation = HORIZONTAL;
     if(settings.size < TINY || settings.size > LARGE)
         settings.size = SMALL;
     if(settings.popup_size < SMALL || settings.popup_size > LARGE)
@@ -549,6 +587,9 @@ void panel_write_xml(xmlNodePtr root)
 
     snprintf(value, 2, "%d", settings.style);
     xmlSetProp(node, "style", value);
+
+    snprintf(value, 2, "%d", settings.orientation);
+    xmlSetProp(node, "orientation", value);
 
     if(settings.theme)
         xmlSetProp(node, "icontheme", settings.theme);
@@ -592,6 +633,26 @@ void panel_write_xml(xmlNodePtr root)
         child = xmlNewTextChild(node, NULL, "Exit", settings.exit_command);
     }
 }
+
+void panel_reorient()
+{
+    gtk_widget_hide(toplevel);
+    gtk_widget_destroy(main_frame);
+    panel_contents_init();
+    side_panel_init(LEFT, GTK_BOX(left_hbox));
+    central_panel_init(GTK_BOX(central_hbox));
+    side_panel_init(RIGHT, GTK_BOX(right_hbox));
+
+    /* read and apply configuration 
+     * This function creates the panel items and popup menus */
+    get_panel_config();
+
+    /* give early visual feedback 
+     * the init functions have already created the basic panel */
+    panel_set_position();
+    gtk_widget_show(toplevel);
+}
+
 
 /*  Main program
  *  ------------
