@@ -375,7 +375,7 @@ static GtkWidget *
 get_control_menu (void)
 {
     static GtkItemFactory *factory;
-    GtkWidget *menu = NULL;
+    static GtkWidget *menu = NULL;
 
     if (!menu)
     {

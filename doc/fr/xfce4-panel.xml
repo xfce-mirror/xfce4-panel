@@ -1,0 +1,713 @@
+<?xml version='1.0'?> 
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+          "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY copyright SYSTEM "copyright.xml"> 
+  <!ENTITY manrevision "0.99"> 
+  <!ENTITY date "Sep 2003"> 
+  <!ENTITY appversion "4.0"> 
+  <!ENTITY app "<application>xfce4-panel</application>">
+]>
+
+<article id="xfce4-panel" lang="fr">
+
+<!-- Header --> 
+<articleinfo>
+
+  <title>Le panneau de XFce 4</title>
+  
+  <copyright>
+    <year>2003</year> <holder>Jasper Huijsmans</holder>
+  </copyright>
+
+  <copyright>
+   <year>2003</year> <holder>M.C. Collilieux (French
+   translation)</holder>
+  </copyright>
+
+<!-- I don't know about this
+  <legalnotice id="legalnotice">
+    <para>
+      This document is provided under the terms of the GNU GPL, version
+      2 or (at your option) any later version.
+    </para>
+  </legalnotice>
+-->
+  <authorgroup>
+
+    <author>
+      <firstname>Jasper</firstname> <surname>Huijsmans</surname>
+      <affiliation>
+	<address><email>huysmans@users.sourceforge.net</email></address>
+      </affiliation>
+    </author>
+
+    <othercredit role="translator">
+      <firstname>Marie-Claude</firstname> <surname>Collilieux</surname>
+      <affiliation>
+	<orgname>French Translation Team</orgname>
+	<address><email>m.collilieux@free.fr</email> </address>
+      </affiliation> <contrib>French translation</contrib>
+    </othercredit>
+
+  </authorgroup>
+
+  <!--
+  <revhistory>
+    <revision>
+      <revnumber>0.4</revnumber> 
+      <date>May 2003</date>
+      <authorinitials>jbh</authorinitials>
+    </revision>
+    <revision>
+      <revnumber>0.3</revnumber> 
+      <date>February 2003</date>
+      <authorinitials>jbh</authorinitials>
+    </revision>
+  </revhistory>
+  -->
+
+  <releaseinfo>Ce manuel décrit &app; version &appversion;. 
+    Dernière mise à jour : &date;
+  </releaseinfo>
+
+</articleinfo>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-intro">
+  <title>Introduction</title>
+
+  <para>Le panneau XFce 4 fait partie de l'<ulink url="http://www.xfce.org" 
+      type="html">environnement de bureau XFce 4</ulink> et comprend des 
+	  lanceurs de programmes, des menus, une horloge, un changeur de bureau, 
+	  et plus encore. La commande pour le lancer est &app;. Beaucoup d'éléments 
+	  de ce panneau peuvent être configurés à partir d'une interface graphique.
+  </para>
+
+  <para>Si vous êtiez habitué aux précédentes versions de XFce, vous trouverez 
+    beaucoup de nouvelles possibilités. Parmi les plus remarquables :  
+	la possibilité de mettre le panneau verticalement, les thèmes d'icônes, le 
+	nouveau pager graphique et la possibilité de configurer la position des 
+	boutons des menus popup. La manière dont les paramètres sont préservés 
+	est complétement modifiée, cela pourra prendre un peu de temps pour s'y 
+	habituer. Ce manuel devrait vous fournir toute l'information nécessaire 
+	pour adapter le panneau à vos préférences.
+  </para>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-getting-started">
+  <title>Démarrer</title>
+  
+  <para>Quand vous lancez le panneau, vous voyez une barre au bas de 
+    votre écran, comme ceci :
+  </para>
+
+  <figure id="default-panel-fig">
+    <title>Panneau XFce par défaut</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/default_panel.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/default_panel.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Montre la configuration par défaut du panneau XFce. 
+	    Il contient plusieurs lanceurs, un moniteur de courrier, 
+		une horloge  et un changeur de bureau. Montre aussi un 
+		menu ouvert.
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>L'illustration montre la configuration par défaut du panneau 
+    avec un menu ouvert et la souris au-dessus d'un bouton lanceur, 
+	faisant apparaître un message d'aide.
+  </para>
+
+  <para>Il y a une poignée de déplacement à chaque extrémité du panneau. 
+    Vous pouvez les utiliser pour déplacer le panneau sur l'écran. Cliquer 
+	avec le bouton droit (ou Maj + clic gauche) sur l'une d'elles fait 
+	apparaître un menu popup...
+	Allez-y, testez ;-)
+  </para>
+
+  <figure id="handle-popup-fig">
+    <title>Menu popup des poignées de déplacement</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/handle-popup.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/handle-popup.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Montre le menu popup des poignées de déplacement.</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>La zone située entre les poignées de déplacement contient les éléments 
+    du panneau. Les éléments disponibles sont décrits dans la section 
+	"<ulink url="#panel-items">Éléments du panneau</ulink>". La plupart 
+	des éléments réalisent une action lors d'un clic. Le paramétrage des 
+	éléments se fait dans un menu accessible par un clic droit.
+  </para>
+
+  <para>Un clic droit sur un item ouvre un menu popup à partir duquel vous 
+    pouvez ouvrir les propriétés de l'élément, supprimer l'élément ou ajouter 
+    un nouvel élément. Les éléments peuvent aussi être ajoutés à partir du menu 
+	popup des poignées de déplacement (voir au-dessus). Un sous-menu propose 
+	une liste des éléments disponibles dans laquelle choisir.
+	Quand vous ajoutez un nouvel élément, le panneau ouvre le dialogue des 
+	propriétés, vous pouvez alors modifier les options de l'élément ainsi 
+	que sa position dans le panneau.
+  </para>
+
+  <figure id="item-popup-fig">
+    <title>Eléments du menu popup</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/item-popup.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/item-popup.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Montre les éléments du menu popup.</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>Les préférences globales du panneau peuvent être modifiées à partir 
+    du gestionnaire de paramètres du panneau XFce 4. Celui-ci peut être lancé, 
+	soit à partir du bouton lanceur du panneau, soit en choisissant 'Propriétés...' 
+	dans le menu popup des poignées de déplacement. Voir  "<ulink url="#panel-settings">
+	Préférences du panneau</ulink>" pour une explication des options disponibles.
+  </para>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-items">
+  <title>Éléments du panneau</title>
+
+  <para>Le panneau Xfce 4 peut charger aussi bien des plugins externes que 
+    les plugins internes. Dans cette partie, nous décrirons seulement les 
+	éléments qui sont installés en même temps que le panneau.
+  </para>
+  
+  <para>La fenêtre de dialogue des propriétés d'un élément du panneau peut être ouverte 
+    avec un clic droit sur l'élément. Chaque type d'élément a son propre 
+	dialogue de configuration. Chaque fenêtre de dialogue possède au minimum ces 
+	options :
+  </para>
+
+  <itemizedlist>
+    <listitem>Changer la position d'un élément dans le panneau.</listitem>
+    <listitem>Supprimer cet élément. </listitem>
+  </itemizedlist>
+
+
+  <sect2 id="launcher-item">
+    <title>Lanceur</title>
+
+    <para>L'élément le plus courant est le lanceur. Il vous permet 
+	  de démarrer un programme à partir du panneau. La fenêtre de dialogue propose les options suivantes :
+    </para>
+
+    <variablelist>
+      <varlistentry>
+	<term>Commande</term>
+	<listitem>Vous pouvez entrer la commande à lancer ou le chemin à suivre dans 
+	  le système de fichiers. Il existe une option pour lancer un 
+	  programme dans un terminal et pour utiliser la notification 
+	  de démarrage. Cette dernière option signifie que le gestionnaire 
+	  de fenêtres montre un sablier pendant le chargement de l'application, 
+	  à condition que celle-ci supporte cette fonctionnalité, ce qui est le cas de peu de 
+	  programmes actuellement. Les programmes basés sur Gtk 2.2 sont censés la 
+	  supporter.
+	</listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>Icône</term>
+	<listitem>Le panneau fournit un certain nombre d'icônes qui peuvent être 
+	  utilisées en standard.Ces icônes peuvent aussi être harmonisées avec 
+	  le thème d'icônes que vous avez choisi dans les <ulink url="#panel-settings">
+	  préférences globales</ulink>. Bien sûr, vous pouvez aussi sélectionner 
+	  vos propres icônes en parcourant les répertoires grâce au bouton à 
+	  coté de la zone de saisie, ou en déposant une image à partir du 
+	  gestionnaire de fichier sur la zone de prévisualisation.
+	</listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>Bulle d'aide</term>
+	<listitem>Les éléments du panneau affichent cette aide si vous laissez 
+	  la souris au-dessus d'eux.
+	</listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>Menu</term>
+	<listitem>Un lanceur peut contenir un menu. Quand cette option est 
+	  choisie, un bouton avec une petite flêche apparaît à coté de 
+	  l'élément. Reportez-vous à <ulink url="#subpanels">menus du panneau</ulink> 
+	  pour plus d'information. La position du bouton peut être modifiée dans 
+	  les préférences générales.
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    
+    <figure id="launcher-fig">
+      <title>Élément lanceur</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/launcher-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/launcher-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Montre les propriétés de l'élément lanceur.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="clock-item">
+    <title>Horloge XFce</title>
+
+    <para>Le style de l'horloge Xfce peut être modifié par certaines options. 
+	  Il existe trois types d'horloge possibles : analogique, numérique et 
+	  LED. Une option permet d'afficher ou non les secondes, et pour les modèles 
+	  numérique et LED vous pouvez choisir un affichage sur 24 ou 12 heures 
+	  (avec possibilité d'ajouter un mode AM/PM). L'horloge affiche en outre 
+	  la date en bulle d'aide. Cliquer sur l'horloge n'apporte rien.
+    </para>
+    
+    <figure id="clock-fig">
+      <title>Élément horloge</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/clock-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/clock-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Montre les propriétés de l'horloge.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="mailcheck-item">
+    <title>Moniteur de courrier</title>
+
+    <para>Le moniteur de courrier surveille la boîte aux lettres locale 
+    de votre choix, à condition qu'elle soit au format mbox. 
+    L'icône de courrier s'accorde avec votre thème d'icônes. Vous 
+	  pouvez choisir l'emplacement de votre boîte, la commande à lancer 
+	  lorsque vous cliquez sur le bouton et l'intervalle entre chaque 
+	  vérification. La commande a les mêmes options que celles des 
+	  éléments lanceurs voir <ulink url="#launcher-item" type="html">
+	  au-dessus</ulink>).
+    </para>
+      
+    <figure id="mailcheck-fig">
+      <title>Moniteur de courrier</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/mailcheck-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/mailcheck-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Montre les propriétés du moniteur de courrier.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="switcher-item">
+    <title>Changeur de bureaux et changeur de bureaux graphique</title>
+
+    <para>Le panneau fournit deux éléments pour interagir avec les 
+	  bureaux virtuels. Un changeur d'espace de travail de type CDE 
+	  qui montre des boutons avec le nom des bureaux, et un changeur 
+	  graphique qui affiche une vue miniature du bureau et vous permet 
+	  même de déplacer une fenêtre vers un autre espace par un 
+	  glisser-déposer. Le changeur graphique permet aussi de passer d'un 
+	  espace à l'autre avec la molette de la souris quand le curseur est maintenu au-dessus.
+    </para>
+    
+    <figure id="nooptions-fig">
+      <title>Éléments sans option</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/nooptions-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/nooptions-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Montre les propriétés d'un élément sans option.
+	    </phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="systembuttons-item">
+    <title>Boutons système</title>
+
+    <para>Un élément "Boutons sytème" possède un ou deux boutons qui 
+	  peuvent réaliser des actions spécifiques. Le bouton 
+	  s'accorde avec votre thème d'icône. Il existe quatre boutons :
+	</para>
+
+    <variablelist>
+      <varlistentry>
+	<term>Verrouiller</term>
+	<listitem>Lance <application>xfrun4</application> qui tente de 
+	  verrouiller l'écran soit avec xscreensaver, soit, en cas d'échec, 
+	  avec xlock.
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>Quitter</term>
+	<listitem>Ceci permet de fermer le panneau, et permet aussi de 
+	  terminer votre session X (si vous utilisez <application>startxfce4
+	  </application> ou avez placé le lancement du panneau à la fin de 
+	  votre fichier de démarrage de X).
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>Information</term>
+	<listitem>Le bouton information amène le dialogue <emphasis>À propos</emphasis> 
+	  de XFce 4.
+	</listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>Paramètres</term>
+	<listitem>Le bouton Paramètres ouvre le gestionnaire de paramètres 
+	  de XFce, à partir duquel, vous accèdez aux réglages de tous les 
+	  composants, ainsi qu'à certains réglages du système, tels le comportement de la souris 
+	  et les paramètres de l'interface utilisateur.
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    
+    <figure id="systembuttons-fig">
+      <title>Élément boutons système</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/systembuttons-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/systembuttons-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Montre les propriétés de l'élément boutons système.
+	    </phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="separator-item">
+    <title>Séparateur</title>
+
+    <para>Cet élément est simplement une ligne de séparation sur le 
+	  panneau. Il n'a pas d'autre option que sa position.
+    </para>
+    
+    <para>Notez qu'il peut être difficile d'ouvrir son menu popup car vous avez
+     trés peu de surface sur laquelle cliquer.
+    </para>
+    
+  </sect2>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+
+</sect1>
+
+<sect1 id="subpanels">
+  <title>Menus du panneau</title>
+
+  <para>Les éléments lanceurs du panneau peuvent être associés avec un 
+    menu, lequel peut être ouvert en cliquant sur le bouton fléché à coté. 
+	La position de ce bouton est configurable dans les préférences globales. 
+	Vous pouvez aussi ouvrir le menu en cliquant sur le bouton lanceur et 
+	en prolongeant l'appui, le menu s'ouvre aprés un court délai.
+  </para>
+
+  <para>Utilisez le choix 'Ajouter un lanceur' en première ligne du menu 
+    du lanceur, ou déposez un exécutable à partir du gestionnaire de fichier 
+	sur cette ligne, pour ajouter un nouveau choix au menu. Pour supprimer 
+	un élément du menu, utilisez le bouton 'supprimer' dans la fenêtre 
+	des propriétés de l'élément.
+  </para>
+
+  <para>Une possibilité particulière des menus du panneau est qu'ils 
+    peuvent être détachés du panneau et rester dans leur propre fenêtre. 
+	Pour détacher un menu, cliquer sur la petite ligne en bas du menu 
+	(voir la <ulink url="#default-panel-fig">copie d'écran</ulink> du 
+	panneau par défaut).
+  </para>
+
+  <para>Le dialogue des propriétés d'un élément du menu s'ouvre de suite 
+    quand vous faites un clic droit (ou Maj + clic gauche) sur celui-ci. 
+	Ce dialogue est trés semblable à celui de l'élément lanceur.
+  </para>
+
+  <figure id="menuitem-fig">
+    <title>Elément de menu</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/menuitem-properties.png" 
+		     format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/menuitem-properties.eps" 
+		     format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Montre les propriétés d'un élément du menu.
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-settings">
+  <title>Préférences du panneau</title>
+
+  <para>La fenêtre des propriétés du panneau XFce 4 peut être ouverte 
+    à partir du gestionnaire de paramètres de Xfce 4, lequel peut être 
+	ouvert par un lanceur du panneau ou par un clic droit sur les 
+	poignées de déplacement du panneau.
+  </para>
+
+  <figure id="panel-settings-fig">
+    <title>Paramètres du panneau</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/panel-settings.png" 
+		     format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/panel-settings.eps" 
+		     format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>Montre les propriétés des préférences du panneau.
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <sect2 id="panel-apearance">
+    <title>Apparence</title>
+
+    <variablelist>
+      <varlistentry>
+	<term>Taille</term> 
+	<listitem>
+	  <para>Il y a quatre tailles disponibles : tout petit, 
+	    petit, moyen, grand. La taille par défaut est petit.
+	  </para>
+	</listitem>
+      </varlistentry> 
+      <varlistentry>
+	<term>Orientation</term> 
+	<listitem>
+	  <para>Une nouvelle fonctionnalité du panneau de XFce 4 est la possibilité 
+	    d'être placé dans le sens vertical, aussi bien que dans le sens 
+		horizontal habituel.
+	  </para>
+	</listitem>
+      </varlistentry> 
+      <varlistentry>
+	<term>Position des popup</term> 
+	<listitem>
+	  <para>Cette option modifie la position du bouton qui ouvre 
+	    un menu du panneau. Il peut être placé au-dessus, en-dessous, 
+		à gauche ou à droite de l'élément lanceur.
+	  </para>
+	</listitem>
+      </varlistentry> 
+      <varlistentry>
+	<term>Thème d'icônes</term> 
+	<listitem>
+	  <para>Une autre nouveauté de XFce 4 est la possibilité de choisir  
+	    un thème d'icônes. Les icônes pour les lanceurs et les autres 
+		éléments du panneau suivent le thème d'icônes du panneau.
+
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+    
+  </sect2>
+
+  <sect2 id="panel-position">
+    <title>Position</title>
+
+    <variablelist>
+      <varlistentry>
+	<term>Niveau</term> 
+	<listitem>
+	  <para>Le niveau du panneau conditionne sa position par 
+	    rapport aux autres fenêtres. Le panneau peut être en 
+		permanence au-dessus, caché par les autres fenêtres, 
+		ou agir comme les autres fenêtres. Par défaut, le panneau 
+		se situe au-dessus.
+	  </para>
+	</listitem>
+      </varlistentry> 
+      
+      <varlistentry>
+	<term>Centrage</term> 
+	<listitem>
+	  <para>Il est trés facile de déplacer le panneau sur l'écran. Le 
+	    dialogue de paramétrage vous permet de centrer le panneau sur 
+		l'un des cotés de l'écran. Notez que le panneau 'se colle' 
+		aux coins de l'écran tout comme au milieu d'un coté de celui-ci 
+		si vous l'amenez suffisamment prés d'une de ces positions.
+	  </para>
+	</listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>Comportement</term> 
+	<listitem>
+	  <para>Si vous cochez le choix 'Masquer automatiquement', le panneau 
+	    se transforme en une fine barre. Déplacer la souris au-dessus de 
+		celle-ci découvre le panneau. Ceci fonctionne mieux quand le 
+		panneau est sur un bord de l'écran (la cible est plus facile à 
+		toucher).
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+
+  </sect2>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-copyright">
+  <title>A propos de &app;</title>
+
+  <para>&app; est écrit par Jasper Huijsmans 
+    (<email>huysmans@users.sourceforge.net</email>). Vous trouverez 
+	des informations 
+	supplémentaires sur le <ulink url="http://www.xfce.org" 
+	type="http">site XFce</ulink>.</para>
+
+  <para>Pour soumettre un bug ou faire une suggestion sur l'application 
+    ou sur le manuel, envoyez un e-mail à la liste de diffusion 
+	 <ulink url="http://www.moongroup.com/mailman/listinfo/xfce4-dev/"
+	type="http">xfce4-dev</ulink>  &mdash; méthode recommandée 
+     &mdash; ou utilisez le système de gestion des bugs sur 
+	 <ulink url="http://sourceforge.net/projects/xfce" 
+	type="http">XFce SourceForge project site</ulink>.
+	Si vous avez des questions sur l'utilisation ou l'installation de ce 
+	paquetage, vous pouvez les poser sur la liste de diffusion 
+	<ulink url="http://www.moongroup.com/mailman/listinfo/xfce/"
+	type="http">xfce</ulink> 
+  </para>
+    
+  <para>Ce programme est distribué selon les termes de la licence publique 
+     générale GNU, publiée par la Free Software Foundation, soit la version 2 
+	 de cette licence, soit (selon votre choix) toute version ultérieure.
+  </para>
+
+  <para>Vous devez avoir reÃ§u une copie de la licence publique 
+     générale GNU avec ce programme. Sinon, écrivez à la Free Software 
+    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+    USA.
+  </para>
+
+</sect1>
+
+</article>

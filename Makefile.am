@@ -3,9 +3,13 @@
 confdir = $(sysconfdir)/xfce4
 conf_DATA = 								\
 	xfce4rc 							\
-	xfce4rc.nl 							\
+	xfce4rc.ar							\
+	xfce4rc.az 							\
 	xfce4rc.ca							\
-	xfce4rc.hu
+	xfce4rc.hu							\
+	xfce4rc.it							\
+	xfce4rc.nl 							\
+	xfce4rc.vi
 
 EXTRA_DIST = 								\
 	HACKING								\
