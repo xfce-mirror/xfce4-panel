@@ -63,7 +63,9 @@ mcs_plugin_init (McsPlugin * mp)
 #ifdef ENABLE_NLS
     /* This is required for UTF-8 at least - Please don't remove it */
     bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
     textdomain (GETTEXT_PACKAGE);
 #endif
 
