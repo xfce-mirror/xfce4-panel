@@ -1,6 +1,29 @@
 NEWS for xfce4-panel
 ====================
 
+4.2.0
+=====
+- New look with smaller move handles and new default icons.
+- Uses global icon theme setting (in user interface dialog).
+- Improved resizing and moving behaviour; panel is forced to be on the edges
+  of the screen.
+- The panel is now a dock type window, which means it will always be on top.
+- Improved focus handling; clicking on the panel will not remove the focus
+  from the currently active window.
+- There can be only one panel per X screen. Multihead supported when
+  environment is set up properly (DISPLAY variable).
+- Support for kiosk mode.
+- Unload unused plugins and dynamically update plugin list. Use dialog to add
+  new panel items, instead of a submenu.
+- Mail checker now supports mbox, Maildir and POP3.
+- Support for dragging applications from xfce4-appfinder to a launcher
+  properties dialog.
+- Transparency when the X Composite extension is enabled and the window
+  manager supports it.
+- Backward compatibility with the Xfce Goodies plugins available from
+  http://xfce-goodies.berlios.de/.
+
+
 4.1.99.3 (4.2-RC3)
 ==================
 - Fix type mismatch when writing backup files. Fixes infinite loop on non-x86.
