@@ -120,7 +120,10 @@ void panel_init(void)
     central_frame = gtk_frame_new(NULL);
     if(settings.style == OLD_STYLE)
         gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
-    gtk_widget_show(central_frame);
+
+    if (settings.show_central)
+	gtk_widget_show(central_frame);
+
     gtk_container_add(GTK_CONTAINER(hbox), central_frame);
 
     central_hbox = gtk_hbox_new(FALSE, 0);
