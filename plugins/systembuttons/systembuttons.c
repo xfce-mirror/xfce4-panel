@@ -70,12 +70,14 @@ typedef struct
 }
 SignalCallback;
 
+enum {LOCK, EXIT, SETUP, INFO};
+
 typedef struct
 {
     gboolean show_two;
     int button_types[2]; /* 0, 1, 2 or 3 for lock, exit, setup and info */
 
-    GtkWidget *vbox;
+    GtkWidget *box;
     GtkWidget *align[2]; /* containers for the actual buttons */
 
     GList *callbacks; /* save callbacks for when we change buttons */
@@ -104,16 +106,16 @@ static void button_update_image(GtkWidget *button, int type)
     
     switch (type)
     {
-	case 0:
+	case LOCK:
 	    pb = get_minibutton_pixbuf(MINILOCK_ICON);
 	    break;
-	case 1:
+	case EXIT:
 	    pb = get_minibutton_pixbuf(MINIPOWER_ICON);
 	    break;
-	case 2:
+	case SETUP:
 	    pb = get_minibutton_pixbuf(MINIPALET_ICON);
 	    break;
-	case 3:
+	case INFO:
 	    pb = get_minibutton_pixbuf(MINIINFO_ICON);
 	    break;
     }
@@ -154,16 +156,16 @@ static GtkWidget *create_systembutton(int type)
 
     switch (type)
     {
-	case 0:
+	case LOCK:
     	    callback = G_CALLBACK(mini_lock_cb);
 	    break;
-	case 1:
+	case EXIT:
     	    callback = G_CALLBACK(mini_power_cb);
 	    break;
-	case 2:
+	case SETUP:
     	    callback = G_CALLBACK(mini_palet_cb);
 	    break;
-	case 3:
+	case INFO:
     	    callback = G_CALLBACK(mini_info_cb);
 	    break;
     }
@@ -194,6 +196,27 @@ static void systembuttons_change_type(t_systembuttons *sb, int n, int type)
     }
 }
 
+static void arrange_systembuttons(t_systembuttons *sb, int orientation)
+{
+    if (sb->box)
+    {
+	gtk_container_remove(GTK_CONTAINER(sb->box), sb->align[0]);
+	gtk_container_remove(GTK_CONTAINER(sb->box), sb->align[1]);
+
+	gtk_widget_destroy(sb->box);
+    }
+
+    if (orientation == HORIZONTAL)
+	sb->box = gtk_vbox_new(TRUE, 0);
+    else
+	sb->box = gtk_hbox_new(TRUE, 0);
+
+    gtk_widget_show(sb->box);
+
+    gtk_box_pack_start(GTK_BOX(sb->box), sb->align[0], TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(sb->box), sb->align[1], TRUE, TRUE, 0);
+}
+
 static t_systembuttons *systembuttons_new(void)
 {
     GtkWidget *button;
@@ -201,12 +224,8 @@ static t_systembuttons *systembuttons_new(void)
 
     sb->show_two = TRUE;
 
-    sb->vbox = gtk_vbox_new(TRUE, 0);
-    gtk_widget_show(sb->vbox);
-
     sb->align[0] = gtk_alignment_new(0,0,1,1);
     gtk_widget_show(sb->align[0]);
-    gtk_box_pack_start(GTK_BOX(sb->vbox), sb->align[0], TRUE, TRUE, 0);
     
     sb->button_types[0] = 0;
     button = create_systembutton(0);
@@ -214,12 +233,16 @@ static t_systembuttons *systembuttons_new(void)
 
     sb->align[1] = gtk_alignment_new(0,0,1,1);
     gtk_widget_show(sb->align[1]);
-    gtk_box_pack_start(GTK_BOX(sb->vbox), sb->align[1], TRUE, TRUE, 0);
     
     sb->button_types[1] = 1;
     button = create_systembutton(1);
     gtk_container_add(GTK_CONTAINER(sb->align[1]), button);
 
+    g_object_ref(sb->align[0]);
+    g_object_ref(sb->align[1]);
+    
+    arrange_systembuttons(sb, settings.orientation);
+    
     return sb;
 }
 
@@ -321,6 +344,14 @@ static void systembuttons_write_config(Control * control, xmlNodePtr node)
 }
 
 /* global prefs */
+static void systembuttons_set_orientation(Control *control, int orientation)
+{
+   t_systembuttons *sb = control->data;
+
+   arrange_systembuttons(sb, orientation);
+   gtk_container_add(GTK_CONTAINER(control->base), sb->box);
+}
+
 static void systembuttons_set_theme(Control * control, const char *theme)
 {
     GtkWidget *button;
@@ -512,7 +543,7 @@ gboolean create_systembuttons_control(Control * control)
 {
     t_systembuttons *sb = systembuttons_new();
 
-    gtk_container_add(GTK_CONTAINER(control->base), sb->vbox);
+    gtk_container_add(GTK_CONTAINER(control->base), sb->box);
 
     control->data = (gpointer) sb;
     control->with_popup = FALSE;
@@ -541,10 +572,10 @@ G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
     cc->attach_callback = systembuttons_attach_callback;
 
     /* no set size => xfce sets size base container */
+    cc->set_orientation = systembuttons_set_orientation;
     cc->set_theme = systembuttons_set_theme;
     cc->add_options = systembuttons_add_options;
 }
-
 
 XFCE_PLUGIN_CHECK_INIT
 
