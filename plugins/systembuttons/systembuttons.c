@@ -300,6 +300,8 @@ systembuttons_set_size (Control * control, int size)
 
     s = w = h = icon_size[size] + border_width;
 
+    n = sb->show_two ? 2 : 1;
+    
     if (settings.orientation == HORIZONTAL)
     {
 	if (settings.size > SMALL)
