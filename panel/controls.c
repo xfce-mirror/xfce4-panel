@@ -255,71 +255,88 @@ GSList *get_control_class_list(void)
 /* right click menu 
  * ----------------
 */
-static void edit_control(gpointer data, int action, GtkWidget *widget)
-{
-    Control *control;
-    
-    control = gtk_item_factory_popup_data_from_widget(widget);
+static Control *popup_control = NULL;
 
-    controls_dialog(control);
+static void edit_control(void)
+{
+    if (popup_control)
+	controls_dialog(popup_control);
+
+    popup_control = NULL;
 }
 
-static void remove_control(gpointer data, int action, GtkWidget *widget)
+static void remove_control(void)
 {
-    Control *control;
-    
-    control = gtk_item_factory_popup_data_from_widget(widget);
+    if (popup_control)
+	groups_remove(popup_control->index);
 
-    groups_remove(control->index);
+    popup_control = NULL;
 }
 
-static void add_control(gpointer data, int action, GtkWidget *widget)
+static void add_control(void)
 {
-    Control *control, *newcontrol;
-    
-    control = gtk_item_factory_popup_data_from_widget(widget);
+    Control *newcontrol;
     
     panel_add_control();
     panel_set_position();
-    
     newcontrol = groups_get_control(settings.num_groups-1);
-    groups_move(settings.num_groups-1, control->index);
+    
+    if (popup_control)
+	groups_move(settings.num_groups-1, popup_control->index);
+
+    popup_control = NULL;
 
     controls_dialog(newcontrol);
 }
 
 static GtkItemFactoryEntry control_items[] = {
-  { N_("/Edit ..."),      NULL, edit_control,   1, "<Item>" },
-  { N_("/Remove"),        NULL, remove_control, 1, "<Item>" },
-  { "/sep",               NULL, NULL,           0, "<Separator>" },
-  { N_("/Add new item"), NULL, add_control,    1, "<Item>" }
+  { N_("/Edit ..."),     NULL, edit_control,   0, "<Item>" },
+  { N_("/Remove"),       NULL, remove_control, 0, "<Item>" },
+  { "/sep",              NULL, NULL,           0, "<Separator>" },
+  { N_("/Add new item"), NULL, add_control,    0, "<Item>" }
 };
 
+static GtkWidget *get_control_menu(void)
+{
+    static GtkItemFactory *factory;
+    GtkWidget *menu = NULL;
+
+    if (!menu)
+    {
+       factory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
+       
+       gtk_item_factory_create_items(factory, G_N_ELEMENTS(control_items),
+				     control_items, NULL);
+
+       menu = gtk_item_factory_get_widget(factory, "<popup>");
+    }
+
+    return menu;
+}
 static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *control)
 {
-    static GtkItemFactory *factory = NULL;
-
     if (disable_user_config)
 	return FALSE;
     
     if(ev->button == 3 || 
 	    (ev->button == 1 && (ev->state & GDK_SHIFT_MASK)))
     {
-	hide_current_popup_menu();
+	GtkWidget *menu;
 	
-	if (!factory)
-	{
-	   factory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
-	   
-	   gtk_item_factory_create_items(factory, G_N_ELEMENTS(control_items),
-					 control_items, NULL);
-	}
+	hide_current_popup_menu();
 
-	gtk_item_factory_popup_with_data(factory, control, NULL, 
+	popup_control = control;
+
+	menu = get_control_menu();
+	
+	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, 
+		       ev->button, ev->time); 
+	
+/*	gtk_item_factory_popup_with_data(factory, control, NULL, 
 					 ev->x_root, ev->y_root,
 					 ev->button, ev->time);
 
-/*	controls_dialog(control); */
+	controls_dialog(control); */
 
 	return TRUE;
     }
