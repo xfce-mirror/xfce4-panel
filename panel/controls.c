@@ -1,6 +1,6 @@
 /*  controls.c
  *  
- *  Copyright (C) 2002-2003 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright (C) 2002-2004 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -78,6 +78,7 @@ struct _ControlClassInfo
     int refcount; 
     gboolean unique;
     GdkPixbuf *icon;
+    gboolean unloadable;
 };
 
 
@@ -251,6 +252,8 @@ load_plugin (gchar * path)
 	info = g_new0 (ControlClassInfo, 1);
 	cc = info->class = g_new0 (ControlClass, 1);
 	
+	info->unloadable = TRUE;
+
 	cc->id = PLUGIN;
 	cc->gmodule = gm;
 	
@@ -266,14 +269,14 @@ load_plugin (gchar * path)
 	if (g_slist_find_custom (control_class_info_list, 
 		    		 cc->name, compare_class_info_by_name))
 	{
-	    DBG ("...already loaded");
+	    DBG ("\talready loaded");
 	    
 	    control_class_free (cc);
 	    control_class_info_free (info);
 	}
 	else
 	{
-	    DBG ("...ok");
+	    DBG ("\tok");
 	    
 	    control_class_info_list = 
 		g_slist_prepend (control_class_info_list, info);
@@ -375,7 +378,9 @@ unload_modules (void)
 
 	DBG ("info: %s (%d items)", info->caption, info->refcount);
 	
-	if (info->class->id == PLUGIN && info->refcount == 0 && 
+	if (info->unloadable && 
+	    info->class->id == PLUGIN && 
+	    info->refcount == 0 && 
 	    info->class->gmodule != NULL)
 	{
 	    DBG ("info: unload %s", info->caption);
@@ -460,6 +465,20 @@ control_class_set_icon (ControlClass *cclass, GdkPixbuf *icon)
 	    info->icon = NULL;
     }
 }
+
+void 
+control_class_set_unloadable (ControlClass *cclass, gboolean unloadable)
+{
+    ControlClassInfo *info;
+
+    info = get_control_class_info (cclass);
+
+    if (info)
+	info->unloadable = unloadable;
+}
+
+	
+/* not in header, but exported for groups.c */
 
 void 
 control_class_unref (ControlClass *cclass)

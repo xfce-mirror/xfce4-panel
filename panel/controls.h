@@ -78,11 +78,13 @@ void control_class_list_init (void);
 void control_class_list_cleanup (void);
 
 /* NOTE:
- * Use next two function only on classes that have at least 
+ * Use next functions only on classes that have at least 
  * their name field initialized */
 void control_class_set_icon (ControlClass *cclass, GdkPixbuf *icon);
 
 void control_class_set_unique (ControlClass *cclass, gboolean unique);
+
+void control_class_set_unloadable (ControlClass *cclass, gboolean unloadable);
 
 /* add controls menu */
 GtkWidget *get_controls_submenu (void);
