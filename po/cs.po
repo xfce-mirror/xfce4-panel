@@ -1,45 +1,42 @@
+# translation of cs.po to Czech
 # Czech translation for xfdesktop
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
 # Lukáš Konarovský <daeltar@daeltar.org>, 2003.
+# Alois Nespor <Alois.Nespor@seznam.cz>, 2004.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
-"PO-Revision-Date: 2003-15-11 HO:MI+ZONE\n"
-"Last-Translator: Lukas Konarovsky <daeltar@daeltar.org>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2004-09-21 13:35+0200\n"
+"PO-Revision-Date: 2004-10-28 10:34+0000\n"
+"Last-Translator: Alois Nespor <Alois.Nespor@seznam.cz>\n"
+"Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:514
 msgid "Select file"
 msgstr "Vyber soubor"
 
 #: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "Nenalezeny žádné data. Panel bude prázdný."
 
 #: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
 msgstr "Pozice:"
 
-#: panel/controls_dialog.c:155
-#, fuzzy
+#: panel/controls_dialog.c:153
 msgid "Item properties"
-msgstr "/_Vlastnosti..."
+msgstr "Vlastnosti položky"
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
-#, fuzzy
+#: panel/controls_dialog.c:207 panel/controls.c:691
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Odstranením položky odstraníte její popup menu.\n"
-"\n"
-"Chcete ji skutečně odstranit?"
+msgstr "Odstranením položky odstraníte také její vyskakovací menu."
 
 #: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
@@ -51,11 +48,11 @@ msgstr "Příkaz:"
 
 #: panel/item_dialog.c:307
 msgid "Run in _terminal"
-msgstr "Spusť v _terminálu"
+msgstr "Spustit v _terminálu"
 
 #: panel/item_dialog.c:325
 msgid "Use startup _notification"
-msgstr "Použij startup _notification"
+msgstr "Použij  _oznámení při startu"
 
 #: panel/item_dialog.c:511
 msgid "Other Icon"
@@ -71,7 +68,7 @@ msgstr "Nadpis:"
 
 #: panel/item_dialog.c:946
 msgid "Tooltip:"
-msgstr "Popisek:"
+msgstr "Rada:"
 
 #: panel/item_dialog.c:974
 msgid "Attach menu to launcher"
@@ -79,13 +76,12 @@ msgstr "Pridej menu k spušteči"
 
 #: panel/item_dialog.c:1194
 msgid "Change menu item"
-msgstr "Změn položku menu"
+msgstr "Změnit položku menu"
 
 #. add buttons
 #: panel/item_dialog.c:1200 panel/controls.c:728
-#, fuzzy
 msgid "_Remove"
-msgstr "/_Odstranit"
+msgstr "_Odstranit"
 
 #: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
@@ -105,10 +101,10 @@ msgstr "Přidej novou položku"
 
 #: panel/main.c:121
 msgid "Are you sure you want to exit?"
-msgstr "Jste si jisti, že chcete ukončit Xfce?"
+msgstr "Skutečně chcete ukončit Xfce?"
 
-#: panel/main.c:401
-#, fuzzy, c-format
+#: panel/main.c:398
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -120,117 +116,117 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"%s, verze %s\n"
-"Část Xfce Desktop Environment\n"
-"http://www.xfce.org\n"
+"\n"
+" Panel Xfce\n"
+" Verze %s\n"
+"\n"
+" Součást grafického prostředí Xfce\n"
+" http://www.xfce.org\n"
+"\n"
+" Licence GNU GPL.\n"
+"\n"
 
-#: panel/main.c:488
+#: panel/main.c:472
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: Úspešně spustěno bez správy relace"
 
-#: panel/main.c:493
+#: panel/main.c:477
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: Úspešně spustěno se správou relace"
 
 #: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "Nelze vytvořit položku panelu \"%s\"."
 
-#: panel/controls.c:723 panel/panel.c:585
-#, fuzzy
+#: panel/controls.c:723 panel/panel.c:562
 msgid "_Properties..."
-msgstr "/_Vlastnosti..."
+msgstr "_Vlastnosti..."
 
-#: panel/controls.c:737 panel/panel.c:575
-#, fuzzy
+#: panel/controls.c:737 panel/panel.c:552
 msgid "Add _new item"
-msgstr "/Přidat _novou položku"
+msgstr "Přidat _novou položku"
 
 #: panel/controls.c:1020
 msgid "This item has no configuration options"
-msgstr "Tato položka nemá žádná nasatvitelné vlastnosti"
+msgstr "Tato položka nemá žádná nastavitelné vlastnosti"
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:543 panel/panel.c:944 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:448
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: panel/panel.c:590
-#, fuzzy
+#: panel/panel.c:567
 msgid "_About Xfce"
-msgstr "/_O desktopu Xfce"
+msgstr "_O Xfce"
+
+#: panel/panel.c:572
+msgid "_Help"
+msgstr "_Nápověda"
+
+#: panel/panel.c:581
+msgid "_Lock screen"
+msgstr "_Zamknout obrazovku"
+
+#: panel/panel.c:586
+msgid "_Restart"
+msgstr "_Restartovat"
 
 #: panel/panel.c:595
-#, fuzzy
-msgid "_Help"
-msgstr "/_Nápověda"
-
-#: panel/panel.c:604
-#, fuzzy
-msgid "_Lock screen"
-msgstr "/_Zamknout obrazovku"
-
-#: panel/panel.c:609
-msgid "_Restart"
-msgstr ""
-
-#: panel/panel.c:618
-#, fuzzy
 msgid "E_xit"
-msgstr "/_Konec"
+msgstr "_Ukončit práci"
 
-#: panel/icons.c:63
+#: panel/icons.c:60
 msgid "Default"
 msgstr "Výchozí"
 
-#: panel/icons.c:64
+#: panel/icons.c:61
 msgid "Editor"
 msgstr "Editor"
 
-#: panel/icons.c:65
+#: panel/icons.c:62
 msgid "File management"
 msgstr "Správa souborů"
 
-#: panel/icons.c:66
+#: panel/icons.c:63
 msgid "Utilities"
 msgstr "Nástroje"
 
-#: panel/icons.c:67
+#: panel/icons.c:64
 msgid "Games"
 msgstr "Hry"
 
-#: panel/icons.c:68
+#: panel/icons.c:65
 msgid "Help browser"
 msgstr "Prohlížeč nápovědy"
 
-#: panel/icons.c:69
+#: panel/icons.c:66
 msgid "Multimedia"
-msgstr "Multimedia"
+msgstr "Multimédia"
 
-#: panel/icons.c:70
+#: panel/icons.c:67
 msgid "Network"
 msgstr "Síť"
 
-#: panel/icons.c:71
+#: panel/icons.c:68
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panel/icons.c:72
+#: panel/icons.c:69
 msgid "Printer"
 msgstr "Tiskárna"
 
-#: panel/icons.c:73
+#: panel/icons.c:70
 msgid "Productivity"
 msgstr "Produktivita"
 
-#: panel/icons.c:74
+#: panel/icons.c:71
 msgid "Sound"
 msgstr "Zvuk"
 
-#: panel/icons.c:75
+#: panel/icons.c:72
 msgid "Terminal"
 msgstr "Terminál"
 
@@ -256,7 +252,7 @@ msgstr "Velký"
 
 #: settings/xfce_settings_dialog.c:100
 msgid "Huge"
-msgstr ""
+msgstr "Obrovský"
 
 #: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
@@ -284,33 +280,33 @@ msgstr "Dole"
 
 #: settings/xfce_settings_dialog.c:269
 msgid "Panel size:"
-msgstr "Velikost panelu"
+msgstr "Velikost panelu:"
 
 #: settings/xfce_settings_dialog.c:285
 msgid "Panel orientation:"
-msgstr "Orientace panelu"
+msgstr "Orientace panelu:"
 
 #: settings/xfce_settings_dialog.c:304
 msgid "Popup position:"
-msgstr "Pozice pro popup:"
+msgstr "Pozice pro vyskakovací okno:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Vždy nahoře:"
 
 #: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
 msgstr "Automaticky skrývat:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:465
 msgid "Xfce Panel Settings"
-msgstr "Xfce Nastavení Panelu"
+msgstr "Nastavení panelu Xfce"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:475
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: settings/xfce_settings_dialog.c:491
+#: settings/xfce_settings_dialog.c:493
 msgid "Behaviour"
 msgstr "Chování"
 
@@ -324,55 +320,55 @@ msgstr "Chování"
 #.
 #: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:429
+#: plugins/clock/clock.c:423
 msgid "Clock type:"
 msgstr "Typ hodin:"
 
-#: plugins/clock/clock.c:442
+#: plugins/clock/clock.c:436
 msgid "Analog"
 msgstr "Analogové"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:440
 msgid "Digital"
 msgstr "Digitální"
 
-#: plugins/clock/clock.c:450
+#: plugins/clock/clock.c:444
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:512
+#: plugins/clock/clock.c:506
 msgid "Hour mode:"
 msgstr "Hodinový mód:"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:513
 msgid "24 hour"
 msgstr "24 hodinový"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:519
 msgid "12 hour"
 msgstr "12 hodinový"
 
-#: plugins/clock/clock.c:531
+#: plugins/clock/clock.c:525
 msgid "AM/PM"
-msgstr "AM/PM"
+msgstr "Dopoledne/Odpoledne"
 
-#: plugins/clock/clock.c:569
+#: plugins/clock/clock.c:563
 msgid "Show seconds:"
 msgstr "Ukázat sekundy:"
 
-#: plugins/clock/clock.c:682
+#: plugins/clock/clock.c:676
 msgid "Xfce Clock"
-msgstr "Xfce Hodiny"
+msgstr "Hodiny Xfce"
 
 #: plugins/pager/pager.c:311
 msgid "Number of rows:"
-msgstr ""
+msgstr "Počet řádků:"
 
 #: plugins/pager/pager.c:313
 msgid "Number of columns:"
-msgstr ""
+msgstr "Počet sloupců:"
 
 #: plugins/pager/pager.c:360
 msgid "Graphical pager"
@@ -426,9 +422,8 @@ msgstr "Tlačítko 2"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
 msgid "_Hide"
-msgstr "/_Nápověda"
+msgstr "_Skrýt"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -440,147 +435,25 @@ msgstr "Oddělovač"
 
 #: plugins/mailcheck/mailcheck.c:787
 msgid "Mail box:"
-msgstr "Emailová schránka"
+msgstr "Poštovní schránka"
 
 #: plugins/mailcheck/mailcheck.c:824
-#, fuzzy
 msgid "New mail command:"
-msgstr "Příkaz pro mail"
+msgstr "Příkaz nové pošty:"
 
 #: plugins/mailcheck/mailcheck.c:838
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Příkaz, který se má vykonat, při kliku na tlačítkp"
+msgstr "Při obdržení nové pošty spustit příkaz"
 
 #: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Příkaz, který se má vykonat, při kliku na tlačítkp"
+msgstr "Při stiknutí tlačítka na panelu spustit příkaz"
 
 #: plugins/mailcheck/mailcheck.c:889
 msgid "Interval (sec):"
-msgstr "Inerval (sec)"
+msgstr "Interval (sek)"
 
 #: plugins/mailcheck/mailcheck.c:965
-#, fuzzy
 msgid "Mail checker"
-msgstr "Konrola pošty"
+msgstr "Kontrola pošty"
 
-#~ msgid "Remove"
-#~ msgstr "Odstraň"
-
-#~ msgid "Show two buttons:"
-#~ msgstr "Ukázat dvě tlačítka:"
-
-#~ msgid "Change item"
-#~ msgstr "Změn položku"
-
-#~ msgid "Menu:"
-#~ msgstr "Menu:"
-
-#~ msgid "/Xfce Panel"
-#~ msgstr "/Xfce Panel"
-
-#~ msgid "/Add _new item"
-#~ msgstr "/Přidat _novou položku"
-
-#~ msgid "/_Properties..."
-#~ msgstr "/_Vlastnosti..."
-
-#~ msgid "Select icon"
-#~ msgstr "Vyber ikonu"
-
-#~ msgid "Icon:"
-#~ msgstr "Ikona:"
-
-#~ msgid "Icon Preview"
-#~ msgstr "Náhled ikony"
-
-#~ msgid ""
-#~ "Your window manager does not seem to support the new window manager hints "
-#~ "as defined on http://www.freedesktop.org. \n"
-#~ "Some Xfce features may not work as intended."
-#~ msgstr ""
-#~ "Váš window manager jak se zdá nepodporuje window manager hints jak je "
-#~ "definováno na http://www.freedesktop.org. \n"
-#~ "Některé z vlastností Xfce nemusí fungovat jek bylo zamýšleno."
-
-#~ msgid "/_Settings manager"
-#~ msgstr "/_Settings manager"
-
-#~ msgid "Tiny"
-#~ msgstr "Titěrný"
-
-#~ msgid "Icon theme:"
-#~ msgstr "Ikonové téma:"
-
-#~ msgid "Panel layer:"
-#~ msgstr "Vrstva panelu:"
-
-#~ msgid "Normal"
-#~ msgstr "Normální"
-
-#~ msgid "Center the panel:"
-#~ msgstr "Centrovat panel:"
-
-#~ msgid "Set"
-#~ msgstr "Nasatvit"
-
-#~ msgid "Position"
-#~ msgstr "Pozice"
-
-#~ msgid "Sunday"
-#~ msgstr "Neděle"
-
-#~ msgid "Monday"
-#~ msgstr "Pondělí"
-
-#~ msgid "Tuesday"
-#~ msgstr "Úterý"
-
-#~ msgid "Wednesday"
-#~ msgstr "Středa"
-
-#~ msgid "Thursday"
-#~ msgstr "Čtvrtek"
-
-#~ msgid "Friday"
-#~ msgstr "Pátek"
-
-#~ msgid "Saturday"
-#~ msgstr "Sobota"
-
-#~ msgid "January"
-#~ msgstr "Leden"
-
-#~ msgid "February"
-#~ msgstr "Únor"
-
-#~ msgid "March"
-#~ msgstr "Březen"
-
-#~ msgid "April"
-#~ msgstr "Duben"
-
-#~ msgid "May"
-#~ msgstr "Květen"
-
-#~ msgid "June"
-#~ msgstr "Červen"
-
-#~ msgid "July"
-#~ msgstr "Červenec"
-
-#~ msgid "August"
-#~ msgstr "Srpen"
-
-#~ msgid "September"
-#~ msgstr "Září"
-
-#~ msgid "October"
-#~ msgstr "Říjen"
-
-#~ msgid "November"
-#~ msgstr "Listopad"
-
-#~ msgid "December"
-#~ msgstr "Prosinec"
