@@ -1,0 +1,458 @@
+# Estonian translation of xfce4-panel.
+# Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce4-panel package.
+# peeter <Peeter.Vois@mail.ee>, 2004.
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-08-22 16:35+0200\n"
+"PO-Revision-Date: 2004-02-03 10:04+0200\n"
+"Last-Translator: Peeter Vois <Peeter.Vois@mail.ee>\n"
+"Language-Team: Estonian <et@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: panel/xfce_support.c:603
+msgid "Select file"
+msgstr "Vali fail"
+
+#: panel/settings.c:172
+msgid "No data was found. The panel will be empty."
+msgstr "Mingeid andmeid ei leitud. Paneel on tühi."
+
+#: panel/controls_dialog.c:88 panel/item_dialog.c:1200
+msgid "Position:"
+msgstr "Positsioon:"
+
+#: panel/controls_dialog.c:148
+msgid "Item properties"
+msgstr "Omadused"
+
+#: panel/controls_dialog.c:200 panel/controls.c:685
+msgid "Removing the item will also remove its popup menu."
+msgstr "Asja eemaldamine eemaldab ka selle küljes oleva menüü."
+
+#: panel/item_dialog.c:151 panel/item_dialog.c:605
+msgid "Select command"
+msgstr "Vali käsklus"
+
+#: panel/item_dialog.c:294
+msgid "Command:"
+msgstr "Käsklus:"
+
+#: panel/item_dialog.c:353
+msgid "Run in _terminal"
+msgstr "Käivita _terminalis"
+
+#: panel/item_dialog.c:372
+msgid "Use startup _notification"
+msgstr "Kasuta _stardi teavitust"
+
+#: panel/item_dialog.c:566
+msgid "Other Icon"
+msgstr "Teine ikoon"
+
+#: panel/item_dialog.c:676
+msgid "Drag file onto this frame to change the icon"
+msgstr "Tiri fail sellesse raami, et ikooni muuta"
+
+#: panel/item_dialog.c:962
+msgid "Caption:"
+msgstr "Silt:"
+
+#: panel/item_dialog.c:991
+msgid "Tooltip:"
+msgstr "Tutvustus:"
+
+#: panel/item_dialog.c:1019
+msgid "Attach menu to launcher"
+msgstr "Lisa menüü käivitajale"
+
+#: panel/item_dialog.c:1234
+msgid "Change menu item"
+msgstr "Muuda menüü asja"
+
+#. add buttons
+#: panel/item_dialog.c:1240
+msgid "Remove"
+msgstr "Eemalda"
+
+#: panel/item_dialog.c:1252 panel/item.c:631
+msgid "Launcher"
+msgstr "Startija"
+
+#: panel/item.c:466
+msgid "Click mouse button 3 to change item"
+msgstr "Vajuta hiire keskmist muppu, et asja muuta"
+
+#: panel/item.c:489
+msgid "Add launcher"
+msgstr "Lisa startija"
+
+#: panel/item.c:494
+msgid "Add new item"
+msgstr "Lisa uus asi"
+
+#: panel/main.c:119
+msgid "Are you sure you want to exit?"
+msgstr "Oled sa kindel, et soovid väljuda?"
+
+#: panel/main.c:326
+#, c-format
+msgid ""
+"\n"
+" The Xfce Panel\n"
+" Version %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
+msgstr ""
+"\n"
+" Xfce Paneel\n"
+" Versioon %s\n"
+"\n"
+" See on osa Xfce töölaua keskkonnast\n"
+" http://www.xfce.org\n"
+"\n"
+" Litsentseeritud GNU GPL litsentsi all.\n"
+"\n"
+
+#: panel/main.c:395
+#, c-format
+msgid "%s: Successfully started without session management"
+msgstr "%s: Õnnelikult käivitunud ilma sessiooni managerita"
+
+#: panel/main.c:400
+#, c-format
+msgid "%s: Successfully started with session management"
+msgstr "%s: Õnnelikult käivitunud koos sessiooni manageriga"
+
+#: panel/controls.c:640 panel/controls.c:731
+#, c-format
+msgid "Could not create panel item \"%s\"."
+msgstr "Ei suuda luua paneeli asja \"%s\"."
+
+#: panel/controls.c:792 panel/panel.c:573
+msgid "_Properties..."
+msgstr "_Omadused..."
+
+#: panel/controls.c:797
+msgid "_Remove"
+msgstr "_Eemalda"
+
+#: panel/controls.c:806 panel/panel.c:563
+msgid "Add _new item"
+msgstr "Lisa _uus asi"
+
+#: panel/controls.c:1080
+msgid "This item has no configuration options"
+msgstr "Sellel asjal ei ole midagi sättida"
+
+#: panel/panel.c:554 panel/panel.c:956 settings/xfce_settings_plugin.c:67
+#: settings/xfce_settings_dialog.c:453
+msgid "Xfce Panel"
+msgstr "Xfce Paneel"
+
+#: panel/panel.c:578
+msgid "_About Xfce"
+msgstr "_Xfce-st"
+
+#: panel/panel.c:583
+msgid "_Help"
+msgstr "_Abi"
+
+#: panel/panel.c:592
+msgid "_Lock screen"
+msgstr "_Lukusta ekraan"
+
+#: panel/panel.c:597
+msgid "_Restart"
+msgstr "_Käivita uuesti"
+
+#: panel/panel.c:606
+msgid "E_xit"
+msgstr "V_älja"
+
+#: panel/icons.c:68
+msgid "Default"
+msgstr "Vaikimisi"
+
+#: panel/icons.c:69
+msgid "Editor"
+msgstr "Redaktor"
+
+#: panel/icons.c:70
+msgid "File management"
+msgstr "Failide haldamine"
+
+#: panel/icons.c:71
+msgid "Utilities"
+msgstr "Asjakesed"
+
+#: panel/icons.c:72
+msgid "Games"
+msgstr "Mängud"
+
+#: panel/icons.c:73
+msgid "Help browser"
+msgstr "Abi sirvur"
+
+#: panel/icons.c:74
+msgid "Multimedia"
+msgstr "Multimeedia"
+
+#: panel/icons.c:75
+msgid "Network"
+msgstr "Võrgundus"
+
+#: panel/icons.c:76
+msgid "Graphics"
+msgstr "Graafika"
+
+#: panel/icons.c:77
+msgid "Printer"
+msgstr "Printimine"
+
+#: panel/icons.c:78
+msgid "Productivity"
+msgstr "Tootlikkus"
+
+#: panel/icons.c:79
+msgid "Sound"
+msgstr "Heli"
+
+#: panel/icons.c:80
+msgid "Terminal"
+msgstr "Terminal"
+
+#: panel/mcs_client.c:204
+msgid "Settings manager not available"
+msgstr "Seadistuste haldur ei ole kättesaadav"
+
+#: panel/popup.c:255
+msgid "Menu"
+msgstr "Menüü"
+
+#: settings/xfce_settings_dialog.c:97
+msgid "Small"
+msgstr "Väike"
+
+#: settings/xfce_settings_dialog.c:101
+msgid "Medium"
+msgstr "Keskmine"
+
+#: settings/xfce_settings_dialog.c:105
+msgid "Large"
+msgstr "Suur"
+
+#: settings/xfce_settings_dialog.c:109
+msgid "Huge"
+msgstr "Väga suur"
+
+#: settings/xfce_settings_dialog.c:189
+msgid "Horizontal"
+msgstr "Horisontaalne"
+
+#: settings/xfce_settings_dialog.c:193
+msgid "Vertical"
+msgstr "Vertikaalne"
+
+#: settings/xfce_settings_dialog.c:232
+msgid "Left"
+msgstr "Vasak"
+
+#: settings/xfce_settings_dialog.c:236
+msgid "Right"
+msgstr "Parem"
+
+#: settings/xfce_settings_dialog.c:240
+msgid "Top"
+msgstr "Ülal"
+
+#: settings/xfce_settings_dialog.c:244
+msgid "Bottom"
+msgstr "All"
+
+#: settings/xfce_settings_dialog.c:279
+msgid "Panel size:"
+msgstr "Paneeli suurus:"
+
+#: settings/xfce_settings_dialog.c:295
+msgid "Panel orientation:"
+msgstr "Paneeli orientatsioon:"
+
+#: settings/xfce_settings_dialog.c:311
+msgid "Popup position:"
+msgstr "Menüü positsioon:"
+
+#: settings/xfce_settings_dialog.c:349
+msgid "Always on top:"
+msgstr "Alati kõige peal:"
+
+#: settings/xfce_settings_dialog.c:401
+msgid "Autohide:"
+msgstr "Automaatne varjamine:"
+
+#: settings/xfce_settings_dialog.c:470
+msgid "Xfce Panel Settings"
+msgstr "Xfce paneeli seaded"
+
+#: settings/xfce_settings_dialog.c:481
+msgid "Appearance"
+msgstr "Väljanägemine"
+
+#: settings/xfce_settings_dialog.c:494
+msgid "Behaviour"
+msgstr "Käitumine"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:202
+msgid "%A, %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: plugins/clock/clock.c:423
+msgid "Clock type:"
+msgstr "Kella tüüp:"
+
+#: plugins/clock/clock.c:436
+msgid "Analog"
+msgstr "Analoog"
+
+#: plugins/clock/clock.c:440
+msgid "Digital"
+msgstr "Digitaal"
+
+#: plugins/clock/clock.c:444
+msgid "LED"
+msgstr "LED"
+
+#: plugins/clock/clock.c:506
+msgid "Hour mode:"
+msgstr "Režiim:"
+
+#: plugins/clock/clock.c:513
+msgid "24 hour"
+msgstr "24 tundi"
+
+#: plugins/clock/clock.c:519
+msgid "12 hour"
+msgstr "12 tundi"
+
+#: plugins/clock/clock.c:525
+msgid "AM/PM"
+msgstr "EL/PL"
+
+#: plugins/clock/clock.c:563
+msgid "Show seconds:"
+msgstr "Näita sekundeid"
+
+#: plugins/clock/clock.c:674
+msgid "Xfce Clock"
+msgstr "Xfce kell"
+
+#: plugins/pager/pager.c:309
+msgid "Number of rows:"
+msgstr "Ridade arv:"
+
+#: plugins/pager/pager.c:311
+msgid "Number of columns:"
+msgstr "Veergude arv:"
+
+#: plugins/pager/pager.c:355
+msgid "Graphical pager"
+msgstr "Graafiline tööruumi näitaja"
+
+#: plugins/switcher/switcher.c:696
+msgid "Desktop switcher"
+msgstr "Töölaua vahetaja"
+
+#: plugins/systembuttons/systembuttons.c:55
+msgid ""
+"Access to the configuration system has been disabled.\n"
+"\n"
+"Ask your system administrator for more information"
+msgstr ""
+"Juurdepääs konfiguratsioonisüsteemile on keelatud.\n"
+"\n"
+"Küsi oma süsteemi administraatorilt rohkem infot!"
+
+#: plugins/systembuttons/systembuttons.c:140
+msgid "Lock the screen"
+msgstr "Lukusta ekraan"
+
+#: plugins/systembuttons/systembuttons.c:141
+#: plugins/systembuttons/systembuttons.c:508
+msgid "Exit"
+msgstr "Välju"
+
+#: plugins/systembuttons/systembuttons.c:142
+#: plugins/systembuttons/systembuttons.c:509
+msgid "Setup"
+msgstr "Seaded"
+
+#: plugins/systembuttons/systembuttons.c:143
+#: plugins/systembuttons/systembuttons.c:510
+msgid "Info"
+msgstr "Info"
+
+#: plugins/systembuttons/systembuttons.c:490
+msgid "Show two buttons:"
+msgstr "Näita kahte nuppu:"
+
+#. set names to use in option menus
+#: plugins/systembuttons/systembuttons.c:507
+msgid "Lock"
+msgstr "Lukusta"
+
+#: plugins/systembuttons/systembuttons.c:539
+msgid "Button 1:"
+msgstr "Nupp 1:"
+
+#: plugins/systembuttons/systembuttons.c:555
+msgid "Button 2:"
+msgstr "Nupp 2:"
+
+#: plugins/systembuttons/systembuttons.c:591
+msgid "System buttons"
+msgstr "Süsteemi nupud"
+
+#: plugins/separator/separator.c:153
+msgid "Separator"
+msgstr "Eraldaja"
+
+#: plugins/mailcheck/mailcheck.c:788
+msgid "Mail box:"
+msgstr "Kirjakast:"
+
+#: plugins/mailcheck/mailcheck.c:825
+msgid "New mail command:"
+msgstr "Uue kirja käsklus:"
+
+#: plugins/mailcheck/mailcheck.c:839
+msgid "Command to run when new mail arrives"
+msgstr "Käsklus, mida käivitada, kui saabub uus kiri"
+
+#: plugins/mailcheck/mailcheck.c:869
+msgid "Command to run when the button on the panel is clicked"
+msgstr "Käsklus, mida käivitada, kui paneelil asuvat nuppu vajutatakse"
+
+#: plugins/mailcheck/mailcheck.c:891
+msgid "Interval (sec):"
+msgstr "Intervall (sec):"
+
+#: plugins/mailcheck/mailcheck.c:963
+msgid "Mail checker"
+msgstr "Kirjade kontrollija"
+
