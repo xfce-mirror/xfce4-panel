@@ -931,6 +931,8 @@ create_panel_window (Panel * p)
     gtk_window_set_skip_taskbar_hint (window, TRUE);
     gtk_window_set_skip_pager_hint (window, TRUE);
 
+    gtk_window_set_gravity (window, GDK_GRAVITY_STATIC);
+    
     pb = get_panel_pixbuf ();
     gtk_window_set_icon (window, pb);
     g_object_unref (pb);
