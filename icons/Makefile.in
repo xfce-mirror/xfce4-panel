@@ -48,7 +48,9 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 SOURCES =
 DIST_SOURCES =
-DATA = $(noinst_DATA)
+am__installdirs = "$(DESTDIR)$(hicolordir)"
+hicolorDATA_INSTALL = $(INSTALL_DATA)
+DATA = $(hicolor_DATA) $(noinst_DATA)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMDEP_FALSE = @AMDEP_FALSE@
@@ -190,6 +192,8 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+hicolordir = $(datadir)/icons/hicolor/48x48/apps
+hicolor_DATA = xfce-mail.png
 noinst_DATA = xfce4-panel-icon.h xfce4-panel.png
 EXTRA_DIST = $(noinst_DATA)
 all: all-am
@@ -234,6 +238,23 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
+install-hicolorDATA: $(hicolor_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(hicolordir)" || $(mkdir_p) "$(DESTDIR)$(hicolordir)"
+	@list='$(hicolor_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(hicolorDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(hicolordir)/$$f'"; \
+	  $(hicolorDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(hicolordir)/$$f"; \
+	done
+
+uninstall-hicolorDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(hicolor_DATA)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f '$(DESTDIR)$(hicolordir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(hicolordir)/$$f"; \
+	done
 tags: TAGS
 TAGS:
 
@@ -272,6 +293,9 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(DATA)
 installdirs:
+	for dir in "$(DESTDIR)$(hicolordir)"; do \
+	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
+	done
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -314,7 +338,7 @@ info: info-am
 
 info-am:
 
-install-data-am:
+install-data-am: install-hicolorDATA
 
 install-exec-am:
 
@@ -340,24 +364,22 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-info-am
+uninstall-am: uninstall-hicolorDATA uninstall-info-am
 
 .PHONY: all all-am check check-am clean clean-generic clean-libtool \
 	distclean distclean-generic distclean-libtool distdir dvi \
 	dvi-am html html-am info info-am install install-am \
 	install-data install-data-am install-exec install-exec-am \
-	install-info install-info-am install-man install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am \
-	uninstall-info-am
+	install-hicolorDATA install-info install-info-am install-man \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	uninstall uninstall-am uninstall-hicolorDATA uninstall-info-am
 
 
 xfce4-panel-icon.h: $(srcdir)/xfce4-panel.png
 	gdk-pixbuf-csource --raw --build-list 				\
 	panel_icon_data $(srcdir)/xfce4-panel.png > xfce4-panel-icon.h
-
-all: xfce4-panel-icon.h
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

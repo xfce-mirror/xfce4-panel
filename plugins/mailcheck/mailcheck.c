@@ -93,23 +93,60 @@ enum
 };
 
 static char *mailcheck_icon_names[] = {
-    "nomail",
-    "newmail",
-    "oldmail"
+    "mail_section",
+    "gnome-mailcheck",
+    "xfce-mail"
 };
 
 static GdkPixbuf *
-get_mailcheck_pixbuf (int id)
+get_mail_pixbuf (void)
 {
-    GdkPixbuf *pb;
-    char *name = mailcheck_icon_names[id];
+    GdkPixbuf *pb = NULL;
+    char *name;
+    int i;
 
-    pb = get_themed_pixbuf (name);
+    for (i = 0; i < G_N_ELEMENTS (mailcheck_icon_names); ++i)
+    {
+	name = mailcheck_icon_names [i];
 
-    if (!pb)
+	pb = xfce_load_themed_icon (name, icon_size [settings.size]);
+
+	if (pb)
+	    break;
+    }
+
+    if (G_UNLIKELY (!pb))
+    {
+	g_critical ("Mail icon could not be found");
 	pb = get_pixbuf_by_id (UNKNOWN_ICON);
+    }
 
     return pb;
+}
+
+static void
+reset_mailcheck_icons (t_mailcheck *mc)
+{
+    if (mc->newmail_pb)
+	g_object_unref (mc->newmail_pb);
+
+    if (mc->nomail_pb)
+	g_object_unref (mc->nomail_pb);
+
+    if (mc->oldmail_pb)
+	g_object_unref (mc->oldmail_pb);
+
+    mc->newmail_pb = get_mail_pixbuf ();
+
+    g_return_if_fail (mc->newmail_pb != NULL);
+
+    mc->nomail_pb = gdk_pixbuf_copy (mc->newmail_pb);
+    gdk_pixbuf_saturate_and_pixelate (mc->nomail_pb,
+	    			      mc->nomail_pb, 
+				      0, TRUE);
+
+    mc->oldmail_pb = mc->nomail_pb;
+    g_object_ref (mc->oldmail_pb);
 }
 
 /*  Configuration
@@ -564,10 +601,8 @@ mailcheck_new (void)
     mailcheck->interval = 30;
     mailcheck->timeout_id = 0;
 
-    mailcheck->nomail_pb = get_mailcheck_pixbuf (NO_MAIL);
-    mailcheck->oldmail_pb = get_mailcheck_pixbuf (OLD_MAIL);
-    mailcheck->newmail_pb = get_mailcheck_pixbuf (NEW_MAIL);
-
+    reset_mailcheck_icons (mailcheck);
+    
     mailcheck->newmail_command = g_strdup ("");
 
     mail = g_getenv ("MAIL");
@@ -621,14 +656,8 @@ mailcheck_set_theme (Control * control, const char *theme)
 {
     t_mailcheck *mailcheck = (t_mailcheck *) control->data;
 
-    g_object_unref (mailcheck->nomail_pb);
-    g_object_unref (mailcheck->oldmail_pb);
-    g_object_unref (mailcheck->newmail_pb);
-
-    mailcheck->nomail_pb = get_mailcheck_pixbuf (NO_MAIL);
-    mailcheck->oldmail_pb = get_mailcheck_pixbuf (OLD_MAIL);
-    mailcheck->newmail_pb = get_mailcheck_pixbuf (NEW_MAIL);
-
+    reset_mailcheck_icons (mailcheck);
+    
     if (mailcheck->status == NO_MAIL)
     {
 	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mailcheck->button),

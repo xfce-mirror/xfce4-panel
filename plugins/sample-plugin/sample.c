@@ -245,7 +245,9 @@ sample_free (Control * control)
 static void
 sample_set_theme (Control * control, const char *theme)
 {
-    t_sample *sample = (t_sample *) control->data;
+    t_sample *sample;
+    
+    sample = (t_sample *) control->data;
 
     /* update the icons */
 }
@@ -558,6 +560,26 @@ xfce_control_class_init (ControlClass * cc)
      * cc->set_orientation = NULL;
      * cc->about = NULL;
      */
+
+    /* Additional API calls */
+
+    /* use if there should be only one instance per screen */
+    control_class_set_unique (cc, TRUE);
+
+    /* use if the gmodule should not be unloaded *
+     * (usually because of library issues)       */
+    control_class_set_unloadable (cc, FALSE);
+
+    /* use to set an icon to represent the module        *
+     * (you could even update it when the theme changes) */
+    if (1)
+    {
+	GdkPixbuf *pixbuf;
+
+	pixbuf = xfce_load_themed_icon ("sampleicon.png", 48);
+	control_class_set_icon (cc, pixbuf);
+	g_object_unref (pixbuf);
+    }
 }
 
 /* Macro that checks panel API version */
