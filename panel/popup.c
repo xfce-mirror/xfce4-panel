@@ -310,7 +310,7 @@ static void set_popup_window_properties(GtkWidget * win)
     g_object_unref(pb);
 
     if(settings.on_top)
-        set_window_type_dock(window, settings.on_top);
+        set_window_type_dock(win, settings.on_top);
 
     /* don't care about decorations when calculating position */
     gtk_window_set_gravity(window, GDK_GRAVITY_STATIC);

@@ -12,7 +12,7 @@ icons.c \
 info.c \
 item.c \
 item_dialog.c \
-move.c \
+handle.c \
 popup.c \
 settings.c \
 side.c \
@@ -23,7 +23,7 @@ central.h \
 controls_dialog.h \
 dialogs.h \
 item_dialog.h \
-move.h \
+handle.h \
 popup.h \
 settings.h \
 side.h \

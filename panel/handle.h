@@ -1,5 +1,6 @@
-/*  gxfce
- *  Copyright (C) 1999, 2002 Olivier Fourdan (fourdan@xfce.org)
+/*  handle.h
+ *  
+ *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,23 +17,22 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#ifndef __XFCE_HANDLE_H__
+#define __XFCE_HANDLE_H__
 
-#ifndef __XFCE_MOVE_H__
-#define __XFCE_MOVE_H__
+#include "global.h"
 
-#include <gtk/gtk.h>
-#include <X11/Xlib.h>
+typedef struct _Handle Handle;
 
-typedef struct _cursoroffset
-{
-    gint x, y;
-}
-CursorOffset;
+Handle *handle_new(int side);
 
-/*
-void CreateDrawGC (GdkWindow *w);
-void FreeDrawGC (void);
-*/
-void attach_move_callbacks(GtkWidget * handle);
+void handle_pack(Handle *mh, GtkBox *box);
 
-#endif
+void handle_unpack(Handle *mh, GtkContainer *container);
+
+void handle_set_size(Handle *mh, int size);
+
+void handle_set_style(Handle *mh, int style);
+
+#endif /* __XFCE_HANDLE_H__ */
+

@@ -7,7 +7,7 @@ pkginfo_DATA = AUTHORS COPYING ChangeLog
 noinst_DATA = example.xfce4rc
 
 
-EXTRA_DIST = example.xfce4rc.in xfce4.spec xfce4.spec.in 
+EXTRA_DIST = example.xfce4rc.in xfce4.spec xfce4.spec.in autogen.sh
 
 SUBDIRS = @MY_SUBDIRS@
 

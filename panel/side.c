@@ -39,12 +39,9 @@
 #include "item.h"
 #include "controls.h"
 #include "callbacks.h"
-#include "move.h"
 #include "icons.h"
 
 typedef struct _PanelGroup PanelGroup;
-typedef struct _MoveHandle MoveHandle;
-
 /* left and right versions of all important data are represented in a
  * single two dimensional array. This allows for the use of the enum
  * members LEFT (== 0) and RIGHT (== 1) as index.*/
@@ -52,219 +49,14 @@ typedef struct _MoveHandle MoveHandle;
 static PanelGroup *groups[2][NBGROUPS];
 static PanelPopup *popups[2][NBGROUPS];
 static PanelControl *controls[2][NBGROUPS];
-static MoveHandle *handles[2];
 static GtkBox *boxes[2];
 
 /*
 static GPtrArray *groups[2];
 static GPtrArray *popups[2];
 static GPtrArray *controls[2];
-static MoveHandle *handles[2];
 static GtkBox *boxes[2];
 */
-
-/*  Move handle
- *  -----------
-*/
-struct _MoveHandle
-{
-    int side;
-
-    GtkWidget *base;            /* provided by the panel group */
-    GtkWidget *box;             /* depends on popup position */
-
-/*    GdkPixbuf *iconify_pb;
-    GtkWidget *iconify_image;*/
-    GtkWidget *button;
-
-/*    GdkPixbuf *handle_pb;
-    GtkWidget *handle_image;*/
-    GtkWidget *eventbox;
-    GtkWidget *frame;
-};
-
-static void move_handle_arrange(MoveHandle * mh, int position)
-{
-    gboolean horizontal;
-
-    if(mh->box)
-    {
-        gtk_container_remove(GTK_CONTAINER(mh->box), mh->button);
-        gtk_container_remove(GTK_CONTAINER(mh->box), mh->eventbox);
-
-        /* removing the box will destroy it */
-        gtk_container_remove(GTK_CONTAINER(mh->base), mh->box);
-    }
-
-    /* create new box */
-    if(position == TOP || position == BOTTOM)
-    {
-        horizontal = TRUE;
-        mh->box = gtk_hbox_new(FALSE, 0);
-    }
-    else
-    {
-        horizontal = FALSE;
-        mh->box = gtk_vbox_new(FALSE, 0);
-    }
-
-    gtk_widget_show(mh->box);
-    gtk_container_add(GTK_CONTAINER(mh->base), mh->box);
-
-    if(mh->side == RIGHT && (horizontal || settings.orientation == VERTICAL))
-    {
-        gtk_box_pack_end(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
-        gtk_box_pack_end(GTK_BOX(mh->box), mh->eventbox, TRUE, TRUE, 0);
-    }
-    else
-    {
-        gtk_box_pack_start(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
-        gtk_box_pack_start(GTK_BOX(mh->box), mh->eventbox, TRUE, TRUE, 0);
-    }
-}
-
-void move_handle_pack(MoveHandle * mh, GtkContainer * container)
-{
-    gtk_container_add(container, mh->base);
-}
-
-void move_handle_unpack(MoveHandle * mh, GtkContainer * container)
-{
-    gtk_container_add(container, mh->base);
-}
-
-void move_handle_free(MoveHandle * mh)
-{
-    if(mh->button && GTK_IS_WIDGET(mh->button))
-    {
-        gtk_widget_destroy(mh->button);
-        gtk_widget_destroy(mh->eventbox);
-    }
-
-    g_free(mh);
-}
-
-void move_handle_set_size(MoveHandle * mh, int size)
-{
-    int h = top_height[size];
-    int w = icon_size[size] + border_width - h;
-    int p = settings.popup_position;
-
-    if(p == TOP || p == BOTTOM)
-        gtk_widget_set_size_request(mh->eventbox, w + border_width, h);
-    else
-        gtk_widget_set_size_request(mh->eventbox, h, w);
-
-    gtk_widget_set_size_request(mh->button, h, h);
-}
-
-void move_handle_set_style(MoveHandle * mh, int style)
-{
-    if(style == OLD_STYLE)
-    {
-        gtk_frame_set_shadow_type(GTK_FRAME(mh->frame), GTK_SHADOW_OUT);
-        gtk_widget_set_name(mh->frame, "gxfce_color1");
-
-        gtk_widget_set_name(mh->eventbox, "gxfce_color1");
-
-        gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NORMAL);
-        gtk_widget_set_name(mh->button, "gxfce_color1");
-    }
-    else
-    {
-        gtk_frame_set_shadow_type(GTK_FRAME(mh->frame), GTK_SHADOW_NONE);
-        gtk_widget_set_name(mh->frame, "gxfce_color7");
-
-        gtk_widget_set_name(mh->eventbox, "gxfce_color7");
-
-        gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
-        gtk_widget_set_name(mh->button, "gxfce_color7");
-    }
-}
-
-MoveHandle *create_move_handle(int side)
-{
-    GdkPixbuf *pb;
-    GtkWidget *im;
-    MoveHandle *mh = g_new(MoveHandle, 1);
-
-    mh->side = side;
-
-    mh->base = gtk_alignment_new(0, 0, 1, 1);
-    gtk_widget_show(mh->base);
-
-    /* protect against destruction when unpacking */
-    g_object_ref(mh->base);
-
-    mh->button = gtk_button_new();
-    if(settings.style == NEW_STYLE)
-        gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
-    gtk_widget_show(mh->button);
-
-    if (side == LEFT)
-    {
-	pb = get_system_pixbuf(CLOSE_ICON);
-	im = gtk_image_new_from_pixbuf(pb);
-	g_object_unref(pb);
-	gtk_widget_show(im);
-	gtk_container_add(GTK_CONTAINER(mh->button), im);
-
-	add_tooltip(mh->button, _("Quit..."));
-	
-	g_signal_connect(mh->button, "clicked", G_CALLBACK(close_cb), NULL);
-    }
-    else
-    {
-	pb = get_system_pixbuf(ICONIFY_ICON);
-	im = gtk_image_new_from_pixbuf(pb);
-	g_object_unref(pb);
-	gtk_widget_show(im);
-	gtk_container_add(GTK_CONTAINER(mh->button), im);
-
-	add_tooltip(mh->button, _("Iconify panel"));
-	
-	g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
-    }
-
-    if(settings.style == NEW_STYLE)
-        gtk_widget_set_name(im, "gxfce_color1");
-    else
-        gtk_widget_set_name(im, "gxfce_color7");
-
-    mh->eventbox = gtk_event_box_new();
-    add_tooltip(mh->eventbox, _("Move panel"));
-    gtk_widget_show(mh->eventbox);
-
-    mh->frame = gtk_frame_new(NULL);
-    gtk_widget_show(mh->frame);
-    gtk_container_add(GTK_CONTAINER(mh->eventbox), mh->frame);
-
-    pb = get_system_pixbuf(HANDLE_ICON);
-    im = gtk_image_new_from_pixbuf(pb);
-    g_object_unref(pb);
-    gtk_widget_show(im);
-    gtk_container_add(GTK_CONTAINER(mh->frame), im);
-
-    if(settings.style == NEW_STYLE)
-        gtk_widget_set_name(im, "gxfce_color1");
-    else
-        gtk_widget_set_name(im, "gxfce_color7");
-
-    /* protect against destruction when removed from box */
-    g_object_ref(mh->button);
-    g_object_ref(mh->eventbox);
-
-    mh->box = NULL;
-
-    move_handle_set_size(mh, settings.size);
-    move_handle_set_style(mh, settings.style);
-    move_handle_arrange(mh, settings.popup_position);
-
-    /* signals */
-    attach_move_callbacks(mh->eventbox);
-
-    return mh;
-}
 
 /*  Panel group
  *  -----------
@@ -283,7 +75,6 @@ struct _PanelGroup
 void panel_group_arrange(PanelGroup * pg, int position)
 {
     gboolean vertical = settings.orientation == VERTICAL;
-    gboolean start = TRUE;
     
     if(pg->box)
     {
@@ -303,33 +94,15 @@ void panel_group_arrange(PanelGroup * pg, int position)
     gtk_container_add(GTK_CONTAINER(pg->base), pg->box);
 
     /* find all cases for which we must use .._pack_end() */
-    if (pg->index == 0)
-    {
-	if ((vertical && position == RIGHT) || (!vertical && position == BOTTOM))
-	    start = FALSE;
-	else if (pg->side == RIGHT)
-	{
-	    if (vertical && (position == TOP || position == BOTTOM))
-		start = FALSE;
-	    else if (!vertical && position != TOP)
-		start = FALSE;
-	}
-    }
-    else
-    {
-	if (position == RIGHT || position == BOTTOM)
-	    start = FALSE;
-    }
-    
-    if(start)
-    {
-        gtk_box_pack_start(GTK_BOX(pg->box), pg->top, FALSE, TRUE, 0);
-        gtk_box_pack_start(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
-    }
-    else
+    if (position == RIGHT || position == BOTTOM)
     {
 	gtk_box_pack_end(GTK_BOX(pg->box), pg->top, FALSE, TRUE, 0);
 	gtk_box_pack_end(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
+    }
+    else
+    {
+        gtk_box_pack_start(GTK_BOX(pg->box), pg->top, FALSE, TRUE, 0);
+        gtk_box_pack_start(GTK_BOX(pg->box), pg->bottom, TRUE, TRUE, 0);
     }
 }
 
@@ -393,22 +166,9 @@ void side_panel_init(int side, GtkBox * box)
             groups[side][i] = create_panel_group(side, i);
 	    panel_group_pack(groups[side][i], box);
 
-            if(i == 0)
-            {
-                handles[side] = create_move_handle(side);
-		move_handle_pack(handles[side],
-				 GTK_CONTAINER(groups[side][i]->top));
-                /* Theoretically the popups array can be 1 item shorter
-                   than the others, because this on will always be NULL.
-                   However, that would be really confusing. */
-                popups[side][i] = NULL;
-            }
-            else
-            {
-                popups[side][i] = create_panel_popup();
-		panel_popup_pack(popups[side][i],
-				 GTK_CONTAINER(groups[side][i]->top));
-            }
+	    popups[side][i] = create_panel_popup();
+	    panel_popup_pack(popups[side][i],
+			     GTK_CONTAINER(groups[side][i]->top));
 
             /* we create an empty control, because we don't know what to put
              * here until after we read the configuration file */
@@ -438,9 +198,6 @@ void side_panel_pack(int side, GtkBox *box)
 	{
 	    panel_group_pack(groups[side][i], box);
 	    panel_group_arrange(groups[side][i], settings.popup_position);
-
-	    if(i == 0)
-		move_handle_arrange(handles[side], settings.popup_position);
 	}
     }
 }
@@ -467,9 +224,7 @@ void side_panel_cleanup(int side)
 
     for(i = 0; i < NBGROUPS; i++)
     {
-        if(i == 0)
-            move_handle_free(handles[side]);
-        else if(popups[side][i])
+        if(popups[side][i])
             panel_popup_free(popups[side][i]);
 
         if(controls[side][i])
@@ -483,9 +238,7 @@ void side_panel_set_size(int side, int size)
 
     for(i = 0; i < NBGROUPS; i++)
     {
-        if(i == 0)
-            move_handle_set_size(handles[side], size);
-        else if(popups[side][i])
+	if(popups[side][i])
             panel_popup_set_size(popups[side][i], size);
 
         if(controls[side][i])
@@ -513,9 +266,7 @@ void side_panel_set_popup_position(int side, int position)
         if(groups[side][i])
             panel_group_arrange(groups[side][i], position);
 
-        if(i == 0)
-            move_handle_arrange(handles[side], position);
-        else if(popups[side][i])
+        if(popups[side][i])
             panel_popup_set_popup_position(popups[side][i], position);
     }
 }
@@ -537,9 +288,7 @@ void side_panel_set_style(int side, int style)
 
     for(i = 0; i < NBGROUPS; i++)
     {
-        if(i == 0)
-            move_handle_set_style(handles[side], style);
-        else if(popups[side][i])
+        if(popups[side][i])
             panel_popup_set_style(popups[side][i], style);
 
         if(controls[side][i])
@@ -553,7 +302,7 @@ void side_panel_set_theme(int side, const char *theme)
 
     for(i = 0; i < NBGROUPS; i++)
     {
-        if(i != 0 && popups[side][i])
+        if(popups[side][i])
             panel_popup_set_theme(popups[side][i], theme);
 
         if(controls[side][i])

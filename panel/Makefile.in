@@ -104,7 +104,7 @@ icons.c \
 info.c \
 item.c \
 item_dialog.c \
-move.c \
+handle.c \
 popup.c \
 settings.c \
 side.c \
@@ -115,7 +115,7 @@ central.h \
 controls_dialog.h \
 dialogs.h \
 item_dialog.h \
-move.h \
+handle.h \
 popup.h \
 settings.h \
 side.h \
@@ -150,7 +150,7 @@ am_xfce4_OBJECTS = xfce4-xfce_clock.$(OBJEXT) xfce4-builtins.$(OBJEXT) \
 	xfce4-controls.$(OBJEXT) xfce4-controls_dialog.$(OBJEXT) \
 	xfce4-dialogs.$(OBJEXT) xfce4-iconbutton.$(OBJEXT) \
 	xfce4-icons.$(OBJEXT) xfce4-info.$(OBJEXT) xfce4-item.$(OBJEXT) \
-	xfce4-item_dialog.$(OBJEXT) xfce4-move.$(OBJEXT) \
+	xfce4-item_dialog.$(OBJEXT) xfce4-handle.$(OBJEXT) \
 	xfce4-popup.$(OBJEXT) xfce4-settings.$(OBJEXT) \
 	xfce4-side.$(OBJEXT) xfce4-wmhints.$(OBJEXT) \
 	xfce4-xfce.$(OBJEXT) xfce4-xfce_support.$(OBJEXT)
@@ -171,11 +171,11 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-controls.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-controls_dialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-dialogs.Po \
+@AMDEP_TRUE@	./$(DEPDIR)/xfce4-handle.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-iconbutton.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-icons.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-info.Po ./$(DEPDIR)/xfce4-item.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-item_dialog.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/xfce4-move.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-popup.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-settings.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-side.Po \
@@ -247,7 +247,7 @@ xfce4-icons.$(OBJEXT): icons.c
 xfce4-info.$(OBJEXT): info.c
 xfce4-item.$(OBJEXT): item.c
 xfce4-item_dialog.$(OBJEXT): item_dialog.c
-xfce4-move.$(OBJEXT): move.c
+xfce4-handle.$(OBJEXT): handle.c
 xfce4-popup.$(OBJEXT): popup.c
 xfce4-settings.$(OBJEXT): settings.c
 xfce4-side.$(OBJEXT): side.c
@@ -270,12 +270,12 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-controls.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-controls_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-dialogs.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-handle.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-iconbutton.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-icons.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-item.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-item_dialog.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-move.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-popup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-settings.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-side.Po@am__quote@
@@ -521,23 +521,23 @@ xfce4-item_dialog.lo: item_dialog.c
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-item_dialog.lo `test -f 'item_dialog.c' || echo '$(srcdir)/'`item_dialog.c
 
-xfce4-move.o: move.c
-@AMDEP_TRUE@	source='move.c' object='xfce4-move.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-move.Po' tmpdepfile='$(DEPDIR)/xfce4-move.TPo' @AMDEPBACKSLASH@
+xfce4-handle.o: handle.c
+@AMDEP_TRUE@	source='handle.c' object='xfce4-handle.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-handle.Po' tmpdepfile='$(DEPDIR)/xfce4-handle.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-move.o `test -f 'move.c' || echo '$(srcdir)/'`move.c
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-handle.o `test -f 'handle.c' || echo '$(srcdir)/'`handle.c
 
-xfce4-move.obj: move.c
-@AMDEP_TRUE@	source='move.c' object='xfce4-move.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-move.Po' tmpdepfile='$(DEPDIR)/xfce4-move.TPo' @AMDEPBACKSLASH@
+xfce4-handle.obj: handle.c
+@AMDEP_TRUE@	source='handle.c' object='xfce4-handle.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-handle.Po' tmpdepfile='$(DEPDIR)/xfce4-handle.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-move.obj `cygpath -w move.c`
+	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-handle.obj `cygpath -w handle.c`
 
-xfce4-move.lo: move.c
-@AMDEP_TRUE@	source='move.c' object='xfce4-move.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-move.Plo' tmpdepfile='$(DEPDIR)/xfce4-move.TPlo' @AMDEPBACKSLASH@
+xfce4-handle.lo: handle.c
+@AMDEP_TRUE@	source='handle.c' object='xfce4-handle.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@	depfile='$(DEPDIR)/xfce4-handle.Plo' tmpdepfile='$(DEPDIR)/xfce4-handle.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-move.lo `test -f 'move.c' || echo '$(srcdir)/'`move.c
+	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-handle.lo `test -f 'handle.c' || echo '$(srcdir)/'`handle.c
 
 xfce4-popup.o: popup.c
 @AMDEP_TRUE@	source='popup.c' object='xfce4-popup.o' libtool=no @AMDEPBACKSLASH@

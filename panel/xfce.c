@@ -39,6 +39,7 @@
 #include "icons.h"
 #include "callbacks.h"
 #include "settings.h"
+#include "handle.h"
 
 /*  Panel dimensions 
 */
@@ -63,6 +64,8 @@ static GtkWidget *main_frame;
 static GtkWidget *main_box;	/* contains panel and taskbar (future) */
 
 static GtkWidget *panel_box;	/* contains all panel components */
+
+Handle *handles[2];
 
 static GtkWidget *left_box;
 static GtkWidget *right_box;
@@ -121,6 +124,7 @@ static GtkWidget *create_panel_window(void)
 
 static void create_panel_contents(void)
 {
+    GtkWidget *sep1, *sep2;
     gboolean vertical = settings.orientation == VERTICAL;
     
     main_frame = gtk_frame_new(NULL);
@@ -136,6 +140,10 @@ static void create_panel_contents(void)
 
 	panel_box = gtk_vbox_new(FALSE, 0);
 
+	sep1 = gtk_hseparator_new();
+
+	sep2 = gtk_hseparator_new();
+
 	left_box = gtk_vbox_new(FALSE, 0);
 
 	right_box = gtk_vbox_new(FALSE, 0);
@@ -148,6 +156,10 @@ static void create_panel_contents(void)
 
 	panel_box = gtk_hbox_new(FALSE, 0);
 
+	sep1 = gtk_vseparator_new();
+
+	sep2 = gtk_vseparator_new();
+
 	left_box = gtk_hbox_new(FALSE, 0);
 
 	right_box = gtk_hbox_new(FALSE, 0);
@@ -158,6 +170,8 @@ static void create_panel_contents(void)
     /* show them */
     gtk_widget_show(main_box);
     gtk_widget_show(panel_box);
+    gtk_widget_show(sep1);
+    gtk_widget_show(sep2);
     gtk_widget_show(left_box);
     gtk_widget_show(right_box);
     gtk_widget_show(central_box);
@@ -168,6 +182,9 @@ static void create_panel_contents(void)
 				   adding central panel from the dialog */
     
     /* create the other widgets */
+
+    handles[LEFT] = handle_new(LEFT);
+    handles[RIGHT] = handle_new(RIGHT);
     
     central_frame = gtk_frame_new(NULL);
     if(settings.style == OLD_STYLE)
@@ -186,6 +203,10 @@ static void create_panel_contents(void)
 
     gtk_box_pack_start(GTK_BOX(main_box), panel_box, TRUE, TRUE, 0);
 
+    handle_pack(handles[LEFT], GTK_BOX(panel_box));
+
+    gtk_box_pack_start(GTK_BOX(panel_box), sep1, FALSE, TRUE, 0);
+
     gtk_box_pack_start(GTK_BOX(panel_box), left_box, TRUE, TRUE, 0);
 
     gtk_box_pack_start(GTK_BOX(panel_box), central_frame, TRUE, TRUE, 0);
@@ -193,6 +214,10 @@ static void create_panel_contents(void)
     gtk_container_add(GTK_CONTAINER(central_frame), central_box);
 
     gtk_box_pack_start(GTK_BOX(panel_box), right_box, TRUE, TRUE, 0);
+    
+    gtk_box_pack_start(GTK_BOX(panel_box), sep2, FALSE, TRUE, 0);
+
+    handle_pack(handles[RIGHT], GTK_BOX(panel_box));
 }
 
 void panel_init(void)
@@ -249,6 +274,9 @@ void panel_set_size(int size)
     side_panel_set_size(LEFT, size);
     central_panel_set_size(size);
     side_panel_set_size(RIGHT, size);
+
+    handle_set_size(handles[LEFT], size);
+    handle_set_size(handles[RIGHT], size);
 }
 
 void panel_set_popup_size(int size)
@@ -279,9 +307,13 @@ void panel_set_style(int style)
     else
         gtk_frame_set_shadow_type(GTK_FRAME(central_frame),
                                   GTK_SHADOW_ETCHED_IN);
+
     side_panel_set_style(LEFT, style);
     central_panel_set_style(style);
     side_panel_set_style(RIGHT, style);
+
+    handle_set_style(handles[LEFT], style);
+    handle_set_style(handles[RIGHT], style);
 }
 
 void panel_set_theme(const char *theme)
