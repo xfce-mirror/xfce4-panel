@@ -216,7 +216,7 @@ void item_write_config(Item * item, xmlNodePtr node)
     if (item->type == MENUITEM)
 	xmlNewTextChild(node, NULL, "Caption", item->caption);
 
-    child = xmlNewChild(node, NULL, "Command", item->command);
+    child = xmlNewTextChild(node, NULL, "Command", item->command);
 
     snprintf(value, 2, "%d", item->in_terminal);
     xmlSetProp(child, "term", value);
