@@ -747,7 +747,7 @@ void quit(gboolean force)
     if(settings.exit_command)
         exec_cmd_silent(settings.exit_command, FALSE);
 
-    gtk_widget_destroy(toplevel);
+/*    gtk_widget_destroy(toplevel);*/
 
     gtk_main_quit();
 }
