@@ -267,8 +267,6 @@ controls_dialog (Control * control)
     dlg = gtk_dialog_new_with_buttons (_("Change item"), NULL,
 				       GTK_DIALOG_MODAL, NULL);
 
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-
     button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
     gtk_widget_show (button);
@@ -352,6 +350,7 @@ controls_dialog (Control * control)
 	gtk_widget_grab_default (done);
 	gtk_widget_grab_focus (done);
 
+        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 	response = gtk_dialog_run (GTK_DIALOG (dlg));
 
 	if (response == RESPONSE_REMOVE)
@@ -371,6 +370,7 @@ controls_dialog (Control * control)
 		break;
 	    }
 
+            gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 	    gtk_widget_show (dlg);
 	}
 	else if (response != RESPONSE_REVERT)

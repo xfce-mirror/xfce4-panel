@@ -994,8 +994,6 @@ create_menu_item_dialog (Item * mi)
 
     dlg = gtk_dialog_new_with_buttons (title, NULL, GTK_DIALOG_MODAL, NULL);
 
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-
     /* add buttons */
     remove_button = mixed_button_new (GTK_STOCK_REMOVE, _("Remove"));
     GTK_WIDGET_SET_FLAGS (remove_button, GTK_CAN_DEFAULT);
@@ -1068,6 +1066,7 @@ edit_menu_item_dialog (Item * mi)
 
         gtk_widget_set_sensitive (revert_button, FALSE);
 
+        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
         response = gtk_dialog_run (GTK_DIALOG (dlg));
 
         if (response == RESPONSE_REVERT)
