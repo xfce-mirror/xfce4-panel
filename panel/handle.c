@@ -31,7 +31,12 @@
 /* popup menu */
 static void edit_prefs(void)
 {
-    mcs_dialog();
+    mcs_dialog(NULL);
+}
+
+static void settings_mgr(void)
+{
+    mcs_dialog("all");
 }
 
 static void add_new(void)
@@ -71,8 +76,10 @@ static void do_help(void)
 static GtkItemFactoryEntry panel_items[] = {
   { N_("/XFce Panel"),        NULL, NULL,        0, "<Title>" },
   { "/sep",              NULL, NULL,        0, "<Separator>" },
-  { N_("/_Preferences"), NULL, edit_prefs,  0, "<Item>" },
   { N_("/Add _new item"), NULL, add_new,    0, "<Item>" },
+  { "/sep",              NULL, NULL,        0, "<Separator>" },
+  { N_("/_Preferences"), NULL, edit_prefs,  0, "<Item>" },
+  { N_("/_Settings manager"), NULL, settings_mgr,  0, "<Item>" },
   { N_("/sep"),          NULL, NULL,        0, "<Separator>" },
   { N_("/_Lock screen"), NULL, lock_screen, 0, "<Item>" },
   { N_("/E_xit"),        NULL, exit_panel,  0, "<Item>" },
@@ -80,8 +87,6 @@ static GtkItemFactoryEntry panel_items[] = {
   { N_("/_About XFce"),  NULL, do_info,     0, "<Item>" },
   { N_("/_Help"),        NULL, do_help,     0, "<Item>" },
 };
-
-static int n_panel_items = 9;
 
 static GtkMenu *create_handle_menu(void)
 {
@@ -92,7 +97,8 @@ static GtkMenu *create_handle_menu(void)
     {
 	ifactory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
 
-	gtk_item_factory_create_items(ifactory, n_panel_items, panel_items, NULL);
+	gtk_item_factory_create_items(ifactory, G_N_ELEMENTS(panel_items), 
+				      panel_items, NULL);
 
 	menu = GTK_MENU(gtk_item_factory_get_widget(ifactory, "<popup>"));
     }

@@ -269,9 +269,14 @@ void mcs_stop_watch(void)
     client = NULL;
 }
 
-void mcs_dialog(void)
+void mcs_dialog(const char *channel)
 {
-    if (client)
+    if (!client)
+	return;
+
+    if (channel)
+	mcs_client_show(GDK_DISPLAY(), DefaultScreen(GDK_DISPLAY()), channel);
+    else
 	mcs_client_show(GDK_DISPLAY(), DefaultScreen(GDK_DISPLAY()), CHANNEL);
 }
 
