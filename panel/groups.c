@@ -568,6 +568,20 @@ groups_set_theme (const char *theme)
     }
 }
 
+void 
+groups_set_arrow_direction (GtkArrowType type)
+{
+    GSList *li;
+    PanelGroup *group;
+
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
+
+	panel_popup_set_arrow_type (group->popup, type);
+    }
+}
+
 void
 groups_add_control (int id, const char *filename, int index)
 {

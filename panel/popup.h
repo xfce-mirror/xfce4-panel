@@ -59,6 +59,7 @@ void panel_popup_set_size (PanelPopup * pp, int size);
 void panel_popup_set_popup_position (PanelPopup * pp, int position);
 void panel_popup_set_layer (PanelPopup * pp, int layer);
 void panel_popup_set_theme (PanelPopup * pp, const char *theme);
+void panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type);
 
 void hide_current_popup_menu (void);
 

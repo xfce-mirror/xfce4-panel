@@ -70,6 +70,7 @@ position_popup (PanelPopup * pp)
     gboolean vertical = settings.orientation == VERTICAL;
     int pos = settings.popup_position;
     GtkAllocation alloc1 = {0,}, alloc2 = {0,};
+    GtkArrowType at;
     
     if (pp->detached)
 	return;
@@ -84,6 +85,8 @@ position_popup (PanelPopup * pp)
     w = gdk_screen_width ();
     h = gdk_screen_height ();
 
+    at = xfce_togglebutton_get_arrow_type (XFCE_TOGGLEBUTTON(pp->button));
+    
     if (!GTK_WIDGET_REALIZED (pp->window))
 	gtk_widget_realize (pp->window);
 
@@ -92,8 +95,6 @@ position_popup (PanelPopup * pp)
     alloc2.width = req.width;
     alloc2.height = req.height;
     gtk_widget_size_allocate (pp->window, &alloc2);
-
-    /*gtk_widget_realize (pp->window);*/
 
     /* this is necessary, because the icons are resized on allocation */
     gtk_widget_size_request (pp->window, &req);
@@ -117,7 +118,7 @@ position_popup (PanelPopup * pp)
     if (vertical)
     {
 	/* left if buttons left ... */
-	if (pos == LEFT && x - req.width >= 0)
+	if (at == GTK_ARROW_LEFT && x - req.width >= 0)
 	{
 	    x = x - req.width;
 	    y = y + alloc1.height - req.height;
@@ -141,7 +142,7 @@ position_popup (PanelPopup * pp)
     else
     {
 	/* down if buttons on bottom ... */
-	if (pos == BOTTOM && y + alloc1.height + req.height <= h)
+	if (at == GTK_ARROW_DOWN && y + alloc1.height + req.height <= h)
 	{
 	    x = x + alloc1.width / 2 - req.width / 2;
 	    y = y + alloc1.height;
@@ -165,9 +166,6 @@ position_popup (PanelPopup * pp)
 	    x = w - req.width;
     }
 
-#if 0
-    g_print(" *** Position: %d, %d\n", x, y);
-#endif
     gtk_window_move (GTK_WINDOW (pp->window), x, y);
     gtk_window_stick (GTK_WINDOW (pp->window));
     gtk_widget_show (pp->window);
@@ -529,27 +527,8 @@ panel_popup_set_size (PanelPopup * pp, int size)
 void
 panel_popup_set_popup_position (PanelPopup * pp, int position)
 {
-    GtkArrowType at;
-    gboolean vertical = settings.orientation == VERTICAL;
-
     settings.popup_position = position;
 
-    if (vertical)
-    {
-	if (settings.popup_position == LEFT)
-	    at = GTK_ARROW_LEFT;
-	else
-	    at = GTK_ARROW_RIGHT;
-    }
-    else
-    {
-	if (settings.popup_position == BOTTOM)
-	    at = GTK_ARROW_DOWN;
-	else
-	    at = GTK_ARROW_UP;
-    }
-
-    xfce_togglebutton_set_arrow_type (XFCE_TOGGLEBUTTON (pp->button), at);
     panel_popup_set_size (pp, settings.size);
 }
 
@@ -570,4 +549,14 @@ panel_popup_set_theme (PanelPopup * pp, const char *theme)
 
 	item_set_theme (mi, theme);
     }
+}
+
+void
+panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type)
+{
+    if (!pp || !pp->button)
+	return;
+	    
+    xfce_togglebutton_set_arrow_type (XFCE_TOGGLEBUTTON (pp->button), 
+				      type);
 }

@@ -257,23 +257,23 @@ xfce_panel_set_xselection (void)
     char *selection_name;
     GtkWidget *invisible;
 
-    TRACE ("claiming xfdesktop manager selection for screen %d", scr);
-
     display = GDK_DISPLAY ();
     scr = DefaultScreen (display);
     
+    TRACE ("claiming xfdesktop manager selection for screen %d", scr);
+
     invisible = gtk_invisible_new ();
     gtk_widget_realize (invisible);
 
     if (!selection_atom)
     {
 	selection_name = g_strdup_printf (XFCE_PANEL_SELECTION_FMT, scr);
-	selection_atom = XInternAtom (gdk_display, selection_name, False);
+	selection_atom = XInternAtom (display, selection_name, False);
 	g_free (selection_name);
     }
 
     if (!manager_atom)
-	manager_atom = XInternAtom (gdk_display, "MANAGER", False);
+	manager_atom = XInternAtom (display, "MANAGER", False);
 
     selection_window = GDK_WINDOW_XWINDOW (invisible->window);
 
@@ -298,7 +298,7 @@ xfce_panel_set_xselection (void)
 	xev.data.l[3] = 0;	/* manager specific data */
 	xev.data.l[4] = 0;	/* manager specific data */
 
-	XSendEvent (display, RootWindow (display, scr), False,
+	XSendEvent (display, GDK_ROOT_WINDOW(), False,
 		    StructureNotifyMask, (XEvent *) & xev);
     }
     else
@@ -322,8 +322,6 @@ main (int argc, char **argv)
 
     xfce_textdomain(GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
-    gtk_init (&argc, &argv);
-
     if (argc == 2 &&
 	(strequal (argv[1], "-v") || strequal (argv[1], "--version") ||
 	 strequal (argv[1], "-h") || strequal (argv[1], "--help")))
@@ -333,6 +331,8 @@ main (int argc, char **argv)
 		   "http://www.xfce.org\n"), PACKAGE, VERSION);
 	return 0;
     }
+
+    gtk_init (&argc, &argv);
 
     progname = argv[0];
     
