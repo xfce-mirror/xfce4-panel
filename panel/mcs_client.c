@@ -212,7 +212,7 @@ void mcs_watch_xfce_channel(void)
     if (!settings_hash)
 	init_settings_hash();
     
-    if (!mcs_client_check_manager(dpy, screen))
+    if (!mcs_client_check_manager(dpy, screen, "xfce-mcs-manager"))
 	g_critical(_("MCS settings manager not running!"));
     
     client = mcs_client_new(dpy, screen, notify_cb, watch_cb, NULL);

@@ -1,4 +1,4 @@
-plugindir = $(libdir)/libxfce4mcs/settings/
+plugindir = $(libdir)/xfce-mcs-manager/plugins
 
 plugin_LTLIBRARIES = libxfce4settings.la
 libxfce4settings_la_LDFLAGS = -module -avoid-version
