@@ -34,6 +34,8 @@
 #include "xfce.h"
 #include "xfce_clock.h"
 
+#include "debug.h"
+
 /* panel control configuration
    Global widget used in all the module configuration
    to revert the settings
@@ -117,11 +119,11 @@ static t_clock *clock_new(void)
     gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
 
     /* Cosmetic change */
-    if(XFCE_CLOCK(clock->clock)->mode == XFCE_CLOCK_ANALOG)
+    /* if(xfce_clock_get_mode(XFCE_CLOCK(clock->clock)) == XFCE_CLOCK_ANALOG )
 	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_NONE);
     else
 	gtk_frame_set_shadow_type(GTK_FRAME(clock->frame), GTK_SHADOW_IN);
-
+    */
     gtk_widget_show(clock->frame);
 
     clock->eventbox = gtk_event_box_new();
@@ -200,8 +202,61 @@ void clock_free(PanelControl * pc)
 void clock_set_size(PanelControl * pc, int size)
 {
     int s = icon_size[size];
+    int w;
     t_clock *clock = (t_clock *) pc->data;
-    gtk_widget_set_size_request(clock->clock, s, s);
+    XfceClock *tmp = XFCE_CLOCK(clock->clock);
+    DBG("Entering clock_set_size\n");
+    DBG("s is %d\n",s);
+    /*if(settings.orientation ==
+      settings.popup_position*/
+
+    DBG("icon_size[size] is icon_size[%d]=%d\n",
+	   size,
+	   icon_size[size]);
+    DBG("Just before gtk_widget_set_size_request()\n");
+    switch (xfce_clock_get_mode(tmp))
+    {
+    case XFCE_CLOCK_LEDS:
+	w = icon_size[size];
+
+	if( settings.orientation == VERTICAL && (settings.popup_position == LEFT || settings.popup_position == RIGHT) )
+	{
+
+	    DBG("Right/Left popup\n");
+	    if(size <= SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))
+		w = w + 35;
+	}
+	else if ( settings.orientation == VERTICAL && (settings.popup_position == BOTTOM || settings.popup_position == TOP) )
+	{
+
+	    DBG("Top/Bottom popup\n");
+	    if( size <= SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
+
+	}
+	else if ( settings.orientation == HORIZONTAL && (settings.popup_position == LEFT || settings.popup_position == RIGHT) )
+	{
+	    DBG("Right/Left popup\n");
+	    if( size == SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
+	    if( size == TINY && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
+
+	}
+	else if ( settings.orientation == HORIZONTAL && (settings.popup_position == TOP || settings.popup_position == BOTTOM) )
+	{
+	    DBG("Right/Left popup\n");
+	    if( size == SMALL && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 30;
+	    if( size == TINY && (xfce_clock_ampm_shown(tmp) || xfce_clock_secs_shown(tmp)))		    w = w + 35;
+
+	}
+	DBG("Using custom width of %d\n", w);
+
+
+	break;
+    default:
+	w = -1;
+	break;
+    }
+    DBG("Before size_request, w is %d\n",w);
+    gtk_widget_set_size_request(clock->frame, w, s);
 }
 
 /* FIXME: have to have a look into it as I don't really know if that
@@ -214,11 +269,13 @@ void clock_set_style(PanelControl * pc, int style)
     if(style == OLD_STYLE)
     {
         gtk_widget_set_name(clock->frame, "gxfce_color2");
+	gtk_widget_set_name(clock->clock, "gxfce_color2");
         gtk_widget_set_name(clock->eventbox, "gxfce_color2");
     }
     else
     {
         gtk_widget_set_name(clock->frame, "gxfce_color4");
+	gtk_widget_set_name(clock->clock, "gxfce_color4");
         gtk_widget_set_name(clock->eventbox, "gxfce_color4");
     }
 }
@@ -284,7 +341,6 @@ static void clock_type_changed(GtkOptionMenu * omi, t_clock * clock)
      /* Make the revert_button sensitive to get our initial value back
       */
      gtk_widget_set_sensitive( revert_button, TRUE );
-
 }
 
 
@@ -497,6 +553,10 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
     if ( value = xmlGetProp(node, (const xmlChar *)"Clock_type"))
     {
 	XFCE_CLOCK(cl->clock)->mode = atoi(value);
+	if(xfce_clock_get_mode(XFCE_CLOCK(cl->clock)) == XFCE_CLOCK_ANALOG )
+	    gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_NONE);
+	else
+	    gtk_frame_set_shadow_type(GTK_FRAME(cl->frame), GTK_SHADOW_IN);
         g_free(value);
     }
 

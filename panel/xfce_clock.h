@@ -73,7 +73,6 @@ extern "C"
         gint pointer_width;
 
         gboolean relief;
-        GtkShadowType shadow_type;
 
         /* ID of update timer, or 0 if none */
         guint32 timer;
@@ -99,7 +98,6 @@ extern "C"
     GtkWidget *xfce_clock_new(void);
     GtkType xfce_clock_get_type(void);
     void xfce_clock_set_relief(XfceClock * clock, gboolean relief);
-    void xfce_clock_set_shadow_type(XfceClock * clock, GtkShadowType type);
     void xfce_clock_show_ampm(XfceClock * clock, gboolean show);
     void xfce_clock_ampm_toggle(XfceClock * clock);
     gboolean xfce_clock_ampm_shown(XfceClock * clock);
