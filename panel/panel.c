@@ -30,6 +30,8 @@
 #undef GDK_MULTIHEAD_SAFE
 #endif
 
+#include <math.h>
+
 #include <X11/Xlib.h>
 
 #include <libxfce4util/debug.h>
@@ -635,6 +637,48 @@ panel_allocate_cb (GtkWidget * window, GtkAllocation *allocation, Panel *p)
     }
 }
 
+static void
+screen_size_changed (GdkScreen *screen, Panel *p)
+{
+    double xalign, yalign;
+    int width, height, x, y;
+
+    /* xrandr doesn't work with xinerama, so we can assume to have
+     * only one monitor 
+     * TODO: update if this is not (or no longer) true */
+    width = xinerama_scr.xmax;
+    height = xinerama_scr.ymax;
+    
+    xalign = (double) p->position.x / (width - panel_req.width);
+    yalign = (double) p->position.y / (height - panel_req.height);
+
+    DBG ("Relative position: %.2f x %.2f", xalign, yalign);
+    
+    update_xinerama_coordinates (p);
+    
+    width = xinerama_scr.xmax - xinerama_scr.xmin;
+    height = xinerama_scr.ymax - xinerama_scr.ymin;
+    
+    DBG ("New screen size: %d x %d", width, height);
+
+    x = rint (xalign * (width - panel_req.width));
+    y = rint (yalign * (height - panel_req.height));
+
+    if (x + panel_req.width > width)
+	x = width - panel_req.width;
+    if (x < 0)
+	x = 0;
+
+    if (y + panel_req.height > height)
+	y = height - panel_req.height;
+    if (y < 0)
+	y = 0;
+
+    gtk_window_move (p->toplevel, x, y);
+    p->position.x = x;
+    p->position.y = y;
+}
+
 static GtkWidget *
 create_panel_window (void)
 {
@@ -659,6 +703,11 @@ create_panel_window (void)
     g_signal_connect (w, "size-allocate", G_CALLBACK (panel_allocate_cb), 
 	    	      &panel);
 
+#if GTK_CHECK_VERSION(2,2,0)
+    g_signal_connect(G_OBJECT(gdk_screen_get_default()), "size-changed",
+            	     G_CALLBACK(screen_size_changed), &panel);
+#endif
+    
     return w;
 }
 

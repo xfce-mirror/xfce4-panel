@@ -135,8 +135,8 @@ quit (gboolean force)
     DBG("sigstate: %d", sigstate);
     if (sigstate != RESTART)
     {
-	exit (0);
 	g_message("%s: Exit", PACKAGE);
+	exit (0);
     }
 }
 
@@ -156,7 +156,6 @@ check_signal_state (void)
 	
 	if (sigstate == RESTART && !restarting)
 	{
-	    /* prevent quit() from exiting */
 	    restarting = TRUE;
 	    
 	    /* calls gtk_main_quit() */
@@ -164,7 +163,7 @@ check_signal_state (void)
 
 	    /* progname is saved on startup 
 	     * TODO: do we need to pass on arguments? */
-	    g_message("%s: restarting ...", PACKAGE);
+	    g_message("%s: restarting %s ...", PACKAGE, progname);
 	    execlp(progname,progname,NULL);
 	}
 	else if (sigstate == QUIT)
