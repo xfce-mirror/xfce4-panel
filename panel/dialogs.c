@@ -246,7 +246,7 @@ static void add_header(const char *text, GtkBox * box)
 
     label = gtk_label_new(NULL);
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    markup = g_strconcat("<b><span size=\"large\">", text, "</span></b>", NULL);
+    markup = g_strconcat("<b>", text, "</b>", NULL);
     gtk_label_set_markup(GTK_LABEL(label), markup);
     g_free(markup);
     gtk_widget_show(label);
@@ -892,19 +892,57 @@ static void ontop_changed(GtkToggleButton * button, gpointer data)
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
-static void position_clicked(GtkWidget * button)
+enum
 {
-    position.x = -1;
-    position.y = -1;
+    BOTTOMCENTER,
+    TOPCENTER,
+    LEFTCENTER,
+    RIGHTCENTER,
+    NUM_POSITIONS
+};
 
-    panel_set_position();
+static char *position_names[] = {
+    N_("Bottom"),
+    N_("Top"),
+    N_("Left"),
+    N_("Right"),
+};
+
+static void position_clicked(GtkWidget * button, GtkOptionMenu *om)
+{
+    int w, h, width, height;
+
+    gtk_window_get_size(GTK_WINDOW(toplevel), &width, &height);
+    
+    switch (gtk_option_menu_get_history(om))
+    {
+	case TOPCENTER:
+	    position.y = 0;
+	    position.x = gdk_screen_width() / 2 - width / 2;
+	    break;
+	case LEFTCENTER:
+	    position.x = 0;
+	    position.y = gdk_screen_height() / 2 - height / 2;
+	    break;
+	case RIGHTCENTER:
+	    position.x = gdk_screen_width() - width;
+	    position.y = gdk_screen_height() / 2 - height / 2;
+	    break;
+	default:
+	    position.x = gdk_screen_width() / 2 - width / 2;
+	    position.y = gdk_screen_height() - height;
+	    break;
+    }
+    
+    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
 /* restore position and set on top or not */
 static void add_position_box(GtkBox * box)
 {
-    GtkWidget *frame, *vbox, *hbox, *label;
+    GtkWidget *frame, *vbox, *hbox, *label, *optionmenu, *menu;
+    int i;
 
     /* frame and vbox */
     frame = gtk_frame_new(NULL);
@@ -937,22 +975,40 @@ static void add_position_box(GtkBox * box)
     g_signal_connect(ontop_checkbox, "toggled",
                      G_CALLBACK(ontop_changed), NULL);
 
-    /* button */
+    /* centering */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Default position:"));
+    label = gtk_label_new(_("Center the panel:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    pos_button = mixed_button_new(GTK_STOCK_REFRESH, _("Set"));
+    optionmenu = gtk_option_menu_new();
+    gtk_widget_show(optionmenu);
+    gtk_box_pack_start(GTK_BOX(hbox), optionmenu, FALSE, FALSE, 0);
+
+    menu = gtk_menu_new();
+    gtk_widget_show(menu);
+    gtk_option_menu_set_menu(GTK_OPTION_MENU(optionmenu), menu);
+
+    for (i = 0; i < NUM_POSITIONS; i++)
+    {
+	GtkWidget *mi = gtk_menu_item_new_with_label(_(position_names[i]));
+
+	gtk_widget_show(mi);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+    }
+    
+    gtk_option_menu_set_history(GTK_OPTION_MENU(optionmenu), 0);
+    
+    pos_button = mixed_button_new(GTK_STOCK_APPLY, _("Set"));
     gtk_widget_show(pos_button);
     gtk_box_pack_start(GTK_BOX(hbox), pos_button, FALSE, FALSE, 0);
 
-    g_signal_connect(pos_button, "clicked", G_CALLBACK(position_clicked), NULL);
+    g_signal_connect(pos_button, "clicked", G_CALLBACK(position_clicked), optionmenu);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
