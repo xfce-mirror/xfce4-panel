@@ -17,3 +17,15 @@ libswitcher_la_CFLAGS =							\
 
 libswitcher_la_LIBADD =							\
 	@LIBS@
+
+if HAVE_CYGWIN
+libswitcher_la_LDFLAGS +=                                               \
+	-no-undefined                                                   \
+	-export-symbols $(top_srcdir)/panel/panel.def                   \
+	@LIBXML_LDFLAGS@                                                \
+	@LIBX11_LDFLAGS@                                                
+libswitcher_la_LIBADD +=                                                \
+	@XFCE_MCS_MANAGER_LIBS@                                         \
+	@LIBXML_LIBS@                                                   \
+	@LIBX11_LIBS@
+endif

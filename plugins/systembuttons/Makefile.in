@@ -37,6 +37,17 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_triplet = @host@
+@HAVE_CYGWIN_TRUE@am__append_1 = \
+@HAVE_CYGWIN_TRUE@	-no-undefined                                                   \
+@HAVE_CYGWIN_TRUE@	-export-symbols $(top_srcdir)/panel/panel.def                   \
+@HAVE_CYGWIN_TRUE@	@LIBXML_LDFLAGS@                                                \
+@HAVE_CYGWIN_TRUE@	@LIBX11_LDFLAGS@                                                
+
+@HAVE_CYGWIN_TRUE@am__append_2 = \
+@HAVE_CYGWIN_TRUE@	@XFCE_MCS_MANAGER_LIBS@                                         \
+@HAVE_CYGWIN_TRUE@	@LIBXML_LIBS@                                                   \
+@HAVE_CYGWIN_TRUE@	@LIBX11_LIBS@
+
 subdir = plugins/systembuttons
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -51,7 +62,8 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(plugindir)"
 pluginLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(plugin_LTLIBRARIES)
-libsystembuttons_la_DEPENDENCIES =
+am__DEPENDENCIES_1 =
+libsystembuttons_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_libsystembuttons_la_OBJECTS = libsystembuttons_la-systembuttons.lo
 libsystembuttons_la_OBJECTS = $(am_libsystembuttons_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -107,6 +119,8 @@ FFLAGS = @FFLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
+HAVE_CYGWIN_FALSE = @HAVE_CYGWIN_FALSE@
+HAVE_CYGWIN_TRUE = @HAVE_CYGWIN_TRUE@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -217,8 +231,8 @@ plugindir = $(libdir)/xfce4/panel-plugins
 plugin_LTLIBRARIES = libsystembuttons.la
 libsystembuttons_la_LDFLAGS = \
 	-avoid-version							\
-	-module
-
+	-module\
+$(am__append_1)
 libsystembuttons_la_SOURCES = \
 	systembuttons.c
 
@@ -228,8 +242,8 @@ libsystembuttons_la_CFLAGS = \
 	@LIBXML_CFLAGS@
 
 libsystembuttons_la_LIBADD = \
-	@LIBS@
-
+	@LIBS@\
+$(am__append_2)
 all: all-am
 
 .SUFFIXES:

@@ -40,6 +40,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_triplet = @host@
 bin_PROGRAMS = xfce4-panel$(EXEEXT)
+@HAVE_CYGWIN_TRUE@am__append_1 = -no-undefined
 subdir = panel
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/xfce4-panel-1.0.pc.in $(xfce4_panelinclude_HEADERS)
@@ -52,7 +53,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES = xfce4-panel-1.0.pc
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(xfce4_panelincludedir)"
+am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(develdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(xfce4_panelincludedir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_xfce4_panel_OBJECTS = xfce4_panel-add-control-dialog.$(OBJEXT) \
@@ -92,8 +93,9 @@ LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(xfce4_panel_SOURCES)
 DIST_SOURCES = $(xfce4_panel_SOURCES)
+develDATA_INSTALL = $(INSTALL_DATA)
 pkgconfigDATA_INSTALL = $(INSTALL_DATA)
-DATA = $(pkgconfig_DATA)
+DATA = $(devel_DATA) $(pkgconfig_DATA)
 xfce4_panelincludeHEADERS_INSTALL = $(INSTALL_HEADER)
 HEADERS = $(xfce4_panelinclude_HEADERS)
 ETAGS = etags
@@ -134,6 +136,8 @@ FFLAGS = @FFLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
+HAVE_CYGWIN_FALSE = @HAVE_CYGWIN_FALSE@
+HAVE_CYGWIN_TRUE = @HAVE_CYGWIN_TRUE@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -240,6 +244,8 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
+@HAVE_CYGWIN_TRUE@develdir = $(datadir)/xfce4/devel
+@HAVE_CYGWIN_TRUE@devel_DATA = panel.def
 xfce4_panel_SOURCES = \
 	add-control-dialog.c					\
 	add-control-dialog.h					\
@@ -298,8 +304,8 @@ xfce4_panel_CFLAGS = \
 	-DLOCALEDIR=\"$(localedir)\"
 
 xfce4_panel_LDFLAGS = \
-	-export-dynamic
-
+	-export-dynamic\
+$(am__append_1)
 xfce4_panel_LDADD = \
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
@@ -309,6 +315,7 @@ xfce4_panel_LDADD = \
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xfce4-panel-1.0.pc
+@HAVE_CYGWIN_TRUE@EXTRA_DIST = $(devel_DATA)
 all: all-am
 
 .SUFFIXES:
@@ -741,6 +748,23 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
+install-develDATA: $(devel_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(develdir)" || $(mkdir_p) "$(DESTDIR)$(develdir)"
+	@list='$(devel_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(develDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(develdir)/$$f'"; \
+	  $(develDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(develdir)/$$f"; \
+	done
+
+uninstall-develDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(devel_DATA)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f '$(DESTDIR)$(develdir)/$$f'"; \
+	  rm -f "$(DESTDIR)$(develdir)/$$f"; \
+	done
 install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(pkgconfigdir)" || $(mkdir_p) "$(DESTDIR)$(pkgconfigdir)"
@@ -853,7 +877,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(PROGRAMS) $(DATA) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(xfce4_panelincludedir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(develdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(xfce4_panelincludedir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \
 	done
 install: install-am
@@ -900,7 +924,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-pkgconfigDATA \
+install-data-am: install-develDATA install-pkgconfigDATA \
 	install-xfce4_panelincludeHEADERS
 
 install-exec-am: install-binPROGRAMS
@@ -929,22 +953,24 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-info-am \
-	uninstall-pkgconfigDATA uninstall-xfce4_panelincludeHEADERS
+uninstall-am: uninstall-binPROGRAMS uninstall-develDATA \
+	uninstall-info-am uninstall-pkgconfigDATA \
+	uninstall-xfce4_panelincludeHEADERS
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
 	clean-generic clean-libtool ctags distclean distclean-compile \
 	distclean-generic distclean-libtool distclean-tags distdir dvi \
 	dvi-am html html-am info info-am install install-am \
-	install-binPROGRAMS install-data install-data-am install-exec \
-	install-exec-am install-info install-info-am install-man \
-	install-pkgconfigDATA install-strip \
-	install-xfce4_panelincludeHEADERS installcheck installcheck-am \
-	installdirs maintainer-clean maintainer-clean-generic \
-	mostlyclean mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
-	uninstall-am uninstall-binPROGRAMS uninstall-info-am \
-	uninstall-pkgconfigDATA uninstall-xfce4_panelincludeHEADERS
+	install-binPROGRAMS install-data install-data-am \
+	install-develDATA install-exec install-exec-am install-info \
+	install-info-am install-man install-pkgconfigDATA \
+	install-strip install-xfce4_panelincludeHEADERS installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags uninstall uninstall-am uninstall-binPROGRAMS \
+	uninstall-develDATA uninstall-info-am uninstall-pkgconfigDATA \
+	uninstall-xfce4_panelincludeHEADERS
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -25,6 +25,7 @@
 
 #include <X11/Xlib.h>
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libnetk.h>
 
@@ -87,6 +88,7 @@ Panel panel;
  **/
 int icon_size[] = { 24, 30, 45, 60 };
 
+G_MODULE_EXPORT
 int border_width = 4;
 
 int top_height[] = { 14, 16, 18, 20 };

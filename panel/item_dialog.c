@@ -37,6 +37,7 @@
 #include <config.h>
 #endif
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
@@ -246,6 +247,7 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
     gtk_drag_finish (context, sd->data != NULL, FALSE, time);
 }
 
+G_MODULE_EXPORT
 CommandOptions *
 create_command_options (GtkSizeGroup * sg)
 {
@@ -368,6 +370,7 @@ destroy_command_options (CommandOptions * opts)
     g_free (opts);
 }
 
+G_MODULE_EXPORT
 void
 command_options_set_command (CommandOptions * opts, const char *command,
 			     gboolean in_term, gboolean use_sn)
@@ -401,6 +404,7 @@ command_options_set_callback (CommandOptions * opts,
     opts->data = data;
 }
 
+G_MODULE_EXPORT
 void
 command_options_get_command (CommandOptions * opts, char **command,
 			     gboolean * in_term, gboolean * use_sn)

@@ -20,6 +20,7 @@
 #ifndef __XFCE_ITEM_DIALOG_H__
 #define __XFCE_ITEM_DIALOG_H__
 
+#include <gmodule.h>
 #include <panel/item.h>
 
 /* CommandOptions
@@ -50,10 +51,12 @@ struct _CommandOptions
     gpointer data;
 };
 
+G_MODULE_IMPORT
 CommandOptions *create_command_options (GtkSizeGroup * sg);
 
 void destroy_command_options (CommandOptions * opts);
 
+G_MODULE_IMPORT
 void command_options_set_command (CommandOptions * opts, const char *command,
 				  gboolean in_term, gboolean use_sn);
 
@@ -62,6 +65,7 @@ void command_options_set_callback (CommandOptions * opts,
 						     gboolean, gpointer),
 				   gpointer data);
 
+G_MODULE_IMPORT
 void command_options_get_command (CommandOptions * opts, char **command,
 				  gboolean * in_term, gboolean * use_sn);
 

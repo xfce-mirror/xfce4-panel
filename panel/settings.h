@@ -20,6 +20,7 @@
 #ifndef __XFCE_XMLCONFIG_H__
 #define __XFCE_XMLCONFIG_H__
 
+#include <gmodule.h>
 #include <libxml/tree.h>
 #include <panel/global.h>
 
@@ -29,7 +30,8 @@ void get_global_prefs (void);
 
 void get_panel_config (void);
 
-extern xmlDocPtr xmlconfig;
+G_MODULE_IMPORT
+xmlDocPtr xmlconfig;
 
 #define DATA(node) xmlNodeListGetString(xmlconfig, node->children, 1)
 

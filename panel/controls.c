@@ -239,6 +239,7 @@ control_class_info_create_control (ControlClassInfo * info, Control * control)
 
 /* plugins */
 
+G_MODULE_EXPORT
 gchar *
 xfce_plugin_check_version (gint version)
 {
@@ -480,6 +481,7 @@ control_class_list_cleanup (void)
     unloading--;
 }
 
+G_MODULE_EXPORT
 void
 control_class_set_unique (ControlClass * cclass, gboolean unique)
 {

@@ -6,6 +6,12 @@ libxfce4settings_la_LDFLAGS =						\
 	-avoid-version							\
 	-module
 
+if HAVE_CYGWIN
+libxfce4settings_la_LDFLAGS +=                                          \
+	-no-undefined                                                   \
+	-export-symbols $(datadir)/xfce4/devel/mcs-manager.def
+endif
+
 libxfce4settings_la_SOURCES =						\
 	xfce_settings.h							\
 	xfce_settings_dialog.c						\

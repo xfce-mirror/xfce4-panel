@@ -20,6 +20,7 @@
 #ifndef __XFCE_GLOBAL_H__
 #define __XFCE_GLOBAL_H__
 
+#include <gmodule.h>
 #include <string.h>
 #include <gtk/gtk.h>
 #include <libxfcegui4/libxfcegui4.h>
@@ -74,7 +75,8 @@ enum
 
 extern int icon_size[PANEL_SIZES];
 
-extern int border_width;
+G_MODULE_IMPORT
+int border_width;
 
 extern int top_height[PANEL_SIZES];
 
@@ -111,7 +113,8 @@ struct _Settings
  * for more flexibility (e.g. multple panels) */
 
 /* defined in settings.c */
-extern gboolean disable_user_config;
+G_MODULE_IMPORT
+gboolean disable_user_config;
 
 /* defined in panel.c */
 extern Settings settings;

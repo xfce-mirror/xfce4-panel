@@ -38,6 +38,10 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_triplet = @host@
+@HAVE_CYGWIN_TRUE@am__append_1 = \
+@HAVE_CYGWIN_TRUE@	-no-undefined                                                   \
+@HAVE_CYGWIN_TRUE@	-export-symbols $(datadir)/xfce4/devel/mcs-manager.def
+
 subdir = settings
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -112,6 +116,8 @@ FFLAGS = @FFLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
+HAVE_CYGWIN_FALSE = @HAVE_CYGWIN_FALSE@
+HAVE_CYGWIN_TRUE = @HAVE_CYGWIN_TRUE@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -222,8 +228,8 @@ plugindir = @XFCE_MCS_MANAGER_PLUGINSDIR@
 plugin_LTLIBRARIES = libxfce4settings.la
 libxfce4settings_la_LDFLAGS = \
 	-avoid-version							\
-	-module
-
+	-module\
+$(am__append_1)
 libxfce4settings_la_SOURCES = \
 	xfce_settings.h							\
 	xfce_settings_dialog.c						\

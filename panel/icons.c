@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/xfce-icontheme.h>
 
@@ -79,6 +80,7 @@ icon_theme_init (void)
 		      G_CALLBACK (theme_changed), NULL);
 }
 
+G_MODULE_EXPORT
 GdkPixbuf *
 themed_pixbuf_from_name_list (char **namelist, int size)
 {
@@ -123,6 +125,7 @@ themed_pixbuf_from_name_list (char **namelist, int size)
     return pb;
 }
 
+G_MODULE_EXPORT
 GdkPixbuf *
 get_pixbuf_by_id (int id)
 {

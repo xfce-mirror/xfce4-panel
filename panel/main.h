@@ -20,6 +20,9 @@
 #ifndef __XFCE_MAIN_H__
 #define __XFCE_MAIN_H__
 
+#include <gmodule.h>
+
+G_MODULE_IMPORT
 void quit (gboolean force);
 void restart (void);
 

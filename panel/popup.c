@@ -27,6 +27,7 @@
 
 #include <gdk/gdkkeysyms.h>
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/xfce_togglebutton.h>
 #include <libxfcegui4/xfce_menubutton.h>
@@ -199,6 +200,7 @@ show_popup (PanelPopup * pp)
     position_popup (pp);
 }
 
+G_MODULE_EXPORT
 void
 hide_current_popup_menu (void)
 {

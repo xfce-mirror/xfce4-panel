@@ -1,5 +1,10 @@
 bin_PROGRAMS = xfce4-panel
 
+if HAVE_CYGWIN
+develdir   = $(datadir)/xfce4/devel
+devel_DATA = panel.def
+endif
+
 xfce4_panel_SOURCES =						\
 	add-control-dialog.c					\
 	add-control-dialog.h					\
@@ -61,6 +66,10 @@ xfce4_panel_CFLAGS = 							\
 xfce4_panel_LDFLAGS =							\
 	-export-dynamic
 
+if HAVE_CYGWIN
+xfce4_panel_LDFLAGS += -no-undefined
+endif
+
 xfce4_panel_LDADD =							\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
@@ -70,3 +79,7 @@ xfce4_panel_LDADD =							\
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xfce4-panel-1.0.pc
+
+if HAVE_CYGWIN
+EXTRA_DIST += $(devel_DATA)
+endif

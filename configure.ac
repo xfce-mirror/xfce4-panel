@@ -17,6 +17,7 @@ dnl Check for UNIX variants
 AC_AIX
 AC_ISC_POSIX
 AC_MINIX
+AM_CONDITIONAL([HAVE_CYGWIN], [test "`uname | grep \"CYGWIN\"`" != ""])
 
 dnl Check for basic programs
 AC_PROG_CC

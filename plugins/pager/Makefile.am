@@ -16,3 +16,15 @@ libpager_la_CFLAGS =							\
 
 libpager_la_LIBADD =							\
 	@LIBS@
+
+if HAVE_CYGWIN
+libpager_la_LDFLAGS +=                                                  \
+	-no-undefined                                                   \
+	-export-symbols $(top_srcdir)/panel/panel.def                   \
+	@LIBXML_LDFLAGS@                                                \
+	@LIBX11_LDFLAGS@                                                
+libpager_la_LIBADD +=                                                   \
+	@XFCE_MCS_MANAGER_LIBS@                                         \
+	@LIBXML_LIBS@                                                   \
+	@LIBX11_LIBS@
+endif

@@ -210,6 +210,7 @@ write_backup_file (const char * path)
 */
 static GtkTooltips *tooltips = NULL;
 
+G_MODULE_EXPORT
 void
 add_tooltip (GtkWidget * widget, const char *tip)
 {
@@ -492,78 +493,6 @@ fs_cancel_cb (GtkDialog * fs)
     gtk_dialog_response (fs, GTK_RESPONSE_CANCEL);
 }
 
-#if 0
-/* escaping spaces */
-static char *
-path_escape_spaces (const char *path)
-{
-    char *newpath;
-    const char *s;
-    int n = 0;
-
-    for (s = path; (s = strchr (s, ' ')) != NULL; s++)
-    {
-	n++;
-    }
-
-    newpath = g_new (char, strlen (path) + n + 1);
-
-    for (n = 0, s = path; s && *s; n++, s++)
-    {
-	if (*s == ' ')
-	{
-	    newpath[n] = '\\';
-	    newpath[++n] = ' ';
-	}
-	else
-	{
-	    newpath[n] = *s;
-	}
-    }
-
-    newpath[n] = '\0';
-
-    return newpath;
-}
-
-static char *
-path_unescape_spaces (const char *path)
-{
-    char *newpath;
-    const char *s;
-    int n = 0;
-
-    for (s = path; s && *s; s++)
-    {
-	if (*s == '\\' && *(++s) == ' ')
-	{
-	    s++;
-	    n++;
-	}
-	else if (*s == ' ')
-	{
-	    break;
-	}
-    }
-
-    newpath = g_new (char, s - path - n + 1);
-
-    for (n = 0, s = path; s && *s; n++, s++)
-    {
-	if (*s == '\\' && *(s + 1) == ' ')
-	{
-	    s++;
-	}
-
-	newpath[n] = *s;
-    }
-
-    newpath[n] = '\0';
-
-    return newpath;
-}
-#endif
-
 /* Any of the arguments may be NULL */
 static char *
 real_select_file (const char *title, const char *path,
@@ -609,6 +538,7 @@ real_select_file (const char *title, const char *path,
     return name;
 }
 
+G_MODULE_EXPORT
 char *
 select_file_name (const char *title, const char *path, GtkWidget * parent)
 {
@@ -693,6 +623,7 @@ schedule_exec (const char * cmd, gboolean in_terminal, gboolean use_sn,
     (void) g_idle_add ((GSourceFunc) delayed_exec, (gpointer) command);
 }
 
+G_MODULE_EXPORT
 void
 exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
@@ -701,6 +632,7 @@ exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 }
 
 /* without error reporting dialog */
+G_MODULE_EXPORT
 void
 exec_cmd_silent (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {

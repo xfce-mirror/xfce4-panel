@@ -34,6 +34,7 @@
 #include <X11/Xatom.h>
 #include <gdk/gdkx.h>
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4mcs/mcs-client.h>
 #include <libxfcegui4/libnetk.h>
@@ -184,6 +185,7 @@ mcs_stop_watch (void)
 }
 
 /* this function is exported to allow access to other channels */
+G_MODULE_EXPORT
 void
 mcs_dialog (const char *channel)
 {

@@ -20,6 +20,7 @@
 #ifndef __XFCE_POPUP_H__
 #define __XFCE_POPUP_H__
 
+#include <gmodule.h>
 #include <libxml/tree.h>
 #include <panel/global.h>
 
@@ -61,6 +62,7 @@ void panel_popup_set_layer (PanelPopup * pp, int layer);
 void panel_popup_set_theme (PanelPopup * pp, const char *theme);
 void panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type);
 
+G_MODULE_IMPORT
 void hide_current_popup_menu (void);
 
 void panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node);

@@ -52,6 +52,7 @@ void icons_init (void);
 
 void icon_theme_init (void);
 
+G_MODULE_IMPORT
 GdkPixbuf *get_pixbuf_by_id (int id);
 
 GdkPixbuf *get_panel_pixbuf (void);
@@ -63,6 +64,7 @@ GdkPixbuf *get_scaled_pixbuf (GdkPixbuf * pb, int size);
 /* for plugins */
 GdkPixbuf *get_themed_pixbuf (const char *name);
 
+G_MODULE_IMPORT
 GdkPixbuf *themed_pixbuf_from_name_list (char **namelist, int size);
 
 #endif /* __XFCE_ICONS_H__ */

@@ -30,6 +30,7 @@
 #include <stdlib.h>
 #endif
 
+#include <gmodule.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
@@ -44,8 +45,10 @@
 #define ROOT	"Xfce"
 #define NS	"http://www.xfce.org/xfce4/panel/1.0"
 
+G_MODULE_EXPORT
 gboolean disable_user_config = FALSE;
 
+G_MODULE_EXPORT
 xmlDocPtr xmlconfig = NULL;
 
 /*  Configuration

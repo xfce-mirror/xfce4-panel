@@ -37,6 +37,17 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_triplet = @host@
+@HAVE_CYGWIN_TRUE@am__append_1 = \
+@HAVE_CYGWIN_TRUE@	-no-undefined                                                   \
+@HAVE_CYGWIN_TRUE@	-export-symbols $(top_srcdir)/panel/panel.def                   \
+@HAVE_CYGWIN_TRUE@	@LIBXML_LDFLAGS@                                                \
+@HAVE_CYGWIN_TRUE@	@LIBX11_LDFLAGS@                                                
+
+@HAVE_CYGWIN_TRUE@am__append_2 = \
+@HAVE_CYGWIN_TRUE@	@XFCE_MCS_MANAGER_LIBS@                                         \
+@HAVE_CYGWIN_TRUE@	@LIBXML_LIBS@                                                   \
+@HAVE_CYGWIN_TRUE@	@LIBX11_LIBS@
+
 subdir = plugins/sample-plugin
 DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -49,7 +60,8 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libsample_la_DEPENDENCIES =
+am__DEPENDENCIES_1 =
+libsample_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_libsample_la_OBJECTS = libsample_la-sample.lo
 libsample_la_OBJECTS = $(am_libsample_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -104,6 +116,8 @@ FFLAGS = @FFLAGS@
 GETTEXT_PACKAGE = @GETTEXT_PACKAGE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
+HAVE_CYGWIN_FALSE = @HAVE_CYGWIN_FALSE@
+HAVE_CYGWIN_TRUE = @HAVE_CYGWIN_TRUE@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_SCRIPT = @INSTALL_SCRIPT@
@@ -213,8 +227,8 @@ target_alias = @target_alias@
 noinst_LTLIBRARIES = libsample.la
 libsample_la_LDFLAGS = \
 	-avoid-version						\
-	-module
-
+	-module\
+$(am__append_1)
 libsample_la_SOURCES = \
 	sample.c
 
@@ -224,8 +238,8 @@ libsample_la_CFLAGS = \
 	@LIBXML_CFLAGS@
 
 libsample_la_LIBADD = \
-	@LIBS@
-
+	@LIBS@\
+$(am__append_2)
 all: all-am
 
 .SUFFIXES:

@@ -45,6 +45,7 @@
 #include <unistd.h>
 #endif
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/session-client.h>
 #include <libxfcegui4/netk-util.h>
@@ -112,6 +113,7 @@ die (gpointer client_data)
 /*  Exported interface
  *  ------------------
 */
+G_MODULE_EXPORT
 void
 quit (gboolean force)
 {
