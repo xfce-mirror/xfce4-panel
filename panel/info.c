@@ -72,7 +72,7 @@ static GtkWidget *create_bold_label(const char *text)
 
 static void info_help_cb(GtkWidget * w, gpointer data)
 {
-    exec_cmd("xfhelp", FALSE);
+    exec_cmd("xfhelp", FALSE, FALSE);
 }
 
 GtkWidget *create_scrolled_text_view(const char *file)

@@ -87,7 +87,7 @@ static void add_new(void)
 
 static void lock_screen(void)
 {
-    exec_cmd("xflock", FALSE);
+    exec_cmd("xflock", FALSE, FALSE);
 }
 
 static void exit_panel(void)
@@ -102,7 +102,7 @@ static void do_info(void)
 
 static void do_help(void)
 {
-    exec_cmd("xfhelp", FALSE);
+    exec_cmd("xfhelp", FALSE, FALSE);
 }
 
 static GtkItemFactoryEntry panel_items[] = {

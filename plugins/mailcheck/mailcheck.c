@@ -40,6 +40,7 @@ typedef struct
     char *mbox;
     char *command;
     gboolean term;
+    gboolean use_sn;
     int interval;
     
     int timeout_id;
@@ -167,6 +168,19 @@ void mailcheck_read_config(Control *control, xmlNodePtr node)
 
 		g_free(value);
 	    }
+	    value = xmlGetProp(node, "term");
+
+	    if(value)
+	    {
+		int n = atoi(value);
+
+		if(n == 1)
+		    mc->use_sn = TRUE;
+		else
+		    mc->use_sn = FALSE;
+
+		g_free(value);
+	    }
 	}
     }
 
@@ -191,6 +205,9 @@ void mailcheck_write_config(Control *control, xmlNodePtr parent)
     
     snprintf(value, 2, "%d", mc->term);
     xmlSetProp(node, "term", value);
+    
+    snprintf(value, 2, "%d", mc->use_sn);
+    xmlSetProp(node, "sn", value);
 }
 
 static void mailcheck_attach_callback(Control *control, const char *signal,
@@ -203,7 +220,7 @@ static void mailcheck_attach_callback(Control *control, const char *signal,
 
 static void run_mail_command(t_mailcheck *mc)
 {
-    exec_cmd(mc->command, mc->term);
+    exec_cmd(mc->command, mc->term, mc->use_sn);
 }
 
 static t_mailcheck *mailcheck_new(void)
@@ -233,6 +250,7 @@ static t_mailcheck *mailcheck_new(void)
 
     mailcheck->command = g_strdup("pine");
     mailcheck->term = TRUE;
+    mailcheck->use_sn = FALSE;
 
     mailcheck->button = xfce_iconbutton_new_from_pixbuf(mailcheck->nomail_pb);
     gtk_widget_show(mailcheck->button);
@@ -347,6 +365,7 @@ typedef struct
     char *mbox;
     char *command;
     gboolean term;
+    gboolean use_sn;
     int interval;
 
     /* control dialog */
@@ -357,6 +376,7 @@ typedef struct
     GtkWidget *mbox_entry;
     GtkWidget *cmd_entry;
     GtkWidget *term_cb;
+    GtkWidget *sn_cb;
     GtkWidget *interval_spin;
 }
 MailDialog;
@@ -369,6 +389,7 @@ static void create_backup(MailDialog *md)
     md->mbox = g_strdup(mc->mbox);
     md->command = g_strdup(mc->command);
     md->term = mc->term;
+    md->use_sn = mc->use_sn;
     md->interval = mc->interval;
 }
 
@@ -397,6 +418,9 @@ static void mailcheck_apply_options(MailDialog *md)
     mc->term =
         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(md->term_cb));
 
+    mc->use_sn =
+        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(md->sn_cb));
+
     tmp = gtk_entry_get_text(GTK_ENTRY(md->mbox_entry));
 
     if(tmp && *tmp)
@@ -421,6 +445,8 @@ static void mailcheck_revert_options(MailDialog *md)
     gtk_entry_set_text(GTK_ENTRY(md->cmd_entry), md->command);
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->term_cb), md->term);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->sn_cb), md->use_sn);
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(md->interval_spin), 
 	    		      md->interval);
@@ -539,9 +565,16 @@ static void term_toggled(GtkToggleButton *tb, MailDialog *md)
     make_sensitive(md->revert);
 }
 
+static void sn_toggled(GtkToggleButton *tb, MailDialog *md)
+{
+    md->mc->use_sn = gtk_toggle_button_get_active(tb);
+
+    make_sensitive(md->revert);
+}
+
 static void add_command_box(GtkWidget *vbox, GtkSizeGroup *sg, MailDialog *md)
 {
-    GtkWidget *hbox, *label, *button, *align;
+    GtkWidget *hbox, *hbox2, *vbox2, *label, *button, *align;
 
     hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
@@ -579,22 +612,41 @@ static void add_command_box(GtkWidget *vbox, GtkSizeGroup *sg, MailDialog *md)
                      G_CALLBACK(command_entry_lost_focus), md);
 
     /* run in terminal ? */
-    hbox = gtk_hbox_new(FALSE, BORDER);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
+    hbox2 = gtk_hbox_new(FALSE, BORDER);
+    gtk_widget_show(hbox2);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox2, FALSE, FALSE, 0);
 
     align = gtk_alignment_new(0,0,0,0);
     gtk_widget_show(align);
     gtk_size_group_add_widget(sg, align);
-    gtk_box_pack_start(GTK_BOX(hbox), align, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(hbox2), align, FALSE, FALSE, 0);
+
+    vbox2 = gtk_vbox_new(FALSE, BORDER);
+    gtk_widget_show(vbox2);
+    gtk_box_pack_start(GTK_BOX(hbox2), vbox2, FALSE, FALSE, 0);
 
     md->term_cb = gtk_check_button_new_with_mnemonic(_("Run in _terminal"));
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->term_cb), md->term);
     gtk_widget_show(md->term_cb);
-    gtk_box_pack_start(GTK_BOX(hbox), md->term_cb, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox2), md->term_cb, FALSE, FALSE, 0);
 
     g_signal_connect(md->term_cb, "toggled", 
 	    	     G_CALLBACK(term_toggled), md);
+
+    md->sn_cb =
+        gtk_check_button_new_with_mnemonic(_("Use startup _notification"));
+    gtk_widget_show(md->sn_cb);
+    gtk_box_pack_start(GTK_BOX(vbox2), md->sn_cb, FALSE, FALSE, 0);
+#ifdef HAVE_STARTUP_NOTIFICATION
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->sn_cb), md->use_sn);
+    gtk_widget_set_sensitive(md->sn_cb, TRUE);
+#else
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(md->sn_cb), FALSE);
+    gtk_widget_set_sensitive(md->sn_cb, FALSE);
+#endif
+    g_signal_connect(md->sn_cb, "toggled", 
+	    	     G_CALLBACK(sn_toggled), md);
+		     
 }
 
 /* interval */

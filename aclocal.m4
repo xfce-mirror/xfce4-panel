@@ -1034,6 +1034,8 @@ glib_DEFUN([GLIB_WITH_NLS],
 	    [CATOBJEXT=.mo
              DATADIRNAME=lib])
 	  INSTOBJEXT=.mo
+	else
+	  gt_cv_have_gettext=no
 	fi
       fi
     ])

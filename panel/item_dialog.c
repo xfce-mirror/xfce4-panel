@@ -58,6 +58,7 @@ static int id_callback;
 static GtkWidget *command_entry;
 static GtkWidget *command_browse_button;
 static GtkWidget *term_checkbutton;
+static GtkWidget *sn_checkbutton;
 static GtkWidget *icon_id_menu;
 static GtkWidget *icon_entry;
 static GtkWidget *icon_browse_button;
@@ -99,6 +100,7 @@ struct ItemBackup
 {
     char *command;
     gboolean in_terminal;
+    gboolean use_sn;
 
     char *caption;
     char *tooltip;
@@ -115,6 +117,7 @@ void init_backup(void)
 {
     backup.command = NULL;
     backup.in_terminal = FALSE;
+    backup.use_sn = FALSE;
 
     backup.caption = NULL;
     backup.tooltip = NULL;
@@ -359,7 +362,9 @@ static void command_browse_cb(GtkWidget * b, GtkEntry * entry)
 static GtkWidget *create_command_option(GtkSizeGroup * sg)
 {
     GtkWidget *vbox;
+    GtkWidget *vbox2;
     GtkWidget *hbox;
+    GtkWidget *hbox2;
     GtkWidget *label;
 
     vbox = gtk_vbox_new(FALSE, 8);
@@ -388,20 +393,33 @@ static GtkWidget *create_command_option(GtkSizeGroup * sg)
                      G_CALLBACK(command_browse_cb), command_entry);
 
     /* terminal */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+    hbox2 = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox2);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox2, FALSE, TRUE, 0);
 
     label = gtk_label_new("");
     gtk_size_group_add_widget(sg, label);
     gtk_widget_show(label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(hbox2), label, FALSE, FALSE, 0);
+
+    vbox2 = gtk_vbox_new(FALSE, 0);
+    gtk_widget_show(vbox2);
+    gtk_box_pack_start(GTK_BOX(hbox2), vbox2, FALSE, TRUE, 0);
 
     term_checkbutton =
         gtk_check_button_new_with_mnemonic(_("Run in _terminal"));
     gtk_widget_show(term_checkbutton);
-    gtk_box_pack_start(GTK_BOX(hbox), term_checkbutton, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox2), term_checkbutton, FALSE, FALSE, 0);
 
+    sn_checkbutton =
+        gtk_check_button_new_with_mnemonic(_("Use startup _notification"));
+    gtk_widget_show(sn_checkbutton);
+    gtk_box_pack_start(GTK_BOX(vbox2), sn_checkbutton, FALSE, FALSE, 0);
+#ifdef HAVE_STARTUP_NOTIFICATION
+    gtk_widget_set_sensitive(sn_checkbutton, TRUE);
+#else
+    gtk_widget_set_sensitive(sn_checkbutton, FALSE);
+#endif
     return vbox;
 }
 
@@ -634,6 +652,9 @@ static void item_apply_options(void)
     config_item->in_terminal =
         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(term_checkbutton));
 
+    config_item->use_sn =
+        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(sn_checkbutton));
+
     /* tooltip */
     g_free(config_item->tooltip);
     config_item->tooltip = NULL;
@@ -680,6 +701,7 @@ void item_revert_options(void)
     config_item->command = g_strdup(backup.command);
 
     config_item->in_terminal = backup.in_terminal;
+    config_item->use_sn = backup.use_sn;
 
     /* tooltip */
     g_free(config_item->tooltip);
@@ -720,6 +742,9 @@ void item_revert_options(void)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
                                  config_item->in_terminal);
 
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sn_checkbutton),
+                                 config_item->use_sn);
+
     if(config_item->tooltip)
         gtk_entry_set_text(GTK_ENTRY(tip_entry), config_item->tooltip);
     else
@@ -755,6 +780,7 @@ static void item_add_options(GtkContainer *container)
 	backup.command = g_strdup(config_item->command);
     
     backup.in_terminal = config_item->in_terminal;
+    backup.use_sn = config_item->use_sn;
     
     if (config_item->tooltip)
 	backup.tooltip = g_strdup(config_item->tooltip);
@@ -790,6 +816,9 @@ static void item_add_options(GtkContainer *container)
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
                                  backup.in_terminal);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sn_checkbutton),
+                                 backup.use_sn);
 
     change_icon(backup.icon_id, backup.icon_path);
 

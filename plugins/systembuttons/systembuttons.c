@@ -34,7 +34,7 @@
 /* callbacks */
 static void mini_lock_cb(void)
 {
-    exec_cmd("xflock", FALSE);
+    exec_cmd("xflock", FALSE, FALSE);
 }
 
 extern void info_panel_dialog(void);

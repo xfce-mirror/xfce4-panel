@@ -29,6 +29,7 @@ struct _Item
 {
     char *command;
     gboolean in_terminal;
+    gboolean use_sn;
     char *caption;
     char *tooltip;
 

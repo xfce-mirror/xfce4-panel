@@ -56,7 +56,7 @@ static void item_drop_cb(GtkWidget * widget, GdkDragContext * context, gint x, g
             strcat(execute, "\' ");
         }
 
-        exec_cmd(execute, item->in_terminal);
+        exec_cmd(execute, item->in_terminal, item->use_sn);
         g_free(execute);
 
 	hide_current_popup_menu();
@@ -71,7 +71,7 @@ static void item_click_cb(GtkButton * b, Item * item)
 {
     hide_current_popup_menu();
     
-    exec_cmd(item->command, item->in_terminal);
+    exec_cmd(item->command, item->in_terminal, item->use_sn);
 }
 
 /*  Menu item callbacks
@@ -171,10 +171,38 @@ void item_read_config(Item * item, xmlNodePtr node)
             value = xmlGetProp(child, "term");
 
             if(value)
+	    {
                 n = atoi(value);
+		g_free(value);
+            }
+	    
+            if(n == 1)
+	    {
+                item->in_terminal = TRUE;
+            }
+	    else
+	    {
+                item->in_terminal = FALSE;
+            }
+
+            n = -1;
+	    value = xmlGetProp(child, "sn");
+
+            if(value)
+	    {
+                n = atoi(value);
+		g_free(value);
+            }
 
             if(n == 1)
-                item->in_terminal = TRUE;
+	    {
+                item->use_sn = TRUE;
+            }
+	    else
+	    {
+	        item->use_sn = FALSE;
+            }
+
         }
         else if(xmlStrEqual(child->name, (const xmlChar *)"Tooltip"))
         {
@@ -220,6 +248,9 @@ void item_write_config(Item * item, xmlNodePtr node)
 
     snprintf(value, 2, "%d", item->in_terminal);
     xmlSetProp(child, "term", value);
+
+    snprintf(value, 2, "%d", item->use_sn);
+    xmlSetProp(child, "sn", value);
 
     if(item->tooltip)
         xmlNewTextChild(node, NULL, "Tooltip", item->tooltip);

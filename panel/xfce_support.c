@@ -1,6 +1,8 @@
 /*  xfce_support.c
  *  
  *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
+ *  startup notification added by Olivier fourdan based on gnome-desktop
+ *  developed by Elliot Lee <sopwith@redhat.com> and Sid Vicious
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -32,10 +34,19 @@
 
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
+#include <glib.h>
 #include <gdk/gdk.h>
 #include <libxfcegui4/libxfcegui4.h>
 
+#ifdef HAVE_STARTUP_NOTIFICATION
+#define SN_API_NOT_YET_FROZEN
+#include <libsn/sn.h>
+#include <gdk/gdkx.h>
+#endif
+
 #include "xfce.h"
+
+extern char **environ;
 
 /*  Files and directories
  *  ---------------------
@@ -574,34 +585,248 @@ char *select_file_with_preview(const char *title, const char *path, GtkWidget * 
 /*  Executing commands
  *  ------------------
 */
-static void real_exec_cmd(const char *cmd, gboolean in_terminal,
-                          gboolean silent)
+
+#ifdef HAVE_STARTUP_NOTIFICATION
+#define STARTUP_TIMEOUT_LENGTH (15 /* seconds */ * 1000)
+
+typedef struct
 {
-    char execute[MAXSTRLEN + 1];
+    GdkScreen *screen;
+    GSList *contexts;
+    guint timeout_id;
+} 
+StartupTimeoutData;
 
-    if(in_terminal)
-        snprintf(execute, MAXSTRLEN, "xterm -e %s", cmd);
-    else
-        snprintf(execute, MAXSTRLEN, "%s", cmd);
-
-    if (silent)
-    {
-	GError *error = NULL;
-
-	if(!g_spawn_command_line_async(execute, &error))
-	    g_warning("xfce: %s\n", error->message);
-    }
-    else
-	exec_command(execute);
+static void sn_error_trap_push (SnDisplay *display, Display   *xdisplay)
+{
+    gdk_error_trap_push ();
 }
 
-void exec_cmd(const char *cmd, gboolean in_terminal)
+static void sn_error_trap_pop (SnDisplay *display, Display   *xdisplay)
 {
-    real_exec_cmd(cmd, in_terminal, FALSE);
+    gdk_error_trap_pop ();
+}
+
+extern char **environ;
+
+static char ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_context, char **envp)
+{
+    char **retval = NULL;
+    int    i;
+    int    desktop_startup_id_len;
+
+    if (envp == NULL)
+    {
+	envp = environ;
+    }
+    for (i = 0; envp[i]; i++);
+
+    retval = g_new (char *, i + 2);
+
+    desktop_startup_id_len = strlen ("DESKTOP_STARTUP_ID");
+
+    for (i = 0; envp[i]; i++) 
+    {
+        if (strncmp (envp[i], "DESKTOP_STARTUP_ID", desktop_startup_id_len) != 0)
+        {
+            retval[i] = g_strdup (envp[i]);
+	}
+    }
+
+    retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
+    ++i;
+    retval[i] = NULL;
+
+    return retval;
+}
+
+
+static void free_startup_timeout (void *data)
+{
+    StartupTimeoutData *std = data;
+
+    g_slist_foreach (std->contexts, (GFunc) sn_launcher_context_unref, NULL);
+    g_slist_free (std->contexts);
+
+    if (std->timeout_id != 0) 
+    {
+        g_source_remove (std->timeout_id);
+        std->timeout_id = 0;
+    }
+
+    g_free (std);
+}
+
+static gboolean startup_timeout (void *data)
+{
+    StartupTimeoutData *std = data;
+    GSList *tmp;
+    GTimeVal now;
+    int min_timeout;
+
+    min_timeout = STARTUP_TIMEOUT_LENGTH;
+
+    g_get_current_time (&now);
+
+    tmp = std->contexts;
+    while (tmp != NULL) 
+    {
+	SnLauncherContext *sn_context = tmp->data;
+	GSList *next = tmp->next;
+	long tv_sec, tv_usec;
+	double elapsed;
+
+	sn_launcher_context_get_last_active_time (sn_context, &tv_sec, &tv_usec);
+
+	elapsed = ((((double)now.tv_sec - tv_sec) * G_USEC_PER_SEC + (now.tv_usec - tv_usec))) / 1000.0;
+
+	if (elapsed >= STARTUP_TIMEOUT_LENGTH) 
+        {
+	    std->contexts = g_slist_remove (std->contexts, sn_context);
+	    sn_launcher_context_complete (sn_context);
+	    sn_launcher_context_unref (sn_context);
+	} 
+	else 
+	{
+	    min_timeout = MIN (min_timeout, (STARTUP_TIMEOUT_LENGTH - elapsed));
+	}
+
+	tmp = next;
+    }
+
+    if (std->contexts == NULL) 
+    {
+	std->timeout_id = 0;
+    } 
+    else 
+    {
+	std->timeout_id = g_timeout_add (min_timeout, startup_timeout, std);
+    }
+
+    return FALSE;
+}
+
+static void add_startup_timeout (GdkScreen *screen, SnLauncherContext *sn_context)
+{
+    StartupTimeoutData *data;
+
+    data = g_object_get_data (G_OBJECT (screen), "xfce-startup-data");
+    if (data == NULL) 
+    {
+	data = g_new (StartupTimeoutData, 1);
+	data->screen = screen;
+	data->contexts = NULL;
+	data->timeout_id = 0;
+
+	g_object_set_data_full (G_OBJECT (screen), "xfce-startup-data", data, free_startup_timeout);		
+    }
+
+    sn_launcher_context_ref (sn_context);
+    data->contexts = g_slist_prepend (data->contexts, sn_context);
+
+    if (data->timeout_id == 0) 
+    {
+        data->timeout_id = g_timeout_add (STARTUP_TIMEOUT_LENGTH, startup_timeout, data);		
+    }
+}
+#endif /* HAVE_STARTUP_NOTIFICATION */
+
+static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn, gboolean silent)
+{
+    gchar *execute = NULL;
+    GError *error = NULL;
+    gboolean success = TRUE;
+    gchar **envp = environ;
+    gchar **argv = NULL;
+    gboolean retval;
+#ifdef HAVE_STARTUP_NOTIFICATION
+    SnLauncherContext *sn_context = NULL;
+    SnDisplay *sn_display = NULL;
+#endif
+
+    if(in_terminal)
+    {
+        execute = g_strdup_printf("xterm -e %s", cmd);
+    }
+    else
+    {
+        execute = g_strdup_printf("%s", cmd);
+    }
+    
+    if (!g_shell_parse_argv (execute, NULL, &argv, &error))
+    {
+        g_free(execute);
+	if (error)
+	{
+	    g_warning("xfce: %s\n", error->message);
+	    g_error_free(error);
+	}
+        return;
+    }
+    g_free(execute);
+
+#ifdef HAVE_STARTUP_NOTIFICATION
+    if (use_sn)
+    {
+	sn_display = sn_display_new (gdk_display, sn_error_trap_push, sn_error_trap_pop);
+	sn_context = sn_launcher_context_new (sn_display, DefaultScreen (gdk_display));
+    }
+    if (sn_context != NULL && !sn_launcher_context_get_initiated (sn_context)) 
+    {
+	sn_launcher_context_set_binary_name (sn_context, execute);
+	sn_launcher_context_initiate (sn_context, g_get_prgname () ? g_get_prgname () : "unknown", argv[0], CurrentTime);
+	envp = make_spawn_environment_for_sn_context (sn_context, envp);
+    }
+#endif
+    		     
+    if (silent)
+    {
+        retval = g_spawn_async(NULL, argv, envp, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
+	if(!retval)
+	{
+	    if (error)
+	    {
+	        g_warning("xfce: %s\n", error->message);
+	        g_error_free(error);
+	    }
+	    success = FALSE;
+	}
+    }
+    else
+    {
+	success = exec_command_full_with_envp(argv, envp);
+    }
+
+#ifdef HAVE_STARTUP_NOTIFICATION
+    if (use_sn)
+    {
+	if (sn_context != NULL) 
+	{
+            if (!success)
+	    {
+		sn_launcher_context_complete (sn_context); /* end sequence */
+	    }
+	    else
+	    {
+		add_startup_timeout (gdk_display_get_default_screen (gdk_display_get_default ()), sn_context);
+		sn_launcher_context_unref (sn_context);
+	    }
+	}
+	sn_display_unref (sn_display);
+	g_strfreev (envp);
+    }
+#endif /* HAVE_STARTUP_NOTIFICATION */
+    g_strfreev (argv);
+
+}
+
+void exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn)
+{
+    real_exec_cmd(cmd, in_terminal, use_sn, FALSE);
 }
 
 /* without error reporting dialog */
-void exec_cmd_silent(const char *cmd, gboolean in_terminal)
+void exec_cmd_silent(const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
-    real_exec_cmd(cmd, in_terminal, TRUE);
+    real_exec_cmd(cmd, in_terminal, use_sn, TRUE);
 }
