@@ -91,14 +91,12 @@ ClockDialog;
 
 /* start xfcalendar or send a client message
  * NOTE: keep message format in sync with xfcalendar */
-static gboolean retry_popup_xfcalendar (GtkWidget * widget);
 
 static gboolean
-popup_xfcalendar (GtkWidget * widget, guint32 time)
+popup_xfcalendar (GtkWidget * widget)
 {
     GdkAtom atom;
     Window xwindow;
-    static guint32 start_time = 0;
 
     /* send message to xfcalendar if it is running */
     atom = gdk_atom_intern ("_XFCE_CALENDAR_RUNNING", FALSE);
@@ -143,20 +141,12 @@ popup_xfcalendar (GtkWidget * widget, guint32 time)
 
 	return TRUE;
     }
-    else if (time > start_time + 2000 || start_time == 0)
+    else 
     {
-	start_time = time;
 	exec_cmd_silent ("xfcalendar", FALSE, FALSE);
-	g_timeout_add (1000, (GSourceFunc) retry_popup_xfcalendar, widget);
+    exec_cmd_silent ("xfcalendar", FALSE, FALSE); /* actually only RAISE */
     }
 
-    return FALSE;
-}
-
-static gboolean
-retry_popup_xfcalendar (GtkWidget * widget)
-{
-    popup_xfcalendar (widget, gtk_get_current_event_time ());
     return FALSE;
 }
 
@@ -166,7 +156,7 @@ on_button_press_event_cb (GtkWidget * widget,
 {
     if (event->button == 1)
     {
-	return popup_xfcalendar (control->base, event->time);
+	return popup_xfcalendar (control->base);
     }
 
     return FALSE;
