@@ -1,9 +1,10 @@
 bin_PROGRAMS = xfce4-iconbox
 
 xfce4_iconbox_SOURCES =							\
-	xfce-iconlist.c							\
-	xfce-iconlist.h							\
-	iconbox.c
+	iconbox.c							\
+	iconbox.h							\
+	iconbox-settings.c						\
+	iconbox-settings.h
 
 xfce4_iconbox_CFLAGS =							\
 	-I$(srcdir)							\

@@ -339,6 +339,7 @@ xfce_panel_window_init (XfcePanelWindow * panel_window)
     priv->bottom_padding    = 0;
     priv->left_padding      = 0;
     priv->right_padding     = 0;
+    priv->moveable          = TRUE;
 
     gtk_widget_set_events (GTK_WIDGET (panel_window),
                            gtk_widget_get_events (GTK_WIDGET (panel_window))

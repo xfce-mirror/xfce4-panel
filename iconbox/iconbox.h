@@ -2,7 +2,7 @@
 
 /*  $Id$
  *
- *  Copyright © 2004-2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,49 +19,19 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <stdio.h>
-#include <string.h>
+#include <gtk/gtkenums.h>
 
-#include <gtk/gtk.h>
+typedef struct _Iconbox Iconbox;
 
-#include "xfce-iconlist.h"
+void iconbox_set_direction (Iconbox *ib, GtkDirectionType direction);
 
-GType
-xfce_iconlist_get_type (void)
-{
-    return G_TYPE_NONE;
-}
+void iconbox_set_side (Iconbox *ib, GtkSideType side);
 
-GtkOrientation
-xfce_iconlist_get_orientation (XfceIconlist * list)
-{
-    return GTK_ORIENTATION_HORIZONTAL;
-}
+void iconbox_set_icon_size (Iconbox *ib, int size);
 
-void
-xfce_iconlist_set_orientation (XfceIconlist * list,
-                               GtkOrientation orientation)
-{
-}
+void iconbox_set_show_only_hidden (Iconbox *ib, gboolean only_hidden);
 
-int
-xfce_iconlist_get_rows (XfceIconlist * list)
-{
-    return 1;
-}
+void iconbox_set_show_all_workspaces (Iconbox *ib, gboolean all_workspaces);
 
-void
-xfce_iconlist_set_rows (XfceIconlist * list, int rows)
-{
-}
+void iconbox_set_hide_when_empty (Iconbox *ib, gboolean hide);
 
-int
-xfce_iconlist_get_icon_size (XfceIconlist * list)
-{
-    return 32;
-}
-
-void
-xfce_iconlist_set_icon_size (XfceIconlist * list, int size)
-{
-}

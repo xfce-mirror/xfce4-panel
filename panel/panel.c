@@ -470,6 +470,9 @@ panel_resize_func (XfcePanelWindow * panel_window, Panel *p,
     *x -= (new->width - old->width) / 2;
     *y -= (new->height - old->height) / 2;
 
+    p->priv->req.width = new->width;
+    p->priv->req.height = new->height;
+    
     panel_move_func (panel_window, p, x, y);
 }
 
