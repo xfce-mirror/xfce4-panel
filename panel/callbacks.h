@@ -28,7 +28,7 @@ void close_cb(void);
 
 /* side panel */
 gboolean panel_control_press_cb(GtkWidget * b, GdkEventButton * ev,
-                                PanelControl * pc);
+                                Control * control);
 
 void toggle_popup(GtkWidget * button, PanelPopup * pp);
 

@@ -50,7 +50,7 @@ struct _PanelGroup
     GtkWidget *box;             /* hbox or vbox */
 
     PanelPopup *popup;
-    PanelControl *control;
+    Control *control;
 };
 
 static void panel_group_arrange(PanelGroup * pg)
@@ -62,7 +62,7 @@ static void panel_group_arrange(PanelGroup * pg)
 	if (pg->popup)
 	    panel_popup_unpack(pg->popup);
 	if (pg->control)
-	    panel_control_unpack(pg->control);
+	    control_unpack(pg->control);
 
         gtk_widget_destroy(pg->box);
     }
@@ -78,7 +78,7 @@ static void panel_group_arrange(PanelGroup * pg)
     if (position == RIGHT || position == BOTTOM)
     {
 	if (pg->control)
-	    panel_control_pack(pg->control, GTK_BOX(pg->box));
+	    control_pack(pg->control, GTK_BOX(pg->box));
 	if (pg->popup)
 	    panel_popup_pack(pg->popup, GTK_BOX(pg->box));
     }
@@ -87,7 +87,7 @@ static void panel_group_arrange(PanelGroup * pg)
 	if (pg->popup)
 	    panel_popup_pack(pg->popup, GTK_BOX(pg->box));
 	if (pg->control)
-	    panel_control_pack(pg->control, GTK_BOX(pg->box));
+	    control_pack(pg->control, GTK_BOX(pg->box));
     }
 }
 
@@ -114,7 +114,7 @@ PanelGroup *create_panel_group(int index)
 static void panel_group_free(PanelGroup *pg)
 {
     panel_popup_free(pg->popup);
-    panel_control_free(pg->control);
+    control_free(pg->control);
 
     g_object_unref(pg->base);
     g_free(pg);
@@ -144,7 +144,7 @@ void groups_init(GtkBox * box)
 
     groupbox = box;
 
-    modules_init();
+    control_class_list_init();
 
     for(i = 0; i < settings.num_groups; i++)
     {
@@ -157,7 +157,7 @@ void groups_init(GtkBox * box)
 
 	/* we create an empty control, because we don't know what to put
 	 * here until after we read the configuration file */
-	group->control = panel_control_new(i);
+	group->control = control_new(i);
 
 	panel_group_arrange(group);
     }
@@ -168,14 +168,14 @@ void groups_cleanup(void)
     GList *li;
     PanelGroup *group;
 
-    modules_cleanup();
-
     for(li = group_list; li; li = li->next)
     {
 	group = li->data;
 
 	panel_group_free(group);
     }
+
+    control_class_list_cleanup();
 
     g_list_free(group_list);
     g_list_free(removed_list);
@@ -220,14 +220,14 @@ void old_groups_set_from_xml(int side, xmlNodePtr node)
                 }
                 else if(xmlStrEqual(child->name, (const xmlChar *)"Control"))
                 {
-                    panel_control_set_from_xml(group->control, child);
+                    control_set_from_xml(group->control, child);
                     control_created = TRUE;
                 }
             }
         }
 
         if(!control_created)
-            panel_control_set_from_xml(group->control, NULL);
+            control_set_from_xml(group->control, NULL);
 
         if(node)
             node = node->next;
@@ -266,14 +266,14 @@ void groups_set_from_xml(xmlNodePtr node)
                 }
                 else if(xmlStrEqual(child->name, (const xmlChar *)"Control"))
                 {
-                    panel_control_set_from_xml(group->control, child);
+                    control_set_from_xml(group->control, child);
                     control_created = TRUE;
                 }
             }
         }
 
         if(!control_created)
-            panel_control_set_from_xml(group->control, NULL);
+            control_set_from_xml(group->control, NULL);
 
         if(node)
             node = node->next;
@@ -295,7 +295,7 @@ void groups_write_xml(xmlNodePtr root)
         child = xmlNewTextChild(node, NULL, "Group", NULL);
 
         panel_popup_write_xml(group->popup, child);
-        panel_control_write_xml(group->control, child);
+        control_write_xml(group->control, child);
     }
 }
 
@@ -328,23 +328,23 @@ void groups_unpack(void)
     }
 }
 
-void groups_register_control(PanelControl * pc)
+void groups_register_control(Control * control)
 {
     PanelGroup *group;
 
-    group = g_list_nth(group_list, pc->index)->data;
+    group = g_list_nth(group_list, control->index)->data;
 
-    group->control = pc;
+    group->control = control;
 
-    if (!pc->with_popup) 
-	groups_show_popup(pc->index, FALSE);
+    if (!control->with_popup) 
+	groups_show_popup(control->index, FALSE);
     else
-	groups_show_popup(pc->index, TRUE);
+	groups_show_popup(control->index, TRUE);
     
     panel_group_arrange(group);
 }
 
-PanelControl *groups_get_control(int index)
+Control *groups_get_control(int index)
 {
     GList *li;
     PanelGroup *group;
@@ -440,7 +440,7 @@ void groups_set_orientation(int orientation)
     {
 	group = li->data;
 
-	panel_control_set_orientation(group->control, orientation);
+	control_set_orientation(group->control, orientation);
     }
 }
 
@@ -467,7 +467,7 @@ void groups_set_size(int size)
 	group = li->data;
 
 	panel_popup_set_size(group->popup, size);
-        panel_control_set_size(group->control, size);
+        control_set_size(group->control, size);
     }
 }
 
@@ -495,7 +495,7 @@ void groups_set_style(int style)
 	group = li->data;
         
 	panel_popup_set_style(group->popup, style);
-        panel_control_set_style(group->control, style);
+        control_set_style(group->control, style);
     }
 }
 
@@ -509,7 +509,7 @@ void groups_set_theme(const char *theme)
 	group = li->data;
         
 	panel_popup_set_theme(group->popup, theme);
-        panel_control_set_theme(group->control, theme);
+        control_set_theme(group->control, theme);
     }
 }
 
@@ -549,8 +549,8 @@ void groups_set_num_groups(int n)
 
 		    group->popup = create_panel_popup();
 
-		    group->control = panel_control_new(i);
-		    create_panel_control(group->control);
+		    group->control = control_new(i);
+		    create_control(group->control, ICON, NULL);
 
 		    panel_group_arrange(group);
 		}

@@ -815,16 +815,16 @@ void add_minibuttons(t_switcher *sw)
 static void arrange_switcher(t_switcher *sw);
 
 /* settings */
-static void switcher_set_size(PanelControl *pc, int size)
+static void switcher_set_size(Control *control, int size)
 {
     int i;
     GList *li;
     t_switcher *sw;
     int s;
 
-    gtk_widget_set_size_request(pc->base, -1, -1);
+    gtk_widget_set_size_request(control->base, -1, -1);
 
-    sw = pc->data;
+    sw = control->data;
 
     s = minibutton_size[size];
     
@@ -844,11 +844,11 @@ static void switcher_set_size(PanelControl *pc, int size)
     }
 }
 
-static void switcher_set_style(PanelControl *pc, int style)
+static void switcher_set_style(Control *control, int style)
 {
     t_switcher *sw;
 
-    sw = pc->data;
+    sw = control->data;
 
     if (style == OLD_STYLE)
     {
@@ -866,13 +866,13 @@ static void switcher_set_style(PanelControl *pc, int style)
     }
 }
 
-static void switcher_set_theme(PanelControl *pc, const char *theme)
+static void switcher_set_theme(Control *control, const char *theme)
 {
     GdkPixbuf *pb [4];
     t_switcher *sw;
     int i;
 
-    sw = pc->data;
+    sw = control->data;
 
     pb[0] = get_minibutton_pixbuf(MINILOCK_ICON);
     pb[1] = get_minibutton_pixbuf(MINIINFO_ICON);
@@ -886,24 +886,24 @@ static void switcher_set_theme(PanelControl *pc, const char *theme)
  	g_object_unref(pb[i]);
     }
     
-     switcher_set_size(pc, settings.size);
+     switcher_set_size(control, settings.size);
 }
 
-static void switcher_set_orientation(PanelControl *pc, int orientation)
+static void switcher_set_orientation(Control *control, int orientation)
 {
     t_switcher *sw;
 
-    sw = pc->data;
+    sw = control->data;
 
     arrange_switcher(sw);
-    switcher_set_style(pc, settings.style);
-    switcher_set_size(pc, settings.size);
+    switcher_set_style(control, settings.style);
+    switcher_set_size(control, settings.size);
 }
 
 /*  creation, destruction and configuration 
  *  ---------------------------------------
 */
-static void switcher_read_config(PanelControl *pc, xmlNodePtr node)
+static void switcher_read_config(Control *control, xmlNodePtr node)
 {
     xmlNodePtr  child = NULL;
     xmlChar *value;
@@ -915,7 +915,7 @@ static void switcher_read_config(PanelControl *pc, xmlNodePtr node)
     if(!node)
 	return;
 
-    sw = pc->data;
+    sw = control->data;
     
     /* properties */
     value = xmlGetProp(node, "showminibuttons");
@@ -1003,13 +1003,13 @@ static void switcher_read_config(PanelControl *pc, xmlNodePtr node)
 	set_screen_names(sw->screen_names);
 }
 
-static void switcher_write_config(PanelControl *pc, xmlNodePtr node)
+static void switcher_write_config(Control *control, xmlNodePtr node)
 {
     int i;
     char prop[3];
     t_switcher *sw;
 
-    sw = pc->data;
+    sw = control->data;
     
     snprintf(prop, 3, "%d", sw->show_minibuttons ? 1 : 0);
     xmlSetProp(node, "showminibuttons", prop);
@@ -1029,7 +1029,7 @@ static void switcher_write_config(PanelControl *pc, xmlNodePtr node)
     }
 }
 
-static void switcher_attach_callback(PanelControl *pc, const char *signal, 
+static void switcher_attach_callback(Control *control, const char *signal, 
 				     GCallback callback, gpointer data)
 {
     SignalCallback *sc;
@@ -1037,7 +1037,7 @@ static void switcher_attach_callback(PanelControl *pc, const char *signal,
     GList *li;
     int i;
 
-    sw = pc->data;
+    sw = control->data;
 
     sc = signal_callback_new(signal, callback, data);
     sw->callbacks = g_list_append(sw->callbacks, sc);
@@ -1224,12 +1224,12 @@ t_switcher *switcher_new(NetkScreen *screen)
     return sw;
 }
 
-static void switcher_free(PanelControl *pc)
+static void switcher_free(Control *control)
 {
     GList *li;
     t_switcher *sw;
 
-    sw = pc->data;
+    sw = control->data;
     
     g_signal_handler_disconnect(sw->screen, sw->ws_changed_id);
     g_signal_handler_disconnect(sw->screen, sw->ws_created_id);
@@ -1354,7 +1354,7 @@ static void switcher_revert(GtkWidget *b, t_switcher_dialog *sd)
 */
 }  
 
-static void switcher_add_options(PanelControl *pc, GtkContainer *container, 
+static void switcher_add_options(Control *control, GtkContainer *container, 
 				 GtkWidget *revert, GtkWidget *done)
 {
     GtkWidget *vbox, *hbox, *label, *button;
@@ -1363,7 +1363,7 @@ static void switcher_add_options(PanelControl *pc, GtkContainer *container,
 
     sd = g_new0(t_switcher_dialog, 1);
     
-    sd->sw = pc->data;
+    sd->sw = control->data;
 
     sd->backup_show_minibuttons = sd->sw->show_minibuttons;
     sd->backup_show_names = sd->sw->show_names;
@@ -1462,9 +1462,7 @@ static void switcher_add_options(PanelControl *pc, GtkContainer *container,
 /*  Switcher panel control
  *  ----------------------
 */
-#define CAPTION N_("Desktop switcher")
-
-gboolean create_switcher_control(PanelControl *pc)
+gboolean create_switcher_control(Control *control)
 {
     t_switcher *sw;
     NetkScreen *screen;
@@ -1475,36 +1473,35 @@ gboolean create_switcher_control(PanelControl *pc)
     sw = switcher_new(screen);
     netk_screen_force_update(screen);
 
-    gtk_container_add(GTK_CONTAINER(pc->base), sw->frame);
+    gtk_container_add(GTK_CONTAINER(control->base), sw->frame);
     
-    pc->data = sw;
-    pc->with_popup = FALSE;
+    control->data = sw;
+    control->with_popup = FALSE;
     
-    pc->caption = g_strdup(_(CAPTION));
-
-    pc->free = switcher_free;
-    pc->read_config = switcher_read_config;
-    pc->write_config = switcher_write_config;
-    pc->attach_callback = switcher_attach_callback;
-    
-    pc->add_options = switcher_add_options;
-
-    pc->set_orientation = switcher_set_orientation;
-    pc->set_size = switcher_set_size;
-    pc->set_style = switcher_set_style;
-    pc->set_theme = switcher_set_theme;
-
-    switcher_set_style(pc, settings.style);
-    switcher_set_size(pc, settings.size);
+    switcher_set_style(control, settings.style);
+    switcher_set_size(control, settings.size);
 
     return TRUE;
 }
 
-G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 {
-    module->name = "switcher";
-    module->caption = _(CAPTION);
-    module->create_control = (CreateControlFunc) create_switcher_control;
+    cc->name = "switcher";
+    cc->caption = _("Desktop switcher");
+    
+    cc->create_control = (CreateControlFunc) create_switcher_control;
+
+    cc->free = switcher_free;
+    cc->read_config = switcher_read_config;
+    cc->write_config = switcher_write_config;
+    cc->attach_callback = switcher_attach_callback;
+    
+    cc->add_options = switcher_add_options;
+
+    cc->set_orientation = switcher_set_orientation;
+    cc->set_size = switcher_set_size;
+    cc->set_style = switcher_set_style;
+    cc->set_theme = switcher_set_theme;
 }
 
 

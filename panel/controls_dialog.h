@@ -22,6 +22,6 @@
 
 #include "global.h"
 
-void change_panel_control_dialog(PanelControl * pc);
+void controls_dialog(Control * control);
 
 #endif /* __XFCE_CONTROLS_DIALOG_H__ */

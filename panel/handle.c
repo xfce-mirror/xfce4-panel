@@ -36,13 +36,14 @@ static void edit_prefs(void)
 
 static void add_new(void)
 {
-    PanelControl *pc;
+    Control *control;
     
     panel_add_control();
     panel_set_position();
     
-    pc = groups_get_control(settings.num_groups-1);
-    change_panel_control_dialog(pc);
+    control = groups_get_control(settings.num_groups-1);
+
+    controls_dialog(control);
 }
 
 static void lock_screen(void)

@@ -25,88 +25,78 @@
 
 #include "global.h"
 
-typedef gboolean (*CreateControlFunc) (PanelControl *control);
+typedef gboolean(*CreateControlFunc) (Control * control);
 
-typedef struct _PanelModule PanelModule;
-
-struct _PanelModule
+struct _ControlClass
 {
     int id;
-    const char *name; /* unique name */
-    const char *caption; /* translated, human readable */
+    const char *name;           /* unique name */
+    const char *caption;        /* translated, human readable */
+
+    /* for plugins */
     GModule *gmodule;
+    char *filename;
+
     CreateControlFunc create_control;
+
+    /* module interface */
+    void (*free) (Control * control);
+    void (*read_config) (Control * control, xmlNodePtr node);
+    void (*write_config) (Control * control, xmlNodePtr node);
+    void (*attach_callback) (Control * control, const char *signal,
+                             GCallback callback, gpointer data);
+
+    void (*add_options) (Control * control, GtkContainer * container,
+                         GtkWidget * revert, GtkWidget * done);
+
+    /* global preferences */
+    void (*set_orientation) (Control * control, int orientation);
+    void (*set_size) (Control * control, int size);
+    void (*set_style) (Control * control, int style);
+    void (*set_theme) (Control * control, const char *theme);
 };
 
-#define PANEL_MODULE(m) ((PanelModule*) m)
-
-struct _PanelControl
+struct _Control
 {
-    /* info */
-    int index;
-    int id;
-    char *filename;
-    char *dirname;
-    GModule *gmodule;
+    ControlClass *cclass;
 
     /* base widget (supplied by xfce) */
     GtkWidget *base;
-    
-    /* module data */
-    char *caption;
+
+    int index;
     gpointer data;
     gboolean with_popup;
-
-    /* module interface */
-    void (*free)(PanelControl *pc);
-    void (*read_config)(PanelControl *pc, xmlNodePtr node);
-    void (*write_config)(PanelControl *pc, xmlNodePtr node);
-    void (*attach_callback)(PanelControl *pc, const char *signal, 
-	    		    GCallback callback, gpointer data);
-
-    void (*add_options)(PanelControl *pc, GtkContainer *container,
-	    		GtkWidget *revert, GtkWidget *done);
-
-    /* global preferences */
-    void (*set_orientation)(PanelControl *pc, int orientation);
-    void (*set_size)(PanelControl *pc, int size);
-    void (*set_style)(PanelControl *pc, int style);
-    void (*set_theme)(PanelControl *pc, const char *theme);
 };
 
-void modules_init(void);
+#define CONTROL_CLASS(cc) ((ControlClass*) cc)
 
-void modules_cleanup(void);
+/* control class list */
+void control_class_list_init(void);
 
-const GSList *get_module_list(void);
+void control_class_list_cleanup(void);
 
-PanelControl *panel_control_new(int index);
+GSList *get_control_class_list(void);
 
-void create_panel_control(PanelControl * pc);
+/* controls */
+Control *control_new(int index);
+void create_control(Control * control, int id, const char *filename);
+void control_free(Control * control);
 
-void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node);
+void control_set_from_xml(Control * control, xmlNodePtr node);
+void control_write_xml(Control * control, xmlNodePtr parent);
 
-void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent);
+void control_pack(Control * control, GtkBox * box);
+void control_unpack(Control * control);
 
-void panel_control_free(PanelControl * pc);
+void control_add_options(Control * control, GtkContainer * container,
+                         GtkWidget * revert, GtkWidget * done);
 
-void panel_control_pack(PanelControl * pc, GtkBox * box);
+/* global settings */
+void control_set_settings(Control * control);
 
-void panel_control_unpack(PanelControl * pc);
-
-/* config dialog */
-void panel_control_add_options(PanelControl * pc, GtkContainer * container,
-                               GtkWidget * revert, GtkWidget * done);
-
-/* settings */
-void panel_control_set_settings(PanelControl *pc);
-
-void panel_control_set_orientation(PanelControl * pc, int orientation);
-
-void panel_control_set_size(PanelControl * pc, int size);
-
-void panel_control_set_style(PanelControl * pc, int style);
-
-void panel_control_set_theme(PanelControl * pc, const char *theme);
+void control_set_orientation(Control * control, int orientation);
+void control_set_size(Control * control, int size);
+void control_set_style(Control * control, int style);
+void control_set_theme(Control * control, const char *theme);
 
 #endif /* __XFCE_CONTROLS_H__ */

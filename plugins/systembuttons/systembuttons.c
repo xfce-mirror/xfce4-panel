@@ -218,19 +218,19 @@ static t_systembuttons *systembuttons_new(void)
     return sb;
 }
 
-static void systembuttons_free(PanelControl * pc)
+static void systembuttons_free(Control * control)
 {
-    t_systembuttons *sb = pc->data;
+    t_systembuttons *sb = control->data;
 
     g_list_free(sb->callbacks);
     
     g_free(sb);
 }
 
-static void systembuttons_attach_callback(PanelControl *pc, const char *signal,
+static void systembuttons_attach_callback(Control *control, const char *signal,
 				 GCallback callback, gpointer data)
 {
-    t_systembuttons *sb = (t_systembuttons *)pc->data;
+    t_systembuttons *sb = (t_systembuttons *)control->data;
     SignalCallback *cb;
     GtkWidget *button;
 
@@ -249,11 +249,11 @@ static void systembuttons_attach_callback(PanelControl *pc, const char *signal,
 }
 
 /* settings */
-static void systembuttons_read_config(PanelControl * pc, xmlNodePtr node)
+static void systembuttons_read_config(Control * control, xmlNodePtr node)
 {
     xmlChar *value;
     int n;
-    t_systembuttons *sb = (t_systembuttons *)pc->data;
+    t_systembuttons *sb = (t_systembuttons *)control->data;
 
     value = xmlGetProp(node, (const xmlChar *)"button1");
 
@@ -297,10 +297,10 @@ static void systembuttons_read_config(PanelControl * pc, xmlNodePtr node)
     }
 }
 
-static void systembuttons_write_config(PanelControl * pc, xmlNodePtr node)
+static void systembuttons_write_config(Control * control, xmlNodePtr node)
 {
     char prop[3];
-    t_systembuttons *sb = pc->data;
+    t_systembuttons *sb = control->data;
 
     sprintf(prop, "%d", sb->button_types[0]);
 
@@ -316,12 +316,12 @@ static void systembuttons_write_config(PanelControl * pc, xmlNodePtr node)
 }
 
 /* global prefs */
-static void systembuttons_set_theme(PanelControl * pc, const char *theme)
+static void systembuttons_set_theme(Control * control, const char *theme)
 {
     GtkWidget *button;
     t_systembuttons *sb;
     
-    sb = pc->data;
+    sb = control->data;
     
     button = gtk_bin_get_child(GTK_BIN(sb->align[0]));
     button_update_image(button, sb->button_types[0]);
@@ -385,7 +385,7 @@ static void systembuttons_revert_configuration(t_systembuttons_dialog *sbd)
     gtk_option_menu_set_history(om, sbd->backup_button_types[1]);
 }
 
-void systembuttons_add_options(PanelControl * pc, GtkContainer * container,
+void systembuttons_add_options(Control * control, GtkContainer * container,
                       	       GtkWidget * revert, GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label, *om = NULL;
@@ -399,7 +399,7 @@ void systembuttons_add_options(PanelControl * pc, GtkContainer * container,
     sg2 = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
     /* initialize dialog structure */
-    sb = pc->data;
+    sb = control->data;
     sbd = g_new0(t_systembuttons_dialog, 1);
     
     sbd->backup_show_two = sb->show_two;
@@ -503,36 +503,34 @@ void systembuttons_add_options(PanelControl * pc, GtkContainer * container,
 }
 
 /* panel control */
-#define CAPTION N_("System buttons")
-
-gboolean create_systembuttons_control(PanelControl * pc)
+gboolean create_systembuttons_control(Control * control)
 {
     t_systembuttons *sb = systembuttons_new();
 
-    gtk_container_add(GTK_CONTAINER(pc->base), sb->vbox);
+    gtk_container_add(GTK_CONTAINER(control->base), sb->vbox);
 
-    pc->caption = g_strdup(_(CAPTION));
-    pc->data = (gpointer) sb;
+    control->data = (gpointer) sb;
 
-    pc->free = systembuttons_free;
-    pc->read_config = systembuttons_read_config;
-    pc->write_config = systembuttons_write_config;
-    pc->attach_callback = systembuttons_attach_callback;
-
-    /* no set size => xfce sets size base container */
-    pc->set_theme = systembuttons_set_theme;
-    pc->add_options = systembuttons_add_options;
-
-    panel_control_set_size(pc, settings.size);
+    control_set_size(control, settings.size);
 
     return TRUE;
 }
 
-G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 {
-    module->name = "systembuttons";
-    module->caption = _(CAPTION);
-    module->create_control = (CreateControlFunc) create_systembuttons_control;
+    cc->name = "systembuttons";
+    cc->caption = _("System buttons");
+    
+    cc->create_control = (CreateControlFunc) create_systembuttons_control;
+
+    cc->free = systembuttons_free;
+    cc->read_config = systembuttons_read_config;
+    cc->write_config = systembuttons_write_config;
+    cc->attach_callback = systembuttons_attach_callback;
+
+    /* no set size => xfce sets size base container */
+    cc->set_theme = systembuttons_set_theme;
+    cc->add_options = systembuttons_add_options;
 }
 
 

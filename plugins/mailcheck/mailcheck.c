@@ -38,9 +38,6 @@
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static GtkTooltips *tooltips = NULL;
 
-/* this is checked when the control is loaded */
-int is_xfce_panel_control = 1;
-
 #define MAILCHECK_ROOT "Mailcheck"
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -123,14 +120,14 @@ static void mailcheck_set_tip(t_mailcheck *mc)
     }
 }
 
-void mailcheck_read_config(PanelControl *pc, xmlNodePtr node)
+void mailcheck_read_config(Control *control, xmlNodePtr node)
 {
     char *file;
     const char *mail, *logname;
     xmlChar *value;
     int n;
 
-    t_mailcheck *mc = (t_mailcheck *)pc->data;
+    t_mailcheck *mc = (t_mailcheck *)control->data;
     
     if(!node || !node->children)
 	return;
@@ -204,12 +201,12 @@ void mailcheck_read_config(PanelControl *pc, xmlNodePtr node)
     mailcheck_set_tip(mc);
 }
 
-void mailcheck_write_config(PanelControl *pc, xmlNodePtr parent)
+void mailcheck_write_config(Control *control, xmlNodePtr parent)
 {
     xmlNodePtr root, node;
     char value[MAXSTRLEN + 1];
 
-    t_mailcheck *mc = (t_mailcheck *)pc->data;
+    t_mailcheck *mc = (t_mailcheck *)control->data;
     
     root = xmlNewTextChild(parent, NULL, MAILCHECK_ROOT, NULL);
 
@@ -227,10 +224,10 @@ void mailcheck_write_config(PanelControl *pc, xmlNodePtr parent)
 	xmlNewTextChild(root, NULL, "Tooltip", mc->tooltip);
 }
 
-static void mailcheck_attach_callback(PanelControl *pc, const char *signal,
+static void mailcheck_attach_callback(Control *control, const char *signal,
 				      GCallback callback, gpointer data)
 {
-    t_mailcheck *mc = pc->data;
+    t_mailcheck *mc = control->data;
 
     g_signal_connect(mc->button, signal, callback, data);
 }
@@ -285,9 +282,9 @@ static t_mailcheck *mailcheck_new(void)
     return mailcheck;
 }
 
-void mailcheck_free(PanelControl * pc)
+void mailcheck_free(Control * control)
 {
-    t_mailcheck *mailcheck = (t_mailcheck *) pc->data;
+    t_mailcheck *mailcheck = (t_mailcheck *) control->data;
 
     if (mailcheck->timeout_id > 0)
 	g_source_remove(mailcheck->timeout_id);
@@ -332,9 +329,9 @@ static gboolean check_mail(t_mailcheck *mailcheck)
     return TRUE;
 }
 
-static void run_mailcheck(PanelControl *pc)
+static void run_mailcheck(Control *control)
 {
-    t_mailcheck *mc = pc->data;
+    t_mailcheck *mc = control->data;
 
     if (mc->timeout_id > 0)
     {
@@ -349,9 +346,9 @@ static void run_mailcheck(PanelControl *pc)
     }
 }
 
-static void mailcheck_set_theme(PanelControl *pc, const char *theme)
+static void mailcheck_set_theme(Control *control, const char *theme)
 {
-    t_mailcheck *mailcheck = (t_mailcheck *) pc->data;
+    t_mailcheck *mailcheck = (t_mailcheck *) control->data;
 
     g_object_unref(mailcheck->nomail_pb);
     g_object_unref(mailcheck->oldmail_pb);
@@ -417,9 +414,9 @@ static void update_options_box(t_mailcheck *mc)
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(spinbutton), mc->interval);
 }
 
-static void mailcheck_revert_options(PanelControl *pc)
+static void mailcheck_revert_options(Control *control)
 {
-    t_mailcheck *mc = (t_mailcheck *) pc->data;
+    t_mailcheck *mc = (t_mailcheck *) control->data;
 
     g_free(mc->mbox);
     mc->mbox = g_strdup(backup.mbox);
@@ -433,10 +430,10 @@ static void mailcheck_revert_options(PanelControl *pc)
     update_options_box(mc);
 }
 
-static void mailcheck_apply_options(PanelControl * pc)
+static void mailcheck_apply_options(Control * control)
 {
     const char *tmp;
-    t_mailcheck *mc = (t_mailcheck *) pc->data;
+    t_mailcheck *mc = (t_mailcheck *) control->data;
 
     tmp = gtk_entry_get_text(GTK_ENTRY(command_entry));
 
@@ -460,7 +457,7 @@ static void mailcheck_apply_options(PanelControl * pc)
     mc->interval = 
 	gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton));
 
-    run_mailcheck(pc);
+    run_mailcheck(control);
 
     mailcheck_set_tip(mc);
 }
@@ -479,9 +476,9 @@ static void browse_cb(GtkWidget * b, GtkEntry * entry)
     }
 }
 
-gboolean mailcheck_entry_changed(PanelControl *pc)
+gboolean mailcheck_entry_changed(Control *control)
 {
-    mailcheck_apply_options(pc);
+    mailcheck_apply_options(control);
 
     make_sensitive(revert_button);
     
@@ -489,7 +486,7 @@ gboolean mailcheck_entry_changed(PanelControl *pc)
     return FALSE;
 }
 
-void mailcheck_add_options(PanelControl * pc, GtkContainer * container, 
+void mailcheck_add_options(Control * control, GtkContainer * container, 
 			   GtkWidget *revert, GtkWidget *done)
 {
     GtkWidget *vbox;
@@ -498,7 +495,7 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
     GtkWidget *mbox_button;
     GtkWidget *command_button;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-    t_mailcheck *mc = (t_mailcheck *) pc->data;
+    t_mailcheck *mc = (t_mailcheck *) control->data;
 
     create_mailcheck_backup(mc);
     revert_button = revert;
@@ -532,7 +529,7 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
 
     /* only set label on focus out */
     g_signal_connect_swapped(mbox_entry, "focus-out-event",
-                     G_CALLBACK(mailcheck_entry_changed), pc);
+                     G_CALLBACK(mailcheck_entry_changed), control);
 
     /* mail command */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -565,7 +562,7 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
 
     /* only set label on focus out */
     g_signal_connect_swapped(command_entry, "focus-out-event",
-                     G_CALLBACK(mailcheck_entry_changed), pc);
+                     G_CALLBACK(mailcheck_entry_changed), control);
 
     /* run in terminal ? */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -583,7 +580,7 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
                      	     G_CALLBACK(make_sensitive), revert_button);
 
     g_signal_connect_swapped(term_checkbutton, "toggled",
-                     	     G_CALLBACK(mailcheck_apply_options), pc);
+                     	     G_CALLBACK(mailcheck_apply_options), control);
 
     /* mail check interval */
     hbox = gtk_hbox_new(FALSE, 4);
@@ -602,7 +599,7 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
                      	     G_CALLBACK(make_sensitive), revert_button);
 
     g_signal_connect_swapped(spinbutton, "value-changed",
-                     	     G_CALLBACK(mailcheck_apply_options), pc);
+                     	     G_CALLBACK(mailcheck_apply_options), control);
 
     update_options_box(mc);
     
@@ -610,46 +607,44 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
 
     /* signals */
     g_signal_connect_swapped(revert, "clicked", 
-	    	     	     G_CALLBACK(mailcheck_revert_options), pc);
+	    	     	     G_CALLBACK(mailcheck_revert_options), control);
 
     g_signal_connect_swapped(done, "clicked", 
-	    	     	     G_CALLBACK(mailcheck_apply_options), pc);
+	    	     	     G_CALLBACK(mailcheck_apply_options), control);
 
     gtk_container_add(container, vbox);
 }
 
 /* create panel control */
-#define CAPTION N_("Mail check")
-
-gboolean create_mailcheck_control(PanelControl * pc)
+gboolean create_mailcheck_control(Control * control)
 {
     t_mailcheck *mailcheck = mailcheck_new();
     GtkWidget *b = mailcheck->button;
 
-    gtk_container_add(GTK_CONTAINER(pc->base), b);
+    gtk_container_add(GTK_CONTAINER(control->base), b);
 
-    pc->caption = g_strdup(_(CAPTION));
-    pc->data = (gpointer) mailcheck;
+    control->data = (gpointer) mailcheck;
 
-    pc->free = mailcheck_free;
-    pc->read_config = mailcheck_read_config;
-    pc->write_config = mailcheck_write_config;
-    pc->attach_callback = mailcheck_attach_callback;
-
-    pc->add_options = (gpointer) mailcheck_add_options;
-
-    pc->set_theme = mailcheck_set_theme;
-
-    run_mailcheck(pc);
+    run_mailcheck(control);
 
     return TRUE;
 }
 
-G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 {
-    module->name = "mailcheck";
-    module->caption = _(CAPTION);
-    module->create_control = (CreateControlFunc) create_mailcheck_control;
+    cc->name = "mailcheck";
+    cc->caption = _("Mail check");
+    
+    cc->create_control = (CreateControlFunc) create_mailcheck_control;
+    
+    cc->free = mailcheck_free;
+    cc->read_config = mailcheck_read_config;
+    cc->write_config = mailcheck_write_config;
+    cc->attach_callback = mailcheck_attach_callback;
+
+    cc->add_options = (gpointer) mailcheck_add_options;
+
+    cc->set_theme = mailcheck_set_theme;
 }
 
 

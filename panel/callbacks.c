@@ -35,8 +35,6 @@
 
 static PanelPopup *open_popup = NULL;
 
-void hide_current_popup_menu(void);
-
 /*  Panel callbacks
  *  ---------------
 */
@@ -52,25 +50,6 @@ void close_cb(void)
     hide_current_popup_menu();
 
     quit(FALSE);
-}
-
-/*  Panel control callbacks
- *  -----------------------
-*/
-gboolean panel_control_press_cb(GtkWidget * b, GdkEventButton * ev,
-                                PanelControl * pc)
-{
-    if(ev->button != 3)
-        return FALSE;
-
-    if(disable_user_config)
-        return FALSE;
-
-    hide_current_popup_menu();
-
-    change_panel_control_dialog(pc);
-
-    return TRUE;
 }
 
 /*  Panel popup callbacks

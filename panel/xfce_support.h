@@ -38,6 +38,8 @@ GtkWidget *mixed_button_new(const char *stock, const char *message);
 /* x atoms and properties */
 void set_window_type_dock(GtkWidget *win, gboolean set);
 void set_window_layer(GtkWidget *win, int layer);
+gboolean check_net_wm_support(void);
+void set_window_skip(GtkWidget *win);
 
 /* dnd */
 void dnd_set_drag_dest(GtkWidget * widget);

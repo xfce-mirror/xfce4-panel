@@ -47,7 +47,6 @@ enum
 /* the item is a menu item or a panel control */
 MenuItem *mitem = NULL;
 int num_items = 0;
-/*PanelControl *pcontrol = NULL;*/
 PanelItem *pitem;
 
 /* important widgets */
@@ -601,7 +600,7 @@ static GtkWidget *create_icon_preview_frame()
 /*  Panel item options box
  *  ----------------------
 */
-void panel_item_revert_options(PanelControl * pc)
+void panel_item_revert_options(Control * control)
 {
     g_free(pitem->command);
     pitem->command = g_strdup(backup.command);
@@ -670,14 +669,14 @@ void panel_item_apply_options(void)
     panel_item_apply_config(pitem);
 }
 
-void panel_item_add_options(PanelControl * pc, GtkContainer * container,
+void panel_item_add_options(Control * control, GtkContainer * container,
                             GtkWidget * revert, GtkWidget * done)
 {
     GtkWidget *main_hbox;
     GtkWidget *options_box;
     GtkWidget *preview_frame;
 
-    pitem = (PanelItem *) pc->data;
+    pitem = (PanelItem *) control->data;
     mitem = NULL;
 
     dialog = gtk_widget_get_toplevel(done);

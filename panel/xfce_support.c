@@ -328,6 +328,51 @@ void set_window_layer(GtkWidget *win, int layer)
     }
 }
 
+gboolean check_net_wm_support(void)
+{
+    static Atom xa_NET_WM_SUPPORT = 0;
+    Window xid;
+
+    if (!xa_NET_WM_SUPPORT)
+    {
+	xa_NET_WM_SUPPORT = XInternAtom(GDK_DISPLAY(), 
+					"_NET_SUPPORTING_WM_CHECK", False);
+    }
+
+    if (netk_get_window(GDK_ROOT_WINDOW(), xa_NET_WM_SUPPORT, &xid))
+    {
+/*	if (netk_get_window(xid, xa_NET_WM_SUPPORT, &xid))
+	    g_print("ok");
+	else
+	    g_print("not ok");
+*/
+	return TRUE;
+    }
+
+    return FALSE;
+}
+
+void set_window_skip(GtkWidget *win)
+{
+    Screen *xscreen;
+    Window xid;
+    static Atom xa_SKIP_PAGER = 0;
+    static Atom xa_SKIP_TASKBAR = 0;
+
+    if (!xa_SKIP_PAGER)
+    {
+	xa_SKIP_PAGER = XInternAtom(GDK_DISPLAY(), 
+				    "_NET_WM_STATE_SKIP_PAGER", False);
+	xa_SKIP_TASKBAR = XInternAtom(GDK_DISPLAY(), 
+				      "_NET_WM_STATE_SKIP_TASKBAR", False);
+    }
+    
+    xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
+    xid = GDK_WINDOW_XID(win->window);
+    
+    netk_change_state(xscreen, xid, TRUE, xa_SKIP_PAGER, xa_SKIP_TASKBAR);
+}
+
 /*  DND
  *  ---
 */

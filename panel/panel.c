@@ -18,7 +18,7 @@
 */
 
 #include <X11/Xlib.h>
-#include <libxfcegui4/netk-util.h>
+#include <libxfcegui4/libnetk.h>
 
 #include "xfce.h"
 #include "groups.h"
@@ -70,10 +70,13 @@ static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev,
 /*  creation and destruction  */
 static GtkWidget *create_panel_window(void)
 {
-    GtkWidget *w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    GtkWindow *window = GTK_WINDOW(w);
+    GtkWidget *w;
+    GtkWindow *window;
     GdkPixbuf *pb;
 
+    w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    window = GTK_WINDOW(w);
+    
     gtk_window_set_title(window, _("XFce Panel"));
     gtk_window_set_decorated(window, FALSE);
     gtk_window_set_resizable(window, FALSE);
@@ -191,6 +194,7 @@ void create_panel(void)
     
     gtk_widget_show(toplevel);
     set_window_layer(toplevel, settings.layer);
+    set_window_skip(toplevel);
 }
 
 void panel_add_control(void)

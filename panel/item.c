@@ -46,9 +46,9 @@ void panel_item_apply_config(PanelItem * pi)
 
 /*  global settings
 */
-static void panel_item_set_theme(PanelControl * pc, const char *theme)
+static void panel_item_set_theme(Control * control, const char *theme)
 {
-    PanelItem *pi = (PanelItem *) pc->data;
+    PanelItem *pi = (PanelItem *) control->data;
 
     panel_item_apply_config(pi);
 }
@@ -83,9 +83,9 @@ static PanelItem *panel_item_new(void)
     return pi;
 }
 
-static void panel_item_read_config(PanelControl * pc, xmlNodePtr node)
+static void panel_item_read_config(Control * control, xmlNodePtr node)
 {
-    PanelItem *pi = (PanelItem *) pc->data;
+    PanelItem *pi = (PanelItem *) control->data;
     xmlNodePtr child;
     xmlChar *value;
 
@@ -150,9 +150,9 @@ static void panel_item_read_config(PanelControl * pc, xmlNodePtr node)
 
 /* destruction
 */
-static void panel_item_free(PanelControl * pc)
+static void panel_item_free(Control * control)
 {
-    PanelItem *pi = (PanelItem *) pc->data;
+    PanelItem *pi = (PanelItem *) control->data;
 
     g_free(pi->command);
     g_free(pi->icon_path);
@@ -163,9 +163,9 @@ static void panel_item_free(PanelControl * pc)
 
 /*  exit
 */
-static void panel_item_write_config(PanelControl * pc, xmlNodePtr root)
+static void panel_item_write_config(Control * control, xmlNodePtr root)
 {
-    PanelItem *pi = (PanelItem *) pc->data;
+    PanelItem *pi = (PanelItem *) control->data;
     xmlNodePtr child;
     char value[3];
 
@@ -183,34 +183,40 @@ static void panel_item_write_config(PanelControl * pc, xmlNodePtr root)
     xmlSetProp(child, "id", value);
 }
 
-static void panel_item_attach_callback(PanelControl *pc, const char *signal,
+static void panel_item_attach_callback(Control *control, const char *signal,
 				       GCallback callback, gpointer data)
 {
-    PanelItem *pi = pc->data;
+    PanelItem *pi = control->data;
 
     g_signal_connect(pi->button, signal, callback,data);
 }
 
 /*  create a default panel item 
 */
-void create_panel_item(PanelControl * pc)
+void create_panel_item(Control * control)
 {
     PanelItem *pi = panel_item_new();
 
-    gtk_container_add(GTK_CONTAINER(pc->base), pi->button);
+    gtk_container_add(GTK_CONTAINER(control->base), pi->button);
 
-    /* fill the PanelControl structure */
-    pc->id = ICON;
-
-    pc->caption = g_strdup(_("Icon"));
-    pc->data = (gpointer) pi;
-
-    pc->free = panel_item_free;
-    pc->read_config = panel_item_read_config;
-    pc->write_config = panel_item_write_config;
-    pc->attach_callback = panel_item_attach_callback;
-
-    pc->add_options = panel_item_add_options;
-
-    pc->set_theme = panel_item_set_theme;
+    control->data = (gpointer) pi;
 }
+
+void panel_item_class_init(ControlClass *cc)
+{
+    cc->id = ICON;
+    cc->name = "icon";
+    cc->caption = _("Launcher");
+
+    cc->create_control = (CreateControlFunc) create_panel_item;
+
+    cc->free = panel_item_free;
+    cc->read_config = panel_item_read_config;
+    cc->write_config = panel_item_write_config;
+    cc->attach_callback = panel_item_attach_callback;
+
+    cc->add_options = panel_item_add_options;
+
+    cc->set_theme = panel_item_set_theme;
+}
+

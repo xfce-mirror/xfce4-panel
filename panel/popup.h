@@ -91,8 +91,4 @@ void menu_item_free(MenuItem * mi);
 
 void menu_item_apply_config(MenuItem * mi);
 
-void panel_popup_add_item(PanelPopup * pp, MenuItem * mi);
-
-void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi);
-
 #endif /* __XFCE_POPUP_H__ */

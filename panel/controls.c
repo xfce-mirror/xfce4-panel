@@ -17,108 +17,81 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-/*  Plugins
+/*  Controls
+ *  --------
+ *  Controls provide a unified interface for panel items. Each control has an
+ *  associated control class that defines interface functions for the control.
+ *
+ *  A control is created using the create_control function of the associated
+ *  class. This takes an allocated control structure as argument, containing
+ *  only a base container widget.
+ * 
+ *  On startup a list of control classes is made from which new controls can
+ *  be created.
+ *
+ *  Plugins
  *  -------
- *  Plugins are accessed through the GModule interface. They must provide these 
- *  two symbols:
- *  - is_xfce_panel_control : only checked for existence
- *  - module_init : this function takes a PanelControl structure as argument
- *    and must fill it with the appropriate values and pointers.
+ *  A control class can also be provided by a plugin. The plugin is accessed 
+ *  using the g_module interface.
 */
 
-/*  Panel Control Configuration Dialog
- *  ----------------------------------
- *  All panel controls may provide an add_options() functions to allow
- *  options to be changed. The arguments to this function are a PanelControl,
- *  a GtkContainer to pack options into, and two GtkButton's. 
- *
- *  The first button is used to revert changes. The button is initially 
- *  insensitive. The panel control should make it sensitive when an option
- *  is changed. The panel control should also connect a callback that 
- *  reverts the options to the initial state. This implies the initial state
- *  should be saved when creating the options.
- *
- *  The second button is used to close the dialog. Any changes that weren't 
- *  applied immediately should be applied now.
- *  
- *  You can connect to the destroy signal on the option widgets (or the 
- *  continainer) to know when to clean up the backup data. 
+/*  control class list 
+ *  ------------------
 */
 
 #include "xfce.h"
 #include "item.h"
-#include "callbacks.h"
+#include "popup.h"
 #include "groups.h"
 #include "plugins.h"
+#include "controls_dialog.h"
 
-/*  Modules
- *  -------
-*/
-/* new module interface 
- * - panel controls are created using 'modules'.
- * - modules can be plugins or builtin (launchers)
- * - open plugins only once
- * - keep list of modules 
- * - create new controls using these modules 
-*/
+static GSList *control_class_list = NULL;
 
-#define SOEXT 		("." G_MODULE_SUFFIX)
-#define SOEXT_LEN 	(strlen (SOEXT))
-
-#define API_VERSION 2
-
-gchar *xfce_plugin_check_version(gint version)
+/* lookup functions */
+static gint compare_classes (gconstpointer class_a, gconstpointer class_b)
 {
-    if (version != API_VERSION)
-	return "Incompatible plugin version";
-    else
-	return NULL;
-}
-
-static void free_module(PanelModule *module)
-{
-    if (module->id == PLUGIN)
-	g_module_close(module->gmodule);
-
-    g_free(module);
-}
-
-static GSList *module_list = NULL;
-
-const GSList *get_module_list(void)
-{
-    return module_list;
-}
-
-static gint compare_modules (gconstpointer module_a, gconstpointer module_b)
-{
-    g_assert (module_a != NULL);
-    g_assert (module_b != NULL);
+    g_assert (class_a != NULL);
+    g_assert (class_b != NULL);
     
-    return (g_ascii_strcasecmp(PANEL_MODULE(module_a)->name, 
-			       PANEL_MODULE(module_b)->name));
+    return (g_ascii_strcasecmp(CONTROL_CLASS(class_a)->name, 
+			       CONTROL_CLASS(class_b)->name));
 }
 
 #if 0
-static gint lookup_modules (gconstpointer module, gconstpointer name)
+static gint lookup_classes (gconstpointer class, gconstpointer name)
 {
-    g_assert (module != NULL);
+    g_assert (class != NULL);
     g_assert (name != NULL);
     
-    return (g_ascii_strcasecmp(PANEL_MODULE(module)->name, name));
+    return (g_ascii_strcasecmp(CONTROL_CLASS(class)->name, name));
+}
+
+static gint lookup_classes_by_id (gconstpointer class, 
+				  gconstpointer id)
+{
+    int real_id;
+    
+    g_assert (class != NULL);
+    g_assert (id != NULL);
+    
+    real_id = GPOINTER_TO_INT(id);
+    
+    return (CONTROL_CLASS(class)->id != real_id);
 }
 #endif
-static gint lookup_modules_by_filename (gconstpointer module, 
+
+static gint lookup_classes_by_filename (gconstpointer class, 
 					gconstpointer filename)
 {
     char *fn;
     int result;
     
-    g_assert (module != NULL);
+    g_assert (class != NULL);
     g_assert (filename != NULL);
     
-    if (PANEL_MODULE(module)->gmodule)
-	fn = g_path_get_basename(g_module_name(PANEL_MODULE(module)->gmodule));
+    if (CONTROL_CLASS(class)->gmodule)
+	fn = g_path_get_basename(g_module_name(CONTROL_CLASS(class)->gmodule));
     else
 	return -1;
     
@@ -128,60 +101,73 @@ static gint lookup_modules_by_filename (gconstpointer module,
     return result;
 }
 
-static gint lookup_modules_by_id (gconstpointer module, 
-				  gconstpointer id)
+/* free a class */
+static void control_class_free(ControlClass *cc)
 {
-    int real_id;
-    
-    g_assert (module != NULL);
-    g_assert (id != NULL);
-    
-    real_id = GPOINTER_TO_INT(id);
-    
-    return (PANEL_MODULE(module)->id == real_id);
+    if (cc->id == PLUGIN)
+    {
+	g_module_close(cc->gmodule);
+	g_free(cc->filename);
+    }
+
+    g_free(cc);
+}
+
+/* plugins */
+#define SOEXT 		("." G_MODULE_SUFFIX)
+#define SOEXT_LEN 	(strlen (SOEXT))
+
+#define API_VERSION 3
+
+gchar *xfce_plugin_check_version(gint version)
+{
+    if (version != API_VERSION)
+	return "Incompatible plugin version";
+    else
+	return NULL;
 }
 
 static void load_plugin(gchar *path)
 {
     gpointer tmp;
-    PanelModule *module;
+    ControlClass *cc;
     GModule *gm;
     
-    void (*init)(PanelModule *mp);
+    void (*init)(ControlClass *cc);
         
-    module = g_new0(PanelModule, 1);
+    cc = g_new0(ControlClass, 1);
+    cc->id = PLUGIN;
     
-    gm = g_module_open(path,0);
-    module->gmodule = gm;
+    cc->gmodule = gm = g_module_open(path,0);
 
-    if (gm && g_module_symbol(gm, "xfce_plugin_init", &tmp))
+    if (gm && g_module_symbol(gm, "xfce_control_class_init", &tmp))
     {
         init = tmp;
-        init(module);
+        init(cc);
 	
-	if (g_slist_find_custom(module_list, module, compare_modules))
+	if (g_slist_find_custom(control_class_list, cc, compare_classes))
 	{
-            g_message ("xfce4: module %s has already been loaded", 
-		       module->name);
-	    free_module(module);
+            g_message ("xfce4: module %s has already been loaded", cc->name);
+	    control_class_free(cc);
 	}
 	else
 	{
-            g_message ("xfce4: module %s successfully loaded", module->name);
-	    module_list = g_slist_append(module_list, module);
+            g_message ("xfce4: module %s successfully loaded", cc->name);
+	    control_class_list = g_slist_append(control_class_list, cc);
+	    cc->filename = g_path_get_basename(path);
 	}
     }
     else if (gm)
     {
         g_warning ("xfce4: incompatible module %s",  path);
         g_module_close (gm);
-	g_free(module);
+	g_free(cc);
     }
     else
     {
         g_warning ("xfce4: module %s cannot be opened (%s)",  
 		   path, g_module_error());
-	g_free(module);
+	g_free(cc);
     }
 }
 
@@ -212,35 +198,11 @@ load_plugin_dir (const char *dir)
     g_dir_close (gdir);
 }
 
-static void add_builtin_modules(void)
-{
-    /* there are currently no builtin modules */
-}
-
-static void add_launcher_module(void)
-{
-    PanelModule *module;
-
-    module = g_new0(PanelModule, 1);
-
-    module->name = "icon";
-    module->caption = _("Launcher");
-    module->create_control = (CreateControlFunc)create_panel_item;
-
-    module_list = g_slist_append(module_list, module);
-}
-
-void modules_init(void)
+/* control class list */
+static void add_plugin_classes(void)
 {
     char **dirs, **d;
 
-    /* launcher module */
-    add_launcher_module();
-
-    /* builtin modules */
-    add_builtin_modules();
-
-    /* plugins */    
     dirs = get_plugin_dirs();
 
     for(d = dirs; *d; d++)
@@ -249,282 +211,199 @@ void modules_init(void)
     g_strfreev(dirs);
 }
 
-void modules_cleanup(void)
+static void add_builtin_classes(void)
+{
+    /* There are no builtin classes at the moment */
+}
+
+static void add_launcher_class(void)
+{
+    ControlClass *cc = g_new0(ControlClass, 1);
+
+    panel_item_class_init(cc);
+
+    control_class_list = g_slist_append(control_class_list, cc);
+}
+
+void control_class_list_init(void)
+{
+    add_launcher_class();
+    add_builtin_classes();
+    add_plugin_classes();
+}
+
+void control_class_list_cleanup(void)
 {
     GSList *li;
 
-    for (li = module_list; li; li = li->next)
+    for (li = control_class_list; li; li = li->next)
     {
-	PanelModule *module = li->data;
+	ControlClass *cc = li->data;
 
-	free_module(module);
+	control_class_free(cc);
     }
 
-    g_slist_free(module_list);
-    module_list = NULL;
+    g_slist_free(control_class_list);
+    control_class_list = NULL;
 }
 
-gboolean create_builtin(PanelControl *pc)
+GSList *get_control_class_list(void)
 {
-    GSList *li = NULL;
-    PanelModule *module;
-
-    li = g_slist_find_custom(module_list, GINT_TO_POINTER(pc->id), 
-	    		     lookup_modules_by_id);
-
-    if (!li)
-	return FALSE;
-
-    module = li->data;
-    
-    return module->create_control(pc);
+    return control_class_list;
 }
 
-gboolean create_plugin(PanelControl *pc)
-{
-    GSList *li = NULL;
-    PanelModule *module;
-
-    li = g_slist_find_custom(module_list, pc->filename, 
-	    		     lookup_modules_by_filename);
-
-    if (!li)
-	return FALSE;
-
-    module = li->data;
-    
-    return module->create_control(pc);
-}
-
-void create_launcher(PanelControl *pc)
-{
-    GSList *li = NULL;
-    PanelModule *module;
-
-    li = g_slist_find_custom(module_list, GINT_TO_POINTER(ICON), 
-			     lookup_modules_by_id);
-    module = li->data;
-    
-    module->create_control(pc);
-}
-
-#if 0
-/*  Plugins
- *  -------
+/*  Controls 
+ *  --------
 */
-static char *find_plugin(const char *name)
+static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *control)
 {
-    char **dirs, **d;
-    char *path;
-
-    dirs = get_plugin_dirs();
-
-    for(d = dirs; *d; d++)
-    {
-        path = g_build_filename(*d, name, NULL);
-
-        if(g_file_test(path, G_FILE_TEST_EXISTS))
-        {
-            g_strfreev(dirs);
-            return path;
-        }
-        else
-            g_free(path);
-    }
-
-    return NULL;
-}
-
-gboolean create_plugin(PanelControl * pc)
-{
-    gpointer tmp;
-    char *path;
-    void (*init) (PanelControl * pc);
-
-    /* find the module somewhere */
-    g_return_val_if_fail(pc->filename, FALSE);
-    g_return_val_if_fail(g_module_supported(), FALSE);
-
-    if(pc->dirname)
-        path = g_build_filename(pc->dirname, pc->filename, NULL);
-    else
-        path = find_plugin(pc->filename);
-
-    g_return_val_if_fail(path, FALSE);
-
-    /* try to load it */
-    pc->gmodule = g_module_open(path, 0);
-
-    if(!pc->gmodule)
-    {
-        const char *err = g_module_error();
-
-        g_printerr("gmodule could not be opened: %s\n", path);
-        g_printerr("	%s\n", err);
-        g_free(path);
+    if(ev->button != 3 || disable_user_config)
         return FALSE;
-    }
-    /* TODO: perhaps we should do versioning here ? */
-    else if(!g_module_symbol(pc->gmodule, "is_xfce_panel_control", &tmp))
-    {
-        g_printerr("Not a panel module: %s\n", path);
-        g_free(path);
-        return FALSE;
-    }
 
-    g_free(path);
+    hide_current_popup_menu();
 
-    if(g_module_symbol(pc->gmodule, "module_init", &tmp))
-    {
-        init = tmp;
-        init(pc);
-    }
-    else
-    {
-        g_module_close(pc->gmodule);
-        pc->gmodule = NULL;
+    controls_dialog(control);
 
-        return FALSE;
-    }
-
-    /* TODO: should we do more testing to verify the module ? */
     return TRUE;
 }
-#endif
 
-/*  The PanelControl interface
- *
-*/
-
-/* static functions */
-static void panel_control_read_config(PanelControl * pc, xmlNodePtr node)
+static gboolean create_plugin(Control *control, const char *filename)
 {
-    if(pc->read_config)
-        pc->read_config(pc, node);
+    GSList *li = NULL;
+    ControlClass *cc;
+
+    li = g_slist_find_custom(control_class_list, filename, 
+	    		     lookup_classes_by_filename);
+
+    if (!li)
+	return FALSE;
+
+    cc = control->cclass = li->data;
+    
+    return cc->create_control(control);
 }
 
-/*  creation
-*/
-PanelControl *panel_control_new(int index)
+static gboolean create_builtin(Control *control, int id)
 {
-    PanelControl *pc = g_new(PanelControl, 1);
-
-    pc->index = index;
-    pc->id = ICON;
-    pc->filename = NULL;
-    pc->dirname = NULL;
-    pc->gmodule = NULL;
-
-    /* this is the only widget created here
-     * We use the alignment as the simplest container 
-     * (a frame adds a 2 pixel border)
-     */
-    pc->base = gtk_event_box_new();/*gtk_alignment_new(0,0,1,1);*/
-    gtk_widget_show(pc->base);
-
-    /* protect against destruction when unpacking */
-    g_object_ref(pc->base);
-    gtk_object_sink(GTK_OBJECT(pc->base));
-
-    pc->caption = NULL;
-    pc->data = NULL;
-    pc->with_popup = TRUE;
-
-    pc->free = NULL;
-    pc->read_config = NULL;
-    pc->write_config = NULL;
-    pc->attach_callback = NULL;
-
-    pc->add_options = NULL;
-
-    pc->set_orientation = NULL;
-    pc->set_size = NULL;
-    pc->set_style = NULL;
-    pc->set_theme = NULL;
-
-    return pc;
+    g_warning("xfce4: unknown control id: %d\n", id);
+    return FALSE;
 }
 
-#if 0
-void create_panel_control(PanelControl * pc)
+static void create_launcher(Control *control)
 {
-    switch (pc->id)
-    {
-        case PLUGIN:
-            create_plugin(pc);
-            break;
-        default:
-            create_panel_item(pc);
-            break;
-    }
-
-    /* these are required for proper operation */
-    if(!pc->caption || !pc->attach_callback || 
-	    !gtk_bin_get_child(GTK_BIN(pc->base)))
-    {
-        if(pc->free)
-            pc->free(pc);
-
-        create_panel_item(pc);
-    }
-
-    pc->attach_callback(pc, "button-press-event", 
-	    		G_CALLBACK(panel_control_press_cb), pc);
-
-    g_signal_connect(pc->base, "button-press-event", 
-	    	     G_CALLBACK(panel_control_press_cb), pc);
-
-    panel_control_set_settings(pc);
+    ControlClass *cc;
+    
+    /* we know it is the first item in the list */
+    cc = control->cclass = control_class_list->data;
+    
+    cc->create_control(control);
 }
-#endif
 
-void create_panel_control(PanelControl *pc)
+void create_control(Control * control, int id, const char *filename)
 {
-    switch (pc->id)
+    ControlClass *cc;
+    
+    /* the control class is set in the create_* functions */
+    switch (id)
     {
 	case ICON:
-	    create_launcher(pc);
+	    create_launcher(control);
 	    break;
 	case PLUGIN:
-	    if (!create_plugin(pc))
-	    {
-		g_warning("xfce4: failed to load module %s\n", pc->filename);
-		create_launcher(pc);
-	    }
+	    if (!create_plugin(control, filename))
+		create_launcher(control);
 	    break;
 	default:
-	    if (!create_builtin(pc))
-		create_launcher(pc);
+	    if (!create_builtin(control, id))
+		create_launcher(control);
     }
 
+    cc = control->cclass;
+    
     /* these are required for proper operation */
-    if(!pc->caption || !pc->attach_callback || 
-	    !gtk_bin_get_child(GTK_BIN(pc->base)))
+    if(!gtk_bin_get_child(GTK_BIN(control->base)))
     {
-        if(pc->free)
-            pc->free(pc);
+        if(cc && cc->free)
+            cc->free(control);
 
-        create_launcher(pc);
+        create_launcher(control);
     }
 
-    pc->attach_callback(pc, "button-press-event", 
-	    		G_CALLBACK(panel_control_press_cb), pc);
+    cc->attach_callback(control, "button-press-event", 
+	    		G_CALLBACK(control_press_cb), control);
 
-    g_signal_connect(pc->base, "button-press-event", 
-	    	     G_CALLBACK(panel_control_press_cb), pc);
+    g_signal_connect(control->base, "button-press-event", 
+	    	     G_CALLBACK(control_press_cb), control);
 
-    panel_control_set_settings(pc);
+    control_set_settings(control);
 }
 
-/* here the actual panel control is created */
-void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node)
+Control *control_new(int index)
+{
+    Control *control = g_new0(Control, 1);
+
+    control->index = index;
+    control->with_popup = TRUE;
+
+    control->base = gtk_event_box_new();
+    gtk_widget_show(control->base);
+    
+    /* protect against destruction when unpacking */
+    g_object_ref(control->base);
+    gtk_object_sink(GTK_OBJECT(control->base));
+
+    return control;
+}
+
+void control_free(Control * control)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->free)
+	cc->free(control);
+
+    gtk_widget_destroy(control->base);
+    g_object_unref(control->base);
+
+    g_free(control);
+}
+
+void control_pack(Control * control, GtkBox * box)
+{
+    gtk_box_pack_start(box, control->base, TRUE, TRUE, 0);
+}
+
+void control_unpack(Control * control)
+{
+    gtk_container_remove(GTK_CONTAINER(control->base->parent), control->base);
+}
+
+/* configuration */
+static void control_read_config(Control *control, xmlNodePtr node)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->read_config)
+	cc->read_config(control, node);
+}
+
+static void control_write_config(Control *control, xmlNodePtr node)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->write_config)
+	cc->write_config(control, node);
+}
+
+void control_set_from_xml(Control * control, xmlNodePtr node)
 {
     xmlChar *value;
+    int id = ICON;
+    char *filename = NULL;
 
     if(!node)
     {
-        create_panel_control(pc);
-
+        create_control(control, ICON, NULL);
         return;
     }
 
@@ -533,129 +412,53 @@ void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node)
 
     if(value)
     {
-        pc->id = atoi(value);
+        id = atoi(value);
         g_free(value);
     }
 
-    if(pc->id == PLUGIN)
-    {
-        value = xmlGetProp(node, (const xmlChar *)"filename");
+    if(id == PLUGIN)
+        filename = (char *) xmlGetProp(node, (const xmlChar *)"filename");
 
-        if(value)
-            pc->filename = (char *)value;
-    }
-
-    /* create a default control */
-    create_panel_control(pc);
+    /* create a default control of specified type */
+    create_control(control, id, filename);
+    g_free(filename);
 
     /* allow the control to read its configuration */
-    panel_control_read_config(pc, node);
+    control_read_config(control, node);
 
     /* also check if added to the panel */
-    if (!pc->with_popup && pc->base->parent) 
-	groups_show_popup(pc->index, FALSE);
+    if (!control->with_popup && control->base->parent) 
+	groups_show_popup(control->index, FALSE);
 }
 
-void panel_control_free(PanelControl * pc)
-{
-    g_free(pc->filename);
-    g_free(pc->dirname);
-
-    g_free(pc->caption);
-
-    if(pc->free)
-        pc->free(pc);
-
-    gtk_widget_destroy(pc->base);
-    g_object_unref(pc->base);
-
-    g_free(pc);
-}
-
-void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent)
+void control_write_xml(Control * control, xmlNodePtr parent)
 {
     xmlNodePtr node;
     char value[4];
+    ControlClass *cc = control->cclass;
 
     node = xmlNewTextChild(parent, NULL, "Control", NULL);
 
-    snprintf(value, 3, "%d", pc->id);
+    snprintf(value, 3, "%d", cc->id);
     xmlSetProp(node, "id", value);
 
-    if(pc->filename)
-        xmlSetProp(node, "filename", pc->filename);
+    if(cc->filename)
+        xmlSetProp(node, "filename", cc->filename);
 
-    if(pc->write_config)
-        pc->write_config(pc, node);
+    /* allow the control to write its configuration */
+    control_write_config(control, node);
 }
 
-/*  packing and unpacking
-*/
-void panel_control_pack(PanelControl * pc, GtkBox * box)
+/* options dialog */
+void control_add_options(Control * control, GtkContainer * container,
+                         GtkWidget * revert, GtkWidget * done)
 {
-    gtk_box_pack_start(box, pc->base, TRUE, TRUE, 0);
+    ControlClass *cc = control->cclass;
 
-    panel_control_set_settings(pc);
-}
-
-void panel_control_unpack(PanelControl * pc)
-{
-    if(pc->base->parent && GTK_IS_WIDGET(pc->base->parent))
+    if (cc && cc->add_options)
     {
-        gtk_container_remove(GTK_CONTAINER(pc->base->parent), pc->base);
+        cc->add_options(control, container, revert, done);
     }
-}
-
-/*  global settings
- *  ---------------
- *  These are mostly wrappers around the functions provided by a 
- *  panel control
-*/
-void panel_control_set_settings(PanelControl *pc)
-{
-    panel_control_set_orientation(pc, settings.size);
-    panel_control_set_size(pc, settings.size);
-    panel_control_set_style(pc, settings.style);
-
-    if (settings.theme)
-	panel_control_set_theme(pc, settings.theme);
-}
-
-void panel_control_set_orientation(PanelControl *pc, int orientation)
-{
-    if (pc->set_orientation)
-	pc->set_orientation(pc, orientation);
-}
-
-void panel_control_set_size(PanelControl * pc, int size)
-{
-    int s = icon_size[size] + border_width;
-
-    if(pc->set_size)
-        pc->set_size(pc, size);
-    else
-	gtk_widget_set_size_request(pc->base, s, s);
-}
-
-void panel_control_set_style(PanelControl * pc, int style)
-{
-    if(pc->set_style)
-        pc->set_style(pc, style);
-}
-
-void panel_control_set_theme(PanelControl * pc, const char *theme)
-{
-    if(pc->set_theme)
-        pc->set_theme(pc, theme);
-}
-
-/*  Change panel controls
-*/
-void panel_control_add_options(PanelControl * pc, GtkContainer * container,
-                               GtkWidget * revert, GtkWidget * done)
-{
-    if(pc->add_options)
-        pc->add_options(pc, container, revert, done);
     else
     {
         GtkWidget *hbox, *image, *label;
@@ -670,10 +473,58 @@ void panel_control_add_options(PanelControl * pc, GtkContainer * container,
         gtk_widget_show(image);
         gtk_box_pack_start(GTK_BOX(hbox), image, TRUE, FALSE, 0);
 
-        label = gtk_label_new(_("This module has no configuration options"));
+        label = gtk_label_new(_("This item has no configuration options"));
         gtk_widget_show(label);
         gtk_box_pack_start(GTK_BOX(hbox), label, TRUE, FALSE, 0);
 
         gtk_container_add(container, hbox);
     }
 }
+
+/* global settings */
+
+void control_set_settings(Control * control)
+{
+    control_set_orientation(control, settings.orientation);
+    control_set_size(control, settings.size);
+    control_set_style(control, settings.style);
+    control_set_theme(control, settings.theme);
+}
+
+void control_set_orientation(Control * control, int orientation)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->set_orientation)
+	cc->set_orientation(control, orientation);
+}
+
+void control_set_size(Control * control, int size)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->set_size)
+	cc->set_size(control, size);
+    else
+    {
+	int s = icon_size[size] + border_width;
+	gtk_widget_set_size_request(control->base, s, s);
+    }
+}
+
+void control_set_style(Control * control, int style)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->set_style)
+	cc->set_style(control, style);
+}
+
+void control_set_theme(Control * control, const char *theme)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->set_theme)
+	cc->set_theme(control, theme);
+}
+

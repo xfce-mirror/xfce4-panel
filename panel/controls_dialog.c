@@ -34,174 +34,67 @@
 #include "groups.h"
 #include "settings.h"
 
-static GtkWidget *container;        /* container on the panel to hold the 
-				       panel control */
-static GList *controls = NULL;      /* list of names of available controls */
-static PanelControl *pc = NULL;  	/* original panel control */
-static PanelControl *current_pc = NULL; /* current control  
-					   == pc, if type is not changed */
-static int current_index = 0;
+static GSList *control_list = NULL;       /* list of control controles */
 
+static GtkWidget *container;            /* container on the panel to hold the 
+				           panel control */
+static Control *old_control = NULL;  	/* original panel control */
+static Control *current_control = NULL; /* current control == old_control, 
+					   if type is not changed */
 static GtkWidget *type_option_menu;
 static GtkWidget *pos_spin;
 static GtkWidget *notebook;
 static GtkWidget *done;
 static GtkWidget *revert;
 
-#if 0
-/*  new dialog:
- *  - 1 dialog for all panel items; list of items + dialog area.
- *  - add, remove and move items
- *  - don't allow to change to a module without popup (?); only add/remove.
- *  - include popup menu (??)
-*/
+static int backup_index;
 
-typedef struct
+/* control control list */
+static void create_control_list(Control * control)
 {
-    GtkWidget *control_container;
-    PanelControl *pc;
-    PanelControl *new_pc; /* == pc, if type is not changed */
-    
-    GtkWidget *vbox;
-    GtkWidget *type_option_menu;
-    GtkWidget *pos_spin;
-    GtkWidget *align;  /* container for control options */
-    GtkWidget *done;
-    GtkWidget *revert;
-}
-DialogPage;
-
-typedef struct
-{
-    GtkWidget *dialog;
-
-    GtkTreeModel *store; /* GtkListStore */
-    GtkTreeView *view;
-
-    GtkWidget *notebook;
-    GList *pages;
-}
-ControlsDialog;
-
-#endif
-
-/*  Global controls list
- *  --------------------
- *  Make a list of all available panel controls
- *  starting with the current one
-*/
-void create_controls_list(PanelControl * pc)
-{
-    PanelControl *new_pc;
-    GList *names = NULL;
-    char **dirs, **d;
     int i;
+    GSList *li, *class_list;
+    
+    class_list = get_control_class_list();
 
-    controls = NULL;
-    current_pc = pc;
+    /* first the original control */
+    control_list = g_slist_append(control_list, control);
 
-    /* add the original control as first in the list */
-    controls = g_list_append(controls, pc);
-
-    /* most common control */
-    if(pc->id != ICON)
+    /* then one for each other control class */
+    for (i = 0, li = class_list;  li; li = li->next, i++)
     {
-        new_pc = panel_control_new(pc->index);
-        create_panel_control(new_pc);
+	ControlClass *cc = li->data;
+	Control *new_control;
 
-        controls = g_list_append(controls, new_pc);
+	if (cc == control->cclass)
+	    continue;
+
+	new_control = control_new(control->index);
+	new_control->cclass = cc;
+	cc->create_control(new_control);
+
+	control_set_settings(new_control);
+
+	control_list = g_slist_append(control_list, new_control);
     }
-
-    /* builtin modules */
-    for(i = 0; i < NUM_BUILTINS; i++)
-    {
-        if(i == pc->id)
-            continue;
-
-        new_pc = panel_control_new(pc->index);
-        new_pc->id = i;
-
-        create_panel_control(new_pc);
-
-        if(new_pc->id == ICON)
-        {
-            panel_control_free(new_pc);
-            continue;
-        }
-
-        controls = g_list_append(controls, new_pc);
-    }
-
-    /* Plugins. We identify them by caption; that should be sufficient. */
-    dirs = get_plugin_dirs();
-
-    if(pc->id == PLUGIN)
-        names = g_list_append(names, pc->caption);
-
-    for(d = dirs; *d; d++)
-    {
-        GDir *gdir = g_dir_open(*d, 0, NULL);
-        const char *file;
-
-        if(!gdir)
-            continue;
-
-        while((file = g_dir_read_name(gdir)))
-        {
-            char *s = strrchr(file, '.');
-
-            s++;
-            if(!strequal(s, G_MODULE_SUFFIX))
-                continue;
-
-            new_pc = panel_control_new(pc->index);
-            new_pc->id = PLUGIN;
-            new_pc->filename = g_strdup(file);
-            new_pc->dirname = g_strdup(*d);
-
-            create_panel_control(new_pc);
-
-            if(new_pc->id == ICON)
-            {
-                panel_control_free(new_pc);
-                continue;
-            }
-
-            if(g_list_find_custom
-               (names, new_pc->caption, (GCompareFunc) strcmp))
-            {
-                panel_control_free(new_pc);
-                continue;
-            }
-
-            names = g_list_append(names, new_pc->caption);
-            controls = g_list_append(controls, new_pc);
-        }
-    }
-
-    g_strfreev(dirs);
 }
 
-void clear_controls_list(void)
+static void clear_control_list(void)
 {
-    GList *current;
-    PanelControl *pc;
+    GSList *li;
+    
+    /* first remove the current control */
+    control_list = g_slist_remove(control_list, current_control);
 
-    /* remove current control from the list */
-    controls = g_list_remove(controls, current_pc);
-
-    /* free all other controls */
-    for(current = controls; current; current = current->next)
+    for (li = control_list; li; li = li->next)
     {
-        pc = (PanelControl *) current->data;
+	Control *control = li->data;
 
-        if(pc)
-            panel_control_free(pc);
+	control_free(control);
     }
 
-    controls = NULL;
-    current_pc = NULL;
-    current_index = 0;
+    g_slist_free(control_list);    
+    control_list = NULL;
 }
 
 /*  Type options menu
@@ -210,60 +103,58 @@ void clear_controls_list(void)
 static void type_option_changed(GtkOptionMenu * om)
 {
     int n = gtk_option_menu_get_history(om);
-    GList *li;
-    PanelControl *new_pc;
+    GSList *li;
+    Control *control = NULL;
 
-    li = g_list_nth(controls, n);
-    new_pc = (PanelControl *) li->data;
+    li = g_slist_nth(control_list, n);
+    control = li->data;
 
-    /* this may have changed */
-    new_pc->index = current_pc->index;
+    if (control == current_control)
+	return;
     
-    panel_control_unpack(current_pc);
-    panel_control_pack(new_pc, GTK_BOX(container));
-    groups_register_control(new_pc); 
-    container = new_pc->base->parent;
-
-    current_pc = new_pc;
-    current_index = n;
+    control_unpack(current_control);
+    control_pack(control, GTK_BOX(container));
+    
+    control->index = current_control->index;
+    groups_register_control(control); 
+    
+    container = control->base->parent;
+    current_control = control;
 
     gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), n);
+
+    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static GtkWidget *create_type_option_menu(void)
 {
     GtkWidget *om;
     GtkWidget *menu, *mi;
-    GList *li;
-    PanelControl *pc;
+    GSList *li;
+    Control *control;
 
     om = gtk_option_menu_new();
     menu = gtk_menu_new();
 
-    for(li = controls; li; li = li->next)
+    for(li = control_list; li; li = li->next)
     {
-        pc = (PanelControl *) li->data;
+        control = li->data;
 
-        mi = gtk_menu_item_new_with_label(pc->caption);
+        mi = gtk_menu_item_new_with_label(control->cclass->caption);
         gtk_widget_show(mi);
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
     }
 
     gtk_option_menu_set_menu(GTK_OPTION_MENU(om), menu);
-
+    
     g_signal_connect(om, "changed", G_CALLBACK(type_option_changed), NULL);
 
     return om;
 }
 
-/*  Notebook containing all options
- *  -------------------------------
- *  Every panel control adds its options to a notebook page.
-*/
 static void add_notebook(GtkBox * box)
 {
-    GList *li;
-    PanelControl *pc;
+    GSList *li;
     GtkWidget *frame;
 
     notebook = gtk_notebook_new();
@@ -272,17 +163,19 @@ static void add_notebook(GtkBox * box)
     gtk_notebook_set_show_tabs(GTK_NOTEBOOK(notebook), FALSE);
     gtk_notebook_set_show_border(GTK_NOTEBOOK(notebook), FALSE);
 
-    for(li = controls; li; li = li->next)
+    /* add page for every control in control_list */
+    for (li = control_list; li; li = li->next)
     {
-        pc = (PanelControl *) li->data;
+	Control *control = li->data;
 
-        frame = gtk_frame_new(NULL);
-        gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_NONE);
-        gtk_container_set_border_width(GTK_CONTAINER(frame), 4);
-        gtk_widget_show(frame);
-        gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, NULL);
+	frame = gtk_frame_new(NULL);
+	gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_NONE);
+	gtk_container_set_border_width(GTK_CONTAINER(frame), 4);
+	gtk_widget_show(frame);
+	gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, NULL);
 
-        panel_control_add_options(pc, GTK_CONTAINER(frame), revert, done);
+	control_add_options(control, GTK_CONTAINER(frame), 
+			    revert, done);
     }
 
     gtk_box_pack_start(box, notebook, TRUE, TRUE, 0);
@@ -291,18 +184,6 @@ static void add_notebook(GtkBox * box)
 /*  The main dialog
  *  ---------------
 */
-
-static int backup_pos;
-static int backup_index;
-
-static void revert_pos(GtkWidget *w)
-{
-    if (backup_index != current_pc->index)
-	groups_move(current_pc->index, backup_index);
-    
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), backup_pos);
-}
-
 static void pos_changed(GtkSpinButton *spin)
 {
     int n;
@@ -310,10 +191,10 @@ static void pos_changed(GtkSpinButton *spin)
 
     n = gtk_spin_button_get_value_as_int(spin) - 1;
     
-    if (n != current_pc->index)
+    if (n != current_control->index)
     {
-	groups_move(current_pc->index, n);
-	current_pc->index = n;
+	groups_move(current_control->index, n);
+	current_control->index = n;
 
 	changed = TRUE;
     }
@@ -322,9 +203,22 @@ static void pos_changed(GtkSpinButton *spin)
 	gtk_widget_set_sensitive(revert, TRUE);
 }
 
+static void controls_dialog_revert(void)
+{
+    gtk_option_menu_set_history(GTK_OPTION_MENU(type_option_menu), 0);
+
+    if (backup_index != current_control->index)
+    {
+	groups_move(current_control->index, backup_index);
+
+	gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), 
+				  backup_index+1);
+    }
+}
+
 enum { RESPONSE_DONE, RESPONSE_REVERT, RESPONSE_REMOVE };
 
-void change_panel_control_dialog(PanelControl * pc)
+void controls_dialog(Control * control)
 {
     GtkWidget *dlg;
     GtkWidget *button;
@@ -336,8 +230,11 @@ void change_panel_control_dialog(PanelControl * pc)
     int response;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
+    old_control = current_control = control;
+    backup_index = control->index;
+
     /* Keep track of the panel container */
-    container = pc->base->parent;
+    container = control->base->parent;
 
     dlg = gtk_dialog_new_with_buttons(_("Change item"), GTK_WINDOW(toplevel),
                                       GTK_DIALOG_MODAL, NULL);
@@ -357,16 +254,19 @@ void change_panel_control_dialog(PanelControl * pc)
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_DONE);
     GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
     
+    g_signal_connect(revert, "clicked", 
+	    	     G_CALLBACK(controls_dialog_revert), NULL);
+    
     main_vbox = GTK_DIALOG(dlg)->vbox;
 
-    /* find all available controls */
-    create_controls_list(pc);
-
-    vbox = gtk_vbox_new(FALSE, 8);
+    vbox = gtk_vbox_new(FALSE, 7);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 8);
     gtk_widget_show(vbox);
     gtk_box_pack_start(GTK_BOX(main_vbox), vbox, FALSE, FALSE, 0);
     
+    /* find all available controls */
+    create_control_list(control);
+
     /* option menu */
     hbox = gtk_hbox_new(FALSE, 8);
     gtk_widget_show(hbox);
@@ -393,16 +293,12 @@ void change_panel_control_dialog(PanelControl * pc)
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    backup_index = pc->index;
-    backup_pos = backup_index + 1;
-    
     pos_spin = gtk_spin_button_new_with_range(1, settings.num_groups, 1);
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), backup_pos);
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), backup_index+1);
     gtk_widget_show(pos_spin);
     gtk_box_pack_start(GTK_BOX(hbox), pos_spin, FALSE, FALSE, 0);
     
     g_signal_connect(pos_spin, "value-changed", G_CALLBACK(pos_changed), NULL);
-    g_signal_connect(revert, "clicked", G_CALLBACK(revert_pos), NULL);
 
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
     
@@ -434,24 +330,21 @@ void change_panel_control_dialog(PanelControl * pc)
 		break;
 	    }
 	}
-	else if (response == RESPONSE_REVERT)
+	else if (response != RESPONSE_REVERT)
 	{
-	    gtk_option_menu_set_history(GTK_OPTION_MENU(type_option_menu), 0);
-	}
-	else
-	{
-            break;
+	    break;
 	}
     }
     
     gtk_widget_destroy(dlg);
 
-    clear_controls_list();
+    clear_control_list();
 
     if (response == RESPONSE_REMOVE)
     {
-	groups_remove(pc->index);
+	groups_remove(current_control->index);
     }
 
     write_panel_config();
 }
+

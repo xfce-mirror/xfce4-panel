@@ -25,7 +25,7 @@
 
 #include <xfce.h>
 
-#define XFCE_PLUGIN_API_VERSION 2
+#define XFCE_PLUGIN_API_VERSION 3
 
 #ifdef __cplusplus
 extern "C"
@@ -34,11 +34,17 @@ extern "C"
 
 /* prototype for plugin init function 
  * (must be implemented by plugin) */
-G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module);
+G_MODULE_EXPORT void xfce_control_class_init(ControlClass *control);
 
-/* plugin version check function (implemented by xfce4) */
+/* plugin version check function (implemented by xfce4 in controls.c) */
 gchar *xfce_plugin_check_version(gint version);
 
+/* nifty idea, I think from dia:
+ * every module just has to include this header and put 
+ * XFCE_PLUGIN_CHECK_INIT
+ * somewhere in the file (e.g. at the end :), and the API version will
+ * be checked on opening the GModule.
+*/
 #define XFCE_PLUGIN_CHECK_INIT \
 G_MODULE_EXPORT const gchar *g_module_check_init(GModule *gmodule); \
 const gchar * \

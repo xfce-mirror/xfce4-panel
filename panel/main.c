@@ -35,6 +35,7 @@
 #include <sys/wait.h>
 
 #include <libxfcegui4/session-client.h>
+#include <libxfcegui4/netk-util.h>
 
 #include "xfce.h"
 #include "settings.h"
@@ -135,6 +136,9 @@ static void sighandler(int sig)
 
 int main(int argc, char **argv)
 {
+    int i;
+    gboolean net_wm_support = FALSE;
+    
     if(argc == 2 && (strequal(argv[1], "-v") || strequal(argv[1], "--version")))
     {
         g_print(_("xfce4, version %s\n\n"
@@ -157,6 +161,24 @@ int main(int argc, char **argv)
     signal(SIGTERM, &sighandler);
     signal(SIGINT, &sighandler);
 
+    for (i = 0; i < 5; i++)
+    {
+	net_wm_support = check_net_wm_support();
+
+	if (net_wm_support)
+	    break;
+	else
+	    g_usleep(2000000);
+    }
+    
+    if (!net_wm_support)
+    {
+	report_error(_("Your window manager does not seem to support "
+		       "the new window manager hints as defined on "
+		       "http://www.freedesktop.org. \n"
+		       "Some XFce features may not work as intended."));
+    }		
+    
     icons_init();
     xfce_run();
 

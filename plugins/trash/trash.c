@@ -35,7 +35,7 @@
 GtkWidget *revert_button;
 
 /* this is checked when the control is loaded */
-int is_xfce_panel_control = 1;
+int is_xfce_control = 1;
 
 
 enum
@@ -209,9 +209,9 @@ static gboolean check_trash(t_trash *trash)
     return TRUE;
 }
 
-static void run_trash(PanelControl *pc)
+static void run_trash(Control *control)
 {
-    t_trash *trash = pc->data;
+    t_trash *trash = control->data;
 
     if (trash->timeout_id > 0)
     {
@@ -223,10 +223,10 @@ static void run_trash(PanelControl *pc)
     trash->timeout_id = g_timeout_add(2000, (GSourceFunc)check_trash, trash);
 }
 
-static void trash_free(PanelControl * pc)
+static void trash_free(Control * control)
 {
-    t_trash *trash = (t_trash *) pc->data;
-    pc->data = NULL;
+    t_trash *trash = (t_trash *) control->data;
+    control->data = NULL;
 
     if (trash->timeout_id > 0)
 	g_source_remove(trash->timeout_id);
@@ -239,17 +239,17 @@ static void trash_free(PanelControl * pc)
     g_free(trash);
 }
 
-static void trash_attach_callback(PanelControl *pc, const char *signal,
+static void trash_attach_callback(Control *control, const char *signal,
 				  GCallback callback, gpointer data)
 {
-    t_trash *trash = (t_trash *) pc->data;
+    t_trash *trash = (t_trash *) control->data;
 
     g_signal_connect(trash->button, signal, callback, data);
 }
 
-static void trash_set_theme(PanelControl * pc, const char *theme)
+static void trash_set_theme(Control * control, const char *theme)
 {
-    t_trash *trash = (t_trash *) pc->data;
+    t_trash *trash = (t_trash *) control->data;
 
     g_object_unref(trash->empty_pb);
     g_object_unref(trash->full_pb);
@@ -262,38 +262,36 @@ static void trash_set_theme(PanelControl * pc, const char *theme)
     else
         xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(trash->button), trash->full_pb);
 
-    panel_control_set_size(pc, settings.size);
+    control_set_size(control, settings.size);
 }
 
 /*  create trash panel control
 */
-#define CAPTION N_("Trash can")
-
-gboolean create_trash_control(PanelControl * pc)
+gboolean create_trash_control(Control * control)
 {
     t_trash *trash = trash_new();
     GtkWidget *b = trash->button;
 
-    gtk_container_add(GTK_CONTAINER(pc->base), b);
+    gtk_container_add(GTK_CONTAINER(control->base), b);
 
-    pc->caption = g_strdup(_(CAPTION));
-    pc->data = trash;
+    control->data = trash;
 
-    pc->free = trash_free;
-    pc->attach_callback = trash_attach_callback;
-
-    pc->set_theme = trash_set_theme;
-
-    run_trash(pc);
+    run_trash(control);
 
     return TRUE;
 }
 
-G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 {
-    module->name = "trash";
-    module->caption = _(CAPTION);
-    module->create_control = (CreateControlFunc) create_trash_control;
+    cc->name = "trash";
+    cc->caption = _("Trash can");
+    
+    cc->create_control = (CreateControlFunc) create_trash_control;
+
+    cc->free = trash_free;
+    cc->attach_callback = trash_attach_callback;
+
+    cc->set_theme = trash_set_theme;
 }
 
 

@@ -27,7 +27,7 @@ void edit_menu_item_dialog(MenuItem * mi);
 void add_menu_item_dialog(PanelPopup * pp);
 
 /* options box for panel control dialog */
-void panel_item_add_options(PanelControl * pc, GtkContainer * container,
+void panel_item_add_options(Control * control, GtkContainer * container,
                             GtkWidget * revert, GtkWidget * done);
 
 #endif /* __XFCE_ITEM_DIALOG_H__ */

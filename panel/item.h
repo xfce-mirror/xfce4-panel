@@ -43,6 +43,7 @@ void panel_item_apply_config(PanelItem * pi);
 
 /*  panel control interface
 */
-void create_panel_item(PanelControl * pc);
+void create_panel_item(Control * control);
+void panel_item_class_init(ControlClass *cc);
 
 #endif /* __XFCE_ITEM_H__ */
