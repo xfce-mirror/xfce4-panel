@@ -1,5 +1,5 @@
 /*  global.h
- *  
+ *
  *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,6 +27,9 @@
 #include <gtk/gtk.h>
 #include <libxml/tree.h>
 #include <string.h>
+
+/* Debug purpose */
+#include "debug.h"
 
 /* gettext */
 #define _(x) x
@@ -73,8 +76,8 @@ enum
 
 /*  Panel sizes
  *  -----------
- *  settings.size is a symbolic size given by an enum. The actual sizes 
- *  are put in an array so you can use the symbolic size as index, 
+ *  settings.size is a symbolic size given by an enum. The actual sizes
+ *  are put in an array so you can use the symbolic size as index,
  *  e.g. icon_size[SMALL], top_height[LARGE]
 */
 enum
