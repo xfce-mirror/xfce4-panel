@@ -139,7 +139,7 @@ clock_date_tooltip (GtkWidget * widget)
 	wday = tm->tm_wday;
 	mon = tm->tm_mon;
 	year = tm->tm_year;
-	snprintf (date_s, 255, "%s, %u %s %u", _(day_names[wday]), mday,
+	snprintf (date_s, 255, _("%s, %u %s %u"), _(day_names[wday]), mday,
 		  _(month_names[mon]), year + 1900);
 	add_tooltip (widget, _(date_s));
     }
