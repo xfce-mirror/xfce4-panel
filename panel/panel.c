@@ -707,6 +707,8 @@ panel_set_orientation (int orientation)
     panel_set_size (settings.size);
 
     gtk_widget_show(panel.toplevel);
+    set_window_layer (panel.toplevel, settings.layer);
+    set_window_skip (panel.toplevel);
     
     if (hidden)
 	panel_set_autohide(TRUE);
