@@ -56,6 +56,7 @@ void show_info(const char *text);
 
 /* file open dialog */
 char *select_file_name(const char *title, const char *path, GtkWidget * parent);
+char *select_file_with_preview(const char *title, const char *path, GtkWidget * parent);
 
 /* executing programs */
 void exec_cmd(const char *cmd, gboolean in_terminal);

@@ -263,7 +263,7 @@ static GtkWidget *create_icon_option_menu(void)
 static void icon_browse_cb(GtkWidget * b, GtkEntry * entry)
 {
     char *file =
-        select_file_name(_("Select icon"), gtk_entry_get_text(entry), dialog);
+        select_file_with_preview(_("Select icon"), gtk_entry_get_text(entry), dialog);
 
     if(file)
     {

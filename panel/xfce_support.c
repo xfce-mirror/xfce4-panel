@@ -493,12 +493,14 @@ static void fs_cancel_cb(GtkDialog * fs)
 }
 
 /* Any of the arguments may be NULL */
-char *select_file_name(const char *title, const char *path, GtkWidget * parent)
+static char *real_select_file(const char *title, const char *path, GtkWidget * parent, gboolean with_preview)
 {
     const char *t = (title) ? title : _("Select file");
-    GtkWidget *fs = preview_file_selection_new(t, TRUE);
+    GtkWidget *fs;
     char *name = NULL;
     const char *temp;
+
+    fs = preview_file_selection_new(t, with_preview);
 
     if(path)
         gtk_file_selection_set_filename(GTK_FILE_SELECTION(fs), path);
@@ -525,6 +527,16 @@ char *select_file_name(const char *title, const char *path, GtkWidget * parent)
     gtk_widget_destroy(fs);
 
     return name;
+}
+
+char *select_file_name(const char *title, const char *path, GtkWidget * parent)
+{
+    return real_select_file(title, path, parent, FALSE);
+}
+
+char *select_file_with_preview(const char *title, const char *path, GtkWidget * parent)
+{
+    return real_select_file(title, path, parent, TRUE);
 }
 
 /*  Executing commands
