@@ -91,70 +91,85 @@ ClockDialog;
 
 /* start xfcalendar or send a client message
  * NOTE: keep message format in sync with xfcalendar */
-static void
-send_client_message (GdkWindow *sender, Window xid, const char *msg)
+static gboolean retry_popup_xfcalendar (GtkWidget * widget);
+
+static gboolean
+popup_xfcalendar (GtkWidget * widget, guint32 time)
 {
-    GdkEventClient gev;
+    GdkAtom atom;
+    Window xwindow;
+    static guint32 start_time = 0;
 
-    gev.type = GDK_CLIENT_EVENT;
-    gev.window = sender;
-    gev.send_event = TRUE;
-    gev.message_type = gdk_atom_intern ("_XFCE_CALENDAR_TOGGLE_HERE", FALSE);
-    gev.data_format = 8;
-    strcpy (gev.data.b, msg);
+    /* send message to xfcalendar if it is running */
+    atom = gdk_atom_intern ("_XFCE_CALENDAR_RUNNING", FALSE);
+    if ((xwindow = XGetSelectionOwner (GDK_DISPLAY (),
+				       gdk_x11_atom_to_xatom (atom))) != None)
+    {
+	char msg[20];
+	const char *fmt = "%lx:%s";
+	Window xid = GDK_WINDOW_XID (widget->window);
+	GdkEventClient gev;
 
-    gdk_event_send_client_message ((GdkEvent *) & gev, (GdkNativeWindow) xid);
-    gdk_flush ();
+	/* popup in the same direction as menus */
+	switch (groups_get_arrow_direction ())
+	{
+	    case GTK_ARROW_UP:
+		sprintf (msg, fmt, xid, "up");
+		break;
+	    case GTK_ARROW_DOWN:
+		sprintf (msg, fmt, xid, "down");
+		break;
+	    case GTK_ARROW_LEFT:
+		sprintf (msg, fmt, xid, "left");
+		break;
+	    case GTK_ARROW_RIGHT:
+		sprintf (msg, fmt, xid, "right");
+		break;
+	    default:
+		return FALSE;
+	}
+
+	gev.type = GDK_CLIENT_EVENT;
+	gev.window = widget->window;
+	gev.send_event = TRUE;
+	gev.message_type =
+	    gdk_atom_intern ("_XFCE_CALENDAR_TOGGLE_HERE", FALSE);
+	gev.data_format = 8;
+	strcpy (gev.data.b, msg);
+
+	gdk_event_send_client_message ((GdkEvent *) & gev,
+				       (GdkNativeWindow) xwindow);
+	gdk_flush ();
+
+	return TRUE;
+    }
+    else if (time > start_time + 2000 || start_time == 0)
+    {
+	start_time = time;
+	exec_cmd_silent ("xfcalendar", FALSE, FALSE);
+	g_timeout_add (1000, (GSourceFunc)retry_popup_xfcalendar, widget);
+    }
+
+    return FALSE;
 }
 
 static gboolean
-on_button_press_event_cb(GtkWidget *widget,
-                         GdkEventButton *event, Control *control)
+retry_popup_xfcalendar (GtkWidget * widget)
 {
-  GdkAtom atom;
-  Window xwindow;
-  static guint32 start_time = 0;
+    popup_xfcalendar (widget, gtk_get_current_event_time ());
+    return FALSE;
+}
 
-  if (event->button == 1)
-  {
-      /** send message to xfcalendar if it is running */
-      atom = gdk_atom_intern("_XFCE_CALENDAR_RUNNING", FALSE);
-      if ((xwindow = XGetSelectionOwner(GDK_DISPLAY(),
-                                        gdk_x11_atom_to_xatom(atom))) != None)
-      {
-	  char msg[20];
-	  const char *fmt = "%lx:%s";
-	  Window xid = GDK_WINDOW_XID (control->base->window);
-	  
-	  /* popup in the same direction as menus */
-	  switch (groups_get_arrow_direction())
-	  {
-	      case GTK_ARROW_UP:
-		  sprintf(msg, fmt, xid, "up");
-		  break;
-	      case GTK_ARROW_DOWN:
-		  sprintf(msg, fmt, xid, "down");
-		  break;
-	      case GTK_ARROW_LEFT:
-		  sprintf(msg, fmt, xid, "left");
-		  break;
-	      case GTK_ARROW_RIGHT:
-		  sprintf(msg, fmt, xid, "right");
-		  break;
-	      default:
-		  return FALSE;
-	  }
+static gboolean
+on_button_press_event_cb (GtkWidget * widget,
+			  GdkEventButton * event, Control * control)
+{
+    if (event->button == 1)
+    {
+	return popup_xfcalendar (control->base, event->time);
+    }
 
-	  send_client_message (control->base->window, xwindow, msg);
-          return TRUE;
-      }        
-      else if (event->time > start_time + 2000 || start_time == 0)
-      {
-	  exec_cmd_silent ("xfcalendar", FALSE, FALSE);
-      }
-  }
-
-  return FALSE;
+    return FALSE;
 }
 
 /* creation and destruction */
@@ -172,7 +187,7 @@ clock_date_tooltip (GtkWidget * widget)
 
     ticks = time (0);
     tm = localtime (&ticks);
-    
+
     if (mday != tm->tm_mday)
     {
 	mday = tm->tm_mday;
@@ -221,8 +236,8 @@ clock_new (void)
 		       clock->eventbox);
 
     /* callback for calendar popup */
-    g_signal_connect(G_OBJECT(clock->eventbox), "button-press-event",
-                     G_CALLBACK(on_button_press_event_cb), clock);
+    g_signal_connect (G_OBJECT (clock->eventbox), "button-press-event",
+		      G_CALLBACK (on_button_press_event_cb), clock);
 
     return clock;
 }
@@ -602,7 +617,7 @@ clock_restore_backup (ClockDialog * cd)
 /* clock options box */
 void
 clock_create_options (Control * control, GtkContainer * container,
-		   GtkWidget * done)
+		      GtkWidget * done)
 {
     GtkWidget *vbox;
     GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
