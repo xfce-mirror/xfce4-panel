@@ -413,12 +413,9 @@ static GtkWidget *create_clock_ampm_button(t_clock * clock)
     return cb;
 }
 
-<<<<<<< builtins.c
+
 /* Store old clock infos to be retrieved later on */
 static void clock_create_backup(t_clock *cl)
-=======
-static void clock_create_backup(t_clock * clock)
->>>>>>> 1.15
 {
     XfceClock *tmp = XFCE_CLOCK( cl->clock );
     g_return_if_fail( tmp != NULL );
