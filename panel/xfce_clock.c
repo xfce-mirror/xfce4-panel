@@ -166,9 +166,8 @@ static void xfce_clock_realize(GtkWidget * widget)
 
     gdk_window_set_user_data(widget->window, widget);
 
-    gtk_style_set_background(widget->parent->style, widget->window,
-                             GTK_STATE_NORMAL);
-
+    gtk_style_set_background(widget->parent->style, widget->window, GTK_STATE_NORMAL);
+    
     if(!(clock->timer))
         clock->timer =
             gtk_timeout_add(clock->interval, (GtkFunction) xfce_clock_timer,
@@ -189,17 +188,14 @@ static void xfce_clock_init(XfceClock * clock)
     clock->hrs_angle = 2.5 * M_PI - (h % 12) * M_PI / 6 - m * M_PI / 360;
     clock->min_angle = 2.5 * M_PI - m * M_PI / 30;
     clock->sec_angle = 2.5 * M_PI - s * M_PI / 30;
-
     clock->timer = 0;
     clock->radius = 0;
     clock->pointer_width = 0;
-
     clock->mode = XFCE_CLOCK_ANALOG;
     clock->military_time = 0;   /* use 12 hour mode by default */
     clock->display_am_pm = 1;   /* display am or pm by default. */
     clock->display_secs = 0;    /* do not display secs by default */
     clock->interval = 100;      /* 1/10 seconds update interval by default */
-    
     clock->led_size = DIGIT_MEDIUM;
 }
 
@@ -1036,8 +1032,6 @@ static void xfce_clock_draw(GtkWidget * widget, GdkRectangle * area)
     g_return_if_fail(XFCE_IS_CLOCK(widget));
     g_return_if_fail(GTK_WIDGET_DRAWABLE(widget));
     g_return_if_fail(!GTK_WIDGET_NO_WINDOW(widget));
-    g_return_if_fail(GTK_IS_WIDGET(widget->parent));
-    g_return_if_fail(GTK_WIDGET_DRAWABLE(widget->parent));
 
     clock = XFCE_CLOCK(widget);
      if(clock->mode == XFCE_CLOCK_ANALOG)

@@ -156,10 +156,7 @@ void clear_controls_list(void)
         pc = (PanelControl *) current->data;
 
         if(pc)
-	{
-	    gtk_widget_destroy(pc->base);
             panel_control_free(pc);
-	}
     }
 
     controls = NULL;
@@ -181,7 +178,8 @@ static void type_option_changed(GtkOptionMenu * om)
 
     panel_control_unpack(current_pc);
     panel_control_pack(new_pc, container);
-    side_panel_register_control(new_pc);
+    /* Isn't that already done in panel_control_pack() ?? */
+    /* side_panel_register_control(new_pc); */
 
     current_pc = new_pc;
     current_index = n;

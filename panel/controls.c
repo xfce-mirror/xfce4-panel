@@ -181,7 +181,9 @@ PanelControl *panel_control_new(int side, int index)
     pc->index = index;
 
     /* this is the only widget created here */
-    pc->base = gtk_event_box_new();
+    pc->base = gtk_frame_new(NULL); /* gtk_event_box_new(); */
+    gtk_container_set_border_width(GTK_CONTAINER(pc->base), 0);
+    gtk_frame_set_shadow_type(GTK_FRAME(pc->base), GTK_SHADOW_NONE);
     gtk_widget_show(pc->base);
 
     /* protect against destruction when unpacking */
@@ -335,15 +337,15 @@ void panel_control_free(PanelControl * pc)
 {
     panel_control_stop(pc);
 
-    if(pc->free)
-        pc->free(pc);
-
     if(pc->caption)
         g_free(pc->caption);
 
-/*    if(G_IS_OBJECT(pc->base))
-        g_object_unref(pc->base);
-*/
+    if(pc->free)
+        pc->free(pc);
+
+    if(GTK_IS_WIDGET(pc->base))
+        gtk_widget_destroy(pc->base);
+
     g_free(pc);
 }
 

@@ -114,7 +114,9 @@ static GtkWidget *ampmbutton, *secsbutton, *checkbutton, *om;
 static t_clock *clock_new(void)
 {
     t_clock *clock = g_new(t_clock, 1);
+    
     clock->clock = xfce_clock_new();
+    g_object_ref(G_OBJECT(clock->clock));
 
     clock->frame = gtk_frame_new(NULL);
     gtk_container_set_border_width(GTK_CONTAINER(clock->frame), 0);
@@ -191,6 +193,12 @@ void clock_free(PanelControl * pc)
 {
     t_clock *clock = (t_clock *) pc->data;
     g_return_if_fail( clock != NULL );
+    if(GTK_IS_WIDGET(clock->clock))
+        gtk_widget_destroy(clock->clock);
+    if(GTK_IS_WIDGET(clock->eventbox))
+        gtk_widget_destroy(clock->eventbox);
+    if(GTK_IS_WIDGET(clock->frame))
+        gtk_widget_destroy(clock->frame);
     g_free(clock);
 }
 
@@ -553,7 +561,7 @@ void clock_read_config(PanelControl *pc, xmlNodePtr node)
         g_free(value);
     }
 #else
-    if ( value = xmlGetProp(node, (const xmlChar *)"Clock_type"))
+    if (value = xmlGetProp(node, (const xmlChar *)"Clock_type"))
     {
 	XFCE_CLOCK(cl->clock)->mode = atoi(value);
         g_free(value);
@@ -691,7 +699,7 @@ void create_clock(PanelControl * pc)
 
     pc->caption = g_strdup(_("XFce clock"));
     pc->data = (gpointer) clock;
-    pc->main = clock->eventbox;
+    pc->main = clock->frame;
 
     pc->interval = 1000;        /* 1 sec */
 
