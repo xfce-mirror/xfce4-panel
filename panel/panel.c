@@ -1638,3 +1638,8 @@ panel_unblock_autohide (Panel *p)
 	p->priv->block_autohide--;
 }
 
+int 
+panel_get_side (void)
+{
+    return panel.priv->side;
+}

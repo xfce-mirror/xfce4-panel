@@ -86,4 +86,7 @@ void panel_block_autohide (Panel *panel);
 
 void panel_unblock_autohide (Panel *panel);
 
+int panel_get_side (void);
+
+
 #endif /* __XFCE_PANEL_H */
