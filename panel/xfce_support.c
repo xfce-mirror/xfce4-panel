@@ -749,11 +749,11 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
 
     if(in_terminal)
     {
-        execute = g_strdup_printf("xterm -e %s", cmd);
+        execute = g_strdup_printf("xfterm4 e %s", cmd);
     }
     else
     {
-        execute = g_strdup_printf("%s", cmd);
+        execute = g_strdup(cmd);
     }
     
     if (!g_shell_parse_argv (execute, NULL, &argv, &error))
@@ -761,12 +761,11 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
         g_free(execute);
         if (error)
         {
-            g_warning("xfce: %s\n", error->message);
+            g_warning("%s: %s\n", PACKAGE, error->message);
             g_error_free(error);
         }
         return;
     }
-    g_free(execute);
 
     free_envp = NULL;
 #ifdef HAVE_STARTUP_NOTIFICATION
@@ -786,6 +785,8 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
     }
 #endif
                      
+    g_free(execute);
+
     if (silent)
     {
         retval = g_spawn_async(NULL, argv, free_envp ? free_envp : envp, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
@@ -793,7 +794,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
         {
             if (error)
             {
-                g_warning("xfce: %s\n", error->message);
+                g_warning("%s: %s\n", PACKAGE, error->message);
                 g_error_free(error);
             }
             success = FALSE;
