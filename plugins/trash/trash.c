@@ -25,12 +25,8 @@
 
 #include <libxfcegui4/xfce_iconbutton.h>
 
-#include "global.h"
-#include "debug.h"
-
-#include "controls.h"
-#include "icons.h"
-#include "xfce_support.h"
+#include "xfce.h"
+#include "plugins.h"
 
 /* panel control configuration
    Global widget used in all the module configuration
@@ -271,16 +267,17 @@ static void trash_set_theme(PanelControl * pc, const char *theme)
 
 /*  create trash panel control
 */
-/* this must be called 'module_init', because that is what we look for 
- * when opening the gmodule */
-void module_init(PanelControl * pc)
+#define API_VERSION 2
+#define CAPTION N_("Trash can")
+
+gboolean create_trash_control(PanelControl * pc)
 {
     t_trash *trash = trash_new();
     GtkWidget *b = trash->button;
 
     gtk_container_add(GTK_CONTAINER(pc->base), b);
 
-    pc->caption = g_strdup(_("Trash can"));
+    pc->caption = g_strdup(_(CAPTION));
     pc->data = trash;
 
     pc->free = trash_free;
@@ -289,6 +286,24 @@ void module_init(PanelControl * pc)
     pc->set_theme = trash_set_theme;
 
     run_trash(pc);
+
+    return TRUE;
 }
+
+gchar *xfce_plugin_check_version(gint version)
+{
+    if (version != API_VERSION)
+	return "Incompatible plugin version";
+    else
+	return NULL;
+}
+
+G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+{
+    module->name = "trash";
+    module->caption = _(CAPTION);
+    module->create_control = (CreateControlFunc) create_trash_control;
+}
+
 
 

@@ -26,6 +26,7 @@
 
 #include "xfce.h"
 #include "dialogs.h"
+#include "plugins.h"
 
 /* callbacks */
 static void mini_lock_cb(void)
@@ -504,13 +505,16 @@ void systembuttons_add_options(PanelControl * pc, GtkContainer * container,
 /* panel control */
 int is_xfce_panel_control;
 
-void module_init(PanelControl * pc)
+#define API_VERSION 2
+#define CAPTION N_("System buttons")
+
+gboolean create_systembuttons_control(PanelControl * pc)
 {
     t_systembuttons *sb = systembuttons_new();
 
     gtk_container_add(GTK_CONTAINER(pc->base), sb->vbox);
 
-    pc->caption = g_strdup(_("System buttons"));
+    pc->caption = g_strdup(_(CAPTION));
     pc->data = (gpointer) sb;
 
     pc->free = systembuttons_free;
@@ -523,6 +527,24 @@ void module_init(PanelControl * pc)
     pc->add_options = systembuttons_add_options;
 
     panel_control_set_size(pc, settings.size);
+
+    return TRUE;
 }
+
+gchar *xfce_plugin_check_version(gint version)
+{
+    if (version != API_VERSION)
+	return "Incompatible plugin version";
+    else
+	return NULL;
+}
+
+G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+{
+    module->name = "systembuttons";
+    module->caption = _(CAPTION);
+    module->create_control = (CreateControlFunc) create_systembuttons_control;
+}
+
 
 

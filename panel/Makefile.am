@@ -24,6 +24,7 @@ main.c \
 main.h \
 panel.c \
 panel.h \
+plugins.h \
 popup.c \
 popup.h \
 settings.c \
@@ -39,6 +40,7 @@ global.h \
 icons.h \
 main.h \
 panel.h \
+plugins.h \
 xfce_support.h \
 xfce.h 
 

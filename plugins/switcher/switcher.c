@@ -22,10 +22,9 @@
 
 #include <libxfcegui4/libxfcegui4.h>
 
-#include "global.h"
-#include "icons.h"
-#include "controls.h"
+#include "xfce.h"
 #include "settings.h"
+#include "plugins.h"
 
 typedef struct
 {
@@ -1465,7 +1464,10 @@ static void switcher_add_options(PanelControl *pc, GtkContainer *container,
 */
 int is_xfce_panel_control = 1;
 
-void module_init(PanelControl *pc)
+#define API_VERSION 2
+#define CAPTION N_("Desktop switcher")
+
+gboolean create_switcher_control(PanelControl *pc)
 {
     t_switcher *sw;
     NetkScreen *screen;
@@ -1481,7 +1483,7 @@ void module_init(PanelControl *pc)
     pc->data = sw;
     pc->with_popup = FALSE;
     
-    pc->caption = g_strdup(_("Desktop switcher"));
+    pc->caption = g_strdup(_(CAPTION));
 
     pc->free = switcher_free;
     pc->read_config = switcher_read_config;
@@ -1497,5 +1499,24 @@ void module_init(PanelControl *pc)
 
     switcher_set_style(pc, settings.style);
     switcher_set_size(pc, settings.size);
+
+    return TRUE;
 }
+
+gchar *xfce_plugin_check_version(gint version)
+{
+    if (version != API_VERSION)
+	return "Incompatible plugin version";
+    else
+	return NULL;
+}
+
+G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+{
+    module->name = "switcher";
+    module->caption = _(CAPTION);
+    module->create_control = (CreateControlFunc) create_switcher_control;
+}
+
+
 

@@ -49,96 +49,136 @@
 #include "item.h"
 #include "callbacks.h"
 #include "groups.h"
+#include "plugins.h"
 
-#if 0
-/*  Plugins
+/*  Modules
  *  -------
 */
-/* new plugin interface 
- * - open modules once
+/* new module interface 
+ * - panel controls are created using 'modules'.
+ * - modules can be plugins or builtin (launchers)
+ * - open plugins only once
  * - keep list of modules 
  * - create new controls using these modules 
 */
-#include "plugins.h"
 
 #define SOEXT 		("." G_MODULE_SUFFIX)
 #define SOEXT_LEN 	(strlen (SOEXT))
 
-static void free_plugin(PanelPlugin *plugin)
+static void free_module(PanelModule *module)
 {
-    g_module_close(plugin->module);
+    if (module->id == PLUGIN)
+	g_module_close(module->gmodule);
 
-    g_free(plugin);
+    g_free(module);
 }
 
-static GSList *plugin_list = NULL;
+static GSList *module_list = NULL;
 
-static gint compare_plugins (gconstpointer plugin_a, gconstpointer plugin_b)
+const GSList *get_module_list(void)
 {
-    g_assert (plugin_a != NULL);
-    g_assert (plugin_b != NULL);
+    return module_list;
+}
+
+static gint compare_modules (gconstpointer module_a, gconstpointer module_b)
+{
+    g_assert (module_a != NULL);
+    g_assert (module_b != NULL);
     
-    return (g_ascii_strcasecmp((PanelPlugin) plugin_a->name, 
-			       (PanelPlugin) plugin_b->name));
+    return (g_ascii_strcasecmp(PANEL_MODULE(module_a)->name, 
+			       PANEL_MODULE(module_b)->name));
 }
 
-static gint lookup_plugins (gconstpointer plugin, gconstpointer name)
+#if 0
+static gint lookup_modules (gconstpointer module, gconstpointer name)
 {
-    g_assert (plugin != NULL);
+    g_assert (module != NULL);
     g_assert (name != NULL);
     
-    return (g_ascii_strcasecmp((PanelPlugin) plugin->name, name));
+    return (g_ascii_strcasecmp(PANEL_MODULE(module)->name, name));
+}
+#endif
+static gint lookup_modules_by_filename (gconstpointer module, 
+					gconstpointer filename)
+{
+    char *fn;
+    int result;
+    
+    g_assert (module != NULL);
+    g_assert (filename != NULL);
+    
+    if (PANEL_MODULE(module)->gmodule)
+	fn = g_path_get_basename(g_module_name(PANEL_MODULE(module)->gmodule));
+    else
+	return -1;
+    
+    result = g_ascii_strcasecmp(fn, filename);
+    g_free(fn);
+
+    return result;
+}
+
+static gint lookup_modules_by_id (gconstpointer module, 
+				  gconstpointer id)
+{
+    int real_id;
+    
+    g_assert (module != NULL);
+    g_assert (id != NULL);
+    
+    real_id = GPOINTER_TO_INT(id);
+    
+    return (PANEL_MODULE(module)->id == real_id);
 }
 
 static void load_plugin(gchar *path)
 {
     gpointer tmp;
-    PanelPlugin *plugin;
+    PanelModule *module;
     GModule *gm;
     
-    void (*init)(PanelPlugin *mp);
+    void (*init)(PanelModule *mp);
         
-    plugin = g_new0(PanelPlugin, 1);
-    
-    plugin->manager = manager;
+    module = g_new0(PanelModule, 1);
     
     gm = g_module_open(path,0);
+    module->gmodule = gm;
 
     if (gm && g_module_symbol(gm, "xfce_plugin_init", &tmp))
     {
         init = tmp;
-        init(plugin);
+        init(module);
 	
-	if (g_slist_find_custom(plugin_list, plugin, compare_plugins))
+	if (g_slist_find_custom(module_list, module, compare_modules))
 	{
-            g_message ("xfce: module %s has already been loaded", 
-		       plugin->name);
-	    free_plugin(plugin);
+            g_message ("xfce4: module %s has already been loaded", 
+		       module->name);
+	    free_module(module);
 	}
 	else
 	{
-            g_message ("xfce: module %s successfully loaded", plugin->name);
-	    plugin_list = g_slist_append(plugin_list, plugin);
+            g_message ("xfce4: module %s successfully loaded", module->name);
+	    module_list = g_slist_append(module_list, module);
 	}
     }
     else if (gm)
     {
-        g_warning ("xfce: incompatible module %s",  path);
+        g_warning ("xfce4: incompatible module %s",  path);
         g_module_close (gm);
-	g_free(plugin);
+	g_free(module);
     }
     else
     {
-        g_warning ("xfce: module %s cannot be opened (%s)",  
+        g_warning ("xfce4: module %s cannot be opened (%s)",  
 		   path, g_module_error());
-	g_free(plugin);
+	g_free(module);
     }
 }
 
 static void
-plugins_load_dir (const char *dir)
+load_plugin_dir (const char *dir)
 {
-    GDir *gdir = g_dir_open(*d, 0, NULL);
+    GDir *gdir = g_dir_open(dir, 0, NULL);
     const char *file;
 
     if(!gdir)
@@ -146,7 +186,7 @@ plugins_load_dir (const char *dir)
 
     while((file = g_dir_read_name(gdir)))
     {
-	char *s = file;
+	const char *s = file;
 
 	s += strlen(file) - SOEXT_LEN;
 	
@@ -162,12 +202,35 @@ plugins_load_dir (const char *dir)
     g_dir_close (gdir);
 }
 
-void plugins_init(void)
+static void add_builtin_modules(void)
+{
+    /* there are currently no builtin modules */
+}
+
+static void add_launcher_module(void)
+{
+    PanelModule *module;
+
+    module = g_new0(PanelModule, 1);
+
+    module->name = "icon";
+    module->caption = _("Launcher");
+    module->create_control = (CreateControlFunc)create_panel_item;
+
+    module_list = g_slist_append(module_list, module);
+}
+
+void modules_init(void)
 {
     char **dirs, **d;
-    char *path;
-    GModule *module;
 
+    /* launcher module */
+    add_launcher_module();
+
+    /* builtin modules */
+    add_builtin_modules();
+
+    /* plugins */    
     dirs = get_plugin_dirs();
 
     for(d = dirs; *d; d++)
@@ -176,23 +239,66 @@ void plugins_init(void)
     g_strfreev(dirs);
 }
 
-void plugins_cleanup(void)
+void modules_cleanup(void)
 {
-    SGList *li;
+    GSList *li;
 
-    for (li = plugin_list; li; li = li->next)
+    for (li = module_list; li; li = li->next)
     {
-	PanelPlugin *plugin = li->data;
+	PanelModule *module = li->data;
 
-	free_plugin(plugin);
+	free_module(module);
     }
 
-    g_slist_free(plugin_list);
-    plugin_list = NULL;
+    g_slist_free(module_list);
+    module_list = NULL;
 }
 
-#endif
+gboolean create_builtin(PanelControl *pc)
+{
+    GSList *li = NULL;
+    PanelModule *module;
 
+    li = g_slist_find_custom(module_list, GINT_TO_POINTER(pc->id), 
+	    		     lookup_modules_by_id);
+
+    if (!li)
+	return FALSE;
+
+    module = li->data;
+    
+    return module->create_control(pc);
+}
+
+gboolean create_plugin(PanelControl *pc)
+{
+    GSList *li = NULL;
+    PanelModule *module;
+
+    li = g_slist_find_custom(module_list, pc->filename, 
+	    		     lookup_modules_by_filename);
+
+    if (!li)
+	return FALSE;
+
+    module = li->data;
+    
+    return module->create_control(pc);
+}
+
+void create_launcher(PanelControl *pc)
+{
+    GSList *li = NULL;
+    PanelModule *module;
+
+    li = g_slist_find_custom(module_list, GINT_TO_POINTER(ICON), 
+			     lookup_modules_by_id);
+    module = li->data;
+    
+    module->create_control(pc);
+}
+
+#if 0
 /*  Plugins
  *  -------
 */
@@ -274,6 +380,7 @@ gboolean create_plugin(PanelControl * pc)
     /* TODO: should we do more testing to verify the module ? */
     return TRUE;
 }
+#endif
 
 /*  The PanelControl interface
  *
@@ -328,6 +435,7 @@ PanelControl *panel_control_new(int index)
     return pc;
 }
 
+#if 0
 void create_panel_control(PanelControl * pc)
 {
     switch (pc->id)
@@ -352,6 +460,48 @@ void create_panel_control(PanelControl * pc)
 
     pc->attach_callback(pc, "button-press-event", 
 	    		G_CALLBACK(panel_control_press_cb), pc);
+
+    g_signal_connect(pc->base, "button-press-event", 
+	    	     G_CALLBACK(panel_control_press_cb), pc);
+
+    panel_control_set_settings(pc);
+}
+#endif
+
+void create_panel_control(PanelControl *pc)
+{
+    switch (pc->id)
+    {
+	case ICON:
+	    create_launcher(pc);
+	    break;
+	case PLUGIN:
+	    if (!create_plugin(pc))
+	    {
+		g_warning("xfce4: failed to load module %s\n", pc->filename);
+		create_launcher(pc);
+	    }
+	    break;
+	default:
+	    if (!create_builtin(pc))
+		create_launcher(pc);
+    }
+
+    /* these are required for proper operation */
+    if(!pc->caption || !pc->attach_callback || 
+	    !gtk_bin_get_child(GTK_BIN(pc->base)))
+    {
+        if(pc->free)
+            pc->free(pc);
+
+        create_launcher(pc);
+    }
+
+    pc->attach_callback(pc, "button-press-event", 
+	    		G_CALLBACK(panel_control_press_cb), pc);
+
+    g_signal_connect(pc->base, "button-press-event", 
+	    	     G_CALLBACK(panel_control_press_cb), pc);
 
     panel_control_set_settings(pc);
 }
@@ -506,7 +656,7 @@ void panel_control_add_options(PanelControl * pc, GtkContainer * container,
 
         image =
             gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
-                                     GTK_ICON_SIZE_SMALL_TOOLBAR);
+                                     GTK_ICON_SIZE_LARGE_TOOLBAR);
         gtk_widget_show(image);
         gtk_box_pack_start(GTK_BOX(hbox), image, TRUE, FALSE, 0);
 

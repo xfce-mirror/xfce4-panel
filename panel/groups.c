@@ -144,6 +144,8 @@ void groups_init(GtkBox * box)
 
     groupbox = box;
 
+    modules_init();
+
     for(i = 0; i < settings.num_groups; i++)
     {
 	group = create_panel_group(i);
@@ -165,6 +167,8 @@ void groups_cleanup(void)
 {
     GList *li;
     PanelGroup *group;
+
+    modules_cleanup();
 
     for(li = group_list; li; li = li->next)
     {

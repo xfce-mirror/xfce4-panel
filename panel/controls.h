@@ -25,6 +25,21 @@
 
 #include "global.h"
 
+typedef gboolean (*CreateControlFunc) (PanelControl *control);
+
+typedef struct _PanelModule PanelModule;
+
+struct _PanelModule
+{
+    int id;
+    const char *name; /* unique name */
+    const char *caption; /* translated, human readable */
+    GModule *gmodule;
+    CreateControlFunc create_control;
+};
+
+#define PANEL_MODULE(m) ((PanelModule*) m)
+
 struct _PanelControl
 {
     /* info */
@@ -58,6 +73,12 @@ struct _PanelControl
     void (*set_style)(PanelControl *pc, int style);
     void (*set_theme)(PanelControl *pc, const char *theme);
 };
+
+void modules_init(void);
+
+void modules_cleanup(void);
+
+const GSList *get_module_list(void);
 
 PanelControl *panel_control_new(int index);
 

@@ -22,11 +22,9 @@
 
 #include <libxfcegui4/xfce_iconbutton.h>
 
-#include "global.h"
-#include "xfce_support.h"
-#include "icons.h"
-#include "controls.h"
+#include "xfce.h"
 #include "settings.h"
+#include "plugins.h"
 
 #if 0
 /* mailcheck icons */
@@ -620,16 +618,18 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
     gtk_container_add(container, vbox);
 }
 
-/* this must be called 'module_init', because that is what we look for 
- * when opening the gmodule */
-void module_init(PanelControl * pc)
+/* create panel control */
+#define API_VERSION 2
+#define CAPTION N_("Mail check")
+
+gboolean create_mailcheck_control(PanelControl * pc)
 {
     t_mailcheck *mailcheck = mailcheck_new();
     GtkWidget *b = mailcheck->button;
 
     gtk_container_add(GTK_CONTAINER(pc->base), b);
 
-    pc->caption = g_strdup(_("Mail check"));
+    pc->caption = g_strdup(_(CAPTION));
     pc->data = (gpointer) mailcheck;
 
     pc->free = mailcheck_free;
@@ -642,4 +642,24 @@ void module_init(PanelControl * pc)
     pc->set_theme = mailcheck_set_theme;
 
     run_mailcheck(pc);
+
+    return TRUE;
 }
+
+gchar *xfce_plugin_check_version(gint version)
+{
+    if (version != API_VERSION)
+	return "Incompatible plugin version";
+    else
+	return NULL;
+}
+
+G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+{
+    module->name = "mailcheck";
+    module->caption = _(CAPTION);
+    module->create_control = (CreateControlFunc) create_mailcheck_control;
+}
+
+
+

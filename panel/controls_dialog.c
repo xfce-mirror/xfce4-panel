@@ -35,15 +35,55 @@
 #include "settings.h"
 
 static GtkWidget *container;        /* container on the panel to hold the 
-                                   panel control */
-static GList *controls = NULL;         /* list of all available controls */
-static PanelControl *current_pc = NULL;
+				       panel control */
+static GList *controls = NULL;      /* list of names of available controls */
+static PanelControl *pc = NULL;  	/* original panel control */
+static PanelControl *current_pc = NULL; /* current control  
+					   == pc, if type is not changed */
 static int current_index = 0;
+
 static GtkWidget *type_option_menu;
 static GtkWidget *pos_spin;
 static GtkWidget *notebook;
 static GtkWidget *done;
 static GtkWidget *revert;
+
+#if 0
+/*  new dialog:
+ *  - 1 dialog for all panel items; list of items + dialog area.
+ *  - add, remove and move items
+ *  - don't allow to change to a module without popup (?); only add/remove.
+ *  - include popup menu (??)
+*/
+
+typedef struct
+{
+    GtkWidget *control_container;
+    PanelControl *pc;
+    PanelControl *new_pc; /* == pc, if type is not changed */
+    
+    GtkWidget *vbox;
+    GtkWidget *type_option_menu;
+    GtkWidget *pos_spin;
+    GtkWidget *align;  /* container for control options */
+    GtkWidget *done;
+    GtkWidget *revert;
+}
+DialogPage;
+
+typedef struct
+{
+    GtkWidget *dialog;
+
+    GtkTreeModel *store; /* GtkListStore */
+    GtkTreeView *view;
+
+    GtkWidget *notebook;
+    GList *pages;
+}
+ControlsDialog;
+
+#endif
 
 /*  Global controls list
  *  --------------------

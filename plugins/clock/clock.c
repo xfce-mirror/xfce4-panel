@@ -33,6 +33,8 @@
 #include "controls.h"
 #include "icons.h"
 
+#include "plugins.h"
+
 /* Clock tooltip - From xfce3 */
 /* FIXME: Find another place for that */
 static char *day_names[] = { N_("Sunday"),
@@ -645,15 +647,16 @@ void clock_add_options(PanelControl * pc, GtkContainer * container,
 
 /*  create clock panel control
 */
-/* this must be called 'module_init', because that is what we look for 
- * when opening the gmodule */
-void module_init(PanelControl * pc)
+#define API_VERSION 2
+#define CAPTION N_("Xfce clock")
+
+gboolean create_clock_control(PanelControl * pc)
 {
     t_clock *clock = clock_new();
 
     gtk_container_add(GTK_CONTAINER(pc->base), clock->frame);
 
-    pc->caption = g_strdup(_("XFce clock"));
+    pc->caption = g_strdup(_(CAPTION));
     pc->data = (gpointer) clock;
 
     pc->free = (gpointer) clock_free;
@@ -674,6 +677,24 @@ void module_init(PanelControl * pc)
     
     gtk_widget_set_size_request(pc->base, -1, -1);
     clock_set_size(pc, settings.size); 
+
+    return TRUE;
 }
+
+gchar *xfce_plugin_check_version(gint version)
+{
+    if (version != API_VERSION)
+	return "Incompatible plugin version";
+    else
+	return NULL;
+}
+
+G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
+{
+    module->name = "clock";
+    module->caption = _(CAPTION);
+    module->create_control = (CreateControlFunc) create_clock_control;
+}
+
 
 
