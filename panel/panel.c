@@ -348,6 +348,12 @@ void panel_center(int side)
 	    position.y = h - req.height - margins.bottom;
     }
 
+    if (position.x < 0)
+	position.x = 0;
+
+    if (position.y < 0)
+	position.y = 0;
+    
     panel_set_position();
 }
 
@@ -362,6 +368,20 @@ void panel_set_position(void)
     }
     else
     {
+	GtkRequisition req;
+	int w, h;
+	
+	w = gdk_screen_width();
+	h = gdk_screen_height();
+	
+	gtk_widget_size_request(toplevel, &req);
+	
+	if (position.x + req.width > w && req.width <= w)
+	    position.x = w - req.width;
+	
+	if (position.y + req.height > h && req.height <= h)
+	    position.y = h - req.height;
+	
 	DBG("position: (%d, %d)\n", position.x, position.y);
 
 	/* use gdk to prevent margins from interfering :) */

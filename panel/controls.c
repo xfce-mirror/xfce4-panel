@@ -252,11 +252,53 @@ GSList *get_control_class_list(void)
     return control_class_list;
 }
 
-/*  Controls 
- *  --------
+/* right click menu 
+ * ----------------
 */
+static void edit_control(gpointer data, int action, GtkWidget *widget)
+{
+    Control *control;
+    
+    control = gtk_item_factory_popup_data_from_widget(widget);
+
+    controls_dialog(control);
+}
+
+static void remove_control(gpointer data, int action, GtkWidget *widget)
+{
+    Control *control;
+    
+    control = gtk_item_factory_popup_data_from_widget(widget);
+
+    groups_remove(control->index);
+}
+
+static void add_control(gpointer data, int action, GtkWidget *widget)
+{
+    Control *control, *newcontrol;
+    
+    control = gtk_item_factory_popup_data_from_widget(widget);
+    
+    panel_add_control();
+    panel_set_position();
+    
+    newcontrol = groups_get_control(settings.num_groups-1);
+    groups_move(settings.num_groups-1, control->index);
+
+    controls_dialog(newcontrol);
+}
+
+static GtkItemFactoryEntry control_items[] = {
+  { N_("/Edit ..."),      NULL, edit_control,   1, "<Item>" },
+  { N_("/Remove"),        NULL, remove_control, 1, "<Item>" },
+  { "/sep",               NULL, NULL,           0, "<Separator>" },
+  { N_("/Add new item"), NULL, add_control,    1, "<Item>" }
+};
+
 static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *control)
 {
+    static GtkItemFactory *factory = NULL;
+
     if (disable_user_config)
 	return FALSE;
     
@@ -264,8 +306,20 @@ static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *con
 	    (ev->button == 1 && (ev->state & GDK_SHIFT_MASK)))
     {
 	hide_current_popup_menu();
+	
+	if (!factory)
+	{
+	   factory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
+	   
+	   gtk_item_factory_create_items(factory, G_N_ELEMENTS(control_items),
+					 control_items, NULL);
+	}
 
-	controls_dialog(control);
+	gtk_item_factory_popup_with_data(factory, control, NULL, 
+					 ev->x_root, ev->y_root,
+					 ev->button, ev->time);
+
+/*	controls_dialog(control); */
 
 	return TRUE;
     }
@@ -275,6 +329,9 @@ static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *con
     }
 }
 
+/*  Controls 
+ *  --------
+*/
 static gboolean create_plugin(Control *control, const char *filename)
 {
     GSList *li = NULL;
