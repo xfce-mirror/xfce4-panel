@@ -612,9 +612,8 @@ extern char **environ;
 static gchar ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_context, char **envp)
 {
     gchar **retval = NULL;
-    int i;
+    int i, j;
     int desktop_startup_id_len;
-    gboolean has_startup_id = FALSE;
 
     if (envp == NULL)
     {
@@ -626,25 +625,17 @@ static gchar ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_con
 
     desktop_startup_id_len = strlen ("DESKTOP_STARTUP_ID");
 
-    for (i = 0; envp[i]; i++) 
+    for (i = 0, j = 0; envp[i]; i++) 
     {
         if (strncmp (envp[i], "DESKTOP_STARTUP_ID", desktop_startup_id_len) != 0)
         {
-            retval[i] = g_strdup (envp[i]);
-        }
-        else
-        {
-            retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
-            has_startup_id = TRUE;
+            retval[j] = g_strdup (envp[i]);
+	    ++j;
         }
     }
-    if(!has_startup_id)
-    {
-        ++i;
-        retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
-    }
-    ++i;
-    retval[i] = NULL;
+    retval[j] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
+    ++j;
+    retval[j] = NULL;
 
     return retval;
 }
