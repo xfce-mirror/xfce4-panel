@@ -201,7 +201,7 @@ static GtkWidget *create_panel_window(void)
     gtk_window_set_resizable(window, FALSE);
     gtk_window_stick(window);
 
-    pb = get_pixbuf_from_id(XFCE_ICON);
+    pb = get_system_pixbuf(XFCE_ICON);
     gtk_window_set_icon(window, pb);
     g_object_unref(pb);
 

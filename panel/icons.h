@@ -41,23 +41,10 @@ enum
     SOUND_ICON,
     TERMINAL_ICON,
     NUM_ICONS
-}
+};
 
-char *icon_names = {
-    N_("Default"),
-    N_("Editor"),
-    N_("File management"),
-    N_("Utilities"),
-    N_("Games"),
-    N_("Help browser"),
-    N_("Multimedia"),
-    N_("Network"),
-    N_("Graphics"),
-    N_("Printer"),
-    N_("Productvity"),
-    N_("Sound"),
-    N_("Terminal")
-}
+char *icon_names[NUM_ICONS];
+
 /* system icons */
 enum
 {
@@ -90,7 +77,7 @@ enum
     PPP_OFF_ICON,
     PPP_ON_ICON,
     PPP_CONNECTING_ICON,*/
-}
+};
 
 #define UNKNOWN_ICON DEFAULT_ICON
 
@@ -103,7 +90,7 @@ GdkPixbuf *get_system_pixbuf(int id);
 
 GdkPixbuf *get_module_pixbuf(int id);
 
-GdkPixbuf *get_scaled_pixbuf(const GdkPixbuf *pb, int size);
+GdkPixbuf *get_scaled_pixbuf(GdkPixbuf *pb, int size);
 
 /* for plugins */
 GdkPixbuf *get_themed_pixbuf(const char *name);

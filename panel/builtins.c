@@ -26,6 +26,7 @@
 #include "builtins.h"
 
 #include "xfce.h"
+#include "xfce_support.h"
 #include "module.h"
 #include "item.h"
 #include "icons.h"
@@ -270,8 +271,8 @@ static t_trash *trash_new(PanelGroup * pg)
     trash->item = panel_item_new(pg);
     trash->item->command = g_strdup("xftrash");
 
-    trash->empty_pb = get_trash_pixbuf(TRASH_EMPTY_ICON);
-    trash->full_pb = get_trash_pixbuf(TRASH_FULL_ICON);
+    trash->empty_pb = get_module_pixbuf(TRASH_EMPTY_ICON);
+    trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
     
     create_panel_item(trash->item);
 
@@ -414,8 +415,8 @@ static void trash_set_icon_theme(PanelModule * pm, const char *theme)
     g_object_unref(trash->empty_pb);
     g_object_unref(trash->full_pb);
     
-    trash->empty_pb = get_themed_trash_pixbuf(TRASH_EMPTY_ICON, theme);
-    trash->full_pb = get_themed_trash_pixbuf(TRASH_FULL_ICON, theme);
+    trash->empty_pb = get_module_pixbuf(TRASH_EMPTY_ICON);
+    trash->full_pb = get_module_pixbuf(TRASH_FULL_ICON);
 
     if(trash->empty)
         trash->item->pb = trash->empty_pb;

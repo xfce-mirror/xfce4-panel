@@ -96,10 +96,10 @@ static void create_minibuttons(void)
     GtkWidget *button;
     int i;
 
-    pb[0] = get_pixbuf_from_id(MINILOCK_ICON);
-    pb[1] = get_pixbuf_from_id(MINIINFO_ICON);
-    pb[2] = get_pixbuf_from_id(MINIPALET_ICON);
-    pb[3] = get_pixbuf_from_id(MINIPOWER_ICON);
+    pb[0] = get_system_pixbuf(MINILOCK_ICON);
+    pb[1] = get_system_pixbuf(MINIINFO_ICON);
+    pb[2] = get_system_pixbuf(MINIPALET_ICON);
+    pb[3] = get_system_pixbuf(MINIPOWER_ICON);
 
     for(i = 0; i < 4; i++)
     {

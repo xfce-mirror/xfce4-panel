@@ -21,9 +21,11 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "xfce.h"
 
 #include "callbacks.h"
+
+#include "xfce.h"
+#include "xfce_support.h"
 #include "dialogs.h"
 #include "panel.h"
 #include "central.h"
@@ -35,153 +37,6 @@
 static PanelPopup *open_popup = NULL;
 
 void hide_current_popup_menu(void);
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Utility functions
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void exec_cmd(const char *cmd, gboolean in_terminal)
-{
-    GError *error = NULL;       /* this must be NULL to prevent crash :( */
-    char execute[MAXSTRLEN + 1];
-
-    if(!cmd)
-        return;
-
-    if (in_terminal)
-	snprintf(execute, MAXSTRLEN, "xterm -e %s", cmd);
-    else
-	snprintf(execute, MAXSTRLEN, "%s", cmd);
-    
-    if(!g_spawn_command_line_async(execute, &error))
-    {
-        char *msg;
-
-        msg = g_strcompress(error->message);
-
-	report_error(msg);
-	
-        g_free(msg);
-    }
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-/*** the next three routines are taken straight from gnome-libs so that the
-     gtk-only version can receive drag and drops as well ***/
-/**
- * gnome_uri_list_free_strings:
- * @list: A GList returned by gnome_uri_list_extract_uris() or gnome_uri_list_extract_filenames()
- *
- * Releases all of the resources allocated by @list.
- */
-void gnome_uri_list_free_strings(GList * list)
-{
-    g_list_foreach(list, (GFunc) g_free, NULL);
-    g_list_free(list);
-}
-
-
-/**
- * gnome_uri_list_extract_uris:
- * @uri_list: an uri-list in the standard format.
- *
- * Returns a GList containing strings allocated with g_malloc
- * that have been splitted from @uri-list.
- */
-GList *gnome_uri_list_extract_uris(const gchar * uri_list)
-{
-    const gchar *p, *q;
-    gchar *retval;
-    GList *result = NULL;
-
-    g_return_val_if_fail(uri_list != NULL, NULL);
-
-    p = uri_list;
-
-    /* We don't actually try to validate the URI according to RFC
-     * 2396, or even check for allowed characters - we just ignore
-     * comments and trim whitespace off the ends.  We also
-     * allow LF delimination as well as the specified CRLF.
-     */
-    while(p)
-    {
-        if(*p != '#')
-        {
-            while(isspace((int)(*p)))
-                p++;
-
-            q = p;
-            while(*q && (*q != '\n') && (*q != '\r'))
-                q++;
-
-            if(q > p)
-            {
-                q--;
-                while(q > p && isspace((int)(*q)))
-                    q--;
-
-                retval = (char *)g_malloc(q - p + 2);
-                strncpy(retval, p, q - p + 1);
-                retval[q - p + 1] = '\0';
-
-                result = g_list_prepend(result, retval);
-            }
-        }
-        p = strchr(p, '\n');
-        if(p)
-            p++;
-    }
-
-    return g_list_reverse(result);
-}
-
-
-/**
- * gnome_uri_list_extract_filenames:
- * @uri_list: an uri-list in the standard format
- *
- * Returns a GList containing strings allocated with g_malloc
- * that contain the filenames in the uri-list.
- *
- * Note that unlike gnome_uri_list_extract_uris() function, this
- * will discard any non-file uri from the result value.
- */
-GList *gnome_uri_list_extract_filenames(const gchar * uri_list)
-{
-    GList *tmp_list, *node, *result;
-
-    g_return_val_if_fail(uri_list != NULL, NULL);
-
-    result = gnome_uri_list_extract_uris(uri_list);
-
-    tmp_list = result;
-    while(tmp_list)
-    {
-        gchar *s = (char *)tmp_list->data;
-
-        node = tmp_list;
-        tmp_list = tmp_list->next;
-
-        if(!strncmp(s, "file:", 5))
-        {
-            /* added by Jasper Huijsmans
-               remove leading multiple slashes */
-            if(!strncmp(s + 5, "///", 3))
-                node->data = g_strdup(s + 7);
-            else
-                node->data = g_strdup(s + 5);
-        }
-        else
-        {
-            node->data = g_strdup(s);
-        }
-        g_free(s);
-    }
-    return result;
-}
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 

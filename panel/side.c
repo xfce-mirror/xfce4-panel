@@ -370,7 +370,7 @@ void add_move_handle(MoveHandle * mh, int side, GtkWidget * vbox)
     add_tooltip(mh->button, _("Iconify panel"));
     gtk_widget_show(mh->button);
 
-    pb = get_pixbuf_from_id(ICONIFY_ICON);
+    pb = get_system_pixbuf(ICONIFY_ICON);
     im = gtk_image_new_from_pixbuf(pb);
     gtk_widget_set_name(im, "gxfce_color1");
     g_object_unref(pb);
@@ -388,7 +388,7 @@ void add_move_handle(MoveHandle * mh, int side, GtkWidget * vbox)
     gtk_container_add(GTK_CONTAINER(mh->eventbox), mh->frame);
     gtk_widget_show(mh->frame);
 
-    pb = get_pixbuf_from_id(HANDLE_ICON);
+    pb = get_system_pixbuf(HANDLE_ICON);
     im = gtk_image_new_from_pixbuf(pb);
     gtk_widget_set_name(im, "gxfce_color1");
     g_object_unref(pb);

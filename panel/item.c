@@ -21,7 +21,7 @@
 
 #include "item.h"
 #include "panel.h"
-#include "dnd.h"
+#include "xfce_support.h"
 #include "callbacks.h"
 #include "popup.h"
 #include "icons.h"
@@ -63,14 +63,12 @@ void create_panel_item(PanelItem * pi)
     gtk_button_set_relief(GTK_BUTTON(pi->button), GTK_RELIEF_NONE);
 
     if(pi->id == EXTERN_ICON && pi->path)
-        pi->pb = gdk_pixbuf_new_from_file(pi->path, NULL);
+        pi->pb = get_pixbuf_from_file(pi->path);
     else
-        pi->pb = get_pixbuf_from_id(pi->id);
+        pi->pb = get_pixbuf_by_id(pi->id);
 
     gtk_container_set_border_width(GTK_CONTAINER(pi->button), 2);
-    pb = gdk_pixbuf_scale_simple(pi->pb,
-                                 MEDIUM_PANEL_ICONS - 4,
-                                 MEDIUM_PANEL_ICONS - 4, GDK_INTERP_BILINEAR);
+    pb = get_scaled_pixbuf(pi->pb, MEDIUM_PANEL_ICONS - 4);
 
     pi->image = gtk_image_new_from_pixbuf(pb);
     g_object_unref(pb);
@@ -133,9 +131,7 @@ void panel_item_set_size(PanelItem * pi, int size)
     gtk_container_set_border_width(GTK_CONTAINER(pi->button), bw);
     gtk_widget_set_size_request(pi->button, width + 4, height + 4);
 
-    pb = gdk_pixbuf_scale_simple(pi->pb,
-                                 width - 2 * bw,
-                                 height - 2 * bw, GDK_INTERP_BILINEAR);
+    pb = get_scaled_pixbuf(pi->pb, width - 2 * bw);
     gtk_image_set_from_pixbuf(GTK_IMAGE(pi->image), pb);
     g_object_unref(pb);
 }
@@ -151,7 +147,7 @@ void panel_item_set_icon_theme(PanelItem * pi, const char *theme)
 
     g_object_unref(pi->pb);
 
-    pi->pb = get_themed_pixbuf_from_id(pi->id, theme);
+    pi->pb = get_pixbuf_by_id(pi->id);
     panel_item_set_size(pi, settings.size);
 }
 

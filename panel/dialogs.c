@@ -1,3 +1,4 @@
+
 /*  dialogs.c
  *
  *  Copyright (C) 2002 Jasper Huijsmans <j.b.huijsmans@hetnet.nl>
@@ -24,7 +25,7 @@
 #include "dialogs.h"
 
 #include "xfce.h"
-#include "dnd.h"
+#include "xfce_support.h"
 #include "callbacks.h"
 #include "settings.h"
 #include "central.h"
@@ -36,122 +37,6 @@
 
 enum
 { RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Convenience functions
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-/* Taken from ROX Filer (http://rox.sf.net)
- * by Thomas Leonard
- */
-GtkWidget *mixed_button_new(const char *stock, const char *message)
-{
-    GtkWidget *button, *align, *image, *hbox, *label;
-
-    button = gtk_button_new();
-    label = gtk_label_new_with_mnemonic(message);
-    gtk_label_set_mnemonic_widget(GTK_LABEL(label), button);
-
-    image = gtk_image_new_from_stock(stock, GTK_ICON_SIZE_BUTTON);
-    hbox = gtk_hbox_new(FALSE, 2);
-
-    align = gtk_alignment_new(0.5, 0.5, 0.0, 0.0);
-
-    gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
-    gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    gtk_container_add(GTK_CONTAINER(button), align);
-    gtk_container_add(GTK_CONTAINER(align), hbox);
-    gtk_widget_show_all(align);
-
-    return button;
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   General dialogs
-
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void report_error(const char *text)
-{
-    GtkWidget *dialog;
-
-    dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
-                                    GTK_DIALOG_MODAL |
-                                    GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE, text);
-
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
-}
-
-void show_info(const char *text)
-{
-    GtkWidget *dialog;
-
-    dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
-                                    GTK_DIALOG_MODAL |
-                                    GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, text);
-
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
-}
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-static void fs_ok_cb(GtkDialog * fs)
-{
-    gtk_dialog_response(fs, GTK_RESPONSE_OK);
-}
-
-
-static void fs_cancel_cb(GtkDialog * fs)
-{
-    gtk_dialog_response(fs, GTK_RESPONSE_CANCEL);
-}
-
-/* Let's user select a file in a from a dialog. Any of the arguments may be NULL */
-char *select_file_name(const char *title, const char *path, GtkWidget * parent)
-{
-    const char *t = (title) ? title : _("Select file");
-    GtkWidget *fs = gtk_file_selection_new(t);
-    char *name = NULL;
-    const char *temp;
-
-    if(path)
-        gtk_file_selection_set_filename(GTK_FILE_SELECTION(fs), path);
-
-    if(parent)
-        gtk_window_set_transient_for(GTK_WINDOW(fs), GTK_WINDOW(parent));
-
-    g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(fs)->ok_button),
-                             "clicked", G_CALLBACK(fs_ok_cb), fs);
-
-    g_signal_connect_swapped(G_OBJECT(GTK_FILE_SELECTION(fs)->cancel_button),
-                             "clicked", G_CALLBACK(fs_cancel_cb), fs);
-
-    if(gtk_dialog_run(GTK_DIALOG(fs)) == GTK_RESPONSE_OK)
-    {
-        temp = gtk_file_selection_get_filename(GTK_FILE_SELECTION(fs));
-
-        if(temp && strlen(temp))
-            name = g_strdup(temp);
-        else
-            name = NULL;
-    }
-
-    gtk_widget_destroy(fs);
-
-    return name;
-}
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -315,11 +200,8 @@ static void icon_id_changed(void)
         {
             gtk_entry_set_text(GTK_ENTRY(iframe->icon_entry), iframe->icon_path);
 
-            iframe->pb = gdk_pixbuf_new_from_file(iframe->icon_path, NULL);
+            iframe->pb = get_pixbuf_from_file(iframe->icon_path);
         }
-
-        if(!iframe->pb)
-            iframe->pb = get_pixbuf_from_id(UNKNOWN_ICON);
 
         gtk_widget_set_sensitive(iframe->icon_browse_button, TRUE);
         gtk_widget_set_sensitive(iframe->icon_entry, TRUE);
@@ -339,7 +221,7 @@ static void icon_id_changed(void)
         gtk_entry_set_text(GTK_ENTRY(iframe->icon_entry), "");
         gtk_widget_set_sensitive(iframe->icon_browse_button, FALSE);
         gtk_widget_set_sensitive(iframe->icon_entry, FALSE);
-        iframe->pb = get_themed_pixbuf_from_id(new_id, settings.icon_theme);
+        iframe->pb = get_pixbuf_by_id(new_id);
     }
 
 
@@ -1001,7 +883,7 @@ static GtkWidget *create_panel_control_dialog(PanelItem * pi, PanelModule * pm)
     }
     else
     {
-        iframe->pb = get_pixbuf_from_id(UNKNOWN_ICON);
+        iframe->pb = get_pixbuf_by_id(UNKNOWN_ICON);
     }
 
     create_item_frame();
@@ -1083,7 +965,7 @@ void add_menu_item_dialog(PanelPopup * pp)
 
     iframe->num_items = g_list_length(pp->items) + 1;
 
-    iframe->pb = get_pixbuf_from_id(UNKNOWN_ICON);
+    iframe->pb = get_pixbuf_by_id(UNKNOWN_ICON);
     create_item_frame();
 
     box = GTK_DIALOG(dialog)->vbox;

@@ -4,7 +4,6 @@ builtins.c \
 callbacks.c \
 central.c \
 dialogs.c \
-dnd.c \
 icons.c \
 item.c \
 module.c \
@@ -17,7 +16,6 @@ builtins.h \
 callbacks.h \
 central.h \
 dialogs.h \
-dnd.h \
 move.h \
 popup.h \
 settings.h \

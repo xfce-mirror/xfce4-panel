@@ -138,7 +138,7 @@ char *get_read_file(void)
     if(!disable_user_config)
     {
         /* same as save file */
-        char file = get_save_file();
+        char *file = get_save_file();
 
         if(g_file_test(file, G_FILE_TEST_EXISTS))
             return file;
@@ -456,7 +456,8 @@ static void *expand_path(void)
         const char *path = g_getenv("PATH");
         const char *home = g_getenv("HOME");
         int homelen = strlen(home);
-        char *c, *s;
+        const char *c;
+		char *s;
         char newpath[MAXSTRLEN + 1];
 
 

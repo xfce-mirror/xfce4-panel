@@ -20,7 +20,7 @@
 #include "popup.h"
 
 #include "xfce.h"
-#include "dnd.h"
+#include "xfce_support.h"
 #include "callbacks.h"
 #include "icons.h"
 
@@ -37,8 +37,8 @@ PanelPopup *panel_popup_new(void)
     PanelPopup *pp = g_new(PanelPopup, 1);
 
     pp->button = NULL;
-    pp->up = get_pixbuf_from_id(UP_ICON);
-    pp->down = get_pixbuf_from_id(DOWN_ICON);
+    pp->up = get_system_pixbuf(UP_ICON);
+    pp->down = get_system_pixbuf(DOWN_ICON);
     pp->image = gtk_image_new();
     pp->hgroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
     pp->window = NULL;
@@ -277,7 +277,7 @@ void create_addtomenu_item(MenuItem * mi)
     gtk_frame_set_shadow_type(GTK_FRAME(mi->frame), GTK_SHADOW_NONE);
     gtk_box_pack_start(GTK_BOX(mi->hbox), mi->frame, FALSE, FALSE, 0);
 
-    mi->pixbuf = get_pixbuf_from_id(ADDICON_ICON);
+    mi->pixbuf = get_system_pixbuf(ADDICON_ICON);
     mi->image = gtk_image_new_from_pixbuf(mi->pixbuf);
     gtk_container_add(GTK_CONTAINER(mi->frame), mi->image);
 
@@ -304,9 +304,9 @@ void create_menu_item(MenuItem * mi)
     gtk_button_set_relief(GTK_BUTTON(mi->button), GTK_RELIEF_NONE);
 
     if(mi->icon_id == EXTERN_ICON && mi->icon_path)
-        mi->pixbuf = gdk_pixbuf_new_from_file(mi->icon_path, NULL);
+        mi->pixbuf = get_pixbuf_from_file(mi->icon_path);
     else
-        mi->pixbuf = get_pixbuf_from_id(mi->icon_id);
+        mi->pixbuf = get_pixbuf_by_id(mi->icon_id);
 
     mi->hbox = gtk_hbox_new(FALSE, 8);
     gtk_container_add(GTK_CONTAINER(mi->button), mi->hbox);
@@ -315,9 +315,7 @@ void create_menu_item(MenuItem * mi)
     gtk_frame_set_shadow_type(GTK_FRAME(mi->frame), GTK_SHADOW_NONE);
     gtk_box_pack_start(GTK_BOX(mi->hbox), mi->frame, FALSE, FALSE, 0);
 
-    pb = gdk_pixbuf_scale_simple(mi->pixbuf,
-                                 MEDIUM_POPUP_ICONS,
-                                 MEDIUM_POPUP_ICONS, GDK_INTERP_BILINEAR);
+    pb = get_scaled_pixbuf(mi->pixbuf, MEDIUM_POPUP_ICONS);
 
     mi->image = gtk_image_new_from_pixbuf(pb);
     g_object_unref(pb);
@@ -369,7 +367,7 @@ void menu_item_set_popup_size(MenuItem * mi, int size)
     GdkPixbuf *pb;
     int s = popup_size(size);
 
-    pb = gdk_pixbuf_scale_simple(mi->pixbuf, s - 4, s - 4, GDK_INTERP_BILINEAR);
+    pb = get_scaled_pixbuf(mi->pixbuf, s - 4);
     gtk_image_set_from_pixbuf(GTK_IMAGE(mi->image), pb);
     g_object_unref(pb);
 
@@ -392,7 +390,7 @@ void menu_item_set_icon_theme(MenuItem * mi, const char *theme)
 
     g_object_unref(mi->pixbuf);
 
-    mi->pixbuf = get_themed_pixbuf_from_id(mi->icon_id, theme);
+    mi->pixbuf = get_pixbuf_by_id(mi->icon_id);
     menu_item_set_popup_size(mi, settings.popup_size);
 }
 
