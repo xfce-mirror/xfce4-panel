@@ -72,10 +72,6 @@ Makefile
 doc/Makefile
 doc/C/Makefile
 doc/C/images/Makefile
-doc/fr/Makefile
-doc/fr/images/Makefile
-doc/it/Makefile
-doc/it/images/Makefile
 po/Makefile.in
 icons/Makefile
 panel/Makefile
