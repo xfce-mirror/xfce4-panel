@@ -71,7 +71,7 @@ PKG_CHECK_MODULES(BASE_DEPENDENCIES, glib-2.0 >= $GLIB_REQUIRED_VERSION gtk+-2.0
 
 PKG_CHECK_MODULES(MCS_CLIENT,  libxfce4mcs-client-1.0 >= $LIBXFCE4MCS_REQUIRED_VERSION)
 PKG_CHECK_MODULES(MCS_MANAGER, libxfce4mcs-manager-1.0 >= $LIBXFCE4MCS_REQUIRED_VERSION)
-PKG_CHECK_MODULES(XFCE_MCS_MANAGER, xfce-mcs-manager = 1)
+PKG_CHECK_MODULES(XFCE_MCS_MANAGER, xfce-mcs-manager >= 0.1)
 
 if $PKG_CONFIG --atleast-version $STARTUP_NOTIFICATION_VERSION libstartup-notification-1.0; then
     have_startup_notification=yes
