@@ -135,13 +135,17 @@ static void show_popup(PanelPopup * pp)
     p = gtk_widget_get_parent_window(pp->button);
     gdk_window_get_root_origin(p, &xparent, &yparent);
 
+    w = gdk_screen_width();
+    h = gdk_screen_height();
+
     if(!GTK_WIDGET_REALIZED(pp->window))
         gtk_widget_realize(pp->window);
 
+    /* show the window off scren to get the right dimensions */
+    gtk_window_move(GTK_WINDOW(pp->window), w+1, h+1);
+    gtk_widget_show(pp->window);
     gtk_widget_size_request(pp->window, &req2);
-
-    w = gdk_screen_width();
-    h = gdk_screen_height();
+    gtk_widget_hide(pp->window);
 
     /*  positioning logic (well ...)
      *  ----------------------------
