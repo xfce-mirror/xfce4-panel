@@ -1511,7 +1511,7 @@ static void switcher_add_options(Control *control, GtkContainer *container,
     		       FALSE, FALSE, 0);
     
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->graphical_checkbutton), 
-	    			 sd->sw->show_minibuttons);
+	    			 sd->sw->graphical);
     g_signal_connect(sd->graphical_checkbutton, "toggled", 
 	    	     G_CALLBACK(graphical_changed), sd);
 
