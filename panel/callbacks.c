@@ -21,6 +21,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <gdk/gdkkeysyms.h>
 #include <libxfcegui4/xfce_togglebutton.h>
 
 #include "xfce.h"
@@ -228,6 +229,18 @@ gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
     hide_popup(pp);
 
     return TRUE;
+}
+
+gboolean popup_key_pressed(GtkWidget * window, GdkEventKey * ev, 
+			   PanelPopup * pp)
+{
+    if (ev->keyval == GDK_Escape)
+    {
+	hide_popup(pp);
+	return TRUE;
+    }
+    else
+	return FALSE;
 }
 
 /*  Panel item callbacks

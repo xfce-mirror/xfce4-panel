@@ -36,6 +36,9 @@ void tearoff_popup(GtkWidget * button, PanelPopup * pp);
 
 gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp);
 
+gboolean popup_key_pressed(GtkWidget * window, GdkEventKey * ev, 
+			   PanelPopup * pp);
+
 /* panel items */
 void panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                         gint x, gint y, GtkSelectionData * data,

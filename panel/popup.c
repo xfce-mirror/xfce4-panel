@@ -343,6 +343,9 @@ PanelPopup *create_panel_popup(void)
 
     g_signal_connect(pp->window, "delete-event", G_CALLBACK(delete_popup), pp);
 
+    g_signal_connect(pp->window, "key-press-event", 
+	    	     G_CALLBACK(popup_key_pressed), pp);
+
     /* apparently this is necessary to make the popup show correctly */
     pp->detached = FALSE;
 
