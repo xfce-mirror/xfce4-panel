@@ -45,7 +45,6 @@
 #include <libxfcegui4/xfce_clock.h>
 
 #include "global.h"
-#include "debug.h"
 
 #include "controls.h"
 #include "icons.h"

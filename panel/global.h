@@ -24,9 +24,6 @@
 #include <gtk/gtk.h>
 #include <libxfcegui4/libxfcegui4.h>
 
-/* Debug purpose */
-#include "debug.h"
-
 /* why is this not in the standard C library ? */
 #define strequal(s1,s2) !strcmp (s1, s2)
 #define strnequal(s1,s2,n) !strncmp (s1, s2, n)

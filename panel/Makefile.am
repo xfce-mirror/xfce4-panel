@@ -31,7 +31,6 @@ xfce4_panel_SOURCES =							\
 
 pkginclude_HEADERS = 							\
 	controls.h							\
-	debug.h 							\
 	global.h 							\
 	icons.h 							\
 	main.h 								\

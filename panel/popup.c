@@ -27,6 +27,7 @@
 
 #include <gdk/gdkkeysyms.h>
 
+#include <libxfce4util/debug.h>
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/xfce_togglebutton.h>
 #include <libxfcegui4/xfce_menubutton.h>

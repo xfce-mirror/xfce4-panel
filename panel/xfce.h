@@ -26,6 +26,5 @@
 #include <controls.h>
 #include <icons.h>
 #include <xfce_support.h>
-#include <debug.h>
 
 #endif /* __XFCE4_H */
