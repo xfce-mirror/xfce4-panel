@@ -899,6 +899,7 @@ create_item_control (Control * control)
 
     control->with_popup = FALSE;
     gtk_container_add (GTK_CONTAINER (control->base), ic->base);
+    gtk_container_set_border_width (GTK_CONTAINER (control->base), 0);
 
     control->data = (gpointer) ic;
 }

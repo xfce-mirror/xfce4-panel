@@ -999,6 +999,7 @@ create_mailcheck_control (Control * control)
     GtkWidget *b = mailcheck->button;
 
     gtk_container_add (GTK_CONTAINER (control->base), b);
+    gtk_container_set_border_width (GTK_CONTAINER (control->base), 0);
 
     control->data = (gpointer) mailcheck;
     control->with_popup = FALSE;

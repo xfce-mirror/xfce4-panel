@@ -598,6 +598,7 @@ create_systembuttons_control (Control * control)
 
     gtk_widget_set_size_request (control->base, -1, -1);
     gtk_container_add (GTK_CONTAINER (control->base), sb->box);
+    gtk_container_set_border_width (GTK_CONTAINER (control->base), 0);
 
     control->data = (gpointer) sb;
     control->with_popup = FALSE;

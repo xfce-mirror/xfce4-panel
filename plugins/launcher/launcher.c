@@ -293,6 +293,7 @@ create_launcher_control (Control * control)
 {
     Launcher *launcher = launcher_new ();
 
+    gtk_container_set_border_width (GTK_CONTAINER (control->base), 0);
     gtk_widget_set_size_request (control->base, -1, -1);
     gtk_container_add (GTK_CONTAINER (control->base), launcher->box);
 
