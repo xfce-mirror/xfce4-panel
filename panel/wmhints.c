@@ -266,7 +266,7 @@ static void root_property_notify(XPropertyEvent * event)
         int n = get_net_current_desktop();
 
         if(n >= 0)
-            panel_set_current(n);
+            central_panel_set_current(n);
 
         return;
     }
@@ -276,7 +276,7 @@ static void root_property_notify(XPropertyEvent * event)
         int n = get_net_number_of_desktops();
 
         if(n >= 0)
-            panel_set_num_screens(n);
+            central_panel_set_num_screens(n);
 
         return;
     }

@@ -51,8 +51,6 @@ void panel_set_show_central(gboolean show);
 void panel_set_show_desktop_buttons(gboolean show);
 void panel_set_show_minibuttons(gboolean show);
 
-void panel_set_current(int n);
-
 /* global prefs */
 void init_settings(void);
 void panel_set_settings(void);

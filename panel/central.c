@@ -41,12 +41,16 @@ static char *screen_class[] = {
     "gxfce_color6"
 };
 
-GtkWidget *minibuttons[4];
-GtkWidget *mini_tables[2];      /* LEFT and RIGHT */
+static GtkWidget *central_frame;
+static GtkWidget *central_box;
+static GtkWidget *separators[2];
 
-GtkWidget *desktop_table;
-ScreenButton *screen_buttons[NBSCREENS];
-char *screen_names[NBSCREENS];
+static GtkWidget *minibuttons[4];
+static GtkWidget *mini_tables[2];      /* LEFT and RIGHT */
+
+static GtkWidget *desktop_table;
+static ScreenButton *screen_buttons[NBSCREENS];
+static char *screen_names[NBSCREENS];
 
 int current_screen = 0;
 
@@ -354,10 +358,11 @@ static void add_desktop_table(GtkBox * hbox)
     gtk_box_pack_start(hbox, desktop_table, TRUE, TRUE, 0);
 }
 
-void central_panel_init(GtkBox * hbox)
+void central_panel_init(GtkContainer * container)
 {
     int i;
     static gboolean need_init = TRUE;
+    gboolean newstyle = settings.style == NEW_STYLE;
 
     if (need_init)
     {
@@ -365,8 +370,40 @@ void central_panel_init(GtkBox * hbox)
 	 need_init = FALSE;
     }
 
-    create_minibuttons();
+    central_frame = gtk_frame_new(NULL);
+    gtk_widget_show(central_frame);
+    gtk_container_add(container, central_frame);
 
+    if (newstyle)
+	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_NONE);
+    else
+	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+    
+    if (settings.orientation == VERTICAL)
+    {
+	central_box = gtk_vbox_new(FALSE, 0);
+	separators[0] = gtk_hseparator_new();
+	separators[1] = gtk_hseparator_new();
+    }
+    else
+    {
+	central_box = gtk_hbox_new(FALSE, 0);
+	separators[0] = gtk_vseparator_new();
+	separators[1] = gtk_vseparator_new();
+    }
+
+    gtk_widget_show(central_box);
+    gtk_container_add(GTK_CONTAINER(central_frame), central_box);
+    
+    if (newstyle)
+    {
+	gtk_widget_show(separators[0]);
+	gtk_widget_show(separators[1]);
+    }
+    
+    gtk_box_pack_start(GTK_BOX(central_box), separators[0], FALSE, FALSE, 0);
+    
+    create_minibuttons();
 
     for(i = 0; i < NBSCREENS; i++)
     {
@@ -385,12 +422,13 @@ void central_panel_init(GtkBox * hbox)
             screen_buttons[i] = NULL;
     }
 
-    add_mini_table(LEFT, hbox);
-    add_desktop_table(hbox);
-    add_mini_table(RIGHT, hbox);
+    add_mini_table(LEFT, GTK_BOX(central_box));
+    add_desktop_table(GTK_BOX(central_box));
+    add_mini_table(RIGHT, GTK_BOX(central_box));
 
+    gtk_box_pack_start(GTK_BOX(central_box), separators[1], FALSE, FALSE, 0);
+    
     central_panel_set_size(settings.size);
-
 }
 
 void central_panel_set_from_xml(xmlNodePtr node)
@@ -649,6 +687,21 @@ void central_panel_set_style(int style)
 {
     int i;
 
+    if (style == NEW_STYLE)
+    {
+	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_NONE);
+
+	gtk_widget_show(separators[0]);
+	gtk_widget_show(separators[1]);
+    }
+    else
+    {
+	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
+
+	gtk_widget_hide(separators[0]);
+	gtk_widget_hide(separators[1]);
+    }
+    
     for(i = 0; i < NBSCREENS; i++)
     {
         ScreenButton *sb = screen_buttons[i];

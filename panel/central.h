@@ -23,7 +23,7 @@
 #include "global.h"
 
 /* central panel */
-void central_panel_init(GtkBox * hbox);
+void central_panel_init(GtkContainer *container);
 
 void central_panel_set_from_xml(xmlNodePtr node);
 

@@ -74,10 +74,9 @@ Handle *handles[2];
 
 static GtkWidget *left_box;
 static GtkWidget *right_box;
-static GtkWidget *central_frame;
-static GtkWidget *central_box;
+static GtkWidget *central_container;
 
-gboolean central_frame_created = FALSE;
+gboolean central_created = FALSE;
 
 /*  callbacks  */
 static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, 
@@ -91,10 +90,12 @@ static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev,
 static gboolean panel_destroy_cb(GtkWidget * frame, GdkEvent * ev, 
 				      gpointer data)
 {
+    toplevel = NULL;
+
     side_panel_cleanup(LEFT);
     side_panel_cleanup(RIGHT);
 
-    if (central_frame_created)
+    if (central_created)
 	central_panel_cleanup();
 
     return TRUE;
@@ -129,7 +130,6 @@ static GtkWidget *create_panel_window(void)
 
 static void create_panel_contents(void)
 {
-    GtkWidget *sep1, *sep2;
     gboolean vertical = settings.orientation == VERTICAL;
     
     main_frame = gtk_frame_new(NULL);
@@ -145,15 +145,9 @@ static void create_panel_contents(void)
 
 	panel_box = gtk_vbox_new(FALSE, 0);
 
-	sep1 = gtk_hseparator_new();
-
-	sep2 = gtk_hseparator_new();
-
 	left_box = gtk_vbox_new(FALSE, 0);
 
 	right_box = gtk_vbox_new(FALSE, 0);
-
-	central_box = gtk_vbox_new(FALSE, 0);
     }
     else
     {
@@ -161,46 +155,26 @@ static void create_panel_contents(void)
 
 	panel_box = gtk_hbox_new(FALSE, 0);
 
-	sep1 = gtk_vseparator_new();
-
-	sep2 = gtk_vseparator_new();
-
 	left_box = gtk_hbox_new(FALSE, 0);
 
 	right_box = gtk_hbox_new(FALSE, 0);
-
-	central_box = gtk_hbox_new(FALSE, 0);
     }
     
     /* show them */
     gtk_widget_show(main_box);
     gtk_widget_show(panel_box);
-/*    gtk_widget_show(sep1);
-    gtk_widget_show(sep2);*/
     gtk_widget_show(left_box);
     gtk_widget_show(right_box);
-    gtk_widget_show(central_box);
 
-    /* ref the ones we may need to move around */
-    g_object_ref(panel_box);	/* may be swapped with taskbar container */
-    g_object_ref(right_box); 	/* may have to be temporarily removed when 
-				   adding central panel from the dialog */
-    
     /* create the other widgets */
 
     handles[LEFT] = handle_new(LEFT);
     handles[RIGHT] = handle_new(RIGHT);
     
-    central_frame = gtk_frame_new(NULL);
-    if(settings.style == OLD_STYLE)
-	gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
-    g_object_ref(central_frame);
-    central_frame_created = TRUE;
-
+    central_container = gtk_alignment_new(0,0,1,1);
+    
     if(settings.show_central)
-    {
-        gtk_widget_show(central_frame);
-    }
+        gtk_widget_show(central_container);
     
     /* pack the widgets into the main frame */
     
@@ -210,18 +184,12 @@ static void create_panel_contents(void)
 
     handle_pack(handles[LEFT], GTK_BOX(panel_box));
 
-    gtk_box_pack_start(GTK_BOX(panel_box), sep1, FALSE, TRUE, 0);
-
     gtk_box_pack_start(GTK_BOX(panel_box), left_box, TRUE, TRUE, 0);
 
-    gtk_box_pack_start(GTK_BOX(panel_box), central_frame, TRUE, TRUE, 0);
-
-    gtk_container_add(GTK_CONTAINER(central_frame), central_box);
+    gtk_box_pack_start(GTK_BOX(panel_box), central_container, TRUE, TRUE, 0);
 
     gtk_box_pack_start(GTK_BOX(panel_box), right_box, TRUE, TRUE, 0);
     
-    gtk_box_pack_start(GTK_BOX(panel_box), sep2, FALSE, TRUE, 0);
-
     handle_pack(handles[RIGHT], GTK_BOX(panel_box));
 }
 
@@ -233,7 +201,7 @@ void panel_init(void)
 
 void panel_cleanup(void)
 {
-    if(GTK_IS_WIDGET(toplevel))
+    if(toplevel && GTK_IS_WIDGET(toplevel))
         gtk_widget_destroy(toplevel);
 }
 
@@ -258,11 +226,13 @@ void panel_set_orientation(int orientation)
     side_panel_pack(LEFT, GTK_BOX(left_box));
     side_panel_pack(RIGHT, GTK_BOX(right_box));
     
-    central_panel_init(GTK_BOX(central_box));
+    if (settings.show_central)
+    {
+	central_panel_init(GTK_CONTAINER(central_container));
+	central_created = TRUE;
+    }
 
     panel_set_position();
-    panel_set_current(current_screen);
-    
     panel_set_popup_position(settings.popup_position);
 }
 
@@ -280,7 +250,10 @@ void panel_set_size(int size)
     settings.size = size;
 
     side_panel_set_size(LEFT, size);
-    central_panel_set_size(size);
+
+    if (central_created)
+	central_panel_set_size(size);
+
     side_panel_set_size(RIGHT, size);
 
     handle_set_size(handles[LEFT], size);
@@ -305,14 +278,10 @@ void panel_set_style(int style)
 {
     settings.style = style;
 
-    if(style == OLD_STYLE)
-        gtk_frame_set_shadow_type(GTK_FRAME(central_frame), GTK_SHADOW_OUT);
-    else
-        gtk_frame_set_shadow_type(GTK_FRAME(central_frame),
-                                  GTK_SHADOW_ETCHED_IN);
-
+    if (central_created)
+	central_panel_set_style(style);
+    
     side_panel_set_style(LEFT, style);
-    central_panel_set_style(style);
     side_panel_set_style(RIGHT, style);
 
     handle_set_style(handles[LEFT], style);
@@ -326,8 +295,10 @@ void panel_set_theme(const char *theme)
     settings.theme = g_strdup(theme);
     g_free(tmp);
 
+    if (central_created)
+	central_panel_set_theme(theme);
+
     side_panel_set_theme(LEFT, theme);
-    central_panel_set_theme(theme);
     side_panel_set_theme(RIGHT, theme);
 }
 
@@ -346,17 +317,25 @@ void panel_set_num_right(int n)
 void panel_set_num_screens(int n)
 {
     settings.num_screens = n;
-    central_panel_set_num_screens(n);
+    
+    if (central_created)
+	central_panel_set_num_screens(n);
 }
 
 void panel_set_show_central(gboolean show)
 {
     settings.show_central = show;
 
-    if(show)
-        gtk_widget_show(central_frame);
+    if (show && !central_created)
+    {
+	central_panel_init(GTK_CONTAINER(central_container));
+	central_created = TRUE;
+    }
+    
+    if (show)
+        gtk_widget_show(central_container);
     else
-        gtk_widget_hide(central_frame);
+        gtk_widget_hide(central_container);
 }
 
 void panel_set_show_desktop_buttons(gboolean show)
@@ -371,27 +350,6 @@ void panel_set_show_minibuttons(gboolean show)
     settings.show_minibuttons = show;
 
     central_panel_set_show_minibuttons(show);
-}
-
-void panel_set_current(int n)
-{
-    static gboolean need_init = TRUE;
-
-    if (need_init)
-    {
-	/* force creation of _NET_CURRENT_DESKTOP hint */
-	if (n == 0)
-	{
-	    request_net_current_desktop(1);
-
-	    request_net_current_desktop(0);
-	}
-
-	need_init = FALSE;
-    }
-    
-    current_screen = n;
-    central_panel_set_current(n);
 }
 
 /*  Global preferences
@@ -421,8 +379,6 @@ void init_settings(void)
 
     settings.lock_command = NULL;
     settings.exit_command = NULL;
-    
-    current_screen = get_net_current_desktop();
 }
 
 void panel_set_settings(void)
@@ -436,13 +392,16 @@ void panel_set_settings(void)
     side_panel_set_num_groups(LEFT, settings.num_left);
     side_panel_set_num_groups(RIGHT, settings.num_right);
 
-    central_panel_set_num_screens(settings.num_screens);
+    panel_set_num_screens(settings.num_screens);
 
     panel_set_show_central(settings.show_central);
-    central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
-    panel_set_show_minibuttons(settings.show_minibuttons);
 
-    central_panel_set_current(current_screen);
+    if (central_created)
+    {
+	central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
+	central_panel_set_show_minibuttons(settings.show_minibuttons);
+        central_panel_set_current(current_screen);
+    }
 }
 
 void panel_set_position(void)
@@ -813,9 +772,15 @@ void xfce_run(void)
 
     /* panel framework */
     panel_init();
+    
     side_panel_init(LEFT, GTK_BOX(left_box));
-    central_panel_init(GTK_BOX(central_box));
     side_panel_init(RIGHT, GTK_BOX(right_box));
+
+    if (settings.show_central)
+    {
+	central_panel_init(GTK_CONTAINER(central_container));
+	central_created = TRUE;
+    }
 
     /* give early visual feedback 
      * the init functions have already created the basic panel */
@@ -833,7 +798,8 @@ void xfce_run(void)
 
     request_net_number_of_desktops(settings.num_screens);
 
-    central_panel_set_current(current_screen);
+    if (central_created)
+	central_panel_set_current(current_screen);
 
     gtk_main();
 }
