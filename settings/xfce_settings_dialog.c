@@ -33,8 +33,7 @@
 
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4mcs/mcs-manager.h>
-#include <libxfcegui4/dialogs.h>
-#include <libxfcegui4/xfce_framebox.h>
+#include <libxfcegui4/libxfcegui4.h>
 
 #include "xfce_settings.h"
 #include "xfce_settings_plugin.h"
@@ -508,6 +507,6 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     add_spacer (GTK_BOX (vbox), BORDER);
 
-    gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dialog));
     gtk_widget_show (dialog);
 }
