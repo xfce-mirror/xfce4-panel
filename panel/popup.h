@@ -61,7 +61,6 @@ void panel_popup_set_layer (PanelPopup * pp, int layer);
 void panel_popup_set_theme (PanelPopup * pp, const char *theme);
 
 void hide_current_popup_menu (void);
-void reposition_current_popup (void);
 
 void panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node);
 void panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root);

@@ -70,7 +70,10 @@ position_popup (PanelPopup * pp)
     gboolean vertical = settings.orientation == VERTICAL;
     int pos = settings.popup_position;
     GtkAllocation alloc1 = {0,}, alloc2 = {0,};
- 
+    
+    if (pp->detached)
+	return;
+
     alloc1 = pp->button->allocation;
     xbutton = alloc1.x;
     ybutton = alloc1.y;
@@ -206,16 +209,6 @@ hide_current_popup_menu (void)
 }
 
 void
-reposition_current_popup (void) 
-{
-    if (!open_popup)
-	return;
-    
-    position_popup(open_popup);
-}
-
-
-void
 toggle_popup (GtkWidget * button, PanelPopup * pp)
 {
     hide_current_popup_menu ();
@@ -231,10 +224,8 @@ tearoff_popup (GtkWidget * button, PanelPopup * pp)
 {
     open_popup = NULL;
     pp->detached = TRUE;
-    gtk_widget_hide (pp->window);
     gtk_widget_hide (pp->tearoff_button);
     gtk_window_set_decorated (GTK_WINDOW (pp->window), TRUE);
-    show_popup (pp);
 }
 
 gboolean
@@ -348,6 +339,9 @@ create_panel_popup (void)
     pp->window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     set_popup_window_properties (pp->window);
 
+    g_signal_connect_swapped(pp->window, "size-allocate", 
+	    		     G_CALLBACK(position_popup), pp);
+    
     pp->frame = gtk_frame_new (NULL);
     gtk_frame_set_shadow_type (GTK_FRAME (pp->frame), GTK_SHADOW_OUT);
     gtk_container_add (GTK_CONTAINER (pp->window), pp->frame);
@@ -357,21 +351,21 @@ create_panel_popup (void)
 
     pp->addtomenu_item = menu_item_new (pp);
     create_addtomenu_item (pp->addtomenu_item);
-    gtk_box_pack_start (GTK_BOX (pp->vbox), pp->addtomenu_item->button, TRUE,
-			TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (pp->vbox), pp->addtomenu_item->button, FALSE,
+			FALSE, 0);
 
     pp->separator = gtk_hseparator_new ();
     gtk_box_pack_start (GTK_BOX (pp->vbox), pp->separator, FALSE, FALSE, 0);
 
     /* we don't know the items until we read the config file */
     pp->items = NULL;
-    pp->item_vbox = gtk_vbox_new (TRUE, 0);
+    pp->item_vbox = gtk_vbox_new (FALSE, 0);
     gtk_widget_show (pp->item_vbox);
     gtk_box_pack_start (GTK_BOX (pp->vbox), pp->item_vbox, FALSE, FALSE, 0);
 
     pp->tearoff_button = gtk_button_new ();
     gtk_button_set_relief (GTK_BUTTON (pp->tearoff_button), GTK_RELIEF_NONE);
-    gtk_box_pack_start (GTK_BOX (pp->vbox), pp->tearoff_button, FALSE, TRUE,
+    gtk_box_pack_start (GTK_BOX (pp->vbox), pp->tearoff_button, FALSE, FALSE,
 			0);
     sep = gtk_hseparator_new ();
     gtk_container_add (GTK_CONTAINER (pp->tearoff_button), sep);
@@ -416,7 +410,7 @@ panel_popup_add_item (PanelPopup * pp, Item * mi)
     GList *li;
     int i;
 
-    gtk_box_pack_start (GTK_BOX (pp->item_vbox), mi->button, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (pp->item_vbox), mi->button, FALSE, FALSE, 0);
     gtk_box_reorder_child (GTK_BOX (pp->item_vbox), mi->button, mi->pos);
 
     pp->items = g_list_insert (pp->items, mi, mi->pos);
@@ -530,7 +524,6 @@ panel_popup_set_size (PanelPopup * pp, int size)
 
 	menu_item_set_popup_size (mi, size);
     }
-
 }
 
 void

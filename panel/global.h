@@ -41,7 +41,7 @@
 /* limits to the panel size */
 #define NBSCREENS 12
 #define NBGROUPS  16
-#define NBITEMS   16
+#define NBITEMS   25
 
 /* don't change default here, this is the fallback option
  * default config is set in the settings manager plugin */

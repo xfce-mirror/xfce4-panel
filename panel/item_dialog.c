@@ -1102,8 +1102,7 @@ edit_menu_item_dialog (Item * mi)
 	gtk_container_remove (GTK_CONTAINER (pp->item_vbox), mi->button);
 	pp->items = g_list_remove (pp->items, mi);
 	item_free (mi);
-
-	reposition_current_popup ();
+	reindex_items(pp->items);
     }
 
     gtk_widget_destroy (dlg);
@@ -1123,7 +1122,6 @@ add_menu_item_dialog (PanelPopup * pp)
     mi->pos = 0;
 
     panel_popup_add_item (pp, mi);
-    reposition_current_popup ();
 
     edit_menu_item_dialog (mi);
 }
