@@ -1,3 +1,138 @@
+2003-03-02 18:10  xfce
+
+	* po/: fr.gmo, fr.po: Rearrange button events handler in xfwm4
+	Update french translation for xfce4 panel
+
+2003-03-01 00:38  xfce
+
+	* Makefile.in, aclocal.m4, config.guess, config.h.in, config.sub,
+	configure, ltcf-c.sh, ltconfig, ltmain.sh, doc/Makefile.in,
+	doc/html/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: [no log message]
+
+2003-02-28 20:09  bmeurer
+
+	* example.xfce4rc.in: Fixed type "xfhelp" -> "xfhelp4"
+
+2003-02-28 19:42  xfce
+
+	* Makefile.in, aclocal.m4, config.guess, configure, ltmain.sh,
+	doc/Makefile.in, doc/html/Makefile.in, doc/images/Makefile.in,
+	doc/xml/Makefile.in, icons/Makefile.in, panel/Makefile.in,
+	plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Fix xfce-mcs-manager API/ABI versionning
+	Update configure/libtool to use libtool 1.4.3
+
+2003-02-28 11:53  bmeurer
+
+	* configure, Makefile.in, aclocal.m4, config.guess, configure.ac,
+	ltcf-c.sh, ltconfig, ltmain.sh, doc/html/Makefile.in,
+	doc/Makefile.in, doc/images/Makefile.in, doc/xml/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/clock/Makefile.in,
+	plugins/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Fixes
+	xfce-mcs-manager issue.
+
+2003-02-27 22:48  xfce
+
+	* configure: Updates (I'm sure you wouldn't have guessed)
+
+2003-02-26 15:39  huysmans
+
+	* panel/main.c: POSIX signal handling
+
+2003-02-26 11:21  huysmans
+
+	* configure, configure.ac, po/ja.gmo, po/ja.po: Add japanese
+	translations
+
+2003-02-26 08:17  xfce
+
+	* Makefile.in, aclocal.m4, config.guess, config.sub, configure,
+	ltmain.sh, doc/Makefile.in, doc/html/Makefile.in,
+	doc/images/Makefile.in, doc/xml/Makefile.in, icons/Makefile.in,
+	panel/Makefile.in, panel/xfce_support.c, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Apply Benedikt
+	Meurer <Benedikt.Meurer@unix-ag.uni-siegen.de> patch Replace all 
+	occurences of g_getenv("HOME") with g_get_home_dir() Regenerate all
+	Makefiles.on and configure scripts
+
+2003-02-25 23:18  huysmans
+
+	* plugins/systembuttons/systembuttons.c: Use xflock4
+
+2003-02-25 22:19  huysmans
+
+	* autogen.sh: Fix proper use of AC_PROG_LIBTOOL
+
+2003-02-25 11:54  huysmans
+
+	* Makefile.in, aclocal.m4, configure, doc/Makefile.in,
+	doc/html/Makefile.in, doc/images/Makefile.in,
+	doc/images/panel-settings.png, doc/xml/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/xfce_settings_dialog.c,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Update
+	screenshots for new dialog style
+
+2003-02-24 23:10  huysmans
+
+	* settings/: Makefile.in, xfce_settings_dialog.c: Use frames in
+	dialog for the sake of consistency.
+
+2003-02-24 20:56  huysmans
+
+	* panel/: popup.c, panel.c: Revert to using gtk to move the panels.
+	No more flicker, yay.
+
+2003-02-23 23:22  huysmans
+
+	* panel/popup.c: Use gdk_window_move to position subpanel. gtk does
+	not ignore margins
+
+2003-02-23 14:52  huysmans
+
+	* doc/: html/panel-copyright.html, html/panel-getting-started.html,
+	html/panel-settings.html, html/panel-use.html,
+	html/xfce4-panel.html, xml/xfce4-panel.xml: Add some text to panel
+	item screenshots
+
+2003-02-22 12:10  huysmans
+
+	* doc/: html/panel-getting-started.html, html/panel-settings.html,
+	html/panel-use.html, html/xfce4-panel.html, xml/xfce4-panel.xml:
+	Small doc update
+
+2003-02-22 11:30  huysmans
+
+	* ChangeLog, doc/images/Makefile.am, doc/images/Makefile.in:
+	Actually install doc images ...
+
 2003-02-18 22:56  xfce
 
 	* panel/panel.c: Use xflock4 instead of xflock (same file, just a

@@ -75,17 +75,19 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-intro">
   <title>Introduction</title>
 
-  <para>The XFce panel is part of the XFce Desktop Environment and
-    features program lauchers, popup menus, a desktop switcher and
-    more. The actual command to run is &app;. Many aspects of the panel
-    can be configured through graphical dialogs.
+  <para>The XFce panel is part of the 
+    <ulink url="index.html" type="html">XFce Desktop Environment</ulink> and
+    features program lauchers, popup menus, a desktop switcher and more. The 
+    actual command to run is &app;. Many aspects of the panel can be 
+    configured through graphical dialogs.
   </para>
 
-  <para>XFce is a collection of programs that together provide a
-    full-featured desktop environment. It aims to be fast and lightweight,
-    while still being visually appealing and easy to use. For more
-    information visit the 
-    <ulink url="http://www.xfce.org" type="http">XFce website</ulink>. 
+  <para>If you are familiar with previous versions of XFce you will find many
+    new features. Most visible are probably the vertical panel mode, the icon
+    themes, the new graphical pager and the variable position of the popup 
+    buttons. The way preferences are handled has changed completely, so it 
+    may take some time to get used to. This manual should provide you with all 
+    necessary information on how to adjust the panel to your liking.
   </para>
 
 </sect1>
@@ -376,7 +378,9 @@ maintainers, etc. Commented out by default.
 	CDE-like desktop switcher, that shows buttons with the desktop name 
 	and a graphical pager that shows a miniature view of the desktops and
 	even allows you to move windows to another workspace by dragging the
-	mini-window in the pager.</para>
+	mini-window in the pager. The graphical pager even allows you to
+	change workspaces by using the mouse scrollwheel, when you hold the
+	mouse over it.</para>
       
       <para>&nbsp;</para>
 
@@ -422,8 +426,8 @@ maintainers, etc. Commented out by default.
 	<varlistentry>
 	  <term>Exit</term>
 	  <listitem>This will exit the panel and usually also end your X
-	    session, when you used <application>startxfce4</application> or 
-	    put the panel at the end of your X startup file.
+	    session (when you used <application>startxfce4</application> or 
+	    put the panel at the end of your X startup file).
 	  </listitem>
 	</varlistentry>
 	<varlistentry>
