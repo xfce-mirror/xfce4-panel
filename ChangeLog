@@ -1,3 +1,7 @@
+2004-12-20 21:11  jasper
+
+	* ChangeLog, NEWS: Update ChangeLog and NEWS
+
 2004-12-19 21:49  pollux
 
 	* po/: ko.gmo, ko.po: update KO translations
@@ -701,11 +705,6 @@
 	  update: * use Base Dir Spec * xfce4rc -> panel/contents.xml *
 	  small doc update, more to come
 
-2004-09-10 23:45  pollux
-
-	* configure, configure.ac, po/he.gmo, po/he.po: add HE translations
-	  from Yuval Tanny <tanai@int.gov.il>
-
 2004-09-10 22:49  pollux
 
 	* Makefile.am, Makefile.in, xfce4rc.he, po/he.gmo, po/he.po: HE
@@ -929,34 +928,10 @@
 	* Makefile.am, Makefile.in, aclocal.m4, xfce4rc.ro: adds xfce4rc
 	  Romanian translation from Razvan T. Coloja
 
-2004-08-13 11:33  pollux
-
-	* Makefile.am, Makefile.in, aclocal.m4, xfce4rc.ro: adds xfce4rc
-	  Romanian translation from Razvan T. Coloja
-
 2004-08-12 23:28  jasper
 
 	* panel/item_dialog.c: Add preliminary, minimal appfinder DND
 	  support. Patch by Eduard.
-
-2004-08-10 11:25  pollux
-
-	* po/: ar.gmo, ar.po, az.gmo, az.po, bg.gmo, bg.po, ca.gmo, ca.po,
-	  cs.gmo, cs.po, de.gmo, de.po, es.gmo, es.po, es_MX.gmo, es_MX.po,
-	  et.gmo, et.po, eu.gmo, eu.po, fa_IR.gmo, fa_IR.po, fi.gmo, fi.po,
-	  fr.gmo, fr.po, hi.gmo, hi.po, hu.gmo, hu.po, it.gmo, it.po,
-	  ja.gmo, ja.po, ko.gmo, ko.po, lt.gmo, lt.po, ms.gmo, ms.po,
-	  nl.gmo, nl.po, no.gmo, no.po, pl.gmo, pl.po, pt_BR.gmo, pt_BR.po,
-	  pt_PT.gmo, pt_PT.po, ru.gmo, ru.po, sv.gmo, sv.po, ta.gmo, ta.po,
-	  tr.gmo, tr.po, uk.gmo, uk.po, vi.gmo, vi.po, xfce4-panel.pot,
-	  zh_CN.gmo, zh_CN.po, zh_TW.gmo, zh_TW.po: update of zh_TW
-	  translation from Ambrose Li and po files update
-
-2004-08-10 11:22  pollux
-
-	* plugins/clock/clock.c: applies patch from Ambrose Li to allow the
-	  clock to display a meaningful date for Chinese, Japanese, and
-	  Korean
 
 2004-08-10 10:14  jasper
 
@@ -1098,7 +1073,7 @@
 	* m4/depends.m4: Modifed panel plugin check, so one (the installer)
 	  can choose to install into a different plugin dir.
 
-2004-07-19 20:35  pollux
+2004-07-19 20:37  pollux
 
 	* po/: no.gmo, no.po: definitively fix #162
 
@@ -1125,32 +1100,12 @@
 	* settings/xfce_settings_plugin.c: Fix bug #235: changes to panel
 	  settings not accepted at first login
 
-2004-07-15 11:17  jasper
-
-	* settings/xfce_settings_plugin.c: Fix bug #239: crash
-	  xfce-mcs-manager on empty xfce4-settings.xml
-
-2004-07-15 08:22  jasper
-
-	* aclocal.m4, configure, configure.ac, ltmain.sh,
-	  po/xfce4-panel.pot: Bump version for possible bug fix release
-
-2004-07-15 07:59  jasper
-
-	* doc/: C/xfce4-panel.html, C/xfce4-panel.xml, fr/xfce4-panel.html,
-	  fr/xfce4-panel.xml: get rid of moongroup references
-
 2004-07-14 22:22  jasper
 
 	* NEWS, doc/C/xfce4-panel.html, doc/C/xfce4-panel.xml,
 	  doc/fr/xfce4-panel.html, doc/fr/xfce4-panel.xml,
 	  doc/it/xfce4-panel.html, doc/it/xfce4-panel.xml: Get rid of
 	  moongroup.com references
-
-2004-07-14 21:03  jasper
-
-	* panel/item.c: Fix for bug #215: crash when dropping large number
-	  of files
 
 2004-07-14 20:27  jasper
 
@@ -1171,12 +1126,6 @@
 
 	* panel/: panel.c, panel.h, xfce_support.c, xfce_support.h: More
 	  positioning stuff. Let's hope I didn't break anything ...
-
-2004-07-11 09:59  olivier
-
-	* Makefile.am, Makefile.in, xfce4rc.fr, panel/main.c,
-	  panel/xfce_support.c: Add french localization of default config
-	  from LiNuCe <linuce@wanadoo.fr>
 
 2004-07-11 09:51  olivier
 
@@ -1216,47 +1165,13 @@
 	* panel/panel.c: Remove dock type again. Use window state to set
 	  panel always on top.
 
-2004-07-09 11:32  olivier
-
-	* ChangeLog: Update ChangeLog
-
-2004-07-09 10:59  olivier
-
-	* po/xfce4-panel.pot: Update versions.
-
-2004-07-09 09:53  olivier
-
-	* ChangeLog: Update ChangeLogs for 4.0.6
-
-2004-07-08 21:53  olivier
-
-	* ltmain.sh: Update tree for 4.0.6 release
-
 2004-07-08 08:38  jasper
 
 	* panel/panel.c: Fix some issues with positioning and struts
 
-2004-07-08 00:18  kelnos
-
-	* settings/xfce_settings_plugin.c: compile fix from linuce on #xfce
-
-2004-07-06 17:58  pollux
-
-	* configure, configure.ac, po/eu.gmo, po/eu.po: add basque
-	  translation from ^pi^ <pi@beobide.net>
-
-2004-06-27 23:18  pollux
-
-	* po/: ru.gmo, ru.po: russian translations update from Anthony
-	  Ivanoff
-
 2004-06-20 22:23  olivier
 
 	* panel/mcs_client.c: Fix panel crash with gtk+-2.2.x
-
-2004-06-18 21:46  jasper
-
-	* settings/xfce_settings_plugin.c: Patch by Arelien Foret
 
 2004-06-18 21:42  jasper
 
@@ -1316,11 +1231,6 @@
 
 	* po/zh_CN.po: Update zh_CN translations
 
-2004-06-11 13:03  pollux
-
-	* configure, configure.ac, ltmain.sh, po/et.gmo, po/et.po: Estonian
-	  translations from Peeter Vois <peeter.vois@proekspert.ee> added
-
 2004-05-29 09:47  jasper
 
 	* panel/: controls.c, panel.c, panel.h: Cleaning up panel
@@ -1366,19 +1276,6 @@
 	* panel/: item_dialog.c, item_dialog.h: xffm_theme_maker is now
 	  replaced by xfmime_edit.
 
-2004-05-04 00:15  olivier
-
-	* Makefile.in, aclocal.m4, config.guess, config.sub, configure,
-	  install-sh, ltmain.sh, mkinstalldirs, doc/Makefile.in,
-	  doc/C/Makefile.in, doc/C/images/Makefile.in, doc/fr/Makefile.in,
-	  doc/fr/images/Makefile.in, icons/Makefile.in, panel/Makefile.in,
-	  plugins/Makefile.in, plugins/clock/Makefile.in,
-	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
-	  plugins/separator/Makefile.in, plugins/switcher/Makefile.in,
-	  plugins/systembuttons/Makefile.in, po/zh_TW.gmo, po/zh_TW.po,
-	  settings/Makefile.in: Update zh_TW translations by umm
-	  <umm@pchome.com.tw>
-
 2004-05-03 23:44  olivier
 
 	* Makefile.in, aclocal.m4, config.guess, config.sub, configure,
@@ -1412,15 +1309,6 @@
 	* settings/: Makefile.am, Makefile.in, xfce-panel-settings.desktop:
 	  .desktop file for panel settings
 
-2004-04-23 22:19  olivier
-
-	* xfce4rc, xfce4rc.ar, xfce4rc.az, xfce4rc.ca, xfce4rc.hu,
-	  xfce4rc.it, xfce4rc.nl, xfce4rc.vi: Change defaults: Removes the
-	  "-splash"  option from mozilla launcher that confuses the
-	  "mozilla" script (preventing the opening of another window when
-	  Mozilla is already running), fix a typo in Nautilus name, and
-	  enables startup notification for apps that support it.
-
 2004-04-23 22:15  olivier
 
 	* xfce4rc, xfce4rc.ar, xfce4rc.az, xfce4rc.ca, xfce4rc.eu,
@@ -1441,11 +1329,6 @@
 2004-04-21 08:09  olivier
 
 	* panel/groups.c: Apply patch from Scott Barron
-
-2004-04-21 07:58  olivier
-
-	* configure, configure.ac, panel/groups.c, po/xfce4-panel.pot:
-	  Apply patch from Scott Barron
 
 2004-04-21 02:56  kelnos
 
@@ -1579,10 +1462,6 @@
 	  xfce_load_themed_icon(), duh...).  bump libxfcegui4 version
 	  requirement to 4.1.11
 
-2004-03-21 08:55  jasper
-
-	* panel/xfce_support.c: Backport exec fix from 4.1.x
-
 2004-03-20 21:22  jasper
 
 	* panel/item.c: Revert tweaks to dnd :)
@@ -1593,7 +1472,7 @@
 
 2004-03-18 19:26  jasper
 
-	* panel/: item.c: Fix DND for launchers with 'Run in terminal'
+	* panel/item.c: Fix DND for launchers with 'Run in terminal'
 	  checked.
 
 2004-03-15 08:36  olivier
@@ -1605,15 +1484,6 @@
 	  Peter Slavov <peshka@i-space.org> Italian from Alex Dupre
 	  <ale@FreeBSD.org> Arabic from Saleh Hathal
 	  <hathalsal@hotmail.com>
-
-2004-03-15 00:25  olivier
-
-	* Makefile.am, Makefile.in, aclocal.m4, configure, configure.ac,
-	  xfce4rc.ar, xfce4rc.it, po/ar.gmo, po/ar.po, po/bg.gmo, po/bg.po,
-	  po/it.gmo, po/it.po: Add/update i18n for: Bulgarian from Miroslav
-	  Yordanov <miordanov@i-space.org> and Peter Slavov
-	  <peshka@i-space.org> Italian from Alex Dupre <ale@FreeBSD.org>
-	  Arabic from Saleh Hathal <hathalsal@hotmail.com>
 
 2004-03-14 21:09  jasper
 
@@ -1651,17 +1521,6 @@
 	  settings/xfce_settings_plugin.c: Show only new-style icon themes
 	  in dialog and remove position settings from dialog (not a real
 	  setting)
-
-2004-02-28 18:23  olivier
-
-	* ltmain.sh: sync for 4.0.4 release
-
-2004-02-27 08:34  jasper
-
-	* NEWS, panel/groups.c, panel/groups.h, panel/panel.c,
-	  panel/popup.c, panel/popup.h, po/xfce4-panel.pot: Panel
-	  positioning and popup arrow direction backport from development
-	  version
 
 2004-02-25 20:16  kelnos
 
@@ -1701,30 +1560,9 @@
 	* panel/xfcombo.c: Fix stub for create combo function when
 	  HAVE_LIBDBH is not defined
 
-2004-01-30 08:06  jasper
-
-	* configure, configure.ac, ltmain.sh, po/es.gmo, po/es.po,
-	  po/fa_IR.gmo, po/fa_IR.po, po/pt_BR.gmo, po/pt_BR.po,
-	  po/zh_CN.gmo, po/zh_CN.po: Update translations for spanish,
-	  persian, brasilian and chinese
-
 2004-01-29 16:51  jasper
 
 	* po/: fa_IR.gmo, fa_IR.po: Update Persian translations
-
-2004-01-25 01:10  olivier
-
-	* Makefile.in, aclocal.m4, compile, config.guess, config.sub,
-	  configure, configure.ac, depcomp, install-sh, ltmain.sh, missing,
-	  mkinstalldirs, doc/Makefile.in, doc/C/Makefile.in,
-	  doc/C/images/Makefile.in, doc/fr/Makefile.in,
-	  doc/fr/images/Makefile.in, icons/Makefile.in, panel/Makefile.in,
-	  plugins/Makefile.in, plugins/clock/Makefile.in,
-	  plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
-	  plugins/separator/Makefile.in, plugins/switcher/Makefile.in,
-	  plugins/systembuttons/Makefile.in, po/fa_IR.gmo, po/fa_IR.po,
-	  settings/Makefile.in: Update libtool and other automake, autoconf
-	  and gettext.
 
 2004-01-25 01:07  olivier
 
@@ -1814,11 +1652,6 @@
 	* po/de.po: I'm poor lonely and all alone. Thats why I'm doing
 	  translations at 7 past twelve during the night.
 
-2004-01-07 21:38  olivier
-
-	* ChangeLog, po/ChangeLog: Huge update before 4.0.3 release,
-	  mainly: ChangeLog update, Version number updates.
-
 2004-01-07 08:41  jasper
 
 	* panel/controls.c: O dear. Module unloading. It actually appears
@@ -1834,11 +1667,6 @@
 	  panel/groups.h, panel/panel.c, plugins/clock/clock.c: Internal
 	  changes. First step towards module unloading. Add uniqueness (see
 	  clock for an example). Add title to item right-click menu.
-
-2004-01-03 21:54  olivier
-
-	* po/: pl.gmo, pl.po: Fix Polish translation from Daniel Mróz
-	  <beorn@alpha.pl>
 
 2004-01-03 21:23  olivier
 
@@ -1860,40 +1688,18 @@
 	* plugins/clock/clock.c: Prevent starting multiple instances of
 	  xfcalendar
 
-2003-12-29 16:20  olivier
-
-	* ChangeLog, configure, configure.ac, po/no.gmo, po/no.po: Update
-	  version number, Update ChangeLog Fix missing CHARSET in potfiles
-
 2003-12-29 16:18  olivier
 
 	* po/: no.gmo, no.po: Fix missing CHARSET in potfiles
-
-2003-12-29 13:16  jasper
-
-	* configure, configure.ac, po/no.gmo, po/no.po, po/tr.gmo,
-	  po/tr.po: Update Norwegian and Turkish translations
 
 2003-12-29 11:56  jasper
 
 	* configure, configure.ac, po/no.gmo, po/no.po, po/tr.gmo,
 	  po/tr.po: Update Norwegian and Turkish translations
 
-2003-12-28 21:28  olivier
-
-	* po/xfce4-panel.pot: Fix removal of properties on unframed windows
-
-2003-12-27 22:52  jasper
-
-	* po/: pl.gmo, pl.po: Update Polish translations
-
 2003-12-27 20:46  jasper
 
 	* po/: pl.gmo, pl.po: Update Polish translations
-
-2003-12-18 00:00  olivier
-
-	* ChangeLog: Update ChangeLog(s)
 
 2003-12-17 17:29  jasper
 
@@ -1901,11 +1707,6 @@
 	  extension %-d. For now ...
 
 2003-12-16 09:26  jasper
-
-	* Makefile.am, Makefile.in, xfce4rc.az: Add Azerbaijani
-	  translations
-
-2003-12-16 09:21  jasper
 
 	* Makefile.am, Makefile.in, xfce4rc.az: Add Azerbaijani
 	  translations
@@ -1918,29 +1719,19 @@
 	  pop3://username:password@host for the mailbox) Small tweaks to
 	  default xfwm4 and gtk themes
 
-2003-12-15 22:35  jasper
-
-	* configure, configure.ac, po/az.gmo, po/az.po: Add Azerbaijani
-	  translations
-
 2003-12-15 21:56  jasper
 
 	* configure, configure.ac, po/az.gmo, po/az.po: Add Azerbaijani
 	  translations
-
-2003-12-06 22:12  jasper
-
-	* ChangeLog, configure, configure.ac, panel/panel.c: Fix
-	  positioning when screen size is different from previous session
 
 2003-12-06 19:28  jasper
 
 	* panel/: groups.c, panel.c: Fix positioning when screen size is
 	  different than in previous session
 
-2003-12-06 17:04  jasper
+2003-12-06 17:05  jasper
 
-	* panel/: popup.c: Fix panel crash when removing an item with a
+	* panel/popup.c: Fix panel crash when removing an item with a
 	  detached menu
 
 2003-12-06 16:26  jasper
@@ -1983,14 +1774,9 @@
 	* Makefile.am, Makefile.in, configure, xfce4rc.vi: Update
 	  vietnamese translations
 
-2003-12-01 12:49  jasper
-
-	* Makefile.am, Makefile.in, xfce4rc.vi: Update vietnamese
-	  translations
-
 2003-12-01 12:41  jasper
 
-	* panel/: xfce_support.c: Fix bug with XFCE_DISABLE_USER_CONFIG
+	* panel/xfce_support.c: Fix bug with XFCE_DISABLE_USER_CONFIG
 
 2003-12-01 12:04  jasper
 
@@ -2006,16 +1792,16 @@
 	* configure.ac, po/it.gmo, po/it.po: Added italian translation,
 	  thanks to Eduard Roccatello.
 
-2003-11-17 16:08  jasper
+2003-11-17 16:10  jasper
 
-	* panel/: xfce_support.c: Check for cmd != NULL when executing
+	* panel/xfce_support.c: Check for cmd != NULL when executing
 	  commands
 
 2003-11-16 22:49  olivier
 
 	* po/de.gmo: Fix 64bit/endianess problem
 
-2003-11-16 09:44  jasper
+2003-11-16 09:45  jasper
 
 	* po/: cs.gmo, cs.po: Update Czech translations
 
@@ -2023,26 +1809,7 @@
 
 	* po/de.po: Minor updates
 
-2003-11-12 08:02  jasper
-
-	* po/: ca.gmo, de.gmo, es.gmo, es_MX.gmo, fi.gmo, fr.gmo, hi.gmo,
-	  hu.gmo, ja.gmo, ko.gmo, lt.gmo, ms.gmo, nl.gmo, pl.gmo,
-	  pt_PT.gmo, ru.gmo, sv.gmo, ta.gmo, tr.gmo, uk.gmo, vi.gmo,
-	  zh_CN.gmo, zh_TW.gmo: Forgot gmo files update
-
-2003-11-11 19:35  jasper
-
-	* po/: ca.po, cs.po, de.po, es.po, es_MX.po, fi.po, fr.po, hi.po,
-	  hu.po, ja.po, ko.po, lt.po, ms.po, nl.po, pl.po, pt_PT.po, ru.po,
-	  sv.po, ta.po, tr.po, uk.po, vi.po, zh_CN.po, zh_TW.po: Update po
-	  files, just in case something changed ...
-
 2003-11-09 20:22  jasper
-
-	* configure, configure.ac, po/cs.gmo, po/cs.po: Add Check
-	  translations
-
-2003-11-09 20:09  jasper
 
 	* configure, configure.ac, po/cs.gmo, po/cs.po: Add Check
 	  translations
@@ -2060,23 +1827,6 @@
 
 	* doc/fr/images/: menuitem-properties.png,
 	  menuitems-properties.png: correct wrong image name
-
-2003-11-07 22:09  jasper
-
-	* configure, configure.ac, doc/Makefile.am, doc/Makefile.in,
-	  doc/C/xfce4-panel.html, doc/fr/Makefile.am, doc/fr/Makefile.in,
-	  doc/fr/xfce4-panel.html, doc/fr/xfce4-panel.xml,
-	  doc/fr/images/Makefile.am, doc/fr/images/Makefile.in,
-	  doc/fr/images/clock-properties.png,
-	  doc/fr/images/default_panel.png, doc/fr/images/handle-popup.png,
-	  doc/fr/images/item-popup.png,
-	  doc/fr/images/launcher-properties.png,
-	  doc/fr/images/mailcheck-properties.png,
-	  doc/fr/images/menuitems-properties.png,
-	  doc/fr/images/nooptions-properties.png,
-	  doc/fr/images/panel-settings.png,
-	  doc/fr/images/systembuttons-properties.png, po/xfce4-panel.pot:
-	  Add French documentation
 
 2003-11-07 19:42  jasper
 
@@ -2102,7 +1852,7 @@
 
 2003-11-05 17:21  jasper
 
-	* panel/: main.c: Make SIGUSR2 quit with confirmation
+	* panel/main.c: Make SIGUSR2 quit with confirmation
 
 2003-11-04 14:25  jasper
 
@@ -2113,29 +1863,14 @@
 	* configure, configure.ac, po/uk.gmo, po/uk.po: Add Ukranian
 	  translations
 
-2003-11-01 15:16  olivier
-
-	* icons/xfce4-panel-icon.h: Set version to 4.0.1
-
 2003-10-25 16:37  jasper
 
 	* panel/: main.c, panel.c: Add xrandr awareness
-
-2003-10-25 00:31  jasper
-
-	* configure, configure.ac, po/vi.gmo, po/vi.po:
-	  Add vietnamese translations by Lam Vinh Nien <nienvl@yahoo.ca>.
 
 2003-10-25 00:20  jasper
 
 	* configure, configure.ac, po/vi.gmo, po/vi.po:
 	  Add vietnamese translations by Lam Vinh Nien <nienvl@yahoo.ca>.
-
-2003-10-23 15:07  jasper
-
-	* panel/: controls.c, main.c: Use execlp to restart panel. Fixes
-	  problem with newly installed plugins not showing up in menu as
-	  well.
 
 2003-10-22 08:39  jasper
 
@@ -2145,18 +1880,9 @@
 
 	* panel/main.c: Don't forget to save on SIGHUP (X exit).
 
-2003-10-21 12:03  jasper
-
-	* panel/main.c: Don't forget to save on SIGHUP (X exit)
-
 2003-10-21 08:09  jasper
 
 	* panel/main.c: Use x selection to run only one panel instance
-
-2003-10-17 18:32  jasper
-
-	* configure, configure.ac, po/sv.gmo, po/sv.po: Add/update swedish
-	  translations
 
 2003-10-17 17:37  jasper
 
@@ -2181,237 +1907,10 @@
 	* xfce4rc, xfce4rc.ca, xfce4rc.hu, xfce4rc.nl: Sync with my local
 	  tree
 
-2003-10-13 23:26  olivier
-
-	* xfce4rc.ca, xfce4rc.hu, xfce4rc.nl: Apply changes from my local
-	  tree
-
 2003-10-13 20:51  jasper
 
 	* ChangeLog: Update ChangeLog's after syncing with SF. Everything
 	  should now be up-to-date.
-
-2003-10-13 20:30  jasper
-
-	* ChangeLog: Update ChangeLog's after syncing with SF. Everything
-	  should now be up-to-date.
-
-2003-10-13 20:01  jasper
-
-	* xfce4rc, plugins/pager/pager.c:
-	  Huge update to get new repository in sync with the one on SF. We
-	  lose some CVS history here, but I will include the missing
-	  ChangeLog entries here:
-
-	  +++
-
-	  2003-10-12 23:13  xfce
-
-		  * xfce4/xfce4rc, xfwm4/src/client.c: Add --no-desktop to
-	  default
-		  nautilus entry Use Height/Width on Mwm hints updates
-
-	  2003-10-10 23:51  edscott
-
-		  * xffm/libs/: menu_callbacks.c, run.c: fixed another
-	  g_strchug()
-		  bug
-
-	  2003-10-10 23:15  xfce
-
-		  * xfce-utils/scripts/xinitrc: Don't use cpp in xrdb so
-	  that DPI
-		  settings load even on workstations w/out cpp
-
-	  2003-10-10 22:38  xfce
-
-		  * xfwm4/: configure, configure.ac, themes/Makefile.am,
-		  themes/Makefile.in, themes/tgc-large/Makefile.am,
-		  themes/tgc-large/Makefile.in, themes/tgc-large/README,
-		  themes/tgc-large/bottom-active.xpm,
-		  themes/tgc-large/bottom-inactive.xpm,
-		  themes/tgc-large/bottom-left-active.xpm,
-		  themes/tgc-large/bottom-left-inactive.xpm,
-		  themes/tgc-large/bottom-right-active.xpm,
-		  themes/tgc-large/bottom-right-inactive.xpm,
-		  themes/tgc-large/close-active.xpm,
-		  themes/tgc-large/close-inactive.xpm,
-		  themes/tgc-large/close-pressed.xpm,
-		  themes/tgc-large/hide-active.xpm,
-		  themes/tgc-large/hide-inactive.xpm,
-		  themes/tgc-large/hide-pressed.xpm,
-		  themes/tgc-large/left-active.xpm,
-		  themes/tgc-large/left-inactive.xpm,
-		  themes/tgc-large/maximize-active.xpm,
-		  themes/tgc-large/maximize-inactive.xpm,
-		  themes/tgc-large/maximize-pressed.xpm,
-		  themes/tgc-large/maximize-toggled-active.xpm,
-		  themes/tgc-large/maximize-toggled-inactive.xpm,
-		  themes/tgc-large/maximize-toggled-pressed.xpm,
-		  themes/tgc-large/menu-active.xpm,
-		  themes/tgc-large/menu-inactive.xpm,
-		  themes/tgc-large/menu-pressed.xpm,
-		  themes/tgc-large/right-active.xpm,
-		  themes/tgc-large/right-inactive.xpm,
-		  themes/tgc-large/shade-active.xpm,
-		  themes/tgc-large/shade-inactive.xpm,
-		  themes/tgc-large/shade-pressed.xpm,
-		  themes/tgc-large/shade-toggled-active.xpm,
-		  themes/tgc-large/shade-toggled-inactive.xpm,
-		  themes/tgc-large/shade-toggled-pressed.xpm,
-		  themes/tgc-large/stick-active.xpm,
-		  themes/tgc-large/stick-inactive.xpm,
-		  themes/tgc-large/stick-pressed.xpm,
-		  themes/tgc-large/stick-toggled-active.xpm,
-		  themes/tgc-large/stick-toggled-inactive.xpm,
-		  themes/tgc-large/stick-toggled-pressed.xpm,
-		  themes/tgc-large/themerc,
-	  themes/tgc-large/title-1-active.xpm,
-		  themes/tgc-large/title-1-inactive.xpm,
-		  themes/tgc-large/title-2-active.xpm,
-		  themes/tgc-large/title-2-inactive.xpm,
-		  themes/tgc-large/title-3-active.xpm,
-		  themes/tgc-large/title-3-inactive.xpm,
-		  themes/tgc-large/title-4-active.xpm,
-		  themes/tgc-large/title-4-inactive.xpm,
-		  themes/tgc-large/title-5-active.xpm,
-		  themes/tgc-large/title-5-inactive.xpm,
-		  themes/tgc-large/top-left-active.xpm,
-		  themes/tgc-large/top-left-inactive.xpm,
-		  themes/tgc-large/top-right-active.xpm,
-		  themes/tgc-large/top-right-inactive.xpm: Add tgc-large as
-	  in HEAD
-		  branch
-
-	  2003-10-10 22:06  xfce
-
-		  * libxfcegui4/libxfcegui4/netk-pager.c,
-		  xfwm4/themes/default/bottom-active.xpm,
-		  xfwm4/themes/default/bottom-inactive.xpm,
-		  xfwm4/themes/default/bottom-left-active.xpm,
-		  xfwm4/themes/default/bottom-left-inactive.xpm,
-		  xfwm4/themes/default/bottom-right-active.xpm,
-		  xfwm4/themes/default/bottom-right-inactive.xpm,
-		  xfwm4/themes/default/close-active.xpm,
-		  xfwm4/themes/default/close-inactive.xpm,
-		  xfwm4/themes/default/close-pressed.xpm,
-		  xfwm4/themes/default/hide-active.xpm,
-		  xfwm4/themes/default/hide-inactive.xpm,
-		  xfwm4/themes/default/hide-pressed.xpm,
-		  xfwm4/themes/default/left-active.xpm,
-		  xfwm4/themes/default/left-inactive.xpm,
-		  xfwm4/themes/default/maximize-active.xpm,
-		  xfwm4/themes/default/maximize-inactive.xpm,
-		  xfwm4/themes/default/maximize-pressed.xpm,
-		  xfwm4/themes/default/maximize-toggled-active.xpm,
-		  xfwm4/themes/default/maximize-toggled-inactive.xpm,
-		  xfwm4/themes/default/maximize-toggled-pressed.xpm,
-		  xfwm4/themes/default/menu-active.xpm,
-		  xfwm4/themes/default/menu-inactive.xpm,
-		  xfwm4/themes/default/menu-pressed.xpm,
-		  xfwm4/themes/default/right-active.xpm,
-		  xfwm4/themes/default/right-inactive.xpm,
-		  xfwm4/themes/default/shade-active.xpm,
-		  xfwm4/themes/default/shade-inactive.xpm,
-		  xfwm4/themes/default/shade-pressed.xpm,
-		  xfwm4/themes/default/shade-toggled-active.xpm,
-		  xfwm4/themes/default/shade-toggled-inactive.xpm,
-		  xfwm4/themes/default/shade-toggled-pressed.xpm,
-		  xfwm4/themes/default/stick-active.xpm,
-		  xfwm4/themes/default/stick-inactive.xpm,
-		  xfwm4/themes/default/stick-pressed.xpm,
-		  xfwm4/themes/default/stick-toggled-active.xpm,
-		  xfwm4/themes/default/stick-toggled-inactive.xpm,
-		  xfwm4/themes/default/stick-toggled-pressed.xpm,
-		  xfwm4/themes/default/title-1-active.xpm,
-		  xfwm4/themes/default/title-1-inactive.xpm,
-		  xfwm4/themes/default/title-2-active.xpm,
-		  xfwm4/themes/default/title-2-inactive.xpm,
-		  xfwm4/themes/default/title-3-active.xpm,
-		  xfwm4/themes/default/title-3-inactive.xpm,
-		  xfwm4/themes/default/title-4-active.xpm,
-		  xfwm4/themes/default/title-4-inactive.xpm,
-		  xfwm4/themes/default/title-5-active.xpm,
-		  xfwm4/themes/default/title-5-inactive.xpm,
-		  xfwm4/themes/default/top-left-active.xpm,
-		  xfwm4/themes/default/top-left-inactive.xpm,
-		  xfwm4/themes/default/top-right-active.xpm,
-		  xfwm4/themes/default/top-right-inactive.xpm: Basically
-	  revert to
-		  "pre" xfwm4 default style that looked better than 4.0.0
-
-	  2003-10-10 20:21  huysmans
-
-		  * xfce4/plugins/pager/pager.c: Fix resizing bug
-
-	  2003-10-08 23:35  xfce
-
-		  * xfwm4/src/: client.c, events.c, settings.c: Fix
-	  raise/lower patch
-
-	  2003-10-08 22:34  xfce
-
-		  * xfwm4/: src/settings.c, themes/default.keys/keythemerc:
-	  Fix
-		  raise/lower key shortcut
-
-	  2003-10-07 22:37  xfce
-
-		  * xffm/libs/input.c: With gtk 2.2.3/2.2.4 the
-		  gtk_getentrytext_function does not return "" but NULL.
-
-	  2003-10-07 22:31  xfce
-
-		  * xfwm4/themes/tgc-large/: Makefile.am, Makefile.in,
-	  README,
-		  bottom-active.xpm, bottom-inactive.xpm,
-	  bottom-left-active.xpm,
-		  bottom-left-inactive.xpm, bottom-right-active.xpm,
-		  bottom-right-inactive.xpm, close-active.xpm,
-	  close-inactive.xpm,
-		  close-pressed.xpm, hide-active.xpm, hide-inactive.xpm,
-		  hide-pressed.xpm, left-active.xpm, left-inactive.xpm,
-		  maximize-active.xpm, maximize-inactive.xpm,
-	  maximize-pressed.xpm,
-		  maximize-toggled-active.xpm,
-	  maximize-toggled-inactive.xpm,
-		  maximize-toggled-pressed.xpm, menu-active.xpm,
-	  menu-inactive.xpm,
-		  menu-pressed.xpm, right-active.xpm, right-inactive.xpm,
-		  shade-active.xpm, shade-inactive.xpm, shade-pressed.xpm,
-		  shade-toggled-active.xpm, shade-toggled-inactive.xpm,
-		  shade-toggled-pressed.xpm, stick-active.xpm,
-	  stick-inactive.xpm,
-		  stick-pressed.xpm, stick-toggled-active.xpm,
-		  stick-toggled-inactive.xpm, stick-toggled-pressed.xpm,
-	  themerc,
-		  title-1-active.xpm, title-1-inactive.xpm,
-	  title-2-active.xpm,
-		  title-2-inactive.xpm, title-3-active.xpm,
-	  title-3-inactive.xpm,
-		  title-4-active.xpm, title-4-inactive.xpm,
-	  title-5-active.xpm,
-		  title-5-inactive.xpm, top-left-active.xpm,
-	  top-left-inactive.xpm,
-		  top-right-active.xpm, top-right-inactive.xpm: Change
-	  default theme,
-		  keep old 4.0 theme as default-4.0 and add tgc-large theme
-	  Include
-		  improvements for fullscreen mode for gst from Arwed von
-	  Merkatz
-		  <v.merkatz@gmx.net>
-
-	  2003-10-07 22:14  xfce
-
-		  * xffm/libs/run.c, xfwm4/ChangeLog, xfwm4/configure,
-		  xfwm4/configure.ac, xfwm4/src/client.c,
-	  xfwm4/src/events.c: Include
-		  changes for gst fullscreen mode as suggested by Arwed von
-	  Merkatz
-		  <v.merkatz@gmx.net> Include fix for "run..." in xffm from
-	  Edscott
-
-	  +++
 
 2003-10-13 18:21  jasper
 
@@ -2816,17 +2315,13 @@
 
 	  +++
 
-2003-09-30 22:58  huysmans
-
-	* configure, configure.ac: change version to 4.0.0.1
-
 2003-09-30 22:53  huysmans
 
 	* configure, configure.ac: change version to 4.0.0.1
 
 2003-09-30 22:28  huysmans
 
-	* panel/: controls_dialog.c: Fix a bug with empty panel.
+	* panel/controls_dialog.c: Fix a bug with empty panel.
 
 2003-09-28 22:24  xfce
 
@@ -2836,10 +2331,6 @@
 2003-09-27 14:37  huysmans
 
 	* po/: ta.gmo, ta.po: Update tamil translation
-
-2003-09-27 13:20  huysmans
-
-	* po/: ta.gmo, ta.po: Update tamil translations
 
 2003-09-22 22:52  huysmans
 
@@ -3415,27 +2906,14 @@
 
 	* po/xfce4-panel.pot: Updates.
 
-2003-06-21 20:03  bmeurer
-
-	* configure, configure.ac: Fixes.
-
 2003-06-21 19:58  bmeurer
 
 	* configure, configure.ac: Fixes.
-
-2003-06-21 19:21  bmeurer
-
-	* po/: de.gmo, de.po: Fixed problem with June->Juni translation.
 
 2003-06-21 19:14  bmeurer
 
 	* HACKING, aclocal.m4, configure, po/de.gmo, po/de.po: Updated
 	  german translations.
-
-2003-06-21 18:58  bmeurer
-
-	* aclocal.m4, configure, configure.ac, po/nl.gmo,
-	  po/xfce4-panel.pot: version -> 3.91.0
 
 2003-06-21 18:55  bmeurer
 
