@@ -321,7 +321,7 @@ panel_set_hidden (Panel * p, gboolean hide)
     while(gtk_events_pending())
 	gtk_main_iteration();
 
-    gtk_window_present(GTK_WINDOW(p->toplevel));
+    /* gtk_window_present(GTK_WINDOW(p->toplevel)); */
     gtk_window_move (GTK_WINDOW (p->toplevel), x, y);
 }
 
