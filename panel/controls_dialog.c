@@ -246,14 +246,17 @@ void controls_dialog(Control * control)
     gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
 
     button = gtk_button_new_from_stock(GTK_STOCK_REMOVE);
+    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_REMOVE);
 
     revert = button = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
+    GTK_WIDGET_SET_FLAGS (revert, GTK_CAN_DEFAULT);
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_REVERT);
 
     done = button = mixed_button_new(GTK_STOCK_OK, _("_Done"));
+    GTK_WIDGET_SET_FLAGS (done, GTK_CAN_DEFAULT);
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_DONE);
     GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);

@@ -880,16 +880,19 @@ GtkWidget *create_menu_item_dialog(Item * mi)
 
     /* add buttons */
     remove_button = mixed_button_new(GTK_STOCK_REMOVE, _("Remove"));
+    GTK_WIDGET_SET_FLAGS (remove_button, GTK_CAN_DEFAULT);
     gtk_widget_show(remove_button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), remove_button,
                                  RESPONSE_REMOVE);
 
     revert_button = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
+    GTK_WIDGET_SET_FLAGS (revert_button, GTK_CAN_DEFAULT);
     gtk_widget_show(revert_button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), revert_button,
                                  RESPONSE_REVERT);
 
     done_button = mixed_button_new(GTK_STOCK_OK, _("_Done"));
+    GTK_WIDGET_SET_FLAGS (done_button, GTK_CAN_DEFAULT);
     gtk_widget_show(done_button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), done_button, RESPONSE_DONE);
 

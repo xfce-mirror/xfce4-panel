@@ -543,6 +543,7 @@ static void add_position_box(GtkBox * box, GtkSizeGroup *sg)
     gtk_option_menu_set_history(GTK_OPTION_MENU(optionmenu), 0);
     
     pos_button = mixed_button_new(GTK_STOCK_APPLY, _("Set"));
+    GTK_WIDGET_SET_FLAGS (pos_button, GTK_CAN_DEFAULT);
     gtk_widget_show(pos_button);
     gtk_box_pack_start(GTK_BOX(hbox), pos_button, FALSE, FALSE, 0);
 
