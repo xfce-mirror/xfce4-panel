@@ -58,6 +58,10 @@
 
 #define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%u"
 
+#define RC_STRING \
+    "style \"popupbutton\" { GtkWidget::focus-padding = 0 }\n" \
+    "class \"XfceTogglebutton\" style \"popupbutton\"\n"
+
 /* signal handling */
 typedef enum
 {
@@ -368,6 +372,9 @@ main (int argc, char **argv)
     signal (SIGTERM, sighandler);
 #endif
 
+    /* hack to prevent arrow buttons from being cropped */
+    gtk_rc_parse_string (RC_STRING);
+    
     /* icon framework: names and id's */
     icons_init ();
 
