@@ -3,32 +3,41 @@ TODO list for xfce4
 
 Major features for 4.0
 ----------------------
-* write user docs				STARTED
 * provide good default configuration
 
-Nice to have for 4.0
---------------------
-* more themes: Night, KDE, Next, WindowsXP, BeOS, ...
-  (not too many released with xfce4; < 10)
 
 After 4.0 
 ------------------------------------
 * make panel a gtk widget
   - include move handles (steal code form GtkHandlebox)
   - use properties and signals for settings
+
+* do something smart with the panel behaviour depending on its position
+  - hiding
+  - popup arrow direction
+  - idea: keep panel on same alignment percentage (O% left aligned, 50%
+    centered, 100% right aligned).
+  - be a bit smarter when changing panel size (eg, keep at edge).
+
+* Allow multiple panels?
+  - seriously look at mcs plugin. Most settings should become per panel
+    instead of global.
+
 * make controls / control classes a widget or gobject
   - use refcounting on classes to load / unload modules
   - perhaps using a timeout
   - perhaps use interfaces or derived widgets for controls
+  
 * plugins:
-  - volume control plugin (DONE)
-  - notification area plugin (as used by GNOME and KDE)
-    This would be really cool! (DONE)
   - dockapps support
-* allow hiding of all popup buttons
+  - iconbox / task list
+  
 * write API docs for plugin writers
+
 * new dialog for panel controls (treeview with dialog area)
   adding/removing controls from here.
+  
 * Move to glib xml parsing. More work, but more speed / reduced memory usage
+
 * IMPORTANT: Move the exec_cmd stuff to libxfce4util/libxfcegui4 and
   unify the interface!
