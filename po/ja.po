@@ -1,24 +1,24 @@
 # Japanese translation for xfce4-panel.
-# Copyright (C) 2003-2005 Olivier Fourdan
+# Copyright (C) 2002-2005, The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Zhao Ji <zhao-ji@awz.ne.jp>, 2003-2004.
-# Daichi Kawahata <daichi.k@users.sourceforge.net>, 2005.
+# Daichi Kawahata <daichik@users.sourceforge.net>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-03-12 22:33+0100\n"
-"PO-Revision-Date: 2005-02-17 21:34+0900\n"
-"Last-Translator: Daichi Kawahata <daichi.k@users.sourceforge.net>\n"
-"Language-Team: Japanese <xfce-i18n@xfce.org>\n"
+"PO-Revision-Date: 2005-03-16 05:12+0900\n"
+"Last-Translator: Daichi Kawahata <daichik@users.sourceforge.net>\n"
+"Language-Team: xfce-users-jp <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: panel/xfce_support.c:307
 msgid "Select file"
-msgstr "ファイル選択"
+msgstr "ファイルを選択して下さい"
 
 #: panel/settings.c:268
 msgid "No data was found. The panel will be empty."
@@ -35,11 +35,11 @@ msgstr "アイテムのプロパティ"
 
 #: panel/controls_dialog.c:210 panel/controls.c:714
 msgid "Removing the item will also remove its popup menu."
-msgstr "アイテムを削除するとポップアップメニューも削除されます。"
+msgstr "アイテムを削除すると、ポップアップメニューも削除されます。"
 
 #: panel/item_dialog.c:123
 msgid "Select command"
-msgstr "コマンド選択"
+msgstr "コマンドを選択して下さい"
 
 #: panel/item_dialog.c:260
 msgid "Command:"
@@ -47,11 +47,11 @@ msgstr "コマンド:"
 
 #: panel/item_dialog.c:306
 msgid "Run in _terminal"
-msgstr "ターミナルで実行(_T)"
+msgstr "ターミナルで実行する(_T)"
 
 #: panel/item_dialog.c:324
 msgid "Use startup _notification"
-msgstr "起動通知を使用(_N)"
+msgstr "起動通知を使用する(_N)"
 
 #: panel/item_dialog.c:510
 msgid "Other Icon"
@@ -59,7 +59,7 @@ msgstr "その他のアイコン"
 
 #: panel/item_dialog.c:621
 msgid "Drag file onto this frame to change the icon"
-msgstr "アイコンを変更するにはこのフレームへファイルをドラッグして下さい"
+msgstr "アイコンを変更するには、このフレームへファイルをドラッグして下さい"
 
 #: panel/item_dialog.c:933
 msgid "Caption:"
@@ -71,7 +71,7 @@ msgstr "ツールチップ:"
 
 #: panel/item_dialog.c:988
 msgid "Attach menu to launcher"
-msgstr "メニューをランチャーへ付ける"
+msgstr "メニューをランチャーへ取り付ける"
 
 #: panel/item_dialog.c:1173
 msgid "Change menu item"
@@ -84,19 +84,19 @@ msgstr "削除(_R)"
 
 #: panel/item_dialog.c:1191
 msgid "Launcher"
-msgstr "ランチャ"
+msgstr "ランチャー"
 
 #: panel/item.c:619
 msgid "Click mouse button 3 to change item"
-msgstr "アイテムを変更するにはマウスの右ボタンをクリックして下さい"
+msgstr "アイテムを変更するには、マウスの右ボタンをクリックして下さい"
 
 #: panel/item.c:644
 msgid "Add launcher"
-msgstr "ランチャーを追加"
+msgstr "ランチャーを追加する"
 
 #: panel/item.c:649
 msgid "Add new item"
-msgstr "新規アイテムを追加"
+msgstr "新規アイテムを追加する"
 
 #: panel/main.c:120
 msgid "Are you sure you want to exit?"
@@ -122,7 +122,7 @@ msgstr ""
 "Xfce デスクトップ環境の一部\n"
 "http://www.xfce.org\n"
 "\n"
-"GNU GPL の下に使用できます。\n"
+"GNU GPL の下に利用できます。\n"
 "\n"
 
 #: panel/main.c:484
@@ -146,11 +146,11 @@ msgstr "プロパティ(_P)..."
 
 #: panel/controls.c:760 panel/panel.c:705
 msgid "Add _new item"
-msgstr "新規アイテムを追加(_N)"
+msgstr "新規アイテムを追加する(_N)"
 
 #: panel/controls.c:1087
 msgid "This item has no configuration options"
-msgstr "このアイテムにオプション設定は存在しません"
+msgstr "このアイテムに設定オプションは存在しません"
 
 #: panel/panel.c:696 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:392
@@ -191,7 +191,7 @@ msgstr "ファイル管理"
 
 #: panel/icons.c:66
 msgid "Utilities"
-msgstr "実用"
+msgstr "ユーティリティ"
 
 #: panel/icons.c:67
 msgid "Games"
@@ -228,7 +228,6 @@ msgstr "サウンド"
 #. Translation with context.
 #. * Translators only need to translate 'Terminal'
 #: panel/icons.c:77
-#, fuzzy
 msgid "icons|Terminal"
 msgstr "ターミナル"
 
@@ -238,7 +237,7 @@ msgstr "設定マネージャが利用できません"
 
 #: taskbar/xftaskbar.c:510
 msgid "There is already a system tray running on this screen"
-msgstr " この画面には既に動作しているシステムトレイがあります"
+msgstr "この画面には既に動作しているシステムトレイがあります"
 
 #: taskbar/xftaskbar.c:516
 #, c-format
@@ -564,25 +563,22 @@ msgstr ""
 
 #: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
-msgstr "画面をロックする"
+msgstr "画面をロックします"
 
 #. don't translate 'tip|'
 #: plugins/systembuttons/systembuttons.c:172
-#, fuzzy
 msgid "tip|Exit"
-msgstr "終了"
+msgstr "Xfce を終了します"
 
 #. don't translate 'tip|'
 #: plugins/systembuttons/systembuttons.c:174
-#, fuzzy
 msgid "tip|Setup"
-msgstr "設定"
+msgstr "設定を行います"
 
 #. don't translate 'tip|'
 #: plugins/systembuttons/systembuttons.c:176
-#, fuzzy
 msgid "tip|Info"
-msgstr "お知らせ"
+msgstr "お知らせを表示します"
 
 #. set names to use in option menus
 #: plugins/systembuttons/systembuttons.c:521
@@ -603,11 +599,11 @@ msgstr "お知らせ"
 
 #: plugins/systembuttons/systembuttons.c:553
 msgid "Button 1:"
-msgstr "ボタン1:"
+msgstr "ボタン１:"
 
 #: plugins/systembuttons/systembuttons.c:568
 msgid "Button 2:"
-msgstr "ボタン2:"
+msgstr "ボタン２:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:582
@@ -632,11 +628,11 @@ msgstr "新規メール受信時のコマンド:"
 
 #: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
-msgstr "新しいメールが到着した時に実行されるコマンド"
+msgstr "新しいメールが到着した時に実行されるコマンドです"
 
 #: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
-msgstr "パネル上のボタンがクリックされた時に実行されるコマンド"
+msgstr "パネル上のボタンがクリックされた時に実行されるコマンドです"
 
 #: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
@@ -672,144 +668,56 @@ msgstr "Xfce 4 タスクバー設定"
 
 #: config/contents.xml.in.h:1
 msgid "Appfinder"
-msgstr ""
+msgstr "アプリファインダー"
 
 #: config/contents.xml.in.h:2
 msgid "Drag file to print"
-msgstr ""
+msgstr "印刷するファイルをここにドラッグして下さい"
 
 #: config/contents.xml.in.h:3
-#, fuzzy
 msgid "File manager"
-msgstr "ファイル管理"
+msgstr "ファイルマネージャを実行します"
 
 #: config/contents.xml.in.h:4
 msgid "Find and run applications"
-msgstr ""
+msgstr "アプリケーションを検索・実行します"
 
 #: config/contents.xml.in.h:5
 msgid "Konqueror"
-msgstr ""
+msgstr "Konqueror"
 
 #: config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
-msgstr ""
+msgstr "ファイルマネージャ Konqueror を実行します"
 
 #: config/contents.xml.in.h:7
 msgid "Manual"
-msgstr ""
+msgstr "マニュアルを表示します"
 
 #: config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
-msgstr ""
+msgstr "ウェブブラウザ Mozilla を実行します"
 
 #: config/contents.xml.in.h:9
 msgid "Music player"
-msgstr ""
+msgstr "音楽プレイヤーを実行します"
 
 #: config/contents.xml.in.h:10
 msgid "Nautilus"
-msgstr ""
+msgstr "Nautilus"
 
 #: config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
-msgstr ""
+msgstr "ファイルマネージャ Nautilus を実行します"
 
 #: config/contents.xml.in.h:12
-#, fuzzy
 msgid "Printer Management"
-msgstr "ファイル管理"
+msgstr "印刷機の管理を行います"
 
 #: config/contents.xml.in.h:13
 msgid "Settings"
-msgstr "設定"
+msgstr "設定を行います"
 
 #: config/contents.xml.in.h:14
 msgid "Terminal"
-msgstr "ターミナル"
-
-#~ msgid "Arrow type"
-#~ msgstr "矢印の種類"
-
-#~ msgid "The arrow type of the menu button"
-#~ msgstr "メニューボタンの矢印の種類です"
-
-#~ msgid "Orientation"
-#~ msgstr "方向"
-
-#~ msgid "The orientation of the itembar"
-#~ msgstr "アイテムバーが延びる方向です"
-
-#~ msgid "Handle style"
-#~ msgstr "ハンドルのスタイル"
-
-#~ msgid "Type of handles to draw"
-#~ msgstr "描画するハンドルの種類です"
-
-#~ msgid "Menu"
-#~ msgstr "メニュー"
-
-#~ msgid "Development"
-#~ msgstr "開発"
-
-#~ msgid "System"
-#~ msgstr "システム"
-
-#~ msgid "Windows programs"
-#~ msgstr "Windows プログラム"
-
-#~ msgid "Name"
-#~ msgstr "名前"
-
-#~ msgid "Description"
-#~ msgstr "説明"
-
-#~ msgid "Select image file"
-#~ msgstr "画像ファイルを選択"
-
-#~ msgid "Other..."
-#~ msgstr "その他..."
-
-#~ msgid "Command"
-#~ msgstr "コマンド"
-
-#~ msgid "Use _startup notification"
-#~ msgstr "起動通知を使用(_S)"
-
-#~ msgid "Edit launcher"
-#~ msgstr "ランチャーを編集"
-
-#~ msgid "New item"
-#~ msgstr "新規アイテム"
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "このアイテムはまだ設定されていません"
-
-#~ msgid "_Edit"
-#~ msgstr "編集(_E)"
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "リストの最初のアイテムはパネルに表示されます。追加したアイテムはメニューに"
-#~ "表示されます。"
-
-#~ msgid "Launcher Plugin"
-#~ msgstr "ランチャープラグイン"
-
-#~ msgid "Alternative Launcher"
-#~ msgstr "別のランチャー"
-
-#~ msgid ""
-#~ "Could not run \"%s\":\n"
-#~ "%s"
-#~ msgstr ""
-#~ "\"%s\" を実行できませんでした:\n"
-#~ "%s"
-
-#~ msgid "Notification Area"
-#~ msgstr "通知エリア"
-
-#~ msgid "Always on top:"
-#~ msgstr "常に上部へ:"
+msgstr "ターミナルを実行します"
