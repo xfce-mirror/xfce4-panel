@@ -838,6 +838,8 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     dialog = gtk_dialog_new_with_buttons(_("XFce Panel Preferences"),
                                     	 NULL, GTK_DIALOG_NO_SEPARATOR, NULL);
 
+    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+
     gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
 
     revert = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));

@@ -204,49 +204,20 @@ void mcs_init_settings(void)
 }
 
 /* connecting and disconnecting */
-static gboolean manager_is_running(void)
-{
-    Display *dpy = gdk_display;
-    int scr = DefaultScreen(dpy);
-    int result;
-    
-    /* we need a multi channel settings manager */
-    result = mcs_manager_check_running(dpy, scr);
-
-    return (MCS_MANAGER_STD < result);
-}
-
-static void start_mcs_manager(void)
-{
-    GError *error = NULL;
-    
-    g_message("xfce4: starting the settings manager\n");
-
-    if (!g_spawn_command_line_sync("xfce-mcs-manager", 
-				   NULL, NULL, NULL, &error))
-    {
-	g_critical("xfce4: could not start settings manager: %s\n",
-		   error->message);
-    }
-    else
-    {
-        g_message("xfce4: settings manager successfully started\n");
-    }
-}
-
 void mcs_watch_xfce_channel(void)
 {
+    Display *dpy = GDK_DISPLAY();
+    int screen = DefaultScreen(dpy);
+
     if (!settings_hash)
 	init_settings_hash();
     
-    if (!manager_is_running())
-	start_mcs_manager();
+    if (!mcs_client_check_manager(dpy, screen))
+	g_critical(_("MCS settings manager not running!"));
     
-    client = mcs_client_new(GDK_DISPLAY(), 
-	    		    DefaultScreen(GDK_DISPLAY()), 
-			    notify_cb, watch_cb, NULL);
+    client = mcs_client_new(dpy, screen, notify_cb, watch_cb, NULL);
        
-    if(!client || !manager_is_running())
+    if(!client)
     {
         g_critical(_("xfce4: could not connect to settings manager!" 
 		     "Please check your installation."));

@@ -1,3 +1,38 @@
+2003-01-10 00:02  xfce
+
+	* Makefile.in, config.h.in, configure, configure.ac, xfce4.spec.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	plugins/trash/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Update
+	dependencies on libxfcegui4 version and libxfce4mcs
+
+2003-01-09 23:53  xfce
+
+	* Makefile.in, aclocal.m4, configure, icons/Makefile.in,
+	panel/Makefile.in, plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, plugins/trash/Makefile.in,
+	settings/Makefile.am, settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Add " -avoid-version " to 
+	libxfce4settings_la_LDFLAGS in settings/Makefile.am
+
+2003-01-09 23:25  huysmans
+
+	* panel/: item_dialog.c, popup.c, popup.h: Fix possible bug in menu
+	item ordering. See if you can break this one perldude :)
+
+2003-01-09 08:05  huysmans
+
+	* ChangeLog, plugins/switcher/switcher.c,
+	plugins/systembuttons/systembuttons.c: Fix bug in calling
+	mcs_dialog(). Thanks to L. Friendman for pointing it out.
+
 2003-01-08 15:55  huysmans
 
 	* panel/: handle.c, mcs_client.c, mcs_client.h: Add option to run
