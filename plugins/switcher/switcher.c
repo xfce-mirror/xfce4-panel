@@ -962,8 +962,8 @@ static void switcher_read_config(Control *control, xmlNodePtr node)
 	    sw->cde_pager = NULL;
 
 	    gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
-		    	       TRUE, TRUE, 2);
-	    gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 1);
+		    	       TRUE, FALSE, 2);
+	    gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 2);
 	
 	    s = icon_size[settings.size];
 
@@ -1380,8 +1380,8 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 	gtk_widget_show(sw->netk_pager);
 	
 	gtk_box_pack_start(GTK_BOX(sw->box), sw->netk_pager, 
-			   TRUE, TRUE, 2);
-	gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 1);
+			   TRUE, FALSE, 2);
+	gtk_box_reorder_child(GTK_BOX(sw->box), sw->netk_pager, 2);
 	
 	s = icon_size[settings.size];
 
