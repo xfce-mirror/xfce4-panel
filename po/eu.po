@@ -1,24 +1,25 @@
-# translation of es.po to euskera
+# SOME DESCRIPTIVE TITLE.
 # This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER.
-# Jon Latorre Martinez <edscott@imp.mx>, 2003.
-# Jon Latorre Martinez <patataman@airtel.net>, 2003.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Piarres Beobide Egaña <pi@beobide.net>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: es\n"
+"Project-Id-Version: xfce4-panel.\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-05 17:25+0100\n"
-"PO-Revision-Date: 1996-01-30 03:42+0100\n"
-"Last-Translator: Jon Latorre Martinez <patataman@airtel.net>\n"
-"Language-Team: euskera <eu@li.org>\n"
+"POT-Creation-Date: 2004-04-21 07:46+0200\n"
+"PO-Revision-Date: 2004-07-06 13:53+0200\n"
+"Last-Translator: Piarres Beobide Egaña <pi@beobide.net>\n"
+"Language-Team: Euskara <librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: panel/xfce_support.c:597
 msgid "Select file"
-msgstr "Fitxateguia aukeratu"
+msgstr "Fitxategia aukeratu"
 
 #: panel/controls_dialog.c:254
 msgid "Change item"
@@ -34,7 +35,7 @@ msgid ""
 "\n"
 "Do you want to remove the item?"
 msgstr ""
-"Elementua kerntzean menua ere kenduko du\n"
+"Elementua kentzean menua ere kenduko du\n"
 "\n"
 "Elementua kendu nahi al duzu?"
 
@@ -52,7 +53,7 @@ msgstr "Ikonoa:"
 
 #: panel/item_dialog.c:433
 msgid "Select command"
-msgstr "Aukeratu komandoa"
+msgstr "Komandoa aukeratu"
 
 #: panel/item_dialog.c:461
 msgid "Command:"
@@ -64,19 +65,19 @@ msgstr "_terminalean exekutatu"
 
 #: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
-msgstr "Erabili notifikazioak"
+msgstr "Erabili _notifikazioak"
 
 #: panel/item_dialog.c:530
 msgid "Caption:"
-msgstr "Jaso"
+msgstr "Epigrafea:"
 
 #: panel/item_dialog.c:563
 msgid "Tooltip:"
-msgstr "Etiketa esplitatiboa"
+msgstr "Etiketa esplitatiboa:"
 
 #: panel/item_dialog.c:599
 msgid "Menu:"
-msgstr "Menua:"
+msgstr "Menu:"
 
 #: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
@@ -84,7 +85,7 @@ msgstr "Abiarazleari menua gehitu"
 
 #: panel/item_dialog.c:738
 msgid "Icon Preview"
-msgstr "Ikonoaren aurre bista"
+msgstr "Ikonoaren aurreikuspena"
 
 #: panel/item_dialog.c:742
 msgid "Drag file onto this frame to change the icon"
@@ -97,21 +98,21 @@ msgstr "Menuaren elementua aldatu"
 #. add buttons
 #: panel/item_dialog.c:933
 msgid "Remove"
-msgstr "Ezabatu"
+msgstr "Kendu"
 
-#: panel/item.c:441
+#: panel/item.c:449
 msgid "Click mouse button 3 to change item"
 msgstr "Saguaren 3. botoia sakatu elementua aldatzeko"
 
-#: panel/item.c:464
+#: panel/item.c:472
 msgid "Add launcher"
 msgstr "Abiarazlea gehitu"
 
-#: panel/item.c:469
+#: panel/item.c:477
 msgid "Add new item"
 msgstr "Elementu berria gehitu"
 
-#: panel/item.c:601
+#: panel/item.c:609
 msgid "Launcher"
 msgstr "Abiarazlea"
 
@@ -123,7 +124,7 @@ msgstr "Ziur irten nahi duzula?"
 #, c-format
 msgid ""
 "%s, version %s\n"
-"Part of the Xfce Desktop Environment\n"
+"Part of the XFce Desktop Environment\n"
 "http://www.xfce.org\n"
 msgstr ""
 "%s, bertsioa%s\n"
@@ -134,19 +135,19 @@ msgstr ""
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
-"Some Xfce features may not work as intended."
+"Some XFce features may not work as intended."
 msgstr ""
-"Zure lehio kudeatzaileak badirudi ez dituela funtzio berriak onartzen "
+"Lehio kudeatzaileak badirudi ez dituela funtzio berriak onartzen "
 "http://www.freedesktop.org.-en agertzen den bezala \n"
-"Agian ezauarri batzuk ez dute behar bezala funtzionatuko."
+"Agian ezaugarri batzuk ez dute behar bezala funtzionatuko."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:399
 msgid "/Add _new item"
-msgstr "/Elementu berria gehitu"
+msgstr "/Eleme_ntu berria gehitu"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:401
 msgid "/_Properties..."
-msgstr "/_Propietateak"
+msgstr "/_Propietateak..."
 
 #: panel/controls.c:323
 msgid "/_Remove"
@@ -156,34 +157,34 @@ msgstr "/_Ezabatu"
 msgid "This item has no configuration options"
 msgstr "Elementu honek ez ditu ezarpen aukerak"
 
-#: panel/panel.c:121
-msgid "/Xfce Panel"
-msgstr "/Xfce Panela"
+#: panel/panel.c:397
+msgid "/XFce Panel"
+msgstr "/XFce Panela"
 
-#: panel/panel.c:126
+#: panel/panel.c:402
 msgid "/_Settings manager"
-msgstr "/Konfigurazio administratzailea"
+msgstr "/Konfigurazio kudeatzailea"
 
-#: panel/panel.c:128
-msgid "/_About Xfce"
-msgstr "/_Xfce-i buruz"
+#: panel/panel.c:404
+msgid "/_About XFce"
+msgstr "/_XFce-i buruz"
 
-#: panel/panel.c:129
+#: panel/panel.c:405
 msgid "/_Help"
-msgstr "/Laguntza"
+msgstr "/_Laguntza"
 
-#: panel/panel.c:131
+#: panel/panel.c:407
 msgid "/_Lock screen"
 msgstr "/Pantai_La blokeatu"
 
-#: panel/panel.c:132
+#: panel/panel.c:408
 msgid "/E_xit"
-msgstr "/Irten"
+msgstr "/I_rten"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:795 settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
-msgid "Xfce Panel"
-msgstr "Xfce Panela"
+msgid "XFce Panel"
+msgstr "XFce Panela"
 
 #: panel/icons.c:73
 msgid "Default"
@@ -223,11 +224,11 @@ msgstr "Grafikoak"
 
 #: panel/icons.c:82
 msgid "Printer"
-msgstr "Inprimagailuak"
+msgstr "Inprimagailua"
 
 #: panel/icons.c:83
 msgid "Productivity"
-msgstr "Produktibitatea"
+msgstr "Ekoizpena"
 
 #: panel/icons.c:84
 msgid "Sound"
@@ -239,9 +240,9 @@ msgstr "Terminala"
 
 #: panel/mcs_client.c:208
 msgid "Settings manager not available"
-msgstr "Saio administratzailea ez dago erabilgarri"
+msgstr "Saio kudeatzailea ez dago erabilgarri"
 
-#: panel/popup.c:263
+#: panel/popup.c:269
 msgid "Menu"
 msgstr "Menua"
 
@@ -280,12 +281,12 @@ msgstr "Eskuinean"
 #: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
 #: settings/xfce_settings_dialog.c:511
 msgid "Top"
-msgstr "Goia"
+msgstr "Goian"
 
 #: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
 #: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
-msgstr "Behea"
+msgstr "Behean"
 
 #: settings/xfce_settings_dialog.c:374
 msgid "Panel size:"
@@ -301,11 +302,11 @@ msgstr "Bapateko mezuen kokalekua:"
 
 #: settings/xfce_settings_dialog.c:424
 msgid "Icon theme:"
-msgstr "Ikonoen gaia:"
+msgstr "Ikono gaia:"
 
 #: settings/xfce_settings_dialog.c:495
 msgid "Panel layer:"
-msgstr "Panelaren nibela:"
+msgstr "Panelaren maila:"
 
 #: settings/xfce_settings_dialog.c:515
 msgid "Normal"
@@ -313,19 +314,19 @@ msgstr "Normala"
 
 #: settings/xfce_settings_dialog.c:535
 msgid "Center the panel:"
-msgstr "Panela itxi:"
+msgstr "Panela erdiratu:"
 
 #: settings/xfce_settings_dialog.c:559
 msgid "Set"
-msgstr "Konfiguratu"
+msgstr "Ezarri"
 
 #: settings/xfce_settings_dialog.c:595
 msgid "Autohide:"
 msgstr "Automatikoki ezkutatu"
 
 #: settings/xfce_settings_dialog.c:663
-msgid "Xfce Panel Settings"
-msgstr "Xfce-ko panelaren konfigurazioa"
+msgid "XFce Panel Settings"
+msgstr "XFce Panelaren konfigurazioa"
 
 #. Appearance
 #: settings/xfce_settings_dialog.c:675
@@ -340,7 +341,7 @@ msgstr "Kokalekua"
 #. autohide
 #: settings/xfce_settings_dialog.c:712
 msgid "Behaviour"
-msgstr "Konportamendua"
+msgstr "Portamoldea"
 
 #: plugins/clock/clock.c:57
 msgid "Sunday"
@@ -436,7 +437,7 @@ msgstr "LED"
 
 #: plugins/clock/clock.c:433
 msgid "Hour mode:"
-msgstr "Ordutegi mota"
+msgstr "Ordutegi mota:"
 
 #: plugins/clock/clock.c:440
 msgid "24 hour"
@@ -452,11 +453,11 @@ msgstr "AM/PM"
 
 #: plugins/clock/clock.c:490
 msgid "Show seconds:"
-msgstr "Erakutsi segunduak"
+msgstr "segunduak bistarazi:"
 
 #: plugins/clock/clock.c:599
 msgid "Xfce Clock"
-msgstr "Xfce-ren erlojua"
+msgstr "Xfce erlojua"
 
 #: plugins/pager/pager.c:271
 msgid "Graphical pager"
@@ -493,11 +494,11 @@ msgstr "Konfigurazioa"
 #: plugins/systembuttons/systembuttons.c:151
 #: plugins/systembuttons/systembuttons.c:520
 msgid "Info"
-msgstr "Informazioa"
+msgstr "Info"
 
 #: plugins/systembuttons/systembuttons.c:500
 msgid "Show two buttons:"
-msgstr "Erakutsi botoiak"
+msgstr "Erakutsi bi botoi:"
 
 #. set names to use in option menus
 #: plugins/systembuttons/systembuttons.c:517
@@ -530,72 +531,13 @@ msgstr "Posta programak:"
 
 #: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Paneleko botoia sakatzean exekutatu behar dena"
+msgstr "Paneleko botoia sakatzean abiarazi behar dena"
 
 #: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
-msgstr "Interbaloa (seg):"
+msgstr "Aldia (seg):"
 
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Posta begiratu"
 
-#~ msgid "_Done"
-#~ msgstr "Termina_Do"
-
-#~ msgid "_Revert"
-#~ msgstr "_Deshacer"
-
-#~ msgid "Type:"
-#~ msgstr "Tipo:"
-
-#~ msgid "Add item"
-#~ msgstr "Añadir nuevo elemento"
-
-#~ msgid "Xfce Desktop Environment"
-#~ msgstr "Entorno de Escritorio Xfce"
-
-#~ msgid "Copyright 2002-2003 by Olivier Fourdan"
-#~ msgstr "Copyright 2002-2003, Olivier Fourdan"
-
-#~ msgid "Credits"
-#~ msgstr "Créditos"
-
-#~ msgid "License"
-#~ msgstr "Licencia"
-
-#~ msgid "/_Panel settings"
-#~ msgstr "/Configuración del _Panel"
-
-#~ msgid "Trashcan: 0 files"
-#~ msgstr "Cubo de basura: 0 archivos"
-
-#~ msgid "Trashcan: %d files / %d %s"
-#~ msgstr "Cubo de basura: %d archivos / %d %s"
-
-#~ msgid "Trash can"
-#~ msgstr "Cubo de basura"
-
-#~ msgid "Xfce 4"
-#~ msgstr "Xfce 4"
-
-#~ msgid "By Olivier Fourdan (c) 1997-2003"
-#~ msgstr "Por Olivier Fourdan (c) 1997-2003"
-
-#~ msgid "Toggle AM PM mode :"
-#~ msgstr "Intercambiar modo AM PM"
-
-#~ msgid "/_Edit ..."
-#~ msgstr "/_Editar ..."
-
-#~ msgid "Traditional"
-#~ msgstr "Tradicional"
-
-#~ msgid "Modern"
-#~ msgstr "Moderno"
-
-#~ msgid "Panel style:"
-#~ msgstr "Estilo del panel"
-
-#~ msgid "Show minibuttons"
-#~ msgstr "Mostrar minibotones"
