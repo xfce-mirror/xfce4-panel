@@ -26,17 +26,12 @@
 #include <config.h>
 #endif
 
-#ifdef GDK_MULTIHEAD_SAFE
-#undef GDK_MULTIHEAD_SAFE
-#endif
-
 #include <math.h>
 
 #include <X11/Xlib.h>
 
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libnetk.h>
-#include <libxfcegui4/xinerama.h>
 #include <libxfcegui4/icons.h>
 
 #include "xfce.h"
@@ -151,23 +146,25 @@ update_arrow_direction (int x, int y)
 static void
 update_xinerama_coordinates (Panel * p)
 {
+    GdkRectangle rect;
+    gint monitor_nbr;
+    GdkScreen *gscrn;
     int x, y;
-    DesktopMargins margins = { 0 };
 
     g_return_if_fail (dpy != NULL);
-    
-    netk_get_desktop_margins (xscreen, &margins);
-    
+        
     gtk_window_get_position (GTK_WINDOW (p->toplevel), &x, &y);
     x += p->toplevel->allocation.width / 2;
     y += p->toplevel->allocation.height / 2;
 
-    xinerama_scr.xmin = MAX (MyDisplayX (x, y), margins.left);
-    xinerama_scr.xmax = MIN (MyDisplayMaxX (dpy, scr, x, y), 
-	    		     screen_width - margins.right);
-    xinerama_scr.ymin = MAX (MyDisplayY (x, y), margins.top);
-    xinerama_scr.ymax = MIN (MyDisplayMaxY (dpy, scr, x, y), 
-	    		     screen_height - margins.bottom);
+    gscrn = gtk_widget_get_screen (GTK_WIDGET (p->toplevel));
+    monitor_nbr = gdk_screen_get_monitor_at_point (gscrn, x, y);
+    gdk_screen_get_monitor_geometry (gscrn, monitor_nbr, &rect);
+
+    xinerama_scr.xmin = rect.x;
+    xinerama_scr.xmax = rect.x + rect.width;
+    xinerama_scr.ymin = rect.y;
+    xinerama_scr.ymax = rect.y + rect.height;
 
     DBG ("screen: %d,%d+%dx%d",
 	 xinerama_scr.xmin, xinerama_scr.ymin,
@@ -263,15 +260,20 @@ panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
     static int num_screens = 0;
 
     if (G_UNLIKELY(num_screens == 0))
-	num_screens = xineramaGetHeads ();
+    {
+	GdkScreen *gscrn;
 
+        gscrn = gtk_widget_get_screen (GTK_WIDGET (panel->toplevel));
+        num_screens = gdk_screen_get_n_monitors (gscrn);
+    }
+    
     if (G_UNLIKELY(num_screens > 1))
     {
 	int xcenter, ycenter;
-
+	
 	xcenter = *x + panel_req.width / 2;
 	ycenter = *y + panel_req.height / 2;
-	
+
 	if (xcenter < xinerama_scr.xmin || ycenter < xinerama_scr.ymax
 	    || xcenter > xinerama_scr.xmax || ycenter > xinerama_scr.ymax)
 	{
