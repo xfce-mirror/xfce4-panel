@@ -53,9 +53,8 @@ AC_OUTPUT([
 xfce4.spec
 Makefile
 doc/Makefile
-doc/images/Makefile
-doc/html/Makefile
-doc/xml/Makefile
+doc/C/Makefile
+doc/C/images/Makefile
 po/Makefile.in
 icons/Makefile
 panel/Makefile
