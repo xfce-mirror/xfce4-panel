@@ -222,7 +222,7 @@ GdkPixbuf *get_themed_pixbuf(const char *name)
 
     pb = _get_themed_pixbuf(name, settings.theme);
 
-    if (!pb && settings.theme && !strequal(DEFAULT_THEME, settings.theme))
+    if (!pb && (!settings.theme  || !strequal(DEFAULT_THEME, settings.theme)))
 	pb = _get_themed_pixbuf(name, DEFAULT_THEME);
 
     if (!pb)

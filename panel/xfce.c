@@ -612,6 +612,9 @@ void panel_parse_xml(xmlNodePtr node)
     if(settings.num_screens < 1 || settings.num_screens > NBSCREENS)
         settings.num_screens = 4;
 
+    if (settings.show_central && settings.central_index == -1)
+	settings.central_index = settings.num_groups / 2;
+
     /* some things just look awful with old style */
     if(settings.orientation == HORIZONTAL)
     {
