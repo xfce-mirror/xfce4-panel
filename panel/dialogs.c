@@ -178,6 +178,9 @@ static void restore_backup(void)
 {
     /* we just let the calbacks of our dialog do all the work */
 
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin),
+                              backup.num_screens);
+
     /* this must be first */
     gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu),
     				backup.orientation);
@@ -193,12 +196,6 @@ static void restore_backup(void)
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(groups_spin), backup.num_groups);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(central_spin), backup.central_index);
-
-    /* Fix a bad revert number of desktop
-       FIXME: there should be a better way to do this
-    */
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin),
-                              settings.num_screens=backup.num_screens);
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox),
                                  backup.show_desktop_buttons);
@@ -223,7 +220,7 @@ static void restore_backup(void)
 */
     position.x = backup_pos.x;
     position.y = backup_pos.y;
-    panel_set_position();
+    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
 }
 
 /*  sections
@@ -1143,7 +1140,6 @@ static gboolean running = FALSE;
 void global_settings_dialog(void)
 {
     GtkWidget *frame, *vbox, *button;
-    gboolean done;
     GtkWidget *notebook, *label;
     char *markup;
 
@@ -1154,7 +1150,6 @@ void global_settings_dialog(void)
     }
 
     running = TRUE;
-    done = FALSE;
 
     create_backup();
 
@@ -1277,7 +1272,7 @@ void global_settings_dialog(void)
 
     gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), lastpage);
     
-    while(!done)
+    while(1)
     {
         int response = GTK_RESPONSE_NONE;
 
@@ -1288,6 +1283,7 @@ void global_settings_dialog(void)
             restore_backup();
             panel_set_settings();
             gtk_widget_set_sensitive(revert, FALSE);
+	    gtk_widget_grab_focus(button);
         }
 /* FIXME: Get rid of these options
         else if(GTK_IS_WIDGET(dialog))
@@ -1324,7 +1320,7 @@ void global_settings_dialog(void)
         }
 */	
         else
-            done = TRUE;
+            break;
     }
 
     lastpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));

@@ -895,20 +895,27 @@ void central_panel_set_num_screens(int n)
     {
         ScreenButton *sb = screen_buttons[i];
 
-        if(!sb && i < n)
-        {
-            sb = screen_buttons[i] = create_screen_button(i);
-            screen_button_pack(sb, desktop_table);
-
-	    if (!screen_names[i])
-		screen_names[i] = get_default_screen_name(i);
-            screen_button_update_name(sb);
-        }
-
         if(i < n)
-            gtk_widget_show(sb->frame);
-        else if(sb)
-	    gtk_widget_hide(sb->frame);
+        {
+	    if (!sb)
+	    {
+		sb = screen_buttons[i] = create_screen_button(i);
+		screen_button_pack(sb, desktop_table);
+
+		if (!screen_names[i])
+		    screen_names[i] = get_default_screen_name(i);
+		
+		screen_button_update_name(sb);
+	    }
+
+	    gtk_widget_show(sb->frame);
+        }
+        else if (sb)
+	{
+	    gtk_widget_destroy(sb->frame);
+	    g_free(sb);
+	    screen_buttons[i] = NULL;
+	}
     }
 
     if(n == 1)
