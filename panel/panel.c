@@ -721,10 +721,10 @@ panel_center (int side)
 	    gtk_main_iteration();
     }
     
+    gtk_widget_size_request (panel.toplevel, &req);
+
     xscreen = DefaultScreenOfDisplay (GDK_DISPLAY ());
     netk_get_desktop_margins (xscreen, &margins);
-
-    gtk_widget_size_request (panel.toplevel, &req);
 
     switch (side)
     {

@@ -63,10 +63,27 @@ static void
 save_yourself (gpointer data, int save_style, gboolean shutdown,
                int interact_style, gboolean fast)
 {
+    hidden = panel.hidden;
+    
     if (panel.toplevel)
+    {
+	if (hidden)
+	{
+	    panel_set_autohide(FALSE);
+
+	    while (gtk_event_pending())
+		gtk_main_iteration();
+	}
+	
         gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
                                  &panel.position.y);
 
+	gtk_widget_hide (panel.toplevel);
+    }
+
+    if (hidden && panel.toplevel)
+	panel_set_autohide(TRUE);
+    
     write_panel_config ();
 }
 
@@ -82,6 +99,8 @@ die (gpointer client_data)
 void
 quit (gboolean force)
 {
+    gboolean hidden;
+
     if (!force)
     {
         if (session_managed)
@@ -98,11 +117,26 @@ quit (gboolean force)
 
     mcs_stop_watch ();
 
+    hidden = panel.hidden;
+    
     if (panel.toplevel)
+    {
+	if (hidden)
+	{
+	    panel_set_autohide(FALSE);
+
+	    while (gtk_event_pending())
+		gtk_main_iteration();
+	}
+	
         gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
                                  &panel.position.y);
 
-    gtk_widget_hide (panel.toplevel);
+	if (hidden)
+	    panel_set_autohide(TRUE);
+
+	gtk_widget_hide (panel.toplevel);
+    }
 
     write_panel_config ();
 
@@ -122,10 +156,26 @@ void
 restart (void)
 {
     int x, y;
+    gboolean hidden;
 
+    hidden = panel.hidden;
+    
     if (panel.toplevel)
+    {
+	if (hidden)
+	{
+	    panel_set_autohide(FALSE);
+
+	    while (gtk_event_pending())
+		gtk_main_iteration();
+	}
+	
         gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
                                  &panel.position.y);
+
+	if (hidden)
+	    panel_set_autohide(TRUE);
+    }
 
     /* somehow the position gets lost here ... 
      * FIXME: find out why, may be a real bug */
@@ -134,7 +184,8 @@ restart (void)
 
     write_panel_config ();
 
-    gtk_widget_hide (panel.toplevel);
+    if (panel.toplevel)
+	gtk_widget_hide (panel.toplevel);
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     free_startup_timeout ();
