@@ -18,6 +18,7 @@ libxfce4panel_la_CFLAGS =						\
 	@LIBXFCEGUI4_CFLAGS@
 	
 libxfce4panel_la_LDFLAGS = 						\
+	-export-dynamic							\
 	-version-info @LIBXFCE4PANEL_VERINFO@
 
 xfce_headers = \
