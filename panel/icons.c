@@ -40,15 +40,18 @@ const char *icon_names[NUM_ICONS];
 static void
 theme_changed (XfceIconTheme * icontheme)
 {
+#if 0
     char *theme;
 
     g_object_get (gtk_settings_get_default (), "gtk-icon-theme-name",
 		  &theme, NULL);
 
     DBG ("Theme: %s\n", theme);
-    panel_set_theme (theme);
 
     g_free (theme);
+#endif
+    
+    panel_set_theme (NULL);
 }
 
 G_MODULE_EXPORT /* EXPORT:icons_init */

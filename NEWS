@@ -5,10 +5,12 @@ NEWS for xfce4-panel
 ==================
 - Several translation updates (Jean-Francois)
 
+- Some autohide fixes with open dialogs (Jasper)
+
 - Fix multihead support (Jasper)
 
-- Translucent panel when set on top. Needs xfwm4 with composite support and
-  XOrg >= 6.8.0 with composite extension enabled. (Olivier)
+- Translucent panel when set on top. Needs xfwm4 with composite support 
+  and XOrg >= 6.8.0 with composite extension enabled. (Olivier)
 
 
 4.1.90 (4.2 BETA1)
@@ -41,16 +43,17 @@ NEWS for xfce4-panel
 - Reduce handle width to show only one line of dots. (Jasper)
 
 - Split out the code for choosing a command and choosing an icon from
-  item_dialog.c. to make it available for use in other dialogs (plugins). The
-  mailcheck plugin makes use of it and of course the launcher dialog. (Jasper)
+  item_dialog.c. to make it available for use in other dialogs (plugins). 
+  The mailcheck plugin makes use of it and of course the launcher dialog. 
+  (Jasper)
 
 - Implement module unloading. Add uniqueness setting to plugins. (Jasper)
 
 - Add pop3 email checking: Use 'pop3://username:password@host' as mailbox.
   (Olivier)
 
-- Properly update arrow direction. Use this info to position the menus. Much
-  better. (Jasper)
+- Properly update arrow direction. Use this info to position the menus. 
+  Much better. (Jasper)
 
 - Add xrandr awareness. (Jasper)
 

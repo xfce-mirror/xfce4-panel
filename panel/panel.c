@@ -342,16 +342,19 @@ restrict_position (Panel * p, int *x, int *y)
 	p->priv->offset = *y - p->priv->monitor_geometry.y;
     }
 
-    DBG ("++ position: %d, %d\n", p->position.x, p->position.y);
-    DBG ("   monitor: %d\n", p->priv->monitor);
-    DBG ("   side: %s\n",
+    DBG ("\n"
+         " ++ position: %d, %d\n"
+         "    monitor: %d\n"
+         "    side: %s\n"
+         "    state: %s\n",
+         p->position.x, p->position.y,
+         p->priv->monitor,
 	 p->priv->side == LEFT ? "left" :
-	 p->priv->side == RIGHT ? "right" :
-	 p->priv->side == TOP ? "top" : "bottom");
-    DBG ("   state: %s\n",
+            p->priv->side == RIGHT ? "right" :
+                p->priv->side == TOP ? "top" : "bottom",
 	 p->priv->pos_state == XFCE_POS_STATE_CENTER ? "center" :
-	 p->priv->pos_state == XFCE_POS_STATE_START ? "start" :
-	 p->priv->pos_state == XFCE_POS_STATE_END ? "end" : "none");
+             p->priv->pos_state == XFCE_POS_STATE_START ? "start" :
+                 p->priv->pos_state == XFCE_POS_STATE_END ? "end" : "none");
 }
 
 static void
@@ -452,16 +455,19 @@ panel_set_position (Panel * p)
 	}
     }
 
-    DBG (" ++ position: %d, %d\n", p->position.x, p->position.y);
-    DBG ("    monitor: %d\n", p->priv->monitor);
-    DBG ("    side: %s\n",
+    DBG ("\n"
+         " ++ position: %d, %d\n"
+         "    monitor: %d\n"
+         "    side: %s\n"
+         "    state: %s\n",
+         p->position.x, p->position.y,
+         p->priv->monitor,
 	 p->priv->side == LEFT ? "left" :
-	 p->priv->side == RIGHT ? "right" :
-	 p->priv->side == TOP ? "top" : "bottom");
-    DBG ("    state: %s\n",
+            p->priv->side == RIGHT ? "right" :
+                p->priv->side == TOP ? "top" : "bottom",
 	 p->priv->pos_state == XFCE_POS_STATE_CENTER ? "center" :
-	 p->priv->pos_state == XFCE_POS_STATE_START ? "start" :
-	 p->priv->pos_state == XFCE_POS_STATE_END ? "end" : "none");
+             p->priv->pos_state == XFCE_POS_STATE_START ? "start" :
+                 p->priv->pos_state == XFCE_POS_STATE_END ? "end" : "none");
 
     gtk_window_move (GTK_WINDOW (p->toplevel), p->position.x, p->position.y);
 
