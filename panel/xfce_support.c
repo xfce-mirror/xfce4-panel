@@ -609,11 +609,11 @@ static void sn_error_trap_pop (SnDisplay *display, Display   *xdisplay)
 
 extern char **environ;
 
-static char ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_context, char **envp)
+static gchar ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_context, char **envp)
 {
-    char **retval = NULL;
-    int    i;
-    int    desktop_startup_id_len;
+    gchar **retval = NULL;
+    int i;
+    int desktop_startup_id_len;
 
     if (envp == NULL)
     {
@@ -621,7 +621,7 @@ static char ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_cont
     }
     for (i = 0; envp[i]; i++);
 
-    retval = g_new (char *, i + 2);
+    retval = g_new (gchar *, i + 2);
 
     desktop_startup_id_len = strlen ("DESKTOP_STARTUP_ID");
 
@@ -631,9 +631,11 @@ static char ** make_spawn_environment_for_sn_context (SnLauncherContext *sn_cont
         {
             retval[i] = g_strdup (envp[i]);
 	}
+	else
+	{
+	    retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
+	}
     }
-
-    retval[i] = g_strdup_printf ("DESKTOP_STARTUP_ID=%s", sn_launcher_context_get_startup_id (sn_context));
     ++i;
     retval[i] = NULL;
 
@@ -736,6 +738,7 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
     gchar *execute = NULL;
     GError *error = NULL;
     gboolean success = TRUE;
+    gchar **free_envp = NULL;
     gchar **envp = environ;
     gchar **argv = NULL;
     gboolean retval;
@@ -771,11 +774,12 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
 	sn_display = sn_display_new (gdk_display, sn_error_trap_push, sn_error_trap_pop);
 	sn_context = sn_launcher_context_new (sn_display, DefaultScreen (gdk_display));
     }
-    if (sn_context != NULL && !sn_launcher_context_get_initiated (sn_context)) 
+    if ((sn_context != NULL) && !sn_launcher_context_get_initiated (sn_context)) 
     {
 	sn_launcher_context_set_binary_name (sn_context, execute);
 	sn_launcher_context_initiate (sn_context, g_get_prgname () ? g_get_prgname () : "unknown", argv[0], CurrentTime);
 	envp = make_spawn_environment_for_sn_context (sn_context, envp);
+	free_envp = envp;
     }
 #endif
     		     
@@ -813,7 +817,11 @@ static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean use_sn
 	    }
 	}
 	sn_display_unref (sn_display);
-	g_strfreev (envp);
+	if (free_envp)
+	{
+	    g_strfreev (free_envp);
+	    free_envp = NULL;
+	}
     }
 #endif /* HAVE_STARTUP_NOTIFICATION */
     g_strfreev (argv);
