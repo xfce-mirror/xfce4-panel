@@ -381,9 +381,6 @@ main (int argc, char **argv)
 
     session_managed = session_init (client_session);
     
-    if (!session_managed)
-	g_message ("%s: Running without session manager", PACKAGE);
-
 #ifdef HAVE_SIGACTION
     act.sa_handler = sighandler;
     sigemptyset (&act.sa_mask);
