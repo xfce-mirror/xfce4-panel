@@ -556,18 +556,18 @@ panel_set_hidden (Panel * p, gboolean hide)
 	if (settings.orientation == VERTICAL)
 	{
 	    if (pos.x - xinerama_scr.xmin < xinerama_scr.xmax - pos.x)
-		x = pos.x;
+		x = xinerama_scr.xmin;
 	    else
-		x = pos.x + panel_req.width - HIDDEN_SIZE + 1;
+		x = xinerama_scr.xmax - HIDDEN_SIZE;
 
 	    w = HIDDEN_SIZE;
 	}
 	else
 	{
 	    if (pos.y - xinerama_scr.ymin < xinerama_scr.ymax - pos.y)
-		y = pos.y;
+		y = xinerama_scr.ymin;
 	    else
-		y = pos.y + panel_req.height - HIDDEN_SIZE + 1;
+		y = xinerama_scr.ymax - HIDDEN_SIZE;
 
 	    h = HIDDEN_SIZE;
 	}
