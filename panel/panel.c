@@ -54,6 +54,8 @@
 
 #define HANDLE_WIDTH 10
 
+#define SNAP_WIDTH 25
+
 /* globals */
 
 Settings settings;
@@ -83,7 +85,7 @@ static int old_screen_height = 0;
 
 /* screen properties */
 static Display *dpy = NULL;
-Screen *xscreen = NULL;
+static Screen *xscreen = NULL;
 static int scr = 0;
 static int screen_width = 0;
 static int screen_height = 0;
@@ -95,7 +97,7 @@ struct XineramaScreen
     int xmax, ymax;
 };
 
-struct XineramaScreen xinerama_scr = { 0 };
+static struct XineramaScreen xinerama_scr = { 0 };
 
 static GtkRequisition panel_req = { 0 };
 
@@ -210,21 +212,17 @@ update_position (Panel * p, int *x, int *y)
 	    *y = xinerama_scr.ymax - panel_req.height;
 	}
 
+	/* only center if left side will be on the screen */
 	if (xcenter > xinerama_scr.xmin &&
-	    *x > xcenter - 20 && *x < xcenter + 20)
+	    *x > xcenter - SNAP_WIDTH && *x < xcenter + SNAP_WIDTH)
 	{
 	    *x = xcenter;
 	}
-	else if (*x + panel_req.width > xinerama_scr.xmax - 20)
+	else if (*x + panel_req.width > xinerama_scr.xmax - SNAP_WIDTH)
 	{
 	    *x = xinerama_scr.xmax - panel_req.width;
 	}
-	else if (*x < xinerama_scr.xmin + 20)
-	{
-	    *x = xinerama_scr.xmin;
-	}
-
-	if (*x < xinerama_scr.xmin)
+	else if (*x < xinerama_scr.xmin + SNAP_WIDTH)
 	{
 	    *x = xinerama_scr.xmin;
 	}
@@ -240,21 +238,17 @@ update_position (Panel * p, int *x, int *y)
 	    *x = xinerama_scr.xmax - panel_req.width;
 	}
 
+	/* only center if top side will be on the screen */
 	if (ycenter > xinerama_scr.ymin &&
-	    *y > ycenter - 20 && *y < ycenter + 20)
+	    *y > ycenter - SNAP_WIDTH && *y < ycenter + SNAP_WIDTH)
 	{
 	    *y = ycenter;
 	}
-	else if (*y + panel_req.height > xinerama_scr.ymax - 20)
+	else if (*y + panel_req.height > xinerama_scr.ymax - SNAP_WIDTH)
 	{
 	    *y = xinerama_scr.ymax - panel_req.height;
 	}
-	else if (*y < xinerama_scr.ymin + 20)
-	{
-	    *y = xinerama_scr.ymin;
-	}
-
-	if (*y < xinerama_scr.ymin)
+	else if (*y < xinerama_scr.ymin + SNAP_WIDTH)
 	{
 	    *y = xinerama_scr.ymin;
 	}
@@ -285,7 +279,6 @@ panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
 	}
     }
     
-    /* check if xinerama screen must be updated */
     update_position (panel, x, y);
 }
 
@@ -421,12 +414,26 @@ get_handle_menu (void)
 	menu = GTK_MENU (gtk_item_factory_get_widget (ifactory, "<popup>"));
     }
 
-    /* the third item, keep in sync with factory 
-    item = GTK_MENU_SHELL (menu)->children->next->next->data;
+    /* when XFCE_DISABLE_USER_CONFIG is set, hide 3rd, 4th and 5th item;
+     * keep in sync with factory. */
+    if (G_UNLIKELY (disable_user_config))
+    {
+	GList *l;
+	GtkWidget *item;
+	
+	l = g_list_nth (GTK_MENU_SHELL (menu)->children, 2);
+	item = l->data;
+	gtk_widget_hide (item);
     
-    submenu = get_controls_submenu();
-    gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);*/
-
+	l = l->next;
+	item = l->data;
+	gtk_widget_hide (item);
+    
+	l = l->next;
+	item = l->data;
+	gtk_widget_hide (item);
+    }
+    
     return menu;
 }
 
@@ -802,7 +809,7 @@ create_panel_framework (Panel * p)
 				   (gpointer *) & (p->toplevel));
     }
 
-    /* this is necessary after a SIGHUP */
+    /* this is necessary after a SIGUSR */
     gtk_window_stick (GTK_WINDOW (p->toplevel));
 
     /* Connect signalers to window for autohide */
@@ -860,11 +867,19 @@ panel_cleanup (void)
     groups_cleanup ();
 }
 
+static gboolean
+connect_auto_resize (Panel *p)
+{
+    gtk_widget_size_request (p->toplevel, &panel_req);
+    g_signal_connect (p->toplevel, "size-allocate", 
+	    	      G_CALLBACK (panel_allocate_cb), p);
+    return FALSE;
+}
+
 void
 create_panel (void)
 {
     static gboolean need_init = TRUE;
-    int x, y;
     int hidden;
 
     /* necessary for initial settings to do the right thing */
@@ -903,13 +918,6 @@ create_panel (void)
     hidden = settings.autohide;
     settings.autohide = FALSE;
 
-    /* FIXME
-     * somehow the position gets set differently in the code below
-     * we just save it here and restore it before reading the config
-     * file */
-    x = panel.position.x;
-    y = panel.position.y;
-
     /* panel framework */
     create_panel_framework (&panel);
 
@@ -919,39 +927,36 @@ create_panel (void)
      * This function creates the panel items and popup menus */
     get_panel_config ();
 
+    gtk_widget_size_request (panel.toplevel, &panel_req);
+
     if (old_screen_width > 0)
     {
 	double xscale, yscale;
 
-	gtk_widget_size_request (panel.toplevel, &panel_req);
+	xscale = (double) panel.position.x / 
+	    (double) (old_screen_width - panel_req.width);
 	
-	xscale = (double) x / (double) (old_screen_width - panel_req.width);
-	yscale = (double) y / (double) (old_screen_height - panel_req.height);
+	yscale = (double) panel.position.y / 
+	    (double) (old_screen_height - panel_req.height);
 	
-	x = rint (xscale * (screen_width - panel_req.width));
-	y = rint (yscale * (screen_height - panel_req.height));
+	panel.position.x = rint (xscale * (screen_width - panel_req.width));
+	panel.position.y = rint (yscale * (screen_height - panel_req.height));
 
 	old_screen_width = old_screen_height = 0;
     }
 	
-    panel.position.x = x;
-    panel.position.y = y;
-    gtk_window_move (GTK_WINDOW (panel.toplevel), x, y);
-
-    gtk_widget_size_request (panel.toplevel, &panel_req);
     update_xinerama_coordinates (&panel);
+    
+    panel_created = TRUE;
 
-    panel.position.x = x;
-    panel.position.y = y;
     panel_set_position ();
-
-    gtk_widget_show (panel.toplevel);
+    
+    gtk_widget_show_now (panel.toplevel);
     set_window_layer (panel.toplevel, settings.layer);
     set_window_skip (panel.toplevel);
 
     /* this must be before set_autohide() and after set_position()
      * otherwise the initial position will be messed up */
-    panel_created = TRUE;
 
     if (hidden)
 	panel_set_autohide (TRUE);
@@ -961,9 +966,9 @@ create_panel (void)
 		      G_CALLBACK (screen_size_changed), &panel);
 #endif
 
-    g_signal_connect (GTK_WINDOW (panel.toplevel), "size-allocate", 
-	    	      G_CALLBACK (panel_allocate_cb), &panel);
-
+    /* delay automatic resizing, so that plugins (e.g. pager) may first
+     * get their full size */
+    g_idle_add ((GSourceFunc) connect_auto_resize, &panel);
 }
 
 /*  Panel settings

@@ -80,6 +80,7 @@ add_control_dialog (Panel * panel, int position)
 	    			  GTK_RESPONSE_CANCEL);
 
     add = gtk_button_new_from_stock (GTK_STOCK_ADD);
+    GTK_WIDGET_SET_FLAGS (add, GTK_CAN_DEFAULT);
     gtk_widget_show (add);
     gtk_dialog_add_action_widget (GTK_DIALOG (dlg), add, GTK_RESPONSE_OK);
 
