@@ -56,6 +56,7 @@ void panel_set_num_right(int n);
 
 void panel_set_current(int n);
 void panel_set_num_screens(int n);
+void panel_set_show_central(gboolean show);
 
 /* panel configuration */
 void panel_parse_xml(xmlNodePtr node);

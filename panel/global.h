@@ -109,6 +109,7 @@ struct _Settings
     int num_right;
 
     int num_screens;
+    gboolean show_central;
     gboolean show_desktop_buttons;
     int current;
 

@@ -130,7 +130,7 @@ gboolean create_extern_module(PanelModule * pm)
         init(pm);
     }
 
-    if(!pm->update || !pm->main)
+    if(!pm->main)
     {
         g_module_close(pm->gmodule);
         pm->gmodule = NULL;
@@ -142,11 +142,8 @@ gboolean create_extern_module(PanelModule * pm)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
    Panel module interface
-
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 gboolean create_panel_module(PanelModule * pm)
 {
     gboolean success;

@@ -315,6 +315,7 @@ void init_settings(void)
     settings.num_right = 5;
     settings.num_screens = 4;
     settings.current = 0;
+    settings.show_central = TRUE;
     settings.show_desktop_buttons = TRUE;
     settings.lock_command = NULL;
     settings.exit_command = NULL;
@@ -345,6 +346,8 @@ void panel_set_settings(void)
     central_panel_set_num_screens(settings.num_screens);
 
     central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
+
+    panel_set_show_central(settings.show_central);
 
     if(n < settings.num_screens)
         request_net_number_of_desktops(settings.num_screens);
@@ -453,6 +456,16 @@ void panel_set_num_screens(int n)
     central_panel_set_num_screens(n);
 }
 
+void panel_set_show_central(gboolean show)
+{
+    settings.show_central = show;
+
+    if (show)
+	gtk_widget_show(central_frame);
+    else
+	gtk_widget_hide(central_frame);
+}
+
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   Panel configuration
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -510,6 +523,20 @@ void panel_parse_xml(xmlNodePtr node)
 
     if(value)
         settings.num_screens = atoi(value);
+
+    g_free(value);
+
+    value = xmlGetProp(node, (const xmlChar *)"showcentral");
+
+    if(value)
+    {
+	n = atoi(value);
+
+	if (n == 1)
+	    settings.show_central = TRUE;
+	else
+	    settings.show_central = FALSE;
+    }
 
     g_free(value);
 
@@ -605,6 +632,9 @@ void panel_write_xml(xmlNodePtr root)
 
     snprintf(value, 3, "%d", settings.num_screens);
     xmlSetProp(node, "screens", value);
+
+    snprintf(value, 2, "%d", settings.show_central);
+    xmlSetProp(node, "showcentral", value);
 
     snprintf(value, 2, "%d", settings.show_desktop_buttons);
     xmlSetProp(node, "desktopbuttons", value);

@@ -31,6 +31,7 @@
 #include "item.h"
 #include "icons.h"
 #include "dialogs.h"
+#include "callbacks.h"
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
    Builtin modules
@@ -38,6 +39,10 @@
 static gboolean create_clock_module(PanelModule * pm);
 
 static gboolean create_trash_module(PanelModule * pm);
+
+static gboolean create_exit_module(PanelModule * pm);
+
+static gboolean create_config_module(PanelModule * pm);
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 
@@ -50,6 +55,12 @@ gboolean create_builtin_module(PanelModule * pm)
             break;
         case TRASH_MODULE:
             return create_trash_module(pm);
+            break;
+        case EXIT_MODULE:
+            return create_exit_module(pm);
+            break;
+        case CONFIG_MODULE:
+            return create_config_module(pm);
             break;
         default:
             return FALSE;
@@ -560,3 +571,249 @@ static gboolean create_trash_module(PanelModule * pm)
 
     return TRUE;
 }
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Exit module
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+typedef struct
+{
+    GtkWidget *vbox;
+
+    GtkWidget *exit_button;
+    GtkWidget *lock_button;
+}
+t_exit;
+
+static t_exit *exit_new(void)
+{
+    GtkWidget *im;
+    GdkPixbuf *pb = NULL;
+    t_exit *exit = g_new(t_exit, 1);
+
+    exit->vbox = gtk_vbox_new(TRUE, 0);
+    gtk_widget_show(exit->vbox);
+
+    /* protect against destruction when unpacking */
+    g_object_ref(exit->vbox);
+
+    exit->lock_button = gtk_button_new();
+    gtk_button_set_relief(GTK_BUTTON(exit->lock_button), GTK_RELIEF_NONE);
+    gtk_widget_show(exit->lock_button);
+    gtk_box_pack_start(GTK_BOX(exit->vbox), exit->lock_button, TRUE, TRUE, 0);
+
+    pb = get_system_pixbuf(MINILOCK_ICON);
+    im = gtk_image_new_from_pixbuf(pb);
+    gtk_widget_show(im);
+    g_object_unref(pb);
+    gtk_container_add(GTK_CONTAINER(exit->lock_button), im);
+
+    exit->exit_button = gtk_button_new();
+    gtk_button_set_relief(GTK_BUTTON(exit->exit_button), GTK_RELIEF_NONE);
+    gtk_widget_show(exit->exit_button);
+    gtk_box_pack_start(GTK_BOX(exit->vbox), exit->exit_button, TRUE, TRUE, 0);
+
+    pb = get_system_pixbuf(MINIPOWER_ICON);
+    im = gtk_image_new_from_pixbuf(pb);
+    gtk_widget_show(im);
+    g_object_unref(pb);
+    gtk_container_add(GTK_CONTAINER(exit->exit_button), im);
+
+    add_tooltip(exit->lock_button, _("Lock the screen"));
+    add_tooltip(exit->exit_button, _("Exit"));
+
+    g_signal_connect_swapped(exit->lock_button, "clicked", 
+			     G_CALLBACK(mini_lock_cb), NULL);
+
+    g_signal_connect_swapped(exit->exit_button, "clicked", 
+			     G_CALLBACK(quit), NULL);
+    
+    return exit;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+static void exit_pack(PanelModule * pm, GtkBox * box)
+{
+    t_exit *exit = (t_exit *) pm->data;
+
+    gtk_box_pack_start(box, exit->vbox, TRUE, TRUE, 0);
+}
+
+static void exit_unpack(PanelModule * pm, GtkContainer * container)
+{
+    t_exit *exit = (t_exit *) pm->data;
+
+    gtk_container_remove(container, exit->vbox);
+}
+
+static void exit_free(PanelModule * pm)
+{
+    t_exit *exit = (t_exit *) pm->data;
+
+    if(GTK_IS_WIDGET(pm->main))
+        gtk_widget_destroy(pm->main);
+
+    g_free(exit);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+static void exit_set_size(PanelModule * pm, int size)
+{
+    t_exit *exit = (t_exit *) pm->data;
+    GdkPixbuf *pb1, *pb2;
+    GtkWidget *im;
+    int width, height;
+
+    width = icon_size(size);
+    height = icon_size(size) / 2;
+
+    gtk_widget_set_size_request(exit->exit_button, width + 4, height + 2);
+    gtk_widget_set_size_request(exit->lock_button, width + 4, height + 2);
+
+    pb1 = get_system_pixbuf(MINIPOWER_ICON);
+    im = gtk_bin_get_child(GTK_BIN(exit->exit_button));
+    pb2 = get_scaled_pixbuf(pb1, height-4);
+    gtk_image_set_from_pixbuf(GTK_IMAGE(im), pb2);
+
+    g_object_unref(pb1);
+    g_object_unref(pb2);
+
+    pb1 = get_system_pixbuf(MINILOCK_ICON);
+    im = gtk_bin_get_child(GTK_BIN(exit->lock_button));
+    pb2 = get_scaled_pixbuf(pb1, height-4);
+    gtk_image_set_from_pixbuf(GTK_IMAGE(im), pb2);
+
+    g_object_unref(pb1);
+    g_object_unref(pb2);
+}
+
+static void exit_set_icon_theme(PanelModule * pm, const char *theme)
+{
+    exit_set_size(pm, settings.size);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+static gboolean create_exit_module(PanelModule * pm)
+{
+    t_exit *exit = exit_new();
+
+    pm->caption = g_strdup(_("Exit/Lock"));
+    pm->data = (gpointer) exit;
+    pm->main = exit->exit_button;
+
+    pm->interval = 0;
+    pm->update = NULL;
+
+    pm->pack = (gpointer) exit_pack;
+    pm->unpack = (gpointer) exit_unpack;
+    pm->free = (gpointer) exit_free;
+
+    pm->set_size = (gpointer) exit_set_size;
+    pm->set_icon_theme = (gpointer) exit_set_icon_theme;
+
+    return TRUE;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Config module
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+static GtkWidget *config_new(void)
+{
+    GtkWidget *button;
+    GtkWidget *im;
+    GdkPixbuf *pb = NULL;
+
+    button = gtk_button_new();
+    gtk_button_set_relief(GTK_BUTTON(button), GTK_RELIEF_NONE);
+    gtk_widget_show(button);
+    /* protect against destruction when unpacking */
+    g_object_ref(button);
+
+    pb = get_system_pixbuf(MINIPALET_ICON);
+    im = gtk_image_new_from_pixbuf(pb);
+    gtk_widget_show(im);
+    g_object_unref(pb);
+    gtk_container_add(GTK_CONTAINER(button), im);
+
+    add_tooltip(button, _("Setup..."));
+
+    g_signal_connect_swapped(button, "clicked", 
+			     G_CALLBACK(mini_palet_cb), NULL);
+
+    return button;
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+static void config_pack(PanelModule * pm, GtkBox * box)
+{
+    GtkWidget *config = (GtkWidget *) pm->data;
+
+    gtk_box_pack_start(box, config, TRUE, TRUE, 0);
+}
+
+static void config_unpack(PanelModule * pm, GtkContainer * container)
+{
+    GtkWidget *config = (GtkWidget *) pm->data;
+
+    gtk_container_remove(container, config);
+}
+
+static void config_free(PanelModule * pm)
+{
+    if(GTK_IS_WIDGET(pm->main))
+        gtk_widget_destroy(pm->main);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+
+static void config_set_size(PanelModule * pm, int size)
+{
+    GtkWidget *config = (GtkWidget *) pm->data;
+    GdkPixbuf *pb1, *pb2;
+    GtkWidget *im;
+    int width, height;
+
+    width = icon_size(size);
+    height = icon_size(size);
+
+    gtk_widget_set_size_request(config, width + 4, height + 4);
+
+    pb1 = get_system_pixbuf(MINIPALET_ICON);
+    im = gtk_bin_get_child(GTK_BIN(config));
+    pb2 = get_scaled_pixbuf(pb1, height);
+    gtk_image_set_from_pixbuf(GTK_IMAGE(im), pb2);
+
+    g_object_unref(pb1);
+    g_object_unref(pb2);
+}
+
+static void config_set_icon_theme(PanelModule * pm, const char *theme)
+{
+    config_set_size(pm, settings.size);
+}
+
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+static gboolean create_config_module(PanelModule * pm)
+{
+    GtkWidget *config = config_new();
+
+    pm->caption = g_strdup(_("Setup"));
+    pm->data = (gpointer) config;
+    pm->main = config;
+
+    pm->interval = 0;
+    pm->update = NULL;
+
+    pm->pack = (gpointer) config_pack;
+    pm->unpack = (gpointer) config_unpack;
+    pm->free = (gpointer) config_free;
+
+    pm->set_size = (gpointer) config_set_size;
+    pm->set_icon_theme = (gpointer) config_set_icon_theme;
+
+    return TRUE;
+}
+
+

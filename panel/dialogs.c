@@ -120,6 +120,7 @@ static GtkWidget *theme_menu;
 static GtkWidget *left_spin;
 static GtkWidget *right_spin;
 static GtkWidget *buttons_checkbox;
+static GtkWidget *central_checkbox;
 static GtkWidget *screens_spin;
 static GtkWidget *pos_button;
 static GtkWidget *lock_entry;
@@ -132,7 +133,7 @@ static Settings backup;
 static int backup_theme_index = 0;
 
 GtkShadowType main_shadow = GTK_SHADOW_IN;
-GtkShadowType header_shadow = GTK_SHADOW_NONE;
+GtkShadowType header_shadow = GTK_SHADOW_OUT;
 GtkShadowType option_shadow = GTK_SHADOW_NONE;
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -150,6 +151,7 @@ static void create_backup(void)
     backup.num_right = settings.num_right;
     backup.num_screens = settings.num_screens;
     backup.show_desktop_buttons = settings.show_desktop_buttons;
+    backup.show_central = settings.show_central;
     backup.lock_command = g_strdup(settings.lock_command);
     backup.exit_command = g_strdup(settings.exit_command);
 }
@@ -167,11 +169,14 @@ static void restore_backup(void)
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), backup.num_right);
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), backup.num_screens);
-    /* apparently the callback doesn't always work */
-    panel_set_num_screens(backup.num_screens);
+    /* apparently the callback doesn't always work 
+       panel_set_num_screens(backup.num_screens);*/
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox), 
 				 backup.show_desktop_buttons);
+    
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox), 
+				 backup.show_central);
     
     if(backup.lock_command)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
@@ -579,6 +584,16 @@ static void desktop_buttons_changed(GtkToggleButton *button, gpointer data)
     gboolean show = gtk_toggle_button_get_active(button);
 
     central_panel_set_show_desktop_buttons(show);
+    gtk_widget_set_sensitive(revert, TRUE);
+}
+
+static void central_changed(GtkToggleButton *button, gpointer data)
+{
+    gboolean show = gtk_toggle_button_get_active(button);
+
+    panel_set_show_central(show);
+    gtk_widget_set_sensitive(buttons_checkbox, show);
+    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static void add_controls_box(GtkBox * box)
@@ -639,6 +654,25 @@ static void add_controls_box(GtkBox * box)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
+    label = gtk_label_new(_("Show central panel:")); 
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    central_checkbox = gtk_check_button_new();
+    gtk_widget_show(central_checkbox);
+    gtk_box_pack_start(GTK_BOX(hbox), central_checkbox, FALSE, FALSE, 0);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox), 
+				 settings.show_central);
+    g_signal_connect(central_checkbox, "toggled", G_CALLBACK(central_changed),
+		     NULL);
+
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
     label = gtk_label_new(_("Show desktop buttons:")); 
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
@@ -653,6 +687,8 @@ static void add_controls_box(GtkBox * box)
 				 settings.show_desktop_buttons);
     g_signal_connect(buttons_checkbox, "toggled", G_CALLBACK(desktop_buttons_changed),
 		     NULL);
+
+    gtk_widget_set_sensitive(buttons_checkbox, settings.show_central);
 
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
