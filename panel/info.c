@@ -257,7 +257,7 @@ void info_panel_dialog(void)
     GtkWidget *info_help_button;
 
     info = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_position(GTK_WINDOW(info), GTK_WIN_POS_CENTER);
+    gtk_window_set_position(GTK_WINDOW(info), GTK_WIN_POS_CENTER);
     gtk_window_set_title(GTK_WINDOW(info), _("Info ..."));
 
     /* Make the info dialog sticky */
