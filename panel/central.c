@@ -199,11 +199,16 @@ void screen_button_pack(ScreenButton * sb, GtkWidget * table)
     else
     {
         if(pos % 2 == 0 || settings.size <= SMALL)
+	{
             gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 0, 1,
                              GTK_EXPAND, GTK_EXPAND, 0, 0);
+	}
         else
-            gtk_table_attach(GTK_TABLE(table), sb->frame, pos - 1, pos , 1, 2,
+	{
+	    pos = (pos - 1)/2;
+            gtk_table_attach(GTK_TABLE(table), sb->frame, pos, pos + 1, 1, 2,
                              GTK_EXPAND, GTK_EXPAND, 0, 0);
+	}
     }
 
     /* Reorder the table to fix a bad display bug 
