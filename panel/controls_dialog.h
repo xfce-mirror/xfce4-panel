@@ -20,7 +20,7 @@
 #ifndef __XFCE_CONTROLS_DIALOG_H__
 #define __XFCE_CONTROLS_DIALOG_H__
 
-#include "global.h"
+#include <panel/global.h>
 
 void controls_dialog (Control * control);
 

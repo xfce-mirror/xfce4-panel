@@ -5,3 +5,23 @@ Developer notes:
 	  or gettextize in this directory, as it'll break the locales
 	  install stuff. If you think you need to change something,
 	  ask Benedikt Meurer first (benedikt.meurer@unix-ag.uni-siegen.de).
+
+	* Theres now a xfce4-panel-1.0.pc file for use with external panel
+	  plugins. In addition the panel header files are now installed into
+	  $(includedir)/xfce4/panel, so if you want to use them in your
+	  code, refer to them as <panel/whatever.h>.
+	  To compile a panel plugin add the output of
+	  
+	  	pkg-config --cflags xfce4-panel-1.0
+	
+	  to your CFLAGS and the output of
+	  
+	  	pkg-config --libs xfce4-panel-1.0
+	
+	  to your LIBS. The plugin needs to be installed into the panels
+	  plugin in order to be found by the panel. To get the path to
+	  the plugins directory use the following command:
+
+	  	pkg-config --variable=pluginsdir xfce4-panel-1.0
+
+	  Have fun with writing new panel plugins.

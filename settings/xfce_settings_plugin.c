@@ -43,7 +43,7 @@
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
 
-#include "icons/xfce_icon.xpm"
+#include <icons/xfce_icon.xpm>
 
 #define DEFAULT_THEME "Curve"
 

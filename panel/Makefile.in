@@ -191,7 +191,9 @@ xfce4_panel_SOURCES = \
 	xfce_support.h 
 
 
-pkginclude_HEADERS = \
+xfce4_panelincludedir = $(includedir)/xfce4/panel
+
+xfce4_panelinclude_HEADERS = \
 	controls.h							\
 	global.h 							\
 	icons.h 							\
@@ -225,10 +227,13 @@ xfce4_panel_LDADD = \
 	@LIBXFCE4MCS_CLIENT_LIBS@					\
 	@LIBXML_LIBS@
 
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = xfce4-panel-1.0.pc
 subdir = panel
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_FILES = xfce4-panel-1.0.pc
 bin_PROGRAMS = xfce4-panel$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
@@ -266,9 +271,12 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 DIST_SOURCES = $(xfce4_panel_SOURCES)
-HEADERS = $(pkginclude_HEADERS)
+DATA = $(pkgconfig_DATA)
 
-DIST_COMMON = $(pkginclude_HEADERS) Makefile.am Makefile.in
+HEADERS = $(xfce4_panelinclude_HEADERS)
+
+DIST_COMMON = $(xfce4_panelinclude_HEADERS) Makefile.am Makefile.in \
+	xfce4-panel-1.0.pc.in
 SOURCES = $(xfce4_panel_SOURCES)
 
 all: all-am
@@ -280,6 +288,8 @@ $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configu
 	  $(AUTOMAKE) --foreign  panel/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
+xfce4-panel-1.0.pc: $(top_builddir)/config.status xfce4-panel-1.0.pc.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
@@ -773,23 +783,41 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
-pkgincludeHEADERS_INSTALL = $(INSTALL_HEADER)
-install-pkgincludeHEADERS: $(pkginclude_HEADERS)
+pkgconfigDATA_INSTALL = $(INSTALL_DATA)
+install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(pkgincludedir)
-	@list='$(pkginclude_HEADERS)'; for p in $$list; do \
+	$(mkinstalldirs) $(DESTDIR)$(pkgconfigdir)
+	@list='$(pkgconfig_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(pkgincludeHEADERS_INSTALL) $$d$$p $(DESTDIR)$(pkgincludedir)/$$f"; \
-	  $(pkgincludeHEADERS_INSTALL) $$d$$p $(DESTDIR)$(pkgincludedir)/$$f; \
+	  echo " $(pkgconfigDATA_INSTALL) $$d$$p $(DESTDIR)$(pkgconfigdir)/$$f"; \
+	  $(pkgconfigDATA_INSTALL) $$d$$p $(DESTDIR)$(pkgconfigdir)/$$f; \
 	done
 
-uninstall-pkgincludeHEADERS:
+uninstall-pkgconfigDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(pkginclude_HEADERS)'; for p in $$list; do \
+	@list='$(pkgconfig_DATA)'; for p in $$list; do \
 	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(pkgincludedir)/$$f"; \
-	  rm -f $(DESTDIR)$(pkgincludedir)/$$f; \
+	  echo " rm -f $(DESTDIR)$(pkgconfigdir)/$$f"; \
+	  rm -f $(DESTDIR)$(pkgconfigdir)/$$f; \
+	done
+xfce4_panelincludeHEADERS_INSTALL = $(INSTALL_HEADER)
+install-xfce4_panelincludeHEADERS: $(xfce4_panelinclude_HEADERS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(xfce4_panelincludedir)
+	@list='$(xfce4_panelinclude_HEADERS)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(xfce4_panelincludeHEADERS_INSTALL) $$d$$p $(DESTDIR)$(xfce4_panelincludedir)/$$f"; \
+	  $(xfce4_panelincludeHEADERS_INSTALL) $$d$$p $(DESTDIR)$(xfce4_panelincludedir)/$$f; \
+	done
+
+uninstall-xfce4_panelincludeHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(xfce4_panelinclude_HEADERS)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f $(DESTDIR)$(xfce4_panelincludedir)/$$f"; \
+	  rm -f $(DESTDIR)$(xfce4_panelincludedir)/$$f; \
 	done
 
 ETAGS = etags
@@ -879,10 +907,10 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS) $(HEADERS)
+all-am: Makefile $(PROGRAMS) $(DATA) $(HEADERS)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(bindir) $(DESTDIR)$(pkgincludedir)
+	$(mkinstalldirs) $(DESTDIR)$(bindir) $(DESTDIR)$(pkgconfigdir) $(DESTDIR)$(xfce4_panelincludedir)
 
 install: install-am
 install-exec: install-exec-am
@@ -925,7 +953,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-pkgincludeHEADERS
+install-data-am: install-pkgconfigDATA install-xfce4_panelincludeHEADERS
 
 install-exec-am: install-binPROGRAMS
 
@@ -953,7 +981,7 @@ ps: ps-am
 ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-info-am \
-	uninstall-pkgincludeHEADERS
+	uninstall-pkgconfigDATA uninstall-xfce4_panelincludeHEADERS
 
 .PHONY: CTAGS GTAGS all all-am check check-am clean clean-binPROGRAMS \
 	clean-generic clean-libtool ctags distclean distclean-compile \
@@ -961,12 +989,13 @@ uninstall-am: uninstall-binPROGRAMS uninstall-info-am \
 	distclean-tags distdir dvi dvi-am info info-am install \
 	install-am install-binPROGRAMS install-data install-data-am \
 	install-exec install-exec-am install-info install-info-am \
-	install-man install-pkgincludeHEADERS install-strip \
-	installcheck installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags uninstall uninstall-am uninstall-binPROGRAMS \
-	uninstall-info-am uninstall-pkgincludeHEADERS
+	install-man install-pkgconfigDATA install-strip \
+	install-xfce4_panelincludeHEADERS installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags uninstall \
+	uninstall-am uninstall-binPROGRAMS uninstall-info-am \
+	uninstall-pkgconfigDATA uninstall-xfce4_panelincludeHEADERS
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

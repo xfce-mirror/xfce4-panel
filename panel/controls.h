@@ -23,7 +23,7 @@
 #include <gmodule.h>
 #include <libxml/tree.h>
 
-#include "global.h"
+#include <panel/global.h>
 
 typedef gboolean (*CreateControlFunc) (Control * control);
 

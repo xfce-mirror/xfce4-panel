@@ -44,12 +44,10 @@
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/xfce_clock.h>
 
-#include "global.h"
-
-#include "controls.h"
-#include "icons.h"
-
-#include "plugins.h"
+#include <panel/global.h>
+#include <panel/controls.h>
+#include <panel/icons.h>
+#include <panel/plugins.h>
 
 #define BORDER 6
 

@@ -27,11 +27,14 @@
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/libxfcegui4.h>
 
-#include "xfce.h"
-#include "popup.h"
-#include "settings.h"
-#include "plugins.h"
-#include "mcs_client.h"
+#include <panel/xfce.h>
+#include <panel/popup.h>
+#include <panel/settings.h>
+#include <panel/plugins.h>
+
+#if 0
+#include <panel/mcs_client.h>
+#endif
 
 static int screen_button_width[] = { 35, 45, 80, 80 };
 

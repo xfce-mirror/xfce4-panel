@@ -20,7 +20,7 @@
 #ifndef __XFCE_ITEMS_H
 #define __XFCE_ITEMS_H
 
-#include "global.h"
+#include <panel/global.h>
 
 enum
 { PANELITEM, MENUITEM };

@@ -20,7 +20,7 @@
 #ifndef __XFCE_ICONS_H__
 #define __XFCE_ICONS_H__
 
-#include "global.h"
+#include <panel/global.h>
 
 /* launcher and menu icons */
 enum

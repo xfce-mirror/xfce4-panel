@@ -20,7 +20,7 @@
 #ifndef __XFCE_ITEM_DIALOG_H__
 #define __XFCE_ITEM_DIALOG_H__
 
-#include "global.h"
+#include <panel/global.h>
 
 void edit_menu_item_dialog (Item * mi);
 

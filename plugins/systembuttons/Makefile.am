@@ -10,7 +10,6 @@ libsystembuttons_la_SOURCES = 						\
 	systembuttons.c
 
 libsystembuttons_la_CFLAGS =						\
-	-I$(top_srcdir)/panel						\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXML_CFLAGS@
 

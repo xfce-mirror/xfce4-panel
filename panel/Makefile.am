@@ -29,7 +29,9 @@ xfce4_panel_SOURCES =							\
 	xfce_support.c 							\
 	xfce_support.h 
 
-pkginclude_HEADERS = 							\
+xfce4_panelincludedir = $(includedir)/xfce4/panel
+
+xfce4_panelinclude_HEADERS =						\
 	controls.h							\
 	global.h 							\
 	icons.h 							\
@@ -59,3 +61,6 @@ xfce4_panel_LDADD =							\
 	@LIBXFCEGUI4_LIBS@						\
 	@LIBXFCE4MCS_CLIENT_LIBS@					\
 	@LIBXML_LIBS@
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = xfce4-panel-1.0.pc

@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+pluginsdir=${libdir}/xfce4/plugins
+
+Name: xfce4-panel
+Description: XFce4 desktop panel
+Requires: libxfcegui4-1.0 libxml-2.0
+Version: @VERSION@
+Libs: -L${libdir}
+Cflags: -I${includedir}/xfce4

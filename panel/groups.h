@@ -20,7 +20,7 @@
 #ifndef __XFCE_GROUPS_H__
 #define __XFCE_GROUPS_H__
 
-#include "global.h"
+#include <panel/global.h>
 
 void groups_init (GtkBox * box);
 void groups_pack (GtkBox * box);

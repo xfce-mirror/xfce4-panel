@@ -161,12 +161,25 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
 confdir = $(sysconfdir)/xfce4
-
 conf_DATA = xfce4rc
 
-EXTRA_DIST = xfce4rc.in xfce4.spec.in HACKING .indent.pro
+EXTRA_DIST = \
+	HACKING								\
+	NOTES								\
+	PLUGIN.NOTES
 
-SUBDIRS = po doc icons panel settings plugins themes
+
+SUBDIRS = \
+	po								\
+	doc								\
+	icons								\
+	panel								\
+	settings							\
+	plugins								\
+	themes
+
+
+ACLOCAL_AMFLAGS = -I m4
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -205,7 +218,7 @@ $(top_builddir)/config.status: $(srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 $(srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(srcdir)/configure.ac $(ACLOCAL_M4) $(CONFIGURE_DEPENDENCIES)
 	cd $(srcdir) && $(AUTOCONF)
 
-$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ configure.ac 
+$(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ configure.ac m4/debug.m4 m4/depends.m4 m4/i18n.m4 m4/X11.m4
 	cd $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 
 config.h: stamp-h1
@@ -391,7 +404,7 @@ distcleancheck_listfiles = find . -type f -print
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkinstalldirs) $(distdir)/. $(distdir)/po
+	$(mkinstalldirs) $(distdir)/. $(distdir)/panel $(distdir)/po
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -599,9 +612,12 @@ uninstall-info: uninstall-info-recursive
 	uninstall-info-am uninstall-info-recursive uninstall-recursive
 
 @SET_MAKE@
+	xfce4rc.in							\
+	xfce4.spec.in							\
+	.indent.pro
 
 distclean-local:
-	rm -rf xfce4rc xfce4.spec *.cache
+	rm -rf xfce4rc xfce4.spec *.cache *~
 
 rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz

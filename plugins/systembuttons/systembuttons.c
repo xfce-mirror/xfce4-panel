@@ -30,9 +30,12 @@
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/xfce_iconbutton.h>
 
-#include "xfce.h"
-#include "plugins.h"
+#include <panel/xfce.h>
+#include <panel/plugins.h>
+
+#if 0
 #include "mcs_client.h"
+#endif
 
 /* callbacks */
 static void

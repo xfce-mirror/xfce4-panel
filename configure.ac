@@ -2,12 +2,14 @@ dnl configure.ac
 dnl
 dnl xfce4 - panel for the XFce Desktop environment
 dnl
+dnl 2003 Benedikt Meurer <benedikt.meurer@unix-ag.uni-siegen.de>
+dnl
 
 AC_INIT([panel/main.c])
 
 AM_CONFIG_HEADER([config.h])
 
-AM_INIT_AUTOMAKE([xfce4], [0.9])
+AM_INIT_AUTOMAKE([xfce4], [0.10])
 
 AM_MAINTAINER_MODE
 
@@ -32,15 +34,15 @@ BM_I18N([xfce4-panel], [de es es_MX fr fi nl ja])
 dnl Check for X11 installed
 BM_LIBX11_REQUIRE
 
-dnl AC_CHECK_LIB(Xext, main,, AC_MSG_ERROR([The X Window System installed on this machine does not support the shape extension]), $X_CFLAGS $X_PRE_LIBS $X_EXTRA_LIBS $X_LIBS)
-
+dnl Check for required packages
 BM_DEPEND([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [0.0.3])
 BM_DEPEND([LIBXFCEGUI4], [libxfcegui4-1.0], [0.0.17])
 BM_DEPEND([LIBXML], [libxml-2.0], [2.4.0])
 BM_DEPEND([XFCE_MCS_MANAGER], [xfce-mcs-manager], [0.1])
 
-BM_DEPEND_CHECK(LIBSTARTUP_NOTIFICATION, libstartup-notification-1.0, 0.4,
-  [startup-notification], [startup notification library])
+dnl Check for optional packages
+BM_DEPEND_CHECK([LIBSTARTUP_NOTIFICATION], [libstartup-notification-1.0],
+  [0.4], [startup-notification], [startup notification library])
 
 dnl Check for debugging support
 BM_DEBUG_SUPPORT
@@ -56,6 +58,7 @@ doc/xml/Makefile
 po/Makefile.in
 icons/Makefile
 panel/Makefile
+panel/xfce4-panel-1.0.pc
 plugins/Makefile
 plugins/mailcheck/Makefile
 plugins/clock/Makefile

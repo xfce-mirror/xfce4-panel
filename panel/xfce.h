@@ -20,11 +20,11 @@
 #ifndef __XFCE4_H
 #define __XFCE4_H
 
-#include <global.h>
-#include <main.h>
-#include <panel.h>
-#include <controls.h>
-#include <icons.h>
-#include <xfce_support.h>
+#include <panel/global.h>
+#include <panel/main.h>
+#include <panel/panel.h>
+#include <panel/controls.h>
+#include <panel/icons.h>
+#include <panel/xfce_support.h>
 
 #endif /* __XFCE4_H */

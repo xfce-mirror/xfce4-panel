@@ -22,7 +22,7 @@
 
 #include <libxml/tree.h>
 
-#include "global.h"
+#include <panel/global.h>
 
 /* Panel */
 struct _Panel

@@ -21,7 +21,7 @@
 #define __XFCE_XMLCONFIG_H__
 
 #include <libxml/tree.h>
-#include "global.h"
+#include <panel/global.h>
 
 void write_panel_config (void);
 

@@ -21,7 +21,7 @@
 #define __XFCE_POPUP_H__
 
 #include <libxml/tree.h>
-#include "global.h"
+#include <panel/global.h>
 
 struct _PanelPopup
 {

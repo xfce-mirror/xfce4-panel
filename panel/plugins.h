@@ -23,7 +23,7 @@
 #include <glib.h>
 #include <gmodule.h>
 
-#include <xfce.h>
+#include <panel/xfce.h>
 
 #define XFCE_PLUGIN_API_VERSION 3
 

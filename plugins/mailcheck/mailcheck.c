@@ -35,9 +35,9 @@
 #include <libxfce4util/i18n.h>
 #include <libxfcegui4/xfce_iconbutton.h>
 
-#include "xfce.h"
-#include "settings.h"
-#include "plugins.h"
+#include <panel/xfce.h>
+#include <panel/settings.h>
+#include <panel/plugins.h>
 
 #define MAILCHECK_ROOT "Mailcheck"
 
