@@ -531,10 +531,10 @@ void panel_parse_xml(xmlNodePtr node)
 		break;
 
 	    if (w != gdk_screen_width())
-		position.x = (int)((double)(position.x * w) / (double)gdk_screen_width());
+		position.x = (int)((double)(position.x * gdk_screen_width()) / (double)w);
 	    
 	    if (h != gdk_screen_height())
-		position.y = (int)((double)(position.y * h) / (double)gdk_screen_height());
+		position.y = (int)((double)(position.y * gdk_screen_height()) / (double)h);
         }
     }
 
