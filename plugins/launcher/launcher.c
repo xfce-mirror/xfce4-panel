@@ -41,17 +41,19 @@
 #include <panel/settings.h>
 #include <panel/plugins.h>
 
-#define BORDER           6
-#define W_ARROW          18
-#define MENU_ICON_SIZE   24
-#define DLG_ICON_SIZE    32
-#define PANEL_ICON_SIZE  48
 
+#define INSENSITIVE_TIMEOUT     800
+#define BORDER                  6
+#define W_ARROW                 18
+#define MENU_ICON_SIZE          24
+#define DLG_ICON_SIZE           32
+#define PANEL_ICON_SIZE         48
 /* Don't use icons without xfce- default */
-#define NUM_CATEGORIES   (XFCE_N_BUILTIN_ICON_CATEGORIES - 4)
+#define NUM_CATEGORIES          (XFCE_N_BUILTIN_ICON_CATEGORIES - 4)
 
 
 static XfceIconTheme *launcher_theme = NULL;
+
 
 /* typedefs */
 typedef struct _Entry Entry;
@@ -89,6 +91,7 @@ static Launcher *launcher_new (void);
 static void launcher_properties_dialog (Launcher *launcher, 
                                         GtkContainer *container, 
                                         GtkWidget *close);
+
 static void launcher_read_xml (Launcher *launcher, xmlNodePtr node);
 
 static void launcher_write_xml (Launcher *launcher, xmlNodePtr node);
@@ -116,6 +119,24 @@ launcher_load_pixbuf (const char *file, int size)
         pb = xfce_icon_theme_load_category (launcher_theme, 0, size);
 
     return pb;
+}
+
+/* prevent users from clicking twice because of slow app start */
+static gboolean set_sensitive_cb (GtkWidget *button)
+{
+    if (GTK_IS_WIDGET (button))
+        gtk_widget_set_sensitive (button, TRUE);
+    
+    return FALSE;
+}
+
+static void
+after_exec_insensitive (GtkWidget *button)
+{
+    gtk_widget_set_sensitive (button, FALSE);
+    
+    g_timeout_add (INSENSITIVE_TIMEOUT, 
+                   (GSourceFunc) set_sensitive_cb, button);
 }
 
 
@@ -366,7 +387,7 @@ entry_exec (Entry *entry)
         return;
     
     xfce_exec (entry->exec, entry->terminal, entry->startup, &error);
-
+        
     if (error)
     {
         xfce_err (_("Could not run \"%s\":\n%s"), 
@@ -558,14 +579,18 @@ launcher_toggle_menu (GtkToggleButton *b, Launcher *launcher)
 static void
 launcher_state_changed (GtkWidget *b1, GtkStateType state, GtkWidget *b2)
 {
-    if (GTK_WIDGET_STATE (b2) != GTK_WIDGET_STATE (b1))
+    if (GTK_WIDGET_STATE (b2) != GTK_WIDGET_STATE (b1)
+        && GTK_WIDGET_STATE (b1) != GTK_STATE_INSENSITIVE)
+    {
         gtk_widget_set_state (b2, GTK_WIDGET_STATE (b1));
+    }
 }
 
 static void
 launcher_clicked (GtkWidget *w, Launcher *launcher)
 {
     entry_exec (launcher->entry);
+    after_exec_insensitive (w);
 }
 
 static Launcher *
@@ -1509,7 +1534,7 @@ launcher_dialog_add_item_tree (LauncherDialog *ld, GtkBox *box)
                                     GTK_POLICY_NEVER);
     gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (ld->scroll),
 					 GTK_SHADOW_IN);
-    gtk_box_pack_end (box, ld->scroll, TRUE, TRUE, 0);
+    gtk_box_pack_start (box, ld->scroll, TRUE, TRUE, 0);
     
     store = gtk_list_store_new (1, G_TYPE_POINTER);
     model = GTK_TREE_MODEL (store);
@@ -1779,7 +1804,7 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
-    gtk_box_pack_end (box, hbox, FALSE, FALSE, 0);
+    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
 
     ld->up = b = gtk_button_new ();
     gtk_widget_show (b);
@@ -1861,12 +1886,12 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
 
     g_signal_connect_swapped (vbox, "destroy", 
                               G_CALLBACK (launcher_dialog_destroyed), ld);
-
-    launcher_dialog_add_explanation (GTK_BOX (vbox));
     
     launcher_dialog_add_buttons (ld, GTK_BOX (vbox));
  
     launcher_dialog_add_item_tree (ld, GTK_BOX (vbox));
+
+    launcher_dialog_add_explanation (GTK_BOX (vbox));
 }
 
 /* dnd */
