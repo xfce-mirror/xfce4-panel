@@ -53,6 +53,7 @@ xfce4_panelinclude_HEADERS =					\
 
 xfce4_panel_CFLAGS = 							\
 	-I$(top_srcdir)							\
+	-I$(top_srcdir)/libs						\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
@@ -64,6 +65,7 @@ xfce4_panel_CFLAGS = 							\
 	-DLOCALEDIR=\"$(localedir)\"
 
 xfce4_panel_LDFLAGS =							\
+	../libs/libxfce4panel.la					\
 	-export-dynamic
 
 if HAVE_CYGWIN

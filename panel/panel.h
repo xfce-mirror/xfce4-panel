@@ -50,9 +50,6 @@ struct _Panel
 
     GtkWidget *toplevel;
 
-    GtkWidget *main_frame;
-    GtkWidget *panel_box;
-    GtkWidget *handles[2];
     GtkWidget *group_box;
 
     PanelPrivate *priv;
