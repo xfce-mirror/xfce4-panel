@@ -25,7 +25,7 @@
 
 #include <panel/xfce.h>
 
-#define XFCE_PLUGIN_API_VERSION 6
+#define XFCE_PLUGIN_API_VERSION 7
 
 G_BEGIN_DECLS
 
