@@ -239,7 +239,9 @@ main (int argc, char **argv)
 
 #ifdef ENABLE_NLS
     bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
     textdomain (GETTEXT_PACKAGE);
 #endif
 
