@@ -111,8 +111,9 @@ separator_new (void)
 
     sep->box = gtk_event_box_new();
     gtk_widget_show(sep->box);
-
-    sep->align = gtk_alignment_new(0.5, 0.5, 0.8, 0.8);
+    gtk_container_set_border_width(GTK_CONTAINER(sep->box), 3);
+    
+    sep->align = gtk_alignment_new(0.5, 0.5, 0.75, 0.75);
     gtk_widget_show(sep->align);
     gtk_container_add(GTK_CONTAINER(sep->box), sep->align);
     
