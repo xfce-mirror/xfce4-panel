@@ -1,3 +1,53 @@
+2002-09-21 09:21  zedek
+
+	* panel/dialogs.c: Fix the bad number of desktop buttons when
+	reverting in the panel configuration
+
+2002-09-20 10:54  zedek
+
+	* panel/central.c: Fix the desktop buttons handling
+	(size,positionning)
+
+2002-09-20 10:05  zedek
+
+	* icons/digits.xbm, panel/builtins.c, panel/xfce_clock.c,
+	panel/xfce_clock.h: Cosmetic changes Removed the digits data from
+	the C source (clean up) and set it in a separate file Added tiny
+	size handle (still not functionnal for the clock :))
+
+2002-09-18 17:05  zedek
+
+	* panel/builtins.c: Fixed my previous commit (bis) :)
+
+2002-09-18 17:02  zedek
+
+	* panel/builtins.c: Fixed my previous commit :)
+
+2002-09-18 14:52  zedek
+
+	* panel/builtins.c: Added Write/Read to the xfce4 rc file to store
+	our configuration Fixed minor bugs (sic) Added functions to
+	apply/revert the configuration in the confi dialog Code clean up
+	More comments
+
+2002-09-17 22:27  huysmans
+
+	* TODO: Update todo list: we want to add variable width/height
+	modules
+
+2002-09-16 23:24  huysmans
+
+	* panel/: builtins.c, builtins.h, callbacks.c, callbacks.h,
+	central.c, central.h, controls.c, controls.h, controls_dialog.c,
+	dialogs.c, iconbutton.c, iconbutton.h, item.c, item_dialog.c,
+	popup.c, popup.h, side.c, side.h, wmhints.c, xfce.c, xfce.h,
+	xfce_clock.c, xfce_clock.h, xfce_support.c, xfce_support.h: Started
+	fixing issues with the vertical panel
+
+2002-09-16 18:36  huysmans
+
+	* ChangeLog: Update ChangeLog
+
 2002-09-16 18:34  huysmans
 
 	* TODO, panel/callbacks.c, panel/callbacks.h, panel/central.c,
