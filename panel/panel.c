@@ -759,9 +759,6 @@ panel_set_hidden (Panel * p, gboolean hide)
 	}
     }
 
-    /* prevent annoying resizing / flickering */
-    g_object_freeze_notify (G_OBJECT (p->toplevel));
-    
     if (hide)
     {
 	gtk_widget_hide (p->main_frame);
@@ -775,9 +772,11 @@ panel_set_hidden (Panel * p, gboolean hide)
     
     DBG ("%s: (%d,%d) %dx%d", hide ? "hide" : "unhide", x, y, w, h);
 
+    /* this seems to be necessary to be able to move the window ... */
+    while (gtk_events_pending ())
+	gtk_main_iteration_do (FALSE);
+    
     gdk_window_move_resize (p->toplevel->window, x, y, w, h);
-
-    g_object_thaw_notify (G_OBJECT (p->toplevel));
 
     /* set flag after moving when unhiding */
     if (!hide)
