@@ -159,7 +159,7 @@ launcher_set_theme (Control *control, const char *theme)
     GdkPixbuf *pb;
     Launcher *launcher = control->data;
     
-    g_return_if_fail (l != NULL);
+    g_return_if_fail (launcher != NULL);
 
     e = launcher->entry;
 

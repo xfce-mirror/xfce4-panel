@@ -1029,9 +1029,10 @@ xfce_itembar_get_child_expand (XfceItembar * itembar, GtkWidget * item)
     XfceItembarPrivate *priv;
     GList *l;
     
-    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
-    g_return_if_fail (item != NULL 
-                      && GTK_WIDGET (item)->parent == GTK_WIDGET (itembar));
+    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
+    g_return_val_if_fail (item != NULL && 
+                          GTK_WIDGET (item)->parent == GTK_WIDGET (itembar),
+                          FALSE);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (itembar));
     
@@ -1234,7 +1235,8 @@ xfce_itembar_get_item_at_point (XfceItembar * itembar, int x, int y)
 
     for (l = priv->children; l != NULL; l = l->next)
     {
-        GtkWidget *w = l->data;
+        XfceItembarChild *child = l->data;
+        GtkWidget *w = child->widget;
         GtkAllocation *a = &(w->allocation);
 
         if (x >= a->x && x < a->x + a->width 
