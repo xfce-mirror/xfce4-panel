@@ -204,7 +204,7 @@ clock_date_tooltip (GtkWidget * widget)
 	/* Conversion to utf8
 	 * patch by Oliver M. Bolzer <oliver@fakeroot.net>
 	 */
-        if (!g_utf8_validate (date_s))
+        if (!g_utf8_validate (date_s, -1, NULL))
             utf8date = g_locale_to_utf8 (date_s, -1, NULL, NULL, NULL);
         
 	if (utf8date)
