@@ -247,7 +247,7 @@ drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
     gtk_drag_finish (context, sd->data != NULL, FALSE, time);
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:create_command_options */
 CommandOptions *
 create_command_options (GtkSizeGroup * sg)
 {
@@ -341,6 +341,7 @@ create_command_options (GtkSizeGroup * sg)
     return opts;
 }
 
+G_MODULE_EXPORT /* EXPORT:destroy_command_options */
 void
 destroy_command_options (CommandOptions * opts)
 {
@@ -370,7 +371,7 @@ destroy_command_options (CommandOptions * opts)
     g_free (opts);
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:command_options_set_command */
 void
 command_options_set_command (CommandOptions * opts, const char *command,
 			     gboolean in_term, gboolean use_sn)
@@ -394,6 +395,7 @@ command_options_set_command (CommandOptions * opts, const char *command,
 	opts->on_change (command, in_term, use_sn, opts->data);
 }
 
+G_MODULE_EXPORT /* EXPORT:command_options_set_callback */
 void
 command_options_set_callback (CommandOptions * opts,
 			      void (*callback) (const char *, gboolean,
@@ -404,7 +406,7 @@ command_options_set_callback (CommandOptions * opts,
     opts->data = data;
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:command_options_get_command */
 void
 command_options_get_command (CommandOptions * opts, char **command,
 			     gboolean * in_term, gboolean * use_sn)
@@ -529,6 +531,7 @@ create_icon_option_menu (void)
     return om;
 }
 
+G_MODULE_EXPORT /* EXPORT:icon_entry_lost_focus */
 gboolean
 icon_entry_lost_focus (GtkEntry * entry, GdkEventFocus * event,
 		       IconOptions * opts)
@@ -639,6 +642,7 @@ create_icon_preview_frame (IconOptions * opts)
     return frame;
 }
 
+G_MODULE_EXPORT /* EXPORT:create_icon_options */
 IconOptions *
 create_icon_options (GtkSizeGroup * sg, gboolean use_builtins)
 {
@@ -736,6 +740,7 @@ create_icon_options (GtkSizeGroup * sg, gboolean use_builtins)
     return opts;
 }
 
+G_MODULE_EXPORT /* EXPORT:destroy_icon_options */
 void
 destroy_icon_options (IconOptions * opts)
 {
@@ -764,6 +769,7 @@ destroy_icon_options (IconOptions * opts)
     g_free (opts);
 }
 
+G_MODULE_EXPORT /* EXPORT:icon_options_set_icon */
 void
 icon_options_set_icon (IconOptions * opts, int id, const char *path)
 {
@@ -807,6 +813,7 @@ icon_options_set_icon (IconOptions * opts, int id, const char *path)
 	opts->on_change (id, path, opts->data);
 }
 
+G_MODULE_EXPORT /* EXPORT:icon_options_set_callback */
 void
 icon_options_set_callback (IconOptions * opts,
 			   void (*callback) (int, const char *, gpointer),
@@ -816,6 +823,7 @@ icon_options_set_callback (IconOptions * opts,
     opts->data = data;
 }
 
+G_MODULE_EXPORT /* EXPORT:icon_options_get_icon */
 void
 icon_options_get_icon (IconOptions * opts, int *id, char **path)
 {
@@ -1095,6 +1103,7 @@ create_item_dialog (Control * control, Item * item,
 
 /* panel control */
 
+G_MODULE_EXPORT /* EXPORT:panel_item_create_options */
 void
 panel_item_create_options (Control * control, GtkContainer * container,
 			   GtkWidget * done)
@@ -1173,6 +1182,7 @@ menu_dialog_delete (GtkWidget * dlg)
     return TRUE;
 }
 
+G_MODULE_EXPORT /* EXPORT:edit_menu_item_dialog */
 void
 edit_menu_item_dialog (Item * mi)
 {
@@ -1249,6 +1259,7 @@ edit_menu_item_dialog (Item * mi)
     write_panel_config ();
 }
 
+G_MODULE_EXPORT /* EXPORT:add_menu_item_dialog */
 void
 add_menu_item_dialog (PanelPopup * pp)
 {
@@ -1262,6 +1273,7 @@ add_menu_item_dialog (PanelPopup * pp)
     edit_menu_item_dialog (mi);
 }
 
+G_MODULE_EXPORT /* EXPORT:destroy_menu_dialog */
 void
 destroy_menu_dialog (void)
 {

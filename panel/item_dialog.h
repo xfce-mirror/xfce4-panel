@@ -51,22 +51,19 @@ struct _CommandOptions
     gpointer data;
 };
 
-G_MODULE_IMPORT
-CommandOptions *create_command_options (GtkSizeGroup * sg);
+G_MODULE_IMPORT CommandOptions *create_command_options (GtkSizeGroup * sg);
 
-void destroy_command_options (CommandOptions * opts);
+G_MODULE_IMPORT void destroy_command_options (CommandOptions * opts);
 
-G_MODULE_IMPORT
-void command_options_set_command (CommandOptions * opts, const char *command,
+G_MODULE_IMPORT void command_options_set_command (CommandOptions * opts, const char *command,
 				  gboolean in_term, gboolean use_sn);
 
-void command_options_set_callback (CommandOptions * opts,
+G_MODULE_IMPORT void command_options_set_callback (CommandOptions * opts,
 				   void (*callback) (const char *, gboolean,
 						     gboolean, gpointer),
 				   gpointer data);
 
-G_MODULE_IMPORT
-void command_options_get_command (CommandOptions * opts, char **command,
+G_MODULE_IMPORT void command_options_get_command (CommandOptions * opts, char **command,
 				  gboolean * in_term, gboolean * use_sn);
 
 
@@ -104,30 +101,30 @@ struct _IconOptions
     gpointer data;
 };
 
-IconOptions *create_icon_options (GtkSizeGroup * sg, gboolean use_builtins);
+G_MODULE_IMPORT IconOptions *create_icon_options (GtkSizeGroup * sg, gboolean use_builtins);
 
-void destroy_icon_options (IconOptions * opts);
+G_MODULE_IMPORT void destroy_icon_options (IconOptions * opts);
 
-void icon_options_set_icon (IconOptions * opts, int id, const char *path);
+G_MODULE_IMPORT void icon_options_set_icon (IconOptions * opts, int id, const char *path);
 
-void icon_options_set_callback (IconOptions * opts,
+G_MODULE_IMPORT void icon_options_set_callback (IconOptions * opts,
 				void (*callback) (int, const char *,
 						  gpointer), gpointer data);
 
-void icon_options_get_icon (IconOptions * opts, int *id, char **path);
+G_MODULE_IMPORT void icon_options_get_icon (IconOptions * opts, int *id, char **path);
 
 
 /* PanelItem and MenuItem dialogs
  * ------------------------------
  * These functions should only be used by the panel 
 */
-void panel_item_create_options (Control * control, GtkContainer * container,
+G_MODULE_IMPORT void panel_item_create_options (Control * control, GtkContainer * container,
 				GtkWidget * done);
 
-void edit_menu_item_dialog (Item * mi);
+G_MODULE_IMPORT void edit_menu_item_dialog (Item * mi);
 
-void add_menu_item_dialog (PanelPopup * pp);
+G_MODULE_IMPORT void add_menu_item_dialog (PanelPopup * pp);
 
-void destroy_menu_dialog (void);
+G_MODULE_IMPORT void destroy_menu_dialog (void);
 
 #endif /* __XFCE_ITEM_DIALOG_H__ */

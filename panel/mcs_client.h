@@ -22,11 +22,10 @@
 
 #include <gmodule.h>
 
-void mcs_watch_xfce_channel (void);
+G_MODULE_IMPORT void mcs_watch_xfce_channel (void);
 
-void mcs_stop_watch (void);
+G_MODULE_IMPORT void mcs_stop_watch (void);
 
-G_MODULE_IMPORT
-void mcs_dialog (const char *channel);
+G_MODULE_IMPORT void mcs_dialog (const char *channel);
 
 #endif /* __XFCE_MCSCLIENT_H */

@@ -78,7 +78,9 @@ struct _PanelPrivate
  * ---------------- */
 
 /* FIXME: get rid of these */
+G_MODULE_EXPORT /* EXPORT:settings */
 Settings settings;
+G_MODULE_EXPORT /* EXPORT:panel */
 Panel panel;
 
 /**
@@ -86,13 +88,16 @@ Panel panel;
  * Arrays are indexed by symbolic sizes TINY, SMALL, MEDIUM, LARGE
  * (see global.h).
  **/
+G_MODULE_EXPORT /* EXPORT:icon_size */
 int icon_size[] = { 24, 30, 45, 60 };
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:border_width */
 int border_width = 4;
 
+G_MODULE_EXPORT /* EXPORT:top_height */
 int top_height[] = { 14, 16, 18, 20 };
 
+G_MODULE_EXPORT /* EXPORT:popup_icon_size */
 int popup_icon_size[] = { 22, 26, 26, 32 };
 
 /* static prototypes *
@@ -702,6 +707,7 @@ handler_move_start (Panel * p)
 				 p->position.y + p->priv->req.height / 2);
 }
 
+G_MODULE_EXPORT /* EXPORT:handle_new */
 GtkWidget *
 handle_new (Panel * p)
 {
@@ -1001,12 +1007,14 @@ create_panel_framework (Panel * p)
 			FALSE, 0);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_cleanup */
 void
 panel_cleanup (void)
 {
     groups_cleanup ();
 }
 
+G_MODULE_EXPORT /* EXPORT:create_panel */
 void
 create_panel (void)
 {
@@ -1112,6 +1120,7 @@ create_panel (void)
 /*  Panel settings
  *  --------------
 */
+G_MODULE_EXPORT /* EXPORT:panel_set_orientation */
 void
 panel_set_orientation (int orientation)
 {
@@ -1198,6 +1207,7 @@ panel_set_orientation (int orientation)
     update_partial_struts (&panel);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_set_layer */
 void
 panel_set_layer (int layer)
 {
@@ -1246,6 +1256,7 @@ panel_set_layer (int layer)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_set_size */
 void
 panel_set_size (int size)
 {
@@ -1267,6 +1278,7 @@ panel_set_size (int size)
     panel_set_theme (panel.priv->settings.theme);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_set_popup_position */
 void
 panel_set_popup_position (int position)
 {
@@ -1287,6 +1299,7 @@ panel_set_popup_position (int position)
     panel_set_size (settings.size);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_set_theme */
 void
 panel_set_theme (const char *theme)
 {
@@ -1306,6 +1319,7 @@ panel_set_theme (const char *theme)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_set_settings */
 void
 panel_set_settings (void)
 {
@@ -1315,6 +1329,7 @@ panel_set_settings (void)
     panel_set_theme (settings.theme);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_center */
 void
 panel_center (int side)
 {
@@ -1325,6 +1340,7 @@ panel_center (int side)
     panel_set_position (&panel);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_set_autohide */
 void
 panel_set_autohide (gboolean hide)
 {
@@ -1372,6 +1388,7 @@ init_settings (Panel * p)
     settings = p->priv->settings;
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_parse_xml */
 void
 panel_parse_xml (xmlNodePtr node)
 {
@@ -1581,6 +1598,7 @@ panel_parse_xml (xmlNodePtr node)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_write_xml */
 void
 panel_write_xml (xmlNodePtr root)
 {
@@ -1648,6 +1666,7 @@ menu_destroyed (GtkWidget * menu, Panel * p)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_register_open_menu */
 void
 panel_register_open_menu (GtkWidget * menu)
 {
@@ -1657,12 +1676,14 @@ panel_register_open_menu (GtkWidget * menu)
 		      &panel);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_block_autohide */
 void
 panel_block_autohide (Panel * p)
 {
     p->priv->block_autohide++;
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_unblock_autohide */
 void
 panel_unblock_autohide (Panel * p)
 {
@@ -1670,6 +1691,7 @@ panel_unblock_autohide (Panel * p)
 	p->priv->block_autohide--;
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_get_side */
 int
 panel_get_side (void)
 {

@@ -22,8 +22,7 @@
 
 #include <gmodule.h>
 
-G_MODULE_IMPORT
-void quit (gboolean force);
-void restart (void);
+G_MODULE_IMPORT void quit (gboolean force);
+G_MODULE_IMPORT void restart (void);
 
 #endif /* __XFCE_MAIN_H__ */

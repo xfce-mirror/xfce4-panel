@@ -45,10 +45,10 @@
 #define ROOT	"Xfce"
 #define NS	"http://www.xfce.org/xfce4/panel/1.0"
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:disable_user_config */
 gboolean disable_user_config = FALSE;
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:xmlconfig */
 xmlDocPtr xmlconfig = NULL;
 
 /*  Configuration
@@ -141,6 +141,7 @@ get_xml_root (void)
     return node;
 }
 
+G_MODULE_EXPORT /* EXPORT:get_global_prefs */
 void
 get_global_prefs (void)
 {
@@ -165,6 +166,7 @@ get_global_prefs (void)
     /* leave the xmldoc open for get_panel_config() */
 }
 
+G_MODULE_EXPORT /* EXPORT:get_panel_config */
 void
 get_panel_config (void)
 {
@@ -198,6 +200,7 @@ get_panel_config (void)
     xmlconfig = NULL;
 }
 
+G_MODULE_EXPORT /* EXPORT:write_panel_config */
 void
 write_panel_config (void)
 {

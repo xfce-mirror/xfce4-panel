@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
@@ -130,6 +131,7 @@ add_spacer (GtkBox * box, int size)
     gtk_box_pack_start (box, align, FALSE, FALSE, 0);
 }
 
+G_MODULE_EXPORT /* EXPORT:controls_dialog */
 void
 controls_dialog (Control * control)
 {
@@ -220,6 +222,7 @@ retry:
     write_panel_config ();
 }
 
+G_MODULE_EXPORT /* EXPORT:destroy_controls_dialog */
 void
 destroy_controls_dialog (void)
 {

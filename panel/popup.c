@@ -39,6 +39,7 @@
 
 #define NBITEMS 32
 
+G_MODULE_EXPORT /* EXPORT:open_popup */
 PanelPopup *open_popup = NULL;
 
 /*  Panel popup callbacks
@@ -200,7 +201,7 @@ show_popup (PanelPopup * pp)
     position_popup (pp);
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:hide_current_popup_menu */
 void
 hide_current_popup_menu (void)
 {
@@ -208,6 +209,7 @@ hide_current_popup_menu (void)
 	hide_popup (open_popup);
 }
 
+G_MODULE_EXPORT /* EXPORT:toggle_popup */
 void
 toggle_popup (GtkWidget * button, PanelPopup * pp)
 {
@@ -219,6 +221,7 @@ toggle_popup (GtkWidget * button, PanelPopup * pp)
 	hide_popup (pp);
 }
 
+G_MODULE_EXPORT /* EXPORT:tearoff_popup */
 void
 tearoff_popup (GtkWidget * button, PanelPopup * pp)
 {
@@ -228,6 +231,7 @@ tearoff_popup (GtkWidget * button, PanelPopup * pp)
     gtk_window_set_decorated (GTK_WINDOW (pp->window), TRUE);
 }
 
+G_MODULE_EXPORT /* EXPORT:delete_popup */
 gboolean
 delete_popup (GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
 {
@@ -236,6 +240,7 @@ delete_popup (GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
     return TRUE;
 }
 
+G_MODULE_EXPORT /* EXPORT:popup_key_pressed */
 gboolean
 popup_key_pressed (GtkWidget * window, GdkEventKey * ev, PanelPopup * pp)
 {
@@ -293,6 +298,7 @@ drag_motion (GtkWidget * widget, GdkDragContext * context,
     return TRUE;
 }
 
+G_MODULE_EXPORT /* EXPORT:create_panel_popup */
 PanelPopup *
 create_panel_popup (void)
 {
@@ -389,6 +395,7 @@ create_panel_popup (void)
     return pp;
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_pack */
 void
 panel_popup_pack (PanelPopup * pp, GtkBox * box)
 {
@@ -398,6 +405,7 @@ panel_popup_pack (PanelPopup * pp, GtkBox * box)
     gtk_box_pack_start (box, pp->button, FALSE, FALSE, 0);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_unpack */
 void
 panel_popup_unpack (PanelPopup * pp)
 {
@@ -411,6 +419,7 @@ panel_popup_unpack (PanelPopup * pp)
     gtk_container_remove (GTK_CONTAINER (container), pp->button);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_add_item */
 void
 panel_popup_add_item (PanelPopup * pp, Item * mi)
 {
@@ -430,6 +439,7 @@ panel_popup_add_item (PanelPopup * pp, Item * mi)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_remove_item */
 void
 panel_popup_remove_item (PanelPopup * pp, Item * mi)
 {
@@ -450,6 +460,7 @@ panel_popup_remove_item (PanelPopup * pp, Item * mi)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_set_from_xml */
 void
 panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node)
 {
@@ -476,6 +487,7 @@ panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_write_xml */
 void
 panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root)
 {
@@ -497,6 +509,7 @@ panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_free */
 void
 panel_popup_free (PanelPopup * pp)
 {
@@ -518,6 +531,7 @@ panel_popup_free (PanelPopup * pp)
     g_free (pp);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_set_size */
 void
 panel_popup_set_size (PanelPopup * pp, int size)
 {
@@ -547,6 +561,7 @@ panel_popup_set_size (PanelPopup * pp, int size)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_set_popup_position */
 void
 panel_popup_set_popup_position (PanelPopup * pp, int position)
 {
@@ -558,6 +573,7 @@ panel_popup_set_popup_position (PanelPopup * pp, int position)
     panel_popup_set_size (pp, settings.size);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_set_layer */
 void
 panel_popup_set_layer (PanelPopup * pp, int layer)
 {
@@ -567,6 +583,7 @@ panel_popup_set_layer (PanelPopup * pp, int layer)
     set_window_layer (pp->window, layer);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_set_theme */
 void
 panel_popup_set_theme (PanelPopup * pp, const char *theme)
 {
@@ -583,6 +600,7 @@ panel_popup_set_theme (PanelPopup * pp, const char *theme)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_popup_set_arrow_type */
 void
 panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type)
 {

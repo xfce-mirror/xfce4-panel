@@ -95,6 +95,7 @@ static int unload_id = 0;
 static int unloading = 0;
 
 /* not static, must be available in panel.c for handle menu */
+G_MODULE_EXPORT /* EXPORT:popup_control */
 Control *popup_control = NULL;
 
 /* convenience function */
@@ -239,7 +240,7 @@ control_class_info_create_control (ControlClassInfo * info, Control * control)
 
 /* plugins */
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:xfce_plugin_check_version */
 gchar *
 xfce_plugin_check_version (gint version)
 {
@@ -444,6 +445,7 @@ unload_modules (void)
 
 /* exported interface */
 
+G_MODULE_EXPORT /* EXPORT:control_class_list_init */
 void
 control_class_list_init (void)
 {
@@ -455,6 +457,7 @@ control_class_list_init (void)
 	g_timeout_add (UNLOAD_TIMEOUT, (GSourceFunc) unload_modules, NULL);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_class_list_cleanup */
 void
 control_class_list_cleanup (void)
 {
@@ -481,7 +484,7 @@ control_class_list_cleanup (void)
     unloading--;
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:control_class_set_unique */
 void
 control_class_set_unique (ControlClass * cclass, gboolean unique)
 {
@@ -493,6 +496,7 @@ control_class_set_unique (ControlClass * cclass, gboolean unique)
 	info->unique = unique;
 }
 
+G_MODULE_EXPORT /* EXPORT:control_class_set_icon */
 void
 control_class_set_icon (ControlClass * cclass, GdkPixbuf * icon)
 {
@@ -512,6 +516,7 @@ control_class_set_icon (ControlClass * cclass, GdkPixbuf * icon)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:control_class_set_unloadable */
 void
 control_class_set_unloadable (ControlClass * cclass, gboolean unloadable)
 {
@@ -526,6 +531,7 @@ control_class_set_unloadable (ControlClass * cclass, gboolean unloadable)
 
 /* not in header, but exported for groups.c */
 
+G_MODULE_EXPORT /* EXPORT:control_class_unref */
 void
 control_class_unref (ControlClass * cclass)
 {
@@ -569,6 +575,7 @@ create_control_info (ControlClassInfo * info)
 }
 
 /* for add-controls-dialog.c */
+G_MODULE_EXPORT /* EXPORT:get_control_info_list */
 GSList *
 get_control_info_list (void)
 {
@@ -601,6 +608,7 @@ get_control_info_list (void)
     return infolist;
 }
 
+G_MODULE_EXPORT /* EXPORT:insert_control */
 void
 insert_control (Panel * panel, const char *name, int position)
 {
@@ -747,6 +755,7 @@ add_control (GtkWidget * w, ControlClassInfo * info)
 	panel_set_autohide (TRUE);
 }
 
+G_MODULE_EXPORT /* EXPORT:get_controls_submenu */
 GtkWidget *
 get_controls_submenu (void)
 {
@@ -896,6 +905,7 @@ create_launcher (Control * control)
     info->refcount++;
 }
 
+G_MODULE_EXPORT /* EXPORT:create_control */
 gboolean
 create_control (Control * control, int id, const char *filename)
 {
@@ -923,6 +933,7 @@ create_control (Control * control, int id, const char *filename)
     return FALSE;
 }
 
+G_MODULE_EXPORT /* EXPORT:control_new */
 Control *
 control_new (int index)
 {
@@ -941,6 +952,7 @@ control_new (int index)
     return control;
 }
 
+G_MODULE_EXPORT /* EXPORT:control_free */
 void
 control_free (Control * control)
 {
@@ -955,12 +967,14 @@ control_free (Control * control)
     g_free (control);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_pack */
 void
 control_pack (Control * control, GtkBox * box)
 {
     gtk_box_pack_start (box, control->base, TRUE, TRUE, 0);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_unpack */
 void
 control_unpack (Control * control)
 {
@@ -968,6 +982,7 @@ control_unpack (Control * control)
 			  control->base);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_attach_callbacks */
 void
 control_attach_callbacks (Control * control)
 {
@@ -1000,6 +1015,7 @@ control_write_config (Control * control, xmlNodePtr node)
 	cc->write_config (control, node);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_set_from_xml */
 gboolean
 control_set_from_xml (Control * control, xmlNodePtr node)
 {
@@ -1044,6 +1060,7 @@ control_set_from_xml (Control * control, xmlNodePtr node)
     return TRUE;
 }
 
+G_MODULE_EXPORT /* EXPORT:control_write_xml */
 void
 control_write_xml (Control * control, xmlNodePtr parent)
 {
@@ -1063,6 +1080,7 @@ control_write_xml (Control * control, xmlNodePtr parent)
     control_write_config (control, node);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_create_options */
 void
 control_create_options (Control * control, GtkContainer * container,
 			GtkWidget * done)
@@ -1098,6 +1116,7 @@ control_create_options (Control * control, GtkContainer * container,
 
 /* controls global preferences */
 
+G_MODULE_EXPORT /* EXPORT:control_set_settings */
 void
 control_set_settings (Control * control)
 {
@@ -1106,6 +1125,7 @@ control_set_settings (Control * control)
     control_set_theme (control, settings.theme);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_set_orientation */
 void
 control_set_orientation (Control * control, int orientation)
 {
@@ -1115,6 +1135,7 @@ control_set_orientation (Control * control, int orientation)
 	cc->set_orientation (control, orientation);
 }
 
+G_MODULE_EXPORT /* EXPORT:control_set_size */
 void
 control_set_size (Control * control, int size)
 {
@@ -1130,6 +1151,7 @@ control_set_size (Control * control, int size)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:control_set_theme */
 void
 control_set_theme (Control * control, const char *theme)
 {

@@ -20,11 +20,12 @@
 #ifndef _ADD_CONTROL_DIALOG_H
 #define _ADD_CONTROL_DIALOG_H
 
+#include <gmodule.h>
 #include <panel/global.h>
 
 G_BEGIN_DECLS 
 
-void add_control_dialog (Panel * panel, int position);
+G_MODULE_IMPORT void add_control_dialog (Panel * panel, int position);
 
 G_END_DECLS
 

@@ -47,25 +47,24 @@ struct _PanelPopup
 };
 
 /* Panel popups */
-PanelPopup *create_panel_popup (void);
-void panel_popup_free (PanelPopup * pp);
+G_MODULE_IMPORT PanelPopup *create_panel_popup (void);
+G_MODULE_IMPORT void panel_popup_free (PanelPopup * pp);
 
-void panel_popup_pack (PanelPopup * pp, GtkBox * box);
-void panel_popup_unpack (PanelPopup * pp);
+G_MODULE_IMPORT void panel_popup_pack (PanelPopup * pp, GtkBox * box);
+G_MODULE_IMPORT void panel_popup_unpack (PanelPopup * pp);
 
-void panel_popup_add_item (PanelPopup * pp, Item * mi);
-void panel_popup_remove_item (PanelPopup * pp, Item * mi);
+G_MODULE_IMPORT void panel_popup_add_item (PanelPopup * pp, Item * mi);
+G_MODULE_IMPORT void panel_popup_remove_item (PanelPopup * pp, Item * mi);
 
-void panel_popup_set_size (PanelPopup * pp, int size);
-void panel_popup_set_popup_position (PanelPopup * pp, int position);
-void panel_popup_set_layer (PanelPopup * pp, int layer);
-void panel_popup_set_theme (PanelPopup * pp, const char *theme);
-void panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type);
+G_MODULE_IMPORT void panel_popup_set_size (PanelPopup * pp, int size);
+G_MODULE_IMPORT void panel_popup_set_popup_position (PanelPopup * pp, int position);
+G_MODULE_IMPORT void panel_popup_set_layer (PanelPopup * pp, int layer);
+G_MODULE_IMPORT void panel_popup_set_theme (PanelPopup * pp, const char *theme);
+G_MODULE_IMPORT void panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type);
 
-G_MODULE_IMPORT
-void hide_current_popup_menu (void);
+G_MODULE_IMPORT void hide_current_popup_menu (void);
 
-void panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node);
-void panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root);
+G_MODULE_IMPORT void panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node);
+G_MODULE_IMPORT void panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root);
 
 #endif /* __XFCE_POPUP_H__ */

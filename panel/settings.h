@@ -24,14 +24,13 @@
 #include <libxml/tree.h>
 #include <panel/global.h>
 
-void write_panel_config (void);
+G_MODULE_IMPORT void write_panel_config (void);
 
-void get_global_prefs (void);
+G_MODULE_IMPORT void get_global_prefs (void);
 
-void get_panel_config (void);
+G_MODULE_IMPORT void get_panel_config (void);
 
-G_MODULE_IMPORT
-xmlDocPtr xmlconfig;
+G_MODULE_IMPORT xmlDocPtr xmlconfig;
 
 #define DATA(node) xmlNodeListGetString(xmlconfig, node->children, 1)
 

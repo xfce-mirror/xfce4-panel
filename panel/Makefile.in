@@ -315,7 +315,7 @@ xfce4_panel_LDADD = \
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xfce4-panel-1.0.pc
-@HAVE_CYGWIN_TRUE@EXTRA_DIST = $(devel_DATA)
+@HAVE_CYGWIN_TRUE@EXTRA_DIST = $(devel_DATA) create-def-file.sh
 all: all-am
 
 .SUFFIXES:
@@ -972,6 +972,9 @@ uninstall-am: uninstall-binPROGRAMS uninstall-develDATA \
 	uninstall-develDATA uninstall-info-am uninstall-pkgconfigDATA \
 	uninstall-xfce4_panelincludeHEADERS
 
+
+@HAVE_CYGWIN_TRUE@panel.def: $(xfce4_panel_SOURCES) create-def-file.sh
+@HAVE_CYGWIN_TRUE@	sh create-def-file.sh $(xfce4_panel_SOURCES)
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -24,7 +24,7 @@ libpager_la_LDFLAGS +=                                                  \
 	@LIBXML_LDFLAGS@                                                \
 	@LIBX11_LDFLAGS@                                                
 libpager_la_LIBADD +=                                                   \
-	@XFCE_MCS_MANAGER_LIBS@                                         \
+	@LIBXFCEGUI4_LIBS@                                              \
 	@LIBXML_LIBS@                                                   \
 	@LIBX11_LIBS@
 endif

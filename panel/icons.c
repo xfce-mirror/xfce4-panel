@@ -33,6 +33,7 @@
 
 static XfceIconTheme *global_icon_theme = NULL;
 
+G_MODULE_EXPORT /* EXPORT:icon_names */
 const char *icon_names[NUM_ICONS];
 
 
@@ -50,6 +51,7 @@ theme_changed (XfceIconTheme * icontheme)
     g_free (theme);
 }
 
+G_MODULE_EXPORT /* EXPORT:icons_init */
 void
 icons_init (void)
 {
@@ -73,6 +75,7 @@ icons_init (void)
         xfce_icon_theme_get_for_screen (gdk_screen_get_default());
 }
 
+G_MODULE_EXPORT /* EXPORT:icon_theme_init */
 void
 icon_theme_init (void)
 {
@@ -80,7 +83,7 @@ icon_theme_init (void)
 		      G_CALLBACK (theme_changed), NULL);
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:themed_pixbuf_from_name_list */
 GdkPixbuf *
 themed_pixbuf_from_name_list (char **namelist, int size)
 {
@@ -125,7 +128,7 @@ themed_pixbuf_from_name_list (char **namelist, int size)
     return pb;
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:get_pixbuf_by_id */
 GdkPixbuf *
 get_pixbuf_by_id (int id)
 {
@@ -226,6 +229,7 @@ get_pixbuf_by_id (int id)
     return pb;
 }
 
+G_MODULE_EXPORT /* EXPORT:get_pixbuf_from_file */
 GdkPixbuf *
 get_pixbuf_from_file (const char *path)
 {
@@ -261,6 +265,7 @@ get_pixbuf_from_file (const char *path)
     return pb;
 }
 
+G_MODULE_EXPORT /* EXPORT:get_panel_pixbuf */
 GdkPixbuf *
 get_panel_pixbuf (void)
 {
@@ -279,6 +284,7 @@ get_panel_pixbuf (void)
     return pb;
 }
 
+G_MODULE_EXPORT /* EXPORT:get_scaled_pixbuf */
 GdkPixbuf *
 get_scaled_pixbuf (GdkPixbuf * pb, int size)
 {
@@ -318,6 +324,7 @@ get_scaled_pixbuf (GdkPixbuf * pb, int size)
     return gdk_pixbuf_scale_simple (pb, neww, newh, GDK_INTERP_BILINEAR);
 }
 
+G_MODULE_EXPORT /* EXPORT:get_themed_pixbuf */
 GdkPixbuf *
 get_themed_pixbuf (const char *name)
 {

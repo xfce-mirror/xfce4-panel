@@ -113,7 +113,7 @@ die (gpointer client_data)
 /*  Exported interface
  *  ------------------
 */
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:quit */
 void
 quit (gboolean force)
 {
@@ -148,6 +148,7 @@ quit (gboolean force)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:restart */
 void
 restart (void)
 {

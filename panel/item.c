@@ -31,6 +31,8 @@
 #include <config.h>
 #endif
 
+#include <gmodule.h>
+
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/xfce_togglebutton.h>
 #include <libxfcegui4/xfce_menubutton.h>
@@ -267,6 +269,7 @@ panel_item_press (GtkButton * b, GdkEventButton * ev, Item * item)
 /*  Common item interface
  *  ---------------------
 */
+G_MODULE_EXPORT /* EXPORT:item_read_config */
 void
 item_read_config (Item * item, xmlNodePtr node)
 {
@@ -368,6 +371,7 @@ item_read_config (Item * item, xmlNodePtr node)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:item_write_config */
 void
 item_write_config (Item * item, xmlNodePtr node)
 {
@@ -400,6 +404,7 @@ item_write_config (Item * item, xmlNodePtr node)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:item_free */
 void
 item_free (Item * item)
 {
@@ -411,6 +416,7 @@ item_free (Item * item)
     g_free (item);
 }
 
+G_MODULE_EXPORT /* EXPORT:item_set_theme */
 void
 item_set_theme (Item * item, const char *theme)
 {
@@ -429,6 +435,7 @@ item_set_theme (Item * item, const char *theme)
     g_object_unref (pb);
 }
 
+G_MODULE_EXPORT /* EXPORT:item_apply_config */
 void
 item_apply_config (Item * item)
 {
@@ -476,6 +483,7 @@ item_apply_config (Item * item)
 /*  Menu items  
  *  ----------
 */
+G_MODULE_EXPORT /* EXPORT:menu_item_new */
 Item *
 menu_item_new (PanelPopup * pp)
 {
@@ -488,6 +496,7 @@ menu_item_new (PanelPopup * pp)
     return mi;
 }
 
+G_MODULE_EXPORT /* EXPORT:create_addtomenu_item */
 void
 create_addtomenu_item (Item * mi)
 {
@@ -511,6 +520,7 @@ create_addtomenu_item (Item * mi)
     menu_item_set_popup_size (mi, settings.size);
 }
 
+G_MODULE_EXPORT /* EXPORT:create_menu_item */
 void
 create_menu_item (Item * mi)
 {
@@ -537,6 +547,7 @@ create_menu_item (Item * mi)
     menu_item_set_popup_size (mi, settings.size);
 }
 
+G_MODULE_EXPORT /* EXPORT:menu_item_set_popup_size */
 void
 menu_item_set_popup_size (Item * mi, int size)
 {
@@ -619,6 +630,7 @@ panel_item_attach_callback (Control * control, const char *signal,
     g_signal_connect (pi->button, signal, callback, data);
 }
 
+G_MODULE_EXPORT /* EXPORT:create_panel_item */
 void
 create_panel_item (Control * control)
 {
@@ -630,6 +642,7 @@ create_panel_item (Control * control)
     control->data = (gpointer) pi;
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_item_class_init */
 void
 panel_item_class_init (ControlClass * cc)
 {

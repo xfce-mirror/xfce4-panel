@@ -20,9 +20,10 @@
 #ifndef __XFCE_CONTROLS_DIALOG_H__
 #define __XFCE_CONTROLS_DIALOG_H__
 
+#include <gmodule.h>
 #include <panel/global.h>
 
-void controls_dialog (Control * control);
-void destroy_controls_dialog (void);
+G_MODULE_IMPORT void controls_dialog (Control * control);
+G_MODULE_IMPORT void destroy_controls_dialog (void);
 
 #endif /* __XFCE_CONTROLS_DIALOG_H__ */

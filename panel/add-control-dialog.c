@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#include <gmodule.h>
 #include <gtk/gtk.h>
 
 #include <libxfce4util/libxfce4util.h>
@@ -71,6 +72,7 @@ static ControlList *add_control_list (GtkBox * box);
  * @position : desired position on the panel; use -1 to put the item
  *             at the end.
  **/
+G_MODULE_EXPORT /* EXPORT:add_control_dialog */
 void
 add_control_dialog (Panel * panel, int position)
 {

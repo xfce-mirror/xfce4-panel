@@ -20,6 +20,7 @@
 #ifndef __XFCE_ICONS_H__
 #define __XFCE_ICONS_H__
 
+#include <gmodule.h>
 #include <panel/global.h>
 
 /* launcher and menu icons */
@@ -44,27 +45,25 @@ enum
     NUM_ICONS
 };
 
-extern const char *icon_names[NUM_ICONS];
+G_MODULE_IMPORT const char *icon_names[NUM_ICONS];
 
 #define UNKNOWN_ICON DEFAULT_ICON
 
-void icons_init (void);
+G_MODULE_IMPORT void icons_init (void);
 
-void icon_theme_init (void);
+G_MODULE_IMPORT void icon_theme_init (void);
 
-G_MODULE_IMPORT
-GdkPixbuf *get_pixbuf_by_id (int id);
+G_MODULE_IMPORT GdkPixbuf *get_pixbuf_by_id (int id);
 
-GdkPixbuf *get_panel_pixbuf (void);
+G_MODULE_IMPORT GdkPixbuf *get_panel_pixbuf (void);
 
-GdkPixbuf *get_pixbuf_from_file (const char *path);
+G_MODULE_IMPORT GdkPixbuf *get_pixbuf_from_file (const char *path);
 
-GdkPixbuf *get_scaled_pixbuf (GdkPixbuf * pb, int size);
+G_MODULE_IMPORT GdkPixbuf *get_scaled_pixbuf (GdkPixbuf * pb, int size);
 
 /* for plugins */
-GdkPixbuf *get_themed_pixbuf (const char *name);
+G_MODULE_IMPORT GdkPixbuf *get_themed_pixbuf (const char *name);
 
-G_MODULE_IMPORT
-GdkPixbuf *themed_pixbuf_from_name_list (char **namelist, int size);
+G_MODULE_IMPORT GdkPixbuf *themed_pixbuf_from_name_list (char **namelist, int size);
 
 #endif /* __XFCE_ICONS_H__ */

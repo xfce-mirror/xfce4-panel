@@ -40,6 +40,7 @@
 #include <X11/Xatom.h>
 
 #include <glib.h>
+#include <gmodule.h>
 #include <gdk/gdk.h>
 
 #include <libxfce4util/libxfce4util.h>
@@ -59,6 +60,7 @@ extern char **environ;
 /*  Files and directories
  *  ---------------------
 */
+G_MODULE_EXPORT /* EXPORT:get_save_dir */
 char *
 get_save_dir (void)
 {
@@ -77,6 +79,7 @@ get_save_dir (void)
     return dir;
 }
 
+G_MODULE_EXPORT /* EXPORT:get_save_file */
 char *
 get_save_file (const char * name)
 {
@@ -134,6 +137,7 @@ get_localized_rcfile (const char *path)
     return NULL;
 }
 
+G_MODULE_EXPORT /* EXPORT:get_read_file */
 char *
 get_read_file (const char * name)
 {
@@ -180,6 +184,7 @@ get_read_file (const char * name)
     return file;
 }
 
+G_MODULE_EXPORT /* EXPORT:write_backup_file */
 void
 write_backup_file (const char * path)
 {
@@ -210,7 +215,7 @@ write_backup_file (const char * path)
 */
 static GtkTooltips *tooltips = NULL;
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:add_tooltip */
 void
 add_tooltip (GtkWidget * widget, const char *tip)
 {
@@ -220,6 +225,7 @@ add_tooltip (GtkWidget * widget, const char *tip)
     gtk_tooltips_set_tip (tooltips, widget, tip, NULL);
 }
 
+G_MODULE_EXPORT /* EXPORT:set_window_layer */
 void
 set_window_layer (GtkWidget * win, int layer)
 {
@@ -255,6 +261,7 @@ set_window_layer (GtkWidget * win, int layer)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:check_net_wm_support */
 gboolean
 check_net_wm_support (void)
 {
@@ -280,6 +287,7 @@ check_net_wm_support (void)
     return FALSE;
 }
 
+G_MODULE_EXPORT /* EXPORT:set_window_skip */
 void
 set_window_skip (GtkWidget * win)
 {
@@ -324,6 +332,7 @@ static GtkTargetEntry target_table[] = {
 
 static guint n_targets = sizeof (target_table) / sizeof (target_table[0]);
 
+G_MODULE_EXPORT /* EXPORT:dnd_set_drag_dest */
 void
 dnd_set_drag_dest (GtkWidget * widget)
 {
@@ -350,6 +359,7 @@ dnd_drop_cb (GtkWidget * widget, GdkDragContext * context,
 		     time);
 }
 
+G_MODULE_EXPORT /* EXPORT:dnd_set_callback */
 void
 dnd_set_callback (GtkWidget * widget, DropCallback function, gpointer data)
 {
@@ -368,6 +378,7 @@ dnd_set_callback (GtkWidget * widget, DropCallback function, gpointer data)
  *
  * Releases all of the resources allocated by @list.
  */
+G_MODULE_EXPORT /* EXPORT:gnome_uri_list_free_strings */
 void
 gnome_uri_list_free_strings (GList * list)
 {
@@ -383,6 +394,7 @@ gnome_uri_list_free_strings (GList * list)
  * Returns a GList containing strings allocated with g_malloc
  * that have been splitted from @uri-list.
  */
+G_MODULE_EXPORT /* EXPORT:gnome_uri_list_extract_uris */
 GList *
 gnome_uri_list_extract_uris (const char * uri_list)
 {
@@ -442,6 +454,7 @@ gnome_uri_list_extract_uris (const char * uri_list)
  * Note that unlike gnome_uri_list_extract_uris() function, this
  * will discard any non-file uri from the result value.
  */
+G_MODULE_EXPORT /* EXPORT:gnome_uri_list_extract_filenames */
 GList *
 gnome_uri_list_extract_filenames (const char * uri_list)
 {
@@ -538,13 +551,14 @@ real_select_file (const char *title, const char *path,
     return name;
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:select_file_name */
 char *
 select_file_name (const char *title, const char *path, GtkWidget * parent)
 {
     return real_select_file (title, path, parent, FALSE);
 }
 
+G_MODULE_EXPORT /* EXPORT:select_file_with_preview */
 char *
 select_file_with_preview (const char *title, const char *path,
 			  GtkWidget * parent)
@@ -623,7 +637,7 @@ schedule_exec (const char * cmd, gboolean in_terminal, gboolean use_sn,
     (void) g_idle_add ((GSourceFunc) delayed_exec, (gpointer) command);
 }
 
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:exec_cmd */
 void
 exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
@@ -632,7 +646,7 @@ exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 }
 
 /* without error reporting dialog */
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:exec_cmd_silent */
 void
 exec_cmd_silent (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {

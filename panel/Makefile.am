@@ -81,5 +81,8 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xfce4-panel-1.0.pc
 
 if HAVE_CYGWIN
-EXTRA_DIST += $(devel_DATA)
+panel.def: $(xfce4_panel_SOURCES) create-def-file.sh
+	sh create-def-file.sh $(xfce4_panel_SOURCES)
+
+EXTRA_DIST += $(devel_DATA) create-def-file.sh
 endif

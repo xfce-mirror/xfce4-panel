@@ -122,6 +122,7 @@ notify_cb (const char *name, const char *channel_name,
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:client_event_filter */
 GdkFilterReturn
 client_event_filter (GdkXEvent * xevent, GdkEvent * event, gpointer data)
 {
@@ -145,6 +146,7 @@ watch_cb (Window window, Bool is_start, long mask, void *cb_data)
 }
 
 /* connecting and disconnecting */
+G_MODULE_EXPORT /* EXPORT:mcs_watch_xfce_channel */
 void
 mcs_watch_xfce_channel (void)
 {
@@ -173,6 +175,7 @@ mcs_watch_xfce_channel (void)
     mcs_client_add_channel (client, CHANNEL);
 }
 
+G_MODULE_EXPORT /* EXPORT:mcs_stop_watch */
 void
 mcs_stop_watch (void)
 {
@@ -185,7 +188,7 @@ mcs_stop_watch (void)
 }
 
 /* this function is exported to allow access to other channels */
-G_MODULE_EXPORT
+G_MODULE_EXPORT /* EXPORT:mcs_dialog */
 void
 mcs_dialog (const char *channel)
 {

@@ -20,41 +20,42 @@
 #ifndef __XFCE_GROUPS_H__
 #define __XFCE_GROUPS_H__
 
+#include <gmodule.h>
 #include <panel/global.h>
 
 /* general */
-void groups_init (GtkBox * box);
-void groups_cleanup (void);
+G_MODULE_IMPORT void groups_init (GtkBox * box);
+G_MODULE_IMPORT void groups_cleanup (void);
 
-void groups_pack (GtkBox * box);
-void groups_unpack (void);
+G_MODULE_IMPORT void groups_pack (GtkBox * box);
+G_MODULE_IMPORT void groups_unpack (void);
 
 /* configuration */
-void old_groups_set_from_xml (int side, xmlNodePtr node);
-void groups_set_from_xml (xmlNodePtr node);
-void groups_write_xml (xmlNodePtr root);
+G_MODULE_IMPORT void old_groups_set_from_xml (int side, xmlNodePtr node);
+G_MODULE_IMPORT void groups_set_from_xml (xmlNodePtr node);
+G_MODULE_IMPORT void groups_write_xml (xmlNodePtr root);
 
 /* settings */
-void groups_set_orientation (int orientation);
-void groups_set_layer (int layer);
+G_MODULE_IMPORT void groups_set_orientation (int orientation);
+G_MODULE_IMPORT void groups_set_layer (int layer);
 
-void groups_set_size (int size);
-void groups_set_popup_position (int position);
-void groups_set_theme (const char *theme);
+G_MODULE_IMPORT void groups_set_size (int size);
+G_MODULE_IMPORT void groups_set_popup_position (int position);
+G_MODULE_IMPORT void groups_set_theme (const char *theme);
 
 /* arrow direction */
-void groups_set_arrow_direction (GtkArrowType type);
-GtkArrowType groups_get_arrow_direction (void);
+G_MODULE_IMPORT void groups_set_arrow_direction (GtkArrowType type);
+G_MODULE_IMPORT GtkArrowType groups_get_arrow_direction (void);
 
 /* find or act on specific group */
-Control *groups_get_control (int index);
-PanelPopup *groups_get_popup (int index);
+G_MODULE_IMPORT Control *groups_get_control (int index);
+G_MODULE_IMPORT PanelPopup *groups_get_popup (int index);
 
-void groups_move (int from, int to);
-void groups_remove (int index);
-void groups_show_popup (int index, gboolean show);
-void groups_add_control (Control * control, int index);
+G_MODULE_IMPORT void groups_move (int from, int to);
+G_MODULE_IMPORT void groups_remove (int index);
+G_MODULE_IMPORT void groups_show_popup (int index, gboolean show);
+G_MODULE_IMPORT void groups_add_control (Control * control, int index);
 
-int groups_get_n_controls (void);
+G_MODULE_IMPORT int groups_get_n_controls (void);
 
 #endif /* __XFCE_GROUPS_H__ */

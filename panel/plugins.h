@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 G_MODULE_IMPORT void xfce_control_class_init (ControlClass * control);
 
 /* plugin version check function (implemented by xfce4 in controls.c) */
-gchar *xfce_plugin_check_version (gint version);
+G_MODULE_IMPORT gchar *xfce_plugin_check_version (gint version);
 
 /* nifty idea, I think from dia:
  * every module just has to include this header and put 

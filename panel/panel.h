@@ -20,6 +20,7 @@
 #ifndef __XFCE_PANEL_H
 #define __XFCE_PANEL_H
 
+#include <gmodule.h>
 #include <libxml/tree.h>
 #include <panel/global.h>
 
@@ -58,35 +59,35 @@ struct _Panel
 };
 
 /* panel functions */
-void create_panel (void);
-void panel_cleanup (void);
+G_MODULE_IMPORT void create_panel (void);
+G_MODULE_IMPORT void panel_cleanup (void);
 
 /* global settings */
-void panel_set_settings (void);
+G_MODULE_IMPORT void panel_set_settings (void);
 
-void panel_center (int side);
+G_MODULE_IMPORT void panel_center (int side);
 
-void panel_set_orientation (int orientation);
-void panel_set_layer (int layer);
+G_MODULE_IMPORT void panel_set_orientation (int orientation);
+G_MODULE_IMPORT void panel_set_layer (int layer);
 
-void panel_set_size (int size);
-void panel_set_popup_position (int position);
-void panel_set_theme (const char *theme);
+G_MODULE_IMPORT void panel_set_size (int size);
+G_MODULE_IMPORT void panel_set_popup_position (int position);
+G_MODULE_IMPORT void panel_set_theme (const char *theme);
 
-void panel_set_autohide (gboolean hide);
+G_MODULE_IMPORT void panel_set_autohide (gboolean hide);
 
 /* panel data */
-void panel_parse_xml (xmlNodePtr node);
-void panel_write_xml (xmlNodePtr root);
+G_MODULE_IMPORT void panel_parse_xml (xmlNodePtr node);
+G_MODULE_IMPORT void panel_write_xml (xmlNodePtr root);
 
 /* for menus, to prevent problems with autohide */
-void panel_register_open_menu (GtkWidget * menu);
+G_MODULE_IMPORT void panel_register_open_menu (GtkWidget * menu);
 
-void panel_block_autohide (Panel * panel);
+G_MODULE_IMPORT void panel_block_autohide (Panel * panel);
 
-void panel_unblock_autohide (Panel * panel);
+G_MODULE_IMPORT void panel_unblock_autohide (Panel * panel);
 
-int panel_get_side (void);
+G_MODULE_IMPORT int panel_get_side (void);
 
 
 #endif /* __XFCE_PANEL_H */

@@ -73,14 +73,13 @@ enum
 enum
 { TINY, SMALL, MEDIUM, LARGE, PANEL_SIZES };
 
-extern int icon_size[PANEL_SIZES];
+G_MODULE_IMPORT int icon_size[PANEL_SIZES];
 
-G_MODULE_IMPORT
-int border_width;
+G_MODULE_IMPORT int border_width;
 
-extern int top_height[PANEL_SIZES];
+G_MODULE_IMPORT int top_height[PANEL_SIZES];
 
-extern int popup_icon_size[PANEL_SIZES];
+G_MODULE_IMPORT int popup_icon_size[PANEL_SIZES];
 
 /* types for panel controls */
 enum
@@ -113,12 +112,11 @@ struct _Settings
  * for more flexibility (e.g. multple panels) */
 
 /* defined in settings.c */
-G_MODULE_IMPORT
-gboolean disable_user_config;
+G_MODULE_IMPORT gboolean disable_user_config;
 
 /* defined in panel.c */
-extern Settings settings;
-extern Panel panel;
+G_MODULE_IMPORT Settings settings;
+G_MODULE_IMPORT Panel panel;
 
 
 #endif /* __XFCE_GLOBAL_H__ */

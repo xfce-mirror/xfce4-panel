@@ -35,6 +35,7 @@
 #include <config.h>
 #endif
 
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 
 #include "xfce.h"
@@ -103,6 +104,7 @@ panel_group_arrange (PanelGroup * pg)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:create_panel_group */
 PanelGroup *
 create_panel_group (int index)
 {
@@ -148,6 +150,7 @@ panel_group_unpack (PanelGroup * pg)
  *  Mainly housekeeping for the global list of panel groups
 */
 
+G_MODULE_EXPORT /* EXPORT:groups_init */
 void
 groups_init (GtkBox * box)
 {
@@ -157,6 +160,7 @@ groups_init (GtkBox * box)
     control_class_list_init ();
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_cleanup */
 void
 groups_cleanup (void)
 {
@@ -176,6 +180,7 @@ groups_cleanup (void)
     group_list = NULL;
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_pack */
 void
 groups_pack (GtkBox * box)
 {
@@ -193,6 +198,7 @@ groups_pack (GtkBox * box)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_unpack */
 void
 groups_unpack (void)
 {
@@ -209,6 +215,7 @@ groups_unpack (void)
 
 /* configuration */
 
+G_MODULE_EXPORT /* EXPORT:old_groups_set_from_xml */
 void
 old_groups_set_from_xml (int side, xmlNodePtr node)
 {
@@ -281,6 +288,7 @@ old_groups_set_from_xml (int side, xmlNodePtr node)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_set_from_xml */
 void
 groups_set_from_xml (xmlNodePtr node)
 {
@@ -338,6 +346,7 @@ groups_set_from_xml (xmlNodePtr node)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_write_xml */
 void
 groups_write_xml (xmlNodePtr root)
 {
@@ -361,7 +370,7 @@ groups_write_xml (xmlNodePtr root)
 }
 
 /* settings */
-
+G_MODULE_EXPORT /* EXPORT:groups_set_orientation */
 void
 groups_set_orientation (int orientation)
 {
@@ -376,6 +385,7 @@ groups_set_orientation (int orientation)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_set_layer */
 void
 groups_set_layer (int layer)
 {
@@ -390,6 +400,7 @@ groups_set_layer (int layer)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_set_size */
 void
 groups_set_size (int size)
 {
@@ -405,6 +416,7 @@ groups_set_size (int size)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_set_popup_position */
 void
 groups_set_popup_position (int position)
 {
@@ -420,6 +432,7 @@ groups_set_popup_position (int position)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_set_theme */
 void
 groups_set_theme (const char *theme)
 {
@@ -437,6 +450,7 @@ groups_set_theme (const char *theme)
 
 /* arrow direction */
 
+G_MODULE_EXPORT /* EXPORT:groups_set_arrow_direction */
 void
 groups_set_arrow_direction (GtkArrowType type)
 {
@@ -453,6 +467,7 @@ groups_set_arrow_direction (GtkArrowType type)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_get_arrow_direction */
 GtkArrowType
 groups_get_arrow_direction (void)
 {
@@ -484,6 +499,7 @@ groups_get_nth (int n)
     return group;
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_get_control */
 Control *
 groups_get_control (int index)
 {
@@ -493,6 +509,7 @@ groups_get_control (int index)
     return group->control;
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_get_popup */
 PanelPopup *
 groups_get_popup (int index)
 {
@@ -502,6 +519,7 @@ groups_get_popup (int index)
     return group->popup;
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_move */
 void
 groups_move (int from, int to)
 {
@@ -528,6 +546,7 @@ groups_move (int from, int to)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_remove */
 void
 groups_remove (int index)
 {
@@ -561,6 +580,7 @@ groups_remove (int index)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_show_popup */
 void
 groups_show_popup (int index, gboolean show)
 {
@@ -588,6 +608,7 @@ groups_show_popup (int index, gboolean show)
     }
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_add_control */
 void
 groups_add_control (Control * control, int index)
 {
@@ -619,6 +640,7 @@ groups_add_control (Control * control, int index)
     settings.num_groups++;
 }
 
+G_MODULE_EXPORT /* EXPORT:groups_get_n_controls */
 int
 groups_get_n_controls (void)
 {

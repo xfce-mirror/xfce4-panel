@@ -20,7 +20,9 @@
 #ifndef __XFCE_ITEMS_H
 #define __XFCE_ITEMS_H
 
+#include <gmodule.h>
 #include <panel/global.h>
+#include <libxml/tree.h>
 
 enum
 { PANELITEM, MENUITEM };
@@ -48,29 +50,29 @@ struct _Item
 };
 
 /* special menu item */
-void create_addtomenu_item (Item * mi);
+G_MODULE_IMPORT void create_addtomenu_item (Item * mi);
 
 /* menu items */
-Item *menu_item_new (PanelPopup * pp);
+G_MODULE_IMPORT Item *menu_item_new (PanelPopup * pp);
 
-void create_menu_item (Item * mi);
+G_MODULE_IMPORT void create_menu_item (Item * mi);
 
-void menu_item_set_popup_size (Item * item, int size);
+G_MODULE_IMPORT void menu_item_set_popup_size (Item * item, int size);
 
 /*  panel control interface for panel items */
-void create_panel_item (Control * control);
+G_MODULE_IMPORT void create_panel_item (Control * control);
 
-void panel_item_class_init (ControlClass * cc);
+G_MODULE_IMPORT void panel_item_class_init (ControlClass * cc);
 
 /* common functions */
-void item_free (Item * item);
+G_MODULE_IMPORT void item_free (Item * item);
 
-void item_set_theme (Item * item, const char *theme);
+G_MODULE_IMPORT void item_set_theme (Item * item, const char *theme);
 
-void item_apply_config (Item * item);
+G_MODULE_IMPORT void item_apply_config (Item * item);
 
-void item_read_config (Item * item, xmlNodePtr node);
+G_MODULE_IMPORT void item_read_config (Item * item, xmlNodePtr node);
 
-void item_write_config (Item * item, xmlNodePtr node);
+G_MODULE_IMPORT void item_write_config (Item * item, xmlNodePtr node);
 
 #endif /* __XFCE_ITEMS_H */

@@ -82,56 +82,55 @@ typedef struct
 }
 ControlInfo;
 
-GSList *get_control_info_list (void);
+G_MODULE_IMPORT GSList *get_control_info_list (void);
 
-void insert_control (Panel * panel, const char *name, int position);
+G_MODULE_IMPORT void insert_control (Panel * panel, const char *name, int position);
 
 /* control classes */
-void control_class_list_init (void);
+G_MODULE_IMPORT void control_class_list_init (void);
 
-void control_class_list_cleanup (void);
+G_MODULE_IMPORT void control_class_list_cleanup (void);
 
 /* NOTE:
  * Use next functions only on classes that have at least 
  * their name field initialized */
-void control_class_set_icon (ControlClass * cclass, GdkPixbuf * icon);
+G_MODULE_IMPORT void control_class_set_icon (ControlClass * cclass, GdkPixbuf * icon);
 
-G_MODULE_IMPORT
-void control_class_set_unique (ControlClass * cclass, gboolean unique);
+G_MODULE_IMPORT void control_class_set_unique (ControlClass * cclass, gboolean unique);
 
-void control_class_set_unloadable (ControlClass * cclass,
+G_MODULE_IMPORT void control_class_set_unloadable (ControlClass * cclass,
 				   gboolean unloadable);
 
 /* add controls menu */
-GtkWidget *get_controls_submenu (void);
+G_MODULE_IMPORT GtkWidget *get_controls_submenu (void);
 
 /* controls */
-Control *control_new (int index);
+G_MODULE_IMPORT Control *control_new (int index);
 
-gboolean create_control (Control * control, int id, const char *filename);
+G_MODULE_IMPORT gboolean create_control (Control * control, int id, const char *filename);
 
-void control_free (Control * control);
+G_MODULE_IMPORT void control_free (Control * control);
 
-gboolean control_set_from_xml (Control * control, xmlNodePtr node);
+G_MODULE_IMPORT gboolean control_set_from_xml (Control * control, xmlNodePtr node);
 
-void control_write_xml (Control * control, xmlNodePtr parent);
+G_MODULE_IMPORT void control_write_xml (Control * control, xmlNodePtr parent);
 
-void control_pack (Control * control, GtkBox * box);
+G_MODULE_IMPORT void control_pack (Control * control, GtkBox * box);
 
-void control_unpack (Control * control);
+G_MODULE_IMPORT void control_unpack (Control * control);
 
-void control_attach_callbacks (Control * control);
+G_MODULE_IMPORT void control_attach_callbacks (Control * control);
 
-void control_create_options (Control * control, GtkContainer * container,
+G_MODULE_IMPORT void control_create_options (Control * control, GtkContainer * container,
 			     GtkWidget * done);
 
 /* global settings */
-void control_set_settings (Control * control);
+G_MODULE_IMPORT void control_set_settings (Control * control);
 
-void control_set_orientation (Control * control, int orientation);
+G_MODULE_IMPORT void control_set_orientation (Control * control, int orientation);
 
-void control_set_size (Control * control, int size);
+G_MODULE_IMPORT void control_set_size (Control * control, int size);
 
-void control_set_theme (Control * control, const char *theme);
+G_MODULE_IMPORT void control_set_theme (Control * control, const char *theme);
 
 #endif /* __XFCE_CONTROLS_H__ */
