@@ -1,26 +1,8 @@
-xfcedir = $(datadir)/xfce4/themes/XFce
-xfce_DATA = \
-edit.xpm \
-file1.xpm \
-file2.xpm \
-games.xpm \
-newmail.xpm \
-man.xpm \
-miniinfo.xpm \
-minilock.xpm \
-minipalet.xpm \
-minipower.xpm \
-multimedia.xpm \
-network.xpm \
-nomail.xpm \
-oldmail.xpm \
-paint.xpm \
-print.xpm \
-schedule.xpm \
-sound.xpm \
-terminal.xpm \
-trash_empty.xpm \
-trash_full.xpm \
-unknown.xpm
+XFcedir = $(datadir)/xfce4/themes/XFce
 
-EXTRA_DIST = $(xfce_DATA)
+XFce_DATA = \
+	index.theme
+
+EXTRA_DIST = $(XFce_DATA)
+
+SUBDIRS = 53x53 50x50 48x48 24x24 19x19 16x16 14x14 

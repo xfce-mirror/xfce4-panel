@@ -1,25 +1,9 @@
-freeiconsdir = $(datadir)/xfce4/themes/FreeIcons
-freeicons_DATA = 							\
-	README 								\
-	edit.png							\
-	file1.png 							\
-	file2.png 							\
-	games.png 							\
-	newmail.png 							\
-	man.png 							\
-	miniinfo.png 							\
-	minilock.png 							\
-	minipalet.png 							\
-	minipower.png 							\
-	multimedia.png 							\
-	network.png 							\
-	nomail.png 							\
-	oldmail.png 							\
-	paint.png 							\
-	print.png 							\
-	schedule.png 							\
-	sound.png 							\
-	terminal.png 							\
-	unknown.png
+FreeIconsdir = $(datadir)/xfce4/themes/FreeIcons
 
-EXTRA_DIST = $(freeicons_DATA)
+FreeIcons_DATA = \
+	README			\
+	index.theme
+
+EXTRA_DIST = $(FreeIcons_DATA)
+
+SUBDIRS = 48x48 24x24 22x22 

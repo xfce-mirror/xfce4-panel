@@ -1,23 +1,8 @@
-gnomedir = $(datadir)/xfce4/themes/Gnome
-gnome_DATA = \
-edit.png \
-file1.png \
-file2.png \
-games.png \
-man.png \
-miniinfo.png \
-minilock.png \
-minipalet.png \
-minipower.png \
-multimedia.png \
-network.png \
-paint.png \
-print.png \
-schedule.png \
-sound.png \
-terminal.png \
-trash_empty.png \
-trash_full.png \
-unknown.png
+Gnomedir = $(datadir)/xfce4/themes/Gnome
 
-EXTRA_DIST = $(gnome_DATA)
+Gnome_DATA = \
+	index.theme
+
+EXTRA_DIST = $(Gnome_DATA)
+
+SUBDIRS = 50x50 48x48 24x24 

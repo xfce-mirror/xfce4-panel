@@ -1,27 +1,9 @@
-curvedir = $(datadir)/xfce4/themes/Curve
-curve_DATA = \
-edit.png \
-file1.png \
-file2.png \
-games.png \
-man.png \
-miniinfo.png \
-minilock.png \
-minipalet.png \
-minipower.png \
-multimedia.png \
-network.png \
-paint.png \
-print.png \
-schedule.png \
-sound.png \
-terminal.png \
-trash_empty.png \
-trash_full.png \
-unknown.png \
-newmail.png \
-nomail.png \
-oldmail.png \
-README
+Curvedir = $(datadir)/xfce4/themes/Curve
 
-EXTRA_DIST = $(curve_DATA)
+Curve_DATA = \
+	README			\
+	index.theme
+
+EXTRA_DIST = $(Curve_DATA)
+
+SUBDIRS = 48x48 22x22 
