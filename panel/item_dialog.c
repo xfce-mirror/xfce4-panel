@@ -797,7 +797,7 @@ void menu_item_revert_options(void)
     mitem->tooltip = g_strdup(backup.tooltip);
 
     g_free(mitem->caption);
-    mitem->tooltip = g_strdup(backup.caption);
+    mitem->caption = g_strdup(backup.caption);
 
     mitem->icon_id = backup.icon_id;
 
@@ -818,8 +818,6 @@ void menu_item_revert_options(void)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
                                  mitem->in_terminal);
 
-    change_icon(mitem->icon_id, mitem->icon_path);
-
     if(mitem->tooltip)
         gtk_entry_set_text(GTK_ENTRY(tip_entry), mitem->tooltip);
 
@@ -829,6 +827,8 @@ void menu_item_revert_options(void)
     if(num_items > 1)
         gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin),
                                   (gfloat) mitem->pos + 1);
+
+    change_icon(mitem->icon_id, mitem->icon_path);
 
     gtk_widget_set_sensitive(revert_button, FALSE);
 }
