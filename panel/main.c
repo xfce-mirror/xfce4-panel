@@ -385,6 +385,9 @@ path_failed:
 int
 main (int argc, char **argv)
 {
+    char *new, *old;
+    int scr;
+    
 #ifdef HAVE_SIGACTION
     struct sigaction act;
 #endif
@@ -448,9 +451,22 @@ main (int argc, char **argv)
 
     /* copy files from old location when no Base Dir Spec compliant
      * directories are found */
-    ensure_base_dir_spec (XFCE_RESOURCE_CONFIG, 
-                          "", "xfce4rc", 
-                          "panel", "contents.xml");
+    scr = DefaultScreen (GDK_DISPLAY());
+
+    if (scr == 0)
+    {
+        old = g_strdup ("xfce4rc");
+        new = g_strdup ("contents.xml");
+    }
+    else
+    {
+        old = g_strdup_printf ("xfce4rc.%d", scr);
+        new = g_strdup_printf ("contents.xml.%d", scr);
+    }
+
+    ensure_base_dir_spec (XFCE_RESOURCE_CONFIG, "", old, "panel", new);
+    g_free (old);
+    g_free (new);
     
     /* icon framework: names and id's */
     icons_init ();
