@@ -131,6 +131,8 @@ static void icon_id_changed(void)
     if(new_id == 0)
     {
         change_icon(EXTERN_ICON, icon_path);
+        gtk_widget_set_sensitive(icon_entry, TRUE);
+        gtk_widget_set_sensitive(icon_browse_button, TRUE);
     }
     else
     {
