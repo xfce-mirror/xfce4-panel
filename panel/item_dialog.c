@@ -41,16 +41,18 @@
  *  options for caption and position in menu.
 */
 
-static void menu_item_apply_options(void);
-static void panel_item_apply_options(void);
+static void item_apply_options(void);
 
 enum
 { RESPONSE_REVERT, RESPONSE_DONE, RESPONSE_REMOVE };
 
 /* the item is a menu item or a panel control */
-MenuItem *mitem = NULL;
+Item *config_item = NULL;
 int num_items = 0;
-PanelItem *pitem;
+
+static GtkWidget *dialog;
+
+static int id_callback;
 
 /* important widgets */
 static GtkWidget *command_entry;
@@ -63,16 +65,12 @@ static GtkWidget *tip_entry;
 static GtkWidget *preview_image;
 
 /* for menu items */
-GtkWidget *caption_entry;
-GtkWidget *pos_spin;
+static GtkWidget *caption_entry;
+static GtkWidget *pos_spin;
 
 /* controls on the parent dialog */
-GtkWidget *revert_button;
-GtkWidget *done_button;
-
-static GtkWidget *dialog;
-
-static int id_callback;
+static GtkWidget *revert_button;
+static GtkWidget *done_button;
 
 /* usefull for (instant) apply */
 int icon_id;
@@ -82,7 +80,7 @@ int pos;
 /* reindex menuitems */
 static void reindex_items(GList *items)
 {
-    MenuItem *item;
+    Item *item;
     GList *li;
     int i;
 
@@ -155,10 +153,7 @@ void make_sensitive(GtkWidget * widget)
 gboolean entry_lost_focus(GtkEntry * entry, GdkEventFocus * event,
                           gpointer data)
 {
-    if(mitem)
-        menu_item_apply_options();
-    else
-        panel_item_apply_options();
+    item_apply_options();
 
     /* needed to prevent GTK+ crash :( */
     return FALSE;
@@ -184,8 +179,8 @@ static void change_icon(int id, const char *path)
 
     if(!pb || !GDK_IS_PIXBUF(pb))
     {
-        g_printerr("xfce4: %s (line %d): couldn't create pixbuf\n",
-                   __FILE__, __LINE__);
+        g_warning("%s: couldn't create pixbuf: id=%d, path=%s\n", PACKAGE,
+		  id, path ? path : "");
         return;
     }
 
@@ -215,7 +210,7 @@ static void change_icon(int id, const char *path)
         gtk_entry_set_text(GTK_ENTRY(icon_entry), "");
 
         gtk_widget_set_sensitive(icon_entry, FALSE);
-        gtk_widget_set_sensitive(icon_browse_button, FALSE);
+/*        gtk_widget_set_sensitive(icon_browse_button, FALSE);*/
     }
 
     g_signal_handler_block(icon_id_menu, id_callback);
@@ -223,10 +218,7 @@ static void change_icon(int id, const char *path)
                                 (id == EXTERN_ICON) ? 0 : id);
     g_signal_handler_unblock(icon_id_menu, id_callback);
 
-    if(mitem)
-        menu_item_apply_options();
-    else
-        panel_item_apply_options();
+    item_apply_options();
 
     make_sensitive(revert_button);
 }
@@ -485,17 +477,17 @@ static GtkWidget *create_tooltip_option(GtkSizeGroup * sg)
 static void pos_changed(GtkSpinButton * spin, gpointer data)
 {
     int n = gtk_spin_button_get_value_as_int(spin);
-    PanelPopup *pp = mitem->parent;
+    PanelPopup *pp = config_item->parent;
 
-    if (n == mitem->pos)
+    if (n -1 == config_item->pos)
 	return;
     
-    pp->items = g_list_remove(pp->items, mitem);
-    mitem->pos = n - 1;
-    pp->items = g_list_insert(pp->items, mitem, mitem->pos);
-    reindex_items(mitem->parent->items);
+    pp->items = g_list_remove(pp->items, config_item);
+    config_item->pos = n - 1;
+    pp->items = g_list_insert(pp->items, config_item, config_item->pos);
+    reindex_items(pp->items);
     
-    menu_item_apply_options();
+    item_apply_options();
     gtk_widget_set_sensitive(revert_button, TRUE);
 }
 
@@ -548,7 +540,7 @@ static GtkWidget *create_item_options_box(void)
     gtk_box_pack_start(GTK_BOX(vbox), box, FALSE, TRUE, 0);
 
     /* caption (menu item) */
-    if(mitem)
+    if(config_item->type == MENUITEM)
     {
         box = create_caption_option(sg);
         gtk_box_pack_start(GTK_BOX(vbox), box, FALSE, TRUE, 0);
@@ -559,7 +551,7 @@ static GtkWidget *create_item_options_box(void)
     gtk_box_pack_start(GTK_BOX(vbox), box, FALSE, TRUE, 0);
 
     /* position (menu item) */
-    if(mitem && num_items > 1)
+    if(config_item->type == MENUITEM && num_items > 1)
     {
         box = create_position_option(sg);
         gtk_box_pack_start(GTK_BOX(vbox), box, FALSE, TRUE, 0);
@@ -622,265 +614,166 @@ static GtkWidget *create_icon_preview_frame()
     return frame;
 }
 
-/*  Panel item options box
- *  ----------------------
+/*  Apply and revert
+ *  ----------------
 */
-void panel_item_revert_options(Control * control)
-{
-    g_free(pitem->command);
-    pitem->command = g_strdup(backup.command);
-
-    pitem->in_terminal = backup.in_terminal;
-
-    g_free(pitem->tooltip);
-    pitem->tooltip = g_strdup(backup.tooltip);
-
-    pitem->icon_id = backup.icon_id;
-
-    g_free(pitem->icon_path);
-    pitem->icon_path = g_strdup(backup.icon_path);
-
-    panel_item_apply_config(pitem);
-
-    /* revert the widgets */
-    if(pitem->command)
-        gtk_entry_set_text(GTK_ENTRY(command_entry), pitem->command);
-    else
-        gtk_entry_set_text(GTK_ENTRY(command_entry), "");
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
-                                 pitem->in_terminal);
-
-    change_icon(pitem->icon_id, pitem->icon_path);
-
-    if(pitem->tooltip)
-        gtk_entry_set_text(GTK_ENTRY(tip_entry), pitem->tooltip);
-    else
-        gtk_entry_set_text(GTK_ENTRY(tip_entry), "");
-}
-
-void panel_item_apply_options(void)
+static void item_apply_options(void)
 {
     const char *temp;
-
-    g_free(pitem->command);
+    PanelPopup *pp = NULL;
+    
+    /* command */
+    g_free(config_item->command);
+    config_item->command = NULL;
+    
     temp = gtk_entry_get_text(GTK_ENTRY(command_entry));
 
     if(temp && *temp)
-        pitem->command = g_strdup(temp);
-    else
-        pitem->command = NULL;
+        config_item->command = g_strdup(temp);
 
-    pitem->in_terminal =
+    config_item->in_terminal =
         gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(term_checkbutton));
 
-    g_free(pitem->tooltip);
+    /* tooltip */
+    g_free(config_item->tooltip);
+    config_item->tooltip = NULL;
     temp = gtk_entry_get_text(GTK_ENTRY(tip_entry));
 
     if(temp && *temp)
-        pitem->tooltip = g_strdup(temp);
-    else
-        pitem->tooltip = NULL;
+        config_item->tooltip = g_strdup(temp);
 
-    pitem->icon_id = icon_id;
+    /* icon */
+    config_item->icon_id = icon_id;
 
-    g_free(pitem->icon_path);
+    g_free(config_item->icon_path);
+    config_item->icon_path = NULL;
 
-    if(icon_path && pitem->icon_id == EXTERN_ICON)
-        pitem->icon_path = g_strdup(icon_path);
-    else
-        pitem->icon_path = NULL;
+    if(icon_path && config_item->icon_id == EXTERN_ICON)
+        config_item->icon_path = g_strdup(icon_path);
 
-    panel_item_apply_config(pitem);
+    if (config_item->type == MENUITEM)
+    {
+	pp = config_item->parent;
+
+	/* caption */
+	g_free(config_item->caption);
+	temp = gtk_entry_get_text(GTK_ENTRY(caption_entry));
+	config_item->caption = NULL;
+
+	if(temp && *temp)
+	    config_item->caption = g_strdup(temp);
+
+	/* position */
+	gtk_box_reorder_child(GTK_BOX(pp->item_vbox), config_item->button, 
+			      config_item->pos);
+    }
+
+    item_apply_config(config_item);
 }
 
-void panel_item_add_options(Control * control, GtkContainer * container,
-                            GtkWidget * revert, GtkWidget * done)
+void item_revert_options(void)
 {
-    GtkWidget *main_hbox;
-    GtkWidget *options_box;
-    GtkWidget *preview_frame;
+    PanelPopup *pp = NULL;
 
-    pitem = (PanelItem *) control->data;
-    mitem = NULL;
+    /* command */
+    g_free(config_item->command);
+    config_item->command = g_strdup(backup.command);
 
-    dialog = gtk_widget_get_toplevel(done);
+    config_item->in_terminal = backup.in_terminal;
 
-    revert_button = revert;
+    /* tooltip */
+    g_free(config_item->tooltip);
+    config_item->tooltip = g_strdup(backup.tooltip);
 
-    g_signal_connect_swapped(revert, "clicked",
-                             G_CALLBACK(panel_item_revert_options), pitem);
+    /* icon */
+    config_item->icon_id = backup.icon_id;
 
-    g_signal_connect_swapped(done, "clicked",
-                             G_CALLBACK(panel_item_apply_options), pitem);
+    g_free(config_item->icon_path);
+    config_item->icon_path = g_strdup(backup.icon_path);
 
-    /* create backup for revert */
-    init_backup();
+    if (config_item->type == MENUITEM)
+    {
+	pp = config_item->parent;
 
-    if(pitem->command)
-        backup.command = g_strdup(pitem->command);
+	/* caption */
+	g_free(config_item->caption);
+	config_item->caption = g_strdup(backup.caption);
 
-    backup.in_terminal = pitem->in_terminal;
+	/* position */
+	pp->items = g_list_remove(pp->items, config_item);
+	config_item->pos = backup.pos;
+	pp->items = g_list_insert(pp->items, config_item, config_item->pos);
+	reindex_items(config_item->parent->items);
 
-    if(pitem->tooltip)
-        backup.tooltip = g_strdup(pitem->tooltip);
+	gtk_box_reorder_child(GTK_BOX(config_item->parent->item_vbox), 
+			      config_item->button, config_item->pos);
+    }
 
-    backup.icon_id = pitem->icon_id;
-
-    if(pitem->icon_path)
-        backup.icon_path = g_strdup(pitem->icon_path);
-
-    main_hbox = gtk_hbox_new(FALSE, 8);
-    gtk_widget_show(main_hbox);
-    gtk_container_add(container, main_hbox);
-
-    /* clean backup when dialog is destroyed */
-    g_signal_connect(main_hbox, "destroy-event",
-                     G_CALLBACK(clear_backup), NULL);
-
-    options_box = create_item_options_box();
-    gtk_box_pack_start(GTK_BOX(main_hbox), options_box, TRUE, TRUE, 0);
-
-    preview_frame = create_icon_preview_frame();
-    gtk_box_pack_start(GTK_BOX(main_hbox), preview_frame, TRUE, FALSE, 0);
-
-    /* fill in the structures 
-     * use the backup values because the item may have changed
-     * after connecting callbacks */
-    if(backup.command)
-        gtk_entry_set_text(GTK_ENTRY(command_entry), backup.command);
-
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
-                                 backup.in_terminal);
-
-    change_icon(backup.icon_id, backup.icon_path);
-
-    if(backup.tooltip)
-        gtk_entry_set_text(GTK_ENTRY(tip_entry), backup.tooltip);
-}
-
-/*  Menu item options box
- *  ---------------------
- *  Much of the code is shared with the panel item option box
-*/
-static void menu_item_apply_options(void)
-{
-    const char *temp;
-    PanelPopup *pp = mitem->parent;
-
-    g_free(mitem->command);
-    temp = gtk_entry_get_text(GTK_ENTRY(command_entry));
-
-    if(temp && *temp)
-        mitem->command = g_strdup(temp);
-    else
-        mitem->command = NULL;
-
-    mitem->in_terminal =
-        gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(term_checkbutton));
-
-    g_free(mitem->tooltip);
-    temp = gtk_entry_get_text(GTK_ENTRY(tip_entry));
-
-    if(temp && *temp)
-        mitem->tooltip = g_strdup(temp);
-    else
-        mitem->tooltip = NULL;
-
-    mitem->icon_id = icon_id;
-
-    g_free(mitem->icon_path);
-
-    if(icon_path && mitem->icon_id == EXTERN_ICON)
-        mitem->icon_path = g_strdup(icon_path);
-    else
-        mitem->icon_path = NULL;
-
-    g_free(mitem->caption);
-    temp = gtk_entry_get_text(GTK_ENTRY(caption_entry));
-
-    if(temp && *temp)
-        mitem->caption = g_strdup(temp);
-    else
-        mitem->caption = NULL;
-
-    gtk_box_reorder_child(GTK_BOX(pp->item_vbox), mitem->button, mitem->pos);
-
-    menu_item_apply_config(mitem);
-}
-
-void menu_item_revert_options(void)
-{
-    PanelPopup *pp = mitem->parent;
-
-    g_free(mitem->command);
-    mitem->command = g_strdup(backup.command);
-
-    mitem->in_terminal = backup.in_terminal;
-
-    g_free(mitem->tooltip);
-    mitem->tooltip = g_strdup(backup.tooltip);
-
-    g_free(mitem->caption);
-    mitem->caption = g_strdup(backup.caption);
-
-    mitem->icon_id = backup.icon_id;
-
-    g_free(mitem->icon_path);
-    mitem->icon_path = g_strdup(backup.icon_path);
-
-    pp->items = g_list_remove(pp->items, mitem);
-    mitem->pos = backup.pos;
-    pp->items = g_list_insert(pp->items, mitem, mitem->pos);
-    reindex_items(mitem->parent->items);
-
-    gtk_box_reorder_child(GTK_BOX(mitem->parent->item_vbox), mitem->button, 
-	    		  mitem->pos);
-
-    menu_item_apply_config(mitem);
+    item_apply_config(config_item);
 
     /* revert the widgets */
-    if(mitem->command)
-        gtk_entry_set_text(GTK_ENTRY(command_entry), mitem->command);
+    if(config_item->command)
+        gtk_entry_set_text(GTK_ENTRY(command_entry), config_item->command);
+    else
+	gtk_entry_set_text(GTK_ENTRY(command_entry), "");
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton),
-                                 mitem->in_terminal);
+                                 config_item->in_terminal);
 
-    if(mitem->tooltip)
-        gtk_entry_set_text(GTK_ENTRY(tip_entry), mitem->tooltip);
+    if(config_item->tooltip)
+        gtk_entry_set_text(GTK_ENTRY(tip_entry), config_item->tooltip);
+    else
+	gtk_entry_set_text(GTK_ENTRY(tip_entry), "");
 
-    if(mitem->caption)
-        gtk_entry_set_text(GTK_ENTRY(caption_entry), mitem->caption);
+    if(config_item->type == MENUITEM)
+    {
+	if (config_item->caption)
+	    gtk_entry_set_text(GTK_ENTRY(caption_entry), config_item->caption);
+	else
+	    gtk_entry_set_text(GTK_ENTRY(caption_entry), "");
 
-    if(num_items > 1)
-        gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin),
-                                  (gfloat) mitem->pos + 1);
+	if(num_items > 1)
+	    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin),
+				      (gfloat) config_item->pos + 1);
+    }
 
-    change_icon(mitem->icon_id, mitem->icon_path);
+    change_icon(config_item->icon_id, config_item->icon_path);
 
     gtk_widget_set_sensitive(revert_button, FALSE);
 }
 
-void menu_item_add_options(MenuItem * item, GtkContainer * container)
+static void item_add_options(GtkContainer *container)
 {
     GtkWidget *main_hbox;
     GtkWidget *options_box;
     GtkWidget *preview_frame;
 
-    pitem = NULL;
-    mitem = item;
-
+    /* backup */
     init_backup();
 
-    backup.command = g_strdup(mitem->command);
-    backup.in_terminal = mitem->in_terminal;
-    backup.tooltip = g_strdup(mitem->tooltip);
-    backup.caption = g_strdup(mitem->caption);
-    backup.icon_id = mitem->icon_id;
-    backup.icon_path = g_strdup(mitem->icon_path);
-    backup.pos = mitem->pos;
+    if (config_item->command)
+	backup.command = g_strdup(config_item->command);
+    
+    backup.in_terminal = config_item->in_terminal;
+    
+    if (config_item->tooltip)
+	backup.tooltip = g_strdup(config_item->tooltip);
+    
+    backup.icon_id = config_item->icon_id;
+    
+    if (config_item->icon_path)
+	backup.icon_path = g_strdup(config_item->icon_path);
+    
+    if (config_item->type == MENUITEM)
+    {
+	if (config_item->caption)
+	    backup.caption = g_strdup(config_item->caption);
+	
+	backup.pos = config_item->pos;
+    }
 
-    main_hbox = gtk_hbox_new(FALSE, 8);
+    /* options box */
+    main_hbox = gtk_hbox_new(FALSE, 6);
     gtk_widget_show(main_hbox);
     gtk_container_add(container, main_hbox);
 
@@ -903,21 +796,44 @@ void menu_item_add_options(MenuItem * item, GtkContainer * container)
     if(backup.tooltip)
         gtk_entry_set_text(GTK_ENTRY(tip_entry), backup.tooltip);
 
-    if(backup.caption)
-        gtk_entry_set_text(GTK_ENTRY(caption_entry), backup.caption);
+    if (config_item->type == MENUITEM)
+    {
+	if(backup.caption)
+	    gtk_entry_set_text(GTK_ENTRY(caption_entry), backup.caption);
 
-    if(num_items > 1)
-        gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin),
-                                  (gfloat) backup.pos + 1);
+	if(num_items > 1)
+	    gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin),
+				      (gfloat) backup.pos + 1);
+    }
 
-    menu_item_apply_options();
+    item_apply_options();
+}
+
+/*  Panel item dialog
+ *  -----------------
+*/
+void panel_item_add_options(Control * control, GtkContainer * container,
+                            GtkWidget * revert, GtkWidget * done)
+{
+    config_item = control->data;
+
+    dialog = gtk_widget_get_toplevel(done);
+
+    revert_button = revert;
+
+    g_signal_connect_swapped(revert, "clicked",
+                             G_CALLBACK(item_revert_options), NULL);
+
+    g_signal_connect_swapped(done, "clicked",
+                             G_CALLBACK(item_apply_options), NULL);
+
+    item_add_options(container);
 }
 
 /*  Menu item dialogs
  *  -----------------
- *  Edit or add menu items
 */
-GtkWidget *create_menu_item_dialog(MenuItem * mi)
+GtkWidget *create_menu_item_dialog(Item * mi)
 {
     char *title;
     GtkWidget *dlg;
@@ -953,18 +869,19 @@ GtkWidget *create_menu_item_dialog(MenuItem * mi)
 
     frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_NONE);
-    gtk_container_set_border_width(GTK_CONTAINER(frame), 10);
+    gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
     gtk_box_pack_start(GTK_BOX(main_vbox), frame, TRUE, TRUE, 0);
 
-    menu_item_add_options(mi, GTK_CONTAINER(frame));
+    config_item = mi;
+    item_add_options(GTK_CONTAINER(frame));
 
     /* signals */
     g_signal_connect(revert_button, "clicked",
-                     G_CALLBACK(menu_item_revert_options), NULL);
+                     G_CALLBACK(item_revert_options), NULL);
 
     g_signal_connect(done_button, "clicked",
-                     G_CALLBACK(menu_item_apply_options), NULL);
+                     G_CALLBACK(item_apply_options), NULL);
 
     return dlg;
 }
@@ -978,15 +895,14 @@ static void reposition_popup(PanelPopup * pp)
     gtk_button_clicked(GTK_BUTTON(pp->button));
 }
 
-void edit_menu_item_dialog(MenuItem * mi)
+void edit_menu_item_dialog(Item * mi)
 {
     GtkWidget *dlg;
     PanelPopup *pp = mi->parent;
 
-    mitem = mi;
-    pitem = NULL;
+    config_item = mi;
 
-    num_items = g_list_length(mi->parent->items);
+    num_items = g_list_length(pp->items);
 
     dlg = create_menu_item_dialog(mi);
 
@@ -1010,7 +926,7 @@ void edit_menu_item_dialog(MenuItem * mi)
         {
             gtk_container_remove(GTK_CONTAINER(pp->item_vbox), mi->button);
             pp->items = g_list_remove(pp->items, mi);
-            menu_item_free(mi);
+            item_free(mi);
 
             reposition_popup(pp);
         }
@@ -1023,25 +939,19 @@ void edit_menu_item_dialog(MenuItem * mi)
 
     clear_backup();
 
-    if(icon_path)
-    {
-        g_free(icon_path);
-        icon_path = NULL;
-    }
-
     write_panel_config();
 }
 
 void add_menu_item_dialog(PanelPopup * pp)
 {
-    MenuItem *mi = menu_item_new(pp);
+    Item *mi = menu_item_new(pp);
 
     create_menu_item(mi);
     mi->pos = 0;
 
     panel_popup_add_item(pp, mi);
-
     reposition_popup(pp);
 
     edit_menu_item_dialog(mi);
 }
+

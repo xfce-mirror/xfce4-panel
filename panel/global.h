@@ -91,8 +91,7 @@ enum
 typedef struct _ControlClass ControlClass;
 typedef struct _Control Control;
 typedef struct _PanelPopup PanelPopup;
-typedef struct _PanelItem PanelItem;
-typedef struct _MenuItem MenuItem;
+typedef struct _Item Item;
 
 /* global settings */
 typedef struct _Settings Settings;

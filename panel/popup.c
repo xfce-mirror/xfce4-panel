@@ -25,231 +25,9 @@
 
 #include "xfce.h"
 #include "popup.h"
+#include "item.h"
 #include "callbacks.h"
 #include "settings.h"
-
-/*  Menu items  
- *  ----------
-*/
-MenuItem *menu_item_new(PanelPopup * pp)
-{
-    MenuItem *mi = g_new(MenuItem, 1);
-
-    mi->parent = pp;
-    mi->pos = 0;
-
-    mi->command = NULL;
-    mi->in_terminal = FALSE;
-    mi->caption = NULL;
-    mi->tooltip = NULL;
-
-    mi->icon_id = UNKNOWN_ICON;
-    mi->icon_path = NULL;
-
-    mi->button = NULL;
-
-    return mi;
-}
-
-void menu_item_read_config(MenuItem * mi, xmlNodePtr node)
-{
-    xmlNodePtr child;
-    xmlChar *value;
-
-    for(child = node->children; child; child = child->next)
-    {
-        if(xmlStrEqual(child->name, (const xmlChar *)"Caption"))
-        {
-            value = DATA(child);
-
-            if(value)
-                mi->caption = (char *)value;
-        }
-        else if(xmlStrEqual(child->name, (const xmlChar *)"Command"))
-        {
-            int n = -1;
-
-            value = DATA(child);
-
-            if(value)
-                mi->command = (char *)value;
-
-            value = xmlGetProp(child, "term");
-
-            if(value)
-                n = atoi(value);
-
-            if(n == 1)
-                mi->in_terminal = TRUE;
-        }
-        else if(xmlStrEqual(child->name, (const xmlChar *)"Tooltip"))
-        {
-            value = DATA(child);
-
-            if(value)
-                mi->tooltip = (char *)value;
-        }
-        else if(xmlStrEqual(child->name, (const xmlChar *)"Icon"))
-        {
-            value = xmlGetProp(child, (const xmlChar *)"id");
-
-            if(value)
-                mi->icon_id = atoi(value);
-
-            if(!value || mi->icon_id < EXTERN_ICON || mi->icon_id >= NUM_ICONS)
-                mi->icon_id = UNKNOWN_ICON;
-
-            g_free(value);
-
-            if(mi->icon_id == EXTERN_ICON)
-            {
-                value = DATA(child);
-
-                if(value)
-                    mi->icon_path = (char *)value;
-                else
-                    mi->icon_id = UNKNOWN_ICON;
-            }
-        }
-    }
-}
-
-void menu_item_write_xml(MenuItem * mi, xmlNodePtr root)
-{
-    xmlNodePtr node;
-    xmlNodePtr child;
-    char value[3];
-
-    node = xmlNewTextChild(root, NULL, "Item", NULL);
-
-    xmlNewTextChild(node, NULL, "Caption", mi->caption);
-
-    child = xmlNewChild(node, NULL, "Command", mi->command);
-
-    snprintf(value, 2, "%d", mi->in_terminal);
-    xmlSetProp(child, "term", value);
-
-    if(mi->tooltip)
-        xmlNewTextChild(node, NULL, "Tooltip", mi->tooltip);
-
-    child = xmlNewTextChild(node, NULL, "Icon", mi->icon_path);
-
-    snprintf(value, 3, "%d", mi->icon_id);
-    xmlSetProp(child, "id", value);
-}
-
-void menu_item_free(MenuItem * mi)
-{
-    g_free(mi->command);
-    g_free(mi->caption);
-    g_free(mi->tooltip);
-    g_free(mi->icon_path);
-
-    g_free(mi);
-}
-
-void menu_item_set_popup_size(MenuItem * mi, int size)
-{
-    int s = popup_icon_size[size];
-
-    gtk_widget_set_size_request(mi->button, -1, s + border_width);
-}
-
-void menu_item_set_theme(MenuItem * mi, const char *theme)
-{
-    GdkPixbuf *pb;
-    
-    if(mi->icon_id <= EXTERN_ICON)
-        return;
-
-    pb = get_pixbuf_by_id(mi->icon_id);
-    xfce_menubutton_set_pixbuf(XFCE_MENUBUTTON(mi->button), pb);
-    g_object_unref(pb);
-/*    menu_item_set_popup_size(mi, settings.size);*/
-}
-
-void menu_item_apply_config(MenuItem * mi)
-{
-    GdkPixbuf *pb = NULL;
-
-    xfce_menubutton_set_text(XFCE_MENUBUTTON(mi->button), mi->caption);
-    
-    if(mi->icon_id == EXTERN_ICON)
-        pb = get_pixbuf_from_file(mi->icon_path);
-    else if (mi->icon_id != STOCK_ICON)
-        pb = get_pixbuf_by_id(mi->icon_id);
-
-    if (pb)
-    {
-	xfce_menubutton_set_pixbuf(XFCE_MENUBUTTON(mi->button), pb);
-	g_object_unref(pb);
-    }
-    
-    menu_item_set_popup_size(mi, settings.size);
-
-    if(mi->tooltip)
-        add_tooltip(mi->button, mi->tooltip);
-}
-
-void create_addtomenu_item(MenuItem * mi)
-{
-    mi->button = xfce_menubutton_new_with_stock_icon(_("Add launcher"), GTK_STOCK_ADD);
-    gtk_widget_show(mi->button);
-    gtk_button_set_relief(GTK_BUTTON(mi->button), GTK_RELIEF_NONE);
-
-    add_tooltip(mi->button, _("Add new item"));
-
-    /* signals */
-    dnd_set_drag_dest(mi->button);
-
-    g_signal_connect(mi->button, "drag_data_received",
-                     G_CALLBACK(addtomenu_item_drop_cb), mi->parent);
-
-    g_signal_connect(mi->button, "clicked", G_CALLBACK(addtomenu_item_click_cb),
-                     mi->parent);
-
-    menu_item_set_popup_size(mi, settings.size);
-}
-
-void create_menu_item(MenuItem * mi)
-{
-    GdkPixbuf *pb = NULL;
-
-    mi->button = xfce_menubutton_new(mi->caption);
-    gtk_widget_show(mi->button);
-    gtk_button_set_relief(GTK_BUTTON(mi->button), GTK_RELIEF_NONE);
-
-    if(mi->icon_id == EXTERN_ICON && mi->icon_path)
-        pb = get_pixbuf_from_file(mi->icon_path);
-    else
-        pb = get_pixbuf_by_id(mi->icon_id);
-
-    if (pb)
-    {
-	xfce_menubutton_set_pixbuf(XFCE_MENUBUTTON(mi->button), pb);
-	g_object_unref(pb);
-    }
-
-    if(mi->tooltip && strlen(mi->tooltip))
-        add_tooltip(mi->button, mi->tooltip);
-    else if(mi->command && strlen(mi->command))
-        add_tooltip(mi->button, mi->command);
-    else
-        add_tooltip(mi->button, _("Click mouse button 3 to change item"));
-
-    /* signals */
-    g_signal_connect(mi->button, "button-press-event",
-                     G_CALLBACK(menu_item_press), mi);
-
-    g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb), mi);
-
-    dnd_set_drag_dest(mi->button);
-
-    g_signal_connect(mi->button, "drag_data_received",
-                     G_CALLBACK(menu_item_drop_cb), mi);
-
-    menu_item_set_popup_size(mi, settings.size);
-}
 
 /*  Popup menus 
  *  -----------
@@ -396,7 +174,7 @@ void panel_popup_unpack(PanelPopup * pp)
     gtk_container_remove(GTK_CONTAINER(container), pp->button);
 }
 
-void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
+void panel_popup_add_item(PanelPopup * pp, Item * mi)
 {
     GList *li;
     int i;
@@ -408,13 +186,13 @@ void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
 
     for(i = 0, li = pp->items; li && li->data; i++, li = li->next)
     {
-        MenuItem *item = (MenuItem *) li->data;
+        Item *item = li->data;
 
         item->pos = i;
     }
 }
 
-void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi)
+void panel_popup_remove_item(PanelPopup * pp, Item * mi)
 {
     GList *li;
     int i;
@@ -423,11 +201,11 @@ void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi)
 
     pp->items = g_list_remove(pp->items, mi);
 
-    menu_item_free(mi);
+    item_free(mi);
 
     for(i = 0, li = pp->items; li && li->data; i++, li = li->next)
     {
-        MenuItem *item = (MenuItem *) li->data;
+        Item *item = li->data;
 
         item->pos = i;
     }
@@ -436,39 +214,39 @@ void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi)
 void panel_popup_set_from_xml(PanelPopup * pp, xmlNodePtr node)
 {
     xmlNodePtr child;
-    int i = 0;
+    int i;
 
-    for(child = node->children; child; child = child->next)
+    for(i = 0, child = node->children; child; i++, child = child->next)
     {
-        MenuItem *mi;
+        Item *mi;
 
         if(!xmlStrEqual(child->name, (const xmlChar *)"Item"))
             continue;
 
         mi = menu_item_new(pp);
-        menu_item_read_config(mi, child);
+        item_read_config(mi, child);
         create_menu_item(mi);
 
         mi->pos = i;
 
         panel_popup_add_item(pp, mi);
-
-        i++;
     }
 }
 
 void panel_popup_write_xml(PanelPopup * pp, xmlNodePtr root)
 {
-    xmlNodePtr node;
+    xmlNodePtr node, child;
     GList *li;
 
     node = xmlNewTextChild(root, NULL, "Popup", NULL);
 
     for(li = pp->items; li; li = li->next)
     {
-        MenuItem *mi = (MenuItem *) li->data;
+        Item *mi = li->data;
 
-        menu_item_write_xml(mi, node);
+        child = xmlNewTextChild(node, NULL, "Item", NULL);
+
+        item_write_config(mi, child);
     }
 }
 
@@ -478,8 +256,8 @@ void panel_popup_free(PanelPopup * pp)
     GList *li;
     for(li = pp->items; li && li->data; li = li->next)
     {
-        MenuItem *mi = (MenuItem *) li->data;
-        menu_item_free(mi);
+        Item *mi = li->data;
+        item_free(mi);
     }
 
     g_free(pp);
@@ -504,7 +282,7 @@ void panel_popup_set_size(PanelPopup * pp, int size)
     
     for(li = pp->items; li && li->data; li = li->next)
     {
-        MenuItem *mi = (MenuItem *) li->data;
+        Item *mi = li->data;
         menu_item_set_popup_size(mi, size);
     }
 
@@ -547,8 +325,8 @@ void panel_popup_set_theme(PanelPopup * pp, const char *theme)
 
     for(li = pp->items; li && li->data; li = li->next)
     {
-        MenuItem *mi = (MenuItem *) li->data;
-        menu_item_set_theme(mi, theme);
+        Item *mi = li->data;
+        item_set_theme(mi, theme);
     }
 }
 

@@ -37,28 +37,12 @@ struct _PanelPopup
 
     GtkSizeGroup *hgroup;
 
-    MenuItem *addtomenu_item;
+    Item *addtomenu_item;
     GtkWidget *separator;
     GtkWidget *tearoff_button;
 
     GtkWidget *item_vbox;
-    GList *items;               /* type MenuItem */
-};
-
-struct _MenuItem
-{
-    char *command;
-    gboolean in_terminal;
-    char *caption;
-    char *tooltip;
-
-    int icon_id;
-    char *icon_path;
-
-    PanelPopup *parent;
-    int pos;
-
-    GtkWidget *button;
+    GList *items;               /* type Item */
 };
 
 /* Panel popups */
@@ -69,8 +53,8 @@ void panel_popup_free(PanelPopup * pp);
 void panel_popup_pack(PanelPopup * pp, GtkBox * box);
 void panel_popup_unpack(PanelPopup * pp);
 
-void panel_popup_add_item(PanelPopup * pp, MenuItem * mi);
-void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi);
+void panel_popup_add_item(PanelPopup * pp, Item * mi);
+void panel_popup_remove_item(PanelPopup * pp, Item * mi);
 
 void panel_popup_set_size(PanelPopup * pp, int size);
 void panel_popup_set_popup_position(PanelPopup * pp, int position);
@@ -81,14 +65,5 @@ void hide_current_popup_menu(void);
 
 void panel_popup_set_from_xml(PanelPopup * pp, xmlNodePtr node);
 void panel_popup_write_xml(PanelPopup * pp, xmlNodePtr root);
-
-/* Menu items */
-MenuItem *menu_item_new(PanelPopup * pp);
-
-void create_menu_item(MenuItem * mi);
-
-void menu_item_free(MenuItem * mi);
-
-void menu_item_apply_config(MenuItem * mi);
 
 #endif /* __XFCE_POPUP_H__ */

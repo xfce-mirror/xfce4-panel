@@ -22,13 +22,8 @@
 
 #include "global.h"
 
-/* global */
 void iconify_cb(void);
 void close_cb(void);
-
-/* side panel */
-gboolean panel_control_press_cb(GtkWidget * b, GdkEventButton * ev,
-                                Control * control);
 
 void toggle_popup(GtkWidget * button, PanelPopup * pp);
 
@@ -38,27 +33,5 @@ gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp);
 
 gboolean popup_key_pressed(GtkWidget * window, GdkEventKey * ev, 
 			   PanelPopup * pp);
-
-/* panel items */
-void panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
-                        gint x, gint y, GtkSelectionData * data,
-                        guint info, guint time, PanelItem * pi);
-
-void panel_item_click_cb(GtkButton * b, PanelItem * pi);
-
-/* menu items */
-void addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
-                            gint x, gint y, GtkSelectionData * data,
-                            guint info, guint time, PanelPopup * pp);
-
-void addtomenu_item_click_cb(GtkButton * b, PanelPopup * pp);
-
-gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi);
-
-void menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
-                       gint x, gint y, GtkSelectionData * data,
-                       guint info, guint time, MenuItem * mi);
-
-void menu_item_click_cb(GtkButton * b, MenuItem * mi);
 
 #endif /* __XFCE_CALLBACKS_H__ */

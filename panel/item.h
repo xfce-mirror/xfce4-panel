@@ -1,4 +1,4 @@
-/*  item.h
+/*  xfce4
  *  
  *  Copyright (C) 2002 Jasper Huijsmans (huysmans@users.sourceforge.net)
  *
@@ -17,33 +17,57 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#ifndef __XFCE_ITEM_H__
-#define __XFCE_ITEM_H__
+#ifndef __XFCE_ITEMS_H
+#define __XFCE_ITEMS_H
 
 #include "global.h"
 
-/*  The panel item stuff is only public for use in item_dialog.c, so that
- *  the dialog can provide immediate apply and revert functionality.
- *
- *  The dialog is in a separate file because it is shared with menu items.
-*/
-struct _PanelItem
+enum
+{ PANELITEM, MENUITEM };
+
+struct _Item
 {
     char *command;
     gboolean in_terminal;
+    char *caption;
     char *tooltip;
 
     int icon_id;
-    char *icon_path;            /* if id==EXTERN_ICON */
+    char *icon_path;
 
+    int type;
     GtkWidget *button;
+
+    /* for menu items */
+    PanelPopup *parent;
+    int pos;
 };
 
-void panel_item_apply_config(PanelItem * pi);
+/* special menu item */
+void create_addtomenu_item(Item * mi);
+    
+/* menu items */
+Item *menu_item_new(PanelPopup * pp);
 
-/*  panel control interface
-*/
+void create_menu_item(Item * mi);
+
+void menu_item_set_popup_size(Item *item, int size);
+
+/*  panel control interface for panel items */
 void create_panel_item(Control * control);
+
 void panel_item_class_init(ControlClass *cc);
 
-#endif /* __XFCE_ITEM_H__ */
+/* common functions */
+void item_free(Item * item);
+
+void item_set_theme(Item *item, const char *theme);
+
+void item_apply_config(Item *item);
+
+void item_read_config(Item *item, xmlNodePtr node);
+
+void item_write_config(Item *item, xmlNodePtr node);
+
+#endif /* __XFCE_ITEMS_H */
+

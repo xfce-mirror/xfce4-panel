@@ -22,7 +22,7 @@
 
 #include "global.h"
 
-void edit_menu_item_dialog(MenuItem * mi);
+void edit_menu_item_dialog(Item * mi);
 
 void add_menu_item_dialog(PanelPopup * pp);
 

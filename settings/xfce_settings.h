@@ -20,7 +20,7 @@
 #ifndef __XFCE_SETTINGS_H
 #define __XFCE_SETTINGS_H
 
-#define CHANNEL "xfce"
+#define CHANNEL "XFCE"
 
 /* IMPORTANT: keep this in sync with mcs_client.c */
 enum {
