@@ -18,6 +18,7 @@
 */
 
 #include <xfce_togglebutton.h>
+#include <xfce_menubutton.h>
 
 #include "popup.h"
 
@@ -47,11 +48,6 @@ MenuItem *menu_item_new(PanelPopup * pp)
     mi->icon_path = NULL;
 
     mi->button = NULL;
-    mi->hbox = NULL;
-    mi->label = NULL;
-
-    mi->pixbuf = NULL;
-    mi->image = NULL;
 
     return mi;
 }
@@ -155,65 +151,54 @@ void menu_item_free(MenuItem * mi)
 
 void menu_item_set_popup_size(MenuItem * mi, int size)
 {
-    GdkPixbuf *pb;
     int s = popup_icon_size[size];
 
-    if (mi->pixbuf)
-    {
-	pb = get_scaled_pixbuf(mi->pixbuf, s - border_width);
-	gtk_image_set_from_pixbuf(GTK_IMAGE(mi->image), pb);
-	g_object_unref(pb);
-    }
-
-    gtk_widget_set_size_request(mi->image, s, s);
     gtk_widget_set_size_request(mi->button, -1, s + border_width);
 }
 
 void menu_item_set_theme(MenuItem * mi, const char *theme)
 {
-    if(mi->icon_id == EXTERN_ICON)
+    GdkPixbuf *pb;
+    
+    if(mi->icon_id <= EXTERN_ICON)
         return;
 
-    g_object_unref(mi->pixbuf);
-
-    mi->pixbuf = get_pixbuf_by_id(mi->icon_id);
-    menu_item_set_popup_size(mi, settings.size);
+    pb = get_pixbuf_by_id(mi->icon_id);
+    xfce_menubutton_set_pixbuf(XFCE_MENUBUTTON(mi->button), pb);
+    g_object_unref(pb);
+/*    menu_item_set_popup_size(mi, settings.size);*/
 }
 
 void menu_item_apply_config(MenuItem * mi)
 {
-    GdkPixbuf *tmp;
+    GdkPixbuf *pb = NULL;
 
-    g_object_unref(mi->pixbuf);
-
+    xfce_menubutton_set_text(XFCE_MENUBUTTON(mi->button), mi->caption);
+    
     if(mi->icon_id == EXTERN_ICON)
-        mi->pixbuf = get_pixbuf_from_file(mi->icon_path);
-    else
-        mi->pixbuf = get_pixbuf_by_id(mi->icon_id);
+        pb = get_pixbuf_from_file(mi->icon_path);
+    else if (mi->icon_id != STOCK_ICON)
+        pb = get_pixbuf_by_id(mi->icon_id);
 
+    if (pb)
+    {
+	xfce_menubutton_set_pixbuf(XFCE_MENUBUTTON(mi->button), pb);
+	g_object_unref(pb);
+    }
+    
     menu_item_set_popup_size(mi, settings.size);
 
     if(mi->tooltip)
         add_tooltip(mi->button, mi->tooltip);
-
-    gtk_label_set_text(GTK_LABEL(mi->label), mi->caption);
 }
 
 void create_addtomenu_item(MenuItem * mi)
 {
-    mi->button = gtk_button_new();
+    mi->button = xfce_menubutton_new_with_stock_icon(_("Add icon..."), GTK_STOCK_ADD);
+    gtk_widget_show(mi->button);
     gtk_button_set_relief(GTK_BUTTON(mi->button), GTK_RELIEF_NONE);
 
-    mi->hbox = gtk_hbox_new(FALSE, 8);
-    gtk_container_add(GTK_CONTAINER(mi->button), mi->hbox);
-    
-    mi->image = gtk_image_new_from_stock(GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
-    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->image, FALSE, FALSE, 0);
-
     add_tooltip(mi->button, _("Add new item"));
-    mi->label = gtk_label_new(_("Add icon..."));
-    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->label, FALSE, FALSE, 0);
-    gtk_misc_set_alignment(GTK_MISC(mi->label), 0.1, 0.5);
 
     /* signals */
     dnd_set_drag_dest(mi->button);
@@ -229,29 +214,22 @@ void create_addtomenu_item(MenuItem * mi)
 
 void create_menu_item(MenuItem * mi)
 {
-    GdkPixbuf *pb;
+    GdkPixbuf *pb = NULL;
 
-    mi->button = gtk_button_new();
+    mi->button = xfce_menubutton_new(mi->caption);
+    gtk_widget_show(mi->button);
     gtk_button_set_relief(GTK_BUTTON(mi->button), GTK_RELIEF_NONE);
 
     if(mi->icon_id == EXTERN_ICON && mi->icon_path)
-        mi->pixbuf = get_pixbuf_from_file(mi->icon_path);
+        pb = get_pixbuf_from_file(mi->icon_path);
     else
-        mi->pixbuf = get_pixbuf_by_id(mi->icon_id);
+        pb = get_pixbuf_by_id(mi->icon_id);
 
-    mi->hbox = gtk_hbox_new(FALSE, 8);
-    gtk_container_add(GTK_CONTAINER(mi->button), mi->hbox);
-
-    pb = get_scaled_pixbuf(mi->pixbuf, popup_icon_size[settings.size]);
-    mi->image = gtk_image_new_from_pixbuf(pb);
-    g_object_unref(pb);
-    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->image, FALSE, FALSE, 0);
-
-    mi->label = gtk_label_new(mi->caption);
-    gtk_box_pack_start(GTK_BOX(mi->hbox), mi->label, FALSE, FALSE, 0);
-    gtk_misc_set_alignment(GTK_MISC(mi->label), 0.1, 0.5);
-
-    gtk_widget_show_all(mi->button);
+    if (pb)
+    {
+	xfce_menubutton_set_pixbuf(XFCE_MENUBUTTON(mi->button), pb);
+	g_object_unref(pb);
+    }
 
     if(mi->tooltip && strlen(mi->tooltip))
         add_tooltip(mi->button, mi->tooltip);
@@ -346,7 +324,6 @@ PanelPopup *create_panel_popup(void)
 
     pp->addtomenu_item = menu_item_new(pp);
     create_addtomenu_item(pp->addtomenu_item);
-    gtk_size_group_add_widget(pp->hgroup, pp->addtomenu_item->image);
     gtk_box_pack_start(GTK_BOX(pp->vbox), pp->addtomenu_item->button, TRUE,
                        TRUE, 0);
 
@@ -397,7 +374,6 @@ void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
     GList *li;
     int i;
 
-    gtk_size_group_add_widget(pp->hgroup, mi->image);
     gtk_box_pack_start(GTK_BOX(pp->vbox), mi->button, TRUE, TRUE, 0);
     gtk_box_reorder_child(GTK_BOX(pp->vbox), mi->button, mi->pos + 2);
 
@@ -407,7 +383,7 @@ void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
     {
         MenuItem *item = (MenuItem *) li->data;
 
-        mi->pos = i;
+        item->pos = i;
     }
 }
 

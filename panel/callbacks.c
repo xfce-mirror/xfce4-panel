@@ -393,12 +393,7 @@ addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
             mi->caption[0] = g_ascii_toupper(mi->caption[0]);
 
             create_menu_item(mi);
-            pp->items = g_list_prepend(pp->items, mi);
-
-            gtk_size_group_add_widget(pp->hgroup, mi->image);
-            gtk_box_pack_start(GTK_BOX(pp->vbox), mi->button, TRUE, TRUE, 0);
-
-            gtk_box_reorder_child(GTK_BOX(pp->vbox), mi->button, 2);
+	    panel_popup_add_item(pp, mi);
 
 	    if (!pp->detached)
 	    {

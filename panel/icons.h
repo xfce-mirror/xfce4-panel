@@ -25,6 +25,7 @@
 /* launcher and menu icons */
 enum
 {
+    STOCK_ICON = -2, /* used in popup menu */
     EXTERN_ICON = -1,
     /* general icons */
     DEFAULT_ICON,

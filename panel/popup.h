@@ -57,12 +57,6 @@ struct _MenuItem
     int pos;
 
     GtkWidget *button;
-    GtkWidget *hbox;
-
-    GdkPixbuf *pixbuf;
-    GtkWidget *image;
-
-    GtkWidget *label;
 };
 
 /* Panel popups */

@@ -17,8 +17,6 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include <xfce_togglebutton.h>
-
 #include "global.h"
 #include "item_dialog.h"
 #include "xfce_support.h"
@@ -1015,6 +1013,7 @@ void add_menu_item_dialog(PanelPopup * pp)
     MenuItem *mi = menu_item_new(pp);
 
     create_menu_item(mi);
+    mi->pos = 0;
 
     panel_popup_add_item(pp, mi);
 
