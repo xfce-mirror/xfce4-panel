@@ -42,7 +42,7 @@
 
 #define DEFAULT_JUSTIFICATION  GTK_JUSTIFY_LEFT
 #define DEFAULT_SIDE           GTK_SIDE_BOTTOM
-#define DEFAULT_SIZE           48
+#define DEFAULT_SIZE           32
 
 #define IS_HORIZONTAL(s) (s == GTK_SIDE_TOP || s == GTK_SIDE_BOTTOM)
 
@@ -64,6 +64,7 @@ struct _Iconbox
     int x, y;
     int width, height;
     int offset;
+    int block_resize;
 
     GtkWidget *win;
     GtkWidget *box;
@@ -113,8 +114,8 @@ icon_update_image (Icon *icon)
     h = gdk_pixbuf_get_height (icon->pb);
 
     if (w > icon->ib->icon_size || h > icon->ib->icon_size ||
-        ABS (w - icon->ib->icon_size) > 10 || 
-        ABS (h - icon->ib->icon_size) > 10)
+        ABS (w - icon->ib->icon_size) > 20 || 
+        ABS (h - icon->ib->icon_size) > 20)
     {
         if (w > h)
         {
@@ -335,7 +336,8 @@ icon_new (NetkWindow *window, Iconbox *ib)
     
     type = netk_window_get_window_type (window);
     
-    if (!(type == NETK_WINDOW_NORMAL || type == NETK_WINDOW_UTILITY) ||
+    if (!(type == NETK_WINDOW_NORMAL || type == NETK_WINDOW_UTILITY ||
+          type == NETK_WINDOW_DIALOG) ||            
         netk_window_is_skip_tasklist (window))
     {
         icon->skip = TRUE;
@@ -515,22 +517,43 @@ iconbox_move_function (GtkWidget *win, Iconbox *ib, int *x, int *y)
             *x = CLAMP (*x, r.x, r.x + r.width - win->allocation.width);
             *y = r.y + r.height - win->allocation.height;
     }
+
+    if (IS_HORIZONTAL (ib->side))
+    {
+        if (ib->justification == GTK_JUSTIFY_RIGHT)
+            ib->offset = r.x + r.width - win->allocation.width - *x;
+        else
+            ib->offset = *x - r.x;
+    }
+    else
+    {
+        if (ib->justification == GTK_JUSTIFY_RIGHT)
+            ib->offset = r.y + r.height - win->allocation.height - *y;
+        else
+            ib->offset = *y - r.y;
+    }
+    
+    ib->x = *x;
+    ib->y = *y;
 }
 
 static void
 iconbox_resize_function (GtkWidget *win, Iconbox *ib, GtkAllocation *old, 
                          GtkAllocation *new, int *x, int *y)
 {
+    ib->width = new->width;
+    ib->height = new->height;
+
+    if (ib->block_resize)
+        return;
+    
     if(ib->justification == GTK_JUSTIFY_RIGHT)
     {
-        if (ib->side == GTK_SIDE_LEFT || ib->side == GTK_SIDE_RIGHT)
+        if (!IS_HORIZONTAL (ib->side))
             *y = *y - new->height + old->height;
         else
             *x = *x - new->width + old->width;
     }
-
-    ib->width = new->width;
-    ib->height = new->height;
 
     iconbox_move_function (win, ib, x, y);
 }
@@ -557,8 +580,8 @@ create_iconbox (void)
         icon_tooltips = gtk_tooltips_new ();
     
     ib->justification = DEFAULT_JUSTIFICATION;
-    ib->side      = DEFAULT_SIDE;
-    ib->icon_size = DEFAULT_SIZE;
+    ib->side          = DEFAULT_SIDE;
+    ib->icon_size     = DEFAULT_SIZE;
     
     return ib;
 }
@@ -567,6 +590,8 @@ create_iconbox (void)
 static void
 iconbox_read_settings (Iconbox *ib)
 {
+    char *file;
+
     ib->mcs_client = iconbox_connect_mcs_client (ib->gdk_screen, ib);
     
     switch (ib->justification)
@@ -608,6 +633,33 @@ iconbox_read_settings (Iconbox *ib)
     gtk_container_add (GTK_CONTAINER (ib->win), ib->box);
     
     /* read offset */
+    file = xfce_resource_lookup (XFCE_RESOURCE_CONFIG,
+                                 "xfce4" G_DIR_SEPARATOR_S "iconboxrc");
+
+    if (file)
+    {
+        FILE *fp;
+        
+        if ((fp = fopen (file, "r")) != NULL)
+        {
+            char line[255];
+            int offset;
+
+            while (fgets(line, sizeof (line), fp))
+            {
+                if (sscanf (line, "offset = %d", &offset) > 0)
+                {
+                    ib->offset = offset;
+
+                    break;
+                }
+            }
+
+            fclose (fp);
+        }
+        
+        g_free (file);
+    }
 }
 
 static void
@@ -622,7 +674,7 @@ iconbox_set_position (Iconbox *ib)
 
     gdk_screen_get_monitor_geometry (ib->gdk_screen, ib->monitor, &r);
 
-    if (ib->side == GTK_SIDE_TOP || ib->side == GTK_SIDE_BOTTOM)
+    if (IS_HORIZONTAL (ib->side))
     {
         switch (ib->justification)
         {
@@ -674,12 +726,33 @@ iconbox_set_position (Iconbox *ib)
 
 /* session management */
 static void
+write_offset (Iconbox *ib)
+{
+    char *file;
+    FILE *fp;
+
+    /* save offset */
+    file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
+                                        "xfce4" G_DIR_SEPARATOR_S "iconboxrc",
+                                        TRUE);
+
+    if ((fp = fopen (file, "w")) != NULL)
+    {
+        fprintf (fp, "offset = %d", ib->offset);
+
+        fclose (fp);
+    }
+    
+    g_free (file);
+}
+
+static void
 save (gpointer data, int save_style, gboolean shutdown, int interact_style, 
       gboolean fast)
 {
-    Iconbox *ib = (Iconbox *)data;
-    
-    /* save offset */
+    Iconbox *ib = data;
+
+    write_offset (ib);
 }
 
 static void
@@ -758,6 +831,8 @@ cleanup_iconbox (Iconbox *ib)
     int i;
     GSList *l;
 
+    write_offset (ib);
+    
     iconbox_disconnect_mcs_client (ib->mcs_client);
     
     for (i = 0; i < N_ICONBOX_CONNECTIONS; i++)
@@ -772,6 +847,8 @@ cleanup_iconbox (Iconbox *ib)
     {
         icon_destroy ((Icon *)l->data);
     }
+
+    g_slist_free (ib->iconlist);
     
     g_free (ib);
 }
@@ -856,6 +933,8 @@ iconbox_set_side (Iconbox * ib, GtkSideType side)
     if (!oldbox)
         return;
     
+    ib->block_resize++;
+
     if (IS_HORIZONTAL (ib->side))
     {
         if (!GTK_IS_HBOX (oldbox))
@@ -909,8 +988,13 @@ iconbox_set_side (Iconbox * ib, GtkSideType side)
         gtk_widget_show (ib->box);
         gtk_container_add (GTK_CONTAINER (ib->win), ib->box);
     }
-
+    
     iconbox_set_position (ib);
+
+    while (gtk_events_pending ())
+        gtk_main_iteration ();
+
+    ib->block_resize--;
 }
 
 void
@@ -922,6 +1006,8 @@ iconbox_set_icon_size (Iconbox * ib, int size)
 
     if (size == ib->icon_size)
         return;
+
+    ib->block_resize++;
 
     ib->icon_size = size;
 
@@ -939,6 +1025,13 @@ iconbox_set_icon_size (Iconbox * ib, int size)
 
         icon_update_image (icon);
     }
+    
+    iconbox_set_position (ib);
+
+    while (gtk_events_pending ())
+        gtk_main_iteration ();
+
+    ib->block_resize--;
 }
 
 void

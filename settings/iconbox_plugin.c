@@ -41,7 +41,7 @@
 /* default settings */
 #define DEFAULT_SIDE           GTK_SIDE_BOTTOM
 #define DEFAULT_JUSTIFICATION  GTK_JUSTIFY_LEFT
-#define DEFAULT_SIZE	       48
+#define DEFAULT_SIZE	       32
 #define DEFAULT_SHOW_HIDDEN    FALSE
 
 /* gui */
