@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-01-27 15:46+0100\n"
-"PO-Revision-Date: 2004-11-27 22:36+0900\n"
+"PO-Revision-Date: 2005-01-29 18:37+0900\n"
 "Last-Translator: ByungHyun Choi<byunghyunchoi@rtlinux.or.kr>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,7 @@ msgstr ""
 " Xfce Panel\n"
 " Version %s\n"
 "\n"
-" Xfce 데스크탑 환경의 부속품입니다.\n"
+" Xfce 데스크탑 환경의 일부분입니다.\n"
 " http://www.xfce.org\n"
 "\n"
 " GNU GPL 라이선스를 따릅니다.\n"
@@ -254,7 +254,6 @@ msgstr "시스템 트레이에 %s를(을) 등록하지 못 했습니다."
 #. * %Y  : four digit year
 #.
 #: taskbar/xftaskbar.c:612
-#, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%Y-%m-%d %A"
 
@@ -272,16 +271,14 @@ msgid "Cannot create MCS client channel"
 msgstr "MCS 클라이언트 채널을 생성하지 못 했습니다."
 
 #: iconbox/iconbox.c:567
-#, fuzzy
 msgid "Xfce Iconbox"
-msgstr "Xfce 4 아이콘박스 설정"
+msgstr "Xfce 아이콘박스 설정"
 
 #: iconbox/iconbox.c:575
 msgid "Developer"
-msgstr ""
+msgstr "만든이"
 
 #: iconbox/iconbox.c:611
-#, fuzzy
 msgid "_About"
 msgstr "Xfce는(_A)..."
 
@@ -374,7 +371,6 @@ msgid "_Bottom"
 msgstr "아래(_B)"
 
 #: settings/xftaskbar_plugin.c:422
-#, fuzzy
 msgid "Alignment:"
 msgstr "배치"
 
@@ -396,7 +392,6 @@ msgid "Size"
 msgstr "크기"
 
 #: settings/xftaskbar_plugin.c:474
-#, fuzzy
 msgid "Height:"
 msgstr "높이 :"
 
@@ -406,7 +401,7 @@ msgstr "폭:"
 
 #: settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
-msgstr ""
+msgstr "크기에 맞게 줄임(_S)"
 
 #. Autohide
 #: settings/xftaskbar_plugin.c:561
@@ -419,13 +414,12 @@ msgstr "태스크바 자동 숨김(_h)"
 
 #. tasklist
 #: settings/xftaskbar_plugin.c:583
-#, fuzzy
 msgid "Tasklist"
-msgstr "태스크"
+msgstr "태스크 목록"
 
 #: settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
-msgstr ""
+msgstr "태스크 목록 보이기"
 
 #: settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
@@ -451,16 +445,15 @@ msgstr "태스크바에 페이저 보이기(_p)"
 #. status area
 #: settings/xftaskbar_plugin.c:641
 msgid "Status area"
-msgstr ""
+msgstr "상태 영역"
 
 #: settings/xftaskbar_plugin.c:650
-#, fuzzy
 msgid "Show _notification icons"
 msgstr "프로그램 이름 보이기(_n)"
 
 #: settings/xftaskbar_plugin.c:657
 msgid "Show _time"
-msgstr ""
+msgstr "시계를 보여줌(_t)"
 
 #: settings/xftaskbar_plugin.c:718
 msgid "General"
@@ -472,24 +465,23 @@ msgstr ""
 
 #: settings/iconbox_plugin.c:629
 msgid "Icon size"
-msgstr ""
+msgstr "아이콘 크기"
 
 #: settings/iconbox_plugin.c:691
-#, fuzzy
 msgid "_Show only minimized applications"
-msgstr "프로그램 이름 보이기(_n)"
+msgstr "최소화된 것만 보이기(_S)"
 
 #: settings/iconbox_plugin.c:754
 msgid "Transparency"
-msgstr ""
+msgstr "투명"
 
 #: settings/iconbox_plugin.c:762
 msgid "None"
-msgstr ""
+msgstr "사용안함"
 
 #: settings/iconbox_plugin.c:777
 msgid "Full"
-msgstr ""
+msgstr "최대"
 
 #: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
 #: settings/iconbox_plugin.c:992
@@ -666,18 +658,3 @@ msgstr "태스크바 설정"
 #: settings/xfce-taskbar-settings.desktop.in.h:2
 msgid "Xfce 4 Taskbar Settings"
 msgstr "Xfce 4 태스크바 설정"
-
-#~ msgid "Notification area"
-#~ msgstr "알림 영역"
-
-#~ msgid "Show _system tray in taskbar"
-#~ msgstr "태스크바에 시스템 트레이 보이기(_s)"
-
-#~ msgid "Cannot get initial style"
-#~ msgstr "초기화 스타일을 못 찾겠습니다."
-
-#~ msgid "Cannot get default screen\n"
-#~ msgstr "화면 여백을 확보하지 못 했습니다.\n"
-
-#~ msgid "Cannot connect to session manager"
-#~ msgstr "세션 관리도구와 연결하지 못 했습니다."
