@@ -45,7 +45,7 @@ item_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 {
     GList *fnames, *fnp;
     guint count;
-    char *execute;
+    GString *execute;
 
     if (!item || !(item->command))
 	return;
@@ -55,28 +55,26 @@ item_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 
     if (count > 0)
     {
-	execute = g_new0 (char, MAXSTRLEN);
+	execute = g_string_sized_new (3 * strlen (item->command));
 
 	if (item->in_terminal)
-	    strcpy(execute, "\"");
-	else
-	    strcpy(execute, "");
+	    g_string_append_c (execute, '"');
 	
-	strcat (execute, item->command);
+	g_string_append (execute, item->command);
 
 	for (fnp = fnames; fnp; fnp = fnp->next, count--)
 	{
-	    strcat (execute, " \'");
-	    strncat (execute, (char *) (fnp->data),
-		     MAXSTRLEN - strlen (execute) - 2);
-	    strcat (execute, "\' ");
+	    g_string_append_c (execute, ' ');
+	    g_string_append_c (execute, '\'');
+	    g_string_append (execute, (char *) (fnp->data));
+	    g_string_append_c (execute, '\'');
 	}
 
 	if (item->in_terminal)
-	    strcat(execute, "\"");
+	    g_string_append_c (execute, '"');
 
-	exec_cmd (execute, item->in_terminal, item->use_sn);
-	g_free (execute);
+	exec_cmd (execute->str, item->in_terminal, item->use_sn);
+	g_string_free (execute, TRUE);
 
 	hide_current_popup_menu ();
     }
