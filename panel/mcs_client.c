@@ -36,13 +36,13 @@
 #include "panel.h"
 #include "xfce_support.h"
 #include "mcs_client.h"
-#include "../settings/xfce_settings.h"
-
-#define CHANNEL "xfce"
+#include "settings/xfce_settings.h"
 
 static McsClient *client = NULL;
 
-/* special case: position setting */
+/* special case: position setting 
+ * this is not part of the settings struct, but it is being changed from
+ * the settings dialog. */
 static void mcs_position_setting(int pos)
 {
     static int x, y;
@@ -92,7 +92,6 @@ static gpointer settings_callbacks [] = {
     panel_set_size,
     panel_set_popup_position,
     panel_set_theme,
-/*    panel_set_num_groups,*/
     mcs_position_setting
 };
 
@@ -131,6 +130,7 @@ static void update_setting(const char *name, McsSetting *setting)
     }
 }
 
+/* event handling */
 static void notify_cb(const char *name, const char *channel_name, McsAction action, McsSetting * setting, void *data)
 {
     if (g_ascii_strcasecmp(CHANNEL, channel_name))
@@ -169,26 +169,6 @@ static void watch_cb(Window window, Bool is_start, long mask, void *cb_data)
         gdk_window_remove_filter(gdkwin, client_event_filter, NULL);
 }
 
-/* initialize settings */
-static void init_one_setting(const char *name)
-{
-    McsSetting *setting;
-
-    if (MCS_SUCCESS == mcs_client_get_setting(client, name, CHANNEL, &setting))
-    {
-	update_setting(name, setting);
-	mcs_setting_free(setting);
-    }
-}
-
-void mcs_init_settings(void)
-{
-    if (!settings_hash)
-	init_settings_hash();
-
-    g_hash_table_foreach(settings_hash, (GHFunc) init_one_setting, NULL);
-}
-
 /* connecting and disconnecting */
 void mcs_watch_xfce_channel(void)
 {
@@ -197,11 +177,13 @@ void mcs_watch_xfce_channel(void)
 
     if (!settings_hash)
 	init_settings_hash();
+
+    client = NULL;
     
     if (!mcs_client_check_manager(dpy, screen, "xfce-mcs-manager"))
-	g_critical("%s: MCS settings manager not running!", PACKAGE);
-    
-    client = mcs_client_new(dpy, screen, notify_cb, watch_cb, NULL);
+	g_warning("%s: MCS settings manager not running!", PACKAGE);
+    else
+	client = mcs_client_new(dpy, screen, notify_cb, watch_cb, NULL);
        
     if(!client)
     {
@@ -223,6 +205,7 @@ void mcs_stop_watch(void)
     client = NULL;
 }
 
+/* this function is exported to allow access to other channels */
 void mcs_dialog(const char *channel)
 {
     if (!client)

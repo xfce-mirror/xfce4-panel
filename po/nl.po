@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 VERSION\n"
-"POT-Creation-Date: 2003-01-24 15:52+0100\n"
+"POT-Creation-Date: 2003-01-29 13:10+0100\n"
 "PO-Revision-Date: 24-01-03 12:43:34+0100\n"
 "Last-Translator: Jasper Huijsmans <huysmans@sourceforge.net>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -15,45 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/controls.c:296
-msgid "/_Edit ..."
-msgstr "/_Bewerken ..."
-
-#: panel/controls.c:297
-msgid "/_Remove"
-msgstr "/_Verwijderen"
-
-#: panel/controls.c:299 panel/handle.c:82
-msgid "/Add _new item"
-msgstr "_Nieuw item toevoegen"
-
-#: panel/controls.c:572
-msgid "This item has no configuration options"
-msgstr "Geen configuratie opties"
-
-#: panel/controls_dialog.c:243
-msgid "Change item"
-msgstr "Item aanpassen"
-
-#: panel/controls_dialog.c:252 panel/item_dialog.c:915
-#: settings/xfce_settings_dialog.c:771
-msgid "_Revert"
-msgstr "_Herstellen"
-
-#: panel/controls_dialog.c:256 panel/item_dialog.c:920
-#: settings/xfce_settings_dialog.c:776
-msgid "_Done"
-msgstr "_Sluiten"
-
-#: panel/controls_dialog.c:278
-msgid "Type:"
-msgstr "Type:"
-
-#: panel/controls_dialog.c:294 panel/item_dialog.c:493
-msgid "Position:"
-msgstr "Positie:"
-
-#: panel/controls_dialog.c:332
+#: panel/controls.c:278 panel/controls_dialog.c:333
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -62,6 +24,44 @@ msgstr ""
 "Hiermee verwijdert u ook het popup menu.\n"
 "\n"
 "Wilt u het item verwijderen?"
+
+#: panel/controls.c:306
+msgid "/_Properties..."
+msgstr "/_Eigenschappen"
+
+#: panel/controls.c:307
+msgid "/_Remove"
+msgstr "/_Verwijderen"
+
+#: panel/controls.c:309 panel/handle.c:82
+msgid "/Add _new item"
+msgstr "_Item toevoegen"
+
+#: panel/controls.c:580
+msgid "This item has no configuration options"
+msgstr "Geen configuratie opties"
+
+#: panel/controls_dialog.c:243
+msgid "Change item"
+msgstr "Item aanpassen"
+
+#: panel/controls_dialog.c:252 panel/item_dialog.c:942
+#: settings/xfce_settings_dialog.c:689
+msgid "_Revert"
+msgstr "_Herstellen"
+
+#: panel/controls_dialog.c:256 panel/item_dialog.c:947
+#: settings/xfce_settings_dialog.c:694
+msgid "_Done"
+msgstr "_Sluiten"
+
+#: panel/controls_dialog.c:278
+msgid "Type:"
+msgstr "Type:"
+
+#: panel/controls_dialog.c:294 panel/item_dialog.c:515
+msgid "Position:"
+msgstr "Positie:"
 
 #: panel/handle.c:80
 msgid "/XFce Panel"
@@ -73,7 +73,7 @@ msgstr "/_Panel opties"
 
 #: panel/handle.c:85
 msgid "/_Settings manager"
-msgstr "/_Opties manager"
+msgstr "/_Optiemanager"
 
 #: panel/handle.c:87
 msgid "/_About XFce"
@@ -151,9 +151,8 @@ msgstr "XFce 4"
 msgid "By Olivier Fourdan (c) 1997-2003"
 msgstr "Door Olivier Fourdan (c) 1997-2003"
 
-#: panel/info.c:160 panel/info.c:271 plugins/switcher/switcher.c:619
-#: plugins/systembuttons/systembuttons.c:136
-#: plugins/systembuttons/systembuttons.c:446
+#: panel/info.c:160 panel/info.c:271 plugins/systembuttons/systembuttons.c:138
+#: plugins/systembuttons/systembuttons.c:490
 msgid "Info"
 msgstr "Info"
 
@@ -173,61 +172,61 @@ msgstr "Klik muisknop 3 om item te bewerken"
 msgid "Launcher"
 msgstr "Starter"
 
-#: panel/item_dialog.c:240
+#: panel/item_dialog.c:255
 msgid "Other Icon"
 msgstr "Ander pictogram"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:279
 msgid "Select icon"
 msgstr "Pictogram selecteren"
 
-#: panel/item_dialog.c:299
+#: panel/item_dialog.c:314
 msgid "Icon:"
 msgstr "Pictogram:"
 
-#: panel/item_dialog.c:343
+#: panel/item_dialog.c:358
 msgid "Select command"
 msgstr "Commando selecteren"
 
-#: panel/item_dialog.c:366
+#: panel/item_dialog.c:381
 msgid "Command:"
 msgstr "Commando:"
 
-#: panel/item_dialog.c:394 plugins/mailcheck/mailcheck.c:574
+#: panel/item_dialog.c:409 plugins/mailcheck/mailcheck.c:574
 msgid "Run in _terminal"
 msgstr "Uitvoeren in _terminal"
 
-#: panel/item_dialog.c:416
+#: panel/item_dialog.c:431
 msgid "Caption:"
 msgstr "Naam:"
 
-#: panel/item_dialog.c:454
+#: panel/item_dialog.c:469
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:582
+#: panel/item_dialog.c:604
 msgid "Icon Preview"
 msgstr "Voorbeeld"
 
-#: panel/item_dialog.c:586
+#: panel/item_dialog.c:608
 msgid "Drag file onto this frame to change the icon"
 msgstr "Sleep bestand naar dit frame om pictogram te wijzigen"
 
 #. create dialog
-#: panel/item_dialog.c:902
+#: panel/item_dialog.c:929
 msgid "Change menu item"
 msgstr "Menu item veranderen"
 
 #. add buttons
-#: panel/item_dialog.c:910
+#: panel/item_dialog.c:937
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: panel/main.c:82
+#: panel/main.c:71
 msgid "Are you sure you want to exit?"
 msgstr "Weet u zeker dat u wil afsluiten?"
 
-#: panel/main.c:163
+#: panel/main.c:153
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -238,7 +237,7 @@ msgstr ""
 "Onderdeel van de XFce Desktop Environment\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:181
+#: panel/main.c:171
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -248,11 +247,11 @@ msgstr ""
 "zijn gedefinieerd op http://www.freedesktop.org. \n"
 "Sommige XFce functie zullen niet werken zoals bedoeld."
 
-#: panel/mcs_client.c:211
+#: panel/mcs_client.c:192
 msgid "Settings manager not available"
-msgstr "Optie manager niet beschikbaar"
+msgstr "Optiemanager niet beschikbaar"
 
-#: panel/panel.c:84 settings/xfce_settings_plugin.c:66
+#: panel/panel.c:87 settings/xfce_settings_plugin.c:66
 msgid "XFce Panel"
 msgstr "XFce Panel"
 
@@ -272,101 +271,89 @@ msgstr "Menu"
 msgid "Select file"
 msgstr "Bestand selecteren"
 
-#: settings/xfce_settings_dialog.c:208
+#: settings/xfce_settings_dialog.c:197
 msgid "Tiny"
 msgstr "Zeer klein"
 
-#: settings/xfce_settings_dialog.c:212
+#: settings/xfce_settings_dialog.c:201
 msgid "Small"
 msgstr "Klein"
 
-#: settings/xfce_settings_dialog.c:216
+#: settings/xfce_settings_dialog.c:205
 msgid "Medium"
 msgstr "Medium"
 
-#: settings/xfce_settings_dialog.c:220
+#: settings/xfce_settings_dialog.c:209
 msgid "Large"
 msgstr "Groot"
 
-#: settings/xfce_settings_dialog.c:253
-msgid "Traditional"
-msgstr "Traditioneel"
-
-#: settings/xfce_settings_dialog.c:257
-msgid "Modern"
-msgstr "Modern"
-
-#: settings/xfce_settings_dialog.c:332
+#: settings/xfce_settings_dialog.c:260
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#: settings/xfce_settings_dialog.c:336
+#: settings/xfce_settings_dialog.c:264
 msgid "Vertical"
 msgstr "Verticaal"
 
-#: settings/xfce_settings_dialog.c:369 settings/xfce_settings_dialog.c:613
+#: settings/xfce_settings_dialog.c:297 settings/xfce_settings_dialog.c:525
 msgid "Left"
 msgstr "Links"
 
-#: settings/xfce_settings_dialog.c:373 settings/xfce_settings_dialog.c:614
+#: settings/xfce_settings_dialog.c:301 settings/xfce_settings_dialog.c:526
 msgid "Right"
 msgstr "Rechts"
 
-#: settings/xfce_settings_dialog.c:377 settings/xfce_settings_dialog.c:612
-#: settings/xfce_settings_dialog.c:667
+#: settings/xfce_settings_dialog.c:305 settings/xfce_settings_dialog.c:524
+#: settings/xfce_settings_dialog.c:579
 msgid "Top"
 msgstr "Boven"
 
-#: settings/xfce_settings_dialog.c:381 settings/xfce_settings_dialog.c:611
-#: settings/xfce_settings_dialog.c:675
+#: settings/xfce_settings_dialog.c:309 settings/xfce_settings_dialog.c:523
+#: settings/xfce_settings_dialog.c:587
 msgid "Bottom"
 msgstr "Onder"
 
-#: settings/xfce_settings_dialog.c:514
+#: settings/xfce_settings_dialog.c:442
 msgid "Panel size:"
 msgstr "Panel grootte:"
 
-#: settings/xfce_settings_dialog.c:530
+#: settings/xfce_settings_dialog.c:458
 msgid "Panel orientation:"
 msgstr "Panel orientatie:"
 
-#: settings/xfce_settings_dialog.c:547
+#: settings/xfce_settings_dialog.c:475
 msgid "Popup position:"
 msgstr "Popup positie:"
 
-#: settings/xfce_settings_dialog.c:564
-msgid "Panel style:"
-msgstr "Panel stijl:"
-
-#: settings/xfce_settings_dialog.c:580
+#: settings/xfce_settings_dialog.c:492
 msgid "Icon theme:"
 msgstr "Pictogram thema:"
 
-#: settings/xfce_settings_dialog.c:651
+#: settings/xfce_settings_dialog.c:563
 msgid "Panel layer:"
 msgstr "Panel laag:"
 
-#: settings/xfce_settings_dialog.c:671
+#: settings/xfce_settings_dialog.c:583
 msgid "Normal"
 msgstr "Normaal"
 
-#: settings/xfce_settings_dialog.c:690
+#: settings/xfce_settings_dialog.c:602
 msgid "Center the panel:"
 msgstr "Panel centreren:"
 
-#: settings/xfce_settings_dialog.c:714
+#: settings/xfce_settings_dialog.c:626
 msgid "Set"
 msgstr "Zet"
 
-#: settings/xfce_settings_dialog.c:765 settings/xfce_settings_dialog.c:786
+#: settings/xfce_settings_dialog.c:683 settings/xfce_settings_dialog.c:704
 msgid "XFce Panel Settings"
 msgstr "XFce Panel Opties"
 
-#: settings/xfce_settings_dialog.c:804
+#: settings/xfce_settings_dialog.c:722
 msgid "Appearance"
 msgstr "Weergave"
 
-#: settings/xfce_settings_dialog.c:822
+#: settings/xfce_settings_dialog.c:740
 msgid "Position"
 msgstr "Positie"
 
@@ -448,35 +435,35 @@ msgstr "November"
 msgid "December"
 msgstr "December"
 
-#: plugins/clock/clock.c:295
+#: plugins/clock/clock.c:249
 msgid "Analog"
 msgstr "Analoog"
 
-#: plugins/clock/clock.c:299
+#: plugins/clock/clock.c:253
 msgid "Digital"
 msgstr "Digitaal"
 
-#: plugins/clock/clock.c:303
+#: plugins/clock/clock.c:257
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:570
+#: plugins/clock/clock.c:508
 msgid "Clock type:"
 msgstr "Klok type:"
 
-#: plugins/clock/clock.c:584
+#: plugins/clock/clock.c:522
 msgid "24 hour clock:"
 msgstr "24-uurs klok:"
 
-#: plugins/clock/clock.c:598
+#: plugins/clock/clock.c:536
 msgid "Toggle AM PM mode :"
 msgstr "AM PM modus aan/uit :"
 
-#: plugins/clock/clock.c:612
+#: plugins/clock/clock.c:550
 msgid "Show seconds:"
 msgstr "Secondes tonen:"
 
-#: plugins/clock/clock.c:659
+#: plugins/clock/clock.c:604
 msgid "Xfce Clock"
 msgstr "Xfce Klok"
 
@@ -496,11 +483,19 @@ msgstr "Commando voor de knop op het paneel"
 msgid "Interval (sec):"
 msgstr "Interval (sec):"
 
-#: plugins/mailcheck/mailcheck.c:639
+#: plugins/mailcheck/mailcheck.c:645
 msgid "Mail check"
 msgstr "Mail check"
 
-#: plugins/switcher/switcher.c:570 plugins/systembuttons/systembuttons.c:51
+#: plugins/switcher/switcher.c:916
+msgid "Use graphical pager"
+msgstr "Grafische pager gebruiken"
+
+#: plugins/switcher/switcher.c:969
+msgid "Desktop switcher"
+msgstr "Bureaublad wisselaar"
+
+#: plugins/systembuttons/systembuttons.c:51
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -510,51 +505,38 @@ msgstr ""
 "\n"
 "Vraag uw systeembeheerder voor meer informatie"
 
-#. fixed tooltips, since the user can't change the icon anyway
-#: plugins/switcher/switcher.c:618 plugins/systembuttons/systembuttons.c:133
+#: plugins/systembuttons/systembuttons.c:135
 msgid "Lock the screen"
 msgstr "Scherm beveiligen"
 
-#: plugins/switcher/switcher.c:620 plugins/systembuttons/systembuttons.c:135
-#: plugins/systembuttons/systembuttons.c:445
-msgid "Setup"
-msgstr "Opties"
-
-#: plugins/switcher/switcher.c:621 plugins/systembuttons/systembuttons.c:134
-#: plugins/systembuttons/systembuttons.c:444
+#: plugins/systembuttons/systembuttons.c:136
+#: plugins/systembuttons/systembuttons.c:488
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: plugins/switcher/switcher.c:1231
-msgid "Show minibuttons"
-msgstr "Miniknoppen tonen"
+#: plugins/systembuttons/systembuttons.c:137
+#: plugins/systembuttons/systembuttons.c:489
+msgid "Setup"
+msgstr "Opties"
 
-#: plugins/switcher/switcher.c:1251
-msgid "Use graphical pager"
-msgstr "Grafische pager gebruiken"
-
-#: plugins/switcher/switcher.c:1299
-msgid "Desktop switcher"
-msgstr "Bureaublad wisselaar"
-
-#: plugins/systembuttons/systembuttons.c:427
+#: plugins/systembuttons/systembuttons.c:471
 msgid "Show two buttons:"
 msgstr "Twee knoppen tonen:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:443
+#: plugins/systembuttons/systembuttons.c:487
 msgid "Lock"
 msgstr "Schermbeveiliging"
 
-#: plugins/systembuttons/systembuttons.c:474
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Button 1:"
 msgstr "Knop 1:"
 
-#: plugins/systembuttons/systembuttons.c:490
+#: plugins/systembuttons/systembuttons.c:534
 msgid "Button 2:"
 msgstr "Knop 2:"
 
-#: plugins/systembuttons/systembuttons.c:527
+#: plugins/systembuttons/systembuttons.c:578
 msgid "System buttons"
 msgstr "Systeemknoppen"
 
@@ -568,6 +550,7 @@ msgstr "Prullenbak: 0 bestanden"
 msgid "Trashcan: %d files / %d %s"
 msgstr "Prullenbak: %d bestanden / %d %s"
 
-#: plugins/trash/trash.c:292
+#: plugins/trash/trash.c:298
 msgid "Trash can"
 msgstr "Prullenbak"
+

@@ -38,47 +38,7 @@
 
 gboolean disable_user_config = FALSE;
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  Reading xml
--*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 xmlDocPtr xmlconfig = NULL;
-
-static xmlDocPtr make_empty_doc(void)
-{
-    xmlDocPtr doc;
-    xmlNodePtr root;
-
-    doc = xmlNewDoc("1.0");
-    doc->children = xmlNewDocRawNode(doc, NULL, ROOT, NULL);
-
-    root = (xmlNodePtr) doc->children;
-    xmlDocSetRootElement(doc, root);
-
-    xmlNewTextChild(root, NULL, "Panel", NULL);
-    xmlNewTextChild(root, NULL, "Groups", NULL);
-
-    return doc;
-}
-
-
-static xmlDocPtr read_xml_file(void)
-{
-    char *rcfile;
-    xmlDocPtr doc = NULL;
-
-    xmlKeepBlanksDefault(0);
-
-    rcfile = get_read_file(XFCERC);
-
-    if(rcfile)
-        doc = xmlParseFile(rcfile);
-
-    if(!doc)
-        doc = make_empty_doc();
-
-    g_free(rcfile);
-    return doc;
-}
 
 /*  Configuration
  *  -------------
@@ -90,38 +50,73 @@ static gboolean check_disable_user_config(void)
     return (var && !strequal(var, "0"));
 }
 
-/* for now we still read this from the xml file until we have a new 
- * preferences system */
-void get_global_prefs(void)
+/*  Reading xml
+ *  -----------
+*/
+static xmlDocPtr read_xml_file(void)
 {
-    xmlNodePtr node;
+    char *rcfile;
+    xmlDocPtr doc = NULL;
 
+    xmlKeepBlanksDefault(0);
+
+    rcfile = get_read_file(XFCERC);
+
+    if(rcfile)
+    {
+        doc = xmlParseFile(rcfile);
+	g_free(rcfile);
+    }
+    
+    return doc;
+}
+
+static xmlNodePtr get_xml_root(void)
+{
+    xmlNodePtr node = NULL;
+    
     /* global xmlDocPtr */
     if(!xmlconfig)
         xmlconfig = read_xml_file();
+
+    if (!xmlconfig)
+    {
+	g_message("%s: No config file found", PACKAGE);
+	return NULL;
+    }
 
     node = xmlDocGetRootElement(xmlconfig);
 
     if(!node)
     {
-        g_printerr("%s: %s (line %d): empty document\n", PACKAGE, __FILE__,
-                   __LINE__);
+        g_warning("%s: empty document: %s\n", PACKAGE, xmlconfig->name);
 
         xmlFreeDoc(xmlconfig);
-        xmlconfig = make_empty_doc();
-        node = xmlDocGetRootElement(xmlconfig);
+	xmlconfig = NULL;
+	return NULL;
     }
 
     if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
     {
-        g_printerr("%s: %s (line %d): wrong document type\n", PACKAGE, 
-		   __FILE__, __LINE__);
+        g_warning("%s: wrong document type: %s\n", PACKAGE, xmlconfig->name);
 
         xmlFreeDoc(xmlconfig);
-        xmlconfig = make_empty_doc();
-        node = xmlDocGetRootElement(xmlconfig);
+	xmlconfig = NULL;
+	return NULL;
     }
 
+    return node;
+}
+
+void get_global_prefs(void)
+{
+    xmlNodePtr node;
+
+    node = get_xml_root();
+
+    if (!node)
+	return;
+    
     /* Now parse the xml tree */
     for(node = node->children; node; node = node->next)
     {
@@ -133,6 +128,7 @@ void get_global_prefs(void)
         }
     }
 
+    /* leave the xmldoc open for get_panel_config() */
 }
 
 void get_panel_config(void)
@@ -141,32 +137,15 @@ void get_panel_config(void)
 
     disable_user_config = check_disable_user_config();
 
-    /* global xmlDocPtr */
-    if(!xmlconfig)
-        xmlconfig = read_xml_file();
+    node = get_xml_root();
 
-    node = xmlDocGetRootElement(xmlconfig);
-
-    if(!node)
+    if (!node)
     {
-        g_printerr("%s: %s (line %d): empty document\n", PACKAGE, __FILE__,
-                   __LINE__);
-
-        xmlFreeDoc(xmlconfig);
-        xmlconfig = make_empty_doc();
-        node = xmlDocGetRootElement(xmlconfig);
+	/* create empty items */
+	groups_set_from_xml(NULL);
+	return;
     }
-
-    if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
-    {
-        g_printerr("%s: %s (line %d): wrong document type\n",
-                   PACKAGE, __FILE__, __LINE__);
-
-        xmlFreeDoc(xmlconfig);
-        xmlconfig = make_empty_doc();
-        node = xmlDocGetRootElement(xmlconfig);
-    }
-
+    
     /* Now parse the xml tree */
     for(node = node->children; node; node = node->next)
     {

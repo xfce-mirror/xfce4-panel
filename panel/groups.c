@@ -137,33 +137,12 @@ static void panel_group_unpack(PanelGroup * pg)
  *  ------
  *  Mainly housekeeping for the global list of panel groups
 */
-
-/* FIXME: get rid of num_groups global option. 
- * Just add/remove items from config file and dialog. */
 void groups_init(GtkBox * box)
 {
-    int i;
-    PanelGroup *group;
-
     groupbox = box;
 
+    /* we need this later on, so we may just as well initialize it here */
     control_class_list_init();
-
-    for(i = 0; i < settings.num_groups; i++)
-    {
-	group = create_panel_group(i);
-	panel_group_pack(group, box);
-
-	group_list = g_slist_append(group_list, group);
-
-	group->popup = create_panel_popup();
-
-	/* we create an empty control, because we don't know what to put
-	 * here until after we read the configuration file */
-	group->control = control_new(i);
-
-	panel_group_arrange(group);
-    }
 }
 
 void groups_cleanup(void)
@@ -203,15 +182,30 @@ void old_groups_set_from_xml(int side, xmlNodePtr node)
     if(node)
         node = node->children;
 
-    for(i = last_group; i < settings.num_groups && li; i++, li = li->next)
+    for(i = last_group; i < settings.num_groups || li; i++)
     {
         gboolean control_created = FALSE;
 
-	group = li->data;
-	
 	if (side == LEFT && !node)
 	    break;
 
+	if (li)
+	{
+	    group = li->data;
+	}
+	else
+	{
+	    group = create_panel_group(i);
+	    panel_group_pack(group, groupbox);
+	    group_list = g_slist_append(group_list, group);
+
+	    group->popup = create_panel_popup();
+
+	    group->control = control_new(i);
+
+	    panel_group_arrange(group);
+	}
+	
         if(node)
         {
             for(child = node->children; child; child = child->next)
@@ -234,6 +228,9 @@ void old_groups_set_from_xml(int side, xmlNodePtr node)
 
         if(node)
             node = node->next;
+
+	if (li)
+	    li = li->next;
 
 	last_group++;
     }
@@ -252,11 +249,26 @@ void groups_set_from_xml(xmlNodePtr node)
     if(node)
         node = node->children;
 
-    for(i = 0; i < settings.num_groups && li; i++, li = li->next)
+    for(i = 0; i < settings.num_groups || li; i++)
     {
         gboolean control_created = FALSE;
 
-	group = li->data;
+	if (li)
+	{
+	    group = li->data;
+	}
+	else
+	{
+	    group = create_panel_group(i);
+	    panel_group_pack(group, groupbox);
+	    group_list = g_slist_append(group_list, group);
+
+	    group->popup = create_panel_popup();
+
+	    group->control = control_new(i);
+
+	    panel_group_arrange(group);
+	}
 	
         if(node)
         {
@@ -280,6 +292,9 @@ void groups_set_from_xml(xmlNodePtr node)
 
         if(node)
             node = node->next;
+
+	if (li)
+	    li = li->next;
     }
 }
 

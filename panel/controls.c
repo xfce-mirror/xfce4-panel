@@ -22,7 +22,7 @@
  *  Controls provide a unified interface for panel items. Each control has an
  *  associated control class that defines interface functions for the control.
  *
- *  A control is created using the create_control function of the associated
+ *  A control is created using the create_control function of its associated
  *  class. This takes an allocated control structure as argument, containing
  *  only a base container widget.
  * 
@@ -33,10 +33,6 @@
  *  -------
  *  A control class can also be provided by a plugin. The plugin is accessed 
  *  using the g_module interface.
-*/
-
-/*  control class list 
- *  ------------------
 */
 
 #include <config.h>
@@ -51,7 +47,9 @@
 
 static GSList *control_class_list = NULL;
 
-/* lookup functions */
+/*  Control classes
+ *  ---------------
+*/
 static gint compare_classes (gconstpointer class_a, gconstpointer class_b)
 {
     g_assert (class_a != NULL);
@@ -116,7 +114,9 @@ static void control_class_free(ControlClass *cc)
     g_free(cc);
 }
 
-/* plugins */
+/*  Plugins
+ *  -------
+*/
 #define SOEXT 		("." G_MODULE_SUFFIX)
 #define SOEXT_LEN 	(strlen (SOEXT))
 
@@ -201,7 +201,9 @@ load_plugin_dir (const char *dir)
     g_dir_close (gdir);
 }
 
-/* control class list */
+/*  Control class list 
+ *  ------------------
+*/
 static void add_plugin_classes(void)
 {
     char **dirs, **d;
@@ -255,8 +257,8 @@ GSList *get_control_class_list(void)
     return control_class_list;
 }
 
-/* right click menu 
- * ----------------
+/* Control right click menu 
+ * ------------------------
 */
 static Control *popup_control = NULL;
 
@@ -271,7 +273,15 @@ static void edit_control(void)
 static void remove_control(void)
 {
     if (popup_control)
-	groups_remove(popup_control->index);
+    {
+	if (!(popup_control->with_popup) ||
+	    confirm(_("Removing an item will also remove its popup menu.\n\n"
+		      "Do you want to remove the item?"), 
+		    GTK_STOCK_REMOVE, NULL))
+	{
+	    groups_remove(popup_control->index);
+	}
+    }
 
     popup_control = NULL;
 }
@@ -293,7 +303,7 @@ static void add_control(void)
 }
 
 static GtkItemFactoryEntry control_items[] = {
-  { N_("/_Edit ..."),     NULL, edit_control,   0, "<Item>" },
+  { N_("/_Properties..."),     NULL, edit_control,   0, "<Item>" },
   { N_("/_Remove"),       NULL, remove_control, 0, "<Item>" },
   { "/sep",              NULL, NULL,           0, "<Separator>" },
   { N_("/Add _new item"), NULL, add_control,    0, "<Item>" }
@@ -340,12 +350,6 @@ static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *con
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL, 
 		       ev->button, ev->time); 
 	
-/*	gtk_item_factory_popup_with_data(factory, control, NULL, 
-					 ev->x_root, ev->y_root,
-					 ev->button, ev->time);
-
-	controls_dialog(control); */
-
 	return TRUE;
     }
     else
@@ -354,8 +358,8 @@ static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *con
     }
 }
 
-/*  Controls 
- *  --------
+/*  Controls creation and destruction 
+ *  ---------------------------------
 */
 static gboolean create_plugin(Control *control, const char *filename)
 {
@@ -375,25 +379,23 @@ static gboolean create_plugin(Control *control, const char *filename)
 
 static gboolean create_builtin(Control *control, int id)
 {
-    g_warning("xfce4: unknown control id: %d\n", id);
+    /* there are no builtin controls anymore! */
+    g_warning("%s: unknown control id: %d\n", PACKAGE, id);
     return FALSE;
 }
 
 static void create_launcher(Control *control)
 {
-    ControlClass *cc;
-    
     /* we know it is the first item in the list */
-    cc = control->cclass = control_class_list->data;
+    control->cclass = control_class_list->data;
     
-    cc->create_control(control);
+    control->cclass->create_control(control);
 }
 
 void create_control(Control * control, int id, const char *filename)
 {
     ControlClass *cc;
     
-    /* the control class is set in the create_* functions */
     switch (id)
     {
 	case ICON:
@@ -408,6 +410,7 @@ void create_control(Control * control, int id, const char *filename)
 		create_launcher(control);
     }
 
+    /* the control class is set in the create_* functions above */
     cc = control->cclass;
     
     /* these are required for proper operation */
@@ -474,7 +477,11 @@ void control_attach_callbacks(Control *control)
 	    	     G_CALLBACK(control_press_cb), control);
 }
 
-/* configuration */
+/*  Controls configuration
+ *  ----------------------
+*/
+
+/* module configuration */
 static void control_read_config(Control *control, xmlNodePtr node)
 {
     ControlClass *cc = control->cclass;
@@ -491,6 +498,7 @@ static void control_write_config(Control *control, xmlNodePtr node)
 	cc->write_config(control, node);
 }
 
+/* control configuration */
 void control_set_from_xml(Control * control, xmlNodePtr node)
 {
     xmlChar *value;
@@ -577,8 +585,9 @@ void control_add_options(Control * control, GtkContainer * container,
     }
 }
 
-/* global settings */
-
+/*  Controls global preferences
+ *  ---------------------------
+*/
 void control_set_settings(Control * control)
 {
     control_set_orientation(control, settings.orientation);

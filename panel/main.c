@@ -190,8 +190,6 @@ int main(int argc, char **argv)
     /* icon framework: names and id's */
     icons_init();
     
-    mcs_watch_xfce_channel();
-    
     create_panel();
 
     gtk_main();

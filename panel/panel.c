@@ -168,8 +168,8 @@ void create_panel(void)
 	get_global_prefs();
 
 	/* If there is a settings manager it takes precedence */
-	mcs_init_settings();
-
+	mcs_watch_xfce_channel();
+    
 	need_init = FALSE;
     }
 
