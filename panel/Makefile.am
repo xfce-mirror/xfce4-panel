@@ -43,7 +43,8 @@ xfce4_panelinclude_HEADERS =					\
 	item_dialog.h						\
 	plugins.h 						\
 	xfce_support.h 						\
-	xfce.h 
+	xfce.h 							\
+	xfcombo.h
 
 xfce4_panel_CFLAGS = 							\
 	-I$(top_srcdir)							\
