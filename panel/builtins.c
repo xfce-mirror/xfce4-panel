@@ -692,7 +692,7 @@ void create_clock(PanelControl * pc)
 
     pc->caption = g_strdup(_("XFce clock"));
     pc->data = (gpointer) clock;
-    pc->main = clock->frame;
+    pc->main = clock->eventbox;
 
     pc->interval = 1000;        /* 1 sec */
 
@@ -715,7 +715,6 @@ void create_clock(PanelControl * pc)
     moment
     */
     clock_date_tooltip (clock->eventbox);
-
 }
 
 /* -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- */
