@@ -165,16 +165,16 @@ orientation_changed (GtkOptionMenu * menu)
     switch (pos)
     {
 	case LEFT:
-	    pos = BOTTOM;
-	    break;
-	case RIGHT:
 	    pos = TOP;
 	    break;
+	case RIGHT:
+	    pos = BOTTOM;
+	    break;
 	case TOP:
-	    pos = RIGHT;
+	    pos = LEFT;
 	    break;
 	case BOTTOM:
-	    pos = LEFT;
+	    pos = RIGHT;
 	    break;
     }
 

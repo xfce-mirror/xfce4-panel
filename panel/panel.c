@@ -557,6 +557,7 @@ create_panel (void)
 {
     static gboolean need_init = TRUE;
     int x, y;
+    int hidden;
 
     /* necessary for initial settings to do the right thing */
     panel_created = FALSE;
@@ -589,15 +590,19 @@ create_panel (void)
 	need_init = FALSE;
     }
 
-    /* panel framework */
-    create_panel_framework (&panel);
-
+    /* unhide panel initially */
+    hidden = settings.autohide;
+    settings.autohide=FALSE;
+    
     /* FIXME
      * somehow the position gets set differently in the code below
      * we just save it here and restore it before reading the config
      * file */
     x = panel.position.x;
     y = panel.position.y;
+    
+    /* panel framework */
+    create_panel_framework (&panel);
 
     groups_init (GTK_BOX (panel.group_box));
 
@@ -617,7 +622,11 @@ create_panel (void)
      * otherwise the initial position will be messed up */
     panel_created = TRUE;
 
-    if (settings.autohide)
+    panel.position.x = x;
+    panel.position.y = y;
+    panel_set_position ();
+
+    if (hidden)
 	panel_set_autohide(TRUE);
 }
 
@@ -663,16 +672,16 @@ panel_set_orientation (int orientation)
     switch (pos)
     {
 	case LEFT:
-	    pos = BOTTOM;
-	    break;
-	case RIGHT:
 	    pos = TOP;
 	    break;
+	case RIGHT:
+	    pos = BOTTOM;
+	    break;
 	case TOP:
-	    pos = RIGHT;
+	    pos = LEFT;
 	    break;
 	case BOTTOM:
-	    pos = LEFT;
+	    pos = RIGHT;
 	    break;
     }
     panel_set_popup_position(pos);
