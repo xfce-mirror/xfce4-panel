@@ -656,7 +656,7 @@ get_control_menu (void)
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
-	mi = gtk_menu_item_new_with_label(_("Add _new item"));
+	mi = gtk_menu_item_new_with_mnemonic(_("Add _new item"));
 	gtk_widget_show (mi);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     }
