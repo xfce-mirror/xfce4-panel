@@ -1,57 +1,24 @@
 <?xml version="1.0"?>
 <Xfce>
-  <Panel>
-    <Position x="-1" y="-1"/>
-    <Lock>xflock</Lock>
+  <Panel size="1" popupposition="2" style="1" orientation="0" layer="0" left="5" right="5" screens="4" showcentral="1" desktopbuttons="1" minibuttons="1">
   </Panel>
-  <Central/>
+  <Central>
+  </Central>
   <Left>
     <Group>
-      <Control id="0"/>
-    </Group>
-    <Group>
-      <Popup>
-        <Item>
-          <Caption>SU Term</Caption>
-          <Command term="1">su -</Command>
-          <Tooltip>Super User Terminal</Tooltip>
-          <Icon id="12"/>
-        </Item>
-        <Item>
-          <Caption>XTerm</Caption>
-          <Command term="0">xfterm</Command>
-          <Tooltip>Terminal</Tooltip>
-          <Icon id="-1">_pkgdatadir_/icons/CheckMarkMonitor.xpm</Icon>
-        </Item>
-        <Item>
-          <Caption>Uitvoeren...</Caption>
-          <Command term="0">xfrun</Command>
-          <Tooltip>Programma uitvoeren</Tooltip>
-          <Icon id="-1">_pkgdatadir_/icons/FileAPP.xpm</Icon>
-        </Item>
-        <Item>
-          <Caption>XFGlob</Caption>
-          <Command term="0"/>
-          <Tooltip>Find files</Tooltip>
-          <Icon id="-1">_pkgdatadir_/icons/View.xpm</Icon>
-        </Item>
-        <Item>
-          <Caption>XFDiff</Caption>
-          <Command term="0">xfdiff</Command>
-          <Tooltip>Find differences between files</Tooltip>
-          <Icon id="-1">_pkgdatadir_/pixmaps/inspect.xpm</Icon>
-        </Item>
-        <Item>
-          <Caption>Mount floppy</Caption>
-          <Command term="0">xfmountdev /mnt/floppy</Command>
-          <Tooltip>Mount and unmount floppy</Tooltip>
-          <Icon id="-1">_pkgdatadir_/icons/DiskFloppy.xpm</Icon>
-        </Item>
-      </Popup>
+      <Popup/>
       <Control id="-2">
         <Command term="0">xftree</Command>
-        <Tooltip>Bestandsbeheer</Tooltip>
+        <Tooltip>File manager</Tooltip>
         <Icon id="2"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-2">
+        <Command term="0">xterm</Command>
+        <Tooltip>Terminal</Tooltip>
+        <Icon id="12"/>
       </Control>
     </Group>
     <Group>
@@ -70,92 +37,31 @@
       </Control>
     </Group>
     <Group>
-      <Popup>
-        <Item>
-          <Caption>OpenOffice</Caption>
-          <Command term="0">OpenOffice/OpenOffice.org1.0/soffice</Command>
-          <Tooltip>Office suite</Tooltip>
-          <Icon id="-1">_pkgdatadir_/pixmaps/Bookshelf.xpm</Icon>
-        </Item>
-      </Popup>
-      <Control id="-1">libmailcheck.so</Control>
-    </Group>
-    <Group>
-      <Popup>
-        <Item>
-          <Caption>Skipstone</Caption>
-          <Command term="0">skipstone</Command>
-          <Tooltip>Internet browser</Tooltip>
-          <Icon id="-1">_pkgdatadir_/pixmaps/gnome-globe.png</Icon>
-        </Item>
-      </Popup>
-      <Control id="-2">
-        <Command term="0">galeon -w</Command>
-        <Tooltip>Galeon internet browser</Tooltip>
-        <Icon id="7"/>
+      <Popup/>
+      <Control id="-1" filename="libmailcheck.so">
       </Control>
     </Group>
     <Group>
       <Popup/>
       <Control id="-2">
-        <Command term="0"/>
-        <Tooltip>Click Mouse 3 to change item</Tooltip>
-        <Icon id="0"/>
+        <Command term="0">mozilla</Command>
+        <Tooltip>Web browser</Tooltip>
+        <Icon id="7"/>
       </Control>
     </Group>
   </Left>
   <Right>
     <Group>
-      <Control id="1"/>
-    </Group>
-    <Group>
-      <Popup>
-        <Item>
-          <Caption>The Gimp</Caption>
-          <Command term="0"/>
-          <Icon id="-1">_pkgdatadir_/icons/GIMP.xpm</Icon>
-        </Item>
-        <Item>
-          <Caption>Emacs</Caption>
-          <Command term="0"/>
-          <Tooltip>Including the kitchen sink</Tooltip>
-          <Icon id="-1">_pkgdatadir_/icons/Pencils.xpm</Icon>
-        </Item>
-      </Popup>
+      <Popup/>
       <Control id="-2">
-        <Command term="0">xfhelp</Command>
-        <Tooltip>Xfce Handleiding</Tooltip>
-        <Icon id="5"/>
-      </Control>
-    </Group>
-    <Group>
-      <Popup>
-        <Item>
-          <Caption>XFbd</Caption>
-          <Command term="0">xfbd -i</Command>
-          <Tooltip>Backdrop settings</Tooltip>
-          <Icon id="8"/>
-        </Item>
-        <Item>
-          <Caption>XFMouse</Caption>
-          <Command term="0">xfmouse -i</Command>
-          <Tooltip>Muis-instellingen</Tooltip>
-          <Icon id="-1">_pkgdatadir_/icons/Mouse.xpm</Icon>
-        </Item>
-      </Popup>
-      <Control id="-2">
-        <Command term="0">xfstyle</Command>
-        <Tooltip>XFce Style Manager</Tooltip>
-        <Icon id="3"/>
+        <Command term="0">gimp</Command>
+        <Tooltip>The Gimp</Tooltip>
+        <Icon id="8"/>
       </Control>
     </Group>
     <Group>
       <Popup/>
-      <Control id="-2">
-        <Command term="0">anjuta</Command>
-        <Tooltip>Anjuta C/C++ IDE</Tooltip>
-	<Icon id="-1">/usr/share/pixmaps/anjuta/applogo.png</Icon>
-      </Control>
+      <Control id="-1" filename="libtrash.so"/>
     </Group>
     <Group>
       <Popup/>
@@ -166,11 +72,30 @@
       </Control>
     </Group>
     <Group>
-      <Popup/>
+      <Popup>
+        <Item>
+          <Caption>XFMouse</Caption>
+          <Command term="0">xfmouse4 -i</Command>
+          <Tooltip>Change mouse settings</Tooltip>
+          <Icon id="3"/>
+        </Item>
+        <Item>
+          <Caption>XFbd</Caption>
+          <Command term="0">xfbd4 -i</Command>
+          <Tooltip>Change background</Tooltip>
+          <Icon id="3"/>
+        </Item>
+      </Popup>
       <Control id="-2">
-        <Command term="0"/>
-        <Tooltip>Click Mouse 3 to change item</Tooltip>
-        <Icon id="0"/>
+        <Command term="0">xfhelp</Command>
+        <Tooltip>Manual</Tooltip>
+        <Icon id="5"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libclock.so">
+        <XfceClock Clock_type="0" Toggle_military="0" Toggle_am_pm="1" Toggle_secs="0"/>
       </Control>
     </Group>
   </Right>

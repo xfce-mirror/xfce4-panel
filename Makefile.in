@@ -132,10 +132,11 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
 pkginfodir = $(pkgdatadir)
+confdir = $(sysconfdir)/xfce4
 
 pkginfo_DATA = AUTHORS COPYING ChangeLog
 
-noinst_DATA = example.xfce4rc
+conf_DATA = xfce4rc
 
 EXTRA_DIST = example.xfce4rc.in xfce4.spec xfce4.spec.in autogen.sh
 
@@ -146,7 +147,7 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
 CONFIG_CLEAN_FILES = xfce4.spec
 DIST_SOURCES =
-DATA = $(noinst_DATA) $(pkginfo_DATA)
+DATA = $(conf_DATA) $(pkginfo_DATA)
 
 
 RECURSIVE_TARGETS = info-recursive dvi-recursive pdf-recursive \
@@ -208,6 +209,24 @@ clean-libtool:
 distclean-libtool:
 	-rm -f libtool
 uninstall-info-am:
+confDATA_INSTALL = $(INSTALL_DATA)
+install-confDATA: $(conf_DATA)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(confdir)
+	@list='$(conf_DATA)'; for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " $(confDATA_INSTALL) $$d$$p $(DESTDIR)$(confdir)/$$f"; \
+	  $(confDATA_INSTALL) $$d$$p $(DESTDIR)$(confdir)/$$f; \
+	done
+
+uninstall-confDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(conf_DATA)'; for p in $$list; do \
+	  f="`echo $$p | sed -e 's|^.*/||'`"; \
+	  echo " rm -f $(DESTDIR)$(confdir)/$$f"; \
+	  rm -f $(DESTDIR)$(confdir)/$$f; \
+	done
 pkginfoDATA_INSTALL = $(INSTALL_DATA)
 install-pkginfoDATA: $(pkginfo_DATA)
 	@$(NORMAL_INSTALL)
@@ -475,7 +494,7 @@ check: check-recursive
 all-am: Makefile $(DATA) config.h
 installdirs: installdirs-recursive
 installdirs-am:
-	$(mkinstalldirs) $(DESTDIR)$(pkginfodir)
+	$(mkinstalldirs) $(DESTDIR)$(confdir) $(DESTDIR)$(pkginfodir)
 
 install: install-recursive
 install-exec: install-exec-recursive
@@ -518,7 +537,7 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-pkginfoDATA
+install-data-am: install-confDATA install-pkginfoDATA
 
 install-exec-am:
 
@@ -545,7 +564,7 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-info-am uninstall-pkginfoDATA
+uninstall-am: uninstall-confDATA uninstall-info-am uninstall-pkginfoDATA
 
 uninstall-info: uninstall-info-recursive
 
@@ -556,26 +575,27 @@ uninstall-info: uninstall-info-recursive
 	distclean-local distclean-recursive distclean-tags \
 	distcleancheck distdir distuninstallcheck dvi dvi-am \
 	dvi-recursive info info-am info-recursive install install-am \
-	install-data install-data-am install-data-recursive \
-	install-exec install-exec-am install-exec-recursive \
-	install-info install-info-am install-info-recursive install-man \
-	install-pkginfoDATA install-recursive install-strip \
-	installcheck installcheck-am installdirs installdirs-am \
-	installdirs-recursive maintainer-clean maintainer-clean-generic \
+	install-confDATA install-data install-data-am \
+	install-data-recursive install-exec install-exec-am \
+	install-exec-recursive install-info install-info-am \
+	install-info-recursive install-man install-pkginfoDATA \
+	install-recursive install-strip installcheck installcheck-am \
+	installdirs installdirs-am installdirs-recursive \
+	maintainer-clean maintainer-clean-generic \
 	maintainer-clean-recursive mostlyclean mostlyclean-generic \
 	mostlyclean-libtool mostlyclean-recursive pdf pdf-am \
 	pdf-recursive ps ps-am ps-recursive tags tags-recursive \
-	uninstall uninstall-am uninstall-info-am \
+	uninstall uninstall-am uninstall-confDATA uninstall-info-am \
 	uninstall-info-recursive uninstall-pkginfoDATA \
 	uninstall-recursive
 
 @SET_MAKE@
 
 distclean-local:
-	rm -rf example.xfce4rc xfce4.spec *.cache
+	rm -rf xfce4rc xfce4.spec *.cache
 
-example.xfce4rc:
-	@sed -e "s%_pkgdatadir_%$(pkgdatadir)%g" example.xfce4rc.in > example.xfce4rc
+xfce4rc:
+	@sed -e "s%_pkgdatadir_%$(pkgdatadir)%g" example.xfce4rc.in > xfce4rc
 
 rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz

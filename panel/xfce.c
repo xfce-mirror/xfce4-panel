@@ -788,6 +788,7 @@ void xfce_init(void)
 void xfce_run(void)
 {
     gboolean need_init = TRUE;
+    int x, y;
 
     if (need_init)
     {
@@ -800,7 +801,14 @@ void xfce_run(void)
 
     /* panel framework */
     panel_init();
-    
+
+    /* somehow the position gets set differently in the code below
+     * we just save it here and restore it before reading the config
+     * file */
+    x = position.x;
+    y = position.y;
+
+
     side_panel_init(LEFT, GTK_BOX(group_box));
     
     if (settings.show_central)
@@ -812,12 +820,14 @@ void xfce_run(void)
     side_panel_init(RIGHT, GTK_BOX(group_box));
 
     /* give early visual feedback 
-     * the init functions have already created the basic panel */
+     * the init functions have already created the basic panel 
     panel_set_position();
-    gtk_widget_show(toplevel);
+    gtk_widget_show(toplevel);*/
 
     /* read and apply configuration 
      * This function creates the panel items and popup menus */
+    position.x = x;
+    position.y = y;
     get_panel_config();
 
     /* panel may have moved slightly off the screen */
