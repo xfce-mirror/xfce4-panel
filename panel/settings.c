@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -101,7 +104,7 @@ void get_global_prefs(void)
 
     if(!node)
     {
-        g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__,
+        g_printerr("%s: %s (line %d): empty document\n", PACKAGE, __FILE__,
                    __LINE__);
 
         xmlFreeDoc(xmlconfig);
@@ -111,8 +114,8 @@ void get_global_prefs(void)
 
     if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
     {
-        g_printerr(_("xfce: %s (line %d): wrong document type\n"),
-                   __FILE__, __LINE__);
+        g_printerr("%s: %s (line %d): wrong document type\n", PACKAGE, 
+		   __FILE__, __LINE__);
 
         xmlFreeDoc(xmlconfig);
         xmlconfig = make_empty_doc();
@@ -146,7 +149,7 @@ void get_panel_config(void)
 
     if(!node)
     {
-        g_printerr(_("xfce: %s (line %d): empty document\n"), __FILE__,
+        g_printerr("%s: %s (line %d): empty document\n", PACKAGE, __FILE__,
                    __LINE__);
 
         xmlFreeDoc(xmlconfig);
@@ -156,8 +159,8 @@ void get_panel_config(void)
 
     if(!xmlStrEqual(node->name, (const xmlChar *)ROOT))
     {
-        g_printerr(_("xfce: %s (line %d): wrong document type\n"),
-                   __FILE__, __LINE__);
+        g_printerr("%s: %s (line %d): wrong document type\n",
+                   PACKAGE, __FILE__, __LINE__);
 
         xmlFreeDoc(xmlconfig);
         xmlconfig = make_empty_doc();

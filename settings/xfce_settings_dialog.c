@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <stdio.h>
 #include <string.h>
 
@@ -26,9 +29,6 @@
 #include "xfce_settings.h"
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
-
-#define _(String) String
-#define N_(String) String
 
 #define strequals(s1,s2) !strcmp(s1, s2)
 
@@ -527,7 +527,7 @@ static void add_style_box(GtkBox * box, GtkSizeGroup *sg)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Panel Orientation:"));
+    label = gtk_label_new(_("Panel orientation:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -762,7 +762,7 @@ void run_xfce_settings_dialog(McsPlugin *mp)
 
     xfce_create_backup();
 
-    dialog = gtk_dialog_new_with_buttons(_("XFce Panel Preferences"),
+    dialog = gtk_dialog_new_with_buttons(_("XFce Panel Settings"),
                                     	 NULL, GTK_DIALOG_NO_SEPARATOR, NULL);
 
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);

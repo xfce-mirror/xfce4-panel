@@ -11,6 +11,14 @@ AM_CONFIG_HEADER(config.h)
 # Honor aclocal flags
 ACLOCAL="$ACLOCAL $ACLOCAL_FLAGS"
 
+GETTEXT_PACKAGE=xfce4-panel
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[Name of default
+gettext domain])
+
+ALL_LINGUAS="nl"
+AM_GLIB_GNU_GETTEXT
+
 AC_PROG_CC
 AC_PROG_INSTALL
 
@@ -71,6 +79,7 @@ AC_PROG_LIBTOOL
 AC_OUTPUT([
 xfce4.spec
 Makefile
+po/Makefile.in
 icons/Makefile
 panel/Makefile
 plugins/Makefile

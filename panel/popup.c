@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <libxfcegui4/xfce_togglebutton.h>
 #include <libxfcegui4/xfce_menubutton.h>
 
@@ -190,7 +193,7 @@ void menu_item_apply_config(MenuItem * mi)
 
 void create_addtomenu_item(MenuItem * mi)
 {
-    mi->button = xfce_menubutton_new_with_stock_icon(_("Add icon..."), GTK_STOCK_ADD);
+    mi->button = xfce_menubutton_new_with_stock_icon(_("Add launcher"), GTK_STOCK_ADD);
     gtk_widget_show(mi->button);
     gtk_button_set_relief(GTK_BUTTON(mi->button), GTK_RELIEF_NONE);
 
@@ -232,7 +235,7 @@ void create_menu_item(MenuItem * mi)
     else if(mi->command && strlen(mi->command))
         add_tooltip(mi->button, mi->command);
     else
-        add_tooltip(mi->button, _("Click Mouse 3 to change item"));
+        add_tooltip(mi->button, _("Click mouse button 3 to change item"));
 
     /* signals */
     g_signal_connect(mi->button, "button-press-event",

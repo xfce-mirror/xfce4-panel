@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <stdio.h>
 #include <string.h>
 
@@ -32,12 +35,6 @@
 #define XFCE_AUTHORS "ChangeLog"
 #endif
 
-#ifndef VERSION
-#define VERSION "unknown"
-#endif
-
-#define XFCE_VERSION N_("XFce 4: build " VERSION)
-
 static void fill_buffer(const char *filename, char **buf, int *nb)
 {
     GError *err = NULL;
@@ -49,7 +46,7 @@ static void fill_buffer(const char *filename, char **buf, int *nb)
 
     if(err)
     {
-        g_printerr("\nxfce4: %s (line: %d): %s\n\n", __FILE__, __LINE__,
+        g_printerr("%s: %s (line: %d): %s\n\n", PACKAGE, __FILE__, __LINE__,
                    err->message);
     }
 }
@@ -118,6 +115,7 @@ static GtkWidget *create_info_header(void)
     GtkWidget *logo_im;
     GtkWidget *frame;
     GtkWidget *label;
+    char text[100];
 
     vbox1 = gtk_vbox_new(FALSE, 4);
     gtk_widget_show(vbox1);
@@ -138,12 +136,13 @@ static GtkWidget *create_info_header(void)
     gtk_widget_show(vbox2);
     gtk_container_add(GTK_CONTAINER(frame), vbox2);
 
-    label = create_bold_label(_(XFCE_VERSION));
+    sprintf(text, _("XFce 4"));
+    label = create_bold_label(text);
     gtk_widget_show(label);
     gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
     gtk_box_pack_start(GTK_BOX(vbox2), label, FALSE, FALSE, 0);
 
-    label = create_bold_label(_("By Olivier Fourdan (c) 1997-2002"));
+    label = create_bold_label(_("By Olivier Fourdan (c) 1997-2003"));
     gtk_widget_show(label);
     gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_LEFT);
     gtk_box_pack_start(GTK_BOX(vbox2), label, FALSE, FALSE, 0);
@@ -269,7 +268,7 @@ void info_panel_dialog(void)
 
     info = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(info), GTK_WIN_POS_CENTER);
-    gtk_window_set_title(GTK_WINDOW(info), _("Info ..."));
+    gtk_window_set_title(GTK_WINDOW(info), _("Info"));
 
     /* Make the info dialog sticky */
     gtk_window_stick(GTK_WINDOW(info));

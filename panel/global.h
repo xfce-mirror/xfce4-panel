@@ -27,10 +27,6 @@
 /* Debug purpose */
 #include "debug.h"
 
-/* gettext */
-#define _(x) x
-#define N_(x) x
-
 /* why is this not in the standard C library ? */
 #define strequal(s1,s2) !strcmp (s1, s2)
 #define strnequal(s1,s2,n) !strncmp (s1, s2, n)

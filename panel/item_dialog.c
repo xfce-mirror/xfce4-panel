@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include "xfce.h"
 #include "popup.h"
 #include "item.h"
@@ -234,7 +237,7 @@ static GtkWidget *create_icon_option_menu(void)
     GtkWidget *mi;
     int i;
 
-    mi = gtk_menu_item_new_with_label(_("External Icon"));
+    mi = gtk_menu_item_new_with_label(_("Other Icon"));
     gtk_widget_show(mi);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
 
@@ -909,12 +912,12 @@ GtkWidget *create_menu_item_dialog(MenuItem * mi)
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), remove_button,
                                  RESPONSE_REMOVE);
 
-    revert_button = mixed_button_new(GTK_STOCK_UNDO, _("Revert"));
+    revert_button = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
     gtk_widget_show(revert_button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), revert_button,
                                  RESPONSE_REVERT);
 
-    done_button = mixed_button_new(GTK_STOCK_OK, _("Done"));
+    done_button = mixed_button_new(GTK_STOCK_OK, _("_Done"));
     gtk_widget_show(done_button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), done_button, RESPONSE_DONE);
 

@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <sys/stat.h>
 #include <gtk/gtk.h>
 
@@ -564,7 +567,7 @@ void mailcheck_add_options(Control * control, GtkContainer * container,
     /* run in terminal ? */
     hbox = gtk_hbox_new(FALSE, 4);
 
-    label = gtk_label_new(_(""));
+    label = gtk_label_new("");
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 

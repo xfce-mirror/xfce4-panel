@@ -39,6 +39,9 @@
  *  ------------------
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include "xfce.h"
 #include "item.h"
 #include "popup.h"
@@ -290,10 +293,10 @@ static void add_control(void)
 }
 
 static GtkItemFactoryEntry control_items[] = {
-  { N_("/Edit ..."),     NULL, edit_control,   0, "<Item>" },
-  { N_("/Remove"),       NULL, remove_control, 0, "<Item>" },
+  { N_("/_Edit ..."),     NULL, edit_control,   0, "<Item>" },
+  { N_("/_Remove"),       NULL, remove_control, 0, "<Item>" },
   { "/sep",              NULL, NULL,           0, "<Separator>" },
-  { N_("/Add new item"), NULL, add_control,    0, "<Item>" }
+  { N_("/Add _new item"), NULL, add_control,    0, "<Item>" }
 };
 
 static GtkWidget *get_control_menu(void)
@@ -303,12 +306,15 @@ static GtkWidget *get_control_menu(void)
 
     if (!menu)
     {
-       factory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
+        factory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
        
-       gtk_item_factory_create_items(factory, G_N_ELEMENTS(control_items),
-				     control_items, NULL);
+	gtk_item_factory_set_translate_func(factory, 
+					    (GtkTranslateFunc) gettext,
+					    NULL, NULL);
+        gtk_item_factory_create_items(factory, G_N_ELEMENTS(control_items),
+				      control_items, NULL);
 
-       menu = gtk_item_factory_get_widget(factory, "<popup>");
+        menu = gtk_item_factory_get_widget(factory, "<popup>");
     }
 
     return menu;

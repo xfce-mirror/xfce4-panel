@@ -19,6 +19,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -653,7 +656,7 @@ gboolean create_clock_control(Control * control)
 G_MODULE_EXPORT void xfce_control_class_init(ControlClass *cc)
 {
     cc->name = "clock";
-    cc->caption = _("Xfce clock");
+    cc->caption = _("Xfce Clock");
     
     cc->create_control = (CreateControlFunc) create_clock_control;
 

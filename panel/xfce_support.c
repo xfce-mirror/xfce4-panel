@@ -23,6 +23,9 @@
  * all modules (and external plugins).
  */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stddef.h>

@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <libxfcegui4/xfce_iconbutton.h>
 
 #include "xfce.h"
@@ -70,7 +73,7 @@ static PanelItem *panel_item_new(void)
     gtk_widget_show(pi->button);
     gtk_button_set_relief(GTK_BUTTON(pi->button), GTK_RELIEF_NONE);
 
-    add_tooltip(pi->button, _("Click Mouse 3 to change item"));
+    add_tooltip(pi->button, _("Click mouse button 3 to change item"));
 
     g_signal_connect(pi->button, "clicked", G_CALLBACK(panel_item_click_cb), pi);
 

@@ -22,6 +22,9 @@
  *  both sides of the switcher plugin: 
  *  lock, exit, setup and info.
 */
+#include <config.h>
+#include <my_gettext.h>
+
 #include <libxfcegui4/xfce_iconbutton.h>
 
 #include "xfce.h"
@@ -129,7 +132,7 @@ static void button_set_tip(GtkWidget *button, int type)
     {
 	tips[0] = _("Lock the screen");
 	tips[1] = _("Exit");
-	tips[2] = _("Setup ...");
+	tips[2] = _("Setup");
 	tips[3] = _("Info");
     }
 

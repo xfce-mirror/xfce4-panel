@@ -23,9 +23,8 @@
  *  and session management.
 */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <config.h>
+#include <my_gettext.h>
 
 #include <signal.h>
 #include <stddef.h>
@@ -80,7 +79,7 @@ void quit(gboolean force)
 	    logout_session(client_session);
 	    return;
 	}
-	else if (!confirm(_("Are you sure you want to Exit ?"), GTK_STOCK_QUIT, NULL))
+	else if (!confirm(_("Are you sure you want to exit?"), GTK_STOCK_QUIT, NULL))
 	{
 	    return;
 	}
@@ -148,13 +147,22 @@ int main(int argc, char **argv)
     int i;
     gboolean net_wm_support = FALSE;
     
+#ifdef ENABLE_NLS
+    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
+#endif
+
+    gtk_set_locale ();
     gtk_init(&argc, &argv);
 
-    if(argc == 2 && (strequal(argv[1], "-v") || strequal(argv[1], "--version")))
+    if(argc == 2 && 
+	(strequal(argv[1], "-v") || strequal(argv[1], "--version") || 
+	 strequal(argv[1], "-h") || strequal(argv[1], "--help")))
     {
-        g_print(_("xfce4, version %s\n\n"
+        g_print(_("%s, version %s\n"
                   "Part of the XFce Desktop Environment\n"
-                  "http://www.xfce.org\n"), VERSION);
+                  "http://www.xfce.org\n"), PACKAGE, VERSION);
 	return 0;
     }
 

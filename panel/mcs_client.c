@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stddef.h>
@@ -197,18 +200,15 @@ void mcs_watch_xfce_channel(void)
 	init_settings_hash();
     
     if (!mcs_client_check_manager(dpy, screen, "xfce-mcs-manager"))
-	g_critical(_("MCS settings manager not running!"));
+	g_critical("%s: MCS settings manager not running!", PACKAGE);
     
     client = mcs_client_new(dpy, screen, notify_cb, watch_cb, NULL);
        
     if(!client)
     {
-        g_critical(_("xfce4: could not connect to settings manager!" 
-		     "Please check your installation."));
+        g_warning("%s: could not connect to settings manager", PACKAGE);
 
-	show_error(_("The XFce panel could not connect to the settings \n"
-		       "manager.\n"
-		       "Please make sure it is installed on your system."));
+	show_warning(_("Settings manager not available"));
 
 	return;
     }

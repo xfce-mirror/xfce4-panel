@@ -29,6 +29,9 @@
  *  Important data are kept as global variables for easy access.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include "xfce.h"
 #include "controls_dialog.h"
 #include "groups.h"
@@ -246,11 +249,11 @@ void controls_dialog(Control * control)
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_REMOVE);
 
-    revert = button = mixed_button_new(GTK_STOCK_UNDO, _("Revert"));
+    revert = button = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_REVERT);
 
-    done = button = mixed_button_new(GTK_STOCK_OK, _("Done"));
+    done = button = mixed_button_new(GTK_STOCK_OK, _("_Done"));
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dlg), button, RESPONSE_DONE);
     GTK_WIDGET_SET_FLAGS(button, GTK_CAN_DEFAULT);
@@ -324,12 +327,16 @@ void controls_dialog(Control * control)
 
 	if (response == RESPONSE_REMOVE)
 	{
+	    gtk_widget_hide(dlg);
+	    
 	    if (confirm(_("Removing an item will also remove its popup menu.\n\n"
 			  "Do you want to remove the item?"), 
 			GTK_STOCK_REMOVE, NULL))
 	    {
 		break;
 	    }
+	    
+	    gtk_widget_show(dlg);
 	}
 	else if (response != RESPONSE_REVERT)
 	{

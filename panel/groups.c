@@ -27,6 +27,9 @@
  *  button. 
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include "xfce.h"
 #include "groups.h"
 #include "popup.h"

@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <stdio.h>
 #include <string.h>
 
@@ -33,18 +36,9 @@
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
 
-#include "../icons/xfce_icon.xpm"
+#include "icons/xfce_icon.xpm"
 
 #define DEFAULT_THEME "Curve"
-#define _(String) String
-
-#ifndef DATADIR
-#define DATADIR "/usr/local/share/xfce4"
-#endif
-
-#ifndef SYSCONFDIR
-#define SYSCONFDIR "/usr/local/etc"
-#endif
 
 #define strequal(s1,s2) !strcmp(s1, s2)
 
@@ -57,13 +51,19 @@ static void xfce_create_channel(McsManager *sm);
 
 McsPluginInitResult mcs_plugin_init(McsPlugin *mp)
 {
+#ifdef ENABLE_NLS
+    bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+    textdomain (GETTEXT_PACKAGE);
+#endif
+
     mcs_manager = mp->manager;
 
     xfce_create_channel(mp->manager);
     xfce_set_options(mp->manager);
     
     mp->plugin_name = g_strdup(CHANNEL);
-    mp->caption = g_strdup(_("XFce panel"));
+    mp->caption = g_strdup(_("XFce Panel"));
     mp->run_dialog = run_xfce_settings_dialog;
     mp->icon = gdk_pixbuf_new_from_xpm_data((const char **)xfce_icon_xpm);
 

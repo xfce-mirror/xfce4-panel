@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -193,12 +196,14 @@ static gboolean check_trash(t_trash *trash)
         g_free(cwd);
 
         if(size < 1024)
-            sprintf(text, _("Trashcan: %d files / %d B"), number, size);
+            sprintf(text, _("Trashcan: %d files / %d %s"), 
+		    number, size, "B");
         else if(size < 1024 * 1024)
-            sprintf(text, _("Trashcan: %d files / %d KB"), number, size / 1024);
+            sprintf(text, _("Trashcan: %d files / %d %s"), 
+		    number, size / 1024, "KB");
         else
-            sprintf(text, _("Trashcan: %d files / %d MB"), number,
-                    size / (1024 * 1024));
+            sprintf(text, _("Trashcan: %d files / %d %s"), 
+		    number, size / (1024 * 1024), "MB");
 
         add_tooltip(trash->button, text);
     }

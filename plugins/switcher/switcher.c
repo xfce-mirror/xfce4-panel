@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
@@ -613,8 +616,8 @@ static void create_minibuttons(t_switcher *sw)
     
     /* fixed tooltips, since the user can't change the icon anyway */
     add_tooltip(sw->minibuttons[0], _("Lock the screen"));
-    add_tooltip(sw->minibuttons[1], _("Info..."));
-    add_tooltip(sw->minibuttons[2], _("Setup..."));
+    add_tooltip(sw->minibuttons[1], _("Info"));
+    add_tooltip(sw->minibuttons[2], _("Setup"));
     add_tooltip(sw->minibuttons[3], _("Exit"));
 
     /* signals */
@@ -1225,23 +1228,6 @@ static void switcher_add_options(Control *control, GtkContainer *container,
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new(_("Workspace options:"));
-    gtk_widget_show(label);
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_size_group_add_widget(sg,label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    button = gtk_button_new_from_stock(GTK_STOCK_PROPERTIES);
-    gtk_widget_show(button);
-    gtk_box_pack_start(GTK_BOX(hbox), button, FALSE, FALSE, 0);
-    
-    g_signal_connect(button, "clicked", G_CALLBACK(workspace_dialog), sd);
-
-    /* show minibuttons ? */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
-
     label = gtk_label_new(_("Show minibuttons"));
     gtk_widget_show(label);
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
@@ -1257,26 +1243,6 @@ static void switcher_add_options(Control *control, GtkContainer *container,
     g_signal_connect(sd->mini_checkbutton, "toggled", 
 	    	     G_CALLBACK(show_minibuttons_changed), sd);
 
-    /* show desktop names ? 
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
-
-    label = gtk_label_new(_("Use desktop names:"));
-    gtk_widget_show(label);
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_size_group_add_widget(sg,label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    sd->names_checkbutton = gtk_check_button_new();
-    gtk_widget_show(sd->names_checkbutton);
-    gtk_box_pack_start(GTK_BOX(hbox), sd->names_checkbutton, FALSE, FALSE, 0);
-    
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(sd->names_checkbutton), 
-	    			 sd->sw->show_names);
-    g_signal_connect(sd->names_checkbutton, "toggled", 
-	    	     G_CALLBACK(show_names_changed), sd);
-*/
     /* show graphical pager ?*/ 
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);

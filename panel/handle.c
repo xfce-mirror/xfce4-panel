@@ -17,6 +17,9 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+#include <config.h>
+#include <my_gettext.h>
+
 #include <libxfcegui4/xfce_movehandler.h>
 #include <libxfcegui4/xfce_decorbutton.h>
 
@@ -78,12 +81,12 @@ static GtkItemFactoryEntry panel_items[] = {
   { "/sep",              NULL, NULL,        0, "<Separator>" },
   { N_("/Add _new item"), NULL, add_new,    0, "<Item>" },
   { "/sep",              NULL, NULL,        0, "<Separator>" },
-  { N_("/_Preferences"), NULL, edit_prefs,  0, "<Item>" },
+  { N_("/_Panel settings"), NULL, edit_prefs,  0, "<Item>" },
   { N_("/_Settings manager"), NULL, settings_mgr,  0, "<Item>" },
   { "/sep",              NULL, NULL,        0, "<Separator>" },
   { N_("/_About XFce"),  NULL, do_info,     0, "<Item>" },
   { N_("/_Help"),        NULL, do_help,     0, "<Item>" },
-  { N_("/sep"),          NULL, NULL,        0, "<Separator>" },
+  { "/sep",          NULL, NULL,        0, "<Separator>" },
   { N_("/_Lock screen"), NULL, lock_screen, 0, "<Item>" },
   { N_("/E_xit"),        NULL, exit_panel,  0, "<Item>" },
 };
@@ -97,9 +100,11 @@ static GtkMenu *create_handle_menu(void)
     {
 	ifactory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
 
+	gtk_item_factory_set_translate_func(ifactory, 
+					    (GtkTranslateFunc) gettext,
+					    NULL, NULL);
 	gtk_item_factory_create_items(ifactory, G_N_ELEMENTS(panel_items), 
 				      panel_items, NULL);
-
 	menu = GTK_MENU(gtk_item_factory_get_widget(ifactory, "<popup>"));
     }
 
@@ -120,55 +125,6 @@ struct _Handle
 
 static void handle_arrange(Handle * mh)
 {
-#if 0
-    gboolean vertical = settings.orientation == VERTICAL;
-    int position = settings.popup_position;
-
-    if(mh->box)
-    {
-        gtk_container_remove(GTK_CONTAINER(mh->box), mh->button);
-        gtk_container_remove(GTK_CONTAINER(mh->box), mh->handler);
-
-        /* removing the box will destroy it */
-        gtk_container_remove(GTK_CONTAINER(mh->base), mh->box);
-    }
-
-    /* create new box */
-    if(vertical)
-        mh->box = gtk_hbox_new(FALSE, 0);
-    else
-        mh->box = gtk_vbox_new(FALSE, 0);
-
-    gtk_widget_show(mh->box);
-    gtk_container_add(GTK_CONTAINER(mh->base), mh->box);
-
-    if(vertical)
-    {
-	if (position == LEFT)
-	{
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->handler, TRUE, TRUE, 0);
-	}
-	else
-	{
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->handler, TRUE, TRUE, 0);
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
-	}
-    }
-    else
-    {
-	if (position == BOTTOM)
-	{
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->handler, TRUE, TRUE, 0);
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
-	}
-	else
-	{
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->button, FALSE, FALSE, 0);
-	    gtk_box_pack_start(GTK_BOX(mh->box), mh->handler, TRUE, TRUE, 0);
-	}
-    }
-#endif
 }
 
 static gboolean handler_pressed_cb(GtkWidget *h, GdkEventButton *event, 
@@ -200,42 +156,6 @@ Handle *handle_new(int side)
 /*    GtkWidget *im;*/
     Handle *mh = g_new(Handle, 1);
     GtkMenu *menu;
-
-#if 0
-    mh->base = gtk_alignment_new(0, 0, 1, 1);
-    gtk_widget_show(mh->base);
-
-    /* protect against destruction when unpacking */
-    g_object_ref(mh->base);
-
-    mh->button = gtk_button_new();
-    if(settings.style == NEW_STYLE)
-        gtk_button_set_relief(GTK_BUTTON(mh->button), GTK_RELIEF_NONE);
-    gtk_widget_show(mh->button);
-
-    if (side == LEFT)
-    {
-	im = xfce_decorbutton_new(XFCE_DECORBUTTON_CLOSE);
-	gtk_widget_show(im);
-	gtk_container_add(GTK_CONTAINER(mh->button), im);
-	
-	add_tooltip(mh->button, _("Quit..."));
-	
-	g_signal_connect(mh->button, "clicked", G_CALLBACK(close_cb), NULL);
-    }
-    else
-    {
-	im = xfce_decorbutton_new(XFCE_DECORBUTTON_HIDE);
-	gtk_widget_show(im);
-	gtk_container_add(GTK_CONTAINER(mh->button), im);
-	
-	add_tooltip(mh->button, _("Iconify panel"));
-	
-	g_signal_connect(mh->button, "clicked", G_CALLBACK(iconify_cb), NULL);
-    }
-
-    gtk_widget_set_name(im, "xfce_popup_button");
-#endif
 
     mh->handler = xfce_movehandler_new(toplevel);
     gtk_widget_show(mh->handler);
