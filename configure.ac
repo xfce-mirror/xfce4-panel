@@ -30,7 +30,7 @@ dnl Check for i18n support
 BM_I18N([xfce4-panel], [de es es_MX fr fi nl ja])
 
 dnl Check for X11 installed
-AM_LIBX11_REQUIRE
+BM_LIBX11_REQUIRE
 
 dnl AC_CHECK_LIB(Xext, main,, AC_MSG_ERROR([The X Window System installed on this machine does not support the shape extension]), $X_CFLAGS $X_PRE_LIBS $X_EXTRA_LIBS $X_LIBS)
 
