@@ -33,6 +33,8 @@
 #include "xfce_settings_plugin.h"
 #include "xfce_settings_dialog.h"
 
+#include "../icons/xfce_icon.xpm"
+
 #define DEFAULT_THEME "Curve"
 #define _(String) String
 
@@ -63,7 +65,7 @@ McsPluginInitResult mcs_plugin_init(McsPlugin *mp)
     mp->plugin_name = g_strdup(CHANNEL);
     mp->caption = g_strdup(_("XFce panel"));
     mp->run_dialog = run_xfce_settings_dialog;
-    mp->icon = gdk_pixbuf_new_from_file(DATADIR "/icons/xfce_icon.xpm", NULL);
+    mp->icon = gdk_pixbuf_new_from_xpm_data((const char **)xfce_icon_xpm);
 
     return MCS_PLUGIN_INIT_OK;
 }
