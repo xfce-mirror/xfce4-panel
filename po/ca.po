@@ -1,19 +1,18 @@
-# xfce4-panel for XFce desktop environment.
+# xfce4 (panel) for XFce desktop environment.
 # Copyright (C) 2003 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the xfce4-panel package.
+# This file is distributed under the same license as the xfce4 package.
 # Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2003-07-03 10:52+0200\n"
-"PO-Revision-Date: 2003-05-11 13:06+0100\n"
+"PO-Revision-Date: 2003-07-05 16:17+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: ca <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: panel/xfce_support.c:648
 msgid "Select file"
@@ -23,11 +22,13 @@ msgstr "Seleccioneu el fitxer"
 msgid "Change item"
 msgstr "Canviar element"
 
-#: panel/controls_dialog.c:275 panel/item_dialog.c:1004
+#: panel/controls_dialog.c:275
+#: panel/item_dialog.c:1004
 msgid "_Revert"
 msgstr "_Reverteix"
 
-#: panel/controls_dialog.c:280 panel/item_dialog.c:1010
+#: panel/controls_dialog.c:280
+#: panel/item_dialog.c:1010
 msgid "_Done"
 msgstr "_Fet"
 
@@ -35,27 +36,29 @@ msgstr "_Fet"
 msgid "Type:"
 msgstr "Tipus:"
 
-#: panel/controls_dialog.c:320 panel/item_dialog.c:609
+#: panel/controls_dialog.c:320
+#: panel/item_dialog.c:609
 msgid "Position:"
 msgstr "Posició:"
 
-#: panel/controls_dialog.c:366 panel/controls.c:272
+#: panel/controls_dialog.c:366
+#: panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
 "Do you want to remove the item?"
 msgstr ""
-"Suprimir un element també suprimèix el seu menú emergent.\n"
+"Suprimir un element també suprimeix el seu menú emergent.\n"
 "\n"
 "Vols suprimir l'element?"
 
 #: panel/item_dialog.c:279
 msgid "Other Icon"
-msgstr "Una altra Icona"
+msgstr "Una altra icona"
 
 #: panel/item_dialog.c:304
 msgid "Select icon"
-msgstr "Selecciona una Icona"
+msgstr "Seleccioneu una icona"
 
 #: panel/item_dialog.c:342
 msgid "Icon:"
@@ -63,17 +66,19 @@ msgstr "Icona:"
 
 #: panel/item_dialog.c:387
 msgid "Select command"
-msgstr "Selecciona un programa"
+msgstr "Seleccioneu ordre"
 
 #: panel/item_dialog.c:414
 msgid "Command:"
-msgstr "Programa:"
+msgstr "Ordre:"
 
-#: panel/item_dialog.c:447 plugins/mailcheck/mailcheck.c:679
+#: panel/item_dialog.c:447
+#: plugins/mailcheck/mailcheck.c:679
 msgid "Run in _terminal"
-msgstr "Executa en un _terminal"
+msgstr "Executar en un _terminal"
 
-#: panel/item_dialog.c:452 plugins/mailcheck/mailcheck.c:687
+#: panel/item_dialog.c:452
+#: plugins/mailcheck/mailcheck.c:687
 msgid "Use startup _notification"
 msgstr "Utilitzeu _notificació d'inicialització"
 
@@ -86,13 +91,12 @@ msgid "Tooltip:"
 msgstr "Rètol indicador:"
 
 #: panel/item_dialog.c:554
-#, fuzzy
 msgid "Menu:"
-msgstr "Menú"
+msgstr "Menú:"
 
 #: panel/item_dialog.c:561
 msgid "Attach menu to launcher"
-msgstr ""
+msgstr "Afegir un menú al llançador"
 
 #: panel/item_dialog.c:704
 msgid "Icon Preview"
@@ -118,11 +122,11 @@ msgstr "Cliqueu el botó 3 del ratolí per canviar l'element"
 
 #: panel/item.c:374
 msgid "Add launcher"
-msgstr "Afegeix llançador"
+msgstr "Afegir llançador"
 
 #: panel/item.c:379
 msgid "Add new item"
-msgstr "Afegeix un nou element"
+msgstr "Afegir un nou element"
 
 #: panel/item.c:509
 msgid "Launcher"
@@ -145,25 +149,25 @@ msgstr ""
 
 #: panel/main.c:275
 msgid ""
-"Your window manager does not seem to support the new window manager hints as "
-"defined on http://www.freedesktop.org. \n"
+"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"El teu gestor de finestres sembla no suportar els consells del nou gestor de "
-"finestras tal com estan definits a http://www..freedesktop.org. \n"
-"Algunes funcionalitats poden no anar tal com es van preveure."
+"El teu gestor de finestres sembla no suportar els consells del nou gestor de finestras tal com estan definits a http://www..freedesktop.org. \n"
+"Algunes funcionalitats poden no funcionar tal com es van preveure."
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320
+#: panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/Afegir _nou element"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322
+#: panel/panel.c:125
 msgid "/_Properties..."
 msgstr "/_Propietats..."
 
 #: panel/controls.c:323
 msgid "/_Remove"
-msgstr "/_Suprimir"
+msgstr "/_Elimina"
 
 #: panel/controls.c:655
 msgid "This item has no configuration options"
@@ -193,7 +197,8 @@ msgstr "/_Bloqueja la pantalla"
 msgid "/E_xit"
 msgstr "/S_urt"
 
-#: panel/panel.c:469 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:469
+#: settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:641
 msgid "XFce Panel"
 msgstr "Plafó XFce"
@@ -224,7 +229,7 @@ msgstr "Navegador d'ajuda"
 
 #: panel/icons.c:79
 msgid "Multimedia"
-msgstr "Multimèdia"
+msgstr "Multimedia"
 
 #: panel/icons.c:80
 msgid "Network"
@@ -244,7 +249,7 @@ msgstr "Productivitat"
 
 #: panel/icons.c:84
 msgid "Sound"
-msgstr "So"
+msgstr "Só"
 
 #: panel/icons.c:85
 msgid "Terminal"
@@ -260,11 +265,11 @@ msgstr "Menú"
 
 #: settings/xfce_settings_dialog.c:119
 msgid "Tiny"
-msgstr "Molt Petit"
+msgstr "Diminut"
 
 #: settings/xfce_settings_dialog.c:123
 msgid "Small"
-msgstr "Petit"
+msgstr "Menut"
 
 #: settings/xfce_settings_dialog.c:127
 msgid "Medium"
@@ -282,20 +287,24 @@ msgstr "Horitzontal"
 msgid "Vertical"
 msgstr "Vertical"
 
-#: settings/xfce_settings_dialog.c:218 settings/xfce_settings_dialog.c:448
+#: settings/xfce_settings_dialog.c:218
+#: settings/xfce_settings_dialog.c:448
 msgid "Left"
 msgstr "Esquerra"
 
-#: settings/xfce_settings_dialog.c:222 settings/xfce_settings_dialog.c:449
+#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:449
 msgid "Right"
 msgstr "Dreta"
 
-#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:447
+#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:447
 #: settings/xfce_settings_dialog.c:503
 msgid "Top"
 msgstr "Superior"
 
-#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:446
 #: settings/xfce_settings_dialog.c:511
 msgid "Bottom"
 msgstr "Inferior"
@@ -330,7 +339,7 @@ msgstr "Centra el plafó:"
 
 #: settings/xfce_settings_dialog.c:551
 msgid "Set"
-msgstr "Fixa"
+msgstr "Estableix"
 
 #: settings/xfce_settings_dialog.c:587
 msgid "Autohide:"
@@ -477,7 +486,7 @@ msgstr "Paginador gràfic"
 
 #: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
-msgstr "Canvia l'escriptori"
+msgstr "Canviador d'escriptori"
 
 #: plugins/systembuttons/systembuttons.c:60
 msgid ""
@@ -531,7 +540,7 @@ msgstr "Butons del sistema"
 
 #: plugins/separator/separator.c:147
 msgid "Separator"
-msgstr ""
+msgstr "separador"
 
 #: plugins/mailcheck/mailcheck.c:539
 msgid "Mail box:"
@@ -543,7 +552,7 @@ msgstr "Programa de correu:"
 
 #: plugins/mailcheck/mailcheck.c:646
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Programa a executar quan es cliqui el butó del plafó"
+msgstr "Programa a executar quan cliqueu el butó del plafó"
 
 #: plugins/mailcheck/mailcheck.c:719
 msgid "Interval (sec):"
@@ -551,4 +560,5 @@ msgstr "Interval (seg):"
 
 #: plugins/mailcheck/mailcheck.c:796
 msgid "Mail check"
-msgstr "Comprova el correu"
+msgstr "Comprovació de correu"
+
