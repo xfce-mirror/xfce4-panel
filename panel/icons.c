@@ -17,9 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include "global.h"
-#include "icons.h"
-#include "xfce_support.h"
+#include "xfce.h"
 
 /* program icons */
 #include "icons/diag_icon.xpm"
@@ -76,15 +74,13 @@ static void set_icon_names()
     icon_names[++i] = _("Terminal");
 }
 
-void create_builtin_pixbufs(void)
+void icons_init(void)
 {
     set_icon_names();
 }
 
 GdkPixbuf *get_pixbuf_by_id(int id)
 {
-    GdkPixbuf *pb;
-
     if(id < UNKNOWN_ICON || id >= NUM_ICONS)
         id = UNKNOWN_ICON;
 
@@ -120,6 +116,8 @@ GdkPixbuf *get_system_pixbuf(int id)
 
     if (!pb)
 	pb = get_pixbuf_by_id(UNKNOWN_ICON);
+
+    return pb;
 }
 
 GdkPixbuf *get_minibutton_pixbuf(int id)
@@ -216,6 +214,17 @@ static GdkPixbuf *_get_themed_pixbuf(const char *name, const char *theme)
 
     g_strfreev(icon_paths);
 
+    /* prevent race condition when we can't find our fallback icon:
+     * default theme, unknown icon */
+    if (!pb && strequal(real_theme, DEFAULT_THEME) && 
+	    strequal(name, xfce_icon_names[UNKNOWN_ICON]))
+    {
+	g_printerr("\n** ERROR **: xfce: unable to find any icons! "
+		   "Please check your installation.\n\n");
+
+	quit(TRUE);
+    }
+    
     return pb;
 }
 

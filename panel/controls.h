@@ -21,6 +21,7 @@
 #define __XFCE_CONTROLS_H__
 
 #include <gmodule.h>
+#include <libxml/tree.h>
 
 #include "global.h"
 

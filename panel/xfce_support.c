@@ -24,8 +24,15 @@
  */
 
 #include <ctype.h>
-#include "global.h"
-#include "xfce_support.h"
+#include <stdio.h>
+#include <stddef.h>
+
+#include <X11/Xlib.h>
+#include <X11/Xatom.h>
+#include <gdk/gdk.h>
+#include <libxfcegui4/libxfcegui4.h>
+
+#include "xfce.h"
 
 /*  Files and directories
  *  ---------------------
@@ -248,6 +255,79 @@ GtkWidget *mixed_button_new(const char *stock, const char *message)
     return button;
 }
 
+/*  X atoms and properties
+*/
+void set_window_type_dock(GtkWidget * window, gboolean set)
+{
+    /* Copied from ROX Filer by Thomas Leonard */
+    /* TODO: Use gdk function when it supports this type */
+    GdkAtom window_type;
+    gboolean mapped;
+
+    if(set)
+	window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_DOCK", FALSE);
+    else
+	window_type = gdk_atom_intern("_NET_WM_WINDOW_TYPE_NORMAL", FALSE);
+
+    if(!GTK_WIDGET_REALIZED(window))
+	gtk_widget_realize(window);
+
+    if((mapped = GTK_WIDGET_MAPPED(window)))
+	gtk_widget_unmap(window);
+
+    gdk_property_change(window->window,
+			gdk_atom_intern("_NET_WM_WINDOW_TYPE", FALSE),
+			gdk_atom_intern("ATOM", FALSE), 32,
+			GDK_PROP_MODE_REPLACE, (guchar *) & window_type, 1);
+
+    if(!set)
+	gdk_property_delete(window->window,
+			    gdk_atom_intern("_WIN_LAYER", FALSE));
+
+    if(mapped)
+	gtk_widget_map(window);
+
+    if(GTK_IS_WINDOW(toplevel))
+    {
+	panel_set_position();
+	gtk_window_present(GTK_WINDOW(toplevel));
+    }
+}
+
+void set_window_layer(GtkWidget *win, int layer)
+{
+    Screen *xscreen;
+    Window xid;
+    static Atom xa_ABOVE = 0;
+    static Atom xa_BELOW = 0;
+
+    if(!GTK_WIDGET_REALIZED(win))
+	gtk_widget_realize(win);
+    
+    xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
+    xid = GDK_WINDOW_XID(win->window);
+    
+    if (!xa_ABOVE)
+    {
+	xa_ABOVE = XInternAtom(GDK_DISPLAY(), "_NET_WM_STATE_ABOVE", False);
+	xa_BELOW = XInternAtom(GDK_DISPLAY(), "_NET_WM_STATE_BELOW", False);
+    }
+    
+    switch (layer)
+    {
+	case ABOVE:
+	    netk_change_state(xscreen, xid, TRUE, xa_ABOVE, None);
+	    netk_change_state(xscreen, xid, FALSE, xa_BELOW, None);
+	    break;
+	case BELOW:
+	    netk_change_state(xscreen, xid, TRUE, xa_BELOW, None);
+	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, None);
+	    break;
+	default:
+	    netk_change_state(xscreen, xid, FALSE, xa_ABOVE, xa_BELOW);
+    }
+}
+
 /*  DND
  *  ---
 */
@@ -439,6 +519,7 @@ gboolean confirm(const char *text, const char *stock, const char *action)
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 
     response = gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_hide(dialog);
     gtk_widget_destroy(dialog);
 
     if(response == GTK_RESPONSE_YES)

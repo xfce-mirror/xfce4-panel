@@ -20,14 +20,10 @@
 #include <libxfcegui4/xfce_togglebutton.h>
 #include <libxfcegui4/xfce_menubutton.h>
 
-#include "popup.h"
-
 #include "xfce.h"
-#include "xfce_support.h"
+#include "popup.h"
 #include "callbacks.h"
-#include "icons.h"
 #include "settings.h"
-#include "wmhints.h"
 
 /*  Menu items  
  *  ----------
@@ -271,8 +267,7 @@ static void set_popup_window_properties(GtkWidget * win)
     gtk_window_set_icon(window, pb);
     g_object_unref(pb);
 
-    if(settings.layer == ABOVE)
-        set_window_type_dock(win, TRUE);
+    set_window_layer(win, settings.layer);
 
     /* don't care about decorations when calculating position */
     gtk_window_set_gravity(window, GDK_GRAVITY_STATIC);
@@ -364,9 +359,11 @@ void panel_popup_pack(PanelPopup * pp, GtkBox * box)
     gtk_box_pack_start(box, pp->button, FALSE, FALSE, 0);
 }
 
-void panel_popup_unpack(PanelPopup * pp, GtkContainer * container)
+void panel_popup_unpack(PanelPopup * pp)
 {
-    gtk_container_remove(container, pp->button);
+    GtkWidget *container = pp->button->parent;
+    
+    gtk_container_remove(GTK_CONTAINER(container), pp->button);
 }
 
 void panel_popup_add_item(PanelPopup * pp, MenuItem * mi)
@@ -402,7 +399,7 @@ void panel_popup_remove_item(PanelPopup * pp, MenuItem * mi)
     {
         MenuItem *item = (MenuItem *) li->data;
 
-        mi->pos = i;
+        item->pos = i;
     }
 }
 
@@ -461,8 +458,7 @@ void panel_popup_free(PanelPopup * pp)
 void panel_popup_set_size(PanelPopup * pp, int size)
 {
     int pos = settings.popup_position;
-    GdkPixbuf *pb;
-    int w, h, s;
+    int w, h;
     GList *li;
 
     w = icon_size[size] + border_width;
@@ -486,7 +482,6 @@ void panel_popup_set_size(PanelPopup * pp, int size)
 
 void panel_popup_set_style(PanelPopup * pp, int style)
 {
-    GList *li;
     if(style == OLD_STYLE)
         xfce_togglebutton_set_relief(XFCE_TOGGLEBUTTON(pp->button), GTK_RELIEF_NORMAL);
     else
@@ -528,9 +523,9 @@ void panel_popup_set_popup_position(PanelPopup * pp, int position)
     panel_popup_set_size(pp, settings.size);
 }
 
-void panel_popup_set_on_top(PanelPopup * pp, gboolean on_top)
+void panel_popup_set_layer(PanelPopup * pp, int layer)
 {
-    set_window_type_dock(pp->window, on_top);
+    set_window_layer(pp->window, layer);
 }
 
 void panel_popup_set_theme(PanelPopup * pp, const char *theme)

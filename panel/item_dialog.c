@@ -17,15 +17,11 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-#include "global.h"
-#include "item_dialog.h"
-#include "xfce_support.h"
-#include "controls.h"
-#include "settings.h"
-#include "item.h"
-#include "side.h"
+#include "xfce.h"
 #include "popup.h"
-#include "icons.h"
+#include "item.h"
+#include "item_dialog.h"
+#include "settings.h"
 
 /*  item_dialog.c
  *  -------------
@@ -514,7 +510,6 @@ static GtkWidget *create_item_options_box(void)
 {
     GtkWidget *vbox;
     GtkWidget *box;
-    GtkWidget *label;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
     vbox = gtk_vbox_new(FALSE, 8);
@@ -897,13 +892,8 @@ GtkWidget *create_menu_item_dialog(MenuItem * mi)
 {
     char *title;
     GtkWidget *dlg;
-    GtkWidget *hbox;
-    GtkWidget *label;
     GtkWidget *main_vbox;
     GtkWidget *frame;
-    GtkWidget *main_hbox;
-    GtkWidget *options_box;
-    GtkWidget *preview_frame;
     GtkWidget *remove_button;
 
     /* create dialog */

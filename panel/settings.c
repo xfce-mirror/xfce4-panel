@@ -24,16 +24,11 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include "global.h"
-#include "settings.h"
-
 #include "xfce.h"
-#include "xfce_support.h"
-#include "central.h"
-#include "side.h"
+#include "settings.h"
+#include "groups.h"
 #include "popup.h"
 #include "item.h"
-#include "controls.h"
 
 #define ROOT	"Xfce"
 #define NS	"http://www.xfce.org/xfce4/panel/1.0"
@@ -174,12 +169,17 @@ void get_panel_config(void)
     /* Now parse the xml tree */
     for(node = node->children; node; node = node->next)
     {
-        if(xmlStrEqual(node->name, (const xmlChar *)"Central"))
-            central_panel_set_from_xml(node);
-        else if(xmlStrEqual(node->name, (const xmlChar *)"Left"))
-            side_panel_set_from_xml(LEFT, node);
-        else if(xmlStrEqual(node->name, (const xmlChar *)"Right"))
-            side_panel_set_from_xml(RIGHT, node);
+	if (xmlStrEqual(node->name, (const xmlChar *)"Groups"))
+	{
+	    groups_set_from_xml(node);
+	    break;
+	}
+
+	/* old format */
+        if (xmlStrEqual(node->name, (const xmlChar *)"Left"))
+            old_groups_set_from_xml(LEFT, node);
+        else if (xmlStrEqual(node->name, (const xmlChar *)"Right"))
+            old_groups_set_from_xml(RIGHT, node);
     }
 
     xmlFreeDoc(xmlconfig);
@@ -218,9 +218,8 @@ void write_panel_config(void)
     xmlDocSetRootElement(xmlconfig, root);
 
     panel_write_xml(root);
-    central_panel_write_xml(root);
-    side_panel_write_xml(LEFT, root);
-    side_panel_write_xml(RIGHT, root);
+    
+    groups_write_xml(root);
 
     xmlSaveFormatFile(rcfile, xmlconfig, 1);
 

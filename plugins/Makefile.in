@@ -133,7 +133,8 @@ target_alias = @target_alias@
 SUBDIRS = \
 mailcheck \
 clock \
-trash
+trash \
+switcher
 
 subdir = plugins
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs

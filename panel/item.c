@@ -19,15 +19,11 @@
 
 #include <libxfcegui4/xfce_iconbutton.h>
 
-#include "item.h"
-
-#include "item_dialog.h"
-#include "controls.h"
 #include "xfce.h"
-#include "xfce_support.h"
-#include "callbacks.h"
+#include "item.h"
+#include "item_dialog.h"
 #include "popup.h"
-#include "icons.h"
+#include "callbacks.h"
 #include "settings.h"
 
 /*  (re)apply the settings to the icon button

@@ -65,7 +65,7 @@ enum
 
 #define UNKNOWN_ICON DEFAULT_ICON
 
-void create_builtin_pixbufs(void);
+void icons_init(void);
 
 GdkPixbuf *get_pixbuf_by_id(int id);
 GdkPixbuf *get_minibutton_pixbuf(int id);

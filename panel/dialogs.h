@@ -22,8 +22,6 @@
 
 #include "global.h"
 
-void screen_button_dialog(ScreenButton * sb);
-
 void set_transient_for_dialog(GtkWidget * window);
 
 void global_settings_dialog(void);

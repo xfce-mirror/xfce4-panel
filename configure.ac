@@ -1,4 +1,4 @@
-AC_INIT(panel/xfce.c)
+AC_INIT(panel/main.c)
 
 VERSION=`date +%y%m%d`
 AC_SUBST(VERSION)
@@ -77,6 +77,7 @@ plugins/Makefile
 plugins/mailcheck/Makefile
 plugins/clock/Makefile
 plugins/trash/Makefile
+plugins/switcher/Makefile
 themes/Makefile
 themes/Crystal/Makefile
 themes/Curve/Makefile

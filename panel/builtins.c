@@ -21,10 +21,10 @@
 
 #include <libxfcegui4/xfce_iconbutton.h>
 
+#include "xfce.h"
 #include "builtins.h"
-#include "controls.h"
-#include "icons.h"
-#include "xfce_support.h"
+#include "popup.h"
+#include "dialogs.h"
 
 /* panel control configuration
    Global widget used in all the module configuration
@@ -37,22 +37,19 @@ static GtkWidget *revert_button;
 */
 static void mini_lock_cb(void)
 {
-    char *cmd = settings.lock_command;
-
-    if(!cmd)
-        return;
-
     hide_current_popup_menu();
 
-    exec_cmd(cmd, FALSE);
+    exec_cmd("xflock", FALSE);
 }
 
+#if 0
 static void mini_info_cb(void)
 {
     hide_current_popup_menu();
 
     info_panel_dialog();
 }
+#endif
 
 static void mini_palet_cb(void)
 {
@@ -80,23 +77,22 @@ static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
 */
 typedef struct
 {
-    gboolean with_lock;
+    int buttons; /* 0, 1 or 2 for both, lock, exit */
 
     GtkWidget *vbox;
-
-    GtkWidget *exit_button;
     GtkWidget *lock_button;
+    GtkWidget *exit_button;
 }
 t_exit;
 
-static gboolean backup_lock;
+static int backup_buttons;
 
 static t_exit *exit_new(void)
 {
     GdkPixbuf *pb;
     t_exit *exit = g_new(t_exit, 1);
 
-    exit->with_lock = TRUE;
+    exit->buttons = 0; /* both buttons */
 
     exit->vbox = gtk_vbox_new(TRUE, 0);
     gtk_widget_show(exit->vbox);
@@ -127,7 +123,7 @@ static t_exit *exit_new(void)
 
 static void exit_free(PanelControl * pc)
 {
-    t_exit *exit = (t_exit *)pc->data;
+    t_exit *exit = pc->data;
 
     g_free(exit);
 }
@@ -135,28 +131,41 @@ static void exit_free(PanelControl * pc)
 static void exit_read_config(PanelControl * pc, xmlNodePtr node)
 {
     xmlChar *value;
-    int n;
     t_exit *exit = (t_exit *)pc->data;
 
-    value = xmlGetProp(node, (const xmlChar *)"lock");
+    value = xmlGetProp(node, (const xmlChar *)"buttons");
 
     if (value)
     {
-	n = atoi(value);
+	exit->buttons = atoi(value);
+	g_free(value);
 
-	if (n == 0)
+	switch (exit->buttons)
 	{
-	    exit->with_lock = FALSE;
-	    gtk_widget_hide(exit->lock_button);
+	    case 1:
+		gtk_widget_hide(exit->exit_button);
+		gtk_widget_show(exit->lock_button);
+		break;
+	    case 2:
+		gtk_widget_hide(exit->lock_button);
+		gtk_widget_show(exit->exit_button);
+		break;
+	    default:
+		gtk_widget_show(exit->lock_button);
+		gtk_widget_show(exit->exit_button);
+		exit->buttons = 0;
 	}
     }
 }
 
 static void exit_write_config(PanelControl * pc, xmlNodePtr node)
 {
-    t_exit *exit = (t_exit *)pc->data;
+    char prop[3];
+    t_exit *exit = pc->data;
 
-    xmlSetProp(node, (const xmlChar *)"lock", exit->with_lock ? "1" : "0");
+    sprintf(prop, "%d", exit->buttons);
+
+    xmlSetProp(node, (const xmlChar *)"buttons", prop);
 }
 
 static void exit_attach_callback(PanelControl *pc, const char *signal,
@@ -164,7 +173,7 @@ static void exit_attach_callback(PanelControl *pc, const char *signal,
 {
     t_exit *exit = (t_exit *)pc->data;
 
-    g_signal_connect(exit->exit_button, signal, callback, data);
+    g_signal_connect(exit->lock_button, signal, callback, data);
     g_signal_connect(exit->exit_button, signal, callback, data);
 }
 
@@ -180,140 +189,90 @@ static void exit_set_theme(PanelControl * pc, const char *theme)
     pb = get_minibutton_pixbuf(MINIPOWER_ICON);
     xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(exit->exit_button), pb);
     g_object_unref(pb);
-
-/*    panel_control_set_size(pc, settings.size);*/
 }
 
 GtkWidget *lock_entry;
 GtkWidget *exit_entry;
 
-static void toggle_lock(GtkWidget *b, t_exit *exit)
+static void buttons_changed(GtkOptionMenu *om, t_exit *exit)
 {
-    if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(b)))
+    int n = gtk_option_menu_get_history(om);
+    
+    if (n == exit->buttons)
+	return;
+    
+    exit->buttons = n;
+    
+    switch (n)
     {
-	gtk_widget_show(exit->lock_button);
-	exit->with_lock = TRUE;
-	gtk_widget_set_sensitive(lock_entry, TRUE);
-    }
-    else
-    {
-	gtk_widget_hide(exit->lock_button);
-	exit->with_lock = FALSE;
-	gtk_widget_set_sensitive(lock_entry, FALSE);
+	case 1:
+	    gtk_widget_hide(exit->exit_button);
+	    gtk_widget_show(exit->lock_button);
+	    break;
+	case 2:
+	    gtk_widget_hide(exit->lock_button);
+	    gtk_widget_show(exit->exit_button);
+	    break;
+	default:
+	    gtk_widget_show(exit->lock_button);
+	    gtk_widget_show(exit->exit_button);
     }
 
     gtk_widget_set_sensitive(revert_button, TRUE);
 }
 
-static void exit_revert_configuration(GtkWidget *b)
+static void exit_revert_configuration(GtkOptionMenu *om)
 {
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(b), backup_lock);
-
-    if(settings.lock_command)
-        gtk_entry_set_text(GTK_ENTRY(lock_entry), settings.lock_command);
-    
-    if(settings.exit_command)
-        gtk_entry_set_text(GTK_ENTRY(exit_entry), settings.exit_command);
-}
-
-static void exit_apply_configuration(PanelControl * pc)
-{
-    const char *tmp;
-    
-    tmp = gtk_entry_get_text(GTK_ENTRY(lock_entry));
-
-    g_free(settings.lock_command);
-
-    if(tmp && *tmp)
-        settings.lock_command = g_strdup(tmp);
-    else
-        settings.lock_command = NULL;
-
-    tmp = gtk_entry_get_text(GTK_ENTRY(exit_entry));
-
-    g_free(settings.exit_command);
-
-    if(tmp && *tmp)
-        settings.exit_command = g_strdup(tmp);
-    else
-        settings.exit_command = NULL;
+    gtk_option_menu_set_history(om, backup_buttons);
 }
 
 void exit_add_options(PanelControl * pc, GtkContainer * container,
                       GtkWidget * revert, GtkWidget * done)
 {
-    GtkWidget *vbox, *hbox, *label, *checkbox;
-    GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-
-    t_exit *exit = (t_exit *)pc->data;
+    GtkWidget *vbox, *hbox, *label, *om, *menu, *mi;
+    t_exit *exit = pc->data;
 
     revert_button = revert;
-
-    backup_lock = exit->with_lock;
+    backup_buttons = exit->buttons;
     
-    vbox = gtk_vbox_new(FALSE, 4);
+    vbox = gtk_vbox_new(FALSE, 0);
     gtk_widget_show(vbox);
-
-    /* lock checkbox */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Show lock button:"));
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    checkbox = gtk_check_button_new();
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkbox), exit->with_lock);
-    gtk_widget_show(checkbox);
-    gtk_box_pack_start(GTK_BOX(hbox), checkbox, FALSE, FALSE, 0);
-
-    /* lock command */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Lock command:"));
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    lock_entry = gtk_entry_new();
-    if(settings.lock_command)
-        gtk_entry_set_text(GTK_ENTRY(lock_entry), settings.lock_command);
-    gtk_widget_show(lock_entry);
-    gtk_box_pack_start(GTK_BOX(hbox), lock_entry, FALSE, FALSE, 0);
-
-    /* exit command */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Exit command"));
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    exit_entry = gtk_entry_new();
-    if(settings.exit_command)
-        gtk_entry_set_text(GTK_ENTRY(exit_entry), settings.exit_command);
-    gtk_widget_show(exit_entry);
-    gtk_box_pack_start(GTK_BOX(hbox), exit_entry, FALSE, FALSE, 0);
-
     gtk_container_add(container, vbox);
+    
+    /* buttons option menu */
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, FALSE, 0);
 
-    /* signals */
-    g_signal_connect(checkbox, "toggled", G_CALLBACK(toggle_lock), exit);
+    label = gtk_label_new(_("Show buttons:"));
+    gtk_widget_show(label);
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    om = gtk_option_menu_new();
+    gtk_widget_show(om);
+    gtk_box_pack_start(GTK_BOX(hbox), om, FALSE, FALSE, 0);
+
+    menu = gtk_menu_new();
     
-    g_signal_connect_swapped(revert, "clicked",
-                             G_CALLBACK(exit_revert_configuration), checkbox);
-    
-    g_signal_connect_swapped(done, "clicked",
-                             G_CALLBACK(exit_apply_configuration), pc);
+    mi = gtk_menu_item_new_with_label(_("Both"));
+    gtk_widget_show(mi);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+
+    mi = gtk_menu_item_new_with_label(_("Lock"));
+    gtk_widget_show(mi);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+
+    mi = gtk_menu_item_new_with_label(_("Exit"));
+    gtk_widget_show(mi);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+
+    gtk_option_menu_set_menu(GTK_OPTION_MENU(om), menu);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(om), exit->buttons);
+
+    g_signal_connect(om, "changed", G_CALLBACK(buttons_changed), exit);
+    g_signal_connect_swapped(revert, "clicked", 
+	    		     G_CALLBACK(exit_revert_configuration), om);
 }
 
 void create_exit(PanelControl * pc)

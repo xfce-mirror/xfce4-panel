@@ -20,9 +20,11 @@
 #include <libxfcegui4/xfce_movehandler.h>
 #include <libxfcegui4/xfce_decorbutton.h>
 
+#include "xfce.h"
 #include "handle.h"
 #include "popup.h" /* to hide popups */
 #include "callbacks.h"
+#include "dialogs.h"
 
 /* popup menu */
 static void edit_prefs(void)

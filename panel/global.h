@@ -20,13 +20,7 @@
 #ifndef __XFCE_GLOBAL_H__
 #define __XFCE_GLOBAL_H__
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
-
 #include <gtk/gtk.h>
-#include <libxfcegui4/libxfcegui4.h>
-#include <libxml/tree.h>
 #include <string.h>
 
 /* Debug purpose */
@@ -83,9 +77,9 @@ enum
 
 /*  Panel sizes
  *  -----------
- *  settings.size is a symbolic size given by an enum. The actual sizes
- *  are put in an array so you can use the symbolic size as index,
- *  e.g. icon_size[SMALL], top_height[LARGE]
+ *  `settings.size' is a symbolic size given by an enum. The actual sizes
+ *  are put in an array so you can use the symbolic size as index, e.g. 
+ *  icon_size[SMALL]. The sizes are defined in `panel.h'.
 */
 enum
 { TINY, SMALL, MEDIUM, LARGE, PANEL_SIZES };
@@ -102,18 +96,15 @@ extern int top_height[PANEL_SIZES];
 
 extern int screen_button_width[PANEL_SIZES];
 
-/* panel controls */
+/* types for panel controls */
 
 enum
 {
-    ICON = -2,
-    PLUGIN = -1,
-    DUMMY_CLOCK, 
-    DUMMY_TRASH,
+    ICON = -2,   /* special case: the traditional laucher item */
+    PLUGIN = -1, /* external plugin */
     EXIT,
     CONFIG,
-    NUM_BUILTINS,
-    CENTRAL	/* still special case so > NUM_BUILTINS */
+    NUM_BUILTINS
 };
 
 /* panel layer */
@@ -125,16 +116,13 @@ enum
 };
 
 /* typedefs */
-typedef struct _ScreenButton ScreenButton;
 typedef struct _PanelControl PanelControl;
-typedef struct _IconButton IconButton;
-typedef struct _PanelItem PanelItem;
 typedef struct _PanelPopup PanelPopup;
+typedef struct _PanelItem PanelItem;
 typedef struct _MenuItem MenuItem;
 
 /* global settings */
 typedef struct _Settings Settings;
-
 typedef struct _Position Position;
 
 struct _Position
@@ -153,22 +141,13 @@ struct _Settings
     int style;
     char *theme;
 
-    int num_screens;
     int num_groups;
-    int central_index;
-    
-    gboolean show_central;
-    gboolean show_desktop_buttons;
-    gboolean show_minibuttons;
-
-    char *lock_command;
-    char *exit_command;
 };
 
 /* defined in settings.c */
 extern gboolean disable_user_config;
 
-/* defined in xfce.c */
+/* defined in panel.c */
 extern GtkWidget *toplevel;
 extern Settings settings;
 extern Position position;

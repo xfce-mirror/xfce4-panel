@@ -45,12 +45,11 @@
  *    and must fill it with the appropriate values and pointers.
 */
 
-#include "controls.h"
+#include "xfce.h"
 #include "item.h"
 #include "builtins.h"
-#include "xfce_support.h"
 #include "callbacks.h"
-#include "side.h"
+#include "groups.h"
 
 /*  Plugins
  *  -------
@@ -149,7 +148,6 @@ static void panel_control_read_config(PanelControl * pc, xmlNodePtr node)
 */
 PanelControl *panel_control_new(int index)
 {
-    int size = icon_size[settings.size] + border_width;
     PanelControl *pc = g_new(PanelControl, 1);
 
     pc->index = index;
@@ -162,7 +160,7 @@ PanelControl *panel_control_new(int index)
      * We use the alignment as the simplest container 
      * (a frame adds a 2 pixel border)
      */
-    pc->base = gtk_alignment_new(0,0,1,1);
+    pc->base = gtk_event_box_new();/*gtk_alignment_new(0,0,1,1);*/
     gtk_widget_show(pc->base);
 
     /* protect against destruction when unpacking */
@@ -253,13 +251,13 @@ void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node)
 
     /* create a default control */
     create_panel_control(pc);
-http://mail.gnome.org/archives/desktop-devel-list/2002-November/msg00176.html
+
     /* allow the control to read its configuration */
     panel_control_read_config(pc, node);
 
     /* also check if added to the panel */
     if (!pc->with_popup && pc->base->parent) 
-	side_panel_show_popup(pc->index, FALSE);
+	groups_show_popup(pc->index, FALSE);
 }
 
 void panel_control_free(PanelControl * pc)

@@ -1,4 +1,5 @@
 SUBDIRS = \
 mailcheck \
 clock \
-trash
+trash \
+switcher

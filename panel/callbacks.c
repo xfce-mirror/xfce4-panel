@@ -23,11 +23,8 @@
 
 #include <libxfcegui4/xfce_togglebutton.h>
 
-#include "callbacks.h"
-#include "xfce_support.h"
 #include "xfce.h"
-#include "wmhints.h"
-#include "central.h"
+#include "callbacks.h"
 #include "item.h"
 #include "item_dialog.h"
 #include "popup.h"
@@ -63,8 +60,6 @@ void close_cb(void)
 gboolean panel_control_press_cb(GtkWidget * b, GdkEventButton * ev,
                                 PanelControl * pc)
 {
-    GtkWidget *item;
-    
     if(ev->button != 3)
         return FALSE;
 
@@ -100,7 +95,7 @@ static void hide_popup(PanelPopup * pp)
 
 static void show_popup(PanelPopup * pp)
 {
-    GtkRequisition req1, req2;
+    GtkRequisition req;
     GdkWindow *p;
     int xbutton, ybutton, xparent, yparent, x, y;
     int w, h;
@@ -143,16 +138,16 @@ static void show_popup(PanelPopup * pp)
     if(!GTK_WIDGET_REALIZED(pp->window))
         gtk_widget_realize(pp->window);
 
-    gtk_widget_size_request(pp->window, &req2);
+    gtk_widget_size_request(pp->window, &req);
 
-    alloc2.width = req2.width;
-    alloc2.height = req2.height;
+    alloc2.width = req.width;
+    alloc2.height = req.height;
     gtk_widget_size_allocate(pp->window, &alloc2);
 
     gtk_widget_realize(pp->window);
     
     /* this is necessary, because the icons are resized on allocation */
-    gtk_widget_size_request(pp->window, &req2);
+    gtk_widget_size_request(pp->window, &req);
 
     /*  positioning logic (well ...)
      *  ----------------------------
@@ -173,21 +168,21 @@ static void show_popup(PanelPopup * pp)
     if (vertical)
     {
 	/* left if buttons left ... */
-	if (pos == LEFT && x - req2.width >= 0)
+	if (pos == LEFT && x - req.width >= 0)
 	{
-	    x = x - req2.width;
-	    y = y + alloc1.height - req2.height;
+	    x = x - req.width;
+	    y = y + alloc1.height - req.height;
 	}
 	/* .. or if menu doesn't fit right, but does fit left */
-	else if (x + req2.width + alloc1.width > w && x - req2.width >= 0)
+	else if (x + req.width + alloc1.width > w && x - req.width >= 0)
 	{
-	    x = x - req2.width;
-	    y = y + alloc1.height - req2.height;
+	    x = x - req.width;
+	    y = y + alloc1.height - req.height;
 	}
 	else /* right */
 	{
 	    x = x + alloc1.width;
-	    y = y + alloc1.height - req2.height;
+	    y = y + alloc1.height - req.height;
 	}
 
 	/* check if it fits upwards */
@@ -197,28 +192,28 @@ static void show_popup(PanelPopup * pp)
     else
     {
 	/* down if buttons on bottom ... */
-	if (pos == BOTTOM && y + alloc1.height + req2.height <= h)
+	if (pos == BOTTOM && y + alloc1.height + req.height <= h)
 	{
-	    x = x + alloc1.width / 2 - req2.width / 2;
+	    x = x + alloc1.width / 2 - req.width / 2;
 	    y = y + alloc1.height;
 	}
 	/* ... or up doesn't fit and down does */
-	else if (y - req2.height < 0 && y + alloc1.height + req2.height <= h)
+	else if (y - req.height < 0 && y + alloc1.height + req.height <= h)
 	{
-	    x = x + alloc1.width / 2 - req2.width / 2;
+	    x = x + alloc1.width / 2 - req.width / 2;
 	    y = y + alloc1.height;
 	}
 	else
 	{
-	    x = x + alloc1.width / 2 - req2.width / 2;
-	    y = y - req2.height;
+	    x = x + alloc1.width / 2 - req.width / 2;
+	    y = y - req.height;
 	}
 
 	/* check if it fits to the left and the right */
 	if (x < 0)
 	    x = 0;
-	else if (x + req2.width > w)
-	    x = w - req2.width;
+	else if (x + req.width > w)
+	    x = w - req.width;
     }
 
     gtk_window_move(GTK_WINDOW(pp->window), x, y);

@@ -1,4 +1,4 @@
-/*  wmhints.h
+/*  xfce4
  *
  *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
@@ -17,19 +17,10 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __XFCE_WMHINTS_H__
-#define __XFCE_WMHINTS_H__
+#ifndef __XFCE_MAIN_H__
+#define __XFCE_MAIN_H__
 
-void check_net_support(void);
+void quit(gboolean force);
+void restart(void);
 
-void watch_root_properties(void);
-
-void set_window_type_dock(GtkWidget * window, gboolean set);
-
-void request_net_current_desktop(int n);
-void request_net_number_of_desktops(int n);
-
-int get_net_current_desktop(void);
-int get_net_number_of_desktops(void);
-
-#endif /* __XFCE_WMHINTS_H__ */
+#endif /* __XFCE_MAIN_H__ */
