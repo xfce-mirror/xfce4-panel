@@ -15,7 +15,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
-*/
+ */
 
 #ifndef __XFCE_GLOBAL_H__
 #define __XFCE_GLOBAL_H__
@@ -106,6 +106,7 @@ struct _Settings
     int num_right;
 
     int num_screens;
+    gboolean show_desktop_buttons;
     int current;
 
     char *lock_command;

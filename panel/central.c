@@ -172,7 +172,9 @@ static void add_desktop_table(GtkBox * hbox)
     int i;
 
     table = gtk_table_new(2, NBSCREENS, FALSE);
-    gtk_widget_show(table);
+
+    if (settings.show_desktop_buttons)
+	gtk_widget_show(table);
 
     desktop_table = table;
 
@@ -419,8 +421,18 @@ void central_panel_set_num_screens(int n)
 
     if(n == 1)
         gtk_widget_hide(desktop_table);
-    else
+    else if (settings.show_desktop_buttons)
         gtk_widget_show(desktop_table);
+}
+
+void central_panel_set_show_desktop_buttons(gboolean show)
+{
+    if (show)
+	gtk_widget_show(desktop_table);
+    else if (settings.num_screens > 1)
+	gtk_widget_hide(desktop_table);
+
+    settings.show_desktop_buttons = show;
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/

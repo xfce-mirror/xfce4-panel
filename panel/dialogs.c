@@ -38,11 +38,8 @@ enum
 { RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Central panel dialogs
-
+  Central panel dialogs
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 void screen_button_dialog(ScreenButton * sb)
 {
     GtkWidget *dialog;
@@ -110,6 +107,7 @@ void set_transient_for_dialog(GtkWidget * window)
  * left : spinbutton
  * right: spinbutton
  * screens: spinbutton
+ * desktop buttons: checkbox
  * position: button (restore default)
  * lock command : entry + browse button
  * exit command : entry + browse button
@@ -121,6 +119,7 @@ static GtkWidget *style_menu;
 static GtkWidget *theme_menu;
 static GtkWidget *left_spin;
 static GtkWidget *right_spin;
+static GtkWidget *buttons_checkbox;
 static GtkWidget *screens_spin;
 static GtkWidget *pos_button;
 static GtkWidget *lock_entry;
@@ -150,6 +149,7 @@ static void create_backup(void)
     backup.num_left = settings.num_left;
     backup.num_right = settings.num_right;
     backup.num_screens = settings.num_screens;
+    backup.show_desktop_buttons = settings.show_desktop_buttons;
     backup.lock_command = g_strdup(settings.lock_command);
     backup.exit_command = g_strdup(settings.exit_command);
 }
@@ -166,6 +166,8 @@ static void restore_backup(void)
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), backup.num_left);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), backup.num_right);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), backup.num_screens);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox), 
+				 backup.show_desktop_buttons);
 
     if(backup.lock_command)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
@@ -567,6 +569,16 @@ static void spin_changed(GtkWidget * spin)
         gtk_widget_set_sensitive(revert, TRUE);
 }
 
+
+static void desktop_buttons_changed(GtkToggleButton *button, gpointer data)
+{
+    gboolean show = gtk_toggle_button_get_active(button);
+
+    central_panel_set_show_desktop_buttons(show);
+
+    gtk_widget_set_sensitive(screens_spin, show);
+}
+
 static void add_controls_box(GtkBox * box)
 {
     GtkWidget *frame, *vbox, *hbox, *label;
@@ -619,11 +631,32 @@ static void add_controls_box(GtkBox * box)
     g_signal_connect(right_spin, "value-changed", G_CALLBACK(spin_changed), NULL);
 
     /* screens */
+    add_spacer(GTK_BOX(vbox));
+
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Virtual desktops:"));
+    label = gtk_label_new(_("Show desktop buttons:")); 
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    buttons_checkbox = gtk_check_button_new();
+    gtk_widget_show(buttons_checkbox);
+    gtk_box_pack_start(GTK_BOX(hbox), buttons_checkbox, FALSE, FALSE, 0);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox), 
+				 settings.show_desktop_buttons);
+    g_signal_connect(buttons_checkbox, "toggled", G_CALLBACK(desktop_buttons_changed),
+		     NULL);
+
+    hbox = gtk_hbox_new(FALSE, 4);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Virtual desktops:")); 
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
@@ -635,6 +668,8 @@ static void add_controls_box(GtkBox * box)
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), settings.num_screens);
     g_signal_connect(screens_spin, "value-changed", G_CALLBACK(spin_changed), NULL);
+
+    gtk_widget_set_sensitive(screens_spin, settings.show_desktop_buttons);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/

@@ -312,6 +312,7 @@ void init_settings(void)
     settings.num_right = 5;
     settings.num_screens = 4;
     settings.current = 0;
+    settings.show_desktop_buttons = TRUE;
     settings.lock_command = NULL;
     settings.exit_command = NULL;
 }
@@ -339,6 +340,8 @@ void panel_set_settings(void)
         settings.num_screens = n;
 
     central_panel_set_num_screens(settings.num_screens);
+
+    central_panel_set_show_desktop_buttons(settings.show_desktop_buttons);
 
     if(n < settings.num_screens)
         request_net_number_of_desktops(settings.num_screens);
@@ -454,6 +457,7 @@ void panel_parse_xml(xmlNodePtr node)
 {
     xmlChar *value;
     xmlNodePtr child;
+    int n;
 
     /* properties */
     value = xmlGetProp(node, (const xmlChar *)"size");
@@ -503,6 +507,20 @@ void panel_parse_xml(xmlNodePtr node)
 
     if(value)
         settings.num_screens = atoi(value);
+
+    g_free(value);
+
+    value = xmlGetProp(node, (const xmlChar *)"desktopbuttons");
+
+    if(value)
+    {
+	n = atoi(value);
+
+	if (n == 1)
+	    settings.show_desktop_buttons = TRUE;
+	else
+	    settings.show_desktop_buttons = FALSE;
+    }
 
     g_free(value);
 
@@ -584,6 +602,9 @@ void panel_write_xml(xmlNodePtr root)
 
     snprintf(value, 2, "%d", settings.num_screens);
     xmlSetProp(node, "screens", value);
+
+    snprintf(value, 2, "%d", settings.show_desktop_buttons);
+    xmlSetProp(node, "desktopbuttons", value);
 
     child = xmlNewTextChild(node, NULL, "Position", NULL);
 

@@ -48,6 +48,8 @@ void central_panel_set_current(int n);
 
 void central_panel_set_num_screens(int n);
 
+void central_panel_set_show_desktop_buttons(gboolean show);
+
 /* screen buttons */
 ScreenButton *screen_button_new(int index);
 void add_screen_button(ScreenButton * sb, GtkWidget * table);
