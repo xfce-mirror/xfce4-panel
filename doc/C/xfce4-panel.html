@@ -1,16 +1,10 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Xfce 4 Panel</title><link rel="stylesheet" href="../xfce.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.62.4"><link rel="home" href="#xfce4-panel" title="Xfce 4 Panel"><link rel="next" href="#panel-intro" title="Introduction"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="xfce4-panel"></a>Xfce 4 Panel</h1></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Jasper</span> <span class="surname">Huijsmans</span></h3><div class="affiliation"><div class="address"><p><tt class="email">&lt;<a href="mailto:huysmans@users.sourceforge.net">huysmans@users.sourceforge.net</a>&gt;</tt></p></div></div></div></div></div><div><span xmlns="http://www.w3.org/TR/xhtml1/transitional" class="releaseinfo">This manual describes <b xmlns="" class="application"><tt>xfce4-panel</tt></b> version 4.0. 
-    Last updated: Sep 2003
-  <br></br></span></div><div><p class="copyright">Copyright © 2003 Jasper Huijsmans</p></div></div><div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#panel-intro">Introduction</a></span></dt><dt><span class="sect1"><a href="#panel-getting-started">Getting Started</a></span></dt><dt><span class="sect1"><a href="#panel-items">Panel Items</a></span></dt><dd><dl><dt><span class="sect2"><a href="#launcher-item">Launcher</a></span></dt><dt><span class="sect2"><a href="#clock-item">Xfce Clock</a></span></dt><dt><span class="sect2"><a href="#mailcheck-item">Mail Check</a></span></dt><dt><span class="sect2"><a href="#switcher-item">Desktop Switcher and Graphical Pager</a></span></dt><dt><span class="sect2"><a href="#systembuttons-item">System Buttons</a></span></dt><dt><span class="sect2"><a href="#separator-item">Separator</a></span></dt></dl></dd><dt><span class="sect1"><a href="#subpanels">Panel Menus</a></span></dt><dt><span class="sect1"><a href="#panel-settings">Panel Preferences</a></span></dt><dd><dl><dt><span class="sect2"><a href="#panel-apearance">Appearance</a></span></dt><dt><span class="sect2"><a href="#panel-position">Position</a></span></dt></dl></dd><dt><span class="sect1"><a href="#panel-copyright">About xfce4-panel</a></span></dt></dl></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-intro"></a>Introduction</h2></div></div><div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Xfce 4 Panel</title><link rel="stylesheet" href="../xfce.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="#xfce4-panel" title="Xfce 4 Panel"><link rel="next" href="#panel-intro" title="Introduction"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="article" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="xfce4-panel"></a>Xfce 4 Panel</h1></div><div><div class="authorgroup"><div class="author"><h3 class="author"><span class="firstname">Jasper</span> <span class="surname">Huijsmans</span></h3><div class="affiliation"><div class="address"><p><tt class="email">&lt;<a href="mailto:huysmans@users.sourceforge.net">huysmans@users.sourceforge.net</a>&gt;</tt></p></div></div></div></div></div><div><span xmlns="http://www.w3.org/TR/xhtml1/transitional" class="releaseinfo">This manual describes <b xmlns="" class="application"><tt>xfce4-panel</tt></b> version 4.1.x. 
+    Last updated: Aug 2004
+  <br></br></span></div><div><p class="copyright">Copyright © 2004 Jasper Huijsmans</p></div></div><div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#panel-intro">Introduction</a></span></dt><dt><span class="sect1"><a href="#panel-getting-started">Getting Started</a></span></dt><dt><span class="sect1"><a href="#panel-items">Panel Items</a></span></dt><dd><dl><dt><span class="sect2"><a href="#launcher-item">Launcher</a></span></dt><dt><span class="sect2"><a href="#clock-item">Xfce Clock</a></span></dt><dt><span class="sect2"><a href="#mailcheck-item">Mail Check</a></span></dt><dt><span class="sect2"><a href="#switcher-item">Desktop Switcher and Graphical Pager</a></span></dt><dt><span class="sect2"><a href="#systembuttons-item">System Buttons</a></span></dt><dt><span class="sect2"><a href="#separator-item">Separator</a></span></dt></dl></dd><dt><span class="sect1"><a href="#subpanels">Panel Menus</a></span></dt><dt><span class="sect1"><a href="#panel-settings">Panel Preferences</a></span></dt><dd><dl><dt><span class="sect2"><a href="#panel-apearance">Appearance</a></span></dt><dt><span class="sect2"><a href="#panel-behaviour">Behaviour</a></span></dt></dl></dd><dt><span class="sect1"><a href="#panel-copyright">About xfce4-panel</a></span></dt></dl></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-intro"></a>Introduction</h2></div></div><div></div></div><p>
     The Xfce 4 panel is part of the <a href="http://www.xfce.org" target="_top">Xfce 4 Desktop Environment</a> and features program 
     launchers, panel menus, a clock, a desktop switcher and more. The actual 
     command to run is <b class="application"><tt>xfce4-panel</tt></b>. Many aspects of the panel can be configured 
-    through graphical dialogs.
-  </p><p>
-    If you are familiar with previous versions of Xfce you will find many
-    new features. Most visible are probably the vertical panel mode, the icon
-    themes, the new graphical pager and the configurable position of the
-    panel menu popup buttons. The way preferences are handled has changed 
-    completely, so it may take some time to get used to. This manual should 
+    through graphical dialogs. This manual should 
     provide you with all necessary information on how to adjust the panel to 
     your liking.
   </p></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-getting-started"></a>Getting Started</h2></div></div><div></div></div><p>When you start the panel you will see a bar apearing at the bottom
@@ -60,12 +54,8 @@
 	  show an hourglass while the program is loading. But, the application
 	  has to support that and not many program do at the moment. Programs
 	  build with Gtk 2.2, should support it.
-	</dd><dt><span class="term">Icon</span></dt><dd>The panel provides a number of standard icons that can be
-	  used. These icons will also follow the icon theme you choose from
-	  the <a href="#panel-settings" target="_top">global preferences
-	    dialog</a>. Of course you can also choose a custom icon, 
-	  either by browsing the file system from the button next to the entry
-	  or by dropping an image on the preview area from a file manager.
+	</dd><dt><span class="term">Icon</span></dt><dd>The icons used by the panel will follow the icon theme you choose from
+	  the <a href="xfce-mcs-plugins#ui-settings" target="_top">user interface settings dialog</a>. Of course you can also choose a custom icon, either by browsing the file system from the button next to the entry or by dropping an image on the preview area from a file manager.
 	</dd><dt><span class="term">Tooltip</span></dt><dd>The panel item will show this tooltip if you hold the mouse 
 	  over it.
 	</dd><dt><span class="term">Menu</span></dt><dd>A launcher can have a panel menu attached to it. When this
@@ -129,45 +119,31 @@
     itself is very similar to the dialog for launcher type panel items.
   </p><div class="figure"><a name="menuitem-fig"></a><p class="title"><b>Figure 9. Menu Item</b></p><div class="screenshot"><div class="mediaobject"><img src="images/menuitem-properties.png" alt="Shows properties dialog for menu items.
 	  "></div></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-settings"></a>Panel Preferences</h2></div></div><div></div></div><p>The properties dialog for the Xfce 4 Panel can be opened from
-  the Xfce 4 Settings Manager, which can be started from a panel launcher
-  or from the right-click menu on the panel handles. The menu also provides 
-  direct access to the panel properties dialog.</p><div class="figure"><a name="panel-settings-fig"></a><p class="title"><b>Figure 10. Panel Settings</b></p><div class="screenshot"><div class="mediaobject"><img src="images/panel-settings.png" alt="Shows properties dialog for global panel preferences.
-	  "></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-apearance"></a>Appearance</h3></div></div><div></div></div><div class="variablelist"><dl><dt><span class="term">Size</span></dt><dd><p>There are four panel sizes available: tiny, small,
-	    medium and large. Small is the default.
+  the Xfce 4 Settings Manager, which can be started from a panel launcher. 
+  The panel right-clic menu also provides direct access to the panel 
+  properties dialog.</p><div class="figure"><a name="panel-settings-fig"></a><p class="title"><b>Figure 10. Panel Settings</b></p><div class="screenshot"><div class="mediaobject"><img src="images/panel-settings.png" alt="Shows properties dialog for global panel preferences.
+	  "></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-apearance"></a>Appearance</h3></div></div><div></div></div><div class="variablelist"><dl><dt><span class="term">Size</span></dt><dd><p>There are four panel sizes available: small, 
+	    medium big and huge. Small is the default.
 	  </p></dd><dt><span class="term">Orientation</span></dt><dd><p>An exciting new feature of the Xfce 4 Panel is the
 	    ability to put it in a vertical orientation as well as
 	    the standard horizontal layout.
 	  </p></dd><dt><span class="term">Popup position</span></dt><dd><p>This option change the position of the buttons that open 
 	    a panel menu. It can be above, below, to the left or to the 
 	    right of the panel item.
-	  </p></dd><dt><span class="term">Icon theme</span></dt><dd><p>Also new in Xfce 4 are icon themes for the panel. The
-	    predefined icons for launcher items and the icons of other 
-	    types of panel items follow the panel icon theme.
-	  </p></dd></dl></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-position"></a>Position</h3></div></div><div></div></div><div class="variablelist"><dl><dt><span class="term">Layer</span></dt><dd><p>The panel layer determines its behaviour relative to
-	    other windows. The panel can be always below or above other
-	    windows or act the same as other windows. By default the
-	    panel will be on top.
-	  </p></dd><dt><span class="term">Centering</span></dt><dd><p>It is very easy to move the panel around the screen. The 
-	    settings dialog provides an easy way to center the panel on 
-	    one of the four edges of the screen. Note that the panel will also
-	    'snap' to the screen corners as well as the center of the screen
-	    edges when you drag it close enough to those positions.
-	  </p></dd><dt><span class="term">Behaviour</span></dt><dd><p>If you choose autohide, the panel will collapse to a thin bar. 
-	    Moving the mouse over it will unhide the panel. This works best 
-	    when the panel is on the edge of the screen (this makes the target
-	    much easier to hit).
+	  </p></dd></dl></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="panel-behaviour"></a>Behaviour</h3></div></div><div></div></div><div class="variablelist"><dl><dt><span class="term">Always on top</span></dt><dd><p>If you choose always on top option, the panel frame will always appear above other windows, and maximized windows won't cover the panel area.</p></dd><dt><span class="term">Autohide</span></dt><dd><p>If you choose autohide, the panel will collapse to a thin bar. 
+	    Moving the mouse over it will unhide the panel.
 	  </p></dd></dl></div></div></div><p> </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="panel-copyright"></a>About <b class="application"><tt>xfce4-panel</tt></b></h2></div></div><div></div></div><p><b class="application"><tt>xfce4-panel</tt></b> was written by Jasper Huijsmans 
     (<tt class="email">&lt;<a href="mailto:huysmans@users.sourceforge.net">huysmans@users.sourceforge.net</a>&gt;</tt>). To find more 
     information, please visit the 
     <a href="http://www.xfce.org" target="_top">Xfce web site</a>. 
   </p><p>To report a bug or make a suggestion regarding this application or
     this manual, send an email to the 
-    <a href="http://www.xfce.org/mailman/listinfo/xfce4-dev/" target="_top">xfce4-dev</a> mailing list &#8212; this is the preferred
+    <a href="http://lunar-linux.org/mailman/listinfo/xfce4-dev" target="_top">xfce4-dev</a> mailing list &#8212; this is the preferred
     method &#8212; or use the bug tracking system at the
-    <a href="http://sourceforge.net/projects/xfce" target="_top">Xfce SourceForge project site</a>. 
+    <a href="http://bugs.xfce.org/" target="_top">http://bugs.xfce.org/</a>. 
     If you have questions about the use or installation of this package,
     please ask on the 
-    <a href="http://www.xfce.org/mailman/listinfo/xfce/" target="_top">xfce</a> mailing list. 
+    <a href="http://lunar-linux.org/mailman/listinfo/xfce" target="_top">xfce</a> mailing list. 
   </p><p> This program is distributed under the terms of the
     GNU General Public License as published by the Free Software Foundation; 
     either version 2 of the License, or (at your option) any later version.

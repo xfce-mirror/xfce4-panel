@@ -3,8 +3,8 @@
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY copyright SYSTEM "copyright.xml"> 
   <!ENTITY manrevision "0.99"> 
-  <!ENTITY date "Sep 2003"> 
-  <!ENTITY appversion "4.0"> 
+  <!ENTITY date "Aug 2004"> 
+  <!ENTITY appversion "4.1.x"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
 
@@ -16,7 +16,7 @@
   <title>Xfce 4 Panel</title>
   
   <copyright>
-    <year>2003</year> <holder>Jasper Huijsmans</holder>
+    <year>2004</year> <holder>Jasper Huijsmans</holder>
   </copyright>
 
 <!-- translators: uncomment this:
@@ -91,15 +91,7 @@ maintainers, etc. Commented out by default.
       type="html">Xfce 4 Desktop Environment</ulink> and features program 
     launchers, panel menus, a clock, a desktop switcher and more. The actual 
     command to run is &app;. Many aspects of the panel can be configured 
-    through graphical dialogs.
-  </para>
-
-  <para>
-    If you are familiar with previous versions of Xfce you will find many
-    new features. Most visible are probably the vertical panel mode, the icon
-    themes, the new graphical pager and the configurable position of the
-    panel menu popup buttons. The way preferences are handled has changed 
-    completely, so it may take some time to get used to. This manual should 
+    through graphical dialogs. This manual should 
     provide you with all necessary information on how to adjust the panel to 
     your liking.
   </para>
@@ -259,12 +251,8 @@ maintainers, etc. Commented out by default.
       
       <varlistentry>
 	<term>Icon</term>
-	<listitem>The panel provides a number of standard icons that can be
-	  used. These icons will also follow the icon theme you choose from
-	  the <ulink url="#panel-settings">global preferences
-	    dialog</ulink>. Of course you can also choose a custom icon, 
-	  either by browsing the file system from the button next to the entry
-	  or by dropping an image on the preview area from a file manager.
+	<listitem>The icons used by the panel will follow the icon theme you choose from
+	  the <ulink url="xfce-mcs-plugins#ui-settings">user interface settings dialog</ulink>. Of course you can also choose a custom icon, either by browsing the file system from the button next to the entry or by dropping an image on the preview area from a file manager.
 	</listitem>
       </varlistentry>
       
@@ -556,9 +544,9 @@ maintainers, etc. Commented out by default.
   <title>Panel Preferences</title>
 
   <para>The properties dialog for the Xfce 4 Panel can be opened from
-  the Xfce 4 Settings Manager, which can be started from a panel launcher
-  or from the right-click menu on the panel handles. The menu also provides 
-  direct access to the panel properties dialog.</para>
+  the Xfce 4 Settings Manager, which can be started from a panel launcher. 
+  The panel right-clic menu also provides direct access to the panel 
+  properties dialog.</para>
 
   <figure id="panel-settings-fig">
     <title>Panel Settings</title> 
@@ -589,8 +577,8 @@ maintainers, etc. Commented out by default.
       <varlistentry>
 	<term>Size</term> 
 	<listitem>
-	  <para>There are four panel sizes available: tiny, small,
-	    medium and large. Small is the default.
+	  <para>There are four panel sizes available: small, 
+	    medium big and huge. Small is the default.
 	  </para>
 	</listitem>
       </varlistentry> 
@@ -612,58 +600,32 @@ maintainers, etc. Commented out by default.
 	  </para>
 	</listitem>
       </varlistentry> 
-      <varlistentry>
-	<term>Icon theme</term> 
-	<listitem>
-	  <para>Also new in Xfce 4 are icon themes for the panel. The
-	    predefined icons for launcher items and the icons of other 
-	    types of panel items follow the panel icon theme.
-	  </para>
-	</listitem>
-      </varlistentry>
     </variablelist>
     
   </sect2>
 
-  <sect2 id="panel-position">
-    <title>Position</title>
+  <sect2 id="panel-behaviour">
+    <title>Behaviour</title>
 
     <variablelist>
+
       <varlistentry>
-	<term>Layer</term> 
+	<term>Always on top</term> 
 	<listitem>
-	  <para>The panel layer determines its behaviour relative to
-	    other windows. The panel can be always below or above other
-	    windows or act the same as other windows. By default the
-	    panel will be on top.
-	  </para>
+      <para>If you choose always on top option, the panel frame will always appear above other windows, and maximized windows won't cover the panel area.</para>
 	</listitem>
-      </varlistentry> 
-      
+		</varlistentry>
+
+
       <varlistentry>
-	<term>Centering</term> 
-	<listitem>
-	  <para>It is very easy to move the panel around the screen. The 
-	    settings dialog provides an easy way to center the panel on 
-	    one of the four edges of the screen. Note that the panel will also
-	    'snap' to the screen corners as well as the center of the screen
-	    edges when you drag it close enough to those positions.
-	  </para>
-	</listitem>
-      </varlistentry>
-      
-      <varlistentry>
-	<term>Behaviour</term> 
+	<term>Autohide</term> 
 	<listitem>
 	  <para>If you choose autohide, the panel will collapse to a thin bar. 
-	    Moving the mouse over it will unhide the panel. This works best 
-	    when the panel is on the edge of the screen (this makes the target
-	    much easier to hit).
+	    Moving the mouse over it will unhide the panel.
 	  </para>
 	</listitem>
       </varlistentry>
     </variablelist>
-
   </sect2>
 
 </sect1>
@@ -682,14 +644,14 @@ maintainers, etc. Commented out by default.
 
   <para>To report a bug or make a suggestion regarding this application or
     this manual, send an email to the 
-    <ulink url="http://www.xfce.org/mailman/listinfo/xfce4-dev/"
+    <ulink url="http://lunar-linux.org/mailman/listinfo/xfce4-dev"
       type="http">xfce4-dev</ulink> mailing list &mdash; this is the preferred
     method &mdash; or use the bug tracking system at the
-    <ulink url="http://sourceforge.net/projects/xfce" 
-      type="http">Xfce SourceForge project site</ulink>. 
+    <ulink url="http://bugs.xfce.org/" 
+      type="http">http://bugs.xfce.org/</ulink>. 
     If you have questions about the use or installation of this package,
     please ask on the 
-    <ulink url="http://www.xfce.org/mailman/listinfo/xfce/"
+    <ulink url="http://lunar-linux.org/mailman/listinfo/xfce"
       type="http">xfce</ulink> mailing list. 
   </para>
     
