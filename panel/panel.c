@@ -25,14 +25,26 @@
 
 #include "xfce.h"
 #include "groups.h"
+#include "controls.h"
+#include "controls_dialog.h"
 #include "popup.h"
-#include "handle.h"
+#include "info.h"
 #include "settings.h"
 #include "mcs_client.h"
 
 /* global settings */
 Settings settings;
 Position position;
+
+GtkWidget *toplevel = NULL;
+
+static GtkWidget *main_frame;
+static GtkWidget *panel_box;	/* contains all panel components */
+static GtkWidget *handles[2];
+static GtkWidget *group_box;
+
+/* lock settings update when panel is not yet (re)build */
+static gboolean panel_created = FALSE;
 
 /*  Panel dimensions 
  *  ----------------
@@ -44,25 +56,157 @@ int icon_size[] = { 24, 30, 45, 60 };
 
 int border_width = 4;
 
-int top_height[] = { 14, 16, 16, 18 };
+int top_height[] = { 14, 16, 18, 20 };
 
 int popup_icon_size[] = { 20, 24, 24, 32 };
 
+/*  Move handle menu
+ *  ----------------
+*/
+static void edit_prefs(void)
+{
+    mcs_dialog(NULL);
+}
+
+static void settings_mgr(void)
+{
+    mcs_dialog("all");
+}
+
+static void add_new(void)
+{
+    Control *control;
+    
+    panel_add_control();
+    panel_set_position();
+    
+    control = groups_get_control(settings.num_groups-1);
+
+    controls_dialog(control);
+}
+
+static void lock_screen(void)
+{
+    exec_cmd("xflock", FALSE);
+}
+
+static void exit_panel(void)
+{
+    quit(FALSE);
+}
+
+static void do_info(void)
+{
+   info_panel_dialog(); 
+}
+
+static void do_help(void)
+{
+    exec_cmd("xfhelp", FALSE);
+}
+
+static GtkItemFactoryEntry panel_items[] = {
+  { N_("/XFce Panel"),        NULL, NULL,        0, "<Title>" },
+  { "/sep",              NULL, NULL,        0, "<Separator>" },
+  { N_("/Add _new item"), NULL, add_new,    0, "<Item>" },
+  { "/sep",              NULL, NULL,        0, "<Separator>" },
+  { N_("/_Panel settings"), NULL, edit_prefs,  0, "<Item>" },
+  { N_("/_Settings manager"), NULL, settings_mgr,  0, "<Item>" },
+  { "/sep",              NULL, NULL,        0, "<Separator>" },
+  { N_("/_About XFce"),  NULL, do_info,     0, "<Item>" },
+  { N_("/_Help"),        NULL, do_help,     0, "<Item>" },
+  { "/sep",          NULL, NULL,        0, "<Separator>" },
+  { N_("/_Lock screen"), NULL, lock_screen, 0, "<Item>" },
+  { N_("/E_xit"),        NULL, exit_panel,  0, "<Item>" },
+};
+
+static GtkMenu *create_handle_menu(void)
+{
+    static GtkMenu *menu = NULL;
+    GtkItemFactory *ifactory;
+
+    if (!menu)
+    {
+	ifactory = gtk_item_factory_new(GTK_TYPE_MENU, "<popup>", NULL);
+
+	gtk_item_factory_set_translate_func(ifactory, 
+					    (GtkTranslateFunc) gettext,
+					    NULL, NULL);
+	gtk_item_factory_create_items(ifactory, G_N_ELEMENTS(panel_items), 
+				      panel_items, NULL);
+	menu = GTK_MENU(gtk_item_factory_get_widget(ifactory, "<popup>"));
+    }
+
+    return menu;
+}
+
+/*  Move handles
+ *  ------------
+*/
+static void handle_set_size(GtkWidget * mh, int size)
+{
+    int h = top_height[size];
+    int w = icon_size[size] + 2*border_width;
+    gboolean vertical = settings.orientation == VERTICAL;
+
+    if(vertical)
+        gtk_widget_set_size_request(mh, w, h);
+    else
+        gtk_widget_set_size_request(mh, h, w);
+}
+
+static gboolean handler_pressed_cb(GtkWidget *h, GdkEventButton *event, 
+			       GtkMenu *menu)
+{
+    hide_current_popup_menu();
+
+    if (event->button == 3 || 
+	    (event->button == 1 && event->state & GDK_SHIFT_MASK ))
+    {
+	gtk_menu_popup(menu, NULL, NULL, NULL, NULL, event->button, event->time); 
+	return TRUE;
+    }
+    
+    /* let default handler run */
+    return FALSE;
+}
+
+static gboolean handler_released_cb(GtkWidget *h, GdkEventButton *event, 
+			            gpointer data)
+{
+    gtk_window_get_position(GTK_WINDOW(toplevel), &position.x, &position.y);
+    /* let default handler run */
+    return FALSE;
+}
+
+GtkWidget *handle_new(void)
+{
+    GtkWidget *mh;
+    GtkMenu *menu;
+
+    mh = xfce_movehandler_new(toplevel);
+    gtk_widget_show(mh);
+    
+    gtk_widget_set_name(mh, "xfce_panel");
+
+    menu = create_handle_menu();
+    
+    g_signal_connect(mh, "button-press-event", 
+	    	     G_CALLBACK(handler_pressed_cb), menu);
+
+    g_signal_connect(mh, "button-release-event", 
+	    	     G_CALLBACK(handler_released_cb), NULL);
+
+    /* protect against destruction when removed from box */
+    g_object_ref(mh);
+
+    handle_set_size(mh, settings.size);
+
+    return mh;
+}
+
 /*  Panel framework
  *  ---------------
-*/
-GtkWidget *toplevel = NULL;
-
-static GtkWidget *main_frame;
-static GtkWidget *panel_box;	/* contains all panel components */
-Handle *handles[2];
-static GtkWidget *group_box;
-
-/* lock settings update when panel is not yet (re)build */
-static gboolean panel_created = FALSE;
-
-/*  Callbacks  
- *  ---------
 */
 static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, 
 				gpointer data)
@@ -72,9 +216,6 @@ static gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev,
     return TRUE;
 }
 
-/*  Creation and destruction  
- *  ------------------------
-*/
 static GtkWidget *create_panel_window(void)
 {
     GtkWidget *w;
@@ -136,14 +277,14 @@ static void create_panel_framework(void)
     gtk_widget_show(group_box);
 
     /* create handles */
-    handles[LEFT] = handle_new(LEFT);
-    handles[RIGHT] = handle_new(RIGHT);
+    handles[LEFT] = handle_new();
+    handles[RIGHT] = handle_new();
     
     /* pack the widgets into the main frame */
     gtk_container_add(GTK_CONTAINER(main_frame), panel_box);
-    handle_pack(handles[LEFT], GTK_BOX(panel_box));
+    gtk_box_pack_start(GTK_BOX(panel_box), handles[LEFT], FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(panel_box), group_box, TRUE, TRUE, 0);
-    handle_pack(handles[RIGHT], GTK_BOX(panel_box));
+    gtk_box_pack_start(GTK_BOX(panel_box), handles[RIGHT], FALSE, FALSE, 0);
 }
 
 void panel_cleanup(void)
@@ -268,8 +409,6 @@ void panel_set_popup_position(int position)
     hide_current_popup_menu();
 
     groups_set_popup_position(position);
-    handle_set_popup_position(handles[LEFT]);
-    handle_set_popup_position(handles[RIGHT]);
 
     /* this is necessary to get the right proportions */
     panel_set_size(settings.size);

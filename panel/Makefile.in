@@ -163,11 +163,10 @@ controls_dialog.h \
 global.h \
 groups.c \
 groups.h \
-handle.c \
-handle.h \
 icons.c \
 icons.h \
 info.c \
+info.h \
 item.c \
 item.h \
 item_dialog.c \
@@ -211,12 +210,11 @@ PROGRAMS = $(bin_PROGRAMS)
 
 am_xfce4_panel_OBJECTS = xfce4_panel-controls.$(OBJEXT) \
 	xfce4_panel-controls_dialog.$(OBJEXT) \
-	xfce4_panel-groups.$(OBJEXT) xfce4_panel-handle.$(OBJEXT) \
-	xfce4_panel-icons.$(OBJEXT) xfce4_panel-info.$(OBJEXT) \
-	xfce4_panel-item.$(OBJEXT) xfce4_panel-item_dialog.$(OBJEXT) \
-	xfce4_panel-main.$(OBJEXT) xfce4_panel-mcs_client.$(OBJEXT) \
-	xfce4_panel-panel.$(OBJEXT) xfce4_panel-popup.$(OBJEXT) \
-	xfce4_panel-settings.$(OBJEXT) \
+	xfce4_panel-groups.$(OBJEXT) xfce4_panel-icons.$(OBJEXT) \
+	xfce4_panel-info.$(OBJEXT) xfce4_panel-item.$(OBJEXT) \
+	xfce4_panel-item_dialog.$(OBJEXT) xfce4_panel-main.$(OBJEXT) \
+	xfce4_panel-mcs_client.$(OBJEXT) xfce4_panel-panel.$(OBJEXT) \
+	xfce4_panel-popup.$(OBJEXT) xfce4_panel-settings.$(OBJEXT) \
 	xfce4_panel-xfce_support.$(OBJEXT)
 xfce4_panel_OBJECTS = $(am_xfce4_panel_OBJECTS)
 xfce4_panel_DEPENDENCIES =
@@ -228,7 +226,6 @@ am__depfiles_maybe = depfiles
 @AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4_panel-controls.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-controls_dialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-groups.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-handle.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-icons.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-info.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4_panel-item.Po \
@@ -303,7 +300,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-controls.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-controls_dialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-groups.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-handle.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-icons.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4_panel-item.Po@am__quote@
@@ -449,39 +445,6 @@ xfce4_panel-groups.lo: groups.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-groups.Plo' tmpdepfile='$(DEPDIR)/xfce4_panel-groups.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-groups.lo `test -f 'groups.c' || echo '$(srcdir)/'`groups.c
-
-xfce4_panel-handle.o: handle.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-handle.o -MD -MP -MF "$(DEPDIR)/xfce4_panel-handle.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4_panel-handle.o `test -f 'handle.c' || echo '$(srcdir)/'`handle.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4_panel-handle.Tpo" "$(DEPDIR)/xfce4_panel-handle.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-handle.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='handle.c' object='xfce4_panel-handle.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-handle.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-handle.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-handle.o `test -f 'handle.c' || echo '$(srcdir)/'`handle.c
-
-xfce4_panel-handle.obj: handle.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-handle.obj -MD -MP -MF "$(DEPDIR)/xfce4_panel-handle.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4_panel-handle.obj `if test -f 'handle.c'; then $(CYGPATH_W) 'handle.c'; else $(CYGPATH_W) '$(srcdir)/handle.c'; fi`; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4_panel-handle.Tpo" "$(DEPDIR)/xfce4_panel-handle.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-handle.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='handle.c' object='xfce4_panel-handle.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-handle.Po' tmpdepfile='$(DEPDIR)/xfce4_panel-handle.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-handle.obj `if test -f 'handle.c'; then $(CYGPATH_W) 'handle.c'; else $(CYGPATH_W) '$(srcdir)/handle.c'; fi`
-
-xfce4_panel-handle.lo: handle.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-handle.lo -MD -MP -MF "$(DEPDIR)/xfce4_panel-handle.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4_panel-handle.lo `test -f 'handle.c' || echo '$(srcdir)/'`handle.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4_panel-handle.Tpo" "$(DEPDIR)/xfce4_panel-handle.Plo"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4_panel-handle.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='handle.c' object='xfce4_panel-handle.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4_panel-handle.Plo' tmpdepfile='$(DEPDIR)/xfce4_panel-handle.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -c -o xfce4_panel-handle.lo `test -f 'handle.c' || echo '$(srcdir)/'`handle.c
 
 xfce4_panel-icons.o: icons.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_panel_CFLAGS) $(CFLAGS) -MT xfce4_panel-icons.o -MD -MP -MF "$(DEPDIR)/xfce4_panel-icons.Tpo" \
