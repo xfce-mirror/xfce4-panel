@@ -92,7 +92,7 @@ void check_net_support(void)
         }
         else
         {
-            g_usleep(5);
+            g_usleep(5000);
         }
     }
 
