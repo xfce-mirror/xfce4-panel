@@ -67,15 +67,23 @@ item_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
     {
 	execute = g_new0 (char, MAXSTRLEN);
 
-	strcpy (execute, item->command);
+	if (item->in_terminal)
+	    strcpy(execute, "\"");
+	else
+	    strcpy(execute, "");
+	
+	strcat (execute, item->command);
 
 	for (fnp = fnames; fnp; fnp = fnp->next, count--)
 	{
 	    strcat (execute, " \'");
 	    strncat (execute, (char *) (fnp->data),
-		     MAXSTRLEN - strlen (execute));
+		     MAXSTRLEN - strlen (execute) - 2);
 	    strcat (execute, "\' ");
 	}
+
+	if (item->in_terminal)
+	    strcat(execute, "\"");
 
 	exec_cmd (execute, item->in_terminal, item->use_sn);
 	g_free (execute);
