@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFCE4\n"
-"POT-Creation-Date: 2003-04-21 09:36+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-06 17:09+0200\n"
 "PO-Revision-Date: 2003-06-01 23:04+0200\n"
 "Last-Translator: Ilkka Ollakka <ilkka.j.ollakka@students.oamk.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,35 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:644
+#: panel/xfce_support.c:645
 msgid "Select file"
 msgstr "Valitse tiedosto"
 
-#: panel/controls_dialog.c:265
+#: panel/controls_dialog.c:264
 msgid "Change item"
 msgstr "Muuta osaa"
 
-#: panel/controls_dialog.c:264
-#: panel/item_dialog.c:916
+#: panel/controls_dialog.c:274 panel/item_dialog.c:994
 msgid "_Revert"
 msgstr "P_alauta"
 
-#: panel/controls_dialog.c:269
-#: panel/item_dialog.c:922
+#: panel/controls_dialog.c:279 panel/item_dialog.c:1000
 msgid "_Done"
 msgstr "_Valmis"
 
-#: panel/controls_dialog.c:304
+#: panel/controls_dialog.c:303
 msgid "Type:"
 msgstr "Malli:"
 
-#: panel/controls_dialog.c:308
-#: panel/item_dialog.c:545
+#: panel/controls_dialog.c:319 panel/item_dialog.c:597
 msgid "Position:"
 msgstr "Paikka:"
 
-#: panel/controls_dialog.c:349
-#: panel/controls.c:266
+#: panel/controls_dialog.c:364 panel/controls.c:271
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -52,18 +49,6 @@ msgstr ""
 "\n"
 "Haluatko poistaa osan?"
 
-#: panel/controls_dialog.c:470
-msgid "Add item"
-msgstr "Lisää uusi osa"
-
-#: panel/controls_dialog.c:483
-msgid "Select Item Type"
-msgstr "Valitse tyyppi"
-
-#: panel/controls_dialog.c:506
-msgid "Select an item type from the list"
-msgstr "Valitse listasta sopiva tyyppi"
-
 #: panel/item_dialog.c:267
 msgid "Other Icon"
 msgstr "Muu kuvake"
@@ -72,59 +57,57 @@ msgstr "Muu kuvake"
 msgid "Select icon"
 msgstr "Valitse kuvake"
 
-#: panel/item_dialog.c:329
+#: panel/item_dialog.c:330
 msgid "Icon:"
 msgstr "Kuvake:"
 
-#: panel/item_dialog.c:374
+#: panel/item_dialog.c:375
 msgid "Select command"
 msgstr "Valitse komento"
 
-#: panel/item_dialog.c:401
+#: panel/item_dialog.c:402
 msgid "Command:"
 msgstr "Komento:"
 
-#: panel/item_dialog.c:426
-#: plugins/mailcheck/mailcheck.c:670
+#: panel/item_dialog.c:435 plugins/mailcheck/mailcheck.c:675
 msgid "Run in _terminal"
 msgstr "Aja Päätteessä"
 
-#: panel/item_dialog.c:431
-#: plugins/mailcheck/mailcheck.c:678
+#: panel/item_dialog.c:440 plugins/mailcheck/mailcheck.c:683
 msgid "Use startup _notification"
 msgstr "Käytä käynnistyksen _huomautusta"
 
-#: panel/item_dialog.c:465
+#: panel/item_dialog.c:467
 msgid "Caption:"
 msgstr "Valikkoteksti:"
 
-#: panel/item_dialog.c:504
+#: panel/item_dialog.c:506
 msgid "Tooltip:"
 msgstr "Kuvaus:"
 
-#: panel/item_dialog.c:540
+#: panel/item_dialog.c:542
 msgid "Menu:"
 msgstr "Valikko"
 
-#: panel/item_dialog.c:547
+#: panel/item_dialog.c:549
 msgid "Attach menu to launcher"
 msgstr "Lisää alavalikko"
 
-#: panel/item_dialog.c:693
+#: panel/item_dialog.c:692
 msgid "Icon Preview"
 msgstr "Kuvakkeen esikatselu"
 
-#: panel/item_dialog.c:697
+#: panel/item_dialog.c:696
 msgid "Drag file onto this frame to change the icon"
 msgstr "Raahaa tiedosto tähän kehykseen vaihtaaksesi kuvaketta"
 
 #. create dialog
-#: panel/item_dialog.c:968
+#: panel/item_dialog.c:981
 msgid "Change menu item"
 msgstr "Vaihda valikon osaa"
 
 #. add buttons
-#: panel/item_dialog.c:975
+#: panel/item_dialog.c:988
 msgid "Remove"
 msgstr "Poista"
 
@@ -136,11 +119,11 @@ msgstr "Paina hiiren 3-napilla vaihtaaksesi osan"
 msgid "Add launcher"
 msgstr "Lisää käynnistin"
 
-#: panel/item.c:378
+#: panel/item.c:379
 msgid "Add new item"
 msgstr "Lisää uusi osa"
 
-#: panel/item.c:508
+#: panel/item.c:509
 msgid "Launcher"
 msgstr "Käynnistin"
 
@@ -148,7 +131,7 @@ msgstr "Käynnistin"
 msgid "Are you sure you want to exit?"
 msgstr "Haluatko lopettaa?"
 
-#: panel/main.c:252
+#: panel/main.c:253
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -159,27 +142,29 @@ msgstr ""
 "Osa XFce-työpöytäympäristöä\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:268
-msgid "Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+#: panel/main.c:269
+msgid ""
+"Your window manager does not seem to support the new window manager hints as "
+"defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
-msgstr "Ikkunamanagerisi ei näytä tukevan uusia ikkunamanageriohjeita, jotka on määritelty http://www.freedesktop.org.\n"
+msgstr ""
+"Ikkunamanagerisi ei näytä tukevan uusia ikkunamanageriohjeita, jotka on "
+"määritelty http://www.freedesktop.org.\n"
 "Jotkin XFce:n ominaisuudet eivät välttämättä toimi kuten on tarkoitus."
 
-#: panel/controls.c:308
-#: panel/panel.c:150
-msgid "/_Properties..."
-msgstr "/_Ominaisuudet..."
-
-#: panel/controls.c:321
-msgid "/_Remove"
-msgstr "/_Poista"
-
-#: panel/controls.c:311
-#: panel/panel.c:148
+#: panel/controls.c:319 panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/_Lisää uusi osa"
 
-#: panel/controls.c:592
+#: panel/controls.c:321 panel/panel.c:125
+msgid "/_Properties..."
+msgstr "/_Ominaisuudet..."
+
+#: panel/controls.c:322
+msgid "/_Remove"
+msgstr "/_Poista"
+
+#: panel/controls.c:654
 msgid "This item has no configuration options"
 msgstr "Tällä osalla ei ole muokattavia ominaisuuksia"
 
@@ -207,9 +192,8 @@ msgstr "/_Lukitse näyttö"
 msgid "/E_xit"
 msgstr "/_Poistu"
 
-#: panel/panel.c:472
-#: settings/xfce_settings_plugin.c:75
-#: settings/xfce_settings_dialog.c:630
+#: panel/panel.c:469 settings/xfce_settings_plugin.c:76
+#: settings/xfce_settings_dialog.c:634
 msgid "XFce Panel"
 msgstr "XFce Paneeli"
 
@@ -297,80 +281,76 @@ msgstr "Horinsontaali"
 msgid "Vertical"
 msgstr "Vertikaali"
 
-#: settings/xfce_settings_dialog.c:217
-#: settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:217 settings/xfce_settings_dialog.c:447
 msgid "Left"
 msgstr "Vasen"
 
-#: settings/xfce_settings_dialog.c:221
-#: settings/xfce_settings_dialog.c:447
+#: settings/xfce_settings_dialog.c:221 settings/xfce_settings_dialog.c:448
 msgid "Right"
 msgstr "Oikea"
 
-#: settings/xfce_settings_dialog.c:225
-#: settings/xfce_settings_dialog.c:445
-#: settings/xfce_settings_dialog.c:501
+#: settings/xfce_settings_dialog.c:225 settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:502
 msgid "Top"
 msgstr "Päällä"
 
-#: settings/xfce_settings_dialog.c:229
-#: settings/xfce_settings_dialog.c:444
-#: settings/xfce_settings_dialog.c:509
+#: settings/xfce_settings_dialog.c:229 settings/xfce_settings_dialog.c:445
+#: settings/xfce_settings_dialog.c:510
 msgid "Bottom"
 msgstr "Alla"
 
-#: settings/xfce_settings_dialog.c:364
+#: settings/xfce_settings_dialog.c:365
 msgid "Panel size:"
 msgstr "Paneelin koko:"
 
-#: settings/xfce_settings_dialog.c:380
+#: settings/xfce_settings_dialog.c:381
 msgid "Panel orientation:"
 msgstr "Paneelin suunta:"
 
-#: settings/xfce_settings_dialog.c:397
+#: settings/xfce_settings_dialog.c:398
 msgid "Popup position:"
 msgstr "Ponnahdusvalikoiden sijainti:"
 
-#: settings/xfce_settings_dialog.c:414
+#: settings/xfce_settings_dialog.c:415
 msgid "Icon theme:"
 msgstr "Kuvakkeiden teema:"
 
-#: settings/xfce_settings_dialog.c:485
+#: settings/xfce_settings_dialog.c:486
 msgid "Panel layer:"
 msgstr "Paneelin taso:"
 
-#: settings/xfce_settings_dialog.c:505
+#: settings/xfce_settings_dialog.c:506
 msgid "Normal"
 msgstr "Normaali"
 
-#: settings/xfce_settings_dialog.c:524
+#: settings/xfce_settings_dialog.c:526
 msgid "Center the panel:"
 msgstr "Keskitä paneeli:"
 
-#: settings/xfce_settings_dialog.c:548
+#: settings/xfce_settings_dialog.c:550
 msgid "Set"
 msgstr "Aseta"
 
-#: settings/xfce_settings_dialog.c:584
+#: settings/xfce_settings_dialog.c:586
 msgid "Autohide:"
 msgstr "Piilota automaattisesti:"
 
-#: settings/xfce_settings_dialog.c:644
+#: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel Settings"
 msgstr "XFce Paneelin Asetukset"
 
 #. Appearance
-#: settings/xfce_settings_dialog.c:656
+#: settings/xfce_settings_dialog.c:661
 msgid "Appearance"
 msgstr "Ulkonäkö"
 
 #. Position
-#: settings/xfce_settings_dialog.c:677
+#: settings/xfce_settings_dialog.c:682
 msgid "Position"
 msgstr "Sijainti"
 
 #. autohide
-#: settings/xfce_settings_dialog.c:693
+#: settings/xfce_settings_dialog.c:698
 msgid "Behaviour"
 msgstr "Käytös"
 
@@ -486,19 +466,19 @@ msgstr "AM/PM"
 msgid "Show seconds:"
 msgstr "Näytä sekunnit:"
 
-#: plugins/clock/clock.c:608
+#: plugins/clock/clock.c:609
 msgid "Xfce Clock"
 msgstr "Xfce Kello"
 
-#: plugins/pager/pager.c:323
+#: plugins/pager/pager.c:324
 msgid "Graphical pager"
 msgstr "Käytä graafista työpöydän vaihtajaa"
 
-#: plugins/switcher/switcher.c:694
+#: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
 msgstr "Työpöydän vaihtaja"
 
-#: plugins/systembuttons/systembuttons.c:59
+#: plugins/systembuttons/systembuttons.c:60
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -508,63 +488,71 @@ msgstr ""
 "\n"
 "Kysy järjestelmäsi ylläpidolta lisätietoa asiasta"
 
-#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:150
 msgid "Lock the screen"
 msgstr "Lukitse näyttö"
 
-#: plugins/systembuttons/systembuttons.c:150
-#: plugins/systembuttons/systembuttons.c:586
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Exit"
 msgstr "Lopeta"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:587
+#: plugins/systembuttons/systembuttons.c:152
+#: plugins/systembuttons/systembuttons.c:589
 msgid "Setup"
 msgstr "Asetukset"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:588
+#: plugins/systembuttons/systembuttons.c:153
+#: plugins/systembuttons/systembuttons.c:590
 msgid "Info"
 msgstr "Tietoja"
 
-#: plugins/systembuttons/systembuttons.c:569
+#: plugins/systembuttons/systembuttons.c:570
 msgid "Show two buttons:"
 msgstr "Näytä kaksi nappia:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:585
+#: plugins/systembuttons/systembuttons.c:587
 msgid "Lock"
 msgstr "Lukitse"
 
-#: plugins/systembuttons/systembuttons.c:616
+#: plugins/systembuttons/systembuttons.c:619
 msgid "Button 1:"
 msgstr "Nappi 1:"
 
-#: plugins/systembuttons/systembuttons.c:632
+#: plugins/systembuttons/systembuttons.c:635
 msgid "Button 2:"
 msgstr "Nappi 2:"
 
-#: plugins/systembuttons/systembuttons.c:671
+#: plugins/systembuttons/systembuttons.c:674
 msgid "System buttons"
 msgstr "Järjestelmänapit"
 
-#: plugins/mailcheck/mailcheck.c:532
+#: plugins/mailcheck/mailcheck.c:535
 msgid "Mail box:"
 msgstr "Postilaatikko:"
 
-#: plugins/mailcheck/mailcheck.c:624
+#: plugins/mailcheck/mailcheck.c:628
 msgid "Mail command:"
 msgstr "Postikomento:"
 
-#: plugins/mailcheck/mailcheck.c:637
+#: plugins/mailcheck/mailcheck.c:642
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Komento joka ajetaan kun kuvaketta painetaan"
 
-#: plugins/mailcheck/mailcheck.c:710
+#: plugins/mailcheck/mailcheck.c:715
 msgid "Interval (sec):"
 msgstr "Väli (sekuntia):"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:792
 msgid "Mail check"
 msgstr "Postin tarkistus"
 
+#~ msgid "Add item"
+#~ msgstr "Lisää uusi osa"
+
+#~ msgid "Select Item Type"
+#~ msgstr "Valitse tyyppi"
+
+#~ msgid "Select an item type from the list"
+#~ msgstr "Valitse listasta sopiva tyyppi"

@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-05-04 23:58+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-06 17:09+0200\n"
 "PO-Revision-Date: 2003-05-11 13:06+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: ca <LL@li.org>\n"
@@ -14,31 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:644
+#: panel/xfce_support.c:645
 msgid "Select file"
 msgstr "Seleccioneu el fitxer"
 
-#: panel/controls_dialog.c:261
+#: panel/controls_dialog.c:264
 msgid "Change item"
 msgstr "Canviar element"
 
-#: panel/controls_dialog.c:271 panel/item_dialog.c:916
+#: panel/controls_dialog.c:274 panel/item_dialog.c:994
 msgid "_Revert"
 msgstr "_Reverteix"
 
-#: panel/controls_dialog.c:276 panel/item_dialog.c:922
+#: panel/controls_dialog.c:279 panel/item_dialog.c:1000
 msgid "_Done"
 msgstr "_Fet"
 
-#: panel/controls_dialog.c:299
+#: panel/controls_dialog.c:303
 msgid "Type:"
 msgstr "Tipus:"
 
-#: panel/controls_dialog.c:315 panel/item_dialog.c:545
+#: panel/controls_dialog.c:319 panel/item_dialog.c:597
 msgid "Position:"
 msgstr "Posició:"
 
-#: panel/controls_dialog.c:360 panel/controls.c:270
+#: panel/controls_dialog.c:364 panel/controls.c:271
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -48,73 +49,82 @@ msgstr ""
 "\n"
 "Vols suprimir l'element?"
 
-#: panel/item_dialog.c:260
+#: panel/item_dialog.c:267
 msgid "Other Icon"
 msgstr "Una altra Icona"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:292
 msgid "Select icon"
 msgstr "Selecciona una Icona"
 
-#: panel/item_dialog.c:322
+#: panel/item_dialog.c:330
 msgid "Icon:"
 msgstr "Icona:"
 
-#: panel/item_dialog.c:367
+#: panel/item_dialog.c:375
 msgid "Select command"
 msgstr "Selecciona un programa"
 
-#: panel/item_dialog.c:394
+#: panel/item_dialog.c:402
 msgid "Command:"
 msgstr "Programa:"
 
-#: panel/item_dialog.c:426 plugins/mailcheck/mailcheck.c:670
+#: panel/item_dialog.c:435 plugins/mailcheck/mailcheck.c:675
 msgid "Run in _terminal"
 msgstr "Executa en un _terminal"
 
-#: panel/item_dialog.c:431 plugins/mailcheck/mailcheck.c:678
+#: panel/item_dialog.c:440 plugins/mailcheck/mailcheck.c:683
 msgid "Use startup _notification"
 msgstr "Utilitzeu _notificació d'inicialització"
 
-#: panel/item_dialog.c:458
+#: panel/item_dialog.c:467
 msgid "Caption:"
 msgstr "Llegenda:"
 
-#: panel/item_dialog.c:497
+#: panel/item_dialog.c:506
 msgid "Tooltip:"
 msgstr "Rètol indicador:"
 
-#: panel/item_dialog.c:637
+#: panel/item_dialog.c:542
+#, fuzzy
+msgid "Menu:"
+msgstr "Menú"
+
+#: panel/item_dialog.c:549
+msgid "Attach menu to launcher"
+msgstr ""
+
+#: panel/item_dialog.c:692
 msgid "Icon Preview"
 msgstr "Previsualització d'icona"
 
-#: panel/item_dialog.c:641
+#: panel/item_dialog.c:696
 msgid "Drag file onto this frame to change the icon"
 msgstr "Arrossega el fitxer dins d'aquest marc per canviar la icona"
 
 #. create dialog
-#: panel/item_dialog.c:903
+#: panel/item_dialog.c:981
 msgid "Change menu item"
 msgstr "Canvia l'element del menú"
 
 #. add buttons
-#: panel/item_dialog.c:910
+#: panel/item_dialog.c:988
 msgid "Remove"
 msgstr "Elimina"
 
-#: panel/item.c:337
+#: panel/item.c:352
 msgid "Click mouse button 3 to change item"
 msgstr "Cliqueu el botó 3 del ratolí per canviar l'element"
 
-#: panel/item.c:359
+#: panel/item.c:374
 msgid "Add launcher"
 msgstr "Afegeix llançador"
 
-#: panel/item.c:363
+#: panel/item.c:379
 msgid "Add new item"
 msgstr "Afegeix un nou element"
 
-#: panel/item.c:490
+#: panel/item.c:509
 msgid "Launcher"
 msgstr "Llançador"
 
@@ -122,7 +132,7 @@ msgstr "Llançador"
 msgid "Are you sure you want to exit?"
 msgstr "Esteu segur que voleu sortir?"
 
-#: panel/main.c:252
+#: panel/main.c:253
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -133,7 +143,7 @@ msgstr ""
 "Part del Entorn d'Escriptori XFce\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:268
+#: panel/main.c:269
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -143,48 +153,48 @@ msgstr ""
 "finestras tal com estan definits a http://www..freedesktop.org. \n"
 "Algunes funcionalitats poden no anar tal com es van preveure."
 
-#: panel/controls.c:312 panel/panel.c:150
-msgid "/_Properties..."
-msgstr "/_Propietats..."
-
-#: panel/controls.c:313
-msgid "/_Remove"
-msgstr "/_Suprimir"
-
-#: panel/controls.c:315 panel/panel.c:148
+#: panel/controls.c:319 panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/Afegir _nou element"
 
-#: panel/controls.c:601
+#: panel/controls.c:321 panel/panel.c:125
+msgid "/_Properties..."
+msgstr "/_Propietats..."
+
+#: panel/controls.c:322
+msgid "/_Remove"
+msgstr "/_Suprimir"
+
+#: panel/controls.c:654
 msgid "This item has no configuration options"
 msgstr "Aquest element no té opcions de configuració"
 
-#: panel/panel.c:146
+#: panel/panel.c:121
 msgid "/XFce Panel"
 msgstr "/Plafó XFce"
 
-#: panel/panel.c:151
+#: panel/panel.c:126
 msgid "/_Settings manager"
 msgstr "/_Gestor d'ajustaments"
 
-#: panel/panel.c:153
+#: panel/panel.c:128
 msgid "/_About XFce"
 msgstr "/_Quant a XFce"
 
-#: panel/panel.c:154
+#: panel/panel.c:129
 msgid "/_Help"
 msgstr "/_Ajuda"
 
-#: panel/panel.c:156
+#: panel/panel.c:131
 msgid "/_Lock screen"
 msgstr "/_Bloqueja la pantalla"
 
-#: panel/panel.c:157
+#: panel/panel.c:132
 msgid "/E_xit"
 msgstr "/S_urt"
 
-#: panel/panel.c:478 settings/xfce_settings_plugin.c:76
-#: settings/xfce_settings_dialog.c:630
+#: panel/panel.c:469 settings/xfce_settings_plugin.c:76
+#: settings/xfce_settings_dialog.c:634
 msgid "XFce Panel"
 msgstr "Plafó XFce"
 
@@ -272,76 +282,76 @@ msgstr "Horitzontal"
 msgid "Vertical"
 msgstr "Vertical"
 
-#: settings/xfce_settings_dialog.c:217 settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:217 settings/xfce_settings_dialog.c:447
 msgid "Left"
 msgstr "Esquerra"
 
-#: settings/xfce_settings_dialog.c:221 settings/xfce_settings_dialog.c:447
+#: settings/xfce_settings_dialog.c:221 settings/xfce_settings_dialog.c:448
 msgid "Right"
 msgstr "Dreta"
 
-#: settings/xfce_settings_dialog.c:225 settings/xfce_settings_dialog.c:445
-#: settings/xfce_settings_dialog.c:501
+#: settings/xfce_settings_dialog.c:225 settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:502
 msgid "Top"
 msgstr "Superior"
 
-#: settings/xfce_settings_dialog.c:229 settings/xfce_settings_dialog.c:444
-#: settings/xfce_settings_dialog.c:509
+#: settings/xfce_settings_dialog.c:229 settings/xfce_settings_dialog.c:445
+#: settings/xfce_settings_dialog.c:510
 msgid "Bottom"
 msgstr "Inferior"
 
-#: settings/xfce_settings_dialog.c:364
+#: settings/xfce_settings_dialog.c:365
 msgid "Panel size:"
 msgstr "Tamany del plafó:"
 
-#: settings/xfce_settings_dialog.c:380
+#: settings/xfce_settings_dialog.c:381
 msgid "Panel orientation:"
 msgstr "Orientació del plafó:"
 
-#: settings/xfce_settings_dialog.c:397
+#: settings/xfce_settings_dialog.c:398
 msgid "Popup position:"
 msgstr "Posició emergent:"
 
-#: settings/xfce_settings_dialog.c:414
+#: settings/xfce_settings_dialog.c:415
 msgid "Icon theme:"
 msgstr "Tema d'icones:"
 
-#: settings/xfce_settings_dialog.c:485
+#: settings/xfce_settings_dialog.c:486
 msgid "Panel layer:"
 msgstr "Capa del plafó:"
 
-#: settings/xfce_settings_dialog.c:505
+#: settings/xfce_settings_dialog.c:506
 msgid "Normal"
 msgstr "Normal"
 
-#: settings/xfce_settings_dialog.c:524
+#: settings/xfce_settings_dialog.c:526
 msgid "Center the panel:"
 msgstr "Centra el plafó:"
 
-#: settings/xfce_settings_dialog.c:548
+#: settings/xfce_settings_dialog.c:550
 msgid "Set"
 msgstr "Fixa"
 
-#: settings/xfce_settings_dialog.c:584
+#: settings/xfce_settings_dialog.c:586
 msgid "Autohide:"
 msgstr "Ocultació automàtica:"
 
-#: settings/xfce_settings_dialog.c:644
+#: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel Settings"
 msgstr "Ajustaments del Plafó XFce"
 
 #. Appearance
-#: settings/xfce_settings_dialog.c:656
+#: settings/xfce_settings_dialog.c:661
 msgid "Appearance"
 msgstr "Aparença"
 
 #. Position
-#: settings/xfce_settings_dialog.c:677
+#: settings/xfce_settings_dialog.c:682
 msgid "Position"
 msgstr "Posició"
 
 #. autohide
-#: settings/xfce_settings_dialog.c:693
+#: settings/xfce_settings_dialog.c:698
 msgid "Behaviour"
 msgstr "Comportament"
 
@@ -457,19 +467,19 @@ msgstr "AM/PM"
 msgid "Show seconds:"
 msgstr "Mostra els segons:"
 
-#: plugins/clock/clock.c:608
+#: plugins/clock/clock.c:609
 msgid "Xfce Clock"
 msgstr "Rellotge XFce"
 
-#: plugins/pager/pager.c:323
+#: plugins/pager/pager.c:324
 msgid "Graphical pager"
 msgstr "Paginador gràfic"
 
-#: plugins/switcher/switcher.c:694
+#: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
 msgstr "Canvia l'escriptori"
 
-#: plugins/systembuttons/systembuttons.c:59
+#: plugins/systembuttons/systembuttons.c:60
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -479,62 +489,62 @@ msgstr ""
 "\n"
 "Demaneu al vostre administrador del sistema més informació"
 
-#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:150
 msgid "Lock the screen"
 msgstr "Bloqueja la pantalla"
 
-#: plugins/systembuttons/systembuttons.c:150
-#: plugins/systembuttons/systembuttons.c:586
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Exit"
 msgstr "Sortir"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:587
+#: plugins/systembuttons/systembuttons.c:152
+#: plugins/systembuttons/systembuttons.c:589
 msgid "Setup"
 msgstr "Configuració"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:588
+#: plugins/systembuttons/systembuttons.c:153
+#: plugins/systembuttons/systembuttons.c:590
 msgid "Info"
 msgstr "Informació"
 
-#: plugins/systembuttons/systembuttons.c:569
+#: plugins/systembuttons/systembuttons.c:570
 msgid "Show two buttons:"
 msgstr "Mostra dos butons:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:585
+#: plugins/systembuttons/systembuttons.c:587
 msgid "Lock"
 msgstr "Bloqueja"
 
-#: plugins/systembuttons/systembuttons.c:616
+#: plugins/systembuttons/systembuttons.c:619
 msgid "Button 1:"
 msgstr "Butó 1:"
 
-#: plugins/systembuttons/systembuttons.c:632
+#: plugins/systembuttons/systembuttons.c:635
 msgid "Button 2:"
 msgstr "Butó 2:"
 
-#: plugins/systembuttons/systembuttons.c:671
+#: plugins/systembuttons/systembuttons.c:674
 msgid "System buttons"
 msgstr "Butons del sistema"
 
-#: plugins/mailcheck/mailcheck.c:532
+#: plugins/mailcheck/mailcheck.c:535
 msgid "Mail box:"
 msgstr "Bústia del correu:"
 
-#: plugins/mailcheck/mailcheck.c:624
+#: plugins/mailcheck/mailcheck.c:628
 msgid "Mail command:"
 msgstr "Programa de correu:"
 
-#: plugins/mailcheck/mailcheck.c:637
+#: plugins/mailcheck/mailcheck.c:642
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Programa a executar quan es cliqui el butó del plafó"
 
-#: plugins/mailcheck/mailcheck.c:710
+#: plugins/mailcheck/mailcheck.c:715
 msgid "Interval (sec):"
 msgstr "Interval (seg):"
 
-#: plugins/mailcheck/mailcheck.c:786
+#: plugins/mailcheck/mailcheck.c:792
 msgid "Mail check"
 msgstr "Comprova el correu"

@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tamil XFCE Panel 4\n"
-"POT-Creation-Date: 2003-05-04 23:58+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-06-06 17:09+0200\n"
 "PO-Revision-Date: 2003-05-12 22:32+0600\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -14,35 +15,31 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:644
+#: panel/xfce_support.c:645
 msgid "Select file"
 msgstr "§¸¡ôÒ ¦¾Ã¢×¦ºö¸"
 
-#: panel/controls_dialog.c:261
+#: panel/controls_dialog.c:264
 msgid "Change item"
 msgstr "¯ÕôÀÊ Á¡üÚ"
 
-#: panel/controls_dialog.c:271
-#: panel/item_dialog.c:916
+#: panel/controls_dialog.c:274 panel/item_dialog.c:994
 msgid "_Revert"
 msgstr "_¿¢¨ÄÁ£ðÎ"
 
-#: panel/controls_dialog.c:276
-#: panel/item_dialog.c:922
+#: panel/controls_dialog.c:279 panel/item_dialog.c:1000
 msgid "_Done"
 msgstr "_ãÎ"
 
-#: panel/controls_dialog.c:299
+#: panel/controls_dialog.c:303
 msgid "Type:"
 msgstr "Å¨¸:"
 
-#: panel/controls_dialog.c:315
-#: panel/item_dialog.c:545
+#: panel/controls_dialog.c:319 panel/item_dialog.c:597
 msgid "Position:"
 msgstr "­¼õ:"
 
-#: panel/controls_dialog.c:360
-#: panel/controls.c:270
+#: panel/controls_dialog.c:364 panel/controls.c:271
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -52,75 +49,82 @@ msgstr ""
 "\n"
 "¯ÕôÀÊ¨Âì ¸Æð¼ Å¢ÕôÀÁ¡?"
 
-#: panel/item_dialog.c:260
+#: panel/item_dialog.c:267
 msgid "Other Icon"
 msgstr "§Å§Ã¡÷ ÌÚõÀ¼õ"
 
-#: panel/item_dialog.c:285
+#: panel/item_dialog.c:292
 msgid "Select icon"
 msgstr "ÌÚôÀ¼õ ¦¾Ã¢× ¦ºö"
 
-#: panel/item_dialog.c:322
+#: panel/item_dialog.c:330
 msgid "Icon:"
 msgstr "ÌÚõÀ¼õ:"
 
-#: panel/item_dialog.c:367
+#: panel/item_dialog.c:375
 msgid "Select command"
 msgstr "¸ð¼¨Ç ¦¾Ã¢×¦ºö¸"
 
-#: panel/item_dialog.c:394
+#: panel/item_dialog.c:402
 msgid "Command:"
 msgstr "¸ð¼¨Ç:"
 
-#: panel/item_dialog.c:426
-#: plugins/mailcheck/mailcheck.c:670
+#: panel/item_dialog.c:435 plugins/mailcheck/mailcheck.c:675
 msgid "Run in _terminal"
 msgstr "Ó¨ÉÂò¾¢ø þÂì¸"
 
-#: panel/item_dialog.c:431
-#: plugins/mailcheck/mailcheck.c:678
+#: panel/item_dialog.c:440 plugins/mailcheck/mailcheck.c:683
 msgid "Use startup _notification"
 msgstr "¦¾¡¼ì¸ _«È¢ôÒ ÀÂýÀÎò¾×õ"
 
-#: panel/item_dialog.c:458
+#: panel/item_dialog.c:467
 msgid "Caption:"
 msgstr "¾¨ÄôÒ Å¡ì¸¢Âõ"
 
-#: panel/item_dialog.c:497
+#: panel/item_dialog.c:506
 msgid "Tooltip:"
 msgstr "¯¾Å¢¸ÕÅ¢:"
 
-#: panel/item_dialog.c:637
+#: panel/item_dialog.c:542
+#, fuzzy
+msgid "Menu:"
+msgstr "ÀðÊ"
+
+#: panel/item_dialog.c:549
+msgid "Attach menu to launcher"
+msgstr ""
+
+#: panel/item_dialog.c:692
 msgid "Icon Preview"
 msgstr "ÌÚõÀ¼õ Óý¸¡ðº¢"
 
-#: panel/item_dialog.c:641
+#: panel/item_dialog.c:696
 msgid "Drag file onto this frame to change the icon"
 msgstr "ÌÚõÀ¼ò¨¾ Á¡üÚÅ¾üÌ, þîºð¼õ §Áø §¸¡ôÒ þØòÐô §À¡¼×õ"
 
 #. create dialog
-#: panel/item_dialog.c:903
+#: panel/item_dialog.c:981
 msgid "Change menu item"
 msgstr "ÀðÊ ¯ÕôÀÊ Á¡üÈ×õ"
 
 #. add buttons
-#: panel/item_dialog.c:910
+#: panel/item_dialog.c:988
 msgid "Remove"
 msgstr "¸ÆðÎ¸"
 
-#: panel/item.c:337
+#: panel/item.c:352
 msgid "Click mouse button 3 to change item"
 msgstr "¯ÕôÀÊ Á¡üÚÅ¾üÌ 3¬õ ÍðÊ ¦À¡ò¾¡¨É «Óò¾×õ"
 
-#: panel/item.c:359
+#: panel/item.c:374
 msgid "Add launcher"
 msgstr "¦¾¡¼í¸÷ §º÷ì¸×õ"
 
-#: panel/item.c:363
+#: panel/item.c:379
 msgid "Add new item"
 msgstr "Ò¾¢Â ¯ÕôÀÊ §º÷ì¸×õ"
 
-#: panel/item.c:490
+#: panel/item.c:509
 msgid "Launcher"
 msgstr "¦¾¡¼í¸÷"
 
@@ -128,7 +132,7 @@ msgstr "¦¾¡¼í¸÷"
 msgid "Are you sure you want to exit?"
 msgstr "¦ÅÇ¢¦ºøÄ ¯í¸ÙìÌ Å¢ÕôÀÁ¡?"
 
-#: panel/main.c:252
+#: panel/main.c:253
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -139,59 +143,58 @@ msgstr ""
 "XFce ¸½¢§Á¨º ÝÆ¨Ä §º÷ó¾Ð\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:268
+#: panel/main.c:269
 msgid ""
-"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+"Your window manager does not seem to support the new window manager hints as "
+"defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"¯í¸û º¡ÇÃ§ÁÄ¡Ç÷ http://www.freedesktop.org «Ú¾¢Â¢ð¼ º¡ÇÃ-ÌÈ¢ôÀ¢Î¸ÙìÌ ¬¾ÃÅÇ¢ôÒ ¸¢¨¼Â¡Ð. \n"
+"¯í¸û º¡ÇÃ§ÁÄ¡Ç÷ http://www.freedesktop.org «Ú¾¢Â¢ð¼ º¡ÇÃ-ÌÈ¢ôÀ¢Î¸ÙìÌ ¬¾ÃÅÇ¢"
+"ôÒ ¸¢¨¼Â¡Ð. \n"
 "º¢Ä XFce ¦ºÂøÀ¡Î¸û Å¢ÕõÀ¢ÂÐ§À¡ø §Å¨Ä¦ºöÂ¡Ð."
 
-#: panel/controls.c:312
-#: panel/panel.c:150
-msgid "/_Properties..."
-msgstr "/_ÀñÒ¸û..."
-
-#: panel/controls.c:313
-msgid "/_Remove"
-msgstr "/_¸ÆðÎ¸"
-
-#: panel/controls.c:315
-#: panel/panel.c:148
+#: panel/controls.c:319 panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/Ò¾¢Â _¯ÕôÀÊ §º÷ì¸×õ"
 
-#: panel/controls.c:601
+#: panel/controls.c:321 panel/panel.c:125
+msgid "/_Properties..."
+msgstr "/_ÀñÒ¸û..."
+
+#: panel/controls.c:322
+msgid "/_Remove"
+msgstr "/_¸ÆðÎ¸"
+
+#: panel/controls.c:654
 msgid "This item has no configuration options"
 msgstr "þó¾ ¯ÕôÀÊìÌ «¨ÁôÒò §¾÷×¸û ¸¢¨¼Â¡Ð"
 
-#: panel/panel.c:146
+#: panel/panel.c:121
 msgid "/XFce Panel"
 msgstr "/XFCE ÀÄ¨¸"
 
-#: panel/panel.c:151
+#: panel/panel.c:126
 msgid "/_Settings manager"
 msgstr "/_«¨ÁôÒ¸û §ÁÄ¡Ç÷"
 
-#: panel/panel.c:153
+#: panel/panel.c:128
 msgid "/_About XFce"
 msgstr "/_XFCE ÀüÈ¢"
 
-#: panel/panel.c:154
+#: panel/panel.c:129
 msgid "/_Help"
 msgstr "/_¯¾Å¢"
 
-#: panel/panel.c:156
+#: panel/panel.c:131
 msgid "/_Lock screen"
 msgstr "/_¾¢¨Ã¨Âô âðÎ¸"
 
-#: panel/panel.c:157
+#: panel/panel.c:132
 msgid "/E_xit"
 msgstr "/¦ÅÇ¢_î¦ºø"
 
-#: panel/panel.c:478
-#: settings/xfce_settings_plugin.c:76
-#: settings/xfce_settings_dialog.c:630
+#: panel/panel.c:469 settings/xfce_settings_plugin.c:76
+#: settings/xfce_settings_dialog.c:634
 msgid "XFce Panel"
 msgstr "XFCE ÀÄ¨¸"
 
@@ -279,80 +282,76 @@ msgstr "¸¢¨¼Â¡É"
 msgid "Vertical"
 msgstr "¦ºíÌò¾Á¡É"
 
-#: settings/xfce_settings_dialog.c:217
-#: settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:217 settings/xfce_settings_dialog.c:447
 msgid "Left"
 msgstr "­¼Ð"
 
-#: settings/xfce_settings_dialog.c:221
-#: settings/xfce_settings_dialog.c:447
+#: settings/xfce_settings_dialog.c:221 settings/xfce_settings_dialog.c:448
 msgid "Right"
 msgstr "ÅÄÐ"
 
-#: settings/xfce_settings_dialog.c:225
-#: settings/xfce_settings_dialog.c:445
-#: settings/xfce_settings_dialog.c:501
+#: settings/xfce_settings_dialog.c:225 settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:502
 msgid "Top"
 msgstr "§Áø"
 
-#: settings/xfce_settings_dialog.c:229
-#: settings/xfce_settings_dialog.c:444
-#: settings/xfce_settings_dialog.c:509
+#: settings/xfce_settings_dialog.c:229 settings/xfce_settings_dialog.c:445
+#: settings/xfce_settings_dialog.c:510
 msgid "Bottom"
 msgstr "¸£ú"
 
-#: settings/xfce_settings_dialog.c:364
+#: settings/xfce_settings_dialog.c:365
 msgid "Panel size:"
 msgstr "ÀÄ¨¸ «Ç×:"
 
-#: settings/xfce_settings_dialog.c:380
+#: settings/xfce_settings_dialog.c:381
 msgid "Panel orientation:"
 msgstr "ÀÄ¨¸ ¾¢¨º «¨Á×:"
 
-#: settings/xfce_settings_dialog.c:397
+#: settings/xfce_settings_dialog.c:398
 msgid "Popup position:"
 msgstr "ÀÄ¨¸ ­¼õ:"
 
-#: settings/xfce_settings_dialog.c:414
+#: settings/xfce_settings_dialog.c:415
 msgid "Icon theme:"
 msgstr "ÌÚõÀ¼õ §¾¡üÈõ:"
 
-#: settings/xfce_settings_dialog.c:485
+#: settings/xfce_settings_dialog.c:486
 msgid "Panel layer:"
 msgstr "ÀÄ¨¸ «Îì¸õ:"
 
-#: settings/xfce_settings_dialog.c:505
+#: settings/xfce_settings_dialog.c:506
 msgid "Normal"
 msgstr "­ÂøÀ¡ÉÐ"
 
-#: settings/xfce_settings_dialog.c:524
+#: settings/xfce_settings_dialog.c:526
 msgid "Center the panel:"
 msgstr "ÀÄ¨¸¨Â ¿ÎôÀÎòÐ:"
 
-#: settings/xfce_settings_dialog.c:548
+#: settings/xfce_settings_dialog.c:550
 msgid "Set"
 msgstr "«¨Á"
 
-#: settings/xfce_settings_dialog.c:584
+#: settings/xfce_settings_dialog.c:586
 msgid "Autohide:"
 msgstr "¾¡É¡¸§Å ´Ç¢/Á¨È:"
 
-#: settings/xfce_settings_dialog.c:644
+#: settings/xfce_settings_dialog.c:649
 msgid "XFce Panel Settings"
 msgstr "XFce ÀÄ¨¸ «¨ÁôÒ¸û"
 
 #. Appearance
-#: settings/xfce_settings_dialog.c:656
+#: settings/xfce_settings_dialog.c:661
 msgid "Appearance"
 msgstr "§¾¡üÈõ"
 
 #. Position
-#: settings/xfce_settings_dialog.c:677
+#: settings/xfce_settings_dialog.c:682
 msgid "Position"
 msgstr "­¼õ"
 
 #. autohide
-#: settings/xfce_settings_dialog.c:693
+#: settings/xfce_settings_dialog.c:698
 msgid "Behaviour"
 msgstr "´Øì¸õ"
 
@@ -468,19 +467,19 @@ msgstr "¸¡/Á¡"
 msgid "Show seconds:"
 msgstr "¦¿¡Ê¸û ¸¡ñÀ¢ì¸×õ:"
 
-#: plugins/clock/clock.c:608
+#: plugins/clock/clock.c:609
 msgid "Xfce Clock"
 msgstr "XFCE ¸Ê¸¡Ãõ"
 
-#: plugins/pager/pager.c:323
+#: plugins/pager/pager.c:324
 msgid "Graphical pager"
 msgstr "Å¨ÃÅ¢Âø ÀÂÉ¨ÆÂõ"
 
-#: plugins/switcher/switcher.c:694
+#: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
 msgstr "§Å¨ÄÂ¢¼ Á¡üÈ¢"
 
-#: plugins/systembuttons/systembuttons.c:59
+#: plugins/systembuttons/systembuttons.c:60
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -490,63 +489,62 @@ msgstr ""
 "\n"
 "¯í¸û ¸½¢ô¦À¡È¢ ¿¢÷Å¡¸¢Ô¼ý ¦¾¡¼÷Ò¦¸¡ûÇ×õ"
 
-#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:150
 msgid "Lock the screen"
 msgstr "¾¢¨Ã¨Âô âðÎ¸"
 
-#: plugins/systembuttons/systembuttons.c:150
-#: plugins/systembuttons/systembuttons.c:586
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Exit"
 msgstr "¦ºÇ¢î¦ºø"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:587
+#: plugins/systembuttons/systembuttons.c:152
+#: plugins/systembuttons/systembuttons.c:589
 msgid "Setup"
 msgstr "«¨ÁôÒ"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:588
+#: plugins/systembuttons/systembuttons.c:153
+#: plugins/systembuttons/systembuttons.c:590
 msgid "Info"
 msgstr "¾¸Åø"
 
-#: plugins/systembuttons/systembuttons.c:569
+#: plugins/systembuttons/systembuttons.c:570
 msgid "Show two buttons:"
 msgstr "þÃñÎ ¦À¡ò¾¡ý¸¨Ç ¸¡ðÎ¸:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:585
+#: plugins/systembuttons/systembuttons.c:587
 msgid "Lock"
 msgstr "âðÎ"
 
-#: plugins/systembuttons/systembuttons.c:616
+#: plugins/systembuttons/systembuttons.c:619
 msgid "Button 1:"
 msgstr "¦À¡ò¾¡ý 1:"
 
-#: plugins/systembuttons/systembuttons.c:632
+#: plugins/systembuttons/systembuttons.c:635
 msgid "Button 2:"
 msgstr "¦À¡ò¾¡ý 2:"
 
-#: plugins/systembuttons/systembuttons.c:671
+#: plugins/systembuttons/systembuttons.c:674
 msgid "System buttons"
 msgstr "«¨ÁôÒ ¦À¡ò¾¡ý¸û"
 
-#: plugins/mailcheck/mailcheck.c:532
+#: plugins/mailcheck/mailcheck.c:535
 msgid "Mail box:"
 msgstr "«ïºø ¦ÀðÊ:"
 
-#: plugins/mailcheck/mailcheck.c:624
+#: plugins/mailcheck/mailcheck.c:628
 msgid "Mail command:"
 msgstr "«ïºø ¸ð¼¨Ç:"
 
-#: plugins/mailcheck/mailcheck.c:637
+#: plugins/mailcheck/mailcheck.c:642
 msgid "Command to run when the button on the panel is clicked"
 msgstr "ÀÄ¨¸ ¦À¡ò¾¡¨É «Óò¾¢É¡ø þÂì¸§ÅñÊÂ ¸ð¼¨Ç"
 
-#: plugins/mailcheck/mailcheck.c:710
+#: plugins/mailcheck/mailcheck.c:715
 msgid "Interval (sec):"
 msgstr "­¨¼¦ÅÇ¢ (¦¿¡Ê):"
 
-#: plugins/mailcheck/mailcheck.c:786
+#: plugins/mailcheck/mailcheck.c:792
 msgid "Mail check"
 msgstr "«ïºø ºÃ¢À¡÷ôÒ"
-
