@@ -92,8 +92,7 @@ static const char *keys[] = {
     "Categories",
     "OnlyShowIn",
     "Exec",
-    "Terminal",
-    NULL
+    "Terminal"
 };
 
 /* useful widgets */

@@ -26,6 +26,8 @@
 
 G_MODULE_IMPORT void write_panel_config (void);
 
+G_MODULE_IMPORT void write_final_panel_config (void);
+  
 G_MODULE_IMPORT void get_global_prefs (void);
 
 G_MODULE_IMPORT void get_panel_config (void);
