@@ -463,10 +463,8 @@ run_xfce_settings_dialog (McsPlugin * mp)
     /* pretty header */
     vbox = GTK_DIALOG (dialog)->vbox;
 
-    pb = gdk_pixbuf_scale_simple (mp->icon, 32, 32, GDK_INTERP_HYPER);
-    header = xfce_create_header (pb, _("Xfce Panel Settings"));
+    header = xfce_create_header (mp->icon, _("Xfce Panel Settings"));
     gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, TRUE, 0);
-    g_object_unref (pb);
 
     add_spacer (GTK_BOX (vbox), 2 * BORDER);
 
