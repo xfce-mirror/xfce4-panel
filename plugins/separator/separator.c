@@ -35,6 +35,7 @@
 typedef struct
 {
     GtkWidget *box;
+    GtkWidget *align;
     GtkWidget *hsep;
     GtkWidget *vsep;
 }
@@ -86,19 +87,19 @@ separator_set_orientation (Control * control, int orientation)
     t_separator *sep = control->data;
     GtkWidget *child;
 
-    child = gtk_bin_get_child(GTK_BIN(sep->box));
+    child = gtk_bin_get_child(GTK_BIN(sep->align));
 
     if (child)
-	gtk_container_remove(GTK_CONTAINER(sep->box), child);
+	gtk_container_remove(GTK_CONTAINER(sep->align), child);
 
     if (orientation == HORIZONTAL)
     {
-	gtk_container_add(GTK_CONTAINER(sep->box), sep->vsep);
+	gtk_container_add(GTK_CONTAINER(sep->align), sep->vsep);
 	gtk_widget_show(sep->vsep);
     }
     else
     {
-	gtk_container_add(GTK_CONTAINER(sep->box), sep->hsep);
+	gtk_container_add(GTK_CONTAINER(sep->align), sep->hsep);
 	gtk_widget_show(sep->hsep);
     }
 }
@@ -111,6 +112,10 @@ separator_new (void)
     sep->box = gtk_event_box_new();
     gtk_widget_show(sep->box);
 
+    sep->align = gtk_alignment_new(0.5, 0.5, 0.8, 0.8);
+    gtk_widget_show(sep->align);
+    gtk_container_add(GTK_CONTAINER(sep->box), sep->align);
+    
     sep->hsep = gtk_hseparator_new();
     g_object_ref(sep->hsep);
     gtk_object_sink(GTK_OBJECT(sep->hsep));
