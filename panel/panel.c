@@ -120,7 +120,7 @@ set_opacity (Panel * p, gboolean translucent)
 {
     guint opacity;
 
-    opacity = (translucent ? 0xe0000000 : 0xffffffff);
+    opacity = (translucent ? 0xc0000000 : 0xffffffff);
     gdk_error_trap_push ();
 
     gdk_property_change (p->toplevel->window,
@@ -137,7 +137,7 @@ update_partial_struts (Panel * p)
 {
     gulong data[12] = { 0, };
 
-    if (!p->priv->settings.autohide && p->priv->settings.layer == 0)
+    if (!p->priv->settings.autohide)
     {
 	int w, h, x, y;
 
@@ -855,7 +855,12 @@ static gboolean
 panel_enter (GtkWindow * w, GdkEventCrossing * event, Panel * p)
 {
     if (!(settings.autohide))
+    {
+        if (event->detail != GDK_NOTIFY_INFERIOR)
+            set_opacity (p, FALSE);
+        
 	return FALSE;
+    }
 
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
@@ -880,7 +885,12 @@ static gboolean
 panel_leave (GtkWidget * w, GdkEventCrossing * event, Panel * p)
 {
     if (!(settings.autohide))
-	return FALSE;
+    {
+        if (event->detail != GDK_NOTIFY_INFERIOR)
+            set_opacity (p, TRUE);
+	
+        return FALSE;
+    }
 
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
@@ -959,6 +969,8 @@ set_panel_window_properties (Panel * p)
 {
     GtkWindow *window = GTK_WINDOW (p->toplevel);
     
+    gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DOCK);
+
     gtk_window_set_decorated (window, FALSE);
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);
@@ -978,8 +990,8 @@ create_panel_window (Panel * p)
     window = GTK_WINDOW (w);
 
     gtk_window_set_title (window, _("Xfce Panel"));
-
     gtk_window_set_gravity (window, GDK_GRAVITY_STATIC);
+    gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DOCK);
 
     pb = get_panel_pixbuf ();
     gtk_window_set_icon (window, pb);
@@ -1132,6 +1144,8 @@ create_panel (void)
 
     if (p->priv->settings.autohide)
 	panel_set_autohide (TRUE);
+    else
+        set_opacity (p, TRUE);
 
     update_partial_struts (p);
 
@@ -1231,6 +1245,8 @@ panel_set_orientation (int orientation)
 
     if (hidden)
 	panel_set_autohide (TRUE);
+    else
+        set_opacity (&panel, TRUE);
 
     update_partial_struts (&panel);
 }
@@ -1239,6 +1255,7 @@ G_MODULE_EXPORT /* EXPORT:panel_set_layer */
 void
 panel_set_layer (int layer)
 {
+#if 0
     panel.priv->settings.layer = layer;
 
     /* backwards compat */
@@ -1252,7 +1269,6 @@ panel_set_layer (int layer)
 	    gtk_window_present (GTK_WINDOW (panel.toplevel));
 
 	update_partial_struts (&panel);
-        set_opacity (&panel, (layer == ABOVE));
 
 #if 0
 	/* dock type hint */
@@ -1283,6 +1299,7 @@ panel_set_layer (int layer)
 
 #endif
     }
+#endif
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_set_size */
@@ -1385,13 +1402,18 @@ panel_set_autohide (gboolean hide)
     {
 	DBG ("add hide timeout");
 
-	panel.hide_timeout = g_timeout_add (1000,
-					    (GSourceFunc) panel_hide_timeout,
-					    &panel);
+        if (!panel.hide_timeout)
+        {
+            panel.hide_timeout = 
+                g_timeout_add (1000, (GSourceFunc) panel_hide_timeout, &panel);
+        }
+
+        set_opacity (&panel, FALSE);
     }
     else
     {
 	panel_set_hidden (&panel, hide);
+        set_opacity (&panel, TRUE);
     }
 
     update_partial_struts (&panel);
@@ -1436,6 +1458,7 @@ panel_parse_xml (xmlNodePtr node)
 	g_free (value);
     }
 
+#if 0
     value = xmlGetProp (node, (const xmlChar *) "layer");
 
     if (value)
@@ -1446,6 +1469,7 @@ panel_parse_xml (xmlNodePtr node)
 
 	g_free (value);
     }
+#endif
 
     value = xmlGetProp (node, (const xmlChar *) "size");
 
@@ -1640,9 +1664,11 @@ panel_write_xml (xmlNodePtr root)
     snprintf (value, 2, "%d", settings.orientation);
     xmlSetProp (node, "orientation", value);
 
+#if 0
     snprintf (value, 2, "%d", settings.layer);
     xmlSetProp (node, "layer", value);
-
+#endif
+    
     snprintf (value, 2, "%d", settings.size);
     xmlSetProp (node, "size", value);
 
@@ -1683,17 +1709,24 @@ menu_destroyed (GtkWidget * menu, Panel * p)
 {
     panel_unblock_autohide (p);
 
-    if (p->priv->settings.autohide
-	&& gdk_window_at_pointer (NULL, NULL) != p->toplevel->window)
+    if (p->priv->block_autohide == 0 
+        && gdk_window_at_pointer (NULL, NULL) != p->toplevel->window)
     {
-	GdkEvent *ev = gdk_event_new (GDK_LEAVE_NOTIFY);
+        if (p->priv->settings.autohide)
+        {
+            GdkEvent *ev = gdk_event_new (GDK_LEAVE_NOTIFY);
 
-	((GdkEventCrossing *) ev)->time = GDK_CURRENT_TIME;
-	((GdkEventCrossing *) ev)->detail = GDK_NOTIFY_NONLINEAR;
+            ((GdkEventCrossing *) ev)->time = GDK_CURRENT_TIME;
+            ((GdkEventCrossing *) ev)->detail = GDK_NOTIFY_NONLINEAR;
 
-	gtk_widget_event (p->toplevel, ev);
+            gtk_widget_event (p->toplevel, ev);
 
-	gdk_event_free (ev);
+            gdk_event_free (ev);
+        }
+        else
+        {
+            set_opacity (p, TRUE);
+        }
     }
 }
 

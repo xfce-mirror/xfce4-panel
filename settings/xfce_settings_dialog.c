@@ -313,6 +313,7 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
 }
 
+#if 0
 /* layer */
 
 static void
@@ -368,6 +369,7 @@ add_layer_box (GtkBox * box, GtkSizeGroup * sg)
 
     g_signal_connect (cb, "toggled", G_CALLBACK (layer_changed), NULL);
 }
+#endif
 
 /* autohide */
 
@@ -496,7 +498,9 @@ run_xfce_settings_dialog (McsPlugin * mp)
     gtk_widget_show (vbox);
     xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
+#if 0
     add_layer_box (GTK_BOX (vbox), sg);
+#endif
 
     add_autohide_box (GTK_BOX (vbox), sg);
 
