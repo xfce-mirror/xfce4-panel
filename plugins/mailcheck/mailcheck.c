@@ -123,6 +123,70 @@ mailcheck_set_tip (t_mailcheck * mc)
 	g_free (tip);
     }
 }
+    
+static gboolean
+set_mail_icon (t_mailcheck * mc)
+{
+    if (mc->status == NO_MAIL)
+	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
+				    mc->nomail_pb);
+    else if (mc->status == OLD_MAIL)
+	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
+				    mc->oldmail_pb);
+    else
+	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
+				    mc->newmail_pb);
+
+    return FALSE;
+}
+
+static gboolean
+check_mail (t_mailcheck * mailcheck)
+{
+    int mail;
+    struct stat s;
+
+    DBG("Checking mail ... ");
+    
+    if (stat (mailcheck->mbox, &s) < 0)
+	mail = NO_MAIL;
+    else if (!s.st_size)
+	mail = NO_MAIL;
+    else if (s.st_mtime <= s.st_atime)
+	mail = OLD_MAIL;
+    else
+	mail = NEW_MAIL;
+
+    if (mail != mailcheck->status)
+    {
+	mailcheck->status = mail;
+
+	g_idle_add ((GSourceFunc) set_mail_icon, mailcheck);
+    }
+
+    DBG("Done\n");
+    
+    /* keep the g_timeout running */
+    return TRUE;
+}
+
+
+static void
+run_mailcheck (t_mailcheck * mc)
+{
+    if (mc->timeout_id > 0)
+    {
+	g_source_remove (mc->timeout_id);
+	mc->timeout_id = 0;
+    }
+
+    if (mc->interval > 0)
+    {
+	mc->timeout_id = g_timeout_add (mc->interval * 1000,
+					(GSourceFunc) check_mail, mc);
+    }
+}
+
 
 void
 mailcheck_read_config (Control * control, xmlNodePtr node)
@@ -202,6 +266,8 @@ mailcheck_read_config (Control * control, xmlNodePtr node)
 	    }
 	}
     }
+
+    run_mailcheck (mc);
 
     mailcheck_set_tip (mc);
 }
@@ -304,67 +370,8 @@ mailcheck_free (Control * control)
     g_free (mailcheck);
 }
 
-static gboolean
-set_mail_icon (t_mailcheck * mc)
-{
-    if (mc->status == NO_MAIL)
-	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
-				    mc->nomail_pb);
-    else if (mc->status == OLD_MAIL)
-	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
-				    mc->oldmail_pb);
-    else
-	xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (mc->button),
-				    mc->newmail_pb);
 
-    return FALSE;
-}
 
-static gboolean
-check_mail (t_mailcheck * mailcheck)
-{
-    int mail;
-    struct stat s;
-
-    DBG("Checking mail ... ");
-    
-    if (stat (mailcheck->mbox, &s) < 0)
-	mail = NO_MAIL;
-    else if (!s.st_size)
-	mail = NO_MAIL;
-    else if (s.st_mtime <= s.st_atime)
-	mail = OLD_MAIL;
-    else
-	mail = NEW_MAIL;
-
-    if (mail != mailcheck->status)
-    {
-	mailcheck->status = mail;
-
-	g_idle_add ((GSourceFunc) set_mail_icon, mailcheck);
-    }
-
-    DBG("Done\n");
-    
-    /* keep the g_timeout running */
-    return TRUE;
-}
-
-static void
-run_mailcheck (t_mailcheck * mc)
-{
-    if (mc->timeout_id > 0)
-    {
-	g_source_remove (mc->timeout_id);
-	mc->timeout_id = 0;
-    }
-
-    if (mc->interval > 0)
-    {
-	mc->timeout_id = g_timeout_add (mc->interval * 1000,
-					(GSourceFunc) check_mail, mc);
-    }
-}
 
 static void
 mailcheck_set_theme (Control * control, const char *theme)
@@ -785,7 +792,6 @@ create_mailcheck_control (Control * control)
     control->data = (gpointer) mailcheck;
     control->with_popup = FALSE;
 
-    run_mailcheck (mailcheck);
 
     return TRUE;
 }
