@@ -531,6 +531,10 @@ groups_remove (int index)
     PanelGroup *group;
 
     li = g_slist_nth (group_list, index);
+    /* Paranoid, should not happen here */
+    if (!li) 
+        return;
+ 
     group = li->data;
 
     DBG ("unref class %s", group->control->cclass->caption);
@@ -559,6 +563,9 @@ groups_show_popup (int index, gboolean show)
     PanelGroup *group;
 
     li = g_slist_nth (group_list, index);
+    if (!li) 
+        return;
+
     group = li->data;
 
     if (show && group->control->with_popup && !group->popup)
