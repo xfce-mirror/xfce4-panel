@@ -34,8 +34,9 @@ const char *icon_names[NUM_ICONS];
 
 /* icon themes */
 static char *icon_suffix[] = {
-    "png",
     "svg",	/* librsvg provides a gdk_pixbuf loader for svg files */
+    "svg.gz",	/* librsvg provides a gdk_pixbuf loader for svg files */
+    "png",
     "xpm",
     NULL
 };
