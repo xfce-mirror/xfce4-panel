@@ -140,6 +140,21 @@ quit (gboolean force)
     }
 }
 
+void
+restart (void)
+{
+    /* don't really quit */
+    sigstate = RESTART;
+    
+    /* calls gtk_main_quit() */
+    quit(TRUE);
+
+    /* progname is saved on startup 
+     * TODO: do we need to pass on arguments? */
+    g_message("%s: restarting %s ...", PACKAGE, progname);
+    execlp(progname,progname,NULL);
+}
+
 /*  Signals
  *  -------
 */
@@ -158,13 +173,7 @@ check_signal_state (void)
 	{
 	    restarting = TRUE;
 	    
-	    /* calls gtk_main_quit() */
-	    quit(TRUE);
-
-	    /* progname is saved on startup 
-	     * TODO: do we need to pass on arguments? */
-	    g_message("%s: restarting %s ...", PACKAGE, progname);
-	    execlp(progname,progname,NULL);
+	    restart();
 	}
 	else if (sigstate == QUIT)
 	{
