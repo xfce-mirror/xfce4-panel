@@ -79,6 +79,22 @@ struct _ItemDialog
 static GtkWidget *menudialog = NULL;	/* keep track of this for signal 
 					   handling */
 
+static GtkTargetEntry entry[] = {
+    {"text/uri-list", 0, 0},
+    {"STRING", 0, 1}
+};
+
+static const char *keys[] = {
+    "Name",
+    "Comment",
+    "Icon",
+    "Categories",
+    "OnlyShowIn",
+    "Exec",
+    "Terminal",
+    NULL
+};
+
 /* useful widgets */
 
 static void 
@@ -193,6 +209,69 @@ command_toggle_cb (GtkWidget *w, CommandOptions *opts)
     }
 }
 
+/* Drag and drop URI callback (Appfinder' stuff) */
+/* TODO: 
+ * - also add icon terminal checkbutton and tooltip (Comment) from 
+ *   .desktop file 
+ * - allow drop on window (no way to find window currently though...) 
+ */
+static void
+drag_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
+	      gint y, GtkSelectionData * sd, guint info,
+	      guint time, CommandOptions * opts)
+{
+    gchar *filename = NULL;
+    gchar *temp = NULL;
+    gchar *buf = NULL;
+    gchar *exec = NULL;
+    gchar **execp = NULL;
+    XfceDesktopEntry *dentry;
+
+    if (sd->data)
+    {
+	if (g_str_has_prefix (sd->data, "file://"))
+	    buf = g_build_filename (&(sd->data)[7], NULL);
+	else if (g_str_has_prefix (sd->data, "file:"))
+	    buf = g_build_filename (&(sd->data)[5], NULL);
+	else
+	    buf = g_strdup (sd->data);
+
+	/* Remove \n at the end of filename (if present) */
+	temp = strtok (buf, "\n");
+	if (!temp)
+	    filename = g_strdup (buf);
+	else if (!g_file_test (temp, G_FILE_TEST_EXISTS))
+	    filename = g_strndup (temp, strlen (temp) - 1);
+	else
+	    filename = g_strdup (temp);
+	g_free (buf);
+
+	if (g_file_test (filename, G_FILE_TEST_EXISTS) &&
+	    XFCE_IS_DESKTOP_ENTRY (dentry =
+				   xfce_desktop_entry_new (filename, keys,
+							   7)))
+	{
+
+	    if (xfce_desktop_entry_get_string (dentry, "Exec", FALSE, &exec)
+		&& exec)
+	    {
+		if (g_strrstr (exec, "%") != NULL)
+		{
+		    execp = g_strsplit (exec, "%", 0);
+		    g_free (exec);
+		    exec = g_strdup (execp[0]);
+		    g_strfreev (execp);
+		}
+		command_options_set_command (opts, exec, FALSE, FALSE);
+	    }
+
+	    g_object_unref (dentry);
+	}
+    }
+
+    gtk_drag_finish (context, sd->data != NULL, FALSE, time);
+}
+
 CommandOptions *
 create_command_options (GtkSizeGroup *sg)
 {
@@ -220,7 +299,8 @@ create_command_options (GtkSizeGroup *sg)
     gtk_size_group_add_widget (sg, w);
     
     /* only available when compiled with libdbh support and 
-     * libxfce4_combo module is installed */
+     * libxfce4_combo module is installed 
+     * Disabled, doesn't work properly */
     opts->info = 
 	create_completion_combo ((ComboCallback)combo_completion_cb, opts);
 
@@ -249,7 +329,14 @@ create_command_options (GtkSizeGroup *sg)
     g_signal_connect (w, "clicked", G_CALLBACK (command_browse_cb), 
 	    	      opts);
 
-    /* TODO: xfce4-appfinder support (desktop files / menu spec) */
+    /* xfce4-appfinder support (desktop files / menu spec) */
+    gtk_drag_dest_set (opts->base, GTK_DEST_DEFAULT_ALL, entry, 2, 
+	    	       GDK_ACTION_COPY);
+    g_signal_connect (opts->base, "drag-data-received", 
+	    	      G_CALLBACK (drag_drop_cb), opts);
+    
+    g_signal_connect (opts->command_entry, "drag-data-received", 
+	    	      G_CALLBACK (drag_drop_cb), opts);
     
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -928,31 +1015,12 @@ popup_menu_changed (GtkToggleButton * tb, Control *control)
 static inline void
 add_menu_option (GtkBox *box, ItemDialog *idlg, GtkSizeGroup *sg)
 {
-#if 0
-    GtkWidget *hbox;
-    GtkWidget *label;
-
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new (_("Menu:"));
-    gtk_size_group_add_widget (sg, label);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-#endif
     idlg->menu_checkbutton =
 	gtk_check_button_new_with_label (_("Attach menu to launcher"));
     gtk_widget_show (idlg->menu_checkbutton);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (idlg->menu_checkbutton),
 				  idlg->item->with_popup);
-#if 0
-    gtk_box_pack_start (GTK_BOX (hbox), idlg->menu_checkbutton, 
-	    		FALSE, FALSE, 0);
-#else
     gtk_box_pack_start (box, idlg->menu_checkbutton, FALSE, FALSE, 0);
-#endif    
 
     g_signal_connect (idlg->menu_checkbutton, "toggled",
 		      G_CALLBACK (popup_menu_changed), idlg->control);
