@@ -1,0 +1,128 @@
+Proposal for xml config file for xfce
+-------------------------------------
+namespace: xfce:"http://www.xfce.org/xfce"
+root: Panel
+
+name: Panel
+parent: none
+properties: size (int), popupsize (int), style (int), icontheme (string)
+children:
+  Position
+  Central
+  Left
+  Right
+
+name: Position
+parent: Panel  
+properties: x (int), y (int)
+content: none
+children: none
+
+name: Central
+parent: Panel  
+properties: none
+content: none
+children:
+  Screens
+  Lock
+  Power
+
+name: Left
+parent: Panel  
+properties: visible
+content: none
+children:
+  Group
+
+name Right
+parent: Panel  
+properties: visible
+content: none
+children:
+  Group
+
+name: Screens
+parent: Central
+properties: visible (int)
+content: none
+children:
+  Screen
+
+name: Screen
+parent: Screens
+properties: none
+content: screen name
+children: none
+
+name: Lock
+parent: Central
+properties: none
+content: lock command
+children: none
+
+name: Power
+parent: Central
+properties: ?
+content: ? something to quit the session
+children: none
+
+name: Group
+parent: Left, Right
+properties: none
+content: none
+children:
+  Popup
+  Item
+  Module
+
+name: Popup
+parent: Group
+properties: none
+content: none
+children:
+  Item
+
+name: Item
+parent: Group, Popup
+properties: none
+content: none
+children:
+  Caption
+  Command
+  Tooltip
+  Icon
+:close
+
+name: Module
+parent: Group
+properties: id (int)
+content: module name
+children: none
+
+name: Caption
+parent: Item  
+properties: none
+content: label for item
+children: none
+
+name: Command
+parent: Item
+properties: none
+content: command to execute
+children: none
+
+name: Tooltip
+parent: Item
+properties: none
+content: tooltip for item
+children: none
+
+name: Icon
+parent: Item
+properties: id (int)
+content: path to icon
+children: none
+
+
+Example
+-------

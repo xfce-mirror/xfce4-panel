@@ -1,0 +1,68 @@
+README for xfce version 4.x
+---------------------------
+
+WHAT IS IT ?
+------------
+'xfce' is the panel of the XFce Desktop Environment. It is modeled after the CDE
+panel and, of course, previous versions of xfce.
+This version is based on GTK2 and should have all the advantages that come with
+this new and improved toolkit (see http://www.gtk.org).
+
+WHAT'S NEW ?
+------------
+Apart from the toolkit changes the underlying framework of the panel has also
+changed completely. All interactions with the window manager take place through
+the new window manager hints as defined on http://www.freedesktop.org. This
+means that you will need a compliant window manager for xfce to function
+properly (preferably xfwm4 ;-).
+
+INFO FOR DEVELOPERS
+-------------------
+This section gives an overview of the internal design of the panel to assist
+anyone who wants to read the code.
+Several structures are defined to describe the different parts of the panel.
+
+The panel consists of three subpanels: two side panels (left and right) and a
+central panel. The central panel contains the desktop switcher and four small
+butons. The side panels consist of several panel groups.
+
+A panel group in turn consists of a top and a bottom widget. The top widget is
+usually a popup button, except for the outer groups on both panels where it is a
+move handle. The bottom widget is either a normal panel item (icon button with
+run action) or a module. 
+
+A module can be a builtin module or an external plugin. It usually is an
+indicator of some sort, e.g. a clock, a trashcan and a mail checker. For 
+demonstration purposes xfce comes with a builtin clock and trashcan and a sample
+plugin mailchecker. plugins are loaded throught the gmodule interface.
+
+The panel defines a sort of API where commands are passed on through the
+hierarchy of structures.
+
+*** UNFINISHED PART ***
+Popup menus are not yet implemented.
+
+Currently there is no configuration framework yet. There are functions to change
+the size of the panel (small, medium or large) and the style (new or old). The
+number of desktops can be set in settings.c for now. 
+
+The panel can switch desktops and, even nicer, reacts to changes made by other
+programs, both for the current desktop and the number of desktops.
+
+C STRUCTURE HIERARCHY
+---------------------
+This only defines the relation between structures. Their members are omitted.
+You can find them in their corresponding header files.
+
+XfcePanel panel
+	SidePanel *left_panel
+  		PanelGroup *groups [NBGROUPS]
+			MoveHandle handle / PanelPopup popup
+			PanelItem item / PanelModule module
+	CentralPanel central_panel
+		ScreenButton *screen_buttons [NBSCREENS]
+	SidePanel right_panel
+  		PanelGroup *groups [NBGROUPS]
+			MoveHandle handle / PanelPopup popup
+			PanelItem item / PanelModule module
+
