@@ -888,6 +888,9 @@ void central_panel_set_num_screens(int n)
         {
             sb = screen_buttons[i] = create_screen_button(i);
             screen_button_pack(sb, desktop_table);
+
+	    if (!screen_names[i])
+		screen_names[i] = get_default_screen_name(i);
             screen_button_update_name(sb);
         }
 
@@ -899,7 +902,7 @@ void central_panel_set_num_screens(int n)
 
     if(n == 1)
         gtk_widget_hide(desktop_table);
-    else if(settings.show_desktop_buttons)
+    else if (settings.show_desktop_buttons)
         gtk_widget_show(desktop_table);
 }
 
