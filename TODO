@@ -4,22 +4,24 @@ TODO list for xfce4
 Major features for 4.0
 ----------------------
 * port clock widget			Mostly done (zeDek)
+   - add color handling (fg/bg)         In progress (zeDek)
+   - fix the tiny size mode             In progress (zeDek)
 * unify panel controls			Done
   (make everything a module)
-* improve module configuration		
+* improve module configuration
   - add chosen module to panel		Done
   - direct-apply options		Done
   - save config in main file		Done
     (pass xmlNodePtr to module)
-* improve global configuration		
+* improve global configuration
   - add stay-on-top option		Done
   - split up dialog			Mostly done
-  - port to new xfce-wide system	
+  - port to new xfce-wide system
 * write API docs for plugin writers
 * write user docs
 * provide good default configuration
-* allow different positions for 
-  popup button in all sizes		Done
+* allow different positions for
+   - popup button in all sizes          Done
 * Update popup positioning function to
   new account for panel orientation
 * Idem for panel positioning and style
@@ -27,6 +29,8 @@ Major features for 4.0
 * Update module API for variable sized modules
   void set_orientation(PanelControl *pc, int orientation);
   void minimum_size(PanelControl *pc, int size, int *width, int *height);
+* Add support of the NET_DESKTOP_NAMES form freedesktop.org standard
+   (In progress zeDek)
 
 Nice to have for 4.0
 --------------------
