@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2002-2005 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -28,6 +28,8 @@
 #include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libnetk.h>
+
+#include "xfce-panel-window.h"
 
 #include "xfce.h"
 #include "groups.h"
@@ -66,8 +68,6 @@ struct _PanelPrivate
 
     gboolean is_created;
     int block_autohide;
-
-    int allocate_id;
 };
 
 
@@ -162,7 +162,7 @@ get_opacity_setting (void)
 }
 
 static void
-set_opacity (Panel * p, gboolean translucent)
+set_translucent (Panel * p, gboolean translucent)
 {
     static gboolean initialized = FALSE;
     guint opacity;
@@ -186,6 +186,8 @@ set_opacity (Panel * p, gboolean translucent)
 			 GDK_PROP_MODE_REPLACE, (guchar *) & opacity, 1L);
 
     gdk_error_trap_pop ();
+
+    gtk_widget_queue_draw (p->toplevel);
 }
 
 static void
@@ -404,23 +406,33 @@ restrict_position (Panel * p, int *x, int *y)
 	p->priv->offset = *y - p->priv->monitor_geometry.y;
     }
 
-    DBG ("\n"
-         " ++ position: %d, %d\n"
-         "    monitor: %d\n"
-         "    side: %s\n"
-         "    state: %s\n",
-         p->position.x, p->position.y,
-         p->priv->monitor,
-	 p->priv->side == LEFT ? "left" :
-            p->priv->side == RIGHT ? "right" :
-                p->priv->side == TOP ? "top" : "bottom",
-	 p->priv->pos_state == XFCE_POS_STATE_CENTER ? "center" :
-             p->priv->pos_state == XFCE_POS_STATE_START ? "start" :
-                 p->priv->pos_state == XFCE_POS_STATE_END ? "end" : "none");
+    switch (p->priv->side)
+    {
+        case TOP:
+            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
+                                           0, 1, 0, 0);
+            break;
+        case BOTTOM:
+            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
+                                           1, 0, 0, 0);
+            break;
+        case LEFT:
+            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
+                                           0, 0, 0, 1);
+            break;
+        case RIGHT:
+            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
+                                           0, 0, 1, 0);
+            break;
+        default:
+            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
+                                           1, 1, 1, 1);
+    }
 }
 
+/* move / resize */
 static void
-panel_move_func (GtkWidget * win, int *x, int *y, Panel * panel)
+panel_move_func (XfcePanelWindow * panel_window, Panel * panel, int *x, int *y)
 {
     static int num_screens = 0;
     int side;
@@ -446,6 +458,19 @@ panel_move_func (GtkWidget * win, int *x, int *y, Panel * panel)
 
     if (side != panel->priv->side)
 	update_arrow_direction (panel);
+}
+
+static void
+panel_resize_func (XfcePanelWindow * panel_window, Panel *p, 
+                   GtkAllocation * old, GtkAllocation * new, int *x, int *y)
+{
+    if (p->hidden || !old || !new)
+        return;
+
+    *x -= (new->width - old->width) / 2;
+    *y -= (new->height - old->height) / 2;
+
+    panel_move_func (panel_window, p, x, y);
 }
 
 static void
@@ -708,24 +733,12 @@ get_handle_menu (void)
     return GTK_MENU (menu);
 }
 
-/*  Move handles
- *  ------------
-*/
-static void
-handle_set_size (GtkWidget * mh, int size)
-{
-    if (settings.orientation == VERTICAL)
-	gtk_widget_set_size_request (mh, -1, HANDLE_WIDTH);
-    else
-	gtk_widget_set_size_request (mh, HANDLE_WIDTH, -1);
-}
-
 /* defined in controls.c, must be set to NULL to indicate the menu
  * is not being popped up from a panel item */
 extern Control *popup_control;
 
 static gboolean
-handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
+window_pressed_cb (GtkWidget * w, GdkEventButton * event)
 {
     hide_current_popup_menu ();
 
@@ -750,31 +763,15 @@ handler_pressed_cb (GtkWidget * h, GdkEventButton * event)
 }
 
 static void
-handler_move_end_cb (GtkWidget * h, Panel * p)
+window_move_end_cb (GtkWidget * w, int x, int y, Panel * p)
 {
-    int x, y;
-
-    gtk_window_get_position (GTK_WINDOW (panel.toplevel),
-			     &p->position.x, &p->position.y);
+    p->position.x = x;
+    p->position.y = y;
 
     DBG ("move end: %d,%d", p->position.x, p->position.y);
 
     update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
 				 p->position.y + p->priv->req.height / 2);
-
-    x = p->position.x;
-    y = p->position.y;
-
-    restrict_position (p, &x, &y);
-
-    if (x != p->position.x || y != p->position.y)
-    {
-	gtk_window_move (GTK_WINDOW (p->toplevel), x, y);
-	p->position.x = x;
-	p->position.y = y;
-
-	update_arrow_direction (p);
-    }
 
     write_panel_config ();
 
@@ -782,39 +779,10 @@ handler_move_end_cb (GtkWidget * h, Panel * p)
 }
 
 static void
-handler_move_start (Panel * p)
+window_move_start (Panel * p)
 {
     update_xinerama_coordinates (p, p->position.x + p->priv->req.width / 2,
 				 p->position.y + p->priv->req.height / 2);
-}
-
-G_MODULE_EXPORT /* EXPORT:handle_new */
-GtkWidget *
-handle_new (Panel * p)
-{
-    GtkWidget *mh;
-
-    mh = xfce_movehandler_new (panel.toplevel);
-    xfce_movehandler_set_move_func (XFCE_MOVEHANDLER (mh),
-				    (XfceMoveFunc) panel_move_func, p);
-    gtk_widget_show (mh);
-
-    gtk_widget_set_name (mh, "xfce_panel");
-
-    g_signal_connect (mh, "button-press-event",
-		      G_CALLBACK (handler_pressed_cb), p);
-
-    g_signal_connect_swapped (mh, "move-start",
-			      G_CALLBACK (handler_move_start), p);
-
-    g_signal_connect (mh, "move-end", G_CALLBACK (handler_move_end_cb), p);
-
-    /* protect against destruction when removed from box */
-    g_object_ref (mh);
-
-    handle_set_size (mh, settings.size);
-
-    return mh;
 }
 
 /*  Autohide
@@ -825,14 +793,17 @@ extern PanelPopup *open_popup;
 static void
 panel_set_hidden (Panel * p, gboolean hide)
 {
+    static int recursive = 0;
     int x, y, w, h;
-
-    g_signal_handler_block (p->toplevel, p->priv->allocate_id);
     
-    /* set flag before moving when hiding */
-    if (hide)
-	p->hidden = hide;
+    while (recursive > 0)
+        g_usleep (1000);
 
+    if (hide == p->hidden)
+        return;
+    
+    recursive++;
+    
     x = p->position.x;
     y = p->position.y;
     w = p->priv->req.width;
@@ -863,31 +834,43 @@ panel_set_hidden (Panel * p, gboolean hide)
 	}
     }
 
+    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (p->toplevel), 
+                                           NULL, NULL);
+    
+    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (p->toplevel), 
+                                         NULL, NULL);
+    
     if (hide)
     {
-	gtk_widget_hide (p->main_frame);
+        g_object_ref (p->group_box);
+	gtk_widget_hide (p->group_box);
+	gtk_container_remove (GTK_CONTAINER (p->toplevel), p->group_box);
+        xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (p->toplevel),
+                                            XFCE_HANDLE_STYLE_NONE);
 	gtk_widget_set_size_request (p->toplevel, w, h);
     }
     else
     {
 	gtk_widget_set_size_request (p->toplevel, -1, -1);
-	gtk_widget_show (p->main_frame);
+        xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (p->toplevel),
+                                            XFCE_HANDLE_STYLE_BOTH);
+	gtk_container_add (GTK_CONTAINER (p->toplevel), p->group_box);
+	gtk_widget_show (p->group_box);
+        g_object_unref (p->group_box);
     }
 
-    DBG ("%s: (%d,%d) %dx%d", hide ? "hide" : "unhide", x, y, w, h);
+    p->hidden = hide;
 
-    /* this seems to be necessary to be able to move the window ... */
-    while (gtk_events_pending ())
-	gtk_main_iteration_do (FALSE);
-
+    DBG ("%s: (%d,%d) %dx%d\n", hide ? "hide" : "unhide", x, y, w, h);
     gdk_window_move_resize (p->toplevel->window, x, y, w, h);
-
-    /* set flag after moving when unhiding */
-    if (!hide)
-	p->hidden = hide;
     
-    g_usleep (10000);
-    g_signal_handler_unblock (p->toplevel, p->priv->allocate_id);
+    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (p->toplevel),
+            (XfcePanelWindowResizeFunc) panel_resize_func, p);
+    
+    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (p->toplevel),
+            (XfcePanelWindowMoveFunc) panel_move_func, p);
+    
+    recursive--;
 }
 
 static gboolean
@@ -924,7 +907,7 @@ panel_enter (GtkWindow * w, GdkEventCrossing * event, Panel * p)
 {
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-        set_opacity (p, FALSE);
+        set_translucent (p, FALSE);
 
         if (settings.autohide)
         {
@@ -951,7 +934,7 @@ panel_leave (GtkWidget * w, GdkEventCrossing * event, Panel * p)
 {
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-        set_opacity (p, TRUE);
+        set_translucent (p, TRUE);
 
         if (settings.autohide)
         {
@@ -1013,35 +996,6 @@ panel_delete_cb (GtkWidget * window, GdkEvent * ev, gpointer data)
     return TRUE;
 }
 
-static void
-panel_allocate_cb (GtkWidget * window, GtkAllocation * allocation, Panel * p)
-{
-    if (p->hidden)
-	return;
-
-    if (allocation->width != p->priv->req.width
-	|| allocation->height != p->priv->req.height)
-    {
-	panel_set_position (p);
-        gtk_widget_queue_draw (p->toplevel);
-    }
-}
-
-static void
-set_panel_window_properties (Panel * p)
-{
-    GtkWindow *window = GTK_WINDOW (p->toplevel);
-    
-    gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DOCK);
-
-    gtk_window_set_decorated (window, FALSE);
-    gtk_window_set_resizable (window, FALSE);
-    gtk_window_stick (window);
-
-    gtk_window_set_skip_taskbar_hint (window, TRUE);
-    gtk_window_set_skip_pager_hint (window, TRUE);
-}
-
 static GtkWidget *
 create_panel_window (Panel * p)
 {
@@ -1049,12 +1003,10 @@ create_panel_window (Panel * p)
     GtkWindow *window;
     GdkPixbuf *pb;
 
-    w = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    w = xfce_panel_window_new ();
     window = GTK_WINDOW (w);
 
     gtk_window_set_title (window, _("Xfce Panel"));
-    gtk_window_stick (window);
-    gtk_window_set_type_hint (window, GDK_WINDOW_TYPE_HINT_DOCK);
 
     pb = get_panel_pixbuf ();
     gtk_window_set_icon (window, pb);
@@ -1062,8 +1014,21 @@ create_panel_window (Panel * p)
 
     g_signal_connect (w, "delete-event", G_CALLBACK (panel_delete_cb), p);
 
+    g_signal_connect (w, "button-press-event",
+		      G_CALLBACK (window_pressed_cb), p);
+
+    g_signal_connect_swapped (w, "move-start",
+			      G_CALLBACK (window_move_start), p);
+
+    g_signal_connect (w, "move-end", G_CALLBACK (window_move_end_cb), p);
     g_object_set_data (G_OBJECT (w), "panel", p);
 
+    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (w),
+            (XfcePanelWindowMoveFunc) panel_move_func, p);
+    
+    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (w),
+            (XfcePanelWindowResizeFunc) panel_resize_func, p);
+    
     return w;
 }
 
@@ -1072,40 +1037,19 @@ create_panel_framework (Panel * p)
 {
     gboolean vertical = (settings.orientation == VERTICAL);
 
-    /* main frame */
-    p->main_frame = gtk_frame_new (NULL);
-    gtk_frame_set_shadow_type (GTK_FRAME (p->main_frame), GTK_SHADOW_OUT);
-    gtk_container_set_border_width (GTK_CONTAINER (p->main_frame), 0);
-    gtk_widget_show (p->main_frame);
-    gtk_container_add (GTK_CONTAINER (p->toplevel), p->main_frame);
-
     /* create all widgets that depend on orientation */
     if (vertical)
-    {
-	p->panel_box = gtk_vbox_new (FALSE, 0);
 	p->group_box = gtk_vbox_new (FALSE, 0);
-    }
     else
-    {
-	p->panel_box = gtk_hbox_new (FALSE, 0);
 	p->group_box = gtk_hbox_new (FALSE, 0);
-    }
 
-    /* show them */
-    gtk_widget_show (p->panel_box);
     gtk_widget_show (p->group_box);
 
-    /* create handles */
-    p->handles[LEFT] = handle_new (p);
-    p->handles[RIGHT] = handle_new (p);
+    gtk_container_add (GTK_CONTAINER (p->toplevel), p->group_box);
 
-    /* pack the widgets into the main frame */
-    gtk_container_add (GTK_CONTAINER (p->main_frame), p->panel_box);
-    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[LEFT], FALSE,
-			FALSE, 0);
-    gtk_box_pack_start (GTK_BOX (p->panel_box), p->group_box, TRUE, TRUE, 0);
-    gtk_box_pack_start (GTK_BOX (p->panel_box), p->handles[RIGHT], FALSE,
-			FALSE, 0);
+    xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (p->toplevel),
+                                       vertical ? GTK_ORIENTATION_VERTICAL :
+                                                  GTK_ORIENTATION_HORIZONTAL);
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_cleanup */
@@ -1165,13 +1109,10 @@ create_panel (void)
      * This function creates the panel items and popup menus */
     get_panel_config ();
 
-    set_panel_window_properties (p);
-
     if (!GTK_WIDGET_REALIZED (p->toplevel))
         gtk_widget_realize (p->toplevel);
 
     p->priv->is_created = TRUE;
-
     
     panel_set_position (p);
 
@@ -1196,7 +1137,7 @@ create_panel (void)
     if (p->priv->settings.autohide)
 	panel_set_autohide (TRUE);
     
-    set_opacity (p, TRUE);
+    set_translucent (p, TRUE);
 
     update_partial_struts (p);
 
@@ -1214,11 +1155,6 @@ create_panel (void)
 
     g_signal_connect (p->toplevel, "drag-motion",
 		      G_CALLBACK (drag_motion), p);
-
-    /* auto resize functions */
-    p->priv->allocate_id = 
-        g_signal_connect (p->toplevel, "size-allocate",
-                          G_CALLBACK (panel_allocate_cb), p);
 
     g_signal_connect (p->priv->screen, "size-changed",
 		      G_CALLBACK (screen_size_changed), p);
@@ -1279,7 +1215,7 @@ panel_set_orientation (int orientation)
     groups_unpack ();
 
     /* no need to recreate the window */
-    gtk_widget_destroy (panel.main_frame);
+    gtk_widget_destroy (panel.group_box);
     create_panel_framework (&panel);
 
     groups_pack (GTK_BOX (panel.group_box));
@@ -1299,8 +1235,6 @@ panel_set_orientation (int orientation)
     else
 	panel_center (RIGHT);
 
-    set_panel_window_properties (&panel);
-
     gtk_widget_show_now (panel.toplevel);
 
     /* size sometimes changes after showing */
@@ -1311,7 +1245,7 @@ panel_set_orientation (int orientation)
     if (hidden)
 	panel_set_autohide (TRUE);
 
-    set_opacity (&panel, TRUE);
+    set_translucent (&panel, TRUE);
 
     update_partial_struts (&panel);
 }
@@ -1382,8 +1316,6 @@ panel_set_size (int size)
     hide_current_popup_menu ();
 
     groups_set_size (size);
-    handle_set_size (panel.handles[LEFT], size);
-    handle_set_size (panel.handles[RIGHT], size);
 
     /* this will also resize the icons */
     panel_set_theme (panel.priv->settings.theme);
@@ -1463,21 +1395,8 @@ panel_set_autohide (gboolean hide)
     if (!panel.priv->is_created)
 	return;
 
-    if (hide)
-    {
-	DBG ("add hide timeout");
-
-        if (!panel.hide_timeout)
-        {
-            panel.hide_timeout = 
-                g_timeout_add (1000, (GSourceFunc) panel_hide_timeout, &panel);
-        }
-    }
-    else
-    {
-	panel_set_hidden (&panel, FALSE);
-        gtk_widget_queue_resize (panel.toplevel);
-    }
+    panel_set_hidden (&panel, hide);
+    gtk_widget_queue_resize (panel.toplevel);
 
     update_partial_struts (&panel);
 }
@@ -1787,7 +1706,7 @@ menu_destroyed (GtkWidget * menu, Panel * p)
             gdk_event_free (ev);
         }
         
-        set_opacity (p, TRUE);
+        set_translucent (p, TRUE);
     }
 }
 

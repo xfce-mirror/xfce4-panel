@@ -151,7 +151,12 @@ item_middle_click (GtkWidget * w, GdkEventButton * ev, Item * item)
  *  -------------------
 */
 static const char *keys[] = {
-    "Exec"
+    "Name",
+    "GenericName",
+    "Comment",
+    "Exec",
+    "Icon",
+    "Terminal"
 };
 
 static void
@@ -194,20 +199,52 @@ addtomenu_item_drop_cb (GtkWidget * widget,
 
             if (g_file_test (buf, G_FILE_TEST_EXISTS) &&
                 XFCE_IS_DESKTOP_ENTRY (dentry =
-                                       xfce_desktop_entry_new (buf, keys, 1)))
+                                       xfce_desktop_entry_new (buf, keys, 
+                                           G_N_ELEMENTS (keys))))
             {
+                char *term;
+                
+                xfce_desktop_entry_get_string (dentry, "GenericName", FALSE,
+                                               &(mi->caption));
+                
+                if (!mi->caption)
+                {
+                    xfce_desktop_entry_get_string (dentry, "Name", FALSE,
+                                                   &(mi->caption));
+                }
+                
+                xfce_desktop_entry_get_string (dentry, "Comment", FALSE,
+                                               &(mi->tooltip));
+                
                 xfce_desktop_entry_get_string (dentry, "Exec", FALSE,
                                                &(mi->command));
+
+                xfce_desktop_entry_get_string (dentry, "Icon", FALSE,
+                                               &(mi->icon_path));
+
+                if (mi->icon_path)
+                    mi->icon_id = EXTERN_ICON;
+                
+                xfce_desktop_entry_get_string (dentry, "Terminal", FALSE,
+                                               &term);
+
+                if (term && 
+                    (!strncmp ("1", term, 1) || !strncmp ("true", term, 4)))
+                {
+                    mi->in_terminal = TRUE;
+                    g_free (term);
+                }
+
                 g_object_unref (dentry);
                 g_free (buf);
             }
             else
             {
                 mi->command = buf;
-            }
 
-	    mi->caption = g_path_get_basename (mi->command);
-	    mi->caption[0] = g_ascii_toupper (mi->caption[0]);
+                mi->caption = g_path_get_basename (mi->command);
+                mi->caption[0] = g_ascii_toupper (mi->caption[0]);
+            }
 
 	    create_menu_item (mi);
 	    panel_popup_add_item (pp, mi);
