@@ -18,5 +18,5 @@ example.xfce4rc:
 	@sed -e "s%_pkgdatadir_%$(pkgdatadir)%g" example.xfce4rc.in > example.xfce4rc
 
 rpm: dist
-	rpm -ta $(PACKAGE)-$(VERSION).tar.gz
+	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
 	@rm -f $(PACKAGE)-$(VERSION).tar.gz
