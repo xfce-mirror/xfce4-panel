@@ -571,7 +571,7 @@ real_select_file (const char *title, const char *path,
             char *current, *full;
 
             current = g_get_current_dir ();
-            full = g_build_filename (current, path);
+            full = g_build_filename (current, path, NULL);
 
             xfce_file_chooser_set_filename(XFCE_FILE_CHOOSER(fs), full);
 
