@@ -1,5 +1,5 @@
 Summary: 	Next generation panel for xfce
-Name: 		xfce4
+Name: 		xfce4-panel
 Version: 	@VERSION@
 Release: 	1
 License:	GPL
@@ -21,26 +21,29 @@ BuildRequires:	xfce-mcs-manager-devel >= @XFCE_MCS_MANAGER_REQUIRED_VERSION@
 BuildRequires: 	libxml2-devel >= @LIBXML_REQUIRED_VERSION@
 
 %description
-xfce4 is the panel for the XFce desktop environment
+xfce4-panel is the panel for the XFce desktop environment
 
-%package themes
-Summary:	Icon themes for xfce4
-Group:		User Interface/Desktops
-Requires:	xfce4
+# These are all required to have a properly functioning panel, so they should 
+# not be separate IMO -- Jasper
+
+# %package themes
+# Summary:	Icon themes for xfce4
+# Group:		User Interface/Desktops
+# Requires:	xfce4
 # This should be really noarch, but if I set noarch here, even the arch
 # dependent stuff is marked as noarch, so... no noarch.
 # BuildArch:	noarch
 
-%description themes
-Various icon themes for xfce4.
+# %description themes
+# Various icon themes for xfce4.
 
-%package plugins
-Summary:	Panel plugins for xfce4
-Group:		User Interface/Desktops
-Requires:	xfce4
+# %package plugins
+# Summary:	Panel plugins for xfce4
+# Group:		User Interface/Desktops
+# Requires:	xfce4
 
-%description plugins
-Various panel plugins for xfce4.
+# %description plugins
+# Various panel plugins for xfce4.
 
 %prep
 %setup -q
@@ -66,12 +69,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/xfce4/mcs-plugins/
 %{_libdir}/pkgconfig/
 %{_bindir}/*
-
-%files themes
-%defattr(-, root, root)
 %{_datadir}/xfce4/themes/
-
-%files plugins
-%defattr(-, root, root)
 %{_libdir}/xfce4/panel-plugins/
 
