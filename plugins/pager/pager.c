@@ -316,6 +316,8 @@ pager_create_options (Control * control, GtkContainer * container,
 
     max = netk_screen_get_workspace_count (pager->screen);
 
+    if (max > 1)
+    {
     spin = gtk_spin_button_new_with_range (1, max, 1);
     gtk_widget_show (spin);
     gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
@@ -324,6 +326,14 @@ pager_create_options (Control * control, GtkContainer * container,
 
     g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed),
 		      pager);
+    }
+    else
+    {
+        GtkWidget *label = gtk_label_new ("1");
+
+        gtk_widget_show (label);
+        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    }
 }
 
 /*  Switcher panel control
