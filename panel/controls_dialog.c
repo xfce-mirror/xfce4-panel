@@ -385,6 +385,7 @@ void change_panel_control_dialog(PanelControl * pc)
     n = (backup_index >= backup_central_index && central_created) ? 1 : 0;
     backup_pos = 1 + backup_index + n;
     
+    n = central_created ? 1 : 0;
     pos_spin = gtk_spin_button_new_with_range(1, settings.num_groups + n, 1);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin), backup_pos);
     gtk_widget_show(pos_spin);
