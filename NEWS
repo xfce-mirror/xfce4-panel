@@ -21,7 +21,7 @@ Use a dialog to add items to the panel, instead of a submenu.
 - put 'Properties...' and 'Remove' in a submenu of panel item right-click
   menus. May prevent some accidental removals.
 
-* 2004-01-18  Jasper Huijsmans <jasper@moongroup.com>
+* 2004-01-18  Jasper Huijsmans <jasper@xfce.org>
 
 Split out the code for choosing a command and choosing an icon from
 item_dialog.c. to make it available for use in other dialogs (plugins). The
@@ -30,12 +30,12 @@ mailcheck plugin makes use of it and of course the item dialog.
 As a consequence the item dialog was redesigned a little. Doesn't look too bad
 IMHO.
 
-* 2004-01-10  Jasper Huijsmans <jasper@moongroup.com>
+* 2004-01-10  Jasper Huijsmans <jasper@xfce.org>
 
 Add support for the completion combo from xfce4-modules, if libdbh is
 available at configure time.
 
-* 2004-01-07  Jasper Huijsmans <jasper@moongroup.com>
+* 2004-01-07  Jasper Huijsmans <jasper@xfce.org>
 
 Implement module unloading. Add uniqueness setting to plugins.
 
@@ -43,20 +43,20 @@ Implement module unloading. Add uniqueness setting to plugins.
 
 Add pop3 email checking: Use 'pop3://username:password@host' as mailbox.
 
-* 2003-12-03  Jasper Huijsmans <jasper@moongroup.com>
+* 2003-12-03  Jasper Huijsmans <jasper@xfce.org>
 
 Properly update arrow direction. Use this info to position the menus. Much
 better.
 
-* 2003-11-07  Jasper Huijsmans <jasper@moongroup.com>
+* 2003-11-07  Jasper Huijsmans <jasper@xfce.org>
 
 French documentation. Awesome.
 
-* 2003-10-25  Jasper Huijsmans <jasper@moongroup.com>
+* 2003-10-25  Jasper Huijsmans <jasper@xfce.org>
 
 Add xrandr awareness.
 
-* 2003-10-10  Jasper Huijsmans <jasper@moongroup.com>
+* 2003-10-10  Jasper Huijsmans <jasper@xfce.org>
 
 Add xinerama aware smart positioning. Keeps panel inside the screen and, if it
 was before, centered. Only autohide when panel is on one of the the screen 
