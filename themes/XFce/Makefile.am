@@ -4,7 +4,7 @@ edit.xpm \
 file1.xpm \
 file2.xpm \
 games.xpm \
-mail.xpm \
+newmail.xpm \
 man.xpm \
 miniinfo.xpm \
 minilock.xpm \
