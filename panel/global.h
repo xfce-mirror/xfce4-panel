@@ -25,6 +25,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <xfce4/libxfcegui4/libxfcegui4.h>
 #include <libxml/tree.h>
 #include <string.h>
 

@@ -496,7 +496,7 @@ static void fs_cancel_cb(GtkDialog * fs)
 char *select_file_name(const char *title, const char *path, GtkWidget * parent)
 {
     const char *t = (title) ? title : _("Select file");
-    GtkWidget *fs = gtk_file_selection_new(t);
+    GtkWidget *fs = preview_file_selection_new(t, TRUE);
     char *name = NULL;
     const char *temp;
 
