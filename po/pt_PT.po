@@ -1,50 +1,43 @@
-# Portuguese translation of PACKAGE.
-# Copyright (C) 2003 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Nuno Donato <nunodonato@sapo.pt>, 2003.
-# , fuzzy
-# 
+# Portuguese translation of xfce4-panel.
+# Copyright (C) 2003 THE xfce4-panel'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce4-panel package.
+# Nuno Donato <nunodonato@gmail.com.pt>, 2004.
 # 
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: xfce4-panel 4.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-09-21 13:35+0200\n"
-"PO-Revision-Date: 2003-09-12 01:27+0100\n"
-"Last-Translator: Nuno Donato <nunodonato@sapo.pt>\n"
+"PO-Revision-Date: 2004-10-09 22:00+0100\n"
+"Last-Translator: Nuno Donato <nunodonato@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: panel/xfce_support.c:514
 msgid "Select file"
-msgstr "Seleccione Ficheiro"
+msgstr "Seleccione o ficheiro"
 
 #: panel/settings.c:179
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "Não foram encontrados dados. O painel estará vazio."
 
 #: panel/controls_dialog.c:89 panel/item_dialog.c:1157
 msgid "Position:"
-msgstr "Posição"
+msgstr "Posição:"
 
 #: panel/controls_dialog.c:153
-#, fuzzy
 msgid "Item properties"
-msgstr "/_Propriedades"
+msgstr "Propriedades do item"
 
 #: panel/controls_dialog.c:207 panel/controls.c:691
-#, fuzzy
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Removendo um item também irá remover o seu menu de pop-up.\n"
-"\n"
-"Deseja remover este item?"
+msgstr "Removendo o item também irá remover o seu menu de pop-up."
 
 #: panel/item_dialog.c:123 panel/item_dialog.c:551
 msgid "Select command"
-msgstr "Selecione o comando"
+msgstr "Seleccione o comando"
 
 #: panel/item_dialog.c:264
 msgid "Command:"
@@ -52,7 +45,7 @@ msgstr "Comando:"
 
 #: panel/item_dialog.c:307
 msgid "Run in _terminal"
-msgstr "Executar na consola"
+msgstr "Executar no terminal"
 
 #: panel/item_dialog.c:325
 msgid "Use startup _notification"
@@ -84,9 +77,8 @@ msgstr "Mudar o item do menu"
 
 #. add buttons
 #: panel/item_dialog.c:1200 panel/controls.c:728
-#, fuzzy
 msgid "_Remove"
-msgstr "/_Remover"
+msgstr "_Remover"
 
 #: panel/item_dialog.c:1212 panel/item.c:668
 msgid "Launcher"
@@ -94,7 +86,7 @@ msgstr "Lançador"
 
 #: panel/item.c:496
 msgid "Click mouse button 3 to change item"
-msgstr "Clicar com o 3 butão do rato para alterar este item"
+msgstr "Clicar com o botão 3 do rato para alterar este item"
 
 #: panel/item.c:521
 msgid "Add launcher"
@@ -109,7 +101,7 @@ msgid "Are you sure you want to exit?"
 msgstr "Tem a certeza que deseja sair?"
 
 #: panel/main.c:398
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -121,34 +113,38 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"%s, versão %s\n"
-"Parte do Ambiente de Trabalho XFCE\n"
-"http://www.xfce.org\n"
+"\n"
+" O Painel do Xfce\n"
+" Versão %s\n"
+"\n"
+" Parte do Ambiente de Trabalho Xfce\n"
+" http://www.xfce.org\n"
+"\n"
+"Lincenciado com a GNU GPL.\n"
+"\n"
 
 #: panel/main.c:472
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: Iniciado com sucesso sem a gestão de sessões"
 
 #: panel/main.c:477
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: Iniciado com sucesso com a gestão de sessões"
 
 #: panel/controls.c:646
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "Não foi possível criar o item \"%s\" do painel."
 
 #: panel/controls.c:723 panel/panel.c:562
-#, fuzzy
 msgid "_Properties..."
-msgstr "/_Propriedades"
+msgstr "_Propriedades..."
 
 #: panel/controls.c:737 panel/panel.c:552
-#, fuzzy
 msgid "Add _new item"
-msgstr "/Adicionar _novo item"
+msgstr "Adicionar _novo item"
 
 #: panel/controls.c:1020
 msgid "This item has no configuration options"
@@ -160,28 +156,24 @@ msgid "Xfce Panel"
 msgstr "Painel do Xfce"
 
 #: panel/panel.c:567
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/S_obre o Xfce"
+msgstr "_Sobre o Xfce"
 
 #: panel/panel.c:572
-#, fuzzy
 msgid "_Help"
-msgstr "/_Ajuda"
+msgstr "_Ajuda"
 
 #: panel/panel.c:581
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/_Trancar ecrã"
+msgstr "_Trancar ecrã"
 
 #: panel/panel.c:586
 msgid "_Restart"
-msgstr ""
+msgstr "_Reiniciar"
 
 #: panel/panel.c:595
-#, fuzzy
 msgid "E_xit"
-msgstr "/_Sair"
+msgstr "_Sair"
 
 #: panel/icons.c:60
 msgid "Default"
@@ -257,7 +249,7 @@ msgstr "Grande"
 
 #: settings/xfce_settings_dialog.c:100
 msgid "Huge"
-msgstr ""
+msgstr "Enorme"
 
 #: settings/xfce_settings_dialog.c:176
 msgid "Horizontal"
@@ -297,7 +289,7 @@ msgstr "Posição do popup:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Sempre no topo:"
 
 #: settings/xfce_settings_dialog.c:396
 msgid "Autohide:"
@@ -325,7 +317,7 @@ msgstr "Comportamento"
 #.
 #: plugins/clock/clock.c:202
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%A, %d %B %Y"
 
 #: plugins/clock/clock.c:423
 msgid "Clock type:"
@@ -369,11 +361,11 @@ msgstr "Relógio Xfce"
 
 #: plugins/pager/pager.c:311
 msgid "Number of rows:"
-msgstr ""
+msgstr "Número de linhas:"
 
 #: plugins/pager/pager.c:313
 msgid "Number of columns:"
-msgstr ""
+msgstr "Número de colunas"
 
 #: plugins/pager/pager.c:360
 msgid "Graphical pager"
@@ -427,9 +419,8 @@ msgstr "Botão 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
 msgid "_Hide"
-msgstr "/_Ajuda"
+msgstr "_Esconder"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -444,14 +435,12 @@ msgid "Mail box:"
 msgstr "Caixa de Correio:"
 
 #: plugins/mailcheck/mailcheck.c:824
-#, fuzzy
 msgid "New mail command:"
-msgstr "Comando de Correio:"
+msgstr "Comando para nova mensagem:"
 
 #: plugins/mailcheck/mailcheck.c:838
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Comando a executar quando o botão no painel é clicado"
+msgstr "Comando a executar quando chega uma nova mensagem"
 
 #: plugins/mailcheck/mailcheck.c:868
 msgid "Command to run when the button on the panel is clicked"
@@ -462,9 +451,8 @@ msgid "Interval (sec):"
 msgstr "Intervalo (segundos):"
 
 #: plugins/mailcheck/mailcheck.c:965
-#, fuzzy
 msgid "Mail checker"
-msgstr "Verificar Correio"
+msgstr "Verificador de email"
 
 #~ msgid "Remove"
 #~ msgstr "Remover"
