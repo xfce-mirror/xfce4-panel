@@ -1164,6 +1164,8 @@ panel_set_orientation (int orientation)
     /* size sometimes changes after showing */
     panel_set_position (&panel);
 
+    gtk_window_stick (GTK_WINDOW (panel.toplevel));
+
     panel_set_layer (panel.priv->settings.layer);
 
     if (hidden)
