@@ -1032,6 +1032,9 @@ create_menu_item_dialog (Item * mi)
     g_signal_connect (done_button, "clicked",
                       G_CALLBACK (item_apply_options), NULL);
 
+    gtk_widget_grab_default (done_button);
+    gtk_widget_grab_focus (done_button);
+    
     return dlg;
 }
 

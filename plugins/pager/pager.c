@@ -168,7 +168,6 @@ static void
 arrange_pager (t_pager * pager)
 {
     GList *li;
-    gboolean vertical = settings.orientation == VERTICAL;
 
     if (pager->netk_pager)
 	gtk_widget_destroy(pager->netk_pager);
