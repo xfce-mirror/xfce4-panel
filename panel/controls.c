@@ -262,7 +262,11 @@ remove_control (void)
 {
     if (popup_control)
     {
-        if (!(popup_control->with_popup) ||
+	PanelPopup *pp;
+
+	pp = groups_get_popup(popup_control->index);
+	
+        if (!(popup_control->with_popup) || pp->items == NULL ||
             confirm (_("Removing an item will also remove its popup menu.\n\n"
                        "Do you want to remove the item?"),
                      GTK_STOCK_REMOVE, NULL))
