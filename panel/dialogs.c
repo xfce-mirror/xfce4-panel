@@ -149,7 +149,7 @@ GtkShadowType main_shadow = GTK_SHADOW_IN;
 GtkShadowType header_shadow = GTK_SHADOW_OUT;
 GtkShadowType option_shadow = GTK_SHADOW_NONE;
 
-/*  backup 
+/*  backup
 */
 static void create_backup(void)
 {
@@ -176,14 +176,14 @@ static void restore_backup(void)
     /* we just let the calbacks of our dialog do all the work */
 
     /* this must be first */
-    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu), 
-    				backup.orientation); 
+    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu),
+    				backup.orientation);
 
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_menu), backup.popup_size);
 
-    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu), 
-    				backup.popup_position); 
+    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu),
+    				backup.popup_position);
 
     gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), backup.style);
     gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
@@ -192,8 +192,11 @@ static void restore_backup(void)
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), backup.num_left);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), backup.num_right);
 
+    /* Fix a bad revert number of desktop
+       FIXME: there should be a better way to do this
+    */
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin),
-                              backup.num_screens);
+                              settings.num_screens=backup.num_screens);
 
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(buttons_checkbox),
                                  backup.show_desktop_buttons);
@@ -219,7 +222,7 @@ static void restore_backup(void)
     panel_set_position();
 }
 
-/*  sections 
+/*  sections
 */
 static void add_header(const char *text, GtkBox * box)
 {
@@ -256,7 +259,7 @@ static void add_spacer(GtkBox * box)
     gtk_box_pack_start(box, eventbox, FALSE, TRUE, 0);
 }
 
-/*  sizes 
+/*  sizes
 */
 static void size_menu_changed(GtkOptionMenu * menu)
 {
@@ -718,8 +721,10 @@ static void add_style_box(GtkBox * box)
 
 static void spin_changed(GtkWidget * spin)
 {
-    int n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin));
+    int n;
     gboolean changed = FALSE;
+    n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin));
+
 
     if(spin == left_spin && n != settings.num_left)
     {
@@ -733,7 +738,7 @@ static void spin_changed(GtkWidget * spin)
     }
     else if(spin == screens_spin && n != settings.num_screens)
     {
-        request_net_number_of_desktops(n);
+	request_net_number_of_desktops(n);
         changed = TRUE;
     }
 
@@ -1243,7 +1248,6 @@ void global_settings_dialog(void)
         if(response == RESPONSE_REVERT)
         {
             restore_backup();
-
             panel_set_settings();
             gtk_widget_set_sensitive(revert, FALSE);
         }
