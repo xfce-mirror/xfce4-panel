@@ -71,7 +71,7 @@
 static void xfce_clock_class_init(XfceClockClass * klass);
 static void xfce_clock_init(XfceClock * clock);
 static void xfce_clock_destroy(GtkObject * object);
-
+static void xfce_clock_finalize(GObject * object);
 static void xfce_clock_realize(GtkWidget * widget);
 static void xfce_clock_size_request(GtkWidget * widget,
                                     GtkRequisition * requisition);
@@ -117,14 +117,17 @@ GtkType xfce_clock_get_type(void)
 static void xfce_clock_class_init(XfceClockClass * class)
 {
     GtkObjectClass *object_class;
+    GObjectClass *gobject_class;
     GtkWidgetClass *widget_class;
 
     object_class = (GtkObjectClass *) class;
     widget_class = (GtkWidgetClass *) class;
-
+    gobject_class = G_OBJECT_CLASS (class);
+    
     parent_class = gtk_type_class(gtk_widget_get_type());
 
     object_class->destroy = xfce_clock_destroy;
+    gobject_class->finalize = xfce_clock_finalize;
 
     widget_class->realize = xfce_clock_realize;
     widget_class->expose_event = xfce_clock_expose;
@@ -160,18 +163,19 @@ static void xfce_clock_realize(GtkWidget * widget)
 
     widget->style = gtk_style_attach(widget->style, widget->window);
 
-    clock->digits_bmap =
-        gdk_bitmap_create_from_data(widget->window, digits_bits, digits_width,
-                                    digits_height);
-
     gdk_window_set_user_data(widget->window, widget);
 
     gtk_style_set_background(widget->parent->style, widget->window, GTK_STATE_NORMAL);
     
+    if (!(clock->digits_bmap))
+    {
+        clock->digits_bmap = gdk_bitmap_create_from_data(widget->window, digits_bits, digits_width, digits_height);
+    }
+    
     if(!(clock->timer))
-        clock->timer =
-            gtk_timeout_add(clock->interval, (GtkFunction) xfce_clock_timer,
-                            (gpointer) clock);
+    {
+        clock->timer = gtk_timeout_add(clock->interval, (GtkFunction) xfce_clock_timer, (gpointer) clock);
+    }
 }
 
 static void xfce_clock_init(XfceClock * clock)
@@ -197,6 +201,8 @@ static void xfce_clock_init(XfceClock * clock)
     clock->display_secs = 0;    /* do not display secs by default */
     clock->interval = 100;      /* 1/10 seconds update interval by default */
     clock->led_size = DIGIT_MEDIUM;
+    clock->digits_bmap = NULL;
+    clock->timer = 0;
 }
 
 GtkWidget *xfce_clock_new(void)
@@ -206,6 +212,15 @@ GtkWidget *xfce_clock_new(void)
 
 static void xfce_clock_destroy(GtkObject * object)
 {
+    g_return_if_fail(object != NULL);
+    g_return_if_fail(XFCE_IS_CLOCK(object));
+
+    if(GTK_OBJECT_CLASS(parent_class)->destroy)
+        (*GTK_OBJECT_CLASS(parent_class)->destroy) (object);
+}
+
+static void xfce_clock_finalize (GObject *object)
+{
     XfceClock *clock;
 
     g_return_if_fail(object != NULL);
@@ -213,6 +228,7 @@ static void xfce_clock_destroy(GtkObject * object)
 
     clock = XFCE_CLOCK(object);
 
+ 
     if(clock->digits_bmap)
     {
         gdk_bitmap_unref(clock->digits_bmap);
@@ -223,8 +239,8 @@ static void xfce_clock_destroy(GtkObject * object)
         gtk_timeout_remove(clock->timer);
 	clock->timer = 0;
     }
-    if(GTK_OBJECT_CLASS(parent_class)->destroy)
-        (*GTK_OBJECT_CLASS(parent_class)->destroy) (object);
+
+    G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 void xfce_clock_show_ampm(XfceClock * clock, gboolean show)
@@ -1049,14 +1065,10 @@ static gint xfce_clock_timer(XfceClock * clock)
     struct tm *tm;
     static guint oh = 0, om = 0, os = 0;
     gint h, m, s;
-    static gboolean sem = FALSE;
 
     g_return_val_if_fail(clock != NULL, FALSE);
     g_return_val_if_fail(XFCE_IS_CLOCK(clock), FALSE);
 
-    if(sem)
-        return TRUE;
-    sem = TRUE;
     ticks = time(0);
     tm = localtime(&ticks);
     h = tm->tm_hour;
@@ -1075,7 +1087,6 @@ static gint xfce_clock_timer(XfceClock * clock)
         xfce_clock_draw_internal(GTK_WIDGET(clock));
     }
 
-    sem = FALSE;
     return TRUE;
 }
 
