@@ -26,6 +26,9 @@ struct _PanelPopup
 {
     /* button */
     GtkWidget *button;
+    GdkPixbuf *up;
+    GdkPixbuf *down;
+    GtkWidget *image;
 
     /* menu */
     gboolean detached;

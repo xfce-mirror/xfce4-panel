@@ -30,8 +30,11 @@
  *  should be saved when creating the options.
  *
  *  The second button is used to close the dialog. Any changes that weren't 
- *  applied immediately should be applied now and backup data should be freed
- *  if necessary.
+ *  applied immediately should be applied now.
+ *  
+ *  You can connect to the destroy signal on the option widgets (or the 
+ *  continainer) to know when to clean up the backup data. 
+ *  
  *  
  *  Plugins
  *  -------
@@ -75,7 +78,7 @@ static char *find_plugin(const char *name)
     return NULL;
 }
 
-static gboolean create_plugin(PanelControl * pc)
+gboolean create_plugin(PanelControl * pc)
 {
     gpointer tmp;
     char *path;
