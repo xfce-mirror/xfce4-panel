@@ -888,7 +888,6 @@ control_new (int index)
 
     control->base = xfce_item_new ();
     gtk_widget_show (control->base);
-    gtk_container_set_border_width (GTK_CONTAINER (control->base), 1);
 
     /* protect against destruction when unpacking */
     g_object_ref (control->base);

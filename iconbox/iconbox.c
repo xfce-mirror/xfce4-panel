@@ -895,11 +895,14 @@ iconbox_set_position (Iconbox *ib)
 {
     GdkRectangle r;
     GtkRequisition req;
+    gboolean top, bottom, left, right;
 
     gtk_widget_size_request (ib->win, &req);
     ib->width = req.width;
     ib->height = req.height;
 
+    top = bottom = left = right = TRUE;
+    
     gdk_screen_get_monitor_geometry (ib->gdk_screen, ib->monitor, &r);
 
     if (IS_HORIZONTAL (ib->side))
@@ -908,22 +911,34 @@ iconbox_set_position (Iconbox *ib)
         {
             case GTK_JUSTIFY_RIGHT:
                 ib->x = r.x + r.width - ib->width - ib->offset;
+                if (!ib->offset)
+                    right = FALSE;
                 break;
             case GTK_JUSTIFY_LEFT:
                 ib->x = r.x + ib->offset;
+                if (!ib->offset)
+                    left = FALSE;
                 break;
             case GTK_JUSTIFY_CENTER:
                 ib->x = r.x + (r.width - ib->width) / 2;
                 break;
             case GTK_JUSTIFY_FILL:
                 ib->x = r.x;
+                left = FALSE;
+                right = FALSE;
                 break;
         }
 
         if (ib->side == GTK_SIDE_BOTTOM)
+        {
             ib->y = r.y + r.height- ib->height;
+            top = FALSE;
+        }
         else
+        {
             ib->y = r.y;
+            bottom = FALSE;
+        }
     }
     else
     {
@@ -931,24 +946,39 @@ iconbox_set_position (Iconbox *ib)
         {
             case GTK_JUSTIFY_RIGHT:
                 ib->y = r.y + r.height - ib->height - ib->offset;
+                if (!ib->offset)
+                    bottom = FALSE;
                 break;
             case GTK_JUSTIFY_LEFT:
                 ib->y = r.y + ib->offset;
+                if (!ib->offset)
+                    top = FALSE;
                 break;
             case GTK_JUSTIFY_CENTER:
                 ib->y = r.y + (r.height - ib->height) / 2;
                 break;
             case GTK_JUSTIFY_FILL:
                 ib->y = r.y;
+                top = FALSE;
+                bottom = FALSE;
                 break;
         }
 
         if (ib->side == GTK_SIDE_RIGHT)
+        {
             ib->x = r.x + r.width - ib->width;
+            right = FALSE;
+        }
         else
+        {
             ib->x = r.x;
+            left = FALSE;
+        }
     }
 
+    xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (ib->win),
+                                       top, bottom, left, right);
+        
     gtk_window_move (GTK_WINDOW (ib->win), ib->x, ib->y);
 }
 

@@ -78,7 +78,7 @@ struct _XfcePanelWindowPrivate
     XfcePanelWindowResizeFunc resize_func;
     gpointer resize_data;
 
-    int top_padding, bottom_padding, left_padding, right_padding;
+    gboolean top_border, bottom_border, left_border, right_border;
 
     gboolean moveable;
 };
@@ -335,10 +335,10 @@ xfce_panel_window_init (XfcePanelWindow * panel_window)
     priv->move_data         = NULL;
     priv->resize_func       = NULL;
     priv->resize_data       = NULL;
-    priv->top_padding       = 0;
-    priv->bottom_padding    = 0;
-    priv->left_padding      = 0;
-    priv->right_padding     = 0;
+    priv->top_border        = TRUE;
+    priv->bottom_border     = TRUE;
+    priv->left_border       = TRUE;
+    priv->right_border      = TRUE;
     priv->moveable          = TRUE;
 
     gtk_widget_set_events (GTK_WIDGET (panel_window),
@@ -449,6 +449,84 @@ xfce_panel_window_hide (GtkWidget * widget)
 }
 
 /* drawing, size and style */
+static void
+_panel_window_paint_border (XfcePanelWindow * panel)
+{
+    XfcePanelWindowPrivate *priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel);
+    GdkWindow *window = GTK_WIDGET (panel)->window;
+    GtkAllocation *a = &(GTK_WIDGET (panel)->allocation);
+    GtkStyle *style = GTK_WIDGET (panel)->style;
+    GtkStateType state_type = GTK_WIDGET_STATE (GTK_WIDGET (panel));
+    int x, y, width, height;
+    int top, bottom, left, right;
+
+    x = a->x;
+    y = a->y;
+    width = a->width;
+    height = a->height;
+
+    top    = priv->top_border    ? style->ythickness : 0;
+    bottom = priv->bottom_border ? style->ythickness : 0;
+    left   = priv->left_border   ? style->xthickness : 0;
+    right  = priv->right_border  ? style->xthickness : 0;
+    
+    /* Code taken from gtk-xfce-engine-2 */
+    if (top > 1)
+    {
+        gdk_draw_line (window, style->dark_gc[state_type], x, y,
+                       x + width - 1, y);
+        gdk_draw_line (window, style->light_gc[state_type], x + 1, y + 1,
+                       x + width - 2, y + 1);
+    }
+    else if (top > 0)
+    {
+        gdk_draw_line (window, style->light_gc[state_type], x, y,
+                       x + width - 1, y);
+    }
+    
+    if (bottom > 1)
+    {
+        gdk_draw_line (window, style->black_gc, x + 1, y + height - 1,
+                       x + width - 1, y + height - 1);
+
+        gdk_draw_line (window, style->dark_gc[state_type], x + 2,
+                       y + height - 2, x + width - 2, y + height - 2);
+    }
+    else if (bottom > 0)
+    {
+        gdk_draw_line (window, style->dark_gc[state_type], x + 1,
+                       y + height - 1, x + width - 1, y + height - 1);
+    }
+
+    if (left > 1)
+    {
+        gdk_draw_line (window, style->dark_gc[state_type], x, y, x,
+                       y + height - 1);
+
+        gdk_draw_line (window, style->light_gc[state_type], x + 1, y + 1,
+                       x + 1, y + height - 2);
+    }
+    else if (left > 0)
+    {
+        gdk_draw_line (window, style->light_gc[state_type], x, y, x,
+                       y + height - 1);
+    }
+
+    if (right > 1)
+    {
+        gdk_draw_line (window, style->black_gc, x + width - 1, y + 1,
+                       x + width - 1, y + height - 1);
+        
+        gdk_draw_line (window, style->dark_gc[state_type], x + width - 2,
+                       y + 2, x + width - 2, y + height - 2);
+    }
+    else if (right > 0)
+    {
+        gdk_draw_line (window, style->dark_gc[state_type], x + width - 1,
+                       y + 1, x + width - 1, y + height - 1);
+    }
+}
+
 static gint
 xfce_panel_window_expose (GtkWidget * widget, GdkEventExpose * event)
 {
@@ -458,14 +536,11 @@ xfce_panel_window_expose (GtkWidget * widget, GdkEventExpose * event)
 
     if (GTK_WIDGET_DRAWABLE (widget))
     {
-        gtk_paint_box (widget->style,
-                       widget->window,
-                       GTK_WIDGET_STATE (widget),
-                       GTK_SHADOW_OUT,
-                       &event->area, widget, "panel_window",
-                       widget->allocation.x,
-                       widget->allocation.y,
-                       widget->allocation.width, widget->allocation.height);
+        if (GTK_BIN (widget)->child)
+        {
+            gtk_container_propagate_expose (GTK_CONTAINER (widget),
+                                            GTK_BIN (widget)->child, event);
+        }
 
         switch (priv->handle_style)
         {
@@ -482,12 +557,8 @@ xfce_panel_window_expose (GtkWidget * widget, GdkEventExpose * event)
             default:
                 break;
         }
-
-        if (GTK_BIN (widget)->child)
-        {
-            gtk_container_propagate_expose (GTK_CONTAINER (widget),
-                                            GTK_BIN (widget)->child, event);
-        }
+    
+        _panel_window_paint_border (panel_window);
     }
 
     return FALSE;
@@ -509,8 +580,14 @@ xfce_panel_window_size_request (GtkWidget * widget,
         gtk_widget_size_request (GTK_BIN (widget)->child, requisition);
     }
     
-    requisition->width += priv->left_padding + priv->right_padding;
-    requisition->height += priv->top_padding + priv->bottom_padding;
+    if (priv->top_border)
+        requisition->height += widget->style->ythickness;
+    if (priv->bottom_border)
+        requisition->height += widget->style->ythickness;
+    if (priv->left_border)
+        requisition->height += widget->style->xthickness;
+    if (priv->right_border)
+        requisition->height += widget->style->xthickness;
 
     if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
     {
@@ -604,10 +681,24 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
 
         childalloc = *allocation;
 
-        childalloc.x += priv->left_padding;
-        childalloc.y += priv->top_padding;
-        childalloc.width -= priv->left_padding + priv->right_padding;
-        childalloc.height -= priv->top_padding + priv->bottom_padding;
+        if (priv->top_border)
+        {
+            childalloc.y += widget->style->ythickness;
+            childalloc.height -= widget->style->ythickness;
+        }
+        
+        if (priv->bottom_border)
+            childalloc.height -= widget->style->ythickness;
+        
+        if (priv->left_border)
+        {
+            childalloc.x += widget->style->xthickness;
+            childalloc.width -= widget->style->xthickness;
+        }
+        
+        if (priv->right_border)
+            childalloc.width -= widget->style->xthickness;
+            
 
         if (priv->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
@@ -900,19 +991,21 @@ xfce_panel_window_set_handle_style (XfcePanelWindow * window,
 }
 
 /**
- * xfce_panel_window_get_padding
+ * xfce_panel_window_get_show_border
  * @window        : #XfcePanelWindow
- * @top_padding   : location for top padding or %NULL
- * @bottom_padding: location for bottom padding or %NULL
- * @left_padding  : location for left padding or %NULL
- * @right_padding : location for right padding or %NULL
+ * @top_border   : location for top border or %NULL
+ * @bottom_border: location for bottom border or %NULL
+ * @left_border  : location for left border or %NULL
+ * @right_border : location for right border or %NULL
  * 
- * Get padding inside panel window.
+ * Get visibility of panel window borders.
  **/
 void
-xfce_panel_window_get_padding (XfcePanelWindow * window, 
-                               int *top_padding, int *bottom_padding, 
-                               int *left_padding, int *right_padding)
+xfce_panel_window_get_show_border (XfcePanelWindow * window, 
+                                   gboolean *top_border, 
+                                   gboolean *bottom_border, 
+                                   gboolean *left_border, 
+                                   gboolean *right_border)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -920,30 +1013,32 @@ xfce_panel_window_get_padding (XfcePanelWindow * window,
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
-    if (top_padding != NULL)
-        *top_padding = priv->top_padding;
-    if (bottom_padding != NULL)
-        *bottom_padding = priv->bottom_padding;
-    if (left_padding != NULL)
-        *left_padding = priv->left_padding;
-    if (right_padding != NULL)
-        *right_padding = priv->right_padding;
+    if (top_border != NULL)
+        *top_border = priv->top_border;
+    if (bottom_border != NULL)
+        *bottom_border = priv->bottom_border;
+    if (left_border != NULL)
+        *left_border = priv->left_border;
+    if (right_border != NULL)
+        *right_border = priv->right_border;
 }
 
 /**
- * xfce_panel_window_get_padding
+ * xfce_panel_window_get_show_border
  * @window        : #XfcePanelWindow
- * @top_padding   : top padding
- * @bottom_padding: bottom padding
- * @left_padding  : left padding
- * @right_padding : right padding
+ * @top_border   : show top border
+ * @bottom_border: show bottom border
+ * @left_border  : show left border
+ * @right_border : show right border
  * 
- * Set padding inside panel window.
+ * Set border visibility for the panel window.
  **/
 void
-xfce_panel_window_set_padding (XfcePanelWindow * window, 
-                               int top_padding, int bottom_padding, 
-                               int left_padding, int right_padding)
+xfce_panel_window_set_show_border (XfcePanelWindow * window, 
+                                   gboolean top_border, 
+                                   gboolean bottom_border, 
+                                   gboolean left_border, 
+                                   gboolean right_border)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -951,18 +1046,18 @@ xfce_panel_window_set_padding (XfcePanelWindow * window,
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
-    if (top_padding == priv->top_padding
-        && bottom_padding == priv->bottom_padding
-        && left_padding == priv->left_padding
-        && right_padding == priv->right_padding)
+    if (top_border == priv->top_border
+        && bottom_border == priv->bottom_border
+        && left_border == priv->left_border
+        && right_border == priv->right_border)
     {
         return;
     }
     
-    priv->top_padding = top_padding;
-    priv->bottom_padding = bottom_padding;
-    priv->left_padding = left_padding;
-    priv->right_padding = right_padding;
+    priv->top_border = top_border;
+    priv->bottom_border = bottom_border;
+    priv->left_border = left_border;
+    priv->right_border = right_border;
 
     gtk_widget_queue_resize (GTK_WIDGET (window));
 }

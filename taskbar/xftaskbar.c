@@ -273,18 +273,18 @@ taskbar_position (Taskbar * taskbar)
         taskbar->y = rect.y;
 
         if (taskbar->shrink || taskbar->width_percent != 100)
-            xfce_panel_window_set_padding (win,0,1,1,1);
+            xfce_panel_window_set_show_border (win, FALSE, TRUE, TRUE, TRUE);
         else
-            xfce_panel_window_set_padding (win,0,1,0,0);
+            xfce_panel_window_set_show_border (win, FALSE, TRUE, FALSE, FALSE);
     }
     else
     {
         taskbar->y = rect.y + rect.height - taskbar->win->allocation.height;
         
         if (taskbar->shrink || taskbar->width_percent != 100)
-            xfce_panel_window_set_padding (win,1,0,1,1);
+            xfce_panel_window_set_show_border (win, TRUE, FALSE, TRUE, TRUE);
         else
-            xfce_panel_window_set_padding (win,1,0,0,0);
+            xfce_panel_window_set_show_border (win, TRUE, FALSE, FALSE, FALSE);
     }
     
     gtk_window_move (GTK_WINDOW (taskbar->win), taskbar_get_x (taskbar),
@@ -905,8 +905,8 @@ main (int argc, char **argv)
     xfce_panel_window_set_moveable (XFCE_PANEL_WINDOW (taskbar->win), FALSE);
     xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (taskbar->win),
                                         XFCE_HANDLE_STYLE_NONE);
-    xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (taskbar->win),
-                                   0, 1, 0, 0);
+    xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (taskbar->win),
+                                       FALSE, TRUE, FALSE, FALSE);
     gtk_window_set_title (GTK_WINDOW (taskbar->win), _("Taskbar"));
     
     gtk_widget_set_size_request (GTK_WIDGET (taskbar->win), taskbar->width,

@@ -428,24 +428,24 @@ restrict_position (Panel * p, int *x, int *y)
     switch (p->priv->side)
     {
         case TOP:
-            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
-                                           0, 1, 0, 0);
+            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
+                                               FALSE, TRUE, TRUE, TRUE);
             break;
         case BOTTOM:
-            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
-                                           1, 0, 0, 0);
+            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
+                                               TRUE, FALSE, TRUE, TRUE);
             break;
         case LEFT:
-            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
-                                           0, 0, 0, 1);
+            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
+                                               TRUE, TRUE, FALSE, TRUE);
             break;
         case RIGHT:
-            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
-                                           0, 0, 1, 0);
+            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
+                                               TRUE, TRUE, TRUE, FALSE);
             break;
         default:
-            xfce_panel_window_set_padding (XFCE_PANEL_WINDOW (p->toplevel), 
-                                           1, 1, 1, 1);
+            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
+                                               TRUE, TRUE, TRUE, TRUE);
     }
 }
 

@@ -109,17 +109,17 @@ void xfce_panel_window_set_handle_style            (XfcePanelWindow * window,
                                                     XfceHandleStyle style);
 
 
-void xfce_panel_window_get_padding                 (XfcePanelWindow * window,
-                                                    int * top_padding,
-                                                    int * bottom_padding,
-                                                    int * left_padding,
-                                                    int * right_padding);
+void xfce_panel_window_get_show_border             (XfcePanelWindow * window,
+                                                    gboolean * top,
+                                                    gboolean * bottom,
+                                                    gboolean * left,
+                                                    gboolean * right);
 
-void xfce_panel_window_set_padding                 (XfcePanelWindow * window,
-                                                    int top_padding,
-                                                    int bottom_padding,
-                                                    int left_padding,
-                                                    int right_padding);
+void xfce_panel_window_set_show_border             (XfcePanelWindow * window,
+                                                    gboolean top,
+                                                    gboolean bottom,
+                                                    gboolean left,
+                                                    gboolean right);
 
 
 void xfce_panel_window_set_move_function           (XfcePanelWindow * window,
