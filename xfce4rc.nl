@@ -69,10 +69,17 @@
       <Control id="-1" filename="libseparator.so"/>
     </Group>
     <Group>
-      <Popup/>
-      <Control id="-2" popup="0">
-        <Command term="0" sn="0">xfce-setting-show</Command>
-	<Tooltip>Instellingen</Tooltip>
+      <Popup>
+        <Item>
+          <Caption>Screensaver</Caption>
+          <Command term="0" sn="0">xscreensaver-demo</Command>
+          <Tooltip>Screensaver</Tooltip>
+          <Icon id="3"/>
+        </Item>
+      </Popup>
+      <Control id="-2" popup="1">
+        <Command term="0" sn="1">xfce-setting-show</Command>
+        <Tooltip>Settings</Tooltip>
         <Icon id="3"/>
       </Control>
     </Group>
@@ -105,7 +112,7 @@
     </Group>
     <Group>
       <Popup/>
-      <Control id="-1" filename="libsystembuttons.so" button1="1" button2="1" showtwo="0"/>
+      <Control id="-1" filename="libsystembuttons.so" button1="0" button2="1" showtwo="1"/>
     </Group>
     <Group>
       <Popup/>
