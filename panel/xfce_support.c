@@ -312,6 +312,10 @@ check_net_wm_support (void)
 void
 set_window_skip (GtkWidget * win)
 {
+#if GTK_CHECK_VERSION(2, 2, 0)
+    g_object_set (G_OBJECT(win), "skip_taskbar_hint", TRUE, NULL);
+    g_object_set (G_OBJECT(win), "skip_pager_hint", TRUE, NULL);
+#else
     Screen *xscreen;
     Window xid;
     static Atom xa_SKIP_PAGER = 0;
@@ -329,6 +333,7 @@ set_window_skip (GtkWidget * win)
     xid = GDK_WINDOW_XID (win->window);
 
     netk_change_state (xscreen, xid, TRUE, xa_SKIP_PAGER, xa_SKIP_TASKBAR);
+#endif
 }
 
 /*  DND

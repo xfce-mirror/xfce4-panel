@@ -261,16 +261,6 @@ main (int argc, char **argv)
 		    "http://www.freedesktop.org. \n"
 		    "Some XFce features may not work as intended."));
     }
-
-    client_session = client_session_new (argc, argv, NULL /* data */ ,
-					 SESSION_RESTART_IF_RUNNING, 40);
-
-    client_session->save_yourself = save_yourself;
-    client_session->die = die;
-
-    if (!(session_managed = session_init (client_session)))
-	g_message ("%s: Running without session manager", PACKAGE);
-
 #ifdef HAVE_SIGACTION
     act.sa_handler = sighandler;
     sigemptyset (&act.sa_mask);
@@ -296,6 +286,15 @@ main (int argc, char **argv)
     icons_init ();
 
     create_panel ();
+
+    client_session = client_session_new (argc, argv, NULL /* data */ ,
+					 SESSION_RESTART_IF_RUNNING, 40);
+
+    client_session->save_yourself = save_yourself;
+    client_session->die = die;
+
+    if (!(session_managed = session_init (client_session)))
+	g_message ("%s: Running without session manager", PACKAGE);
 
     /* signal state */
     g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
