@@ -26,3 +26,5 @@ libxfce4settings_la_LIBADD =						\
 
 appsdir = $(datadir)/applications
 apps_DATA = xfce-panel-settings.desktop
+
+EXTRA_DIST = xfce-panel-settings.desktop
