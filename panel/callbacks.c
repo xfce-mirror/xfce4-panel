@@ -104,7 +104,7 @@ static void show_popup(PanelPopup * pp)
     int w, h;
     gboolean vertical = settings.orientation == VERTICAL;
     int pos = settings.popup_position;
-    GtkAllocation alloc;
+    GtkAllocation alloc1 = {0, }, alloc2 = {0, };
 
     if(open_popup)
         hide_popup(open_popup);
@@ -128,9 +128,9 @@ static void show_popup(PanelPopup * pp)
         gtk_widget_show(pp->separator);
     }
 
-    alloc = pp->button->allocation;
-    xbutton = alloc.x;
-    ybutton = alloc.y;
+    alloc1 = pp->button->allocation;
+    xbutton = alloc1.x;
+    ybutton = alloc1.y;
     
     p = gtk_widget_get_parent_window(pp->button);
     gdk_window_get_root_origin(p, &xparent, &yparent);
@@ -141,11 +141,16 @@ static void show_popup(PanelPopup * pp)
     if(!GTK_WIDGET_REALIZED(pp->window))
         gtk_widget_realize(pp->window);
 
-    /* show the window off scren to get the right dimensions */
-    gtk_window_move(GTK_WINDOW(pp->window), w+1, h+1);
-    gtk_widget_show(pp->window);
     gtk_widget_size_request(pp->window, &req2);
-    gtk_widget_hide(pp->window);
+
+    alloc2.width = req2.width;
+    alloc2.height = req2.height;
+    gtk_widget_size_allocate(pp->window, &alloc2);
+
+    gtk_widget_realize(pp->window);
+    
+    /* this is necessary, because the icons are resized on allocation */
+    gtk_widget_size_request(pp->window, &req2);
 
     /*  positioning logic (well ...)
      *  ----------------------------
@@ -169,18 +174,18 @@ static void show_popup(PanelPopup * pp)
 	if (pos == LEFT && x - req2.width >= 0)
 	{
 	    x = x - req2.width;
-	    y = y + alloc.height - req2.height;
+	    y = y + alloc1.height - req2.height;
 	}
 	/* .. or if menu doesn't fit right, but does fit left */
-	else if (x + req2.width + alloc.width > w && x - req2.width >= 0)
+	else if (x + req2.width + alloc1.width > w && x - req2.width >= 0)
 	{
 	    x = x - req2.width;
-	    y = y + alloc.height - req2.height;
+	    y = y + alloc1.height - req2.height;
 	}
 	else /* right */
 	{
-	    x = x + alloc.width;
-	    y = y + alloc.height - req2.height;
+	    x = x + alloc1.width;
+	    y = y + alloc1.height - req2.height;
 	}
 
 	/* check if it fits upwards */
@@ -190,20 +195,20 @@ static void show_popup(PanelPopup * pp)
     else
     {
 	/* down if buttons on bottom ... */
-	if (pos == BOTTOM && y + alloc.height + req2.height <= h)
+	if (pos == BOTTOM && y + alloc1.height + req2.height <= h)
 	{
-	    x = x + alloc.width / 2 - req2.width / 2;
-	    y = y + alloc.height;
+	    x = x + alloc1.width / 2 - req2.width / 2;
+	    y = y + alloc1.height;
 	}
 	/* ... or up doesn't fit and down does */
-	else if (y - req2.height < 0 && y + alloc.height + req2.height <= h)
+	else if (y - req2.height < 0 && y + alloc1.height + req2.height <= h)
 	{
-	    x = x + alloc.width / 2 - req2.width / 2;
-	    y = y + alloc.height;
+	    x = x + alloc1.width / 2 - req2.width / 2;
+	    y = y + alloc1.height;
 	}
 	else
 	{
-	    x = x + alloc.width / 2 - req2.width / 2;
+	    x = x + alloc1.width / 2 - req2.width / 2;
 	    y = y - req2.height;
 	}
 
