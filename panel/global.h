@@ -20,8 +20,9 @@
 #ifndef __XFCE_GLOBAL_H__
 #define __XFCE_GLOBAL_H__
 
-#include <gtk/gtk.h>
 #include <string.h>
+#include <gtk/gtk.h>
+#include <libxfcegui4/libxfcegui4.h>
 
 /* Debug purpose */
 #include "debug.h"

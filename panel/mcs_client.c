@@ -251,7 +251,7 @@ void mcs_watch_xfce_channel(void)
         g_critical(_("xfce4: could not connect to settings manager!" 
 		     "Please check your installation."));
 
-	report_error(_("The XFce panel could not connect to the settings \n"
+	show_error(_("The XFce panel could not connect to the settings \n"
 		       "manager.\n"
 		       "Please make sure it is installed on your system."));
 

@@ -187,7 +187,7 @@ int main(int argc, char **argv)
     
     if (!net_wm_support)
     {
-	report_error(_("Your window manager does not seem to support "
+	show_error(_("Your window manager does not seem to support "
 		       "the new window manager hints as defined on "
 		       "http://www.freedesktop.org. \n"
 		       "Some XFce features may not work as intended."));

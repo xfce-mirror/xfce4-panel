@@ -32,9 +32,6 @@ void write_backup_file(const char *path);
 /* tooltips */
 void add_tooltip(GtkWidget * widget, char *tip);
 
-/* button with text and stock icon */
-GtkWidget *mixed_button_new(const char *stock, const char *message);
-
 /* x atoms and properties */
 void set_window_type_dock(GtkWidget *win, gboolean set);
 void set_window_layer(GtkWidget *win, int layer);
@@ -54,11 +51,6 @@ void dnd_set_callback(GtkWidget * widget, DropCallback function, gpointer data);
 void gnome_uri_list_free_strings(GList * list);
 GList *gnome_uri_list_extract_uris(const gchar * uri_list);
 GList *gnome_uri_list_extract_filenames(const gchar * uri_list);
-
-/* dialogs */
-gboolean confirm(const char *text, const char *stock, const char *action);
-void report_error(const char *text);
-void show_info(const char *text);
 
 /* file open dialog */
 char *select_file_name(const char *title, const char *path, GtkWidget * parent);

@@ -227,34 +227,6 @@ void add_tooltip(GtkWidget * widget, char *tip)
     gtk_tooltips_set_tip(tooltips, widget, tip, NULL);
 }
 
-/*  Button with text and stock icon
- *  -------------------------------
- *  Taken from ROX Filer (http://rox.sourceforge.net)
- *  by Thomas Leonard
-*/
-GtkWidget *mixed_button_new(const char *stock, const char *message)
-{
-    GtkWidget *button, *align, *image, *hbox, *label;
-
-    button = gtk_button_new();
-    label = gtk_label_new_with_mnemonic(message);
-    gtk_label_set_mnemonic_widget(GTK_LABEL(label), button);
-
-    image = gtk_image_new_from_stock(stock, GTK_ICON_SIZE_BUTTON);
-    hbox = gtk_hbox_new(FALSE, 2);
-
-    align = gtk_alignment_new(0.5, 0.5, 0.0, 0.0);
-
-    gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
-    gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    gtk_container_add(GTK_CONTAINER(button), align);
-    gtk_container_add(GTK_CONTAINER(align), hbox);
-    gtk_widget_show_all(align);
-
-    return button;
-}
-
 /*  X atoms and properties
 */
 void set_window_type_dock(GtkWidget * window, gboolean set)
@@ -535,75 +507,6 @@ GList *gnome_uri_list_extract_filenames(const gchar * uri_list)
     return result;
 }
 
-/*  User interaction dialogs
- *  ------------------------
-*/
-gboolean confirm(const char *text, const char *stock, const char *action)
-{
-    GtkWidget *dialog, *button;
-    int response = GTK_RESPONSE_NONE;
-
-    dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
-                                    GTK_DIALOG_MODAL |
-                                    GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_NONE,
-                                    text);
-
-    button = gtk_button_new_from_stock(GTK_STOCK_CANCEL);
-    gtk_widget_show(button);
-    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_NO);
-
-    if(action)
-        button = mixed_button_new(stock, action);
-    else
-        button = gtk_button_new_from_stock(stock);
-    gtk_widget_show(button);
-
-    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_YES);
-
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    response = gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_hide(dialog);
-    gtk_widget_destroy(dialog);
-
-    if(response == GTK_RESPONSE_YES)
-        return TRUE;
-    else
-        return FALSE;
-}
-
-void report_error(const char *text)
-{
-    GtkWidget *dialog;
-
-    dialog = gtk_message_dialog_new(toplevel ? GTK_WINDOW(toplevel) : NULL,
-                                    GTK_DIALOG_MODAL |
-                                    GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
-                                    text);
-
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
-}
-
-void show_info(const char *text)
-{
-    GtkWidget *dialog;
-
-    dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
-                                    GTK_DIALOG_MODAL |
-                                    GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, text);
-
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
-}
-
 /*  File open dialog
  *  ----------------
 */
@@ -668,90 +571,25 @@ char *select_file_with_preview(const char *title, const char *path, GtkWidget * 
 /*  Executing commands
  *  ------------------
 */
-
-/* '~' doesn't get expanded by g_spawn_* */
-/* this has to be statically allocated for putenv !! */
-static char newpath[MAXSTRLEN + 1];
-
-static void expand_path(void)
-{
-    static gboolean first = TRUE;
-
-    /* we don't have to do this every time */
-    if(first)
-    {
-        const char *path = g_getenv("PATH");
-        const char *home = g_getenv("HOME");
-        int homelen = strlen(home);
-        const char *c;
-        char *s;
-
-        if(!path || !strlen(path))
-            return;
-
-        c = path;
-        s = newpath;
-
-	strcpy(s, "PATH=");
-	s+=5;
-	
-        while(*c)
-        {
-            if(*c == '~')
-            {
-                strcpy(s, home);
-                s += homelen;
-            }
-            else
-            {
-                *s = *c;
-                s++;
-            }
-
-            c++;
-        }
-
-        *s = '\0';
-        first = FALSE;
-
-        putenv(newpath);
-    }
-}
-
 static void real_exec_cmd(const char *cmd, gboolean in_terminal,
                           gboolean silent)
 {
-    GError *error = NULL;       /* this must be NULL to prevent crash :( */
     char execute[MAXSTRLEN + 1];
-
-    if(!cmd)
-        return;
-
-    /* make sure '~' is expanded in the users PATH */
-    expand_path();
 
     if(in_terminal)
         snprintf(execute, MAXSTRLEN, "xterm -e %s", cmd);
     else
         snprintf(execute, MAXSTRLEN, "%s", cmd);
 
-    if(!g_spawn_command_line_async(execute, &error))
+    if (silent)
     {
-        char *msg;
+	GError *error = NULL;
 
-        msg = g_strcompress(error->message);
-
-        if(silent)
-        {
-            g_printerr("xfce: %s\n", msg);
-        }
-        else
-        {
-            report_error(msg);
-        }
-
-        g_free(msg);
+	if(!g_spawn_command_line_async(execute, &error))
+	    g_warning("xfce: %s\n", error->message);
     }
+    else
+	exec_command(execute);
 }
 
 void exec_cmd(const char *cmd, gboolean in_terminal)
