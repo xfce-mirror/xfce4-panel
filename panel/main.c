@@ -53,15 +53,26 @@
 #include "settings.h"
 #include "mcs_client.h"
 
+/* signal handling */
+typedef enum
+{
+    NOSIGNAL,
+    RESTART,
+    QUIT,
+    NUM_SIGNALS,
+}
+SignalState;
+
+static SignalState sigstate = NOSIGNAL;
+
 /*  session management
  *  ------------------
 */
 static SessionClient *client_session;
 static gboolean session_managed = FALSE;
 
-static void
-save_yourself (gpointer data, int save_style, gboolean shutdown,
-               int interact_style, gboolean fast)
+static void 
+save_panel(void)
 {
     gboolean hidden = settings.autohide;
     
@@ -86,6 +97,13 @@ save_yourself (gpointer data, int save_style, gboolean shutdown,
     
     write_panel_config ();
 }
+    
+static void
+save_yourself (gpointer data, int save_style, gboolean shutdown,
+               int interact_style, gboolean fast)
+{
+    save_panel();
+}
 
 static void
 die (gpointer client_data)
@@ -99,8 +117,6 @@ die (gpointer client_data)
 void
 quit (gboolean force)
 {
-    gboolean hidden;
-
     if (!force)
     {
         if (session_managed)
@@ -117,28 +133,7 @@ quit (gboolean force)
 
     mcs_stop_watch ();
 
-    hidden = settings.autohide;
-    
-    if (panel.toplevel)
-    {
-	if (hidden)
-	{
-	    panel_set_autohide(FALSE);
-
-	    while (gtk_events_pending())
-		gtk_main_iteration();
-	}
-	
-        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
-                                 &panel.position.y);
-
-	if (hidden)
-	    panel_set_autohide(TRUE);
-
-	gtk_widget_hide (panel.toplevel);
-    }
-
-    write_panel_config ();
+    save_panel();
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     free_startup_timeout ();
@@ -155,34 +150,12 @@ quit (gboolean force)
 void
 restart (void)
 {
-    int x, y;
-    gboolean hidden;
-
-    hidden = settings.autohide;
+/*    int x, y;
     
-    if (panel.toplevel)
-    {
-	if (hidden)
-	{
-	    panel_set_autohide(FALSE);
-
-	    while (gtk_events_pending())
-		gtk_main_iteration();
-	}
-	
-        gtk_window_get_position (GTK_WINDOW (panel.toplevel), &panel.position.x,
-                                 &panel.position.y);
-
-	if (hidden)
-	    panel_set_autohide(TRUE);
-    }
-
-    /* somehow the position gets lost here ... 
-     * FIXME: find out why, may be a real bug */
     x = panel.position.x;
     y = panel.position.y;
-
-    write_panel_config ();
+*/
+    save_panel ();
 
     if (panel.toplevel)
 	gtk_widget_hide (panel.toplevel);
@@ -192,36 +165,62 @@ restart (void)
 #endif
 
     panel_cleanup ();
-    gtk_widget_destroy (gtk_bin_get_child (GTK_BIN (panel.toplevel)));
+    gtk_widget_destroy (panel.main_frame);
 
     create_panel ();
-
+/*
     panel.position.x = x;
     panel.position.y = y;
-    panel_set_position ();
+    panel_set_position ();*/
 }
 
 /*  Main program
  *  ------------
 */
+static gboolean check_signal_state(void)
+{
+    static gboolean restarting = FALSE;
+    
+    if (sigstate != NOSIGNAL)
+    {
+	if (sigstate == RESTART && !restarting)
+	{
+	    restarting = TRUE;
+	    sigstate = NOSIGNAL;
+	    restart();
+	    restarting = FALSE;
+	}
+	else if (sigstate == QUIT)
+	{
+	    quit(TRUE);
+	}
+    }
+
+    /* keep running */
+    return TRUE;
+}
+
 static void
 sighandler (int sig)
 {
+    /* Don't do any reall stuff here.
+     * Only set a signal state flag. There's a timeout in the main loop
+     * that tests the flag.
+     * This will prevent problems with gtk main loop threads and stuff
+     */
     switch (sig)
     {
         case SIGUSR1:
-            /* sleep for a second, we may be exiting X */
-            g_usleep (1000 * 1000);
-            restart ();
+            sigstate = RESTART;
             break;
 
         case SIGINT:
-            /* hack: prevent the panel from saving config */
+            /* hack: prevent the panel from saving config on ^C */
             disable_user_config = TRUE;
             /* fall through */
 
         default:
-            quit (TRUE);
+	    sigstate = QUIT;
     }
 }
 
@@ -302,6 +301,9 @@ main (int argc, char **argv)
 
     create_panel ();
 
+    /* signal state */
+    g_timeout_add(500, (GSourceFunc)check_signal_state, NULL);
+    
     gtk_main ();
 
     return 0;
