@@ -536,9 +536,7 @@ void panel_set_position(void)
     
 	DBG("position: (%d, %d)\n", position.x, position.y);
 
-	/* use gdk to prevent margins from interfering :( */
-	gtk_window_present(GTK_WINDOW(toplevel));
-	gdk_window_move(toplevel->window, position.x, position.y);
+	gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
     }
 }
 

@@ -174,9 +174,8 @@ static void show_popup(PanelPopup * pp)
 	    x = w - req.width;
     }
 
-    /* FIXME: is there a way to move the window before showing it? */
+    gtk_window_move(GTK_WINDOW(pp->window), x, y);
     gtk_widget_show(pp->window);
-    gdk_window_move(pp->window->window, x, y);
 }
 
 void hide_current_popup_menu(void)
