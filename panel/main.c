@@ -142,6 +142,7 @@ static void sighandler(int sig)
 
 int main(int argc, char **argv)
 {
+    struct sigaction act;
     int i;
     gboolean net_wm_support = FALSE;
     
@@ -191,9 +192,16 @@ int main(int argc, char **argv)
     if(!(session_managed = session_init(client_session)))
         g_message("%s: Running without session manager", PACKAGE);
 
-    signal(SIGHUP, &sighandler);
-    signal(SIGTERM, &sighandler);
-    signal(SIGINT, &sighandler);
+    act.sa_handler = sighandler;
+    sigemptyset(&act.sa_mask);
+#ifdef SA_RESTART
+    act.sa_flags = SA_RESTART;
+#else
+    act.sa_flags = 0;
+#endif
+    sigaction(SIGHUP, &act, NULL);
+    sigaction(SIGINT, &act, NULL);
+    sigaction(SIGTERM, &act, NULL);
 
     /* icon framework: names and id's */
     icons_init();
