@@ -1,5 +1,6 @@
 bin_PROGRAMS = xfce4
 xfce4_SOURCES = \
+xfce_clock.c \
 builtins.c \
 callbacks.c \
 central.c \
@@ -27,6 +28,7 @@ popup.h \
 settings.h \
 side.h \
 wmhints.h \
+xfce_clock.h \
 xfce.c \
 xfce_support.c
 
