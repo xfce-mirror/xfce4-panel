@@ -1,4 +1,4 @@
-/*  dialog.h
+/*  xfce4
  *
  *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
@@ -15,17 +15,44 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+*/
 
-#ifndef __XFCE_DIALOGS_H__
-#define __XFCE_DIALOGS_H__
+#ifndef __XFCE_SETTINGS_H
+#define __XFCE_SETTINGS_H
 
-#include "global.h"
+#define CHANNEL "xfce"
 
-void set_transient_for_dialog(GtkWidget * window);
+/* IMPORTANT: keep this in sync with mcs_client.c */
+enum {
+    XFCE_ORIENTATION,
+    XFCE_LAYER,
+    XFCE_SIZE,
+    XFCE_POPUPPOSITION,
+    XFCE_STYLE,
+    XFCE_THEME,
+    XFCE_POSITION,
+    XFCE_OPTIONS
+};
 
-void global_settings_dialog(void);
+enum {
+    XFCE_POSITION_BOTTOM,
+    XFCE_POSITION_TOP,
+    XFCE_POSITION_LEFT,
+    XFCE_POSITION_RIGHT,
+    XFCE_POSITION_SAVE,
+    XFCE_POSITION_RESTORE,
+    XFCE_POSITION_NONE,
+};
 
-void info_panel_dialog(void);
+static char *xfce_settings_names [] = {
+    "orientation",
+    "layer",
+    "size",
+    "popupposition",
+    "style",
+    "theme",
+    "position"
+};
 
-#endif /* __XFCE_DIALOGS_H__ */
+#endif /* __XFCE_SETTINGS_H */
+

@@ -464,7 +464,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS EGREP MY_SUBDIRS GLIB_REQUIRED_VERSION GTK_REQUIRED_VERSION PANGO_REQUIRED_VERSION LIBXFCEGUI4_REQUIRED_VERSION PKG_CONFIG BASE_DEPENDENCIES_CFLAGS BASE_DEPENDENCIES_LIBS build build_cpu build_vendor build_os host host_cpu host_vendor host_os LN_S ECHO RANLIB ac_ct_RANLIB LIBTOOL LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS VERSION INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO AMTAR install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM AWK SET_MAKE MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CPP X_CFLAGS X_PRE_LIBS X_LIBS X_EXTRA_LIBS EGREP MY_SUBDIRS GLIB_REQUIRED_VERSION GTK_REQUIRED_VERSION PANGO_REQUIRED_VERSION LIBXFCEGUI4_REQUIRED_VERSION PKG_CONFIG BASE_DEPENDENCIES_CFLAGS BASE_DEPENDENCIES_LIBS MCS_CLIENT_CFLAGS MCS_CLIENT_LIBS MCS_MANAGER_CFLAGS MCS_MANAGER_LIBS build build_cpu build_vendor build_os host host_cpu host_vendor host_os LN_S ECHO RANLIB ac_ct_RANLIB LIBTOOL LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1012,7 +1012,6 @@ Optional Features:
                           (and sometimes confusing) to the casual installer
   --disable-dependency-tracking Speeds up one-time builds
   --enable-dependency-tracking  Do not reject slow dependency extractors
-  --disable-plugins  	Don't build plugins
   --enable-debug          debug mode (default disabled)
   --enable-static=PKGS  build static libraries default=no
   --enable-shared=PKGS  build shared libraries default=yes
@@ -4880,16 +4879,8 @@ fi
 done
 
 
-# Check whether --enable-plugins or --disable-plugins was given.
-if test "${enable_plugins+set}" = set; then
-  enableval="$enable_plugins"
-   case "${enableval}" in
-	          no) MY_SUBDIRS="icons panel themes" ;;
-		  *)  MY_SUBDIRS="icons panel plugins themes" ;;
-	    	esac
-else
-   MY_SUBDIRS="icons panel plugins themes"
-fi;
+MY_SUBDIRS="icons panel settings plugins themes"
+
 
 DEBUG=0
 # Check whether --enable-debug or --disable-debug was given.
@@ -4901,8 +4892,6 @@ cat >>confdefs.h <<\_ACEOF
 _ACEOF
 
 fi;
-
-
 
 
 ## Versions of dependencies
@@ -5032,6 +5021,203 @@ echo "${ECHO_T}$BASE_DEPENDENCIES_LIBS" >&6
   else
      { { echo "$as_me:$LINENO: error: Library requirements (glib-2.0 >= $GLIB_REQUIRED_VERSION gtk+-2.0 >= $GTK_REQUIRED_VERSION pango >= $PANGO_REQUIRED_VERSION gmodule-2.0 libxml-2.0 libxfcegui4-1.0 >= $LIBXFCEGUI4_REQUIRED_VERSION) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
 echo "$as_me: error: Library requirements (glib-2.0 >= $GLIB_REQUIRED_VERSION gtk+-2.0 >= $GTK_REQUIRED_VERSION pango >= $PANGO_REQUIRED_VERSION gmodule-2.0 libxml-2.0 libxfcegui4-1.0 >= $LIBXFCEGUI4_REQUIRED_VERSION) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
+   { (exit 1); exit 1; }; }
+  fi
+
+
+
+  succeeded=no
+
+  if test -z "$PKG_CONFIG"; then
+    # Extract the first word of "pkg-config", so it can be a program name with args.
+set dummy pkg-config; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_path_PKG_CONFIG+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_path_PKG_CONFIG" && ac_cv_path_PKG_CONFIG="no"
+  ;;
+esac
+fi
+PKG_CONFIG=$ac_cv_path_PKG_CONFIG
+
+if test -n "$PKG_CONFIG"; then
+  echo "$as_me:$LINENO: result: $PKG_CONFIG" >&5
+echo "${ECHO_T}$PKG_CONFIG" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+  fi
+
+  if test "$PKG_CONFIG" = "no" ; then
+     echo "*** The pkg-config script could not be found. Make sure it is"
+     echo "*** in your path, or set the PKG_CONFIG environment variable"
+     echo "*** to the full path to pkg-config."
+     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
+  else
+     PKG_CONFIG_MIN_VERSION=0.9.0
+     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
+        echo "$as_me:$LINENO: checking for libxfce4mcs-client-1.0" >&5
+echo $ECHO_N "checking for libxfce4mcs-client-1.0... $ECHO_C" >&6
+
+        if $PKG_CONFIG --exists "libxfce4mcs-client-1.0" ; then
+            echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+            succeeded=yes
+
+            echo "$as_me:$LINENO: checking MCS_CLIENT_CFLAGS" >&5
+echo $ECHO_N "checking MCS_CLIENT_CFLAGS... $ECHO_C" >&6
+            MCS_CLIENT_CFLAGS=`$PKG_CONFIG --cflags "libxfce4mcs-client-1.0"`
+            echo "$as_me:$LINENO: result: $MCS_CLIENT_CFLAGS" >&5
+echo "${ECHO_T}$MCS_CLIENT_CFLAGS" >&6
+
+            echo "$as_me:$LINENO: checking MCS_CLIENT_LIBS" >&5
+echo $ECHO_N "checking MCS_CLIENT_LIBS... $ECHO_C" >&6
+            MCS_CLIENT_LIBS=`$PKG_CONFIG --libs "libxfce4mcs-client-1.0"`
+            echo "$as_me:$LINENO: result: $MCS_CLIENT_LIBS" >&5
+echo "${ECHO_T}$MCS_CLIENT_LIBS" >&6
+        else
+            MCS_CLIENT_CFLAGS=""
+            MCS_CLIENT_LIBS=""
+            ## If we have a custom action on failure, don't print errors, but
+            ## do set a variable so people can do so.
+            MCS_CLIENT_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libxfce4mcs-client-1.0"`
+            echo $MCS_CLIENT_PKG_ERRORS
+        fi
+
+
+
+     else
+        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
+        echo "*** See http://www.freedesktop.org/software/pkgconfig"
+     fi
+  fi
+
+  if test $succeeded = yes; then
+     :
+  else
+     { { echo "$as_me:$LINENO: error: Library requirements (libxfce4mcs-client-1.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
+echo "$as_me: error: Library requirements (libxfce4mcs-client-1.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
+   { (exit 1); exit 1; }; }
+  fi
+
+
+  succeeded=no
+
+  if test -z "$PKG_CONFIG"; then
+    # Extract the first word of "pkg-config", so it can be a program name with args.
+set dummy pkg-config; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_path_PKG_CONFIG+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  case $PKG_CONFIG in
+  [\\/]* | ?:[\\/]*)
+  ac_cv_path_PKG_CONFIG="$PKG_CONFIG" # Let the user override the test with a path.
+  ;;
+  *)
+  as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_path_PKG_CONFIG="$as_dir/$ac_word$ac_exec_ext"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_path_PKG_CONFIG" && ac_cv_path_PKG_CONFIG="no"
+  ;;
+esac
+fi
+PKG_CONFIG=$ac_cv_path_PKG_CONFIG
+
+if test -n "$PKG_CONFIG"; then
+  echo "$as_me:$LINENO: result: $PKG_CONFIG" >&5
+echo "${ECHO_T}$PKG_CONFIG" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+  fi
+
+  if test "$PKG_CONFIG" = "no" ; then
+     echo "*** The pkg-config script could not be found. Make sure it is"
+     echo "*** in your path, or set the PKG_CONFIG environment variable"
+     echo "*** to the full path to pkg-config."
+     echo "*** Or see http://www.freedesktop.org/software/pkgconfig to get pkg-config."
+  else
+     PKG_CONFIG_MIN_VERSION=0.9.0
+     if $PKG_CONFIG --atleast-pkgconfig-version $PKG_CONFIG_MIN_VERSION; then
+        echo "$as_me:$LINENO: checking for libxfce4mcs-manager-1.0" >&5
+echo $ECHO_N "checking for libxfce4mcs-manager-1.0... $ECHO_C" >&6
+
+        if $PKG_CONFIG --exists "libxfce4mcs-manager-1.0" ; then
+            echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+            succeeded=yes
+
+            echo "$as_me:$LINENO: checking MCS_MANAGER_CFLAGS" >&5
+echo $ECHO_N "checking MCS_MANAGER_CFLAGS... $ECHO_C" >&6
+            MCS_MANAGER_CFLAGS=`$PKG_CONFIG --cflags "libxfce4mcs-manager-1.0"`
+            echo "$as_me:$LINENO: result: $MCS_MANAGER_CFLAGS" >&5
+echo "${ECHO_T}$MCS_MANAGER_CFLAGS" >&6
+
+            echo "$as_me:$LINENO: checking MCS_MANAGER_LIBS" >&5
+echo $ECHO_N "checking MCS_MANAGER_LIBS... $ECHO_C" >&6
+            MCS_MANAGER_LIBS=`$PKG_CONFIG --libs "libxfce4mcs-manager-1.0"`
+            echo "$as_me:$LINENO: result: $MCS_MANAGER_LIBS" >&5
+echo "${ECHO_T}$MCS_MANAGER_LIBS" >&6
+        else
+            MCS_MANAGER_CFLAGS=""
+            MCS_MANAGER_LIBS=""
+            ## If we have a custom action on failure, don't print errors, but
+            ## do set a variable so people can do so.
+            MCS_MANAGER_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libxfce4mcs-manager-1.0"`
+            echo $MCS_MANAGER_PKG_ERRORS
+        fi
+
+
+
+     else
+        echo "*** Your version of pkg-config is too old. You need version $PKG_CONFIG_MIN_VERSION or newer."
+        echo "*** See http://www.freedesktop.org/software/pkgconfig"
+     fi
+  fi
+
+  if test $succeeded = yes; then
+     :
+  else
+     { { echo "$as_me:$LINENO: error: Library requirements (libxfce4mcs-manager-1.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&5
+echo "$as_me: error: Library requirements (libxfce4mcs-manager-1.0) not met; consider adjusting the PKG_CONFIG_PATH environment variable if your libraries are in a nonstandard prefix so pkg-config can find them." >&2;}
    { (exit 1); exit 1; }; }
   fi
 
@@ -6147,7 +6333,7 @@ test "x$enable_libtool_lock" != xno && enable_libtool_lock=yes
 case $host in
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 6150 "configure"' > conftest.$ac_ext
+  echo '#line 6336 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -6665,7 +6851,7 @@ chmod -w .
 save_CFLAGS="$CFLAGS"
 CFLAGS="$CFLAGS -o out/conftest2.$ac_objext"
 compiler_c_o=no
-if { (eval echo configure:6668: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>out/conftest.err; } && test -s out/conftest2.$ac_objext; then
+if { (eval echo configure:6854: \"$ac_compile\") 1>&5; (eval $ac_compile) 2>out/conftest.err; } && test -s out/conftest2.$ac_objext; then
   # The compiler can only warn and ignore the option if not recognized
   # So say no if there are warnings
   if test -s out/conftest.err; then
@@ -8410,7 +8596,7 @@ else
     lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 8413 "configure"
+#line 8599 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -8508,7 +8694,7 @@ else
     lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 8511 "configure"
+#line 8697 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -9233,7 +9419,7 @@ LIBTOOL='$(SHELL) $(top_builddir)/libtool'
 
 
 
-                                                                                                                                                                ac_config_files="$ac_config_files xfce4.spec Makefile icons/Makefile panel/Makefile plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/trash/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile themes/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
+                                                                                                                                                                          ac_config_files="$ac_config_files xfce4.spec Makefile icons/Makefile panel/Makefile plugins/Makefile plugins/mailcheck/Makefile plugins/clock/Makefile plugins/trash/Makefile plugins/switcher/Makefile plugins/systembuttons/Makefile settings/Makefile themes/Makefile themes/Crystal/Makefile themes/Curve/Makefile themes/Gnome/Makefile themes/Noia/Makefile themes/XFce/Makefile"
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
 # tests run on this system so they can be shared between configure
@@ -9779,6 +9965,7 @@ do
   "plugins/trash/Makefile" ) CONFIG_FILES="$CONFIG_FILES plugins/trash/Makefile" ;;
   "plugins/switcher/Makefile" ) CONFIG_FILES="$CONFIG_FILES plugins/switcher/Makefile" ;;
   "plugins/systembuttons/Makefile" ) CONFIG_FILES="$CONFIG_FILES plugins/systembuttons/Makefile" ;;
+  "settings/Makefile" ) CONFIG_FILES="$CONFIG_FILES settings/Makefile" ;;
   "themes/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Makefile" ;;
   "themes/Crystal/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Crystal/Makefile" ;;
   "themes/Curve/Makefile" ) CONFIG_FILES="$CONFIG_FILES themes/Curve/Makefile" ;;
@@ -9920,6 +10107,10 @@ s,@LIBXFCEGUI4_REQUIRED_VERSION@,$LIBXFCEGUI4_REQUIRED_VERSION,;t t
 s,@PKG_CONFIG@,$PKG_CONFIG,;t t
 s,@BASE_DEPENDENCIES_CFLAGS@,$BASE_DEPENDENCIES_CFLAGS,;t t
 s,@BASE_DEPENDENCIES_LIBS@,$BASE_DEPENDENCIES_LIBS,;t t
+s,@MCS_CLIENT_CFLAGS@,$MCS_CLIENT_CFLAGS,;t t
+s,@MCS_CLIENT_LIBS@,$MCS_CLIENT_LIBS,;t t
+s,@MCS_MANAGER_CFLAGS@,$MCS_MANAGER_CFLAGS,;t t
+s,@MCS_MANAGER_LIBS@,$MCS_MANAGER_LIBS,;t t
 s,@build@,$build,;t t
 s,@build_cpu@,$build_cpu,;t t
 s,@build_vendor@,$build_vendor,;t t

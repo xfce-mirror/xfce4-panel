@@ -6,8 +6,6 @@ controls.c \
 controls.h \
 controls_dialog.c \
 controls_dialog.h \
-dialogs.c \
-dialogs.h \
 global.h \
 groups.c \
 groups.h \
@@ -22,6 +20,8 @@ item_dialog.c \
 item_dialog.h \
 main.c \
 main.h \
+mcs_client.c \
+mcs_client.h \
 panel.c \
 panel.h \
 plugins.h \
@@ -44,5 +44,5 @@ plugins.h \
 xfce_support.h \
 xfce.h 
 
-xfce4_CFLAGS = -Wall @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ -DG_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DLIBDIR=\"$(pkglibdir)\" -DSYSCONFDIR=\"$(sysconfdir)\" -DVERSION=\"@VERSION@\"
-xfce4_LDADD = @LIBS@ @X_LIBS@  @BASE_DEPENDENCIES_LIBS@
+xfce4_CFLAGS = -Wall @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ @MCS_CLIENT_CFLAGS@ -DG_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DLIBDIR=\"$(pkglibdir)\" -DSYSCONFDIR=\"$(sysconfdir)\" -DVERSION=\"@VERSION@\"
+xfce4_LDADD = @LIBS@ @X_LIBS@  @BASE_DEPENDENCIES_LIBS@ @MCS_CLIENT_LIBS@ 

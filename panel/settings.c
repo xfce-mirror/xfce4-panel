@@ -189,6 +189,7 @@ void write_panel_config(void)
     char *dir;
     char *rcfile;
     xmlNodePtr root;
+    static gboolean backup = TRUE;
 
     disable_user_config = check_disable_user_config();
 
@@ -198,7 +199,14 @@ void write_panel_config(void)
     rcfile = get_save_file(XFCERC);
 
     if(g_file_test(rcfile, G_FILE_TEST_EXISTS))
-        write_backup_file(rcfile);
+    {
+	if (backup)
+	{
+	    write_backup_file(rcfile);
+	    backup = FALSE;
+	}
+	
+    }
     else
     {
         dir = g_path_get_dirname(rcfile);

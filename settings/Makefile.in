@@ -20,7 +20,7 @@ VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
-top_builddir = ../..
+top_builddir = ..
 
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 INSTALL = @INSTALL@
@@ -134,31 +134,39 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-plugindir = $(pkglibdir)/plugins
+plugindir = $(libdir)/libxfce4mcs/settings/
 
-plugin_LTLIBRARIES = libclock.la
-libclock_la_LDFLAGS = "-module"
+plugin_LTLIBRARIES = libxfce4settings.la
+libxfce4settings_la_LDFLAGS = "-module"
 
-libclock_la_SOURCES = \
-clock.c
+libxfce4settings_la_SOURCES = \
+xfce_settings.h \
+xfce_settings_dialog.c \
+xfce_settings_dialog.h \
+xfce_settings_plugin.c \
+xfce_settings_plugin.h
 
 
-libclock_la_CFLAGS = -Wall -I../../panel @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ -DG_DISABLE_DEPRECATED -DDATADIR=\"$(pkgdatadir)\" -DLIBDIR=\"$(pkglibdir)\"
-libclock_la_LIBADD = @LIBS@ @X_LIBS@  @BASE_DEPENDENCIES_LIBS@
-subdir = plugins/clock
+libxfce4settings_la_CFLAGS = -Wall -I../../panel @CFLAGS@ @X_CFLAGS@ @BASE_DEPENDENCIES_CFLAGS@ @MCS_MANAGER_CFLAGS@ -DG_DISABLE_DEPRECATED -DSYSCONFDIR=\"$(sysconfdir)\" -DDATADIR=\"$(pkgdatadir)\" 
+libxfce4settings_la_LIBADD = @LIBS@ @X_LIBS@  @BASE_DEPENDENCIES_LIBS@ @MCS_MANAGER_LIBS@ 
+subdir = settings
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(plugin_LTLIBRARIES)
 
-libclock_la_DEPENDENCIES =
-am_libclock_la_OBJECTS = libclock_la-clock.lo
-libclock_la_OBJECTS = $(am_libclock_la_OBJECTS)
+libxfce4settings_la_DEPENDENCIES =
+am_libxfce4settings_la_OBJECTS = \
+	libxfce4settings_la-xfce_settings_dialog.lo \
+	libxfce4settings_la-xfce_settings_plugin.lo
+libxfce4settings_la_OBJECTS = $(am_libxfce4settings_la_OBJECTS)
 
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/libclock_la-clock.Plo
+@AMDEP_TRUE@DEP_FILES = \
+@AMDEP_TRUE@	./$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Plo \
+@AMDEP_TRUE@	./$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Plo
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -166,9 +174,9 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(libclock_la_SOURCES)
+DIST_SOURCES = $(libxfce4settings_la_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(libclock_la_SOURCES)
+SOURCES = $(libxfce4settings_la_SOURCES)
 
 all: all-am
 
@@ -176,7 +184,7 @@ all: all-am
 .SUFFIXES: .c .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  plugins/clock/Makefile
+	  $(AUTOMAKE) --gnu  settings/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 pluginLTLIBRARIES_INSTALL = $(INSTALL)
@@ -207,9 +215,10 @@ clean-pluginLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-libclock_la-clock.lo: clock.c
-libclock.la: $(libclock_la_OBJECTS) $(libclock_la_DEPENDENCIES) 
-	$(LINK) -rpath $(plugindir) $(libclock_la_LDFLAGS) $(libclock_la_OBJECTS) $(libclock_la_LIBADD) $(LIBS)
+libxfce4settings_la-xfce_settings_dialog.lo: xfce_settings_dialog.c
+libxfce4settings_la-xfce_settings_plugin.lo: xfce_settings_plugin.c
+libxfce4settings.la: $(libxfce4settings_la_OBJECTS) $(libxfce4settings_la_DEPENDENCIES) 
+	$(LINK) -rpath $(plugindir) $(libxfce4settings_la_LDFLAGS) $(libxfce4settings_la_OBJECTS) $(libxfce4settings_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -217,7 +226,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libclock_la-clock.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -255,38 +265,71 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
-libclock_la-clock.o: clock.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libclock_la_CFLAGS) $(CFLAGS) -MT libclock_la-clock.o -MD -MP -MF "$(DEPDIR)/libclock_la-clock.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libclock_la-clock.o `test -f 'clock.c' || echo '$(srcdir)/'`clock.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libclock_la-clock.Tpo" "$(DEPDIR)/libclock_la-clock.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libclock_la-clock.Tpo"; exit 1; \
+libxfce4settings_la-xfce_settings_dialog.o: xfce_settings_dialog.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -MT libxfce4settings_la-xfce_settings_dialog.o -MD -MP -MF "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libxfce4settings_la-xfce_settings_dialog.o `test -f 'xfce_settings_dialog.c' || echo '$(srcdir)/'`xfce_settings_dialog.c; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo" "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='clock.c' object='libclock_la-clock.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libclock_la-clock.Po' tmpdepfile='$(DEPDIR)/libclock_la-clock.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfce_settings_dialog.c' object='libxfce4settings_la-xfce_settings_dialog.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Po' tmpdepfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libclock_la_CFLAGS) $(CFLAGS) -c -o libclock_la-clock.o `test -f 'clock.c' || echo '$(srcdir)/'`clock.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -c -o libxfce4settings_la-xfce_settings_dialog.o `test -f 'xfce_settings_dialog.c' || echo '$(srcdir)/'`xfce_settings_dialog.c
 
-libclock_la-clock.obj: clock.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libclock_la_CFLAGS) $(CFLAGS) -MT libclock_la-clock.obj -MD -MP -MF "$(DEPDIR)/libclock_la-clock.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libclock_la-clock.obj `if test -f 'clock.c'; then $(CYGPATH_W) 'clock.c'; else $(CYGPATH_W) '$(srcdir)/clock.c'`; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libclock_la-clock.Tpo" "$(DEPDIR)/libclock_la-clock.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libclock_la-clock.Tpo"; exit 1; \
+libxfce4settings_la-xfce_settings_dialog.obj: xfce_settings_dialog.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -MT libxfce4settings_la-xfce_settings_dialog.obj -MD -MP -MF "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libxfce4settings_la-xfce_settings_dialog.obj `if test -f 'xfce_settings_dialog.c'; then $(CYGPATH_W) 'xfce_settings_dialog.c'; else $(CYGPATH_W) '$(srcdir)/xfce_settings_dialog.c'`; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo" "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='clock.c' object='libclock_la-clock.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libclock_la-clock.Po' tmpdepfile='$(DEPDIR)/libclock_la-clock.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfce_settings_dialog.c' object='libxfce4settings_la-xfce_settings_dialog.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Po' tmpdepfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libclock_la_CFLAGS) $(CFLAGS) -c -o libclock_la-clock.obj `if test -f 'clock.c'; then $(CYGPATH_W) 'clock.c'; else $(CYGPATH_W) '$(srcdir)/clock.c'`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -c -o libxfce4settings_la-xfce_settings_dialog.obj `if test -f 'xfce_settings_dialog.c'; then $(CYGPATH_W) 'xfce_settings_dialog.c'; else $(CYGPATH_W) '$(srcdir)/xfce_settings_dialog.c'`
 
-libclock_la-clock.lo: clock.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libclock_la_CFLAGS) $(CFLAGS) -MT libclock_la-clock.lo -MD -MP -MF "$(DEPDIR)/libclock_la-clock.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libclock_la-clock.lo `test -f 'clock.c' || echo '$(srcdir)/'`clock.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libclock_la-clock.Tpo" "$(DEPDIR)/libclock_la-clock.Plo"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libclock_la-clock.Tpo"; exit 1; \
+libxfce4settings_la-xfce_settings_dialog.lo: xfce_settings_dialog.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -MT libxfce4settings_la-xfce_settings_dialog.lo -MD -MP -MF "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libxfce4settings_la-xfce_settings_dialog.lo `test -f 'xfce_settings_dialog.c' || echo '$(srcdir)/'`xfce_settings_dialog.c; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo" "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Plo"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='clock.c' object='libclock_la-clock.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libclock_la-clock.Plo' tmpdepfile='$(DEPDIR)/libclock_la-clock.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfce_settings_dialog.c' object='libxfce4settings_la-xfce_settings_dialog.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.Plo' tmpdepfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_dialog.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libclock_la_CFLAGS) $(CFLAGS) -c -o libclock_la-clock.lo `test -f 'clock.c' || echo '$(srcdir)/'`clock.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -c -o libxfce4settings_la-xfce_settings_dialog.lo `test -f 'xfce_settings_dialog.c' || echo '$(srcdir)/'`xfce_settings_dialog.c
+
+libxfce4settings_la-xfce_settings_plugin.o: xfce_settings_plugin.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -MT libxfce4settings_la-xfce_settings_plugin.o -MD -MP -MF "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libxfce4settings_la-xfce_settings_plugin.o `test -f 'xfce_settings_plugin.c' || echo '$(srcdir)/'`xfce_settings_plugin.c; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo" "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo"; exit 1; \
+@am__fastdepCC_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfce_settings_plugin.c' object='libxfce4settings_la-xfce_settings_plugin.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Po' tmpdepfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -c -o libxfce4settings_la-xfce_settings_plugin.o `test -f 'xfce_settings_plugin.c' || echo '$(srcdir)/'`xfce_settings_plugin.c
+
+libxfce4settings_la-xfce_settings_plugin.obj: xfce_settings_plugin.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -MT libxfce4settings_la-xfce_settings_plugin.obj -MD -MP -MF "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libxfce4settings_la-xfce_settings_plugin.obj `if test -f 'xfce_settings_plugin.c'; then $(CYGPATH_W) 'xfce_settings_plugin.c'; else $(CYGPATH_W) '$(srcdir)/xfce_settings_plugin.c'`; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo" "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo"; exit 1; \
+@am__fastdepCC_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfce_settings_plugin.c' object='libxfce4settings_la-xfce_settings_plugin.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Po' tmpdepfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -c -o libxfce4settings_la-xfce_settings_plugin.obj `if test -f 'xfce_settings_plugin.c'; then $(CYGPATH_W) 'xfce_settings_plugin.c'; else $(CYGPATH_W) '$(srcdir)/xfce_settings_plugin.c'`
+
+libxfce4settings_la-xfce_settings_plugin.lo: xfce_settings_plugin.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -MT libxfce4settings_la-xfce_settings_plugin.lo -MD -MP -MF "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libxfce4settings_la-xfce_settings_plugin.lo `test -f 'xfce_settings_plugin.c' || echo '$(srcdir)/'`xfce_settings_plugin.c; \
+@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo" "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Plo"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Tpo"; exit 1; \
+@am__fastdepCC_TRUE@	fi
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='xfce_settings_plugin.c' object='libxfce4settings_la-xfce_settings_plugin.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.Plo' tmpdepfile='$(DEPDIR)/libxfce4settings_la-xfce_settings_plugin.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxfce4settings_la_CFLAGS) $(CFLAGS) -c -o libxfce4settings_la-xfce_settings_plugin.lo `test -f 'xfce_settings_plugin.c' || echo '$(srcdir)/'`xfce_settings_plugin.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -353,7 +396,7 @@ distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 
-top_distdir = ../..
+top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)

@@ -23,8 +23,10 @@
 #include <libxfcegui4/libxfcegui4.h>
 
 #include "xfce.h"
+#include "popup.h"
 #include "settings.h"
 #include "plugins.h"
+#include "mcs_client.h"
 
 typedef struct
 {
@@ -105,7 +107,7 @@ SignalCallback *signal_callback_new(const char *signal,
 }
 
 /* request number of desktops */
-static set_num_screens(int n)
+static void set_num_screens(int n)
 {
     static Atom xa_NET_NUMBER_OF_DESKTOPS = 0;
     XClientMessageEvent sev;
@@ -317,11 +319,6 @@ static void screen_button_update_label(ScreenButton *sb, const char *name)
     g_free(markup);
 }
 
-static void workspace_name_changed_cb(NetkWorkspace *ws, ScreenButton *sb)
-{
-    /* not implemented in the library yet */
-}
-
 static gboolean
 screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev, ScreenButton * sb)
 {
@@ -379,7 +376,7 @@ h = -1;
 }
 
 /* creation and destruction */
-
+#if 0
 static void screen_button_modify_style(ScreenButton *sb)
 {
     GtkStyle *style;
@@ -405,6 +402,7 @@ static void screen_button_modify_style(ScreenButton *sb)
     
     gtk_widget_destroy(w);
 }
+#endif
 
 ScreenButton *create_screen_button(int index, const char *name, 
 				   NetkScreen *screen)
@@ -603,7 +601,6 @@ static void cde_pager_remove_button(CdePager *pager)
 static void cde_pager_set_active(CdePager *pager, NetkWorkspace *ws)
 {
     GList *li;
-    int i, n;
 
     for (li = pager->buttons; li; li = li->next)
     {
@@ -617,7 +614,6 @@ static void cde_pager_set_active(CdePager *pager, NetkWorkspace *ws)
 CdePager *create_cde_pager(NetkScreen *screen, GPtrArray *names)
 {
     int i, n;
-    GtkWidget *box;
 
     CdePager *pager = g_new0(CdePager, 1);
 
@@ -667,7 +663,7 @@ CdePager *create_cde_pager(NetkScreen *screen, GPtrArray *names)
     return pager;
 }
 
-static void *cde_pager_free(CdePager *pager)
+static void cde_pager_free(CdePager *pager)
 {
     GList *li;
 
@@ -692,6 +688,8 @@ static void mini_lock_cb(void)
     exec_cmd("xflock", FALSE);
 }
 
+extern void info_panel_dialog(void);
+
 static void mini_info_cb(void)
 {
     hide_current_popup_menu();
@@ -710,7 +708,7 @@ static void mini_palet_cb(void)
         return;
     }
 
-    global_settings_dialog();
+    mcs_dialog();
 }
 
 static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
@@ -723,7 +721,6 @@ static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)
 static void create_minibuttons(t_switcher *sw)
 {
     GdkPixbuf *pb[4];
-    GtkWidget *im;
     GtkWidget *button;
     int i;
     GList *li;
@@ -818,7 +815,6 @@ static void arrange_switcher(t_switcher *sw);
 static void switcher_set_size(Control *control, int size)
 {
     int i;
-    GList *li;
     t_switcher *sw;
     int s;
 
@@ -1034,7 +1030,6 @@ static void switcher_attach_callback(Control *control, const char *signal,
 {
     SignalCallback *sc;
     t_switcher *sw;
-    GList *li;
     int i;
 
     sw = control->data;
@@ -1059,10 +1054,8 @@ static void switcher_attach_callback(Control *control, const char *signal,
 
 static void arrange_switcher(t_switcher *sw)
 {
-    int i;
     GList *li;
     gboolean vertical = settings.orientation == VERTICAL;
-    GtkWidget *button_vbox;
 
     /* destroy existing widgets */
     if (sw->box)
@@ -1277,14 +1270,6 @@ static void workspace_dialog(GtkWidget *b, t_switcher_dialog *sd)
 {
 }
 
-static gboolean backup_show_minibuttons;
-static gboolean backup_show_names;
-static gboolean backup_graphical;
-
-static GtkWidget *mini_checkbutton;
-static GtkWidget *names_checkbutton;
-static GtkWidget *graphical_checkbutton;
-
 static void show_minibuttons_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 {
     t_switcher *sw = sd->sw;
@@ -1307,6 +1292,7 @@ static void show_minibuttons_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
     gtk_widget_set_sensitive(sd->revert, TRUE);
 }
 
+#if 0
 static void show_names_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 {
     t_switcher *sw = sd->sw;
@@ -1324,7 +1310,9 @@ static void show_names_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 
     gtk_widget_set_sensitive(sd->revert, TRUE);
 }
+#endif
 
+#if 0
 static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 {
     t_switcher *sw = sd->sw;
@@ -1342,6 +1330,7 @@ static void graphical_changed(GtkToggleButton *tb, t_switcher_dialog *sd)
 
     gtk_widget_set_sensitive(sd->revert, TRUE);
 }
+#endif
 
 static void switcher_revert(GtkWidget *b, t_switcher_dialog *sd)
 {
@@ -1457,6 +1446,7 @@ static void switcher_add_options(Control *control, GtkContainer *container,
 	    	     G_CALLBACK(graphical_changed), sd);
 */
     g_signal_connect(revert, "clicked", G_CALLBACK(switcher_revert), sd);
+    g_signal_connect(done, "clicked", G_CALLBACK(switcher_dialog_done), sd);
 }
 
 /*  Switcher panel control

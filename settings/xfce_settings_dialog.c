@@ -1,4 +1,4 @@
-/*  dialogs.c
+/*  xfce4
  *
  *  Copyright (C) 2002 Jasper Huijsmans <huysmans@users.sourceforge.net>
  *
@@ -15,23 +15,39 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+*/
 
 #include <stdio.h>
 #include <string.h>
-#include <gmodule.h>
 
-#include <X11/Xlib.h>
-#include <libxfcegui4/netk-util.h>
+#include <gtk/gtk.h>
 
-#include "xfce.h"
-#include "dialogs.h"
+#include "xfce_settings.h"
+#include "xfce_settings_plugin.h"
+#include "xfce_settings_dialog.h"
 
-#include "callbacks.h"
-#include "settings.h"
-#include "groups.h"
-#include "item.h"
-#include "popup.h"
+#define _(String) String
+#define N_(String) String
+
+#define strequals(s1,s2) !strcmp(s1, s2)
+
+#ifndef DATADIR
+#define DATADIR "/usr/local/share/xfce4"
+#endif
+
+/* panel sides / popup orientation */
+enum
+{ LEFT, RIGHT, TOP, BOTTOM };
+
+/* panel styles */
+enum
+{ OLD_STYLE, NEW_STYLE };
+
+/* panel orientation */
+enum
+{ HORIZONTAL, VERTICAL };
+
+static McsManager *mcs_manager;
 
 enum
 { RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
@@ -51,7 +67,7 @@ static GtkWidget *size_menu;
 static GtkWidget *popup_position_menu;
 static GtkWidget *style_menu;
 static GtkWidget *theme_menu;
-static GtkWidget *groups_spin;
+/*static GtkWidget *groups_spin;*/
 
 static GtkWidget *layer_menu;
 static GtkWidget *pos_button;
@@ -59,57 +75,45 @@ static GtkWidget *pos_button;
 static GtkSizeGroup *sg = NULL;
 static GtkWidget *revert;
 
-static Position backup_pos;
-static Settings backup;
 static int backup_theme_index = 0;
 
 GtkShadowType main_shadow = GTK_SHADOW_NONE;
 GtkShadowType header_shadow = GTK_SHADOW_NONE;
 GtkShadowType option_shadow = GTK_SHADOW_NONE;
 
-/*  backup
-*/
-static void create_backup(void)
+static gboolean is_running = FALSE;
+static GtkWidget *dialog = NULL;
+
+/* stop gcc from complaining when using -Wall:
+ * this variable will not be used, but I want the 
+ * definition of names to be available in the 
+ * xfce-settings.h header for other modules */
+char **names = xfce_settings_names;
+
+/* useful widgets */
+static GtkWidget *mixed_button_new(const char *stock, const char *message)
 {
-    backup_pos.x = position.x;
-    backup_pos.y = position.y;
-    backup.size = settings.size;
-    backup.popup_position = settings.popup_position;
-    backup.style = settings.style;
-    backup.orientation = settings.orientation;
-    backup.theme = g_strdup(settings.theme);
-    backup.num_groups = settings.num_groups;
-    backup.layer = settings.layer;
-}
+    GtkWidget *button, *align, *image, *hbox, *label;
 
-static void restore_backup(void)
-{
-    /* we just let the calbacks of our dialog do all the work */
+    button = gtk_button_new();
+    label = gtk_label_new_with_mnemonic(message);
+    gtk_label_set_mnemonic_widget(GTK_LABEL(label), button);
 
-    /* this must be first */
-    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu),
-    				backup.orientation);
+    image = gtk_image_new_from_stock(stock, GTK_ICON_SIZE_BUTTON);
+    hbox = gtk_hbox_new(FALSE, 2);
 
-    gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
+    align = gtk_alignment_new(0.5, 0.5, 0.0, 0.0);
 
-    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu),
-    				backup.popup_position);
+    gtk_box_pack_start(GTK_BOX(hbox), image, FALSE, FALSE, 0);
+    gtk_box_pack_end(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), backup.style);
-    gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
-                                backup_theme_index);
-
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(groups_spin), backup.num_groups);
+    gtk_container_add(GTK_CONTAINER(button), align);
+    gtk_container_add(GTK_CONTAINER(align), hbox);
+    gtk_widget_show_all(align);
     
-    gtk_option_menu_set_history(GTK_OPTION_MENU(layer_menu), backup.layer);
-
-    position.x = backup_pos.x;
-    position.y = backup_pos.y;
-    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
+    return button;
 }
 
-/*  sections
-*/
 static void add_header(const char *text, GtkBox * box)
 {
     GtkWidget *frame, *label;
@@ -140,38 +144,87 @@ static void add_spacer(GtkBox * box)
     gtk_box_pack_start(box, eventbox, FALSE, TRUE, 0);
 }
 
-/*  size
-*/
+/* backup values */
+static int bu_orientation;
+static int bu_layer;
+static int bu_size;
+static int bu_popup_position;
+static int bu_style;
+static char *bu_theme;
+
+static void xfce_create_backup(void)
+{
+    McsSetting *setting;
+
+    setting = &xfce_options[XFCE_ORIENTATION];
+    bu_orientation = setting->data.v_int;
+
+    setting = &xfce_options[XFCE_LAYER];
+    bu_layer = setting->data.v_int;
+
+    setting = &xfce_options[XFCE_SIZE];
+    bu_size = setting->data.v_int;
+
+    setting = &xfce_options[XFCE_POPUPPOSITION];
+    bu_popup_position = setting->data.v_int;
+
+    setting = &xfce_options[XFCE_STYLE];
+    bu_style = setting->data.v_int;
+
+    setting = &xfce_options[XFCE_THEME];
+    bu_theme = g_strdup(setting->data.v_string);
+
+    xfce_options[XFCE_POSITION].data.v_int = XFCE_POSITION_SAVE;
+    mcs_manager_set_setting(mcs_manager, &xfce_options[XFCE_POSITION], 
+	    		    CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+}
+
+static void xfce_restore_backup(void)
+{
+    /* we just let the calbacks of our dialog do all the work */
+
+    /* this must be first */
+    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu),
+    				bu_orientation);
+
+    gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), bu_size);
+
+    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu),
+    				bu_popup_position);
+
+    gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), bu_style);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
+                                backup_theme_index);
+
+/*    gtk_spin_button_set_value(GTK_SPIN_BUTTON(groups_spin), bu_num_groups);*/
+    
+    gtk_option_menu_set_history(GTK_OPTION_MENU(layer_menu), bu_layer);
+
+    xfce_options[XFCE_POSITION].data.v_int = XFCE_POSITION_RESTORE;
+    mcs_manager_set_setting(mcs_manager, &xfce_options[XFCE_POSITION], CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+}
+
+static void xfce_free_backup(void)
+{
+    g_free(bu_theme);
+}
+
+/* size */
 static void size_menu_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
-    gboolean changed = TRUE;
+    McsSetting *setting = &xfce_options[XFCE_SIZE];
 
-    if(GTK_WIDGET(menu) == size_menu && n != settings.size)
-    {
-        panel_set_size(n);
+    if (n == setting->data.v_int)
+	return;
 
-        if(n == TINY)
-        {
-            gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
-
-            gtk_widget_set_sensitive(style_menu, FALSE);
-        }
-        else
-        {
-            gtk_widget_set_sensitive(style_menu, TRUE);
-        }
-    }
-    else
-    {
-        changed = FALSE;
-    }
-
-    if(changed)
-    {
-        panel_set_position();
-        gtk_widget_set_sensitive(revert, TRUE);
-    }
+    setting->data.v_int = n;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+    
+    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static void add_size_menu(GtkWidget * option_menu, int size)
@@ -202,16 +255,19 @@ static void add_size_menu(GtkWidget * option_menu, int size)
                      NULL);
 }
 
-/*  style
-*/
+/* style */
 static void style_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
+    McsSetting *setting = &xfce_options[XFCE_STYLE];
 
-    if(n == settings.style)
+    if(n == setting->data.v_int)
         return;
 
-    panel_set_style(n);
+    setting->data.v_int = n;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -219,6 +275,7 @@ static void add_style_menu(GtkWidget * option_menu, int style)
 {
     GtkWidget *menu = gtk_menu_new();
     GtkWidget *item;
+    int n, pos;
 
     item = gtk_menu_item_new_with_label(_("Traditional"));
     gtk_widget_show(item);
@@ -233,30 +290,55 @@ static void add_style_menu(GtkWidget * option_menu, int style)
 
     g_signal_connect(option_menu, "changed", G_CALLBACK(style_changed), NULL);
 
-    if (settings.orientation == VERTICAL)
+    n = xfce_options[XFCE_ORIENTATION].data.v_int;
+    pos = xfce_options[XFCE_POPUPPOSITION].data.v_int;
+    
+    if ((n == HORIZONTAL && (pos == LEFT || pos == RIGHT)) ||
+        (n == VERTICAL && (pos == TOP || pos == BOTTOM)))
     {
-	if(settings.popup_position == TOP || settings.popup_position == BOTTOM)
-	    gtk_widget_set_sensitive(option_menu, FALSE);
+        gtk_option_menu_set_history(GTK_OPTION_MENU(option_menu), NEW_STYLE);
+        gtk_widget_set_sensitive(option_menu, FALSE);
     }
     else
     {
-	if(settings.popup_position == LEFT || settings.popup_position == RIGHT)
-	    gtk_widget_set_sensitive(option_menu, FALSE);
+        gtk_widget_set_sensitive(option_menu, TRUE);
     }
 }
 
-
-/*
- * Panel Orientation
- */
-
+/* Panel Orientation */
 static void orientation_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
-    int pos = settings.popup_position;
+    int pos = xfce_options[XFCE_POPUPPOSITION].data.v_int;
+    McsSetting *setting = &xfce_options[XFCE_ORIENTATION];
 
-    if(n == settings.orientation)
+    if(n == setting->data.v_int)
         return;
+
+    setting->data.v_int = n;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+
+    /* this seems more logical */
+    switch (pos)
+    {
+	case LEFT:
+	    pos = BOTTOM;
+	    break;
+	case RIGHT:
+	    pos = TOP;
+	    break;
+	case TOP:
+	    pos = RIGHT;
+	    break;
+	case BOTTOM:
+	    pos = LEFT;
+	    break;
+    }
+    
+    setting = &xfce_options[XFCE_POPUPPOSITION];
+    setting->data.v_int = pos;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
 
     if ((n == HORIZONTAL && (pos == LEFT || pos == RIGHT)) ||
         (n == VERTICAL && (pos == TOP || pos == BOTTOM)))
@@ -268,10 +350,8 @@ static void orientation_changed(GtkOptionMenu * menu)
     {
         gtk_widget_set_sensitive(style_menu, TRUE);
     }
-
+    
     gtk_widget_set_sensitive(revert, TRUE);
-
-    panel_set_orientation(n);
 }
 
 static void add_orientation_menu(GtkWidget * option_menu, int orientation)
@@ -295,29 +375,19 @@ static void add_orientation_menu(GtkWidget * option_menu, int orientation)
 
 }
 
-
-/*  popup position
-*/
+/* popup position */
 static void popup_position_changed(GtkOptionMenu * menu)
 {
     int n = gtk_option_menu_get_history(menu);
+    McsSetting *setting = &xfce_options[XFCE_POPUPPOSITION];
 
-    if(n == settings.popup_position)
+    if(n == setting->data.v_int)
         return;
 
-    if ((settings.orientation == HORIZONTAL && (n == LEFT || n == RIGHT)) ||
-        (settings.orientation == VERTICAL && (n == TOP || n == BOTTOM)))
-    {
-        gtk_option_menu_set_history(GTK_OPTION_MENU(style_menu), NEW_STYLE);
-        gtk_widget_set_sensitive(style_menu, FALSE);
-    }
-    else
-    {
-        gtk_widget_set_sensitive(style_menu, TRUE);
-    }
-
-    panel_set_popup_position(n);
-    panel_set_position();
+    setting->data.v_int = n;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+    
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -361,8 +431,10 @@ static char **find_themes(void)
     int i, len;
 
     /* Add default theme */
-    list = g_list_append(list, g_strdup(DEFAULT_THEME));
-    dirs = get_theme_dirs();
+    dirs = g_new0(char *, 3);
+
+    dirs[0] = g_build_filename(g_getenv("HOME"), ".xfce4", "themes", NULL);
+    dirs[1] = g_build_filename(DATADIR, "themes", NULL);
 
     for(d = dirs; *d; d++)
     {
@@ -406,11 +478,12 @@ static void theme_changed(GtkOptionMenu * option_menu)
 {
     const char *theme;
     GtkWidget *label;
+    McsSetting *setting = &xfce_options[XFCE_THEME];
 
     /* Right, this is weird, apparently the option menu
      * button reparents the label connected to the menuitem
-     * that is selected. So to get to the label we go to the
-     * child of the button and not of the menu item!
+     * that is selected. So to get to the label we have to go 
+     * to the child of the button and not of the menu item!
      *
      * This took a while to find out :-)
      */
@@ -418,10 +491,14 @@ static void theme_changed(GtkOptionMenu * option_menu)
 
     theme = gtk_label_get_text(GTK_LABEL(label));
 
-    if(settings.theme && theme && strequal(theme, settings.theme))
+    if(strequals(theme, setting->data.v_string))
         return;
 
-    panel_set_theme(theme);
+    g_free(setting->data.v_string);
+    setting->data.v_string = g_strdup(theme);
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -439,7 +516,7 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
 	gtk_widget_show(item);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 
-	if(settings.theme && strequal(settings.theme, *s))
+	if(theme && strequals(theme, *s))
 	    n = backup_theme_index = i;
     }
 
@@ -451,8 +528,6 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
     g_signal_connect(option_menu, "changed", G_CALLBACK(theme_changed), NULL);
 }
 
-static int lastpage = 0;
-
 static void add_style_box(GtkBox * box)
 {
     GtkWidget *frame, *vbox, *hbox, *label;
@@ -463,7 +538,7 @@ static void add_style_box(GtkBox * box)
     gtk_widget_show(frame);
     gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
 
-    vbox = gtk_vbox_new(FALSE, 4);
+    vbox = gtk_vbox_new(FALSE, 6);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
     gtk_widget_show(vbox);
     gtk_container_add(GTK_CONTAINER(frame), vbox);
@@ -481,7 +556,7 @@ static void add_style_box(GtkBox * box)
 
     size_menu = gtk_option_menu_new();
     gtk_widget_show(size_menu);
-    add_size_menu(size_menu, settings.size);
+    add_size_menu(size_menu, xfce_options[XFCE_SIZE].data.v_int);
     gtk_box_pack_start(GTK_BOX(hbox), size_menu, TRUE, TRUE, 0);
 
     /* style */
@@ -497,7 +572,7 @@ static void add_style_box(GtkBox * box)
 
     style_menu = gtk_option_menu_new();
     gtk_widget_show(style_menu);
-    add_style_menu(style_menu, settings.style);
+    add_style_menu(style_menu, xfce_options[XFCE_STYLE].data.v_int);
     gtk_box_pack_start(GTK_BOX(hbox), style_menu, TRUE, TRUE, 0);
 
     /* panel orientation */
@@ -513,11 +588,11 @@ static void add_style_box(GtkBox * box)
 
     orientation_menu = gtk_option_menu_new();
     gtk_widget_show(orientation_menu);
-    add_orientation_menu(orientation_menu, settings.orientation);
+    add_orientation_menu(orientation_menu, 
+	    		 xfce_options[XFCE_ORIENTATION].data.v_int);
     gtk_box_pack_start(GTK_BOX(hbox), orientation_menu, TRUE, TRUE, 0);
 
-
-    /* popup orientation */
+    /* popup button */
     hbox = gtk_hbox_new(FALSE, 4);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
@@ -530,7 +605,8 @@ static void add_style_box(GtkBox * box)
 
     popup_position_menu = gtk_option_menu_new();
     gtk_widget_show(popup_position_menu);
-    add_popup_position_menu(popup_position_menu, settings.popup_position);
+    add_popup_position_menu(popup_position_menu, 
+	    		    xfce_options[XFCE_POPUPPOSITION].data.v_int);
     gtk_box_pack_start(GTK_BOX(hbox), popup_position_menu, TRUE, TRUE, 0);
 
     /* icon theme */
@@ -546,13 +622,12 @@ static void add_style_box(GtkBox * box)
 
     theme_menu = gtk_option_menu_new();
     gtk_widget_show(theme_menu);
-    add_theme_menu(theme_menu, settings.theme);
+    add_theme_menu(theme_menu, xfce_options[XFCE_THEME].data.v_string);
     gtk_box_pack_start(GTK_BOX(hbox), theme_menu, TRUE, TRUE, 0);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+#if 0
 /* panel groups and screen buttons */
-
 static void spin_changed(GtkWidget * spin)
 {
     int n;
@@ -604,28 +679,25 @@ static void add_controls_box(GtkBox * box)
     g_signal_connect(groups_spin, "value-changed", G_CALLBACK(spin_changed),
                      NULL);
 }
+#endif
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /* position */
 static void layer_changed(GtkWidget * om, gpointer data)
 {
-    int layer = gtk_option_menu_get_history(GTK_OPTION_MENU(om));
-
-    if (settings.layer == layer)
-	return;
+    int layer;
+    McsSetting *setting = &xfce_options[XFCE_LAYER];
     
-    panel_set_layer(layer);
+    layer = gtk_option_menu_get_history(GTK_OPTION_MENU(om));
+
+    if (setting->data.v_int == layer)
+	return;
+
+    setting->data.v_int = layer;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+    
     gtk_widget_set_sensitive(revert, TRUE);
 }
-
-enum
-{
-    BOTTOMCENTER,
-    TOPCENTER,
-    LEFTCENTER,
-    RIGHTCENTER,
-    NUM_POSITIONS
-};
 
 static char *position_names[] = {
     N_("Bottom"),
@@ -636,40 +708,24 @@ static char *position_names[] = {
 
 static void position_clicked(GtkWidget * button, GtkOptionMenu *om)
 {
-    int width, height;
-    DesktopMargins margins;
-    Screen *xscreen;
+    int n;
+    McsSetting *setting = &xfce_options[XFCE_POSITION];
     
-    xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
-    netk_get_desktop_margins(xscreen, &margins);
+    n = gtk_option_menu_get_history(om);
 
-    gtk_window_get_size(GTK_WINDOW(toplevel), &width, &height);
+    /* make sure it gets changed */
+    setting->data.v_int = XFCE_POSITION_NONE;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
+    gdk_flush();
     
-    switch (gtk_option_menu_get_history(om))
-    {
-	case TOPCENTER:
-	    position.y = margins.top;
-	    position.x = gdk_screen_width() / 2 - width / 2;
-	    break;
-	case LEFTCENTER:
-	    position.x = margins.left;
-	    position.y = gdk_screen_height() / 2 - height / 2;
-	    break;
-	case RIGHTCENTER:
-	    position.x = gdk_screen_width() - width - margins.right;
-	    position.y = gdk_screen_height() / 2 - height / 2;
-	    break;
-	default:
-	    position.x = gdk_screen_width() / 2 - width / 2;
-	    position.y = gdk_screen_height() - height - margins.bottom;
-	    break;
-    }
+    setting->data.v_int = n;
+    mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
+    mcs_manager_notify(mcs_manager, CHANNEL);
     
-    gtk_window_move(GTK_WINDOW(toplevel), position.x, position.y);
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
-/* restore position and set on top or not */
 static void add_position_box(GtkBox * box)
 {
     GtkWidget *frame, *vbox, *hbox, *label, *optionmenu, *menu;
@@ -681,7 +737,7 @@ static void add_position_box(GtkBox * box)
     gtk_widget_show(frame);
     gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
 
-    vbox = gtk_vbox_new(FALSE, 4);
+    vbox = gtk_vbox_new(FALSE, 6);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
     gtk_widget_show(vbox);
     gtk_container_add(GTK_CONTAINER(frame), vbox);
@@ -720,7 +776,9 @@ static void add_position_box(GtkBox * box)
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
     }
     
-    gtk_option_menu_set_history(GTK_OPTION_MENU(layer_menu), settings.layer);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(layer_menu), 
+	    			xfce_options[XFCE_LAYER].data.v_int);
+
     g_signal_connect(layer_menu, "changed", G_CALLBACK(layer_changed), NULL);    
 
     /* centering */
@@ -742,7 +800,7 @@ static void add_position_box(GtkBox * box)
     gtk_widget_show(menu);
     gtk_option_menu_set_menu(GTK_OPTION_MENU(optionmenu), menu);
 
-    for (i = 0; i < NUM_POSITIONS; i++)
+    for (i = 0; i < 4; i++)
     {
 	GtkWidget *mi = gtk_menu_item_new_with_label(_(position_names[i]));
 
@@ -759,36 +817,31 @@ static void add_position_box(GtkBox * box)
     g_signal_connect(pos_button, "clicked", G_CALLBACK(position_clicked), optionmenu);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /* the dialog */
+/* static int lastpage = 0;*/
 
-static gboolean running = FALSE;
-static GtkWidget *dialog = NULL;
-
-void global_settings_dialog(void)
+void run_xfce_settings_dialog(McsPlugin *mp)
 {
     GtkWidget *frame, *vbox, *button;
-    GtkWidget *notebook, *label;
-    char *markup;
+/*    GtkWidget *notebook, *label;
+    char *markup;*/
 
-    if(running)
+    mcs_manager = mp->manager;
+
+    if(is_running)
     {
         gtk_window_present(GTK_WINDOW(dialog));
         return;
     }
 
-    running = TRUE;
+    is_running = TRUE;
 
-    create_backup();
+    xfce_create_backup();
 
     /* we may have to recreate the panel so safe the changes now */
-    if (!disable_user_config)
-	write_panel_config();
-
     dialog =
         gtk_dialog_new_with_buttons(_("XFce Panel Preferences"),
-                                    GTK_WINDOW(toplevel),
-/*                             GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,*/
+                                    NULL,
                                     GTK_DIALOG_NO_SEPARATOR,
                                     NULL);
 
@@ -804,45 +857,45 @@ void global_settings_dialog(void)
     gtk_widget_show(button);
     gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
 
-    /* main notebook */
+    /* main notebook 
     notebook = gtk_notebook_new();
     gtk_widget_show(notebook);
     gtk_container_set_border_width(GTK_CONTAINER(notebook), 5);
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), notebook,
                        TRUE, TRUE, 0);
-
+*/
     /* first notebook page */
     frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
     gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
 
-    markup = g_strconcat("<span> ", _("General"), " </span>", NULL);
+/*    markup = g_strconcat("<span> ", _("General"), " </span>", NULL);
     label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(label), markup);
     g_free(markup);
     gtk_widget_show(label);
-
-    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
-
+*/
+/*    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), frame, label);
+*/
     vbox = gtk_vbox_new(FALSE, 2);
     gtk_widget_show(vbox);
     gtk_container_add(GTK_CONTAINER(frame), vbox);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    add_header(_("Panel controls"), GTK_BOX(vbox));
+/*    add_header(_("Panel controls"), GTK_BOX(vbox));
     add_controls_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
-
+*/
     add_header(_("Position"), GTK_BOX(vbox));
     add_position_box(GTK_BOX(vbox));
     add_spacer(GTK_BOX(vbox));
 
-    g_object_unref(sg);
-
+/*    g_object_unref(sg);
+*/
     /* second notebook page */
-    frame = gtk_frame_new(NULL);
+/*    frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(frame), main_shadow);
     gtk_container_set_border_width(GTK_CONTAINER(frame), 6);
     gtk_widget_show(frame);
@@ -860,7 +913,7 @@ void global_settings_dialog(void)
     gtk_container_add(GTK_CONTAINER(frame), vbox);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-
+*/
     /* Appearance */
     add_header(_("Appearance"), GTK_BOX(vbox));
     add_style_box(GTK_BOX(vbox));
@@ -868,7 +921,10 @@ void global_settings_dialog(void)
 
     g_object_unref(sg);
 
-    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), lastpage);
+/*    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook), lastpage);
+*/    
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), frame,
+                       TRUE, TRUE, 0);
     
     while(1)
     {
@@ -878,8 +934,8 @@ void global_settings_dialog(void)
 
         if(response == RESPONSE_REVERT)
         {
-            restore_backup();
-            panel_set_settings();
+            xfce_restore_backup();
+            xfce_set_options(mcs_manager);
             gtk_widget_set_sensitive(revert, FALSE);
 	    gtk_widget_grab_focus(button);
         }
@@ -887,12 +943,13 @@ void global_settings_dialog(void)
             break;
     }
 
-    lastpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
-    
+/*    lastpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
+*/
     gtk_widget_destroy(dialog);
-    running = FALSE;
+    is_running = FALSE;
     dialog = NULL;
 
-    write_panel_config();
+    xfce_free_backup();
+    xfce_write_options(mcs_manager);
 }
 

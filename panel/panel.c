@@ -22,8 +22,10 @@
 
 #include "xfce.h"
 #include "groups.h"
+#include "popup.h"
 #include "handle.h"
 #include "settings.h"
+#include "mcs_client.h"
 
 /* global settings */
 Settings settings;
@@ -173,6 +175,9 @@ void create_panel(void)
 	init_settings();
 	get_global_prefs();
 
+	/* If there is a settings manager it takes precedence */
+	mcs_init_settings();
+
 	need_init = FALSE;
     }
 
@@ -192,6 +197,8 @@ void create_panel(void)
      * This function creates the panel items and popup menus */
     get_panel_config();
 
+    panel_created = TRUE;
+
     /* panel may have moved slightly off the screen */
     position.x = x;
     position.y = y;
@@ -200,8 +207,6 @@ void create_panel(void)
     gtk_widget_show(toplevel);
     set_window_layer(toplevel, settings.layer);
     set_window_skip(toplevel);
-
-    panel_created = TRUE;
 }
 
 void panel_add_control(void)
@@ -221,6 +226,8 @@ void panel_set_orientation(int orientation)
     if (!panel_created)
 	return;
     
+    hide_current_popup_menu();
+
     /* save panel controls */
     groups_unpack();
 
@@ -231,25 +238,6 @@ void panel_set_orientation(int orientation)
     groups_pack(GTK_BOX(group_box));
     groups_set_orientation(orientation);
     
-    /* this seems more logical */
-    switch (settings.popup_position)
-    {
-	case LEFT:
-	    settings.popup_position = BOTTOM;
-	    break;
-	case RIGHT:
-	    settings.popup_position = TOP;
-	    break;
-	case TOP:
-	    settings.popup_position = RIGHT;
-	    break;
-	case BOTTOM:
-	    settings.popup_position = LEFT;
-	    break;
-    }
-    
-    panel_set_popup_position(settings.popup_position);
-
     position.x = position.y = -1;
     panel_set_position();
 }
@@ -273,6 +261,8 @@ void panel_set_size(int size)
     if (!panel_created)
 	return;
     
+    hide_current_popup_menu();
+
     groups_set_size(size);
     handle_set_size(handles[LEFT], size);
     handle_set_size(handles[RIGHT], size);
@@ -285,6 +275,8 @@ void panel_set_popup_position(int position)
     if (!panel_created)
 	return;
     
+    hide_current_popup_menu();
+
     groups_set_popup_position(position);
     handle_set_popup_position(handles[LEFT]);
     handle_set_popup_position(handles[RIGHT]);

@@ -28,10 +28,8 @@
 #include "item.h"
 #include "item_dialog.h"
 #include "popup.h"
-#include "dialogs.h"
 #include "controls_dialog.h"
 #include "settings.h"
-
 
 static PanelPopup *open_popup = NULL;
 

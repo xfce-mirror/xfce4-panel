@@ -15,7 +15,7 @@ SUBDIRS = @MY_SUBDIRS@
 distclean-local:
 	rm -rf xfce4rc xfce4.spec *.cache
 
-xfce4rc:
+xfce4rc: example.xfce4rc.in
 	@sed -e "s%_pkgdatadir_%$(pkgdatadir)%g" example.xfce4rc.in > xfce4rc
 
 rpm: dist

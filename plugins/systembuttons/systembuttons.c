@@ -25,14 +25,16 @@
 #include <libxfcegui4/xfce_iconbutton.h>
 
 #include "xfce.h"
-#include "dialogs.h"
 #include "plugins.h"
+#include "mcs_client.h"
 
 /* callbacks */
 static void mini_lock_cb(void)
 {
     exec_cmd("xflock", FALSE);
 }
+
+extern void info_panel_dialog(void);
 
 static void mini_info_cb(void)
 {
@@ -48,7 +50,7 @@ static void mini_palet_cb(void)
         return;
     }
 
-    global_settings_dialog();
+    mcs_dialog();
 }
 
 static void mini_power_cb(GtkButton * b, GdkEventButton * ev, gpointer data)

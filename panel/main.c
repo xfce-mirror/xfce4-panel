@@ -39,6 +39,7 @@
 
 #include "xfce.h"
 #include "settings.h"
+#include "mcs_client.h"
 
 /*  session management
  *  ------------------
@@ -62,6 +63,8 @@ static void die (gpointer client_data)
 */
 static void xfce_run(void)
 {
+    mcs_watch_xfce_channel();
+    
     create_panel();
 
     gtk_main();
@@ -89,6 +92,8 @@ void quit(gboolean force)
     if (!disable_user_config)
 	write_panel_config();
 
+    mcs_stop_watch();
+
     panel_cleanup();
     
     if (gtk_main_level())
@@ -101,6 +106,8 @@ void restart(void)
 {
     if (!disable_user_config)
 	write_panel_config();
+
+    mcs_stop_watch();
 
     panel_cleanup();
     gtk_widget_destroy(toplevel);
@@ -180,6 +187,7 @@ int main(int argc, char **argv)
     }		
     
     icons_init();
+    
     xfce_run();
 
     return 0;

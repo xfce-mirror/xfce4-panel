@@ -66,19 +66,6 @@ static char *month_names[] = { N_("January"),
 */
 static GtkWidget *revert_button;
 
-static void set_tip(GtkWidget *widget, const char *tip)
-{
-    static GtkTooltips *tooltips = NULL;
-
-    if (!tooltips)
-    {
-	tooltips = gtk_tooltips_new();
-    }
-
-    gtk_tooltips_set_tip(tooltips, widget, tip, NULL);
-}
-
-
 /*  Clock module
  *  ------------
 */
@@ -179,7 +166,6 @@ void update_clock_size(XfceClock *clock, int size)
 
 void clock_set_size(Control * control, int size)
 {
-    int s = icon_size[size];
     t_clock *clock = (t_clock *) control->data;
     XfceClock *tmp = XFCE_CLOCK(clock->clock);
 

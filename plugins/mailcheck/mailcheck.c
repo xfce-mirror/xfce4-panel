@@ -122,8 +122,6 @@ static void mailcheck_set_tip(t_mailcheck *mc)
 
 void mailcheck_read_config(Control *control, xmlNodePtr node)
 {
-    char *file;
-    const char *mail, *logname;
     xmlChar *value;
     int n;
 
@@ -239,7 +237,6 @@ static void run_mail_command(t_mailcheck *mc)
 
 static t_mailcheck *mailcheck_new(void)
 {
-    PanelItem *pi;
     t_mailcheck *mailcheck;
     const char *mail;
 
@@ -611,6 +608,9 @@ void mailcheck_add_options(Control * control, GtkContainer * container,
 
     g_signal_connect_swapped(done, "clicked", 
 	    	     	     G_CALLBACK(mailcheck_apply_options), control);
+
+    g_signal_connect(done, "clicked", 
+	    	     G_CALLBACK(clean_mailcheck_backup), NULL);
 
     gtk_container_add(container, vbox);
 }

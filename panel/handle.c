@@ -25,13 +25,13 @@
 #include "popup.h" /* to hide popups */
 #include "groups.h"
 #include "callbacks.h"
-#include "dialogs.h"
 #include "controls_dialog.h"
+#include "mcs_client.h"
 
 /* popup menu */
 static void edit_prefs(void)
 {
-    global_settings_dialog();
+    mcs_dialog();
 }
 
 static void add_new(void)
@@ -55,6 +55,8 @@ static void exit_panel(void)
 {
     quit(FALSE);
 }
+
+extern void info_panel_dialog(void);
 
 static void do_info(void)
 {

@@ -27,13 +27,8 @@ AC_CHECK_LIB(Xpm, main,, AC_MSG_ERROR([libXpm is missing from your system: Make 
 
 AC_CHECK_FUNCS(setlocale strchr strrchr strstr)
 
-AC_ARG_ENABLE(plugins,
-	      [  --disable-plugins  	Don't build plugins],
-	      [ case "${enableval}" in
-	          no) MY_SUBDIRS="icons panel themes" ;;
-		  *)  MY_SUBDIRS="icons panel plugins themes" ;;
-	    	esac],
-	      [ MY_SUBDIRS="icons panel plugins themes" ])
+MY_SUBDIRS="icons panel settings plugins themes" 
+AC_SUBST(MY_SUBDIRS)
 
 dnl
 dnl  Debugging mode
@@ -43,8 +38,6 @@ AC_ARG_ENABLE(debug,
 		[  --enable-debug          debug mode (default disabled)],
 		[ AC_DEFINE(DEBUG, 1, [Define to 1 for debug.]) ],)
 
-
-AC_SUBST(MY_SUBDIRS)
 
 ## Versions of dependencies
 GLIB_REQUIRED_VERSION=2.0.0
@@ -64,6 +57,9 @@ AC_SUBST(LIBXFCEGUI4_REQUIRED_VERSION)
 
 PKG_CHECK_MODULES(BASE_DEPENDENCIES, glib-2.0 >= $GLIB_REQUIRED_VERSION gtk+-2.0 >= $GTK_REQUIRED_VERSION pango >= $PANGO_REQUIRED_VERSION gmodule-2.0 libxml-2.0 libxfcegui4-1.0 >= $LIBXFCEGUI4_REQUIRED_VERSION)
 
+PKG_CHECK_MODULES(MCS_CLIENT,  libxfce4mcs-client-1.0)
+PKG_CHECK_MODULES(MCS_MANAGER, libxfce4mcs-manager-1.0)
+
 ## libtool support (for plugins)
 AC_DISABLE_STATIC
 AC_PROG_LIBTOOL
@@ -79,6 +75,7 @@ plugins/clock/Makefile
 plugins/trash/Makefile
 plugins/switcher/Makefile
 plugins/systembuttons/Makefile
+settings/Makefile
 themes/Makefile
 themes/Crystal/Makefile
 themes/Curve/Makefile
