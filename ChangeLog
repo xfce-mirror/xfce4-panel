@@ -1,3 +1,79 @@
+2002-11-10 16:23  huysmans
+
+	* panel/: central.c, dialogs.c: Fix repositioning bug in
+	preferences dialog
+
+2002-11-10 16:02  huysmans
+
+	* panel/central.c: Fix screen button positioning bug (again./xfce4
+	)
+
+2002-11-10 15:54  huysmans
+
+	* panel/central.c: Fix small screen naming bug
+
+2002-11-10 15:41  huysmans
+
+	* panel/central.c: Update desktop switcher
+
+2002-11-10 14:07  huysmans
+
+	* panel/: controls_dialog.c, side.c, side.h: Allow removal of panel
+	controls
+
+2002-11-10 12:45  huysmans
+
+	* panel/central.c: Fix a bug in screen name handling
+
+2002-11-10 11:35  huysmans
+
+	* panel/: dialogs.c, global.h, popup.c, side.c, xfce.c, xfce.h: Try
+	to fix a bug in panel control positioning
+
+2002-11-10 11:03  madkiss
+
+	* debian/: changelog, control, copyright, docs, rules,
+	xfce4-dev.install, xfce4-themes.install, xfce4.install, xfce4.menu,
+	maintain/xfce4.1: 
+	Added first version of official debian/ subdirectory
+
+2002-11-10 11:03  madkiss
+
+	* debian/: changelog, control, copyright, docs, rules,
+	xfce4-dev.install, xfce4-themes.install, xfce4.install, xfce4.menu,
+	maintain/xfce4.1: Initial revision
+
+2002-11-09 22:49  huysmans
+
+	* panel/: icons.c, xfce.c: Fix a bug whith icon handling when there
+	is no rc file or theme == NULL
+
+2002-11-09 11:48  huysmans
+
+	* panel/dialogs.c: Add back notebook tabs in global dialog
+
+2002-11-08 23:21  xfce
+
+	* panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/trash/Makefile.in, themes/Makefile.in,
+	themes/Curve/Makefile.in, themes/Gnome/Makefile.in,
+	themes/XFce/Makefile.in: make sure required libs for build/rpm are
+	listed, with versions and keep the minimum version required at only
+	one place (configure.ac)
+
+2002-11-08 23:14  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	xfce4.spec.in, icons/Makefile.in: make sure required libs for
+	build/rpm are listed, with versions and keep the minimum version
+	required at only one place (configure.ac)
+
+2002-11-08 15:16  huysmans
+
+	* ChangeLog, panel/dialogs.c: Add panel centering options to global
+	dialog
+
 2002-11-08 13:49  huysmans
 
 	* configure, configure.ac, icons/Makefile.am, icons/Makefile.in,

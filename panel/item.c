@@ -187,6 +187,14 @@ static void panel_item_write_config(PanelControl * pc, xmlNodePtr root)
     xmlSetProp(child, "id", value);
 }
 
+static void panel_item_attach_callback(PanelControl *pc, const char *signal,
+				       GCallback callback, gpointer data)
+{
+    PanelItem *pi = pc->data;
+
+    g_signal_connect(pi->button, signal, callback,data);
+}
+
 /*  create a default panel item 
 */
 void create_panel_item(PanelControl * pc)
@@ -199,15 +207,14 @@ void create_panel_item(PanelControl * pc)
     pc->id = ICON;
 
     pc->caption = g_strdup(_("Icon"));
-    pc->main = pi->button;
     pc->data = (gpointer) pi;
 
+    pc->free = panel_item_free;
     pc->read_config = panel_item_read_config;
     pc->write_config = panel_item_write_config;
-
-    pc->free = panel_item_free;
-
-    pc->set_theme = panel_item_set_theme;
+    pc->attach_callback = panel_item_attach_callback;
 
     pc->add_options = panel_item_add_options;
+
+    pc->set_theme = panel_item_set_theme;
 }

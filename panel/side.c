@@ -216,6 +216,11 @@ void side_panel_register_control(PanelControl * pc)
 
     group->control = pc;
 
+    if (!pc->with_popup) 
+	side_panel_show_popup(pc->index, FALSE);
+    else
+	side_panel_show_popup(pc->index, TRUE);
+    
     panel_group_arrange(group, settings.popup_position);
 }
 
@@ -415,6 +420,20 @@ void side_panel_remove(int index)
 
 	group->index = group->control->index = i;
     }
+}
+
+void side_panel_show_popup(int index, gboolean show)
+{
+    GList *li;
+    PanelGroup *group;
+
+    li = g_list_nth(group_list, index);
+    group = li->data;
+
+    if (show)
+	gtk_widget_show(group->popup->button);
+    else
+	gtk_widget_hide(group->popup->button);
 }
 
 void side_panel_set_from_xml(int side, xmlNodePtr node)

@@ -84,16 +84,18 @@ gboolean create_plugin(PanelControl * pc)
     char *path;
     void (*init) (PanelControl * pc);
 
+    /* find the module somewhere */
     g_return_val_if_fail(pc->filename, FALSE);
     g_return_val_if_fail(g_module_supported(), FALSE);
 
-    if(pc->dir)
-        path = g_build_filename(pc->dir, pc->filename, NULL);
+    if(pc->dirname)
+        path = g_build_filename(pc->dirname, pc->filename, NULL);
     else
         path = find_plugin(pc->filename);
 
     g_return_val_if_fail(path, FALSE);
 
+    /* try to load it */
     pc->gmodule = g_module_open(path, 0);
 
     if(!pc->gmodule)
@@ -105,6 +107,7 @@ gboolean create_plugin(PanelControl * pc)
         g_free(path);
         return FALSE;
     }
+    /* TODO: perhaps we should do versioning here ? */
     else if(!g_module_symbol(pc->gmodule, "is_xfce_panel_control", &tmp))
     {
         g_printerr("Not a panel module: %s\n", path);
@@ -119,8 +122,7 @@ gboolean create_plugin(PanelControl * pc)
         init = tmp;
         init(pc);
     }
-
-    if(!pc->main || !pc->base)
+    else
     {
         g_module_close(pc->gmodule);
         pc->gmodule = NULL;
@@ -128,6 +130,7 @@ gboolean create_plugin(PanelControl * pc)
         return FALSE;
     }
 
+    /* TODO: should we do more testing to verify the module ? */
     return TRUE;
 }
 
@@ -136,34 +139,6 @@ gboolean create_plugin(PanelControl * pc)
 */
 
 /* static functions */
-static void panel_control_stop(PanelControl * pc)
-{
-    if(!pc || !pc->update)
-        return;
-
-    if(pc->timeout_id)
-    {
-        g_source_remove(pc->timeout_id);
-        pc->timeout_id = 0;
-    }
-}
-
-static void panel_control_start(PanelControl * pc)
-{
-    if(!pc->update)
-        return;
-
-    if(pc->interval > 0)
-    {
-        if(pc->timeout_id)
-            panel_control_stop(pc);
-
-
-        pc->timeout_id =
-            g_timeout_add(pc->interval, (GSourceFunc) pc->update, pc);
-    }
-}
-
 static void panel_control_read_config(PanelControl * pc, xmlNodePtr node)
 {
     if(pc->read_config)
@@ -177,46 +152,38 @@ PanelControl *panel_control_new(int index)
     int size = icon_size[settings.size] + border_width;
     PanelControl *pc = g_new(PanelControl, 1);
 
-    pc->container = NULL;
-
     pc->index = index;
+    pc->id = ICON;
+    pc->filename = NULL;
+    pc->dirname = NULL;
+    pc->gmodule = NULL;
 
     /* this is the only widget created here
-     * We use the eventbox as the simplest container 
+     * We use the alignment as the simplest container 
      * (a frame adds a 2 pixel border)
      */
-    pc->base = gtk_event_box_new();
-    gtk_container_set_border_width(GTK_CONTAINER(pc->base), 0);
+    pc->base = gtk_alignment_new(0,0,1,1);
     gtk_widget_show(pc->base);
 
     /* protect against destruction when unpacking */
     g_object_ref(pc->base);
-
-    pc->id = ICON;
-    pc->filename = NULL;
-    pc->dir = NULL;
-    pc->gmodule = NULL;
+    gtk_object_sink(GTK_OBJECT(pc->base));
 
     pc->caption = NULL;
-    pc->main = NULL;
     pc->data = NULL;
-
-    pc->read_config = NULL;
-    pc->write_config = NULL;
+    pc->with_popup = TRUE;
 
     pc->free = NULL;
+    pc->read_config = NULL;
+    pc->write_config = NULL;
+    pc->attach_callback = NULL;
 
-    pc->interval = 0;
-    pc->timeout_id = 0;
-    pc->update = NULL;
+    pc->add_options = NULL;
 
     pc->set_orientation = NULL;
     pc->set_size = NULL;
     pc->set_style = NULL;
     pc->set_theme = NULL;
-
-    pc->callback_id = 0;
-    pc->add_options = NULL;
 
     return pc;
 }
@@ -240,7 +207,8 @@ void create_panel_control(PanelControl * pc)
     }
 
     /* these are required for proper operation */
-    if(!pc->main || !gtk_bin_get_child(GTK_BIN(pc->base)) || !pc->caption)
+    if(!pc->caption || !pc->attach_callback || 
+	    !gtk_bin_get_child(GTK_BIN(pc->base)))
     {
         if(pc->free)
             pc->free(pc);
@@ -248,11 +216,9 @@ void create_panel_control(PanelControl * pc)
         create_panel_item(pc);
     }
 
-    pc->callback_id =
-        g_signal_connect(pc->main, "button-press-event",
-                         G_CALLBACK(panel_control_press_cb), pc);
+    pc->attach_callback(pc, "button-press-event", 
+	    		G_CALLBACK(panel_control_press_cb), pc);
 
-    panel_control_start(pc);
     panel_control_set_settings(pc);
 }
 
@@ -291,61 +257,27 @@ void panel_control_set_from_xml(PanelControl * pc, xmlNodePtr node)
     /* allow the control to read its configuration */
     panel_control_read_config(pc, node);
 
-    panel_control_start(pc);
+    /* also check if added to the panel */
+    if (!pc->with_popup && pc->base->parent) 
+	side_panel_show_popup(pc->index, FALSE);
 }
 
-/*  packing and unpacking
-*/
-void panel_control_pack(PanelControl * pc, GtkBox * box)
-{
-    pc->container = GTK_CONTAINER(box);
-
-    gtk_box_pack_start(box, pc->base, TRUE, TRUE, 0);
-
-    if(pc->main)
-    {
-        pc->callback_id =
-            g_signal_connect(pc->main, "button-press-event",
-                             G_CALLBACK(panel_control_press_cb), pc);
-
-	panel_control_set_settings(pc);
-    }
-}
-
-void panel_control_unpack(PanelControl * pc)
-{
-    panel_control_stop(pc);
-
-    if(pc->callback_id)
-        g_signal_handler_disconnect(pc->main, pc->callback_id);
-
-    if(pc->container && GTK_IS_WIDGET(pc->container))
-    {
-        gtk_container_remove(pc->container, pc->base);
-        pc->container = NULL;
-    }
-}
-
-/*  destruction
-*/
 void panel_control_free(PanelControl * pc)
 {
-    panel_control_stop(pc);
+    g_free(pc->filename);
+    g_free(pc->dirname);
 
-    if(pc->caption)
-        g_free(pc->caption);
+    g_free(pc->caption);
 
     if(pc->free)
         pc->free(pc);
 
-    if(GTK_IS_WIDGET(pc->base))
-        gtk_widget_destroy(pc->base);
+    gtk_widget_destroy(pc->base);
+    g_object_unref(pc->base);
 
     g_free(pc);
 }
 
-/*  exit
-*/
 void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent)
 {
     xmlNodePtr node;
@@ -361,6 +293,23 @@ void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent)
 
     if(pc->write_config)
         pc->write_config(pc, node);
+}
+
+/*  packing and unpacking
+*/
+void panel_control_pack(PanelControl * pc, GtkBox * box)
+{
+    gtk_box_pack_start(box, pc->base, TRUE, TRUE, 0);
+
+    panel_control_set_settings(pc);
+}
+
+void panel_control_unpack(PanelControl * pc)
+{
+    if(pc->base->parent && GTK_IS_WIDGET(pc->base->parent))
+    {
+        gtk_container_remove(GTK_CONTAINER(pc->base->parent), pc->base);
+    }
 }
 
 /*  global settings
@@ -433,7 +382,4 @@ void panel_control_add_options(PanelControl * pc, GtkContainer * container,
 
         gtk_container_add(container, hbox);
     }
-
-    g_signal_connect_swapped(done, "clicked",
-                             G_CALLBACK(panel_control_start), pc);
 }

@@ -62,7 +62,7 @@ static char *month_names[] = { N_("January"),
    Global widget used in all the module configuration
    to revert the settings
 */
-GtkWidget *revert_button;
+static GtkWidget *revert_button;
 
 /* this is checked when the control is loaded */
 int is_xfce_panel_control = 1;
@@ -137,10 +137,11 @@ static t_clock *clock_new(void)
     return clock;
 }
 
-void clock_free(PanelControl * pc)
+static void clock_free(PanelControl * pc)
 {
     t_clock *clock = (t_clock *) pc->data;
     g_return_if_fail( clock != NULL );
+    
     if(GTK_IS_WIDGET(clock->clock))
         gtk_widget_destroy(clock->clock);
     if(GTK_IS_WIDGET(clock->eventbox))
@@ -148,6 +149,14 @@ void clock_free(PanelControl * pc)
     if(GTK_IS_WIDGET(clock->frame))
         gtk_widget_destroy(clock->frame);
     g_free(clock);
+}
+
+static void clock_attach_callback(PanelControl * pc, const char *signal,
+				  GCallback callback, gpointer data)
+{
+    t_clock *clock = (t_clock *) pc->data;
+
+    g_signal_connect(clock->eventbox, signal, callback, data);
 }
 
 void update_clock_size(XfceClock *clock, int size)
@@ -186,9 +195,6 @@ void clock_set_size(PanelControl * pc, int size)
     update_clock_size(tmp, size);
 }
 
-/* FIXME: have to have a look into it as I don't really know if that
-   still works :). At least it compiles.
-*/
 void clock_set_style(PanelControl * pc, int style)
 {
     t_clock *clock = (t_clock *) pc->data;
@@ -238,7 +244,6 @@ clock_date_tooltip (GtkWidget * widget)
     }
     return TRUE;
 }
-
 
 /* Update the widgets' state of the configuration dialog to
     reflect change
@@ -644,19 +649,16 @@ void module_init(PanelControl * pc)
 
     pc->caption = g_strdup(_("XFce clock"));
     pc->data = (gpointer) clock;
-    pc->main = clock->eventbox;
-
-    pc->interval = 1000;        /* 1 sec */
 
     pc->free = (gpointer) clock_free;
-
     pc->read_config = clock_read_config;
     pc->write_config = clock_write_config;
+    pc->attach_callback = clock_attach_callback;
+
+    pc->add_options = (gpointer) clock_add_options;
 
     pc->set_size = (gpointer) clock_set_size;
     pc->set_style = (gpointer) clock_set_style;
-
-    pc->add_options = (gpointer) clock_add_options;
 
     /* Add tooltip to show up the current date */
     /*
@@ -667,6 +669,8 @@ void module_init(PanelControl * pc)
     moment
     */
     clock_date_tooltip (clock->eventbox);
+    gtk_widget_set_size_request(pc->base, -1, -1);
+    clock_set_size(pc, settings.size); 
 }
 
 

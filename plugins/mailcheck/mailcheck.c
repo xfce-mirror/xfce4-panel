@@ -58,8 +58,10 @@ enum
 /* control data structure */
 typedef struct
 {
-    int status;
     int interval;
+    int timeout_id;
+
+    int status;
     char *mbox;
 
     GdkPixbuf *nomail_pb;
@@ -228,6 +230,14 @@ void mailcheck_write_config(PanelControl *pc, xmlNodePtr parent)
 	xmlNewTextChild(root, NULL, "Tooltip", mc->tooltip);
 }
 
+static void mailcheck_attach_callback(PanelControl *pc, const char *signal,
+				      GCallback callback, gpointer data)
+{
+    t_mailcheck *mc = pc->data;
+
+    g_signal_connect(mc->button, signal, callback, data);
+}
+
 static void run_mail_command(t_mailcheck *mc)
 {
     exec_cmd(mc->command, mc->term);
@@ -242,10 +252,11 @@ static t_mailcheck *mailcheck_new(void)
     mailcheck = g_new(t_mailcheck, 1);
 
     mailcheck->status = NO_MAIL;
-    mailcheck->interval = 30;
     mailcheck->mbox = NULL;
     mailcheck->command = NULL;
     mailcheck->tooltip = NULL;
+    mailcheck->interval = 30;
+    mailcheck->timeout_id = 0;
 
     mailcheck->nomail_pb = get_mailcheck_pixbuf(NO_MAIL);
     mailcheck->oldmail_pb = get_mailcheck_pixbuf(OLD_MAIL);
@@ -281,6 +292,9 @@ void mailcheck_free(PanelControl * pc)
 {
     t_mailcheck *mailcheck = (t_mailcheck *) pc->data;
 
+    if (mailcheck->timeout_id > 0)
+	g_source_remove(mailcheck->timeout_id);
+    
     g_free(mailcheck->mbox);
     g_free(mailcheck->command);
 
@@ -291,9 +305,8 @@ void mailcheck_free(PanelControl * pc)
     g_free(mailcheck);
 }
 
-static gboolean check_mail(PanelControl * pc)
+static gboolean check_mail(t_mailcheck *mailcheck)
 {
-    t_mailcheck *mailcheck = (t_mailcheck *) pc->data;
     int mail;
     struct stat s;
 
@@ -318,7 +331,25 @@ static gboolean check_mail(PanelControl * pc)
             xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(mailcheck->button), mailcheck->newmail_pb);
     }
 
+    /* keep the g_timeout running */
     return TRUE;
+}
+
+static void run_mailcheck(PanelControl *pc)
+{
+    t_mailcheck *mc = pc->data;
+
+    if (mc->timeout_id > 0)
+    {
+	g_source_remove(mc->timeout_id);
+	mc->timeout_id = 0;
+    }
+
+    if (mc->interval > 0)
+    {
+	mc->timeout_id = g_timeout_add(mc->interval*1000, 
+		(GSourceFunc)check_mail, mc);
+    }
 }
 
 static void mailcheck_set_theme(PanelControl *pc, const char *theme)
@@ -402,8 +433,6 @@ static void mailcheck_revert_options(PanelControl *pc)
     mc->term = backup.term;
     mc->interval = backup.interval;
 
-    pc->interval = 1000 * mc->interval;
-
     update_options_box(mc);
 }
 
@@ -434,7 +463,7 @@ static void mailcheck_apply_options(PanelControl * pc)
     mc->interval = 
 	gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton));
 
-    pc->interval = 1000 * mc->interval;
+    run_mailcheck(pc);
 
     mailcheck_set_tip(mc);
 }
@@ -603,16 +632,15 @@ void module_init(PanelControl * pc)
 
     pc->caption = g_strdup(_("Mail check"));
     pc->data = (gpointer) mailcheck;
-    pc->main = b;
-
-    pc->interval = 1000 * mailcheck->interval;  /* in msec */
-    pc->update = check_mail;
 
     pc->free = mailcheck_free;
-
     pc->read_config = mailcheck_read_config;
     pc->write_config = mailcheck_write_config;
-    pc->set_theme = mailcheck_set_theme;
+    pc->attach_callback = mailcheck_attach_callback;
 
     pc->add_options = (gpointer) mailcheck_add_options;
+
+    pc->set_theme = mailcheck_set_theme;
+
+    run_mailcheck(pc);
 }

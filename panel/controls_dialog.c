@@ -37,7 +37,7 @@
 #include "settings.h"
 #include "side.h"
 
-static GtkContainer *container;        /* container on the panel to hold the 
+static GtkWidget *container;        /* container on the panel to hold the 
                                    panel control */
 static GList *controls = NULL;         /* list of all available controls */
 static PanelControl *current_pc = NULL;
@@ -86,7 +86,7 @@ void create_controls_list(PanelControl * pc)
 
         create_panel_control(new_pc);
 
-        if(!new_pc->main || new_pc->id == ICON)
+        if(new_pc->id == ICON)
         {
             panel_control_free(new_pc);
             continue;
@@ -120,11 +120,11 @@ void create_controls_list(PanelControl * pc)
             new_pc = panel_control_new(pc->index);
             new_pc->id = PLUGIN;
             new_pc->filename = g_strdup(file);
-            new_pc->dir = g_strdup(*d);
+            new_pc->dirname = g_strdup(*d);
 
             create_panel_control(new_pc);
 
-            if(!new_pc->main || new_pc->id == ICON)
+            if(new_pc->id == ICON)
             {
                 panel_control_free(new_pc);
                 continue;
@@ -185,7 +185,7 @@ static void type_option_changed(GtkOptionMenu * om)
     panel_control_unpack(current_pc);
     panel_control_pack(new_pc, GTK_BOX(container));
     side_panel_register_control(new_pc); 
-    container = new_pc->container;
+    container = new_pc->base->parent;
 
     current_pc = new_pc;
     current_index = n;
@@ -277,9 +277,10 @@ static void pos_changed(GtkSpinButton *spin)
 {
     int n, index;
     gboolean changed = FALSE;
-    
+
     n = gtk_spin_button_get_value_as_int(spin) - 1;
 
+    
     if (!central_created || n < settings.central_index)
     {
 	index = n;
@@ -292,13 +293,13 @@ static void pos_changed(GtkSpinButton *spin)
 	    {
 		/* special case: move the desktop switcher */
 		panel_set_central_index(settings.central_index + 1);
-		return;
+		changed = TRUE;
 	    }
 	    else
 	    {
 		/* special case: move the desktop switcher */
 		panel_set_central_index(settings.central_index - 1);
-		return;
+		changed = TRUE;
 	    }
 	}
 	else
@@ -307,12 +308,14 @@ static void pos_changed(GtkSpinButton *spin)
 	}
     }
     
-    if (index == current_pc->index)
-	return;
+    if (!changed && index != current_pc->index)
+    {
+	side_panel_move(current_pc->index, index);
+	changed = TRUE;
+    }
 
-    side_panel_move(current_pc->index, index);
-
-    gtk_widget_set_sensitive(revert, TRUE);
+    if (changed)
+	gtk_widget_set_sensitive(revert, TRUE);
 }
 
 enum { RESPONSE_DONE, RESPONSE_REVERT, RESPONSE_REMOVE };
@@ -330,7 +333,7 @@ void change_panel_control_dialog(PanelControl * pc)
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
     /* Keep track of the panel container */
-    container = pc->container;
+    container = pc->base->parent;
 
     dlg = gtk_dialog_new_with_buttons(_("Change item"), GTK_WINDOW(toplevel),
                                       GTK_DIALOG_MODAL, NULL);

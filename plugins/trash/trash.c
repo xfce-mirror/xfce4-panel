@@ -59,6 +59,8 @@ static char *trash_icon_names[] = {
 */
 typedef struct
 {
+    int timeout_id;
+
     char *dirname;
     char *command;
     gboolean in_terminal;
@@ -111,6 +113,8 @@ static t_trash *trash_new(void)
     const char *home = g_getenv("HOME");
     GtkWidget *b;
 
+    trash->timeout_id = 0;
+
     trash->dirname = g_strconcat(home, "/.xfce/trash", NULL);
 
     trash->empty = TRUE;
@@ -138,10 +142,8 @@ static t_trash *trash_new(void)
     return trash;
 }
 
-static gboolean check_trash(PanelControl * pc)
+static gboolean check_trash(t_trash *trash)
 {
-    t_trash *trash = (t_trash *) pc->data;
-
     GDir *dir;
     const char *file;
     char text[MAXSTRLEN];
@@ -149,6 +151,7 @@ static gboolean check_trash(PanelControl * pc)
 
     if(!trash->dirname)
         return TRUE;
+
     dir = g_dir_open(trash->dirname, 0, NULL);
 
     if(dir)
@@ -210,9 +213,27 @@ static gboolean check_trash(PanelControl * pc)
     return TRUE;
 }
 
+static void run_trash(PanelControl *pc)
+{
+    t_trash *trash = pc->data;
+
+    if (trash->timeout_id > 0)
+    {
+	g_source_remove(trash->timeout_id);
+	trash->timeout_id = 0;
+    }
+
+    /* 2 seconds */
+    trash->timeout_id = g_timeout_add(2000, (GSourceFunc)check_trash, trash);
+}
+
 static void trash_free(PanelControl * pc)
 {
     t_trash *trash = (t_trash *) pc->data;
+    pc->data = NULL;
+
+    if (trash->timeout_id > 0)
+	g_source_remove(trash->timeout_id);
 
     g_free(trash->dirname);
 
@@ -220,6 +241,14 @@ static void trash_free(PanelControl * pc)
     g_object_unref(trash->full_pb);
 
     g_free(trash);
+}
+
+static void trash_attach_callback(PanelControl *pc, const char *signal,
+				  GCallback callback, gpointer data)
+{
+    t_trash *trash = (t_trash *) pc->data;
+
+    g_signal_connect(trash->button, signal, callback, data);
 }
 
 static void trash_set_theme(PanelControl * pc, const char *theme)
@@ -252,15 +281,14 @@ void module_init(PanelControl * pc)
     gtk_container_add(GTK_CONTAINER(pc->base), b);
 
     pc->caption = g_strdup(_("Trash can"));
-    pc->data = (gpointer) trash;
-    pc->main = b;
+    pc->data = trash;
 
-    pc->interval = 2000;        /* 2 sec */
-    pc->update = (gpointer) check_trash;
+    pc->free = trash_free;
+    pc->attach_callback = trash_attach_callback;
 
-    pc->free = (gpointer) trash_free;
+    pc->set_theme = trash_set_theme;
 
-    pc->set_theme = (gpointer) trash_set_theme;
+    run_trash(pc);
 }
 
 

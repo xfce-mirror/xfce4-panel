@@ -2,7 +2,7 @@
  *
  *  Copyright (C) 2002 Jasper Huijsmans(huysmans@users.sourceforge.net)
  *                     Xavier Maillard (zedek@fxgsproject.org)
- *                     Olivier Fourdan
+ *                     Olivier Fourdan (fourdan@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@
    Global widget used in all the module configuration
    to revert the settings
 */
-GtkWidget *revert_button;
+static GtkWidget *revert_button;
 
 /*  Callbacks
  *  ---------
@@ -157,6 +157,15 @@ static void exit_write_config(PanelControl * pc, xmlNodePtr node)
     t_exit *exit = (t_exit *)pc->data;
 
     xmlSetProp(node, (const xmlChar *)"lock", exit->with_lock ? "1" : "0");
+}
+
+static void exit_attach_callback(PanelControl *pc, const char *signal,
+				 GCallback callback, gpointer data)
+{
+    t_exit *exit = (t_exit *)pc->data;
+
+    g_signal_connect(exit->exit_button, signal, callback, data);
+    g_signal_connect(exit->exit_button, signal, callback, data);
 }
 
 static void exit_set_theme(PanelControl * pc, const char *theme)
@@ -315,15 +324,11 @@ void create_exit(PanelControl * pc)
 
     pc->caption = g_strdup(_("Exit/Lock"));
     pc->data = (gpointer) exit;
-    pc->main = exit->exit_button;
-
-    pc->interval = 0;
-    pc->update = NULL;
 
     pc->free = exit_free;
-    
     pc->read_config = exit_read_config;
     pc->write_config = exit_write_config;
+    pc->attach_callback = exit_attach_callback;
     
     pc->set_theme = exit_set_theme;
 
@@ -353,12 +358,18 @@ static GtkWidget *config_new(void)
     return button;
 }
 
+static void config_attach_callback(PanelControl *pc, const char *signal,
+				   GCallback callback, gpointer data)
+{
+    g_signal_connect(GTK_WIDGET(pc->data), signal, callback, data);
+}
+
 static void config_set_theme(PanelControl * pc, const char *theme)
 {
     GdkPixbuf *pb;
 
     pb = get_minibutton_pixbuf(MINIPALET_ICON);
-    xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(pc->main), pb);
+    xfce_iconbutton_set_pixbuf(XFCE_ICONBUTTON(pc->data), pb);
     g_object_unref(pb);
 }
 
@@ -368,8 +379,9 @@ void create_config(PanelControl * pc)
 
     gtk_container_add(GTK_CONTAINER(pc->base), b);
     pc->caption = g_strdup(_("Setup"));
-    pc->main = b;
+    pc->data = b;
 
+    pc->attach_callback = config_attach_callback;
     pc->set_theme = config_set_theme;
 }
 
@@ -379,12 +391,31 @@ void create_config(PanelControl * pc)
  *  Still a special case module, but hopefully not for much longer ...
 */
 
-void create_central(PanelControl *pc)
+void create_switcher(PanelControl *pc)
 {
-    central_panel_init(GTK_CONTAINER(pc->base));
+    pc->data = switcher_init(PanelControl *pc);
 
     pc->caption = g_strdup(_("Desktop switcher"));
     pc->main = pc->base; /* hack */
+
+    pc->read_config = switcher_read_config;
+    pc->write_config = switcher_read_config;
+
+    pc->free = switcher_free;
+
+    pc->interval = 0;
+    pc->timeout_id = 0;
+    pc->update = NULL;
+
+    pc->set_orientation = NULL;
+    pc->set_size = NULL;
+    pc->set_style = NULL;
+    pc->set_theme = NULL;
+
+    pc->callback_id = 0;
+    pc->add_options = NULL;
+
+    return pc;
 }
 #endif
 

@@ -54,6 +54,8 @@ void side_panel_move(int from, int to);
 
 void side_panel_remove(int index);
 
+void side_panel_show_popup(int index, gboolean show);
+
 void side_panel_set_num_groups(int n);
 
 #endif /* __XFCE_SIDE_H__ */
