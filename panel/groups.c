@@ -377,27 +377,45 @@ groups_register_control (Control * control)
     panel_group_arrange (group);
 }
 
-Control *
-groups_get_control (int index)
+static PanelGroup *
+groups_get_nth(int n)
 {
-    GSList *li;
     PanelGroup *group;
-    int n, len;
+    GSList *li;
+    int index, len;
 
     len = g_slist_length (group_list);
 
-    if (index < 0)
-        n = 0;
-    else if (index >= len)
-        n = len - 1;
+    if (n < 0)
+        index = 0;
+    else if (n >= len)
+        index = len - 1;
     else
-        n = index;
+        index = n;
 
-    li = g_slist_nth (group_list, n);
+    li = g_slist_nth (group_list, index);
 
     group = li->data;
 
+    return group;
+}
+
+Control *
+groups_get_control (int index)
+{
+    PanelGroup *group;
+
+    group = groups_get_nth(index);
     return group->control;
+}
+
+PanelPopup *
+groups_get_popup (int index)
+{
+    PanelGroup *group;
+
+    group = groups_get_nth(index);
+    return group->popup;
 }
 
 void

@@ -38,6 +38,7 @@
 #include "xfce.h"
 #include "controls_dialog.h"
 #include "groups.h"
+#include "popup.h"
 #include "settings.h"
 
 static GSList *control_list = NULL;     /* list of available controls */
@@ -342,9 +343,13 @@ controls_dialog (Control * control)
 
         if (response == RESPONSE_REMOVE)
         {
+	    PanelPopup *popup;
+	    
             gtk_widget_hide (dlg);
 
-            if (!(control->with_popup) ||
+	    popup = groups_get_popup(control->index);
+
+            if (!(control->with_popup) || popup->items == NULL ||
                 confirm (_
                          ("Removing an item will also remove its popup menu.\n\n"
                           "Do you want to remove the item?"), GTK_STOCK_REMOVE,

@@ -33,6 +33,7 @@ void groups_write_xml (xmlNodePtr root);
 
 void groups_register_control (Control * control);
 Control *groups_get_control (int index);
+PanelPopup *groups_get_popup (int index);
 
 void groups_move (int from, int to);
 void groups_remove (int index);
