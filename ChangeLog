@@ -1,3 +1,42 @@
+2004-11-06 14:11  jasper
+
+	* panel/xfce_support.c: Use file chooser widget
+
+2004-11-05 23:25  jasper
+
+	* panel/item_dialog.c: small DND fix
+
+2004-11-05 22:16  jasper
+
+	* panel/: icons.c, panel.c: Fix icon size in dialog header
+
+2004-11-03 18:06  jasper
+
+	* doc/C/: xfce4-panel.html, xfce4-panel.xml: Try to clarify the
+	  file locations a little
+
+2004-11-01 10:56  jasper
+
+	* panel/panel.c: Hmm, set the sticky hint a bit earlier
+
+2004-10-31 17:43  jasper
+
+	* doc/C/: xfce4-panel.html, xfce4-panel.xml: Update doc to include
+	  latest changes
+
+2004-10-31 14:58  jasper
+
+	* configure, configure.ac, ltmain.sh, panel/panel.c,
+	  settings/xfce_settings_dialog.c: Ok, some changes to improve
+	  focus management and transparency: * panel is now a dock-type
+	  window. Always-on-top non-optional.  * transparency is toggled
+	  when mouse is over the panel * no transparency when panel
+	  autohides
+
+2004-10-30 21:03  olivier
+
+	* ChangeLog, ltmain.sh: Global update for 4.1.91 (Xfce 4.2 beta 2)
+
 2004-10-30 16:00  pollux
 
 	* po/: lt.gmo, lt.po: update LT translations
