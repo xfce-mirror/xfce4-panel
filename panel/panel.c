@@ -145,7 +145,7 @@ static GtkMenu *create_handle_menu(void)
 */
 static void handle_set_size(GtkWidget * mh, int size)
 {
-    int h = top_height[size];
+    int h = (size == TINY) ? top_height[TINY] : top_height[SMALL];
     int w = icon_size[size] + 2*border_width;
     gboolean vertical = settings.orientation == VERTICAL;
 
