@@ -77,7 +77,7 @@ static GtkWidget *dialog = NULL;
  * xfce-settings.h header for other modules */
 char **names = xfce_settings_names;
 
-/* useful widgets */
+/* useful widgets
 static void add_section_header(const char *text, GtkBox * box)
 {
     GtkWidget *label;
@@ -92,7 +92,7 @@ static void add_section_header(const char *text, GtkBox * box)
 
     gtk_box_pack_start(box, label, FALSE, TRUE, 0);
 }
-
+ */
 #define SKIP BORDER
 
 static void add_spacer(GtkBox * box)
@@ -561,7 +561,7 @@ static void dialog_delete(GtkWidget *dialog)
 
 void run_xfce_settings_dialog(McsPlugin *mp)
 {
-    GtkWidget *header, *hbox, *vbox, *sep;
+    GtkWidget *header, *hbox, *frame, *vbox;
     GtkSizeGroup *sg;
 
     if(is_running)
@@ -599,37 +599,40 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     add_spacer(GTK_BOX(vbox));
  
     /* hbox */
-    hbox = gtk_hbox_new(FALSE, BORDER);
+    hbox = gtk_hbox_new(FALSE, 0);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 
     /* Appearance */
+    frame = gtk_frame_new(_("Appearance"));
+    gtk_container_set_border_width(GTK_CONTAINER(frame), BORDER-1);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(GTK_BOX(hbox), frame, FALSE, FALSE, 0);
+    
     vbox = gtk_vbox_new(FALSE, BORDER);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), BORDER);
     gtk_widget_show(vbox);
-    gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    add_section_header(_("Appearance"), GTK_BOX(vbox));
     add_style_box(GTK_BOX(vbox), sg);
 
     g_object_unref(sg);
 
-    /* Separator */
-    sep = gtk_vseparator_new();
-    gtk_widget_show(sep);
-    gtk_box_pack_start(GTK_BOX(hbox), sep, TRUE, TRUE, 0);
- 
     /* Position */
+    frame = gtk_frame_new(_("Position"));
+    gtk_container_set_border_width(GTK_CONTAINER(frame), BORDER-1);
+    gtk_widget_show(frame);
+    gtk_box_pack_start(GTK_BOX(hbox), frame, FALSE, FALSE, 0);
+    
     vbox = gtk_vbox_new(FALSE, BORDER);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), BORDER);
     gtk_widget_show(vbox);
-    gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(frame), vbox);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    add_section_header(_("Position"), GTK_BOX(vbox));
     add_position_box(GTK_BOX(vbox), sg);
 
     g_object_unref(sg);
