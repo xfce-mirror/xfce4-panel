@@ -20,7 +20,7 @@
 #ifndef __XFCE_ITEM_DIALOG_H__
 #define __XFCE_ITEM_DIALOG_H__
 
-#include <panel/global.h>
+#include <panel/item.h>
 
 void edit_menu_item_dialog (Item * mi);
 
@@ -29,5 +29,15 @@ void add_menu_item_dialog (PanelPopup * pp);
 /* options box for panel control dialog */
 void panel_item_add_options (Control * control, GtkContainer * container,
                              GtkWidget * revert, GtkWidget * done);
+
+extern GtkWidget *	create_icon_option_menu(void);
+extern GtkWidget *	create_icon_option(GtkSizeGroup *);
+extern GtkWidget *	create_command_option(GtkSizeGroup *);
+extern GtkWidget *	create_caption_option(GtkSizeGroup *);
+extern GtkWidget *	create_tooltip_option(GtkSizeGroup *);
+extern GtkWidget *	create_position_option(GtkSizeGroup *);
+extern GtkWidget *	create_item_options_box(void);
+extern GtkWidget *	create_icon_preview_frame(void);
+extern GtkWidget *	create_menu_item_dialog (Item *);
 
 #endif /* __XFCE_ITEM_DIALOG_H__ */

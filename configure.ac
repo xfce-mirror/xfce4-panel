@@ -9,7 +9,7 @@ AC_INIT([panel/main.c])
 
 AM_CONFIG_HEADER([config.h])
 
-AM_INIT_AUTOMAKE([xfce4], [0.10])
+AM_INIT_AUTOMAKE([xfce4], [0.10.1])
 
 AM_MAINTAINER_MODE
 

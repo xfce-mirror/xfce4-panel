@@ -249,7 +249,7 @@ icon_id_changed (void)
     }
 }
 
-static GtkWidget *
+GtkWidget *
 create_icon_option_menu (void)
 {
     GtkWidget *om;
@@ -304,7 +304,7 @@ icon_entry_lost_focus (GtkEntry * entry, GdkEventFocus * event, gpointer data)
     return FALSE;
 }
 
-static GtkWidget *
+GtkWidget *
 create_icon_option (GtkSizeGroup * sg)
 {
     GtkWidget *vbox;
@@ -374,7 +374,7 @@ command_browse_cb (GtkWidget * b, GtkEntry * entry)
     }
 }
 
-static GtkWidget *
+GtkWidget *
 create_command_option (GtkSizeGroup * sg)
 {
     GtkWidget *vbox;
@@ -441,7 +441,7 @@ create_command_option (GtkSizeGroup * sg)
 
 /*  Change caption
 */
-static GtkWidget *
+GtkWidget *
 create_caption_option (GtkSizeGroup * sg)
 {
     GtkWidget *vbox;
@@ -480,7 +480,7 @@ create_caption_option (GtkSizeGroup * sg)
 
 /*  Change tooltip
 */
-static GtkWidget *
+GtkWidget *
 create_tooltip_option (GtkSizeGroup * sg)
 {
     GtkWidget *vbox;
@@ -528,7 +528,7 @@ pos_changed (GtkSpinButton * spin, gpointer data)
     gtk_widget_set_sensitive (revert_button, TRUE);
 }
 
-static GtkWidget *
+GtkWidget *
 create_position_option (GtkSizeGroup * sg)
 {
     GtkWidget *vbox;
@@ -561,7 +561,7 @@ create_position_option (GtkSizeGroup * sg)
 /*  The main options box
  *  --------------------
 */
-static GtkWidget *
+GtkWidget *
 create_item_options_box (void)
 {
     GtkWidget *vbox;
@@ -628,7 +628,7 @@ icon_drop_cb (GtkWidget * widget, GdkDragContext * context,
                      time);
 }
 
-static GtkWidget *
+GtkWidget *
 create_icon_preview_frame ()
 {
     GtkWidget *frame;

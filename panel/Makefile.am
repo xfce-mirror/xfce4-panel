@@ -1,44 +1,46 @@
 bin_PROGRAMS = xfce4-panel
 
-xfce4_panel_SOURCES =							\
-	controls.c							\
-	controls.h 							\
-	controls_dialog.c 						\
-	controls_dialog.h 						\
-	global.h 							\
-	groups.c 							\
-	groups.h 							\
-	icons.c 							\
-	icons.h 							\
-	item.c 								\
-	item.h 								\
-	item_dialog.c 							\
-	item_dialog.h 							\
-	main.c								\
-	main.h 								\
-	mcs_client.c 							\
-	mcs_client.h 							\
-	panel.c 							\
-	panel.h 							\
-	plugins.h 							\
-	popup.c 							\
-	popup.h 							\
-	settings.c 							\
-	settings.h 							\
-	xfce.h 								\
-	xfce_support.c 							\
-	xfce_support.h 
+xfce4_panel_SOURCES =						\
+	controls.c						\
+	controls.h 						\
+	controls_dialog.c 					\
+	controls_dialog.h 					\
+	global.h 						\
+	groups.c 						\
+	groups.h 						\
+	icons.c 						\
+	icons.h 						\
+	item.c 							\
+	item.h 							\
+	item_dialog.c 						\
+	item_dialog.h 						\
+	main.c							\
+	main.h 							\
+	mcs_client.c 						\
+	mcs_client.h 						\
+	panel.c 						\
+	panel.h 						\
+	plugins.h 						\
+	popup.c 						\
+	popup.h 						\
+	settings.c 						\
+	settings.h 						\
+	xfce.h 							\
+	xfce_support.c 						\
+	xfce_support.h
 
 xfce4_panelincludedir = $(includedir)/xfce4/panel
 
-xfce4_panelinclude_HEADERS =						\
-	controls.h							\
-	global.h 							\
-	icons.h 							\
-	main.h 								\
-	panel.h 							\
-	plugins.h 							\
-	xfce_support.h 							\
+xfce4_panelinclude_HEADERS =					\
+	controls.h						\
+	global.h 						\
+	icons.h 						\
+	main.h 							\
+	panel.h 						\
+	item.h							\
+	item_dialog.h						\
+	plugins.h 						\
+	xfce_support.h 						\
 	xfce.h 
 
 xfce4_panel_CFLAGS = 							\
