@@ -1,41 +1,42 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Portuguese translation of PACKAGE.
+# Copyright (C) 2003 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Duarte Henriques duarte_henriques@myrealbox.com>, 2003.
-#
-#, fuzzy
+# Nuno Donato <nunodonato@sapo.pt>, 2003.
+# , fuzzy
+# 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 1.0.0\n"
-"POT-Creation-Date: 2003-09-10 08:40+0200\n"
-"PO-Revision-Date: 2003-09-15 22:32+0000\n"
-"Last-Translator: Duarte Serrano Gonçalves Henriques <duarte_henriques@myrealbox.com>\n"
-"Language-Team: none <LL@li.org>\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-08-26 08:23+0200\n"
+"PO-Revision-Date: 2003-09-12 01:27+0100\n"
+"Last-Translator: Nuno Donato <nunodonato@sapo.pt>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: panel/xfce_support.c:597
 msgid "Select file"
-msgstr "Seleccione o ficheiro"
+msgstr "Seleccione Ficheiro"
 
 #: panel/controls_dialog.c:254
 msgid "Change item"
-msgstr "Mudar item"
+msgstr "Editar Item"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286 panel/item_dialog.c:653
 msgid "Position:"
-msgstr "Posição:"
+msgstr "Posição"
 
 #: panel/controls_dialog.c:331 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
 "Do you want to remove the item?"
-msgstr ""
-"Remover um item também remove o seu menu.\n"
+msgstr "Removendo um item também irá remover o seu menu de pop-up.\n"
 "\n"
-"Tem a certeza que quer remover o item?"
+"Deseja remover este item?"
 
 #: panel/item_dialog.c:320
 msgid "Other Icon"
@@ -43,15 +44,15 @@ msgstr "Outro Ícone"
 
 #: panel/item_dialog.c:345
 msgid "Select icon"
-msgstr "Seleccione o icone"
+msgstr "Selecione o ícone"
 
 #: panel/item_dialog.c:384
 msgid "Icon:"
-msgstr "Ícone:"
+msgstr "Ícone"
 
 #: panel/item_dialog.c:433
 msgid "Select command"
-msgstr "Seleccione o comando"
+msgstr "Selecione o comando"
 
 #: panel/item_dialog.c:461
 msgid "Command:"
@@ -59,19 +60,19 @@ msgstr "Comando:"
 
 #: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
-msgstr "Correr no _terminal"
+msgstr "Executar na consola"
 
 #: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
-msgstr "Usar _notificação de arranque"
+msgstr "Usar notificação de arranque"
 
 #: panel/item_dialog.c:530
 msgid "Caption:"
-msgstr "Legenda:"
+msgstr "Título:"
 
 #: panel/item_dialog.c:563
 msgid "Tooltip:"
-msgstr "Balão:"
+msgstr "Dica:"
 
 #: panel/item_dialog.c:599
 msgid "Menu:"
@@ -79,40 +80,40 @@ msgstr "Menu:"
 
 #: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
-msgstr "Adiciona um menu ao launcher"
+msgstr "Anexar menu ao lançador"
 
-#: panel/item_dialog.c:738
+#: panel/item_dialog.c:748
 msgid "Icon Preview"
-msgstr "Antevisão do Ícone"
+msgstr "Previsão do Ícon"
 
-#: panel/item_dialog.c:742
+#: panel/item_dialog.c:752
 msgid "Drag file onto this frame to change the icon"
-msgstr "Arraste um ficheiro para aqui para mudar o ícone"
+msgstr "Arrastar ficheiro para esta frame para mudar o ícone"
 
-#: panel/item_dialog.c:931
+#: panel/item_dialog.c:1034
 msgid "Change menu item"
-msgstr "Muda o item do menu"
+msgstr "Mudar o item do menu"
 
 #. add buttons
-#: panel/item_dialog.c:934
+#: panel/item_dialog.c:1037
 msgid "Remove"
 msgstr "Remover"
 
 #: panel/item.c:441
 msgid "Click mouse button 3 to change item"
-msgstr "Clique com o terceiro botão para mudar o item"
+msgstr "Clicar com o 3 butão do rato para alterar este item"
 
 #: panel/item.c:464
 msgid "Add launcher"
-msgstr "Adiciona um launcher"
+msgstr "Adicionar Lançador"
 
 #: panel/item.c:469
 msgid "Add new item"
-msgstr "Adiciona um item"
+msgstr "Adicionar novo item"
 
 #: panel/item.c:601
 msgid "Launcher"
-msgstr "Launcher"
+msgstr "Lançador"
 
 #: panel/main.c:132
 msgid "Are you sure you want to exit?"
@@ -124,8 +125,8 @@ msgid ""
 "%s, version %s\n"
 "Part of the XFce Desktop Environment\n"
 "http://www.xfce.org\n"
-msgstr ""
-"Parte do Ambiente de Trabalho XFce\n"
+msgstr "%s, versão %s\n"
+"Parte do Ambiente de Trabalho XFCE\n"
 "http://www.xfce.org\n"
 
 #: panel/main.c:284
@@ -134,17 +135,16 @@ msgid ""
 "defined on http://www.freedesktop.org. \n"
 "Some XFce features may not work as intended."
 msgstr ""
-"O seu gestor de janelas aparenta não suportar as novas características "
-"definidas em http://www.freedesktop.org. \n"
-"Algumas características do XFce poderão não funcionar como esperado."
+"O seu gestor de janelas parece não suportar as novas dicas de janelas como está definido em http://www.freedesktop.org.\n"
+"Algumas funcionalidades do XFce poderão não funcionar como esperado."
 
 #: panel/controls.c:320 panel/panel.c:123
 msgid "/Add _new item"
-msgstr "/Acrescentar _item"
+msgstr "/Adicionar _novo item"
 
 #: panel/controls.c:322 panel/panel.c:125
 msgid "/_Properties..."
-msgstr "/_Propriedades..."
+msgstr "/_Propriedades"
 
 #: panel/controls.c:323
 msgid "/_Remove"
@@ -152,7 +152,7 @@ msgstr "/_Remover"
 
 #: panel/controls.c:655
 msgid "This item has no configuration options"
-msgstr "Este item não tem opções de configuração"
+msgstr "Este item não tem opções para configurar"
 
 #: panel/panel.c:121
 msgid "/XFce Panel"
@@ -160,19 +160,19 @@ msgstr "/Painel do XFce"
 
 #: panel/panel.c:126
 msgid "/_Settings manager"
-msgstr "/Gestor de _configurações"
+msgstr "/_Gestor de Definições"
 
 #: panel/panel.c:128
 msgid "/_About XFce"
-msgstr "/_Acerca do XFce"
+msgstr "/S_obre o XFce"
 
 #: panel/panel.c:129
 msgid "/_Help"
-msgstr "/A_juda"
+msgstr "/_Ajuda"
 
 #: panel/panel.c:131
 msgid "/_Lock screen"
-msgstr "/_Trancar écran"
+msgstr "/_Trancar ecrã"
 
 #: panel/panel.c:132
 msgid "/E_xit"
@@ -185,7 +185,7 @@ msgstr "Painel do XFce"
 
 #: panel/icons.c:73
 msgid "Default"
-msgstr "Padrão"
+msgstr "Por omissão"
 
 #: panel/icons.c:74
 msgid "Editor"
@@ -193,11 +193,11 @@ msgstr "Editor"
 
 #: panel/icons.c:75
 msgid "File management"
-msgstr "Gestão de ficheiros"
+msgstr "Gestor de Ficheiros"
 
 #: panel/icons.c:76
 msgid "Utilities"
-msgstr "Utilidades"
+msgstr "Utilitários"
 
 #: panel/icons.c:77
 msgid "Games"
@@ -205,11 +205,11 @@ msgstr "Jogos"
 
 #: panel/icons.c:78
 msgid "Help browser"
-msgstr "Procura na ajuda"
+msgstr "Navegador de Ajuda"
 
 #: panel/icons.c:79
 msgid "Multimedia"
-msgstr "Multimedia"
+msgstr "Multimédia"
 
 #: panel/icons.c:80
 msgid "Network"
@@ -225,7 +225,7 @@ msgstr "Impressora"
 
 #: panel/icons.c:83
 msgid "Productivity"
-msgstr "Produtividade"
+msgstr "Productividade"
 
 #: panel/icons.c:84
 msgid "Sound"
@@ -233,19 +233,19 @@ msgstr "Som"
 
 #: panel/icons.c:85
 msgid "Terminal"
-msgstr "Terminal"
+msgstr "Consola"
 
 #: panel/mcs_client.c:208
 msgid "Settings manager not available"
-msgstr "Gestor de configurações não está disponível"
+msgstr "Gestor de Definições não disponível"
 
-#: panel/popup.c:263
+#: panel/popup.c:272
 msgid "Menu"
-msgstr "Menu"
+msgstr "Menú"
 
 #: settings/xfce_settings_dialog.c:119
 msgid "Tiny"
-msgstr "Minúsculo"
+msgstr "Minusculo"
 
 #: settings/xfce_settings_dialog.c:123
 msgid "Small"
@@ -287,23 +287,23 @@ msgstr "Baixo"
 
 #: settings/xfce_settings_dialog.c:374
 msgid "Panel size:"
-msgstr "Tamanho do painel:"
+msgstr "Tamanho do Painel:"
 
 #: settings/xfce_settings_dialog.c:390
 msgid "Panel orientation:"
-msgstr "Orientação do painel:"
+msgstr "Orientação do Painel:"
 
 #: settings/xfce_settings_dialog.c:407
 msgid "Popup position:"
-msgstr "Posição de popup:"
+msgstr "Posição do popup:"
 
 #: settings/xfce_settings_dialog.c:424
 msgid "Icon theme:"
-msgstr "Tema de ícones:"
+msgstr "Tema dos Ícones:"
 
 #: settings/xfce_settings_dialog.c:495
 msgid "Panel layer:"
-msgstr "Plano do Painel:"
+msgstr "Camada do Painel:"
 
 #: settings/xfce_settings_dialog.c:515
 msgid "Normal"
@@ -311,11 +311,11 @@ msgstr "Normal"
 
 #: settings/xfce_settings_dialog.c:535
 msgid "Center the panel:"
-msgstr "Centrar o painel:"
+msgstr "Centrar o Painel:"
 
 #: settings/xfce_settings_dialog.c:559
 msgid "Set"
-msgstr "Definir"
+msgstr "Aplicar"
 
 #: settings/xfce_settings_dialog.c:595
 msgid "Autohide:"
@@ -323,7 +323,7 @@ msgstr "Esconder automáticamente:"
 
 #: settings/xfce_settings_dialog.c:663
 msgid "XFce Panel Settings"
-msgstr "Configurações do Painel XFce"
+msgstr "Definições do Painel XFce"
 
 #. Appearance
 #: settings/xfce_settings_dialog.c:675
@@ -346,23 +346,23 @@ msgstr "Domingo"
 
 #: plugins/clock/clock.c:58
 msgid "Monday"
-msgstr "Segunda"
+msgstr "Segunda-feira"
 
 #: plugins/clock/clock.c:59
 msgid "Tuesday"
-msgstr "Terça"
+msgstr "Terça-feira"
 
 #: plugins/clock/clock.c:60
 msgid "Wednesday"
-msgstr "Quarta"
+msgstr "Quarta-feira"
 
 #: plugins/clock/clock.c:61
 msgid "Thursday"
-msgstr "Quinta"
+msgstr "Quinta-feira"
 
 #: plugins/clock/clock.c:62
 msgid "Friday"
-msgstr "Sexta"
+msgstr "Sexta-feira"
 
 #: plugins/clock/clock.c:63
 msgid "Saturday"
@@ -418,7 +418,7 @@ msgstr "Dezembro"
 
 #: plugins/clock/clock.c:350
 msgid "Clock type:"
-msgstr "Tipo de relógio:"
+msgstr "Tipo do relógio:"
 
 #: plugins/clock/clock.c:363
 msgid "Analog"
@@ -434,7 +434,7 @@ msgstr "LED"
 
 #: plugins/clock/clock.c:433
 msgid "Hour mode:"
-msgstr "Modo:"
+msgstr "Modo Horário"
 
 #: plugins/clock/clock.c:440
 msgid "24 hour"
@@ -458,25 +458,24 @@ msgstr "Relógio XFce"
 
 #: plugins/pager/pager.c:277
 msgid "Graphical pager"
-msgstr "Paginador Gráfico"
+msgstr "Alternador Gráfico das Áreas de Trabalho"
 
 #: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
-msgstr "Desktop switcher"
+msgstr "Alternador das Areas de Trabalho"
 
 #: plugins/systembuttons/systembuttons.c:60
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
 "Ask your system administrator for more information"
-msgstr ""
-"Acesso às configurações de sistema não está disponível.\n"
+msgstr "O acesso à configuraçao do sistema foi desactivado.\n"
 "\n"
-"Peça ao seu administrador de sistema mais informações"
+"Peça ao seu administrador de sistema para mais informações."
 
 #: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
-msgstr "Trancar o écran"
+msgstr "Trancar o ecrã"
 
 #: plugins/systembuttons/systembuttons.c:149
 #: plugins/systembuttons/systembuttons.c:518
@@ -491,11 +490,11 @@ msgstr "Configurar"
 #: plugins/systembuttons/systembuttons.c:151
 #: plugins/systembuttons/systembuttons.c:520
 msgid "Info"
-msgstr "Info"
+msgstr "Informação"
 
 #: plugins/systembuttons/systembuttons.c:500
 msgid "Show two buttons:"
-msgstr "Mostrar dois botões:"
+msgstr "Mostrar dois butões:"
 
 #. set names to use in option menus
 #: plugins/systembuttons/systembuttons.c:517
@@ -512,7 +511,7 @@ msgstr "Botão 2:"
 
 #: plugins/systembuttons/systembuttons.c:600
 msgid "System buttons"
-msgstr "Botões de sistema"
+msgstr "Botões de Sistema"
 
 #: plugins/separator/separator.c:153
 msgid "Separator"
@@ -520,20 +519,21 @@ msgstr "Separador"
 
 #: plugins/mailcheck/mailcheck.c:539
 msgid "Mail box:"
-msgstr "Caixa de email:"
+msgstr "Caixa de Correio:"
 
 #: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
-msgstr "Comando de email"
+msgstr "Comando de Correio:"
 
 #: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Comando a ser executado quando o botão no painel é carregado"
+msgstr "Comando a executar quando o botão no painel é clicado"
 
 #: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
-msgstr "Intervalo (seg):"
+msgstr "Intervalo (segundos):"
 
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
-msgstr "Verificar mail"
+msgstr "Verificar Correio"
+
