@@ -2,4 +2,5 @@ SUBDIRS = \
 mailcheck \
 clock \
 trash \
-switcher
+switcher \
+systembuttons

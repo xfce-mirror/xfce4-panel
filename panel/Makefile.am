@@ -1,7 +1,5 @@
 bin_PROGRAMS = xfce4
 xfce4_SOURCES = \
-builtins.c \
-builtins.h \
 callbacks.c \
 callbacks.h \
 controls.c \

@@ -17,6 +17,15 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
+/*  Plugins
+ *  -------
+ *  Plugins are accessed through the GModule interface. They must provide these 
+ *  two symbols:
+ *  - is_xfce_panel_control : only checked for existence
+ *  - module_init : this function takes a PanelControl structure as argument
+ *    and must fill it with the appropriate values and pointers.
+*/
+
 /*  Panel Control Configuration Dialog
  *  ----------------------------------
  *  All panel controls may provide an add_options() functions to allow
@@ -34,22 +43,155 @@
  *  
  *  You can connect to the destroy signal on the option widgets (or the 
  *  continainer) to know when to clean up the backup data. 
- *  
- *  
- *  Plugins
- *  -------
- *  Plugins are accessed through the GModule interface. They must provide these 
- *  two symbols:
- *  - is_xfce_panel_control : only checked for existance
- *  - module_init : this function takes a PanelControl structure as argument
- *    and must fill it with the appropriate values and pointers.
 */
 
 #include "xfce.h"
 #include "item.h"
-#include "builtins.h"
 #include "callbacks.h"
 #include "groups.h"
+
+#if 0
+/*  Plugins
+ *  -------
+*/
+/* new plugin interface 
+ * - open modules once
+ * - keep list of modules 
+ * - create new controls using these modules 
+*/
+#include "plugins.h"
+
+#define SOEXT 		("." G_MODULE_SUFFIX)
+#define SOEXT_LEN 	(strlen (SOEXT))
+
+static void free_plugin(PanelPlugin *plugin)
+{
+    g_module_close(plugin->module);
+
+    g_free(plugin);
+}
+
+static GSList *plugin_list = NULL;
+
+static gint compare_plugins (gconstpointer plugin_a, gconstpointer plugin_b)
+{
+    g_assert (plugin_a != NULL);
+    g_assert (plugin_b != NULL);
+    
+    return (g_ascii_strcasecmp((PanelPlugin) plugin_a->name, 
+			       (PanelPlugin) plugin_b->name));
+}
+
+static gint lookup_plugins (gconstpointer plugin, gconstpointer name)
+{
+    g_assert (plugin != NULL);
+    g_assert (name != NULL);
+    
+    return (g_ascii_strcasecmp((PanelPlugin) plugin->name, name));
+}
+
+static void load_plugin(gchar *path)
+{
+    gpointer tmp;
+    PanelPlugin *plugin;
+    GModule *gm;
+    
+    void (*init)(PanelPlugin *mp);
+        
+    plugin = g_new0(PanelPlugin, 1);
+    
+    plugin->manager = manager;
+    
+    gm = g_module_open(path,0);
+
+    if (gm && g_module_symbol(gm, "xfce_plugin_init", &tmp))
+    {
+        init = tmp;
+        init(plugin);
+	
+	if (g_slist_find_custom(plugin_list, plugin, compare_plugins))
+	{
+            g_message ("xfce: module %s has already been loaded", 
+		       plugin->name);
+	    free_plugin(plugin);
+	}
+	else
+	{
+            g_message ("xfce: module %s successfully loaded", plugin->name);
+	    plugin_list = g_slist_append(plugin_list, plugin);
+	}
+    }
+    else if (gm)
+    {
+        g_warning ("xfce: incompatible module %s",  path);
+        g_module_close (gm);
+	g_free(plugin);
+    }
+    else
+    {
+        g_warning ("xfce: module %s cannot be opened (%s)",  
+		   path, g_module_error());
+	g_free(plugin);
+    }
+}
+
+static void
+plugins_load_dir (const char *dir)
+{
+    GDir *gdir = g_dir_open(*d, 0, NULL);
+    const char *file;
+
+    if(!gdir)
+	return;
+
+    while((file = g_dir_read_name(gdir)))
+    {
+	char *s = file;
+
+	s += strlen(file) - SOEXT_LEN;
+	
+	if(strequal(s, SOEXT))
+	{
+	    char *path = g_build_filename(dir, file, NULL);
+	    
+	    load_plugin (path);
+	    g_free (path);
+	}
+    }
+    
+    g_dir_close (gdir);
+}
+
+void plugins_init(void)
+{
+    char **dirs, **d;
+    char *path;
+    GModule *module;
+
+    dirs = get_plugin_dirs();
+
+    for(d = dirs; *d; d++)
+	load_plugin_dir(*d);
+
+    g_strfreev(dirs);
+}
+
+void plugins_cleanup(void)
+{
+    SGList *li;
+
+    for (li = plugin_list; li; li = li->next)
+    {
+	PanelPlugin *plugin = li->data;
+
+	free_plugin(plugin);
+    }
+
+    g_slist_free(plugin_list);
+    plugin_list = NULL;
+}
+
+#endif
 
 /*  Plugins
  *  -------
@@ -192,12 +334,6 @@ void create_panel_control(PanelControl * pc)
     {
         case PLUGIN:
             create_plugin(pc);
-            break;
-        case EXIT:
-            create_exit(pc);
-            break;
-        case CONFIG:
-            create_config(pc);
             break;
         default:
             create_panel_item(pc);

@@ -182,17 +182,26 @@ XFce is a collection of programs that together provide the full functionality\n\
 of the desktop enviroment. At this time the following programs are part of XFce:\n\
 \n\
 o Window manager (xfwm4)\n\
-   handles the placement on the screen\n\
+   handles the placement of windows on the screen\n\
 \n\
 o Panel (xfce4)\n\
    start programs, monitor mailboxes, show time\n\
+\n\
+o Root menu (xfdeskmenu)\n\
+   provides a menu when you click on the desktop background\n\
+\n\
+o Utilities\n\
+   xfbd4: set background image\n\
+   xfmouse4: set mouse settings\n\
+   xfrun4: run programs\n\
+   xftaskbar4: simple taskbar with pager\n\
 \n\
 This is a developcent version and the list presented here is expected to grow\n\
 considerably before the final release\n\
 \n\
 Thank you for your interest in XFce,\n\
 \n\
-	-- The XFce Developcent Team --\n";
+	-- The XFce Development Team --\n";
 
         gtk_text_buffer_set_text(tb, info_text, -1);
         info_view = gtk_text_view_new();

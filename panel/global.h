@@ -102,9 +102,7 @@ enum
 {
     ICON = -2,   /* special case: the traditional laucher item */
     PLUGIN = -1, /* external plugin */
-    EXIT,
-    CONFIG,
-    NUM_BUILTINS
+    NUM_BUILTINS /* no more builtins! yay! */
 };
 
 /* panel layer */

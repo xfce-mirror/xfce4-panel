@@ -132,8 +132,6 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 bin_PROGRAMS = xfce4
 xfce4_SOURCES = \
-builtins.c \
-builtins.h \
 callbacks.c \
 callbacks.h \
 controls.c \
@@ -187,11 +185,10 @@ CONFIG_CLEAN_FILES =
 bin_PROGRAMS = xfce4$(EXEEXT)
 PROGRAMS = $(bin_PROGRAMS)
 
-am_xfce4_OBJECTS = xfce4-builtins.$(OBJEXT) xfce4-callbacks.$(OBJEXT) \
-	xfce4-controls.$(OBJEXT) xfce4-controls_dialog.$(OBJEXT) \
-	xfce4-dialogs.$(OBJEXT) xfce4-groups.$(OBJEXT) \
-	xfce4-handle.$(OBJEXT) xfce4-icons.$(OBJEXT) \
-	xfce4-info.$(OBJEXT) xfce4-item.$(OBJEXT) \
+am_xfce4_OBJECTS = xfce4-callbacks.$(OBJEXT) xfce4-controls.$(OBJEXT) \
+	xfce4-controls_dialog.$(OBJEXT) xfce4-dialogs.$(OBJEXT) \
+	xfce4-groups.$(OBJEXT) xfce4-handle.$(OBJEXT) \
+	xfce4-icons.$(OBJEXT) xfce4-info.$(OBJEXT) xfce4-item.$(OBJEXT) \
 	xfce4-item_dialog.$(OBJEXT) xfce4-main.$(OBJEXT) \
 	xfce4-panel.$(OBJEXT) xfce4-popup.$(OBJEXT) \
 	xfce4-settings.$(OBJEXT) xfce4-xfce_support.$(OBJEXT)
@@ -202,8 +199,7 @@ xfce4_LDFLAGS =
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4-builtins.Po \
-@AMDEP_TRUE@	./$(DEPDIR)/xfce4-callbacks.Po \
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/xfce4-callbacks.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-controls.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-controls_dialog.Po \
 @AMDEP_TRUE@	./$(DEPDIR)/xfce4-dialogs.Po \
@@ -268,7 +264,6 @@ clean-binPROGRAMS:
 	  echo " rm -f $$p $$f"; \
 	  rm -f $$p $$f ; \
 	done
-xfce4-builtins.$(OBJEXT): builtins.c
 xfce4-callbacks.$(OBJEXT): callbacks.c
 xfce4-controls.$(OBJEXT): controls.c
 xfce4-controls_dialog.$(OBJEXT): controls_dialog.c
@@ -294,7 +289,6 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-builtins.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-callbacks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-controls.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xfce4-controls_dialog.Po@am__quote@
@@ -346,39 +340,6 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/$*.Plo' tmpdepfile='$(DEPDIR)/$*.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
-
-xfce4-builtins.o: builtins.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -MT xfce4-builtins.o -MD -MP -MF "$(DEPDIR)/xfce4-builtins.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4-builtins.o `test -f 'builtins.c' || echo '$(srcdir)/'`builtins.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4-builtins.Tpo" "$(DEPDIR)/xfce4-builtins.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4-builtins.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='builtins.c' object='xfce4-builtins.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4-builtins.Po' tmpdepfile='$(DEPDIR)/xfce4-builtins.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-builtins.o `test -f 'builtins.c' || echo '$(srcdir)/'`builtins.c
-
-xfce4-builtins.obj: builtins.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -MT xfce4-builtins.obj -MD -MP -MF "$(DEPDIR)/xfce4-builtins.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4-builtins.obj `if test -f 'builtins.c'; then $(CYGPATH_W) 'builtins.c'; else $(CYGPATH_W) '$(srcdir)/builtins.c'`; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4-builtins.Tpo" "$(DEPDIR)/xfce4-builtins.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4-builtins.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='builtins.c' object='xfce4-builtins.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4-builtins.Po' tmpdepfile='$(DEPDIR)/xfce4-builtins.TPo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-builtins.obj `if test -f 'builtins.c'; then $(CYGPATH_W) 'builtins.c'; else $(CYGPATH_W) '$(srcdir)/builtins.c'`
-
-xfce4-builtins.lo: builtins.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -MT xfce4-builtins.lo -MD -MP -MF "$(DEPDIR)/xfce4-builtins.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o xfce4-builtins.lo `test -f 'builtins.c' || echo '$(srcdir)/'`builtins.c; \
-@am__fastdepCC_TRUE@	then mv "$(DEPDIR)/xfce4-builtins.Tpo" "$(DEPDIR)/xfce4-builtins.Plo"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/xfce4-builtins.Tpo"; exit 1; \
-@am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='builtins.c' object='xfce4-builtins.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/xfce4-builtins.Plo' tmpdepfile='$(DEPDIR)/xfce4-builtins.TPlo' @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -c -o xfce4-builtins.lo `test -f 'builtins.c' || echo '$(srcdir)/'`builtins.c
 
 xfce4-callbacks.o: callbacks.c
 @am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(xfce4_CFLAGS) $(CFLAGS) -MT xfce4-callbacks.o -MD -MP -MF "$(DEPDIR)/xfce4-callbacks.Tpo" \
