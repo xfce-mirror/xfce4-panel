@@ -189,7 +189,7 @@ void mcs_watch_xfce_channel(void)
     {
         g_warning("%s: could not connect to settings manager", PACKAGE);
 
-	show_warning(_("Settings manager not available"));
+	xfce_warn(_("Settings manager not available"));
 
 	return;
     }

@@ -46,7 +46,7 @@ static void mini_palet_cb(void)
 {
     if(disable_user_config)
     {
-        show_info(_("Access to the configuration system has been disabled.\n\n"
+        xfce_info(_("Access to the configuration system has been disabled.\n\n"
                     "Ask your system administrator for more information"));
         return;
     }

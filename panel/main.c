@@ -184,12 +184,11 @@ int main(int argc, char **argv)
 	    g_usleep(2000000);
     }
     
-    if (!net_wm_support)
-    {
-	show_error(_("Your window manager does not seem to support "
-		       "the new window manager hints as defined on "
-		       "http://www.freedesktop.org. \n"
-		       "Some XFce features may not work as intended."));
+    if (!net_wm_support) {
+	    xfce_err(_( "Your window manager does not seem to support "
+		            "the new window manager hints as defined on "
+		            "http://www.freedesktop.org. \n"
+		            "Some XFce features may not work as intended."));
     }		
     
     client_session = client_session_new(argc, argv, NULL /* data */ , 
