@@ -77,14 +77,14 @@ void quit(gboolean force)
 	}
     }
     
+    mcs_stop_watch();
+
     if (toplevel)
 	gtk_window_get_position(GTK_WINDOW(toplevel), &position.x, &position.y);
 
     gtk_widget_hide(toplevel);
 
     write_panel_config();
-
-    mcs_stop_watch();
 
 #ifdef HAVE_STARTUP_NOTIFICATION
     free_startup_timeout ();

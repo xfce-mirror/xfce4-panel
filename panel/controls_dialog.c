@@ -240,7 +240,7 @@ void controls_dialog(Control * control)
     /* Keep track of the panel container */
     container = control->base->parent;
 
-    dlg = gtk_dialog_new_with_buttons(_("Change item"), GTK_WINDOW(toplevel),
+    dlg = gtk_dialog_new_with_buttons(_("Change item"), NULL,
                                       GTK_DIALOG_MODAL, NULL);
 
     gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);

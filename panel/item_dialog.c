@@ -873,7 +873,7 @@ GtkWidget *create_menu_item_dialog(Item * mi)
     /* create dialog */
     title = _("Change menu item");
 
-    dlg = gtk_dialog_new_with_buttons(title, GTK_WINDOW(toplevel),
+    dlg = gtk_dialog_new_with_buttons(title, NULL,
                                       GTK_DIALOG_MODAL, NULL);
 
     gtk_window_set_position(GTK_WINDOW(dlg), GTK_WIN_POS_CENTER);
