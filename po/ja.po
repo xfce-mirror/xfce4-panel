@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
-"POT-Creation-Date: 2003-07-03 10:52+0200\n"
+"POT-Creation-Date: 2003-07-09 10:08+0200\n"
 "PO-Revision-Date: 2003-05-27 12:30+0900\n"
 "Last-Translator: Zhao Ji <zhao-ji@awz.ne.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,27 +19,15 @@ msgstr ""
 msgid "Select file"
 msgstr "ファイル選択"
 
-#: panel/controls_dialog.c:267
+#: panel/controls_dialog.c:246
 msgid "Change item"
 msgstr "項目変更"
 
-#: panel/controls_dialog.c:275 panel/item_dialog.c:1004
-msgid "_Revert"
-msgstr "元に戻す(_R)"
-
-#: panel/controls_dialog.c:280 panel/item_dialog.c:1010
-msgid "_Done"
-msgstr "実行(_D)"
-
-#: panel/controls_dialog.c:304
-msgid "Type:"
-msgstr "タイプ:"
-
-#: panel/controls_dialog.c:320 panel/item_dialog.c:609
+#: panel/controls_dialog.c:278 panel/item_dialog.c:650
 msgid "Position:"
 msgstr "位置:"
 
-#: panel/controls_dialog.c:366 panel/controls.c:272
+#: panel/controls_dialog.c:323 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -49,82 +37,81 @@ msgstr ""
 "\n"
 "このメニュー項目を削除してもよろしいですか？"
 
-#: panel/item_dialog.c:279
+#: panel/item_dialog.c:317
 msgid "Other Icon"
 msgstr "その他のアイコン"
 
-#: panel/item_dialog.c:304
+#: panel/item_dialog.c:342
 msgid "Select icon"
 msgstr "アイコン選択"
 
-#: panel/item_dialog.c:342
+#: panel/item_dialog.c:381
 msgid "Icon:"
 msgstr "アイコン:"
 
-#: panel/item_dialog.c:387
+#: panel/item_dialog.c:430
 msgid "Select command"
 msgstr "コマンド選択"
 
-#: panel/item_dialog.c:414
+#: panel/item_dialog.c:458
 msgid "Command:"
 msgstr "コマンド"
 
-#: panel/item_dialog.c:447 plugins/mailcheck/mailcheck.c:679
+#: panel/item_dialog.c:495 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "ターミナル内部で実行(_t)"
 
-#: panel/item_dialog.c:452 plugins/mailcheck/mailcheck.c:687
+#: panel/item_dialog.c:500 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "起動通知を使う (_n)"
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:527
 msgid "Caption:"
 msgstr "キャプション:"
 
-#: panel/item_dialog.c:518
+#: panel/item_dialog.c:560
 msgid "Tooltip:"
 msgstr "ツール チップ:"
 
-#: panel/item_dialog.c:554
+#: panel/item_dialog.c:596
 #, fuzzy
 msgid "Menu:"
 msgstr "メニュー"
 
-#: panel/item_dialog.c:561
+#: panel/item_dialog.c:603
 msgid "Attach menu to launcher"
 msgstr "メニューをランチャーへ追加"
 
-#: panel/item_dialog.c:704
+#: panel/item_dialog.c:745
 msgid "Icon Preview"
 msgstr "アイコン確認"
 
-#: panel/item_dialog.c:708
+#: panel/item_dialog.c:749
 msgid "Drag file onto this frame to change the icon"
 msgstr "項目変更のために、ここへファイルをドラッグしてください"
 
-#. create dialog
-#: panel/item_dialog.c:993
+#: panel/item_dialog.c:1032
 msgid "Change menu item"
 msgstr "メニュー項目の変更"
 
 #. add buttons
-#: panel/item_dialog.c:998
+#: panel/item_dialog.c:1035
 msgid "Remove"
 msgstr "削除"
 
-#: panel/item.c:352
+#: panel/item.c:360
 msgid "Click mouse button 3 to change item"
 msgstr "項目変更するために、マウスの右ボタンをクリックして下さい"
 
-#: panel/item.c:374
+#: panel/item.c:383
 msgid "Add launcher"
 msgstr "ランチャ追加"
 
-#: panel/item.c:379
+#: panel/item.c:388
 msgid "Add new item"
 msgstr "項目追加"
 
-#: panel/item.c:509
+#: panel/item.c:518
 msgid "Launcher"
 msgstr "ランチャ"
 
@@ -428,47 +415,47 @@ msgstr "11月"
 msgid "December"
 msgstr "12月"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "時計のタイプ:"
 
-#: plugins/clock/clock.c:366
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "アナログ"
 
-#: plugins/clock/clock.c:370
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "デヂタル"
 
-#: plugins/clock/clock.c:374
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr "ＬＥＤ"
 
-#: plugins/clock/clock.c:439
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
 msgstr "時間制:"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:440
 msgid "24 hour"
 msgstr "24時間制"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12時間制"
 
-#: plugins/clock/clock.c:458
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "午前/午後"
 
-#: plugins/clock/clock.c:498
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "秒表示:"
 
-#: plugins/clock/clock.c:609
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "XFce時計"
 
-#: plugins/pager/pager.c:278
+#: plugins/pager/pager.c:277
 msgid "Graphical pager"
 msgstr "グラフィカル・ページャ"
 
@@ -486,47 +473,47 @@ msgstr ""
 "\n"
 "詳しい情報は、システム管理者へ問い合わせて下さい。"
 
-#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
 msgstr "画面ロック"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:591
+#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:586
 msgid "Exit"
 msgstr "終了"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:592
+#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:587
 msgid "Setup"
 msgstr "設定"
 
-#: plugins/systembuttons/systembuttons.c:153
-#: plugins/systembuttons/systembuttons.c:593
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Info"
 msgstr "お知らせ"
 
-#: plugins/systembuttons/systembuttons.c:573
+#: plugins/systembuttons/systembuttons.c:568
 msgid "Show two buttons:"
 msgstr ""
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:590
+#: plugins/systembuttons/systembuttons.c:585
 msgid "Lock"
 msgstr "ロック"
 
-#: plugins/systembuttons/systembuttons.c:622
+#: plugins/systembuttons/systembuttons.c:617
 msgid "Button 1:"
 msgstr "ボタン１:"
 
-#: plugins/systembuttons/systembuttons.c:638
+#: plugins/systembuttons/systembuttons.c:633
 msgid "Button 2:"
 msgstr "ボタン２:"
 
-#: plugins/systembuttons/systembuttons.c:677
+#: plugins/systembuttons/systembuttons.c:668
 msgid "System buttons"
 msgstr "システム・ボタン"
 
-#: plugins/separator/separator.c:147
+#: plugins/separator/separator.c:153
 msgid "Separator"
 msgstr ""
 
@@ -534,21 +521,30 @@ msgstr ""
 msgid "Mail box:"
 msgstr "メール受信箱:"
 
-#: plugins/mailcheck/mailcheck.c:632
+#: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
 msgstr "メール コマンド:"
 
-#: plugins/mailcheck/mailcheck.c:646
+#: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
 msgstr "ボタンを押されると、実行されるコマンド"
 
-#: plugins/mailcheck/mailcheck.c:719
+#: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
 msgstr "間隔 (sec):"
 
-#: plugins/mailcheck/mailcheck.c:796
+#: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "メール確認"
+
+#~ msgid "_Done"
+#~ msgstr "実行(_D)"
+
+#~ msgid "_Revert"
+#~ msgstr "元に戻す(_R)"
+
+#~ msgid "Type:"
+#~ msgstr "タイプ:"
 
 #, fuzzy
 #~ msgid "Add item"

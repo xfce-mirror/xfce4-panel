@@ -99,12 +99,6 @@ get_mailcheck_pixbuf (int id)
  *  -------------
 */
 static void
-make_sensitive (GtkWidget * w)
-{
-    gtk_widget_set_sensitive (w, TRUE);
-}
-
-static void
 mailcheck_set_tip (t_mailcheck * mc)
 {
     char *tip;
@@ -413,7 +407,6 @@ typedef struct
 
     /* control dialog */
     GtkWidget *dialog;
-    GtkWidget *revert;
 
     /* options */
     GtkWidget *mbox_entry;
@@ -482,6 +475,7 @@ mailcheck_apply_options (MailDialog * md)
     run_mailcheck (mc);
 }
 
+#if 0
 /* restore baclup */
 static void
 mailcheck_revert_options (MailDialog * md)
@@ -503,6 +497,7 @@ mailcheck_revert_options (MailDialog * md)
 
     gtk_widget_set_sensitive (md->revert, FALSE);
 }
+#endif
 
 /* mbox */
 static void
@@ -520,7 +515,6 @@ mbox_browse_cb (GtkWidget * b, MailDialog * md)
 	gtk_entry_set_text (GTK_ENTRY (md->mbox_entry), file);
 	g_free (file);
 	mailcheck_apply_options (md);
-	make_sensitive (md->revert);
     }
 }
 
@@ -528,8 +522,6 @@ gboolean
 mbox_entry_lost_focus (MailDialog * md)
 {
     mailcheck_apply_options (md);
-
-    make_sensitive (md->revert);
 
     /* needed to let entry handle focus-out as well */
     return FALSE;
@@ -566,12 +558,6 @@ add_mbox_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     
     g_signal_connect (button, "clicked", G_CALLBACK (mbox_browse_cb), md);
 
-    /* activate revert button when changing the label */
-    g_signal_connect_swapped (md->mbox_entry, "insert-at-cursor",
-			      G_CALLBACK (make_sensitive), md->revert);
-    g_signal_connect (md->mbox_entry, "delete-from-cursor",
-		      G_CALLBACK (make_sensitive), md->revert);
-
     /* only set label on focus out */
     g_signal_connect_swapped (md->mbox_entry, "focus-out-event",
 			      G_CALLBACK (mbox_entry_lost_focus), md);
@@ -593,7 +579,6 @@ command_browse_cb (GtkWidget * b, MailDialog * md)
 	gtk_entry_set_text (GTK_ENTRY (md->cmd_entry), file);
 	g_free (file);
 /*	mailcheck_apply_options(md);*/
-	make_sensitive (md->revert);
     }
 }
 
@@ -610,8 +595,6 @@ command_entry_lost_focus (MailDialog * md)
 	md->mc->command = g_strdup (tmp);
     }
 
-    make_sensitive (md->revert);
-
     /* needed to let entry handle focus-out as well */
     return FALSE;
 }
@@ -620,16 +603,12 @@ static void
 term_toggled (GtkToggleButton * tb, MailDialog * md)
 {
     md->mc->term = gtk_toggle_button_get_active (tb);
-
-    make_sensitive (md->revert);
 }
 
 static void
 sn_toggled (GtkToggleButton * tb, MailDialog * md)
 {
     md->mc->use_sn = gtk_toggle_button_get_active (tb);
-
-    make_sensitive (md->revert);
 }
 
 static void
@@ -667,12 +646,6 @@ add_command_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
     gtk_container_add(GTK_CONTAINER(button), image);
     
     g_signal_connect (button, "clicked", G_CALLBACK (command_browse_cb), md);
-
-    /* activate revert button when changing the label */
-    g_signal_connect_swapped (md->cmd_entry, "insert-at-cursor",
-			      G_CALLBACK (make_sensitive), md->revert);
-    g_signal_connect_swapped (md->cmd_entry, "delete-from-cursor",
-			      G_CALLBACK (make_sensitive), md->revert);
 
     /* only set command on focus out */
     g_signal_connect_swapped (md->cmd_entry, "focus-out-event",
@@ -719,8 +692,6 @@ static void
 interval_changed (GtkSpinButton * spin, MailDialog * md)
 {
     md->mc->interval = gtk_spin_button_get_value_as_int (spin);
-
-    make_sensitive (md->revert);
 }
 
 static void
@@ -751,7 +722,7 @@ add_interval_box (GtkWidget * vbox, GtkSizeGroup * sg, MailDialog * md)
 /* the dialog */
 void
 mailcheck_add_options (Control * control, GtkContainer * container,
-		       GtkWidget * revert, GtkWidget * done)
+		       GtkWidget * done)
 {
     GtkWidget *vbox;
     GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -761,8 +732,7 @@ mailcheck_add_options (Control * control, GtkContainer * container,
 
     md->mc = (t_mailcheck *) control->data;
 
-    md->revert = revert;
-    md->dialog = gtk_widget_get_toplevel (revert);
+    md->dialog = gtk_widget_get_toplevel (done);
 
     create_backup (md);
 
@@ -776,9 +746,6 @@ mailcheck_add_options (Control * control, GtkContainer * container,
     add_interval_box (vbox, sg, md);
 
     /* signals */
-    g_signal_connect_swapped (revert, "clicked",
-			      G_CALLBACK (mailcheck_revert_options), md);
-
     g_signal_connect_swapped (done, "clicked",
 			      G_CALLBACK (mailcheck_apply_options), md);
 

@@ -24,7 +24,4 @@
 
 void controls_dialog (Control * control);
 
-#if 0
-void controls_add_dialog (int index);
-#endif
 #endif /* __XFCE_CONTROLS_DIALOG_H__ */

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XFCE4\n"
-"POT-Creation-Date: 2003-07-03 10:52+0200\n"
+"POT-Creation-Date: 2003-07-09 10:08+0200\n"
 "PO-Revision-Date: 2003-06-01 23:04+0200\n"
 "Last-Translator: Ilkka Ollakka <ilkka.j.ollakka@students.oamk.fi>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,27 +19,15 @@ msgstr ""
 msgid "Select file"
 msgstr "Valitse tiedosto"
 
-#: panel/controls_dialog.c:267
+#: panel/controls_dialog.c:246
 msgid "Change item"
 msgstr "Muuta osaa"
 
-#: panel/controls_dialog.c:275 panel/item_dialog.c:1004
-msgid "_Revert"
-msgstr "P_alauta"
-
-#: panel/controls_dialog.c:280 panel/item_dialog.c:1010
-msgid "_Done"
-msgstr "_Valmis"
-
-#: panel/controls_dialog.c:304
-msgid "Type:"
-msgstr "Malli:"
-
-#: panel/controls_dialog.c:320 panel/item_dialog.c:609
+#: panel/controls_dialog.c:278 panel/item_dialog.c:650
 msgid "Position:"
 msgstr "Paikka:"
 
-#: panel/controls_dialog.c:366 panel/controls.c:272
+#: panel/controls_dialog.c:323 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -49,81 +37,80 @@ msgstr ""
 "\n"
 "Haluatko poistaa osan?"
 
-#: panel/item_dialog.c:279
+#: panel/item_dialog.c:317
 msgid "Other Icon"
 msgstr "Muu kuvake"
 
-#: panel/item_dialog.c:304
+#: panel/item_dialog.c:342
 msgid "Select icon"
 msgstr "Valitse kuvake"
 
-#: panel/item_dialog.c:342
+#: panel/item_dialog.c:381
 msgid "Icon:"
 msgstr "Kuvake:"
 
-#: panel/item_dialog.c:387
+#: panel/item_dialog.c:430
 msgid "Select command"
 msgstr "Valitse komento"
 
-#: panel/item_dialog.c:414
+#: panel/item_dialog.c:458
 msgid "Command:"
 msgstr "Komento:"
 
-#: panel/item_dialog.c:447 plugins/mailcheck/mailcheck.c:679
+#: panel/item_dialog.c:495 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Aja Päätteessä"
 
-#: panel/item_dialog.c:452 plugins/mailcheck/mailcheck.c:687
+#: panel/item_dialog.c:500 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Käytä käynnistyksen _huomautusta"
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:527
 msgid "Caption:"
 msgstr "Valikkoteksti:"
 
-#: panel/item_dialog.c:518
+#: panel/item_dialog.c:560
 msgid "Tooltip:"
 msgstr "Kuvaus:"
 
-#: panel/item_dialog.c:554
+#: panel/item_dialog.c:596
 msgid "Menu:"
 msgstr "Valikko"
 
-#: panel/item_dialog.c:561
+#: panel/item_dialog.c:603
 msgid "Attach menu to launcher"
 msgstr "Lisää alavalikko"
 
-#: panel/item_dialog.c:704
+#: panel/item_dialog.c:745
 msgid "Icon Preview"
 msgstr "Kuvakkeen esikatselu"
 
-#: panel/item_dialog.c:708
+#: panel/item_dialog.c:749
 msgid "Drag file onto this frame to change the icon"
 msgstr "Raahaa tiedosto tähän kehykseen vaihtaaksesi kuvaketta"
 
-#. create dialog
-#: panel/item_dialog.c:993
+#: panel/item_dialog.c:1032
 msgid "Change menu item"
 msgstr "Vaihda valikon osaa"
 
 #. add buttons
-#: panel/item_dialog.c:998
+#: panel/item_dialog.c:1035
 msgid "Remove"
 msgstr "Poista"
 
-#: panel/item.c:352
+#: panel/item.c:360
 msgid "Click mouse button 3 to change item"
 msgstr "Paina hiiren 3-napilla vaihtaaksesi osan"
 
-#: panel/item.c:374
+#: panel/item.c:383
 msgid "Add launcher"
 msgstr "Lisää käynnistin"
 
-#: panel/item.c:379
+#: panel/item.c:388
 msgid "Add new item"
 msgstr "Lisää uusi osa"
 
-#: panel/item.c:509
+#: panel/item.c:518
 msgid "Launcher"
 msgstr "Käynnistin"
 
@@ -430,47 +417,47 @@ msgstr "Marraskuu"
 msgid "December"
 msgstr "Joulukuu"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "Kellon tyyppi:"
 
-#: plugins/clock/clock.c:366
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "Analoginen"
 
-#: plugins/clock/clock.c:370
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "Digitaalinen"
 
-#: plugins/clock/clock.c:374
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:439
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
 msgstr "Tuntinäyttö"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:440
 msgid "24 hour"
 msgstr "24-tuntinen"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12-tuntinen"
 
-#: plugins/clock/clock.c:458
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:498
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "Näytä sekunnit:"
 
-#: plugins/clock/clock.c:609
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "Xfce Kello"
 
-#: plugins/pager/pager.c:278
+#: plugins/pager/pager.c:277
 msgid "Graphical pager"
 msgstr "Käytä graafista työpöydän vaihtajaa"
 
@@ -488,47 +475,47 @@ msgstr ""
 "\n"
 "Kysy järjestelmäsi ylläpidolta lisätietoa asiasta"
 
-#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
 msgstr "Lukitse näyttö"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:591
+#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:586
 msgid "Exit"
 msgstr "Lopeta"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:592
+#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:587
 msgid "Setup"
 msgstr "Asetukset"
 
-#: plugins/systembuttons/systembuttons.c:153
-#: plugins/systembuttons/systembuttons.c:593
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Info"
 msgstr "Tietoja"
 
-#: plugins/systembuttons/systembuttons.c:573
+#: plugins/systembuttons/systembuttons.c:568
 msgid "Show two buttons:"
 msgstr "Näytä kaksi nappia:"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:590
+#: plugins/systembuttons/systembuttons.c:585
 msgid "Lock"
 msgstr "Lukitse"
 
-#: plugins/systembuttons/systembuttons.c:622
+#: plugins/systembuttons/systembuttons.c:617
 msgid "Button 1:"
 msgstr "Nappi 1:"
 
-#: plugins/systembuttons/systembuttons.c:638
+#: plugins/systembuttons/systembuttons.c:633
 msgid "Button 2:"
 msgstr "Nappi 2:"
 
-#: plugins/systembuttons/systembuttons.c:677
+#: plugins/systembuttons/systembuttons.c:668
 msgid "System buttons"
 msgstr "Järjestelmänapit"
 
-#: plugins/separator/separator.c:147
+#: plugins/separator/separator.c:153
 msgid "Separator"
 msgstr "Erotin"
 
@@ -536,21 +523,30 @@ msgstr "Erotin"
 msgid "Mail box:"
 msgstr "Postilaatikko:"
 
-#: plugins/mailcheck/mailcheck.c:632
+#: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
 msgstr "Postikomento:"
 
-#: plugins/mailcheck/mailcheck.c:646
+#: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Komento joka ajetaan kun kuvaketta painetaan"
 
-#: plugins/mailcheck/mailcheck.c:719
+#: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
 msgstr "Väli (sekuntia):"
 
-#: plugins/mailcheck/mailcheck.c:796
+#: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Postin tarkistus"
+
+#~ msgid "_Done"
+#~ msgstr "_Valmis"
+
+#~ msgid "_Revert"
+#~ msgstr "P_alauta"
+
+#~ msgid "Type:"
+#~ msgstr "Malli:"
 
 #~ msgid "Add item"
 #~ msgstr "Lisää uusi osa"

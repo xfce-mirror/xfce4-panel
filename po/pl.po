@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-07-03 10:52+0200\n"
+"POT-Creation-Date: 2003-07-09 10:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Paweł Pastuła <pastulap@poczta.onet.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,27 +20,15 @@ msgstr ""
 msgid "Select file"
 msgstr "Wybierz plik"
 
-#: panel/controls_dialog.c:267
+#: panel/controls_dialog.c:246
 msgid "Change item"
 msgstr "Zmień element"
 
-#: panel/controls_dialog.c:275 panel/item_dialog.c:1004
-msgid "_Revert"
-msgstr "Z_amień"
-
-#: panel/controls_dialog.c:280 panel/item_dialog.c:1010
-msgid "_Done"
-msgstr "_Zamknij"
-
-#: panel/controls_dialog.c:304
-msgid "Type:"
-msgstr "Typ:"
-
-#: panel/controls_dialog.c:320 panel/item_dialog.c:609
+#: panel/controls_dialog.c:278 panel/item_dialog.c:650
 msgid "Position:"
 msgstr "Pozycja"
 
-#: panel/controls_dialog.c:366 panel/controls.c:272
+#: panel/controls_dialog.c:323 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -50,81 +38,80 @@ msgstr ""
 "\n"
 "Czy chcesz usunąć element?"
 
-#: panel/item_dialog.c:279
+#: panel/item_dialog.c:317
 msgid "Other Icon"
 msgstr "Inna ikona"
 
-#: panel/item_dialog.c:304
+#: panel/item_dialog.c:342
 msgid "Select icon"
 msgstr "Wybierz ikonę"
 
-#: panel/item_dialog.c:342
+#: panel/item_dialog.c:381
 msgid "Icon:"
 msgstr "Ikona:"
 
-#: panel/item_dialog.c:387
+#: panel/item_dialog.c:430
 msgid "Select command"
 msgstr "Wybierz polecenie"
 
-#: panel/item_dialog.c:414
+#: panel/item_dialog.c:458
 msgid "Command:"
 msgstr "Polecenie:"
 
-#: panel/item_dialog.c:447 plugins/mailcheck/mailcheck.c:679
+#: panel/item_dialog.c:495 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Uruchom w _terminalu"
 
-#: panel/item_dialog.c:452 plugins/mailcheck/mailcheck.c:687
+#: panel/item_dialog.c:500 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Powiadom o uruchomieniu"
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:527
 msgid "Caption:"
 msgstr "Opis:"
 
-#: panel/item_dialog.c:518
+#: panel/item_dialog.c:560
 msgid "Tooltip:"
 msgstr "Podpowiedź"
 
-#: panel/item_dialog.c:554
+#: panel/item_dialog.c:596
 msgid "Menu:"
 msgstr ""
 
-#: panel/item_dialog.c:561
+#: panel/item_dialog.c:603
 msgid "Attach menu to launcher"
 msgstr ""
 
-#: panel/item_dialog.c:704
+#: panel/item_dialog.c:745
 msgid "Icon Preview"
 msgstr "Podgląd iknony"
 
-#: panel/item_dialog.c:708
+#: panel/item_dialog.c:749
 msgid "Drag file onto this frame to change the icon"
 msgstr "Przeciągnij plik do tej ramki aby zmienić ikonę"
 
-#. create dialog
-#: panel/item_dialog.c:993
+#: panel/item_dialog.c:1032
 msgid "Change menu item"
 msgstr "Zmień element menu"
 
 #. add buttons
-#: panel/item_dialog.c:998
+#: panel/item_dialog.c:1035
 msgid "Remove"
 msgstr "_Usuń"
 
-#: panel/item.c:352
+#: panel/item.c:360
 msgid "Click mouse button 3 to change item"
 msgstr "Naciśnij 3 klawisz myszy aby usunąć element"
 
-#: panel/item.c:374
+#: panel/item.c:383
 msgid "Add launcher"
 msgstr "Dodaj program"
 
-#: panel/item.c:379
+#: panel/item.c:388
 msgid "Add new item"
 msgstr "Dodaj nowy element"
 
-#: panel/item.c:509
+#: panel/item.c:518
 msgid "Launcher"
 msgstr "Program"
 
@@ -431,48 +418,48 @@ msgstr "Listopad"
 msgid "December"
 msgstr "Grudzień"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "Typ zegarka:"
 
-#: plugins/clock/clock.c:366
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "Analogowy"
 
-#: plugins/clock/clock.c:370
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "Cyfrowy"
 
-#: plugins/clock/clock.c:374
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr ""
 
-#: plugins/clock/clock.c:439
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
 msgstr "Tryb godzin"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:440
 #, fuzzy
 msgid "24 hour"
 msgstr "24 godzinny:"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12 godzinny"
 
-#: plugins/clock/clock.c:458
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:498
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "Pokaż sekundy:"
 
-#: plugins/clock/clock.c:609
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "Zegar XFce"
 
-#: plugins/pager/pager.c:278
+#: plugins/pager/pager.c:277
 msgid "Graphical pager"
 msgstr ""
 
@@ -490,47 +477,47 @@ msgstr ""
 "\n"
 "Zapytaj administratora systemu o więcej informacji"
 
-#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
 msgstr "Zablokuj ekran"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:591
+#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:586
 msgid "Exit"
 msgstr "Wyjdź"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:592
+#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:587
 msgid "Setup"
 msgstr "Ustawienia"
 
-#: plugins/systembuttons/systembuttons.c:153
-#: plugins/systembuttons/systembuttons.c:593
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Info"
 msgstr "Informacja"
 
-#: plugins/systembuttons/systembuttons.c:573
+#: plugins/systembuttons/systembuttons.c:568
 msgid "Show two buttons:"
 msgstr "Pokaż dwa przyciski"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:590
+#: plugins/systembuttons/systembuttons.c:585
 msgid "Lock"
 msgstr "Zablokuj"
 
-#: plugins/systembuttons/systembuttons.c:622
+#: plugins/systembuttons/systembuttons.c:617
 msgid "Button 1:"
 msgstr "Przycisk 1:"
 
-#: plugins/systembuttons/systembuttons.c:638
+#: plugins/systembuttons/systembuttons.c:633
 msgid "Button 2:"
 msgstr "Przycisk 2:"
 
-#: plugins/systembuttons/systembuttons.c:677
+#: plugins/systembuttons/systembuttons.c:668
 msgid "System buttons"
 msgstr "Przysicki systemowe"
 
-#: plugins/separator/separator.c:147
+#: plugins/separator/separator.c:153
 msgid "Separator"
 msgstr ""
 
@@ -538,21 +525,30 @@ msgstr ""
 msgid "Mail box:"
 msgstr "Skrzynka pocztowa:"
 
-#: plugins/mailcheck/mailcheck.c:632
+#: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
 msgstr "Polecenie poczty:"
 
-#: plugins/mailcheck/mailcheck.c:646
+#: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Polecenie do uruchomienia po naciśnieciu na przycisku panela"
 
-#: plugins/mailcheck/mailcheck.c:719
+#: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
 msgstr "Interwał (sek):"
 
-#: plugins/mailcheck/mailcheck.c:796
+#: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "Sprawdzenie poczty"
+
+#~ msgid "_Done"
+#~ msgstr "_Zamknij"
+
+#~ msgid "_Revert"
+#~ msgstr "Z_amień"
+
+#~ msgid "Type:"
+#~ msgstr "Typ:"
 
 #, fuzzy
 #~ msgid "Add item"

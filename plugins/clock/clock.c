@@ -103,7 +103,6 @@ typedef struct
 
     /* controls dialog */
     GtkWidget *dialog;
-    GtkWidget *revert;
 
     /* clock options */
     GtkWidget *type_menu;
@@ -337,8 +336,6 @@ clock_type_changed (GtkOptionMenu * om, ClockDialog * cd)
 	make_sensitive (cd->twelve_rb);
 	make_sensitive (cd->ampm_rb);
     }
-
-    gtk_widget_set_sensitive (cd->revert, TRUE);
 }
 
 static void
@@ -393,7 +390,6 @@ set_24hr_mode (GtkToggleButton * tb, ClockDialog * cd)
     xfce_clock_show_military (xclock, 1);
 
     update_clock_size (xclock, settings.size);
-    gtk_widget_set_sensitive (cd->revert, TRUE);
 }
 
 static void
@@ -408,7 +404,6 @@ set_12hr_mode (GtkToggleButton * tb, ClockDialog * cd)
     xfce_clock_show_ampm (xclock, 0);
 
     update_clock_size (xclock, settings.size);
-    gtk_widget_set_sensitive (cd->revert, TRUE);
 }
 
 static void
@@ -423,7 +418,6 @@ set_ampm_mode (GtkToggleButton * tb, ClockDialog * cd)
     xfce_clock_show_ampm (xclock, 1);
 
     update_clock_size (xclock, settings.size);
-    gtk_widget_set_sensitive (cd->revert, TRUE);
 }
 
 static void
@@ -481,8 +475,6 @@ clock_seconds_changed (GtkToggleButton * tb, ClockDialog * cd)
 
     xfce_clock_show_secs (xclock, gtk_toggle_button_get_active (tb));
     update_clock_size (xclock, settings.size);
-
-    gtk_widget_set_sensitive (cd->revert, TRUE);
 }
 
 static void
@@ -510,6 +502,7 @@ add_seconds_box (GtkWidget * vbox, GtkSizeGroup * sg, ClockDialog * cd)
     g_signal_connect (cb, "toggled", G_CALLBACK (clock_seconds_changed), cd);
 }
 
+#if 0
 /* backup */
 static void
 clock_create_backup (ClockDialog * cd)
@@ -546,11 +539,12 @@ clock_restore_backup (ClockDialog * cd)
     tb = GTK_TOGGLE_BUTTON (cd->seconds_cb);
     gtk_toggle_button_set_active (tb, cd->secs);
 }
+#endif
 
 /* clock options box */
 void
 clock_add_options (Control * control, GtkContainer * container,
-		   GtkWidget * revert, GtkWidget * done)
+		   GtkWidget * done)
 {
     GtkWidget *vbox;
     GtkSizeGroup *sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
@@ -559,13 +553,9 @@ clock_add_options (Control * control, GtkContainer * container,
     cd = g_new0 (ClockDialog, 1);
 
     cd->clock = control->data;
-    cd->dialog = gtk_widget_get_toplevel (revert);
-    cd->revert = revert;
+    cd->dialog = gtk_widget_get_toplevel (done);
 
-    clock_create_backup (cd);
-
-    g_signal_connect_swapped (revert, "clicked",
-			      G_CALLBACK (clock_restore_backup), cd);
+/*    clock_create_backup (cd);*/
 
     g_signal_connect_swapped (cd->dialog, "destroy-event",
 			      G_CALLBACK (g_free), cd);

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-07-03 10:52+0200\n"
+"POT-Creation-Date: 2003-07-09 10:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Paweł Pastuła <pastulap@poczta.onet.pl>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,27 +20,15 @@ msgstr ""
 msgid "Select file"
 msgstr "选择文件"
 
-#: panel/controls_dialog.c:267
+#: panel/controls_dialog.c:246
 msgid "Change item"
 msgstr "改变条目"
 
-#: panel/controls_dialog.c:275 panel/item_dialog.c:1004
-msgid "_Revert"
-msgstr "恢复(_R)"
-
-#: panel/controls_dialog.c:280 panel/item_dialog.c:1010
-msgid "_Done"
-msgstr "完成(_D)"
-
-#: panel/controls_dialog.c:304
-msgid "Type:"
-msgstr "类型:"
-
-#: panel/controls_dialog.c:320 panel/item_dialog.c:609
+#: panel/controls_dialog.c:278 panel/item_dialog.c:650
 msgid "Position:"
 msgstr "位置"
 
-#: panel/controls_dialog.c:366 panel/controls.c:272
+#: panel/controls_dialog.c:323 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -50,82 +38,81 @@ msgstr ""
 "\n"
 "你希望删除该条目吗?"
 
-#: panel/item_dialog.c:279
+#: panel/item_dialog.c:317
 msgid "Other Icon"
 msgstr "其它图标"
 
-#: panel/item_dialog.c:304
+#: panel/item_dialog.c:342
 msgid "Select icon"
 msgstr "选择图标"
 
-#: panel/item_dialog.c:342
+#: panel/item_dialog.c:381
 msgid "Icon:"
 msgstr "图标:"
 
-#: panel/item_dialog.c:387
+#: panel/item_dialog.c:430
 msgid "Select command"
 msgstr "选择命令"
 
-#: panel/item_dialog.c:414
+#: panel/item_dialog.c:458
 msgid "Command:"
 msgstr "命令:"
 
-#: panel/item_dialog.c:447 plugins/mailcheck/mailcheck.c:679
+#: panel/item_dialog.c:495 plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "在终端中运行(_t)"
 
-#: panel/item_dialog.c:452 plugins/mailcheck/mailcheck.c:687
+#: panel/item_dialog.c:500 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "使用启动提示(_n)"
 
-#: panel/item_dialog.c:479
+#: panel/item_dialog.c:527
 msgid "Caption:"
 msgstr "标题:"
 
-#: panel/item_dialog.c:518
+#: panel/item_dialog.c:560
 msgid "Tooltip:"
 msgstr "工具提示:"
 
-#: panel/item_dialog.c:554
+#: panel/item_dialog.c:596
 #, fuzzy
 msgid "Menu:"
 msgstr "菜单"
 
-#: panel/item_dialog.c:561
+#: panel/item_dialog.c:603
 msgid "Attach menu to launcher"
 msgstr ""
 
-#: panel/item_dialog.c:704
+#: panel/item_dialog.c:745
 msgid "Icon Preview"
 msgstr "图标预览"
 
-#: panel/item_dialog.c:708
+#: panel/item_dialog.c:749
 msgid "Drag file onto this frame to change the icon"
 msgstr "拖拽文件到该框架中以改变图标"
 
-#. create dialog
-#: panel/item_dialog.c:993
+#: panel/item_dialog.c:1032
 msgid "Change menu item"
 msgstr "改变菜单条目"
 
 #. add buttons
-#: panel/item_dialog.c:998
+#: panel/item_dialog.c:1035
 msgid "Remove"
 msgstr "删除"
 
-#: panel/item.c:352
+#: panel/item.c:360
 msgid "Click mouse button 3 to change item"
 msgstr "点击鼠标右键以改变条目"
 
-#: panel/item.c:374
+#: panel/item.c:383
 msgid "Add launcher"
 msgstr "添加启动器"
 
-#: panel/item.c:379
+#: panel/item.c:388
 msgid "Add new item"
 msgstr "添加新条目"
 
-#: panel/item.c:509
+#: panel/item.c:518
 msgid "Launcher"
 msgstr "启动器"
 
@@ -432,48 +419,48 @@ msgstr "十一月"
 msgid "December"
 msgstr "十二月"
 
-#: plugins/clock/clock.c:353
+#: plugins/clock/clock.c:350
 msgid "Clock type:"
 msgstr "钟表类型:"
 
-#: plugins/clock/clock.c:366
+#: plugins/clock/clock.c:363
 msgid "Analog"
 msgstr "模拟式"
 
-#: plugins/clock/clock.c:370
+#: plugins/clock/clock.c:367
 msgid "Digital"
 msgstr "数字式"
 
-#: plugins/clock/clock.c:374
+#: plugins/clock/clock.c:371
 msgid "LED"
 msgstr "数字液晶显示"
 
-#: plugins/clock/clock.c:439
+#: plugins/clock/clock.c:433
 msgid "Hour mode:"
 msgstr "Tryb godzin"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:440
 #, fuzzy
 msgid "24 hour"
 msgstr "24小时"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:446
 msgid "12 hour"
 msgstr "12小时"
 
-#: plugins/clock/clock.c:458
+#: plugins/clock/clock.c:452
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:498
+#: plugins/clock/clock.c:490
 msgid "Show seconds:"
 msgstr "显示秒:"
 
-#: plugins/clock/clock.c:609
+#: plugins/clock/clock.c:599
 msgid "Xfce Clock"
 msgstr "XFce时钟"
 
-#: plugins/pager/pager.c:278
+#: plugins/pager/pager.c:277
 #, fuzzy
 msgid "Graphical pager"
 msgstr "图形化的窗口切换器"
@@ -492,47 +479,47 @@ msgstr ""
 "\n"
 "请向你的系统管理员咨询以得到更多的信息"
 
-#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:148
 msgid "Lock the screen"
 msgstr "锁住屏幕"
 
-#: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:591
+#: plugins/systembuttons/systembuttons.c:149
+#: plugins/systembuttons/systembuttons.c:586
 msgid "Exit"
 msgstr "退出"
 
-#: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:592
+#: plugins/systembuttons/systembuttons.c:150
+#: plugins/systembuttons/systembuttons.c:587
 msgid "Setup"
 msgstr "设置"
 
-#: plugins/systembuttons/systembuttons.c:153
-#: plugins/systembuttons/systembuttons.c:593
+#: plugins/systembuttons/systembuttons.c:151
+#: plugins/systembuttons/systembuttons.c:588
 msgid "Info"
 msgstr "信息"
 
-#: plugins/systembuttons/systembuttons.c:573
+#: plugins/systembuttons/systembuttons.c:568
 msgid "Show two buttons:"
 msgstr "显示两个按钮"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:590
+#: plugins/systembuttons/systembuttons.c:585
 msgid "Lock"
 msgstr "锁住"
 
-#: plugins/systembuttons/systembuttons.c:622
+#: plugins/systembuttons/systembuttons.c:617
 msgid "Button 1:"
 msgstr "按钮1:"
 
-#: plugins/systembuttons/systembuttons.c:638
+#: plugins/systembuttons/systembuttons.c:633
 msgid "Button 2:"
 msgstr "按钮2:"
 
-#: plugins/systembuttons/systembuttons.c:677
+#: plugins/systembuttons/systembuttons.c:668
 msgid "System buttons"
 msgstr "系统按钮"
 
-#: plugins/separator/separator.c:147
+#: plugins/separator/separator.c:153
 msgid "Separator"
 msgstr ""
 
@@ -540,21 +527,30 @@ msgstr ""
 msgid "Mail box:"
 msgstr "邮件箱:"
 
-#: plugins/mailcheck/mailcheck.c:632
+#: plugins/mailcheck/mailcheck.c:623
 msgid "Mail command:"
 msgstr "邮件命令:"
 
-#: plugins/mailcheck/mailcheck.c:646
+#: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
 msgstr "在面板上点击该按钮时所执行的命令"
 
-#: plugins/mailcheck/mailcheck.c:719
+#: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"
 msgstr "间隔(秒):"
 
-#: plugins/mailcheck/mailcheck.c:796
+#: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "检查邮件"
+
+#~ msgid "_Done"
+#~ msgstr "完成(_D)"
+
+#~ msgid "_Revert"
+#~ msgstr "恢复(_R)"
+
+#~ msgid "Type:"
+#~ msgstr "类型:"
 
 #, fuzzy
 #~ msgid "Add item"

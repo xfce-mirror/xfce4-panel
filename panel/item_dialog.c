@@ -48,7 +48,7 @@
 static void item_apply_options (void);
 
 enum
-{ RESPONSE_REVERT, RESPONSE_DONE, RESPONSE_REMOVE };
+{ RESPONSE_DONE, RESPONSE_REMOVE };
 
 /* the item is a menu item or a panel control */
 Control *config_control = NULL;
@@ -78,7 +78,6 @@ static GtkWidget *caption_entry;
 static GtkWidget *pos_spin;
 
 /* controls on the parent dialog */
-static GtkWidget *revert_button;
 static GtkWidget *done_button;
 
 /* usefull for (instant) apply */
@@ -102,8 +101,8 @@ reindex_items (GList * items)
     }
 }
 
-/*  Save options for revert 
- *  -----------------------
+/*  Save options 
+ *  ------------
 */
 struct ItemBackup
 {
@@ -157,7 +156,7 @@ clear_backup (void)
     init_backup ();
 }
 
-/*  useful in callbacks to make revert button sensitive
+/*  useful in callbacks
 */
 void
 make_sensitive (GtkWidget * widget)
@@ -185,10 +184,47 @@ entry_lost_focus (GtkEntry * entry, GdkEventFocus * event, gpointer data)
  *  - writing the path in the text entry
  *  - using the file dialog
 */
+#define PREVIEW_SIZE 48
+
+static GdkPixbuf *
+scale_image(GdkPixbuf *pb)
+{
+    int w, h;
+    GdkPixbuf *newpb;
+    
+    g_return_val_if_fail(pb != NULL, NULL);
+
+    w = gdk_pixbuf_get_width(pb);
+    h = gdk_pixbuf_get_height(pb);
+
+    if (w > PREVIEW_SIZE || h > PREVIEW_SIZE)
+    {
+	if (w > h)
+	{
+	    h = (int) (((double)PREVIEW_SIZE/(double)w)*(double)h);
+	    w = PREVIEW_SIZE;
+	}
+	else
+	{
+	    w = (int) (((double)PREVIEW_SIZE/(double)h)*(double)w);
+	    h = PREVIEW_SIZE;
+	}
+
+	newpb = gdk_pixbuf_scale_simple(pb, w, h, GDK_INTERP_BILINEAR);
+    }
+    else
+    {
+	newpb = pb;
+	g_object_ref(newpb);
+    }
+
+    return newpb;
+}
+
 static void
 change_icon (int id, const char *path)
 {
-    GdkPixbuf *pb = NULL;
+    GdkPixbuf *pb = NULL, *tmp;
 
     if (id == EXTERN_ICON && path)
     {
@@ -214,6 +250,10 @@ change_icon (int id, const char *path)
         return;
     }
 
+    tmp = pb;
+    pb = scale_image(tmp);
+    g_object_unref(tmp);
+    
     gtk_image_set_from_pixbuf (GTK_IMAGE (preview_image), pb);
     g_object_unref (pb);
 
@@ -249,8 +289,6 @@ change_icon (int id, const char *path)
     g_signal_handler_unblock (icon_id_menu, id_callback);
 
     item_apply_options ();
-
-    make_sensitive (revert_button);
 }
 
 static void
@@ -496,12 +534,6 @@ create_caption_option (GtkSizeGroup * sg)
     gtk_widget_show (caption_entry);
     gtk_box_pack_start (GTK_BOX (hbox), caption_entry, TRUE, TRUE, 0);
 
-    /* activate revert button when changing the label */
-    g_signal_connect_swapped (caption_entry, "insert-at-cursor",
-                              G_CALLBACK (make_sensitive), revert_button);
-    g_signal_connect_swapped (caption_entry, "delete-from-cursor",
-                              G_CALLBACK (make_sensitive), revert_button);
-
     /* only set label on focus out */
     g_signal_connect (caption_entry, "focus-out-event",
                       G_CALLBACK (entry_lost_focus), NULL);
@@ -598,7 +630,6 @@ pos_changed (GtkSpinButton * spin, gpointer data)
     reindex_items (pp->items);
 
     item_apply_options ();
-    gtk_widget_set_sensitive (revert_button, TRUE);
 }
 
 GtkWidget *
@@ -732,8 +763,8 @@ create_icon_preview_frame ()
     return frame;
 }
 
-/*  Apply and revert
- *  ----------------
+/*  Apply
+ *  -----
 */
 static void
 item_apply_options (void)
@@ -793,6 +824,7 @@ item_apply_options (void)
     item_apply_config (config_item);
 }
 
+#if 0
 void
 item_revert_options (void)
 {
@@ -877,6 +909,7 @@ item_revert_options (void)
 
     gtk_widget_set_sensitive (revert_button, FALSE);
 }
+#endif
 
 static void
 item_add_options (GtkContainer * container)
@@ -969,17 +1002,12 @@ item_add_options (GtkContainer * container)
 */
 void
 panel_item_add_options (Control * control, GtkContainer * container,
-                        GtkWidget * revert, GtkWidget * done)
+                        GtkWidget * done)
 {
     config_control = control;
     config_item = control->data;
 
     dialog = gtk_widget_get_toplevel (done);
-
-    revert_button = revert;
-
-    g_signal_connect_swapped (revert, "clicked",
-                              G_CALLBACK (item_revert_options), NULL);
 
     g_signal_connect_swapped (done, "clicked",
                               G_CALLBACK (item_apply_options), NULL);
@@ -1000,9 +1028,8 @@ create_menu_item_dialog (Item * mi)
     GtkWidget *remove_button;
 
     /* create dialog */
-    title = _("Change menu item");
-
-    dlg = gtk_dialog_new_with_buttons (title, NULL, GTK_DIALOG_MODAL, NULL);
+    dlg = gtk_dialog_new();
+    gtk_window_set_title(GTK_WINDOW(dlg), _("Change menu item"));
 
     /* add buttons */
     remove_button = mixed_button_new (GTK_STOCK_REMOVE, _("Remove"));
@@ -1011,18 +1038,18 @@ create_menu_item_dialog (Item * mi)
     gtk_dialog_add_action_widget (GTK_DIALOG (dlg), remove_button,
                                   RESPONSE_REMOVE);
 
-    revert_button = mixed_button_new (GTK_STOCK_UNDO, _("_Revert"));
-    GTK_WIDGET_SET_FLAGS (revert_button, GTK_CAN_DEFAULT);
-    gtk_widget_show (revert_button);
-    gtk_dialog_add_action_widget (GTK_DIALOG (dlg), revert_button,
-                                  RESPONSE_REVERT);
-
-    done_button = mixed_button_new (GTK_STOCK_OK, _("_Done"));
+    done_button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
     GTK_WIDGET_SET_FLAGS (done_button, GTK_CAN_DEFAULT);
     gtk_widget_show (done_button);
     gtk_dialog_add_action_widget (GTK_DIALOG (dlg), done_button,
                                   RESPONSE_DONE);
 
+/*    gtk_widget_show(GTK_DIALOG(dlg)->action_area);
+    gtk_button_box_set_layout (GTK_BUTTON_BOX (GTK_DIALOG(dlg)->action_area),
+                               GTK_BUTTONBOX_END);
+*/
+    gtk_button_box_set_child_secondary(GTK_BUTTON_BOX (GTK_DIALOG(dlg)->action_area), remove_button, TRUE);
+    
     /* the options */
     main_vbox = GTK_DIALOG (dlg)->vbox;
 
@@ -1036,9 +1063,6 @@ create_menu_item_dialog (Item * mi)
     item_add_options (GTK_CONTAINER (frame));
 
     /* signals */
-    g_signal_connect (revert_button, "clicked",
-                      G_CALLBACK (item_revert_options), NULL);
-
     g_signal_connect (done_button, "clicked",
                       G_CALLBACK (item_apply_options), NULL);
 
@@ -1063,6 +1087,7 @@ edit_menu_item_dialog (Item * mi)
 {
     GtkWidget *dlg;
     PanelPopup *pp = mi->parent;
+    int response = GTK_RESPONSE_NONE;
 
     config_item = mi;
 
@@ -1072,31 +1097,18 @@ edit_menu_item_dialog (Item * mi)
 
     dialog = dlg;
 
-    /* run dialog until 'Done' */
-    while (1)
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    response = gtk_dialog_run (GTK_DIALOG (dlg));
+
+    /* the options are already applied, so we only have to deal
+     * with removal */
+    if (response == RESPONSE_REMOVE)
     {
-        int response = GTK_RESPONSE_NONE;
+	gtk_container_remove (GTK_CONTAINER (pp->item_vbox), mi->button);
+	pp->items = g_list_remove (pp->items, mi);
+	item_free (mi);
 
-        gtk_widget_set_sensitive (revert_button, FALSE);
-
-        gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-        response = gtk_dialog_run (GTK_DIALOG (dlg));
-
-        if (response == RESPONSE_REVERT)
-            continue;
-
-        /* the options are already applied, so we only have to deal
-         * with removal */
-        if (response == RESPONSE_REMOVE)
-        {
-            gtk_container_remove (GTK_CONTAINER (pp->item_vbox), mi->button);
-            pp->items = g_list_remove (pp->items, mi);
-            item_free (mi);
-
-            reposition_popup (pp);
-        }
-
-        break;
+	reposition_popup (pp);
     }
 
     gtk_widget_destroy (dlg);

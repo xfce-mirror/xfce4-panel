@@ -50,7 +50,6 @@ static Control *current_control = NULL;	/* current control == old_control,
 static GtkWidget *pos_spin;
 static GtkWidget *notebook;
 static GtkWidget *done;
-static GtkWidget *revert;
 
 static int backup_index;
 
@@ -198,7 +197,7 @@ add_notebook (GtkBox * box)
 	gtk_widget_show (frame);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), frame, NULL);
 
-	control_add_options (control, GTK_CONTAINER (frame), revert, done);
+	control_add_options (control, GTK_CONTAINER (frame), done);
     }
 
     gtk_box_pack_start (box, notebook, TRUE, TRUE, 0);
@@ -211,7 +210,6 @@ static void
 pos_changed (GtkSpinButton * spin)
 {
     int n;
-    gboolean changed = FALSE;
 
     n = gtk_spin_button_get_value_as_int (spin) - 1;
 
@@ -219,31 +217,11 @@ pos_changed (GtkSpinButton * spin)
     {
 	groups_move (current_control->index, n);
 	current_control->index = n;
-
-	changed = TRUE;
-    }
-
-    if (changed)
-	gtk_widget_set_sensitive (revert, TRUE);
-}
-
-static void
-controls_dialog_revert (void)
-{
-#if 0
-    gtk_option_menu_set_history (GTK_OPTION_MENU (type_option_menu), 0);
-#endif
-    if (backup_index != current_control->index)
-    {
-	groups_move (current_control->index, backup_index);
-
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (pos_spin),
-				   backup_index + 1);
     }
 }
 
 enum
-{ RESPONSE_DONE, RESPONSE_REVERT, RESPONSE_REMOVE };
+{ RESPONSE_DONE, RESPONSE_REMOVE };
 
 void
 controls_dialog (Control * control)
@@ -264,28 +242,25 @@ controls_dialog (Control * control)
     /* Keep track of the panel container */
     container = control->base->parent;
 
-    dlg = gtk_dialog_new_with_buttons (_("Change item"), NULL,
-				       GTK_DIALOG_MODAL, NULL);
+    dlg = gtk_dialog_new();
+    gtk_window_set_title(GTK_WINDOW(dlg), _("Change item"));
 
     button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
-    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (GTK_DIALOG (dlg), button, RESPONSE_REMOVE);
+    GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+    gtk_button_box_set_child_secondary(GTK_BUTTON_BOX (GTK_DIALOG(dlg)->action_area), button, TRUE);
 
-    revert = button = mixed_button_new (GTK_STOCK_UNDO, _("_Revert"));
-    GTK_WIDGET_SET_FLAGS (revert, GTK_CAN_DEFAULT);
-    gtk_widget_show (button);
-    gtk_dialog_add_action_widget (GTK_DIALOG (dlg), button, RESPONSE_REVERT);
-
-    done = button = mixed_button_new (GTK_STOCK_OK, _("_Done"));
-    GTK_WIDGET_SET_FLAGS (done, GTK_CAN_DEFAULT);
+    done = button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (GTK_DIALOG (dlg), button, RESPONSE_DONE);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 
-    g_signal_connect (revert, "clicked",
-		      G_CALLBACK (controls_dialog_revert), NULL);
-
+/*    gtk_widget_show(GTK_DIALOG(dlg)->action_area);
+    gtk_button_box_set_layout (GTK_BUTTON_BOX (GTK_DIALOG(dlg)->action_area),
+                               GTK_BUTTONBOX_END);
+*/
+    
     main_vbox = GTK_DIALOG (dlg)->vbox;
 
     vbox = gtk_vbox_new (FALSE, 7);
@@ -295,24 +270,7 @@ controls_dialog (Control * control)
 
     /* find all available controls */
     create_control_list (control);
-#if 0
 
-    /* option menu */
-    hbox = gtk_hbox_new (FALSE, 8);
-    gtk_widget_show (hbox);
-
-    label = gtk_label_new (_("Type:"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_widget_show (label);
-    gtk_size_group_add_widget (sg, label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-    type_option_menu = create_type_option_menu ();
-    gtk_widget_show (type_option_menu);
-    gtk_box_pack_start (GTK_BOX (hbox), type_option_menu, FALSE, FALSE, 0);
-
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-#endif
     /* position */
     hbox = gtk_hbox_new (FALSE, 8);
     gtk_widget_show (hbox);
@@ -346,7 +304,6 @@ controls_dialog (Control * control)
     {
 	response = GTK_RESPONSE_NONE;
 
-	gtk_widget_set_sensitive (revert, FALSE);
 	gtk_widget_grab_default (done);
 	gtk_widget_grab_focus (done);
 
@@ -373,7 +330,7 @@ controls_dialog (Control * control)
             gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
 	    gtk_widget_show (dlg);
 	}
-	else if (response != RESPONSE_REVERT)
+	else
 	{
 	    break;
 	}

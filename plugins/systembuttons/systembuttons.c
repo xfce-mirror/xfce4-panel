@@ -107,8 +107,6 @@ typedef struct
     GtkWidget *two_checkbutton;
     GtkWidget *option_menu_hbox[2];
     GtkWidget *option_menus[2];
-
-    GtkWidget *revert;
 }
 t_systembuttons_dialog;
 
@@ -497,8 +495,6 @@ checkbutton_changed (GtkToggleButton * tb, t_systembuttons_dialog * sbd)
 	    gtk_widget_hide (sbd->option_menu_hbox[1]);
 	}
 
-	gtk_widget_set_sensitive (sbd->revert, TRUE);
-
 	systembuttons_set_size (sbd->control, settings.size);
     }
 }
@@ -515,10 +511,9 @@ buttons_changed (GtkOptionMenu * om, t_systembuttons_dialog * sbd)
 	return;
 
     systembuttons_change_type (sbd->sb, i, n);
-
-    gtk_widget_set_sensitive (sbd->revert, TRUE);
 }
 
+#if 0
 static void
 systembuttons_revert_configuration (t_systembuttons_dialog * sbd)
 {
@@ -533,10 +528,11 @@ systembuttons_revert_configuration (t_systembuttons_dialog * sbd)
     om = GTK_OPTION_MENU (sbd->option_menus[1]);
     gtk_option_menu_set_history (om, sbd->backup_button_types[1]);
 }
+#endif
 
 void
 systembuttons_add_options (Control * control, GtkContainer * container,
-			   GtkWidget * revert, GtkWidget * done)
+			   GtkWidget * done)
 {
     GtkWidget *vbox, *hbox, *label, *om = NULL;
     const char *names[4];
@@ -558,7 +554,6 @@ systembuttons_add_options (Control * control, GtkContainer * container,
 
     sbd->control = control;
     sbd->sb = sb;
-    sbd->revert = revert;
 
     /* add widgets */
     vbox = gtk_vbox_new (FALSE, 8);
@@ -647,10 +642,6 @@ systembuttons_add_options (Control * control, GtkContainer * container,
     gtk_size_group_add_widget (sg2, om);
 
     /* dialog buttons */
-    g_signal_connect_swapped (revert, "clicked",
-			      G_CALLBACK (systembuttons_revert_configuration),
-			      sbd);
-
     g_signal_connect_swapped (done, "clicked", G_CALLBACK (g_free), sbd);
 }
 
