@@ -1,2 +1,3 @@
 SUBDIRS = \
-mailcheck
+mailcheck \
+clock
