@@ -189,6 +189,7 @@ void clock_set_size(PanelModule * pm, int size)
     clock->size = size;
 
     gtk_widget_set_size_request(clock->label, -1, s);
+    adjust_time(pm);
 }
 
 void clock_set_style(PanelModule * pm, int style)

@@ -156,10 +156,6 @@ static void create_backup(void)
 
 static void restore_backup(void)
 {
-    settings.x = backup.x;
-    settings.y = backup.y;
-    panel_set_position();
-
     /* we just let the calbacks of our dialog do all the work */
     
     gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), backup.size);
@@ -180,6 +176,10 @@ static void restore_backup(void)
         gtk_entry_set_text(GTK_ENTRY(exit_entry), backup.exit_command);
     else
         gtk_entry_set_text(GTK_ENTRY(exit_entry), "");
+
+    settings.x = backup.x;
+    settings.y = backup.y;
+    panel_set_position();
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
