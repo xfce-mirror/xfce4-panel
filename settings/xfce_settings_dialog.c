@@ -48,9 +48,6 @@ enum
 
 static McsManager *mcs_manager;
 
-enum
-{ RESPONSE_REMOVE, RESPONSE_CHANGE, RESPONSE_CANCEL, RESPONSE_REVERT };
-
 /*  Global settings
  *  ---------------
  *  size: option menu
@@ -66,10 +63,6 @@ static GtkWidget *theme_menu;
 
 static GtkWidget *layer_menu;
 static GtkWidget *pos_button;
-
-static GtkWidget *revert;
-
-static int backup_theme_index = 0;
 
 GtkShadowType main_shadow = GTK_SHADOW_NONE;
 GtkShadowType header_shadow = GTK_SHADOW_NONE;
@@ -111,68 +104,6 @@ static void add_spacer(GtkBox * box)
     gtk_box_pack_start(box, eventbox, FALSE, TRUE, 0);
 }
 
-/* backup values */
-static int bu_orientation;
-static int bu_layer;
-static int bu_size;
-static int bu_popup_position;
-static char *bu_theme;
-
-static void xfce_create_backup(void)
-{
-    McsSetting *setting;
-
-    setting = &xfce_options[XFCE_ORIENTATION];
-    bu_orientation = setting->data.v_int;
-
-    setting = &xfce_options[XFCE_LAYER];
-    bu_layer = setting->data.v_int;
-
-    setting = &xfce_options[XFCE_SIZE];
-    bu_size = setting->data.v_int;
-
-    setting = &xfce_options[XFCE_POPUPPOSITION];
-    bu_popup_position = setting->data.v_int;
-
-    setting = &xfce_options[XFCE_THEME];
-    bu_theme = g_strdup(setting->data.v_string);
-
-    xfce_options[XFCE_POSITION].data.v_int = XFCE_POSITION_SAVE;
-    mcs_manager_set_setting(mcs_manager, &xfce_options[XFCE_POSITION], 
-	    		    CHANNEL);
-    mcs_manager_notify(mcs_manager, CHANNEL);
-}
-
-static void xfce_restore_backup(void)
-{
-    /* we just let the calbacks of our dialog do all the work */
-
-    /* this must be first */
-    gtk_option_menu_set_history(GTK_OPTION_MENU(orientation_menu),
-    				bu_orientation);
-
-    gtk_option_menu_set_history(GTK_OPTION_MENU(size_menu), bu_size);
-
-    gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu),
-    				bu_popup_position);
-
-    gtk_option_menu_set_history(GTK_OPTION_MENU(theme_menu),
-                                backup_theme_index);
-
-/*    gtk_spin_button_set_value(GTK_SPIN_BUTTON(groups_spin), bu_num_groups);*/
-    
-    gtk_option_menu_set_history(GTK_OPTION_MENU(layer_menu), bu_layer);
-
-    xfce_options[XFCE_POSITION].data.v_int = XFCE_POSITION_RESTORE;
-    mcs_manager_set_setting(mcs_manager, &xfce_options[XFCE_POSITION], CHANNEL);
-    mcs_manager_notify(mcs_manager, CHANNEL);
-}
-
-static void xfce_free_backup(void)
-{
-    g_free(bu_theme);
-}
-
 /* size */
 static void size_menu_changed(GtkOptionMenu * menu)
 {
@@ -185,8 +116,6 @@ static void size_menu_changed(GtkOptionMenu * menu)
     setting->data.v_int = n;
     mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
     mcs_manager_notify(mcs_manager, CHANNEL);
-    
-    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static void add_size_menu(GtkWidget * option_menu, int size)
@@ -248,8 +177,6 @@ static void orientation_changed(GtkOptionMenu * menu)
     }
     
     gtk_option_menu_set_history(GTK_OPTION_MENU(popup_position_menu), pos);
-	
-    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static void add_orientation_menu(GtkWidget * option_menu, int orientation)
@@ -270,7 +197,6 @@ static void add_orientation_menu(GtkWidget * option_menu, int orientation)
 
     g_signal_connect(option_menu, "changed",
                      G_CALLBACK(orientation_changed), NULL);
-
 }
 
 /* popup position */
@@ -285,8 +211,6 @@ static void popup_position_changed(GtkOptionMenu * menu)
     setting->data.v_int = n;
     mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
     mcs_manager_notify(mcs_manager, CHANNEL);
-    
-    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static void add_popup_position_menu(GtkWidget * option_menu, int position)
@@ -396,8 +320,6 @@ static void theme_changed(GtkOptionMenu * option_menu)
     setting->data.v_string = g_strdup(theme);
     mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
     mcs_manager_notify(mcs_manager, CHANNEL);
-
-    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static void add_theme_menu(GtkWidget * option_menu, const char *theme)
@@ -413,9 +335,6 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
 	item = gtk_menu_item_new_with_label(*s);
 	gtk_widget_show(item);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-
-	if(theme && strequals(theme, *s))
-	    n = backup_theme_index = i;
     }
 
     g_strfreev(themes);
@@ -515,8 +434,6 @@ static void layer_changed(GtkWidget * om, gpointer data)
     setting->data.v_int = layer;
     mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
     mcs_manager_notify(mcs_manager, CHANNEL);
-    
-    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static char *position_names[] = {
@@ -538,12 +455,11 @@ static void position_clicked(GtkWidget * button, GtkOptionMenu *om)
     mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
     mcs_manager_notify(mcs_manager, CHANNEL);
     gdk_flush();
+    g_usleep(10);
     
     setting->data.v_int = n;
     mcs_manager_set_setting(mcs_manager, setting, CHANNEL);
     mcs_manager_notify(mcs_manager, CHANNEL);
-    
-    gtk_widget_set_sensitive(revert, TRUE);
 }
 
 static void add_position_box(GtkBox * box, GtkSizeGroup *sg)
@@ -631,35 +547,18 @@ static void add_position_box(GtkBox * box, GtkSizeGroup *sg)
 }
 
 /* the dialog */
-/* static int lastpage = 0;*/
-
 static void dialog_delete(GtkWidget *dialog)
 {
-/*    lastpage = gtk_notebook_get_current_page(GTK_NOTEBOOK(notebook));
-*/
     gtk_widget_destroy(dialog);
     is_running = FALSE;
     dialog = NULL;
 
-    xfce_free_backup();
     xfce_write_options(mcs_manager);
-}
-
-static void dialog_response(GtkWidget *dialog, int response)
-{
-    if(response == RESPONSE_REVERT)
-    {
-	xfce_restore_backup();
-	xfce_set_options(mcs_manager);
-	gtk_widget_set_sensitive(revert, FALSE);
-    }
-    else
-	dialog_delete(dialog);
 }
 
 void run_xfce_settings_dialog(McsPlugin *mp)
 {
-    GtkWidget *button, *header, *hbox, *vbox, *sep;
+    GtkWidget *header, *hbox, *vbox, *sep;
     GtkSizeGroup *sg;
 
     if(is_running)
@@ -678,26 +577,16 @@ void run_xfce_settings_dialog(McsPlugin *mp)
 
     mcs_manager = mp->manager;
 
-    xfce_create_backup();
-
-    dialog = gtk_dialog_new_with_buttons(_("XFce Panel Settings"),
-                                    	 NULL, GTK_DIALOG_NO_SEPARATOR, NULL);
+    dialog = gtk_dialog_new_with_buttons(_("XFce Panel"),
+                                    	 NULL, GTK_DIALOG_NO_SEPARATOR, 
+					 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
+					 NULL);
 
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
 
-    revert = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
-    gtk_widget_show(revert);
-    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), revert, RESPONSE_REVERT);
-    gtk_widget_set_sensitive(revert, FALSE);
-
-    button = mixed_button_new(GTK_STOCK_OK, _("_Done"));
-    gtk_widget_show(button);
-    gtk_dialog_add_action_widget(GTK_DIALOG(dialog), button, GTK_RESPONSE_OK);
-
-    g_signal_connect(dialog, "response", G_CALLBACK(dialog_response), dialog);
-    g_signal_connect_swapped(dialog, "delete_event", 
-	    		     G_CALLBACK(dialog_delete), dialog);
+    g_signal_connect(dialog, "response", G_CALLBACK(dialog_delete), NULL);
+    g_signal_connect(dialog, "delete_event", G_CALLBACK(dialog_delete), NULL);
     
     /* pretty header */
     vbox = GTK_DIALOG(dialog)->vbox;

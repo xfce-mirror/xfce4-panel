@@ -110,7 +110,7 @@ static GtkItemFactoryEntry panel_items[] = {
   { "/sep",              NULL, NULL,        0, "<Separator>" },
   { N_("/Add _new item"), NULL, add_new,    0, "<Item>" },
   { "/sep",              NULL, NULL,        0, "<Separator>" },
-  { N_("/_Panel settings"), NULL, edit_prefs,  0, "<Item>" },
+  { N_("/_Properties..."), NULL, edit_prefs,  0, "<Item>" },
   { N_("/_Settings manager"), NULL, settings_mgr,  0, "<Item>" },
   { "/sep",              NULL, NULL,        0, "<Separator>" },
   { N_("/_About XFce"),  NULL, do_info,     0, "<Item>" },
@@ -397,6 +397,8 @@ void panel_set_size(int size)
     groups_set_size(size);
     handle_set_size(handles[LEFT], size);
     handle_set_size(handles[RIGHT], size);
+
+    panel_set_position();
 }
 
 void panel_set_popup_position(int position)

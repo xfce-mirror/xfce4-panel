@@ -331,7 +331,7 @@ static GtkWidget *create_icon_option(GtkSizeGroup * sg)
                      G_CALLBACK(icon_entry_lost_focus), NULL);
 
 
-    icon_browse_button = gtk_button_new_with_label(" ... ");
+    icon_browse_button = gtk_button_new_with_label("...");
     gtk_widget_show(icon_browse_button);
     gtk_box_pack_start(GTK_BOX(hbox), icon_browse_button, FALSE, FALSE, 0);
 

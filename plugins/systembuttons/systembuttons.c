@@ -211,16 +211,34 @@ static void arrange_systembuttons(t_systembuttons *sb, int orientation)
 	gtk_widget_destroy(sb->box);
     }
 
+    /* we need some extra spacing when the panel size <= SMALL
+     * hence the strange code below :) */
     if ((orientation == HORIZONTAL && settings.size > SMALL) ||
 	(orientation == VERTICAL && settings.size <= SMALL))
     {
-	sb->box = gtk_vbox_new(FALSE, 0);
-	sb->buttonbox = gtk_vbox_new(TRUE, 0);
+	if (settings.size > SMALL)
+	{
+	    sb->box = gtk_vbox_new(TRUE, 0);
+	    sb->buttonbox = sb->box;
+	}
+	else
+	{
+	    sb->box = gtk_vbox_new(FALSE, 0);
+	    sb->buttonbox = gtk_vbox_new(TRUE, 0);
+	}
     }
     else
     {
-	sb->box = gtk_hbox_new(FALSE, 0);
-	sb->buttonbox = gtk_hbox_new(TRUE, 0);
+	if (settings.size > SMALL)
+	{
+	    sb->box = gtk_hbox_new(FALSE, 0);
+	    sb->buttonbox = sb->box;
+	}
+	else
+	{
+	    sb->box = gtk_hbox_new(FALSE, 0);	
+	    sb->buttonbox = gtk_hbox_new(TRUE, 0);
+	}
     }
 
     gtk_widget_show(sb->box);
@@ -228,19 +246,26 @@ static void arrange_systembuttons(t_systembuttons *sb, int orientation)
 
     spacing = border_width / 2;
     
-    align = gtk_alignment_new(0,0,0,0);
-    gtk_widget_set_size_request(align, spacing, spacing);
-    gtk_widget_show(align);
-    gtk_box_pack_start(GTK_BOX(sb->box), align, FALSE, FALSE, 0);
+    if (settings.size <= SMALL)
+    {
+	align = gtk_alignment_new(0,0,0,0);
+	gtk_widget_set_size_request(align, spacing, spacing);
+	gtk_widget_show(align);
+	gtk_box_pack_start(GTK_BOX(sb->box), align, FALSE, FALSE, 0);
 
-    gtk_box_pack_start(GTK_BOX(sb->box), sb->buttonbox, TRUE, TRUE, 0);
+	gtk_box_pack_start(GTK_BOX(sb->box), sb->buttonbox, TRUE, TRUE, 0);
+    }
+    
     gtk_box_pack_start(GTK_BOX(sb->buttonbox), sb->align[0], TRUE, TRUE, 0);
     gtk_box_pack_start(GTK_BOX(sb->buttonbox), sb->align[1], TRUE, TRUE, 0);
 
-    align = gtk_alignment_new(0,0,0,0);
-    gtk_widget_set_size_request(align, spacing, spacing);
-    gtk_widget_show(align);
-    gtk_box_pack_start(GTK_BOX(sb->box), align, FALSE, FALSE, 0);
+    if (settings.size <= SMALL)
+    {
+	align = gtk_alignment_new(0,0,0,0);
+	gtk_widget_set_size_request(align, spacing, spacing);
+	gtk_widget_show(align);
+	gtk_box_pack_start(GTK_BOX(sb->box), align, FALSE, FALSE, 0);
+    }
 }
 
 static t_systembuttons *systembuttons_new(void)
@@ -276,6 +301,7 @@ static void systembuttons_free(Control * control)
 {
     t_systembuttons *sb = control->data;
 
+    g_list_foreach(sb->callbacks, (GFunc)g_free, NULL);
     g_list_free(sb->callbacks);
     
     g_free(sb);
