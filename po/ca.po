@@ -1,15 +1,15 @@
-# xfce4 (panel) for Xfce desktop environment.
-# Copyright (C) 2003 THE PACKAGE'S COPYRIGHT HOLDER
+# xfce4-panel for XFce desktop environment.
+# Copyright (C) 2003, 2004 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the xfce4 package.
-# Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003.
+# Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: XFce 4\n"
 "POT-Creation-Date: 2003-12-04 09:37+0100\n"
-"PO-Revision-Date: 2003-07-05 16:17+0100\n"
-"Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
-"Language-Team: ca <LL@li.org>\n"
+"PO-Revision-Date: 2004-03-29 21:17+0100\n"
+"Last-Translator: Carles Munoz Gorriz <carlesmu@internautas.org>\n"
+"Language-Team: ca <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,11 +22,13 @@ msgstr "Seleccioneu el fitxer"
 msgid "Change item"
 msgstr "Canviar element"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:681
+#: panel/controls_dialog.c:286
+#: panel/item_dialog.c:681
 msgid "Position:"
 msgstr "Posició:"
 
-#: panel/controls_dialog.c:342 panel/controls.c:272
+#: panel/controls_dialog.c:342
+#: panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -56,11 +58,13 @@ msgstr "Seleccioneu ordre"
 msgid "Command:"
 msgstr "Ordre:"
 
-#: panel/item_dialog.c:532 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532
+#: plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "Executar en un _terminal"
 
-#: panel/item_dialog.c:537 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537
+#: plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "Utilitzeu _notificació d'inicialització"
 
@@ -121,28 +125,28 @@ msgstr "Esteu segur que voleu sortir?"
 #, c-format
 msgid ""
 "%s, version %s\n"
-"Part of the Xfce Desktop Environment\n"
+"Part of the XFce Desktop Environment\n"
 "http://www.xfce.org\n"
 msgstr ""
 "%s, versió %s\n"
-"Part del Entorn d'Escriptori Xfce\n"
+"Part del Entorn d'Escriptori XFce\n"
 "http://www.xfce.org\n"
 
 #: panel/main.c:361
 msgid ""
-"Your window manager does not seem to support the new window manager hints as "
-"defined on http://www.freedesktop.org. \n"
-"Some Xfce features may not work as intended."
+"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+"Some XFce features may not work as intended."
 msgstr ""
-"El teu gestor de finestres sembla no suportar els consells del nou gestor de "
-"finestras tal com estan definits a http://www..freedesktop.org. \n"
+"El teu gestor de finestres sembla no suportar els consells del nou gestor de finestras tal com estan definits a http://www..freedesktop.org. \n"
 "Algunes funcionalitats poden no funcionar tal com es van preveure."
 
-#: panel/controls.c:320 panel/panel.c:412
+#: panel/controls.c:320
+#: panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/Afegir _nou element"
 
-#: panel/controls.c:322 panel/panel.c:414
+#: panel/controls.c:322
+#: panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/_Propietats..."
 
@@ -155,12 +159,12 @@ msgid "This item has no configuration options"
 msgstr "Aquest element no té opcions de configuració"
 
 #: panel/panel.c:410
-msgid "/Xfce Panel"
-msgstr "/Plafó Xfce"
+msgid "/XFce Panel"
+msgstr "/Plafó XFce"
 
 #: panel/panel.c:415
-msgid "/_About Xfce"
-msgstr "/_Quant a Xfce"
+msgid "/_About XFce"
+msgstr "/_Quant a XFce"
 
 #: panel/panel.c:416
 msgid "/_Help"
@@ -175,18 +179,18 @@ msgid "/_Lock screen"
 msgstr "/_Bloqueja la pantalla"
 
 #: panel/panel.c:423
-#, fuzzy
 msgid "/_Restart"
-msgstr "_Reverteix"
+msgstr "/_Reinicia"
 
 #: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/S_urt"
 
-#: panel/panel.c:812 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812
+#: settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
-msgid "Xfce Panel"
-msgstr "Plafó Xfce"
+msgid "XFce Panel"
+msgstr "Plafó XFce"
 
 #: panel/icons.c:73
 msgid "Default"
@@ -272,20 +276,24 @@ msgstr "Horitzontal"
 msgid "Vertical"
 msgstr "Vertical"
 
-#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
+#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:456
 msgid "Left"
 msgstr "Esquerra"
 
-#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
+#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:457
 msgid "Right"
 msgstr "Dreta"
 
-#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:455
 #: settings/xfce_settings_dialog.c:511
 msgid "Top"
 msgstr "Superior"
 
-#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:238
+#: settings/xfce_settings_dialog.c:454
 #: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
 msgstr "Inferior"
@@ -327,8 +335,8 @@ msgid "Autohide:"
 msgstr "Ocultació automàtica:"
 
 #: settings/xfce_settings_dialog.c:663
-msgid "Xfce Panel Settings"
-msgstr "Ajustaments del Plafó Xfce"
+msgid "XFce Panel Settings"
+msgstr "Ajustaments del Plafó XFce"
 
 #. Appearance
 #: settings/xfce_settings_dialog.c:675
@@ -352,10 +360,9 @@ msgstr "Comportament"
 #. * %-d : day of the month, without prefixed 0
 #. * %B  : full month name
 #. * %Y  : four digit year
-#.
 #: plugins/clock/clock.c:119
 msgid "%A, %-d %B %Y"
-msgstr ""
+msgstr "%A, %-d %B %Y"
 
 #: plugins/clock/clock.c:336
 msgid "Clock type:"
@@ -395,7 +402,7 @@ msgstr "Mostra els segons:"
 
 #: plugins/clock/clock.c:585
 msgid "Xfce Clock"
-msgstr "Rellotge Xfce"
+msgstr "Rellotge XFce"
 
 #: plugins/pager/pager.c:271
 msgid "Graphical pager"
@@ -479,65 +486,3 @@ msgstr "Interval (seg):"
 msgid "Mail check"
 msgstr "Comprovació de correu"
 
-#~ msgid "Sunday"
-#~ msgstr "Diumenge"
-
-#~ msgid "Monday"
-#~ msgstr "Dilluns"
-
-#~ msgid "Tuesday"
-#~ msgstr "Dimarts"
-
-#~ msgid "Wednesday"
-#~ msgstr "Dimecres"
-
-#~ msgid "Thursday"
-#~ msgstr "Dijous"
-
-#~ msgid "Friday"
-#~ msgstr "Divendres"
-
-#~ msgid "Saturday"
-#~ msgstr "Dissabte"
-
-#~ msgid "January"
-#~ msgstr "Gener"
-
-#~ msgid "February"
-#~ msgstr "Febrer"
-
-#~ msgid "March"
-#~ msgstr "Març"
-
-#~ msgid "April"
-#~ msgstr "Abril"
-
-#~ msgid "May"
-#~ msgstr "Maig"
-
-#~ msgid "June"
-#~ msgstr "Juny"
-
-#~ msgid "July"
-#~ msgstr "Juliol"
-
-#~ msgid "August"
-#~ msgstr "Agost"
-
-#~ msgid "September"
-#~ msgstr "Setembre"
-
-#~ msgid "October"
-#~ msgstr "Octubre"
-
-#~ msgid "November"
-#~ msgstr "Novembre"
-
-#~ msgid "December"
-#~ msgstr "Decembre"
-
-#~ msgid "_Done"
-#~ msgstr "_Fet"
-
-#~ msgid "Type:"
-#~ msgstr "Tipus:"
