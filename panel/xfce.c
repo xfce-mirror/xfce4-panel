@@ -51,7 +51,7 @@ int border_width = 4;
 
 int popup_icon_size[] = { 16, 20, 24, 32 };
 
-int top_height[] = { 12, 14, 14, 16 };
+int top_height[] = { 14, 16, 16, 18 };
 
 int screen_button_width[] = { 30, 40, 80, 80 };
 
