@@ -202,8 +202,6 @@ PanelControl *panel_control_new(int side, int index)
     pc->read_config = NULL;
     pc->write_config = NULL;
 
-    pc->minimum_size = NULL;
-    
     pc->free = NULL;
 
     pc->interval = 0;
@@ -314,6 +312,8 @@ void panel_control_pack(PanelControl * pc, GtkContainer * container)
         pc->callback_id =
             g_signal_connect(pc->main, "button-press-event",
                              G_CALLBACK(panel_control_press_cb), pc);
+
+	panel_control_set_settings(pc);
     }
 }
 
@@ -373,17 +373,14 @@ void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent)
  *  These are mostly wrappers around the functions provided by a 
  *  panel control
 */
-void panel_control_minimum_size(PanelControl * pc, int size, int orientation,
-		    		int *width, int *height)
+void panel_control_set_settings(PanelControl *pc)
 {
-    if (pc->minimum_size)
-    {
-	pc->minimum_size(pc, size, orientation, width, height);
-    }
-    else
-    {
-	*width = *height = icon_size[size];
-    }
+    panel_control_set_orientation(pc, settings.size);
+    panel_control_set_size(pc, settings.size);
+    panel_control_set_style(pc, settings.style);
+
+    if (settings.theme)
+	panel_control_set_theme(pc, settings.theme);
 }
 
 void panel_control_set_orientation(PanelControl *pc, int orientation)
@@ -398,8 +395,6 @@ void panel_control_set_size(PanelControl * pc, int size)
 
     if(pc->set_size)
         pc->set_size(pc, size);
-
-    gtk_widget_set_size_request(pc->base, s, s);
 }
 
 void panel_control_set_style(PanelControl * pc, int style)

@@ -47,10 +47,6 @@ struct _PanelControl
     void (*read_config) (PanelControl * pc, xmlNodePtr node);
     void (*write_config) (PanelControl * pc, xmlNodePtr node);
 
-    /* width and height are return parameters */
-    void (*minimum_size)(PanelControl * pc, int size, int orientation,
-	    		 int *width, int *height);
-
     void (*free) (PanelControl *);
 
     int interval;
@@ -79,12 +75,12 @@ void panel_control_write_xml(PanelControl * pc, xmlNodePtr parent);
 
 void panel_control_free(PanelControl * pc);
 
-void panel_control_minimum_size(PanelControl * pc, int size, int orientation,
-		    		int *width, int *height);
-
 void panel_control_pack(PanelControl * pc, GtkContainer * container);
 
 void panel_control_unpack(PanelControl * pc);
+
+/* settings */
+void panel_control_set_settings(PanelControl *pc);
 
 void panel_control_set_orientation(PanelControl * pc, int orientation);
 
