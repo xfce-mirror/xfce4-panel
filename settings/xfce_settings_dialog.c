@@ -36,6 +36,8 @@
 #define DATADIR "/usr/local/share/xfce4"
 #endif
 
+#define BORDER 6
+
 /* panel sides / popup orientation */
 enum
 { LEFT, RIGHT, TOP, BOTTOM };
@@ -56,24 +58,21 @@ enum
 /*  Global settings
  *  ---------------
  *  size: option menu
+ *  panel orientation: option menu
  *  popup position: option menu
  *  style: option menu (should be radio buttons according to GNOME HIG)
- *  panel orientation: option menu
  *  icon theme: option menu
- *  num groups : spinbutton
- *  position: button (restore default)
+ *  position: option menu + button (centering only)
 */
 static GtkWidget *orientation_menu;
 static GtkWidget *size_menu;
 static GtkWidget *popup_position_menu;
 static GtkWidget *style_menu;
 static GtkWidget *theme_menu;
-/*static GtkWidget *groups_spin;*/
 
 static GtkWidget *layer_menu;
 static GtkWidget *pos_button;
 
-static GtkSizeGroup *sg = NULL;
 static GtkWidget *revert;
 
 static int backup_theme_index = 0;
@@ -92,15 +91,10 @@ static GtkWidget *dialog = NULL;
 char **names = xfce_settings_names;
 
 /* useful widgets */
-static void add_header(const char *text, GtkBox * box)
+static void add_section_header(const char *text, GtkBox * box)
 {
-    GtkWidget *frame, *label;
+    GtkWidget *label;
     char *markup;
-
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), header_shadow);
-    gtk_widget_show(frame);
-    gtk_box_pack_start(box, frame, FALSE, TRUE, 0);
 
     label = gtk_label_new(NULL);
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
@@ -108,10 +102,11 @@ static void add_header(const char *text, GtkBox * box)
     gtk_label_set_markup(GTK_LABEL(label), markup);
     g_free(markup);
     gtk_widget_show(label);
-    gtk_container_add(GTK_CONTAINER(frame), label);
+
+    gtk_box_pack_start(box, label, FALSE, TRUE, 0);
 }
 
-#define SKIP 12
+#define SKIP BORDER
 
 static void add_spacer(GtkBox * box)
 {
@@ -503,23 +498,16 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
     g_signal_connect(option_menu, "changed", G_CALLBACK(theme_changed), NULL);
 }
 
-static void add_style_box(GtkBox * box)
+static void add_style_box(GtkBox * box, GtkSizeGroup *sg)
 {
-    GtkWidget *frame, *vbox, *hbox, *label;
+    GtkWidget *vbox, *hbox, *label;
 
-    /* frame and vbox */
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), option_shadow);
-    gtk_widget_show(frame);
-    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
-
-    vbox = gtk_vbox_new(FALSE, 6);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
+    vbox = gtk_vbox_new(FALSE, BORDER);
     gtk_widget_show(vbox);
-    gtk_container_add(GTK_CONTAINER(frame), vbox);
+    gtk_box_pack_start(box, vbox, TRUE, TRUE, 0);
 
     /* size */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
@@ -534,24 +522,8 @@ static void add_style_box(GtkBox * box)
     add_size_menu(size_menu, xfce_options[XFCE_SIZE].data.v_int);
     gtk_box_pack_start(GTK_BOX(hbox), size_menu, TRUE, TRUE, 0);
 
-    /* style */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Panel style:"));
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    style_menu = gtk_option_menu_new();
-    gtk_widget_show(style_menu);
-    add_style_menu(style_menu, xfce_options[XFCE_STYLE].data.v_int);
-    gtk_box_pack_start(GTK_BOX(hbox), style_menu, TRUE, TRUE, 0);
-
     /* panel orientation */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
@@ -568,7 +540,7 @@ static void add_style_box(GtkBox * box)
     gtk_box_pack_start(GTK_BOX(hbox), orientation_menu, TRUE, TRUE, 0);
 
     /* popup button */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
@@ -584,8 +556,24 @@ static void add_style_box(GtkBox * box)
 	    		    xfce_options[XFCE_POPUPPOSITION].data.v_int);
     gtk_box_pack_start(GTK_BOX(hbox), popup_position_menu, TRUE, TRUE, 0);
 
+    /* style */
+    hbox = gtk_hbox_new(FALSE, BORDER);
+    gtk_widget_show(hbox);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new(_("Panel style:"));
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
+    gtk_widget_show(label);
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    style_menu = gtk_option_menu_new();
+    gtk_widget_show(style_menu);
+    add_style_menu(style_menu, xfce_options[XFCE_STYLE].data.v_int);
+    gtk_box_pack_start(GTK_BOX(hbox), style_menu, TRUE, TRUE, 0);
+
     /* icon theme */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
@@ -600,61 +588,6 @@ static void add_style_box(GtkBox * box)
     add_theme_menu(theme_menu, xfce_options[XFCE_THEME].data.v_string);
     gtk_box_pack_start(GTK_BOX(hbox), theme_menu, TRUE, TRUE, 0);
 }
-
-#if 0
-/* panel groups and screen buttons */
-static void spin_changed(GtkWidget * spin)
-{
-    int n;
-    gboolean changed = FALSE;
-    n = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin));
-
-
-    if(n != settings.num_groups)
-    {
-        panel_set_num_groups(n);
-        changed = TRUE;
-    }
-
-    if(changed)
-        gtk_widget_set_sensitive(revert, TRUE);
-}
-
-static void add_controls_box(GtkBox * box)
-{
-    GtkWidget *frame, *vbox, *hbox, *label;
-
-    /* frame and vbox */
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), option_shadow);
-    gtk_widget_show(frame);
-    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
-
-    vbox = gtk_vbox_new(FALSE, 4);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
-    gtk_widget_show(vbox);
-    gtk_container_add(GTK_CONTAINER(frame), vbox);
-
-    /* groups */
-    hbox = gtk_hbox_new(FALSE, 4);
-    gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
-
-    label = gtk_label_new(_("Panel controls:"));
-    gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
-    gtk_widget_show(label);
-    gtk_size_group_add_widget(sg, label);
-    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
-
-    groups_spin = gtk_spin_button_new_with_range(1, 2*NBGROUPS, 1);
-    gtk_widget_show(groups_spin);
-    gtk_box_pack_start(GTK_BOX(hbox), groups_spin, FALSE, FALSE, 0);
-
-    gtk_spin_button_set_value(GTK_SPIN_BUTTON(groups_spin), settings.num_groups);
-    g_signal_connect(groups_spin, "value-changed", G_CALLBACK(spin_changed),
-                     NULL);
-}
-#endif
 
 /* position */
 static void layer_changed(GtkWidget * om, gpointer data)
@@ -701,24 +634,17 @@ static void position_clicked(GtkWidget * button, GtkOptionMenu *om)
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
-static void add_position_box(GtkBox * box)
+static void add_position_box(GtkBox * box, GtkSizeGroup *sg)
 {
-    GtkWidget *frame, *vbox, *hbox, *label, *optionmenu, *menu;
+    GtkWidget *vbox, *hbox, *label, *optionmenu, *menu;
     int i;
 
-    /* frame and vbox */
-    frame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame), option_shadow);
-    gtk_widget_show(frame);
-    gtk_box_pack_start(box, frame, TRUE, TRUE, 0);
-
-    vbox = gtk_vbox_new(FALSE, 6);
-    gtk_container_set_border_width(GTK_CONTAINER(vbox), 4);
+    vbox = gtk_vbox_new(FALSE, BORDER);
     gtk_widget_show(vbox);
-    gtk_container_add(GTK_CONTAINER(frame), vbox);
+    gtk_box_pack_start(box, vbox, TRUE, TRUE, 0);
 
     /* checkbutton */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
@@ -757,7 +683,7 @@ static void add_position_box(GtkBox * box)
     g_signal_connect(layer_menu, "changed", G_CALLBACK(layer_changed), NULL);    
 
     /* centering */
-    hbox = gtk_hbox_new(FALSE, 4);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
@@ -822,6 +748,7 @@ static void dialog_response(GtkWidget *dialog, int response)
 void run_xfce_settings_dialog(McsPlugin *mp)
 {
     GtkWidget *button, *header, *hbox, *vbox, *sep;
+    GtkSizeGroup *sg;
 
     if(is_running)
     {
@@ -839,8 +766,7 @@ void run_xfce_settings_dialog(McsPlugin *mp)
                                     	 NULL, GTK_DIALOG_NO_SEPARATOR, NULL);
 
     gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    gtk_container_set_border_width(GTK_CONTAINER(dialog), 4);
+    gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
 
     revert = mixed_button_new(GTK_STOCK_UNDO, _("_Revert"));
     gtk_widget_show(revert);
@@ -858,25 +784,25 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     /* pretty header */
     vbox = GTK_DIALOG(dialog)->vbox;
     header = create_header(mp->icon, _("XFce Panel Settings"));
-    gtk_box_pack_start(GTK_BOX(vbox), header, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), header, FALSE, TRUE, 0);
+    
     add_spacer(GTK_BOX(vbox));
  
     /* hbox */
-    hbox = gtk_hbox_new(FALSE, 8);
+    hbox = gtk_hbox_new(FALSE, BORDER);
     gtk_widget_show(hbox);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
-                       TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, TRUE, TRUE, 0);
 
     /* Appearance */
-    vbox = gtk_vbox_new(FALSE, 8);
+    vbox = gtk_vbox_new(FALSE, BORDER);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), BORDER);
     gtk_widget_show(vbox);
     gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    add_header(_("Appearance"), GTK_BOX(vbox));
-    add_style_box(GTK_BOX(vbox));
-    add_spacer(GTK_BOX(vbox));
+    add_section_header(_("Appearance"), GTK_BOX(vbox));
+    add_style_box(GTK_BOX(vbox), sg);
 
     g_object_unref(sg);
 
@@ -884,17 +810,17 @@ void run_xfce_settings_dialog(McsPlugin *mp)
     sep = gtk_vseparator_new();
     gtk_widget_show(sep);
     gtk_box_pack_start(GTK_BOX(hbox), sep, TRUE, TRUE, 0);
-    
+ 
     /* Position */
-    vbox = gtk_vbox_new(FALSE, 8);
+    vbox = gtk_vbox_new(FALSE, BORDER);
+    gtk_container_set_border_width(GTK_CONTAINER(vbox), BORDER);
     gtk_widget_show(vbox);
     gtk_box_pack_start(GTK_BOX(hbox), vbox, FALSE, FALSE, 0);
 
     sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
-    add_header(_("Position"), GTK_BOX(vbox));
-    add_position_box(GTK_BOX(vbox));
-/*    add_spacer(GTK_BOX(vbox));*/
+    add_section_header(_("Position"), GTK_BOX(vbox));
+    add_position_box(GTK_BOX(vbox), sg);
 
     g_object_unref(sg);
 
