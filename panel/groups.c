@@ -40,6 +40,7 @@
 
 static GSList *group_list = NULL;
 static GSList *removed_list = NULL;
+static GtkArrowType popup_arrow_type = GTK_ARROW_UP;
 
 static GtkBox *groupbox;
 
@@ -659,3 +660,28 @@ groups_set_num_groups (int n)
 	settings.num_groups--;
     }
 }
+
+/* arrow direction */
+
+void
+groups_set_arrow_direction (GtkArrowType type)
+{
+    GSList *li;
+    PanelGroup *group;
+
+    popup_arrow_type = type;
+ 
+    for (li = group_list; li; li = li->next)
+    {
+	group = li->data;
+ 
+	panel_popup_set_arrow_type (group->popup, type);
+    }
+}
+ 
+GtkArrowType
+groups_get_arrow_direction (void)
+{
+    return popup_arrow_type;
+}
+
