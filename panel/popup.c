@@ -265,27 +265,24 @@ void create_menu_item(MenuItem * mi)
 
     gtk_widget_show_all(mi->button);
 
+    if(mi->tooltip && strlen(mi->tooltip))
+	add_tooltip(mi->button, mi->tooltip);
+    else if (mi->command && strlen(mi->command))
+	add_tooltip(mi->button, mi->command);
+    else
+	add_tooltip(mi->button, _("Click Mouse 3 to change item"));
+
     /* signals */
     g_signal_connect(mi->button, "button-press-event",
                      G_CALLBACK(menu_item_press), mi);
 
-    if(mi->command && strlen(mi->command))
-    {
-        g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb),
-                         mi);
+    g_signal_connect(mi->button, "clicked", G_CALLBACK(menu_item_click_cb),
+		     mi);
 
-        if(mi->tooltip && strlen(mi->tooltip))
-            add_tooltip(mi->button, mi->tooltip);
-        else
-            add_tooltip(mi->button, mi->command);
+    dnd_set_drag_dest(mi->button);
 
-        dnd_set_drag_dest(mi->button);
-
-        g_signal_connect(mi->button, "drag_data_received",
-                         G_CALLBACK(menu_item_drop_cb), mi);
-    }
-    else
-        add_tooltip(mi->button, _("Click Mouse 3 to change item"));
+    g_signal_connect(mi->button, "drag_data_received",
+		     G_CALLBACK(menu_item_drop_cb), mi);
 
     menu_item_set_popup_size(mi, settings.popup_size);
     menu_item_set_style(mi, settings.style);
@@ -294,24 +291,42 @@ void create_menu_item(MenuItem * mi)
 /*  Popup menus 
  *  -----------
 */
+static void set_popup_window_properties(GtkWidget *win)
+{
+    GtkWindow *window = GTK_WINDOW(win);
+    GdkPixbuf *pb;
+    
+    gtk_window_set_decorated(window, FALSE);
+    gtk_window_set_resizable(window, FALSE);
+    gtk_window_stick(window);
+    gtk_window_set_title(window, " ");
+    gtk_window_set_transient_for(window, GTK_WINDOW(toplevel));
+    gtk_window_set_type_hint(window, GDK_WINDOW_TYPE_HINT_MENU);
+
+    pb = get_system_pixbuf(MENU_ICON);
+    gtk_window_set_icon(window, pb);
+    g_object_unref(pb);
+
+    if (settings.on_top)
+	set_window_type_dock(window, settings.on_top);
+    
+    /* don't care about decorations when calculating position */
+    gtk_window_set_gravity(window, GDK_GRAVITY_STATIC);
+}
+
 PanelPopup *create_panel_popup(void)
 {
     PanelPopup *pp = g_new(PanelPopup, 1);
-    GdkPixbuf *pb;
     GtkWidget *sep;
 
-    pp->up = NULL; /* get_system_pixbuf(UP_ICON);*/
-    pp->down = NULL; /* get_system_pixbuf(DOWN_ICON);*/
+    pp->up = NULL;
+    pp->down = NULL;
 
     /* the button */
     pp->button = gtk_toggle_button_new();
     gtk_button_set_relief(GTK_BUTTON(pp->button), GTK_RELIEF_NONE);
-/*    gtk_widget_set_size_request(pp->button,
-                                top_height[settings.size], 
-				icon_size[settings.size] + border_width);
-*/
+
     pp->image = gtk_image_new();
-/*    gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->up);*/
     gtk_container_add(GTK_CONTAINER(pp->button), pp->image);
 
     gtk_widget_show_all(pp->button);
@@ -320,22 +335,7 @@ PanelPopup *create_panel_popup(void)
     pp->hgroup = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
 
     pp->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_decorated(GTK_WINDOW(pp->window), FALSE);
-    gtk_window_set_resizable(GTK_WINDOW(pp->window), FALSE);
-    gtk_window_stick(GTK_WINDOW(pp->window));
-    gtk_window_set_title(GTK_WINDOW(pp->window), "");
-    gtk_window_set_transient_for(GTK_WINDOW(pp->window), GTK_WINDOW(toplevel));
-    gtk_window_set_type_hint(GTK_WINDOW(pp->window), GDK_WINDOW_TYPE_HINT_MENU);
-
-    pb = get_system_pixbuf(MENU_ICON);
-    gtk_window_set_icon(GTK_WINDOW(pp->window), pb);
-    g_object_unref(pb);
-
-    if (settings.on_top)
-	set_window_type_dock(GTK_WINDOW(pp->window), settings.on_top);
-    
-    /* don't care about decorations when calculating position */
-    gtk_window_set_gravity(GTK_WINDOW(pp->window), GDK_GRAVITY_STATIC);
+    set_popup_window_properties(pp->window);
 
     pp->frame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(pp->frame), GTK_SHADOW_OUT);

@@ -311,6 +311,8 @@ void create_clock(PanelControl * pc)
     pc->set_style = (gpointer) clock_set_style;
 
     pc->add_options = (gpointer) clock_add_options;
+
+    adjust_time(pc);
 }
 
 /*  Trash module

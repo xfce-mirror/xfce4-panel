@@ -881,6 +881,8 @@ void menu_item_add_options(MenuItem * item, GtkContainer * container)
     if(num_items > 1)
         gtk_spin_button_set_value(GTK_SPIN_BUTTON(pos_spin),
                                   (gfloat) backup.pos + 1);
+
+    menu_item_apply_options();
 }
 
 /*  Menu item dialogs
