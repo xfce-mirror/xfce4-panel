@@ -139,7 +139,7 @@ get_opacity_setting (void)
 
             while (fgets(line, sizeof (line), fp))
             {
-                if (sscanf (line, "panel=%u", &trans) > 0)
+                if (sscanf (line, "panel = %u", &trans) > 0)
                 {
                     trans = CLAMP (trans, 0, 80);
 
