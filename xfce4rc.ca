@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<Xfce>
+  <Panel orientation="0" layer="0" size="1" popupposition="1" icontheme="Curve" groups="15">
+  </Panel>
+  <Groups>
+    <Group>
+      <Popup>
+        <Item>
+          <Caption>Terminal</Caption>
+          <Command term="0" sn="0">xfterm4</Command>
+          <Tooltip>Terminal</Tooltip>
+          <Icon id="12"/>
+        </Item>
+      </Popup>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="0">xfterm4</Command>
+        <Tooltip>Terminal</Tooltip>
+        <Icon id="12"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup>
+        <Item>
+          <Caption>Konqueror</Caption>
+          <Command term="0" sn="0">konqueror</Command>
+          <Tooltip>Gestor de fitxers konqueror</Tooltip>
+          <Icon id="2"/>
+        </Item>
+        <Item>
+          <Caption>Nautilus</Caption>
+          <Command term="0" sn="0">nautilus</Command>
+          <Tooltip>Gestor de fitxers nautlius</Tooltip>
+          <Icon id="2"/>
+        </Item>
+      </Popup>
+      <Control id="-2" popup="1">
+        <Command term="0" sn="1">xffm</Command>
+        <Tooltip>Gestor de fitxers</Tooltip>
+        <Icon id="2"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup>
+        <Item>
+          <Caption>Galeon</Caption>
+          <Command term="0" sn="0">galeon</Command>
+          <Tooltip>Navegador</Tooltip>
+          <Icon id="7"/>
+        </Item>
+      </Popup>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="0">mozilla</Command>
+        <Tooltip>Navegador mozilla</Tooltip>
+        <Icon id="7"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libmailcheck.so">
+        <Mailcheck interval="30">
+          <Command term="0" sn="0">mozilla -mail</Command>
+        </Mailcheck>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="0">xmms</Command>
+        <Tooltip>Reproductor de música</Tooltip>
+        <Icon id="6"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libseparator.so"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libpager.so"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libseparator.so"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="0">xfce-setting-show</Command>
+        <Tooltip>Ajustaments</Tooltip>
+        <Icon id="3"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup>
+        <Item>
+          <Caption>Gestió d'impressores</Caption>
+          <Command term="0" sn="0">xfprint-manager</Command>
+          <Tooltip>Gestió d'impressores</Tooltip>
+          <Icon id="9"/>
+        </Item>
+      </Popup>
+      <Control id="-2" popup="1">
+        <Command term="0" sn="1">xfprint4</Command>
+        <Tooltip>Arrossegueu per imprimir</Tooltip>
+        <Icon id="9"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-2" popup="0">
+        <Command term="0" sn="0">xfhelp4</Command>
+        <Tooltip>Manual</Tooltip>
+        <Icon id="5"/>
+      </Control>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libseparator.so"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libsystembuttons.so" button1="1" button2="1" showtwo="0"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libseparator.so"/>
+    </Group>
+    <Group>
+      <Popup/>
+      <Control id="-1" filename="libclock.so">
+        <XfceClock Clock_type="2" Toggle_military="1" Toggle_am_pm="1" Toggle_secs="0"/>
+      </Control>
+    </Group>
+  </Groups>
+</Xfce>

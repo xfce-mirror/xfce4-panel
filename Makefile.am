@@ -1,12 +1,12 @@
 @SET_MAKE@
 
 confdir = $(sysconfdir)/xfce4
-conf_DATA = xfce4rc xfce4rc.nl
+conf_DATA = xfce4rc xfce4rc.nl xfcerc.ca
 
 EXTRA_DIST = 								\
 	HACKING								\
 	NOTES								\
-	xfce4rc							\
+	$(conf_DATA)							\
 	xfce4.spec							\
 	.indent.pro
 
