@@ -598,7 +598,12 @@ panel_set_orientation (int orientation)
 
     hidden = settings.autohide;
     if (hidden)
+    {
 	panel_set_autohide(FALSE);
+
+	while (gtk_events_pending())
+	    gtk_main_iteration();
+    }
     
     hide_current_popup_menu ();
 
@@ -611,9 +616,6 @@ panel_set_orientation (int orientation)
 
     groups_pack (GTK_BOX (panel.group_box));
     groups_set_orientation (orientation);
-
-    while(gtk_events_pending())
-	gtk_main_iteration();
 
     panel.position.x = panel.position.y = -1;
     panel_set_position ();
