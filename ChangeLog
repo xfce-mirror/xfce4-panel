@@ -1,3 +1,386 @@
+2003-07-05 14:31  xfce
+
+	* Makefile.in, ltconfig: Remove ltconfig script as it is generated
+
+2003-07-05 10:41  huysmans
+
+	* plugins/mailcheck/mailcheck.c: Renew timeout after reading the
+	config file. Patch by Bernhard Walle.
+
+2003-07-05 01:37  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, ltcf-c.sh,
+	ltmain.sh, doc/Makefile.in, doc/C/Makefile.in,
+	doc/C/images/Makefile.in, icons/Makefile.in, panel/Makefile.in,
+	plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	plugins/separator/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: libttol update and all
+
+2003-07-04 18:55  bmeurer
+
+	* po/: de.gmo, de.po: Small fix.
+
+2003-07-03 22:24  xfce
+
+	* plugins/separator/separator.c, po/es_MX.gmo, po/fr.gmo, po/fr.po:
+	Tweak new separator plugin and update frnech po
+
+2003-07-03 20:16  edscott
+
+	* po/: es.po, es_MX.po: spanish tranlation updates for 4.0 release.
+
+2003-07-03 14:36  huysmans
+
+	* po/: de.gmo, de.po: Update German translations
+
+2003-07-03 14:28  huysmans
+
+	* po/: fi.gmo, fi.po: Update finish translation
+
+2003-07-03 14:20  huysmans
+
+	* plugins/separator/separator.c: Make separator 80%
+
+2003-07-03 12:12  huysmans
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	ltcf-c.sh, ltconfig, ltmain.sh, xfce4rc, doc/Makefile.in,
+	doc/C/Makefile.in, doc/C/xfce4-panel.html, doc/C/xfce4-panel.xml,
+	doc/C/images/Makefile.in, doc/C/images/default_panel.png,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.am,
+	plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/mailcheck/mailcheck.c,
+	plugins/pager/Makefile.in, plugins/pager/pager.c,
+	plugins/separator/Makefile.am, plugins/separator/Makefile.in,
+	plugins/separator/separator.c, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in,
+	plugins/systembuttons/systembuttons.c, po/POTFILES.in, po/ca.gmo,
+	po/ca.po, po/de.gmo, po/de.po, po/es.gmo, po/es.po, po/es_MX.gmo,
+	po/es_MX.po, po/fi.gmo, po/fi.po, po/fr.gmo, po/fr.po, po/hi.gmo,
+	po/hi.po, po/ja.gmo, po/ja.po, po/ms.gmo, po/ms.po, po/nl.gmo,
+	po/nl.po, po/pl.gmo, po/pl.po, po/ru.gmo, po/ru.po, po/ta.gmo,
+	po/ta.po, po/tr.gmo, po/tr.po, po/xfce4-panel.pot, po/zh_CN.gmo,
+	po/zh_CN.po, settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add separator.
+	Remove separators from pager. Several smaller fixes to plugins.
+	Update docs.
+
+2003-07-02 10:29  huysmans
+
+	* doc/C/images/panel-settings.png: Update image for panel settings
+
+2003-06-29 22:05  huysmans
+
+	* plugins/systembuttons/systembuttons.c: Fix systembutton sizing.
+	Patch by Michael Mosier
+
+2003-06-28 11:46  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, ltmain.sh,
+	doc/Makefile.in, doc/C/Makefile.in, doc/C/images/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Update to libtool-1.5 Use proper complete
+	CURRENT:REVISION:AGE scheme for lib versionning
+
+2003-06-21 21:22  bmeurer
+
+	* po/xfce4-panel.pot: Updates.
+
+2003-06-21 20:03  bmeurer
+
+	* configure, configure.ac: Fixes.
+
+2003-06-21 19:58  bmeurer
+
+	* configure, configure.ac: Fixes.
+
+2003-06-21 19:21  bmeurer
+
+	* po/: de.gmo, de.po: Fixed problem with June->Juni translation.
+
+2003-06-21 19:14  bmeurer
+
+	* HACKING, aclocal.m4, configure, po/de.gmo, po/de.po: Updated
+	german translations.
+
+2003-06-21 18:58  bmeurer
+
+	* aclocal.m4, configure, configure.ac, po/nl.gmo,
+	po/xfce4-panel.pot: version -> 3.91.0
+
+2003-06-21 18:55  bmeurer
+
+	* configure.ac: Updated version numbers.
+
+2003-06-18 22:36  xfce
+
+	* panel/controls_dialog.c, panel/item_dialog.c,
+	settings/xfce_settings_dialog.c: Call gtk_window_set_position () as
+	late at possible as it seems there is a race cond in gtk+
+
+2003-06-15 14:21  bmeurer
+
+	* TODO: Added note about libxfce4util.
+
+2003-06-15 14:20  bmeurer
+
+	* panel/xfce_support.c: Added a patch to improve the responsiveness
+	of the UI by executing commands when the main loop is idle instead
+	of executing them directly on button click.
+
+2003-06-14 23:53  bmeurer
+
+	* panel/main.c, settings/xfce_settings_dialog.c,
+	settings/xfce_settings_plugin.c: Introduced xfce_textdomain()
+
+2003-06-14 18:03  xfce
+
+	* panel/controls_dialog.c, panel/item_dialog.c,
+	settings/xfce_settings_dialog.c: Revert the GTK_POS_WINDOW_CENTER
+
+2003-06-14 01:57  xfce
+
+	* panel/controls_dialog.c, panel/item_dialog.c,
+	settings/xfce_settings_dialog.c: Use GTK_WIN_POS_CENTER_ALWAYS
+	instead of GTK_WIN_POS_CENTER when centering dialogs
+
+2003-06-14 00:32  bmeurer
+
+	* m4/i18n.m4, configure, aclocal.m4: Fixed
+	bind_textdomain_codeset() problem on linux.
+
+2003-06-12 22:26  bmeurer
+
+	* settings/: xfce_settings_dialog.c, xfce_settings_plugin.c: Fixes
+	bind_textdomain_codeset()
+
+2003-06-10 23:49  bmeurer
+
+	* Makefile.in, aclocal.m4, config.guess, config.h.in, config.sub,
+	configure, install-sh, ltcf-c.sh, ltconfig, ltmain.sh,
+	doc/Makefile.in, doc/C/Makefile.in, doc/C/images/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: automake 1.7.5
+
+2003-06-10 23:34  xfce
+
+	* panel/xfce_support.c: Add test for bind_textdomain_codeset() Use
+	xftree4 as viewer on dirs unless "Open in terminal" is checked
+
+2003-06-10 23:19  bmeurer
+
+	* panel/main.c: Fixed bind_textdomain_codeset() problem
+
+2003-06-10 23:14  xfce
+
+	* panel/: item_dialog.c, xfce_support.c: Add support for
+	directories as launchers in panel and add extra check for icons
+
+2003-06-10 22:19  bmeurer
+
+	* panel/: controls.c, controls_dialog.c, groups.c: Make
+	--enable-debug=full work.
+
+2003-06-10 01:38  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	doc/Makefile.in, doc/C/Makefile.in, doc/C/images/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	settings/xfce_settings_dialog.c, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add new widget
+	xfce_framebox to unify look across UI Migrate all plugins to this
+	new widget
+
+2003-06-08 21:06  huysmans
+
+	* panel/global.h: Make Curve the fallback icon theme instead of
+	XFce
+
+2003-06-08 16:29  huysmans
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	doc/Makefile.in, doc/C/Makefile.in, doc/C/images/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, po/ru.gmo, po/ru.po,
+	settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add russian
+	translation and fix xfdesktop not reading a new local menu
+
+2003-06-08 15:51  bmeurer
+
+	* panel/icons.c: Prefer SVG over PNG.
+
+2003-06-07 14:58  bmeurer
+
+	* panel/icons.c: Added .svg support for themes. (librsvg provides a
+	gdk-pixbuf loader), pointed out by keke@plskthx.org
+
+2003-06-06 23:36  xfce
+
+	* Makefile.in, aclocal.m4, config.h.in, configure, configure.ac,
+	doc/Makefile.in, doc/C/Makefile.in, doc/C/images/Makefile.in,
+	icons/Makefile.in, panel/Makefile.in, plugins/Makefile.in,
+	plugins/clock/Makefile.in, plugins/mailcheck/Makefile.in,
+	plugins/pager/Makefile.in, plugins/switcher/Makefile.in,
+	plugins/systembuttons/Makefile.in, settings/Makefile.in,
+	themes/Makefile.in, themes/Crystal/Makefile.in,
+	themes/Curve/Makefile.in, themes/FreeIcons/Makefile.in,
+	themes/Gnome/Makefile.in, themes/Noia/Makefile.in,
+	themes/XFce/Makefile.in: Versionning scheme
+
+2003-06-06 17:46  huysmans
+
+	* po/: ca.gmo, ca.po, de.gmo, de.po, es.gmo, es.po, es_MX.gmo,
+	es_MX.po, fi.gmo, fi.po, fr.gmo, fr.po, hi.gmo, hi.po, ja.gmo,
+	ja.po, ms.gmo, ms.po, nl.gmo, nl.po, pl.gmo, pl.po, ta.gmo, ta.po,
+	tr.gmo, tr.po, xfce4-panel.pot, zh_CN.gmo, zh_CN.po: final
+	update-po before beta 1
+
+2003-06-05 23:48  huysmans
+
+	* doc/C/: xfce4-panel.html, xfce4-panel.xml: Doc fixes assorti
+
+2003-06-05 11:08  huysmans
+
+	* doc/C/images/: handle-popup.png, item-popup.png: Updated images
+
+2003-06-05 09:28  huysmans
+
+	* po/: de.gmo, de.po: Updated translations and multiple file drop
+	on backdrop list manager
+
+2003-06-03 16:54  huysmans
+
+	* doc/C/: xfce4-panel.html, xfce4-panel.xml: Remove revision
+	history
+
+2003-06-02 20:18  huysmans
+
+	* xfce4rc: Fix empty menu item
+
+2003-06-02 19:56  huysmans
+
+	* doc/C/images/default_panel.png: Update default panel image
+
+2003-06-02 17:44  huysmans
+
+	* xfce4rc: change some defaults
+
+2003-06-01 23:27  huysmans
+
+	* po/: fi.gmo, fi.po: Update fi translations and specfile fix
+
+2003-05-30 22:36  huysmans
+
+	* configure, configure.ac, po/ms.gmo, po/ms.po: Add malayan
+	translations
+
+2003-05-30 21:24  huysmans
+
+	* configure, configure.ac: Build only static libs
+
+2003-05-30 10:50  huysmans
+
+	* doc/C/images/: Makefile.am, Makefile.in: Small tweaks to build
+	files
+
+2003-05-29 14:53  huysmans
+
+	* doc/xfce-nochunk.xsl: improve stylesheet import
+
+2003-05-29 14:35  huysmans
+
+	* po/: ca.gmo, ca.po: Update catalan translations
+
+2003-05-29 13:54  huysmans
+
+	* plugins/mailcheck/mailcheck.c: Fix crash with empty command
+
+2003-05-29 11:55  huysmans
+
+	* plugins/mailcheck/mailcheck.c, po/ja.gmo, po/nl.po: Translations
+	update
+
+2003-05-27 23:29  xfce
+
+	* po/ja.po: Add Japanese translation by Zhao-Ji <zhao-ji at awz dot
+	ne dot jp>
+
+2003-05-21 23:42  huysmans
+
+	* configure, configure.ac, po/hi.gmo, po/hi.po, po/tr.gmo,
+	po/tr.po: Add Turkish translations
+
+2003-05-17 10:43  huysmans
+
+	* .indent.pro, HACKING, icons/xfce4-panel-icon.h, panel/controls.c,
+	panel/controls.h, panel/controls_dialog.c, panel/controls_dialog.h,
+	panel/global.h, panel/groups.c, panel/groups.h, panel/icons.c,
+	panel/icons.h, panel/item.c, panel/item_dialog.c,
+	panel/item_dialog.h, panel/main.c, panel/mcs_client.c,
+	panel/panel.c, panel/panel.h, panel/plugins.h, panel/popup.c,
+	panel/popup.h, panel/settings.c, panel/xfce_support.c,
+	panel/xfce_support.h, plugins/clock/clock.c,
+	plugins/mailcheck/mailcheck.c, plugins/pager/pager.c,
+	plugins/switcher/switcher.c, plugins/systembuttons/systembuttons.c,
+	settings/xfce_settings_dialog.c, settings/xfce_settings_plugin.c:
+	Reindent using Olivier's new .indent.pro file
+
+2003-05-16 20:19  huysmans
+
+	* Makefile.in, aclocal.m4, config.guess, config.sub, configure,
+	configure.ac, doc/Makefile.in, doc/C/Makefile.in,
+	doc/C/images/Makefile.in, icons/Makefile.in, panel/Makefile.in,
+	plugins/Makefile.in, plugins/clock/Makefile.in,
+	plugins/mailcheck/Makefile.in, plugins/pager/Makefile.in,
+	plugins/switcher/Makefile.in, plugins/systembuttons/Makefile.in,
+	po/ta.gmo, po/ta.po, settings/Makefile.in, themes/Makefile.in,
+	themes/Crystal/Makefile.in, themes/Curve/Makefile.in,
+	themes/FreeIcons/Makefile.in, themes/Gnome/Makefile.in,
+	themes/Noia/Makefile.in, themes/XFce/Makefile.in: Add tamil
+	translations
+
+2003-05-15 15:25  huysmans
+
+	* doc/C/: xfce4-panel.html, xfce4-panel.xml: documentation fixes
+	(2)
+
+2003-05-15 15:22  huysmans
+
+	* doc/C/: xfce4-panel.html, xfce4-panel.xml: documentation fixes
+
+2003-05-15 13:03  huysmans
+
+	* ChangeLog: Mass update of ChangeLogs
+
 2003-05-14 07:50  huysmans
 
 	* po/: fi.gmo, fi.po: update finnish translations
