@@ -44,6 +44,8 @@
 typedef struct _PanelGroup PanelGroup;
 
 static GList *group_list = NULL;
+static GList *removed_list = NULL;
+
 static GtkBox *groupbox;
 
 /*  Panel group
@@ -238,7 +240,9 @@ void side_panel_cleanup(int side)
     }
 
     g_list_free(group_list);
+    g_list_free(removed_list);
     group_list = NULL;
+    removed_list = NULL;
 }
 
 void side_panel_set_size(int side, int size)
@@ -435,11 +439,14 @@ void side_panel_set_from_xml(int side, xmlNodePtr node)
 
 void side_panel_set_num_groups(int n)
 {
-    int i;
+    int i, len, max;
     GList *li;
     PanelGroup *group;
 
-    for(i = 0, li = group_list; i < n ||li; i++)
+    len = g_list_length(group_list);
+    max = (n > len) ? n : len;
+    
+    for(i = 0, li = group_list; i < max; i++)
     {
 	group = li ? li->data : NULL;
 	
@@ -447,24 +454,44 @@ void side_panel_set_num_groups(int n)
         {
             if(!group)
             {
-                group = create_panel_group(i);
-                panel_group_pack(group, groupbox);
+		if (removed_list)
+		{
+		    group = removed_list->data;
+		    removed_list = g_list_delete_link(removed_list, removed_list);
+		    
+		    panel_group_pack(group, groupbox);
+		    group_list = g_list_append(group_list, group);
+		    
+		    panel_group_arrange(group, settings.popup_position);
+		}
+		else
+		{
+		    group = create_panel_group(i);
+		    panel_group_pack(group, groupbox);
+		    group_list = g_list_append(group_list, group);
 
-		group_list = g_list_append(group_list, group);
+		    group->popup = create_panel_popup();
 
-                group->popup = create_panel_popup();
+		    group->control = panel_control_new(i);
+		    create_panel_control(group->control);
 
-                group->control = panel_control_new(i);
-                create_panel_control(group->control);
-
-		panel_group_arrange(group, settings.popup_position);
+		    panel_group_arrange(group, settings.popup_position);
+		}
             }
 
 	    gtk_widget_show(group->base);
         }
         else if(group)
         {
-            gtk_widget_hide(group->base);
+	    GList *li2;
+	    
+            panel_group_unpack(group, GTK_CONTAINER(groupbox));
+
+	    li2 = li;
+	    li = li->prev;
+
+	    group_list = g_list_remove_link(group_list, li2);
+	    removed_list = g_list_prepend(removed_list, group);
         }
 
 	if (li)

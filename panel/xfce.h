@@ -38,7 +38,7 @@ void panel_reorient(void);
 void panel_set_size(int size);
 void panel_set_popup_position(int position);
 void panel_set_orientation(int orientation);
-void panel_set_on_top(gboolean on_top);
+void panel_set_layer(int layer);
 
 void panel_set_style(int size);
 void panel_set_theme(const char *theme);

@@ -116,6 +116,14 @@ enum
     CENTRAL	/* still special case so > NUM_BUILTINS */
 };
 
+/* panel layer */
+enum
+{
+    ABOVE,
+    NORMAL,
+    BELOW
+};
+
 /* typedefs */
 typedef struct _ScreenButton ScreenButton;
 typedef struct _PanelControl PanelControl;
@@ -137,7 +145,7 @@ struct _Position
 struct _Settings
 {
     int orientation;
-    gboolean on_top;
+    int layer;
 
     int size;
     int popup_position;

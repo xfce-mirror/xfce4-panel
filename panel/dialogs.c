@@ -136,7 +136,7 @@ static GtkWidget *buttons_checkbox;
 static GtkWidget *minibuttons_checkbox;
 
 static GtkWidget *screens_spin;
-static GtkWidget *ontop_checkbox;
+static GtkWidget *layer_menu;
 static GtkWidget *pos_button;
 static GtkWidget *lock_entry;
 static GtkWidget *exit_entry;
@@ -169,7 +169,7 @@ static void create_backup(void)
     backup.show_desktop_buttons = settings.show_desktop_buttons;
     backup.show_minibuttons = settings.show_minibuttons;
     backup.show_central = settings.show_central;
-    backup.on_top = settings.on_top;
+    backup.layer = settings.layer;
 /*    backup.lock_command = g_strdup(settings.lock_command);
     backup.exit_command = g_strdup(settings.exit_command);*/
 }
@@ -209,8 +209,7 @@ static void restore_backup(void)
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(central_checkbox),
                                  backup.show_central);
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ontop_checkbox),
-                                 backup.on_top);
+    gtk_option_menu_set_history(GTK_OPTION_MENU(layer_menu), backup.layer);
 
 /*    if(backup.lock_command)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
@@ -886,11 +885,14 @@ static void add_controls_box(GtkBox * box)
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /* position */
-static void ontop_changed(GtkToggleButton * button, gpointer data)
+static void layer_changed(GtkWidget * om, gpointer data)
 {
-    gboolean ontop = gtk_toggle_button_get_active(button);
+    int layer = gtk_option_menu_get_history(GTK_OPTION_MENU(om));
 
-    panel_set_on_top(ontop);
+    if (settings.layer == layer)
+	return;
+    
+    panel_set_layer(layer);
     gtk_widget_set_sensitive(revert, TRUE);
 }
 
@@ -962,20 +964,37 @@ static void add_position_box(GtkBox * box)
     gtk_widget_show(hbox);
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
-    label = gtk_label_new(_("Keep panel on top:"));
+    label = gtk_label_new(_("Panel layer:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     gtk_widget_show(label);
     gtk_size_group_add_widget(sg, label);
     gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
 
-    ontop_checkbox = gtk_check_button_new();
-    gtk_widget_show(ontop_checkbox);
-    gtk_box_pack_start(GTK_BOX(hbox), ontop_checkbox, FALSE, FALSE, 0);
+    layer_menu = gtk_option_menu_new();
+    gtk_widget_show(layer_menu);
+    gtk_box_pack_start(GTK_BOX(hbox), layer_menu, FALSE, FALSE, 0);
 
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ontop_checkbox),
-                                 settings.on_top);
-    g_signal_connect(ontop_checkbox, "toggled",
-                     G_CALLBACK(ontop_changed), NULL);
+    menu = gtk_menu_new();
+    gtk_option_menu_set_menu(GTK_OPTION_MENU(layer_menu), menu);
+
+    {
+	GtkWidget *mi;
+
+	mi = gtk_menu_item_new_with_label(_("Top"));
+	gtk_widget_show(mi);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+
+	mi = gtk_menu_item_new_with_label(_("Normal"));
+	gtk_widget_show(mi);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+
+	mi = gtk_menu_item_new_with_label(_("Bottom"));
+	gtk_widget_show(mi);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), mi);
+    }
+    
+    gtk_option_menu_set_history(GTK_OPTION_MENU(layer_menu), settings.layer);
+    g_signal_connect(layer_menu, "changed", G_CALLBACK(layer_changed), NULL);    
 
     /* centering */
     hbox = gtk_hbox_new(FALSE, 4);

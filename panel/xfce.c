@@ -120,7 +120,7 @@ static GtkWidget *create_panel_window(void)
     g_signal_connect(w, "destroy-event", G_CALLBACK(panel_destroy_cb), NULL);
     g_signal_connect(w, "delete-event", G_CALLBACK(panel_delete_cb), NULL);
 
-    if(settings.on_top)
+    if(settings.layer == ABOVE)
         set_window_type_dock(w, TRUE);
 
     return w;
@@ -223,11 +223,17 @@ void panel_set_orientation(int orientation)
     panel_set_popup_position(settings.popup_position);
 }
 
-void panel_set_on_top(gboolean on_top)
+void panel_set_layer(int layer)
 {
-    settings.on_top = on_top;
+    gboolean on_top = FALSE;
+    
+    settings.layer = layer;
 
+    if (layer == ABOVE)
+	on_top = TRUE;
+    
     set_window_type_dock(toplevel, on_top);
+
     side_panel_set_on_top(LEFT, on_top);
     side_panel_set_on_top(RIGHT, on_top);
 }
@@ -360,12 +366,12 @@ void init_settings(void)
     position.x = -1;
     position.y = -1;
 
+    settings.orientation = HORIZONTAL;
+    settings.layer = ABOVE;
     settings.size = SMALL;
     settings.popup_position = TOP;
     settings.style = NEW_STYLE;
-    settings.orientation = HORIZONTAL;
     settings.theme = NULL;
-    settings.on_top = TRUE;
 
     settings.num_screens = 4;
     settings.num_groups = 8;
@@ -483,6 +489,7 @@ void panel_parse_xml(xmlNodePtr node)
 
     g_free(value);
 
+    /* old setting, use it as fallback; superceded by "layer" */
     value = xmlGetProp(node, (const xmlChar *)"ontop");
 
     if(value)
@@ -490,12 +497,24 @@ void panel_parse_xml(xmlNodePtr node)
         n = atoi(value);
 
         if(n == 1)
-            settings.on_top = TRUE;
+            settings.layer = ABOVE;
         else
-            settings.on_top = FALSE;
+            settings.layer = NORMAL;
+
+	g_free(value);
     }
 
-    g_free(value);
+    value = xmlGetProp(node, (const xmlChar *)"layer");
+
+    if(value)
+    {
+        n = atoi(value);
+
+        if(n >= ABOVE && n <= BELOW)
+            settings.layer = n;
+
+	g_free(value);
+    }
 
     value = xmlGetProp(node, (const xmlChar *)"left");
 
@@ -657,8 +676,8 @@ void panel_write_xml(xmlNodePtr root)
     if(settings.theme)
         xmlSetProp(node, "icontheme", settings.theme);
 
-    snprintf(value, 2, "%d", settings.on_top);
-    xmlSetProp(node, "ontop", value);
+    snprintf(value, 2, "%d", settings.layer);
+    xmlSetProp(node, "layer", value);
 
     snprintf(value, 3, "%d", settings.central_index);
     xmlSetProp(node, "left", value);
