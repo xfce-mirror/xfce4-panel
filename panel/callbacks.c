@@ -39,33 +39,16 @@ static PanelPopup *open_popup = NULL;
 void hide_current_popup_menu(void);
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Panel callbacks
-
+  Panel callbacks
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
 gboolean panel_delete_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
 {
-    GtkWidget *dialog;
-    int response;
     char *text = _("The panel recieved a request from the window "
                    "manager to quit. Usually this is by accident.\n"
                    "If you want to continue using the panel choose "
                    "\'No\'\n\n" "Do you want to quit the panel?");
 
-    hide_current_popup_menu();
-
-    dialog = gtk_message_dialog_new(GTK_WINDOW(window),
-                                    GTK_DIALOG_MODAL |
-                                    GTK_DIALOG_DESTROY_WITH_PARENT,
-                                    GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, text);
-
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-
-    response = gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
-
-    if(response == GTK_RESPONSE_YES)
+    if(confirm(text, GTK_STOCK_QUIT, NULL))
         quit();
 
     return TRUE;
@@ -79,19 +62,16 @@ gboolean panel_destroy_cb(GtkWidget * window, GdkEvent * ev, gpointer data)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-   Central panel callbacks
-
+  Central panel callbacks
 -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void screen_button_click(GtkWidget *b, ScreenButton *sb)
+void screen_button_click(GtkWidget * b, ScreenButton * sb)
 {
-    if (sb->index == settings.current)
+    if(sb->index == settings.current)
     {
-	central_panel_set_current(sb->index);
-	return;
+        central_panel_set_current(sb->index);
+        return;
     }
-    
+
     request_net_current_desktop(sb->index);
 }
 
@@ -100,21 +80,21 @@ screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev, ScreenButton * sb)
 {
     hide_current_popup_menu();
 
-    if (disable_user_config)
-	return FALSE;
-    
+    if(disable_user_config)
+        return FALSE;
+
     if(ev->button != 3)
         return FALSE;
 
     screen_button_dialog(sb);
-    
+
     return TRUE;
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-
-void mini_lock_cb(char *cmd)
+void mini_lock_cb(void)
 {
+	char *cmd = settings.lock_command;
+	
     if(!cmd)
         return;
 
@@ -132,13 +112,13 @@ void mini_palet_cb(void)
 {
     hide_current_popup_menu();
 
-    if (disable_user_config)
+    if(disable_user_config)
     {
-	show_info(_("Access to the configuration system has been disabled.\n\n"
-		    "Ask your system administrator for more information"));
-	return;
+        show_info(_("Access to the configuration system has been disabled.\n\n"
+                    "Ask your system administrator for more information"));
+        return;
     }
-    
+
     global_settings_dialog();
 }
 
@@ -228,22 +208,22 @@ static void show_popup(PanelPopup * pp)
     if(!pp->detached)
         open_popup = pp;
 
-    if (pp->items && !pp->detached)
-	gtk_widget_show(pp->tearoff_button);
+    if(pp->items && !pp->detached)
+        gtk_widget_show(pp->tearoff_button);
     else
-	gtk_widget_hide(pp->tearoff_button);
-    
-    if (disable_user_config || g_list_length(pp->items) >= NBITEMS)
+        gtk_widget_hide(pp->tearoff_button);
+
+    if(disable_user_config || g_list_length(pp->items) >= NBITEMS)
     {
-	gtk_widget_hide(pp->addtomenu_item->button);
-	gtk_widget_hide(pp->separator);
+        gtk_widget_hide(pp->addtomenu_item->button);
+        gtk_widget_hide(pp->separator);
     }
     else
     {
-	gtk_widget_show(pp->addtomenu_item->button);
-	gtk_widget_show(pp->separator);
+        gtk_widget_show(pp->addtomenu_item->button);
+        gtk_widget_show(pp->separator);
     }
-	    
+
     gtk_image_set_from_pixbuf(GTK_IMAGE(pp->image), pp->down);
 
     if(!GTK_WIDGET_REALIZED(pp->button))
@@ -333,8 +313,8 @@ gboolean delete_popup(GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
 
 void
 panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
-             gint x, gint y, GtkSelectionData * data,
-             guint info, guint time, PanelItem *pi)
+                   gint x, gint y, GtkSelectionData * data,
+                   guint info, guint time, PanelItem * pi)
 {
     GList *fnames, *fnp;
     guint count;
@@ -365,7 +345,7 @@ panel_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                     time);
 }
 
-void panel_item_click_cb(GtkButton * b, PanelItem *pi)
+void panel_item_click_cb(GtkButton * b, PanelItem * pi)
 {
     hide_current_popup_menu();
     exec_cmd(pi->command, pi->in_terminal);
@@ -410,7 +390,7 @@ addtomenu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
             gtk_box_pack_start(GTK_BOX(pp->vbox), mi->button, TRUE, TRUE, 0);
 
             gtk_box_reorder_child(GTK_BOX(pp->vbox), mi->button, 2);
-	    
+
             gtk_button_clicked(GTK_BUTTON(pp->button));
             gtk_button_clicked(GTK_BUTTON(pp->button));
         }
@@ -438,8 +418,8 @@ gboolean menu_item_press(GtkButton * b, GdkEventButton * ev, MenuItem * mi)
 
 void
 menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
-             gint x, gint y, GtkSelectionData * data,
-             guint info, guint time, MenuItem *mi)
+                  gint x, gint y, GtkSelectionData * data,
+                  guint info, guint time, MenuItem * mi)
 {
     GList *fnames, *fnp;
     guint count;
@@ -470,9 +450,8 @@ menu_item_drop_cb(GtkWidget * widget, GdkDragContext * context,
                     time);
 }
 
-void menu_item_click_cb(GtkButton * b, MenuItem *mi)
+void menu_item_click_cb(GtkButton * b, MenuItem * mi)
 {
     hide_current_popup_menu();
     exec_cmd(mi->command, mi->in_terminal);
 }
-

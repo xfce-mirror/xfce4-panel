@@ -552,7 +552,7 @@ static void *expand_path(void)
     }
 }
 
-void exec_cmd(const char *cmd, gboolean in_terminal)
+static void real_exec_cmd(const char *cmd, gboolean in_terminal, gboolean silent)
 {
     GError *error = NULL;       /* this must be NULL to prevent crash :( */
     char execute[MAXSTRLEN + 1];
@@ -570,12 +570,29 @@ void exec_cmd(const char *cmd, gboolean in_terminal)
 
     if(!g_spawn_command_line_async(execute, &error))
     {
-        char *msg;
+		char *msg;
 
-        msg = g_strcompress(error->message);
-
-        report_error(msg);
-
-        g_free(msg);
+		msg = g_strcompress(error->message);
+	
+		if (silent)
+		{
+			g_printerr("xfce: %s\n", msg);
+		}
+		else
+		{
+			report_error(msg);
+		}
+	
+		g_free(msg);
     }
+}
+
+void exec_cmd(const char *cmd, gboolean in_terminal)
+{
+	real_exec_cmd(cmd, in_terminal, FALSE);
+}
+
+void exec_cmd_silent(const char *cmd, gboolean in_terminal)
+{
+	real_exec_cmd(cmd, in_terminal, TRUE);
 }

@@ -46,5 +46,6 @@ char *select_file_name(const char *title, const char *path, GtkWidget * parent);
 
 /* executing programs */
 void exec_cmd(const char *cmd, gboolean in_terminal);
+void exec_cmd_silent(const char *cmd, gboolean in_terminal);
 
 #endif /* __XFCE_SUPPORT_H__ */

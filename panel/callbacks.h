@@ -34,7 +34,7 @@ void screen_button_click(GtkWidget *b, ScreenButton *sb);
 gboolean screen_button_pressed_cb(GtkButton * b, GdkEventButton * ev,
                                   ScreenButton * sb);
 
-void mini_lock_cb(char *cmd);
+void mini_lock_cb(void);
 void mini_info_cb(void);
 void mini_palet_cb(void);
 

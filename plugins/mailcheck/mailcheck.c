@@ -162,6 +162,18 @@ static get_mailcheck_config(t_mailcheck *mc)
 					
 					if (value)
 						mc->item->command = (char *) value;
+					
+					value = xmlGetProp(node, "term");
+					
+					if (value)
+					{
+						int n = atoi(value);
+						
+						if (n == 1)
+							mc->item->in_terminal = TRUE;
+						
+						g_free(value);
+					}
 				}
 				else if(xmlStrEqual(node->name, (const xmlChar *)"Interval"))
 				{
@@ -208,8 +220,7 @@ static get_mailcheck_config(t_mailcheck *mc)
 static write_mailcheck_config(t_mailcheck *mc)
 {
 	char *dir, *rcfile;
-    xmlNodePtr root;
-    xmlNodePtr child;
+    xmlNodePtr root, node;
     char value[MAXSTRLEN + 1];
 	
 	rcfile = get_save_file("mailcheckrc");
@@ -228,7 +239,9 @@ static write_mailcheck_config(t_mailcheck *mc)
 
     xmlNewTextChild(root, NULL, "Mbox", mc->mbox);
 	
-    xmlNewTextChild(root, NULL, "Command", mc->item->command);
+    node = xmlNewTextChild(root, NULL, "Command", mc->item->command);
+	snprintf(value, 2, "%d", mc->item->in_terminal);
+	xmlSetProp(node, "term", value);
 	
 	snprintf(value, MAXSTRLEN, "%d", mc->interval);
     xmlNewTextChild(root, NULL, "Interval", value);
@@ -349,10 +362,21 @@ void mailcheck_set_size(PanelModule *pm, int size)
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
+GtkWidget *mcdialog;
+
+static void browse_cb(GtkWidget *b, GtkEntry *entry)
+{
+	const char *text = gtk_entry_get_text(entry);
+	char *file;
+	
+	file = select_file_name(NULL,text,mcdialog);
+	
+	if (file)
+		gtk_entry_set_text(entry, file);
+}
 
 void mailcheck_configure(PanelModule * pm)
 {
-    GtkWidget *dialog;
     GtkWidget *vbox;
     GtkWidget *hbox;
     GtkWidget *label;
@@ -360,27 +384,28 @@ void mailcheck_configure(PanelModule * pm)
     GtkWidget *mbox_button;
     GtkWidget *command_entry;
     GtkWidget *command_button;
+	GtkWidget *term_checkbutton;
     GtkWidget *spinbutton;
     GtkSizeGroup *sg = gtk_size_group_new(GTK_SIZE_GROUP_HORIZONTAL);
-
-    int response;
+    int response = GTK_RESPONSE_NONE;
     t_mailcheck *mc = (t_mailcheck *) pm->data;
 
-    dialog = gtk_dialog_new_with_buttons(_("Mail check options"), NULL,
+    mcdialog = gtk_dialog_new_with_buttons(_("Mail check options"), NULL,
                                          GTK_DIALOG_MODAL,
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                          GTK_STOCK_APPLY, GTK_RESPONSE_OK,
                                          NULL);
 
-    gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+    gtk_window_set_position(GTK_WINDOW(mcdialog), GTK_WIN_POS_CENTER);
 
-    set_transient_for_dialog(dialog);
+    set_transient_for_dialog(mcdialog);
 
     vbox = gtk_vbox_new(TRUE, 8);
     gtk_container_set_border_width(GTK_CONTAINER(vbox), 10);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), vbox, FALSE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(mcdialog)->vbox), vbox, FALSE, TRUE, 0);
 
-    hbox = gtk_hbox_new(FALSE, 4);
+	/* mbox location */
+	hbox = gtk_hbox_new(FALSE, 4);
 
     label = gtk_label_new(_("Mail box:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
@@ -393,9 +418,12 @@ void mailcheck_configure(PanelModule * pm)
 
     mbox_button = gtk_button_new_with_label(" ... ");
     gtk_box_pack_start(GTK_BOX(hbox), mbox_button, FALSE, FALSE, 0);
+	
+	g_signal_connect(mbox_button, "clicked", G_CALLBACK(browse_cb), mbox_entry);
 
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
+	/* mail command */
     hbox = gtk_hbox_new(FALSE, 4);
 
     label = gtk_label_new(_("Mail command:"));
@@ -414,8 +442,24 @@ void mailcheck_configure(PanelModule * pm)
     command_button = gtk_button_new_with_label(" ... ");
     gtk_box_pack_start(GTK_BOX(hbox), command_button, FALSE, FALSE, 0);
 
+	g_signal_connect(command_button, "clicked", G_CALLBACK(browse_cb), command_entry);
+
     gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
 
+	/* run in terminal ? */
+    hbox = gtk_hbox_new(FALSE, 4);
+
+    label = gtk_label_new(_(""));
+    gtk_size_group_add_widget(sg, label);
+    gtk_box_pack_start(GTK_BOX(hbox), label, FALSE, FALSE, 0);
+
+    term_checkbutton = gtk_check_button_new_with_mnemonic(_("Run in _terminal"));
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(term_checkbutton), mc->item->in_terminal);
+    gtk_box_pack_start(GTK_BOX(hbox), term_checkbutton, FALSE, FALSE, 0);
+
+    gtk_box_pack_start(GTK_BOX(vbox), hbox, FALSE, TRUE, 0);
+
+	/* mail check interval */
     hbox = gtk_hbox_new(FALSE, 4);
 
     label = gtk_label_new(_("Interval (sec):"));
@@ -431,7 +475,7 @@ void mailcheck_configure(PanelModule * pm)
 
     gtk_widget_show_all(vbox);
 
-    response = gtk_dialog_run(GTK_DIALOG(dialog));
+    response = gtk_dialog_run(GTK_DIALOG(mcdialog));
 
     if(response == GTK_RESPONSE_OK)
     {
@@ -446,6 +490,8 @@ void mailcheck_configure(PanelModule * pm)
             mc->item->command = g_strdup(tmp);
         }
 
+		mc->item->in_terminal = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(term_checkbutton));
+		
         tmp = gtk_entry_get_text(GTK_ENTRY(mbox_entry));
 
         if(tmp && *tmp)
@@ -459,7 +505,7 @@ void mailcheck_configure(PanelModule * pm)
 		write_mailcheck_config(mc);
     }
 
-    gtk_widget_destroy(dialog);
+    gtk_widget_destroy(mcdialog);
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/

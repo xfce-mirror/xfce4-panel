@@ -117,12 +117,11 @@ void quit(void)
     gtk_widget_hide(toplevel);
 
     if(settings.exit_command)
-        exec_cmd(settings.exit_command, FALSE);
+        exec_cmd_silent(settings.exit_command, FALSE);
 
     gtk_main_quit();
 
     panel_cleanup();
-
 }
 
 void restart(void)
@@ -193,8 +192,6 @@ GtkWidget *left_hbox = NULL;
 GtkWidget *right_hbox = NULL;
 GtkWidget *central_hbox = NULL;
 
-
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 static GtkWidget *create_panel_window(void)
 {
     GtkWidget *w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -287,9 +284,9 @@ void panel_cleanup(void)
     side_panel_cleanup(RIGHT);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-/*  settings */
-
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Panel settings
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 Settings settings;
 
 void init_settings(void)
@@ -434,9 +431,9 @@ void panel_set_num_screens(int n)
     central_panel_set_num_screens(n);
 }
 
-/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
-/*  configuration */
-
+/*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+  Panel configuration
+-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 void panel_parse_xml(xmlNodePtr node)
 {
     xmlChar *value;
