@@ -36,6 +36,9 @@
 Settings settings;
 Position position;
 
+static int screen_width = 0;
+static int screen_height = 0;
+
 GtkWidget *toplevel = NULL;
 
 static GtkWidget *main_frame;
@@ -316,6 +319,10 @@ void create_panel(void)
 	/* If there is a settings manager it takes precedence */
 	mcs_watch_xfce_channel();
     
+	/* set for later use */
+	screen_width = gdk_screen_width();
+	screen_height = gdk_screen_height();
+
 	need_init = FALSE;
     }
 
@@ -460,9 +467,9 @@ void panel_center(int side)
     int w, h;
     DesktopMargins margins;
     Screen *xscreen;
-    
-    w = gdk_screen_width();
-    h = gdk_screen_height();
+
+    w = screen_width;
+    h = screen_height;
 
     xscreen = DefaultScreenOfDisplay(GDK_DISPLAY());
     netk_get_desktop_margins(xscreen, &margins);
@@ -499,7 +506,7 @@ void panel_center(int side)
 
 void panel_set_position(void)
 {
-    if(position.x < 0 || position.y < 0)
+    if(position.x == -1 && position.y == -1)
     {
 	if (settings.orientation == HORIZONTAL)
 	    panel_center(BOTTOM);
@@ -511,8 +518,8 @@ void panel_set_position(void)
 	GtkRequisition req;
 	int w, h;
 	
-	w = gdk_screen_width();
-	h = gdk_screen_height();
+	w = screen_width;
+	h = screen_height;
 	
 	gtk_widget_size_request(toplevel, &req);
 	
@@ -522,9 +529,15 @@ void panel_set_position(void)
 	if (position.y + req.height > h && req.height <= h)
 	    position.y = h - req.height;
 	
+	if (position.x < 0)
+	    position.x = 0;
+
+	if (position.y < 0)
+	    position.y = 0;
+    
 	DBG("position: (%d, %d)\n", position.x, position.y);
 
-	/* use gdk to prevent margins from interfering :) */
+	/* use gdk to prevent margins from interfering :( */
 	gtk_window_present(GTK_WINDOW(toplevel));
 	gdk_window_move(toplevel->window, position.x, position.y);
     }

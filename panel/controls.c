@@ -59,29 +59,6 @@ static gint compare_classes (gconstpointer class_a, gconstpointer class_b)
 			       CONTROL_CLASS(class_b)->name));
 }
 
-#if 0
-static gint lookup_classes (gconstpointer class, gconstpointer name)
-{
-    g_assert (class != NULL);
-    g_assert (name != NULL);
-    
-    return (g_ascii_strcasecmp(CONTROL_CLASS(class)->name, name));
-}
-
-static gint lookup_classes_by_id (gconstpointer class, 
-				  gconstpointer id)
-{
-    int real_id;
-    
-    g_assert (class != NULL);
-    g_assert (id != NULL);
-    
-    real_id = GPOINTER_TO_INT(id);
-    
-    return (CONTROL_CLASS(class)->id != real_id);
-}
-#endif
-
 static gint lookup_classes_by_filename (gconstpointer class, 
 					gconstpointer filename)
 {
@@ -217,11 +194,6 @@ static void add_plugin_classes(void)
     g_strfreev(dirs);
 }
 
-static void add_builtin_classes(void)
-{
-    /* There are no builtin classes at the moment */
-}
-
 static void add_launcher_class(void)
 {
     ControlClass *cc = g_new0(ControlClass, 1);
@@ -234,7 +206,6 @@ static void add_launcher_class(void)
 void control_class_list_init(void)
 {
     add_launcher_class();
-    add_builtin_classes();
     add_plugin_classes();
 }
 
@@ -335,6 +306,7 @@ static GtkWidget *get_control_menu(void)
 
     return menu;
 }
+
 static gboolean control_press_cb(GtkWidget *b, GdkEventButton * ev, Control *control)
 {
     if (disable_user_config)
@@ -383,13 +355,6 @@ static gboolean create_plugin(Control *control, const char *filename)
     return cc->create_control(control);
 }
 
-static gboolean create_builtin(Control *control, int id)
-{
-    /* there are no builtin controls anymore! */
-    g_warning("%s: unknown control id: %d\n", PACKAGE, id);
-    return FALSE;
-}
-
 static void create_launcher(Control *control)
 {
     /* we know it is the first item in the list */
@@ -404,16 +369,12 @@ void create_control(Control * control, int id, const char *filename)
     
     switch (id)
     {
-	case ICON:
-	    create_launcher(control);
-	    break;
 	case PLUGIN:
 	    if (!create_plugin(control, filename))
 		create_launcher(control);
 	    break;
 	default:
-	    if (!create_builtin(control, id))
-		create_launcher(control);
+	    create_launcher(control);
     }
 
     /* the control class is set in the create_* functions above */
@@ -536,7 +497,7 @@ void control_set_from_xml(Control * control, xmlNodePtr node)
     /* allow the control to read its configuration */
     control_read_config(control, node);
 
-    /* also check if added to the panel */
+    /* hide popup? also check if added to the panel */
     if (!control->with_popup && control->base->parent) 
 	groups_show_popup(control->index, FALSE);
 }
@@ -573,9 +534,9 @@ void control_add_options(Control * control, GtkContainer * container,
     {
         GtkWidget *hbox, *image, *label;
 
-        hbox = gtk_hbox_new(FALSE, 4);
+        hbox = gtk_hbox_new(FALSE, 6);
         gtk_widget_show(hbox);
-        gtk_container_set_border_width(GTK_CONTAINER(hbox), 10);
+        gtk_container_set_border_width(GTK_CONTAINER(hbox), 6);
 
         image =
             gtk_image_new_from_stock(GTK_STOCK_DIALOG_INFO,
