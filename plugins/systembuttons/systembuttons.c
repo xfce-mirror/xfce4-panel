@@ -168,9 +168,12 @@ button_set_tip (GtkWidget * button, int type)
     if (need_init)
     {
 	tips[0] = _("Lock the screen");
-	tips[1] = _("Exit");
-	tips[2] = _("Setup");
-	tips[3] = _("Info");
+        /* don't translate 'tip|' */
+	tips[1] = Q_("tip|Exit");
+        /* don't translate 'tip|' */
+	tips[2] = Q_("tip|Setup");
+        /* don't translate 'tip|' */
+	tips[3] = Q_("tip|Info");
     }
 
     add_tooltip (button, tips[type]);

@@ -267,7 +267,6 @@ xfce_separator_item_new (void)
     XfceSeparatorItem *separator_item;
 
     separator_item = g_object_new (XFCE_TYPE_SEPARATOR_ITEM, 
-                                   "homogeneous", FALSE, 
                                    "use_drag_window", TRUE,
                                    NULL);
 
