@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY copyright SYSTEM "copyright.xml"> 
-  <!ENTITY appversion "3.99.3"> 
   <!ENTITY manrevision "0.99"> 
-  <!ENTITY date "July 2003"> 
+  <!ENTITY date "Sep 2003"> 
+  <!ENTITY appversion "4.0"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
 
@@ -86,14 +86,16 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-intro">
   <title>Introduction</title>
 
-  <para>The XFce 4 panel is part of the <ulink url="http://www.xfce.org" 
+  <para>
+    The XFce 4 panel is part of the <ulink url="http://www.xfce.org" 
       type="html">XFce 4 Desktop Environment</ulink> and features program 
     launchers, panel menus, a clock, a desktop switcher and more. The actual 
     command to run is &app;. Many aspects of the panel can be configured 
     through graphical dialogs.
   </para>
 
-  <para>If you are familiar with previous versions of XFce you will find many
+  <para>
+    If you are familiar with previous versions of XFce you will find many
     new features. Most visible are probably the vertical panel mode, the icon
     themes, the new graphical pager and the configurable position of the
     panel menu popup buttons. The way preferences are handled has changed 
@@ -136,14 +138,16 @@ maintainers, etc. Commented out by default.
     </screenshot>
   </figure>
 
-  <para>The figure shows the default panel configuration with one open
+  <para>
+    The figure shows the default panel configuration with one open
     panel menu and the mouse hovering over a launcher button, making it show
     a tooltip.
   </para>
 
-  <para>There is a move handle on each side of the panel which
-    you can use to drag the panel anywhere on the screen. Right clicking
-    (or Shift-click) on one of them shows a popup menu ... Go on, try it ;-)
+  <para>There is a move handle on each side of the panel. You can use it to
+    drag the panel anywhere on the screen. Clicking with the right mouse
+    button (or Shift + left click) on one of them shows a popup menu ... 
+    Go on, try it ;-)
   </para>
 
   <figure id="handle-popup-fig">
@@ -166,9 +170,10 @@ maintainers, etc. Commented out by default.
   </figure>
 
   <para>The area between the move handles contains panel items. The available 
-    items are are described in the "<ulink 
-      url="#panel-items">Panel Items</ulink>" section. Most items perform an 
-    action when clicked. 
+    items are are described in the 
+    "<ulink url="#panel-items">Panel Items</ulink>" section. Most items 
+    perform an action when clicked. Configuration of panel items is done from
+    a right-click popup menu.
   </para>
 
   <para>Right-clicking on an item will popup a menu from which you can open a
@@ -176,7 +181,7 @@ maintainers, etc. Commented out by default.
     added from the right-click menu on one of the move handles (see above). 
     A submenu shows a list of available item types that you can choose from.
     When you add a new item, the panel will imediately open its properties
-    dialog, so you can change the item's options and position.
+    dialog, so you can change the item's options and position on the panel.
   </para>
 
   <figure id="item-popup-fig">
@@ -198,11 +203,11 @@ maintainers, etc. Commented out by default.
     </screenshot>
   </figure>
 
-  <para>Global panel preferences can be changed from the XFce 4 Settings 
-    Manager, which can be started either from the 'Setup' button on the panel
-    (see Systembuttons panel item, below), or by choosing the 'Properties...'
-    item from the right-click menu on the move handles. See 
-    "<ulink url="#panel-settings">Panel Preferences</ulink>" for an 
+  <para>
+    Global panel preferences can be changed from the XFce 4 Settings 
+    Manager, which can be started either from a panel laucher, or by choosing 
+    the 'Properties...' entry from the right-click menu on the move handles. 
+    See "<ulink url="#panel-settings">Panel Preferences</ulink>" for an 
     explanation of the available options.
   </para>
 
@@ -214,12 +219,14 @@ maintainers, etc. Commented out by default.
 <sect1 id="panel-items">
   <title>Panel Items</title>
 
-  <para>The XFce 4 panel has the possibility to load external plugins as well
+  <para>
+    The XFce 4 panel has the possibility to load external plugins as well
     as builtin ones. In this section we will only decribe panel items that are
     installed with the panel.
   </para>
   
-  <para>The properties dialog for a panel item can be opened from the 
+  <para>
+    The properties dialog for a panel item can be opened from the 
     right-click menu on the item. Each type of panel item has its own 
     configuration dialog. Every dialog offers at least these options:
   </para>
@@ -244,7 +251,7 @@ maintainers, etc. Commented out by default.
 	<listitem>You can type the command to run or browse the file system. 
 	  There is an option to start in a terminal and one to use startup
 	  notification. This last option means that the window manager can
-	  show an hourglass while the program is loading. But, the apllication
+	  show an hourglass while the program is loading. But, the application
 	  has to support that and not many program do at the moment. Programs
 	  build with Gtk 2.2, should support it.
 	</listitem>
@@ -549,10 +556,9 @@ maintainers, etc. Commented out by default.
   <title>Panel Preferences</title>
 
   <para>The properties dialog for the XFce 4 Panel can be opened from
-  the XFce 4 Settings Manager, which can be started from the panel using
-  the setup button as shown in <xref linkend="default-panel-fig"/>
-  or from the right-click menu on the panel handles. The latter menu
-  also provides direct access to the panel properties dialog.</para>
+  the XFce 4 Settings Manager, which can be started from a panel launcher
+  or from the right-click menu on the panel handles. The menu also provides 
+  direct access to the panel properties dialog.</para>
 
   <figure id="panel-settings-fig">
     <title>Panel Settings</title> 
@@ -675,10 +681,16 @@ maintainers, etc. Commented out by default.
   </para>
 
   <para>To report a bug or make a suggestion regarding this application or
-    this manual send an e-mail to the xfce4-dev mailing list, or use the bug 
-    tracking system at the 
-    <ulink url="http://sourceforge.net/projects/xfce" type="http">XFce 
-      sourceforge project site</ulink>. 
+    this manual, send an email to the 
+    <ulink url="http://www.moongroup.com/mailman/listinfo/xfce4-dev/"
+      type="http">xfce4-dev</ulink> mailing list &mdash; this is the preferred
+    method &mdash; or use the bug tracking system at the
+    <ulink url="http://sourceforge.net/projects/xfce" 
+      type="http">XFce SourceForge project site</ulink>. 
+    If you have questions about the use or installation of this package,
+    please ask on the 
+    <ulink url="http://www.moongroup.com/mailman/listinfo/xfce/"
+      type="http">xfce</ulink> mailing list. 
   </para>
     
   <para> This program is distributed under the terms of the
