@@ -71,7 +71,7 @@ save_yourself (gpointer data, int save_style, gboolean shutdown,
 	{
 	    panel_set_autohide(FALSE);
 
-	    while (gtk_event_pending())
+	    while (gtk_events_pending())
 		gtk_main_iteration();
 	}
 	
@@ -125,7 +125,7 @@ quit (gboolean force)
 	{
 	    panel_set_autohide(FALSE);
 
-	    while (gtk_event_pending())
+	    while (gtk_events_pending())
 		gtk_main_iteration();
 	}
 	
@@ -166,7 +166,7 @@ restart (void)
 	{
 	    panel_set_autohide(FALSE);
 
-	    while (gtk_event_pending())
+	    while (gtk_events_pending())
 		gtk_main_iteration();
 	}
 	
