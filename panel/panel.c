@@ -52,9 +52,6 @@
 
 #define HANDLE_WIDTH 10
 
-/* TODO: I didn't actually check this ... -- Jasper */
-#define FRAME_IPADDING 1
-
 /* globals */
 
 Settings settings;
@@ -410,7 +407,7 @@ static GtkItemFactoryEntry panel_items[] = {
     {N_("/Add _new item"), NULL, run_add_control_dialog, 0, "<Item>"},
     {"/sep", NULL, NULL, 0, "<Separator>"},
     {N_("/_Properties..."), NULL, edit_prefs, 0, "<Item>"},
-    {N_("/_About XFce"), NULL, do_info, 0, "<Item>"},
+    {N_("/_About Xfce"), NULL, do_info, 0, "<Item>"},
     {N_("/_Help"), NULL, do_help, 0, "<Item>"},
 #if 0
     {"/sep", NULL, NULL, 0, "<Separator>"},
@@ -808,7 +805,7 @@ create_panel_window (Panel * p)
     w = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     window = GTK_WINDOW (w);
 
-    gtk_window_set_title (window, _("XFce Panel"));
+    gtk_window_set_title (window, _("Xfce Panel"));
     gtk_window_set_decorated (window, FALSE);
     gtk_window_set_resizable (window, FALSE);
     gtk_window_stick (window);

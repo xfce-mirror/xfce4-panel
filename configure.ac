@@ -1,6 +1,6 @@
 dnl configure.ac
 dnl
-dnl xfce4 - panel for the XFce Desktop environment
+dnl xfce4 - panel for the Xfce Desktop environment
 dnl
 dnl 2003 Benedikt Meurer <benedikt.meurer@unix-ag.uni-siegen.de>
 dnl

@@ -64,7 +64,7 @@ mcs_plugin_init (McsPlugin * mp)
     xfce_set_options (mp->manager);
 
     mp->plugin_name = g_strdup (CHANNEL);
-    mp->caption = g_strdup (_("XFce Panel"));
+    mp->caption = g_strdup (_("Xfce Panel"));
     mp->run_dialog = run_xfce_settings_dialog;
     mp->icon = xfce_inline_icon_at_size (panel_icon_data, 48, 48);
 
@@ -282,7 +282,7 @@ xfce_write_options (McsManager * sm)
     int i;
 
     doc = xmlNewDoc ("1.0");
-    doc->children = xmlNewDocRawNode (doc, NULL, "XFce", NULL);
+    doc->children = xmlNewDocRawNode (doc, NULL, "Xfce", NULL);
 
     node = (xmlNodePtr) doc->children;
     xmlDocSetRootElement (doc, node);

@@ -322,9 +322,9 @@ main (int argc, char **argv)
 	 strequal (argv[1], "-h") || strequal (argv[1], "--help")))
     {
 	g_print (_("\n"
-		   " The XFce Panel\n"
+		   " The Xfce Panel\n"
 		   " Version %s\n\n"
-		   " Part of the XFce Desktop Environment\n"
+		   " Part of the Xfce Desktop Environment\n"
 		   " http://www.xfce.org\n\n"
 		   " Licensed under the GNU GPL.\n\n"), 
 		 VERSION);
@@ -363,7 +363,7 @@ main (int argc, char **argv)
 	    xfce_err (_("Your window manager does not seem to support "
 			"the new window manager hints as defined on "
 			"http://www.freedesktop.org. \n"
-			"Some XFce features may not work as intended."));
+			"Some Xfce features may not work as intended."));
 	}
     }
 #endif

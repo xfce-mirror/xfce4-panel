@@ -602,7 +602,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
 
     mcs_manager = mp->manager;
 
-    dialog = gtk_dialog_new_with_buttons (_("XFce Panel"),
+    dialog = gtk_dialog_new_with_buttons (_("Xfce Panel"),
 					  NULL, GTK_DIALOG_NO_SEPARATOR,
 					  GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
 					  NULL);
@@ -619,7 +619,7 @@ run_xfce_settings_dialog (McsPlugin * mp)
     vbox = GTK_DIALOG (dialog)->vbox;
 
     pb = gdk_pixbuf_scale_simple (mp->icon, 32, 32, GDK_INTERP_HYPER);
-    header = xfce_create_header (pb, _("XFce Panel Settings"));
+    header = xfce_create_header (pb, _("Xfce Panel Settings"));
     gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, TRUE, 0);
     g_object_unref (pb);
 
