@@ -619,7 +619,6 @@ void mailcheck_add_options(PanelControl * pc, GtkContainer * container,
 }
 
 /* create panel control */
-#define API_VERSION 2
 #define CAPTION N_("Mail check")
 
 gboolean create_mailcheck_control(PanelControl * pc)
@@ -646,14 +645,6 @@ gboolean create_mailcheck_control(PanelControl * pc)
     return TRUE;
 }
 
-gchar *xfce_plugin_check_version(gint version)
-{
-    if (version != API_VERSION)
-	return "Incompatible plugin version";
-    else
-	return NULL;
-}
-
 G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
 {
     module->name = "mailcheck";
@@ -662,4 +653,5 @@ G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
 }
 
 
+XFCE_PLUGIN_CHECK_INIT
 

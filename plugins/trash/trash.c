@@ -267,7 +267,6 @@ static void trash_set_theme(PanelControl * pc, const char *theme)
 
 /*  create trash panel control
 */
-#define API_VERSION 2
 #define CAPTION N_("Trash can")
 
 gboolean create_trash_control(PanelControl * pc)
@@ -290,14 +289,6 @@ gboolean create_trash_control(PanelControl * pc)
     return TRUE;
 }
 
-gchar *xfce_plugin_check_version(gint version)
-{
-    if (version != API_VERSION)
-	return "Incompatible plugin version";
-    else
-	return NULL;
-}
-
 G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
 {
     module->name = "trash";
@@ -306,4 +297,5 @@ G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
 }
 
 
+XFCE_PLUGIN_CHECK_INIT
 

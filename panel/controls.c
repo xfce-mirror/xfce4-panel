@@ -65,6 +65,16 @@
 #define SOEXT 		("." G_MODULE_SUFFIX)
 #define SOEXT_LEN 	(strlen (SOEXT))
 
+#define API_VERSION 2
+
+gchar *xfce_plugin_check_version(gint version)
+{
+    if (version != API_VERSION)
+	return "Incompatible plugin version";
+    else
+	return NULL;
+}
+
 static void free_module(PanelModule *module)
 {
     if (module->id == PLUGIN)

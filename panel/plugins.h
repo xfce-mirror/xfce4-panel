@@ -36,8 +36,7 @@ extern "C"
  * (must be implemented by plugin) */
 G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module);
 
-/* prototype for plugin version check function 
- * (must be implemented by plugin) */
+/* plugin version check function (implemented by xfce4) */
 gchar *xfce_plugin_check_version(gint version);
 
 #define XFCE_PLUGIN_CHECK_INIT \

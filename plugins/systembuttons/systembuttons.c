@@ -503,9 +503,6 @@ void systembuttons_add_options(PanelControl * pc, GtkContainer * container,
 }
 
 /* panel control */
-int is_xfce_panel_control;
-
-#define API_VERSION 2
 #define CAPTION N_("System buttons")
 
 gboolean create_systembuttons_control(PanelControl * pc)
@@ -531,14 +528,6 @@ gboolean create_systembuttons_control(PanelControl * pc)
     return TRUE;
 }
 
-gchar *xfce_plugin_check_version(gint version)
-{
-    if (version != API_VERSION)
-	return "Incompatible plugin version";
-    else
-	return NULL;
-}
-
 G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
 {
     module->name = "systembuttons";
@@ -547,4 +536,5 @@ G_MODULE_EXPORT void xfce_plugin_init(PanelModule *module)
 }
 
 
+XFCE_PLUGIN_CHECK_INIT
 
