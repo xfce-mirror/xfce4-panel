@@ -528,7 +528,7 @@ control_class_unref (ControlClass *cclass)
 }
 
 static gint
-sort_control_func (gpointer a, gpointer b, gpointer data)
+sort_control_func (gpointer a, gpointer b)
 {
     ControlInfo *ca = (ControlInfo *) a;
     ControlInfo *cb = (ControlInfo *) b;
@@ -583,7 +583,7 @@ get_control_info_list (void)
     }
 
     /* sort alphabetically, but keep launcher at the top */
-    infolist = g_slist_sort (infolist, (GCompareDataFunc) sort_control_func);
+    infolist = g_slist_sort (infolist, (GCompareFunc) sort_control_func);
 
     infolist = g_slist_prepend (infolist, launcherinfo);
 
