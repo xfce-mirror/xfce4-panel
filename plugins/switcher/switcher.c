@@ -1225,14 +1225,18 @@ static void switcher_set_current_screen(NetkScreen *screen, t_switcher *sw)
 static void switcher_screen_created(NetkScreen *screen, NetkWorkspace *ws,
 				    t_switcher *sw)
 {
-    if (!sw->graphical)
+    if (sw->graphical)
+	netk_pager_update_size(sw->netk_pager, sw->screen);
+    else
 	cde_pager_add_button(sw->cde_pager, sw->callbacks, sw->screen_names);
 }
 
 static void switcher_screen_destroyed(NetkScreen *screen, NetkWorkspace *ws,
 				      t_switcher *sw)
 {
-    if (!sw->graphical)
+    if (sw->graphical)
+	netk_pager_update_size(sw->netk_pager, sw->screen);
+    else
 	cde_pager_remove_button(sw->cde_pager);
 }
 
