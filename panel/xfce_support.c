@@ -95,6 +95,9 @@ get_read_dirs (void)
     return dirs;
 }
 
+/*
+ * XXX - replace with xfce_get_path_localized()
+ */
 static gchar *
 get_localized_system_rcfile (const gchar * name)
 {
@@ -987,15 +990,55 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
     g_strfreev (argv);
 }
 
+/*
+ * This is used to get better UI response. Exec the command when the panel
+ * becomes idle, so Gtk has time to do the important UI work first.
+ */
+typedef struct _ActionCommand ActionCommand;
+struct _ActionCommand
+{
+	gchar		*cmd;
+	gboolean	in_terminal;
+	gboolean	use_sn;
+	gboolean	silent;
+};
+
+static gboolean
+delayed_exec(ActionCommand *command)
+{
+	real_exec_cmd(command->cmd, command->in_terminal, command->use_sn,
+			command->silent);
+
+	g_free(command->cmd);
+	g_free(command);
+
+	return(FALSE);
+}
+
+static void
+schedule_exec(const gchar *cmd, gboolean in_terminal, gboolean use_sn,
+	      gboolean silent)
+{
+	ActionCommand *command;
+
+	command = g_new(ActionCommand, 1);
+	command->cmd = g_strdup(cmd);
+	command->in_terminal = in_terminal;
+	command->use_sn = use_sn;
+	command->silent = silent;
+
+	(void)g_idle_add((GSourceFunc)delayed_exec, (gpointer)command);
+}
+
 void
 exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
-    real_exec_cmd (cmd, in_terminal, use_sn, FALSE);
+    schedule_exec(cmd, in_terminal, use_sn, FALSE);
 }
 
 /* without error reporting dialog */
 void
 exec_cmd_silent (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
-    real_exec_cmd (cmd, in_terminal, use_sn, TRUE);
+    schedule_exec(cmd, in_terminal, use_sn, TRUE);
 }
