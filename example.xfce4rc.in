@@ -2,9 +2,7 @@
 <Xfce>
   <Panel size="1" popupposition="2" style="1" orientation="0" layer="0" left="5" right="5" screens="4" showcentral="1" desktopbuttons="1" minibuttons="1">
   </Panel>
-  <Central>
-  </Central>
-  <Left>
+  <Groups>
     <Group>
       <Popup/>
       <Control id="-2">
@@ -49,8 +47,10 @@
         <Icon id="7"/>
       </Control>
     </Group>
-  </Left>
-  <Right>
+    <Group>
+	<Popup/>
+	<Control id="-1" filename="libswitcher.so"/>
+    </Group>
     <Group>
       <Popup/>
       <Control id="-2">
@@ -98,5 +98,5 @@
         <XfceClock Clock_type="0" Toggle_military="0" Toggle_am_pm="1" Toggle_secs="0"/>
       </Control>
     </Group>
-  </Right>
+  </Groups>
 </Xfce>
