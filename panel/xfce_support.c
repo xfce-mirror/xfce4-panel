@@ -712,6 +712,12 @@ void free_startup_timeout (void)
 {
     StartupTimeoutData *std = startup_timeout_data;
 
+    if (!std)
+    {
+        /* No startup notification used, return silently */
+        return;
+    }
+    
     g_slist_foreach (std->contexts, (GFunc) sn_launcher_context_unref, NULL);
     g_slist_free (std->contexts);
 
