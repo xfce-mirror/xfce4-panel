@@ -50,9 +50,6 @@ typedef struct
     int ws_destroyed_id;
 
     GtkWidget *base;
-    GtkWidget *box;
-
-    GtkWidget *separators[2];
 
     /* graphical pager */
     GtkWidget *netk_pager;
@@ -85,7 +82,7 @@ signal_callback_new (const char *signal, GCallback callback, gpointer data)
 static void
 netk_pager_update_size (GtkWidget * pager, NetkScreen * screen)
 {
-    int s = icon_size[settings.size];
+    int s = icon_size[settings.size] + border_width;
     int count = netk_screen_get_workspace_count (screen);
     int w;
 
@@ -122,11 +119,7 @@ create_netk_pager (NetkScreen * screen)
     return pager;
 }
 
-/*  Desktop pager
- *  ----------------
-*/
-
-/* static prototypes */
+/* static prototype */
 static void arrange_pager (t_pager * pager);
 
 /* settings */
@@ -177,52 +170,13 @@ arrange_pager (t_pager * pager)
     GList *li;
     gboolean vertical = settings.orientation == VERTICAL;
 
-    /* destroy existing widgets */
-    if (pager->box)
-    {
-	gtk_widget_destroy (pager->box);
-    }
-
-    /* then create new ones */
-    if (vertical)
-    {
-	pager->box = gtk_vbox_new (FALSE, 1);
-	pager->separators[0] = gtk_hseparator_new ();
-	pager->separators[1] = gtk_hseparator_new ();
-    }
-    else
-    {
-	pager->box = gtk_hbox_new (FALSE, 0);
-	pager->separators[0] = gtk_vseparator_new ();
-	pager->separators[1] = gtk_vseparator_new ();
-    }
-
+    if (pager->netk_pager)
+	gtk_widget_destroy(pager->netk_pager);
+    
     pager->netk_pager = create_netk_pager (pager->screen);
 
-    /* show the widgets */
-    gtk_widget_show (pager->box);
-
-    gtk_widget_show (pager->separators[0]);
-    gtk_widget_show (pager->separators[1]);
-
     /* packing the widgets */
-    gtk_container_add (GTK_CONTAINER (pager->base), pager->box);
-
-    gtk_box_pack_start (GTK_BOX (pager->box), pager->separators[0], TRUE,
-			TRUE, 2);
-
-    {
-	GtkWidget *align;
-
-	align = gtk_alignment_new (0.5, 0.5, 0, 0);
-	gtk_widget_show (align);
-	gtk_container_add (GTK_CONTAINER (align), pager->netk_pager);
-
-	gtk_box_pack_start (GTK_BOX (pager->box), align, TRUE, TRUE, 2);
-    }
-
-    gtk_box_pack_start (GTK_BOX (pager->box), pager->separators[1], TRUE,
-			TRUE, 2);
+    gtk_container_add (GTK_CONTAINER (pager->base), pager->netk_pager);
 
     /* attach callbacks */
     for (li = pager->callbacks; li; li = li->next)
@@ -256,8 +210,8 @@ pager_new (NetkScreen * screen)
 
     pager->screen = screen;
 
-    pager->base = gtk_alignment_new (0.5, 0.5, 0.8, 0.8);
-    gtk_widget_show (pager->base);
+    pager->base = gtk_alignment_new (0.5, 0.5, 0, 0); 
+    gtk_widget_show (pager->base); 
 
     /* this creates all widgets */
     arrange_pager (pager);

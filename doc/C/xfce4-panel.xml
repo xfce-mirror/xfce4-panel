@@ -2,9 +2,9 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY copyright SYSTEM "copyright.xml"> 
-  <!ENTITY appversion "3.90"> 
-  <!ENTITY manrevision "0.4"> 
-  <!ENTITY date "May 2003"> 
+  <!ENTITY appversion "3.91.1"> 
+  <!ENTITY manrevision "0.8"> 
+  <!ENTITY date "3 July 2003"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
 
@@ -74,7 +74,8 @@ maintainers, etc. Commented out by default.
   </revhistory>
   -->
 
-  <releaseinfo>This manual describes &app; version &appversion;
+  <releaseinfo>This manual describes &app; version &appversion;. 
+    Last updated: &date;
   </releaseinfo>
 
 </articleinfo>
@@ -170,12 +171,12 @@ maintainers, etc. Commented out by default.
     action when clicked. 
   </para>
 
-  <para>Right-clicking will popup a menu from which you can open a
+  <para>Right-clicking on an item will popup a menu from which you can open a
     properties dialog, remove the item or add a new item. Items can also be 
     added from the right-click menu on one of the move handles (see above). 
-    A submenu shows a list of available item types that you can choose from. A 
-    properties dialog will open for the newly added panel item, so you can 
-    change the item's options.
+    A submenu shows a list of available item types that you can choose from.
+    When you add a new item, the panel will imediately open its properties
+    dialog, so you can change the item's options and position.
   </para>
 
   <figure id="item-popup-fig">
@@ -470,6 +471,19 @@ maintainers, etc. Commented out by default.
     </figure>
 
 
+  </sect2>
+
+  <sect2 id="separator-item">
+    <title>Separator</title>
+
+    <para>This item simply adds a separator line to the panel. It has no
+      options to set except it's position.
+    </para>
+    
+    <para>Note that it may be a bit hard to popup the right-click menu, 
+      because you only have a small area to click on.
+    </para>
+    
   </sect2>
 
   <!-- extra space -->

@@ -162,42 +162,41 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 plugindir = $(libdir)/xfce4/panel-plugins
 
-plugin_LTLIBRARIES = libswitcher.la
+plugin_LTLIBRARIES = libseparator.la
 
-libswitcher_la_LDFLAGS = \
+libseparator_la_LDFLAGS = \
 	-avoid-version							\
 	-module
 
 
-libswitcher_la_SOURCES = \
-	switcher.c
+libseparator_la_SOURCES = \
+	separator.c
 
 
-libswitcher_la_CFLAGS = \
+libseparator_la_CFLAGS = \
 	-I$(top_srcdir)							\
-	@LIBX11_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@LIBXML_CFLAGS@
 
 
-libswitcher_la_LIBADD = \
+libseparator_la_LIBADD = \
 	@LIBS@
 
-subdir = plugins/switcher
+subdir = plugins/separator
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(plugin_LTLIBRARIES)
 
-libswitcher_la_DEPENDENCIES =
-am_libswitcher_la_OBJECTS = libswitcher_la-switcher.lo
-libswitcher_la_OBJECTS = $(am_libswitcher_la_OBJECTS)
+libseparator_la_DEPENDENCIES =
+am_libseparator_la_OBJECTS = libseparator_la-separator.lo
+libseparator_la_OBJECTS = $(am_libseparator_la_OBJECTS)
 
 DEFAULT_INCLUDES =  -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
-@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/libswitcher_la-switcher.Plo
+@AMDEP_TRUE@DEP_FILES = ./$(DEPDIR)/libseparator_la-separator.Plo
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
@@ -205,9 +204,9 @@ LTCOMPILE = $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) \
 CCLD = $(CC)
 LINK = $(LIBTOOL) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-DIST_SOURCES = $(libswitcher_la_SOURCES)
+DIST_SOURCES = $(libseparator_la_SOURCES)
 DIST_COMMON = Makefile.am Makefile.in
-SOURCES = $(libswitcher_la_SOURCES)
+SOURCES = $(libseparator_la_SOURCES)
 
 all: all-am
 
@@ -215,7 +214,7 @@ all: all-am
 .SUFFIXES: .c .lo .o .obj
 $(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ Makefile.am  $(top_srcdir)/configure.ac $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign  plugins/switcher/Makefile
+	  $(AUTOMAKE) --foreign  plugins/separator/Makefile
 Makefile: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
 pluginLTLIBRARIES_INSTALL = $(INSTALL)
@@ -246,8 +245,8 @@ clean-pluginLTLIBRARIES:
 	  echo "rm -f \"$${dir}/so_locations\""; \
 	  rm -f "$${dir}/so_locations"; \
 	done
-libswitcher.la: $(libswitcher_la_OBJECTS) $(libswitcher_la_DEPENDENCIES) 
-	$(LINK) -rpath $(plugindir) $(libswitcher_la_LDFLAGS) $(libswitcher_la_OBJECTS) $(libswitcher_la_LIBADD) $(LIBS)
+libseparator.la: $(libseparator_la_OBJECTS) $(libseparator_la_DEPENDENCIES) 
+	$(LINK) -rpath $(plugindir) $(libseparator_la_LDFLAGS) $(libseparator_la_OBJECTS) $(libseparator_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT) core *.core
@@ -255,7 +254,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libswitcher_la-switcher.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libseparator_la-separator.Plo@am__quote@
 
 distclean-depend:
 	-rm -rf ./$(DEPDIR)
@@ -293,38 +292,38 @@ distclean-depend:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ `test -f '$<' || echo '$(srcdir)/'`$<
 
-libswitcher_la-switcher.o: switcher.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -MT libswitcher_la-switcher.o -MD -MP -MF "$(DEPDIR)/libswitcher_la-switcher.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libswitcher_la-switcher.o `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libswitcher_la-switcher.Tpo" "$(DEPDIR)/libswitcher_la-switcher.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libswitcher_la-switcher.Tpo"; exit 1; \
+libseparator_la-separator.o: separator.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseparator_la_CFLAGS) $(CFLAGS) -MT libseparator_la-separator.o -MD -MP -MF "$(DEPDIR)/libseparator_la-separator.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libseparator_la-separator.o `test -f 'separator.c' || echo '$(srcdir)/'`separator.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libseparator_la-separator.Tpo" "$(DEPDIR)/libseparator_la-separator.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libseparator_la-separator.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='switcher.c' object='libswitcher_la-switcher.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libswitcher_la-switcher.Po' tmpdepfile='$(DEPDIR)/libswitcher_la-switcher.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='separator.c' object='libseparator_la-separator.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libseparator_la-separator.Po' tmpdepfile='$(DEPDIR)/libseparator_la-separator.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -c -o libswitcher_la-switcher.o `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseparator_la_CFLAGS) $(CFLAGS) -c -o libseparator_la-separator.o `test -f 'separator.c' || echo '$(srcdir)/'`separator.c
 
-libswitcher_la-switcher.obj: switcher.c
-@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -MT libswitcher_la-switcher.obj -MD -MP -MF "$(DEPDIR)/libswitcher_la-switcher.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libswitcher_la-switcher.obj `if test -f 'switcher.c'; then $(CYGPATH_W) 'switcher.c'; else $(CYGPATH_W) '$(srcdir)/switcher.c'; fi`; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libswitcher_la-switcher.Tpo" "$(DEPDIR)/libswitcher_la-switcher.Po"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libswitcher_la-switcher.Tpo"; exit 1; \
+libseparator_la-separator.obj: separator.c
+@am__fastdepCC_TRUE@	if $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseparator_la_CFLAGS) $(CFLAGS) -MT libseparator_la-separator.obj -MD -MP -MF "$(DEPDIR)/libseparator_la-separator.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libseparator_la-separator.obj `if test -f 'separator.c'; then $(CYGPATH_W) 'separator.c'; else $(CYGPATH_W) '$(srcdir)/separator.c'; fi`; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libseparator_la-separator.Tpo" "$(DEPDIR)/libseparator_la-separator.Po"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libseparator_la-separator.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='switcher.c' object='libswitcher_la-switcher.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libswitcher_la-switcher.Po' tmpdepfile='$(DEPDIR)/libswitcher_la-switcher.TPo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='separator.c' object='libseparator_la-separator.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libseparator_la-separator.Po' tmpdepfile='$(DEPDIR)/libseparator_la-separator.TPo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -c -o libswitcher_la-switcher.obj `if test -f 'switcher.c'; then $(CYGPATH_W) 'switcher.c'; else $(CYGPATH_W) '$(srcdir)/switcher.c'; fi`
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseparator_la_CFLAGS) $(CFLAGS) -c -o libseparator_la-separator.obj `if test -f 'separator.c'; then $(CYGPATH_W) 'separator.c'; else $(CYGPATH_W) '$(srcdir)/separator.c'; fi`
 
-libswitcher_la-switcher.lo: switcher.c
-@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -MT libswitcher_la-switcher.lo -MD -MP -MF "$(DEPDIR)/libswitcher_la-switcher.Tpo" \
-@am__fastdepCC_TRUE@	  -c -o libswitcher_la-switcher.lo `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c; \
-@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libswitcher_la-switcher.Tpo" "$(DEPDIR)/libswitcher_la-switcher.Plo"; \
-@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libswitcher_la-switcher.Tpo"; exit 1; \
+libseparator_la-separator.lo: separator.c
+@am__fastdepCC_TRUE@	if $(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseparator_la_CFLAGS) $(CFLAGS) -MT libseparator_la-separator.lo -MD -MP -MF "$(DEPDIR)/libseparator_la-separator.Tpo" \
+@am__fastdepCC_TRUE@	  -c -o libseparator_la-separator.lo `test -f 'separator.c' || echo '$(srcdir)/'`separator.c; \
+@am__fastdepCC_TRUE@	then mv -f "$(DEPDIR)/libseparator_la-separator.Tpo" "$(DEPDIR)/libseparator_la-separator.Plo"; \
+@am__fastdepCC_TRUE@	else rm -f "$(DEPDIR)/libseparator_la-separator.Tpo"; exit 1; \
 @am__fastdepCC_TRUE@	fi
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='switcher.c' object='libswitcher_la-switcher.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libswitcher_la-switcher.Plo' tmpdepfile='$(DEPDIR)/libswitcher_la-switcher.TPlo' @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='separator.c' object='libseparator_la-separator.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	depfile='$(DEPDIR)/libseparator_la-separator.Plo' tmpdepfile='$(DEPDIR)/libseparator_la-separator.TPlo' @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libswitcher_la_CFLAGS) $(CFLAGS) -c -o libswitcher_la-switcher.lo `test -f 'switcher.c' || echo '$(srcdir)/'`switcher.c
+@am__fastdepCC_FALSE@	$(LIBTOOL) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libseparator_la_CFLAGS) $(CFLAGS) -c -o libseparator_la-separator.lo `test -f 'separator.c' || echo '$(srcdir)/'`separator.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

@@ -347,6 +347,61 @@ systembuttons_attach_callback (Control * control, const char *signal,
     g_signal_connect (button, signal, callback, data);
 }
 
+/* global prefs */
+static void
+systembuttons_set_size (Control * control, int size)
+{
+    int s1, s2, n;
+    t_systembuttons *sb = control->data;
+
+    arrange_systembuttons (sb, settings.orientation);
+    gtk_container_add (GTK_CONTAINER (control->base), sb->box);
+
+    n = sb->show_two ? 2 : 1;
+    s1 = icon_size[size] + border_width;
+    s2 = s1 * 0.75;
+
+    if ((settings.orientation == VERTICAL && size <= SMALL) ||
+	(settings.orientation == HORIZONTAL && size > SMALL))
+    {
+	if (size > SMALL)
+	    gtk_widget_set_size_request (sb->buttonbox, s2, s1);
+	else
+	    gtk_widget_set_size_request (sb->buttonbox, s2, s1 * n * 0.75);
+    }
+    else
+    {
+	if (size > SMALL)
+	    gtk_widget_set_size_request (sb->buttonbox, s1, s2);
+	else
+	    gtk_widget_set_size_request (sb->buttonbox, s1 * n * 0.75, s2);
+    }
+}
+
+static void
+systembuttons_set_orientation (Control * control, int orientation)
+{
+    t_systembuttons *sb = control->data;
+
+    arrange_systembuttons (sb, orientation);
+    gtk_container_add (GTK_CONTAINER (control->base), sb->box);
+}
+
+static void
+systembuttons_set_theme (Control * control, const char *theme)
+{
+    GtkWidget *button;
+    t_systembuttons *sb;
+
+    sb = control->data;
+
+    button = gtk_bin_get_child (GTK_BIN (sb->align[0]));
+    button_update_image (button, sb->button_types[0]);
+
+    button = gtk_bin_get_child (GTK_BIN (sb->align[1]));
+    button_update_image (button, sb->button_types[1]);
+}
+
 /* settings */
 static void
 systembuttons_read_config (Control * control, xmlNodePtr node)
@@ -417,61 +472,6 @@ systembuttons_write_config (Control * control, xmlNodePtr node)
     sprintf (prop, "%d", sb->show_two ? 1 : 0);
 
     xmlSetProp (node, (const xmlChar *) "showtwo", prop);
-}
-
-/* global prefs */
-static void
-systembuttons_set_size (Control * control, int size)
-{
-    int s1, s2, n;
-    t_systembuttons *sb = control->data;
-
-    arrange_systembuttons (sb, settings.orientation);
-    gtk_container_add (GTK_CONTAINER (control->base), sb->box);
-
-    n = sb->show_two ? 2 : 1;
-    s1 = icon_size[size] + border_width;
-    s2 = s1 * 0.75;
-
-    if ((settings.orientation == VERTICAL && size <= SMALL) ||
-	(settings.orientation == HORIZONTAL && size > SMALL))
-    {
-	if (size > SMALL)
-	    gtk_widget_set_size_request (sb->buttonbox, s2, s1);
-	else
-	    gtk_widget_set_size_request (sb->buttonbox, s2, s1 * n * 0.75);
-    }
-    else
-    {
-	if (size > SMALL)
-	    gtk_widget_set_size_request (sb->buttonbox, s1, s2);
-	else
-	    gtk_widget_set_size_request (sb->buttonbox, s1 * n * 0.75, s2);
-    }
-}
-
-static void
-systembuttons_set_orientation (Control * control, int orientation)
-{
-    t_systembuttons *sb = control->data;
-
-    arrange_systembuttons (sb, orientation);
-    gtk_container_add (GTK_CONTAINER (control->base), sb->box);
-}
-
-static void
-systembuttons_set_theme (Control * control, const char *theme)
-{
-    GtkWidget *button;
-    t_systembuttons *sb;
-
-    sb = control->data;
-
-    button = gtk_bin_get_child (GTK_BIN (sb->align[0]));
-    button_update_image (button, sb->button_types[0]);
-
-    button = gtk_bin_get_child (GTK_BIN (sb->align[1]));
-    button_update_image (button, sb->button_types[1]);
 }
 
 /* options dialog */

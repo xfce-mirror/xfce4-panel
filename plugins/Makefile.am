@@ -3,4 +3,5 @@ SUBDIRS =								\
 	mailcheck							\
 	switcher							\
 	systembuttons							\
-	pager
+	pager								\
+	separator

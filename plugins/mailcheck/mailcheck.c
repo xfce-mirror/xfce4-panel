@@ -33,6 +33,7 @@
 #include <gtk/gtk.h>
 
 #include <libxfce4util/i18n.h>
+#include <libxfce4util/debug.h>
 #include <libxfcegui4/xfce_iconbutton.h>
 
 #include <panel/xfce.h>
@@ -325,6 +326,8 @@ check_mail (t_mailcheck * mailcheck)
     int mail;
     struct stat s;
 
+    DBG("Checking mail ... ");
+    
     if (stat (mailcheck->mbox, &s) < 0)
 	mail = NO_MAIL;
     else if (!s.st_size)
@@ -341,6 +344,8 @@ check_mail (t_mailcheck * mailcheck)
 	g_idle_add ((GSourceFunc) set_mail_icon, mailcheck);
     }
 
+    DBG("Done\n");
+    
     /* keep the g_timeout running */
     return TRUE;
 }

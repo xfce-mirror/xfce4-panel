@@ -7,7 +7,7 @@ dnl
 
 AC_INIT([panel/main.c])
 
-AM_INIT_AUTOMAKE([xfce4-panel], [3.91.0])
+AM_INIT_AUTOMAKE([xfce4-panel], [3.91.1])
 
 AM_CONFIG_HEADER([config.h])
 
@@ -68,6 +68,7 @@ plugins/clock/Makefile
 plugins/switcher/Makefile
 plugins/systembuttons/Makefile
 plugins/pager/Makefile
+plugins/separator/Makefile
 settings/Makefile
 themes/Makefile
 themes/Crystal/Makefile

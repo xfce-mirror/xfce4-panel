@@ -6,40 +6,40 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 1.0.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-06 17:09+0200\n"
+"POT-Creation-Date: 2003-07-03 10:52+0200\n"
 "PO-Revision-Date: 2003-05-27 12:30+0900\n"
 "Last-Translator: Zhao Ji <zhao-ji@awz.ne.jp>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
 
-#: panel/xfce_support.c:645
+#: panel/xfce_support.c:648
 msgid "Select file"
 msgstr "ファイル選択"
 
-#: panel/controls_dialog.c:264
+#: panel/controls_dialog.c:267
 msgid "Change item"
 msgstr "項目変更"
 
-#: panel/controls_dialog.c:274 panel/item_dialog.c:994
+#: panel/controls_dialog.c:275 panel/item_dialog.c:1004
 msgid "_Revert"
 msgstr "元に戻す(_R)"
 
-#: panel/controls_dialog.c:279 panel/item_dialog.c:1000
+#: panel/controls_dialog.c:280 panel/item_dialog.c:1010
 msgid "_Done"
 msgstr "実行(_D)"
 
-#: panel/controls_dialog.c:303
+#: panel/controls_dialog.c:304
 msgid "Type:"
 msgstr "タイプ:"
 
-#: panel/controls_dialog.c:319 panel/item_dialog.c:597
+#: panel/controls_dialog.c:320 panel/item_dialog.c:609
 msgid "Position:"
 msgstr "位置:"
 
-#: panel/controls_dialog.c:364 panel/controls.c:271
+#: panel/controls_dialog.c:366 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -49,66 +49,66 @@ msgstr ""
 "\n"
 "このメニュー項目を削除してもよろしいですか？"
 
-#: panel/item_dialog.c:267
+#: panel/item_dialog.c:279
 msgid "Other Icon"
 msgstr "その他のアイコン"
 
-#: panel/item_dialog.c:292
+#: panel/item_dialog.c:304
 msgid "Select icon"
 msgstr "アイコン選択"
 
-#: panel/item_dialog.c:330
+#: panel/item_dialog.c:342
 msgid "Icon:"
 msgstr "アイコン:"
 
-#: panel/item_dialog.c:375
+#: panel/item_dialog.c:387
 msgid "Select command"
 msgstr "コマンド選択"
 
-#: panel/item_dialog.c:402
+#: panel/item_dialog.c:414
 msgid "Command:"
 msgstr "コマンド"
 
-#: panel/item_dialog.c:435 plugins/mailcheck/mailcheck.c:675
+#: panel/item_dialog.c:447 plugins/mailcheck/mailcheck.c:679
 msgid "Run in _terminal"
 msgstr "ターミナル内部で実行(_t)"
 
-#: panel/item_dialog.c:440 plugins/mailcheck/mailcheck.c:683
+#: panel/item_dialog.c:452 plugins/mailcheck/mailcheck.c:687
 msgid "Use startup _notification"
 msgstr "起動通知を使う (_n)"
 
-#: panel/item_dialog.c:467
+#: panel/item_dialog.c:479
 msgid "Caption:"
 msgstr "キャプション:"
 
-#: panel/item_dialog.c:506
+#: panel/item_dialog.c:518
 msgid "Tooltip:"
 msgstr "ツール チップ:"
 
-#: panel/item_dialog.c:542
+#: panel/item_dialog.c:554
 #, fuzzy
 msgid "Menu:"
 msgstr "メニュー"
 
-#: panel/item_dialog.c:549
+#: panel/item_dialog.c:561
 msgid "Attach menu to launcher"
 msgstr "メニューをランチャーへ追加"
 
-#: panel/item_dialog.c:692
+#: panel/item_dialog.c:704
 msgid "Icon Preview"
 msgstr "アイコン確認"
 
-#: panel/item_dialog.c:696
+#: panel/item_dialog.c:708
 msgid "Drag file onto this frame to change the icon"
 msgstr "項目変更のために、ここへファイルをドラッグしてください"
 
 #. create dialog
-#: panel/item_dialog.c:981
+#: panel/item_dialog.c:993
 msgid "Change menu item"
 msgstr "メニュー項目の変更"
 
 #. add buttons
-#: panel/item_dialog.c:988
+#: panel/item_dialog.c:998
 msgid "Remove"
 msgstr "削除"
 
@@ -132,7 +132,7 @@ msgstr "ランチャ"
 msgid "Are you sure you want to exit?"
 msgstr "本当に終了してもいいですか？"
 
-#: panel/main.c:253
+#: panel/main.c:259
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -140,7 +140,7 @@ msgid ""
 "http://www.xfce.org\n"
 msgstr ""
 
-#: panel/main.c:269
+#: panel/main.c:275
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -150,19 +150,19 @@ msgstr ""
 "ヒントをサポートしていません。\n"
 "XFceの特徴は、いくつか意図する通りに動かないかもしれません。"
 
-#: panel/controls.c:319 panel/panel.c:123
+#: panel/controls.c:320 panel/panel.c:123
 msgid "/Add _new item"
 msgstr "/項目追加 (_n)"
 
-#: panel/controls.c:321 panel/panel.c:125
+#: panel/controls.c:322 panel/panel.c:125
 msgid "/_Properties..."
 msgstr "/プロパティ(_P)"
 
-#: panel/controls.c:322
+#: panel/controls.c:323
 msgid "/_Remove"
 msgstr "/削除 (_R)"
 
-#: panel/controls.c:654
+#: panel/controls.c:655
 msgid "This item has no configuration options"
 msgstr "この項目に、オプション設定は存在しません"
 
@@ -190,60 +190,60 @@ msgstr "/画面ロック (_L)"
 msgid "/E_xit"
 msgstr "/終了 (_x)"
 
-#: panel/panel.c:469 settings/xfce_settings_plugin.c:76
-#: settings/xfce_settings_dialog.c:634
+#: panel/panel.c:469 settings/xfce_settings_plugin.c:82
+#: settings/xfce_settings_dialog.c:641
 msgid "XFce Panel"
 msgstr "XFceパネル"
 
-#: panel/icons.c:71
+#: panel/icons.c:73
 msgid "Default"
 msgstr "標準"
 
-#: panel/icons.c:72
+#: panel/icons.c:74
 msgid "Editor"
 msgstr "エディタ"
 
-#: panel/icons.c:73
+#: panel/icons.c:75
 msgid "File management"
 msgstr "ファイル操作"
 
-#: panel/icons.c:74
+#: panel/icons.c:76
 msgid "Utilities"
 msgstr "ユーティリティ"
 
-#: panel/icons.c:75
+#: panel/icons.c:77
 msgid "Games"
 msgstr "ゲーム"
 
-#: panel/icons.c:76
+#: panel/icons.c:78
 msgid "Help browser"
 msgstr "ヘルプ ブラウザ"
 
-#: panel/icons.c:77
+#: panel/icons.c:79
 msgid "Multimedia"
 msgstr "マルチメディア"
 
-#: panel/icons.c:78
+#: panel/icons.c:80
 msgid "Network"
 msgstr "ネットワーク"
 
-#: panel/icons.c:79
+#: panel/icons.c:81
 msgid "Graphics"
 msgstr "グラフィック"
 
-#: panel/icons.c:80
+#: panel/icons.c:82
 msgid "Printer"
 msgstr "プリンタ"
 
-#: panel/icons.c:81
+#: panel/icons.c:83
 msgid "Productivity"
 msgstr "プロダクト"
 
-#: panel/icons.c:82
+#: panel/icons.c:84
 msgid "Sound"
 msgstr "サウンド"
 
-#: panel/icons.c:83
+#: panel/icons.c:85
 msgid "Terminal"
 msgstr "ターミナル"
 
@@ -255,100 +255,100 @@ msgstr "設定マネージャが利用不可能です"
 msgid "Menu"
 msgstr "メニュー"
 
-#: settings/xfce_settings_dialog.c:118
+#: settings/xfce_settings_dialog.c:119
 msgid "Tiny"
 msgstr "極小"
 
-#: settings/xfce_settings_dialog.c:122
+#: settings/xfce_settings_dialog.c:123
 msgid "Small"
 msgstr "小"
 
-#: settings/xfce_settings_dialog.c:126
+#: settings/xfce_settings_dialog.c:127
 msgid "Medium"
 msgstr "中"
 
-#: settings/xfce_settings_dialog.c:130
+#: settings/xfce_settings_dialog.c:131
 msgid "Large"
 msgstr "大"
 
-#: settings/xfce_settings_dialog.c:181
+#: settings/xfce_settings_dialog.c:182
 msgid "Horizontal"
 msgstr "水平"
 
-#: settings/xfce_settings_dialog.c:185
+#: settings/xfce_settings_dialog.c:186
 msgid "Vertical"
 msgstr "垂直"
 
-#: settings/xfce_settings_dialog.c:217 settings/xfce_settings_dialog.c:447
+#: settings/xfce_settings_dialog.c:218 settings/xfce_settings_dialog.c:448
 msgid "Left"
 msgstr "左"
 
-#: settings/xfce_settings_dialog.c:221 settings/xfce_settings_dialog.c:448
+#: settings/xfce_settings_dialog.c:222 settings/xfce_settings_dialog.c:449
 msgid "Right"
 msgstr "右"
 
-#: settings/xfce_settings_dialog.c:225 settings/xfce_settings_dialog.c:446
-#: settings/xfce_settings_dialog.c:502
+#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:447
+#: settings/xfce_settings_dialog.c:503
 msgid "Top"
 msgstr "上"
 
-#: settings/xfce_settings_dialog.c:229 settings/xfce_settings_dialog.c:445
-#: settings/xfce_settings_dialog.c:510
+#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:446
+#: settings/xfce_settings_dialog.c:511
 msgid "Bottom"
 msgstr "下"
 
-#: settings/xfce_settings_dialog.c:365
+#: settings/xfce_settings_dialog.c:366
 msgid "Panel size:"
 msgstr "パネル サイズ:"
 
-#: settings/xfce_settings_dialog.c:381
+#: settings/xfce_settings_dialog.c:382
 msgid "Panel orientation:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:398
+#: settings/xfce_settings_dialog.c:399
 msgid "Popup position:"
 msgstr "ポップアップ位置:"
 
-#: settings/xfce_settings_dialog.c:415
+#: settings/xfce_settings_dialog.c:416
 msgid "Icon theme:"
 msgstr "アイコン テーマ:"
 
-#: settings/xfce_settings_dialog.c:486
+#: settings/xfce_settings_dialog.c:487
 msgid "Panel layer:"
 msgstr "パネル・レイヤ"
 
-#: settings/xfce_settings_dialog.c:506
+#: settings/xfce_settings_dialog.c:507
 msgid "Normal"
 msgstr "ノーマル"
 
-#: settings/xfce_settings_dialog.c:526
+#: settings/xfce_settings_dialog.c:527
 msgid "Center the panel:"
 msgstr "パネル中央"
 
-#: settings/xfce_settings_dialog.c:550
+#: settings/xfce_settings_dialog.c:551
 msgid "Set"
 msgstr "セット"
 
-#: settings/xfce_settings_dialog.c:586
+#: settings/xfce_settings_dialog.c:587
 msgid "Autohide:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:649
+#: settings/xfce_settings_dialog.c:655
 msgid "XFce Panel Settings"
 msgstr "XFce パネル設定"
 
 #. Appearance
-#: settings/xfce_settings_dialog.c:661
+#: settings/xfce_settings_dialog.c:667
 msgid "Appearance"
 msgstr "外観"
 
 #. Position
-#: settings/xfce_settings_dialog.c:682
+#: settings/xfce_settings_dialog.c:688
 msgid "Position"
 msgstr "位置"
 
 #. autohide
-#: settings/xfce_settings_dialog.c:698
+#: settings/xfce_settings_dialog.c:704
 msgid "Behaviour"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgstr "秒表示:"
 msgid "Xfce Clock"
 msgstr "XFce時計"
 
-#: plugins/pager/pager.c:324
+#: plugins/pager/pager.c:278
 msgid "Graphical pager"
 msgstr "グラフィカル・ページャ"
 
@@ -491,58 +491,62 @@ msgid "Lock the screen"
 msgstr "画面ロック"
 
 #: plugins/systembuttons/systembuttons.c:151
-#: plugins/systembuttons/systembuttons.c:588
+#: plugins/systembuttons/systembuttons.c:591
 msgid "Exit"
 msgstr "終了"
 
 #: plugins/systembuttons/systembuttons.c:152
-#: plugins/systembuttons/systembuttons.c:589
+#: plugins/systembuttons/systembuttons.c:592
 msgid "Setup"
 msgstr "設定"
 
 #: plugins/systembuttons/systembuttons.c:153
-#: plugins/systembuttons/systembuttons.c:590
+#: plugins/systembuttons/systembuttons.c:593
 msgid "Info"
 msgstr "お知らせ"
 
-#: plugins/systembuttons/systembuttons.c:570
+#: plugins/systembuttons/systembuttons.c:573
 msgid "Show two buttons:"
 msgstr ""
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:587
+#: plugins/systembuttons/systembuttons.c:590
 msgid "Lock"
 msgstr "ロック"
 
-#: plugins/systembuttons/systembuttons.c:619
+#: plugins/systembuttons/systembuttons.c:622
 msgid "Button 1:"
 msgstr "ボタン１:"
 
-#: plugins/systembuttons/systembuttons.c:635
+#: plugins/systembuttons/systembuttons.c:638
 msgid "Button 2:"
 msgstr "ボタン２:"
 
-#: plugins/systembuttons/systembuttons.c:674
+#: plugins/systembuttons/systembuttons.c:677
 msgid "System buttons"
 msgstr "システム・ボタン"
 
-#: plugins/mailcheck/mailcheck.c:535
+#: plugins/separator/separator.c:147
+msgid "Separator"
+msgstr ""
+
+#: plugins/mailcheck/mailcheck.c:539
 msgid "Mail box:"
 msgstr "メール受信箱:"
 
-#: plugins/mailcheck/mailcheck.c:628
+#: plugins/mailcheck/mailcheck.c:632
 msgid "Mail command:"
 msgstr "メール コマンド:"
 
-#: plugins/mailcheck/mailcheck.c:642
+#: plugins/mailcheck/mailcheck.c:646
 msgid "Command to run when the button on the panel is clicked"
 msgstr "ボタンを押されると、実行されるコマンド"
 
-#: plugins/mailcheck/mailcheck.c:715
+#: plugins/mailcheck/mailcheck.c:719
 msgid "Interval (sec):"
 msgstr "間隔 (sec):"
 
-#: plugins/mailcheck/mailcheck.c:792
+#: plugins/mailcheck/mailcheck.c:796
 msgid "Mail check"
 msgstr "メール確認"
 
