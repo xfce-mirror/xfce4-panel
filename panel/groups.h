@@ -51,4 +51,8 @@ void groups_set_theme (const char *theme);
 void groups_set_num_groups (int n);
 void groups_add_control (int id, const char *filename, int index);
 
+/* arrow direction */
+void groups_set_arrow_direction (GtkArrowType type);
+GtkArrowType groups_get_arrow_direction (void);
+
 #endif /* __XFCE_GROUPS_H__ */
