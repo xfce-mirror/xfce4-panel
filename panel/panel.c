@@ -371,13 +371,8 @@ panel_move_func (GtkWidget *win, int *x, int *y, Panel *panel)
 static void
 panel_set_position (Panel * p)
 {
-    gboolean hidden = p->priv->settings.autohide;
-
-    if (!p->priv->is_created)
+    if (!p->priv->is_created || p->hidden)
 	return;
-
-    if (hidden)
-	panel_set_autohide (FALSE);
 
     gtk_widget_size_request (p->toplevel, &(p->priv->req));
     
@@ -467,9 +462,6 @@ panel_set_position (Panel * p)
 
     update_arrow_direction (p);
 
-    if (hidden)
-	panel_set_autohide (TRUE);
-    
     write_panel_config ();
 
     update_partial_struts (p);
@@ -777,8 +769,8 @@ panel_set_hidden (Panel * p, gboolean hide)
     }
     else
     {
-	gtk_widget_show (p->main_frame);
 	gtk_widget_set_size_request (p->toplevel, -1, -1);
+	gtk_widget_show (p->main_frame);
     }
     
     DBG ("%s: (%d,%d) %dx%d", hide ? "hide" : "unhide", x, y, w, h);
@@ -792,7 +784,7 @@ panel_set_hidden (Panel * p, gboolean hide)
 	p->hidden = hide;
 }
 
-gboolean
+static gboolean
 panel_hide_timeout (Panel * p)
 {
     /* if popup is open, keep trying */
@@ -809,7 +801,7 @@ panel_hide_timeout (Panel * p)
     return FALSE;
 }
 
-gboolean
+static gboolean
 panel_unhide_timeout (Panel * p)
 {
     if (p->hidden)
@@ -818,7 +810,7 @@ panel_unhide_timeout (Panel * p)
     return FALSE;
 }
 
-gboolean
+static gboolean
 panel_enter (GtkWindow * w, GdkEventCrossing * event, Panel * p)
 {
     if (!(settings.autohide))
@@ -843,7 +835,7 @@ panel_enter (GtkWindow * w, GdkEventCrossing * event, Panel * p)
     return FALSE;
 }
 
-gboolean
+static gboolean
 panel_leave (GtkWidget * w, GdkEventCrossing * event, Panel * p)
 {
     if (!(settings.autohide))
@@ -955,28 +947,6 @@ create_panel_framework (Panel * p)
 {
     gboolean vertical = (settings.orientation == VERTICAL);
 
-    /* toplevel window */
-    if (!p->toplevel)
-    {
-	p->toplevel = create_panel_window (p);
-	
-	g_object_add_weak_pointer (G_OBJECT (p->toplevel),
-				   (gpointer *) & (p->toplevel));
-
-	/* Connect signalers to window for autohide */
-	g_signal_connect (p->toplevel, "enter-notify-event",
-			  G_CALLBACK (panel_enter), p);
-
-	g_signal_connect (p->toplevel, "leave-notify-event",
-			  G_CALLBACK (panel_leave), p);
-
-	gtk_drag_dest_set (p->toplevel, GTK_DEST_DEFAULT_ALL, entry, 2,
-			   GDK_ACTION_COPY);
-
-	g_signal_connect (p->toplevel, "drag-motion",
-			  G_CALLBACK (drag_motion), p);
-    }
-
     /* main frame */
     p->main_frame = gtk_frame_new (NULL);
     gtk_frame_set_shadow_type (GTK_FRAME (p->main_frame), GTK_SHADOW_OUT);
@@ -1038,8 +1008,24 @@ create_panel (void)
 
     p->priv = g_new0 (PanelPrivate, 1);
 
-    /* panel framework */
-    create_panel_framework (p);
+    /* toplevel window */
+    p->toplevel = create_panel_window (p);
+    
+    g_object_add_weak_pointer (G_OBJECT (p->toplevel),
+			       (gpointer *) & (p->toplevel));
+
+    /* Connect signalers to window for autohide */
+    g_signal_connect (p->toplevel, "enter-notify-event",
+		      G_CALLBACK (panel_enter), p);
+
+    g_signal_connect (p->toplevel, "leave-notify-event",
+		      G_CALLBACK (panel_leave), p);
+
+    gtk_drag_dest_set (p->toplevel, GTK_DEST_DEFAULT_ALL, entry, 2,
+		       GDK_ACTION_COPY);
+
+    g_signal_connect (p->toplevel, "drag-motion",
+		      G_CALLBACK (drag_motion), p);
 
     p->priv->screen = gtk_widget_get_screen (p->toplevel);
     p->priv->monitor = -1;
@@ -1053,6 +1039,9 @@ create_panel (void)
 
     /* backwards compat */
     p->priv->settings = settings;
+
+    /* panel framework */
+    create_panel_framework (p);
 
     groups_init (GTK_BOX (p->group_box));
 
