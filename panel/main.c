@@ -65,6 +65,7 @@ typedef enum
     NOSIGNAL,
     RESTART,
     QUIT,
+    QUIT_CONFIRM,
     NUM_SIGNALS,
 }
 SignalState;
@@ -179,6 +180,11 @@ check_signal_state (void)
 	{
 	    quit (TRUE);
 	}
+	else if (sigstate == QUIT_CONFIRM)
+	{
+	    sigstate = NOSIGNAL;
+	    quit (FALSE);
+	}
     }
 
     /* keep running */
@@ -199,6 +205,10 @@ sighandler (int sig)
 	    sigstate = RESTART;
 	    break;
 
+	case SIGUSR2:
+	    sigstate = QUIT_CONFIRM;
+	    break;
+	    
 	case SIGINT:
 	    /* hack: prevent the panel from saving config on ^C */
 	    disable_user_config = TRUE;
@@ -373,11 +383,13 @@ main (int argc, char **argv)
 #endif
     sigaction (SIGHUP, &act, NULL);
     sigaction (SIGUSR1, &act, NULL);
+    sigaction (SIGUSR2, &act, NULL);
     sigaction (SIGINT, &act, NULL);
     sigaction (SIGTERM, &act, NULL);
 #else
     signal (SIGHUP, sighandler);
     signal (SIGUSR1, sighandler);
+    signal (SIGUSR2, sighandler);
     signal (SIGINT, sighandler);
     signal (SIGTERM, sighandler);
 #endif
