@@ -1,20 +1,29 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Treanslation file for XFce4's panel.
+# Copyright (C) Olivier Fourdain, 2003
+# This file is distributed under the same license as the XFce4.
 # FIRST AUTHOR <edscott@imp.mx>, 2003.
+#
+#  Paweł Pastuła <pastulap@poczta.onet.pl>, 2003
+#--
+#  Daniel Mróz <beorn@alpha.pl>, 2003
+#
+#     Changes:
+#        - fixed missing semicolons
+#        - minor changes and fixes (ie "Środek" -> "Środa")
+#        - translated few missing strings
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2003-09-10 08:40+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Paweł Pastuła <pastulap@poczta.onet.pl>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2003-11-05 17:25+0100\n"
+"PO-Revision-Date: 2003-12-25 18:20+0100\n"
+"Last-Translator: Daniel Mróz <beorn@alpha.pl>\n"
+"Language-Team: none <none@none>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: beorn@alpha.pl\n"
 
 #: panel/xfce_support.c:597
 msgid "Select file"
@@ -26,9 +35,9 @@ msgstr "Zmień element"
 
 #: panel/controls_dialog.c:286 panel/item_dialog.c:647
 msgid "Position:"
-msgstr "Pozycja"
+msgstr "Pozycja:"
 
-#: panel/controls_dialog.c:331 panel/controls.c:272
+#: panel/controls_dialog.c:342 panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -64,7 +73,7 @@ msgstr "Uruchom w _terminalu"
 
 #: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
-msgstr "Powiadom o uruchomieniu"
+msgstr "_Powiadom o uruchomieniu"
 
 #: panel/item_dialog.c:530
 msgid "Caption:"
@@ -72,7 +81,7 @@ msgstr "Opis:"
 
 #: panel/item_dialog.c:563
 msgid "Tooltip:"
-msgstr "Podpowiedź"
+msgstr "Podpowiedź:"
 
 #: panel/item_dialog.c:599
 msgid "Menu:"
@@ -80,22 +89,22 @@ msgstr ""
 
 #: panel/item_dialog.c:606
 msgid "Attach menu to launcher"
-msgstr ""
+msgstr "Dołącz menu do aktywatora"
 
 #: panel/item_dialog.c:738
 msgid "Icon Preview"
-msgstr "Podgląd iknony"
+msgstr "Podgląd ikony"
 
 #: panel/item_dialog.c:742
 msgid "Drag file onto this frame to change the icon"
 msgstr "Przeciągnij plik do tej ramki aby zmienić ikonę"
 
-#: panel/item_dialog.c:931
+#: panel/item_dialog.c:930
 msgid "Change menu item"
 msgstr "Zmień element menu"
 
 #. add buttons
-#: panel/item_dialog.c:934
+#: panel/item_dialog.c:933
 msgid "Remove"
 msgstr "_Usuń"
 
@@ -105,7 +114,7 @@ msgstr "Naciśnij 3 klawisz myszy aby usunąć element"
 
 #: panel/item.c:464
 msgid "Add launcher"
-msgstr "Dodaj program"
+msgstr "Dodaj aktywator"
 
 #: panel/item.c:469
 msgid "Add new item"
@@ -113,13 +122,13 @@ msgstr "Dodaj nowy element"
 
 #: panel/item.c:601
 msgid "Launcher"
-msgstr "Program"
+msgstr "Aktywator"
 
-#: panel/main.c:132
+#: panel/main.c:115
 msgid "Are you sure you want to exit?"
 msgstr "Czy na pewno chcesz wyjść?"
 
-#: panel/main.c:268
+#: panel/main.c:243
 #, c-format
 msgid ""
 "%s, version %s\n"
@@ -130,7 +139,7 @@ msgstr ""
 "Część środowiska XFCE\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:284
+#: panel/main.c:259
 msgid ""
 "Your window manager does not seem to support the new window manager hints as "
 "defined on http://www.freedesktop.org. \n"
@@ -162,7 +171,7 @@ msgstr "/Panel XFce"
 
 #: panel/panel.c:126
 msgid "/_Settings manager"
-msgstr "/_Menadźer ustawień"
+msgstr "/_Menadżer ustawień"
 
 #: panel/panel.c:128
 msgid "/_About XFce"
@@ -187,7 +196,7 @@ msgstr "Panel XFce"
 
 #: panel/icons.c:73
 msgid "Default"
-msgstr "Standardowy"
+msgstr "Domyślny"
 
 #: panel/icons.c:74
 msgid "Editor"
@@ -227,7 +236,7 @@ msgstr "Drukarka"
 
 #: panel/icons.c:83
 msgid "Productivity"
-msgstr "Produkcja"
+msgstr "Produktywność"
 
 #: panel/icons.c:84
 msgid "Sound"
@@ -289,11 +298,11 @@ msgstr "Dół"
 
 #: settings/xfce_settings_dialog.c:374
 msgid "Panel size:"
-msgstr "Rozmiar panela:"
+msgstr "Rozmiar panelu:"
 
 #: settings/xfce_settings_dialog.c:390
 msgid "Panel orientation:"
-msgstr "Położenie panela:"
+msgstr "Położenie panelu:"
 
 #: settings/xfce_settings_dialog.c:407
 msgid "Popup position:"
@@ -305,7 +314,7 @@ msgstr "Styl ikon:"
 
 #: settings/xfce_settings_dialog.c:495
 msgid "Panel layer:"
-msgstr "Warstwa panela:"
+msgstr "Warstwa panelu:"
 
 #: settings/xfce_settings_dialog.c:515
 msgid "Normal"
@@ -321,11 +330,11 @@ msgstr "Ustaw"
 
 #: settings/xfce_settings_dialog.c:595
 msgid "Autohide:"
-msgstr "Automatyczne ukrywanie"
+msgstr "Automatyczne ukrywanie:"
 
 #: settings/xfce_settings_dialog.c:663
 msgid "XFce Panel Settings"
-msgstr "Ustawienia panela XFce"
+msgstr "Ustawienia panelu XFce"
 
 #. Appearance
 #: settings/xfce_settings_dialog.c:675
@@ -356,7 +365,7 @@ msgstr "Wtorek"
 
 #: plugins/clock/clock.c:60
 msgid "Wednesday"
-msgstr "Środek"
+msgstr "Środa"
 
 #: plugins/clock/clock.c:61
 msgid "Thursday"
@@ -436,12 +445,12 @@ msgstr ""
 
 #: plugins/clock/clock.c:433
 msgid "Hour mode:"
-msgstr "Tryb godzin"
+msgstr "Tryb godzin:"
 
 #: plugins/clock/clock.c:440
 #, fuzzy
 msgid "24 hour"
-msgstr "24 godzinny:"
+msgstr "24 godzinny"
 
 #: plugins/clock/clock.c:446
 msgid "12 hour"
@@ -459,9 +468,9 @@ msgstr "Pokaż sekundy:"
 msgid "Xfce Clock"
 msgstr "Zegar XFce"
 
-#: plugins/pager/pager.c:277
+#: plugins/pager/pager.c:271
 msgid "Graphical pager"
-msgstr ""
+msgstr "Lista obszarów roboczych"
 
 #: plugins/switcher/switcher.c:696
 msgid "Desktop switcher"
@@ -498,7 +507,7 @@ msgstr "Informacja"
 
 #: plugins/systembuttons/systembuttons.c:500
 msgid "Show two buttons:"
-msgstr "Pokaż dwa przyciski"
+msgstr "Pokaż dwa przyciski:"
 
 #. set names to use in option menus
 #: plugins/systembuttons/systembuttons.c:517
@@ -515,7 +524,7 @@ msgstr "Przycisk 2:"
 
 #: plugins/systembuttons/systembuttons.c:600
 msgid "System buttons"
-msgstr "Przysicki systemowe"
+msgstr "Przyciski systemowe"
 
 #: plugins/separator/separator.c:153
 msgid "Separator"
@@ -531,7 +540,7 @@ msgstr "Polecenie poczty:"
 
 #: plugins/mailcheck/mailcheck.c:637
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Polecenie do uruchomienia po naciśnieciu na przycisku panela"
+msgstr "Polecenie do uruchomienia po naciśnieciu na przycisku panelu"
 
 #: plugins/mailcheck/mailcheck.c:706
 msgid "Interval (sec):"

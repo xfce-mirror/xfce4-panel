@@ -160,7 +160,7 @@ get_theme_dirs (void)
 	dirs = g_new (gchar *, 2);
 
 	dirs[0] = g_build_filename (DATADIR, "themes", NULL);
-	dirs[2] = NULL;
+	dirs[1] = NULL;
     }
     else
     {
@@ -312,6 +312,10 @@ check_net_wm_support (void)
 void
 set_window_skip (GtkWidget * win)
 {
+#if GTK_CHECK_VERSION(2, 2, 0)
+    g_object_set (G_OBJECT(win), "skip_taskbar_hint", TRUE, NULL);
+    g_object_set (G_OBJECT(win), "skip_pager_hint", TRUE, NULL);
+#else
     Screen *xscreen;
     Window xid;
     static Atom xa_SKIP_PAGER = 0;
@@ -329,6 +333,7 @@ set_window_skip (GtkWidget * win)
     xid = GDK_WINDOW_XID (win->window);
 
     netk_change_state (xscreen, xid, TRUE, xa_SKIP_PAGER, xa_SKIP_TASKBAR);
+#endif
 }
 
 /*  DND
@@ -822,7 +827,6 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
     gchar **free_envp = NULL;
     gchar **envp = environ;
     gchar **argv = NULL;
-    gboolean retval;
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     SnLauncherContext *sn_context = NULL;
@@ -833,16 +837,16 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
     {
         if (in_terminal)
         {
-	    execute = g_strdup_printf ("xfterm4 %s", cmd);
+	    execute = g_strconcat ("xfterm4 ", cmd, NULL);
         }
         else
         {
-	    execute = g_strdup_printf ("xftree4 %s", cmd);
+	    execute = g_strconcat ("xftree4 ", cmd, NULL);
         }
     }
     else if (in_terminal)
     {
-	execute = g_strdup_printf ("xfterm4 -e %s", cmd);
+	execute = g_strconcat ("xfterm4 -e ", cmd, NULL);
     }
     else
     {
@@ -889,25 +893,25 @@ real_exec_cmd (const char *cmd, gboolean in_terminal,
 
     g_free (execute);
 
-    if (silent)
+    success =
+	g_spawn_async_with_pipes (NULL, argv, free_envp ? free_envp : envp,
+				  G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, 
+				  NULL, NULL, NULL, &error);
+    if (!success)
     {
-	retval =
-	    g_spawn_async (NULL, argv, free_envp ? free_envp : envp,
-			   G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
-	if (!retval)
+	if (error)
 	{
-	    if (error)
+	    if (silent)
 	    {
-		g_warning ("%s: %s\n", PACKAGE, error->message);
-		g_error_free (error);
+		g_warning ("%s", error->message);
 	    }
-	    success = FALSE;
+	    else
+	    {
+		xfce_err (error->message);
+	    }
+	    
+	    g_error_free (error);
 	}
-    }
-    else
-    {
-	success =
-	    exec_command_full_with_envp (argv, free_envp ? free_envp : envp);
     }
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
@@ -982,6 +986,7 @@ schedule_exec(const gchar *cmd, gboolean in_terminal, gboolean use_sn,
 void
 exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
+    g_return_if_fail (cmd != NULL);
     schedule_exec(cmd, in_terminal, use_sn, FALSE);
 }
 
@@ -989,5 +994,6 @@ exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn)
 void
 exec_cmd_silent (const char *cmd, gboolean in_terminal, gboolean use_sn)
 {
+    g_return_if_fail (cmd != NULL);
     schedule_exec(cmd, in_terminal, use_sn, TRUE);
 }

@@ -5,10 +5,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
-"POT-Creation-Date: 2003-09-10 08:40+0200\n"
-"PO-Revision-Date: 2003-08-29 21:17+0800\n"
+"POT-Creation-Date: 2003-12-04 09:37+0100\n"
+"PO-Revision-Date: 2004-04-20 16:21+0800\n"
 "Last-Translator: umm <umm@pchome.com.tw>\n"
-"Language-Team:  <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,11 +21,13 @@ msgstr "選擇檔案"
 msgid "Change item"
 msgstr "改變項目"
 
-#: panel/controls_dialog.c:286 panel/item_dialog.c:647
+#: panel/controls_dialog.c:286
+#: panel/item_dialog.c:681
 msgid "Position:"
 msgstr "位置："
 
-#: panel/controls_dialog.c:331 panel/controls.c:272
+#: panel/controls_dialog.c:342
+#: panel/controls.c:272
 msgid ""
 "Removing an item will also remove its popup menu.\n"
 "\n"
@@ -35,64 +37,66 @@ msgstr ""
 "\n"
 "你希望移除該項目嗎？"
 
-#: panel/item_dialog.c:320
+#: panel/item_dialog.c:321
 msgid "Other Icon"
 msgstr "其他圖示"
 
-#: panel/item_dialog.c:345
+#: panel/item_dialog.c:346
 msgid "Select icon"
 msgstr "選擇圖示"
 
-#: panel/item_dialog.c:384
+#: panel/item_dialog.c:396
 msgid "Icon:"
 msgstr "圖示："
 
-#: panel/item_dialog.c:433
+#: panel/item_dialog.c:467
 msgid "Select command"
 msgstr "選擇指令"
 
-#: panel/item_dialog.c:461
+#: panel/item_dialog.c:495
 msgid "Command:"
 msgstr "指令："
 
-#: panel/item_dialog.c:498 plugins/mailcheck/mailcheck.c:668
+#: panel/item_dialog.c:532
+#: plugins/mailcheck/mailcheck.c:668
 msgid "Run in _terminal"
 msgstr "在終端機中執行(_T)"
 
-#: panel/item_dialog.c:503 plugins/mailcheck/mailcheck.c:676
+#: panel/item_dialog.c:537
+#: plugins/mailcheck/mailcheck.c:676
 msgid "Use startup _notification"
 msgstr "使用啟動提示(_N)"
 
-#: panel/item_dialog.c:530
+#: panel/item_dialog.c:564
 msgid "Caption:"
 msgstr "標題："
 
-#: panel/item_dialog.c:563
+#: panel/item_dialog.c:597
 msgid "Tooltip:"
 msgstr "工具提示："
 
-#: panel/item_dialog.c:599
+#: panel/item_dialog.c:633
 msgid "Menu:"
 msgstr "選單："
 
-#: panel/item_dialog.c:606
+#: panel/item_dialog.c:640
 msgid "Attach menu to launcher"
 msgstr "將選單附加到啟動器"
 
-#: panel/item_dialog.c:738
+#: panel/item_dialog.c:773
 msgid "Icon Preview"
 msgstr "圖示預覽"
 
-#: panel/item_dialog.c:742
+#: panel/item_dialog.c:777
 msgid "Drag file onto this frame to change the icon"
 msgstr "拖曳檔案到框架中以改變圖示"
 
-#: panel/item_dialog.c:931
+#: panel/item_dialog.c:965
 msgid "Change menu item"
 msgstr "改變選單項目"
 
 #. add buttons
-#: panel/item_dialog.c:934
+#: panel/item_dialog.c:968
 msgid "Remove"
 msgstr "移除"
 
@@ -112,36 +116,36 @@ msgstr "增加新項目"
 msgid "Launcher"
 msgstr "啟動器"
 
-#: panel/main.c:132
+#: panel/main.c:117
 msgid "Are you sure you want to exit?"
 msgstr "你確定要退出？"
 
-#: panel/main.c:268
+#: panel/main.c:329
 #, c-format
 msgid ""
 "%s, version %s\n"
-"Part of the XFce Desktop Environment\n"
+"Part of the Xfce Desktop Environment\n"
 "http://www.xfce.org\n"
 msgstr ""
 "%s, 版本 %s\n"
-"XFce 桌面環境的組成部分\n"
+"Xfce 桌面環境的組成部分\n"
 "http://www.xfce.org\n"
 
-#: panel/main.c:284
+#: panel/main.c:361
 msgid ""
-"Your window manager does not seem to support the new window manager hints as "
-"defined on http://www.freedesktop.org. \n"
-"Some XFce features may not work as intended."
+"Your window manager does not seem to support the new window manager hints as defined on http://www.freedesktop.org. \n"
+"Some Xfce features may not work as intended."
 msgstr ""
-"你的視窗管理程式似乎不支援 http://www.freedesktop.org 所定義的視窗管理程式提"
-"示。\n"
-"某些 XFce 的功能可能無法正常運行。"
+"你的視窗管理程式似乎不支援 http://www.freedesktop.org 所定義的視窗管理程式提示。\n"
+"某些 Xfce 的功能可能無法正常運行。"
 
-#: panel/controls.c:320 panel/panel.c:123
+#: panel/controls.c:320
+#: panel/panel.c:412
 msgid "/Add _new item"
 msgstr "/增加新項目(_N)"
 
-#: panel/controls.c:322 panel/panel.c:125
+#: panel/controls.c:322
+#: panel/panel.c:414
 msgid "/_Properties..."
 msgstr "/屬性(_P)..."
 
@@ -153,34 +157,39 @@ msgstr "/移除(_R)"
 msgid "This item has no configuration options"
 msgstr "該項目沒有設定選項"
 
-#: panel/panel.c:121
-msgid "/XFce Panel"
-msgstr "/XFce 啟動面板"
+#: panel/panel.c:410
+msgid "/Xfce Panel"
+msgstr "/Xfce 啟動面板"
 
-#: panel/panel.c:126
-msgid "/_Settings manager"
-msgstr "/設定管理程式(_S)"
+#: panel/panel.c:415
+msgid "/_About Xfce"
+msgstr "/關於 Xfce(_A)"
 
-#: panel/panel.c:128
-msgid "/_About XFce"
-msgstr "/關於 XFce(_A)"
-
-#: panel/panel.c:129
+#: panel/panel.c:416
 msgid "/_Help"
 msgstr "/說明(_H)"
 
-#: panel/panel.c:131
+#: panel/panel.c:419
+msgid "/_Settings manager"
+msgstr "/設定管理程式(_S)"
+
+#: panel/panel.c:422
 msgid "/_Lock screen"
 msgstr "/鎖住螢幕(_L)"
 
-#: panel/panel.c:132
+#: panel/panel.c:423
+msgid "/_Restart"
+msgstr "重置(_R)"
+
+#: panel/panel.c:425
 msgid "/E_xit"
 msgstr "/離開(_X)"
 
-#: panel/panel.c:489 settings/xfce_settings_plugin.c:82
+#: panel/panel.c:812
+#: settings/xfce_settings_plugin.c:82
 #: settings/xfce_settings_dialog.c:649
-msgid "XFce Panel"
-msgstr "XFce 面板"
+msgid "Xfce Panel"
+msgstr "Xfce 面板"
 
 #: panel/icons.c:73
 msgid "Default"
@@ -238,7 +247,7 @@ msgstr "終端機"
 msgid "Settings manager not available"
 msgstr "設定管理程式不可使用"
 
-#: panel/popup.c:263
+#: panel/popup.c:261
 msgid "Menu"
 msgstr "選單"
 
@@ -266,20 +275,24 @@ msgstr "水平"
 msgid "Vertical"
 msgstr "垂直"
 
-#: settings/xfce_settings_dialog.c:226 settings/xfce_settings_dialog.c:456
+#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:456
 msgid "Left"
 msgstr "左側"
 
-#: settings/xfce_settings_dialog.c:230 settings/xfce_settings_dialog.c:457
+#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:457
 msgid "Right"
 msgstr "右側"
 
-#: settings/xfce_settings_dialog.c:234 settings/xfce_settings_dialog.c:455
+#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:455
 #: settings/xfce_settings_dialog.c:511
 msgid "Top"
 msgstr "頂部"
 
-#: settings/xfce_settings_dialog.c:238 settings/xfce_settings_dialog.c:454
+#: settings/xfce_settings_dialog.c:238
+#: settings/xfce_settings_dialog.c:454
 #: settings/xfce_settings_dialog.c:519
 msgid "Bottom"
 msgstr "底部"
@@ -321,8 +334,8 @@ msgid "Autohide:"
 msgstr "自動隱藏："
 
 #: settings/xfce_settings_dialog.c:663
-msgid "XFce Panel Settings"
-msgstr "XFce 面板設定"
+msgid "Xfce Panel Settings"
+msgstr "Xfce 面板設定"
 
 #. Appearance
 #: settings/xfce_settings_dialog.c:675
@@ -339,123 +352,58 @@ msgstr "位置"
 msgid "Behaviour"
 msgstr "特性"
 
-#: plugins/clock/clock.c:57
-msgid "Sunday"
-msgstr "星期日"
+#  Use format characters from strftime(3)
+#  * to get the proper string for your locale.
+#  * I used these:
+#  * %A  : full weekday name
+#  * %-d : day of the month, without prefixed 0
+#  * %B  : full month name
+#  * %Y  : four digit year
+#: plugins/clock/clock.c:119
+msgid "%A, %-d %B %Y"
+msgstr ""
 
-#: plugins/clock/clock.c:58
-msgid "Monday"
-msgstr "星期一"
-
-#: plugins/clock/clock.c:59
-msgid "Tuesday"
-msgstr "星期二"
-
-#: plugins/clock/clock.c:60
-msgid "Wednesday"
-msgstr "星期三"
-
-#: plugins/clock/clock.c:61
-msgid "Thursday"
-msgstr "星期四"
-
-#: plugins/clock/clock.c:62
-msgid "Friday"
-msgstr "星期五"
-
-#: plugins/clock/clock.c:63
-msgid "Saturday"
-msgstr "星期六"
-
-#: plugins/clock/clock.c:67
-msgid "January"
-msgstr "一月"
-
-#: plugins/clock/clock.c:68
-msgid "February"
-msgstr "二月"
-
-#: plugins/clock/clock.c:69
-msgid "March"
-msgstr "三月"
-
-#: plugins/clock/clock.c:70
-msgid "April"
-msgstr "四月"
-
-#: plugins/clock/clock.c:71
-msgid "May"
-msgstr "五月"
-
-#: plugins/clock/clock.c:72
-msgid "June"
-msgstr "六月"
-
-#: plugins/clock/clock.c:73
-msgid "July"
-msgstr "七月"
-
-#: plugins/clock/clock.c:74
-msgid "August"
-msgstr "八月"
-
-#: plugins/clock/clock.c:75
-msgid "September"
-msgstr "九月"
-
-#: plugins/clock/clock.c:76
-msgid "October"
-msgstr "十月"
-
-#: plugins/clock/clock.c:77
-msgid "November"
-msgstr "十一月"
-
-#: plugins/clock/clock.c:78
-msgid "December"
-msgstr "十二月"
-
-#: plugins/clock/clock.c:350
+#: plugins/clock/clock.c:336
 msgid "Clock type:"
 msgstr "時鐘樣式："
 
-#: plugins/clock/clock.c:363
+#: plugins/clock/clock.c:349
 msgid "Analog"
 msgstr "指針式"
 
-#: plugins/clock/clock.c:367
+#: plugins/clock/clock.c:353
 msgid "Digital"
 msgstr "數位式"
 
-#: plugins/clock/clock.c:371
+#: plugins/clock/clock.c:357
 msgid "LED"
 msgstr "數位液晶顯示"
 
-#: plugins/clock/clock.c:433
+#: plugins/clock/clock.c:419
 msgid "Hour mode:"
 msgstr "時間模式："
 
-#: plugins/clock/clock.c:440
+#: plugins/clock/clock.c:426
 msgid "24 hour"
 msgstr "24 小時"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:432
 msgid "12 hour"
 msgstr "12 小時"
 
-#: plugins/clock/clock.c:452
+#: plugins/clock/clock.c:438
 msgid "AM/PM"
 msgstr "上午/下午"
 
-#: plugins/clock/clock.c:490
+#: plugins/clock/clock.c:476
 msgid "Show seconds:"
 msgstr "顯示秒："
 
-#: plugins/clock/clock.c:599
+#: plugins/clock/clock.c:585
 msgid "Xfce Clock"
-msgstr "XFce 時鐘"
+msgstr "Xfce 時鐘"
 
-#: plugins/pager/pager.c:277
+#: plugins/pager/pager.c:271
 msgid "Graphical pager"
 msgstr "圖形化視窗切換器"
 
@@ -496,7 +444,7 @@ msgstr "資訊"
 msgid "Show two buttons:"
 msgstr "顯示兩個按鈕："
 
-#. set names to use in option menus
+#  set names to use in option menus
 #: plugins/systembuttons/systembuttons.c:517
 msgid "Lock"
 msgstr "鎖住"
@@ -536,3 +484,4 @@ msgstr "間隔（秒）："
 #: plugins/mailcheck/mailcheck.c:778
 msgid "Mail check"
 msgstr "檢查郵件"
+

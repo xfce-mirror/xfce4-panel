@@ -4,14 +4,7 @@
   </Panel>
   <Groups>
     <Group>
-      <Popup>
-        <Item>
-          <Caption>Terminal</Caption>
-          <Command term="0" sn="0">xfterm4</Command>
-          <Tooltip>Terminal</Tooltip>
-          <Icon id="12"/>
-        </Item>
-      </Popup>
+      <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">xfterm4</Command>
         <Tooltip>Terminal</Tooltip>
@@ -28,8 +21,8 @@
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
-          <Command term="0" sn="0">nautilus</Command>
-          <Tooltip>Gestor de fitxers nautlius</Tooltip>
+          <Command term="0" sn="0">nautilus --no-desktop</Command>
+          <Tooltip>Gestor de fitxers Nautilus</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
@@ -40,14 +33,7 @@
       </Control>
     </Group>
     <Group>
-      <Popup>
-        <Item>
-          <Caption>Galeon</Caption>
-          <Command term="0" sn="0">galeon</Command>
-          <Tooltip>Navegador</Tooltip>
-          <Icon id="7"/>
-        </Item>
-      </Popup>
+      <Popup/>
       <Control id="-2" popup="0">
         <Command term="0" sn="0">mozilla</Command>
         <Tooltip>Navegador mozilla</Tooltip>
@@ -86,7 +72,7 @@
       <Popup>
         <Item>
           <Caption>Screensaver</Caption>
-          <Command term="0" sn="0">xscreensaver-demo</Command>
+          <Command term="0" sn="1">xscreensaver-demo</Command>
           <Tooltip>Screensaver</Tooltip>
           <Icon id="3"/>
         </Item>
@@ -101,7 +87,7 @@
       <Popup>
         <Item>
           <Caption>Gestió d'impressores</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
+          <Command term="0" sn="1">xfprint-manager</Command>
           <Tooltip>Gestió d'impressores</Tooltip>
           <Icon id="9"/>
         </Item>

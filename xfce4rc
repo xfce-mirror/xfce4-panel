@@ -21,8 +21,8 @@
         </Item>
         <Item>
           <Caption>Nautilus</Caption>
-          <Command term="0" sn="0">nautilus</Command>
-          <Tooltip>Nautlius File Manager</Tooltip>
+          <Command term="0" sn="0">nautilus --no-desktop</Command>
+          <Tooltip>Nautilus File Manager</Tooltip>
           <Icon id="2"/>
         </Item>
       </Popup>
@@ -72,7 +72,7 @@
       <Popup>
         <Item>
           <Caption>Screensaver</Caption>
-          <Command term="0" sn="0">xscreensaver-demo</Command>
+          <Command term="0" sn="1">xscreensaver-demo</Command>
           <Tooltip>Screensaver</Tooltip>
           <Icon id="3"/>
         </Item>
@@ -87,7 +87,7 @@
       <Popup>
         <Item>
           <Caption>Printer Management</Caption>
-          <Command term="0" sn="0">xfprint-manager</Command>
+          <Command term="0" sn="1">xfprint-manager</Command>
           <Tooltip>Printer Management</Tooltip>
           <Icon id="9"/>
         </Item>
