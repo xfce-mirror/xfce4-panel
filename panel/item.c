@@ -248,10 +248,9 @@ addtomenu_item_drop_cb (GtkWidget * widget,
 	    create_menu_item (mi);
 	    panel_popup_add_item (pp, mi);
 
-	    if (!pp->detached)
+	    if (!panel_popup_is_detached (pp))
 	    {
-		xfce_togglebutton_toggled (XFCE_TOGGLEBUTTON (pp->button));
-		xfce_togglebutton_toggled (XFCE_TOGGLEBUTTON (pp->button));
+                panel_popup_update_menu_position (pp);
 	    }
 	}
     }
@@ -298,10 +297,9 @@ popup_menu_timeout (Item * item)
 
     /* Explanantion of code below:
      * 
-     * For a panel item with menu we have a GtkBox containing a control 
-     * and a popup button.
-     * The item->button is a child of the control's base container, so
-     * 'item->button->parent->parent' is the box we are looking for.
+     * For a panel item with menu we have a GtkBox containing an item 
+     * and a popup button, so 'item->button->parent' is the box we are 
+     * looking for.
      *
      * A GtkBox contains children of the type GtkBoxChild. We are 
      * interested in the widget member of this struct. If it is not
@@ -319,7 +317,7 @@ popup_menu_timeout (Item * item)
 	if (!GTK_IS_WIDGET (w))
 	    continue;
 
-	if (w != item->button->parent)
+	if (w != item->button)
 	{
 	    if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)))
 	    {

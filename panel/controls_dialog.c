@@ -205,7 +205,8 @@ controls_dialog (Control * control)
 
             pp = item_control_get_popup (control);
 
-            if (!(control->with_popup) || !pp || pp->items == NULL ||
+            if (!control->with_popup || !pp || 
+                panel_popup_get_n_items (pp) == 0 ||
                 xfce_confirm (_("Removing the item will also remove "
                                 "its popup menu."), GTK_STOCK_REMOVE, NULL))
             {

@@ -28,47 +28,21 @@
 
 /* panel popup */
 
-struct _PanelPopup
-{
-    /* button */
-    GtkWidget *button;
-
-    /* menu */
-    gboolean detached;
-
-    GtkWidget *window;
-    GtkWidget *frame;
-    GtkWidget *vbox;
-
-    GtkSizeGroup *hgroup;
-
-    Item *addtomenu_item;
-    GtkWidget *separator;
-    GtkWidget *tearoff_button;
-
-    GtkWidget *item_vbox;
-    GList *items;		/* type Item */
-};
-
-/* Panel popups */
-G_MODULE_IMPORT PanelPopup *create_panel_popup (void);
-G_MODULE_IMPORT void panel_popup_free (PanelPopup * pp);
-
-G_MODULE_IMPORT void panel_popup_pack (PanelPopup * pp, GtkBox * box);
-G_MODULE_IMPORT void panel_popup_unpack (PanelPopup * pp);
-
-G_MODULE_IMPORT void panel_popup_add_item (PanelPopup * pp, Item * mi);
-G_MODULE_IMPORT void panel_popup_remove_item (PanelPopup * pp, Item * mi);
-
-G_MODULE_IMPORT void panel_popup_set_size (PanelPopup * pp, int size);
-G_MODULE_IMPORT void panel_popup_set_popup_position (PanelPopup * pp, int position);
-G_MODULE_IMPORT void panel_popup_set_theme (PanelPopup * pp, const char *theme);
-G_MODULE_IMPORT void panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type);
-
 G_MODULE_IMPORT void hide_current_popup_menu (void);
 
-G_MODULE_IMPORT void panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node);
-G_MODULE_IMPORT void panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root);
+G_MODULE_IMPORT gboolean panel_popup_is_detached (PanelPopup *pp);
+
+G_MODULE_IMPORT gboolean panel_popup_get_n_items (PanelPopup *pp);
+
+G_MODULE_IMPORT void panel_popup_add_item (PanelPopup *pp, Item *item);
+
+G_MODULE_IMPORT void panel_popup_remove_item (PanelPopup *pp, Item *item);
+
+G_MODULE_IMPORT void panel_popup_move_item (PanelPopup *pp, Item *item, 
+                                            int position);
+
+G_MODULE_IMPORT void panel_popup_update_menu_position (PanelPopup *pp);
+
 
 /* item control */
 

@@ -47,20 +47,40 @@
 /* PanelPopup *
  * ---------- */
 
+struct _PanelPopup
+{
+    /* button */
+    GtkWidget *button;
+
+    /* menu */
+    gboolean detached;
+
+    GtkWidget *window;
+    GtkWidget *frame;
+    GtkWidget *vbox;
+
+    GtkSizeGroup *hgroup;
+
+    Item *addtomenu_item;
+    GtkWidget *separator;
+    GtkWidget *tearoff_button;
+
+    GtkWidget *item_vbox;
+    GList *items;		/* type Item */
+};
+
 G_MODULE_EXPORT /* EXPORT:open_popup */
 PanelPopup *open_popup = NULL;
 
-/*  Panel popup callbacks
- *  ---------------------
-*/
+/* callbacks */
 static void
 hide_popup (PanelPopup * pp)
 {
-    if (open_popup == pp)
-	open_popup = NULL;
-
     if (!pp)
 	return;
+
+    if (open_popup == pp)
+	open_popup = NULL;
 
     xfce_togglebutton_set_active (XFCE_TOGGLEBUTTON (pp->button), FALSE);
 
@@ -207,16 +227,7 @@ show_popup (PanelPopup * pp)
     position_popup (pp);
 }
 
-G_MODULE_EXPORT /* EXPORT:hide_current_popup_menu */
-void
-hide_current_popup_menu (void)
-{
-    if (open_popup)
-	hide_popup (open_popup);
-}
-
-G_MODULE_EXPORT /* EXPORT:toggle_popup */
-void
+static void
 toggle_popup (GtkWidget * button, PanelPopup * pp)
 {
     hide_current_popup_menu ();
@@ -227,8 +238,7 @@ toggle_popup (GtkWidget * button, PanelPopup * pp)
 	hide_popup (pp);
 }
 
-G_MODULE_EXPORT /* EXPORT:tearoff_popup */
-void
+static void
 tearoff_popup (GtkWidget * button, PanelPopup * pp)
 {
     open_popup = NULL;
@@ -237,8 +247,7 @@ tearoff_popup (GtkWidget * button, PanelPopup * pp)
     gtk_window_set_decorated (GTK_WINDOW (pp->window), TRUE);
 }
 
-G_MODULE_EXPORT /* EXPORT:delete_popup */
-gboolean
+static gboolean
 delete_popup (GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
 {
     hide_popup (pp);
@@ -246,8 +255,7 @@ delete_popup (GtkWidget * window, GdkEvent * ev, PanelPopup * pp)
     return TRUE;
 }
 
-G_MODULE_EXPORT /* EXPORT:popup_key_pressed */
-gboolean
+static gboolean
 popup_key_pressed (GtkWidget * window, GdkEventKey * ev, PanelPopup * pp)
 {
     if (ev->keyval == GDK_Escape)
@@ -261,6 +269,139 @@ popup_key_pressed (GtkWidget * window, GdkEventKey * ev, PanelPopup * pp)
 /*  Popup menus 
  *  -----------
 */
+static void
+panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node)
+{
+    xmlNodePtr child;
+    int i;
+
+    if (!pp)
+	return;
+
+    for (i = 0, child = node->children; child; i++, child = child->next)
+    {
+	Item *mi;
+
+	if (!xmlStrEqual (child->name, (const xmlChar *) "Item"))
+	    continue;
+
+	mi = menu_item_new (pp);
+	item_read_config (mi, child);
+	create_menu_item (mi);
+
+	mi->pos = i;
+
+	panel_popup_add_item (pp, mi);
+    }
+}
+
+static void
+panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root)
+{
+    xmlNodePtr node, child;
+    GList *li;
+
+    if (!pp || !pp->items)
+	return;
+
+    node = xmlNewTextChild (root, NULL, "Popup", NULL);
+
+    for (li = pp->items; li; li = li->next)
+    {
+	Item *mi = li->data;
+
+	child = xmlNewTextChild (node, NULL, "Item", NULL);
+
+	item_write_config (mi, child);
+    }
+}
+
+static void
+panel_popup_free (PanelPopup * pp)
+{
+    /* only items contain non-gtk elements to be freed */
+    GList *li;
+
+    if (!pp)
+	return;
+
+    gtk_widget_destroy (pp->window);
+
+    for (li = pp->items; li && li->data; li = li->next)
+    {
+	Item *mi = li->data;
+
+	item_free (mi);
+    }
+
+    g_free (pp);
+}
+
+static void
+panel_popup_set_size (PanelPopup * pp, int size)
+{
+    int pos = settings.popup_position;
+    int w, h;
+    GList *li;
+
+    if (!pp)
+	return;
+
+    w = icon_size[size] + border_width;
+    h = top_height[size];
+
+    if (pos == LEFT || pos == RIGHT)
+	gtk_widget_set_size_request (pp->button, h, w);
+    else
+	gtk_widget_set_size_request (pp->button, w, h);
+
+    /* decide on popup size based on panel size */
+    menu_item_set_popup_size (pp->addtomenu_item, size);
+
+    for (li = pp->items; li && li->data; li = li->next)
+    {
+	Item *mi = li->data;
+
+	menu_item_set_popup_size (mi, size);
+    }
+}
+
+static void
+panel_popup_set_popup_position (PanelPopup * pp, int position)
+{
+    settings.popup_position = position;
+
+    if (!pp)
+	return;
+
+    panel_popup_set_size (pp, settings.size);
+}
+
+static void
+panel_popup_set_theme (PanelPopup * pp, const char *theme)
+{
+    GList *li;
+
+    if (!pp)
+	return;
+
+    for (li = pp->items; li && li->data; li = li->next)
+    {
+	Item *mi = li->data;
+
+	item_set_theme (mi, theme);
+    }
+}
+
+static void
+panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type)
+{
+    if (!pp || !pp->button)
+	return;
+
+    xfce_togglebutton_set_arrow_type (XFCE_TOGGLEBUTTON (pp->button), type);
+}
+
 static void
 set_popup_window_properties (GtkWidget * win)
 {
@@ -302,8 +443,7 @@ drag_motion (GtkWidget * widget, GdkDragContext * context,
     return TRUE;
 }
 
-G_MODULE_EXPORT /* EXPORT:create_panel_popup */
-PanelPopup *
+static PanelPopup *
 create_panel_popup (void)
 {
     PanelPopup *pp = g_new (PanelPopup, 1);
@@ -401,28 +541,30 @@ create_panel_popup (void)
     return pp;
 }
 
-G_MODULE_EXPORT /* EXPORT:panel_popup_pack */
+G_MODULE_EXPORT /* EXPORT:hide_current_popup_menu */
 void
-panel_popup_pack (PanelPopup * pp, GtkBox * box)
+hide_current_popup_menu (void)
 {
-    if (!pp)
-	return;
-
-    gtk_box_pack_start (box, pp->button, FALSE, FALSE, 0);
+    if (open_popup)
+	hide_popup (open_popup);
 }
 
-G_MODULE_EXPORT /* EXPORT:panel_popup_unpack */
-void
-panel_popup_unpack (PanelPopup * pp)
+G_MODULE_EXPORT /* EXPORT: panel_popup_is_detached */
+gboolean 
+panel_popup_is_detached (PanelPopup *pp)
 {
-    GtkWidget *container;
+    g_return_val_if_fail (pp != NULL, FALSE);
 
-    if (!pp)
-	return;
+    return pp->detached;
+}
 
-    container = pp->button->parent;
+G_MODULE_EXPORT /* EXPORT: panel_popup_has_items */
+gboolean 
+panel_popup_get_n_items (PanelPopup *pp)
+{
+    g_return_val_if_fail (pp != NULL, 0);
 
-    gtk_container_remove (GTK_CONTAINER (container), pp->button);
+    return g_list_length (pp->items);
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_popup_add_item */
@@ -452,7 +594,7 @@ panel_popup_remove_item (PanelPopup * pp, Item * mi)
     GList *li;
     int i;
 
-    gtk_container_remove (GTK_CONTAINER (pp->vbox), mi->button);
+    gtk_container_remove (GTK_CONTAINER (pp->item_vbox), mi->button);
 
     pp->items = g_list_remove (pp->items, mi);
 
@@ -466,145 +608,44 @@ panel_popup_remove_item (PanelPopup * pp, Item * mi)
     }
 }
 
-G_MODULE_EXPORT /* EXPORT:panel_popup_set_from_xml */
+G_MODULE_EXPORT /* EXPORT: panel_popup_move_item */
 void
-panel_popup_set_from_xml (PanelPopup * pp, xmlNodePtr node)
+panel_popup_move_item (PanelPopup *pp, Item *item, int position)
 {
-    xmlNodePtr child;
-    int i;
+    int i, len;
+    GList *l;
+ 
+    len = g_list_length (pp->items);
+    
+    position = CLAMP (position, 0, len);
+    
+    pp->items = g_list_remove (pp->items, item);
 
-    if (!pp)
-	return;
+    if (position > item->pos)
+        position--;
+    
+    pp->items = g_list_insert (pp->items, item, position);
 
-    for (i = 0, child = node->children; child; i++, child = child->next)
+    for (l = pp->items, i = 0; l != NULL; l = l->next, ++i)
     {
-	Item *mi;
+        Item *item = l->data;
 
-	if (!xmlStrEqual (child->name, (const xmlChar *) "Item"))
-	    continue;
-
-	mi = menu_item_new (pp);
-	item_read_config (mi, child);
-	create_menu_item (mi);
-
-	mi->pos = i;
-
-	panel_popup_add_item (pp, mi);
-    }
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_popup_write_xml */
-void
-panel_popup_write_xml (PanelPopup * pp, xmlNodePtr root)
-{
-    xmlNodePtr node, child;
-    GList *li;
-
-    if (!pp || !pp->items)
-	return;
-
-    node = xmlNewTextChild (root, NULL, "Popup", NULL);
-
-    for (li = pp->items; li; li = li->next)
-    {
-	Item *mi = li->data;
-
-	child = xmlNewTextChild (node, NULL, "Item", NULL);
-
-	item_write_config (mi, child);
-    }
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_popup_free */
-void
-panel_popup_free (PanelPopup * pp)
-{
-    /* only items contain non-gtk elements to be freed */
-    GList *li;
-
-    if (!pp)
-	return;
-
-    gtk_widget_destroy (pp->window);
-
-    for (li = pp->items; li && li->data; li = li->next)
-    {
-	Item *mi = li->data;
-
-	item_free (mi);
+        item->pos = i;
     }
 
-    g_free (pp);
+    gtk_box_reorder_child (GTK_BOX (pp->item_vbox), item->button, item->pos);
 }
 
-G_MODULE_EXPORT /* EXPORT:panel_popup_set_size */
+G_MODULE_EXPORT /* EXPORT: panel_popup_update_menu_position */
 void
-panel_popup_set_size (PanelPopup * pp, int size)
+panel_popup_update_menu_position (PanelPopup *pp)
 {
-    int pos = settings.popup_position;
-    int w, h;
-    GList *li;
+    if (!pp || !GTK_WIDGET_VISIBLE (pp->window))
+        return;
 
-    if (!pp)
-	return;
-
-    w = icon_size[size] + border_width;
-    h = top_height[size];
-
-    if (pos == LEFT || pos == RIGHT)
-	gtk_widget_set_size_request (pp->button, h, w);
-    else
-	gtk_widget_set_size_request (pp->button, w, h);
-
-    /* decide on popup size based on panel size */
-    menu_item_set_popup_size (pp->addtomenu_item, size);
-
-    for (li = pp->items; li && li->data; li = li->next)
-    {
-	Item *mi = li->data;
-
-	menu_item_set_popup_size (mi, size);
-    }
+    position_popup (pp);
 }
 
-G_MODULE_EXPORT /* EXPORT:panel_popup_set_popup_position */
-void
-panel_popup_set_popup_position (PanelPopup * pp, int position)
-{
-    settings.popup_position = position;
-
-    if (!pp)
-	return;
-
-    panel_popup_set_size (pp, settings.size);
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_popup_set_theme */
-void
-panel_popup_set_theme (PanelPopup * pp, const char *theme)
-{
-    GList *li;
-
-    if (!pp)
-	return;
-
-    for (li = pp->items; li && li->data; li = li->next)
-    {
-	Item *mi = li->data;
-
-	item_set_theme (mi, theme);
-    }
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_popup_set_arrow_type */
-void
-panel_popup_set_arrow_type (PanelPopup * pp, GtkArrowType type)
-{
-    if (!pp || !pp->button)
-	return;
-
-    xfce_togglebutton_set_arrow_type (XFCE_TOGGLEBUTTON (pp->button), type);
-}
 
 /* ItemControl *
  * ----------- */

@@ -1108,21 +1108,6 @@ create_item_dialog (Control *control, Item * item, GtkContainer * container,
 /* menu item */
 
 static void
-reindex_items (GList * items)
-{
-    Item *item;
-    GList *li;
-    int i;
-
-    for (i = 0, li = items; li; i++, li = li->next)
-    {
-	item = li->data;
-
-	item->pos = i;
-    }
-}
-
-static void
 pos_changed (GtkSpinButton * spin, Item * item)
 {
     int n = gtk_spin_button_get_value_as_int (spin) - 1;
@@ -1131,11 +1116,7 @@ pos_changed (GtkSpinButton * spin, Item * item)
     if (n == item->pos)
 	return;
 
-    pp->items = g_list_remove (pp->items, item);
-    pp->items = g_list_insert (pp->items, item, n);
-    reindex_items (pp->items);
-
-    gtk_box_reorder_child (GTK_BOX (pp->item_vbox), item->button, item->pos);
+    panel_popup_move_item (pp, item, n);
 }
 
 static void
@@ -1217,7 +1198,7 @@ edit_menu_item_dialog (Item * mi)
     add_spacer (GTK_BOX (dlg->vbox), BORDER);
 
     /* position */
-    num_items = g_list_length (mi->parent->items);
+    num_items = panel_popup_get_n_items (mi->parent);
 
     if (num_items > 1)
     {
@@ -1249,10 +1230,7 @@ edit_menu_item_dialog (Item * mi)
     {
 	PanelPopup *pp = mi->parent;
 
-	gtk_container_remove (GTK_CONTAINER (pp->item_vbox), mi->button);
-	pp->items = g_list_remove (pp->items, mi);
-	item_free (mi);
-	reindex_items (pp->items);
+        panel_popup_remove_item (pp, mi);
     }
 
     gtk_widget_destroy (menudialog);
