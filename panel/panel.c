@@ -1137,6 +1137,9 @@ panel_set_theme (const char *theme)
     g_free (settings.theme);
     settings.theme = g_strdup (theme);
 
+    gtk_settings_set_string_property (gtk_settings_get_default (),
+    		"gtk-icon-theme-name", theme, "panel.c:1141");
+
     if (!panel_created)
 	return;
 
