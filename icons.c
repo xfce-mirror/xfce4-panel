@@ -1,4 +1,4 @@
-/*  icons.h
+/*  icons.c
  *  
  *  Copyright (C) 2002 Jasper Huijsmans (j.b.huijsmans@hetnet.nl)
  *
@@ -88,8 +88,8 @@ static char *xfce_icon_names[] = {
 };
 
 static char *trash_icon_names[] = {
-    "trash_full",
-    "trash_empty"
+    "trash_empty",
+    "trash_full"
 };
 
 static void set_icon_names(void)
@@ -216,18 +216,14 @@ GdkPixbuf *get_pixbuf_from_id(int id)
     return pb;
 }
 
-static GList *get_icon_paths(void)
+static char **get_icon_paths(void)
 {
-    GList *list = NULL;
-    char *dir;
+    char **dirs = g_new0(char *, 3);
 
-    dir = g_build_filename(g_getenv("HOME"), RCDIR, "panel/themes", NULL);
-    list = g_list_append(list, dir);
+    dirs[0] = g_build_filename(g_getenv("HOME"), RCDIR, "panel/themes", NULL);
+    dirs[1] = g_build_filename(DATADIR, "panel/themes", NULL);
 
-    dir = g_build_filename(DATADIR, "panel/themes", NULL);
-    list = g_list_append(list, dir);
-
-    return list;
+    return dirs;
 }
 
 GdkPixbuf *get_themed_pixbuf_from_id(int id, const char *theme)
@@ -240,17 +236,17 @@ GdkPixbuf *get_themed_pixbuf_from_id(int id, const char *theme)
 
     if(id >= UNKNOWN_ICON && id < NUM_ICONS)
     {
-        GList *icon_paths = get_icon_paths();
-        GList *li;
+        char **icon_paths = get_icon_paths();
+        char **p;
 
-        for(li = icon_paths; li; li = li->next)
+        for(p = icon_paths; *p; p++)
         {
-            char *dir = (char *)li->data;
-            char *suffix;
+            char **suffix;
 
-            for(suffix = icon_suffix[0]; suffix; suffix++)
+            for(suffix = icon_suffix; *suffix; suffix++)
             {
-                char *path = g_build_filename(dir, theme, name, suffix, NULL);
+                char *path =
+                    g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
 
                 if(g_file_test(path, G_FILE_TEST_EXISTS))
                     pb = gdk_pixbuf_new_from_file(path, NULL);
@@ -265,8 +261,7 @@ GdkPixbuf *get_themed_pixbuf_from_id(int id, const char *theme)
                 break;
         }
 
-        g_list_foreach(icon_paths, (GFunc) g_free, NULL);
-        g_list_free(icon_paths);
+        g_strfreev(icon_paths);
     }
 
     if(pb)
@@ -293,20 +288,19 @@ GdkPixbuf *get_themed_trash_pixbuf(int id, const char *theme)
 {
     GdkPixbuf *pb = NULL;
     char *name = trash_icon_names[id];
-    GList *icon_paths = get_icon_paths();
-    GList *li;
+    char **icon_paths = get_icon_paths();
+    char **p;
 
     if(!theme)
         return get_trash_pixbuf(id);
 
-    for(li = icon_paths; li; li = li->next)
+    for(p = icon_paths; *p; p++)
     {
-        char *dir = (char *)li->data;
-        char *suffix;
+        char **suffix;
 
-        for(suffix = icon_suffix[0]; suffix; suffix++)
+        for(suffix = icon_suffix; *suffix; suffix++)
         {
-            char *path = g_build_filename(dir, theme, name, suffix, NULL);
+            char *path = g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
 
             if(g_file_test(path, G_FILE_TEST_EXISTS))
                 pb = gdk_pixbuf_new_from_file(path, NULL);
@@ -321,8 +315,7 @@ GdkPixbuf *get_themed_trash_pixbuf(int id, const char *theme)
             break;
     }
 
-    g_list_foreach(icon_paths, (GFunc) g_free, NULL);
-    g_list_free(icon_paths);
+    g_strfreev(icon_paths);
 
     if(pb)
         return pb;

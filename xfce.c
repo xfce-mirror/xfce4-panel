@@ -136,7 +136,7 @@ void xfce_run(void)
 
 int main(int argc, char **argv)
 {
-    pid_t pid = fork();
+/*    pid_t pid = fork();
 
     if(pid < 0)
     {
@@ -146,7 +146,7 @@ int main(int argc, char **argv)
     {
         _exit(0);
     }
-
+*/
     gtk_init(&argc, &argv);
 
     xfce_init();

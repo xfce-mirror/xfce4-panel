@@ -1341,16 +1341,16 @@ static void restore_backup(void)
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(left_spin), backup.num_left);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(right_spin), backup.num_right);
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(screens_spin), backup.num_screens);
-    
-    if (backup.lock_command)
-	gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
+
+    if(backup.lock_command)
+        gtk_entry_set_text(GTK_ENTRY(lock_entry), backup.lock_command);
     else
-	gtk_entry_set_text(GTK_ENTRY(lock_entry), "");
-    
-    if (backup.exit_command)
-	gtk_entry_set_text(GTK_ENTRY(exit_entry), backup.exit_command);
+        gtk_entry_set_text(GTK_ENTRY(lock_entry), "");
+
+    if(backup.exit_command)
+        gtk_entry_set_text(GTK_ENTRY(exit_entry), backup.exit_command);
     else
-	gtk_entry_set_text(GTK_ENTRY(exit_entry), "");
+        gtk_entry_set_text(GTK_ENTRY(exit_entry), "");
 }
 
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
@@ -1365,7 +1365,7 @@ static void add_header(const char *text, GtkBox * box)
     gtk_frame_set_shadow_type(GTK_FRAME(frame), GTK_SHADOW_OUT);
     gtk_widget_show(frame);
     gtk_box_pack_start(box, frame, FALSE, TRUE, 0);
-    
+
     label = gtk_label_new(NULL);
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0.5);
     markup = g_strconcat("<b><span size=\"large\">", text, "</span></b>", NULL);
@@ -1523,8 +1523,7 @@ static char **find_icon_themes(void)
     int i;
 
     dirs = g_new(char *, 3);
-    dirs[0] =
-        g_build_filename(g_getenv("HOME"), RCDIR, "panel", "themes", NULL);
+    dirs[0] = g_build_filename(g_getenv("HOME"), ".xfce4", "panel", "themes", NULL);
     dirs[1] = g_build_filename(DATADIR, "panel", "themes", NULL);
     dirs[2] = NULL;
 
@@ -1536,14 +1535,34 @@ static char **find_icon_themes(void)
         {
             while((file = g_dir_read_name(gdir)))
             {
-                if(!g_list_find_custom(list, file, (GCompareFunc) strcmp))
-                    list = g_list_append(list, g_strdup(file));
+		char *path = g_build_filename(dirs[i], file);
+		
+                if(!g_list_find_custom(list, file, (GCompareFunc) strcmp) &&
+                   g_file_test(path, G_FILE_TEST_IS_DIR))
+		{
+		    list = g_list_append(list, g_strdup(file));
+		}
+		
+		g_free(path);
             }
 
             g_dir_close(gdir);
         }
     }
 
+    if (list)
+    {
+	int len = g_list_length(list);
+	GList *li;
+	
+	themes = g_new0(char *, len+1);
+	
+	for (i = 0, li = list; li ; li = li->next, i++)
+	{
+	    themes[i] = (char *) li->data;
+	}
+    }
+    
     g_strfreev(dirs);
     return themes;
 }
@@ -1557,15 +1576,23 @@ static void theme_changed(GtkOptionMenu * option_menu)
         theme = NULL;
     else
     {
-        GtkWidget *menu = gtk_option_menu_get_menu(option_menu);
-        GtkWidget *item = gtk_menu_get_active(GTK_MENU(menu));
-        GtkWidget *label = gtk_bin_get_child(GTK_BIN(item));
+	GtkWidget *label;
+	
+	/* Right, this is weird, apparently the option menu
+	 * button reparents the label connected to the menuitem
+	 * that is selected. So to get to the label we go to the
+	 * child of the button and not of the menu item!
+	 *
+	 * This took a while to find out :-)
+	 */
+	
+        label = gtk_bin_get_child(GTK_BIN(option_menu));
 
         theme = gtk_label_get_text(GTK_LABEL(label));
     }
 
     if((theme == NULL && settings.icon_theme == NULL) ||
-       strequal(theme, settings.icon_theme))
+       (settings.icon_theme && theme && strequal(theme, settings.icon_theme)))
         return;
 
     panel_set_icon_theme(theme);
@@ -1578,7 +1605,7 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
     GtkWidget *item;
     int i = 0, n = 0;
     char **themes = find_icon_themes();
-    char *s;
+    char **s;
 
     item = gtk_menu_item_new_with_label(_("XFce standard theme"));
     gtk_widget_show(item);
@@ -1586,14 +1613,14 @@ static void add_theme_menu(GtkWidget * option_menu, const char *theme)
 
     if(themes)
     {
-        for(s = themes[i]; s; s++, i++)
+        for (i = 0, s = themes; *s; s++, i++)
         {
-            item = gtk_menu_item_new_with_label(s);
+            item = gtk_menu_item_new_with_label(*s);
             gtk_widget_show(item);
             gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
-	    
-	    if (settings.icon_theme && strequal(settings.icon_theme, s))
-		n = backup_theme_index = i;
+
+            if(settings.icon_theme && strequal(settings.icon_theme, *s))
+                n = backup_theme_index = i+1;
         }
 
         g_strfreev(themes);
@@ -1800,7 +1827,7 @@ static void add_position_box(GtkBox * box)
 /*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*/
 /* lock and exit commands */
 
-static void entry_changed(GtkWidget *w)
+static void entry_changed(GtkWidget * w)
 {
     gtk_widget_set_sensitive(revert, TRUE);
 }
@@ -1860,8 +1887,10 @@ static void add_advanced_box(GtkBox * box)
 
     if(settings.lock_command)
         gtk_entry_set_text(GTK_ENTRY(lock_entry), settings.lock_command);
-    g_signal_connect(lock_entry, "insert-at-cursor", G_CALLBACK(entry_changed), NULL);
-    g_signal_connect(lock_entry, "delete-from-cursor", G_CALLBACK(entry_changed), NULL);
+    g_signal_connect(lock_entry, "insert-at-cursor", G_CALLBACK(entry_changed),
+                     NULL);
+    g_signal_connect(lock_entry, "delete-from-cursor", G_CALLBACK(entry_changed),
+                     NULL);
 
     button = gtk_button_new_with_label(" ... ");
     gtk_widget_show(button);
@@ -1886,8 +1915,10 @@ static void add_advanced_box(GtkBox * box)
 
     if(settings.exit_command)
         gtk_entry_set_text(GTK_ENTRY(exit_entry), settings.exit_command);
-    g_signal_connect(exit_entry, "insert-at-cursor", G_CALLBACK(entry_changed), NULL);
-    g_signal_connect(exit_entry, "delete-from-cursor", G_CALLBACK(entry_changed), NULL);
+    g_signal_connect(exit_entry, "insert-at-cursor", G_CALLBACK(entry_changed),
+                     NULL);
+    g_signal_connect(exit_entry, "delete-from-cursor", G_CALLBACK(entry_changed),
+                     NULL);
 
     button = gtk_button_new_with_label(" ... ");
     gtk_widget_show(button);

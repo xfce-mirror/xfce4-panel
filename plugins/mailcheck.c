@@ -45,10 +45,74 @@ typedef struct
 }
 t_mailcheck;
 
+static char *icon_suffix[] = {
+    "png",
+    "xpm",
+    NULL
+};
+
+static char *mailcheck_icon_names[] = {
+    "nomail",
+    "newmail",
+    "oldmail"
+};
+
+static char **get_icon_paths(void)
+{
+    char **dirs = g_new0(char *, 3);
+
+    dirs[0] = g_build_filename(g_getenv("HOME"), RCDIR, "panel/themes", NULL);
+    dirs[1] = g_build_filename(DATADIR, "panel/themes", NULL);
+
+    return dirs;
+}
+
+static GdkPixbuf *get_themed_mailcheck_pixbuf(int id, const char *theme)
+{
+    GdkPixbuf *pb = NULL;
+    char *name = mailcheck_icon_names[id];
+    char **icon_paths = get_icon_paths();
+    char **p;
+
+    if(!theme)
+        return NULL;
+
+    for(p = icon_paths; *p; p++)
+    {
+        char **suffix;
+
+        for(suffix = icon_suffix; *suffix; suffix++)
+        {
+            char *path = g_strconcat(*p, "/", theme, "/", name, ".", *suffix, NULL);
+
+            if(g_file_test(path, G_FILE_TEST_EXISTS))
+                pb = gdk_pixbuf_new_from_file(path, NULL);
+
+            g_free(path);
+
+            if(pb)
+                break;
+        }
+
+        if(pb)
+            break;
+    }
+
+    g_strfreev(icon_paths);
+
+    if(pb)
+        return pb;
+    else
+        return NULL;
+}
+
 static GdkPixbuf *get_mailcheck_pixbuf(int id)
 {
     GdkPixbuf *pb;
 
+    if (settings.icon_theme)
+	pb = get_themed_mailcheck_pixbuf(id, settings.icon_theme);
+    
     if(id == NEW_MAIL)
         pb = gdk_pixbuf_new_from_xpm_data((const char **)mail_xpm);
     else if(id == OLD_MAIL)
