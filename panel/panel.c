@@ -269,7 +269,7 @@ panel_set_hidden (Panel * p, gboolean hide)
     pos = p->position;
 
     /* xinerama aware screen coordinates */
-    if (pos.x < minx || pos.x > maxx || pos.y < miny || pos.y > maxy)
+    if (pos.x < minx || pos.x >= maxx || pos.y < miny || pos.y >= maxy)
     {
 	minx = MyDisplayX (pos.x, pos.y);
 	maxx = MyDisplayMaxX (dpy, scr, pos.x, pos.y);
