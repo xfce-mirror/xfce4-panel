@@ -72,6 +72,8 @@ GtkWidget *pos_spin;
 GtkWidget *revert_button;
 GtkWidget *done_button;
 
+static GtkWidget *dialog;
+
 static int id_callback;
 
 /* usefull for (instant) apply */
@@ -261,7 +263,7 @@ static GtkWidget *create_icon_option_menu(void)
 static void icon_browse_cb(GtkWidget * b, GtkEntry * entry)
 {
     char *file =
-        select_file_name(_("Select icon"), gtk_entry_get_text(entry), NULL);
+        select_file_name(_("Select icon"), gtk_entry_get_text(entry), dialog);
 
     if(file)
     {
@@ -340,7 +342,7 @@ static GtkWidget *create_icon_option(GtkSizeGroup * sg)
 static void command_browse_cb(GtkWidget * b, GtkEntry * entry)
 {
     char *file =
-        select_file_name(_("Select command"), gtk_entry_get_text(entry), NULL);
+        select_file_name(_("Select command"), gtk_entry_get_text(entry), dialog);
 
     if(file)
     {
@@ -683,6 +685,8 @@ void panel_item_add_options(PanelControl * pc, GtkContainer * container,
     pitem = (PanelItem *) pc->data;
     mitem = NULL;
 
+    dialog = gtk_widget_get_toplevel(done);
+
     revert_button = revert;
 
     g_signal_connect_swapped(revert, "clicked",
@@ -965,6 +969,8 @@ void edit_menu_item_dialog(MenuItem * mi)
     num_items = g_list_length(mi->parent->items);
 
     dlg = create_menu_item_dialog(mi);
+
+    dialog = dlg;
 
     /* run dialog until 'Done' */
     while(1)

@@ -1,3 +1,16 @@
+2002-11-18 22:51  huysmans
+
+	* panel/: builtins.c, controls.c, controls.h, xfce.c: Fix SIGHUP
+	handling, I'll just quit. Restarting doesn't work
+
+2002-11-13 10:22  huysmans
+
+	* ChangeLog, aclocal.m4, configure, panel/builtins.c,
+	panel/controls.c, panel/controls.h, panel/controls_dialog.c,
+	panel/item.c, panel/side.c, panel/side.h, plugins/clock/clock.c,
+	plugins/mailcheck/mailcheck.c, plugins/trash/trash.c: Panel control
+	API change and several small fixes
+
 2002-11-10 16:23  huysmans
 
 	* panel/: central.c, dialogs.c: Fix repositioning bug in
