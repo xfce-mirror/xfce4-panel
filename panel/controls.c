@@ -928,7 +928,7 @@ control_swap_base (Control *control, GtkWidget *newbase)
     if (parent)
     {
         xfce_itembar_insert (XFCE_ITEMBAR (parent), 
-                             XFCE_ITEM (control->base), n-1);
+                             XFCE_ITEM (control->base), n);
     }
 }
 
