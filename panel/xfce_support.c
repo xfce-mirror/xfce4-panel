@@ -36,6 +36,8 @@
 #include <stddef.h>
 #endif
 
+#include <math.h>
+
 #include <X11/Xlib.h>
 #include <X11/Xatom.h>
 
@@ -496,16 +498,54 @@ gnome_uri_list_extract_filenames (const char * uri_list)
  *  ----------------
 */
 static void
-fs_ok_cb (GtkDialog * fs)
+update_preview (XfceFileChooser *chooser, gpointer data)
 {
-    gtk_dialog_response (fs, GTK_RESPONSE_OK);
-}
+    GtkImage *preview;
+    char *filename;
+    GdkPixbuf *pb = NULL;
+    
+    preview = GTK_IMAGE(data);
+    filename = xfce_file_chooser_get_filename(chooser);
+    
+    if(g_file_test(filename, G_FILE_TEST_EXISTS)
+       && (pb = gdk_pixbuf_new_from_file (filename, NULL)))
+    {
+        int w, h;
+        
+        w = gdk_pixbuf_get_width (pb);
+        h = gdk_pixbuf_get_height (pb);
 
+        if (h > 120 || w > 120)
+        {
+            double wratio, hratio;
+            GdkPixbuf *tmp;
+            
+            wratio = (double)120 / w;
+            hratio = (double)120 / h;
 
-static void
-fs_cancel_cb (GtkDialog * fs)
-{
-    gtk_dialog_response (fs, GTK_RESPONSE_CANCEL);
+            if (hratio < wratio)
+            {
+                w = rint (hratio * w);
+                h = 120;
+            }
+            else
+            {
+                w = 120;
+                h = rint (wratio * h);
+            }
+
+            tmp = gdk_pixbuf_scale_simple (pb, w, h, GDK_INTERP_BILINEAR);
+            g_object_unref (pb);
+            pb = tmp;
+        }
+    }
+    
+    g_free(filename);
+    
+    gtk_image_set_from_pixbuf(preview, pb);
+
+    if (pb)
+        g_object_unref(pb);
 }
 
 /* Any of the arguments may be NULL */
@@ -516,36 +556,57 @@ real_select_file (const char *title, const char *path,
     const char *t = (title) ? title : _("Select file");
     GtkWidget *fs;
     char *name = NULL;
-    const char *temp;
 
-    fs = preview_file_selection_new (t, with_preview);
+    fs = xfce_file_chooser_new(t, GTK_WINDOW(parent), 
+                               XFCE_FILE_CHOOSER_ACTION_OPEN, 
+                               GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
+                               GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, 
+                               NULL);
 
-    if (path)
+    if (path && *path && g_file_test (path, G_FILE_TEST_EXISTS))
     {
-	gtk_file_selection_set_filename (GTK_FILE_SELECTION (fs), path);
+        if (!g_path_is_absolute (path))
+        {
+            char *current, *full;
+
+            current = g_get_current_dir ();
+            full = g_build_filename (current, path);
+
+            xfce_file_chooser_set_filename(XFCE_FILE_CHOOSER(fs), full);
+
+            g_free (current);
+            g_free (full);
+        }
+        else
+        {
+            xfce_file_chooser_set_filename(XFCE_FILE_CHOOSER(fs), path);
+        }
     }
 
-    if (parent)
-	gtk_window_set_transient_for (GTK_WINDOW (fs), GTK_WINDOW (parent));
-
-    g_signal_connect_swapped (G_OBJECT (GTK_FILE_SELECTION (fs)->ok_button),
-			      "clicked", G_CALLBACK (fs_ok_cb), fs);
-
-    g_signal_connect_swapped (G_OBJECT
-			      (GTK_FILE_SELECTION (fs)->cancel_button),
-			      "clicked", G_CALLBACK (fs_cancel_cb), fs);
-
-    if (gtk_dialog_run (GTK_DIALOG (fs)) == GTK_RESPONSE_OK)
+    if (with_preview)
     {
-	temp = gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
+        GtkWidget *frame, *preview;
+        
+        frame = gtk_frame_new (NULL);
+        gtk_widget_set_size_request (frame, 130, 130);
+        gtk_widget_show (frame);
+        
+	preview = gtk_image_new();
+	gtk_widget_show(preview);
+        gtk_container_add (GTK_CONTAINER (frame), preview);
+        
+	xfce_file_chooser_set_preview_widget(XFCE_FILE_CHOOSER(fs), frame);
+	xfce_file_chooser_set_preview_callback(XFCE_FILE_CHOOSER(fs),
+			(PreviewUpdateFunc)update_preview, preview);
+	xfce_file_chooser_set_use_preview_label (XFCE_FILE_CHOOSER(fs), FALSE);
 
-	if (temp && strlen (temp))
-	    /* Too messy: commands should be escaped, internal filenames
-	     * should not. The user now has to escape commands manually
-	     name = path_escape_spaces (temp); */
-	    name = g_strdup (temp);
-	else
-	    name = NULL;
+        if (path)
+            update_preview (XFCE_FILE_CHOOSER(fs), preview);
+    }
+    
+    if (gtk_dialog_run (GTK_DIALOG (fs)) == GTK_RESPONSE_ACCEPT)
+    {
+	name = xfce_file_chooser_get_filename(XFCE_FILE_CHOOSER(fs));
     }
 
     gtk_widget_destroy (fs);
