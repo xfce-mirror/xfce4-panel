@@ -398,8 +398,7 @@ void side_panel_write_xml(int side, xmlNodePtr root)
     {
         child = xmlNewTextChild(node, NULL, "Group", NULL);
 
-        if(i != 0)
-            panel_popup_write_xml(popups[side][i], child);
+        panel_popup_write_xml(popups[side][i], child);
 
         panel_control_write_xml(controls[side][i], child);
     }

@@ -532,6 +532,9 @@ char *select_file_name(const char *title, const char *path, GtkWidget * parent)
 */
 
 /* '~' doesn't get expanded by g_spawn_* */
+/* this has to be statically allocated for putenv !! */
+static char newpath[MAXSTRLEN + 1];
+
 static void expand_path(void)
 {
     static gboolean first = TRUE;
@@ -544,8 +547,6 @@ static void expand_path(void)
         int homelen = strlen(home);
         const char *c;
         char *s;
-        char newpath[MAXSTRLEN + 1];
-
 
         if(!path || !strlen(path))
             return;
@@ -553,11 +554,14 @@ static void expand_path(void)
         c = path;
         s = newpath;
 
+	strcpy(s, "PATH=");
+	s+=5;
+	
         while(*c)
         {
             if(*c == '~')
             {
-                sprintf(s, home);
+                strcpy(s, home);
                 s += homelen;
             }
             else
@@ -572,7 +576,7 @@ static void expand_path(void)
         *s = '\0';
         first = FALSE;
 
-        setenv("PATH", newpath, 1);
+        putenv(newpath);
     }
 }
 
