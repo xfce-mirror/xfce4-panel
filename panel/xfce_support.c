@@ -67,14 +67,14 @@ char **get_read_dirs(void)
     {
         dirs = g_new0(char *, 2);
 
-        dirs[0] = g_strdup(SYSCONFDIR);
+        dirs[0] = g_build_filename(SYSCONFDIR, SYSRCDIR, NULL);
     }
     else
     {
         dirs = g_new0(char *, 3);
 
         dirs[0] = g_build_filename(g_getenv("HOME"), HOMERCDIR, NULL);
-        dirs[1] = g_strdup(SYSCONFDIR);
+        dirs[1] = g_build_filename(SYSCONFDIR, SYSRCDIR, NULL);
     }
 
     return dirs;
@@ -429,7 +429,7 @@ void report_error(const char *text)
 {
     GtkWidget *dialog;
 
-    dialog = gtk_message_dialog_new(GTK_WINDOW(toplevel),
+    dialog = gtk_message_dialog_new(toplevel ? GTK_WINDOW(toplevel) : NULL,
                                     GTK_DIALOG_MODAL |
                                     GTK_DIALOG_DESTROY_WITH_PARENT,
                                     GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE, text);

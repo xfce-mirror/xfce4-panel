@@ -90,17 +90,15 @@ void check_net_support(void)
             gdk_error_trap_pop();
             return;
         }
-        else
-        {
-            g_usleep(5000);
-        }
+        else if (i < 2)
+            g_usleep(2000000); /* wait 2 seconds */
+
+		gdk_flush();
+        gdk_error_trap_pop();
     }
 
-    gdk_flush();
-    gdk_error_trap_pop();
-
     /* fall through */
-    report_error(_("The xfce panel needs a window manager that supports the"
+    report_error(_("The xfce panel needs a window manager that supports the "
                    "extended window manager hints as defined on "
                    "http://www.freedesktop.org.\n"
                    "The panel was designed to run with xfwm4, the window"

@@ -42,6 +42,7 @@ void create_xfce_panel(void);
 void panel_cleanup(void);
 
 /* panel settings */
+void init_settings(void);
 void panel_set_settings(void);
 void panel_set_position(void);
 
