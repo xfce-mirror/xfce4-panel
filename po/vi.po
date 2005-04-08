@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfwm4 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
+"POT-Creation-Date: 2005-03-17 21:45+0100\n"
 "PO-Revision-Date: 2004-09-08 15:40+9\n"
 "Last-Translator: Lâm Vĩnh Niên <nienvl@yahoo.ca>\n"
 "Language-Team: none <LL@li.org>\n"
@@ -15,15 +15,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:557
 msgid "Select file"
 msgstr "Chọn tập tin"
 
-#: panel/settings.c:179
+#: panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "Không tìm thấy dữ liệu"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Vị trí:"
 
@@ -31,72 +31,72 @@ msgstr "Vị trí:"
 msgid "Item properties"
 msgstr "Đặc tính đề mục"
 
-#: panel/controls_dialog.c:209 panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Gỡ bỏ đề mục cũng sẽ gỡ bỏ thực đơn tắt của nó."
 
-#: panel/item_dialog.c:123 panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Chọn lệnh"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:268
 msgid "Command:"
 msgstr "Lệnh"
 
-#: panel/item_dialog.c:307
+#: panel/item_dialog.c:311
 msgid "Run in _terminal"
 msgstr "Chạy ở _trạm cuối"
 
-#: panel/item_dialog.c:325
+#: panel/item_dialog.c:329
 msgid "Use startup _notification"
 msgstr "Dùng thô_ng báo lúc khởi động"
 
-#: panel/item_dialog.c:511
+#: panel/item_dialog.c:515
 msgid "Other Icon"
 msgstr "Biểu tượng khác"
 
-#: panel/item_dialog.c:622
+#: panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
 msgstr "Kéo tập tin vào khung này để đổi biểu tượng"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "Chú thích:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "Lời chú."
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "Thêm vào trình gọi"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "Chuyển đề mục thực đơn"
 
 #. add buttons
-#: panel/item_dialog.c:1200 panel/controls.c:728
+#: panel/item_dialog.c:1221 panel/controls.c:748
 msgid "_Remove"
 msgstr "Gỡ _bỏ"
 
-#: panel/item_dialog.c:1212 panel/item.c:668
+#: panel/item_dialog.c:1233 panel/item.c:738
 msgid "Launcher"
 msgstr "Trình gọi"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Nhấp nút chuột 3 để đổi đề mục"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Thêm trình gọi"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Thêm đề mục mới"
 
-#: panel/main.c:121
+#: panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "Bạn có chắc là bạn muốn thoát?"
 
@@ -133,45 +133,45 @@ msgstr "%s: Khởi động thành công không quản lí phiên làm việc"
 msgid "%s: Successfully started with session management"
 msgstr "%s: Khởi động thành công quản lí phiên làm việc"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Không thể tạo đề mục panel \"%s\"."
 
-#: panel/controls.c:723 panel/panel.c:585
+#: panel/controls.c:743 panel/panel.c:647
 msgid "_Properties..."
 msgstr "Đặ_c tính"
 
-#: panel/controls.c:737 panel/panel.c:575
+#: panel/controls.c:757 panel/panel.c:637
 msgid "Add _new item"
 msgstr "Thêm đề mục _mới"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Đề mục này không có tuỳ chọn cấu hình"
 
-#: panel/panel.c:566 panel/panel.c:980 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: panel/panel.c:590
+#: panel/panel.c:652
 msgid "_About Xfce"
 msgstr "_Về Xfce"
 
-#: panel/panel.c:595
+#: panel/panel.c:657
 msgid "_Help"
 msgstr "_Giúp đỡ"
 
-#: panel/panel.c:604
+#: panel/panel.c:666
 msgid "_Lock screen"
 msgstr "_Khoá màn hình"
 
-#: panel/panel.c:609
+#: panel/panel.c:671
 msgid "_Restart"
 msgstr "Khở_i động lại"
 
-#: panel/panel.c:618
+#: panel/panel.c:680
 msgid "E_xit"
 msgstr "_Thoát"
 
@@ -235,55 +235,55 @@ msgstr "Không có trình quản lí các thiết lập"
 msgid "Menu"
 msgstr "Thực đơn"
 
-#: settings/xfce_settings_dialog.c:88
+#: settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "Nhỏ"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Trung"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "Lớn"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Khổng lồ"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Ngang"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Dọc"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Trái"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Phải"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Đỉnh"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Đáy"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Kích thước panel:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Hướng panel:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Vị trí bật"
 
@@ -291,19 +291,19 @@ msgstr "Vị trí bật"
 msgid "Always on top:"
 msgstr "Luôn luôn trên đỉnh:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Tự động ẩn:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Diện mạo"
 
-#: settings/xfce_settings_dialog.c:491
+#: settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "Hành xử"
 
@@ -315,59 +315,59 @@ msgstr "Hành xử"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:202
+#: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:429
+#: plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "Kiểu đồng hồ:"
 
-#: plugins/clock/clock.c:442
+#: plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "Tương tự"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "Số"
 
-#: plugins/clock/clock.c:450
+#: plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:512
+#: plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "Chế độ giờ"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24 giờ"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12 giờ"
 
-#: plugins/clock/clock.c:531
+#: plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:569
+#: plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "Hiện giây"
 
-#: plugins/clock/clock.c:682
+#: plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Đồng hồ Xfce"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Số hàng:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Số cột:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Trình chuyển trang đồ hoạ"
 
@@ -419,9 +419,8 @@ msgstr "Nút 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
 msgid "_Hide"
-msgstr "_Giúp đỡ"
+msgstr "Ẩ_n"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -431,29 +430,27 @@ msgstr "Các nút hệ thống"
 msgid "Separator"
 msgstr "Dấu cách"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Hộp thư:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Lệnh thư mới:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Lệnh thi hành khi có thư mới đến"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Lệnh thi hành khi nhấp vào nút trên panel"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Thời khoảng (giây):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Kiểm thư"
 
-#~ msgid "Show two buttons:"
-#~ msgstr "Hiển thị hai nút:"

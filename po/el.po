@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: el_GR\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-03-12 10:09+0100\n"
-"PO-Revision-Date: 2005-03-25 18:26+0200\n"
-"Last-Translator: Stavros Giannouris <StavrosG2002@freemail.gr>\n"
+"PO-Revision-Date: 2005-04-07 17:41+0200\n"
+"Last-Translator: Stavros Giannouris <stavrosg2002@freemail.gr>\n"
 "Language-Team: Ελληνικά\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,8 @@ msgstr "Επιλογή αρχείου"
 msgid "No data was found. The panel will be empty."
 msgstr "Δεν βρέθηκαν δεδομένα. Το ταμπλώ θα είναι άδειο"
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: panel/controls_dialog.c:89
+#: panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Θέση:"
 
@@ -33,7 +34,8 @@ msgstr "Θέση:"
 msgid "Item properties"
 msgstr "Ιδιότητες αντικειμένου"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
+#: panel/controls_dialog.c:209
+#: panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Με την αφαίρεση του αντικειμένου, θα αφαιρεθεί και το πτυσσόμενο μενού του."
 
@@ -78,11 +80,13 @@ msgid "Change menu item"
 msgstr "Αλλαγή του στοιχείου του μενού"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
+#: panel/item_dialog.c:1221
+#: panel/controls.c:748
 msgid "_Remove"
 msgstr "_Απομάκρυνση"
 
-#: panel/item_dialog.c:1233 panel/item.c:738
+#: panel/item_dialog.c:1233
+#: panel/item.c:738
 msgid "Launcher"
 msgstr "Εκκινητής"
 
@@ -100,7 +104,7 @@ msgstr "Προσθήκη νέου αντικειμένου"
 
 #: panel/main.c:120
 msgid "Are you sure you want to exit?"
-msgstr "Είστε σίγουρος ότι θέλετε να βγείτε?"
+msgstr "Είστε σίγουρος ότι θέλετε να βγείτε;"
 
 #: panel/main.c:401
 #, c-format
@@ -128,23 +132,25 @@ msgstr ""
 #: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr "%s: Άνοιξε επιτυχώς χωρίς διαχείρηση συνόδου"
+msgstr "%s: Άνοιξε επιτυχώς χωρίς διαχείρηση συνεδρίας"
 
 #: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr "%s: Άνοιξε επιτυχώς με διαχείρηση συνόδου"
+msgstr "%s: Άνοιξε επιτυχώς με διαχείρηση συνεδρίας"
 
 #: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr "Αδ'υνατη η δημιουργία του αντικειμένου \"%s\" στο ταμπλώ."
+msgstr "Αδύνατη η δημιουργία του αντικειμένου \"%s\" στο ταμπλώ."
 
-#: panel/controls.c:743 panel/panel.c:647
+#: panel/controls.c:743
+#: panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Ιδιότητες..."
 
-#: panel/controls.c:757 panel/panel.c:637
+#: panel/controls.c:757
+#: panel/panel.c:637
 msgid "Add _new item"
 msgstr "Προσθήκη _νέου αντικειμένου"
 
@@ -152,7 +158,9 @@ msgstr "Προσθήκη _νέου αντικειμένου"
 msgid "This item has no configuration options"
 msgstr "Αυτό το αντικείμενο δεν έχει ρυθμήσεις"
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: panel/panel.c:628
+#: panel/panel.c:1055
+#: settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Ταμπλώ του Xfce"
@@ -179,7 +187,7 @@ msgstr "Έ_ξοδος"
 
 #: panel/icons.c:63
 msgid "Default"
-msgstr "Προεπιλεγμένο"
+msgstr "Προκαθορισμένο"
 
 #: panel/icons.c:64
 msgid "Editor"
@@ -371,7 +379,7 @@ msgstr "Αριθμός στηλών:"
 
 #: plugins/pager/pager.c:373
 msgid "Graphical pager"
-msgstr "Γραφικός Βομβητής"
+msgstr "Γραφικός Διαχειριστής Επιφανειών Εργασίας"
 
 #: plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
@@ -434,7 +442,7 @@ msgstr "Διαχωριστικό"
 
 #: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
-msgstr "Mail box:"
+msgstr "Θυρίδα ηλεκτρονικού ταχυδρομείου:"
 
 #: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
