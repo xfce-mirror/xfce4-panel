@@ -376,9 +376,25 @@ entry_exec (Entry *entry)
 
 /* menu */
 static void
-launcher_menu_deactivated (GtkWidget *menu, GtkToggleButton *tb)
+launcher_menu_deactivated (GtkWidget *menu, Launcher *launcher)
 {
-    gtk_toggle_button_set_active (tb, FALSE);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), 
+                                  FALSE);
+    launcher->from_timeout = FALSE;
+}
+
+static gboolean
+launcher_button_released (GtkWidget *mi, GdkEventButton *ev, 
+                                    Launcher *launcher)
+{
+    if (launcher->from_timeout)
+    {
+        launcher->from_timeout = FALSE;
+        /* don't activate on button release */
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 static void
@@ -388,13 +404,26 @@ launcher_menu_item_activate (GtkWidget *mi, Entry *entry)
 }
 
 static void
+menu_detached (void)
+{
+    /* do nothing */
+}
+
+static void
 launcher_create_menu (Launcher *launcher)
 {
     launcher->menu = gtk_menu_new ();
 
+    g_signal_connect (launcher->menu, "button-release-event", 
+                      G_CALLBACK (launcher_button_released),
+                      launcher);
+    
     g_signal_connect (launcher->menu, "deactivate", 
-                      G_CALLBACK (launcher_menu_deactivated),
-                      launcher->arrowbutton);
+                      G_CALLBACK (launcher_menu_deactivated), launcher);
+
+    gtk_menu_attach_to_widget (GTK_MENU (launcher->menu), 
+                               launcher->arrowbutton,
+                               (GtkMenuDetachFunc)menu_detached);
 }
 
 static void
@@ -440,6 +469,10 @@ launcher_recreate_menu (Launcher *launcher)
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
         g_object_unref (pb);
 
+        g_signal_connect (mi, "button-release-event", 
+                          G_CALLBACK (launcher_button_released),
+                          launcher);
+        
         g_signal_connect (mi, "activate", 
                           G_CALLBACK (launcher_menu_item_activate), entry);
 
@@ -535,15 +568,52 @@ launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
         *y = geom.y;
 }
 
-static void
-launcher_toggle_menu (GtkToggleButton *b, Launcher *launcher)
+static gboolean
+real_toggle_menu (Launcher *launcher)
 {
-    if (gtk_toggle_button_get_active (b) && launcher->items)
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), 
+                                                     TRUE);
+    
+    if (launcher->items)
     {
         gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL, 
-                        (GtkMenuPositionFunc) launcher_position_menu, b,
-                        0, gtk_get_current_event_time ());
+                        (GtkMenuPositionFunc) launcher_position_menu, 
+                        launcher->arrowbutton, 0, 
+                        gtk_get_current_event_time ());
     }
+
+    launcher->popup_timeout = 0;
+    return FALSE;
+}
+
+static gboolean
+launcher_toggle_menu_timeout (GtkToggleButton *b, GdkEventButton *ev, 
+                              Launcher *launcher)
+{
+    if (ev->button != 1)
+        return FALSE;
+
+    if (launcher->popup_timeout < 1)
+    {
+        launcher->from_timeout = TRUE;
+        
+        launcher->popup_timeout = 
+            g_timeout_add (500, (GSourceFunc)real_toggle_menu, launcher);
+    }
+
+    return FALSE;
+}
+
+static gboolean
+launcher_toggle_menu (GtkToggleButton *b, GdkEventButton *ev, 
+                      Launcher *launcher)
+{
+    if (ev->button != 1)
+        return FALSE;
+    
+    real_toggle_menu (launcher);
+
+    return TRUE;
 }
 
 /* launcher */
@@ -605,6 +675,13 @@ launcher_state_changed (GtkWidget *b1, GtkStateType state, GtkWidget *b2)
 static void
 launcher_clicked (GtkWidget *w, Launcher *launcher)
 {
+    if (launcher->popup_timeout > 0)
+    {
+        g_source_remove (launcher->popup_timeout);
+        launcher->popup_timeout = 0;
+        launcher->from_timeout = FALSE;
+    }
+
     entry_exec (launcher->entry);
     after_exec_insensitive (w);
 }
@@ -646,10 +723,13 @@ launcher_new (void)
                            GTK_RELIEF_NONE);
     gtk_button_set_focus_on_click (GTK_BUTTON (launcher->arrowbutton), FALSE);
     
+    g_signal_connect (launcher->iconbutton, "button-press-event",
+                      G_CALLBACK (launcher_toggle_menu_timeout), launcher);
+    
     g_signal_connect (launcher->iconbutton, "clicked",
                       G_CALLBACK (launcher_clicked), launcher);
     
-    g_signal_connect (launcher->arrowbutton, "toggled",
+    g_signal_connect (launcher->arrowbutton, "button-press-event",
                       G_CALLBACK (launcher_toggle_menu), launcher);
     
     g_signal_connect (launcher->iconbutton, "state-changed",

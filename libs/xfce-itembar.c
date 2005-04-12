@@ -558,6 +558,11 @@ xfce_itembar_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
     }
 
     g_free (props);
+
+    if (priv->raised && priv->event_window != NULL)
+    {
+        gdk_window_raise (priv->event_window);
+    }
 }
 
 static void
@@ -1233,6 +1238,9 @@ xfce_itembar_get_item_at_point (XfceItembar * itembar, int x, int y)
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
+    x += GTK_WIDGET (itembar)->allocation.x;
+    y += GTK_WIDGET (itembar)->allocation.y;
+    
     for (l = priv->children; l != NULL; l = l->next)
     {
         XfceItembarChild *child = l->data;

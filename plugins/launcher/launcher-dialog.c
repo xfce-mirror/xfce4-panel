@@ -987,6 +987,7 @@ launcher_dialog_add_item_tree (LauncherDialog *ld, GtkBox *box)
     
     /* create the view */
     col = gtk_tree_view_column_new ();
+    gtk_tree_view_column_set_spacing (col, BORDER);
     gtk_tree_view_append_column (GTK_TREE_VIEW (tv), col);
 
     cell = gtk_cell_renderer_pixbuf_new ();

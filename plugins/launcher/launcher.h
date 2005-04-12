@@ -78,6 +78,9 @@ struct _Launcher
     GtkWidget *box;
     GtkWidget *arrowbutton;
     GtkWidget *iconbutton;
+
+    int popup_timeout;
+    gboolean from_timeout;
 };
 
 
