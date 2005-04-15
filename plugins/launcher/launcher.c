@@ -385,7 +385,7 @@ launcher_menu_deactivated (GtkWidget *menu, Launcher *launcher)
 
 static gboolean
 launcher_button_released (GtkWidget *mi, GdkEventButton *ev, 
-                                    Launcher *launcher)
+                          Launcher *launcher)
 {
     if (launcher->from_timeout)
     {

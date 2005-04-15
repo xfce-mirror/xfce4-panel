@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright (C) 2002-2004 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (C) 2002-2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -57,6 +57,7 @@ static gpointer settings_callbacks[] = {
     panel_set_popup_position,
     panel_set_theme,
     panel_set_autohide,
+    panel_set_full_width
 };
 
 static void

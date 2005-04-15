@@ -359,6 +359,53 @@ add_autohide_box (GtkBox * box, GtkSizeGroup * sg)
     g_signal_connect (check, "toggled", G_CALLBACK (autohide_changed), NULL);
 }
 
+/* full_width */
+static void
+full_width_changed (GtkToggleButton * tb)
+{
+    int full;
+
+    full = gtk_toggle_button_get_active (tb) ? 1 : 0;
+
+    mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_FULLWIDTH],
+			 CHANNEL, full);
+    mcs_manager_notify (mcs_manager, CHANNEL);
+}
+
+static void
+add_full_width_box (GtkBox * box, GtkSizeGroup * sg)
+{
+    GtkWidget *hbox, *label, *check;
+    McsSetting *setting;
+
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (box, hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new (_("Full width:"));
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_size_group_add_widget (sg, label);
+
+    check = gtk_check_button_new ();
+    gtk_widget_show (check);
+    gtk_box_pack_start (GTK_BOX (hbox), check, FALSE, FALSE, 0);
+
+    setting = mcs_manager_setting_lookup (mcs_manager,
+					  xfce_settings_names[XFCE_FULLWIDTH],
+					  CHANNEL);
+
+    if (setting)
+    {
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check),
+				      setting->data.v_int == 1);
+    }
+
+    g_signal_connect (check, "toggled", G_CALLBACK (full_width_changed), NULL);
+}
+
+
 /* the dialog */
 
 static void
@@ -440,6 +487,8 @@ run_xfce_settings_dialog (McsPlugin * mp)
     xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
 
     add_autohide_box (GTK_BOX (vbox), sg);
+
+    add_full_width_box (GTK_BOX (vbox), sg);
 
     g_object_unref (sg);
 

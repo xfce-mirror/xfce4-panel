@@ -214,6 +214,9 @@ old_xml_start_element (GMarkupParseContext * context,
 	    case XFCE_AUTOHIDE:
 		opt.type = MCS_TYPE_INT;
 		break;
+	    case XFCE_FULLWIDTH:
+		opt.type = MCS_TYPE_INT;
+		break;
 	}
 
 	if (opt.type == MCS_TYPE_INT)
@@ -322,6 +325,10 @@ xfce_init_options (void)
 		opt.data.v_string = DEFAULT_THEME;
 		break;
 	    case XFCE_AUTOHIDE:
+		opt.type = MCS_TYPE_INT;
+		opt.data.v_int = 0;
+		break;
+	    case XFCE_FULLWIDTH:
 		opt.type = MCS_TYPE_INT;
 		opt.data.v_int = 0;
 		break;

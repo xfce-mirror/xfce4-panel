@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright 2002-2004 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2002-2005 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -69,6 +69,8 @@ G_MODULE_IMPORT void panel_set_popup_position (int position);
 G_MODULE_IMPORT void panel_set_theme (const char *theme);
 
 G_MODULE_IMPORT void panel_set_autohide (gboolean hide);
+
+G_MODULE_IMPORT void panel_set_full_width (gboolean full_width);
 
 /* panel data */
 G_MODULE_IMPORT void panel_parse_xml (xmlNodePtr node);

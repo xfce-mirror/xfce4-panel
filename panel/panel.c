@@ -57,6 +57,8 @@ struct _PanelPrivate
 {
     Settings settings;
 
+    gboolean full_width;
+
     GdkScreen *screen;
     int monitor;
     GdkRectangle monitor_geometry;
@@ -316,6 +318,7 @@ static void
 restrict_position (Panel * p, int *x, int *y)
 {
     int xcenter, ycenter, snapwidth;
+    gboolean show_sides;
 
     if (!p || !p->toplevel)
 	return;
@@ -425,23 +428,29 @@ restrict_position (Panel * p, int *x, int *y)
 	p->priv->offset = *y - p->priv->monitor_geometry.y;
     }
 
+    show_sides = !p->priv->full_width;
+    
     switch (p->priv->side)
     {
         case TOP:
             xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               FALSE, TRUE, TRUE, TRUE);
+                                               FALSE, TRUE, 
+                                               show_sides, show_sides);
             break;
         case BOTTOM:
             xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               TRUE, FALSE, TRUE, TRUE);
+                                               TRUE, FALSE, 
+                                               show_sides, show_sides);
             break;
         case LEFT:
             xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               TRUE, TRUE, FALSE, TRUE);
+                                               show_sides, show_sides, 
+                                               FALSE, TRUE);
             break;
         case RIGHT:
             xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               TRUE, TRUE, TRUE, FALSE);
+                                               show_sides, show_sides, 
+                                               TRUE, FALSE);
             break;
         default:
             xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
@@ -496,23 +505,32 @@ panel_set_coordinates (Panel *p)
 		+ p->priv->monitor_geometry.width - p->priv->req.width;
 	}
 
-	switch (p->priv->pos_state)
-	{
-	    case XFCE_POS_STATE_CENTER:
-		p->position.y = p->priv->monitor_geometry.y
-		    + (p->priv->monitor_geometry.height
-		       - p->priv->req.height) / 2;
-		break;
-	    case XFCE_POS_STATE_START:
-		p->position.y = p->priv->monitor_geometry.y;
-		break;
-	    case XFCE_POS_STATE_END:
-		p->position.y = p->priv->monitor_geometry.y
-		    + p->priv->monitor_geometry.height - p->priv->req.height;
-		break;
-	    default:
-		p->position.y = p->priv->monitor_geometry.y + p->priv->offset;
-	}
+        if (p->priv->full_width)
+        {
+            p->position.y = p->priv->monitor_geometry.y;
+        }
+        else
+        {
+            switch (p->priv->pos_state)
+            {
+                case XFCE_POS_STATE_CENTER:
+                    p->position.y = p->priv->monitor_geometry.y
+                        + (p->priv->monitor_geometry.height
+                           - p->priv->req.height) / 2;
+                    break;
+                case XFCE_POS_STATE_START:
+                    p->position.y = p->priv->monitor_geometry.y;
+                    break;
+                case XFCE_POS_STATE_END:
+                    p->position.y = p->priv->monitor_geometry.y
+                        + p->priv->monitor_geometry.height 
+                        - p->priv->req.height;
+                    break;
+                default:
+                    p->position.y = p->priv->monitor_geometry.y 
+                        + p->priv->offset;
+            }
+        }
     }
     else
     {
@@ -526,23 +544,32 @@ panel_set_coordinates (Panel *p)
 		+ p->priv->monitor_geometry.height - p->priv->req.height;
 	}
 
-	switch (p->priv->pos_state)
-	{
-	    case XFCE_POS_STATE_CENTER:
-		p->position.x = p->priv->monitor_geometry.x
-		    + (p->priv->monitor_geometry.width
-		       - p->priv->req.width) / 2;
-		break;
-	    case XFCE_POS_STATE_START:
-		p->position.x = p->priv->monitor_geometry.x;
-		break;
-	    case XFCE_POS_STATE_END:
-		p->position.x = p->priv->monitor_geometry.x
-		    + p->priv->monitor_geometry.width - p->priv->req.width;
-		break;
-	    default:
-		p->position.x = p->priv->monitor_geometry.x + p->priv->offset;
-	}
+        if (p->priv->full_width)
+        {
+            p->position.x = p->priv->monitor_geometry.x;
+        }
+        else
+        {
+            switch (p->priv->pos_state)
+            {
+                case XFCE_POS_STATE_CENTER:
+                    p->position.x = p->priv->monitor_geometry.x
+                        + (p->priv->monitor_geometry.width
+                           - p->priv->req.width) / 2;
+                    break;
+                case XFCE_POS_STATE_START:
+                    p->position.x = p->priv->monitor_geometry.x;
+                    break;
+                case XFCE_POS_STATE_END:
+                    p->position.x = p->priv->monitor_geometry.x
+                        + p->priv->monitor_geometry.width 
+                        - p->priv->req.width;
+                    break;
+                default:
+                    p->position.x = p->priv->monitor_geometry.x 
+                        + p->priv->offset;
+            }
+        }
     }
 
     DBG ("\n"
@@ -1174,9 +1201,8 @@ create_panel (void)
 
     gtk_widget_show (p->toplevel);
 
-    /* size sometimes changes after showing toplevel */
-    panel_set_position (p);
-    
+    panel_set_full_width (p->priv->full_width);
+
     /* recalculate pos_state for old API where only x and y coordinates are
      * read from the config file */
     restrict_position (p, &(p->position.x), &(p->position.y));
@@ -1521,6 +1547,65 @@ panel_set_autohide (gboolean hide)
     update_partial_struts (&panel);
 }
 
+G_MODULE_EXPORT /* EXPORT:panel_set_full_width */
+void 
+panel_set_full_width (gboolean full_width)
+{
+    panel.priv->full_width = full_width;
+
+    xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (panel.toplevel),
+                                        full_width ?
+                                        XFCE_HANDLE_STYLE_NONE :
+                                        XFCE_HANDLE_STYLE_BOTH);
+
+    if (panel.priv->is_created)
+    {
+        XfcePanelWindow *window = XFCE_PANEL_WINDOW (panel.toplevel);
+        
+        switch (panel.priv->side)
+        {
+            case TOP:
+                xfce_panel_window_set_show_border (window,
+                                                   FALSE, TRUE, 
+                                                   !full_width, !full_width);
+                break;
+            case BOTTOM:
+                xfce_panel_window_set_show_border (window, 
+                                                   TRUE, FALSE, 
+                                                   !full_width, !full_width);
+                break;
+            case LEFT:
+                xfce_panel_window_set_show_border (window, 
+                                                   !full_width, !full_width, 
+                                                   FALSE, TRUE);
+                break;
+            case RIGHT:
+                xfce_panel_window_set_show_border (window, 
+                                                   !full_width, !full_width, 
+                                                   TRUE, FALSE);
+                break;
+            default:
+                xfce_panel_window_set_show_border (window, 
+                                                   TRUE, TRUE, TRUE, TRUE);
+        }
+
+        if (full_width)
+        {
+            GdkRectangle *r = &panel.priv->monitor_geometry;
+            if (panel.priv->settings.orientation == HORIZONTAL)
+                gtk_widget_set_size_request (panel.toplevel, r->width, -1);
+            else
+                gtk_widget_set_size_request (panel.toplevel, -1, r->height);
+        }
+        else
+        {
+            gtk_widget_set_size_request (panel.toplevel, -1, -1);
+            panel_center (panel.priv->side);
+        }
+        
+    }
+}
+
 /*  Global preferences
  *  ------------------
 */
@@ -1535,6 +1620,8 @@ init_settings (Panel * p)
     p->priv->settings.autohide = FALSE;
 
     p->priv->settings.theme = NULL;
+
+    p->priv->full_width = FALSE;
 
     /* backwards compat */
     settings = p->priv->settings;

@@ -94,6 +94,7 @@ iconbox/Makefile
 settings/Makefile
 plugins/Makefile
 plugins/clock/Makefile
+plugins/flexspace/Makefile
 plugins/launcher/Makefile
 plugins/mailcheck/Makefile
 plugins/pager/Makefile
@@ -102,5 +103,6 @@ plugins/separator/Makefile
 plugins/switcher/Makefile
 plugins/systembuttons/Makefile
 plugins/systray/Makefile
+plugins/tasklist/Makefile
 ])
 

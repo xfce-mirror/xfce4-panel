@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-12 22:33+0100\n"
+"POT-Creation-Date: 2005-04-15 11:09+0200\n"
 "PO-Revision-Date: 2005-01-08 11:37+0500\n"
 "Last-Translator: Anthony Ivanoff <a-i@bk.ru>\n"
 "Language-Team: Russian\n"
@@ -20,93 +20,93 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: panel/xfce_support.c:307
+#: ../panel/xfce_support.c:307
 msgid "Select file"
 msgstr "Выбор файла"
 
-#: panel/settings.c:268
+#: ../panel/settings.c:268
 msgid "No data was found. The panel will be empty."
 msgstr "Данные не найдены. Панель будет пуста."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1136
-#: settings/xftaskbar_plugin.c:393
+#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1136
+#: ../settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Позиция:"
 
-#: panel/controls_dialog.c:155
+#: ../panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "Свойства элемента"
 
-#: panel/controls_dialog.c:210 panel/controls.c:714
+#: ../panel/controls_dialog.c:210 ../panel/controls.c:714
 msgid "Removing the item will also remove its popup menu."
 msgstr "При удалении объекта будет также удалено его подменю."
 
-#: panel/item_dialog.c:123
+#: ../panel/item_dialog.c:123
 msgid "Select command"
 msgstr "Выбор программы"
 
-#: panel/item_dialog.c:260
+#: ../panel/item_dialog.c:260
 msgid "Command:"
 msgstr "Команда:"
 
-#: panel/item_dialog.c:306
+#: ../panel/item_dialog.c:306 ../plugins/launcher/launcher-dialog.c:602
 msgid "Run in _terminal"
 msgstr "Выполнять в окне терминала"
 
-#: panel/item_dialog.c:324
+#: ../panel/item_dialog.c:324
 msgid "Use startup _notification"
 msgstr "Использовать уведомление о запуске"
 
-#: panel/item_dialog.c:510
+#: ../panel/item_dialog.c:510
 msgid "Other Icon"
 msgstr "Другой значок"
 
-#: panel/item_dialog.c:621
+#: ../panel/item_dialog.c:621
 msgid "Drag file onto this frame to change the icon"
 msgstr "Перетащите сюда файл, чтобы изменить значок"
 
-#: panel/item_dialog.c:933
+#: ../panel/item_dialog.c:933
 msgid "Caption:"
 msgstr "Название:"
 
-#: panel/item_dialog.c:962
+#: ../panel/item_dialog.c:962
 msgid "Tooltip:"
 msgstr "Подсказка:"
 
-#: panel/item_dialog.c:988
+#: ../panel/item_dialog.c:988
 msgid "Attach menu to launcher"
 msgstr "Добавить подменю к обьекту"
 
-#: panel/item_dialog.c:1173
+#: ../panel/item_dialog.c:1173
 msgid "Change menu item"
 msgstr "Изменение элемента меню"
 
 #. add buttons
-#: panel/item_dialog.c:1179 panel/controls.c:751
+#: ../panel/item_dialog.c:1179 ../panel/controls.c:751
 msgid "_Remove"
 msgstr "Удалить"
 
-#: panel/item_dialog.c:1191
+#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:129
 msgid "Launcher"
 msgstr "Запуск"
 
-#: panel/item.c:619
+#: ../panel/item.c:619
 msgid "Click mouse button 3 to change item"
 msgstr "Щелкните средней кнопкой мыши, чтобы изменить объект"
 
-#: panel/item.c:644
+#: ../panel/item.c:644
 msgid "Add launcher"
 msgstr "Добавить запуск"
 
-#: panel/item.c:649
+#: ../panel/item.c:649
 msgid "Add new item"
 msgstr "Добавить новый объект"
 
-#: panel/main.c:120
+#: ../panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "Вы уверены, что хотите выйти?"
 
-#: panel/main.c:401
+#: ../panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -129,122 +129,123 @@ msgstr ""
 " Распространяется на условиях GNU GPL.\n"
 "\n"
 
-#: panel/main.c:484
+#: ../panel/main.c:484
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Успешно запущено без управления сеансами"
 
-#: panel/main.c:489
+#: ../panel/main.c:489
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Успешно запущено; управление сеансами включено"
 
-#: panel/controls.c:668
+#: ../panel/controls.c:668
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Невозможно создать элемент панели \"%s\"."
 
-#: panel/controls.c:746 panel/panel.c:715 iconbox/iconbox.c:618
+#: ../panel/controls.c:746 ../panel/panel.c:742 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "Свойства..."
 
-#: panel/controls.c:760 panel/panel.c:705
+#: ../panel/controls.c:760 ../panel/panel.c:732
 msgid "Add _new item"
 msgstr "Добавить новый объект"
 
-#: panel/controls.c:1087
+#: ../panel/controls.c:1086
 msgid "This item has no configuration options"
 msgstr "Обьект не имеет настраиваемых параметров"
 
-#: panel/panel.c:696 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:392
+#: ../panel/panel.c:723 ../panel/panel.c:1075
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:439
 msgid "Xfce Panel"
 msgstr "Панель Xfce"
 
-#: panel/panel.c:720
+#: ../panel/panel.c:747
 msgid "_About Xfce"
 msgstr "Об Xfce"
 
-#: panel/panel.c:725
+#: ../panel/panel.c:752
 msgid "_Help"
 msgstr "Помощь"
 
-#: panel/panel.c:734
+#: ../panel/panel.c:761
 msgid "_Lock screen"
 msgstr "Заблокировать экран"
 
-#: panel/panel.c:739
+#: ../panel/panel.c:766
 msgid "_Restart"
 msgstr "Перезагрузить"
 
-#: panel/panel.c:748 iconbox/iconbox.c:628
+#: ../panel/panel.c:775 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "Выход"
 
-#: panel/icons.c:63
+#: ../panel/icons.c:63 ../plugins/launcher/launcher-dialog.c:83
 msgid "Default"
 msgstr "Стандартная"
 
-#: panel/icons.c:64
+#: ../panel/icons.c:64 ../plugins/launcher/launcher-dialog.c:84
 msgid "Editor"
 msgstr "Редактор"
 
-#: panel/icons.c:65
+#: ../panel/icons.c:65 ../plugins/launcher/launcher-dialog.c:85
 msgid "File management"
 msgstr "Работа с файлами"
 
-#: panel/icons.c:66
+#: ../panel/icons.c:66 ../plugins/launcher/launcher-dialog.c:86
 msgid "Utilities"
 msgstr "Утилиты"
 
-#: panel/icons.c:67
+#: ../panel/icons.c:67 ../plugins/launcher/launcher-dialog.c:87
 msgid "Games"
 msgstr "Игры"
 
-#: panel/icons.c:68
+#: ../panel/icons.c:68 ../plugins/launcher/launcher-dialog.c:88
 msgid "Help browser"
 msgstr "Просмотр помощи"
 
-#: panel/icons.c:69
+#: ../panel/icons.c:69 ../plugins/launcher/launcher-dialog.c:89
 msgid "Multimedia"
 msgstr "Мультимедиа"
 
-#: panel/icons.c:70
+#: ../panel/icons.c:70 ../plugins/launcher/launcher-dialog.c:90
 msgid "Network"
 msgstr "Сеть"
 
-#: panel/icons.c:71
+#: ../panel/icons.c:71 ../plugins/launcher/launcher-dialog.c:91
 msgid "Graphics"
 msgstr "Графика"
 
-#: panel/icons.c:72
+#: ../panel/icons.c:72 ../plugins/launcher/launcher-dialog.c:92
 msgid "Printer"
 msgstr "Принтер"
 
-#: panel/icons.c:73
+#: ../panel/icons.c:73 ../plugins/launcher/launcher-dialog.c:93
 msgid "Productivity"
 msgstr "Производительность"
 
-#: panel/icons.c:74
+#: ../panel/icons.c:74 ../plugins/launcher/launcher-dialog.c:94
 msgid "Sound"
 msgstr "Звук"
 
 #. Translation with context.
 #. * Translators only need to translate 'Terminal'
-#: panel/icons.c:77
+#: ../panel/icons.c:77
 #, fuzzy
 msgid "icons|Terminal"
 msgstr "Терминал"
 
-#: panel/mcs_client.c:168
+#: ../panel/mcs_client.c:169
 msgid "Settings manager not available"
 msgstr "Диспетчер настроек недоступен"
 
-#: taskbar/xftaskbar.c:510
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
 msgstr ""
 
-#: taskbar/xftaskbar.c:516
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:71
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr ""
@@ -257,245 +258,249 @@ msgstr ""
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: taskbar/xftaskbar.c:616
+#: ../taskbar/xftaskbar.c:616
 #, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: taskbar/xftaskbar.c:637
+#: ../taskbar/xftaskbar.c:637
 msgid "%H:%M"
 msgstr ""
 
-#: taskbar/xftaskbar.c:910 settings/xftaskbar_plugin.c:696
-#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+#: ../taskbar/xftaskbar.c:910 ../settings/xftaskbar_plugin.c:696
+#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr ""
 
-#: taskbar/xftaskbar.c:1025
+#: ../taskbar/xftaskbar.c:1025
 msgid "Cannot create MCS client channel"
 msgstr ""
 
-#: iconbox/iconbox.c:568
+#: ../iconbox/iconbox.c:568
 #, fuzzy
 msgid "Xfce Iconbox"
 msgstr "Настройки панели значков Xfce 4"
 
-#: iconbox/iconbox.c:576
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:137
 msgid "Developer"
 msgstr ""
 
-#: iconbox/iconbox.c:612
+#: ../iconbox/iconbox.c:612
 #, fuzzy
 msgid "_About"
 msgstr "Об Xfce"
 
-#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
-#: settings/xftaskbar_plugin.c:511
+#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
+#: ../settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Маленький"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Средний"
 
-#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
-#: settings/xftaskbar_plugin.c:532
+#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
+#: ../settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Большой"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Огромный"
 
-#: settings/xfce_settings_dialog.c:175
+#: ../settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Горизонтальное"
 
-#: settings/xfce_settings_dialog.c:179
+#: ../settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Вертикальное"
 
-#: settings/xfce_settings_dialog.c:221
+#: ../settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Слева"
 
-#: settings/xfce_settings_dialog.c:225
+#: ../settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Справа"
 
-#: settings/xfce_settings_dialog.c:229
+#: ../settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Сверху"
 
-#: settings/xfce_settings_dialog.c:233
+#: ../settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Снизу"
 
-#: settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Размер панели:"
 
-#: settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Положение панели:"
 
-#: settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Положению меню:"
 
-#: settings/xfce_settings_dialog.c:339
+#: ../settings/xfce_settings_dialog.c:339
 msgid "Autohide:"
 msgstr "Автоматически скрывать:"
 
-#: settings/xfce_settings_dialog.c:409
+#: ../settings/xfce_settings_dialog.c:385
+msgid "Full width:"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:456
 msgid "Xfce Panel Settings"
 msgstr "Настройки панели Xfce"
 
-#: settings/xfce_settings_dialog.c:419
+#: ../settings/xfce_settings_dialog.c:466
 msgid "Appearance"
 msgstr "Внешний вид"
 
 #. show only hidden
-#: settings/xfce_settings_dialog.c:434 settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:481 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Поведение"
 
 #. position
-#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
 #, fuzzy
 msgid "Position"
 msgstr "Позиция:"
 
-#: settings/xftaskbar_plugin.c:399
+#: ../settings/xftaskbar_plugin.c:399
 #, fuzzy
 msgid "_Top"
 msgstr "Сверху"
 
-#: settings/xftaskbar_plugin.c:409
+#: ../settings/xftaskbar_plugin.c:409
 #, fuzzy
 msgid "_Bottom"
 msgstr "Снизу"
 
-#: settings/xftaskbar_plugin.c:422
+#: ../settings/xftaskbar_plugin.c:422
 msgid "Alignment:"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:429
+#: ../settings/xftaskbar_plugin.c:429
 #, fuzzy
 msgid "_Left"
 msgstr "Слева"
 
-#: settings/xftaskbar_plugin.c:439
+#: ../settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:447
+#: ../settings/xftaskbar_plugin.c:447
 #, fuzzy
 msgid "_Right"
 msgstr "Справа"
 
 #. size
-#: settings/xftaskbar_plugin.c:464
+#: ../settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:474
+#: ../settings/xftaskbar_plugin.c:474
 #, fuzzy
 msgid "Height:"
 msgstr "Справа"
 
-#: settings/xftaskbar_plugin.c:505
+#: ../settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:541
+#: ../settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr ""
 
 #. Autohide
-#: settings/xftaskbar_plugin.c:561
+#: ../settings/xftaskbar_plugin.c:561
 #, fuzzy
 msgid "Autohide"
 msgstr "Автоматически скрывать:"
 
-#: settings/xftaskbar_plugin.c:566
+#: ../settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr ""
 
 #. tasklist
-#: settings/xftaskbar_plugin.c:583
+#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:92
 msgid "Tasklist"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:592
+#: ../settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:604
+#: ../settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:613
+#: ../settings/xftaskbar_plugin.c:613
 #, fuzzy
 msgid "Always _group tasks"
 msgstr "Поверх всех окон:"
 
-#: settings/xftaskbar_plugin.c:621
+#: ../settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr ""
 
 #. pager
-#: settings/xftaskbar_plugin.c:629
+#: ../settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:634
+#: ../settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr ""
 
 #. status area
-#: settings/xftaskbar_plugin.c:641
+#: ../settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:650
+#: ../settings/xftaskbar_plugin.c:650
 msgid "Show _notification icons"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:657
+#: ../settings/xftaskbar_plugin.c:657
 msgid "Show _time"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:718
+#: ../settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:729
+#: ../settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr ""
 
-#: settings/iconbox_plugin.c:629
+#: ../settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr ""
 
-#: settings/iconbox_plugin.c:691
+#: ../settings/iconbox_plugin.c:691
 msgid "_Show only minimized applications"
 msgstr ""
 
-#: settings/iconbox_plugin.c:754
+#: ../settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr ""
 
-#: settings/iconbox_plugin.c:762
+#: ../settings/iconbox_plugin.c:762
 msgid "None"
 msgstr ""
 
-#: settings/iconbox_plugin.c:777
+#: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
 
-#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
-#: settings/iconbox_plugin.c:992
+#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
+#: ../settings/iconbox_plugin.c:992
 #, fuzzy
 msgid "Iconbox"
 msgstr "Настройки панели значков"
@@ -508,67 +513,195 @@ msgstr "Настройки панели значков"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:191
+#: ../plugins/clock/clock.c:191
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:421
+#: ../plugins/clock/clock.c:421
 msgid "Clock type:"
 msgstr "Тип часов:"
 
-#: plugins/clock/clock.c:434
+#: ../plugins/clock/clock.c:434
 msgid "Analog"
 msgstr "Аналоговые"
 
-#: plugins/clock/clock.c:438
+#: ../plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "Цифровые"
 
-#: plugins/clock/clock.c:442
+#: ../plugins/clock/clock.c:442
 msgid "LED"
 msgstr "ЖК"
 
-#: plugins/clock/clock.c:504
+#: ../plugins/clock/clock.c:504
 msgid "Hour mode:"
 msgstr "Стиль:"
 
-#: plugins/clock/clock.c:511
+#: ../plugins/clock/clock.c:511
 msgid "24 hour"
 msgstr "24 часа"
 
-#: plugins/clock/clock.c:517
+#: ../plugins/clock/clock.c:517
 msgid "12 hour"
 msgstr "12 часов"
 
-#: plugins/clock/clock.c:523
+#: ../plugins/clock/clock.c:523
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:561
+#: ../plugins/clock/clock.c:561
 msgid "Show seconds:"
 msgstr "Показывать секунды:"
 
-#: plugins/clock/clock.c:674
+#: ../plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Часы Xfce"
 
-#: plugins/pager/pager.c:313
+#: ../plugins/flexspace/flexspace.c:78
+msgid "Flexible space"
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:129
+#, fuzzy
+msgid "Launcher Plugin"
+msgstr "Запуск"
+
+#: ../plugins/launcher/launcher.c:312
+#, fuzzy
+msgid "Alternative Launcher"
+msgstr "Добавить подменю к обьекту"
+
+#: ../plugins/launcher/launcher.c:370
+#, fuzzy, c-format
+msgid ""
+"Could not run \"%s\":\n"
+"%s"
+msgstr "Невозможно создать элемент панели \"%s\"."
+
+#: ../plugins/launcher/launcher.c:701
+#: ../plugins/launcher/launcher-dialog.c:1185
+#, fuzzy
+msgid "New item"
+msgstr "Добавить новый объект"
+
+#: ../plugins/launcher/launcher.c:703
+#: ../plugins/launcher/launcher-dialog.c:1186
+#, fuzzy
+msgid "This item has not yet been configured"
+msgstr "Обьект не имеет настраиваемых параметров"
+
+#: ../plugins/launcher/launcher-dialog.c:95 ../config/contents.xml.in.h:14
+msgid "Terminal"
+msgstr "Терминал"
+
+#: ../plugins/launcher/launcher-dialog.c:96
+msgid "Development"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:97 ../config/contents.xml.in.h:13
+#, fuzzy
+msgid "Settings"
+msgstr "Настройки панели"
+
+#: ../plugins/launcher/launcher-dialog.c:98
+msgid "System"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:99
+msgid "Windows programs"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:262
+#, fuzzy
+msgid "Name"
+msgstr "Игры"
+
+#: ../plugins/launcher/launcher-dialog.c:282
+#, fuzzy
+msgid "Description"
+msgstr "Позиция:"
+
+#: ../plugins/launcher/launcher-dialog.c:397
+#, fuzzy
+msgid "Select image file"
+msgstr "Выбор файла"
+
+#: ../plugins/launcher/launcher-dialog.c:468
+msgid "Other..."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:567
+#, fuzzy
+msgid "Command"
+msgstr "Команда:"
+
+#: ../plugins/launcher/launcher-dialog.c:622
+#, fuzzy
+msgid "Use _startup notification"
+msgstr "Использовать уведомление о запуске"
+
+#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:649
+#, fuzzy
+msgid "Edit launcher"
+msgstr "Добавить запуск"
+
+#: ../plugins/launcher/launcher-dialog.c:1262
+#, fuzzy
+msgid "_Edit"
+msgstr "Редактор"
+
+#: ../plugins/launcher/launcher-dialog.c:1298
+msgid ""
+"The first item in the list is shown on the panel. Additional items will "
+"appear in a menu."
+msgstr ""
+
+#: ../plugins/mailcheck/mailcheck.c:838
+msgid "Mail box:"
+msgstr "Почтовый ящик:"
+
+#: ../plugins/mailcheck/mailcheck.c:875
+msgid "New mail command:"
+msgstr "Запустить по получении новой почты:"
+
+#: ../plugins/mailcheck/mailcheck.c:889
+msgid "Command to run when new mail arrives"
+msgstr "Команда, выполняемая при приходе новой почты"
+
+#: ../plugins/mailcheck/mailcheck.c:919
+msgid "Command to run when the button on the panel is clicked"
+msgstr "Команда, выполняемая при нажатии кнопки на панели"
+
+#: ../plugins/mailcheck/mailcheck.c:940
+msgid "Interval (sec):"
+msgstr "Интервал (сек):"
+
+#: ../plugins/mailcheck/mailcheck.c:1017
+msgid "Mail checker"
+msgstr "Проверка почты"
+
+#: ../plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "Число строк:"
 
-#: plugins/pager/pager.c:315
+#: ../plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "Число колонок:"
 
-#: plugins/pager/pager.c:372
+#: ../plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "Графический пейджер"
 
-#: plugins/switcher/switcher.c:698
+#: ../plugins/separator/separator.c:65
+msgid "Separator"
+msgstr "Разделитель"
+
+#: ../plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "Переключатель рабочих мест"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -578,174 +711,141 @@ msgstr ""
 "\n"
 "Обратитесь к системному администратору."
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "Заблокировать экран"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:172
 #, fuzzy
 msgid "tip|Exit"
 msgstr "Выход"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:174
+#: ../plugins/systembuttons/systembuttons.c:174
 #, fuzzy
 msgid "tip|Setup"
 msgstr "Настройка"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:176
+#: ../plugins/systembuttons/systembuttons.c:176
 #, fuzzy
 msgid "tip|Info"
 msgstr "Информация"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Lock"
 msgstr "Блокирование"
 
-#: plugins/systembuttons/systembuttons.c:522
+#: ../plugins/systembuttons/systembuttons.c:522
 msgid "Exit"
 msgstr "Выход"
 
-#: plugins/systembuttons/systembuttons.c:523
+#: ../plugins/systembuttons/systembuttons.c:523
 msgid "Setup"
 msgstr "Настройка"
 
-#: plugins/systembuttons/systembuttons.c:524
+#: ../plugins/systembuttons/systembuttons.c:524
 msgid "Info"
 msgstr "Информация"
 
-#: plugins/systembuttons/systembuttons.c:553
+#: ../plugins/systembuttons/systembuttons.c:553
 msgid "Button 1:"
 msgstr "Кнопка 1:"
 
-#: plugins/systembuttons/systembuttons.c:568
+#: ../plugins/systembuttons/systembuttons.c:568
 msgid "Button 2:"
 msgstr "Кнопка 2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:582
+#: ../plugins/systembuttons/systembuttons.c:582
 msgid "_Hide"
 msgstr "Скрыть"
 
-#: plugins/systembuttons/systembuttons.c:620
+#: ../plugins/systembuttons/systembuttons.c:620
 msgid "System buttons"
 msgstr "Системные кнопки"
 
-#: plugins/separator/separator.c:65
-msgid "Separator"
-msgstr "Разделитель"
+#: ../plugins/systray/systray.c:273
+msgid "Notification Area"
+msgstr ""
 
-#: plugins/mailcheck/mailcheck.c:838
-msgid "Mail box:"
-msgstr "Почтовый ящик:"
-
-#: plugins/mailcheck/mailcheck.c:875
-msgid "New mail command:"
-msgstr "Запустить по получении новой почты:"
-
-#: plugins/mailcheck/mailcheck.c:889
-msgid "Command to run when new mail arrives"
-msgstr "Команда, выполняемая при приходе новой почты"
-
-#: plugins/mailcheck/mailcheck.c:919
-msgid "Command to run when the button on the panel is clicked"
-msgstr "Команда, выполняемая при нажатии кнопки на панели"
-
-#: plugins/mailcheck/mailcheck.c:940
-msgid "Interval (sec):"
-msgstr "Интервал (сек):"
-
-#: plugins/mailcheck/mailcheck.c:1017
-msgid "Mail checker"
-msgstr "Проверка почты"
-
-#: settings/xfce-panel-settings.desktop.in.h:1
+#: ../settings/xfce-panel-settings.desktop.in.h:1
 msgid "Panel Settings"
 msgstr "Настройки панели"
 
-#: settings/xfce-panel-settings.desktop.in.h:2
+#: ../settings/xfce-panel-settings.desktop.in.h:2
 msgid "Xfce 4 Panel Settings"
 msgstr "Настройки панели Xfce 4"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:1
+#: ../settings/xfce-iconbox-settings.desktop.in.h:1
 msgid "Iconbox Settings"
 msgstr "Настройки панели значков"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:2
+#: ../settings/xfce-iconbox-settings.desktop.in.h:2
 msgid "Xfce 4 Iconbox Settings"
 msgstr "Настройки панели значков Xfce 4"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:1
+#: ../settings/xfce-taskbar-settings.desktop.in.h:1
 #, fuzzy
 msgid "Taskbar Settings"
 msgstr "Настройки панели"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:2
+#: ../settings/xfce-taskbar-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Taskbar Settings"
 msgstr "Настройки панели Xfce 4"
 
-#: config/contents.xml.in.h:1
+#: ../config/contents.xml.in.h:1
 msgid "Appfinder"
 msgstr ""
 
-#: config/contents.xml.in.h:2
+#: ../config/contents.xml.in.h:2
 msgid "Drag file to print"
 msgstr ""
 
-#: config/contents.xml.in.h:3
+#: ../config/contents.xml.in.h:3
 #, fuzzy
 msgid "File manager"
 msgstr "Работа с файлами"
 
-#: config/contents.xml.in.h:4
+#: ../config/contents.xml.in.h:4
 msgid "Find and run applications"
 msgstr ""
 
-#: config/contents.xml.in.h:5
+#: ../config/contents.xml.in.h:5
 msgid "Konqueror"
 msgstr ""
 
-#: config/contents.xml.in.h:6
+#: ../config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
 msgstr ""
 
-#: config/contents.xml.in.h:7
+#: ../config/contents.xml.in.h:7
 msgid "Manual"
 msgstr ""
 
-#: config/contents.xml.in.h:8
+#: ../config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
 msgstr ""
 
-#: config/contents.xml.in.h:9
+#: ../config/contents.xml.in.h:9
 msgid "Music player"
 msgstr ""
 
-#: config/contents.xml.in.h:10
+#: ../config/contents.xml.in.h:10
 msgid "Nautilus"
 msgstr ""
 
-#: config/contents.xml.in.h:11
+#: ../config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
 msgstr ""
 
-#: config/contents.xml.in.h:12
+#: ../config/contents.xml.in.h:12
 #, fuzzy
 msgid "Printer Management"
 msgstr "Работа с файлами"
-
-#: config/contents.xml.in.h:13
-#, fuzzy
-msgid "Settings"
-msgstr "Настройки панели"
-
-#: config/contents.xml.in.h:14
-msgid "Terminal"
-msgstr "Терминал"
 
 #~ msgid "Menu"
 #~ msgstr "Меню"

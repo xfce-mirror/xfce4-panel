@@ -1,5 +1,6 @@
 SUBDIRS =								\
 	clock								\
+	flexspace							\
 	launcher							\
 	mailcheck							\
 	pager								\
@@ -7,4 +8,5 @@ SUBDIRS =								\
 	separator							\
 	switcher							\
 	systembuttons							\
-	systray
+	systray								\
+	tasklist
