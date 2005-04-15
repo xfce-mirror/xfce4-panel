@@ -912,21 +912,16 @@ panel_set_hidden (Panel * p, gboolean hide)
     
     if (hide)
     {
-        g_object_ref (p->group_box);
 	gtk_widget_hide (p->group_box);
-	gtk_container_remove (GTK_CONTAINER (p->toplevel), p->group_box);
         xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (p->toplevel),
                                             XFCE_HANDLE_STYLE_NONE);
 	gtk_widget_set_size_request (p->toplevel, w, h);
     }
     else
     {
-	gtk_widget_set_size_request (p->toplevel, -1, -1);
-        xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (p->toplevel),
-                                            XFCE_HANDLE_STYLE_BOTH);
-	gtk_container_add (GTK_CONTAINER (p->toplevel), p->group_box);
 	gtk_widget_show (p->group_box);
-        g_object_unref (p->group_box);
+
+        panel_set_full_width (p->priv->full_width);
     }
 
     p->hidden = hide;
