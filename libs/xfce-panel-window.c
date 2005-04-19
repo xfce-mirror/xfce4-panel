@@ -585,9 +585,9 @@ xfce_panel_window_size_request (GtkWidget * widget,
     if (priv->bottom_border)
         requisition->height += widget->style->ythickness;
     if (priv->left_border)
-        requisition->height += widget->style->xthickness;
+        requisition->width += widget->style->xthickness;
     if (priv->right_border)
-        requisition->height += widget->style->xthickness;
+        requisition->width += widget->style->xthickness;
 
     if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
     {
@@ -699,7 +699,6 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
         if (priv->right_border)
             childalloc.width -= widget->style->xthickness;
             
-
         if (priv->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
             childalloc.x += start_handle_size;
@@ -839,29 +838,60 @@ _paint_handle (XfcePanelWindow * panel_window, gboolean start,
     {
         w = HANDLE_WIDTH;
         h = alloc->height - 2 * ythick;
+
+        y = alloc->y + ythick;
+
+        if (priv->top_border)
+        {
+            h -= ythick;
+            y += ythick;
+        }
+        if (priv->bottom_border)
+            h -= ythick;
+
+        if (start)
+        {
+            x = alloc->x + xthick;
+
+            if (priv->left_border)
+                x += xthick;
+        }
+        else
+        {
+            x = alloc->x + alloc->width - HANDLE_WIDTH - xthick;
+
+            if (priv->right_border)
+                x -= xthick;
+        }
     }
     else
     {
         w = alloc->width - 2 * xthick;
         h = HANDLE_WIDTH;
-    }
 
-    if (start)
-    {
         x = alloc->x + xthick;
-        y = alloc->y + ythick;
-    }
-    else
-    {
-        if (horizontal)
+
+        if (priv->left_border)
         {
-            x = alloc->x + alloc->width - HANDLE_WIDTH - xthick;
+            w -= xthick;
+            x += xthick;
+        }
+        if (priv->right_border)
+            w -= xthick;
+
+        if (start)
+        {
             y = alloc->y + ythick;
+
+            if (priv->top_border)
+                y += ythick;
         }
         else
         {
-            x = alloc->x + xthick;
-            y = alloc->y + alloc->height - HANDLE_WIDTH - ythick;
+            y = alloc->y + alloc->height - HANDLE_WIDTH - 2 * ythick;
+
+            if (priv->bottom_border)
+                y -= ythick;
         }
     }
 
@@ -1046,20 +1076,18 @@ xfce_panel_window_set_show_border (XfcePanelWindow * window,
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
-    if (top_border == priv->top_border
-        && bottom_border == priv->bottom_border
-        && left_border == priv->left_border
-        && right_border == priv->right_border)
+    if (top_border != priv->top_border
+        || bottom_border != priv->bottom_border
+        || left_border != priv->left_border
+        || right_border != priv->right_border)
     {
-        return;
-    }
-    
-    priv->top_border = top_border;
-    priv->bottom_border = bottom_border;
-    priv->left_border = left_border;
-    priv->right_border = right_border;
+        priv->top_border = top_border;
+        priv->bottom_border = bottom_border;
+        priv->left_border = left_border;
+        priv->right_border = right_border;
 
-    gtk_widget_queue_resize (GTK_WIDGET (window));
+        gtk_widget_queue_resize (GTK_WIDGET (window));
+    }
 }
 
 /**
