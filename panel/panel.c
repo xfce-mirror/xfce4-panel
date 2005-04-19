@@ -214,8 +214,8 @@ update_partial_struts (Panel * p)
 
 	x = p->position.x;
 	y = p->position.y;
-	w = p->priv->req.width;
-	h = p->priv->req.height;
+	w = p->toplevel->allocation.width;
+	h = p->toplevel->allocation.height;
 
 	switch (p->priv->side)
 	{
