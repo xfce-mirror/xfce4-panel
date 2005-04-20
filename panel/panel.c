@@ -606,6 +606,8 @@ panel_resize_func (XfcePanelWindow * panel_window, Panel *p,
 
     *x = p->position.x;
     *y = p->position.y;
+
+    update_partial_struts (p);
 }
 
 static void
