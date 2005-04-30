@@ -719,7 +719,7 @@ set_panel_icon (LauncherDialog *ld)
 }
 
 static void
-launcher_dialog_destroyed (LauncherDialog *ld)
+launcher_dialog_destroyed (GtkWidget *box, LauncherDialog *ld)
 {
     if (ld->launcher->iconbutton)
     {
@@ -974,7 +974,7 @@ launcher_dialog_add_item_tree (LauncherDialog *ld, GtkBox *box)
 
     ld->tree = tv = gtk_tree_view_new_with_model (model);
     gtk_widget_show (tv);
-    gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tv), TRUE);
+    gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tv), FALSE);
     gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tv), FALSE);
     gtk_container_add (GTK_CONTAINER (ld->scroll), tv);
 
@@ -1233,47 +1233,39 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
 static void
 launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
 {
-    GtkWidget *hbox, *b, *img;
+    GtkWidget *vbox, *b;
 
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-
-    ld->up = b = gtk_button_new ();
+    vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    gtk_box_pack_end (box, vbox, FALSE, FALSE, 0);
+    
+    ld->up = b = gtk_button_new_with_mnemonic (_("_Up"));
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, 0);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
-    img = gtk_image_new_from_stock (GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (b), img);
-
-    ld->down = b = gtk_button_new ();
+    ld->down = b = gtk_button_new_with_mnemonic (_("_Down"));
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, 0);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
-
-    img = gtk_image_new_from_stock (GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (b), img);
 
     ld->edit = b = gtk_button_new_with_mnemonic (_("_Edit"));
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, BORDER);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
-    ld->add = b = gtk_button_new_from_stock (GTK_STOCK_ADD);
+    ld->add = b = gtk_button_new_with_mnemonic (_("_Add"));
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, 0);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
-    ld->remove = b = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
+    ld->remove = b = gtk_button_new_with_mnemonic (_("_Remove"));
     gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, 0);
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
@@ -1307,7 +1299,8 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
                             GtkWidget * close)
 {
     LauncherDialog *ld;
-    GtkWidget *vbox;
+    GtkWidget *vbox, *label, *hbox;
+    char *markup;
 
     ld = g_new0 (LauncherDialog, 1);
     
@@ -1317,14 +1310,28 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
     gtk_widget_show (vbox);
     gtk_container_add (container, vbox);
 
-    g_signal_connect_swapped (vbox, "destroy", 
-                              G_CALLBACK (launcher_dialog_destroyed), ld);
+    markup = g_strdup_printf ("<b>%s</b>", _("Panel Item and Menu Items"));
     
-    launcher_dialog_add_buttons (ld, GTK_BOX (vbox));
+    label = gtk_label_new (NULL);
+    gtk_label_set_markup (GTK_LABEL (label), markup);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+
+    g_free (markup);
+    
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
+    
+    launcher_dialog_add_buttons (ld, GTK_BOX (hbox));
  
-    launcher_dialog_add_item_tree (ld, GTK_BOX (vbox));
+    launcher_dialog_add_item_tree (ld, GTK_BOX (hbox));
 
     launcher_dialog_add_explanation (GTK_BOX (vbox));
+    
+    g_signal_connect (close, "clicked", 
+                      G_CALLBACK (launcher_dialog_destroyed), ld);
 }
 
 /* dnd */

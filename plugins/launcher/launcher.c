@@ -37,6 +37,7 @@
 #include "launcher.h"
 #include "launcher-dialog.h"
 
+#define MENU_TIMEOUT  300
 
 XfceIconTheme *launcher_theme = NULL;
 
@@ -195,7 +196,8 @@ launcher_set_size (Control *control, int size)
     Launcher *launcher = control->data;
 
     gtk_widget_set_size_request (launcher->iconbutton, 
-                                 icon_size [size], icon_size [size]);
+                                 icon_size [size] + border_width, 
+                                 icon_size [size] + border_width);
 }
 
 static void
@@ -518,7 +520,7 @@ launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
     widget = b->parent->parent;
     
     /* wtf is this anyway? */
-    *push_in = TRUE;
+    *push_in = FALSE;
 
     if (!GTK_WIDGET_REALIZED (GTK_WIDGET (menu)))
         gtk_widget_realize (GTK_WIDGET (menu));
@@ -598,7 +600,8 @@ launcher_toggle_menu_timeout (GtkToggleButton *b, GdkEventButton *ev,
         launcher->from_timeout = TRUE;
         
         launcher->popup_timeout = 
-            g_timeout_add (500, (GSourceFunc)real_toggle_menu, launcher);
+            g_timeout_add (MENU_TIMEOUT, (GSourceFunc)real_toggle_menu, 
+                           launcher);
     }
 
     return FALSE;
