@@ -31,6 +31,7 @@ enum
     XFCE_THEME,
     XFCE_AUTOHIDE,
     XFCE_FULLWIDTH,
+    XFCE_HANDLESTYLE,
     XFCE_OPTIONS
 };
 
@@ -40,7 +41,8 @@ static char *xfce_settings_names[] = {
     "popupposition",
     "theme",
     "autohide",
-    "fullwidth"
+    "fullwidth",
+    "handlestyle"
 };
 
 #endif /* __XFCE_SETTINGS_H */

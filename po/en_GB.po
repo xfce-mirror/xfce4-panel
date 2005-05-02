@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-15 11:09+0200\n"
+"POT-Creation-Date: 2005-05-02 22:27+0200\n"
 "PO-Revision-Date: 2004-12-03 18:06+0200\n"
 "Last-Translator: Translate.org.za <info@translate.org.za>\n"
 "Language-Team: \n"
@@ -80,10 +80,11 @@ msgstr "Change menu item"
 
 #. add buttons
 #: ../panel/item_dialog.c:1179 ../panel/controls.c:751
+#: ../plugins/launcher/launcher-dialog.c:1266
 msgid "_Remove"
 msgstr "_Remove"
 
-#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:129
+#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:130
 msgid "Launcher"
 msgstr "Launcher"
 
@@ -141,11 +142,11 @@ msgstr "%s: Successfully started with session management"
 msgid "Could not create panel item \"%s\"."
 msgstr "Could not create panel item \"%s\"."
 
-#: ../panel/controls.c:746 ../panel/panel.c:742 ../iconbox/iconbox.c:618
+#: ../panel/controls.c:746 ../panel/panel.c:717 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "_Properties..."
 
-#: ../panel/controls.c:760 ../panel/panel.c:732
+#: ../panel/controls.c:760 ../panel/panel.c:707
 msgid "Add _new item"
 msgstr "Add _new item"
 
@@ -153,29 +154,29 @@ msgstr "Add _new item"
 msgid "This item has no configuration options"
 msgstr "This item has no configuration options"
 
-#: ../panel/panel.c:723 ../panel/panel.c:1075
+#: ../panel/panel.c:698 ../panel/panel.c:1046
 #: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:439
+#: ../settings/xfce_settings_dialog.c:507
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: ../panel/panel.c:747
+#: ../panel/panel.c:722
 msgid "_About Xfce"
 msgstr "_About Xfce"
 
-#: ../panel/panel.c:752
+#: ../panel/panel.c:727
 msgid "_Help"
 msgstr "_Help"
 
-#: ../panel/panel.c:761
+#: ../panel/panel.c:736
 msgid "_Lock screen"
 msgstr "_Lock screen"
 
-#: ../panel/panel.c:766
+#: ../panel/panel.c:741
 msgid "_Restart"
 msgstr "_Restart"
 
-#: ../panel/panel.c:775 ../iconbox/iconbox.c:628
+#: ../panel/panel.c:750 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "E_xit"
 
@@ -234,15 +235,15 @@ msgstr "Sound"
 msgid "icons|Terminal"
 msgstr "Terminal"
 
-#: ../panel/mcs_client.c:169
+#: ../panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "Settings manager not available"
 
-#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:65
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:70
 msgid "There is already a system tray running on this screen"
 msgstr ""
 
-#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:71
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:76
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr ""
@@ -277,7 +278,7 @@ msgstr ""
 msgid "Xfce Iconbox"
 msgstr ""
 
-#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:137
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:138
 msgid "Developer"
 msgstr ""
 
@@ -328,36 +329,57 @@ msgstr "Top"
 msgid "Bottom"
 msgstr "Bottom"
 
-#: ../settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:275 ../settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:279
+#, fuzzy
+msgid "At both sides"
+msgstr "Autohide:"
+
+#: ../settings/xfce_settings_dialog.c:283
+msgid "At the start"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:287
+msgid "At the end"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:320
 msgid "Panel size:"
 msgstr "Panel size:"
 
-#: ../settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:336
 msgid "Panel orientation:"
 msgstr "Panel orientation:"
 
-#: ../settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:355
 msgid "Popup position:"
 msgstr "Popup position:"
 
-#: ../settings/xfce_settings_dialog.c:339
+#: ../settings/xfce_settings_dialog.c:371
+msgid "Handles:"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:407
 msgid "Autohide:"
 msgstr "Autohide:"
 
-#: ../settings/xfce_settings_dialog.c:385
+#: ../settings/xfce_settings_dialog.c:453
 msgid "Full width:"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:456
+#: ../settings/xfce_settings_dialog.c:524
 msgid "Xfce Panel Settings"
 msgstr "Xfce Panel Settings"
 
-#: ../settings/xfce_settings_dialog.c:466
+#: ../settings/xfce_settings_dialog.c:534
 msgid "Appearance"
 msgstr "Appearance"
 
 #. show only hidden
-#: ../settings/xfce_settings_dialog.c:481 ../settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:549 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Behaviour"
 
@@ -487,10 +509,6 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:762
-msgid "None"
-msgstr ""
-
 #: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
@@ -556,30 +574,30 @@ msgstr "Xfce Clock"
 msgid "Flexible space"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:129
+#: ../plugins/launcher/launcher.c:130
 #, fuzzy
 msgid "Launcher Plugin"
 msgstr "Launcher"
 
-#: ../plugins/launcher/launcher.c:312
+#: ../plugins/launcher/launcher.c:314
 #, fuzzy
 msgid "Alternative Launcher"
 msgstr "Attach menu to launcher"
 
-#: ../plugins/launcher/launcher.c:370
+#: ../plugins/launcher/launcher.c:372
 #, fuzzy, c-format
 msgid ""
 "Could not run \"%s\":\n"
 "%s"
 msgstr "Could not create panel item \"%s\"."
 
-#: ../plugins/launcher/launcher.c:701
+#: ../plugins/launcher/launcher.c:704
 #: ../plugins/launcher/launcher-dialog.c:1185
 #, fuzzy
 msgid "New item"
 msgstr "Add new item"
 
-#: ../plugins/launcher/launcher.c:703
+#: ../plugins/launcher/launcher.c:706
 #: ../plugins/launcher/launcher-dialog.c:1186
 #, fuzzy
 msgid "This item has not yet been configured"
@@ -641,15 +659,31 @@ msgstr "Use startup _notification"
 msgid "Edit launcher"
 msgstr "Add launcher"
 
-#: ../plugins/launcher/launcher-dialog.c:1262
+#: ../plugins/launcher/launcher-dialog.c:1242
+msgid "_Up"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1248
+msgid "_Down"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1254
 #, fuzzy
 msgid "_Edit"
 msgstr "Editor"
 
-#: ../plugins/launcher/launcher-dialog.c:1298
+#: ../plugins/launcher/launcher-dialog.c:1260
+msgid "_Add"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1290
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1313
+msgid "Panel Item and Menu Items"
 msgstr ""
 
 #: ../plugins/mailcheck/mailcheck.c:838
@@ -762,7 +796,7 @@ msgstr "_Hide"
 msgid "System buttons"
 msgstr "System buttons"
 
-#: ../plugins/systray/systray.c:273
+#: ../plugins/systray/systray.c:278
 msgid "Notification Area"
 msgstr ""
 

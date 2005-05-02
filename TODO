@@ -3,7 +3,7 @@ TODO
 * Fix gettext issues so I don't have to use a special
   #define dg_(s)  dgettext (PACKAGE, s)
   Somehow PACKAGE_GETTEXT is set to something else ...
-* plugin library
+* out of proces plugins with plugin library
   - with API docs
 * multiple panels
   - Most settings should become per panel
@@ -16,13 +16,8 @@ TODO
   - [DONE] include move handles (steal code form GtkHandlebox)
   - use properties and signals for settings
   - perhaps use interfaces or derived widgets for controls
-* Change xml parsing to use lang: properties. This allows translations to be
-  handled through gettext/intltool.
+* [DONE] Change xml parsing to use lang: properties. This allows translations 
+  to be handled through gettext/intltool.
+* Add option to choose handle type
 
-Ideas
------
-* plugins:
-  - dockapps support
-* 2 plugins side by side 
-   (like systembuttons)
 

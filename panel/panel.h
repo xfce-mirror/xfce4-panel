@@ -72,6 +72,8 @@ G_MODULE_IMPORT void panel_set_autohide (gboolean hide);
 
 G_MODULE_IMPORT void panel_set_full_width (gboolean full_width);
 
+G_MODULE_IMPORT void panel_set_handle_style (int style);
+
 /* panel data */
 G_MODULE_IMPORT void panel_parse_xml (xmlNodePtr node);
 G_MODULE_IMPORT void panel_write_xml (xmlNodePtr root);

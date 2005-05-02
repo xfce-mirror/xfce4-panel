@@ -251,14 +251,66 @@ add_popup_position_menu (GtkWidget * option_menu)
 		      G_CALLBACK (popup_position_changed), NULL);
 }
 
+/* handle style */
+
+static void
+handle_style_changed (GtkOptionMenu * menu)
+{
+    int n = gtk_option_menu_get_history (menu);
+
+    mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_HANDLESTYLE],
+			 CHANNEL, n);
+    mcs_manager_notify (mcs_manager, CHANNEL);
+}
+
+static void
+add_handle_style_menu (GtkWidget * option_menu)
+{
+    GtkWidget *menu;
+    GtkWidget *item;
+    McsSetting *setting;
+
+    menu = gtk_menu_new ();
+    
+    item = gtk_menu_item_new_with_label (_("None"));
+    gtk_widget_show (item);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+    item = gtk_menu_item_new_with_label (_("At both sides"));
+    gtk_widget_show (item);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+    item = gtk_menu_item_new_with_label (_("At the start"));
+    gtk_widget_show (item);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+    item = gtk_menu_item_new_with_label (_("At the end"));
+    gtk_widget_show (item);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
+    gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
+
+    setting =
+	mcs_manager_setting_lookup (mcs_manager,
+				    xfce_settings_names[XFCE_HANDLESTYLE],
+				    CHANNEL);
+
+    if (setting)
+    {
+	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu),
+				     setting->data.v_int);
+    }
+
+    g_signal_connect (option_menu, "changed",
+		      G_CALLBACK (handle_style_changed), NULL);
+}
+
 static void
 add_style_box (GtkBox * box, GtkSizeGroup * sg)
 {
     GtkWidget *vbox, *hbox, *label, *omenu, *popup_menu;
 
-    vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_widget_show (vbox);
-    gtk_box_pack_start (box, vbox, TRUE, TRUE, 0);
+    vbox = GTK_WIDGET (box);
 
     /* size */
     hbox = gtk_hbox_new (FALSE, BORDER);
@@ -309,6 +361,22 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     omenu = popup_menu;
     gtk_widget_show (omenu);
     add_popup_position_menu (omenu);
+    gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
+
+    /* handle style */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
+
+    label = gtk_label_new (_("Handles:"));
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_widget_show (label);
+    gtk_size_group_add_widget (sg, label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    omenu = gtk_option_menu_new ();
+    gtk_widget_show (omenu);
+    add_handle_style_menu (omenu);
     gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
 }
 

@@ -217,6 +217,9 @@ old_xml_start_element (GMarkupParseContext * context,
 	    case XFCE_FULLWIDTH:
 		opt.type = MCS_TYPE_INT;
 		break;
+	    case XFCE_HANDLESTYLE:
+		opt.type = MCS_TYPE_INT;
+		break;
 	}
 
 	if (opt.type == MCS_TYPE_INT)
@@ -331,6 +334,10 @@ xfce_init_options (void)
 	    case XFCE_FULLWIDTH:
 		opt.type = MCS_TYPE_INT;
 		opt.data.v_int = 0;
+		break;
+	    case XFCE_HANDLESTYLE:
+		opt.type = MCS_TYPE_INT;
+		opt.data.v_int = 1;
 		break;
 	}
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-15 11:09+0200\n"
+"POT-Creation-Date: 2005-05-02 22:27+0200\n"
 "PO-Revision-Date: 2004-03-09 18:48+0200\n"
 "Last-Translator: Miroslav Yordanov <miordanov@i-space.org>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
@@ -85,11 +85,12 @@ msgstr "Промяна на обект от менюто"
 
 #. add buttons
 #: ../panel/item_dialog.c:1179 ../panel/controls.c:751
+#: ../plugins/launcher/launcher-dialog.c:1266
 #, fuzzy
 msgid "_Remove"
 msgstr "/_Премахва"
 
-#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:129
+#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:130
 msgid "Launcher"
 msgstr "Обект"
 
@@ -141,12 +142,12 @@ msgstr ""
 msgid "Could not create panel item \"%s\"."
 msgstr ""
 
-#: ../panel/controls.c:746 ../panel/panel.c:742 ../iconbox/iconbox.c:618
+#: ../panel/controls.c:746 ../panel/panel.c:717 ../iconbox/iconbox.c:618
 #, fuzzy
 msgid "_Properties..."
 msgstr "/_Настройки"
 
-#: ../panel/controls.c:760 ../panel/panel.c:732
+#: ../panel/controls.c:760 ../panel/panel.c:707
 #, fuzzy
 msgid "Add _new item"
 msgstr "/Добавяне на нов обект"
@@ -155,32 +156,32 @@ msgstr "/Добавяне на нов обект"
 msgid "This item has no configuration options"
 msgstr "Този обект няма опции за настройване"
 
-#: ../panel/panel.c:723 ../panel/panel.c:1075
+#: ../panel/panel.c:698 ../panel/panel.c:1046
 #: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:439
+#: ../settings/xfce_settings_dialog.c:507
 msgid "Xfce Panel"
 msgstr "Xfce панел"
 
-#: ../panel/panel.c:747
+#: ../panel/panel.c:722
 #, fuzzy
 msgid "_About Xfce"
 msgstr "/_Относно Xfce"
 
-#: ../panel/panel.c:752
+#: ../panel/panel.c:727
 #, fuzzy
 msgid "_Help"
 msgstr "/_Помощ"
 
-#: ../panel/panel.c:761
+#: ../panel/panel.c:736
 #, fuzzy
 msgid "_Lock screen"
 msgstr "/_Заключва екрана"
 
-#: ../panel/panel.c:766
+#: ../panel/panel.c:741
 msgid "_Restart"
 msgstr ""
 
-#: ../panel/panel.c:775 ../iconbox/iconbox.c:628
+#: ../panel/panel.c:750 ../iconbox/iconbox.c:628
 #, fuzzy
 msgid "E_xit"
 msgstr "/Изход"
@@ -240,15 +241,15 @@ msgstr "Звук"
 msgid "icons|Terminal"
 msgstr "Терминал"
 
-#: ../panel/mcs_client.c:169
+#: ../panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "Мениджъра за настройки не е достъпен"
 
-#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:65
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:70
 msgid "There is already a system tray running on this screen"
 msgstr "Вече има панел със задачи стартиран в този екран"
 
-#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:71
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:76
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "Не мога да регистрирам панела с задачите: %s"
@@ -282,7 +283,7 @@ msgstr "Не мога да създам канала на клиента MCS"
 msgid "Xfce Iconbox"
 msgstr ""
 
-#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:137
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:138
 msgid "Developer"
 msgstr ""
 
@@ -333,36 +334,57 @@ msgstr "Горе"
 msgid "Bottom"
 msgstr "Долу"
 
-#: ../settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:275 ../settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:279
+#, fuzzy
+msgid "At both sides"
+msgstr "Автоматично скриване"
+
+#: ../settings/xfce_settings_dialog.c:283
+msgid "At the start"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:287
+msgid "At the end"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:320
 msgid "Panel size:"
 msgstr "Размер на панела:"
 
-#: ../settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:336
 msgid "Panel orientation:"
 msgstr "Ориентация на панела:"
 
-#: ../settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:355
 msgid "Popup position:"
 msgstr "Позиция на изкачащото меню:"
 
-#: ../settings/xfce_settings_dialog.c:339
+#: ../settings/xfce_settings_dialog.c:371
+msgid "Handles:"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:407
 msgid "Autohide:"
 msgstr "Автоматично скриване:"
 
-#: ../settings/xfce_settings_dialog.c:385
+#: ../settings/xfce_settings_dialog.c:453
 msgid "Full width:"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:456
+#: ../settings/xfce_settings_dialog.c:524
 msgid "Xfce Panel Settings"
 msgstr "Xfce·настройки за панела"
 
-#: ../settings/xfce_settings_dialog.c:466
+#: ../settings/xfce_settings_dialog.c:534
 msgid "Appearance"
 msgstr "Изглед"
 
 #. show only hidden
-#: ../settings/xfce_settings_dialog.c:481 ../settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:549 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Вид"
 
@@ -493,10 +515,6 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:762
-msgid "None"
-msgstr ""
-
 #: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
@@ -563,30 +581,30 @@ msgstr "Xfce часовник"
 msgid "Flexible space"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:129
+#: ../plugins/launcher/launcher.c:130
 #, fuzzy
 msgid "Launcher Plugin"
 msgstr "Обект"
 
-#: ../plugins/launcher/launcher.c:312
+#: ../plugins/launcher/launcher.c:314
 #, fuzzy
 msgid "Alternative Launcher"
 msgstr "Прикрепва меню към обекта"
 
-#: ../plugins/launcher/launcher.c:370
+#: ../plugins/launcher/launcher.c:372
 #, c-format
 msgid ""
 "Could not run \"%s\":\n"
 "%s"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:701
+#: ../plugins/launcher/launcher.c:704
 #: ../plugins/launcher/launcher-dialog.c:1185
 #, fuzzy
 msgid "New item"
 msgstr "Добавяне на нов обект"
 
-#: ../plugins/launcher/launcher.c:703
+#: ../plugins/launcher/launcher.c:706
 #: ../plugins/launcher/launcher-dialog.c:1186
 #, fuzzy
 msgid "This item has not yet been configured"
@@ -648,15 +666,31 @@ msgstr "Използва съобщение при стартиране"
 msgid "Edit launcher"
 msgstr "Добавяне на обект"
 
-#: ../plugins/launcher/launcher-dialog.c:1262
+#: ../plugins/launcher/launcher-dialog.c:1242
+msgid "_Up"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1248
+msgid "_Down"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1254
 #, fuzzy
 msgid "_Edit"
 msgstr "Редактор"
 
-#: ../plugins/launcher/launcher-dialog.c:1298
+#: ../plugins/launcher/launcher-dialog.c:1260
+msgid "_Add"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1290
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1313
+msgid "Panel Item and Menu Items"
 msgstr ""
 
 #: ../plugins/mailcheck/mailcheck.c:838
@@ -773,7 +807,7 @@ msgstr "/_Помощ"
 msgid "System buttons"
 msgstr "Системни бутони"
 
-#: ../plugins/systray/systray.c:273
+#: ../plugins/systray/systray.c:278
 #, fuzzy
 msgid "Notification Area"
 msgstr "Област за известяване"

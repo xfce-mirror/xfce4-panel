@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-15 11:09+0200\n"
+"POT-Creation-Date: 2005-05-02 22:27+0200\n"
 "PO-Revision-Date: 2005-01-24 16:02+0100\n"
 "Last-Translator: Yongtao Yang <yongtao.yang@telia.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,10 +79,11 @@ msgstr "改变菜单条目"
 
 #. add buttons
 #: ../panel/item_dialog.c:1179 ../panel/controls.c:751
+#: ../plugins/launcher/launcher-dialog.c:1266
 msgid "_Remove"
 msgstr "删除(_R)"
 
-#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:129
+#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:130
 msgid "Launcher"
 msgstr "启动器"
 
@@ -140,11 +141,11 @@ msgstr "%s：带会话管理方式启动成功"
 msgid "Could not create panel item \"%s\"."
 msgstr "无法创建条目 “%s ”。"
 
-#: ../panel/controls.c:746 ../panel/panel.c:742 ../iconbox/iconbox.c:618
+#: ../panel/controls.c:746 ../panel/panel.c:717 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "属性(_P)..."
 
-#: ../panel/controls.c:760 ../panel/panel.c:732
+#: ../panel/controls.c:760 ../panel/panel.c:707
 msgid "Add _new item"
 msgstr "添加新条目(_N)"
 
@@ -152,29 +153,29 @@ msgstr "添加新条目(_N)"
 msgid "This item has no configuration options"
 msgstr "该条目没有配置选项"
 
-#: ../panel/panel.c:723 ../panel/panel.c:1075
+#: ../panel/panel.c:698 ../panel/panel.c:1046
 #: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:439
+#: ../settings/xfce_settings_dialog.c:507
 msgid "Xfce Panel"
 msgstr "Xfce面板"
 
-#: ../panel/panel.c:747
+#: ../panel/panel.c:722
 msgid "_About Xfce"
 msgstr "关于Xfce(_A)"
 
-#: ../panel/panel.c:752
+#: ../panel/panel.c:727
 msgid "_Help"
 msgstr "帮助(_H)"
 
-#: ../panel/panel.c:761
+#: ../panel/panel.c:736
 msgid "_Lock screen"
 msgstr "锁住屏幕(_L)"
 
-#: ../panel/panel.c:766
+#: ../panel/panel.c:741
 msgid "_Restart"
 msgstr "重新启动(_R)"
 
-#: ../panel/panel.c:775 ../iconbox/iconbox.c:628
+#: ../panel/panel.c:750 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "退出(_X)"
 
@@ -233,15 +234,15 @@ msgstr "声音"
 msgid "icons|Terminal"
 msgstr "终端"
 
-#: ../panel/mcs_client.c:169
+#: ../panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "配置管理器不可用"
 
-#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:65
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:70
 msgid "There is already a system tray running on this screen"
 msgstr ""
 
-#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:71
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:76
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr ""
@@ -275,7 +276,7 @@ msgstr ""
 msgid "Xfce Iconbox"
 msgstr ""
 
-#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:137
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:138
 msgid "Developer"
 msgstr ""
 
@@ -326,36 +327,57 @@ msgstr "顶部"
 msgid "Bottom"
 msgstr "底部"
 
-#: ../settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:275 ../settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:279
+#, fuzzy
+msgid "At both sides"
+msgstr "自动隐藏："
+
+#: ../settings/xfce_settings_dialog.c:283
+msgid "At the start"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:287
+msgid "At the end"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:320
 msgid "Panel size:"
 msgstr "面板大小："
 
-#: ../settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:336
 msgid "Panel orientation:"
 msgstr "面板方向："
 
-#: ../settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:355
 msgid "Popup position:"
 msgstr "弹出菜单位置："
 
-#: ../settings/xfce_settings_dialog.c:339
+#: ../settings/xfce_settings_dialog.c:371
+msgid "Handles:"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:407
 msgid "Autohide:"
 msgstr "自动隐藏："
 
-#: ../settings/xfce_settings_dialog.c:385
+#: ../settings/xfce_settings_dialog.c:453
 msgid "Full width:"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:456
+#: ../settings/xfce_settings_dialog.c:524
 msgid "Xfce Panel Settings"
 msgstr "Xfce面板配置"
 
-#: ../settings/xfce_settings_dialog.c:466
+#: ../settings/xfce_settings_dialog.c:534
 msgid "Appearance"
 msgstr "外观"
 
 #. show only hidden
-#: ../settings/xfce_settings_dialog.c:481 ../settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:549 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "行为"
 
@@ -485,10 +507,6 @@ msgstr ""
 msgid "Transparency"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:762
-msgid "None"
-msgstr ""
-
 #: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
@@ -554,30 +572,30 @@ msgstr "Xfce时钟"
 msgid "Flexible space"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:129
+#: ../plugins/launcher/launcher.c:130
 #, fuzzy
 msgid "Launcher Plugin"
 msgstr "启动器"
 
-#: ../plugins/launcher/launcher.c:312
+#: ../plugins/launcher/launcher.c:314
 #, fuzzy
 msgid "Alternative Launcher"
 msgstr "将菜单附加到启动器"
 
-#: ../plugins/launcher/launcher.c:370
+#: ../plugins/launcher/launcher.c:372
 #, fuzzy, c-format
 msgid ""
 "Could not run \"%s\":\n"
 "%s"
 msgstr "无法创建条目 “%s ”。"
 
-#: ../plugins/launcher/launcher.c:701
+#: ../plugins/launcher/launcher.c:704
 #: ../plugins/launcher/launcher-dialog.c:1185
 #, fuzzy
 msgid "New item"
 msgstr "添加新条目"
 
-#: ../plugins/launcher/launcher.c:703
+#: ../plugins/launcher/launcher.c:706
 #: ../plugins/launcher/launcher-dialog.c:1186
 #, fuzzy
 msgid "This item has not yet been configured"
@@ -638,15 +656,31 @@ msgstr "使用启动提示(_N)"
 msgid "Edit launcher"
 msgstr "添加启动器"
 
-#: ../plugins/launcher/launcher-dialog.c:1262
+#: ../plugins/launcher/launcher-dialog.c:1242
+msgid "_Up"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1248
+msgid "_Down"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1254
 #, fuzzy
 msgid "_Edit"
 msgstr "编辑器"
 
-#: ../plugins/launcher/launcher-dialog.c:1298
+#: ../plugins/launcher/launcher-dialog.c:1260
+msgid "_Add"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1290
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1313
+msgid "Panel Item and Menu Items"
 msgstr ""
 
 #: ../plugins/mailcheck/mailcheck.c:838
@@ -759,7 +793,7 @@ msgstr "隐藏(_H)"
 msgid "System buttons"
 msgstr "系统按钮"
 
-#: ../plugins/systray/systray.c:273
+#: ../plugins/systray/systray.c:278
 msgid "Notification Area"
 msgstr ""
 

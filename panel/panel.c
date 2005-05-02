@@ -58,6 +58,7 @@ struct _PanelPrivate
     Settings settings;
 
     gboolean full_width;
+    XfceHandleStyle handle_style;
 
     GdkScreen *screen;
     int monitor;
@@ -318,7 +319,6 @@ static void
 restrict_position (Panel * p, int *x, int *y)
 {
     int xcenter, ycenter, snapwidth;
-    gboolean show_sides;
 
     if (!p || !p->toplevel)
 	return;
@@ -428,34 +428,7 @@ restrict_position (Panel * p, int *x, int *y)
 	p->priv->offset = *y - p->priv->monitor_geometry.y;
     }
 
-    show_sides = !p->priv->full_width;
-    
-    switch (p->priv->side)
-    {
-        case TOP:
-            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               FALSE, TRUE, 
-                                               show_sides, show_sides);
-            break;
-        case BOTTOM:
-            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               TRUE, FALSE, 
-                                               show_sides, show_sides);
-            break;
-        case LEFT:
-            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               show_sides, show_sides, 
-                                               FALSE, TRUE);
-            break;
-        case RIGHT:
-            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               show_sides, show_sides, 
-                                               TRUE, FALSE);
-            break;
-        default:
-            xfce_panel_window_set_show_border (XFCE_PANEL_WINDOW (p->toplevel), 
-                                               TRUE, TRUE, TRUE, TRUE);
-    }
+    panel_set_handle_style (panel.priv->handle_style);
 }
 
 /* move / resize */
@@ -923,7 +896,8 @@ panel_set_hidden (Panel * p, gboolean hide)
     {
 	gtk_widget_show (p->group_box);
 
-        panel_set_full_width (p->priv->full_width);
+        if (p->priv->full_width)
+            panel_set_full_width (p->priv->full_width);
     }
 
     p->hidden = hide;
@@ -1198,7 +1172,8 @@ create_panel (void)
 
     gtk_widget_show (p->toplevel);
 
-    panel_set_full_width (p->priv->full_width);
+    if (p->priv->full_width)
+        panel_set_full_width (p->priv->full_width);
 
     /* recalculate pos_state for old API where only x and y coordinates are
      * read from the config file */
@@ -1550,42 +1525,10 @@ panel_set_full_width (gboolean full_width)
 {
     panel.priv->full_width = full_width;
 
-    xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (panel.toplevel),
-                                        full_width ?
-                                        XFCE_HANDLE_STYLE_NONE :
-                                        XFCE_HANDLE_STYLE_BOTH);
-
+    panel_set_handle_style (panel.priv->handle_style);
+    
     if (panel.priv->is_created)
     {
-        XfcePanelWindow *window = XFCE_PANEL_WINDOW (panel.toplevel);
-        
-        switch (panel.priv->side)
-        {
-            case TOP:
-                xfce_panel_window_set_show_border (window,
-                                                   FALSE, TRUE, 
-                                                   !full_width, !full_width);
-                break;
-            case BOTTOM:
-                xfce_panel_window_set_show_border (window, 
-                                                   TRUE, FALSE, 
-                                                   !full_width, !full_width);
-                break;
-            case LEFT:
-                xfce_panel_window_set_show_border (window, 
-                                                   !full_width, !full_width, 
-                                                   FALSE, TRUE);
-                break;
-            case RIGHT:
-                xfce_panel_window_set_show_border (window, 
-                                                   !full_width, !full_width, 
-                                                   TRUE, FALSE);
-                break;
-            default:
-                xfce_panel_window_set_show_border (window, 
-                                                   TRUE, TRUE, TRUE, TRUE);
-        }
-
         if (full_width)
         {
             GdkRectangle *r = &panel.priv->monitor_geometry;
@@ -1600,6 +1543,68 @@ panel_set_full_width (gboolean full_width)
             panel_center (panel.priv->side);
         }
         
+    }
+}
+
+G_MODULE_EXPORT /* EXPORT:panel_set_handle_style */
+void 
+panel_set_handle_style (int style)
+{
+    gboolean fullwidth;
+    XfceHandleStyle handle_style = 
+        CLAMP (style, XFCE_HANDLE_STYLE_NONE, XFCE_HANDLE_STYLE_END);
+    
+    panel.priv->handle_style = handle_style;
+
+    fullwidth = panel.priv->full_width;
+    
+    xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (panel.toplevel),
+                                        fullwidth ?
+                                        XFCE_HANDLE_STYLE_NONE : 
+                                        handle_style);
+
+    if (panel.priv->is_created)
+    {
+        XfcePanelWindow *window = XFCE_PANEL_WINDOW (panel.toplevel);
+        gboolean top, bottom, left, right;
+        
+        top = bottom = left = right = FALSE;
+        
+        switch (panel.priv->side)
+        {
+            case TOP:
+                bottom = TRUE;
+                left = !fullwidth &&
+                       panel.priv->pos_state != XFCE_POS_STATE_START;
+                right = !fullwidth && 
+                        panel.priv->pos_state != XFCE_POS_STATE_END;
+                break;
+            case BOTTOM:
+                top = TRUE;
+                left = !fullwidth && 
+                       panel.priv->pos_state != XFCE_POS_STATE_START;
+                right = !fullwidth && 
+                        panel.priv->pos_state != XFCE_POS_STATE_END;
+                break;
+            case LEFT:
+                right = TRUE;
+                top = !fullwidth && 
+                      panel.priv->pos_state != XFCE_POS_STATE_START;
+                bottom = !fullwidth && 
+                         panel.priv->pos_state != XFCE_POS_STATE_END;
+                break;
+            case RIGHT:
+                left = TRUE;
+                top = !fullwidth && 
+                      panel.priv->pos_state != XFCE_POS_STATE_START;
+                bottom = !fullwidth && 
+                         panel.priv->pos_state != XFCE_POS_STATE_END;
+                break;
+            default:
+                top = bottom = left = right = TRUE;
+        }
+
+        xfce_panel_window_set_show_border (window, top, bottom, left, right);
     }
 }
 
@@ -1619,6 +1624,8 @@ init_settings (Panel * p)
     p->priv->settings.theme = NULL;
 
     p->priv->full_width = FALSE;
+
+    p->priv->handle_style = XFCE_HANDLE_STYLE_BOTH;
 
     /* backwards compat */
     settings = p->priv->settings;

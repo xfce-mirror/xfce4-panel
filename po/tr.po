@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-04-15 11:09+0200\n"
+"POT-Creation-Date: 2005-05-02 22:27+0200\n"
 "PO-Revision-Date: 2004-10-10 11:59+0300\n"
 "Last-Translator: Erçin EKER <ercin.eker@linux.org.tr>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -78,10 +78,11 @@ msgstr "Menü nesnesini değiştir"
 
 #. add buttons
 #: ../panel/item_dialog.c:1179 ../panel/controls.c:751
+#: ../plugins/launcher/launcher-dialog.c:1266
 msgid "_Remove"
 msgstr "_Sil"
 
-#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:129
+#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:130
 msgid "Launcher"
 msgstr "Başlatıcı"
 
@@ -139,11 +140,11 @@ msgstr "%s: Oturum yönetimiyle başarıyla başladı"
 msgid "Could not create panel item \"%s\"."
 msgstr "Panel nesnesi \"%s\" oluşturulamıyor."
 
-#: ../panel/controls.c:746 ../panel/panel.c:742 ../iconbox/iconbox.c:618
+#: ../panel/controls.c:746 ../panel/panel.c:717 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "_Seçenekler..."
 
-#: ../panel/controls.c:760 ../panel/panel.c:732
+#: ../panel/controls.c:760 ../panel/panel.c:707
 msgid "Add _new item"
 msgstr "Yeni nesne _ekle"
 
@@ -151,29 +152,29 @@ msgstr "Yeni nesne _ekle"
 msgid "This item has no configuration options"
 msgstr "Bu nesne ayarlanabilir seçenek sunmuyor"
 
-#: ../panel/panel.c:723 ../panel/panel.c:1075
+#: ../panel/panel.c:698 ../panel/panel.c:1046
 #: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:439
+#: ../settings/xfce_settings_dialog.c:507
 msgid "Xfce Panel"
 msgstr "Xfce Paneli"
 
-#: ../panel/panel.c:747
+#: ../panel/panel.c:722
 msgid "_About Xfce"
 msgstr "Xfce _Hakkında"
 
-#: ../panel/panel.c:752
+#: ../panel/panel.c:727
 msgid "_Help"
 msgstr "_Yardım"
 
-#: ../panel/panel.c:761
+#: ../panel/panel.c:736
 msgid "_Lock screen"
 msgstr "Ekranı _kilitle"
 
-#: ../panel/panel.c:766
+#: ../panel/panel.c:741
 msgid "_Restart"
 msgstr "_Yeniden Başlat"
 
-#: ../panel/panel.c:775 ../iconbox/iconbox.c:628
+#: ../panel/panel.c:750 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "_Çık"
 
@@ -232,15 +233,15 @@ msgstr "Ses"
 msgid "icons|Terminal"
 msgstr "Terminal"
 
-#: ../panel/mcs_client.c:169
+#: ../panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "Ayar yöneticisi kullanılamıyor"
 
-#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:65
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:70
 msgid "There is already a system tray running on this screen"
 msgstr "Bu ekranda zaten çalışan bir sistem çekmecesi var"
 
-#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:71
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:76
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "Sistem çekmecesi kaydedilemiyor: %s"
@@ -275,7 +276,7 @@ msgstr "MCS istemci kanalı oluşturulamıyor"
 msgid "Xfce Iconbox"
 msgstr ""
 
-#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:137
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:138
 msgid "Developer"
 msgstr ""
 
@@ -326,36 +327,57 @@ msgstr "Üst"
 msgid "Bottom"
 msgstr "Alt"
 
-#: ../settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:275 ../settings/iconbox_plugin.c:762
+msgid "None"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:279
+#, fuzzy
+msgid "At both sides"
+msgstr "Otomatik gizle"
+
+#: ../settings/xfce_settings_dialog.c:283
+msgid "At the start"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:287
+msgid "At the end"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:320
 msgid "Panel size:"
 msgstr "Panel boyutu:"
 
-#: ../settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:336
 msgid "Panel orientation:"
 msgstr "Panel yönelimi:"
 
-#: ../settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:355
 msgid "Popup position:"
 msgstr "Popup konumu:"
 
-#: ../settings/xfce_settings_dialog.c:339
+#: ../settings/xfce_settings_dialog.c:371
+msgid "Handles:"
+msgstr ""
+
+#: ../settings/xfce_settings_dialog.c:407
 msgid "Autohide:"
 msgstr "Otomatik Gizleme:"
 
-#: ../settings/xfce_settings_dialog.c:385
+#: ../settings/xfce_settings_dialog.c:453
 msgid "Full width:"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:456
+#: ../settings/xfce_settings_dialog.c:524
 msgid "Xfce Panel Settings"
 msgstr "Xfce Panel Ayarları"
 
-#: ../settings/xfce_settings_dialog.c:466
+#: ../settings/xfce_settings_dialog.c:534
 msgid "Appearance"
 msgstr "Görünüm"
 
 #. show only hidden
-#: ../settings/xfce_settings_dialog.c:481 ../settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:549 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Davranış"
 
@@ -484,10 +506,6 @@ msgstr "Uygulama _isimlerini göster"
 msgid "Transparency"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:762
-msgid "None"
-msgstr ""
-
 #: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
@@ -554,30 +572,30 @@ msgstr "Xfce Saati"
 msgid "Flexible space"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:129
+#: ../plugins/launcher/launcher.c:130
 #, fuzzy
 msgid "Launcher Plugin"
 msgstr "Başlatıcı"
 
-#: ../plugins/launcher/launcher.c:312
+#: ../plugins/launcher/launcher.c:314
 #, fuzzy
 msgid "Alternative Launcher"
 msgstr "Başlatıcıya menü ekle"
 
-#: ../plugins/launcher/launcher.c:370
+#: ../plugins/launcher/launcher.c:372
 #, fuzzy, c-format
 msgid ""
 "Could not run \"%s\":\n"
 "%s"
 msgstr "Panel nesnesi \"%s\" oluşturulamıyor."
 
-#: ../plugins/launcher/launcher.c:701
+#: ../plugins/launcher/launcher.c:704
 #: ../plugins/launcher/launcher-dialog.c:1185
 #, fuzzy
 msgid "New item"
 msgstr "Yeni nesne ekle"
 
-#: ../plugins/launcher/launcher.c:703
+#: ../plugins/launcher/launcher.c:706
 #: ../plugins/launcher/launcher-dialog.c:1186
 #, fuzzy
 msgid "This item has not yet been configured"
@@ -639,15 +657,31 @@ msgstr "Başlangıç _uyarısı kullan"
 msgid "Edit launcher"
 msgstr "Başlatıcı ekle"
 
-#: ../plugins/launcher/launcher-dialog.c:1262
+#: ../plugins/launcher/launcher-dialog.c:1242
+msgid "_Up"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1248
+msgid "_Down"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1254
 #, fuzzy
 msgid "_Edit"
 msgstr "Düzenleyici"
 
-#: ../plugins/launcher/launcher-dialog.c:1298
+#: ../plugins/launcher/launcher-dialog.c:1260
+msgid "_Add"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1290
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1313
+msgid "Panel Item and Menu Items"
 msgstr ""
 
 #: ../plugins/mailcheck/mailcheck.c:838
@@ -760,7 +794,7 @@ msgstr "_Gizle"
 msgid "System buttons"
 msgstr "Sistem düğmeleri"
 
-#: ../plugins/systray/systray.c:273
+#: ../plugins/systray/systray.c:278
 #, fuzzy
 msgid "Notification Area"
 msgstr "Bilgilendirme bölümü"

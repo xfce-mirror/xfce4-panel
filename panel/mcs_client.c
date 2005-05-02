@@ -57,7 +57,8 @@ static gpointer settings_callbacks[] = {
     panel_set_popup_position,
     panel_set_theme,
     panel_set_autohide,
-    panel_set_full_width
+    panel_set_full_width,
+    panel_set_handle_style
 };
 
 static void
