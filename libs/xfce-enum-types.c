@@ -4,7 +4,6 @@
 #include <xfce-enum-types.h>
 #include <xfce-panel-window.h>
 
-
 /* enumerations from "xfce-panel-window.h" */
 GType
 xfce_handle_style_get_type (void)
@@ -22,7 +21,6 @@ xfce_handle_style_get_type (void)
   }
 	return type;
 }
-
 
 /* Generated data ends here */
 

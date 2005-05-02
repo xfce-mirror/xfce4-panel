@@ -75,6 +75,8 @@ static void xfce_item_class_init    (XfceItemClass * klass);
 static void xfce_item_init          (XfceItem * item);
 
 /* GObject */
+static void xfce_item_finalize      (GObject * object);
+
 static void xfce_item_set_property  (GObject * object,
 				     guint prop_id,
 				     const GValue * value,
@@ -159,6 +161,7 @@ xfce_item_class_init (XfceItemClass * klass)
     gobject_class = (GObjectClass *) klass;
     widget_class = (GtkWidgetClass *) klass;
 
+    gobject_class->finalize     = xfce_item_finalize;
     gobject_class->get_property = xfce_item_get_property;
     gobject_class->set_property = xfce_item_set_property;
 
@@ -246,6 +249,14 @@ xfce_item_init (XfceItem * item)
     priv->has_handle      = DEFAULT_HAS_HANDLE;
     priv->use_drag_window = DEFAULT_USE_DRAG_WINDOW;
     priv->drag_window     = NULL;
+}
+
+static void
+xfce_item_finalize (GObject * object)
+{
+    _destroy_drag_window (XFCE_ITEM (object));
+
+    G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void
