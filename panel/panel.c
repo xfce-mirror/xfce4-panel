@@ -898,6 +898,11 @@ panel_set_hidden (Panel * p, gboolean hide)
 
         if (p->priv->full_width)
             panel_set_full_width (p->priv->full_width);
+        else
+        {
+            panel_set_handle_style (p->priv->handle_style);
+            gtk_widget_set_size_request (p->toplevel, -1, -1);
+        }
     }
 
     p->hidden = hide;
