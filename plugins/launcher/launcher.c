@@ -138,7 +138,7 @@ launcher_about (void)
                                 _("Developer"));
 
     pb = xfce_themed_icon_load ("xfce4-panel", DLG_ICON_SIZE);
-    dlg = xfce_about_dialog_new (NULL, info, pb);
+    dlg = xfce_about_dialog_new_with_values (NULL, info, pb);
     g_object_unref (pb);
 
     gtk_widget_set_size_request (dlg, 300, 200);
