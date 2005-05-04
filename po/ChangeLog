@@ -1,2 +1,2523 @@
-*  2003-02-17
-	Add ChangeLog to keep make dist happy
+2005-04-16 16:17  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/pl.po: update PL translations
+
+2005-04-12 14:59  jasper
+
+	* xfce4-panel/branches/xfce_4_2/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/aclocal.m4,
+	  xfce4-panel/branches/xfce_4_2/autogen.sh,
+	  xfce4-panel/branches/xfce_4_2/compile,
+	  xfce4-panel/branches/xfce_4_2/config.guess,
+	  xfce4-panel/branches/xfce_4_2/config.h.in,
+	  xfce4-panel/branches/xfce_4_2/config.sub,
+	  xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/depcomp,
+	  xfce4-panel/branches/xfce_4_2/doc/C/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/C/images/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/icons/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/install-sh,
+	  xfce4-panel/branches/xfce_4_2/ltmain.sh,
+	  xfce4-panel/branches/xfce_4_2/missing,
+	  xfce4-panel/branches/xfce_4_2/mkinstalldirs,
+	  xfce4-panel/branches/xfce_4_2/panel/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/clock/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/pager/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/sample-plugin/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/separator/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/switcher/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/po/Makefile.in.in,
+	  xfce4-panel/branches/xfce_4_2/po/ar.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/az.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/be.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/bg.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/bn_IN.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ca.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/cs.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/da.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/de.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/el.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/en_GB.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/es.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/es_MX.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/et.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/eu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/fa.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/fi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/fr.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/gu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/he.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/hi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/hu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/it.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ja.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ko.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/lt.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ms.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/nb_NO.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/nl.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pa.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pl.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pt_BR.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pt_PT.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ro.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ru.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/sk.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/sv.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ta.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/tr.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/vi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/zh_CN.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/zh_TW.gmo,
+	  xfce4-panel/branches/xfce_4_2/settings/Makefile.in: Make xfce_4_2
+	  branch use dev tools and remove generated files
+
+2005-04-09 12:12  pollux
+
+	* xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/configure.ac,
+	  xfce4-panel/branches/xfce_4_2/po/bn_IN.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/bn_IN.po: ad bn_IN translations
+
+2005-04-08 07:57  pollux
+
+	* xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/configure.ac,
+	  xfce4-panel/branches/xfce_4_2/po/el.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/el.po,
+	  xfce4-panel/branches/xfce_4_2/po/el_GR.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/el_GR.po,
+	  xfce4-panel/branches/xfce_4_2/po/vi.po: update EL translations
+
+2005-04-07 17:06  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/ar.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/az.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/be.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/bg.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ca.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/cs.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/cs.po,
+	  xfce4-panel/branches/xfce_4_2/po/da.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/de.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/el_GR.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/en_GB.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/es.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/es_MX.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/et.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/eu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/fa.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/fi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/fr.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/gu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/he.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/hi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/hu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/it.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ja.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ko.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/lt.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ms.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/nb_NO.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/nl.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pa.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pl.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pt_BR.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/pt_PT.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ro.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ru.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/sk.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/sv.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ta.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/tr.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/uk.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/vi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/zh_CN.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/zh_TW.gmo: update CS translations
+
+2005-03-28 09:18  jasper
+
+	* xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/configure.ac,
+	  xfce4-panel/branches/xfce_4_2/doc/C/xfce4-panel.html,
+	  xfce4-panel/branches/xfce_4_2/doc/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/doc/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/add-item-dialog.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/clock-properties.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/default-session.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/default_panel.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/handle-popup.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/item-popup.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/launcher-properties.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/mailcheck-properties.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/menuitem-properties.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/nooptions-properties.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/pager-properties.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/panel-settings.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/images/systembuttons-properties.png,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/xfce4-panel.html,
+	  xfce4-panel/branches/xfce_4_2/doc/fr/xfce4-panel.xml,
+	  xfce4-panel/branches/xfce_4_2/po/xfce4-panel.pot: Add French doc
+
+2005-03-26 11:08  pollux
+
+	* xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/configure.ac,
+	  xfce4-panel/branches/xfce_4_2/po/el_GR.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/el_GR.po: ADD el_GR translations
+	  from Stavros Giannouris <StavrosG2002@freemail.gr>
+
+2005-03-20 21:52  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/ko.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ko.po: update KO translations
+
+2005-03-20 21:48  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/ja.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ja.po: update JA translations
+
+2005-03-20 21:43  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/hu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/hu.po: update HU translations
+
+2005-03-12 14:19  olivier
+
+	* xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/configure.ac,
+	  xfce4-panel/branches/xfce_4_2/ltmain.sh,
+	  xfce4-panel/branches/xfce_4_2/po/xfce4-panel.pot: Mass update for
+	  4.2.1
+
+2005-03-12 09:10  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/he.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/he.po: update HE translations
+
+2005-03-11 11:38  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/ja.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ja.po: update JA translations
+
+2005-03-09 16:13  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/ja.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ja.po: update JA translations
+
+2005-03-05 11:21  pollux
+
+	* xfce4-panel/branches/xfce_4_2/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/configure.ac,
+	  xfce4-panel/branches/xfce_4_2/contents.xml.da,
+	  xfce4-panel/branches/xfce_4_2/po/da.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/da.po: add DA translations from
+	  Jesper Berth <big@santaz.dk>
+
+2005-03-04 17:43  pollux
+
+	* xfce4-panel/branches/xfce_4_2/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/contents.xml.ja,
+	  xfce4-panel/branches/xfce_4_2/po/ja.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ja.po: update JA translations
+
+2005-02-21 09:12  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/eu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/eu.po: update EU translations
+
+2005-02-21 08:57  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/ja.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ja.po: update JA translations
+
+2005-02-01 17:25  pollux
+
+	* xfce4-panel/branches/xfce_4_2/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/contents.xml.zh_CN,
+	  xfce4-panel/branches/xfce_4_2/po/fi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/zh_CN.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/zh_CN.po,
+	  xfce4-panel/branches/xfce_4_2/settings/xfce-panel-settings.desktop:
+	  update zh_CN translations
+
+2005-01-30 09:39  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/fi.po: update FI translations
+
+2005-01-23 17:09  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/lt.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/lt.po: update LT translations
+
+2005-01-23 16:48  pollux
+
+	* xfce4-panel/branches/xfce_4_2/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/contents.xml.fi,
+	  xfce4-panel/branches/xfce_4_2/po/fi.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/fi.po: update FI translations
+
+2005-01-18 11:14  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/hu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/hu.po: fix #701
+
+2005-01-10 12:56  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/hu.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/hu.po: update HU translations
+
+2005-01-10 11:55  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/lt.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/lt.po: update LT translations
+
+2005-01-09 12:39  benny
+
+	* xfce4-panel/branches/xfce_4_2/configure,
+	  xfce4-panel/branches/xfce_4_2/configure.ac,
+	  xfce4-panel/branches/xfce_4_2/doc/C/xfce4-panel.html,
+	  xfce4-panel/branches/xfce_4_2/doc/C/xfce4-panel.xml,
+	  xfce4-panel/branches/xfce_4_2/doc/Makefile.am,
+	  xfce4-panel/branches/xfce_4_2/doc/Makefile.in,
+	  xfce4-panel/branches/xfce_4_2/doc/fr,
+	  xfce4-panel/branches/xfce_4_2/doc/it,
+	  xfce4-panel/branches/xfce_4_2/po/xfce4-panel.pot: Remove outdated
+	  translations of the documentation. Update version in
+	  documentation.
+
+2005-01-09 12:03  pollux
+
+	* xfce4-panel/branches/xfce_4_2/contents.xml.ro,
+	  xfce4-panel/branches/xfce_4_2/po/ro.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ro.po: update RO translations
+
+2005-01-08 15:49  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/ru.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/ru.po,
+	  xfce4-panel/branches/xfce_4_2/settings/xfce-panel-settings.desktop:
+	  update RU translations
+
+2005-01-05 16:29  moe
+
+	* xfce4-panel/branches/xfce_4_2/po/de.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/de.po: Backporting the
+	  translations to xfce_4_2.
+
+2005-01-05 16:14  pollux
+
+	* xfce4-panel/branches/xfce_4_2/po/he.gmo,
+	  xfce4-panel/branches/xfce_4_2/po/he.po: update HE translations
+
+2005-01-05 16:14  
+
+	* xfce4-panel/branches/xfce_4_2: This commit was manufactured by
+	  cvs2svn to create branch 'xfce_4_2'.
+
+2005-01-02 12:51  olivier
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/ltmain.sh, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Update version and changelog
+
+2004-12-28 10:46  pollux
+
+	* xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po: fix #608
+
+2004-12-23 21:24  pollux
+
+	* xfce4-panel/trunk/po/et.gmo, xfce4-panel/trunk/po/et.po,
+	  xfce4-panel/trunk/settings/xfce-panel-settings.desktop: update ET
+	  translations
+
+2004-12-22 21:00  benny
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/Makefile.am,
+	  xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/po/cs.gmo,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/settings/Makefile.am,
+	  xfce4-panel/trunk/settings/Makefile.in: Update ChangeLog. Fix make
+	  distcheck.
+
+2004-12-21 09:03  kelnos
+
+	* xfce4-panel/trunk/po/cs.po: add/update czech translations
+
+2004-12-19 20:49  pollux
+
+	* xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po: update KO
+	  translations
+
+2004-12-15 19:04  pollux
+
+	* xfce4-panel/trunk/po/pt_BR.gmo, xfce4-panel/trunk/po/pt_BR.po:
+	  update pt_BR translations
+
+2004-12-14 20:33  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/ro.gmo, xfce4-panel/trunk/po/ro.po: add RO
+	  translations
+
+2004-12-14 11:51  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/main.c,
+	  xfce4-panel/trunk/panel/xfce_support.c,
+	  xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/settings/xfce_settings_plugin.c: Fix type
+	  mismatch. Patch by Michele Baldessari <michele@pupazzo.org>.
+
+2004-12-13 22:08  pollux
+
+	* xfce4-panel/trunk/po/ko.po: update KO translations
+
+2004-12-11 17:51  olivier
+
+	* xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/xfce4.spec.in: Various changes and small fixes
+
+2004-12-05 23:43  olivier
+
+	* xfce4-panel/trunk/contents.xml.ko,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Add missing
+	  "contents.xml.ko"
+
+2004-12-05 21:38  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/nb_NO.gmo, xfce4-panel/trunk/po/nb_NO.po,
+	  xfce4-panel/trunk/po/no.gmo, xfce4-panel/trunk/po/no.po: add nb_NO
+	  translations
+
+2004-12-05 21:20  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/en_GB.gmo, xfce4-panel/trunk/po/en_GB.po: add
+	  en_GB translations
+
+2004-12-05 20:50  pollux
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/settings/xfce-panel-settings.desktop: update KO
+	  translations and add screenshots in xfprint doc
+
+2004-11-30 21:57  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/po/tr.gmo: Fix text selection being lost when
+	  validating icon in item dialog (Bug #542)
+
+2004-11-28 18:01  pollux
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/po/tr.po: update TR translations
+
+2004-11-26 19:06  pollux
+
+	* xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po: update KO
+	  translations
+
+2004-11-16 23:09  olivier
+
+	* xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po: Improve
+	  French translation.
+
+2004-11-16 22:50  olivier
+
+	* xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Update French localization
+
+2004-11-13 15:19  olivier
+
+	* xfce4-panel/trunk/po/xfce4-panel.pot: Auto-tools check-up.
+
+2004-11-06 16:24  olivier
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/compile,
+	  xfce4-panel/trunk/config.guess, xfce4-panel/trunk/config.sub,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/depcomp, xfce4-panel/trunk/doc/C/Makefile.in,
+	  xfce4-panel/trunk/doc/C/images/Makefile.in,
+	  xfce4-panel/trunk/doc/Makefile.in,
+	  xfce4-panel/trunk/doc/fr/Makefile.in,
+	  xfce4-panel/trunk/doc/fr/images/Makefile.in,
+	  xfce4-panel/trunk/doc/it/Makefile.in,
+	  xfce4-panel/trunk/doc/it/images/Makefile.in,
+	  xfce4-panel/trunk/icons/Makefile.in, xfce4-panel/trunk/install-sh,
+	  xfce4-panel/trunk/ltmain.sh, xfce4-panel/trunk/missing,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/sample-plugin/Makefile.in,
+	  xfce4-panel/trunk/plugins/separator/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/settings/Makefile.in: Update
+	  automake/autoconf/libtool/gettext versions to generate the
+	  configure scripts and Makefiles, Update versions of all packages
+	  to 4.1.99.1 (ie 4.2 RC1), Update ChangeLogs.
+
+2004-10-30 14:00  pollux
+
+	* xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po: update LT
+	  translations
+
+2004-10-29 09:48  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/ltmain.sh, xfce4-panel/trunk/po/ar.gmo,
+	  xfce4-panel/trunk/po/ar.po, xfce4-panel/trunk/po/az.gmo,
+	  xfce4-panel/trunk/po/az.po, xfce4-panel/trunk/po/be.gmo,
+	  xfce4-panel/trunk/po/be.po, xfce4-panel/trunk/po/bg.gmo,
+	  xfce4-panel/trunk/po/bg.po, xfce4-panel/trunk/po/ca.gmo,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/cs.gmo,
+	  xfce4-panel/trunk/po/cs.po, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/et.gmo,
+	  xfce4-panel/trunk/po/et.po, xfce4-panel/trunk/po/eu.gmo,
+	  xfce4-panel/trunk/po/eu.po, xfce4-panel/trunk/po/fa.gmo,
+	  xfce4-panel/trunk/po/fa.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/gu.gmo,
+	  xfce4-panel/trunk/po/gu.po, xfce4-panel/trunk/po/he.gmo,
+	  xfce4-panel/trunk/po/he.po, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hi.po, xfce4-panel/trunk/po/hu.gmo,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/it.gmo,
+	  xfce4-panel/trunk/po/it.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/po/ko.po, xfce4-panel/trunk/po/lt.gmo,
+	  xfce4-panel/trunk/po/lt.po, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/no.gmo,
+	  xfce4-panel/trunk/po/no.po, xfce4-panel/trunk/po/pa.gmo,
+	  xfce4-panel/trunk/po/pa.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/pt_BR.gmo,
+	  xfce4-panel/trunk/po/pt_BR.po, xfce4-panel/trunk/po/pt_PT.gmo,
+	  xfce4-panel/trunk/po/pt_PT.po, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/sk.gmo,
+	  xfce4-panel/trunk/po/sk.po, xfce4-panel/trunk/po/sv.gmo,
+	  xfce4-panel/trunk/po/sv.po, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/vi.gmo,
+	  xfce4-panel/trunk/po/vi.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  Update dependency versions. Make distcheck passes.
+
+2004-10-28 11:55  pollux
+
+	* xfce4-panel/trunk/po/he.gmo, xfce4-panel/trunk/po/he.po,
+	  xfce4-panel/trunk/settings/xfce-panel-settings.desktop: update HE
+	  translations
+
+2004-10-20 22:06  pollux
+
+	* xfce4-panel/trunk/po/ar.gmo, xfce4-panel/trunk/po/az.gmo,
+	  xfce4-panel/trunk/po/be.gmo, xfce4-panel/trunk/po/bg.gmo,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/cs.gmo,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/et.gmo,
+	  xfce4-panel/trunk/po/et.po, xfce4-panel/trunk/po/eu.gmo,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/gu.gmo, xfce4-panel/trunk/po/he.gmo,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hu.gmo,
+	  xfce4-panel/trunk/po/it.gmo, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/lt.gmo,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/no.gmo, xfce4-panel/trunk/po/pa.gmo,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pt_BR.gmo,
+	  xfce4-panel/trunk/po/pt_PT.gmo, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/sk.gmo, xfce4-panel/trunk/po/sv.gmo,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/vi.gmo, xfce4-panel/trunk/po/zh_CN.gmo,
+	  xfce4-panel/trunk/po/zh_TW.gmo: update ET translations
+
+2004-10-11 16:30  benny
+
+	* xfce4-panel/trunk/po/ar.po, xfce4-panel/trunk/po/az.po,
+	  xfce4-panel/trunk/po/be.po, xfce4-panel/trunk/po/bg.po,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/cs.po,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/et.po,
+	  xfce4-panel/trunk/po/eu.po, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/gu.po,
+	  xfce4-panel/trunk/po/he.po, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/it.po,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/lt.po, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/no.po,
+	  xfce4-panel/trunk/po/pa.po, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/pt_BR.po, xfce4-panel/trunk/po/pt_PT.po,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/sk.po,
+	  xfce4-panel/trunk/po/sv.po, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/vi.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.po, xfce4-panel/trunk/po/zh_TW.po:
+	  update-po for Moe.
+
+2004-10-10 11:52  pollux
+
+	* xfce4-panel/trunk/po/pt_PT.gmo, xfce4-panel/trunk/po/pt_PT.po:
+	  update pt_PT translations
+
+2004-10-09 14:20  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/fa.gmo, xfce4-panel/trunk/po/fa.po,
+	  xfce4-panel/trunk/po/fa_IR.gmo, xfce4-panel/trunk/po/fa_IR.po:
+	  update FA translations
+
+2004-10-09 13:48  pollux
+
+	* xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es_MX.gmo:
+	  Punjabi translations update from jaswinderlinux@netscape.net
+
+2004-10-08 13:04  edscott
+
+	* xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.po: fix
+	  missing strings, spelling mistakes, and context mistakes
+
+2004-10-03 16:14  pollux
+
+	* xfce4-panel/trunk/po/pa.gmo, xfce4-panel/trunk/po/pa.po: Punjabi
+	  translations (PA) from jaswinderlinux@netscape.net
+
+2004-10-02 13:28  olivier
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/ltmain.sh,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Update all files for 4.2
+	  beta 1
+
+2004-09-30 15:48  pollux
+
+	* xfce4-panel/trunk/po/it.gmo, xfce4-panel/trunk/po/it.po: updated
+	  Italian translations from Luca Marrocco <buildup@libero.it>
+
+2004-09-29 08:22  pollux
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/contents.xml.zh_TW,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  updated zh_TW translations from Ambrose Li <acli@ada.dhs.org>
+
+2004-09-29 07:59  pollux
+
+	* xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  updated zh_CN translations from yongtao yang
+	  <yongtao.yang@gmail.com>
+
+2004-09-23 21:36  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/gu.gmo, xfce4-panel/trunk/po/gu.po,
+	  xfce4-panel/trunk/po/nl.gmo: add Gujarati translations (GU) from
+	  Ankit Patel <ankit@redhat.com>
+
+2004-09-23 09:09  jasper
+
+	* xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/settings/xfce-panel-settings.desktop: Better
+	  translation
+
+2004-09-22 17:45  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/pa.gmo, xfce4-panel/trunk/po/pa.po: add
+	  Punjabi (PA) translation of the panel
+
+2004-09-21 11:51  jasper
+
+	* xfce4-panel/trunk/po/ar.gmo, xfce4-panel/trunk/po/ar.po,
+	  xfce4-panel/trunk/po/az.gmo, xfce4-panel/trunk/po/az.po,
+	  xfce4-panel/trunk/po/be.gmo, xfce4-panel/trunk/po/be.po,
+	  xfce4-panel/trunk/po/bg.gmo, xfce4-panel/trunk/po/bg.po,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/cs.gmo, xfce4-panel/trunk/po/cs.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/et.gmo, xfce4-panel/trunk/po/et.po,
+	  xfce4-panel/trunk/po/eu.gmo, xfce4-panel/trunk/po/eu.po,
+	  xfce4-panel/trunk/po/fa_IR.gmo, xfce4-panel/trunk/po/fa_IR.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/he.gmo, xfce4-panel/trunk/po/he.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po,
+	  xfce4-panel/trunk/po/it.gmo, xfce4-panel/trunk/po/it.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/no.gmo, xfce4-panel/trunk/po/no.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/pt_BR.gmo, xfce4-panel/trunk/po/pt_BR.po,
+	  xfce4-panel/trunk/po/pt_PT.gmo, xfce4-panel/trunk/po/pt_PT.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/sk.gmo, xfce4-panel/trunk/po/sk.po,
+	  xfce4-panel/trunk/po/sv.gmo, xfce4-panel/trunk/po/sv.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/vi.gmo, xfce4-panel/trunk/po/vi.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po: Run
+	  make update-po at Moe's request.
+
+2004-09-21 07:47  jasper
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/NEWS,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/add-control-dialog.c,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Small tweaks. Panel passes
+	  make distcheck.
+
+2004-09-20 22:22  olivier
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Update all ChangeLogs
+
+2004-09-18 16:41  pollux
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/eu.gmo, xfce4-panel/trunk/po/eu.po: update EU
+	  translations
+
+2004-09-18 00:02  moe
+
+	* xfce4-panel/trunk/po/de.po: Updating these for alpha release. Not
+	  yet finished .. but I'm just too tired to continue. Needs
+	  extensive spell checking and approvement (Note to myself: Write
+	  mail to the list!).
+
+2004-09-16 22:10  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/be.gmo, xfce4-panel/trunk/po/be.po: add BE
+	  translations from Ales Nyakhaychyk <nab@mail.by>
+
+2004-09-10 20:49  pollux
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/po/he.gmo, xfce4-panel/trunk/po/he.po,
+	  xfce4-panel/trunk/xfce4rc.he: HE translations update from Yuval
+	  Tanny <tanai@int.gov.il>
+
+2004-09-09 18:51  pollux
+
+	* xfce4-panel/trunk/po/vi.gmo, xfce4-panel/trunk/po/vi.po,
+	  xfce4-panel/trunk/xfce4rc.vi: update VI translations
+
+2004-09-07 13:43  jasper
+
+	* xfce4-panel/trunk/po/ar.po, xfce4-panel/trunk/po/az.gmo,
+	  xfce4-panel/trunk/po/az.po, xfce4-panel/trunk/po/bg.gmo,
+	  xfce4-panel/trunk/po/bg.po, xfce4-panel/trunk/po/ca.gmo,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/cs.gmo,
+	  xfce4-panel/trunk/po/cs.po, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/et.gmo,
+	  xfce4-panel/trunk/po/et.po, xfce4-panel/trunk/po/eu.gmo,
+	  xfce4-panel/trunk/po/eu.po, xfce4-panel/trunk/po/fa_IR.gmo,
+	  xfce4-panel/trunk/po/fa_IR.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/he.gmo,
+	  xfce4-panel/trunk/po/he.po, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hi.po, xfce4-panel/trunk/po/hu.gmo,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/it.gmo,
+	  xfce4-panel/trunk/po/it.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/po/ko.po, xfce4-panel/trunk/po/lt.gmo,
+	  xfce4-panel/trunk/po/lt.po, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/no.gmo,
+	  xfce4-panel/trunk/po/no.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/pt_BR.gmo,
+	  xfce4-panel/trunk/po/pt_BR.po, xfce4-panel/trunk/po/pt_PT.gmo,
+	  xfce4-panel/trunk/po/pt_PT.po, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/sk.gmo,
+	  xfce4-panel/trunk/po/sk.po, xfce4-panel/trunk/po/sv.gmo,
+	  xfce4-panel/trunk/po/sv.po, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/vi.gmo,
+	  xfce4-panel/trunk/po/vi.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  Tiny string freeze breakage (1 message). Sorry.
+
+2004-09-07 13:37  jasper
+
+	* xfce4-panel/trunk/po/ar.gmo: Tiny string freeze breakage (1
+	  message). Sorry.
+
+2004-09-06 14:08  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/et.gmo, xfce4-panel/trunk/po/et.po: ET
+	  translations from Peeter Vois <Peeter.Vois@proekspert.ee>
+
+2004-08-30 12:55  jasper
+
+	* xfce4-panel/trunk/.indent.pro,
+	  xfce4-panel/trunk/panel/add-control-dialog.c,
+	  xfce4-panel/trunk/panel/add-control-dialog.h,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls.h,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/controls_dialog.h,
+	  xfce4-panel/trunk/panel/global.h,
+	  xfce4-panel/trunk/panel/groups.c,
+	  xfce4-panel/trunk/panel/groups.h, xfce4-panel/trunk/panel/icons.c,
+	  xfce4-panel/trunk/panel/icons.h, xfce4-panel/trunk/panel/item.c,
+	  xfce4-panel/trunk/panel/item.h,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/item_dialog.h,
+	  xfce4-panel/trunk/panel/main.c, xfce4-panel/trunk/panel/main.h,
+	  xfce4-panel/trunk/panel/mcs_client.c,
+	  xfce4-panel/trunk/panel/mcs_client.h,
+	  xfce4-panel/trunk/panel/panel.c, xfce4-panel/trunk/panel/panel.h,
+	  xfce4-panel/trunk/panel/plugins.h,
+	  xfce4-panel/trunk/panel/popup.c, xfce4-panel/trunk/panel/popup.h,
+	  xfce4-panel/trunk/panel/settings.c,
+	  xfce4-panel/trunk/panel/settings.h,
+	  xfce4-panel/trunk/panel/xfce.h,
+	  xfce4-panel/trunk/panel/xfce_support.c,
+	  xfce4-panel/trunk/panel/xfce_support.h,
+	  xfce4-panel/trunk/panel/xfcombo.c,
+	  xfce4-panel/trunk/panel/xfcombo.h,
+	  xfce4-panel/trunk/plugins/clock/clock.c,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/pager/pager.c,
+	  xfce4-panel/trunk/plugins/sample-plugin/sample.c,
+	  xfce4-panel/trunk/plugins/separator/separator.c,
+	  xfce4-panel/trunk/plugins/switcher/switcher.c,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/settings/xfce_settings.h,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.h,
+	  xfce4-panel/trunk/settings/xfce_settings_plugin.c,
+	  xfce4-panel/trunk/settings/xfce_settings_plugin.h: * Use
+	  XfceIconTheme (warning: still crashes) * Add $ and clean up
+	  copyright statements * Reindent using only spaces (more like
+	  Olivier's style)
+
+2004-08-29 16:03  pollux
+
+	* xfce4-panel/trunk/po/az.gmo, xfce4-panel/trunk/po/az.po: AZ
+	  translations update from Metin Amiroff <metin@karegen.com>
+
+2004-08-28 19:20  pollux
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/sk.gmo, xfce4-panel/trunk/po/sk.po,
+	  xfce4-panel/trunk/xfce4rc.sk: add Slovak translations from Juraj
+	  Brosz <Juraj.Brosz@pobox.sk>
+
+2004-08-26 19:57  pollux
+
+	* xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po: finnish
+	  translations update from Ilkka Ollakka
+	  <ilkka.j.ollakka@students.oamk.fi>
+
+2004-08-24 10:04  pollux
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/xfce4rc.ru: RU
+	  translations update from Anthony Ivanoff <a-i@bk.ru>
+
+2004-08-22 15:29  jasper
+
+	* xfce4-panel/trunk/TODO, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/item.c,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/main.c, xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/panel/settings.c,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/po/POTFILES.in, xfce4-panel/trunk/po/ar.gmo,
+	  xfce4-panel/trunk/po/ar.po, xfce4-panel/trunk/po/az.gmo,
+	  xfce4-panel/trunk/po/az.po, xfce4-panel/trunk/po/bg.gmo,
+	  xfce4-panel/trunk/po/bg.po, xfce4-panel/trunk/po/ca.gmo,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/cs.gmo,
+	  xfce4-panel/trunk/po/cs.po, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/eu.gmo,
+	  xfce4-panel/trunk/po/eu.po, xfce4-panel/trunk/po/fa_IR.gmo,
+	  xfce4-panel/trunk/po/fa_IR.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/he.gmo,
+	  xfce4-panel/trunk/po/he.po, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hi.po, xfce4-panel/trunk/po/hu.gmo,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/it.gmo,
+	  xfce4-panel/trunk/po/it.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/po/ko.po, xfce4-panel/trunk/po/lt.gmo,
+	  xfce4-panel/trunk/po/lt.po, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/no.gmo,
+	  xfce4-panel/trunk/po/no.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/pt_BR.gmo,
+	  xfce4-panel/trunk/po/pt_BR.po, xfce4-panel/trunk/po/pt_PT.gmo,
+	  xfce4-panel/trunk/po/pt_PT.po, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/sv.gmo,
+	  xfce4-panel/trunk/po/sv.po, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/vi.gmo,
+	  xfce4-panel/trunk/po/vi.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  Update strings. Gettext stuff seems a bit broken...
+
+2004-08-15 19:39  olivier
+
+	* xfce4-panel/trunk/panel/add-control-dialog.c,
+	  xfce4-panel/trunk/panel/controls.c, xfce4-panel/trunk/po/ar.gmo,
+	  xfce4-panel/trunk/po/ar.po, xfce4-panel/trunk/po/az.gmo,
+	  xfce4-panel/trunk/po/az.po, xfce4-panel/trunk/po/bg.gmo,
+	  xfce4-panel/trunk/po/bg.po, xfce4-panel/trunk/po/ca.gmo,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/cs.gmo,
+	  xfce4-panel/trunk/po/cs.po, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/eu.gmo,
+	  xfce4-panel/trunk/po/eu.po, xfce4-panel/trunk/po/fa_IR.gmo,
+	  xfce4-panel/trunk/po/fa_IR.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hi.po, xfce4-panel/trunk/po/hu.gmo,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/it.gmo,
+	  xfce4-panel/trunk/po/it.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/po/ko.po, xfce4-panel/trunk/po/lt.gmo,
+	  xfce4-panel/trunk/po/lt.po, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/no.gmo,
+	  xfce4-panel/trunk/po/no.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/pt_BR.gmo,
+	  xfce4-panel/trunk/po/pt_BR.po, xfce4-panel/trunk/po/pt_PT.gmo,
+	  xfce4-panel/trunk/po/pt_PT.po, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/sv.gmo,
+	  xfce4-panel/trunk/po/sv.po, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/vi.gmo,
+	  xfce4-panel/trunk/po/vi.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po,
+	  xfce4-panel/trunk/settings/xfce-panel-settings.desktop: Resync
+	  with repository, most notably: - libxfcegui4 fixes with gtk 2.2 -
+	  xfwm4 updates - Present panel plugins in alphabetical order - Fix
+	  add plugin dialog being placed over the panel when using SM -
+	  French po updates - Other various small bug fixes
+
+2004-08-14 19:44  pollux
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/he.gmo, xfce4-panel/trunk/po/he.po: Hebrew
+	  translations from Yuval Tanny <tanai@int.gov.il>
+
+2004-07-19 18:37  pollux
+
+	* xfce4-panel/trunk/po/no.gmo, xfce4-panel/trunk/po/no.po:
+	  definitively fix #162
+
+2004-07-13 15:39  pollux
+
+	* xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po: Catalan
+	  translation correction from Xan <DXpublica@telefonica.net>
+
+2004-06-17 13:49  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/icons/Makefile.am,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/icons/xfce-edit.png,
+	  xfce4-panel/trunk/icons/xfce-filemanager.png,
+	  xfce4-panel/trunk/icons/xfce-games.png,
+	  xfce4-panel/trunk/icons/xfce-graphics.png,
+	  xfce4-panel/trunk/icons/xfce-internet.png,
+	  xfce4-panel/trunk/icons/xfce-man.png,
+	  xfce4-panel/trunk/icons/xfce-multimedia.png,
+	  xfce4-panel/trunk/icons/xfce-print.png,
+	  xfce4-panel/trunk/icons/xfce-schedule.png,
+	  xfce4-panel/trunk/icons/xfce-sound.png,
+	  xfce4-panel/trunk/icons/xfce-system-exit.png,
+	  xfce4-panel/trunk/icons/xfce-system-info.png,
+	  xfce4-panel/trunk/icons/xfce-system-lock.png,
+	  xfce4-panel/trunk/icons/xfce-system-settings.png,
+	  xfce4-panel/trunk/icons/xfce-terminal.png,
+	  xfce4-panel/trunk/icons/xfce-unknown.png,
+	  xfce4-panel/trunk/icons/xfce-utils.png,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/groups.c,
+	  xfce4-panel/trunk/panel/groups.h, xfce4-panel/trunk/panel/icons.c,
+	  xfce4-panel/trunk/panel/icons.h,
+	  xfce4-panel/trunk/panel/mcs_client.c,
+	  xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/panel/settings.c,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/sample-plugin/sample.c,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c,
+	  xfce4-panel/trunk/themes/Crystal, xfce4-panel/trunk/themes/Curve,
+	  xfce4-panel/trunk/themes/FreeIcons,
+	  xfce4-panel/trunk/themes/Gnome,
+	  xfce4-panel/trunk/themes/Makefile.am,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia, xfce4-panel/trunk/themes/XFce: Oh
+	  dear, big changes. Please test. Changes include: * Icon themeing
+	  based on icon spec. No more panel-specific theme option. Panel
+	  themes can still be created, but additionally the panel looks for
+	  gnome and kde icons, when no xfce- namespaced icons were found.
+	  Old panel themes will no longer work. * Removed old icon themes. *
+	  Removed panel layer option. The panel now is a dock-type window
+	  and sets partial struts to allow the wm to do the right thing.
+
+2004-06-13 21:18  pollux
+
+	* xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po: Updated
+	  lt translations from Mantas Zapolskas
+
+2004-06-13 09:40  pollux
+
+	* xfce4-panel/trunk/po/zh_CN.gmo: .gmo files updated
+
+2004-06-11 19:59  pollux
+
+	* xfce4-panel/trunk/po/zh_CN.po: Update zh_CN translations
+
+2004-05-10 11:57  jasper
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/NEWS,
+	  xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/ltmain.sh,
+	  xfce4-panel/trunk/panel/global.h, xfce4-panel/trunk/panel/icons.c,
+	  xfce4-panel/trunk/panel/panel.h,
+	  xfce4-panel/trunk/plugins/Makefile.am,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/sample-plugin,
+	  xfce4-panel/trunk/plugins/sample-plugin/Makefile.am,
+	  xfce4-panel/trunk/plugins/sample-plugin/Makefile.in,
+	  xfce4-panel/trunk/plugins/sample-plugin/README,
+	  xfce4-panel/trunk/plugins/sample-plugin/sample.c,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Add a new sample plugin to
+	  the panel. It will not be installed.
+
+2004-05-03 21:44  olivier
+
+	* xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.guess, xfce4-panel/trunk/config.sub,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/doc/C/Makefile.in,
+	  xfce4-panel/trunk/doc/C/images/Makefile.in,
+	  xfce4-panel/trunk/doc/Makefile.in,
+	  xfce4-panel/trunk/doc/fr/Makefile.in,
+	  xfce4-panel/trunk/doc/fr/images/Makefile.in,
+	  xfce4-panel/trunk/icons/Makefile.in, xfce4-panel/trunk/install-sh,
+	  xfce4-panel/trunk/ltmain.sh, xfce4-panel/trunk/mkinstalldirs,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/separator/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po,
+	  xfce4-panel/trunk/themes/Crystal/22x22/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/22x22/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/48x48/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/48x48/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/22x22/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/22x22/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/48x48/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/48x48/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/22x22/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/22x22/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/24x24/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/24x24/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/48x48/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/48x48/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/24x24/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/24x24/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/48x48/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/48x48/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/50x50/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/50x50/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/22x22/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/22x22/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/48x48/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/48x48/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/14x14/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/14x14/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/16x16/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/16x16/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/19x19/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/19x19/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/24x24/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/24x24/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/48x48/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/48x48/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/50x50/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/50x50/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/53x53/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/53x53/emblems/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in: Update zh_TW
+	  translations from umm <umm@pchome.com.tw>
+
+2004-04-23 12:19  jasper
+
+	* xfce4-panel/trunk/TODO, xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/po/ca.gmo: Update plugin list (remove
+	  uninstalled and add newly installed ones) when opening the add
+	  item dialog. Based on the idea of Scott Barron
+	  <scott@elitists.net>.
+
+2004-04-12 13:36  dannym
+
+	* xfce4-panel/trunk/po/ca.po: Updated catalan translations by Carles
+	  Mu&#65533;&#65533;oz Gorriz
+
+2004-04-10 22:20  jasper
+
+	* xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/panel.c, xfce4-panel/trunk/po/ar.gmo,
+	  xfce4-panel/trunk/po/bg.gmo, xfce4-panel/trunk/po/ca.gmo,
+	  xfce4-panel/trunk/po/cs.gmo, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/eu.gmo, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/it.gmo,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pt_PT.gmo, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/sv.gmo, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/vi.gmo,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_TW.gmo:
+	  Fix panel on the screen edge. Also should fix Moe's autohide bug.
+
+2004-04-10 14:21  jasper
+
+	* xfce4-panel/trunk/README, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/doc/C/xfce4-panel.html,
+	  xfce4-panel/trunk/doc/C/xfce4-panel.xml,
+	  xfce4-panel/trunk/doc/fr/xfce4-panel.html,
+	  xfce4-panel/trunk/doc/fr/xfce4-panel.xml,
+	  xfce4-panel/trunk/panel/main.c, xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/panel/xfce4-panel-1.0.pc.in,
+	  xfce4-panel/trunk/po/ar.gmo, xfce4-panel/trunk/po/ar.po,
+	  xfce4-panel/trunk/po/az.gmo, xfce4-panel/trunk/po/az.po,
+	  xfce4-panel/trunk/po/bg.gmo, xfce4-panel/trunk/po/bg.po,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/cs.gmo, xfce4-panel/trunk/po/cs.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/eu.po, xfce4-panel/trunk/po/fa_IR.gmo,
+	  xfce4-panel/trunk/po/fa_IR.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hi.po, xfce4-panel/trunk/po/hu.gmo,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/it.gmo,
+	  xfce4-panel/trunk/po/it.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/po/ko.po, xfce4-panel/trunk/po/lt.gmo,
+	  xfce4-panel/trunk/po/lt.po, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/no.gmo,
+	  xfce4-panel/trunk/po/no.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/pt_BR.gmo,
+	  xfce4-panel/trunk/po/pt_BR.po, xfce4-panel/trunk/po/pt_PT.gmo,
+	  xfce4-panel/trunk/po/pt_PT.po, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/sv.gmo,
+	  xfce4-panel/trunk/po/sv.po, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/uk.gmo,
+	  xfce4-panel/trunk/po/uk.po, xfce4-panel/trunk/po/vi.gmo,
+	  xfce4-panel/trunk/po/vi.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c,
+	  xfce4-panel/trunk/settings/xfce_settings_plugin.c,
+	  xfce4-panel/trunk/xfce4.spec.in: Gratuitous spamming of commits
+	  list: changed all occurances of XFce to Xfce; Olivier told me once
+	  he prefered that. Sorry.
+
+2004-03-15 07:36  olivier
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/ltmain.sh,
+	  xfce4-panel/trunk/po/ar.gmo, xfce4-panel/trunk/po/ar.po,
+	  xfce4-panel/trunk/po/bg.gmo, xfce4-panel/trunk/po/bg.po,
+	  xfce4-panel/trunk/po/it.gmo, xfce4-panel/trunk/po/it.po,
+	  xfce4-panel/trunk/xfce4rc.ar, xfce4-panel/trunk/xfce4rc.it:
+	  Add/update i18n for: Bulgarian from Miroslav Yordanov
+	  <miordanov@i-space.org> and Peter Slavov <peshka@i-space.org>
+	  Italian from Alex Dupre <ale@FreeBSD.org> Arabic from Saleh Hathal
+	  <hathalsal@hotmail.com>
+
+2004-02-17 19:36  jasper
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/xfcombo.c, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/xfce4rc.ms: Update
+	  Malay translations
+
+2004-02-11 20:44  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/ltmain.sh,
+	  xfce4-panel/trunk/po/eu.gmo, xfce4-panel/trunk/po/eu.po,
+	  xfce4-panel/trunk/xfce4rc.eu: Add Basque (eu) translations
+
+2004-01-29 15:51  jasper
+
+	* xfce4-panel/trunk/po/fa_IR.gmo, xfce4-panel/trunk/po/fa_IR.po:
+	  Update Persian translations
+
+2004-01-21 13:44  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/fa_IR.gmo, xfce4-panel/trunk/po/fa_IR.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/pt_BR.gmo, xfce4-panel/trunk/po/pt_BR.po,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  Translations added/updated for spanish, persian, japanese, korean,
+	  brasilian and chinese
+
+2004-01-08 21:18  jasper
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/NEWS,
+	  xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls.h,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/global.h,
+	  xfce4-panel/trunk/panel/groups.c,
+	  xfce4-panel/trunk/panel/groups.h, xfce4-panel/trunk/panel/item.c,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/panel.c, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: General clean-ups. First
+	  step to prettier property dialogs.
+
+2004-01-07 23:07  moe
+
+	* xfce4-panel/trunk/po/de.po: I'm poor lonely and all alone. Thats
+	  why I'm doing translations at 7 past twelve during the night.
+
+2004-01-03 20:23  olivier
+
+	* xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po: Update
+	  Polish translation from Daniel Mr&#65533;&#65533;z <beorn@alpha.pl>
+
+2003-12-29 15:18  olivier
+
+	* xfce4-panel/trunk/po/no.gmo, xfce4-panel/trunk/po/no.po: Fix
+	  missing CHARSET in potfiles
+
+2003-12-29 10:56  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/no.gmo, xfce4-panel/trunk/po/no.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po: Update
+	  Norwegian and Turkish translations
+
+2003-12-27 19:46  jasper
+
+	* xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po: Update
+	  Polish translations
+
+2003-12-15 20:56  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/az.gmo, xfce4-panel/trunk/po/az.po: Add
+	  Azerbaijani translations
+
+2003-12-06 15:26  jasper
+
+	* xfce4-panel/trunk/AUTHORS, xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls.h,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/groups.c,
+	  xfce4-panel/trunk/panel/groups.h, xfce4-panel/trunk/panel/icons.c,
+	  xfce4-panel/trunk/panel/item.c,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/item_dialog.h,
+	  xfce4-panel/trunk/panel/main.c, xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/panel/panel.h, xfce4-panel/trunk/panel/popup.c,
+	  xfce4-panel/trunk/panel/xfce_support.c,
+	  xfce4-panel/trunk/plugins/clock/clock.c,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/cs.gmo, xfce4-panel/trunk/po/cs.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po,
+	  xfce4-panel/trunk/po/it.gmo, xfce4-panel/trunk/po/it.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/pt_PT.gmo, xfce4-panel/trunk/po/pt_PT.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/sv.gmo, xfce4-panel/trunk/po/sv.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/vi.gmo, xfce4-panel/trunk/po/vi.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  Further cleanup: only create popup widgets when actually used.
+	  Start xfcalendar from the clock or send it a client message if
+	  already running
+
+2003-11-20 21:31  benny
+
+	* xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/po/it.gmo,
+	  xfce4-panel/trunk/po/it.po: Added italian translation, thanks to
+	  Eduard Roccatello.
+
+2003-11-16 21:49  olivier
+
+	* xfce4-panel/trunk/po/de.gmo: Fix 64bit/endianess problem
+
+2003-11-16 08:45  jasper
+
+	* xfce4-panel/trunk/po/cs.gmo, xfce4-panel/trunk/po/cs.po: Update
+	  Czech translations
+
+2003-11-14 17:00  moe
+
+	* xfce4-panel/trunk/po/de.po: Minor updates
+
+2003-11-09 19:22  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/cs.gmo, xfce4-panel/trunk/po/cs.po: Add Check
+	  translations
+
+2003-11-08 16:16  dannym
+
+	* xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po: Fix for a
+	  typo in "Lock" translation spotted by Lefungus
+	  (lefungus@altern.org)
+
+2003-11-07 12:49  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/doc/C/xfce4-panel.html,
+	  xfce4-panel/trunk/doc/Makefile.am,
+	  xfce4-panel/trunk/doc/Makefile.in, xfce4-panel/trunk/doc/fr,
+	  xfce4-panel/trunk/doc/fr/Makefile.am,
+	  xfce4-panel/trunk/doc/fr/Makefile.in,
+	  xfce4-panel/trunk/doc/fr/images,
+	  xfce4-panel/trunk/doc/fr/images/Makefile.am,
+	  xfce4-panel/trunk/doc/fr/images/Makefile.in,
+	  xfce4-panel/trunk/doc/fr/images/clock-properties.png,
+	  xfce4-panel/trunk/doc/fr/images/default_panel.png,
+	  xfce4-panel/trunk/doc/fr/images/handle-popup.png,
+	  xfce4-panel/trunk/doc/fr/images/item-popup.png,
+	  xfce4-panel/trunk/doc/fr/images/launcher-properties.png,
+	  xfce4-panel/trunk/doc/fr/images/mailcheck-properties.png,
+	  xfce4-panel/trunk/doc/fr/images/menuitems-properties.png,
+	  xfce4-panel/trunk/doc/fr/images/nooptions-properties.png,
+	  xfce4-panel/trunk/doc/fr/images/panel-settings.png,
+	  xfce4-panel/trunk/doc/fr/images/systembuttons-properties.png,
+	  xfce4-panel/trunk/doc/fr/xfce4-panel.html,
+	  xfce4-panel/trunk/doc/fr/xfce4-panel.xml,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Add French documentation.
+	  Rather large commit.
+
+2003-11-03 18:06  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/uk.gmo, xfce4-panel/trunk/po/uk.po: Add
+	  Ukranian translations
+
+2003-10-24 22:20  jasper
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/vi.gmo, xfce4-panel/trunk/po/vi.po: Add
+	  vietnamese translations by Lam Vinh Nien <nienvl@yahoo.ca>.
+
+2003-10-17 15:37  jasper
+
+	* xfce4-panel/trunk/NEWS, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/icons/xfce4-panel-icon.h,
+	  xfce4-panel/trunk/panel/main.c, xfce4-panel/trunk/po/sv.gmo,
+	  xfce4-panel/trunk/po/sv.po, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Add/update swedish translations
+
+2003-10-15 11:20  jasper
+
+	* xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po: Update
+	  korean translations
+
+2003-09-27 12:37  huysmans
+
+	* xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po: Update
+	  tamil translation
+
+2003-09-22 20:34  huysmans
+
+	* xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/pt_PT.gmo, xfce4-panel/trunk/po/pt_PT.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  Update version numbers and po files for release
+
+2003-09-15 20:55  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/pt.gmo, xfce4-panel/trunk/po/pt.po,
+	  xfce4-panel/trunk/po/pt_PT.gmo, xfce4-panel/trunk/po/pt_PT.po: Big
+	  portugese translation update
+
+2003-09-15 18:19  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/pt.gmo, xfce4-panel/trunk/po/pt.po: Portugese
+	  translations
+
+2003-09-10 07:39  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  Update version numbers and po files for release
+
+2003-09-08 06:24  huysmans
+
+	* xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po: Update
+	  russian translations
+
+2003-09-02 06:48  huysmans
+
+	* xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po: Update
+	  malaysian translations
+
+2003-08-30 12:49  huysmans
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/zh_TW.Big5.gmo,
+	  xfce4-panel/trunk/po/zh_TW.Big5.po,
+	  xfce4-panel/trunk/po/zh_TW.gmo, xfce4-panel/trunk/po/zh_TW.po:
+	  Rename zh_TW.Big5 -> zh_TW
+
+2003-08-30 08:57  huysmans
+
+	* xfce4-panel/trunk/po/zh_TW.Big5.gmo,
+	  xfce4-panel/trunk/po/zh_TW.Big5.po: Add traditional chinese
+	  translations
+
+2003-08-26 07:12  huysmans
+
+	* xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ko.gmo, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  Update version numbers and po files for release
+
+2003-08-17 11:36  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/lt.gmo, xfce4-panel/trunk/po/lt.po: Add
+	  lithuanian translations
+
+2003-08-14 19:09  xfce
+
+	* xfce4-panel/trunk/po/xfce4-panel.pot: Resync with cvs
+
+2003-08-05 17:25  huysmans
+
+	* xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po: Updated
+	  german translations
+
+2003-08-04 18:25  xfce
+
+	* xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/po/ko.gmo,
+	  xfce4-panel/trunk/po/ko.po: Add Korean translation from ByungHyun
+	  Choi <byunghyunchoi@hotmail.com>
+
+2003-07-30 08:05  huysmans
+
+	* xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/po/ca.gmo,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hi.po, xfce4-panel/trunk/po/hu.gmo,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  Update version numbers and po files for release
+
+2003-07-29 06:28  huysmans
+
+	* xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po: Update
+	  russian translations
+
+2003-07-26 13:37  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Fix autohide bug, I hope
+
+2003-07-25 11:03  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c: More
+	  positioning changes
+
+2003-07-25 09:52  huysmans
+
+	* xfce4-panel/trunk/NEWS, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c: Tweaks. startup
+	  autohide is still a problem
+
+2003-07-24 06:27  huysmans
+
+	* xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po: Update
+	  finnish translations
+
+2003-07-19 08:59  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  Update version numbers and po files for release
+
+2003-07-18 10:56  huysmans
+
+	* xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po: Update
+	  hungarian translations
+
+2003-07-18 07:46  huysmans
+
+	* xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po: Update
+	  turkish translations
+
+2003-07-16 15:01  huysmans
+
+	* xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po: Update
+	  russian translations
+
+2003-07-16 09:57  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/hu.gmo, xfce4-panel/trunk/po/hu.po,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po: Add
+	  hungarian translations
+
+2003-07-11 06:55  huysmans
+
+	* xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  Update Chinese translations
+
+2003-07-10 09:24  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  Bump version numbers for release and update po files
+
+2003-07-09 08:21  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls.h,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/controls_dialog.h,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/item_dialog.h,
+	  xfce4-panel/trunk/panel/plugins.h,
+	  xfce4-panel/trunk/plugins/clock/clock.c,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po: Big
+	  internal changes. Remove revert button from item dialogs; this
+	  also affects plugin API. API version increased
+
+2003-07-08 07:31  huysmans
+
+	* xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/plugins/pager/pager.c,
+	  xfce4-panel/trunk/po/es.gmo: Small fixes
+
+2003-07-07 21:18  huysmans
+
+	* xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po: Update
+	  catalan translations
+
+2003-07-07 11:16  huysmans
+
+	* xfce4-panel/trunk/AUTHORS, xfce4-panel/trunk/HACKING,
+	  xfce4-panel/trunk/NEWS, xfce4-panel/trunk/README,
+	  xfce4-panel/trunk/TODO, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Update some info
+
+2003-07-04 16:55  bmeurer
+
+	* xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po: Small
+	  fix.
+
+2003-07-03 20:24  xfce
+
+	* xfce4-panel/trunk/plugins/separator/separator.c,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po: Tweak new separator plugin and update
+	  frnech po
+
+2003-07-03 18:16  edscott
+
+	* xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.po: spanish
+	  tranlation updates for 4.0 release.
+
+2003-07-03 12:36  huysmans
+
+	* xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po: Update
+	  German translations
+
+2003-07-03 12:28  huysmans
+
+	* xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po: Update
+	  finish translation
+
+2003-07-03 10:13  huysmans
+
+	* xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/doc/C/Makefile.in,
+	  xfce4-panel/trunk/doc/C/images/Makefile.in,
+	  xfce4-panel/trunk/doc/C/images/default_panel.png,
+	  xfce4-panel/trunk/doc/C/xfce4-panel.html,
+	  xfce4-panel/trunk/doc/C/xfce4-panel.xml,
+	  xfce4-panel/trunk/doc/Makefile.in,
+	  xfce4-panel/trunk/icons/Makefile.in, xfce4-panel/trunk/ltcf-c.sh,
+	  xfce4-panel/trunk/ltconfig, xfce4-panel/trunk/ltmain.sh,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/Makefile.am,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/pager.c,
+	  xfce4-panel/trunk/plugins/separator,
+	  xfce4-panel/trunk/plugins/separator/Makefile.am,
+	  xfce4-panel/trunk/plugins/separator/Makefile.in,
+	  xfce4-panel/trunk/plugins/separator/separator.c,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/po/POTFILES.in, xfce4-panel/trunk/po/ca.gmo,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/hi.gmo,
+	  xfce4-panel/trunk/po/hi.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ms.gmo,
+	  xfce4-panel/trunk/po/ms.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/ru.gmo,
+	  xfce4-panel/trunk/po/ru.po, xfce4-panel/trunk/po/ta.gmo,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.gmo,
+	  xfce4-panel/trunk/po/tr.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in,
+	  xfce4-panel/trunk/xfce4rc: Add separator. Remove separators from
+	  pager. Several smaller fixes to plugins. Update docs.
+
+2003-06-21 19:22  bmeurer
+
+	* xfce4-panel/trunk/po/xfce4-panel.pot: Updates.
+
+2003-06-21 17:14  bmeurer
+
+	* xfce4-panel/trunk/HACKING, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po: Updated german translations.
+
+2003-06-08 14:29  huysmans
+
+	* xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/doc/C/Makefile.in,
+	  xfce4-panel/trunk/doc/C/images/Makefile.in,
+	  xfce4-panel/trunk/doc/Makefile.in,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/po/ru.gmo, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in: Add russian translation
+	  and fix xfdesktop not reading a new local menu
+
+2003-06-06 15:46  huysmans
+
+	* xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  final update-po before beta 1
+
+2003-06-05 07:28  huysmans
+
+	* xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po: Updated
+	  translations and multiple file drop on backdrop list manager
+
+2003-06-01 21:27  huysmans
+
+	* xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po: Update fi
+	  translations and specfile fix
+
+2003-05-30 20:36  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/ms.gmo, xfce4-panel/trunk/po/ms.po: Add
+	  malayan translations
+
+2003-05-29 12:35  huysmans
+
+	* xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po: Update
+	  catalan translations
+
+2003-05-29 09:56  huysmans
+
+	* xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/nl.po:
+	  Translations update
+
+2003-05-27 21:29  xfce
+
+	* xfce4-panel/trunk/po/ja.po: Add Japanese translation by Zhao-Ji
+	  <zhao-ji at awz dot ne dot jp>
+
+2003-05-21 21:42  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/hi.gmo, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/tr.gmo, xfce4-panel/trunk/po/tr.po: Add
+	  Turkish translations
+
+2003-05-16 18:21  huysmans
+
+	* xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.guess, xfce4-panel/trunk/config.sub,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/doc/C/Makefile.in,
+	  xfce4-panel/trunk/doc/C/images/Makefile.in,
+	  xfce4-panel/trunk/doc/Makefile.in,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/po/ta.gmo, xfce4-panel/trunk/po/ta.po,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in: Add tamil translations
+
+2003-05-14 05:50  huysmans
+
+	* xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po: update
+	  finnish translations
+
+2003-05-13 17:15  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/ca.gmo, xfce4-panel/trunk/po/ca.po: Add
+	  catalan translations
+
+2003-05-13 09:03  huysmans
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/doc/html/Makefile.am,
+	  xfce4-panel/trunk/doc/html/Makefile.in,
+	  xfce4-panel/trunk/doc/images/Makefile.am,
+	  xfce4-panel/trunk/doc/images/Makefile.in,
+	  xfce4-panel/trunk/panel/Makefile.am,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.am,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.am,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/Makefile.am,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.am,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.am,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/po/Makefile.in.in, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/pl.gmo,
+	  xfce4-panel/trunk/po/pl.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/settings/Makefile.am,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.am,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.am,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/Makefile.am,
+	  xfce4-panel/trunk/themes/FreeIcons/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.am,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.am,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.am,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in,
+	  xfce4-panel/trunk/xfce4.spec.in: Fix distcheck target. Rename
+	  package to xfce4-panel. Set version to 3.90 (betas will be 3.90,
+	  3.91, 3.92, etc.)
+
+2003-05-12 18:04  huysmans
+
+	* xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po:
+	  Renamed subpanel to menu
+
+2003-05-12 16:38  huysmans
+
+	* xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/controls_dialog.h,
+	  xfce4-panel/trunk/panel/groups.c,
+	  xfce4-panel/trunk/panel/groups.h, xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po: Get
+	  rid of type option menu from item dialog
+
+2003-05-12 10:41  huysmans
+
+	* xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.po: Update po files
+
+2003-05-04 22:21  huysmans
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/icons/Makefile.am,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/panel/Makefile.am,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.am,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.am,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/Makefile.am,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.am,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.am,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pl.gmo, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/settings/Makefile.am,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/xfce4.spec.in, xfce4-panel/trunk/xfce4rc,
+	  xfce4-panel/trunk/xfce4rc.in: Fixes for rpm target and distcheck
+	  stuff
+
+2003-05-03 22:02  xfce
+
+	* xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po: Various
+	  fixes, added french translation, fixed desktop switching in xfwm4
+
+2003-05-03 09:43  huysmans
+
+	* xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/doc/Makefile.in,
+	  xfce4-panel/trunk/doc/html/Makefile.in,
+	  xfce4-panel/trunk/doc/images/Makefile.in,
+	  xfce4-panel/trunk/doc/xml/Makefile.in,
+	  xfce4-panel/trunk/icons/Makefile.in, xfce4-panel/trunk/ltcf-c.sh,
+	  xfce4-panel/trunk/ltconfig, xfce4-panel/trunk/ltmain.sh,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/po/zh_CN.gmo, xfce4-panel/trunk/po/zh_CN.po,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/FreeIcons/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in: Add chinese
+	  translations
+
+2003-05-01 05:55  huysmans
+
+	* xfce4-panel/trunk/po/pl.gmo: Add missing gmo files
+
+2003-04-27 20:09  bmeurer
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/pl.po: Added polish translations.
+
+2003-04-25 17:47  huysmans
+
+	* xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po: Update finnish translations
+
+2003-04-25 09:23  bmeurer
+
+	* xfce4-panel/trunk/po/de.po: German translation. Provided by Moritz
+	  Heiber.
+
+2003-04-21 07:42  huysmans
+
+	* xfce4-panel/trunk/aclocal.m4, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/ltcf-c.sh,
+	  xfce4-panel/trunk/ltconfig, xfce4-panel/trunk/ltmain.sh,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/themes/Carillon,
+	  xfce4-panel/trunk/themes/Carillon/Makefile.am,
+	  xfce4-panel/trunk/themes/Carillon/Makefile.in,
+	  xfce4-panel/trunk/themes/Carillon/README,
+	  xfce4-panel/trunk/themes/Carillon/edit.png,
+	  xfce4-panel/trunk/themes/Carillon/file1.png,
+	  xfce4-panel/trunk/themes/Carillon/file2.png,
+	  xfce4-panel/trunk/themes/Carillon/games.png,
+	  xfce4-panel/trunk/themes/Carillon/man.png,
+	  xfce4-panel/trunk/themes/Carillon/miniinfo.png,
+	  xfce4-panel/trunk/themes/Carillon/minilock.png,
+	  xfce4-panel/trunk/themes/Carillon/minipalet.png,
+	  xfce4-panel/trunk/themes/Carillon/minipower.png,
+	  xfce4-panel/trunk/themes/Carillon/multimedia.png,
+	  xfce4-panel/trunk/themes/Carillon/network.png,
+	  xfce4-panel/trunk/themes/Carillon/newmail.png,
+	  xfce4-panel/trunk/themes/Carillon/nomail.png,
+	  xfce4-panel/trunk/themes/Carillon/oldmail.png,
+	  xfce4-panel/trunk/themes/Carillon/paint.png,
+	  xfce4-panel/trunk/themes/Carillon/print.png,
+	  xfce4-panel/trunk/themes/Carillon/schedule.png,
+	  xfce4-panel/trunk/themes/Carillon/sound.png,
+	  xfce4-panel/trunk/themes/Carillon/terminal.png,
+	  xfce4-panel/trunk/themes/Carillon/unknown.png,
+	  xfce4-panel/trunk/themes/Makefile.am,
+	  xfce4-panel/trunk/themes/Makefile.in: Add Carillon icon theme
+	  (FreeIcons by Tomasz Mielnik)
+
+2003-04-18 21:17  huysmans
+
+	* xfce4-panel/trunk/po/POTFILES.in, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.gmo,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Update file list. i18n still broken
+
+2003-04-18 08:57  huysmans
+
+	* xfce4-panel/trunk/ChangeLog,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/icons.c, xfce4-panel/trunk/panel/icons.h,
+	  xfce4-panel/trunk/panel/main.c, xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/ja.gmo,
+	  xfce4-panel/trunk/po/nl.gmo: Will this (finally) fix the autohide
+	  <-> positioning problems?
+
+2003-04-13 21:21  huysmans
+
+	* xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.po, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/ja.po,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Update pot-file and Dutch translations
+
+2003-04-02 13:25  bmeurer
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/NOTES, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/autogen.sh, xfce4-panel/trunk/config.guess,
+	  xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/config.sub,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/depcomp, xfce4-panel/trunk/doc/Makefile.in,
+	  xfce4-panel/trunk/doc/html/Makefile.in,
+	  xfce4-panel/trunk/doc/images/Makefile.in,
+	  xfce4-panel/trunk/doc/xml/Makefile.in,
+	  xfce4-panel/trunk/example.xfce4rc.in,
+	  xfce4-panel/trunk/icons/Makefile.am,
+	  xfce4-panel/trunk/icons/Makefile.in, xfce4-panel/trunk/install-sh,
+	  xfce4-panel/trunk/ltcf-c.sh, xfce4-panel/trunk/ltconfig,
+	  xfce4-panel/trunk/ltmain.sh, xfce4-panel/trunk/m4,
+	  xfce4-panel/trunk/m4/X11.m4, xfce4-panel/trunk/m4/debug.m4,
+	  xfce4-panel/trunk/m4/depends.m4, xfce4-panel/trunk/m4/i18n.m4,
+	  xfce4-panel/trunk/m4/rpath.m4, xfce4-panel/trunk/missing,
+	  xfce4-panel/trunk/mkinstalldirs,
+	  xfce4-panel/trunk/panel/Makefile.am,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/main.c,
+	  xfce4-panel/trunk/panel/xfce_support.c,
+	  xfce4-panel/trunk/panel/xfce_support.h,
+	  xfce4-panel/trunk/plugins/Makefile.am,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.am,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/clock.c,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.am,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/pager/Makefile.am,
+	  xfce4-panel/trunk/plugins/pager/Makefile.in,
+	  xfce4-panel/trunk/plugins/pager/pager.c,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.am,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/switcher.c,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.am,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/po/Makefile.in.in,
+	  xfce4-panel/trunk/settings/Makefile.am,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c,
+	  xfce4-panel/trunk/settings/xfce_settings_plugin.c,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.am,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in,
+	  xfce4-panel/trunk/xfce4.spec.in, xfce4-panel/trunk/xfce4rc.in:
+	  Large autotools update. Should fix James problems with
+	  unsubstituted @PKG_LDFLAGS@ in .pc files. Should also make it
+	  easier to port XFce4 to a non-POSIX (or even non-UNIX) plattform,
+	  using autoconf.
+
+2003-03-29 15:19  huysmans
+
+	* xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po: Update
+	  german translations
+
+2003-03-02 17:10  xfce
+
+	* xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po: Rearrange
+	  button events handler in xfwm4 Update french translation for xfce4
+	  panel
+
+2003-02-26 10:22  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/ja.gmo, xfce4-panel/trunk/po/ja.po: Add
+	  japanese translations
+
+2003-02-17 13:16  huysmans
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/doc/xml/xfce4-panel.xml,
+	  xfce4-panel/trunk/icons/Makefile.am,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/icons/xfce_slogan.xpm,
+	  xfce4-panel/trunk/panel/Makefile.am,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/panel/info.c, xfce4-panel/trunk/panel/info.h,
+	  xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/po/ChangeLog, xfce4-panel/trunk/po/POTFILES.in,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Remove info panel. Use
+	  xfce4-about instead.
+
+2003-02-10 21:58  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/po/es_MX.gmo, xfce4-panel/trunk/po/es_MX.po:
+	  Forgot to put old spanish translations back as es_MX
+
+2003-02-10 19:39  huysmans
+
+	* xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po: Update
+	  spanish translations
+
+2003-02-04 10:00  huysmans
+
+	* xfce4-panel/trunk/Makefile.am, xfce4-panel/trunk/Makefile.in,
+	  xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/doc, xfce4-panel/trunk/doc/Makefile.am,
+	  xfce4-panel/trunk/doc/Makefile.in, xfce4-panel/trunk/doc/html,
+	  xfce4-panel/trunk/doc/html/GPL.html,
+	  xfce4-panel/trunk/doc/html/Makefile.am,
+	  xfce4-panel/trunk/doc/html/Makefile.in,
+	  xfce4-panel/trunk/doc/html/copyright.html,
+	  xfce4-panel/trunk/doc/html/index.html,
+	  xfce4-panel/trunk/doc/html/ln-legalnotice.html,
+	  xfce4-panel/trunk/doc/html/panel-getting-started.html,
+	  xfce4-panel/trunk/doc/html/panel-prefs.html,
+	  xfce4-panel/trunk/doc/html/panel-use.html,
+	  xfce4-panel/trunk/doc/images,
+	  xfce4-panel/trunk/doc/images/Makefile.am,
+	  xfce4-panel/trunk/doc/images/Makefile.in,
+	  xfce4-panel/trunk/doc/images/default_panel.png,
+	  xfce4-panel/trunk/doc/xml, xfce4-panel/trunk/doc/xml/GPL.xml,
+	  xfce4-panel/trunk/doc/xml/Makefile.am,
+	  xfce4-panel/trunk/doc/xml/Makefile.in,
+	  xfce4-panel/trunk/doc/xml/copyright.xml,
+	  xfce4-panel/trunk/doc/xml/xfce.xsl,
+	  xfce4-panel/trunk/doc/xml/xfce4-panel.xml,
+	  xfce4-panel/trunk/example.xfce4rc.in, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/nl.gmo: Add
+	  documentation framework and some preliminary text
+
+2003-02-02 21:02  huysmans
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/po/POTFILES.in,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Update translatable strings
+
+2003-02-01 19:34  huysmans
+
+	* xfce4-panel/trunk/configure, xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/plugins/Makefile.am,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/trash, xfce4-panel/trunk/po/de.gmo,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/nl.gmo: Remove
+	  trash plugin. Cleanup mailcheck plugin
+
+2003-02-01 13:16  huysmans
+
+	* xfce4-panel/trunk/AUTHORS, xfce4-panel/trunk/ChangeLog,
+	  xfce4-panel/trunk/plugins/clock/clock.c,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/fi.po, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/xfce4-panel.pot:
+	  Cleanup clock plugin. Update to gettext 0.11.5
+
+2003-02-01 09:44  huysmans
+
+	* xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po: Update
+	  finnish translations
+
+2003-01-30 15:53  huysmans
+
+	* xfce4-panel/trunk/AUTHORS, xfce4-panel/trunk/COPYING,
+	  xfce4-panel/trunk/ChangeLog,
+	  xfce4-panel/trunk/icons/xfce_slogan.xpm,
+	  xfce4-panel/trunk/panel/info.c, xfce4-panel/trunk/po/POTFILES.in,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Update info text. Use
+	  AUTHORS for the credits page. Fix strange characters in COPYING
+
+2003-01-29 15:41  huysmans
+
+	* xfce4-panel/trunk/README, xfce4-panel/trunk/TODO,
+	  xfce4-panel/trunk/panel/callbacks.c,
+	  xfce4-panel/trunk/panel/callbacks.h,
+	  xfce4-panel/trunk/panel/global.h, xfce4-panel/trunk/panel/item.c,
+	  xfce4-panel/trunk/panel/item.h,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/item_dialog.h,
+	  xfce4-panel/trunk/panel/popup.c, xfce4-panel/trunk/panel/popup.h,
+	  xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/es.gmo,
+	  xfce4-panel/trunk/po/fi.gmo, xfce4-panel/trunk/po/fr.gmo,
+	  xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/settings/xfce_settings.h: Cleanup. Unify
+	  PanelItem and MenuItem to avoid code duplication. Small bug fixes.
+
+2003-01-29 12:15  huysmans
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/panel/Makefile.am,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/groups.c, xfce4-panel/trunk/panel/main.c,
+	  xfce4-panel/trunk/panel/mcs_client.c,
+	  xfce4-panel/trunk/panel/mcs_client.h,
+	  xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/panel/settings.c, xfce4-panel/trunk/po/de.po,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Cleanup configuration
+	  handling and other fixes. Includes string changes.
+
+2003-01-26 18:33  huysmans
+
+	* xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/po/fi.gmo,
+	  xfce4-panel/trunk/po/fi.po: Add Finnish translations
+
+2003-01-25 13:14  huysmans
+
+	* xfce4-panel/trunk/po/de.gmo, xfce4-panel/trunk/po/de.po: Really
+	  add german translation
+
+2003-01-24 14:57  xfce
+
+	* xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/xfce4-panel.pot: Fix encoding not specified
+	  in es.po, regenerate pot file (required after Edscott fixed a typo
+	  in the source) and adjust french translation.
+
+2003-01-24 14:41  xfce
+
+	* xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/plugins/trash/Makefile.in,
+	  xfce4-panel/trunk/po/fr.gmo, xfce4-panel/trunk/po/fr.po,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in: Add french xtion.
+
+2003-01-24 13:33  edscott
+
+	* xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/panel/icons.c,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/plugins/trash/Makefile.in,
+	  xfce4-panel/trunk/po/es.gmo, xfce4-panel/trunk/po/es.po,
+	  xfce4-panel/trunk/po/nl.gmo, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in: added spanish
+	  translation and fixed a typo in source code
+
+2003-01-24 11:53  huysmans
+
+	* xfce4-panel/trunk/ChangeLog, xfce4-panel/trunk/Makefile.am,
+	  xfce4-panel/trunk/Makefile.in, xfce4-panel/trunk/aclocal.m4,
+	  xfce4-panel/trunk/config.h.in, xfce4-panel/trunk/configure,
+	  xfce4-panel/trunk/configure.ac,
+	  xfce4-panel/trunk/icons/Makefile.in,
+	  xfce4-panel/trunk/panel/Makefile.am,
+	  xfce4-panel/trunk/panel/Makefile.in,
+	  xfce4-panel/trunk/panel/callbacks.c,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/global.h,
+	  xfce4-panel/trunk/panel/groups.c,
+	  xfce4-panel/trunk/panel/handle.c, xfce4-panel/trunk/panel/icons.c,
+	  xfce4-panel/trunk/panel/info.c, xfce4-panel/trunk/panel/item.c,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/main.c,
+	  xfce4-panel/trunk/panel/mcs_client.c,
+	  xfce4-panel/trunk/panel/my_gettext.h,
+	  xfce4-panel/trunk/panel/panel.c, xfce4-panel/trunk/panel/popup.c,
+	  xfce4-panel/trunk/panel/settings.c,
+	  xfce4-panel/trunk/panel/xfce_support.c,
+	  xfce4-panel/trunk/plugins/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/Makefile.am,
+	  xfce4-panel/trunk/plugins/clock/Makefile.in,
+	  xfce4-panel/trunk/plugins/clock/clock.c,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.am,
+	  xfce4-panel/trunk/plugins/mailcheck/Makefile.in,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.am,
+	  xfce4-panel/trunk/plugins/switcher/Makefile.in,
+	  xfce4-panel/trunk/plugins/switcher/switcher.c,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.am,
+	  xfce4-panel/trunk/plugins/systembuttons/Makefile.in,
+	  xfce4-panel/trunk/plugins/systembuttons/systembuttons.c,
+	  xfce4-panel/trunk/plugins/trash/Makefile.am,
+	  xfce4-panel/trunk/plugins/trash/Makefile.in,
+	  xfce4-panel/trunk/plugins/trash/trash.c, xfce4-panel/trunk/po,
+	  xfce4-panel/trunk/po/Makefile.in.in,
+	  xfce4-panel/trunk/po/POTFILES.in, xfce4-panel/trunk/po/nl.gmo,
+	  xfce4-panel/trunk/po/nl.po, xfce4-panel/trunk/po/xfce4-panel.pot,
+	  xfce4-panel/trunk/settings/Makefile.am,
+	  xfce4-panel/trunk/settings/Makefile.in,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c,
+	  xfce4-panel/trunk/settings/xfce_settings_plugin.c,
+	  xfce4-panel/trunk/themes/Crystal/Makefile.in,
+	  xfce4-panel/trunk/themes/Curve/Makefile.in,
+	  xfce4-panel/trunk/themes/Gnome/Makefile.in,
+	  xfce4-panel/trunk/themes/Makefile.in,
+	  xfce4-panel/trunk/themes/Noia/Makefile.in,
+	  xfce4-panel/trunk/themes/XFce/Makefile.in: Add i18n framework and
+	  Dutch translation
+
