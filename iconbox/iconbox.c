@@ -576,7 +576,7 @@ menu_about (GtkWidget *w, Iconbox *ib)
                                 _("Developer"));
 
     pb = xfce_themed_icon_load ("xfce4-iconbox", 32);
-    dlg = xfce_about_dialog_new_with_values (GTK_WINDOW (ib->win), info, pb);
+    dlg = xfce_about_dialog_new (GTK_WINDOW (ib->win), info, pb);
     g_object_unref (pb);
 
     gtk_widget_set_size_request (dlg, 400, 300);
