@@ -736,9 +736,6 @@ item_control_set_arrow_direction (Control *control, GtkArrowType type)
 {
     ItemControl *ic;
 
-    if (control->cclass->id != ICON)
-        return;
-        
     ic = control->data;
 
     if (ic->popup)
@@ -923,4 +920,6 @@ item_control_class_init (ControlClass * cc)
 
     cc->set_size = item_control_set_size;
     cc->set_theme = item_control_set_theme;
+
+    cc->set_arrow_direction = item_control_set_arrow_direction;
 }

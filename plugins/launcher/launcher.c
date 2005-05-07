@@ -37,8 +37,6 @@
 #include "launcher.h"
 #include "launcher-dialog.h"
 
-#define MENU_TIMEOUT  300
-
 XfceIconTheme *launcher_theme = NULL;
 
 
@@ -150,6 +148,18 @@ launcher_about (void)
     gtk_widget_destroy (dlg);
 
     xfce_about_info_free (info);
+}
+
+static void
+launcher_set_arrow_direction (Control *control, GtkArrowType type)
+{
+    Launcher *launcher = control->data;
+    XfceArrowButton *button = XFCE_ARROW_BUTTON (launcher->arrowbutton);
+    
+    g_return_if_fail (launcher != NULL);
+
+    if (button)
+        xfce_arrow_button_set_arrow_type (button, type);
 }
 
 static void
@@ -326,6 +336,8 @@ xfce_control_class_init (ControlClass * cc)
     cc->set_orientation = launcher_set_orientation;
     cc->set_size = launcher_set_size;
     cc->set_theme = launcher_set_theme;
+
+    cc->set_arrow_direction = launcher_set_arrow_direction;
 
     cc->about = launcher_about;
 

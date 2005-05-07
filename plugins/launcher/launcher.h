@@ -22,13 +22,14 @@
 #ifndef _XFCE_PANEL_LAUNCHER_H
 #define _XFCE_PANEL_LAUNCHER_H
 
-#define INSENSITIVE_TIMEOUT     800
+#define MENU_TIMEOUT            250
+#define INSENSITIVE_TIMEOUT     500
 #define BORDER                  6
-#define W_ARROW                 18
+#define W_ARROW                 16
 #define MENU_ICON_SIZE          24
 #define DLG_ICON_SIZE           32
 #define PANEL_ICON_SIZE         48
-/* Don't use icons without xfce- default */
+/* A bit of a hack: Don't use icons without xfce- default */
 #define NUM_CATEGORIES          (XFCE_N_BUILTIN_ICON_CATEGORIES - 4)
 
 typedef struct _Icon Icon;

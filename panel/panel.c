@@ -261,6 +261,12 @@ update_partial_struts (Panel * p)
     gdk_error_trap_pop ();
 }
 
+static GtkArrowType
+_arrow_type_from_position (Panel *p)
+{
+    return GTK_ARROW_UP;
+}
+
 static void
 update_arrow_direction (Panel * p)
 {
@@ -278,8 +284,8 @@ update_arrow_direction (Panel * p)
 	case TOP:
 	    type = GTK_ARROW_DOWN;
 	    break;
-	default:
-	    type = GTK_ARROW_UP;
+	default:            
+	    type = _arrow_type_from_position (p);
     }
 
     p->priv->popup_arrow_type = type;
@@ -288,7 +294,7 @@ update_arrow_direction (Panel * p)
     {
         Control *control = l->data;
 
-        item_control_set_arrow_direction (control, type);
+        control_set_arrow_direction (control, type);
     }
 }
 

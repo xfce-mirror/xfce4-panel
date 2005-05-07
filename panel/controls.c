@@ -1138,3 +1138,13 @@ control_set_theme (Control * control, const char *theme)
     if (cc && cc->set_theme)
 	cc->set_theme (control, theme);
 }
+
+G_MODULE_EXPORT /* EXPORT:control_set_arrow_direction */
+void
+control_set_arrow_direction (Control * control, GtkArrowType type)
+{
+    ControlClass *cc = control->cclass;
+
+    if (cc && cc->set_arrow_direction)
+	cc->set_arrow_direction (control, type);
+}

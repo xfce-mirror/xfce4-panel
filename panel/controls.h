@@ -54,6 +54,9 @@ struct _ControlClass
     void (*set_size) (Control * control, int size);
     void (*set_theme) (Control * control, const char *theme);
 
+    /* panel_side_changed */
+    void (*set_arrow_direction) (Control *control, GtkArrowType type);
+
     /* open about dialog */
     void (*about) (void);
 };
@@ -139,5 +142,9 @@ G_MODULE_IMPORT void control_set_orientation (Control * control,
 G_MODULE_IMPORT void control_set_size (Control * control, int size);
 
 G_MODULE_IMPORT void control_set_theme (Control * control, const char *theme);
+
+/* panel side */
+G_MODULE_IMPORT void control_set_arrow_direction (Control * control, 
+    						  GtkArrowType type);
 
 #endif /* __XFCE_CONTROLS_H__ */

@@ -1310,7 +1310,7 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
     gtk_widget_show (vbox);
     gtk_container_add (container, vbox);
 
-    markup = g_strdup_printf ("<b>%s</b>", _("Panel Item and Menu Items"));
+    markup = g_strdup_printf ("<b>%s</b>", _("Panel Item and Menu"));
     
     label = gtk_label_new (NULL);
     gtk_label_set_markup (GTK_LABEL (label), markup);
@@ -1320,6 +1320,8 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
 
     g_free (markup);
     
+    launcher_dialog_add_explanation (GTK_BOX (vbox));
+    
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
@@ -1328,8 +1330,6 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
  
     launcher_dialog_add_item_tree (ld, GTK_BOX (hbox));
 
-    launcher_dialog_add_explanation (GTK_BOX (vbox));
-    
     g_signal_connect (close, "clicked", 
                       G_CALLBACK (launcher_dialog_destroyed), ld);
 }
