@@ -1355,7 +1355,7 @@ create_entry_from_desktop_file (const char *path)
     if ((dentry = xfce_desktop_entry_new (path, dentry_keys, 
                                           G_N_ELEMENTS (dentry_keys))))
     {
-        char *value;
+        char *value = NULL;
 
         xfce_desktop_entry_get_string (dentry, "OnlyShowIn", FALSE, 
                                        &value);
@@ -1376,6 +1376,7 @@ create_entry_from_desktop_file (const char *path)
         xfce_desktop_entry_get_string (dentry, "Comment", FALSE,
                                        &(e->comment));
         
+        value = NULL;
         xfce_desktop_entry_get_string (dentry, "Icon", FALSE,
                                        &value);
 
@@ -1388,6 +1389,7 @@ create_entry_from_desktop_file (const char *path)
         xfce_desktop_entry_get_string (dentry, "Exec", FALSE,
                                        &(e->exec));
 
+        value = NULL;
         xfce_desktop_entry_get_string (dentry, "Terminal", FALSE,
                                        &value);
 
@@ -1399,6 +1401,7 @@ create_entry_from_desktop_file (const char *path)
         
         g_free (value);
 
+        value = NULL;
         xfce_desktop_entry_get_string (dentry, "StartupNotify", FALSE,
                                        &value);
 
