@@ -167,9 +167,6 @@ controls_dialog (Control * control)
     gtk_dialog_add_action_widget (dlg, button, GTK_RESPONSE_OK);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
 
-    /* Setting border of action area does not seem to work :( */
-    gtk_container_set_border_width (GTK_CONTAINER (button), 3);
-
     header = xfce_create_header (NULL, control->cclass->caption);
     gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child),
 				    BORDER);
