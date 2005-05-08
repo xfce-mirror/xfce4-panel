@@ -54,14 +54,8 @@
 #include "settings.h"
 #include "mcs_client.h"
 #include "controls_dialog.h"
-#include "item_dialog.h"
-#include "item-control.h"
 
 #define XFCE_PANEL_SELECTION_FMT "XFCE_PANEL_SELECTION_%u"
-
-#define RC_STRING \
-    "style \"popupbutton\" { GtkWidget::focus-padding = 0 }\n" \
-    "class \"XfceTogglebutton\" style \"popupbutton\"\n"
 
 /* signal handling */
 typedef enum
@@ -169,7 +163,6 @@ check_signal_state (void)
     {
 	/* close open dialogs */
 	destroy_controls_dialog ();
-	destroy_menu_dialog ();
 
 	if (sigstate == RESTART && !restarting)
 	{
@@ -445,9 +438,6 @@ main (int argc, char **argv)
     signal (SIGINT, sighandler);
     signal (SIGTERM, sighandler);
 #endif
-
-    /* hack to prevent arrow buttons from being cropped */
-    gtk_rc_parse_string (RC_STRING);
 
     /* copy files from old location when no Base Dir Spec compliant
      * directories are found */

@@ -37,7 +37,6 @@
 #include "controls.h"
 #include "controls_dialog.h"
 #include "add-control-dialog.h"
-#include "item-control.h"
 #include "settings.h"
 #include "mcs_client.h"
 #include "icons.h"
@@ -104,9 +103,6 @@ int border_width = 4;
 
 G_MODULE_EXPORT /* EXPORT:top_height */
 int top_height[] = { 14, 16, 18, 20 };
-
-G_MODULE_EXPORT /* EXPORT:popup_icon_size */
-int popup_icon_size[] = { 22, 26, 26, 32 };
 
 
 /* static prototypes *
@@ -792,8 +788,6 @@ extern Control *popup_control;
 static gboolean
 window_pressed_cb (GtkWidget * w, GdkEventButton * event)
 {
-    hide_current_popup_menu ();
-
     if (event->button == 3 ||
 	(event->button == 1 && event->state & GDK_SHIFT_MASK))
     {
@@ -842,9 +836,6 @@ window_move_start (Panel * p)
 /*  Autohide
  *  --------
 */
-/* FIXME even more ugly */
-extern PanelPopup *open_popup;
-
 static void
 panel_set_hidden (Panel * p, gboolean hide)
 {
@@ -925,7 +916,7 @@ static gboolean
 panel_hide_timeout (Panel * p)
 {
     /* if popup is open, keep trying */
-    if (open_popup || p->priv->block_autohide > 0)
+    if (p->priv->block_autohide > 0)
 	return TRUE;
 
     if (!p->hidden)
@@ -1219,6 +1210,13 @@ create_panel (void)
 		      G_CALLBACK (screen_size_changed), p);
 }
 
+G_MODULE_EXPORT /* EXPORT:get_current_panel */
+Panel *
+get_current_panel (void)
+{
+    return &panel;
+}
+
 /* find or act on specific groups */
 
 G_MODULE_EXPORT /* EXPORT:panel_move_control */
@@ -1305,11 +1303,6 @@ panel_add_control (Control * control, int index)
     if (index >= 0 && index < len)
 	panel_move_control (len, index);
 
-    if (control->with_popup)
-    {
-	item_control_show_popup (control, TRUE);
-    }
-
     settings.num_groups++;
 
     write_panel_config ();
@@ -1331,7 +1324,6 @@ void
 panel_set_orientation (int orientation)
 {
     gboolean hidden;
-    int pos;
     GSList *l;
 
     panel.priv->settings.orientation = orientation;
@@ -1341,8 +1333,6 @@ panel_set_orientation (int orientation)
 
     if (!panel.priv->is_created)
 	return;
-
-    hide_current_popup_menu ();
 
     hidden = settings.autohide;
     if (hidden)
@@ -1374,29 +1364,6 @@ panel_set_orientation (int orientation)
                                         GTK_ORIENTATION_HORIZONTAL);
     }
     
-    /* change popup position to make it look better 
-     * done here, because it's needed for size calculation 
-     * the setttings dialog will also change, we just 
-     * anticipate that ;-)
-     */
-    pos = settings.popup_position;
-    switch (pos)
-    {
-	case LEFT:
-	    pos = TOP;
-	    break;
-	case RIGHT:
-	    pos = BOTTOM;
-	    break;
-	case TOP:
-	    pos = LEFT;
-	    break;
-	case BOTTOM:
-	    pos = RIGHT;
-	    break;
-    }
-    panel_set_popup_position (pos);
-
     gtk_widget_size_request (panel.toplevel, &panel.priv->req);
 
     /* calls panel_set_position () */
@@ -1433,8 +1400,6 @@ panel_set_size (int size)
     if (!panel.priv->is_created)
 	return;
 
-    hide_current_popup_menu ();
-
     for (l = panel.priv->controls; l != NULL; l = l->next)
     {
         Control *control = l->data;
@@ -1444,35 +1409,6 @@ panel_set_size (int size)
 
     /* this will also resize the icons */
     panel_set_theme (panel.priv->settings.theme);
-}
-
-G_MODULE_EXPORT /* EXPORT:panel_set_popup_position */
-void
-panel_set_popup_position (int position)
-{
-    GSList *l;
-    
-    panel.priv->settings.popup_position = position;
-
-    /* backwards compat */
-    settings = panel.priv->settings;
-
-    if (!panel.priv->is_created)
-	return;
-
-    hide_current_popup_menu ();
-
-    for (l = panel.priv->controls; l != NULL; l = l->next)
-    {
-        Control *control = l->data;
-
-        item_control_set_popup_position (control, position);
-    }
-
-    update_arrow_direction (&panel);
-
-    /* this is necessary to get the right proportions */
-    panel_set_size (settings.size);
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_set_theme */
@@ -1507,7 +1443,6 @@ void
 panel_set_settings (void)
 {
     panel_set_size (settings.size);
-    panel_set_popup_position (settings.popup_position);
 
     panel_set_theme (settings.theme);
 }
@@ -1628,7 +1563,6 @@ init_settings (Panel * p)
     p->priv->settings.orientation = HORIZONTAL;
 
     p->priv->settings.size = SMALL;
-    p->priv->settings.popup_position = RIGHT;
 
     p->priv->settings.autohide = FALSE;
 
@@ -1668,17 +1602,6 @@ panel_parse_xml (xmlNodePtr node)
 	n = (int) strtol (value, NULL, 0);
 
         settings.size = CLAMP (n, TINY, LARGE);
-
-	g_free (value);
-    }
-
-    value = xmlGetProp (node, (const xmlChar *) "popupposition");
-
-    if (value)
-    {
-	n = (int) strtol (value, NULL, 0);
-
-        settings.popup_position = CLAMP (n, LEFT, BOTTOM);
 
 	g_free (value);
     }
@@ -1847,9 +1770,6 @@ panel_write_xml (xmlNodePtr root)
     snprintf (value, 2, "%d", settings.size);
     xmlSetProp (node, "size", value);
 
-    snprintf (value, 2, "%d", settings.popup_position);
-    xmlSetProp (node, "popupposition", value);
-
     child = xmlNewTextChild (node, NULL, "Position", NULL);
 
     snprintf (value, 5, "%d", panel.priv->monitor);
@@ -1932,7 +1852,7 @@ old_groups_set_from_xml (int side, xmlNodePtr node)
 	    }
 
             if (control_created && popup_node)
-                item_control_add_popup_from_xml (control, popup_node);
+                control_add_popup_from_xml (control, popup_node);
 	}
 
 	if (!control_created)
@@ -1981,7 +1901,9 @@ groups_set_from_xml (xmlNodePtr node)
 		    control_set_from_xml (control, child);
 
                 if (control_created && popup_node)
-                    item_control_add_popup_from_xml (control, popup_node);
+                {
+                    control_add_popup_from_xml (control, popup_node);
+                }
 	    }
 	}
 
@@ -2011,8 +1933,6 @@ groups_write_xml (xmlNodePtr root)
 
 	child = xmlNewTextChild (node, NULL, "Group", NULL);
 
-        /* special case for launchers */
-        item_control_write_popup_xml (control, child);
 	control_write_xml (control, child);
     }
 }
@@ -2041,6 +1961,8 @@ menu_destroyed (GtkWidget * menu, Panel * p)
         
         set_translucent (p, TRUE);
     }
+
+    g_signal_handlers_disconnect_by_func (menu, menu_destroyed, p);
 }
 
 G_MODULE_EXPORT /* EXPORT:panel_register_open_menu */

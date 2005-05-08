@@ -38,8 +38,6 @@
 
 #include "xfce.h"
 #include "settings.h"
-#include "item-control.h"
-#include "item.h"
 
 #define ROOT	"Xfce"
 #define NS	"http://www.xfce.org/xfce4/panel/1.0"

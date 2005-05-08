@@ -205,9 +205,6 @@ old_xml_start_element (GMarkupParseContext * context,
 	    case XFCE_SIZE:
 		opt.type = MCS_TYPE_INT;
 		break;
-	    case XFCE_POPUPPOSITION:
-		opt.type = MCS_TYPE_INT;
-		break;
 	    case XFCE_THEME:
 		opt.type = MCS_TYPE_STRING;
 		break;
@@ -316,10 +313,6 @@ xfce_init_options (void)
 		opt.data.v_int = 0;
 		break;
 	    case XFCE_SIZE:
-		opt.type = MCS_TYPE_INT;
-		opt.data.v_int = 1;
-		break;
-	    case XFCE_POPUPPOSITION:
 		opt.type = MCS_TYPE_INT;
 		opt.data.v_int = 1;
 		break;

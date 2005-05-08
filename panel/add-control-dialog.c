@@ -30,6 +30,8 @@
 
 #include "add-control-dialog.h"
 
+#define BORDER  8
+
 typedef struct
 {
     Panel *panel;
@@ -106,11 +108,11 @@ add_control_dialog (Panel * panel, int position)
 
     add_header (GTK_BOX (vbox));
 
-    add_spacer (GTK_BOX (vbox), 12);
+    add_spacer (GTK_BOX (vbox), BORDER);
 
     list = add_control_list (GTK_BOX (vbox));
 
-    add_spacer (GTK_BOX (vbox), 12);
+    add_spacer (GTK_BOX (vbox), BORDER);
 
     list->panel = panel;
     list->position = position;
@@ -297,7 +299,7 @@ add_control_list (GtkBox * box)
     GdkColor color;
 
     scroll = gtk_scrolled_window_new (NULL, NULL);
-    gtk_container_set_border_width (GTK_CONTAINER (scroll), 6);
+    gtk_container_set_border_width (GTK_CONTAINER (scroll), BORDER);
     gtk_widget_show (scroll);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
 				    GTK_POLICY_NEVER, GTK_POLICY_ALWAYS);

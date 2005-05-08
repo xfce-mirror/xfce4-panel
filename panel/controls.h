@@ -113,13 +113,13 @@ G_MODULE_IMPORT Control *control_new (int index);
 G_MODULE_IMPORT void control_swap_base (Control * control,
                                         GtkWidget * newbase);
 
-G_MODULE_IMPORT gboolean create_control (Control * control, int id,
-                                         const char *filename);
-
 G_MODULE_IMPORT void control_free (Control * control);
 
 G_MODULE_IMPORT gboolean control_set_from_xml (Control * control,
                                                xmlNodePtr node);
+
+G_MODULE_IMPORT void control_add_popup_from_xml (Control * control,
+                                                 xmlNodePtr node);
 
 G_MODULE_IMPORT void control_write_xml (Control * control, xmlNodePtr parent);
 

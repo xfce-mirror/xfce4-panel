@@ -43,6 +43,8 @@ XfceIconTheme *launcher_theme = NULL;
 /* prototypes */
 static Launcher *launcher_new (void);
 
+static void launcher_menu_read_old_xml (Launcher *launcher, xmlNodePtr node);
+
 static void launcher_read_xml (Launcher *launcher, xmlNodePtr node);
 
 static void launcher_write_xml (Launcher *launcher, xmlNodePtr node);
@@ -321,7 +323,7 @@ xfce_control_class_init (ControlClass * cc)
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
     cc->name = "launcher";
-    cc->caption = _("Alternative Launcher");
+    cc->caption = _("Launcher");
 
     cc->create_control = (CreateControlFunc) create_launcher_control;
 
@@ -346,6 +348,18 @@ xfce_control_class_init (ControlClass * cc)
 
 /* Macro that checks panel API version */
 XFCE_PLUGIN_CHECK_INIT
+
+G_MODULE_EXPORT
+void
+launcher_add_popup_from_xml (Control *control, xmlNodePtr node)
+{
+    Launcher *launcher = control->data;
+
+    launcher_menu_read_old_xml (launcher, node);
+
+    if (launcher->items != NULL)
+        gtk_widget_show (launcher->arrowbutton);
+}
 
 /* Launcher: plugin implementation *
  * ------------------------------- */
@@ -590,6 +604,8 @@ real_toggle_menu (Launcher *launcher)
     
     if (launcher->items)
     {
+        panel_register_open_menu (launcher->menu);
+
         gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL, 
                         (GtkMenuPositionFunc) launcher_position_menu, 
                         launcher->arrowbutton, 0, 
@@ -888,9 +904,187 @@ create_entry_from_xml (xmlNodePtr node)
     return entry;
 }
 
-static void
-launcher_read_old_xml (Launcher *launcher, xmlNodePtr node)
+static Entry *
+entry_from_old_xml (xmlNodePtr node)
 {
+    const gchar *locale;
+    xmlNodePtr child;
+    xmlChar   *value;
+    xmlChar   *lang;
+    gboolean   caption_found = FALSE;
+    guint      caption_match = XFCE_LOCALE_NO_MATCH;
+    gboolean   tooltip_found = FALSE;
+    guint      tooltip_match = XFCE_LOCALE_NO_MATCH;
+    guint      match;
+    Entry     *entry;
+
+    locale = setlocale (LC_MESSAGES, NULL);
+
+    entry = g_new0 (Entry, 1);
+    
+    for (child = node->children; child; child = child->next)
+    {
+	if (xmlStrEqual (child->name, (const xmlChar *) "Caption"))
+	{
+	    value = DATA (child);
+
+	    if (value != NULL)
+            {
+                lang = xmlNodeGetLang (child);
+            
+                if (lang != NULL)
+                {
+                    match = xfce_locale_match (locale, (const gchar *) lang);
+                    xmlFree (lang);
+                }
+                else
+                {
+                    match = XFCE_LOCALE_NO_MATCH;
+                }
+
+                if (match > caption_match || !caption_found)
+                {
+                    g_free (entry->name);
+		    entry->name = g_strdup ((const char *) value);
+                    caption_match = match;
+                    caption_found = TRUE;
+                }
+
+                xmlFree (value);
+            }
+	}
+	else if (xmlStrEqual (child->name, (const xmlChar *) "Command"))
+	{
+	    int n = -1;
+
+	    value = DATA (child);
+
+	    if (value)
+		entry->exec = (char *) value;
+
+	    value = xmlGetProp (child, "term");
+
+	    if (value)
+	    {
+		n = (int) strtol (value, NULL, 0);
+		g_free (value);
+	    }
+
+	    if (n == 1)
+	    {
+		entry->terminal = TRUE;
+	    }
+	    else
+	    {
+		entry->terminal = FALSE;
+	    }
+
+	    n = -1;
+	    value = xmlGetProp (child, "sn");
+
+	    if (value)
+	    {
+		n = (int) strtol (value, NULL, 0);
+		g_free (value);
+	    }
+
+	    if (n == 1)
+	    {
+		entry->startup = TRUE;
+	    }
+	    else
+	    {
+		entry->startup = FALSE;
+	    }
+
+	}
+	else if (xmlStrEqual (child->name, (const xmlChar *) "Tooltip"))
+	{
+	    value = DATA (child);
+
+	    if (value != NULL)
+            {
+                lang = xmlNodeGetLang (child);
+                if (lang != NULL)
+                {
+                    match = xfce_locale_match (locale, (const gchar *) lang);
+                    xmlFree (lang);
+                }
+                else
+                {
+                    match = XFCE_LOCALE_NO_MATCH;
+                }
+
+                if (match > tooltip_match || !tooltip_found)
+                {
+                    g_free (entry->comment);
+                    entry->comment = g_strdup ((const char *) value);
+                    tooltip_match = match;
+                    tooltip_found = TRUE;
+                }
+
+                xmlFree (value);
+            }
+	}
+	else if (xmlStrEqual (child->name, (const xmlChar *) "Icon"))
+	{
+            int n;
+            
+	    value = xmlGetProp (child, (const xmlChar *) "id");
+
+	    if (value)
+            {
+                n = (int) strtol (value, NULL, 0);
+
+                g_free (value);
+
+                if (n == EXTERN_ICON)
+                {
+                    entry->icon.type = ICON_TYPE_NAME;
+                    
+                    value = DATA (child);
+
+                    if (value)
+                        entry->icon.icon.name = (char *) value;
+                }
+                else
+                {
+                    entry->icon.type = ICON_TYPE_CATEGORY;
+                    
+                    entry->icon.icon.category = CLAMP (n, 0, NUM_CATEGORIES);
+                }
+            }
+	}
+    }
+
+    if (entry->exec)
+    {
+        if (!entry->name)
+            entry->name = g_strdup (entry->exec);
+
+        return entry;
+    }
+
+    g_print (" ++ no entry created\n");
+
+    entry_free (entry);
+    return NULL;
+}
+
+static void
+launcher_menu_read_old_xml (Launcher *launcher, xmlNodePtr node)
+{
+    for (node = node->children; node != NULL; node = node->next)
+    {
+        Entry *entry = entry_from_old_xml (node);
+
+        if (entry)
+            launcher->items = g_list_prepend (launcher->items, entry);
+    }
+
+    launcher_update_panel_entry (launcher);
+
+    launcher_recreate_menu (launcher);
 }
 
 static void
@@ -903,7 +1097,16 @@ launcher_read_xml (Launcher *launcher, xmlNodePtr node)
     
     if (!xmlStrEqual (node->children->name, (const xmlChar *) "launcher"))
     {
-        launcher_read_old_xml (launcher, node);
+        Entry *entry = entry_from_old_xml (node);
+
+        if (entry)
+        {
+            entry_free (launcher->entry);
+            launcher->entry = entry;
+
+            launcher_update_panel_entry (launcher);
+        }
+        
         return;
     }
     

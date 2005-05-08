@@ -38,9 +38,8 @@
 #include "controls_dialog.h"
 #include "panel.h"
 #include "settings.h"
-#include "item-control.h"
 
-#define BORDER 6
+#define BORDER 8
 
 static GtkWidget *cdialog = NULL;
 
@@ -154,12 +153,14 @@ controls_dialog (Control * control)
 
     gtk_window_set_title (GTK_WINDOW (dlg), _("Item properties"));
 
+#if 0
     button = gtk_button_new_from_stock (GTK_STOCK_REMOVE);
     gtk_widget_show (button);
     gtk_dialog_add_action_widget (dlg, button, GTK_RESPONSE_CANCEL);
     GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
     gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (dlg->action_area),
 					button, TRUE);
+#endif
 
     close = button = gtk_button_new_from_stock (GTK_STOCK_CLOSE);
     gtk_widget_show (button);
@@ -169,7 +170,6 @@ controls_dialog (Control * control)
     header = xfce_create_header (NULL, control->cclass->caption);
     gtk_container_set_border_width (GTK_CONTAINER (GTK_BIN (header)->child),
 				    BORDER);
-    gtk_widget_set_size_request (header, -1, 32);
     gtk_widget_show (header);
     gtk_box_pack_start (GTK_BOX (dlg->vbox), header, FALSE, TRUE, 0);
 
@@ -187,38 +187,14 @@ controls_dialog (Control * control)
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
-    /* run dialog until 'Close' or 'Remove' */
-    while (1)
-    {
-        response = GTK_RESPONSE_NONE;
+    response = GTK_RESPONSE_NONE;
 
-        gtk_widget_grab_default (close);
-        gtk_widget_grab_focus (close);
+    gtk_widget_grab_default (close);
+    gtk_widget_grab_focus (close);
 
-        response = gtk_dialog_run (dlg);
+    response = gtk_dialog_run (dlg);
 
-        gtk_widget_hide (cdialog);
-
-        if (response == GTK_RESPONSE_CANCEL)
-        {
-            PanelPopup *pp;
-
-            pp = item_control_get_popup (control);
-
-            if (!control->with_popup || !pp || 
-                panel_popup_get_n_items (pp) == 0 ||
-                xfce_confirm (_("Removing the item will also remove "
-                                "its popup menu."), GTK_STOCK_REMOVE, NULL))
-            {
-                panel_remove_control (control->index);
-                break;
-            }
-        }
-        else
-        {
-            break;
-        }
-    }
+    gtk_widget_hide (cdialog);
 
     gtk_widget_destroy (cdialog);
 

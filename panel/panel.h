@@ -59,13 +59,14 @@ struct _Panel
 G_MODULE_IMPORT void create_panel (void);
 G_MODULE_IMPORT void panel_cleanup (void);
 
+G_MODULE_IMPORT Panel *get_current_panel (void);
+
 /* global settings */
 G_MODULE_IMPORT void panel_set_settings (void);
 
 G_MODULE_IMPORT void panel_set_orientation (int orientation);
 
 G_MODULE_IMPORT void panel_set_size (int size);
-G_MODULE_IMPORT void panel_set_popup_position (int position);
 G_MODULE_IMPORT void panel_set_theme (const char *theme);
 
 G_MODULE_IMPORT void panel_set_autohide (gboolean hide);

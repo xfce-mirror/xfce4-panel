@@ -28,7 +28,6 @@
 #include <libxfcegui4/libxfcegui4.h>
 
 #include <panel/xfce.h>
-#include <panel/item-control.h>
 #include <panel/settings.h>
 #include <panel/plugins.h>
 
@@ -151,8 +150,6 @@ static gboolean
 screen_button_pressed_cb (GtkButton * b, GdkEventButton * ev,
 			  ScreenButton * sb)
 {
-    hide_current_popup_menu ();
-
     if (ev->button == 1)
     {
 	netk_workspace_activate (sb->workspace);

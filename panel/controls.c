@@ -50,8 +50,6 @@
 #include "xfce-itembar.h"
 
 #include "xfce.h"
-#include "item.h"
-#include "item-control.h"
 #include "plugins.h"
 #include "controls_dialog.h"
 #include "add-control-dialog.h"
@@ -304,8 +302,17 @@ load_plugin (gchar * path)
 	}
 	else
 	{
-	    control_class_info_list =
-		g_slist_append (control_class_info_list, info);
+            /* make sure the launcher plugin is first */
+            if (strcmp (cc->name, "launcher") == 0)
+            {
+                control_class_info_list =
+                    g_slist_prepend (control_class_info_list, info);
+            }
+            else
+            {
+                control_class_info_list =
+                    g_slist_append (control_class_info_list, info);
+            }
 
 	    cc->filename = g_path_get_basename (path);
 	    info->path = g_strdup (path);
@@ -356,8 +363,25 @@ load_plugin_dir (const char *dir)
 static void
 add_plugin_classes (void)
 {
+    char *home_plugins = NULL;
+    const char *var;
+    
     wait_for_unloading ();
     unloading++;
+
+    if ((var = g_getenv ("XFCE_PLUGIN_HOME")))
+    {
+        home_plugins = g_strdup (var);
+    }
+    else
+    {
+        home_plugins = g_build_filename (xfce_get_homedir (), ".local", 
+                                         "lib", "xfce4", "panel-plugins", 
+                                         NULL);
+    }
+    
+    load_plugin_dir (home_plugins);
+    g_free (home_plugins);
 
     load_plugin_dir (LIBDIR G_DIR_SEPARATOR_S PLUGINDIR);
 
@@ -371,7 +395,7 @@ clean_plugin_classes (void)
 
     prev = control_class_info_list;
 
-    for (li = control_class_info_list->next; li; li = li->next)
+    for (li = control_class_info_list; li; li = li->next)
     {
 	ControlClassInfo *info = li->data;
 
@@ -399,25 +423,6 @@ clean_plugin_classes (void)
     }
 }
 
-/*  builtin launcher class */
-
-static void
-add_launcher_class (void)
-{
-    ControlClassInfo *info;
-    ControlClass *cc;
-
-    info = g_new0 (ControlClassInfo, 1);
-    cc = info->class = g_new0 (ControlClass, 1);
-
-    item_control_class_init (cc);
-
-    info->name = g_strdup (cc->name);
-    info->caption = g_strdup (cc->caption);
-
-    control_class_info_list = g_slist_append (NULL, info);
-}
-
 /* module unloading timeout */
 
 static gboolean
@@ -430,8 +435,7 @@ unload_modules (void)
 
     unloading++;
 
-    /* first item is launcher */
-    for (li = control_class_info_list->next; li != NULL; li = li->next)
+    for (li = control_class_info_list; li != NULL; li = li->next)
     {
 	ControlClassInfo *info = li->data;
 
@@ -457,8 +461,6 @@ G_MODULE_EXPORT /* EXPORT:control_class_list_init */
 void
 control_class_list_init (void)
 {
-    /* prepend class info to the list */
-    add_launcher_class ();
     add_plugin_classes ();
 
     unload_id =
@@ -652,7 +654,6 @@ insert_control (Panel * panel, const char *name, int position)
 
     if (control_class_info_create_control (info, control))
     {
-	hide_current_popup_menu ();
 	panel_add_control (control, position);
 	control_attach_callbacks (control);
 	control_set_settings (control);
@@ -705,14 +706,10 @@ remove_control (void)
 {
     if (popup_control)
     {
-	PanelPopup *pp;
-
-	pp = item_control_get_popup (popup_control);
-
-	if (!popup_control->with_popup || !pp || 
-            panel_popup_get_n_items (pp) == 0 ||
-	    xfce_confirm (_("Removing the item will also remove "
-			    "its popup menu."), GTK_STOCK_REMOVE, NULL))
+        char *msg = g_strdup_printf (_("Remove %s item?"), 
+                                     popup_control->cclass->caption);
+        
+	if (xfce_confirm (msg, GTK_STOCK_REMOVE, NULL))
 	{
 	    panel_remove_control (popup_control->index);
 	}
@@ -779,8 +776,6 @@ control_press_cb (GtkWidget * b, GdkEventButton * ev, Control * control)
     {
 	GtkWidget *menu, *item, *label;
 
-	hide_current_popup_menu ();
-
 	gtk_widget_grab_focus (b);
 
 	popup_control = control;
@@ -826,35 +821,13 @@ create_plugin (Control * control, const char *filename)
     return control_class_info_create_control (info, control);
 }
 
-static void
-create_launcher (Control * control)
-{
-    ControlClassInfo *info;
-
-    /* we know it is the first item in the list */
-    info = control_class_info_list->data;
-    control->cclass = info->class;
-
-    /* we also assume it never fails ;-) */
-    info->class->create_control (control);
-    info->refcount++;
-}
-
-G_MODULE_EXPORT /* EXPORT:create_control */
-gboolean
+static gboolean
 create_control (Control * control, int id, const char *filename)
 {
     ControlClass *cc;
 
-    if (id == PLUGIN)
-    {
-	if (!create_plugin (control, filename))
-	    goto failed;
-    }
-    else
-    {
-	create_launcher (control);
-    }
+    if (!create_plugin (control, filename))
+        goto failed;
 
     /* the control class is set in the create_* functions above */
     cc = control->cclass;
@@ -1018,6 +991,8 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 
     if (id == PLUGIN)
 	filename = (char *) xmlGetProp (node, (const xmlChar *) "filename");
+    else
+        filename = g_strdup ("liblauncher.so");
 
     /* create a default control of specified type */
     if (!create_control (control, id, filename))
@@ -1028,14 +1003,35 @@ control_set_from_xml (Control * control, xmlNodePtr node)
 
     g_free (filename);
 
-    /* hide popup? also check if added to the panel */
-    if (control->with_popup && control->base->parent)
-	item_control_show_popup (control, TRUE);
-
     /* allow the control to read its configuration */
     control_read_config (control, node);
 
     return TRUE;
+}
+
+G_MODULE_EXPORT /* EXPORT:control_add_popup_from_xml */
+void 
+control_add_popup_from_xml (Control * control, xmlNodePtr node)
+{
+    gpointer tmp;
+    void (*func)(Control *control, xmlNodePtr node);
+    
+    if (strcmp (control->cclass->name, "launcher") != 0)
+    {
+        DBG (" ++ Not a launcher:%d\n", control->index);
+        return;
+    }
+    
+    if (!g_module_symbol (control->cclass->gmodule, 
+                          "launcher_add_popup_from_xml", &tmp))
+    {
+        DBG (" ++ Function not found to add menu\n");
+        return;
+    }
+
+    func = tmp;
+
+    func (control, node);
 }
 
 G_MODULE_EXPORT /* EXPORT:control_write_xml */

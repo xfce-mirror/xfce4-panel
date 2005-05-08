@@ -54,7 +54,6 @@ static GHashTable *settings_hash = NULL;
 static gpointer settings_callbacks[] = {
     panel_set_orientation,
     panel_set_size,
-    panel_set_popup_position,
     panel_set_theme,
     panel_set_autohide,
     panel_set_full_width,

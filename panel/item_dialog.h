@@ -1,6 +1,6 @@
 /*  $Id$
  *
- *  Copyright 2003-2004 Jasper Huijsmans (jasper@xfce.org)
+ *  Copyright 2003-2005 Jasper Huijsmans (jasper@xfce.org)
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 #define __XFCE_ITEM_DIALOG_H__
 
 #include <gmodule.h>
-#include <panel/item.h>
 
 /* CommandOptions
  * --------------
@@ -112,20 +111,5 @@ G_MODULE_IMPORT void icon_options_set_callback (IconOptions * opts,
 						  gpointer), gpointer data);
 
 G_MODULE_IMPORT void icon_options_get_icon (IconOptions * opts, int *id, char **path);
-
-
-/* PanelItem and MenuItem dialogs
- * ------------------------------
- * These functions should only be used by the panel 
-*/
-G_MODULE_IMPORT void create_item_dialog (Control *control, Item *item, 
-    					 GtkContainer * container,
-					 GtkWidget * done);
-
-G_MODULE_IMPORT void edit_menu_item_dialog (Item * mi);
-
-G_MODULE_IMPORT void add_menu_item_dialog (PanelPopup * pp);
-
-G_MODULE_IMPORT void destroy_menu_dialog (void);
 
 #endif /* __XFCE_ITEM_DIALOG_H__ */

@@ -15,10 +15,6 @@ xfce4_panel_SOURCES =						\
 	global.h 						\
 	icons.c 						\
 	icons.h 						\
-	item-control.c 							\
-	item-control.h 							\
-	item.c 							\
-	item.h 							\
 	item_dialog.c 						\
 	item_dialog.h 						\
 	main.c							\
@@ -43,7 +39,6 @@ xfce4_panelinclude_HEADERS =					\
 	icons.h 						\
 	main.h 							\
 	panel.h 						\
-	item.h							\
 	item_dialog.h						\
 	plugins.h 						\
 	xfce_support.h 						\

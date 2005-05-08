@@ -47,12 +47,11 @@
 typedef struct _Panel Panel;
 typedef struct _ControlClass ControlClass;
 typedef struct _Control Control;
-typedef struct _PanelPopup PanelPopup;
 typedef struct _Item Item;
 typedef struct _Settings Settings;
 typedef struct _Position Position;
 
-/* panel sides / popup orientation */
+/* panel sides */
 enum
 { LEFT, RIGHT, TOP, BOTTOM };
 
@@ -80,7 +79,6 @@ struct _Settings
     int layer;
 
     int size;
-    int popup_position;
 
     int autohide;
 
@@ -104,8 +102,5 @@ G_MODULE_IMPORT int icon_size[PANEL_SIZES];
 G_MODULE_IMPORT int border_width;
 
 G_MODULE_IMPORT int top_height[PANEL_SIZES];
-
-G_MODULE_IMPORT int popup_icon_size[PANEL_SIZES];
-
 
 #endif /* __XFCE_GLOBAL_H__ */

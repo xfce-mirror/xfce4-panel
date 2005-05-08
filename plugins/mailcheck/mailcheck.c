@@ -53,7 +53,7 @@
 
 #define MAILCHECK_ROOT "Mailcheck"
 
-#define BORDER 6
+#define BORDER 8
 
 static GtkTooltips *tooltips = NULL;
 
