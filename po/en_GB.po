@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-23 18:06+0200\n"
+"POT-Creation-Date: 2005-05-10 22:10+0200\n"
 "PO-Revision-Date: 2004-12-03 18:06+0200\n"
 "Last-Translator: Translate.org.za <info@translate.org.za>\n"
 "Language-Team: \n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: panel/xfce_support.c:556
+#: panel/xfce_support.c:557
 msgid "Select file"
 msgstr "Select file"
 
-#: panel/settings.c:179
+#: panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "No data was found. The panel will be empty."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1161
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Position:"
 
@@ -61,44 +61,44 @@ msgstr "Other Icon"
 msgid "Drag file onto this frame to change the icon"
 msgstr "Drag file onto this frame to change the icon"
 
-#: panel/item_dialog.c:921
+#: panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "Caption:"
 
-#: panel/item_dialog.c:950
+#: panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "Tooltip:"
 
-#: panel/item_dialog.c:978
+#: panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "Attach menu to launcher"
 
-#: panel/item_dialog.c:1198
+#: panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "Change menu item"
 
 #. add buttons
-#: panel/item_dialog.c:1204 panel/controls.c:748
+#: panel/item_dialog.c:1221 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Remove"
 
-#: panel/item_dialog.c:1216 panel/item.c:668
+#: panel/item_dialog.c:1233 panel/item.c:738
 msgid "Launcher"
 msgstr "Launcher"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Click mouse button 3 to change item"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Add launcher"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Add new item"
 
-#: panel/main.c:121
+#: panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "Are you sure you want to exit?"
 
@@ -140,11 +140,11 @@ msgstr "%s: Successfully started with session management"
 msgid "Could not create panel item \"%s\"."
 msgstr "Could not create panel item \"%s\"."
 
-#: panel/controls.c:743 panel/panel.c:639
+#: panel/controls.c:743 panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Properties..."
 
-#: panel/controls.c:757 panel/panel.c:629
+#: panel/controls.c:757 panel/panel.c:637
 msgid "Add _new item"
 msgstr "Add _new item"
 
@@ -152,28 +152,28 @@ msgstr "Add _new item"
 msgid "This item has no configuration options"
 msgstr "This item has no configuration options"
 
-#: panel/panel.c:620 panel/panel.c:1042 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:451
+#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: panel/panel.c:644
+#: panel/panel.c:652
 msgid "_About Xfce"
 msgstr "_About Xfce"
 
-#: panel/panel.c:649
+#: panel/panel.c:657
 msgid "_Help"
 msgstr "_Help"
 
-#: panel/panel.c:658
+#: panel/panel.c:666
 msgid "_Lock screen"
 msgstr "_Lock screen"
 
-#: panel/panel.c:663
+#: panel/panel.c:671
 msgid "_Restart"
 msgstr "_Restart"
 
-#: panel/panel.c:672
+#: panel/panel.c:680
 msgid "E_xit"
 msgstr "E_xit"
 
@@ -237,75 +237,75 @@ msgstr "Settings manager not available"
 msgid "Menu"
 msgstr "Menu"
 
-#: settings/xfce_settings_dialog.c:88
+#: settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "Small"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Medium"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "Large"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Huge"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Vertical"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Left"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Right"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Top"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Bottom"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Panel size:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Panel orientation:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Popup position:"
 
-#: settings/xfce_settings_dialog.c:344
+#: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "Always on top:"
 
-#: settings/xfce_settings_dialog.c:398
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Autohide:"
 
-#: settings/xfce_settings_dialog.c:468
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce Panel Settings"
 
-#: settings/xfce_settings_dialog.c:478
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Appearance"
 
-#: settings/xfce_settings_dialog.c:493
+#: settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "Behaviour"
 
@@ -317,59 +317,59 @@ msgstr "Behaviour"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:202
+#: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%A, %-e %B %Y"
 
-#: plugins/clock/clock.c:429
+#: plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "Clock type:"
 
-#: plugins/clock/clock.c:442
+#: plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "Analogue"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "Digital"
 
-#: plugins/clock/clock.c:450
+#: plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:512
+#: plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "Hour mode:"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24 hour"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12 hour"
 
-#: plugins/clock/clock.c:531
+#: plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:569
+#: plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "Show seconds:"
 
-#: plugins/clock/clock.c:682
+#: plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Xfce Clock"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Number of rows:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Number of columns:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Graphical pager"
 
@@ -432,27 +432,26 @@ msgstr "System buttons"
 msgid "Separator"
 msgstr "Separator"
 
-#: plugins/mailcheck/mailcheck.c:836
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Mail box:"
 
-#: plugins/mailcheck/mailcheck.c:873
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "New mail command:"
 
-#: plugins/mailcheck/mailcheck.c:887
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Command to run when new mail arrives"
 
-#: plugins/mailcheck/mailcheck.c:917
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Command to run when the button on the panel is clicked"
 
-#: plugins/mailcheck/mailcheck.c:938
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Interval (sec):"
 
-#: plugins/mailcheck/mailcheck.c:1014
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Mail checker"
-

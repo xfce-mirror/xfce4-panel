@@ -10,25 +10,24 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-29 11:29+0200\n"
+"POT-Creation-Date: 2005-05-10 22:10+0200\n"
 "PO-Revision-Date: 2005-03-10 10:57+0100\n"
+"Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 
-#: panel/xfce_support.c:516
+#: panel/xfce_support.c:557
 msgid "Select file"
 msgstr "Fájl kiválasztása"
 
-#: panel/settings.c:179
+#: panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "Nincs adat. A panel üres lesz."
 
-#: panel/controls_dialog.c:89
-#: panel/item_dialog.c:1157
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Helyzet:"
 
@@ -36,76 +35,72 @@ msgstr "Helyzet:"
 msgid "Item properties"
 msgstr "Tulajdonságok"
 
-#: panel/controls_dialog.c:209
-#: panel/controls.c:691
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Az elem eltávolítása a menüjét is eltávolítja."
 
-#: panel/item_dialog.c:123
-#: panel/item_dialog.c:551
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Parancs kiválasztása"
 
-#: panel/item_dialog.c:264
+#: panel/item_dialog.c:268
 msgid "Command:"
 msgstr "Parancs:"
 
-#: panel/item_dialog.c:307
+#: panel/item_dialog.c:311
 msgid "Run in _terminal"
 msgstr "_Terminálban futtatás"
 
-#: panel/item_dialog.c:325
+#: panel/item_dialog.c:329
 msgid "Use startup _notification"
 msgstr "Indításkor _figyelmeztetés bekapcsolása"
 
-#: panel/item_dialog.c:511
+#: panel/item_dialog.c:515
 msgid "Other Icon"
 msgstr "Más ikon"
 
-#: panel/item_dialog.c:622
+#: panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
 msgstr "Húzd a fájlt e keretre az ikon megváltoztatásához"
 
-#: panel/item_dialog.c:917
+#: panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "Címke:"
 
-#: panel/item_dialog.c:946
+#: panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "Tipp:"
 
-#: panel/item_dialog.c:974
+#: panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "Menü csatolása az indítóhoz"
 
-#: panel/item_dialog.c:1194
+#: panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "Menüelem módosítása"
 
 #. add buttons
-#: panel/item_dialog.c:1200
-#: panel/controls.c:728
+#: panel/item_dialog.c:1221 panel/controls.c:748
 msgid "_Remove"
 msgstr "Tö_rlés"
 
-#: panel/item_dialog.c:1212
-#: panel/item.c:668
+#: panel/item_dialog.c:1233 panel/item.c:738
 msgid "Launcher"
 msgstr "Indító"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Az elem módosításához kattints a 2. egérgombra"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Indító hozzáadása"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Panelra helyezés"
 
-#: panel/main.c:121
+#: panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "Biztosan ki akarsz lépni?"
 
@@ -141,49 +136,45 @@ msgstr "%s: Sikeres indulás folyamatkezelés nélkül"
 msgid "%s: Successfully started with session management"
 msgstr "%s: Sikeres indulás folyamatkezeléssel"
 
-#: panel/controls.c:646
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Nem sikerült lérehozni ezt a panelelemet: \"%s\"."
 
-#: panel/controls.c:723
-#: panel/panel.c:585
+#: panel/controls.c:743 panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Tulajdonságok..."
 
-#: panel/controls.c:737
-#: panel/panel.c:575
+#: panel/controls.c:757 panel/panel.c:637
 msgid "Add _new item"
 msgstr "Új _elem hozzáadása"
 
-#: panel/controls.c:1020
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Ennek az elemnek nincsenek beállítási lehetőségei"
 
-#: panel/panel.c:566
-#: panel/panel.c:980
-#: settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:449
+#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce panel"
 
-#: panel/panel.c:590
+#: panel/panel.c:652
 msgid "_About Xfce"
 msgstr "Xfce _névjegy"
 
-#: panel/panel.c:595
+#: panel/panel.c:657
 msgid "_Help"
 msgstr "/_Súgó"
 
-#: panel/panel.c:604
+#: panel/panel.c:666
 msgid "_Lock screen"
 msgstr "Képernyő_zár"
 
-#: panel/panel.c:609
+#: panel/panel.c:671
 msgid "_Restart"
 msgstr "Újra_indítás"
 
-#: panel/panel.c:618
+#: panel/panel.c:680
 msgid "E_xit"
 msgstr "_Kilépés"
 
@@ -247,55 +238,55 @@ msgstr "Beállításkezelő nem elérhető"
 msgid "Menu"
 msgstr "Menü"
 
-#: settings/xfce_settings_dialog.c:88
+#: settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "Kicsi"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Közepes"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "Nagy"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Óriás"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Vízszintes"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Függőleges"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Balra"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Jobbra"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Felül"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Alul"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Panel mérete:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Panel tájolása:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Legördülő menü helye:"
 
@@ -303,76 +294,83 @@ msgstr "Legördülő menü helye:"
 msgid "Always on top:"
 msgstr "Mindig felül:"
 
-#: settings/xfce_settings_dialog.c:396
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Automatikus el_rejtés:"
 
-#: settings/xfce_settings_dialog.c:466
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce panel beállításai"
 
-#: settings/xfce_settings_dialog.c:476
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: settings/xfce_settings_dialog.c:491
+#: settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "Láthatóság"
 
 #. Use format characters from strftime(3)
-#: plugins/clock/clock.c:202
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%Y. %B %d., %A"
 
-#: plugins/clock/clock.c:429
+#: plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "Óra jellege:"
 
-#: plugins/clock/clock.c:442
+#: plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "Analóg"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "Digitális"
 
-#: plugins/clock/clock.c:450
+#: plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:512
+#: plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "Időformátum:"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24 órás"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12 órás"
 
-#: plugins/clock/clock.c:531
+#: plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "de./du."
 
-#: plugins/clock/clock.c:569
+#: plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "Másodpercek kijelzése:"
 
-#: plugins/clock/clock.c:682
+#: plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Xfce óra"
 
-#: plugins/pager/pager.c:311
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Sorok száma:"
 
-#: plugins/pager/pager.c:313
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Oszlopok száma:"
 
-#: plugins/pager/pager.c:360
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Grafikus lapozó"
 
@@ -435,143 +433,111 @@ msgstr "Rendszergombok"
 msgid "Separator"
 msgstr "Elválasztó"
 
-#: plugins/mailcheck/mailcheck.c:787
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Postaláda:"
 
-#: plugins/mailcheck/mailcheck.c:824
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Új levél parancs:"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Új levél érkezésekor futtatandó parancs"
 
-#: plugins/mailcheck/mailcheck.c:868
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "A panelen levő gomb megnyomásakor futtatandó parancs"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Gyakoriság (másodperc):"
 
-#: plugins/mailcheck/mailcheck.c:965
+#: plugins/mailcheck/mailcheck.c:1016
 #, fuzzy
 msgid "Mail checker"
 msgstr "Új levelek keresése"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:278
-#: xftaskbar/plugin/xftaskbar_plugin.c:285
-#: xftaskbar/plugin/xftaskbar_plugin.c:533
-msgid "Taskbar"
-msgstr "Feladatsáv"
+#~ msgid "Taskbar"
+#~ msgstr "Feladatsáv"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:298
-msgid "Position"
-msgstr "Helyzet"
+#~ msgid "Position"
+#~ msgstr "Helyzet"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:306
-msgid "_Top"
-msgstr "_Fent"
+#~ msgid "_Top"
+#~ msgstr "_Fent"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:313
-msgid "_Bottom"
-msgstr "_Lent"
+#~ msgid "_Bottom"
+#~ msgstr "_Lent"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:320
-msgid "Alignment"
-msgstr "Igazítás"
+#~ msgid "Alignment"
+#~ msgstr "Igazítás"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:329
-msgid "_Left"
-msgstr "_Balra"
+#~ msgid "_Left"
+#~ msgstr "_Balra"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:336
-msgid "_Center"
-msgstr "_Középre"
+#~ msgid "_Center"
+#~ msgstr "_Középre"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:343
-msgid "_Right"
-msgstr "_Jobbra"
+#~ msgid "_Right"
+#~ msgstr "_Jobbra"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:350
-msgid "Autohide"
-msgstr "Automatikus elrejtés"
+#~ msgid "Autohide"
+#~ msgstr "Automatikus elrejtés"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:354
-msgid "Auto _hide taskbar"
-msgstr "Feladatsáv automatikus _rejtése"
+#~ msgid "Auto _hide taskbar"
+#~ msgstr "Feladatsáv automatikus _rejtése"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:359
-msgid "Size"
-msgstr "Méret"
+#~ msgid "Size"
+#~ msgstr "Méret"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:368
-msgid "Height :"
-msgstr "Magasság:"
+#~ msgid "Height :"
+#~ msgstr "Magasság:"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:403
-msgid "Width:"
-msgstr "Szélesség:"
+#~ msgid "Width:"
+#~ msgstr "Szélesség:"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:452
-msgid "Tasks"
-msgstr "Programok"
+#~ msgid "Tasks"
+#~ msgstr "Programok"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:460
-msgid "Show tasks from _all workspaces"
-msgstr "Feladatok mutatása v_alamennyi munkaterületről"
+#~ msgid "Show tasks from _all workspaces"
+#~ msgstr "Feladatok mutatása v_alamennyi munkaterületről"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:465
-msgid "Always _group tasks"
-msgstr "Feladatok csoportosítása mindi_g"
+#~ msgid "Always _group tasks"
+#~ msgstr "Feladatok csoportosítása mindi_g"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:470
-msgid "Show application _names"
-msgstr "Program_nevek mutatása"
+#~ msgid "Show application _names"
+#~ msgstr "Program_nevek mutatása"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:475
-msgid "Pager"
-msgstr "Lapozó"
+#~ msgid "Pager"
+#~ msgstr "Lapozó"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:479
-msgid "Show _pager in taskbar"
-msgstr "La_pozó a feladatsávon"
+#~ msgid "Show _pager in taskbar"
+#~ msgstr "La_pozó a feladatsávon"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:484
-msgid "Notification area"
-msgstr "Értesítési terület"
+#~ msgid "Notification area"
+#~ msgstr "Értesítési terület"
 
-#: xftaskbar/plugin/xftaskbar_plugin.c:488
-msgid "Show _system tray in taskbar"
-msgstr "Rendszertálca a feladat_sávon"
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "Rendszertálca a feladat_sávon"
 
-#: xftaskbar/xftaskbar.c:137
-msgid "Cannot get initial style"
-msgstr "Nem elérhető az eredeti téma"
+#~ msgid "Cannot get initial style"
+#~ msgstr "Nem elérhető az eredeti téma"
 
-#: xftaskbar/xftaskbar.c:260
-msgid "There is already a system tray running on this screen"
-msgstr "Már fut egy rendszer panel ezen a képernyőn"
+#~ msgid "There is already a system tray running on this screen"
+#~ msgstr "Már fut egy rendszer panel ezen a képernyőn"
 
-#: xftaskbar/xftaskbar.c:268
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "Nem lehet bejegyezni a panelt: %s"
+#~ msgid "Unable to register system tray: %s"
+#~ msgstr "Nem lehet bejegyezni a panelt: %s"
 
-#: xftaskbar/xftaskbar.c:467
-msgid "This should not happen"
-msgstr "Ennek nem szabadna megtörténnie"
+#~ msgid "This should not happen"
+#~ msgstr "Ennek nem szabadna megtörténnie"
 
-#: xftaskbar/xftaskbar.c:592
-msgid "Cannot get default screen\n"
-msgstr "Az alapértelmezett képernyő megnyitása sikertelen\n"
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "Az alapértelmezett képernyő megnyitása sikertelen\n"
 
-#: xftaskbar/xftaskbar.c:681
-msgid "Cannot connect to session manager"
-msgstr "Nem lehet a munkamenet-kezelőhöz csatlakozni"
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "Nem lehet a munkamenet-kezelőhöz csatlakozni"
 
-#: xftaskbar/xftaskbar.c:694
-msgid "Cannot create MCS client channel"
-msgstr "Nem lehet MCS ügyfélcsatornát létrehozni"
-
+#~ msgid "Cannot create MCS client channel"
+#~ msgstr "Nem lehet MCS ügyfélcsatornát létrehozni"

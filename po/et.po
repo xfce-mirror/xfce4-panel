@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2005-05-10 22:10+0200\n"
 "PO-Revision-Date: 2004-12-09 01:36+0300\n"
 "Last-Translator: Mart Tõnso <mart.tonso@ttu.ee>\n"
 "Language-Team: \n"
@@ -14,16 +14,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:556
+#: panel/xfce_support.c:557
 msgid "Select file"
 msgstr "Vali fail"
 
-#: panel/settings.c:179
+#: panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "Mingeid andmeid ei leitud. Paneel on tühi."
 
-#: panel/controls_dialog.c:89
-#: panel/item_dialog.c:1161
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Positsioon:"
 
@@ -31,8 +30,7 @@ msgstr "Positsioon:"
 msgid "Item properties"
 msgstr "Omadused"
 
-#: panel/controls_dialog.c:209
-#: panel/controls.c:711
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Asja eemaldamine eemaldab ka selle küljes oleva menüü."
 
@@ -60,46 +58,44 @@ msgstr "Teine ikoon"
 msgid "Drag file onto this frame to change the icon"
 msgstr "Tiri fail sellesse raami, et ikooni muuta"
 
-#: panel/item_dialog.c:921
+#: panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "Silt:"
 
-#: panel/item_dialog.c:950
+#: panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "Tutvustus:"
 
-#: panel/item_dialog.c:978
+#: panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "Lisa käivitajale menüü"
 
-#: panel/item_dialog.c:1198
+#: panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "Muuda menüü asja"
 
 #. add buttons
-#: panel/item_dialog.c:1204
-#: panel/controls.c:748
+#: panel/item_dialog.c:1221 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Eemalda"
 
-#: panel/item_dialog.c:1216
-#: panel/item.c:668
+#: panel/item_dialog.c:1233 panel/item.c:738
 msgid "Launcher"
 msgstr "Startija"
 
-#: panel/item.c:496
+#: panel/item.c:566
 msgid "Click mouse button 3 to change item"
 msgstr "Vajuta hiire keskmist muppu, et asja muuta"
 
-#: panel/item.c:521
+#: panel/item.c:591
 msgid "Add launcher"
 msgstr "Lisa startija"
 
-#: panel/item.c:526
+#: panel/item.c:596
 msgid "Add new item"
 msgstr "Lisa uus asi"
 
-#: panel/main.c:121
+#: panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "Oled sa kindel, et soovid väljuda?"
 
@@ -141,13 +137,11 @@ msgstr "%s: Õnnelikult käivitunud koos sessioonihalduriga"
 msgid "Could not create panel item \"%s\"."
 msgstr "Ei suuda luua paneeli asja \"%s\"."
 
-#: panel/controls.c:743
-#: panel/panel.c:639
+#: panel/controls.c:743 panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Omadused..."
 
-#: panel/controls.c:757
-#: panel/panel.c:629
+#: panel/controls.c:757 panel/panel.c:637
 msgid "Add _new item"
 msgstr "Lisa _uus asi"
 
@@ -155,30 +149,28 @@ msgstr "Lisa _uus asi"
 msgid "This item has no configuration options"
 msgstr "Sellel asjal ei ole midagi sättida"
 
-#: panel/panel.c:620
-#: panel/panel.c:1042
-#: settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:451
+#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
-#: panel/panel.c:644
+#: panel/panel.c:652
 msgid "_About Xfce"
 msgstr "_Xfce-st"
 
-#: panel/panel.c:649
+#: panel/panel.c:657
 msgid "_Help"
 msgstr "_Abi"
 
-#: panel/panel.c:658
+#: panel/panel.c:666
 msgid "_Lock screen"
 msgstr "_Lukusta ekraan"
 
-#: panel/panel.c:663
+#: panel/panel.c:671
 msgid "_Restart"
 msgstr "_Käivita uuesti"
 
-#: panel/panel.c:672
+#: panel/panel.c:680
 msgid "E_xit"
 msgstr "V_älja"
 
@@ -242,121 +234,127 @@ msgstr "Seadistuste haldur ei ole kättesaadav"
 msgid "Menu"
 msgstr "Menüü"
 
-#: settings/xfce_settings_dialog.c:88
+#: settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "Väike"
 
-#: settings/xfce_settings_dialog.c:92
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Keskmine"
 
-#: settings/xfce_settings_dialog.c:96
+#: settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "Suur"
 
-#: settings/xfce_settings_dialog.c:100
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Väga suur"
 
-#: settings/xfce_settings_dialog.c:176
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Horisontaalne"
 
-#: settings/xfce_settings_dialog.c:180
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Vertikaalne"
 
-#: settings/xfce_settings_dialog.c:222
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Vasak"
 
-#: settings/xfce_settings_dialog.c:226
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Parem"
 
-#: settings/xfce_settings_dialog.c:230
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Ülal"
 
-#: settings/xfce_settings_dialog.c:234
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "All"
 
-#: settings/xfce_settings_dialog.c:269
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Paneeli suurus:"
 
-#: settings/xfce_settings_dialog.c:285
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Paneeli orientatsioon:"
 
-#: settings/xfce_settings_dialog.c:304
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Menüü positsioon:"
 
-#: settings/xfce_settings_dialog.c:344
+#: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "Alati kõige peal:"
 
-#: settings/xfce_settings_dialog.c:398
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Automaatne varjamine:"
 
-#: settings/xfce_settings_dialog.c:468
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce paneeli seaded"
 
-#: settings/xfce_settings_dialog.c:478
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Väljanägemine"
 
-#: settings/xfce_settings_dialog.c:493
+#: settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "Käitumine"
 
 #. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
 #. * %d  : day of the month
-#: plugins/clock/clock.c:202
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:429
+#: plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "Kella tüüp:"
 
-#: plugins/clock/clock.c:442
+#: plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "Analoog"
 
-#: plugins/clock/clock.c:446
+#: plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "Digitaal"
 
-#: plugins/clock/clock.c:450
+#: plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:512
+#: plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "Režiim:"
 
-#: plugins/clock/clock.c:519
+#: plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24 tundi"
 
-#: plugins/clock/clock.c:525
+#: plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12 tundi"
 
-#: plugins/clock/clock.c:531
+#: plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "EL/PL"
 
-#: plugins/clock/clock.c:569
+#: plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "Näita sekundeid"
 
-#: plugins/clock/clock.c:682
+#: plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Xfce kell"
 
@@ -431,27 +429,26 @@ msgstr "Süsteemi nupud"
 msgid "Separator"
 msgstr "Eraldaja"
 
-#: plugins/mailcheck/mailcheck.c:836
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Kirjakast:"
 
-#: plugins/mailcheck/mailcheck.c:873
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Uue kirja käsklus:"
 
-#: plugins/mailcheck/mailcheck.c:887
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Käsklus, mida käivitada, kui saabub uus kiri"
 
-#: plugins/mailcheck/mailcheck.c:917
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Käsklus, mida käivitada, kui paneelil asuvat nuppu vajutatakse"
 
-#: plugins/mailcheck/mailcheck.c:938
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Intervall (sec):"
 
-#: plugins/mailcheck/mailcheck.c:1014
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Kirjade kontrollija"
-
