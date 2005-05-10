@@ -202,7 +202,7 @@ addtomenu_item_drop_cb (GtkWidget * widget,
                                        xfce_desktop_entry_new (buf, keys, 
                                            G_N_ELEMENTS (keys))))
             {
-                char *term;
+                char *term = NULL;
                 
                 xfce_desktop_entry_get_string (dentry, "GenericName", FALSE,
                                                &(mi->caption));
