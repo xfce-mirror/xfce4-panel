@@ -1443,7 +1443,6 @@ create_entry_from_file (const char *path)
             utf8 = g_locale_to_utf8 (path, -1, NULL, NULL, NULL);
         else
             utf8 = g_strdup (path);
-    
         
         e = g_new0 (Entry, 1);
         
@@ -1456,7 +1455,7 @@ create_entry_from_file (const char *path)
         end = strrchr (start, '.');
         e->name = g_strndup (start, end ? end - start : strlen (start));
         e->icon.type = ICON_TYPE_NAME;
-        e->icon.icon.name = g_strup (e->name);
+        e->icon.icon.name = g_strdup (e->name);
 
         g_free (utf8);
     }
