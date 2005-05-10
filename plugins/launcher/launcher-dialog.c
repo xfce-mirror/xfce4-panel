@@ -417,8 +417,6 @@ icon_browse (GtkWidget *b, EntryDialog *ed)
 static void
 icon_menu_browse (GtkWidget *mi, EntryDialog *ed)
 {
-    GdkPixbuf *pb;
-    
     ed->icon_changed = TRUE;
 
     gtk_widget_hide (ed->icon_label);
@@ -426,9 +424,11 @@ icon_menu_browse (GtkWidget *mi, EntryDialog *ed)
 
     update_entry_icon (ed);
 
-    pb = launcher_load_pixbuf (&ed->entry->icon, DLG_ICON_SIZE);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (ed->icon_img), pb);
-    g_object_unref (pb);
+    if (ed->entry->icon.type != ICON_TYPE_NAME || 
+        !ed->entry->icon.icon.name)
+    {
+        icon_browse (NULL, ed);
+    }
 }
 
 static GtkWidget *
@@ -848,7 +848,7 @@ cursor_changed (GtkTreeView * tv, LauncherDialog *ld)
     GtkTreeModel *model;
     GtkTreeIter iter;
     Entry *e;
-
+    
     sel = gtk_tree_view_get_selection (tv);
     gtk_tree_selection_get_selected (sel, &model, &iter);
 
