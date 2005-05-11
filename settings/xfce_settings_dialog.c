@@ -121,7 +121,7 @@ add_size_menu (GtkWidget * option_menu)
 static void
 orientation_changed (GtkOptionMenu * menu, GtkOptionMenu *popup_menu)
 {
-    int n, pos;
+    int n;
     McsSetting *setting;
 
     n = gtk_option_menu_get_history (menu);
@@ -134,37 +134,11 @@ orientation_changed (GtkOptionMenu * menu, GtkOptionMenu *popup_menu)
 
     mcs_manager_set_int (mcs_manager, xfce_settings_names[XFCE_ORIENTATION],
 			 CHANNEL, n);
-
-    /* also change popup position */
-    setting =
-	mcs_manager_setting_lookup (mcs_manager, "popupposition", CHANNEL);
-
-    if (setting)
-    {
-        pos = setting->data.v_int;
-
-        switch (pos)
-        {
-            case LEFT:
-                pos = TOP;
-                break;
-            case RIGHT:
-                pos = BOTTOM;
-                break;
-            case TOP:
-                pos = LEFT;
-                break;
-            case BOTTOM:
-                pos = RIGHT;
-                break;
-        }
-
-        gtk_option_menu_set_history (GTK_OPTION_MENU (popup_menu), pos);
-    }
+    mcs_manager_notify (mcs_manager, CHANNEL);
 }
 
 static void
-add_orientation_menu (GtkWidget * option_menu, GtkWidget *popup_menu)
+add_orientation_menu (GtkWidget * option_menu)
 {
     GtkWidget *menu;
     GtkWidget *item;
@@ -194,7 +168,7 @@ add_orientation_menu (GtkWidget * option_menu, GtkWidget *popup_menu)
     }
 
     g_signal_connect (option_menu, "changed",
-		      G_CALLBACK (orientation_changed), popup_menu);
+		      G_CALLBACK (orientation_changed), NULL);
 }
 
 /* handle style */
@@ -254,7 +228,7 @@ add_handle_style_menu (GtkWidget * option_menu)
 static void
 add_style_box (GtkBox * box, GtkSizeGroup * sg)
 {
-    GtkWidget *vbox, *hbox, *label, *omenu, *popup_menu;
+    GtkWidget *vbox, *hbox, *label, *omenu;
 
     vbox = GTK_WIDGET (box);
 
@@ -286,11 +260,9 @@ add_style_box (GtkBox * box, GtkSizeGroup * sg)
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     /* needed here already */
-    popup_menu = gtk_option_menu_new ();
-    
     omenu = gtk_option_menu_new ();
     gtk_widget_show (omenu);
-    add_orientation_menu (omenu, popup_menu);
+    add_orientation_menu (omenu);
     gtk_box_pack_start (GTK_BOX (hbox), omenu, TRUE, TRUE, 0);
 
     /* handle style */

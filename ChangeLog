@@ -1,3 +1,95 @@
+2005-05-08 10:15  jasper
+
+	* xfce4-panel/trunk/panel/controls_dialog.c: cosmetic tweak
+
+2005-05-08 09:58  jasper
+
+	* xfce4-panel/trunk/panel/Makefile.am,
+	  xfce4-panel/trunk/panel/add-control-dialog.c,
+	  xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls.h,
+	  xfce4-panel/trunk/panel/controls_dialog.c,
+	  xfce4-panel/trunk/panel/global.h,
+	  xfce4-panel/trunk/panel/item-control.c,
+	  xfce4-panel/trunk/panel/item-control.h,
+	  xfce4-panel/trunk/panel/item.c, xfce4-panel/trunk/panel/item.h,
+	  xfce4-panel/trunk/panel/item_dialog.c,
+	  xfce4-panel/trunk/panel/item_dialog.h,
+	  xfce4-panel/trunk/panel/main.c,
+	  xfce4-panel/trunk/panel/mcs_client.c,
+	  xfce4-panel/trunk/panel/panel.c, xfce4-panel/trunk/panel/panel.h,
+	  xfce4-panel/trunk/panel/settings.c,
+	  xfce4-panel/trunk/plugins/launcher/launcher.c,
+	  xfce4-panel/trunk/plugins/mailcheck/mailcheck.c,
+	  xfce4-panel/trunk/plugins/switcher/switcher.c,
+	  xfce4-panel/trunk/settings/xfce_settings.h,
+	  xfce4-panel/trunk/settings/xfce_settings_dialog.c,
+	  xfce4-panel/trunk/settings/xfce_settings_plugin.c: * remove
+	  builtin launcher * replace with new launcher (backwards
+	  compatible) * remove popup position global option * other stuff
+	  (it's a pretty big change, so I'm sure i forgot something ;-)
+	  Please tell me if it breaks anything.
+
+2005-05-07 12:27  jasper
+
+	* xfce4-panel/trunk/panel/controls.c,
+	  xfce4-panel/trunk/panel/controls.h,
+	  xfce4-panel/trunk/panel/item-control.c,
+	  xfce4-panel/trunk/panel/panel.c,
+	  xfce4-panel/trunk/plugins/launcher/launcher-dialog.c,
+	  xfce4-panel/trunk/plugins/launcher/launcher.c,
+	  xfce4-panel/trunk/plugins/launcher/launcher.h,
+	  xfce4-panel/trunk/po/ar.po, xfce4-panel/trunk/po/az.po,
+	  xfce4-panel/trunk/po/be.po, xfce4-panel/trunk/po/bg.po,
+	  xfce4-panel/trunk/po/ca.po, xfce4-panel/trunk/po/cs.po,
+	  xfce4-panel/trunk/po/de.po, xfce4-panel/trunk/po/en_GB.po,
+	  xfce4-panel/trunk/po/es.po, xfce4-panel/trunk/po/es_MX.po,
+	  xfce4-panel/trunk/po/et.po, xfce4-panel/trunk/po/eu.po,
+	  xfce4-panel/trunk/po/fa.po, xfce4-panel/trunk/po/fi.po,
+	  xfce4-panel/trunk/po/fr.po, xfce4-panel/trunk/po/gu.po,
+	  xfce4-panel/trunk/po/he.po, xfce4-panel/trunk/po/hi.po,
+	  xfce4-panel/trunk/po/hu.po, xfce4-panel/trunk/po/it.po,
+	  xfce4-panel/trunk/po/ja.po, xfce4-panel/trunk/po/ko.po,
+	  xfce4-panel/trunk/po/lt.po, xfce4-panel/trunk/po/ms.po,
+	  xfce4-panel/trunk/po/nb_NO.po, xfce4-panel/trunk/po/nl.po,
+	  xfce4-panel/trunk/po/pa.po, xfce4-panel/trunk/po/pl.po,
+	  xfce4-panel/trunk/po/pt_BR.po, xfce4-panel/trunk/po/pt_PT.po,
+	  xfce4-panel/trunk/po/ro.po, xfce4-panel/trunk/po/ru.po,
+	  xfce4-panel/trunk/po/sk.po, xfce4-panel/trunk/po/sv.po,
+	  xfce4-panel/trunk/po/ta.po, xfce4-panel/trunk/po/tr.po,
+	  xfce4-panel/trunk/po/uk.po, xfce4-panel/trunk/po/vi.po,
+	  xfce4-panel/trunk/po/zh_CN.po, xfce4-panel/trunk/po/zh_TW.po:
+	  Allow all controls to act on changing the panel side; specifically
+	  the new launcher.
+
+2005-05-06 19:02  pollux
+
+	* xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/po/bn_IN.po: add
+	  bn_IN translations
+
+2005-05-06 18:48  pollux
+
+	* xfce4-panel/trunk/configure.ac, xfce4-panel/trunk/po/mr.po: add MR
+	  translations
+
+2005-05-06 17:19  pollux
+
+	* xfce4-panel/trunk/po/ja.po: update JA translations
+
+2005-05-05 12:55  perldude
+
+	* xfce4-panel/trunk/iconbox/iconbox.c,
+	  xfce4-panel/trunk/plugins/launcher/launcher.c: <kelnos> blame
+	  danny
+
+2005-05-04 21:05  olivier
+
+	* xfce4-panel/trunk/ChangeLog: Update ChangeLog
+
+2005-05-04 21:04  olivier
+
+	* xfce4-panel/trunk/po/ChangeLog: Update ChangeLog
+
 2005-05-03 21:07  dannym
 
 	* xfce4-panel/trunk/iconbox/iconbox.c,

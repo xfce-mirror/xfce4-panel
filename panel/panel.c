@@ -1344,16 +1344,6 @@ panel_set_orientation (int orientation)
 
     gtk_widget_hide (panel.toplevel);
 
-    xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (panel.toplevel),
-                                       orientation == VERTICAL ?
-                                                GTK_ORIENTATION_VERTICAL :
-                                                GTK_ORIENTATION_HORIZONTAL);
-    
-    xfce_itembar_set_orientation (XFCE_ITEMBAR (panel.group_box),
-                                  orientation == VERTICAL ?
-                                        GTK_ORIENTATION_VERTICAL :
-                                        GTK_ORIENTATION_HORIZONTAL);
-    
     for (l = panel.priv->controls; l != NULL; l = l->next)
     {
         Control *control = l->data;
@@ -1364,6 +1354,18 @@ panel_set_orientation (int orientation)
                                         GTK_ORIENTATION_HORIZONTAL);
     }
     
+    xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (panel.toplevel),
+                                       orientation == VERTICAL ?
+                                                GTK_ORIENTATION_VERTICAL :
+                                                GTK_ORIENTATION_HORIZONTAL);
+    
+    xfce_itembar_set_orientation (XFCE_ITEMBAR (panel.group_box),
+                                  orientation == VERTICAL ?
+                                        GTK_ORIENTATION_VERTICAL :
+                                        GTK_ORIENTATION_HORIZONTAL);
+    
+    panel_set_size (panel.priv->settings.size);
+
     gtk_widget_size_request (panel.toplevel, &panel.priv->req);
 
     /* calls panel_set_position () */
