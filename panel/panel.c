@@ -1342,7 +1342,7 @@ panel_set_orientation (int orientation)
 
     panel.priv->block_resize++;
 
-    gtk_widget_hide (panel.toplevel);
+/*    gtk_widget_hide (panel.toplevel);*/
 
     for (l = panel.priv->controls; l != NULL; l = l->next)
     {
@@ -1374,7 +1374,7 @@ panel_set_orientation (int orientation)
     else
 	panel_center (RIGHT);
 
-    gtk_widget_show (panel.toplevel);
+/*    gtk_widget_show (panel.toplevel); */
 
     panel_set_position (&panel);
 
