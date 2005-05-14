@@ -333,7 +333,7 @@ systray_set_orientation (Control *control, int orientation)
         }
         else
         {
-            systray->box = gtk_hbox_new (FALSE, 0);
+            systray->box = gtk_vbox_new (FALSE, 0);
             systray->iconbox = gtk_vbox_new (TRUE, 3);
         }
 
