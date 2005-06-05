@@ -552,10 +552,10 @@ taskbar_toggle_tray (Taskbar * taskbar)
         {
             gtk_widget_destroy (taskbar->iconbox);
             taskbar->iconbox = NULL;
-
-            if (!taskbar->show_time)
-                gtk_widget_hide (taskbar->statusframe);
         }
+
+        if (!taskbar->show_time)
+            gtk_widget_hide (taskbar->statusframe);
     }
 
     /* called from an idle loop, so return FALSE to end loop */
@@ -970,7 +970,6 @@ main (int argc, char **argv)
     taskbar->statusframe = gtk_frame_new (NULL);
     gtk_frame_set_shadow_type (GTK_FRAME (taskbar->statusframe), GTK_SHADOW_IN);
     gtk_container_set_border_width (GTK_CONTAINER (taskbar->statusframe), 2);
-    gtk_widget_show (taskbar->statusframe);
     xfce_itembar_append (XFCE_ITEMBAR (taskbar->itembar), 
                          taskbar->statusframe);
     
@@ -1005,8 +1004,6 @@ main (int argc, char **argv)
     gtk_widget_show (taskbar->timelabel);
     gtk_container_add (GTK_CONTAINER (taskbar->timebox), taskbar->timelabel);
     
-    taskbar_toggle_time (taskbar);
-
     /* session */
     client_session =
         client_session_new (argc, argv, NULL /* data */ ,

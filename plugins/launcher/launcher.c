@@ -39,6 +39,8 @@
 
 XfceIconTheme *launcher_theme = NULL;
 
+static Launcher *open_launcher = NULL;
+
 
 /* prototypes */
 static Launcher *launcher_new (void);
@@ -158,8 +160,6 @@ launcher_set_arrow_direction (Control *control, GtkArrowType type)
     Launcher *launcher = control->data;
     XfceArrowButton *button = XFCE_ARROW_BUTTON (launcher->arrowbutton);
     
-    g_return_if_fail (launcher != NULL);
-
     if (button)
         xfce_arrow_button_set_arrow_type (button, type);
 }
@@ -308,7 +308,6 @@ create_launcher_control (Control * control)
 {
     Launcher *launcher = launcher_new ();
 
-    gtk_container_set_border_width (GTK_CONTAINER (control->base), 0);
     gtk_widget_set_size_request (control->base, -1, -1);
     gtk_container_add (GTK_CONTAINER (control->base), launcher->box);
 
@@ -349,6 +348,8 @@ xfce_control_class_init (ControlClass * cc)
 /* Macro that checks panel API version */
 XFCE_PLUGIN_CHECK_INIT
 
+
+/* backward compatibility to old launchers */
 G_MODULE_EXPORT
 void
 launcher_add_popup_from_xml (Control *control, xmlNodePtr node)
@@ -360,6 +361,7 @@ launcher_add_popup_from_xml (Control *control, xmlNodePtr node)
     if (launcher->items != NULL)
         gtk_widget_show (launcher->arrowbutton);
 }
+
 
 /* Launcher: plugin implementation *
  * ------------------------------- */
@@ -402,6 +404,60 @@ entry_exec (Entry *entry)
     }
 }
 
+static void
+entry_drop_cb (Entry *entry, GList *data)
+{
+    GList *l;
+    GString *execute;
+    char *file;
+    execute = g_string_sized_new (100);
+
+    if (entry->terminal)
+        g_string_append_c (execute, '"');
+
+    /* XXX Fix the quoting (if necessary) */
+    g_string_append (execute, entry->exec);
+
+    for (l = data; l != NULL; l = l->next)
+    {
+        file = file_uri_to_local ((char *) l->data);
+
+        if (file)
+        {
+            g_string_append_c (execute, ' ');
+            g_string_append_c (execute, '"');
+            g_string_append (execute, file);
+            g_string_append_c (execute, '"');
+
+            g_free (file);
+        }
+    }
+
+    if (entry->terminal)
+        g_string_append_c (execute, '"');
+
+    exec_cmd (execute->str, entry->terminal, entry->startup);
+    
+    g_string_free (execute, TRUE);
+}
+
+static void
+entry_data_received (GtkWidget *w, GList *data, Entry *entry)
+{
+    if (!data || !data->data)
+        return;
+    
+    entry_drop_cb (entry, data);
+
+    if (open_launcher)
+    {
+        gtk_widget_hide (open_launcher->menu);
+        gtk_toggle_button_set_active (
+                GTK_TOGGLE_BUTTON (open_launcher->arrowbutton), FALSE);
+        open_launcher = NULL;
+    }
+}
+
 /* menu */
 static void
 launcher_menu_deactivated (GtkWidget *menu, Launcher *launcher)
@@ -437,6 +493,45 @@ menu_detached (void)
     /* do nothing */
 }
 
+static gboolean
+launcher_menu_drag_leave_timeout (Launcher *launcher)
+{
+    GdkScreen *screen = gtk_widget_get_screen (launcher->arrowbutton);
+    GdkDisplay *dpy = gdk_screen_get_display (screen);
+    GdkWindow *win = gdk_display_get_window_at_pointer (dpy, NULL, NULL);
+    
+    if (win)
+    {
+        GdkWindow *parent;
+            
+        if (win == launcher->menu->window 
+                 || win == launcher->arrowbutton->window)
+            goto out;
+
+        for (parent = gdk_window_get_parent (win); parent != NULL;
+             parent = gdk_window_get_parent (parent))
+        {
+            if (parent == launcher->menu->window)
+                goto out;
+        }
+    }
+
+    gtk_widget_hide (GTK_MENU (launcher->menu)->toplevel);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton),
+                                  FALSE);
+    
+out:
+    return FALSE;
+}
+
+static void
+launcher_menu_drag_leave (GtkWidget *w, GdkDragContext *drag_context,
+                          guint time, Launcher *launcher)
+{
+    g_timeout_add (100, (GSourceFunc)launcher_menu_drag_leave_timeout, 
+                   launcher);
+}
+
 static void
 launcher_create_menu (Launcher *launcher)
 {
@@ -452,6 +547,10 @@ launcher_create_menu (Launcher *launcher)
     gtk_menu_attach_to_widget (GTK_MENU (launcher->menu), 
                                launcher->arrowbutton,
                                (GtkMenuDetachFunc)menu_detached);
+
+    dnd_set_drag_dest (launcher->menu);
+    g_signal_connect (launcher->menu, "drag-leave", 
+                      G_CALLBACK (launcher_menu_drag_leave), launcher);
 }
 
 static void
@@ -506,6 +605,12 @@ launcher_recreate_menu (Launcher *launcher)
 
         if (entry->comment)
             gtk_tooltips_set_tip (launcher->tips, mi, entry->comment, NULL);
+
+        dnd_set_drag_dest (mi);
+        dnd_set_callback (mi, DROP_CALLBACK (entry_data_received), entry);
+
+        g_signal_connect (mi, "drag-leave", 
+                          G_CALLBACK (launcher_menu_drag_leave), launcher);
     }
 }
 
@@ -652,45 +757,57 @@ static void
 launcher_entry_data_received (GtkWidget *w, GList *data, gpointer user_data)
 {
     Launcher *launcher = user_data;
-    GList *l;
-    GString *execute;
-    char *file;
 
     if (!data || !data->data)
         return;
-    
-    execute = g_string_sized_new (100);
 
-    if (launcher->entry->terminal)
-        g_string_append_c (execute, '"');
-
-    /* XXX Fix the quoting (if necessary) */
-    g_string_append (execute, launcher->entry->exec);
-
-    for (l = data; l != NULL; l = l->next)
-    {
-        file = file_uri_to_local ((char *) l->data);
-
-        if (file)
-        {
-            g_string_append_c (execute, ' ');
-            g_string_append_c (execute, '"');
-            g_string_append (execute, file);
-            g_string_append_c (execute, '"');
-
-            g_free (file);
-        }
-    }
-
-    if (launcher->entry->terminal)
-        g_string_append_c (execute, '"');
-
-    exec_cmd (execute->str, launcher->entry->terminal, 
-              launcher->entry->startup);
+    entry_drop_cb (launcher->entry, data);
     
     after_exec_insensitive (launcher->iconbutton);
+}
+
+static void
+launcher_arrow_drag (GtkToggleButton * tb, Launcher * launcher)
+{
+    int x, y, push_in;
+
+    if (open_launcher && open_launcher != launcher)
+    {
+        gtk_widget_hide (open_launcher->menu);
+        gtk_toggle_button_set_active (
+                GTK_TOGGLE_BUTTON (open_launcher->arrowbutton), FALSE);
+        open_launcher = NULL;
+    }
     
-    g_string_free (execute, TRUE);
+    gtk_toggle_button_set_active (tb, TRUE);
+
+    gtk_widget_show (launcher->menu);
+
+    {
+        GtkRequisition tmp_request;
+        GtkAllocation tmp_allocation = { 0, };
+
+        gtk_widget_size_request (GTK_MENU (launcher->menu)->toplevel, 
+                                 &tmp_request);
+
+        tmp_allocation.width = tmp_request.width;
+        tmp_allocation.height = tmp_request.height;
+
+        gtk_widget_size_allocate (GTK_MENU (launcher->menu)->toplevel, 
+                                  &tmp_allocation);
+
+        gtk_widget_realize (launcher->menu);
+    }
+
+    launcher_position_menu (GTK_MENU (launcher->menu), &x, &y, &push_in,
+                            GTK_WIDGET (tb));
+
+    gtk_window_move (GTK_WINDOW (GTK_MENU (launcher->menu)->toplevel),
+                     x, y);
+
+    gtk_widget_show (GTK_MENU (launcher->menu)->toplevel);
+
+    open_launcher = launcher;
 }
 
 static void
@@ -778,6 +895,13 @@ launcher_new (void)
     dnd_set_drag_dest (launcher->iconbutton);
     dnd_set_callback (launcher->iconbutton, 
                       DROP_CALLBACK (launcher_entry_data_received), launcher);
+
+    dnd_set_drag_dest (launcher->arrowbutton);
+    dnd_set_drag_callback (launcher->arrowbutton, 
+                           DRAG_CALLBACK (launcher_arrow_drag), launcher);
+    
+    g_signal_connect (launcher->arrowbutton, "drag-leave", 
+                      G_CALLBACK (launcher_menu_drag_leave), launcher);
 
     if (G_UNLIKELY (!launcher_theme))
         launcher_theme = xfce_icon_theme_get_for_screen (

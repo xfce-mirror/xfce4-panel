@@ -25,32 +25,52 @@
 #ifndef __XFCE_SUPPORT_H__
 #define __XFCE_SUPPORT_H__
 
-/* tooltips */
-G_MODULE_IMPORT void add_tooltip (GtkWidget * widget, const char *tip);
-
 /* dnd */
-G_MODULE_IMPORT void dnd_set_drag_dest (GtkWidget * widget);
+typedef void (*DragCallback) (GtkWidget * widget, gpointer data);
 
 typedef void (*DropCallback) (GtkWidget * widget, GList * drop_data,
 			      gpointer data);
 
+#define DRAG_CALLBACK(f) (DragCallback)f
+
 #define DROP_CALLBACK(f) (DropCallback)f
 
-G_MODULE_IMPORT void dnd_set_callback (GtkWidget * widget, DropCallback function,
-		       gpointer data);
+G_MODULE_IMPORT void dnd_set_drag_dest (GtkWidget * widget);
+
+G_MODULE_IMPORT void dnd_set_drag_callback (GtkWidget * widget, 
+                       			    DragCallback function, 
+					    gpointer data);
+
+G_MODULE_IMPORT void dnd_set_callback (GtkWidget * widget, 
+    				       DropCallback function, 
+				       gpointer data);
 
 G_MODULE_IMPORT void gnome_uri_list_free_strings (GList * list);
+
 G_MODULE_IMPORT GList *gnome_uri_list_extract_uris (const gchar * uri_list);
-G_MODULE_IMPORT GList *gnome_uri_list_extract_filenames (const gchar * uri_list);
+
+G_MODULE_IMPORT GList *
+	gnome_uri_list_extract_filenames (const gchar * uri_list);
+
+	
+/* tooltips */
+G_MODULE_IMPORT void add_tooltip (GtkWidget * widget, const char *tip);
+
 
 /* file open dialog */
 G_MODULE_IMPORT char *select_file_name (const char *title, const char *path,
 			GtkWidget * parent);
-char *select_file_with_preview (const char *title, const char *path,
-				GtkWidget * parent);
+
+G_MODULE_IMPORT char *select_file_with_preview (const char *title, 
+    						const char *path,
+						GtkWidget * parent);
+
 
 /* executing programs */
-G_MODULE_IMPORT void exec_cmd (const char *cmd, gboolean in_terminal, gboolean use_sn);
-G_MODULE_IMPORT void exec_cmd_silent (const char *cmd, gboolean in_terminal, gboolean use_sn);
+G_MODULE_IMPORT void exec_cmd (const char *cmd, gboolean in_terminal, 
+    			       gboolean use_sn);
+
+G_MODULE_IMPORT void exec_cmd_silent (const char *cmd, gboolean in_terminal, 
+    			              gboolean use_sn);
 
 #endif /* __XFCE_SUPPORT_H__ */
