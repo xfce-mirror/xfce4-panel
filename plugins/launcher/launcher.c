@@ -451,7 +451,7 @@ entry_data_received (GtkWidget *w, GList *data, Entry *entry)
 
     if (open_launcher)
     {
-        gtk_widget_hide (open_launcher->menu);
+        gtk_widget_hide (GTK_MENU (open_launcher->menu)->toplevel);
         gtk_toggle_button_set_active (
                 GTK_TOGGLE_BUTTON (open_launcher->arrowbutton), FALSE);
         open_launcher = NULL;
@@ -498,29 +498,20 @@ launcher_menu_drag_leave_timeout (Launcher *launcher)
 {
     GdkScreen *screen = gtk_widget_get_screen (launcher->arrowbutton);
     GdkDisplay *dpy = gdk_screen_get_display (screen);
-    GdkWindow *win = gdk_display_get_window_at_pointer (dpy, NULL, NULL);
+    int x, y, wx, wy, ww, wh;
     
-    if (win)
+    gdk_display_get_pointer (dpy, NULL, &x, &y, NULL);
+    
+    gdk_window_get_root_origin (launcher->menu->window, &wx, &wy);
+    gdk_drawable_get_size (GDK_DRAWABLE (launcher->menu->window), &ww, &wh);
+    
+    if (x < wx || x > wx + ww || y < wy || y > wy +wh)
     {
-        GdkWindow *parent;
-            
-        if (win == launcher->menu->window 
-                 || win == launcher->arrowbutton->window)
-            goto out;
-
-        for (parent = gdk_window_get_parent (win); parent != NULL;
-             parent = gdk_window_get_parent (parent))
-        {
-            if (parent == launcher->menu->window)
-                goto out;
-        }
+        gtk_widget_hide (GTK_MENU (launcher->menu)->toplevel);
+        gtk_toggle_button_set_active (
+                GTK_TOGGLE_BUTTON (launcher->arrowbutton), FALSE);
     }
-
-    gtk_widget_hide (GTK_MENU (launcher->menu)->toplevel);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton),
-                                  FALSE);
     
-out:
     return FALSE;
 }
 
