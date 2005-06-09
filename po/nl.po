@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4 VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-02 22:27+0200\n"
+"POT-Creation-Date: 2005-06-09 14:01+0200\n"
 "PO-Revision-Date: 2004-08-22 16:00+0200\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.org>\n"
 "Language-Team: Nederlands <nl@li.org>\n"
@@ -16,94 +16,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../panel/xfce_support.c:307
+#: panel/xfce_support.c:334
 msgid "Select file"
 msgstr "Bestand selecteren"
 
-#: ../panel/settings.c:268
+#: panel/settings.c:266
 msgid "No data was found. The panel will be empty."
 msgstr "Geen data gevonden. Het paneel zal leeg zijn."
 
-#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1136
-#: ../settings/xftaskbar_plugin.c:393
+#: panel/controls_dialog.c:88 settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Positie:"
 
-#: ../panel/controls_dialog.c:155
+#: panel/controls_dialog.c:154
 msgid "Item properties"
 msgstr "Item eigenschappen"
 
-#: ../panel/controls_dialog.c:210 ../panel/controls.c:714
-msgid "Removing the item will also remove its popup menu."
-msgstr "Hiermee verwijdert u ook het popup menu."
-
-#: ../panel/item_dialog.c:123
+#: panel/item_dialog.c:63
 msgid "Select command"
 msgstr "Commando selecteren"
 
-#: ../panel/item_dialog.c:260
+#: panel/item_dialog.c:200
 msgid "Command:"
 msgstr "Commando:"
 
-#: ../panel/item_dialog.c:306 ../plugins/launcher/launcher-dialog.c:602
+#: panel/item_dialog.c:246 plugins/launcher/launcher-dialog.c:602
 msgid "Run in _terminal"
 msgstr "Uitvoeren in _terminal"
 
-#: ../panel/item_dialog.c:324
+#: panel/item_dialog.c:264
 msgid "Use startup _notification"
 msgstr "Opstart-_notificatie gebruiken"
 
-#: ../panel/item_dialog.c:510
+#: panel/item_dialog.c:450
 msgid "Other Icon"
 msgstr "Ander pictogram"
 
-#: ../panel/item_dialog.c:621
+#: panel/item_dialog.c:561
 msgid "Drag file onto this frame to change the icon"
 msgstr "Sleep bestand naar dit frame om pictogram te wijzigen"
 
-#: ../panel/item_dialog.c:933
-msgid "Caption:"
-msgstr "Naam:"
-
-#: ../panel/item_dialog.c:962
-msgid "Tooltip:"
-msgstr "Tooltip:"
-
-#: ../panel/item_dialog.c:988
-msgid "Attach menu to launcher"
-msgstr "Voeg menu toe aan starter"
-
-#: ../panel/item_dialog.c:1173
-msgid "Change menu item"
-msgstr "Menu item veranderen"
-
-#. add buttons
-#: ../panel/item_dialog.c:1179 ../panel/controls.c:751
-#: ../plugins/launcher/launcher-dialog.c:1266
-msgid "_Remove"
-msgstr "_Verwijderen"
-
-#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:130
-msgid "Launcher"
-msgstr "Starter"
-
-#: ../panel/item.c:619
-msgid "Click mouse button 3 to change item"
-msgstr "Klik muisknop 3 om item te bewerken"
-
-#: ../panel/item.c:644
-msgid "Add launcher"
-msgstr "Toevoegen"
-
-#: ../panel/item.c:649
-msgid "Add new item"
-msgstr "Nieuw item toevoegen"
-
-#: ../panel/main.c:120
+#: panel/main.c:114
 msgid "Are you sure you want to exit?"
 msgstr "Weet u zeker dat u wil afsluiten?"
 
-#: ../panel/main.c:401
+#: panel/main.c:394
 #, c-format
 msgid ""
 "\n"
@@ -126,122 +83,130 @@ msgstr ""
 " Gelicenseerd onder de GNU GPL.\n"
 "\n"
 
-#: ../panel/main.c:484
+#: panel/main.c:474
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Succesvol gestart zonder sessiebeheer"
 
-#: ../panel/main.c:489
+#: panel/main.c:479
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Succesvol gestart met sessiebeheer"
 
-#: ../panel/controls.c:668
+#: panel/controls.c:669
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Kon paneel item \"%s\" niet creëren."
 
-#: ../panel/controls.c:746 ../panel/panel.c:717 ../iconbox/iconbox.c:618
+#: panel/controls.c:709
+#, c-format
+msgid "Remove %s item?"
+msgstr ""
+
+#: panel/controls.c:743 panel/panel.c:719 iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "_Eigenschappen..."
 
-#: ../panel/controls.c:760 ../panel/panel.c:707
+#: panel/controls.c:748 plugins/launcher/launcher-dialog.c:1266
+msgid "_Remove"
+msgstr "_Verwijderen"
+
+#: panel/controls.c:757 panel/panel.c:709
 msgid "Add _new item"
 msgstr "Item _toevoegen"
 
-#: ../panel/controls.c:1086
+#: panel/controls.c:1082
 msgid "This item has no configuration options"
 msgstr "Geen configuratie opties"
 
-#: ../panel/panel.c:698 ../panel/panel.c:1046
-#: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:507
+#: panel/panel.c:700 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel"
 msgstr "Xfce Panel"
 
-#: ../panel/panel.c:722
+#: panel/panel.c:724
 msgid "_About Xfce"
 msgstr "Xfce _info"
 
-#: ../panel/panel.c:727
+#: panel/panel.c:729
 msgid "_Help"
 msgstr "_Help"
 
-#: ../panel/panel.c:736
+#: panel/panel.c:738
 msgid "_Lock screen"
 msgstr "Scherm _beveiligen"
 
-#: ../panel/panel.c:741
+#: panel/panel.c:743
 msgid "_Restart"
 msgstr "_Herstarten"
 
-#: ../panel/panel.c:750 ../iconbox/iconbox.c:628
+#: panel/panel.c:752 iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "_Afsluiten"
 
-#: ../panel/icons.c:63 ../plugins/launcher/launcher-dialog.c:83
+#: panel/icons.c:63 plugins/launcher/launcher-dialog.c:83
 msgid "Default"
 msgstr "Standaard"
 
-#: ../panel/icons.c:64 ../plugins/launcher/launcher-dialog.c:84
+#: panel/icons.c:64 plugins/launcher/launcher-dialog.c:84
 msgid "Editor"
 msgstr "Editor"
 
-#: ../panel/icons.c:65 ../plugins/launcher/launcher-dialog.c:85
+#: panel/icons.c:65 plugins/launcher/launcher-dialog.c:85
 msgid "File management"
 msgstr "Bestandsbeheer"
 
-#: ../panel/icons.c:66 ../plugins/launcher/launcher-dialog.c:86
+#: panel/icons.c:66 plugins/launcher/launcher-dialog.c:86
 msgid "Utilities"
 msgstr "Hulpmiddelen"
 
-#: ../panel/icons.c:67 ../plugins/launcher/launcher-dialog.c:87
+#: panel/icons.c:67 plugins/launcher/launcher-dialog.c:87
 msgid "Games"
 msgstr "Spellen"
 
-#: ../panel/icons.c:68 ../plugins/launcher/launcher-dialog.c:88
+#: panel/icons.c:68 plugins/launcher/launcher-dialog.c:88
 msgid "Help browser"
 msgstr "Help browser"
 
-#: ../panel/icons.c:69 ../plugins/launcher/launcher-dialog.c:89
+#: panel/icons.c:69 plugins/launcher/launcher-dialog.c:89
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: ../panel/icons.c:70 ../plugins/launcher/launcher-dialog.c:90
+#: panel/icons.c:70 plugins/launcher/launcher-dialog.c:90
 msgid "Network"
 msgstr "Netwerk"
 
-#: ../panel/icons.c:71 ../plugins/launcher/launcher-dialog.c:91
+#: panel/icons.c:71 plugins/launcher/launcher-dialog.c:91
 msgid "Graphics"
 msgstr "Grafisch"
 
-#: ../panel/icons.c:72 ../plugins/launcher/launcher-dialog.c:92
+#: panel/icons.c:72 plugins/launcher/launcher-dialog.c:92
 msgid "Printer"
 msgstr "Printer"
 
-#: ../panel/icons.c:73 ../plugins/launcher/launcher-dialog.c:93
+#: panel/icons.c:73 plugins/launcher/launcher-dialog.c:93
 msgid "Productivity"
 msgstr "Productiviteit"
 
-#: ../panel/icons.c:74 ../plugins/launcher/launcher-dialog.c:94
+#: panel/icons.c:74 plugins/launcher/launcher-dialog.c:94
 msgid "Sound"
 msgstr "Geluid"
 
 #. Translation with context.
 #. * Translators only need to translate 'Terminal'
-#: ../panel/icons.c:77
+#: panel/icons.c:77
 msgid "icons|Terminal"
 msgstr "Terminal"
 
-#: ../panel/mcs_client.c:170
+#: panel/mcs_client.c:169
 msgid "Settings manager not available"
 msgstr "Configuratiemanager niet beschikbaar"
 
-#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:70
+#: taskbar/xftaskbar.c:510 plugins/systray/systray.c:88
 msgid "There is already a system tray running on this screen"
 msgstr "Er is al een system tray actief op dit scherm"
 
-#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:76
+#: taskbar/xftaskbar.c:516 plugins/systray/systray.c:94
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "Kan system tray niet registreren: %s"
@@ -254,254 +219,234 @@ msgstr "Kan system tray niet registreren: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../taskbar/xftaskbar.c:616
+#: taskbar/xftaskbar.c:616 plugins/systray/systray.c:175
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../taskbar/xftaskbar.c:637
+#: taskbar/xftaskbar.c:637 plugins/systray/systray.c:200
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: ../taskbar/xftaskbar.c:910 ../settings/xftaskbar_plugin.c:696
-#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
+#: taskbar/xftaskbar.c:910 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr "Taakbalk"
 
-#: ../taskbar/xftaskbar.c:1025
+#: taskbar/xftaskbar.c:1022
 msgid "Cannot create MCS client channel"
 msgstr "Kan MCS client kanaal niet aanmaken"
 
-#: ../iconbox/iconbox.c:568
+#: iconbox/iconbox.c:568
 msgid "Xfce Iconbox"
 msgstr "Xfce Iconbox"
 
-#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:138
+#: iconbox/iconbox.c:576 plugins/launcher/launcher.c:140
 msgid "Developer"
 msgstr "Ontwikkelaar"
 
-#: ../iconbox/iconbox.c:612
+#: iconbox/iconbox.c:612
 msgid "_About"
 msgstr "_Info"
 
-#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
-#: ../settings/xftaskbar_plugin.c:511
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Klein"
 
-#: ../settings/xfce_settings_dialog.c:91
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Medium"
 
-#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
-#: ../settings/xftaskbar_plugin.c:532
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Groot"
 
-#: ../settings/xfce_settings_dialog.c:99
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Enorm"
 
-#: ../settings/xfce_settings_dialog.c:175
+#: settings/xfce_settings_dialog.c:149
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#: ../settings/xfce_settings_dialog.c:179
+#: settings/xfce_settings_dialog.c:153
 msgid "Vertical"
 msgstr "Verticaal"
 
-#: ../settings/xfce_settings_dialog.c:221
-msgid "Left"
-msgstr "Links"
-
-#: ../settings/xfce_settings_dialog.c:225
-msgid "Right"
-msgstr "Rechts"
-
-#: ../settings/xfce_settings_dialog.c:229
-msgid "Top"
-msgstr "Boven"
-
-#: ../settings/xfce_settings_dialog.c:233
-msgid "Bottom"
-msgstr "Onder"
-
-#: ../settings/xfce_settings_dialog.c:275 ../settings/iconbox_plugin.c:762
+#: settings/xfce_settings_dialog.c:195 settings/iconbox_plugin.c:762
 msgid "None"
 msgstr "Geen"
 
-#: ../settings/xfce_settings_dialog.c:279
+#: settings/xfce_settings_dialog.c:199
 msgid "At both sides"
 msgstr "Aan beide zijden"
 
-#: ../settings/xfce_settings_dialog.c:283
+#: settings/xfce_settings_dialog.c:203
 msgid "At the start"
 msgstr "Aan het begin"
 
-#: ../settings/xfce_settings_dialog.c:287
+#: settings/xfce_settings_dialog.c:207
 msgid "At the end"
 msgstr "Aan het eind"
 
-#: ../settings/xfce_settings_dialog.c:320
+#: settings/xfce_settings_dialog.c:240
 msgid "Panel size:"
 msgstr "Panel grootte:"
 
-#: ../settings/xfce_settings_dialog.c:336
+#: settings/xfce_settings_dialog.c:256
 msgid "Panel orientation:"
 msgstr "Panel oriëntatie:"
 
-#: ../settings/xfce_settings_dialog.c:355
-msgid "Popup position:"
-msgstr "Popup positie:"
-
-#: ../settings/xfce_settings_dialog.c:371
+#: settings/xfce_settings_dialog.c:273
 msgid "Handles:"
 msgstr "Handgrepen"
 
-#: ../settings/xfce_settings_dialog.c:407
+#: settings/xfce_settings_dialog.c:309
 msgid "Autohide:"
 msgstr "Automatisch verbergen:"
 
-#: ../settings/xfce_settings_dialog.c:453
+#: settings/xfce_settings_dialog.c:355
 msgid "Full width:"
 msgstr "Volledige breedte:"
 
-#: ../settings/xfce_settings_dialog.c:524
+#: settings/xfce_settings_dialog.c:426
 msgid "Xfce Panel Settings"
 msgstr "Instellingen Xfce Panel"
 
-#: ../settings/xfce_settings_dialog.c:534
+#: settings/xfce_settings_dialog.c:436
 msgid "Appearance"
 msgstr "Weergave"
 
 #. show only hidden
-#: ../settings/xfce_settings_dialog.c:549 ../settings/iconbox_plugin.c:685
+#: settings/xfce_settings_dialog.c:451 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Gedrag"
 
 #. position
-#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
 msgid "Position"
 msgstr "Positie"
 
-#: ../settings/xftaskbar_plugin.c:399
+#: settings/xftaskbar_plugin.c:399
 msgid "_Top"
 msgstr "_Boven"
 
-#: ../settings/xftaskbar_plugin.c:409
+#: settings/xftaskbar_plugin.c:409
 msgid "_Bottom"
 msgstr "_Onder"
 
-#: ../settings/xftaskbar_plugin.c:422
+#: settings/xftaskbar_plugin.c:422
 msgid "Alignment:"
 msgstr "Uitlijning:"
 
-#: ../settings/xftaskbar_plugin.c:429
+#: settings/xftaskbar_plugin.c:429
 msgid "_Left"
 msgstr "_Links"
 
-#: ../settings/xftaskbar_plugin.c:439
+#: settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr "_Midden"
 
-#: ../settings/xftaskbar_plugin.c:447
+#: settings/xftaskbar_plugin.c:447
 msgid "_Right"
 msgstr "_Rechts"
 
 #. size
-#: ../settings/xftaskbar_plugin.c:464
+#: settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr "Grootte"
 
-#: ../settings/xftaskbar_plugin.c:474
+#: settings/xftaskbar_plugin.c:474
 msgid "Height:"
 msgstr "Hoogte:"
 
-#: ../settings/xftaskbar_plugin.c:505
+#: settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr "Breedte:"
 
-#: ../settings/xftaskbar_plugin.c:541
+#: settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr "Automatisch ver_kleinen"
 
 #. Autohide
-#: ../settings/xftaskbar_plugin.c:561
+#: settings/xftaskbar_plugin.c:561
 msgid "Autohide"
 msgstr "Automatisch verbergen"
 
-#: ../settings/xftaskbar_plugin.c:566
+#: settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr "Taakbalk automatisch _verbergen"
 
 #. tasklist
-#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:92
+#: settings/xftaskbar_plugin.c:583 plugins/tasklist/tasklist.c:92
 msgid "Tasklist"
 msgstr "Taakbalk"
 
-#: ../settings/xftaskbar_plugin.c:592
+#: settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr "Taakbalk tonen"
 
-#: ../settings/xftaskbar_plugin.c:604
+#: settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr "Taken van _alle bureaubladen tonen"
 
-#: ../settings/xftaskbar_plugin.c:613
+#: settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
 msgstr "Taken altijd _groeperen"
 
-#: ../settings/xftaskbar_plugin.c:621
+#: settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr "Toon programmatitels"
 
 #. pager
-#: ../settings/xftaskbar_plugin.c:629
+#: settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr "Pager"
 
-#: ../settings/xftaskbar_plugin.c:634
+#: settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr "_Pager tonen in taakbalk"
 
 #. status area
-#: ../settings/xftaskbar_plugin.c:641
+#: settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr "Statusvak"
 
-#: ../settings/xftaskbar_plugin.c:650
+#: settings/xftaskbar_plugin.c:650
 msgid "Show _notification icons"
 msgstr "_Notificatie-pictogrammen tonen"
 
-#: ../settings/xftaskbar_plugin.c:657
+#: settings/xftaskbar_plugin.c:657 plugins/systray/systray.c:535
 msgid "Show _time"
 msgstr "Tijd tonen"
 
-#: ../settings/xftaskbar_plugin.c:718
+#: settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr "Algemeen"
 
-#: ../settings/xftaskbar_plugin.c:729
+#: settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr "Onderdelen"
 
-#: ../settings/iconbox_plugin.c:629
+#: settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr "Pictogramgrootte"
 
-#: ../settings/iconbox_plugin.c:691
+#: settings/iconbox_plugin.c:691
 msgid "_Show only minimized applications"
 msgstr "Ge_minimaliseerde programma's tonen"
 
-#: ../settings/iconbox_plugin.c:754
+#: settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr "Transparantie"
 
-#: ../settings/iconbox_plugin.c:777
+#: settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr "Volledig"
 
-#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
-#: ../settings/iconbox_plugin.c:992
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
 msgid "Iconbox"
 msgstr "Iconbox"
 
@@ -513,63 +458,63 @@ msgstr "Iconbox"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../plugins/clock/clock.c:191
+#: plugins/clock/clock.c:191
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:421
+#: plugins/clock/clock.c:421
 msgid "Clock type:"
 msgstr "Klok type:"
 
-#: ../plugins/clock/clock.c:434
+#: plugins/clock/clock.c:434
 msgid "Analog"
 msgstr "Analoog"
 
-#: ../plugins/clock/clock.c:438
+#: plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "Digitaal"
 
-#: ../plugins/clock/clock.c:442
+#: plugins/clock/clock.c:442
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:504
+#: plugins/clock/clock.c:504
 msgid "Hour mode:"
 msgstr "Uren weergave:"
 
-#: ../plugins/clock/clock.c:511
+#: plugins/clock/clock.c:511
 msgid "24 hour"
 msgstr "24-uurs"
 
-#: ../plugins/clock/clock.c:517
+#: plugins/clock/clock.c:517
 msgid "12 hour"
 msgstr "12-uurs"
 
-#: ../plugins/clock/clock.c:523
+#: plugins/clock/clock.c:523
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: ../plugins/clock/clock.c:561
+#: plugins/clock/clock.c:561
 msgid "Show seconds:"
 msgstr "Secondes tonen:"
 
-#: ../plugins/clock/clock.c:674
+#: plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Xfce Klok"
 
-#: ../plugins/flexspace/flexspace.c:78
+#: plugins/flexspace/flexspace.c:78
 msgid "Flexible space"
 msgstr "Flexibele ruimte"
 
-#: ../plugins/launcher/launcher.c:130
+#: plugins/launcher/launcher.c:132 plugins/launcher/launcher.c:325
+msgid "Launcher"
+msgstr "Starter"
+
+#: plugins/launcher/launcher.c:132
 msgid "Launcher Plugin"
 msgstr "Starter plugin"
 
-#: ../plugins/launcher/launcher.c:314
-msgid "Alternative Launcher"
-msgstr "Alternatieve starter"
-
-#: ../plugins/launcher/launcher.c:372
+#: plugins/launcher/launcher.c:400
 #, c-format
 msgid ""
 "Could not run \"%s\":\n"
@@ -578,82 +523,80 @@ msgstr ""
 "Kon \"%s\" niet uitvoeren:\n"
 "%s"
 
-#: ../plugins/launcher/launcher.c:704
-#: ../plugins/launcher/launcher-dialog.c:1185
+#: plugins/launcher/launcher.c:840 plugins/launcher/launcher-dialog.c:1185
 msgid "New item"
 msgstr "Nieuw item"
 
-#: ../plugins/launcher/launcher.c:706
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: plugins/launcher/launcher.c:842 plugins/launcher/launcher-dialog.c:1186
 msgid "This item has not yet been configured"
 msgstr "Dit item is nog niet geconfigureerd"
 
-#: ../plugins/launcher/launcher-dialog.c:95 ../config/contents.xml.in.h:14
+#: plugins/launcher/launcher-dialog.c:95 config/contents.xml.in.h:14
 msgid "Terminal"
 msgstr "Terminal"
 
-#: ../plugins/launcher/launcher-dialog.c:96
+#: plugins/launcher/launcher-dialog.c:96
 msgid "Development"
 msgstr "Programmeren"
 
-#: ../plugins/launcher/launcher-dialog.c:97 ../config/contents.xml.in.h:13
+#: plugins/launcher/launcher-dialog.c:97 config/contents.xml.in.h:13
 msgid "Settings"
 msgstr "Instellingen"
 
-#: ../plugins/launcher/launcher-dialog.c:98
+#: plugins/launcher/launcher-dialog.c:98
 msgid "System"
 msgstr "Systeem"
 
-#: ../plugins/launcher/launcher-dialog.c:99
+#: plugins/launcher/launcher-dialog.c:99
 msgid "Windows programs"
 msgstr "Windows programmas"
 
-#: ../plugins/launcher/launcher-dialog.c:262
+#: plugins/launcher/launcher-dialog.c:262
 msgid "Name"
 msgstr "Naam"
 
-#: ../plugins/launcher/launcher-dialog.c:282
+#: plugins/launcher/launcher-dialog.c:282
 msgid "Description"
 msgstr "Beschrijving"
 
-#: ../plugins/launcher/launcher-dialog.c:397
+#: plugins/launcher/launcher-dialog.c:397
 msgid "Select image file"
 msgstr "Plaatje selecteren"
 
-#: ../plugins/launcher/launcher-dialog.c:468
+#: plugins/launcher/launcher-dialog.c:468
 msgid "Other..."
 msgstr "Aangepast..."
 
-#: ../plugins/launcher/launcher-dialog.c:567
+#: plugins/launcher/launcher-dialog.c:567
 msgid "Command"
 msgstr "Commando"
 
-#: ../plugins/launcher/launcher-dialog.c:622
+#: plugins/launcher/launcher-dialog.c:622
 msgid "Use _startup notification"
 msgstr "Opstart-_notificatie gebruiken"
 
-#: ../plugins/launcher/launcher-dialog.c:644
-#: ../plugins/launcher/launcher-dialog.c:649
+#: plugins/launcher/launcher-dialog.c:644
+#: plugins/launcher/launcher-dialog.c:649
 msgid "Edit launcher"
 msgstr "Starter bewereken"
 
-#: ../plugins/launcher/launcher-dialog.c:1242
+#: plugins/launcher/launcher-dialog.c:1242
 msgid "_Up"
 msgstr "_Omhoog"
 
-#: ../plugins/launcher/launcher-dialog.c:1248
+#: plugins/launcher/launcher-dialog.c:1248
 msgid "_Down"
 msgstr "Om_laag"
 
-#: ../plugins/launcher/launcher-dialog.c:1254
+#: plugins/launcher/launcher-dialog.c:1254
 msgid "_Edit"
 msgstr "Be_werken"
 
-#: ../plugins/launcher/launcher-dialog.c:1260
+#: plugins/launcher/launcher-dialog.c:1260
 msgid "_Add"
 msgstr "_Toevoegen"
 
-#: ../plugins/launcher/launcher-dialog.c:1290
+#: plugins/launcher/launcher-dialog.c:1290
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -661,55 +604,55 @@ msgstr ""
 "Het eerste item wordt getoond op het paneel. Overige items worden in een "
 "menu geplaatst."
 
-#: ../plugins/launcher/launcher-dialog.c:1313
+#: plugins/launcher/launcher-dialog.c:1313
 msgid "Panel Item and Menu"
 msgstr "Paneel-item en menu"
 
-#: ../plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Mail box:"
 
-#: ../plugins/mailcheck/mailcheck.c:875
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Nieuwe mail commando:"
 
-#: ../plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Commando om uit te voeren als nieuwe mail arriveert"
 
-#: ../plugins/mailcheck/mailcheck.c:919
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Commando voor de knop op het paneel"
 
-#: ../plugins/mailcheck/mailcheck.c:940
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Interval (sec):"
 
-#: ../plugins/mailcheck/mailcheck.c:1017
+#: plugins/mailcheck/mailcheck.c:1017
 msgid "Mail checker"
 msgstr "Mail checker"
 
-#: ../plugins/pager/pager.c:313
+#: plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "Aantal rijen:"
 
-#: ../plugins/pager/pager.c:315
+#: plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "Aantal kolommen:"
 
-#: ../plugins/pager/pager.c:372
+#: plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "Grafische pager"
 
-#: ../plugins/separator/separator.c:65
+#: plugins/separator/separator.c:65
 msgid "Separator"
 msgstr "Scheidingslijn"
 
-#: ../plugins/switcher/switcher.c:698
+#: plugins/switcher/switcher.c:695
 msgid "Desktop switcher"
 msgstr "Bureaublad wisselaar"
 
-#: ../plugins/systembuttons/systembuttons.c:85
+#: plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -719,131 +662,181 @@ msgstr ""
 "\n"
 "Vraag uw systeembeheerder voor meer informatie"
 
-#: ../plugins/systembuttons/systembuttons.c:170
+#: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "Scherm beveiligen"
 
 #. don't translate 'tip|'
-#: ../plugins/systembuttons/systembuttons.c:172
+#: plugins/systembuttons/systembuttons.c:172
 msgid "tip|Exit"
 msgstr "Afsluiten"
 
 #. don't translate 'tip|'
-#: ../plugins/systembuttons/systembuttons.c:174
+#: plugins/systembuttons/systembuttons.c:174
 msgid "tip|Setup"
 msgstr "Instellingen"
 
 #. don't translate 'tip|'
-#: ../plugins/systembuttons/systembuttons.c:176
+#: plugins/systembuttons/systembuttons.c:176
 msgid "tip|Info"
 msgstr "Info"
 
 #. set names to use in option menus
-#: ../plugins/systembuttons/systembuttons.c:521
+#: plugins/systembuttons/systembuttons.c:521
 msgid "Lock"
 msgstr "Schermbeveiliging"
 
-#: ../plugins/systembuttons/systembuttons.c:522
+#: plugins/systembuttons/systembuttons.c:522
 msgid "Exit"
 msgstr "Afsluiten"
 
-#: ../plugins/systembuttons/systembuttons.c:523
+#: plugins/systembuttons/systembuttons.c:523
 msgid "Setup"
 msgstr "Instellingen"
 
-#: ../plugins/systembuttons/systembuttons.c:524
+#: plugins/systembuttons/systembuttons.c:524
 msgid "Info"
 msgstr "Info"
 
-#: ../plugins/systembuttons/systembuttons.c:553
+#: plugins/systembuttons/systembuttons.c:553
 msgid "Button 1:"
 msgstr "Knop 1:"
 
-#: ../plugins/systembuttons/systembuttons.c:568
+#: plugins/systembuttons/systembuttons.c:568
 msgid "Button 2:"
 msgstr "Knop 2:"
 
 #. checkbox
-#: ../plugins/systembuttons/systembuttons.c:582
+#: plugins/systembuttons/systembuttons.c:582
 msgid "_Hide"
 msgstr "_Verbergen"
 
-#: ../plugins/systembuttons/systembuttons.c:620
+#: plugins/systembuttons/systembuttons.c:620
 msgid "System buttons"
 msgstr "Systeemknoppen"
 
-#: ../plugins/systray/systray.c:278
-msgid "Notification Area"
-msgstr "Notificatie-pictogrammen"
+#: plugins/systray/systray.c:492
+#, fuzzy
+msgid "Status Area"
+msgstr "Statusvak"
 
-#: ../settings/xfce-panel-settings.desktop.in.h:1
+#: plugins/systray/systray.c:555
+msgid "Display time before icons"
+msgstr ""
+
+#: settings/xfce-panel-settings.desktop.in.h:1
 msgid "Panel Settings"
 msgstr "Instellingen voor het paneel"
 
-#: ../settings/xfce-panel-settings.desktop.in.h:2
+#: settings/xfce-panel-settings.desktop.in.h:2
 msgid "Xfce 4 Panel Settings"
 msgstr "Instellingen Xfce 4 Panel"
 
-#: ../settings/xfce-iconbox-settings.desktop.in.h:1
+#: settings/xfce-iconbox-settings.desktop.in.h:1
 msgid "Iconbox Settings"
 msgstr "Instellingen voor de iconbox"
 
-#: ../settings/xfce-iconbox-settings.desktop.in.h:2
+#: settings/xfce-iconbox-settings.desktop.in.h:2
 msgid "Xfce 4 Iconbox Settings"
 msgstr "Instellingen Xfce 4 Iconbox"
 
-#: ../settings/xfce-taskbar-settings.desktop.in.h:1
+#: settings/xfce-taskbar-settings.desktop.in.h:1
 msgid "Taskbar Settings"
 msgstr "Instellingen voor de taakbalk"
 
-#: ../settings/xfce-taskbar-settings.desktop.in.h:2
+#: settings/xfce-taskbar-settings.desktop.in.h:2
 msgid "Xfce 4 Taskbar Settings"
 msgstr "Instellingen Xfce 4 Taakbalk"
 
-#: ../config/contents.xml.in.h:1
+#: config/contents.xml.in.h:1
 msgid "Appfinder"
 msgstr "Programmazoeker"
 
-#: ../config/contents.xml.in.h:2
+#: config/contents.xml.in.h:2
 msgid "Drag file to print"
 msgstr "Sleep bestand om te printen"
 
-#: ../config/contents.xml.in.h:3
+#: config/contents.xml.in.h:3
 msgid "File manager"
 msgstr "Bestandsbeheer"
 
-#: ../config/contents.xml.in.h:4
+#: config/contents.xml.in.h:4
 msgid "Find and run applications"
 msgstr "Zoeken en uitvoeren van programma's"
 
-#: ../config/contents.xml.in.h:5
+#: config/contents.xml.in.h:5
 msgid "Konqueror"
 msgstr "Konqueror"
 
-#: ../config/contents.xml.in.h:6
+#: config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
 msgstr "Konqueror bestandsbeheer"
 
-#: ../config/contents.xml.in.h:7
+#: config/contents.xml.in.h:7
 msgid "Manual"
 msgstr "Handleiding"
 
-#: ../config/contents.xml.in.h:8
+#: config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
 msgstr "Mozilla webbrowser"
 
-#: ../config/contents.xml.in.h:9
+#: config/contents.xml.in.h:9
 msgid "Music player"
 msgstr "Muziekspeler"
 
-#: ../config/contents.xml.in.h:10
+#: config/contents.xml.in.h:10
 msgid "Nautilus"
 msgstr "Nautilus"
 
-#: ../config/contents.xml.in.h:11
+#: config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
 msgstr "Nautilus bestandsbeheer"
 
-#: ../config/contents.xml.in.h:12
+#: config/contents.xml.in.h:12
 msgid "Printer Management"
 msgstr "Printerbeheer"
+
+#~ msgid "Removing the item will also remove its popup menu."
+#~ msgstr "Hiermee verwijdert u ook het popup menu."
+
+#~ msgid "Caption:"
+#~ msgstr "Naam:"
+
+#~ msgid "Tooltip:"
+#~ msgstr "Tooltip:"
+
+#~ msgid "Attach menu to launcher"
+#~ msgstr "Voeg menu toe aan starter"
+
+#~ msgid "Change menu item"
+#~ msgstr "Menu item veranderen"
+
+#~ msgid "Click mouse button 3 to change item"
+#~ msgstr "Klik muisknop 3 om item te bewerken"
+
+#~ msgid "Add launcher"
+#~ msgstr "Toevoegen"
+
+#~ msgid "Add new item"
+#~ msgstr "Nieuw item toevoegen"
+
+#~ msgid "Left"
+#~ msgstr "Links"
+
+#~ msgid "Right"
+#~ msgstr "Rechts"
+
+#~ msgid "Top"
+#~ msgstr "Boven"
+
+#~ msgid "Bottom"
+#~ msgstr "Onder"
+
+#~ msgid "Popup position:"
+#~ msgstr "Popup positie:"
+
+#~ msgid "Alternative Launcher"
+#~ msgstr "Alternatieve starter"
+
+#~ msgid "Notification Area"
+#~ msgstr "Notificatie-pictogrammen"

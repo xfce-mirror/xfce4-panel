@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa_IR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-02 22:27+0200\n"
+"POT-Creation-Date: 2005-06-09 14:01+0200\n"
 "PO-Revision-Date: 2004-09-28 20:20+0330\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian\n"
@@ -18,94 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
 
-#: ../panel/xfce_support.c:307
+#: panel/xfce_support.c:334
 msgid "Select file"
 msgstr "انتخاب کردن پرونده"
 
-#: ../panel/settings.c:268
+#: panel/settings.c:266
 msgid "No data was found. The panel will be empty."
 msgstr "هیچ داده‌ای یافت نشد. تابلو خالی خواهد بود."
 
-#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1136
-#: ../settings/xftaskbar_plugin.c:393
+#: panel/controls_dialog.c:88 settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "موقعیت:"
 
-#: ../panel/controls_dialog.c:155
+#: panel/controls_dialog.c:154
 msgid "Item properties"
 msgstr "مشخصات آیتم"
 
-#: ../panel/controls_dialog.c:210 ../panel/controls.c:714
-msgid "Removing the item will also remove its popup menu."
-msgstr "برداشتن آیتمی فهرست واشوی آن را نیز برخواهد داشت."
-
-#: ../panel/item_dialog.c:123
+#: panel/item_dialog.c:63
 msgid "Select command"
 msgstr "انتخاب کردن فرمان"
 
-#: ../panel/item_dialog.c:260
+#: panel/item_dialog.c:200
 msgid "Command:"
 msgstr "فرمان:"
 
-#: ../panel/item_dialog.c:306 ../plugins/launcher/launcher-dialog.c:602
+#: panel/item_dialog.c:246 plugins/launcher/launcher-dialog.c:602
 msgid "Run in _terminal"
 msgstr "اجرا کردن در _پایانه"
 
-#: ../panel/item_dialog.c:324
+#: panel/item_dialog.c:264
 msgid "Use startup _notification"
 msgstr "استفاده کردن از یادآوری _آغازین"
 
-#: ../panel/item_dialog.c:510
+#: panel/item_dialog.c:450
 msgid "Other Icon"
 msgstr "شمایل دیگر"
 
-#: ../panel/item_dialog.c:621
+#: panel/item_dialog.c:561
 msgid "Drag file onto this frame to change the icon"
 msgstr "پرونده را برای تغییر شمایل بر روی این قاب بکشانید"
 
-#: ../panel/item_dialog.c:933
-msgid "Caption:"
-msgstr "عنوان:"
-
-#: ../panel/item_dialog.c:962
-msgid "Tooltip:"
-msgstr "راهنمای‌ابزار:"
-
-#: ../panel/item_dialog.c:988
-msgid "Attach menu to launcher"
-msgstr "پیوست فهرست به پرتابگر"
-
-#: ../panel/item_dialog.c:1173
-msgid "Change menu item"
-msgstr "تغییر دادن آیتم فهرست"
-
-#. add buttons
-#: ../panel/item_dialog.c:1179 ../panel/controls.c:751
-#: ../plugins/launcher/launcher-dialog.c:1266
-msgid "_Remove"
-msgstr "_برداشتن"
-
-#: ../panel/item_dialog.c:1191 ../plugins/launcher/launcher.c:130
-msgid "Launcher"
-msgstr "پرتابگر"
-
-#: ../panel/item.c:619
-msgid "Click mouse button 3 to change item"
-msgstr "دکمه‌ی سوم موشی را برای تغییر دادن آیتم کلیک کنید"
-
-#: ../panel/item.c:644
-msgid "Add launcher"
-msgstr "افزودن پرتابگر"
-
-#: ../panel/item.c:649
-msgid "Add new item"
-msgstr "افزودن آیتم جدید"
-
-#: ../panel/main.c:120
+#: panel/main.c:114
 msgid "Are you sure you want to exit?"
 msgstr "آیا مطمئن هستید که می‌خواهید خارج شوید؟"
 
-#: ../panel/main.c:401
+#: panel/main.c:394
 #, c-format
 msgid ""
 "\n"
@@ -128,123 +85,131 @@ msgstr ""
 " Licensed under the GNU GPL.\n"
 "\n"
 
-#: ../panel/main.c:484
+#: panel/main.c:474
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: با موفقیت بدون مدیریت نشست شروع گردید"
 
-#: ../panel/main.c:489
+#: panel/main.c:479
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: با موفقیت با مدیریت نشست شروع گردید"
 
-#: ../panel/controls.c:668
+#: panel/controls.c:669
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "نمی‌توان آیتم \"%s\" تابلو را ایجاد کرد."
 
-#: ../panel/controls.c:746 ../panel/panel.c:717 ../iconbox/iconbox.c:618
+#: panel/controls.c:709
+#, c-format
+msgid "Remove %s item?"
+msgstr ""
+
+#: panel/controls.c:743 panel/panel.c:719 iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "_مشخصات..."
 
-#: ../panel/controls.c:760 ../panel/panel.c:707
+#: panel/controls.c:748 plugins/launcher/launcher-dialog.c:1266
+msgid "_Remove"
+msgstr "_برداشتن"
+
+#: panel/controls.c:757 panel/panel.c:709
 msgid "Add _new item"
 msgstr "افزودن آیتم _جدید"
 
-#: ../panel/controls.c:1086
+#: panel/controls.c:1082
 msgid "This item has no configuration options"
 msgstr "این آیتم هیچ گزینه‌های تنظیمی ندارد"
 
-#: ../panel/panel.c:698 ../panel/panel.c:1046
-#: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:507
+#: panel/panel.c:700 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel"
 msgstr "تابلوی Xfce"
 
-#: ../panel/panel.c:722
+#: panel/panel.c:724
 msgid "_About Xfce"
 msgstr "_درباره‌ی Xfce"
 
-#: ../panel/panel.c:727
+#: panel/panel.c:729
 msgid "_Help"
 msgstr "_راهنما"
 
-#: ../panel/panel.c:736
+#: panel/panel.c:738
 msgid "_Lock screen"
 msgstr "_قفل کردن صفحه"
 
-#: ../panel/panel.c:741
+#: panel/panel.c:743
 msgid "_Restart"
 msgstr "_راه‌اندازی مجدد"
 
-#: ../panel/panel.c:750 ../iconbox/iconbox.c:628
+#: panel/panel.c:752 iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "_خروج"
 
-#: ../panel/icons.c:63 ../plugins/launcher/launcher-dialog.c:83
+#: panel/icons.c:63 plugins/launcher/launcher-dialog.c:83
 msgid "Default"
 msgstr "پیش‌فرض"
 
-#: ../panel/icons.c:64 ../plugins/launcher/launcher-dialog.c:84
+#: panel/icons.c:64 plugins/launcher/launcher-dialog.c:84
 msgid "Editor"
 msgstr "ویرایشگر"
 
-#: ../panel/icons.c:65 ../plugins/launcher/launcher-dialog.c:85
+#: panel/icons.c:65 plugins/launcher/launcher-dialog.c:85
 msgid "File management"
 msgstr "مدیریت پرونده"
 
-#: ../panel/icons.c:66 ../plugins/launcher/launcher-dialog.c:86
+#: panel/icons.c:66 plugins/launcher/launcher-dialog.c:86
 msgid "Utilities"
 msgstr "وسایل"
 
-#: ../panel/icons.c:67 ../plugins/launcher/launcher-dialog.c:87
+#: panel/icons.c:67 plugins/launcher/launcher-dialog.c:87
 msgid "Games"
 msgstr "بازی‌ها"
 
-#: ../panel/icons.c:68 ../plugins/launcher/launcher-dialog.c:88
+#: panel/icons.c:68 plugins/launcher/launcher-dialog.c:88
 msgid "Help browser"
 msgstr "مرورگر راهنما"
 
-#: ../panel/icons.c:69 ../plugins/launcher/launcher-dialog.c:89
+#: panel/icons.c:69 plugins/launcher/launcher-dialog.c:89
 msgid "Multimedia"
 msgstr "چندرسانه‌ای"
 
-#: ../panel/icons.c:70 ../plugins/launcher/launcher-dialog.c:90
+#: panel/icons.c:70 plugins/launcher/launcher-dialog.c:90
 msgid "Network"
 msgstr "شبکه"
 
-#: ../panel/icons.c:71 ../plugins/launcher/launcher-dialog.c:91
+#: panel/icons.c:71 plugins/launcher/launcher-dialog.c:91
 msgid "Graphics"
 msgstr "گرافیک"
 
-#: ../panel/icons.c:72 ../plugins/launcher/launcher-dialog.c:92
+#: panel/icons.c:72 plugins/launcher/launcher-dialog.c:92
 msgid "Printer"
 msgstr "چاپگر"
 
-#: ../panel/icons.c:73 ../plugins/launcher/launcher-dialog.c:93
+#: panel/icons.c:73 plugins/launcher/launcher-dialog.c:93
 msgid "Productivity"
 msgstr "سازنده‌گی"
 
-#: ../panel/icons.c:74 ../plugins/launcher/launcher-dialog.c:94
+#: panel/icons.c:74 plugins/launcher/launcher-dialog.c:94
 msgid "Sound"
 msgstr "صوت"
 
 #. Translation with context.
 #. * Translators only need to translate 'Terminal'
-#: ../panel/icons.c:77
+#: panel/icons.c:77
 #, fuzzy
 msgid "icons|Terminal"
 msgstr "پایانه"
 
-#: ../panel/mcs_client.c:170
+#: panel/mcs_client.c:169
 msgid "Settings manager not available"
 msgstr "مدیر تنظیمات در دسترس نیست"
 
-#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:70
+#: taskbar/xftaskbar.c:510 plugins/systray/systray.c:88
 msgid "There is already a system tray running on this screen"
 msgstr "سینی سیستمی از قبل بر روی این پرده در حال اجراست"
 
-#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:76
+#: taskbar/xftaskbar.c:516 plugins/systray/systray.c:94
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "نمیتوان سینی سیستم را ثبت کرد: %s"
@@ -257,262 +222,242 @@ msgstr "نمیتوان سینی سیستم را ثبت کرد: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../taskbar/xftaskbar.c:616
+#: taskbar/xftaskbar.c:616 plugins/systray/systray.c:175
 #, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../taskbar/xftaskbar.c:637
+#: taskbar/xftaskbar.c:637 plugins/systray/systray.c:200
 msgid "%H:%M"
 msgstr ""
 
-#: ../taskbar/xftaskbar.c:910 ../settings/xftaskbar_plugin.c:696
-#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
+#: taskbar/xftaskbar.c:910 settings/xftaskbar_plugin.c:696
+#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr "نوارکاری"
 
-#: ../taskbar/xftaskbar.c:1025
+#: taskbar/xftaskbar.c:1022
 msgid "Cannot create MCS client channel"
 msgstr "نمی‌توان کانال کارگیر MCS را ایجاد کرد"
 
-#: ../iconbox/iconbox.c:568
+#: iconbox/iconbox.c:568
 msgid "Xfce Iconbox"
 msgstr ""
 
-#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:138
+#: iconbox/iconbox.c:576 plugins/launcher/launcher.c:140
 msgid "Developer"
 msgstr ""
 
-#: ../iconbox/iconbox.c:612
+#: iconbox/iconbox.c:612
 #, fuzzy
 msgid "_About"
 msgstr "_درباره‌ی Xfce"
 
-#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
-#: ../settings/xftaskbar_plugin.c:511
+#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
+#: settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "کوچک"
 
-#: ../settings/xfce_settings_dialog.c:91
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "متوسط"
 
-#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
-#: ../settings/xftaskbar_plugin.c:532
+#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
+#: settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "بزرگ"
 
-#: ../settings/xfce_settings_dialog.c:99
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "عظیم"
 
-#: ../settings/xfce_settings_dialog.c:175
+#: settings/xfce_settings_dialog.c:149
 msgid "Horizontal"
 msgstr "افقی"
 
-#: ../settings/xfce_settings_dialog.c:179
+#: settings/xfce_settings_dialog.c:153
 msgid "Vertical"
 msgstr "عمودی"
 
-#: ../settings/xfce_settings_dialog.c:221
-msgid "Left"
-msgstr "چپ"
-
-#: ../settings/xfce_settings_dialog.c:225
-msgid "Right"
-msgstr "راست"
-
-#: ../settings/xfce_settings_dialog.c:229
-msgid "Top"
-msgstr "بالا"
-
-#: ../settings/xfce_settings_dialog.c:233
-msgid "Bottom"
-msgstr "پایین"
-
-#: ../settings/xfce_settings_dialog.c:275 ../settings/iconbox_plugin.c:762
+#: settings/xfce_settings_dialog.c:195 settings/iconbox_plugin.c:762
 msgid "None"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:279
+#: settings/xfce_settings_dialog.c:199
 #, fuzzy
 msgid "At both sides"
 msgstr "پنهان‌سازی خودکار"
 
-#: ../settings/xfce_settings_dialog.c:283
+#: settings/xfce_settings_dialog.c:203
 msgid "At the start"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:287
+#: settings/xfce_settings_dialog.c:207
 msgid "At the end"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:320
+#: settings/xfce_settings_dialog.c:240
 msgid "Panel size:"
 msgstr "اندازه‌ی تابلو:"
 
-#: ../settings/xfce_settings_dialog.c:336
+#: settings/xfce_settings_dialog.c:256
 msgid "Panel orientation:"
 msgstr "جهت تابلو:"
 
-#: ../settings/xfce_settings_dialog.c:355
-msgid "Popup position:"
-msgstr "موقعیت واشو:"
-
-#: ../settings/xfce_settings_dialog.c:371
+#: settings/xfce_settings_dialog.c:273
 msgid "Handles:"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:407
+#: settings/xfce_settings_dialog.c:309
 msgid "Autohide:"
 msgstr "پنهان‌سازی خودکار:"
 
-#: ../settings/xfce_settings_dialog.c:453
+#: settings/xfce_settings_dialog.c:355
 msgid "Full width:"
 msgstr ""
 
-#: ../settings/xfce_settings_dialog.c:524
+#: settings/xfce_settings_dialog.c:426
 msgid "Xfce Panel Settings"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../settings/xfce_settings_dialog.c:534
+#: settings/xfce_settings_dialog.c:436
 msgid "Appearance"
 msgstr "ظاهر"
 
 #. show only hidden
-#: ../settings/xfce_settings_dialog.c:549 ../settings/iconbox_plugin.c:685
+#: settings/xfce_settings_dialog.c:451 settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "رفتار"
 
 #. position
-#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
+#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
 msgid "Position"
 msgstr "موقعیت"
 
-#: ../settings/xftaskbar_plugin.c:399
+#: settings/xftaskbar_plugin.c:399
 msgid "_Top"
 msgstr "_بالا"
 
-#: ../settings/xftaskbar_plugin.c:409
+#: settings/xftaskbar_plugin.c:409
 msgid "_Bottom"
 msgstr "_پایین"
 
-#: ../settings/xftaskbar_plugin.c:422
+#: settings/xftaskbar_plugin.c:422
 #, fuzzy
 msgid "Alignment:"
 msgstr "همترازی"
 
-#: ../settings/xftaskbar_plugin.c:429
+#: settings/xftaskbar_plugin.c:429
 msgid "_Left"
 msgstr "_چپ"
 
-#: ../settings/xftaskbar_plugin.c:439
+#: settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr "_مرکز"
 
-#: ../settings/xftaskbar_plugin.c:447
+#: settings/xftaskbar_plugin.c:447
 msgid "_Right"
 msgstr "_راست"
 
 #. size
-#: ../settings/xftaskbar_plugin.c:464
+#: settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr "اندازه"
 
-#: ../settings/xftaskbar_plugin.c:474
+#: settings/xftaskbar_plugin.c:474
 #, fuzzy
 msgid "Height:"
 msgstr "ارتفاع :"
 
-#: ../settings/xftaskbar_plugin.c:505
+#: settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr "پهنا:"
 
-#: ../settings/xftaskbar_plugin.c:541
+#: settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr ""
 
 #. Autohide
-#: ../settings/xftaskbar_plugin.c:561
+#: settings/xftaskbar_plugin.c:561
 msgid "Autohide"
 msgstr "پنهان‌سازی خودکار"
 
-#: ../settings/xftaskbar_plugin.c:566
+#: settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr "_پنهان‌سازی خودکار نوارکاری"
 
 #. tasklist
-#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:92
+#: settings/xftaskbar_plugin.c:583 plugins/tasklist/tasklist.c:92
 #, fuzzy
 msgid "Tasklist"
 msgstr "کارها"
 
-#: ../settings/xftaskbar_plugin.c:592
+#: settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr ""
 
-#: ../settings/xftaskbar_plugin.c:604
+#: settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr "نشان دادن کارها از _همه‌ی فضاهای کاری"
 
-#: ../settings/xftaskbar_plugin.c:613
+#: settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
 msgstr "همیشه کارهای _گروه"
 
-#: ../settings/xftaskbar_plugin.c:621
+#: settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr "نشان دادن _نام‌های برنامه"
 
 #. pager
-#: ../settings/xftaskbar_plugin.c:629
+#: settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr "صفحه‌نما"
 
-#: ../settings/xftaskbar_plugin.c:634
+#: settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr "نشان دادن _صفحه‌نما در نوارکار"
 
 #. status area
-#: ../settings/xftaskbar_plugin.c:641
+#: settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr ""
 
-#: ../settings/xftaskbar_plugin.c:650
+#: settings/xftaskbar_plugin.c:650
 #, fuzzy
 msgid "Show _notification icons"
 msgstr "نشان دادن _نام‌های برنامه"
 
-#: ../settings/xftaskbar_plugin.c:657
+#: settings/xftaskbar_plugin.c:657 plugins/systray/systray.c:535
 msgid "Show _time"
 msgstr ""
 
-#: ../settings/xftaskbar_plugin.c:718
+#: settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr ""
 
-#: ../settings/xftaskbar_plugin.c:729
+#: settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:629
+#: settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:691
+#: settings/iconbox_plugin.c:691
 #, fuzzy
 msgid "_Show only minimized applications"
 msgstr "نشان دادن _نام‌های برنامه"
 
-#: ../settings/iconbox_plugin.c:754
+#: settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:777
+#: settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
 
-#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
-#: ../settings/iconbox_plugin.c:992
+#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
+#: settings/iconbox_plugin.c:992
 msgid "Iconbox"
 msgstr ""
 
@@ -524,211 +469,208 @@ msgstr ""
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../plugins/clock/clock.c:191
+#: plugins/clock/clock.c:191
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:421
+#: plugins/clock/clock.c:421
 msgid "Clock type:"
 msgstr "نوع ساعت:"
 
-#: ../plugins/clock/clock.c:434
+#: plugins/clock/clock.c:434
 msgid "Analog"
 msgstr "آنالوگ"
 
-#: ../plugins/clock/clock.c:438
+#: plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "ارقامی"
 
-#: ../plugins/clock/clock.c:442
+#: plugins/clock/clock.c:442
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:504
+#: plugins/clock/clock.c:504
 msgid "Hour mode:"
 msgstr "حالت ساعت:"
 
-#: ../plugins/clock/clock.c:511
+#: plugins/clock/clock.c:511
 msgid "24 hour"
 msgstr "۲۴ ساعتی"
 
-#: ../plugins/clock/clock.c:517
+#: plugins/clock/clock.c:517
 msgid "12 hour"
 msgstr "۱۲ ساعتی"
 
-#: ../plugins/clock/clock.c:523
+#: plugins/clock/clock.c:523
 msgid "AM/PM"
 msgstr "ق‌ظ/ب‌ظ"
 
-#: ../plugins/clock/clock.c:561
+#: plugins/clock/clock.c:561
 msgid "Show seconds:"
 msgstr "نشان دادن ثانیه‌ها:"
 
-#: ../plugins/clock/clock.c:674
+#: plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "ساعت Xfce"
 
-#: ../plugins/flexspace/flexspace.c:78
+#: plugins/flexspace/flexspace.c:78
 msgid "Flexible space"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:130
+#: plugins/launcher/launcher.c:132 plugins/launcher/launcher.c:325
+msgid "Launcher"
+msgstr "پرتابگر"
+
+#: plugins/launcher/launcher.c:132
 #, fuzzy
 msgid "Launcher Plugin"
 msgstr "پرتابگر"
 
-#: ../plugins/launcher/launcher.c:314
-#, fuzzy
-msgid "Alternative Launcher"
-msgstr "پیوست فهرست به پرتابگر"
-
-#: ../plugins/launcher/launcher.c:372
+#: plugins/launcher/launcher.c:400
 #, fuzzy, c-format
 msgid ""
 "Could not run \"%s\":\n"
 "%s"
 msgstr "نمی‌توان آیتم \"%s\" تابلو را ایجاد کرد."
 
-#: ../plugins/launcher/launcher.c:704
-#: ../plugins/launcher/launcher-dialog.c:1185
+#: plugins/launcher/launcher.c:840 plugins/launcher/launcher-dialog.c:1185
 #, fuzzy
 msgid "New item"
 msgstr "افزودن آیتم جدید"
 
-#: ../plugins/launcher/launcher.c:706
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: plugins/launcher/launcher.c:842 plugins/launcher/launcher-dialog.c:1186
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "این آیتم هیچ گزینه‌های تنظیمی ندارد"
 
-#: ../plugins/launcher/launcher-dialog.c:95 ../config/contents.xml.in.h:14
+#: plugins/launcher/launcher-dialog.c:95 config/contents.xml.in.h:14
 msgid "Terminal"
 msgstr "پایانه"
 
-#: ../plugins/launcher/launcher-dialog.c:96
+#: plugins/launcher/launcher-dialog.c:96
 msgid "Development"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:97 ../config/contents.xml.in.h:13
+#: plugins/launcher/launcher-dialog.c:97 config/contents.xml.in.h:13
 #, fuzzy
 msgid "Settings"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../plugins/launcher/launcher-dialog.c:98
+#: plugins/launcher/launcher-dialog.c:98
 msgid "System"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:99
+#: plugins/launcher/launcher-dialog.c:99
 msgid "Windows programs"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:262
+#: plugins/launcher/launcher-dialog.c:262
 #, fuzzy
 msgid "Name"
 msgstr "بازی‌ها"
 
-#: ../plugins/launcher/launcher-dialog.c:282
+#: plugins/launcher/launcher-dialog.c:282
 #, fuzzy
 msgid "Description"
 msgstr "موقعیت"
 
-#: ../plugins/launcher/launcher-dialog.c:397
+#: plugins/launcher/launcher-dialog.c:397
 #, fuzzy
 msgid "Select image file"
 msgstr "انتخاب کردن پرونده"
 
-#: ../plugins/launcher/launcher-dialog.c:468
+#: plugins/launcher/launcher-dialog.c:468
 msgid "Other..."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:567
+#: plugins/launcher/launcher-dialog.c:567
 #, fuzzy
 msgid "Command"
 msgstr "فرمان:"
 
-#: ../plugins/launcher/launcher-dialog.c:622
+#: plugins/launcher/launcher-dialog.c:622
 #, fuzzy
 msgid "Use _startup notification"
 msgstr "استفاده کردن از یادآوری _آغازین"
 
-#: ../plugins/launcher/launcher-dialog.c:644
-#: ../plugins/launcher/launcher-dialog.c:649
+#: plugins/launcher/launcher-dialog.c:644
+#: plugins/launcher/launcher-dialog.c:649
 #, fuzzy
 msgid "Edit launcher"
 msgstr "افزودن پرتابگر"
 
-#: ../plugins/launcher/launcher-dialog.c:1242
+#: plugins/launcher/launcher-dialog.c:1242
 msgid "_Up"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1248
+#: plugins/launcher/launcher-dialog.c:1248
 msgid "_Down"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1254
+#: plugins/launcher/launcher-dialog.c:1254
 #, fuzzy
 msgid "_Edit"
 msgstr "ویرایشگر"
 
-#: ../plugins/launcher/launcher-dialog.c:1260
+#: plugins/launcher/launcher-dialog.c:1260
 msgid "_Add"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1290
+#: plugins/launcher/launcher-dialog.c:1290
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1313
+#: plugins/launcher/launcher-dialog.c:1313
 msgid "Panel Item and Menu"
 msgstr ""
 
-#: ../plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "جعبه‌ی پست:"
 
-#: ../plugins/mailcheck/mailcheck.c:875
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "فرمان جدید پست:"
 
-#: ../plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "فرمان برای اجرا وقتی که پست جدید می‌آید"
 
-#: ../plugins/mailcheck/mailcheck.c:919
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "فرمان برای اجرا وقتی که دکمه‌ی بر روی تابلو کلیک شده باشد"
 
-#: ../plugins/mailcheck/mailcheck.c:940
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "بازه (ثانیه)"
 
-#: ../plugins/mailcheck/mailcheck.c:1017
+#: plugins/mailcheck/mailcheck.c:1017
 msgid "Mail checker"
 msgstr "بررسی‌گر پست"
 
-#: ../plugins/pager/pager.c:313
+#: plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "تعداد ردیف‌ها:"
 
-#: ../plugins/pager/pager.c:315
+#: plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "تعداد ستون‌ها:"
 
-#: ../plugins/pager/pager.c:372
+#: plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "صفحه‌نمای گرافیکی"
 
-#: ../plugins/separator/separator.c:65
+#: plugins/separator/separator.c:65
 msgid "Separator"
 msgstr "جداساز"
 
-#: ../plugins/switcher/switcher.c:698
+#: plugins/switcher/switcher.c:695
 msgid "Desktop switcher"
 msgstr "عوض کننده‌ی رومیزی"
 
-#: ../plugins/systembuttons/systembuttons.c:85
+#: plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -738,146 +680,196 @@ msgstr ""
 "\n"
 "برای اطلاعات بیشتر از مدیر سیستم خود سؤال کنید"
 
-#: ../plugins/systembuttons/systembuttons.c:170
+#: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "قفل کردن صفحه"
 
 #. don't translate 'tip|'
-#: ../plugins/systembuttons/systembuttons.c:172
+#: plugins/systembuttons/systembuttons.c:172
 #, fuzzy
 msgid "tip|Exit"
 msgstr "خروج"
 
 #. don't translate 'tip|'
-#: ../plugins/systembuttons/systembuttons.c:174
+#: plugins/systembuttons/systembuttons.c:174
 #, fuzzy
 msgid "tip|Setup"
 msgstr "برپاسازی"
 
 #. don't translate 'tip|'
-#: ../plugins/systembuttons/systembuttons.c:176
+#: plugins/systembuttons/systembuttons.c:176
 #, fuzzy
 msgid "tip|Info"
 msgstr "اطلاعات"
 
 #. set names to use in option menus
-#: ../plugins/systembuttons/systembuttons.c:521
+#: plugins/systembuttons/systembuttons.c:521
 msgid "Lock"
 msgstr "قفل کردن"
 
-#: ../plugins/systembuttons/systembuttons.c:522
+#: plugins/systembuttons/systembuttons.c:522
 msgid "Exit"
 msgstr "خروج"
 
-#: ../plugins/systembuttons/systembuttons.c:523
+#: plugins/systembuttons/systembuttons.c:523
 msgid "Setup"
 msgstr "برپاسازی"
 
-#: ../plugins/systembuttons/systembuttons.c:524
+#: plugins/systembuttons/systembuttons.c:524
 msgid "Info"
 msgstr "اطلاعات"
 
-#: ../plugins/systembuttons/systembuttons.c:553
+#: plugins/systembuttons/systembuttons.c:553
 msgid "Button 1:"
 msgstr "دکمه‌ی ۱:"
 
-#: ../plugins/systembuttons/systembuttons.c:568
+#: plugins/systembuttons/systembuttons.c:568
 msgid "Button 2:"
 msgstr "دکمه ۲:"
 
 #. checkbox
-#: ../plugins/systembuttons/systembuttons.c:582
+#: plugins/systembuttons/systembuttons.c:582
 msgid "_Hide"
 msgstr "_پنهان کردن"
 
-#: ../plugins/systembuttons/systembuttons.c:620
+#: plugins/systembuttons/systembuttons.c:620
 msgid "System buttons"
 msgstr "دکمه‌های سیستم"
 
-#: ../plugins/systray/systray.c:278
-#, fuzzy
-msgid "Notification Area"
-msgstr "ناحیه‌ی یادآوری"
+#: plugins/systray/systray.c:492
+msgid "Status Area"
+msgstr ""
 
-#: ../settings/xfce-panel-settings.desktop.in.h:1
+#: plugins/systray/systray.c:555
+msgid "Display time before icons"
+msgstr ""
+
+#: settings/xfce-panel-settings.desktop.in.h:1
 #, fuzzy
 msgid "Panel Settings"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../settings/xfce-panel-settings.desktop.in.h:2
+#: settings/xfce-panel-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Panel Settings"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../settings/xfce-iconbox-settings.desktop.in.h:1
+#: settings/xfce-iconbox-settings.desktop.in.h:1
 #, fuzzy
 msgid "Iconbox Settings"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../settings/xfce-iconbox-settings.desktop.in.h:2
+#: settings/xfce-iconbox-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Iconbox Settings"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../settings/xfce-taskbar-settings.desktop.in.h:1
+#: settings/xfce-taskbar-settings.desktop.in.h:1
 #, fuzzy
 msgid "Taskbar Settings"
 msgstr "نوارکاری"
 
-#: ../settings/xfce-taskbar-settings.desktop.in.h:2
+#: settings/xfce-taskbar-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Taskbar Settings"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../config/contents.xml.in.h:1
+#: config/contents.xml.in.h:1
 msgid "Appfinder"
 msgstr ""
 
-#: ../config/contents.xml.in.h:2
+#: config/contents.xml.in.h:2
 msgid "Drag file to print"
 msgstr ""
 
-#: ../config/contents.xml.in.h:3
+#: config/contents.xml.in.h:3
 #, fuzzy
 msgid "File manager"
 msgstr "مدیریت پرونده"
 
-#: ../config/contents.xml.in.h:4
+#: config/contents.xml.in.h:4
 msgid "Find and run applications"
 msgstr ""
 
-#: ../config/contents.xml.in.h:5
+#: config/contents.xml.in.h:5
 msgid "Konqueror"
 msgstr ""
 
-#: ../config/contents.xml.in.h:6
+#: config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
 msgstr ""
 
-#: ../config/contents.xml.in.h:7
+#: config/contents.xml.in.h:7
 msgid "Manual"
 msgstr ""
 
-#: ../config/contents.xml.in.h:8
+#: config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
 msgstr ""
 
-#: ../config/contents.xml.in.h:9
+#: config/contents.xml.in.h:9
 msgid "Music player"
 msgstr ""
 
-#: ../config/contents.xml.in.h:10
+#: config/contents.xml.in.h:10
 msgid "Nautilus"
 msgstr ""
 
-#: ../config/contents.xml.in.h:11
+#: config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
 msgstr ""
 
-#: ../config/contents.xml.in.h:12
+#: config/contents.xml.in.h:12
 #, fuzzy
 msgid "Printer Management"
 msgstr "مدیریت پرونده"
+
+#~ msgid "Removing the item will also remove its popup menu."
+#~ msgstr "برداشتن آیتمی فهرست واشوی آن را نیز برخواهد داشت."
+
+#~ msgid "Caption:"
+#~ msgstr "عنوان:"
+
+#~ msgid "Tooltip:"
+#~ msgstr "راهنمای‌ابزار:"
+
+#~ msgid "Attach menu to launcher"
+#~ msgstr "پیوست فهرست به پرتابگر"
+
+#~ msgid "Change menu item"
+#~ msgstr "تغییر دادن آیتم فهرست"
+
+#~ msgid "Click mouse button 3 to change item"
+#~ msgstr "دکمه‌ی سوم موشی را برای تغییر دادن آیتم کلیک کنید"
+
+#~ msgid "Add launcher"
+#~ msgstr "افزودن پرتابگر"
+
+#~ msgid "Add new item"
+#~ msgstr "افزودن آیتم جدید"
+
+#~ msgid "Left"
+#~ msgstr "چپ"
+
+#~ msgid "Right"
+#~ msgstr "راست"
+
+#~ msgid "Top"
+#~ msgstr "بالا"
+
+#~ msgid "Bottom"
+#~ msgstr "پایین"
+
+#~ msgid "Popup position:"
+#~ msgstr "موقعیت واشو:"
+
+#, fuzzy
+#~ msgid "Alternative Launcher"
+#~ msgstr "پیوست فهرست به پرتابگر"
+
+#, fuzzy
+#~ msgid "Notification Area"
+#~ msgstr "ناحیه‌ی یادآوری"
 
 #~ msgid "Menu"
 #~ msgstr "فهرست"
