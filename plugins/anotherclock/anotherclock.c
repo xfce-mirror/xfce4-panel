@@ -151,10 +151,30 @@ anotherclock_timeout (AnotherClock *ac)
     time_t ticks;
     struct tm *tm;
     char date_s[255];
+    char *small, *large;
 
     ticks = time (0);
     tm = localtime (&ticks);
 
+    switch (ac->size)
+    {
+        case 0:
+            small = "x-small";
+            large = "large";
+            break;
+        case 1:
+            small = "small";
+            large = "x-large";
+            break;
+        case 2:
+            small = "small";
+            large = "x-large";
+            break;
+        default:
+            small = "medium";
+            large = "xx-large";
+    }
+        
     if (tm->tm_mday != ac->mday)
     {
         ac->mday = tm->tm_mday;
@@ -187,27 +207,12 @@ anotherclock_timeout (AnotherClock *ac)
 
     if (tm->tm_min != ac->min)
     {
-        char *markup = NULL, *size = NULL;
+        char *markup = NULL;
         
         ac->min = tm->tm_min;
         
-        switch (ac->size)
-        {
-            case 0:
-                size = "x-small";
-                break;
-            case 1:
-                size = "small";
-                break;
-            case 2:
-                size = "small";
-                break;
-            default:
-                size = "medium";
-        }
-        
         markup = g_strdup_printf ("<span size=\"%s\">%02d</span>", 
-                                  size, ac->min);
+                                  small, ac->min);
         
         gtk_label_set_markup (GTK_LABEL (ac->minlabel), markup);
 
@@ -216,31 +221,14 @@ anotherclock_timeout (AnotherClock *ac)
     
     if (tm->tm_hour != ac->hr)
     {
-        char *markup = NULL, *size = NULL;
+        char *markup = NULL;
         
         ac->hr = tm->tm_hour;
         
-        switch (ac->size)
-        {
-            case 0:
-                size = "large";
-                break;
-            case 1:
-                size = "x-large";
-                break;
-            case 2:
-                size = "x-large";
-                break;
-            default:
-                size = "xx-large";
-        }
-        
         markup = g_strdup_printf ("<span size=\"%s\">%d</span>", 
-                                  size, ac->hr);
+                                  large, ac->hr);
         
         gtk_label_set_markup (GTK_LABEL (ac->hrlabel), markup);
-
-        g_free (markup);
     }
     
     return TRUE;
@@ -254,7 +242,7 @@ anotherclock_new (void)
     
     ac->mday = ac->min = ac->hr = -1;
 
-    ac->size = 1;
+    ac->size = settings.size;
 
     ac->tips = gtk_tooltips_new ();
     g_object_ref (ac->tips);
@@ -265,6 +253,7 @@ anotherclock_new (void)
     gtk_widget_show (ac->eventbox);
 
     align = gtk_alignment_new (0.5, 0.5, 0, 0);
+    gtk_container_set_border_width (GTK_CONTAINER (align), 2);
     gtk_widget_show (align);
     gtk_container_add (GTK_CONTAINER (ac->eventbox), align);
 
@@ -285,7 +274,6 @@ anotherclock_new (void)
     gtk_table_attach (GTK_TABLE (ac->table), ac->minlabel,
                       1, 2, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
     
-    /* Add tooltip to show the current date */
     anotherclock_timeout (ac);
 
     ac->timeout_id =
