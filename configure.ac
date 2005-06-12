@@ -93,6 +93,7 @@ taskbar/Makefile
 iconbox/Makefile
 settings/Makefile
 plugins/Makefile
+plugins/anotherclock/Makefile
 plugins/clock/Makefile
 plugins/flexspace/Makefile
 plugins/launcher/Makefile

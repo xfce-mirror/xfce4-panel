@@ -1,4 +1,5 @@
 SUBDIRS =								\
+	anotherclock							\
 	clock								\
 	flexspace							\
 	launcher							\
