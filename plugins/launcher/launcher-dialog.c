@@ -1233,12 +1233,23 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
 static void
 launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
 {
-    GtkWidget *vbox, *b;
+    GtkWidget *vbox, *b, *align;
 
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
-    gtk_box_pack_end (box, vbox, FALSE, FALSE, 0);
+    gtk_box_pack_start (box, vbox, FALSE, FALSE, 0);
     
+    ld->edit = b = gtk_button_new_with_mnemonic (_("_Edit"));
+    gtk_widget_show (b);
+    gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, 0);
+
+    align = gtk_alignment_new (0, 0, 0, 0);
+    gtk_widget_show (align);
+    gtk_widget_set_size_request (align, 1, 1);
+    gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
+    
+    g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
+
     ld->up = b = gtk_button_new_with_mnemonic (_("_Up"));
     gtk_widget_show (b);
     gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, 0);
@@ -1251,12 +1262,11 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
 
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
-    ld->edit = b = gtk_button_new_with_mnemonic (_("_Edit"));
-    gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, BORDER);
-
-    g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
-
+    align = gtk_alignment_new (0, 0, 0, 0);
+    gtk_widget_show (align);
+    gtk_widget_set_size_request (align, 1, 1);
+    gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
+    
     ld->add = b = gtk_button_new_with_mnemonic (_("_Add"));
     gtk_widget_show (b);
     gtk_box_pack_start (GTK_BOX (vbox), b, FALSE, FALSE, 0);
@@ -1275,7 +1285,7 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
 static void
 launcher_dialog_add_explanation (GtkBox *box)
 {
-    GtkWidget *hbox, *img, *label;
+    GtkWidget *hbox, *img, *label, *align;
 
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -1292,6 +1302,11 @@ launcher_dialog_add_explanation (GtkBox *box)
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+    
+    align = gtk_alignment_new (0, 0, 0, 0);
+    gtk_widget_show (align);
+    gtk_widget_set_size_request (align, BORDER, BORDER);
+    gtk_box_pack_start (box, align, FALSE, FALSE, 0);
 }
 
 void
@@ -1299,8 +1314,7 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
                             GtkWidget * close)
 {
     LauncherDialog *ld;
-    GtkWidget *vbox, *label, *hbox;
-    char *markup;
+    GtkWidget *vbox, *hbox;
 
     ld = g_new0 (LauncherDialog, 1);
     
@@ -1310,16 +1324,6 @@ launcher_properties_dialog (Launcher * launcher, GtkContainer * container,
     gtk_widget_show (vbox);
     gtk_container_add (container, vbox);
 
-    markup = g_strdup_printf ("<b>%s</b>", _("Panel Item and Menu"));
-    
-    label = gtk_label_new (NULL);
-    gtk_label_set_markup (GTK_LABEL (label), markup);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
-
-    g_free (markup);
-    
     launcher_dialog_add_explanation (GTK_BOX (vbox));
     
     hbox = gtk_hbox_new (FALSE, BORDER);

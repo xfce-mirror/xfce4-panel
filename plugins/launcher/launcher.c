@@ -477,6 +477,10 @@ launcher_button_released (GtkWidget *mi, GdkEventButton *ev,
         /* don't activate on button release */
         return TRUE;
     }
+    
+    /* don't activate on right-click */
+    if (ev->button == 3)
+        return TRUE;
 
     return FALSE;
 }
