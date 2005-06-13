@@ -57,7 +57,6 @@ typedef struct
 
     GtkWidget *hrlabel;
     GtkWidget *minlabel;
-    GtkWidget *ampmlabel;
 
     GtkTooltips *tips;
 
@@ -68,6 +67,8 @@ typedef struct
     int mday;
     int min;
     int hr;
+
+    gboolean use24;
 }
 AnotherClock;
 
@@ -222,13 +223,19 @@ anotherclock_timeout (AnotherClock *ac)
     if (tm->tm_hour != ac->hr)
     {
         char *markup = NULL;
+        gboolean pm = FALSE;
         
         ac->hr = tm->tm_hour;
+
+        if (!ac->use24 && ac->hr > 12)
+            pm = TRUE;
         
-        markup = g_strdup_printf ("<span size=\"%s\">%d</span>", 
-                                  large, ac->hr);
+        markup = g_strdup_printf ("<span size=\"%s\">%2d</span>", 
+                                  large, pm ? ac->hr - 12 : ac->hr);
         
         gtk_label_set_markup (GTK_LABEL (ac->hrlabel), markup);
+
+        g_free (markup);
     }
     
     return TRUE;
@@ -259,6 +266,7 @@ anotherclock_new (void)
 
     ac->table = gtk_table_new (2, 2, FALSE);
     gtk_table_set_col_spacings (GTK_TABLE (ac->table), 2);
+    gtk_table_set_row_spacings (GTK_TABLE (ac->table), 0);
     gtk_widget_show (ac->table);
     gtk_container_add (GTK_CONTAINER (align), ac->table);
 
@@ -266,13 +274,13 @@ anotherclock_new (void)
     gtk_widget_show (ac->hrlabel);
     gtk_label_set_use_markup (GTK_LABEL (ac->hrlabel), TRUE);
     gtk_table_attach (GTK_TABLE (ac->table), ac->hrlabel,
-                      0, 1, 0, 2, GTK_FILL, GTK_FILL, 0, 0);
+                      0, 1, 0, 2, 0, 0, 0, 0);
     
     ac->minlabel = gtk_label_new (NULL);
     gtk_widget_show (ac->minlabel);
     gtk_label_set_use_markup (GTK_LABEL (ac->minlabel), TRUE);
     gtk_table_attach (GTK_TABLE (ac->table), ac->minlabel,
-                      1, 2, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
+                      1, 2, 0, 1, 0, 0, 0, 0);
     
     anotherclock_timeout (ac);
 
@@ -330,14 +338,61 @@ anotherclock_set_size (Control * control, int size)
 static void
 anotherclock_write_config (Control * control, xmlNodePtr parent)
 {
+    char value[2];
+    AnotherClock *ac = control->data;
+
+    g_snprintf (value, 2, "%d", ac->use24);
+
+    xmlSetProp (parent, "use24", (const xmlChar *) value);
 }
 
 /* Read the configuration file at init */
 static void
 anotherclock_read_config (Control * control, xmlNodePtr node)
 {
+    xmlChar *value;
+    AnotherClock *ac = control->data;
+
+    value = xmlGetProp (node, "use24");
+
+    if (value)
+    {
+        int n = strtol ((const char *)value, NULL, 0);
+
+        ac->use24 = (n == 1);
+    }
+    else
+    {
+        ac->use24 = TRUE;
+    }
 }
 
+/* configuration dialog */
+static void
+toggle_24hr (GtkToggleButton *b, AnotherClock *ac)
+{
+    ac->use24 = gtk_toggle_button_get_active (b);
+
+    ac->hr = -1;
+    anotherclock_timeout (ac);
+}
+
+static void
+anotherclock_create_options (Control * control, GtkContainer * container,
+                             GtkWidget * close)
+{
+    GtkWidget *b;
+    AnotherClock *ac = control->data;
+
+    b = gtk_check_button_new_with_label (_("24 hour clock"));
+    gtk_widget_show (b);
+    gtk_container_add (container, b);
+
+    if (ac->use24)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (b), TRUE);
+
+    g_signal_connect (b, "toggled", G_CALLBACK (toggle_24hr), ac);
+}
 
 /*  Clock panel control
  *  -------------------
@@ -375,6 +430,8 @@ xfce_control_class_init (ControlClass * cc)
     cc->attach_callback = anotherclock_attach_callback;
 
     cc->set_size = anotherclock_set_size;
+
+    cc->create_options = anotherclock_create_options;
 
     control_class_set_unique (cc, TRUE);
 }
