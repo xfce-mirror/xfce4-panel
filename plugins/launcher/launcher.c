@@ -100,25 +100,6 @@ file_uri_to_local (const char *uri)
     return g_strdup (s);
 }
 
-/* prevent users from clicking twice because of slow app start */
-static gboolean set_sensitive_cb (GtkWidget *button)
-{
-    if (GTK_IS_WIDGET (button))
-        gtk_widget_set_sensitive (button, TRUE);
-    
-    return FALSE;
-}
-
-static void
-after_exec_insensitive (GtkWidget *button)
-{
-    gtk_widget_set_sensitive (button, FALSE);
-    
-    g_timeout_add (INSENSITIVE_TIMEOUT, 
-                   (GSourceFunc) set_sensitive_cb, button);
-}
-
-
 /* Plugin interface *
  * ---------------- */
 
@@ -760,8 +741,6 @@ launcher_entry_data_received (GtkWidget *w, GList *data, gpointer user_data)
         return;
 
     entry_drop_cb (launcher->entry, data);
-    
-    after_exec_insensitive (launcher->iconbutton);
 }
 
 static void
@@ -829,7 +808,6 @@ launcher_clicked (GtkWidget *w, Launcher *launcher)
     }
 
     entry_exec (launcher->entry);
-    after_exec_insensitive (w);
 }
 
 static Launcher *
