@@ -40,10 +40,7 @@
     (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_ITEMBAR, XfceItembarPrivate))
 
 #define DEFAULT_ORIENTATION     GTK_ORIENTATION_HORIZONTAL
-#define MIN_ICON_SIZE           12
-#define MAX_ICON_SIZE           256
-#define DEFAULT_ICON_SIZE       32
-#define DEFAULT_TOOLBAR_STYLE   GTK_TOOLBAR_ICONS
+#define DEFAULT_CHILD_EXPAND    FALSE
 
 enum
 {
@@ -256,7 +253,7 @@ xfce_itembar_class_init (XfceItembarClass * klass)
     pspec = g_param_spec_boolean ("expand", 
                                   "Expand", 
                                   "Whether to grow with parent",
-                                  FALSE,
+                                  DEFAULT_CHILD_EXPAND,
                                   G_PARAM_READWRITE);
     
     gtk_container_class_install_child_property (container_class,
@@ -301,7 +298,6 @@ static void
 xfce_itembar_finalize (GObject * object)
 {
     GList *l;
-    
     XfceItembarPrivate *priv = XFCE_ITEMBAR_GET_PRIVATE (object);
 
     for (l = priv->children; l != NULL; l = l->next)
@@ -414,7 +410,6 @@ xfce_itembar_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
     int border_width;
     GList *l;
     GtkTextDirection direction;
-    gboolean use_expand = TRUE;
     struct ItemProps { 
         GtkAllocation allocation;
         gboolean expand; 
@@ -511,12 +506,35 @@ xfce_itembar_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
         props[i].expand = child->expand;
     }
 
-    if (n_expand > 0)
+    while (n_expand > 0)
     {
-        expand_width = MAX (expand_width / n_expand, 0);
+        int real_expand_width = 
+            MAX (expand_width / n_expand, 0);
 
-        if (expand_width < max_expand)
-            use_expand = FALSE;
+        /* if it fits, continue */
+        if (real_expand_width >= max_expand)
+        {
+            expand_width = real_expand_width;
+            break;
+        }
+
+        /* remove bigger items from expand list */
+        for (i = 0; i < n; ++i)
+        {
+            int size;
+            
+            if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
+                size = props[i].allocation.width;
+            else
+                size = props[i].allocation.height;
+
+            if (size > real_expand_width)
+            {
+                props[i].expand = FALSE;
+                expand_width -= size;
+                n_expand--;
+            }
+        }
     }
     
     x = y = border_width;
@@ -534,7 +552,7 @@ xfce_itembar_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
         if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
         {
-            if (props[i].expand && use_expand)
+            if (props[i].expand)
                 props[i].allocation.width = expand_width;
 
             if (direction == GTK_TEXT_DIR_RTL)
@@ -547,7 +565,7 @@ xfce_itembar_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
         }
         else
         {
-            if (props[i].expand && use_expand)
+            if (props[i].expand)
                 props[i].allocation.height = expand_width;
 
             y += props[i].allocation.height;
