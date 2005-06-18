@@ -518,10 +518,15 @@ xfce_itembar_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
             break;
         }
 
+        max_expand = 0;
+        
         /* remove bigger items from expand list */
         for (i = 0; i < n; ++i)
         {
             int size;
+            
+            if (!props[i].expand)
+                continue;
             
             if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
                 size = props[i].allocation.width;
@@ -533,6 +538,10 @@ xfce_itembar_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
                 props[i].expand = FALSE;
                 expand_width -= size;
                 n_expand--;
+            }
+            else
+            {
+                max_expand = MAX (size, max_expand);
             }
         }
     }
