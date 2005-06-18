@@ -944,6 +944,12 @@ _find_drop_index (XfceItembar * itembar, int x, int y)
 
 /* public interface */
 
+/**
+ * xfce_itembar_new:
+ * @orientation: #GtkOrientation for new itembar.
+ *
+ * Returns: new itembar widget with @orientation.
+ **/
 GtkWidget *
 xfce_itembar_new (GtkOrientation orientation)
 {
@@ -955,6 +961,12 @@ xfce_itembar_new (GtkOrientation orientation)
     return GTK_WIDGET (itembar);
 }
 
+/**
+ * xfce_itembar_get_orientation:
+ * @itembar: a #XfceItembar
+ *
+ * Returns: #GtkOrienation of @itembar.
+ **/
 GtkOrientation 
 xfce_itembar_get_orientation (XfceItembar * itembar)
 {
@@ -967,6 +979,13 @@ xfce_itembar_get_orientation (XfceItembar * itembar)
     return priv->orientation;
 }
 
+/**
+ * xfce_itembar_set_orientation:
+ * @itembar: a #XfceItembar
+ * @orientation: New #GtkOrientation
+ *
+ * Set the orienation of @itembar.
+ **/
 void 
 xfce_itembar_set_orientation (XfceItembar * itembar, GtkOrientation orientation)
 {
@@ -990,6 +1009,14 @@ xfce_itembar_set_orientation (XfceItembar * itembar, GtkOrientation orientation)
 }
 
 
+/**
+ * xfce_itembar_insert:
+ * @itembar: a #XfceItembar
+ * @item: A child of @itembar
+ * @position: position for @item
+ *
+ * Insert new item at @position on @itembar.
+ **/
 void
 xfce_itembar_insert (XfceItembar * itembar, GtkWidget * item, int position)
 {
@@ -1011,18 +1038,40 @@ xfce_itembar_insert (XfceItembar * itembar, GtkWidget * item, int position)
     gtk_widget_queue_resize (GTK_WIDGET (itembar));
 }
 
+/**
+ * xfce_itembar_append:
+ * @itembar: a #XfceItembar
+ * @item: A child of @itembar
+ *
+ * Add a new item at the end of @itembar.
+ **/
 void
 xfce_itembar_append (XfceItembar * itembar, GtkWidget * item)
 {
     xfce_itembar_insert (itembar, item, -1);
 }
 
+/**
+ * xfce_itembar_prepend:
+ * @itembar: a #XfceItembar
+ * @item: A child of @itembar
+ *
+ * Add a new item at the start of @itembar.
+ **/
 void
 xfce_itembar_prepend (XfceItembar * itembar, GtkWidget * item)
 {
     xfce_itembar_insert (itembar, item, 0);
 }
 
+/**
+ * xfce_itembar_reorder child:
+ * @itembar: a #XfceItembar
+ * @item: A child of @itembar
+ * @position: new index for @item
+ *
+ * Move @item to a new position on @itembar.
+ **/
 void
 xfce_itembar_reorder_child (XfceItembar * itembar, GtkWidget * item,
                             int position)
@@ -1055,6 +1104,14 @@ xfce_itembar_reorder_child (XfceItembar * itembar, GtkWidget * item,
     gtk_widget_queue_resize (GTK_WIDGET (itembar));
 }
 
+/**
+ * xfce_itembar_get_child_expand:
+ * @itembar: a #XfceItembar
+ * @item: A child of @itembar
+ *
+ * Returns: %TRUE if @item will expand when the size of @itembar increases,
+ *          otherwise %FALSE.
+ **/
 gboolean 
 xfce_itembar_get_child_expand (XfceItembar * itembar, GtkWidget * item)
 {
@@ -1081,6 +1138,14 @@ xfce_itembar_get_child_expand (XfceItembar * itembar, GtkWidget * item)
     return FALSE;
 }
 
+/**
+ * xfce_itembar_set_child_expand:
+ * @itembar: a #XfceItembar
+ * @item: A child of @itembar
+ * @expand: %TRUE or %FALSE.
+ *
+ * Set whether @item should expand when the size of @itembar increases.
+ **/
 void 
 xfce_itembar_set_child_expand (XfceItembar * itembar, GtkWidget * item,
                                gboolean expand)
@@ -1108,6 +1173,12 @@ xfce_itembar_set_child_expand (XfceItembar * itembar, GtkWidget * item,
     gtk_widget_queue_resize (GTK_WIDGET (itembar));
 }
 
+/**
+ * xfce_itembar_get_n_items:
+ * @itembar: a #XfceItembar
+ *
+ * Returns: The number of items on @itembar.
+ **/
 int
 xfce_itembar_get_n_items (XfceItembar * itembar)
 {
@@ -1120,6 +1191,13 @@ xfce_itembar_get_n_items (XfceItembar * itembar)
     return g_list_length (priv->children);
 }
 
+/**
+ * xfce_itembar_get_item_index:
+ * @itembar: a #XfceItembar
+ * @item: A child of @itembar
+ *
+ * Returns: The index of @item or -1 if @itembar does not contain @item.
+ **/
 int
 xfce_itembar_get_item_index (XfceItembar * itembar, GtkWidget * item)
 {
