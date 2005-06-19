@@ -7,6 +7,7 @@ EXTRA_DIST = 								\
 	intltool-update.in						\
 	AUTHORS								\
 	COPYING								\
+	COPYING_LIBS							\
 	ChangeLog							\
 	HACKING								\
 	INSTALL								\

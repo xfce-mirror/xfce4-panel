@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfwm4 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-09 14:01+0200\n"
+"POT-Creation-Date: 2005-06-19 15:55+0200\n"
 "PO-Revision-Date: 2004-09-08 15:40+9\n"
 "Last-Translator: Lâm Vĩnh Niên <nienvl@yahoo.ca>\n"
 "Language-Team: none <LL@li.org>\n"
@@ -15,51 +15,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:334
+#: ../panel/xfce_support.c:334
 msgid "Select file"
 msgstr "Chọn tập tin"
 
-#: panel/settings.c:266
+#: ../panel/settings.c:266
 msgid "No data was found. The panel will be empty."
 msgstr "Không tìm thấy dữ liệu"
 
-#: panel/controls_dialog.c:88 settings/xftaskbar_plugin.c:393
+#: ../panel/controls_dialog.c:88 ../settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "Vị trí:"
 
-#: panel/controls_dialog.c:154
+#: ../panel/controls_dialog.c:154
 msgid "Item properties"
 msgstr "Đặc tính đề mục"
 
-#: panel/item_dialog.c:63
+#: ../panel/item_dialog.c:63
 msgid "Select command"
 msgstr "Chọn lệnh"
 
-#: panel/item_dialog.c:200
+#: ../panel/item_dialog.c:200
 msgid "Command:"
 msgstr "Lệnh"
 
-#: panel/item_dialog.c:246 plugins/launcher/launcher-dialog.c:602
+#: ../panel/item_dialog.c:246 ../plugins/launcher/launcher-dialog.c:602
 msgid "Run in _terminal"
 msgstr "Chạy ở _trạm cuối"
 
-#: panel/item_dialog.c:264
+#: ../panel/item_dialog.c:264
 msgid "Use startup _notification"
 msgstr "Dùng thô_ng báo lúc khởi động"
 
-#: panel/item_dialog.c:450
+#: ../panel/item_dialog.c:450
 msgid "Other Icon"
 msgstr "Biểu tượng khác"
 
-#: panel/item_dialog.c:561
+#: ../panel/item_dialog.c:561
 msgid "Drag file onto this frame to change the icon"
 msgstr "Kéo tập tin vào khung này để đổi biểu tượng"
 
-#: panel/main.c:114
+#: ../panel/main.c:114
 msgid "Are you sure you want to exit?"
 msgstr "Bạn có chắc là bạn muốn thoát?"
 
-#: panel/main.c:394
+#: ../panel/main.c:394
 #, c-format
 msgid ""
 "\n"
@@ -82,131 +82,132 @@ msgstr ""
 "Giấy phép theo GNU GPL.\n"
 "\n"
 
-#: panel/main.c:474
+#: ../panel/main.c:474
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Khởi động thành công không quản lí phiên làm việc"
 
-#: panel/main.c:479
+#: ../panel/main.c:479
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Khởi động thành công quản lí phiên làm việc"
 
-#: panel/controls.c:669
+#: ../panel/controls.c:669
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Không thể tạo đề mục panel \"%s\"."
 
-#: panel/controls.c:709
+#: ../panel/controls.c:709
 #, c-format
 msgid "Remove %s item?"
 msgstr ""
 
-#: panel/controls.c:743 panel/panel.c:719 iconbox/iconbox.c:618
+#: ../panel/controls.c:743 ../panel/panel.c:719 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "Đặ_c tính"
 
-#: panel/controls.c:748 plugins/launcher/launcher-dialog.c:1266
+#: ../panel/controls.c:748 ../plugins/launcher/launcher-dialog.c:1276
 msgid "_Remove"
 msgstr "Gỡ _bỏ"
 
-#: panel/controls.c:757 panel/panel.c:709
+#: ../panel/controls.c:757 ../panel/panel.c:709
 msgid "Add _new item"
 msgstr "Thêm đề mục _mới"
 
-#: panel/controls.c:1082
+#: ../panel/controls.c:1082
 msgid "This item has no configuration options"
 msgstr "Đề mục này không có tuỳ chọn cấu hình"
 
-#: panel/panel.c:700 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:409
+#: ../panel/panel.c:700 ../panel/panel.c:1048
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: panel/panel.c:724
+#: ../panel/panel.c:724
 msgid "_About Xfce"
 msgstr "_Về Xfce"
 
-#: panel/panel.c:729
+#: ../panel/panel.c:729
 msgid "_Help"
 msgstr "_Giúp đỡ"
 
-#: panel/panel.c:738
+#: ../panel/panel.c:738
 msgid "_Lock screen"
 msgstr "_Khoá màn hình"
 
-#: panel/panel.c:743
+#: ../panel/panel.c:743
 msgid "_Restart"
 msgstr "Khở_i động lại"
 
-#: panel/panel.c:752 iconbox/iconbox.c:628
+#: ../panel/panel.c:752 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "_Thoát"
 
-#: panel/icons.c:63 plugins/launcher/launcher-dialog.c:83
+#: ../panel/icons.c:63 ../plugins/launcher/launcher-dialog.c:83
 msgid "Default"
 msgstr "Mặc định"
 
-#: panel/icons.c:64 plugins/launcher/launcher-dialog.c:84
+#: ../panel/icons.c:64 ../plugins/launcher/launcher-dialog.c:84
 msgid "Editor"
 msgstr "Trình biên tập"
 
-#: panel/icons.c:65 plugins/launcher/launcher-dialog.c:85
+#: ../panel/icons.c:65 ../plugins/launcher/launcher-dialog.c:85
 msgid "File management"
 msgstr "Quản lí tập tin"
 
-#: panel/icons.c:66 plugins/launcher/launcher-dialog.c:86
+#: ../panel/icons.c:66 ../plugins/launcher/launcher-dialog.c:86
 msgid "Utilities"
 msgstr "Công cụ"
 
-#: panel/icons.c:67 plugins/launcher/launcher-dialog.c:87
+#: ../panel/icons.c:67 ../plugins/launcher/launcher-dialog.c:87
 msgid "Games"
 msgstr "Trò chơi"
 
-#: panel/icons.c:68 plugins/launcher/launcher-dialog.c:88
+#: ../panel/icons.c:68 ../plugins/launcher/launcher-dialog.c:88
 msgid "Help browser"
 msgstr "Trình duyệt giúp đỡ"
 
-#: panel/icons.c:69 plugins/launcher/launcher-dialog.c:89
+#: ../panel/icons.c:69 ../plugins/launcher/launcher-dialog.c:89
 msgid "Multimedia"
 msgstr "Đa phương tiện"
 
-#: panel/icons.c:70 plugins/launcher/launcher-dialog.c:90
+#: ../panel/icons.c:70 ../plugins/launcher/launcher-dialog.c:90
 msgid "Network"
 msgstr "Mạng"
 
-#: panel/icons.c:71 plugins/launcher/launcher-dialog.c:91
+#: ../panel/icons.c:71 ../plugins/launcher/launcher-dialog.c:91
 msgid "Graphics"
 msgstr "Đồ hoạ"
 
-#: panel/icons.c:72 plugins/launcher/launcher-dialog.c:92
+#: ../panel/icons.c:72 ../plugins/launcher/launcher-dialog.c:92
 msgid "Printer"
 msgstr "Máy in"
 
-#: panel/icons.c:73 plugins/launcher/launcher-dialog.c:93
+#: ../panel/icons.c:73 ../plugins/launcher/launcher-dialog.c:93
 msgid "Productivity"
 msgstr "Productivity"
 
-#: panel/icons.c:74 plugins/launcher/launcher-dialog.c:94
+#: ../panel/icons.c:74 ../plugins/launcher/launcher-dialog.c:94
 msgid "Sound"
 msgstr "Âm thanh"
 
 #. Translation with context.
 #. * Translators only need to translate 'Terminal'
-#: panel/icons.c:77
+#: ../panel/icons.c:77
 #, fuzzy
 msgid "icons|Terminal"
 msgstr "Trạm cuối"
 
-#: panel/mcs_client.c:169
+#: ../panel/mcs_client.c:169
 msgid "Settings manager not available"
 msgstr "Không có trình quản lí các thiết lập"
 
-#: taskbar/xftaskbar.c:510 plugins/systray/systray.c:88
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:88
 msgid "There is already a system tray running on this screen"
 msgstr "Có sẵn khay hệ thống đang chạy trên màn hình này"
 
-#: taskbar/xftaskbar.c:516 plugins/systray/systray.c:94
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:94
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "Không thể đăng kí khay hệ thống: %s"
@@ -219,242 +220,242 @@ msgstr "Không thể đăng kí khay hệ thống: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: taskbar/xftaskbar.c:616 plugins/systray/systray.c:175
+#: ../taskbar/xftaskbar.c:616 ../plugins/systray/systray.c:175
 #, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: taskbar/xftaskbar.c:637 plugins/systray/systray.c:200
+#: ../taskbar/xftaskbar.c:637 ../plugins/systray/systray.c:200
 msgid "%H:%M"
 msgstr ""
 
-#: taskbar/xftaskbar.c:910 settings/xftaskbar_plugin.c:696
-#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+#: ../taskbar/xftaskbar.c:910 ../settings/xftaskbar_plugin.c:696
+#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr "Thanh tác vụ"
 
-#: taskbar/xftaskbar.c:1022
+#: ../taskbar/xftaskbar.c:1022
 msgid "Cannot create MCS client channel"
 msgstr "Không thể tạo kênh khách MCS"
 
-#: iconbox/iconbox.c:568
+#: ../iconbox/iconbox.c:568
 msgid "Xfce Iconbox"
 msgstr ""
 
-#: iconbox/iconbox.c:576 plugins/launcher/launcher.c:140
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:121
 msgid "Developer"
 msgstr ""
 
-#: iconbox/iconbox.c:612
+#: ../iconbox/iconbox.c:612
 #, fuzzy
 msgid "_About"
 msgstr "_Về Xfce"
 
-#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
-#: settings/xftaskbar_plugin.c:511
+#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
+#: ../settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "Nhỏ"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Trung"
 
-#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
-#: settings/xftaskbar_plugin.c:532
+#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
+#: ../settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "Lớn"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Khổng lồ"
 
-#: settings/xfce_settings_dialog.c:149
+#: ../settings/xfce_settings_dialog.c:149
 msgid "Horizontal"
 msgstr "Ngang"
 
-#: settings/xfce_settings_dialog.c:153
+#: ../settings/xfce_settings_dialog.c:153
 msgid "Vertical"
 msgstr "Dọc"
 
-#: settings/xfce_settings_dialog.c:195 settings/iconbox_plugin.c:762
+#: ../settings/xfce_settings_dialog.c:195 ../settings/iconbox_plugin.c:762
 msgid "None"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:199
+#: ../settings/xfce_settings_dialog.c:199
 #, fuzzy
 msgid "At both sides"
 msgstr "Tự động ẩn"
 
-#: settings/xfce_settings_dialog.c:203
+#: ../settings/xfce_settings_dialog.c:203
 msgid "At the start"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:207
+#: ../settings/xfce_settings_dialog.c:207
 msgid "At the end"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:240
+#: ../settings/xfce_settings_dialog.c:240
 msgid "Panel size:"
 msgstr "Kích thước panel:"
 
-#: settings/xfce_settings_dialog.c:256
+#: ../settings/xfce_settings_dialog.c:256
 msgid "Panel orientation:"
 msgstr "Hướng panel:"
 
-#: settings/xfce_settings_dialog.c:273
+#: ../settings/xfce_settings_dialog.c:273
 msgid "Handles:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:309
+#: ../settings/xfce_settings_dialog.c:309
 msgid "Autohide:"
 msgstr "Tự động ẩn:"
 
-#: settings/xfce_settings_dialog.c:355
+#: ../settings/xfce_settings_dialog.c:355
 msgid "Full width:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:426
+#: ../settings/xfce_settings_dialog.c:426
 msgid "Xfce Panel Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: settings/xfce_settings_dialog.c:436
+#: ../settings/xfce_settings_dialog.c:436
 msgid "Appearance"
 msgstr "Diện mạo"
 
 #. show only hidden
-#: settings/xfce_settings_dialog.c:451 settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:451 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "Hành xử"
 
 #. position
-#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
 msgid "Position"
 msgstr "Vị trí"
 
-#: settings/xftaskbar_plugin.c:399
+#: ../settings/xftaskbar_plugin.c:399
 msgid "_Top"
 msgstr "Đỉ_nh"
 
-#: settings/xftaskbar_plugin.c:409
+#: ../settings/xftaskbar_plugin.c:409
 msgid "_Bottom"
 msgstr "Đá_y"
 
-#: settings/xftaskbar_plugin.c:422
+#: ../settings/xftaskbar_plugin.c:422
 #, fuzzy
 msgid "Alignment:"
 msgstr "Canh hàng"
 
-#: settings/xftaskbar_plugin.c:429
+#: ../settings/xftaskbar_plugin.c:429
 msgid "_Left"
 msgstr "T_rái"
 
-#: settings/xftaskbar_plugin.c:439
+#: ../settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr "Giữ_a"
 
-#: settings/xftaskbar_plugin.c:447
+#: ../settings/xftaskbar_plugin.c:447
 msgid "_Right"
 msgstr "_Phải"
 
 #. size
-#: settings/xftaskbar_plugin.c:464
+#: ../settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr "Kích thước"
 
-#: settings/xftaskbar_plugin.c:474
+#: ../settings/xftaskbar_plugin.c:474
 #, fuzzy
 msgid "Height:"
 msgstr "Chiều cao :"
 
-#: settings/xftaskbar_plugin.c:505
+#: ../settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr "Bề rộng:"
 
-#: settings/xftaskbar_plugin.c:541
+#: ../settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr ""
 
 #. Autohide
-#: settings/xftaskbar_plugin.c:561
+#: ../settings/xftaskbar_plugin.c:561
 msgid "Autohide"
 msgstr "Tự động ẩn"
 
-#: settings/xftaskbar_plugin.c:566
+#: ../settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr "Tự động ẩn t_hanh tác vụ"
 
 #. tasklist
-#: settings/xftaskbar_plugin.c:583 plugins/tasklist/tasklist.c:92
+#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:92
 #, fuzzy
 msgid "Tasklist"
 msgstr "Tác vụ"
 
-#: settings/xftaskbar_plugin.c:592
+#: ../settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:604
+#: ../settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr "Hiển thị các tác vụ từ _mọi không gian làm việc"
 
-#: settings/xftaskbar_plugin.c:613
+#: ../settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
 msgstr "Luôn luôn _nhóm các tác vụ"
 
-#: settings/xftaskbar_plugin.c:621
+#: ../settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr "Hiển thị _tên ứng dụng"
 
 #. pager
-#: settings/xftaskbar_plugin.c:629
+#: ../settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr "Trình chuyển trang"
 
-#: settings/xftaskbar_plugin.c:634
+#: ../settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr "Hiển thị trình chu_yển trang trên thanh tác vụ"
 
 #. status area
-#: settings/xftaskbar_plugin.c:641
+#: ../settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:650
+#: ../settings/xftaskbar_plugin.c:650
 #, fuzzy
 msgid "Show _notification icons"
 msgstr "Hiển thị _tên ứng dụng"
 
-#: settings/xftaskbar_plugin.c:657 plugins/systray/systray.c:535
+#: ../settings/xftaskbar_plugin.c:657 ../plugins/systray/systray.c:535
 msgid "Show _time"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:718
+#: ../settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:729
+#: ../settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr ""
 
-#: settings/iconbox_plugin.c:629
+#: ../settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr ""
 
-#: settings/iconbox_plugin.c:691
+#: ../settings/iconbox_plugin.c:691
 #, fuzzy
 msgid "_Show only minimized applications"
 msgstr "Hiển thị _tên ứng dụng"
 
-#: settings/iconbox_plugin.c:754
+#: ../settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr ""
 
-#: settings/iconbox_plugin.c:777
+#: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
 
-#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
-#: settings/iconbox_plugin.c:992
+#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
+#: ../settings/iconbox_plugin.c:992
 msgid "Iconbox"
 msgstr ""
 
@@ -466,208 +467,206 @@ msgstr ""
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:191
+#: ../plugins/clock/clock.c:191
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:421
+#: ../plugins/clock/clock.c:421
 msgid "Clock type:"
 msgstr "Kiểu đồng hồ:"
 
-#: plugins/clock/clock.c:434
+#: ../plugins/clock/clock.c:434
 msgid "Analog"
 msgstr "Tương tự"
 
-#: plugins/clock/clock.c:438
+#: ../plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "Số"
 
-#: plugins/clock/clock.c:442
+#: ../plugins/clock/clock.c:442
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:504
+#: ../plugins/clock/clock.c:504
 msgid "Hour mode:"
 msgstr "Chế độ giờ"
 
-#: plugins/clock/clock.c:511
+#: ../plugins/clock/clock.c:511
 msgid "24 hour"
 msgstr "24 giờ"
 
-#: plugins/clock/clock.c:517
+#: ../plugins/clock/clock.c:517
 msgid "12 hour"
 msgstr "12 giờ"
 
-#: plugins/clock/clock.c:523
+#: ../plugins/clock/clock.c:523
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:561
+#: ../plugins/clock/clock.c:561
 msgid "Show seconds:"
 msgstr "Hiện giây"
 
-#: plugins/clock/clock.c:674
+#: ../plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Đồng hồ Xfce"
 
-#: plugins/flexspace/flexspace.c:78
+#: ../plugins/flexspace/flexspace.c:78
 msgid "Flexible space"
 msgstr ""
 
-#: plugins/launcher/launcher.c:132 plugins/launcher/launcher.c:325
+#: ../plugins/launcher/launcher.c:113 ../plugins/launcher/launcher.c:306
 msgid "Launcher"
 msgstr "Trình gọi"
 
-#: plugins/launcher/launcher.c:132
+#: ../plugins/launcher/launcher.c:113
 #, fuzzy
 msgid "Launcher Plugin"
 msgstr "Trình gọi"
 
-#: plugins/launcher/launcher.c:400
+#: ../plugins/launcher/launcher.c:381
 #, fuzzy, c-format
 msgid ""
 "Could not run \"%s\":\n"
 "%s"
 msgstr "Không thể tạo đề mục panel \"%s\"."
 
-#: plugins/launcher/launcher.c:840 plugins/launcher/launcher-dialog.c:1185
+#: ../plugins/launcher/launcher.c:825
+#: ../plugins/launcher/launcher-dialog.c:1185
 #, fuzzy
 msgid "New item"
 msgstr "Thêm đề mục mới"
 
-#: plugins/launcher/launcher.c:842 plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher.c:827
+#: ../plugins/launcher/launcher-dialog.c:1186
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "Đề mục này không có tuỳ chọn cấu hình"
 
-#: plugins/launcher/launcher-dialog.c:95 config/contents.xml.in.h:14
+#: ../plugins/launcher/launcher-dialog.c:95 ../config/contents.xml.in.h:14
 msgid "Terminal"
 msgstr "Trạm cuối"
 
-#: plugins/launcher/launcher-dialog.c:96
+#: ../plugins/launcher/launcher-dialog.c:96
 msgid "Development"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:97 config/contents.xml.in.h:13
+#: ../plugins/launcher/launcher-dialog.c:97 ../config/contents.xml.in.h:13
 #, fuzzy
 msgid "Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: plugins/launcher/launcher-dialog.c:98
+#: ../plugins/launcher/launcher-dialog.c:98
 msgid "System"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:99
+#: ../plugins/launcher/launcher-dialog.c:99
 msgid "Windows programs"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:262
+#: ../plugins/launcher/launcher-dialog.c:262
 #, fuzzy
 msgid "Name"
 msgstr "Trò chơi"
 
-#: plugins/launcher/launcher-dialog.c:282
+#: ../plugins/launcher/launcher-dialog.c:282
 #, fuzzy
 msgid "Description"
 msgstr "Vị trí"
 
-#: plugins/launcher/launcher-dialog.c:397
+#: ../plugins/launcher/launcher-dialog.c:397
 #, fuzzy
 msgid "Select image file"
 msgstr "Chọn tập tin"
 
-#: plugins/launcher/launcher-dialog.c:468
+#: ../plugins/launcher/launcher-dialog.c:468
 msgid "Other..."
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:567
+#: ../plugins/launcher/launcher-dialog.c:567
 #, fuzzy
 msgid "Command"
 msgstr "Lệnh"
 
-#: plugins/launcher/launcher-dialog.c:622
+#: ../plugins/launcher/launcher-dialog.c:622
 #, fuzzy
 msgid "Use _startup notification"
 msgstr "Dùng thô_ng báo lúc khởi động"
 
-#: plugins/launcher/launcher-dialog.c:644
-#: plugins/launcher/launcher-dialog.c:649
+#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:649
 #, fuzzy
 msgid "Edit launcher"
 msgstr "Thêm trình gọi"
 
-#: plugins/launcher/launcher-dialog.c:1242
-msgid "_Up"
-msgstr ""
-
-#: plugins/launcher/launcher-dialog.c:1248
-msgid "_Down"
-msgstr ""
-
-#: plugins/launcher/launcher-dialog.c:1254
+#: ../plugins/launcher/launcher-dialog.c:1242
 #, fuzzy
 msgid "_Edit"
 msgstr "Trình biên tập"
 
-#: plugins/launcher/launcher-dialog.c:1260
+#: ../plugins/launcher/launcher-dialog.c:1253
+msgid "_Up"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1259
+msgid "_Down"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1270
 msgid "_Add"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:1290
+#: ../plugins/launcher/launcher-dialog.c:1300
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:1313
-msgid "Panel Item and Menu"
-msgstr ""
-
-#: plugins/mailcheck/mailcheck.c:838
+#: ../plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Hộp thư:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: ../plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Lệnh thư mới:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: ../plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Lệnh thi hành khi có thư mới đến"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: ../plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Lệnh thi hành khi nhấp vào nút trên panel"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: ../plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Thời khoảng (giây):"
 
-#: plugins/mailcheck/mailcheck.c:1017
+#: ../plugins/mailcheck/mailcheck.c:1017
 msgid "Mail checker"
 msgstr "Kiểm thư"
 
-#: plugins/pager/pager.c:313
+#: ../plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "Số hàng:"
 
-#: plugins/pager/pager.c:315
+#: ../plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "Số cột:"
 
-#: plugins/pager/pager.c:372
+#: ../plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "Trình chuyển trang đồ hoạ"
 
-#: plugins/separator/separator.c:65
+#: ../plugins/separator/separator.c:65
 msgid "Separator"
 msgstr "Dấu cách"
 
-#: plugins/switcher/switcher.c:695
+#: ../plugins/switcher/switcher.c:695
 msgid "Desktop switcher"
 msgstr "Trình chuyển desktop"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -677,147 +676,147 @@ msgstr ""
 "\n"
 "Hỏi nhà quản trị hệ thống để có thêm thông tin"
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "Khoá màn hình"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:172
 #, fuzzy
 msgid "tip|Exit"
 msgstr "Thoát"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:174
+#: ../plugins/systembuttons/systembuttons.c:174
 #, fuzzy
 msgid "tip|Setup"
 msgstr "Thiết lập"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:176
+#: ../plugins/systembuttons/systembuttons.c:176
 #, fuzzy
 msgid "tip|Info"
 msgstr "Thông tin"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Lock"
 msgstr "Khoá"
 
-#: plugins/systembuttons/systembuttons.c:522
+#: ../plugins/systembuttons/systembuttons.c:522
 msgid "Exit"
 msgstr "Thoát"
 
-#: plugins/systembuttons/systembuttons.c:523
+#: ../plugins/systembuttons/systembuttons.c:523
 msgid "Setup"
 msgstr "Thiết lập"
 
-#: plugins/systembuttons/systembuttons.c:524
+#: ../plugins/systembuttons/systembuttons.c:524
 msgid "Info"
 msgstr "Thông tin"
 
-#: plugins/systembuttons/systembuttons.c:553
+#: ../plugins/systembuttons/systembuttons.c:553
 msgid "Button 1:"
 msgstr "Nút 1:"
 
-#: plugins/systembuttons/systembuttons.c:568
+#: ../plugins/systembuttons/systembuttons.c:568
 msgid "Button 2:"
 msgstr "Nút 2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:582
+#: ../plugins/systembuttons/systembuttons.c:582
 #, fuzzy
 msgid "_Hide"
 msgstr "_Giúp đỡ"
 
-#: plugins/systembuttons/systembuttons.c:620
+#: ../plugins/systembuttons/systembuttons.c:620
 msgid "System buttons"
 msgstr "Các nút hệ thống"
 
-#: plugins/systray/systray.c:492
+#: ../plugins/systray/systray.c:492
 msgid "Status Area"
 msgstr ""
 
-#: plugins/systray/systray.c:555
+#: ../plugins/systray/systray.c:555
 msgid "Display time before icons"
 msgstr ""
 
-#: settings/xfce-panel-settings.desktop.in.h:1
+#: ../settings/xfce-panel-settings.desktop.in.h:1
 #, fuzzy
 msgid "Panel Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: settings/xfce-panel-settings.desktop.in.h:2
+#: ../settings/xfce-panel-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Panel Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:1
+#: ../settings/xfce-iconbox-settings.desktop.in.h:1
 #, fuzzy
 msgid "Iconbox Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:2
+#: ../settings/xfce-iconbox-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Iconbox Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:1
+#: ../settings/xfce-taskbar-settings.desktop.in.h:1
 #, fuzzy
 msgid "Taskbar Settings"
 msgstr "Thanh tác vụ"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:2
+#: ../settings/xfce-taskbar-settings.desktop.in.h:2
 #, fuzzy
 msgid "Xfce 4 Taskbar Settings"
 msgstr "Các thiết lập Panel Xfce"
 
-#: config/contents.xml.in.h:1
+#: ../config/contents.xml.in.h:1
 msgid "Appfinder"
 msgstr ""
 
-#: config/contents.xml.in.h:2
+#: ../config/contents.xml.in.h:2
 msgid "Drag file to print"
 msgstr ""
 
-#: config/contents.xml.in.h:3
+#: ../config/contents.xml.in.h:3
 #, fuzzy
 msgid "File manager"
 msgstr "Quản lí tập tin"
 
-#: config/contents.xml.in.h:4
+#: ../config/contents.xml.in.h:4
 msgid "Find and run applications"
 msgstr ""
 
-#: config/contents.xml.in.h:5
+#: ../config/contents.xml.in.h:5
 msgid "Konqueror"
 msgstr ""
 
-#: config/contents.xml.in.h:6
+#: ../config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
 msgstr ""
 
-#: config/contents.xml.in.h:7
+#: ../config/contents.xml.in.h:7
 msgid "Manual"
 msgstr ""
 
-#: config/contents.xml.in.h:8
+#: ../config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
 msgstr ""
 
-#: config/contents.xml.in.h:9
+#: ../config/contents.xml.in.h:9
 msgid "Music player"
 msgstr ""
 
-#: config/contents.xml.in.h:10
+#: ../config/contents.xml.in.h:10
 msgid "Nautilus"
 msgstr ""
 
-#: config/contents.xml.in.h:11
+#: ../config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
 msgstr ""
 
-#: config/contents.xml.in.h:12
+#: ../config/contents.xml.in.h:12
 #, fuzzy
 msgid "Printer Management"
 msgstr "Quản lí tập tin"

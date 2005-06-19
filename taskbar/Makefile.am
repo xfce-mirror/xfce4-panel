@@ -10,12 +10,12 @@ xfce4_taskbar_CFLAGS =							\
 	-DPACKAGE_LOCALE_DIR=\"$(localedir)\"
 
 xfce4_taskbar_LDADD =							\
-	$(top_srcdir)/libs/libxfce4panel.la				\
+	../libs/libxfce4panel.la					\
 	@LIBXFCEGUI4_LIBS@						\
 	@LIBXFCE4MCS_CLIENT_LIBS@
 
 xfce4_taskbar_DEPENDENCIES =						\
-	$(top_srcdir)/libs/libxfce4panel.la
+	../libs/libxfce4panel.la
 
 install-exec-local:
 	( cd $(DESTDIR)$(bindir) && 					\

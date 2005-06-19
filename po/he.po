@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-09 14:01+0200\n"
+"POT-Creation-Date: 2005-06-19 15:55+0200\n"
 "PO-Revision-Date: 2004-12-31 16:47+0200\n"
 "Last-Translator: Yuval Tanny <tanai@int.gov.il>\n"
 "Language-Team: Hebrew Team <xfce2004@yahoo.com>\n"
@@ -17,51 +17,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#: panel/xfce_support.c:334
+#: ../panel/xfce_support.c:334
 msgid "Select file"
 msgstr "בחר קובץ:"
 
-#: panel/settings.c:266
+#: ../panel/settings.c:266
 msgid "No data was found. The panel will be empty."
 msgstr "לא נמצא מידע. הלוח יהיה ריק."
 
-#: panel/controls_dialog.c:88 settings/xftaskbar_plugin.c:393
+#: ../panel/controls_dialog.c:88 ../settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "מיקום:"
 
-#: panel/controls_dialog.c:154
+#: ../panel/controls_dialog.c:154
 msgid "Item properties"
 msgstr "מאפייני פריט"
 
-#: panel/item_dialog.c:63
+#: ../panel/item_dialog.c:63
 msgid "Select command"
 msgstr "בחר פקודה"
 
-#: panel/item_dialog.c:200
+#: ../panel/item_dialog.c:200
 msgid "Command:"
 msgstr "פקודה:"
 
-#: panel/item_dialog.c:246 plugins/launcher/launcher-dialog.c:602
+#: ../panel/item_dialog.c:246 ../plugins/launcher/launcher-dialog.c:602
 msgid "Run in _terminal"
 msgstr "הרץ בתוך _מסוף"
 
-#: panel/item_dialog.c:264
+#: ../panel/item_dialog.c:264
 msgid "Use startup _notification"
 msgstr "השתמש בהתראת _פתיחה"
 
-#: panel/item_dialog.c:450
+#: ../panel/item_dialog.c:450
 msgid "Other Icon"
 msgstr "צלמית אחרת"
 
-#: panel/item_dialog.c:561
+#: ../panel/item_dialog.c:561
 msgid "Drag file onto this frame to change the icon"
 msgstr "גרור קובץ למסגרת זו כדי לשנות את הצלמית"
 
-#: panel/main.c:114
+#: ../panel/main.c:114
 msgid "Are you sure you want to exit?"
 msgstr "האם אתה בטוח שברצונך לצאת?"
 
-#: panel/main.c:394
+#: ../panel/main.c:394
 #, c-format
 msgid ""
 "\n"
@@ -83,131 +83,132 @@ msgstr ""
 " מופץ תחת רישיון ה GNU GPL.\n"
 "\n"
 
-#: panel/main.c:474
+#: ../panel/main.c:474
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s הופעל בהצלחה ללא ניהול ההפעלה"
 
-#: panel/main.c:479
+#: ../panel/main.c:479
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s הופעל בהצלחה עם ניהול ההפעלה"
 
-#: panel/controls.c:669
+#: ../panel/controls.c:669
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "אין אפשרות ליצור פריט ללוח \"%s\"."
 
-#: panel/controls.c:709
+#: ../panel/controls.c:709
 #, c-format
 msgid "Remove %s item?"
 msgstr ""
 
-#: panel/controls.c:743 panel/panel.c:719 iconbox/iconbox.c:618
+#: ../panel/controls.c:743 ../panel/panel.c:719 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "_מאפיינים..."
 
-#: panel/controls.c:748 plugins/launcher/launcher-dialog.c:1266
+#: ../panel/controls.c:748 ../plugins/launcher/launcher-dialog.c:1276
 msgid "_Remove"
 msgstr "_הסר"
 
-#: panel/controls.c:757 panel/panel.c:709
+#: ../panel/controls.c:757 ../panel/panel.c:709
 msgid "Add _new item"
 msgstr "הוסף פריט _חדש"
 
-#: panel/controls.c:1082
+#: ../panel/controls.c:1082
 msgid "This item has no configuration options"
 msgstr "לפריט זה אין אפשרויות הגדרה"
 
-#: panel/panel.c:700 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:409
+#: ../panel/panel.c:700 ../panel/panel.c:1048
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel"
 msgstr "לוח Xfce"
 
-#: panel/panel.c:724
+#: ../panel/panel.c:724
 msgid "_About Xfce"
 msgstr "_אודות Xfce"
 
-#: panel/panel.c:729
+#: ../panel/panel.c:729
 msgid "_Help"
 msgstr "_עזרה"
 
-#: panel/panel.c:738
+#: ../panel/panel.c:738
 msgid "_Lock screen"
 msgstr "_נעילת מסך"
 
-#: panel/panel.c:743
+#: ../panel/panel.c:743
 msgid "_Restart"
 msgstr "_איתחול"
 
-#: panel/panel.c:752 iconbox/iconbox.c:628
+#: ../panel/panel.c:752 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "י_ציאה"
 
-#: panel/icons.c:63 plugins/launcher/launcher-dialog.c:83
+#: ../panel/icons.c:63 ../plugins/launcher/launcher-dialog.c:83
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: panel/icons.c:64 plugins/launcher/launcher-dialog.c:84
+#: ../panel/icons.c:64 ../plugins/launcher/launcher-dialog.c:84
 msgid "Editor"
 msgstr "עורך"
 
-#: panel/icons.c:65 plugins/launcher/launcher-dialog.c:85
+#: ../panel/icons.c:65 ../plugins/launcher/launcher-dialog.c:85
 msgid "File management"
 msgstr "מנהל הקבצים"
 
-#: panel/icons.c:66 plugins/launcher/launcher-dialog.c:86
+#: ../panel/icons.c:66 ../plugins/launcher/launcher-dialog.c:86
 msgid "Utilities"
 msgstr "כלים"
 
-#: panel/icons.c:67 plugins/launcher/launcher-dialog.c:87
+#: ../panel/icons.c:67 ../plugins/launcher/launcher-dialog.c:87
 msgid "Games"
 msgstr "משחקים"
 
-#: panel/icons.c:68 plugins/launcher/launcher-dialog.c:88
+#: ../panel/icons.c:68 ../plugins/launcher/launcher-dialog.c:88
 msgid "Help browser"
 msgstr "דפדפן העזרה"
 
-#: panel/icons.c:69 plugins/launcher/launcher-dialog.c:89
+#: ../panel/icons.c:69 ../plugins/launcher/launcher-dialog.c:89
 msgid "Multimedia"
 msgstr "מולטימדיה"
 
-#: panel/icons.c:70 plugins/launcher/launcher-dialog.c:90
+#: ../panel/icons.c:70 ../plugins/launcher/launcher-dialog.c:90
 msgid "Network"
 msgstr "רשת"
 
-#: panel/icons.c:71 plugins/launcher/launcher-dialog.c:91
+#: ../panel/icons.c:71 ../plugins/launcher/launcher-dialog.c:91
 msgid "Graphics"
 msgstr "גרפיקה"
 
-#: panel/icons.c:72 plugins/launcher/launcher-dialog.c:92
+#: ../panel/icons.c:72 ../plugins/launcher/launcher-dialog.c:92
 msgid "Printer"
 msgstr "מדפסת"
 
-#: panel/icons.c:73 plugins/launcher/launcher-dialog.c:93
+#: ../panel/icons.c:73 ../plugins/launcher/launcher-dialog.c:93
 msgid "Productivity"
 msgstr "פרודוקטיביות"
 
-#: panel/icons.c:74 plugins/launcher/launcher-dialog.c:94
+#: ../panel/icons.c:74 ../plugins/launcher/launcher-dialog.c:94
 msgid "Sound"
 msgstr "צליל"
 
 #. Translation with context.
 #. * Translators only need to translate 'Terminal'
-#: panel/icons.c:77
+#: ../panel/icons.c:77
 #, fuzzy
 msgid "icons|Terminal"
 msgstr "מסוף"
 
-#: panel/mcs_client.c:169
+#: ../panel/mcs_client.c:169
 msgid "Settings manager not available"
 msgstr "מנהל ההגדרות אינו זמין"
 
-#: taskbar/xftaskbar.c:510 plugins/systray/systray.c:88
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:88
 msgid "There is already a system tray running on this screen"
 msgstr "מגש המערכת כבר פתוח בחלון זה"
 
-#: taskbar/xftaskbar.c:516 plugins/systray/systray.c:94
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:94
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "אין אפשרות לרשום את מגש המערכת: %s"
@@ -220,243 +221,243 @@ msgstr "אין אפשרות לרשום את מגש המערכת: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: taskbar/xftaskbar.c:616 plugins/systray/systray.c:175
+#: ../taskbar/xftaskbar.c:616 ../plugins/systray/systray.c:175
 #, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: taskbar/xftaskbar.c:637 plugins/systray/systray.c:200
+#: ../taskbar/xftaskbar.c:637 ../plugins/systray/systray.c:200
 msgid "%H:%M"
 msgstr ""
 
-#: taskbar/xftaskbar.c:910 settings/xftaskbar_plugin.c:696
-#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+#: ../taskbar/xftaskbar.c:910 ../settings/xftaskbar_plugin.c:696
+#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr "שורת המשימות"
 
-#: taskbar/xftaskbar.c:1022
+#: ../taskbar/xftaskbar.c:1022
 msgid "Cannot create MCS client channel"
 msgstr "אין אפשרות ליצור ערוץ לקוח MCS"
 
-#: iconbox/iconbox.c:568
+#: ../iconbox/iconbox.c:568
 #, fuzzy
 msgid "Xfce Iconbox"
 msgstr "הגדרות סמלים Xfce 4"
 
-#: iconbox/iconbox.c:576 plugins/launcher/launcher.c:140
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:121
 msgid "Developer"
 msgstr ""
 
-#: iconbox/iconbox.c:612
+#: ../iconbox/iconbox.c:612
 #, fuzzy
 msgid "_About"
 msgstr "_אודות Xfce"
 
-#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
-#: settings/xftaskbar_plugin.c:511
+#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
+#: ../settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "קטן"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "בינוני"
 
-#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
-#: settings/xftaskbar_plugin.c:532
+#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
+#: ../settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "גדול"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "ענק"
 
-#: settings/xfce_settings_dialog.c:149
+#: ../settings/xfce_settings_dialog.c:149
 msgid "Horizontal"
 msgstr "אופקי"
 
-#: settings/xfce_settings_dialog.c:153
+#: ../settings/xfce_settings_dialog.c:153
 msgid "Vertical"
 msgstr "אנכי"
 
-#: settings/xfce_settings_dialog.c:195 settings/iconbox_plugin.c:762
+#: ../settings/xfce_settings_dialog.c:195 ../settings/iconbox_plugin.c:762
 msgid "None"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:199
+#: ../settings/xfce_settings_dialog.c:199
 #, fuzzy
 msgid "At both sides"
 msgstr "הסתרה אוטומטית"
 
-#: settings/xfce_settings_dialog.c:203
+#: ../settings/xfce_settings_dialog.c:203
 msgid "At the start"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:207
+#: ../settings/xfce_settings_dialog.c:207
 msgid "At the end"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:240
+#: ../settings/xfce_settings_dialog.c:240
 msgid "Panel size:"
 msgstr "גודל הלוח:"
 
-#: settings/xfce_settings_dialog.c:256
+#: ../settings/xfce_settings_dialog.c:256
 msgid "Panel orientation:"
 msgstr "כיוון הלוח:"
 
-#: settings/xfce_settings_dialog.c:273
+#: ../settings/xfce_settings_dialog.c:273
 msgid "Handles:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:309
+#: ../settings/xfce_settings_dialog.c:309
 msgid "Autohide:"
 msgstr "הסתרה אוטומטית:"
 
-#: settings/xfce_settings_dialog.c:355
+#: ../settings/xfce_settings_dialog.c:355
 msgid "Full width:"
 msgstr ""
 
-#: settings/xfce_settings_dialog.c:426
+#: ../settings/xfce_settings_dialog.c:426
 msgid "Xfce Panel Settings"
 msgstr "הגדרות לוח Xfce"
 
-#: settings/xfce_settings_dialog.c:436
+#: ../settings/xfce_settings_dialog.c:436
 msgid "Appearance"
 msgstr "מראה"
 
 #. show only hidden
-#: settings/xfce_settings_dialog.c:451 settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:451 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "התנהגות"
 
 #. position
-#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
 msgid "Position"
 msgstr "מיקום"
 
-#: settings/xftaskbar_plugin.c:399
+#: ../settings/xftaskbar_plugin.c:399
 msgid "_Top"
 msgstr "_עליון"
 
-#: settings/xftaskbar_plugin.c:409
+#: ../settings/xftaskbar_plugin.c:409
 msgid "_Bottom"
 msgstr "_תחתון"
 
-#: settings/xftaskbar_plugin.c:422
+#: ../settings/xftaskbar_plugin.c:422
 #, fuzzy
 msgid "Alignment:"
 msgstr "יישור"
 
-#: settings/xftaskbar_plugin.c:429
+#: ../settings/xftaskbar_plugin.c:429
 msgid "_Left"
 msgstr "_שמאל"
 
-#: settings/xftaskbar_plugin.c:439
+#: ../settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr "_אמצע"
 
-#: settings/xftaskbar_plugin.c:447
+#: ../settings/xftaskbar_plugin.c:447
 msgid "_Right"
 msgstr "_מין"
 
 #. size
-#: settings/xftaskbar_plugin.c:464
+#: ../settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr "גודל"
 
-#: settings/xftaskbar_plugin.c:474
+#: ../settings/xftaskbar_plugin.c:474
 #, fuzzy
 msgid "Height:"
 msgstr "גובה:"
 
-#: settings/xftaskbar_plugin.c:505
+#: ../settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr "רוחב:"
 
-#: settings/xftaskbar_plugin.c:541
+#: ../settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr ""
 
 #. Autohide
-#: settings/xftaskbar_plugin.c:561
+#: ../settings/xftaskbar_plugin.c:561
 msgid "Autohide"
 msgstr "הסתרה אוטומטית"
 
-#: settings/xftaskbar_plugin.c:566
+#: ../settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr "_הסתרה אוטומטית של שורת המשימות"
 
 #. tasklist
-#: settings/xftaskbar_plugin.c:583 plugins/tasklist/tasklist.c:92
+#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:92
 #, fuzzy
 msgid "Tasklist"
 msgstr "משימות"
 
-#: settings/xftaskbar_plugin.c:592
+#: ../settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:604
+#: ../settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr "הצג משימות מ_כל סביבות העבודה"
 
-#: settings/xftaskbar_plugin.c:613
+#: ../settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
 msgstr "תמיד _קבץ משימות"
 
-#: settings/xftaskbar_plugin.c:621
+#: ../settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr "הצג _שמות של יישומים"
 
 #. pager
-#: settings/xftaskbar_plugin.c:629
+#: ../settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr "מחליף סביבות עבודה"
 
-#: settings/xftaskbar_plugin.c:634
+#: ../settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr "הצג _מחליף סביבות עבודה בשורת המשימות"
 
 #. status area
-#: settings/xftaskbar_plugin.c:641
+#: ../settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:650
+#: ../settings/xftaskbar_plugin.c:650
 #, fuzzy
 msgid "Show _notification icons"
 msgstr "הצג _שמות של יישומים"
 
-#: settings/xftaskbar_plugin.c:657 plugins/systray/systray.c:535
+#: ../settings/xftaskbar_plugin.c:657 ../plugins/systray/systray.c:535
 msgid "Show _time"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:718
+#: ../settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr ""
 
-#: settings/xftaskbar_plugin.c:729
+#: ../settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr ""
 
-#: settings/iconbox_plugin.c:629
+#: ../settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr ""
 
-#: settings/iconbox_plugin.c:691
+#: ../settings/iconbox_plugin.c:691
 #, fuzzy
 msgid "_Show only minimized applications"
 msgstr "הצג _שמות של יישומים"
 
-#: settings/iconbox_plugin.c:754
+#: ../settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr ""
 
-#: settings/iconbox_plugin.c:777
+#: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr ""
 
-#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
-#: settings/iconbox_plugin.c:992
+#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
+#: ../settings/iconbox_plugin.c:992
 #, fuzzy
 msgid "Iconbox"
 msgstr "הגדרות סמלים"
@@ -469,208 +470,206 @@ msgstr "הגדרות סמלים"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:191
+#: ../plugins/clock/clock.c:191
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:421
+#: ../plugins/clock/clock.c:421
 msgid "Clock type:"
 msgstr "סוג שעון:"
 
-#: plugins/clock/clock.c:434
+#: ../plugins/clock/clock.c:434
 msgid "Analog"
 msgstr "אנלוגי"
 
-#: plugins/clock/clock.c:438
+#: ../plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "דיגיטלי"
 
-#: plugins/clock/clock.c:442
+#: ../plugins/clock/clock.c:442
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:504
+#: ../plugins/clock/clock.c:504
 msgid "Hour mode:"
 msgstr "מצב שעה:"
 
-#: plugins/clock/clock.c:511
+#: ../plugins/clock/clock.c:511
 msgid "24 hour"
 msgstr "24 שעות"
 
-#: plugins/clock/clock.c:517
+#: ../plugins/clock/clock.c:517
 msgid "12 hour"
 msgstr "12 שעות"
 
-#: plugins/clock/clock.c:523
+#: ../plugins/clock/clock.c:523
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:561
+#: ../plugins/clock/clock.c:561
 msgid "Show seconds:"
 msgstr "הצג שניות:"
 
-#: plugins/clock/clock.c:674
+#: ../plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "שעון Xfce"
 
-#: plugins/flexspace/flexspace.c:78
+#: ../plugins/flexspace/flexspace.c:78
 msgid "Flexible space"
 msgstr ""
 
-#: plugins/launcher/launcher.c:132 plugins/launcher/launcher.c:325
+#: ../plugins/launcher/launcher.c:113 ../plugins/launcher/launcher.c:306
 msgid "Launcher"
 msgstr "משגר"
 
-#: plugins/launcher/launcher.c:132
+#: ../plugins/launcher/launcher.c:113
 #, fuzzy
 msgid "Launcher Plugin"
 msgstr "משגר"
 
-#: plugins/launcher/launcher.c:400
+#: ../plugins/launcher/launcher.c:381
 #, fuzzy, c-format
 msgid ""
 "Could not run \"%s\":\n"
 "%s"
 msgstr "אין אפשרות ליצור פריט ללוח \"%s\"."
 
-#: plugins/launcher/launcher.c:840 plugins/launcher/launcher-dialog.c:1185
+#: ../plugins/launcher/launcher.c:825
+#: ../plugins/launcher/launcher-dialog.c:1185
 #, fuzzy
 msgid "New item"
 msgstr "הוסף פריט חדש"
 
-#: plugins/launcher/launcher.c:842 plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher.c:827
+#: ../plugins/launcher/launcher-dialog.c:1186
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "לפריט זה אין אפשרויות הגדרה"
 
-#: plugins/launcher/launcher-dialog.c:95 config/contents.xml.in.h:14
+#: ../plugins/launcher/launcher-dialog.c:95 ../config/contents.xml.in.h:14
 msgid "Terminal"
 msgstr "מסוף"
 
-#: plugins/launcher/launcher-dialog.c:96
+#: ../plugins/launcher/launcher-dialog.c:96
 msgid "Development"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:97 config/contents.xml.in.h:13
+#: ../plugins/launcher/launcher-dialog.c:97 ../config/contents.xml.in.h:13
 #, fuzzy
 msgid "Settings"
 msgstr "הגדרות לוח"
 
-#: plugins/launcher/launcher-dialog.c:98
+#: ../plugins/launcher/launcher-dialog.c:98
 msgid "System"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:99
+#: ../plugins/launcher/launcher-dialog.c:99
 msgid "Windows programs"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:262
+#: ../plugins/launcher/launcher-dialog.c:262
 #, fuzzy
 msgid "Name"
 msgstr "משחקים"
 
-#: plugins/launcher/launcher-dialog.c:282
+#: ../plugins/launcher/launcher-dialog.c:282
 #, fuzzy
 msgid "Description"
 msgstr "מיקום"
 
-#: plugins/launcher/launcher-dialog.c:397
+#: ../plugins/launcher/launcher-dialog.c:397
 #, fuzzy
 msgid "Select image file"
 msgstr "בחר קובץ:"
 
-#: plugins/launcher/launcher-dialog.c:468
+#: ../plugins/launcher/launcher-dialog.c:468
 msgid "Other..."
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:567
+#: ../plugins/launcher/launcher-dialog.c:567
 #, fuzzy
 msgid "Command"
 msgstr "פקודה:"
 
-#: plugins/launcher/launcher-dialog.c:622
+#: ../plugins/launcher/launcher-dialog.c:622
 #, fuzzy
 msgid "Use _startup notification"
 msgstr "השתמש בהתראת _פתיחה"
 
-#: plugins/launcher/launcher-dialog.c:644
-#: plugins/launcher/launcher-dialog.c:649
+#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:649
 #, fuzzy
 msgid "Edit launcher"
 msgstr "הוסף משגר"
 
-#: plugins/launcher/launcher-dialog.c:1242
-msgid "_Up"
-msgstr ""
-
-#: plugins/launcher/launcher-dialog.c:1248
-msgid "_Down"
-msgstr ""
-
-#: plugins/launcher/launcher-dialog.c:1254
+#: ../plugins/launcher/launcher-dialog.c:1242
 #, fuzzy
 msgid "_Edit"
 msgstr "עורך"
 
-#: plugins/launcher/launcher-dialog.c:1260
+#: ../plugins/launcher/launcher-dialog.c:1253
+msgid "_Up"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1259
+msgid "_Down"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1270
 msgid "_Add"
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:1290
+#: ../plugins/launcher/launcher-dialog.c:1300
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: plugins/launcher/launcher-dialog.c:1313
-msgid "Panel Item and Menu"
-msgstr ""
-
-#: plugins/mailcheck/mailcheck.c:838
+#: ../plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "תיבת דואר:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: ../plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "פקודת דואר חדשה:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: ../plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "פקודה להרצה כאשר דואר חדש מגיע"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: ../plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "פקודה להרצה כאשר הלחצן על הלוח נלחץ"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: ../plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "משך זמן (שניות):"
 
-#: plugins/mailcheck/mailcheck.c:1017
+#: ../plugins/mailcheck/mailcheck.c:1017
 msgid "Mail checker"
 msgstr "בדיקת דואר"
 
-#: plugins/pager/pager.c:313
+#: ../plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "מספר שורות:"
 
-#: plugins/pager/pager.c:315
+#: ../plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "מספר טורים:"
 
-#: plugins/pager/pager.c:372
+#: ../plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "מחליף סביבות עבודה גרפי"
 
-#: plugins/separator/separator.c:65
+#: ../plugins/separator/separator.c:65
 msgid "Separator"
 msgstr "מפריד"
 
-#: plugins/switcher/switcher.c:695
+#: ../plugins/switcher/switcher.c:695
 msgid "Desktop switcher"
 msgstr "מחליף שולחנות עבודה"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -680,140 +679,140 @@ msgstr ""
 "\n"
 "שאל את מנהל המערכת שלך למידע נוסף."
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "נעילת מסך"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:172
 #, fuzzy
 msgid "tip|Exit"
 msgstr "יציאה"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:174
+#: ../plugins/systembuttons/systembuttons.c:174
 #, fuzzy
 msgid "tip|Setup"
 msgstr "הגדרות"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:176
+#: ../plugins/systembuttons/systembuttons.c:176
 #, fuzzy
 msgid "tip|Info"
 msgstr "מידע"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Lock"
 msgstr "נעילה"
 
-#: plugins/systembuttons/systembuttons.c:522
+#: ../plugins/systembuttons/systembuttons.c:522
 msgid "Exit"
 msgstr "יציאה"
 
-#: plugins/systembuttons/systembuttons.c:523
+#: ../plugins/systembuttons/systembuttons.c:523
 msgid "Setup"
 msgstr "הגדרות"
 
-#: plugins/systembuttons/systembuttons.c:524
+#: ../plugins/systembuttons/systembuttons.c:524
 msgid "Info"
 msgstr "מידע"
 
-#: plugins/systembuttons/systembuttons.c:553
+#: ../plugins/systembuttons/systembuttons.c:553
 msgid "Button 1:"
 msgstr "לחצן 1:"
 
-#: plugins/systembuttons/systembuttons.c:568
+#: ../plugins/systembuttons/systembuttons.c:568
 msgid "Button 2:"
 msgstr "לחצן 2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:582
+#: ../plugins/systembuttons/systembuttons.c:582
 msgid "_Hide"
 msgstr "_הסתר"
 
-#: plugins/systembuttons/systembuttons.c:620
+#: ../plugins/systembuttons/systembuttons.c:620
 msgid "System buttons"
 msgstr "לחצני מערכת"
 
-#: plugins/systray/systray.c:492
+#: ../plugins/systray/systray.c:492
 msgid "Status Area"
 msgstr ""
 
-#: plugins/systray/systray.c:555
+#: ../plugins/systray/systray.c:555
 msgid "Display time before icons"
 msgstr ""
 
-#: settings/xfce-panel-settings.desktop.in.h:1
+#: ../settings/xfce-panel-settings.desktop.in.h:1
 msgid "Panel Settings"
 msgstr "הגדרות לוח"
 
-#: settings/xfce-panel-settings.desktop.in.h:2
+#: ../settings/xfce-panel-settings.desktop.in.h:2
 msgid "Xfce 4 Panel Settings"
 msgstr "הגדרות לוח Xfce 4"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:1
+#: ../settings/xfce-iconbox-settings.desktop.in.h:1
 msgid "Iconbox Settings"
 msgstr "הגדרות סמלים"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:2
+#: ../settings/xfce-iconbox-settings.desktop.in.h:2
 msgid "Xfce 4 Iconbox Settings"
 msgstr "הגדרות סמלים Xfce 4"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:1
+#: ../settings/xfce-taskbar-settings.desktop.in.h:1
 msgid "Taskbar Settings"
 msgstr "הגדרות שורת המשימות"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:2
+#: ../settings/xfce-taskbar-settings.desktop.in.h:2
 msgid "Xfce 4 Taskbar Settings"
 msgstr "הגדרות שורת המשימות Xfce 4"
 
-#: config/contents.xml.in.h:1
+#: ../config/contents.xml.in.h:1
 msgid "Appfinder"
 msgstr ""
 
-#: config/contents.xml.in.h:2
+#: ../config/contents.xml.in.h:2
 msgid "Drag file to print"
 msgstr ""
 
-#: config/contents.xml.in.h:3
+#: ../config/contents.xml.in.h:3
 #, fuzzy
 msgid "File manager"
 msgstr "מנהל הקבצים"
 
-#: config/contents.xml.in.h:4
+#: ../config/contents.xml.in.h:4
 msgid "Find and run applications"
 msgstr ""
 
-#: config/contents.xml.in.h:5
+#: ../config/contents.xml.in.h:5
 msgid "Konqueror"
 msgstr ""
 
-#: config/contents.xml.in.h:6
+#: ../config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
 msgstr ""
 
-#: config/contents.xml.in.h:7
+#: ../config/contents.xml.in.h:7
 msgid "Manual"
 msgstr ""
 
-#: config/contents.xml.in.h:8
+#: ../config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
 msgstr ""
 
-#: config/contents.xml.in.h:9
+#: ../config/contents.xml.in.h:9
 msgid "Music player"
 msgstr ""
 
-#: config/contents.xml.in.h:10
+#: ../config/contents.xml.in.h:10
 msgid "Nautilus"
 msgstr ""
 
-#: config/contents.xml.in.h:11
+#: ../config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
 msgstr ""
 
-#: config/contents.xml.in.h:12
+#: ../config/contents.xml.in.h:12
 #, fuzzy
 msgid "Printer Management"
 msgstr "מנהל הקבצים"

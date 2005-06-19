@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-09 14:01+0200\n"
+"POT-Creation-Date: 2005-06-19 15:55+0200\n"
 "PO-Revision-Date: 2005-05-06 18:43+0530\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -17,51 +17,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9\n"
 
-#: panel/xfce_support.c:334
+#: ../panel/xfce_support.c:334
 msgid "Select file"
 msgstr "फाईल निवडा"
 
-#: panel/settings.c:266
+#: ../panel/settings.c:266
 msgid "No data was found. The panel will be empty."
 msgstr "डाटा सापडला नाही. पॅनेल रीकामे राहील."
 
-#: panel/controls_dialog.c:88 settings/xftaskbar_plugin.c:393
+#: ../panel/controls_dialog.c:88 ../settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "जागा:"
 
-#: panel/controls_dialog.c:154
+#: ../panel/controls_dialog.c:154
 msgid "Item properties"
 msgstr "आयटम गुणधर्म"
 
-#: panel/item_dialog.c:63
+#: ../panel/item_dialog.c:63
 msgid "Select command"
 msgstr "आज्ञा निवडा"
 
-#: panel/item_dialog.c:200
+#: ../panel/item_dialog.c:200
 msgid "Command:"
 msgstr "आज्ञा:"
 
-#: panel/item_dialog.c:246 plugins/launcher/launcher-dialog.c:602
+#: ../panel/item_dialog.c:246 ../plugins/launcher/launcher-dialog.c:602
 msgid "Run in _terminal"
 msgstr "टर्मिनलमध्ये सुरु करा (_t)"
 
-#: panel/item_dialog.c:264
+#: ../panel/item_dialog.c:264
 msgid "Use startup _notification"
 msgstr "सुरुवातीची सुचना वापरा (_n)"
 
-#: panel/item_dialog.c:450
+#: ../panel/item_dialog.c:450
 msgid "Other Icon"
 msgstr "बाकीचे आयकॉन"
 
-#: panel/item_dialog.c:561
+#: ../panel/item_dialog.c:561
 msgid "Drag file onto this frame to change the icon"
 msgstr "आयकॉन बदलण्यासाठी फाईलला या चौकटीत ओढा"
 
-#: panel/main.c:114
+#: ../panel/main.c:114
 msgid "Are you sure you want to exit?"
 msgstr "तुम्हाला नक्की बाहेर जावयाचे आहे का?"
 
-#: panel/main.c:394
+#: ../panel/main.c:394
 #, c-format
 msgid ""
 "\n"
@@ -81,130 +81,131 @@ msgstr ""
 "\n"
 " GNU GPL अतंर्गत असलेला परवाना.\n"
 
-#: panel/main.c:474
+#: ../panel/main.c:474
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: सत्र व्यवस्थापनाशीवाय यशस्वी सुरु झाले"
 
-#: panel/main.c:479
+#: ../panel/main.c:479
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: सत्र व्यवस्थापनासह यशस्वी सुरु झाले"
 
-#: panel/controls.c:669
+#: ../panel/controls.c:669
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "पॅनेल आयटम तयार करु शकत नाही\"%s\"."
 
-#: panel/controls.c:709
+#: ../panel/controls.c:709
 #, c-format
 msgid "Remove %s item?"
 msgstr ""
 
-#: panel/controls.c:743 panel/panel.c:719 iconbox/iconbox.c:618
+#: ../panel/controls.c:743 ../panel/panel.c:719 ../iconbox/iconbox.c:618
 msgid "_Properties..."
 msgstr "गुणधर्म (_P)..."
 
-#: panel/controls.c:748 plugins/launcher/launcher-dialog.c:1266
+#: ../panel/controls.c:748 ../plugins/launcher/launcher-dialog.c:1276
 msgid "_Remove"
 msgstr "काढणे (_R)"
 
-#: panel/controls.c:757 panel/panel.c:709
+#: ../panel/controls.c:757 ../panel/panel.c:709
 msgid "Add _new item"
 msgstr "नविन आयटम मिळवा (_n)"
 
-#: panel/controls.c:1082
+#: ../panel/controls.c:1082
 msgid "This item has no configuration options"
 msgstr "या आयटमला कॉनफीग्युरेशन पर्याय उपलब्ध नाहीत"
 
-#: panel/panel.c:700 panel/panel.c:1048 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:409
+#: ../panel/panel.c:700 ../panel/panel.c:1048
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel"
 msgstr "Xfce पॅनेल"
 
-#: panel/panel.c:724
+#: ../panel/panel.c:724
 msgid "_About Xfce"
 msgstr "Xfce च्या बद्दल (_A)"
 
-#: panel/panel.c:729
+#: ../panel/panel.c:729
 msgid "_Help"
 msgstr "मदत (_H)"
 
-#: panel/panel.c:738
+#: ../panel/panel.c:738
 msgid "_Lock screen"
 msgstr "पडदा  ताळेबंद करा (_L)"
 
-#: panel/panel.c:743
+#: ../panel/panel.c:743
 msgid "_Restart"
 msgstr " पुनः सुरुवात (_R)"
 
-#: panel/panel.c:752 iconbox/iconbox.c:628
+#: ../panel/panel.c:752 ../iconbox/iconbox.c:628
 msgid "E_xit"
 msgstr "बाहेर (_x)"
 
-#: panel/icons.c:63 plugins/launcher/launcher-dialog.c:83
+#: ../panel/icons.c:63 ../plugins/launcher/launcher-dialog.c:83
 msgid "Default"
 msgstr "गृहित"
 
-#: panel/icons.c:64 plugins/launcher/launcher-dialog.c:84
+#: ../panel/icons.c:64 ../plugins/launcher/launcher-dialog.c:84
 msgid "Editor"
 msgstr "संपादक"
 
-#: panel/icons.c:65 plugins/launcher/launcher-dialog.c:85
+#: ../panel/icons.c:65 ../plugins/launcher/launcher-dialog.c:85
 msgid "File management"
 msgstr "फाईल व्य़वस्थापन"
 
-#: panel/icons.c:66 plugins/launcher/launcher-dialog.c:86
+#: ../panel/icons.c:66 ../plugins/launcher/launcher-dialog.c:86
 msgid "Utilities"
 msgstr "उपयुक्तता"
 
-#: panel/icons.c:67 plugins/launcher/launcher-dialog.c:87
+#: ../panel/icons.c:67 ../plugins/launcher/launcher-dialog.c:87
 msgid "Games"
 msgstr "खेळ"
 
-#: panel/icons.c:68 plugins/launcher/launcher-dialog.c:88
+#: ../panel/icons.c:68 ../plugins/launcher/launcher-dialog.c:88
 msgid "Help browser"
 msgstr "ब्राउझर मदत"
 
-#: panel/icons.c:69 plugins/launcher/launcher-dialog.c:89
+#: ../panel/icons.c:69 ../plugins/launcher/launcher-dialog.c:89
 msgid "Multimedia"
 msgstr "मल्टिमेडिया"
 
-#: panel/icons.c:70 plugins/launcher/launcher-dialog.c:90
+#: ../panel/icons.c:70 ../plugins/launcher/launcher-dialog.c:90
 msgid "Network"
 msgstr "जाळे"
 
-#: panel/icons.c:71 plugins/launcher/launcher-dialog.c:91
+#: ../panel/icons.c:71 ../plugins/launcher/launcher-dialog.c:91
 msgid "Graphics"
 msgstr "चित्रकला"
 
-#: panel/icons.c:72 plugins/launcher/launcher-dialog.c:92
+#: ../panel/icons.c:72 ../plugins/launcher/launcher-dialog.c:92
 msgid "Printer"
 msgstr "प्रिण्टंर"
 
-#: panel/icons.c:73 plugins/launcher/launcher-dialog.c:93
+#: ../panel/icons.c:73 ../plugins/launcher/launcher-dialog.c:93
 msgid "Productivity"
 msgstr "उत्पादकता"
 
-#: panel/icons.c:74 plugins/launcher/launcher-dialog.c:94
+#: ../panel/icons.c:74 ../plugins/launcher/launcher-dialog.c:94
 msgid "Sound"
 msgstr "आवाज"
 
 #. Translation with context.
 #. * Translators only need to translate 'Terminal'
-#: panel/icons.c:77
+#: ../panel/icons.c:77
 msgid "icons|Terminal"
 msgstr "आयकॉनस|टर्मिनल"
 
-#: panel/mcs_client.c:169
+#: ../panel/mcs_client.c:169
 msgid "Settings manager not available"
 msgstr "रचना व्यवस्थापक उपलब्ध नाही"
 
-#: taskbar/xftaskbar.c:510 plugins/systray/systray.c:88
+#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:88
 msgid "There is already a system tray running on this screen"
 msgstr " या पडद्यावर अगोदरच प्रणाली ट्रे सुरु आहे"
 
-#: taskbar/xftaskbar.c:516 plugins/systray/systray.c:94
+#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:94
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "प्रणाली ट्रे ची नोंदणी होऊ शकत नाही: %s"
@@ -217,234 +218,234 @@ msgstr "प्रणाली ट्रे ची नोंदणी होऊ �
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: taskbar/xftaskbar.c:616 plugins/systray/systray.c:175
+#: ../taskbar/xftaskbar.c:616 ../plugins/systray/systray.c:175
 msgid "%A %d %B %Y"
 msgstr "%ए %d %बी %वाय"
 
-#: taskbar/xftaskbar.c:637 plugins/systray/systray.c:200
+#: ../taskbar/xftaskbar.c:637 ../plugins/systray/systray.c:200
 msgid "%H:%M"
 msgstr "%एच:%एम"
 
-#: taskbar/xftaskbar.c:910 settings/xftaskbar_plugin.c:696
-#: settings/xftaskbar_plugin.c:706 settings/xftaskbar_plugin.c:987
+#: ../taskbar/xftaskbar.c:910 ../settings/xftaskbar_plugin.c:696
+#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
 msgid "Taskbar"
 msgstr "कार्य दांडा"
 
-#: taskbar/xftaskbar.c:1022
+#: ../taskbar/xftaskbar.c:1022
 msgid "Cannot create MCS client channel"
 msgstr "MCS पक्षकार माध्यम तयार करु शकत नाही"
 
-#: iconbox/iconbox.c:568
+#: ../iconbox/iconbox.c:568
 msgid "Xfce Iconbox"
 msgstr "Xfce आयकॉनबॉक्स"
 
-#: iconbox/iconbox.c:576 plugins/launcher/launcher.c:140
+#: ../iconbox/iconbox.c:576 ../plugins/launcher/launcher.c:121
 msgid "Developer"
 msgstr "निर्माता"
 
-#: iconbox/iconbox.c:612
+#: ../iconbox/iconbox.c:612
 msgid "_About"
 msgstr "च्य़ा बद्दल (_A)"
 
-#: settings/xfce_settings_dialog.c:87 settings/xftaskbar_plugin.c:480
-#: settings/xftaskbar_plugin.c:511
+#: ../settings/xfce_settings_dialog.c:87 ../settings/xftaskbar_plugin.c:480
+#: ../settings/xftaskbar_plugin.c:511
 msgid "Small"
 msgstr "लहान"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "मध्यम"
 
-#: settings/xfce_settings_dialog.c:95 settings/xftaskbar_plugin.c:499
-#: settings/xftaskbar_plugin.c:532
+#: ../settings/xfce_settings_dialog.c:95 ../settings/xftaskbar_plugin.c:499
+#: ../settings/xftaskbar_plugin.c:532
 msgid "Large"
 msgstr "मोठे"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "प्रचंड"
 
-#: settings/xfce_settings_dialog.c:149
+#: ../settings/xfce_settings_dialog.c:149
 msgid "Horizontal"
 msgstr "आडवे"
 
-#: settings/xfce_settings_dialog.c:153
+#: ../settings/xfce_settings_dialog.c:153
 msgid "Vertical"
 msgstr "उभे"
 
-#: settings/xfce_settings_dialog.c:195 settings/iconbox_plugin.c:762
+#: ../settings/xfce_settings_dialog.c:195 ../settings/iconbox_plugin.c:762
 msgid "None"
 msgstr "काहीही नाही"
 
-#: settings/xfce_settings_dialog.c:199
+#: ../settings/xfce_settings_dialog.c:199
 msgid "At both sides"
 msgstr "दोन्हि बाजूस"
 
-#: settings/xfce_settings_dialog.c:203
+#: ../settings/xfce_settings_dialog.c:203
 msgid "At the start"
 msgstr "सुरुवातीस"
 
-#: settings/xfce_settings_dialog.c:207
+#: ../settings/xfce_settings_dialog.c:207
 msgid "At the end"
 msgstr "सर्वात शेवटी"
 
-#: settings/xfce_settings_dialog.c:240
+#: ../settings/xfce_settings_dialog.c:240
 msgid "Panel size:"
 msgstr "पॅनेलचा आकार:"
 
-#: settings/xfce_settings_dialog.c:256
+#: ../settings/xfce_settings_dialog.c:256
 msgid "Panel orientation:"
 msgstr "पॅनेलची पुर्वाभिमुखता:"
 
-#: settings/xfce_settings_dialog.c:273
+#: ../settings/xfce_settings_dialog.c:273
 msgid "Handles:"
 msgstr "मूठी:"
 
-#: settings/xfce_settings_dialog.c:309
+#: ../settings/xfce_settings_dialog.c:309
 msgid "Autohide:"
 msgstr "स्वयंलुप्त:"
 
-#: settings/xfce_settings_dialog.c:355
+#: ../settings/xfce_settings_dialog.c:355
 msgid "Full width:"
 msgstr "पुर्ण रुंदी:"
 
-#: settings/xfce_settings_dialog.c:426
+#: ../settings/xfce_settings_dialog.c:426
 msgid "Xfce Panel Settings"
 msgstr "Xfce पॅनेल रचना"
 
-#: settings/xfce_settings_dialog.c:436
+#: ../settings/xfce_settings_dialog.c:436
 msgid "Appearance"
 msgstr "स्वरुप"
 
 #. show only hidden
-#: settings/xfce_settings_dialog.c:451 settings/iconbox_plugin.c:685
+#: ../settings/xfce_settings_dialog.c:451 ../settings/iconbox_plugin.c:685
 msgid "Behaviour"
 msgstr "स्वभाव"
 
 #. position
-#: settings/xftaskbar_plugin.c:383 settings/iconbox_plugin.c:298
+#: ../settings/xftaskbar_plugin.c:383 ../settings/iconbox_plugin.c:298
 msgid "Position"
 msgstr "जागा"
 
-#: settings/xftaskbar_plugin.c:399
+#: ../settings/xftaskbar_plugin.c:399
 msgid "_Top"
 msgstr "शिखर (_T)"
 
-#: settings/xftaskbar_plugin.c:409
+#: ../settings/xftaskbar_plugin.c:409
 msgid "_Bottom"
 msgstr "तळ (_B)"
 
-#: settings/xftaskbar_plugin.c:422
+#: ../settings/xftaskbar_plugin.c:422
 msgid "Alignment:"
 msgstr "मांडणी:"
 
-#: settings/xftaskbar_plugin.c:429
+#: ../settings/xftaskbar_plugin.c:429
 msgid "_Left"
 msgstr "डावा (_L)"
 
-#: settings/xftaskbar_plugin.c:439
+#: ../settings/xftaskbar_plugin.c:439
 msgid "_Center"
 msgstr "मध्य(_C)"
 
-#: settings/xftaskbar_plugin.c:447
+#: ../settings/xftaskbar_plugin.c:447
 msgid "_Right"
 msgstr "उजवा (_R)"
 
 #. size
-#: settings/xftaskbar_plugin.c:464
+#: ../settings/xftaskbar_plugin.c:464
 msgid "Size"
 msgstr "आकार"
 
-#: settings/xftaskbar_plugin.c:474
+#: ../settings/xftaskbar_plugin.c:474
 msgid "Height:"
 msgstr "उंची:"
 
-#: settings/xftaskbar_plugin.c:505
+#: ../settings/xftaskbar_plugin.c:505
 msgid "Width:"
 msgstr "रुंदी:"
 
-#: settings/xftaskbar_plugin.c:541
+#: ../settings/xftaskbar_plugin.c:541
 msgid "_Shrink to fit"
 msgstr "योग्यतेनुसार आकुंचन (_S)"
 
 #. Autohide
-#: settings/xftaskbar_plugin.c:561
+#: ../settings/xftaskbar_plugin.c:561
 msgid "Autohide"
 msgstr "स्वंयलुप्त"
 
-#: settings/xftaskbar_plugin.c:566
+#: ../settings/xftaskbar_plugin.c:566
 msgid "Auto _hide taskbar"
 msgstr "स्वंयलुप्त कार्य दांडा (_h)"
 
 #. tasklist
-#: settings/xftaskbar_plugin.c:583 plugins/tasklist/tasklist.c:92
+#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:92
 msgid "Tasklist"
 msgstr "कार्य यादी"
 
-#: settings/xftaskbar_plugin.c:592
+#: ../settings/xftaskbar_plugin.c:592
 msgid "Show tasklist"
 msgstr "कार्य यादी दाखवा"
 
-#: settings/xftaskbar_plugin.c:604
+#: ../settings/xftaskbar_plugin.c:604
 msgid "Show tasks from _all workspaces"
 msgstr "कार्ये सर्व वर्कस्पेसेस पासुन दाखवा (_a)"
 
-#: settings/xftaskbar_plugin.c:613
+#: ../settings/xftaskbar_plugin.c:613
 msgid "Always _group tasks"
 msgstr "नेहमी कार्यांचे संघटन करा (_g)"
 
-#: settings/xftaskbar_plugin.c:621
+#: ../settings/xftaskbar_plugin.c:621
 msgid "Show application _names"
 msgstr "ऍप्लिकेशनचीशनची नावे प्रदर्शित कराा (_n)"
 
 #. pager
-#: settings/xftaskbar_plugin.c:629
+#: ../settings/xftaskbar_plugin.c:629
 msgid "Pager"
 msgstr "पेजर"
 
-#: settings/xftaskbar_plugin.c:634
+#: ../settings/xftaskbar_plugin.c:634
 msgid "Show _pager in taskbar"
 msgstr "कार्य दांड्यामध्ये पेजर दाखवा (_p)"
 
 #. status area
-#: settings/xftaskbar_plugin.c:641
+#: ../settings/xftaskbar_plugin.c:641
 msgid "Status area"
 msgstr "स्थिती भाग"
 
-#: settings/xftaskbar_plugin.c:650
+#: ../settings/xftaskbar_plugin.c:650
 msgid "Show _notification icons"
 msgstr "सूचना आयकॉन दाखवा (_n)"
 
-#: settings/xftaskbar_plugin.c:657 plugins/systray/systray.c:535
+#: ../settings/xftaskbar_plugin.c:657 ../plugins/systray/systray.c:535
 msgid "Show _time"
 msgstr "वेळ दाखवा (_t)"
 
-#: settings/xftaskbar_plugin.c:718
+#: ../settings/xftaskbar_plugin.c:718
 msgid "General"
 msgstr "सर्वसामान्य"
 
-#: settings/xftaskbar_plugin.c:729
+#: ../settings/xftaskbar_plugin.c:729
 msgid "Components"
 msgstr "घटक"
 
-#: settings/iconbox_plugin.c:629
+#: ../settings/iconbox_plugin.c:629
 msgid "Icon size"
 msgstr "आयकॉनचा आकार"
 
-#: settings/iconbox_plugin.c:691
+#: ../settings/iconbox_plugin.c:691
 msgid "_Show only minimized applications"
 msgstr "फक्त लहान केलेल्या ऍँप्लिकेशनस प्रदर्शित करा (_S)"
 
-#: settings/iconbox_plugin.c:754
+#: ../settings/iconbox_plugin.c:754
 msgid "Transparency"
 msgstr "पारदर्शकता"
 
-#: settings/iconbox_plugin.c:777
+#: ../settings/iconbox_plugin.c:777
 msgid "Full"
 msgstr "संपूर्ण"
 
-#: settings/iconbox_plugin.c:831 settings/iconbox_plugin.c:841
-#: settings/iconbox_plugin.c:992
+#: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
+#: ../settings/iconbox_plugin.c:992
 msgid "Iconbox"
 msgstr "आयकॉन बॉक्स"
 
@@ -456,63 +457,63 @@ msgstr "आयकॉन बॉक्स"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:191
+#: ../plugins/clock/clock.c:191
 msgid "%A, %d %B %Y"
 msgstr "%ए, %d %बी %वाय"
 
-#: plugins/clock/clock.c:421
+#: ../plugins/clock/clock.c:421
 msgid "Clock type:"
 msgstr "घड्याळाचे प्रकार:"
 
-#: plugins/clock/clock.c:434
+#: ../plugins/clock/clock.c:434
 msgid "Analog"
 msgstr "अनॅलॉग"
 
-#: plugins/clock/clock.c:438
+#: ../plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "डिजिटल"
 
-#: plugins/clock/clock.c:442
+#: ../plugins/clock/clock.c:442
 msgid "LED"
 msgstr "लेड"
 
-#: plugins/clock/clock.c:504
+#: ../plugins/clock/clock.c:504
 msgid "Hour mode:"
 msgstr "तासाची पद्धत:"
 
-#: plugins/clock/clock.c:511
+#: ../plugins/clock/clock.c:511
 msgid "24 hour"
 msgstr "२४ तास"
 
-#: plugins/clock/clock.c:517
+#: ../plugins/clock/clock.c:517
 msgid "12 hour"
 msgstr "१२ तास"
 
-#: plugins/clock/clock.c:523
+#: ../plugins/clock/clock.c:523
 msgid "AM/PM"
 msgstr " एम / पीम"
 
-#: plugins/clock/clock.c:561
+#: ../plugins/clock/clock.c:561
 msgid "Show seconds:"
 msgstr "सेकंद:"
 
-#: plugins/clock/clock.c:674
+#: ../plugins/clock/clock.c:674
 msgid "Xfce Clock"
 msgstr "Xfce घड्याळ"
 
-#: plugins/flexspace/flexspace.c:78
+#: ../plugins/flexspace/flexspace.c:78
 msgid "Flexible space"
 msgstr "लवचीक जागा"
 
-#: plugins/launcher/launcher.c:132 plugins/launcher/launcher.c:325
+#: ../plugins/launcher/launcher.c:113 ../plugins/launcher/launcher.c:306
 msgid "Launcher"
 msgstr "लॉनचंर"
 
-#: plugins/launcher/launcher.c:132
+#: ../plugins/launcher/launcher.c:113
 msgid "Launcher Plugin"
 msgstr "लॉनचंर प्लगइन"
 
-#: plugins/launcher/launcher.c:400
+#: ../plugins/launcher/launcher.c:381
 #, c-format
 msgid ""
 "Could not run \"%s\":\n"
@@ -521,135 +522,132 @@ msgstr ""
 "सुरु होऊ शकत नाही \"%s\":\n"
 "%s"
 
-#: plugins/launcher/launcher.c:840 plugins/launcher/launcher-dialog.c:1185
+#: ../plugins/launcher/launcher.c:825
+#: ../plugins/launcher/launcher-dialog.c:1185
 msgid "New item"
 msgstr "नवीन आयटम"
 
-#: plugins/launcher/launcher.c:842 plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher.c:827
+#: ../plugins/launcher/launcher-dialog.c:1186
 msgid "This item has not yet been configured"
 msgstr "हा आयटम अजून कॉनफीग्युरड झालेला नाही"
 
-#: plugins/launcher/launcher-dialog.c:95 config/contents.xml.in.h:14
+#: ../plugins/launcher/launcher-dialog.c:95 ../config/contents.xml.in.h:14
 msgid "Terminal"
 msgstr "टर्मिनल"
 
-#: plugins/launcher/launcher-dialog.c:96
+#: ../plugins/launcher/launcher-dialog.c:96
 msgid "Development"
 msgstr "विकास"
 
-#: plugins/launcher/launcher-dialog.c:97 config/contents.xml.in.h:13
+#: ../plugins/launcher/launcher-dialog.c:97 ../config/contents.xml.in.h:13
 msgid "Settings"
 msgstr "रचना"
 
-#: plugins/launcher/launcher-dialog.c:98
+#: ../plugins/launcher/launcher-dialog.c:98
 msgid "System"
 msgstr "प्रणाली"
 
-#: plugins/launcher/launcher-dialog.c:99
+#: ../plugins/launcher/launcher-dialog.c:99
 msgid "Windows programs"
 msgstr "विण्डो चे कार्यक्रम"
 
-#: plugins/launcher/launcher-dialog.c:262
+#: ../plugins/launcher/launcher-dialog.c:262
 msgid "Name"
 msgstr "नाव"
 
-#: plugins/launcher/launcher-dialog.c:282
+#: ../plugins/launcher/launcher-dialog.c:282
 msgid "Description"
 msgstr "माहीती"
 
-#: plugins/launcher/launcher-dialog.c:397
+#: ../plugins/launcher/launcher-dialog.c:397
 msgid "Select image file"
 msgstr "प्रतिमा फाईल निवडा "
 
-#: plugins/launcher/launcher-dialog.c:468
+#: ../plugins/launcher/launcher-dialog.c:468
 msgid "Other..."
 msgstr "बाकीचे..."
 
-#: plugins/launcher/launcher-dialog.c:567
+#: ../plugins/launcher/launcher-dialog.c:567
 msgid "Command"
 msgstr "आज्ञा"
 
-#: plugins/launcher/launcher-dialog.c:622
+#: ../plugins/launcher/launcher-dialog.c:622
 msgid "Use _startup notification"
 msgstr "सुरुवातीची सुचना वापरा (_s)"
 
-#: plugins/launcher/launcher-dialog.c:644
-#: plugins/launcher/launcher-dialog.c:649
+#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:649
 msgid "Edit launcher"
 msgstr "लॉनचंर संपादित करा"
 
-#: plugins/launcher/launcher-dialog.c:1242
-msgid "_Up"
-msgstr "वर (_U)"
-
-#: plugins/launcher/launcher-dialog.c:1248
-msgid "_Down"
-msgstr "खाली (_D)"
-
-#: plugins/launcher/launcher-dialog.c:1254
+#: ../plugins/launcher/launcher-dialog.c:1242
 msgid "_Edit"
 msgstr "संपादक"
 
-#: plugins/launcher/launcher-dialog.c:1260
+#: ../plugins/launcher/launcher-dialog.c:1253
+msgid "_Up"
+msgstr "वर (_U)"
+
+#: ../plugins/launcher/launcher-dialog.c:1259
+msgid "_Down"
+msgstr "खाली (_D)"
+
+#: ../plugins/launcher/launcher-dialog.c:1270
 msgid "_Add"
 msgstr "मिसळणे (_A)"
 
-#: plugins/launcher/launcher-dialog.c:1290
+#: ../plugins/launcher/launcher-dialog.c:1300
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr "सूचीमधील पहिला आयटम पॅनेलवर दाखवलेला आहे. बाकीचे आयटमस यादीमध्ये येतील."
 
-#: plugins/launcher/launcher-dialog.c:1313
-#, fuzzy
-msgid "Panel Item and Menu"
-msgstr "पॅनेल आयटम आणि यादी आयटमस"
-
-#: plugins/mailcheck/mailcheck.c:838
+#: ../plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "मेल बॉक्स:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: ../plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "नविन मेल बॉक्स:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: ../plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "नविन मेल आल्यानंतर सुरु होणारी आज्ञा"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: ../plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "पॅनेलचे बटन दाबल्यानंतर सुरु होणारी आज्ञा"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: ../plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "मध्यातंर (सेक):"
 
-#: plugins/mailcheck/mailcheck.c:1017
+#: ../plugins/mailcheck/mailcheck.c:1017
 msgid "Mail checker"
 msgstr "मेल तपासनारा"
 
-#: plugins/pager/pager.c:313
+#: ../plugins/pager/pager.c:313
 msgid "Number of rows:"
 msgstr "ओळींची संख्या:"
 
-#: plugins/pager/pager.c:315
+#: ../plugins/pager/pager.c:315
 msgid "Number of columns:"
 msgstr "स्तंभाची संख्या:"
 
-#: plugins/pager/pager.c:372
+#: ../plugins/pager/pager.c:372
 msgid "Graphical pager"
 msgstr "पेजरचे चित्र"
 
-#: plugins/separator/separator.c:65
+#: ../plugins/separator/separator.c:65
 msgid "Separator"
 msgstr "विभक्त रेषा"
 
-#: plugins/switcher/switcher.c:695
+#: ../plugins/switcher/switcher.c:695
 msgid "Desktop switcher"
 msgstr "डेस्कटॉप स्विचर"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -659,139 +657,143 @@ msgstr ""
 "\n"
 "अधीक माहीतीसाठी प्रणाली व्यवस्थापकास विचारा"
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "पडदा टाळेबंद करा"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:172
 msgid "tip|Exit"
 msgstr "tip| बाहेर"
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:174
+#: ../plugins/systembuttons/systembuttons.c:174
 msgid "tip|Setup"
 msgstr "tip| उभारणे "
 
 #. don't translate 'tip|'
-#: plugins/systembuttons/systembuttons.c:176
+#: ../plugins/systembuttons/systembuttons.c:176
 msgid "tip|Info"
 msgstr "tip| माहिती"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Lock"
 msgstr "टाळेबंद"
 
-#: plugins/systembuttons/systembuttons.c:522
+#: ../plugins/systembuttons/systembuttons.c:522
 msgid "Exit"
 msgstr "बाहेर"
 
-#: plugins/systembuttons/systembuttons.c:523
+#: ../plugins/systembuttons/systembuttons.c:523
 msgid "Setup"
 msgstr "उभारणे"
 
-#: plugins/systembuttons/systembuttons.c:524
+#: ../plugins/systembuttons/systembuttons.c:524
 msgid "Info"
 msgstr "माहिती"
 
-#: plugins/systembuttons/systembuttons.c:553
+#: ../plugins/systembuttons/systembuttons.c:553
 msgid "Button 1:"
 msgstr "बटन १:"
 
-#: plugins/systembuttons/systembuttons.c:568
+#: ../plugins/systembuttons/systembuttons.c:568
 msgid "Button 2:"
 msgstr "बटन २:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:582
+#: ../plugins/systembuttons/systembuttons.c:582
 msgid "_Hide"
 msgstr "लुप्त (_H)"
 
-#: plugins/systembuttons/systembuttons.c:620
+#: ../plugins/systembuttons/systembuttons.c:620
 msgid "System buttons"
 msgstr "प्रणाली बटन"
 
-#: plugins/systray/systray.c:492
+#: ../plugins/systray/systray.c:492
 #, fuzzy
 msgid "Status Area"
 msgstr "स्थिती भाग"
 
-#: plugins/systray/systray.c:555
+#: ../plugins/systray/systray.c:555
 msgid "Display time before icons"
 msgstr ""
 
-#: settings/xfce-panel-settings.desktop.in.h:1
+#: ../settings/xfce-panel-settings.desktop.in.h:1
 msgid "Panel Settings"
 msgstr "पॅनेल रचना"
 
-#: settings/xfce-panel-settings.desktop.in.h:2
+#: ../settings/xfce-panel-settings.desktop.in.h:2
 msgid "Xfce 4 Panel Settings"
 msgstr "Xfce ४ पॅनेल रचना"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:1
+#: ../settings/xfce-iconbox-settings.desktop.in.h:1
 msgid "Iconbox Settings"
 msgstr "आयकॉनबॉक्स रचना"
 
-#: settings/xfce-iconbox-settings.desktop.in.h:2
+#: ../settings/xfce-iconbox-settings.desktop.in.h:2
 msgid "Xfce 4 Iconbox Settings"
 msgstr "Xfce ४ आयकॉन रचना"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:1
+#: ../settings/xfce-taskbar-settings.desktop.in.h:1
 msgid "Taskbar Settings"
 msgstr "कार्य दांडा रचना"
 
-#: settings/xfce-taskbar-settings.desktop.in.h:2
+#: ../settings/xfce-taskbar-settings.desktop.in.h:2
 msgid "Xfce 4 Taskbar Settings"
 msgstr "Xfce ४ कार्य दांडा रचना"
 
-#: config/contents.xml.in.h:1
+#: ../config/contents.xml.in.h:1
 msgid "Appfinder"
 msgstr "ऍपफाईनडंर"
 
-#: config/contents.xml.in.h:2
+#: ../config/contents.xml.in.h:2
 msgid "Drag file to print"
 msgstr "प्रिंट करण्यासाठी फाईल ओढा"
 
-#: config/contents.xml.in.h:3
+#: ../config/contents.xml.in.h:3
 msgid "File manager"
 msgstr "फाईल व्यवस्थापक"
 
-#: config/contents.xml.in.h:4
+#: ../config/contents.xml.in.h:4
 msgid "Find and run applications"
 msgstr "ऍप्लिकेशनस शोधा आणि सुरु करा"
 
-#: config/contents.xml.in.h:5
+#: ../config/contents.xml.in.h:5
 msgid "Konqueror"
 msgstr "कॉनकरर"
 
-#: config/contents.xml.in.h:6
+#: ../config/contents.xml.in.h:6
 msgid "Konqueror File Manager"
 msgstr "कॉनकरर फाईल व्यवस्थापक "
 
-#: config/contents.xml.in.h:7
+#: ../config/contents.xml.in.h:7
 msgid "Manual"
 msgstr "हस्तलिखित"
 
-#: config/contents.xml.in.h:8
+#: ../config/contents.xml.in.h:8
 msgid "Mozilla Web Browser"
 msgstr "मॉझिला वेब ब्राउझर"
 
-#: config/contents.xml.in.h:9
+#: ../config/contents.xml.in.h:9
 msgid "Music player"
 msgstr "संगीत वाजवणारा"
 
-#: config/contents.xml.in.h:10
+#: ../config/contents.xml.in.h:10
 msgid "Nautilus"
 msgstr "नॉटिलस"
 
-#: config/contents.xml.in.h:11
+#: ../config/contents.xml.in.h:11
 msgid "Nautilus File Manager"
 msgstr "नॉटिलस फाईल व्यवस्थापक "
 
-#: config/contents.xml.in.h:12
+#: ../config/contents.xml.in.h:12
 msgid "Printer Management"
 msgstr "प्रिंण्टर व्यवस्थापन "
+
+#, fuzzy
+#~ msgid "Panel Item and Menu"
+#~ msgstr "पॅनेल आयटम आणि यादी आयटमस"
 
 #~ msgid "Removing the item will also remove its popup menu."
 #~ msgstr "आयटम काढूण टाकताना त्याची अनपक्षीत उद्भवणारी यादी काढून टाकण्यात येइल."

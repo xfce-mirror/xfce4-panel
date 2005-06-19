@@ -65,7 +65,7 @@ xfce4_panel_LDFLAGS += -no-undefined
 endif
 
 xfce4_panel_LDADD =							\
-	$(top_srcdir)/libs/libxfce4panel.la				\
+	../libs/libxfce4panel.la					\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
 	@LIBXFCEGUI4_LIBS@						\
@@ -73,7 +73,7 @@ xfce4_panel_LDADD =							\
 	@LIBXML_LIBS@
 
 xfce4_panel_DEPENDENCIES =						\
-	$(top_srcdir)/libs/libxfce4panel.la
+	../libs/libxfce4panel.la
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = xfce4-panel-1.0.pc

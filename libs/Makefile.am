@@ -1,16 +1,19 @@
 lib_LTLIBRARIES = libxfce4panel.la
 
-libxfce4panel_la_SOURCES =						\
-	xfce-arrow-button.c						\
-	xfce-arrow-button.h						\
+generated_files = 							\
 	xfce-enum-types.c						\
 	xfce-enum-types.h						\
+	xfce-marshal.c							\
+	xfce-marshal.h
+
+libxfce4panel_la_SOURCES =						\
+	$(generated_files)						\
+	xfce-arrow-button.c						\
+	xfce-arrow-button.h						\
 	xfce-itembar.c							\
 	xfce-itembar.h							\
 	xfce-item.c							\
 	xfce-item.h							\
-	xfce-marshal.c							\
-	xfce-marshal.h							\
 	xfce-paint-private.c						\
 	xfce-paint-private.h						\
 	xfce-panel-window.c						\
@@ -35,6 +38,10 @@ libxfce4panel_la_CFLAGS =						\
 libxfce4panel_la_LDFLAGS = 						\
 	-export-dynamic							\
 	-version-info @LIBXFCE4PANEL_VERINFO@
+
+EXTRA_DIST = 								\
+	xfce-marshal.list						\
+	$(generated_files)
 
 xfce_headers = \
 	xfce-panel-window.h
@@ -72,3 +79,8 @@ xfce-marshal.c: xfce-marshal.h $(srcdir)/xfce-marshal.list Makefile
         cp tmp-marshal.c $(@F) && \
         rm -f tmp-marshal.c tmp-marshal.c~
 
+DISTCLEANFILES =							\
+	xfce-enum-types.h						\
+	xfce-enum-types.c						\
+	xfce-marshal.h							\
+	xfce-marshal.c
