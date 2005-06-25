@@ -109,6 +109,9 @@ ensure_base_dir_spec (XfceResourceType type,
     path = xfce_resource_save_location (type, new, FALSE);
     g_free (new);
 
+    if (G_UNLIKELY (path == NULL))
+      return;
+
     if (!xfce_mkdirhier (path, 0700, &error))
     {
         g_printerr ("%s\n", error->message);
