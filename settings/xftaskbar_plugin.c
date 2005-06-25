@@ -765,15 +765,16 @@ static gboolean
 write_options (McsPlugin * mcs_plugin)
 {
     gchar *rcfile;
-    gboolean result;
+    gboolean result = FALSE;
 
     rcfile = xfce_resource_save_location (XFCE_RESOURCE_CONFIG,
                                           RCDIR G_DIR_SEPARATOR_S RCFILE,
                                           TRUE);
-    result =
-        mcs_manager_save_channel_to_file (mcs_plugin->manager, CHANNEL,
-                                          rcfile);
-    g_free (rcfile);
+    if (G_LIKELY (rcfile != NULL))
+    {
+        result = mcs_manager_save_channel_to_file (mcs_plugin->manager, CHANNEL, rcfile);
+        g_free (rcfile);
+    }
 
     return result;
 }
