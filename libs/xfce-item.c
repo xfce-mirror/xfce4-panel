@@ -28,7 +28,7 @@
 
 #include "xfce-marshal.h"
 #include "xfce-enum-types.h"
-#include "xfce-paint-private.h"
+/* include "xfce-paint-private.h" */
 #include "xfce-item.h"
 #include "xfce-itembar.h"
 
@@ -40,7 +40,13 @@
 #define DEFAULT_HAS_HANDLE      FALSE
 #define DEFAULT_USE_DRAG_WINDOW FALSE
 
-#define HANDLE_WIDTH            XFCE_DEFAULT_HANDLE_WIDTH
+/* NOTE: we don't use the handle currently, so we don't paint a 
+ * handle either. We just leave a little extra space for the user
+ * to click on.
+ */
+
+/*#define HANDLE_WIDTH            XFCE_DEFAULT_HANDLE_WIDTH*/
+#define HANDLE_WIDTH  2
 
 enum
 {
@@ -310,9 +316,15 @@ xfce_item_expose (GtkWidget * widget, GdkEventExpose *event)
 {
     if (GTK_WIDGET_DRAWABLE (widget))
     {
-        XfceItemPrivate *priv = XFCE_ITEM_GET_PRIVATE (XFCE_ITEM (widget));
+#if 0
         GtkAllocation *allocation = &(widget->allocation);
+        XfceItemPrivate *priv = XFCE_ITEM_GET_PRIVATE (XFCE_ITEM (widget));
 
+        /* NOTE: we don't use the handle currently, so we don't paint a 
+         * handle either. We just leave a little extra space for the user
+         * to click on.
+         */
+        
         if (priv->has_handle)
         {
             int x, y, w, h;
@@ -345,6 +357,7 @@ xfce_item_expose (GtkWidget * widget, GdkEventExpose *event)
             xfce_paint_handle (widget, &(event->area), "handlebox",
                                orientation, x, y, w, h);
         }
+#endif
         
         if (GTK_BIN (widget)->child)
         {
