@@ -36,7 +36,7 @@ typedef struct
 {
     GtkWidget *widget;
 
-    gboolean always_group;
+    NetkTasklistGroupingType grouping;
     gboolean all_workspaces;
     gboolean show_label;
 }
@@ -63,6 +63,14 @@ tasklist_set_size (Control * control, int size)
     }
 }
 
+static void
+tasklist_free (Control *control)
+{
+    Tasklist *tasklist = control->data;
+
+    g_free (tasklist);
+}
+
 /* config */
 static void
 tasklist_read_config (Control *control, xmlNodePtr node)
@@ -84,13 +92,15 @@ tasklist_read_config (Control *control, xmlNodePtr node)
             xmlFree (value);
         }
         
-        value = xmlGetProp (node, "always_group");
+        value = xmlGetProp (node, "grouping");
 
         if (value)
         {
             n = strtol (value, NULL, 0);
 
-            tasklist->always_group = (n == 1);
+            if (n >= 0)
+                tasklist->grouping = CLAMP (n, NETK_TASKLIST_NEVER_GROUP,
+                                            NETK_TASKLIST_ALWAYS_GROUP);
 
             xmlFree (value);
         }
@@ -111,9 +121,7 @@ tasklist_read_config (Control *control, xmlNodePtr node)
                                               tasklist->all_workspaces);
 
     netk_tasklist_set_grouping (NETK_TASKLIST (tasklist->widget),
-                                tasklist->always_group ? 
-                                        NETK_TASKLIST_ALWAYS_GROUP :
-                                        NETK_TASKLIST_AUTO_GROUP);
+                                tasklist->grouping);
 
     netk_tasklist_set_show_label (NETK_TASKLIST (tasklist->widget),
                                   tasklist->show_label);
@@ -128,8 +136,8 @@ tasklist_write_config (Control *control, xmlNodePtr node)
     g_snprintf (value, 2, "%d", tasklist->all_workspaces);
     xmlSetProp (node, "all_workspaces", (const xmlChar *)value);
     
-    g_snprintf (value, 2, "%d", tasklist->always_group);
-    xmlSetProp (node, "always_group", (const xmlChar *)value);
+    g_snprintf (value, 2, "%d", tasklist->grouping);
+    xmlSetProp (node, "grouping", (const xmlChar *)value);
 
     g_snprintf (value, 2, "%d", tasklist->show_label);
     xmlSetProp (node, "show_label", (const xmlChar *)value);
@@ -147,14 +155,12 @@ all_workspaces_toggled (GtkToggleButton *tb, Tasklist *tasklist)
 }
 
 static void
-always_group_toggled (GtkToggleButton *tb, Tasklist *tasklist)
+grouping_changed (GtkComboBox *cb, Tasklist *tasklist)
 {
-    tasklist->always_group = gtk_toggle_button_get_active (tb);
+    tasklist->grouping = gtk_combo_box_get_active (cb);
 
     netk_tasklist_set_grouping (NETK_TASKLIST (tasklist->widget),
-                                tasklist->always_group ? 
-                                        NETK_TASKLIST_ALWAYS_GROUP :
-                                        NETK_TASKLIST_AUTO_GROUP);
+                                tasklist->grouping);
 }
 
 static void
@@ -189,21 +195,31 @@ tasklist_create_options (Control *control, GtkContainer *container,
     g_signal_connect (cb, "toggled", G_CALLBACK (all_workspaces_toggled),
                       tasklist);
 
-    cb = gtk_check_button_new_with_mnemonic (_("Always _group tasks"));
-    gtk_widget_show (cb);
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-                                  tasklist->always_group);
-
-    g_signal_connect (cb, "toggled", G_CALLBACK (always_group_toggled),
-                      tasklist);
-
     cb = gtk_check_button_new_with_mnemonic (_("Show application _names"));
     gtk_widget_show (cb);
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
                                   tasklist->show_label);
     g_signal_connect (cb, "toggled", G_CALLBACK (show_label_toggled),
+                      tasklist);
+
+    cb = gtk_combo_box_new_text ();
+    gtk_widget_show (cb);
+    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
+        
+    /* keep order in sync with NetkTasklistGroupingType */
+    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), 
+                               _("Never group tasks"));
+    
+    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), 
+                               _("Automatically group tasks"));
+    
+    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), 
+                               _("Always group tasks"));
+
+    gtk_combo_box_set_active (GTK_COMBO_BOX (cb), tasklist->grouping);
+    
+    g_signal_connect (cb, "changed", G_CALLBACK (grouping_changed),
                       tasklist);
 }
 
@@ -224,6 +240,7 @@ create_tasklist_control (Control * control)
     Tasklist *tasklist = g_new0 (Tasklist, 1);
     
     tasklist->show_label = TRUE;
+    tasklist->grouping = NETK_TASKLIST_AUTO_GROUP;
 
     xfce_item_set_has_handle (XFCE_ITEM (control->base), TRUE);
     g_signal_connect (control->base, "realize",
@@ -252,6 +269,8 @@ xfce_control_class_init (ControlClass * cc)
 
     cc->attach_callback = tasklist_attach_callback;
     cc->set_size = tasklist_set_size;
+
+    cc->free = tasklist_free;
 
     cc->read_config = tasklist_read_config;
     cc->write_config = tasklist_write_config;
