@@ -312,9 +312,6 @@ position_icon_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
     GdkRectangle geom;
     int num;
 
-    /* wtf is this anyway? */
-    *push_in = TRUE;
-
     if (!GTK_WIDGET_REALIZED (GTK_WIDGET (menu)))
         gtk_widget_realize (GTK_WIDGET (menu));
 
@@ -476,6 +473,26 @@ create_icon_category_menu (EntryDialog *ed)
 }
 
 static void
+exec_browse (GtkWidget *b, EntryDialog *ed)
+{
+    char *file;
+    
+    file = select_file_with_preview (_("Select command"), ed->entry->exec, 
+                                     ed->dlg);
+
+    if (file)
+    {
+        gtk_entry_set_text (GTK_ENTRY (ed->exec), file);
+        gtk_editable_set_position (GTK_EDITABLE (ed->exec), -1);
+        update_entry_exec (ed);
+
+        ed->exec_changed = TRUE;
+    }
+
+    g_free (file);
+}
+
+static void
 add_entry_icon_options (EntryDialog *ed, GtkBox *box, GtkSizeGroup *sg)
 {
     GtkWidget *hbox, *hbox2, *arrow, *align, *img;
@@ -580,9 +597,12 @@ add_entry_exec_options (EntryDialog *ed, GtkBox *box, GtkSizeGroup *sg)
     g_signal_connect (ed->exec, "focus-out-event",
                       G_CALLBACK (entry_lost_focus), ed);
 
-    button = gtk_button_new ();
+    ed->exec_browse = button = gtk_button_new ();
     gtk_widget_show (button);
     gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    g_signal_connect (ed->exec_browse, "clicked", G_CALLBACK (exec_browse), 
+                      ed);
 
     img = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
     gtk_widget_show (img);
@@ -723,8 +743,8 @@ launcher_dialog_destroyed (GtkWidget *box, LauncherDialog *ld)
 {
     if (ld->launcher->iconbutton)
     {
-        launcher_recreate_menu (ld->launcher);
         launcher_update_panel_entry (ld->launcher);
+        launcher_recreate_menu (ld->launcher);
     }
 
     g_free (ld);
@@ -1059,25 +1079,21 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
 
         path = gtk_tree_model_get_path (model, &iter);
 
-        if (gtk_tree_path_prev (path))
+        if (gtk_tree_path_prev (path) &&
+                gtk_tree_model_get_iter (model, &iter2, path))
         {
-            gtk_tree_model_get_iter (model, &iter2, path);
-
             gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &iter2);
 
             gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, 
                                       FALSE);
 
-            if (!gtk_tree_path_prev (path))
+            if (e == (Entry *)ld->launcher->items->data)
             {
                 Entry *tmp = ld->launcher->entry;
                 
-                ld->launcher->items = g_list_remove (ld->launcher->items, e);
-
                 ld->launcher->entry = e;
 
-                ld->launcher->items = g_list_prepend (ld->launcher->items, 
-                                                      tmp);
+                ld->launcher->items->data = tmp;
 
                 set_panel_icon (ld);
             }
@@ -1090,14 +1106,9 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
                     if ((Entry *)l->data == e)
                     {
                         GList *l2 = l->prev;                    
-                        
-                        l->prev = l2->prev;
-                        l2->prev = l;
-                        l2->next = l->next;
-                        l->next = l2;
-                        
-                        if (l2 == ld->launcher->items)
-                            ld->launcher->items = l;
+
+                        l->data = l2->data;
+                        l2->data = e;
                         
                         break;
                     }
@@ -1124,15 +1135,10 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
 
             if (e == ld->launcher->entry)
             {
-                Entry *tmp;
+                Entry *tmp = ld->launcher->items->data;
 
-                tmp = ld->launcher->items->data;
+                ld->launcher->items->data = e;
 
-                ld->launcher->items = g_list_remove (ld->launcher->items, tmp);
-
-                ld->launcher->items = g_list_prepend (ld->launcher->items, 
-                                                      ld->launcher->entry);
-                
                 ld->launcher->entry = tmp;
 
                 set_panel_icon (ld);
@@ -1146,14 +1152,9 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
                     if ((Entry *)l->data == e)
                     {
                         GList *l2 = l->next;                    
-                        
-                        l2->prev = l->prev;
-                        l->prev = l2;
-                        l->next = l2->next;
-                        l2->next = l;
 
-                        if (l == ld->launcher->items)
-                            ld->launcher->items = l2;
+                        l->data = l2->data;
+                        l2->data = e;
                         
                         break;
                     }
