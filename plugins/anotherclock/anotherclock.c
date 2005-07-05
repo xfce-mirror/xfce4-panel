@@ -92,7 +92,7 @@ popup_xfcalendar (GtkWidget * widget)
 	GdkEventClient gev;
 
 	/* popup in the same direction as menus */
-	switch (groups_get_arrow_direction ())
+	switch (panel_get_arrow_direction (get_current_panel()))
 	{
 	    case GTK_ARROW_UP:
 		sprintf (msg, fmt, xid, "up");

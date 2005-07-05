@@ -797,8 +797,8 @@ dialog_response (GtkWidget * dialog, gint response_id, IconboxDialog *id)
              "Side         : %s\n"
              "Justification: %s\n"
              "Size         : %d\n"
-             "Only hidden  : %s\n",
-             "Transparency : %s",
+             "Only hidden  : %s\n"
+             "Transparency : %d",
              (side == GTK_SIDE_TOP) ? "top" :
                (side == GTK_SIDE_BOTTOM) ? "bottom" :
                  (side == GTK_SIDE_LEFT) ? "left" : 
