@@ -457,73 +457,151 @@ _panel_window_paint_border (XfcePanelWindow * panel)
     GtkAllocation *a = &(GTK_WIDGET (panel)->allocation);
     GtkStyle *style = GTK_WIDGET (panel)->style;
     GtkStateType state_type = GTK_WIDGET_STATE (GTK_WIDGET (panel));
-    int x, y, width, height;
     int top, bottom, left, right;
-
-    x = a->x;
-    y = a->y;
-    width = a->width;
-    height = a->height;
 
     top    = priv->top_border    ? style->ythickness : 0;
     bottom = priv->bottom_border ? style->ythickness : 0;
     left   = priv->left_border   ? style->xthickness : 0;
     right  = priv->right_border  ? style->xthickness : 0;
     
-    /* Code taken from gtk-xfce-engine-2 */
-    if (top > 1)
+    /* Code based on gtk-xfce-engine-2 */
+
+    /* Attempt to explain the code below with some ASCII 'art'
+     * 
+     * joining lines: - = horizontal, + = vertical
+     *
+     * single       double
+     * ----------+  ----------+
+     * +         +  +--------++
+     * +         +  ++       ++
+     * +         +  ++       ++
+     * +         +  ++--------+
+     * +----------  +----------
+     * 
+     */
+    
+    if (top > 0)
     {
-        gdk_draw_line (window, style->dark_gc[state_type], x, y,
-                       x + width - 1, y);
-        gdk_draw_line (window, style->light_gc[state_type], x + 1, y + 1,
-                       x + width - 2, y + 1);
-    }
-    else if (top > 0)
-    {
-        gdk_draw_line (window, style->light_gc[state_type], x, y,
-                       x + width - 1, y);
+        int x1, y1, x2;
+
+        x1 = a->x;
+        y1 = a->y;
+        x2 = x1 + a->width - 1;
+
+        if (right > 0) x2--;
+        
+        if (top > 1)
+        {
+            gdk_draw_line (window, style->dark_gc[state_type], 
+                           x1, y1, x2, y1);
+            
+            if (left > 0) x1++;
+
+            if (right > 1) x2--;
+
+            y1++;
+            
+            gdk_draw_line (window, style->light_gc[state_type], 
+                           x1, y1, x2, y1);
+        }
+        else
+        {
+            gdk_draw_line (window, style->light_gc[state_type], 
+                           x1, y1, x2, y1);
+        }
     }
     
-    if (bottom > 1)
+    if (bottom > 0)
     {
-        gdk_draw_line (window, style->black_gc, x + 1, y + height - 1,
-                       x + width - 1, y + height - 1);
+        int x1, y1, x2;
 
-        gdk_draw_line (window, style->dark_gc[state_type], x + 2,
-                       y + height - 2, x + width - 2, y + height - 2);
-    }
-    else if (bottom > 0)
-    {
-        gdk_draw_line (window, style->dark_gc[state_type], x + 1,
-                       y + height - 1, x + width - 1, y + height - 1);
+        x1 = a->x;
+        y1 = a->y + a->height - 1;
+        x2 = x1 + a->width - 1;
+        
+        if (left > 0) x1++;
+        
+        if (bottom > 1)
+        {        
+            gdk_draw_line (window, style->dark_gc[state_type], 
+                           x1, y1, x2, y1);
+
+            if (left > 1) x1++;
+
+            if (right > 0) x2--;
+
+            y1--;
+            
+            gdk_draw_line (window, style->mid_gc[state_type],
+                           x1, y1, x2, y1);
+        }
+        else
+        {
+            gdk_draw_line (window, style->dark_gc[state_type], 
+                           x1, y1, x2, y1);
+        }
     }
 
-    if (left > 1)
+    if (left > 0)
     {
-        gdk_draw_line (window, style->dark_gc[state_type], x, y, x,
-                       y + height - 1);
+        int x1, y1, y2;
 
-        gdk_draw_line (window, style->light_gc[state_type], x + 1, y + 1,
-                       x + 1, y + height - 2);
-    }
-    else if (left > 0)
-    {
-        gdk_draw_line (window, style->light_gc[state_type], x, y, x,
-                       y + height - 1);
+        x1 = a->x;
+        y1 = a->y;
+        y2 = a->y + a->height - 1;
+        
+        if (top > 0) y1++;
+        
+        if (left > 1)
+        {
+            gdk_draw_line (window, style->dark_gc[state_type], 
+                           x1, y1, x1, y2);
+
+            if (top > 1) y1++;
+
+            if (bottom > 0) y2--;
+
+            x1++;
+            
+            gdk_draw_line (window, style->light_gc[state_type], 
+                           x1, y1, x1, y2);
+        }
+        else 
+        {
+            gdk_draw_line (window, style->light_gc[state_type], 
+                           x1, y1, x1, y2);
+        }
     }
 
     if (right > 1)
     {
-        gdk_draw_line (window, style->black_gc, x + width - 1, y + 1,
-                       x + width - 1, y + height - 1);
+        int x1, y1, y2;
+
+        x1 = a->x + a->width - 1;
+        y1 = a->y;
+        y2 = a->y + a->height - 1;
         
-        gdk_draw_line (window, style->dark_gc[state_type], x + width - 2,
-                       y + 2, x + width - 2, y + height - 2);
-    }
-    else if (right > 0)
-    {
-        gdk_draw_line (window, style->dark_gc[state_type], x + width - 1,
-                       y + 1, x + width - 1, y + height - 1);
+        if (bottom > 0) y2--;
+        
+        if (right > 1)
+        {
+            gdk_draw_line (window, style->dark_gc[state_type], 
+                           x1, y1, x1, y2);
+            
+            if (top > 0) y1++;
+
+            if (bottom > 1) y2--;
+
+            x1--;
+            
+            gdk_draw_line (window, style->mid_gc[state_type], 
+                           x1, y1, x1, y2);
+        }
+        else
+        {
+            gdk_draw_line (window, style->dark_gc[state_type],
+                           x1, y1, x1, y2);
+        }
     }
 }
 
