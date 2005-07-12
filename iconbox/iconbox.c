@@ -920,7 +920,7 @@ iconbox_set_position (Iconbox *ib)
                     left = FALSE;
                 break;
             case GTK_JUSTIFY_CENTER:
-                ib->x = r.x + (r.width - ib->width) / 2;
+                ib->x = MAX (r.x, r.x + (r.width - ib->width) / 2);
                 break;
             case GTK_JUSTIFY_FILL:
                 ib->x = r.x;
@@ -932,15 +932,15 @@ iconbox_set_position (Iconbox *ib)
         if (ib->side == GTK_SIDE_BOTTOM)
         {
             ib->y = r.y + r.height- ib->height;
-            top = FALSE;
+            bottom = FALSE;
         }
         else
         {
             ib->y = r.y;
-            bottom = FALSE;
+            top = FALSE;
         }
     }
-    else
+    else /* vertical */
     {
         switch (ib->justification)
         {
@@ -955,7 +955,7 @@ iconbox_set_position (Iconbox *ib)
                     top = FALSE;
                 break;
             case GTK_JUSTIFY_CENTER:
-                ib->y = r.y + (r.height - ib->height) / 2;
+                ib->y = MAX (r.y, r.y + (r.height - ib->height) / 2);
                 break;
             case GTK_JUSTIFY_FILL:
                 ib->y = r.y;
