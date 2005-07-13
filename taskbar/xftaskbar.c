@@ -38,6 +38,7 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
+#include <stdlib.h>
 #include <signal.h>
 
 #include <gtk/gtk.h>
@@ -73,6 +74,7 @@ struct _Taskbar
     Display *dpy;
     int scr;
     GdkScreen *gscr;
+    gint monitor_nbr;
 
     /* position */
     guint x, y, width, height;
@@ -266,7 +268,8 @@ taskbar_position (Taskbar * taskbar)
 
     gtk_widget_set_size_request (GTK_WIDGET (taskbar->win), w, h);
     
-    gdk_screen_get_monitor_geometry (taskbar->gscr, 0, &rect);
+    gdk_screen_get_monitor_geometry (taskbar->gscr, taskbar->monitor_nbr, 
+                                     &rect);
         
     if (taskbar->position == TOP)
     {
@@ -842,7 +845,7 @@ main (int argc, char **argv)
     NetkScreen *screen;
     Taskbar *taskbar;
     GdkRectangle rect;
-    gint monitor_nbr;
+    gint max_monitor_nbr, i;
 #ifdef HAVE_SIGACTION
     struct sigaction act;
 #endif
@@ -869,8 +872,39 @@ main (int argc, char **argv)
     screen = netk_screen_get (taskbar->scr);
     netk_screen_force_update (screen);
     
-    monitor_nbr = gdk_screen_get_monitor_at_point (taskbar->gscr, 0, 0);
-    gdk_screen_get_monitor_geometry (taskbar->gscr, monitor_nbr, &rect);
+    taskbar->monitor_nbr = 1;
+    for (i = 1; i < argc; i++)
+    {
+        if (!strncmp (argv[i], "--monitor", 9 /* strlen ("--monitor") */ ))
+        {
+            gchar *rvalue;
+
+            rvalue = strrchr (argv[i], '=');
+            if (rvalue)
+            {
+                rvalue++;
+                taskbar->monitor_nbr = (int)strtol(rvalue, NULL, 0);
+            }
+            break;
+        }
+    }
+    
+    max_monitor_nbr = gdk_screen_get_n_monitors (taskbar->gscr);
+    if (taskbar->monitor_nbr > max_monitor_nbr)
+    {
+        taskbar->monitor_nbr = max_monitor_nbr;
+        g_warning ("There are only %i monitor(s) connected, using %i", 
+                   max_monitor_nbr, taskbar->monitor_nbr);
+    }
+    else if (taskbar->monitor_nbr < 1)
+    {
+        taskbar->monitor_nbr = 1;
+        g_warning ("The monitor number must be at least 1\n");
+    }
+
+    taskbar->monitor_nbr--;
+    gdk_screen_get_monitor_geometry (taskbar->gscr, taskbar->monitor_nbr, 
+                                     &rect);
 
     /* initialize settings */
     taskbar->position        = TOP;
