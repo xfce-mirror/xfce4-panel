@@ -34,7 +34,7 @@ AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h netinet/in.h])
 AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support
-BM_I18N([xfce4-panel], [ar az be bg bn_IN ca cs da de el en_GB es es_MX et
+BM_I18N([xfce4-panel], [ar az be bg bn_IN ca cs da de el en_GB eo es es_MX et
                         eu fa fr fi gu he hi hu it ja lt mr ms nl ko nb_NO
 			pa pl pt_BR pt_PT ro ru sv sk ta tr vi zh_CN zh_TW])
 
