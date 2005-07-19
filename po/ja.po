@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 15:55+0200\n"
-"PO-Revision-Date: 2005-05-23 21:34+0900\n"
+"POT-Creation-Date: 2005-07-18 15:15+0900\n"
+"PO-Revision-Date: 2005-07-18 15:41+0900\n"
 "Last-Translator: Daichi Kawahata <daichik@users.sourceforge.net>\n"
 "Language-Team: xfce-users-jp <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,10 @@ msgstr "ファイルを選択して下さい"
 msgid "No data was found. The panel will be empty."
 msgstr "データがありませんでした。パネルは空になります。"
 
+#: ../panel/add-control-dialog.c:88 ../panel/add-control-dialog.c:224
+msgid "Add new item"
+msgstr "新しいアイテムを追加して下さい"
+
 #: ../panel/controls_dialog.c:88 ../settings/xftaskbar_plugin.c:393
 msgid "Position:"
 msgstr "位置:"
@@ -32,7 +36,7 @@ msgstr "位置:"
 msgid "Item properties"
 msgstr "アイテムのプロパティ"
 
-#: ../panel/item_dialog.c:63
+#: ../panel/item_dialog.c:63 ../plugins/launcher/launcher-dialog.c:480
 msgid "Select command"
 msgstr "コマンドを選択して下さい"
 
@@ -40,7 +44,7 @@ msgstr "コマンドを選択して下さい"
 msgid "Command:"
 msgstr "コマンド:"
 
-#: ../panel/item_dialog.c:246 ../plugins/launcher/launcher-dialog.c:602
+#: ../panel/item_dialog.c:246 ../plugins/launcher/launcher-dialog.c:622
 msgid "Run in _terminal"
 msgstr "ターミナルで実行する(_T)"
 
@@ -107,13 +111,13 @@ msgstr "アイテム %s を削除しますか？"
 msgid "_Properties..."
 msgstr "プロパティ(_P)..."
 
-#: ../panel/controls.c:748 ../plugins/launcher/launcher-dialog.c:1276
+#: ../panel/controls.c:748 ../plugins/launcher/launcher-dialog.c:1277
 msgid "_Remove"
 msgstr "削除(_R)"
 
 #: ../panel/controls.c:757 ../panel/panel.c:709
 msgid "Add _new item"
-msgstr "新規アイテムを追加する(_N)"
+msgstr "アイテムを追加(_N)"
 
 #: ../panel/controls.c:1082
 msgid "This item has no configuration options"
@@ -203,11 +207,11 @@ msgstr "ターミナル"
 msgid "Settings manager not available"
 msgstr "設定マネージャが利用できません"
 
-#: ../taskbar/xftaskbar.c:510 ../plugins/systray/systray.c:88
+#: ../taskbar/xftaskbar.c:513 ../plugins/systray/systray.c:88
 msgid "There is already a system tray running on this screen"
 msgstr "この画面には既に動作しているシステムトレイがあります"
 
-#: ../taskbar/xftaskbar.c:516 ../plugins/systray/systray.c:94
+#: ../taskbar/xftaskbar.c:519 ../plugins/systray/systray.c:94
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "システムトレイを登録できません: %s"
@@ -220,20 +224,21 @@ msgstr "システムトレイを登録できません: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../taskbar/xftaskbar.c:616 ../plugins/systray/systray.c:175
+#: ../taskbar/xftaskbar.c:619 ../plugins/anotherclock/anotherclock.c:190
+#: ../plugins/systray/systray.c:175
 msgid "%A %d %B %Y"
 msgstr "%Y %B %d %A"
 
-#: ../taskbar/xftaskbar.c:637 ../plugins/systray/systray.c:200
+#: ../taskbar/xftaskbar.c:640 ../plugins/systray/systray.c:200
 msgid "%H:%M"
 msgstr "%H:%M"
 
-#: ../taskbar/xftaskbar.c:910 ../settings/xftaskbar_plugin.c:696
-#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:987
+#: ../taskbar/xftaskbar.c:944 ../settings/xftaskbar_plugin.c:696
+#: ../settings/xftaskbar_plugin.c:706 ../settings/xftaskbar_plugin.c:988
 msgid "Taskbar"
 msgstr "タスクバー"
 
-#: ../taskbar/xftaskbar.c:1022
+#: ../taskbar/xftaskbar.c:1056
 msgid "Cannot create MCS client channel"
 msgstr "MCS クライアントのチャンネルを作成できません"
 
@@ -380,7 +385,7 @@ msgid "Auto _hide taskbar"
 msgstr "タスクバーを自動的に隠す(_H)"
 
 #. tasklist
-#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:92
+#: ../settings/xftaskbar_plugin.c:583 ../plugins/tasklist/tasklist.c:266
 msgid "Tasklist"
 msgstr "タスクリスト"
 
@@ -388,7 +393,7 @@ msgstr "タスクリスト"
 msgid "Show tasklist"
 msgstr "タスクリストを表示"
 
-#: ../settings/xftaskbar_plugin.c:604
+#: ../settings/xftaskbar_plugin.c:604 ../plugins/tasklist/tasklist.c:188
 msgid "Show tasks from _all workspaces"
 msgstr "全てのワークスペースからタスクを表示(_A)"
 
@@ -396,7 +401,7 @@ msgstr "全てのワークスペースからタスクを表示(_A)"
 msgid "Always _group tasks"
 msgstr "常にタスクをまとめる(_G)"
 
-#: ../settings/xftaskbar_plugin.c:621
+#: ../settings/xftaskbar_plugin.c:621 ../plugins/tasklist/tasklist.c:198
 msgid "Show application _names"
 msgstr "アプリケーション名を表示(_N)"
 
@@ -447,9 +452,17 @@ msgid "Full"
 msgstr "最大"
 
 #: ../settings/iconbox_plugin.c:831 ../settings/iconbox_plugin.c:841
-#: ../settings/iconbox_plugin.c:992
+#: ../settings/iconbox_plugin.c:994
 msgid "Iconbox"
 msgstr "アイコンボックス"
+
+#: ../plugins/anotherclock/anotherclock.c:387
+msgid "24 hour clock"
+msgstr "24時間制"
+
+#: ../plugins/anotherclock/anotherclock.c:423
+msgid "Another Clock"
+msgstr "アナザー・クロック"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -525,12 +538,12 @@ msgstr ""
 "%s"
 
 #: ../plugins/launcher/launcher.c:825
-#: ../plugins/launcher/launcher-dialog.c:1185
+#: ../plugins/launcher/launcher-dialog.c:1186
 msgid "New item"
 msgstr "新規アイテム"
 
 #: ../plugins/launcher/launcher.c:827
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher-dialog.c:1187
 msgid "This item has not yet been configured"
 msgstr "このアイテムまだ設定されていません"
 
@@ -562,44 +575,44 @@ msgstr "名前"
 msgid "Description"
 msgstr "説明"
 
-#: ../plugins/launcher/launcher-dialog.c:397
+#: ../plugins/launcher/launcher-dialog.c:394
 msgid "Select image file"
 msgstr "画像ファイルを選択して下さい"
 
-#: ../plugins/launcher/launcher-dialog.c:468
+#: ../plugins/launcher/launcher-dialog.c:465
 msgid "Other..."
 msgstr "その他..."
 
-#: ../plugins/launcher/launcher-dialog.c:567
+#: ../plugins/launcher/launcher-dialog.c:584
 msgid "Command"
 msgstr "コマンド"
 
-#: ../plugins/launcher/launcher-dialog.c:622
+#: ../plugins/launcher/launcher-dialog.c:642
 msgid "Use _startup notification"
 msgstr "起動通知を使用する(_N)"
 
-#: ../plugins/launcher/launcher-dialog.c:644
-#: ../plugins/launcher/launcher-dialog.c:649
+#: ../plugins/launcher/launcher-dialog.c:664
+#: ../plugins/launcher/launcher-dialog.c:669
 msgid "Edit launcher"
 msgstr "ランチャーを編集する"
 
-#: ../plugins/launcher/launcher-dialog.c:1242
+#: ../plugins/launcher/launcher-dialog.c:1243
 msgid "_Edit"
 msgstr "編集(_E)"
 
-#: ../plugins/launcher/launcher-dialog.c:1253
+#: ../plugins/launcher/launcher-dialog.c:1254
 msgid "_Up"
 msgstr "上へ(_U)"
 
-#: ../plugins/launcher/launcher-dialog.c:1259
+#: ../plugins/launcher/launcher-dialog.c:1260
 msgid "_Down"
 msgstr "下へ(_D)"
 
-#: ../plugins/launcher/launcher-dialog.c:1270
+#: ../plugins/launcher/launcher-dialog.c:1271
 msgid "_Add"
 msgstr "追加(_A)"
 
-#: ../plugins/launcher/launcher-dialog.c:1300
+#: ../plugins/launcher/launcher-dialog.c:1301
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -722,6 +735,18 @@ msgstr "通知エリア"
 msgid "Display time before icons"
 msgstr "アイコンの前に時間を表示"
 
+#: ../plugins/tasklist/tasklist.c:212
+msgid "Never group tasks"
+msgstr "タスクはまとめない"
+
+#: ../plugins/tasklist/tasklist.c:215
+msgid "Automatically group tasks"
+msgstr "タスクを自動的にまとめる"
+
+#: ../plugins/tasklist/tasklist.c:218
+msgid "Always group tasks"
+msgstr "常にタスクをまとめる"
+
 #: ../settings/xfce-panel-settings.desktop.in.h:1
 msgid "Panel Settings"
 msgstr "パネル設定"
@@ -793,27 +818,3 @@ msgstr "ファイル・マネージャ Nautilus を実行します"
 #: ../config/contents.xml.in.h:12
 msgid "Printer Management"
 msgstr "プリンタ・マネージャ"
-
-#~ msgid "Panel Item and Menu"
-#~ msgstr "パネルアイテムとメニュー"
-
-#~ msgid "Arrow type"
-#~ msgstr "矢印の種類"
-
-#~ msgid "The arrow type of the menu button"
-#~ msgstr "メニューボタンの矢印の種類です"
-
-#~ msgid "Orientation"
-#~ msgstr "パネルの方向"
-
-#~ msgid "The orientation of the itembar"
-#~ msgstr "アイテムバーが延びる方向です"
-
-#~ msgid "Handle style"
-#~ msgstr "取っ手の様式"
-
-#~ msgid "Type of handles to draw"
-#~ msgstr "描画する取っ手の種類です"
-
-#~ msgid "Add new item"
-#~ msgstr "新規アイテムを追加する"
