@@ -56,16 +56,20 @@ typedef struct
     GtkWidget *timelabel;
     int time_id;
     
-    gboolean show_time;
-    gboolean before_icons;
-    
     int mday;
     int min;
+    
+    /* options */
+    gboolean show_time;
+    gboolean before_icons;
+    gboolean ampm;
+
+    gboolean show_frame;
 }
 Systray;
 
 /* border width */
-static int systray_border [] = { 1, 2, 3, 4 };
+static int systray_border [] = { 0, 1, 2, 4 };
 
 
 /* prototypes */
@@ -196,9 +200,15 @@ time_timeout (Systray *systray)
     if (tm->tm_min != systray->min)
     {
         systray->min = tm->tm_min;
-        
-        strftime (date_s, 255, _("%H:%M"), tm);
 
+        if (systray->ampm)
+            snprintf (date_s, 255, "%d:%02d %cM", 
+                      tm->tm_hour > 12 ? tm->tm_hour -12 : tm->tm_hour, 
+                      tm->tm_min,
+                      tm->tm_hour < 12 ? 'A' : 'P');
+        else
+            snprintf (date_s, 255, "%d:%02d", tm->tm_hour, tm->tm_min);
+        
         if (!g_utf8_validate (date_s, -1, NULL))
         {
             char *utf8date;
@@ -230,6 +240,7 @@ systray_set_show_time (Systray *systray, gboolean show)
             systray->timetips = gtk_tooltips_new ();
         
         systray->timebox = gtk_event_box_new ();
+        gtk_container_set_border_width (GTK_CONTAINER (systray->timebox), 2);
         gtk_widget_show (systray->timebox);
         gtk_box_pack_start (GTK_BOX (systray->box), systray->timebox,
                             FALSE, FALSE, 0);
@@ -273,6 +284,36 @@ systray_set_before_icons (Systray *systray, gboolean before_icons)
         gtk_box_reorder_child (GTK_BOX (systray->box), systray->timebox,
                                before_icons ? 0 : 2);
     }
+}
+
+static void
+systray_set_ampm (Systray *systray, gboolean ampm)
+{
+    if (ampm == systray->ampm)
+        return;
+
+    systray->ampm = ampm;
+
+    if (systray->show_time)
+    {
+        systray->mday = -1;
+        systray->min = -1;
+        
+        time_timeout (systray);
+    }
+}
+
+static void
+systray_set_show_frame (Systray *systray, gboolean show_frame)
+{
+    if (show_frame == systray->show_frame)
+        return;
+
+    systray->show_frame = show_frame;
+
+    gtk_frame_set_shadow_type (GTK_FRAME (systray->frame),
+                               show_frame ? GTK_SHADOW_IN :
+                                            GTK_SHADOW_NONE);
 }
 
 /* plugin */
@@ -412,6 +453,8 @@ systray_new (void)
     /* initialize default settings */
     systray->orientation = HORIZONTAL;
     systray->size = SMALL;
+    systray->ampm = TRUE;
+    systray->show_frame = TRUE;
 
     systray->tray = xfce_system_tray_new ();
 
@@ -524,14 +567,36 @@ toggle_before_icons (GtkToggleButton *b, Systray *systray)
     systray_set_before_icons (systray, gtk_toggle_button_get_active (b));
 }
 
+static void
+toggle_twentyfour (GtkToggleButton *b, Systray *systray)
+{
+    systray_set_ampm (systray, !gtk_toggle_button_get_active (b));
+}
+
+static void
+toggle_show_frame (GtkToggleButton *b, Systray *systray)
+{
+    systray_set_show_frame (systray, gtk_toggle_button_get_active (b));
+}
+
 static GtkWidget *
 systray_create_options_widget (Systray *systray)
 {
-    GtkWidget *vbox, *button, *hbox, *align;
+    GtkWidget *vbox1, *frame, *vbox, *button, *align;
     
+    vbox1 = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox1);
+
+    /* time options */
+    frame = xfce_framebox_new (_("Time"), TRUE);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (vbox1), frame, FALSE, FALSE, 0);
+
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
-
+    xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
+    
+    /* time:show */
     button = gtk_check_button_new_with_mnemonic (_("Show _time"));
     gtk_widget_show (button);
     gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
@@ -542,19 +607,11 @@ systray_create_options_widget (Systray *systray)
     g_signal_connect (button, "toggled", G_CALLBACK (toggle_show_time),
                       systray);
     
-    hbox = gtk_hbox_new (FALSE, 0);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-    
-    align = gtk_alignment_new (0,0,0,0);
-    gtk_widget_set_size_request (align, 2 * BORDER, -1);
-    gtk_widget_show (align);
-    gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
-    
+    /* time:before_icons */
     button = 
         gtk_check_button_new_with_mnemonic (_("Display time before icons"));
     gtk_widget_show (button);
-    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
     
     if (systray->before_icons)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
@@ -562,7 +619,44 @@ systray_create_options_widget (Systray *systray)
     g_signal_connect (button, "toggled", G_CALLBACK (toggle_before_icons), 
                       systray);
     
-    return vbox;
+    /* time:ampm */
+    button = 
+        gtk_check_button_new_with_mnemonic (_("Use 24-hour clock"));
+    gtk_widget_show (button);
+    gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+    
+    if (!systray->ampm)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+
+    g_signal_connect (button, "toggled", G_CALLBACK (toggle_twentyfour), 
+                      systray);
+    
+    /* appearance options */
+    align = gtk_alignment_new (0,0,0,0);
+    gtk_widget_set_size_request (align, BORDER, BORDER);
+    gtk_widget_show (align);
+    gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
+    
+    frame = xfce_framebox_new (_("Appearance"), TRUE);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (vbox1), frame, FALSE, FALSE, 0);
+
+    vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    xfce_framebox_add (XFCE_FRAMEBOX (frame), vbox);
+    
+    /* appearance:show_frame */
+    button = gtk_check_button_new_with_mnemonic (_("Show _frame"));
+    gtk_widget_show (button);
+    gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
+    
+    if (systray->show_frame)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+
+    g_signal_connect (button, "toggled", G_CALLBACK (toggle_show_frame),
+                      systray);
+    
+    return vbox1;
 }
 
 static void 
@@ -573,6 +667,15 @@ systray_read_xml (Systray *systray, xmlNodePtr node)
     
     if (!node)
         return;
+
+    if ((value = xmlGetProp (node, "ampm")))
+    {
+        n = (int) strtol (value, NULL, 0);
+
+        systray_set_ampm (systray, (n == 1));
+        
+        g_free (value);
+    }
 
     if ((value = xmlGetProp (node, "before")))
     {
@@ -591,17 +694,32 @@ systray_read_xml (Systray *systray, xmlNodePtr node)
         
         g_free (value);
     }
+
+    if ((value = xmlGetProp (node, "frame")))
+    {
+        n = (int) strtol (value, NULL, 0);
+
+        systray_set_show_frame (systray, (n == 1));
+        
+        g_free (value);
+    }
 }
 
 static void 
 systray_write_xml (Systray *systray, xmlNodePtr node)
 {
     char value[2];
+        
+    snprintf (value, 2, "%d", systray->ampm);
+    xmlSetProp (node, "ampm", value);
+    
+    snprintf (value, 2, "%d", systray->before_icons);
+    xmlSetProp (node, "before", value);
     
     snprintf (value, 2, "%d", systray->show_time);
     xmlSetProp (node, "time", value);
     
-    snprintf (value, 2, "%d", systray->before_icons);
-    xmlSetProp (node, "before", value);
+    snprintf (value, 2, "%d", systray->show_frame);
+    xmlSetProp (node, "frame", value);    
 }
 
