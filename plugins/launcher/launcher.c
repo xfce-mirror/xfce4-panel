@@ -148,7 +148,6 @@ launcher_set_arrow_direction (Control *control, GtkArrowType type)
 static void
 launcher_set_theme (Control *control, const char *theme)
 {
-    GList *l, *ll;
     Entry *e;
     GdkPixbuf *pb;
     Launcher *launcher = control->data;
@@ -164,23 +163,7 @@ launcher_set_theme (Control *control, const char *theme)
     if (!launcher->menu)
         return;
     
-    ll = GTK_MENU_SHELL (launcher->menu)->children;
-    
-    for (l = launcher->items; l != NULL && ll != NULL; 
-         l = l->next, ll = ll->next)
-    {
-        GtkWidget *im;
-        
-        e = l->data;
-        
-        pb = launcher_load_pixbuf (&e->icon, MENU_ICON_SIZE);
-
-        im = gtk_image_new_from_pixbuf (pb);
-        gtk_widget_show (im);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (ll->data), im);
-
-        g_object_unref (pb);
-    }
+    launcher_recreate_menu (launcher);
 }
 
 static void
