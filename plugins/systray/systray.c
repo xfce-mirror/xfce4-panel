@@ -582,7 +582,7 @@ toggle_show_frame (GtkToggleButton *b, Systray *systray)
 static GtkWidget *
 systray_create_options_widget (Systray *systray)
 {
-    GtkWidget *vbox1, *frame, *vbox, *button, *align;
+    GtkWidget *vbox1, *frame, *vbox, *button;
     
     vbox1 = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox1);
@@ -632,11 +632,6 @@ systray_create_options_widget (Systray *systray)
                       systray);
     
     /* appearance options */
-    align = gtk_alignment_new (0,0,0,0);
-    gtk_widget_set_size_request (align, BORDER, BORDER);
-    gtk_widget_show (align);
-    gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
-    
     frame = xfce_framebox_new (_("Appearance"), TRUE);
     gtk_widget_show (frame);
     gtk_box_pack_start (GTK_BOX (vbox1), frame, FALSE, FALSE, 0);
