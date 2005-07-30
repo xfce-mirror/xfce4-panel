@@ -259,6 +259,7 @@ get_panel_config (void)
 {
     xmlNodePtr node;
 
+    g_print (" +++ Get xml root node\n");
     node = get_xml_root ();
 
     if (!node)
@@ -268,6 +269,7 @@ get_panel_config (void)
     }
 
     /* Now parse the xml tree */
+    g_print (" +++ Parse xml\n");
     for (node = node->children; node; node = node->next)
     {
 	if (xmlStrEqual (node->name, (const xmlChar *) "Groups"))
@@ -283,6 +285,7 @@ get_panel_config (void)
 	    old_groups_set_from_xml (RIGHT, node);
     }
 
+    g_print (" +++ Free xml tree\n");
     xmlFreeDoc (xmlconfig);
     xmlconfig = NULL;
 }

@@ -1185,7 +1185,20 @@ create_panel (void)
     p->priv->block_resize--;
 
     if (p->priv->settings.autohide)
+    {
+        /* make sure we use the entire width */
+        if (p->priv->full_width)
+        {
+            GdkRectangle *r = &p->priv->monitor_geometry;
+            
+            if (panel.priv->settings.orientation == HORIZONTAL)
+                p->priv->req.width = r->width;
+            else
+                p->priv->req.height = r->height;
+        }
+        
 	panel_set_autohide (TRUE);
+    }
     
     set_translucent (p, TRUE);
 
