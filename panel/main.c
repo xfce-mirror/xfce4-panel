@@ -458,7 +458,6 @@ main (int argc, char **argv)
     g_free (old);
     g_free (new);
     
-    g_print (" + Create panel...\n");
     create_panel ();
 
     client_session = client_session_new (argc, argv, NULL /* data */ ,
@@ -485,7 +484,6 @@ main (int argc, char **argv)
     /* signal state */
     g_timeout_add (500, (GSourceFunc) check_signal_state, NULL);
 
-    g_print (" + Start main loop.\n");
     gtk_main ();
 
     return 0;
