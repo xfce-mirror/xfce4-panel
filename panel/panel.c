@@ -885,9 +885,11 @@ panel_set_hidden (Panel * p, gboolean hide)
     if (hide)
     {
 	gtk_widget_hide (p->group_box);
+	gtk_window_move(p->toplevel, x, y);
+	gtk_widget_set_size_request (p->toplevel, w, h);
+	
         xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (p->toplevel),
                                             XFCE_HANDLE_STYLE_NONE);
-	gtk_widget_set_size_request (p->toplevel, w, h);
     }
     else
     {
@@ -906,7 +908,6 @@ panel_set_hidden (Panel * p, gboolean hide)
 
     DBG ("%s: (%d,%d) %dx%d\n", hide ? "hide" : "unhide", x, y, w, h);
     gdk_window_move_resize (p->toplevel->window, x, y, w, h);
-    
     p->priv->block_resize--;
     
     recursive--;
