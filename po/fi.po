@@ -1,13 +1,14 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Translation of xfce4-panel into Finnish.
+# This file is distributed under the same license as the xfce4-panel package.
+# Copyright (C) 2002-2005 The Xfce Development Team.
 # Ilkka Ollakka <ilkka.j.ollakka@students.oamk.fi>, 2003
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: XFCE4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-05-10 22:10+0200\n"
-"PO-Revision-Date: 2005-01-22 22:22+0200\n"
+"PO-Revision-Date: 2005-08-11 12:41+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -44,7 +45,7 @@ msgstr "Komento:"
 
 #: panel/item_dialog.c:311
 msgid "Run in _terminal"
-msgstr "Aja Pää_tteessä"
+msgstr "Suorita pää_tteessä"
 
 #: panel/item_dialog.c:329
 msgid "Use startup _notification"
@@ -85,7 +86,7 @@ msgstr "Käynnistin"
 
 #: panel/item.c:566
 msgid "Click mouse button 3 to change item"
-msgstr "Napsauta hiiren 3-nappia muuttaaksesi osaa"
+msgstr "Napsauta hiiren 3-painiketta muuttaaksesi osaa"
 
 #: panel/item.c:591
 msgid "Add launcher"
@@ -113,11 +114,12 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Xfce Paneeli\n"
+" Xfce paneeli\n"
 " Versio %s\n"
 "\n"
-" Osa Xfce-työpöytäympäristöä\n"
+" Xfce-työpöytäympäristön osa\n"
 " http://www.xfce.org\n"
+"\n"
 " Lisensoitu GNU GPL:n mukaisesti.\n"
 "\n"
 
@@ -151,7 +153,7 @@ msgstr "Tällä osalla ei ole muokattavia ominaisuuksia"
 #: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
-msgstr "Xfce Paneeli"
+msgstr "Xfce paneeli"
 
 #: panel/panel.c:652
 msgid "_About Xfce"
@@ -267,11 +269,11 @@ msgstr "Oikealla"
 
 #: settings/xfce_settings_dialog.c:229
 msgid "Top"
-msgstr "Päällä"
+msgstr "Ylhäällä"
 
 #: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
-msgstr "Alla"
+msgstr "Alhaalla"
 
 #: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
@@ -287,7 +289,7 @@ msgstr "Ponnahdusvalikon sijainti:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr "Aina päälimmäisenä:"
+msgstr "Aina etualalla:"
 
 #: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
@@ -295,7 +297,7 @@ msgstr "Piilota automaattisesti:"
 
 #: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
-msgstr "Xfce Paneelin Asetukset"
+msgstr "Xfce paneelin asetukset"
 
 #: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
@@ -315,7 +317,7 @@ msgstr "Käytös"
 #.
 #: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
-msgstr "%A, %d %B %Y"
+msgstr "%A, %d.%m.%Y"
 
 #: plugins/clock/clock.c:422
 msgid "Clock type:"
@@ -335,7 +337,7 @@ msgstr "LED"
 
 #: plugins/clock/clock.c:505
 msgid "Hour mode:"
-msgstr "Tuntinäyttö"
+msgstr "Tuntinäyttö:"
 
 #: plugins/clock/clock.c:512
 msgid "24 hour"
@@ -355,7 +357,7 @@ msgstr "Näytä sekunnit:"
 
 #: plugins/clock/clock.c:675
 msgid "Xfce Clock"
-msgstr "Xfce Kello"
+msgstr "Xfce kello"
 
 #: plugins/pager/pager.c:314
 msgid "Number of rows:"
@@ -438,11 +440,11 @@ msgstr "Uuden postin komento:"
 
 #: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
-msgstr "Komento, joka ajetaan, kun uutta postia on saapunut"
+msgstr "Komento joka suoritetaan, kun uutta postia on saapunut"
 
 #: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Komento, joka ajetaan kuvaketta painettaessa"
+msgstr "Komento joka suoritetaan kuvaketta painettaessa"
 
 #: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
