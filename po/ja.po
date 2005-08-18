@@ -2,16 +2,16 @@
 # Copyright (C) 2002-2005 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Zhao Ji <zhao-ji@awz.ne.jp>, 2003-2004.
-# Daichi Kawahata <daichik@users.sourceforge.net>, 2005.
+# Daichi Kawahata <daichi@xfce.org>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-07-18 15:15+0900\n"
-"PO-Revision-Date: 2005-07-18 15:41+0900\n"
-"Last-Translator: Daichi Kawahata <daichik@users.sourceforge.net>\n"
-"Language-Team: xfce-users-jp <xfce-users-jp@ml.fdiary.net>\n"
+"POT-Creation-Date: 2005-08-17 23:01+0900\n"
+"PO-Revision-Date: 2005-08-16 04:33+0900\n"
+"Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
+"Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,10 +23,6 @@ msgstr "ファイルを選択して下さい"
 #: ../panel/settings.c:266
 msgid "No data was found. The panel will be empty."
 msgstr "データがありませんでした。パネルは空になります。"
-
-#: ../panel/add-control-dialog.c:88 ../panel/add-control-dialog.c:224
-msgid "Add new item"
-msgstr "新しいアイテムを追加して下さい"
 
 #: ../panel/controls_dialog.c:88 ../settings/xftaskbar_plugin.c:393
 msgid "Position:"
@@ -123,7 +119,7 @@ msgstr "アイテムを追加(_N)"
 msgid "This item has no configuration options"
 msgstr "このアイテムに設定オプションは存在しません"
 
-#: ../panel/panel.c:700 ../panel/panel.c:1048
+#: ../panel/panel.c:700 ../panel/panel.c:1049
 #: ../settings/xfce_settings_plugin.c:86
 #: ../settings/xfce_settings_dialog.c:409
 msgid "Xfce Panel"
@@ -207,11 +203,11 @@ msgstr "ターミナル"
 msgid "Settings manager not available"
 msgstr "設定マネージャが利用できません"
 
-#: ../taskbar/xftaskbar.c:513 ../plugins/systray/systray.c:88
+#: ../taskbar/xftaskbar.c:513 ../plugins/systray/systray.c:92
 msgid "There is already a system tray running on this screen"
 msgstr "この画面には既に動作しているシステムトレイがあります"
 
-#: ../taskbar/xftaskbar.c:519 ../plugins/systray/systray.c:94
+#: ../taskbar/xftaskbar.c:519 ../plugins/systray/systray.c:98
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "システムトレイを登録できません: %s"
@@ -224,12 +220,11 @@ msgstr "システムトレイを登録できません: %s"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../taskbar/xftaskbar.c:619 ../plugins/anotherclock/anotherclock.c:190
-#: ../plugins/systray/systray.c:175
+#: ../taskbar/xftaskbar.c:619 ../plugins/systray/systray.c:179
 msgid "%A %d %B %Y"
 msgstr "%Y %B %d %A"
 
-#: ../taskbar/xftaskbar.c:640 ../plugins/systray/systray.c:200
+#: ../taskbar/xftaskbar.c:640
 msgid "%H:%M"
 msgstr "%H:%M"
 
@@ -320,7 +315,8 @@ msgstr "最大幅にする:"
 msgid "Xfce Panel Settings"
 msgstr "Xfce パネル設定"
 
-#: ../settings/xfce_settings_dialog.c:436
+#. appearance options
+#: ../settings/xfce_settings_dialog.c:436 ../plugins/systray/systray.c:635
 msgid "Appearance"
 msgstr "外観"
 
@@ -423,7 +419,8 @@ msgstr "通知エリア"
 msgid "Show _notification icons"
 msgstr "通知アイコンを表示(_N)"
 
-#: ../settings/xftaskbar_plugin.c:657 ../plugins/systray/systray.c:535
+#. time:show
+#: ../settings/xftaskbar_plugin.c:657 ../plugins/systray/systray.c:600
 msgid "Show _time"
 msgstr "時間を表示(_T)"
 
@@ -455,14 +452,6 @@ msgstr "最大"
 #: ../settings/iconbox_plugin.c:994
 msgid "Iconbox"
 msgstr "アイコンボックス"
-
-#: ../plugins/anotherclock/anotherclock.c:387
-msgid "24 hour clock"
-msgstr "24時間制"
-
-#: ../plugins/anotherclock/anotherclock.c:423
-msgid "Another Clock"
-msgstr "アナザー・クロック"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -520,7 +509,7 @@ msgstr "Xfce 時計"
 msgid "Flexible space"
 msgstr "可変スペース"
 
-#: ../plugins/launcher/launcher.c:113 ../plugins/launcher/launcher.c:306
+#: ../plugins/launcher/launcher.c:113 ../plugins/launcher/launcher.c:289
 msgid "Launcher"
 msgstr "ランチャー"
 
@@ -528,7 +517,7 @@ msgstr "ランチャー"
 msgid "Launcher Plugin"
 msgstr "ランチャー・プラグイン"
 
-#: ../plugins/launcher/launcher.c:381
+#: ../plugins/launcher/launcher.c:364
 #, c-format
 msgid ""
 "Could not run \"%s\":\n"
@@ -537,12 +526,12 @@ msgstr ""
 "\"%s\" を実行できませんでした:\n"
 "%s"
 
-#: ../plugins/launcher/launcher.c:825
+#: ../plugins/launcher/launcher.c:808
 #: ../plugins/launcher/launcher-dialog.c:1186
 msgid "New item"
 msgstr "新規アイテム"
 
-#: ../plugins/launcher/launcher.c:827
+#: ../plugins/launcher/launcher.c:810
 #: ../plugins/launcher/launcher-dialog.c:1187
 msgid "This item has not yet been configured"
 msgstr "このアイテムまだ設定されていません"
@@ -727,13 +716,29 @@ msgstr "隠す(_H)"
 msgid "System buttons"
 msgstr "システムボタン"
 
-#: ../plugins/systray/systray.c:492
+#: ../plugins/systray/systray.c:535
 msgid "Status Area"
 msgstr "通知エリア"
 
-#: ../plugins/systray/systray.c:555
+#. time options
+#: ../plugins/systray/systray.c:591
+msgid "Time"
+msgstr ""
+
+#: ../plugins/systray/systray.c:612
 msgid "Display time before icons"
 msgstr "アイコンの前に時間を表示"
+
+#: ../plugins/systray/systray.c:624
+#, fuzzy
+msgid "Use 24-hour clock"
+msgstr "24時間制"
+
+#. appearance:show_frame
+#: ../plugins/systray/systray.c:644
+#, fuzzy
+msgid "Show _frame"
+msgstr "時間を表示(_T)"
 
 #: ../plugins/tasklist/tasklist.c:212
 msgid "Never group tasks"
@@ -818,3 +823,9 @@ msgstr "ファイル・マネージャ Nautilus を実行します"
 #: ../config/contents.xml.in.h:12
 msgid "Printer Management"
 msgstr "プリンタ・マネージャ"
+
+#~ msgid "Add new item"
+#~ msgstr "新しいアイテムを追加して下さい"
+
+#~ msgid "Another Clock"
+#~ msgstr "アナザー・クロック"
