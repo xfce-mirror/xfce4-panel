@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-08-17 23:01+0900\n"
-"PO-Revision-Date: 2005-08-16 04:33+0900\n"
+"POT-Creation-Date: 2005-08-19 20:39+0900\n"
+"PO-Revision-Date: 2005-08-19 20:48+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -83,15 +83,17 @@ msgstr ""
 "GNU GPL の下に利用できます。\n"
 "\n"
 
+# NOTE: デバッグ用
 #: ../panel/main.c:474
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr "%s: セッション管理無しでの起動に成功しました"
+msgstr "%s: Successfully started without session management"
 
+# NOTE: デバッグ用
 #: ../panel/main.c:479
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr "%s: セッション管理有りでの起動に成功しました"
+msgstr "%s: Successfully started with session management"
 
 #: ../panel/controls.c:669
 #, c-format
@@ -554,7 +556,7 @@ msgstr "システム"
 
 #: ../plugins/launcher/launcher-dialog.c:99
 msgid "Windows programs"
-msgstr "各 Windows プログラム"
+msgstr "Windows プログラム"
 
 #: ../plugins/launcher/launcher-dialog.c:262
 msgid "Name"
@@ -723,22 +725,20 @@ msgstr "通知エリア"
 #. time options
 #: ../plugins/systray/systray.c:591
 msgid "Time"
-msgstr ""
+msgstr "時間"
 
 #: ../plugins/systray/systray.c:612
 msgid "Display time before icons"
 msgstr "アイコンの前に時間を表示"
 
 #: ../plugins/systray/systray.c:624
-#, fuzzy
 msgid "Use 24-hour clock"
-msgstr "24時間制"
+msgstr "24時間時計を使用"
 
 #. appearance:show_frame
 #: ../plugins/systray/systray.c:644
-#, fuzzy
 msgid "Show _frame"
-msgstr "時間を表示(_T)"
+msgstr "枠を表示(_F)"
 
 #: ../plugins/tasklist/tasklist.c:212
 msgid "Never group tasks"
@@ -822,10 +822,4 @@ msgstr "ファイル・マネージャ Nautilus を実行します"
 
 #: ../config/contents.xml.in.h:12
 msgid "Printer Management"
-msgstr "プリンタ・マネージャ"
-
-#~ msgid "Add new item"
-#~ msgstr "新しいアイテムを追加して下さい"
-
-#~ msgid "Another Clock"
-#~ msgstr "アナザー・クロック"
+msgstr "プリンタ・マネージャー"
