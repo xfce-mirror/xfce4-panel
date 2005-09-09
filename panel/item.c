@@ -49,24 +49,6 @@
 static gboolean popup_from_timeout = FALSE;
 static int popup_timeout_id = 0;
 
-/* prevent users from clicking twice because of slow app start */
-static gboolean set_sensitive_cb (GtkWidget *button)
-{
-    if (GTK_IS_WIDGET (button))
-        gtk_widget_set_sensitive (button, TRUE);
-    
-    return FALSE;
-}
-
-static void
-after_exec_insensitive (GtkWidget *button)
-{
-    gtk_widget_set_sensitive (button, FALSE);
-    
-    g_timeout_add (INSENSITIVE_TIMEOUT, 
-                   (GSourceFunc) set_sensitive_cb, button);
-}
-
 /*  Common item callbacks
  *  ---------------------
 */
@@ -106,7 +88,6 @@ item_drop_cb (GtkWidget * widget, GdkDragContext * context, gint x,
 	    g_string_append_c (execute, '"');
 
 	exec_cmd (execute->str, item->in_terminal, item->use_sn);
-        after_exec_insensitive (item->button);
         
 	g_string_free (execute, TRUE);
 
@@ -133,7 +114,6 @@ item_click_cb (GtkButton * b, Item * item)
     hide_current_popup_menu ();
 
     exec_cmd (item->command, item->in_terminal, item->use_sn);
-    after_exec_insensitive (item->button);
 }
 
 static gboolean
