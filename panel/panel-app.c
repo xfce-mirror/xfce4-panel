@@ -345,6 +345,20 @@ panel_app_init (void)
     return 0;
 }
 
+static gboolean
+expose_timeout (GtkWidget *panel)
+{
+    gtk_widget_queue_draw (panel);
+    return FALSE;
+}
+
+static void
+panel_app_init_panel (GtkWidget *panel)
+{
+    gtk_widget_show (panel);
+    g_idle_add ((GSourceFunc)expose_timeout, panel);
+}    
+
 /**
  * panel_app_run
  * 
@@ -412,7 +426,8 @@ panel_app_run (int argc, char **argv)
 
     panel_app.panel_list = panel_config_create_panels ();
 
-    g_ptr_array_foreach (panel_app.panel_list, (GFunc)gtk_widget_show, NULL);
+    g_ptr_array_foreach (panel_app.panel_list, (GFunc)panel_app_init_panel, 
+                         NULL);
 
     /* Run Forrest, Run! */
     panel_app.check_id = 
