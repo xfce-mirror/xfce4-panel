@@ -1,0 +1,17 @@
+prefix=@prefix@
+datadir=@datadir@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+libexecdir=@libexecdir@
+includedir=@includedir@
+
+internalplugindir=${libdir}/xfce4/panel-plugins
+externalplugindir=${libexecdir}/xfce4/panel-plugins
+desktopdatadir=${datadir}/xfce4/panel-plugins
+
+Name: libxfce4panel
+Description: Library for the Xfce Panel
+Requires: libxfcegui4-1.0
+Version: @VERSION@
+Libs: -L${libdir} -lxfce4panel
+Cflags: -I${includedir}/xfce4/

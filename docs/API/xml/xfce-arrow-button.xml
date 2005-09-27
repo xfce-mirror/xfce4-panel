@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="XfceArrowButton">
+<refmeta>
+<refentrytitle>XfceArrowButton</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>XfceArrowButton</refname><refpurpose><para>
+Toggle button with arrow.
+</para></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+
+
+            <link linkend="XfceArrowButton-struct">XfceArrowButton</link>;
+<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-arrow-button-new">xfce_arrow_button_new</link>           (<link linkend="GtkArrowType">GtkArrowType</link> type);
+<link linkend="void">void</link>        <link linkend="xfce-arrow-button-set-arrow-type">xfce_arrow_button_set_arrow_type</link>
+                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
+                                             <link linkend="GtkArrowType">GtkArrowType</link> type);
+<link linkend="GtkArrowType">GtkArrowType</link> <link linkend="xfce-arrow-button-get-arrow-type">xfce_arrow_button_get_arrow_type</link>
+                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button);
+
+</synopsis>
+</refsynopsisdiv>
+
+<refsect1>
+<title>Object Hierarchy</title>
+<synopsis>
+
+  <link linkend="GObject">GObject</link>
+   +----<link linkend="GtkObject">GtkObject</link>
+         +----<link linkend="GtkWidget">GtkWidget</link>
+               +----<link linkend="GtkContainer">GtkContainer</link>
+                     +----<link linkend="GtkBin">GtkBin</link>
+                           +----<link linkend="GtkButton">GtkButton</link>
+                                 +----<link linkend="GtkToggleButton">GtkToggleButton</link>
+                                       +----XfceArrowButton
+</synopsis>
+
+</refsect1>
+
+
+
+<refsect1>
+<title>Implemented Interfaces</title>
+<para>
+XfceArrowButton implements
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
+
+</refsect1>
+
+
+<refsect1>
+<title>Properties</title>
+<synopsis>
+
+  &quot;<link linkend="XfceArrowButton--arrow-type">arrow-type</link>&quot;           <link linkend="GtkArrowType">GtkArrowType</link>          : Read / Write
+</synopsis>
+</refsect1>
+
+<refsect1>
+<title>Signal Prototypes</title>
+<synopsis>
+
+&quot;<link linkend="XfceArrowButton-arrow-type-changed">arrow-type-changed</link>&quot;
+            <link linkend="void">void</link>        user_function      (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
+                                            <link linkend="GtkArrowType">GtkArrowType</link> type,
+                                            <link linkend="gpointer">gpointer</link> user_data);
+</synopsis>
+</refsect1>
+
+
+<refsect1>
+<title>Description</title>
+<para>
+Toggle button with arrow. The arrow direction will be inverted when the button
+is toggled.
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="XfceArrowButton-struct"/>XfceArrowButton</title>
+<indexterm><primary>XfceArrowButton</primary></indexterm><programlisting>typedef struct _XfceArrowButton XfceArrowButton;</programlisting>
+<para>
+The <link linkend="XfceArrowButton-struct"><type>XfceArrowButton-struct</type></link> struct contains private data only, and
+should be accessed using the functions below.
+</para></refsect2>
+<refsect2>
+<title><anchor id="xfce-arrow-button-new"/>xfce_arrow_button_new ()</title>
+<indexterm><primary>xfce_arrow_button_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_arrow_button_new           (<link linkend="GtkArrowType">GtkArrowType</link> type);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>type</parameter>&nbsp;:</term>
+<listitem><simpara> <link linkend="GtkArrowType"><type>GtkArrowType</type></link> for the arrow button
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> newly created <link linkend="XfceArrowButton"><type>XfceArrowButton</type></link> widget.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-arrow-button-set-arrow-type"/>xfce_arrow_button_set_arrow_type ()</title>
+<indexterm><primary>xfce_arrow_button_set_arrow_type</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_arrow_button_set_arrow_type
+                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
+                                             <link linkend="GtkArrowType">GtkArrowType</link> type);</programlisting>
+<para>
+Sets the arrow type for <parameter>button</parameter>.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>button</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="XfceArrowButton"><type>XfceArrowButton</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type</parameter>&nbsp;:</term>
+<listitem><simpara> new <link linkend="GtkArrowType"><type>GtkArrowType</type></link> to set
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-arrow-button-get-arrow-type"/>xfce_arrow_button_get_arrow_type ()</title>
+<indexterm><primary>xfce_arrow_button_get_arrow_type</primary></indexterm><programlisting><link linkend="GtkArrowType">GtkArrowType</link> xfce_arrow_button_get_arrow_type
+                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button);</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>button</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="XfceArrowButton"><type>XfceArrowButton</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GtkArrowType"><type>GtkArrowType</type></link> of <parameter>button</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+<refsect1>
+<title>Properties</title>
+<refsect2><title><anchor id="XfceArrowButton--arrow-type"/>The &quot;<literal>arrow-type</literal>&quot; property</title>
+<programlisting>  &quot;arrow-type&quot;           <link linkend="GtkArrowType">GtkArrowType</link>          : Read / Write</programlisting>
+<para>
+The arrow type of the button. This value also determines the direction
+of the popup menu.</para>
+<para>
+
+</para><para>Default value: GTK_ARROW_UP</para>
+</refsect2>
+
+</refsect1>
+
+<refsect1>
+<title>Signals</title>
+<refsect2><title><anchor id="XfceArrowButton-arrow-type-changed"/>The &quot;arrow-type-changed&quot; signal</title>
+<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
+                                            <link linkend="GtkArrowType">GtkArrowType</link> type,
+                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<para>
+Emitted when the arrow direction of the menu button changes.
+This value also determines the direction of the popup menu.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>button</parameter>&nbsp;:</term>
+<listitem><simpara> the object which emitted the signal
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>type</parameter>&nbsp;:</term>
+<listitem><simpara> the new <link linkend="GtkArrowType"><type>GtkArrowType</type></link> of the button
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+</refsect1>
+
+
+<refsect1>
+<title>See Also</title>
+<para>
+<link linkend="GtkToggleButton"><type>GtkToggleButton</type></link>
+</para>
+</refsect1>
+
+</refentry>

@@ -1,0 +1,608 @@
+# Dutch translations for xfce4-panel.
+# Copyright (C) 2005 Jasper Huijsmans <jasper@xfce.org>
+# This file is distributed under the same license as the xfce4-panel package.
+# Jasper Huijsmans <jasper@xfce.org>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel 4.3.12\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-09-25 17:06+0200\n"
+"PO-Revision-Date: 2005-09-25 17:08+0200\n"
+"Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
+"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit"
+
+#: ../libxfce4panel/xfce-panel-external-item.c:167
+#, c-format
+msgid "An item was unexpectedly removed: \"%s\"."
+msgstr "Een item was onverwacht verwijderd: \"%s\"."
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:664
+#, c-format
+msgid "Remove \"%s\"?"
+msgstr "\"%s\" verwijderen?"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel.c:515
+#: ../panel/panel-app.c:543 ../panel/panel-app.c:568 ../panel/panel-app.c:595
+#: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
+#: ../plugins/launcher/launcher.c:357
+msgid "Xfce Panel"
+msgstr "Xfce Paneel"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:671
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr ""
+"Het item zal verwijderd worden van het paneel en de bijbehorende "
+"configuratie gaat verloren."
+
+#. configure, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:755
+msgid "Item Preferences"
+msgstr "Item configureren"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+msgid "Remove Item"
+msgstr "Item verwijderen"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:775 ../panel/panel.c:540
+#: ../panel/panel-settings.c:1253
+msgid "Panel Preferences"
+msgstr "Paneel configureren"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:783 ../panel/panel.c:547
+msgid "Manage Panel Items"
+msgstr "Items beheren"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:791 ../panel/panel.c:554
+msgid "New Panel"
+msgstr "Nieuw Paneel"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:799 ../panel/panel.c:561
+msgid "Remove this Panel"
+msgstr "Dit paneel verwijderen"
+
+#. about item, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813
+msgid "About this Item"
+msgstr "Item info"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:823 ../panel/panel.c:572
+msgid "About the Xfce Panel"
+msgstr "Xfce Paneel info"
+
+#: ../panel/panel.c:524 ../plugins/actions/actions.c:332
+msgid "Quit"
+msgstr "Afsluiten"
+
+#: ../panel/panel.c:530
+msgid "Restart"
+msgstr "Herstarten"
+
+#: ../panel/panel-item-manager.c:327 ../panel/panel-item-manager.c:335
+#, c-format
+msgid "Could not open \"%s\" module"
+msgstr "Kon \"%s\" module niet openen"
+
+#: ../panel/panel-app.c:180
+msgid "Are you sure you want to exit?"
+msgstr "Weet u zeker dat u wil afsluiten?"
+
+#: ../panel/panel-app.c:545
+msgid "Exit Xfce Panel?"
+msgstr "Het Xfce Paneel afsluiten?"
+
+#: ../panel/panel-app.c:546
+msgid "You can't remove the last panel. Would you like to exit the program?"
+msgstr ""
+"U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
+
+#: ../panel/panel-app.c:566
+#, c-format
+msgid "Remove Panel \"%d\"?"
+msgstr "Paneel \"%d\" verwijderen?"
+
+#: ../panel/panel-app.c:570
+msgid "The panel will be removed and its configuration will be lost."
+msgstr ""
+"Het paneel zal verwijderd worden en de bijbehorende configuratie gaat "
+"verloren."
+
+#: ../panel/panel-app.c:603
+msgid "Developer"
+msgstr "Ontwikkelaar"
+
+#: ../panel/main.c:46
+#, c-format
+msgid ""
+"\n"
+" Xfce Panel %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
+msgstr ""
+"\n"
+" Xfce Paneel %s\n"
+"\n"
+" Onderdeel van de Xfce Werkomgeving\n"
+" http://www.xfce.org\n"
+"\n"
+" Distributie is toegestaan volgens de termen van de GNU GPL.\n"
+"\n"
+
+#: ../panel/main.c:52
+#, c-format
+msgid ""
+" Usage: %s [OPTIONS]\n"
+"\n"
+msgstr ""
+" Gebruik: %s [OPTIES]\n"
+"\n"
+
+#. Only translate the descriptions, not the options itself
+#: ../panel/main.c:55
+msgid ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save panel configurations\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Exit panels\n"
+" -a, --add       Add new items\n"
+"\n"
+msgstr ""
+" OPTIES\n"
+" -h, --help      Dit bericht tonen en afsluiten\n"
+" -v, --version   Dit bericht tonen en afsluiten\n"
+" -c, --customize Panelen configureren\n"
+" -s, --save      Paneel configuraties opslaan\n"
+" -r, --restart   Panelen herstarten\n"
+" -q, --quit      Sessie beëindigen\n"
+" -x, --exit      Panelen afsluiten, zonder bevestiging\n"
+" -a, --add       Nieuwe items toevoegen\n"
+"\n"
+
+#. floating?
+#: ../panel/panel-settings.c:382
+msgid "Panel Type"
+msgstr "Paneel Type"
+
+#: ../panel/panel-settings.c:391
+msgid "Fixed Position"
+msgstr "Vaste positie"
+
+#: ../panel/panel-settings.c:393
+msgid "Freely Moveable"
+msgstr "Vrij te verplaatsen"
+
+#. position
+#: ../panel/panel-settings.c:399
+msgid "Position"
+msgstr "Plaatsing"
+
+#: ../panel/panel-settings.c:483
+msgid "_Full Width"
+msgstr "_Volledige breedte"
+
+#: ../panel/panel-settings.c:492
+msgid "Auto_hide"
+msgstr "Automatisch verbergen"
+
+#: ../panel/panel-settings.c:510
+msgid "Orientation:"
+msgstr "Oriëntatie:"
+
+#: ../panel/panel-settings.c:522
+msgid "Horizontal"
+msgstr "Horizontaal"
+
+#: ../panel/panel-settings.c:524
+msgid "Vertical"
+msgstr "Verticaal"
+
+#: ../panel/panel-settings.c:533
+msgid "Handle Style:"
+msgstr "Handgrepen:"
+
+#: ../panel/panel-settings.c:545
+msgid "At both sides"
+msgstr "Aan beide zijden"
+
+#: ../panel/panel-settings.c:547
+msgid "At the start"
+msgstr "Aan het begin"
+
+#: ../panel/panel-settings.c:549
+msgid "At the end"
+msgstr "Aan het eind"
+
+#: ../panel/panel-settings.c:583
+msgid "Monitor"
+msgstr "Monitor"
+
+#. size
+#: ../panel/panel-settings.c:665
+msgid "Size"
+msgstr "Grootte"
+
+#: ../panel/panel-settings.c:676
+msgid "Small"
+msgstr "Klein"
+
+#: ../panel/panel-settings.c:693
+msgid "Large"
+msgstr "Groot"
+
+#. transparency
+#: ../panel/panel-settings.c:701
+msgid "Transparency"
+msgstr "Transparantie"
+
+#: ../panel/panel-settings.c:709
+msgid "None"
+msgstr "Geen"
+
+#: ../panel/panel-settings.c:726
+msgid "Full"
+msgstr "Volledig"
+
+#: ../panel/panel-settings.c:1018
+msgid ""
+"Drag items from the list to a panel or move existing items to a new location."
+msgstr ""
+"Sleep items van de lijst naar een paneel of verplaats bestaande items naar "
+"een nieuwe positie."
+
+#: ../panel/panel-settings.c:1036
+msgid "Avalaible Items"
+msgstr "Beschikbare items"
+
+#: ../panel/panel-settings.c:1049
+msgid "Add To Selected Panel"
+msgstr "Toevoegen aan het geselecteerde paneel"
+
+#: ../panel/panel-settings.c:1255
+msgid "Add Items"
+msgstr "Items toevoegen"
+
+#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Kon \"%s\" niet uitvoeren"
+
+#: ../plugins/launcher/launcher.c:1137
+msgid "New item"
+msgstr "Nieuw item"
+
+#: ../plugins/launcher/launcher.c:1138
+msgid "This item has not yet been configured"
+msgstr "Dit item moet nog geconfigureerd worden"
+
+#: ../plugins/launcher/launcher-dialog.c:78
+msgid "Default"
+msgstr "Standaard"
+
+#: ../plugins/launcher/launcher-dialog.c:79
+msgid "Editor"
+msgstr "Editor"
+
+#: ../plugins/launcher/launcher-dialog.c:80
+msgid "File management"
+msgstr "Bestandsbeheer"
+
+#: ../plugins/launcher/launcher-dialog.c:81
+msgid "Utilities"
+msgstr "Hulpmiddelen"
+
+#: ../plugins/launcher/launcher-dialog.c:82
+msgid "Games"
+msgstr "Games"
+
+#: ../plugins/launcher/launcher-dialog.c:83
+msgid "Help browser"
+msgstr "Handleiding"
+
+#: ../plugins/launcher/launcher-dialog.c:84
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: ../plugins/launcher/launcher-dialog.c:85
+msgid "Network"
+msgstr "Netwerk"
+
+#: ../plugins/launcher/launcher-dialog.c:86
+msgid "Graphics"
+msgstr "Grafisch"
+
+#: ../plugins/launcher/launcher-dialog.c:87
+msgid "Printer"
+msgstr "Printer"
+
+#: ../plugins/launcher/launcher-dialog.c:88
+msgid "Productivity"
+msgstr "Productiviteit"
+
+#: ../plugins/launcher/launcher-dialog.c:89
+msgid "Sound"
+msgstr "Geluid"
+
+#: ../plugins/launcher/launcher-dialog.c:90
+msgid "Terminal"
+msgstr "Terminal"
+
+#: ../plugins/launcher/launcher-dialog.c:373
+msgid "Select image file"
+msgstr "Plaatje selecteren"
+
+#: ../plugins/launcher/launcher-dialog.c:418
+msgid "Select command"
+msgstr "Commando selecteren"
+
+#: ../plugins/launcher/launcher-dialog.c:441
+msgid "Name"
+msgstr "Naam"
+
+#: ../plugins/launcher/launcher-dialog.c:459
+msgid "Description"
+msgstr "Beschrijving"
+
+#: ../plugins/launcher/launcher-dialog.c:514
+msgid "Other..."
+msgstr "Aangepast..."
+
+#: ../plugins/launcher/launcher-dialog.c:597
+msgid "Command"
+msgstr "Commando"
+
+#: ../plugins/launcher/launcher-dialog.c:633
+msgid "Run in _terminal"
+msgstr "Uitvoeren in _terminal"
+
+#: ../plugins/launcher/launcher-dialog.c:651
+msgid "Use _startup notification"
+msgstr "Opstart-_notificatie gebruiken"
+
+#: ../plugins/launcher/launcher-dialog.c:1104
+msgid "New Item"
+msgstr "Nieuw Item"
+
+#: ../plugins/launcher/launcher-dialog.c:1209
+msgid ""
+"The first item in the list is shown on the panel. Additional items will "
+"appear in a menu."
+msgstr ""
+"Het eerste item word getoond op het paneel. Overige items worden in een menu "
+"geplaatst."
+
+#: ../plugins/launcher/launcher-dialog.c:1246
+msgid "Configure Launcher"
+msgstr "Snelkoppeling configureren"
+
+#: ../plugins/launcher/launcher-dialog.c:1255
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Snelkoppeling"
+
+#: ../plugins/launcher/launcher-dialog.c:1571
+msgid "Select file"
+msgstr "Bestand selecteren"
+
+#: ../plugins/separator/separator.c:241
+msgid "Configure Separator"
+msgstr "Scheidingslijn configureren"
+
+#: ../plugins/separator/separator.c:253
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator"
+msgstr "Scheidingslijn"
+
+#: ../plugins/separator/separator.c:266
+msgid "_Draw Separator"
+msgstr "_Lijn tonen"
+
+#: ../plugins/separator/separator.c:275
+msgid "_Expand"
+msgstr "_Groeien"
+
+#: ../plugins/actions/actions.c:295
+msgid "Configure Panel Actions"
+msgstr "Paneelacties configureren"
+
+#: ../plugins/actions/actions.c:307
+#: ../plugins/actions/actions.desktop.in.in.h:2
+msgid "Panel Actions"
+msgstr "Paneelacties"
+
+#: ../plugins/actions/actions.c:324
+msgid "Select action type:"
+msgstr "Actie selecteren:"
+
+#: ../plugins/actions/actions.c:333
+msgid "Lock screen"
+msgstr "Scherm beveiligen"
+
+#: ../plugins/actions/actions.c:334
+msgid "Quit + Lock screen"
+msgstr "Afsluiten + Scherm beveiligen"
+
+#: ../plugins/tasklist/tasklist.c:318
+msgid "Configure Task List"
+msgstr "Takenlijst configureren"
+
+#: ../plugins/tasklist/tasklist.c:330
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+msgid "Task List"
+msgstr "Takenlijst"
+
+#: ../plugins/tasklist/tasklist.c:343
+msgid "Show tasks from _all workspaces"
+msgstr "Taken van _alle bureaubladen tonen"
+
+#: ../plugins/tasklist/tasklist.c:353
+msgid "Show application _names"
+msgstr "_Namen van applicaties tonen"
+
+#: ../plugins/tasklist/tasklist.c:367
+msgid "Never group tasks"
+msgstr "Taken nooit groeperen"
+
+#: ../plugins/tasklist/tasklist.c:370
+msgid "Automatically group tasks"
+msgstr "Taken automatisch groeperen"
+
+#: ../plugins/tasklist/tasklist.c:373
+msgid "Always group tasks"
+msgstr "Taken altijd groeperen"
+
+#: ../plugins/pager/pager.c:275
+msgid "Configure Pager"
+msgstr "Pager configureren"
+
+#: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Pager"
+msgstr "Pager"
+
+#: ../plugins/pager/pager.c:307
+msgid "Number of rows:"
+msgstr "Aantal rijen:"
+
+#: ../plugins/pager/pager.c:311
+msgid "Number of columns:"
+msgstr "Aantal kolommen:"
+
+#: ../plugins/systray/systray.c:65
+msgid "There is already a system tray running on this screen"
+msgstr "Er is al een systeemvak actief op dit scherm"
+
+#: ../plugins/systray/systray.c:71
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Kan systeemvak niet registreren: %s"
+
+#: ../plugins/systray/systray.c:345
+msgid "Configure Status Area"
+msgstr "Statusgebied configureren"
+
+#: ../plugins/systray/systray.c:357
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid "Status Area"
+msgstr "Statusgebied"
+
+#: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+msgid "Show _frame"
+msgstr "_Frame tonen"
+
+#: ../plugins/iconbox/iconbox.c:746
+msgid "Configure Icon Box"
+msgstr "Iconbox configureren"
+
+#: ../plugins/iconbox/iconbox.c:758
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+msgid "Icon Box"
+msgstr "Iconbox"
+
+#: ../plugins/iconbox/iconbox.c:772
+msgid "Only show minimized applications"
+msgstr "Enkel geminimaliseerde applicaties tonen"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: ../plugins/clock/clock.c:109
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
+
+#: ../plugins/clock/clock.c:401
+msgid "Configure Clock"
+msgstr "Klok configureren"
+
+#: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Klok"
+
+#: ../plugins/clock/clock.c:420
+msgid "Appearance"
+msgstr "Weergave"
+
+#. Keep order in sync with XfceClockMode
+#: ../plugins/clock/clock.c:435
+msgid "Analog"
+msgstr "Analoog"
+
+#: ../plugins/clock/clock.c:436
+msgid "Digital"
+msgstr "Digitaal"
+
+#: ../plugins/clock/clock.c:437
+msgid "LED"
+msgstr "LED"
+
+#: ../plugins/clock/clock.c:450
+msgid "Clock Options"
+msgstr "Klok-opties"
+
+#: ../plugins/clock/clock.c:460
+msgid "Use 24-_hour clock"
+msgstr "24-_uursklok gebruiken"
+
+#: ../plugins/clock/clock.c:468
+msgid "Show AM/PM"
+msgstr "AM/PM tonen"
+
+#: ../plugins/clock/clock.c:476
+msgid "Display seconds"
+msgstr "Secondes weergeven"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr "Programma-starter met optioneel menu"
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:1
+msgid "Test Plugin"
+msgstr "Test Plugin"
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:2
+msgid "This plugin has no purpose"
+msgstr "Deze plugin heeft geen doel"
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr "Spatie of scheidingslijn tussen items"
+
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Log out or lock the screen"
+msgstr "Afsluiten of scherm beveiligen"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Show all running applications"
+msgstr "Alle lopende applicaties tonen"
+
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Miniature view of all virtual desktops"
+msgstr "Miniatuuroverzicht van alle virtuele bureaubladen"
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Show notification icons"
+msgstr "Notificatie-pictogrammen tonen"
+
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+msgid "Show icons of all running applications"
+msgstr "Pictogrammen tonen voor alle lopende applicaties"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "Hoe laat is het?"
+

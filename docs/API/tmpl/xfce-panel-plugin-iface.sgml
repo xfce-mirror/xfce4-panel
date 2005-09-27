@@ -1,0 +1,261 @@
+<!-- ##### SECTION Title ##### -->
+XfcePanelPlugin
+
+<!-- ##### SECTION Short_Description ##### -->
+<para>
+Panel plugin interface.
+</para>
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+The interface implemented by both internal and external plugins. Plugin
+writers may use the functions described below to interact with the plugin
+widget.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+<link linkend="libxfce4panel-Writing-Plugins">Writing Plugins</link>
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT XfcePanelPlugin ##### -->
+<para>
+The #XfcePanelPlugin-struct is a purely virtual object to describe an instance
+of a widget implementing the panel plugin interface.
+</para>
+
+
+<!-- ##### SIGNAL XfcePanelPlugin::about ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::configure-plugin ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::free-data ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::orientation-changed ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL XfcePanelPlugin::save ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::screen-position-changed ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL XfcePanelPlugin::size-changed ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+@arg1: 
+@Returns: 
+
+<!-- ##### ARG XfcePanelPlugin:display-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:expand ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:screen-position ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:size ##### -->
+<para>
+
+</para>
+
+<!-- ##### USER_FUNCTION XfcePanelPluginFunc ##### -->
+<para>
+
+</para>
+
+@plugin: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_get_name ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_get_id ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_get_display_name ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_get_size ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_get_screen_position ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_set_expand ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@expand: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_get_expand ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_get_orientation ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_add_action_widget ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@widget: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_menu_insert_item ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@item: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_menu_show_about ##### -->
+<para>
+
+</para>
+
+@plugin: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_menu_show_configure ##### -->
+<para>
+
+</para>
+
+@plugin: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_block_menu ##### -->
+<para>
+
+</para>
+
+@plugin: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_unblock_menu ##### -->
+<para>
+
+</para>
+
+@plugin: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_lookup_rc_file ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_plugin_save_location ##### -->
+<para>
+
+</para>
+
+@plugin: 
+@Returns: 
+
+

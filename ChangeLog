@@ -1,0 +1,1086 @@
+2005-09-25 07:27  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c:
+	  Clean launcher config file efore saving new one.
+
+2005-09-24 15:00  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/po/nl.po: Update ChangeLog and
+	  translations
+
+2005-09-24 12:13  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.h,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel.c: Save
+	  configuration in some more situations
+
+2005-09-24 07:23  jasper
+
+	* xfce4-panel/branches/experimental/plugins/actions/actions.c,
+	  xfce4-panel/branches/experimental/plugins/clock/clock.c,
+	  xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.h,
+	  xfce4-panel/branches/experimental/plugins/pager/pager.c,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.c,
+	  xfce4-panel/branches/experimental/plugins/systray/systray.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c:
+	  Save plugin configuration after dialog closes
+
+2005-09-23 20:26  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel-app.c: Fix save on
+	  session log-out
+
+2005-09-23 20:12  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c:
+	  Fix 'Remove this Panel' menu item
+
+2005-09-23 19:49  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-messages.h,
+	  xfce4-panel/branches/experimental/panel/panel-app-messages.c,
+	  xfce4-panel/branches/experimental/panel/panel-app-messages.h,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.h,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c:
+	  Extra item signals, extra menu items. Botsie, I hope you're happy
+	  now...
+
+2005-09-23 11:45  jasper
+
+	* xfce4-panel/branches/experimental/config/panels.xml.in,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/panel/main.c,
+	  xfce4-panel/branches/experimental/panel/panel-app-messages.c,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/po/nl.po: * Fix right-click menu
+	  handling in customization mode * Make -a,--add option show 'Add
+	  Items' dialog * Show value for size and transparency in dialog *
+	  Split settings dialog in separate dialogs for properties and to
+	  add items * Set version to 4.3.21
+
+2005-09-23 07:06  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/config/panels.xml.in,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-arrow-button.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-arrow-button.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-itembar.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-enums.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-messages.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-messages.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-window.h,
+	  xfce4-panel/branches/experimental/panel/main.c,
+	  xfce4-panel/branches/experimental/panel/panel-app-messages.c,
+	  xfce4-panel/branches/experimental/panel/panel-app-messages.h,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.h,
+	  xfce4-panel/branches/experimental/panel/panel-config.c,
+	  xfce4-panel/branches/experimental/panel/panel-config.h,
+	  xfce4-panel/branches/experimental/panel/panel-dnd.c,
+	  xfce4-panel/branches/experimental/panel/panel-dnd.h,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.h,
+	  xfce4-panel/branches/experimental/panel/panel-private.h,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-properties.h,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.h,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/panel/panel.h,
+	  xfce4-panel/branches/experimental/plugins/actions/actions.c,
+	  xfce4-panel/branches/experimental/plugins/clock/clock.c,
+	  xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.h,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.h,
+	  xfce4-panel/branches/experimental/plugins/pager/pager.c,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.c,
+	  xfce4-panel/branches/experimental/plugins/systray/systray.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.c:
+	  Expand svn Id keyword
+
+2005-09-22 20:22  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel-properties.c: Fix
+	  setting struts for floating panels
+
+2005-09-22 19:00  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c: *
+	  Better fix for missing alpha channel
+
+2005-09-22 18:45  jasper
+
+	* xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c:
+	  Fix bug when removing second item. Note to self: 0 is the first
+	  index of an array.
+
+2005-09-22 17:23  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel.c: Make moving
+	  floating panels work again...
+
+2005-09-22 15:41  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-messages.h,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.h,
+	  xfce4-panel/branches/experimental/panel/panel-private.h,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.h,
+	  xfce4-panel/branches/experimental/panel/panel.c: * Add 'Add Items'
+	  menu item * Add panel right-click menu
+
+2005-09-22 14:41  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/plugins/systray/systray.desktop.in.in:
+	  * clean up config file when plugin is removed * Set uniqueness for
+	  systray
+
+2005-09-22 13:52  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/plugins/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/clock,
+	  xfce4-panel/branches/experimental/plugins/clock/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/clock/clock.c,
+	  xfce4-panel/branches/experimental/plugins/clock/clock.desktop.in.in,
+	  xfce4-panel/branches/experimental/po/POTFILES.in,
+	  xfce4-panel/branches/experimental/po/nl.po: Add clock plugin.
+	  Ported by Jannis.
+
+2005-09-22 09:45  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c,
+	  xfce4-panel/branches/experimental/plugins/pager/pager.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c: *
+	  Keep floating panels inside the screen * make tasklist, pager and
+	  iconbox handle screen changes (not tested)
+
+2005-09-22 07:56  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c: Fix
+	  handling of GtkTooltips object
+
+2005-09-22 07:01  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c:
+	  Remove assert for pixbuf alpha channel.
+
+2005-09-22 06:59  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c:
+	  Draw plugin handles differently from panel handles, to avoid
+	  confusion.
+
+2005-09-21 15:05  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/plugins/actions/actions.c,
+	  xfce4-panel/branches/experimental/plugins/actions/actions.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/iconbox/iconbox.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c,
+	  xfce4-panel/branches/experimental/plugins/pager/pager.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.c,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/systray/systray.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.desktop.in.in,
+	  xfce4-panel/branches/experimental/po/POTFILES.in,
+	  xfce4-panel/branches/experimental/po/nl.po: * Clean up some
+	  strings * Make quit action log out of the session * Update
+	  POTFILES.in and nl.po
+
+2005-09-21 13:57  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c: Try
+	  to improve iconbox when windows change 'skip_tasklist' hint.
+	  netk_tasklist still works better.
+
+2005-09-21 13:28  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c: Fix
+	  sizing for iconbox
+
+2005-09-21 13:19  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/plugins/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/actions/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/actions/actions.c,
+	  xfce4-panel/branches/experimental/plugins/iconbox,
+	  xfce4-panel/branches/experimental/plugins/iconbox/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c,
+	  xfce4-panel/branches/experimental/plugins/iconbox/iconbox.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/launcher/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/pager/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/separator/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/systray,
+	  xfce4-panel/branches/experimental/plugins/systray/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/systray/systray.c,
+	  xfce4-panel/branches/experimental/plugins/systray/systray.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/tasklist/Makefile.am:
+	  Add systray (without clock) and iconbox plugins
+
+2005-09-21 07:51  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel-item-manager.c: Fix
+	  directory lookup for plugins
+
+2005-09-21 07:48  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-itembar.c:
+	  Improve size allocation of expanded items
+
+2005-09-20 21:07  jasper
+
+	* xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c: Fix
+	  changing orientation of tasklist plugin
+
+2005-09-20 20:22  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c: Fix
+	  crash when removing panel.
+
+2005-09-20 15:02  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/README.Plugins,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/plugins/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/pager,
+	  xfce4-panel/branches/experimental/plugins/pager/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/pager/pager.c,
+	  xfce4-panel/branches/experimental/plugins/pager/pager.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c: *
+	  Add Pager plugin * Use X-XFCE-Unique and update README.Plugins
+
+2005-09-20 13:02  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/plugins/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/actions/actions.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist,
+	  xfce4-panel/branches/experimental/plugins/tasklist/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.c:
+	  * Fix return value for set_size callbacks * Add tasklist plugin
+
+2005-09-20 11:30  jasper
+
+	* xfce4-panel/branches/experimental/plugins/actions/actions.c:
+	  Improve action button sizing
+
+2005-09-20 10:48  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/plugins/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/actions,
+	  xfce4-panel/branches/experimental/plugins/actions/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/actions/actions.c,
+	  xfce4-panel/branches/experimental/plugins/actions/actions.desktop.in.in:
+	  Add Panel Actions plugin: quit and/or lock screen.
+
+2005-09-20 07:50  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel-settings.c: Add
+	  workaround to make DND work when customizing panels: make child
+	  widgets insensitive, so they don't interfere with the DND. If
+	  someone can think of a better solution, please let me know.
+
+2005-09-20 07:21  jasper
+
+	* xfce4-panel/branches/experimental/docs/API/html/XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-sections.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/libxfce4panel-unused.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin-iface.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.c,
+	  xfce4-panel/branches/experimental/plugins/testplugin/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.c:
+	  * Don't force the use of XfceRc for configuration. Return file
+	  name instead. * Update documentation
+
+2005-09-20 06:38  jasper
+
+	* xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c:
+	  Get rid of gtk 2.8-only function. It's not needed as far as I can
+	  see.
+
+2005-09-18 18:41  dannym
+
+	* xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c:
+	  use the gtk file chooser instead of the xfce file chooser since
+	  the latter is deprecated :)
+
+2005-09-15 15:18  jasper
+
+	* xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/plugins/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/separator,
+	  xfce4-panel/branches/experimental/plugins/separator/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.c,
+	  xfce4-panel/branches/experimental/plugins/separator/separator.desktop.in.in:
+	  * Add separator/space plugin * Properly set expand when adding
+	  items to the panel
+
+2005-09-15 06:45  jasper
+
+	* xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c:
+	  Documentation fix
+
+2005-09-15 06:39  jasper
+
+	* xfce4-panel/branches/experimental/docs/API/html/XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-sections.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin-iface.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c:
+	  Small API addition: xfce_panel_plugin_(un)block_menu(), useful
+	  when showing configuration dialog. Make launcher plugin use new
+	  API.
+
+2005-09-14 12:10  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/README.Plugins,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin.h,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher-dialog.h,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.h,
+	  xfce4-panel/branches/experimental/po/POTFILES.in,
+	  xfce4-panel/branches/experimental/po/nl.po: * Implement launcher
+	  plugin. This is a large update, please try it. I'm kinda pleased
+	  with it myself. * Use exit() instead of gtk_main_quit() in
+	  external plugins * Fix README.Plugins * Reset screen position
+	  after moving floating panels
+
+2005-09-11 11:07  jasper
+
+	* xfce4-panel/branches/experimental/plugins/launcher/launcher.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.desktop.in.in:
+	  'Fix' .desktop files: Add Type and Encoding, remove External
+
+2005-09-10 09:20  jasper
+
+	* xfce4-panel/branches/experimental/README.Plugins,
+	  xfce4-panel/branches/experimental/docs/API/html/XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/libxfce4panel-unused.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin-iface.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.h:
+	  * Remove set_data/get_data from the plugin interface * Update API
+	  docs * Update README.Plugins
+
+2005-09-09 19:08  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/libxfce4panel-1.0.pc.in,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c:
+	  * Add desktopdatadir variable to the .pc file * Make plugin
+	  interface depend on GTK_TYPE_CONTAINER
+
+2005-09-09 13:12  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/docs/API/Makefile.am,
+	  xfce4-panel/branches/experimental/docs/API/html/XfceArrowButton.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfceItembar.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelWindow.html,
+	  xfce4-panel/branches/experimental/docs/API/html/ch01.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Standard-Enumerations.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Writing-Plugins.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceArrowButton.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceItembar.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelWindow.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-docs.sgml,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-sections.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel.types,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/libxfce4panel-unused.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-arrow-button.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-itembar.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-enums.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-external-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-internal-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin-iface.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-window.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/object_index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/tree_index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-arrow-button.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-itembar.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-external-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-internal-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-window.xml,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-arrow-button.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-marshal.list,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.c:
+	  Large update, including major API change. I hope no-one started
+	  porting plugins yet ;-) * Get rid of XfcePanelPluginInfo struct *
+	  Add XfcePanelPluginFunc typedef * Registration macros, and of
+	  course the actual *_plugin_new() functions, now take a
+	  construction function as argument * Add a bunch of signals for the
+	  other callback functions in the old XfcePanelPluginInfo struct. *
+	  Update the doc generation so now it also shows signals and
+	  properties. Yay. * gtk-doc still sees 21 undocumented function.
+	  This is wrong. * Make included plugins use the new API.
+
+2005-09-08 10:25  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/panel/panel-dnd.c,
+	  xfce4-panel/branches/experimental/panel/panel-private.h,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel.c: Oh my. DND of
+	  items on a panel and between panels is now implemented. Probably
+	  could use some testing.
+
+2005-09-08 06:35  jasper
+
+	* xfce4-panel/branches/experimental/docs/API/Makefile.am,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel.types,
+	  xfce4-panel/branches/experimental/libxfce4panel/Makefile.am,
+	  xfce4-panel/branches/experimental/libxfce4panel/libxfce4panel-1.0.pc.in,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin.h,
+	  xfce4-panel/branches/experimental/panel/Makefile.am,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.h,
+	  xfce4-panel/branches/experimental/panel/panel-private.h,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-properties.h,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/panel/panel.h,
+	  xfce4-panel/branches/experimental/plugins/launcher/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/testplugin/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.c:
+	  Fix includes
+
+2005-09-07 21:39  pollux
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.h:
+	  yet another patch from danny
+
+2005-09-07 21:26  pollux
+
+	* xfce4-panel/branches/experimental/libxfce4panel/Makefile.am:
+	  another fix from danny
+
+2005-09-07 21:18  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-messages.h,
+	  xfce4-panel/branches/experimental/panel/Makefile.am,
+	  xfce4-panel/branches/experimental/panel/panel-dnd.c,
+	  xfce4-panel/branches/experimental/panel/panel-dnd.h,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel.c: Rather large
+	  update: * Add initial support for DND: items can be dragged from
+	  the treeview to a panel. * Add clever hacks to keep the
+	  right-click menu of the items accessible. This is probably too
+	  clever for my own good...
+
+2005-09-07 21:14  pollux
+
+	* xfce4-panel/branches/experimental/README.Plugins,
+	  xfce4-panel/branches/experimental/libxfce4panel/Makefile.am: fix
+	  typos for danny
+
+2005-09-06 21:02  jasper
+
+	* xfce4-panel/branches/experimental/Makefile.am,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/docs/API/Makefile.am,
+	  xfce4-panel/branches/experimental/docs/API/html/ch01.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Standard-Enumerations.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Writing-Plugins.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceArrowButton.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceItembar.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelWindow.html,
+	  xfce4-panel/branches/experimental/libs,
+	  xfce4-panel/branches/experimental/libxfce4panel,
+	  xfce4-panel/branches/experimental/libxfce4panel/Makefile.am,
+	  xfce4-panel/branches/experimental/libxfce4panel/libxfce4panel-1.0.pc.in,
+	  xfce4-panel/branches/experimental/panel/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/launcher/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/testplugin/Makefile.am,
+	  xfce4-panel/branches/experimental/po/POTFILES.in,
+	  xfce4-panel/branches/experimental/po/nl.po: * install headers in
+	  xfce4/libxfce4panel/ for consistency with other libs * rename libs
+	  to libxfce4panel * fix .pc file
+
+2005-09-06 19:06  jasper
+
+	* xfce4-panel/branches/experimental/libs/Makefile.am: Prevent
+	  namespace conflicts
+
+2005-09-06 18:47  jasper
+
+	* xfce4-panel/branches/experimental/PANEL_DESIGN,
+	  xfce4-panel/branches/experimental/libs/Makefile.am,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.c,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/panel/panel.c: * Change plugin
+	  remove callback (plugin is removed in free_data()). * Install
+	  xfce-panel-enum-types.h for language bindings
+
+2005-09-06 11:54  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.h,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel.c: * Really fix
+	  crash on exit (*ahem*) * Block autohide when settings dialog is
+	  shown * Register open dialog to be able to clean up on exit if it
+	  is still open
+
+2005-09-06 10:06  jasper
+
+	* xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel.c: This should
+	  really fix the crash on exit. Let me know if it doesn't.
+
+2005-09-06 09:36  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/docs/API/Makefile.am,
+	  xfce4-panel/branches/experimental/docs/API/html/ch01.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Standard-Enumerations.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Writing-Plugins.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceArrowButton.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceItembar.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-sections.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-arrow-button.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-itembar.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-enums.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-arrow-button.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-itembar.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-enums.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin.xml,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.c,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.h,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-enums.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-item-iface.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-messages.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/po/nl.po: Mostly cosmetic
+	  changes: * Docs: gtk-doc still refuses to see that 100% of the
+	  symbols is documented * Small tweak to settings dialog to try and
+	  improve 'Add Item' tab
+
+2005-09-05 14:59  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/ch01.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Implementing-a-plugin-for-the-Xfce-Panel.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Standard-Enumerations.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Writing-Plugins.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceArrowButton.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceItembar.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelWindow.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-docs.sgml,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-sections.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/libxfce4panel-unused.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-arrow-button.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-itembar.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-enums.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-external-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-internal-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin-iface.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-window.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/libxfce4panel-doc.bottom,
+	  xfce4-panel/branches/experimental/docs/API/xml/object_index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/tree_index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-arrow-button.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-itembar.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-enums.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-external-item.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-external-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-internal-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-item-iface.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-window.xml,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.c,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.h,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-enums.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-item.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.h: Try
+	  (rather unsuccessfully) to get doc coverage to 100%. Somehow the
+	  parser doesn't mark some functions as documented, even though they
+	  are shown (mostly) correctly in the generated html. Any help with
+	  this will be very much appreciated.
+
+2005-09-04 19:49  jasper
+
+	* xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/ch01.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Implementing-a-plugin-for-the-Xfce-Panel.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin.xml,
+	  xfce4-panel/branches/experimental/panel/main.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.c: * Hopefully
+	  fix the crash on exit * set locale before printing version
+	  information * Tweak documentation
+
+2005-09-04 12:43  jasper
+
+	* xfce4-panel/branches/experimental/README.Plugins,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.desktop.in.in:
+	  Change .desktop keys at benny's request
+
+2005-09-03 17:22  jasper
+
+	* xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-internal-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.h,
+	  xfce4-panel/branches/experimental/panel/panel-private.h,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-properties.h,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/panel/panel.h: Fix up some
+	  includes.
+
+2005-09-03 14:20  jasper
+
+	* xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.c:
+	  Add prerequisite on GObject for plugin interface
+
+2005-09-03 13:13  jasper
+
+	* xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Implementing-a-plugin-for-the-Xfce-Panel.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Standard-Enumerations.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceItembar.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelWindow.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-sections.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/libxfce4panel-unused.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-window.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-window.xml,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.h,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c: * Fix
+	  movability when changing from fixed to floating position * rename
+	  moveable to movable, saves typing ;-)
+
+2005-09-02 14:54  jasper
+
+	* xfce4-panel/branches/experimental/README.Plugins: Add note about
+	  API docs to theREADME.Plugins
+
+2005-09-02 13:18  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/Makefile.am,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/docs,
+	  xfce4-panel/branches/experimental/docs/API,
+	  xfce4-panel/branches/experimental/docs/API/Makefile.am,
+	  xfce4-panel/branches/experimental/docs/API/html,
+	  xfce4-panel/branches/experimental/docs/API/html/XfcePanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/ch01.html,
+	  xfce4-panel/branches/experimental/docs/API/html/home.png,
+	  xfce4-panel/branches/experimental/docs/API/html/index.html,
+	  xfce4-panel/branches/experimental/docs/API/html/index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/html/left.png,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Implementing-a-plugin-for-the-Xfce-Panel.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-Standard-Enumerations.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceArrowButton.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceExternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceInternalPanelPlugin.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfceItembar.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel-XfcePanelWindow.html,
+	  xfce4-panel/branches/experimental/docs/API/html/libxfce4panel.devhelp,
+	  xfce4-panel/branches/experimental/docs/API/html/right.png,
+	  xfce4-panel/branches/experimental/docs/API/html/style.css,
+	  xfce4-panel/branches/experimental/docs/API/html/up.png,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl-list.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-decl.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-docs.sgml,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-overrides.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-sections.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel-undocumented.txt,
+	  xfce4-panel/branches/experimental/docs/API/libxfce4panel.types,
+	  xfce4-panel/branches/experimental/docs/API/tmpl,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/libxfce4panel-unused.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-arrow-button.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-itembar.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-enums.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-external-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-internal-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin-iface.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-plugin.sgml,
+	  xfce4-panel/branches/experimental/docs/API/tmpl/xfce-panel-window.sgml,
+	  xfce4-panel/branches/experimental/docs/API/version.xml.in,
+	  xfce4-panel/branches/experimental/docs/API/xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/libxfce4panel-doc.bottom,
+	  xfce4-panel/branches/experimental/docs/API/xml/libxfce4panel-doc.top,
+	  xfce4-panel/branches/experimental/docs/API/xml/object_index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/tree_index.sgml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-arrow-button.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-itembar.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-enums.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-external-item.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-external-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-internal-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-item-iface.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin-iface.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-plugin.xml,
+	  xfce4-panel/branches/experimental/docs/API/xml/xfce-panel-window.xml,
+	  xfce4-panel/branches/experimental/docs/Makefile.am,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.c,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.h,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-enums.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-item.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/panel/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.desktop.in.in:
+	  Add initial API docs
+
+2005-09-02 08:00  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel-app.c: Hide panels
+	  before cleanup
+
+2005-09-02 07:40  jasper
+
+	* xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/panel/Makefile.am,
+	  xfce4-panel/branches/experimental/panel/panel-config.c,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/po/nl.po: * Fix resizing of
+	  plugins when orientation changes * Fix panel orientation setting
+	  when screen position changes * Check if resource directories
+	  include our prefix * Check for Kiosk mode when looking up plugins
+
+2005-09-02 06:33  jasper
+
+	* xfce4-panel/branches/experimental/README.Plugins: Fix example
+	  macro call
+
+2005-09-01 21:01  jasper
+
+	* xfce4-panel/branches/experimental/panel/panel-settings.c: Present
+	  dialog window when requested while already running.
+
+2005-09-01 19:40  jasper
+
+	* xfce4-panel/branches/experimental,
+	  xfce4-panel/branches/experimental/.indent.pro,
+	  xfce4-panel/branches/experimental/AUTHORS,
+	  xfce4-panel/branches/experimental/COPYING,
+	  xfce4-panel/branches/experimental/COPYING_LIBS,
+	  xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/HACKING,
+	  xfce4-panel/branches/experimental/INSTALL,
+	  xfce4-panel/branches/experimental/Makefile.am,
+	  xfce4-panel/branches/experimental/NEWS,
+	  xfce4-panel/branches/experimental/PANEL_DESIGN,
+	  xfce4-panel/branches/experimental/README,
+	  xfce4-panel/branches/experimental/README.Kiosk,
+	  xfce4-panel/branches/experimental/README.Plugins,
+	  xfce4-panel/branches/experimental/autogen.sh,
+	  xfce4-panel/branches/experimental/config,
+	  xfce4-panel/branches/experimental/config/Makefile.am,
+	  xfce4-panel/branches/experimental/config/panels.xml.in,
+	  xfce4-panel/branches/experimental/configure.ac,
+	  xfce4-panel/branches/experimental/icons,
+	  xfce4-panel/branches/experimental/icons/Makefile.am,
+	  xfce4-panel/branches/experimental/icons/xfce-edit.png,
+	  xfce4-panel/branches/experimental/icons/xfce-filemanager.png,
+	  xfce4-panel/branches/experimental/icons/xfce-games.png,
+	  xfce4-panel/branches/experimental/icons/xfce-graphics.png,
+	  xfce4-panel/branches/experimental/icons/xfce-internet.png,
+	  xfce4-panel/branches/experimental/icons/xfce-mail.png,
+	  xfce4-panel/branches/experimental/icons/xfce-man.png,
+	  xfce4-panel/branches/experimental/icons/xfce-multimedia.png,
+	  xfce4-panel/branches/experimental/icons/xfce-printer.png,
+	  xfce4-panel/branches/experimental/icons/xfce-schedule.png,
+	  xfce4-panel/branches/experimental/icons/xfce-sound.png,
+	  xfce4-panel/branches/experimental/icons/xfce-system-exit.png,
+	  xfce4-panel/branches/experimental/icons/xfce-system-info.png,
+	  xfce4-panel/branches/experimental/icons/xfce-system-lock.png,
+	  xfce4-panel/branches/experimental/icons/xfce-system-settings.png,
+	  xfce4-panel/branches/experimental/icons/xfce-terminal.png,
+	  xfce4-panel/branches/experimental/icons/xfce-unknown.png,
+	  xfce4-panel/branches/experimental/icons/xfce-utils.png,
+	  xfce4-panel/branches/experimental/icons/xfce4-iconbox.png,
+	  xfce4-panel/branches/experimental/icons/xfce4-panel.png,
+	  xfce4-panel/branches/experimental/icons/xfce4-taskbar.png,
+	  xfce4-panel/branches/experimental/libs,
+	  xfce4-panel/branches/experimental/libs/Makefile.am,
+	  xfce4-panel/branches/experimental/libs/libxfce4panel-1.0.pc.in,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.c,
+	  xfce4-panel/branches/experimental/libs/xfce-arrow-button.h,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.c,
+	  xfce4-panel/branches/experimental/libs/xfce-itembar.h,
+	  xfce4-panel/branches/experimental/libs/xfce-marshal.list,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-enums.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-item.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-external-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-internal-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-item-iface.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-iface.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-messages.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin-messages.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-plugin.h,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.c,
+	  xfce4-panel/branches/experimental/libs/xfce-panel-window.h,
+	  xfce4-panel/branches/experimental/panel,
+	  xfce4-panel/branches/experimental/panel/Makefile.am,
+	  xfce4-panel/branches/experimental/panel/main.c,
+	  xfce4-panel/branches/experimental/panel/panel-app-messages.c,
+	  xfce4-panel/branches/experimental/panel/panel-app-messages.h,
+	  xfce4-panel/branches/experimental/panel/panel-app.c,
+	  xfce4-panel/branches/experimental/panel/panel-app.h,
+	  xfce4-panel/branches/experimental/panel/panel-config.c,
+	  xfce4-panel/branches/experimental/panel/panel-config.h,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.c,
+	  xfce4-panel/branches/experimental/panel/panel-item-manager.h,
+	  xfce4-panel/branches/experimental/panel/panel-private.h,
+	  xfce4-panel/branches/experimental/panel/panel-properties.c,
+	  xfce4-panel/branches/experimental/panel/panel-properties.h,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel-settings.h,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/panel/panel.h,
+	  xfce4-panel/branches/experimental/panel/xfce-panel-settings.desktop.in,
+	  xfce4-panel/branches/experimental/plugins,
+	  xfce4-panel/branches/experimental/plugins/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/launcher,
+	  xfce4-panel/branches/experimental/plugins/launcher/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.c,
+	  xfce4-panel/branches/experimental/plugins/launcher/launcher.desktop.in.in,
+	  xfce4-panel/branches/experimental/plugins/testplugin,
+	  xfce4-panel/branches/experimental/plugins/testplugin/Makefile.am,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.c,
+	  xfce4-panel/branches/experimental/plugins/testplugin/testplugin.desktop.in.in,
+	  xfce4-panel/branches/experimental/po,
+	  xfce4-panel/branches/experimental/po/ChangeLog,
+	  xfce4-panel/branches/experimental/po/POTFILES.in,
+	  xfce4-panel/branches/experimental/po/nl.po,
+	  xfce4-panel/branches/experimental/xfce4-panel.spec.in: Import new
+	  panel framework into 'exprimental' branch.
+

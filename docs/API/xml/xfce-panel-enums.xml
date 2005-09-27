@@ -1,0 +1,272 @@
+<?xml version="1.0"?>
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+<refentry id="libxfce4panel-Standard-Enumerations">
+<refmeta>
+<refentrytitle>Standard Enumerations</refentrytitle>
+<manvolnum>3</manvolnum>
+<refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
+</refmeta>
+
+<refnamediv>
+<refname>Standard Enumerations</refname><refpurpose><para>
+Standard enumerations used by the Xfce Panel.
+</para></refpurpose>
+</refnamediv>
+
+<refsynopsisdiv><title>Synopsis</title>
+
+<synopsis>
+
+
+
+enum        <link linkend="XfceScreenPosition">XfceScreenPosition</link>;
+#define     <link linkend="xfce-screen-position-is-horizontal">xfce_screen_position_is_horizontal</link>(position)
+#define     <link linkend="xfce-screen-position-get-orientation">xfce_screen_position_get_orientation</link>(position)
+#define     <link linkend="xfce-screen-position-is-floating">xfce_screen_position_is_floating</link>(position)
+#define     <link linkend="xfce-screen-position-is-top">xfce_screen_position_is_top</link>     (position)
+#define     <link linkend="xfce-screen-position-is-left">xfce_screen_position_is_left</link>    (position)
+#define     <link linkend="xfce-screen-position-is-right">xfce_screen_position_is_right</link>   (position)
+#define     <link linkend="xfce-screen-position-is-bottom">xfce_screen_position_is_bottom</link>  (position)
+</synopsis>
+</refsynopsisdiv>
+
+
+
+
+
+
+
+
+
+<refsect1>
+<title>Description</title>
+<para>
+Currently only contains the definition of <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>.
+</para>
+</refsect1>
+
+<refsect1>
+<title>Details</title>
+<refsect2>
+<title><anchor id="XfceScreenPosition"/>enum XfceScreenPosition</title>
+<indexterm><primary>XfceScreenPosition</primary></indexterm><programlisting>typedef enum /*&lt;enum,prefix=XFCE_SCREEN_POSITION &gt;*/
+{
+    XFCE_SCREEN_POSITION_NONE,
+    
+    /* top */
+    XFCE_SCREEN_POSITION_NW_H,          /* North West Horizontal */
+    XFCE_SCREEN_POSITION_N,             /* North                 */
+    XFCE_SCREEN_POSITION_NE_H,          /* North East Horizontal */
+
+    /* left */
+    XFCE_SCREEN_POSITION_NW_V,          /* North West Vertical   */
+    XFCE_SCREEN_POSITION_W,             /* West                  */
+    XFCE_SCREEN_POSITION_SW_V,          /* South West Vertical   */
+    
+    /* right */
+    XFCE_SCREEN_POSITION_NE_V,          /* North East Vertical   */
+    XFCE_SCREEN_POSITION_E,             /* East                  */
+    XFCE_SCREEN_POSITION_SE_V,          /* South East Vertical   */
+
+    /* bottom */
+    XFCE_SCREEN_POSITION_SW_H,          /* South West Horizontal */
+    XFCE_SCREEN_POSITION_S,             /* South                 */
+    XFCE_SCREEN_POSITION_SE_H,          /* South East Horizontal */
+
+    /* floating */
+    XFCE_SCREEN_POSITION_FLOATING_H,    /* Floating Horizontal */
+    XFCE_SCREEN_POSITION_FLOATING_V,    /* Floating Vertical */
+}
+XfceScreenPosition;
+</programlisting>
+<para>
+There are three screen positions for each side of the screen:
+LEFT/TOP, CENTER and RIGHT/BOTTOM. The XfceScreenPosition is expressed
+as navigational direction, with possible addition of H or V to denote
+horizontal and vertical orientation. Additionally there are two floating 
+positions, horizontal and vertical.</para>
+<para>
+
+</para><variablelist role="enum">
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_NONE</literal></term>
+<listitem><simpara> No position has been set.
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_NW_H</literal></term>
+<listitem><simpara> North West Horizontal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_N</literal></term>
+<listitem><simpara> North
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_NE_H</literal></term>
+<listitem><simpara> North East Horizontal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_NW_V</literal></term>
+<listitem><simpara> North West Vertical
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_W</literal></term>
+<listitem><simpara> West
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_SW_V</literal></term>
+<listitem><simpara> South West Vertical
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_NE_V</literal></term>
+<listitem><simpara> North East Vertical
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_E</literal></term>
+<listitem><simpara> East
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_SE_V</literal></term>
+<listitem><simpara> South East Vertical
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_SW_H</literal></term>
+<listitem><simpara> South West Horizontal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_S</literal></term>
+<listitem><simpara> South
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_SE_H</literal></term>
+<listitem><simpara> South East Horizontal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_FLOATING_H</literal></term>
+<listitem><simpara> Floating Horizontal
+</simpara></listitem>
+</varlistentry>
+<varlistentry>
+<term><literal>XFCE_SCREEN_POSITION_FLOATING_V</literal></term>
+<listitem><simpara> Floating Vertical
+</simpara></listitem>
+</varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-screen-position-is-horizontal"/>xfce_screen_position_is_horizontal()</title>
+<indexterm><primary>xfce_screen_position_is_horizontal</primary></indexterm><programlisting>#define     xfce_screen_position_is_horizontal(position)</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>position</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if horizontal, <literal>FALSE</literal> otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-screen-position-get-orientation"/>xfce_screen_position_get_orientation()</title>
+<indexterm><primary>xfce_screen_position_get_orientation</primary></indexterm><programlisting>#define     xfce_screen_position_get_orientation(position)</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>position</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <link linkend="GtkOrientation"><type>GtkOrientation</type></link> corresponding to <parameter>position</parameter>.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-screen-position-is-floating"/>xfce_screen_position_is_floating()</title>
+<indexterm><primary>xfce_screen_position_is_floating</primary></indexterm><programlisting>#define     xfce_screen_position_is_floating(position)</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>position</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if floating, <literal>FALSE</literal> otherwise.
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-screen-position-is-top"/>xfce_screen_position_is_top()</title>
+<indexterm><primary>xfce_screen_position_is_top</primary></indexterm><programlisting>#define     xfce_screen_position_is_top(position)</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>position</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if on the top of the screen, <literal>FALSE</literal> otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-screen-position-is-left"/>xfce_screen_position_is_left()</title>
+<indexterm><primary>xfce_screen_position_is_left</primary></indexterm><programlisting>#define     xfce_screen_position_is_left(position)</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>position</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if on the left of the screen, <literal>FALSE</literal> otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-screen-position-is-right"/>xfce_screen_position_is_right()</title>
+<indexterm><primary>xfce_screen_position_is_right</primary></indexterm><programlisting>#define     xfce_screen_position_is_right(position)</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>position</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if on the right of the screen, <literal>FALSE</literal> otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-screen-position-is-bottom"/>xfce_screen_position_is_bottom()</title>
+<indexterm><primary>xfce_screen_position_is_bottom</primary></indexterm><programlisting>#define     xfce_screen_position_is_bottom(position)</programlisting>
+<para>
+</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>position</parameter>&nbsp;:</term>
+<listitem><simpara> the <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if on the bottom of the screen, <literal>FALSE</literal> otherwise
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+
+</refsect1>
+
+
+
+
+</refentry>

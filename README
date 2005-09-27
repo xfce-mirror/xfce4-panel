@@ -1,0 +1,33 @@
+README for xfce version 4.4.x
+=============================
+
+WHAT IS IT ?
+------------
+'xfce4-panel' is the panel of the Xfce Desktop Environment. It is modeled
+slightly after the CDE panel and, of course, previous versions of xfce.
+This version is based on GTK2 and should have all the advantages that come 
+with this new and improved toolkit (see http://www.gtk.org).
+
+The panel provides program lauchersi with optional, non-hierarchical menus 
+(easier to read at a glance), and several panel 'plugins' like a clock and a
+pager. Additional plugins may be installed separately.
+
+
+WHAT'S NEW ?
+------------
+Apart from the toolkit changes the underlying framework of the panel has also
+changed completely. 
+
+All interactions with the window manager take place through the new window
+manager hints as defined on http://www.freedesktop.org. This means that you 
+will need a compliant window manager for xfce to function properly (preferably 
+xfwm4 ;-).
+
+Highlights from the new panel include:
+o vertical and horizontal mode
+o icon themes
+o dynamic modules as well as traditional launcher buttons
+o support for multiple panels
+o plugins can be loadable modules or external programs
+
+

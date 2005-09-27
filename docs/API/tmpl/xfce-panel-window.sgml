@@ -1,0 +1,212 @@
+<!-- ##### SECTION Title ##### -->
+XfcePanelWindow
+
+<!-- ##### SECTION Short_Description ##### -->
+<para>
+A toplevel borderless window with optional move handles.
+</para>
+
+<!-- ##### SECTION Long_Description ##### -->
+<para>
+A widget derived from #GtkWindow that implements a toplevel window for panels.
+It optionally can have one or two move handles.
+</para>
+
+<!-- ##### SECTION See_Also ##### -->
+<para>
+
+</para>
+
+<!-- ##### SECTION Stability_Level ##### -->
+
+
+<!-- ##### STRUCT XfcePanelWindow ##### -->
+<para>
+The #XfcePanelWindow-struct struct contains private data only, and
+should be accessed using the functions below.
+</para>
+
+
+<!-- ##### SIGNAL XfcePanelWindow::move ##### -->
+<para>
+
+</para>
+
+@xfcepanelwindow: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL XfcePanelWindow::move-end ##### -->
+<para>
+
+</para>
+
+@xfcepanelwindow: the object which received the signal.
+@arg1: 
+@arg2: 
+
+<!-- ##### SIGNAL XfcePanelWindow::move-start ##### -->
+<para>
+
+</para>
+
+@xfcepanelwindow: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelWindow::orientation-changed ##### -->
+<para>
+
+</para>
+
+@xfcepanelwindow: the object which received the signal.
+@arg1: 
+
+<!-- ##### ARG XfcePanelWindow:handle-style ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelWindow:orientation ##### -->
+<para>
+
+</para>
+
+<!-- ##### ENUM XfceHandleStyle ##### -->
+<para>
+
+</para>
+
+@XFCE_HANDLE_STYLE_NONE: 
+@XFCE_HANDLE_STYLE_BOTH: 
+@XFCE_HANDLE_STYLE_START: 
+@XFCE_HANDLE_STYLE_END: 
+
+<!-- ##### USER_FUNCTION XfcePanelWindowMoveFunc ##### -->
+<para>
+
+</para>
+
+@widget: 
+@data: 
+@x: 
+@y: 
+
+
+<!-- ##### USER_FUNCTION XfcePanelWindowResizeFunc ##### -->
+<para>
+
+</para>
+
+@widget: 
+@data: 
+@previous: 
+@allocation: 
+@x: 
+@y: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_new ##### -->
+<para>
+
+</para>
+
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_set_orientation ##### -->
+<para>
+
+</para>
+
+@window: 
+@orientation: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_get_orientation ##### -->
+<para>
+
+</para>
+
+@window: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_set_handle_style ##### -->
+<para>
+
+</para>
+
+@window: 
+@handle_style: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_get_handle_style ##### -->
+<para>
+
+</para>
+
+@window: 
+@Returns: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_set_show_border ##### -->
+<para>
+
+</para>
+
+@window: 
+@top_border: 
+@bottom_border: 
+@left_border: 
+@right_border: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_get_show_border ##### -->
+<para>
+
+</para>
+
+@window: 
+@top_border: 
+@bottom_border: 
+@left_border: 
+@right_border: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_set_resize_function ##### -->
+<para>
+
+</para>
+
+@window: 
+@function: 
+@data: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_set_move_function ##### -->
+<para>
+
+</para>
+
+@window: 
+@function: 
+@data: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_set_movable ##### -->
+<para>
+
+</para>
+
+@window: 
+@movable: 
+
+
+<!-- ##### FUNCTION xfce_panel_window_get_movable ##### -->
+<para>
+
+</para>
+
+@window: 
+@Returns: 
+
+
