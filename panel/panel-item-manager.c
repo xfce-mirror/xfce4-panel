@@ -70,9 +70,10 @@ static GHashTable *plugin_classes = NULL;
 /* hash table */
 
 static void
-_free_item_class (char *plugin_name, XfcePanelItemClass *class, 
-                   gpointer data)
+_free_item_class (XfcePanelItemClass *class)
 {
+    DBG ("Free item class: %s", class->plugin_name);
+
     if (class->gmodule != NULL)
         g_module_close (class->gmodule);
     
@@ -82,6 +83,8 @@ _free_item_class (char *plugin_name, XfcePanelItemClass *class,
     g_free (class->icon);
 
     g_free (class->file);
+
+    g_free (class);
 }
 
 static void
@@ -120,8 +123,6 @@ _plugin_name_from_filename (const char *file)
 
     name = g_strndup (s, p - s);
 
-    DBG (" ++ name: %s", name);
-
     return name;
 }
 
@@ -129,10 +130,21 @@ static XfcePanelItemClass *
 _new_plugin_class_from_desktop_file (const char *file)
 {
     XfcePanelItemClass *class = NULL;
-    XfceRc *rc = xfce_rc_simple_open (file, TRUE);
+    XfceRc *rc;
+    char *name;
 
     DBG ("Plugin .desktop file: %s", file);
     
+    name = _plugin_name_from_filename (file);
+    
+    if (g_hash_table_lookup (plugin_classes, name) != NULL)
+    {
+        g_free (name);
+        return NULL;
+    }
+    
+    rc = xfce_rc_simple_open (file, TRUE);
+
     if (rc && xfce_rc_has_group (rc, "Xfce Panel"))
     {
         const char *value;
@@ -165,7 +177,7 @@ _new_plugin_class_from_desktop_file (const char *file)
 
         if (class)
         {
-            class->plugin_name = _plugin_name_from_filename (file);
+            class->plugin_name = name;
             
             if ((value = xfce_rc_read_entry (rc, "Name", NULL)))
                 class->name = g_strdup (value);
@@ -181,6 +193,14 @@ _new_plugin_class_from_desktop_file (const char *file)
             class->unique = 
                 xfce_rc_read_bool_entry (rc, "X-XFCE-Unique", FALSE);
         }
+        else
+        {
+            g_free (name);
+        }
+    }
+    else
+    {
+        g_free (name);
     }
 
     if (rc)
@@ -189,11 +209,8 @@ _new_plugin_class_from_desktop_file (const char *file)
     return class;
 }
 
-
-/* public API */
-
-void
-xfce_panel_item_manager_init (void)
+static void
+_update_plugin_list (void)
 {
     char **dirs, **d;
     gboolean datadir_used = FALSE;
@@ -204,9 +221,6 @@ xfce_panel_item_manager_init (void)
     use_user_config = xfce_kiosk_query (kiosk, "CustomizePanel");
     xfce_kiosk_free (kiosk);
 
-    plugin_classes = 
-        g_hash_table_new ((GHashFunc) g_str_hash, (GEqualFunc) g_str_equal);
-    
     if (G_UNLIKELY (!use_user_config))
     {
         dirs = g_new (char*, 2);
@@ -282,11 +296,23 @@ xfce_panel_item_manager_init (void)
     g_strfreev (dirs);
 }
 
+/* public API */
+
+void
+xfce_panel_item_manager_init (void)
+{
+    plugin_classes = 
+        g_hash_table_new_full ((GHashFunc) g_str_hash, 
+                               (GEqualFunc) g_str_equal,
+                               NULL,
+                               (GDestroyNotify)_free_item_class);
+
+    _update_plugin_list ();
+}
+
 void 
 xfce_panel_item_manager_cleanup (void)
 {
-    g_hash_table_foreach (plugin_classes, (GHFunc) _free_item_class, NULL);
-
     g_hash_table_destroy (plugin_classes);
 
     plugin_classes = NULL;
@@ -359,15 +385,64 @@ xfce_panel_item_manager_create_item (const char *name, const char *id,
     return item;
 }
 
+static gboolean
+_check_class_removal (gpointer key, XfcePanelItemClass *class)
+{
+    if (!g_file_test (class->file, G_FILE_TEST_EXISTS))
+    {
+        if (class->is_external)
+            return TRUE;
+
+        if (!class->use_count)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static int
+_compare_classes (gpointer *a, gpointer *b)
+{
+    XfcePanelItemClass *class_a, *class_b;
+    
+    if (!a || !(*a))
+        return 1;
+
+    if (!b || !(*b))
+        return -1;
+
+    if (*a == *b)
+        return 0;
+
+    class_a = *a;
+    class_b = *b;
+
+    if (!strcmp (class_a->plugin_name, "launcher"))
+        return -1;
+
+    if (!strcmp (class_b->plugin_name, "launcher"))
+        return 1;
+
+    return strcmp (class_a->name ? class_a->name : "x",
+                   class_b->name ? class_b->name : "x");
+}
+
 GPtrArray *
 xfce_panel_item_manager_get_item_info_list (void)
 {
     GPtrArray *array;
     
+    _update_plugin_list ();
+    
+    g_hash_table_foreach_remove (plugin_classes, (GHRFunc)_check_class_removal,
+                                 NULL);
+    
     array = g_ptr_array_sized_new (g_hash_table_size (plugin_classes));
     
     g_hash_table_foreach (plugin_classes, (GHFunc)_add_item_info_to_array,
                           array);
+
+    g_ptr_array_sort (array, (GCompareFunc)_compare_classes);
     
     return array;
 }
