@@ -331,7 +331,7 @@ xfce_external_panel_plugin_remove (XfcePanelPlugin * plugin)
 
     priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
 
-    file = xfce_panel_plugin_save_location (plugin);
+    file = xfce_panel_plugin_save_location (plugin, FALSE);
     if (file)
     {
         unlink (file);

@@ -95,7 +95,8 @@ void xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin);
 /* config */
 char *xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin);
 
-char *xfce_panel_plugin_save_location (XfcePanelPlugin *plugin);
+char *xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
+                                       gboolean create);
 
 
 G_END_DECLS

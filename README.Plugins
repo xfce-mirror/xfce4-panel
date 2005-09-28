@@ -223,16 +223,25 @@ additional, custom menu items.
   void xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
                                            GtkMenuItem *item);
 
+If you're plugin has a configuration dialog you need to make that menu item
+visible and connect to the "configure-plugin" signal. The same for an about
+dialog and the "about" signal.
+
+  void xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin);
+
+  void xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin);
+
 
 == Configuration ==
 
-Plugins can save and retrieve their configuration, using simple ini-style
-configuration files, which are handled by the XfceRc interface in
-libxfce4util. During contruction (one of the vtable functions) a plugin can
-open the file read-only to improve efficiency.
+Plugins can save and retrieve their configuration, using a unique file name.
+There's one function for looking up the config file for reading and one for
+the file to save.
 
-  XfceRc *xfce_panel_plugin_get_rc_file (XfcePanelPlugin *plugin, 
-                                         gboolean read_only);
+  char *xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin);
+
+  char *xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
+                                         gboolean create);
 
 
 == Examples ==

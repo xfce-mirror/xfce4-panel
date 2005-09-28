@@ -1071,6 +1071,7 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
 /**
  * xfce_panel_plugin_save_location
  * @plugin    : an #XfcePanelPlugin
+ * @create    : whether the file should be created
  *
  * Unique file location that can be used to store configuration information.
  * Uses xfce_resource_save_location() internally.
@@ -1081,7 +1082,7 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
  * See also: xfce_panel_plugin_lookup_rc_file() 
  **/
 char *
-xfce_panel_plugin_save_location (XfcePanelPlugin *plugin)
+xfce_panel_plugin_save_location (XfcePanelPlugin *plugin, gboolean create)
 {
     char path[255];
 
@@ -1092,7 +1093,7 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin)
                 xfce_panel_plugin_get_name (plugin), 
                 xfce_panel_plugin_get_id (plugin));
 
-    return xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
+    return xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, create);
 }
 
 /* set sensitive */

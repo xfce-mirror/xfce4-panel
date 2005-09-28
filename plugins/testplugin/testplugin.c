@@ -50,7 +50,7 @@ test_save (XfcePanelPlugin *plugin)
     
     DBG ("Save: %s", PLUGIN_NAME);
 
-    if (!(file = xfce_panel_plugin_save_location (plugin)))
+    if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
         return;
 
     rc = xfce_rc_simple_open (file, FALSE);

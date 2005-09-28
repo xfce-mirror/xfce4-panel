@@ -48,7 +48,8 @@ const <link linkend="char">char</link>* <link linkend="xfce-panel-plugin-get-dis
 <link linkend="void">void</link>        <link linkend="xfce-panel-plugin-unblock-menu">xfce_panel_plugin_unblock_menu</link>  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
 <link linkend="char">char</link>*       <link linkend="xfce-panel-plugin-lookup-rc-file">xfce_panel_plugin_lookup_rc_file</link>
                                             (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="char">char</link>*       <link linkend="xfce-panel-plugin-save-location">xfce_panel_plugin_save_location</link> (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="char">char</link>*       <link linkend="xfce-panel-plugin-save-location">xfce_panel_plugin_save_location</link> (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                             <link linkend="gboolean">gboolean</link> create);
 
 </synopsis>
 </refsynopsisdiv>
@@ -394,7 +395,8 @@ See also: <link linkend="xfce-panel-plugin-save-location"><function>xfce_panel_p
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-save-location"/>xfce_panel_plugin_save_location ()</title>
-<indexterm><primary>xfce_panel_plugin_save_location</primary></indexterm><programlisting><link linkend="char">char</link>*       xfce_panel_plugin_save_location (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_save_location</primary></indexterm><programlisting><link linkend="char">char</link>*       xfce_panel_plugin_save_location (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                             <link linkend="gboolean">gboolean</link> create);</programlisting>
 <para>
 Unique file location that can be used to store configuration information.
 Uses <link linkend="xfce-resource-save-location"><function>xfce_resource_save_location()</function></link> internally.</para>
@@ -403,6 +405,9 @@ Uses <link linkend="xfce-resource-save-location"><function>xfce_resource_save_lo
 </para><variablelist role="params">
 <varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
 <listitem><simpara> an <link linkend="XfcePanelPlugin"><type>XfcePanelPlugin</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>create</parameter>&nbsp;:</term>
+<listitem><simpara> whether the file should be created
 </simpara></listitem></varlistentry>
 <varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> path to configuration file or <literal>NULL</literal> is the file could not be
          created. The returned string must be freed using <link linkend="g-free"><function>g_free()</function></link>.

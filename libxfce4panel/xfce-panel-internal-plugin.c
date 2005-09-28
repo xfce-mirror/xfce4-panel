@@ -474,7 +474,7 @@ xfce_internal_panel_plugin_remove (XfcePanelPlugin * plugin)
 
     g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    file = xfce_panel_plugin_save_location (plugin);
+    file = xfce_panel_plugin_save_location (plugin, FALSE);
     if (file)
     {
         unlink (file);

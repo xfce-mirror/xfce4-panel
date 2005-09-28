@@ -53,60 +53,6 @@ void
 int argc,char **argv,XfcePanelPluginFunc construct
 </FUNCTION>
 <MACRO>
-<NAME>XFCE_TYPE_INTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_TYPE_INTERNAL_PANEL_PLUGIN            (xfce_internal_panel_plugin_get_type ())
-</MACRO>
-<MACRO>
-<NAME>XFCE_INTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_INTERNAL_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPlugin))
-</MACRO>
-<MACRO>
-<NAME>XFCE_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
-#define XFCE_INTERNAL_PANEL_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_IS_INTERNAL_PANEL_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
-#define XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
-</MACRO>
-<MACRO>
-<NAME>XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS</NAME>
-#define XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
-</MACRO>
-<STRUCT>
-<NAME>XfceInternalPanelPlugin</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceInternalPanelPluginClass</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceInternalPanelPlugin</NAME>
-struct _XfceInternalPanelPlugin
-{
-    GtkEventBox parent;
-};
-</STRUCT>
-<STRUCT>
-<NAME>XfceInternalPanelPluginClass</NAME>
-struct _XfceInternalPanelPluginClass
-{
-    GtkEventBoxClass parent_class;
-};
-</STRUCT>
-<FUNCTION>
-<NAME>xfce_internal_panel_plugin_get_type</NAME>
-<RETURNS>GType </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_internal_panel_plugin_new</NAME>
-<RETURNS>GtkWidget *</RETURNS>
-const char *name,const char *id,const char *display_name,int size,XfceScreenPosition position,XfcePanelPluginFunc construct
-</FUNCTION>
-<MACRO>
 <NAME>XFCE_TYPE_ITEMBAR</NAME>
 #define XFCE_TYPE_ITEMBAR            (xfce_itembar_get_type ())
 </MACRO>
@@ -340,8 +286,8 @@ XfceScreenPosition;
         plugin = xfce_external_panel_plugin_new (argc, argv, \
                      (XfcePanelPluginFunc)construct); \
         if (!plugin) return 1; \
-        g_signal_connect (plugin, "destroy", \
-                          G_CALLBACK (exit), NULL); \
+        g_signal_connect_after (plugin, "destroy", \
+                                G_CALLBACK (exit), NULL); \
         gtk_widget_show (plugin); \
         gtk_main (); \
         return 0; \
@@ -466,7 +412,7 @@ XfcePanelPlugin *plugin
 <FUNCTION>
 <NAME>xfce_panel_plugin_save_location</NAME>
 <RETURNS>char *</RETURNS>
-XfcePanelPlugin *plugin
+XfcePanelPlugin *plugin,gboolean create
 </FUNCTION>
 <MACRO>
 <NAME>XFCE_TYPE_ARROW_BUTTON</NAME>
@@ -694,6 +640,60 @@ XfcePanelWindow * window,gboolean movable
 <NAME>xfce_panel_window_get_movable</NAME>
 <RETURNS>gboolean </RETURNS>
 XfcePanelWindow * window
+</FUNCTION>
+<MACRO>
+<NAME>XFCE_TYPE_INTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_TYPE_INTERNAL_PANEL_PLUGIN            (xfce_internal_panel_plugin_get_type ())
+</MACRO>
+<MACRO>
+<NAME>XFCE_INTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_INTERNAL_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPlugin))
+</MACRO>
+<MACRO>
+<NAME>XFCE_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
+#define XFCE_INTERNAL_PANEL_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_IS_INTERNAL_PANEL_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
+#define XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
+</MACRO>
+<MACRO>
+<NAME>XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS</NAME>
+#define XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
+</MACRO>
+<STRUCT>
+<NAME>XfceInternalPanelPlugin</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceInternalPanelPluginClass</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceInternalPanelPlugin</NAME>
+struct _XfceInternalPanelPlugin
+{
+    GtkEventBox parent;
+};
+</STRUCT>
+<STRUCT>
+<NAME>XfceInternalPanelPluginClass</NAME>
+struct _XfceInternalPanelPluginClass
+{
+    GtkEventBoxClass parent_class;
+};
+</STRUCT>
+<FUNCTION>
+<NAME>xfce_internal_panel_plugin_get_type</NAME>
+<RETURNS>GType </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_internal_panel_plugin_new</NAME>
+<RETURNS>GtkWidget *</RETURNS>
+const char *name,const char *id,const char *display_name,int size,XfceScreenPosition position,XfcePanelPluginFunc construct
 </FUNCTION>
 <FUNCTION>
 <NAME>xfce_handle_style_get_type</NAME>

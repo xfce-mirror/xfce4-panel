@@ -269,7 +269,7 @@ clock_write_rc_file (XfcePanelPlugin *plugin, Clock *clock)
     char *file;
     XfceRc *rc;
     
-    if (!(file = xfce_panel_plugin_save_location (plugin)))
+    if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
         return;
 
     rc = xfce_rc_simple_open (file, FALSE);
