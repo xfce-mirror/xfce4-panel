@@ -1,16 +1,16 @@
-# Dutch translations for xfce4-panel.
-# Copyright (C) 2005 Jasper Huijsmans <jasper@xfce.org>
+# Bulgarian translation of xfce4-panel.
+# Copyright (C) 2002-2005 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-# Jasper Huijsmans <jasper@xfce.org>, 2005.
+# Miroslav Yordanov <miordanov@i-space.org>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.12\n"
+"Project-Id-Version: xfce4-panel 4.3.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-28 10:01+0200\n"
-"PO-Revision-Date: 2005-09-28 10:02+0200\n"
-"Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
-"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"PO-Revision-Date: 2005-08-21 17:27+0900\n"
+"Last-Translator: Miroslav Yordanov <miordanov@i-space.org>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,105 +18,105 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:167
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "Een item was onverwacht verwijderd: \"%s\"."
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:664
-#, c-format
+#, fuzzy, c-format
 msgid "Remove \"%s\"?"
-msgstr "\"%s\" verwijderen?"
+msgstr "/_Премахва"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel.c:515
 #: ../panel/panel-app.c:558 ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
 #: ../plugins/launcher/launcher.c:357
 msgid "Xfce Panel"
-msgstr "Xfce Paneel"
+msgstr "Xfce панел"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:671
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
-"Het item zal verwijderd worden van het paneel en de bijbehorende "
-"configuratie gaat verloren."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:755
+#, fuzzy
 msgid "Item Preferences"
-msgstr "Item configureren"
+msgstr "/_Настройки"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+#, fuzzy
 msgid "Remove Item"
-msgstr "Item verwijderen"
+msgstr "/_Премахва"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:775 ../panel/panel.c:540
 #: ../panel/panel-settings.c:1253
 msgid "Panel Preferences"
-msgstr "Paneel configureren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:783 ../panel/panel.c:547
 msgid "Manage Panel Items"
-msgstr "Items beheren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:791 ../panel/panel.c:554
+#, fuzzy
 msgid "New Panel"
-msgstr "Nieuw Paneel"
+msgstr "Xfce панел"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:799 ../panel/panel.c:561
 msgid "Remove this Panel"
-msgstr "Dit paneel verwijderen"
+msgstr ""
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813
 msgid "About this Item"
-msgstr "Item info"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:823 ../panel/panel.c:572
+#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Xfce Paneel info"
+msgstr "Xfce панел"
 
 #: ../panel/panel.c:524 ../plugins/actions/actions.c:332
 msgid "Quit"
-msgstr "Afsluiten"
+msgstr ""
 
 #: ../panel/panel.c:530
 msgid "Restart"
-msgstr "Herstarten"
+msgstr ""
 
 #: ../panel/panel-item-manager.c:327 ../panel/panel-item-manager.c:335
 #, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Kon \"%s\" module niet openen"
+msgstr ""
 
 #: ../panel/panel-app.c:180
 msgid "Are you sure you want to exit?"
-msgstr "Weet u zeker dat u wil afsluiten?"
+msgstr "Сигурни ли сте че искате да излезнете?"
 
 #: ../panel/panel-app.c:560
+#, fuzzy
 msgid "Exit Xfce Panel?"
-msgstr "Het Xfce Paneel afsluiten?"
+msgstr "Xfce панел"
 
 #: ../panel/panel-app.c:561
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
-"U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
 
 #: ../panel/panel-app.c:581
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Paneel \"%d\" verwijderen?"
+msgstr ""
 
 #: ../panel/panel-app.c:585
 msgid "The panel will be removed and its configuration will be lost."
 msgstr ""
-"Het paneel zal verwijderd worden en de bijbehorende configuratie gaat "
-"verloren."
 
 #: ../panel/panel-app.c:618
 msgid "Developer"
-msgstr "Ontwikkelaar"
+msgstr ""
 
 #: ../panel/main.c:46
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -128,12 +128,13 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Xfce Paneel %s\n"
+"The Xfce Panel\n"
+"·версия·%s\n"
 "\n"
-" Onderdeel van de Xfce Werkomgeving\n"
-" http://www.xfce.org\n"
+"Част от·Xfce·Desktop·Environment\n"
+"http://www.xfce.org\n"
 "\n"
-" Distributie is toegestaan volgens de termen van de GNU GPL.\n"
+"Licensed under the GNU GPL.\n"
 "\n"
 
 #: ../panel/main.c:52
@@ -142,8 +143,6 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
-" Gebruik: %s [OPTIES]\n"
-"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -159,359 +158,373 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
-" OPTIES\n"
-" -h, --help      Dit bericht tonen en afsluiten\n"
-" -v, --version   Dit bericht tonen en afsluiten\n"
-" -c, --customize Panelen configureren\n"
-" -s, --save      Paneel configuraties opslaan\n"
-" -r, --restart   Panelen herstarten\n"
-" -q, --quit      Sessie beëindigen\n"
-" -x, --exit      Panelen afsluiten, zonder bevestiging\n"
-" -a, --add       Nieuwe items toevoegen\n"
-"\n"
 
 #. floating?
 #: ../panel/panel-settings.c:382
+#, fuzzy
 msgid "Panel Type"
-msgstr "Paneel Type"
+msgstr "Размер на панела:"
 
 #: ../panel/panel-settings.c:391
+#, fuzzy
 msgid "Fixed Position"
-msgstr "Vaste positie"
+msgstr "Позиция"
 
 #: ../panel/panel-settings.c:393
 msgid "Freely Moveable"
-msgstr "Vrij te verplaatsen"
+msgstr ""
 
 #. position
 #: ../panel/panel-settings.c:399
 msgid "Position"
-msgstr "Plaatsing"
+msgstr "Позиция"
 
 #: ../panel/panel-settings.c:483
 msgid "_Full Width"
-msgstr "_Volledige breedte"
+msgstr ""
 
 #: ../panel/panel-settings.c:492
+#, fuzzy
 msgid "Auto_hide"
-msgstr "Automatisch verbergen"
+msgstr "Автоматично скриване"
 
 #: ../panel/panel-settings.c:510
+#, fuzzy
 msgid "Orientation:"
-msgstr "Oriëntatie:"
+msgstr "Ориентация на панела:"
 
 #: ../panel/panel-settings.c:522
 msgid "Horizontal"
-msgstr "Horizontaal"
+msgstr "Хоризонтално"
 
 #: ../panel/panel-settings.c:524
 msgid "Vertical"
-msgstr "Verticaal"
+msgstr "Вертикално"
 
 #: ../panel/panel-settings.c:533
 msgid "Handle Style:"
-msgstr "Handgrepen:"
+msgstr ""
 
 #: ../panel/panel-settings.c:545
+#, fuzzy
 msgid "At both sides"
-msgstr "Aan beide zijden"
+msgstr "Автоматично скриване"
 
 #: ../panel/panel-settings.c:547
 msgid "At the start"
-msgstr "Aan het begin"
+msgstr ""
 
 #: ../panel/panel-settings.c:549
 msgid "At the end"
-msgstr "Aan het eind"
+msgstr ""
 
 #: ../panel/panel-settings.c:583
+#, fuzzy
 msgid "Monitor"
-msgstr "Monitor"
+msgstr "Редактор"
 
 #. size
 #: ../panel/panel-settings.c:665
 msgid "Size"
-msgstr "Grootte"
+msgstr "Размер"
 
 #: ../panel/panel-settings.c:676
 msgid "Small"
-msgstr "Klein"
+msgstr "Малък"
 
 #: ../panel/panel-settings.c:693
 msgid "Large"
-msgstr "Groot"
+msgstr "Голям"
 
 #. transparency
 #: ../panel/panel-settings.c:701
 msgid "Transparency"
-msgstr "Transparantie"
+msgstr ""
 
 #: ../panel/panel-settings.c:709
 msgid "None"
-msgstr "Geen"
+msgstr ""
 
 #: ../panel/panel-settings.c:726
 msgid "Full"
-msgstr "Volledig"
+msgstr ""
 
 #: ../panel/panel-settings.c:1018
 msgid ""
 "Drag items from the list to a panel or move existing items to a new location."
 msgstr ""
-"Sleep items van de lijst naar een paneel of verplaats bestaande items naar "
-"een nieuwe positie."
 
 #: ../panel/panel-settings.c:1036
 msgid "Avalaible Items"
-msgstr "Beschikbare items"
+msgstr ""
 
 #: ../panel/panel-settings.c:1049
 msgid "Add To Selected Panel"
-msgstr "Toevoegen aan het geselecteerde paneel"
+msgstr ""
 
 #: ../panel/panel-settings.c:1255
+#, fuzzy
 msgid "Add Items"
-msgstr "Items toevoegen"
+msgstr "/Добавяне на нов обект"
 
 #: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
 #, c-format
 msgid "Could not run \"%s\""
-msgstr "Kon \"%s\" niet uitvoeren"
+msgstr ""
 
 #: ../plugins/launcher/launcher.c:1137
+#, fuzzy
 msgid "New item"
-msgstr "Nieuw item"
+msgstr "Добавяне на нов обект"
 
 #: ../plugins/launcher/launcher.c:1138
+#, fuzzy
 msgid "This item has not yet been configured"
-msgstr "Dit item moet nog geconfigureerd worden"
+msgstr "Този обект няма опции за настройване"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
-msgstr "Standaard"
+msgstr "По Подразбиране"
 
 #: ../plugins/launcher/launcher-dialog.c:79
 msgid "Editor"
-msgstr "Editor"
+msgstr "Редактор"
 
 #: ../plugins/launcher/launcher-dialog.c:80
 msgid "File management"
-msgstr "Bestandsbeheer"
+msgstr "Управление на файловете"
 
 #: ../plugins/launcher/launcher-dialog.c:81
 msgid "Utilities"
-msgstr "Hulpmiddelen"
+msgstr "Полезни"
 
 #: ../plugins/launcher/launcher-dialog.c:82
 msgid "Games"
-msgstr "Games"
+msgstr "Игри"
 
 #: ../plugins/launcher/launcher-dialog.c:83
 msgid "Help browser"
-msgstr "Handleiding"
+msgstr "Помощен браузър"
 
 #: ../plugins/launcher/launcher-dialog.c:84
 msgid "Multimedia"
-msgstr "Multimedia"
+msgstr "Мултимедия"
 
 #: ../plugins/launcher/launcher-dialog.c:85
 msgid "Network"
-msgstr "Netwerk"
+msgstr "Мрежа"
 
 #: ../plugins/launcher/launcher-dialog.c:86
 msgid "Graphics"
-msgstr "Grafisch"
+msgstr "Графики"
 
 #: ../plugins/launcher/launcher-dialog.c:87
 msgid "Printer"
-msgstr "Printer"
+msgstr "Принтер"
 
 #: ../plugins/launcher/launcher-dialog.c:88
 msgid "Productivity"
-msgstr "Productiviteit"
+msgstr "Продуктивност"
 
 #: ../plugins/launcher/launcher-dialog.c:89
 msgid "Sound"
-msgstr "Geluid"
+msgstr "Звук"
 
 #: ../plugins/launcher/launcher-dialog.c:90
 msgid "Terminal"
-msgstr "Terminal"
+msgstr "Терминал"
 
 #: ../plugins/launcher/launcher-dialog.c:373
+#, fuzzy
 msgid "Select image file"
-msgstr "Plaatje selecteren"
+msgstr "Избира файл"
 
 #: ../plugins/launcher/launcher-dialog.c:418
 msgid "Select command"
-msgstr "Commando selecteren"
+msgstr "Избор на команда"
 
 #: ../plugins/launcher/launcher-dialog.c:441
+#, fuzzy
 msgid "Name"
-msgstr "Naam"
+msgstr "Игри"
 
 #: ../plugins/launcher/launcher-dialog.c:459
+#, fuzzy
 msgid "Description"
-msgstr "Beschrijving"
+msgstr "Позиция"
 
 #: ../plugins/launcher/launcher-dialog.c:514
 msgid "Other..."
-msgstr "Aangepast..."
+msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.c:597
+#, fuzzy
 msgid "Command"
-msgstr "Commando"
+msgstr "Команда:"
 
 #: ../plugins/launcher/launcher-dialog.c:633
 msgid "Run in _terminal"
-msgstr "Uitvoeren in _terminal"
+msgstr "Стартиране в _терминал"
 
 #: ../plugins/launcher/launcher-dialog.c:651
+#, fuzzy
 msgid "Use _startup notification"
-msgstr "Opstart-_notificatie gebruiken"
+msgstr "Използва съобщение при стартиране"
 
 #: ../plugins/launcher/launcher-dialog.c:1104
+#, fuzzy
 msgid "New Item"
-msgstr "Nieuw Item"
+msgstr "Добавяне на нов обект"
 
 #: ../plugins/launcher/launcher-dialog.c:1209
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
-"Het eerste item word getoond op het paneel. Overige items worden in een menu "
-"geplaatst."
 
 #: ../plugins/launcher/launcher-dialog.c:1246
+#, fuzzy
 msgid "Configure Launcher"
-msgstr "Snelkoppeling configureren"
+msgstr "Обект"
 
 #: ../plugins/launcher/launcher-dialog.c:1255
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
-msgstr "Snelkoppeling"
+msgstr "Обект"
 
 #: ../plugins/launcher/launcher-dialog.c:1571
 msgid "Select file"
-msgstr "Bestand selecteren"
+msgstr "Избира файл"
 
 #: ../plugins/separator/separator.c:241
+#, fuzzy
 msgid "Configure Separator"
-msgstr "Scheidingslijn configureren"
+msgstr "Разделител"
 
 #: ../plugins/separator/separator.c:253
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator"
-msgstr "Scheidingslijn"
+msgstr "Разделител"
 
 #: ../plugins/separator/separator.c:266
+#, fuzzy
 msgid "_Draw Separator"
-msgstr "_Lijn tonen"
+msgstr "Разделител"
 
 #: ../plugins/separator/separator.c:275
 msgid "_Expand"
-msgstr "_Groeien"
+msgstr ""
 
 #: ../plugins/actions/actions.c:295
+#, fuzzy
 msgid "Configure Panel Actions"
-msgstr "Paneelacties configureren"
+msgstr "Xfce·настройки за панела"
 
 #: ../plugins/actions/actions.c:307
 #: ../plugins/actions/actions.desktop.in.in.h:2
+#, fuzzy
 msgid "Panel Actions"
-msgstr "Paneelacties"
+msgstr "Xfce·настройки за панела"
 
 #: ../plugins/actions/actions.c:324
+#, fuzzy
 msgid "Select action type:"
-msgstr "Actie selecteren:"
+msgstr "Избор на команда"
 
 #: ../plugins/actions/actions.c:333
+#, fuzzy
 msgid "Lock screen"
-msgstr "Scherm beveiligen"
+msgstr "/_Заключва екрана"
 
 #: ../plugins/actions/actions.c:334
+#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "Afsluiten + Scherm beveiligen"
+msgstr "/_Заключва екрана"
 
 #: ../plugins/tasklist/tasklist.c:320
 msgid "Configure Task List"
-msgstr "Takenlijst configureren"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:332
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+#, fuzzy
 msgid "Task List"
-msgstr "Takenlijst"
+msgstr "Задачи"
 
 #: ../plugins/tasklist/tasklist.c:345
+#, fuzzy
 msgid "Show tasks from _all workspaces"
-msgstr "Taken van _alle bureaubladen tonen"
+msgstr "Показва задачите от всички работни места"
 
 #: ../plugins/tasklist/tasklist.c:355
 msgid "Show application _names"
-msgstr "_Namen van applicaties tonen"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:369
 msgid "Never group tasks"
-msgstr "Taken nooit groeperen"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:372
 msgid "Automatically group tasks"
-msgstr "Taken automatisch groeperen"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:375
 msgid "Always group tasks"
-msgstr "Taken altijd groeperen"
+msgstr ""
 
 #: ../plugins/pager/pager.c:275
 msgid "Configure Pager"
-msgstr "Pager configureren"
+msgstr ""
 
 #: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
-msgstr "Pager"
+msgstr "Пейджър"
 
 #: ../plugins/pager/pager.c:307
 msgid "Number of rows:"
-msgstr "Aantal rijen:"
+msgstr ""
 
 #: ../plugins/pager/pager.c:311
 msgid "Number of columns:"
-msgstr "Aantal kolommen:"
+msgstr ""
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
-msgstr "Er is al een systeemvak actief op dit scherm"
+msgstr "Вече има панел със задачи стартиран в този екран"
 
 #: ../plugins/systray/systray.c:71
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "Kan systeemvak niet registreren: %s"
+msgstr "Не мога да регистрирам панела с задачите: %s"
 
 #: ../plugins/systray/systray.c:345
+#, fuzzy
 msgid "Configure Status Area"
-msgstr "Statusgebied configureren"
+msgstr "Събота"
 
 #: ../plugins/systray/systray.c:357
 #: ../plugins/systray/systray.desktop.in.in.h:2
+#, fuzzy
 msgid "Status Area"
-msgstr "Statusgebied"
+msgstr "Събота"
 
 #: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
 msgid "Show _frame"
-msgstr "_Frame tonen"
+msgstr ""
 
 #: ../plugins/iconbox/iconbox.c:748
 msgid "Configure Icon Box"
-msgstr "Iconbox configureren"
+msgstr ""
 
 #: ../plugins/iconbox/iconbox.c:760
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+#, fuzzy
 msgid "Icon Box"
-msgstr "Iconbox"
+msgstr "Икона:"
 
 #: ../plugins/iconbox/iconbox.c:774
 msgid "Only show minimized applications"
-msgstr "Enkel geminimaliseerde applicaties tonen"
+msgstr ""
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -523,28 +536,30 @@ msgstr "Enkel geminimaliseerde applicaties tonen"
 #.
 #: ../plugins/clock/clock.c:109
 msgid "%A %d %B %Y"
-msgstr "%A, %d %B %Y"
+msgstr ""
 
 #: ../plugins/clock/clock.c:401
+#, fuzzy
 msgid "Configure Clock"
-msgstr "Klok configureren"
+msgstr "Xfce часовник"
 
 #: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#, fuzzy
 msgid "Clock"
-msgstr "Klok"
+msgstr "Заключва"
 
 #: ../plugins/clock/clock.c:420
 msgid "Appearance"
-msgstr "Weergave"
+msgstr "Изглед"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:435
 msgid "Analog"
-msgstr "Analoog"
+msgstr "Аналогов"
 
 #: ../plugins/clock/clock.c:436
 msgid "Digital"
-msgstr "Digitaal"
+msgstr "Цифров"
 
 #: ../plugins/clock/clock.c:437
 msgid "LED"
@@ -552,57 +567,280 @@ msgstr "LED"
 
 #: ../plugins/clock/clock.c:450
 msgid "Clock Options"
-msgstr "Klok-opties"
+msgstr ""
 
 #: ../plugins/clock/clock.c:460
 msgid "Use 24-_hour clock"
-msgstr "24-_uursklok gebruiken"
+msgstr ""
 
 #: ../plugins/clock/clock.c:468
+#, fuzzy
 msgid "Show AM/PM"
-msgstr "AM/PM tonen"
+msgstr "AM/PM"
 
 #: ../plugins/clock/clock.c:476
 msgid "Display seconds"
-msgstr "Secondes weergeven"
+msgstr ""
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Programma-starter met optioneel menu"
+msgstr ""
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
+#, fuzzy
 msgid "Test Plugin"
-msgstr "Test Plugin"
+msgstr "Обект"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr "Deze plugin heeft geen doel"
+msgstr ""
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "Spatie of scheidingslijn tussen items"
+msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
+#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "Afsluiten of scherm beveiligen"
+msgstr "Заключване на екрана"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Show all running applications"
-msgstr "Alle lopende applicaties tonen"
+msgstr ""
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr "Miniatuuroverzicht van alle virtuele bureaubladen"
+msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
-msgstr "Notificatie-pictogrammen tonen"
+msgstr ""
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr "Pictogrammen tonen voor alle lopende applicaties"
+msgstr ""
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr "Hoe laat is het?"
+msgstr ""
 
+#, fuzzy
+#~ msgid "Panel Settings"
+#~ msgstr "Xfce·настройки за панела"
+
+#, fuzzy
+#~ msgid "Xfce 4 Panel Settings"
+#~ msgstr "Xfce·настройки за панела"
+
+#~ msgid "Position:"
+#~ msgstr "Позиция"
+
+#~ msgid "Command:"
+#~ msgstr "Команда:"
+
+#~ msgid "Use startup _notification"
+#~ msgstr "Използва съобщение при стартиране"
+
+#~ msgid "Other Icon"
+#~ msgstr "Друга икона"
+
+#~ msgid "Drag file onto this frame to change the icon"
+#~ msgstr "Дръпнете файл в тази рамка за се промени иконата"
+
+#, fuzzy
+#~ msgid "_Properties..."
+#~ msgstr "/_Настройки"
+
+#~ msgid "This item has no configuration options"
+#~ msgstr "Този обект няма опции за настройване"
+
+#, fuzzy
+#~ msgid "_About Xfce"
+#~ msgstr "/_Относно Xfce"
+
+#, fuzzy
+#~ msgid "_Help"
+#~ msgstr "/_Помощ"
+
+#, fuzzy
+#~ msgid "E_xit"
+#~ msgstr "/Изход"
+
+#, fuzzy
+#~ msgid "icons|Terminal"
+#~ msgstr "Терминал"
+
+#~ msgid "Settings manager not available"
+#~ msgstr "Мениджъра за настройки не е достъпен"
+
+#~ msgid "Taskbar"
+#~ msgstr "Лента за задачи"
+
+#~ msgid "Cannot create MCS client channel"
+#~ msgstr "Не мога да създам канала на клиента MCS"
+
+#, fuzzy
+#~ msgid "_About"
+#~ msgstr "/_Относно Xfce"
+
+#~ msgid "Medium"
+#~ msgstr "Среден"
+
+#~ msgid "Autohide:"
+#~ msgstr "Автоматично скриване:"
+
+#~ msgid "Behaviour"
+#~ msgstr "Вид"
+
+#, fuzzy
+#~ msgid "_Top"
+#~ msgstr "Горе"
+
+#, fuzzy
+#~ msgid "_Bottom"
+#~ msgstr "Долу"
+
+#, fuzzy
+#~ msgid "Height:"
+#~ msgstr "Широчина :"
+
+#, fuzzy
+#~ msgid "Auto _hide taskbar"
+#~ msgstr "Автоматично скриване на лентата със задачи"
+
+#, fuzzy
+#~ msgid "Show _pager in taskbar"
+#~ msgstr "Показва пейджъра на лентата със задачи"
+
+#, fuzzy
+#~ msgid "Status area"
+#~ msgstr "Събота"
+
+#, fuzzy
+#~ msgid "Icon size"
+#~ msgstr "Преглед на икона"
+
+#~ msgid "Clock type:"
+#~ msgstr "Тип на часовника:"
+
+#~ msgid "Hour mode:"
+#~ msgstr "Часови режим:"
+
+#~ msgid "24 hour"
+#~ msgstr "24 часов"
+
+#~ msgid "12 hour"
+#~ msgstr "12 часов"
+
+#~ msgid "Show seconds:"
+#~ msgstr "Показва секунди:"
+
+#, fuzzy
+#~ msgid "Settings"
+#~ msgstr "Xfce·настройки за панела"
+
+#, fuzzy
+#~ msgid "Edit launcher"
+#~ msgstr "Добавяне на обект"
+
+#, fuzzy
+#~ msgid "_Edit"
+#~ msgstr "Редактор"
+
+#~ msgid "Mail box:"
+#~ msgstr "Пощенска кутия:"
+
+#, fuzzy
+#~ msgid "New mail command:"
+#~ msgstr "Пощенска команда:"
+
+#, fuzzy
+#~ msgid "Command to run when new mail arrives"
+#~ msgstr "Команда която да се стартира при натискане на бутона на панела"
+
+#~ msgid "Command to run when the button on the panel is clicked"
+#~ msgstr "Команда която да се стартира при натискане на бутона на панела"
+
+#~ msgid "Interval (sec):"
+#~ msgstr "Интервал (сек):"
+
+#, fuzzy
+#~ msgid "Mail checker"
+#~ msgstr "Проверка на пощата"
+
+#~ msgid "Graphical pager"
+#~ msgstr "Графичен пейджър"
+
+#~ msgid "Desktop switcher"
+#~ msgstr "Превключвач на работното място"
+
+#~ msgid ""
+#~ "Access to the configuration system has been disabled.\n"
+#~ "\n"
+#~ "Ask your system administrator for more information"
+#~ msgstr ""
+#~ "Достъпът до системата за конфигуриране е изключен.\n"
+#~ "\n"
+#~ "Питайте вашия системен администратор за повече инфорцмация"
+
+#, fuzzy
+#~ msgid "tip|Exit"
+#~ msgstr "Изход"
+
+#, fuzzy
+#~ msgid "tip|Setup"
+#~ msgstr "Настройки"
+
+#, fuzzy
+#~ msgid "tip|Info"
+#~ msgstr "Информация"
+
+#~ msgid "Exit"
+#~ msgstr "Изход"
+
+#~ msgid "Setup"
+#~ msgstr "Настройки"
+
+#~ msgid "Info"
+#~ msgstr "Информация"
+
+#~ msgid "Button 1:"
+#~ msgstr "Бутон 1:"
+
+#~ msgid "Button 2:"
+#~ msgstr "Бутон 2:"
+
+#, fuzzy
+#~ msgid "_Hide"
+#~ msgstr "/_Помощ"
+
+#~ msgid "System buttons"
+#~ msgstr "Системни бутони"
+
+#, fuzzy
+#~ msgid "Iconbox Settings"
+#~ msgstr "Xfce·настройки за панела"
+
+#, fuzzy
+#~ msgid "Xfce 4 Iconbox Settings"
+#~ msgstr "Xfce·настройки за панела"
+
+#, fuzzy
+#~ msgid "Taskbar Settings"
+#~ msgstr "Лента за задачи"
+
+#, fuzzy
+#~ msgid "Xfce 4 Taskbar Settings"
+#~ msgstr "Xfce·настройки за панела"
+
+#, fuzzy
+#~ msgid "File manager"
+#~ msgstr "Управление на файловете"
+
+#, fuzzy
+#~ msgid "Manual"
+#~ msgstr "Януари"
+
+#, fuzzy
+#~ msgid "Printer Management"
+#~ msgstr "Управление на файловете"

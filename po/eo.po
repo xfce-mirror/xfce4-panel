@@ -1,122 +1,127 @@
-# Dutch translations for xfce4-panel.
-# Copyright (C) 2005 Jasper Huijsmans <jasper@xfce.org>
+# Esperanto translations for the xfce4-panel package.
+# Copyright (C) 2005 Sylvain Vedrenne
 # This file is distributed under the same license as the xfce4-panel package.
-# Jasper Huijsmans <jasper@xfce.org>, 2005.
+# Sylvain Vedrenne <sylvain.vedrenne@free.fr>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.12\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-28 10:01+0200\n"
-"PO-Revision-Date: 2005-09-28 10:02+0200\n"
-"Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
-"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"PO-Revision-Date: 2005-07-16 16:17+0200\n"
+"Last-Translator: Sylvain Vedrenne <sylvain.vedrenne@free.fr>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../libxfce4panel/xfce-panel-external-item.c:167
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "Een item was onverwacht verwijderd: \"%s\"."
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:664
-#, c-format
+#, fuzzy, c-format
 msgid "Remove \"%s\"?"
-msgstr "\"%s\" verwijderen?"
+msgstr "Forigi la elementon %s?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel.c:515
 #: ../panel/panel-app.c:558 ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
 #: ../plugins/launcher/launcher.c:357
 msgid "Xfce Panel"
-msgstr "Xfce Paneel"
+msgstr "Xfce-a Panelo"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:671
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
-"Het item zal verwijderd worden van het paneel en de bijbehorende "
-"configuratie gaat verloren."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:755
+#, fuzzy
 msgid "Item Preferences"
-msgstr "Item configureren"
+msgstr "Elementaj parametroj"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+#, fuzzy
 msgid "Remove Item"
-msgstr "Item verwijderen"
+msgstr "Forigi la elementon %s?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:775 ../panel/panel.c:540
 #: ../panel/panel-settings.c:1253
 msgid "Panel Preferences"
-msgstr "Paneel configureren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:783 ../panel/panel.c:547
 msgid "Manage Panel Items"
-msgstr "Items beheren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:791 ../panel/panel.c:554
+#, fuzzy
 msgid "New Panel"
-msgstr "Nieuw Paneel"
+msgstr "Xfce-a Panelo"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:799 ../panel/panel.c:561
+#, fuzzy
 msgid "Remove this Panel"
-msgstr "Dit paneel verwijderen"
+msgstr "Forigi la elementon %s?"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813
 msgid "About this Item"
-msgstr "Item info"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:823 ../panel/panel.c:572
+#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Xfce Paneel info"
+msgstr "Xfce-a Panelo"
 
 #: ../panel/panel.c:524 ../plugins/actions/actions.c:332
 msgid "Quit"
-msgstr "Afsluiten"
+msgstr ""
 
 #: ../panel/panel.c:530
+#, fuzzy
 msgid "Restart"
-msgstr "Herstarten"
+msgstr "_Restartigu"
 
 #: ../panel/panel-item-manager.c:327 ../panel/panel-item-manager.c:335
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Kon \"%s\" module niet openen"
+msgstr ""
+"Malsukcesis startigi \"%s\":\n"
+"%s"
 
 #: ../panel/panel-app.c:180
 msgid "Are you sure you want to exit?"
-msgstr "Weet u zeker dat u wil afsluiten?"
+msgstr "Ĉu vi vere volas adiaŭi?"
 
 #: ../panel/panel-app.c:560
+#, fuzzy
 msgid "Exit Xfce Panel?"
-msgstr "Het Xfce Paneel afsluiten?"
+msgstr "Xfce-a Panelo"
 
 #: ../panel/panel-app.c:561
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
-"U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
 
 #: ../panel/panel-app.c:581
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Paneel \"%d\" verwijderen?"
+msgstr ""
 
 #: ../panel/panel-app.c:585
 msgid "The panel will be removed and its configuration will be lost."
 msgstr ""
-"Het paneel zal verwijderd worden en de bijbehorende configuratie gaat "
-"verloren."
 
 #: ../panel/panel-app.c:618
 msgid "Developer"
-msgstr "Ontwikkelaar"
+msgstr "Programisto"
 
 #: ../panel/main.c:46
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -128,12 +133,13 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Xfce Paneel %s\n"
+" La Xfce-a Panelo\n"
+" Eldono %s\n"
 "\n"
-" Onderdeel van de Xfce Werkomgeving\n"
+" Parto de la Xfce-a Labortabla Medio\n"
 " http://www.xfce.org\n"
 "\n"
-" Distributie is toegestaan volgens de termen van de GNU GPL.\n"
+" Disdonita laŭ la GNU GPL.\n"
 "\n"
 
 #: ../panel/main.c:52
@@ -142,8 +148,6 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
-" Gebruik: %s [OPTIES]\n"
-"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -159,359 +163,375 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
-" OPTIES\n"
-" -h, --help      Dit bericht tonen en afsluiten\n"
-" -v, --version   Dit bericht tonen en afsluiten\n"
-" -c, --customize Panelen configureren\n"
-" -s, --save      Paneel configuraties opslaan\n"
-" -r, --restart   Panelen herstarten\n"
-" -q, --quit      Sessie beëindigen\n"
-" -x, --exit      Panelen afsluiten, zonder bevestiging\n"
-" -a, --add       Nieuwe items toevoegen\n"
-"\n"
 
 #. floating?
 #: ../panel/panel-settings.c:382
+#, fuzzy
 msgid "Panel Type"
-msgstr "Paneel Type"
+msgstr "Dimensioj de la panelo:"
 
 #: ../panel/panel-settings.c:391
+#, fuzzy
 msgid "Fixed Position"
-msgstr "Vaste positie"
+msgstr "Pozicio"
 
 #: ../panel/panel-settings.c:393
 msgid "Freely Moveable"
-msgstr "Vrij te verplaatsen"
+msgstr ""
 
 #. position
 #: ../panel/panel-settings.c:399
 msgid "Position"
-msgstr "Plaatsing"
+msgstr "Pozicio"
 
 #: ../panel/panel-settings.c:483
+#, fuzzy
 msgid "_Full Width"
-msgstr "_Volledige breedte"
+msgstr "Tuta larĝo:"
 
 #: ../panel/panel-settings.c:492
+#, fuzzy
 msgid "Auto_hide"
-msgstr "Automatisch verbergen"
+msgstr "Aŭtomate kaŝu"
 
 #: ../panel/panel-settings.c:510
+#, fuzzy
 msgid "Orientation:"
-msgstr "Oriëntatie:"
+msgstr "Direkto de la panelo:"
 
 #: ../panel/panel-settings.c:522
 msgid "Horizontal"
-msgstr "Horizontaal"
+msgstr "Horizontala"
 
 #: ../panel/panel-settings.c:524
 msgid "Vertical"
-msgstr "Verticaal"
+msgstr "Vertikala"
 
 #: ../panel/panel-settings.c:533
+#, fuzzy
 msgid "Handle Style:"
-msgstr "Handgrepen:"
+msgstr "Manteniloj:"
 
 #: ../panel/panel-settings.c:545
 msgid "At both sides"
-msgstr "Aan beide zijden"
+msgstr "Ĉe la du flankoj"
 
 #: ../panel/panel-settings.c:547
 msgid "At the start"
-msgstr "Aan het begin"
+msgstr "Ĉe la komenco"
 
 #: ../panel/panel-settings.c:549
 msgid "At the end"
-msgstr "Aan het eind"
+msgstr "Ĉe la fino"
 
 #: ../panel/panel-settings.c:583
+#, fuzzy
 msgid "Monitor"
-msgstr "Monitor"
+msgstr "Redaktilo"
 
 #. size
 #: ../panel/panel-settings.c:665
 msgid "Size"
-msgstr "Grootte"
+msgstr "Dimensioj"
 
 #: ../panel/panel-settings.c:676
 msgid "Small"
-msgstr "Klein"
+msgstr "Malgranda"
 
 #: ../panel/panel-settings.c:693
 msgid "Large"
-msgstr "Groot"
+msgstr "Granda"
 
 #. transparency
 #: ../panel/panel-settings.c:701
 msgid "Transparency"
-msgstr "Transparantie"
+msgstr "Transparenteco"
 
 #: ../panel/panel-settings.c:709
 msgid "None"
-msgstr "Geen"
+msgstr "Nenia"
 
 #: ../panel/panel-settings.c:726
 msgid "Full"
-msgstr "Volledig"
+msgstr "Tuta"
 
 #: ../panel/panel-settings.c:1018
 msgid ""
 "Drag items from the list to a panel or move existing items to a new location."
 msgstr ""
-"Sleep items van de lijst naar een paneel of verplaats bestaande items naar "
-"een nieuwe positie."
 
 #: ../panel/panel-settings.c:1036
 msgid "Avalaible Items"
-msgstr "Beschikbare items"
+msgstr ""
 
 #: ../panel/panel-settings.c:1049
 msgid "Add To Selected Panel"
-msgstr "Toevoegen aan het geselecteerde paneel"
+msgstr ""
 
 #: ../panel/panel-settings.c:1255
+#, fuzzy
 msgid "Add Items"
-msgstr "Items toevoegen"
+msgstr "Aldoni _novan elementon"
 
 #: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
-#, c-format
+#, fuzzy, c-format
 msgid "Could not run \"%s\""
-msgstr "Kon \"%s\" niet uitvoeren"
+msgstr ""
+"Malsukcesis startigi \"%s\":\n"
+"%s"
 
 #: ../plugins/launcher/launcher.c:1137
 msgid "New item"
-msgstr "Nieuw item"
+msgstr "Novan elementon"
 
 #: ../plugins/launcher/launcher.c:1138
 msgid "This item has not yet been configured"
-msgstr "Dit item moet nog geconfigureerd worden"
+msgstr "Tiu ĉi elemento ne jam estis konfigurita"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
-msgstr "Standaard"
+msgstr "Defaŭlta"
 
 #: ../plugins/launcher/launcher-dialog.c:79
 msgid "Editor"
-msgstr "Editor"
+msgstr "Redaktilo"
 
 #: ../plugins/launcher/launcher-dialog.c:80
 msgid "File management"
-msgstr "Bestandsbeheer"
+msgstr "Dosieradministrado"
 
 #: ../plugins/launcher/launcher-dialog.c:81
 msgid "Utilities"
-msgstr "Hulpmiddelen"
+msgstr "Utilaĵoj"
 
 #: ../plugins/launcher/launcher-dialog.c:82
 msgid "Games"
-msgstr "Games"
+msgstr "Ludoj"
 
 #: ../plugins/launcher/launcher-dialog.c:83
 msgid "Help browser"
-msgstr "Handleiding"
+msgstr "Helplegilo"
 
 #: ../plugins/launcher/launcher-dialog.c:84
 msgid "Multimedia"
-msgstr "Multimedia"
+msgstr "Plurmedio"
 
 #: ../plugins/launcher/launcher-dialog.c:85
 msgid "Network"
-msgstr "Netwerk"
+msgstr "Reto"
 
 #: ../plugins/launcher/launcher-dialog.c:86
 msgid "Graphics"
-msgstr "Grafisch"
+msgstr "Grafiko"
 
 #: ../plugins/launcher/launcher-dialog.c:87
 msgid "Printer"
-msgstr "Printer"
+msgstr "Printilo"
 
 #: ../plugins/launcher/launcher-dialog.c:88
 msgid "Productivity"
-msgstr "Productiviteit"
+msgstr "Produktado"
 
 #: ../plugins/launcher/launcher-dialog.c:89
 msgid "Sound"
-msgstr "Geluid"
+msgstr "Sono"
 
 #: ../plugins/launcher/launcher-dialog.c:90
 msgid "Terminal"
-msgstr "Terminal"
+msgstr "Terminalo"
 
 #: ../plugins/launcher/launcher-dialog.c:373
 msgid "Select image file"
-msgstr "Plaatje selecteren"
+msgstr "Elektu bildodosieron"
 
 #: ../plugins/launcher/launcher-dialog.c:418
 msgid "Select command"
-msgstr "Commando selecteren"
+msgstr "Elektu komandon"
 
 #: ../plugins/launcher/launcher-dialog.c:441
 msgid "Name"
-msgstr "Naam"
+msgstr "Nomo"
 
 #: ../plugins/launcher/launcher-dialog.c:459
 msgid "Description"
-msgstr "Beschrijving"
+msgstr "Priskribo"
 
 #: ../plugins/launcher/launcher-dialog.c:514
 msgid "Other..."
-msgstr "Aangepast..."
+msgstr "Alia..."
 
 #: ../plugins/launcher/launcher-dialog.c:597
 msgid "Command"
-msgstr "Commando"
+msgstr "Komando"
 
 #: ../plugins/launcher/launcher-dialog.c:633
 msgid "Run in _terminal"
-msgstr "Uitvoeren in _terminal"
+msgstr "Lanĉu en _terminalo"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "Use _startup notification"
-msgstr "Opstart-_notificatie gebruiken"
+msgstr "Uzu _lanĉa informigo"
 
 #: ../plugins/launcher/launcher-dialog.c:1104
+#, fuzzy
 msgid "New Item"
-msgstr "Nieuw Item"
+msgstr "Novan elementon"
 
 #: ../plugins/launcher/launcher-dialog.c:1209
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
-"Het eerste item word getoond op het paneel. Overige items worden in een menu "
-"geplaatst."
+"La unua elemento de la listo estas montrita sur la panelo. Aliaj elementoj\n"
+"estos videbla en menuo"
 
 #: ../plugins/launcher/launcher-dialog.c:1246
+#, fuzzy
 msgid "Configure Launcher"
-msgstr "Snelkoppeling configureren"
+msgstr "Lanĉilo"
 
 #: ../plugins/launcher/launcher-dialog.c:1255
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
-msgstr "Snelkoppeling"
+msgstr "Lanĉilo"
 
 #: ../plugins/launcher/launcher-dialog.c:1571
 msgid "Select file"
-msgstr "Bestand selecteren"
+msgstr "Elektu dosieron"
 
 #: ../plugins/separator/separator.c:241
+#, fuzzy
 msgid "Configure Separator"
-msgstr "Scheidingslijn configureren"
+msgstr "Disigilo"
 
 #: ../plugins/separator/separator.c:253
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator"
-msgstr "Scheidingslijn"
+msgstr "Disigilo"
 
 #: ../plugins/separator/separator.c:266
+#, fuzzy
 msgid "_Draw Separator"
-msgstr "_Lijn tonen"
+msgstr "Disigilo"
 
 #: ../plugins/separator/separator.c:275
 msgid "_Expand"
-msgstr "_Groeien"
+msgstr ""
 
 #: ../plugins/actions/actions.c:295
+#, fuzzy
 msgid "Configure Panel Actions"
-msgstr "Paneelacties configureren"
+msgstr "Parametroj de la Xfce-a Panelo"
 
 #: ../plugins/actions/actions.c:307
 #: ../plugins/actions/actions.desktop.in.in.h:2
+#, fuzzy
 msgid "Panel Actions"
-msgstr "Paneelacties"
+msgstr "Parametroj de la Panelo"
 
 #: ../plugins/actions/actions.c:324
+#, fuzzy
 msgid "Select action type:"
-msgstr "Actie selecteren:"
+msgstr "Elektu komandon"
 
 #: ../plugins/actions/actions.c:333
+#, fuzzy
 msgid "Lock screen"
-msgstr "Scherm beveiligen"
+msgstr "_Ŝlosu la ekranon"
 
 #: ../plugins/actions/actions.c:334
+#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "Afsluiten + Scherm beveiligen"
+msgstr "_Ŝlosu la ekranon"
 
 #: ../plugins/tasklist/tasklist.c:320
 msgid "Configure Task List"
-msgstr "Takenlijst configureren"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:332
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+#, fuzzy
 msgid "Task List"
-msgstr "Takenlijst"
+msgstr "Taskolisto"
 
 #: ../plugins/tasklist/tasklist.c:345
 msgid "Show tasks from _all workspaces"
-msgstr "Taken van _alle bureaubladen tonen"
+msgstr "Montru la taskojn de _ĉiuj laborspacoj"
 
 #: ../plugins/tasklist/tasklist.c:355
 msgid "Show application _names"
-msgstr "_Namen van applicaties tonen"
+msgstr "Montru la _nomojn de la aplikaĵoj"
 
 #: ../plugins/tasklist/tasklist.c:369
+#, fuzzy
 msgid "Never group tasks"
-msgstr "Taken nooit groeperen"
+msgstr "Ĉiam _grupigu la taskojn"
 
 #: ../plugins/tasklist/tasklist.c:372
+#, fuzzy
 msgid "Automatically group tasks"
-msgstr "Taken automatisch groeperen"
+msgstr "Ĉiam _grupigu la taskojn"
 
 #: ../plugins/tasklist/tasklist.c:375
+#, fuzzy
 msgid "Always group tasks"
-msgstr "Taken altijd groeperen"
+msgstr "Ĉiam _grupigu la taskojn"
 
 #: ../plugins/pager/pager.c:275
 msgid "Configure Pager"
-msgstr "Pager configureren"
+msgstr ""
 
 #: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
-msgstr "Pager"
+msgstr "Paĝilo"
 
 #: ../plugins/pager/pager.c:307
 msgid "Number of rows:"
-msgstr "Aantal rijen:"
+msgstr "Nombro da horizontaloj:"
 
 #: ../plugins/pager/pager.c:311
 msgid "Number of columns:"
-msgstr "Aantal kolommen:"
+msgstr "Nombro da vertikaloj"
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
-msgstr "Er is al een systeemvak actief op dit scherm"
+msgstr "Iu seancadministrila avisoregiono jam estas kuranta ĉe tiu ekrano"
 
 #: ../plugins/systray/systray.c:71
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "Kan systeemvak niet registreren: %s"
+msgstr "Malsukcesas registri la seancadministrilan avisoregionon:\" %s"
 
 #: ../plugins/systray/systray.c:345
+#, fuzzy
 msgid "Configure Status Area"
-msgstr "Statusgebied configureren"
+msgstr "Statusregiono"
 
 #: ../plugins/systray/systray.c:357
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Status Area"
-msgstr "Statusgebied"
+msgstr "Statusregiono"
 
 #: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+#, fuzzy
 msgid "Show _frame"
-msgstr "_Frame tonen"
+msgstr "Montru la _horon"
 
 #: ../plugins/iconbox/iconbox.c:748
+#, fuzzy
 msgid "Configure Icon Box"
-msgstr "Iconbox configureren"
+msgstr "Xfce Piktogramoskatolo"
 
 #: ../plugins/iconbox/iconbox.c:760
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+#, fuzzy
 msgid "Icon Box"
-msgstr "Iconbox"
+msgstr "Piktogramokesto"
 
 #: ../plugins/iconbox/iconbox.c:774
+#, fuzzy
 msgid "Only show minimized applications"
-msgstr "Enkel geminimaliseerde applicaties tonen"
+msgstr "_Montru nur la aplikaĵojn etigitajn"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -523,28 +543,30 @@ msgstr "Enkel geminimaliseerde applicaties tonen"
 #.
 #: ../plugins/clock/clock.c:109
 msgid "%A %d %B %Y"
-msgstr "%A, %d %B %Y"
+msgstr "%A %Y %B %d"
 
 #: ../plugins/clock/clock.c:401
+#, fuzzy
 msgid "Configure Clock"
-msgstr "Klok configureren"
+msgstr "Xfce-a horloĝo"
 
 #: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#, fuzzy
 msgid "Clock"
-msgstr "Klok"
+msgstr "Ŝlosu"
 
 #: ../plugins/clock/clock.c:420
 msgid "Appearance"
-msgstr "Weergave"
+msgstr "Aspekto"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:435
 msgid "Analog"
-msgstr "Analoog"
+msgstr "Analoga"
 
 #: ../plugins/clock/clock.c:436
 msgid "Digital"
-msgstr "Digitaal"
+msgstr "Cifereca"
 
 #: ../plugins/clock/clock.c:437
 msgid "LED"
@@ -552,57 +574,351 @@ msgstr "LED"
 
 #: ../plugins/clock/clock.c:450
 msgid "Clock Options"
-msgstr "Klok-opties"
+msgstr ""
 
 #: ../plugins/clock/clock.c:460
 msgid "Use 24-_hour clock"
-msgstr "24-_uursklok gebruiken"
+msgstr ""
 
 #: ../plugins/clock/clock.c:468
+#, fuzzy
 msgid "Show AM/PM"
-msgstr "AM/PM tonen"
+msgstr "AM/PM"
 
 #: ../plugins/clock/clock.c:476
+#, fuzzy
 msgid "Display seconds"
-msgstr "Secondes weergeven"
+msgstr "Montru la horon antaŭ la piktogramojn"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Programma-starter met optioneel menu"
+msgstr ""
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
+#, fuzzy
 msgid "Test Plugin"
-msgstr "Test Plugin"
+msgstr "Lanĉilokromaĵo"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr "Deze plugin heeft geen doel"
+msgstr ""
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "Spatie of scheidingslijn tussen items"
+msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
+#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "Afsluiten of scherm beveiligen"
+msgstr "Ŝlosu la ekranon"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+#, fuzzy
 msgid "Show all running applications"
-msgstr "Alle lopende applicaties tonen"
+msgstr "_Montru nur la aplikaĵojn etigitajn"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr "Miniatuuroverzicht van alle virtuele bureaubladen"
+msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
+#, fuzzy
 msgid "Show notification icons"
-msgstr "Notificatie-pictogrammen tonen"
+msgstr "Montru _avizopiktogramojn"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+#, fuzzy
 msgid "Show icons of all running applications"
-msgstr "Pictogrammen tonen voor alle lopende applicaties"
+msgstr "_Montru nur la aplikaĵojn etigitajn"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr "Hoe laat is het?"
+msgstr ""
 
+#~ msgid "Panel Settings"
+#~ msgstr "Parametroj de la Panelo"
+
+#~ msgid "Xfce 4 Panel Settings"
+#~ msgstr "Parametroj de la Xfce 4 Panelo"
+
+#~ msgid "No data was found. The panel will be empty."
+#~ msgstr "Malsukcesis trovi ian datumon. La panelo estos malplena."
+
+#~ msgid "Position:"
+#~ msgstr "Pozicio:"
+
+#~ msgid "Command:"
+#~ msgstr "Komando:"
+
+#~ msgid "Use startup _notification"
+#~ msgstr "Uzi lanĉa _informigo"
+
+#~ msgid "Other Icon"
+#~ msgstr "Alia Piktogramo"
+
+#~ msgid "Drag file onto this frame to change the icon"
+#~ msgstr "Treni dosieron sur tiun kadron por ŝanĝi la piktogramon"
+
+#~ msgid "%s: Successfully started without session management"
+#~ msgstr "%s: Sukcese startis sen seancadministrado"
+
+#~ msgid "%s: Successfully started with session management"
+#~ msgstr "%s: Sukcese startis kun seancadministrado"
+
+#~ msgid "Could not create panel item \"%s\"."
+#~ msgstr "Malsukcesis krei tiun panelan elementon \"%s\"."
+
+#~ msgid "_Properties..."
+#~ msgstr "_Parametroj..."
+
+#~ msgid "_Remove"
+#~ msgstr "_Forigi"
+
+#~ msgid "This item has no configuration options"
+#~ msgstr "Ĉi tiu elemento ne havas konfigurajn opciojn"
+
+#~ msgid "_About Xfce"
+#~ msgstr "_Pri Xfce"
+
+#~ msgid "_Help"
+#~ msgstr "_Helpo"
+
+#~ msgid "E_xit"
+#~ msgstr "A_diaŭu"
+
+#~ msgid "icons|Terminal"
+#~ msgstr "icons|Terminalo"
+
+#~ msgid "Settings manager not available"
+#~ msgstr "La parametradministrilo ne estas disponebla"
+
+#~ msgid "%H:%M"
+#~ msgstr "%H:%M"
+
+#~ msgid "Taskbar"
+#~ msgstr "Taskostrio"
+
+#~ msgid "Cannot create MCS client channel"
+#~ msgstr "Ne eblas krei MCS klientan kanalon"
+
+#~ msgid "_About"
+#~ msgstr "_Pri"
+
+#~ msgid "Medium"
+#~ msgstr "Meza"
+
+#~ msgid "Huge"
+#~ msgstr "Grandega"
+
+#~ msgid "Autohide:"
+#~ msgstr "Aŭtomate kaŝu:"
+
+#~ msgid "Behaviour"
+#~ msgstr "Konduto"
+
+#~ msgid "_Top"
+#~ msgstr "_Supre"
+
+#~ msgid "_Bottom"
+#~ msgstr "_Malsupre"
+
+#~ msgid "Alignment:"
+#~ msgstr "Alliniigo:"
+
+#~ msgid "_Left"
+#~ msgstr "_Maldekstre"
+
+#~ msgid "_Center"
+#~ msgstr "_Centre"
+
+#~ msgid "_Right"
+#~ msgstr "_Dekstre"
+
+#~ msgid "Height:"
+#~ msgstr "Staturo:"
+
+#~ msgid "Width:"
+#~ msgstr "Larĝo:"
+
+#~ msgid "_Shrink to fit"
+#~ msgstr "_Etiĝu por konveni (\"Shrink to fit\")"
+
+#~ msgid "Auto _hide taskbar"
+#~ msgstr "Aŭtomate _kaŝu la taskostrion"
+
+#~ msgid "Show tasklist"
+#~ msgstr "Montru la taskoliston"
+
+#~ msgid "Show _pager in taskbar"
+#~ msgstr "Montru la _paĝilon en la taskostrio"
+
+#~ msgid "Status area"
+#~ msgstr "Statusregiono"
+
+#~ msgid "General"
+#~ msgstr "Generale"
+
+#~ msgid "Components"
+#~ msgstr "Elementoj"
+
+#~ msgid "Icon size"
+#~ msgstr "Grando de piktogramo"
+
+#~ msgid "%A, %d %B %Y"
+#~ msgstr "%A, %Y %B %d"
+
+#~ msgid "Clock type:"
+#~ msgstr "Speco de horloĝo:"
+
+#~ msgid "Hour mode:"
+#~ msgstr "Reĝimo de horo:"
+
+#~ msgid "24 hour"
+#~ msgstr "Internacia (24 horoj)"
+
+#~ msgid "12 hour"
+#~ msgstr "12 horoj"
+
+#~ msgid "Show seconds:"
+#~ msgstr "Montru la sekundojn"
+
+#~ msgid "Flexible space"
+#~ msgstr "Fleksebla spaco"
+
+#~ msgid "Development"
+#~ msgstr "Programado"
+
+#~ msgid "Settings"
+#~ msgstr "Parametroj"
+
+#~ msgid "System"
+#~ msgstr "Sistemo"
+
+#~ msgid "Windows programs"
+#~ msgstr "Aliaj programoj (\"Windows programs\")"
+
+#~ msgid "Edit launcher"
+#~ msgstr "Modifu la lanĉilon"
+
+#~ msgid "_Edit"
+#~ msgstr "_Redaktadi"
+
+#~ msgid "_Up"
+#~ msgstr "_Supren"
+
+#~ msgid "_Down"
+#~ msgstr "_Malsupren"
+
+#~ msgid "_Add"
+#~ msgstr "_Aldoni"
+
+#~ msgid "Mail box:"
+#~ msgstr "Retpoŝtkesto:"
+
+#~ msgid "New mail command:"
+#~ msgstr "Komando por novan mesaĝon:"
+
+#~ msgid "Command to run when new mail arrives"
+#~ msgstr "Komando startiginda kiam nova poŝto alvenas"
+
+#~ msgid "Command to run when the button on the panel is clicked"
+#~ msgstr "Komando startiginda kiam oni alklakas la butonon ĉe la panelo"
+
+#~ msgid "Interval (sec):"
+#~ msgstr "Intertempo (sek):"
+
+#~ msgid "Mail checker"
+#~ msgstr "Poŝtkontrolilo"
+
+#~ msgid "Graphical pager"
+#~ msgstr "Grafika paĝilo"
+
+#~ msgid "Desktop switcher"
+#~ msgstr "Labortabloŝanĝilo"
+
+#~ msgid ""
+#~ "Access to the configuration system has been disabled.\n"
+#~ "\n"
+#~ "Ask your system administrator for more information"
+#~ msgstr ""
+#~ "Nuntempe ne estas permesita konfiguri la sistemon.\n"
+#~ "\n"
+#~ "Por pli da informo, demandu vian sistemestron"
+
+#~ msgid "tip|Exit"
+#~ msgstr "tip|Adiaŭo"
+
+#~ msgid "tip|Setup"
+#~ msgstr "tip|Konfigurado"
+
+#~ msgid "tip|Info"
+#~ msgstr "tip|Informo"
+
+#~ msgid "Exit"
+#~ msgstr "Adiaŭu"
+
+#~ msgid "Setup"
+#~ msgstr "Konfigurado"
+
+#~ msgid "Info"
+#~ msgstr "Informo"
+
+#~ msgid "Button 1:"
+#~ msgstr "Butono 1:"
+
+#~ msgid "Button 2:"
+#~ msgstr "Butono 2:"
+
+#~ msgid "_Hide"
+#~ msgstr "_Kaŝu"
+
+#~ msgid "System buttons"
+#~ msgstr "Sistemaj butonoj"
+
+#~ msgid "Iconbox Settings"
+#~ msgstr "Parametroj de la Piktogramkesto"
+
+#~ msgid "Xfce 4 Iconbox Settings"
+#~ msgstr "Xfce 4 Parametroj de la Piktogramkesto"
+
+#~ msgid "Taskbar Settings"
+#~ msgstr "Parametroj de la Taskostrio"
+
+#~ msgid "Xfce 4 Taskbar Settings"
+#~ msgstr "Xfce 4 Parametroj de la Taskostrio"
+
+#~ msgid "Appfinder"
+#~ msgstr "Aplikaĵtrovilo"
+
+#~ msgid "Drag file to print"
+#~ msgstr "Trenu printindan dosieron"
+
+#~ msgid "File manager"
+#~ msgstr "Dosieradministrilo"
+
+#~ msgid "Find and run applications"
+#~ msgstr "Trovu kaj startigu aplikaĵojn"
+
+#~ msgid "Konqueror"
+#~ msgstr "Konkeroro (\"Konqueror\")"
+
+#~ msgid "Konqueror File Manager"
+#~ msgstr "La Dosieradministrilo Konkeroro (\"Konqueror\")"
+
+#~ msgid "Manual"
+#~ msgstr "Manlibro"
+
+#~ msgid "Mozilla Web Browser"
+#~ msgstr "La Retumilo Mozilo (\"Mozilla\")"
+
+#~ msgid "Music player"
+#~ msgstr "Musiklegilo"
+
+#~ msgid "Nautilus"
+#~ msgstr "Naŭtiluso (\"Nautilus\")"
+
+#~ msgid "Nautilus File Manager"
+#~ msgstr "La Dosieradministrilo Naŭtiluso (\"Nautilus\")"
+
+#~ msgid "Printer Management"
+#~ msgstr "Administrado de la Printiloj"

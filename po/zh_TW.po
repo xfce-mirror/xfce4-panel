@@ -1,122 +1,128 @@
-# Dutch translations for xfce4-panel.
-# Copyright (C) 2005 Jasper Huijsmans <jasper@xfce.org>
+# Copyright (C) 2003 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the xfce4-panel package.
-# Jasper Huijsmans <jasper@xfce.org>, 2005.
+# umm <umm@pchome.com.tw>, 2003.
+# Ambrose Li <acli@ada.dhs.org>, 2004.
+# Hydonsingore Cia <hydonsingore@mail.educities.edu.tw>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.12\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-28 10:01+0200\n"
-"PO-Revision-Date: 2005-09-28 10:02+0200\n"
-"Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
-"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"PO-Revision-Date: 2005-09-08 23:20+0800\n"
+"Last-Translator: Hydonsingore Cia <hydonsingore@mail.educities.edu.tw>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../libxfce4panel/xfce-panel-external-item.c:167
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "Een item was onverwacht verwijderd: \"%s\"."
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:664
-#, c-format
+#, fuzzy, c-format
 msgid "Remove \"%s\"?"
-msgstr "\"%s\" verwijderen?"
+msgstr "移除 %s 項目"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel.c:515
 #: ../panel/panel-app.c:558 ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
 #: ../plugins/launcher/launcher.c:357
 msgid "Xfce Panel"
-msgstr "Xfce Paneel"
+msgstr "Xfce 面板"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:671
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
-"Het item zal verwijderd worden van het paneel en de bijbehorende "
-"configuratie gaat verloren."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:755
+#, fuzzy
 msgid "Item Preferences"
-msgstr "Item configureren"
+msgstr "項目屬性"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+#, fuzzy
 msgid "Remove Item"
-msgstr "Item verwijderen"
+msgstr "移除 %s 項目"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:775 ../panel/panel.c:540
 #: ../panel/panel-settings.c:1253
 msgid "Panel Preferences"
-msgstr "Paneel configureren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:783 ../panel/panel.c:547
 msgid "Manage Panel Items"
-msgstr "Items beheren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:791 ../panel/panel.c:554
+#, fuzzy
 msgid "New Panel"
-msgstr "Nieuw Paneel"
+msgstr "Xfce 面板"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:799 ../panel/panel.c:561
+#, fuzzy
 msgid "Remove this Panel"
-msgstr "Dit paneel verwijderen"
+msgstr "移除 %s 項目"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813
 msgid "About this Item"
-msgstr "Item info"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:823 ../panel/panel.c:572
+#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Xfce Paneel info"
+msgstr "Xfce 面板"
 
 #: ../panel/panel.c:524 ../plugins/actions/actions.c:332
 msgid "Quit"
-msgstr "Afsluiten"
+msgstr ""
 
 #: ../panel/panel.c:530
+#, fuzzy
 msgid "Restart"
-msgstr "Herstarten"
+msgstr "重新啟動(_R)"
 
 #: ../panel/panel-item-manager.c:327 ../panel/panel-item-manager.c:335
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Kon \"%s\" module niet openen"
+msgstr ""
+"無法執行\"%s\":\n"
+"%s"
 
 #: ../panel/panel-app.c:180
 msgid "Are you sure you want to exit?"
-msgstr "Weet u zeker dat u wil afsluiten?"
+msgstr "你確定要退出？"
 
 #: ../panel/panel-app.c:560
+#, fuzzy
 msgid "Exit Xfce Panel?"
-msgstr "Het Xfce Paneel afsluiten?"
+msgstr "Xfce 面板"
 
 #: ../panel/panel-app.c:561
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
-"U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
 
 #: ../panel/panel-app.c:581
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Paneel \"%d\" verwijderen?"
+msgstr ""
 
 #: ../panel/panel-app.c:585
 msgid "The panel will be removed and its configuration will be lost."
 msgstr ""
-"Het paneel zal verwijderd worden en de bijbehorende configuratie gaat "
-"verloren."
 
 #: ../panel/panel-app.c:618
 msgid "Developer"
-msgstr "Ontwikkelaar"
+msgstr "開發者"
 
+# TODO check translation
 #: ../panel/main.c:46
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -128,12 +134,13 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Xfce Paneel %s\n"
+"Xfce 面板\n"
+"版本 %s\n"
 "\n"
-" Onderdeel van de Xfce Werkomgeving\n"
-" http://www.xfce.org\n"
+"Xfce 桌面環境的組成部分\n"
+"http://www.xfce.org\n"
 "\n"
-" Distributie is toegestaan volgens de termen van de GNU GPL.\n"
+"以 GNU GPL 方式授權發行。\n"
 "\n"
 
 #: ../panel/main.c:52
@@ -142,8 +149,6 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
-" Gebruik: %s [OPTIES]\n"
-"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -159,360 +164,381 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
-" OPTIES\n"
-" -h, --help      Dit bericht tonen en afsluiten\n"
-" -v, --version   Dit bericht tonen en afsluiten\n"
-" -c, --customize Panelen configureren\n"
-" -s, --save      Paneel configuraties opslaan\n"
-" -r, --restart   Panelen herstarten\n"
-" -q, --quit      Sessie beëindigen\n"
-" -x, --exit      Panelen afsluiten, zonder bevestiging\n"
-" -a, --add       Nieuwe items toevoegen\n"
-"\n"
 
 #. floating?
 #: ../panel/panel-settings.c:382
+#, fuzzy
 msgid "Panel Type"
-msgstr "Paneel Type"
+msgstr "面板大小："
 
 #: ../panel/panel-settings.c:391
+#, fuzzy
 msgid "Fixed Position"
-msgstr "Vaste positie"
+msgstr "位置"
 
 #: ../panel/panel-settings.c:393
 msgid "Freely Moveable"
-msgstr "Vrij te verplaatsen"
+msgstr ""
 
 #. position
 #: ../panel/panel-settings.c:399
 msgid "Position"
-msgstr "Plaatsing"
+msgstr "位置"
 
 #: ../panel/panel-settings.c:483
+#, fuzzy
 msgid "_Full Width"
-msgstr "_Volledige breedte"
+msgstr "全寬度"
 
 #: ../panel/panel-settings.c:492
+#, fuzzy
 msgid "Auto_hide"
-msgstr "Automatisch verbergen"
+msgstr "自動隱藏"
 
 #: ../panel/panel-settings.c:510
+#, fuzzy
 msgid "Orientation:"
-msgstr "Oriëntatie:"
+msgstr "面板方向："
 
 #: ../panel/panel-settings.c:522
 msgid "Horizontal"
-msgstr "Horizontaal"
+msgstr "水平"
 
 #: ../panel/panel-settings.c:524
 msgid "Vertical"
-msgstr "Verticaal"
+msgstr "垂直"
 
 #: ../panel/panel-settings.c:533
+#, fuzzy
 msgid "Handle Style:"
-msgstr "Handgrepen:"
+msgstr "把手"
 
 #: ../panel/panel-settings.c:545
 msgid "At both sides"
-msgstr "Aan beide zijden"
+msgstr "在兩邊"
 
 #: ../panel/panel-settings.c:547
 msgid "At the start"
-msgstr "Aan het begin"
+msgstr "在開始"
 
 #: ../panel/panel-settings.c:549
 msgid "At the end"
-msgstr "Aan het eind"
+msgstr "在結尾"
 
 #: ../panel/panel-settings.c:583
+#, fuzzy
 msgid "Monitor"
-msgstr "Monitor"
+msgstr "編輯器"
 
 #. size
 #: ../panel/panel-settings.c:665
 msgid "Size"
-msgstr "Grootte"
+msgstr "大小"
 
 #: ../panel/panel-settings.c:676
 msgid "Small"
-msgstr "Klein"
+msgstr "小"
 
 #: ../panel/panel-settings.c:693
 msgid "Large"
-msgstr "Groot"
+msgstr "大"
 
 #. transparency
 #: ../panel/panel-settings.c:701
 msgid "Transparency"
-msgstr "Transparantie"
+msgstr "透明度"
 
 #: ../panel/panel-settings.c:709
 msgid "None"
-msgstr "Geen"
+msgstr "無"
 
 #: ../panel/panel-settings.c:726
 msgid "Full"
-msgstr "Volledig"
+msgstr "全"
 
 #: ../panel/panel-settings.c:1018
 msgid ""
 "Drag items from the list to a panel or move existing items to a new location."
 msgstr ""
-"Sleep items van de lijst naar een paneel of verplaats bestaande items naar "
-"een nieuwe positie."
 
 #: ../panel/panel-settings.c:1036
 msgid "Avalaible Items"
-msgstr "Beschikbare items"
+msgstr ""
 
 #: ../panel/panel-settings.c:1049
 msgid "Add To Selected Panel"
-msgstr "Toevoegen aan het geselecteerde paneel"
+msgstr ""
 
 #: ../panel/panel-settings.c:1255
+#, fuzzy
 msgid "Add Items"
-msgstr "Items toevoegen"
+msgstr "增加新項目(_N)"
 
 #: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
-#, c-format
+#, fuzzy, c-format
 msgid "Could not run \"%s\""
-msgstr "Kon \"%s\" niet uitvoeren"
+msgstr ""
+"無法執行\"%s\":\n"
+"%s"
 
 #: ../plugins/launcher/launcher.c:1137
 msgid "New item"
-msgstr "Nieuw item"
+msgstr "增加新項目"
 
 #: ../plugins/launcher/launcher.c:1138
 msgid "This item has not yet been configured"
-msgstr "Dit item moet nog geconfigureerd worden"
+msgstr "該項目尚未設定"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
-msgstr "Standaard"
+msgstr "預設"
 
 #: ../plugins/launcher/launcher-dialog.c:79
 msgid "Editor"
-msgstr "Editor"
+msgstr "編輯器"
 
 #: ../plugins/launcher/launcher-dialog.c:80
 msgid "File management"
-msgstr "Bestandsbeheer"
+msgstr "檔案管理"
 
 #: ../plugins/launcher/launcher-dialog.c:81
 msgid "Utilities"
-msgstr "Hulpmiddelen"
+msgstr "公用程式"
 
 #: ../plugins/launcher/launcher-dialog.c:82
 msgid "Games"
-msgstr "Games"
+msgstr "遊戲"
 
 #: ../plugins/launcher/launcher-dialog.c:83
 msgid "Help browser"
-msgstr "Handleiding"
+msgstr "求助瀏覽器"
 
 #: ../plugins/launcher/launcher-dialog.c:84
 msgid "Multimedia"
-msgstr "Multimedia"
+msgstr "多媒體"
 
 #: ../plugins/launcher/launcher-dialog.c:85
 msgid "Network"
-msgstr "Netwerk"
+msgstr "網路"
 
+# NOTE 譯文改動by Ambrose
 #: ../plugins/launcher/launcher-dialog.c:86
 msgid "Graphics"
-msgstr "Grafisch"
+msgstr "圖像處理"
 
 #: ../plugins/launcher/launcher-dialog.c:87
 msgid "Printer"
-msgstr "Printer"
+msgstr "印表機"
 
 #: ../plugins/launcher/launcher-dialog.c:88
 msgid "Productivity"
-msgstr "Productiviteit"
+msgstr "生產力"
 
 #: ../plugins/launcher/launcher-dialog.c:89
 msgid "Sound"
-msgstr "Geluid"
+msgstr "聲音"
 
 #: ../plugins/launcher/launcher-dialog.c:90
 msgid "Terminal"
-msgstr "Terminal"
+msgstr "終端機"
 
 #: ../plugins/launcher/launcher-dialog.c:373
 msgid "Select image file"
-msgstr "Plaatje selecteren"
+msgstr "選擇影像檔案"
 
 #: ../plugins/launcher/launcher-dialog.c:418
 msgid "Select command"
-msgstr "Commando selecteren"
+msgstr "選擇指令"
 
 #: ../plugins/launcher/launcher-dialog.c:441
 msgid "Name"
-msgstr "Naam"
+msgstr "名稱"
 
 #: ../plugins/launcher/launcher-dialog.c:459
 msgid "Description"
-msgstr "Beschrijving"
+msgstr "描述"
 
 #: ../plugins/launcher/launcher-dialog.c:514
 msgid "Other..."
-msgstr "Aangepast..."
+msgstr "其他..."
 
 #: ../plugins/launcher/launcher-dialog.c:597
 msgid "Command"
-msgstr "Commando"
+msgstr "指令"
 
 #: ../plugins/launcher/launcher-dialog.c:633
 msgid "Run in _terminal"
-msgstr "Uitvoeren in _terminal"
+msgstr "在終端機中執行(_T)"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "Use _startup notification"
-msgstr "Opstart-_notificatie gebruiken"
+msgstr "使用啟動提示(_S)"
 
 #: ../plugins/launcher/launcher-dialog.c:1104
+#, fuzzy
 msgid "New Item"
-msgstr "Nieuw Item"
+msgstr "增加新項目"
 
 #: ../plugins/launcher/launcher-dialog.c:1209
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
-msgstr ""
-"Het eerste item word getoond op het paneel. Overige items worden in een menu "
-"geplaatst."
+msgstr "清單中的第一個項目會出現在面板上，其餘的項目會顯現在選單中。"
 
 #: ../plugins/launcher/launcher-dialog.c:1246
+#, fuzzy
 msgid "Configure Launcher"
-msgstr "Snelkoppeling configureren"
+msgstr "啟動器"
 
 #: ../plugins/launcher/launcher-dialog.c:1255
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
-msgstr "Snelkoppeling"
+msgstr "啟動器"
 
 #: ../plugins/launcher/launcher-dialog.c:1571
 msgid "Select file"
-msgstr "Bestand selecteren"
+msgstr "選擇檔案"
 
 #: ../plugins/separator/separator.c:241
+#, fuzzy
 msgid "Configure Separator"
-msgstr "Scheidingslijn configureren"
+msgstr "分隔線"
 
 #: ../plugins/separator/separator.c:253
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator"
-msgstr "Scheidingslijn"
+msgstr "分隔線"
 
 #: ../plugins/separator/separator.c:266
+#, fuzzy
 msgid "_Draw Separator"
-msgstr "_Lijn tonen"
+msgstr "分隔線"
 
 #: ../plugins/separator/separator.c:275
 msgid "_Expand"
-msgstr "_Groeien"
+msgstr ""
 
 #: ../plugins/actions/actions.c:295
+#, fuzzy
 msgid "Configure Panel Actions"
-msgstr "Paneelacties configureren"
+msgstr "Xfce 面板設定"
 
 #: ../plugins/actions/actions.c:307
 #: ../plugins/actions/actions.desktop.in.in.h:2
+#, fuzzy
 msgid "Panel Actions"
-msgstr "Paneelacties"
+msgstr "設定面板"
 
 #: ../plugins/actions/actions.c:324
+#, fuzzy
 msgid "Select action type:"
-msgstr "Actie selecteren:"
+msgstr "選擇指令"
 
 #: ../plugins/actions/actions.c:333
+#, fuzzy
 msgid "Lock screen"
-msgstr "Scherm beveiligen"
+msgstr "鎖住螢幕(_L)"
 
 #: ../plugins/actions/actions.c:334
+#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "Afsluiten + Scherm beveiligen"
+msgstr "鎖住螢幕(_L)"
 
 #: ../plugins/tasklist/tasklist.c:320
 msgid "Configure Task List"
-msgstr "Takenlijst configureren"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:332
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+#, fuzzy
 msgid "Task List"
-msgstr "Takenlijst"
+msgstr "工作列表"
 
 #: ../plugins/tasklist/tasklist.c:345
 msgid "Show tasks from _all workspaces"
-msgstr "Taken van _alle bureaubladen tonen"
+msgstr "顯示所有工作區的工作(_A)"
 
 #: ../plugins/tasklist/tasklist.c:355
 msgid "Show application _names"
-msgstr "_Namen van applicaties tonen"
+msgstr "顯示應用程式的名稱(_N)"
 
+# FIXME 譯文有待改進
 #: ../plugins/tasklist/tasklist.c:369
+#, fuzzy
 msgid "Never group tasks"
-msgstr "Taken nooit groeperen"
+msgstr "總是將工作分成群組(_G)"
 
+# FIXME 譯文有待改進
 #: ../plugins/tasklist/tasklist.c:372
+#, fuzzy
 msgid "Automatically group tasks"
-msgstr "Taken automatisch groeperen"
+msgstr "總是將工作分成群組(_G)"
 
+# FIXME 譯文有待改進
 #: ../plugins/tasklist/tasklist.c:375
+#, fuzzy
 msgid "Always group tasks"
-msgstr "Taken altijd groeperen"
+msgstr "總是將工作分成群組(_G)"
 
 #: ../plugins/pager/pager.c:275
 msgid "Configure Pager"
-msgstr "Pager configureren"
+msgstr ""
 
 #: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
-msgstr "Pager"
+msgstr "頁面切換器"
 
 #: ../plugins/pager/pager.c:307
 msgid "Number of rows:"
-msgstr "Aantal rijen:"
+msgstr "行數："
 
 #: ../plugins/pager/pager.c:311
 msgid "Number of columns:"
-msgstr "Aantal kolommen:"
+msgstr "列數："
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
-msgstr "Er is al een systeemvak actief op dit scherm"
+msgstr "此螢幕已經有另一個系統匣正在運行"
 
 #: ../plugins/systray/systray.c:71
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "Kan systeemvak niet registreren: %s"
+msgstr "無法註冊系統匣： %s"
 
 #: ../plugins/systray/systray.c:345
+#, fuzzy
 msgid "Configure Status Area"
-msgstr "Statusgebied configureren"
+msgstr "狀態區"
 
 #: ../plugins/systray/systray.c:357
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Status Area"
-msgstr "Statusgebied"
+msgstr "狀態區"
 
 #: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+#, fuzzy
 msgid "Show _frame"
-msgstr "_Frame tonen"
+msgstr "顯示時間(_T)"
 
 #: ../plugins/iconbox/iconbox.c:748
+#, fuzzy
 msgid "Configure Icon Box"
-msgstr "Iconbox configureren"
+msgstr "Xfce 圖示盒"
 
 #: ../plugins/iconbox/iconbox.c:760
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+#, fuzzy
 msgid "Icon Box"
-msgstr "Iconbox"
+msgstr "圖示盒"
 
 #: ../plugins/iconbox/iconbox.c:774
+#, fuzzy
 msgid "Only show minimized applications"
-msgstr "Enkel geminimaliseerde applicaties tonen"
+msgstr "只顯示最小化的應用程式(_S)"
 
+# NOTE 假如中文內碼為UTF8, 日期格式是「xxxx年xx月xx日　星期ｘ」
+# NOTE 但如果中文內碼為五大碼，GTK會無法顯示星期，變成只有「xxxx年xx月xx日」
+# NOTE 詳情請參見 http://bugzilla.xfce.org/show_bug.cgi?id=332
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
 #. * I used these:
@@ -523,86 +549,387 @@ msgstr "Enkel geminimaliseerde applicaties tonen"
 #.
 #: ../plugins/clock/clock.c:109
 msgid "%A %d %B %Y"
-msgstr "%A, %d %B %Y"
+msgstr "%Y年%B月%d日　%A"
 
 #: ../plugins/clock/clock.c:401
+#, fuzzy
 msgid "Configure Clock"
-msgstr "Klok configureren"
+msgstr "Xfce 時鐘"
 
+#  set names to use in option menus
 #: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#, fuzzy
 msgid "Clock"
-msgstr "Klok"
+msgstr "鎖住"
 
 #: ../plugins/clock/clock.c:420
 msgid "Appearance"
-msgstr "Weergave"
+msgstr "外觀"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:435
 msgid "Analog"
-msgstr "Analoog"
+msgstr "指針式"
 
 #: ../plugins/clock/clock.c:436
 msgid "Digital"
-msgstr "Digitaal"
+msgstr "數位式"
 
 #: ../plugins/clock/clock.c:437
 msgid "LED"
-msgstr "LED"
+msgstr "數位液晶顯示"
 
 #: ../plugins/clock/clock.c:450
 msgid "Clock Options"
-msgstr "Klok-opties"
+msgstr ""
 
 #: ../plugins/clock/clock.c:460
 msgid "Use 24-_hour clock"
-msgstr "24-_uursklok gebruiken"
+msgstr ""
 
 #: ../plugins/clock/clock.c:468
+#, fuzzy
 msgid "Show AM/PM"
-msgstr "AM/PM tonen"
+msgstr "上午/下午"
 
 #: ../plugins/clock/clock.c:476
+#, fuzzy
 msgid "Display seconds"
-msgstr "Secondes weergeven"
+msgstr "讓時間顯示在圖示之前"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Programma-starter met optioneel menu"
+msgstr ""
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
+#, fuzzy
 msgid "Test Plugin"
-msgstr "Test Plugin"
+msgstr "啟動器外掛"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr "Deze plugin heeft geen doel"
+msgstr ""
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "Spatie of scheidingslijn tussen items"
+msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
+#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "Afsluiten of scherm beveiligen"
+msgstr "鎖住螢幕"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+#, fuzzy
 msgid "Show all running applications"
-msgstr "Alle lopende applicaties tonen"
+msgstr "只顯示最小化的應用程式(_S)"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr "Miniatuuroverzicht van alle virtuele bureaubladen"
+msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
+#, fuzzy
 msgid "Show notification icons"
-msgstr "Notificatie-pictogrammen tonen"
+msgstr "顯示通知圖示(_N)"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+#, fuzzy
 msgid "Show icons of all running applications"
-msgstr "Pictogrammen tonen voor alle lopende applicaties"
+msgstr "只顯示最小化的應用程式(_S)"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr "Hoe laat is het?"
+msgstr ""
 
+#~ msgid "Panel Settings"
+#~ msgstr "設定面板"
+
+#~ msgid "Xfce 4 Panel Settings"
+#~ msgstr "Xfce 4 面板設定"
+
+#~ msgid "No data was found. The panel will be empty."
+#~ msgstr "找不到任何資料，面板將會留空。"
+
+#~ msgid "Position:"
+#~ msgstr "位置："
+
+#~ msgid "Command:"
+#~ msgstr "指令："
+
+#~ msgid "Use startup _notification"
+#~ msgstr "使用啟動提示(_N)"
+
+#~ msgid "Other Icon"
+#~ msgstr "其他圖示"
+
+# NOTE 譯文改動by Ambrose
+#~ msgid "Drag file onto this frame to change the icon"
+#~ msgstr "要改變圖示，拖曳檔案到此框架內即可"
+
+#~ msgid "%s: Successfully started without session management"
+#~ msgstr "%s: 成功啟動，但無法使用工作階段管理"
+
+#~ msgid "%s: Successfully started with session management"
+#~ msgstr "%s: 成功啟動，並使用工作階段管理"
+
+#~ msgid "Could not create panel item \"%s\"."
+#~ msgstr "無法建立面板項目「%s」。"
+
+#~ msgid "_Properties..."
+#~ msgstr "屬性(_P)..."
+
+#~ msgid "_Remove"
+#~ msgstr "移除(_R)"
+
+#~ msgid "This item has no configuration options"
+#~ msgstr "該項目沒有設定選項"
+
+#~ msgid "_About Xfce"
+#~ msgstr "關於 Xfce(_A)"
+
+#~ msgid "_Help"
+#~ msgstr "說明(_H)"
+
+#~ msgid "E_xit"
+#~ msgstr "離開(_X)"
+
+#~ msgid "icons|Terminal"
+#~ msgstr "圖示|終端機"
+
+#~ msgid "Settings manager not available"
+#~ msgstr "設定管理程式無法使用"
+
+#~ msgid "%H:%M"
+#~ msgstr "%H:%M"
+
+#~ msgid "Taskbar"
+#~ msgstr "工作列"
+
+#~ msgid "Cannot create MCS client channel"
+#~ msgstr "無法建立 MCS 用戶通道"
+
+#~ msgid "_About"
+#~ msgstr "關於(_A)"
+
+#~ msgid "Medium"
+#~ msgstr "中"
+
+#~ msgid "Huge"
+#~ msgstr "巨大"
+
+#~ msgid "Autohide:"
+#~ msgstr "自動隱藏："
+
+#~ msgid "Behaviour"
+#~ msgstr "特性"
+
+#~ msgid "_Top"
+#~ msgstr "頂部(_T)"
+
+#~ msgid "_Bottom"
+#~ msgstr "底部(_B)"
+
+#~ msgid "Alignment:"
+#~ msgstr "對齊"
+
+#~ msgid "_Left"
+#~ msgstr "左邊(_L)"
+
+#~ msgid "_Center"
+#~ msgstr "中間(_C)"
+
+#~ msgid "_Right"
+#~ msgstr "右邊(_R)"
+
+#~ msgid "Height:"
+#~ msgstr "高度："
+
+#~ msgid "Width:"
+#~ msgstr "闊度："
+
+#~ msgid "_Shrink to fit"
+#~ msgstr "適度縮小(_S)"
+
+#~ msgid "Auto _hide taskbar"
+#~ msgstr "自動隱藏工作列(_H)"
+
+#~ msgid "Show tasklist"
+#~ msgstr "顯示工作列表"
+
+#~ msgid "Show _pager in taskbar"
+#~ msgstr "在工作列中顯示頁面切換器(_P)"
+
+#~ msgid "Status area"
+#~ msgstr "狀態區"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "Components"
+#~ msgstr "元件"
+
+#~ msgid "Icon size"
+#~ msgstr "圖示大小"
+
+# NOTE 假如中文內碼為UTF8, 日期格式是「xxxx年xx月xx日　星期ｘ」
+# NOTE 但如果中文內碼為五大碼，GTK會無法顯示星期，變成只有「xxxx年xx月xx日」
+# NOTE 詳情請參見 http://bugzilla.xfce.org/show_bug.cgi?id=332
+#~ msgid "%A, %d %B %Y"
+#~ msgstr "%Y年%B月%d日　%A"
+
+#~ msgid "Clock type:"
+#~ msgstr "時鐘樣式："
+
+#~ msgid "Hour mode:"
+#~ msgstr "時間模式："
+
+#~ msgid "24 hour"
+#~ msgstr "24 小時"
+
+#~ msgid "12 hour"
+#~ msgstr "12 小時"
+
+#~ msgid "Show seconds:"
+#~ msgstr "顯示秒："
+
+#~ msgid "Flexible space"
+#~ msgstr "彈性空間"
+
+#~ msgid "Development"
+#~ msgstr "開發"
+
+#~ msgid "Settings"
+#~ msgstr "設定"
+
+#~ msgid "System"
+#~ msgstr "系統"
+
+#~ msgid "Windows programs"
+#~ msgstr "Windows程式"
+
+#~ msgid "Edit launcher"
+#~ msgstr "編輯啟動器"
+
+#~ msgid "_Edit"
+#~ msgstr "編輯(_E)"
+
+#~ msgid "_Up"
+#~ msgstr "上(_U)"
+
+#~ msgid "_Down"
+#~ msgstr "下(_D)"
+
+#~ msgid "_Add"
+#~ msgstr "新增(_A)"
+
+#~ msgid "Mail box:"
+#~ msgstr "郵件箱："
+
+#~ msgid "New mail command:"
+#~ msgstr "新郵件指令："
+
+#~ msgid "Command to run when new mail arrives"
+#~ msgstr "有新郵件時所執行的指令"
+
+#~ msgid "Command to run when the button on the panel is clicked"
+#~ msgstr "在面板上點選該按鈕時所執行的指令"
+
+#~ msgid "Interval (sec):"
+#~ msgstr "間隔（秒）："
+
+#~ msgid "Mail checker"
+#~ msgstr "檢查郵件"
+
+#~ msgid "Graphical pager"
+#~ msgstr "圖形化視窗切換器"
+
+#~ msgid "Desktop switcher"
+#~ msgstr "桌面切換器"
+
+#~ msgid ""
+#~ "Access to the configuration system has been disabled.\n"
+#~ "\n"
+#~ "Ask your system administrator for more information"
+#~ msgstr ""
+#~ "設定系統的作業已被禁止。\n"
+#~ "\n"
+#~ "詳情請向你的系統管理員諮詢"
+
+#~ msgid "tip|Exit"
+#~ msgstr "退出"
+
+#~ msgid "tip|Setup"
+#~ msgstr "設定"
+
+#~ msgid "tip|Info"
+#~ msgstr "資訊"
+
+#~ msgid "Exit"
+#~ msgstr "退出"
+
+#~ msgid "Setup"
+#~ msgstr "設定"
+
+#~ msgid "Info"
+#~ msgstr "資訊"
+
+#~ msgid "Button 1:"
+#~ msgstr "按鈕 1："
+
+#~ msgid "Button 2:"
+#~ msgstr "按鈕 2："
+
+#~ msgid "_Hide"
+#~ msgstr "隱藏(_H)"
+
+#~ msgid "System buttons"
+#~ msgstr "系統按鈕"
+
+#~ msgid "Iconbox Settings"
+#~ msgstr "設定圖示盒"
+
+#~ msgid "Xfce 4 Iconbox Settings"
+#~ msgstr "Xfce 4 圖示盒設定"
+
+#~ msgid "Taskbar Settings"
+#~ msgstr "設定 Xfce 4 的工作列"
+
+#~ msgid "Xfce 4 Taskbar Settings"
+#~ msgstr "Xfce 4 工作列設定"
+
+#~ msgid "Appfinder"
+#~ msgstr "程式搜尋器"
+
+#~ msgid "Drag file to print"
+#~ msgstr "拖弋檔案去列印"
+
+#~ msgid "File manager"
+#~ msgstr "檔案管理器"
+
+#~ msgid "Find and run applications"
+#~ msgstr "尋找並執行應用程式"
+
+#~ msgid "Konqueror"
+#~ msgstr "Konqueror"
+
+#~ msgid "Konqueror File Manager"
+#~ msgstr "Konqueror檔案管理器"
+
+#~ msgid "Manual"
+#~ msgstr "手冊"
+
+#~ msgid "Mozilla Web Browser"
+#~ msgstr "Mozilla網頁瀏覽器"
+
+#~ msgid "Music player"
+#~ msgstr "音樂播放程式"
+
+#~ msgid "Nautilus"
+#~ msgstr "Nautilus"
+
+#~ msgid "Nautilus File Manager"
+#~ msgstr "Nautilus檔案管理器"
+
+#~ msgid "Printer Management"
+#~ msgstr "列印管理"

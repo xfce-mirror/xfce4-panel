@@ -1,16 +1,18 @@
-# Dutch translations for xfce4-panel.
-# Copyright (C) 2005 Jasper Huijsmans <jasper@xfce.org>
+# Polish translations for xfce4-panel package.
+# Copyright (C) 2002-2005 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-# Jasper Huijsmans <jasper@xfce.org>, 2005.
+# Paweł Pastuła <pastulap@poczta.onet.pl>, 2003.
+# Daniel Mróz <beorn@alpha.pl>, 2003.
+# Wit Wiliński <madman@berlios.de>, 2005.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.12\n"
+"Project-Id-Version: xfce4-panel 4.3.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-09-28 10:01+0200\n"
-"PO-Revision-Date: 2005-09-28 10:02+0200\n"
-"Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
-"Language-Team: Dutch <vertaling@vrijschrift.org>\n"
+"PO-Revision-Date: 2005-08-17 22:58+0900\n"
+"Last-Translator: Wit Wiliński <madman@berlios.de>\n"
+"Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,105 +20,109 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:167
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "Een item was onverwacht verwijderd: \"%s\"."
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:664
-#, c-format
+#, fuzzy, c-format
 msgid "Remove \"%s\"?"
-msgstr "\"%s\" verwijderen?"
+msgstr "Usunąć element %s?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel.c:515
 #: ../panel/panel-app.c:558 ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
 #: ../plugins/launcher/launcher.c:357
 msgid "Xfce Panel"
-msgstr "Xfce Paneel"
+msgstr "Panel Xfce"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:671
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
-"Het item zal verwijderd worden van het paneel en de bijbehorende "
-"configuratie gaat verloren."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:755
+#, fuzzy
 msgid "Item Preferences"
-msgstr "Item configureren"
+msgstr "Ustawienia elementu"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+#, fuzzy
 msgid "Remove Item"
-msgstr "Item verwijderen"
+msgstr "Usunąć element %s?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:775 ../panel/panel.c:540
 #: ../panel/panel-settings.c:1253
 msgid "Panel Preferences"
-msgstr "Paneel configureren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:783 ../panel/panel.c:547
 msgid "Manage Panel Items"
-msgstr "Items beheren"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:791 ../panel/panel.c:554
+#, fuzzy
 msgid "New Panel"
-msgstr "Nieuw Paneel"
+msgstr "Panel Xfce"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:799 ../panel/panel.c:561
+#, fuzzy
 msgid "Remove this Panel"
-msgstr "Dit paneel verwijderen"
+msgstr "Usunąć element %s?"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813
 msgid "About this Item"
-msgstr "Item info"
+msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:823 ../panel/panel.c:572
+#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Xfce Paneel info"
+msgstr "Panel Xfce"
 
 #: ../panel/panel.c:524 ../plugins/actions/actions.c:332
 msgid "Quit"
-msgstr "Afsluiten"
+msgstr ""
 
 #: ../panel/panel.c:530
+#, fuzzy
 msgid "Restart"
-msgstr "Herstarten"
+msgstr "_Restart"
 
 #: ../panel/panel-item-manager.c:327 ../panel/panel-item-manager.c:335
-#, c-format
+#, fuzzy, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Kon \"%s\" module niet openen"
+msgstr ""
+"Błąd uruchomienia \"%s\":\n"
+"%s"
 
 #: ../panel/panel-app.c:180
 msgid "Are you sure you want to exit?"
-msgstr "Weet u zeker dat u wil afsluiten?"
+msgstr "Czy na pewno chcesz wyjść?"
 
 #: ../panel/panel-app.c:560
+#, fuzzy
 msgid "Exit Xfce Panel?"
-msgstr "Het Xfce Paneel afsluiten?"
+msgstr "Panel Xfce"
 
 #: ../panel/panel-app.c:561
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
-"U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
 
 #: ../panel/panel-app.c:581
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Paneel \"%d\" verwijderen?"
+msgstr ""
 
 #: ../panel/panel-app.c:585
 msgid "The panel will be removed and its configuration will be lost."
 msgstr ""
-"Het paneel zal verwijderd worden en de bijbehorende configuratie gaat "
-"verloren."
 
 #: ../panel/panel-app.c:618
 msgid "Developer"
-msgstr "Ontwikkelaar"
+msgstr ""
 
 #: ../panel/main.c:46
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -128,12 +134,13 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Xfce Paneel %s\n"
+" Panel Xfce\n"
+" Wersja %s\n"
 "\n"
-" Onderdeel van de Xfce Werkomgeving\n"
+" Część środowiska graficznego Xfce\n"
 " http://www.xfce.org\n"
 "\n"
-" Distributie is toegestaan volgens de termen van de GNU GPL.\n"
+" Program na licencji GNU GPL.\n"
 "\n"
 
 #: ../panel/main.c:52
@@ -142,8 +149,6 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
-" Gebruik: %s [OPTIES]\n"
-"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -159,156 +164,154 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
-" OPTIES\n"
-" -h, --help      Dit bericht tonen en afsluiten\n"
-" -v, --version   Dit bericht tonen en afsluiten\n"
-" -c, --customize Panelen configureren\n"
-" -s, --save      Paneel configuraties opslaan\n"
-" -r, --restart   Panelen herstarten\n"
-" -q, --quit      Sessie beëindigen\n"
-" -x, --exit      Panelen afsluiten, zonder bevestiging\n"
-" -a, --add       Nieuwe items toevoegen\n"
-"\n"
 
 #. floating?
 #: ../panel/panel-settings.c:382
+#, fuzzy
 msgid "Panel Type"
-msgstr "Paneel Type"
+msgstr "Rozmiar panelu:"
 
 #: ../panel/panel-settings.c:391
+#, fuzzy
 msgid "Fixed Position"
-msgstr "Vaste positie"
+msgstr "Pozycja"
 
 #: ../panel/panel-settings.c:393
 msgid "Freely Moveable"
-msgstr "Vrij te verplaatsen"
+msgstr ""
 
 #. position
 #: ../panel/panel-settings.c:399
 msgid "Position"
-msgstr "Plaatsing"
+msgstr "Pozycja"
 
 #: ../panel/panel-settings.c:483
+#, fuzzy
 msgid "_Full Width"
-msgstr "_Volledige breedte"
+msgstr "Szerokość całego ekranu:"
 
 #: ../panel/panel-settings.c:492
+#, fuzzy
 msgid "Auto_hide"
-msgstr "Automatisch verbergen"
+msgstr "Automatyczne ukrywanie"
 
 #: ../panel/panel-settings.c:510
+#, fuzzy
 msgid "Orientation:"
-msgstr "Oriëntatie:"
+msgstr "Położenie panelu:"
 
 #: ../panel/panel-settings.c:522
 msgid "Horizontal"
-msgstr "Horizontaal"
+msgstr "Poziome"
 
 #: ../panel/panel-settings.c:524
 msgid "Vertical"
-msgstr "Verticaal"
+msgstr "Pionowe"
 
 #: ../panel/panel-settings.c:533
+#, fuzzy
 msgid "Handle Style:"
-msgstr "Handgrepen:"
+msgstr "Uchwyty:"
 
 #: ../panel/panel-settings.c:545
 msgid "At both sides"
-msgstr "Aan beide zijden"
+msgstr "Na obu brzegach"
 
 #: ../panel/panel-settings.c:547
 msgid "At the start"
-msgstr "Aan het begin"
+msgstr "Na początku"
 
 #: ../panel/panel-settings.c:549
 msgid "At the end"
-msgstr "Aan het eind"
+msgstr "Na końcu"
 
 #: ../panel/panel-settings.c:583
+#, fuzzy
 msgid "Monitor"
-msgstr "Monitor"
+msgstr "Edytor"
 
 #. size
 #: ../panel/panel-settings.c:665
 msgid "Size"
-msgstr "Grootte"
+msgstr "Rozmiar"
 
 #: ../panel/panel-settings.c:676
 msgid "Small"
-msgstr "Klein"
+msgstr "Mały"
 
 #: ../panel/panel-settings.c:693
 msgid "Large"
-msgstr "Groot"
+msgstr "Duży"
 
 #. transparency
 #: ../panel/panel-settings.c:701
 msgid "Transparency"
-msgstr "Transparantie"
+msgstr "Przezroczystość"
 
 #: ../panel/panel-settings.c:709
 msgid "None"
-msgstr "Geen"
+msgstr "Brak"
 
 #: ../panel/panel-settings.c:726
 msgid "Full"
-msgstr "Volledig"
+msgstr "Pełna"
 
 #: ../panel/panel-settings.c:1018
 msgid ""
 "Drag items from the list to a panel or move existing items to a new location."
 msgstr ""
-"Sleep items van de lijst naar een paneel of verplaats bestaande items naar "
-"een nieuwe positie."
 
 #: ../panel/panel-settings.c:1036
 msgid "Avalaible Items"
-msgstr "Beschikbare items"
+msgstr ""
 
 #: ../panel/panel-settings.c:1049
 msgid "Add To Selected Panel"
-msgstr "Toevoegen aan het geselecteerde paneel"
+msgstr ""
 
 #: ../panel/panel-settings.c:1255
+#, fuzzy
 msgid "Add Items"
-msgstr "Items toevoegen"
+msgstr "Dodaj _nowy element"
 
 #: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
-#, c-format
+#, fuzzy, c-format
 msgid "Could not run \"%s\""
-msgstr "Kon \"%s\" niet uitvoeren"
+msgstr ""
+"Błąd uruchomienia \"%s\":\n"
+"%s"
 
 #: ../plugins/launcher/launcher.c:1137
 msgid "New item"
-msgstr "Nieuw item"
+msgstr "Nowy element"
 
 #: ../plugins/launcher/launcher.c:1138
 msgid "This item has not yet been configured"
-msgstr "Dit item moet nog geconfigureerd worden"
+msgstr "Ten element nie został jeszcze skonfigurowany"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
-msgstr "Standaard"
+msgstr "Domyślny"
 
 #: ../plugins/launcher/launcher-dialog.c:79
 msgid "Editor"
-msgstr "Editor"
+msgstr "Edytor"
 
 #: ../plugins/launcher/launcher-dialog.c:80
 msgid "File management"
-msgstr "Bestandsbeheer"
+msgstr "Menedżer plików"
 
 #: ../plugins/launcher/launcher-dialog.c:81
 msgid "Utilities"
-msgstr "Hulpmiddelen"
+msgstr "Narzędzia"
 
 #: ../plugins/launcher/launcher-dialog.c:82
 msgid "Games"
-msgstr "Games"
+msgstr "Gry"
 
 #: ../plugins/launcher/launcher-dialog.c:83
 msgid "Help browser"
-msgstr "Handleiding"
+msgstr "Przeglądarka pomocy"
 
 #: ../plugins/launcher/launcher-dialog.c:84
 msgid "Multimedia"
@@ -316,23 +319,23 @@ msgstr "Multimedia"
 
 #: ../plugins/launcher/launcher-dialog.c:85
 msgid "Network"
-msgstr "Netwerk"
+msgstr "Sieć"
 
 #: ../plugins/launcher/launcher-dialog.c:86
 msgid "Graphics"
-msgstr "Grafisch"
+msgstr "Grafika"
 
 #: ../plugins/launcher/launcher-dialog.c:87
 msgid "Printer"
-msgstr "Printer"
+msgstr "Drukarka"
 
 #: ../plugins/launcher/launcher-dialog.c:88
 msgid "Productivity"
-msgstr "Productiviteit"
+msgstr "Produktywność"
 
 #: ../plugins/launcher/launcher-dialog.c:89
 msgid "Sound"
-msgstr "Geluid"
+msgstr "Dźwięk"
 
 #: ../plugins/launcher/launcher-dialog.c:90
 msgid "Terminal"
@@ -340,178 +343,191 @@ msgstr "Terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:373
 msgid "Select image file"
-msgstr "Plaatje selecteren"
+msgstr "Wybierz plik graficzny"
 
 #: ../plugins/launcher/launcher-dialog.c:418
 msgid "Select command"
-msgstr "Commando selecteren"
+msgstr "Wybierz polecenie"
 
 #: ../plugins/launcher/launcher-dialog.c:441
 msgid "Name"
-msgstr "Naam"
+msgstr "Nazwa"
 
 #: ../plugins/launcher/launcher-dialog.c:459
 msgid "Description"
-msgstr "Beschrijving"
+msgstr "Opis"
 
 #: ../plugins/launcher/launcher-dialog.c:514
 msgid "Other..."
-msgstr "Aangepast..."
+msgstr "Inna..."
 
 #: ../plugins/launcher/launcher-dialog.c:597
 msgid "Command"
-msgstr "Commando"
+msgstr "Polecenie"
 
 #: ../plugins/launcher/launcher-dialog.c:633
 msgid "Run in _terminal"
-msgstr "Uitvoeren in _terminal"
+msgstr "Uruchom w _terminalu"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "Use _startup notification"
-msgstr "Opstart-_notificatie gebruiken"
+msgstr "Użyj p_owiadomienia o uruchamianiu"
 
 #: ../plugins/launcher/launcher-dialog.c:1104
+#, fuzzy
 msgid "New Item"
-msgstr "Nieuw Item"
+msgstr "Nowy element"
 
 #: ../plugins/launcher/launcher-dialog.c:1209
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
-"Het eerste item word getoond op het paneel. Overige items worden in een menu "
-"geplaatst."
+"Pierwszy element na liście jest widoczny w panelu. Pozostałe elementy "
+"pojawią się w menu."
 
 #: ../plugins/launcher/launcher-dialog.c:1246
+#, fuzzy
 msgid "Configure Launcher"
-msgstr "Snelkoppeling configureren"
+msgstr "Aktywator"
 
 #: ../plugins/launcher/launcher-dialog.c:1255
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
-msgstr "Snelkoppeling"
+msgstr "Aktywator"
 
 #: ../plugins/launcher/launcher-dialog.c:1571
 msgid "Select file"
-msgstr "Bestand selecteren"
+msgstr "Wybierz plik"
 
 #: ../plugins/separator/separator.c:241
+#, fuzzy
 msgid "Configure Separator"
-msgstr "Scheidingslijn configureren"
+msgstr "Separator"
 
 #: ../plugins/separator/separator.c:253
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator"
-msgstr "Scheidingslijn"
+msgstr "Separator"
 
 #: ../plugins/separator/separator.c:266
+#, fuzzy
 msgid "_Draw Separator"
-msgstr "_Lijn tonen"
+msgstr "Separator"
 
 #: ../plugins/separator/separator.c:275
 msgid "_Expand"
-msgstr "_Groeien"
+msgstr ""
 
 #: ../plugins/actions/actions.c:295
+#, fuzzy
 msgid "Configure Panel Actions"
-msgstr "Paneelacties configureren"
+msgstr "Ustawienia panelu Xfce"
 
 #: ../plugins/actions/actions.c:307
 #: ../plugins/actions/actions.desktop.in.in.h:2
+#, fuzzy
 msgid "Panel Actions"
-msgstr "Paneelacties"
+msgstr "Ustawienia panelu"
 
 #: ../plugins/actions/actions.c:324
+#, fuzzy
 msgid "Select action type:"
-msgstr "Actie selecteren:"
+msgstr "Wybierz polecenie"
 
 #: ../plugins/actions/actions.c:333
+#, fuzzy
 msgid "Lock screen"
-msgstr "Scherm beveiligen"
+msgstr "Zab_lokuj ekran"
 
 #: ../plugins/actions/actions.c:334
+#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "Afsluiten + Scherm beveiligen"
+msgstr "Zab_lokuj ekran"
 
 #: ../plugins/tasklist/tasklist.c:320
 msgid "Configure Task List"
-msgstr "Takenlijst configureren"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:332
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+#, fuzzy
 msgid "Task List"
-msgstr "Takenlijst"
+msgstr "Lista zadań"
 
 #: ../plugins/tasklist/tasklist.c:345
 msgid "Show tasks from _all workspaces"
-msgstr "Taken van _alle bureaubladen tonen"
+msgstr "Pokaż z_adania z wszystkich biurek"
 
 #: ../plugins/tasklist/tasklist.c:355
 msgid "Show application _names"
-msgstr "_Namen van applicaties tonen"
+msgstr "Pokaż _nazwy programów"
 
 #: ../plugins/tasklist/tasklist.c:369
 msgid "Never group tasks"
-msgstr "Taken nooit groeperen"
+msgstr "Nie grupuj zadań"
 
 #: ../plugins/tasklist/tasklist.c:372
 msgid "Automatically group tasks"
-msgstr "Taken automatisch groeperen"
+msgstr "Automatycznie grupuj zadania"
 
 #: ../plugins/tasklist/tasklist.c:375
 msgid "Always group tasks"
-msgstr "Taken altijd groeperen"
+msgstr "Zawsze grupuj zadania"
 
 #: ../plugins/pager/pager.c:275
 msgid "Configure Pager"
-msgstr "Pager configureren"
+msgstr ""
 
 #: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
-msgstr "Pager"
+msgstr ""
 
 #: ../plugins/pager/pager.c:307
 msgid "Number of rows:"
-msgstr "Aantal rijen:"
+msgstr "Ilość wierszy:"
 
 #: ../plugins/pager/pager.c:311
 msgid "Number of columns:"
-msgstr "Aantal kolommen:"
+msgstr "Ilość kolumn:"
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
-msgstr "Er is al een systeemvak actief op dit scherm"
+msgstr "Obszar powiadomień jest już uruchomiony na tym ekranie"
 
 #: ../plugins/systray/systray.c:71
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "Kan systeemvak niet registreren: %s"
+msgstr "Nie można zarejestrować obszaru powiadomień: %s"
 
 #: ../plugins/systray/systray.c:345
+#, fuzzy
 msgid "Configure Status Area"
-msgstr "Statusgebied configureren"
+msgstr "Pole statusu"
 
 #: ../plugins/systray/systray.c:357
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Status Area"
-msgstr "Statusgebied"
+msgstr "Pole statusu"
 
 #: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+#, fuzzy
 msgid "Show _frame"
-msgstr "_Frame tonen"
+msgstr "Pokaż ze_gar"
 
 #: ../plugins/iconbox/iconbox.c:748
 msgid "Configure Icon Box"
-msgstr "Iconbox configureren"
+msgstr ""
 
 #: ../plugins/iconbox/iconbox.c:760
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr "Iconbox"
+msgstr ""
 
 #: ../plugins/iconbox/iconbox.c:774
+#, fuzzy
 msgid "Only show minimized applications"
-msgstr "Enkel geminimaliseerde applicaties tonen"
+msgstr "P_okazuj tylko zminimalizowane aplikacje"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -523,28 +539,30 @@ msgstr "Enkel geminimaliseerde applicaties tonen"
 #.
 #: ../plugins/clock/clock.c:109
 msgid "%A %d %B %Y"
-msgstr "%A, %d %B %Y"
+msgstr "%A, %e %B %Y"
 
 #: ../plugins/clock/clock.c:401
+#, fuzzy
 msgid "Configure Clock"
-msgstr "Klok configureren"
+msgstr "Zegar Xfce"
 
 #: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#, fuzzy
 msgid "Clock"
-msgstr "Klok"
+msgstr "Zablokuj"
 
 #: ../plugins/clock/clock.c:420
 msgid "Appearance"
-msgstr "Weergave"
+msgstr "Wygląd"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:435
 msgid "Analog"
-msgstr "Analoog"
+msgstr "Analogowy"
 
 #: ../plugins/clock/clock.c:436
 msgid "Digital"
-msgstr "Digitaal"
+msgstr "Cyfrowy"
 
 #: ../plugins/clock/clock.c:437
 msgid "LED"
@@ -552,57 +570,341 @@ msgstr "LED"
 
 #: ../plugins/clock/clock.c:450
 msgid "Clock Options"
-msgstr "Klok-opties"
+msgstr ""
 
 #: ../plugins/clock/clock.c:460
 msgid "Use 24-_hour clock"
-msgstr "24-_uursklok gebruiken"
+msgstr ""
 
 #: ../plugins/clock/clock.c:468
+#, fuzzy
 msgid "Show AM/PM"
-msgstr "AM/PM tonen"
+msgstr "AM/PM"
 
 #: ../plugins/clock/clock.c:476
+#, fuzzy
 msgid "Display seconds"
-msgstr "Secondes weergeven"
+msgstr "Pokaż zegar przed ikonami"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Programma-starter met optioneel menu"
+msgstr ""
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
 msgid "Test Plugin"
-msgstr "Test Plugin"
+msgstr ""
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr "Deze plugin heeft geen doel"
+msgstr ""
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "Spatie of scheidingslijn tussen items"
+msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
+#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "Afsluiten of scherm beveiligen"
+msgstr "Zablokuj ekran"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+#, fuzzy
 msgid "Show all running applications"
-msgstr "Alle lopende applicaties tonen"
+msgstr "P_okazuj tylko zminimalizowane aplikacje"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr "Miniatuuroverzicht van alle virtuele bureaubladen"
+msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
+#, fuzzy
 msgid "Show notification icons"
-msgstr "Notificatie-pictogrammen tonen"
+msgstr "Pokaż ikony powiadomie_nia"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+#, fuzzy
 msgid "Show icons of all running applications"
-msgstr "Pictogrammen tonen voor alle lopende applicaties"
+msgstr "P_okazuj tylko zminimalizowane aplikacje"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr "Hoe laat is het?"
+msgstr ""
 
+#~ msgid "Panel Settings"
+#~ msgstr "Ustawienia panelu"
+
+#~ msgid "Xfce 4 Panel Settings"
+#~ msgstr "Ustawienia panelu Xfce 4"
+
+#~ msgid "No data was found. The panel will be empty."
+#~ msgstr "Nie znaleziono ustawień. Panel będzie pusty."
+
+#~ msgid "Position:"
+#~ msgstr "Pozycja:"
+
+#~ msgid "Command:"
+#~ msgstr "Polecenie:"
+
+#~ msgid "Use startup _notification"
+#~ msgstr "_Powiadom o uruchomieniu"
+
+#~ msgid "Other Icon"
+#~ msgstr "Inna ikona"
+
+#~ msgid "Drag file onto this frame to change the icon"
+#~ msgstr "Przeciągnij plik do tej ramki aby zmienić ikonę"
+
+#~ msgid "%s: Successfully started without session management"
+#~ msgstr "%s: Poprawnie uruchomiony bez zarządzania sesją"
+
+#~ msgid "%s: Successfully started with session management"
+#~ msgstr "%s: Poprawnie uruchomiony z zarządzaniem sesją"
+
+#~ msgid "Could not create panel item \"%s\"."
+#~ msgstr "Nie można utworzyć elementu panelu \"%s\"."
+
+#~ msgid "_Properties..."
+#~ msgstr "_Właściwości..."
+
+#~ msgid "_Remove"
+#~ msgstr "_Usuń"
+
+#~ msgid "This item has no configuration options"
+#~ msgstr "Ten element nie ma konfigurowalnych opcji"
+
+#~ msgid "_About Xfce"
+#~ msgstr "_O Xfce"
+
+#~ msgid "_Help"
+#~ msgstr "Pomo_c"
+
+#~ msgid "E_xit"
+#~ msgstr "W_yjście"
+
+#~ msgid "icons|Terminal"
+#~ msgstr "Terminal"
+
+#~ msgid "Settings manager not available"
+#~ msgstr "Menadżer ustawień niedostępny"
+
+#~ msgid "%H:%M"
+#~ msgstr "%H:%M"
+
+#~ msgid "Taskbar"
+#~ msgstr "Pasek zadań"
+
+#~ msgid "_About"
+#~ msgstr "_O Xfce"
+
+#~ msgid "Medium"
+#~ msgstr "Średni"
+
+#~ msgid "Huge"
+#~ msgstr "Ogromny"
+
+#~ msgid "Autohide:"
+#~ msgstr "Automatyczne ukrywanie:"
+
+#~ msgid "Behaviour"
+#~ msgstr "Zachowanie"
+
+#~ msgid "_Top"
+#~ msgstr "_Góra"
+
+#~ msgid "_Bottom"
+#~ msgstr "_Dół"
+
+#~ msgid "Alignment:"
+#~ msgstr "Wyrównanie:"
+
+#~ msgid "_Left"
+#~ msgstr "_Lewo"
+
+#~ msgid "_Center"
+#~ msgstr "Śr_odek"
+
+#~ msgid "_Right"
+#~ msgstr "P_rawo"
+
+#~ msgid "Height:"
+#~ msgstr "Wysokość:"
+
+#~ msgid "Width:"
+#~ msgstr "Szerokość:"
+
+#~ msgid "_Shrink to fit"
+#~ msgstr "Zmn_iejsz, by dopasować"
+
+#~ msgid "Auto _hide taskbar"
+#~ msgstr "Automatycznie u_krywaj pasek zadań"
+
+#~ msgid "Show tasklist"
+#~ msgstr "Pokaż listę zadań"
+
+#~ msgid "Always _group tasks"
+#~ msgstr "Zawsze _grupuj zadania"
+
+#~ msgid "Show _pager in taskbar"
+#~ msgstr "Pokaż _pager na pasku zadań"
+
+#~ msgid "Status area"
+#~ msgstr "Obszar statusu"
+
+#~ msgid "Show _time"
+#~ msgstr "Pokaż ze_gar"
+
+#~ msgid "General"
+#~ msgstr "Ogólne"
+
+#~ msgid "Components"
+#~ msgstr "Składniki"
+
+#~ msgid "Icon size"
+#~ msgstr "Rozmiar ikon"
+
+#~ msgid "%A, %d %B %Y"
+#~ msgstr "%A, %e %B %Y"
+
+#~ msgid "Clock type:"
+#~ msgstr "Typ zegara:"
+
+#~ msgid "Hour mode:"
+#~ msgstr "Tryb:"
+
+#~ msgid "24 hour"
+#~ msgstr "24-godzinny"
+
+#~ msgid "12 hour"
+#~ msgstr "12-godzinny"
+
+#~ msgid "Show seconds:"
+#~ msgstr "Pokaż sekundy:"
+
+#~ msgid "Flexible space"
+#~ msgstr "Swobodny odstęp"
+
+#~ msgid "Development"
+#~ msgstr "Programowanie"
+
+#~ msgid "Settings"
+#~ msgstr "Ustawienia"
+
+#~ msgid "System"
+#~ msgstr "System"
+
+#~ msgid "Edit launcher"
+#~ msgstr "Edycja aktywatora"
+
+#~ msgid "_Edit"
+#~ msgstr "_Edycja"
+
+#~ msgid "_Up"
+#~ msgstr "_Góra"
+
+#~ msgid "_Down"
+#~ msgstr "_Dół"
+
+#~ msgid "_Add"
+#~ msgstr "Dod_aj"
+
+#~ msgid "Mail box:"
+#~ msgstr "Skrzynka pocztowa:"
+
+#~ msgid "New mail command:"
+#~ msgstr "Po nadejściu poczty:"
+
+#~ msgid "Command to run when new mail arrives"
+#~ msgstr "Polecenie do uruchomienia po otrzymaniu nowej poczty"
+
+#~ msgid "Command to run when the button on the panel is clicked"
+#~ msgstr "Polecenie do uruchomienia po naciśnieciu na przycisku panelu"
+
+#~ msgid "Interval (sec):"
+#~ msgstr "Sprawdź co (sek):"
+
+#~ msgid "Mail checker"
+#~ msgstr "Sprawdzenie poczty"
+
+#~ msgid "Graphical pager"
+#~ msgstr "Lista obszarów roboczych"
+
+#~ msgid "Desktop switcher"
+#~ msgstr "Przełącznik obszaru roboczego"
+
+#~ msgid ""
+#~ "Access to the configuration system has been disabled.\n"
+#~ "\n"
+#~ "Ask your system administrator for more information"
+#~ msgstr ""
+#~ "Dostęp do systemu konfiguracyjnego został zablokowany.\n"
+#~ "\n"
+#~ "Zapytaj administratora systemu o więcej informacji"
+
+#~ msgid "tip|Exit"
+#~ msgstr "Zakończ"
+
+#~ msgid "tip|Setup"
+#~ msgstr "Ustawienia"
+
+#~ msgid "tip|Info"
+#~ msgstr "Informacje"
+
+#~ msgid "Exit"
+#~ msgstr "Zakończ"
+
+#~ msgid "Setup"
+#~ msgstr "Ustawienia"
+
+#~ msgid "Info"
+#~ msgstr "Informacje"
+
+#~ msgid "Button 1:"
+#~ msgstr "Przycisk 1:"
+
+#~ msgid "Button 2:"
+#~ msgstr "Przycisk 2:"
+
+#~ msgid "_Hide"
+#~ msgstr "U_kryj"
+
+#~ msgid "System buttons"
+#~ msgstr "Przyciski systemowe"
+
+#~ msgid "Taskbar Settings"
+#~ msgstr "Ustawienia paska zadań"
+
+#~ msgid "Appfinder"
+#~ msgstr "Appfinder"
+
+#~ msgid "Drag file to print"
+#~ msgstr "Przeciągnij plik, aby go wydrukować"
+
+#~ msgid "File manager"
+#~ msgstr "Menadżer plików"
+
+#~ msgid "Find and run applications"
+#~ msgstr "Znajdź i uruchom aplikacje"
+
+#~ msgid "Konqueror"
+#~ msgstr "Konqueror"
+
+#~ msgid "Konqueror File Manager"
+#~ msgstr "Menadżer plików Konqueror"
+
+#~ msgid "Manual"
+#~ msgstr "Podręcznik"
+
+#~ msgid "Mozilla Web Browser"
+#~ msgstr "Przęglądarka internetowa Mozilla"
+
+#~ msgid "Music player"
+#~ msgstr "Odtwarzacz muzyki"
+
+#~ msgid "Nautilus"
+#~ msgstr "Nautilus"
+
+#~ msgid "Nautilus File Manager"
+#~ msgstr "Menadżer plików Nautilus"
+
+#~ msgid "Printer Management"
+#~ msgstr "Zarządzanie drukarkami"

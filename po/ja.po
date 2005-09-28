@@ -1,0 +1,934 @@
+# $Id: ja.po 17804 2005-09-24 07:45:44Z daichi $
+#
+# Japanese translations for xfce4-panel package.
+# Copyright (C) 2002-2005 The Xfce development team.
+# This file is distributed under the same license as the xfce4-panel package.
+# Zhao Ji <zhao-ji@awz.ne.jp>, 2003.
+# Daichi Kawahata <daichi@xfce.org>, 2005.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel 4.3.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-09-28 10:01+0200\n"
+"PO-Revision-Date: 2005-08-19 20:48+0900\n"
+"Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
+"Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../libxfce4panel/xfce-panel-external-item.c:167
+#, c-format
+msgid "An item was unexpectedly removed: \"%s\"."
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:664
+#, fuzzy, c-format
+msgid "Remove \"%s\"?"
+msgstr "アイテム %s を削除しますか？"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel.c:515
+#: ../panel/panel-app.c:558 ../panel/panel-app.c:583 ../panel/panel-app.c:610
+#: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
+#: ../plugins/launcher/launcher.c:357
+msgid "Xfce Panel"
+msgstr "Xfce パネル"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:671
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr ""
+
+#. configure, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:755
+#, fuzzy
+msgid "Item Preferences"
+msgstr "アイテムのプロパティ"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+#, fuzzy
+msgid "Remove Item"
+msgstr "アイテム %s を削除しますか？"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:775 ../panel/panel.c:540
+#: ../panel/panel-settings.c:1253
+msgid "Panel Preferences"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:783 ../panel/panel.c:547
+msgid "Manage Panel Items"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:791 ../panel/panel.c:554
+#, fuzzy
+msgid "New Panel"
+msgstr "Xfce パネル"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:799 ../panel/panel.c:561
+#, fuzzy
+msgid "Remove this Panel"
+msgstr "アイテム %s を削除しますか？"
+
+#. about item, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813
+msgid "About this Item"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:823 ../panel/panel.c:572
+#, fuzzy
+msgid "About the Xfce Panel"
+msgstr "Xfce パネル"
+
+#: ../panel/panel.c:524 ../plugins/actions/actions.c:332
+msgid "Quit"
+msgstr ""
+
+#: ../panel/panel.c:530
+#, fuzzy
+msgid "Restart"
+msgstr "再起動(_R)"
+
+#: ../panel/panel-item-manager.c:327 ../panel/panel-item-manager.c:335
+#, fuzzy, c-format
+msgid "Could not open \"%s\" module"
+msgstr ""
+"\"%s\" を実行できませんでした:\n"
+"%s"
+
+#: ../panel/panel-app.c:180
+msgid "Are you sure you want to exit?"
+msgstr "本当に終了しても宜しいですか？"
+
+#: ../panel/panel-app.c:560
+#, fuzzy
+msgid "Exit Xfce Panel?"
+msgstr "Xfce パネル"
+
+#: ../panel/panel-app.c:561
+msgid "You can't remove the last panel. Would you like to exit the program?"
+msgstr ""
+
+#: ../panel/panel-app.c:581
+#, c-format
+msgid "Remove Panel \"%d\"?"
+msgstr ""
+
+#: ../panel/panel-app.c:585
+msgid "The panel will be removed and its configuration will be lost."
+msgstr ""
+
+#: ../panel/panel-app.c:618
+msgid "Developer"
+msgstr "開発者"
+
+#: ../panel/main.c:46
+#, fuzzy, c-format
+msgid ""
+"\n"
+" Xfce Panel %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
+msgstr ""
+"\n"
+"Xfce パネル\n"
+"バージョン %s\n"
+"\n"
+"Xfce デスクトップ環境の一部\n"
+"http://www.xfce.org\n"
+"\n"
+"GNU GPL の下に利用できます。\n"
+"\n"
+
+#: ../panel/main.c:52
+#, c-format
+msgid ""
+" Usage: %s [OPTIONS]\n"
+"\n"
+msgstr ""
+
+#. Only translate the descriptions, not the options itself
+#: ../panel/main.c:55
+msgid ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save panel configurations\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Exit panels\n"
+" -a, --add       Add new items\n"
+"\n"
+msgstr ""
+
+#. floating?
+#: ../panel/panel-settings.c:382
+#, fuzzy
+msgid "Panel Type"
+msgstr "パネルの大きさ:"
+
+#: ../panel/panel-settings.c:391
+#, fuzzy
+msgid "Fixed Position"
+msgstr "位置"
+
+#: ../panel/panel-settings.c:393
+msgid "Freely Moveable"
+msgstr ""
+
+#. position
+#: ../panel/panel-settings.c:399
+msgid "Position"
+msgstr "位置"
+
+#: ../panel/panel-settings.c:483
+#, fuzzy
+msgid "_Full Width"
+msgstr "最大幅にする:"
+
+#: ../panel/panel-settings.c:492
+#, fuzzy
+msgid "Auto_hide"
+msgstr "自動的に隠す"
+
+#: ../panel/panel-settings.c:510
+#, fuzzy
+msgid "Orientation:"
+msgstr "パネルの方向:"
+
+#: ../panel/panel-settings.c:522
+msgid "Horizontal"
+msgstr "水平"
+
+#: ../panel/panel-settings.c:524
+msgid "Vertical"
+msgstr "垂直"
+
+#: ../panel/panel-settings.c:533
+#, fuzzy
+msgid "Handle Style:"
+msgstr "取っ手:"
+
+#: ../panel/panel-settings.c:545
+msgid "At both sides"
+msgstr "両側に付ける"
+
+#: ../panel/panel-settings.c:547
+msgid "At the start"
+msgstr "始めに付ける"
+
+#: ../panel/panel-settings.c:549
+msgid "At the end"
+msgstr "終わりに付ける"
+
+#: ../panel/panel-settings.c:583
+#, fuzzy
+msgid "Monitor"
+msgstr "エディタ"
+
+#. size
+#: ../panel/panel-settings.c:665
+msgid "Size"
+msgstr "大きさ"
+
+#: ../panel/panel-settings.c:676
+msgid "Small"
+msgstr "小"
+
+#: ../panel/panel-settings.c:693
+msgid "Large"
+msgstr "大"
+
+#. transparency
+#: ../panel/panel-settings.c:701
+msgid "Transparency"
+msgstr "透明度"
+
+#: ../panel/panel-settings.c:709
+msgid "None"
+msgstr "なし"
+
+#: ../panel/panel-settings.c:726
+msgid "Full"
+msgstr "最大"
+
+#: ../panel/panel-settings.c:1018
+msgid ""
+"Drag items from the list to a panel or move existing items to a new location."
+msgstr ""
+
+#: ../panel/panel-settings.c:1036
+msgid "Avalaible Items"
+msgstr ""
+
+#: ../panel/panel-settings.c:1049
+msgid "Add To Selected Panel"
+msgstr ""
+
+#: ../panel/panel-settings.c:1255
+#, fuzzy
+msgid "Add Items"
+msgstr "アイテムを追加(_N)"
+
+#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
+#, fuzzy, c-format
+msgid "Could not run \"%s\""
+msgstr ""
+"\"%s\" を実行できませんでした:\n"
+"%s"
+
+#: ../plugins/launcher/launcher.c:1137
+msgid "New item"
+msgstr "新規アイテム"
+
+#: ../plugins/launcher/launcher.c:1138
+msgid "This item has not yet been configured"
+msgstr "このアイテムまだ設定されていません"
+
+#: ../plugins/launcher/launcher-dialog.c:78
+msgid "Default"
+msgstr "標準"
+
+#: ../plugins/launcher/launcher-dialog.c:79
+msgid "Editor"
+msgstr "エディタ"
+
+#: ../plugins/launcher/launcher-dialog.c:80
+msgid "File management"
+msgstr "ファイル管理"
+
+#: ../plugins/launcher/launcher-dialog.c:81
+msgid "Utilities"
+msgstr "ユーティリティ"
+
+#: ../plugins/launcher/launcher-dialog.c:82
+msgid "Games"
+msgstr "ゲーム"
+
+#: ../plugins/launcher/launcher-dialog.c:83
+msgid "Help browser"
+msgstr "ヘルプブラウザ"
+
+#: ../plugins/launcher/launcher-dialog.c:84
+msgid "Multimedia"
+msgstr "マルチメディア"
+
+#: ../plugins/launcher/launcher-dialog.c:85
+msgid "Network"
+msgstr "ネットワーク"
+
+#: ../plugins/launcher/launcher-dialog.c:86
+msgid "Graphics"
+msgstr "グラフィック"
+
+#: ../plugins/launcher/launcher-dialog.c:87
+msgid "Printer"
+msgstr "プリンタ"
+
+#: ../plugins/launcher/launcher-dialog.c:88
+msgid "Productivity"
+msgstr "プロダクト"
+
+#: ../plugins/launcher/launcher-dialog.c:89
+msgid "Sound"
+msgstr "サウンド"
+
+#: ../plugins/launcher/launcher-dialog.c:90
+msgid "Terminal"
+msgstr "ターミナル"
+
+#: ../plugins/launcher/launcher-dialog.c:373
+msgid "Select image file"
+msgstr "画像ファイルを選択して下さい"
+
+#: ../plugins/launcher/launcher-dialog.c:418
+msgid "Select command"
+msgstr "コマンドを選択して下さい"
+
+#: ../plugins/launcher/launcher-dialog.c:441
+msgid "Name"
+msgstr "名前"
+
+#: ../plugins/launcher/launcher-dialog.c:459
+msgid "Description"
+msgstr "説明"
+
+#: ../plugins/launcher/launcher-dialog.c:514
+msgid "Other..."
+msgstr "その他..."
+
+#: ../plugins/launcher/launcher-dialog.c:597
+msgid "Command"
+msgstr "コマンド"
+
+#: ../plugins/launcher/launcher-dialog.c:633
+msgid "Run in _terminal"
+msgstr "ターミナルで実行する(_T)"
+
+#: ../plugins/launcher/launcher-dialog.c:651
+msgid "Use _startup notification"
+msgstr "起動通知を使用する(_N)"
+
+#: ../plugins/launcher/launcher-dialog.c:1104
+#, fuzzy
+msgid "New Item"
+msgstr "新規アイテム"
+
+#: ../plugins/launcher/launcher-dialog.c:1209
+msgid ""
+"The first item in the list is shown on the panel. Additional items will "
+"appear in a menu."
+msgstr ""
+"このリストの最初のアイテムはパネルに表示されます。追加したアイテムはメニュー"
+"に表示されます。"
+
+#: ../plugins/launcher/launcher-dialog.c:1246
+#, fuzzy
+msgid "Configure Launcher"
+msgstr "ランチャー"
+
+#: ../plugins/launcher/launcher-dialog.c:1255
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "ランチャー"
+
+#: ../plugins/launcher/launcher-dialog.c:1571
+msgid "Select file"
+msgstr "ファイルを選択して下さい"
+
+#: ../plugins/separator/separator.c:241
+#, fuzzy
+msgid "Configure Separator"
+msgstr "セパレータ"
+
+#: ../plugins/separator/separator.c:253
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator"
+msgstr "セパレータ"
+
+#: ../plugins/separator/separator.c:266
+#, fuzzy
+msgid "_Draw Separator"
+msgstr "セパレータ"
+
+#: ../plugins/separator/separator.c:275
+msgid "_Expand"
+msgstr ""
+
+#: ../plugins/actions/actions.c:295
+#, fuzzy
+msgid "Configure Panel Actions"
+msgstr "Xfce パネル設定"
+
+#: ../plugins/actions/actions.c:307
+#: ../plugins/actions/actions.desktop.in.in.h:2
+#, fuzzy
+msgid "Panel Actions"
+msgstr "パネル設定"
+
+#: ../plugins/actions/actions.c:324
+#, fuzzy
+msgid "Select action type:"
+msgstr "コマンドを選択して下さい"
+
+#: ../plugins/actions/actions.c:333
+#, fuzzy
+msgid "Lock screen"
+msgstr "画面のロック(_L)"
+
+#: ../plugins/actions/actions.c:334
+#, fuzzy
+msgid "Quit + Lock screen"
+msgstr "画面のロック(_L)"
+
+#: ../plugins/tasklist/tasklist.c:320
+msgid "Configure Task List"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:332
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+#, fuzzy
+msgid "Task List"
+msgstr "タスクリスト"
+
+#: ../plugins/tasklist/tasklist.c:345
+msgid "Show tasks from _all workspaces"
+msgstr "全てのワークスペースからタスクを表示(_A)"
+
+#: ../plugins/tasklist/tasklist.c:355
+msgid "Show application _names"
+msgstr "アプリケーション名を表示(_N)"
+
+#: ../plugins/tasklist/tasklist.c:369
+msgid "Never group tasks"
+msgstr "タスクはまとめない"
+
+#: ../plugins/tasklist/tasklist.c:372
+msgid "Automatically group tasks"
+msgstr "タスクを自動的にまとめる"
+
+#: ../plugins/tasklist/tasklist.c:375
+msgid "Always group tasks"
+msgstr "常にタスクをまとめる"
+
+#: ../plugins/pager/pager.c:275
+msgid "Configure Pager"
+msgstr ""
+
+#: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Pager"
+msgstr "ページャ"
+
+#: ../plugins/pager/pager.c:307
+msgid "Number of rows:"
+msgstr "行数:"
+
+#: ../plugins/pager/pager.c:311
+msgid "Number of columns:"
+msgstr "列数:"
+
+#: ../plugins/systray/systray.c:65
+msgid "There is already a system tray running on this screen"
+msgstr "この画面には既に動作しているシステムトレイがあります"
+
+#: ../plugins/systray/systray.c:71
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "システムトレイを登録できません: %s"
+
+#: ../plugins/systray/systray.c:345
+#, fuzzy
+msgid "Configure Status Area"
+msgstr "通知エリア"
+
+#: ../plugins/systray/systray.c:357
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid "Status Area"
+msgstr "通知エリア"
+
+#: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+msgid "Show _frame"
+msgstr "枠を表示(_F)"
+
+#: ../plugins/iconbox/iconbox.c:748
+#, fuzzy
+msgid "Configure Icon Box"
+msgstr "Xfce アイコンボックス"
+
+#: ../plugins/iconbox/iconbox.c:760
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+#, fuzzy
+msgid "Icon Box"
+msgstr "アイコンボックス"
+
+#: ../plugins/iconbox/iconbox.c:774
+#, fuzzy
+msgid "Only show minimized applications"
+msgstr "最小化したアプリケーションのみ表示(_S)"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: ../plugins/clock/clock.c:109
+msgid "%A %d %B %Y"
+msgstr "%Y %B %d %A"
+
+#: ../plugins/clock/clock.c:401
+#, fuzzy
+msgid "Configure Clock"
+msgstr "Xfce 時計"
+
+#: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#, fuzzy
+msgid "Clock"
+msgstr "ロック"
+
+#: ../plugins/clock/clock.c:420
+msgid "Appearance"
+msgstr "外観"
+
+#. Keep order in sync with XfceClockMode
+#: ../plugins/clock/clock.c:435
+msgid "Analog"
+msgstr "アナログ"
+
+#: ../plugins/clock/clock.c:436
+msgid "Digital"
+msgstr "デジタル"
+
+#: ../plugins/clock/clock.c:437
+msgid "LED"
+msgstr "LED"
+
+#: ../plugins/clock/clock.c:450
+msgid "Clock Options"
+msgstr ""
+
+#: ../plugins/clock/clock.c:460
+#, fuzzy
+msgid "Use 24-_hour clock"
+msgstr "24時間時計を使用"
+
+#: ../plugins/clock/clock.c:468
+#, fuzzy
+msgid "Show AM/PM"
+msgstr "午前/午後"
+
+#: ../plugins/clock/clock.c:476
+#, fuzzy
+msgid "Display seconds"
+msgstr "アイコンの前に時間を表示"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr ""
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:1
+#, fuzzy
+msgid "Test Plugin"
+msgstr "ランチャー・プラグイン"
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:2
+msgid "This plugin has no purpose"
+msgstr ""
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr ""
+
+#: ../plugins/actions/actions.desktop.in.in.h:1
+#, fuzzy
+msgid "Log out or lock the screen"
+msgstr "画面をロックします"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+#, fuzzy
+msgid "Show all running applications"
+msgstr "最小化したアプリケーションのみ表示(_S)"
+
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Miniature view of all virtual desktops"
+msgstr ""
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+#, fuzzy
+msgid "Show notification icons"
+msgstr "通知アイコンを表示(_N)"
+
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+#, fuzzy
+msgid "Show icons of all running applications"
+msgstr "最小化したアプリケーションのみ表示(_S)"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr ""
+
+#~ msgid "Panel Settings"
+#~ msgstr "パネル設定"
+
+#~ msgid "Xfce 4 Panel Settings"
+#~ msgstr "Xfce 4 パネル設定"
+
+#~ msgid "No data was found. The panel will be empty."
+#~ msgstr "データがありませんでした。パネルは空になります。"
+
+#~ msgid "Position:"
+#~ msgstr "位置:"
+
+#~ msgid "Command:"
+#~ msgstr "コマンド:"
+
+#~ msgid "Use startup _notification"
+#~ msgstr "起動通知を使用する(_N)"
+
+#~ msgid "Other Icon"
+#~ msgstr "その他のアイコン"
+
+#~ msgid "Drag file onto this frame to change the icon"
+#~ msgstr "アイコンを変更するには、このフレームへファイルをドラッグして下さい"
+
+# NOTE: デバッグ用
+#~ msgid "%s: Successfully started without session management"
+#~ msgstr "%s: Successfully started without session management"
+
+# NOTE: デバッグ用
+#~ msgid "%s: Successfully started with session management"
+#~ msgstr "%s: Successfully started with session management"
+
+#~ msgid "Could not create panel item \"%s\"."
+#~ msgstr "パネルアイテム \"%s\" を作成できませんでした。"
+
+#~ msgid "_Properties..."
+#~ msgstr "プロパティ(_P)..."
+
+#~ msgid "_Remove"
+#~ msgstr "削除(_R)"
+
+#~ msgid "This item has no configuration options"
+#~ msgstr "このアイテムに設定オプションは存在しません"
+
+#~ msgid "_About Xfce"
+#~ msgstr "Xfce について(_A)"
+
+#~ msgid "_Help"
+#~ msgstr "ヘルプ(_H)"
+
+#~ msgid "E_xit"
+#~ msgstr "終了(_X)"
+
+#~ msgid "icons|Terminal"
+#~ msgstr "ターミナル"
+
+#~ msgid "Settings manager not available"
+#~ msgstr "設定マネージャが利用できません"
+
+#~ msgid "%H:%M"
+#~ msgstr "%H:%M"
+
+#~ msgid "Taskbar"
+#~ msgstr "タスクバー"
+
+#~ msgid "Cannot create MCS client channel"
+#~ msgstr "MCS クライアントのチャンネルを作成できません"
+
+#~ msgid "_About"
+#~ msgstr "このプログラムにについて(_A)"
+
+#~ msgid "Medium"
+#~ msgstr "中"
+
+#~ msgid "Huge"
+#~ msgstr "巨大"
+
+#~ msgid "Autohide:"
+#~ msgstr "自動的に隠す:"
+
+#~ msgid "Behaviour"
+#~ msgstr "振る舞い"
+
+#~ msgid "_Top"
+#~ msgstr "最上部(_T)"
+
+#~ msgid "_Bottom"
+#~ msgstr "最下部(_B)"
+
+#~ msgid "Alignment:"
+#~ msgstr "配置:"
+
+#~ msgid "_Left"
+#~ msgstr "左側(_L)"
+
+#~ msgid "_Center"
+#~ msgstr "中央(_C)"
+
+#~ msgid "_Right"
+#~ msgstr "右側(_R)"
+
+#~ msgid "Height:"
+#~ msgstr "縦幅:"
+
+#~ msgid "Width:"
+#~ msgstr "横幅:"
+
+#~ msgid "_Shrink to fit"
+#~ msgstr "画面に合うよう縮める(_S)"
+
+#~ msgid "Auto _hide taskbar"
+#~ msgstr "タスクバーを自動的に隠す(_H)"
+
+#~ msgid "Show tasklist"
+#~ msgstr "タスクリストを表示"
+
+#~ msgid "Always _group tasks"
+#~ msgstr "常にタスクをまとめる(_G)"
+
+#~ msgid "Show _pager in taskbar"
+#~ msgstr "タスクバーでページャを表示(_P)"
+
+#~ msgid "Status area"
+#~ msgstr "通知エリア"
+
+#~ msgid "Show _time"
+#~ msgstr "時間を表示(_T)"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "Components"
+#~ msgstr "コンポーネント"
+
+#~ msgid "Icon size"
+#~ msgstr "アイコンの大きさ"
+
+#~ msgid "%A, %d %B %Y"
+#~ msgstr "%Y, %B %d %A"
+
+#~ msgid "Clock type:"
+#~ msgstr "時計の種類:"
+
+#~ msgid "Hour mode:"
+#~ msgstr "時制:"
+
+#~ msgid "24 hour"
+#~ msgstr "24時間制"
+
+#~ msgid "12 hour"
+#~ msgstr "12時間制"
+
+#~ msgid "Show seconds:"
+#~ msgstr "秒を表示する:"
+
+#~ msgid "Flexible space"
+#~ msgstr "可変スペース"
+
+#~ msgid "Development"
+#~ msgstr "開発"
+
+#~ msgid "Settings"
+#~ msgstr "設定"
+
+#~ msgid "System"
+#~ msgstr "システム"
+
+#~ msgid "Windows programs"
+#~ msgstr "Windows プログラム"
+
+#~ msgid "Edit launcher"
+#~ msgstr "ランチャーを編集する"
+
+#~ msgid "_Edit"
+#~ msgstr "編集(_E)"
+
+#~ msgid "_Up"
+#~ msgstr "上へ(_U)"
+
+#~ msgid "_Down"
+#~ msgstr "下へ(_D)"
+
+#~ msgid "_Add"
+#~ msgstr "追加(_A)"
+
+#~ msgid "Mail box:"
+#~ msgstr "メール受信箱:"
+
+#~ msgid "New mail command:"
+#~ msgstr "新規メール受信時のコマンド:"
+
+#~ msgid "Command to run when new mail arrives"
+#~ msgstr "新しいメールが到着した時に実行するコマンドです"
+
+#~ msgid "Command to run when the button on the panel is clicked"
+#~ msgstr "パネル上のボタンがクリックされた時に実行するコマンドです"
+
+#~ msgid "Interval (sec):"
+#~ msgstr "間隔 (秒):"
+
+#~ msgid "Mail checker"
+#~ msgstr "メール確認プログラム"
+
+#~ msgid "Graphical pager"
+#~ msgstr "グラフィカルページャ"
+
+#~ msgid "Desktop switcher"
+#~ msgstr "デスクトップ切替プログラム"
+
+#~ msgid ""
+#~ "Access to the configuration system has been disabled.\n"
+#~ "\n"
+#~ "Ask your system administrator for more information"
+#~ msgstr ""
+#~ "設定システムへのアクセスが無効になっています。\n"
+#~ "\n"
+#~ "詳しい情報は、システム管理者へ問い合わせて下さい。"
+
+#~ msgid "tip|Exit"
+#~ msgstr "Xfce を終了します"
+
+#~ msgid "tip|Setup"
+#~ msgstr "設定を行います"
+
+#~ msgid "tip|Info"
+#~ msgstr "Xfce についての情報を表示します"
+
+#~ msgid "Exit"
+#~ msgstr "終了"
+
+#~ msgid "Setup"
+#~ msgstr "設定"
+
+#~ msgid "Info"
+#~ msgstr "情報"
+
+#~ msgid "Button 1:"
+#~ msgstr "ボタン１:"
+
+#~ msgid "Button 2:"
+#~ msgstr "ボタン２:"
+
+#~ msgid "_Hide"
+#~ msgstr "隠す(_H)"
+
+#~ msgid "System buttons"
+#~ msgstr "システムボタン"
+
+#~ msgid "Time"
+#~ msgstr "時間"
+
+#~ msgid "Iconbox Settings"
+#~ msgstr "アイコンボックス設定"
+
+#~ msgid "Xfce 4 Iconbox Settings"
+#~ msgstr "Xfce 4 アイコンボックス設定"
+
+#~ msgid "Taskbar Settings"
+#~ msgstr "タスクバー設定"
+
+#~ msgid "Xfce 4 Taskbar Settings"
+#~ msgstr "Xfce 4 タスクバー設定"
+
+#~ msgid "Appfinder"
+#~ msgstr "アプリファインダー"
+
+#~ msgid "Drag file to print"
+#~ msgstr "印刷するファイルをここにドラッグして下さい"
+
+#~ msgid "File manager"
+#~ msgstr "ファイル・マネージャを実行します"
+
+#~ msgid "Find and run applications"
+#~ msgstr "アプリケーションを検索および実行します"
+
+#~ msgid "Konqueror"
+#~ msgstr "Konqueror"
+
+#~ msgid "Konqueror File Manager"
+#~ msgstr "ファイル・マネージャ Konqueror を実行します"
+
+#~ msgid "Manual"
+#~ msgstr "マニュアル"
+
+#~ msgid "Mozilla Web Browser"
+#~ msgstr "ウェブ・ブラウザ Mozilla を実行します"
+
+#~ msgid "Music player"
+#~ msgstr "音楽プレイヤーを実行します"
+
+#~ msgid "Nautilus"
+#~ msgstr "Nautilus"
+
+#~ msgid "Nautilus File Manager"
+#~ msgstr "ファイル・マネージャ Nautilus を実行します"
+
+#~ msgid "Printer Management"
+#~ msgstr "プリンタ・マネージャー"

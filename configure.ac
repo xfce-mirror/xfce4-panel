@@ -6,7 +6,7 @@ dnl 2005 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl version info
-m4_define([xfce4_panel_version],[4.3.21])
+m4_define([xfce4_panel_version],[4.3.22])
 m4_define([libxfce4panel_verinfo], [1:1:0])
 
 dnl init autoconf
@@ -47,7 +47,9 @@ AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h])
 AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support
-XDT_I18N([nl])
+XDT_I18N([nl ar az be bg bn_IN ca cs de el en_GB eo es_MX es et eu fa fi fr gu
+	  he hi hu hy it ja ko lt mr ms nb_NO nl pa pl pt_BR pt_PT ro ru sk sv
+	  ta tr uk vi zh_CN zh_TW ])
 
 dnl Check for X11 installed
 XDT_CHECK_LIBX11_REQUIRE

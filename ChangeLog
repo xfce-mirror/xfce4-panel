@@ -1,3 +1,38 @@
+2005-09-27 08:35  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c:
+	  This works better with transparency. Saves the creation of another
+	  gdk window as well.
+
+2005-09-26 20:23  jasper
+
+	* xfce4-panel/branches/experimental/plugins/iconbox/iconbox.c,
+	  xfce4-panel/branches/experimental/plugins/tasklist/tasklist.c:
+	  Improve redrawing of handle for iconbox or tasklist
+
+2005-09-26 08:07  jasper
+
+	* xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin.h:
+	  Use _connect_after() for external plugins
+
+2005-09-25 15:09  jasper
+
+	* xfce4-panel/branches/experimental/ChangeLog,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-item.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-external-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-internal-plugin.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-item-iface.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface-private.h,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-iface.c,
+	  xfce4-panel/branches/experimental/libxfce4panel/xfce-panel-plugin-messages.h,
+	  xfce4-panel/branches/experimental/panel/panel-settings.c,
+	  xfce4-panel/branches/experimental/panel/panel.c,
+	  xfce4-panel/branches/experimental/po/nl.po: * Make both internal
+	  and external items insensitive when managing items * Rename menu
+	  item to 'Manager Panel Items'
+
 2005-09-25 07:27  jasper
 
 	* xfce4-panel/branches/experimental/ChangeLog,

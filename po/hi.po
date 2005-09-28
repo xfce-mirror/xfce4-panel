@@ -1,0 +1,996 @@
+# Hindi translations for xfce4-panel package.
+# Copyright (C) 2002-2005 The Xfce development team.
+# This file is distributed under the same license as the xfce4-panel package.
+# G Karunakar <karunakar@freedomink.org>, 2003.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel 4.3.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2005-09-28 10:01+0200\n"
+"PO-Revision-Date: 2005-08-21 17:43+0900\n"
+"Last-Translator: G Karunakar <karunakar@freedomink.org>\n"
+"Language-Team: Hindi <indlinux-hindi-gnome@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../libxfce4panel/xfce-panel-external-item.c:167
+#, c-format
+msgid "An item was unexpectedly removed: \"%s\"."
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:664
+#, fuzzy, c-format
+msgid "Remove \"%s\"?"
+msgstr "हटाएं"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel.c:515
+#: ../panel/panel-app.c:558 ../panel/panel-app.c:583 ../panel/panel-app.c:610
+#: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
+#: ../plugins/launcher/launcher.c:357
+msgid "Xfce Panel"
+msgstr "Xfce पेनेल"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:671
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr ""
+
+#. configure, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:755
+#, fuzzy
+msgid "Item Preferences"
+msgstr "/विशेषताएं (_P) ..."
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+#, fuzzy
+msgid "Remove Item"
+msgstr "हटाएं"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:775 ../panel/panel.c:540
+#: ../panel/panel-settings.c:1253
+msgid "Panel Preferences"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:783 ../panel/panel.c:547
+msgid "Manage Panel Items"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:791 ../panel/panel.c:554
+#, fuzzy
+msgid "New Panel"
+msgstr "Xfce पेनेल"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:799 ../panel/panel.c:561
+msgid "Remove this Panel"
+msgstr ""
+
+#. about item, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813
+msgid "About this Item"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:823 ../panel/panel.c:572
+#, fuzzy
+msgid "About the Xfce Panel"
+msgstr "Xfce पेनेल"
+
+#: ../panel/panel.c:524 ../plugins/actions/actions.c:332
+msgid "Quit"
+msgstr ""
+
+#: ../panel/panel.c:530
+#, fuzzy
+msgid "Restart"
+msgstr "पुरानी स्थिति में लाएं (_R)"
+
+#: ../panel/panel-item-manager.c:327 ../panel/panel-item-manager.c:335
+#, c-format
+msgid "Could not open \"%s\" module"
+msgstr ""
+
+#: ../panel/panel-app.c:180
+msgid "Are you sure you want to exit?"
+msgstr "कया आप सचमुच बाहर निकलना चाहते हैं"
+
+#: ../panel/panel-app.c:560
+#, fuzzy
+msgid "Exit Xfce Panel?"
+msgstr "Xfce पेनेल"
+
+#: ../panel/panel-app.c:561
+msgid "You can't remove the last panel. Would you like to exit the program?"
+msgstr ""
+
+#: ../panel/panel-app.c:581
+#, c-format
+msgid "Remove Panel \"%d\"?"
+msgstr ""
+
+#: ../panel/panel-app.c:585
+msgid "The panel will be removed and its configuration will be lost."
+msgstr ""
+
+#: ../panel/panel-app.c:618
+msgid "Developer"
+msgstr ""
+
+#: ../panel/main.c:46
+#, fuzzy, c-format
+msgid ""
+"\n"
+" Xfce Panel %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
+msgstr ""
+"\n"
+"The Xfce Panel\n"
+"\n"
+"सेसकरण %s\n"
+"\n"
+"Xfce डेसकटॉप वातावरण का भाग\n"
+"http://www.xfce.org\n"
+"\n"
+"Licensed under the GNU GPL.\n"
+"\n"
+
+#: ../panel/main.c:52
+#, c-format
+msgid ""
+" Usage: %s [OPTIONS]\n"
+"\n"
+msgstr ""
+
+#. Only translate the descriptions, not the options itself
+#: ../panel/main.c:55
+msgid ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save panel configurations\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Exit panels\n"
+" -a, --add       Add new items\n"
+"\n"
+msgstr ""
+
+#. floating?
+#: ../panel/panel-settings.c:382
+#, fuzzy
+msgid "Panel Type"
+msgstr "पेनल परत"
+
+#: ../panel/panel-settings.c:391
+#, fuzzy
+msgid "Fixed Position"
+msgstr "स्थिति"
+
+#: ../panel/panel-settings.c:393
+msgid "Freely Moveable"
+msgstr ""
+
+#. position
+#: ../panel/panel-settings.c:399
+msgid "Position"
+msgstr "स्थिति"
+
+#: ../panel/panel-settings.c:483
+msgid "_Full Width"
+msgstr ""
+
+#: ../panel/panel-settings.c:492
+#, fuzzy
+msgid "Auto_hide"
+msgstr "स्वतः छुपें"
+
+#: ../panel/panel-settings.c:510
+#, fuzzy
+msgid "Orientation:"
+msgstr "पेनल स्थिति"
+
+#: ../panel/panel-settings.c:522
+msgid "Horizontal"
+msgstr "क्षेतिजीय"
+
+#: ../panel/panel-settings.c:524
+msgid "Vertical"
+msgstr "लंबवत"
+
+#: ../panel/panel-settings.c:533
+msgid "Handle Style:"
+msgstr ""
+
+#: ../panel/panel-settings.c:545
+#, fuzzy
+msgid "At both sides"
+msgstr "स्वतः छुपें"
+
+#: ../panel/panel-settings.c:547
+msgid "At the start"
+msgstr ""
+
+#: ../panel/panel-settings.c:549
+msgid "At the end"
+msgstr ""
+
+#: ../panel/panel-settings.c:583
+#, fuzzy
+msgid "Monitor"
+msgstr "एडीटर"
+
+#. size
+#: ../panel/panel-settings.c:665
+msgid "Size"
+msgstr "आकार"
+
+#: ../panel/panel-settings.c:676
+msgid "Small"
+msgstr "छोटा"
+
+#: ../panel/panel-settings.c:693
+msgid "Large"
+msgstr "विशाल"
+
+#. transparency
+#: ../panel/panel-settings.c:701
+msgid "Transparency"
+msgstr ""
+
+#: ../panel/panel-settings.c:709
+#, fuzzy
+msgid "None"
+msgstr "हो गया (_D)"
+
+#: ../panel/panel-settings.c:726
+msgid "Full"
+msgstr ""
+
+#: ../panel/panel-settings.c:1018
+msgid ""
+"Drag items from the list to a panel or move existing items to a new location."
+msgstr ""
+
+#: ../panel/panel-settings.c:1036
+msgid "Avalaible Items"
+msgstr ""
+
+#: ../panel/panel-settings.c:1049
+msgid "Add To Selected Panel"
+msgstr ""
+
+#: ../panel/panel-settings.c:1255
+#, fuzzy
+msgid "Add Items"
+msgstr "वस्तु जोडें"
+
+#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
+#, c-format
+msgid "Could not run \"%s\""
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:1137
+#, fuzzy
+msgid "New item"
+msgstr "नया वस्तु जोडें"
+
+#: ../plugins/launcher/launcher.c:1138
+#, fuzzy
+msgid "This item has not yet been configured"
+msgstr "इस वस्तु के कोइ कॉनफिगरेशन विकल्प नहीं हैं"
+
+#: ../plugins/launcher/launcher-dialog.c:78
+msgid "Default"
+msgstr "डिफाल्ट"
+
+#: ../plugins/launcher/launcher-dialog.c:79
+msgid "Editor"
+msgstr "एडीटर"
+
+#: ../plugins/launcher/launcher-dialog.c:80
+msgid "File management"
+msgstr "फाइल प्रभंधन"
+
+#: ../plugins/launcher/launcher-dialog.c:81
+msgid "Utilities"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:82
+msgid "Games"
+msgstr "खेल"
+
+#: ../plugins/launcher/launcher-dialog.c:83
+msgid "Help browser"
+msgstr "सहायता ब्राउसर"
+
+#: ../plugins/launcher/launcher-dialog.c:84
+msgid "Multimedia"
+msgstr "मल्टीमीडिया"
+
+#: ../plugins/launcher/launcher-dialog.c:85
+msgid "Network"
+msgstr "नेटवर्क"
+
+#: ../plugins/launcher/launcher-dialog.c:86
+msgid "Graphics"
+msgstr "ग्राफिक्स"
+
+# libgnomeprintui/gnome-print-dialog.c:150
+# libgnomeprintui/gnome-printer-dialog.c:116
+#: ../plugins/launcher/launcher-dialog.c:87
+msgid "Printer"
+msgstr "प्रिंटर"
+
+#: ../plugins/launcher/launcher-dialog.c:88
+msgid "Productivity"
+msgstr "उत्पादकता"
+
+#: ../plugins/launcher/launcher-dialog.c:89
+msgid "Sound"
+msgstr "ध्वनि"
+
+#: ../plugins/launcher/launcher-dialog.c:90
+msgid "Terminal"
+msgstr "टर्मिनल"
+
+# libgnomeui/gnome-file-entry.c:418
+#: ../plugins/launcher/launcher-dialog.c:373
+#, fuzzy
+msgid "Select image file"
+msgstr "फाइल चयन करें"
+
+#: ../plugins/launcher/launcher-dialog.c:418
+msgid "Select command"
+msgstr "आदेश चुनें"
+
+#: ../plugins/launcher/launcher-dialog.c:441
+#, fuzzy
+msgid "Name"
+msgstr "खेल"
+
+#: ../plugins/launcher/launcher-dialog.c:459
+#, fuzzy
+msgid "Description"
+msgstr "स्थिति"
+
+#: ../plugins/launcher/launcher-dialog.c:514
+msgid "Other..."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:597
+#, fuzzy
+msgid "Command"
+msgstr "आदेश :"
+
+#: ../plugins/launcher/launcher-dialog.c:633
+msgid "Run in _terminal"
+msgstr "टर्मिनल में चलाएं (_t)"
+
+#: ../plugins/launcher/launcher-dialog.c:651
+msgid "Use _startup notification"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1104
+#, fuzzy
+msgid "New Item"
+msgstr "नया वस्तु जोडें"
+
+#: ../plugins/launcher/launcher-dialog.c:1209
+msgid ""
+"The first item in the list is shown on the panel. Additional items will "
+"appear in a menu."
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1246
+#, fuzzy
+msgid "Configure Launcher"
+msgstr "मेनू को लाँचर से जोडें"
+
+#: ../plugins/launcher/launcher-dialog.c:1255
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "लाँचर"
+
+# libgnomeui/gnome-file-entry.c:418
+#: ../plugins/launcher/launcher-dialog.c:1571
+msgid "Select file"
+msgstr "फाइल चयन करें"
+
+#: ../plugins/separator/separator.c:241
+msgid "Configure Separator"
+msgstr ""
+
+#: ../plugins/separator/separator.c:253
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator"
+msgstr ""
+
+#: ../plugins/separator/separator.c:266
+msgid "_Draw Separator"
+msgstr ""
+
+#: ../plugins/separator/separator.c:275
+msgid "_Expand"
+msgstr ""
+
+#: ../plugins/actions/actions.c:295
+#, fuzzy
+msgid "Configure Panel Actions"
+msgstr "Xfce पेनेल समायोजन"
+
+#: ../plugins/actions/actions.c:307
+#: ../plugins/actions/actions.desktop.in.in.h:2
+#, fuzzy
+msgid "Panel Actions"
+msgstr "Xfce पेनेल समायोजन"
+
+#: ../plugins/actions/actions.c:324
+#, fuzzy
+msgid "Select action type:"
+msgstr "वस्तु प्रकार चुनें"
+
+#: ../plugins/actions/actions.c:333
+#, fuzzy
+msgid "Lock screen"
+msgstr "/सक्रीन पर ताला (_L)"
+
+#: ../plugins/actions/actions.c:334
+#, fuzzy
+msgid "Quit + Lock screen"
+msgstr "/सक्रीन पर ताला (_L)"
+
+#: ../plugins/tasklist/tasklist.c:320
+msgid "Configure Task List"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:332
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+#, fuzzy
+msgid "Task List"
+msgstr "टास्कस"
+
+#: ../plugins/tasklist/tasklist.c:345
+#, fuzzy
+msgid "Show tasks from _all workspaces"
+msgstr "सभी कार्यस्थान से टास्क दिखाएं"
+
+#: ../plugins/tasklist/tasklist.c:355
+msgid "Show application _names"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:369
+msgid "Never group tasks"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:372
+msgid "Automatically group tasks"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:375
+msgid "Always group tasks"
+msgstr ""
+
+#: ../plugins/pager/pager.c:275
+msgid "Configure Pager"
+msgstr ""
+
+#: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Pager"
+msgstr "पेजर"
+
+#: ../plugins/pager/pager.c:307
+msgid "Number of rows:"
+msgstr ""
+
+#: ../plugins/pager/pager.c:311
+msgid "Number of columns:"
+msgstr ""
+
+#: ../plugins/systray/systray.c:65
+msgid "There is already a system tray running on this screen"
+msgstr "इस स्क्रीन पर पहले से ही सिस्टम ट्रे चल रहा है"
+
+#: ../plugins/systray/systray.c:71
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "सिस्टम ट्रे रजिस्टर करने में अक्षम: %s"
+
+#: ../plugins/systray/systray.c:345
+#, fuzzy
+msgid "Configure Status Area"
+msgstr "शनिवार"
+
+#: ../plugins/systray/systray.c:357
+#: ../plugins/systray/systray.desktop.in.in.h:2
+#, fuzzy
+msgid "Status Area"
+msgstr "शनिवार"
+
+#: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+msgid "Show _frame"
+msgstr ""
+
+#: ../plugins/iconbox/iconbox.c:748
+msgid "Configure Icon Box"
+msgstr ""
+
+# libgnome-desktop/gnome-ditem-edit.c:371
+#: ../plugins/iconbox/iconbox.c:760
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+#, fuzzy
+msgid "Icon Box"
+msgstr "आईकाॅन :"
+
+#: ../plugins/iconbox/iconbox.c:774
+msgid "Only show minimized applications"
+msgstr ""
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: ../plugins/clock/clock.c:109
+msgid "%A %d %B %Y"
+msgstr ""
+
+#: ../plugins/clock/clock.c:401
+#, fuzzy
+msgid "Configure Clock"
+msgstr "Xfce घडी"
+
+#: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#, fuzzy
+msgid "Clock"
+msgstr "ताला"
+
+#: ../plugins/clock/clock.c:420
+msgid "Appearance"
+msgstr "रूप"
+
+#. Keep order in sync with XfceClockMode
+#: ../plugins/clock/clock.c:435
+msgid "Analog"
+msgstr "एनॉलॉग"
+
+#: ../plugins/clock/clock.c:436
+msgid "Digital"
+msgstr "डिजिटल"
+
+#: ../plugins/clock/clock.c:437
+msgid "LED"
+msgstr "एलईडी"
+
+#: ../plugins/clock/clock.c:450
+msgid "Clock Options"
+msgstr ""
+
+#: ../plugins/clock/clock.c:460
+msgid "Use 24-_hour clock"
+msgstr ""
+
+#: ../plugins/clock/clock.c:468
+#, fuzzy
+msgid "Show AM/PM"
+msgstr "पुर्ववगन्ह/अपरान्ह"
+
+#: ../plugins/clock/clock.c:476
+msgid "Display seconds"
+msgstr ""
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr ""
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:1
+#, fuzzy
+msgid "Test Plugin"
+msgstr "लाँचर"
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:2
+msgid "This plugin has no purpose"
+msgstr ""
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr ""
+
+#: ../plugins/actions/actions.desktop.in.in.h:1
+#, fuzzy
+msgid "Log out or lock the screen"
+msgstr "सक्रीन पर ताला लगाएं"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Show all running applications"
+msgstr ""
+
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Miniature view of all virtual desktops"
+msgstr ""
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+#, fuzzy
+msgid "Show notification icons"
+msgstr "नोटिफिकेशन क्षेत्र"
+
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+msgid "Show icons of all running applications"
+msgstr ""
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Panel Settings"
+#~ msgstr "Xfce पेनेल समायोजन"
+
+#, fuzzy
+#~ msgid "Xfce 4 Panel Settings"
+#~ msgstr "Xfce पेनेल समायोजन"
+
+#~ msgid "Position:"
+#~ msgstr "स्थान:"
+
+#~ msgid "Command:"
+#~ msgstr "आदेश :"
+
+#~ msgid "Other Icon"
+#~ msgstr "अन्य आईकाॅन"
+
+#, fuzzy
+#~ msgid "_Properties..."
+#~ msgstr "/विशेषताएं (_P) ..."
+
+#, fuzzy
+#~ msgid "_Remove"
+#~ msgstr "/हटाएं (_R)"
+
+#, fuzzy
+#~ msgid "Add _new item"
+#~ msgstr "/नया वस्तु जोडें (_n)"
+
+#~ msgid "This item has no configuration options"
+#~ msgstr "इस वस्तु के कोइ कॉनफिगरेशन विकल्प नहीं हैं"
+
+#, fuzzy
+#~ msgid "_About Xfce"
+#~ msgstr "/Xfce के बोरे में (_A)"
+
+#, fuzzy
+#~ msgid "_Help"
+#~ msgstr "/सहायता (_H)"
+
+#, fuzzy
+#~ msgid "E_xit"
+#~ msgstr "/बाहर निकलें (_x)"
+
+#, fuzzy
+#~ msgid "icons|Terminal"
+#~ msgstr "टर्मिनल"
+
+#~ msgid "Settings manager not available"
+#~ msgstr "समायोजन प्रभंधक उपलब्ध नहीं"
+
+#~ msgid "Taskbar"
+#~ msgstr "टास्कबार"
+
+#~ msgid "Cannot create MCS client channel"
+#~ msgstr " MCS क्लाएंट चैनल नहीं बना सकता"
+
+#, fuzzy
+#~ msgid "_About"
+#~ msgstr "/Xfce के बोरे में (_A)"
+
+#~ msgid "Medium"
+#~ msgstr "मध्य"
+
+#~ msgid "Panel size:"
+#~ msgstr "पेनेल आकार"
+
+#~ msgid "Behaviour"
+#~ msgstr "व्यावहार"
+
+#, fuzzy
+#~ msgid "_Top"
+#~ msgstr "ऊपर"
+
+# #-#-#-#-#  libgnomeprintui.HEAD.hi.po (libgnomeprintui )  #-#-#-#-#
+# libgnomeprintui/gnome-print-paper-selector.c:2013
+#, fuzzy
+#~ msgid "_Bottom"
+#~ msgstr "नीचे"
+
+#, fuzzy
+#~ msgid "Height:"
+#~ msgstr " ऊँचाई:"
+
+#, fuzzy
+#~ msgid "Auto _hide taskbar"
+#~ msgstr "टास्कबार को स्वतः छुपाएँ "
+
+#, fuzzy
+#~ msgid "Show _pager in taskbar"
+#~ msgstr "टास्कबार में पेजर दिखाएं"
+
+#, fuzzy
+#~ msgid "Status area"
+#~ msgstr "शनिवार"
+
+#, fuzzy
+#~ msgid "Icon size"
+#~ msgstr "आईकाॅन"
+
+#~ msgid "Clock type:"
+#~ msgstr "घडी प्रकार"
+
+#~ msgid "Hour mode:"
+#~ msgstr "घंटा पद्धति"
+
+#~ msgid "24 hour"
+#~ msgstr "२४ घंटे"
+
+#~ msgid "12 hour"
+#~ msgstr "१२ घंटे"
+
+#~ msgid "Show seconds:"
+#~ msgstr "क्षण दिखाएं"
+
+#, fuzzy
+#~ msgid "Settings"
+#~ msgstr "Xfce पेनेल समायोजन"
+
+#, fuzzy
+#~ msgid "Edit launcher"
+#~ msgstr "लाँचर जोडें"
+
+#, fuzzy
+#~ msgid "_Edit"
+#~ msgstr "एडीटर"
+
+#~ msgid "Mail box:"
+#~ msgstr "डाक पेटी"
+
+#, fuzzy
+#~ msgid "New mail command:"
+#~ msgstr "डाक आदेश"
+
+#, fuzzy
+#~ msgid "Command to run when new mail arrives"
+#~ msgstr "पेनेल पर बट्टन दबाने पर चलाने वाला आदेश"
+
+#~ msgid "Command to run when the button on the panel is clicked"
+#~ msgstr "पेनेल पर बट्टन दबाने पर चलाने वाला आदेश"
+
+#~ msgid "Interval (sec):"
+#~ msgstr "अंतराल (क्षण):"
+
+#, fuzzy
+#~ msgid "Mail checker"
+#~ msgstr "डाक देखो"
+
+#~ msgid "Graphical pager"
+#~ msgstr "ग्राफिकल पेजर"
+
+#~ msgid "Desktop switcher"
+#~ msgstr "डेसकटॉप प्रवर्तक"
+
+#, fuzzy
+#~ msgid "tip|Exit"
+#~ msgstr "बाहर"
+
+#, fuzzy
+#~ msgid "tip|Setup"
+#~ msgstr "सेटप"
+
+#, fuzzy
+#~ msgid "tip|Info"
+#~ msgstr "जानकारी"
+
+#~ msgid "Exit"
+#~ msgstr "बाहर"
+
+#~ msgid "Setup"
+#~ msgstr "सेटप"
+
+#~ msgid "Info"
+#~ msgstr "जानकारी"
+
+#~ msgid "Button 1:"
+#~ msgstr "बट्टन 1"
+
+#~ msgid "Button 2:"
+#~ msgstr "बट्टन 2"
+
+#, fuzzy
+#~ msgid "_Hide"
+#~ msgstr "/सहायता (_H)"
+
+#~ msgid "System buttons"
+#~ msgstr "सिसटम बट्टन"
+
+#, fuzzy
+#~ msgid "Iconbox Settings"
+#~ msgstr "Xfce पेनेल समायोजन"
+
+#, fuzzy
+#~ msgid "Xfce 4 Iconbox Settings"
+#~ msgstr "Xfce पेनेल समायोजन"
+
+#, fuzzy
+#~ msgid "Taskbar Settings"
+#~ msgstr "टास्कबार"
+
+#, fuzzy
+#~ msgid "Xfce 4 Taskbar Settings"
+#~ msgstr "Xfce पेनेल समायोजन"
+
+#, fuzzy
+#~ msgid "File manager"
+#~ msgstr "फाइल प्रभंधन"
+
+#, fuzzy
+#~ msgid "Manual"
+#~ msgstr "जनवरी"
+
+#, fuzzy
+#~ msgid "Printer Management"
+#~ msgstr "फाइल प्रभंधन"
+
+#~ msgid "Tooltip:"
+#~ msgstr "टूल टिप्पणी"
+
+#~ msgid "Attach menu to launcher"
+#~ msgstr "मेनू को लाँचर से जोडें"
+
+#~ msgid "Change menu item"
+#~ msgstr "मेनू वस्तु बदलें"
+
+#~ msgid "Click mouse button 3 to change item"
+#~ msgstr "वस्तु बदलने के लिए माउस बट्टन ३ दबाएं"
+
+#~ msgid "Add launcher"
+#~ msgstr "लाँचर जोडें"
+
+#~ msgid "Add new item"
+#~ msgstr "नया वस्तु जोडें"
+
+#~ msgid "Left"
+#~ msgstr "बांये"
+
+#~ msgid "Right"
+#~ msgstr "दायें"
+
+#~ msgid "Top"
+#~ msgstr "ऊपर"
+
+#~ msgid "Bottom"
+#~ msgstr "नीचे"
+
+#~ msgid "Popup position:"
+#~ msgstr "पॉप्प स्थिति"
+
+#~ msgid "Menu"
+#~ msgstr "मेनू"
+
+#, fuzzy
+#~ msgid "Show _system tray in taskbar"
+#~ msgstr "टास्कबार में सिस्टम ट्रे दिखाएं"
+
+#~ msgid "Cannot get initial style"
+#~ msgstr "आरंभिक स्टाइल प्राप्त नहीं कर सका!"
+
+#~ msgid "This should not happen"
+#~ msgstr "ऐसा होना नहीं चाहिए"
+
+#, fuzzy
+#~ msgid "Cannot get default screen\n"
+#~ msgstr "डेस्कटॉप हाशिया प्राप्त नहीं कर सका"
+
+#~ msgid "Cannot connect to session manager"
+#~ msgstr "सत्र प्रबंधक से जुड़ नहीं सकता"
+
+#~ msgid "Show two buttons:"
+#~ msgstr "दो बट्टन दिखाएं"
+
+#~ msgid "Change item"
+#~ msgstr "बदलें"
+
+#~ msgid "Menu:"
+#~ msgstr "मेनु:"
+
+#~ msgid "/Xfce Panel"
+#~ msgstr "/Xfce पेनेल"
+
+#~ msgid "/Add _new item"
+#~ msgstr "/नया वस्तु जोडें (_n)"
+
+#~ msgid "/_Properties..."
+#~ msgstr "/विशेषताएं (_P) ..."
+
+#~ msgid "Select icon"
+#~ msgstr "आईकाॅन चुनें"
+
+#~ msgid "/_Settings manager"
+#~ msgstr "/समायोजन प्रभंधक (_S)"
+
+#~ msgid "Tiny"
+#~ msgstr "सूक्षम"
+
+#~ msgid "Icon theme:"
+#~ msgstr "आईकन थीम"
+
+#~ msgid "Normal"
+#~ msgstr "सामान्य"
+
+#~ msgid "Center the panel:"
+#~ msgstr "पेनेल को केंद्र मे करें"
+
+#~ msgid "Set"
+#~ msgstr "सेट"
+
+#~ msgid "Sunday"
+#~ msgstr "रविवार"
+
+#~ msgid "Monday"
+#~ msgstr "सोमवार"
+
+#~ msgid "Tuesday"
+#~ msgstr "मंगलवार"
+
+#~ msgid "Wednesday"
+#~ msgstr "बुधवार"
+
+#~ msgid "Thursday"
+#~ msgstr "गुरुवार"
+
+#~ msgid "Friday"
+#~ msgstr "शुक्रवार"
+
+#~ msgid "February"
+#~ msgstr "फरवरी"
+
+#~ msgid "March"
+#~ msgstr "मार्च"
+
+#~ msgid "April"
+#~ msgstr "अप्रैल"
+
+#~ msgid "May"
+#~ msgstr "मई"
+
+#~ msgid "June"
+#~ msgstr "जून"
+
+#~ msgid "July"
+#~ msgstr "जुलाई"
+
+#~ msgid "August"
+#~ msgstr "अगस्त"
+
+#~ msgid "September"
+#~ msgstr "सितम्बर"
+
+#~ msgid "October"
+#~ msgstr "अक्टूबर"
+
+#~ msgid "November"
+#~ msgstr "नवम्बर"
+
+#~ msgid "December"
+#~ msgstr "दिसम्बर"
+
+#~ msgid "Type:"
+#~ msgstr "प्रकार:"
+
+#~ msgid "Select an item type from the list"
+#~ msgstr "सूची में से वस्तु प्रकार चुनें"

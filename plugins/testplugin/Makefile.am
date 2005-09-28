@@ -1,6 +1,6 @@
-plugindir = $(libexecdir)/xfce4/panel-plugins
-plugin_PROGRAMS = testplugin
-#noinst_PROGRAMS = testplugin
+#plugindir = $(libexecdir)/xfce4/panel-plugins
+#plugin_PROGRAMS = testplugin
+noinst_PROGRAMS = testplugin
 
 testplugin_SOURCES =					\
 	testplugin.c
@@ -24,16 +24,17 @@ testplugin_LDFLAGS =					\
 desktop_in_in_files = testplugin.desktop.in.in
 desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
 	
-desktopdir = $(datadir)/xfce4/panel-plugins
-desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-#noinst_DATA = $(desktop_in_files:.desktop.in=.desktop)
+#desktopdir = $(datadir)/xfce4/panel-plugins
+#desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+noinst_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = 								\
 	$(desktop_in_in_files)
 
 DISTCLEANFILES =							\
-	$(desktop_DATA) $(desktop_in_files)
+	$(noinst_DATA) $(desktop_in_files)
+#	$(desktop_DATA) $(desktop_in_files)
 	
 # get full path into .desktop file
 %.desktop.in: %.desktop.in.in

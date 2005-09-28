@@ -348,7 +348,7 @@ panel_app_init (void)
 static gboolean
 expose_timeout (GtkWidget *panel)
 {
-    gtk_widget_queue_draw (panel);
+    gtk_widget_queue_resize (panel);
     return FALSE;
 }
 
