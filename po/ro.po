@@ -1,107 +1,107 @@
-# Romanian translation of xfce4-panel
-# Copyright (C) 2004 Free Software Foundation.
-# This file is distributed under the same license as the xfwm4 package.
-# Mişu Moldovan <dumol@go.ro>, 2004.
+# Romanian translation of xfce4-panel.
+# Copyright (C) 2002-2005 The Xfce development team.
+# This file is distributed under the same license as the xfce4-panel package.
+# Mişu Moldovan <dumol@gnome.ro>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.2 rc3\n"
+"Project-Id-Version: xfce4-panel 4.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 12:06+0900\n"
-"PO-Revision-Date: 2005-01-08 22:02+0200\n"
-"Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
+"POT-Creation-Date: 2005-09-28 12:49+0900\n"
+"PO-Revision-Date: 2005-09-29 14:01+0900\n"
+"Last-Translator: Mişu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: panel/xfce_support.c:557
+#: ../panel/xfce_support.c:557
 msgid "Select file"
 msgstr "Selectare fişier"
 
-#: panel/settings.c:181
+#: ../panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "Nu s-au găsit nici un fel de date. Panoul va fi gol."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Poziţie:"
 
-#: panel/controls_dialog.c:155
+#: ../panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "Proprietăţi"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
+#: ../panel/controls_dialog.c:209 ../panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Ştergerea itemului va duce la pierderea meniului asociat."
 
-#: panel/item_dialog.c:124
+#: ../panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Selectare comandă"
 
-#: panel/item_dialog.c:268
+#: ../panel/item_dialog.c:268
 msgid "Command:"
 msgstr "Comandă:"
 
-#: panel/item_dialog.c:311
+#: ../panel/item_dialog.c:311
 msgid "Run in _terminal"
 msgstr "Porneşte în _terminal"
 
-#: panel/item_dialog.c:329
+#: ../panel/item_dialog.c:329
 msgid "Use startup _notification"
 msgstr "Utilizează _notificare la pornire"
 
-#: panel/item_dialog.c:515
+#: ../panel/item_dialog.c:515
 msgid "Other Icon"
 msgstr "Altă iconiţă"
 
-#: panel/item_dialog.c:626
+#: ../panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
 msgstr "Trageţi un fişier peste acest cadru pentru a schimba iconiţa"
 
-#: panel/item_dialog.c:938
+#: ../panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "Titlu:"
 
-#: panel/item_dialog.c:967
+#: ../panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "Etichetă:"
 
-#: panel/item_dialog.c:995
+#: ../panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "Ataşează un meniu lansatorului"
 
-#: panel/item_dialog.c:1215
+#: ../panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "Editare item meniu"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
+#: ../panel/item_dialog.c:1221 ../panel/controls.c:748
 msgid "_Remove"
 msgstr "Şter_ge"
 
-#: panel/item_dialog.c:1233 panel/item.c:718
+#: ../panel/item_dialog.c:1233 ../panel/item.c:718
 msgid "Launcher"
 msgstr "Lansator"
 
-#: panel/item.c:546
+#: ../panel/item.c:546
 msgid "Click mouse button 3 to change item"
 msgstr "Apăsaţi butonul dreapta de mouse pentru editare"
 
-#: panel/item.c:571
+#: ../panel/item.c:571
 msgid "Add launcher"
 msgstr "Adăugare lansator"
 
-#: panel/item.c:576
+#: ../panel/item.c:576
 msgid "Add new item"
 msgstr "Adăugare item nou"
 
-#: panel/main.c:120
+#: ../panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "Chiar doriţi să ieşiţi?"
 
-#: panel/main.c:401
+#: ../panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -124,187 +124,188 @@ msgstr ""
 " Licenţă GNU GPL.\n"
 "\n"
 
-#: panel/main.c:488
+#: ../panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Am pornit cu succes fără administrator de sesiuni"
 
-#: panel/main.c:493
+#: ../panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Am pornit cu succes cu administrator de sesiuni"
 
-#: panel/controls.c:666
+#: ../panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Nu am reuşit să creez itemul „%s”."
 
-#: panel/controls.c:743 panel/panel.c:647
+#: ../panel/controls.c:743 ../panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Proprietăţi..."
 
-#: panel/controls.c:757 panel/panel.c:637
+#: ../panel/controls.c:757 ../panel/panel.c:637
 msgid "Add _new item"
 msgstr "Adăugare item _nou"
 
-#: panel/controls.c:1040
+#: ../panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Acest item nu are opţiuni de configurare"
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:450
+#: ../panel/panel.c:628 ../panel/panel.c:1055
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Panou Xfce"
 
-#: panel/panel.c:652
+#: ../panel/panel.c:652
 msgid "_About Xfce"
 msgstr "_Despre Xfce"
 
-#: panel/panel.c:657
+#: ../panel/panel.c:657
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: panel/panel.c:666
+#: ../panel/panel.c:666
 msgid "_Lock screen"
 msgstr "_Blocare ecran"
 
-#: panel/panel.c:671
+#: ../panel/panel.c:671
 msgid "_Restart"
 msgstr "_Repornire"
 
-#: panel/panel.c:680
+#: ../panel/panel.c:680
 msgid "E_xit"
 msgstr "_Ieşire"
 
-#: panel/icons.c:63
+#: ../panel/icons.c:63
 msgid "Default"
 msgstr "Implicită"
 
-#: panel/icons.c:64
+#: ../panel/icons.c:64
 msgid "Editor"
 msgstr "Editor"
 
-#: panel/icons.c:65
+#: ../panel/icons.c:65
 msgid "File management"
 msgstr "Administrare fişiere"
 
-#: panel/icons.c:66
+#: ../panel/icons.c:66
 msgid "Utilities"
 msgstr "Utilitare"
 
-#: panel/icons.c:67
+#: ../panel/icons.c:67
 msgid "Games"
 msgstr "Jocuri"
 
-#: panel/icons.c:68
+#: ../panel/icons.c:68
 msgid "Help browser"
 msgstr "Navigator documentaţie"
 
-#: panel/icons.c:69
+#: ../panel/icons.c:69
 msgid "Multimedia"
 msgstr "Multimedia"
 
-#: panel/icons.c:70
+#: ../panel/icons.c:70
 msgid "Network"
 msgstr "Reţea"
 
-#: panel/icons.c:71
+#: ../panel/icons.c:71
 msgid "Graphics"
 msgstr "Grafică"
 
-#: panel/icons.c:72
+#: ../panel/icons.c:72
 msgid "Printer"
 msgstr "Imprimantă"
 
-#: panel/icons.c:73
+#: ../panel/icons.c:73
 msgid "Productivity"
 msgstr "Productivitate"
 
-#: panel/icons.c:74
+#: ../panel/icons.c:74
 msgid "Sound"
 msgstr "Sunet"
 
-#: panel/icons.c:75
+#: ../panel/icons.c:75
 msgid "Terminal"
 msgstr "Terminal"
 
-#: panel/mcs_client.c:170
+#: ../panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "Administratorul setărilor nu e disponibil"
 
-#: panel/popup.c:267
+#: ../panel/popup.c:267
 msgid "Menu"
 msgstr "Meniu"
 
-#: settings/xfce_settings_dialog.c:87
+#: ../settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "Mică"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Medie"
 
-#: settings/xfce_settings_dialog.c:95
+#: ../settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "Mare"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Imensă"
 
-#: settings/xfce_settings_dialog.c:175
+#: ../settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Orizontală"
 
-#: settings/xfce_settings_dialog.c:179
+#: ../settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Verticală"
 
-#: settings/xfce_settings_dialog.c:221
+#: ../settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Stânga"
 
-#: settings/xfce_settings_dialog.c:225
+#: ../settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Dreapta"
 
-#: settings/xfce_settings_dialog.c:229
+#: ../settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Sus"
 
-#: settings/xfce_settings_dialog.c:233
+#: ../settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Jos"
 
-#: settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Mărime panou:"
 
-#: settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Orientare panou:"
 
-#: settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Poziţie popup:"
 
-#: settings/xfce_settings_dialog.c:343
+#: ../settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "Mereu deasupra:"
 
-#: settings/xfce_settings_dialog.c:397
+#: ../settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Ascundere:"
 
-#: settings/xfce_settings_dialog.c:467
+#: ../settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Setări Panou Xfce"
 
-#: settings/xfce_settings_dialog.c:477
+#: ../settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Aparenţă"
 
-#: settings/xfce_settings_dialog.c:492
+#: ../settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "Comportament"
 
@@ -316,67 +317,67 @@ msgstr "Comportament"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:192
+#: ../plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: plugins/clock/clock.c:422
+#: ../plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "Tip ceas:"
 
-#: plugins/clock/clock.c:435
+#: ../plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "Analog"
 
-#: plugins/clock/clock.c:439
+#: ../plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "Digital"
 
-#: plugins/clock/clock.c:443
+#: ../plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:505
+#: ../plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "Stil oră:"
 
-#: plugins/clock/clock.c:512
+#: ../plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24 ore"
 
-#: plugins/clock/clock.c:518
+#: ../plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12 ore"
 
-#: plugins/clock/clock.c:524
+#: ../plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "AM/PM"
 
-#: plugins/clock/clock.c:562
+#: ../plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "Arată secundele:"
 
-#: plugins/clock/clock.c:675
+#: ../plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Ceas Xfce"
 
-#: plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Număr de rânduri:"
 
-#: plugins/pager/pager.c:316
+#: ../plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Număr de coloane:"
 
-#: plugins/pager/pager.c:373
+#: ../plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Comutator grafic"
 
-#: plugins/switcher/switcher.c:698
+#: ../plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "Comutator desktop"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -386,71 +387,71 @@ msgstr ""
 "\n"
 "Contactaţi administratorul sistemului pentru mai multe detalii."
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "Blocare ecran"
 
-#: plugins/systembuttons/systembuttons.c:171
-#: plugins/systembuttons/systembuttons.c:519
+#: ../plugins/systembuttons/systembuttons.c:171
+#: ../plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "Ieşire"
 
-#: plugins/systembuttons/systembuttons.c:172
-#: plugins/systembuttons/systembuttons.c:520
+#: ../plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "Configurare"
 
-#: plugins/systembuttons/systembuttons.c:173
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:173
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "Info"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:518
+#: ../plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "Blocare"
 
-#: plugins/systembuttons/systembuttons.c:550
+#: ../plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "Buton 1:"
 
-#: plugins/systembuttons/systembuttons.c:565
+#: ../plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "Buton 2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:579
+#: ../plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "_Ascunde"
 
-#: plugins/systembuttons/systembuttons.c:616
+#: ../plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
 msgstr "Butoane sistem"
 
-#: plugins/separator/separator.c:155
+#: ../plugins/separator/separator.c:155
 msgid "Separator"
 msgstr "Separator"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: ../plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Căsuţă mail:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: ../plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Comandă mail nou:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: ../plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Comandă de lansat la sosirea unui mail nou"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: ../plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Comandă de lansat la apăsarea butonului din panou"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: ../plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Interval (sec):"
 
-#: plugins/mailcheck/mailcheck.c:1016
+#: ../plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Verificare mail"

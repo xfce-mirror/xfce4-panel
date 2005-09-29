@@ -1,106 +1,106 @@
-# translation of xfce4-panel.po to Turkish
-# This file is distributed under the same license as the PACKAGE package.
-# Copyright (C) 2004 THE PACKAGE'S COPYRIGHT HOLDER
+# Turkish translations for xfce4-panel package.
+# Copyright (C) 2002-2005 The Xfce development team.
+# This file is distributed under the same license as the xfce4-panel package.
 # Erçin EKER <ercin.eker@linux.org.tr>, 2004
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel\n"
+"Project-Id-Version: xfce4-panel 4.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 12:06+0900\n"
-"PO-Revision-Date: 2004-10-10 11:59+0300\n"
+"POT-Creation-Date: 2005-09-28 12:49+0900\n"
+"PO-Revision-Date: 2005-09-29 14:04+0900\n"
 "Last-Translator: Erçin EKER <ercin.eker@linux.org.tr>\n"
-"Language-Team: Turkish <tr@li.org>\n"
+"Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:557
+#: ../panel/xfce_support.c:557
 msgid "Select file"
 msgstr "Dosya seç"
 
-#: panel/settings.c:181
+#: ../panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "Hiçbir veri bulunamadı. Panel boş olacak."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Konum:"
 
-#: panel/controls_dialog.c:155
+#: ../panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "Nesne tercihleri"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
+#: ../panel/controls_dialog.c:209 ../panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "Bu bileşeni silmek ona bağlı menüyüde silecektir."
 
-#: panel/item_dialog.c:124
+#: ../panel/item_dialog.c:124
 msgid "Select command"
 msgstr "Komut seç"
 
-#: panel/item_dialog.c:268
+#: ../panel/item_dialog.c:268
 msgid "Command:"
 msgstr "Komut:"
 
-#: panel/item_dialog.c:311
+#: ../panel/item_dialog.c:311
 msgid "Run in _terminal"
 msgstr "_Terminalde çalıştır"
 
-#: panel/item_dialog.c:329
+#: ../panel/item_dialog.c:329
 msgid "Use startup _notification"
 msgstr "Başlangıç _uyarısı kullan"
 
-#: panel/item_dialog.c:515
+#: ../panel/item_dialog.c:515
 msgid "Other Icon"
 msgstr "Diğer Simge"
 
-#: panel/item_dialog.c:626
+#: ../panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
 msgstr "Simgeyi değiştirmek için bu çerçeveye bir dosya sürükleyin"
 
-#: panel/item_dialog.c:938
+#: ../panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "Başlık:"
 
-#: panel/item_dialog.c:967
+#: ../panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "İpucu:"
 
-#: panel/item_dialog.c:995
+#: ../panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "Başlatıcıya menü ekle"
 
-#: panel/item_dialog.c:1215
+#: ../panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "Menü nesnesini değiştir"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
+#: ../panel/item_dialog.c:1221 ../panel/controls.c:748
 msgid "_Remove"
 msgstr "_Sil"
 
-#: panel/item_dialog.c:1233 panel/item.c:718
+#: ../panel/item_dialog.c:1233 ../panel/item.c:718
 msgid "Launcher"
 msgstr "Başlatıcı"
 
-#: panel/item.c:546
+#: ../panel/item.c:546
 msgid "Click mouse button 3 to change item"
 msgstr "Nesneyi değiştirmek için farenin 3. tuşuna basın"
 
-#: panel/item.c:571
+#: ../panel/item.c:571
 msgid "Add launcher"
 msgstr "Başlatıcı ekle"
 
-#: panel/item.c:576
+#: ../panel/item.c:576
 msgid "Add new item"
 msgstr "Yeni nesne ekle"
 
-#: panel/main.c:120
+#: ../panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "Çıkmak istediğinizden emin misiniz?"
 
-#: panel/main.c:401
+#: ../panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -123,187 +123,188 @@ msgstr ""
 " GNU GPL ile lisanslanmıştır.\n"
 "\n"
 
-#: panel/main.c:488
+#: ../panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: Oturum yöneticimi olmadan başarıyla başladı"
 
-#: panel/main.c:493
+#: ../panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: Oturum yönetimiyle başarıyla başladı"
 
-#: panel/controls.c:666
+#: ../panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "Panel nesnesi \"%s\" oluşturulamıyor."
 
-#: panel/controls.c:743 panel/panel.c:647
+#: ../panel/controls.c:743 ../panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Seçenekler..."
 
-#: panel/controls.c:757 panel/panel.c:637
+#: ../panel/controls.c:757 ../panel/panel.c:637
 msgid "Add _new item"
 msgstr "Yeni nesne _ekle"
 
-#: panel/controls.c:1040
+#: ../panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Bu nesne ayarlanabilir seçenek sunmuyor"
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:450
+#: ../panel/panel.c:628 ../panel/panel.c:1055
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce Paneli"
 
-#: panel/panel.c:652
+#: ../panel/panel.c:652
 msgid "_About Xfce"
 msgstr "Xfce _Hakkında"
 
-#: panel/panel.c:657
+#: ../panel/panel.c:657
 msgid "_Help"
 msgstr "_Yardım"
 
-#: panel/panel.c:666
+#: ../panel/panel.c:666
 msgid "_Lock screen"
 msgstr "Ekranı _kilitle"
 
-#: panel/panel.c:671
+#: ../panel/panel.c:671
 msgid "_Restart"
 msgstr "_Yeniden Başlat"
 
-#: panel/panel.c:680
+#: ../panel/panel.c:680
 msgid "E_xit"
 msgstr "_Çık"
 
-#: panel/icons.c:63
+#: ../panel/icons.c:63
 msgid "Default"
 msgstr "Öntanımlı"
 
-#: panel/icons.c:64
+#: ../panel/icons.c:64
 msgid "Editor"
 msgstr "Düzenleyici"
 
-#: panel/icons.c:65
+#: ../panel/icons.c:65
 msgid "File management"
 msgstr "Dosya yönetimi"
 
-#: panel/icons.c:66
+#: ../panel/icons.c:66
 msgid "Utilities"
 msgstr "Araçlar"
 
-#: panel/icons.c:67
+#: ../panel/icons.c:67
 msgid "Games"
 msgstr "Oyunlar"
 
-#: panel/icons.c:68
+#: ../panel/icons.c:68
 msgid "Help browser"
 msgstr "Yardım Merkezi"
 
-#: panel/icons.c:69
+#: ../panel/icons.c:69
 msgid "Multimedia"
 msgstr "Çoklu Ortam"
 
-#: panel/icons.c:70
+#: ../panel/icons.c:70
 msgid "Network"
 msgstr "Ağ"
 
-#: panel/icons.c:71
+#: ../panel/icons.c:71
 msgid "Graphics"
 msgstr "Grafik"
 
-#: panel/icons.c:72
+#: ../panel/icons.c:72
 msgid "Printer"
 msgstr "Yazıcı"
 
-#: panel/icons.c:73
+#: ../panel/icons.c:73
 msgid "Productivity"
 msgstr "Üretkenlik"
 
-#: panel/icons.c:74
+#: ../panel/icons.c:74
 msgid "Sound"
 msgstr "Ses"
 
-#: panel/icons.c:75
+#: ../panel/icons.c:75
 msgid "Terminal"
 msgstr "Terminal"
 
-#: panel/mcs_client.c:170
+#: ../panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "Ayar yöneticisi kullanılamıyor"
 
-#: panel/popup.c:267
+#: ../panel/popup.c:267
 msgid "Menu"
 msgstr "Menü"
 
-#: settings/xfce_settings_dialog.c:87
+#: ../settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "Küçük"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "Orta"
 
-#: settings/xfce_settings_dialog.c:95
+#: ../settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "Büyük"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "Kocaman"
 
-#: settings/xfce_settings_dialog.c:175
+#: ../settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "Yatay"
 
-#: settings/xfce_settings_dialog.c:179
+#: ../settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "Dikey"
 
-#: settings/xfce_settings_dialog.c:221
+#: ../settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "Sol"
 
-#: settings/xfce_settings_dialog.c:225
+#: ../settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "Sağ"
 
-#: settings/xfce_settings_dialog.c:229
+#: ../settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "Üst"
 
-#: settings/xfce_settings_dialog.c:233
+#: ../settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "Alt"
 
-#: settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "Panel boyutu:"
 
-#: settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "Panel yönelimi:"
 
-#: settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "Popup konumu:"
 
-#: settings/xfce_settings_dialog.c:343
+#: ../settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "Her zaman üstte:"
 
-#: settings/xfce_settings_dialog.c:397
+#: ../settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "Otomatik Gizleme:"
 
-#: settings/xfce_settings_dialog.c:467
+#: ../settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce Panel Ayarları"
 
-#: settings/xfce_settings_dialog.c:477
+#: ../settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "Görünüm"
 
-#: settings/xfce_settings_dialog.c:492
+#: ../settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "Davranış"
 
@@ -315,67 +316,67 @@ msgstr "Davranış"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:192
+#: ../plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%d %B %Y, %A"
 
-#: plugins/clock/clock.c:422
+#: ../plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "Saat türü:"
 
-#: plugins/clock/clock.c:435
+#: ../plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "Analog"
 
-#: plugins/clock/clock.c:439
+#: ../plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "Sayısal"
 
-#: plugins/clock/clock.c:443
+#: ../plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: plugins/clock/clock.c:505
+#: ../plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "Saat biçimi:"
 
-#: plugins/clock/clock.c:512
+#: ../plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24 saat"
 
-#: plugins/clock/clock.c:518
+#: ../plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12 saat"
 
-#: plugins/clock/clock.c:524
+#: ../plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "ÖÖ/ÖS"
 
-#: plugins/clock/clock.c:562
+#: ../plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "Saniyeyi göster:"
 
-#: plugins/clock/clock.c:675
+#: ../plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Xfce Saati"
 
-#: plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "Satır sayısı:"
 
-#: plugins/pager/pager.c:316
+#: ../plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "Sütun sayısı:"
 
-#: plugins/pager/pager.c:373
+#: ../plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "Grafik sayfalayıcı"
 
-#: plugins/switcher/switcher.c:698
+#: ../plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "Masaüstü değiştirici"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -385,71 +386,71 @@ msgstr ""
 "\n"
 "Daha fazla bilgi için sistem yöneticinize baş vurun"
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "Ekranı kilitle"
 
-#: plugins/systembuttons/systembuttons.c:171
-#: plugins/systembuttons/systembuttons.c:519
+#: ../plugins/systembuttons/systembuttons.c:171
+#: ../plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "Çıkış"
 
-#: plugins/systembuttons/systembuttons.c:172
-#: plugins/systembuttons/systembuttons.c:520
+#: ../plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "Ayarlar"
 
-#: plugins/systembuttons/systembuttons.c:173
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:173
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "Bilgi"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:518
+#: ../plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "Kilitle"
 
-#: plugins/systembuttons/systembuttons.c:550
+#: ../plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "Düğme 1:"
 
-#: plugins/systembuttons/systembuttons.c:565
+#: ../plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "Düğme 2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:579
+#: ../plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "_Gizle"
 
-#: plugins/systembuttons/systembuttons.c:616
+#: ../plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
 msgstr "Sistem düğmeleri"
 
-#: plugins/separator/separator.c:155
+#: ../plugins/separator/separator.c:155
 msgid "Separator"
 msgstr "Ayırıcı"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: ../plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "Posta kutusu:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: ../plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "Yeni posta komutu:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: ../plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "Yeni posta geldiğinde çalıştırılacak komut"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: ../plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "Paneldeki düğmeye tıklandığında çalıştırılacak komut"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: ../plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Gecikme (sn):"
 
-#: plugins/mailcheck/mailcheck.c:1016
+#: ../plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Posta denetleyici"

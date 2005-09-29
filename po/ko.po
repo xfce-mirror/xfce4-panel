@@ -1,107 +1,107 @@
-# Xfce4-panel German translation
-# Copyright (C) 2003 Olivier Fourdan
+# Korean translations for xfce4-panel package.
+# Copyright (C) 2002-2005 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-# Moritz Heiber <mistermoe@hackerboard.de>, 2003
+# ByungHyun Choi <byunghyun.choi@gmail.com>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 1.0.0\n"
+"Project-Id-Version: xfce4-panel 4.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-26 12:06+0900\n"
-"PO-Revision-Date: 2005-07-02 00:25:15+0900\n"
-"Last-Translator: ByungHyun Choi<byunghyun.choi@gmail.com>\n"
+"POT-Creation-Date: 2005-09-28 12:49+0900\n"
+"PO-Revision-Date: 2005-09-29 13:57+0900\n"
+"Last-Translator: ByungHyun Choi <byunghyun.choi@gmail.com>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
 "net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel/xfce_support.c:557
+#: ../panel/xfce_support.c:557
 msgid "Select file"
 msgstr "화일선택"
 
-#: panel/settings.c:181
+#: ../panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "데이터를 찾지 못했기 때문에 패널에는 아무 것도 보이지 않습니다."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "위치:"
 
-#: panel/controls_dialog.c:155
+#: ../panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "속성"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
+#: ../panel/controls_dialog.c:209 ../panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "이 항목을 삭제하면 팝업 메뉴도 같이 사라집니다."
 
-#: panel/item_dialog.c:124
+#: ../panel/item_dialog.c:124
 msgid "Select command"
 msgstr "명령어 선택"
 
-#: panel/item_dialog.c:268
+#: ../panel/item_dialog.c:268
 msgid "Command:"
 msgstr "명령:"
 
-#: panel/item_dialog.c:311
+#: ../panel/item_dialog.c:311
 msgid "Run in _terminal"
 msgstr "터미널에서 실행하기(_t)"
 
-#: panel/item_dialog.c:329
+#: ../panel/item_dialog.c:329
 msgid "Use startup _notification"
 msgstr "시작과 동시에 알림(_n)"
 
-#: panel/item_dialog.c:515
+#: ../panel/item_dialog.c:515
 msgid "Other Icon"
 msgstr "다른 아이콘"
 
-#: panel/item_dialog.c:626
+#: ../panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
 msgstr "아이콘을 변경하려면 이 프레임에 화일을 끌어다 놓으세요."
 
-#: panel/item_dialog.c:938
+#: ../panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "캡션:"
 
-#: panel/item_dialog.c:967
+#: ../panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "도구도움말:"
 
-#: panel/item_dialog.c:995
+#: ../panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "실행기에 메뉴 추가"
 
-#: panel/item_dialog.c:1215
+#: ../panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "메뉴 항목 변경"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
+#: ../panel/item_dialog.c:1221 ../panel/controls.c:748
 msgid "_Remove"
 msgstr "삭제(_R)"
 
-#: panel/item_dialog.c:1233 panel/item.c:718
+#: ../panel/item_dialog.c:1233 ../panel/item.c:718
 msgid "Launcher"
 msgstr "실행기"
 
-#: panel/item.c:546
+#: ../panel/item.c:546
 msgid "Click mouse button 3 to change item"
 msgstr "항목을 변경하려면 마우스 버튼 3을 클릭하세요."
 
-#: panel/item.c:571
+#: ../panel/item.c:571
 msgid "Add launcher"
 msgstr "실행기 추가"
 
-#: panel/item.c:576
+#: ../panel/item.c:576
 msgid "Add new item"
 msgstr "새 항목 추가"
 
-#: panel/main.c:120
+#: ../panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "종료하시겠습니까?"
 
-#: panel/main.c:401
+#: ../panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -124,187 +124,188 @@ msgstr ""
 " GNU GPL 라이선스를 따릅니다.\n"
 "\n"
 
-#: panel/main.c:488
+#: ../panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "세션관리 없이 %s를(을) 시작했습니다."
 
-#: panel/main.c:493
+#: ../panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "세션을 관리하면서 %s를(을) 시작했습니다."
 
-#: panel/controls.c:666
+#: ../panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "패널 항목 \"%s\"를(을) 생성하지 못 했습니다."
 
-#: panel/controls.c:743 panel/panel.c:647
+#: ../panel/controls.c:743 ../panel/panel.c:647
 msgid "_Properties..."
 msgstr "속성(_P)"
 
-#: panel/controls.c:757 panel/panel.c:637
+#: ../panel/controls.c:757 ../panel/panel.c:637
 msgid "Add _new item"
 msgstr "새 항목 추가(_n)"
 
-#: panel/controls.c:1040
+#: ../panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "이 아이템은 속성을 정의할 수 없습니다."
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
-#: settings/xfce_settings_dialog.c:450
+#: ../panel/panel.c:628 ../panel/panel.c:1055
+#: ../settings/xfce_settings_plugin.c:86
+#: ../settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce 패널"
 
-#: panel/panel.c:652
+#: ../panel/panel.c:652
 msgid "_About Xfce"
 msgstr "Xfce는(_A)..."
 
-#: panel/panel.c:657
+#: ../panel/panel.c:657
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: panel/panel.c:666
+#: ../panel/panel.c:666
 msgid "_Lock screen"
 msgstr "화면잠금(_L)"
 
-#: panel/panel.c:671
+#: ../panel/panel.c:671
 msgid "_Restart"
 msgstr "다시 시작(_R)"
 
-#: panel/panel.c:680
+#: ../panel/panel.c:680
 msgid "E_xit"
 msgstr "종료(_x)"
 
-#: panel/icons.c:63
+#: ../panel/icons.c:63
 msgid "Default"
 msgstr "기본"
 
-#: panel/icons.c:64
+#: ../panel/icons.c:64
 msgid "Editor"
 msgstr "편집기"
 
-#: panel/icons.c:65
+#: ../panel/icons.c:65
 msgid "File management"
 msgstr "화일 관리"
 
-#: panel/icons.c:66
+#: ../panel/icons.c:66
 msgid "Utilities"
 msgstr "도구"
 
-#: panel/icons.c:67
+#: ../panel/icons.c:67
 msgid "Games"
 msgstr "게임"
 
-#: panel/icons.c:68
+#: ../panel/icons.c:68
 msgid "Help browser"
 msgstr "도움말 브라우져"
 
-#: panel/icons.c:69
+#: ../panel/icons.c:69
 msgid "Multimedia"
 msgstr "멀티미디어"
 
-#: panel/icons.c:70
+#: ../panel/icons.c:70
 msgid "Network"
 msgstr "네트워크"
 
-#: panel/icons.c:71
+#: ../panel/icons.c:71
 msgid "Graphics"
 msgstr "그래픽"
 
-#: panel/icons.c:72
+#: ../panel/icons.c:72
 msgid "Printer"
 msgstr "프린터"
 
-#: panel/icons.c:73
+#: ../panel/icons.c:73
 msgid "Productivity"
 msgstr "개발도구"
 
-#: panel/icons.c:74
+#: ../panel/icons.c:74
 msgid "Sound"
 msgstr "사운드"
 
-#: panel/icons.c:75
+#: ../panel/icons.c:75
 msgid "Terminal"
 msgstr "터미널"
 
-#: panel/mcs_client.c:170
+#: ../panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "설정 도구 모음을 실행시킬 수 없군요."
 
-#: panel/popup.c:267
+#: ../panel/popup.c:267
 msgid "Menu"
 msgstr "메뉴"
 
-#: settings/xfce_settings_dialog.c:87
+#: ../settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "작게"
 
-#: settings/xfce_settings_dialog.c:91
+#: ../settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "중간"
 
-#: settings/xfce_settings_dialog.c:95
+#: ../settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "크게"
 
-#: settings/xfce_settings_dialog.c:99
+#: ../settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "아주 크게"
 
-#: settings/xfce_settings_dialog.c:175
+#: ../settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "수평"
 
-#: settings/xfce_settings_dialog.c:179
+#: ../settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "수직"
 
-#: settings/xfce_settings_dialog.c:221
+#: ../settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "좌측"
 
-#: settings/xfce_settings_dialog.c:225
+#: ../settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "우측"
 
-#: settings/xfce_settings_dialog.c:229
+#: ../settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "위"
 
-#: settings/xfce_settings_dialog.c:233
+#: ../settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "아래"
 
-#: settings/xfce_settings_dialog.c:268
+#: ../settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "패널 크기:"
 
-#: settings/xfce_settings_dialog.c:284
+#: ../settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "패널 방향:"
 
-#: settings/xfce_settings_dialog.c:303
+#: ../settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "패널 위치:"
 
-#: settings/xfce_settings_dialog.c:343
+#: ../settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "항상 위로: "
 
-#: settings/xfce_settings_dialog.c:397
+#: ../settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "자동 숨김:"
 
-#: settings/xfce_settings_dialog.c:467
+#: ../settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce 패널 설정"
 
-#: settings/xfce_settings_dialog.c:477
+#: ../settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "겉 모습"
 
-#: settings/xfce_settings_dialog.c:492
+#: ../settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "동작"
 
@@ -316,67 +317,67 @@ msgstr "동작"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: plugins/clock/clock.c:192
+#: ../plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%Y-%m-%d %A"
 
-#: plugins/clock/clock.c:422
+#: ../plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "시계 형태:"
 
-#: plugins/clock/clock.c:435
+#: ../plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "아날로그"
 
-#: plugins/clock/clock.c:439
+#: ../plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "디지탈"
 
-#: plugins/clock/clock.c:443
+#: ../plugins/clock/clock.c:443
 msgid "LED"
 msgstr "전광판"
 
-#: plugins/clock/clock.c:505
+#: ../plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "시간 표시:"
 
-#: plugins/clock/clock.c:512
+#: ../plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24시간"
 
-#: plugins/clock/clock.c:518
+#: ../plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12시간"
 
-#: plugins/clock/clock.c:524
+#: ../plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "오전/오후"
 
-#: plugins/clock/clock.c:562
+#: ../plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "초:"
 
-#: plugins/clock/clock.c:675
+#: ../plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Xfce 시계"
 
-#: plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "몇 줄:"
 
-#: plugins/pager/pager.c:316
+#: ../plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "몇 열:"
 
-#: plugins/pager/pager.c:373
+#: ../plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "페이저"
 
-#: plugins/switcher/switcher.c:698
+#: ../plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "데스크탑 전환기"
 
-#: plugins/systembuttons/systembuttons.c:85
+#: ../plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -385,71 +386,71 @@ msgstr ""
 "설정 시스템을 사용하지 못하도록 설정되어 있으니,\n"
 "상세한 내용은 시스템 관리자에게 질문하십시오."
 
-#: plugins/systembuttons/systembuttons.c:170
+#: ../plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "화면 잠금"
 
-#: plugins/systembuttons/systembuttons.c:171
-#: plugins/systembuttons/systembuttons.c:519
+#: ../plugins/systembuttons/systembuttons.c:171
+#: ../plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "종료"
 
-#: plugins/systembuttons/systembuttons.c:172
-#: plugins/systembuttons/systembuttons.c:520
+#: ../plugins/systembuttons/systembuttons.c:172
+#: ../plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "설정"
 
-#: plugins/systembuttons/systembuttons.c:173
-#: plugins/systembuttons/systembuttons.c:521
+#: ../plugins/systembuttons/systembuttons.c:173
+#: ../plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "정보"
 
 #. set names to use in option menus
-#: plugins/systembuttons/systembuttons.c:518
+#: ../plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "잠그기"
 
-#: plugins/systembuttons/systembuttons.c:550
+#: ../plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "버튼 1:"
 
-#: plugins/systembuttons/systembuttons.c:565
+#: ../plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "버튼 2:"
 
 #. checkbox
-#: plugins/systembuttons/systembuttons.c:579
+#: ../plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "도움말(_H)"
 
-#: plugins/systembuttons/systembuttons.c:616
+#: ../plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
 msgstr "시스템 버튼"
 
-#: plugins/separator/separator.c:155
+#: ../plugins/separator/separator.c:155
 msgid "Separator"
 msgstr "분리표시"
 
-#: plugins/mailcheck/mailcheck.c:838
+#: ../plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "우편함:"
 
-#: plugins/mailcheck/mailcheck.c:875
+#: ../plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "메일 명령:"
 
-#: plugins/mailcheck/mailcheck.c:889
+#: ../plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "새로운 편지가 왔을 때 실행할 명령"
 
-#: plugins/mailcheck/mailcheck.c:919
+#: ../plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "패널의 버튼을 클릭할 때 실행할 명령"
 
-#: plugins/mailcheck/mailcheck.c:940
+#: ../plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "확인주기(초):"
 
-#: plugins/mailcheck/mailcheck.c:1016
+#: ../plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "메일 확인"
