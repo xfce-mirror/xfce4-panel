@@ -22,6 +22,7 @@
 #ifndef _XFCE_PANEL_PLUGIN_H
 #define _XFCE_PANEL_PLUGIN_H
 
+#include <stdlib.h>
 #include <libxfce4panel/xfce-panel-enums.h>
 #include <libxfce4panel/xfce-panel-plugin-iface.h>
 #include <libxfce4panel/xfce-panel-internal-plugin.h> 
