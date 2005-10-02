@@ -868,6 +868,9 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin)
                 "xfce-panel-plugin-button-release-callback",
                 GINT_TO_POINTER (id));
 
+        gtk_menu_set_screen (menu, 
+                             gtk_widget_get_screen (GTK_WIDGET (plugin)));
+        
         gtk_menu_popup (menu, NULL, NULL, NULL, NULL, 0, GDK_CURRENT_TIME);
     }
 }
@@ -893,6 +896,8 @@ _plugin_popup_menu (GtkWidget *widget, GdkEventButton *ev,
     if (ev->button == 3 || (ev->button == 1 && 
         (ev->state & modifiers) == GDK_CONTROL_MASK))
     {
+        gtk_menu_set_screen (menu, gtk_widget_get_screen (widget));
+        
         gtk_menu_popup (menu, NULL, NULL, NULL, NULL, ev->button, ev->time);
         return TRUE;
     }

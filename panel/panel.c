@@ -593,6 +593,9 @@ _panel_button_pressed (GtkWidget *widget, GdkEventButton *ev)
     
         priv = PANEL_GET_PRIVATE (widget);
 
+        gtk_menu_set_screen (GTK_MENU (priv->menu), 
+                             gtk_widget_get_screen (widget));
+        
         gtk_menu_popup (GTK_MENU (priv->menu), NULL, NULL, NULL, NULL, 
                         ev->button, ev->time);
 
