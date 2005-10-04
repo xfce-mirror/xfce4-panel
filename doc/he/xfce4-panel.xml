@@ -1,0 +1,733 @@
+<?xml version='1.0'?> 
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+          "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY manrevision "1.2"> 
+  <!ENTITY date "Jan 2005"> 
+  <!ENTITY appversion "4.2.0"> 
+  <!ENTITY app "<application>xfce4-panel</application>">
+]>
+
+<article id="xfce4-panel" lang="he">
+
+<!-- Header --> 
+<articleinfo>
+
+  <title>לוח Xfce 4</title>
+  
+  <copyright>
+    <year>2004</year> <holder>Jasper Huijsmans</holder>
+  </copyright>
+
+<!-- translators: uncomment this: -->
+
+  <copyright>
+   <year>2005</year> <holder>Dotan Kamber (Hebrew
+   translation)</holder>
+  </copyright>
+
+<!-- I don't know about this
+  <legalnotice id="legalnotice">
+    <para>
+      This document is provided under the terms of the GNU GPL, version
+      2 or (at your option) any later version.
+    </para>
+  </legalnotice>
+-->
+  <authorgroup>
+
+    <author>
+      <firstname>Jasper</firstname> <surname>Huijsmans</surname>
+      <affiliation>
+	<address><email>jasper@xfce.org</email></address>
+      </affiliation>
+    </author>
+
+<!-- This is appropriate place for other contributors: translators,
+maintainers, etc. Commented out by default. -->
+
+    <othercredit role="translator">
+      <firstname>דותן</firstname> <surname>קמבר</surname>
+      <affiliation>
+	<address><email>kamberd@yahoo.com</email> </address>
+      </affiliation> <contrib>תרגום עברי</contrib>
+    </othercredit>
+
+  </authorgroup>
+
+  <!--
+  <revhistory>
+    <revision>
+      <revnumber>0.4</revnumber> 
+      <date>May 2003</date>
+      <authorinitials>jbh</authorinitials>
+    </revision>
+    <revision>
+      <revnumber>0.3</revnumber> 
+      <date>February 2003</date>
+      <authorinitials>jbh</authorinitials>
+    </revision>
+  </revhistory>
+  -->
+
+ <releaseinfo>מדריך זה מתאר את &app; גרסה &appversion; עידכון אחרון : &date;
+</releaseinfo>
+
+</articleinfo>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-intro">
+  <title>מבוא</title>
+
+  <para>
+לוח XFce 4 הנו חלק<ulink url="http://www.xfce.org" 
+      type="html">סביבת שולחן העבודה של  Xfce 4</ulink> ומכיל משגרי תוכניות, תפריט לוח, שעון, מחליף שולחנות עבודה ועוד. היבטים רבים של הלוח ניתנים להגדרה דרך תיבות דו-שיח גרפיות. מדריך זה אמור לספק לך את כל המידע הנחוץ כדי להתאים את הלוח להעדפותיך.
+  </para>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-getting-started">
+  <title>מתחילים</title>
+  
+  <para>בדרך כלל יועלה הלוח כחלק מהופעת Xfce בעת השימוש בתסריט <application>startxfce4</application> הפקודה אשר תריץ את הלוח תהיה &app;.
+  </para>
+
+  <para>
+כאשר יעלה הלוח, יוצג סרגל בחלק התחתון של המסך הנראה כך:
+  </para>
+
+  <figure id="default-panel-fig">
+    <title>לוח ברירת המחדל של Xfce</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/default_panel.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/default_panel.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>לוח XFCE בצורת ברירת המחדל, מספר משגרים, בודק דואר עם הודעה חדשה, מחליף סביבות עבודה ושעון, כולל גם תפריט לוח פתוח
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>
+התמונה מציגה את הלוח במצב ברירת המחדל עם תפריט לוח פתוח. העברת העכבר מעל פריט בלוח תציג את תיאור הכלי. הלוח של Xfce עושה שימוש ניכר בלחצנים הימני והשמאלי של העכבר. לחצן עכבר השמאלי מפעיל את פעולת ברירת המחדל של הפריט בעוד שלחצן העכבר הימני על פי רוב יפעיל תפריט מקושר. לחצן עכבר שמאלי בתוספת Shift יכול בדרך כלל לשמש כתחליף ללחצן הימני. לתשומת לבך- המדריך מניח שימוש בעכבר לימניים.
+  </para>
+
+  <para>קיימות נקודות אחיזה להזזת הלוח משני צידיו. ניתן להשתמש בנקודות אחיזה אלו כדי לגרור את הלוח לכל מקום על שולי המסך. גרירה מעבר למחצית המסך תעביר את הלוח אל שולי צידו השני של המסך. לחיצה ימנית של העכבר על נקודת אחיזה תציג תפריט מזנק … קדימה, עוד לא ניסית?! ;-)
+  </para>
+
+  <figure id="handle-popup-fig">
+    <title>תפריט מזנק של נקודת אחיזת הלוח</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/handle-popup.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/handle-popup.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>תפריט מזנק שך נקודת האחיזה.</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>השטח בין ידיות האחיזה מכיל פריטי לוח. הפריטים הזמינים מפורטים בחלק "<ulink url="#panel-items">רכיבי הלוח</ulink>" מרבית הפריטים מבצעים פעולה בעקבות לחיצה. לחיצה ימנית על פריט תזניק תפריט שממנו ניתן לפתוח תיבת דו-שיח מאפיינים…, להסיר את הפריט או להוסיף פריט חדש. פריטים יכולים גם להתווסף מתפריט הלחיצה הימנית על אחת מנקודות האחיזה של הלוח (מפורט לעיל). 
+  </para>
+
+  <figure id="item-popup-fig">
+    <title>תפריט מזנק של פריט</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/item-popup.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/item-popup.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>תפריט מזנק של פריט.</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>כאשר ברצונך להוסיף פריט, תיבת דו-שיח תפתח עם רשימת כל רכיבי הלוח הזמינים. חלק מהרכיבים יכולים להופיע פעם אחת בלבד בלוח, לדוגמה מגש המערכת, והם יופיעו בצבע אפור כאשר פריט זהה כבר נמצא.
+  </para>
+  
+  <figure id="add-item-dialog-fig">
+    <title>תיבת הדו-שיח להוספת רכיב</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/add-item-dialog.png" format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/add-item-dialog.eps" format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>תיבת דו-שיח עם רכיבים זמינים של הלוח</phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <para>
+העדפות לוח מקיפות ניתן לשנות דרך מנהל הגדות Xfce 4, אותו ניתן להתחיל או ממשגר בלוח או על ידי הרצת <application>xfce-settings-show</application>.
+    ניתן לעיין ב- "<ulink url="#panel-settings">העדפות הלוח</ulink>" להסברים על האפשרויות הזמינות.
+  </para>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-items">
+  <title>רכיבי הלוח</title>
+
+  <para>
+ללוח Xfce 4 יש את היכולת לטעון הרחבות חיצוניות כמו גם כאלו שמובנות בו. בחלק זה נתאר רק את רכיבי הלוח המותקנים איתו.
+  </para>
+  
+  <para>
+    תיבת הדו-שיח של מאפיני רכיב בלוח ניתנת לפתיחה דרך תפריט לחצן העכבר הימני על הרכיב. לכל סוג של רכיבי לוח יש את תיבת הדו-שיח שלו. כל תיבת דו-שיח מציעה לכל הפחות את האפשרויות הבאות:
+  </para>
+
+  <itemizedlist>
+    <listitem>שינוי מיקום הרכיב על הלוח.</listitem>
+    <listitem>הסרת הרכיב.</listitem>
+    <listitem>סגירת תיבת הדו-שיח.</listitem>
+  </itemizedlist>
+
+
+  <sect2 id="launcher-item">
+    <title>משגר</title>
+
+    <para>המשגר הוא פריט הלוח הנפוץ ביותר. המשגר מאפשר איתחול תוכניות מהלוח. תיבת הדו-שיח מאפיינים מציעה את האפשרויות הבאות:
+    </para>
+
+    <variablelist>
+      <varlistentry>
+	<term>סמל</term>
+	<listitem><para>סמלים בהם יהיה שימוש בלוח יעקבו אחר ערכת הנושא הנבחרת  
+	  <ulink url="xfce-mcs-plugins.html#ui-settings">מתיבת הדו-שיח של הגדרות המנשק</ulink>. ניתן כמובן לבחור בסמל מותאם אישית, הן על ידי דפדפוף במערכת הקבצים מהכפתור הסמוך למובאה והן על ידי גרירת תמונה על אזור התצוגה המקדימה ממנהל הקבצים.
+</para></listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>פקודה</term>
+	<listitem><para>ניתן להקליד את הפקודה להרצה או לדפדף במערכת הקבצים. קיימת אפשרות לאתחל במסוף ואפשרות להתשמש בהודעת אתחול. משמעות האפשרות האחרונה היא שמנהל החלונות יכול להראות שעון בעת טענית התוכנית אך גם על הישום לתמוך בכך. תוכניות שנבנו עם GTK 2.2 אמורות לתמוך בכך.
+</para></listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>תיאור הכלי</term>
+	<listitem><para>רכיב הלוח יציג תיאור כלי זה אם יושהה העכבר עליו.
+</para></listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>תפריט</term>
+	<listitem><para>למשגר יכול להיות מצורף תפריט לוח. כאשר נבחרת אפשרות זאת כפתור קטן עם חץ יופיע בסמוך לפריט. מידע נוסף על תפריטי לוח ניתן למצוא <ulink url="#subpanels">כאן</ulink> ניתן לשנות את מיקום כפתור התפריט מתיבת הדו-שיח של מאפייני הלוח.
+</para></listitem>
+      </varlistentry>
+    </variablelist>
+    
+    <figure id="launcher-fig">
+      <title>משגר</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/launcher-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/launcher-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>תיבת דו שיח של אפשרויות רכיב לוח.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="clock-item">
+    <title>שעון Xfce</title>
+
+    <para>לשעון של Xfce מספר אפשרויות לשינוי התצוגה. קיימים שלושה סוגי שעונים: אנאלוגי, דיגיטאלי ו-LED. קיימת אפשרות להצגת שניות ועבור השעונים מסוג LED ודיגיטאלי באפשרותך לבחור בין מצב תצוגה של 24 שעות למצב של 12 שעות ולמצב של 12 שעות עם חיווי AM/PM. השעון מציג את התאריך הנוכחי כתיאור הכלי. לחיצה על השעון אינה מבצעת כל פעולה.
+    </para>
+    
+    <figure id="clock-fig">
+      <title>רכיב השעון</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/clock-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/clock-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>תיבת דו-שיח לאפשרויות השעון</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="mailcheck-item">
+    <title>בודק הדואר</title>
+
+    <para>בודק הדואר מפקח על תיבת דואר לדואר נכנס. תיבת הדואר יכולה להיות בתסדיר mbox או Maildir.
+    </para>
+    
+    <para>סמל תיבת הדואר עוקב אחר הגדרות ערכת הנושא. ניתן לבחור את מיקום תיבת הדואר, הפקודה להרצה בלחיצה על הכפתור ואת המרווח בין בדיקות הדואר. הפקודה בעלת אפשרויות כשל פקודת משגר (פירוט <ulink url="#launcher-item" type="html">לעיל</ulink>).ניתן גם לבחור בפקודה שתבוצע בהתקבל הודעה חדשה.
+    </para>
+      
+    <figure id="mailcheck-fig">
+      <title>רכיב בודק הדואר</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/mailcheck-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/mailcheck-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>תיבת האפשרויות של בודק הדואר</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+    <para>לשימוש מתקדם ניתן לספק תיבת POP3 על שרת מרוחק אם משתמשים בתחביר הבא:
+      <option>pop3://user:password@server:port</option>. אם לא ימולא שדה ה-port יעשה שימוש ב- 110 כברירת מחדל.
+    </para>
+    
+    <para>יש לשים לב כי אפשרות זאת עדיין ניסיונית בשלב זה. בטרם שימוש, יש לודא כי חיבור האינטרנט תקין משום שכשל בבדיקת הדואר עלול לחסום את הלוח.
+    </para>
+
+  </sect2>
+
+  <sect2 id="switcher-item">
+    <title>מחליף סביבות עבודה גרפי</title>
+
+    <para>הלוח מספק שני רכיבים לטיפול בשולחנות עבודה וירטואלים - מחליף סיבות עבודה דמוי CDE, שמציג כפתורים עם שם שלוחן העבודה, ומחליף סביבות עבודה גרפי, שמציג תמונה ממוזערת של שולחן העבודה ואף מאפשר להזיז חלונות בין סביבות עבודה שונות על ידי גרירת החלונות הממוזערים במחליף סביבות העבודה. בעזרת מחליף סביבות העבודה הגרפי ניתן גם לעבור סביבות עבודה על ידי שימוש בגלגלת העכבר.
+    </para>
+
+    <para>מחליף סביבות העבודה הגרפי ניתן לקבוע את מספר השורות בהן יעשה שימוש, או הטורים כאשר הלוח במצב אנכ.</para>
+    
+    <figure id="pager-fig">
+      <title>מחליף סביבות עבודה גרפי</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/pager-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <textobject>
+	    <phrase> תיבת אפשרויות של מחליף סביבות העבודה 
+	    </phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+  </sect2>
+
+  <sect2 id="systembuttons-item">
+    <title>כפתורי מערכת</title>
+
+    <para>רכיב כפתורי המערכת מציג כפתור או שניים היכולים לבצע פעולות מערכת מיוחדות. הכפתורים עוקבים אחר ערכת הנושא לסמלי הלוח. קיימים ארבע כפתורים זמינים:
+</para>
+
+    <variablelist>
+      <varlistentry>
+	<term>נעילה</term>
+	<listitem><para>מריץ את התסריט <application>xflock4</application> שינסה לנעול את המסך בעזרת xscreensaver או במקרה שזה יכשל xlock.
+</para></listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>יציאה</term>
+	<listitem><para>כפתור זה יקפיץ תיבת דו-שיח לסיום הפעלת Xfce.
+</para></listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>מידע</term>
+	<listitem><para>כפתור המידע יציג את תיבת הדו-שיח <emphasis>אודות Xfce 4</emphasis>.
+</para></listitem>
+      </varlistentry>
+      <varlistentry>
+	<term>הגדרות</term>
+	<listitem><para>לחיצה על כפתור ההגדרות תפתח את תיבת מנהל ההגדרות של Xfce, ממנו יש גישה להגדרות כל רכיבי Xfce וחלק מהגדרות המערכת, לדוגמה התנהגות העכבר והגדרות מנשק המשתמש.
+</para></listitem>
+      </varlistentry>
+    </variablelist>
+    
+    <figure id="systembuttons-fig">
+      <title>כפתורי המערכת</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/systembuttons-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/systembuttons-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>מציג תיבת אפשרויות של כפתורי המערכת.
+	    </phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+
+  </sect2>
+
+  <sect2 id="separator-item">
+    <title>מפריד</title>
+
+    <para>רכיב זה פשוט מוסיף קו מפריד ללוח. אין לפריט אפשרויות לכיוון פרט למיקומו.
+    </para>
+    
+    <para>יתכן כי יהיה מעט קשה להגיע לתפריט הלחצן הימני של פריט זה בשל גודלו הפיזי של הרכיב.
+    </para>
+
+    <figure id="nooptions-fig">
+      <title>רכיב ללא אפשרויות</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/nooptions-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/nooptions-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>מציג תיבה של רכיב ללא אפשרויות.
+	    </phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+    
+  </sect2>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+
+</sect1>
+
+<sect1 id="subpanels">
+  <title>תפריטי הלוח</title>
+
+  <para>למשגרים בלוח יכול להיות משויך תפריט שנפתח בלחיצה על החץ הקטן הסמוך לפריט. מיקומו המדויק של לחצן זה ניתן להגדרה מתיבת הדו-שיח של הגדרות הלוח. ניתן לפתוח את התפריט גם על ידי לחיצה ממוסכת על כפתור המשגר. לאחר השהיה קצרה התפריט יפתח.
+  </para>
+
+  <para>יש להשתמש ב-'הוסף משגר' המופיע בראש תפריט לוח כדי להוסיף רכיב חדש, לחילופין ניתן לגרור קובץ בר הפעלה אל פריט זה ממנהל קבצים. כדי להסיר פריט מתפריט לוח יש להשתמש בכפתור ה-'הסרה' בתיבת הדו-שיח של המאפיינים.
+  </para>
+
+  <para>תכונה מיוחדת של תפריטי לוח היא יכולתם להיות מנותקים מהלוח ו-“לחיות” בחלון משלהם. כדי להפריד תפריט מהלוח יש ללחוץ על הקו בתחתית התפריט (ניתן לראות זאת <ulink
+      url="#default-panel-fig">בתמונת המסך</ulink> של לוח ברירת המחדל).
+  </para>
+
+  <para>תיבת הדו-שיח של פריט בתפריט נפתחת מידית בלחיצת לחצן העכבר הימני. תיבת הדו-שיח עצמה דומה ביותר לתיבת הדו-שיח של משגרי הלוח.
+  </para>
+
+  <figure id="menuitem-fig">
+    <title>תפריט לוח</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/menuitem-properties.png" 
+		     format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/menuitem-properties.eps" 
+		     format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>תיבת אפשרויות של התפריט.
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-settings">
+  <title>העדפות הלוח</title>
+
+  <para>את תיבת הדו-שיח של מאפייני הלוח ניתן לפתוח הן ממנהל ההגדרות של Xfce 4 והן מתפריט הלחצן הימני של העכבר על אחת מידיות ההזזה של הלוח.
+  </para>
+
+  <figure id="panel-settings-fig">
+    <title>הגדרות הלוח</title> 
+    <screenshot>
+      <mediaobject>
+	<imageobject>
+	  <imagedata fileref="images/panel-settings.png" 
+		     format="PNG"/>
+	</imageobject> 
+	<!-- 
+	<imageobject>
+	  <imagedata fileref="images/panel-settings.eps" 
+		     format="EPS"/>
+	</imageobject> 
+	--> 
+	<textobject>
+	  <phrase>אפשרויות של הגדרות גלובליות של הלוח.
+	  </phrase>
+	</textobject>
+      </mediaobject>
+    </screenshot>
+  </figure>
+
+  <sect2 id="panel-apearance">
+    <title>הגדרות הלוח</title>
+
+    <variablelist>
+      <varlistentry>
+	<term>גודל</term> 
+	<listitem>
+	  <para>ישנם ארבעה גדלים זמינים ללוח: קטן, בינוני, גדול וענק. בינוני הוא גודל ברירת המחדל.
+	  </para>
+	</listitem>
+      </varlistentry> 
+      <varlistentry>
+	<term>כיוון</term> 
+	<listitem>
+	  <para>ניתן לקבוע ללוח של Xfce 4 כיוון אנכי כמו גם את הפרישה האופקית הרגילה.
+	  </para>
+	</listitem>
+      </varlistentry> 
+      <varlistentry>
+	<term>מיקום התפריט המזנק</term> 
+	<listitem>
+	  <para>אפשרות זו משנה את מיקום הכפתור שפותח תפריט לוח. ניתן לבחור בין - מעל, מתחת, משמאל או מימין לרכיב הלוח לו שייך התפריט.
+	  </para>
+	</listitem>
+      </varlistentry> 
+    </variablelist>
+    
+  </sect2>
+
+  <sect2 id="panel-behaviour">
+    <title>התנהגות</title>
+
+    <variablelist>
+
+      <!--
+      <varlistentry>
+	<term>Always on top</term> 
+	<listitem>
+	  <para>If you choose the always on top option, the panel frame will 
+	    always appear above other windows, and maximized windows won't 
+	    cover the panel area.
+	  </para>
+	</listitem>
+      </varlistentry>
+      -->
+
+      <varlistentry>
+	<term>הסתרה אוטומטית</term> 
+	<listitem>
+	  <para>בחירה בהסתרה אוטומטית תביא לצמצום הלוח לידי סרגל צר. העברת העכבר מעליו תרחיב או הלוח חזרה.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+  </sect2>
+
+</sect1>
+
+  <!-- extra space -->
+  <para>&nbsp;</para>
+
+<sect1 id="panel-advanced">
+  <title>מתקדם</title>
+
+  <sect2 id="panel-files">
+    <title>משתני סביבה וקבצים</title>
+    
+    <para> משתמש עתה במפרט ה- Basedir כפי שהוגדר על ידי <ulink
+	url="http://freedesktop.org">Freedesktop.org</ulink> לאיתור המידע וקבצי האפיון שלו. משמעות הדבר שמיקומי קבצים יפורטו כנתיב ביחס לסיפריות שמתוארות במפרט.
+    </para>
+
+    <variablelist>
+      <varlistentry>
+	<term>${XDG_CONFIG_HOME}</term>
+	<listitem><para>ספרית הבסיס הראשונה לחיפוש עבור קבצי אפיון. כברירת מחדל זו מכוונת ל- <filename
+	    role="directory">~/.config/</filename>.</para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>${XDG_CONFIG_DIRS}</term>
+	<listitem><para>רשימת סיפריות מערכת המכילות מידע אפיוני. כברירת מחדל הלוח יחפש ב- <filename 
+	    role="directory">${sysconfdir}/xdg/</filename> וב- 
+	  <filename role="directory">/etc/xdg/</filename>. הערך של
+	  ${sysconfdir} תלוי באופן בו נבנתה התוכנית ופעמים רבות יהיה
+	  <filename role="directory">/etc/</filename> עבור חבילות בינאריות.
+</para></listitem>
+      </varlistentry>
+    
+      <varlistentry>
+	<term>&lt;basedir&gt;/xfce4/panel/contents.xml</term>
+	<listitem><para>זהו מיקום קובץ האפיון של ה- xml המתאראת תוכן הלוח ביחס לסריות הבסיס שהוזכרו לעיל.</para></listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>&lt;basedir&gt;/xfce4/mcs_settings/panel.xml</term>
+	<listitem><para>זהו המיקום היחסי של הגדרות הלוח המקיפות. קובץ זה מנוהל על ידי מנהל ההגדרות ולא על ידי הלוח עצמו.</para></listitem>
+      </varlistentry>
+      
+      <varlistentry>
+	<term>&lt;basedir&gt;/xfce4/kiosk/kioskrc</term>
+	<listitem><para>קובץ הגדות מצב Kiosk. דוגמה נמצאת <ulink
+	    url="#panel-kiosk">בחלק הבא</ulink>.
+	</para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>&lt;basedir&gt;/xfce4/transparency</term>
+	<listitem>
+	  <para>הגדרות שקיפות. מידע נסוף ניתן 
+	    <ulink url="#panel-transparency">בחלק זה</ulink> מטה.
+	  </para>
+	</listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>אף קובץ אפיון, פרט ל- 
+      <filename>kioskrc</filename> ול- <filename>transparency</filename>, אינו מתוכנן לעריכה ידנית; למעשה השינויים ישוכתבו אם הם יערכו בזמן שהלוח ומנהל ההגדרות רצים.
+    </para>
+
+  </sect2>
+
+  <sect2 id="panel-kiosk">
+    <title>מצב Kiosk</title>
+
+    <para>ללוח יש עתה תמיכה במצב Kiosk אשר ימנע ממשתמשים לבצע שינויים במאפיני הלוח שלהם. כדי להשתמש במצב זה יש ליצור או לערוך את הקובץ 
+      <filename>${sysconfdir}/xdg/xfce4/kiosk/kioskrc</filename>.
+    </para>
+
+    <para>הדרך הטובה ביותר להסביר את מבנה הקובץ הינה על ידי שימוש בדוגמה. החלק של xfce4-panel בקובץ ה- kioskrc שלך יכול להראות כמו:
+    </para>
+
+<programlisting>
+[xfce4-panel]
+CustomizePanel=%powerusers,foo
+</programlisting>
+
+    <para>קטע זה מאפשר רק למשתמשים בקבוצת ה- powerusers וה- foo להתאים את הלוחות שלהם.
+    </para>
+    
+  </sect2>
+
+  <sect2 id="panel-transparency">
+    <title>שקיפות</title>
+
+    <para>לתשומת לבך - שקיפות עובדת רק עם שרת X שתומך בהרחבה Composite, כמו XOrg &gt;= 6.8.0 ושהרחבה זו אופשרה בקבצי האפיון ושמנהל החלונות תומך בה (משמע שעל 
+      <application>xfwm4</application> להיות מהודר עם 
+      <option>--enable-compositor</option>).
+    </para>
+
+    <para>כברירת מחדל הלוח יהיה שקוף אלא אם אפשרות ההסתרה האוטומטית הופעלה. בעת מעבר עכבר מעל לוח השקיפות תןסר באופן זמני.
+    </para>
+
+    <para>באפשרותך ליצור את הקובץ
+      <filename>&lt;basedir&gt;/xfce4/transparency</filename> אם ברצונך לשנות את ערך השקיפות של הלוח (או של קופסת הסמלים). יש ליצור את הקובץ ולהוסיף שורה עם הנוסח
+      <emphasis><option>panel=&lt;value&gt;</option></emphasis>, כש- value הוא מספר בין 0 ל- 100. בחירה ב- 0 למעשה מכבה את אפקט השקיפות
+    </para>
+    
+    <para>לדוגמה, קובץ הגדרת שקיפות יכול לראות כך:</para>
+    
+<programlisting>panel=25
+iconbox=0</programlisting>	    
+    
+  </sect2>
+  
+</sect1>
+  
+  <!-- extra space -->
+  <para>&nbsp;</para>
+  
+<sect1 id="panel-copyright">
+  <title>אודות &app;</title>
+
+  <para>&app; נכתב על ידי Jasper Huijsmans 
+    (<email>jasper@xfce.org</email>). למידע נוסף ניתן לבקר ב <ulink url="http://www.xfce.org" type="http">אתר Xfce</ulink>. 
+  </para>
+
+  <para>לדיווח על תקלה או כדי להציע דבר מה בנוגע ליישום זה או למדריך זה יש להשתמש במערכת המעקב אחר תקלות ב- <ulink 
+      url="http://bugzilla.xfce.org/" 
+      type="http">http://bugzilla.xfce.org/</ulink>. 
+  </para>
+
+  <para>אם יש לך שאלות בנוגע לשימוש או להתקנת ישום זה ניתן להפנותן <ulink 
+      url="http://lunar-linux.org/mailman/listinfo/xfce"
+      type="http">לרשימת הדיוור של Xfce</ulink>. דיונים אודות הפיתוח נערכים ברשימת הדיוור <ulink 
+      url="http://lunar-linux.org/mailman/listinfo/xfce4-dev"
+      type="http">xfce4-dev</ulink>.
+  </para>
+    
+  <para> תוכנית זו מופצת תחת תנאי רישיון GPL (GNU General Public Liscense) כפי שהם מפורסמים על ידי קרן התוכנה החופשית; גרסה 2 של הרישיון או (לבחירתך) כל גרסה מאוחרת יותר.
+  </para>
+
+  <para>עותק של רישיון ה- GNU General Public Liscense אמור היה להיות מצורף לתוכנית זו; אם לא כך, ניתן לכתוב לקרן התוכנה החופשית: Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
+    USA.
+  </para>
+
+</sect1>
+
+</article>
