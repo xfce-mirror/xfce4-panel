@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-09-28 12:49+0900\n"
+"POT-Creation-Date: 2005-10-08 06:14+0900\n"
 "PO-Revision-Date: 2005-09-29 14:05+0900\n"
 "Last-Translator: Ambrose Li <acli@ada.dhs.org>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -16,94 +16,94 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../panel/xfce_support.c:557
+#: panel/xfce_support.c:557
 msgid "Select file"
 msgstr "選擇檔案"
 
-#: ../panel/settings.c:181
+#: panel/settings.c:181
 msgid "No data was found. The panel will be empty."
 msgstr "找不到任何資料，面板將會留空。"
 
-#: ../panel/controls_dialog.c:89 ../panel/item_dialog.c:1178
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "位置："
 
-#: ../panel/controls_dialog.c:155
+#: panel/controls_dialog.c:155
 msgid "Item properties"
 msgstr "項目屬性"
 
-#: ../panel/controls_dialog.c:209 ../panel/controls.c:711
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "移除一個項目將同時移除其附屬的彈出選單。"
 
-#: ../panel/item_dialog.c:124
+#: panel/item_dialog.c:124
 msgid "Select command"
 msgstr "選擇指令"
 
-#: ../panel/item_dialog.c:268
+#: panel/item_dialog.c:268
 msgid "Command:"
 msgstr "指令："
 
-#: ../panel/item_dialog.c:311
+#: panel/item_dialog.c:311
 msgid "Run in _terminal"
 msgstr "在終端機中執行(_T)"
 
-#: ../panel/item_dialog.c:329
+#: panel/item_dialog.c:329
 msgid "Use startup _notification"
 msgstr "使用啟動提示(_N)"
 
-#: ../panel/item_dialog.c:515
+#: panel/item_dialog.c:515
 msgid "Other Icon"
 msgstr "其他圖示"
 
 # NOTE 譯文改動by Ambrose
-#: ../panel/item_dialog.c:626
+#: panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
 msgstr "要改變圖示，拖曳檔案到此框架內即可"
 
-#: ../panel/item_dialog.c:938
+#: panel/item_dialog.c:938
 msgid "Caption:"
 msgstr "標題："
 
-#: ../panel/item_dialog.c:967
+#: panel/item_dialog.c:967
 msgid "Tooltip:"
 msgstr "工具提示："
 
-#: ../panel/item_dialog.c:995
+#: panel/item_dialog.c:995
 msgid "Attach menu to launcher"
 msgstr "將選單附加到啟動器"
 
-#: ../panel/item_dialog.c:1215
+#: panel/item_dialog.c:1215
 msgid "Change menu item"
 msgstr "改變選單項目"
 
 #. add buttons
-#: ../panel/item_dialog.c:1221 ../panel/controls.c:748
+#: panel/item_dialog.c:1221 panel/controls.c:748
 msgid "_Remove"
 msgstr "移除(_R)"
 
-#: ../panel/item_dialog.c:1233 ../panel/item.c:718
+#: panel/item_dialog.c:1233 panel/item.c:718
 msgid "Launcher"
 msgstr "啟動器"
 
-#: ../panel/item.c:546
+#: panel/item.c:546
 msgid "Click mouse button 3 to change item"
 msgstr "點選滑鼠右鍵以改變項目"
 
-#: ../panel/item.c:571
+#: panel/item.c:571
 msgid "Add launcher"
 msgstr "增加啟動器"
 
-#: ../panel/item.c:576
+#: panel/item.c:576
 msgid "Add new item"
 msgstr "增加新項目"
 
-#: ../panel/main.c:120
+#: panel/main.c:120
 msgid "Are you sure you want to exit?"
 msgstr "你確定要退出？"
 
 # TODO check translation
-#: ../panel/main.c:401
+#: panel/main.c:401
 #, c-format
 msgid ""
 "\n"
@@ -126,189 +126,188 @@ msgstr ""
 "以 GNU GPL 方式授權發行。\n"
 "\n"
 
-#: ../panel/main.c:488
+#: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
 msgstr "%s: 成功啟動，但無法使用工作階段管理"
 
-#: ../panel/main.c:493
+#: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
 msgstr "%s: 成功啟動，並使用工作階段管理"
 
-#: ../panel/controls.c:666
+#: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
 msgstr "無法建立面板項目「%s」。"
 
-#: ../panel/controls.c:743 ../panel/panel.c:647
+#: panel/controls.c:743 panel/panel.c:647
 msgid "_Properties..."
 msgstr "屬性(_P)..."
 
-#: ../panel/controls.c:757 ../panel/panel.c:637
+#: panel/controls.c:757 panel/panel.c:637
 msgid "Add _new item"
 msgstr "增加新項目(_N)"
 
-#: ../panel/controls.c:1040
+#: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "該項目沒有設定選項"
 
-#: ../panel/panel.c:628 ../panel/panel.c:1055
-#: ../settings/xfce_settings_plugin.c:86
-#: ../settings/xfce_settings_dialog.c:450
+#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Xfce 面板"
 
-#: ../panel/panel.c:652
+#: panel/panel.c:652
 msgid "_About Xfce"
 msgstr "關於 Xfce(_A)"
 
-#: ../panel/panel.c:657
+#: panel/panel.c:657
 msgid "_Help"
 msgstr "說明(_H)"
 
-#: ../panel/panel.c:666
+#: panel/panel.c:666
 msgid "_Lock screen"
 msgstr "鎖住螢幕(_L)"
 
-#: ../panel/panel.c:671
+#: panel/panel.c:671
 msgid "_Restart"
 msgstr "重新啟動(_R)"
 
-#: ../panel/panel.c:680
+#: panel/panel.c:680
 msgid "E_xit"
 msgstr "離開(_X)"
 
-#: ../panel/icons.c:63
+#: panel/icons.c:63
 msgid "Default"
 msgstr "預設"
 
-#: ../panel/icons.c:64
+#: panel/icons.c:64
 msgid "Editor"
 msgstr "編輯器"
 
-#: ../panel/icons.c:65
+#: panel/icons.c:65
 msgid "File management"
 msgstr "檔案管理"
 
-#: ../panel/icons.c:66
+#: panel/icons.c:66
 msgid "Utilities"
 msgstr "公用程式"
 
-#: ../panel/icons.c:67
+#: panel/icons.c:67
 msgid "Games"
 msgstr "遊戲"
 
-#: ../panel/icons.c:68
+#: panel/icons.c:68
 msgid "Help browser"
 msgstr "求助瀏覽器"
 
-#: ../panel/icons.c:69
+#: panel/icons.c:69
 msgid "Multimedia"
 msgstr "多媒體"
 
-#: ../panel/icons.c:70
+#: panel/icons.c:70
 msgid "Network"
 msgstr "網路"
 
 # NOTE 譯文改動by Ambrose
-#: ../panel/icons.c:71
+#: panel/icons.c:71
 msgid "Graphics"
 msgstr "圖像處理"
 
-#: ../panel/icons.c:72
+#: panel/icons.c:72
 msgid "Printer"
 msgstr "印表機"
 
-#: ../panel/icons.c:73
+#: panel/icons.c:73
 msgid "Productivity"
 msgstr "生產力"
 
-#: ../panel/icons.c:74
+#: panel/icons.c:74
 msgid "Sound"
 msgstr "聲音"
 
-#: ../panel/icons.c:75
+#: panel/icons.c:75
 msgid "Terminal"
 msgstr "終端機"
 
-#: ../panel/mcs_client.c:170
+#: panel/mcs_client.c:170
 msgid "Settings manager not available"
 msgstr "設定管理程式無法使用"
 
-#: ../panel/popup.c:267
+#: panel/popup.c:267
 msgid "Menu"
 msgstr "選單"
 
-#: ../settings/xfce_settings_dialog.c:87
+#: settings/xfce_settings_dialog.c:87
 msgid "Small"
 msgstr "小"
 
-#: ../settings/xfce_settings_dialog.c:91
+#: settings/xfce_settings_dialog.c:91
 msgid "Medium"
 msgstr "中"
 
-#: ../settings/xfce_settings_dialog.c:95
+#: settings/xfce_settings_dialog.c:95
 msgid "Large"
 msgstr "大"
 
-#: ../settings/xfce_settings_dialog.c:99
+#: settings/xfce_settings_dialog.c:99
 msgid "Huge"
 msgstr "巨大"
 
-#: ../settings/xfce_settings_dialog.c:175
+#: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../settings/xfce_settings_dialog.c:179
+#: settings/xfce_settings_dialog.c:179
 msgid "Vertical"
 msgstr "垂直"
 
-#: ../settings/xfce_settings_dialog.c:221
+#: settings/xfce_settings_dialog.c:221
 msgid "Left"
 msgstr "左側"
 
-#: ../settings/xfce_settings_dialog.c:225
+#: settings/xfce_settings_dialog.c:225
 msgid "Right"
 msgstr "右側"
 
-#: ../settings/xfce_settings_dialog.c:229
+#: settings/xfce_settings_dialog.c:229
 msgid "Top"
 msgstr "頂部"
 
-#: ../settings/xfce_settings_dialog.c:233
+#: settings/xfce_settings_dialog.c:233
 msgid "Bottom"
 msgstr "底部"
 
-#: ../settings/xfce_settings_dialog.c:268
+#: settings/xfce_settings_dialog.c:268
 msgid "Panel size:"
 msgstr "面板大小："
 
-#: ../settings/xfce_settings_dialog.c:284
+#: settings/xfce_settings_dialog.c:284
 msgid "Panel orientation:"
 msgstr "面板方向："
 
-#: ../settings/xfce_settings_dialog.c:303
+#: settings/xfce_settings_dialog.c:303
 msgid "Popup position:"
 msgstr "彈出式選單位置："
 
-#: ../settings/xfce_settings_dialog.c:343
+#: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
 msgstr "總是置頂："
 
-#: ../settings/xfce_settings_dialog.c:397
+#: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
 msgstr "自動隱藏："
 
-#: ../settings/xfce_settings_dialog.c:467
+#: settings/xfce_settings_dialog.c:467
 msgid "Xfce Panel Settings"
 msgstr "Xfce 面板設定"
 
-#: ../settings/xfce_settings_dialog.c:477
+#: settings/xfce_settings_dialog.c:477
 msgid "Appearance"
 msgstr "外觀"
 
-#: ../settings/xfce_settings_dialog.c:492
+#: settings/xfce_settings_dialog.c:492
 msgid "Behaviour"
 msgstr "特性"
 
@@ -323,67 +322,67 @@ msgstr "特性"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../plugins/clock/clock.c:192
+#: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
 msgstr "%Y年%m月%d日　%A"
 
-#: ../plugins/clock/clock.c:422
+#: plugins/clock/clock.c:422
 msgid "Clock type:"
 msgstr "時鐘樣式："
 
-#: ../plugins/clock/clock.c:435
+#: plugins/clock/clock.c:435
 msgid "Analog"
 msgstr "指針式"
 
-#: ../plugins/clock/clock.c:439
+#: plugins/clock/clock.c:439
 msgid "Digital"
 msgstr "數位式"
 
-#: ../plugins/clock/clock.c:443
+#: plugins/clock/clock.c:443
 msgid "LED"
 msgstr "數位液晶顯示"
 
-#: ../plugins/clock/clock.c:505
+#: plugins/clock/clock.c:505
 msgid "Hour mode:"
 msgstr "時間模式："
 
-#: ../plugins/clock/clock.c:512
+#: plugins/clock/clock.c:512
 msgid "24 hour"
 msgstr "24 小時"
 
-#: ../plugins/clock/clock.c:518
+#: plugins/clock/clock.c:518
 msgid "12 hour"
 msgstr "12 小時"
 
-#: ../plugins/clock/clock.c:524
+#: plugins/clock/clock.c:524
 msgid "AM/PM"
 msgstr "上午/下午"
 
-#: ../plugins/clock/clock.c:562
+#: plugins/clock/clock.c:562
 msgid "Show seconds:"
 msgstr "顯示秒："
 
-#: ../plugins/clock/clock.c:675
+#: plugins/clock/clock.c:675
 msgid "Xfce Clock"
 msgstr "Xfce 時鐘"
 
-#: ../plugins/pager/pager.c:314
+#: plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "行數："
 
-#: ../plugins/pager/pager.c:316
+#: plugins/pager/pager.c:316
 msgid "Number of columns:"
 msgstr "列數："
 
-#: ../plugins/pager/pager.c:373
+#: plugins/pager/pager.c:373
 msgid "Graphical pager"
 msgstr "圖形化視窗切換器"
 
-#: ../plugins/switcher/switcher.c:698
+#: plugins/switcher/switcher.c:698
 msgid "Desktop switcher"
 msgstr "桌面切換器"
 
-#: ../plugins/systembuttons/systembuttons.c:85
+#: plugins/systembuttons/systembuttons.c:85
 msgid ""
 "Access to the configuration system has been disabled.\n"
 "\n"
@@ -393,72 +392,72 @@ msgstr ""
 "\n"
 "詳情請向你的系統管理員諮詢"
 
-#: ../plugins/systembuttons/systembuttons.c:170
+#: plugins/systembuttons/systembuttons.c:170
 msgid "Lock the screen"
 msgstr "鎖住螢幕"
 
-#: ../plugins/systembuttons/systembuttons.c:171
-#: ../plugins/systembuttons/systembuttons.c:519
+#: plugins/systembuttons/systembuttons.c:171
+#: plugins/systembuttons/systembuttons.c:519
 msgid "Exit"
 msgstr "退出"
 
-#: ../plugins/systembuttons/systembuttons.c:172
-#: ../plugins/systembuttons/systembuttons.c:520
+#: plugins/systembuttons/systembuttons.c:172
+#: plugins/systembuttons/systembuttons.c:520
 msgid "Setup"
 msgstr "設定"
 
-#: ../plugins/systembuttons/systembuttons.c:173
-#: ../plugins/systembuttons/systembuttons.c:521
+#: plugins/systembuttons/systembuttons.c:173
+#: plugins/systembuttons/systembuttons.c:521
 msgid "Info"
 msgstr "資訊"
 
 #  set names to use in option menus
 #. set names to use in option menus
-#: ../plugins/systembuttons/systembuttons.c:518
+#: plugins/systembuttons/systembuttons.c:518
 msgid "Lock"
 msgstr "鎖住"
 
-#: ../plugins/systembuttons/systembuttons.c:550
+#: plugins/systembuttons/systembuttons.c:550
 msgid "Button 1:"
 msgstr "按鈕 1："
 
-#: ../plugins/systembuttons/systembuttons.c:565
+#: plugins/systembuttons/systembuttons.c:565
 msgid "Button 2:"
 msgstr "按鈕 2："
 
 #. checkbox
-#: ../plugins/systembuttons/systembuttons.c:579
+#: plugins/systembuttons/systembuttons.c:579
 msgid "_Hide"
 msgstr "隱藏(_H)"
 
-#: ../plugins/systembuttons/systembuttons.c:616
+#: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
 msgstr "系統按鈕"
 
-#: ../plugins/separator/separator.c:155
+#: plugins/separator/separator.c:155
 msgid "Separator"
 msgstr "分隔線"
 
-#: ../plugins/mailcheck/mailcheck.c:838
+#: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
 msgstr "郵件箱："
 
-#: ../plugins/mailcheck/mailcheck.c:875
+#: plugins/mailcheck/mailcheck.c:875
 msgid "New mail command:"
 msgstr "新郵件指令："
 
-#: ../plugins/mailcheck/mailcheck.c:889
+#: plugins/mailcheck/mailcheck.c:889
 msgid "Command to run when new mail arrives"
 msgstr "有新郵件時所執行的指令"
 
-#: ../plugins/mailcheck/mailcheck.c:919
+#: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
 msgstr "在面板上點選該按鈕時所執行的指令"
 
-#: ../plugins/mailcheck/mailcheck.c:940
+#: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "間隔（秒）："
 
-#: ../plugins/mailcheck/mailcheck.c:1016
+#: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "檢查郵件"
