@@ -1243,7 +1243,7 @@ launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
     
     xfce_panel_plugin_block_menu (ld->plugin);
     
-    ld->dlg = gtk_dialog_new_with_buttons (_("Configure Launcher"), 
+    ld->dlg = gtk_dialog_new_with_buttons (_("Properties"), 
                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
                 GTK_DIALOG_DESTROY_WITH_PARENT |
                 GTK_DIALOG_NO_SEPARATOR,
@@ -1252,7 +1252,7 @@ launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
     
     gtk_container_set_border_width (GTK_CONTAINER (ld->dlg), 2);
     
-    header = xfce_create_header (NULL, _("Launcher"));
+    header = xfce_create_header (NULL, _("Program Launcher"));
     gtk_widget_set_size_request (GTK_BIN (header)->child, -1, 32);
     gtk_container_set_border_width (GTK_CONTAINER (header), BORDER - 2);
     gtk_widget_show (header);

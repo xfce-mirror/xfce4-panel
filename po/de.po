@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.22\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-09 17:04+0200\n"
+"POT-Creation-Date: 2005-10-09 17:55+0200\n"
 "PO-Revision-Date: 2005-10-08 07:16+0900\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <de@li.org>\n"
@@ -42,6 +42,11 @@ msgstr ""
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:755
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:531
+#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
+#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
+#: ../plugins/clock/clock.c:401
 msgid "Properties"
 msgstr ""
 
@@ -66,7 +71,7 @@ msgstr "Neues Panel"
 msgid "Manage Panel Items"
 msgstr "Panel-Items verwalten"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825 ../panel/panel.c:549
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:825 ../panel/panel.c:565
 msgid "New Panel"
 msgstr "Neues Panel"
 
@@ -75,11 +80,11 @@ msgstr "Neues Panel"
 msgid "About the Xfce Panel"
 msgstr "Über Xfce Panel"
 
-#: ../panel/panel.c:560 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../panel/panel.c:566
+#: ../panel/panel.c:555
 msgid "Restart"
 msgstr "Neu starten"
 
@@ -383,22 +388,14 @@ msgstr ""
 "Das erste Item der Liste wird im Panel angezeigt. Zusätzliche Items "
 "erscheinen in einem Menü."
 
-#: ../plugins/launcher/launcher-dialog.c:1246
-msgid "Configure Launcher"
-msgstr "Starter einstellen"
-
 #: ../plugins/launcher/launcher-dialog.c:1255
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "Starter"
+#, fuzzy
+msgid "Program Launcher"
+msgstr "Starter einstellen"
 
 #: ../plugins/launcher/launcher-dialog.c:1571
 msgid "Select file"
 msgstr "Datei auswählen"
-
-#: ../plugins/separator/separator.c:241
-msgid "Configure Separator"
-msgstr "Trennlinie einstellen"
 
 #: ../plugins/separator/separator.c:253
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -412,10 +409,6 @@ msgstr "_Trennlinie zeichnen"
 #: ../plugins/separator/separator.c:275
 msgid "_Expand"
 msgstr "_Ausdehnen"
-
-#: ../plugins/actions/actions.c:295
-msgid "Configure Panel Actions"
-msgstr "Panel-Aktionen einstellen"
 
 #: ../plugins/actions/actions.c:307
 #: ../plugins/actions/actions.desktop.in.in.h:2
@@ -433,10 +426,6 @@ msgstr "Bildschirm sperren"
 #: ../plugins/actions/actions.c:334
 msgid "Quit + Lock screen"
 msgstr "Abmelden + Bildschirm sperren"
-
-#: ../plugins/tasklist/tasklist.c:320
-msgid "Configure Task List"
-msgstr "Taskliste einstellen"
 
 #: ../plugins/tasklist/tasklist.c:332
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -463,10 +452,6 @@ msgstr "Tasks automatisch gruppieren"
 msgid "Always group tasks"
 msgstr "Tasks immer gruppieren"
 
-#: ../plugins/pager/pager.c:275
-msgid "Configure Pager"
-msgstr "Pager einstellen"
-
 #: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Pager"
@@ -488,10 +473,6 @@ msgstr "Es läuft bereits ein Systemtray"
 msgid "Unable to register system tray: %s"
 msgstr "Konnte Systemtray nicht registrieren: %s"
 
-#: ../plugins/systray/systray.c:345
-msgid "Configure Status Area"
-msgstr "Statusfeld einstellen"
-
 #: ../plugins/systray/systray.c:357
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Status Area"
@@ -500,10 +481,6 @@ msgstr "Statusfeld"
 #: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
 msgid "Show _frame"
 msgstr "_Rahmen anzeigen"
-
-#: ../plugins/iconbox/iconbox.c:748
-msgid "Configure Icon Box"
-msgstr "Icon Box einstellen"
 
 #: ../plugins/iconbox/iconbox.c:760
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -525,10 +502,6 @@ msgstr "Nur minimierte Anwendungen anzeigen"
 #: ../plugins/clock/clock.c:109
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
-
-#: ../plugins/clock/clock.c:401
-msgid "Configure Clock"
-msgstr "Uhr einstellen"
 
 #: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
@@ -566,6 +539,10 @@ msgstr "AM/PM anzeigen"
 #: ../plugins/clock/clock.c:476
 msgid "Display seconds"
 msgstr "Sekunden anzeigen"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Starter"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
@@ -606,6 +583,27 @@ msgstr "Symbole aller laufenden Anwendungen anzeigen"
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Wieviel Uhr ist es?"
+
+#~ msgid "Configure Separator"
+#~ msgstr "Trennlinie einstellen"
+
+#~ msgid "Configure Panel Actions"
+#~ msgstr "Panel-Aktionen einstellen"
+
+#~ msgid "Configure Task List"
+#~ msgstr "Taskliste einstellen"
+
+#~ msgid "Configure Pager"
+#~ msgstr "Pager einstellen"
+
+#~ msgid "Configure Status Area"
+#~ msgstr "Statusfeld einstellen"
+
+#~ msgid "Configure Icon Box"
+#~ msgstr "Icon Box einstellen"
+
+#~ msgid "Configure Clock"
+#~ msgstr "Uhr einstellen"
 
 #, fuzzy
 #~ msgid "Preferences"

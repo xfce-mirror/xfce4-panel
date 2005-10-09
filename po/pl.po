@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.22\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-09 17:04+0200\n"
+"POT-Creation-Date: 2005-10-09 17:55+0200\n"
 "PO-Revision-Date: 2005-08-17 22:58+0900\n"
 "Last-Translator: Wit Wiliński <madman@berlios.de>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -42,6 +42,11 @@ msgstr ""
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:755
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:531
+#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
+#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
+#: ../plugins/clock/clock.c:401
 msgid "Properties"
 msgstr ""
 
@@ -66,7 +71,7 @@ msgstr "Panel Xfce"
 msgid "Manage Panel Items"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825 ../panel/panel.c:549
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:825 ../panel/panel.c:565
 #, fuzzy
 msgid "New Panel"
 msgstr "Panel Xfce"
@@ -77,11 +82,11 @@ msgstr "Panel Xfce"
 msgid "About the Xfce Panel"
 msgstr "Panel Xfce"
 
-#: ../panel/panel.c:560 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:566
+#: ../panel/panel.c:555
 #, fuzzy
 msgid "Restart"
 msgstr "_Restart"
@@ -388,24 +393,14 @@ msgstr ""
 "Pierwszy element na liście jest widoczny w panelu. Pozostałe elementy "
 "pojawią się w menu."
 
-#: ../plugins/launcher/launcher-dialog.c:1246
-#, fuzzy
-msgid "Configure Launcher"
-msgstr "Aktywator"
-
 #: ../plugins/launcher/launcher-dialog.c:1255
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
+#, fuzzy
+msgid "Program Launcher"
 msgstr "Aktywator"
 
 #: ../plugins/launcher/launcher-dialog.c:1571
 msgid "Select file"
 msgstr "Wybierz plik"
-
-#: ../plugins/separator/separator.c:241
-#, fuzzy
-msgid "Configure Separator"
-msgstr "Separator"
 
 #: ../plugins/separator/separator.c:253
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -420,11 +415,6 @@ msgstr "Separator"
 #: ../plugins/separator/separator.c:275
 msgid "_Expand"
 msgstr ""
-
-#: ../plugins/actions/actions.c:295
-#, fuzzy
-msgid "Configure Panel Actions"
-msgstr "Ustawienia panelu Xfce"
 
 #: ../plugins/actions/actions.c:307
 #: ../plugins/actions/actions.desktop.in.in.h:2
@@ -446,10 +436,6 @@ msgstr "Zab_lokuj ekran"
 #, fuzzy
 msgid "Quit + Lock screen"
 msgstr "Zab_lokuj ekran"
-
-#: ../plugins/tasklist/tasklist.c:320
-msgid "Configure Task List"
-msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:332
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -477,10 +463,6 @@ msgstr "Automatycznie grupuj zadania"
 msgid "Always group tasks"
 msgstr "Zawsze grupuj zadania"
 
-#: ../plugins/pager/pager.c:275
-msgid "Configure Pager"
-msgstr ""
-
 #: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr ""
@@ -502,11 +484,6 @@ msgstr "Obszar powiadomień jest już uruchomiony na tym ekranie"
 msgid "Unable to register system tray: %s"
 msgstr "Nie można zarejestrować obszaru powiadomień: %s"
 
-#: ../plugins/systray/systray.c:345
-#, fuzzy
-msgid "Configure Status Area"
-msgstr "Pole statusu"
-
 #: ../plugins/systray/systray.c:357
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Status Area"
@@ -516,10 +493,6 @@ msgstr "Pole statusu"
 #, fuzzy
 msgid "Show _frame"
 msgstr "Pokaż ze_gar"
-
-#: ../plugins/iconbox/iconbox.c:748
-msgid "Configure Icon Box"
-msgstr ""
 
 #: ../plugins/iconbox/iconbox.c:760
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -542,11 +515,6 @@ msgstr "P_okazuj tylko zminimalizowane aplikacje"
 #: ../plugins/clock/clock.c:109
 msgid "%A %d %B %Y"
 msgstr "%A, %e %B %Y"
-
-#: ../plugins/clock/clock.c:401
-#, fuzzy
-msgid "Configure Clock"
-msgstr "Zegar Xfce"
 
 #: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
 #, fuzzy
@@ -587,6 +555,10 @@ msgstr "AM/PM"
 #, fuzzy
 msgid "Display seconds"
 msgstr "Pokaż zegar przed ikonami"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Aktywator"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
@@ -631,6 +603,22 @@ msgstr "P_okazuj tylko zminimalizowane aplikacje"
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Configure Separator"
+#~ msgstr "Separator"
+
+#, fuzzy
+#~ msgid "Configure Panel Actions"
+#~ msgstr "Ustawienia panelu Xfce"
+
+#, fuzzy
+#~ msgid "Configure Status Area"
+#~ msgstr "Pole statusu"
+
+#, fuzzy
+#~ msgid "Configure Clock"
+#~ msgstr "Zegar Xfce"
 
 #, fuzzy
 #~ msgid "Preferences"

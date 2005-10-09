@@ -745,7 +745,7 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
 
     xfce_panel_plugin_block_menu (plugin);
     
-    dlg = gtk_dialog_new_with_buttons (_("Configure Icon Box"), 
+    dlg = gtk_dialog_new_with_buttons (_("Properties"), 
                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
                 GTK_DIALOG_DESTROY_WITH_PARENT |
                 GTK_DIALOG_NO_SEPARATOR,
