@@ -2,14 +2,15 @@
 # Copyright (C) 2002-2005 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Joakim Andreasson <joakim.andreasson@gmx.net>, 2003-2004.
+# Alexander Toresson <alexander.toresson@gmail.com>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-08 06:14+0900\n"
-"PO-Revision-Date: 2005-08-21 15:23+0900\n"
-"Last-Translator: Joakim Andreasson <joakim.andreasson@gmx.net>\n"
+"POT-Creation-Date: 2005-10-09 15:52+0900\n"
+"PO-Revision-Date: 2005-10-06 15:56+0100\n"
+"Last-Translator: Alexander Toresson <alexander.toresson@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,24 +22,19 @@ msgstr "Välj fil"
 
 #: panel/settings.c:181
 msgid "No data was found. The panel will be empty."
-msgstr ""
+msgstr "Inga inställningar hittades. Panelen kommer att vara tom."
 
 #: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
-msgstr ""
+msgstr "Position:"
 
 #: panel/controls_dialog.c:155
-#, fuzzy
 msgid "Item properties"
-msgstr "/_Egenskaper..."
+msgstr "Egenskaper..."
 
 #: panel/controls_dialog.c:209 panel/controls.c:711
-#, fuzzy
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Att ta bort ett objekt kommer även att ta bort dess popup-meny.\n"
-"\n"
-"Vill du ta bort objektet?"
+msgstr "Att ta bort ett objekt kommer även att ta bort dess popup-meny."
 
 #: panel/item_dialog.c:124
 msgid "Select command"
@@ -54,7 +50,7 @@ msgstr "Kör i _terminal"
 
 #: panel/item_dialog.c:329
 msgid "Use startup _notification"
-msgstr "Använd start_notifikation"
+msgstr "Använd start_notifiering"
 
 #: panel/item_dialog.c:515
 msgid "Other Icon"
@@ -62,7 +58,7 @@ msgstr "Annan ikon"
 
 #: panel/item_dialog.c:626
 msgid "Drag file onto this frame to change the icon"
-msgstr "Drag en fil till denna ram för att ändra ikon"
+msgstr "Drag en fil till denna ram för att ändra ikonen"
 
 #: panel/item_dialog.c:938
 msgid "Caption:"
@@ -82,9 +78,8 @@ msgstr "Ändra menyobjekt"
 
 #. add buttons
 #: panel/item_dialog.c:1221 panel/controls.c:748
-#, fuzzy
 msgid "_Remove"
-msgstr "/_Ta bort"
+msgstr "_Ta bort"
 
 #: panel/item_dialog.c:1233 panel/item.c:718
 msgid "Launcher"
@@ -107,7 +102,7 @@ msgid "Are you sure you want to exit?"
 msgstr "Är du säker på att du vill avsluta?"
 
 #: panel/main.c:401
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -120,43 +115,41 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"The Xfce Panel\n"
+"Xfce-panelen\n"
 "version %s\n"
 "\n"
-"Del av skrivbordsmiljön Xfce\n"
+"En del av skrivbordsmiljön Xfce\n"
 "http://www.xfce.org\n"
 "\n"
-"Licensed under the GNU GPL.\n"
+"Licensierat under GNU GPL.\n"
 "\n"
 
 #: panel/main.c:488
 #, c-format
 msgid "%s: Successfully started without session management"
-msgstr ""
+msgstr "%s: Startades utan problem, utan sessionshantering"
 
 #: panel/main.c:493
 #, c-format
 msgid "%s: Successfully started with session management"
-msgstr ""
+msgstr "%s: Startades utan problem, med sessionshantering"
 
 #: panel/controls.c:666
 #, c-format
 msgid "Could not create panel item \"%s\"."
-msgstr ""
+msgstr "Lyckades inte skapa den nya posten \"%s\" i panelen."
 
 #: panel/controls.c:743 panel/panel.c:647
-#, fuzzy
 msgid "_Properties..."
-msgstr "/_Egenskaper..."
+msgstr "_Egenskaper..."
 
 #: panel/controls.c:757 panel/panel.c:637
-#, fuzzy
 msgid "Add _new item"
-msgstr "/_Nytt objekt"
+msgstr "_Lägg till nytt objekt"
 
 #: panel/controls.c:1040
 msgid "This item has no configuration options"
-msgstr "Detta objekt saknar konfigurationsalternativ"
+msgstr "Detta objekt saknar konfigureringsalternativ"
 
 #: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:450
@@ -164,32 +157,28 @@ msgid "Xfce Panel"
 msgstr "Xfce-panelen"
 
 #: panel/panel.c:652
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/_Om Xfce"
+msgstr "_Om Xfce"
 
 #: panel/panel.c:657
-#, fuzzy
 msgid "_Help"
-msgstr "/_Hjälp"
+msgstr "_Hjälp"
 
 #: panel/panel.c:666
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/_Lås skärmen"
+msgstr "_Lås skärmen"
 
 #: panel/panel.c:671
 msgid "_Restart"
-msgstr ""
+msgstr "_Starta om"
 
 #: panel/panel.c:680
-#, fuzzy
 msgid "E_xit"
-msgstr "/_Avsluta"
+msgstr "_Avsluta"
 
 #: panel/icons.c:63
 msgid "Default"
-msgstr "Allmän"
+msgstr "Standard"
 
 #: panel/icons.c:64
 msgid "Editor"
@@ -213,7 +202,7 @@ msgstr "Hjälpläsare"
 
 #: panel/icons.c:69
 msgid "Multimedia"
-msgstr ""
+msgstr "Multimedia"
 
 #: panel/icons.c:70
 msgid "Network"
@@ -237,7 +226,7 @@ msgstr "Ljud"
 
 #: panel/icons.c:75
 msgid "Terminal"
-msgstr ""
+msgstr "Terminal"
 
 #: panel/mcs_client.c:170
 msgid "Settings manager not available"
@@ -253,7 +242,7 @@ msgstr "Liten"
 
 #: settings/xfce_settings_dialog.c:91
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 #: settings/xfce_settings_dialog.c:95
 msgid "Large"
@@ -261,7 +250,7 @@ msgstr "Stor"
 
 #: settings/xfce_settings_dialog.c:99
 msgid "Huge"
-msgstr ""
+msgstr "Enorm"
 
 #: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
@@ -301,7 +290,7 @@ msgstr "Popupposition:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Alltid överst:"
 
 #: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
@@ -329,7 +318,7 @@ msgstr "Beteende"
 #.
 #: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%A, %d %B %Y"
 
 #: plugins/clock/clock.c:422
 msgid "Clock type:"
@@ -337,19 +326,19 @@ msgstr "Klocktyp:"
 
 #: plugins/clock/clock.c:435
 msgid "Analog"
-msgstr ""
+msgstr "Analog"
 
 #: plugins/clock/clock.c:439
 msgid "Digital"
-msgstr ""
+msgstr "Digital"
 
 #: plugins/clock/clock.c:443
 msgid "LED"
-msgstr ""
+msgstr "LED"
 
 #: plugins/clock/clock.c:505
 msgid "Hour mode:"
-msgstr "Timvisning:"
+msgstr "Timläge:"
 
 #: plugins/clock/clock.c:512
 msgid "24 hour"
@@ -361,7 +350,7 @@ msgstr "12-timmars"
 
 #: plugins/clock/clock.c:524
 msgid "AM/PM"
-msgstr ""
+msgstr "AM/PM"
 
 #: plugins/clock/clock.c:562
 msgid "Show seconds:"
@@ -373,11 +362,11 @@ msgstr "Xfce-klocka"
 
 #: plugins/pager/pager.c:314
 msgid "Number of rows:"
-msgstr ""
+msgstr "Antal rader:"
 
 #: plugins/pager/pager.c:316
 msgid "Number of columns:"
-msgstr ""
+msgstr "Antal kolumner:"
 
 #: plugins/pager/pager.c:373
 msgid "Graphical pager"
@@ -393,7 +382,7 @@ msgid ""
 "\n"
 "Ask your system administrator for more information"
 msgstr ""
-"Tillgång till konfigurationssystemet har stängts av.\n"
+"Tillgång till konfigureringssystemet har stängts av.\n"
 "\n"
 "Fråga din systemadministratör för mer information"
 
@@ -431,9 +420,8 @@ msgstr "Knapp 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
 msgid "_Hide"
-msgstr "/_Hjälp"
+msgstr "_Göm"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -441,31 +429,28 @@ msgstr "Systemknappar"
 
 #: plugins/separator/separator.c:155
 msgid "Separator"
-msgstr ""
+msgstr "Avgränsare"
 
 #: plugins/mailcheck/mailcheck.c:838
 msgid "Mail box:"
-msgstr "Postbox:"
+msgstr "Mejlbox:"
 
 #: plugins/mailcheck/mailcheck.c:875
-#, fuzzy
 msgid "New mail command:"
-msgstr "Epostkommando:"
+msgstr "Nytt mejl-kommando:"
 
 #: plugins/mailcheck/mailcheck.c:889
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Kommando attutföra när knappen på panelen klickas"
+msgstr "Kommando att utföra när det finns olästa mejl"
 
 #: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
-msgstr "Kommando attutföra när knappen på panelen klickas"
+msgstr "Kommando att utföra när knappen i panelen klickas"
 
 #: plugins/mailcheck/mailcheck.c:940
 msgid "Interval (sec):"
 msgstr "Intervall (sek):"
 
 #: plugins/mailcheck/mailcheck.c:1016
-#, fuzzy
 msgid "Mail checker"
-msgstr "Epostkontroll"
+msgstr "Mejlkontrollör"
