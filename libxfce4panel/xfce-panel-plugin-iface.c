@@ -752,14 +752,14 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                        GINT_TO_POINTER (insert_position));
     
     /* configure, hide by default */
-    mi = gtk_menu_item_new_with_label (_("Item Preferences"));
+    mi = gtk_menu_item_new_with_label (_("Properties"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
     g_signal_connect_swapped (mi, "activate", 
                               G_CALLBACK (xfce_panel_plugin_signal_configure), 
                               plugin);
 
-    mi = gtk_menu_item_new_with_label (_("Remove Item"));
+    mi = gtk_menu_item_new_with_label (_("Remove"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     
@@ -767,50 +767,8 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                               G_CALLBACK (_plugin_remove_confirm), 
                               plugin);
     
-    /* panel section */
-    mi = gtk_separator_menu_item_new ();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    mi = gtk_menu_item_new_with_label (_("Panel Preferences"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_customize_panel), 
-                              plugin);
-
-    mi = gtk_menu_item_new_with_label (_("Manage Panel Items"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_customize_items), 
-                              plugin);
-
-    mi = gtk_menu_item_new_with_label (_("New Panel"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_new_panel), 
-                              plugin);
-
-    mi = gtk_menu_item_new_with_label (_("Remove this Panel"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_remove_panel), 
-                              plugin);
-
-    /* about */
-    mi = gtk_separator_menu_item_new ();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
     /* about item, hide by default */
-    mi = gtk_menu_item_new_with_label (_("About this Item"));
+    mi = gtk_menu_item_new_with_label (_("About"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
     g_signal_connect_swapped (mi, "activate", 
@@ -820,6 +778,60 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-about-item", 
                        mi);
     
+    mi = gtk_menu_item_new_with_label ("");
+    gtk_widget_set_sensitive (mi, FALSE);
+    gtk_widget_set_size_request (mi, -1, 6);
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    /* panel section */
+    mi = gtk_menu_item_new_with_label (_("Panel"));
+    gtk_widget_set_sensitive (mi, FALSE);
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+    
+    mi = gtk_separator_menu_item_new ();
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    mi = gtk_menu_item_new_with_label (_("Manage Panel Items"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+    
+    g_signal_connect_swapped (mi, "activate", 
+                              G_CALLBACK (xfce_panel_plugin_customize_items), 
+                              plugin);
+
+    mi = gtk_menu_item_new_with_label (_("Properties"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+    
+    g_signal_connect_swapped (mi, "activate", 
+                              G_CALLBACK (xfce_panel_plugin_customize_panel), 
+                              plugin);
+
+    mi = gtk_menu_item_new_with_label (_("Remove"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+    
+    g_signal_connect_swapped (mi, "activate", 
+                              G_CALLBACK (xfce_panel_plugin_remove_panel), 
+                              plugin);
+
+    mi = gtk_separator_menu_item_new ();
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    mi = gtk_menu_item_new_with_label (_("New Panel"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+    
+    g_signal_connect_swapped (mi, "activate", 
+                              G_CALLBACK (xfce_panel_plugin_new_panel), 
+                              plugin);
+
+#if 0
+    /* about */
     mi = gtk_menu_item_new_with_label (_("About the Xfce Panel"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -827,6 +839,7 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     g_signal_connect_swapped (mi, "activate", 
                               G_CALLBACK (xfce_panel_plugin_about_panel), 
                               plugin);
+#endif
 
     /* deactivation */
     if (deactivate_cb)

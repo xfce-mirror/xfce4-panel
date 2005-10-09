@@ -512,10 +512,35 @@ _panel_create_menu (Panel *panel)
 
     menu = gtk_menu_new ();
 
-    mi = gtk_menu_item_new_with_label (_("Xfce Panel"));
+    mi = gtk_menu_item_new_with_label (_("Panel"));
     gtk_widget_set_sensitive (mi, FALSE);
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    mi = gtk_separator_menu_item_new ();
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    mi = gtk_menu_item_new_with_label (_("Manage Panel Items"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize_items), 
+                      NULL);
+    
+    mi = gtk_menu_item_new_with_label (_("Properties"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize), 
+                      NULL);
+    
+    mi = gtk_menu_item_new_with_label (_("Remove"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    g_signal_connect_swapped (mi, "activate", 
+                              G_CALLBACK (panel_app_remove_panel), panel);
 
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
@@ -537,33 +562,12 @@ _panel_create_menu (Panel *panel)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     
-    mi = gtk_menu_item_new_with_label (_("Panel Preferences"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize), 
-                      NULL);
-    
-    mi = gtk_menu_item_new_with_label (_("Manage Panel Items"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize_items), 
-                      NULL);
-    
     mi = gtk_menu_item_new_with_label (_("New Panel"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_add_panel), 
                       NULL);
-
-    mi = gtk_menu_item_new_with_label (_("Remove this Panel"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (panel_app_remove_panel), panel);
 
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
