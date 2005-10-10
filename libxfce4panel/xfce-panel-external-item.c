@@ -26,6 +26,7 @@
 #include <string.h>
 #include <gtk/gtk.h>
 #include <libxfcegui4/libxfcegui4.h>
+#include <errno.h>
 
 #include "xfce-panel-enum-types.h"
 #include "xfce-panel-item-iface.h"
@@ -399,7 +400,6 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
 {
     char **argv = NULL;
     gulong sock;
-    GError *error = NULL;
     XfceExternalPanelItemPrivate *priv;
 
     g_signal_handlers_disconnect_by_func (item, G_CALLBACK (_item_setup),
@@ -426,14 +426,21 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
     g_signal_connect (item, "client-event",
                       G_CALLBACK (_item_event_received), NULL);
 
-    if (!g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH,
-                        NULL, NULL, NULL, &error))
+    switch (fork())
     {
-        g_critical ("Could not run plugin: %s", error->message);
-        g_error_free (error);
-        gtk_widget_destroy (GTK_WIDGET (item));
+        case -1:
+            g_critical ("Could not run plugin: %s", g_strerror (errno));
+            gtk_widget_destroy (GTK_WIDGET (item));
+            break;
+        case 0:
+            execv (argv[0], argv);
+            g_critical ("Could not run plugin: %s", g_strerror (errno));
+            gtk_widget_destroy (GTK_WIDGET (item));
+            _exit (1);
+        default:
+            /* parent: do nothing */;
     }
-
+    
     g_strfreev (argv);
 }
 

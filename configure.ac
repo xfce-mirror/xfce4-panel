@@ -6,7 +6,7 @@ dnl 2005 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl version info
-m4_define([xfce4_panel_version],[4.3.22])
+m4_define([xfce4_panel_version],[4.3.23])
 m4_define([libxfce4panel_verinfo], [1:1:0])
 
 dnl init autoconf
@@ -79,7 +79,6 @@ XDT_FEATURE_DEBUG()
 AC_OUTPUT([
 xfce4-panel.spec
 Makefile
-po/Makefile.in
 config/Makefile
 icons/Makefile
 libxfce4panel/Makefile
@@ -95,6 +94,7 @@ plugins/systray/Makefile
 plugins/iconbox/Makefile
 plugins/clock/Makefile
 plugins/testplugin/Makefile
+po/Makefile.in
 docs/Makefile
 docs/API/Makefile
 docs/API/version.xml

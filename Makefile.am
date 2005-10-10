@@ -25,12 +25,12 @@ DISTCLEANFILES =							\
 # docs should be at the end to make sure the library is build before 
 # scanning it.
 SUBDIRS =								\
-	po								\
 	config								\
 	icons								\
 	libxfce4panel							\
 	panel								\
 	plugins								\
+	po								\
 	docs
 
 distclean-local:
