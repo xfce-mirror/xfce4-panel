@@ -711,6 +711,34 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
 
     widget->allocation = *allocation;
 
+    if (GTK_WIDGET_REALIZED (widget))
+    {
+        gdk_window_resize (widget->window,
+                           allocation->width, allocation->height);
+
+        if (priv->shown)
+        {
+            gdk_window_get_root_origin (widget->window,
+                                        &(priv->x_root), &(priv->y_root));
+
+            if (priv->resize_func && priv->shown)
+            {
+                GtkAllocation old, new;
+
+                old = priv->allocation;
+                new = *allocation;
+
+                priv->resize_func (widget, priv->resize_data,
+                                   &old, &new,
+                                   &(priv->x_root), &(priv->y_root));
+
+                gtk_widget_queue_draw (widget);
+            }
+
+            gdk_window_move (widget->window, priv->x_root, priv->y_root);
+        }
+    }
+
     if (GTK_BIN (widget)->child)
     {
         GtkAllocation childalloc;
@@ -770,32 +798,6 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
         }
 
         gtk_widget_size_allocate (GTK_BIN (widget)->child, &childalloc);
-    }
-
-    if (GTK_WIDGET_REALIZED (widget))
-    {
-        gdk_window_resize (widget->window,
-                           allocation->width, allocation->height);
-
-        if (priv->shown)
-        {
-            gdk_window_get_root_origin (widget->window,
-                                        &(priv->x_root), &(priv->y_root));
-
-            if (priv->resize_func && priv->shown)
-            {
-                GtkAllocation old, new;
-
-                old = priv->allocation;
-                new = *allocation;
-
-                priv->resize_func (widget, priv->resize_data,
-                                   &old, &new,
-                                   &(priv->x_root), &(priv->y_root));
-            }
-
-            gdk_window_move (widget->window, priv->x_root, priv->y_root);
-        }
     }
 
     priv->allocation = *allocation;
