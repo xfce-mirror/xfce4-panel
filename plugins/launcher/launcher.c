@@ -543,7 +543,7 @@ launcher_recreate_menu (LauncherPlugin *launcher)
     
     launcher_create_menu (launcher);
     
-    for (i = 1; i < launcher->entries->len; ++i)
+    for (i = launcher->entries->len - 1; i > 0; --i)
     {
         GtkWidget *mi, *img;
         GdkPixbuf *pb;
