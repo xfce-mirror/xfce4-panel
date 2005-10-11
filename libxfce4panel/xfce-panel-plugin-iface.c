@@ -565,6 +565,40 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
     return xfce_screen_position_get_orientation (screen_position);
 }
 
+/**
+ * xfce_panel_plugin_remove_confirm
+ * @plugin : an #XfcePanelPlugin
+ *
+ * Ask the plugin to be removed.
+ **/
+void
+xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
+{
+#if 0
+    int response = GTK_RESPONSE_NONE;
+    char *first;
+    GtkWindow *parent;
+    
+    first = g_strdup_printf (_("Remove \"%s\"?"), 
+                             xfce_panel_plugin_get_display_name (plugin));
+    
+    parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin)));
+    
+    response = xfce_message_dialog (parent, _("Xfce Panel"), 
+                                    GTK_STOCK_DIALOG_QUESTION, first, 
+                                    _("The item will be removed from "
+                                      "the panel and its configuration "
+                                      "will be lost."),
+                                    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                    GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT,
+                                    NULL);
+    g_free (first);
+                                    
+    if (response == GTK_RESPONSE_ACCEPT)
+#endif
+        xfce_panel_plugin_remove (plugin);
+}
+
 /* vtable */
 
 /**
@@ -655,32 +689,6 @@ xfce_panel_plugin_about_panel (XfcePanelPlugin *plugin)
 /* menu */
 
 static void
-_plugin_remove_confirm (XfcePanelPlugin *plugin)
-{
-    int response = GTK_RESPONSE_NONE;
-    char *first;
-    GtkWindow *parent;
-    
-    first = g_strdup_printf (_("Remove \"%s\"?"), 
-                             xfce_panel_plugin_get_display_name (plugin));
-    
-    parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin)));
-    
-    response = xfce_message_dialog (parent, _("Xfce Panel"), 
-                                    GTK_STOCK_DIALOG_QUESTION, first, 
-                                    _("The item will be removed from "
-                                      "the panel and its configuration "
-                                      "will be lost."),
-                                    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                    GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT,
-                                    NULL);
-    g_free (first);
-                                    
-    if (response == GTK_RESPONSE_ACCEPT)
-        xfce_panel_plugin_remove (plugin);
-}
-
-static void
 _plugin_menu_deactivate (GtkWidget *menu)
 {
     int id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu), 
@@ -764,7 +772,7 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     
     g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (_plugin_remove_confirm), 
+                              G_CALLBACK (xfce_panel_plugin_remove_confirm), 
                               plugin);
     
     /* about item, hide by default */

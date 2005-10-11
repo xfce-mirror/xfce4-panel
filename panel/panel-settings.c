@@ -866,6 +866,36 @@ render_text (GtkTreeViewColumn * col, GtkCellRenderer * cell,
 }
 
 static void
+treeview_data_received (GtkWidget *widget, GdkDragContext *context, 
+                        gint x, gint y, GtkSelectionData *data, 
+                        guint info, guint time, gpointer user_data)
+{
+    gboolean handled = FALSE;
+
+    DBG (" + drag data received: %d", info);
+    
+    if (data->length && info == TARGET_PLUGIN_WIDGET)
+        handled = TRUE;
+     
+    gtk_drag_finish (context, handled, handled, time);
+}
+
+static gboolean
+treeview_drag_drop (GtkWidget *widget, GdkDragContext *context, 
+                    gint x, gint y, guint time, gpointer user_data)
+{
+    GdkAtom atom = gtk_drag_dest_find_target (widget, context, NULL);
+
+    if (atom != GDK_NONE)
+    {
+        gtk_drag_get_data (widget, context, atom, time);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void
 treeview_data_get (GtkWidget *widget, GdkDragContext *drag_context, 
                    GtkSelectionData *data, guint info, 
                    guint time, gpointer user_data)
@@ -940,8 +970,16 @@ add_item_treeview (PanelSettingsDialog *psd)
     /* dnd */
     panel_dnd_set_name_source (tv);
 
+    panel_dnd_set_widget_delete_dest (tv);
+
     g_signal_connect (tv, "drag-data-get", G_CALLBACK (treeview_data_get), 
                       psd);
+
+    g_signal_connect (tv, "drag-data-received", 
+                      G_CALLBACK (treeview_data_received), psd);
+    
+    g_signal_connect (tv, "drag-drop", 
+                      G_CALLBACK (treeview_drag_drop), psd);
     
     /* create the view */
     col = gtk_tree_view_column_new ();

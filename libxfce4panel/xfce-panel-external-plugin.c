@@ -580,6 +580,9 @@ _plugin_event_received (GtkWidget * win, GdkEventClient * ev,
                 xfce_panel_plugin_set_sensitive (XFCE_PANEL_PLUGIN (plugin), 
                                                  ev->data.s[1] == 1);
                 break;
+            case XFCE_PANEL_PLUGIN_REMOVE:
+                xfce_panel_plugin_remove_confirm (XFCE_PANEL_PLUGIN (plugin));
+                break;
             default:
                 return FALSE;
         }

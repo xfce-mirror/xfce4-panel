@@ -70,6 +70,15 @@ panel_dnd_set_dest (GtkWidget *widget)
 }
 
 void 
+panel_dnd_set_widget_delete_dest (GtkWidget *widget)
+{
+    gtk_drag_dest_set (widget, 
+                       GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_MOTION,
+                       widget_target_list, n_widget_targets, 
+                       GDK_ACTION_MOVE);
+}
+
+void 
 panel_dnd_unset_dest (GtkWidget *widget)
 {
     gtk_drag_dest_unset (widget);
@@ -99,7 +108,7 @@ panel_dnd_set_widget_source (GtkWidget *widget)
 {
     gtk_drag_source_set (widget, GDK_BUTTON1_MASK, 
                          widget_target_list, n_widget_targets, 
-                         GDK_ACTION_COPY);
+                         GDK_ACTION_COPY|GDK_ACTION_MOVE);
 }
 
 void panel_dnd_unset_source (GtkWidget *widget)

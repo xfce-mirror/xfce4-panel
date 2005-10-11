@@ -111,6 +111,10 @@ static void _panel_drag_data_get (GtkWidget *widget,
                                   guint time, 
                                   Panel *panel);
 
+static void _panel_drag_data_delete (GtkWidget *widget, 
+                                     GdkDragContext *drag_context, 
+                                     Panel *panel);
+
 /* pass through button press events */
 static gboolean _panel_itembar_button_pressed (GtkWidget *widget, 
                                                GdkEventButton *ev, 
@@ -246,6 +250,9 @@ panel_init (Panel * panel)
 
     g_signal_connect (priv->itembar, "drag-data-get", 
                       G_CALLBACK (_panel_drag_data_get), panel);
+
+    g_signal_connect (priv->itembar, "drag-data-delete", 
+                      G_CALLBACK (_panel_drag_data_delete), panel);
 
     /* right-click */
     g_signal_connect (priv->itembar, "button-press-event",
@@ -472,6 +479,18 @@ _panel_drag_data_get (GtkWidget *widget, GdkDragContext *drag_context,
             panel_dnd_set_widget_data (data, priv->drag_widget);
         }
     }
+}
+
+static void
+_panel_drag_data_delete (GtkWidget *widget, GdkDragContext *drag_context, 
+                         Panel *panel)
+{
+    PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
+
+    if (priv->drag_widget)
+        xfce_panel_item_remove (XFCE_PANEL_ITEM (priv->drag_widget));
+    
+    priv->drag_widget = NULL;
 }
 
 /* pass through right-click events when the event window of itembar is raised

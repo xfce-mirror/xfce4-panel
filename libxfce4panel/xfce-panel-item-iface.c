@@ -418,3 +418,16 @@ xfce_panel_item_set_sensitive (XfcePanelItem * item, gboolean sensitive)
     XFCE_PANEL_ITEM_GET_INTERFACE (item)->set_sensitive (item, sensitive);
 }
 
+/*
+ * xfce_panel_item_remove
+ * @item : an #XfcePanelItem
+ *
+ * Remove @item from the panel.
+ **/
+void 
+xfce_panel_item_remove (XfcePanelItem *item)
+{
+    XFCE_PANEL_ITEM_GET_INTERFACE (item)->remove (item);
+}
+
+

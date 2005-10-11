@@ -33,6 +33,8 @@ enum
 
 void panel_dnd_set_dest (GtkWidget *widget);
 
+void panel_dnd_set_widget_delete_dest (GtkWidget *widget);
+
 void panel_dnd_unset_dest (GtkWidget *widget);
 
 GtkWidget *panel_dnd_get_plugin_from_data (GtkSelectionData *data);

@@ -74,6 +74,8 @@ void xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin,
 
 /* vtable */
 
+void xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin);
+
 void xfce_panel_plugin_remove (XfcePanelPlugin *plugin);
 
 void xfce_panel_plugin_customize_panel (XfcePanelPlugin *plugin);
