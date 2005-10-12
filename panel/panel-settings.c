@@ -712,7 +712,7 @@ create_properties_tab (PanelSettingsDialog *psd)
     
     gtk_size_group_add_widget (sg, label);
     
-    psd->transparency = gtk_hscale_new_with_range (0, 100, 5);
+    psd->transparency = gtk_hscale_new_with_range (0, 95, 5);
     gtk_widget_set_size_request (psd->transparency, 150, -1);
     /*gtk_scale_set_draw_value (GTK_SCALE (psd->transparency), FALSE);*/
     gtk_scale_set_value_pos (GTK_SCALE (psd->transparency), GTK_POS_BOTTOM);
