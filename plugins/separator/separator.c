@@ -116,12 +116,12 @@ separator_set_size (XfcePanelPlugin *plugin, int size)
             GTK_ORIENTATION_HORIZONTAL)
     {
         gtk_widget_set_size_request (GTK_WIDGET (plugin), 
-                                     SEPARATOR_WIDTH, -1);
+                                     SEPARATOR_WIDTH, size);
     }
     else
     {
         gtk_widget_set_size_request (GTK_WIDGET (plugin), 
-                                     -1, SEPARATOR_WIDTH);
+                                     size, SEPARATOR_WIDTH);
     }
 
     return TRUE;
