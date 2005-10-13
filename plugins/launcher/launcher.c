@@ -552,8 +552,8 @@ launcher_recreate_menu (LauncherPlugin *launcher)
         GdkPixbuf *pb;
         LauncherEntry *entry = g_ptr_array_index (launcher->entries, i);
         
-        mi = gtk_image_menu_item_new_with_label (entry->name ? entry->name : 
-                                                               "New Item");
+        mi = gtk_image_menu_item_new_with_label (entry->name ? 
+                entry->name : _("New Item"));
         gtk_widget_show (mi);
         gtk_menu_shell_prepend (GTK_MENU_SHELL (launcher->menu), mi);
 
