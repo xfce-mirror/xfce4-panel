@@ -804,10 +804,10 @@ launcher_entry_from_rc_file (XfceRc *rc)
     LauncherEntry *entry = g_new0 (LauncherEntry, 1);
     const char *s;
 
-    if ((s = xfce_rc_read_entry (rc, "Name", NULL)) != NULL && *s)
+    if ((s = xfce_rc_read_entry (rc, "Name", NULL)) != NULL)
         entry->name = g_strdup (s);
 
-    if ((s = xfce_rc_read_entry (rc, "Exec", NULL)) != NULL && *s)
+    if ((s = xfce_rc_read_entry (rc, "Exec", NULL)) != NULL)
         entry->exec = g_strdup (s);
 
     entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
@@ -875,9 +875,11 @@ launcher_read_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
 static void
 launcher_entry_write_rc_file (LauncherEntry *entry, XfceRc *rc)
 {
-    xfce_rc_write_entry (rc, "Name", entry->name ? entry->name : "");
+    if (entry->name)
+        xfce_rc_write_entry (rc, "Name", entry->name);
 
-    xfce_rc_write_entry (rc, "Exec", entry->exec ? entry->exec : "");
+    if (entry->exec)
+        xfce_rc_write_entry (rc, "Exec", entry->exec);
 
     xfce_rc_write_bool_entry (rc, "Terminal", entry->terminal);
     
