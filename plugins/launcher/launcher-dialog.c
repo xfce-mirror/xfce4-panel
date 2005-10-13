@@ -778,6 +778,12 @@ cursor_changed (GtkTreeView * tv, LauncherDialog *ld)
     GtkTreeIter iter;
     LauncherEntry *e;
     
+    /* update current item */
+    update_entry_info (ld);
+    update_entry_exec (ld);
+    if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_CATEGORY)
+        update_entry_icon (ld);
+    
     sel = gtk_tree_view_get_selection (tv);
     gtk_tree_selection_get_selected (sel, &model, &iter);
 
