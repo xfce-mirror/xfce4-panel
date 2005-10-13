@@ -1224,8 +1224,11 @@ static void
 launcher_dialog_response (GtkWidget *dlg, int response, LauncherDialog *ld)
 {
     gtk_widget_hide (dlg);
+    
     launcher_update_panel_entry (ld->launcher);
     launcher_recreate_menu (ld->launcher);
+    
+    gtk_widget_destroy (ld->icon_category);
     gtk_widget_destroy (dlg);
 
     xfce_panel_plugin_unblock_menu (ld->plugin);
