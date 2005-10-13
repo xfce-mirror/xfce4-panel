@@ -329,6 +329,9 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
 
     n = files->len;
     
+    if (G_UNLIKELY (!entry->exec))
+        return;
+
     if (entry->terminal)
     {
         argv = g_new (char *, n + 4);
@@ -549,7 +552,8 @@ launcher_recreate_menu (LauncherPlugin *launcher)
         GdkPixbuf *pb;
         LauncherEntry *entry = g_ptr_array_index (launcher->entries, i);
         
-        mi = gtk_image_menu_item_new_with_label (entry->name);
+        mi = gtk_image_menu_item_new_with_label (entry->name ? entry->name : 
+                                                               "New Item");
         gtk_widget_show (mi);
         gtk_menu_shell_prepend (GTK_MENU_SHELL (launcher->menu), mi);
 
@@ -567,8 +571,7 @@ launcher_recreate_menu (LauncherPlugin *launcher)
         g_signal_connect (mi, "activate", 
                           G_CALLBACK (launcher_menu_item_activate), entry);
 
-        if (entry->comment)
-            gtk_tooltips_set_tip (launcher->tips, mi, entry->comment, NULL);
+        gtk_tooltips_set_tip (launcher->tips, mi, entry->comment, NULL);
 
         launcher_set_drag_dest (mi);
         
@@ -584,7 +587,7 @@ void
 launcher_update_panel_entry (LauncherPlugin *launcher)
 {    
     GdkPixbuf *pb;
-    char *tip;
+    char *tip = NULL;
     LauncherEntry *entry;
     
     if (launcher->entries->len == 0)
@@ -603,10 +606,14 @@ launcher_update_panel_entry (LauncherPlugin *launcher)
         else
             tip = g_strdup (entry->name);
 
-        gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
-
-        g_free (tip);
     }
+    else
+    {
+        tip = g_strdup (_("This item has not yet been configured"));
+    }
+
+    gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
+    g_free (tip);
 }
 
 static void
