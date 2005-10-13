@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.22\n"
+"Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-09 17:55+0200\n"
+"POT-Creation-Date: 2005-10-13 20:59+0900\n"
 "PO-Revision-Date: 2005-09-29 20:40+0900\n"
 "Last-Translator: Anthony Ivanoff <a-i@bk.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -19,32 +19,32 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../libxfce4panel/xfce-panel-external-item.c:167
+#: ../libxfce4panel/xfce-panel-external-item.c:171
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:664
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:582
 #, fuzzy, c-format
 msgid "Remove \"%s\"?"
 msgstr "Удалить"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel-app.c:558
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:587 ../panel/panel-app.c:558
 #: ../panel/panel-app.c:583 ../panel/panel-app.c:610
-#: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
+#: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:312
 #: ../plugins/launcher/launcher.c:357
 msgid "Xfce Panel"
 msgstr "Панель Xfce"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:671
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:589
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:755
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:531
-#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:763
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:550
+#: ../plugins/launcher/launcher-dialog.c:1252
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -52,43 +52,43 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:538
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:770
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:557
 #, fuzzy
 msgid "Remove"
 msgstr "Удалить"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:771
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:779
 msgid "About"
 msgstr ""
 
 #. panel section
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:788 ../panel/panel.c:515
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:796 ../panel/panel.c:534
 #, fuzzy
 msgid "Panel"
 msgstr "Панель Xfce"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:797 ../panel/panel.c:524
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:543
 msgid "Manage Panel Items"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825 ../panel/panel.c:565
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:833 ../panel/panel.c:584
 #, fuzzy
 msgid "New Panel"
 msgstr "Панель Xfce"
 
 #. about
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:835 ../panel/panel.c:576
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:843 ../panel/panel.c:595
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "Панель Xfce"
 
-#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:568 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:555
+#: ../panel/panel.c:574
 #, fuzzy
 msgid "Restart"
 msgstr "Перезагрузить"
@@ -259,24 +259,24 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: ../panel/panel-settings.c:1018
+#: ../panel/panel-settings.c:1056
 msgid ""
 "Drag items from the list to a panel or move existing items to a new location."
 msgstr ""
 
-#: ../panel/panel-settings.c:1036
+#: ../panel/panel-settings.c:1074
 msgid "Avalaible Items"
 msgstr ""
 
-#: ../panel/panel-settings.c:1049
+#: ../panel/panel-settings.c:1087
 msgid "Add To Selected Panel"
 msgstr ""
 
-#: ../panel/panel-settings.c:1253
+#: ../panel/panel-settings.c:1291
 msgid "Panel Preferences"
 msgstr ""
 
-#: ../panel/panel-settings.c:1255
+#: ../panel/panel-settings.c:1293
 #, fuzzy
 msgid "Add Items"
 msgstr "Добавить новый объект"
@@ -286,12 +286,12 @@ msgstr "Добавить новый объект"
 msgid "Could not run \"%s\""
 msgstr "Невозможно создать элемент панели \"%s\"."
 
-#: ../plugins/launcher/launcher.c:1137
+#: ../plugins/launcher/launcher.c:1111
 #, fuzzy
 msgid "New item"
 msgstr "Добавить новый объект"
 
-#: ../plugins/launcher/launcher.c:1138
+#: ../plugins/launcher/launcher.c:1112
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "Обьект не имеет настраиваемых параметров"
@@ -385,23 +385,23 @@ msgstr "Выполнять в окне терминала"
 msgid "Use _startup notification"
 msgstr "Использовать уведомление о запуске"
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1110
 #, fuzzy
 msgid "New Item"
 msgstr "Добавить новый объект"
 
-#: ../plugins/launcher/launcher-dialog.c:1209
+#: ../plugins/launcher/launcher-dialog.c:1215
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1255
+#: ../plugins/launcher/launcher-dialog.c:1261
 #, fuzzy
 msgid "Program Launcher"
 msgstr "Добавить подменю к обьекту"
 
-#: ../plugins/launcher/launcher-dialog.c:1571
+#: ../plugins/launcher/launcher-dialog.c:1577
 msgid "Select file"
 msgstr "Выбор файла"
 

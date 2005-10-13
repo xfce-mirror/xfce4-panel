@@ -7,9 +7,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.22\n"
+"Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-09 17:55+0200\n"
+"POT-Creation-Date: 2005-10-13 20:59+0900\n"
 "PO-Revision-Date: 2005-10-11 00:00+0800\n"
 "Last-Translator: Hydonsingore Cia <hydonsingore@mail.educities.edu.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../libxfce4panel/xfce-panel-external-item.c:167
+#: ../libxfce4panel/xfce-panel-external-item.c:171
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "所有的項目意外地被移除了: \"%s\" 。"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:664
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:582
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "移除 \"%s\" 項目？"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel-app.c:558
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:587 ../panel/panel-app.c:558
 #: ../panel/panel-app.c:583 ../panel/panel-app.c:610
-#: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
+#: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:312
 #: ../plugins/launcher/launcher.c:357
 msgid "Xfce Panel"
 msgstr "Xfce 面板"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:671
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:589
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "這個項目將會從面板中移除，其設定將會遺失"
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:755
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:531
-#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:763
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:550
+#: ../plugins/launcher/launcher-dialog.c:1252
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -50,39 +50,39 @@ msgstr "這個項目將會從面板中移除，其設定將會遺失"
 msgid "Properties"
 msgstr "特性"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:538
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:770
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:557
 msgid "Remove"
 msgstr "移除"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:771
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:779
 msgid "About"
 msgstr "關於"
 
 #. panel section
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:788 ../panel/panel.c:515
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:796 ../panel/panel.c:534
 msgid "Panel"
 msgstr "面板"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:797 ../panel/panel.c:524
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:543
 msgid "Manage Panel Items"
 msgstr "管理面板項目"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825 ../panel/panel.c:565
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:833 ../panel/panel.c:584
 msgid "New Panel"
 msgstr "新增面板"
 
 #. about
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:835 ../panel/panel.c:576
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:843 ../panel/panel.c:595
 msgid "About the Xfce Panel"
 msgstr "關於 Xfce 面板"
 
-#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:568 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr "離開"
 
-#: ../panel/panel.c:555
+#: ../panel/panel.c:574
 msgid "Restart"
 msgstr "重新啟動"
 
@@ -256,24 +256,24 @@ msgstr "無"
 msgid "Full"
 msgstr "全"
 
-#: ../panel/panel-settings.c:1018
+#: ../panel/panel-settings.c:1056
 msgid ""
 "Drag items from the list to a panel or move existing items to a new location."
 msgstr "從清單中將項目拖曳到面板或是將現有的項目移到新位置。"
 
-#: ../panel/panel-settings.c:1036
+#: ../panel/panel-settings.c:1074
 msgid "Avalaible Items"
 msgstr "可用的項目"
 
-#: ../panel/panel-settings.c:1049
+#: ../panel/panel-settings.c:1087
 msgid "Add To Selected Panel"
 msgstr "新增到所選的面板"
 
-#: ../panel/panel-settings.c:1253
+#: ../panel/panel-settings.c:1291
 msgid "Panel Preferences"
 msgstr "面板偏好設定"
 
-#: ../panel/panel-settings.c:1255
+#: ../panel/panel-settings.c:1293
 msgid "Add Items"
 msgstr "增加新項目"
 
@@ -282,11 +282,11 @@ msgstr "增加新項目"
 msgid "Could not run \"%s\""
 msgstr "無法執行\"%s\""
 
-#: ../plugins/launcher/launcher.c:1137
+#: ../plugins/launcher/launcher.c:1111
 msgid "New item"
 msgstr "增加新項目"
 
-#: ../plugins/launcher/launcher.c:1138
+#: ../plugins/launcher/launcher.c:1112
 msgid "This item has not yet been configured"
 msgstr "該項目尚未設定"
 
@@ -375,21 +375,21 @@ msgstr "在終端機中執行(_T)"
 msgid "Use _startup notification"
 msgstr "使用啟動提示(_S)"
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1110
 msgid "New Item"
 msgstr "新增項目"
 
-#: ../plugins/launcher/launcher-dialog.c:1209
+#: ../plugins/launcher/launcher-dialog.c:1215
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr "清單中的第一個項目會出現在面板上，其餘的項目會顯現在選單中。"
 
-#: ../plugins/launcher/launcher-dialog.c:1255
+#: ../plugins/launcher/launcher-dialog.c:1261
 msgid "Program Launcher"
 msgstr "程式啟動器"
 
-#: ../plugins/launcher/launcher-dialog.c:1571
+#: ../plugins/launcher/launcher-dialog.c:1577
 msgid "Select file"
 msgstr "選擇檔案"
 

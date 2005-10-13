@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.22\n"
+"Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-09 17:55+0200\n"
+"POT-Creation-Date: 2005-10-13 20:59+0900\n"
 "PO-Revision-Date: 2005-10-09 17:47+0200\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -15,24 +15,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../libxfce4panel/xfce-panel-external-item.c:167
+#: ../libxfce4panel/xfce-panel-external-item.c:171
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Een item was onverwacht verwijderd: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:664
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:582
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "\"%s\" verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:669 ../panel/panel-app.c:558
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:587 ../panel/panel-app.c:558
 #: ../panel/panel-app.c:583 ../panel/panel-app.c:610
-#: ../panel/panel-settings.c:1199 ../plugins/launcher/launcher.c:312
+#: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:312
 #: ../plugins/launcher/launcher.c:357
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:671
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:589
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
@@ -40,9 +40,9 @@ msgstr ""
 "configuratie gaat verloren."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:755
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:531
-#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:763
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:550
+#: ../plugins/launcher/launcher-dialog.c:1252
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -50,39 +50,39 @@ msgstr ""
 msgid "Properties"
 msgstr "Eigenschappen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:538
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:770
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:557
 msgid "Remove"
 msgstr "Verwijderen"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:771
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:779
 msgid "About"
 msgstr "Info"
 
 #. panel section
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:788 ../panel/panel.c:515
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:796 ../panel/panel.c:534
 msgid "Panel"
 msgstr "Paneel"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:797 ../panel/panel.c:524
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:805 ../panel/panel.c:543
 msgid "Manage Panel Items"
 msgstr "Items beheren"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825 ../panel/panel.c:565
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:833 ../panel/panel.c:584
 msgid "New Panel"
 msgstr "Nieuw Paneel"
 
 #. about
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:835 ../panel/panel.c:576
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:843 ../panel/panel.c:595
 msgid "About the Xfce Panel"
 msgstr "Xfce Paneel info"
 
-#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:568 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: ../panel/panel.c:555
+#: ../panel/panel.c:574
 msgid "Restart"
 msgstr "Herstarten"
 
@@ -258,26 +258,26 @@ msgstr "Geen"
 msgid "Full"
 msgstr "Volledig"
 
-#: ../panel/panel-settings.c:1018
+#: ../panel/panel-settings.c:1056
 msgid ""
 "Drag items from the list to a panel or move existing items to a new location."
 msgstr ""
 "Sleep items van de lijst naar een paneel of verplaats bestaande items naar "
 "een nieuwe positie."
 
-#: ../panel/panel-settings.c:1036
+#: ../panel/panel-settings.c:1074
 msgid "Avalaible Items"
 msgstr "Beschikbare items"
 
-#: ../panel/panel-settings.c:1049
+#: ../panel/panel-settings.c:1087
 msgid "Add To Selected Panel"
 msgstr "Toevoegen aan het geselecteerde paneel"
 
-#: ../panel/panel-settings.c:1253
+#: ../panel/panel-settings.c:1291
 msgid "Panel Preferences"
 msgstr "Paneel configureren"
 
-#: ../panel/panel-settings.c:1255
+#: ../panel/panel-settings.c:1293
 msgid "Add Items"
 msgstr "Items toevoegen"
 
@@ -286,11 +286,11 @@ msgstr "Items toevoegen"
 msgid "Could not run \"%s\""
 msgstr "Kon \"%s\" niet uitvoeren"
 
-#: ../plugins/launcher/launcher.c:1137
+#: ../plugins/launcher/launcher.c:1111
 msgid "New item"
 msgstr "Nieuw item"
 
-#: ../plugins/launcher/launcher.c:1138
+#: ../plugins/launcher/launcher.c:1112
 msgid "This item has not yet been configured"
 msgstr "Dit item moet nog geconfigureerd worden"
 
@@ -378,11 +378,11 @@ msgstr "Uitvoeren in _terminal"
 msgid "Use _startup notification"
 msgstr "Opstart-_notificatie gebruiken"
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1110
 msgid "New Item"
 msgstr "Nieuw Item"
 
-#: ../plugins/launcher/launcher-dialog.c:1209
+#: ../plugins/launcher/launcher-dialog.c:1215
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -390,11 +390,11 @@ msgstr ""
 "Het eerste item word getoond op het paneel. Overige items worden in een menu "
 "geplaatst."
 
-#: ../plugins/launcher/launcher-dialog.c:1255
+#: ../plugins/launcher/launcher-dialog.c:1261
 msgid "Program Launcher"
 msgstr "Snelkoppeling"
 
-#: ../plugins/launcher/launcher-dialog.c:1571
+#: ../plugins/launcher/launcher-dialog.c:1577
 msgid "Select file"
 msgstr "Bestand selecteren"
 
