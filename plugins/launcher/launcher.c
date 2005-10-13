@@ -797,26 +797,11 @@ launcher_entry_from_rc_file (XfceRc *rc)
     LauncherEntry *entry = g_new0 (LauncherEntry, 1);
     const char *s;
 
-    if ((s = xfce_rc_read_entry (rc, "Name", NULL)) != NULL)
-    {
+    if ((s = xfce_rc_read_entry (rc, "Name", NULL)) != NULL && *s)
         entry->name = g_strdup (s);
-    }
-    else
-    {
-        g_free (entry);
-        return NULL;
-    }
 
-    if ((s = xfce_rc_read_entry (rc, "Exec", NULL)) != NULL)
-    {
+    if ((s = xfce_rc_read_entry (rc, "Exec", NULL)) != NULL && *s)
         entry->exec = g_strdup (s);
-    }
-    else
-    {
-        g_free (entry->name);
-        g_free (entry);
-        return NULL;
-    }
 
     entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
     
@@ -883,11 +868,9 @@ launcher_read_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
 static void
 launcher_entry_write_rc_file (LauncherEntry *entry, XfceRc *rc)
 {
-    if (entry->name)
-        xfce_rc_write_entry (rc, "Name", entry->name);
+    xfce_rc_write_entry (rc, "Name", entry->name ? entry->name : "");
 
-    if (entry->exec)
-        xfce_rc_write_entry (rc, "Exec", entry->exec);
+    xfce_rc_write_entry (rc, "Exec", entry->exec ? entry->exec : "");
 
     xfce_rc_write_bool_entry (rc, "Terminal", entry->terminal);
     
@@ -914,26 +897,17 @@ launcher_write_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
     XfceRc *rc;
     char group[10];
     int i;
-    char **groups, **g;
 
     if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
         return;
 
+    unlink (file);
+    
     rc = xfce_rc_simple_open (file, FALSE);
     g_free (file);
 
     if (!rc)
         return;
-    
-    /* delete old values */
-    groups = xfce_rc_get_groups (rc);
-
-    for (g = groups; *g != NULL; ++g)
-    {
-        xfce_rc_delete_group (rc, *g, TRUE);
-    }
-
-    g_strfreev (groups);
     
     for (i = 0; i < launcher->entries->len; ++i)
     {
