@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-14 18:44+0900\n"
+"POT-Creation-Date: 2005-10-15 21:31+0900\n"
 "PO-Revision-Date: 2005-10-14 18:34+0900\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -31,7 +31,7 @@ msgstr "Törlöd ezt: \"%s\"?"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:587 ../panel/panel-app.c:558
 #: ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:312
-#: ../plugins/launcher/launcher.c:357
+#: ../plugins/launcher/launcher.c:360
 msgid "Xfce Panel"
 msgstr "Xfce panel"
 
@@ -278,18 +278,23 @@ msgstr "Panel beállítások"
 msgid "Add Items"
 msgstr "Elemek hozzáadása"
 
-#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
+#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:358
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "\"%s\" nem futtatható"
 
-#: ../plugins/launcher/launcher.c:1111
-msgid "New item"
+#: ../plugins/launcher/launcher.c:556
+#: ../plugins/launcher/launcher-dialog.c:1110
+msgid "New Item"
 msgstr "Új elem"
 
-#: ../plugins/launcher/launcher.c:1112
+#: ../plugins/launcher/launcher.c:612 ../plugins/launcher/launcher.c:1121
 msgid "This item has not yet been configured"
 msgstr "Beállítatlan elem"
+
+#: ../plugins/launcher/launcher.c:1120
+msgid "New item"
+msgstr "Új elem"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -374,10 +379,6 @@ msgstr "_Terminálban futtatás"
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "Use _startup notification"
 msgstr "_Indításjelentés használata"
-
-#: ../plugins/launcher/launcher-dialog.c:1110
-msgid "New Item"
-msgstr "Új elem"
 
 #: ../plugins/launcher/launcher-dialog.c:1215
 msgid ""

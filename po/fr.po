@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-13 20:59+0900\n"
+"POT-Creation-Date: 2005-10-15 21:31+0900\n"
 "PO-Revision-Date: 2005-09-29 20:28+0900\n"
 "Last-Translator: Olivier Fourdan <fourdan@xfce.org>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -28,7 +28,7 @@ msgstr "_Supprimer"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:587 ../panel/panel-app.c:558
 #: ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:312
-#: ../plugins/launcher/launcher.c:357
+#: ../plugins/launcher/launcher.c:360
 msgid "Xfce Panel"
 msgstr "Panneau Xfce"
 
@@ -40,7 +40,7 @@ msgstr ""
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:763
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:550
-#: ../plugins/launcher/launcher-dialog.c:1252
+#: ../plugins/launcher/launcher-dialog.c:1255
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -276,20 +276,26 @@ msgstr ""
 msgid "Add Items"
 msgstr "Ajouter une entrée"
 
-#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
+#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:358
 #, fuzzy, c-format
 msgid "Could not run \"%s\""
 msgstr "Impossible de créer l'élément du panneau \"%s\"."
 
-#: ../plugins/launcher/launcher.c:1111
+#: ../plugins/launcher/launcher.c:556
+#: ../plugins/launcher/launcher-dialog.c:1110
 #, fuzzy
-msgid "New item"
+msgid "New Item"
 msgstr "Ajouter une entrée"
 
-#: ../plugins/launcher/launcher.c:1112
+#: ../plugins/launcher/launcher.c:612 ../plugins/launcher/launcher.c:1121
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "Cette entrée n'a pas d'option de configuration"
+
+#: ../plugins/launcher/launcher.c:1120
+#, fuzzy
+msgid "New item"
+msgstr "Ajouter une entrée"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -380,23 +386,18 @@ msgstr "Exécuter dans un _terminal"
 msgid "Use _startup notification"
 msgstr "Utiliser la _notification de démarrage"
 
-#: ../plugins/launcher/launcher-dialog.c:1110
-#, fuzzy
-msgid "New Item"
-msgstr "Ajouter une entrée"
-
 #: ../plugins/launcher/launcher-dialog.c:1215
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1261
+#: ../plugins/launcher/launcher-dialog.c:1264
 #, fuzzy
 msgid "Program Launcher"
 msgstr "Associer un menu au lanceur"
 
-#: ../plugins/launcher/launcher-dialog.c:1577
+#: ../plugins/launcher/launcher-dialog.c:1580
 msgid "Select file"
 msgstr "Sélection de fichier"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-13 20:59+0900\n"
+"POT-Creation-Date: 2005-10-15 21:31+0900\n"
 "PO-Revision-Date: 2005-10-11 00:00+0800\n"
 "Last-Translator: Hydonsingore Cia <hydonsingore@mail.educities.edu.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -30,7 +30,7 @@ msgstr "移除 \"%s\" 項目？"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:587 ../panel/panel-app.c:558
 #: ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:312
-#: ../plugins/launcher/launcher.c:357
+#: ../plugins/launcher/launcher.c:360
 msgid "Xfce Panel"
 msgstr "Xfce 面板"
 
@@ -42,7 +42,7 @@ msgstr "這個項目將會從面板中移除，其設定將會遺失"
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:763
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:550
-#: ../plugins/launcher/launcher-dialog.c:1252
+#: ../plugins/launcher/launcher-dialog.c:1255
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -277,18 +277,23 @@ msgstr "面板偏好設定"
 msgid "Add Items"
 msgstr "增加新項目"
 
-#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
+#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:358
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "無法執行\"%s\""
 
-#: ../plugins/launcher/launcher.c:1111
-msgid "New item"
-msgstr "增加新項目"
+#: ../plugins/launcher/launcher.c:556
+#: ../plugins/launcher/launcher-dialog.c:1110
+msgid "New Item"
+msgstr "新增項目"
 
-#: ../plugins/launcher/launcher.c:1112
+#: ../plugins/launcher/launcher.c:612 ../plugins/launcher/launcher.c:1121
 msgid "This item has not yet been configured"
 msgstr "該項目尚未設定"
+
+#: ../plugins/launcher/launcher.c:1120
+msgid "New item"
+msgstr "增加新項目"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -375,21 +380,17 @@ msgstr "在終端機中執行(_T)"
 msgid "Use _startup notification"
 msgstr "使用啟動提示(_S)"
 
-#: ../plugins/launcher/launcher-dialog.c:1110
-msgid "New Item"
-msgstr "新增項目"
-
 #: ../plugins/launcher/launcher-dialog.c:1215
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr "清單中的第一個項目會出現在面板上，其餘的項目會顯現在選單中。"
 
-#: ../plugins/launcher/launcher-dialog.c:1261
+#: ../plugins/launcher/launcher-dialog.c:1264
 msgid "Program Launcher"
 msgstr "程式啟動器"
 
-#: ../plugins/launcher/launcher-dialog.c:1577
+#: ../plugins/launcher/launcher-dialog.c:1580
 msgid "Select file"
 msgstr "選擇檔案"
 

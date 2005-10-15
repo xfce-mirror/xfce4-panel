@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-13 20:59+0900\n"
+"POT-Creation-Date: 2005-10-15 21:31+0900\n"
 "PO-Revision-Date: 2005-10-09 17:47+0200\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -28,7 +28,7 @@ msgstr "\"%s\" verwijderen?"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:587 ../panel/panel-app.c:558
 #: ../panel/panel-app.c:583 ../panel/panel-app.c:610
 #: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:312
-#: ../plugins/launcher/launcher.c:357
+#: ../plugins/launcher/launcher.c:360
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
@@ -42,7 +42,7 @@ msgstr ""
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:763
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:550
-#: ../plugins/launcher/launcher-dialog.c:1252
+#: ../plugins/launcher/launcher-dialog.c:1255
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -281,18 +281,23 @@ msgstr "Paneel configureren"
 msgid "Add Items"
 msgstr "Items toevoegen"
 
-#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:355
+#: ../plugins/launcher/launcher.c:310 ../plugins/launcher/launcher.c:358
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "Kon \"%s\" niet uitvoeren"
 
-#: ../plugins/launcher/launcher.c:1111
-msgid "New item"
-msgstr "Nieuw item"
+#: ../plugins/launcher/launcher.c:556
+#: ../plugins/launcher/launcher-dialog.c:1110
+msgid "New Item"
+msgstr "Nieuw Item"
 
-#: ../plugins/launcher/launcher.c:1112
+#: ../plugins/launcher/launcher.c:612 ../plugins/launcher/launcher.c:1121
 msgid "This item has not yet been configured"
 msgstr "Dit item moet nog geconfigureerd worden"
+
+#: ../plugins/launcher/launcher.c:1120
+msgid "New item"
+msgstr "Nieuw item"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -378,10 +383,6 @@ msgstr "Uitvoeren in _terminal"
 msgid "Use _startup notification"
 msgstr "Opstart-_notificatie gebruiken"
 
-#: ../plugins/launcher/launcher-dialog.c:1110
-msgid "New Item"
-msgstr "Nieuw Item"
-
 #: ../plugins/launcher/launcher-dialog.c:1215
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
@@ -390,11 +391,11 @@ msgstr ""
 "Het eerste item word getoond op het paneel. Overige items worden in een menu "
 "geplaatst."
 
-#: ../plugins/launcher/launcher-dialog.c:1261
+#: ../plugins/launcher/launcher-dialog.c:1264
 msgid "Program Launcher"
 msgstr "Snelkoppeling"
 
-#: ../plugins/launcher/launcher-dialog.c:1577
+#: ../plugins/launcher/launcher-dialog.c:1580
 msgid "Select file"
 msgstr "Bestand selecteren"
 
