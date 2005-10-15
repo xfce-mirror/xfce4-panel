@@ -57,6 +57,7 @@ struct _LauncherEntry
     char *name;
     char *comment;
     char *exec;
+    char *real_exec;
 
     LauncherIcon icon; 
 

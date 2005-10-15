@@ -212,12 +212,20 @@ update_entry_exec (LauncherDialog *ld)
         {
             g_free (ld->entry->exec);
             ld->entry->exec = NULL;
+            g_free (ld->entry->real_exec);
+            ld->entry->real_exec = NULL;
         }
     }
     else if (!ld->entry->exec || strcmp (text, ld->entry->exec) != 0)
     {
         g_free (ld->entry->exec);
         ld->entry->exec = g_strdup (text);
+        g_free (ld->entry->real_exec);
+        if (!(ld->entry->real_exec = 
+                    xfce_expand_variables (ld->entry->exec, NULL)))
+        {
+                ld->entry->real_exec = g_strdup (ld->entry->exec);
+        }
     }
 }
 
@@ -1322,6 +1330,7 @@ update_entry_from_desktop_file (LauncherEntry *e, const char *path)
         g_free (e->name);
         g_free (e->comment);
         g_free (e->exec);
+        g_free (e->real_exec);
         if (e->icon.type == LAUNCHER_ICON_TYPE_NAME)
             g_free (e->icon.icon.name);
 
@@ -1362,6 +1371,13 @@ update_entry_from_desktop_file (LauncherEntry *e, const char *path)
 
         xfce_desktop_entry_get_string (dentry, "Exec", FALSE,
                                        &(e->exec));
+        if (e->exec)
+        {
+            if (!(e->real_exec = xfce_expand_variables (e->exec, NULL)))
+                e->real_exec = g_strdup (e->exec);
+        }
+                    
+
 
         value = NULL;
         xfce_desktop_entry_get_string (dentry, "Terminal", FALSE,
@@ -1413,6 +1429,8 @@ create_entry_from_file (const char *path)
             utf8 = g_strdup (path);
         
         e->exec = g_strdup (path);
+        if (!(e->real_exec = xfce_expand_variables (e->exec, NULL)))
+            e->real_exec = g_strdup (e->exec);
         
         if (!(start = strrchr (utf8, G_DIR_SEPARATOR)))
             start = utf8;

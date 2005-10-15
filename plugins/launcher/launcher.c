@@ -290,6 +290,7 @@ launcher_entry_free (LauncherEntry *e)
     if (e->icon.type == LAUNCHER_ICON_TYPE_NAME)
         g_free (e->icon.icon.name);
     g_free (e->exec);
+    g_free (e->real_exec);
 
     g_free (e);
 }
@@ -302,7 +303,7 @@ launcher_entry_exec (LauncherEntry *entry)
     if (!entry->exec || !strlen (entry->exec))
         return;
     
-    xfce_exec (entry->exec, entry->terminal, entry->startup, &error);
+    xfce_exec (entry->real_exec, entry->terminal, entry->startup, &error);
         
     if (error)
     {
@@ -337,13 +338,13 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
         argv = g_new (char *, n + 4);
         argv[0] = "xfterm4";
         argv[1] = "-e";
-        argv[2] = entry->exec;
+        argv[2] = entry->real_exec;
         n = 3;
     }
     else
     {
         argv = g_new (char *, n + 2);
-        argv[0] = entry->exec;
+        argv[0] = entry->real_exec;
         n = 1;
     }
 
@@ -808,7 +809,12 @@ launcher_entry_from_rc_file (XfceRc *rc)
         entry->name = g_strdup (s);
 
     if ((s = xfce_rc_read_entry (rc, "Exec", NULL)) != NULL)
+    {
         entry->exec = g_strdup (s);
+        
+        if (!(entry->real_exec = xfce_expand_variables (entry->exec, NULL)))
+                entry->real_exec = g_strdup (entry->exec);
+    }
 
     entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
     
