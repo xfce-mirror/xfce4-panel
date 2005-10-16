@@ -21,6 +21,7 @@ conf_DATA = 								\
 	contents.xml.ro							\
 	contents.xml.ru							\
 	contents.xml.sk							\
+	contents.xml.sv							\
 	contents.xml.tr							\
 	contents.xml.vi							\
 	contents.xml.zh_CN						\
