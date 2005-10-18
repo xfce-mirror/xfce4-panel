@@ -556,7 +556,7 @@ panel_app_remove_panel (GtkWidget *panel)
     {
         response = 
             xfce_message_dialog (GTK_WINDOW (panel), _("Xfce Panel"),
-                                 GTK_STOCK_DIALOG_QUESTION, 
+                                 GTK_STOCK_DIALOG_WARNING, 
                                  _("Exit Xfce Panel?"), 
                                  _("You can't remove the last panel. "
                                    "Would you like to exit the program?"),
@@ -581,9 +581,9 @@ panel_app_remove_panel (GtkWidget *panel)
     first = g_strdup_printf (_("Remove Panel \"%d\"?"), n + 1);
     
     response = xfce_message_dialog (GTK_WINDOW (panel), _("Xfce Panel"),
-                                    GTK_STOCK_DIALOG_QUESTION, first, 
-                                    _("The panel will be removed and its "
-                                      "configuration will be lost."),
+                                    GTK_STOCK_DIALOG_WARNING, first, 
+                                    _("The selected panel and all its items "
+                                      "will be removed."),
                                     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                     GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT,
                                     NULL);

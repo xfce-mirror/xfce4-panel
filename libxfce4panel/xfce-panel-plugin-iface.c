@@ -574,7 +574,6 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
 void
 xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
 {
-#if 0
     int response = GTK_RESPONSE_NONE;
     char *first;
     GtkWindow *parent;
@@ -595,7 +594,6 @@ xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
     g_free (first);
                                     
     if (response == GTK_RESPONSE_ACCEPT)
-#endif
         xfce_panel_plugin_remove (plugin);
 }
 
