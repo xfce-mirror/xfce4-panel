@@ -527,7 +527,7 @@ _panel_itembar_button_pressed (GtkWidget *widget, GdkEventButton *ev,
 static GtkWidget *
 _panel_create_menu (Panel *panel)
 {
-    GtkWidget *menu, *mi;
+    GtkWidget *menu, *mi, *img;
 
     menu = gtk_menu_new ();
 
@@ -540,23 +540,35 @@ _panel_create_menu (Panel *panel)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-    mi = gtk_menu_item_new_with_label (_("Manage Panel Items"));
+    mi = gtk_image_menu_item_new_with_label (_("Manage Panel Items"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    img = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize_items), 
                       NULL);
     
-    mi = gtk_menu_item_new_with_label (_("Properties"));
+    mi = gtk_image_menu_item_new_with_label (_("Properties"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    img = gtk_image_new_from_stock (GTK_STOCK_PROPERTIES, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize), 
                       NULL);
     
-    mi = gtk_menu_item_new_with_label (_("Remove"));
+    mi = gtk_image_menu_item_new_with_label (_("Remove"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
     g_signal_connect_swapped (mi, "activate", 
                               G_CALLBACK (panel_app_remove_panel), panel);
@@ -565,25 +577,37 @@ _panel_create_menu (Panel *panel)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-    mi = gtk_menu_item_new_with_label (_("Quit"));
+    mi = gtk_image_menu_item_new_with_label (_("Quit"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
+    img = gtk_image_new_from_stock (GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_quit), NULL);
     
-    mi = gtk_menu_item_new_with_label (_("Restart"));
+    mi = gtk_image_menu_item_new_with_label (_("Restart"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     
+    img = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_restart), NULL);
 
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     
-    mi = gtk_menu_item_new_with_label (_("New Panel"));
+    mi = gtk_image_menu_item_new_with_label (_("New Panel"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_add_panel), 
                       NULL);
@@ -592,9 +616,13 @@ _panel_create_menu (Panel *panel)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-    mi = gtk_menu_item_new_with_label (_("About the Xfce Panel"));
+    mi = gtk_image_menu_item_new_with_label (_("About the Xfce Panel"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    img = gtk_image_new_from_stock (GTK_STOCK_ABOUT, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_about), 
                       NULL);
