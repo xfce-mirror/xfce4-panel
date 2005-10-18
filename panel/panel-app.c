@@ -578,6 +578,12 @@ panel_app_remove_panel (GtkWidget *panel)
     if (n == panel_app.panel_list->len)
         return;
     
+    panel_block_autohide (PANEL (panel));
+    
+    panel_set_items_sensitive (PANEL (panel), FALSE);
+    gtk_widget_set_sensitive (panel, FALSE);
+    gtk_drag_highlight (panel);
+    
     first = g_strdup_printf (_("Remove Panel \"%d\"?"), n + 1);
     
     response = xfce_message_dialog (GTK_WINDOW (panel), _("Xfce Panel"),
@@ -590,7 +596,13 @@ panel_app_remove_panel (GtkWidget *panel)
     g_free (first);
                                     
     if (response != GTK_RESPONSE_ACCEPT)
+    {
+        gtk_drag_unhighlight (panel);
+        gtk_widget_set_sensitive (panel, TRUE);
+        panel_set_items_sensitive (PANEL (panel), TRUE);
+        panel_unblock_autohide (PANEL (panel));
         return;
+    }
 
     if (g_ptr_array_remove (panel_app.panel_list, (gpointer)panel))
     {

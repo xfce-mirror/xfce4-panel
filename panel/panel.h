@@ -82,6 +82,9 @@ void panel_save_items (Panel *panel);
 
 gboolean panel_is_horizontal (Panel *panel);
 
+void panel_set_items_sensitive (Panel *panel, gboolean sensitive);
+
+
 G_END_DECLS
 
 #endif /* _PANEL_H */

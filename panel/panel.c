@@ -839,6 +839,22 @@ panel_is_horizontal (Panel *panel)
             xfce_panel_window_get_orientation (XFCE_PANEL_WINDOW (panel)));
 }
 
+void 
+panel_set_items_sensitive (Panel *panel, gboolean sensitive)
+{
+    PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
+    GList *l, *children;
+
+    children = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
+
+    for (l = children; l != NULL; l = l->next)
+    {
+        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (l->data), sensitive);
+    }
+
+    g_list_free (children);
+}
+
 static void 
 panel_menu_deactivated (Panel *panel)
 {

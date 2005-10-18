@@ -1116,7 +1116,6 @@ static void
 items_dialog_opened (Panel *panel)
 {
     PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
-    GList *l, *children;
     
     panel_block_autohide (panel);
 
@@ -1125,14 +1124,7 @@ items_dialog_opened (Panel *panel)
     panel_dnd_set_dest (priv->itembar);
     panel_dnd_set_widget_source (priv->itembar);
 
-    children = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
-
-    for (l = children; l != NULL; l = l->next)
-    {
-        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (l->data), FALSE);
-    }
-
-    g_list_free (children);
+    panel_set_items_sensitive (panel, FALSE);
 }
 
 static void
@@ -1146,20 +1138,12 @@ static void
 items_dialog_closed (Panel *panel)
 {
     PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
-    GList *children, *l;
     
     panel_unblock_autohide (panel);
     
     xfce_itembar_lower_event_window (XFCE_ITEMBAR (priv->itembar));
 
-    children = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
-
-    for (l = children; l != NULL; l = l->next)
-    {
-        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (l->data), TRUE);
-    }
-
-    g_list_free (children);
+    panel_set_items_sensitive (panel, TRUE);
     
     panel_dnd_unset_dest (priv->itembar);
     panel_dnd_unset_source (priv->itembar);
