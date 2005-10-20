@@ -1,15 +1,15 @@
-# Italian translations for xfce4-panel package.
-# Copyright (C) 2002-2005 The Xfce development team.
-# This file is distributed under the same license as the xfce4-panel package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # Alex Dupre <ale@FreeBSD.org>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.2.3\n"
+"Project-Id-Version: Xfce4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-08 06:14+0900\n"
-"PO-Revision-Date: 2005-08-21 15:20+0900\n"
-"Last-Translator: Luca Marrocco <buildup@libero.it>\n"
+"POT-Creation-Date: 2005-03-12 22:33+0100\n"
+"PO-Revision-Date: 2005-10-20 12:30+0100\n"
+"Last-Translator: Alex Dupre <ale@FreeBSD.org>\n"
 "Language-Team: GUFI <traduzioni@gufi.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,22 +23,19 @@ msgstr "Seleziona il file"
 msgid "No data was found. The panel will be empty."
 msgstr "Nessun dato e' stato trovate. Il pannello deve essere vuoto."
 
-#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
+#: panel/controls_dialog.c:89
+#: panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Posizione:"
 
 #: panel/controls_dialog.c:155
-#, fuzzy
 msgid "Item properties"
-msgstr "/_Proprietà ..."
+msgstr "Proprietà dell'oggetto"
 
-#: panel/controls_dialog.c:209 panel/controls.c:711
-#, fuzzy
+#: panel/controls_dialog.c:209
+#: panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
-msgstr ""
-"Rimuovere un oggetto rimuoverà anche il suo menu a scomparsa.\n"
-"\n"
-"Vuoi veramente rimuoverlo?"
+msgstr "La rimozione dell'oggetto rimuoverà anche il suo menu a scomparsa."
 
 #: panel/item_dialog.c:124
 msgid "Select command"
@@ -81,12 +78,13 @@ msgid "Change menu item"
 msgstr "Cambia oggetto del menu"
 
 #. add buttons
-#: panel/item_dialog.c:1221 panel/controls.c:748
-#, fuzzy
+#: panel/item_dialog.c:1221
+#: panel/controls.c:748
 msgid "_Remove"
-msgstr "/_Rimuovi"
+msgstr "_Rimuovi"
 
-#: panel/item_dialog.c:1233 panel/item.c:718
+#: panel/item_dialog.c:1233
+#: panel/item.c:718
 msgid "Launcher"
 msgstr "Launcher"
 
@@ -107,7 +105,7 @@ msgid "Are you sure you want to exit?"
 msgstr "Sei sicuro di voler uscire?"
 
 #: panel/main.c:401
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " The Xfce Panel\n"
@@ -119,15 +117,6 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
-"\n"
-"The Xfce Panel\n"
-"versione %s\n"
-"\n"
-"Parte di Xfce Desktop Environment\n"
-"http://www.xfce.org\n"
-"\n"
-"Licensed under the GNU GPL.\n"
-"\n"
 
 #: panel/main.c:488
 #, c-format
@@ -144,48 +133,46 @@ msgstr "%s: Avviato con successo con la gestione della sessione"
 msgid "Could not create panel item \"%s\"."
 msgstr "L'elemento \"%s\" del pannelo non puo essere creato."
 
-#: panel/controls.c:743 panel/panel.c:647
-#, fuzzy
+#: panel/controls.c:743
+#: panel/panel.c:647
 msgid "_Properties..."
-msgstr "/_Proprietà ..."
+msgstr "_Proprietà..."
 
-#: panel/controls.c:757 panel/panel.c:637
-#, fuzzy
+#: panel/controls.c:757
+#: panel/panel.c:637
 msgid "Add _new item"
-msgstr "/Aggiungi un _nuovo oggetto"
+msgstr "Aggiungi un _nuovo oggetto"
 
 #: panel/controls.c:1040
 msgid "This item has no configuration options"
 msgstr "Questo oggetto non ha opzioni di configurazione"
 
-#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
+#: panel/panel.c:628
+#: panel/panel.c:1055
+#: settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Pannello Xfce"
 
 #: panel/panel.c:652
-#, fuzzy
 msgid "_About Xfce"
-msgstr "/_Info su Xfce"
+msgstr "_Info su Xfce"
 
 #: panel/panel.c:657
-#, fuzzy
 msgid "_Help"
-msgstr "/_Aiuto"
+msgstr "_Aiuto"
 
 #: panel/panel.c:666
-#, fuzzy
 msgid "_Lock screen"
-msgstr "/_Blocca schermo"
+msgstr "_Blocca lo schermo"
 
 #: panel/panel.c:671
 msgid "_Restart"
 msgstr "_Riparti"
 
 #: panel/panel.c:680
-#, fuzzy
 msgid "E_xit"
-msgstr "/_Esci"
+msgstr "_Esci"
 
 #: panel/icons.c:63
 msgid "Default"
@@ -261,7 +248,7 @@ msgstr "Grandi"
 
 #: settings/xfce_settings_dialog.c:99
 msgid "Huge"
-msgstr ""
+msgstr "Enorme"
 
 #: settings/xfce_settings_dialog.c:175
 msgid "Horizontal"
@@ -301,7 +288,7 @@ msgstr "Posizione Popup:"
 
 #: settings/xfce_settings_dialog.c:343
 msgid "Always on top:"
-msgstr ""
+msgstr "Sempre sopra:"
 
 #: settings/xfce_settings_dialog.c:397
 msgid "Autohide:"
@@ -329,7 +316,7 @@ msgstr "Comportamento"
 #.
 #: plugins/clock/clock.c:192
 msgid "%A, %d %B %Y"
-msgstr ""
+msgstr "%A, %d %B %Y"
 
 #: plugins/clock/clock.c:422
 msgid "Clock type:"
@@ -431,9 +418,8 @@ msgstr "Bottone 2:"
 
 #. checkbox
 #: plugins/systembuttons/systembuttons.c:579
-#, fuzzy
 msgid "_Hide"
-msgstr "/_Aiuto"
+msgstr "_Nascondi"
 
 #: plugins/systembuttons/systembuttons.c:616
 msgid "System buttons"
@@ -448,14 +434,12 @@ msgid "Mail box:"
 msgstr "Casella postale:"
 
 #: plugins/mailcheck/mailcheck.c:875
-#, fuzzy
 msgid "New mail command:"
-msgstr "Comando di posta:"
+msgstr "Nuovo comando di posta:"
 
 #: plugins/mailcheck/mailcheck.c:889
-#, fuzzy
 msgid "Command to run when new mail arrives"
-msgstr "Comando da eseguire quando il bottone sul pannello viene cliccato"
+msgstr "Comando da eseguire quando arriva nuova posta"
 
 #: plugins/mailcheck/mailcheck.c:919
 msgid "Command to run when the button on the panel is clicked"
@@ -466,6 +450,6 @@ msgid "Interval (sec):"
 msgstr "Intervallo (sec):"
 
 #: plugins/mailcheck/mailcheck.c:1016
-#, fuzzy
 msgid "Mail checker"
 msgstr "Controllo posta"
+
