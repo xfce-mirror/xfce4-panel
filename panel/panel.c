@@ -531,16 +531,7 @@ _panel_create_menu (Panel *panel)
 
     menu = gtk_menu_new ();
 
-    mi = gtk_menu_item_new_with_label (_("Panel"));
-    gtk_widget_set_sensitive (mi, FALSE);
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    mi = gtk_separator_menu_item_new ();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    mi = gtk_image_menu_item_new_with_label (_("Manage Panel Items"));
+    mi = gtk_image_menu_item_new_with_label (_("Customize Panel"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -551,28 +542,6 @@ _panel_create_menu (Panel *panel)
     g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize_items), 
                       NULL);
     
-    mi = gtk_image_menu_item_new_with_label (_("Properties"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    img = gtk_image_new_from_stock (GTK_STOCK_PROPERTIES, GTK_ICON_SIZE_MENU);
-    gtk_widget_show (img);
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-
-    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize), 
-                      NULL);
-    
-    mi = gtk_image_menu_item_new_with_label (_("Remove"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
-    gtk_widget_show (img);
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (panel_app_remove_panel), panel);
-
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -601,21 +570,6 @@ _panel_create_menu (Panel *panel)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
     
-    mi = gtk_image_menu_item_new_with_label (_("New Panel"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
-    gtk_widget_show (img);
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-
-    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_add_panel), 
-                      NULL);
-
-    mi = gtk_separator_menu_item_new ();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
     mi = gtk_image_menu_item_new_with_label (_("About the Xfce Panel"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);

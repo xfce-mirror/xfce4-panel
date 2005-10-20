@@ -48,15 +48,22 @@ struct _PanelSettingsDialog
 
     GPtrArray *panels;
     Panel *panel;
+    int current;
     
-    GtkWidget *vbox;
+    GtkWidget *notebook;
 
     gboolean updating;
 
+    /* Panel Selection */
+    GtkWidget *panel_selector;
+    GtkWidget *add_panel;
+    GtkWidget *rm_panel;
+
     /* Panel Properties */
     GtkWidget *properties_box;
-
-    GtkWidget *other_box;
+    GtkWidget *left_box;
+    GtkWidget *right_box;
+    
     GPtrArray *monitors;
     GtkWidget *size;
     GtkWidget *transparency;
@@ -83,9 +90,339 @@ struct _PanelSettingsDialog
 
 
 static GtkWidget *dialog_widget = NULL;
-static GtkWidget *dialog_widget_items = NULL;
+static GdkCursor *cursor = NULL;
 
-static void properties_dialog_opened (Panel *panel);
+static void dialog_opened (Panel *panel);
+
+static void update_properties_tab (PanelSettingsDialog *psd);
+
+/*
+ * Grippy Cursor
+ * =============
+ */
+
+/* Cursor inline pixbuf data. Copied from libexo.
+ * Copyright (c) 2004 os-cillation e.K.
+ * Written by Benedikt Meurer <benny@xfce.org>.
+ * License: LGPL
+ */
+#ifdef __SUNPRO_C
+#pragma align 4 (drag_cursor_data)
+#endif
+#ifdef __GNUC__
+static const guint8 drag_cursor_data[] __attribute__ ((__aligned__ (4))) = 
+#else
+static const guint8 drag_cursor_data[] = 
+#endif
+{ ""
+  /* Pixbuf magic (0x47646b50) */
+  "GdkP"
+  /* length: header (24) + pixel_data (2304) */
+  "\0\0\11\30"
+  /* pixdata_type (0x1010002) */
+  "\1\1\0\2"
+  /* rowstride (96) */
+  "\0\0\0`"
+  /* width (24) */
+  "\0\0\0\30"
+  /* height (24) */
+  "\0\0\0\30"
+  /* pixel_data: */
+  "\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\2\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\2\0\0"
+  "\0\2\0\0\0\2\0\0\0\3\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\2\0\0\0\2"
+  "\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\11\0\0\0\0\0\0"
+  "\0\0\0\0\0\1\0\0\0\2\0\0\0\3\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\2\0\0\0\2"
+  "\0\0\0\2\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\0\0\0\0\1\0\0\0\1\0\0\0\1\0\0"
+  "\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\10\0\0\0\0\0\0\0\0\0\0\0\0"
+  "\0\0\0\1\0\0\0\7\0\0\0\4\0\0\0\2\0\0\0\3\0\0\0\3\0\0\0\3\0\0\0\2\0\0"
+  "\0\31\0\0\0#\0\0\0\30\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1\0\0\0\1"
+  "\0\0\0\1\0\0\0\3\0\0\0\2\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+  "\0\1\0\0\0\2\0\0\0\6\0\0\0\11\0\0\0\14\0\0\0\14\0\0\0\12\0\0\0\206\0"
+  "\0\0\303\0\0\0\205\0\0\0\11\0\0\0\6\0\0\0\10\0\0\0\6\0\0\0\3\0\0\0\2"
+  "\0\0\0\4\0\0\0\12\0\0\0\7\0\0\0\5\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+  "\0\4\0\0\0\6\0\0\0V\0\0\0\245\0\0\0\211\0\0\0\4\0\0\0\207\246\246\246"
+  "\331\335\335\335\365\245\245\245\333\0\0\0\250\0\0\0\244\0\0\0\243\0"
+  "\0\0""9\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\2\0\0\0\1\0\0\0\1\0\0\0\0\0\0\0"
+  "\0\0\0\0\1\0\0\0\6\0\0\0\12\0\0\0\\uuu\271\270\270\270\353\246\246\246"
+  "\332\0\0\0\205\0\0\0\267\271\271\271\352\377\377\377\377\270\270\270"
+  "\353$$$\312\270\270\270\353\271\271\271\353WWW\246\0\0\0B\0\0\0\4\0\0"
+  "\0\13\0\0\0\7\0\0\0\3\0\0\0\4\0\0\0\1\0\0\0\0\0\0\0\2\0\0\0\11\0\0\0"
+  "\12\0\0\0\205\220\220\220\341\377\377\377\377\335\335\335\366\0\0\0\307"
+  "\0\0\0\304\270\270\270\353\377\377\377\377\271\271\271\352555\314\377"
+  "\377\377\377\377\377\377\377eee\327\0\0\0f\0\0\0)\0\0\0[\0\0\0\10\0\0"
+  "\0\4\0\0\0\10\0\0\0\3\0\0\0\2\0\0\0\3\0\0\0\11\0\0\0\6\0\0\0[uuu\271"
+  "\321\321\321\362\350\350\350\371ddd\332\22\22\22\311\270\270\270\354"
+  "\377\377\377\377\271\271\271\353555\314\377\377\377\377\377\377\377\377"
+  "eee\327\0\0\0\210;;;{^^^\300\0\0\0E\0\0\0\15\0\0\0\10\0\0\0\6\0\0\0\5"
+  "\0\0\0\5\0\0\0\10\0\0\0\4\0\0\0\12\0\0\0iddd\330\377\377\377\377\377"
+  "\377\377\377444\320\267\267\267\354\377\377\377\377\270\270\270\3545"
+  "55\316\377\377\377\377\377\377\377\377eee\327\33\33\33\311\201\201\201"
+  "\337\335\335\335\365\0\0\0\302\0\0\0\40\0\0\0\4\0\0\0\2\0\0\0\3\0\0\0"
+  "\5\0\0\0\3\0\0\0\6\0\0\0\13\0\0\0jddd\331\377\377\377\377\377\377\377"
+  "\377444\320\270\270\270\354\377\377\377\377\267\267\267\354444\320\377"
+  "\377\377\377\377\377\377\377eee\326\221\221\221\340\377\377\377\377\335"
+  "\335\335\365\0\0\0\301\0\0\0\40\0\0\0\4\0\0\0\4\0\0\0\5\0\0\0\7\0\0\0"
+  "\6\0\0\0\211\0\0\0\242\0\0\0b((([^^^\323\377\377\377\377\343\343\343"
+  "\367\364\364\364\374\377\377\377\377\364\364\364\374\342\342\342\367"
+  "\377\377\377\377\377\377\377\377ccc\333\217\217\217\344\377\377\377\377"
+  "\335\335\335\365\0\0\0\302\0\0\0\40\0\0\0\5\0\0\0\1\0\0\0\3\0\0\0\34"
+  "\0\0\0\204\246\246\246\332\271\271\271\352www\266\0\0\0\227666\312\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\320\320\320"
+  "\363\334\334\334\366\377\377\377\377\335\335\335\365\0\0\0\302\0\0\0"
+  "\40\0\0\0\4\0\0\0\0\0\0\0\2\0\0\0'\0\0\0\303\335\335\335\365\377\377"
+  "\377\377\313\313\313\360eee\327555\315\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\335\335"
+  "\335\365\205\205\205\313\0\0\0b\0\0\0\24\0\0\0\4\0\0\0\0\0\0\0\3\0\0"
+  "\0\35\0\0\0\205\245\245\245\332\351\351\351\371\377\377\377\377\321\321"
+  "\321\363\201\201\201\340\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\271\271\271\352\0\0"
+  "\0\241\0\0\0\1\0\0\0\5\0\0\0\3\0\0\0\0\0\0\0\3\0\0\0\11\0\0\0\11\0\0"
+  "\0\214\245\245\245\333\356\356\356\372\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\271\271\271\352\0\0\0\240\0\0\0\0\0\0\0\1\0"
+  "\0\0\2\0\0\0\0\0\0\0\0\0\0\0\2\0\0\0\14\0\0\0\15\0\0\0\212\217\217\217"
+  "\344\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\270\270"
+  "\270\353\0\0\0\243\0\0\0\0\0\0\0\3\0\0\0\7\0\0\0\0\0\0\0\0\0\0\0\3\0"
+  "\0\0\13\0\0\0\5\0\0\0\207\217\217\217\344\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\243\243\243\350...\234\0\0\0+\0\0\0\1\0\0\0\4\0\0\0\5\0"
+  "\0\0\0\0\0\0\0\0\0\0\1\0\0\0\4\0\0\0\5\0\0\0""5JJJ\223\235\235\235\346"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\217\217\217\344\0\0\0\210\0\0\0\6\0\0\0\2\0"
+  "\0\0\3\0\0\0\3\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\6\0\0\0\11\0\0\0"
+  ":JJJ\221\245\245\245\346\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\266\266\266\356^^^\254\0\0\0N\0\0\0\3\0\0\0\1\0\0\0"
+  "\1\0\0\0\1\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\5\0\0\0\7\0\0\0\12\0"
+  "\0\0""8---\240\270\270\270\354\364\364\364\374\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377ccc\334\0\0\0o\0\0\0\20\0\0\0\6\0\0\0\0\0\0\0\1\0\0\0\1\0\0\0\0\0"
+  "\0\0\0\0\0\0\1\0\0\0\3\0\0\0\4\0\0\0\11\0\0\0\13\0\0\0\25\0\0\0D\0\0"
+  "\0\306\335\335\335\365\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377ddd\330\0\0\0b\0\0\0"
+  "\4\0\0\0\11\0\0\0\1\0\0\0\2\0\0\0\2\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+  "\0\0\1\0\0\0\5\0\0\0\16\0\0\0\25\0\0\0""2\0\0\0\310\334\334\334\366\377"
+  "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
+  "\377\377\377\377\377\377ccc\332\0\0\0d\0\0\0\10\0\0\0\23\0\0\0\5\0\0"
+  "\0\7\0\0\0\10\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\5"
+  "\0\0\0\12\0\0\0\24\0\0\0""8111\267444\320444\321444\322444\321444\317"
+  "444\320%%%a\0\0\0\26\0\0\0\3\0\0\0\3\0\0\0\1\0\0\0\10\0\0\0\10\0\0\0"
+  "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\7\0\0\0\10\0\0\0\12\0\0\0\23"
+  "\0\0\0\32\0\0\0E\0\0\0Q\0\0\0Q\0\0\0O\0\0\0N\0\0\0R\0\0\0L\0\0\0\35\0"
+  "\0\0\4\0\0\0\2\0\0\0\1\0\0\0\2\0\0\0\5\0\0\0\6"
+};
+
+static void
+create_grippy_cursor (GtkWidget *widget)
+{
+    GdkPixbuf *pixbuf;
+
+    pixbuf = 
+        gdk_pixbuf_new_from_inline (-1, drag_cursor_data, FALSE, NULL);
+    cursor = 
+        gdk_cursor_new_from_pixbuf (gtk_widget_get_display (widget),
+                                    pixbuf, 12, 12);
+    g_object_unref (pixbuf);
+}
+
+static void
+destroy_grippy_cursor (void)
+{
+    if (cursor)
+    {
+        gdk_cursor_unref (cursor);
+        cursor = NULL;
+    }
+}
+
+static void
+set_grippy_cursor_for_widget (GtkWidget *widget)
+{
+    if (widget->window)
+    {
+        gdk_window_set_cursor (widget->window, cursor);
+    }
+}
+
+static void
+set_grippy_cursor (PanelSettingsDialog *psd)
+{
+    int i;
+
+    if (psd->tree->window)
+    {
+        gdk_window_set_cursor (psd->tree->window, cursor);
+
+        for (i = 0; i < psd->panels->len; ++i)
+        {
+            GtkWidget *widget = g_ptr_array_index (psd->panels, i);
+
+            gdk_window_set_cursor (widget->window, cursor);
+        }
+    }
+}
+
+static void
+unset_grippy_cursor (PanelSettingsDialog *psd)
+{
+    int i;
+
+    gdk_window_set_cursor (psd->tree->window, NULL);
+
+    for (i = 0; i < psd->panels->len; ++i)
+    {
+        GtkWidget *widget = g_ptr_array_index (psd->panels, i);
+
+        gdk_window_set_cursor (widget->window, NULL);
+    }
+}
+
+
+/*
+ * Panel Selection
+ * ===============
+ */
+ 
+static void
+panel_selected (GtkComboBox * combo, PanelSettingsDialog * psd)
+{
+    int n = gtk_combo_box_get_active (combo);
+
+    if (n == psd->current)
+        return;
+
+    psd->current = n;
+
+    if (psd->panel)
+        gtk_drag_unhighlight (GTK_WIDGET (psd->panel));
+
+    psd->panel = g_ptr_array_index (psd->panels, n);
+
+    gtk_drag_highlight (GTK_WIDGET (psd->panel));
+
+    update_properties_tab (psd);
+}
+
+static void
+add_panel (GtkWidget * w, PanelSettingsDialog * psd)
+{
+    char name[20];
+    int n, x, y;
+
+    n = psd->panels->len;
+
+    panel_app_add_panel ();
+
+    if (n == psd->panels->len)
+        return;
+
+    dialog_opened (g_ptr_array_index (psd->panels, n));
+    set_grippy_cursor_for_widget (
+            GTK_WIDGET (g_ptr_array_index (psd->panels, n)));
+
+    g_snprintf (name, 20, _("Panel %d"), psd->panels->len);
+
+    gtk_combo_box_append_text (GTK_COMBO_BOX (psd->panel_selector), name);
+
+    gtk_combo_box_set_active (GTK_COMBO_BOX (psd->panel_selector), n);
+
+    gtk_window_get_position (GTK_WINDOW (psd->dlg), &x, &y);
+
+    x += (psd->dlg->allocation.width - 
+            GTK_WIDGET (psd->panel)->allocation.width) / 2;
+    y += psd->dlg->allocation.height + BORDER;
+
+    gtk_window_move (GTK_WINDOW (psd->panel), x, y);
+    gtk_widget_queue_resize (GTK_WIDGET (psd->panel));
+}
+
+static void
+remove_panel (GtkWidget * w, PanelSettingsDialog * psd)
+{
+    int n = psd->panels->len;
+    int i;
+    
+    panel_app_remove_panel (GTK_WIDGET (psd->panel));
+
+    if (psd->panels->len == n)
+        return;
+
+    psd->panel = g_ptr_array_index (psd->panels, 0);
+
+    for (i = psd->panels->len; i >= 0; --i)
+        gtk_combo_box_remove_text (GTK_COMBO_BOX (psd->panel_selector), i);
+
+    for (i = 0; i < psd->panels->len; ++i)
+    {
+        char name[20];
+
+        g_snprintf (name, 20, _("Panel %d"), i + 1);
+
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->panel_selector), name);
+    }
+
+    gtk_combo_box_set_active (GTK_COMBO_BOX (psd->panel_selector), 0);
+}
+
+static void
+create_panel_selector (PanelSettingsDialog * psd)
+{
+    GtkWidget *box, *frame, *align, *vbox;
+    int i;
+
+    box = psd->properties_box;
+
+    frame = xfce_create_framebox (_("Select Panel"), &align);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (box), frame, FALSE, FALSE, 0);
+
+    vbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    gtk_container_add (GTK_CONTAINER (align), vbox);
+
+    psd->panel_selector = gtk_combo_box_new_text ();
+    gtk_widget_show (psd->panel_selector);
+    gtk_box_pack_start (GTK_BOX (vbox), psd->panel_selector, TRUE, TRUE, 0);
+
+    for (i = 0; i < psd->panels->len; ++i)
+    {
+        char name[20];
+
+        g_snprintf (name, 20, _("Panel %d"), i + 1);
+
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->panel_selector), name);
+    }
+
+    gtk_combo_box_set_active (GTK_COMBO_BOX (psd->panel_selector),
+                              psd->current);
+
+    gtk_drag_highlight (GTK_WIDGET (psd->panel));
+
+    g_signal_connect (psd->panel_selector, "changed",
+                      G_CALLBACK (panel_selected), psd);
+    
+    psd->add_panel = xfce_create_mixed_button (GTK_STOCK_ADD, _("New Panel"));
+    gtk_widget_show (psd->add_panel);
+    gtk_box_pack_start (GTK_BOX (vbox), psd->add_panel, FALSE, FALSE, 0);
+
+    g_signal_connect (psd->add_panel, "clicked", G_CALLBACK (add_panel), psd);
+
+    psd->rm_panel = 
+        xfce_create_mixed_button (GTK_STOCK_REMOVE, _("Remove Panel"));
+    gtk_widget_show (psd->rm_panel);
+    gtk_box_pack_start (GTK_BOX (vbox), psd->rm_panel, FALSE, FALSE, 0);
+
+    g_signal_connect (psd->rm_panel, "clicked",
+                      G_CALLBACK (remove_panel), psd);
+}
 
 /*
  * Panel Properties
@@ -372,7 +709,7 @@ add_position_box (PanelSettingsDialog *psd)
     GtkSizeGroup *sg;
     int i;
     
-    hbox = psd->properties_box;
+    hbox = psd->left_box;
 
     psd->position_box = vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
@@ -557,19 +894,35 @@ add_position_box (PanelSettingsDialog *psd)
 static void
 create_properties_tab (PanelSettingsDialog *psd)
 {
-    GtkWidget *frame, *vbox2, *hbox, *label, *align;
+    GtkWidget *frame, *box, *sep, *vbox2, *hbox, *label, *align;
     GtkSizeGroup *sg, *sg2;
     int n_monitors, i;
 
-    psd->properties_box = hbox = gtk_hbox_new (FALSE, 2*BORDER);
+    label = gtk_label_new (_("Panel Properties"));
+    gtk_misc_set_padding (GTK_MISC (label), BORDER, 1);
+    gtk_widget_show (label);
+    
+    psd->properties_box = box = gtk_vbox_new (FALSE, BORDER);
+    gtk_container_set_border_width (GTK_CONTAINER (box), BORDER);
+    gtk_widget_show (box);
+        
+    gtk_notebook_append_page (GTK_NOTEBOOK (psd->notebook), box, label);
+    
+    create_panel_selector (psd);
+    
+    sep = gtk_hseparator_new ();
+    gtk_widget_show (sep);
+    gtk_box_pack_start (GTK_BOX (box), sep, FALSE, FALSE, 0);
+
+    psd->left_box = hbox = gtk_hbox_new (FALSE, 2*BORDER);
     gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (psd->vbox), hbox, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (box), hbox, TRUE, TRUE, 0);
 
     /* position */
     add_position_box (psd);
     
     /* other settings */
-    psd->other_box = vbox2 = gtk_vbox_new (FALSE, BORDER);
+    psd->right_box = vbox2 = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox2);
     gtk_box_pack_start (GTK_BOX (hbox), vbox2, FALSE, FALSE, 0);
     
@@ -1038,10 +1391,16 @@ create_items_tab (PanelSettingsDialog *psd)
     GtkWidget *vbox, *hbox, *img, *label, *align;
     char *markup;
 
+    label = gtk_label_new (_("Manage Panel Items"));
+    gtk_misc_set_padding (GTK_MISC (label), BORDER, 1);
+    gtk_widget_show (label);
+    
     psd->items_box = vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
     gtk_widget_show (vbox);
-    gtk_box_pack_start (GTK_BOX (psd->vbox), vbox, TRUE, TRUE, 0);
 
+    gtk_notebook_append_page (GTK_NOTEBOOK (psd->notebook), vbox, label);
+    
     /* info */
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -1053,8 +1412,8 @@ create_items_tab (PanelSettingsDialog *psd)
     gtk_widget_show (img);
     gtk_box_pack_start (GTK_BOX (hbox), img, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Drag items from the list to a panel or move "
-                             "existing items to a new location."));
+    label = gtk_label_new (_("Drag items from the list to a panel or remove "
+                             "them by dragging them back to the list."));
     gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
@@ -1098,22 +1457,13 @@ create_items_tab (PanelSettingsDialog *psd)
 #endif
 }
 
-
 /*
  * Settings Dialog
  * ===============
  */
 
 static void
-properties_dialog_opened (Panel *panel)
-{
-    panel_block_autohide (panel);
-
-    gtk_drag_highlight (GTK_WIDGET (panel));
-}
-
-static void
-items_dialog_opened (Panel *panel)
+dialog_opened (Panel *panel)
 {
     PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
     
@@ -1128,14 +1478,7 @@ items_dialog_opened (Panel *panel)
 }
 
 static void
-properties_dialog_closed (Panel *panel)
-{
-    panel_unblock_autohide (panel);
-    gtk_drag_unhighlight (GTK_WIDGET (panel));
-}
-
-static void
-items_dialog_closed (Panel *panel)
+dialog_closed (Panel *panel)
 {
     PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
     
@@ -1154,20 +1497,14 @@ dialog_response (GtkWidget *dlg, int response, PanelSettingsDialog *psd)
 {
     if (response != GTK_RESPONSE_HELP)
     {
-        if (dlg == dialog_widget)
-        {
-            dialog_widget = NULL;
-            properties_dialog_closed (psd->panel);
-        }
-        else
-        {
-            dialog_widget_items = NULL;
-            g_ptr_array_foreach (psd->panels, (GFunc)items_dialog_closed, 
-                                 NULL);
+        dialog_widget = NULL;
+        unset_grippy_cursor (psd);
+        destroy_grippy_cursor ();
+        g_ptr_array_foreach (psd->panels, (GFunc)dialog_closed, NULL);
 
-            xfce_panel_item_manager_free_item_info_list (psd->items);
+        xfce_panel_item_manager_free_item_info_list (psd->items);
 
-        }
+        gtk_drag_unhighlight (GTK_WIDGET (psd->panel));
 
         gtk_widget_destroy (dlg);
         
@@ -1184,6 +1521,16 @@ dialog_response (GtkWidget *dlg, int response, PanelSettingsDialog *psd)
     }
 }
 
+static void
+notebook_page_changed (GtkWidget *notebook, GtkNotebookPage *np, int page,
+                       PanelSettingsDialog *psd)
+{
+    if (page == 0)
+        set_grippy_cursor (psd);
+    else
+        unset_grippy_cursor (psd);
+}
+
 /* public API */
 void 
 panel_settings_dialog (GPtrArray *panels, gboolean show_items)
@@ -1192,50 +1539,33 @@ panel_settings_dialog (GPtrArray *panels, gboolean show_items)
     GtkWidget *header, *vbox, *img;
     Panel *panel;
 
-    if (!show_items)
+    if (dialog_widget)
     {
-        if (dialog_widget)
-        {
-            gtk_window_present (GTK_WINDOW (dialog_widget));
-            return;
-        }
-    }
-    else
-    {
-        if (dialog_widget_items)
-        {
-            gtk_window_present (GTK_WINDOW (dialog_widget));
-            return;
-        }
+        gtk_window_present (GTK_WINDOW (dialog_widget));
+        return;
     }
     
     psd = g_new0 (PanelSettingsDialog, 1);
 
     psd->panels = panels;
+    psd->current = panel_app_get_current_panel();
     panel = psd->panel = 
-        g_ptr_array_index (panels, panel_app_get_current_panel());
+        g_ptr_array_index (panels, psd->current);
 
     psd->updating = TRUE;
     
     psd->dlg = 
-        gtk_dialog_new_with_buttons (_("Xfce Panel"), GTK_WINDOW (psd->panel), 
+        gtk_dialog_new_with_buttons (_("Xfce Panel"), NULL, 
                                      GTK_DIALOG_NO_SEPARATOR,
                                      GTK_STOCK_HELP, GTK_RESPONSE_HELP,
                                      GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                                      NULL);
     
-    if (!show_items)
-    {
-        dialog_widget = psd->dlg;
-        
-        properties_dialog_opened (panel);
-    }
-    else
-    {
-        dialog_widget_items = psd->dlg;
-        
-        g_ptr_array_foreach (panels, (GFunc)items_dialog_opened, NULL);
-    }
+    dialog_widget = psd->dlg;
+    
+    g_ptr_array_foreach (panels, (GFunc)dialog_opened, NULL);
+    gtk_drag_highlight (GTK_WIDGET (panel));
+    create_grippy_cursor (GTK_WIDGET (panel));
     
     gtk_dialog_set_default_response (GTK_DIALOG (psd->dlg), GTK_RESPONSE_OK);
 
@@ -1274,19 +1604,24 @@ panel_settings_dialog (GPtrArray *panels, gboolean show_items)
     if (!show_items)
         header = xfce_create_header_with_image (img, _("Panel Preferences"));
     else
-        header = xfce_create_header_with_image (img, _("Add Items"));
+        header = xfce_create_header_with_image (img, _("Customize Panels"));
     gtk_widget_show (header);
     gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, FALSE, 0);
 
+#if 0
     psd->vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (psd->vbox), BORDER - 2);
     gtk_widget_show (psd->vbox);
     gtk_box_pack_start (GTK_BOX (vbox), psd->vbox, TRUE, TRUE, 0);
+#endif
 
-    if (!show_items)
-        create_properties_tab (psd);
-    else
-        create_items_tab (psd);
+    psd->notebook = gtk_notebook_new ();
+    gtk_container_set_border_width (GTK_CONTAINER (psd->notebook), BORDER - 2);
+    gtk_widget_show (psd->notebook);
+    gtk_box_pack_start (GTK_BOX (vbox), psd->notebook, TRUE, TRUE, 0);
+
+    create_items_tab (psd);
+    create_properties_tab (psd);
 
     g_signal_connect (psd->dlg, "response", G_CALLBACK (dialog_response), psd);
 
@@ -1295,6 +1630,11 @@ panel_settings_dialog (GPtrArray *panels, gboolean show_items)
     gtk_widget_show (psd->dlg);
 
     panel_app_register_dialog (psd->dlg);
+
+    set_grippy_cursor (psd);
+    
+    g_signal_connect (psd->notebook, "switch-page", 
+                      G_CALLBACK (notebook_page_changed), psd);
 }
 
 

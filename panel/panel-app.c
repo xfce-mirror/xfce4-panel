@@ -249,6 +249,16 @@ create_monitor_list (void)
             gdk_screen_get_monitor_geometry (screen, j, &(monitor->geometry));
 
             g_ptr_array_add (panel_app.monitor_list, monitor);
+#if TEST_MULTIPLE_MONITORS
+            monitor = g_new (XfceMonitor, 1);
+
+            monitor->screen = screen;
+            monitor->num = j;
+
+            gdk_screen_get_monitor_geometry (screen, j, &(monitor->geometry));
+
+            g_ptr_array_add (panel_app.monitor_list, monitor);
+#endif
         }
     }
 }
