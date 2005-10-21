@@ -1130,7 +1130,10 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
         }
         else
         {
-            path = gtk_tree_path_new_from_string ("0");
+            char last[3];
+
+            g_snprintf (last, 3, "%d", ld->launcher->entries->len - 2);
+            path = gtk_tree_path_new_from_string (last);
         }
         
         gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, FALSE);
@@ -1157,6 +1160,7 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
     gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
     
     ld->up = b = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
     gtk_widget_show (b);
     gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
     img = gtk_image_new_from_stock (GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
@@ -1168,6 +1172,7 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
     gtk_widget_set_sensitive (b, FALSE);
 
     ld->down = b = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
     gtk_widget_show (b);
     gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
     img = gtk_image_new_from_stock (GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
@@ -1182,6 +1187,7 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
     gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
     
     ld->add = b = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
     gtk_widget_show (b);
     gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
     img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
@@ -1191,6 +1197,7 @@ launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
     g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
 
     ld->remove = b = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
     gtk_widget_show (b);
     gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
     img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_BUTTON);
