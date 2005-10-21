@@ -894,6 +894,7 @@ add_position_box (PanelSettingsDialog *psd)
 static void
 create_properties_tab (PanelSettingsDialog *psd)
 {
+    static Atom composite_atom = 0;
     GtkWidget *frame, *box, *sep, *vbox2, *hbox, *label, *align;
     GtkSizeGroup *sg, *sg2;
     int n_monitors, i;
@@ -1051,37 +1052,44 @@ create_properties_tab (PanelSettingsDialog *psd)
                       G_CALLBACK (size_changed), psd);
     
     /* transparency */
-    frame = xfce_create_framebox (_("Transparency"), &align);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (vbox2), frame, FALSE, FALSE, 0);
-    
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_container_add (GTK_CONTAINER (align), hbox);
+    if (G_UNLIKELY (!composite_atom))
+        composite_atom = 
+            XInternAtom (GDK_DISPLAY (), "COMPOSITING_MANAGER", False);
 
-    label = xfce_create_small_label (_("None"));
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    
-    gtk_size_group_add_widget (sg, label);
-    
-    psd->transparency = gtk_hscale_new_with_range (0, 95, 5);
-    gtk_widget_set_size_request (psd->transparency, 150, -1);
-    /*gtk_scale_set_draw_value (GTK_SCALE (psd->transparency), FALSE);*/
-    gtk_scale_set_value_pos (GTK_SCALE (psd->transparency), GTK_POS_BOTTOM);
-    gtk_range_set_update_policy (GTK_RANGE (psd->transparency),
-                                 GTK_UPDATE_DELAYED);
-    gtk_widget_show (psd->transparency);
-    gtk_box_pack_start (GTK_BOX (hbox), psd->transparency, FALSE, FALSE, 0);
+    if (XGetSelectionOwner (GDK_DISPLAY (), composite_atom))
+    {
+        frame = xfce_create_framebox (_("Transparency"), &align);
+        gtk_widget_show (frame);
+        gtk_box_pack_start (GTK_BOX (vbox2), frame, FALSE, FALSE, 0);
+        
+        hbox = gtk_hbox_new (FALSE, BORDER);
+        gtk_widget_show (hbox);
+        gtk_container_add (GTK_CONTAINER (align), hbox);
 
-    gtk_size_group_add_widget (sg2, psd->transparency);
-    
-    label = xfce_create_small_label (_("Full"));
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    
-    g_signal_connect (psd->transparency, "value-changed", 
-                      G_CALLBACK (transparency_changed), psd);
+        label = xfce_create_small_label (_("None"));
+        gtk_widget_show (label);
+        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+        
+        gtk_size_group_add_widget (sg, label);
+        
+        psd->transparency = gtk_hscale_new_with_range (0, 95, 5);
+        gtk_widget_set_size_request (psd->transparency, 150, -1);
+        /*gtk_scale_set_draw_value (GTK_SCALE (psd->transparency), FALSE);*/
+        gtk_scale_set_value_pos (GTK_SCALE (psd->transparency), GTK_POS_BOTTOM);
+        gtk_range_set_update_policy (GTK_RANGE (psd->transparency),
+                                     GTK_UPDATE_DELAYED);
+        gtk_widget_show (psd->transparency);
+        gtk_box_pack_start (GTK_BOX (hbox), psd->transparency, FALSE, FALSE, 0);
+
+        gtk_size_group_add_widget (sg2, psd->transparency);
+        
+        label = xfce_create_small_label (_("Full"));
+        gtk_widget_show (label);
+        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+        
+        g_signal_connect (psd->transparency, "value-changed", 
+                          G_CALLBACK (transparency_changed), psd);
+    }
     
     g_object_unref (sg);
     g_object_unref (sg2);
