@@ -682,13 +682,41 @@ autohide_changed (GtkToggleButton *tb, PanelSettingsDialog *psd)
 static void
 orientation_changed (GtkComboBox *box, PanelSettingsDialog *psd)
 {
+    XfceScreenPosition position;
+    int n;
+    
     if (psd->updating)
         return;
 
-    panel_set_screen_position (psd->panel, 
-                               gtk_combo_box_get_active (box) == 0 ? 
+    position = gtk_combo_box_get_active (box) == 0 ? 
                                    XFCE_SCREEN_POSITION_FLOATING_H :
-                                   XFCE_SCREEN_POSITION_FLOATING_V);
+                                   XFCE_SCREEN_POSITION_FLOATING_V;
+    
+    panel_set_screen_position (psd->panel, position);
+
+    psd->updating = TRUE;
+    n = gtk_combo_box_get_active (GTK_COMBO_BOX (psd->handle_style));
+
+    gtk_combo_box_remove_text (GTK_COMBO_BOX (psd->handle_style), 2);
+    gtk_combo_box_remove_text (GTK_COMBO_BOX (psd->handle_style), 1);
+
+    if (position == XFCE_SCREEN_POSITION_FLOATING_H)
+    {
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Left"));
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Right"));
+    }
+    else
+    {
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Top"));
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Bottom"));
+    }
+
+    gtk_combo_box_set_active (GTK_COMBO_BOX (psd->handle_style), n);
+    psd->updating = FALSE;
 }
 
 static void
@@ -867,7 +895,7 @@ add_position_box (PanelSettingsDialog *psd)
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Handle Style:"));
+    label = gtk_label_new (_("Handle Position:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -880,10 +908,20 @@ add_position_box (PanelSettingsDialog *psd)
 
     gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
                                _("At both sides"));
-    gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
-                               _("At the start"));
-    gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
-                               _("At the end"));
+    if (panel_is_horizontal (psd->panel))
+    {
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Left"));
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Right"));
+    }
+    else
+    {
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Top"));
+        gtk_combo_box_append_text (GTK_COMBO_BOX (psd->handle_style), 
+                                   _("Bottom"));
+    }
 
     g_signal_connect (psd->handle_style, "changed", 
                       G_CALLBACK (handle_style_changed), psd);
