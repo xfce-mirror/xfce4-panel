@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-21 17:32+0900\n"
+"POT-Creation-Date: 2005-10-21 20:54+0900\n"
 "PO-Revision-Date: 2005-08-17 22:58+0900\n"
 "Last-Translator: Wit Wiliński <madman@berlios.de>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -29,7 +29,7 @@ msgstr "Usunąć element %s?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:568
 #: ../panel/panel-app.c:599 ../panel/panel-app.c:632
-#: ../panel/panel-settings.c:1558 ../plugins/launcher/launcher.c:313
+#: ../panel/panel-settings.c:1604 ../plugins/launcher/launcher.c:313
 #: ../plugins/launcher/launcher.c:361
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
@@ -188,125 +188,132 @@ msgstr "Wybierz plik"
 msgid "Remove Panel"
 msgstr "Usunąć element %s?"
 
+#: ../panel/panel-settings.c:706 ../panel/panel-settings.c:914
+msgid "Left"
+msgstr ""
+
+#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
+msgid "Right"
+msgstr ""
+
+#: ../panel/panel-settings.c:713 ../panel/panel-settings.c:921
+msgid "Top"
+msgstr ""
+
+#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
+msgid "Bottom"
+msgstr ""
+
 #. floating?
-#: ../panel/panel-settings.c:719
+#: ../panel/panel-settings.c:747
 #, fuzzy
 msgid "Panel Type"
 msgstr "Rozmiar panelu:"
 
-#: ../panel/panel-settings.c:728
+#: ../panel/panel-settings.c:756
 #, fuzzy
 msgid "Fixed Position"
 msgstr "Pozycja"
 
-#: ../panel/panel-settings.c:730
+#: ../panel/panel-settings.c:758
 msgid "Freely Moveable"
 msgstr ""
 
 #. position
-#: ../panel/panel-settings.c:736
+#: ../panel/panel-settings.c:764
 msgid "Position"
 msgstr "Pozycja"
 
-#: ../panel/panel-settings.c:820
+#: ../panel/panel-settings.c:848
 #, fuzzy
 msgid "_Full Width"
 msgstr "Szerokość całego ekranu:"
 
-#: ../panel/panel-settings.c:829
+#: ../panel/panel-settings.c:857
 #, fuzzy
 msgid "Auto_hide"
 msgstr "Automatyczne ukrywanie"
 
-#: ../panel/panel-settings.c:847
+#: ../panel/panel-settings.c:875
 #, fuzzy
 msgid "Orientation:"
 msgstr "Położenie panelu:"
 
-#: ../panel/panel-settings.c:859
+#: ../panel/panel-settings.c:887
 msgid "Horizontal"
 msgstr "Poziome"
 
-#: ../panel/panel-settings.c:861
+#: ../panel/panel-settings.c:889
 msgid "Vertical"
 msgstr "Pionowe"
 
-#: ../panel/panel-settings.c:870
+#: ../panel/panel-settings.c:898
 #, fuzzy
-msgid "Handle Style:"
-msgstr "Uchwyty:"
+msgid "Handle Position:"
+msgstr "Pozycja"
 
-#: ../panel/panel-settings.c:882
+#: ../panel/panel-settings.c:910
 msgid "At both sides"
 msgstr "Na obu brzegach"
 
-#: ../panel/panel-settings.c:884
-msgid "At the start"
-msgstr "Na początku"
-
-#: ../panel/panel-settings.c:886
-msgid "At the end"
-msgstr "Na końcu"
-
-#: ../panel/panel-settings.c:901
+#: ../panel/panel-settings.c:940
 #, fuzzy
 msgid "Panel Properties"
 msgstr "Ustawienia panelu"
 
-#: ../panel/panel-settings.c:936
+#: ../panel/panel-settings.c:975
 #, fuzzy
 msgid "Monitor"
 msgstr "Edytor"
 
 #. size
-#: ../panel/panel-settings.c:1018
+#: ../panel/panel-settings.c:1057
 msgid "Size"
 msgstr "Rozmiar"
 
-#: ../panel/panel-settings.c:1029
+#: ../panel/panel-settings.c:1068
 msgid "Small"
 msgstr "Mały"
 
-#: ../panel/panel-settings.c:1046
+#: ../panel/panel-settings.c:1085
 msgid "Large"
 msgstr "Duży"
 
-#. transparency
-#: ../panel/panel-settings.c:1054
+#: ../panel/panel-settings.c:1099
 msgid "Transparency"
 msgstr "Przezroczystość"
 
-#: ../panel/panel-settings.c:1062
+#: ../panel/panel-settings.c:1107
 msgid "None"
 msgstr "Brak"
 
-#: ../panel/panel-settings.c:1079
+#: ../panel/panel-settings.c:1124
 msgid "Full"
 msgstr "Pełna"
 
-#: ../panel/panel-settings.c:1394
+#: ../panel/panel-settings.c:1440
 msgid "Manage Panel Items"
 msgstr ""
 
-#: ../panel/panel-settings.c:1415
+#: ../panel/panel-settings.c:1461
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 
-#: ../panel/panel-settings.c:1433
+#: ../panel/panel-settings.c:1479
 msgid "Avalaible Items"
 msgstr ""
 
-#: ../panel/panel-settings.c:1446
+#: ../panel/panel-settings.c:1492
 msgid "Add To Selected Panel"
 msgstr ""
 
-#: ../panel/panel-settings.c:1605
+#: ../panel/panel-settings.c:1651
 msgid "Panel Preferences"
 msgstr ""
 
-#: ../panel/panel-settings.c:1607
+#: ../panel/panel-settings.c:1653
 msgid "Customize Panels"
 msgstr ""
 
@@ -415,7 +422,7 @@ msgstr "Uruchom w _terminalu"
 msgid "Use _startup notification"
 msgstr "Użyj p_owiadomienia o uruchamianiu"
 
-#: ../plugins/launcher/launcher-dialog.c:1223
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -423,7 +430,7 @@ msgstr ""
 "Pierwszy element na liście jest widoczny w panelu. Pozostałe elementy "
 "pojawią się w menu."
 
-#: ../plugins/launcher/launcher-dialog.c:1263
+#: ../plugins/launcher/launcher-dialog.c:1270
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -431,12 +438,12 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1272
+#: ../plugins/launcher/launcher-dialog.c:1279
 #, fuzzy
 msgid "Program Launcher"
 msgstr "Aktywator"
 
-#: ../plugins/launcher/launcher-dialog.c:1598
+#: ../plugins/launcher/launcher-dialog.c:1605
 msgid "Select file"
 msgstr "Wybierz plik"
 

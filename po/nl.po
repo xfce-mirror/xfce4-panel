@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-18 09:23+0200\n"
+"POT-Creation-Date: 2005-10-21 20:54+0900\n"
 "PO-Revision-Date: 2005-10-18 09:25+0200\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: ../libxfce4panel/xfce-panel-external-item.c:171
 #, c-format
@@ -25,9 +25,9 @@ msgstr "Een item was onverwacht verwijderd: \"%s\"."
 msgid "Remove \"%s\"?"
 msgstr "\"%s\" verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:558
-#: ../panel/panel-app.c:583 ../panel/panel-app.c:610
-#: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:313
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:568
+#: ../panel/panel-app.c:599 ../panel/panel-app.c:632
+#: ../panel/panel-settings.c:1604 ../plugins/launcher/launcher.c:313
 #: ../plugins/launcher/launcher.c:361
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
@@ -40,51 +40,55 @@ msgstr ""
 "configuratie gaat verloren."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:761
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:811 ../panel/panel.c:550
-#: ../plugins/launcher/launcher-dialog.c:1263
-#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
-#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
-#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
-#: ../plugins/clock/clock.c:401
-msgid "Properties"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:759
+#, fuzzy, c-format
+msgid "%s Properties"
 msgstr "Eigenschappen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:768
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:819 ../panel/panel.c:557
-msgid "Remove"
-msgstr "Verwijderen"
-
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:777
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
 msgid "About"
 msgstr "Info"
 
-#. panel section
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:794 ../panel/panel.c:534
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:799
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:814
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
 msgid "Panel"
 msgstr "Paneel"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:803 ../panel/panel.c:543
-msgid "Manage Panel Items"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:820 ../panel/panel.c:534
+msgid "Customize Panel"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+#, fuzzy
+msgid "Manage Panels"
 msgstr "Items beheren"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:831 ../panel/panel.c:584
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
+#, fuzzy, c-format
+msgid "Remove %s"
+msgstr "\"%s\" verwijderen?"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:867
+#: ../panel/panel-settings.c:412
 msgid "New Panel"
 msgstr "Nieuw Paneel"
 
-#. about
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:841 ../panel/panel.c:595
-msgid "About the Xfce Panel"
-msgstr "Xfce Paneel info"
-
-#: ../panel/panel.c:568 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: ../panel/panel.c:574
+#: ../panel/panel.c:559
 msgid "Restart"
 msgstr "Herstarten"
+
+#: ../panel/panel.c:573
+msgid "About the Xfce Panel"
+msgstr "Xfce Paneel info"
 
 #: ../panel/panel-item-manager.c:353 ../panel/panel-item-manager.c:361
 #, c-format
@@ -95,25 +99,25 @@ msgstr "Kon \"%s\" module niet openen"
 msgid "Are you sure you want to exit?"
 msgstr "Weet u zeker dat u wil afsluiten?"
 
-#: ../panel/panel-app.c:560
+#: ../panel/panel-app.c:570
 msgid "Exit Xfce Panel?"
 msgstr "Het Xfce Paneel afsluiten?"
 
-#: ../panel/panel-app.c:561
+#: ../panel/panel-app.c:571
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
 
-#: ../panel/panel-app.c:581
+#: ../panel/panel-app.c:597
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Paneel \"%d\" verwijderen?"
 
-#: ../panel/panel-app.c:585
+#: ../panel/panel-app.c:601
 msgid "The selected panel and all its items will be removed."
 msgstr "Het geselecteerde paneel met alle items zal worden verwijderd."
 
-#: ../panel/panel-app.c:618
+#: ../panel/panel-app.c:640
 msgid "Developer"
 msgstr "Ontwikkelaar"
 
@@ -172,112 +176,147 @@ msgstr ""
 " -a, --add       Nieuwe items toevoegen\n"
 "\n"
 
+#: ../panel/panel-settings.c:331 ../panel/panel-settings.c:367
+#: ../panel/panel-settings.c:399
+#, fuzzy, c-format
+msgid "Panel %d"
+msgstr "Paneel"
+
+#: ../panel/panel-settings.c:383
+#, fuzzy
+msgid "Select Panel"
+msgstr "Toevoegen aan het geselecteerde paneel"
+
+#: ../panel/panel-settings.c:419
+#, fuzzy
+msgid "Remove Panel"
+msgstr "Dit paneel verwijderen"
+
+#: ../panel/panel-settings.c:706 ../panel/panel-settings.c:914
+msgid "Left"
+msgstr ""
+
+#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
+msgid "Right"
+msgstr ""
+
+#: ../panel/panel-settings.c:713 ../panel/panel-settings.c:921
+msgid "Top"
+msgstr ""
+
+#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
+msgid "Bottom"
+msgstr ""
+
 #. floating?
-#: ../panel/panel-settings.c:382
+#: ../panel/panel-settings.c:747
 msgid "Panel Type"
 msgstr "Paneel Type"
 
-#: ../panel/panel-settings.c:391
+#: ../panel/panel-settings.c:756
 msgid "Fixed Position"
 msgstr "Vaste positie"
 
-#: ../panel/panel-settings.c:393
+#: ../panel/panel-settings.c:758
 msgid "Freely Moveable"
 msgstr "Vrij te verplaatsen"
 
 #. position
-#: ../panel/panel-settings.c:399
+#: ../panel/panel-settings.c:764
 msgid "Position"
 msgstr "Plaatsing"
 
-#: ../panel/panel-settings.c:483
+#: ../panel/panel-settings.c:848
 msgid "_Full Width"
 msgstr "_Volledige breedte"
 
-#: ../panel/panel-settings.c:492
+#: ../panel/panel-settings.c:857
 msgid "Auto_hide"
 msgstr "Automatisch verbergen"
 
-#: ../panel/panel-settings.c:510
+#: ../panel/panel-settings.c:875
 msgid "Orientation:"
 msgstr "Oriëntatie:"
 
-#: ../panel/panel-settings.c:522
+#: ../panel/panel-settings.c:887
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#: ../panel/panel-settings.c:524
+#: ../panel/panel-settings.c:889
 msgid "Vertical"
 msgstr "Verticaal"
 
-#: ../panel/panel-settings.c:533
-msgid "Handle Style:"
-msgstr "Handgrepen:"
+#: ../panel/panel-settings.c:898
+#, fuzzy
+msgid "Handle Position:"
+msgstr "Vaste positie"
 
-#: ../panel/panel-settings.c:545
+#: ../panel/panel-settings.c:910
 msgid "At both sides"
 msgstr "Aan beide zijden"
 
-#: ../panel/panel-settings.c:547
-msgid "At the start"
-msgstr "Aan het begin"
+#: ../panel/panel-settings.c:940
+#, fuzzy
+msgid "Panel Properties"
+msgstr "Eigenschappen"
 
-#: ../panel/panel-settings.c:549
-msgid "At the end"
-msgstr "Aan het eind"
-
-#: ../panel/panel-settings.c:583
+#: ../panel/panel-settings.c:975
 msgid "Monitor"
 msgstr "Monitor"
 
 #. size
-#: ../panel/panel-settings.c:665
+#: ../panel/panel-settings.c:1057
 msgid "Size"
 msgstr "Grootte"
 
-#: ../panel/panel-settings.c:676
+#: ../panel/panel-settings.c:1068
 msgid "Small"
 msgstr "Klein"
 
-#: ../panel/panel-settings.c:693
+#: ../panel/panel-settings.c:1085
 msgid "Large"
 msgstr "Groot"
 
-#. transparency
-#: ../panel/panel-settings.c:701
+#: ../panel/panel-settings.c:1099
 msgid "Transparency"
 msgstr "Transparantie"
 
-#: ../panel/panel-settings.c:709
+#: ../panel/panel-settings.c:1107
 msgid "None"
 msgstr "Geen"
 
-#: ../panel/panel-settings.c:726
+#: ../panel/panel-settings.c:1124
 msgid "Full"
 msgstr "Volledig"
 
-#: ../panel/panel-settings.c:1056
+#: ../panel/panel-settings.c:1440
+msgid "Manage Panel Items"
+msgstr "Items beheren"
+
+#: ../panel/panel-settings.c:1461
+#, fuzzy
 msgid ""
-"Drag items from the list to a panel or move existing items to a new location."
+"Drag items from the list to a panel or remove them by dragging them back to "
+"the list."
 msgstr ""
 "Sleep items van de lijst naar een paneel of verplaats bestaande items naar "
 "een nieuwe positie."
 
-#: ../panel/panel-settings.c:1074
+#: ../panel/panel-settings.c:1479
 msgid "Avalaible Items"
 msgstr "Beschikbare items"
 
-#: ../panel/panel-settings.c:1087
+#: ../panel/panel-settings.c:1492
 msgid "Add To Selected Panel"
 msgstr "Toevoegen aan het geselecteerde paneel"
 
-#: ../panel/panel-settings.c:1291
+#: ../panel/panel-settings.c:1651
 msgid "Panel Preferences"
 msgstr "Paneel configureren"
 
-#: ../panel/panel-settings.c:1293
-msgid "Add Items"
-msgstr "Items toevoegen"
+#: ../panel/panel-settings.c:1653
+msgid "Customize Panels"
+msgstr ""
 
 #: ../plugins/launcher/launcher.c:311 ../plugins/launcher/launcher.c:359
 #, c-format
@@ -381,7 +420,7 @@ msgstr "Uitvoeren in _terminal"
 msgid "Use _startup notification"
 msgstr "Opstart-_notificatie gebruiken"
 
-#: ../plugins/launcher/launcher-dialog.c:1223
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -389,11 +428,19 @@ msgstr ""
 "Het eerste item word getoond op het paneel. Overige items worden in een menu "
 "geplaatst."
 
-#: ../plugins/launcher/launcher-dialog.c:1272
+#: ../plugins/launcher/launcher-dialog.c:1270
+#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
+#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
+#: ../plugins/clock/clock.c:401
+msgid "Properties"
+msgstr "Eigenschappen"
+
+#: ../plugins/launcher/launcher-dialog.c:1279
 msgid "Program Launcher"
 msgstr "Snelkoppeling"
 
-#: ../plugins/launcher/launcher-dialog.c:1598
+#: ../plugins/launcher/launcher-dialog.c:1605
 msgid "Select file"
 msgstr "Bestand selecteren"
 
@@ -583,38 +630,3 @@ msgstr "Pictogrammen tonen voor alle lopende applicaties"
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Hoe laat is het?"
-
-#~ msgid "The panel will be removed and its configuration will be lost."
-#~ msgstr ""
-#~ "Het paneel zal verwijderd worden en de bijbehorende configuratie gaat "
-#~ "verloren."
-
-#~ msgid "Configure Separator"
-#~ msgstr "Scheidingslijn configureren"
-
-#~ msgid "Configure Panel Actions"
-#~ msgstr "Paneelacties configureren"
-
-#~ msgid "Configure Task List"
-#~ msgstr "Takenlijst configureren"
-
-#~ msgid "Configure Pager"
-#~ msgstr "Pager configureren"
-
-#~ msgid "Configure Status Area"
-#~ msgstr "Statusgebied configureren"
-
-#~ msgid "Configure Icon Box"
-#~ msgstr "Iconbox configureren"
-
-#~ msgid "Configure Clock"
-#~ msgstr "Klok configureren"
-
-#~ msgid "Preferences"
-#~ msgstr "Voorkeuren"
-
-#~ msgid "Remove this Panel"
-#~ msgstr "Dit paneel verwijderen"
-
-#~ msgid "About this Item"
-#~ msgstr "Item info"

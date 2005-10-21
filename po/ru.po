@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.24\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-18 09:23+0200\n"
+"POT-Creation-Date: 2005-10-21 20:54+0900\n"
 "PO-Revision-Date: 2005-09-29 20:40+0900\n"
 "Last-Translator: Anthony Ivanoff <a-i@bk.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -29,9 +29,9 @@ msgstr ""
 msgid "Remove \"%s\"?"
 msgstr "Удалить"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:558
-#: ../panel/panel-app.c:583 ../panel/panel-app.c:610
-#: ../panel/panel-settings.c:1237 ../plugins/launcher/launcher.c:313
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:568
+#: ../panel/panel-app.c:599 ../panel/panel-app.c:632
+#: ../panel/panel-settings.c:1604 ../plugins/launcher/launcher.c:313
 #: ../plugins/launcher/launcher.c:361
 msgid "Xfce Panel"
 msgstr "Панель Xfce"
@@ -42,56 +42,60 @@ msgid ""
 msgstr ""
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:761
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:811 ../panel/panel.c:550
-#: ../plugins/launcher/launcher-dialog.c:1263
-#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
-#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
-#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
-#: ../plugins/clock/clock.c:401
-msgid "Properties"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:759
+#, c-format
+msgid "%s Properties"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:768
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:819 ../panel/panel.c:557
+#. about item, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
+msgid "About"
+msgstr ""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:799
 #, fuzzy
 msgid "Remove"
 msgstr "Удалить"
 
-#. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:777
-msgid "About"
-msgstr ""
-
-#. panel section
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:794 ../panel/panel.c:534
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:814
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
 #, fuzzy
 msgid "Panel"
 msgstr "Панель Xfce"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:803 ../panel/panel.c:543
-msgid "Manage Panel Items"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:820 ../panel/panel.c:534
+msgid "Customize Panel"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:831 ../panel/panel.c:584
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+#, fuzzy
+msgid "Manage Panels"
+msgstr "Панель Xfce"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
+#, fuzzy, c-format
+msgid "Remove %s"
+msgstr "Удалить"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:867
+#: ../panel/panel-settings.c:412
 #, fuzzy
 msgid "New Panel"
 msgstr "Панель Xfce"
 
-#. about
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:841 ../panel/panel.c:595
-#, fuzzy
-msgid "About the Xfce Panel"
-msgstr "Панель Xfce"
-
-#: ../panel/panel.c:568 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:574
+#: ../panel/panel.c:559
 #, fuzzy
 msgid "Restart"
 msgstr "Перезагрузить"
+
+#: ../panel/panel.c:573
+#, fuzzy
+msgid "About the Xfce Panel"
+msgstr "Панель Xfce"
 
 #: ../panel/panel-item-manager.c:353 ../panel/panel-item-manager.c:361
 #, fuzzy, c-format
@@ -102,25 +106,25 @@ msgstr "Невозможно создать элемент панели \"%s\"."
 msgid "Are you sure you want to exit?"
 msgstr "Вы уверены, что хотите выйти?"
 
-#: ../panel/panel-app.c:560
+#: ../panel/panel-app.c:570
 #, fuzzy
 msgid "Exit Xfce Panel?"
 msgstr "Панель Xfce"
 
-#: ../panel/panel-app.c:561
+#: ../panel/panel-app.c:571
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 
-#: ../panel/panel-app.c:581
+#: ../panel/panel-app.c:597
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
-#: ../panel/panel-app.c:585
+#: ../panel/panel-app.c:601
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:618
+#: ../panel/panel-app.c:640
 msgid "Developer"
 msgstr ""
 
@@ -168,118 +172,151 @@ msgid ""
 "\n"
 msgstr ""
 
+#: ../panel/panel-settings.c:331 ../panel/panel-settings.c:367
+#: ../panel/panel-settings.c:399
+#, fuzzy, c-format
+msgid "Panel %d"
+msgstr "Панель Xfce"
+
+#: ../panel/panel-settings.c:383
+#, fuzzy
+msgid "Select Panel"
+msgstr "Выбор файла"
+
+#: ../panel/panel-settings.c:419
+#, fuzzy
+msgid "Remove Panel"
+msgstr "Удалить"
+
+#: ../panel/panel-settings.c:706 ../panel/panel-settings.c:914
+msgid "Left"
+msgstr ""
+
+#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
+msgid "Right"
+msgstr ""
+
+#: ../panel/panel-settings.c:713 ../panel/panel-settings.c:921
+msgid "Top"
+msgstr ""
+
+#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
+msgid "Bottom"
+msgstr ""
+
 #. floating?
-#: ../panel/panel-settings.c:382
+#: ../panel/panel-settings.c:747
 #, fuzzy
 msgid "Panel Type"
 msgstr "Размер панели:"
 
-#: ../panel/panel-settings.c:391
+#: ../panel/panel-settings.c:756
 #, fuzzy
 msgid "Fixed Position"
 msgstr "Позиция:"
 
-#: ../panel/panel-settings.c:393
+#: ../panel/panel-settings.c:758
 msgid "Freely Moveable"
 msgstr ""
 
 #. position
-#: ../panel/panel-settings.c:399
+#: ../panel/panel-settings.c:764
 #, fuzzy
 msgid "Position"
 msgstr "Позиция:"
 
-#: ../panel/panel-settings.c:483
+#: ../panel/panel-settings.c:848
 msgid "_Full Width"
 msgstr ""
 
-#: ../panel/panel-settings.c:492
+#: ../panel/panel-settings.c:857
 #, fuzzy
 msgid "Auto_hide"
 msgstr "Автоматически скрывать:"
 
-#: ../panel/panel-settings.c:510
+#: ../panel/panel-settings.c:875
 #, fuzzy
 msgid "Orientation:"
 msgstr "Положение панели:"
 
-#: ../panel/panel-settings.c:522
+#: ../panel/panel-settings.c:887
 msgid "Horizontal"
 msgstr "Горизонтальное"
 
-#: ../panel/panel-settings.c:524
+#: ../panel/panel-settings.c:889
 msgid "Vertical"
 msgstr "Вертикальное"
 
-#: ../panel/panel-settings.c:533
-msgid "Handle Style:"
-msgstr ""
+#: ../panel/panel-settings.c:898
+#, fuzzy
+msgid "Handle Position:"
+msgstr "Позиция:"
 
-#: ../panel/panel-settings.c:545
+#: ../panel/panel-settings.c:910
 #, fuzzy
 msgid "At both sides"
 msgstr "Автоматически скрывать:"
 
-#: ../panel/panel-settings.c:547
-msgid "At the start"
-msgstr ""
+#: ../panel/panel-settings.c:940
+#, fuzzy
+msgid "Panel Properties"
+msgstr "Настройки панели"
 
-#: ../panel/panel-settings.c:549
-msgid "At the end"
-msgstr ""
-
-#: ../panel/panel-settings.c:583
+#: ../panel/panel-settings.c:975
 #, fuzzy
 msgid "Monitor"
 msgstr "Редактор"
 
 #. size
-#: ../panel/panel-settings.c:665
+#: ../panel/panel-settings.c:1057
 msgid "Size"
 msgstr ""
 
-#: ../panel/panel-settings.c:676
+#: ../panel/panel-settings.c:1068
 msgid "Small"
 msgstr "Маленький"
 
-#: ../panel/panel-settings.c:693
+#: ../panel/panel-settings.c:1085
 msgid "Large"
 msgstr "Большой"
 
-#. transparency
-#: ../panel/panel-settings.c:701
+#: ../panel/panel-settings.c:1099
 msgid "Transparency"
 msgstr ""
 
-#: ../panel/panel-settings.c:709
+#: ../panel/panel-settings.c:1107
 msgid "None"
 msgstr ""
 
-#: ../panel/panel-settings.c:726
+#: ../panel/panel-settings.c:1124
 msgid "Full"
 msgstr ""
 
-#: ../panel/panel-settings.c:1056
-msgid ""
-"Drag items from the list to a panel or move existing items to a new location."
+#: ../panel/panel-settings.c:1440
+msgid "Manage Panel Items"
 msgstr ""
 
-#: ../panel/panel-settings.c:1074
+#: ../panel/panel-settings.c:1461
+msgid ""
+"Drag items from the list to a panel or remove them by dragging them back to "
+"the list."
+msgstr ""
+
+#: ../panel/panel-settings.c:1479
 msgid "Avalaible Items"
 msgstr ""
 
-#: ../panel/panel-settings.c:1087
+#: ../panel/panel-settings.c:1492
 msgid "Add To Selected Panel"
 msgstr ""
 
-#: ../panel/panel-settings.c:1291
+#: ../panel/panel-settings.c:1651
 msgid "Panel Preferences"
 msgstr ""
 
-#: ../panel/panel-settings.c:1293
-#, fuzzy
-msgid "Add Items"
-msgstr "Добавить новый объект"
+#: ../panel/panel-settings.c:1653
+msgid "Customize Panels"
+msgstr ""
 
 #: ../plugins/launcher/launcher.c:311 ../plugins/launcher/launcher.c:359
 #, fuzzy, c-format
@@ -391,18 +428,26 @@ msgstr "Выполнять в окне терминала"
 msgid "Use _startup notification"
 msgstr "Использовать уведомление о запуске"
 
-#: ../plugins/launcher/launcher-dialog.c:1223
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1272
+#: ../plugins/launcher/launcher-dialog.c:1270
+#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
+#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
+#: ../plugins/clock/clock.c:401
+msgid "Properties"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1279
 #, fuzzy
 msgid "Program Launcher"
 msgstr "Добавить подменю к обьекту"
 
-#: ../plugins/launcher/launcher-dialog.c:1598
+#: ../plugins/launcher/launcher-dialog.c:1605
 msgid "Select file"
 msgstr "Выбор файла"
 
@@ -606,23 +651,3 @@ msgstr ""
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Configure Separator"
-#~ msgstr "Разделитель"
-
-#, fuzzy
-#~ msgid "Configure Panel Actions"
-#~ msgstr "Настройки панели Xfce"
-
-#, fuzzy
-#~ msgid "Configure Icon Box"
-#~ msgstr "Настройки панели значков Xfce 4"
-
-#, fuzzy
-#~ msgid "Configure Clock"
-#~ msgstr "Часы Xfce"
-
-#, fuzzy
-#~ msgid "Preferences"
-#~ msgstr "Свойства элемента"
