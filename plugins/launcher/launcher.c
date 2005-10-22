@@ -296,14 +296,15 @@ launcher_entry_free (LauncherEntry *e)
 }
 
 static void
-launcher_entry_exec (LauncherEntry *entry)
+launcher_entry_exec (GdkScreen *screen, LauncherEntry *entry)
 {
     GError *error = NULL;
     
     if (!entry->exec || !strlen (entry->exec))
         return;
     
-    xfce_exec (entry->real_exec, entry->terminal, entry->startup, &error);
+    xfce_exec_on_screen (screen, entry->real_exec, entry->terminal, 
+                         entry->startup, &error);
         
     if (error)
     {
@@ -333,6 +334,7 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
     if (G_UNLIKELY (!entry->exec))
         return;
 
+    /* FIXME: realexec may contain arguments -> split up */
     if (entry->terminal)
     {
         argv = g_new (char *, n + 4);
@@ -353,7 +355,8 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
 
     argv[n+i] = NULL;
     
-    if (!xfce_exec_argv (argv, entry->terminal, entry->startup, &error))
+    if (!xfce_exec_argv_on_screen (screen, argv, entry->terminal, 
+                                   entry->startup, &error))
     {
         char *first = 
             g_strdup_printf (_("Could not run \"%s\""), entry->name);
@@ -462,7 +465,7 @@ launcher_button_released (GtkWidget *mi, GdkEventButton *ev,
 static void
 launcher_menu_item_activate (GtkWidget *mi, LauncherEntry *entry)
 {
-    launcher_entry_exec (entry);
+    launcher_entry_exec (gtk_widget_get_screen (mi), entry);
 }
 
 static void
@@ -793,7 +796,8 @@ launcher_clicked (GtkWidget *w, LauncherPlugin *launcher)
         launcher->from_timeout = FALSE;
     }
 
-    launcher_entry_exec (g_ptr_array_index (launcher->entries, 0));
+    launcher_entry_exec (gtk_widget_get_screen (w),
+                         g_ptr_array_index (launcher->entries, 0));
 }
 
 
@@ -802,7 +806,7 @@ launcher_clicked (GtkWidget *w, LauncherPlugin *launcher)
 static LauncherEntry*
 launcher_entry_from_rc_file (XfceRc *rc)
 {
-    LauncherEntry *entry = g_new0 (LauncherEntry, 1);
+    LauncherEntry *entry = launcher_entry_new ();
     const char *s;
 
     if ((s = xfce_rc_read_entry (rc, "Name", NULL)) != NULL)

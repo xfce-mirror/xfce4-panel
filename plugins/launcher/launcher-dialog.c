@@ -526,6 +526,9 @@ create_icon_category_menu (LauncherDialog *ld)
     g_signal_connect (mi, "activate", 
                       G_CALLBACK (icon_menu_browse), ld);
     
+    gtk_menu_set_screen (GTK_MENU (menu), 
+                         gtk_widget_get_screen (ld->launcher->iconbutton));
+
     return menu;
 }
 

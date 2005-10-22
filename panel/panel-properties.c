@@ -866,9 +866,17 @@ panel_set_monitor (Panel *panel, int monitor)
 
     if (monitor != priv->monitor)
     {
+        XfceMonitor *xmon;
+        
         /* TODO: check range */
         priv->monitor = monitor;
 
+        xmon = panel_app_get_monitor (monitor);
+
+        gtk_widget_hide (GTK_WIDGET (panel));
+        gtk_window_set_screen (GTK_WINDOW (panel), xmon->screen);
+        gtk_widget_show (GTK_WIDGET (panel));
+                
         panel_set_position (panel, priv->screen_position, 
                             priv->xoffset, priv->yoffset);
     }

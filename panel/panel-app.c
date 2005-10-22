@@ -220,6 +220,32 @@ session_die (gpointer client_data)
 
 /* screen layout */
 static void
+monitor_size_changed (GdkScreen *screen)
+{
+    int i;
+    XfceMonitor *monitor;
+    GtkWidget *panel;
+
+    for (i = 0; i < panel_app.monitor_list->len; ++i)
+    {
+        monitor = g_ptr_array_index (panel_app.monitor_list, i);
+
+        if (monitor->screen == screen)
+        {
+            gdk_screen_get_monitor_geometry (screen, monitor->num, 
+                                             &(monitor->geometry));
+        }
+    }
+
+    for (i = 0; i < panel_app.panel_list->len; ++i)
+    {
+        panel = g_ptr_array_index (panel_app.panel_list, i);
+
+        gtk_widget_queue_resize (panel);
+    }
+}
+
+static void
 create_monitor_list (void)
 {
     GdkDisplay *display;
@@ -260,6 +286,9 @@ create_monitor_list (void)
             g_ptr_array_add (panel_app.monitor_list, monitor);
 #endif
         }
+
+        g_signal_connect (screen, "size-changed", 
+                          G_CALLBACK (monitor_size_changed), NULL);
     }
 }
 

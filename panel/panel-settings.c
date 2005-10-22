@@ -452,7 +452,9 @@ update_properties_tab (PanelSettingsDialog *psd)
     /* appearance */
     gtk_range_set_value (GTK_RANGE (psd->size), priv->size);
 
-    gtk_range_set_value (GTK_RANGE (psd->transparency), priv->transparency);
+    if (psd->transparency)
+        gtk_range_set_value (GTK_RANGE (psd->transparency), 
+                             priv->transparency);
 
     /* behavior */
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (psd->autohide),
@@ -1587,6 +1589,13 @@ panel_settings_dialog (GPtrArray *panels, gboolean show_items)
 
     if (dialog_widget)
     {
+        int n = panel_app_get_current_panel ();
+        GdkScreen *screen = 
+            gtk_widget_get_screen (g_ptr_array_index (panels, n));
+
+        if (screen != gtk_widget_get_screen (dialog_widget))
+            gtk_window_set_screen (GTK_WINDOW (dialog_widget), screen);
+
         gtk_window_present (GTK_WINDOW (dialog_widget));
         return;
     }
@@ -1621,6 +1630,8 @@ panel_settings_dialog (GPtrArray *panels, gboolean show_items)
     gtk_window_set_skip_taskbar_hint (GTK_WINDOW (psd->dlg), TRUE);
     gtk_window_set_skip_pager_hint (GTK_WINDOW (psd->dlg), TRUE);
     gtk_window_set_position (GTK_WINDOW (psd->dlg), GTK_WIN_POS_CENTER);
+    gtk_window_set_screen (GTK_WINDOW (psd->dlg), 
+                           gtk_widget_get_screen (GTK_WIDGET (panel)));
 
     vbox = GTK_DIALOG (psd->dlg)->vbox;
     gtk_box_set_spacing (GTK_BOX (vbox), BORDER);
