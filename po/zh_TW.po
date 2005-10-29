@@ -7,9 +7,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.24\n"
+"Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-21 20:54+0900\n"
+"POT-Creation-Date: 2005-10-29 16:58+0900\n"
 "PO-Revision-Date: 2005-10-11 00:00+0800\n"
 "Last-Translator: Hydonsingore Cia <hydonsingore@mail.educities.edu.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -27,10 +27,10 @@ msgstr "所有的項目意外地被移除了: \"%s\" 。"
 msgid "Remove \"%s\"?"
 msgstr "移除 \"%s\" 項目？"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:568
-#: ../panel/panel-app.c:599 ../panel/panel-app.c:632
-#: ../panel/panel-settings.c:1604 ../plugins/launcher/launcher.c:313
-#: ../plugins/launcher/launcher.c:361
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:597
+#: ../panel/panel-app.c:628 ../panel/panel-app.c:661
+#: ../panel/panel-settings.c:1613 ../plugins/launcher/launcher.c:314
+#: ../plugins/launcher/launcher.c:364
 msgid "Xfce Panel"
 msgstr "Xfce 面板"
 
@@ -99,24 +99,24 @@ msgstr "無法開啟 \"%s\" 模組"
 msgid "Are you sure you want to exit?"
 msgstr "你確定要退出？"
 
-#: ../panel/panel-app.c:570
+#: ../panel/panel-app.c:599
 msgid "Exit Xfce Panel?"
 msgstr "離開 Xfce 面板？"
 
-#: ../panel/panel-app.c:571
+#: ../panel/panel-app.c:600
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "您無法移除最後一個面板。您要離開本程式嗎？"
 
-#: ../panel/panel-app.c:597
+#: ../panel/panel-app.c:626
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "移除面板 \"%d\" ？"
 
-#: ../panel/panel-app.c:601
+#: ../panel/panel-app.c:630
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:640
+#: ../panel/panel-app.c:669
 msgid "Developer"
 msgstr "開發者"
 
@@ -192,145 +192,145 @@ msgstr "新增到所選的面板"
 msgid "Remove Panel"
 msgstr "移除此面板"
 
-#: ../panel/panel-settings.c:706 ../panel/panel-settings.c:914
+#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
+#: ../panel/panel-settings.c:710 ../panel/panel-settings.c:918
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-settings.c:713 ../panel/panel-settings.c:921
+#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
+#: ../panel/panel-settings.c:717 ../panel/panel-settings.c:925
 msgid "Bottom"
 msgstr ""
 
 #. floating?
-#: ../panel/panel-settings.c:747
+#: ../panel/panel-settings.c:749
 msgid "Panel Type"
 msgstr "面板類型"
 
-#: ../panel/panel-settings.c:756
+#: ../panel/panel-settings.c:758
 msgid "Fixed Position"
 msgstr "固定位置"
 
-#: ../panel/panel-settings.c:758
+#: ../panel/panel-settings.c:760
 msgid "Freely Moveable"
 msgstr "自由可移動"
 
 #. position
-#: ../panel/panel-settings.c:764
+#: ../panel/panel-settings.c:766
 msgid "Position"
 msgstr "位置"
 
-#: ../panel/panel-settings.c:848
+#: ../panel/panel-settings.c:850
 msgid "_Full Width"
 msgstr "全寬度(_F)"
 
-#: ../panel/panel-settings.c:857
+#: ../panel/panel-settings.c:859
 msgid "Auto_hide"
 msgstr "自動隱藏(_H)"
 
-#: ../panel/panel-settings.c:875
+#: ../panel/panel-settings.c:877
 msgid "Orientation:"
 msgstr "方向"
 
-#: ../panel/panel-settings.c:887
+#: ../panel/panel-settings.c:889
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-settings.c:889
+#: ../panel/panel-settings.c:891
 msgid "Vertical"
 msgstr "垂直"
 
-#: ../panel/panel-settings.c:898
+#: ../panel/panel-settings.c:900
 #, fuzzy
 msgid "Handle Position:"
 msgstr "固定位置"
 
-#: ../panel/panel-settings.c:910
+#: ../panel/panel-settings.c:912
 msgid "At both sides"
 msgstr "在兩邊"
 
-#: ../panel/panel-settings.c:940
+#: ../panel/panel-settings.c:942
 #, fuzzy
 msgid "Panel Properties"
 msgstr "特性"
 
-#: ../panel/panel-settings.c:975
+#: ../panel/panel-settings.c:977
 msgid "Monitor"
 msgstr "監視器"
 
 #. size
-#: ../panel/panel-settings.c:1057
+#: ../panel/panel-settings.c:1059
 msgid "Size"
 msgstr "大小"
 
-#: ../panel/panel-settings.c:1068
+#: ../panel/panel-settings.c:1070
 msgid "Small"
 msgstr "小"
 
-#: ../panel/panel-settings.c:1085
+#: ../panel/panel-settings.c:1087
 msgid "Large"
 msgstr "大"
 
-#: ../panel/panel-settings.c:1099
+#: ../panel/panel-settings.c:1101
 msgid "Transparency"
 msgstr "透明度"
 
-#: ../panel/panel-settings.c:1107
+#: ../panel/panel-settings.c:1109
 msgid "None"
 msgstr "無"
 
-#: ../panel/panel-settings.c:1124
+#: ../panel/panel-settings.c:1126
 msgid "Full"
 msgstr "全"
 
-#: ../panel/panel-settings.c:1440
+#: ../panel/panel-settings.c:1442
 msgid "Manage Panel Items"
 msgstr "管理面板項目"
 
-#: ../panel/panel-settings.c:1461
+#: ../panel/panel-settings.c:1463
 #, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr "從清單中將項目拖曳到面板或是將現有的項目移到新位置。"
 
-#: ../panel/panel-settings.c:1479
+#: ../panel/panel-settings.c:1481
 msgid "Avalaible Items"
 msgstr "可用的項目"
 
-#: ../panel/panel-settings.c:1492
+#: ../panel/panel-settings.c:1494
 msgid "Add To Selected Panel"
 msgstr "新增到所選的面板"
 
-#: ../panel/panel-settings.c:1651
+#: ../panel/panel-settings.c:1662
 msgid "Panel Preferences"
 msgstr "面板偏好設定"
 
-#: ../panel/panel-settings.c:1653
+#: ../panel/panel-settings.c:1664
 msgid "Customize Panels"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:311 ../plugins/launcher/launcher.c:359
+#: ../plugins/launcher/launcher.c:312 ../plugins/launcher/launcher.c:362
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "無法執行\"%s\""
 
-#: ../plugins/launcher/launcher.c:557
-#: ../plugins/launcher/launcher-dialog.c:1118
+#: ../plugins/launcher/launcher.c:560
+#: ../plugins/launcher/launcher-dialog.c:1121
 msgid "New Item"
 msgstr "新增項目"
 
-#: ../plugins/launcher/launcher.c:613 ../plugins/launcher/launcher.c:1127
+#: ../plugins/launcher/launcher.c:616 ../plugins/launcher/launcher.c:1131
 msgid "This item has not yet been configured"
 msgstr "該項目尚未設定"
 
-#: ../plugins/launcher/launcher.c:1126
+#: ../plugins/launcher/launcher.c:1130
 msgid "New item"
 msgstr "增加新項目"
 
@@ -407,25 +407,25 @@ msgstr "描述"
 msgid "Other..."
 msgstr "其他..."
 
-#: ../plugins/launcher/launcher-dialog.c:605
+#: ../plugins/launcher/launcher-dialog.c:608
 msgid "Command"
 msgstr "指令"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:644
 msgid "Run in _terminal"
 msgstr "在終端機中執行(_T)"
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:662
 msgid "Use _startup notification"
 msgstr "使用啟動提示(_S)"
 
-#: ../plugins/launcher/launcher-dialog.c:1230
+#: ../plugins/launcher/launcher-dialog.c:1233
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr "清單中的第一個項目會出現在面板上，其餘的項目會顯現在選單中。"
 
-#: ../plugins/launcher/launcher-dialog.c:1270
+#: ../plugins/launcher/launcher-dialog.c:1273
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -433,11 +433,11 @@ msgstr "清單中的第一個項目會出現在面板上，其餘的項目會顯
 msgid "Properties"
 msgstr "特性"
 
-#: ../plugins/launcher/launcher-dialog.c:1279
+#: ../plugins/launcher/launcher-dialog.c:1282
 msgid "Program Launcher"
 msgstr "程式啟動器"
 
-#: ../plugins/launcher/launcher-dialog.c:1605
+#: ../plugins/launcher/launcher-dialog.c:1608
 msgid "Select file"
 msgstr "選擇檔案"
 

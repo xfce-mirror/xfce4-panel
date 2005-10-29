@@ -1,4 +1,3 @@
-# translation of eu.po to librezale.org
 # Euskera translations for xfce4-panel package.
 # Copyright (C) 2002-2005 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
@@ -7,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: eu\n"
+"Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-21 20:54+0900\n"
-"PO-Revision-Date: 2005-10-24 07:29+0200\n"
+"POT-Creation-Date: 2005-10-29 16:58+0900\n"
+"PO-Revision-Date: 2005-10-29 17:07+0900\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: librezale.org <librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,16 +28,19 @@ msgstr "Elementu bat espero gabe ezabatua izan da: \"%s\"."
 msgid "Remove \"%s\"?"
 msgstr "\"%s\" Ezabatu?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:568
-#: ../panel/panel-app.c:599 ../panel/panel-app.c:632
-#: ../panel/panel-settings.c:1604 ../plugins/launcher/launcher.c:313
-#: ../plugins/launcher/launcher.c:361
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:597
+#: ../panel/panel-app.c:628 ../panel/panel-app.c:661
+#: ../panel/panel-settings.c:1613 ../plugins/launcher/launcher.c:314
+#: ../plugins/launcher/launcher.c:364
 msgid "Xfce Panel"
 msgstr "Xfce Panela"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:588
-msgid "The item will be removed from the panel and its configuration will be lost."
-msgstr "Elementu hau paneletik ezabatua izango da eta bere konfigurazioa galdu egingo da."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr ""
+"Elementu hau paneletik ezabatua izango da eta bere konfigurazioa galdu "
+"egingo da."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:759
@@ -99,24 +101,24 @@ msgstr "Ezin da \"%s\" modulua ireki."
 msgid "Are you sure you want to exit?"
 msgstr "Ziur irten nahi duzula?"
 
-#: ../panel/panel-app.c:570
+#: ../panel/panel-app.c:599
 msgid "Exit Xfce Panel?"
 msgstr "Xfce Panela Itxi?"
 
-#: ../panel/panel-app.c:571
+#: ../panel/panel-app.c:600
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Ezin duzu azken panela ezabatu. Agian programatik irten nahi duzu?"
 
-#: ../panel/panel-app.c:597
+#: ../panel/panel-app.c:626
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "\"%d\" Panela Ezabatu?"
 
-#: ../panel/panel-app.c:601
+#: ../panel/panel-app.c:630
 msgid "The selected panel and all its items will be removed."
 msgstr "Aukeratutako panela eta bere elementu guztiak ezabatu egingo dira."
 
-#: ../panel/panel-app.c:640
+#: ../panel/panel-app.c:669
 msgid "Developer"
 msgstr "Garatzailea"
 
@@ -165,10 +167,10 @@ msgid ""
 "\n"
 msgstr ""
 " AUKERAK\n"
-" -h, --help	  Mezu hau bistarazi eta irten\n"
-" -v, --version	  Mezu hau bistarazi eta irten\n"
+" -h, --help\t  Mezu hau bistarazi eta irten\n"
+" -v, --version\t  Mezu hau bistarazi eta irten\n"
 " -c, --customize Konfigurazio elkarrizketa bistarazi\n"
-" -s, --save 	  Panel konfigurazioa gorde\n"
+" -s, --save \t  Panel konfigurazioa gorde\n"
 " -r, --restart   Panelak berrabiarazi\n"
 " -q, --quit      Saio amaitu\n"
 " -x, --exit      Panelak itxi\n"
@@ -188,106 +190,106 @@ msgstr "Panela hautatu"
 msgid "Remove Panel"
 msgstr "Panela Ezabatu"
 
-#: ../panel/panel-settings.c:706 ../panel/panel-settings.c:914
+#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
 msgid "Left"
 msgstr "Ezkerrean"
 
-#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
+#: ../panel/panel-settings.c:710 ../panel/panel-settings.c:918
 msgid "Right"
 msgstr "Eskuinean"
 
-#: ../panel/panel-settings.c:713 ../panel/panel-settings.c:921
+#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
 msgid "Top"
 msgstr "Goian"
 
-#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
+#: ../panel/panel-settings.c:717 ../panel/panel-settings.c:925
 msgid "Bottom"
 msgstr "Behean"
 
 #. floating?
-#: ../panel/panel-settings.c:747
+#: ../panel/panel-settings.c:749
 msgid "Panel Type"
 msgstr "Panel mota:"
 
-#: ../panel/panel-settings.c:756
+#: ../panel/panel-settings.c:758
 msgid "Fixed Position"
 msgstr "Kokaleku Finkoa"
 
-#: ../panel/panel-settings.c:758
+#: ../panel/panel-settings.c:760
 msgid "Freely Moveable"
 msgstr "Libreki mugigarria"
 
 #. position
-#: ../panel/panel-settings.c:764
+#: ../panel/panel-settings.c:766
 msgid "Position"
 msgstr "Kokalekua"
 
-#: ../panel/panel-settings.c:848
+#: ../panel/panel-settings.c:850
 msgid "_Full Width"
 msgstr "_Zabalera osoa"
 
-#: ../panel/panel-settings.c:857
+#: ../panel/panel-settings.c:859
 msgid "Auto_hide"
 msgstr "Automatikoki _ezkutatu"
 
-#: ../panel/panel-settings.c:875
+#: ../panel/panel-settings.c:877
 msgid "Orientation:"
 msgstr "Orientazioa:"
 
-#: ../panel/panel-settings.c:887
+#: ../panel/panel-settings.c:889
 msgid "Horizontal"
 msgstr "Horizontala"
 
-#: ../panel/panel-settings.c:889
+#: ../panel/panel-settings.c:891
 msgid "Vertical"
 msgstr "Bertikala"
 
-#: ../panel/panel-settings.c:898
+#: ../panel/panel-settings.c:900
 msgid "Handle Position:"
 msgstr "Kokalekua Kudeatu:"
 
-#: ../panel/panel-settings.c:910
+#: ../panel/panel-settings.c:912
 msgid "At both sides"
 msgstr "Bi alboetan"
 
-#: ../panel/panel-settings.c:940
+#: ../panel/panel-settings.c:942
 msgid "Panel Properties"
 msgstr "Panelaren propietateak"
 
-#: ../panel/panel-settings.c:975
+#: ../panel/panel-settings.c:977
 msgid "Monitor"
 msgstr "Monitorea"
 
 #. size
-#: ../panel/panel-settings.c:1057
+#: ../panel/panel-settings.c:1059
 msgid "Size"
 msgstr "Tamaina"
 
-#: ../panel/panel-settings.c:1068
+#: ../panel/panel-settings.c:1070
 msgid "Small"
 msgstr "Txikia"
 
-#: ../panel/panel-settings.c:1085
+#: ../panel/panel-settings.c:1087
 msgid "Large"
 msgstr "Handia"
 
-#: ../panel/panel-settings.c:1099
+#: ../panel/panel-settings.c:1101
 msgid "Transparency"
 msgstr "Gardentasuna"
 
-#: ../panel/panel-settings.c:1107
+#: ../panel/panel-settings.c:1109
 msgid "None"
 msgstr "Bat ere ez"
 
-#: ../panel/panel-settings.c:1124
+#: ../panel/panel-settings.c:1126
 msgid "Full"
 msgstr "Osoa"
 
-#: ../panel/panel-settings.c:1440
+#: ../panel/panel-settings.c:1442
 msgid "Manage Panel Items"
 msgstr "Panel Elementuak Kudeatu"
 
-#: ../panel/panel-settings.c:1461
+#: ../panel/panel-settings.c:1463
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -295,37 +297,37 @@ msgstr ""
 "Eraman elementuak zerrendatik panel batetara edo ezabatzeko elementuak "
 "zerrendara eraman berriz."
 
-#: ../panel/panel-settings.c:1479
+#: ../panel/panel-settings.c:1481
 msgid "Avalaible Items"
 msgstr "Elementu erabilgarriak"
 
-#: ../panel/panel-settings.c:1492
+#: ../panel/panel-settings.c:1494
 msgid "Add To Selected Panel"
 msgstr "Hautatutako panelera gehitu"
 
-#: ../panel/panel-settings.c:1651
+#: ../panel/panel-settings.c:1662
 msgid "Panel Preferences"
 msgstr "Panel Hobespenak"
 
-#: ../panel/panel-settings.c:1653
+#: ../panel/panel-settings.c:1664
 msgid "Customize Panels"
 msgstr "Panelak Pertsonalizatu"
 
-#: ../plugins/launcher/launcher.c:311 ../plugins/launcher/launcher.c:359
+#: ../plugins/launcher/launcher.c:312 ../plugins/launcher/launcher.c:362
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "Ezin da \"%s\" abiarazi."
 
-#: ../plugins/launcher/launcher.c:557
-#: ../plugins/launcher/launcher-dialog.c:1118
+#: ../plugins/launcher/launcher.c:560
+#: ../plugins/launcher/launcher-dialog.c:1121
 msgid "New Item"
 msgstr "Elementu berria"
 
-#: ../plugins/launcher/launcher.c:613 ../plugins/launcher/launcher.c:1127
+#: ../plugins/launcher/launcher.c:616 ../plugins/launcher/launcher.c:1131
 msgid "This item has not yet been configured"
 msgstr "Elementu hau ez da konfigruatua izan"
 
-#: ../plugins/launcher/launcher.c:1126
+#: ../plugins/launcher/launcher.c:1130
 msgid "New item"
 msgstr "Elementu berria"
 
@@ -401,27 +403,27 @@ msgstr "Azalpena"
 msgid "Other..."
 msgstr "Besterik..."
 
-#: ../plugins/launcher/launcher-dialog.c:605
+#: ../plugins/launcher/launcher-dialog.c:608
 msgid "Command"
 msgstr "Komandoa"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:644
 msgid "Run in _terminal"
 msgstr "_terminalean exekutatu"
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:662
 msgid "Use _startup notification"
 msgstr "Erabili _hasiera notifikazioak"
 
-#: ../plugins/launcher/launcher-dialog.c:1230
+#: ../plugins/launcher/launcher-dialog.c:1233
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
-"Zerrendako lehenengo elementua panelean bistaraziko da. Hurrengoak "
-"menu batetan agertu beharko lirateke."
+"Zerrendako lehenengo elementua panelean bistaraziko da. Hurrengoak menu "
+"batetan agertu beharko lirateke."
 
-#: ../plugins/launcher/launcher-dialog.c:1270
+#: ../plugins/launcher/launcher-dialog.c:1273
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -429,11 +431,11 @@ msgstr ""
 msgid "Properties"
 msgstr "Propietateak"
 
-#: ../plugins/launcher/launcher-dialog.c:1279
+#: ../plugins/launcher/launcher-dialog.c:1282
 msgid "Program Launcher"
 msgstr "Abiarazleari menua gehitu"
 
-#: ../plugins/launcher/launcher-dialog.c:1605
+#: ../plugins/launcher/launcher-dialog.c:1608
 msgid "Select file"
 msgstr "Fitxategia aukeratu"
 
@@ -623,4 +625,3 @@ msgstr "Bistarazi abiarazirik dauden aplikazio guztien ikonoak"
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Zein ordu da?"
-

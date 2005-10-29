@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.24\n"
+"Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-21 20:54+0900\n"
+"POT-Creation-Date: 2005-10-29 16:58+0900\n"
 "PO-Revision-Date: 2005-10-09 18:53+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg2002@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -25,10 +25,10 @@ msgstr "Ένα αντικείμενο αφαιρέθηκε αναπάντεχα:
 msgid "Remove \"%s\"?"
 msgstr "Διαγραφή \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:568
-#: ../panel/panel-app.c:599 ../panel/panel-app.c:632
-#: ../panel/panel-settings.c:1604 ../plugins/launcher/launcher.c:313
-#: ../plugins/launcher/launcher.c:361
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:597
+#: ../panel/panel-app.c:628 ../panel/panel-app.c:661
+#: ../panel/panel-settings.c:1613 ../plugins/launcher/launcher.c:314
+#: ../plugins/launcher/launcher.c:364
 msgid "Xfce Panel"
 msgstr "Ταμπλώ του Xfce"
 
@@ -99,26 +99,26 @@ msgstr "Δεν ήταν δυνατό το άνοιγμα του αρθρώματ
 msgid "Are you sure you want to exit?"
 msgstr "Είστε σίγουρος ότι θέλετε να βγείτε;"
 
-#: ../panel/panel-app.c:570
+#: ../panel/panel-app.c:599
 msgid "Exit Xfce Panel?"
 msgstr "Έξοδος από το Ταμπλό του Xfce;"
 
-#: ../panel/panel-app.c:571
+#: ../panel/panel-app.c:600
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "Δεν μπορείτε να αφαιρέσετε το τελευταίο ταμπλό. Μήπως θέλετε να βγείτε από "
 "το πρόγραμμα;"
 
-#: ../panel/panel-app.c:597
+#: ../panel/panel-app.c:626
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Αφαίρεση Ταμπλό \"%d\";"
 
-#: ../panel/panel-app.c:601
+#: ../panel/panel-app.c:630
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:640
+#: ../panel/panel-app.c:669
 msgid "Developer"
 msgstr "Ανάπτυξη"
 
@@ -193,108 +193,108 @@ msgstr "Προσθήκη στο επιλεγμένο ταμπλό"
 msgid "Remove Panel"
 msgstr "Αφαίρεση παρόντος Ταμπλό"
 
-#: ../panel/panel-settings.c:706 ../panel/panel-settings.c:914
+#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
+#: ../panel/panel-settings.c:710 ../panel/panel-settings.c:918
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-settings.c:713 ../panel/panel-settings.c:921
+#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
+#: ../panel/panel-settings.c:717 ../panel/panel-settings.c:925
 msgid "Bottom"
 msgstr ""
 
 #. floating?
-#: ../panel/panel-settings.c:747
+#: ../panel/panel-settings.c:749
 msgid "Panel Type"
 msgstr "Τύπος Ταμπλό"
 
-#: ../panel/panel-settings.c:756
+#: ../panel/panel-settings.c:758
 msgid "Fixed Position"
 msgstr "Σταθερή Θέση"
 
-#: ../panel/panel-settings.c:758
+#: ../panel/panel-settings.c:760
 msgid "Freely Moveable"
 msgstr "Ελεύθερα Μετακινούμενο"
 
 #. position
-#: ../panel/panel-settings.c:764
+#: ../panel/panel-settings.c:766
 msgid "Position"
 msgstr "Θέση"
 
-#: ../panel/panel-settings.c:848
+#: ../panel/panel-settings.c:850
 msgid "_Full Width"
 msgstr "_Πλήρες πλάτος"
 
-#: ../panel/panel-settings.c:857
+#: ../panel/panel-settings.c:859
 msgid "Auto_hide"
 msgstr "_Αυτόματη απόκρυψη"
 
-#: ../panel/panel-settings.c:875
+#: ../panel/panel-settings.c:877
 msgid "Orientation:"
 msgstr "Προσανατολισμός:"
 
-#: ../panel/panel-settings.c:887
+#: ../panel/panel-settings.c:889
 msgid "Horizontal"
 msgstr "Οριζόντιο"
 
-#: ../panel/panel-settings.c:889
+#: ../panel/panel-settings.c:891
 msgid "Vertical"
 msgstr "Κάθετο"
 
-#: ../panel/panel-settings.c:898
+#: ../panel/panel-settings.c:900
 #, fuzzy
 msgid "Handle Position:"
 msgstr "Σταθερή Θέση"
 
-#: ../panel/panel-settings.c:910
+#: ../panel/panel-settings.c:912
 msgid "At both sides"
 msgstr "Και στις δυο πλευρές"
 
-#: ../panel/panel-settings.c:940
+#: ../panel/panel-settings.c:942
 #, fuzzy
 msgid "Panel Properties"
 msgstr "Ιδιότητες"
 
-#: ../panel/panel-settings.c:975
+#: ../panel/panel-settings.c:977
 msgid "Monitor"
 msgstr ""
 
 #. size
-#: ../panel/panel-settings.c:1057
+#: ../panel/panel-settings.c:1059
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: ../panel/panel-settings.c:1068
+#: ../panel/panel-settings.c:1070
 msgid "Small"
 msgstr "Μικρό"
 
-#: ../panel/panel-settings.c:1085
+#: ../panel/panel-settings.c:1087
 msgid "Large"
 msgstr "Μεγάλο"
 
-#: ../panel/panel-settings.c:1099
+#: ../panel/panel-settings.c:1101
 msgid "Transparency"
 msgstr "Διαφάνεια"
 
-#: ../panel/panel-settings.c:1107
+#: ../panel/panel-settings.c:1109
 msgid "None"
 msgstr "Κανένα"
 
-#: ../panel/panel-settings.c:1124
+#: ../panel/panel-settings.c:1126
 msgid "Full"
 msgstr "Πλήρες"
 
-#: ../panel/panel-settings.c:1440
+#: ../panel/panel-settings.c:1442
 msgid "Manage Panel Items"
 msgstr "Διαχείριση Αντικειμένων στο Ταμπλό"
 
-#: ../panel/panel-settings.c:1461
+#: ../panel/panel-settings.c:1463
 #, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
@@ -303,37 +303,37 @@ msgstr ""
 "Σύρετε αντικείμενα από τη λίστα στο ταμπλό ή μετακινήσετε υπάρχοντα "
 "αντικείμενα σε νέα τοποθεσία."
 
-#: ../panel/panel-settings.c:1479
+#: ../panel/panel-settings.c:1481
 msgid "Avalaible Items"
 msgstr "Διαθέσιμα Αντικείμενα"
 
-#: ../panel/panel-settings.c:1492
+#: ../panel/panel-settings.c:1494
 msgid "Add To Selected Panel"
 msgstr "Προσθήκη στο επιλεγμένο ταμπλό"
 
-#: ../panel/panel-settings.c:1651
+#: ../panel/panel-settings.c:1662
 msgid "Panel Preferences"
 msgstr "Προτιμήσεις Ταμπλό"
 
-#: ../panel/panel-settings.c:1653
+#: ../panel/panel-settings.c:1664
 msgid "Customize Panels"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:311 ../plugins/launcher/launcher.c:359
+#: ../plugins/launcher/launcher.c:312 ../plugins/launcher/launcher.c:362
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "Αδυναμία εκτέλεσης \"%s\""
 
-#: ../plugins/launcher/launcher.c:557
-#: ../plugins/launcher/launcher-dialog.c:1118
+#: ../plugins/launcher/launcher.c:560
+#: ../plugins/launcher/launcher-dialog.c:1121
 msgid "New Item"
 msgstr "Νέο Αντικείμενο"
 
-#: ../plugins/launcher/launcher.c:613 ../plugins/launcher/launcher.c:1127
+#: ../plugins/launcher/launcher.c:616 ../plugins/launcher/launcher.c:1131
 msgid "This item has not yet been configured"
 msgstr "Αυτό το αντικείμενο δεν έχει ρυθμιστεί ακόμα "
 
-#: ../plugins/launcher/launcher.c:1126
+#: ../plugins/launcher/launcher.c:1130
 msgid "New item"
 msgstr "Νέο αντικείμενο"
 
@@ -409,19 +409,19 @@ msgstr "Περιγραφή"
 msgid "Other..."
 msgstr "Άλλο..."
 
-#: ../plugins/launcher/launcher-dialog.c:605
+#: ../plugins/launcher/launcher-dialog.c:608
 msgid "Command"
 msgstr "Εντολή"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:644
 msgid "Run in _terminal"
 msgstr "Εκτέλεση σε _τερματικό"
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:662
 msgid "Use _startup notification"
 msgstr "Χρήση γνω_στοποίηση εκκίνησης"
 
-#: ../plugins/launcher/launcher-dialog.c:1230
+#: ../plugins/launcher/launcher-dialog.c:1233
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -429,7 +429,7 @@ msgstr ""
 "Το πρώτο αντικείμενο στη λίστα εμφανίζεται στο ταμπλό. Τα υπόλοιπα θα μπουν "
 "σε μενού."
 
-#: ../plugins/launcher/launcher-dialog.c:1270
+#: ../plugins/launcher/launcher-dialog.c:1273
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
@@ -437,12 +437,12 @@ msgstr ""
 msgid "Properties"
 msgstr "Ιδιότητες"
 
-#: ../plugins/launcher/launcher-dialog.c:1279
+#: ../plugins/launcher/launcher-dialog.c:1282
 #, fuzzy
 msgid "Program Launcher"
 msgstr "Ρύθμιση Εκκινητή"
 
-#: ../plugins/launcher/launcher-dialog.c:1605
+#: ../plugins/launcher/launcher-dialog.c:1608
 msgid "Select file"
 msgstr "Επιλογή αρχείου"
 
