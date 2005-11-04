@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-29 16:58+0900\n"
-"PO-Revision-Date: 2005-10-29 16:37+0900\n"
+"POT-Creation-Date: 2005-11-01 17:25+0900\n"
+"PO-Revision-Date: 2005-11-04 17:27+0900\n"
 "Last-Translator: Collet Etienne <xanaxlnx@gmail.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,9 +40,9 @@ msgstr "L'élément sera enlevé du panneau et sa configuration sera perdue."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:759
-#, fuzzy, c-format
+#, c-format
 msgid "%s Properties"
-msgstr "Propriétés"
+msgstr "Propriétés-%s"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:778
@@ -60,17 +60,16 @@ msgstr "Panneau"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:820 ../panel/panel.c:534
 msgid "Customize Panel"
-msgstr ""
+msgstr "Configurer Le Pannneau"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:837
-#, fuzzy
 msgid "Manage Panels"
-msgstr "Contrôle Des Éléments Du Panneau"
+msgstr "Contrôle Des Panneaux"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:850
-#, fuzzy, c-format
+#, c-format
 msgid "Remove %s"
-msgstr "Supprimer \"%s\"?"
+msgstr "Supprimer \"%s\""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:867
 #: ../panel/panel-settings.c:412
@@ -167,8 +166,8 @@ msgid ""
 "\n"
 msgstr ""
 " OPTIONS\n"
-" -h, --help      Montrer les options\n"
-" -v, --version   Montrer les options\n"
+" -h, --help      Montrer les options et la version\n"
+" -v, --version   Montrer les options et la version\n"
 " -c, --customize Montrez la fenêtre de configuration\n"
 " -s, --save      Sauver la confiquration du panneaux\n"
 " -r, --restart   Relancer les panneux\n"
@@ -179,35 +178,33 @@ msgstr ""
 
 #: ../panel/panel-settings.c:331 ../panel/panel-settings.c:367
 #: ../panel/panel-settings.c:399
-#, fuzzy, c-format
+#, c-format
 msgid "Panel %d"
-msgstr "Panneau"
+msgstr "Panneau %d"
 
 #: ../panel/panel-settings.c:383
-#, fuzzy
 msgid "Select Panel"
-msgstr "Ajoutez Au Panneau Sélectionné"
+msgstr "Sélectionner le panneau"
 
 #: ../panel/panel-settings.c:419
-#, fuzzy
 msgid "Remove Panel"
-msgstr "Supprimer le Panneau \"%d\"?"
+msgstr "Supprimer le Panneau \"%d\""
 
 #: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
 msgid "Left"
-msgstr ""
+msgstr "à Gauche"
 
 #: ../panel/panel-settings.c:710 ../panel/panel-settings.c:918
 msgid "Right"
-msgstr ""
+msgstr "à Droite"
 
 #: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
 msgid "Top"
-msgstr ""
+msgstr "en Haut"
 
 #: ../panel/panel-settings.c:717 ../panel/panel-settings.c:925
 msgid "Bottom"
-msgstr ""
+msgstr "en Bas"
 
 #. floating?
 #: ../panel/panel-settings.c:749
@@ -220,7 +217,7 @@ msgstr "Position fixe"
 
 #: ../panel/panel-settings.c:760
 msgid "Freely Moveable"
-msgstr "position mobile"
+msgstr "Position mobile"
 
 #. position
 #: ../panel/panel-settings.c:766
@@ -248,18 +245,16 @@ msgid "Vertical"
 msgstr "Vertical"
 
 #: ../panel/panel-settings.c:900
-#, fuzzy
 msgid "Handle Position:"
-msgstr "Position fixe"
+msgstr "Position Des Poignées:"
 
 #: ../panel/panel-settings.c:912
 msgid "At both sides"
 msgstr "Sur les deux côtés"
 
 #: ../panel/panel-settings.c:942
-#, fuzzy
 msgid "Panel Properties"
-msgstr "Propriétés"
+msgstr "Propriétés-du Panneau"
 
 #: ../panel/panel-settings.c:977
 msgid "Monitor"
@@ -295,13 +290,12 @@ msgid "Manage Panel Items"
 msgstr "Contrôle Des Éléments Du Panneau"
 
 #: ../panel/panel-settings.c:1463
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
-"Ajouter ou enlever les éléments de la liste d'un panneau ou déplacez les "
-"éléments existants à un nouvel endroit."
+"Ajouter ou enlever des éléments de la liste d'un panneau ou les déplacez à "
+"un nouvel endroit."
 
 #: ../panel/panel-settings.c:1481
 msgid "Avalaible Items"
@@ -317,7 +311,7 @@ msgstr "Préférences des panneaux"
 
 #: ../panel/panel-settings.c:1664
 msgid "Customize Panels"
-msgstr ""
+msgstr "Configuration Des Panneaux"
 
 #: ../plugins/launcher/launcher.c:312 ../plugins/launcher/launcher.c:362
 #, c-format
@@ -367,7 +361,7 @@ msgstr "Multimédia"
 
 #: ../plugins/launcher/launcher-dialog.c:85
 msgid "Network"
-msgstr "Réseau"
+msgstr "Réseaux"
 
 #: ../plugins/launcher/launcher-dialog.c:86
 msgid "Graphics"
@@ -391,7 +385,7 @@ msgstr "Terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:381
 msgid "Select image file"
-msgstr "Sélection une image"
+msgstr "Sélectionner une image"
 
 #: ../plugins/launcher/launcher-dialog.c:426
 msgid "Select command"
@@ -403,7 +397,7 @@ msgstr "Nom"
 
 #: ../plugins/launcher/launcher-dialog.c:467
 msgid "Description"
-msgstr "Descrpition"
+msgstr "Description"
 
 #: ../plugins/launcher/launcher-dialog.c:522
 msgid "Other..."
@@ -456,7 +450,7 @@ msgstr "Séparation"
 
 #: ../plugins/separator/separator.c:275
 msgid "_Expand"
-msgstr "_Augmentez"
+msgstr "_Étendre"
 
 #: ../plugins/actions/actions.c:307
 #: ../plugins/actions/actions.desktop.in.in.h:2
@@ -535,7 +529,7 @@ msgstr "Montrez l'_armature"
 #: ../plugins/iconbox/iconbox.c:760
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr "Paramétrage de la boite à icônes"
+msgstr "Boite À Icônes"
 
 #: ../plugins/iconbox/iconbox.c:774
 msgid "Only show minimized applications"
@@ -550,7 +544,6 @@ msgstr "Montrez seulement les applications réduites au minimum"
 #. * %Y  : four digit year
 #.
 #: ../plugins/clock/clock.c:109
-#, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
