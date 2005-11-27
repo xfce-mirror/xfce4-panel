@@ -177,7 +177,7 @@ check_signal_state (void)
             {
                 logout_session (panel_app.session_client);
             }
-            else if (xfce_confirm (_("Are you sure you want to exit?"),
+            else if (xfce_confirm (_("Exit Xfce Panel?"),
                                    GTK_STOCK_QUIT, NULL))
             {
                 panel_app_save ();
@@ -603,7 +603,8 @@ panel_app_remove_panel (GtkWidget *panel)
                                  GTK_STOCK_QUIT, GTK_RESPONSE_ACCEPT,
                                  NULL);
 
-        panel_app_quit_noconfirm ();
+        if (response == GTK_RESPONSE_ACCEPT)
+            panel_app_quit_noconfirm ();
 
         return;
     }
