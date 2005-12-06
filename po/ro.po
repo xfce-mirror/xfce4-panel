@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-28 19:08+0900\n"
+"POT-Creation-Date: 2005-12-06 21:42+0100\n"
 "PO-Revision-Date: 2005-09-29 20:39+0900\n"
 "Last-Translator: Mişu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -39,57 +39,39 @@ msgid ""
 msgstr ""
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:759
-#, c-format
-msgid "%s Properties"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:722
+#: ../plugins/launcher/launcher-dialog.c:1273
+#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
+#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
+#: ../plugins/clock/clock.c:401
+msgid "Properties"
 msgstr ""
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:739
 msgid "About"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:799
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:756
 #, fuzzy
 msgid "Remove"
 msgstr "Şter_ge"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:814
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
-#, fuzzy
-msgid "Panel"
-msgstr "Panou Xfce"
-
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:820 ../panel/panel.c:534
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:774 ../panel/panel.c:536
 msgid "Customize Panel"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
-#, fuzzy
-msgid "Manage Panels"
-msgstr "Panou Xfce"
-
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
-#, fuzzy, c-format
-msgid "Remove %s"
-msgstr "Şter_ge"
-
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:867
-#: ../panel/panel-settings.c:412
-#, fuzzy
-msgid "New Panel"
-msgstr "Panou Xfce"
-
-#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:551 ../plugins/actions/actions.c:332
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:559
+#: ../panel/panel.c:561
 #, fuzzy
 msgid "Restart"
 msgstr "_Repornire"
 
-#: ../panel/panel.c:573
+#: ../panel/panel.c:575
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "Panou Xfce"
@@ -175,6 +157,11 @@ msgstr "Panou Xfce"
 #, fuzzy
 msgid "Select Panel"
 msgstr "Selectare fişier"
+
+#: ../panel/panel-settings.c:412
+#, fuzzy
+msgid "New Panel"
+msgstr "Panou Xfce"
 
 #: ../panel/panel-settings.c:419
 #, fuzzy
@@ -426,14 +413,6 @@ msgid ""
 "appear in a menu."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1273
-#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
-#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
-#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
-#: ../plugins/clock/clock.c:401
-msgid "Properties"
-msgstr ""
-
 #: ../plugins/launcher/launcher-dialog.c:1282
 #, fuzzy
 msgid "Program Launcher"
@@ -647,6 +626,18 @@ msgstr "Arată _numele programelor"
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Panel"
+#~ msgstr "Panou Xfce"
+
+#, fuzzy
+#~ msgid "Manage Panels"
+#~ msgstr "Panou Xfce"
+
+#, fuzzy
+#~ msgid "Remove %s"
+#~ msgstr "Şter_ge"
 
 #~ msgid "Are you sure you want to exit?"
 #~ msgstr "Chiar doriţi să ieşiţi?"

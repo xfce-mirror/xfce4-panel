@@ -381,15 +381,6 @@ _item_event_received (XfceExternalPanelItem * item, GdkEventClient * ev)
             case XFCE_PANEL_PLUGIN_CUSTOMIZE_ITEMS:
                 xfce_panel_item_customize_items (XFCE_PANEL_ITEM (item));
                 break;
-            case XFCE_PANEL_PLUGIN_NEW_PANEL:
-                xfce_panel_item_new_panel (XFCE_PANEL_ITEM (item));
-                break;
-            case XFCE_PANEL_PLUGIN_REMOVE_PANEL:
-                xfce_panel_item_remove_panel (XFCE_PANEL_ITEM (item));
-                break;
-            case XFCE_PANEL_PLUGIN_ABOUT_PANEL:
-                xfce_panel_item_about_panel (XFCE_PANEL_ITEM (item));
-                break;
             case XFCE_PANEL_PLUGIN_MENU_DEACTIVATED:
                 xfce_panel_item_menu_deactivated (XFCE_PANEL_ITEM (item));
                 break;

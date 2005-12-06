@@ -39,12 +39,6 @@ struct _XfcePanelPluginInterface
     void (*customize_panel)   (XfcePanelPlugin *plugin);
     
     void (*customize_items)   (XfcePanelPlugin *plugin);
-    
-    void (*new_panel)         (XfcePanelPlugin *plugin);
-    
-    void (*remove_panel)      (XfcePanelPlugin *plugin);
-    
-    void (*about_panel)       (XfcePanelPlugin *plugin);
 };
 
 /* menu */
@@ -81,12 +75,6 @@ void xfce_panel_plugin_remove (XfcePanelPlugin *plugin);
 void xfce_panel_plugin_customize_panel (XfcePanelPlugin *plugin);
 
 void xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin);
-
-void xfce_panel_plugin_new_panel (XfcePanelPlugin *plugin);
-
-void xfce_panel_plugin_remove_panel (XfcePanelPlugin *plugin);
-
-void xfce_panel_plugin_about_panel (XfcePanelPlugin *plugin);
 
 
 G_END_DECLS

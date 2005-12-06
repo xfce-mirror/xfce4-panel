@@ -27,6 +27,7 @@
 #include <time.h>
 #include <gtk/gtk.h>
 
+#include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-window.h>
 #include <libxfce4panel/xfce-itembar.h>
 #include <libxfce4panel/xfce-panel-item-iface.h>
@@ -125,6 +126,7 @@ static GtkWidget *_panel_create_menu (Panel *panel);
 
 static gboolean _panel_button_pressed (GtkWidget *widget, 
                                        GdkEventButton *ev);
+
 
 /* this sets up a lot of stuff, see GObject API reference */
 G_DEFINE_TYPE (Panel, panel, XFCE_TYPE_PANEL_WINDOW);
@@ -669,16 +671,6 @@ _item_expand_changed (GtkWidget *item, gboolean expand, Panel *panel)
     xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item, expand);
 }
 
-void
-panel_add_item (Panel * panel, const char *name)
-{
-    char *id = g_strdup_printf ("%ld", time (NULL));
-    
-    panel_add_item_with_id (panel, name, id);
-
-    g_free (id);
-}
-
 static GtkWidget *
 panel_create_item (Panel *panel, const char *name, const char *id)
 {
@@ -690,7 +682,6 @@ panel_create_item (Panel *panel, const char *name, const char *id)
     if ((item = xfce_panel_item_manager_create_item (name, id, 
                     priv->size, priv->screen_position)) != NULL)
     {
-
         g_signal_connect_swapped (item, "menu-deactivated", 
                                   G_CALLBACK (panel_menu_deactivated), panel);
         
@@ -702,64 +693,72 @@ panel_create_item (Panel *panel, const char *name, const char *id)
         
         g_signal_connect (item, "customize-items", 
                           G_CALLBACK (panel_app_customize_items), NULL);
-        
-        g_signal_connect (item, "new-panel", 
-                          G_CALLBACK (panel_app_add_panel), NULL);
-        
-        g_signal_connect_swapped (item, "remove-panel", 
-                                  G_CALLBACK (panel_app_remove_panel), panel);
-        
-        g_signal_connect (item, "about-panel", 
-                          G_CALLBACK (panel_app_about), NULL);
     }
 
     return item;
+}
+
+static void
+panel_insert_widget (Panel *panel, GtkWidget *item, int position)
+{
+    PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
+
+    gtk_widget_show (item);
+
+    if (position == -1)
+        xfce_itembar_append (XFCE_ITEMBAR (priv->itembar), item);
+    else
+        xfce_itembar_insert (XFCE_ITEMBAR (priv->itembar), item, position);
+
+    xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item,
+            xfce_panel_item_get_expand (XFCE_PANEL_ITEM (item)));
+
+    if (xfce_itembar_event_window_is_raised (XFCE_ITEMBAR (priv->itembar)))
+        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (item), FALSE);
+
+    g_signal_connect (item, "destroy", G_CALLBACK (panel_app_queue_save),
+                      NULL);
 }
 
 void
 panel_add_item_with_id (Panel * panel, const char *name,
                         const char *id)
 {
-    PanelPrivate *priv;
     GtkWidget *item;
-
-    priv = PANEL_GET_PRIVATE (panel);
 
     if ((item = panel_create_item (panel, name, id)) != NULL)
     {
-        gtk_widget_show (item);
-        xfce_itembar_append (XFCE_ITEMBAR (priv->itembar), item);
-        xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item,
-                xfce_panel_item_get_expand (XFCE_PANEL_ITEM (item)));
-
-        if (xfce_itembar_event_window_is_raised (XFCE_ITEMBAR (priv->itembar)))
-            xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (item), FALSE);
-
-        g_signal_connect (item, "destroy", G_CALLBACK (panel_app_queue_save),
-                          NULL);
+        panel_insert_widget (panel, item, -1);
     }
+}
+
+static char *
+_panel_get_new_id (void)
+{
+    static int counter = 0;
+    static char id[30];
+    
+    /* unique number: pseudo-random time() + counter */
+    g_snprintf (id, 30, "%ld%d", time (NULL), counter++);
+    
+    return id;
+}
+
+void
+panel_add_item (Panel * panel, const char *name)
+{
+    panel_add_item_with_id (panel, name, _panel_get_new_id ());
 }
 
 static void 
 panel_insert_item (Panel *panel, const char *name, int position)
 {
     GtkWidget *item;
-    char *id = g_strdup_printf ("%ld", time (NULL));
 
-    if ((item = panel_create_item (panel, name, id)) != NULL)
+    if ((item = panel_create_item (panel, name, _panel_get_new_id ())) != NULL)
     {
-        gtk_widget_show (item);
-
-        xfce_itembar_insert (XFCE_ITEMBAR (GTK_BIN (panel)->child), 
-                             item, position);
-        xfce_itembar_set_child_expand (XFCE_ITEMBAR (GTK_BIN (panel)->child), 
-                item, xfce_panel_item_get_expand (XFCE_PANEL_ITEM (item)));
-
-        g_signal_connect (item, "destroy", G_CALLBACK (panel_app_queue_save),
-                          NULL);
+        panel_insert_widget (panel, item, position);
     }
-
-    g_free (id);
 }
 
 /* configuration */

@@ -114,12 +114,6 @@ static void xfce_internal_panel_plugin_customize_panel (XfcePanelPlugin *
 static void xfce_internal_panel_plugin_customize_items (XfcePanelPlugin *
                                                         plugin);
 
-static void xfce_internal_panel_plugin_new_panel (XfcePanelPlugin * plugin);
-
-static void xfce_internal_panel_plugin_remove_panel (XfcePanelPlugin * plugin);
-
-static void xfce_internal_panel_plugin_about_panel (XfcePanelPlugin * plugin);
-
 
 /* properties */
 static void xfce_internal_panel_plugin_set_name (XfcePanelPlugin * plugin,
@@ -189,9 +183,6 @@ xfce_internal_panel_plugin_init_plugin_interface (gpointer g_iface,
     iface->set_expand = xfce_internal_panel_plugin_set_expand;
     iface->customize_panel = xfce_internal_panel_plugin_customize_panel;
     iface->customize_items = xfce_internal_panel_plugin_customize_items;
-    iface->new_panel = xfce_internal_panel_plugin_new_panel;
-    iface->remove_panel = xfce_internal_panel_plugin_remove_panel;
-    iface->about_panel = xfce_internal_panel_plugin_about_panel;
 }
 
 static void
@@ -523,24 +514,6 @@ static void
 xfce_internal_panel_plugin_customize_items (XfcePanelPlugin * plugin)
 {
     xfce_panel_item_customize_items (XFCE_PANEL_ITEM (plugin));
-}
-
-static void
-xfce_internal_panel_plugin_new_panel (XfcePanelPlugin * plugin)
-{
-    xfce_panel_item_new_panel (XFCE_PANEL_ITEM (plugin));
-}
-
-static void
-xfce_internal_panel_plugin_remove_panel (XfcePanelPlugin * plugin)
-{
-    xfce_panel_item_remove_panel (XFCE_PANEL_ITEM (plugin));
-}
-
-static void
-xfce_internal_panel_plugin_about_panel (XfcePanelPlugin * plugin)
-{
-    xfce_panel_item_about_panel (XFCE_PANEL_ITEM (plugin));
 }
 
 

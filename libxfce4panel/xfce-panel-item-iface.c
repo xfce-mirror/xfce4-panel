@@ -31,9 +31,6 @@ enum
     MENU_DEACTIVATED,
     CUSTOMIZE_PANEL,
     CUSTOMIZE_ITEMS,
-    NEW_PANEL,
-    REMOVE_PANEL,
-    ABOUT_PANEL,
     LAST_SIGNAL
 };
 
@@ -109,54 +106,6 @@ xfce_panel_item_base_init (gpointer g_class)
          **/
         xfce_panel_item_signals [CUSTOMIZE_ITEMS] =
             g_signal_newv ("customize-items",
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
-                                 G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID, 
-                           G_TYPE_NONE, 0, NULL);
-
-        /**
-         * XfcePanelItem::new-panel
-         * @item   : #XfcePanelItem
-         *
-         * The signal is emitted when a plugin requests a new panel to be
-         * created.
-         **/
-        xfce_panel_item_signals [NEW_PANEL] =
-            g_signal_newv ("new-panel",
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
-                                 G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID, 
-                           G_TYPE_NONE, 0, NULL);
-
-        /**
-         * XfcePanelItem::remove-panel
-         * @item   : #XfcePanelItem
-         *
-         * The signal is emitted when a plugin requests the panel to be
-         * removed.
-         **/
-        xfce_panel_item_signals [REMOVE_PANEL] =
-            g_signal_newv ("remove-panel",
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
-                                 G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID, 
-                           G_TYPE_NONE, 0, NULL);
-
-        /**
-         * XfcePanelItem::about-panel
-         * @item   : #XfcePanelItem
-         *
-         * The signal is emitted when a plugin requests the panel to show its
-         * about dialog.
-         **/
-        xfce_panel_item_signals [ABOUT_PANEL] =
-            g_signal_newv ("about-panel",
                            XFCE_TYPE_PANEL_ITEM,
                            G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
                                  G_SIGNAL_NO_HOOKS,
@@ -257,51 +206,6 @@ xfce_panel_item_customize_items (XfcePanelItem *item)
     g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (item, xfce_panel_item_signals[CUSTOMIZE_ITEMS], 0, NULL);
-}
-
-/**
- * xfce_panel_item_new_panel
- * @item   : #XfcePanelItem
- *
- * Emits the "new-panel" signal on the item. Should only be called by
- * item implementations.
- **/
-void
-xfce_panel_item_new_panel (XfcePanelItem *item)
-{
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
-
-    g_signal_emit (item, xfce_panel_item_signals[NEW_PANEL], 0, NULL);
-}
-
-/**
- * xfce_panel_item_remove_panel
- * @item   : #XfcePanelItem
- *
- * Emits the "remove-panel" signal on the item. Should only be called by
- * item implementations.
- **/
-void
-xfce_panel_item_remove_panel (XfcePanelItem *item)
-{
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
-
-    g_signal_emit (item, xfce_panel_item_signals[REMOVE_PANEL], 0, NULL);
-}
-
-/**
- * xfce_panel_item_about_panel
- * @item   : #XfcePanelItem
- *
- * Emits the "about-panel" signal on the item. Should only be called by
- * item implementations.
- **/
-void
-xfce_panel_item_about_panel (XfcePanelItem *item)
-{
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
-
-    g_signal_emit (item, xfce_panel_item_signals[ABOUT_PANEL], 0, NULL);
 }
 
 /* properties */

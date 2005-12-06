@@ -648,42 +648,6 @@ xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin)
     return XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->customize_items (plugin);
 }
 
-/**
- * xfce_panel_plugin_new_panel
- * @plugin : an #XfcePanelPlugin
- *
- * Create a new panel.
- **/
-void 
-xfce_panel_plugin_new_panel (XfcePanelPlugin *plugin)
-{
-    return XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->new_panel (plugin);
-}
-
-/**
- * xfce_panel_plugin_remove_panel
- * @plugin : an #XfcePanelPlugin
- *
- * Remove this panel.
- **/
-void 
-xfce_panel_plugin_remove_panel (XfcePanelPlugin *plugin)
-{
-    return XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->remove_panel (plugin);
-}
-
-/**
- * xfce_panel_plugin_about_panel
- * @plugin : an #XfcePanelPlugin
- *
- * Show panel about dialog.
- **/
-void 
-xfce_panel_plugin_about_panel (XfcePanelPlugin *plugin)
-{
-    return XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->about_panel (plugin);
-}
-
 /* menu */
 
 static void
@@ -733,7 +697,6 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     GtkWidget *menu, *mi, *img;
     int insert_position;
     int configure_position;
-    char text[50];
     
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
@@ -756,9 +719,7 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     
     /* configure, hide by default */
     
-    g_snprintf (text, 50, _("%s Properties"), 
-                xfce_panel_plugin_get_display_name (plugin));
-    mi = gtk_image_menu_item_new_with_label (text);
+    mi = gtk_image_menu_item_new_with_label (_("Properties"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
     img = gtk_image_new_from_stock (GTK_STOCK_PROPERTIES, GTK_ICON_SIZE_MENU);
@@ -791,10 +752,6 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-insert-position", 
                        GINT_TO_POINTER (insert_position));
 
-    mi = gtk_separator_menu_item_new();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
 #if 0
     mi = gtk_image_menu_item_new_with_label (_("Remove"));
     gtk_widget_show (mi);
@@ -808,15 +765,12 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                               G_CALLBACK (xfce_panel_plugin_remove_confirm), 
                               plugin);
 #endif
-    
+
     /* panel section */
-#if 0
-    mi = gtk_menu_item_new_with_label (_("Panel"));
-    gtk_widget_set_sensitive (mi, FALSE);
+    mi = gtk_separator_menu_item_new();
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-#endif
-    
+
     mi = gtk_image_menu_item_new_with_label (_("Customize Panel"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -828,54 +782,6 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     g_signal_connect_swapped (mi, "activate", 
                               G_CALLBACK (xfce_panel_plugin_customize_items), 
                               plugin);
-
-#if 0
-    mi = gtk_separator_menu_item_new ();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    g_snprintf (text, 50, _("Manage Panels"));
-    mi = gtk_image_menu_item_new_with_label (text);
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    img = gtk_image_new_from_stock (GTK_STOCK_PROPERTIES, GTK_ICON_SIZE_MENU);
-    gtk_widget_show (img);
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_customize_panel), 
-                              plugin);
-
-    g_snprintf (text, 50, _("Remove %s"), _("Panel"));
-    mi = gtk_image_menu_item_new_with_label (text);
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
-    gtk_widget_show (img);
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_remove_panel), 
-                              plugin);
-
-    mi = gtk_separator_menu_item_new ();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-    mi = gtk_image_menu_item_new_with_label (_("New Panel"));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
-    gtk_widget_show (img);
-    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_new_panel), 
-                              plugin);
-#endif
 
     /* deactivation */
     if (deactivate_cb)

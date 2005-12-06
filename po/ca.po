@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-28 19:08+0900\n"
+"POT-Creation-Date: 2005-12-06 21:42+0100\n"
 "PO-Revision-Date: 2005-10-29 17:06+0900\n"
 "Last-Translator: Pau Rullan Ferragut <paurullan@bulma.net>\n"
 "Language-Team: Catalan <ca@dodds.net>\n"
@@ -43,60 +43,43 @@ msgid ""
 msgstr "element de   quadre i."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:759
-#, fuzzy, c-format
-msgid "%s Properties"
-msgstr "Propietats de %s"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:722
+#: ../plugins/launcher/launcher-dialog.c:1273
+#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
+#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
+#: ../plugins/clock/clock.c:401
+#, fuzzy
+msgid "Properties"
+msgstr "Propietats"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:739
 #, fuzzy
 msgid "About"
 msgstr "Quant a"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:799
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:756
 #, fuzzy
 msgid "Remove"
 msgstr "Suprimeix"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:814
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
-#, fuzzy
-msgid "Panel"
-msgstr "Plafó"
-
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:820 ../panel/panel.c:534
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:774 ../panel/panel.c:536
 #, fuzzy
 msgid "Customize Panel"
 msgstr "Personalitza Plafó"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
-#, fuzzy
-msgid "Manage Panels"
-msgstr "Gestiona Quadres"
-
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:850
-#, fuzzy, c-format
-msgid "Remove %s"
-msgstr "Suprimeix"
-
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:867
-#: ../panel/panel-settings.c:412
-#, fuzzy
-msgid "New Panel"
-msgstr "Nou Plafó"
-
-#: ../panel/panel.c:549 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:551 ../plugins/actions/actions.c:332
 #, fuzzy
 msgid "Quit"
 msgstr "Surt"
 
-#: ../panel/panel.c:559
+#: ../panel/panel.c:561
 #, fuzzy
 msgid "Restart"
 msgstr "Reinicia"
 
-#: ../panel/panel.c:573
+#: ../panel/panel.c:575
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "Quant a   Plafó"
@@ -190,6 +173,11 @@ msgstr "Plafó"
 #, fuzzy
 msgid "Select Panel"
 msgstr "Seleccioneu Plafó"
+
+#: ../panel/panel-settings.c:412
+#, fuzzy
+msgid "New Panel"
+msgstr "Nou Plafó"
 
 #: ../panel/panel-settings.c:419
 #, fuzzy
@@ -481,15 +469,6 @@ msgid ""
 msgstr ""
 "primer element po   llista és on   quadre Addicionals elements po a menú."
 
-#: ../plugins/launcher/launcher-dialog.c:1273
-#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
-#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
-#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
-#: ../plugins/clock/clock.c:401
-#, fuzzy
-msgid "Properties"
-msgstr "Propietats"
-
 #: ../plugins/launcher/launcher-dialog.c:1282
 #, fuzzy
 msgid "Program Launcher"
@@ -728,6 +707,22 @@ msgstr "Mostra de all"
 #, fuzzy
 msgid "What time is it?"
 msgstr "Què time és?"
+
+#, fuzzy
+#~ msgid "%s Properties"
+#~ msgstr "Propietats de %s"
+
+#, fuzzy
+#~ msgid "Panel"
+#~ msgstr "Plafó"
+
+#, fuzzy
+#~ msgid "Manage Panels"
+#~ msgstr "Gestiona Quadres"
+
+#, fuzzy
+#~ msgid "Remove %s"
+#~ msgstr "Suprimeix"
 
 #, fuzzy
 #~ msgid "Are you sure you want to exit?"
