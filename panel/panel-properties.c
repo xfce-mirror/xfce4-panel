@@ -39,6 +39,8 @@
 
 #define HIDDEN_SIZE	3
 #define OPAQUE          0xffffffff
+#define HIDE_TIMEOUT    350
+#define UNHIDE_TIMEOUT  200
 
 
 /* automatic (re)sizing and moving */
@@ -542,8 +544,9 @@ panel_enter (Panel *panel, GdkEventCrossing * event)
         }
 
         if (priv->hidden)
-            priv->unhide_timeout = 
-                g_timeout_add (200, (GSourceFunc)_unhide_timeout, panel);
+            priv->unhide_timeout = g_timeout_add (UNHIDE_TIMEOUT, 
+                                                  (GSourceFunc)_unhide_timeout,
+                                                  panel);
     }
 }
 
@@ -569,8 +572,9 @@ panel_leave (Panel *panel, GdkEventCrossing * event)
         }
 
         if (!priv->hidden)
-            priv->hide_timeout = 
-                g_timeout_add (500, (GSourceFunc)_hide_timeout, panel);
+            priv->hide_timeout = g_timeout_add (HIDE_TIMEOUT, 
+                                                (GSourceFunc)_hide_timeout, 
+                                                panel);
     }
 }
 
