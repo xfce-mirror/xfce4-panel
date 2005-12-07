@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.2.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-03-12 22:33+0100\n"
+"POT-Creation-Date: 2005-12-07 12:32+0100\n"
 "PO-Revision-Date: 2005-10-21 08:19+0900\n"
 "Last-Translator: Alex Dupre <ale@FreeBSD.org>\n"
 "Language-Team: GUFI <traduzioni@gufi.org>\n"
@@ -20,12 +20,11 @@ msgstr ""
 msgid "Select file"
 msgstr "Seleziona il file"
 
-#: panel/settings.c:181
+#: panel/settings.c:187
 msgid "No data was found. The panel will be empty."
 msgstr "Nessun dato e' stato trovate. Il pannello deve essere vuoto."
 
-#: panel/controls_dialog.c:89
-#: panel/item_dialog.c:1178
+#: panel/controls_dialog.c:89 panel/item_dialog.c:1178
 msgid "Position:"
 msgstr "Posizione:"
 
@@ -33,8 +32,7 @@ msgstr "Posizione:"
 msgid "Item properties"
 msgstr "Proprietà dell'oggetto"
 
-#: panel/controls_dialog.c:209
-#: panel/controls.c:711
+#: panel/controls_dialog.c:209 panel/controls.c:711
 msgid "Removing the item will also remove its popup menu."
 msgstr "La rimozione dell'oggetto rimuoverà anche il suo menu a scomparsa."
 
@@ -79,13 +77,11 @@ msgid "Change menu item"
 msgstr "Cambia oggetto del menu"
 
 #. add buttons
-#: panel/item_dialog.c:1221
-#: panel/controls.c:748
+#: panel/item_dialog.c:1221 panel/controls.c:748
 msgid "_Remove"
 msgstr "_Rimuovi"
 
-#: panel/item_dialog.c:1233
-#: panel/item.c:718
+#: panel/item_dialog.c:1233 panel/item.c:718
 msgid "Launcher"
 msgstr "Launcher"
 
@@ -134,13 +130,11 @@ msgstr "%s: Avviato con successo con la gestione della sessione"
 msgid "Could not create panel item \"%s\"."
 msgstr "L'elemento \"%s\" del pannelo non puo essere creato."
 
-#: panel/controls.c:743
-#: panel/panel.c:647
+#: panel/controls.c:743 panel/panel.c:647
 msgid "_Properties..."
 msgstr "_Proprietà..."
 
-#: panel/controls.c:757
-#: panel/panel.c:637
+#: panel/controls.c:757 panel/panel.c:637
 msgid "Add _new item"
 msgstr "Aggiungi un _nuovo oggetto"
 
@@ -148,9 +142,7 @@ msgstr "Aggiungi un _nuovo oggetto"
 msgid "This item has no configuration options"
 msgstr "Questo oggetto non ha opzioni di configurazione"
 
-#: panel/panel.c:628
-#: panel/panel.c:1055
-#: settings/xfce_settings_plugin.c:86
+#: panel/panel.c:628 panel/panel.c:1055 settings/xfce_settings_plugin.c:86
 #: settings/xfce_settings_dialog.c:450
 msgid "Xfce Panel"
 msgstr "Pannello Xfce"
@@ -453,4 +445,3 @@ msgstr "Intervallo (sec):"
 #: plugins/mailcheck/mailcheck.c:1016
 msgid "Mail checker"
 msgstr "Controllo posta"
-

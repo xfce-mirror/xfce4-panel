@@ -47,11 +47,17 @@
 
 #define XML_FORMAT_VERSION  2
 
+#define WRITE_TIMEOUT   10000
+
 G_MODULE_EXPORT /* EXPORT:disable_user_config */
 gboolean disable_user_config = FALSE;
 
 G_MODULE_EXPORT /* EXPORT:xmlconfig */
 xmlDocPtr xmlconfig = NULL;
+
+/* delayed saving */
+static int final_write_timeout = 0;
+
 
 /*  Configuration
  *  -------------
@@ -202,6 +208,27 @@ get_panel_config (void)
     xmlconfig = NULL;
 }
 
+static gboolean
+write_timeout (void)
+{
+    final_write_timeout = 0;
+    
+    write_final_panel_config ();
+    
+    return FALSE;
+}
+
+static void
+queue_final_write (void)
+{
+    if (final_write_timeout == 0)
+    {
+        final_write_timeout = 
+            g_timeout_add (WRITE_TIMEOUT, 
+                           (GSourceFunc)write_timeout, NULL);
+    }
+}
+
 G_MODULE_EXPORT /* EXPORT:write_panel_config */
 void
 write_panel_config (void)
@@ -213,7 +240,7 @@ write_panel_config (void)
     if (disable_user_config)
 	return;
 
-    xfcerc = get_save_file ("contents.xml.active");
+    xfcerc = get_save_file ("contents.xml");
     
     if (!xfcerc)
     {
@@ -221,7 +248,7 @@ write_panel_config (void)
         return;
     }
     
-    tmprc = g_strconcat (xfcerc, ".tmp", NULL);
+    tmprc = g_strconcat (xfcerc, ".active", NULL);
 
     xmlconfig = xmlNewDoc ("1.0");
     xmlconfig->children = xmlNewDocRawNode (xmlconfig, NULL, ROOT, NULL);
@@ -242,23 +269,8 @@ write_panel_config (void)
 	goto out;
     }
 
-    if (g_file_test (xfcerc, G_FILE_TEST_EXISTS) && unlink (xfcerc))
-    {
-	g_critical ("Could not remove old contents.xml");
-	goto out;
-    }
-
-    if (link (tmprc, xfcerc))
-    {
-	g_critical ("Could not link new contents.xml");
-	goto out;
-    }
-
-    if (unlink (tmprc))
-    {
-	g_warning ("Could not remove temporary file contents.xml.tmp");
-    }
-
+    queue_final_write ();
+    
   out:
     g_free (tmprc);
     g_free (xfcerc);
