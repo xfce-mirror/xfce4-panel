@@ -324,6 +324,8 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    
     g_signal_connect (dlg, "response", G_CALLBACK (tasklist_dialog_response),
                       tasklist);
 

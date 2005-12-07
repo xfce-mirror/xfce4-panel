@@ -1277,6 +1277,8 @@ launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    gtk_window_set_position (GTK_WINDOW (ld->dlg), GTK_WIN_POS_CENTER);
+    
     gtk_container_set_border_width (GTK_CONTAINER (ld->dlg), 2);
     
     header = xfce_create_header (NULL, _("Program Launcher"));

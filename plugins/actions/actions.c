@@ -299,6 +299,8 @@ actions_properties_dialog (XfcePanelPlugin *plugin)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    
     g_signal_connect (dlg, "response", G_CALLBACK (actions_dialog_response),
                       plugin);
 

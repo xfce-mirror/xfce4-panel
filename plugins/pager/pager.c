@@ -279,6 +279,8 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    
     g_signal_connect (dlg, "response", G_CALLBACK (pager_dialog_response),
                       pager);
 
