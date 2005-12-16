@@ -52,16 +52,13 @@ struct _XfceItembarClass
     void (*orientation_changed)   (XfceItembar * itembar,
                                    GtkOrientation orientation);
 
-    void (*icon_size_changed)     (XfceItembar * itembar,
-                                   int size);
-
-    void (*toolbar_style_changed) (XfceItembar * itembar,
-                                   GtkToolbarStyle);
+    void (*contents_changed)      (XfceItembar * itembar);
 
     /* Padding for future expansion */
     void (*_xfce_reserved1)       (void);
     void (*_xfce_reserved2)       (void);
     void (*_xfce_reserved3)       (void);
+    void (*_xfce_reserved4)       (void);
 };
 
 

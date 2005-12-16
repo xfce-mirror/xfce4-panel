@@ -45,6 +45,7 @@
 enum
 {
     ORIENTATION_CHANGED,
+    CONTENTS_CHANGED,
     LAST_SIGNAL
 };
 
@@ -249,6 +250,23 @@ xfce_itembar_class_init (XfceItembarClass * klass)
                       NULL, NULL,
                       g_cclosure_marshal_VOID__ENUM,
                       G_TYPE_NONE, 1, GTK_TYPE_ORIENTATION);
+    
+    /**
+     * XfceItembar::contents-changed:
+     * @itembar     : the object which emitted the signal
+     *
+     * Emitted when the contents of the itembar change, either by adding
+     * a child, removing a child, or reordering a child.
+     **/
+    itembar_signals[CONTENTS_CHANGED] =
+        g_signal_new ("contents-changed",
+                      G_OBJECT_CLASS_TYPE (klass),
+                      G_SIGNAL_RUN_FIRST,
+                      G_STRUCT_OFFSET (XfceItembarClass, 
+                                       contents_changed),
+                      NULL, NULL,
+                      g_cclosure_marshal_VOID__VOID,
+                      G_TYPE_NONE, 0);
     
     /* properties */
 
@@ -846,6 +864,9 @@ xfce_itembar_remove (GtkContainer * container, GtkWidget *child)
             if (was_visible)
                 gtk_widget_queue_resize (GTK_WIDGET (container));
             
+            g_signal_emit (G_OBJECT (container), 
+                           itembar_signals [CONTENTS_CHANGED], 0);
+
             break;
         }
     }
@@ -1062,6 +1083,8 @@ xfce_itembar_insert (XfceItembar * itembar, GtkWidget * item, int position)
     gtk_widget_set_parent (GTK_WIDGET (item), GTK_WIDGET (itembar));
 
     gtk_widget_queue_resize (GTK_WIDGET (itembar));
+    
+    g_signal_emit (G_OBJECT (itembar), itembar_signals [CONTENTS_CHANGED], 0);
 }
 
 /**
@@ -1121,11 +1144,14 @@ xfce_itembar_reorder_child (XfceItembar * itembar, GtkWidget * item,
 
             priv->children = g_list_insert (priv->children, child, position);
 
+            gtk_widget_queue_resize (GTK_WIDGET (itembar));
+            
+            g_signal_emit (G_OBJECT (itembar), 
+                           itembar_signals [CONTENTS_CHANGED], 0);
+
             break;
         }
     }
-
-    gtk_widget_queue_resize (GTK_WIDGET (itembar));
 }
 
 /**

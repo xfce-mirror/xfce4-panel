@@ -36,6 +36,7 @@
 #include "panel-config.h"
 #include "panel-properties.h"
 #include "panel-settings.h"
+#include "panel-manager.h"
 #include "panel.h"
 
 #ifndef _
@@ -518,13 +519,13 @@ panel_app_queue_save (void)
 void 
 panel_app_customize (void)
 {
-    panel_settings_dialog (panel_app.panel_list, FALSE);
+    panel_manager_dialog (panel_app.panel_list, FALSE);
 }
 
 void 
 panel_app_customize_items (void)
 {
-    panel_settings_dialog (panel_app.panel_list, TRUE);
+    panel_manager_dialog (panel_app.panel_list, TRUE);
 }
 
 void 
