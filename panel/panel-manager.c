@@ -1511,6 +1511,23 @@ add_items_dialog (PanelManagerDialog *pmd)
 
 /* current items */
 static void
+remove_item (GtkWidget *b, PanelManagerDialog *pmd)
+{
+    GtkTreeSelection *sel;
+    GtkTreeModel *model;
+    GtkTreeIter iter;
+    XfcePanelItem *item;
+    
+    sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (pmd->panel_tree));
+    gtk_tree_selection_get_selected (sel, &model, &iter);
+
+    gtk_tree_model_get (model, &iter, 1, &item, -1);
+
+    if (item)
+        xfce_panel_item_remove (item);
+}
+
+static void
 move_item (GtkWidget *button, PanelManagerDialog *pmd)
 {
     GtkTreeSelection *sel;
@@ -1764,6 +1781,8 @@ create_items_tab (PanelManagerDialog *pmd)
     img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_BUTTON);
     gtk_widget_show (img);
     gtk_container_add (GTK_CONTAINER (pmd->rm_item), img);
+    
+    g_signal_connect (pmd->rm_item, "clicked", G_CALLBACK (remove_item), pmd);
     
     pmd->add_new_item = gtk_button_new ();
     gtk_widget_show (pmd->add_new_item);
