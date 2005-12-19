@@ -759,6 +759,7 @@ add_items_dialog (GPtrArray *panels)
         gtk_dialog_new_with_buttons (_("Xfce Panel"), NULL,
                                      GTK_DIALOG_NO_SEPARATOR,
                                      GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+                                     GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
                                      GTK_STOCK_ADD, GTK_RESPONSE_OK,
                                      NULL);
     
