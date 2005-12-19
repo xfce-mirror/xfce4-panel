@@ -439,6 +439,11 @@ _panel_drag_begin (GtkWidget *widget, GdkDragContext *drag_context,
     if (priv->drag_widget)
     {
         plugin = priv->drag_widget;
+
+        /* allow menu to close, in order to not mess up the snapshot of the
+         * plugin */
+        while (gtk_events_pending ())
+            gtk_main_iteration ();
     }
     else
     {
@@ -723,13 +728,16 @@ _item_start_move (GtkWidget *item, Panel *panel)
         
         priv = PANEL_GET_PRIVATE (p);
 
-        panel_set_items_sensitive (p, FALSE);
+        if (!priv->edit_mode)
+        {
+            panel_set_items_sensitive (p, FALSE);
 
-        panel_dnd_set_dest (priv->itembar);
-        panel_dnd_set_widget_source (priv->itembar);
-        xfce_itembar_lower_event_window (XFCE_ITEMBAR (priv->itembar));
+            panel_dnd_set_dest (priv->itembar);
+            panel_dnd_set_widget_source (priv->itembar);
+            xfce_itembar_raise_event_window (XFCE_ITEMBAR (priv->itembar));
 
-        panel_block_autohide (p);
+            panel_block_autohide (p);
+        }
     }
 
     priv = PANEL_GET_PRIVATE (panel);
