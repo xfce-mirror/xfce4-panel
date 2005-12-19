@@ -35,8 +35,6 @@
 #include "panel-item-manager.h"
 #include "panel-config.h"
 #include "panel-properties.h"
-#include "panel-settings.h"
-#include "panel-manager.h"
 #include "panel-dialogs.h"
 #include "panel.h"
 
@@ -455,10 +453,6 @@ panel_app_run (int argc, char **argv)
         panel_app.session_client = NULL;
     }   
     
-    /* gtk_thread_init */
-    if (!g_thread_supported ()) 
-        g_thread_init (NULL);
-
     /* screen layout and geometry */
     create_monitor_list ();
     

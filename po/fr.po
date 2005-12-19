@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-06 21:42+0100\n"
+"POT-Creation-Date: 2005-12-19 23:05+0100\n"
 "PO-Revision-Date: 2005-11-04 17:27+0900\n"
 "Last-Translator: Collet Etienne <xanaxlnx@gmail.com>\n"
 "Language-Team: French <traduc@traduc.org>\n"
@@ -26,10 +26,10 @@ msgstr "L'élément a été inopinément enlevé : \"%s\"."
 msgid "Remove \"%s\"?"
 msgstr "Supprimer \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:597
-#: ../panel/panel-app.c:629 ../panel/panel-app.c:662
-#: ../panel/panel-settings.c:1613 ../plugins/launcher/launcher.c:314
-#: ../plugins/launcher/launcher.c:364
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:593
+#: ../panel/panel-app.c:625 ../panel/panel-app.c:658
+#: ../panel/panel-dialogs.c:574 ../panel/panel-dialogs.c:1559
+#: ../plugins/launcher/launcher.c:314 ../plugins/launcher/launcher.c:364
 msgid "Xfce Panel"
 msgstr "Panneau Xfce"
 
@@ -39,7 +39,7 @@ msgid ""
 msgstr "L'élément sera enlevé du panneau et sa configuration sera perdue."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:722
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:734
 #: ../plugins/launcher/launcher-dialog.c:1273
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
@@ -49,27 +49,42 @@ msgid "Properties"
 msgstr "Propriétés"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:739
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:751
 msgid "About"
 msgstr "A propos"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:756
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:764
+#, fuzzy
+msgid "Move"
+msgstr "Supprimer"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:786
 msgid "Remove"
 msgstr "Supprimer"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:774 ../panel/panel.c:536
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:803
+#, fuzzy
+msgid "Add New Item"
+msgstr "Ajouter un élément"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:815 ../panel/panel.c:569
 msgid "Customize Panel"
 msgstr "Configurer Le Pannneau"
 
-#: ../panel/panel.c:551 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:580 ../panel/panel-dialogs.c:593
+msgid "Add Items"
+msgstr ""
+
+#: ../panel/panel.c:595 ../plugins/actions/actions.c:334
 msgid "Quit"
 msgstr "Quitter"
 
-#: ../panel/panel.c:561
+#: ../panel/panel.c:605
 msgid "Restart"
 msgstr "Redémarrer"
 
-#: ../panel/panel.c:575
+#: ../panel/panel.c:619
 msgid "About the Xfce Panel"
 msgstr "A-propos du Panneau Xfce"
 
@@ -78,26 +93,26 @@ msgstr "A-propos du Panneau Xfce"
 msgid "Could not open \"%s\" module"
 msgstr "Impossible de créer l'élément du panneau \"%s\"."
 
-#: ../panel/panel-app.c:180 ../panel/panel-app.c:599
+#: ../panel/panel-app.c:180 ../panel/panel-app.c:595
 msgid "Exit Xfce Panel?"
 msgstr "Quitter le Panneau Xfce"
 
-#: ../panel/panel-app.c:600
+#: ../panel/panel-app.c:596
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "Vous ne pouvez pas enlever le dernier panneau. voulez-vous sortir du "
 "programme?"
 
-#: ../panel/panel-app.c:627
+#: ../panel/panel-app.c:623
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Supprimer le Panneau \"%d\"?"
 
-#: ../panel/panel-app.c:631
+#: ../panel/panel-app.c:627
 msgid "The selected panel and all its items will be removed."
 msgstr "Le panneau choisi et tous ses élément seront suprimé."
 
-#: ../panel/panel-app.c:670
+#: ../panel/panel-app.c:666
 msgid "Developer"
 msgstr "Développeur"
 
@@ -157,124 +172,7 @@ msgstr ""
 " -a, --add       Ajouter un nouveau élément\n"
 "\n"
 
-#: ../panel/panel-settings.c:331 ../panel/panel-settings.c:367
-#: ../panel/panel-settings.c:399
-#, c-format
-msgid "Panel %d"
-msgstr "Panneau %d"
-
-#: ../panel/panel-settings.c:383
-msgid "Select Panel"
-msgstr "Sélectionner le panneau"
-
-#: ../panel/panel-settings.c:412
-msgid "New Panel"
-msgstr "Nouveau Panneau"
-
-#: ../panel/panel-settings.c:419
-msgid "Remove Panel"
-msgstr "Supprimer le Panneau \"%d\""
-
-#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
-msgid "Left"
-msgstr "à Gauche"
-
-#: ../panel/panel-settings.c:710 ../panel/panel-settings.c:918
-msgid "Right"
-msgstr "à Droite"
-
-#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
-msgid "Top"
-msgstr "en Haut"
-
-#: ../panel/panel-settings.c:717 ../panel/panel-settings.c:925
-msgid "Bottom"
-msgstr "en Bas"
-
-#. floating?
-#: ../panel/panel-settings.c:749
-msgid "Panel Type"
-msgstr "Type de panneau"
-
-#: ../panel/panel-settings.c:758
-msgid "Fixed Position"
-msgstr "Position fixe"
-
-#: ../panel/panel-settings.c:760
-msgid "Freely Moveable"
-msgstr "Position mobile"
-
-#. position
-#: ../panel/panel-settings.c:766
-msgid "Position"
-msgstr "Position"
-
-#: ../panel/panel-settings.c:850
-msgid "_Full Width"
-msgstr "Pleine Largeur"
-
-#: ../panel/panel-settings.c:859
-msgid "Auto_hide"
-msgstr "Masquer automatiquement"
-
-#: ../panel/panel-settings.c:877
-msgid "Orientation:"
-msgstr "Orientation du panneau :"
-
-#: ../panel/panel-settings.c:889
-msgid "Horizontal"
-msgstr "Horizontal"
-
-#: ../panel/panel-settings.c:891
-msgid "Vertical"
-msgstr "Vertical"
-
-#: ../panel/panel-settings.c:900
-msgid "Handle Position:"
-msgstr "Position Des Poignées:"
-
-#: ../panel/panel-settings.c:912
-msgid "At both sides"
-msgstr "Sur les deux côtés"
-
-#: ../panel/panel-settings.c:942
-msgid "Panel Properties"
-msgstr "Propriétés-du Panneau"
-
-#: ../panel/panel-settings.c:977
-msgid "Monitor"
-msgstr "Moniteur"
-
-#. size
-#: ../panel/panel-settings.c:1059
-msgid "Size"
-msgstr "Taille"
-
-#: ../panel/panel-settings.c:1070
-msgid "Small"
-msgstr "Petit"
-
-#: ../panel/panel-settings.c:1087
-msgid "Large"
-msgstr "Grand"
-
-#: ../panel/panel-settings.c:1101
-msgid "Transparency"
-msgstr "Transparence"
-
-#: ../panel/panel-settings.c:1109
-msgid "None"
-msgstr "Aucune"
-
-#: ../panel/panel-settings.c:1126
-msgid "Full"
-msgstr "Total"
-
-#: ../panel/panel-settings.c:1442
-msgid "Manage Panel Items"
-msgstr "Contrôle Des Éléments Du Panneau"
-
-#: ../panel/panel-settings.c:1463
+#: ../panel/panel-dialogs.c:608
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -282,19 +180,120 @@ msgstr ""
 "Ajouter ou enlever des éléments de la liste d'un panneau ou les déplacez à "
 "un nouvel endroit."
 
-#: ../panel/panel-settings.c:1481
+#: ../panel/panel-dialogs.c:621
 msgid "Avalaible Items"
 msgstr "Éléments ajoutable"
 
-#: ../panel/panel-settings.c:1494
-msgid "Add To Selected Panel"
-msgstr "Ajoutez Au Panneau Sélectionné"
+#: ../panel/panel-dialogs.c:744 ../plugins/clock/clock.c:422
+msgid "Appearance"
+msgstr "Apparence"
 
-#: ../panel/panel-settings.c:1662
-msgid "Panel Preferences"
-msgstr "Préférences des panneaux"
+#. size
+#: ../panel/panel-dialogs.c:756
+msgid "Size"
+msgstr "Taille"
 
-#: ../panel/panel-settings.c:1664
+#: ../panel/panel-dialogs.c:767
+msgid "Small"
+msgstr "Petit"
+
+#: ../panel/panel-dialogs.c:781
+msgid "Large"
+msgstr "Grand"
+
+#: ../panel/panel-dialogs.c:798
+msgid "Transparency"
+msgstr "Transparence"
+
+#: ../panel/panel-dialogs.c:806
+msgid "None"
+msgstr "Aucune"
+
+#: ../panel/panel-dialogs.c:820
+msgid "Full"
+msgstr "Total"
+
+#: ../panel/panel-dialogs.c:1022 ../panel/panel-dialogs.c:1245
+msgid "Left"
+msgstr "à Gauche"
+
+#: ../panel/panel-dialogs.c:1024 ../panel/panel-dialogs.c:1247
+msgid "Right"
+msgstr "à Droite"
+
+#: ../panel/panel-dialogs.c:1029 ../panel/panel-dialogs.c:1252
+msgid "Top"
+msgstr "en Haut"
+
+#: ../panel/panel-dialogs.c:1031 ../panel/panel-dialogs.c:1254
+msgid "Bottom"
+msgstr "en Bas"
+
+#. floating?
+#: ../panel/panel-dialogs.c:1065
+msgid "Panel Type"
+msgstr "Type de panneau"
+
+#: ../panel/panel-dialogs.c:1074
+msgid "Fixed Position"
+msgstr "Position fixe"
+
+#: ../panel/panel-dialogs.c:1080
+msgid "Freely Moveable"
+msgstr "Position mobile"
+
+#. position
+#: ../panel/panel-dialogs.c:1091 ../panel/panel-dialogs.c:1269
+msgid "Position"
+msgstr "Position"
+
+#: ../panel/panel-dialogs.c:1179
+msgid "_Full Width"
+msgstr "Pleine Largeur"
+
+#: ../panel/panel-dialogs.c:1188
+msgid "Auto_hide"
+msgstr "Masquer automatiquement"
+
+#: ../panel/panel-dialogs.c:1206
+msgid "Orientation:"
+msgstr "Orientation du panneau :"
+
+#: ../panel/panel-dialogs.c:1218
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: ../panel/panel-dialogs.c:1220
+msgid "Vertical"
+msgstr "Vertical"
+
+#: ../panel/panel-dialogs.c:1229
+msgid "Handle Position:"
+msgstr "Position Des Poignées:"
+
+#: ../panel/panel-dialogs.c:1241
+msgid "At both sides"
+msgstr "Sur les deux côtés"
+
+#: ../panel/panel-dialogs.c:1290
+msgid "Monitor"
+msgstr "Moniteur"
+
+#: ../panel/panel-dialogs.c:1406 ../panel/panel-dialogs.c:1442
+#: ../panel/panel-dialogs.c:1469
+#, c-format
+msgid "Panel %d"
+msgstr "Panneau %d"
+
+#: ../panel/panel-dialogs.c:1490
+msgid "Remove Panel"
+msgstr "Supprimer le Panneau \"%d\""
+
+#: ../panel/panel-dialogs.c:1503
+msgid "New Panel"
+msgstr "Nouveau Panneau"
+
+#: ../panel/panel-dialogs.c:1604
 msgid "Customize Panels"
 msgstr "Configuration Des Panneaux"
 
@@ -408,80 +407,80 @@ msgstr ""
 "Le premier élément dans la liste est montré sur le panneau. Les éléments "
 "additionnels apparaîtront dans un menu."
 
-#: ../plugins/launcher/launcher-dialog.c:1282
+#: ../plugins/launcher/launcher-dialog.c:1284
 msgid "Program Launcher"
 msgstr "Lanceur De Programme"
 
-#: ../plugins/launcher/launcher-dialog.c:1608
+#: ../plugins/launcher/launcher-dialog.c:1610
 msgid "Select file"
 msgstr "Sélection de fichier"
 
-#: ../plugins/separator/separator.c:253
+#: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator"
 msgstr "Séparation"
 
-#: ../plugins/separator/separator.c:266
+#: ../plugins/separator/separator.c:268
 msgid "_Draw Separator"
 msgstr "Séparation"
 
-#: ../plugins/separator/separator.c:275
+#: ../plugins/separator/separator.c:277
 msgid "_Expand"
 msgstr "_Étendre"
 
-#: ../plugins/actions/actions.c:307
+#: ../plugins/actions/actions.c:309
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Panel Actions"
 msgstr "Actions Du Panneau"
 
-#: ../plugins/actions/actions.c:324
+#: ../plugins/actions/actions.c:326
 msgid "Select action type:"
 msgstr "Choisissez le type d'action :"
 
-#: ../plugins/actions/actions.c:333
+#: ../plugins/actions/actions.c:335
 msgid "Lock screen"
 msgstr "Verrouiller l'écran"
 
-#: ../plugins/actions/actions.c:334
+#: ../plugins/actions/actions.c:336
 msgid "Quit + Lock screen"
 msgstr "Quitter + Verrouiller l'écran"
 
-#: ../plugins/tasklist/tasklist.c:332
+#: ../plugins/tasklist/tasklist.c:334
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Liste Des Tâches"
 
-#: ../plugins/tasklist/tasklist.c:345
+#: ../plugins/tasklist/tasklist.c:347
 msgid "Show tasks from _all workspaces"
 msgstr ""
 "Afficher les tâches de\n"
 "_tous les espaces de travail"
 
-#: ../plugins/tasklist/tasklist.c:355
+#: ../plugins/tasklist/tasklist.c:357
 msgid "Show application _names"
 msgstr "Afficher le _nom des applications"
 
-#: ../plugins/tasklist/tasklist.c:369
+#: ../plugins/tasklist/tasklist.c:371
 msgid "Never group tasks"
 msgstr "Jamais reggrouper les tâches"
 
-#: ../plugins/tasklist/tasklist.c:372
+#: ../plugins/tasklist/tasklist.c:374
 msgid "Automatically group tasks"
 msgstr "Re_grouper automatiquement les tâches"
 
-#: ../plugins/tasklist/tasklist.c:375
+#: ../plugins/tasklist/tasklist.c:377
 msgid "Always group tasks"
 msgstr "Toujours re_grouper les tâches"
 
-#: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:289 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Bureaux"
 
-#: ../plugins/pager/pager.c:307
+#: ../plugins/pager/pager.c:309
 msgid "Number of rows:"
 msgstr "Nombre de lignes :"
 
-#: ../plugins/pager/pager.c:311
+#: ../plugins/pager/pager.c:313
 msgid "Number of columns:"
 msgstr "Nombre de colonnes :"
 
@@ -494,21 +493,21 @@ msgstr "Il y a déjà une zone de notification système active pour cet écran"
 msgid "Unable to register system tray: %s"
 msgstr "Impossible d'activer le système de notification: %s"
 
-#: ../plugins/systray/systray.c:357
+#: ../plugins/systray/systray.c:359
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Status Area"
 msgstr "Région De Statut"
 
-#: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+#: ../plugins/systray/systray.c:372 ../plugins/clock/clock.c:444
 msgid "Show _frame"
 msgstr "Montrez l'_armature"
 
-#: ../plugins/iconbox/iconbox.c:760
+#: ../plugins/iconbox/iconbox.c:762
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "Boite À Icônes"
 
-#: ../plugins/iconbox/iconbox.c:774
+#: ../plugins/iconbox/iconbox.c:776
 msgid "Only show minimized applications"
 msgstr "Montrez seulement les applications réduites au minimum"
 
@@ -524,40 +523,36 @@ msgstr "Montrez seulement les applications réduites au minimum"
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:415 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Horloge"
 
-#: ../plugins/clock/clock.c:420
-msgid "Appearance"
-msgstr "Apparence"
-
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:435
+#: ../plugins/clock/clock.c:437
 msgid "Analog"
 msgstr "Analogique"
 
-#: ../plugins/clock/clock.c:436
+#: ../plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "Numérique"
 
-#: ../plugins/clock/clock.c:437
+#: ../plugins/clock/clock.c:439
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:452
 msgid "Clock Options"
 msgstr "Options De L'Horloge"
 
-#: ../plugins/clock/clock.c:460
+#: ../plugins/clock/clock.c:462
 msgid "Use 24-_hour clock"
 msgstr "Utilisez 24 heure dans l'horloge"
 
-#: ../plugins/clock/clock.c:468
+#: ../plugins/clock/clock.c:470
 msgid "Show AM/PM"
 msgstr "Montrer AM/PM"
 
-#: ../plugins/clock/clock.c:476
+#: ../plugins/clock/clock.c:478
 msgid "Display seconds"
 msgstr "Montrer les secondes"
 
@@ -604,6 +599,21 @@ msgstr "Montrez les icônes de toutes les applications courantes"
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr "Quelle heure est-il ?"
+
+#~ msgid "Select Panel"
+#~ msgstr "Sélectionner le panneau"
+
+#~ msgid "Panel Properties"
+#~ msgstr "Propriétés-du Panneau"
+
+#~ msgid "Manage Panel Items"
+#~ msgstr "Contrôle Des Éléments Du Panneau"
+
+#~ msgid "Add To Selected Panel"
+#~ msgstr "Ajoutez Au Panneau Sélectionné"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Préférences des panneaux"
 
 #~ msgid "%s Properties"
 #~ msgstr "Propriétés-%s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-11 19:02+0200\n"
+"POT-Creation-Date: 2005-12-19 23:05+0100\n"
 "PO-Revision-Date: 2005-12-11 19:11+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg2002@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -25,85 +25,95 @@ msgstr "Ένα αντικείμενο αφαιρέθηκε αναπάντεχα:
 msgid "Remove \"%s\"?"
 msgstr "Να διαγραφεί το \"%s\";"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586
-#: ../panel/panel-app.c:597
-#: ../panel/panel-app.c:629
-#: ../panel/panel-app.c:662
-#: ../panel/panel-settings.c:1613
-#: ../plugins/launcher/launcher.c:314
-#: ../plugins/launcher/launcher.c:364
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:593
+#: ../panel/panel-app.c:625 ../panel/panel-app.c:658
+#: ../panel/panel-dialogs.c:574 ../panel/panel-dialogs.c:1559
+#: ../plugins/launcher/launcher.c:314 ../plugins/launcher/launcher.c:364
 msgid "Xfce Panel"
 msgstr "Ταμπλώ του Xfce"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:588
-msgid "The item will be removed from the panel and its configuration will be lost."
-msgstr "Αυτό το αντικείμενο θα αφαιρεθεί από το ταμπλό και οι ρυθμίσεις του θα χαθούν."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr ""
+"Αυτό το αντικείμενο θα αφαιρεθεί από το ταμπλό και οι ρυθμίσεις του θα "
+"χαθούν."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:722
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:734
 #: ../plugins/launcher/launcher-dialog.c:1273
-#: ../plugins/separator/separator.c:241
-#: ../plugins/actions/actions.c:295
-#: ../plugins/tasklist/tasklist.c:320
-#: ../plugins/pager/pager.c:275
-#: ../plugins/systray/systray.c:345
-#: ../plugins/iconbox/iconbox.c:748
+#: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
+#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
 #: ../plugins/clock/clock.c:401
 msgid "Properties"
 msgstr "Ιδιότητες"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:739
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:751
 msgid "About"
 msgstr "Περί"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:756
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:764
+#, fuzzy
+msgid "Move"
+msgstr "Απομάκρυνση"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:786
 msgid "Remove"
 msgstr "Απομάκρυνση"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:774
-#: ../panel/panel.c:536
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:803
+#, fuzzy
+msgid "Add New Item"
+msgstr "Νέο Αντικείμενο"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:815 ../panel/panel.c:569
 msgid "Customize Panel"
 msgstr "Προσαρμογή Ταμπλό"
 
-#: ../panel/panel.c:551
-#: ../plugins/actions/actions.c:334
+#: ../panel/panel.c:580 ../panel/panel-dialogs.c:593
+msgid "Add Items"
+msgstr ""
+
+#: ../panel/panel.c:595 ../plugins/actions/actions.c:334
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: ../panel/panel.c:561
+#: ../panel/panel.c:605
 msgid "Restart"
 msgstr "Επανεκκίνηση"
 
-#: ../panel/panel.c:575
+#: ../panel/panel.c:619
 msgid "About the Xfce Panel"
 msgstr "Περί Ταμπλό του Xfce"
 
-#: ../panel/panel-item-manager.c:353
-#: ../panel/panel-item-manager.c:361
+#: ../panel/panel-item-manager.c:353 ../panel/panel-item-manager.c:361
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Δεν ήταν δυνατό το άνοιγμα του αρθρώματος \"%s\""
 
-#: ../panel/panel-app.c:180
-#: ../panel/panel-app.c:599
+#: ../panel/panel-app.c:180 ../panel/panel-app.c:595
 msgid "Exit Xfce Panel?"
 msgstr "Έξοδος από το Ταμπλό του Xfce;"
 
-#: ../panel/panel-app.c:600
+#: ../panel/panel-app.c:596
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr "Δεν μπορείτε να αφαιρέσετε το τελευταίο ταμπλό. Μήπως θέλετε να βγείτε από το πρόγραμμα;"
+msgstr ""
+"Δεν μπορείτε να αφαιρέσετε το τελευταίο ταμπλό. Μήπως θέλετε να βγείτε από "
+"το πρόγραμμα;"
 
-#: ../panel/panel-app.c:627
+#: ../panel/panel-app.c:623
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Να αφαιρεθεί το Ταμπλό \"%d\";"
 
-#: ../panel/panel-app.c:631
+#: ../panel/panel-app.c:627
 msgid "The selected panel and all its items will be removed."
 msgstr "Το επιλεγμένο ταμπλό και όλα τα αντικείμενά του θα αφαιρεθούν."
 
-#: ../panel/panel-app.c:670
+#: ../panel/panel-app.c:666
 msgid "Developer"
 msgstr "Ανάπτυξη"
 
@@ -162,150 +172,132 @@ msgstr ""
 " -a, --add       Προσθήκη νέων αντικειμένων\n"
 "\n"
 
-#: ../panel/panel-settings.c:331
-#: ../panel/panel-settings.c:367
-#: ../panel/panel-settings.c:399
-#, c-format
-msgid "Panel %d"
-msgstr "Ταμπλό %d"
+#: ../panel/panel-dialogs.c:608
+msgid ""
+"Drag items from the list to a panel or remove them by dragging them back to "
+"the list."
+msgstr ""
+"Σύρετε αντικείμενα από τη λίστα στο ταμπλό ή αφαιρέστε υπάρχοντα αντικείμενα "
+"μεταφέροντας τα πίσω στη λίστα."
 
-#: ../panel/panel-settings.c:383
-msgid "Select Panel"
-msgstr "Επιλογή Ταμπλό"
+#: ../panel/panel-dialogs.c:621
+msgid "Avalaible Items"
+msgstr "Διαθέσιμα Αντικείμενα"
 
-#: ../panel/panel-settings.c:412
-msgid "New Panel"
-msgstr "Νέο Ταμπλό"
+#: ../panel/panel-dialogs.c:744 ../plugins/clock/clock.c:422
+msgid "Appearance"
+msgstr "Εμφάνιση"
 
-#: ../panel/panel-settings.c:419
-msgid "Remove Panel"
-msgstr "Αφαίρεση Ταμπλό"
+#. size
+#: ../panel/panel-dialogs.c:756
+msgid "Size"
+msgstr "Μέγεθος"
 
-#: ../panel/panel-settings.c:708
-#: ../panel/panel-settings.c:916
+#: ../panel/panel-dialogs.c:767
+msgid "Small"
+msgstr "Μικρό"
+
+#: ../panel/panel-dialogs.c:781
+msgid "Large"
+msgstr "Μεγάλο"
+
+#: ../panel/panel-dialogs.c:798
+msgid "Transparency"
+msgstr "Διαφάνεια"
+
+#: ../panel/panel-dialogs.c:806
+msgid "None"
+msgstr "Κανένα"
+
+#: ../panel/panel-dialogs.c:820
+msgid "Full"
+msgstr "Πλήρες"
+
+#: ../panel/panel-dialogs.c:1022 ../panel/panel-dialogs.c:1245
 msgid "Left"
 msgstr "Αριστερά"
 
-#: ../panel/panel-settings.c:710
-#: ../panel/panel-settings.c:918
+#: ../panel/panel-dialogs.c:1024 ../panel/panel-dialogs.c:1247
 msgid "Right"
 msgstr "Δεξιά"
 
-#: ../panel/panel-settings.c:715
-#: ../panel/panel-settings.c:923
+#: ../panel/panel-dialogs.c:1029 ../panel/panel-dialogs.c:1252
 msgid "Top"
 msgstr "Επάνω"
 
-#: ../panel/panel-settings.c:717
-#: ../panel/panel-settings.c:925
+#: ../panel/panel-dialogs.c:1031 ../panel/panel-dialogs.c:1254
 msgid "Bottom"
 msgstr "Κάτω"
 
 #. floating?
-#: ../panel/panel-settings.c:749
+#: ../panel/panel-dialogs.c:1065
 msgid "Panel Type"
 msgstr "Τύπος Ταμπλό"
 
-#: ../panel/panel-settings.c:758
+#: ../panel/panel-dialogs.c:1074
 msgid "Fixed Position"
 msgstr "Σταθερή Θέση"
 
-#: ../panel/panel-settings.c:760
+#: ../panel/panel-dialogs.c:1080
 msgid "Freely Moveable"
 msgstr "Ελεύθερα Μετακινούμενο"
 
 #. position
-#: ../panel/panel-settings.c:766
+#: ../panel/panel-dialogs.c:1091 ../panel/panel-dialogs.c:1269
 msgid "Position"
 msgstr "Θέση"
 
-#: ../panel/panel-settings.c:850
+#: ../panel/panel-dialogs.c:1179
 msgid "_Full Width"
 msgstr "_Πλήρες πλάτος"
 
-#: ../panel/panel-settings.c:859
+#: ../panel/panel-dialogs.c:1188
 msgid "Auto_hide"
 msgstr "_Αυτόματη απόκρυψη"
 
-#: ../panel/panel-settings.c:877
+#: ../panel/panel-dialogs.c:1206
 msgid "Orientation:"
 msgstr "Προσανατολισμός:"
 
-#: ../panel/panel-settings.c:889
+#: ../panel/panel-dialogs.c:1218
 msgid "Horizontal"
 msgstr "Οριζόντιο"
 
-#: ../panel/panel-settings.c:891
+#: ../panel/panel-dialogs.c:1220
 msgid "Vertical"
 msgstr "Κάθετο"
 
-#: ../panel/panel-settings.c:900
+#: ../panel/panel-dialogs.c:1229
 msgid "Handle Position:"
 msgstr "Θέση Χειρολαβής:"
 
-#: ../panel/panel-settings.c:912
+#: ../panel/panel-dialogs.c:1241
 msgid "At both sides"
 msgstr "Και στις δυο πλευρές"
 
-#: ../panel/panel-settings.c:942
-msgid "Panel Properties"
-msgstr "Ιδιότητες Ταμπλό"
-
-#: ../panel/panel-settings.c:977
+#: ../panel/panel-dialogs.c:1290
 msgid "Monitor"
 msgstr "Οθόνη"
 
-#. size
-#: ../panel/panel-settings.c:1059
-msgid "Size"
-msgstr "Μέγεθος"
+#: ../panel/panel-dialogs.c:1406 ../panel/panel-dialogs.c:1442
+#: ../panel/panel-dialogs.c:1469
+#, c-format
+msgid "Panel %d"
+msgstr "Ταμπλό %d"
 
-#: ../panel/panel-settings.c:1070
-msgid "Small"
-msgstr "Μικρό"
+#: ../panel/panel-dialogs.c:1490
+msgid "Remove Panel"
+msgstr "Αφαίρεση Ταμπλό"
 
-#: ../panel/panel-settings.c:1087
-msgid "Large"
-msgstr "Μεγάλο"
+#: ../panel/panel-dialogs.c:1503
+msgid "New Panel"
+msgstr "Νέο Ταμπλό"
 
-#: ../panel/panel-settings.c:1101
-msgid "Transparency"
-msgstr "Διαφάνεια"
-
-#: ../panel/panel-settings.c:1109
-msgid "None"
-msgstr "Κανένα"
-
-#: ../panel/panel-settings.c:1126
-msgid "Full"
-msgstr "Πλήρες"
-
-#: ../panel/panel-settings.c:1442
-msgid "Manage Panel Items"
-msgstr "Διαχείριση Αντικειμένων στο Ταμπλό"
-
-#: ../panel/panel-settings.c:1463
-msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
-msgstr "Σύρετε αντικείμενα από τη λίστα στο ταμπλό ή αφαιρέστε υπάρχοντα αντικείμενα μεταφέροντας τα πίσω στη λίστα."
-
-#: ../panel/panel-settings.c:1481
-msgid "Avalaible Items"
-msgstr "Διαθέσιμα Αντικείμενα"
-
-#: ../panel/panel-settings.c:1494
-msgid "Add To Selected Panel"
-msgstr "Προσθήκη στο επιλεγμένο ταμπλό"
-
-#: ../panel/panel-settings.c:1662
-msgid "Panel Preferences"
-msgstr "Προτιμήσεις Ταμπλό"
-
-#: ../panel/panel-settings.c:1664
+#: ../panel/panel-dialogs.c:1604
 msgid "Customize Panels"
 msgstr "Προσαρμογή Ταμπλό"
 
-#: ../plugins/launcher/launcher.c:312
-#: ../plugins/launcher/launcher.c:362
+#: ../plugins/launcher/launcher.c:312 ../plugins/launcher/launcher.c:362
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "Αδυναμία εκτέλεσης \"%s\""
@@ -315,8 +307,7 @@ msgstr "Αδυναμία εκτέλεσης \"%s\""
 msgid "New Item"
 msgstr "Νέο Αντικείμενο"
 
-#: ../plugins/launcher/launcher.c:616
-#: ../plugins/launcher/launcher.c:1131
+#: ../plugins/launcher/launcher.c:616 ../plugins/launcher/launcher.c:1131
 msgid "This item has not yet been configured"
 msgstr "Αυτό το αντικείμενο δεν έχει ρυθμιστεί ακόμα "
 
@@ -409,8 +400,12 @@ msgid "Use _startup notification"
 msgstr "Χρήση γνω_στοποίηση εκκίνησης"
 
 #: ../plugins/launcher/launcher-dialog.c:1233
-msgid "The first item in the list is shown on the panel. Additional items will appear in a menu."
-msgstr "Το πρώτο αντικείμενο στη λίστα εμφανίζεται στο ταμπλό. Τα υπόλοιπα θα μπουν σε μενού."
+msgid ""
+"The first item in the list is shown on the panel. Additional items will "
+"appear in a menu."
+msgstr ""
+"Το πρώτο αντικείμενο στη λίστα εμφανίζεται στο ταμπλό. Τα υπόλοιπα θα μπουν "
+"σε μενού."
 
 #: ../plugins/launcher/launcher-dialog.c:1284
 msgid "Program Launcher"
@@ -475,8 +470,7 @@ msgstr "Αυτόματη ομαδοποίηση εργασιών"
 msgid "Always group tasks"
 msgstr "Πάντα ομαδοποίηση εργασιών"
 
-#: ../plugins/pager/pager.c:289
-#: ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:289 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Ειδοποιητής"
 
@@ -502,8 +496,7 @@ msgstr "Αδύνατη η καταχώρηση της εργαλειοθήκης
 msgid "Status Area"
 msgstr "Περιοχή Κατάστασης"
 
-#: ../plugins/systray/systray.c:372
-#: ../plugins/clock/clock.c:444
+#: ../plugins/systray/systray.c:372 ../plugins/clock/clock.c:444
 msgid "Show _frame"
 msgstr "Εμ_φάνιση πλαισίου"
 
@@ -528,14 +521,9 @@ msgstr "Εμφάνιση μόνο ελαχιστοποιημένων εφαρμ�
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:415
-#: ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:415 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Ρολόι"
-
-#: ../plugins/clock/clock.c:422
-msgid "Appearance"
-msgstr "Εμφάνιση"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:437
@@ -610,14 +598,32 @@ msgstr "Εμφάνιση εικονιδίων όλων των εκτελούμε
 msgid "What time is it?"
 msgstr "Τι ώρα είναι;"
 
+#~ msgid "Select Panel"
+#~ msgstr "Επιλογή Ταμπλό"
+
+#~ msgid "Panel Properties"
+#~ msgstr "Ιδιότητες Ταμπλό"
+
+#~ msgid "Manage Panel Items"
+#~ msgstr "Διαχείριση Αντικειμένων στο Ταμπλό"
+
+#~ msgid "Add To Selected Panel"
+#~ msgstr "Προσθήκη στο επιλεγμένο ταμπλό"
+
+#~ msgid "Panel Preferences"
+#~ msgstr "Προτιμήσεις Ταμπλό"
+
 #~ msgid "%s Properties"
 #~ msgstr "Ιδιότητες %s"
+
 #~ msgid "Panel"
 #~ msgstr "Ταμπλό"
+
 #~ msgid "Manage Panels"
 #~ msgstr "Διαχείριση Ταμπλό"
+
 #~ msgid "Remove %s"
 #~ msgstr "Αφαίρεση %s"
+
 #~ msgid "Are you sure you want to exit?"
 #~ msgstr "Είστε σίγουρος ότι θέλετε να βγείτε;"
-

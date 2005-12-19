@@ -6,7 +6,7 @@ dnl 2005 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl version info
-m4_define([xfce4_panel_version],[4.3.26])
+m4_define([xfce4_panel_version],[4.3.27])
 m4_define([libxfce4panel_verinfo], [1:2:0])
 
 dnl init autoconf
@@ -59,7 +59,7 @@ dnl Check for required packages
 dnl XDT_CHECK_PACKAGE([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.2.0])
 XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.0])
 XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.6])
-XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.4.0])
+XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
 
 dnl Check for optional packages
 XDT_CHECK_OPTIONAL_PACKAGE([LIBSTARTUP_NOTIFICATION],

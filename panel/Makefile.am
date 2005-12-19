@@ -14,10 +14,6 @@ xfce4_panel_SOURCES =						\
 	panel-item-manager.h					\
 	panel-properties.c					\
 	panel-properties.h					\
-	panel-settings.c					\
-	panel-settings.h					\
-	panel-manager.c					\
-	panel-manager.h					\
 	panel-dialogs.c					\
 	panel-dialogs.h					\
 	panel.c							\
@@ -30,7 +26,6 @@ xfce4_panel_CFLAGS = 							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
 	@LIBXFCEGUI4_CFLAGS@						\
-	@GTHREAD_CFLAGS@						\
 	-DDATADIR=\"$(datadir)\"					\
 	-DLIBDIR=\"$(libdir)/xfce4\"					\
 	-DLIBEXECDIR=\"$(libexecdir)/xfce4\"				\
@@ -48,8 +43,7 @@ xfce4_panel_LDADD =							\
 	../libxfce4panel/libxfce4panel.la				\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
-	@LIBXFCEGUI4_LIBS@						\
-	@GTHREAD_LIBS@
+	@LIBXFCEGUI4_LIBS@
 
 xfce4_panel_DEPENDENCIES =						\
 	../libxfce4panel/libxfce4panel.la

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-06 21:42+0100\n"
+"POT-Creation-Date: 2005-12-19 23:05+0100\n"
 "PO-Revision-Date: 2005-09-29 20:35+0900\n"
 "Last-Translator: Pallavi Nikam <pallavi_edu@rediffmail.com>\n"
 "Language-Team: Marathi <en@li.org>\n"
@@ -26,10 +26,10 @@ msgstr ""
 msgid "Remove \"%s\"?"
 msgstr "काढणे (_R)"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:597
-#: ../panel/panel-app.c:629 ../panel/panel-app.c:662
-#: ../panel/panel-settings.c:1613 ../plugins/launcher/launcher.c:314
-#: ../plugins/launcher/launcher.c:364
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:586 ../panel/panel-app.c:593
+#: ../panel/panel-app.c:625 ../panel/panel-app.c:658
+#: ../panel/panel-dialogs.c:574 ../panel/panel-dialogs.c:1559
+#: ../plugins/launcher/launcher.c:314 ../plugins/launcher/launcher.c:364
 msgid "Xfce Panel"
 msgstr "Xfce पॅनेल"
 
@@ -39,7 +39,7 @@ msgid ""
 msgstr ""
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:722
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:734
 #: ../plugins/launcher/launcher-dialog.c:1273
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
 #: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
@@ -49,29 +49,44 @@ msgid "Properties"
 msgstr ""
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:739
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:751
 msgid "About"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:756
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:764
+#, fuzzy
+msgid "Move"
+msgstr "काढणे (_R)"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:786
 #, fuzzy
 msgid "Remove"
 msgstr "काढणे (_R)"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:774 ../panel/panel.c:536
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:803
+#, fuzzy
+msgid "Add New Item"
+msgstr "नवीन आयटम"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:815 ../panel/panel.c:569
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:551 ../plugins/actions/actions.c:332
+#: ../panel/panel.c:580 ../panel/panel-dialogs.c:593
+msgid "Add Items"
+msgstr ""
+
+#: ../panel/panel.c:595 ../plugins/actions/actions.c:334
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:561
+#: ../panel/panel.c:605
 #, fuzzy
 msgid "Restart"
 msgstr " पुनः सुरुवात (_R)"
 
-#: ../panel/panel.c:575
+#: ../panel/panel.c:619
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "Xfce पॅनेल"
@@ -83,25 +98,25 @@ msgstr ""
 "सुरु होऊ शकत नाही \"%s\":\n"
 "%s"
 
-#: ../panel/panel-app.c:180 ../panel/panel-app.c:599
+#: ../panel/panel-app.c:180 ../panel/panel-app.c:595
 #, fuzzy
 msgid "Exit Xfce Panel?"
 msgstr "Xfce पॅनेल"
 
-#: ../panel/panel-app.c:600
+#: ../panel/panel-app.c:596
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 
-#: ../panel/panel-app.c:627
+#: ../panel/panel-app.c:623
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
-#: ../panel/panel-app.c:631
+#: ../panel/panel-app.c:627
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:670
+#: ../panel/panel-app.c:666
 msgid "Developer"
 msgstr "निर्माता"
 
@@ -146,153 +161,135 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../panel/panel-settings.c:331 ../panel/panel-settings.c:367
-#: ../panel/panel-settings.c:399
-#, fuzzy, c-format
-msgid "Panel %d"
-msgstr "Xfce पॅनेल"
-
-#: ../panel/panel-settings.c:383
-#, fuzzy
-msgid "Select Panel"
-msgstr "फाईल निवडा"
-
-#: ../panel/panel-settings.c:412
-#, fuzzy
-msgid "New Panel"
-msgstr "Xfce पॅनेल"
-
-#: ../panel/panel-settings.c:419
-#, fuzzy
-msgid "Remove Panel"
-msgstr "काढणे (_R)"
-
-#: ../panel/panel-settings.c:708 ../panel/panel-settings.c:916
-msgid "Left"
-msgstr ""
-
-#: ../panel/panel-settings.c:710 ../panel/panel-settings.c:918
-msgid "Right"
-msgstr ""
-
-#: ../panel/panel-settings.c:715 ../panel/panel-settings.c:923
-msgid "Top"
-msgstr ""
-
-#: ../panel/panel-settings.c:717 ../panel/panel-settings.c:925
-msgid "Bottom"
-msgstr ""
-
-#. floating?
-#: ../panel/panel-settings.c:749
-#, fuzzy
-msgid "Panel Type"
-msgstr "पॅनेलचा आकार:"
-
-#: ../panel/panel-settings.c:758
-#, fuzzy
-msgid "Fixed Position"
-msgstr "जागा"
-
-#: ../panel/panel-settings.c:760
-msgid "Freely Moveable"
-msgstr ""
-
-#. position
-#: ../panel/panel-settings.c:766
-msgid "Position"
-msgstr "जागा"
-
-#: ../panel/panel-settings.c:850
-#, fuzzy
-msgid "_Full Width"
-msgstr "पुर्ण रुंदी:"
-
-#: ../panel/panel-settings.c:859
-#, fuzzy
-msgid "Auto_hide"
-msgstr "स्वंयलुप्त"
-
-#: ../panel/panel-settings.c:877
-#, fuzzy
-msgid "Orientation:"
-msgstr "पॅनेलची पुर्वाभिमुखता:"
-
-#: ../panel/panel-settings.c:889
-msgid "Horizontal"
-msgstr "आडवे"
-
-#: ../panel/panel-settings.c:891
-msgid "Vertical"
-msgstr "उभे"
-
-#: ../panel/panel-settings.c:900
-#, fuzzy
-msgid "Handle Position:"
-msgstr "जागा"
-
-#: ../panel/panel-settings.c:912
-msgid "At both sides"
-msgstr "दोन्हि बाजूस"
-
-#: ../panel/panel-settings.c:942
-#, fuzzy
-msgid "Panel Properties"
-msgstr "पॅनेल रचना"
-
-#: ../panel/panel-settings.c:977
-#, fuzzy
-msgid "Monitor"
-msgstr "संपादक"
-
-#. size
-#: ../panel/panel-settings.c:1059
-msgid "Size"
-msgstr "आकार"
-
-#: ../panel/panel-settings.c:1070
-msgid "Small"
-msgstr "लहान"
-
-#: ../panel/panel-settings.c:1087
-msgid "Large"
-msgstr "मोठे"
-
-#: ../panel/panel-settings.c:1101
-msgid "Transparency"
-msgstr "पारदर्शकता"
-
-#: ../panel/panel-settings.c:1109
-msgid "None"
-msgstr "काहीही नाही"
-
-#: ../panel/panel-settings.c:1126
-msgid "Full"
-msgstr "संपूर्ण"
-
-#: ../panel/panel-settings.c:1442
-msgid "Manage Panel Items"
-msgstr ""
-
-#: ../panel/panel-settings.c:1463
+#: ../panel/panel-dialogs.c:608
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 
-#: ../panel/panel-settings.c:1481
+#: ../panel/panel-dialogs.c:621
 msgid "Avalaible Items"
 msgstr ""
 
-#: ../panel/panel-settings.c:1494
-msgid "Add To Selected Panel"
+#: ../panel/panel-dialogs.c:744 ../plugins/clock/clock.c:422
+msgid "Appearance"
+msgstr "स्वरुप"
+
+#. size
+#: ../panel/panel-dialogs.c:756
+msgid "Size"
+msgstr "आकार"
+
+#: ../panel/panel-dialogs.c:767
+msgid "Small"
+msgstr "लहान"
+
+#: ../panel/panel-dialogs.c:781
+msgid "Large"
+msgstr "मोठे"
+
+#: ../panel/panel-dialogs.c:798
+msgid "Transparency"
+msgstr "पारदर्शकता"
+
+#: ../panel/panel-dialogs.c:806
+msgid "None"
+msgstr "काहीही नाही"
+
+#: ../panel/panel-dialogs.c:820
+msgid "Full"
+msgstr "संपूर्ण"
+
+#: ../panel/panel-dialogs.c:1022 ../panel/panel-dialogs.c:1245
+msgid "Left"
 msgstr ""
 
-#: ../panel/panel-settings.c:1662
-msgid "Panel Preferences"
+#: ../panel/panel-dialogs.c:1024 ../panel/panel-dialogs.c:1247
+msgid "Right"
 msgstr ""
 
-#: ../panel/panel-settings.c:1664
+#: ../panel/panel-dialogs.c:1029 ../panel/panel-dialogs.c:1252
+msgid "Top"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:1031 ../panel/panel-dialogs.c:1254
+msgid "Bottom"
+msgstr ""
+
+#. floating?
+#: ../panel/panel-dialogs.c:1065
+#, fuzzy
+msgid "Panel Type"
+msgstr "पॅनेलचा आकार:"
+
+#: ../panel/panel-dialogs.c:1074
+#, fuzzy
+msgid "Fixed Position"
+msgstr "जागा"
+
+#: ../panel/panel-dialogs.c:1080
+msgid "Freely Moveable"
+msgstr ""
+
+#. position
+#: ../panel/panel-dialogs.c:1091 ../panel/panel-dialogs.c:1269
+msgid "Position"
+msgstr "जागा"
+
+#: ../panel/panel-dialogs.c:1179
+#, fuzzy
+msgid "_Full Width"
+msgstr "पुर्ण रुंदी:"
+
+#: ../panel/panel-dialogs.c:1188
+#, fuzzy
+msgid "Auto_hide"
+msgstr "स्वंयलुप्त"
+
+#: ../panel/panel-dialogs.c:1206
+#, fuzzy
+msgid "Orientation:"
+msgstr "पॅनेलची पुर्वाभिमुखता:"
+
+#: ../panel/panel-dialogs.c:1218
+msgid "Horizontal"
+msgstr "आडवे"
+
+#: ../panel/panel-dialogs.c:1220
+msgid "Vertical"
+msgstr "उभे"
+
+#: ../panel/panel-dialogs.c:1229
+#, fuzzy
+msgid "Handle Position:"
+msgstr "जागा"
+
+#: ../panel/panel-dialogs.c:1241
+msgid "At both sides"
+msgstr "दोन्हि बाजूस"
+
+#: ../panel/panel-dialogs.c:1290
+#, fuzzy
+msgid "Monitor"
+msgstr "संपादक"
+
+#: ../panel/panel-dialogs.c:1406 ../panel/panel-dialogs.c:1442
+#: ../panel/panel-dialogs.c:1469
+#, fuzzy, c-format
+msgid "Panel %d"
+msgstr "Xfce पॅनेल"
+
+#: ../panel/panel-dialogs.c:1490
+#, fuzzy
+msgid "Remove Panel"
+msgstr "काढणे (_R)"
+
+#: ../panel/panel-dialogs.c:1503
+#, fuzzy
+msgid "New Panel"
+msgstr "Xfce पॅनेल"
+
+#: ../panel/panel-dialogs.c:1604
 msgid "Customize Panels"
 msgstr ""
 
@@ -407,88 +404,88 @@ msgid ""
 "appear in a menu."
 msgstr "सूचीमधील पहिला आयटम पॅनेलवर दाखवलेला आहे. बाकीचे आयटमस यादीमध्ये येतील."
 
-#: ../plugins/launcher/launcher-dialog.c:1282
+#: ../plugins/launcher/launcher-dialog.c:1284
 #, fuzzy
 msgid "Program Launcher"
 msgstr " पर्यायी लॉनचर"
 
-#: ../plugins/launcher/launcher-dialog.c:1608
+#: ../plugins/launcher/launcher-dialog.c:1610
 msgid "Select file"
 msgstr "फाईल निवडा"
 
-#: ../plugins/separator/separator.c:253
+#: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator"
 msgstr "विभक्त रेषा"
 
-#: ../plugins/separator/separator.c:266
+#: ../plugins/separator/separator.c:268
 #, fuzzy
 msgid "_Draw Separator"
 msgstr "विभक्त रेषा"
 
-#: ../plugins/separator/separator.c:275
+#: ../plugins/separator/separator.c:277
 msgid "_Expand"
 msgstr ""
 
-#: ../plugins/actions/actions.c:307
+#: ../plugins/actions/actions.c:309
 #: ../plugins/actions/actions.desktop.in.in.h:2
 #, fuzzy
 msgid "Panel Actions"
 msgstr "पॅनेल रचना"
 
-#: ../plugins/actions/actions.c:324
+#: ../plugins/actions/actions.c:326
 #, fuzzy
 msgid "Select action type:"
 msgstr "आज्ञा निवडा"
 
-#: ../plugins/actions/actions.c:333
+#: ../plugins/actions/actions.c:335
 #, fuzzy
 msgid "Lock screen"
 msgstr "पडदा  ताळेबंद करा (_L)"
 
-#: ../plugins/actions/actions.c:334
+#: ../plugins/actions/actions.c:336
 #, fuzzy
 msgid "Quit + Lock screen"
 msgstr "पडदा  ताळेबंद करा (_L)"
 
-#: ../plugins/tasklist/tasklist.c:332
+#: ../plugins/tasklist/tasklist.c:334
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 #, fuzzy
 msgid "Task List"
 msgstr "कार्य यादी"
 
-#: ../plugins/tasklist/tasklist.c:345
+#: ../plugins/tasklist/tasklist.c:347
 msgid "Show tasks from _all workspaces"
 msgstr "कार्ये सर्व वर्कस्पेसेस पासुन दाखवा (_a)"
 
-#: ../plugins/tasklist/tasklist.c:355
+#: ../plugins/tasklist/tasklist.c:357
 msgid "Show application _names"
 msgstr "ऍप्लिकेशनचीशनची नावे प्रदर्शित कराा (_n)"
 
-#: ../plugins/tasklist/tasklist.c:369
+#: ../plugins/tasklist/tasklist.c:371
 #, fuzzy
 msgid "Never group tasks"
 msgstr "नेहमी कार्यांचे संघटन करा (_g)"
 
-#: ../plugins/tasklist/tasklist.c:372
+#: ../plugins/tasklist/tasklist.c:374
 #, fuzzy
 msgid "Automatically group tasks"
 msgstr "नेहमी कार्यांचे संघटन करा (_g)"
 
-#: ../plugins/tasklist/tasklist.c:375
+#: ../plugins/tasklist/tasklist.c:377
 #, fuzzy
 msgid "Always group tasks"
 msgstr "नेहमी कार्यांचे संघटन करा (_g)"
 
-#: ../plugins/pager/pager.c:287 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:289 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "पेजर"
 
-#: ../plugins/pager/pager.c:307
+#: ../plugins/pager/pager.c:309
 msgid "Number of rows:"
 msgstr "ओळींची संख्या:"
 
-#: ../plugins/pager/pager.c:311
+#: ../plugins/pager/pager.c:313
 msgid "Number of columns:"
 msgstr "स्तंभाची संख्या:"
 
@@ -501,24 +498,24 @@ msgstr " या पडद्यावर अगोदरच प्रणाल�
 msgid "Unable to register system tray: %s"
 msgstr "प्रणाली ट्रे ची नोंदणी होऊ शकत नाही: %s"
 
-#: ../plugins/systray/systray.c:357
+#: ../plugins/systray/systray.c:359
 #: ../plugins/systray/systray.desktop.in.in.h:2
 #, fuzzy
 msgid "Status Area"
 msgstr "स्थिती भाग"
 
-#: ../plugins/systray/systray.c:370 ../plugins/clock/clock.c:442
+#: ../plugins/systray/systray.c:372 ../plugins/clock/clock.c:444
 #, fuzzy
 msgid "Show _frame"
 msgstr "वेळ दाखवा (_t)"
 
-#: ../plugins/iconbox/iconbox.c:760
+#: ../plugins/iconbox/iconbox.c:762
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 #, fuzzy
 msgid "Icon Box"
 msgstr "आयकॉन बॉक्स"
 
-#: ../plugins/iconbox/iconbox.c:774
+#: ../plugins/iconbox/iconbox.c:776
 #, fuzzy
 msgid "Only show minimized applications"
 msgstr "फक्त लहान केलेल्या ऍँप्लिकेशनस प्रदर्शित करा (_S)"
@@ -535,42 +532,38 @@ msgstr "फक्त लहान केलेल्या ऍँप्लिक
 msgid "%A %d %B %Y"
 msgstr "%ए %d %बी %वाय"
 
-#: ../plugins/clock/clock.c:413 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:415 ../plugins/clock/clock.desktop.in.in.h:1
 #, fuzzy
 msgid "Clock"
 msgstr "टाळेबंद"
 
-#: ../plugins/clock/clock.c:420
-msgid "Appearance"
-msgstr "स्वरुप"
-
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:435
+#: ../plugins/clock/clock.c:437
 msgid "Analog"
 msgstr "अनॅलॉग"
 
-#: ../plugins/clock/clock.c:436
+#: ../plugins/clock/clock.c:438
 msgid "Digital"
 msgstr "डिजिटल"
 
-#: ../plugins/clock/clock.c:437
+#: ../plugins/clock/clock.c:439
 msgid "LED"
 msgstr "लेड"
 
-#: ../plugins/clock/clock.c:450
+#: ../plugins/clock/clock.c:452
 msgid "Clock Options"
 msgstr ""
 
-#: ../plugins/clock/clock.c:460
+#: ../plugins/clock/clock.c:462
 msgid "Use 24-_hour clock"
 msgstr ""
 
-#: ../plugins/clock/clock.c:468
+#: ../plugins/clock/clock.c:470
 #, fuzzy
 msgid "Show AM/PM"
 msgstr " एम / पीम"
 
-#: ../plugins/clock/clock.c:476
+#: ../plugins/clock/clock.c:478
 msgid "Display seconds"
 msgstr ""
 
@@ -622,6 +615,14 @@ msgstr "फक्त लहान केलेल्या ऍँप्लिक
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Select Panel"
+#~ msgstr "फाईल निवडा"
+
+#, fuzzy
+#~ msgid "Panel Properties"
+#~ msgstr "पॅनेल रचना"
 
 #, fuzzy
 #~ msgid "Panel"
