@@ -759,12 +759,7 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                               G_CALLBACK (xfce_panel_plugin_signal_about), 
                               plugin);
 
-    /* insert custom items after about */
-    insert_position = 2;
-    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-insert-position", 
-                       GINT_TO_POINTER (insert_position));
-
-    /* move / remove */
+    /* move */
     
     mi = gtk_image_menu_item_new_with_label (_("Move"));
     gtk_widget_show (mi);
@@ -778,6 +773,12 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                               G_CALLBACK (xfce_panel_plugin_move), 
                               plugin);
 
+    /* insert custom items after move */
+    insert_position = 3;
+    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-insert-position", 
+                       GINT_TO_POINTER (insert_position));
+    
+    /* remove */
     mi = gtk_separator_menu_item_new();
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
