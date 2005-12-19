@@ -169,6 +169,18 @@ tasklist_write_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
     xfce_rc_close (rc);
 }
 
+static void 
+tasklist_realize (XfcePanelPlugin *plugin, Tasklist *tasklist)
+{
+    GdkScreen *screen;
+    int screen_idx;
+
+    screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+    screen_idx = gdk_screen_get_number (screen);
+    
+    netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), netk_screen_get (screen_idx));
+}
+
 /* create widgets and connect to signals */
 static gboolean
 handle_expose (GtkWidget *widget, GdkEventExpose *ev, Tasklist *tasklist)
@@ -222,7 +234,10 @@ tasklist_construct (XfcePanelPlugin *plugin)
     
     g_signal_connect (plugin, "save", 
                       G_CALLBACK (tasklist_write_rc_file), tasklist);
-    
+
+    g_signal_connect (plugin, "realize",
+		      G_CALLBACK (tasklist_realize), tasklist);
+
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
                       G_CALLBACK (tasklist_properties_dialog), tasklist);
