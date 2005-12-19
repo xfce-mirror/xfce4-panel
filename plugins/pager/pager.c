@@ -150,6 +150,19 @@ pager_write_rc_file (XfcePanelPlugin *plugin, Pager *pager)
     xfce_rc_close (rc);
 }
 
+static void 
+pager_realize (XfcePanelPlugin *plugin, Pager *pager)
+{
+    GdkScreen *screen;
+    int screen_idx;
+
+    screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+    screen_idx = gdk_screen_get_number (screen);
+    
+    pager->screen = netk_screen_get (screen_idx);
+    netk_pager_set_screen (NETK_PAGER (pager->pager), pager->screen);
+}
+
 /* create widgets and connect to signals */
 static void
 pager_n_workspaces_changed (NetkScreen * screen, NetkWorkspace * ws, 
@@ -206,13 +219,16 @@ pager_construct (XfcePanelPlugin *plugin)
     
     g_signal_connect (plugin, "save", 
                       G_CALLBACK (pager_write_rc_file), pager);
+
+    g_signal_connect (plugin, "realize",
+		      G_CALLBACK (pager_realize), pager);
     
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
                       G_CALLBACK (pager_properties_dialog), pager);
 
     pager->plugin = plugin;
-    
+
     pager->screen = netk_screen_get_default ();
     
     pager_read_rc_file (plugin, pager);
