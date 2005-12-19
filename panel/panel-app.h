@@ -83,6 +83,9 @@ void panel_app_unset_current_panel (gpointer *panel);
 
 int panel_app_get_current_panel (void);
 
+/* get panel list */
+G_CONST_RETURN GPtrArray *panel_app_get_panel_list (void);
+
 G_END_DECLS
 
 #endif /* _PANEL_APP_H */

@@ -33,7 +33,7 @@
  * Licensed under the GNU GPL
  */
 
-static GtkTargetEntry dest_target_list[] = 
+const static GtkTargetEntry dest_target_list[] = 
 {
     { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME },
     { "application/x-xfce-panel-plugin-widget", 
@@ -124,5 +124,16 @@ panel_dnd_set_widget_data (GtkSelectionData *data, GtkWidget *widget)
     DBG (" + set pointer: %ld", n);
     
     gtk_selection_data_set (data, data->target, 32, (guchar *) &n, sizeof (n));
+}
+
+void
+panel_dnd_begin_drag (GtkWidget *widget)
+{
+    static GtkTargetList *list = NULL;
+    
+    if (G_UNLIKELY (list == NULL))
+        list = gtk_target_list_new (widget_target_list, n_widget_targets);
+    
+    gtk_drag_begin (widget, list, GDK_ACTION_COPY, 1, NULL);
 }
 

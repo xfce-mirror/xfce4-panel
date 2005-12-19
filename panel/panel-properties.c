@@ -530,10 +530,13 @@ panel_enter (Panel *panel, GdkEventCrossing * event)
     {
         panel_app_set_current_panel ((gpointer)panel);
         
-        _set_transparent (panel, FALSE);
-
         priv = PANEL_GET_PRIVATE (panel);
         
+        if (priv->block_autohide)
+            return;
+        
+        _set_transparent (panel, FALSE);
+
         if (!priv->autohide)
             return;
         
@@ -558,11 +561,14 @@ panel_leave (Panel *panel, GdkEventCrossing * event)
 
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-        _set_transparent (panel, TRUE);
-
         priv = PANEL_GET_PRIVATE (panel);
         
-        if (!priv->autohide || priv->block_autohide)
+        if (priv->block_autohide)
+            return;
+        
+        _set_transparent (panel, TRUE);
+
+        if (!priv->autohide)
             return;
         
         if (priv->unhide_timeout)
@@ -703,7 +709,7 @@ void panel_set_autohide (Panel *panel, gboolean autohide)
         _set_hidden (panel, TRUE);
 
         /* If autohide is blocked unhide again.
-         * We use the firt _set_hidden() call to give the user
+         * We use the first _set_hidden() call to give the user
          * some visual feedback. */
         if (priv->block_autohide)
         {
@@ -744,10 +750,13 @@ void panel_unblock_autohide (Panel *panel)
     {
         priv->block_autohide--;
 
-        if (!priv->block_autohide && priv->autohide && !priv->hidden)
-            _set_hidden (panel, TRUE);
-
-        _set_transparent (panel, TRUE);
+        if (!priv->block_autohide)
+        {
+            if (priv->autohide && !priv->hidden)
+                _set_hidden (panel, TRUE);
+            
+            _set_transparent (panel, TRUE);
+        }
     }
 }
 

@@ -19,36 +19,14 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _PANEL_DND_H
-#define _PANEL_DND_H
+#ifndef _PANEL_DIALOGS_H
+#define _PANEL_DIALOGS_H
 
-#include <gtk/gtk.h>
+#include "panel.h"
 
-enum 
-{
-    TARGET_PLUGIN_NAME,
-    TARGET_PLUGIN_WIDGET,
-    TARGET_FILE
-};
+void panel_dialog (GPtrArray *panels, gboolean show_items);
 
-void panel_dnd_set_dest (GtkWidget *widget);
-
-void panel_dnd_set_widget_delete_dest (GtkWidget *widget);
-
-void panel_dnd_unset_dest (GtkWidget *widget);
-
-GtkWidget *panel_dnd_get_plugin_from_data (GtkSelectionData *data);
+#endif /* _PANEL_DIALOGS_H */
 
 
-void panel_dnd_set_name_source (GtkWidget *widget);
-
-void panel_dnd_set_widget_source (GtkWidget *widget);
-
-void panel_dnd_unset_source (GtkWidget *widget);
-
-void panel_dnd_set_widget_data (GtkSelectionData *data, GtkWidget *plugin);
-
-void panel_dnd_begin_drag (GtkWidget *widget);
-
-#endif /* _PANEL_DND_H */
 

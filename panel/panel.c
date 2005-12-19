@@ -432,30 +432,39 @@ _panel_drag_begin (GtkWidget *widget, GdkDragContext *drag_context,
     int x, y, rootx, rooty, w, h;
     GtkWidget *plugin;
     GdkPixbuf *pb;
+    PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
 
     DBG (" + drag begin");
     
-    x = y = 0;
-    gdk_display_get_pointer (gtk_widget_get_display (widget), 
-                             NULL, &x, &y, NULL);
-    gdk_window_get_root_origin (widget->window, &rootx, &rooty);
-    x -= rootx;
-    y -= rooty;
+    if (priv->drag_widget)
+    {
+        plugin = priv->drag_widget;
+    }
+    else
+    {
+        x = y = 0;
+        gdk_display_get_pointer (gtk_widget_get_display (widget), 
+                                 NULL, &x, &y, NULL);
+        gdk_window_get_root_origin (widget->window, &rootx, &rooty);
+        x -= rootx;
+        y -= rooty;
 
-    plugin = xfce_itembar_get_item_at_point (XFCE_ITEMBAR (widget), x, y);
+        plugin = xfce_itembar_get_item_at_point (XFCE_ITEMBAR (widget), x, y);
+    }
 
     if (plugin)
     {
-        PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
         GdkDrawable *d = GDK_DRAWABLE (plugin->window);
         
         gdk_drawable_get_size (d, &w, &h);
         pb = gdk_pixbuf_get_from_drawable (NULL, d, NULL, 0, 0, 0, 0, w, h);
-        gtk_drag_source_set_icon_pixbuf (widget, pb);
+        gtk_drag_set_icon_pixbuf (drag_context, pb, 0, 0);
         g_object_unref (pb);
 
         priv->drag_widget = plugin;
     }
+    else
+        DBG ("No Plugin");
 }
 
 static void
@@ -465,6 +474,25 @@ _panel_drag_end (GtkWidget *widget, GdkDragContext *drag_context,
     PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
 
     priv->drag_widget = NULL;
+
+    if (!priv->edit_mode)
+    {
+        const GPtrArray *panels = panel_app_get_panel_list ();
+        int i;
+        
+        for (i = 0; i < panels->len; ++i)
+        {
+            Panel *p = g_ptr_array_index (panels, i);
+            
+            priv = PANEL_GET_PRIVATE (p);
+
+            xfce_itembar_lower_event_window (XFCE_ITEMBAR (priv->itembar));
+            panel_dnd_unset_dest (priv->itembar);
+            panel_set_items_sensitive (p, TRUE);
+
+            panel_unblock_autohide (p);
+        }
+    }
 }
 
 static void
@@ -538,6 +566,17 @@ _panel_create_menu (Panel *panel)
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
     img = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+    gtk_widget_show (img);
+    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+
+    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize), 
+                      NULL);
+    
+    mi = gtk_image_menu_item_new_with_label (_("Add Items"));
+    gtk_widget_show (mi);
+    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+    img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
     gtk_widget_show (img);
     gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
@@ -671,6 +710,34 @@ _item_expand_changed (GtkWidget *item, gboolean expand, Panel *panel)
     xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item, expand);
 }
 
+static void
+_item_start_move (GtkWidget *item, Panel *panel)
+{
+    const GPtrArray *panels = panel_app_get_panel_list ();
+    PanelPrivate *priv;
+    int i;
+    
+    for (i = 0; i < panels->len; ++i)
+    {
+        Panel *p = g_ptr_array_index (panels, i);
+        
+        priv = PANEL_GET_PRIVATE (p);
+
+        panel_set_items_sensitive (p, FALSE);
+
+        panel_dnd_set_dest (priv->itembar);
+        panel_dnd_set_widget_source (priv->itembar);
+        xfce_itembar_lower_event_window (XFCE_ITEMBAR (priv->itembar));
+
+        panel_block_autohide (p);
+    }
+
+    priv = PANEL_GET_PRIVATE (panel);
+    priv->drag_widget = item;
+
+    panel_dnd_begin_drag (priv->itembar);
+}
+
 static GtkWidget *
 panel_create_item (Panel *panel, const char *name, const char *id)
 {
@@ -693,6 +760,9 @@ panel_create_item (Panel *panel, const char *name, const char *id)
         
         g_signal_connect (item, "customize-items", 
                           G_CALLBACK (panel_app_customize_items), NULL);
+        
+        g_signal_connect (item, "move", 
+                          G_CALLBACK (_item_start_move), panel);
     }
 
     return item;

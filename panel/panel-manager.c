@@ -1988,6 +1988,8 @@ dialog_opened (Panel *panel)
     panel_dnd_set_widget_source (priv->itembar);
 
     panel_set_items_sensitive (panel, FALSE);
+
+    priv->edit_mode = TRUE;
 }
 
 static void
@@ -2003,6 +2005,8 @@ dialog_closed (Panel *panel)
     
     panel_dnd_unset_dest (priv->itembar);
     panel_dnd_unset_source (priv->itembar);
+
+    priv->edit_mode = FALSE;
 }
 
 static void

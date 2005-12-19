@@ -81,6 +81,8 @@ void xfce_panel_item_customize_panel (XfcePanelItem *item);
 
 void xfce_panel_item_customize_items (XfcePanelItem *item);
 
+void xfce_panel_item_move (XfcePanelItem *item);
+
 
 /* vtable */
 

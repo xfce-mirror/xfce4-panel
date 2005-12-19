@@ -63,6 +63,8 @@ struct _PanelPrivate
     int unhide_timeout;
 
     GtkWidget *drag_widget;
+
+    gboolean edit_mode;
 };
 
 #endif /* _PANEL_PRIVATE_H */

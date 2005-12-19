@@ -109,6 +109,8 @@ xfce_external_panel_plugin_customize_panel (XfcePanelPlugin * plugin);
 static void 
 xfce_external_panel_plugin_customize_items (XfcePanelPlugin * plugin);
 
+static void xfce_external_panel_plugin_move (XfcePanelPlugin * plugin);
+
 
 /* properties */
 static void xfce_external_panel_plugin_set_name (XfceExternalPanelPlugin *
@@ -164,6 +166,7 @@ xfce_external_panel_plugin_interface_init (gpointer g_iface, gpointer data)
     iface->set_expand = xfce_external_panel_plugin_set_expand;
     iface->customize_panel = xfce_external_panel_plugin_customize_panel;
     iface->customize_items = xfce_external_panel_plugin_customize_items;
+    iface->move = xfce_external_panel_plugin_move;
 }
 
 static void
@@ -372,6 +375,18 @@ xfce_external_panel_plugin_customize_items (XfcePanelPlugin * plugin)
     xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
                                     priv->socket_id,
                                     XFCE_PANEL_PLUGIN_CUSTOMIZE_ITEMS, 0);
+}
+
+static void 
+xfce_external_panel_plugin_move (XfcePanelPlugin * plugin)
+{
+    XfceExternalPanelPluginPrivate *priv;
+
+    priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
+
+    xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
+                                    priv->socket_id,
+                                    XFCE_PANEL_PLUGIN_MOVE, 0);
 }
 
 

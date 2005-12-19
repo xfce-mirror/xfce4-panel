@@ -18,6 +18,8 @@ xfce4_panel_SOURCES =						\
 	panel-settings.h					\
 	panel-manager.c					\
 	panel-manager.h					\
+	panel-dialogs.c					\
+	panel-dialogs.h					\
 	panel.c							\
 	panel-private.h						\
 	panel.h

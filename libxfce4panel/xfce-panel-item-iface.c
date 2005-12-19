@@ -31,6 +31,7 @@ enum
     MENU_DEACTIVATED,
     CUSTOMIZE_PANEL,
     CUSTOMIZE_ITEMS,
+    MOVE,
     LAST_SIGNAL
 };
 
@@ -106,6 +107,21 @@ xfce_panel_item_base_init (gpointer g_class)
          **/
         xfce_panel_item_signals [CUSTOMIZE_ITEMS] =
             g_signal_newv ("customize-items",
+                           XFCE_TYPE_PANEL_ITEM,
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                                 G_SIGNAL_NO_HOOKS,
+                           NULL, NULL, NULL,
+                           g_cclosure_marshal_VOID__VOID, 
+                           G_TYPE_NONE, 0, NULL);
+
+        /**
+         * XfcePanelItem::move
+         * @item   : #XfcePanelItem
+         *
+         * The signal is emitted when a plugin requests the item to be moved.
+         **/
+        xfce_panel_item_signals [MOVE] =
+            g_signal_newv ("move",
                            XFCE_TYPE_PANEL_ITEM,
                            G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
                                  G_SIGNAL_NO_HOOKS,
@@ -206,6 +222,21 @@ xfce_panel_item_customize_items (XfcePanelItem *item)
     g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (item, xfce_panel_item_signals[CUSTOMIZE_ITEMS], 0, NULL);
+}
+
+/**
+ * xfce_panel_item_move
+ * @item   : #XfcePanelItem
+ *
+ * Emits the "move" signal on the item. Should only be called by
+ * item implementations.
+ **/
+void
+xfce_panel_item_move (XfcePanelItem *item)
+{
+    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+
+    g_signal_emit (item, xfce_panel_item_signals[MOVE], 0, NULL);
 }
 
 /* properties */
