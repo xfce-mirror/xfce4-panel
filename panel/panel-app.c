@@ -25,6 +25,8 @@
 
 #include <signal.h>
 #include <string.h>
+#include <errno.h>
+#include <sys/wait.h>
 
 #include <X11/Xlib.h>
 #include <gtk/gtk.h>
@@ -115,6 +117,25 @@ cleanup_panels (void)
 }
 
 /* signal handling */
+
+/** copied from glibc manual, does this prevent zombies? */
+static void
+sigchld_handler (int sig)
+{
+    int pid, status, serrno;
+
+    serrno = errno;
+
+    while (1)
+    {
+        pid = waitpid (WAIT_ANY, &status, WNOHANG);
+
+        if (pid < 0 || pid == 0)
+            break;
+    }
+
+    errno = serrno;
+}
 
 static void
 sighandler (int sig)
@@ -427,12 +448,15 @@ panel_app_run (int argc, char **argv)
     sigaction (SIGUSR2, &act, NULL);
     sigaction (SIGINT, &act, NULL);
     sigaction (SIGTERM, &act, NULL);
+    act.sa_handler = sigchld_handler;
+    sigaction (SIGCHLD, &act, NULL);
 #else
     signal (SIGHUP, sighandler);
     signal (SIGUSR1, sighandler);
     signal (SIGUSR2, sighandler);
     signal (SIGINT, sighandler);
     signal (SIGTERM, sighandler);
+    signal (SIGCHLD, sigchld_handler);
 #endif
 
     /* environment */
