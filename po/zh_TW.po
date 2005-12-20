@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.25\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-19 23:05+0100\n"
+"POT-Creation-Date: 2005-12-20 10:36+0100\n"
 "PO-Revision-Date: 2005-10-11 00:00+0800\n"
 "Last-Translator: Hydonsingore Cia <hydonsingore@mail.educities.edu.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -43,7 +43,7 @@ msgstr "這個項目將會從面板中移除，其設定將會遺失"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:734
 #: ../plugins/launcher/launcher-dialog.c:1273
 #: ../plugins/separator/separator.c:241 ../plugins/actions/actions.c:295
-#: ../plugins/tasklist/tasklist.c:320 ../plugins/pager/pager.c:275
+#: ../plugins/tasklist/tasklist.c:335 ../plugins/pager/pager.c:291
 #: ../plugins/systray/systray.c:345 ../plugins/iconbox/iconbox.c:748
 #: ../plugins/clock/clock.c:401
 msgid "Properties"
@@ -69,23 +69,23 @@ msgstr "移除"
 msgid "Add New Item"
 msgstr "新增項目"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:815 ../panel/panel.c:569
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:815 ../panel/panel.c:574
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:580 ../panel/panel-dialogs.c:593
+#: ../panel/panel.c:585 ../panel/panel-dialogs.c:593
 msgid "Add Items"
 msgstr ""
 
-#: ../panel/panel.c:595 ../plugins/actions/actions.c:334
+#: ../panel/panel.c:600 ../plugins/actions/actions.c:334
 msgid "Quit"
 msgstr "離開"
 
-#: ../panel/panel.c:605
+#: ../panel/panel.c:610
 msgid "Restart"
 msgstr "重新啟動"
 
-#: ../panel/panel.c:619
+#: ../panel/panel.c:624
 msgid "About the Xfce Panel"
 msgstr "關於 Xfce 面板"
 
@@ -444,40 +444,40 @@ msgstr "鎖住螢幕"
 msgid "Quit + Lock screen"
 msgstr "離開並鎖住螢幕"
 
-#: ../plugins/tasklist/tasklist.c:334
+#: ../plugins/tasklist/tasklist.c:349
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "工作清單"
 
-#: ../plugins/tasklist/tasklist.c:347
+#: ../plugins/tasklist/tasklist.c:362
 msgid "Show tasks from _all workspaces"
 msgstr "顯示所有工作區的工作(_A)"
 
-#: ../plugins/tasklist/tasklist.c:357
+#: ../plugins/tasklist/tasklist.c:372
 msgid "Show application _names"
 msgstr "顯示應用程式的名稱(_N)"
 
-#: ../plugins/tasklist/tasklist.c:371
+#: ../plugins/tasklist/tasklist.c:386
 msgid "Never group tasks"
 msgstr "永不將工作分門別類"
 
-#: ../plugins/tasklist/tasklist.c:374
+#: ../plugins/tasklist/tasklist.c:389
 msgid "Automatically group tasks"
 msgstr "自動將工作分門別類"
 
-#: ../plugins/tasklist/tasklist.c:377
+#: ../plugins/tasklist/tasklist.c:392
 msgid "Always group tasks"
 msgstr "總是將工作分門別類"
 
-#: ../plugins/pager/pager.c:289 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "頁面切換器"
 
-#: ../plugins/pager/pager.c:309
+#: ../plugins/pager/pager.c:325
 msgid "Number of rows:"
 msgstr "行數："
 
-#: ../plugins/pager/pager.c:313
+#: ../plugins/pager/pager.c:329
 msgid "Number of columns:"
 msgstr "列數："
 

@@ -363,7 +363,7 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
     if (data->length > 0)
     {
         GtkWidget *plugin;
-        int index;
+        int index, oldindex = -1;
         
         switch (info)
         {
@@ -397,8 +397,17 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                             xfce_panel_item_get_expand (
                                 XFCE_PANEL_ITEM (plugin)));
                 }
-                xfce_itembar_reorder_child (XFCE_ITEMBAR (widget), plugin, 
-                                            index);
+                else /* only when moving on the same panel */
+                {
+                    oldindex = 
+                        xfce_itembar_get_item_index (XFCE_ITEMBAR (widget),
+                                                     plugin);
+                    if (index > oldindex) index--;
+                }
+                
+                if (index != oldindex)
+                    xfce_itembar_reorder_child (XFCE_ITEMBAR (widget), plugin, 
+                                                index);
                 break;
                 
             default:
