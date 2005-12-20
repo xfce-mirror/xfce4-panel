@@ -116,6 +116,10 @@ static void xfce_internal_panel_plugin_customize_items (XfcePanelPlugin *
 
 static void xfce_internal_panel_plugin_move (XfcePanelPlugin * plugin);
 
+static void 
+xfce_internal_panel_plugin_register_menu (XfcePanelPlugin * plugin,
+                                          GtkMenu *menu);
+
 
 /* properties */
 static void xfce_internal_panel_plugin_set_name (XfcePanelPlugin * plugin,
@@ -186,6 +190,7 @@ xfce_internal_panel_plugin_init_plugin_interface (gpointer g_iface,
     iface->customize_panel = xfce_internal_panel_plugin_customize_panel;
     iface->customize_items = xfce_internal_panel_plugin_customize_items;
     iface->move = xfce_internal_panel_plugin_move;
+    iface->register_menu = xfce_internal_panel_plugin_register_menu;
 }
 
 static void
@@ -519,9 +524,24 @@ xfce_internal_panel_plugin_customize_items (XfcePanelPlugin * plugin)
     xfce_panel_item_customize_items (XFCE_PANEL_ITEM (plugin));
 }
 
-static void xfce_internal_panel_plugin_move (XfcePanelPlugin * plugin)
+static void 
+xfce_internal_panel_plugin_move (XfcePanelPlugin * plugin)
 {
     xfce_panel_item_move (XFCE_PANEL_ITEM (plugin));
+}
+
+static void 
+xfce_internal_panel_plugin_register_menu (XfcePanelPlugin * plugin,
+                                          GtkMenu *menu)
+{
+    int id;
+    
+    xfce_panel_item_menu_opened (XFCE_PANEL_ITEM (plugin));
+
+    id = g_signal_connect (menu, "deactivate", 
+                           G_CALLBACK (_plugin_menu_deactivated), plugin);
+    g_object_set_data (G_OBJECT (plugin), "deactivate_id", 
+                       GINT_TO_POINTER (id));
 }
 
 
@@ -574,7 +594,18 @@ xfce_internal_panel_plugin_set_display_name (XfcePanelPlugin * plugin,
 static void
 _plugin_menu_deactivated (GtkWidget * menu, XfcePanelItem * item)
 {
+    int id;
+    
     xfce_panel_item_menu_deactivated (item);
+
+    id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), 
+                                             "deactivate_id"));
+
+    if (id > 0)
+    {
+        g_signal_handler_disconnect (menu, id);
+        g_object_set_data (G_OBJECT (item), "deactivate_id", NULL);
+    }
 }
 
 /* public API */

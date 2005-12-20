@@ -111,6 +111,10 @@ xfce_external_panel_plugin_customize_items (XfcePanelPlugin * plugin);
 
 static void xfce_external_panel_plugin_move (XfcePanelPlugin * plugin);
 
+static void 
+xfce_external_panel_plugin_register_menu (XfcePanelPlugin * plugin,
+                                          GtkMenu *menu);
+
 
 /* properties */
 static void xfce_external_panel_plugin_set_name (XfceExternalPanelPlugin *
@@ -167,6 +171,7 @@ xfce_external_panel_plugin_interface_init (gpointer g_iface, gpointer data)
     iface->customize_panel = xfce_external_panel_plugin_customize_panel;
     iface->customize_items = xfce_external_panel_plugin_customize_items;
     iface->move = xfce_external_panel_plugin_move;
+    iface->register_menu = xfce_external_panel_plugin_register_menu;
 }
 
 static void
@@ -389,6 +394,27 @@ xfce_external_panel_plugin_move (XfcePanelPlugin * plugin)
                                     XFCE_PANEL_PLUGIN_MOVE, 0);
 }
 
+static void 
+xfce_external_panel_plugin_register_menu (XfcePanelPlugin * plugin,
+                                          GtkMenu *menu)
+{
+    XfceExternalPanelPluginPrivate *priv;
+    int id;
+
+    priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
+
+    xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
+                                    priv->socket_id,
+                                    XFCE_PANEL_PLUGIN_POPUP_MENU, 0);
+
+    id = g_signal_connect (menu, "deactivate", 
+                           G_CALLBACK (_plugin_menu_deactivated), plugin);
+
+    g_object_set_data (G_OBJECT (plugin), "deactivate_id", 
+                       GINT_TO_POINTER (id));
+}
+
+
 
 /* item/plugin interaction */
 static void
@@ -505,12 +531,22 @@ static void
 _plugin_menu_deactivated (GtkWidget * menu, XfceExternalPanelPlugin * plugin)
 {
     XfceExternalPanelPluginPrivate *priv;
+    int id;
 
     priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
 
     xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
                                     priv->socket_id,
                                     XFCE_PANEL_PLUGIN_MENU_DEACTIVATED, 0);
+
+    id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), 
+                                              "deactivate_id"));
+
+    if (id > 0)
+    {
+        g_signal_handler_disconnect (menu, id);
+        g_object_set_data (G_OBJECT (plugin), "deactivate_id", NULL);
+    }
 }
 
 static gboolean

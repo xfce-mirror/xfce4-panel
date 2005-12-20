@@ -91,6 +91,9 @@ void xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin);
 
 void xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin);
 
+void xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
+                                      GtkMenu *menu);
+
 
 /* config */
 char *xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin);

@@ -387,6 +387,9 @@ _item_event_received (XfceExternalPanelItem * item, GdkEventClient * ev)
             case XFCE_PANEL_PLUGIN_MENU_DEACTIVATED:
                 xfce_panel_item_menu_deactivated (XFCE_PANEL_ITEM (item));
                 break;
+            case XFCE_PANEL_PLUGIN_POPUP_MENU:
+                xfce_panel_item_menu_opened (XFCE_PANEL_ITEM (item));
+                break;
             default:
                 DBG ("Unknown message: %d", ev->data.s[0]);
                 return FALSE;

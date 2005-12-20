@@ -41,6 +41,9 @@ struct _XfcePanelPluginInterface
     void (*customize_items)   (XfcePanelPlugin *plugin);
     
     void (*move)              (XfcePanelPlugin *plugin);
+
+    void (*register_menu)     (XfcePanelPlugin *plugin,
+                               GtkMenu *menu);
 };
 
 /* menu */
@@ -79,6 +82,8 @@ void xfce_panel_plugin_customize_panel (XfcePanelPlugin *plugin);
 void xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin);
 
 void xfce_panel_plugin_move (XfcePanelPlugin *plugin);
+
+void xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin, GtkMenu *menu);
 
 
 G_END_DECLS

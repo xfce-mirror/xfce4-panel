@@ -29,6 +29,7 @@ enum
 {
     EXPAND_CHANGED,
     MENU_DEACTIVATED,
+    MENU_OPENED,
     CUSTOMIZE_PANEL,
     CUSTOMIZE_ITEMS,
     MOVE,
@@ -72,10 +73,25 @@ xfce_panel_item_base_init (gpointer g_class)
          * XfcePanelItem::menu-deactivated
          * @item   : #XfcePanelItem
          *
-         * The signal is emitted when a plugin menu is deactivate.
+         * The signal is emitted when a plugin menu is deactivated.
          **/
         xfce_panel_item_signals [MENU_DEACTIVATED] =
             g_signal_newv ("menu-deactivated",
+                           XFCE_TYPE_PANEL_ITEM,
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                                 G_SIGNAL_NO_HOOKS,
+                           NULL, NULL, NULL,
+                           g_cclosure_marshal_VOID__VOID, 
+                           G_TYPE_NONE, 0, NULL);
+
+        /**
+         * XfcePanelItem::menu-opened
+         * @item   : #XfcePanelItem
+         *
+         * The signal is emitted when a plugin menu is opened.
+         **/
+        xfce_panel_item_signals [MENU_OPENED] =
+            g_signal_newv ("menu-opened",
                            XFCE_TYPE_PANEL_ITEM,
                            G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
                                  G_SIGNAL_NO_HOOKS,
@@ -192,6 +208,21 @@ xfce_panel_item_menu_deactivated (XfcePanelItem *item)
     g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (item, xfce_panel_item_signals[MENU_DEACTIVATED], 0, NULL);
+}
+
+/**
+ * xfce_panel_item_menu_opened
+ * @item   : #XfcePanelItem
+ *
+ * Emits the "menu-opened" signal on the item. Should only be called by
+ * item implementations.
+ **/
+void 
+xfce_panel_item_menu_opened (XfcePanelItem *item)
+{
+    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+
+    g_signal_emit (item, xfce_panel_item_signals[MENU_OPENED], 0, NULL);
 }
 
 /**

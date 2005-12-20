@@ -77,6 +77,8 @@ void xfce_panel_item_expand_changed (XfcePanelItem *item, gboolean expand);
 
 void xfce_panel_item_menu_deactivated (XfcePanelItem *item);
 
+void xfce_panel_item_menu_opened (XfcePanelItem *item);
+
 void xfce_panel_item_customize_panel (XfcePanelItem *item);
 
 void xfce_panel_item_customize_items (XfcePanelItem *item);

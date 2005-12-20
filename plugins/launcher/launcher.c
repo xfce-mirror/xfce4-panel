@@ -688,6 +688,9 @@ real_toggle_menu (LauncherPlugin *launcher)
     
     if (launcher->entries->len > 0)
     {
+        xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (launcher->plugin), 
+                                         GTK_MENU (launcher->menu));
+
         gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL, 
                         (GtkMenuPositionFunc) launcher_position_menu, 
                         launcher->arrowbutton, 0, 
@@ -1069,6 +1072,8 @@ launcher_new (XfcePanelPlugin *plugin)
     screen_position = xfce_panel_plugin_get_screen_position (plugin);
     
     launcher = g_new0 (LauncherPlugin, 1);
+    
+    launcher->plugin = GTK_WIDGET (plugin);
     
     launcher->tips = gtk_tooltips_new ();
     g_object_ref (launcher->tips);

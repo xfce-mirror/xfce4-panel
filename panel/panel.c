@@ -75,6 +75,8 @@ static void panel_set_property (GObject * object,
 
 static void panel_menu_deactivated (Panel *panel);
 
+static void panel_menu_opened (Panel *panel);
+
 static void panel_insert_item (Panel *panel, 
                                const char *name, 
                                int position);
@@ -769,6 +771,9 @@ panel_create_item (Panel *panel, const char *name, const char *id)
         g_signal_connect_swapped (item, "menu-deactivated", 
                                   G_CALLBACK (panel_menu_deactivated), panel);
         
+        g_signal_connect_swapped (item, "menu-opened", 
+                                  G_CALLBACK (panel_menu_opened), panel);
+        
         g_signal_connect (item, "expand-changed", 
                           G_CALLBACK (_item_expand_changed), panel);
         
@@ -927,12 +932,11 @@ static void
 panel_menu_deactivated (Panel *panel)
 {
     int x, y, w, h, px, py;
-    PanelPrivate *priv;
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
-    
-    priv = PANEL_GET_PRIVATE (panel);
 
+    panel_unblock_autohide (panel);
+    
     gdk_display_get_pointer (gdk_display_get_default (), NULL, &px, &py, NULL);
 
     gtk_window_get_position (GTK_WINDOW (panel), &x, &y);
@@ -949,5 +953,13 @@ panel_menu_deactivated (Panel *panel)
 
         gdk_event_free (ev);
     }
+}
+
+static void
+panel_menu_opened (Panel *panel)
+{
+    g_return_if_fail (PANEL_IS_PANEL (panel));
+
+    panel_block_autohide (panel);
 }
 

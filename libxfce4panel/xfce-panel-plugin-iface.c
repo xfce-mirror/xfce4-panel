@@ -660,6 +660,20 @@ xfce_panel_plugin_move (XfcePanelPlugin *plugin)
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->move (plugin);
 }
 
+/**
+ * xfce_panel_plugin_register_menu
+ * @plugin : an #XfcePanelPlugin
+ * @menu   : a #GtkMenu that will be opened
+ *
+ * Register an open menu. This will make sure the panel will properly handle
+ * its autohide behaviour.
+ **/
+void
+xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin, GtkMenu *menu)
+{
+    XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->register_menu (plugin, menu);
+}
+
 /* menu */
 
 static void
@@ -697,8 +711,6 @@ _plugin_menu_button_released (GtkWidget *menu, GdkEventButton *ev,
 /**
  * xfce_panel_plugin_create_menu
  * @plugin          : an #XfcePanelPlugin
- * @info            : the associated #XfcePanelPluginInfo
- * @deactivate_cb   : function to call when menu is deactivated
  *
  * This should only be called by implementors of the panel plugin interface.
  **/
@@ -716,7 +728,6 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
 
     menu = gtk_menu_new ();
 
-#if 0
     /* title */
     mi = gtk_menu_item_new_with_label (
             xfce_panel_plugin_get_display_name (plugin));
@@ -727,7 +738,6 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-#endif
     
     /* configure, hide by default */
     
@@ -742,7 +752,7 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                               G_CALLBACK (xfce_panel_plugin_signal_configure), 
                               plugin);
 
-    configure_position = 0;
+    configure_position = 2;
     g_object_set_data (G_OBJECT (plugin), 
                        "xfce-panel-plugin-configure-position", 
                        GINT_TO_POINTER (configure_position));
@@ -774,7 +784,7 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                               plugin);
 
     /* insert custom items after move */
-    insert_position = 3;
+    insert_position = 5;
     g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-insert-position", 
                        GINT_TO_POINTER (insert_position));
     
