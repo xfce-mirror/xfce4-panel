@@ -646,6 +646,12 @@ iconbox_screen_changed (GtkWidget *plugin, GdkScreen *screen, Iconbox *ib)
 }
 
 static void
+iconbox_realize (GtkWidget *plugin, Iconbox *ib)
+{
+  iconbox_screen_changed (GTK_WIDGET (plugin), gtk_widget_get_screen (plugin), ib);
+}
+
+static void
 iconbox_construct (XfcePanelPlugin *plugin)
 {
     Iconbox *iconbox = g_new0 (Iconbox, 1);
@@ -704,10 +710,8 @@ iconbox_construct (XfcePanelPlugin *plugin)
     iconbox->screen_changed_id = 
         g_signal_connect (plugin, "screen-changed", 
                           G_CALLBACK (iconbox_screen_changed), iconbox);
-
-    iconbox_screen_changed (GTK_WIDGET (plugin), 
-                            gdk_screen_get_default (),
-                            iconbox);
+    
+    g_signal_connect (plugin, "realize", G_CALLBACK (iconbox_realize), iconbox);
 }
 
 /* -------------------------------------------------------------------- *
