@@ -102,6 +102,9 @@ XfceItembar implements
 <title>Signal Prototypes</title>
 <synopsis>
 
+&quot;<link linkend="XfceItembar-contents-changed">contents-changed</link>&quot;
+            <link linkend="void">void</link>        user_function      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                            <link linkend="gpointer">gpointer</link> user_data);
 &quot;<link linkend="XfceItembar-orientation-changed">orientation-changed</link>&quot;
             <link linkend="void">void</link>        user_function      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                             <link linkend="GtkOrientation">GtkOrientation</link> orientation,
@@ -462,7 +465,21 @@ Whether the child of the <link linkend="XfceItembar"><type>XfceItembar</type></l
 
 <refsect1>
 <title>Signals</title>
-<refsect2><title><anchor id="XfceItembar-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
+<refsect2><title><anchor id="XfceItembar-contents-changed"/>The &quot;contents-changed&quot; signal</title>
+<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<para>
+Emitted when the contents of the itembar change, either by adding
+a child, removing a child, or reordering a child.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>itembar</parameter>&nbsp;:</term>
+<listitem><simpara> the object which emitted the signal
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
+<listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
+</variablelist></refsect2><refsect2><title><anchor id="XfceItembar-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
 <programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                             <link linkend="GtkOrientation">GtkOrientation</link> orientation,
                                             <link linkend="gpointer">gpointer</link> user_data);</programlisting>

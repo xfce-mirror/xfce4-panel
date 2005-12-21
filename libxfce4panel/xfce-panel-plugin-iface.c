@@ -715,8 +715,7 @@ _plugin_menu_button_released (GtkWidget *menu, GdkEventButton *ev,
  * This should only be called by implementors of the panel plugin interface.
  **/
 void
-xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin, 
-                               GCallback deactivate_cb)
+xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
 {
     GtkWidget *menu, *mi, *img;
     int insert_position;
@@ -835,9 +834,6 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin,
                               plugin);
 
     /* deactivation */
-    if (deactivate_cb)
-        g_signal_connect (menu, "deactivate", deactivate_cb, plugin);
-    
     g_signal_connect (menu, "deactivate", 
                       G_CALLBACK (_plugin_menu_deactivate), NULL);
     
@@ -874,6 +870,8 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin)
                 "xfce-panel-plugin-button-release-callback",
                 GINT_TO_POINTER (id));
 
+        xfce_panel_plugin_register_menu (plugin, menu);
+
         gtk_menu_set_screen (menu, 
                              gtk_widget_get_screen (GTK_WIDGET (plugin)));
         
@@ -904,6 +902,8 @@ _plugin_popup_menu (GtkWidget *widget, GdkEventButton *ev,
     {
         gtk_menu_set_screen (menu, gtk_widget_get_screen (widget));
         
+        xfce_panel_plugin_register_menu (plugin, menu);
+
         gtk_menu_popup (menu, NULL, NULL, NULL, NULL, ev->button, ev->time);
         return TRUE;
     }

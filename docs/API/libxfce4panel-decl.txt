@@ -99,16 +99,13 @@ struct _XfceItembarClass
     void (*orientation_changed)   (XfceItembar * itembar,
                                    GtkOrientation orientation);
 
-    void (*icon_size_changed)     (XfceItembar * itembar,
-                                   int size);
-
-    void (*toolbar_style_changed) (XfceItembar * itembar,
-                                   GtkToolbarStyle);
+    void (*contents_changed)      (XfceItembar * itembar);
 
     /* Padding for future expansion */
     void (*_xfce_reserved1)       (void);
     void (*_xfce_reserved2)       (void);
     void (*_xfce_reserved3)       (void);
+    void (*_xfce_reserved4)       (void);
 };
 </STRUCT>
 <FUNCTION>
@@ -403,6 +400,11 @@ XfcePanelPlugin *plugin
 <NAME>xfce_panel_plugin_unblock_menu</NAME>
 <RETURNS>void </RETURNS>
 XfcePanelPlugin *plugin
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_panel_plugin_register_menu</NAME>
+<RETURNS>void </RETURNS>
+XfcePanelPlugin *plugin,GtkMenu *menu
 </FUNCTION>
 <FUNCTION>
 <NAME>xfce_panel_plugin_lookup_rc_file</NAME>

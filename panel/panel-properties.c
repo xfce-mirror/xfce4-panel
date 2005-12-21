@@ -730,6 +730,8 @@ void panel_block_autohide (Panel *panel)
 {
     PanelPrivate *priv;
 
+    DBG ("block");
+    
     priv = PANEL_GET_PRIVATE (panel);
 
     priv->block_autohide++;
@@ -744,6 +746,8 @@ void panel_unblock_autohide (Panel *panel)
 {
     PanelPrivate *priv;
 
+    DBG ("unblock");
+    
     priv = PANEL_GET_PRIVATE (panel);
 
     if (priv->block_autohide > 0)
@@ -752,10 +756,21 @@ void panel_unblock_autohide (Panel *panel)
 
         if (!priv->block_autohide)
         {
-            if (priv->autohide && !priv->hidden)
-                _set_hidden (panel, TRUE);
+            int x, y, w, h, px, py;
+
+            gdk_display_get_pointer (gdk_display_get_default (), 
+                                     NULL, &px, &py, NULL);
+
+            gtk_window_get_position (GTK_WINDOW (panel), &x, &y);
+            gtk_window_get_size (GTK_WINDOW (panel), &w, &h);
+
+            if (px < x || px > x + w || py < y || py > y + h)
+            {
+                if (priv->autohide && !priv->hidden)
+                    _set_hidden (panel, TRUE);
             
-            _set_transparent (panel, TRUE);
+                _set_transparent (panel, TRUE);
+            }
         }
     }
 }

@@ -47,8 +47,7 @@ struct _XfcePanelPluginInterface
 };
 
 /* menu */
-void xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin, 
-                                    GCallback deactivate_cb);
+void xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin);
 
 void xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin);
 

@@ -46,6 +46,8 @@ const <link linkend="char">char</link>* <link linkend="xfce-panel-plugin-get-dis
                                             (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
 <link linkend="void">void</link>        <link linkend="xfce-panel-plugin-block-menu">xfce_panel_plugin_block_menu</link>    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
 <link linkend="void">void</link>        <link linkend="xfce-panel-plugin-unblock-menu">xfce_panel_plugin_unblock_menu</link>  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-register-menu">xfce_panel_plugin_register_menu</link> (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                             <link linkend="GtkMenu">GtkMenu</link> *menu);
 <link linkend="char">char</link>*       <link linkend="xfce-panel-plugin-lookup-rc-file">xfce_panel_plugin_lookup_rc_file</link>
                                             (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
 <link linkend="char">char</link>*       <link linkend="xfce-panel-plugin-save-location">xfce_panel_plugin_save_location</link> (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
@@ -372,6 +374,23 @@ See also: <link linkend="xfce-panel-plugin-block-menu"><function>xfce_panel_plug
 </para><variablelist role="params">
 <varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
 <listitem><simpara> an <link linkend="XfcePanelPlugin"><type>XfcePanelPlugin</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="xfce-panel-plugin-register-menu"/>xfce_panel_plugin_register_menu ()</title>
+<indexterm><primary>xfce_panel_plugin_register_menu</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_register_menu (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                             <link linkend="GtkMenu">GtkMenu</link> *menu);</programlisting>
+<para>
+Register an open menu. This will make sure the panel will properly handle
+its autohide behaviour.</para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>plugin</parameter>&nbsp;:</term>
+<listitem><simpara> an <link linkend="XfcePanelPlugin"><type>XfcePanelPlugin</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>menu</parameter>&nbsp;:</term>
+<listitem><simpara> a <link linkend="GtkMenu"><type>GtkMenu</type></link> that will be opened
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>

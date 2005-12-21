@@ -401,6 +401,8 @@ xfce_external_panel_plugin_register_menu (XfcePanelPlugin * plugin,
     XfceExternalPanelPluginPrivate *priv;
     int id;
 
+    DBG ("register menu");
+    
     priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
 
     xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
@@ -685,8 +687,7 @@ xfce_external_panel_plugin_new (int argc, char **argv,
         gtk_widget_show (GTK_WIDGET (plugin));
 
         /* add menu */
-        xfce_panel_plugin_create_menu (plugin, 
-                                       G_CALLBACK (_plugin_menu_deactivated));
+        xfce_panel_plugin_create_menu (plugin);
 
         xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin),
                                              GTK_WIDGET (plugin));

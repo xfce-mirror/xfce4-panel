@@ -536,6 +536,8 @@ xfce_internal_panel_plugin_register_menu (XfcePanelPlugin * plugin,
 {
     int id;
     
+    DBG ("register menu");
+    
     xfce_panel_item_menu_opened (XFCE_PANEL_ITEM (plugin));
 
     id = g_signal_connect (menu, "deactivate", 
@@ -648,8 +650,7 @@ xfce_internal_panel_plugin_new (const char *name,
     priv->size = size;
 
     /* add menu */
-    xfce_panel_plugin_create_menu (XFCE_PANEL_PLUGIN (plugin),
-                                   G_CALLBACK (_plugin_menu_deactivated));
+    xfce_panel_plugin_create_menu (XFCE_PANEL_PLUGIN (plugin));
 
     xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin),
                                          GTK_WIDGET (plugin));

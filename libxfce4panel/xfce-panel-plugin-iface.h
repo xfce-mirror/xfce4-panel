@@ -24,6 +24,7 @@
 
 #include <gtk/gtkwidget.h>
 #include <gtk/gtkmenuitem.h>
+#include <gtk/gtkmenu.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-enums.h>
 
