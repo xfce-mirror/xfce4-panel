@@ -101,7 +101,7 @@ _add_item_info_to_array (char *plugin_name, XfcePanelItemClass *class,
     info->comment = class->comment;
     
     if (class->icon)
-        info->icon = xfce_themed_icon_load (class->icon, 32);
+        info->icon = xfce_themed_icon_load (class->icon, 48);
 
     g_ptr_array_add (array, info);
 }

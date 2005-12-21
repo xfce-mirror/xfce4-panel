@@ -50,9 +50,6 @@ struct _PanelItemsDialog
     Panel *panel;
     int current;
     
-    int highlight_id;
-    GtkWidget *highlight;
-    
     GtkTooltips *tips;
 
     GPtrArray *items;
@@ -274,41 +271,32 @@ render_text (GtkTreeViewColumn * col, GtkCellRenderer * cell,
 	     GtkTreeModel * model, GtkTreeIter * iter, GtkWidget * treeview)
 {
     XfcePanelItemInfo *info;
-    GtkWidget *item = NULL;
 
     gtk_tree_model_get (model, iter, 0, &info, -1);
 
     if (info)
     {
         gboolean insensitive;
+        char text[512];
 
         insensitive = !xfce_panel_item_manager_is_available (info->name);
         
-#if 0
         if (info->comment)
         {
-            text = g_strdup_printf ("<b>%s</b>\n%s", info->display_name, 
+            g_snprintf (text, 512, "<b>%s</b>\n%s", info->display_name, 
                                     info->comment);
         }
         else
         {
-            text = g_strdup_printf ("<b>%s</b>", info->display_name);
+            g_snprintf (text, 512, "<b>%s</b>", info->display_name);
         }
-#endif
-        /* not panel tree */
-        if (!item)
-            g_object_set (cell, "markup", info->display_name, 
-                          "foreground-set", insensitive, NULL);
-        else
-            g_object_set (cell, "markup", info->display_name, NULL);
+
+        g_object_set (cell, "markup", text, 
+                      "foreground-set", insensitive, NULL);
     }
     else
     {
-        /* not panel tree */
-        if (!item)
-            g_object_set (cell, "markup", "", "foreground-set", TRUE, NULL);
-        else
-            g_object_set (cell, "markup", "", NULL);
+        g_object_set (cell, "markup", "", "foreground-set", TRUE, NULL);
     }
 }
 
@@ -574,7 +562,7 @@ add_items_dialog (GPtrArray *panels)
         gtk_dialog_new_with_buttons (_("Xfce Panel"), NULL,
                                      GTK_DIALOG_NO_SEPARATOR,
                                      GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-                                     GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
+                                     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                      GTK_STOCK_ADD, GTK_RESPONSE_OK,
                                      NULL);
     
@@ -1567,13 +1555,6 @@ manage_panels_dialog (GPtrArray *panels)
 
     gtk_container_set_border_width (GTK_CONTAINER (pmd->dlg), 2);
 
-    gtk_window_stick (GTK_WINDOW (pmd->dlg));
-    gtk_window_set_skip_taskbar_hint (GTK_WINDOW (pmd->dlg), TRUE);
-    gtk_window_set_skip_pager_hint (GTK_WINDOW (pmd->dlg), TRUE);
-    gtk_window_set_position (GTK_WINDOW (pmd->dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_screen (GTK_WINDOW (pmd->dlg), 
-                           gtk_widget_get_screen (GTK_WIDGET (panel)));
-
     pmd->tips = gtk_tooltips_new ();
     g_object_ref (pmd->tips);
     gtk_object_sink (GTK_OBJECT (pmd->tips));
@@ -1632,6 +1613,8 @@ manage_panels_dialog (GPtrArray *panels)
 
     g_signal_connect (pmd->dlg, "response", 
                       G_CALLBACK (panel_dialog_response), pmd);
+    
+    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
     gtk_widget_show (pmd->dlg);
 
     panel_app_register_dialog (pmd->dlg);
