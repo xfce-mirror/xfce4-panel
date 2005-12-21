@@ -174,7 +174,7 @@ present_dialog (GtkWidget *dialog, GPtrArray *panels)
     if (screen != gtk_widget_get_screen (dialog))
         gtk_window_set_screen (GTK_WINDOW (dialog), screen);
 
-    gtk_window_present (GTK_WINDOW (items_dialog_widget));
+    gtk_window_present (GTK_WINDOW (dialog));
 }
 
 
