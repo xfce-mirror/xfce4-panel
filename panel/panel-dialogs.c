@@ -1614,7 +1614,7 @@ manage_panels_dialog (GPtrArray *panels)
     g_signal_connect (pmd->dlg, "response", 
                       G_CALLBACK (panel_dialog_response), pmd);
     
-    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
+    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (pmd->dlg));
     gtk_widget_show (pmd->dlg);
 
     panel_app_register_dialog (pmd->dlg);
