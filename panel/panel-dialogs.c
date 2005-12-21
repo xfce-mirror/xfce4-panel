@@ -274,7 +274,7 @@ render_text (GtkTreeViewColumn * col, GtkCellRenderer * cell,
 	     GtkTreeModel * model, GtkTreeIter * iter, GtkWidget * treeview)
 {
     XfcePanelItemInfo *info;
-    GtkWidget *item;
+    GtkWidget *item = NULL;
 
     gtk_tree_model_get (model, iter, 0, &info, -1);
 
@@ -627,6 +627,7 @@ add_items_dialog (GPtrArray *panels)
      /* make panels insensitive, set up dnd and highlight current panel */
     g_ptr_array_foreach (panels, (GFunc)item_dialog_opened, NULL);
 
+    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
     gtk_widget_show (dlg);
 
     panel_app_register_dialog (dlg);
