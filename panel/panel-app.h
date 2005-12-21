@@ -73,6 +73,10 @@ XfceMonitor *panel_app_get_monitor (int n);
 
 int panel_app_get_n_monitors (void);
 
+gboolean panel_app_monitors_equal_height (void);
+
+gboolean panel_app_monitors_equal_width (void);
+
 /* keep track of open dialogs */
 void panel_app_register_dialog (GtkWidget *dialog);
 
@@ -85,6 +89,7 @@ int panel_app_get_current_panel (void);
 
 /* get panel list */
 G_CONST_RETURN GPtrArray *panel_app_get_panel_list (void);
+
 
 G_END_DECLS
 

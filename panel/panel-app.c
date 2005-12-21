@@ -78,6 +78,10 @@ struct _PanelApp
     int current_panel;
 
     GList *dialogs;
+
+    /* check whether monitors in Xinerama are aligned */
+    guint xinerama_and_equal_width;
+    guint xinerama_and_equal_height;
 };
 
 static PanelApp panel_app = {0};
@@ -272,7 +276,8 @@ create_monitor_list (void)
     GdkDisplay *display;
     GdkScreen *screen;
     XfceMonitor *monitor;
-    int n_screens, n_monitors, i, j;
+    int n_screens, n_monitors, i, j, w, h;
+    gboolean equal_w, equal_h;
     
     panel_app.monitor_list = g_ptr_array_new ();
 
@@ -280,6 +285,8 @@ create_monitor_list (void)
 
     n_screens = gdk_display_get_n_screens (display);
 
+    equal_w = equal_h = TRUE;
+    
     for (i = 0; i < n_screens; ++i)
     {
         screen = gdk_display_get_screen (display, i);
@@ -296,6 +303,18 @@ create_monitor_list (void)
             gdk_screen_get_monitor_geometry (screen, j, &(monitor->geometry));
 
             g_ptr_array_add (panel_app.monitor_list, monitor);
+            
+            if (j > 0)
+            {
+                if (w != monitor->geometry.width)
+                    equal_w = FALSE;
+                if (h != monitor->geometry.height)
+                    equal_h = FALSE;
+            }
+
+            w = monitor->geometry.width;
+            h = monitor->geometry.height;
+            
 #if TEST_MULTIPLE_MONITORS
             monitor = g_new (XfceMonitor, 1);
 
@@ -310,6 +329,12 @@ create_monitor_list (void)
 
         g_signal_connect (screen, "size-changed", 
                           G_CALLBACK (monitor_size_changed), NULL);
+    }
+
+    if (n_screens == 1 && n_monitors > 1)
+    {
+        panel_app.xinerama_and_equal_width = equal_w;
+        panel_app.xinerama_and_equal_height = equal_h;
     }
 }
 
@@ -784,4 +809,16 @@ panel_app_get_panel_list (void)
     return panel_app.panel_list;
 }
 
+/* check whether monitors in Xinerama are aligned */
+gboolean
+panel_app_monitors_equal_height (void)
+{
+    return panel_app.xinerama_and_equal_height;
+}
+
+gboolean
+panel_app_monitors_equal_width (void)
+{
+    return panel_app.xinerama_and_equal_width;
+}
 
