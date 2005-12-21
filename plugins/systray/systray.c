@@ -60,6 +60,8 @@ register_tray (Systray * systray)
     GError *error = NULL;
     Screen *scr = GDK_SCREEN_XSCREEN (gtk_widget_get_screen (systray->frame));
 
+    DBG ("screen : %d", gdk_screen_get_number (gtk_widget_get_screen (systray->frame)));
+
     if (xfce_system_tray_check_running (scr))
     {
         xfce_info (_("There is already a system tray running on this "
@@ -242,6 +244,12 @@ systray_write_rc_file (XfcePanelPlugin *plugin, Systray *systray)
     xfce_rc_close (rc);
 }
 
+static void
+frame_realize (GtkWidget *frame, Systray *systray)
+{
+  systray_start (systray);
+}
+
 /* create widgets and connect to signals */
 static void 
 systray_construct (XfcePanelPlugin *plugin)
@@ -272,6 +280,7 @@ systray_construct (XfcePanelPlugin *plugin)
     gtk_frame_set_shadow_type (GTK_FRAME (systray->frame), 
             systray->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
     gtk_widget_show (systray->frame);
+
     gtk_container_add (GTK_CONTAINER (plugin), systray->frame);
 
     systray->align = gtk_alignment_new (0, 0, 1, 1);
@@ -309,8 +318,9 @@ systray_construct (XfcePanelPlugin *plugin)
     
     g_signal_connect (systray->tray, "message_new", G_CALLBACK (message_new),
                       systray);
-    
-    systray_start (systray);
+
+    g_signal_connect (systray->frame, "realize", G_CALLBACK (frame_realize),
+		      systray);
 }
 
 /* -------------------------------------------------------------------- *
