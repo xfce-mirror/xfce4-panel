@@ -60,8 +60,6 @@ register_tray (Systray * systray)
     GError *error = NULL;
     Screen *scr = GDK_SCREEN_XSCREEN (gtk_widget_get_screen (systray->frame));
 
-    DBG ("screen : %d", gdk_screen_get_number (gtk_widget_get_screen (systray->frame)));
-
     if (xfce_system_tray_check_running (scr))
     {
         xfce_info (_("There is already a system tray running on this "
