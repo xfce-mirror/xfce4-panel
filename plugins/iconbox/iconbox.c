@@ -28,6 +28,7 @@
 
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
+#include <libxfcegui4/netk-window-action-menu.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
 #define N_ICONBOX_CONNECTIONS  4
@@ -193,6 +194,20 @@ icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
             netk_window_minimize (icon->window);
         else
             netk_window_activate (icon->window);
+
+        return TRUE;
+    }
+    else if (ev->button == 3)
+    {
+        GtkWidget *action_menu;
+        
+        action_menu = netk_create_window_action_menu(icon->window);
+        
+        g_signal_connect(G_OBJECT(action_menu), "selection-done", 
+                         G_CALLBACK(gtk_widget_destroy), NULL);
+        
+        gtk_menu_popup(GTK_MENU(action_menu), NULL, NULL, NULL, NULL, 
+                       ev->button, ev->time);
 
         return TRUE;
     }
