@@ -686,7 +686,7 @@ real_toggle_menu (LauncherPlugin *launcher)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), 
                                                      TRUE);
     
-    if (launcher->entries->len > 0)
+    if (launcher->entries->len > 1)
     {
         xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (launcher->plugin), 
                                          GTK_MENU (launcher->menu));
