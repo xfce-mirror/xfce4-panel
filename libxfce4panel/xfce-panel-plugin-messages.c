@@ -51,7 +51,9 @@ xfce_panel_plugin_message_send (GdkWindow *from, GdkNativeWindow xid,
     gev.data.s[1] = value;
     gev.data.s[2] = 0;
 
+    gdk_error_trap_push ();
     gdk_event_send_client_message ((GdkEvent *) & gev, xid);
     gdk_flush ();
+    gdk_error_trap_pop ();
 }
 

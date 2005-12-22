@@ -114,16 +114,16 @@ xfce_external_panel_item_interface_init (gpointer g_iface, gpointer data)
 {
     XfcePanelItemInterface *iface = g_iface;
 
-    iface->get_name = xfce_external_panel_item_get_name;
-    iface->get_id = xfce_external_panel_item_get_id;
-    iface->get_display_name = xfce_external_panel_item_get_display_name;
-    iface->get_expand = xfce_external_panel_item_get_expand;
-    iface->free_data = xfce_external_panel_item_free_data;
-    iface->save = xfce_external_panel_item_save;
-    iface->set_size = xfce_external_panel_item_set_size;
+    iface->get_name            = xfce_external_panel_item_get_name;
+    iface->get_id              = xfce_external_panel_item_get_id;
+    iface->get_display_name    = xfce_external_panel_item_get_display_name;
+    iface->get_expand          = xfce_external_panel_item_get_expand;
+    iface->free_data           = xfce_external_panel_item_free_data;
+    iface->save                = xfce_external_panel_item_save;
+    iface->set_size            = xfce_external_panel_item_set_size;
     iface->set_screen_position = xfce_external_panel_item_set_screen_position;
-    iface->set_sensitive = xfce_external_panel_item_set_sensitive;
-    iface->remove = xfce_external_panel_item_remove;
+    iface->set_sensitive       = xfce_external_panel_item_set_sensitive;
+    iface->remove              = xfce_external_panel_item_remove;
 }
 
 static void
@@ -168,8 +168,11 @@ xfce_external_panel_item_finalize (GObject * object)
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (object);
 
     if (!priv->to_be_removed)
-        xfce_err (_("An item was unexpectedly removed: \"%s\"."),
-                  priv->display_name);
+    {
+        /* dialogs are annoying, just spit out a warning */
+        g_critical (_("An item was unexpectedly removed: \"%s\"."),
+                    priv->display_name);
+    }
 
     g_free (priv->name);
     g_free (priv->id);

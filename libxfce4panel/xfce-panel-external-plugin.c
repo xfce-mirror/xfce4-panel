@@ -159,19 +159,19 @@ G_DEFINE_TYPE_EXTENDED (XfceExternalPanelPlugin,
                         xfce_external_panel_plugin,
                         GTK_TYPE_PLUG, 0,
                         G_IMPLEMENT_INTERFACE (XFCE_TYPE_PANEL_PLUGIN,
-                                               xfce_external_panel_plugin_interface_init));
+                            xfce_external_panel_plugin_interface_init));
 
 static void
 xfce_external_panel_plugin_interface_init (gpointer g_iface, gpointer data)
 {
     XfcePanelPluginInterface *iface = g_iface;
 
-    iface->remove = xfce_external_panel_plugin_remove;
-    iface->set_expand = xfce_external_panel_plugin_set_expand;
+    iface->remove          = xfce_external_panel_plugin_remove;
+    iface->set_expand      = xfce_external_panel_plugin_set_expand;
     iface->customize_panel = xfce_external_panel_plugin_customize_panel;
     iface->customize_items = xfce_external_panel_plugin_customize_items;
-    iface->move = xfce_external_panel_plugin_move;
-    iface->register_menu = xfce_external_panel_plugin_register_menu;
+    iface->move            = xfce_external_panel_plugin_move;
+    iface->register_menu   = xfce_external_panel_plugin_register_menu;
 }
 
 static void
@@ -183,7 +183,7 @@ xfce_external_panel_plugin_class_init (XfceExternalPanelPluginClass * klass)
 
     object_class = (GObjectClass *) klass;
 
-    object_class->finalize = xfce_external_panel_plugin_finalize;
+    object_class->finalize     = xfce_external_panel_plugin_finalize;
     object_class->get_property = xfce_external_panel_plugin_get_property;
     object_class->set_property = xfce_external_panel_plugin_set_property;
 
@@ -415,8 +415,6 @@ xfce_external_panel_plugin_register_menu (XfcePanelPlugin * plugin,
     g_object_set_data (G_OBJECT (plugin), "deactivate_id", 
                        GINT_TO_POINTER (id));
 }
-
-
 
 /* item/plugin interaction */
 static void

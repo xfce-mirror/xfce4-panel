@@ -225,8 +225,8 @@ xfce_arrow_button_expose (GtkWidget * widget, GdkEventExpose *event)
     {
         int x, y, w;
 
-        w = MIN (widget->allocation.height, widget->allocation.width)
-            - 2 * MAX (widget->style->xthickness, widget->style->ythickness);
+        w = MIN (widget->allocation.height - 2 * widget->style->ythickness, 
+                 widget->allocation.width  - 2 * widget->style->xthickness);
 
         w = MIN (w, ARROW_WIDTH);
         
