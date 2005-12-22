@@ -22,9 +22,10 @@
 #ifndef _PANEL_DIALOGS_H
 #define _PANEL_DIALOGS_H
 
-#include "panel.h"
+void add_items_dialog (GPtrArray *panels);
 
-void panel_dialog (GPtrArray *panels, gboolean show_items);
+void panel_manager_dialog (GPtrArray *panels);
+
 
 #endif /* _PANEL_DIALOGS_H */
 

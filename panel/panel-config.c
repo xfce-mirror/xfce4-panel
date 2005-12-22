@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <libxfce4util/libxfce4util.h>
+#include <gdk/gdkx.h>
 #include <gtk/gtkenums.h>
 
 #include "panel-config.h"
@@ -202,6 +203,7 @@ struct _ConfigParser
     ParserState state;
 
     gboolean properties_set;
+    gboolean monitor_set;
     
     /* properties */
     int size;
@@ -219,6 +221,7 @@ static void
 init_properties (ConfigParser *parser)
 {
     parser->properties_set  = FALSE;
+    parser->monitor_set     = FALSE;   
     
     parser->size            = DEFAULT_SIZE;
     parser->monitor         = 0;
@@ -246,6 +249,7 @@ config_set_property (ConfigParser *parser,
     else if (strcmp (name, "monitor") == 0)
     {
         parser->monitor = (int) strtol (value, NULL, 0);
+        parser->monitor_set = TRUE;
     }
     else if (strcmp (name, "screen-position") == 0)
     {
@@ -418,6 +422,11 @@ end_element_handler (GMarkupParseContext * context,
                     if (parser->screen_position == XFCE_SCREEN_POSITION_NONE)
                         parser->screen_position = 
                             XFCE_SCREEN_POSITION_FLOATING_H;
+
+                    if (!parser->monitor_set)
+                    {
+                        parser->monitor = DefaultScreen (GDK_DISPLAY());
+                    }
 
                     g_object_set (G_OBJECT (parser->current_panel),
                                   "size", parser->size,

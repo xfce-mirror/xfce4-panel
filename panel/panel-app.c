@@ -44,6 +44,7 @@
 #define _(x) x
 #endif
 
+#define SELECTION_NAME "XFCE4_PANEL"
 #define PANEL_LAUNCHER "launcher"
 
 /* types and global variables */
@@ -162,7 +163,8 @@ sighandler (int sig)
 	    break;
 
 	case SIGINT:
-            DBG ("INT signal caught");
+        case SIGABRT:
+            DBG ("INT or ABRT signal caught");
             panel_app.runstate = PANEL_RUN_STATE_QUIT_NOSAVE;
             break;
 
@@ -178,11 +180,11 @@ check_signal_state (void)
     static int recursive = 0;
     gboolean quit = FALSE;
  
-    if (recursive)
-        return TRUE;
-    
     /* micro-optimization */
     if (G_LIKELY (panel_app.runstate == PANEL_RUN_STATE_NORMAL))
+        return TRUE;
+    
+    if (G_UNLIKELY (recursive))
         return TRUE;
     
     recursive++;
@@ -369,8 +371,6 @@ int
 panel_app_init (void)
 {
     Atom selection_atom, manager_atom;
-    char *selection_name;
-    int screen_nr;
     GtkWidget *invisible;
     XClientMessageEvent xev;
 
@@ -379,11 +379,7 @@ panel_app_init (void)
     
     panel_app.initialized = TRUE;
     
-    screen_nr = DefaultScreen (GDK_DISPLAY());
-
-    selection_name = g_strdup_printf ("PANEL_%d", screen_nr);
-
-    selection_atom = XInternAtom (GDK_DISPLAY (), selection_name, False);
+    selection_atom = XInternAtom (GDK_DISPLAY (), SELECTION_NAME, False);
 
     panel_app.ipc_window = XGetSelectionOwner (GDK_DISPLAY (), selection_atom);
 
@@ -405,7 +401,7 @@ panel_app_init (void)
             panel_app.ipc_window)
     {
         g_critical ("Could not set ownership of selection \"%s\"",
-                    selection_name);
+                    SELECTION_NAME);
         return -1;
     }
     
@@ -430,6 +426,7 @@ panel_app_init (void)
     return 0;
 }
 
+/* fix position after showing panel for the first time */
 static gboolean
 expose_timeout (GtkWidget *panel)
 {
@@ -457,10 +454,7 @@ panel_app_run (int argc, char **argv)
 {
 #ifdef HAVE_SIGACTION
     struct sigaction act;
-#endif
-
-    /* set up signals */
-#ifdef HAVE_SIGACTION
+    
     act.sa_handler = sighandler;
     sigemptyset (&act.sa_mask);
 #ifdef SA_RESTART
@@ -472,6 +466,7 @@ panel_app_run (int argc, char **argv)
     sigaction (SIGUSR1, &act, NULL);
     sigaction (SIGUSR2, &act, NULL);
     sigaction (SIGINT, &act, NULL);
+    sigaction (SIGABRT, &act, NULL);
     sigaction (SIGTERM, &act, NULL);
     act.sa_handler = sigchld_handler;
     sigaction (SIGCHLD, &act, NULL);
@@ -480,6 +475,7 @@ panel_app_run (int argc, char **argv)
     signal (SIGUSR1, sighandler);
     signal (SIGUSR2, sighandler);
     signal (SIGINT, sighandler);
+    signal (SIGABRT, sighandler);
     signal (SIGTERM, sighandler);
     signal (SIGCHLD, sigchld_handler);
 #endif
@@ -563,13 +559,13 @@ panel_app_queue_save (void)
 void 
 panel_app_customize (void)
 {
-    panel_dialog (panel_app.panel_list, FALSE);
+    panel_manager_dialog (panel_app.panel_list);
 }
 
 void 
 panel_app_customize_items (void)
 {
-    panel_dialog (panel_app.panel_list, TRUE);
+    add_items_dialog (panel_app.panel_list);
 }
 
 void 

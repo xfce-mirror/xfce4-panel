@@ -528,7 +528,7 @@ items_dialog_panel_destroyed (PanelItemsDialog *pid)
     gtk_dialog_response (GTK_DIALOG (pid->dlg), GTK_RESPONSE_CANCEL);
 }
 
-static void
+void
 add_items_dialog (GPtrArray *panels)
 {
     PanelItemsDialog *pid;
@@ -1482,8 +1482,8 @@ panel_dialog_response (GtkWidget *dlg, int response, PanelManagerDialog *pmd)
     }
 }
 
-static void
-manage_panels_dialog (GPtrArray *panels)
+void
+panel_manager_dialog (GPtrArray *panels)
 {
     PanelManagerDialog *pmd;
     GtkWidget *header, *vbox, *img, *sel, *frame, *hbox;
@@ -1586,19 +1586,4 @@ manage_panels_dialog (GPtrArray *panels)
 
     panel_app_register_dialog (pmd->dlg);
 }
-
-/* 
- * Public API 
- * ==========
- */
-
-void 
-panel_dialog (GPtrArray *panels, gboolean show_items)
-{
-    if (show_items)
-        add_items_dialog (panels);
-    else
-        manage_panels_dialog (panels);
-}
-
 

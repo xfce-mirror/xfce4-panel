@@ -61,6 +61,7 @@ enum
 };
 
 
+/* GObject */
 static void panel_finalize     (GObject * object);
 
 static void panel_get_property (GObject * object,
@@ -73,13 +74,19 @@ static void panel_set_property (GObject * object,
                                 const GValue * value,
                                 GParamSpec * pspec);
 
+/* GtkWidget */
 static void panel_size_request  (GtkWidget * widget,
 			         GtkRequisition * requisition);
 
+static gboolean panel_button_pressed (GtkWidget *widget, 
+                                      GdkEventButton *ev);
+
+/* plugin menu */
 static void panel_menu_deactivated (Panel *panel);
 
 static void panel_menu_opened (Panel *panel);
 
+/* add items */
 static void panel_insert_item (Panel *panel, 
                                const char *name, 
                                int position);
@@ -129,9 +136,6 @@ static gboolean _panel_itembar_button_pressed (GtkWidget *widget,
 /* menu */
 static GtkWidget *_panel_create_menu (Panel *panel);
 
-static gboolean _panel_button_pressed (GtkWidget *widget, 
-                                       GdkEventButton *ev);
-
 
 /* this sets up a lot of stuff, see GObject API reference */
 G_DEFINE_TYPE (Panel, panel, XFCE_TYPE_PANEL_WINDOW);
@@ -152,7 +156,7 @@ panel_class_init (PanelClass * klass)
     object_class->get_property = panel_get_property;
     object_class->set_property = panel_set_property;
 
-    widget_class->button_press_event = _panel_button_pressed;
+    widget_class->button_press_event = panel_button_pressed;
     widget_class->size_request = panel_size_request;
     
     /* properties */
@@ -363,6 +367,33 @@ panel_size_request  (GtkWidget * widget, GtkRequisition * requisition)
 
     requisition->width = MAX (12, requisition->width);
     requisition->height = MAX (12, requisition->height);
+}
+
+static gboolean 
+panel_button_pressed (GtkWidget *widget, GdkEventButton *ev)
+{
+    guint modifiers;
+
+    modifiers = gtk_accelerator_get_default_mod_mask ();
+
+    if (ev->button == 3 || (ev->button == 1 && 
+        (ev->state & modifiers) == GDK_CONTROL_MASK))
+    {
+        PanelPrivate *priv;
+    
+        priv = PANEL_GET_PRIVATE (widget);
+
+        gtk_menu_set_screen (GTK_MENU (priv->menu), 
+                             gtk_widget_get_screen (widget));
+        
+        gtk_menu_popup (GTK_MENU (priv->menu), NULL, NULL, NULL, NULL, 
+                        ev->button, ev->time);
+
+        return TRUE;
+    }
+    
+    return GTK_WIDGET_CLASS (panel_parent_class)->button_press_event (widget,
+                                                                      ev);
 }
 
 /* DND dest */
@@ -653,34 +684,6 @@ _panel_create_menu (Panel *panel)
 
     return menu;
 }
-
-static gboolean 
-_panel_button_pressed (GtkWidget *widget, GdkEventButton *ev)
-{
-    guint modifiers;
-
-    modifiers = gtk_accelerator_get_default_mod_mask ();
-
-    if (ev->button == 3 || (ev->button == 1 && 
-        (ev->state & modifiers) == GDK_CONTROL_MASK))
-    {
-        PanelPrivate *priv;
-    
-        priv = PANEL_GET_PRIVATE (widget);
-
-        gtk_menu_set_screen (GTK_MENU (priv->menu), 
-                             gtk_widget_get_screen (widget));
-        
-        gtk_menu_popup (GTK_MENU (priv->menu), NULL, NULL, NULL, NULL, 
-                        ev->button, ev->time);
-
-        return TRUE;
-    }
-    
-    return GTK_WIDGET_CLASS (panel_parent_class)->button_press_event (widget,
-                                                                      ev);
-}
-
 
 /* public API */
 

@@ -56,10 +56,10 @@ version_and_usage (void)
                " -h, --help      Show this message and exit\n"
                " -v, --version   Show this message and exit\n"
                " -c, --customize Show configuration dialog\n"
-               " -s, --save      Save panel configurations\n"
+               " -s, --save      Save configuration\n"
                " -r, --restart   Restart panels\n"
                " -q, --quit      End the session\n"
-               " -x, --exit      Exit panels\n"
+               " -x, --exit      Close all panels and end the program\n"
                " -a, --add       Add new items\n\n"
                ));
 }

@@ -100,6 +100,7 @@ _add_item_info_to_array (char *plugin_name, XfcePanelItemClass *class,
     info->display_name = class->name;
     info->comment = class->comment;
     
+    /* for the item list in the 'Add Items' dialog */
     if (class->icon)
         info->icon = xfce_themed_icon_load (class->icon, 48);
 

@@ -108,7 +108,6 @@ panel_app_send (PanelAppMessage message)
 
         invisible = gtk_invisible_new ();
         gtk_widget_realize (invisible);
-        gtk_widget_show (invisible);
         
 	gev.type = GDK_CLIENT_EVENT;
 	gev.window = invisible->window;
