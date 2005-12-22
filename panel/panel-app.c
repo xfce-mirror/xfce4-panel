@@ -80,8 +80,8 @@ struct _PanelApp
     GList *dialogs;
 
     /* check whether monitors in Xinerama are aligned */
-    guint xinerama_and_equal_width;
-    guint xinerama_and_equal_height;
+    guint xinerama_and_equal_width:1;
+    guint xinerama_and_equal_height:1;
 };
 
 static PanelApp panel_app = {0};

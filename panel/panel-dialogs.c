@@ -72,32 +72,26 @@ struct _PanelManagerDialog
 
     gboolean updating;
 
-    GtkWidget *mainbox;
-
-    /* Panel Selection */
+    /* add/remove/rename panel */
     GtkWidget *panel_selector;
     GtkWidget *add_panel;
     GtkWidget *rm_panel;
 
-    GtkWidget *notebook;
-    
-    /* Panel Properties */
-    GtkWidget *properties_box;
-    GtkWidget *left_box;
-    GtkWidget *right_box;
-    
-    GPtrArray *monitors;
+    /* appearance */
     GtkWidget *size;
     GtkWidget *transparency;
-    GtkWidget *autohide;
 
-    GtkWidget *position_box;
+    /* monitors */
+    GPtrArray *monitors;
+
+    /* position */
     GtkWidget *fixed;
     GtkWidget *floating;
     
     GtkWidget *fixed_box;
     GtkWidget *screen_position[12];
     GtkWidget *fullwidth;
+    GtkWidget *autohide;
 
     GtkWidget *floating_box;
     GtkWidget *orientation;
@@ -703,167 +697,7 @@ update_properties (PanelManagerDialog *pmd)
 }
 
 
-/* Appearance */
-
-static void
-size_changed (GtkRange *range, PanelManagerDialog *pmd)
-{
-    if (pmd->updating)
-        return;
-
-    panel_set_size (pmd->panel, (int) gtk_range_get_value (range));
-}
-
-static void
-transparency_changed (GtkRange *range, PanelManagerDialog *pmd)
-{
-    if (pmd->updating)
-        return;
-
-    panel_set_transparency (pmd->panel, (int) gtk_range_get_value (range));
-}
-
-static void
-create_appearance_tab (PanelManagerDialog *pmd)
-{
-    static Atom composite_atom = 0;
-    GtkWidget *frame, *box, *vbox2, *hbox, *label, *align;
-    GtkSizeGroup *sg, *sg2;
-
-    label = gtk_label_new (_("Appearance"));
-    gtk_misc_set_padding (GTK_MISC (label), BORDER, 1);
-    gtk_widget_show (label);
-    
-    pmd->properties_box = box = pmd->right_box = vbox2 = 
-        gtk_vbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (box), BORDER);
-    gtk_widget_show (box);
-        
-    gtk_notebook_append_page (GTK_NOTEBOOK (pmd->notebook), box, label);
-    
-    /* size */
-    frame = xfce_create_framebox (_("Size"), &align);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (vbox2), frame, FALSE, FALSE, 0);
-    
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_container_add (GTK_CONTAINER (align), hbox);
-
-    sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-    sg2 = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-    label = xfce_create_small_label (_("Small"));
-    gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    
-    gtk_size_group_add_widget (sg, label);
-    
-    pmd->size = gtk_hscale_new_with_range (12, 128, 2);
-    gtk_scale_set_value_pos (GTK_SCALE (pmd->size), GTK_POS_BOTTOM);
-    gtk_range_set_update_policy (GTK_RANGE (pmd->size),
-                                 GTK_UPDATE_DELAYED);
-    gtk_widget_show (pmd->size);
-    gtk_box_pack_start (GTK_BOX (hbox), pmd->size, TRUE, TRUE, 0);
-
-    label = xfce_create_small_label (_("Large"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    
-    gtk_size_group_add_widget (sg2, label);
-        
-    g_signal_connect (pmd->size, "value-changed", 
-                      G_CALLBACK (size_changed), pmd);
-    
-    /* transparency */
-    if (G_UNLIKELY (!composite_atom))
-        composite_atom = 
-            XInternAtom (GDK_DISPLAY (), "COMPOSITING_MANAGER", False);
-
-    if (XGetSelectionOwner (GDK_DISPLAY (), composite_atom))
-    {
-        frame = xfce_create_framebox (_("Transparency"), &align);
-        gtk_widget_show (frame);
-        gtk_box_pack_start (GTK_BOX (vbox2), frame, FALSE, FALSE, 0);
-        
-        hbox = gtk_hbox_new (FALSE, BORDER);
-        gtk_widget_show (hbox);
-        gtk_container_add (GTK_CONTAINER (align), hbox);
-
-        label = xfce_create_small_label (_("None"));
-        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
-        gtk_widget_show (label);
-        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-        
-        gtk_size_group_add_widget (sg, label);
-        
-        pmd->transparency = gtk_hscale_new_with_range (0, 100, 5);
-        gtk_scale_set_value_pos (GTK_SCALE (pmd->transparency), GTK_POS_BOTTOM);
-        gtk_range_set_update_policy (GTK_RANGE (pmd->transparency),
-                                     GTK_UPDATE_DELAYED);
-        gtk_widget_show (pmd->transparency);
-        gtk_box_pack_start (GTK_BOX (hbox), pmd->transparency, TRUE, TRUE, 0);
-
-        label = xfce_create_small_label (_("Full"));
-        gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-        gtk_widget_show (label);
-        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-        
-        gtk_size_group_add_widget (sg2, label);
-        
-        g_signal_connect (pmd->transparency, "value-changed", 
-                          G_CALLBACK (transparency_changed), pmd);
-    }
-    
-    g_object_unref (sg);
-    g_object_unref (sg2);
-}
-
-
-/* Position */
-
-/* monitor */
-static gboolean
-monitor_pressed (GtkToggleButton *tb, GdkEvent *ev, PanelManagerDialog *pmd)
-{
-    if (ev->type == GDK_KEY_PRESS && 
-             ((GdkEventKey *)ev)->keyval == GDK_Tab)
-    {
-        return FALSE;
-    }
-    
-    if (!gtk_toggle_button_get_active (tb))
-    {
-        if (ev->type == GDK_BUTTON_PRESS ||
-            (ev->type == GDK_KEY_PRESS && 
-                (((GdkEventKey *)ev)->keyval == GDK_space ||
-                        ((GdkEventKey *)ev)->keyval == GDK_Return)))
-        {
-            int i;
-
-            for (i = 0; i < pmd->monitors->len; ++i)
-            {
-                GtkToggleButton *mon = g_ptr_array_index (pmd->monitors, i);
-
-                if (mon == tb)
-                {
-                    gtk_toggle_button_set_active (mon, TRUE);
-                    panel_set_monitor (pmd->panel, i);
-                }
-                else
-                {
-                    gtk_toggle_button_set_active (mon, FALSE);
-                }
-            }
-        }
-    }
-
-    return TRUE;
-}
-
-/* type and position */
+/* position */
 static void
 type_changed (GtkToggleButton *tb, PanelManagerDialog *pmd)
 {
@@ -926,7 +760,6 @@ type_changed (GtkToggleButton *tb, PanelManagerDialog *pmd)
     update_properties (pmd);
 }
 
-/* fixed position */
 static gboolean
 screen_position_pressed (GtkToggleButton *tb, GdkEvent *ev, 
                          PanelManagerDialog *pmd)
@@ -985,7 +818,6 @@ autohide_changed (GtkToggleButton *tb, PanelManagerDialog *pmd)
     panel_set_autohide (pmd->panel, gtk_toggle_button_get_active (tb));
 }
 
-/* floating panel */
 static void
 orientation_changed (GtkComboBox *box, PanelManagerDialog *pmd)
 {
@@ -1038,37 +870,31 @@ handle_style_changed (GtkComboBox *box, PanelManagerDialog *pmd)
 }
 
 static void
-add_position_box (PanelManagerDialog *pmd)
+add_position_options (GtkBox *box, PanelManagerDialog *pmd)
 {
-    GtkWidget *hbox, *vbox, *vbox2, *frame, *table, *align, *label;
+    GtkWidget *frame, *vbox, *vbox2, *hbox, *table, *align, *label;
     GtkSizeGroup *sg;
     int i;
     
-    hbox = pmd->left_box;
-
-    pmd->position_box = vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_widget_show (vbox);
-    gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
-
     /* floating? */
     frame = xfce_create_framebox (_("Panel Type"), &align);
     gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
+    gtk_box_pack_start (box, frame, FALSE, FALSE, 0);
     
-    vbox2 = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (vbox2);
-    gtk_container_add (GTK_CONTAINER (align), vbox2);
+    vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    gtk_container_add (GTK_CONTAINER (align), vbox);
 
     pmd->fixed = 
         gtk_radio_button_new_with_label (NULL, _("Fixed Position"));
     gtk_widget_show (pmd->fixed);
-    gtk_box_pack_start (GTK_BOX (vbox2), pmd->fixed, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), pmd->fixed, FALSE, FALSE, 0);
     
     pmd->floating = 
         gtk_radio_button_new_with_label_from_widget (
                 GTK_RADIO_BUTTON (pmd->fixed), _("Freely Moveable"));
     gtk_widget_show (pmd->floating);
-    gtk_box_pack_start (GTK_BOX (vbox2), pmd->floating, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (vbox), pmd->floating, FALSE, FALSE, 0);
 
     g_signal_connect (pmd->fixed, "toggled", G_CALLBACK (type_changed), 
                       pmd);
@@ -1079,18 +905,18 @@ add_position_box (PanelManagerDialog *pmd)
     /* position */
     frame = xfce_create_framebox (_("Position"), &align);
     gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, FALSE, 0);
+    gtk_box_pack_start (box, frame, FALSE, FALSE, 0);
     
     vbox2 = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox2);
     gtk_container_add (GTK_CONTAINER (align), vbox2);
 
     /* fixed */
-    pmd->fixed_box = vbox = gtk_hbox_new (FALSE, BORDER);
+    pmd->fixed_box = vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (vbox2), vbox, TRUE, TRUE, 0);
 
-    hbox = gtk_vbox_new (FALSE, 0);
+    hbox = gtk_hbox_new (FALSE, 0);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
@@ -1215,7 +1041,7 @@ add_position_box (PanelManagerDialog *pmd)
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Handle Position:"));
+    label = gtk_label_new (_("Handle:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -1249,39 +1075,64 @@ add_position_box (PanelManagerDialog *pmd)
     g_object_unref (sg);
 }
 
-static void
-create_position_tab (PanelManagerDialog *pmd)
+/* monitors */
+static gboolean
+monitor_pressed (GtkToggleButton *tb, GdkEvent *ev, PanelManagerDialog *pmd)
 {
-    GtkWidget *frame, *box, *hbox, *label, *align;
+    if (ev->type == GDK_KEY_PRESS && 
+             ((GdkEventKey *)ev)->keyval == GDK_Tab)
+    {
+        return FALSE;
+    }
+    
+    if (!gtk_toggle_button_get_active (tb))
+    {
+        if (ev->type == GDK_BUTTON_PRESS ||
+            (ev->type == GDK_KEY_PRESS && 
+                (((GdkEventKey *)ev)->keyval == GDK_space ||
+                        ((GdkEventKey *)ev)->keyval == GDK_Return)))
+        {
+            int i;
+
+            for (i = 0; i < pmd->monitors->len; ++i)
+            {
+                GtkToggleButton *mon = g_ptr_array_index (pmd->monitors, i);
+
+                if (mon == tb)
+                {
+                    gtk_toggle_button_set_active (mon, TRUE);
+                    panel_set_monitor (pmd->panel, i);
+                }
+                else
+                {
+                    gtk_toggle_button_set_active (mon, FALSE);
+                }
+            }
+        }
+    }
+
+    return TRUE;
+}
+
+static void
+add_monitor_selector (GtkBox *box, PanelManagerDialog *pmd)
+{
     int n_monitors, i;
 
-    label = gtk_label_new (_("Position"));
-    gtk_misc_set_padding (GTK_MISC (label), BORDER, 1);
-    gtk_widget_show (label);
-    
-    pmd->properties_box = pmd->left_box = hbox = box = 
-        gtk_vbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (box), BORDER);
-    gtk_widget_show (box);
-        
-    gtk_notebook_append_page (GTK_NOTEBOOK (pmd->notebook), box, label);
-    
-    /* position */
-    add_position_box (pmd);
-    
-    /* monitor */
     n_monitors = panel_app_get_n_monitors ();
     
     if (n_monitors > 1)
     {
+        GtkWidget *frame, *align, *hbox;
         GtkWidget *scroll = NULL;
         
-        frame = xfce_create_framebox (_("Monitor"), &align);
+        frame = xfce_create_framebox (_("Select Monitor"), &align);
         gtk_widget_show (frame);
-        gtk_box_pack_start (GTK_BOX (box), frame, FALSE, FALSE, 0);
+        gtk_box_pack_start (box, frame, FALSE, FALSE, 0);
 
         hbox = gtk_hbox_new (FALSE, BORDER);
         gtk_widget_show (hbox);
+        /* don't add it to align yet */
 
         pmd->monitors = g_ptr_array_sized_new (n_monitors);
 
@@ -1291,6 +1142,7 @@ create_position_tab (PanelManagerDialog *pmd)
             GtkStyle *style;
             char markup[10];
             
+            /* use a scroll window if more than 4 monitors */
             if (i == 5)
             {
                 GtkRequisition req;
@@ -1358,7 +1210,106 @@ create_position_tab (PanelManagerDialog *pmd)
     }
 }
 
-/* Panel Selector */
+/* appearance */
+static void
+size_changed (GtkRange *range, PanelManagerDialog *pmd)
+{
+    if (pmd->updating)
+        return;
+
+    panel_set_size (pmd->panel, (int) gtk_range_get_value (range));
+}
+
+static void
+transparency_changed (GtkRange *range, PanelManagerDialog *pmd)
+{
+    if (pmd->updating)
+        return;
+
+    panel_set_transparency (pmd->panel, (int) gtk_range_get_value (range));
+}
+
+static void
+add_appearance_options (GtkBox *box, PanelManagerDialog *pmd)
+{
+    static Atom composite_atom = 0;
+    GtkWidget *frame, *hbox, *label, *align;
+    GtkSizeGroup *sg;
+
+    sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+
+    /* size */
+    frame = xfce_create_framebox (_("Size"), &align);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (box, frame, FALSE, FALSE, 0);
+    
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (hbox);
+    gtk_container_add (GTK_CONTAINER (align), hbox);
+
+    label = xfce_create_small_label (_("Small"));
+    gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_size_group_add_widget (sg, label);
+    
+    pmd->size = gtk_hscale_new_with_range (12, 128, 2);
+    gtk_scale_set_value_pos (GTK_SCALE (pmd->size), GTK_POS_BOTTOM);
+    gtk_range_set_update_policy (GTK_RANGE (pmd->size), GTK_UPDATE_DELAYED);
+    gtk_widget_set_size_request (pmd->size, 120, -1);
+    gtk_widget_show (pmd->size);
+    gtk_box_pack_start (GTK_BOX (hbox), pmd->size, FALSE, FALSE, 0);
+
+    label = xfce_create_small_label (_("Large"));
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    
+    g_signal_connect (pmd->size, "value-changed", 
+                      G_CALLBACK (size_changed), pmd);
+    
+    /* transparency */
+    if (G_UNLIKELY (!composite_atom))
+        composite_atom = 
+            XInternAtom (GDK_DISPLAY (), "COMPOSITING_MANAGER", False);
+
+    if (XGetSelectionOwner (GDK_DISPLAY (), composite_atom))
+    {
+        frame = xfce_create_framebox (_("Transparency"), &align);
+        gtk_widget_show (frame);
+        gtk_box_pack_start (box, frame, FALSE, FALSE, 0);
+        
+        hbox = gtk_hbox_new (FALSE, BORDER);
+        gtk_widget_show (hbox);
+        gtk_container_add (GTK_CONTAINER (align), hbox);
+
+        label = xfce_create_small_label (_("None"));
+        gtk_misc_set_alignment (GTK_MISC (label), 1, 0.5);
+        gtk_widget_show (label);
+        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+        gtk_size_group_add_widget (sg, label);
+        
+        pmd->transparency = gtk_hscale_new_with_range (0, 100, 5);
+        gtk_scale_set_value_pos (GTK_SCALE (pmd->transparency), GTK_POS_BOTTOM);
+        gtk_range_set_update_policy (GTK_RANGE (pmd->transparency),
+                                     GTK_UPDATE_DELAYED);
+        gtk_widget_set_size_request (pmd->transparency, 120, -1);
+        gtk_widget_show (pmd->transparency);
+        gtk_box_pack_start (GTK_BOX (hbox), pmd->transparency, FALSE, FALSE, 0);
+
+        label = xfce_create_small_label (_("Full"));
+        gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+        gtk_widget_show (label);
+        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+        
+        g_signal_connect (pmd->transparency, "value-changed", 
+                          G_CALLBACK (transparency_changed), pmd);
+    }
+    
+    g_object_unref (sg);
+}
+
+/* panel selector: add/remove/rename panel */
 static void
 panel_selected (GtkComboBox * combo, PanelManagerDialog * pmd)
 {
@@ -1371,8 +1322,6 @@ panel_selected (GtkComboBox * combo, PanelManagerDialog * pmd)
     pmd->panel = g_ptr_array_index (pmd->panels, n);
 
     update_properties (pmd);
-
-    gtk_notebook_set_current_page (GTK_NOTEBOOK (pmd->notebook), 0);
 
     highlight_widget (GTK_WIDGET (pmd->panel), pmd);
 }
@@ -1436,20 +1385,18 @@ remove_panel (GtkWidget * w, PanelManagerDialog * pmd)
     gtk_combo_box_set_active (GTK_COMBO_BOX (pmd->panel_selector), 0);
 }
 
-static void
-create_panel_selector (PanelManagerDialog * pmd)
+static GtkWidget *
+create_panel_selector (PanelManagerDialog *pmd)
 {
-    GtkWidget *box, *img;
+    GtkWidget *hbox, *img;
     int i;
 
-    box = gtk_hbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (box), BORDER - 2);
-    gtk_widget_show (box);
-    gtk_box_pack_start (GTK_BOX (pmd->mainbox), box, FALSE, FALSE, 0);
+    hbox = gtk_hbox_new (FALSE, 0);
+    gtk_widget_show (hbox);
 
     pmd->panel_selector = gtk_combo_box_new_text ();
     gtk_widget_show (pmd->panel_selector);
-    gtk_box_pack_start (GTK_BOX (box), pmd->panel_selector, TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), pmd->panel_selector, FALSE, FALSE, 0);
 
     for (i = 0; i < pmd->panels->len; ++i)
     {
@@ -1470,7 +1417,7 @@ create_panel_selector (PanelManagerDialog * pmd)
     
     pmd->rm_panel = gtk_button_new ();
     gtk_widget_show (pmd->rm_panel);
-    gtk_box_pack_start (GTK_BOX (box), pmd->rm_panel, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), pmd->rm_panel, FALSE, FALSE, 0);
 
     img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_BUTTON);
     gtk_widget_show (img);
@@ -1483,7 +1430,7 @@ create_panel_selector (PanelManagerDialog * pmd)
     
     pmd->add_panel = gtk_button_new ();
     gtk_widget_show (pmd->add_panel);
-    gtk_box_pack_start (GTK_BOX (box), pmd->add_panel, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), pmd->add_panel, FALSE, FALSE, 0);
 
     img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
     gtk_widget_show (img);
@@ -1492,8 +1439,11 @@ create_panel_selector (PanelManagerDialog * pmd)
     gtk_tooltips_set_tip (pmd->tips, pmd->add_panel, _("New Panel"), NULL);
 
     g_signal_connect (pmd->add_panel, "clicked", G_CALLBACK (add_panel), pmd);
+
+    return hbox;
 }
 
+/* main dialog */
 static void
 panel_dialog_response (GtkWidget *dlg, int response, PanelManagerDialog *pmd)
 {
@@ -1526,7 +1476,7 @@ static void
 manage_panels_dialog (GPtrArray *panels)
 {
     PanelManagerDialog *pmd;
-    GtkWidget *header, *vbox, *img;
+    GtkWidget *header, *vbox, *img, *sel, *frame, *hbox;
     Panel *panel;
 
     if (panel_dialog_widget)
@@ -1558,59 +1508,66 @@ manage_panels_dialog (GPtrArray *panels)
     pmd->tips = gtk_tooltips_new ();
     g_object_ref (pmd->tips);
     gtk_object_sink (GTK_OBJECT (pmd->tips));
-    
-    pmd->mainbox = vbox = GTK_DIALOG (pmd->dlg)->vbox;
 
-    img = gtk_image_new();
+    /* main container */
+    vbox = gtk_vbox_new (FALSE, 8);
+    gtk_widget_show (vbox);
+    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
+    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pmd->dlg)->vbox), vbox, 
+                        TRUE, TRUE, 0);
+
+    /* header */
+    img = gtk_image_new_from_icon_name ("xfce4-panel", GTK_ICON_SIZE_DIALOG);
     gtk_widget_show (img);
-    
-    if ((gtk_major_version == 2 && gtk_minor_version >= 6) || 
-         gtk_major_version > 2)
-    {
-        g_object_set (G_OBJECT (img), 
-                      "icon-name", "xfce4-panel", 
-                      "icon-size", GTK_ICON_SIZE_DIALOG, 
-                      NULL);
-    }
-    else
-    {
-        GdkPixbuf *pb;
 
-        pb = xfce_themed_icon_load ("xfce4-panel", 48);
-
-        gtk_image_set_from_pixbuf (GTK_IMAGE (img), pb);
-
-        g_object_unref (pb);
-    }
-
-    header = xfce_create_header_with_image (img, _("Customize Panels"));
-    gtk_container_set_border_width (GTK_CONTAINER (header), BORDER - 2);
+    header = xfce_create_header_with_image (img, _("Panel Manager"));
     gtk_widget_show (header);
     gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, FALSE, 0);
 
     pmd->updating = TRUE;
     
-    /* select panel */
-    create_panel_selector (pmd);
+    /* add/remove/rename panel */
+    sel = create_panel_selector (pmd);
 
-    /* notebook with panel options */
-    pmd->notebook = gtk_notebook_new ();
-    gtk_container_set_border_width (GTK_CONTAINER (pmd->notebook), BORDER - 2);
-    gtk_widget_show (pmd->notebook);
-    gtk_box_pack_start (GTK_BOX (vbox), pmd->notebook, TRUE, TRUE, 0);
+    frame = gtk_frame_new (NULL);
+    gtk_frame_set_label_widget (GTK_FRAME (frame), sel);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
+    
+    hbox = gtk_hbox_new (FALSE, 2 * BORDER);
+    gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER);
+    gtk_widget_show (hbox);
+    gtk_container_add (GTK_CONTAINER (frame), hbox);
 
-    create_position_tab (pmd);
+    /* left box */
+    vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+    
+    /* position */
+    add_position_options (GTK_BOX (vbox), pmd);
 
-    create_appearance_tab (pmd);
+    /* right box */
+    vbox = gtk_vbox_new (FALSE, BORDER);
+    gtk_widget_show (vbox);
+    gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+    
+    /* monitors */
+    add_monitor_selector (GTK_BOX (vbox), pmd);
+
+    /* appearance */
+    add_appearance_options (GTK_BOX (vbox), pmd);
 
     pmd->updating = FALSE;
 
     /* fill in values */
     update_properties (pmd);
-    
+
+    /* setup panels */
     g_ptr_array_foreach (pmd->panels, (GFunc)panel_block_autohide, NULL);
     highlight_widget (GTK_WIDGET (panel), pmd);
 
+    /* setup and show dialog */
     g_signal_connect (pmd->dlg, "response", 
                       G_CALLBACK (panel_dialog_response), pmd);
     
