@@ -308,15 +308,14 @@ launcher_entry_exec (GdkScreen *screen, LauncherEntry *entry)
         
     if (error)
     {
-        char *first = 
-            g_strdup_printf (_("Could not run \"%s\""), entry->name);
+        char first[256];
+
+        g_snprintf (first, 256, _("Could not run \"%s\""), entry->name);
     
         xfce_message_dialog (NULL, _("Xfce Panel"), 
                              GTK_STOCK_DIALOG_ERROR, first, error->message,
                              GTK_STOCK_CLOSE, GTK_RESPONSE_OK, NULL);
 
-        g_free (first);
-                                    
         g_error_free (error);
     }
 }
@@ -358,8 +357,9 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
     if (!xfce_exec_argv_on_screen (screen, argv, entry->terminal, 
                                    entry->startup, &error))
     {
-        char *first = 
-            g_strdup_printf (_("Could not run \"%s\""), entry->name);
+        char first[256];
+        
+        g_snprintf (first, 256, _("Could not run \"%s\""), entry->name);
     
         xfce_message_dialog (NULL, _("Xfce Panel"), 
                              GTK_STOCK_DIALOG_ERROR, first, error->message,

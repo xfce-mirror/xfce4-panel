@@ -42,6 +42,7 @@ typedef struct
     int screen_changed_id;
     GtkWidget *box;
     GtkWidget *handle;
+    GtkWidget *handle2;
     GtkWidget *iconbox;
 
     GSList *iconlist;
@@ -517,11 +518,16 @@ iconbox_orientation_changed (XfcePanelPlugin *plugin,
     
     gtk_box_pack_start (GTK_BOX (box), iconbox->iconbox, FALSE, FALSE, 0);
     
+    gtk_widget_reparent (iconbox->handle2, box);
+    gtk_box_set_child_packing (GTK_BOX (box), iconbox->handle2,
+                               FALSE, FALSE, 0, GTK_PACK_START);
+    
     gtk_widget_destroy (iconbox->box);
     iconbox->box = box;
     gtk_container_add (GTK_CONTAINER (plugin), box);
 
     gtk_widget_queue_draw (iconbox->handle);
+    gtk_widget_queue_draw (iconbox->handle2);
 }
 
 static gboolean 
@@ -648,7 +654,8 @@ iconbox_screen_changed (GtkWidget *plugin, GdkScreen *screen, Iconbox *ib)
 static void
 iconbox_realize (GtkWidget *plugin, Iconbox *ib)
 {
-  iconbox_screen_changed (GTK_WIDGET (plugin), gtk_widget_get_screen (plugin), ib);
+  iconbox_screen_changed (GTK_WIDGET (plugin), 
+                          gtk_widget_get_screen (plugin), ib);
 }
 
 static void
@@ -702,6 +709,17 @@ iconbox_construct (XfcePanelPlugin *plugin)
     gtk_widget_show (iconbox->iconbox);
     gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->iconbox, 
                         FALSE, FALSE, 0);
+    
+    iconbox->handle2 = gtk_alignment_new (0, 0, 0, 0);
+    gtk_widget_set_size_request (iconbox->handle2, 6, 6);
+    gtk_widget_show (iconbox->handle2);
+    gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->handle2, 
+                        FALSE, FALSE, 0);
+
+    xfce_panel_plugin_add_action_widget (plugin, iconbox->handle2);
+
+    g_signal_connect (iconbox->handle2, "expose-event", 
+                      G_CALLBACK (handle_expose), iconbox);
     
     iconbox->icon_tooltips = gtk_tooltips_new ();
     g_object_ref (iconbox->icon_tooltips);

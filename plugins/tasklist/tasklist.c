@@ -35,6 +35,7 @@ typedef struct
 
     GtkWidget *box;
     GtkWidget *handle;
+    GtkWidget *handle2;
     GtkWidget *list;
 
     int screen_changed_id;
@@ -77,6 +78,9 @@ tasklist_orientation_changed (XfcePanelPlugin *plugin,
     gtk_box_set_child_packing (GTK_BOX (box), tasklist->handle,
                                FALSE, FALSE, 0, GTK_PACK_START);
     gtk_widget_reparent (tasklist->list, box);
+    gtk_widget_reparent (tasklist->handle2, box);
+    gtk_box_set_child_packing (GTK_BOX (box), tasklist->handle2,
+                               FALSE, FALSE, 0, GTK_PACK_START);
 
     gtk_widget_destroy (tasklist->box);
     tasklist->box = box;
@@ -84,6 +88,7 @@ tasklist_orientation_changed (XfcePanelPlugin *plugin,
     gtk_container_add (GTK_CONTAINER (plugin), box);
 
     gtk_widget_queue_draw (tasklist->handle);
+    gtk_widget_queue_draw (tasklist->handle2);
 }
 
 static gboolean 
@@ -271,6 +276,17 @@ tasklist_construct (XfcePanelPlugin *plugin)
     gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->list, 
                         TRUE, TRUE, 0);
             
+    tasklist->handle2 = gtk_alignment_new (0, 0, 0, 0);
+    gtk_widget_set_size_request (tasklist->handle2, 6, 6);
+    gtk_widget_show (tasklist->handle2);
+    gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->handle2, 
+                        FALSE, FALSE, 0);
+
+    xfce_panel_plugin_add_action_widget (plugin, tasklist->handle2);
+
+    g_signal_connect (tasklist->handle2, "expose-event", 
+                      G_CALLBACK (handle_expose), tasklist);
+
     netk_tasklist_set_include_all_workspaces (NETK_TASKLIST (tasklist->list), 
                                               tasklist->all_workspaces);
 
