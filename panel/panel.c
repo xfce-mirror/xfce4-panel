@@ -73,6 +73,9 @@ static void panel_set_property (GObject * object,
                                 const GValue * value,
                                 GParamSpec * pspec);
 
+static void panel_size_request  (GtkWidget * widget,
+			         GtkRequisition * requisition);
+
 static void panel_menu_deactivated (Panel *panel);
 
 static void panel_menu_opened (Panel *panel);
@@ -150,13 +153,14 @@ panel_class_init (PanelClass * klass)
     object_class->set_property = panel_set_property;
 
     widget_class->button_press_event = _panel_button_pressed;
+    widget_class->size_request = panel_size_request;
     
     /* properties */
 
     pspec = g_param_spec_int ("size",
                               "Size",
                               "The size of the panel",
-                              8, 128,
+                              12, 128,
                               DEFAULT_SIZE, G_PARAM_READWRITE);
 
     g_object_class_install_property (object_class, PROP_SIZE, pspec);
@@ -350,6 +354,15 @@ panel_set_property (GObject * object, guint prop_id,
             G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
             break;
     }
+}
+
+static void 
+panel_size_request  (GtkWidget * widget, GtkRequisition * requisition)
+{
+    GTK_WIDGET_CLASS (panel_parent_class)->size_request (widget, requisition);
+
+    requisition->width = MAX (12, requisition->width);
+    requisition->height = MAX (12, requisition->height);
 }
 
 /* DND dest */

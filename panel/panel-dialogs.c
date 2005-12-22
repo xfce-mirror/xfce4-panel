@@ -523,6 +523,12 @@ item_dialog_response (GtkWidget *dlg, int response, PanelItemsDialog *pid)
 }
 
 static void
+items_dialog_panel_destroyed (PanelItemsDialog *pid)
+{
+    gtk_dialog_response (GTK_DIALOG (pid->dlg), GTK_RESPONSE_CANCEL);
+}
+
+static void
 add_items_dialog (GPtrArray *panels)
 {
     PanelItemsDialog *pid;
@@ -561,6 +567,8 @@ add_items_dialog (GPtrArray *panels)
                                      NULL);
     
     g_signal_connect (dlg, "response", G_CALLBACK (item_dialog_response), pid);
+    g_signal_connect_swapped (panel, "destroy", 
+                              G_CALLBACK (items_dialog_panel_destroyed), pid);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
@@ -1362,7 +1370,9 @@ remove_panel (GtkWidget * w, PanelManagerDialog * pmd)
 {
     int n = pmd->panels->len;
     int i;
-    
+
+    highlight_widget (NULL, pmd);
+
     panel_app_remove_panel (GTK_WIDGET (pmd->panel));
 
     if (pmd->panels->len == n)
