@@ -576,14 +576,11 @@ xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
 {
     int response = GTK_RESPONSE_NONE;
     char *first;
-    GtkWindow *parent;
     
     first = g_strdup_printf (_("Remove \"%s\"?"), 
                              xfce_panel_plugin_get_display_name (plugin));
     
-    parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin)));
-    
-    response = xfce_message_dialog (parent, _("Xfce Panel"), 
+    response = xfce_message_dialog (NULL, _("Xfce Panel"), 
                                     GTK_STOCK_DIALOG_QUESTION, first, 
                                     _("The item will be removed from "
                                       "the panel and its configuration "
