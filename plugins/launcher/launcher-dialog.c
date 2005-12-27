@@ -1337,7 +1337,7 @@ update_entry_from_desktop_file (LauncherEntry *e, const char *path)
     if ((dentry = xfce_desktop_entry_new (path, dentry_keys, 
                                           G_N_ELEMENTS (dentry_keys))))
     {
-        char *value = NULL;
+        char *value = NULL, *p;
 
         g_free (e->name);
         g_free (e->comment);
@@ -1383,8 +1383,17 @@ update_entry_from_desktop_file (LauncherEntry *e, const char *path)
 
         xfce_desktop_entry_get_string (dentry, "Exec", FALSE,
                                        &(e->exec));
+
         if (e->exec)
         {
+            /* if command contains % variables, like %U or %f, discard all
+             * arguments. This is not very good solution, but it is simple 
+             * and fast.
+             */
+            if (strchr (e->exec, '%') && (p = strchr (e->exec, ' ')))
+                *p = '\0';
+            
+            /* expand variables */
             if (!(e->real_exec = xfce_expand_variables (e->exec, NULL)))
                 e->real_exec = g_strdup (e->exec);
         }

@@ -55,6 +55,8 @@ struct _PanelItemsDialog
     GPtrArray *items;
     GtkWidget *tree;
     GtkWidget *items_box;
+
+    int panel_destroy_id;
 };
 
 struct _PanelManagerDialog
@@ -511,6 +513,7 @@ item_dialog_response (GtkWidget *dlg, int response, PanelItemsDialog *pid)
         gtk_widget_destroy (dlg);
         
         g_object_unref (pid->tips);
+        g_signal_handler_disconnect (pid->panel, pid->panel_destroy_id);
         g_free (pid);
 
         panel_app_save ();
@@ -567,8 +570,10 @@ add_items_dialog (GPtrArray *panels)
                                      NULL);
     
     g_signal_connect (dlg, "response", G_CALLBACK (item_dialog_response), pid);
-    g_signal_connect_swapped (panel, "destroy", 
-                              G_CALLBACK (items_dialog_panel_destroyed), pid);
+    pid->panel_destroy_id = 
+        g_signal_connect_swapped (panel, "destroy", 
+                                  G_CALLBACK (items_dialog_panel_destroyed), 
+                                  pid);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
