@@ -305,6 +305,9 @@ panel_move_end (XfcePanelWindow *window, int x, int y)
     priv->xoffset = x - xmon->geometry.x;
     priv->yoffset = y - xmon->geometry.y;
 
+    DBG ("\n + Position: %d\n + Offset: (%d, %d)", 
+         priv->screen_position, priv->xoffset, priv->yoffset);
+    
     panel_app_queue_save ();
 }
 
@@ -325,9 +328,6 @@ panel_move_function (XfcePanelWindow *window, Panel *panel, int *x, int *y)
                             GTK_WIDGET (window)->allocation.width, 
                             GTK_WIDGET (window)->allocation.height, 
                             x, y);
-    
-    priv->xoffset = *x - xmon->geometry.x;
-    priv->yoffset = *y - xmon->geometry.y;
 }
 
 static void 
@@ -344,6 +344,12 @@ panel_resize_function (XfcePanelWindow *window, Panel *panel,
     _calculate_coordinates (priv->screen_position, &(xmon->geometry),
                             new->width, new->height, x, y);
     
+    priv->xoffset = *x - xmon->geometry.x;
+    priv->yoffset = *y - xmon->geometry.y;
+    
+    DBG ("\n + Position: %d\n + Offset: (%d, %d)", 
+         priv->screen_position, priv->xoffset, priv->yoffset);
+
     _set_struts (panel, *x, *y, new->width, new->height);
 }
 
@@ -379,14 +385,9 @@ panel_set_position (Panel *panel, XfceScreenPosition position,
         yoffset -= xmon->geometry.y;
     }
     
-    priv->xoffset = xoffset;
-    priv->yoffset = yoffset;
-    
-    x += xoffset;
-    y += yoffset;
-    
     if (priv->full_width)
     {
+        xoffset = yoffset = 0;
         if (xfce_screen_position_is_horizontal (position))
         {
             if (panel_app_monitors_equal_height ())
@@ -394,10 +395,21 @@ panel_set_position (Panel *panel, XfceScreenPosition position,
         }
         else
         {
-            if (!panel_app_monitors_equal_width ())
+            if (panel_app_monitors_equal_width ())
                 y = 0;
         }
     }
+    else
+    {
+        x += xoffset;
+        y += yoffset;
+    }
+    
+    priv->xoffset = xoffset;
+    priv->yoffset = yoffset;
+    
+    DBG ("\n + Position: %d\n + Offset: (%d, %d)", 
+         priv->screen_position, priv->xoffset, priv->yoffset);
     
     gtk_window_move (GTK_WINDOW (panel), x, y);
 
@@ -613,9 +625,8 @@ _window_mapped (Panel *panel)
 
     priv = PANEL_GET_PRIVATE (panel);
 
-    if (priv->autohide)
-        priv->hide_timeout =
-            g_timeout_add (2000, (GSourceFunc)_hide_timeout, panel);
+    panel_set_position (panel, priv->screen_position, 
+                        priv->xoffset, priv->yoffset);
     
     _set_transparent (panel, TRUE);
 
@@ -624,6 +635,14 @@ _window_mapped (Panel *panel)
     xmon = panel_app_get_monitor (priv->monitor);
     priv->xoffset = x - xmon->geometry.x;
     priv->yoffset = y - xmon->geometry.y;
+    
+    DBG ("\n + Position: %d\n + Offset: (%d, %d)", 
+         priv->screen_position, priv->xoffset, priv->yoffset);
+
+    if (priv->autohide)
+        priv->hide_timeout =
+            g_timeout_add (2000, (GSourceFunc)_hide_timeout, panel);
+    
 }
 
 /* public API */
@@ -637,8 +656,6 @@ panel_init_position (Panel *panel)
 
     priv = PANEL_GET_PRIVATE (panel);
     
-    xmon = panel_app_get_monitor (priv->monitor);
-
     orientation = 
         xfce_screen_position_is_horizontal (priv->screen_position) ?
                 GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL;
@@ -646,14 +663,6 @@ panel_init_position (Panel *panel)
     xfce_panel_window_set_orientation (XFCE_PANEL_WINDOW (panel), orientation);
     xfce_itembar_set_orientation (XFCE_ITEMBAR (priv->itembar), orientation);
 
-    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (panel),
-            (XfcePanelWindowMoveFunc)panel_move_function, panel);
-
-    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (panel),
-            (XfcePanelWindowResizeFunc)panel_resize_function, panel);
-
-    g_signal_connect (panel, "move-end", G_CALLBACK (panel_move_end), NULL);
-    
     xmon = panel_app_get_monitor (priv->monitor);
     
     gtk_window_set_screen (GTK_WINDOW (panel), xmon->screen);
@@ -704,6 +713,14 @@ panel_init_position (Panel *panel)
         xfce_panel_window_set_handle_style (XFCE_PANEL_WINDOW (panel),
                                             XFCE_HANDLE_STYLE_NONE);
     }
+    
+    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (panel),
+            (XfcePanelWindowMoveFunc)panel_move_function, panel);
+
+    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (panel),
+            (XfcePanelWindowResizeFunc)panel_resize_function, panel);
+
+    g_signal_connect (panel, "move-end", G_CALLBACK (panel_move_end), NULL);
 }
 
 void 
@@ -724,6 +741,9 @@ panel_center (Panel *panel)
 
     priv->xoffset = (xmon->geometry.width - req.width) / 2;
     priv->yoffset = (xmon->geometry.height - req.height) / 2;
+    
+    DBG ("\n + Position: %d\n + Offset: (%d, %d)", 
+         priv->screen_position, priv->xoffset, priv->yoffset);
 }
 
 void panel_set_autohide (Panel *panel, gboolean autohide)
