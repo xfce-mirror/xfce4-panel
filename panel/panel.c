@@ -548,6 +548,7 @@ _panel_drag_end (GtkWidget *widget, GdkDragContext *drag_context,
 
             xfce_itembar_lower_event_window (XFCE_ITEMBAR (priv->itembar));
             panel_dnd_unset_dest (priv->itembar);
+            panel_dnd_unset_source (priv->itembar);
             panel_set_items_sensitive (p, TRUE);
 
             panel_unblock_autohide (p);
