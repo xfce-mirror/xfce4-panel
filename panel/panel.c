@@ -266,7 +266,7 @@ panel_init (Panel * panel)
     g_signal_connect (priv->itembar, "drag-data-delete", 
                       G_CALLBACK (_panel_drag_data_delete), panel);
 
-    /* right-click */
+    /* mouse click */
     g_signal_connect (priv->itembar, "button-press-event",
                       G_CALLBACK (_panel_itembar_button_pressed), panel);
 
@@ -608,6 +608,14 @@ _panel_itembar_button_pressed (GtkWidget *widget, GdkEventButton *ev,
                 gtk_widget_event (plugin, (GdkEvent *)ev);
                 return TRUE;
             }
+        }
+        else if (ev->button == 1)
+        {
+            PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
+            
+            priv->drag_widget = 
+                xfce_itembar_get_item_at_point (XFCE_ITEMBAR (widget), 
+                                                ev->x, ev->y);
         }
     }
     
