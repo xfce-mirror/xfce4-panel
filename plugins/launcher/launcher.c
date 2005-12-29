@@ -534,6 +534,26 @@ launcher_destroy_menu (LauncherPlugin *launcher)
     launcher->menu = NULL;
 }
 
+static gboolean
+load_menu_icon (GtkImageMenuItem *mi)
+{
+    GtkWidget *img;
+    GdkPixbuf *pb;
+    LauncherEntry *entry;
+    
+    if ((entry = g_object_get_data (G_OBJECT (mi), "launcher_entry")) != NULL)
+    {
+        pb = launcher_icon_load_pixbuf (&entry->icon, MENU_ICON_SIZE);
+
+        img = gtk_image_new_from_pixbuf (pb);
+        gtk_widget_show (img);
+        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+        g_object_unref (pb);
+    }
+
+    return FALSE;
+}
+
 void
 launcher_recreate_menu (LauncherPlugin *launcher)
 {
@@ -552,8 +572,7 @@ launcher_recreate_menu (LauncherPlugin *launcher)
     
     for (i = launcher->entries->len - 1; i > 0; --i)
     {
-        GtkWidget *mi, *img;
-        GdkPixbuf *pb;
+        GtkWidget *mi;
         LauncherEntry *entry = g_ptr_array_index (launcher->entries, i);
         
         mi = gtk_image_menu_item_new_with_label (entry->name ? 
@@ -561,13 +580,10 @@ launcher_recreate_menu (LauncherPlugin *launcher)
         gtk_widget_show (mi);
         gtk_menu_shell_prepend (GTK_MENU_SHELL (launcher->menu), mi);
 
-        pb = launcher_icon_load_pixbuf (&entry->icon, MENU_ICON_SIZE);
-
-        img = gtk_image_new_from_pixbuf (pb);
-        gtk_widget_show (img);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-        g_object_unref (pb);
-
+        /* delayed loading of icons */
+        g_object_set_data (G_OBJECT (mi), "launcher_entry", entry);
+        g_idle_add ((GSourceFunc) load_menu_icon, mi);
+        
         g_signal_connect (mi, "button-release-event", 
                           G_CALLBACK (launcher_button_released),
                           launcher);
@@ -618,6 +634,13 @@ launcher_update_panel_entry (LauncherPlugin *launcher)
 
     gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
     g_free (tip);
+}
+
+static gboolean
+update_panel_entry_idle (LauncherPlugin *launcher)
+{
+    launcher_update_panel_entry (launcher);
+    return FALSE;
 }
 
 static void
@@ -879,7 +902,7 @@ launcher_read_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
     
     xfce_rc_close (rc);
     
-    launcher_update_panel_entry (launcher);
+    g_idle_add ((GSourceFunc)update_panel_entry_idle, launcher);
     launcher_recreate_menu (launcher);
 }
 
@@ -1155,9 +1178,6 @@ launcher_new (XfcePanelPlugin *plugin)
     g_signal_connect (launcher->arrowbutton, "drag-leave", 
                       G_CALLBACK (launcher_menu_drag_leave), launcher);
 
-    launcher_update_panel_entry (launcher);
-    launcher_recreate_menu (launcher);
-    
     g_signal_connect (plugin, "realize", G_CALLBACK (plugin_realized), 
                       launcher);
     
