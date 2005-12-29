@@ -1159,6 +1159,8 @@ launcher_new (XfcePanelPlugin *plugin)
         entry->comment = g_strdup (_("This item has not yet been configured"));
 
         g_ptr_array_add (launcher->entries, entry);
+
+        g_idle_add ((GSourceFunc)update_panel_entry_idle, launcher);
     }
     else if (launcher->entries->len > 1)
     {
