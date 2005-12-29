@@ -91,6 +91,11 @@ launcher_set_size (XfcePanelPlugin *plugin, int size, LauncherPlugin *launcher)
 static void 
 launcher_free_data (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
 {
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+
+    if (dlg)
+        gtk_widget_destroy (dlg);
+    
     launcher_free (launcher);
 }
 

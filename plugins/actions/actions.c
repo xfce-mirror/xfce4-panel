@@ -149,6 +149,15 @@ actions_write_rc_file (XfcePanelPlugin *plugin)
     xfce_rc_close (rc);
 }
 
+static void
+actions_free_data (XfcePanelPlugin *plugin)
+{
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+
+    if (dlg)
+        gtk_widget_destroy (dlg);
+}
+
 /* create widgets and connect to signals */
 static void
 actions_do_quit (GtkWidget *b, XfcePanelPlugin *plugin)
@@ -253,6 +262,9 @@ actions_construct (XfcePanelPlugin *plugin)
     g_signal_connect (plugin, "save", 
                       G_CALLBACK (actions_write_rc_file), NULL);
     
+    g_signal_connect (plugin, "free-data", 
+                      G_CALLBACK (actions_free_data), NULL);
+    
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
                       G_CALLBACK (actions_properties_dialog), NULL);
@@ -280,6 +292,8 @@ static void
 actions_dialog_response (GtkWidget *dlg, int reponse, 
                           XfcePanelPlugin *plugin)
 {
+    g_object_set_data (G_OBJECT (plugin), "dialog", NULL);
+
     gtk_widget_destroy (dlg);
     xfce_panel_plugin_unblock_menu (plugin);
     actions_write_rc_file (plugin);
@@ -299,6 +313,8 @@ actions_properties_dialog (XfcePanelPlugin *plugin)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
+
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
     g_signal_connect (dlg, "response", G_CALLBACK (actions_dialog_response),

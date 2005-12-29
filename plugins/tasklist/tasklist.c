@@ -112,6 +112,11 @@ tasklist_set_size (XfcePanelPlugin *plugin, int size)
 static void
 tasklist_free_data (XfcePanelPlugin *plugin, Tasklist *tasklist)
 {
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+
+    if (dlg)
+        gtk_widget_destroy (dlg);
+    
     g_signal_handler_disconnect (plugin, tasklist->screen_changed_id);
     g_free (tasklist);
 }
@@ -336,6 +341,8 @@ static void
 tasklist_dialog_response (GtkWidget *dlg, int reponse, 
                           Tasklist *tasklist)
 {
+    g_object_set_data (G_OBJECT (tasklist->plugin), "dialog", NULL);
+
     gtk_widget_destroy (dlg);
     xfce_panel_plugin_unblock_menu (tasklist->plugin);
     tasklist_write_rc_file (tasklist->plugin, tasklist);
@@ -355,6 +362,8 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
+
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
     g_signal_connect (dlg, "response", G_CALLBACK (tasklist_dialog_response),

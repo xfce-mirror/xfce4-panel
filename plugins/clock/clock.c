@@ -210,6 +210,11 @@ clock_set_size (XfcePanelPlugin *plugin, int size, Clock *clock)
 static void
 clock_free_data (XfcePanelPlugin *plugin, Clock *clock)
 {
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+
+    if (dlg)
+        gtk_widget_destroy (dlg);
+    
     g_source_remove (clock->timeout_id);
     g_object_unref (clock->tips);
     g_free (clock);
@@ -386,6 +391,8 @@ static void
 clock_dialog_response (GtkWidget *dlg, int reponse, 
                        Clock *clock)
 {
+    g_object_set_data (G_OBJECT (clock->plugin), "dialog", NULL);
+
     gtk_widget_destroy (dlg);
     xfce_panel_plugin_unblock_menu (clock->plugin);
     clock_write_rc_file (clock->plugin, clock);
@@ -405,6 +412,8 @@ clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
+
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
     g_signal_connect (dlg, "response", G_CALLBACK (clock_dialog_response),

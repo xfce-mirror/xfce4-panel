@@ -90,6 +90,11 @@ pager_set_size (XfcePanelPlugin *plugin, int size)
 static void
 pager_free_data (XfcePanelPlugin *plugin, Pager *pager)
 {
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+
+    if (dlg)
+        gtk_widget_destroy (dlg);
+    
     g_signal_handler_disconnect (plugin, pager->screen_changed_id);
 
     if (pager->ws_created_id)
@@ -275,6 +280,8 @@ rows_changed (GtkSpinButton * spin, Pager * pager)
 static void
 pager_dialog_response (GtkWidget *dlg, int reponse, Pager *pager)
 {
+    g_object_set_data (G_OBJECT (pager->plugin), "dialog", NULL);
+
     gtk_widget_destroy (dlg);
     xfce_panel_plugin_unblock_menu (pager->plugin);
     pager_write_rc_file (pager->plugin, pager);
@@ -295,6 +302,8 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
+
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
     g_signal_connect (dlg, "response", G_CALLBACK (pager_dialog_response),

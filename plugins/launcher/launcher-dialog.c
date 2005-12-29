@@ -1241,6 +1241,8 @@ launcher_dialog_add_explanation (GtkBox *box)
 static void
 launcher_dialog_response (GtkWidget *dlg, int response, LauncherDialog *ld)
 {
+    g_object_set_data (G_OBJECT (ld->plugin), "dialog", NULL);
+
     gtk_widget_hide (dlg);
     
     launcher_update_panel_entry (ld->launcher);
@@ -1277,6 +1279,8 @@ launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    g_object_set_data (G_OBJECT (plugin), "dialog", ld->dlg);
+
     gtk_window_set_position (GTK_WINDOW (ld->dlg), GTK_WIN_POS_CENTER);
     
     gtk_container_set_border_width (GTK_CONTAINER (ld->dlg), 2);

@@ -195,6 +195,11 @@ systray_set_size (XfcePanelPlugin *plugin, int size, Systray *systray)
 static void
 systray_free_data (XfcePanelPlugin *plugin, Systray *systray)
 {
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+
+    if (dlg)
+        gtk_widget_destroy (dlg);
+    
     systray_stop (systray);
     g_free (systray);
 }
@@ -338,6 +343,8 @@ static void
 systray_dialog_response (GtkWidget *dlg, int reponse, 
                          Systray *systray)
 {
+    g_object_set_data (G_OBJECT (systray->plugin), "dialog", NULL);
+
     gtk_widget_destroy (dlg);
     xfce_panel_plugin_unblock_menu (systray->plugin);
     systray_write_rc_file (systray->plugin, systray);
@@ -357,6 +364,8 @@ systray_properties_dialog (XfcePanelPlugin *plugin, Systray *systray)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
+
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
     g_signal_connect (dlg, "response", G_CALLBACK (systray_dialog_response),

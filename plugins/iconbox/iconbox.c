@@ -579,6 +579,11 @@ iconbox_set_size (XfcePanelPlugin *plugin, int size, Iconbox *ib)
 static void
 iconbox_free_data (XfcePanelPlugin *plugin, Iconbox *iconbox)
 {
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+
+    if (dlg)
+        gtk_widget_destroy (dlg);
+    
     g_signal_handler_disconnect (plugin, iconbox->screen_changed_id);
 
     cleanup_iconbox (iconbox);
@@ -770,6 +775,8 @@ static void
 iconbox_dialog_response (GtkWidget *dlg, int reponse, 
                          Iconbox *ib)
 {
+    g_object_set_data (G_OBJECT (ib->plugin), "dialog", NULL);
+
     gtk_widget_destroy (dlg);
     xfce_panel_plugin_unblock_menu (ib->plugin);
     iconbox_write_rc_file (ib->plugin, ib);
@@ -789,6 +796,8 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
     
+    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
+
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
     g_signal_connect (dlg, "response", G_CALLBACK (iconbox_dialog_response),
