@@ -98,6 +98,9 @@ static void
 static void
     xfce_internal_panel_plugin_remove_item (XfcePanelItem * plugin);
 
+static void
+    xfce_internal_panel_plugin_configure_item (XfcePanelItem * plugin);
+
 /* plugin interface */
 static void
     xfce_internal_panel_plugin_init_plugin_interface (gpointer g_iface,
@@ -177,6 +180,7 @@ xfce_internal_panel_plugin_init_item_interface (gpointer g_iface,
         xfce_internal_panel_plugin_set_screen_position;
     iface->set_sensitive = xfce_internal_panel_plugin_set_sensitive;
     iface->remove = xfce_internal_panel_plugin_remove_item;
+    iface->configure = xfce_internal_panel_plugin_configure_item;
 }
 
 static void
@@ -473,6 +477,12 @@ static void
 xfce_internal_panel_plugin_remove_item (XfcePanelItem * plugin)
 {
     xfce_panel_plugin_remove_confirm (XFCE_PANEL_PLUGIN (plugin));
+}
+
+static void
+xfce_internal_panel_plugin_configure_item (XfcePanelItem * plugin)
+{
+    xfce_panel_plugin_signal_configure (XFCE_PANEL_PLUGIN (plugin));
 }
 
 /* plugin interface */

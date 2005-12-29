@@ -832,16 +832,18 @@ panel_insert_widget (Panel *panel, GtkWidget *item, int position)
                       NULL);
 }
 
-void
+GtkWidget *
 panel_add_item_with_id (Panel * panel, const char *name,
                         const char *id)
 {
-    GtkWidget *item;
+    GtkWidget *item = NULL;
 
     if ((item = panel_create_item (panel, name, id)) != NULL)
     {
         panel_insert_widget (panel, item, -1);
     }
+
+    return item;
 }
 
 static char *
@@ -856,21 +858,23 @@ _panel_get_new_id (void)
     return id;
 }
 
-void
+GtkWidget *
 panel_add_item (Panel * panel, const char *name)
 {
-    panel_add_item_with_id (panel, name, _panel_get_new_id ());
+    return panel_add_item_with_id (panel, name, _panel_get_new_id ());
 }
 
-void 
+GtkWidget * 
 panel_insert_item (Panel *panel, const char *name, int position)
 {
-    GtkWidget *item;
+    GtkWidget *item = NULL;
 
     if ((item = panel_create_item (panel, name, _panel_get_new_id ())) != NULL)
     {
         panel_insert_widget (panel, item, position);
     }
+
+    return item;
 }
 
 /* configuration */

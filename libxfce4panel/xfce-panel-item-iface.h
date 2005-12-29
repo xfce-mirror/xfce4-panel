@@ -63,9 +63,10 @@ struct _XfcePanelItemInterface
 
     void (*remove)                           (XfcePanelItem *item);
 
+    void (*configure)                        (XfcePanelItem *item);
+
     /* reserved for future expansion */
     void (*_panel_reserved1) (void);
-    void (*_panel_reserved2) (void);
 };
 
 GType xfce_panel_item_get_type (void) G_GNUC_CONST;
@@ -110,6 +111,8 @@ void xfce_panel_item_set_sensitive (XfcePanelItem *item,
                                     gboolean sensitive);
 
 void xfce_panel_item_remove (XfcePanelItem *item);
+
+void xfce_panel_item_configure (XfcePanelItem *item);
 
 
 G_END_DECLS

@@ -586,6 +586,10 @@ _plugin_event_received (GtkWidget * win, GdkEventClient * ev,
             case XFCE_PANEL_PLUGIN_REMOVE:
                 xfce_panel_plugin_remove_confirm (XFCE_PANEL_PLUGIN (plugin));
                 break;
+            case XFCE_PANEL_PLUGIN_CUSTOMIZE:
+                xfce_panel_plugin_signal_configure (
+                                        XFCE_PANEL_PLUGIN (plugin));
+                break;
             default:
                 return FALSE;
         }

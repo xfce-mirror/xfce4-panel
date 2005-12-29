@@ -86,6 +86,9 @@ static void xfce_external_panel_item_set_sensitive (XfcePanelItem *item,
 
 static void xfce_external_panel_item_remove (XfcePanelItem * item);
 
+static void xfce_external_panel_item_configure (XfcePanelItem * item);
+
+
 /* GObject */
 static void xfce_external_panel_item_finalize (GObject * object);
 
@@ -124,6 +127,7 @@ xfce_external_panel_item_interface_init (gpointer g_iface, gpointer data)
     iface->set_screen_position = xfce_external_panel_item_set_screen_position;
     iface->set_sensitive       = xfce_external_panel_item_set_sensitive;
     iface->remove              = xfce_external_panel_item_remove;
+    iface->configure           = xfce_external_panel_item_configure;
 }
 
 static void
@@ -354,6 +358,21 @@ xfce_external_panel_item_remove (XfcePanelItem * item)
     xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
             GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
             XFCE_PANEL_PLUGIN_REMOVE, 0);
+}
+
+static void 
+xfce_external_panel_item_configure (XfcePanelItem * item)
+{
+    XfceExternalPanelItemPrivate *priv;
+
+    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (
+                XFCE_EXTERNAL_PANEL_ITEM (item));
+
+    xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
+            GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
+            XFCE_PANEL_PLUGIN_CUSTOMIZE, 0);
 }
 
 /* internal functions */

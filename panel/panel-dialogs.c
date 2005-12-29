@@ -188,6 +188,7 @@ add_selected_item (PanelItemsDialog *pid)
     GtkTreeModel *model;
     GtkTreeIter iter;
     XfcePanelItemInfo *info;
+    GtkWidget *item = NULL;
 
     sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (pid->tree));
     gtk_tree_selection_get_selected (sel, &model, &iter);
@@ -205,13 +206,15 @@ add_selected_item (PanelItemsDialog *pid)
         n = xfce_itembar_get_item_index (XFCE_ITEMBAR (priv->itembar),
                                          pid->active);
 
-        panel_insert_item (pid->panel, info->name, n + 1);
+        item = panel_insert_item (pid->panel, info->name, n + 1);
     }
     else
     {
-        panel_add_item (pid->panel, info->name);
+        item = panel_add_item (pid->panel, info->name);
     }
 
+    g_idle_add ((GSourceFunc)xfce_panel_item_configure, item);
+    
     return TRUE;
 }
 

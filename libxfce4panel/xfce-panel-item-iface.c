@@ -396,4 +396,15 @@ xfce_panel_item_remove (XfcePanelItem *item)
     XFCE_PANEL_ITEM_GET_INTERFACE (item)->remove (item);
 }
 
+/*
+ * xfce_panel_item_configure
+ * @item : an #XfcePanelItem
+ *
+ * Ask @item to open a settings dialog.
+ **/
+void xfce_panel_item_configure (XfcePanelItem *item)
+{
+    XFCE_PANEL_ITEM_GET_INTERFACE (item)->configure (item);
+}
+
 

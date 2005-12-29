@@ -414,7 +414,7 @@ xfce_panel_plugin_signal_about (XfcePanelPlugin * plugin)
  *
  * Should be called by implementations of the interface.
  **/
-static void 
+void 
 xfce_panel_plugin_signal_configure (XfcePanelPlugin * plugin)
 {
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));

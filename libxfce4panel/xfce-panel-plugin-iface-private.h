@@ -66,6 +66,8 @@ void xfce_panel_plugin_signal_free_data (XfcePanelPlugin * plugin);
 
 void xfce_panel_plugin_signal_save (XfcePanelPlugin * plugin);
 
+void xfce_panel_plugin_signal_configure (XfcePanelPlugin * plugin);
+
 /* set (in)sensitive */
 void xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin, 
                                       gboolean sensitive);
