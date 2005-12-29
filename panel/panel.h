@@ -69,8 +69,9 @@ void panel_free_data (Panel *panel);
 /* adding items */
 void panel_add_item (Panel *panel, const char *name);
 
-void panel_add_item_with_id (Panel *panel, const char *name, const char *id);
+void panel_insert_item (Panel *panel, const char *name, int position);
 
+void panel_add_item_with_id (Panel *panel, const char *name, const char *id);
 
 /* configuration */
 XfcePanelItemConfig *panel_get_item_config_list (Panel *panel);

@@ -563,9 +563,9 @@ panel_app_customize (void)
 }
 
 void 
-panel_app_customize_items (void)
+panel_app_customize_items (GtkWidget *active_item)
 {
-    add_items_dialog (panel_app.panel_list);
+    add_items_dialog (panel_app.panel_list, active_item);
 }
 
 void 

@@ -22,7 +22,7 @@
 #ifndef _PANEL_DIALOGS_H
 #define _PANEL_DIALOGS_H
 
-void add_items_dialog (GPtrArray *panels);
+void add_items_dialog (GPtrArray *panels, GtkWidget *active_item);
 
 void panel_manager_dialog (GPtrArray *panels);
 

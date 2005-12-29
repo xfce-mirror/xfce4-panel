@@ -49,6 +49,8 @@ struct _PanelItemsDialog
     GPtrArray *panels;
     Panel *panel;
     int current;
+
+    GtkWidget *active;
     
     GtkTooltips *tips;
 
@@ -195,7 +197,20 @@ add_selected_item (PanelItemsDialog *pid)
     if (!xfce_panel_item_manager_is_available (info->name))
         return FALSE;
    
-    panel_add_item (pid->panel, info->name);
+    if (pid->active)
+    {
+        PanelPrivate *priv = PANEL_GET_PRIVATE (pid->panel);
+        int n;
+
+        n = xfce_itembar_get_item_index (XFCE_ITEMBAR (priv->itembar),
+                                         pid->active);
+
+        panel_insert_item (pid->panel, info->name, n + 1);
+    }
+    else
+    {
+        panel_add_item (pid->panel, info->name);
+    }
 
     return TRUE;
 }
@@ -532,7 +547,7 @@ items_dialog_panel_destroyed (PanelItemsDialog *pid)
 }
 
 void
-add_items_dialog (GPtrArray *panels)
+add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
 {
     PanelItemsDialog *pid;
     Panel *panel;
@@ -552,6 +567,7 @@ add_items_dialog (GPtrArray *panels)
     pid->current = panel_app_get_current_panel();
     panel = pid->panel = 
         g_ptr_array_index (panels, pid->current);
+    pid->active = active_item;
     
     /* available items */
     pid->items = xfce_panel_item_manager_get_item_info_list ();

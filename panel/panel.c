@@ -86,11 +86,6 @@ static void panel_menu_deactivated (Panel *panel);
 
 static void panel_menu_opened (Panel *panel);
 
-/* add items */
-static void panel_insert_item (Panel *panel, 
-                               const char *name, 
-                               int position);
-
 /* DND dest */
 static void _panel_drag_data_received (GtkWidget *widget, 
                                        GdkDragContext *context, 
@@ -649,8 +644,8 @@ _panel_create_menu (Panel *panel)
     gtk_widget_show (img);
     gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
-    g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize_items), 
-                      NULL);
+    g_signal_connect_swapped (mi, "activate", 
+                              G_CALLBACK (panel_app_customize_items), NULL);
     
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
@@ -867,7 +862,7 @@ panel_add_item (Panel * panel, const char *name)
     panel_add_item_with_id (panel, name, _panel_get_new_id ());
 }
 
-static void 
+void 
 panel_insert_item (Panel *panel, const char *name, int position)
 {
     GtkWidget *item;

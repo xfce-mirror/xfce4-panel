@@ -49,7 +49,7 @@ void panel_app_queue_save (void);
 
 void panel_app_customize (void);
 
-void panel_app_customize_items (void);
+void panel_app_customize_items (GtkWidget *active_item);
 
 void panel_app_save (void);
 

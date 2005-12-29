@@ -65,7 +65,7 @@ client_event_received (GtkWidget *win, GdkEventClient *ev)
                 panel_app_quit_noconfirm ();
                 break;
             case PANEL_APP_ADD:
-                panel_app_customize_items ();
+                panel_app_customize_items (NULL);
                 break;
             case PANEL_APP_ABOUT:
                 panel_app_about ();
