@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-02 02:20+0900\n"
-"PO-Revision-Date: 2005-11-28 22:01+0900\n"
+"PO-Revision-Date: 2005-12-31 01:47+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:177
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "アイテムが予期せずに削除されました: \"%s\"。"
+msgstr "アイテム「%s」が予期せずに削除されました。"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:580
 #, c-format
@@ -56,26 +56,24 @@ msgstr "このプログラムについて"
 
 #. move
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:770
-#, fuzzy
 msgid "Move"
-msgstr "削除"
+msgstr "移動"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:792
 msgid "Remove"
 msgstr "削除"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:809
-#, fuzzy
 msgid "Add New Item"
-msgstr "新しいアイテム"
+msgstr "アイテムの追加"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:628
 msgid "Customize Panel"
-msgstr "パネルのカスタマイズ"
+msgstr "パネルの設定変更"
 
 #: ../panel/panel.c:639 ../panel/panel-dialogs.c:607
 msgid "Add Items"
-msgstr ""
+msgstr "アイテムの追加"
 
 #: ../panel/panel.c:654 ../plugins/actions/actions.c:350
 msgid "Quit"
@@ -148,7 +146,6 @@ msgstr ""
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
-#, fuzzy
 msgid ""
 " OPTIONS\n"
 " -h, --help      Show this message and exit\n"
@@ -168,7 +165,7 @@ msgstr ""
 " -s, --save      パネルの設定を保存します\n"
 " -r, --restart   パネルを再起動します\n"
 " -q, --quit      このセッションを終了します\n"
-" -x, --exit      パネルを終了します\n"
+" -x, --exit      全てのパネルを閉じてこのプログラムを終了します\n"
 " -a, --add       新しいアイテムを追加します\n"
 "\n"
 
@@ -239,18 +236,16 @@ msgid "Vertical"
 msgstr "垂直"
 
 #: ../panel/panel-dialogs.c:1076
-#, fuzzy
 msgid "Handle:"
-msgstr "取っ手の位置:"
+msgstr "取っ手:"
 
 #: ../panel/panel-dialogs.c:1088
 msgid "At both sides"
 msgstr "両側に付ける"
 
 #: ../panel/panel-dialogs.c:1161
-#, fuzzy
 msgid "Select Monitor"
-msgstr "モニター"
+msgstr "モニターの選択"
 
 #. size
 #: ../panel/panel-dialogs.c:1274
@@ -292,9 +287,8 @@ msgid "New Panel"
 msgstr "新しいパネル"
 
 #: ../panel/panel-dialogs.c:1557
-#, fuzzy
 msgid "Panel Manager"
-msgstr "パネルのタイプ"
+msgstr "パネルマネージャー"
 
 #: ../plugins/actions/actions.c:325
 msgid "Panel Actions"
@@ -558,7 +552,7 @@ msgstr "常にタスクをまとめる"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "アクションボタン"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -603,33 +597,3 @@ msgstr "テストプラグイン"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "このプログラムはテスト用です。"
-
-#~ msgid "Customize Panels"
-#~ msgstr "パネルのカスタマイズ"
-
-#~ msgid "Select Panel"
-#~ msgstr "パネルを選択"
-
-#~ msgid "Panel Properties"
-#~ msgstr "パネルのプロパティ"
-
-#~ msgid "Manage Panel Items"
-#~ msgstr "アイテムの管理"
-
-#~ msgid "Add To Selected Panel"
-#~ msgstr "選択したパネルに追加"
-
-#~ msgid "Panel Preferences"
-#~ msgstr "パネルの設定"
-
-#~ msgid "%s Properties"
-#~ msgstr "%sのプロパティ"
-
-#~ msgid "Panel"
-#~ msgstr "パネル"
-
-#~ msgid "Manage Panels"
-#~ msgstr "パネルの管理"
-
-#~ msgid "Remove %s"
-#~ msgstr "%s を削除"
