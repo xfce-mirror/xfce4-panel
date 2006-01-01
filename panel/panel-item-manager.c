@@ -140,6 +140,7 @@ _new_plugin_class_from_desktop_file (const char *file)
     
     if (g_hash_table_lookup (plugin_classes, name) != NULL)
     {
+        DBG ("Already loaded");
         g_free (name);
         return NULL;
     }
@@ -196,11 +197,13 @@ _new_plugin_class_from_desktop_file (const char *file)
         }
         else
         {
+            DBG ("No plugin class found");
             g_free (name);
         }
     }
     else
     {
+        DBG ("No Xfce Panel group");
         g_free (name);
     }
 

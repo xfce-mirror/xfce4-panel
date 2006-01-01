@@ -44,6 +44,10 @@
 #define _(x) x
 #endif
 
+#ifndef WAIT_ANY
+#define WAIT_ANY (-1)
+#endif
+
 #define SELECTION_NAME "XFCE4_PANEL"
 #define PANEL_LAUNCHER "launcher"
 
