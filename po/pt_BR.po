@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-02 02:20+0900\n"
-"PO-Revision-Date: 2005-09-29 20:37+0900\n"
-"Last-Translator: Rodrigo Coacci <rcoacci@gmail.com>\n"
+"POT-Creation-Date: 2006-01-06 15:54-0200\n"
+"PO-Revision-Date: 2006-01-06 16:46-0200\n"
+"Last-Translator: Adriano Winter Bess <awbess@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,12 +19,12 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:177
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr ""
+msgstr "Um item foi removido inesperadamente: \"%s\"."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:580
-#, fuzzy, c-format
+#, c-format
 msgid "Remove \"%s\"?"
-msgstr "_Remover"
+msgstr "Remover \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
@@ -36,7 +36,7 @@ msgstr "Painel Xfce"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:585
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
-msgstr ""
+msgstr "O item será removido do painel e sua configuração será perdida."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:740
@@ -45,80 +45,75 @@ msgstr ""
 #: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:358
 msgid "Properties"
-msgstr ""
+msgstr "Propriedades"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:757
 msgid "About"
-msgstr ""
+msgstr "Sobre"
 
 #. move
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:770
-#, fuzzy
 msgid "Move"
-msgstr "_Remover"
+msgstr "Mover"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:792
-#, fuzzy
 msgid "Remove"
-msgstr "_Remover"
+msgstr "Remover"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:809
-#, fuzzy
 msgid "Add New Item"
-msgstr "Adicionar novo item"
+msgstr "Adicionar Novo Item"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:628
 msgid "Customize Panel"
-msgstr ""
+msgstr "Personalizar o Painel"
 
 #: ../panel/panel.c:639 ../panel/panel-dialogs.c:607
 msgid "Add Items"
-msgstr ""
+msgstr "Adicionar Itens"
 
 #: ../panel/panel.c:654 ../plugins/actions/actions.c:350
 msgid "Quit"
-msgstr ""
+msgstr "Sair"
 
 #: ../panel/panel.c:664
-#, fuzzy
 msgid "Restart"
-msgstr "_Reiniciar"
+msgstr "Reiniciar"
 
 #: ../panel/panel.c:678
-#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Painel Xfce"
+msgstr "Sobre o Painel do Xfce"
 
-#: ../panel/panel-item-manager.c:354 ../panel/panel-item-manager.c:362
-#, fuzzy, c-format
+#: ../panel/panel-item-manager.c:357 ../panel/panel-item-manager.c:365
+#, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Não foi possível criar o item de painel \"%s\"."
+msgstr "Não foi possível abrir o módulo \"%s\""
 
 #: ../panel/panel-app.c:211 ../panel/panel-app.c:644
-#, fuzzy
 msgid "Exit Xfce Panel?"
-msgstr "Painel Xfce"
+msgstr "Terminar o Painel do Xfce?"
 
 #: ../panel/panel-app.c:645
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
+"Você não pode remover o último painel. Você gostaria de terminar o programa?"
 
 #: ../panel/panel-app.c:672
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr ""
+msgstr "Remover o Painel \"%d\"?"
 
 #: ../panel/panel-app.c:676
 msgid "The selected panel and all its items will be removed."
-msgstr ""
+msgstr "O painel selecionado e todos os seus itens serão removidos."
 
 #: ../panel/panel-app.c:715
 msgid "Developer"
-msgstr ""
+msgstr "Desenvolvedor"
 
 #: ../panel/main.c:46
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -130,10 +125,9 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" O Painel do Xfce\n"
-" Versão %s\n"
+" Painel do Xfce %s\n"
 "\n"
-" Parte do Xfce Desktop Environment\n"
+" Parte do Ambiente de Trabalho Xfce\n"
 " http://www.xfce.org\n"
 "\n"
 " Licenciado sob o GNU GPL.\n"
@@ -145,6 +139,8 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
+" Uso: %s [OPÇÕES]\n"
+"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -160,47 +156,57 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
+" OPÇÕES\n"
+" -h, --help      Mostrar esta mensagem e terminar\n"
+" -v, --version   Mostrar esta mensagem e terminar\n"
+" -c, --customize Mostrar diálogo de configuração\n"
+" -s, --save      Salvar a configuração\n"
+" -r, --restart   Reiniciar os painéis\n"
+" -q, --quit      Finalizar a sessão\n"
+" -x, --exit      Fechar todos os painéis e terminar o programa\n"
+" -a, --add       Adicionar novos itens\n"
+"\n"
 
 #: ../panel/panel-dialogs.c:622
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
+"Arraste itens da lista para um painel ou remova-os arrastando de volta para "
+"a lista"
 
 #: ../panel/panel-dialogs.c:635
 msgid "Avalaible Items"
-msgstr ""
+msgstr "Itens Disponíveis"
 
 #: ../panel/panel-dialogs.c:875 ../panel/panel-dialogs.c:1092
 msgid "Left"
-msgstr ""
+msgstr "Esquerda"
 
 #: ../panel/panel-dialogs.c:877 ../panel/panel-dialogs.c:1094
 msgid "Right"
-msgstr ""
+msgstr "Direita"
 
 #: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1099
 msgid "Top"
-msgstr ""
+msgstr "Topo"
 
 #: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
 msgid "Bottom"
-msgstr ""
+msgstr "Abaixo"
 
 #. floating?
 #: ../panel/panel-dialogs.c:912
-#, fuzzy
 msgid "Panel Type"
-msgstr "Tamanho do painel:"
+msgstr "Tipo do Painel:"
 
 #: ../panel/panel-dialogs.c:921
-#, fuzzy
 msgid "Fixed Position"
-msgstr "Posição"
+msgstr "Posição Fixa"
 
 #: ../panel/panel-dialogs.c:927
 msgid "Freely Moveable"
-msgstr ""
+msgstr "Movimentar Livremente"
 
 #. position
 #: ../panel/panel-dialogs.c:938
@@ -209,17 +215,15 @@ msgstr "Posição"
 
 #: ../panel/panel-dialogs.c:1026
 msgid "_Full Width"
-msgstr ""
+msgstr "Lar_gura Total"
 
 #: ../panel/panel-dialogs.c:1035
-#, fuzzy
 msgid "Auto_hide"
-msgstr "Auto-Ocultar"
+msgstr "Auto-O_cultar"
 
 #: ../panel/panel-dialogs.c:1053
-#, fuzzy
 msgid "Orientation:"
-msgstr "Orientação do painel:"
+msgstr "Orientação:"
 
 #: ../panel/panel-dialogs.c:1065
 msgid "Horizontal"
@@ -230,19 +234,16 @@ msgid "Vertical"
 msgstr "Vertical"
 
 #: ../panel/panel-dialogs.c:1076
-#, fuzzy
 msgid "Handle:"
-msgstr "Posição"
+msgstr "Manipulador"
 
 #: ../panel/panel-dialogs.c:1088
-#, fuzzy
 msgid "At both sides"
-msgstr "Auto-Ocultar"
+msgstr "Dos dois lados"
 
 #: ../panel/panel-dialogs.c:1161
-#, fuzzy
 msgid "Select Monitor"
-msgstr "Editor"
+msgstr "Selecione o Monitor"
 
 #. size
 #: ../panel/panel-dialogs.c:1274
@@ -259,56 +260,49 @@ msgstr "Grande"
 
 #: ../panel/panel-dialogs.c:1310
 msgid "Transparency"
-msgstr ""
+msgstr "Transparência"
 
 #: ../panel/panel-dialogs.c:1318
 msgid "None"
-msgstr ""
+msgstr "Nenhuma"
 
 #: ../panel/panel-dialogs.c:1332
 msgid "Full"
-msgstr ""
+msgstr "Total"
 
 #: ../panel/panel-dialogs.c:1376 ../panel/panel-dialogs.c:1414
 #: ../panel/panel-dialogs.c:1439
-#, fuzzy, c-format
+#, c-format
 msgid "Panel %d"
-msgstr "Painel Xfce"
+msgstr "Painel %d"
 
 #: ../panel/panel-dialogs.c:1460
-#, fuzzy
 msgid "Remove Panel"
-msgstr "_Remover"
+msgstr "Remover Painel"
 
 #: ../panel/panel-dialogs.c:1473
-#, fuzzy
 msgid "New Panel"
-msgstr "Painel Xfce"
+msgstr "Novo Painel"
 
 #: ../panel/panel-dialogs.c:1557
-#, fuzzy
 msgid "Panel Manager"
-msgstr "Tamanho do painel:"
+msgstr "Gerenciador do Painel"
 
 #: ../plugins/actions/actions.c:325
-#, fuzzy
 msgid "Panel Actions"
-msgstr "Configurações do painel do Xfce"
+msgstr "Ações do Painel"
 
 #: ../plugins/actions/actions.c:342
-#, fuzzy
 msgid "Select action type:"
-msgstr "Selecionar comando"
+msgstr "Selecione o tipo de ação:"
 
 #: ../plugins/actions/actions.c:351
-#, fuzzy
 msgid "Lock screen"
-msgstr "_Travar tela"
+msgstr "Travar tela"
 
 #: ../plugins/actions/actions.c:352
-#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "_Travar tela"
+msgstr "Sair + Travar tela"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -316,23 +310,21 @@ msgid "Separator"
 msgstr "Separador"
 
 #: ../plugins/separator/separator.c:284
-#, fuzzy
 msgid "_Draw Separator"
-msgstr "Separador"
+msgstr "_Desenhar Separador"
 
 #: ../plugins/separator/separator.c:293
 msgid "_Expand"
-msgstr ""
+msgstr "_Expandir"
 
 #: ../plugins/iconbox/iconbox.c:808
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr ""
+msgstr "Caixa de Ícones"
 
 #: ../plugins/iconbox/iconbox.c:822
-#, fuzzy
 msgid "Only show minimized applications"
-msgstr "Mostrar _nomes do aplicativos"
+msgstr "Mostrar apenas aplicações minimizadas"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -387,77 +379,70 @@ msgid "Terminal"
 msgstr "Terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:381
-#, fuzzy
 msgid "Select image file"
-msgstr "Selecionar arquivo"
+msgstr "Selecionar arquivo da imagem"
 
 #: ../plugins/launcher/launcher-dialog.c:426
 msgid "Select command"
 msgstr "Selecionar comando"
 
 #: ../plugins/launcher/launcher-dialog.c:449
-#, fuzzy
 msgid "Name"
-msgstr "Jogos"
+msgstr "Nome"
 
 #: ../plugins/launcher/launcher-dialog.c:467
-#, fuzzy
 msgid "Description"
-msgstr "Posição"
+msgstr "Descrição"
 
 #: ../plugins/launcher/launcher-dialog.c:522
 msgid "Other..."
-msgstr ""
+msgstr "Outro..."
 
 #: ../plugins/launcher/launcher-dialog.c:608
-#, fuzzy
 msgid "Command"
-msgstr "Comando:"
+msgstr "Comando"
 
 #: ../plugins/launcher/launcher-dialog.c:644
 msgid "Run in _terminal"
 msgstr "Executar no _terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:662
-#, fuzzy
 msgid "Use _startup notification"
-msgstr "Use a _notificação de inicialização"
+msgstr "Usar _notificação de inicialização"
 
 #: ../plugins/launcher/launcher-dialog.c:1121
 #: ../plugins/launcher/launcher.c:584
-#, fuzzy
 msgid "New Item"
-msgstr "Adicionar novo item"
+msgstr "Novo Item"
 
 #: ../plugins/launcher/launcher-dialog.c:1233
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
+"O primeiro item na lista é mostrado no painel. Itens adicionais serão "
+"mostrados em um menu."
 
 #: ../plugins/launcher/launcher-dialog.c:1288
-#, fuzzy
 msgid "Program Launcher"
-msgstr "Adicionar menu ao lançador"
+msgstr "Executor de programa"
 
 #: ../plugins/launcher/launcher-dialog.c:1623
 msgid "Select file"
 msgstr "Selecionar arquivo"
 
 #: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
-#, fuzzy, c-format
+#, c-format
 msgid "Could not run \"%s\""
-msgstr "Não foi possível criar o item de painel \"%s\"."
+msgstr "Não foi possível executar \"%s\""
 
 #: ../plugins/launcher/launcher.c:637 ../plugins/launcher/launcher.c:1164
-#, fuzzy
 msgid "This item has not yet been configured"
-msgstr "Este item não possui opções de configuração"
+msgstr "Este item ainda não foi configurado"
 
 #: ../plugins/launcher/launcher.c:1163
-#, fuzzy
 msgid "New item"
-msgstr "Adicionar novo item"
+msgstr "Novo item"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -468,14 +453,12 @@ msgstr "Adicionar novo item"
 #. * %Y  : four digit year
 #.
 #: ../plugins/clock/clock.c:109
-#, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d de %B de %Y"
 
 #: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
-#, fuzzy
 msgid "Clock"
-msgstr "Travar"
+msgstr "Relógio"
 
 #: ../plugins/clock/clock.c:431
 msgid "Appearance"
@@ -496,24 +479,23 @@ msgstr "LED"
 
 #: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
 msgid "Show _frame"
-msgstr ""
+msgstr "Mostrar _borda"
 
 #: ../plugins/clock/clock.c:461
 msgid "Clock Options"
-msgstr ""
+msgstr "Opções do Relógio"
 
 #: ../plugins/clock/clock.c:471
 msgid "Use 24-_hour clock"
-msgstr ""
+msgstr "Usar formato de 24 _horas"
 
 #: ../plugins/clock/clock.c:479
-#, fuzzy
 msgid "Show AM/PM"
-msgstr "AM/PM"
+msgstr "Mostrar AM/PM"
 
 #: ../plugins/clock/clock.c:487
 msgid "Display seconds"
-msgstr ""
+msgstr "Mostrar segundos"
 
 #: ../plugins/pager/pager.c:314 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -539,13 +521,12 @@ msgstr "Não foi possível registrar a bandeja de sitema: %s"
 #: ../plugins/systray/systray.c:376
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "Status Area"
-msgstr ""
+msgstr "Área de Notificação"
 
 #: ../plugins/tasklist/tasklist.c:374
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
-#, fuzzy
 msgid "Task List"
-msgstr "Tarefas"
+msgstr "Lista de Tarefas"
 
 #: ../plugins/tasklist/tasklist.c:387
 msgid "Show tasks from _all workspaces"
@@ -556,37 +537,32 @@ msgid "Show application _names"
 msgstr "Mostrar _nomes do aplicativos"
 
 #: ../plugins/tasklist/tasklist.c:411
-#, fuzzy
 msgid "Never group tasks"
-msgstr "Sempre a_grupar tarefas"
+msgstr "Nunca agrupar tarefas"
 
 #: ../plugins/tasklist/tasklist.c:414
-#, fuzzy
 msgid "Automatically group tasks"
-msgstr "Sempre a_grupar tarefas"
+msgstr "Agrupar tarefas automaticamente"
 
 #: ../plugins/tasklist/tasklist.c:417
-#, fuzzy
 msgid "Always group tasks"
-msgstr "Sempre a_grupar tarefas"
+msgstr "Sempre agrupar tarefas"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Botões de Ação"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
-#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "Travar a tela"
+msgstr "Sair ou travar a tela"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr ""
+msgstr "Adiciona um espaço ou uma linha entre itens no painel"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
-#, fuzzy
 msgid "Show icons of all running applications"
-msgstr "Mostrar _nomes do aplicativos"
+msgstr "Mostrar ícones de todas as aplicações rodando"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -594,54 +570,28 @@ msgstr "Lançador"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Executor de programas com menu opcional"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr ""
+msgstr "Que horas são?"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr ""
+msgstr "Vista em miniatura de todos as áreas de trabalho virtuais"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Show notification icons"
-msgstr "Mostrar _nomes do aplicativos"
+msgstr "Mostra ícones de notificação"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-#, fuzzy
 msgid "Show all running applications"
-msgstr "Mostrar _nomes do aplicativos"
+msgstr "Mostra todas as aplicações rodando"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
-#, fuzzy
 msgid "Test Plugin"
-msgstr "Lançador"
+msgstr "Item de Teste"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Select Panel"
-#~ msgstr "Selecionar arquivo"
-
-#, fuzzy
-#~ msgid "Panel Properties"
-#~ msgstr "Configurações do painel do Xfce"
-
-#, fuzzy
-#~ msgid "Panel"
-#~ msgstr "Painel Xfce"
-
-#, fuzzy
-#~ msgid "Manage Panels"
-#~ msgstr "Painel Xfce"
-
-#, fuzzy
-#~ msgid "Remove %s"
-#~ msgstr "_Remover"
-
-#~ msgid "Are you sure you want to exit?"
-#~ msgstr "Tem certeza que deseja sair?"
+msgstr "Este item não tem nenhuma propósito"
