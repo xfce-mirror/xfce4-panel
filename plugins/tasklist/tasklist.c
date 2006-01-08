@@ -43,6 +43,9 @@ typedef struct
     NetkTasklistGroupingType grouping;
     gboolean all_workspaces;
     gboolean show_label;
+
+    gboolean expand;
+    int width;
 }
 Tasklist;
 
@@ -92,18 +95,18 @@ tasklist_orientation_changed (XfcePanelPlugin *plugin,
 }
 
 static gboolean 
-tasklist_set_size (XfcePanelPlugin *plugin, int size)
+tasklist_set_size (XfcePanelPlugin *plugin, int size, Tasklist *tasklist)
 {
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
         gtk_widget_set_size_request (GTK_WIDGET (plugin), 
-                                     300, size);
+                                     tasklist->width, size);
     }
     else
     {
         gtk_widget_set_size_request (GTK_WIDGET (plugin), 
-                                     size, 300);
+                                     size, tasklist->width);
     }
 
     return TRUE;
@@ -126,11 +129,13 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
 {
     char *file;
     XfceRc *rc;
-    int grouping, all_workspaces, labels;
+    int grouping, all_workspaces, labels, expand, width;
     
     grouping = NETK_TASKLIST_AUTO_GROUP;
     all_workspaces = 0;
     labels = 1;
+    expand = 1;
+    width = 300;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
@@ -139,12 +144,16 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
 
         if (rc != NULL)
         {
-            grouping = xfce_rc_read_int_entry (rc, "grouping", 
-                                               NETK_TASKLIST_AUTO_GROUP);
+            grouping = xfce_rc_read_int_entry (rc, "grouping", grouping);
             
-            all_workspaces = xfce_rc_read_int_entry (rc, "all_workspaces", 0);
+            all_workspaces = xfce_rc_read_int_entry (rc, "all_workspaces", 
+                                                     all_workspaces);
             
-            labels = xfce_rc_read_int_entry (rc, "show_label", 1);
+            labels = xfce_rc_read_int_entry (rc, "show_label", labels);
+            
+            expand = xfce_rc_read_int_entry (rc, "expand", expand);
+            
+            width = xfce_rc_read_int_entry (rc, "width", width);
             
             xfce_rc_close (rc);
         }
@@ -153,6 +162,8 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
     tasklist->grouping = grouping;
     tasklist->all_workspaces = (all_workspaces == 1);
     tasklist->show_label = (labels != 0);
+    tasklist->expand = (expand != 0);
+    tasklist->width = MAX (100, width);
 }
 
 static void
@@ -176,6 +187,10 @@ tasklist_write_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
 
     xfce_rc_write_int_entry (rc, "show_label", tasklist->show_label);
 
+    xfce_rc_write_int_entry (rc, "expand", tasklist->expand);
+
+    xfce_rc_write_int_entry (rc, "width", tasklist->width);
+
     xfce_rc_close (rc);
 }
 
@@ -188,7 +203,8 @@ tasklist_realize (XfcePanelPlugin *plugin, Tasklist *tasklist)
     screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
     screen_idx = gdk_screen_get_number (screen);
     
-    netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), netk_screen_get (screen_idx));
+    netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), 
+                              netk_screen_get (screen_idx));
 }
 
 /* create widgets and connect to signals */
@@ -233,11 +249,13 @@ tasklist_construct (XfcePanelPlugin *plugin)
 {
     Tasklist *tasklist = g_new0 (Tasklist, 1);
 
+    tasklist->plugin = plugin;
+    
     g_signal_connect (plugin, "orientation-changed", 
                       G_CALLBACK (tasklist_orientation_changed), tasklist);
     
     g_signal_connect (plugin, "size-changed", 
-                      G_CALLBACK (tasklist_set_size), NULL);
+                      G_CALLBACK (tasklist_set_size), tasklist);
     
     g_signal_connect (plugin, "free-data", 
                       G_CALLBACK (tasklist_free_data), tasklist);
@@ -252,11 +270,9 @@ tasklist_construct (XfcePanelPlugin *plugin)
     g_signal_connect (plugin, "configure-plugin", 
                       G_CALLBACK (tasklist_properties_dialog), tasklist);
 
-    xfce_panel_plugin_set_expand (plugin, TRUE);
-    
     tasklist_read_rc_file (plugin, tasklist);
 
-    tasklist->plugin = plugin;
+    xfce_panel_plugin_set_expand (plugin, tasklist->expand);
     
     tasklist->box = (xfce_panel_plugin_get_orientation (plugin) == 
                         GTK_ORIENTATION_HORIZONTAL) ?
@@ -338,6 +354,24 @@ show_label_toggled (GtkToggleButton *tb, Tasklist *tasklist)
 }
 
 static void
+expand_toggled (GtkToggleButton *tb, Tasklist *tasklist)
+{
+    tasklist->expand = gtk_toggle_button_get_active (tb);
+
+    xfce_panel_plugin_set_expand (tasklist->plugin, tasklist->expand);
+}
+
+static void
+width_changed (GtkSpinButton *sb, Tasklist *tasklist)
+{
+    tasklist->width = gtk_spin_button_get_value_as_int (sb);
+
+    tasklist_set_size (tasklist->plugin, 
+                       xfce_panel_plugin_get_size (tasklist->plugin), 
+                       tasklist);
+}
+
+static void
 tasklist_dialog_response (GtkWidget *dlg, int reponse, 
                           Tasklist *tasklist)
 {
@@ -351,7 +385,8 @@ tasklist_dialog_response (GtkWidget *dlg, int reponse,
 static void
 tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
 {
-    GtkWidget *dlg, *header, *vbox, *cb;
+    GtkWidget *dlg, *header, *mainvbox, *vbox, *frame, *cb, 
+              *hbox, *label, *spin;
 
     xfce_panel_plugin_block_menu (plugin);
     
@@ -378,12 +413,53 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), header,
                         FALSE, TRUE, 0);
     
-    vbox = gtk_vbox_new (FALSE, 8);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
-    gtk_widget_show (vbox);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox,
+    mainvbox = gtk_vbox_new (FALSE, 8);
+    gtk_container_set_border_width (GTK_CONTAINER (mainvbox), 5);
+    gtk_widget_show (mainvbox);
+    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), mainvbox,
                         TRUE, TRUE, 0);
 
+    /* Size */
+    vbox = gtk_vbox_new (FALSE, 8);
+    gtk_widget_show (vbox);
+
+    frame = xfce_create_framebox_with_content (_("Size"), vbox);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
+    
+    hbox = gtk_hbox_new (FALSE, 8);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    
+    label = gtk_label_new (_("Width:"));
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    
+    /* an arbitrary max of 4000 should be future proof, right? */
+    spin = gtk_spin_button_new_with_range (100, 4000, 10);
+    gtk_widget_show (spin);
+    gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), tasklist->width);
+    g_signal_connect (spin, "value-changed", G_CALLBACK (width_changed),
+                      tasklist);
+
+    cb = gtk_check_button_new_with_mnemonic (_("Expand"));
+    gtk_widget_show (cb);
+    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
+                                  tasklist->expand);
+    g_signal_connect (cb, "toggled", G_CALLBACK (expand_toggled),
+                      tasklist);
+
+    /* Tasks */
+    vbox = gtk_vbox_new (FALSE, 8);
+    gtk_widget_show (vbox);
+
+    frame = xfce_create_framebox_with_content (_("Task List"), vbox);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
+    
     cb = gtk_check_button_new_with_mnemonic (_("Show tasks "
                                                "from _all workspaces"));
     gtk_widget_show (cb);
