@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-07 12:29+0900\n"
+"POT-Creation-Date: 2006-01-15 10:32+0100\n"
 "PO-Revision-Date: 2005-11-02 02:03+0900\n"
 "Last-Translator: ByungHyun Choi <byunghyun.choi@gmail.com>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
@@ -29,7 +29,7 @@ msgstr "\"%s\"를 삭제할까요?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:584 ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1541
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce 패널"
@@ -44,7 +44,7 @@ msgstr "해당 아이템을 패널에서 삭제하고 설정도 없앱니다."
 #: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1275
 #: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
-#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:358
+#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:393
 msgid "Properties"
 msgstr "속성"
 
@@ -72,7 +72,7 @@ msgstr "새로운 항목"
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:607
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
 msgid "Add Items"
 msgstr ""
 
@@ -168,125 +168,125 @@ msgstr ""
 " -a, --add       새로운 항목을 추가합니다.\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:622
+#: ../panel/panel-dialogs.c:631
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 "패널의 리스트에서 항목을 옮기거나 리스트로 다시 가져다 놓으면 삭제합니다."
 
-#: ../panel/panel-dialogs.c:635
+#: ../panel/panel-dialogs.c:644
 msgid "Avalaible Items"
 msgstr "사용가능한 항목"
 
-#: ../panel/panel-dialogs.c:875 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
 msgid "Left"
 msgstr "왼쪽"
 
-#: ../panel/panel-dialogs.c:877 ../panel/panel-dialogs.c:1094
+#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1103
 msgid "Right"
 msgstr "오른쪽"
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1099
+#: ../panel/panel-dialogs.c:891 ../panel/panel-dialogs.c:1108
 msgid "Top"
 msgstr "위"
 
-#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:893 ../panel/panel-dialogs.c:1110
 msgid "Bottom"
 msgstr "아래"
 
 #. floating?
-#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:921
 msgid "Panel Type"
 msgstr "패널 종류"
 
-#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:930
 msgid "Fixed Position"
 msgstr "위치 고정"
 
-#: ../panel/panel-dialogs.c:927
+#: ../panel/panel-dialogs.c:936
 msgid "Freely Moveable"
 msgstr "마음대로 움직이기"
 
 #. position
-#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:947
 msgid "Position"
 msgstr "위치"
 
-#: ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:1035
 msgid "_Full Width"
 msgstr "최대 폭(_F)"
 
-#: ../panel/panel-dialogs.c:1035
+#: ../panel/panel-dialogs.c:1044
 msgid "Auto_hide"
 msgstr "자동 숨기기(_h)"
 
-#: ../panel/panel-dialogs.c:1053
+#: ../panel/panel-dialogs.c:1062
 msgid "Orientation:"
 msgstr "패널 방향:"
 
-#: ../panel/panel-dialogs.c:1065
+#: ../panel/panel-dialogs.c:1074
 msgid "Horizontal"
 msgstr "수평"
 
-#: ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:1076
 msgid "Vertical"
 msgstr "수직"
 
-#: ../panel/panel-dialogs.c:1076
+#: ../panel/panel-dialogs.c:1085
 #, fuzzy
 msgid "Handle:"
 msgstr "핸들 위치:"
 
-#: ../panel/panel-dialogs.c:1088
+#: ../panel/panel-dialogs.c:1097
 msgid "At both sides"
 msgstr "양쪽 모두"
 
-#: ../panel/panel-dialogs.c:1161
+#: ../panel/panel-dialogs.c:1170
 #, fuzzy
 msgid "Select Monitor"
 msgstr "감시"
 
 #. size
-#: ../panel/panel-dialogs.c:1274
+#: ../panel/panel-dialogs.c:1283 ../plugins/tasklist/tasklist.c:426
 msgid "Size"
 msgstr "크기"
 
-#: ../panel/panel-dialogs.c:1282
+#: ../panel/panel-dialogs.c:1291
 msgid "Small"
 msgstr "작게"
 
-#: ../panel/panel-dialogs.c:1295
+#: ../panel/panel-dialogs.c:1304
 msgid "Large"
 msgstr "크게"
 
-#: ../panel/panel-dialogs.c:1310
+#: ../panel/panel-dialogs.c:1319
 msgid "Transparency"
 msgstr "투명"
 
-#: ../panel/panel-dialogs.c:1318
+#: ../panel/panel-dialogs.c:1327
 msgid "None"
 msgstr "사용안함"
 
-#: ../panel/panel-dialogs.c:1332
+#: ../panel/panel-dialogs.c:1341
 msgid "Full"
 msgstr "최대"
 
-#: ../panel/panel-dialogs.c:1376 ../panel/panel-dialogs.c:1414
-#: ../panel/panel-dialogs.c:1439
+#: ../panel/panel-dialogs.c:1385 ../panel/panel-dialogs.c:1423
+#: ../panel/panel-dialogs.c:1448
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
 
-#: ../panel/panel-dialogs.c:1460
+#: ../panel/panel-dialogs.c:1469
 msgid "Remove Panel"
 msgstr "패널을 삭제합니다."
 
-#: ../panel/panel-dialogs.c:1473
+#: ../panel/panel-dialogs.c:1482
 msgid "New Panel"
 msgstr "새로운 패널"
 
-#: ../panel/panel-dialogs.c:1557
+#: ../panel/panel-dialogs.c:1566
 #, fuzzy
 msgid "Panel Manager"
 msgstr "패널 종류"
@@ -524,28 +524,37 @@ msgstr "시스템 트레이에 %s를(을) 등록하지 못 했습니다."
 msgid "Status Area"
 msgstr "상태 영역"
 
-#: ../plugins/tasklist/tasklist.c:374
+#: ../plugins/tasklist/tasklist.c:409 ../plugins/tasklist/tasklist.c:459
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "태스크 목록"
 
-#: ../plugins/tasklist/tasklist.c:387
+#: ../plugins/tasklist/tasklist.c:434
+msgid "Width:"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:447
+#, fuzzy
+msgid "Expand"
+msgstr "확장(_E)"
+
+#: ../plugins/tasklist/tasklist.c:463
 msgid "Show tasks from _all workspaces"
 msgstr "모든 작업공간의 태스크 보이기(_a)"
 
-#: ../plugins/tasklist/tasklist.c:397
+#: ../plugins/tasklist/tasklist.c:473
 msgid "Show application _names"
 msgstr "프로그램 이름 보이기(_n)"
 
-#: ../plugins/tasklist/tasklist.c:411
+#: ../plugins/tasklist/tasklist.c:487
 msgid "Never group tasks"
 msgstr "태스크를 따로 두기"
 
-#: ../plugins/tasklist/tasklist.c:414
+#: ../plugins/tasklist/tasklist.c:490
 msgid "Automatically group tasks"
 msgstr "같은 태스크를 자동으로 모으기"
 
-#: ../plugins/tasklist/tasklist.c:417
+#: ../plugins/tasklist/tasklist.c:493
 msgid "Always group tasks"
 msgstr "같은 태스크는 항상 모으기"
 

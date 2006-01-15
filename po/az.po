@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-07 12:29+0900\n"
+"POT-Creation-Date: 2006-01-15 10:32+0100\n"
 "PO-Revision-Date: 2005-09-29 20:16+0900\n"
 "Last-Translator: Mətin Əmirov <metin@karegen.com>\n"
 "Language-Team: Azerbaijani <translation-team-az@lists.sourceforge.net>\n"
@@ -29,7 +29,7 @@ msgstr "Sil"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:584 ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1541
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce Paneli"
@@ -44,7 +44,7 @@ msgstr ""
 #: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1275
 #: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
-#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:358
+#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:393
 msgid "Properties"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr "Yeni üzv əlavə et"
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:607
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
 msgid "Add Items"
 msgstr ""
 
@@ -162,131 +162,131 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:622
+#: ../panel/panel-dialogs.c:631
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:635
+#: ../panel/panel-dialogs.c:644
 msgid "Avalaible Items"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:875 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:877 ../panel/panel-dialogs.c:1094
+#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1103
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1099
+#: ../panel/panel-dialogs.c:891 ../panel/panel-dialogs.c:1108
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:893 ../panel/panel-dialogs.c:1110
 msgid "Bottom"
 msgstr ""
 
 #. floating?
-#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:921
 #, fuzzy
 msgid "Panel Type"
 msgstr "Panel böyüklüyü:"
 
-#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:930
 #, fuzzy
 msgid "Fixed Position"
 msgstr "Mövqe"
 
-#: ../panel/panel-dialogs.c:927
+#: ../panel/panel-dialogs.c:936
 msgid "Freely Moveable"
 msgstr ""
 
 #. position
-#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:947
 msgid "Position"
 msgstr "Mövqe"
 
-#: ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:1035
 msgid "_Full Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1035
+#: ../panel/panel-dialogs.c:1044
 #, fuzzy
 msgid "Auto_hide"
 msgstr "Avtomatik gizlət"
 
-#: ../panel/panel-dialogs.c:1053
+#: ../panel/panel-dialogs.c:1062
 #, fuzzy
 msgid "Orientation:"
 msgstr "Panel istiqaməti:"
 
-#: ../panel/panel-dialogs.c:1065
+#: ../panel/panel-dialogs.c:1074
 msgid "Horizontal"
 msgstr "Üfüqi"
 
-#: ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:1076
 msgid "Vertical"
 msgstr "Şaquli"
 
-#: ../panel/panel-dialogs.c:1076
+#: ../panel/panel-dialogs.c:1085
 #, fuzzy
 msgid "Handle:"
 msgstr "Mövqe"
 
-#: ../panel/panel-dialogs.c:1088
+#: ../panel/panel-dialogs.c:1097
 #, fuzzy
 msgid "At both sides"
 msgstr "Avtomatik gizlət"
 
-#: ../panel/panel-dialogs.c:1161
+#: ../panel/panel-dialogs.c:1170
 #, fuzzy
 msgid "Select Monitor"
 msgstr "Editor"
 
 #. size
-#: ../panel/panel-dialogs.c:1274
+#: ../panel/panel-dialogs.c:1283 ../plugins/tasklist/tasklist.c:426
 msgid "Size"
 msgstr "Böyüklük"
 
-#: ../panel/panel-dialogs.c:1282
+#: ../panel/panel-dialogs.c:1291
 msgid "Small"
 msgstr "Kiçik"
 
-#: ../panel/panel-dialogs.c:1295
+#: ../panel/panel-dialogs.c:1304
 msgid "Large"
 msgstr "Geniş"
 
-#: ../panel/panel-dialogs.c:1310
+#: ../panel/panel-dialogs.c:1319
 msgid "Transparency"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1318
+#: ../panel/panel-dialogs.c:1327
 msgid "None"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1332
+#: ../panel/panel-dialogs.c:1341
 msgid "Full"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1376 ../panel/panel-dialogs.c:1414
-#: ../panel/panel-dialogs.c:1439
+#: ../panel/panel-dialogs.c:1385 ../panel/panel-dialogs.c:1423
+#: ../panel/panel-dialogs.c:1448
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "Xfce Paneli"
 
-#: ../panel/panel-dialogs.c:1460
+#: ../panel/panel-dialogs.c:1469
 #, fuzzy
 msgid "Remove Panel"
 msgstr "Sil"
 
-#: ../panel/panel-dialogs.c:1473
+#: ../panel/panel-dialogs.c:1482
 #, fuzzy
 msgid "New Panel"
 msgstr "Xfce Paneli"
 
-#: ../panel/panel-dialogs.c:1557
+#: ../panel/panel-dialogs.c:1566
 #, fuzzy
 msgid "Panel Manager"
 msgstr "Panel böyüklüyü:"
@@ -542,31 +542,39 @@ msgstr "Bildiriş sahəsi qeyd edilə bilmədi: %s"
 msgid "Status Area"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:374
+#: ../plugins/tasklist/tasklist.c:409 ../plugins/tasklist/tasklist.c:459
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 #, fuzzy
 msgid "Task List"
 msgstr "Vəzifələr"
 
-#: ../plugins/tasklist/tasklist.c:387
+#: ../plugins/tasklist/tasklist.c:434
+msgid "Width:"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:447
+msgid "Expand"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:463
 msgid "Show tasks from _all workspaces"
 msgstr "_Bütün iş sahələrindəki vəzifələri göstər"
 
-#: ../plugins/tasklist/tasklist.c:397
+#: ../plugins/tasklist/tasklist.c:473
 msgid "Show application _names"
 msgstr "Proqram _adlarını göstər"
 
-#: ../plugins/tasklist/tasklist.c:411
+#: ../plugins/tasklist/tasklist.c:487
 #, fuzzy
 msgid "Never group tasks"
 msgstr "Vəzifələri həmişə _qrupla"
 
-#: ../plugins/tasklist/tasklist.c:414
+#: ../plugins/tasklist/tasklist.c:490
 #, fuzzy
 msgid "Automatically group tasks"
 msgstr "Vəzifələri həmişə _qrupla"
 
-#: ../plugins/tasklist/tasklist.c:417
+#: ../plugins/tasklist/tasklist.c:493
 #, fuzzy
 msgid "Always group tasks"
 msgstr "Vəzifələri həmişə _qrupla"

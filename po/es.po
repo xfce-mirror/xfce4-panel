@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-07 12:29+0900\n"
+"POT-Creation-Date: 2006-01-15 10:32+0100\n"
 "PO-Revision-Date: 2005-11-07 22:12+0900\n"
 "Last-Translator: Rudy Godoy <rudy@kernel-panik.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "¿Eliminar «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:584 ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1541
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Panel de Xfce"
@@ -44,7 +44,7 @@ msgstr "El elemento se elimará del panel y se perderá su configuración."
 #: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1275
 #: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
-#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:358
+#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:393
 msgid "Properties"
 msgstr "Propiedades"
 
@@ -72,7 +72,7 @@ msgstr "Nuevo elemento"
 msgid "Customize Panel"
 msgstr "Personalizar panel"
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:607
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
 msgid "Add Items"
 msgstr ""
 
@@ -169,7 +169,7 @@ msgstr ""
 " -x, --exit      Finaliza los paneles\n"
 " -a, --add       Añade nuevos elementos\n"
 
-#: ../panel/panel-dialogs.c:622
+#: ../panel/panel-dialogs.c:631
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -177,118 +177,118 @@ msgstr ""
 "Arrastre elementos de la lista hacia un panel, o para eliminarlos,\n"
 "desde éste hacia la lista."
 
-#: ../panel/panel-dialogs.c:635
+#: ../panel/panel-dialogs.c:644
 msgid "Avalaible Items"
 msgstr "Elementos disponibles"
 
-#: ../panel/panel-dialogs.c:875 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
 msgid "Left"
 msgstr "Izquierda"
 
-#: ../panel/panel-dialogs.c:877 ../panel/panel-dialogs.c:1094
+#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1103
 msgid "Right"
 msgstr "Derecha"
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1099
+#: ../panel/panel-dialogs.c:891 ../panel/panel-dialogs.c:1108
 msgid "Top"
 msgstr "Superior"
 
-#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:893 ../panel/panel-dialogs.c:1110
 msgid "Bottom"
 msgstr "Inferior"
 
 #. floating?
-#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:921
 msgid "Panel Type"
 msgstr "Tipo de panel"
 
-#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:930
 msgid "Fixed Position"
 msgstr "Posición fija"
 
-#: ../panel/panel-dialogs.c:927
+#: ../panel/panel-dialogs.c:936
 msgid "Freely Moveable"
 msgstr "Desplazable"
 
 #. position
-#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:947
 msgid "Position"
 msgstr "Posición"
 
-#: ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:1035
 msgid "_Full Width"
 msgstr "_Todo el ancho"
 
-#: ../panel/panel-dialogs.c:1035
+#: ../panel/panel-dialogs.c:1044
 msgid "Auto_hide"
 msgstr "Ocultar automáticamente"
 
-#: ../panel/panel-dialogs.c:1053
+#: ../panel/panel-dialogs.c:1062
 msgid "Orientation:"
 msgstr "Orientación:"
 
-#: ../panel/panel-dialogs.c:1065
+#: ../panel/panel-dialogs.c:1074
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:1076
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-dialogs.c:1076
+#: ../panel/panel-dialogs.c:1085
 #, fuzzy
 msgid "Handle:"
 msgstr "Gestionar posición"
 
-#: ../panel/panel-dialogs.c:1088
+#: ../panel/panel-dialogs.c:1097
 msgid "At both sides"
 msgstr "A ambos lados"
 
-#: ../panel/panel-dialogs.c:1161
+#: ../panel/panel-dialogs.c:1170
 #, fuzzy
 msgid "Select Monitor"
 msgstr "Monitor"
 
 #. size
-#: ../panel/panel-dialogs.c:1274
+#: ../panel/panel-dialogs.c:1283 ../plugins/tasklist/tasklist.c:426
 msgid "Size"
 msgstr "Tamaño"
 
-#: ../panel/panel-dialogs.c:1282
+#: ../panel/panel-dialogs.c:1291
 msgid "Small"
 msgstr "Pequeño"
 
-#: ../panel/panel-dialogs.c:1295
+#: ../panel/panel-dialogs.c:1304
 msgid "Large"
 msgstr "Grande"
 
-#: ../panel/panel-dialogs.c:1310
+#: ../panel/panel-dialogs.c:1319
 msgid "Transparency"
 msgstr "Transparencia"
 
-#: ../panel/panel-dialogs.c:1318
+#: ../panel/panel-dialogs.c:1327
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panel/panel-dialogs.c:1332
+#: ../panel/panel-dialogs.c:1341
 msgid "Full"
 msgstr "Completo"
 
-#: ../panel/panel-dialogs.c:1376 ../panel/panel-dialogs.c:1414
-#: ../panel/panel-dialogs.c:1439
+#: ../panel/panel-dialogs.c:1385 ../panel/panel-dialogs.c:1423
+#: ../panel/panel-dialogs.c:1448
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1460
+#: ../panel/panel-dialogs.c:1469
 msgid "Remove Panel"
 msgstr "Eliminar panel"
 
-#: ../panel/panel-dialogs.c:1473
+#: ../panel/panel-dialogs.c:1482
 msgid "New Panel"
 msgstr "Nuevo panel"
 
-#: ../panel/panel-dialogs.c:1557
+#: ../panel/panel-dialogs.c:1566
 #, fuzzy
 msgid "Panel Manager"
 msgstr "Tipo de panel"
@@ -528,28 +528,37 @@ msgstr "No se pudo registrar la bandeja de iconos: %s"
 msgid "Status Area"
 msgstr "Área de estado"
 
-#: ../plugins/tasklist/tasklist.c:374
+#: ../plugins/tasklist/tasklist.c:409 ../plugins/tasklist/tasklist.c:459
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Lista de tareas"
 
-#: ../plugins/tasklist/tasklist.c:387
+#: ../plugins/tasklist/tasklist.c:434
+msgid "Width:"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:447
+#, fuzzy
+msgid "Expand"
+msgstr "_Expandir"
+
+#: ../plugins/tasklist/tasklist.c:463
 msgid "Show tasks from _all workspaces"
 msgstr "Mostrar t_areas de todos los escritorios virtuales"
 
-#: ../plugins/tasklist/tasklist.c:397
+#: ../plugins/tasklist/tasklist.c:473
 msgid "Show application _names"
 msgstr "Mostrar _nombres de aplicaciones"
 
-#: ../plugins/tasklist/tasklist.c:411
+#: ../plugins/tasklist/tasklist.c:487
 msgid "Never group tasks"
 msgstr "No agrupar tareas"
 
-#: ../plugins/tasklist/tasklist.c:414
+#: ../plugins/tasklist/tasklist.c:490
 msgid "Automatically group tasks"
 msgstr "Agrupar tareas automáticamente"
 
-#: ../plugins/tasklist/tasklist.c:417
+#: ../plugins/tasklist/tasklist.c:493
 msgid "Always group tasks"
 msgstr "Siempre agrupar tareas"
 
