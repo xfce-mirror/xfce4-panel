@@ -28,6 +28,8 @@
 #include "panel-app.h"
 
 #define DEFAULT_SIZE             48
+#define MIN_SIZE                 16
+#define MAX_SIZE                 128
 #define DEFAULT_MONITOR          0
 #define DEFAULT_SCREEN_POSITION  XFCE_SCREEN_POSITION_NONE
 #define DEFAULT_XOFFSET          0

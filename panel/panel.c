@@ -159,7 +159,7 @@ panel_class_init (PanelClass * klass)
     pspec = g_param_spec_int ("size",
                               "Size",
                               "The size of the panel",
-                              12, 128,
+                              MIN_SIZE, MAX_SIZE,
                               DEFAULT_SIZE, G_PARAM_READWRITE);
 
     g_object_class_install_property (object_class, PROP_SIZE, pspec);
@@ -360,8 +360,8 @@ panel_size_request  (GtkWidget * widget, GtkRequisition * requisition)
 {
     GTK_WIDGET_CLASS (panel_parent_class)->size_request (widget, requisition);
 
-    requisition->width = MAX (12, requisition->width);
-    requisition->height = MAX (12, requisition->height);
+    requisition->width = MAX (MIN_SIZE, requisition->width);
+    requisition->height = MAX (MIN_SIZE, requisition->height);
 }
 
 static gboolean 

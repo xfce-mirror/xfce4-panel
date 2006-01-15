@@ -182,6 +182,15 @@ present_dialog (GtkWidget *dialog, GPtrArray *panels)
  */
 
 static gboolean
+item_configure_timeout (XfcePanelItem *item)
+{
+    xfce_panel_item_configure (item);
+
+    return FALSE;
+}
+
+
+static gboolean
 add_selected_item (PanelItemsDialog *pid)
 {
     GtkTreeSelection *sel;
@@ -213,7 +222,7 @@ add_selected_item (PanelItemsDialog *pid)
         item = panel_add_item (pid->panel, info->name);
     }
 
-    g_idle_add ((GSourceFunc)xfce_panel_item_configure, item);
+    g_idle_add ((GSourceFunc)item_configure_timeout, item);
     
     return TRUE;
 }
@@ -1285,7 +1294,7 @@ add_appearance_options (GtkBox *box, PanelManagerDialog *pmd)
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_size_group_add_widget (sg, label);
     
-    pmd->size = gtk_hscale_new_with_range (12, 128, 2);
+    pmd->size = gtk_hscale_new_with_range (MIN_SIZE, MAX_SIZE, 2);
     gtk_scale_set_value_pos (GTK_SCALE (pmd->size), GTK_POS_BOTTOM);
     gtk_range_set_update_policy (GTK_RANGE (pmd->size), GTK_UPDATE_DELAYED);
     gtk_widget_set_size_request (pmd->size, 120, -1);
