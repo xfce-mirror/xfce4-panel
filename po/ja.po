@@ -3,14 +3,14 @@
 # Japanese translations for xfce4-panel package.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-# Daichi Kawahata <daichi@xfce.org>, 2005.
+# Daichi Kawahata <daichi@xfce.org>, 2005-2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-15 10:32+0100\n"
-"PO-Revision-Date: 2005-12-31 01:47+0900\n"
+"PO-Revision-Date: 2006-01-17 21:24+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "アイテム「%s」が予期せずに削除されました。"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:580
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "\"%s\" を削除しますか？"
+msgstr "「%s」を削除しますか？"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
@@ -104,7 +104,7 @@ msgstr ""
 #: ../panel/panel-app.c:672
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "パネル \"%d\" を削除しますか？"
+msgstr "パネル「%d」を削除しますか？"
 
 #: ../panel/panel-app.c:676
 msgid "The selected panel and all its items will be removed."
@@ -280,11 +280,11 @@ msgstr "パネル %d"
 
 #: ../panel/panel-dialogs.c:1469
 msgid "Remove Panel"
-msgstr "パネルを削除"
+msgstr "パネルを削除します"
 
 #: ../panel/panel-dialogs.c:1482
 msgid "New Panel"
-msgstr "新しいパネル"
+msgstr "パネルを追加します"
 
 #: ../panel/panel-dialogs.c:1566
 msgid "Panel Manager"
@@ -313,11 +313,11 @@ msgstr "セパレーター"
 
 #: ../plugins/separator/separator.c:284
 msgid "_Draw Separator"
-msgstr "セパレーターを描く(_D)"
+msgstr "セパレーターを描画する(_D)"
 
 #: ../plugins/separator/separator.c:293
 msgid "_Expand"
-msgstr "拡張(_E)"
+msgstr "拡げる(_E)"
 
 #: ../plugins/iconbox/iconbox.c:808
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -326,7 +326,7 @@ msgstr "アイコン箱"
 
 #: ../plugins/iconbox/iconbox.c:822
 msgid "Only show minimized applications"
-msgstr "最小化したアプリのみ表示"
+msgstr "最小化したアプリのみ表示する"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -481,7 +481,7 @@ msgstr "ダイオード"
 
 #: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
 msgid "Show _frame"
-msgstr "枠を表示(_F)"
+msgstr "枠を表示する(_F)"
 
 #: ../plugins/clock/clock.c:461
 msgid "Clock Options"
@@ -493,7 +493,7 @@ msgstr "24時間制にする(_H)"
 
 #: ../plugins/clock/clock.c:479
 msgid "Show AM/PM"
-msgstr "午前/午後を表示"
+msgstr "AM/PMを表示する"
 
 #: ../plugins/clock/clock.c:487
 msgid "Display seconds"
@@ -505,11 +505,11 @@ msgstr "ページャー"
 
 #: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
-msgstr "縦列の数:"
+msgstr "行数:"
 
 #: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
-msgstr "横列の数:"
+msgstr "列数:"
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
@@ -532,20 +532,19 @@ msgstr "タスクリスト"
 
 #: ../plugins/tasklist/tasklist.c:434
 msgid "Width:"
-msgstr ""
+msgstr "幅:"
 
 #: ../plugins/tasklist/tasklist.c:447
-#, fuzzy
 msgid "Expand"
-msgstr "拡張(_E)"
+msgstr "拡げる"
 
 #: ../plugins/tasklist/tasklist.c:463
 msgid "Show tasks from _all workspaces"
-msgstr "すべてのワークスペースのタスクを表示(_A)"
+msgstr "全ワークスペースのタスクを表示する(_A)"
 
 #: ../plugins/tasklist/tasklist.c:473
 msgid "Show application _names"
-msgstr "アプリケーション名を表示(_N)"
+msgstr "アプリケーション名を表示する(_N)"
 
 #: ../plugins/tasklist/tasklist.c:487
 msgid "Never group tasks"
