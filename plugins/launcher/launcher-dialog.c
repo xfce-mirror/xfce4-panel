@@ -808,7 +808,8 @@ cursor_changed (GtkTreeView * tv, LauncherDialog *ld)
 
 	gtk_widget_set_sensitive (ld->up, TRUE);
 	gtk_widget_set_sensitive (ld->down, TRUE);
-        gtk_widget_set_sensitive (ld->remove, TRUE);
+        gtk_widget_set_sensitive (ld->remove, 
+                                  (ld->launcher->entries->len > 1));
 
         for (i = 0; i < ld->launcher->entries->len; ++i)
         {
@@ -819,7 +820,6 @@ cursor_changed (GtkTreeView * tv, LauncherDialog *ld)
             
             if (i == 0)
             {
-                gtk_widget_set_sensitive (ld->remove, FALSE);
                 gtk_widget_set_sensitive (ld->up, FALSE);
             }
             
@@ -1124,7 +1124,9 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
     }
     else if (b == ld->remove)
     {
-        if (!e || e == g_ptr_array_index (ld->launcher->entries, 0))
+        gboolean is_first;
+        
+        if (!e)
             return;
 
         if (gtk_list_store_remove (GTK_LIST_STORE (model), &iter))
@@ -1142,12 +1144,20 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
         gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, FALSE);
         
         gtk_tree_path_free (path);
-            
+        
+        is_first = (e == g_ptr_array_index (ld->launcher->entries, 0));
+
         g_ptr_array_remove (ld->launcher->entries, e);
         launcher_entry_free (e);
         
         if (ld->launcher->entries->len == 1)
+        {
             gtk_widget_hide (ld->launcher->arrowbutton);
+            gtk_widget_set_sensitive (ld->remove, FALSE);
+        }
+
+        if (is_first)
+            set_panel_icon (ld);
     }
 
     cursor_changed (GTK_TREE_VIEW (ld->tree), ld);
