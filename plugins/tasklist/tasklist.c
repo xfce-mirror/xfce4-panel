@@ -519,11 +519,7 @@ static gboolean
 using_xinerama (XfcePanelPlugin *plugin)
 {
     return ( gdk_screen_get_n_monitors (
-                gtk_widget_get_screen (GTK_WIDGET (plugin))) > 1 
-             && 
-             gdk_display_get_n_screens (
-                gtk_widget_get_display (GTK_WIDGET (plugin))) == 1 
-            );
+                gtk_widget_get_screen (GTK_WIDGET (plugin))) > 1 );
 }
 
 
