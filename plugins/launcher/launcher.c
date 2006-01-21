@@ -441,12 +441,6 @@ launcher_menu_deactivated (GtkWidget *menu, LauncherPlugin *launcher)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), 
                                   FALSE);
     launcher->from_timeout = FALSE;
-
-    /* 'fix' button depressed state for gtk 2.4 */
-    if (gtk_major_version == 2 && gtk_minor_version == 4)
-    {
-        gtk_button_released (GTK_BUTTON (launcher->iconbutton));
-    }
 }
 
 static gboolean

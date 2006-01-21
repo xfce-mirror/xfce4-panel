@@ -26,13 +26,8 @@ static void
 test_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation, 
                      GtkWidget *label)
 {
-    if ((gtk_major_version == 2 && gtk_minor_version >= 6) || 
-         gtk_major_version > 2)
-    {
-        gdouble angle = (orientation == GTK_ORIENTATION_HORIZONTAL) ? 0 : 90;
-
-        g_object_set (G_OBJECT (label), "angle", angle, NULL);
-    }
+    gtk_label_set_angle (GTK_LABEL (label), 
+            (orientation == GTK_ORIENTATION_HORIZONTAL) ? 0 : 90);
 }
 
 static void 
@@ -98,6 +93,7 @@ test_construct (XfcePanelPlugin *plugin)
     GtkWidget *button;
     char *file;
     XfceRc *rc;
+    GtkOrientation orientation = xfce_panel_plugin_get_orientation (plugin);
     
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8"); 
 
@@ -120,17 +116,9 @@ test_construct (XfcePanelPlugin *plugin)
         gtk_button_new_with_label (xfce_panel_plugin_get_display_name (plugin));
     gtk_widget_show (button);
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-    
-    if ((gtk_major_version == 2 && gtk_minor_version >= 6) || 
-         gtk_major_version > 2)
-    {
-        GtkOrientation orientation = 
-            xfce_panel_plugin_get_orientation (plugin);
-        gdouble angle = (orientation == GTK_ORIENTATION_HORIZONTAL) ? 0 : 90;
 
-        g_object_set (G_OBJECT (GTK_BIN (button)->child), 
-                      "angle", angle, NULL);
-    }
+    gtk_label_set_angle (GTK_LABEL (GTK_BIN (button)->child), 
+            (orientation == GTK_ORIENTATION_HORIZONTAL) ? 0 : 90);
     
     gtk_container_add (GTK_CONTAINER (plugin), button);
 
