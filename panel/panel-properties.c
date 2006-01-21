@@ -385,24 +385,23 @@ panel_set_position (Panel *panel, XfceScreenPosition position,
         yoffset -= xmon->geometry.y;
     }
     
-    if (priv->full_width)
+    switch (priv->full_width)
     {
-        xoffset = yoffset = 0;
-        if (xfce_screen_position_is_horizontal (position))
-        {
-            if (panel_app_monitors_equal_height ())
+        case XFCE_PANEL_NORMAL_WIDTH:
+            x += xoffset;
+            y += yoffset;
+            break;
+            
+        case XFCE_PANEL_SPAN_MONITORS:
+            if (xfce_screen_position_is_horizontal (position))
                 x = 0;
-        }
-        else
-        {
-            if (panel_app_monitors_equal_width ())
+            else
                 y = 0;
-        }
-    }
-    else
-    {
-        x += xoffset;
-        y += yoffset;
+            /* fall through */
+            
+        case XFCE_PANEL_FULL_WIDTH:
+            xoffset = yoffset = 0;
+            break;
     }
     
     priv->xoffset = xoffset;
@@ -499,27 +498,33 @@ _set_hidden (Panel *panel, gboolean hide)
         
         xmon = panel_app_get_monitor (priv->monitor);
     
-        if (!priv->full_width)
+        switch (priv->full_width)
         {
-            w = h = -1;
+            case XFCE_PANEL_NORMAL_WIDTH:
+                w = h = -1;
+                break;
+                
+            case XFCE_PANEL_FULL_WIDTH:
+            case XFCE_PANEL_SPAN_MONITORS:
+                if (xfce_screen_position_is_horizontal (priv->screen_position))
+                {
+                    h = -1;
+                    if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
+                        w = xmon->geometry.width;
+                    else
+                        w = gdk_screen_get_width (xmon->screen);
+                }
+                else
+                {
+                    w = -1;
+                    if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
+                        h = xmon->geometry.height;
+                    else
+                        h = gdk_screen_get_height (xmon->screen);
+                }
+                break;
         }
-        else if (xfce_screen_position_is_horizontal (priv->screen_position))
-        {
-            if (!panel_app_monitors_equal_height ())
-                w = xmon->geometry.width;
-            else
-                w = gdk_screen_get_width (xmon->screen);
-            h = -1;
-        }
-        else
-        {
-            w = -1;
-            if (!panel_app_monitors_equal_width ())
-                h = xmon->geometry.height;
-            else
-                h = gdk_screen_get_height (xmon->screen);
-        }
-
+    
         gtk_widget_show (priv->itembar);
         gtk_widget_set_size_request (GTK_WIDGET (panel), w, h);
     }
@@ -670,13 +675,13 @@ panel_init_position (Panel *panel)
     g_signal_connect (xmon->screen, "size-changed", 
                       G_CALLBACK (panel_screen_size_changed), panel);
     
-    if (priv->full_width)
+    if (priv->full_width > XFCE_PANEL_NORMAL_WIDTH)
     {
         if (xfce_screen_position_is_horizontal (priv->screen_position))
         {
             int w;
             
-            if (!panel_app_monitors_equal_height ())
+            if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
                 w = xmon->geometry.width;
             else
                 w = gdk_screen_get_width (xmon->screen);
@@ -687,7 +692,7 @@ panel_init_position (Panel *panel)
         {
             int h;
             
-            if (!panel_app_monitors_equal_width ())
+            if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
                 h = xmon->geometry.height;
             else
                 h = gdk_screen_get_height (xmon->screen);
@@ -832,7 +837,7 @@ void panel_unblock_autohide (Panel *panel)
 }
 
 void
-panel_set_full_width (Panel *panel, gboolean fullwidth)
+panel_set_full_width (Panel *panel, int fullwidth)
 {
     PanelPrivate *priv;
 
@@ -849,28 +854,34 @@ panel_set_full_width (Panel *panel, gboolean fullwidth)
 
             xmon = panel_app_get_monitor (priv->monitor);
 
-            if (!priv->full_width)
+            switch (priv->full_width)
             {
-                w = h = -1;
+                case XFCE_PANEL_NORMAL_WIDTH:
+                    w = h = -1;
+                    break;
+                    
+                case XFCE_PANEL_FULL_WIDTH:
+                case XFCE_PANEL_SPAN_MONITORS:
+                    if (xfce_screen_position_is_horizontal (
+                                priv->screen_position))
+                    {
+                        h = -1;
+                        if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
+                            w = xmon->geometry.width;
+                        else
+                            w = gdk_screen_get_width (xmon->screen);
+                    }
+                    else
+                    {
+                        w = -1;
+                        if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
+                            h = xmon->geometry.height;
+                        else
+                            h = gdk_screen_get_height (xmon->screen);
+                    }
+                    break;
             }
-            else if (xfce_screen_position_is_horizontal (
-                        priv->screen_position))
-            {
-                if (!panel_app_monitors_equal_height())
-                    w = xmon->geometry.width;
-                else
-                    w = gdk_screen_get_width (xmon->screen);
-                h = -1;
-            }
-            else
-            {
-                w = -1;
-                if (!panel_app_monitors_equal_width())
-                    h = xmon->geometry.height;
-                else
-                    h = gdk_screen_get_height (xmon->screen);
-            }
-
+    
             gtk_widget_set_size_request (GTK_WIDGET (panel), w, h);
             
             panel_set_position (panel, priv->screen_position, 

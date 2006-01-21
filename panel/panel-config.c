@@ -209,7 +209,7 @@ struct _ConfigParser
     int size;
     int monitor;
     int screen_position;
-    gboolean full_width;
+    int full_width;
     int xoffset;
     int yoffset;
     int handle_style;
@@ -226,7 +226,7 @@ init_properties (ConfigParser *parser)
     parser->size            = DEFAULT_SIZE;
     parser->monitor         = 0;
     parser->screen_position = DEFAULT_SCREEN_POSITION;
-    parser->full_width      = FALSE;
+    parser->full_width      = XFCE_PANEL_NORMAL_WIDTH;
     parser->xoffset         = 0;
     parser->yoffset         = 0;
     parser->handle_style    = XFCE_HANDLE_STYLE_NONE;
@@ -257,7 +257,7 @@ config_set_property (ConfigParser *parser,
     }
     else if (strcmp (name, "fullwidth") == 0)
     {
-        parser->full_width = ((int) strtol (value, NULL, 0) == 1);
+        parser->full_width = ((int) strtol (value, NULL, 0));
     }
     else if (strcmp (name, "xoffset") == 0)
     {
@@ -634,8 +634,8 @@ config_save_to_file (GPtrArray *array, const char *filename)
     {
         Panel *panel;
         int size, monitor, screen_position, xoffset, yoffset, handle_style,
-            transparency, j;
-        gboolean autohide, fullwidth;
+            transparency, fullwidth, j;
+        gboolean autohide;
         XfcePanelItemConfig *configlist;
         
         DBG ("Saving panel %d", i + 1);
@@ -643,8 +643,8 @@ config_save_to_file (GPtrArray *array, const char *filename)
         panel = g_ptr_array_index (array, i);
 
         size = monitor = screen_position = xoffset = yoffset = 
-            transparency = 0;
-        autohide = fullwidth = FALSE;
+            transparency = fullwidth = 0;
+        autohide = FALSE;
 
         g_object_get (G_OBJECT (panel),
                       "size", &size,

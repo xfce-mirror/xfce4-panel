@@ -43,6 +43,14 @@
 
 typedef struct _PanelPrivate PanelPrivate;
 
+typedef enum
+{
+    XFCE_PANEL_NORMAL_WIDTH,
+    XFCE_PANEL_FULL_WIDTH,
+    XFCE_PANEL_SPAN_MONITORS,    
+}
+XfcePanelWidthType;
+
 struct _PanelPrivate
 {
     GtkWidget *itembar;
@@ -54,7 +62,7 @@ struct _PanelPrivate
     int xoffset;
     int yoffset;
     guint autohide:1;
-    guint full_width:1;
+    XfcePanelWidthType full_width;
     int transparency;
 
     guint opacity;

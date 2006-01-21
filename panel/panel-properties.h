@@ -68,7 +68,7 @@ void panel_block_autohide   (Panel *panel);
 void panel_unblock_autohide (Panel *panel);
 
 void panel_set_full_width   (Panel *panel, 
-                             gboolean fullwidth);
+                             int fullwidth);
 
 void panel_set_transparency (Panel *panel,
                              int transparency);

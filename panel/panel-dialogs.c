@@ -95,6 +95,7 @@ struct _PanelManagerDialog
     GtkWidget *fixed_box;
     GtkWidget *screen_position[12];
     GtkWidget *fullwidth;
+    int n_width_items;
     GtkWidget *autohide;
 
     GtkWidget *floating_box;
@@ -174,7 +175,6 @@ present_dialog (GtkWidget *dialog, GPtrArray *panels)
 
     gtk_window_present (GTK_WINDOW (dialog));
 }
-
 
 /* 
  * Add Items Dialog 
@@ -661,10 +661,19 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
  * ====================
  */
 
-/* Update properties */
+static gboolean
+can_span_monitors (Panel *panel)
+{
+    return ( (panel_app_monitors_equal_height () && 
+             panel_is_horizontal (panel))
+             || (panel_app_monitors_equal_width () && 
+                 !panel_is_horizontal (panel)) );
+}
+
+/* Update widgets */
 
 static void
-update_properties (PanelManagerDialog *pmd)
+update_widgets (PanelManagerDialog *pmd)
 {
     PanelPrivate *priv = PANEL_GET_PRIVATE (pmd->panel);
     int i;
@@ -694,8 +703,6 @@ update_properties (PanelManagerDialog *pmd)
                                   priv->autohide);
     
     /* position */
-    DBG ("position: %d", priv->screen_position);
-
     if (!xfce_screen_position_is_floating (priv->screen_position))
     {
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pmd->fixed), TRUE);
@@ -710,8 +717,8 @@ update_properties (PanelManagerDialog *pmd)
                     (int)priv->screen_position == i+1);
         }
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (pmd->fullwidth),
-                                      priv->full_width);
+        gtk_combo_box_set_active (GTK_COMBO_BOX (pmd->fullwidth), 
+                                  priv->full_width);
     }
     else
     {
@@ -798,7 +805,7 @@ type_changed (GtkToggleButton *tb, PanelManagerDialog *pmd)
 
     gtk_widget_queue_draw (GTK_WIDGET (pmd->panel));
 
-    update_properties (pmd);
+    update_widgets (pmd);
 }
 
 static gboolean
@@ -818,7 +825,7 @@ screen_position_pressed (GtkToggleButton *tb, GdkEvent *ev,
                 (((GdkEventKey *)ev)->keyval == GDK_space ||
                         ((GdkEventKey *)ev)->keyval == GDK_Return)))
         {
-            int i;
+            int i, full_width;
 
             for (i = 0; i < 12; ++i)
             {
@@ -829,7 +836,36 @@ screen_position_pressed (GtkToggleButton *tb, GdkEvent *ev,
                 {
                     gtk_toggle_button_set_active (button, TRUE);
                     panel_set_screen_position (pmd->panel, i + 1);
-                }
+                    
+                    /* fix up full width setting */
+                    full_width = gtk_combo_box_get_active (
+                                        GTK_COMBO_BOX (pmd->fullwidth));
+                    
+                    for ( ; pmd->n_width_items > 0; pmd->n_width_items--)
+                    {
+                        gtk_combo_box_remove_text (
+                                GTK_COMBO_BOX (pmd->fullwidth), 
+                                pmd->n_width_items - 1);
+                    }
+                    
+                    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
+                                               _("Normal Width"));
+                    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
+                                               _("Full Width")); 
+                    pmd->n_width_items = 2;
+                    if (can_span_monitors(pmd->panel))
+                    {
+                        gtk_combo_box_append_text (
+                                GTK_COMBO_BOX (pmd->fullwidth), 
+                                _("Span Monitors"));
+                        pmd->n_width_items = 3;
+                    }
+
+                    full_width = MIN(pmd->n_width_items - 1, full_width);
+                    panel_set_full_width (pmd->panel, full_width);
+                    gtk_combo_box_set_active (GTK_COMBO_BOX (pmd->fullwidth),
+                                              full_width);
+                }                                          
                 else
                 {
                     gtk_toggle_button_set_active (button, FALSE);
@@ -842,12 +878,12 @@ screen_position_pressed (GtkToggleButton *tb, GdkEvent *ev,
 }
 
 static void
-fullwidth_changed (GtkToggleButton *tb, PanelManagerDialog *pmd)
+fullwidth_changed (GtkComboBox *box, PanelManagerDialog *pmd)
 {
     if (pmd->updating)
         return;
 
-    panel_set_full_width (pmd->panel, gtk_toggle_button_get_active (tb));
+    panel_set_full_width (pmd->panel, gtk_combo_box_get_active (box));
 }
 
 static void
@@ -1031,12 +1067,23 @@ add_position_options (GtkBox *box, PanelManagerDialog *pmd)
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (pmd->fixed_box), vbox, TRUE, TRUE, 0);
 
-    pmd->fullwidth = 
-        gtk_check_button_new_with_mnemonic (_("_Full Width"));
+    pmd->fullwidth = gtk_combo_box_new_text ();
     gtk_widget_show (pmd->fullwidth);
     gtk_box_pack_start (GTK_BOX (vbox), pmd->fullwidth, FALSE, FALSE, 0);
 
-    g_signal_connect (pmd->fullwidth, "toggled", 
+    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
+                               _("Normal Width"));
+    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
+                               _("Full Width")); 
+    pmd->n_width_items = 2;
+    if (can_span_monitors (pmd->panel))
+    {
+        pmd->n_width_items = 3;
+        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), 
+                                   _("Span Monitors"));
+    }
+
+    g_signal_connect (pmd->fullwidth, "changed", 
                       G_CALLBACK (fullwidth_changed), pmd);
     
     /* fixed:autohide */
@@ -1362,7 +1409,7 @@ panel_selected (GtkComboBox * combo, PanelManagerDialog * pmd)
     pmd->current = n;
     pmd->panel = g_ptr_array_index (pmd->panels, n);
 
-    update_properties (pmd);
+    update_widgets (pmd);
 
     highlight_widget (GTK_WIDGET (pmd->panel), pmd);
 }
@@ -1604,7 +1651,7 @@ panel_manager_dialog (GPtrArray *panels)
     pmd->updating = FALSE;
 
     /* fill in values */
-    update_properties (pmd);
+    update_widgets (pmd);
 
     /* setup panels */
     g_ptr_array_foreach (pmd->panels, (GFunc)panel_block_autohide, NULL);
