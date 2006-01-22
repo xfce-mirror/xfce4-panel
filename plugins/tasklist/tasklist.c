@@ -156,9 +156,9 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
             if (using_xinerama (plugin))
             {
                 expand = xfce_rc_read_int_entry (rc, "expand", expand);
-            
-                width = xfce_rc_read_int_entry (rc, "width", width);
             }
+            
+            width = xfce_rc_read_int_entry (rc, "width", width);
             
             xfce_rc_close (rc);
         }
@@ -425,32 +425,32 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
                         TRUE, TRUE, 0);
 
     /* Size */
+    vbox = gtk_vbox_new (FALSE, 8);
+    gtk_widget_show (vbox);
+
+    frame = xfce_create_framebox_with_content (_("Size"), vbox);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
+    
+    hbox = gtk_hbox_new (FALSE, 8);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    
+    label = gtk_label_new (_("Minimum Width:"));
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_widget_show (label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    
+    /* an arbitrary max of 4000 should be future proof, right? */
+    spin = gtk_spin_button_new_with_range (100, 4000, 10);
+    gtk_widget_show (spin);
+    gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), tasklist->width);
+    g_signal_connect (spin, "value-changed", G_CALLBACK (width_changed),
+                      tasklist);
+
     if (using_xinerama (plugin))
     {
-        vbox = gtk_vbox_new (FALSE, 8);
-        gtk_widget_show (vbox);
-
-        frame = xfce_create_framebox_with_content (_("Size"), vbox);
-        gtk_widget_show (frame);
-        gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
-        
-        hbox = gtk_hbox_new (FALSE, 8);
-        gtk_widget_show (hbox);
-        gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-        
-        label = gtk_label_new (_("Width:"));
-        gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-        gtk_widget_show (label);
-        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-        
-        /* an arbitrary max of 4000 should be future proof, right? */
-        spin = gtk_spin_button_new_with_range (100, 4000, 10);
-        gtk_widget_show (spin);
-        gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), tasklist->width);
-        g_signal_connect (spin, "value-changed", G_CALLBACK (width_changed),
-                          tasklist);
-
         cb = gtk_check_button_new_with_mnemonic (_("Use all available space"));
         gtk_widget_show (cb);
         gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
@@ -458,22 +458,15 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
                                       tasklist->expand);
         g_signal_connect (cb, "toggled", G_CALLBACK (expand_toggled),
                           tasklist);
-
-        /* Tasks */
-        vbox = gtk_vbox_new (FALSE, 8);
-        gtk_widget_show (vbox);
-
-        frame = xfce_create_framebox_with_content (_("Task List"), vbox);
-        gtk_widget_show (frame);
-        gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
-    
     }
-    else
-    {
-        vbox = gtk_vbox_new (FALSE, 8);
-        gtk_widget_show (vbox);
-        gtk_box_pack_start (GTK_BOX (mainvbox), vbox, FALSE, FALSE, 0);
-    }
+
+    /* Tasks */
+    vbox = gtk_vbox_new (FALSE, 8);
+    gtk_widget_show (vbox);
+
+    frame = xfce_create_framebox_with_content (_("Task List"), vbox);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
     
     cb = gtk_check_button_new_with_mnemonic (_("Show tasks "
                                                "from _all workspaces"));
