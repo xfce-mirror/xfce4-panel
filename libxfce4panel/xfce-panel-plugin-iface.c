@@ -354,15 +354,7 @@ xfce_panel_plugin_signal_size (XfcePanelPlugin * plugin, int size)
 
     if (!handled)
     {
-        if (xfce_panel_plugin_get_orientation (plugin) == 
-            GTK_ORIENTATION_HORIZONTAL)
-        {
-            gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
-        }
-        else
-        {
-            gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
-        }
+        gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
     }
 }
 
