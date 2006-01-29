@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-07 12:29+0900\n"
+"POT-Creation-Date: 2006-01-24 23:58+0900\n"
 "PO-Revision-Date: 2006-01-06 16:46-0200\n"
 "Last-Translator: Adriano Winter Bess <awbess@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
@@ -29,7 +29,7 @@ msgstr "Remover \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:584 ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Painel Xfce"
@@ -42,9 +42,9 @@ msgstr "O item será removido do painel e sua configuração será perdida."
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:740
 #: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
-#: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1275
+#: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
 #: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
-#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:358
+#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
 msgid "Properties"
 msgstr "Propriedades"
 
@@ -70,7 +70,7 @@ msgstr "Adicionar Novo Item"
 msgid "Customize Panel"
 msgstr "Personalizar o Painel"
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:607
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
 msgid "Add Items"
 msgstr "Adicionar Itens"
 
@@ -168,7 +168,7 @@ msgstr ""
 " -a, --add       Adicionar novos itens\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:622
+#: ../panel/panel-dialogs.c:631
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -176,116 +176,127 @@ msgstr ""
 "Arraste itens da lista para um painel ou remova-os arrastando de volta para "
 "a lista"
 
-#: ../panel/panel-dialogs.c:635
+#: ../panel/panel-dialogs.c:644
 msgid "Avalaible Items"
 msgstr "Itens Disponíveis"
 
-#: ../panel/panel-dialogs.c:875 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
+#, fuzzy
+msgid "Normal Width"
+msgstr "Lar_gura Total"
+
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
+#, fuzzy
+msgid "Full Width"
+msgstr "Lar_gura Total"
+
+#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
+#, fuzzy
+msgid "Span Monitors"
+msgstr "Selecione o Monitor"
+
+#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
 msgid "Left"
 msgstr "Esquerda"
 
-#: ../panel/panel-dialogs.c:877 ../panel/panel-dialogs.c:1094
+#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1150
 msgid "Right"
 msgstr "Direita"
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1099
+#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1155
 msgid "Top"
 msgstr "Topo"
 
-#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1157
 msgid "Bottom"
 msgstr "Abaixo"
 
 #. floating?
-#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:957
 msgid "Panel Type"
 msgstr "Tipo do Painel:"
 
-#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:966
 msgid "Fixed Position"
 msgstr "Posição Fixa"
 
-#: ../panel/panel-dialogs.c:927
+#: ../panel/panel-dialogs.c:972
 msgid "Freely Moveable"
 msgstr "Movimentar Livremente"
 
 #. position
-#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:983
 msgid "Position"
 msgstr "Posição"
 
-#: ../panel/panel-dialogs.c:1026
-msgid "_Full Width"
-msgstr "Lar_gura Total"
-
-#: ../panel/panel-dialogs.c:1035
+#: ../panel/panel-dialogs.c:1091
 msgid "Auto_hide"
 msgstr "Auto-O_cultar"
 
-#: ../panel/panel-dialogs.c:1053
+#: ../panel/panel-dialogs.c:1109
 msgid "Orientation:"
 msgstr "Orientação:"
 
-#: ../panel/panel-dialogs.c:1065
+#: ../panel/panel-dialogs.c:1121
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:1123
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-dialogs.c:1076
+#: ../panel/panel-dialogs.c:1132
 msgid "Handle:"
 msgstr "Manipulador"
 
-#: ../panel/panel-dialogs.c:1088
+#: ../panel/panel-dialogs.c:1144
 msgid "At both sides"
 msgstr "Dos dois lados"
 
-#: ../panel/panel-dialogs.c:1161
+#: ../panel/panel-dialogs.c:1217
 msgid "Select Monitor"
 msgstr "Selecione o Monitor"
 
 #. size
-#: ../panel/panel-dialogs.c:1274
+#: ../panel/panel-dialogs.c:1330 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
 msgstr "Tamanho"
 
-#: ../panel/panel-dialogs.c:1282
+#: ../panel/panel-dialogs.c:1338
 msgid "Small"
 msgstr "Pequeno"
 
-#: ../panel/panel-dialogs.c:1295
+#: ../panel/panel-dialogs.c:1351
 msgid "Large"
 msgstr "Grande"
 
-#: ../panel/panel-dialogs.c:1310
+#: ../panel/panel-dialogs.c:1366
 msgid "Transparency"
 msgstr "Transparência"
 
-#: ../panel/panel-dialogs.c:1318
+#: ../panel/panel-dialogs.c:1374
 msgid "None"
 msgstr "Nenhuma"
 
-#: ../panel/panel-dialogs.c:1332
+#: ../panel/panel-dialogs.c:1388
 msgid "Full"
 msgstr "Total"
 
-#: ../panel/panel-dialogs.c:1376 ../panel/panel-dialogs.c:1414
-#: ../panel/panel-dialogs.c:1439
+#: ../panel/panel-dialogs.c:1432 ../panel/panel-dialogs.c:1470
+#: ../panel/panel-dialogs.c:1495
 #, c-format
 msgid "Panel %d"
 msgstr "Painel %d"
 
-#: ../panel/panel-dialogs.c:1460
+#: ../panel/panel-dialogs.c:1516
 msgid "Remove Panel"
 msgstr "Remover Painel"
 
-#: ../panel/panel-dialogs.c:1473
+#: ../panel/panel-dialogs.c:1529
 msgid "New Panel"
 msgstr "Novo Painel"
 
-#: ../panel/panel-dialogs.c:1557
+#: ../panel/panel-dialogs.c:1613
 msgid "Panel Manager"
 msgstr "Gerenciador do Painel"
 
@@ -412,11 +423,11 @@ msgid "Use _startup notification"
 msgstr "Usar _notificação de inicialização"
 
 #: ../plugins/launcher/launcher-dialog.c:1121
-#: ../plugins/launcher/launcher.c:584
+#: ../plugins/launcher/launcher.c:578
 msgid "New Item"
 msgstr "Novo Item"
 
-#: ../plugins/launcher/launcher-dialog.c:1233
+#: ../plugins/launcher/launcher-dialog.c:1243
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -424,11 +435,11 @@ msgstr ""
 "O primeiro item na lista é mostrado no painel. Itens adicionais serão "
 "mostrados em um menu."
 
-#: ../plugins/launcher/launcher-dialog.c:1288
+#: ../plugins/launcher/launcher-dialog.c:1298
 msgid "Program Launcher"
 msgstr "Executor de programa"
 
-#: ../plugins/launcher/launcher-dialog.c:1623
+#: ../plugins/launcher/launcher-dialog.c:1633
 msgid "Select file"
 msgstr "Selecionar arquivo"
 
@@ -437,11 +448,11 @@ msgstr "Selecionar arquivo"
 msgid "Could not run \"%s\""
 msgstr "Não foi possível executar \"%s\""
 
-#: ../plugins/launcher/launcher.c:637 ../plugins/launcher/launcher.c:1164
+#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
 msgid "This item has not yet been configured"
 msgstr "Este item ainda não foi configurado"
 
-#: ../plugins/launcher/launcher.c:1163
+#: ../plugins/launcher/launcher.c:1157
 msgid "New item"
 msgstr "Novo item"
 
@@ -524,28 +535,36 @@ msgstr "Não foi possível registrar a bandeja de sitema: %s"
 msgid "Status Area"
 msgstr "Área de Notificação"
 
-#: ../plugins/tasklist/tasklist.c:374
+#: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Lista de Tarefas"
 
-#: ../plugins/tasklist/tasklist.c:387
+#: ../plugins/tasklist/tasklist.c:439
+msgid "Minimum Width:"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:454
+msgid "Use all available space"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:471
 msgid "Show tasks from _all workspaces"
 msgstr "Exibir tarefas de _todas as áreas de trabalho"
 
-#: ../plugins/tasklist/tasklist.c:397
+#: ../plugins/tasklist/tasklist.c:481
 msgid "Show application _names"
 msgstr "Mostrar _nomes do aplicativos"
 
-#: ../plugins/tasklist/tasklist.c:411
+#: ../plugins/tasklist/tasklist.c:495
 msgid "Never group tasks"
 msgstr "Nunca agrupar tarefas"
 
-#: ../plugins/tasklist/tasklist.c:414
+#: ../plugins/tasklist/tasklist.c:498
 msgid "Automatically group tasks"
 msgstr "Agrupar tarefas automaticamente"
 
-#: ../plugins/tasklist/tasklist.c:417
+#: ../plugins/tasklist/tasklist.c:501
 msgid "Always group tasks"
 msgstr "Sempre agrupar tarefas"
 

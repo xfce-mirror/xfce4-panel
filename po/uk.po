@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-07 12:29+0900\n"
+"POT-Creation-Date: 2006-01-24 23:58+0900\n"
 "PO-Revision-Date: 2005-09-29 20:43+0900\n"
 "Last-Translator: Maxim Dziumanenko <mvd@mylinux.com.ua>\n"
 "Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
@@ -28,7 +28,7 @@ msgstr "В_идалити"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:584 ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Панель Xfce"
@@ -41,9 +41,9 @@ msgstr ""
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:740
 #: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
-#: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1275
+#: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
 #: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
-#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:358
+#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
 msgid "Properties"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgstr "Додати новий об'єкт"
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:607
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
 msgid "Add Items"
 msgstr ""
 
@@ -161,131 +161,140 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:622
+#: ../panel/panel-dialogs.c:631
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:635
+#: ../panel/panel-dialogs.c:644
 msgid "Avalaible Items"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:875 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
+msgid "Normal Width"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
+msgid "Full Width"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
+#, fuzzy
+msgid "Span Monitors"
+msgstr "Редактор"
+
+#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:877 ../panel/panel-dialogs.c:1094
+#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1150
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1099
+#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1155
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1157
 msgid "Bottom"
 msgstr ""
 
 #. floating?
-#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:957
 #, fuzzy
 msgid "Panel Type"
 msgstr "Розмір панелі:"
 
-#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:966
 #, fuzzy
 msgid "Fixed Position"
 msgstr "Розташування"
 
-#: ../panel/panel-dialogs.c:927
+#: ../panel/panel-dialogs.c:972
 msgid "Freely Moveable"
 msgstr ""
 
 #. position
-#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:983
 msgid "Position"
 msgstr "Розташування"
 
-#: ../panel/panel-dialogs.c:1026
-msgid "_Full Width"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:1035
+#: ../panel/panel-dialogs.c:1091
 #, fuzzy
 msgid "Auto_hide"
 msgstr "Автоматичне приховування"
 
-#: ../panel/panel-dialogs.c:1053
+#: ../panel/panel-dialogs.c:1109
 #, fuzzy
 msgid "Orientation:"
 msgstr "Розташування панелі:"
 
-#: ../panel/panel-dialogs.c:1065
+#: ../panel/panel-dialogs.c:1121
 msgid "Horizontal"
 msgstr "Горизонтальне"
 
-#: ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:1123
 msgid "Vertical"
 msgstr "Вертикальне"
 
-#: ../panel/panel-dialogs.c:1076
+#: ../panel/panel-dialogs.c:1132
 #, fuzzy
 msgid "Handle:"
 msgstr "Розташування"
 
-#: ../panel/panel-dialogs.c:1088
+#: ../panel/panel-dialogs.c:1144
 #, fuzzy
 msgid "At both sides"
 msgstr "Автоматичне приховування"
 
-#: ../panel/panel-dialogs.c:1161
+#: ../panel/panel-dialogs.c:1217
 #, fuzzy
 msgid "Select Monitor"
 msgstr "Редактор"
 
 #. size
-#: ../panel/panel-dialogs.c:1274
+#: ../panel/panel-dialogs.c:1330 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
 msgstr "Розмір"
 
-#: ../panel/panel-dialogs.c:1282
+#: ../panel/panel-dialogs.c:1338
 msgid "Small"
 msgstr "Маленький"
 
-#: ../panel/panel-dialogs.c:1295
+#: ../panel/panel-dialogs.c:1351
 msgid "Large"
 msgstr "Великий"
 
-#: ../panel/panel-dialogs.c:1310
+#: ../panel/panel-dialogs.c:1366
 msgid "Transparency"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1318
+#: ../panel/panel-dialogs.c:1374
 msgid "None"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1332
+#: ../panel/panel-dialogs.c:1388
 msgid "Full"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1376 ../panel/panel-dialogs.c:1414
-#: ../panel/panel-dialogs.c:1439
+#: ../panel/panel-dialogs.c:1432 ../panel/panel-dialogs.c:1470
+#: ../panel/panel-dialogs.c:1495
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "Панель Xfce"
 
-#: ../panel/panel-dialogs.c:1460
+#: ../panel/panel-dialogs.c:1516
 #, fuzzy
 msgid "Remove Panel"
 msgstr "В_идалити"
 
-#: ../panel/panel-dialogs.c:1473
+#: ../panel/panel-dialogs.c:1529
 #, fuzzy
 msgid "New Panel"
 msgstr "Панель Xfce"
 
-#: ../panel/panel-dialogs.c:1557
+#: ../panel/panel-dialogs.c:1613
 #, fuzzy
 msgid "Panel Manager"
 msgstr "Розмір панелі:"
@@ -423,23 +432,23 @@ msgid "Use _startup notification"
 msgstr "Використовувати _сповіщення про запуск"
 
 #: ../plugins/launcher/launcher-dialog.c:1121
-#: ../plugins/launcher/launcher.c:584
+#: ../plugins/launcher/launcher.c:578
 #, fuzzy
 msgid "New Item"
 msgstr "Додати новий об'єкт"
 
-#: ../plugins/launcher/launcher-dialog.c:1233
+#: ../plugins/launcher/launcher-dialog.c:1243
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1288
+#: ../plugins/launcher/launcher-dialog.c:1298
 #, fuzzy
 msgid "Program Launcher"
 msgstr "Додати меню до об'єкта"
 
-#: ../plugins/launcher/launcher-dialog.c:1623
+#: ../plugins/launcher/launcher-dialog.c:1633
 msgid "Select file"
 msgstr "Вибір файлу"
 
@@ -448,12 +457,12 @@ msgstr "Вибір файлу"
 msgid "Could not run \"%s\""
 msgstr "Не вдається створити елемент панелі \"%s\"."
 
-#: ../plugins/launcher/launcher.c:637 ../plugins/launcher/launcher.c:1164
+#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "Об'єкт не має параметрів"
 
-#: ../plugins/launcher/launcher.c:1163
+#: ../plugins/launcher/launcher.c:1157
 #, fuzzy
 msgid "New item"
 msgstr "Додати новий об'єкт"
@@ -540,30 +549,38 @@ msgstr "Неможливо зареєструвати системний лот�
 msgid "Status Area"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:374
+#: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 #, fuzzy
 msgid "Task List"
 msgstr "Процеси"
 
-#: ../plugins/tasklist/tasklist.c:387
+#: ../plugins/tasklist/tasklist.c:439
+msgid "Minimum Width:"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:454
+msgid "Use all available space"
+msgstr ""
+
+#: ../plugins/tasklist/tasklist.c:471
 #, fuzzy
 msgid "Show tasks from _all workspaces"
 msgstr "Показувати процеси усіх робочих стільниць"
 
-#: ../plugins/tasklist/tasklist.c:397
+#: ../plugins/tasklist/tasklist.c:481
 msgid "Show application _names"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:411
+#: ../plugins/tasklist/tasklist.c:495
 msgid "Never group tasks"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:414
+#: ../plugins/tasklist/tasklist.c:498
 msgid "Automatically group tasks"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:417
+#: ../plugins/tasklist/tasklist.c:501
 #, fuzzy
 msgid "Always group tasks"
 msgstr "Згори над вікнами:"
@@ -618,26 +635,3 @@ msgstr "Запуск"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Select Panel"
-#~ msgstr "Вибір файлу"
-
-#, fuzzy
-#~ msgid "Panel Properties"
-#~ msgstr "Параметри панелі Xfce"
-
-#, fuzzy
-#~ msgid "Panel"
-#~ msgstr "Панель Xfce"
-
-#, fuzzy
-#~ msgid "Manage Panels"
-#~ msgstr "Панель Xfce"
-
-#, fuzzy
-#~ msgid "Remove %s"
-#~ msgstr "В_идалити"
-
-#~ msgid "Are you sure you want to exit?"
-#~ msgstr "Ви впевнені що хочете вийти?"

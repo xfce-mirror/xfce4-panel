@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-15 10:32+0100\n"
+"POT-Creation-Date: 2006-01-24 23:58+0900\n"
 "PO-Revision-Date: 2005-11-07 22:12+0900\n"
 "Last-Translator: Rudy Godoy <rudy@kernel-panik.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "¿Eliminar «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1541
+#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Panel de Xfce"
@@ -42,9 +42,9 @@ msgstr "El elemento se elimará del panel y se perderá su configuración."
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:740
 #: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
-#: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1275
+#: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
 #: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
-#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:393
+#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
 msgid "Properties"
 msgstr "Propiedades"
 
@@ -181,114 +181,125 @@ msgstr ""
 msgid "Avalaible Items"
 msgstr "Elementos disponibles"
 
-#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
+#, fuzzy
+msgid "Normal Width"
+msgstr "_Todo el ancho"
+
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
+#, fuzzy
+msgid "Full Width"
+msgstr "_Todo el ancho"
+
+#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
+#, fuzzy
+msgid "Span Monitors"
+msgstr "Monitor"
+
+#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
 msgid "Left"
 msgstr "Izquierda"
 
-#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1103
+#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1150
 msgid "Right"
 msgstr "Derecha"
 
-#: ../panel/panel-dialogs.c:891 ../panel/panel-dialogs.c:1108
+#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1155
 msgid "Top"
 msgstr "Superior"
 
-#: ../panel/panel-dialogs.c:893 ../panel/panel-dialogs.c:1110
+#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1157
 msgid "Bottom"
 msgstr "Inferior"
 
 #. floating?
-#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:957
 msgid "Panel Type"
 msgstr "Tipo de panel"
 
-#: ../panel/panel-dialogs.c:930
+#: ../panel/panel-dialogs.c:966
 msgid "Fixed Position"
 msgstr "Posición fija"
 
-#: ../panel/panel-dialogs.c:936
+#: ../panel/panel-dialogs.c:972
 msgid "Freely Moveable"
 msgstr "Desplazable"
 
 #. position
-#: ../panel/panel-dialogs.c:947
+#: ../panel/panel-dialogs.c:983
 msgid "Position"
 msgstr "Posición"
 
-#: ../panel/panel-dialogs.c:1035
-msgid "_Full Width"
-msgstr "_Todo el ancho"
-
-#: ../panel/panel-dialogs.c:1044
+#: ../panel/panel-dialogs.c:1091
 msgid "Auto_hide"
 msgstr "Ocultar automáticamente"
 
-#: ../panel/panel-dialogs.c:1062
+#: ../panel/panel-dialogs.c:1109
 msgid "Orientation:"
 msgstr "Orientación:"
 
-#: ../panel/panel-dialogs.c:1074
+#: ../panel/panel-dialogs.c:1121
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1076
+#: ../panel/panel-dialogs.c:1123
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-dialogs.c:1085
+#: ../panel/panel-dialogs.c:1132
 #, fuzzy
 msgid "Handle:"
 msgstr "Gestionar posición"
 
-#: ../panel/panel-dialogs.c:1097
+#: ../panel/panel-dialogs.c:1144
 msgid "At both sides"
 msgstr "A ambos lados"
 
-#: ../panel/panel-dialogs.c:1170
+#: ../panel/panel-dialogs.c:1217
 #, fuzzy
 msgid "Select Monitor"
 msgstr "Monitor"
 
 #. size
-#: ../panel/panel-dialogs.c:1283 ../plugins/tasklist/tasklist.c:426
+#: ../panel/panel-dialogs.c:1330 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
 msgstr "Tamaño"
 
-#: ../panel/panel-dialogs.c:1291
+#: ../panel/panel-dialogs.c:1338
 msgid "Small"
 msgstr "Pequeño"
 
-#: ../panel/panel-dialogs.c:1304
+#: ../panel/panel-dialogs.c:1351
 msgid "Large"
 msgstr "Grande"
 
-#: ../panel/panel-dialogs.c:1319
+#: ../panel/panel-dialogs.c:1366
 msgid "Transparency"
 msgstr "Transparencia"
 
-#: ../panel/panel-dialogs.c:1327
+#: ../panel/panel-dialogs.c:1374
 msgid "None"
 msgstr "Ninguno"
 
-#: ../panel/panel-dialogs.c:1341
+#: ../panel/panel-dialogs.c:1388
 msgid "Full"
 msgstr "Completo"
 
-#: ../panel/panel-dialogs.c:1385 ../panel/panel-dialogs.c:1423
-#: ../panel/panel-dialogs.c:1448
+#: ../panel/panel-dialogs.c:1432 ../panel/panel-dialogs.c:1470
+#: ../panel/panel-dialogs.c:1495
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1469
+#: ../panel/panel-dialogs.c:1516
 msgid "Remove Panel"
 msgstr "Eliminar panel"
 
-#: ../panel/panel-dialogs.c:1482
+#: ../panel/panel-dialogs.c:1529
 msgid "New Panel"
 msgstr "Nuevo panel"
 
-#: ../panel/panel-dialogs.c:1566
+#: ../panel/panel-dialogs.c:1613
 #, fuzzy
 msgid "Panel Manager"
 msgstr "Tipo de panel"
@@ -416,11 +427,11 @@ msgid "Use _startup notification"
 msgstr "U_sar notificación de arranque"
 
 #: ../plugins/launcher/launcher-dialog.c:1121
-#: ../plugins/launcher/launcher.c:584
+#: ../plugins/launcher/launcher.c:578
 msgid "New Item"
 msgstr "Nuevo elemento"
 
-#: ../plugins/launcher/launcher-dialog.c:1233
+#: ../plugins/launcher/launcher-dialog.c:1243
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -428,11 +439,11 @@ msgstr ""
 "El primer elemento en la lista es mostrado en el panel. Los elementos\n"
 "adicionales aparecerán en un menú."
 
-#: ../plugins/launcher/launcher-dialog.c:1288
+#: ../plugins/launcher/launcher-dialog.c:1298
 msgid "Program Launcher"
 msgstr "Lanzador de programas"
 
-#: ../plugins/launcher/launcher-dialog.c:1623
+#: ../plugins/launcher/launcher-dialog.c:1633
 msgid "Select file"
 msgstr "Elegir archivo"
 
@@ -441,11 +452,11 @@ msgstr "Elegir archivo"
 msgid "Could not run \"%s\""
 msgstr "No se pudo ejecutar «%s»."
 
-#: ../plugins/launcher/launcher.c:637 ../plugins/launcher/launcher.c:1164
+#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
 msgid "This item has not yet been configured"
 msgstr "Todavía no se ha configurado este elemento"
 
-#: ../plugins/launcher/launcher.c:1163
+#: ../plugins/launcher/launcher.c:1157
 msgid "New item"
 msgstr "Nuevo elemento"
 
@@ -528,37 +539,36 @@ msgstr "No se pudo registrar la bandeja de iconos: %s"
 msgid "Status Area"
 msgstr "Área de estado"
 
-#: ../plugins/tasklist/tasklist.c:409 ../plugins/tasklist/tasklist.c:459
+#: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Lista de tareas"
 
-#: ../plugins/tasklist/tasklist.c:434
-msgid "Width:"
+#: ../plugins/tasklist/tasklist.c:439
+msgid "Minimum Width:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:447
-#, fuzzy
-msgid "Expand"
-msgstr "_Expandir"
+#: ../plugins/tasklist/tasklist.c:454
+msgid "Use all available space"
+msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:463
+#: ../plugins/tasklist/tasklist.c:471
 msgid "Show tasks from _all workspaces"
 msgstr "Mostrar t_areas de todos los escritorios virtuales"
 
-#: ../plugins/tasklist/tasklist.c:473
+#: ../plugins/tasklist/tasklist.c:481
 msgid "Show application _names"
 msgstr "Mostrar _nombres de aplicaciones"
 
-#: ../plugins/tasklist/tasklist.c:487
+#: ../plugins/tasklist/tasklist.c:495
 msgid "Never group tasks"
 msgstr "No agrupar tareas"
 
-#: ../plugins/tasklist/tasklist.c:490
+#: ../plugins/tasklist/tasklist.c:498
 msgid "Automatically group tasks"
 msgstr "Agrupar tareas automáticamente"
 
-#: ../plugins/tasklist/tasklist.c:493
+#: ../plugins/tasklist/tasklist.c:501
 msgid "Always group tasks"
 msgstr "Siempre agrupar tareas"
 
@@ -609,36 +619,3 @@ msgstr "Complemento de prueba"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Este complemento no tiene propósito"
-
-#~ msgid "Customize Panels"
-#~ msgstr "Personalizar paneles"
-
-#~ msgid "Select Panel"
-#~ msgstr "Elegir panel"
-
-#~ msgid "Panel Properties"
-#~ msgstr "Propiedades del panel"
-
-#~ msgid "Manage Panel Items"
-#~ msgstr "Gestionar elementos del panel"
-
-#~ msgid "Add To Selected Panel"
-#~ msgstr "Añadir a panel elegido"
-
-#~ msgid "Panel Preferences"
-#~ msgstr "Preferencias de panel"
-
-#~ msgid "%s Properties"
-#~ msgstr "Propiedades de %s"
-
-#~ msgid "Panel"
-#~ msgstr "Panel"
-
-#~ msgid "Manage Panels"
-#~ msgstr "Gestionar paneles"
-
-#~ msgid "Remove %s"
-#~ msgstr "Eliminar %s"
-
-#~ msgid "Are you sure you want to exit?"
-#~ msgstr "¿Está seguro que quiere salir?"
