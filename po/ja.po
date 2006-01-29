@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-24 23:58+0900\n"
-"PO-Revision-Date: 2006-01-17 21:24+0900\n"
+"PO-Revision-Date: 2006-01-29 16:13+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:177
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "アイテム「%s」が予期せずに削除されました。"
+msgstr "アイテム「%s」が不意に削除されました。"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:580
 #, c-format
@@ -69,7 +69,7 @@ msgstr "アイテムの追加"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:628
 msgid "Customize Panel"
-msgstr "パネルの設定変更"
+msgstr "パネルの設定"
 
 #: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
 msgid "Add Items"
@@ -174,27 +174,24 @@ msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
-"アイテムをこのリストからパネルへドラッグするか、アイテムをこのリストにドラッ"
-"グし戻して削除して下さい。"
+"このリストからパネルへドラッグすると追加されます。\n"
+"削除するには、パネルからドラッグし戻して下さい。"
 
 #: ../panel/panel-dialogs.c:644
 msgid "Avalaible Items"
 msgstr "利用可能なアイテム"
 
 #: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
-#, fuzzy
 msgid "Normal Width"
-msgstr "最大幅にする(_F)"
+msgstr "通常幅にする"
 
 #: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
-#, fuzzy
 msgid "Full Width"
-msgstr "最大幅にする(_F)"
+msgstr "最大幅にする"
 
 #: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
-#, fuzzy
 msgid "Span Monitors"
-msgstr "モニターの選択"
+msgstr "モニターをスパンする"
 
 #: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
 msgid "Left"
@@ -433,8 +430,8 @@ msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
-"このリストの先頭に来るアイテムはパネルで表示されます。追加したアイテムはメ"
-"ニューで見られます。"
+"このリストの先頭に来るアイテムはパネルで表示されます。\n"
+"追加したアイテムはメニューに表示されます。"
 
 #: ../plugins/launcher/launcher-dialog.c:1298
 msgid "Program Launcher"
@@ -447,7 +444,7 @@ msgstr "ファイルを選択して下さい"
 #: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
 #, c-format
 msgid "Could not run \"%s\""
-msgstr "\"%s\" を実行できませんでした"
+msgstr "「%s」を実行できませんでした"
 
 #: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
 msgid "This item has not yet been configured"
@@ -543,11 +540,11 @@ msgstr "タスクリスト"
 
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
-msgstr ""
+msgstr "最小幅:"
 
 #: ../plugins/tasklist/tasklist.c:454
 msgid "Use all available space"
-msgstr ""
+msgstr "利用可能な全スペースを使用する"
 
 #: ../plugins/tasklist/tasklist.c:471
 msgid "Show tasks from _all workspaces"
