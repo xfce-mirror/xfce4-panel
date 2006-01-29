@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 23:58+0900\n"
-"PO-Revision-Date: 2005-12-28 21:51+0100\n"
+"POT-Creation-Date: 2006-01-29 18:45+0100\n"
+"PO-Revision-Date: 2006-01-29 19:58+0100\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:177
@@ -21,19 +21,19 @@ msgstr ""
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Een item was onverwacht verwijderd: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:580
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:572
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "\"%s\" verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
 #: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:585
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:577
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
@@ -41,33 +41,34 @@ msgstr ""
 "configuratie gaat verloren."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:740
-#: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:732
+#: ../plugins/actions/actions.c:309 ../plugins/clock/clock.c:408
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
-#: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
+#: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
+#: ../plugins/windowlist/windowlist.c:465
 msgid "Properties"
 msgstr "Eigenschappen"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:757
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:749
 msgid "About"
 msgstr "Info"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:770
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
 msgid "Move"
 msgstr "Verplaatsen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:792
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:784
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:809
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:801
 msgid "Add New Item"
 msgstr "Nieuw item toevoegen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:628
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:628
 msgid "Customize Panel"
 msgstr "Paneel configureren"
 
@@ -182,19 +183,16 @@ msgid "Avalaible Items"
 msgstr "Beschikbare items"
 
 #: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
-#, fuzzy
 msgid "Normal Width"
-msgstr "_Volledige breedte"
+msgstr "Normale breedte"
 
 #: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
-#, fuzzy
 msgid "Full Width"
-msgstr "_Volledige breedte"
+msgstr "Volledige breedte"
 
 #: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
-#, fuzzy
 msgid "Span Monitors"
-msgstr "Monitor selecteren"
+msgstr "Over meerdere monitoren"
 
 #: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
 msgid "Left"
@@ -317,18 +315,58 @@ msgstr "Scherm beveiligen"
 msgid "Quit + Lock screen"
 msgstr "Afsluiten + Scherm beveiligen"
 
-#: ../plugins/separator/separator.c:271
-#: ../plugins/separator/separator.desktop.in.in.h:2
-msgid "Separator"
-msgstr "Scheidingslijn"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: ../plugins/clock/clock.c:109
+msgid "%A %d %B %Y"
+msgstr "%A, %d %B %Y"
 
-#: ../plugins/separator/separator.c:284
-msgid "_Draw Separator"
-msgstr "_Lijn tonen"
+#: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Klok"
 
-#: ../plugins/separator/separator.c:293
-msgid "_Expand"
-msgstr "_Groeien"
+#: ../plugins/clock/clock.c:431
+msgid "Appearance"
+msgstr "Weergave"
+
+#. Keep order in sync with XfceClockMode
+#: ../plugins/clock/clock.c:446
+msgid "Analog"
+msgstr "Analoog"
+
+#: ../plugins/clock/clock.c:447
+msgid "Digital"
+msgstr "Digitaal"
+
+#: ../plugins/clock/clock.c:448
+msgid "LED"
+msgstr "LED"
+
+#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
+msgid "Show _frame"
+msgstr "_Frame tonen"
+
+#: ../plugins/clock/clock.c:461
+msgid "Clock Options"
+msgstr "Opties Klok"
+
+#: ../plugins/clock/clock.c:471
+msgid "Use 24-_hour clock"
+msgstr "24-_uursklok"
+
+#: ../plugins/clock/clock.c:479
+msgid "Show AM/PM"
+msgstr "AM/PM tonen"
+
+#: ../plugins/clock/clock.c:487
+msgid "Display seconds"
+msgstr "Secondes weergeven"
 
 #: ../plugins/iconbox/iconbox.c:808
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -338,6 +376,24 @@ msgstr "Iconbox"
 #: ../plugins/iconbox/iconbox.c:822
 msgid "Only show minimized applications"
 msgstr "Enkel geminimaliseerde applicaties tonen"
+
+#: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Kon \"%s\" niet uitvoeren"
+
+#: ../plugins/launcher/launcher.c:578
+#: ../plugins/launcher/launcher-dialog.c:1121
+msgid "New Item"
+msgstr "Nieuw Item"
+
+#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
+msgid "This item has not yet been configured"
+msgstr "Dit item moet nog geconfigureerd worden"
+
+#: ../plugins/launcher/launcher.c:1157
+msgid "New item"
+msgstr "Nieuw item"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -423,11 +479,6 @@ msgstr "Uitvoeren in _terminal"
 msgid "Use _startup notification"
 msgstr "Opstart-_notificatie gebruiken"
 
-#: ../plugins/launcher/launcher-dialog.c:1121
-#: ../plugins/launcher/launcher.c:578
-msgid "New Item"
-msgstr "Nieuw Item"
-
 #: ../plugins/launcher/launcher-dialog.c:1243
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
@@ -444,72 +495,6 @@ msgstr "Snelkoppeling"
 msgid "Select file"
 msgstr "Bestand selecteren"
 
-#: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
-#, c-format
-msgid "Could not run \"%s\""
-msgstr "Kon \"%s\" niet uitvoeren"
-
-#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
-msgid "This item has not yet been configured"
-msgstr "Dit item moet nog geconfigureerd worden"
-
-#: ../plugins/launcher/launcher.c:1157
-msgid "New item"
-msgstr "Nieuw item"
-
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %d  : day of the month
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: ../plugins/clock/clock.c:109
-msgid "%A %d %B %Y"
-msgstr "%A, %d %B %Y"
-
-#: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
-msgid "Clock"
-msgstr "Klok"
-
-#: ../plugins/clock/clock.c:431
-msgid "Appearance"
-msgstr "Weergave"
-
-#. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:446
-msgid "Analog"
-msgstr "Analoog"
-
-#: ../plugins/clock/clock.c:447
-msgid "Digital"
-msgstr "Digitaal"
-
-#: ../plugins/clock/clock.c:448
-msgid "LED"
-msgstr "LED"
-
-#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
-msgid "Show _frame"
-msgstr "_Frame tonen"
-
-#: ../plugins/clock/clock.c:461
-msgid "Clock Options"
-msgstr "Opties Klok"
-
-#: ../plugins/clock/clock.c:471
-msgid "Use 24-_hour clock"
-msgstr "24-_uursklok"
-
-#: ../plugins/clock/clock.c:479
-msgid "Show AM/PM"
-msgstr "AM/PM tonen"
-
-#: ../plugins/clock/clock.c:487
-msgid "Display seconds"
-msgstr "Secondes weergeven"
-
 #: ../plugins/pager/pager.c:314 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Pager"
@@ -521,6 +506,27 @@ msgstr "Aantal rijen:"
 #: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "Aantal kolommen:"
+
+#: ../plugins/separator/separator.c:271
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator"
+msgstr "Scheidingslijn"
+
+#: ../plugins/separator/separator.c:284
+msgid "_Draw Separator"
+msgstr "_Lijn tonen"
+
+#: ../plugins/separator/separator.c:293
+msgid "_Expand"
+msgstr "_Groeien"
+
+#: ../plugins/showdesktop/showdesktop.c:63
+msgid "Restore hidden windows"
+msgstr "Verborgen vensters weer tonen"
+
+#: ../plugins/showdesktop/showdesktop.c:64
+msgid "Hide windows and show desktop"
+msgstr "Vensters verbergen en bureaublad tonen"
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
@@ -543,11 +549,11 @@ msgstr "Takenlijst"
 
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
-msgstr ""
+msgstr "Minimale breedte:"
 
 #: ../plugins/tasklist/tasklist.c:454
 msgid "Use all available space"
-msgstr ""
+msgstr "Alle beschikbare ruimte opvullen"
 
 #: ../plugins/tasklist/tasklist.c:471
 msgid "Show tasks from _all workspaces"
@@ -569,6 +575,24 @@ msgstr "Taken automatisch groeperen"
 msgid "Always group tasks"
 msgstr "Taken altijd groeperen"
 
+#: ../plugins/windowlist/windowlist.c:249
+#: ../plugins/windowlist/windowlist.c:480
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:2
+msgid "Window List"
+msgstr "Lijst van vensters"
+
+#: ../plugins/windowlist/windowlist.c:348
+msgid "Add workspace"
+msgstr "Virtueel bureaublad toevoegen"
+
+#: ../plugins/windowlist/windowlist.c:358
+msgid "Delete workspace"
+msgstr "Virtueel bureaublad verwijderen"
+
+#: ../plugins/windowlist/windowlist.c:493
+msgid "Include all Workspaces"
+msgstr "Vensters van alle bureaubladen tonen"
+
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Actieknoppen"
@@ -577,9 +601,9 @@ msgstr "Actieknoppen"
 msgid "Log out or lock the screen"
 msgstr "Afsluiten of scherm beveiligen"
 
-#: ../plugins/separator/separator.desktop.in.in.h:1
-msgid "Adds a space or a line between panel items"
-msgstr "Spatie of scheidingslijn tussen items"
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "Hoe laat is het?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
@@ -593,13 +617,21 @@ msgstr "Snelkoppeling"
 msgid "Program launcher with optional menu"
 msgstr "Programma-starter met optioneel menu"
 
-#: ../plugins/clock/clock.desktop.in.in.h:2
-msgid "What time is it?"
-msgstr "Hoe laat is het?"
-
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
 msgstr "Miniatuuroverzicht van alle virtuele bureaubladen"
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr "Spatie of scheidingslijn tussen items"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Show Desktop"
+msgstr "Bureaublad tonen"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Toggle desktop show/hide"
+msgstr "Wisselen tussen vensters verbergen en tonen"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
@@ -609,6 +641,10 @@ msgstr "Notificatie-pictogrammen tonen"
 msgid "Show all running applications"
 msgstr "Alle lopende applicaties tonen"
 
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:1
+msgid "Show list of available windows"
+msgstr "Lijst tonen van beschikbare vensters"
+
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
 msgid "Test Plugin"
 msgstr "Test Plugin"
@@ -616,3 +652,4 @@ msgstr "Test Plugin"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Deze plugin heeft geen doel"
+

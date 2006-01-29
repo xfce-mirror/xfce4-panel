@@ -6,11 +6,11 @@ dnl 2005 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl version info
-m4_define([xfce4_panel_version],[4.3.27])
+m4_define([xfce4_panel_version],[4.3.28])
 m4_define([libxfce4panel_verinfo], [1:2:0])
 
 dnl init autoconf
-AC_COPYRIGHT([Copyright (c) 2002-2005
+AC_COPYRIGHT([Copyright (c) 2002-2006
         The Xfce development team. All rights reserved.
 
 Written for Xfce by Jasper Huijsmans <jasper@xfce.org>.])
@@ -84,15 +84,17 @@ icons/Makefile
 libxfce4panel/Makefile
 libxfce4panel/libxfce4panel-1.0.pc
 panel/Makefile
-plugins/Makefile
-plugins/launcher/Makefile
-plugins/separator/Makefile
 plugins/actions/Makefile
-plugins/tasklist/Makefile
-plugins/pager/Makefile
-plugins/systray/Makefile
-plugins/iconbox/Makefile
 plugins/clock/Makefile
+plugins/iconbox/Makefile
+plugins/launcher/Makefile
+plugins/Makefile
+plugins/pager/Makefile
+plugins/separator/Makefile
+plugins/showdesktop/Makefile
+plugins/systray/Makefile
+plugins/tasklist/Makefile
+plugins/windowlist/Makefile
 plugins/testplugin/Makefile
 po/Makefile.in
 docs/Makefile

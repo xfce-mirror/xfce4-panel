@@ -1,10 +1,12 @@
 SUBDIRS = 				\
-	launcher			\
-	separator			\
 	actions				\
-	tasklist			\
-	pager				\
-	systray				\
-	iconbox				\
 	clock				\
+	iconbox				\
+	launcher			\
+	pager				\
+	separator			\
+	showdesktop			\
+	systray				\
+	tasklist			\
+	windowlist			\
 	testplugin

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-24 23:58+0900\n"
+"POT-Creation-Date: 2006-01-29 18:45+0100\n"
 "PO-Revision-Date: 2005-10-29 17:07+0900\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: librezale.org <librezale@librezale.org>\n"
@@ -24,19 +24,19 @@ msgstr ""
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Elementu bat espero gabe ezabatua izan da: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:580
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:572
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "\"%s\" Ezabatu?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:583 ../panel/panel-app.c:642
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:642
 #: ../panel/panel-app.c:674 ../panel/panel-app.c:707
 #: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce Panela"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:585
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:577
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
@@ -44,33 +44,34 @@ msgstr ""
 "egingo da."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:740
-#: ../plugins/actions/actions.c:309 ../plugins/separator/separator.c:255
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:732
+#: ../plugins/actions/actions.c:309 ../plugins/clock/clock.c:408
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
-#: ../plugins/clock/clock.c:408 ../plugins/pager/pager.c:298
+#: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
+#: ../plugins/windowlist/windowlist.c:465
 msgid "Properties"
 msgstr "Propietateak"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:757
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:749
 msgid "About"
 msgstr "Honi buruz"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:770
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
 msgid "Move"
 msgstr "Mugitu"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:792
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:784
 msgid "Remove"
 msgstr "Kendu"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:809
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:801
 msgid "Add New Item"
 msgstr "Elementu Berria Gehitu"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:821 ../panel/panel.c:628
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:628
 msgid "Customize Panel"
 msgstr "Panela Pertsonalizatu"
 
@@ -318,18 +319,58 @@ msgstr "Pantaila blokeatu"
 msgid "Quit + Lock screen"
 msgstr "PantaiLa blokeatu + Itxi"
 
-#: ../plugins/separator/separator.c:271
-#: ../plugins/separator/separator.desktop.in.in.h:2
-msgid "Separator"
-msgstr "Bereizlea"
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: ../plugins/clock/clock.c:109
+msgid "%A %d %B %Y"
+msgstr "%A, %Y %B %d"
 
-#: ../plugins/separator/separator.c:284
-msgid "_Draw Separator"
-msgstr "Bereizlea _Ipini"
+#: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Ordularia"
 
-#: ../plugins/separator/separator.c:293
-msgid "_Expand"
-msgstr "_Zabaldu"
+#: ../plugins/clock/clock.c:431
+msgid "Appearance"
+msgstr "Itxura"
+
+#. Keep order in sync with XfceClockMode
+#: ../plugins/clock/clock.c:446
+msgid "Analog"
+msgstr "Analogikoa"
+
+#: ../plugins/clock/clock.c:447
+msgid "Digital"
+msgstr "Digitala"
+
+#: ../plugins/clock/clock.c:448
+msgid "LED"
+msgstr "LED"
+
+#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
+msgid "Show _frame"
+msgstr "_Markoa Bistarazi"
+
+#: ../plugins/clock/clock.c:461
+msgid "Clock Options"
+msgstr "Ordulari Aukerak"
+
+#: ../plugins/clock/clock.c:471
+msgid "Use 24-_hour clock"
+msgstr "24 _orduko ordularia erabili"
+
+#: ../plugins/clock/clock.c:479
+msgid "Show AM/PM"
+msgstr "AM/PM bistarazi"
+
+#: ../plugins/clock/clock.c:487
+msgid "Display seconds"
+msgstr "Segunduak bistarazi"
 
 #: ../plugins/iconbox/iconbox.c:808
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -339,6 +380,24 @@ msgstr "Ikono Kutxa"
 #: ../plugins/iconbox/iconbox.c:822
 msgid "Only show minimized applications"
 msgstr "Bakarrik txikituriko aplikazioak bistarazi"
+
+#: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Ezin da \"%s\" abiarazi."
+
+#: ../plugins/launcher/launcher.c:578
+#: ../plugins/launcher/launcher-dialog.c:1121
+msgid "New Item"
+msgstr "Elementu berria"
+
+#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
+msgid "This item has not yet been configured"
+msgstr "Elementu hau ez da konfigruatua izan"
+
+#: ../plugins/launcher/launcher.c:1157
+msgid "New item"
+msgstr "Elementu berria"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -424,11 +483,6 @@ msgstr "_terminalean exekutatu"
 msgid "Use _startup notification"
 msgstr "Erabili _hasiera notifikazioak"
 
-#: ../plugins/launcher/launcher-dialog.c:1121
-#: ../plugins/launcher/launcher.c:578
-msgid "New Item"
-msgstr "Elementu berria"
-
 #: ../plugins/launcher/launcher-dialog.c:1243
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
@@ -445,72 +499,6 @@ msgstr "Abiarazleari menua gehitu"
 msgid "Select file"
 msgstr "Fitxategia aukeratu"
 
-#: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
-#, c-format
-msgid "Could not run \"%s\""
-msgstr "Ezin da \"%s\" abiarazi."
-
-#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
-msgid "This item has not yet been configured"
-msgstr "Elementu hau ez da konfigruatua izan"
-
-#: ../plugins/launcher/launcher.c:1157
-msgid "New item"
-msgstr "Elementu berria"
-
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %d  : day of the month
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: ../plugins/clock/clock.c:109
-msgid "%A %d %B %Y"
-msgstr "%A, %Y %B %d"
-
-#: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
-msgid "Clock"
-msgstr "Ordularia"
-
-#: ../plugins/clock/clock.c:431
-msgid "Appearance"
-msgstr "Itxura"
-
-#. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:446
-msgid "Analog"
-msgstr "Analogikoa"
-
-#: ../plugins/clock/clock.c:447
-msgid "Digital"
-msgstr "Digitala"
-
-#: ../plugins/clock/clock.c:448
-msgid "LED"
-msgstr "LED"
-
-#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
-msgid "Show _frame"
-msgstr "_Markoa Bistarazi"
-
-#: ../plugins/clock/clock.c:461
-msgid "Clock Options"
-msgstr "Ordulari Aukerak"
-
-#: ../plugins/clock/clock.c:471
-msgid "Use 24-_hour clock"
-msgstr "24 _orduko ordularia erabili"
-
-#: ../plugins/clock/clock.c:479
-msgid "Show AM/PM"
-msgstr "AM/PM bistarazi"
-
-#: ../plugins/clock/clock.c:487
-msgid "Display seconds"
-msgstr "Segunduak bistarazi"
-
 #: ../plugins/pager/pager.c:314 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Orrialdekatzailea"
@@ -522,6 +510,27 @@ msgstr "Lerro kopurua:"
 #: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "Zutabe kopurua:"
+
+#: ../plugins/separator/separator.c:271
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator"
+msgstr "Bereizlea"
+
+#: ../plugins/separator/separator.c:284
+msgid "_Draw Separator"
+msgstr "Bereizlea _Ipini"
+
+#: ../plugins/separator/separator.c:293
+msgid "_Expand"
+msgstr "_Zabaldu"
+
+#: ../plugins/showdesktop/showdesktop.c:63
+msgid "Restore hidden windows"
+msgstr ""
+
+#: ../plugins/showdesktop/showdesktop.c:64
+msgid "Hide windows and show desktop"
+msgstr ""
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
@@ -570,6 +579,24 @@ msgstr "Automatikoki taldekatu lanak"
 msgid "Always group tasks"
 msgstr "Beti _taldekatu lanak"
 
+#: ../plugins/windowlist/windowlist.c:249
+#: ../plugins/windowlist/windowlist.c:480
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:2
+msgid "Window List"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:348
+msgid "Add workspace"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:358
+msgid "Delete workspace"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:493
+msgid "Include all Workspaces"
+msgstr ""
+
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Ekintza Botoiak"
@@ -578,9 +605,9 @@ msgstr "Ekintza Botoiak"
 msgid "Log out or lock the screen"
 msgstr "Pantaila blokeatu edo saioa itxi"
 
-#: ../plugins/separator/separator.desktop.in.in.h:1
-msgid "Adds a space or a line between panel items"
-msgstr "Panel elementuen artean lekua edo lerro bat gehitu"
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "Zein ordu da?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
@@ -594,13 +621,21 @@ msgstr "Abiarazlea"
 msgid "Program launcher with optional menu"
 msgstr "Programa abiarazlea aukerako menu batez"
 
-#: ../plugins/clock/clock.desktop.in.in.h:2
-msgid "What time is it?"
-msgstr "Zein ordu da?"
-
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
 msgstr "Idazmahai birtualen ikuspegi txikitua"
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr "Panel elementuen artean lekua edo lerro bat gehitu"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Show Desktop"
+msgstr ""
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Toggle desktop show/hide"
+msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
@@ -609,6 +644,10 @@ msgstr "Bistarazi notifikazio ikonoak"
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Show all running applications"
 msgstr "Bistarazi abiarazirik dauden aplikazio guztiak"
+
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:1
+msgid "Show list of available windows"
+msgstr ""
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
 msgid "Test Plugin"
