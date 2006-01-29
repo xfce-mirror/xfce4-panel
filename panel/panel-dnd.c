@@ -130,10 +130,16 @@ void
 panel_dnd_begin_drag (GtkWidget *widget)
 {
     static GtkTargetList *list = NULL;
+    GdkEvent *ev;
     
     if (G_UNLIKELY (list == NULL))
+    {
         list = gtk_target_list_new (widget_target_list, n_widget_targets);
+    }
     
-    gtk_drag_begin (widget, list, GDK_ACTION_COPY, 1, NULL);
+    ev = gtk_get_current_event();
+    gtk_drag_begin (widget, list, GDK_ACTION_COPY, 1, ev);
+
+    gdk_event_free (ev);
 }
 
