@@ -34,6 +34,10 @@ struct _XfceMonitor
     GdkScreen *screen;
     int num;
     GdkRectangle geometry;
+    guint has_neighbor_left:1;
+    guint has_neighbor_right:1;
+    guint has_neighbor_above:1;
+    guint has_neighbor_below:1;
 };
 
 /* run control */

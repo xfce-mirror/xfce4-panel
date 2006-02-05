@@ -230,7 +230,7 @@ _set_borders (Panel *panel)
 }
 
 static void
-_set_struts (Panel *panel, int x, int y, int w, int h)
+_set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
 {
     PanelPrivate *priv;
     gulong data[12] = { 0, };
@@ -242,31 +242,57 @@ _set_struts (Panel *panel, int x, int y, int w, int h)
     {
         if (xfce_screen_position_is_left (priv->screen_position))
         {
-            data[0] = w;	/* left           */
-
-            data[4] = y;	/* left_start_y   */
-            data[5] = y + h;	/* left_end_y     */
+            /* no struts possible on Xinerama screens when this is monitor
+             * has neighbors on the left (see fd.o spec).
+             */
+            if (!xmon->has_neighbor_left)
+            {
+                data[0] = xmon->geometry.x 
+                          + w;          /* left           */
+                data[4] = y;	        /* left_start_y   */
+                data[5] = y + h;	/* left_end_y     */
+            }
         }
         else if (xfce_screen_position_is_right (priv->screen_position))
         {
-            data[1] = w;	/* right          */
-
-            data[6] = y;	/* right_start_y  */
-            data[7] = y + h;	/* right_end_y    */
+            /* no struts possible on Xinerama screens when this is monitor
+             * has neighbors on the right (see fd.o spec).
+             */
+            if (!xmon->has_neighbor_right)
+            {
+                data[1] =  gdk_screen_get_width (xmon->screen) 
+                           - xmon->geometry.x - xmon->geometry.width 
+                           + w;         /* right          */
+                data[6] = y;	        /* right_start_y  */
+                data[7] = y + h;	/* right_end_y    */
+            }
         }
         else if (xfce_screen_position_is_top (priv->screen_position))
         {
-            data[2] = h;	/* top            */
-
-            data[8] = x;	/* top_start_x    */
-            data[9] = x + w;	/* top_end_x      */
+            /* no struts possible on Xinerama screens when this is monitor
+             * has neighbors on the top (see fd.o spec).
+             */
+            if (!xmon->has_neighbor_above)
+            {
+                data[2] = xmon->geometry.y 
+                          + h;	        /* top            */
+                data[8] = x;	        /* top_start_x    */
+                data[9] = x + w;	/* top_end_x      */
+            }
         }
         else
         {
-            data[3] = h;	/* bottom         */
-
-            data[10] = x;	/* bottom_start_x */
-            data[11] = x + w;	/* bottom_end_x   */
+            /* no struts possible on Xinerama screens when this is monitor
+             * has neighbors on the bottom (see fd.o spec).
+             */
+            if (!xmon->has_neighbor_below)
+            {
+                data[3] = gdk_screen_get_width (xmon->screen) 
+                           - xmon->geometry.x - xmon->geometry.width 
+                           + h;	        /* bottom         */
+                data[10] = x;	        /* bottom_start_x */
+                data[11] = x + w;	/* bottom_end_x   */
+            }
 	}
     }
 
@@ -350,7 +376,7 @@ panel_resize_function (XfcePanelWindow *window, Panel *panel,
     DBG ("\n + Position: %d\n + Offset: (%d, %d)", 
          priv->screen_position, priv->xoffset, priv->yoffset);
 
-    _set_struts (panel, *x, *y, new->width, new->height);
+    _set_struts (panel, xmon, *x, *y, new->width, new->height);
 }
 
 static void 
@@ -412,7 +438,7 @@ panel_set_position (Panel *panel, XfceScreenPosition position,
     
     gtk_window_move (GTK_WINDOW (panel), x, y);
 
-    _set_struts (panel, x, y, req.width, req.height);
+    _set_struts (panel, xmon, x, y, req.width, req.height);
 }
 
 /* screen size */

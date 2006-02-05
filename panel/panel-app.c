@@ -301,7 +301,7 @@ create_monitor_list (void)
 
         for (j = 0; j < n_monitors; ++j)
         {
-            monitor = g_new (XfceMonitor, 1);
+            monitor = g_new0 (XfceMonitor, 1);
 
             monitor->screen = screen;
             monitor->num = j;
@@ -322,7 +322,7 @@ create_monitor_list (void)
             h = monitor->geometry.height;
             
 #if TEST_MULTIPLE_MONITORS
-            monitor = g_new (XfceMonitor, 1);
+            monitor = g_new0 (XfceMonitor, 1);
 
             monitor->screen = screen;
             monitor->num = j;
@@ -341,6 +341,55 @@ create_monitor_list (void)
     {
         panel_app.xinerama_and_equal_width = equal_w;
         panel_app.xinerama_and_equal_height = equal_h;
+    }
+
+    /* check layout */
+    /* TODO: can this be optimized? does it need to be? */
+    for (i = 0; i < panel_app.monitor_list->len; ++i)
+    {
+        XfceMonitor *mon1 = g_ptr_array_index (panel_app.monitor_list, i);
+        
+        for (j = 0; j < panel_app.monitor_list->len; ++j)
+        {
+            XfceMonitor *mon2;
+            
+            if (j == i)
+                continue;
+
+            mon2 = g_ptr_array_index (panel_app.monitor_list, j);
+
+            if (mon2->geometry.x < mon1->geometry.x
+                && mon2->geometry.y < mon1->geometry.y + mon1->geometry.height
+                && mon2->geometry.y + mon2->geometry.height > mon1->geometry.y
+               )
+            {
+                mon1->has_neighbor_left = TRUE;
+            }
+
+            if (mon2->geometry.x > mon1->geometry.x
+                && mon2->geometry.y < mon1->geometry.y + mon1->geometry.height
+                && mon2->geometry.y + mon2->geometry.height > mon1->geometry.y
+               )
+            {
+                mon1->has_neighbor_right = TRUE;
+            }
+
+            if (mon2->geometry.y < mon1->geometry.y
+                && mon2->geometry.x < mon1->geometry.x + mon1->geometry.width
+                && mon2->geometry.x + mon2->geometry.width > mon1->geometry.x
+               )
+            {
+                mon1->has_neighbor_above = TRUE;
+            }
+
+            if (mon2->geometry.y > mon1->geometry.y
+                && mon2->geometry.x < mon1->geometry.x + mon1->geometry.width
+                && mon2->geometry.x + mon2->geometry.width > mon1->geometry.x
+               )
+            {
+                mon1->has_neighbor_below = TRUE;
+            }
+        }
     }
 }
 
