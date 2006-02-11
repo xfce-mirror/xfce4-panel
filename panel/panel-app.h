@@ -25,6 +25,59 @@
 #include <X11/Xlib.h>
 #include <gtk/gtkwidget.h>
 
+#ifdef TIMER
+
+extern GTimer *timer;
+
+#define TIMER_INIT()                                        \
+    {                                                       \
+        if (timer == NULL)                                  \
+        {                                                   \
+            timer = g_timer_new();                          \
+            g_timer_start(timer);                           \
+        }                                                   \
+    }
+
+#define TIMER_ELAPSED(text)                                 \
+    {                                                       \
+        int hrs, mins, secs, ms;                            \
+        gulong elapsed;                                     \
+        gdouble secs_d;                                     \
+        secs_d = g_timer_elapsed(timer, &elapsed);          \
+        ms = (int)(elapsed / 1000); /* -> ms */             \
+        hrs     = secs_d / 3600;                            \
+        secs_d -= hrs * 3600;                               \
+        mins    = secs_d / 60;                              \
+        secs    = secs_d - mins * 60;                       \
+        g_print (" + ");                                    \
+        if (hrs)                                            \
+        {                                                   \
+            g_print ("%d hrs, %d mins, %d secs\t",          \
+                     hrs, mins, secs);                      \
+        }                                                   \
+        else if (mins)                                      \
+        {                                                   \
+            g_print ("%d mins, %d secs\t", mins, secs);     \
+        }                                                   \
+        else if (secs)                                      \
+        {                                                   \
+            g_print ("%d secs, %d ms\t", secs, ms);         \
+        }                                                   \
+        else                                                \
+        {                                                   \
+            g_print ("%.2d ms\t", ms);                      \
+        }                                                   \
+        g_print ("%s\t[%s:%d]\n",                           \
+                 text, __FILE__, __LINE__);                 \
+    }
+
+#else
+
+#define TIMER_INIT()        do {} while(0)
+#define TIMER_ELAPSED(text) do {} while(0)
+
+#endif /* DEBUG */
+
 G_BEGIN_DECLS
 
 typedef struct _XfceMonitor XfceMonitor;

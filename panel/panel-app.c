@@ -51,6 +51,10 @@
 #define SELECTION_NAME "XFCE4_PANEL"
 #define PANEL_LAUNCHER "launcher"
 
+#ifdef TIMER
+GTimer *timer = NULL;
+#endif
+
 /* types and global variables */
 
 typedef enum
@@ -545,19 +549,26 @@ panel_app_run (int argc, char **argv)
     panel_app.session_client->save_yourself = session_save_yourself;
     panel_app.session_client->die = session_die;
 
+    TIMER_ELAPSED("connect to session manager...");
     if (!session_init (panel_app.session_client))
     {
         g_free (panel_app.session_client);
         panel_app.session_client = NULL;
     }   
+    TIMER_ELAPSED(panel_app.session_client ? 
+                  "...connected" : "...not connected");
     
     /* screen layout and geometry */
     create_monitor_list ();
+    TIMER_ELAPSED("end monitor list creation");
     
     /* configuration */
     xfce_panel_item_manager_init ();
+    TIMER_ELAPSED("end init item manager");
 
+    TIMER_ELAPSED("start panel creation");
     panel_app.panel_list = panel_config_create_panels ();
+    TIMER_ELAPSED("end panel creation");
 
     g_ptr_array_foreach (panel_app.panel_list, (GFunc)panel_app_init_panel, 
                          NULL);
@@ -764,7 +775,7 @@ panel_app_about (void)
                                 _("Developer"));
 
     pb = xfce_themed_icon_load ("xfce4-panel", 48);
-    dlg = xfce_about_dialog_new (NULL, info, pb);
+    dlg = xfce_about_dialog_new_with_values (NULL, info, pb);
     g_object_unref (pb);
 
     gtk_widget_set_size_request (dlg, 400, 300);

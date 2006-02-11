@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-29 18:45+0100\n"
+"POT-Creation-Date: 2006-02-11 22:08+0100\n"
 "PO-Revision-Date: 2005-09-29 20:29+0900\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
@@ -28,9 +28,9 @@ msgstr ""
 msgid "Remove \"%s\"?"
 msgstr "શું %s વસ્તુ દૂર કરવી છે?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:642
-#: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
+#: ../panel/panel-app.c:734 ../panel/panel-app.c:767
+#: ../panel/panel-dialogs.c:577 ../panel/panel-dialogs.c:1572
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce પેનલ"
@@ -75,7 +75,7 @@ msgstr "નવી વસ્તુ"
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
 msgid "Add Items"
 msgstr ""
 
@@ -100,25 +100,25 @@ msgstr ""
 "\"%s\" ચલાવી શક્યા નહિં:\n"
 "%s"
 
-#: ../panel/panel-app.c:211 ../panel/panel-app.c:644
+#: ../panel/panel-app.c:215 ../panel/panel-app.c:704
 #, fuzzy
 msgid "Exit Xfce Panel?"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-app.c:645
+#: ../panel/panel-app.c:705
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 
-#: ../panel/panel-app.c:672
+#: ../panel/panel-app.c:732
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
-#: ../panel/panel-app.c:676
+#: ../panel/panel-app.c:736
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:715
+#: ../panel/panel-app.c:775
 msgid "Developer"
 msgstr "વિકાસકર્તા"
 
@@ -166,141 +166,141 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:631
+#: ../panel/panel-dialogs.c:615
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:644
-msgid "Avalaible Items"
+#: ../panel/panel-dialogs.c:628
+msgid "Available Items"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
 #, fuzzy
 msgid "Normal Width"
 msgstr "સંપૂર્ણ પહોળાઈ:"
 
-#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
+#: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
 #, fuzzy
 msgid "Full Width"
 msgstr "સંપૂર્ણ પહોળાઈ:"
 
-#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
+#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
 #, fuzzy
 msgid "Span Monitors"
 msgstr "સંપાદક"
 
-#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
+#: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1155
+#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1157
+#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
 msgid "Bottom"
 msgstr ""
 
 #. floating?
-#: ../panel/panel-dialogs.c:957
+#: ../panel/panel-dialogs.c:941
 #, fuzzy
 msgid "Panel Type"
 msgstr "પેનલ માપ:"
 
-#: ../panel/panel-dialogs.c:966
+#: ../panel/panel-dialogs.c:950
 #, fuzzy
 msgid "Fixed Position"
 msgstr "સ્થિતિ"
 
-#: ../panel/panel-dialogs.c:972
+#: ../panel/panel-dialogs.c:956
 msgid "Freely Moveable"
 msgstr ""
 
 #. position
-#: ../panel/panel-dialogs.c:983
+#: ../panel/panel-dialogs.c:967
 msgid "Position"
 msgstr "સ્થિતિ"
 
-#: ../panel/panel-dialogs.c:1091
+#: ../panel/panel-dialogs.c:1075
 #, fuzzy
 msgid "Auto_hide"
 msgstr "આપોઆપ સંતાડો"
 
-#: ../panel/panel-dialogs.c:1109
+#: ../panel/panel-dialogs.c:1093
 #, fuzzy
 msgid "Orientation:"
 msgstr "પેનલની દિશા:"
 
-#: ../panel/panel-dialogs.c:1121
+#: ../panel/panel-dialogs.c:1105
 msgid "Horizontal"
 msgstr "આડુ"
 
-#: ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:1107
 msgid "Vertical"
 msgstr "ઊભુ"
 
-#: ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:1116
 #, fuzzy
 msgid "Handle:"
 msgstr "સ્થિતિ"
 
-#: ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:1128
 msgid "At both sides"
 msgstr "બંને બાજુઓએ"
 
-#: ../panel/panel-dialogs.c:1217
+#: ../panel/panel-dialogs.c:1201
 #, fuzzy
 msgid "Select Monitor"
 msgstr "સંપાદક"
 
 #. size
-#: ../panel/panel-dialogs.c:1330 ../plugins/tasklist/tasklist.c:431
+#: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
 msgstr "માપ"
 
-#: ../panel/panel-dialogs.c:1338
+#: ../panel/panel-dialogs.c:1322
 msgid "Small"
 msgstr "નાનુ"
 
-#: ../panel/panel-dialogs.c:1351
+#: ../panel/panel-dialogs.c:1335
 msgid "Large"
 msgstr "મોટુ"
 
-#: ../panel/panel-dialogs.c:1366
+#: ../panel/panel-dialogs.c:1350
 msgid "Transparency"
 msgstr "પારદર્શકતા"
 
-#: ../panel/panel-dialogs.c:1374
+#: ../panel/panel-dialogs.c:1358
 msgid "None"
 msgstr "કંઈ નહિં"
 
-#: ../panel/panel-dialogs.c:1388
+#: ../panel/panel-dialogs.c:1372
 msgid "Full"
 msgstr "સંપૂર્ણ"
 
-#: ../panel/panel-dialogs.c:1432 ../panel/panel-dialogs.c:1470
-#: ../panel/panel-dialogs.c:1495
+#: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
+#: ../panel/panel-dialogs.c:1479
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-dialogs.c:1516
+#: ../panel/panel-dialogs.c:1500
 #, fuzzy
 msgid "Remove Panel"
 msgstr "શું %s વસ્તુ દૂર કરવી છે?"
 
-#: ../panel/panel-dialogs.c:1529
+#: ../panel/panel-dialogs.c:1513
 #, fuzzy
 msgid "New Panel"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-dialogs.c:1613
+#: ../panel/panel-dialogs.c:1597
 #, fuzzy
 msgid "Panel Manager"
 msgstr "પેનલ માપ:"
@@ -400,7 +400,7 @@ msgstr ""
 "\"%s\" ચલાવી શક્યા નહિં:\n"
 "%s"
 
-#: ../plugins/launcher/launcher.c:578
+#: ../plugins/launcher/launcher.c:578 ../plugins/launcher/launcher.c:1157
 #: ../plugins/launcher/launcher-dialog.c:1121
 #, fuzzy
 msgid "New Item"
@@ -409,10 +409,6 @@ msgstr "નવી વસ્તુ"
 #: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
 msgid "This item has not yet been configured"
 msgstr "આ વસ્તુ હજુ રૂપરેખાંકિત થઈ નથી"
-
-#: ../plugins/launcher/launcher.c:1157
-msgid "New item"
-msgstr "નવી વસ્તુ"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -558,8 +554,8 @@ msgstr "સિસ્ટમ ટ્રેની નોંધણી કરવા �
 
 #: ../plugins/systray/systray.c:376
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Status Area"
-msgstr "પરિસ્થિતિ વિસ્તાર"
+msgid "System Tray"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -680,3 +676,9 @@ msgstr "લોન્ચર પ્લગઈન"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr ""
+
+#~ msgid "New item"
+#~ msgstr "નવી વસ્તુ"
+
+#~ msgid "Status Area"
+#~ msgstr "પરિસ્થિતિ વિસ્તાર"

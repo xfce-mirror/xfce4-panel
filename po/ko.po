@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-29 18:45+0100\n"
+"POT-Creation-Date: 2006-02-11 22:08+0100\n"
 "PO-Revision-Date: 2005-11-02 02:03+0900\n"
 "Last-Translator: ByungHyun Choi <byunghyun.choi@gmail.com>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
@@ -27,9 +27,9 @@ msgstr "\"%s\"가(이) 느닷없이 삭제되었습니다."
 msgid "Remove \"%s\"?"
 msgstr "\"%s\"를 삭제할까요?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:642
-#: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
+#: ../panel/panel-app.c:734 ../panel/panel-app.c:767
+#: ../panel/panel-dialogs.c:577 ../panel/panel-dialogs.c:1572
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce 패널"
@@ -73,7 +73,7 @@ msgstr "새로운 항목"
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
 msgid "Add Items"
 msgstr ""
 
@@ -94,24 +94,24 @@ msgstr "Xfce 패널은..."
 msgid "Could not open \"%s\" module"
 msgstr "\"%s\"를(을) 열지 못 했습니다."
 
-#: ../panel/panel-app.c:211 ../panel/panel-app.c:644
+#: ../panel/panel-app.c:215 ../panel/panel-app.c:704
 msgid "Exit Xfce Panel?"
 msgstr "Xfce 패널을 종료할까요?"
 
-#: ../panel/panel-app.c:645
+#: ../panel/panel-app.c:705
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "마지막 패널은 삭제할 수 없습니다. 프로그램을 종료할까?"
 
-#: ../panel/panel-app.c:672
+#: ../panel/panel-app.c:732
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "패널 \"%d\"를(을) 삭제할까요?"
 
-#: ../panel/panel-app.c:676
+#: ../panel/panel-app.c:736
 msgid "The selected panel and all its items will be removed."
 msgstr "선택한 패널과 해당 아이템을 모두 삭제합니다."
 
-#: ../panel/panel-app.c:715
+#: ../panel/panel-app.c:775
 msgid "Developer"
 msgstr "만든이"
 
@@ -169,136 +169,137 @@ msgstr ""
 " -a, --add       새로운 항목을 추가합니다.\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:631
+#: ../panel/panel-dialogs.c:615
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 "패널의 리스트에서 항목을 옮기거나 리스트로 다시 가져다 놓으면 삭제합니다."
 
-#: ../panel/panel-dialogs.c:644
-msgid "Avalaible Items"
+#: ../panel/panel-dialogs.c:628
+#, fuzzy
+msgid "Available Items"
 msgstr "사용가능한 항목"
 
-#: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
 #, fuzzy
 msgid "Normal Width"
 msgstr "최대 폭(_F)"
 
-#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
+#: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
 #, fuzzy
 msgid "Full Width"
 msgstr "최대 폭(_F)"
 
-#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
+#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
 #, fuzzy
 msgid "Span Monitors"
 msgstr "감시"
 
-#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
+#: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
 msgid "Left"
 msgstr "왼쪽"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
 msgid "Right"
 msgstr "오른쪽"
 
-#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1155
+#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
 msgid "Top"
 msgstr "위"
 
-#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1157
+#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
 msgid "Bottom"
 msgstr "아래"
 
 #. floating?
-#: ../panel/panel-dialogs.c:957
+#: ../panel/panel-dialogs.c:941
 msgid "Panel Type"
 msgstr "패널 종류"
 
-#: ../panel/panel-dialogs.c:966
+#: ../panel/panel-dialogs.c:950
 msgid "Fixed Position"
 msgstr "위치 고정"
 
-#: ../panel/panel-dialogs.c:972
+#: ../panel/panel-dialogs.c:956
 msgid "Freely Moveable"
 msgstr "마음대로 움직이기"
 
 #. position
-#: ../panel/panel-dialogs.c:983
+#: ../panel/panel-dialogs.c:967
 msgid "Position"
 msgstr "위치"
 
-#: ../panel/panel-dialogs.c:1091
+#: ../panel/panel-dialogs.c:1075
 msgid "Auto_hide"
 msgstr "자동 숨기기(_h)"
 
-#: ../panel/panel-dialogs.c:1109
+#: ../panel/panel-dialogs.c:1093
 msgid "Orientation:"
 msgstr "패널 방향:"
 
-#: ../panel/panel-dialogs.c:1121
+#: ../panel/panel-dialogs.c:1105
 msgid "Horizontal"
 msgstr "수평"
 
-#: ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:1107
 msgid "Vertical"
 msgstr "수직"
 
-#: ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:1116
 #, fuzzy
 msgid "Handle:"
 msgstr "핸들 위치:"
 
-#: ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:1128
 msgid "At both sides"
 msgstr "양쪽 모두"
 
-#: ../panel/panel-dialogs.c:1217
+#: ../panel/panel-dialogs.c:1201
 #, fuzzy
 msgid "Select Monitor"
 msgstr "감시"
 
 #. size
-#: ../panel/panel-dialogs.c:1330 ../plugins/tasklist/tasklist.c:431
+#: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
 msgstr "크기"
 
-#: ../panel/panel-dialogs.c:1338
+#: ../panel/panel-dialogs.c:1322
 msgid "Small"
 msgstr "작게"
 
-#: ../panel/panel-dialogs.c:1351
+#: ../panel/panel-dialogs.c:1335
 msgid "Large"
 msgstr "크게"
 
-#: ../panel/panel-dialogs.c:1366
+#: ../panel/panel-dialogs.c:1350
 msgid "Transparency"
 msgstr "투명"
 
-#: ../panel/panel-dialogs.c:1374
+#: ../panel/panel-dialogs.c:1358
 msgid "None"
 msgstr "사용안함"
 
-#: ../panel/panel-dialogs.c:1388
+#: ../panel/panel-dialogs.c:1372
 msgid "Full"
 msgstr "최대"
 
-#: ../panel/panel-dialogs.c:1432 ../panel/panel-dialogs.c:1470
-#: ../panel/panel-dialogs.c:1495
+#: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
+#: ../panel/panel-dialogs.c:1479
 #, c-format
 msgid "Panel %d"
 msgstr "패널 %d"
 
-#: ../panel/panel-dialogs.c:1516
+#: ../panel/panel-dialogs.c:1500
 msgid "Remove Panel"
 msgstr "패널을 삭제합니다."
 
-#: ../panel/panel-dialogs.c:1529
+#: ../panel/panel-dialogs.c:1513
 msgid "New Panel"
 msgstr "새로운 패널"
 
-#: ../panel/panel-dialogs.c:1613
+#: ../panel/panel-dialogs.c:1597
 #, fuzzy
 msgid "Panel Manager"
 msgstr "패널 종류"
@@ -386,7 +387,7 @@ msgstr "최소화된 것만 보이기"
 msgid "Could not run \"%s\""
 msgstr "\"%s\"를(을) 실행하지 못 했습니다."
 
-#: ../plugins/launcher/launcher.c:578
+#: ../plugins/launcher/launcher.c:578 ../plugins/launcher/launcher.c:1157
 #: ../plugins/launcher/launcher-dialog.c:1121
 msgid "New Item"
 msgstr "새로운 항목"
@@ -394,10 +395,6 @@ msgstr "새로운 항목"
 #: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
 msgid "This item has not yet been configured"
 msgstr "아직 구성되지 않았습니다."
-
-#: ../plugins/launcher/launcher.c:1157
-msgid "New item"
-msgstr "새로운 항목"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -541,8 +538,8 @@ msgstr "시스템 트레이에 %s를(을) 등록하지 못 했습니다."
 
 #: ../plugins/systray/systray.c:376
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Status Area"
-msgstr "상태 영역"
+msgid "System Tray"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -654,3 +651,9 @@ msgstr "테스트 플러그인"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "아무런 의미 없는 플러그인입니다."
+
+#~ msgid "New item"
+#~ msgstr "새로운 항목"
+
+#~ msgid "Status Area"
+#~ msgstr "상태 영역"

@@ -52,8 +52,6 @@ struct _PanelItemsDialog
 
     GtkWidget *active;
     
-    GtkTooltips *tips;
-
     GPtrArray *items;
     GtkWidget *tree;
     GtkWidget *items_box;
@@ -251,15 +249,6 @@ cursor_changed (GtkTreeView * tv, PanelItemsDialog *pid)
     gtk_tree_selection_get_selected (sel, &model, &iter);
 
     gtk_tree_model_get (model, &iter, 0, &info, -1);
-
-    if (info)
-    {
-        gtk_tooltips_set_tip (pid->tips, GTK_WIDGET (tv), info->comment, NULL);
-    }
-    else
-    {
-        gtk_tooltips_set_tip (pid->tips, GTK_WIDGET (tv), NULL, NULL);
-    }
 }
 
 static void
@@ -539,7 +528,6 @@ item_dialog_response (GtkWidget *dlg, int response, PanelItemsDialog *pid)
 
         gtk_widget_destroy (dlg);
         
-        g_object_unref (pid->tips);
         g_signal_handler_disconnect (pid->panel, pid->panel_destroy_id);
         g_free (pid);
 
@@ -584,10 +572,6 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
     /* available items */
     pid->items = xfce_panel_item_manager_get_item_info_list ();
     
-    pid->tips = gtk_tooltips_new ();
-    g_object_ref (pid->tips);
-    gtk_object_sink (GTK_OBJECT (pid->tips));
-
     /* main dialog widget */
     items_dialog_widget = pid->dlg = dlg = 
         gtk_dialog_new_with_buttons (_("Xfce Panel"), NULL,
@@ -641,7 +625,7 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
 
-    markup = g_strdup_printf ("<b>%s</b>", _("Avalaible Items"));
+    markup = g_strdup_printf ("<b>%s</b>", _("Available Items"));
     gtk_label_set_markup (GTK_LABEL (label), markup);
     g_free (markup);
 

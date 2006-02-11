@@ -285,6 +285,9 @@ xfce_external_panel_item_save (XfcePanelItem * item)
 {
     g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
 
+    if (!GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
+        return;
+
     xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
             GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
             XFCE_PANEL_PLUGIN_SAVE, 0);
@@ -329,6 +332,17 @@ xfce_external_panel_item_set_screen_position (XfcePanelItem * item,
 }
 
 static void
+delayed_set_sensitive(XfcePanelItem * item, gpointer sensitive)
+{
+    xfce_external_panel_item_set_sensitive (item, 
+                                            GPOINTER_TO_INT (sensitive));
+    
+    g_signal_handlers_disconnect_by_func(item, 
+                                         G_CALLBACK(delayed_set_sensitive), 
+                                         sensitive);
+}
+
+static void
 xfce_external_panel_item_set_sensitive (XfcePanelItem * item, 
                                         gboolean sensitive)
 {
@@ -339,9 +353,18 @@ xfce_external_panel_item_set_sensitive (XfcePanelItem * item,
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (
                 XFCE_EXTERNAL_PANEL_ITEM (item));
 
-    xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
-            GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
-            XFCE_PANEL_PLUGIN_SENSITIVE, sensitive ? 1 : 0);
+    if (GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
+    {
+        xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
+                GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
+                XFCE_PANEL_PLUGIN_SENSITIVE, sensitive ? 1 : 0);
+    }
+    else
+    {
+        g_signal_connect (item, "plug-added", 
+                          G_CALLBACK(delayed_set_sensitive),
+                          GINT_TO_POINTER (sensitive));
+    }
 }
 
 
@@ -360,6 +383,16 @@ xfce_external_panel_item_remove (XfcePanelItem * item)
             XFCE_PANEL_PLUGIN_REMOVE, 0);
 }
 
+static void
+delayed_configure(XfcePanelItem *item)
+{
+    xfce_external_panel_item_configure (item);
+
+    g_signal_handlers_disconnect_by_func (item,
+                                          G_CALLBACK (delayed_configure), 
+                                          NULL);
+}
+
 static void 
 xfce_external_panel_item_configure (XfcePanelItem * item)
 {
@@ -370,9 +403,17 @@ xfce_external_panel_item_configure (XfcePanelItem * item)
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (
                 XFCE_EXTERNAL_PANEL_ITEM (item));
 
-    xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
-            GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
-            XFCE_PANEL_PLUGIN_CUSTOMIZE, 0);
+    if (GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
+    {
+        xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
+                GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
+                XFCE_PANEL_PLUGIN_CUSTOMIZE, 0);
+    }
+    else
+    {
+        g_signal_connect (item, "plug-added", 
+                          G_CALLBACK(delayed_configure), NULL);
+    }
 }
 
 /* internal functions */

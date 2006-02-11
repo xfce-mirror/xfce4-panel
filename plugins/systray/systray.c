@@ -373,7 +373,7 @@ systray_properties_dialog (XfcePanelPlugin *plugin, Systray *systray)
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
-    header = xfce_create_header (NULL, _("Status Area"));
+    header = xfce_create_header (NULL, _("System Tray"));
     gtk_widget_set_size_request (GTK_BIN (header)->child, 200, 32);
     gtk_container_set_border_width (GTK_CONTAINER (header), 6);
     gtk_widget_show (header);

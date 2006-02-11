@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-29 18:45+0100\n"
-"PO-Revision-Date: 2006-01-29 19:58+0100\n"
+"POT-Creation-Date: 2006-02-11 22:08+0100\n"
+"PO-Revision-Date: 2006-02-11 22:09+0100\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,9 +26,9 @@ msgstr "Een item was onverwacht verwijderd: \"%s\"."
 msgid "Remove \"%s\"?"
 msgstr "\"%s\" verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:642
-#: ../panel/panel-app.c:674 ../panel/panel-app.c:707
-#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
+#: ../panel/panel-app.c:734 ../panel/panel-app.c:767
+#: ../panel/panel-dialogs.c:577 ../panel/panel-dialogs.c:1572
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
@@ -72,7 +72,7 @@ msgstr "Nieuw item toevoegen"
 msgid "Customize Panel"
 msgstr "Paneel configureren"
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
 msgid "Add Items"
 msgstr "Items toevoegen"
 
@@ -93,25 +93,25 @@ msgstr "Info over het Xfce Paneel"
 msgid "Could not open \"%s\" module"
 msgstr "Kon \"%s\" module niet openen"
 
-#: ../panel/panel-app.c:211 ../panel/panel-app.c:644
+#: ../panel/panel-app.c:215 ../panel/panel-app.c:704
 msgid "Exit Xfce Panel?"
 msgstr "Het Xfce Paneel afsluiten?"
 
-#: ../panel/panel-app.c:645
+#: ../panel/panel-app.c:705
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
 
-#: ../panel/panel-app.c:672
+#: ../panel/panel-app.c:732
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Paneel \"%d\" verwijderen?"
 
-#: ../panel/panel-app.c:676
+#: ../panel/panel-app.c:736
 msgid "The selected panel and all its items will be removed."
 msgstr "Het geselecteerde paneel met alle items zal worden verwijderd."
 
-#: ../panel/panel-app.c:715
+#: ../panel/panel-app.c:775
 msgid "Developer"
 msgstr "Ontwikkelaar"
 
@@ -170,7 +170,7 @@ msgstr ""
 " -a, --add       Nieuwe items toevoegen\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:631
+#: ../panel/panel-dialogs.c:615
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -178,124 +178,124 @@ msgstr ""
 "Sleep items van de lijst naar een paneel of verwijder ze door het item terug "
 "naar de lijst te slepen."
 
-#: ../panel/panel-dialogs.c:644
-msgid "Avalaible Items"
+#: ../panel/panel-dialogs.c:628
+msgid "Available Items"
 msgstr "Beschikbare items"
 
-#: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
 msgid "Normal Width"
 msgstr "Normale breedte"
 
-#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
+#: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
 msgid "Full Width"
 msgstr "Volledige breedte"
 
-#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
+#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
 msgid "Span Monitors"
 msgstr "Over meerdere monitoren"
 
-#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
+#: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
 msgid "Left"
 msgstr "Links"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
 msgid "Right"
 msgstr "Rechts"
 
-#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1155
+#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
 msgid "Top"
 msgstr "Boven"
 
-#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1157
+#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
 msgid "Bottom"
 msgstr "Onder"
 
 #. floating?
-#: ../panel/panel-dialogs.c:957
+#: ../panel/panel-dialogs.c:941
 msgid "Panel Type"
 msgstr "Type Paneel"
 
-#: ../panel/panel-dialogs.c:966
+#: ../panel/panel-dialogs.c:950
 msgid "Fixed Position"
 msgstr "Vaste positie"
 
-#: ../panel/panel-dialogs.c:972
+#: ../panel/panel-dialogs.c:956
 msgid "Freely Moveable"
 msgstr "Vrij te verplaatsen"
 
 #. position
-#: ../panel/panel-dialogs.c:983
+#: ../panel/panel-dialogs.c:967
 msgid "Position"
 msgstr "Plaatsing"
 
-#: ../panel/panel-dialogs.c:1091
+#: ../panel/panel-dialogs.c:1075
 msgid "Auto_hide"
 msgstr "Automatisch _verbergen"
 
-#: ../panel/panel-dialogs.c:1109
+#: ../panel/panel-dialogs.c:1093
 msgid "Orientation:"
 msgstr "Oriëntatie:"
 
-#: ../panel/panel-dialogs.c:1121
+#: ../panel/panel-dialogs.c:1105
 msgid "Horizontal"
 msgstr "Horizontaal"
 
-#: ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:1107
 msgid "Vertical"
 msgstr "Verticaal"
 
-#: ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:1116
 msgid "Handle:"
 msgstr "Handgreep:"
 
-#: ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:1128
 msgid "At both sides"
 msgstr "Aan beide zijden"
 
-#: ../panel/panel-dialogs.c:1217
+#: ../panel/panel-dialogs.c:1201
 msgid "Select Monitor"
 msgstr "Monitor selecteren"
 
 #. size
-#: ../panel/panel-dialogs.c:1330 ../plugins/tasklist/tasklist.c:431
+#: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
 msgstr "Grootte"
 
-#: ../panel/panel-dialogs.c:1338
+#: ../panel/panel-dialogs.c:1322
 msgid "Small"
 msgstr "Klein"
 
-#: ../panel/panel-dialogs.c:1351
+#: ../panel/panel-dialogs.c:1335
 msgid "Large"
 msgstr "Groot"
 
-#: ../panel/panel-dialogs.c:1366
+#: ../panel/panel-dialogs.c:1350
 msgid "Transparency"
 msgstr "Transparantie"
 
-#: ../panel/panel-dialogs.c:1374
+#: ../panel/panel-dialogs.c:1358
 msgid "None"
 msgstr "Geen"
 
-#: ../panel/panel-dialogs.c:1388
+#: ../panel/panel-dialogs.c:1372
 msgid "Full"
 msgstr "Volledig"
 
-#: ../panel/panel-dialogs.c:1432 ../panel/panel-dialogs.c:1470
-#: ../panel/panel-dialogs.c:1495
+#: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
+#: ../panel/panel-dialogs.c:1479
 #, c-format
 msgid "Panel %d"
 msgstr "Paneel %d"
 
-#: ../panel/panel-dialogs.c:1516
+#: ../panel/panel-dialogs.c:1500
 msgid "Remove Panel"
 msgstr "Paneel verwijderen"
 
-#: ../panel/panel-dialogs.c:1529
+#: ../panel/panel-dialogs.c:1513
 msgid "New Panel"
 msgstr "Nieuw Paneel"
 
-#: ../panel/panel-dialogs.c:1613
+#: ../panel/panel-dialogs.c:1597
 msgid "Panel Manager"
 msgstr "Paneel Manager"
 
@@ -382,7 +382,7 @@ msgstr "Enkel geminimaliseerde applicaties tonen"
 msgid "Could not run \"%s\""
 msgstr "Kon \"%s\" niet uitvoeren"
 
-#: ../plugins/launcher/launcher.c:578
+#: ../plugins/launcher/launcher.c:578 ../plugins/launcher/launcher.c:1157
 #: ../plugins/launcher/launcher-dialog.c:1121
 msgid "New Item"
 msgstr "Nieuw Item"
@@ -390,10 +390,6 @@ msgstr "Nieuw Item"
 #: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
 msgid "This item has not yet been configured"
 msgstr "Dit item moet nog geconfigureerd worden"
-
-#: ../plugins/launcher/launcher.c:1157
-msgid "New item"
-msgstr "Nieuw item"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -539,8 +535,8 @@ msgstr "Kan systeemvak niet registreren: %s"
 
 #: ../plugins/systray/systray.c:376
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "Status Area"
-msgstr "Statusgebied"
+msgid "System Tray"
+msgstr "Systeemvak"
 
 #: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -652,3 +648,9 @@ msgstr "Test Plugin"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Deze plugin heeft geen doel"
+
+#~ msgid "New item"
+#~ msgstr "Nieuw item"
+
+#~ msgid "Status Area"
+#~ msgstr "Statusgebied"

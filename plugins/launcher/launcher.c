@@ -1154,7 +1154,7 @@ launcher_new (XfcePanelPlugin *plugin)
     {
         LauncherEntry *entry = entry = g_new0 (LauncherEntry, 1);
 
-        entry->name = g_strdup (_("New item"));
+        entry->name = g_strdup (_("New Item"));
         entry->comment = g_strdup (_("This item has not yet been configured"));
 
         g_ptr_array_add (launcher->entries, entry);

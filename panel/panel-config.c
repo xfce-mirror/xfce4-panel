@@ -38,6 +38,7 @@
 #include "panel-private.h"
 #include "panel.h"
 #include "panel-properties.h"
+#include "panel-app.h"
 
 #ifndef _
 #define _(x) x
@@ -309,6 +310,7 @@ start_element_handler (GMarkupParseContext * context,
                 parser->current_panel = panel_new ();
                 g_ptr_array_add (parser->panels, parser->current_panel);
                 init_properties (parser);
+                TIMER_ELAPSED("start config panel");
             }
             break;
 
@@ -410,6 +412,7 @@ end_element_handler (GMarkupParseContext * context,
                     panel_init_position (parser->current_panel);
                 parser->state = PANELS;
                 parser->current_panel = NULL;
+                TIMER_ELAPSED("end config panel");
             }
             break;
 
