@@ -71,6 +71,8 @@ struct _XfcePanelItemInterface
 
 GType xfce_panel_item_get_type (void) G_GNUC_CONST;
 
+/* focus */
+void xfce_panel_item_focus_panel (XfcePanelItem *item);
 
 /* emit signals -- to be called from implementors */
 

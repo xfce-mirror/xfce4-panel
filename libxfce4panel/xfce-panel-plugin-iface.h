@@ -102,6 +102,10 @@ char *xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin);
 char *xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
                                        gboolean create);
 
+/* focus */
+void xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
+                                     GtkWidget *widget);
+
 
 G_END_DECLS
 

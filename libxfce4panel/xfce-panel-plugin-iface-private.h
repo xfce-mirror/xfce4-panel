@@ -44,6 +44,12 @@ struct _XfcePanelPluginInterface
 
     void (*register_menu)     (XfcePanelPlugin *plugin,
                                GtkMenu *menu);
+
+    void (*focus_panel)       (XfcePanelPlugin *plugin);
+    
+    void (*_xfce_reserved1)   (void);
+    void (*_xfce_reserved2)   (void);
+    void (*_xfce_reserved3)   (void);
 };
 
 /* menu */

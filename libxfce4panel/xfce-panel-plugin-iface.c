@@ -663,6 +663,22 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin, GtkMenu *menu)
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->register_menu (plugin, menu);
 }
 
+/**
+ * xfce_panel_plugin_focus_widget
+ * @plugin : an #XfcePanelPlugin
+ * @widget : widget to focus
+ *
+ * Grab the focus on @widget. Asks the panel to allow focus on its items and
+ * set the focus to the requested widget.
+ **/
+void 
+xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin, GtkWidget *widget)
+{
+    XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->focus_panel (plugin);
+    
+    gtk_widget_grab_focus (widget);
+}
+
 /* menu */
 
 static void
@@ -1101,7 +1117,6 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin, gboolean create)
     return xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, create);
 }
 
-/* set sensitive */
 /**
  * xfce_panel_plugin_set_sensitive
  * @plugin    : an #XfcePanelPlugin
@@ -1109,8 +1124,8 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin, gboolean create)
  *
  * This should only be called by plugin implementations.
  **/
-void xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin, 
-                                      gboolean sensitive)
+void 
+xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin, gboolean sensitive)
 {
     if (GTK_BIN (plugin)->child)
         gtk_widget_set_sensitive (GTK_BIN (plugin)->child, sensitive);
@@ -1119,5 +1134,4 @@ void xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin,
                                 G_CALLBACK (xfce_panel_plugin_set_sensitive),
                                 GINT_TO_POINTER (sensitive));
 }
-
 

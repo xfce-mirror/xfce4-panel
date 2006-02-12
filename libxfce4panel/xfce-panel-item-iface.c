@@ -23,6 +23,9 @@
 #include <config.h>
 #endif
 
+#include <X11/Xlib.h>
+#include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include "xfce-panel-item-iface.h"
 
 enum
@@ -176,6 +179,31 @@ xfce_panel_item_get_type (void)
 }
 
 /* public API */
+
+void
+xfce_panel_item_focus_panel (XfcePanelItem *item)
+{
+    static Atom atom = 0;
+    XClientMessageEvent xev;
+    GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET(item));
+
+    if (G_UNLIKELY (!atom))
+        atom = XInternAtom (GDK_DISPLAY (), "_NET_ACTIVE_WINDOW", FALSE);
+
+    xev.type = ClientMessage;
+    xev.window = GDK_WINDOW_XID (toplevel->window);
+    xev.message_type = atom;
+    xev.format = 32;
+    xev.data.l[0] = 0;
+    xev.data.l[1] = 0;
+    xev.data.l[2] = 0;
+    xev.data.l[3] = 0;
+    xev.data.l[4] = 0;
+
+    XSendEvent (GDK_DISPLAY (), GDK_ROOT_WINDOW (), False,
+                StructureNotifyMask, (XEvent *) & xev);
+    gdk_flush();
+}
 
 /* signals */
 

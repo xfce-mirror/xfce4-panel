@@ -115,6 +115,8 @@ static void
 xfce_external_panel_plugin_register_menu (XfcePanelPlugin * plugin,
                                           GtkMenu *menu);
 
+static void xfce_external_panel_plugin_focus_panel (XfcePanelPlugin * plugin);
+
 
 /* properties */
 static void xfce_external_panel_plugin_set_name (XfceExternalPanelPlugin *
@@ -172,6 +174,7 @@ xfce_external_panel_plugin_interface_init (gpointer g_iface, gpointer data)
     iface->customize_items = xfce_external_panel_plugin_customize_items;
     iface->move            = xfce_external_panel_plugin_move;
     iface->register_menu   = xfce_external_panel_plugin_register_menu;
+    iface->focus_panel     = xfce_external_panel_plugin_focus_panel;
 }
 
 static void
@@ -416,6 +419,18 @@ xfce_external_panel_plugin_register_menu (XfcePanelPlugin * plugin,
                        GINT_TO_POINTER (id));
 }
 
+static void 
+xfce_external_panel_plugin_focus_panel (XfcePanelPlugin * plugin)
+{
+    XfceExternalPanelPluginPrivate *priv;
+
+    priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
+
+    xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
+                                    priv->socket_id,
+                                    XFCE_PANEL_PLUGIN_FOCUS, 0);
+}
+
 /* item/plugin interaction */
 static void
 xfce_external_panel_plugin_construct (XfceExternalPanelPlugin * plugin)
@@ -589,6 +604,7 @@ _plugin_event_received (GtkWidget * win, GdkEventClient * ev,
             case XFCE_PANEL_PLUGIN_CUSTOMIZE:
                 xfce_panel_plugin_signal_configure (
                                         XFCE_PANEL_PLUGIN (plugin));
+                break;
                 break;
             default:
                 return FALSE;

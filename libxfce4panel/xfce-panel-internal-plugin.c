@@ -117,11 +117,13 @@ static void xfce_internal_panel_plugin_customize_panel (XfcePanelPlugin *
 static void xfce_internal_panel_plugin_customize_items (XfcePanelPlugin *
                                                         plugin);
 
-static void xfce_internal_panel_plugin_move (XfcePanelPlugin * plugin);
+static void xfce_internal_panel_plugin_focus_panel (XfcePanelPlugin * plugin);
 
 static void 
 xfce_internal_panel_plugin_register_menu (XfcePanelPlugin * plugin,
                                           GtkMenu *menu);
+
+static void xfce_internal_panel_plugin_move (XfcePanelPlugin * plugin);
 
 
 /* properties */
@@ -195,6 +197,7 @@ xfce_internal_panel_plugin_init_plugin_interface (gpointer g_iface,
     iface->customize_items = xfce_internal_panel_plugin_customize_items;
     iface->move = xfce_internal_panel_plugin_move;
     iface->register_menu = xfce_internal_panel_plugin_register_menu;
+    iface->focus_panel = xfce_internal_panel_plugin_focus_panel;
 }
 
 static void
@@ -554,6 +557,12 @@ xfce_internal_panel_plugin_register_menu (XfcePanelPlugin * plugin,
                            G_CALLBACK (_plugin_menu_deactivated), plugin);
     g_object_set_data (G_OBJECT (plugin), "deactivate_id", 
                        GINT_TO_POINTER (id));
+}
+
+static void 
+xfce_internal_panel_plugin_focus_panel (XfcePanelPlugin * plugin)
+{
+    xfce_panel_item_focus_panel (XFCE_PANEL_ITEM (plugin));
 }
 
 
