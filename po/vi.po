@@ -2,41 +2,42 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Lâm Vĩnh Niên <nienvl@yahoo.ca>, 2004.
+# Phan Vĩnh Thịnh <teppi@vnlinux.org>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-11 22:08+0100\n"
-"PO-Revision-Date: 2005-09-29 20:44+0900\n"
-"Last-Translator: Lâm Vĩnh Niên <nienvl@yahoo.ca>\n"
-"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2006-01-29 18:45+0100\n"
+"PO-Revision-Date: 2006-02-11 21:31+0300\n"
+"Last-Translator: Phan Vĩnh Thịnh <teppi@vnlinux.org>\n"
+"Language-Team: Vietnamese <none@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:177
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr ""
+msgstr "Một mục tình cờ bị xóa bỏ: \"%s\"."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:572
-#, fuzzy, c-format
+#, c-format
 msgid "Remove \"%s\"?"
-msgstr "Gỡ _bỏ"
+msgstr "Gỡ bỏ \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
-#: ../panel/panel-app.c:734 ../panel/panel-app.c:767
-#: ../panel/panel-dialogs.c:577 ../panel/panel-dialogs.c:1572
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:642
+#: ../panel/panel-app.c:674 ../panel/panel-app.c:707
+#: ../panel/panel-dialogs.c:593 ../panel/panel-dialogs.c:1588
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:577
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
-msgstr ""
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Mục này sẽ bị gỡ khỏi thanh panel và cấu hình của nó sẽ mất."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:732
@@ -46,80 +47,74 @@ msgstr ""
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
 #: ../plugins/windowlist/windowlist.c:465
 msgid "Properties"
-msgstr ""
+msgstr "Thuộc tính"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:749
 msgid "About"
-msgstr ""
+msgstr "Về"
 
 #. move
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:762
-#, fuzzy
 msgid "Move"
-msgstr "Gỡ _bỏ"
+msgstr "Di chuyển"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:784
-#, fuzzy
 msgid "Remove"
-msgstr "Gỡ _bỏ"
+msgstr "Xóa bỏ"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:801
-#, fuzzy
 msgid "Add New Item"
-msgstr "Thêm đề mục mới"
+msgstr "Thêm mục mới"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:628
 msgid "Customize Panel"
-msgstr ""
+msgstr "Tùy chỉnh thanh Panel"
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
+#: ../panel/panel.c:639 ../panel/panel-dialogs.c:616
 msgid "Add Items"
-msgstr ""
+msgstr "Thêm mục"
 
 #: ../panel/panel.c:654 ../plugins/actions/actions.c:350
 msgid "Quit"
-msgstr ""
+msgstr "Thoát"
 
 #: ../panel/panel.c:664
-#, fuzzy
 msgid "Restart"
-msgstr "Khở_i động lại"
+msgstr "Khởi động lại"
 
 #: ../panel/panel.c:678
-#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Panel Xfce"
+msgstr "Về thanh Panel Xfce"
 
 #: ../panel/panel-item-manager.c:357 ../panel/panel-item-manager.c:365
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Không thể tạo đề mục panel \"%s\"."
+msgstr "Không mở được môđun \"%s\""
 
-#: ../panel/panel-app.c:215 ../panel/panel-app.c:704
-#, fuzzy
+#: ../panel/panel-app.c:211 ../panel/panel-app.c:644
 msgid "Exit Xfce Panel?"
-msgstr "Panel Xfce"
+msgstr "Thoát Panel Xfce?"
 
-#: ../panel/panel-app.c:705
+#: ../panel/panel-app.c:645
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
+msgstr "Không thể gỡ bỏ thanh panel cuối cùng. Thoát chương trình?"
 
-#: ../panel/panel-app.c:732
+#: ../panel/panel-app.c:672
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr ""
+msgstr "Gỡ bỏ thanh panel \"%d\"?"
 
-#: ../panel/panel-app.c:736
+#: ../panel/panel-app.c:676
 msgid "The selected panel and all its items will be removed."
-msgstr ""
+msgstr "Thanh panel đã chọn và các mục của nó sẽ bị xóa."
 
-#: ../panel/panel-app.c:775
+#: ../panel/panel-app.c:715
 msgid "Developer"
-msgstr ""
+msgstr "Nhà phát triển"
 
 #: ../panel/main.c:46
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -131,10 +126,9 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Xfce Panel\n"
-" Phiên bản %s\n"
+" Xfce Panel %s \n"
 "\n"
-" Một phần của Môi trường Desktop Xfce \n"
+" Một phần của Môi trường làm việc Xfce \n"
 " http://www.xfce.org\n"
 "\n"
 "Giấy phép theo GNU GPL.\n"
@@ -146,6 +140,8 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
+" Sử dụng: %s [TÙYCHỌN]\n"
+"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -161,164 +157,161 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
+"TÙYCHỌN\n"
+" -h, --help      Hiển thị hướng dẫn này rồi thoát\n"
+" -v, --version   Hiển thị hướng dẫn này rồi thoát\n"
+" -c, --customize Hiển thị hộp thoại cấu hình\n"
+" -s, --save      Ghi cấu hình\n"
+" -r, --restart   Khởi động lại các panel\n"
+" -q, --quit      Kết thúc buổi làm việc\n"
+" -x, --exit      Đóng mọi panel và kết thúc chương trình\n"
+" -a, --add       Thêm mục mới\n"
+"\n"
 
-#: ../panel/panel-dialogs.c:615
+#: ../panel/panel-dialogs.c:631
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
+"Kéo mục từ danh sách tới một thanh panel để thêm hoặc kéo chúng từ thanh "
+"panel ngược lại danh sách để gỡ bỏ chúng."
 
-#: ../panel/panel-dialogs.c:628
-msgid "Available Items"
-msgstr ""
+#: ../panel/panel-dialogs.c:644
+msgid "Avalaible Items"
+msgstr "Các mục có"
 
-#: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
+#: ../panel/panel-dialogs.c:852 ../panel/panel-dialogs.c:1075
 msgid "Normal Width"
-msgstr ""
+msgstr "Chiều rộng thông thường"
 
-#: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1077
 msgid "Full Width"
-msgstr ""
+msgstr "Chiều rộng đầy đủ"
 
-#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
-#, fuzzy
+#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1083
 msgid "Span Monitors"
-msgstr "Trình biên tập"
+msgstr "Nối các màn hình"
 
-#: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1148
 msgid "Left"
-msgstr ""
+msgstr "Trái"
 
-#: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
+#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1150
 msgid "Right"
-msgstr ""
+msgstr "Phải"
 
-#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
+#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1155
 msgid "Top"
-msgstr ""
+msgstr "Trên"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
+#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1157
 msgid "Bottom"
-msgstr ""
+msgstr "Dưới"
 
 #. floating?
-#: ../panel/panel-dialogs.c:941
-#, fuzzy
+#: ../panel/panel-dialogs.c:957
 msgid "Panel Type"
-msgstr "Kích thước panel:"
+msgstr "Dạng panel"
 
-#: ../panel/panel-dialogs.c:950
-#, fuzzy
+#: ../panel/panel-dialogs.c:966
 msgid "Fixed Position"
-msgstr "Vị trí"
+msgstr "Vị trí cố định"
 
-#: ../panel/panel-dialogs.c:956
+#: ../panel/panel-dialogs.c:972
 msgid "Freely Moveable"
-msgstr ""
+msgstr "Di chuyển tự do"
 
 #. position
-#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:983
 msgid "Position"
 msgstr "Vị trí"
 
-#: ../panel/panel-dialogs.c:1075
-#, fuzzy
+#: ../panel/panel-dialogs.c:1091
 msgid "Auto_hide"
-msgstr "Tự động ẩn"
+msgstr "_Tự động ẩn"
 
-#: ../panel/panel-dialogs.c:1093
-#, fuzzy
+#: ../panel/panel-dialogs.c:1109
 msgid "Orientation:"
-msgstr "Hướng panel:"
+msgstr "Hướng:"
 
-#: ../panel/panel-dialogs.c:1105
+#: ../panel/panel-dialogs.c:1121
 msgid "Horizontal"
 msgstr "Ngang"
 
-#: ../panel/panel-dialogs.c:1107
+#: ../panel/panel-dialogs.c:1123
 msgid "Vertical"
 msgstr "Dọc"
 
-#: ../panel/panel-dialogs.c:1116
-#, fuzzy
+#: ../panel/panel-dialogs.c:1132
 msgid "Handle:"
-msgstr "Vị trí"
+msgstr "Điều khiển:"
 
-#: ../panel/panel-dialogs.c:1128
-#, fuzzy
+#: ../panel/panel-dialogs.c:1144
 msgid "At both sides"
-msgstr "Tự động ẩn"
+msgstr "Ở cả hai phái"
 
-#: ../panel/panel-dialogs.c:1201
-#, fuzzy
+#: ../panel/panel-dialogs.c:1217
 msgid "Select Monitor"
-msgstr "Trình biên tập"
+msgstr "Chọn màn hình"
 
 #. size
-#: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
+#: ../panel/panel-dialogs.c:1330 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
 msgstr "Kích thước"
 
-#: ../panel/panel-dialogs.c:1322
+#: ../panel/panel-dialogs.c:1338
 msgid "Small"
 msgstr "Nhỏ"
 
-#: ../panel/panel-dialogs.c:1335
+#: ../panel/panel-dialogs.c:1351
 msgid "Large"
 msgstr "Lớn"
 
-#: ../panel/panel-dialogs.c:1350
+#: ../panel/panel-dialogs.c:1366
 msgid "Transparency"
-msgstr ""
+msgstr "Trong suốt"
 
-#: ../panel/panel-dialogs.c:1358
+#: ../panel/panel-dialogs.c:1374
 msgid "None"
-msgstr ""
+msgstr "Không"
 
-#: ../panel/panel-dialogs.c:1372
+#: ../panel/panel-dialogs.c:1388
 msgid "Full"
-msgstr ""
+msgstr "Đầy"
 
-#: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
-#: ../panel/panel-dialogs.c:1479
-#, fuzzy, c-format
+#: ../panel/panel-dialogs.c:1432 ../panel/panel-dialogs.c:1470
+#: ../panel/panel-dialogs.c:1495
+#, c-format
 msgid "Panel %d"
-msgstr "Panel Xfce"
+msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1500
-#, fuzzy
+#: ../panel/panel-dialogs.c:1516
 msgid "Remove Panel"
-msgstr "Gỡ _bỏ"
+msgstr "Gỡ bỏ panel"
 
-#: ../panel/panel-dialogs.c:1513
-#, fuzzy
+#: ../panel/panel-dialogs.c:1529
 msgid "New Panel"
-msgstr "Panel Xfce"
+msgstr "Panel mới"
 
-#: ../panel/panel-dialogs.c:1597
-#, fuzzy
+#: ../panel/panel-dialogs.c:1613
 msgid "Panel Manager"
-msgstr "Kích thước panel:"
+msgstr "Quản lý panel"
 
 #: ../plugins/actions/actions.c:325
-#, fuzzy
 msgid "Panel Actions"
-msgstr "Các thiết lập Panel Xfce"
+msgstr "Thao tác"
 
 #: ../plugins/actions/actions.c:342
-#, fuzzy
 msgid "Select action type:"
-msgstr "Chọn lệnh"
+msgstr "Chọn dạng thao tác:"
 
 #: ../plugins/actions/actions.c:351
-#, fuzzy
 msgid "Lock screen"
-msgstr "_Khoá màn hình"
+msgstr "Khoá màn hình"
 
 #: ../plugins/actions/actions.c:352
-#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "_Khoá màn hình"
+msgstr "Thoát + Khoá màn hình"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -329,14 +322,12 @@ msgstr "_Khoá màn hình"
 #. * %Y  : four digit year
 #.
 #: ../plugins/clock/clock.c:109
-#, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
 #: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
-#, fuzzy
 msgid "Clock"
-msgstr "Khoá"
+msgstr "Đồng hồ"
 
 #: ../plugins/clock/clock.c:431
 msgid "Appearance"
@@ -357,50 +348,50 @@ msgstr "LED"
 
 #: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
 msgid "Show _frame"
-msgstr ""
+msgstr "Hiển thị _khung"
 
 #: ../plugins/clock/clock.c:461
 msgid "Clock Options"
-msgstr ""
+msgstr "Tùy chọn đồng hồ"
 
 #: ../plugins/clock/clock.c:471
 msgid "Use 24-_hour clock"
-msgstr ""
+msgstr "Dùng đồng hồ dạng _24 giờ"
 
 #: ../plugins/clock/clock.c:479
-#, fuzzy
 msgid "Show AM/PM"
-msgstr "AM/PM"
+msgstr "Hiển thị AM/PM"
 
 #: ../plugins/clock/clock.c:487
 msgid "Display seconds"
-msgstr ""
+msgstr "Hiển thị kim chỉ giây"
 
 #: ../plugins/iconbox/iconbox.c:808
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr ""
+msgstr "Hộp biểu tượng"
 
 #: ../plugins/iconbox/iconbox.c:822
-#, fuzzy
 msgid "Only show minimized applications"
-msgstr "Hiển thị _tên ứng dụng"
+msgstr "Chỉ hiển thị các ứng dụng thu nhỏ"
 
 #: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
-#, fuzzy, c-format
+#, c-format
 msgid "Could not run \"%s\""
-msgstr "Không thể tạo đề mục panel \"%s\"."
+msgstr "Không thể chạy \"%s\""
 
-#: ../plugins/launcher/launcher.c:578 ../plugins/launcher/launcher.c:1157
+#: ../plugins/launcher/launcher.c:578
 #: ../plugins/launcher/launcher-dialog.c:1121
-#, fuzzy
 msgid "New Item"
-msgstr "Thêm đề mục mới"
+msgstr "Mục mới"
 
 #: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
-#, fuzzy
 msgid "This item has not yet been configured"
-msgstr "Đề mục này không có tuỳ chọn cấu hình"
+msgstr "Mục này chưa được cấu hình"
+
+#: ../plugins/launcher/launcher.c:1157
+msgid "New item"
+msgstr "Mục mới"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -455,52 +446,48 @@ msgid "Terminal"
 msgstr "Trạm cuối"
 
 #: ../plugins/launcher/launcher-dialog.c:381
-#, fuzzy
 msgid "Select image file"
-msgstr "Chọn tập tin"
+msgstr "Chọn tập tin hình ảnh"
 
 #: ../plugins/launcher/launcher-dialog.c:426
 msgid "Select command"
 msgstr "Chọn lệnh"
 
 #: ../plugins/launcher/launcher-dialog.c:449
-#, fuzzy
 msgid "Name"
-msgstr "Trò chơi"
+msgstr "Tên"
 
 #: ../plugins/launcher/launcher-dialog.c:467
-#, fuzzy
 msgid "Description"
-msgstr "Vị trí"
+msgstr "Mô tả"
 
 #: ../plugins/launcher/launcher-dialog.c:522
 msgid "Other..."
-msgstr ""
+msgstr "Khác..."
 
 #: ../plugins/launcher/launcher-dialog.c:608
-#, fuzzy
 msgid "Command"
-msgstr "Lệnh"
+msgstr "Câu lệnh"
 
 #: ../plugins/launcher/launcher-dialog.c:644
 msgid "Run in _terminal"
 msgstr "Chạy ở _trạm cuối"
 
 #: ../plugins/launcher/launcher-dialog.c:662
-#, fuzzy
 msgid "Use _startup notification"
-msgstr "Dùng thô_ng báo lúc khởi động"
+msgstr "Dùng thô_ng báo khởi động"
 
 #: ../plugins/launcher/launcher-dialog.c:1243
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
+"Mục đầu tiên trong danh sách hiển thị trong panel. Các mục khác sẽ "
+"nằm trong một thực đơn."
 
 #: ../plugins/launcher/launcher-dialog.c:1298
-#, fuzzy
 msgid "Program Launcher"
-msgstr "Thêm vào trình gọi"
+msgstr "Trình chạy chương trình"
 
 #: ../plugins/launcher/launcher-dialog.c:1633
 msgid "Select file"
@@ -524,21 +511,20 @@ msgid "Separator"
 msgstr "Dấu cách"
 
 #: ../plugins/separator/separator.c:284
-#, fuzzy
 msgid "_Draw Separator"
-msgstr "Dấu cách"
+msgstr "_Dấu cách vẽ"
 
 #: ../plugins/separator/separator.c:293
 msgid "_Expand"
-msgstr ""
+msgstr "_Mở rộng"
 
 #: ../plugins/showdesktop/showdesktop.c:63
 msgid "Restore hidden windows"
-msgstr ""
+msgstr "Hiện các cửa sổ ẩn"
 
 #: ../plugins/showdesktop/showdesktop.c:64
 msgid "Hide windows and show desktop"
-msgstr ""
+msgstr "Ẩn các cửa sổ và hiển thị nền"
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
@@ -551,22 +537,21 @@ msgstr "Không thể đăng kí khay hệ thống: %s"
 
 #: ../plugins/systray/systray.c:376
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "System Tray"
-msgstr ""
+msgid "Status Area"
+msgstr "Vùng hiện trạng thái"
 
 #: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
-#, fuzzy
 msgid "Task List"
-msgstr "Tác vụ"
+msgstr "Danh sách tác vụ"
 
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
-msgstr ""
+msgstr "Chiều rộng nhỏ nhất:"
 
 #: ../plugins/tasklist/tasklist.c:454
 msgid "Use all available space"
-msgstr ""
+msgstr "Dùng tất cả không gian có thể"
 
 #: ../plugins/tasklist/tasklist.c:471
 msgid "Show tasks from _all workspaces"
@@ -577,55 +562,50 @@ msgid "Show application _names"
 msgstr "Hiển thị _tên ứng dụng"
 
 #: ../plugins/tasklist/tasklist.c:495
-#, fuzzy
 msgid "Never group tasks"
-msgstr "Luôn luôn _nhóm các tác vụ"
+msgstr "Không bao giờ nhóm các tác vụ"
 
 #: ../plugins/tasklist/tasklist.c:498
-#, fuzzy
 msgid "Automatically group tasks"
-msgstr "Luôn luôn _nhóm các tác vụ"
+msgstr "Tự động nhóm các tác vụ"
 
 #: ../plugins/tasklist/tasklist.c:501
-#, fuzzy
 msgid "Always group tasks"
-msgstr "Luôn luôn _nhóm các tác vụ"
+msgstr "Luôn luôn nhóm các tác vụ"
 
 #: ../plugins/windowlist/windowlist.c:249
 #: ../plugins/windowlist/windowlist.c:480
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr ""
+msgstr "Danh sách cửa sổ"
 
 #: ../plugins/windowlist/windowlist.c:348
 msgid "Add workspace"
-msgstr ""
+msgstr "Thêm không gian"
 
 #: ../plugins/windowlist/windowlist.c:358
 msgid "Delete workspace"
-msgstr ""
+msgstr "Xóa không gian"
 
 #: ../plugins/windowlist/windowlist.c:493
 msgid "Include all Workspaces"
-msgstr ""
+msgstr "Trên mọi không gian"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Nút thao tác"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
-#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "Khoá màn hình"
+msgstr "Thoát ra hoặc khóa màn hình"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr ""
+msgstr "Bây giờ là mấy giờ?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
-#, fuzzy
 msgid "Show icons of all running applications"
-msgstr "Hiển thị _tên ứng dụng"
+msgstr "Hiển thị biểu tượng cho mọi ứng dụng đang chạy"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -633,47 +613,41 @@ msgstr "Trình gọi"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Trình chạy chương trình với trình đơn tùy chọn"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr ""
+msgstr "Màn hình thu nhỏ của mọi không gian"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr ""
+msgstr "Thêm khoảng không hoặc một dòng ngăn cách các mục của panel"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "Hiển thị nền"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "Ẩn/Hiện nền"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Show notification icons"
-msgstr "Hiển thị _tên ứng dụng"
+msgstr "Hiển thị biểu tượng thông báo"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-#, fuzzy
 msgid "Show all running applications"
-msgstr "Hiển thị _tên ứng dụng"
+msgstr "Hiển thị mọi ứng dụng đang chạy"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr ""
+msgstr "Hiển thị danh sách các cửa sổ đang có"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
-#, fuzzy
 msgid "Test Plugin"
-msgstr "Trình gọi"
+msgstr "Plugin thử nghiệm"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr ""
+msgstr "Plugin không thực hiện thao tác nào"
 
-#, fuzzy
-#~ msgid "New item"
-#~ msgstr "Thêm đề mục mới"
