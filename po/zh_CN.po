@@ -1,31 +1,32 @@
-# #-#-#-#-#  zh_CN.po (xfce4-panel 4.3.28)  #-#-#-#-#
-# Simplified Chinese translations for xfce-mcs-plugins package.
+# ----zh_CN.po (xfce4-panel 4.3.28)  ----Simplified Chinese translations for xfce-mcs-plugins package.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Yongtao Yang <yongtao.yang@telia.com>, 2004.
-#
+# Huang Huan <unicon221@gmail.com>, 2006.
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-11 22:08+0100\n"
-"PO-Revision-Date: 2005-09-29 20:45+0900\n"
-"Last-Translator: Yongtao Yang <yongtao.yang@telia.com>\n"
-"Language-Team: Simplified Chinese <i18n-translation@lists.linux.net.cn>\n"
+"PO-Revision-Date: 2006-02-16 23:04+0800\n"
+"Last-Translator: Huang Huan <unicon221@gmail.com>\n"
+"Language-Team: Chinese/Simplified <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:177
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr ""
+msgstr "一个项目被意外移除：\"%s\"。"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:572
-#, fuzzy, c-format
+#, c-format
 msgid "Remove \"%s\"?"
-msgstr "删除(_R)"
+msgstr "移除 \"%s\"？"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
 #: ../panel/panel-app.c:734 ../panel/panel-app.c:767
@@ -38,6 +39,7 @@ msgstr "Xfce面板"
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
+"当前项目将被从面板上移除，配置文件也将丢失。"
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:732
@@ -47,80 +49,74 @@ msgstr ""
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
 #: ../plugins/windowlist/windowlist.c:465
 msgid "Properties"
-msgstr ""
+msgstr "属性"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:749
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #. move
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:762
-#, fuzzy
 msgid "Move"
-msgstr "删除(_R)"
+msgstr "移动"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:784
-#, fuzzy
 msgid "Remove"
-msgstr "删除(_R)"
+msgstr "移除"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:801
-#, fuzzy
 msgid "Add New Item"
-msgstr "添加新条目"
+msgstr "添加新项目"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:628
 msgid "Customize Panel"
-msgstr ""
+msgstr "自定义面板"
 
 #: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
 msgid "Add Items"
-msgstr ""
+msgstr "添加项目"
 
 #: ../panel/panel.c:654 ../plugins/actions/actions.c:350
 msgid "Quit"
-msgstr ""
+msgstr "退出"
 
 #: ../panel/panel.c:664
-#, fuzzy
 msgid "Restart"
-msgstr "重新启动(_R)"
+msgstr "重新启动"
 
 #: ../panel/panel.c:678
-#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Xfce面板"
+msgstr "关于Xfce面板"
 
 #: ../panel/panel-item-manager.c:357 ../panel/panel-item-manager.c:365
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open \"%s\" module"
-msgstr "无法创建条目 “%s ”。"
+msgstr "无法打开 “%s ”模块。"
 
 #: ../panel/panel-app.c:215 ../panel/panel-app.c:704
-#, fuzzy
 msgid "Exit Xfce Panel?"
-msgstr "Xfce面板"
+msgstr "退出Xfce面板？"
 
 #: ../panel/panel-app.c:705
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
+msgstr "你不能移除最后一个面板。你想退出面板程序吗？"
 
 #: ../panel/panel-app.c:732
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr ""
+msgstr "移除面板\"%d\"？"
 
 #: ../panel/panel-app.c:736
 msgid "The selected panel and all its items will be removed."
-msgstr ""
+msgstr "所选面板及其上面的项目都将被移除。"
 
 #: ../panel/panel-app.c:775
 msgid "Developer"
-msgstr ""
+msgstr "开发者"
 
 #: ../panel/main.c:46
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -132,8 +128,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-" Xfce 面板\n"
-" 版本 %s\n"
+" Xfce 面板 %s\n"
 "\n"
 " Xfce桌面环境的组成部分\n"
 " http://www.xfce.org\n"
@@ -147,6 +142,8 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
+"用途：%s [选项]\n"
+"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -162,74 +159,80 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
+" 选项\n"
+" -h, --help......显示这条信息然后退出\n"
+" -v, --version...显示这条信息然后退出\n"
+" -c, --customize 显示配置对话框\n"
+" -s, --save      保存配置\n"
+" -r, --restart   重启面板\n"
+" -q, --quit      结束会话\n"
+" -x, --exit      关闭所有面板然后结束程序\n"
+" -a, --add       添加新项目\n"
+"\n"
 
 #: ../panel/panel-dialogs.c:615
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
+"拖动列表上的项目至面板或通过拖动它们回到列表上而移除。"
 
 #: ../panel/panel-dialogs.c:628
 msgid "Available Items"
-msgstr ""
+msgstr "以存在项目"
 
 #: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
 msgid "Normal Width"
-msgstr ""
+msgstr "普通宽度"
 
 #: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
 msgid "Full Width"
-msgstr ""
+msgstr "全屏宽度"
 
 #: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
 #, fuzzy
 msgid "Span Monitors"
-msgstr "编辑器"
+msgstr "监视器"
 
 #: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
 msgid "Left"
-msgstr ""
+msgstr "左"
 
 #: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
 msgid "Right"
-msgstr ""
+msgstr "右"
 
 #: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
 msgid "Top"
-msgstr ""
+msgstr "顶部"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
 msgid "Bottom"
-msgstr ""
+msgstr "底部"
 
 #. floating?
 #: ../panel/panel-dialogs.c:941
-#, fuzzy
 msgid "Panel Type"
 msgstr "面板大小："
 
 #: ../panel/panel-dialogs.c:950
-#, fuzzy
 msgid "Fixed Position"
-msgstr "位置："
+msgstr "填充位置："
 
 #: ../panel/panel-dialogs.c:956
 msgid "Freely Moveable"
-msgstr ""
+msgstr "自由移动"
 
 #. position
 #: ../panel/panel-dialogs.c:967
-#, fuzzy
 msgid "Position"
-msgstr "位置："
+msgstr "位置"
 
 #: ../panel/panel-dialogs.c:1075
-#, fuzzy
 msgid "Auto_hide"
-msgstr "自动隐藏："
+msgstr "自动隐藏(_h)："
 
 #: ../panel/panel-dialogs.c:1093
-#, fuzzy
 msgid "Orientation:"
 msgstr "面板方向："
 
@@ -242,24 +245,21 @@ msgid "Vertical"
 msgstr "竖直"
 
 #: ../panel/panel-dialogs.c:1116
-#, fuzzy
 msgid "Handle:"
-msgstr "位置："
+msgstr "处理："
 
 #: ../panel/panel-dialogs.c:1128
-#, fuzzy
 msgid "At both sides"
-msgstr "自动隐藏："
+msgstr "在两边"
 
 #: ../panel/panel-dialogs.c:1201
-#, fuzzy
 msgid "Select Monitor"
-msgstr "编辑器"
+msgstr "选择监视器"
 
 #. size
 #: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: ../panel/panel-dialogs.c:1322
 msgid "Small"
@@ -271,56 +271,49 @@ msgstr "大"
 
 #: ../panel/panel-dialogs.c:1350
 msgid "Transparency"
-msgstr ""
+msgstr "透明度"
 
 #: ../panel/panel-dialogs.c:1358
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: ../panel/panel-dialogs.c:1372
 msgid "Full"
-msgstr ""
+msgstr "全部"
 
 #: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
 #: ../panel/panel-dialogs.c:1479
-#, fuzzy, c-format
+#, c-format
 msgid "Panel %d"
-msgstr "Xfce面板"
+msgstr "面板%d"
 
 #: ../panel/panel-dialogs.c:1500
-#, fuzzy
 msgid "Remove Panel"
-msgstr "删除(_R)"
+msgstr "移除面板"
 
 #: ../panel/panel-dialogs.c:1513
-#, fuzzy
 msgid "New Panel"
-msgstr "Xfce面板"
+msgstr "新建面板"
 
 #: ../panel/panel-dialogs.c:1597
-#, fuzzy
 msgid "Panel Manager"
-msgstr "面板大小："
+msgstr "面板管理器"
 
 #: ../plugins/actions/actions.c:325
-#, fuzzy
 msgid "Panel Actions"
-msgstr "Xfce面板配置"
+msgstr "面板动作"
 
 #: ../plugins/actions/actions.c:342
-#, fuzzy
 msgid "Select action type:"
-msgstr "选择命令"
+msgstr "选择动作类型："
 
 #: ../plugins/actions/actions.c:351
-#, fuzzy
 msgid "Lock screen"
-msgstr "锁住屏幕(_L)"
+msgstr "锁住屏幕"
 
 #: ../plugins/actions/actions.c:352
-#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "锁住屏幕(_L)"
+msgstr "退出 + 锁住屏幕"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -335,9 +328,8 @@ msgid "%A %d %B %Y"
 msgstr ""
 
 #: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
-#, fuzzy
 msgid "Clock"
-msgstr "锁住"
+msgstr "时钟"
 
 #: ../plugins/clock/clock.c:431
 msgid "Appearance"
@@ -358,49 +350,46 @@ msgstr "数字液晶显示"
 
 #: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
 msgid "Show _frame"
-msgstr ""
+msgstr "显示帧数(_f)"
 
 #: ../plugins/clock/clock.c:461
 msgid "Clock Options"
-msgstr ""
+msgstr "时钟选项"
 
 #: ../plugins/clock/clock.c:471
 msgid "Use 24-_hour clock"
-msgstr ""
+msgstr "使用24小时(_h)时钟显示"
 
 #: ../plugins/clock/clock.c:479
-#, fuzzy
 msgid "Show AM/PM"
-msgstr "AM/PM"
+msgstr "显示AM/PM"
 
 #: ../plugins/clock/clock.c:487
 msgid "Display seconds"
-msgstr ""
+msgstr "显示秒钟"
 
 #: ../plugins/iconbox/iconbox.c:808
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr ""
+msgstr "图标盒"
 
 #: ../plugins/iconbox/iconbox.c:822
 msgid "Only show minimized applications"
-msgstr ""
+msgstr "仅显示最小化程序"
 
 #: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
-#, fuzzy, c-format
+#, c-format
 msgid "Could not run \"%s\""
-msgstr "无法创建条目 “%s ”。"
+msgstr "无法运行 \"%s\""
 
 #: ../plugins/launcher/launcher.c:578 ../plugins/launcher/launcher.c:1157
 #: ../plugins/launcher/launcher-dialog.c:1121
-#, fuzzy
 msgid "New Item"
-msgstr "添加新条目"
+msgstr "新项目"
 
 #: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
-#, fuzzy
 msgid "This item has not yet been configured"
-msgstr "该条目没有配置选项"
+msgstr "该项目没有被配置"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
@@ -416,7 +405,7 @@ msgstr "文件管理"
 
 #: ../plugins/launcher/launcher-dialog.c:81
 msgid "Utilities"
-msgstr "公用程序"
+msgstr "实用工具"
 
 #: ../plugins/launcher/launcher-dialog.c:82
 msgid "Games"
@@ -455,39 +444,34 @@ msgid "Terminal"
 msgstr "终端"
 
 #: ../plugins/launcher/launcher-dialog.c:381
-#, fuzzy
 msgid "Select image file"
-msgstr "选择文件"
+msgstr "选择图形文件"
 
 #: ../plugins/launcher/launcher-dialog.c:426
 msgid "Select command"
 msgstr "选择命令"
 
 #: ../plugins/launcher/launcher-dialog.c:449
-#, fuzzy
 msgid "Name"
-msgstr "游戏"
+msgstr "名称"
 
 #: ../plugins/launcher/launcher-dialog.c:467
-#, fuzzy
 msgid "Description"
-msgstr "位置："
+msgstr "描述"
 
 #: ../plugins/launcher/launcher-dialog.c:522
 msgid "Other..."
-msgstr ""
+msgstr "其它..."
 
 #: ../plugins/launcher/launcher-dialog.c:608
-#, fuzzy
 msgid "Command"
-msgstr "命令："
+msgstr "命令"
 
 #: ../plugins/launcher/launcher-dialog.c:644
 msgid "Run in _terminal"
 msgstr "在终端中运行(_T)"
 
 #: ../plugins/launcher/launcher-dialog.c:662
-#, fuzzy
 msgid "Use _startup notification"
 msgstr "使用启动提示(_N)"
 
@@ -496,11 +480,11 @@ msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
+"列表中的第一个项目会显示在面板上。后加上的项目将出现在菜单中。"
 
 #: ../plugins/launcher/launcher-dialog.c:1298
-#, fuzzy
 msgid "Program Launcher"
-msgstr "将菜单附加到启动器"
+msgstr "程序起动器"
 
 #: ../plugins/launcher/launcher-dialog.c:1633
 msgid "Select file"
@@ -508,7 +492,7 @@ msgstr "选择文件"
 
 #: ../plugins/pager/pager.c:314 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
-msgstr ""
+msgstr "页面切换器"
 
 #: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
@@ -524,106 +508,101 @@ msgid "Separator"
 msgstr "隔离符"
 
 #: ../plugins/separator/separator.c:284
-#, fuzzy
 msgid "_Draw Separator"
-msgstr "隔离符"
+msgstr "绘制(_D)隔离符"
 
 #: ../plugins/separator/separator.c:293
 msgid "_Expand"
-msgstr ""
+msgstr "展开(_E)"
 
 #: ../plugins/showdesktop/showdesktop.c:63
 msgid "Restore hidden windows"
-msgstr ""
+msgstr "恢复隐藏窗口"
 
 #: ../plugins/showdesktop/showdesktop.c:64
 msgid "Hide windows and show desktop"
-msgstr ""
+msgstr "隐藏窗口并显示桌面"
 
 #: ../plugins/systray/systray.c:65
 msgid "There is already a system tray running on this screen"
-msgstr ""
+msgstr "已经有一个系统托盘在运行"
 
 #: ../plugins/systray/systray.c:71
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr ""
+msgstr "不能注册系统托盘：%s"
 
 #: ../plugins/systray/systray.c:376
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr ""
+msgstr "系统托盘"
 
 #: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
-msgstr ""
+msgstr "任务列表"
 
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
-msgstr ""
+msgstr "最小宽度："
 
 #: ../plugins/tasklist/tasklist.c:454
 msgid "Use all available space"
-msgstr ""
+msgstr "使用所有可用空间"
 
 #: ../plugins/tasklist/tasklist.c:471
 msgid "Show tasks from _all workspaces"
-msgstr ""
+msgstr "显示所有(_A)工具区的任务。"
 
 #: ../plugins/tasklist/tasklist.c:481
 msgid "Show application _names"
-msgstr ""
+msgstr "显示程序名称(_N)"
 
 #: ../plugins/tasklist/tasklist.c:495
-#, fuzzy
 msgid "Never group tasks"
-msgstr "总是在顶层："
+msgstr "永不分组任务"
 
 #: ../plugins/tasklist/tasklist.c:498
-#, fuzzy
 msgid "Automatically group tasks"
-msgstr "总是在顶层："
+msgstr "自动分组任务"
 
 #: ../plugins/tasklist/tasklist.c:501
-#, fuzzy
 msgid "Always group tasks"
-msgstr "总是在顶层："
+msgstr "总是分组任务"
 
 #: ../plugins/windowlist/windowlist.c:249
 #: ../plugins/windowlist/windowlist.c:480
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr ""
+msgstr "窗口列表"
 
 #: ../plugins/windowlist/windowlist.c:348
 msgid "Add workspace"
-msgstr ""
+msgstr "添加工作区"
 
 #: ../plugins/windowlist/windowlist.c:358
 msgid "Delete workspace"
-msgstr ""
+msgstr "删除工作区"
 
 #: ../plugins/windowlist/windowlist.c:493
 msgid "Include all Workspaces"
-msgstr ""
+msgstr "包含所有工作区"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "动作按钮"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
-#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "锁住屏幕"
+msgstr "注销或锁住屏幕"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr ""
+msgstr "现在什么时间？"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr ""
+msgstr "显示所有运行中程序的图标"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -631,44 +610,43 @@ msgstr "启动器"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "带有选项菜单的程序起动器"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr ""
+msgstr "所有工作区的缩略显示"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr ""
+msgstr "在面板项目之间添加一块空间或一条线"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "显示桌面"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "切换桌面显示／隐藏"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
-msgstr ""
+msgstr "显示提示图标"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Show all running applications"
-msgstr ""
+msgstr "显示所有运行中的程序"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr ""
+msgstr "显示可用窗口的列表"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
-#, fuzzy
 msgid "Test Plugin"
-msgstr "启动器"
+msgstr "测试插件"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr ""
+msgstr "这个插件没有用途"
 
 #, fuzzy
 #~ msgid "New item"
