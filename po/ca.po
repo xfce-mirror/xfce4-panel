@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-11 22:08+0100\n"
+"POT-Creation-Date: 2006-02-18 22:32+0900\n"
 "PO-Revision-Date: 2006-02-16 22:38+0100\n"
 "Last-Translator: Pau Rul.lan Ferragut <paurullan@bulma.net>\n"
 "Language-Team: catalan\n"
@@ -18,12 +18,12 @@ msgstr ""
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:177
-#, fuzzy, c-format
+#, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:572
-#, fuzzy, c-format
+#, c-format
 msgid "Remove \"%s\"?"
 msgstr ""
 
@@ -42,7 +42,7 @@ msgid ""
 msgstr "element de   quadre i."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:732
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:748
 #: ../plugins/actions/actions.c:309 ../plugins/clock/clock.c:408
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
@@ -53,28 +53,28 @@ msgid "Properties"
 msgstr "Propietats"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:749
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:765
 #, fuzzy
 msgid "About"
 msgstr "Quant a"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:762
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
 #, fuzzy
 msgid "Move"
 msgstr "Suprimeix"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:784
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:800
 #, fuzzy
 msgid "Remove"
 msgstr "Suprimeix"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:801
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
 #, fuzzy
 msgid "Add New Item"
 msgstr "Nou Ítem"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:813 ../panel/panel.c:628
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:628
 #, fuzzy
 msgid "Customize Panel"
 msgstr "Personalitza Plafó"
@@ -99,7 +99,7 @@ msgid "About the Xfce Panel"
 msgstr "Quant a   Plafó"
 
 #: ../panel/panel-item-manager.c:357 ../panel/panel-item-manager.c:365
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open \"%s\" module"
 msgstr ""
 
@@ -114,7 +114,7 @@ msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Tu elimina   últim quadre tu com a    programa?"
 
 #: ../panel/panel-app.c:732
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgid "Developer"
 msgstr ""
 
 #: ../panel/main.c:46
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -149,7 +149,6 @@ msgstr "OPCIONS n n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
-#, fuzzy
 msgid ""
 " OPTIONS\n"
 " -h, --help      Show this message and exit\n"
