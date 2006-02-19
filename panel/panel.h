@@ -46,6 +46,8 @@ typedef struct _XfcePanelItemConfig XfcePanelItemConfig;
 struct _Panel
 {
     XfcePanelWindow parent;
+    /*< private >*/
+    gpointer priv;
 };
 
 struct _PanelClass

@@ -216,6 +216,7 @@ struct _ConfigParser
     int handle_style;
     gboolean autohide;
     int transparency;
+    gboolean activetrans;
 };
 
 static void
@@ -233,6 +234,7 @@ init_properties (ConfigParser *parser)
     parser->handle_style    = XFCE_HANDLE_STYLE_NONE;
     parser->autohide        = DEFAULT_AUTOHIDE;
     parser->transparency    = DEFAULT_TRANSPARENCY;
+    parser->activetrans     = DEFAULT_ACTIVE_TRANS;
 }
 
 static void
@@ -279,6 +281,10 @@ config_set_property (ConfigParser *parser,
     else if (strcmp (name, "transparency") == 0)
     {
         parser->transparency = (int) strtol (value, NULL, 0);
+    }
+    else if (strcmp (name, "activetrans") == 0)
+    {
+        parser->activetrans = ((int) strtol (value, NULL, 0) == 1);
     }
 }
 
@@ -441,6 +447,7 @@ end_element_handler (GMarkupParseContext * context,
                                   "handle-style", parser->handle_style,
                                   "autohide", parser->autohide,
                                   "transparency", parser->transparency,
+                                  "activetrans", parser->activetrans,
                                   NULL);
                 }
                 panel_init_position (parser->current_panel);
@@ -638,7 +645,7 @@ config_save_to_file (GPtrArray *array, const char *filename)
         Panel *panel;
         int size, monitor, screen_position, xoffset, yoffset, handle_style,
             transparency, fullwidth, j;
-        gboolean autohide;
+        gboolean autohide, activetrans;
         XfcePanelItemConfig *configlist;
         
         DBG ("Saving panel %d", i + 1);
@@ -647,7 +654,7 @@ config_save_to_file (GPtrArray *array, const char *filename)
 
         size = monitor = screen_position = xoffset = yoffset = 
             transparency = fullwidth = 0;
-        autohide = FALSE;
+        autohide = activetrans = FALSE;
 
         g_object_get (G_OBJECT (panel),
                       "size", &size,
@@ -659,6 +666,7 @@ config_save_to_file (GPtrArray *array, const char *filename)
                       "handle-style", &handle_style,
                       "autohide", &autohide,
                       "transparency", &transparency,
+                      "activetrans", &activetrans,
                       NULL);
         
         /* grouping */
@@ -692,6 +700,9 @@ config_save_to_file (GPtrArray *array, const char *filename)
                  
         fprintf (fp, "\t\t\t<property name=\"transparency\" value=\"%d\"/>\n",
                      transparency);
+                 
+        fprintf (fp, "\t\t\t<property name=\"activetrans\" value=\"%d\"/>\n",
+                     activetrans);
                  
         /* grouping */
         fprintf (fp, "\t\t</properties>\n"

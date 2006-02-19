@@ -35,8 +35,9 @@
 #define DEFAULT_XOFFSET          0
 #define DEFAULT_YOFFSET          0
 #define DEFAULT_AUTOHIDE         FALSE
-#define DEFAULT_FULL_WIDTH       FALSE
+#define DEFAULT_FULL_WIDTH       XFCE_PANEL_NORMAL_WIDTH
 #define DEFAULT_TRANSPARENCY     20
+#define DEFAULT_ACTIVE_TRANS     FALSE
 
 #define PANEL_GET_PRIVATE(o) \
     (G_TYPE_INSTANCE_GET_PRIVATE ((o), PANEL_TYPE_PANEL, PanelPrivate))
@@ -64,8 +65,10 @@ struct _PanelPrivate
     guint autohide:1;
     XfcePanelWidthType full_width;
     int transparency;
+    guint activetrans:1;
 
     guint opacity;
+    guint saved_opacity;
 
     guint hidden:1;
     int block_autohide;

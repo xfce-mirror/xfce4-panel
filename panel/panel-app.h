@@ -122,7 +122,7 @@ void panel_app_add_panel (void);
 
 void panel_app_remove_panel (GtkWidget *panel);
 
-void panel_app_about (void);
+void panel_app_about (GtkWidget *panel);
 
 Window panel_app_get_ipc_window (void);
 

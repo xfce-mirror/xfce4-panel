@@ -73,6 +73,9 @@ void panel_set_full_width   (Panel *panel,
 void panel_set_transparency (Panel *panel,
                              int transparency);
 
+void panel_set_activetrans (Panel *panel,
+                            gboolean activetrans);
+
 G_END_DECLS
 
 #endif /* _PANEL_POSITION_H */

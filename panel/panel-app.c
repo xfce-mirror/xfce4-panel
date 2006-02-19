@@ -758,7 +758,7 @@ panel_app_remove_panel (GtkWidget *panel)
 }
 
 void 
-panel_app_about (void)
+panel_app_about (GtkWidget *panel)
 {
     XfceAboutInfo *info;
     GtkWidget *dlg;
@@ -776,6 +776,8 @@ panel_app_about (void)
 
     pb = xfce_themed_icon_load ("xfce4-panel", 48);
     dlg = xfce_about_dialog_new_with_values (NULL, info, pb);
+    gtk_window_set_screen (GTK_WINDOW (dlg),
+                           gtk_widget_get_screen (panel));
     g_object_unref (pb);
 
     gtk_widget_set_size_request (dlg, 400, 300);

@@ -148,7 +148,7 @@ _set_borders (Panel *panel)
     PanelPrivate *priv;
     gboolean top, bottom, left, right;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     top = bottom = left = right = TRUE;
 
@@ -235,7 +235,17 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
     PanelPrivate *priv;
     gulong data[12] = { 0, };
 
-    priv = PANEL_GET_PRIVATE (panel);
+    /* _NET_WM_STRUT_PARTIAL: CARDINAL[12]/32
+     * 
+     * 0: left          1: right       2:  top             3:  bottom
+     * 4: left_start_y  5: left_end_y  6:  right_start_y   7:  right_end_y
+     * 8: top_start_x   9: top_end_x   10: bottom_start_x  11: bottom_end_x
+     *
+     * Note: In xinerama use struts relative to combined screen dimensions, not
+     *       just the current monitor.
+     */
+
+    priv = panel->priv;
 
     if (!priv->autohide && 
             !xfce_screen_position_is_floating (priv->screen_position))
@@ -317,7 +327,7 @@ panel_move_end (XfcePanelWindow *window, int x, int y)
     PanelPrivate *priv;
     XfceMonitor *xmon;
 
-    priv = PANEL_GET_PRIVATE (window);
+    priv = PANEL (window)->priv;
 
     if (xfce_screen_position_is_floating (priv->screen_position))
     {
@@ -343,7 +353,7 @@ panel_move_function (XfcePanelWindow *window, Panel *panel, int *x, int *y)
     PanelPrivate *priv;
     XfceMonitor *xmon;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     priv->monitor = gdk_screen_get_monitor_at_point (
                         gtk_widget_get_screen (GTK_WIDGET (window)), *x, *y);
@@ -363,7 +373,7 @@ panel_resize_function (XfcePanelWindow *window, Panel *panel,
     PanelPrivate *priv;
     XfceMonitor *xmon;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     xmon = panel_app_get_monitor (priv->monitor);
     
@@ -388,7 +398,7 @@ panel_set_position (Panel *panel, XfceScreenPosition position,
     int x, y;
     XfceMonitor *xmon;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
     
     xmon = panel_app_get_monitor (priv->monitor);
 
@@ -448,7 +458,7 @@ panel_screen_size_changed (GdkScreen *screen, Panel *panel)
     PanelPrivate *priv;
     XfceMonitor *xmon;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     xmon = panel_app_get_monitor (priv->monitor);
     
@@ -467,7 +477,10 @@ _set_transparent (Panel *panel, gboolean transparent)
     PanelPrivate *priv;
     guint opacity;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    if (!GTK_WIDGET (panel)->window)
+        return;
+    
+    priv = panel->priv;
     
     if (G_UNLIKELY (priv->opacity == 0))
     {
@@ -478,18 +491,23 @@ _set_transparent (Panel *panel, gboolean transparent)
             priv->opacity = OPAQUE;
     }
     
-    opacity = (transparent ? priv->opacity : OPAQUE);
+    opacity = (transparent || priv->activetrans) ? priv->opacity : OPAQUE;
     
-    gdk_error_trap_push ();
+    if (opacity != priv->saved_opacity)
+    {
+        priv->saved_opacity = opacity;
+        
+        gdk_error_trap_push ();
 
-    gdk_property_change (GTK_WIDGET (panel)->window,
-			 gdk_atom_intern ("_NET_WM_WINDOW_OPACITY", FALSE),
-			 gdk_atom_intern ("CARDINAL", FALSE), 32,
-			 GDK_PROP_MODE_REPLACE, (guchar *) & opacity, 1L);
+        gdk_property_change (GTK_WIDGET (panel)->window,
+                             gdk_atom_intern ("_NET_WM_WINDOW_OPACITY", FALSE),
+                             gdk_atom_intern ("CARDINAL", FALSE), 32,
+                             GDK_PROP_MODE_REPLACE, (guchar *) & opacity, 1L);
 
-    gdk_error_trap_pop ();
+        gdk_error_trap_pop ();
 
-    gtk_widget_queue_draw (GTK_WIDGET (panel));
+        gtk_widget_queue_draw (GTK_WIDGET (panel));
+    }
 }
 
 static void
@@ -498,7 +516,7 @@ _set_hidden (Panel *panel, gboolean hide)
     PanelPrivate *priv;
     int w, h;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     priv->hidden = hide;
     
@@ -561,7 +579,7 @@ _hide_timeout (Panel *panel)
 {
     PanelPrivate *priv;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
     priv->hide_timeout = 0;
 
     if (!priv->hidden && !priv->block_autohide)
@@ -575,7 +593,7 @@ _unhide_timeout (Panel *panel)
 {
     PanelPrivate *priv;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
     priv->unhide_timeout = 0;
 
     if (priv->hidden)
@@ -593,7 +611,7 @@ panel_enter (Panel *panel, GdkEventCrossing * event)
     {
         panel_app_set_current_panel ((gpointer)panel);
         
-        priv = PANEL_GET_PRIVATE (panel);
+        priv = panel->priv;
         
         if (priv->block_autohide)
             return;
@@ -624,7 +642,7 @@ panel_leave (Panel *panel, GdkEventCrossing * event)
 
     if (event->detail != GDK_NOTIFY_INFERIOR)
     {
-        priv = PANEL_GET_PRIVATE (panel);
+        priv = panel->priv;
         
         if (priv->block_autohide)
             return;
@@ -654,7 +672,7 @@ _window_mapped (Panel *panel)
     XfceMonitor *xmon;
     int x, y;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     panel_set_position (panel, priv->screen_position, 
                         priv->xoffset, priv->yoffset);
@@ -685,7 +703,7 @@ panel_init_position (Panel *panel)
     GtkOrientation orientation;
     XfceMonitor *xmon;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
     
     orientation = 
         xfce_screen_position_is_horizontal (priv->screen_position) ?
@@ -761,7 +779,7 @@ panel_center (Panel *panel)
     GtkRequisition req;
     XfceMonitor *xmon;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (priv->screen_position < XFCE_SCREEN_POSITION_FLOATING_H)
         return;
@@ -781,7 +799,7 @@ void panel_set_autohide (Panel *panel, gboolean autohide)
 {
     PanelPrivate *priv;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (autohide == priv->autohide)
         return;
@@ -819,7 +837,7 @@ void panel_block_autohide (Panel *panel)
 
     DBG ("block");
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     priv->block_autohide++;
 
@@ -835,7 +853,7 @@ void panel_unblock_autohide (Panel *panel)
 
     DBG ("unblock");
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (priv->block_autohide > 0)
     {
@@ -867,7 +885,7 @@ panel_set_full_width (Panel *panel, int fullwidth)
 {
     PanelPrivate *priv;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
     
     if (fullwidth != priv->full_width)
     {
@@ -918,13 +936,12 @@ panel_set_full_width (Panel *panel, int fullwidth)
     }
 }
 
-/* not really positioning, but easier to put here */
 void
 panel_set_transparency (Panel *panel, int transparency)
 {
     PanelPrivate *priv;
 
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (transparency != priv->transparency)
     {
@@ -932,6 +949,19 @@ panel_set_transparency (Panel *panel, int transparency)
 
         priv->transparency = transparency;
         priv->opacity = 0;
+
+        _set_transparent (panel, TRUE);
+    }
+}
+
+void
+panel_set_activetrans (Panel *panel, gboolean activetrans)
+{
+    PanelPrivate *priv = panel->priv;
+
+    if (activetrans != priv->activetrans)
+    {
+        priv->activetrans = activetrans;
 
         _set_transparent (panel, TRUE);
     }
@@ -946,7 +976,7 @@ panel_get_size (Panel *panel)
 
     g_return_val_if_fail (PANEL_IS_PANEL (panel), DEFAULT_SIZE);
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     return priv->size;
 }
@@ -958,7 +988,7 @@ panel_set_size (Panel *panel, int size)
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (size != priv->size)
     {
@@ -977,7 +1007,7 @@ panel_get_monitor (Panel *panel)
 
     g_return_val_if_fail (PANEL_IS_PANEL (panel), DEFAULT_MONITOR);
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     return priv->monitor;
 }
@@ -989,7 +1019,7 @@ panel_set_monitor (Panel *panel, int monitor)
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (monitor != priv->monitor)
     {
@@ -1016,7 +1046,7 @@ panel_get_screen_position (Panel *panel)
 
     g_return_val_if_fail (PANEL_IS_PANEL (panel), DEFAULT_SCREEN_POSITION);
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     return priv->screen_position;
 }
@@ -1028,7 +1058,7 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (position != priv->screen_position)
     {
@@ -1100,7 +1130,7 @@ panel_get_xoffset (Panel *panel)
 
     g_return_val_if_fail (PANEL_IS_PANEL (panel), DEFAULT_XOFFSET);
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     return priv->xoffset;
 }
@@ -1112,7 +1142,7 @@ panel_set_xoffset (Panel *panel, int xoffset)
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (xoffset != priv->xoffset)
     {
@@ -1128,7 +1158,7 @@ panel_get_yoffset (Panel *panel)
 
     g_return_val_if_fail (PANEL_IS_PANEL (panel), DEFAULT_YOFFSET);
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     return priv->yoffset;
 }
@@ -1140,7 +1170,7 @@ panel_set_yoffset (Panel *panel, int yoffset)
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
     
-    priv = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv;
 
     if (yoffset != priv->yoffset)
     {

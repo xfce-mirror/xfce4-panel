@@ -479,6 +479,8 @@ _item_construct (XfceExternalPanelItem * item)
 static void
 _item_setup (XfceExternalPanelItem * item, const char *file)
 {
+    GdkScreen *gscreen;
+    gchar *gdkdisplay_name;
     char **argv = NULL;
     gulong sock;
     XfceExternalPanelItemPrivate *priv;
@@ -507,6 +509,9 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
     g_signal_connect (item, "client-event",
                       G_CALLBACK (_item_event_received), NULL);
 
+    gscreen = gtk_widget_get_screen (GTK_WIDGET (item));
+    gdkdisplay_name = gdk_screen_make_display_name (gscreen);
+    
     switch (fork())
     {
         case -1:
@@ -514,6 +519,9 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
             gtk_widget_destroy (GTK_WIDGET (item));
             break;
         case 0:
+            xfce_setenv ("DISPLAY", gdkdisplay_name, TRUE);
+            g_free (gdkdisplay_name);
+
             execv (argv[0], argv);
             g_critical ("Could not run plugin: %s", g_strerror (errno));
             gtk_widget_destroy (GTK_WIDGET (item));
@@ -522,6 +530,7 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
             /* parent: do nothing */;
     }
     
+    g_free (gdkdisplay_name);
     g_strfreev (argv);
 }
 
