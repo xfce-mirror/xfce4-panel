@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-18 22:32+0900\n"
-"PO-Revision-Date: 2006-02-12 13:40+0200\n"
+"PO-Revision-Date: 2006-02-23 17:12+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -177,7 +177,6 @@ msgstr ""
 "listan päälle."
 
 #: ../panel/panel-dialogs.c:628
-#, fuzzy
 msgid "Available Items"
 msgstr "Käytettävissä olevat osat"
 
@@ -211,8 +210,9 @@ msgstr "Alhaalla"
 
 #. floating?
 #: ../panel/panel-dialogs.c:941
+#, fuzzy
 msgid "Panel Type"
-msgstr "Paneelin tyyppi"
+msgstr "Paneeli %d"
 
 #: ../panel/panel-dialogs.c:950
 msgid "Fixed Position"
@@ -262,23 +262,24 @@ msgstr "Koko"
 
 #: ../panel/panel-dialogs.c:1322
 msgid "Small"
-msgstr "Pieni"
+msgstr ""
 
 #: ../panel/panel-dialogs.c:1335
 msgid "Large"
-msgstr "Suuri"
+msgstr ""
 
 #: ../panel/panel-dialogs.c:1350
+#, fuzzy
 msgid "Transparency"
-msgstr "Läpinäkyvyys"
+msgstr "Läpinäkyvyys (%)"
 
 #: ../panel/panel-dialogs.c:1358
 msgid "None"
-msgstr "Ei mitään"
+msgstr ""
 
 #: ../panel/panel-dialogs.c:1372
 msgid "Full"
-msgstr "Täysi"
+msgstr ""
 
 #: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
 #: ../panel/panel-dialogs.c:1479
@@ -581,8 +582,9 @@ msgid "Add workspace"
 msgstr "Lisää työtila"
 
 #: ../plugins/windowlist/windowlist.c:358
+#, fuzzy
 msgid "Delete workspace"
-msgstr "Poista työtila"
+msgstr "Lisää työtila"
 
 #: ../plugins/windowlist/windowlist.c:493
 msgid "Include all Workspaces"
@@ -647,7 +649,3 @@ msgstr "Testiliitännäinen"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Tällä liitännäisellä ei ole käyttötarkoitusta"
-
-#, fuzzy
-#~ msgid "New item"
-#~ msgstr "Uusi osa"
