@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-25 11:01+0900\n"
-"PO-Revision-Date: 2006-02-18 22:26+0900\n"
+"PO-Revision-Date: 2006-02-25 11:26+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -258,12 +258,11 @@ msgstr "外観"
 #. size
 #: ../panel/panel-dialogs.c:1337
 msgid "Size (pixels):"
-msgstr ""
+msgstr "サイズ (ピクセル):"
 
 #: ../panel/panel-dialogs.c:1360
-#, fuzzy
 msgid "Transparency (%):"
-msgstr "透明度"
+msgstr "透明度 (%s):"
 
 #: ../panel/panel-dialogs.c:1384
 msgid "Make active panel opaque"
@@ -560,9 +559,9 @@ msgid "Always group tasks"
 msgstr "常にタスクをまとめる"
 
 #: ../plugins/windowlist/windowlist.c:308
-#, fuzzy, c-format
+#, c-format
 msgid "Workspace %d"
-msgstr "ワークスペースを追加"
+msgstr "ワークスペース %d"
 
 #: ../plugins/windowlist/windowlist.c:386
 #: ../plugins/windowlist/windowlist.c:392
@@ -570,14 +569,14 @@ msgid "Add workspace"
 msgstr "ワークスペースを追加"
 
 #: ../plugins/windowlist/windowlist.c:407
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace %d"
-msgstr "パネル「%d」を削除しますか？"
+msgstr "ワークスペース %d を削除"
 
 #: ../plugins/windowlist/windowlist.c:409
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "ワークスペース「%s」を削除"
 
 #: ../plugins/windowlist/windowlist.c:554
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
@@ -590,7 +589,7 @@ msgstr "全ワークスペースを含める"
 
 #: ../plugins/windowlist/windowlist.c:570
 msgid "Show Window Icons"
-msgstr ""
+msgstr "ウィンドウアイコンを表示"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
