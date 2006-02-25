@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-18 22:32+0900\n"
+"POT-Creation-Date: 2006-02-25 11:01+0900\n"
 "PO-Revision-Date: 2005-09-29 20:31+0900\n"
 "Last-Translator: Norayr Chilingaryan <norik@freenet.am>\n"
 "Language-Team: Armenian <en@li.org>\n"
@@ -29,7 +29,7 @@ msgstr "_Վերացնել"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
 #: ../panel/panel-app.c:734 ../panel/panel-app.c:767
-#: ../panel/panel-dialogs.c:577 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:578 ../panel/panel-dialogs.c:1581
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce Վահանակ"
@@ -45,7 +45,7 @@ msgstr ""
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
-#: ../plugins/windowlist/windowlist.c:465
+#: ../plugins/windowlist/windowlist.c:539
 msgid "Properties"
 msgstr ""
 
@@ -70,24 +70,24 @@ msgstr "_Վերացնել"
 msgid "Add New Item"
 msgstr "Ավելացնել նոր միավոր"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:628
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:645
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
+#: ../panel/panel.c:656 ../panel/panel-dialogs.c:601
 msgid "Add Items"
 msgstr ""
 
-#: ../panel/panel.c:654 ../plugins/actions/actions.c:350
+#: ../panel/panel.c:671 ../plugins/actions/actions.c:350
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:664
+#: ../panel/panel.c:681
 #, fuzzy
 msgid "Restart"
 msgstr "_վերաբեռնել"
 
-#: ../panel/panel.c:678
+#: ../panel/panel.c:695
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "Xfce Վահանակ"
@@ -163,141 +163,127 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:615
+#: ../panel/panel-dialogs.c:616
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:628
+#: ../panel/panel-dialogs.c:629
 msgid "Available Items"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
+#: ../panel/panel-dialogs.c:842 ../panel/panel-dialogs.c:1066
 msgid "Normal Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
+#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1068
 msgid "Full Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:850 ../panel/panel-dialogs.c:1074
 #, fuzzy
 msgid "Span Monitors"
 msgstr "Խմբագրիչ"
 
-#: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:910 ../panel/panel-dialogs.c:1139
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
+#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1141
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
+#: ../panel/panel-dialogs.c:917 ../panel/panel-dialogs.c:1146
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
+#: ../panel/panel-dialogs.c:919 ../panel/panel-dialogs.c:1148
 msgid "Bottom"
 msgstr ""
 
-#. floating?
-#: ../panel/panel-dialogs.c:941
-#, fuzzy
-msgid "Panel Type"
-msgstr "Վահանակի չափսը՝"
-
-#: ../panel/panel-dialogs.c:950
-#, fuzzy
-msgid "Fixed Position"
-msgstr "Դիրք՝"
-
-#: ../panel/panel-dialogs.c:956
-msgid "Freely Moveable"
-msgstr ""
-
 #. position
-#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:947
 #, fuzzy
 msgid "Position"
 msgstr "Դիրք՝"
 
-#: ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:961
+#, fuzzy
+msgid "Fixed Position"
+msgstr "Դիրք՝"
+
+#: ../panel/panel-dialogs.c:967
+msgid "Freely Moveable"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:1082
 #, fuzzy
 msgid "Auto_hide"
 msgstr "ինքնաթակնվել՝"
 
-#: ../panel/panel-dialogs.c:1093
+#: ../panel/panel-dialogs.c:1100
 #, fuzzy
 msgid "Orientation:"
 msgstr "Վահանակի դի կողնորոշումը՝"
 
-#: ../panel/panel-dialogs.c:1105
+#: ../panel/panel-dialogs.c:1112
 msgid "Horizontal"
 msgstr "Հորիզոնական"
 
-#: ../panel/panel-dialogs.c:1107
+#: ../panel/panel-dialogs.c:1114
 msgid "Vertical"
 msgstr "Ուղղաձիգ"
 
-#: ../panel/panel-dialogs.c:1116
+#: ../panel/panel-dialogs.c:1123
 #, fuzzy
 msgid "Handle:"
 msgstr "Դիրք՝"
 
-#: ../panel/panel-dialogs.c:1128
+#: ../panel/panel-dialogs.c:1135
 #, fuzzy
 msgid "At both sides"
 msgstr "ինքնաթակնվել՝"
 
-#: ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1208
 #, fuzzy
 msgid "Select Monitor"
 msgstr "Խմբագրիչ"
 
+#: ../panel/panel-dialogs.c:1326 ../plugins/clock/clock.c:431
+msgid "Appearance"
+msgstr "Արտաքին տեսք"
+
 #. size
-#: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
-msgid "Size"
+#: ../panel/panel-dialogs.c:1337
+msgid "Size (pixels):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1322
-msgid "Small"
-msgstr "Փոքր"
-
-#: ../panel/panel-dialogs.c:1335
-msgid "Large"
-msgstr "Մեծ"
-
-#: ../panel/panel-dialogs.c:1350
-msgid "Transparency"
+#: ../panel/panel-dialogs.c:1360
+msgid "Transparency (%):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1358
-msgid "None"
+#: ../panel/panel-dialogs.c:1384
+msgid "Make active panel opaque"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1372
-msgid "Full"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
-#: ../panel/panel-dialogs.c:1479
+#: ../panel/panel-dialogs.c:1425 ../panel/panel-dialogs.c:1463
+#: ../panel/panel-dialogs.c:1488
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "Xfce Վահանակ"
 
-#: ../panel/panel-dialogs.c:1500
+#: ../panel/panel-dialogs.c:1509
 #, fuzzy
 msgid "Remove Panel"
 msgstr "_Վերացնել"
 
-#: ../panel/panel-dialogs.c:1513
+#: ../panel/panel-dialogs.c:1522
 #, fuzzy
 msgid "New Panel"
 msgstr "Xfce Վահանակ"
 
-#: ../panel/panel-dialogs.c:1597
+#: ../panel/panel-dialogs.c:1606
 #, fuzzy
 msgid "Panel Manager"
 msgstr "Վահանակի չափսը՝"
@@ -339,10 +325,6 @@ msgstr "%A, %d %B %Y"
 #, fuzzy
 msgid "Clock"
 msgstr "Կողպել"
-
-#: ../plugins/clock/clock.c:431
-msgid "Appearance"
-msgstr "Արտաքին տեսք"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:446
@@ -561,6 +543,10 @@ msgstr ""
 msgid "Task List"
 msgstr ""
 
+#: ../plugins/tasklist/tasklist.c:431
+msgid "Size"
+msgstr ""
+
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
 msgstr ""
@@ -590,22 +576,37 @@ msgstr ""
 msgid "Always group tasks"
 msgstr "Միշտ վերին՝"
 
-#: ../plugins/windowlist/windowlist.c:249
-#: ../plugins/windowlist/windowlist.c:480
+#: ../plugins/windowlist/windowlist.c:308
+#, c-format
+msgid "Workspace %d"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:386
+#: ../plugins/windowlist/windowlist.c:392
+msgid "Add workspace"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:407
+#, c-format
+msgid "Remove Workspace %d"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:409
+#, c-format
+msgid "Remove Workspace '%s'"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:554
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:348
-msgid "Add workspace"
-msgstr ""
-
-#: ../plugins/windowlist/windowlist.c:358
-msgid "Delete workspace"
-msgstr ""
-
-#: ../plugins/windowlist/windowlist.c:493
+#: ../plugins/windowlist/windowlist.c:565
 msgid "Include all Workspaces"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:570
+msgid "Show Window Icons"
 msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
@@ -668,7 +669,3 @@ msgstr ""
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr ""
-
-#, fuzzy
-#~ msgid "New item"
-#~ msgstr "Ավելացնել նոր միավոր"

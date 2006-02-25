@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-18 22:32+0900\n"
+"POT-Creation-Date: 2006-02-25 11:01+0900\n"
 "PO-Revision-Date: 2006-02-16 23:04+0800\n"
 "Last-Translator: Huang Huan <unicon221@gmail.com>\n"
 "Language-Team: Chinese/Simplified <i18n-translation@lists.linux.net.cn>\n"
@@ -30,7 +30,7 @@ msgstr "移除 \"%s\"？"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
 #: ../panel/panel-app.c:734 ../panel/panel-app.c:767
-#: ../panel/panel-dialogs.c:577 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:578 ../panel/panel-dialogs.c:1581
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 msgid "Xfce Panel"
 msgstr "Xfce面板"
@@ -46,7 +46,7 @@ msgstr "当前项目将被从面板上移除，配置文件也将丢失。"
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
-#: ../plugins/windowlist/windowlist.c:465
+#: ../plugins/windowlist/windowlist.c:539
 msgid "Properties"
 msgstr "属性"
 
@@ -68,23 +68,23 @@ msgstr "移除"
 msgid "Add New Item"
 msgstr "添加新项目"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:628
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:645
 msgid "Customize Panel"
 msgstr "自定义面板"
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
+#: ../panel/panel.c:656 ../panel/panel-dialogs.c:601
 msgid "Add Items"
 msgstr "添加项目"
 
-#: ../panel/panel.c:654 ../plugins/actions/actions.c:350
+#: ../panel/panel.c:671 ../plugins/actions/actions.c:350
 msgid "Quit"
 msgstr "退出"
 
-#: ../panel/panel.c:664
+#: ../panel/panel.c:681
 msgid "Restart"
 msgstr "重新启动"
 
-#: ../panel/panel.c:678
+#: ../panel/panel.c:695
 msgid "About the Xfce Panel"
 msgstr "关于Xfce面板"
 
@@ -169,131 +169,119 @@ msgstr ""
 " -a, --add       添加新项目\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:615
+#: ../panel/panel-dialogs.c:616
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr "拖动列表上的项目至面板或通过拖动它们回到列表上而移除。"
 
-#: ../panel/panel-dialogs.c:628
+#: ../panel/panel-dialogs.c:629
 msgid "Available Items"
 msgstr "以存在项目"
 
-#: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
+#: ../panel/panel-dialogs.c:842 ../panel/panel-dialogs.c:1066
 msgid "Normal Width"
 msgstr "普通宽度"
 
-#: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
+#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1068
 msgid "Full Width"
 msgstr "全屏宽度"
 
-#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:850 ../panel/panel-dialogs.c:1074
 #, fuzzy
 msgid "Span Monitors"
 msgstr "监视器"
 
-#: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:910 ../panel/panel-dialogs.c:1139
 msgid "Left"
 msgstr "左"
 
-#: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
+#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1141
 msgid "Right"
 msgstr "右"
 
-#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
+#: ../panel/panel-dialogs.c:917 ../panel/panel-dialogs.c:1146
 msgid "Top"
 msgstr "顶部"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
+#: ../panel/panel-dialogs.c:919 ../panel/panel-dialogs.c:1148
 msgid "Bottom"
 msgstr "底部"
 
-#. floating?
-#: ../panel/panel-dialogs.c:941
-msgid "Panel Type"
-msgstr "面板大小："
-
-#: ../panel/panel-dialogs.c:950
-msgid "Fixed Position"
-msgstr "填充位置："
-
-#: ../panel/panel-dialogs.c:956
-msgid "Freely Moveable"
-msgstr "自由移动"
-
 #. position
-#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:947
 msgid "Position"
 msgstr "位置"
 
-#: ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:961
+msgid "Fixed Position"
+msgstr "填充位置："
+
+#: ../panel/panel-dialogs.c:967
+msgid "Freely Moveable"
+msgstr "自由移动"
+
+#: ../panel/panel-dialogs.c:1082
 msgid "Auto_hide"
 msgstr "自动隐藏(_h)："
 
-#: ../panel/panel-dialogs.c:1093
+#: ../panel/panel-dialogs.c:1100
 msgid "Orientation:"
 msgstr "面板方向："
 
-#: ../panel/panel-dialogs.c:1105
+#: ../panel/panel-dialogs.c:1112
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-dialogs.c:1107
+#: ../panel/panel-dialogs.c:1114
 msgid "Vertical"
 msgstr "竖直"
 
-#: ../panel/panel-dialogs.c:1116
+#: ../panel/panel-dialogs.c:1123
 msgid "Handle:"
 msgstr "处理："
 
-#: ../panel/panel-dialogs.c:1128
+#: ../panel/panel-dialogs.c:1135
 msgid "At both sides"
 msgstr "在两边"
 
-#: ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1208
 msgid "Select Monitor"
 msgstr "选择监视器"
 
+#: ../panel/panel-dialogs.c:1326 ../plugins/clock/clock.c:431
+msgid "Appearance"
+msgstr "外观"
+
 #. size
-#: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
-msgid "Size"
-msgstr "大小"
+#: ../panel/panel-dialogs.c:1337
+msgid "Size (pixels):"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1322
-msgid "Small"
-msgstr "小"
-
-#: ../panel/panel-dialogs.c:1335
-msgid "Large"
-msgstr "大"
-
-#: ../panel/panel-dialogs.c:1350
-msgid "Transparency"
+#: ../panel/panel-dialogs.c:1360
+#, fuzzy
+msgid "Transparency (%):"
 msgstr "透明度"
 
-#: ../panel/panel-dialogs.c:1358
-msgid "None"
-msgstr "无"
+#: ../panel/panel-dialogs.c:1384
+msgid "Make active panel opaque"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1372
-msgid "Full"
-msgstr "全部"
-
-#: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
-#: ../panel/panel-dialogs.c:1479
+#: ../panel/panel-dialogs.c:1425 ../panel/panel-dialogs.c:1463
+#: ../panel/panel-dialogs.c:1488
 #, c-format
 msgid "Panel %d"
 msgstr "面板%d"
 
-#: ../panel/panel-dialogs.c:1500
+#: ../panel/panel-dialogs.c:1509
 msgid "Remove Panel"
 msgstr "移除面板"
 
-#: ../panel/panel-dialogs.c:1513
+#: ../panel/panel-dialogs.c:1522
 msgid "New Panel"
 msgstr "新建面板"
 
-#: ../panel/panel-dialogs.c:1597
+#: ../panel/panel-dialogs.c:1606
 msgid "Panel Manager"
 msgstr "面板管理器"
 
@@ -328,10 +316,6 @@ msgstr ""
 #: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "时钟"
-
-#: ../plugins/clock/clock.c:431
-msgid "Appearance"
-msgstr "外观"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:446
@@ -539,6 +523,10 @@ msgstr "系统托盘"
 msgid "Task List"
 msgstr "任务列表"
 
+#: ../plugins/tasklist/tasklist.c:431
+msgid "Size"
+msgstr "大小"
+
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
 msgstr "最小宽度："
@@ -567,23 +555,38 @@ msgstr "自动分组任务"
 msgid "Always group tasks"
 msgstr "总是分组任务"
 
-#: ../plugins/windowlist/windowlist.c:249
-#: ../plugins/windowlist/windowlist.c:480
+#: ../plugins/windowlist/windowlist.c:308
+#, fuzzy, c-format
+msgid "Workspace %d"
+msgstr "添加工作区"
+
+#: ../plugins/windowlist/windowlist.c:386
+#: ../plugins/windowlist/windowlist.c:392
+msgid "Add workspace"
+msgstr "添加工作区"
+
+#: ../plugins/windowlist/windowlist.c:407
+#, fuzzy, c-format
+msgid "Remove Workspace %d"
+msgstr "移除面板\"%d\"？"
+
+#: ../plugins/windowlist/windowlist.c:409
+#, c-format
+msgid "Remove Workspace '%s'"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:554
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "窗口列表"
 
-#: ../plugins/windowlist/windowlist.c:348
-msgid "Add workspace"
-msgstr "添加工作区"
-
-#: ../plugins/windowlist/windowlist.c:358
-msgid "Delete workspace"
-msgstr "删除工作区"
-
-#: ../plugins/windowlist/windowlist.c:493
+#: ../plugins/windowlist/windowlist.c:565
 msgid "Include all Workspaces"
 msgstr "包含所有工作区"
+
+#: ../plugins/windowlist/windowlist.c:570
+msgid "Show Window Icons"
+msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -644,7 +647,3 @@ msgstr "测试插件"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "这个插件没有用途"
-
-#, fuzzy
-#~ msgid "New item"
-#~ msgstr "添加新条目"

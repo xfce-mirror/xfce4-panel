@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-18 22:32+0900\n"
+"POT-Creation-Date: 2006-02-25 11:01+0900\n"
 "PO-Revision-Date: 2006-02-16 22:38+0100\n"
 "Last-Translator: Pau Rul.lan Ferragut <paurullan@bulma.net>\n"
 "Language-Team: catalan\n"
@@ -29,7 +29,7 @@ msgstr ""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
 #: ../panel/panel-app.c:734 ../panel/panel-app.c:767
-#: ../panel/panel-dialogs.c:577 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:578 ../panel/panel-dialogs.c:1581
 #: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
 #, fuzzy
 msgid "Xfce Panel"
@@ -47,7 +47,7 @@ msgstr "element de   quadre i."
 #: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
-#: ../plugins/windowlist/windowlist.c:465
+#: ../plugins/windowlist/windowlist.c:539
 #, fuzzy
 msgid "Properties"
 msgstr "Propietats"
@@ -74,26 +74,26 @@ msgstr "Suprimeix"
 msgid "Add New Item"
 msgstr "Nou Ítem"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:628
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:645
 #, fuzzy
 msgid "Customize Panel"
 msgstr "Personalitza Plafó"
 
-#: ../panel/panel.c:639 ../panel/panel-dialogs.c:600
+#: ../panel/panel.c:656 ../panel/panel-dialogs.c:601
 msgid "Add Items"
 msgstr ""
 
-#: ../panel/panel.c:654 ../plugins/actions/actions.c:350
+#: ../panel/panel.c:671 ../plugins/actions/actions.c:350
 #, fuzzy
 msgid "Quit"
 msgstr "Surt"
 
-#: ../panel/panel.c:664
+#: ../panel/panel.c:681
 #, fuzzy
 msgid "Restart"
 msgstr "Reinicia"
 
-#: ../panel/panel.c:678
+#: ../panel/panel.c:695
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "Quant a   Plafó"
@@ -162,7 +162,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:615
+#: ../panel/panel-dialogs.c:616
 #, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
@@ -171,150 +171,132 @@ msgstr ""
 "Arrossega elements de   llista a  a quadre o elimina per endarrere a    "
 "llista."
 
-#: ../panel/panel-dialogs.c:628
+#: ../panel/panel-dialogs.c:629
 #, fuzzy
 msgid "Available Items"
 msgstr "Elements"
 
-#: ../panel/panel-dialogs.c:836 ../panel/panel-dialogs.c:1059
+#: ../panel/panel-dialogs.c:842 ../panel/panel-dialogs.c:1066
 #, fuzzy
 msgid "Normal Width"
 msgstr "Complet Amplada"
 
-#: ../panel/panel-dialogs.c:838 ../panel/panel-dialogs.c:1061
+#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1068
 #, fuzzy
 msgid "Full Width"
 msgstr "Complet Amplada"
 
-#: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:850 ../panel/panel-dialogs.c:1074
 #, fuzzy
 msgid "Span Monitors"
 msgstr "Monitor"
 
-#: ../panel/panel-dialogs.c:904 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:910 ../panel/panel-dialogs.c:1139
 #, fuzzy
 msgid "Left"
 msgstr "Esquerra"
 
-#: ../panel/panel-dialogs.c:906 ../panel/panel-dialogs.c:1134
+#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1141
 #, fuzzy
 msgid "Right"
 msgstr "Dreta"
 
-#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1139
+#: ../panel/panel-dialogs.c:917 ../panel/panel-dialogs.c:1146
 #, fuzzy
 msgid "Top"
 msgstr "Superior"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1141
+#: ../panel/panel-dialogs.c:919 ../panel/panel-dialogs.c:1148
 #, fuzzy
 msgid "Bottom"
 msgstr "Inferior"
 
-#. floating?
-#: ../panel/panel-dialogs.c:941
-#, fuzzy
-msgid "Panel Type"
-msgstr "Plafó Tipus"
-
-#: ../panel/panel-dialogs.c:950
-#, fuzzy
-msgid "Fixed Position"
-msgstr "Fix Posició"
-
-#: ../panel/panel-dialogs.c:956
-msgid "Freely Moveable"
-msgstr ""
-
 #. position
-#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:947
 #, fuzzy
 msgid "Position"
 msgstr "Posició"
 
-#: ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:961
+#, fuzzy
+msgid "Fixed Position"
+msgstr "Fix Posició"
+
+#: ../panel/panel-dialogs.c:967
+msgid "Freely Moveable"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:1082
 #, fuzzy
 msgid "Auto_hide"
 msgstr "Auto"
 
-#: ../panel/panel-dialogs.c:1093
+#: ../panel/panel-dialogs.c:1100
 #, fuzzy
 msgid "Orientation:"
 msgstr "Orientació:"
 
-#: ../panel/panel-dialogs.c:1105
+#: ../panel/panel-dialogs.c:1112
 #, fuzzy
 msgid "Horizontal"
 msgstr "Horitzontal"
 
-#: ../panel/panel-dialogs.c:1107
+#: ../panel/panel-dialogs.c:1114
 #, fuzzy
 msgid "Vertical"
 msgstr "Vertical "
 
-#: ../panel/panel-dialogs.c:1116
+#: ../panel/panel-dialogs.c:1123
 #, fuzzy
 msgid "Handle:"
 msgstr "Gestor Posició:"
 
-#: ../panel/panel-dialogs.c:1128
+#: ../panel/panel-dialogs.c:1135
 #, fuzzy
 msgid "At both sides"
 msgstr "Arrova"
 
-#: ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1208
 #, fuzzy
 msgid "Select Monitor"
 msgstr "Monitor"
 
+#: ../panel/panel-dialogs.c:1326 ../plugins/clock/clock.c:431
+#, fuzzy
+msgid "Appearance"
+msgstr "Aparença"
+
 #. size
-#: ../panel/panel-dialogs.c:1314 ../plugins/tasklist/tasklist.c:431
-#, fuzzy
-msgid "Size"
-msgstr "Mida"
+#: ../panel/panel-dialogs.c:1337
+msgid "Size (pixels):"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1322
+#: ../panel/panel-dialogs.c:1360
 #, fuzzy
-msgid "Small"
-msgstr "Petit"
-
-#: ../panel/panel-dialogs.c:1335
-#, fuzzy
-msgid "Large"
-msgstr "Gran"
-
-#: ../panel/panel-dialogs.c:1350
-#, fuzzy
-msgid "Transparency"
+msgid "Transparency (%):"
 msgstr "Transparència"
 
-#: ../panel/panel-dialogs.c:1358
-#, fuzzy
-msgid "None"
-msgstr "Cap"
+#: ../panel/panel-dialogs.c:1384
+msgid "Make active panel opaque"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1372
-#, fuzzy
-msgid "Full"
-msgstr "Complet"
-
-#: ../panel/panel-dialogs.c:1416 ../panel/panel-dialogs.c:1454
-#: ../panel/panel-dialogs.c:1479
+#: ../panel/panel-dialogs.c:1425 ../panel/panel-dialogs.c:1463
+#: ../panel/panel-dialogs.c:1488
 #, c-format
 msgid "Panel %d"
 msgstr "Quadre %d"
 
-#: ../panel/panel-dialogs.c:1500
+#: ../panel/panel-dialogs.c:1509
 #, fuzzy
 msgid "Remove Panel"
 msgstr "Suprimeix Plafó"
 
-#: ../panel/panel-dialogs.c:1513
+#: ../panel/panel-dialogs.c:1522
 #, fuzzy
 msgid "New Panel"
 msgstr "Nou Plafó"
 
-#: ../panel/panel-dialogs.c:1597
+#: ../panel/panel-dialogs.c:1606
 #, fuzzy
 msgid "Panel Manager"
 msgstr "Plafó Tipus"
@@ -356,11 +338,6 @@ msgstr "%A %d %B %Y"
 #, fuzzy
 msgid "Clock"
 msgstr "Rellotge"
-
-#: ../plugins/clock/clock.c:431
-#, fuzzy
-msgid "Appearance"
-msgstr "Aparença"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:446
@@ -613,6 +590,11 @@ msgstr ""
 msgid "Task List"
 msgstr "Tasca Llista"
 
+#: ../plugins/tasklist/tasklist.c:431
+#, fuzzy
+msgid "Size"
+msgstr "Mida"
+
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
 msgstr ""
@@ -646,22 +628,37 @@ msgstr "Automàticament grup"
 msgid "Always group tasks"
 msgstr "Sempre grup"
 
-#: ../plugins/windowlist/windowlist.c:249
-#: ../plugins/windowlist/windowlist.c:480
+#: ../plugins/windowlist/windowlist.c:308
+#, c-format
+msgid "Workspace %d"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:386
+#: ../plugins/windowlist/windowlist.c:392
+msgid "Add workspace"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:407
+#, c-format
+msgid "Remove Workspace %d"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:409
+#, c-format
+msgid "Remove Workspace '%s'"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:554
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:348
-msgid "Add workspace"
-msgstr ""
-
-#: ../plugins/windowlist/windowlist.c:358
-msgid "Delete workspace"
-msgstr ""
-
-#: ../plugins/windowlist/windowlist.c:493
+#: ../plugins/windowlist/windowlist.c:565
 msgid "Include all Workspaces"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:570
+msgid "Show Window Icons"
 msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
@@ -734,11 +731,3 @@ msgstr "Comprova Connector"
 #, fuzzy
 msgid "This plugin has no purpose"
 msgstr "té no"
-
-#, fuzzy
-#~ msgid "New item"
-#~ msgstr "Nou element"
-
-#, fuzzy
-#~ msgid "Status Area"
-#~ msgstr "Estat Àrea"
