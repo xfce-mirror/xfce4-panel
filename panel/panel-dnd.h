@@ -51,4 +51,3 @@ void panel_dnd_set_widget_data (GtkSelectionData *data, GtkWidget *plugin);
 void panel_dnd_begin_drag (GtkWidget *widget);
 
 #endif /* _PANEL_DND_H */
-

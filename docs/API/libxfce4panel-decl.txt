@@ -416,6 +416,11 @@ XfcePanelPlugin *plugin
 <RETURNS>char *</RETURNS>
 XfcePanelPlugin *plugin,gboolean create
 </FUNCTION>
+<FUNCTION>
+<NAME>xfce_panel_plugin_focus_widget</NAME>
+<RETURNS>void </RETURNS>
+XfcePanelPlugin *plugin,GtkWidget *widget
+</FUNCTION>
 <MACRO>
 <NAME>XFCE_TYPE_ARROW_BUTTON</NAME>
 #define XFCE_TYPE_ARROW_BUTTON            (xfce_arrow_button_get_type ())
@@ -464,11 +469,6 @@ struct _XfceArrowButtonClass
     /* signals */
     void (*arrow_type_changed)     (GtkWidget * widget,
                                     GtkArrowType type);
-
-    /* Padding for future expansion */
-    void (*_xfce_reserved1)        (void);
-    void (*_xfce_reserved2)        (void);
-    void (*_xfce_reserved3)        (void);
 };
 </STRUCT>
 <FUNCTION>
@@ -715,3 +715,13 @@ void
 <NAME>XFCE_TYPE_SCREEN_POSITION</NAME>
 #define XFCE_TYPE_SCREEN_POSITION (xfce_screen_position_get_type())
 </MACRO>
+<FUNCTION>
+<NAME>xfce_create_panel_button</NAME>
+<RETURNS>GtkWidget *</RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_create_panel_toggle_button</NAME>
+<RETURNS>GtkWidget *</RETURNS>
+void
+</FUNCTION>

@@ -148,12 +148,12 @@ panel_class_init (PanelClass * klass)
     object_class = (GObjectClass *) klass;
     widget_class = (GtkWidgetClass *) klass;
 
-    object_class->finalize = panel_finalize;
-    object_class->get_property = panel_get_property;
-    object_class->set_property = panel_set_property;
+    object_class->finalize           = panel_finalize;
+    object_class->get_property       = panel_get_property;
+    object_class->set_property       = panel_set_property;
 
     widget_class->button_press_event = panel_button_pressed;
-    widget_class->size_request = panel_size_request;
+    widget_class->size_request       = panel_size_request;
     
     /* properties */
 
@@ -235,7 +235,9 @@ panel_init (Panel * panel)
 {
     PanelPrivate *priv;
 
-    priv = panel->priv    = PANEL_GET_PRIVATE (panel);
+    priv = panel->priv    = G_TYPE_INSTANCE_GET_PRIVATE (panel, 
+                                                         PANEL_TYPE_PANEL, 
+                                                         PanelPrivate);
 
     priv->size            = DEFAULT_SIZE;
     priv->monitor         = DEFAULT_MONITOR;
@@ -377,7 +379,7 @@ panel_size_request  (GtkWidget * widget, GtkRequisition * requisition)
 {
     GTK_WIDGET_CLASS (panel_parent_class)->size_request (widget, requisition);
 
-    requisition->width = MAX (MIN_SIZE, requisition->width);
+    requisition->width  = MAX (MIN_SIZE, requisition->width);
     requisition->height = MAX (MIN_SIZE, requisition->height);
 }
 
@@ -1003,4 +1005,3 @@ panel_menu_opened (Panel *panel)
 
     panel_block_autohide (panel);
 }
-

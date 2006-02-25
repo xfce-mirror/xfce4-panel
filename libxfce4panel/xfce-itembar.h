@@ -35,9 +35,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfceItembar 	 XfceItembar;
-
-typedef struct _XfceItembarClass XfceItembarClass;
+typedef struct _XfceItembar 	  XfceItembar;
+typedef struct _XfceItembarClass  XfceItembarClass;
 
 struct _XfceItembar
 {

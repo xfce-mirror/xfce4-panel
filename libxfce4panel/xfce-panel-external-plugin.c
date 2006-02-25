@@ -63,11 +63,10 @@ struct _XfceExternalPanelPluginPrivate
     int size;
     XfceScreenPosition screen_position;
 
-    gboolean expand;
-
     XfcePanelPluginFunc construct;
-
     gulong socket_id;
+    
+    guint expand:1;
 };
 
 /* prototypes */
@@ -214,18 +213,14 @@ xfce_external_panel_plugin_init (XfceExternalPanelPlugin * plugin)
 
     priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
 
-    priv->name = NULL;
-    priv->id = NULL;
-    priv->display_name = NULL;
-
-    priv->size = 0;
+    priv->name            = NULL;
+    priv->id              = NULL;
+    priv->display_name    = NULL;
+    priv->size            = 0;
     priv->screen_position = XFCE_SCREEN_POSITION_NONE;
-
-    priv->expand = FALSE;
-
-    priv->construct = NULL;
-
-    priv->socket_id = 0;
+    priv->construct       = NULL;
+    priv->socket_id       = 0;
+    priv->expand          = FALSE;
 }
 
 /* GObject */

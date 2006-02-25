@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-25 11:01+0900\n"
+"POT-Creation-Date: 2006-02-25 22:53+0100\n"
 "PO-Revision-Date: 2005-09-29 20:15+0900\n"
 "Last-Translator: Saleh Alhathal <hathalsal@hotmail.com>\n"
 "Language-Team: Arabic <lumina@silverpen.de>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. dialogs are annoying, just spit out a warning
-#: ../libxfce4panel/xfce-panel-external-item.c:177
+#: ../libxfce4panel/xfce-panel-external-item.c:175
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr ""
@@ -26,10 +26,10 @@ msgstr ""
 msgid "Remove \"%s\"?"
 msgstr "/_حذف"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:702
-#: ../panel/panel-app.c:734 ../panel/panel-app.c:767
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:704
+#: ../panel/panel-app.c:736 ../panel/panel-app.c:769
 #: ../panel/panel-dialogs.c:578 ../panel/panel-dialogs.c:1581
-#: ../plugins/launcher/launcher.c:320 ../plugins/launcher/launcher.c:369
+#: ../plugins/launcher/launcher.c:363 ../plugins/launcher/launcher.c:412
 msgid "Xfce Panel"
 msgstr "شريط Xfce"
 
@@ -40,11 +40,11 @@ msgstr ""
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:748
-#: ../plugins/actions/actions.c:309 ../plugins/clock/clock.c:408
-#: ../plugins/iconbox/iconbox.c:792 ../plugins/launcher/launcher-dialog.c:1285
+#: ../plugins/actions/actions.c:358 ../plugins/clock/clock.c:408
+#: ../plugins/iconbox/iconbox.c:791 ../plugins/launcher/launcher-dialog.c:1283
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
-#: ../plugins/systray/systray.c:360 ../plugins/tasklist/tasklist.c:398
-#: ../plugins/windowlist/windowlist.c:539
+#: ../plugins/systray/systray.c:366 ../plugins/tasklist/tasklist.c:397
+#: ../plugins/windowlist/windowlist.c:540
 msgid "Properties"
 msgstr ""
 
@@ -69,24 +69,24 @@ msgstr "/_حذف"
 msgid "Add New Item"
 msgstr "أضف مادة جديدة"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:645
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:647
 msgid "Customize Panel"
 msgstr ""
 
-#: ../panel/panel.c:656 ../panel/panel-dialogs.c:601
+#: ../panel/panel.c:658 ../panel/panel-dialogs.c:601
 msgid "Add Items"
 msgstr ""
 
-#: ../panel/panel.c:671 ../plugins/actions/actions.c:350
+#: ../panel/panel.c:673 ../plugins/actions/actions.c:399
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:681
+#: ../panel/panel.c:683
 #, fuzzy
 msgid "Restart"
 msgstr "/_إعادة التشغيل"
 
-#: ../panel/panel.c:695
+#: ../panel/panel.c:697
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "شريط Xfce"
@@ -96,25 +96,25 @@ msgstr "شريط Xfce"
 msgid "Could not open \"%s\" module"
 msgstr ""
 
-#: ../panel/panel-app.c:215 ../panel/panel-app.c:704
+#: ../panel/panel-app.c:215 ../panel/panel-app.c:706
 #, fuzzy
 msgid "Exit Xfce Panel?"
 msgstr "شريط Xfce"
 
-#: ../panel/panel-app.c:705
+#: ../panel/panel-app.c:707
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 
-#: ../panel/panel-app.c:732
+#: ../panel/panel-app.c:734
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
-#: ../panel/panel-app.c:736
+#: ../panel/panel-app.c:738
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:775
+#: ../panel/panel-app.c:777
 msgid "Developer"
 msgstr ""
 
@@ -286,22 +286,22 @@ msgstr "شريط Xfce"
 msgid "Panel Manager"
 msgstr "حجم شريط المهام :"
 
-#: ../plugins/actions/actions.c:325
+#: ../plugins/actions/actions.c:374
 #, fuzzy
 msgid "Panel Actions"
 msgstr "إعدادات شريط Xfce"
 
-#: ../plugins/actions/actions.c:342
+#: ../plugins/actions/actions.c:391
 #, fuzzy
 msgid "Select action type:"
 msgstr "إختر أمر"
 
-#: ../plugins/actions/actions.c:351
+#: ../plugins/actions/actions.c:400
 #, fuzzy
 msgid "Lock screen"
 msgstr "/_إغلاق الشاشة"
 
-#: ../plugins/actions/actions.c:352
+#: ../plugins/actions/actions.c:401
 #, fuzzy
 msgid "Quit + Lock screen"
 msgstr "/_إغلاق الشاشة"
@@ -337,7 +337,7 @@ msgstr "رقمية"
 msgid "LED"
 msgstr ""
 
-#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:389
+#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:395
 msgid "Show _frame"
 msgstr ""
 
@@ -358,28 +358,28 @@ msgstr "صباح/مساء"
 msgid "Display seconds"
 msgstr ""
 
-#: ../plugins/iconbox/iconbox.c:808
+#: ../plugins/iconbox/iconbox.c:807
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 #, fuzzy
 msgid "Icon Box"
 msgstr "أيقونة:"
 
-#: ../plugins/iconbox/iconbox.c:822
+#: ../plugins/iconbox/iconbox.c:821
 msgid "Only show minimized applications"
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:318 ../plugins/launcher/launcher.c:367
+#: ../plugins/launcher/launcher.c:361 ../plugins/launcher/launcher.c:410
 #, c-format
 msgid "Could not run \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:578 ../plugins/launcher/launcher.c:1157
-#: ../plugins/launcher/launcher-dialog.c:1121
+#: ../plugins/launcher/launcher.c:621 ../plugins/launcher/launcher.c:1240
+#: ../plugins/launcher/launcher-dialog.c:1119
 #, fuzzy
 msgid "New Item"
 msgstr "أضف مادة جديدة"
 
-#: ../plugins/launcher/launcher.c:631 ../plugins/launcher/launcher.c:1158
+#: ../plugins/launcher/launcher.c:679 ../plugins/launcher/launcher.c:1241
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "ﻻ يحوي على خيرات أعداد"
@@ -436,55 +436,55 @@ msgstr "صوت"
 msgid "Terminal"
 msgstr "سطر اﻷوامر"
 
-#: ../plugins/launcher/launcher-dialog.c:381
+#: ../plugins/launcher/launcher-dialog.c:377
 #, fuzzy
 msgid "Select image file"
 msgstr "إختر ملف"
 
-#: ../plugins/launcher/launcher-dialog.c:426
+#: ../plugins/launcher/launcher-dialog.c:423
 msgid "Select command"
 msgstr "إختر أمر"
 
-#: ../plugins/launcher/launcher-dialog.c:449
+#: ../plugins/launcher/launcher-dialog.c:446
 #, fuzzy
 msgid "Name"
 msgstr "ألعاب"
 
-#: ../plugins/launcher/launcher-dialog.c:467
+#: ../plugins/launcher/launcher-dialog.c:464
 #, fuzzy
 msgid "Description"
 msgstr "موقع"
 
-#: ../plugins/launcher/launcher-dialog.c:522
+#: ../plugins/launcher/launcher-dialog.c:519
 msgid "Other..."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:608
+#: ../plugins/launcher/launcher-dialog.c:605
 #, fuzzy
 msgid "Command"
 msgstr "أمر :"
 
-#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:641
 msgid "Run in _terminal"
 msgstr "تنفيذ في _سطر اﻷوامر"
 
-#: ../plugins/launcher/launcher-dialog.c:662
+#: ../plugins/launcher/launcher-dialog.c:659
 #, fuzzy
 msgid "Use _startup notification"
 msgstr "أستخدم _تنبية بدأ التشغيل"
 
-#: ../plugins/launcher/launcher-dialog.c:1243
+#: ../plugins/launcher/launcher-dialog.c:1241
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1298
+#: ../plugins/launcher/launcher-dialog.c:1296
 #, fuzzy
 msgid "Program Launcher"
 msgstr "برنامج"
 
-#: ../plugins/launcher/launcher-dialog.c:1633
+#: ../plugins/launcher/launcher-dialog.c:1632
 msgid "Select file"
 msgstr "إختر ملف"
 
@@ -502,7 +502,8 @@ msgstr ""
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
-msgid "Separator"
+#, fuzzy
+msgid "Separator or Spacing"
 msgstr "فاصل"
 
 #: ../plugins/separator/separator.c:284
@@ -514,11 +515,11 @@ msgstr "فاصل"
 msgid "_Expand"
 msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:63
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:64
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr ""
 
@@ -531,80 +532,80 @@ msgstr "هناك صينية نظام تعمل مسبقا على الشاشة"
 msgid "Unable to register system tray: %s"
 msgstr "لم أتمكن من تسجيل صينية النظام: %s"
 
-#: ../plugins/systray/systray.c:376
+#: ../plugins/systray/systray.c:382
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:414 ../plugins/tasklist/tasklist.c:467
+#: ../plugins/tasklist/tasklist.c:413 ../plugins/tasklist/tasklist.c:466
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 #, fuzzy
 msgid "Task List"
 msgstr "مهام"
 
-#: ../plugins/tasklist/tasklist.c:431
+#: ../plugins/tasklist/tasklist.c:430
 msgid "Size"
 msgstr "حجم"
 
-#: ../plugins/tasklist/tasklist.c:439
+#: ../plugins/tasklist/tasklist.c:438
 msgid "Minimum Width:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:454
+#: ../plugins/tasklist/tasklist.c:453
 msgid "Use all available space"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:471
+#: ../plugins/tasklist/tasklist.c:470
 #, fuzzy
 msgid "Show tasks from _all workspaces"
 msgstr "أظهر"
 
-#: ../plugins/tasklist/tasklist.c:481
+#: ../plugins/tasklist/tasklist.c:480
 msgid "Show application _names"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:495
+#: ../plugins/tasklist/tasklist.c:494
 msgid "Never group tasks"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:498
+#: ../plugins/tasklist/tasklist.c:497
 msgid "Automatically group tasks"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:501
+#: ../plugins/tasklist/tasklist.c:500
 msgid "Always group tasks"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:308
+#: ../plugins/windowlist/windowlist.c:309
 #, c-format
 msgid "Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:386
-#: ../plugins/windowlist/windowlist.c:392
+#: ../plugins/windowlist/windowlist.c:387
+#: ../plugins/windowlist/windowlist.c:393
 msgid "Add workspace"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:407
+#: ../plugins/windowlist/windowlist.c:408
 #, c-format
 msgid "Remove Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:409
+#: ../plugins/windowlist/windowlist.c:410
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:554
+#: ../plugins/windowlist/windowlist.c:555
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:565
+#: ../plugins/windowlist/windowlist.c:566
 msgid "Include all Workspaces"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:570
+#: ../plugins/windowlist/windowlist.c:571
 msgid "Show Window Icons"
 msgstr ""
 
@@ -669,3 +670,7 @@ msgstr "برنامج"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Separator or Separator"
+#~ msgstr "فاصل"

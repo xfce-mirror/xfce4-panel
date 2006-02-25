@@ -36,7 +36,6 @@
 G_BEGIN_DECLS
 
 typedef struct _XfceArrowButton 	XfceArrowButton;
-
 typedef struct _XfceArrowButtonClass 	XfceArrowButtonClass;
 
 struct _XfceArrowButton
@@ -53,11 +52,6 @@ struct _XfceArrowButtonClass
     /* signals */
     void (*arrow_type_changed)     (GtkWidget * widget,
                                     GtkArrowType type);
-
-    /* Padding for future expansion */
-    void (*_xfce_reserved1)        (void);
-    void (*_xfce_reserved2)        (void);
-    void (*_xfce_reserved3)        (void);
 };
 
 

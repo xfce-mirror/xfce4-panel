@@ -38,14 +38,13 @@ typedef struct
     GtkWidget *handle2;
     GtkWidget *list;
 
+    int width;
     int screen_changed_id;
     
     NetkTasklistGroupingType grouping;
     gboolean all_workspaces;
-    gboolean show_label;
-
-    gboolean expand;
-    int width;
+    guint show_label:1;
+    guint expand:1;
 }
 Tasklist;
 
@@ -74,7 +73,7 @@ tasklist_orientation_changed (XfcePanelPlugin *plugin,
 {
     GtkWidget *box;
 
-    box = orientation == GTK_ORIENTATION_HORIZONTAL ?
+    box = (orientation == GTK_ORIENTATION_HORIZONTAL) ?
             gtk_hbox_new (FALSE, 0) : gtk_vbox_new (FALSE, 0);
     gtk_container_set_reallocate_redraws (GTK_CONTAINER (box), TRUE);
     gtk_widget_show (box);
@@ -133,11 +132,11 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
     XfceRc *rc;
     int grouping, all_workspaces, labels, expand, width;
     
-    grouping = NETK_TASKLIST_AUTO_GROUP;
+    grouping       = NETK_TASKLIST_AUTO_GROUP;
     all_workspaces = 0;
-    labels = 1;
-    expand = 1;
-    width = 300;
+    labels         = 1;
+    expand         = 1;
+    width          = 300;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
@@ -164,11 +163,11 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
         }
     }
 
-    tasklist->grouping = grouping;
+    tasklist->grouping       = grouping;
     tasklist->all_workspaces = (all_workspaces == 1);
-    tasklist->show_label = (labels != 0);
-    tasklist->expand = (expand != 0);
-    tasklist->width = MAX (100, width);
+    tasklist->show_label     = (labels != 0);
+    tasklist->expand         = (expand != 0);
+    tasklist->width          = MAX (100, width);
 }
 
 static void

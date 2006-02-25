@@ -121,19 +121,18 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
     GtkWidgetClass *widget_class;
     GtkContainerClass *container_class;
 
-    parent_class = g_type_class_peek_parent (klass);
-
-    gobject_class = (GObjectClass *) klass;
-    widget_class = (GtkWidgetClass *) klass;
+    parent_class    = g_type_class_peek_parent (klass);
+    gobject_class   = (GObjectClass *) klass;
+    widget_class    = (GtkWidgetClass *) klass;
     container_class = (GtkContainerClass *) klass;
 
     gobject_class->get_property = xfce_arrow_button_get_property;
     gobject_class->set_property = xfce_arrow_button_set_property;
 
-    widget_class->expose_event = xfce_arrow_button_expose;    
-    widget_class->size_request = xfce_arrow_button_size_request;    
+    widget_class->expose_event  = xfce_arrow_button_expose;    
+    widget_class->size_request  = xfce_arrow_button_size_request;    
     
-    container_class->add = xfce_arrow_button_add;
+    container_class->add        = xfce_arrow_button_add;
     container_class->child_type = xfce_arrow_button_child_type;
 
     /* signals */
@@ -322,5 +321,3 @@ xfce_arrow_button_get_arrow_type (XfceArrowButton * button)
 
     return button->arrow_type;
 }
-
-

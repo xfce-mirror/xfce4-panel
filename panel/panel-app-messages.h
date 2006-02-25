@@ -45,4 +45,3 @@ void panel_app_listen (GtkWidget *ipc_window);
 G_END_DECLS
 
 #endif /* _PANEL_APP_MESSAGES_H */
-

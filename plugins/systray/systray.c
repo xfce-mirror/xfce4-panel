@@ -40,7 +40,7 @@ typedef struct
     GtkWidget *align;
     GtkWidget *iconbox;
 
-    gboolean show_frame;
+    guint show_frame:1;
 }
 Systray;
 
@@ -82,10 +82,14 @@ icon_docked (XfceSystemTray * tray, GtkWidget * icon, Systray * systray)
 {
     if (systray->tray_registered)
     {
+        int size = MIN (systray->iconbox->allocation.width,
+                        systray->iconbox->allocation.height);
+
         gtk_widget_hide (systray->iconbox);
         gtk_box_pack_start (GTK_BOX (systray->iconbox), icon, 
                             FALSE, FALSE, 0);
         gtk_widget_show (icon);
+        gtk_widget_set_size_request (icon, size, size);
         gtk_widget_show (systray->iconbox);
         gtk_widget_queue_draw (systray->iconbox);
     }
@@ -142,8 +146,8 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (systray_construct);
 
 static void
 systray_orientation_changed (XfcePanelPlugin *plugin, 
-                              GtkOrientation orientation, 
-                              Systray *systray)
+                             GtkOrientation orientation, 
+                             Systray *systray)
 {
     systray_stop (systray);
     
@@ -174,21 +178,23 @@ systray_orientation_changed (XfcePanelPlugin *plugin,
 static gboolean 
 systray_set_size (XfcePanelPlugin *plugin, int size, Systray *systray)
 {
-    if (size > 26)
-        gtk_container_set_border_width (GTK_CONTAINER (systray->frame), 2);
-    else
-        gtk_container_set_border_width (GTK_CONTAINER (systray->frame), 0);
-    
-    if (xfce_panel_plugin_get_orientation (plugin) ==
-            GTK_ORIENTATION_HORIZONTAL)
-    {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, size);
-    }
-    else
-    {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
-    }
+    GList *list, *l;
+    int border = size > 26 ? 2 : 0;
 
+    gtk_container_set_border_width (GTK_CONTAINER (systray->frame), border);
+    
+    size = size - border - MAX (systray->frame->style->xthickness,
+                                systray->frame->style->ythickness);
+    
+    list = gtk_container_get_children (GTK_CONTAINER (systray->iconbox));
+    for (l = list; l != NULL; l = l->next)
+    {
+        gtk_widget_set_size_request (l->data, size, size);
+    }
+    g_list_free (list);
+
+    gtk_widget_queue_draw (systray->iconbox);
+    
     return TRUE;
 }
 

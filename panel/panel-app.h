@@ -38,7 +38,7 @@ extern GTimer *timer;
         }                                                   \
     }
 
-#define TIMER_ELAPSED(text)                                 \
+#define TIMER_ELAPSED(fmt,args...)                          \
     {                                                       \
         int hrs, mins, secs, ms;                            \
         gulong elapsed;                                     \
@@ -67,16 +67,16 @@ extern GTimer *timer;
         {                                                   \
             g_print ("%.2d ms\t", ms);                      \
         }                                                   \
-        g_print ("%s\t[%s:%d]\n",                           \
-                 text, __FILE__, __LINE__);                 \
+        g_print (fmt, ##args);                              \
+        g_print ("\t\t[%s:%d]\n", __FILE__, __LINE__);      \
     }
 
 #else
 
-#define TIMER_INIT()        do {} while(0)
-#define TIMER_ELAPSED(text) do {} while(0)
+#define TIMER_INIT()               do {} while(0)
+#define TIMER_ELAPSED(fmt,args...) do {} while(0)
 
-#endif /* DEBUG */
+#endif /* TIMER */
 
 G_BEGIN_DECLS
 

@@ -33,5 +33,3 @@ gboolean panel_config_save_panels (GPtrArray *panels);
 G_END_DECLS
 
 #endif /* _PANEL_CONFIG_H */
-
-

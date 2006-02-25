@@ -30,6 +30,7 @@
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfcegui4/netk-window-action-menu.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 #define N_ICONBOX_CONNECTIONS  4
 #define N_ICON_CONNECTIONS     4
@@ -50,7 +51,7 @@ typedef struct
     GtkTooltips *icon_tooltips;
 
     int icon_size;
-    gboolean only_hidden;
+    guint only_hidden:1;
 }
 Iconbox;
 
@@ -291,9 +292,7 @@ icon_new (NetkWindow *window, Iconbox *ib)
         
     icon->window = window;    
 
-    icon->button = gtk_toggle_button_new ();
-    gtk_button_set_focus_on_click (GTK_BUTTON (icon->button), FALSE);
-    gtk_button_set_relief (GTK_BUTTON (icon->button), GTK_RELIEF_NONE);
+    icon->button = xfce_create_panel_toggle_button ();
     
     g_signal_connect (icon->button, "button-press-event",
                       G_CALLBACK (icon_button_pressed), icon);

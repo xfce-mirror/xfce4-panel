@@ -31,21 +31,22 @@
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfcegui4/netk-window-action-menu.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 typedef struct
 {
     XfcePanelPlugin *plugin;
 
+    GtkTooltips *tooltips;
+    
     GtkWidget *button;
     GtkWidget *img;
+    
     NetkScreen *screen;
-    
-    gboolean show_all_workspaces;
-    gboolean show_windowlist_icons;
-    
     int screen_callback_id; 
-
-    GtkTooltips *tooltips;
+    
+    guint show_all_workspaces:1;
+    guint show_windowlist_icons:1;
 }
 Windowlist;
 
@@ -597,8 +598,7 @@ windowlist_new (XfcePanelPlugin * plugin)
     wl->screen = netk_screen_get_default ();
     netk_screen_force_update (wl->screen);
 
-    wl->button = gtk_toggle_button_new ();
-    gtk_button_set_relief (GTK_BUTTON (wl->button), GTK_RELIEF_NONE);
+    wl->button = xfce_create_panel_toggle_button ();
     gtk_widget_show (wl->button);
 
     pb = gtk_widget_render_icon (GTK_WIDGET (plugin), GTK_STOCK_MISSING_IMAGE,

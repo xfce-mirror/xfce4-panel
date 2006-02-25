@@ -35,8 +35,8 @@
 
 G_BEGIN_DECLS 
 
-typedef struct _XfceExternalPanelPlugin XfceExternalPanelPlugin;
-typedef struct _XfceExternalPanelPluginClass XfceExternalPanelPluginClass;
+typedef struct _XfceExternalPanelPlugin         XfceExternalPanelPlugin;
+typedef struct _XfceExternalPanelPluginClass    XfceExternalPanelPluginClass;
 
 struct _XfceExternalPanelPlugin
 {
@@ -56,4 +56,5 @@ GtkWidget *xfce_external_panel_plugin_new (int argc,
                                            XfcePanelPluginFunc construct);
 
 G_END_DECLS
+
 #endif /* _XFCE_EXTERNAL_PANEL_PLUGIN_H */

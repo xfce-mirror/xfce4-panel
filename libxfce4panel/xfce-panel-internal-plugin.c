@@ -63,8 +63,6 @@ struct _XfceInternalPanelPluginPrivate
 };
 
 
-/* prototypes */
-
 /* item interface */
 static void xfce_internal_panel_plugin_init_item_interface (gpointer g_iface,
                                                             gpointer data);
@@ -157,7 +155,6 @@ static void _plugin_menu_deactivated (GtkWidget * menu, XfcePanelItem * item);
 
 
 /* type definition and initialization */
-
 G_DEFINE_TYPE_EXTENDED (XfceInternalPanelPlugin, xfce_internal_panel_plugin,
         GTK_TYPE_EVENT_BOX, 0,
         G_IMPLEMENT_INTERFACE (XFCE_TYPE_PANEL_ITEM,
@@ -171,18 +168,17 @@ xfce_internal_panel_plugin_init_item_interface (gpointer g_iface,
 {
     XfcePanelItemInterface *iface = g_iface;
 
-    iface->get_name = xfce_internal_panel_plugin_get_name;
-    iface->get_id = xfce_internal_panel_plugin_get_id;
-    iface->get_display_name = xfce_internal_panel_plugin_get_display_name;
-    iface->get_expand = xfce_internal_panel_plugin_get_expand;
-    iface->free_data = xfce_internal_panel_plugin_free_data;
-    iface->save = xfce_internal_panel_plugin_save;
-    iface->set_size = xfce_internal_panel_plugin_set_size;
-    iface->set_screen_position =
-        xfce_internal_panel_plugin_set_screen_position;
-    iface->set_sensitive = xfce_internal_panel_plugin_set_sensitive;
-    iface->remove = xfce_internal_panel_plugin_remove_item;
-    iface->configure = xfce_internal_panel_plugin_configure_item;
+    iface->get_name            = xfce_internal_panel_plugin_get_name;
+    iface->get_id              = xfce_internal_panel_plugin_get_id;
+    iface->get_display_name    = xfce_internal_panel_plugin_get_display_name;
+    iface->get_expand          = xfce_internal_panel_plugin_get_expand;
+    iface->free_data           = xfce_internal_panel_plugin_free_data;
+    iface->save                = xfce_internal_panel_plugin_save;
+    iface->set_size            = xfce_internal_panel_plugin_set_size;
+    iface->set_screen_position = xfce_internal_panel_plugin_set_screen_position;
+    iface->set_sensitive       = xfce_internal_panel_plugin_set_sensitive;
+    iface->remove              = xfce_internal_panel_plugin_remove_item;
+    iface->configure           = xfce_internal_panel_plugin_configure_item;
 }
 
 static void
@@ -191,13 +187,13 @@ xfce_internal_panel_plugin_init_plugin_interface (gpointer g_iface,
 {
     XfcePanelPluginInterface *iface = g_iface;
 
-    iface->remove = xfce_internal_panel_plugin_remove;
-    iface->set_expand = xfce_internal_panel_plugin_set_expand;
+    iface->remove          = xfce_internal_panel_plugin_remove;
+    iface->set_expand      = xfce_internal_panel_plugin_set_expand;
     iface->customize_panel = xfce_internal_panel_plugin_customize_panel;
     iface->customize_items = xfce_internal_panel_plugin_customize_items;
-    iface->move = xfce_internal_panel_plugin_move;
-    iface->register_menu = xfce_internal_panel_plugin_register_menu;
-    iface->focus_panel = xfce_internal_panel_plugin_focus_panel;
+    iface->move            = xfce_internal_panel_plugin_move;
+    iface->register_menu   = xfce_internal_panel_plugin_register_menu;
+    iface->focus_panel     = xfce_internal_panel_plugin_focus_panel;
 }
 
 static void
@@ -237,12 +233,12 @@ xfce_internal_panel_plugin_init (XfceInternalPanelPlugin * plugin)
 
     priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
 
-    priv->name = NULL;
-    priv->id = NULL;
-    priv->display_name = NULL;
-    priv->size = 0;
+    priv->name            = NULL;
+    priv->id              = NULL;
+    priv->display_name    = NULL;
+    priv->size            = 0;
     priv->screen_position = XFCE_SCREEN_POSITION_NONE;
-    priv->expand = FALSE;
+    priv->expand          = FALSE;
 }
 
 /* GObject */
@@ -349,9 +345,8 @@ xfce_internal_panel_plugin_get_name (XfcePanelItem * plugin)
 
     g_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), NULL);
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN
-                                                (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (
+                XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     return priv->name;
 }
@@ -676,8 +671,7 @@ xfce_internal_panel_plugin_new (const char *name,
 
     construct (XFCE_PANEL_PLUGIN (plugin));
 
-    /* this should be run here to make sure the default size function
-     * is called when the plugin doesn't handle this signal */
+    /* make sure the plugin has the proper size */
     xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
     
     return plugin;

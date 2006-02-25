@@ -64,12 +64,12 @@ struct _XfcePanelWindowPrivate
     GtkOrientation orientation;
     XfceHandleStyle handle_style;
 
-    gboolean shown;
     GtkAllocation allocation;
 
-    guint in_move:1;
-    int x_offset, y_offset;
-    int x_root, y_root;
+    int x_offset;
+    int y_offset;
+    int x_root;
+    int y_root;
 
     XfcePanelWindowMoveFunc move_func;
     gpointer move_data;
@@ -77,9 +77,13 @@ struct _XfcePanelWindowPrivate
     XfcePanelWindowResizeFunc resize_func;
     gpointer resize_data;
 
-    gboolean top_border, bottom_border, left_border, right_border;
-
-    gboolean movable;
+    guint shown:1;
+    guint in_move:1;
+    guint top_border:1;
+    guint bottom_border:1;
+    guint left_border:1;
+    guint right_border:1;
+    guint movable:1;
 };
 
 
@@ -187,29 +191,28 @@ xfce_panel_window_class_init (XfcePanelWindowClass * klass)
 
     g_type_class_add_private (klass, sizeof (XfcePanelWindowPrivate));
 
-    parent_class = g_type_class_peek_parent (klass);
-
-    gobject_class = (GObjectClass *) klass;
-    widget_class = (GtkWidgetClass *) klass;
+    parent_class    = g_type_class_peek_parent (klass);
+    gobject_class   = (GObjectClass *) klass;
+    widget_class    = (GtkWidgetClass *) klass;
     container_class = (GtkContainerClass *) klass;
 
-    gobject_class->get_property = xfce_panel_window_get_property;
-    gobject_class->set_property = xfce_panel_window_set_property;
+    gobject_class->get_property        = xfce_panel_window_get_property;
+    gobject_class->set_property        = xfce_panel_window_set_property;
 
-    widget_class->realize = xfce_panel_window_realize;
-    widget_class->unrealize = xfce_panel_window_unrealize;
-    widget_class->map = xfce_panel_window_map;
-    widget_class->unmap = xfce_panel_window_unmap;
-    widget_class->show = xfce_panel_window_show;
-    widget_class->hide = xfce_panel_window_hide;
+    widget_class->realize              = xfce_panel_window_realize;
+    widget_class->unrealize            = xfce_panel_window_unrealize;
+    widget_class->map                  = xfce_panel_window_map;
+    widget_class->unmap                = xfce_panel_window_unmap;
+    widget_class->show                 = xfce_panel_window_show;
+    widget_class->hide                 = xfce_panel_window_hide;
 
-    widget_class->expose_event = xfce_panel_window_expose;
-    widget_class->size_request = xfce_panel_window_size_request;
-    widget_class->size_allocate = xfce_panel_window_size_allocate;
+    widget_class->expose_event         = xfce_panel_window_expose;
+    widget_class->size_request         = xfce_panel_window_size_request;
+    widget_class->size_allocate        = xfce_panel_window_size_allocate;
 
-    widget_class->button_press_event = xfce_panel_window_button_press;
+    widget_class->button_press_event   = xfce_panel_window_button_press;
     widget_class->button_release_event = xfce_panel_window_button_release;
-    widget_class->motion_notify_event = xfce_panel_window_motion_notify;
+    widget_class->motion_notify_event  = xfce_panel_window_motion_notify;
 
     /* signals */
 
@@ -1002,12 +1005,7 @@ _paint_handle (XfcePanelWindow * panel_window, gboolean start,
 GtkWidget *
 xfce_panel_window_new (void)
 {
-    XfcePanelWindow *window;
-
-    window = g_object_new (XFCE_TYPE_PANEL_WINDOW,
-                           NULL);
-    
-    return GTK_WIDGET (window);
+    return GTK_WIDGET (g_object_new (XFCE_TYPE_PANEL_WINDOW, NULL));
 }
 
 /**
@@ -1026,7 +1024,6 @@ xfce_panel_window_get_orientation (XfcePanelWindow * window)
     g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), DEFAULT_ORIENTATION);
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
-
 
     return priv->orientation;
 }

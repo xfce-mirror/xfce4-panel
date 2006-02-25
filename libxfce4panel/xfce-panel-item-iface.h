@@ -67,6 +67,8 @@ struct _XfcePanelItemInterface
 
     /* reserved for future expansion */
     void (*_panel_reserved1) (void);
+    void (*_panel_reserved2) (void);
+    void (*_panel_reserved3) (void);
 };
 
 GType xfce_panel_item_get_type (void) G_GNUC_CONST;

@@ -61,20 +61,19 @@ enum
     CHILD_PROP_EXPAND
 };
 
-typedef struct _XfceItembarChild XfceItembarChild;
-
+typedef struct _XfceItembarChild   XfceItembarChild;
 typedef struct _XfceItembarPrivate XfceItembarPrivate;
 
 struct _XfceItembarPrivate 
 {
     GtkOrientation orientation;
-
     GList *children;
-
+    
     GdkWindow *event_window;
     GdkWindow *drag_highlight;
+    
     int drop_index;
-    gboolean raised;
+    guint raised:1;
 };
 
 struct _XfceItembarChild
@@ -205,10 +204,9 @@ xfce_itembar_class_init (XfceItembarClass * klass)
 
     g_type_class_add_private (klass, sizeof (XfceItembarPrivate));
 
-    parent_class = g_type_class_peek_parent (klass);
-
-    gobject_class = (GObjectClass *) klass;
-    widget_class = (GtkWidgetClass *) klass;
+    parent_class    = g_type_class_peek_parent (klass);
+    gobject_class   = (GObjectClass *) klass;
+    widget_class    = (GtkWidgetClass *) klass;
     container_class = (GtkContainerClass *) klass;
 
     gobject_class->finalize             = xfce_itembar_finalize;
@@ -1432,5 +1430,3 @@ xfce_itembar_get_drop_index (XfceItembar * itembar, int x, int y)
 
     return _find_drop_index (itembar, x, y);
 }
-
-

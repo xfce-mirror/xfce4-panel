@@ -55,7 +55,6 @@ XfceHandleStyle;
 
 
 typedef struct _XfcePanelWindow 	  XfcePanelWindow;
-
 typedef struct _XfcePanelWindowClass 	  XfcePanelWindowClass;
 
 

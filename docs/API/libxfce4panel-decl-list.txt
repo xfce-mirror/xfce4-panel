@@ -65,6 +65,7 @@ xfce_panel_plugin_unblock_menu
 xfce_panel_plugin_register_menu
 xfce_panel_plugin_lookup_rc_file
 xfce_panel_plugin_save_location
+xfce_panel_plugin_focus_widget
 <SUBSECTION Standard>
 XFCE_PANEL_PLUGIN
 XFCE_IS_PANEL_PLUGIN
@@ -153,5 +154,11 @@ xfce_handle_style_get_type
 XFCE_TYPE_HANDLE_STYLE
 xfce_screen_position_get_type
 XFCE_TYPE_SCREEN_POSITION
+</SECTION>
+
+<SECTION>
+<FILE>xfce-panel-convenience</FILE>
+xfce_create_panel_button
+xfce_create_panel_toggle_button
 </SECTION>
 

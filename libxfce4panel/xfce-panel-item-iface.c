@@ -190,15 +190,15 @@ xfce_panel_item_focus_panel (XfcePanelItem *item)
     if (G_UNLIKELY (!atom))
         atom = XInternAtom (GDK_DISPLAY (), "_NET_ACTIVE_WINDOW", FALSE);
 
-    xev.type = ClientMessage;
-    xev.window = GDK_WINDOW_XID (toplevel->window);
+    xev.type         = ClientMessage;
+    xev.window       = GDK_WINDOW_XID (toplevel->window);
     xev.message_type = atom;
-    xev.format = 32;
-    xev.data.l[0] = 0;
-    xev.data.l[1] = 0;
-    xev.data.l[2] = 0;
-    xev.data.l[3] = 0;
-    xev.data.l[4] = 0;
+    xev.format       = 32;
+    xev.data.l[0]    = 0;
+    xev.data.l[1]    = 0;
+    xev.data.l[2]    = 0;
+    xev.data.l[3]    = 0;
+    xev.data.l[4]    = 0;
 
     XSendEvent (GDK_DISPLAY (), GDK_ROOT_WINDOW (), False,
                 StructureNotifyMask, (XEvent *) & xev);
@@ -434,5 +434,3 @@ void xfce_panel_item_configure (XfcePanelItem *item)
 {
     XFCE_PANEL_ITEM_GET_INTERFACE (item)->configure (item);
 }
-
-

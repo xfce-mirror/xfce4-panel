@@ -45,15 +45,14 @@ struct _XfceExternalPanelItemPrivate
     char *name;
     char *id;
     char *display_name;
-    guint expand:1;
     int size;
     XfceScreenPosition screen_position;
 
+    guint expand:1;
     /* detect problems */
     guint to_be_removed:1;
 };
 
-/* prototypes */
 
 /* item interface */
 static void xfce_external_panel_item_interface_init (gpointer g_iface,
@@ -106,7 +105,6 @@ static void _item_setup (XfceExternalPanelItem * item, const char *file);
 
 
 /* type definition and initialization */
-
 G_DEFINE_TYPE_EXTENDED (XfceExternalPanelItem, xfce_external_panel_item,
         GTK_TYPE_SOCKET, 0,
         G_IMPLEMENT_INTERFACE (XFCE_TYPE_PANEL_ITEM,
@@ -154,13 +152,13 @@ xfce_external_panel_item_init (XfceExternalPanelItem * item)
 
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (item);
 
-    priv->name = NULL;
-    priv->id = NULL;
-    priv->display_name = NULL;
-    priv->expand = FALSE;
-    priv->size = 0;
+    priv->name            = NULL;
+    priv->id              = NULL;
+    priv->display_name    = NULL;
+    priv->size            = 0;
     priv->screen_position = XFCE_SCREEN_POSITION_NONE;
-    priv->to_be_removed = FALSE;
+    priv->expand          = FALSE;
+    priv->to_be_removed   = FALSE;
 }
 
 /* GObject */
@@ -564,10 +562,10 @@ xfce_external_panel_item_new (const char *name,
 
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (item);
 
-    priv->name = g_strdup (name);
-    priv->id = g_strdup (id);
-    priv->display_name = g_strdup (display_name);
-    priv->size = size;
+    priv->name            = g_strdup (name);
+    priv->id              = g_strdup (id);
+    priv->display_name    = g_strdup (display_name);
+    priv->size            = size;
     priv->screen_position = position;
 
     g_signal_connect (item, "realize", G_CALLBACK (_item_setup),

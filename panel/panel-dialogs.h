@@ -26,8 +26,4 @@ void add_items_dialog (GPtrArray *panels, GtkWidget *active_item);
 
 void panel_manager_dialog (GPtrArray *panels);
 
-
 #endif /* _PANEL_DIALOGS_H */
-
-
-

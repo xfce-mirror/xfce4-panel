@@ -22,19 +22,21 @@
 #ifndef _XFCE_PANEL_LAUNCHER_H
 #define _XFCE_PANEL_LAUNCHER_H
 
-#define MENU_TIMEOUT            250
-#define BORDER                  8
-#define W_ARROW                 16
-#define MENU_ICON_SIZE          24
-#define DLG_ICON_SIZE           32
-#define PANEL_ICON_SIZE         48
-/* A bit of a hack: Don't use icons without xfce- default */
-#define NUM_CATEGORIES          (XFCE_N_BUILTIN_ICON_CATEGORIES - 4)
+#define MENU_TIMEOUT               250
+#define BORDER                     8
+#define W_ARROW                    16
+#define MENU_ICON_SIZE             24
+#define DLG_ICON_SIZE              32
+#define PANEL_ICON_SIZE            48
+#define MIN_ICON_SIZE              12 
 
-typedef enum   _LauncherIconType LauncherIconType;
-typedef struct _LauncherIcon LauncherIcon;
-typedef struct _LauncherEntry LauncherEntry;
-typedef struct _LauncherPlugin LauncherPlugin;
+/* A bit of a hack: Don't use icons without xfce- default */
+#define NUM_CATEGORIES             (XFCE_N_BUILTIN_ICON_CATEGORIES - 4)
+
+typedef enum    _LauncherIconType  LauncherIconType;
+typedef struct  _LauncherIcon      LauncherIcon;
+typedef struct  _LauncherEntry     LauncherEntry;
+typedef struct  _LauncherPlugin    LauncherPlugin;
 
 enum _LauncherIconType
 {
@@ -72,23 +74,15 @@ struct _LauncherPlugin
     GtkWidget *plugin;
     GtkTooltips *tips;
 
-#if 0
-    gboolean is_regular_menu;
-
-    /* regular menu */
-    GtkWidget *menubutton;
-    LauncherIcon icon;     
-#endif
-    
     /* button + menu */
     GtkWidget *box;
     GtkWidget *arrowbutton;
     GtkWidget *iconbutton;
-
+    GtkWidget *image;
     GtkWidget *menu;
 
     int popup_timeout;
-    gboolean from_timeout;
+    guint from_timeout:1;
 };
 
 
@@ -99,6 +93,7 @@ void launcher_recreate_menu (LauncherPlugin *launcher);
 
 void launcher_save (XfcePanelPlugin *plugin, LauncherPlugin *launcher);
 
+
 /* entry */
 LauncherEntry *launcher_entry_new (void);
 
@@ -106,7 +101,8 @@ void launcher_entry_free (LauncherEntry *entry);
 
 
 /* icon */
-GdkPixbuf * launcher_icon_load_pixbuf (LauncherIcon *icon, 
+GdkPixbuf * launcher_icon_load_pixbuf (GtkWidget *w, 
+                                       LauncherIcon *icon, 
                                        int size);
 
 

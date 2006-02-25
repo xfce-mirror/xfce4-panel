@@ -35,7 +35,7 @@
 
 G_BEGIN_DECLS 
 
-typedef struct _XfceInternalPanelPlugin XfceInternalPanelPlugin;
+typedef struct _XfceInternalPanelPlugin      XfceInternalPanelPlugin;
 typedef struct _XfceInternalPanelPluginClass XfceInternalPanelPluginClass;
 
 struct _XfceInternalPanelPlugin
@@ -60,4 +60,5 @@ GtkWidget *xfce_internal_panel_plugin_new (const char *name,
 
 
 G_END_DECLS
+
 #endif /* _XFCE_INTERNAL_PANEL_PLUGIN_H */

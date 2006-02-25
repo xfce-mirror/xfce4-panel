@@ -1134,4 +1134,3 @@ xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin, gboolean sensitive)
                                 G_CALLBACK (xfce_panel_plugin_set_sensitive),
                                 GINT_TO_POINTER (sensitive));
 }
-

@@ -71,8 +71,6 @@ typedef struct _PanelApp PanelApp;
 
 struct _PanelApp
 {
-    guint initialized:1;
-
     GtkWidget *gtk_ipc_window;
     Window ipc_window;
 
@@ -87,6 +85,8 @@ struct _PanelApp
     int current_panel;
 
     GList *dialogs;
+
+    guint initialized:1;
 
     /* check whether monitors in Xinerama are aligned */
     guint xinerama_and_equal_width:1;
@@ -577,7 +577,9 @@ panel_app_run (int argc, char **argv)
     panel_app.check_id = 
         g_timeout_add (250, (GSourceFunc) check_signal_state, NULL);
     panel_app.runstate = PANEL_RUN_STATE_NORMAL;
+    TIMER_ELAPSED("start main loop");
     gtk_main ();
+    TIMER_ELAPSED("end main loop");
     
     g_free (panel_app.session_client);
     panel_app.session_client = NULL;

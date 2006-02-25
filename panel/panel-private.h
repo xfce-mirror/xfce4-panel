@@ -39,8 +39,7 @@
 #define DEFAULT_TRANSPARENCY     20
 #define DEFAULT_ACTIVE_TRANS     FALSE
 
-#define PANEL_GET_PRIVATE(o) \
-    (G_TYPE_INSTANCE_GET_PRIVATE ((o), PANEL_TYPE_PANEL, PanelPrivate))
+#define PANEL_GET_PRIVATE(o)     (PANEL(o)->priv)
 
 typedef struct _PanelPrivate PanelPrivate;
 
@@ -56,29 +55,27 @@ struct _PanelPrivate
 {
     GtkWidget *itembar;
     GtkWidget *menu;
+    GtkWidget *drag_widget;
 
     int size;
     int monitor;
     XfceScreenPosition screen_position;
     int xoffset;
     int yoffset;
-    guint autohide:1;
     XfcePanelWidthType full_width;
     int transparency;
-    guint activetrans:1;
 
     guint opacity;
     guint saved_opacity;
 
-    guint hidden:1;
     int block_autohide;
     int hide_timeout;
     int unhide_timeout;
 
-    GtkWidget *drag_widget;
-
-    gboolean edit_mode;
+    guint autohide:1;
+    guint activetrans:1;
+    guint hidden:1;
+    guint edit_mode:1;
 };
 
 #endif /* _PANEL_PRIVATE_H */
-

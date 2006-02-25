@@ -32,6 +32,7 @@
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -84,6 +85,7 @@ static gboolean
 launcher_set_size (XfcePanelPlugin *plugin, int size, LauncherPlugin *launcher)
 {
     gtk_widget_set_size_request (launcher->iconbutton, size, size);
+    launcher_update_panel_entry (launcher);
 
     return TRUE;
 }
@@ -146,7 +148,27 @@ launcher_construct (XfcePanelPlugin *plugin)
  *                   Launcher Plugin Interface                          *
  * -------------------------------------------------------------------- */
 
-static XfceIconTheme *icontheme = NULL;
+static const char *icon_categories[XFCE_N_BUILTIN_ICON_CATEGORIES][2] =
+{
+	{ "xfce-unknown",       "dialog-question" },
+	{ "xfce-edit",          "accessories-text-editor" },
+	{ "xfce-filemanager",   "system-file-manager" },
+	{ "xfce-utils",         "applications-utilities" },
+	{ "xfce-games",         "applications-games" },
+	{ "xfce-man",           "system-help" },
+	{ "xfce-multimedia",    "applications-multimedia" },
+	{ "xfce-internet",      "applications-internet" },
+	{ "xfce-graphics",      "applications-graphics" },
+	{ "xfce-printer",       "printer" },
+	{ "xfce-schedule",      "clock" },
+	{ "xfce-sound",         "audio-volume-medium" },
+	{ "xfce-terminal",      "utilities-terminal" },
+	{ "xfce-devel",         "applications-development" },
+	{ "xfce-settings",      "preferences-desktop" },
+	{ "xfce-system",        "applications-system" },
+	{ "xfce-wine",          "wine" }
+};
+
 static LauncherPlugin *open_launcher = NULL;
 
 
@@ -257,26 +279,47 @@ void launcher_set_drag_dest (GtkWidget *widget)
  * ----------------- */
 
 GdkPixbuf *
-launcher_icon_load_pixbuf (LauncherIcon *icon, int size)
+launcher_icon_load_pixbuf (GtkWidget *w, LauncherIcon * icon, int size)
 {
     GdkPixbuf *pb = NULL;
-    
+
     if (icon->type == LAUNCHER_ICON_TYPE_NAME)
     {
         if (g_path_is_absolute (icon->icon.name))
-            pb = xfce_pixbuf_new_from_file_at_size (icon->icon.name, 
+        {
+            pb = xfce_pixbuf_new_from_file_at_size (icon->icon.name,
                                                     size, size, NULL);
+        }
         else
+        {
             pb = xfce_themed_icon_load (icon->icon.name, size);
+        }
     }
     else if (icon->type == LAUNCHER_ICON_TYPE_CATEGORY)
     {
-        pb = xfce_icon_theme_load_category (icontheme, icon->icon.category, 
-                                            size);
+        /* first try name from icon nameing spec... */
+        pb = xfce_themed_icon_load (icon_categories[icon->icon.category][1],
+                                    size);
+        /* ...then try xfce name, if necessary */
+        if (!pb)
+        {
+            pb = 
+                xfce_themed_icon_load (icon_categories[icon->icon.category][0],
+                                       size);
+        }
     }
 
     if (!pb)
-        pb = xfce_icon_theme_load_category (icontheme, 0, size);
+    {
+        /* first try name from icon nameing spec... */
+        pb = xfce_themed_icon_load (icon_categories[0][1], size);
+        
+        /* ...then try xfce name, if necessary */
+        if (!pb)
+        {
+            pb = xfce_themed_icon_load (icon_categories[0][0], size);
+        }
+    }
 
     return pb;
 }
@@ -542,8 +585,8 @@ load_menu_icon (GtkImageMenuItem *mi)
     
     if ((entry = g_object_get_data (G_OBJECT (mi), "launcher_entry")) != NULL)
     {
-        pb = launcher_icon_load_pixbuf (&entry->icon, MENU_ICON_SIZE);
-
+        pb = launcher_icon_load_pixbuf (GTK_WIDGET (mi), &entry->icon, 
+                                        MENU_ICON_SIZE);
         img = gtk_image_new_from_pixbuf (pb);
         gtk_widget_show (img);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
@@ -605,34 +648,38 @@ launcher_recreate_menu (LauncherPlugin *launcher)
 void
 launcher_update_panel_entry (LauncherPlugin *launcher)
 {    
+    char tip[512];
     GdkPixbuf *pb;
-    char *tip = NULL;
+    int size;
     LauncherEntry *entry;
-    
+
     if (launcher->entries->len == 0)
         return;
     
     entry = g_ptr_array_index (launcher->entries, 0);
 
-    pb = launcher_icon_load_pixbuf (&(entry->icon), PANEL_ICON_SIZE);
-    xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (launcher->iconbutton), pb);
+    size = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (launcher->plugin)) 
+           - 2 - 2 * MAX (launcher->iconbutton->style->xthickness,
+                          launcher->iconbutton->style->ythickness);
+    
+    pb = launcher_icon_load_pixbuf (launcher->image, &(entry->icon), size);
+    gtk_image_set_from_pixbuf (GTK_IMAGE (launcher->image), pb);
     g_object_unref (pb);
-
+    
     if (entry->name)
     {
         if (entry->comment)
-            tip = g_strdup_printf ("%s\n%s", entry->name, entry->comment);
+            g_snprintf (tip, 521, "%s\n%s", entry->name, entry->comment);
         else
-            tip = g_strdup (entry->name);
+            g_strlcpy (tip, entry->name, 521);
 
     }
     else
     {
-        tip = g_strdup (_("This item has not yet been configured"));
+        g_strlcpy (tip, _("This item has not yet been configured"), 512);
     }
 
     gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
-    g_free (tip);
 }
 
 static gboolean
@@ -1065,6 +1112,22 @@ launcher_set_orientation (XfcePanelPlugin *plugin,
     gtk_container_add (GTK_CONTAINER (plugin), launcher->box);
 }
 
+static void
+plugin_icon_theme_changed (GtkWidget *w, gpointer ignored,
+                           LauncherPlugin *launcher)
+{
+    if (!launcher->plugin)
+        return;
+
+    launcher_update_panel_entry (launcher);
+
+    /* improve interactivity */
+    while (gtk_events_pending ())
+        gtk_main_iteration();
+    
+    launcher_recreate_menu (launcher);
+}
+
 /* Create Launcher Plugin Contents */
 
 static void
@@ -1086,10 +1149,7 @@ launcher_new (XfcePanelPlugin *plugin)
     LauncherPlugin *launcher;
     int size;
     XfceScreenPosition screen_position;
-
-    if (G_UNLIKELY (!icontheme))
-        icontheme = xfce_icon_theme_get_for_screen (NULL);
-
+    
     size = xfce_panel_plugin_get_size (plugin);
     screen_position = xfce_panel_plugin_get_screen_position (plugin);
     
@@ -1109,16 +1169,19 @@ launcher_new (XfcePanelPlugin *plugin)
         launcher->box = gtk_vbox_new (FALSE, 0);
     gtk_widget_show (launcher->box);
 
-    launcher->iconbutton = xfce_iconbutton_new ();
+    launcher->iconbutton = xfce_create_panel_button ();
     gtk_widget_show (launcher->iconbutton);
     gtk_box_pack_start (GTK_BOX (launcher->box), launcher->iconbutton,
                         TRUE, TRUE, 0);
     gtk_widget_set_size_request (launcher->iconbutton, size, size);
-    gtk_button_set_relief (GTK_BUTTON (launcher->iconbutton), 
-                           GTK_RELIEF_NONE);
-    gtk_button_set_focus_on_click (GTK_BUTTON (launcher->iconbutton), FALSE);
 
+    launcher->image = gtk_image_new ();
+    gtk_widget_show (launcher->image);
+    gtk_container_add (GTK_CONTAINER (launcher->iconbutton), launcher->image);
+    
     launcher->arrowbutton = xfce_arrow_button_new (GTK_ARROW_UP);
+    GTK_WIDGET_UNSET_FLAGS (launcher->arrowbutton, 
+                            GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
     gtk_box_pack_start (GTK_BOX (launcher->box), launcher->arrowbutton,
                         FALSE, FALSE, 0);
     gtk_widget_set_size_request (launcher->arrowbutton, W_ARROW, W_ARROW);
@@ -1126,7 +1189,14 @@ launcher_new (XfcePanelPlugin *plugin)
                            GTK_RELIEF_NONE);
     gtk_button_set_focus_on_click (GTK_BUTTON (launcher->arrowbutton), FALSE);
     launcher_set_screen_position (launcher, screen_position);
+
+    /* signals */
+    g_signal_connect (launcher->image, "style-set", 
+                      G_CALLBACK (plugin_icon_theme_changed), launcher);
     
+    g_signal_connect (launcher->image, "screen-changed", 
+                      G_CALLBACK (plugin_icon_theme_changed), launcher);
+
     g_signal_connect (launcher->iconbutton, "button-press-event",
                       G_CALLBACK (launcher_toggle_menu_timeout), launcher);
     
@@ -1147,7 +1217,20 @@ launcher_new (XfcePanelPlugin *plugin)
     g_signal_connect (launcher->iconbutton, "destroy", 
                       G_CALLBACK (gtk_widget_destroyed), 
                       &(launcher->iconbutton));
+    
+    g_signal_connect (launcher->iconbutton, "drag-data-received",
+                      G_CALLBACK (launcher_drag_data_received), launcher);
 
+    g_signal_connect (launcher->arrowbutton, "drag-motion",
+                      G_CALLBACK (launcher_arrow_drag), launcher);
+    
+    g_signal_connect (launcher->arrowbutton, "drag-leave", 
+                      G_CALLBACK (launcher_menu_drag_leave), launcher);
+
+    g_signal_connect (plugin, "realize", G_CALLBACK (plugin_realized), 
+                      launcher);
+    
+    /* configuration */
     launcher_read_rc_file (plugin, launcher);
 
     if (launcher->entries->len == 0)
@@ -1167,20 +1250,7 @@ launcher_new (XfcePanelPlugin *plugin)
     }
 
     launcher_set_drag_dest (launcher->iconbutton);
-    
-    g_signal_connect (launcher->iconbutton, "drag-data-received",
-                      G_CALLBACK (launcher_drag_data_received), launcher);
-
     launcher_set_drag_dest (launcher->arrowbutton);
-    
-    g_signal_connect (launcher->arrowbutton, "drag-motion",
-                      G_CALLBACK (launcher_arrow_drag), launcher);
-    
-    g_signal_connect (launcher->arrowbutton, "drag-leave", 
-                      G_CALLBACK (launcher_menu_drag_leave), launcher);
-
-    g_signal_connect (plugin, "realize", G_CALLBACK (plugin_realized), 
-                      launcher);
     
     return launcher;
 }
@@ -1207,5 +1277,6 @@ launcher_free (LauncherPlugin *launcher)
         gtk_widget_destroy (launcher->menu);
     
     g_free (launcher);
+    launcher->plugin = NULL;
 }
 

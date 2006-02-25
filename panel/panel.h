@@ -38,9 +38,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _Panel           Panel;
-typedef struct _PanelClass      PanelClass;
-
+typedef struct _Panel               Panel;
+typedef struct _PanelClass          PanelClass;
 typedef struct _XfcePanelItemConfig XfcePanelItemConfig;
 
 struct _Panel
@@ -92,4 +91,3 @@ void panel_set_items_sensitive (Panel *panel, gboolean sensitive);
 G_END_DECLS
 
 #endif /* _PANEL_H */
-

@@ -30,6 +30,7 @@
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 typedef enum
 {
@@ -39,7 +40,19 @@ typedef enum
 }
 ActionType;
 
-static void actions_properties_dialog (XfcePanelPlugin *plugin);
+typedef struct
+{
+    XfcePanelPlugin *plugin;
+    
+    ActionType type;
+    GtkWidget *button1;
+    GtkWidget *image1;
+    GtkWidget *button2;
+    GtkWidget *image2;
+}
+Action;
+
+static void actions_properties_dialog (XfcePanelPlugin *plugin, Action *action);
 
 static void actions_construct (XfcePanelPlugin *plugin);
 
@@ -56,57 +69,75 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (actions_construct);
 
 static void
 actions_orientation_changed (XfcePanelPlugin *plugin, 
-                             GtkOrientation orientation)
+                             GtkOrientation orientation,
+                             Action *action)
 {
-    int type = 
-        GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), "type"));
-
-    if (type == ACTION_QUIT_LOCK)
+    if (action->type == ACTION_QUIT_LOCK)
     {
         GtkWidget *box;
-        GList *children;
 
         box = orientation == GTK_ORIENTATION_HORIZONTAL ?
                 gtk_vbox_new (TRUE, 0) : gtk_hbox_new (TRUE, 0);
         gtk_widget_show (box);
 
-        children = gtk_container_get_children (
-                GTK_CONTAINER (GTK_BIN (plugin)->child));
+        gtk_widget_reparent (action->button1, box);
+        gtk_widget_reparent (action->button2, box);
 
-        gtk_widget_reparent (GTK_WIDGET (children->data), box);
-        gtk_widget_reparent (GTK_WIDGET (children->next->data), box);
-
-        g_list_free (children);
-        
         gtk_widget_destroy (GTK_BIN (plugin)->child);
-        
         gtk_container_add (GTK_CONTAINER (plugin), box);
     }
 }
 
 static gboolean 
-actions_set_size (XfcePanelPlugin *plugin, int size)
+actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
 {
-    int width = MAX (size / 2, 
-                     16 + 2 + 2 * GTK_WIDGET (plugin)->style->xthickness);
+    int width;
+    GdkPixbuf *pb = NULL;
+    int border;
     
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
-                                     width, size);
+        border = 2 + 2 * GTK_WIDGET(plugin)->style->ythickness;
     }
     else
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
-                                     size, width);
+        border = 2 + 2 * GTK_WIDGET(plugin)->style->xthickness;
     }
+    
+    width = MIN(size - border, MAX(16, size/2 - border));
 
+    switch (action->type)
+    {
+        case ACTION_QUIT_LOCK:
+            pb = xfce_themed_icon_load ("xfce-system-exit", width);
+            gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
+            g_object_unref (pb);
+            
+            pb = xfce_themed_icon_load ("xfce-system-lock", width);
+            gtk_image_set_from_pixbuf (GTK_IMAGE (action->image2), pb);
+            g_object_unref (pb);
+            
+            break;
+        case ACTION_QUIT:
+            pb = xfce_themed_icon_load ("xfce-system-exit", width);
+            gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
+            g_object_unref (pb);
+            
+            break;
+        case ACTION_LOCK:
+            pb = xfce_themed_icon_load ("xfce-system-lock", width);
+            gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
+            g_object_unref (pb);
+            
+            break;
+    }
+            
     return TRUE;
 }
 
 static void
-actions_read_rc_file (XfcePanelPlugin *plugin)
+actions_read_rc_file (XfcePanelPlugin *plugin, Action *action)
 {
     char *file;
     XfceRc *rc;
@@ -125,11 +156,11 @@ actions_read_rc_file (XfcePanelPlugin *plugin)
         }
     }
 
-    g_object_set_data (G_OBJECT (plugin), "type", GINT_TO_POINTER (type));
+    action->type = type;
 }
 
 static void
-actions_write_rc_file (XfcePanelPlugin *plugin)
+actions_write_rc_file (XfcePanelPlugin *plugin, Action *action)
 {
     char *file;
     XfceRc *rc;
@@ -143,19 +174,22 @@ actions_write_rc_file (XfcePanelPlugin *plugin)
     if (!rc)
         return;
     
-    xfce_rc_write_int_entry (rc, "type", 
-            GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), "type")));
+    xfce_rc_write_int_entry (rc, "type", action->type);
 
     xfce_rc_close (rc);
 }
 
 static void
-actions_free_data (XfcePanelPlugin *plugin)
+actions_free_data (XfcePanelPlugin *plugin, Action *action)
 {
-    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+    GtkWidget *dlg;
 
+    dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
     if (dlg)
         gtk_widget_destroy (dlg);
+
+    g_free (action);
+    action->plugin = NULL;
 }
 
 /* create widgets and connect to signals */
@@ -173,15 +207,13 @@ actions_do_lock (GtkWidget *b, XfcePanelPlugin *plugin)
 }
 
 static void
-actions_create_widgets (XfcePanelPlugin *plugin)
+actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
 {
-    GtkWidget *widget, *box, *button;
-    GdkPixbuf *pb;
-    int size = xfce_panel_plugin_get_size (plugin);
+    GtkWidget *widget, *box, *button, *img;
     
     widget = GTK_WIDGET (plugin);
-    
-    switch (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), "type")))
+
+    switch (action->type)
     {
         case ACTION_QUIT_LOCK:
             box = (xfce_panel_plugin_get_orientation (plugin) == 
@@ -190,88 +222,104 @@ actions_create_widgets (XfcePanelPlugin *plugin)
             gtk_widget_show (box);
             gtk_container_add (GTK_CONTAINER (plugin), box);
 
-            pb = xfce_themed_icon_load ("xfce-system-lock", 16);
-            button = xfce_iconbutton_new_from_pixbuf (pb);
-            gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-            gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+            action->button1 = button = xfce_create_panel_button ();
             gtk_widget_show (button);
             gtk_box_pack_start (GTK_BOX (box), button, TRUE, TRUE, 0);
-            g_object_unref (pb);
 
             xfce_panel_plugin_add_action_widget (plugin, button);
             
             g_signal_connect (button, "clicked", 
                               G_CALLBACK (actions_do_lock), plugin);
+    
+            img = action->image1 = gtk_image_new ();
+            gtk_widget_show (img);
+            gtk_container_add (GTK_CONTAINER (button), img);
             
-            pb = xfce_themed_icon_load ("xfce-system-exit", 16);
-            button = xfce_iconbutton_new_from_pixbuf (pb);
-            gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-            gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+            action->button2 = button = xfce_create_panel_button ();
             gtk_widget_show (button);
             gtk_box_pack_start (GTK_BOX (box), button, TRUE, TRUE, 0);
-            g_object_unref (pb);
 
             xfce_panel_plugin_add_action_widget (plugin, button);
 
             g_signal_connect (button, "clicked", 
                               G_CALLBACK (actions_do_quit), plugin);
+            
+            img = action->image2 = gtk_image_new ();
+            gtk_widget_show (img);
+            gtk_container_add (GTK_CONTAINER (button), img);
             
             break;
         case ACTION_LOCK:
-            pb = xfce_themed_icon_load ("xfce-system-lock", 16);
-            button = xfce_iconbutton_new_from_pixbuf (pb);
-            gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-            gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+            action->button1 = button = xfce_create_panel_button ();
             gtk_widget_show (button);
             gtk_container_add (GTK_CONTAINER (plugin), button);
-            g_object_unref (pb);
             
             xfce_panel_plugin_add_action_widget (plugin, button);
             
             g_signal_connect (button, "clicked", 
                               G_CALLBACK (actions_do_lock), plugin);
             
+            img = action->image1 = gtk_image_new ();
+            gtk_widget_show (img);
+            gtk_container_add (GTK_CONTAINER (button), img);
+            
             break;
         default:
-            pb = xfce_themed_icon_load ("xfce-system-exit", 16);
-            button = xfce_iconbutton_new_from_pixbuf (pb);
-            gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
-            gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+            action->button1 = button = xfce_create_panel_button ();
             gtk_widget_show (button);
             gtk_container_add (GTK_CONTAINER (plugin), button);
-            g_object_unref (pb);
             
             xfce_panel_plugin_add_action_widget (plugin, button);
             
             g_signal_connect (button, "clicked", 
                               G_CALLBACK (actions_do_quit), plugin);
+            
+            img = action->image1 = gtk_image_new ();
+            gtk_widget_show (img);
+            gtk_container_add (GTK_CONTAINER (button), img);
     }
+}
 
-    actions_set_size (plugin, size);
+static void
+actions_icontheme_changed (XfcePanelPlugin *plugin, gpointer ignored,
+                           Action *action)
+{
+    if (action->plugin)
+        actions_set_size (plugin, xfce_panel_plugin_get_size (plugin), action);
 }
 
 static void 
 actions_construct (XfcePanelPlugin *plugin)
 {
+    Action *action = g_new0 (Action, 1);
+
+    action->plugin = plugin;
+    
     g_signal_connect (plugin, "orientation-changed", 
-                      G_CALLBACK (actions_orientation_changed), NULL);
+                      G_CALLBACK (actions_orientation_changed), action);
     
     g_signal_connect (plugin, "size-changed", 
-                      G_CALLBACK (actions_set_size), NULL);
+                      G_CALLBACK (actions_set_size), action);
     
     g_signal_connect (plugin, "save", 
-                      G_CALLBACK (actions_write_rc_file), NULL);
+                      G_CALLBACK (actions_write_rc_file), action);
     
     g_signal_connect (plugin, "free-data", 
-                      G_CALLBACK (actions_free_data), NULL);
+                      G_CALLBACK (actions_free_data), action);
     
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
-                      G_CALLBACK (actions_properties_dialog), NULL);
+                      G_CALLBACK (actions_properties_dialog), action);
 
-    actions_read_rc_file (plugin);
+    actions_read_rc_file (plugin, action);
 
-    actions_create_widgets (plugin);
+    actions_create_widgets (plugin, action);
+    
+    g_signal_connect (plugin, "style-set", 
+                      G_CALLBACK (actions_icontheme_changed), action);
+    
+    g_signal_connect (plugin, "screen-changed", 
+                      G_CALLBACK (actions_icontheme_changed), action);
 }
 
 /* -------------------------------------------------------------------- *
@@ -279,28 +327,29 @@ actions_construct (XfcePanelPlugin *plugin)
  * -------------------------------------------------------------------- */
 
 static void
-action_type_changed (GtkComboBox *box, XfcePanelPlugin *plugin)
+action_type_changed (GtkComboBox *box, Action *action)
 {
-    g_object_set_data (G_OBJECT (plugin), "type", 
-                       GINT_TO_POINTER (gtk_combo_box_get_active (box)));
+    action->type = gtk_combo_box_get_active (box);
 
-    gtk_widget_destroy (GTK_BIN (plugin)->child);
-    actions_create_widgets (plugin);
+    gtk_widget_destroy (GTK_BIN (action->plugin)->child);
+    actions_create_widgets (action->plugin, action);
+
+    actions_set_size (action->plugin, 
+                      xfce_panel_plugin_get_size (action->plugin), action);
 }
 
 static void
-actions_dialog_response (GtkWidget *dlg, int reponse, 
-                          XfcePanelPlugin *plugin)
+actions_dialog_response (GtkWidget *dlg, int reponse, Action *action)
 {
-    g_object_set_data (G_OBJECT (plugin), "dialog", NULL);
+    g_object_set_data (G_OBJECT (action->plugin), "dialog", NULL);
 
     gtk_widget_destroy (dlg);
-    xfce_panel_plugin_unblock_menu (plugin);
-    actions_write_rc_file (plugin);
+    xfce_panel_plugin_unblock_menu (action->plugin);
+    actions_write_rc_file (action->plugin, action);
 }
 
 static void
-actions_properties_dialog (XfcePanelPlugin *plugin)
+actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
 {
     GtkWidget *dlg, *header, *vbox, *hbox, *label, *box;
 
@@ -318,7 +367,7 @@ actions_properties_dialog (XfcePanelPlugin *plugin)
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     
     g_signal_connect (dlg, "response", G_CALLBACK (actions_dialog_response),
-                      plugin);
+                      action);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
@@ -351,11 +400,10 @@ actions_properties_dialog (XfcePanelPlugin *plugin)
     gtk_combo_box_append_text (GTK_COMBO_BOX (box), _("Lock screen"));
     gtk_combo_box_append_text (GTK_COMBO_BOX (box), _("Quit + Lock screen"));
     
-    gtk_combo_box_set_active (GTK_COMBO_BOX (box), 
-            GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), "type")));
+    gtk_combo_box_set_active (GTK_COMBO_BOX (box), action->type);
     
     g_signal_connect (box, "changed", G_CALLBACK (action_type_changed), 
-                      plugin);
+                      action);
     
     gtk_widget_show (dlg);
 }

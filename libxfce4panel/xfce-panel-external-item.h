@@ -35,8 +35,8 @@
 
 G_BEGIN_DECLS 
 
-typedef struct _XfceExternalPanelItem XfceExternalPanelItem;
-typedef struct _XfceExternalPanelItemClass XfceExternalPanelItemClass;
+typedef struct _XfceExternalPanelItem           XfceExternalPanelItem;
+typedef struct _XfceExternalPanelItemClass      XfceExternalPanelItemClass;
 
 struct _XfceExternalPanelItem
 {

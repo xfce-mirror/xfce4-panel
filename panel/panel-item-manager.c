@@ -52,8 +52,8 @@ struct _XfcePanelItemClass
     char *comment;
     char *icon;
 
-    gboolean unique;
-    gboolean is_external;
+    guint unique:1;
+    guint is_external:1;
 
     char *file; /* either executable or loadable module */
     
@@ -96,9 +96,9 @@ _add_item_info_to_array (char *plugin_name, XfcePanelItemClass *class,
 
     info = g_new0 (XfcePanelItemInfo, 1);
     
-    info->name = plugin_name;
+    info->name         = plugin_name;
     info->display_name = class->name;
-    info->comment = class->comment;
+    info->comment      = class->comment;
     
     /* for the item list in the 'Add Items' dialog */
     if (class->icon)

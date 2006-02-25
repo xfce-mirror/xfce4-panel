@@ -178,7 +178,8 @@ update_entry_icon (LauncherDialog *ld)
 
         ld->entry->icon.type = LAUNCHER_ICON_TYPE_NONE;
 
-        pb = launcher_icon_load_pixbuf (&ld->entry->icon, DLG_ICON_SIZE);
+        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
+                                        DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
         g_object_unref (pb);
     }
@@ -191,7 +192,8 @@ update_entry_icon (LauncherDialog *ld)
         ld->entry->icon.type = LAUNCHER_ICON_TYPE_NAME;
         ld->entry->icon.icon.name = g_strdup (text);
         
-        pb = launcher_icon_load_pixbuf (&ld->entry->icon, DLG_ICON_SIZE);
+        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
+                                        DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
         g_object_unref (pb);
     }
@@ -271,14 +273,7 @@ check_button_toggled (GtkWidget *tb, LauncherDialog *ld)
 static void
 set_panel_icon (LauncherDialog *ld)
 {
-    GdkPixbuf *pb;
-    LauncherEntry *entry = g_ptr_array_index (ld->launcher->entries, 0);
-
-    pb = launcher_icon_load_pixbuf (&entry->icon, PANEL_ICON_SIZE);
-    
-    xfce_iconbutton_set_pixbuf (XFCE_ICONBUTTON (ld->launcher->iconbutton),
-                                pb);
-    g_object_unref (pb);
+    launcher_update_panel_entry(ld->launcher);
 }
 
 static void
@@ -357,7 +352,8 @@ icon_menu_activated (GtkWidget *mi, LauncherDialog *ld)
         ld->entry->icon.type = LAUNCHER_ICON_TYPE_CATEGORY;
         ld->entry->icon.icon.category = (XfceIconThemeCategory) n;
 
-        pb = launcher_icon_load_pixbuf (&ld->entry->icon, DLG_ICON_SIZE);
+        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
+                                        DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
         g_object_unref (pb);
 
@@ -389,7 +385,8 @@ icon_browse (GtkWidget *b, LauncherDialog *ld)
         gtk_editable_set_position (GTK_EDITABLE (ld->icon_file), -1);
         update_entry_icon (ld);
 
-        pb = launcher_icon_load_pixbuf (&ld->entry->icon, DLG_ICON_SIZE);
+        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
+                                        DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
         g_object_unref (pb);
 
@@ -508,7 +505,7 @@ create_icon_category_menu (LauncherDialog *ld)
                           G_CALLBACK (icon_menu_activated), ld);
 
         icon.icon.category = i;
-        pb = launcher_icon_load_pixbuf (&icon, MENU_ICON_SIZE);
+        pb = launcher_icon_load_pixbuf (mi, &icon, MENU_ICON_SIZE);
         img = gtk_image_new_from_pixbuf (pb);
         gtk_widget_show (img);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
@@ -691,7 +688,8 @@ launcher_dialog_update_entry_properties (LauncherDialog *ld)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ld->exec_startup), 
                                   ld->entry->startup);
 
-    pb = launcher_icon_load_pixbuf (&ld->entry->icon, DLG_ICON_SIZE);
+    pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
+                                    DLG_ICON_SIZE);
     gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
     g_object_unref (pb);
 
@@ -841,7 +839,7 @@ cursor_changed (GtkTreeView * tv, LauncherDialog *ld)
 
 static void
 render_icon (GtkTreeViewColumn * col, GtkCellRenderer * cell,
-	     GtkTreeModel * model, GtkTreeIter * iter, gpointer data)
+	     GtkTreeModel * model, GtkTreeIter * iter, GtkWidget *tree)
 {
     LauncherEntry *entry;
     GdkPixbuf *pb;
@@ -850,7 +848,7 @@ render_icon (GtkTreeViewColumn * col, GtkCellRenderer * cell,
 
     if (entry)
     {
-        pb = launcher_icon_load_pixbuf (&entry->icon, DLG_ICON_SIZE);
+        pb = launcher_icon_load_pixbuf (tree, &entry->icon, DLG_ICON_SIZE);
         g_object_set (cell, "pixbuf", pb, NULL);
         g_object_unref (pb);
     }
@@ -922,7 +920,7 @@ launcher_dialog_add_item_tree (LauncherDialog *ld, GtkBox *box)
     gtk_tree_view_column_pack_start (col, cell, FALSE);
     gtk_tree_view_column_set_cell_data_func (col, cell,
 					     (GtkTreeCellDataFunc)
-					     render_icon, NULL, NULL);
+					     render_icon, tv, NULL);
 
     cell = gtk_cell_renderer_text_new ();
     gtk_tree_view_column_pack_start (col, cell, TRUE);
@@ -1525,7 +1523,8 @@ entry_dialog_data_received (GtkWidget *w, GdkDragContext *context,
             gtk_toggle_button_set_active (
                     GTK_TOGGLE_BUTTON (ld->exec_startup), e->startup);
 
-            pb = launcher_icon_load_pixbuf (&e->icon, DLG_ICON_SIZE);
+            pb = launcher_icon_load_pixbuf (ld->icon_img, &e->icon, 
+                                            DLG_ICON_SIZE);
             gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
             g_object_unref (pb);
         }

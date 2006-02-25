@@ -18,6 +18,8 @@ libxfce4panel_la_SOURCES =				\
 	xfce-itembar.c					\
 	xfce-itembar.h					\
 	xfce-panel-enums.h				\
+	xfce-panel-convenience.c			\
+	xfce-panel-convenience.h			\
 	xfce-panel-external-item.c			\
 	xfce-panel-external-item.h			\
 	xfce-panel-external-plugin.c			\
@@ -40,6 +42,7 @@ xfce4_panelinclude_HEADERS =				\
 	xfce-arrow-button.h				\
 	xfce-itembar.h					\
 	xfce-panel-enums.h				\
+	xfce-panel-convenience.h			\
 	xfce-panel-plugin-iface.h			\
 	xfce-panel-internal-plugin.h			\
 	xfce-panel-external-plugin.h			\
