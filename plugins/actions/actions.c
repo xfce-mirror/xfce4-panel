@@ -80,7 +80,7 @@ actions_orientation_changed (XfcePanelPlugin *plugin,
     {
         xfce_hvbox_set_orientation (XFCE_HVBOX (GTK_BIN (plugin)->child), 
                 (orientation == GTK_ORIENTATION_HORIZONTAL) ?
-                        GTK_ORIENATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
+                        GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
     }
 }
 
