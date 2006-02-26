@@ -88,6 +88,28 @@ actions_orientation_changed (XfcePanelPlugin *plugin,
     }
 }
 
+static const char *action_icon_names[2][2] = {
+    { "xfce-system-exit", "system-log-out" },
+    { "xfce-system-lock", "system-lock-screen" }
+};
+
+static GdkPixbuf *
+actions_load_icon (ActionType type, int size)
+{
+    GdkPixbuf *pb = NULL;
+    
+    /* first try name from icon nameing spec... */
+    pb = xfce_themed_icon_load (action_icon_names[type][1], size);
+    
+    /* ...then try xfce name, if necessary */
+    if (!pb)
+    {
+        pb = xfce_themed_icon_load (action_icon_names[type][0], size);
+    }
+
+    return pb;
+}
+
 static gboolean 
 actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
 {
@@ -110,23 +132,18 @@ actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
     switch (action->type)
     {
         case ACTION_QUIT_LOCK:
-            pb = xfce_themed_icon_load ("xfce-system-exit", width);
+            pb = actions_load_icon (ACTION_QUIT, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
             g_object_unref (pb);
             
-            pb = xfce_themed_icon_load ("xfce-system-lock", width);
+            pb = actions_load_icon (ACTION_LOCK, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image2), pb);
             g_object_unref (pb);
             
             break;
         case ACTION_QUIT:
-            pb = xfce_themed_icon_load ("xfce-system-exit", width);
-            gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
-            g_object_unref (pb);
-            
-            break;
         case ACTION_LOCK:
-            pb = xfce_themed_icon_load ("xfce-system-lock", width);
+            pb = actions_load_icon (action->type, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
             g_object_unref (pb);
             

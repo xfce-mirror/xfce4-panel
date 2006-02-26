@@ -153,7 +153,7 @@ static const char *icon_categories[XFCE_N_BUILTIN_ICON_CATEGORIES][2] =
 	{ "xfce-unknown",       "dialog-question" },
 	{ "xfce-edit",          "accessories-text-editor" },
 	{ "xfce-filemanager",   "system-file-manager" },
-	{ "xfce-utils",         "applications-utilities" },
+	{ "xfce-utils",         "applications-accessories" },
 	{ "xfce-games",         "applications-games" },
 	{ "xfce-man",           "system-help" },
 	{ "xfce-multimedia",    "applications-multimedia" },

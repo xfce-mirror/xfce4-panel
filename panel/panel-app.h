@@ -52,16 +52,16 @@ extern GTimer *timer;
         g_print (" + ");                                    \
         if (hrs)                                            \
         {                                                   \
-            g_print ("%d hrs, %d mins, %d secs\t",          \
+            g_print ("%d h, %d min, %d s\t",                \
                      hrs, mins, secs);                      \
         }                                                   \
         else if (mins)                                      \
         {                                                   \
-            g_print ("%d mins, %d secs\t", mins, secs);     \
+            g_print ("%d min, %d s\t", mins, secs);         \
         }                                                   \
         else if (secs)                                      \
         {                                                   \
-            g_print ("%d secs, %d ms\t", secs, ms);         \
+            g_print ("%d s, %d ms\t", secs, ms);            \
         }                                                   \
         else                                                \
         {                                                   \
