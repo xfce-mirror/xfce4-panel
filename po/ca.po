@@ -1,4 +1,4 @@
-# translation of ca.po to català
+# Catalan translations for xfce4-panel package.
 # xfce4-panel for XFce desktop environment.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-25 22:53+0100\n"
-"PO-Revision-Date: 2006-02-16 22:38+0100\n"
+"PO-Revision-Date: 2006-02-26 12:56+0100\n"
 "Last-Translator: Pau Rul.lan Ferragut <paurullan@bulma.net>\n"
 "Language-Team: catalan\n"
 "MIME-Version: 1.0\n"
@@ -20,26 +20,24 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:175
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr ""
+msgstr "S'ha esborrat un ítem de manera inesperada: \"%s\"."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:572
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr ""
+msgstr "Suprimir \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:704
 #: ../panel/panel-app.c:736 ../panel/panel-app.c:769
 #: ../panel/panel-dialogs.c:578 ../panel/panel-dialogs.c:1581
 #: ../plugins/launcher/launcher.c:363 ../plugins/launcher/launcher.c:412
-#, fuzzy
 msgid "Xfce Panel"
-msgstr "Plafó Xfce"
+msgstr "Quadre Xfce"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:577
-#, fuzzy
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
-msgstr "element de   quadre i."
+msgstr "Això suprimirà l'element del quadre, perdent-se la seva configuració."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:748
@@ -48,84 +46,72 @@ msgstr "element de   quadre i."
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:366 ../plugins/tasklist/tasklist.c:397
 #: ../plugins/windowlist/windowlist.c:540
-#, fuzzy
 msgid "Properties"
 msgstr "Propietats"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:765
-#, fuzzy
 msgid "About"
 msgstr "Quant a"
 
 #. move
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:778
-#, fuzzy
 msgid "Move"
-msgstr "Suprimeix"
+msgstr "Mou"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:800
-#, fuzzy
 msgid "Remove"
 msgstr "Suprimeix"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:817
-#, fuzzy
 msgid "Add New Item"
-msgstr "Nou Ítem"
+msgstr "Afegix un element nou"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:647
-#, fuzzy
 msgid "Customize Panel"
 msgstr "Personalitza Plafó"
 
 #: ../panel/panel.c:658 ../panel/panel-dialogs.c:601
 msgid "Add Items"
-msgstr ""
+msgstr "Afegir element"
 
 #: ../panel/panel.c:673 ../plugins/actions/actions.c:399
-#, fuzzy
 msgid "Quit"
 msgstr "Surt"
 
 #: ../panel/panel.c:683
-#, fuzzy
 msgid "Restart"
 msgstr "Reinicia"
 
 #: ../panel/panel.c:697
-#, fuzzy
 msgid "About the Xfce Panel"
-msgstr "Quant a   Plafó"
+msgstr "Quant al quadre Xfce"
 
 #: ../panel/panel-item-manager.c:357 ../panel/panel-item-manager.c:365
 #, c-format
 msgid "Could not open \"%s\" module"
-msgstr ""
+msgstr "No s'ha pogut obrir el mòdul \"%s\""
 
 #: ../panel/panel-app.c:215 ../panel/panel-app.c:706
-#, fuzzy
 msgid "Exit Xfce Panel?"
-msgstr "Sortir Plafó?"
+msgstr "Sortir del quadre Xfce?"
 
 #: ../panel/panel-app.c:707
-#, fuzzy
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr "Tu elimina   últim quadre tu com a    programa?"
+msgstr "No podeu eliminar el darrer quadre. Desitgeu tancar el programa?"
 
 #: ../panel/panel-app.c:734
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr ""
+msgstr "Suprimir el quadre \"%d\"?"
 
 #: ../panel/panel-app.c:738
-#, fuzzy
 msgid "The selected panel and all its items will be removed."
-msgstr "seleccionat quadre i all elements."
+msgstr "S'eliminaran el quadre seleccionat i tots els seus elements."
 
 #: ../panel/panel-app.c:777
 msgid "Developer"
-msgstr ""
+msgstr "Desenvolupador"
 
 #: ../panel/main.c:46
 #, c-format
@@ -139,13 +125,21 @@ msgid ""
 " Licensed under the GNU GPL.\n"
 "\n"
 msgstr ""
+"\n"
+"Quadre Xfce %s\n"
+"\n"
+"Part de l'entorn d'escriptori Xfce\n"
+"http://www.xfce.org\n"
+"\n"
+"Llicenciat baix la GNU GPL.\n"
+"\n"
 
 #: ../panel/main.c:52
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
-msgstr "OPCIONS n n"
+msgstr "Ús: %s [OPCIONS]\n\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -161,124 +155,112 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
+"OPCIONS\n"
+"\" -h, --help      Mostra aquest missatge i surt\"\n"
+"\" -v, --version   Mostra aquest missatge i surt\"\n"
+"\" -c, --customize Mostra el dialeg de configuració\"\n"
+"\" -s, --save      Desa la configuració\n"
+"\" -r, --restart   Reinicia els quadres\n"
+"\" -q, --quit      Acaba la sessió\n"
+"\" -x, --exit      Tanca tots els quadres i acaba el programa\n"
+"\" -a, --add       Afegeix elements\n"
+"\n"
 
 #: ../panel/panel-dialogs.c:616
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
-msgstr ""
-"Arrossega elements de   llista a  a quadre o elimina per endarrere a    "
-"llista."
+msgstr "Arrossega elements del llistat al quadre o elimina-los movent-los de nou al llistat."
 
 #: ../panel/panel-dialogs.c:629
-#, fuzzy
 msgid "Available Items"
-msgstr "Elements"
+msgstr "Elements disponibles"
 
 #: ../panel/panel-dialogs.c:842 ../panel/panel-dialogs.c:1066
-#, fuzzy
 msgid "Normal Width"
-msgstr "Complet Amplada"
+msgstr "Amplada normal"
 
 #: ../panel/panel-dialogs.c:844 ../panel/panel-dialogs.c:1068
-#, fuzzy
 msgid "Full Width"
-msgstr "Complet Amplada"
+msgstr "Tota l'amplada"
 
 #: ../panel/panel-dialogs.c:850 ../panel/panel-dialogs.c:1074
-#, fuzzy
 msgid "Span Monitors"
-msgstr "Monitor"
+msgstr "Amplada dels monitors"
 
 #: ../panel/panel-dialogs.c:910 ../panel/panel-dialogs.c:1139
-#, fuzzy
 msgid "Left"
 msgstr "Esquerra"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1141
-#, fuzzy
 msgid "Right"
 msgstr "Dreta"
 
 #: ../panel/panel-dialogs.c:917 ../panel/panel-dialogs.c:1146
-#, fuzzy
 msgid "Top"
 msgstr "Superior"
 
 #: ../panel/panel-dialogs.c:919 ../panel/panel-dialogs.c:1148
-#, fuzzy
 msgid "Bottom"
 msgstr "Inferior"
 
 #. position
 #: ../panel/panel-dialogs.c:947
-#, fuzzy
 msgid "Position"
 msgstr "Posició"
 
 #: ../panel/panel-dialogs.c:961
-#, fuzzy
 msgid "Fixed Position"
-msgstr "Fix Posició"
+msgstr "Posició fixa"
 
 #: ../panel/panel-dialogs.c:967
 msgid "Freely Moveable"
-msgstr ""
+msgstr "Col·locar lliurement"
 
 #: ../panel/panel-dialogs.c:1082
-#, fuzzy
 msgid "Auto_hide"
-msgstr "Auto"
+msgstr "Oculta_automàticament"
 
 #: ../panel/panel-dialogs.c:1100
-#, fuzzy
 msgid "Orientation:"
 msgstr "Orientació:"
 
 #: ../panel/panel-dialogs.c:1112
-#, fuzzy
 msgid "Horizontal"
 msgstr "Horitzontal"
 
 #: ../panel/panel-dialogs.c:1114
-#, fuzzy
 msgid "Vertical"
 msgstr "Vertical "
 
 #: ../panel/panel-dialogs.c:1123
-#, fuzzy
 msgid "Handle:"
-msgstr "Gestor Posició:"
+msgstr "Gestor:"
 
 #: ../panel/panel-dialogs.c:1135
-#, fuzzy
 msgid "At both sides"
-msgstr "Arrova"
+msgstr "A ambdos costats"
 
 #: ../panel/panel-dialogs.c:1208
-#, fuzzy
 msgid "Select Monitor"
-msgstr "Monitor"
+msgstr "Seleccioneu monitor"
 
 #: ../panel/panel-dialogs.c:1326 ../plugins/clock/clock.c:431
-#, fuzzy
 msgid "Appearance"
 msgstr "Aparença"
 
 #. size
 #: ../panel/panel-dialogs.c:1337
 msgid "Size (pixels):"
-msgstr ""
+msgstr "Tamany (píxels):"
 
 #: ../panel/panel-dialogs.c:1360
-#, fuzzy
 msgid "Transparency (%):"
-msgstr "Transparència"
+msgstr "Transparència (%):"
 
 #: ../panel/panel-dialogs.c:1384
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "Mostra opac el quadre actiu"
 
 #: ../panel/panel-dialogs.c:1425 ../panel/panel-dialogs.c:1463
 #: ../panel/panel-dialogs.c:1488
@@ -287,39 +269,32 @@ msgid "Panel %d"
 msgstr "Quadre %d"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Remove Panel"
-msgstr "Suprimeix Plafó"
+msgstr "Suprimeix quadre"
 
 #: ../panel/panel-dialogs.c:1522
-#, fuzzy
 msgid "New Panel"
-msgstr "Nou Plafó"
+msgstr "Quadre nou"
 
 #: ../panel/panel-dialogs.c:1606
-#, fuzzy
 msgid "Panel Manager"
-msgstr "Plafó Tipus"
+msgstr "Gestor de quadres"
 
 #: ../plugins/actions/actions.c:374
-#, fuzzy
 msgid "Panel Actions"
-msgstr "Plafó Accions"
+msgstr "Accions del quadre"
 
 #: ../plugins/actions/actions.c:391
-#, fuzzy
 msgid "Select action type:"
-msgstr "Seleccioneu tipus:"
+msgstr "Seleccioneu tipus d'acció:"
 
 #: ../plugins/actions/actions.c:400
-#, fuzzy
 msgid "Lock screen"
 msgstr "Bloca la pantalla"
 
 #: ../plugins/actions/actions.c:401
-#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "Surt Bloqueja pantalla"
+msgstr "Surt + Bloca pantalla"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -330,408 +305,340 @@ msgstr "Surt Bloqueja pantalla"
 #. * %Y  : four digit year
 #.
 #: ../plugins/clock/clock.c:109
-#, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
 #: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
-#, fuzzy
 msgid "Clock"
 msgstr "Rellotge"
 
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:446
-#, fuzzy
 msgid "Analog"
 msgstr "Analògic"
 
 #: ../plugins/clock/clock.c:447
-#, fuzzy
 msgid "Digital"
 msgstr "Digital "
 
 #: ../plugins/clock/clock.c:448
-#, fuzzy
 msgid "LED"
 msgstr "LED "
 
 #: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:395
-#, fuzzy
 msgid "Show _frame"
 msgstr "Mostra marc"
 
 #: ../plugins/clock/clock.c:461
-#, fuzzy
 msgid "Clock Options"
-msgstr "Rellotge Opcions"
+msgstr "Opcions del rellotge"
 
 #: ../plugins/clock/clock.c:471
-#, fuzzy
 msgid "Use 24-_hour clock"
-msgstr "Utilitza hora"
+msgstr "Utilitza estil de 24 hores"
 
 #: ../plugins/clock/clock.c:479
-#, fuzzy
 msgid "Show AM/PM"
-msgstr "Mostra"
+msgstr "Mostra AM/PM"
 
 #: ../plugins/clock/clock.c:487
-#, fuzzy
 msgid "Display seconds"
-msgstr "Pantalla segons"
+msgstr "Mostra segons"
 
 #: ../plugins/iconbox/iconbox.c:807
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
-#, fuzzy
 msgid "Icon Box"
-msgstr "Icona Quadre"
+msgstr "Caixa d'icona"
 
 #: ../plugins/iconbox/iconbox.c:821
-#, fuzzy
 msgid "Only show minimized applications"
-msgstr "Només minimitzat"
+msgstr "Sols mostra les aplicacions minimitzades"
 
 #: ../plugins/launcher/launcher.c:361 ../plugins/launcher/launcher.c:410
-#, fuzzy, c-format
+#, c-format
 msgid "Could not run \"%s\""
-msgstr "No s'ha pogut executar «%s»"
+msgstr "No s'ha pogut executar \"%s\""
 
 #: ../plugins/launcher/launcher.c:621 ../plugins/launcher/launcher.c:1240
 #: ../plugins/launcher/launcher-dialog.c:1119
-#, fuzzy
 msgid "New Item"
-msgstr "Nou Ítem"
+msgstr "Element nou"
 
 #: ../plugins/launcher/launcher.c:679 ../plugins/launcher/launcher.c:1241
-#, fuzzy
 msgid "This item has not yet been configured"
-msgstr "element té no"
+msgstr "L'element encara no s'ha configurat"
 
 #: ../plugins/launcher/launcher-dialog.c:78
-#, fuzzy
 msgid "Default"
 msgstr "Per defecte"
 
 #: ../plugins/launcher/launcher-dialog.c:79
-#, fuzzy
 msgid "Editor"
 msgstr "Editor"
 
 #: ../plugins/launcher/launcher-dialog.c:80
-#, fuzzy
 msgid "File management"
 msgstr "Gestió de fitxers"
 
 #: ../plugins/launcher/launcher-dialog.c:81
-#, fuzzy
 msgid "Utilities"
 msgstr "Utilitats"
 
 #: ../plugins/launcher/launcher-dialog.c:82
-#, fuzzy
 msgid "Games"
 msgstr "Jocs"
 
 #: ../plugins/launcher/launcher-dialog.c:83
-#, fuzzy
 msgid "Help browser"
 msgstr "Navegador d'ajuda"
 
 #: ../plugins/launcher/launcher-dialog.c:84
-#, fuzzy
 msgid "Multimedia"
 msgstr "Multimèdia"
 
 #: ../plugins/launcher/launcher-dialog.c:85
-#, fuzzy
 msgid "Network"
 msgstr "Xarxa"
 
 #: ../plugins/launcher/launcher-dialog.c:86
-#, fuzzy
 msgid "Graphics"
 msgstr "Gràfics"
 
 #: ../plugins/launcher/launcher-dialog.c:87
-#, fuzzy
 msgid "Printer"
 msgstr "Impressora"
 
 #: ../plugins/launcher/launcher-dialog.c:88
-#, fuzzy
 msgid "Productivity"
 msgstr "Productivitat"
 
 #: ../plugins/launcher/launcher-dialog.c:89
-#, fuzzy
 msgid "Sound"
 msgstr "So"
 
 #: ../plugins/launcher/launcher-dialog.c:90
-#, fuzzy
 msgid "Terminal"
 msgstr "Terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:377
-#, fuzzy
 msgid "Select image file"
 msgstr "Selecciona el fitxer d'imatge"
 
 #: ../plugins/launcher/launcher-dialog.c:423
-#, fuzzy
 msgid "Select command"
 msgstr "Seleccioneu ordre"
 
 #: ../plugins/launcher/launcher-dialog.c:446
-#, fuzzy
 msgid "Name"
 msgstr "Nom"
 
 #: ../plugins/launcher/launcher-dialog.c:464
-#, fuzzy
 msgid "Description"
 msgstr "Descripció"
 
 #: ../plugins/launcher/launcher-dialog.c:519
-#, fuzzy
 msgid "Other..."
-msgstr "Un altre..."
+msgstr "Altre..."
 
 #: ../plugins/launcher/launcher-dialog.c:605
-#, fuzzy
 msgid "Command"
 msgstr "Ordre"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Run in _terminal"
 msgstr "Executa en un _terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:659
-#, fuzzy
 msgid "Use _startup notification"
-msgstr "Utilitza"
+msgstr "Mostra notificació d'engegada"
 
 #: ../plugins/launcher/launcher-dialog.c:1241
-#, fuzzy
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
-msgstr ""
-"primer element po   llista és on   quadre Addicionals elements po a menú."
+msgstr "El primer element del llista es mostrarà al quadre. Els elements adicionals apareixeran al menú."
 
 #: ../plugins/launcher/launcher-dialog.c:1296
-#, fuzzy
 msgid "Program Launcher"
-msgstr "Programa Llançador"
+msgstr "Programa llançadora"
 
 #: ../plugins/launcher/launcher-dialog.c:1632
-#, fuzzy
 msgid "Select file"
 msgstr "Seleccioneu el fitxer"
 
 #: ../plugins/pager/pager.c:314 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Pager"
 msgstr "Paginador"
 
 #: ../plugins/pager/pager.c:334
-#, fuzzy
 msgid "Number of rows:"
 msgstr "Nombre de files:"
 
 #: ../plugins/pager/pager.c:338
-#, fuzzy
 msgid "Number of columns:"
 msgstr "Nombre de columnes:"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "Separador"
+msgstr "Separador o espaiat"
 
 #: ../plugins/separator/separator.c:284
-#, fuzzy
 msgid "_Draw Separator"
-msgstr "Dibuixa Separador"
+msgstr "_Dibuixa Separador"
 
 #: ../plugins/separator/separator.c:293
-#, fuzzy
 msgid "_Expand"
-msgstr "Amplia"
+msgstr "_Expandeix"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
-msgstr ""
+msgstr "Recupera les finestres ocultes"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
-msgstr ""
+msgstr "Oculta les finestres i mostra l'escriptori"
 
 #: ../plugins/systray/systray.c:65
-#, fuzzy
 msgid "There is already a system tray running on this screen"
 msgstr "Ja hi ha una safata del sistema executant-se a la pantalla"
 
 #: ../plugins/systray/systray.c:71
-#, fuzzy, c-format
+#, c-format
 msgid "Unable to register system tray: %s"
 msgstr "No es por registrar la safata del sistema: %s"
 
 #: ../plugins/systray/systray.c:382
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr ""
+msgstr "Safa del sistema"
 
 #: ../plugins/tasklist/tasklist.c:413 ../plugins/tasklist/tasklist.c:466
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
-#, fuzzy
 msgid "Task List"
-msgstr "Tasca Llista"
+msgstr "Llistat de tasques"
 
 #: ../plugins/tasklist/tasklist.c:430
-#, fuzzy
 msgid "Size"
 msgstr "Mida"
 
 #: ../plugins/tasklist/tasklist.c:438
 msgid "Minimum Width:"
-msgstr ""
+msgstr "Mida mínima"
 
 #: ../plugins/tasklist/tasklist.c:453
 msgid "Use all available space"
-msgstr ""
+msgstr "Usa tot l'espai disponible"
 
 #: ../plugins/tasklist/tasklist.c:470
-#, fuzzy
 msgid "Show tasks from _all workspaces"
-msgstr "Mostra les tasques de _totes les àrees de treball"
+msgstr "Mostr_a les tasques de totes les àrees de treball"
 
 #: ../plugins/tasklist/tasklist.c:480
-#, fuzzy
 msgid "Show application _names"
 msgstr "Mostra els _noms de les aplicacions"
 
 #: ../plugins/tasklist/tasklist.c:494
-#, fuzzy
 msgid "Never group tasks"
-msgstr "Mai grup"
+msgstr "No agrupis mai les tasques"
 
 #: ../plugins/tasklist/tasklist.c:497
-#, fuzzy
 msgid "Automatically group tasks"
-msgstr "Automàticament grup"
+msgstr "Agrupa automàticament les tasques"
 
 #: ../plugins/tasklist/tasklist.c:500
-#, fuzzy
 msgid "Always group tasks"
-msgstr "Sempre grup"
+msgstr "Agrupa sempre les tasques"
 
 #: ../plugins/windowlist/windowlist.c:309
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "Espai de treball %d"
 
 #: ../plugins/windowlist/windowlist.c:387
 #: ../plugins/windowlist/windowlist.c:393
 msgid "Add workspace"
-msgstr ""
+msgstr "Afegeix espai de treball"
 
 #: ../plugins/windowlist/windowlist.c:408
 #, c-format
 msgid "Remove Workspace %d"
-msgstr ""
+msgstr "Suprimeix l'espai de treball %d"
 
 #: ../plugins/windowlist/windowlist.c:410
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "Suprimeix l'espai de treball '%s'"
 
 #: ../plugins/windowlist/windowlist.c:555
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr ""
+msgstr "Llista de finestres"
 
 #: ../plugins/windowlist/windowlist.c:566
 msgid "Include all Workspaces"
-msgstr ""
+msgstr "Inclou tots els espais de treball"
 
 #: ../plugins/windowlist/windowlist.c:571
 msgid "Show Window Icons"
-msgstr ""
+msgstr "Mostra icones de finestres"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Botons d'accions"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
-#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "Log o   pantalla"
+msgstr "Surt o bloca la pantalla"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
-#, fuzzy
 msgid "What time is it?"
-msgstr "Què time és?"
+msgstr "Quina hora és?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
-#, fuzzy
 msgid "Show icons of all running applications"
-msgstr "Mostra de all"
+msgstr "Mostra les icones de totes les aplicacions en execució"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
-#, fuzzy
 msgid "Launcher"
-msgstr "Llançador"
+msgstr "Llançadora"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
-#, fuzzy
 msgid "Program launcher with optional menu"
-msgstr "Programa amb menú"
+msgstr "Llançadora de programa amb menu opcional"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Miniature view of all virtual desktops"
-msgstr "de all"
+msgstr "Vista en miniatura de tots els escriptoris virtuals"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
-#, fuzzy
 msgid "Adds a space or a line between panel items"
-msgstr "a espai o a quadre elements"
+msgstr "Afegix un espai o una línea entre els elements del quadre"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "Mostra escriptori"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "Commuta mostra/oculta l'escriptori"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Show notification icons"
-msgstr "Mostra"
+msgstr "Mostra icones de notificació"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-#, fuzzy
 msgid "Show all running applications"
-msgstr "Mostra all"
+msgstr "Mostra totes les aplicacions en execució"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr ""
+msgstr "Mostra el llistat de les finestres disponibles"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
-#, fuzzy
 msgid "Test Plugin"
-msgstr "Comprova Connector"
+msgstr "Connector de proves"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
-#, fuzzy
 msgid "This plugin has no purpose"
-msgstr "té no"
-
-#, fuzzy
-#~ msgid "Separator or Separator"
-#~ msgstr "Dibuixa Separador"
+msgstr "Aquest connector no té propòsit"
