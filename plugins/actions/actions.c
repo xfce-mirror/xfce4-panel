@@ -230,14 +230,19 @@ static void
 actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
 {
     GtkWidget *widget, *box, *button, *img;
+    GtkOrientation orientation;
     
     widget = GTK_WIDGET (plugin);
 
     switch (action->type)
     {
         case ACTION_QUIT_LOCK:
-            box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), 
-                                  TRUE, 0);
+            orientation = (xfce_panel_plugin_get_orientation (plugin) == 
+                           GTK_ORIENTATION_HORIZONTAL) ?
+                                GTK_ORIENTATION_VERTICAL : 
+                                GTK_ORIENTATION_HORIZONTAL;
+
+            box = xfce_hvbox_new (orientation, TRUE, 0);
             gtk_widget_show (box);
             gtk_container_add (GTK_CONTAINER (plugin), box);
 
