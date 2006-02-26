@@ -94,7 +94,17 @@ launcher_set_size (XfcePanelPlugin *plugin, int size, LauncherPlugin *launcher)
 static void 
 launcher_free_data (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
 {
-    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+    GtkWidget *dlg;
+    
+    if (launcher->screen_id)
+        g_signal_handler_disconnect (launcher->image, launcher->screen_id);
+    
+    if (launcher->style_id)
+        g_signal_handler_disconnect (launcher->image, launcher->style_id);
+    
+    launcher->screen_id = launcher->style_id = 0;
+
+    dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
 
     if (dlg)
         gtk_widget_destroy (dlg);
@@ -1176,11 +1186,13 @@ launcher_new (XfcePanelPlugin *plugin)
     launcher_set_screen_position (launcher, screen_position);
 
     /* signals */
-    g_signal_connect (launcher->image, "style-set", 
-                      G_CALLBACK (plugin_icon_theme_changed), launcher);
+    launcher->style_id =
+        g_signal_connect (launcher->image, "style-set", 
+                          G_CALLBACK (plugin_icon_theme_changed), launcher);
     
-    g_signal_connect (launcher->image, "screen-changed", 
-                      G_CALLBACK (plugin_icon_theme_changed), launcher);
+    launcher->screen_id =
+        g_signal_connect (launcher->image, "screen-changed", 
+                          G_CALLBACK (plugin_icon_theme_changed), launcher);
 
     g_signal_connect (launcher->iconbutton, "button-press-event",
                       G_CALLBACK (launcher_toggle_menu_timeout), launcher);

@@ -31,6 +31,7 @@
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/xfce-hvbox.h>
 
 typedef enum
 {
@@ -49,6 +50,9 @@ typedef struct
     GtkWidget *image1;
     GtkWidget *button2;
     GtkWidget *image2;
+
+    int screen_id;
+    int style_id;
 }
 Action;
 
@@ -74,17 +78,8 @@ actions_orientation_changed (XfcePanelPlugin *plugin,
 {
     if (action->type == ACTION_QUIT_LOCK)
     {
-        GtkWidget *box;
-
-        box = orientation == GTK_ORIENTATION_HORIZONTAL ?
-                gtk_vbox_new (TRUE, 0) : gtk_hbox_new (TRUE, 0);
-        gtk_widget_show (box);
-
-        gtk_widget_reparent (action->button1, box);
-        gtk_widget_reparent (action->button2, box);
-
-        gtk_widget_destroy (GTK_BIN (plugin)->child);
-        gtk_container_add (GTK_CONTAINER (plugin), box);
+        xfce_hvbox_set_orientation (XFCE_HVBOX (GTK_BIN (plugin)->child), 
+                                    orientation);
     }
 }
 
@@ -201,12 +196,19 @@ actions_free_data (XfcePanelPlugin *plugin, Action *action)
 {
     GtkWidget *dlg;
 
+    if (action->screen_id)
+        g_signal_handler_disconnect (plugin, action->screen_id);
+    
+    if (action->style_id)
+        g_signal_handler_disconnect (plugin, action->style_id);
+    
+    action->screen_id = action->style_id = 0;
+
     dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
     if (dlg)
         gtk_widget_destroy (dlg);
 
     g_free (action);
-    action->plugin = NULL;
 }
 
 /* create widgets and connect to signals */
@@ -233,9 +235,8 @@ actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
     switch (action->type)
     {
         case ACTION_QUIT_LOCK:
-            box = (xfce_panel_plugin_get_orientation (plugin) == 
-                    GTK_ORIENTATION_HORIZONTAL) ? 
-                  gtk_vbox_new (TRUE, 0) : gtk_hbox_new (TRUE, 0);
+            box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), 
+                                  TRUE, 0);
             gtk_widget_show (box);
             gtk_container_add (GTK_CONTAINER (plugin), box);
 
@@ -301,8 +302,7 @@ static void
 actions_icontheme_changed (XfcePanelPlugin *plugin, gpointer ignored,
                            Action *action)
 {
-    if (action->plugin)
-        actions_set_size (plugin, xfce_panel_plugin_get_size (plugin), action);
+    actions_set_size (plugin, xfce_panel_plugin_get_size (plugin), action);
 }
 
 static void 
@@ -332,11 +332,13 @@ actions_construct (XfcePanelPlugin *plugin)
 
     actions_create_widgets (plugin, action);
     
-    g_signal_connect (plugin, "style-set", 
-                      G_CALLBACK (actions_icontheme_changed), action);
+    action->style_id =
+        g_signal_connect (plugin, "style-set", 
+                          G_CALLBACK (actions_icontheme_changed), action);
     
-    g_signal_connect (plugin, "screen-changed", 
-                      G_CALLBACK (actions_icontheme_changed), action);
+    action->screen_id =
+        g_signal_connect (plugin, "screen-changed", 
+                          G_CALLBACK (actions_icontheme_changed), action);
 }
 
 /* -------------------------------------------------------------------- *

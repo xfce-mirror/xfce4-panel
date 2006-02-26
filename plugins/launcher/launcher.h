@@ -81,6 +81,8 @@ struct _LauncherPlugin
     GtkWidget *image;
     GtkWidget *menu;
 
+    int screen_id;
+    int style_id;
     int popup_timeout;
     guint from_timeout:1;
 };
