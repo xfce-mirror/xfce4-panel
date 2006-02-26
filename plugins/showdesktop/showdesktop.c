@@ -25,8 +25,8 @@
 
 #include <gtk/gtk.h>
 #include <libxfcegui4/libxfcegui4.h>
-
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 #define SHOW_DESKTOP_ICON_NAME  "gnome-fs-desktop"
 #define TIP_ACTIVE              _("Restore hidden windows")
@@ -67,6 +67,7 @@ showdesktop_set_size (XfcePanelPlugin *plugin, int size, ShowDesktopData *sdd)
     pb = xfce_themed_icon_load (SHOW_DESKTOP_ICON_NAME, width);
     gtk_image_set_from_pixbuf (GTK_IMAGE (sdd->image), pb);
     g_object_unref (pb);
+    gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
 
     return TRUE;
 }
@@ -170,7 +171,7 @@ showdesktop_construct (XfcePanelPlugin * plugin)
 
     sdd->image = gtk_image_new ();
 
-    sdd->button = gtk_toggle_button_new ();
+    sdd->button = xfce_create_panel_toggle_button ();
     gtk_container_add (GTK_CONTAINER (sdd->button), GTK_WIDGET (sdd->image));
 
     gtk_button_set_relief (GTK_BUTTON (sdd->button), GTK_RELIEF_NONE);

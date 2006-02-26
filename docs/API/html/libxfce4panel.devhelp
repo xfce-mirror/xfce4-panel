@@ -2,18 +2,59 @@
 <book xmlns="http://www.devhelp.net/book" title="libxfce4panel Reference Manual" link="index.html" author="" name="libxfce4panel">
   <chapters>
     <sub name="API Reference" link="ch01.html">
-      <sub name="XfceArrowButton" link="XfceArrowButton.html"/>
-      <sub name="XfcePanelWindow" link="XfcePanelWindow.html"/>
-      <sub name="XfceItembar" link="XfceItembar.html"/>
-      <sub name="Standard Enumerations" link="libxfce4panel-Standard-Enumerations.html"/>
-      <sub name="Convenience Functions" link="libxfce4panel-Convenience-Functions.html"/>
       <sub name="Writing Plugins" link="libxfce4panel-Writing-Plugins.html"/>
       <sub name="XfcePanelPlugin" link="XfcePanelPlugin.html"/>
       <sub name="XfceExternalPanelPlugin" link="XfceExternalPanelPlugin.html"/>
       <sub name="XfceInternalPanelPlugin" link="XfceInternalPanelPlugin.html"/>
+      <sub name="Convenience Functions" link="libxfce4panel-Convenience-Functions.html"/>
+      <sub name="XfceArrowButton" link="XfceArrowButton.html"/>
+      <sub name="XfcePanelWindow" link="XfcePanelWindow.html"/>
+      <sub name="XfceItembar" link="XfceItembar.html"/>
+      <sub name="XfceHVBox" link="XfceHVBox.html"/>
+      <sub name="Standard Enumerations" link="libxfce4panel-Standard-Enumerations.html"/>
     </sub>
   </chapters>
   <functions>
+    <function name="XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS"/>
+    <function name="XFCE_PANEL_PLUGIN_REGISTER_INTERNAL()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS"/>
+    <function name="XfcePanelPlugin" link="XfcePanelPlugin.html#XfcePanelPlugin-struct"/>
+    <function name="XfcePanelPluginFunc ()" link="XfcePanelPlugin.html#XfcePanelPluginFunc"/>
+    <function name="xfce_panel_plugin_get_name ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-name"/>
+    <function name="xfce_panel_plugin_get_id ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-id"/>
+    <function name="xfce_panel_plugin_get_display_name ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-display-name"/>
+    <function name="xfce_panel_plugin_get_size ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-size"/>
+    <function name="xfce_panel_plugin_get_screen_position ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-screen-position"/>
+    <function name="xfce_panel_plugin_set_expand ()" link="XfcePanelPlugin.html#xfce-panel-plugin-set-expand"/>
+    <function name="xfce_panel_plugin_get_expand ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-expand"/>
+    <function name="xfce_panel_plugin_get_orientation ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-orientation"/>
+    <function name="xfce_panel_plugin_add_action_widget ()" link="XfcePanelPlugin.html#xfce-panel-plugin-add-action-widget"/>
+    <function name="xfce_panel_plugin_menu_insert_item ()" link="XfcePanelPlugin.html#xfce-panel-plugin-menu-insert-item"/>
+    <function name="xfce_panel_plugin_menu_show_about ()" link="XfcePanelPlugin.html#xfce-panel-plugin-menu-show-about"/>
+    <function name="xfce_panel_plugin_menu_show_configure ()" link="XfcePanelPlugin.html#xfce-panel-plugin-menu-show-configure"/>
+    <function name="xfce_panel_plugin_block_menu ()" link="XfcePanelPlugin.html#xfce-panel-plugin-block-menu"/>
+    <function name="xfce_panel_plugin_unblock_menu ()" link="XfcePanelPlugin.html#xfce-panel-plugin-unblock-menu"/>
+    <function name="xfce_panel_plugin_register_menu ()" link="XfcePanelPlugin.html#xfce-panel-plugin-register-menu"/>
+    <function name="xfce_panel_plugin_lookup_rc_file ()" link="XfcePanelPlugin.html#xfce-panel-plugin-lookup-rc-file"/>
+    <function name="xfce_panel_plugin_save_location ()" link="XfcePanelPlugin.html#xfce-panel-plugin-save-location"/>
+    <function name="The &quot;display-name&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--display-name"/>
+    <function name="The &quot;expand&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--expand"/>
+    <function name="The &quot;id&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--id"/>
+    <function name="The &quot;name&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--name"/>
+    <function name="The &quot;screen-position&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--screen-position"/>
+    <function name="The &quot;size&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--size"/>
+    <function name="The &quot;about&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-about"/>
+    <function name="The &quot;configure-plugin&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-configure-plugin"/>
+    <function name="The &quot;free-data&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-free-data"/>
+    <function name="The &quot;orientation-changed&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-orientation-changed"/>
+    <function name="The &quot;save&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-save"/>
+    <function name="The &quot;screen-position-changed&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-screen-position-changed"/>
+    <function name="The &quot;size-changed&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-size-changed"/>
+    <function name="XfceExternalPanelPlugin" link="XfceExternalPanelPlugin.html#XfceExternalPanelPlugin-struct"/>
+    <function name="xfce_external_panel_plugin_new ()" link="XfceExternalPanelPlugin.html#xfce-external-panel-plugin-new"/>
+    <function name="XfceInternalPanelPlugin" link="XfceInternalPanelPlugin.html#XfceInternalPanelPlugin-struct"/>
+    <function name="xfce_internal_panel_plugin_new ()" link="XfceInternalPanelPlugin.html#xfce-internal-panel-plugin-new"/>
+    <function name="xfce_create_panel_button ()" link="libxfce4panel-Convenience-Functions.html#xfce-create-panel-button"/>
+    <function name="xfce_create_panel_toggle_button ()" link="libxfce4panel-Convenience-Functions.html#xfce-create-panel-toggle-button"/>
     <function name="XfceArrowButton" link="XfceArrowButton.html#XfceArrowButton-struct"/>
     <function name="xfce_arrow_button_new ()" link="XfceArrowButton.html#xfce-arrow-button-new"/>
     <function name="xfce_arrow_button_set_arrow_type ()" link="XfceArrowButton.html#xfce-arrow-button-set-arrow-type"/>
@@ -63,6 +104,9 @@
     <function name="The &quot;expand&quot; child property" link="XfceItembar.html#XfceItembar--expand"/>
     <function name="The &quot;contents-changed&quot; signal" link="XfceItembar.html#XfceItembar-contents-changed"/>
     <function name="The &quot;orientation-changed&quot; signal" link="XfceItembar.html#XfceItembar-orientation-changed"/>
+    <function name="XfceHVBox" link="XfceHVBox.html#XfceHVBox-struct"/>
+    <function name="xfce_hvbox_new ()" link="XfceHVBox.html#xfce-hvbox-new"/>
+    <function name="xfce_hvbox_set_orientation ()" link="XfceHVBox.html#xfce-hvbox-set-orientation"/>
     <function name="enum XfceScreenPosition" link="libxfce4panel-Standard-Enumerations.html#XfceScreenPosition"/>
     <function name="xfce_screen_position_is_horizontal()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-horizontal"/>
     <function name="xfce_screen_position_get_orientation()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-get-orientation"/>
@@ -71,45 +115,5 @@
     <function name="xfce_screen_position_is_left()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-left"/>
     <function name="xfce_screen_position_is_right()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-right"/>
     <function name="xfce_screen_position_is_bottom()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-bottom"/>
-    <function name="xfce_create_panel_button ()" link="libxfce4panel-Convenience-Functions.html#xfce-create-panel-button"/>
-    <function name="xfce_create_panel_toggle_button ()" link="libxfce4panel-Convenience-Functions.html#xfce-create-panel-toggle-button"/>
-    <function name="XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS"/>
-    <function name="XFCE_PANEL_PLUGIN_REGISTER_INTERNAL()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS"/>
-    <function name="XfcePanelPlugin" link="XfcePanelPlugin.html#XfcePanelPlugin-struct"/>
-    <function name="XfcePanelPluginFunc ()" link="XfcePanelPlugin.html#XfcePanelPluginFunc"/>
-    <function name="xfce_panel_plugin_get_name ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-name"/>
-    <function name="xfce_panel_plugin_get_id ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-id"/>
-    <function name="xfce_panel_plugin_get_display_name ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-display-name"/>
-    <function name="xfce_panel_plugin_get_size ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-size"/>
-    <function name="xfce_panel_plugin_get_screen_position ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-screen-position"/>
-    <function name="xfce_panel_plugin_set_expand ()" link="XfcePanelPlugin.html#xfce-panel-plugin-set-expand"/>
-    <function name="xfce_panel_plugin_get_expand ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-expand"/>
-    <function name="xfce_panel_plugin_get_orientation ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-orientation"/>
-    <function name="xfce_panel_plugin_add_action_widget ()" link="XfcePanelPlugin.html#xfce-panel-plugin-add-action-widget"/>
-    <function name="xfce_panel_plugin_menu_insert_item ()" link="XfcePanelPlugin.html#xfce-panel-plugin-menu-insert-item"/>
-    <function name="xfce_panel_plugin_menu_show_about ()" link="XfcePanelPlugin.html#xfce-panel-plugin-menu-show-about"/>
-    <function name="xfce_panel_plugin_menu_show_configure ()" link="XfcePanelPlugin.html#xfce-panel-plugin-menu-show-configure"/>
-    <function name="xfce_panel_plugin_block_menu ()" link="XfcePanelPlugin.html#xfce-panel-plugin-block-menu"/>
-    <function name="xfce_panel_plugin_unblock_menu ()" link="XfcePanelPlugin.html#xfce-panel-plugin-unblock-menu"/>
-    <function name="xfce_panel_plugin_register_menu ()" link="XfcePanelPlugin.html#xfce-panel-plugin-register-menu"/>
-    <function name="xfce_panel_plugin_lookup_rc_file ()" link="XfcePanelPlugin.html#xfce-panel-plugin-lookup-rc-file"/>
-    <function name="xfce_panel_plugin_save_location ()" link="XfcePanelPlugin.html#xfce-panel-plugin-save-location"/>
-    <function name="The &quot;display-name&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--display-name"/>
-    <function name="The &quot;expand&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--expand"/>
-    <function name="The &quot;id&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--id"/>
-    <function name="The &quot;name&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--name"/>
-    <function name="The &quot;screen-position&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--screen-position"/>
-    <function name="The &quot;size&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--size"/>
-    <function name="The &quot;about&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-about"/>
-    <function name="The &quot;configure-plugin&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-configure-plugin"/>
-    <function name="The &quot;free-data&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-free-data"/>
-    <function name="The &quot;orientation-changed&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-orientation-changed"/>
-    <function name="The &quot;save&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-save"/>
-    <function name="The &quot;screen-position-changed&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-screen-position-changed"/>
-    <function name="The &quot;size-changed&quot; signal" link="XfcePanelPlugin.html#XfcePanelPlugin-size-changed"/>
-    <function name="XfceExternalPanelPlugin" link="XfceExternalPanelPlugin.html#XfceExternalPanelPlugin-struct"/>
-    <function name="xfce_external_panel_plugin_new ()" link="XfceExternalPanelPlugin.html#xfce-external-panel-plugin-new"/>
-    <function name="XfceInternalPanelPlugin" link="XfceInternalPanelPlugin.html#XfceInternalPanelPlugin-struct"/>
-    <function name="xfce_internal_panel_plugin_new ()" link="XfceInternalPanelPlugin.html#xfce-internal-panel-plugin-new"/>
   </functions>
 </book>

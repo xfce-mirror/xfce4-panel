@@ -28,6 +28,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-hvbox.h>
 
 typedef struct
 {
@@ -149,30 +150,18 @@ systray_orientation_changed (XfcePanelPlugin *plugin,
                              GtkOrientation orientation, 
                              Systray *systray)
 {
-    systray_stop (systray);
-    
-    gtk_widget_destroy (systray->iconbox);
+    xfce_hvbox_set_orientation (XFCE_HVBOX (systray->iconbox), orientation);
 
     if (orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-        systray->iconbox =  gtk_hbox_new (TRUE, 3);
-        
         gtk_alignment_set_padding (GTK_ALIGNMENT (systray->align), 
                                    0, 0, 3, 3);
     }
     else
     {
-        systray->iconbox =  gtk_vbox_new (TRUE, 3);
-        
         gtk_alignment_set_padding (GTK_ALIGNMENT (systray->align), 
                                    3, 3, 0, 0);
     }
-        
-    gtk_widget_show (systray->iconbox);
-
-    gtk_container_add (GTK_CONTAINER (systray->align), systray->iconbox);
-
-    systray_start (systray);
 }
 
 static gboolean 
@@ -299,14 +288,16 @@ systray_construct (XfcePanelPlugin *plugin)
     if (xfce_panel_plugin_get_orientation (plugin) == 
             GTK_ORIENTATION_HORIZONTAL)
     {
-        systray->iconbox =  gtk_hbox_new (TRUE, 3);
+        systray->iconbox =  
+            xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, TRUE, 3);
         
         gtk_alignment_set_padding (GTK_ALIGNMENT (systray->align), 
                                    0, 0, 3, 3);
     }
     else
     {
-        systray->iconbox =  gtk_vbox_new (TRUE, 3);
+        systray->iconbox =  
+            xfce_hvbox_new (GTK_ORIENTATION_VERTICAL, TRUE, 3);
         
         gtk_alignment_set_padding (GTK_ALIGNMENT (systray->align), 
                                    3, 3, 0, 0);
@@ -402,4 +393,3 @@ systray_properties_dialog (XfcePanelPlugin *plugin, Systray *systray)
 
     gtk_widget_show (dlg);
 }
-

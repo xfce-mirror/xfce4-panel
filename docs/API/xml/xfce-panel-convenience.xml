@@ -9,7 +9,9 @@
 </refmeta>
 
 <refnamediv>
-<refname>Convenience Functions</refname><refpurpose></refpurpose>
+<refname>Convenience Functions</refname><refpurpose><para>
+Special purpose widgets and utilities.
+</para></refpurpose>
 </refnamediv>
 
 <refsynopsisdiv><title>Synopsis</title>
@@ -34,7 +36,8 @@
 <refsect1>
 <title>Description</title>
 <para>
-
+This section describes a number of functions that were created to help
+developers of Xfce Panel plugins.
 </para>
 </refsect1>
 
@@ -45,10 +48,7 @@
 <indexterm><primary>xfce_create_panel_button</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_create_panel_button        (void);</programlisting>
 <para>
 Create regular <link linkend="GtkToggleButton"><type>GtkToggleButton</type></link> with a few properties set to be useful in 
-the Xfce panel:
-- Flat (<literal>GTK_RELIEF_NONE</literal>)
-- No focus on click
-- Minimal padding</para>
+Xfce panel: Flat (<literal>GTK_RELIEF_NONE</literal>), no focus on click and minimal padding.</para>
 <para>
 
 </para><variablelist role="params">

@@ -33,6 +33,7 @@
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/xfce-hvbox.h>
 
 #include "launcher.h"
 #include "launcher-dialog.h"
@@ -1093,23 +1094,7 @@ launcher_set_orientation (XfcePanelPlugin *plugin,
                           LauncherPlugin *launcher, 
                           GtkOrientation orientation)
 {
-    GtkWidget *box;
-
-    box = launcher->box;
-
-    if (GTK_ORIENTATION_HORIZONTAL == orientation)
-        launcher->box = gtk_hbox_new (FALSE, 0);
-    else
-        launcher->box = gtk_vbox_new (FALSE, 0);
-    
-    gtk_widget_show (launcher->box);
-
-    gtk_widget_reparent (launcher->iconbutton, launcher->box);
-    gtk_widget_reparent (launcher->arrowbutton, launcher->box);
-
-    gtk_widget_destroy (box);
-
-    gtk_container_add (GTK_CONTAINER (plugin), launcher->box);
+    xfce_hvbox_set_orientation (XFCE_HVBOX (launcher->box), orientation);
 }
 
 static void
@@ -1164,9 +1149,9 @@ launcher_new (XfcePanelPlugin *plugin)
     launcher->entries = g_ptr_array_new ();
     
     if (xfce_screen_position_is_horizontal (screen_position))
-        launcher->box = gtk_hbox_new (FALSE, 0);
+        launcher->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
     else
-        launcher->box = gtk_vbox_new (FALSE, 0);
+        launcher->box = xfce_hvbox_new (GTK_ORIENTATION_VERTICAL, FALSE, 0);
     gtk_widget_show (launcher->box);
 
     launcher->iconbutton = xfce_create_panel_button ();
@@ -1279,4 +1264,3 @@ launcher_free (LauncherPlugin *launcher)
     g_free (launcher);
     launcher->plugin = NULL;
 }
-

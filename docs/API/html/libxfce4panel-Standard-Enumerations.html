@@ -5,19 +5,17 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.69.1">
 <link rel="start" href="index.html" title="libxfce4panel Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference">
-<link rel="prev" href="XfceItembar.html" title="XfceItembar">
-<link rel="next" href="libxfce4panel-Convenience-Functions.html" title="Convenience Functions">
+<link rel="prev" href="XfceHVBox.html" title="XfceHVBox">
 <meta name="generator" content="GTK-Doc V1.4 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="chapter" href="ch01.html" title="API Reference">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
-<td><a accesskey="p" href="XfceItembar.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="XfceHVBox.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">libxfce4panel Reference Manual</th>
-<td><a accesskey="n" href="libxfce4panel-Convenience-Functions.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="refentry" lang="en">
 <a name="libxfce4panel-Standard-Enumerations"></a><div class="titlepage"></div>
@@ -47,17 +45,17 @@ enum        <a href="libxfce4panel-Standard-Enumerations.html#XfceScreenPosition
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2569211"></a><h2>Description</h2>
+<a name="id2574562"></a><h2>Description</h2>
 <p>
 Currently only contains the definition of <a href="libxfce4panel-Standard-Enumerations.html#XfceScreenPosition"><span class="type">XfceScreenPosition</span></a>.
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2533386"></a><h2>Details</h2>
+<a name="id2548736"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2533392"></a><h3>
+<a name="id2548742"></a><h3>
 <a name="XfceScreenPosition"></a>enum XfceScreenPosition</h3>
-<a class="indexterm" name="id2533401"></a><pre class="programlisting">typedef enum /*&lt;enum,prefix=XFCE_SCREEN_POSITION &gt;*/
+<a class="indexterm" name="id2548751"></a><pre class="programlisting">typedef enum /*&lt;enum,prefix=XFCE_SCREEN_POSITION &gt;*/
 {
     XFCE_SCREEN_POSITION_NONE,
     
@@ -194,9 +192,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2538426"></a><h3>
+<a name="id2551468"></a><h3>
 <a name="xfce-screen-position-is-horizontal"></a>xfce_screen_position_is_horizontal()</h3>
-<a class="indexterm" name="id2538437"></a><pre class="programlisting">#define     xfce_screen_position_is_horizontal(position)</pre>
+<a class="indexterm" name="id2551478"></a><pre class="programlisting">#define     xfce_screen_position_is_horizontal(position)</pre>
 <p>
 </p>
 <p>
@@ -222,9 +220,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2538504"></a><h3>
+<a name="id2586546"></a><h3>
 <a name="xfce-screen-position-get-orientation"></a>xfce_screen_position_get_orientation()</h3>
-<a class="indexterm" name="id2538515"></a><pre class="programlisting">#define     xfce_screen_position_get_orientation(position)</pre>
+<a class="indexterm" name="id2586556"></a><pre class="programlisting">#define     xfce_screen_position_get_orientation(position)</pre>
 <p>
 </p>
 <p>
@@ -252,9 +250,9 @@ href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2535134"></a><h3>
+<a name="id2586627"></a><h3>
 <a name="xfce-screen-position-is-floating"></a>xfce_screen_position_is_floating()</h3>
-<a class="indexterm" name="id2535145"></a><pre class="programlisting">#define     xfce_screen_position_is_floating(position)</pre>
+<a class="indexterm" name="id2586638"></a><pre class="programlisting">#define     xfce_screen_position_is_floating(position)</pre>
 <p>
 </p>
 <p>
@@ -280,9 +278,9 @@ href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2535212"></a><h3>
+<a name="id2586707"></a><h3>
 <a name="xfce-screen-position-is-top"></a>xfce_screen_position_is_top()</h3>
-<a class="indexterm" name="id2535222"></a><pre class="programlisting">#define     xfce_screen_position_is_top(position)</pre>
+<a class="indexterm" name="id2586717"></a><pre class="programlisting">#define     xfce_screen_position_is_top(position)</pre>
 <p>
 </p>
 <p>
@@ -308,9 +306,9 @@ href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2535290"></a><h3>
+<a name="id2589050"></a><h3>
 <a name="xfce-screen-position-is-left"></a>xfce_screen_position_is_left()</h3>
-<a class="indexterm" name="id2535301"></a><pre class="programlisting">#define     xfce_screen_position_is_left(position)</pre>
+<a class="indexterm" name="id2589060"></a><pre class="programlisting">#define     xfce_screen_position_is_left(position)</pre>
 <p>
 </p>
 <p>
@@ -336,9 +334,9 @@ href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2553869"></a><h3>
+<a name="id2589130"></a><h3>
 <a name="xfce-screen-position-is-right"></a>xfce_screen_position_is_right()</h3>
-<a class="indexterm" name="id2553880"></a><pre class="programlisting">#define     xfce_screen_position_is_right(position)</pre>
+<a class="indexterm" name="id2589141"></a><pre class="programlisting">#define     xfce_screen_position_is_right(position)</pre>
 <p>
 </p>
 <p>
@@ -364,9 +362,9 @@ href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2553949"></a><h3>
+<a name="id2589210"></a><h3>
 <a name="xfce-screen-position-is-bottom"></a>xfce_screen_position_is_bottom()</h3>
-<a class="indexterm" name="id2553960"></a><pre class="programlisting">#define     xfce_screen_position_is_bottom(position)</pre>
+<a class="indexterm" name="id2589221"></a><pre class="programlisting">#define     xfce_screen_position_is_bottom(position)</pre>
 <p>
 </p>
 <p>
@@ -393,8 +391,8 @@ href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
 </div>
 </div>
 <table class="navigation" width="100%" summary="Navigation footer" cellpadding="2" cellspacing="0"><tr valign="middle">
-<td align="left"><a accesskey="p" href="XfceItembar.html"><b>&lt;&lt;&#160;XfceItembar</b></a></td>
-<td align="right"><a accesskey="n" href="libxfce4panel-Convenience-Functions.html"><b>Convenience Functions&#160;&gt;&gt;</b></a></td>
+<td align="left"><a accesskey="p" href="XfceHVBox.html"><b>&lt;&lt;&#160;XfceHVBox</b></a></td>
+<td align="right"></td>
 </tr></table>
 </body>
 </html>

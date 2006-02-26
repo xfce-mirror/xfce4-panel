@@ -17,6 +17,8 @@ libxfce4panel_la_SOURCES =				\
 	xfce-arrow-button.h				\
 	xfce-itembar.c					\
 	xfce-itembar.h					\
+	xfce-hvbox.c					\
+	xfce-hvbox.h					\
 	xfce-panel-enums.h				\
 	xfce-panel-convenience.c			\
 	xfce-panel-convenience.h			\
@@ -41,6 +43,7 @@ xfce4_panelinclude_HEADERS =				\
 	xfce-panel-window.h				\
 	xfce-arrow-button.h				\
 	xfce-itembar.h					\
+	xfce-hvbox.h					\
 	xfce-panel-enums.h				\
 	xfce-panel-convenience.h			\
 	xfce-panel-plugin-iface.h			\
