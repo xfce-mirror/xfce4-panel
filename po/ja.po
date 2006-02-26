@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-02-25 22:53+0100\n"
-"PO-Revision-Date: 2006-02-25 11:26+0900\n"
+"PO-Revision-Date: 2006-02-27 00:01+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -260,13 +260,15 @@ msgstr "外観"
 msgid "Size (pixels):"
 msgstr "サイズ (ピクセル):"
 
+# FIXME: compositor won't work on irix, thus it's blind-translation
 #: ../panel/panel-dialogs.c:1360
 msgid "Transparency (%):"
 msgstr "透明度 (%s):"
 
+# FIXME: compositor won't work on irix, thus it's blind-translation
 #: ../panel/panel-dialogs.c:1384
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "有効なパネルを不透明にする"
 
 #: ../panel/panel-dialogs.c:1425 ../panel/panel-dialogs.c:1463
 #: ../panel/panel-dialogs.c:1488
@@ -488,9 +490,8 @@ msgstr "列数:"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "セパレーター"
+msgstr "セパレーターまたはスペース"
 
 #: ../plugins/separator/separator.c:284
 msgid "_Draw Separator"
@@ -651,7 +652,3 @@ msgstr "テストプラグイン"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "このプログラムはテスト用です。"
-
-#, fuzzy
-#~ msgid "Separator or Separator"
-#~ msgstr "セパレーターを描画する(_D)"
