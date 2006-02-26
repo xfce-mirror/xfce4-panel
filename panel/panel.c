@@ -83,9 +83,9 @@ static gboolean panel_button_pressed (GtkWidget *widget,
                                       GdkEventButton *ev);
 
 /* plugin menu */
-static void panel_menu_deactivated (Panel *panel);
+static void panel_menu_deactivated (GtkWidget *item);
 
-static void panel_menu_opened (Panel *panel);
+static void panel_menu_opened (GtkWidget *item);
 
 /* DND dest */
 static void _panel_drag_data_received (GtkWidget *widget, 
@@ -444,7 +444,9 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                 if (plugin->parent != widget)
                 {
                     PanelPrivate *priv = panel->priv;
-                    gtk_widget_reparent (plugin, widget);
+
+                    g_object_ref (plugin);
+                    gtk_container_remove (GTK_CONTAINER (plugin->parent), plugin);
                     
                     xfce_panel_item_set_size (XFCE_PANEL_ITEM (plugin),
                                               priv->size);
@@ -452,6 +454,9 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                     xfce_panel_item_set_screen_position (
                             XFCE_PANEL_ITEM (plugin), priv->screen_position);
                     
+                    xfce_itembar_insert (XFCE_ITEMBAR (widget), plugin, index);
+                    g_object_unref (plugin);
+
                     xfce_itembar_set_child_expand (
                             XFCE_ITEMBAR (priv->itembar), plugin,
                             xfce_panel_item_get_expand (
@@ -463,11 +468,12 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                         xfce_itembar_get_item_index (XFCE_ITEMBAR (widget),
                                                      plugin);
                     if (index > oldindex) index--;
+                    
+                    if (index != oldindex)
+                        xfce_itembar_reorder_child (XFCE_ITEMBAR (widget), plugin, 
+                                                    index);
                 }
                 
-                if (index != oldindex)
-                    xfce_itembar_reorder_child (XFCE_ITEMBAR (widget), plugin, 
-                                                index);
                 break;
                 
             default:
@@ -807,11 +813,11 @@ panel_create_item (Panel *panel, const char *name, const char *id)
     if ((item = xfce_panel_item_manager_create_item (name, id, 
                     priv->size, priv->screen_position)) != NULL)
     {
-        g_signal_connect_swapped (item, "menu-deactivated", 
-                                  G_CALLBACK (panel_menu_deactivated), panel);
+        g_signal_connect (item, "menu-deactivated", 
+                          G_CALLBACK (panel_menu_deactivated), panel);
         
-        g_signal_connect_swapped (item, "menu-opened", 
-                                  G_CALLBACK (panel_menu_opened), panel);
+        g_signal_connect (item, "menu-opened", 
+                          G_CALLBACK (panel_menu_opened), panel);
         
         g_signal_connect (item, "expand-changed", 
                           G_CALLBACK (_item_expand_changed), panel);
@@ -972,9 +978,10 @@ panel_set_items_sensitive (Panel *panel, gboolean sensitive)
 }
 
 static void 
-panel_menu_deactivated (Panel *panel)
+panel_menu_deactivated (GtkWidget *item)
 {
     int x, y, w, h, px, py;
+    Panel *panel = PANEL (item->parent->parent);
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
 
@@ -999,9 +1006,9 @@ panel_menu_deactivated (Panel *panel)
 }
 
 static void
-panel_menu_opened (Panel *panel)
+panel_menu_opened (GtkWidget *item)
 {
-    g_return_if_fail (PANEL_IS_PANEL (panel));
+    g_return_if_fail (PANEL_IS_PANEL (item->parent->parent));
 
-    panel_block_autohide (panel);
+    panel_block_autohide (PANEL (item->parent->parent));
 }
