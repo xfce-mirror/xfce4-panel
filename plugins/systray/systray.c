@@ -83,16 +83,9 @@ icon_docked (XfceSystemTray * tray, GtkWidget * icon, Systray * systray)
 {
     if (systray->tray_registered)
     {
-        int size = MIN (systray->iconbox->allocation.width,
-                        systray->iconbox->allocation.height);
-
-        gtk_widget_hide (systray->iconbox);
+        gtk_widget_show (icon);
         gtk_box_pack_start (GTK_BOX (systray->iconbox), icon, 
                             FALSE, FALSE, 0);
-        gtk_widget_show (icon);
-        gtk_widget_set_size_request (icon, size, size);
-        gtk_widget_show (systray->iconbox);
-        gtk_widget_queue_draw (systray->iconbox);
     }
 }
 
@@ -167,24 +160,24 @@ systray_orientation_changed (XfcePanelPlugin *plugin,
 static gboolean 
 systray_set_size (XfcePanelPlugin *plugin, int size, Systray *systray)
 {
-    GList *list, *l;
     int border = size > 26 ? 2 : 0;
 
     gtk_container_set_border_width (GTK_CONTAINER (systray->frame), border);
     
-    size = size - border - MAX (systray->frame->style->xthickness,
-                                systray->frame->style->ythickness);
+    size = size - border - 2 - MAX (systray->frame->style->xthickness,
+                                    systray->frame->style->ythickness);
     
-    list = gtk_container_get_children (GTK_CONTAINER (systray->iconbox));
-    for (l = list; l != NULL; l = l->next)
+    if (xfce_panel_plugin_get_orientation (plugin) 
+            == GTK_ORIENTATION_HORIZONTAL)
     {
-        gtk_widget_set_size_request (l->data, size, size);
+        gtk_widget_set_size_request (systray->iconbox, -1, size);
     }
-    g_list_free (list);
-
-    gtk_widget_queue_draw (systray->iconbox);
-    
-    return TRUE;
+    else
+    {
+        gtk_widget_set_size_request (systray->iconbox, size, -1);
+    }
+        
+     return TRUE;
 }
 
 static void
@@ -289,7 +282,7 @@ systray_construct (XfcePanelPlugin *plugin)
             GTK_ORIENTATION_HORIZONTAL)
     {
         systray->iconbox =  
-            xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, TRUE, 3);
+            xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 3);
         
         gtk_alignment_set_padding (GTK_ALIGNMENT (systray->align), 
                                    0, 0, 3, 3);
@@ -297,7 +290,7 @@ systray_construct (XfcePanelPlugin *plugin)
     else
     {
         systray->iconbox =  
-            xfce_hvbox_new (GTK_ORIENTATION_VERTICAL, TRUE, 3);
+            xfce_hvbox_new (GTK_ORIENTATION_VERTICAL, FALSE, 3);
         
         gtk_alignment_set_padding (GTK_ALIGNMENT (systray->align), 
                                    3, 3, 0, 0);
