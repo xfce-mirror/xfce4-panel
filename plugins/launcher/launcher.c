@@ -424,8 +424,6 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
                              GTK_STOCK_DIALOG_ERROR, first, error->message,
                              GTK_STOCK_CLOSE, GTK_RESPONSE_OK, NULL);
 
-        g_free (first);
-                                    
         g_error_free (error);
     }
 
