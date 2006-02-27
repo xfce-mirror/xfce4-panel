@@ -383,29 +383,42 @@ static void
 launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry, 
                         GPtrArray *files)
 {
-    char **argv;
+    char **argv, **execv;
     int i, n;
     GError *error = NULL;
 
-    n = files->len;
-    
     if (G_UNLIKELY (!entry->exec))
         return;
 
-    /* FIXME: realexec may contain arguments -> split up */
+    if (!g_shell_parse_argv (entry->real_exec, &n, &execv, &error))
+    {
+        char first[256];
+        
+        g_snprintf (first, 256, _("Error in command \"%s\""), 
+                    entry->real_exec);
+    
+        xfce_message_dialog (NULL, _("Xfce Panel"), 
+                             GTK_STOCK_DIALOG_ERROR, first, error->message,
+                             GTK_STOCK_CLOSE, GTK_RESPONSE_OK, NULL);
+
+        g_error_free (error);
+        return;
+    }
+    
     if (entry->terminal)
     {
-        argv = g_new (char *, n + 4);
+        argv = g_new (char *, n + files->len + 3);
         argv[0] = "xfterm4";
         argv[1] = "-e";
-        argv[2] = entry->real_exec;
-        n = 3;
+        for (i = 0; i < n; ++i)
+            argv[i+2] = execv[i];
+        n += 2;
     }
     else
     {
-        argv = g_new (char *, n + 2);
-        argv[0] = entry->real_exec;
-        n = 1;
+        argv = g_new (char *, n + files->len + 1);
+        for (i = 0; i < n; ++i)
+            argv[i] = execv[i];
     }
 
     for (i = 0; i < files->len; ++i)
@@ -427,6 +440,7 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
         g_error_free (error);
     }
 
+    g_strfreev (execv);
     g_free (argv);
 }
 
