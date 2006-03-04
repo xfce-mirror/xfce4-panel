@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.28\n"
+"Project-Id-Version: xfce4-panel 4.3.30\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-25 22:53+0100\n"
+"POT-Creation-Date: 2006-03-04 19:15+0900\n"
 "PO-Revision-Date: 2006-02-11 21:31+0300\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi@vnlinux.org>\n"
 "Language-Team: Vietnamese <none@li.org>\n"
@@ -31,7 +31,8 @@ msgstr "Gỡ bỏ \"%s\"?"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:704
 #: ../panel/panel-app.c:736 ../panel/panel-app.c:769
 #: ../panel/panel-dialogs.c:578 ../panel/panel-dialogs.c:1581
-#: ../plugins/launcher/launcher.c:363 ../plugins/launcher/launcher.c:412
+#: ../plugins/launcher/launcher.c:374 ../plugins/launcher/launcher.c:400
+#: ../plugins/launcher/launcher.c:436
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
@@ -42,10 +43,10 @@ msgstr "Mục này sẽ bị gỡ khỏi thanh panel và cấu hình của nó s
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:748
-#: ../plugins/actions/actions.c:358 ../plugins/clock/clock.c:408
+#: ../plugins/actions/actions.c:383 ../plugins/clock/clock.c:408
 #: ../plugins/iconbox/iconbox.c:791 ../plugins/launcher/launcher-dialog.c:1283
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
-#: ../plugins/systray/systray.c:366 ../plugins/tasklist/tasklist.c:397
+#: ../plugins/systray/systray.c:350 ../plugins/tasklist/tasklist.c:397
 #: ../plugins/windowlist/windowlist.c:540
 msgid "Properties"
 msgstr "Thuộc tính"
@@ -68,23 +69,23 @@ msgstr "Xóa bỏ"
 msgid "Add New Item"
 msgstr "Thêm mục mới"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:647
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:653
 msgid "Customize Panel"
 msgstr "Tùy chỉnh thanh Panel"
 
-#: ../panel/panel.c:658 ../panel/panel-dialogs.c:601
+#: ../panel/panel.c:664 ../panel/panel-dialogs.c:601
 msgid "Add Items"
 msgstr "Thêm mục"
 
-#: ../panel/panel.c:673 ../plugins/actions/actions.c:399
+#: ../panel/panel.c:679 ../plugins/actions/actions.c:424
 msgid "Quit"
 msgstr "Thoát"
 
-#: ../panel/panel.c:683
+#: ../panel/panel.c:689
 msgid "Restart"
 msgstr "Khởi động lại"
 
-#: ../panel/panel.c:697
+#: ../panel/panel.c:703
 msgid "About the Xfce Panel"
 msgstr "Về thanh Panel Xfce"
 
@@ -287,19 +288,19 @@ msgstr "Panel mới"
 msgid "Panel Manager"
 msgstr "Quản lý panel"
 
-#: ../plugins/actions/actions.c:374
+#: ../plugins/actions/actions.c:399
 msgid "Panel Actions"
 msgstr "Thao tác"
 
-#: ../plugins/actions/actions.c:391
+#: ../plugins/actions/actions.c:416
 msgid "Select action type:"
 msgstr "Chọn dạng thao tác:"
 
-#: ../plugins/actions/actions.c:400
+#: ../plugins/actions/actions.c:425
 msgid "Lock screen"
 msgstr "Khoá màn hình"
 
-#: ../plugins/actions/actions.c:401
+#: ../plugins/actions/actions.c:426
 msgid "Quit + Lock screen"
 msgstr "Thoát + Khoá màn hình"
 
@@ -332,7 +333,7 @@ msgstr "Số"
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:395
+#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:379
 msgid "Show _frame"
 msgstr "Hiển thị _khung"
 
@@ -361,17 +362,22 @@ msgstr "Hộp biểu tượng"
 msgid "Only show minimized applications"
 msgstr "Chỉ hiển thị các ứng dụng thu nhỏ"
 
-#: ../plugins/launcher/launcher.c:361 ../plugins/launcher/launcher.c:410
+#: ../plugins/launcher/launcher.c:372 ../plugins/launcher/launcher.c:434
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "Không thể chạy \"%s\""
 
-#: ../plugins/launcher/launcher.c:621 ../plugins/launcher/launcher.c:1240
+#: ../plugins/launcher/launcher.c:397
+#, c-format
+msgid "Error in command \"%s\""
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:644 ../plugins/launcher/launcher.c:1249
 #: ../plugins/launcher/launcher-dialog.c:1119
 msgid "New Item"
 msgstr "Mục mới"
 
-#: ../plugins/launcher/launcher.c:679 ../plugins/launcher/launcher.c:1241
+#: ../plugins/launcher/launcher.c:702 ../plugins/launcher/launcher.c:1250
 msgid "This item has not yet been configured"
 msgstr "Mục này chưa được cấu hình"
 
@@ -509,16 +515,16 @@ msgstr "Hiện các cửa sổ ẩn"
 msgid "Hide windows and show desktop"
 msgstr "Ẩn các cửa sổ và hiển thị nền"
 
-#: ../plugins/systray/systray.c:65
+#: ../plugins/systray/systray.c:66
 msgid "There is already a system tray running on this screen"
 msgstr "Có sẵn khay hệ thống đang chạy trên màn hình này"
 
-#: ../plugins/systray/systray.c:71
+#: ../plugins/systray/systray.c:72
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "Không thể đăng kí khay hệ thống: %s"
 
-#: ../plugins/systray/systray.c:382
+#: ../plugins/systray/systray.c:366
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr ""
@@ -652,7 +658,3 @@ msgstr "Plugin thử nghiệm"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Plugin không thực hiện thao tác nào"
-
-#, fuzzy
-#~ msgid "Separator or Separator"
-#~ msgstr "_Dấu cách vẽ"

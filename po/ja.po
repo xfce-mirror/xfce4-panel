@@ -7,9 +7,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.28\n"
+"Project-Id-Version: xfce4-panel 4.3.30\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-02-25 22:53+0100\n"
+"POT-Creation-Date: 2006-03-04 19:15+0900\n"
 "PO-Revision-Date: 2006-02-27 00:01+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
@@ -31,7 +31,8 @@ msgstr "「%s」を削除しますか？"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:704
 #: ../panel/panel-app.c:736 ../panel/panel-app.c:769
 #: ../panel/panel-dialogs.c:578 ../panel/panel-dialogs.c:1581
-#: ../plugins/launcher/launcher.c:363 ../plugins/launcher/launcher.c:412
+#: ../plugins/launcher/launcher.c:374 ../plugins/launcher/launcher.c:400
+#: ../plugins/launcher/launcher.c:436
 msgid "Xfce Panel"
 msgstr "Xfce パネル"
 
@@ -42,10 +43,10 @@ msgstr "パネルからアイテムが削除されると、その設定も失わ
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:748
-#: ../plugins/actions/actions.c:358 ../plugins/clock/clock.c:408
+#: ../plugins/actions/actions.c:383 ../plugins/clock/clock.c:408
 #: ../plugins/iconbox/iconbox.c:791 ../plugins/launcher/launcher-dialog.c:1283
 #: ../plugins/pager/pager.c:298 ../plugins/separator/separator.c:255
-#: ../plugins/systray/systray.c:366 ../plugins/tasklist/tasklist.c:397
+#: ../plugins/systray/systray.c:350 ../plugins/tasklist/tasklist.c:397
 #: ../plugins/windowlist/windowlist.c:540
 msgid "Properties"
 msgstr "プロパティ"
@@ -68,23 +69,23 @@ msgstr "削除"
 msgid "Add New Item"
 msgstr "アイテムを追加"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:647
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:653
 msgid "Customize Panel"
 msgstr "パネルの設定"
 
-#: ../panel/panel.c:658 ../panel/panel-dialogs.c:601
+#: ../panel/panel.c:664 ../panel/panel-dialogs.c:601
 msgid "Add Items"
 msgstr "アイテムの追加"
 
-#: ../panel/panel.c:673 ../plugins/actions/actions.c:399
+#: ../panel/panel.c:679 ../plugins/actions/actions.c:424
 msgid "Quit"
 msgstr "終了"
 
-#: ../panel/panel.c:683
+#: ../panel/panel.c:689
 msgid "Restart"
 msgstr "再起動"
 
-#: ../panel/panel.c:697
+#: ../panel/panel.c:703
 msgid "About the Xfce Panel"
 msgstr "Xfce パネルについて"
 
@@ -288,19 +289,19 @@ msgstr "パネルを追加します"
 msgid "Panel Manager"
 msgstr "パネルマネージャー"
 
-#: ../plugins/actions/actions.c:374
+#: ../plugins/actions/actions.c:399
 msgid "Panel Actions"
 msgstr "パネルアクション"
 
-#: ../plugins/actions/actions.c:391
+#: ../plugins/actions/actions.c:416
 msgid "Select action type:"
 msgstr "アクションのタイプを選択して下さい"
 
-#: ../plugins/actions/actions.c:400
+#: ../plugins/actions/actions.c:425
 msgid "Lock screen"
 msgstr "画面をロック"
 
-#: ../plugins/actions/actions.c:401
+#: ../plugins/actions/actions.c:426
 msgid "Quit + Lock screen"
 msgstr "終了して画面をロック"
 
@@ -333,7 +334,7 @@ msgstr "デジタル"
 msgid "LED"
 msgstr "ダイオード"
 
-#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:395
+#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:379
 msgid "Show _frame"
 msgstr "枠を表示する(_F)"
 
@@ -362,17 +363,22 @@ msgstr "アイコン箱"
 msgid "Only show minimized applications"
 msgstr "最小化したアプリのみ表示する"
 
-#: ../plugins/launcher/launcher.c:361 ../plugins/launcher/launcher.c:410
+#: ../plugins/launcher/launcher.c:372 ../plugins/launcher/launcher.c:434
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "「%s」を実行できませんでした"
 
-#: ../plugins/launcher/launcher.c:621 ../plugins/launcher/launcher.c:1240
+#: ../plugins/launcher/launcher.c:397
+#, c-format
+msgid "Error in command \"%s\""
+msgstr ""
+
+#: ../plugins/launcher/launcher.c:644 ../plugins/launcher/launcher.c:1249
 #: ../plugins/launcher/launcher-dialog.c:1119
 msgid "New Item"
 msgstr "新しいアイテム"
 
-#: ../plugins/launcher/launcher.c:679 ../plugins/launcher/launcher.c:1241
+#: ../plugins/launcher/launcher.c:702 ../plugins/launcher/launcher.c:1250
 msgid "This item has not yet been configured"
 msgstr "このアイテムはまだ設定されていません"
 
@@ -509,16 +515,16 @@ msgstr "隠したウィンドウを元に戻す"
 msgid "Hide windows and show desktop"
 msgstr "ウィンドウを隠してデスクトップを表示する"
 
-#: ../plugins/systray/systray.c:65
+#: ../plugins/systray/systray.c:66
 msgid "There is already a system tray running on this screen"
 msgstr "この画面には既に実行しているシステムトレイがあります"
 
-#: ../plugins/systray/systray.c:71
+#: ../plugins/systray/systray.c:72
 #, c-format
 msgid "Unable to register system tray: %s"
 msgstr "システムトレイを登録できません: %s"
 
-#: ../plugins/systray/systray.c:382
+#: ../plugins/systray/systray.c:366
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "システムトレイ"
