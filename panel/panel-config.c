@@ -716,13 +716,16 @@ config_save_to_file (GPtrArray *array, const char *filename)
         /* panel items */
         configlist = panel_get_item_config_list (panel);
 
-        for (j = 0; configlist[j].name != NULL; ++j)
+        if (configlist)
         {
-            fprintf (fp, "\t\t\t<item name=\"%s\" id=\"%s\"/>\n",
-                         configlist[j].name, configlist[j].id);
+            for (j = 0; configlist[j].name != NULL; ++j)
+            {
+                fprintf (fp, "\t\t\t<item name=\"%s\" id=\"%s\"/>\n",
+                             configlist[j].name, configlist[j].id);
+            }
+            
+            g_free (configlist);
         }
-        
-        g_free (configlist);
 
         /* grouping */
         fprintf (fp, "\t\t</items>\n"
