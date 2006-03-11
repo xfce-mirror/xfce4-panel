@@ -241,8 +241,8 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
      * 4: left_start_y  5: left_end_y  6:  right_start_y   7:  right_end_y
      * 8: top_start_x   9: top_end_x   10: bottom_start_x  11: bottom_end_x
      *
-     * Note: In xinerama use struts relative to combined screen dimensions, not
-     *       just the current monitor.
+     * Note: In xinerama use struts relative to combined screen dimensions, 
+     *       not just the current monitor.
      */
 
     priv = panel->priv;
@@ -252,7 +252,7 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
     {
         if (xfce_screen_position_is_left (priv->screen_position))
         {
-            /* no struts possible on Xinerama screens when this is monitor
+            /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the left (see fd.o spec).
              */
             if (!xmon->has_neighbor_left)
@@ -265,7 +265,7 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
         }
         else if (xfce_screen_position_is_right (priv->screen_position))
         {
-            /* no struts possible on Xinerama screens when this is monitor
+            /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the right (see fd.o spec).
              */
             if (!xmon->has_neighbor_right)
@@ -279,7 +279,7 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
         }
         else if (xfce_screen_position_is_top (priv->screen_position))
         {
-            /* no struts possible on Xinerama screens when this is monitor
+            /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the top (see fd.o spec).
              */
             if (!xmon->has_neighbor_above)
@@ -292,13 +292,13 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
         }
         else
         {
-            /* no struts possible on Xinerama screens when this is monitor
+            /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the bottom (see fd.o spec).
              */
             if (!xmon->has_neighbor_below)
             {
-                data[3] = gdk_screen_get_width (xmon->screen) 
-                           - xmon->geometry.x - xmon->geometry.width 
+                data[3] = gdk_screen_get_height (xmon->screen) 
+                           - xmon->geometry.y - xmon->geometry.height 
                            + h;	        /* bottom         */
                 data[10] = x;	        /* bottom_start_x */
                 data[11] = x + w;	/* bottom_end_x   */
