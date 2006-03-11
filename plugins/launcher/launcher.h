@@ -38,6 +38,12 @@ typedef struct  _LauncherIcon      LauncherIcon;
 typedef struct  _LauncherEntry     LauncherEntry;
 typedef struct  _LauncherPlugin    LauncherPlugin;
 
+/* Drag-and-drop data formats (for the 'info' parameter).  */
+enum {
+    TARGET_URI_LIST,    /* text/uri-list */
+    TARGET_MOZ_URL      /* text/x-moz-url */
+};
+
 enum _LauncherIconType
 {
     LAUNCHER_ICON_TYPE_NONE,
@@ -111,6 +117,7 @@ GdkPixbuf * launcher_icon_load_pixbuf (GtkWidget *w,
 /* DND */
 void launcher_set_drag_dest (GtkWidget *widget);
 
-GPtrArray *launcher_get_file_list_from_selection_data (GtkSelectionData *data);
+GPtrArray *launcher_get_file_list_from_selection_data (GtkSelectionData *data,
+                                                       guint info);
 
 #endif /* _XFCE_PANEL_LAUNCHER_H */

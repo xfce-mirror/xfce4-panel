@@ -73,6 +73,29 @@ typedef struct
 }
 LauncherDialog;
 
+/* Adding a new Zero Install interface requires using the
+ * network, so we do it asynchronously. This structure records
+ * the details for the callback handler.
+ */
+typedef struct
+{
+    /* LauncherDialog objects are not ref-counted, so we ref-count
+     * the plugin object instead and use that to check that the
+     * LauncherDialog is still available.
+     */
+    GObject *plugin;
+
+    /* The package we are checking. */
+    char *interface_uri;
+
+    /* The entry to update, or NULL to add a new one.
+     * Need to check that this is still valid when the callback is
+     * invoked.
+     */
+    LauncherEntry *entry;
+}
+ZeroInstallProcess;
+
 /* Keep in sync with XfceIconTheme */
 static const char *category_icons [] = {
     N_("Default"),
@@ -1250,6 +1273,7 @@ static void
 launcher_dialog_response (GtkWidget *dlg, int response, LauncherDialog *ld)
 {
     g_object_set_data (G_OBJECT (ld->plugin), "dialog", NULL);
+    g_object_set_data (G_OBJECT (ld->plugin), "launcher-dialog", NULL);
 
     gtk_widget_hide (dlg);
     
@@ -1288,6 +1312,7 @@ launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
                 NULL);
     
     g_object_set_data (G_OBJECT (plugin), "dialog", ld->dlg);
+    g_object_set_data (G_OBJECT (plugin), "launcher-dialog", ld);
 
     gtk_window_set_position (GTK_WINDOW (ld->dlg), GTK_WIN_POS_CENTER);
     
@@ -1340,6 +1365,121 @@ static const char *dentry_keys [] = {
     "StartupNotify",
     "OnlyShowIn"
 };
+
+static LauncherEntry *
+launcher_entry_update_from_interface (LauncherEntry *e, const char *iface)
+{
+    const char *start, *end;
+
+    g_free(e->exec);
+    g_free(e->real_exec);
+
+    e->exec = g_strconcat("0launch ", iface, NULL);
+    e->real_exec = g_strdup(e->exec);
+
+    if (!(start = strrchr (iface, '/')))
+        start = iface;
+    else
+        start++;
+    end = strrchr (start, '.');
+
+    g_free(e->name);
+    e->name = g_strndup (start, end ? end - start : strlen (start));
+
+    g_free(e->icon.icon.name);
+    e->icon.type = LAUNCHER_ICON_TYPE_NAME;
+    e->icon.icon.name = g_strdup (e->name);
+
+    /* Note: we could pull more details (eg, the summary) out of the cached XML
+     * file if we had an XML parser handy. We could even download an icon.
+     */
+    return e;
+}
+
+static void
+zero_install_launch_done (GPid pid, gint status, ZeroInstallProcess *info)
+{
+    g_spawn_close_pid (pid);
+
+    if (status == 0)
+    {
+        /* Success! Let's add the application's details... */
+        LauncherDialog *ld;
+        ld = g_object_get_data (G_OBJECT (info->plugin), "launcher-dialog");
+        if (ld)
+        {
+            LauncherEntry *e = NULL;
+
+            if (info->entry && ld->entry == info->entry)
+            {
+                e = info->entry;
+                launcher_entry_update_from_interface (e, info->interface_uri);
+                launcher_dialog_update_entry_properties (ld);
+            }
+            else
+            {
+                e = launcher_entry_new ();
+                launcher_entry_update_from_interface (e, info->interface_uri);
+                launcher_dialog_add_entry_after (ld, NULL, e);
+            }
+        }
+        else
+        {
+            xfce_warn(_("The Zero Install GUI has finished, but the launcher dialog "
+                      "has disappeared in the meantime. Not adding launcher "
+                      "(but any files downloaded have not been lost)."));
+        }
+    }
+    
+    g_object_unref(info->plugin);
+    g_free(info->interface_uri);
+    g_free(info);
+}
+
+/** The user wants to add a launcher for 'interface'. Confirm that it
+ * is a valid Zero Install interface, download archives needed to run
+ * the program, and then add it as a launcher.
+ * Note: This function will return immediately without adding or updating
+ * the entry. The update happens later in a callback.
+ */
+static void
+start_entry_from_interface_file (LauncherDialog *ld,
+                                 const char *interface,
+                                 LauncherEntry *entry)
+{
+    GPid pid;
+    GError *error = NULL;
+    const gchar *argv[] = {"0launch", "-dg", NULL, NULL};
+
+    argv[2] = interface;
+
+    g_spawn_async(NULL, (gchar **) argv, NULL,
+           G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
+           NULL, NULL,
+           &pid, &error);
+
+    if (error)
+    {
+        xfce_warn (_("Failed to run 0launch:\n%s\n\n"
+                        "For help using Zero Install, "
+                        "see http://0install.net"), error->message);
+        g_error_free (error);
+    }
+    else
+    {
+        ZeroInstallProcess *info;
+        info = g_new0 (ZeroInstallProcess, 1);
+
+        info->interface_uri = g_strdup(interface);
+        info->plugin = G_OBJECT(ld->plugin);
+        info->entry = entry;
+
+        g_object_ref (info->plugin);
+        g_child_watch_add (pid,
+                           (GChildWatchFunc) zero_install_launch_done,
+                           info);
+    }
+}
 
 static LauncherEntry *
 update_entry_from_desktop_file (LauncherEntry *e, const char *path)
@@ -1446,7 +1586,7 @@ static LauncherEntry *
 create_entry_from_file (const char *path)
 {
     LauncherEntry *e = launcher_entry_new ();
-    
+
     if (g_str_has_suffix (path, ".desktop"))
     {
         update_entry_from_desktop_file (e, path);
@@ -1491,15 +1631,20 @@ entry_dialog_data_received (GtkWidget *w, GdkDragContext *context,
     
     if (!data || data->length < 1)
         return;
-    
-    if (!(files = launcher_get_file_list_from_selection_data (data)))
+
+    if (!(files = launcher_get_file_list_from_selection_data (data, info)))
         return;
     
     if (files->len > 0)
     {
         char *file = g_ptr_array_index (files, 0);
-        
-        if (g_str_has_suffix (file, ".desktop"))
+
+        if (g_str_has_suffix (file, ".xml") ||
+            g_str_has_prefix (file, "http://"))
+        {
+            start_entry_from_interface_file (ld, file, ld->entry);
+        }
+        else if (g_str_has_suffix (file, ".desktop"))
         {
             e = update_entry_from_desktop_file (ld->entry, file);
         }
@@ -1547,16 +1692,25 @@ launcher_dialog_data_received (GtkWidget *w, GdkDragContext *context,
     if (!data || data->length < 1)
         return;
     
-    if (!(files = launcher_get_file_list_from_selection_data (data)))
+    if (!(files = launcher_get_file_list_from_selection_data (data, info)))
         return;
     
     for (i = 0; i < files->len; ++i)
     {
         char *file = g_ptr_array_index (files, i);
-        LauncherEntry *e = create_entry_from_file (file);
 
-        if (e)
-            launcher_dialog_add_entry_after (ld, NULL, e);
+        if (g_str_has_suffix (file, ".xml") ||
+            g_str_has_prefix (file, "http://"))
+        {
+            start_entry_from_interface_file (ld, file, NULL);
+        }
+        else
+        {
+            LauncherEntry *e = create_entry_from_file (file);
+
+            if (e)
+                launcher_dialog_add_entry_after (ld, NULL, e);
+        }
 
         g_free (file);
     }

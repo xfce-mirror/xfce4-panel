@@ -188,14 +188,43 @@ static LauncherPlugin *open_launcher = NULL;
 
 static GtkTargetEntry target_list [] =
 {
-    { "text/uri-list", 0, 0 },
-    { "STRING", 0, 0 }
+    { "text/uri-list", 0, TARGET_URI_LIST },
+    { "text/x-moz-url", 0, TARGET_MOZ_URL },
+    { "STRING", 0, TARGET_URI_LIST }
 };
 
 static guint n_targets = G_N_ELEMENTS (target_list);
 
+/* Mozilla uses its own weird format. */
+static void
+add_mozilla_files (GPtrArray *files, GtkSelectionData *data)
+{
+    gchar *utf8, *eol;
+
+    utf8 = g_utf16_to_utf8((gunichar2 *) data->data,
+            (glong) data->length,
+            NULL, NULL, NULL);
+
+    eol = utf8 ? strchr(utf8, '\n') : NULL;
+    if (eol) {
+        gchar *s1 = utf8;
+        if (!strncmp (s1, "file:", 5))
+        {
+            s1 += 5;
+            while (*(s1 + 1) == '/')
+                ++s1;
+        }
+        g_ptr_array_add (files, g_strndup(s1, eol - s1));
+    }
+    else
+    {
+        g_warning ("Invalid UTF16 from text/x-moz-url target");
+    }
+    g_free(utf8);
+}
+
 GPtrArray *
-launcher_get_file_list_from_selection_data (GtkSelectionData *data)
+launcher_get_file_list_from_selection_data (GtkSelectionData *data, guint info)
 {
     GPtrArray *files;
     const char *s1, *s2;
@@ -204,6 +233,12 @@ launcher_get_file_list_from_selection_data (GtkSelectionData *data)
         return NULL;
 
     files = g_ptr_array_new ();
+
+    if (info == TARGET_MOZ_URL)
+    {
+        add_mozilla_files(files, data);
+        return files;
+    }
 
     /* Assume text/uri-list (RFC2483):
      * - Commented lines are allowed; they start with #.
@@ -298,8 +333,8 @@ launcher_icon_load_pixbuf (GtkWidget *w, LauncherIcon * icon, int size)
     {
         if (g_path_is_absolute (icon->icon.name))
         {
-            pb = xfce_pixbuf_new_from_file_at_size (icon->icon.name,
-                                                    size, size, NULL);
+            pb = gdk_pixbuf_new_from_file_at_size (icon->icon.name,
+                                                   size, size, NULL);
         }
         else
         {
@@ -454,7 +489,7 @@ launcher_entry_data_received (GtkWidget *widget, GdkDragContext *context,
     if (!data || data->length < 1)
         return;
     
-    files = launcher_get_file_list_from_selection_data (data);
+    files = launcher_get_file_list_from_selection_data (data, info);
 
     if (files)
     {
@@ -481,7 +516,7 @@ launcher_drag_data_received (GtkWidget *widget, GdkDragContext *context,
     if (!data || data->length < 1)
         return;
     
-    files = launcher_get_file_list_from_selection_data (data);
+    files = launcher_get_file_list_from_selection_data (data, info);
 
     if (files)
     {
