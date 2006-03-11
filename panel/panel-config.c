@@ -428,6 +428,8 @@ end_element_handler (GMarkupParseContext * context,
         case PROPERTIES:
             if (strcmp ("properties", element_name) == 0)
             {
+                XfceMonitor *xmon;
+                
                 parser->state = PANEL;
                 if (parser->properties_set)
                 {
@@ -440,6 +442,11 @@ end_element_handler (GMarkupParseContext * context,
                         parser->monitor = DefaultScreen (GDK_DISPLAY());
                     }
 
+                    
+                    /* environment */
+                    xmon = panel_app_get_monitor (parser->monitor);
+                    xfce_setenv ("DISPLAY", xmon->dpyname, TRUE);
+    
                     g_object_set (G_OBJECT (parser->current_panel),
                                   "size", parser->size,
                                   "monitor", parser->monitor,

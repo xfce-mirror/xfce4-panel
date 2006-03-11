@@ -113,6 +113,14 @@ cleanup_panels (void)
         l = g_list_delete_link (l, l);
     }
 
+    for (i = 0; i < panel_app.monitor_list->len; ++i)
+    {
+        XfceMonitor *xmon = g_ptr_array_index (panel_app.monitor_list, i);
+        g_free (xmon->dpyname);
+        g_free (xmon);
+    }
+    g_ptr_array_free (panel_app.monitor_list, TRUE);
+
     for (i = 0; i < panel_app.panel_list->len; ++i)
     {
         Panel *panel = g_ptr_array_index (panel_app.panel_list, i);
@@ -312,6 +320,8 @@ create_monitor_list (void)
 
             gdk_screen_get_monitor_geometry (screen, j, &(monitor->geometry));
 
+            monitor->dpyname = gdk_screen_make_display_name (screen);
+
             g_ptr_array_add (panel_app.monitor_list, monitor);
             
             if (j > 0)
@@ -332,6 +342,8 @@ create_monitor_list (void)
             monitor->num = j;
 
             gdk_screen_get_monitor_geometry (screen, j, &(monitor->geometry));
+
+            monitor->dpyname = gdk_screen_make_display_name (screen);
 
             g_ptr_array_add (panel_app.monitor_list, monitor);
 #endif
@@ -573,6 +585,10 @@ panel_app_run (int argc, char **argv)
     g_ptr_array_foreach (panel_app.panel_list, (GFunc)panel_app_init_panel, 
                          NULL);
 
+    /* reset environment */
+    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default ()),
+		 TRUE);
+    
     /* Run Forrest, Run! */
     panel_app.check_id = 
         g_timeout_add (250, (GSourceFunc) check_signal_state, NULL);
