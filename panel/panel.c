@@ -810,14 +810,9 @@ panel_create_item (Panel *panel, const char *name, const char *id)
 {
     PanelPrivate *priv;
     GtkWidget *item = NULL;
-    XfceMonitor *xmon;
 
     priv = panel->priv;
 
-    /* environment */
-    xmon = panel_app_get_monitor (priv->monitor);
-    xfce_setenv ("DISPLAY", xmon->dpyname, TRUE);
-    
     if ((item = xfce_panel_item_manager_create_item (name, id, 
                     priv->size, priv->screen_position)) != NULL)
     {
@@ -840,10 +835,6 @@ panel_create_item (Panel *panel, const char *name, const char *id)
                           G_CALLBACK (_item_start_move), panel);
     }
 
-    /* reset environment */
-    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default ()),
-		 TRUE);
-    
     return item;
 }
 

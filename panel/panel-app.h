@@ -87,7 +87,6 @@ struct _XfceMonitor
     GdkScreen *screen;
     int num;
     GdkRectangle geometry;
-    char *dpyname;
     guint has_neighbor_left:1;
     guint has_neighbor_right:1;
     guint has_neighbor_above:1;
