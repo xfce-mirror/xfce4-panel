@@ -221,7 +221,8 @@ add_selected_item (PanelItemsDialog *pid)
         item = panel_add_item (pid->panel, info->name);
     }
 
-    g_idle_add ((GSourceFunc)item_configure_timeout, item);
+    if (item)
+        g_idle_add ((GSourceFunc)item_configure_timeout, item);
     
     return TRUE;
 }
@@ -1179,8 +1180,16 @@ monitor_pressed (GtkToggleButton *tb, GdkEvent *ev, PanelManagerDialog *pmd)
 
                 if (mon == tb)
                 {
+                    XfceMonitor *xmon = panel_app_get_monitor(i);
                     gtk_toggle_button_set_active (mon, TRUE);
                     panel_set_monitor (pmd->panel, i);
+                    if (xmon->screen != gtk_widget_get_screen (pmd->dlg))
+                    {
+                        gtk_widget_hide (pmd->dlg);
+                        gtk_window_set_screen (GTK_WINDOW (pmd->dlg), 
+                                               xmon->screen);
+                        gtk_widget_show (pmd->dlg);
+                    }
                 }
                 else
                 {

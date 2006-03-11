@@ -445,8 +445,9 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                 {
                     PanelPrivate *priv = panel->priv;
 
-                    g_object_ref (plugin);
-                    gtk_container_remove (GTK_CONTAINER (plugin->parent), plugin);
+                    g_object_freeze_notify (G_OBJECT (widget));
+                    
+                    gtk_widget_reparent (GTK_WIDGET (plugin), widget);
                     
                     xfce_panel_item_set_size (XFCE_PANEL_ITEM (plugin),
                                               priv->size);
@@ -454,8 +455,10 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                     xfce_panel_item_set_screen_position (
                             XFCE_PANEL_ITEM (plugin), priv->screen_position);
                     
-                    xfce_itembar_insert (XFCE_ITEMBAR (widget), plugin, index);
-                    g_object_unref (plugin);
+                    xfce_itembar_reorder_child (XFCE_ITEMBAR (widget), plugin, 
+                                                index);
+
+                    g_object_thaw_notify (G_OBJECT (widget));
 
                     xfce_itembar_set_child_expand (
                             XFCE_ITEMBAR (priv->itembar), plugin,

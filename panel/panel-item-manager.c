@@ -63,6 +63,7 @@ struct _XfcePanelItemClass
     /* for loadable modules only */
     GModule *gmodule;
     XfcePanelPluginFunc construct;
+    XfcePanelPluginCheck check;
 };
 
 static GHashTable *plugin_classes = NULL;
@@ -351,6 +352,7 @@ xfce_panel_item_manager_create_item (const char *name, const char *id,
         {
             gpointer symbol;
             XfcePanelPluginFunc (*get_construct) (void);
+            XfcePanelPluginCheck (*get_check) (void);
             
             if (!(class->gmodule = g_module_open (class->file, 0)))
             {
@@ -372,11 +374,29 @@ xfce_panel_item_manager_create_item (const char *name, const char *id,
             get_construct = symbol;
             
             class->construct = get_construct ();
+            
+            if (g_module_symbol (class->gmodule, 
+                                  "xfce_panel_plugin_get_check", &symbol))
+            {
+                get_check = symbol;
+                
+                class->check = get_check ();
+            }
+            else
+            {
+                class->check = NULL;
+            }
         }
 
-        item = xfce_internal_panel_plugin_new (class->plugin_name, id, 
-                                               class->name, size, position, 
-                                               class->construct);
+        if (!class->check || class->check() == TRUE )
+        {
+            item = xfce_internal_panel_plugin_new (class->plugin_name, 
+                                                   id, 
+                                                   class->name, 
+                                                   size, 
+                                                   position, 
+                                                   class->construct);
+        }
     }
 
     if (item)

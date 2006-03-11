@@ -358,6 +358,7 @@ panel_move_function (XfcePanelWindow *window, Panel *panel, int *x, int *y)
     priv->monitor = gdk_screen_get_monitor_at_point (
                         gtk_widget_get_screen (GTK_WIDGET (window)), *x, *y);
     
+    DBG (" + Monitor at (%d, %d) = %d\n", *x, *y, priv->monitor);
     xmon = panel_app_get_monitor (priv->monitor);
     
     _calculate_coordinates (priv->screen_position, &(xmon->geometry),
@@ -1024,18 +1025,30 @@ panel_set_monitor (Panel *panel, int monitor)
     if (monitor != priv->monitor)
     {
         XfceMonitor *xmon;
+        XfcePanelWidthType width;
         
         /* TODO: check range */
         priv->monitor = monitor;
 
         xmon = panel_app_get_monitor (monitor);
 
-        gtk_widget_hide (GTK_WIDGET (panel));
-        gtk_window_set_screen (GTK_WINDOW (panel), xmon->screen);
-        gtk_widget_show (GTK_WIDGET (panel));
-              
-        priv->full_width = !priv->full_width;
-        panel_set_full_width (panel, !priv->full_width);
+        if (xmon->screen != gtk_widget_get_screen (GTK_WIDGET (panel)))
+        {
+            gtk_widget_hide (GTK_WIDGET (panel));
+            gtk_window_set_screen (GTK_WINDOW (panel), xmon->screen);
+            gtk_widget_show (GTK_WIDGET (panel));
+        }
+    
+        /* new size constraints */
+        if ((width = priv->full_width) != XFCE_PANEL_NORMAL_WIDTH)
+        {
+            priv->full_width = XFCE_PANEL_NORMAL_WIDTH;
+            panel_set_full_width (panel, width);
+        }
+        else
+        {
+            gtk_widget_queue_resize (GTK_WIDGET (panel));
+        }
     }
 }
 
