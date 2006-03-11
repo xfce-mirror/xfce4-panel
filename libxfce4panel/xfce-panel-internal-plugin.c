@@ -624,6 +624,23 @@ _plugin_menu_deactivated (GtkWidget * menu, XfcePanelItem * item)
     }
 }
 
+static void
+_plugin_setup (XfceInternalPanelPlugin * plugin, 
+               XfcePanelPluginFunc construct)
+{
+    XfceInternalPanelPluginPrivate *priv;
+
+    g_signal_handlers_disconnect_by_func (plugin, G_CALLBACK (_plugin_setup),
+                                          (gpointer) construct);
+
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
+
+    construct (XFCE_PANEL_PLUGIN (plugin));
+
+    /* make sure the plugin has the proper size */
+    xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
+}
+
 /* public API */
 
 /**
@@ -669,10 +686,8 @@ xfce_internal_panel_plugin_new (const char *name,
     xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin),
                                          GTK_WIDGET (plugin));
 
-    construct (XFCE_PANEL_PLUGIN (plugin));
+    g_signal_connect (plugin, "realize", G_CALLBACK (_plugin_setup), 
+                      construct);
 
-    /* make sure the plugin has the proper size */
-    xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
-    
     return plugin;
 }
