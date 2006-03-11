@@ -128,11 +128,11 @@ actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
     switch (action->type)
     {
         case ACTION_QUIT_LOCK:
-            pb = actions_load_icon (ACTION_QUIT, width);
+            pb = actions_load_icon (ACTION_LOCK, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
             g_object_unref (pb);
             
-            pb = actions_load_icon (ACTION_LOCK, width);
+            pb = actions_load_icon (ACTION_QUIT, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image2), pb);
             g_object_unref (pb);
             
