@@ -51,6 +51,18 @@ typedef struct _XfcePanelPluginInterface XfcePanelPluginInterface;
  **/
 typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
 
+/**
+ * XfcePanelPluginCheck:
+ *
+ * Callback function that is run before creating a plugin. It should return
+ * if the plugin is not available for whatever reason. It should be given as 
+ * the argument to the registration macros.
+ *
+ * See also: XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK() and
+ *           XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()
+ **/
+typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
+
 
 GType xfce_panel_plugin_get_type (void) G_GNUC_CONST;
 

@@ -48,12 +48,30 @@ Systray;
 static void systray_properties_dialog (XfcePanelPlugin *plugin, 
                                        Systray *systray);
 
+static void systray_free_data (XfcePanelPlugin *plugin, Systray *systray);
+
 static void systray_construct (XfcePanelPlugin *plugin);
+
+static gboolean systray_check (GdkScreen *screen);
 
 
 /* -------------------------------------------------------------------- *
  *                             Systray                                  *
  * -------------------------------------------------------------------- */
+
+static gboolean 
+systray_check (GdkScreen *screen)
+{
+    Screen *scr = GDK_SCREEN_XSCREEN (screen);
+
+    if (xfce_system_tray_check_running (scr))
+    {
+        xfce_info (_("There is already a system tray running on this "
+                     "screen"));
+        return FALSE;
+    }
+    return TRUE;
+}
 
 static gboolean
 register_tray (Systray * systray)
@@ -61,7 +79,7 @@ register_tray (Systray * systray)
     GError *error = NULL;
     Screen *scr = GDK_SCREEN_XSCREEN (gtk_widget_get_screen (systray->frame));
 
-    if (xfce_system_tray_check_running (scr))
+    if (!systray_check (gtk_widget_get_screen (systray->frame)))
     {
         xfce_info (_("There is already a system tray running on this "
                      "screen"));
@@ -108,12 +126,28 @@ message_new (XfceSystemTray * tray, GtkWidget * icon, glong id,
     g_print ("++ notification: %s\n", text);
 }
 
+static gboolean
+systray_remove (Systray *systray)
+{
+    GtkWidget *widget = GTK_WIDGET (systray->plugin);
+
+    systray_free_data (systray->plugin, systray);
+    gtk_widget_destroy (widget);
+
+    return FALSE;
+}
+
 static void
 systray_start (Systray *systray)
 {
     if (!systray->tray_registered)
     {
         systray->tray_registered = register_tray (systray);
+        
+        if (!systray->tray_registered)
+        {
+            g_idle_add ((GSourceFunc)systray_remove, systray);
+        }
     }
 }
 
@@ -133,7 +167,8 @@ systray_stop (Systray *systray)
 
 /* Register with the panel */
 
-XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (systray_construct);
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK (systray_construct, 
+                                                systray_check);
 
 
 /* Interface Implementation */
@@ -235,12 +270,6 @@ systray_write_rc_file (XfcePanelPlugin *plugin, Systray *systray)
     xfce_rc_close (rc);
 }
 
-static void
-frame_realize (GtkWidget *frame, Systray *systray)
-{
-  systray_start (systray);
-}
-
 /* create widgets and connect to signals */
 static void 
 systray_construct (XfcePanelPlugin *plugin)
@@ -312,8 +341,7 @@ systray_construct (XfcePanelPlugin *plugin)
     g_signal_connect (systray->tray, "message_new", G_CALLBACK (message_new),
                       systray);
 
-    g_signal_connect (systray->frame, "realize", G_CALLBACK (frame_realize),
-		      systray);
+    systray_start (systray);
 }
 
 /* -------------------------------------------------------------------- *

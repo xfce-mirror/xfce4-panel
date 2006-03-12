@@ -41,10 +41,11 @@ void xfce_panel_item_manager_init (void);
 
 void xfce_panel_item_manager_cleanup (void);
 
-GtkWidget *xfce_panel_item_manager_create_item (const char *name, 
-                                           const char *id,
-                                           int size, 
-                                           XfceScreenPosition position);
+GtkWidget *xfce_panel_item_manager_create_item (GdkScreen *screen,
+                                                const char *name, 
+                                                const char *id,
+                                                int size, 
+                                                XfceScreenPosition position);
 
 /* for 'Add Item' dialog */
 GPtrArray *xfce_panel_item_manager_get_item_info_list (void);

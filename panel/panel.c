@@ -810,11 +810,13 @@ panel_create_item (Panel *panel, const char *name, const char *id)
 {
     PanelPrivate *priv;
     GtkWidget *item = NULL;
+    XfceMonitor *xmon;
 
     priv = panel->priv;
+    xmon = panel_app_get_monitor (priv->monitor);
 
-    if ((item = xfce_panel_item_manager_create_item (name, id, 
-                    priv->size, priv->screen_position)) != NULL)
+    if ((item = xfce_panel_item_manager_create_item (xmon->screen,
+                    name, id, priv->size, priv->screen_position)) != NULL)
     {
         g_signal_connect (item, "menu-deactivated", 
                           G_CALLBACK (panel_menu_deactivated), panel);

@@ -153,6 +153,9 @@ launcher_construct (XfcePanelPlugin *plugin)
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
                       G_CALLBACK (launcher_configure), launcher);
+
+    launcher_set_screen_position (launcher, 
+            xfce_panel_plugin_get_screen_position (plugin));
 }
 
 /* -------------------------------------------------------------------- *
@@ -1172,19 +1175,6 @@ plugin_icon_theme_changed (GtkWidget *w, gpointer ignored,
 
 /* Create Launcher Plugin Contents */
 
-static void
-plugin_realized (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
-{
-    if (!GTK_WIDGET_REALIZED (launcher->iconbutton))
-    {
-        gtk_widget_realize (launcher->box);
-        gtk_widget_realize (launcher->iconbutton);
-    }
-
-    launcher_set_screen_position (launcher, 
-            xfce_panel_plugin_get_screen_position (plugin));
-}
-
 static LauncherPlugin *
 launcher_new (XfcePanelPlugin *plugin)
 {
@@ -1270,9 +1260,6 @@ launcher_new (XfcePanelPlugin *plugin)
     
     g_signal_connect (launcher->arrowbutton, "drag-leave", 
                       G_CALLBACK (launcher_menu_drag_leave), launcher);
-
-    g_signal_connect (plugin, "realize", G_CALLBACK (plugin_realized), 
-                      launcher);
     
     /* configuration */
     launcher_read_rc_file (plugin, launcher);

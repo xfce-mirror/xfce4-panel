@@ -198,19 +198,6 @@ tasklist_write_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
     xfce_rc_close (rc);
 }
 
-static void 
-tasklist_realize (XfcePanelPlugin *plugin, Tasklist *tasklist)
-{
-    GdkScreen *screen;
-    int screen_idx;
-
-    screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-    screen_idx = gdk_screen_get_number (screen);
-    
-    netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), 
-                              netk_screen_get (screen_idx));
-}
-
 /* create widgets and connect to signals */
 static gboolean
 handle_expose (GtkWidget *widget, GdkEventExpose *ev, Tasklist *tasklist)
@@ -251,6 +238,8 @@ tasklist_screen_changed (GtkWidget *plugin, GdkScreen *screen,
 static void 
 tasklist_construct (XfcePanelPlugin *plugin)
 {
+    GdkScreen *screen;
+    int screen_idx;
     Tasklist *tasklist = g_new0 (Tasklist, 1);
 
     tasklist->plugin = plugin;
@@ -266,9 +255,6 @@ tasklist_construct (XfcePanelPlugin *plugin)
     
     g_signal_connect (plugin, "save", 
                       G_CALLBACK (tasklist_write_rc_file), tasklist);
-
-    g_signal_connect (plugin, "realize",
-		      G_CALLBACK (tasklist_realize), tasklist);
 
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
@@ -296,7 +282,9 @@ tasklist_construct (XfcePanelPlugin *plugin)
     g_signal_connect (tasklist->handle, "expose-event", 
                       G_CALLBACK (handle_expose), tasklist);
 
-    tasklist->list = netk_tasklist_new (netk_screen_get_default ());
+    screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+    screen_idx = gdk_screen_get_number (screen);
+    tasklist->list = netk_tasklist_new (netk_screen_get (screen_idx));
     gtk_widget_show (tasklist->list);
     gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->list, 
                         TRUE, TRUE, 0);
