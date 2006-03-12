@@ -261,7 +261,7 @@ session_die (gpointer client_data)
 }
 
 /* screen layout */
-static void
+ static void
 monitor_size_changed (GdkScreen *screen)
 {
     int i;
@@ -283,7 +283,8 @@ monitor_size_changed (GdkScreen *screen)
     {
         panel = g_ptr_array_index (panel_app.panel_list, i);
 
-        gtk_widget_queue_resize (panel);
+        if (screen == gtk_widget_get_screen (panel))
+            panel_screen_size_changed (screen, PANEL (panel));
     }
 }
 
@@ -501,6 +502,7 @@ expose_timeout (GtkWidget *panel)
 static void
 panel_app_init_panel (GtkWidget *panel)
 {
+    panel_init_signals (PANEL (panel));
     gtk_widget_show (panel);
     g_idle_add ((GSourceFunc)expose_timeout, panel);
 }    
@@ -692,7 +694,7 @@ panel_app_add_panel (void)
 
     panel_center (panel);
     panel_init_position (panel);
-
+    panel_init_signals (panel);
     gtk_widget_show (GTK_WIDGET (panel));
 
     panel_app.current_panel = panel_app.panel_list->len - 1;

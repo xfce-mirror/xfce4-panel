@@ -55,20 +55,27 @@ int panel_get_yoffset (Panel *panel);
 void panel_set_yoffset (Panel *panel, int yoffset);
 
 
+/* initilization */
+void panel_init_position (Panel *panel);
+
+void panel_init_signals (Panel *panel);
+
+
 /* positioning */
-void panel_init_position    (Panel *panel);
+void panel_center (Panel *panel);
 
-void panel_center           (Panel *panel);
+void panel_screen_size_changed (GdkScreen *screen, 
+                                Panel *panel);
 
-void panel_set_autohide     (Panel *panel, 
-                             gboolean autohide);
+void panel_set_autohide (Panel *panel, 
+                         gboolean autohide);
 
-void panel_block_autohide   (Panel *panel);
+void panel_block_autohide (Panel *panel);
 
 void panel_unblock_autohide (Panel *panel);
 
-void panel_set_full_width   (Panel *panel, 
-                             int fullwidth);
+void panel_set_full_width (Panel *panel, 
+                           int fullwidth);
 
 void panel_set_transparency (Panel *panel,
                              int transparency);
