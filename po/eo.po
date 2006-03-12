@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.30\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-03-04 19:15+0900\n"
-"PO-Revision-Date: 2006-03-12 15:45+0100\n"
+"PO-Revision-Date: 2006-03-12 20:49+0100\n"
 "Last-Translator: Sylvain Vedrenne <gnu_sylvain@xfce.org>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:175
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr ""
+msgstr "Elemento estis neatendite forigita: \"%s\"."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:572
 #, c-format
@@ -38,7 +38,7 @@ msgstr "Xfce Panelo"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:577
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
-msgstr ""
+msgstr "La elemento estos forigita el la panelo kaj ĝies agordo perdita."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:748
@@ -48,12 +48,12 @@ msgstr ""
 #: ../plugins/systray/systray.c:350 ../plugins/tasklist/tasklist.c:397
 #: ../plugins/windowlist/windowlist.c:540
 msgid "Properties"
-msgstr ""
+msgstr "Parametroj"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:765
 msgid "About"
-msgstr ""
+msgstr "Pri"
 
 #. move
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:778
@@ -70,15 +70,15 @@ msgstr "Aldonu Novan elementon"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:653
 msgid "Customize Panel"
-msgstr ""
+msgstr "Agordu Panelon"
 
 #: ../panel/panel.c:664 ../panel/panel-dialogs.c:601
 msgid "Add Items"
-msgstr ""
+msgstr "Aldonu Elementojn"
 
 #: ../panel/panel.c:679 ../plugins/actions/actions.c:424
 msgid "Quit"
-msgstr ""
+msgstr "Adiaŭu"
 
 #: ../panel/panel.c:689
 msgid "Restart"
@@ -99,16 +99,16 @@ msgstr "Ĉu Audiaŭu la Xfce Panelon?"
 
 #: ../panel/panel-app.c:707
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
+msgstr "Vi ne povas forigi la lastan panelon. Ĉu vi volas adiaŭi la programon?"
 
 #: ../panel/panel-app.c:734
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr ""
+msgstr "Ĉu Forigu Panelon \"%d\"?"
 
 #: ../panel/panel-app.c:738
 msgid "The selected panel and all its items will be removed."
-msgstr ""
+msgstr "La elektita panelo kaj ĉiuj ĝiaj elementoj estos forigitaj."
 
 #: ../panel/panel-app.c:777
 msgid "Developer"
@@ -141,6 +141,8 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
+" Uzado: %s [OPCIOJ]\n"
+"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -156,16 +158,28 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
+" OPCIOJ\n"
+" -h, --help      Montru ĉi-tiun mesaĝon kaj adiaŭu\n"
+" -v, --version   Montru ĉi-tiun mesaĝon kaj adiaŭu\n"
+" -c, --customize Montru agordan mesaĝon\n"
+" -s, --save      Konservu la agordon\n"
+" -r, --restart   Restartigu la panelojn\n"
+" -q, --quit      Fermu la seancon\n"
+" -x, --exit      Fermu ĉiujn panelojn kaj adiaŭu la programon\n"
+" -a, --add       Aldonu novajn elementojn\n"
+"\n"
 
 #: ../panel/panel-dialogs.c:616
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
+"Mustrenu elementojn el la listo al panelo aŭ mustrenante forigu ilin reen "
+"al la listo."
 
 #: ../panel/panel-dialogs.c:629
 msgid "Available Items"
-msgstr ""
+msgstr "Disponeblaj Elementoj"
 
 #: ../panel/panel-dialogs.c:842 ../panel/panel-dialogs.c:1066
 msgid "Normal Width"
@@ -177,23 +191,23 @@ msgstr "Plena larĝo"
 
 #: ../panel/panel-dialogs.c:850 ../panel/panel-dialogs.c:1074
 msgid "Span Monitors"
-msgstr "Kunmeti Ekranojn"
+msgstr "Kunmetu Ekranojn"
 
 #: ../panel/panel-dialogs.c:910 ../panel/panel-dialogs.c:1139
 msgid "Left"
-msgstr ""
+msgstr "Maldekstre"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1141
 msgid "Right"
-msgstr ""
+msgstr "Dekstre"
 
 #: ../panel/panel-dialogs.c:917 ../panel/panel-dialogs.c:1146
 msgid "Top"
-msgstr ""
+msgstr "Supre"
 
 #: ../panel/panel-dialogs.c:919 ../panel/panel-dialogs.c:1148
 msgid "Bottom"
-msgstr ""
+msgstr "Malsupre"
 
 #. position
 #: ../panel/panel-dialogs.c:947
@@ -206,7 +220,7 @@ msgstr "Fiksa Pozicio"
 
 #: ../panel/panel-dialogs.c:967
 msgid "Freely Moveable"
-msgstr ""
+msgstr "Libere Movebla"
 
 #: ../panel/panel-dialogs.c:1082
 msgid "Auto_hide"
@@ -243,7 +257,7 @@ msgstr "Aspekto"
 #. size
 #: ../panel/panel-dialogs.c:1337
 msgid "Size (pixels):"
-msgstr ""
+msgstr "Dimensio (rastrumeroj):"
 
 #: ../panel/panel-dialogs.c:1360
 msgid "Transparency (%):"
@@ -251,7 +265,7 @@ msgstr "Travidebleco (%):"
 
 #: ../panel/panel-dialogs.c:1384
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "Opakigu la aktivan panelon"
 
 #: ../panel/panel-dialogs.c:1425 ../panel/panel-dialogs.c:1463
 #: ../panel/panel-dialogs.c:1488
@@ -310,7 +324,7 @@ msgstr "Analoga"
 
 #: ../plugins/clock/clock.c:447
 msgid "Digital"
-msgstr "Cifereca"
+msgstr "Cifera"
 
 #: ../plugins/clock/clock.c:448
 msgid "LED"
@@ -322,11 +336,11 @@ msgstr "Montru la _kadron"
 
 #: ../plugins/clock/clock.c:461
 msgid "Clock Options"
-msgstr ""
+msgstr "Horloĝaj Opcioj"
 
 #: ../plugins/clock/clock.c:471
 msgid "Use 24-_hour clock"
-msgstr ""
+msgstr "Uzu 24-_horan horloĝon"
 
 #: ../plugins/clock/clock.c:479
 msgid "Show AM/PM"
@@ -353,20 +367,20 @@ msgstr "Malsukcesis startigi \"%s\""
 #: ../plugins/launcher/launcher.c:397
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "Eraro kun la komando \"%s\""
 
 #: ../plugins/launcher/launcher.c:644 ../plugins/launcher/launcher.c:1249
 #: ../plugins/launcher/launcher-dialog.c:1119
 msgid "New Item"
-msgstr "Novan elementon"
+msgstr "Novan Elementon"
 
 #: ../plugins/launcher/launcher.c:702 ../plugins/launcher/launcher.c:1250
 msgid "This item has not yet been configured"
-msgstr "Tiu ĉi elemento ne jam estis konfigurita"
+msgstr "Tiu-ĉi elemento ne jam estis agordita"
 
 #: ../plugins/launcher/launcher-dialog.c:78
 msgid "Default"
-msgstr "Defaŭlta"
+msgstr "Antaŭsupoza"
 
 #: ../plugins/launcher/launcher-dialog.c:79
 msgid "Editor"
@@ -474,7 +488,7 @@ msgstr "Nombro da horizontaloj:"
 
 #: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
-msgstr "Nombro da vertikaloj"
+msgstr "Nombro da vertikaloj:"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -487,29 +501,29 @@ msgstr "_Streku Disigilon"
 
 #: ../plugins/separator/separator.c:293
 msgid "_Expand"
-msgstr ""
+msgstr "_Grandigu"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
-msgstr ""
+msgstr "Videbligu la kaŝitajn fenestrojn"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
-msgstr ""
+msgstr "Kaŝu la fenestrojn por montri la labortablon"
 
 #: ../plugins/systray/systray.c:66
 msgid "There is already a system tray running on this screen"
-msgstr "Iu seancadministrila avizregiono jam estas kuranta ĉe tiu ekrano"
+msgstr "Estas jam avizregiono kuranta sur tiu ekrano"
 
 #: ../plugins/systray/systray.c:72
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "Malsukcesas registri la seancadministrilan avizregionon: %s"
+msgstr "Malsukcesas registri la avizregionon: %s"
 
 #: ../plugins/systray/systray.c:366
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr ""
+msgstr "Avizregiono"
 
 #: ../plugins/tasklist/tasklist.c:413 ../plugins/tasklist/tasklist.c:466
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -522,11 +536,11 @@ msgstr "Dimensioj"
 
 #: ../plugins/tasklist/tasklist.c:438
 msgid "Minimum Width:"
-msgstr ""
+msgstr "Minimuma Larĝo:"
 
 #: ../plugins/tasklist/tasklist.c:453
 msgid "Use all available space"
-msgstr ""
+msgstr "Uzu la tutan disponeblan spacon"
 
 #: ../plugins/tasklist/tasklist.c:470
 msgid "Show tasks from _all workspaces"
@@ -542,7 +556,7 @@ msgstr "Neniam grupigu taskojn"
 
 #: ../plugins/tasklist/tasklist.c:497
 msgid "Automatically group tasks"
-msgstr "Aŭtomate grupigu taskojn"
+msgstr "Aŭtomate grupigu la taskojn"
 
 #: ../plugins/tasklist/tasklist.c:500
 msgid "Always group tasks"
@@ -551,39 +565,39 @@ msgstr "Ĉiam grupigu la taskojn"
 #: ../plugins/windowlist/windowlist.c:309
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "Laborspaco %d"
 
 #: ../plugins/windowlist/windowlist.c:387
 #: ../plugins/windowlist/windowlist.c:393
 msgid "Add workspace"
-msgstr ""
+msgstr "Aldonu laborspacon"
 
 #: ../plugins/windowlist/windowlist.c:408
 #, c-format
 msgid "Remove Workspace %d"
-msgstr ""
+msgstr "Forigu la Laborspacon %d"
 
 #: ../plugins/windowlist/windowlist.c:410
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "Forigu la Laborspacon '%s'"
 
 #: ../plugins/windowlist/windowlist.c:555
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr ""
+msgstr "Listo de la Fenestroj"
 
 #: ../plugins/windowlist/windowlist.c:566
 msgid "Include all Workspaces"
-msgstr ""
+msgstr "Inkluzivu ĉiujn Laborspacojn"
 
 #: ../plugins/windowlist/windowlist.c:571
 msgid "Show Window Icons"
-msgstr ""
+msgstr "Montru la Fenestrajn Piktogramojn"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "Agaj Butonoj"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -591,7 +605,7 @@ msgstr "Adiaŭu aŭ ŝlosu la ekranon"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr ""
+msgstr "Kiomhore estas?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
@@ -603,23 +617,23 @@ msgstr "Lanĉilo"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Programa lanĉilo kun opcia menuo"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr ""
+msgstr "Miniatura vido el ĉiuj virtualaj labortabloj"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr ""
+msgstr "Aldonas spacon aŭ linion inter panelaj elementoj"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "Montru la Labortablon"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "Baskulu la labortablan montru/kaŝu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
@@ -631,7 +645,7 @@ msgstr "Montru ĉiujn kurantajn aplikaĵojn"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr ""
+msgstr "Montru la liston de la disponeblaj fenestroj"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
 msgid "Test Plugin"
@@ -639,4 +653,4 @@ msgstr "Testkromaĵo"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
-msgstr ""
+msgstr "Tiu-ĉi kromaĵo ne havas celon"
