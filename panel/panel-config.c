@@ -417,8 +417,6 @@ end_element_handler (GMarkupParseContext * context,
         case PANEL:
             if (strcmp ("panel", element_name) == 0)
             {
-                if (parser->current_panel)
-                    panel_init_position (parser->current_panel);
                 parser->state = PANELS;
                 parser->current_panel = NULL;
                 TIMER_ELAPSED(" + end config panel");
@@ -454,7 +452,6 @@ end_element_handler (GMarkupParseContext * context,
                                   "activetrans", parser->activetrans,
                                   NULL);
                 }
-                panel_init_position (parser->current_panel);
                 TIMER_ELAPSED(" ++ end properties");
             }
             break;

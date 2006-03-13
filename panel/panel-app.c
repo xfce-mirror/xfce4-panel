@@ -502,6 +502,7 @@ expose_timeout (GtkWidget *panel)
 static void
 panel_app_init_panel (GtkWidget *panel)
 {
+    panel_init_position (PANEL (panel));
     panel_init_signals (PANEL (panel));
     gtk_widget_show (panel);
     g_idle_add ((GSourceFunc)expose_timeout, panel);
