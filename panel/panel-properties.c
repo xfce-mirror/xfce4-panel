@@ -1115,6 +1115,12 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
         GtkOrientation orientation;
         XfcePanelWidthType full_width = priv->full_width;
         
+        xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (panel),
+                                             NULL, NULL);
+
+        xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (panel),
+                                               NULL, NULL);
+        
         if (position == XFCE_SCREEN_POSITION_NONE)
             position = XFCE_SCREEN_POSITION_FLOATING_H;
 
@@ -1162,6 +1168,12 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
         while (gtk_events_pending ())
             gtk_main_iteration ();
 
+        xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (panel),
+                (XfcePanelWindowMoveFunc)panel_move_function, panel);
+
+        xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (panel),
+                (XfcePanelWindowResizeFunc)panel_resize_function, panel);
+        
         priv->screen_position = position;
         panel_set_position (panel, position, priv->xoffset, priv->yoffset);
         
