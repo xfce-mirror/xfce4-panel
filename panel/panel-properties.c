@@ -867,6 +867,18 @@ void panel_set_autohide (Panel *panel, gboolean autohide)
     {
         _set_hidden (panel, FALSE);
     }        
+    else
+    {
+        int x, y, w, h;
+        XfceMonitor *xmon;
+
+        gtk_window_get_position (GTK_WINDOW (panel), &x, &y);
+        gtk_window_get_size (GTK_WINDOW (panel), &w, &h);
+
+        xmon = panel_app_get_monitor (priv->monitor);
+
+        _set_struts (panel, xmon, x, y, w, h);
+    }
 }
 
 void panel_block_autohide (Panel *panel)
