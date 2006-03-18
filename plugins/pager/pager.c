@@ -131,8 +131,7 @@ pager_read_rc_file (XfcePanelPlugin *plugin, Pager *pager)
         }
     }
 
-    pager->rows = 
-        CLAMP (rows, 1, netk_screen_get_workspace_count (pager->screen));
+    pager->rows = rows;
 }
 
 static void
