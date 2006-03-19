@@ -51,8 +51,27 @@
 #define SELECTION_NAME "XFCE4_PANEL"
 #define PANEL_LAUNCHER "launcher"
 
-#ifdef TIMER
-GTimer *timer = NULL;
+#if defined(TIMER) && defined(G_HAVE_ISO_VARARGS)
+void
+xfce_panel_program_log (const char *file, const int line, 
+                        const char *format, ...)
+{
+    va_list args;
+    gchar  *formatted;
+    gchar  *message;
+
+    va_start (args, format);
+    formatted = g_strdup_vprintf (format, args);
+    va_end (args);
+
+    message = g_strdup_printf ("MARK: %s: %s:%d: %s", 
+                               g_get_prgname(), file, line, formatted);
+
+    access (message, F_OK);
+
+    g_free (formatted);
+    g_free (message);
+}
 #endif
 
 /* types and global variables */
@@ -502,10 +521,14 @@ expose_timeout (GtkWidget *panel)
 static void
 panel_app_init_panel (GtkWidget *panel)
 {
+    TIMER_ELAPSED("start panel_app_init_panel: %p", panel);
     panel_init_position (PANEL (panel));
     panel_init_signals (PANEL (panel));
+    TIMER_ELAPSED(" + start show panel");
     gtk_widget_show (panel);
+    TIMER_ELAPSED(" + end show panel");
     g_idle_add ((GSourceFunc)expose_timeout, panel);
+    TIMER_ELAPSED("end panel_app_init_panel");
 }    
 
 /**
@@ -559,22 +582,20 @@ panel_app_run (int argc, char **argv)
     panel_app.session_client->save_yourself = session_save_yourself;
     panel_app.session_client->die = session_die;
 
-    TIMER_ELAPSED("connect to session manager...");
+    TIMER_ELAPSED("connect to session manager");
     if (!session_init (panel_app.session_client))
     {
         g_free (panel_app.session_client);
         panel_app.session_client = NULL;
     }   
-    TIMER_ELAPSED(panel_app.session_client ? 
-                  "...connected" : "...not connected");
     
     /* screen layout and geometry */
+    TIMER_ELAPSED("start monitor list creation");
     create_monitor_list ();
-    TIMER_ELAPSED("end monitor list creation");
     
     /* configuration */
+    TIMER_ELAPSED("start init item manager");
     xfce_panel_item_manager_init ();
-    TIMER_ELAPSED("end init item manager");
 
     TIMER_ELAPSED("start panel creation");
     panel_app.panel_list = panel_config_create_panels ();
@@ -589,7 +610,6 @@ panel_app_run (int argc, char **argv)
     panel_app.runstate = PANEL_RUN_STATE_NORMAL;
     TIMER_ELAPSED("start main loop");
     gtk_main ();
-    TIMER_ELAPSED("end main loop");
     
     g_free (panel_app.session_client);
     panel_app.session_client = NULL;

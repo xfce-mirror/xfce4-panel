@@ -142,19 +142,16 @@ main (int argc, char **argv)
 {
     int success = 0;
     
-    TIMER_INIT();
-    
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
-    TIMER_ELAPSED("end xfce_textdomain()");
     
     if (handle_options (argc, argv, &success))
         exit (success);
 
+    TIMER_ELAPSED("start gtk_init()");
     gtk_init (&argc, &argv);
-    TIMER_ELAPSED("end gtk_init()");
     
+    TIMER_ELAPSED("start panel_init()");
     success = panel_app_init ();
-    TIMER_ELAPSED("end panel_init()");
     
     if (success == -1)
     {
@@ -168,7 +165,6 @@ main (int argc, char **argv)
 
     TIMER_ELAPSED("start panel_app_run()");
     success = panel_app_run (argc, argv);
-    TIMER_ELAPSED("end panel_app_run()");
     
     if (success == 1)
     {

@@ -25,55 +25,15 @@
 #include <X11/Xlib.h>
 #include <gtk/gtkwidget.h>
 
-#ifdef TIMER
+#if defined(TIMER) && defined(G_HAVE_ISO_VARARGS)
+void xfce_panel_program_log (const char *file, const int line, 
+                             const char *format, ...);
 
-extern GTimer *timer;
-
-#define TIMER_INIT()                                        \
-    {                                                       \
-        if (timer == NULL)                                  \
-        {                                                   \
-            timer = g_timer_new();                          \
-            g_timer_start(timer);                           \
-        }                                                   \
-    }
-
-#define TIMER_ELAPSED(fmt,args...)                          \
-    {                                                       \
-        int hrs, mins, secs, ms;                            \
-        gulong elapsed;                                     \
-        gdouble secs_d;                                     \
-        secs_d = g_timer_elapsed(timer, &elapsed);          \
-        ms = (int)(elapsed / 1000); /* -> ms */             \
-        hrs     = secs_d / 3600;                            \
-        secs_d -= hrs * 3600;                               \
-        mins    = secs_d / 60;                              \
-        secs    = secs_d - mins * 60;                       \
-        g_print (" + ");                                    \
-        if (hrs)                                            \
-        {                                                   \
-            g_print ("%d h, %d min, %d s\t",                \
-                     hrs, mins, secs);                      \
-        }                                                   \
-        else if (mins)                                      \
-        {                                                   \
-            g_print ("%d min, %d s\t", mins, secs);         \
-        }                                                   \
-        else if (secs)                                      \
-        {                                                   \
-            g_print ("%d s, %d ms\t", secs, ms);            \
-        }                                                   \
-        else                                                \
-        {                                                   \
-            g_print ("%.2d ms\t", ms);                      \
-        }                                                   \
-        g_print (fmt, ##args);                              \
-        g_print ("\t\t[%s:%d]\n", __FILE__, __LINE__);      \
-    }
+#define TIMER_ELAPSED(...) \
+    xfce_panel_program_log (__FILE__, __LINE__, __VA_ARGS__)
 
 #else
 
-#define TIMER_INIT()               do {} while(0)
 #define TIMER_ELAPSED(fmt,args...) do {} while(0)
 
 #endif /* TIMER */
