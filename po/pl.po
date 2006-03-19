@@ -264,7 +264,7 @@ msgstr "Wygląd"
 #. size
 #: ../panel/panel-dialogs.c:1346
 msgid "Size (pixels):"
-msgstr ""
+msgstr "Rozmiar (piksele)"
 
 #: ../panel/panel-dialogs.c:1369
 #, fuzzy
@@ -273,7 +273,7 @@ msgstr "Przezroczystość"
 
 #: ../panel/panel-dialogs.c:1393
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "Uczyń aktywny panel przeźroczystym"
 
 #: ../panel/panel-dialogs.c:1434 ../panel/panel-dialogs.c:1472
 #: ../panel/panel-dialogs.c:1497
@@ -377,7 +377,7 @@ msgstr ""
 #: ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "Błąd w poleceniu \"%s\""
 
 #: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
 #: ../plugins/launcher/launcher-dialog.c:1142
@@ -489,7 +489,8 @@ msgid ""
 "The Zero Install GUI has finished, but the launcher dialog has disappeared "
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
-msgstr ""
+msgstr "GUI Zero Install zakończyło operacje lecz okno dialogowe zniknęło. "
+"Nie dodaję żadnych wyzwalaczy."
 
 #: ../plugins/launcher/launcher-dialog.c:1463
 #, c-format
@@ -498,7 +499,10 @@ msgid ""
 "%s\n"
 "\n"
 "For help using Zero Install, see http://0install.net"
-msgstr ""
+msgstr "Nie udało się wykonać:\n"
+"%s\n"
+"\n"
+"Opis Zero Install na stronie http://0install.net"
 
 #: ../plugins/launcher/launcher-dialog.c:1786
 msgid "Select file"
@@ -532,11 +536,11 @@ msgstr "_Rozciągnij"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
-msgstr ""
+msgstr "Przywróć ukryte okna"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
-msgstr ""
+msgstr "Ukryj okna i pokaż pulpit"
 
 #: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
@@ -550,7 +554,7 @@ msgstr "Nie można zarejestrować obszaru powiadomień: %s"
 #: ../plugins/systray/systray.c:394
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr ""
+msgstr "Tacka Systemowa"
 
 #: ../plugins/tasklist/tasklist.c:401 ../plugins/tasklist/tasklist.c:454
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -563,11 +567,11 @@ msgstr "Rozmiar"
 
 #: ../plugins/tasklist/tasklist.c:426
 msgid "Minimum Width:"
-msgstr ""
+msgstr "Minimalna Długość:"
 
 #: ../plugins/tasklist/tasklist.c:441
 msgid "Use all available space"
-msgstr ""
+msgstr "Użyj całej dostępnej przestrzeni"
 
 #: ../plugins/tasklist/tasklist.c:458
 msgid "Show tasks from _all workspaces"
@@ -592,12 +596,12 @@ msgstr "Zawsze grupuj zadania"
 #: ../plugins/windowlist/windowlist.c:309
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "Pulpit %d"
 
 #: ../plugins/windowlist/windowlist.c:387
 #: ../plugins/windowlist/windowlist.c:393
 msgid "Add workspace"
-msgstr ""
+msgstr "Dodaj pulpit"
 
 #: ../plugins/windowlist/windowlist.c:408
 #, fuzzy, c-format
@@ -607,20 +611,20 @@ msgstr "Usunąć Panel \"%d\"?"
 #: ../plugins/windowlist/windowlist.c:410
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "Usuń pulpit '%s'"
 
 #: ../plugins/windowlist/windowlist.c:555
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr ""
+msgstr "Lista okien"
 
 #: ../plugins/windowlist/windowlist.c:566
 msgid "Include all Workspaces"
-msgstr ""
+msgstr "Dołącz wszystkie pulpity"
 
 #: ../plugins/windowlist/windowlist.c:571
 msgid "Show Window Icons"
-msgstr ""
+msgstr "Pokazuj ikony okien"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -632,7 +636,7 @@ msgstr "Zablokuj ekran"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr ""
+msgstr "Jaka jest godzina?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
@@ -644,11 +648,11 @@ msgstr "Aktywator"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "Wyzwalacz programu z opcjonalnym menu"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr ""
+msgstr "Minimalny widok wszystkich wirtualnych pulpitów"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
@@ -656,11 +660,11 @@ msgstr "Dodaj spację lub linię pomiędzy elementami panelu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "Pokaż Pulpit"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "Włącz pokaż/ukryj dla pulpitu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
@@ -672,7 +676,7 @@ msgstr "P_okazuj tylko zminimalizowane aplikacje"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr ""
+msgstr "Pokaż listę dostępnych okien"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
 msgid "Test Plugin"
