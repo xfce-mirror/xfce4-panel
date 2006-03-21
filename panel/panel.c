@@ -736,6 +736,13 @@ panel_free_data (Panel *panel)
     
     priv = panel->priv;
 
+    /* try and prevent some race conditions */
+    priv->block_autohide++;
+    xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (panel), 
+                                         NULL, NULL);
+    xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (panel), 
+                                           NULL, NULL);
+ 
     for (l = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
          l != NULL; l = l->next)
     {

@@ -132,13 +132,6 @@ cleanup_panels (void)
         l = g_list_delete_link (l, l);
     }
 
-    for (i = 0; i < panel_app.monitor_list->len; ++i)
-    {
-        XfceMonitor *xmon = g_ptr_array_index (panel_app.monitor_list, i);
-        g_free (xmon);
-    }
-    g_ptr_array_free (panel_app.monitor_list, TRUE);
-
     for (i = 0; i < panel_app.panel_list->len; ++i)
     {
         Panel *panel = g_ptr_array_index (panel_app.panel_list, i);
@@ -153,6 +146,13 @@ cleanup_panels (void)
     }
 
     g_ptr_array_free (panel_app.panel_list, TRUE);
+
+    for (i = 0; i < panel_app.monitor_list->len; ++i)
+    {
+        XfceMonitor *xmon = g_ptr_array_index (panel_app.monitor_list, i);
+        g_free (xmon);
+    }
+    g_ptr_array_free (panel_app.monitor_list, TRUE);
 }
 
 /* signal handling */
