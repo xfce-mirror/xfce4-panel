@@ -60,8 +60,12 @@ libxfce4panel_la_LDFLAGS = 				\
 	-export-dynamic					\
 	-version-info @LIBXFCE4PANEL_VERINFO@
 
+libxfce4panel_la_LIBADD = 
+
 if HAVE_CYGWIN
-libxfce4panel_la_LDFLAGS += -no-undefined
+  libxfce4panel_la_LDFLAGS += -no-undefined
+  libxfce4panel_la_LIBADD += @GTK_LIBS@ @LIBXFCE4UTIL_LIBS@ @LIBXFCEGUI4_LIBS@
+  libxfce4panel_la_CFLAGS += @GTK_CFLAGS@ @LIBXFCE4UTIL_CFLAGS@ @LIBXFCEGUI4_CFLAGS@
 endif
 
 EXTRA_DIST = 						\
