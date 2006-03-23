@@ -268,12 +268,15 @@ _update_plugin_list (void)
             continue;
         }
 
-        while ((file = g_dir_read_name (gdir)) && 
-               g_str_has_suffix (file, ".desktop"))
+        while ((file = g_dir_read_name (gdir)) != NULL)
         {
             XfcePanelItemClass *class;
-            char *path = g_build_filename (dirname, file, NULL);
+            char *path;
 
+            if (!g_str_has_suffix (file, ".desktop"))
+                continue;
+
+            path = g_build_filename (dirname, file, NULL);
             class = _new_plugin_class_from_desktop_file (path);
             
             g_free (path);
