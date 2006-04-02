@@ -1369,30 +1369,71 @@ static const char *dentry_keys [] = {
 static LauncherEntry *
 launcher_entry_update_from_interface (LauncherEntry *e, const char *iface)
 {
-    const char *start, *end;
+    const gchar *argv[] = {"python", "-c",
+        "import sys;"
+        "from zeroinstall.injector.iface_cache import iface_cache;"
+        "iface = iface_cache.get_interface(sys.argv[1]);"
+        "print iface.name;"
+        "print iface.summary.replace('\\n', ' ');"
+        "hasattr(iface_cache, 'get_icon_path') and "
+        "  sys.stdout.write(iface_cache.get_icon_path(iface));",
+        NULL, NULL};
+    GError *error = NULL;
+    char *child_stdout = NULL;
 
-    g_free(e->exec);
-    g_free(e->real_exec);
+    /* Set the command to "0launch iface" */
+    g_free (e->exec);
+    g_free (e->real_exec);
 
-    e->exec = g_strconcat("0launch ", iface, NULL);
-    e->real_exec = g_strdup(e->exec);
+    e->exec = g_strconcat ("0launch ", iface, NULL);
+    e->real_exec = g_strdup (e->exec);
 
-    if (!(start = strrchr (iface, '/')))
-        start = iface;
-    else
-        start++;
-    end = strrchr (start, '.');
-
-    g_free(e->name);
-    e->name = g_strndup (start, end ? end - start : strlen (start));
-
-    g_free(e->icon.icon.name);
-    e->icon.type = LAUNCHER_ICON_TYPE_NAME;
-    e->icon.icon.name = g_strdup (e->name);
-
-    /* Note: we could pull more details (eg, the summary) out of the cached XML
-     * file if we had an XML parser handy. We could even download an icon.
+    /* Get the name and summary from the interface file. Since 0launch
+     * worked, the user should have Python...
      */
+    argv[3] = iface;
+    g_spawn_sync (NULL, (gchar **) argv, NULL,
+           G_SPAWN_SEARCH_PATH,
+           NULL, NULL,
+           &child_stdout, NULL,
+           NULL, &error);
+
+    if (error)
+    {
+        xfce_warn (_("Failed to run 0launch:\n%s\n\n"
+                        "For help using Zero Install, "
+                        "see http://0install.net"), error->message);
+        g_error_free (error);
+    }
+    else if (child_stdout)
+    {
+        gchar **lines;
+        
+        lines = g_strsplit(child_stdout, "\n", 3);
+
+        if (lines[0])
+        {
+            g_free(e->name);
+            e->name = lines[0];
+
+            if (lines[1])
+            {
+                g_free(e->comment);
+                e->comment = lines[1];
+
+                if (lines[2]) {
+                    g_free(e->icon.icon.name);
+                    e->icon.type = LAUNCHER_ICON_TYPE_NAME;
+                    e->icon.icon.name = lines[2];
+                }
+            }
+        }
+
+        g_free (lines); /* Not strvfree(); we used all the lines */
+    }
+
+    g_free (child_stdout);
+
     return e;
 }
 
@@ -1449,9 +1490,9 @@ start_entry_from_interface_file (LauncherDialog *ld,
 {
     GPid pid;
     GError *error = NULL;
-    const gchar *argv[] = {"0launch", "-dg", NULL, NULL};
+    const gchar *argv[] = {"0launch", "-dg", "--", NULL, NULL};
 
-    argv[2] = interface;
+    argv[3] = interface;
 
     g_spawn_async(NULL, (gchar **) argv, NULL,
            G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
