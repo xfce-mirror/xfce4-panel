@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.30\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-09 11:13+0900\n"
-"PO-Revision-Date: 2006-02-24 16:37+0200\n"
+"PO-Revision-Date: 2006-04-08 21:56+0300\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -367,7 +367,7 @@ msgstr "Kohdetta \"%s\" ei voitu suorittaa"
 #: ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "Virhe komennossa \"%s\""
 
 #: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
 #: ../plugins/launcher/launcher-dialog.c:1142
@@ -483,6 +483,10 @@ msgid ""
 "\n"
 "For help using Zero Install, see http://0install.net"
 msgstr ""
+"0launch-komennon suorittaminen epäonnistui:\n"
+"%s\n"
+"\n"
+"Apua Zero Installin käyttöön löydät osoitteesta http://0install.net"
 
 #: ../plugins/launcher/launcher-dialog.c:1469
 msgid ""
@@ -490,6 +494,9 @@ msgid ""
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
+"Zero Install -käyttöliittymän suorittaminen on päättynyt, mutta "
+"käynnistindialogi on kadonnut. Käynnistintä ei lisätä (mutta ladattuja "
+"tiedostoja ei poistettu)."
 
 #: ../plugins/launcher/launcher-dialog.c:1827
 msgid "Select file"
@@ -509,9 +516,8 @@ msgstr "Sarakkeiden lukumäärä:"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "Erotin"
+msgstr "Erotin tai tyhjä tila"
 
 #: ../plugins/separator/separator.c:284
 msgid "_Draw Separator"
