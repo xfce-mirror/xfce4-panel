@@ -1307,6 +1307,6 @@ launcher_free (LauncherPlugin *launcher)
     if (launcher->menu)
         gtk_widget_destroy (launcher->menu);
     
-    g_free (launcher);
     launcher->plugin = NULL;
+    g_free (launcher);
 }
