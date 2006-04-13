@@ -528,7 +528,7 @@ static void
 _set_hidden (Panel *panel, gboolean hide)
 {
     PanelPrivate *priv;
-    int w, h;
+    int w = 0, h = 0;
 
     priv = panel->priv;
 
@@ -944,7 +944,7 @@ panel_set_full_width (Panel *panel, int fullwidth)
         if (GTK_WIDGET_VISIBLE (panel))
         {
             XfceMonitor *xmon;
-            int w, h;
+            int w = 0, h = 0;
 
             xmon = panel_app_get_monitor (priv->monitor);
 

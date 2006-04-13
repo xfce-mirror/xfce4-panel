@@ -6,7 +6,7 @@ dnl 2005 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl version info
-m4_define([xfce4_panel_version],[4.3.30])
+m4_define([xfce4_panel_version],[4.3.90.1])
 m4_define([libxfce4panel_verinfo], [1:4:0])
 
 dnl init autoconf

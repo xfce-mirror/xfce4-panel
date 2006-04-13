@@ -313,7 +313,7 @@ create_monitor_list (void)
     GdkDisplay *display;
     GdkScreen *screen;
     XfceMonitor *monitor;
-    int n_screens, n_monitors, i, j, w, h;
+    int n_screens, n_monitors = 0, i, j, w = 0, h = 0;
     gboolean equal_w, equal_h;
     
     panel_app.monitor_list = g_ptr_array_new ();
