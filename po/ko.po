@@ -57,26 +57,24 @@ msgstr "패널에 대하여..."
 
 #. move
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:778
-#, fuzzy
 msgid "Move"
-msgstr "삭제"
+msgstr "이동"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:800
 msgid "Remove"
 msgstr "삭제"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:817
-#, fuzzy
 msgid "Add New Item"
-msgstr "새로운 항목"
+msgstr "새로운 항목 추가"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
 msgid "Customize Panel"
-msgstr ""
+msgstr "패널 꾸미기"
 
 #: ../panel/panel.c:667 ../panel/panel-dialogs.c:602
 msgid "Add Items"
-msgstr ""
+msgstr "항목 추가"
 
 #: ../panel/panel.c:682 ../plugins/actions/actions.c:424
 msgid "Quit"
@@ -146,7 +144,6 @@ msgstr " 사용법: %s [선택]\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
-#, fuzzy
 msgid ""
 " OPTIONS\n"
 " -h, --help      Show this message and exit\n"
@@ -160,8 +157,8 @@ msgid ""
 "\n"
 msgstr ""
 " 선택\n"
-" -h, --help      도움말을 보여줍니다.\n"
-" -v, --version   버전을 보여줍니다.\n"
+" -h, --help      도움말을 보여주고 끝냅니다.\n"
+" -v, --version   버전을 보여주고 끝냅니다.\n"
 " -c, --customize 설정화면을 보여줍니다.\n"
 " -s, --save      패널 설정을 저장합니다.\n"
 " -r, --restart   패널을 다시 시작합니다.\n"
@@ -178,24 +175,20 @@ msgstr ""
 "패널의 리스트에서 항목을 옮기거나 리스트로 다시 가져다 놓으면 삭제합니다."
 
 #: ../panel/panel-dialogs.c:630
-#, fuzzy
 msgid "Available Items"
 msgstr "사용가능한 항목"
 
 #: ../panel/panel-dialogs.c:843 ../panel/panel-dialogs.c:1067
-#, fuzzy
 msgid "Normal Width"
-msgstr "최대 폭(_F)"
+msgstr "보통 폭"
 
 #: ../panel/panel-dialogs.c:845 ../panel/panel-dialogs.c:1069
-#, fuzzy
 msgid "Full Width"
 msgstr "최대 폭(_F)"
 
 #: ../panel/panel-dialogs.c:851 ../panel/panel-dialogs.c:1075
-#, fuzzy
 msgid "Span Monitors"
-msgstr "감시"
+msgstr "감시자 펼치기"
 
 #: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1140
 msgid "Left"
@@ -243,7 +236,6 @@ msgid "Vertical"
 msgstr "수직"
 
 #: ../panel/panel-dialogs.c:1124
-#, fuzzy
 msgid "Handle:"
 msgstr "핸들 위치:"
 
@@ -252,9 +244,8 @@ msgid "At both sides"
 msgstr "양쪽 모두"
 
 #: ../panel/panel-dialogs.c:1217
-#, fuzzy
 msgid "Select Monitor"
-msgstr "감시"
+msgstr "감시자 선택"
 
 #: ../panel/panel-dialogs.c:1335 ../plugins/clock/clock.c:431
 msgid "Appearance"
@@ -266,13 +257,12 @@ msgid "Size (pixels):"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:1369
-#, fuzzy
 msgid "Transparency (%):"
-msgstr "투명"
+msgstr "투명도(%):"
 
 #: ../panel/panel-dialogs.c:1393
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "활성화된 패널을 흐릭하게"
 
 #: ../panel/panel-dialogs.c:1434 ../panel/panel-dialogs.c:1472
 #: ../panel/panel-dialogs.c:1497
@@ -289,9 +279,8 @@ msgid "New Panel"
 msgstr "새로운 패널"
 
 #: ../panel/panel-dialogs.c:1615
-#, fuzzy
 msgid "Panel Manager"
-msgstr "패널 종류"
+msgstr "패널 관리자"
 
 #: ../plugins/actions/actions.c:399
 msgid "Panel Actions"
@@ -307,7 +296,7 @@ msgstr "화면잠금"
 
 #: ../plugins/actions/actions.c:426
 msgid "Quit + Lock screen"
-msgstr "종료 + 화면잠금(_L)"
+msgstr "종료 + 화면잠금"
 
 #. Use format characters from strftime(3)
 #. * to get the proper string for your locale.
@@ -460,7 +449,7 @@ msgstr "기타..."
 
 #: ../plugins/launcher/launcher-dialog.c:628
 msgid "Command"
-msgstr "명령:"
+msgstr "명령"
 
 #: ../plugins/launcher/launcher-dialog.c:664
 msgid "Run in _terminal"
@@ -489,6 +478,10 @@ msgid ""
 "\n"
 "For help using Zero Install, see http://0install.net"
 msgstr ""
+"0launch를 기동시키기 못 했습니다.:\n"
+"%s\n"
+"\n"
+"Zero Install에 대해서는, http://0install.net을 참고하시렵니까."
 
 #: ../plugins/launcher/launcher-dialog.c:1469
 msgid ""
@@ -496,6 +489,8 @@ msgid ""
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
+"Zero Install GUI가 종료했지만, 실행기 화면이 사라졌습니다."
+"실행기를 추가하지 마십시오(내려받은 화일은 모두 안전합니다)"
 
 #: ../plugins/launcher/launcher-dialog.c:1827
 msgid "Select file"
@@ -515,9 +510,8 @@ msgstr "몇 열:"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "분리표시"
+msgstr "분리표시 또는 띄우기"
 
 #: ../plugins/separator/separator.c:284
 msgid "_Draw Separator"
@@ -529,11 +523,11 @@ msgstr "확장(_E)"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
-msgstr ""
+msgstr "숨긴 창 보이기"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
-msgstr ""
+msgstr "창을 숨기고 작업화면 보이기"
 
 #: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
@@ -547,7 +541,7 @@ msgstr "시스템 트레이에 %s를(을) 등록하지 못 했습니다."
 #: ../plugins/systray/systray.c:394
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr ""
+msgstr "시스템 트레이"
 
 #: ../plugins/tasklist/tasklist.c:401 ../plugins/tasklist/tasklist.c:454
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -560,11 +554,11 @@ msgstr "크기"
 
 #: ../plugins/tasklist/tasklist.c:426
 msgid "Minimum Width:"
-msgstr ""
+msgstr "최소 폭:"
 
 #: ../plugins/tasklist/tasklist.c:441
 msgid "Use all available space"
-msgstr ""
+msgstr "이용가능한 모든 영역 사용"
 
 #: ../plugins/tasklist/tasklist.c:458
 msgid "Show tasks from _all workspaces"
@@ -589,35 +583,35 @@ msgstr "같은 태스크는 항상 모으기"
 #: ../plugins/windowlist/windowlist.c:309
 #, c-format
 msgid "Workspace %d"
-msgstr ""
+msgstr "작업공간 %d"
 
 #: ../plugins/windowlist/windowlist.c:387
 #: ../plugins/windowlist/windowlist.c:393
 msgid "Add workspace"
-msgstr ""
+msgstr "작업공간 추가"
 
 #: ../plugins/windowlist/windowlist.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace %d"
-msgstr "패널 \"%d\"를(을) 삭제할까요?"
+msgstr "작업공간 %d를(을) 삭제할까요?"
 
 #: ../plugins/windowlist/windowlist.c:410
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "작업공간 '%s' 삭제"
 
 #: ../plugins/windowlist/windowlist.c:555
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr ""
+msgstr "창 목록"
 
 #: ../plugins/windowlist/windowlist.c:566
 msgid "Include all Workspaces"
-msgstr ""
+msgstr "모든 작업공간 포함"
 
 #: ../plugins/windowlist/windowlist.c:571
 msgid "Show Window Icons"
-msgstr ""
+msgstr "창 아이콘 모이기"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -653,11 +647,11 @@ msgstr "항목 사이에 빈 공간이나 줄을 추가"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "작업공간 보이기"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "작업공간 보이기/숨기기"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
@@ -669,7 +663,7 @@ msgstr "실행 중인 프로그램 보이기"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr ""
+msgstr "이용가능한 창목록 보이기"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
 msgid "Test Plugin"
