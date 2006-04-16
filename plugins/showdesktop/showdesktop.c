@@ -67,8 +67,11 @@ showdesktop_set_size (XfcePanelPlugin *plugin, int size, ShowDesktopData *sdd)
                                     sdd->button->style->ythickness);
     
     pb = xfce_themed_icon_load (SHOW_DESKTOP_ICON_NAME, width);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (sdd->image), pb);
-    g_object_unref (pb);
+    if (pb) 
+    {
+        gtk_image_set_from_pixbuf (GTK_IMAGE (sdd->image), pb);
+        g_object_unref (pb);
+    }
     gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
 
     return TRUE;
