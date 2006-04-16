@@ -2,12 +2,12 @@ dnl configure.ac
 dnl
 dnl xfce4 - panel for the Xfce Desktop environment
 dnl
-dnl 2005 Jasper Huijsmans <jasper@xfce.org>
+dnl 2005-2006 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl version info
 m4_define([xfce4_panel_version],[4.3.90.1])
-m4_define([libxfce4panel_verinfo], [1:4:0])
+m4_define([libxfce4panel_verinfo], [2:0:1])
 
 dnl init autoconf
 AC_COPYRIGHT([Copyright (c) 2002-2006
@@ -56,9 +56,8 @@ XDT_CHECK_LIBX11_REQUIRE
 XDT_CHECK_LIBSM
 
 dnl Check for required packages
-dnl XDT_CHECK_PACKAGE([LIBXFCE4MCS_CLIENT], [libxfce4mcs-client-1.0], [4.2.0])
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.0])
-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.6])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90.1])
+XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90.1])
 XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
 
 dnl Check for optional packages
@@ -69,9 +68,6 @@ XDT_CHECK_OPTIONAL_PACKAGE([LIBSTARTUP_NOTIFICATION],
 
 dnl gtk-doc
 GTK_DOC_CHECK([1.0])
-
-dnl Configure the mcs plugin
-dnl XDT_XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.2.0])
 
 dnl Check for debugging support
 XDT_FEATURE_DEBUG()

@@ -1,4 +1,4 @@
-@SET_MAKE@
+# $Id$
 
 EXTRA_DIST = 								\
 	intltool-extract.in						\
@@ -14,13 +14,13 @@ EXTRA_DIST = 								\
 	README								\
 	README.Kiosk							\
 	README.Plugins							\
-	.indent.pro
+	.indent.pro							\
+	xfce4-panel.spec
 
 DISTCLEANFILES =							\
 	intltool-extract						\
 	intltool-merge							\
-	intltool-update							\
-	xfce4-panel.spec
+	intltool-update
 
 # docs should be at the end to make sure the library is build before 
 # scanning it.
@@ -33,6 +33,10 @@ SUBDIRS =								\
 	po								\
 	docs
 
+AUTOMAKE_OPTIONS =							\
+	1.8								\
+	dist-bzip2
+
 distclean-local:
 	rm -rf *.cache *~
 
@@ -40,8 +44,6 @@ rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
 	@rm -f $(PACKAGE)-$(VERSION).tar.gz
 
-dist-bz2: dist
-	zcat $(PACKAGE)-$(VERSION).tar.gz | bzip2 --best -c > $(PACKAGE)-$(VERSION).tar.bz2
+DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
-distcheck-bz2: distcheck
-	zcat $(PACKAGE)-$(VERSION).tar.gz | bzip2 --best -c > $(PACKAGE)-$(VERSION).tar.bz2
+# vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

@@ -1,22 +1,18 @@
 Summary: 	Xfce Panel
-Name: 		xfce4-panel
-Version: 	@VERSION@
+Name: 		@PACKAGE_TARNAME@
+Version: 	@PACKAGE_VERSION@
 Release: 	1
 License:	GPL, LGPL
 URL: 		http://www.xfce.org/
 Source0: 	%{name}-%{version}.tar.gz
 Group: 		User Interface/Desktops
 BuildRoot: 	%{_tmppath}/%{name}-root
+Requires:	libxfce4util >= @LIBXFCEGUI4_REQUIRED_VERSION@
 Requires:	libxfcegui4 >= @LIBXFCEGUI4_REQUIRED_VERSION@
-Requires:	libxfce4mcs >= @LIBXFCE4MCS_CLIENT_REQUIRED_VERSION@
-Requires:	xfce-mcs-manager >= @XFCE_MCS_MANAGER_REQUIRED_VERSION@
+BuildRequires: 	libxfce4util-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
 BuildRequires: 	libxfcegui4-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
-BuildRequires:	libxfce4mcs-devel >= @LIBXFCE4MCS_CLIENT_REQUIRED_VERSION@
-BuildRequires:	xfce-mcs-manager-devel >= @XFCE_MCS_MANAGER_REQUIRED_VERSION@
-#Requires:	gtk2 >= @GTK_REQUIRED_VERSION@
-#Requires:	glib2 >= @GLIB_REQUIRED_VERSION@
-#BuildRequires: 	gtk2-devel >= @GTK_REQUIRED_VERSION@
-#BuildRequires: 	glib2-devel >= @GLIB_REQUIRED_VERSION@
+Requires:	gtk2 >= @GTK_REQUIRED_VERSION@
+BuildRequires: 	gtk2-devel >= @GTK_REQUIRED_VERSION@
 
 %description
 xfce4-panel is the panel for the Xfce desktop environment
@@ -24,7 +20,7 @@ xfce4-panel is the panel for the Xfce desktop environment
 %package devel
 Summary:	developpment headers for xfce4-panel
 Group: 		User Interface/Desktops
-Requires:	xfce4-panel >= @VERSION@
+Requires:	xfce4-panel >= @PACKAGE_VERSION@
 
 %description devel
 Header files to build plugins for xfce4-panel.
@@ -33,7 +29,7 @@ Header files to build plugins for xfce4-panel.
 %setup -q
 
 %build
-%configure
+%configure --enable-final --enable-gtk-doc
 make
 
 %install
@@ -43,21 +39,36 @@ make install DESTDIR=$RPM_BUILD_ROOT mandir=%{_mandir}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+/sbin/ldconfig
+touch --no-create %{_datadir}/icons/hicolor || :
+if [ -x %{_bindir}/gtk-update-icon-cache ]; then
+   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+fi
+
+%postun
+/sbin/ldconfig
+touch --no-create %{_datadir}/icons/hicolor || :
+if [ -x %{_bindir}/gtk-update-icon-cache ]; then
+   %{_bindir}/gtk-update-icon-cache --quiet %{_datadir}/icons/hicolor || :
+fi
+
 %files
 %defattr(-,root,root)
 %doc README README.Kiosk ChangeLog NEWS INSTALL COPYING COPYING_LIBS AUTHORS HACKING
-%{_sysconfdir}/xdg/xfce4/
-%{_datadir}/xfce4/doc/
+%config(noreplace) %{_sysconfdir}/xdg/xfce4/
+%{_datadir}/icons/
 %{_datadir}/locale/
-%{_datadir}/applications
-%{_datadir}/icons
-%{_libdir}/xfce4/mcs-plugins/
-%{_libdir}/
+%{_datadir}/xfce4/
 %{_bindir}/
+%{_libdir}/lib*.so.*
 %{_libdir}/xfce4/panel-plugins/
 %{_libexecdir}/xfce4/panel-plugins/
 
 %files devel
 %defattr(-, root, root)
-%{_libdir}/pkgconfig/
+%{_libdir}/lib*.so
+%{_libdir}/*a
+%{_libdir}/pkgconfig/*.pc
 %{_includedir}/xfce4/
+%{_datadir}/gtk-doc/

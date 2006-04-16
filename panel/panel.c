@@ -890,7 +890,7 @@ _panel_get_new_id (void)
     static char id[30];
     
     /* unique number: pseudo-random time() + counter */
-    g_snprintf (id, 30, "%ld%d", time (NULL), counter++);
+    g_snprintf (id, 30, "%ld%d", (glong) time (NULL), counter++);
     
     return id;
 }
