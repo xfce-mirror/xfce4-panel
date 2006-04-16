@@ -67,9 +67,6 @@ struct _PanelManagerDialog
     Panel *panel;
     int current;
     
-    int highlight_id;
-    GtkWidget *highlight;
-    
     GtkTooltips *tips;
 
     gboolean updating;
@@ -105,56 +102,6 @@ struct _PanelManagerDialog
 
 static GtkWidget *panel_dialog_widget = NULL;
 static GtkWidget *items_dialog_widget = NULL;
-
-
-/* Highlight Widget
- * ================
- */
-
-static gboolean
-highlight_exposed (GtkWidget *widget, GdkEventExpose *ev, 
-                   PanelManagerDialog *pmd)
-{
-    int w, h;
-    
-    w = widget->allocation.width - 1;
-    h = widget->allocation.height - 1;
-    
-    /* draw highlight */
-    gdk_draw_rectangle (GDK_DRAWABLE (widget->window),
-                        widget->style->bg_gc[GTK_STATE_SELECTED],
-                        FALSE, 0, 0, w, h);
-
-    return TRUE;
-}
-
-static void
-blink_widget (GtkWidget *widget)
-{
-    /* do something clever to draw attention to selected widget */
-}
-
-static void
-highlight_widget (GtkWidget *widget, PanelManagerDialog *pmd)
-{
-    if (pmd->highlight_id)
-        g_signal_handler_disconnect (pmd->highlight, pmd->highlight_id);
-
-    blink_widget (widget);
-    
-    pmd->highlight = widget;
-
-    if (widget)
-    {
-        pmd->highlight_id = 
-            g_signal_connect_after (widget, "expose-event",
-                                    G_CALLBACK (highlight_exposed), pmd);
-        
-        gtk_widget_queue_draw (widget);
-    }
-    else
-        pmd->highlight_id = 0;
-}
 
 
 /* 
@@ -633,7 +580,7 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
 
     add_item_treeview (pid);
 
-     /* make panels insensitive, set up dnd and highlight current panel */
+     /* make panels insensitive and set up dnd */
     g_ptr_array_foreach (panels, (GFunc)item_dialog_opened, NULL);
 
     gtk_window_set_keep_above (GTK_WINDOW (dlg), TRUE);
@@ -1416,8 +1363,6 @@ panel_selected (GtkComboBox * combo, PanelManagerDialog * pmd)
     pmd->panel = g_ptr_array_index (pmd->panels, n);
 
     update_widgets (pmd);
-
-    highlight_widget (GTK_WIDGET (pmd->panel), pmd);
 }
 
 static void
@@ -1456,8 +1401,6 @@ remove_panel (GtkWidget * w, PanelManagerDialog * pmd)
 {
     int n = pmd->panels->len;
     int i;
-
-    highlight_widget (NULL, pmd);
 
     panel_app_remove_panel (GTK_WIDGET (pmd->panel));
 
@@ -1506,8 +1449,6 @@ create_panel_selector (PanelManagerDialog *pmd)
     gtk_combo_box_set_active (GTK_COMBO_BOX (pmd->panel_selector),
                               pmd->current);
 
-    highlight_widget (GTK_WIDGET (pmd->panel), pmd);
-
     g_signal_connect (pmd->panel_selector, "changed",
                       G_CALLBACK (panel_selected), pmd);
     
@@ -1550,8 +1491,6 @@ panel_dialog_response (GtkWidget *dlg, int response, PanelManagerDialog *pmd)
         if (pmd->monitors)
             g_ptr_array_free (pmd->monitors, TRUE);
         
-        highlight_widget (NULL, pmd);
-
         g_ptr_array_foreach (pmd->panels, (GFunc)panel_unblock_autohide, NULL);
         
         gtk_widget_destroy (dlg);
@@ -1643,7 +1582,6 @@ panel_manager_dialog (GPtrArray *panels)
 
     /* setup panels */
     g_ptr_array_foreach (pmd->panels, (GFunc)panel_block_autohide, NULL);
-    highlight_widget (GTK_WIDGET (panel), pmd);
 
     /* setup and show dialog */
     g_signal_connect (pmd->dlg, "response", 
