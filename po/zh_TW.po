@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-09 11:13+0900\n"
+"POT-Creation-Date: 2006-04-17 22:03+0900\n"
 "PO-Revision-Date: 2006-03-15 01:25+0800\n"
 "Last-Translator: Hydonsingore Cia <hydonsingore@mail.educities.edu.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -30,7 +30,7 @@ msgstr "移除 \"%s\" 項目？"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
 #: ../panel/panel-app.c:766 ../panel/panel-app.c:799
-#: ../panel/panel-dialogs.c:579 ../panel/panel-dialogs.c:1590
+#: ../panel/panel-dialogs.c:526 ../panel/panel-dialogs.c:1533
 #: ../plugins/launcher/launcher.c:412 ../plugins/launcher/launcher.c:438
 #: ../plugins/launcher/launcher.c:474
 msgid "Xfce Panel"
@@ -73,7 +73,7 @@ msgstr "增加新項目"
 msgid "Customize Panel"
 msgstr "自訂面板"
 
-#: ../panel/panel.c:667 ../panel/panel-dialogs.c:602
+#: ../panel/panel.c:667 ../panel/panel-dialogs.c:549
 msgid "Add Items"
 msgstr "增加項目"
 
@@ -171,118 +171,118 @@ msgstr ""
 " -a, --add       新增項目\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:617
+#: ../panel/panel-dialogs.c:564
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr "從清單中將項目拖曳到面板或是將其拖回清單以便移除之。"
 
-#: ../panel/panel-dialogs.c:630
+#: ../panel/panel-dialogs.c:577
 msgid "Available Items"
 msgstr "可用的項目"
 
-#: ../panel/panel-dialogs.c:843 ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
 msgid "Normal Width"
 msgstr "正常寬度"
 
-#: ../panel/panel-dialogs.c:845 ../panel/panel-dialogs.c:1069
+#: ../panel/panel-dialogs.c:796 ../panel/panel-dialogs.c:1020
 msgid "Full Width"
 msgstr "全寬度"
 
-#: ../panel/panel-dialogs.c:851 ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:802 ../panel/panel-dialogs.c:1026
 #, fuzzy
 msgid "Span Monitors"
 msgstr "監視器"
 
-#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1140
+#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1091
 msgid "Left"
 msgstr "左"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1142
+#: ../panel/panel-dialogs.c:864 ../panel/panel-dialogs.c:1093
 msgid "Right"
 msgstr "右"
 
-#: ../panel/panel-dialogs.c:918 ../panel/panel-dialogs.c:1147
+#: ../panel/panel-dialogs.c:869 ../panel/panel-dialogs.c:1098
 msgid "Top"
 msgstr "頂部"
 
-#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:871 ../panel/panel-dialogs.c:1100
 msgid "Bottom"
 msgstr "底部"
 
 #. position
-#: ../panel/panel-dialogs.c:948
+#: ../panel/panel-dialogs.c:899
 msgid "Position"
 msgstr "位置"
 
-#: ../panel/panel-dialogs.c:962
+#: ../panel/panel-dialogs.c:913
 msgid "Fixed Position"
 msgstr "固定位置"
 
-#: ../panel/panel-dialogs.c:968
+#: ../panel/panel-dialogs.c:919
 msgid "Freely Moveable"
 msgstr "自由可移動"
 
-#: ../panel/panel-dialogs.c:1083
+#: ../panel/panel-dialogs.c:1034
 msgid "Auto_hide"
 msgstr "自動隱藏(_H)"
 
-#: ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:1052
 msgid "Orientation:"
 msgstr "方向"
 
-#: ../panel/panel-dialogs.c:1113
+#: ../panel/panel-dialogs.c:1064
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-dialogs.c:1115
+#: ../panel/panel-dialogs.c:1066
 msgid "Vertical"
 msgstr "垂直"
 
-#: ../panel/panel-dialogs.c:1124
+#: ../panel/panel-dialogs.c:1075
 msgid "Handle:"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:1087
 msgid "At both sides"
 msgstr "在兩邊"
 
-#: ../panel/panel-dialogs.c:1217
+#: ../panel/panel-dialogs.c:1168
 msgid "Select Monitor"
 msgstr "選擇監視器"
 
-#: ../panel/panel-dialogs.c:1335 ../plugins/clock/clock.c:431
+#: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
 msgid "Appearance"
 msgstr "外觀"
 
 #. size
-#: ../panel/panel-dialogs.c:1346
+#: ../panel/panel-dialogs.c:1297
 msgid "Size (pixels):"
 msgstr "大小 (像素)："
 
-#: ../panel/panel-dialogs.c:1369
+#: ../panel/panel-dialogs.c:1320
 msgid "Transparency (%):"
 msgstr "透明度 (%)："
 
-#: ../panel/panel-dialogs.c:1393
+#: ../panel/panel-dialogs.c:1344
 msgid "Make active panel opaque"
 msgstr "使現用的面板不透明"
 
-#: ../panel/panel-dialogs.c:1434 ../panel/panel-dialogs.c:1472
-#: ../panel/panel-dialogs.c:1497
+#: ../panel/panel-dialogs.c:1383 ../panel/panel-dialogs.c:1419
+#: ../panel/panel-dialogs.c:1444
 #, c-format
 msgid "Panel %d"
 msgstr "面板 %d"
 
-#: ../panel/panel-dialogs.c:1518
+#: ../panel/panel-dialogs.c:1463
 msgid "Remove Panel"
 msgstr "移除面板"
 
-#: ../panel/panel-dialogs.c:1531
+#: ../panel/panel-dialogs.c:1476
 msgid "New Panel"
 msgstr "新增面板"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1558
 msgid "Panel Manager"
 msgstr "面板管理程式"
 

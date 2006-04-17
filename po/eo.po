@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-09 11:13+0900\n"
+"POT-Creation-Date: 2006-04-17 22:03+0900\n"
 "PO-Revision-Date: 2006-03-12 20:49+0100\n"
 "Last-Translator: Sylvain Vedrenne <gnu_sylvain@xfce.org>\n"
 "Language-Team: Esperanto <translation-team-eo@lists.sourceforge.net>\n"
@@ -29,7 +29,7 @@ msgstr "Ĉu forigu \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
 #: ../panel/panel-app.c:766 ../panel/panel-app.c:799
-#: ../panel/panel-dialogs.c:579 ../panel/panel-dialogs.c:1590
+#: ../panel/panel-dialogs.c:526 ../panel/panel-dialogs.c:1533
 #: ../plugins/launcher/launcher.c:412 ../plugins/launcher/launcher.c:438
 #: ../plugins/launcher/launcher.c:474
 msgid "Xfce Panel"
@@ -72,7 +72,7 @@ msgstr "Aldonu Novan elementon"
 msgid "Customize Panel"
 msgstr "Agordu Panelon"
 
-#: ../panel/panel.c:667 ../panel/panel-dialogs.c:602
+#: ../panel/panel.c:667 ../panel/panel-dialogs.c:549
 msgid "Add Items"
 msgstr "Aldonu Elementojn"
 
@@ -169,7 +169,7 @@ msgstr ""
 " -a, --add       Aldonu novajn elementojn\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:617
+#: ../panel/panel-dialogs.c:564
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -177,111 +177,111 @@ msgstr ""
 "Mustrenu elementojn el la listo al panelo aŭ mustrenante forigu ilin reen al "
 "la listo."
 
-#: ../panel/panel-dialogs.c:630
+#: ../panel/panel-dialogs.c:577
 msgid "Available Items"
 msgstr "Disponeblaj Elementoj"
 
-#: ../panel/panel-dialogs.c:843 ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
 msgid "Normal Width"
 msgstr "Normala Larĝo"
 
-#: ../panel/panel-dialogs.c:845 ../panel/panel-dialogs.c:1069
+#: ../panel/panel-dialogs.c:796 ../panel/panel-dialogs.c:1020
 msgid "Full Width"
 msgstr "Plena larĝo"
 
-#: ../panel/panel-dialogs.c:851 ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:802 ../panel/panel-dialogs.c:1026
 msgid "Span Monitors"
 msgstr "Kunmetu Ekranojn"
 
-#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1140
+#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1091
 msgid "Left"
 msgstr "Maldekstre"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1142
+#: ../panel/panel-dialogs.c:864 ../panel/panel-dialogs.c:1093
 msgid "Right"
 msgstr "Dekstre"
 
-#: ../panel/panel-dialogs.c:918 ../panel/panel-dialogs.c:1147
+#: ../panel/panel-dialogs.c:869 ../panel/panel-dialogs.c:1098
 msgid "Top"
 msgstr "Supre"
 
-#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:871 ../panel/panel-dialogs.c:1100
 msgid "Bottom"
 msgstr "Malsupre"
 
 #. position
-#: ../panel/panel-dialogs.c:948
+#: ../panel/panel-dialogs.c:899
 msgid "Position"
 msgstr "Pozicio"
 
-#: ../panel/panel-dialogs.c:962
+#: ../panel/panel-dialogs.c:913
 msgid "Fixed Position"
 msgstr "Fiksa Pozicio"
 
-#: ../panel/panel-dialogs.c:968
+#: ../panel/panel-dialogs.c:919
 msgid "Freely Moveable"
 msgstr "Libere Movebla"
 
-#: ../panel/panel-dialogs.c:1083
+#: ../panel/panel-dialogs.c:1034
 msgid "Auto_hide"
 msgstr "Aŭtomate _kaŝu"
 
-#: ../panel/panel-dialogs.c:1101
+#: ../panel/panel-dialogs.c:1052
 msgid "Orientation:"
 msgstr "Direkto:"
 
-#: ../panel/panel-dialogs.c:1113
+#: ../panel/panel-dialogs.c:1064
 msgid "Horizontal"
 msgstr "Horizontala"
 
-#: ../panel/panel-dialogs.c:1115
+#: ../panel/panel-dialogs.c:1066
 msgid "Vertical"
 msgstr "Vertikala"
 
-#: ../panel/panel-dialogs.c:1124
+#: ../panel/panel-dialogs.c:1075
 msgid "Handle:"
 msgstr "Anso:"
 
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:1087
 msgid "At both sides"
 msgstr "Ĉe la du flankoj"
 
-#: ../panel/panel-dialogs.c:1217
+#: ../panel/panel-dialogs.c:1168
 msgid "Select Monitor"
 msgstr "Elektu Ekranon"
 
-#: ../panel/panel-dialogs.c:1335 ../plugins/clock/clock.c:431
+#: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
 msgid "Appearance"
 msgstr "Aspekto"
 
 #. size
-#: ../panel/panel-dialogs.c:1346
+#: ../panel/panel-dialogs.c:1297
 msgid "Size (pixels):"
 msgstr "Dimensio (rastrumeroj):"
 
-#: ../panel/panel-dialogs.c:1369
+#: ../panel/panel-dialogs.c:1320
 msgid "Transparency (%):"
 msgstr "Travidebleco (%):"
 
-#: ../panel/panel-dialogs.c:1393
+#: ../panel/panel-dialogs.c:1344
 msgid "Make active panel opaque"
 msgstr "Opakigu la aktivan panelon"
 
-#: ../panel/panel-dialogs.c:1434 ../panel/panel-dialogs.c:1472
-#: ../panel/panel-dialogs.c:1497
+#: ../panel/panel-dialogs.c:1383 ../panel/panel-dialogs.c:1419
+#: ../panel/panel-dialogs.c:1444
 #, c-format
 msgid "Panel %d"
 msgstr "Panelo %d"
 
-#: ../panel/panel-dialogs.c:1518
+#: ../panel/panel-dialogs.c:1463
 msgid "Remove Panel"
 msgstr "Forigu Panelon"
 
-#: ../panel/panel-dialogs.c:1531
+#: ../panel/panel-dialogs.c:1476
 msgid "New Panel"
 msgstr "Novan Panelon"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1558
 msgid "Panel Manager"
 msgstr "Administrilo de Panelo"
 
