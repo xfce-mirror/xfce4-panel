@@ -731,7 +731,7 @@ panel_app_remove_panel (GtkWidget *panel)
     if (panel_app.panel_list->len == 1)
     {
         response = 
-            xfce_message_dialog (GTK_WINDOW (panel), _("Xfce Panel"),
+            xfce_message_dialog (NULL, _("Xfce Panel"),
                                  GTK_STOCK_DIALOG_WARNING, 
                                  _("Exit Xfce Panel?"), 
                                  _("You can't remove the last panel. "
