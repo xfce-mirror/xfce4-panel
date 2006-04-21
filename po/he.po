@@ -8,16 +8,16 @@
 # Yuval Tanny <tanai@int.gov.il>, 2004.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.90.1\n"
+"Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 22:03+0900\n"
-"PO-Revision-Date: 2006-01-30 02:20+0200\n"
+"POT-Creation-Date: 2006-04-09 11:13+0900\n"
+"PO-Revision-Date: 2006-04-19 02:57+0300\n"
 "Last-Translator: Dotan Kamber <kamberd@yahoo.com>\n"
 "Language-Team: Hebrew\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -32,15 +32,14 @@ msgstr "להסיר את \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
 #: ../panel/panel-app.c:766 ../panel/panel-app.c:799
-#: ../panel/panel-dialogs.c:526 ../panel/panel-dialogs.c:1533
+#: ../panel/panel-dialogs.c:579 ../panel/panel-dialogs.c:1590
 #: ../plugins/launcher/launcher.c:412 ../plugins/launcher/launcher.c:438
 #: ../plugins/launcher/launcher.c:474
 msgid "Xfce Panel"
 msgstr "לוח Xfce"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:577
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "הפריט יוסר מהלוח ומאפייניו יאבדו."
 
 #. configure, hide by default
@@ -75,7 +74,7 @@ msgstr "הוסף פריט חדש"
 msgid "Customize Panel"
 msgstr "התאם את הלוח"
 
-#: ../panel/panel.c:667 ../panel/panel-dialogs.c:549
+#: ../panel/panel.c:667 ../panel/panel-dialogs.c:602
 msgid "Add Items"
 msgstr "הוסף פריטים"
 
@@ -161,121 +160,129 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save configuration\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Close all panels and end the program\n"
+" -a, --add       Add new items\n"
+"\n"
 
-#: ../panel/panel-dialogs.c:564
+#: ../panel/panel-dialogs.c:617
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr "גרור פריטים מהרשימה אל הלוח או הסר אותם על ידי גרירתם חזרה אל הרשימה."
 
-#: ../panel/panel-dialogs.c:577
-#, fuzzy
+#: ../panel/panel-dialogs.c:630
 msgid "Available Items"
 msgstr "פריטים זמינים"
 
-#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
+#: ../panel/panel-dialogs.c:843 ../panel/panel-dialogs.c:1067
 msgid "Normal Width"
 msgstr "רוחב רגיל"
 
-#: ../panel/panel-dialogs.c:796 ../panel/panel-dialogs.c:1020
+#: ../panel/panel-dialogs.c:845 ../panel/panel-dialogs.c:1069
 msgid "Full Width"
 msgstr "רוחב מלא"
 
-#: ../panel/panel-dialogs.c:802 ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:851 ../panel/panel-dialogs.c:1075
 #, fuzzy
 msgid "Span Monitors"
 msgstr "פזר צגים"
 
-#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1091
+#: ../panel/panel-dialogs.c:911 ../panel/panel-dialogs.c:1140
 msgid "Left"
 msgstr "שמאל"
 
-#: ../panel/panel-dialogs.c:864 ../panel/panel-dialogs.c:1093
+#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1142
 msgid "Right"
 msgstr "ימין"
 
-#: ../panel/panel-dialogs.c:869 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:918 ../panel/panel-dialogs.c:1147
 msgid "Top"
 msgstr "עליון"
 
-#: ../panel/panel-dialogs.c:871 ../panel/panel-dialogs.c:1100
+#: ../panel/panel-dialogs.c:920 ../panel/panel-dialogs.c:1149
 msgid "Bottom"
 msgstr "תחתון"
 
 #. position
-#: ../panel/panel-dialogs.c:899
+#: ../panel/panel-dialogs.c:948
 msgid "Position"
 msgstr "מיקום"
 
-#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:962
 msgid "Fixed Position"
 msgstr "מיקום קבוע"
 
-#: ../panel/panel-dialogs.c:919
+#: ../panel/panel-dialogs.c:968
 msgid "Freely Moveable"
 msgstr "חופשי לנוע"
 
-#: ../panel/panel-dialogs.c:1034
+#: ../panel/panel-dialogs.c:1083
 msgid "Auto_hide"
 msgstr "_הסתרה אוטומטית"
 
-#: ../panel/panel-dialogs.c:1052
+#: ../panel/panel-dialogs.c:1101
 msgid "Orientation:"
 msgstr "כיוון:"
 
-#: ../panel/panel-dialogs.c:1064
+#: ../panel/panel-dialogs.c:1113
 msgid "Horizontal"
 msgstr "אופקי"
 
-#: ../panel/panel-dialogs.c:1066
+#: ../panel/panel-dialogs.c:1115
 msgid "Vertical"
 msgstr "אנכי"
 
-#: ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:1124
 msgid "Handle:"
 msgstr "ידית:"
 
-#: ../panel/panel-dialogs.c:1087
+#: ../panel/panel-dialogs.c:1136
 msgid "At both sides"
 msgstr "בשני הצדדים"
 
-#: ../panel/panel-dialogs.c:1168
+#: ../panel/panel-dialogs.c:1217
 msgid "Select Monitor"
 msgstr "בחירת צג"
 
-#: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../panel/panel-dialogs.c:1335 ../plugins/clock/clock.c:431
 msgid "Appearance"
 msgstr "מראה"
 
 #. size
-#: ../panel/panel-dialogs.c:1297
+#: ../panel/panel-dialogs.c:1346
 msgid "Size (pixels):"
-msgstr ""
+msgstr "גודל (פיקסלים):"
 
-#: ../panel/panel-dialogs.c:1320
-#, fuzzy
+#: ../panel/panel-dialogs.c:1369
 msgid "Transparency (%):"
-msgstr "שקיפות"
+msgstr "שקיפות (%):"
 
-#: ../panel/panel-dialogs.c:1344
+#: ../panel/panel-dialogs.c:1393
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "בטל שקיפות בלוח פעיל"
 
-#: ../panel/panel-dialogs.c:1383 ../panel/panel-dialogs.c:1419
-#: ../panel/panel-dialogs.c:1444
+#: ../panel/panel-dialogs.c:1434 ../panel/panel-dialogs.c:1472
+#: ../panel/panel-dialogs.c:1497
 #, c-format
 msgid "Panel %d"
 msgstr "לוח %d"
 
-#: ../panel/panel-dialogs.c:1463
+#: ../panel/panel-dialogs.c:1518
 msgid "Remove Panel"
 msgstr "הסר לוח"
 
-#: ../panel/panel-dialogs.c:1476
+#: ../panel/panel-dialogs.c:1531
 msgid "New Panel"
 msgstr "לוח חדש"
 
-#: ../panel/panel-dialogs.c:1558
+#: ../panel/panel-dialogs.c:1615
 msgid "Panel Manager"
 msgstr "מנהל הלוח"
 
@@ -361,7 +368,7 @@ msgstr "כשל בהרצת \"%s\"."
 #: ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "שגיאה בפקודה \"%s\""
 
 #: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
 #: ../plugins/launcher/launcher-dialog.c:1142
@@ -475,13 +482,17 @@ msgid ""
 "\n"
 "For help using Zero Install, see http://0install.net"
 msgstr ""
+"כשל בהרצת 0launch:\n"
+"%s\n"
+"\n"
+"לעזרה בשימוש ב-Zero Install, יש לפנות אל http://0install.net"
 
 #: ../plugins/launcher/launcher-dialog.c:1469
 msgid ""
 "The Zero Install GUI has finished, but the launcher dialog has disappeared "
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
-msgstr ""
+msgstr "מנשק Zero Install סיים אך תיבת הדו-שיח של המשגר נעלמה לעת עתה. לא נוסף משגר (אך כל הקבצים שהורדו לא אבדו)."
 
 #: ../plugins/launcher/launcher-dialog.c:1827
 msgid "Select file"
@@ -501,9 +512,8 @@ msgstr "מספר טורים:"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "מפריד"
+msgstr "קו מפריד או מרווח"
 
 #: ../plugins/separator/separator.c:284
 msgid "_Draw Separator"
@@ -533,7 +543,7 @@ msgstr "אין אפשרות לרשום את מגש המערכת: %s"
 #: ../plugins/systray/systray.c:394
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr ""
+msgstr "מגש מערכת"
 
 #: ../plugins/tasklist/tasklist.c:401 ../plugins/tasklist/tasklist.c:454
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -573,9 +583,9 @@ msgid "Always group tasks"
 msgstr "תמיד קבץ משימות"
 
 #: ../plugins/windowlist/windowlist.c:309
-#, fuzzy, c-format
+#, c-format
 msgid "Workspace %d"
-msgstr "הוסף משטח עבודה"
+msgstr "סביבת עבודה %d"
 
 #: ../plugins/windowlist/windowlist.c:387
 #: ../plugins/windowlist/windowlist.c:393
@@ -583,14 +593,14 @@ msgid "Add workspace"
 msgstr "הוסף משטח עבודה"
 
 #: ../plugins/windowlist/windowlist.c:408
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace %d"
-msgstr "להסיר את לוח \"%d\"?"
+msgstr "הסרת סביבת העבודה %d"
 
 #: ../plugins/windowlist/windowlist.c:410
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "הסרת סביבת העבודה '%s'"
 
 #: ../plugins/windowlist/windowlist.c:555
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
@@ -603,7 +613,7 @@ msgstr "כלול את כל משטחי העבודה"
 
 #: ../plugins/windowlist/windowlist.c:571
 msgid "Show Window Icons"
-msgstr ""
+msgstr "הצג סמלי חלונות"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -658,10 +668,10 @@ msgid "Show list of available windows"
 msgstr "הצג רשימת חלונות זמינים"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
-#, fuzzy
 msgid "Test Plugin"
 msgstr "הרחבת בוחן"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "להרחבה זו אין כל שימוש"
+
