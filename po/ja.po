@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.90.1\n"
+"Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-23 10:36+0200\n"
-"PO-Revision-Date: 2006-03-19 10:59+0900\n"
+"PO-Revision-Date: 2006-04-24 00:38+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -600,12 +600,12 @@ msgstr "常にタスクをまとめる"
 #: ../plugins/windowlist/windowlist.c:226
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "ワークスペース %d を削除してもよろしいですか？"
 
 #: ../plugins/windowlist/windowlist.c:227
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "ワークスペース「%s」を削除してもよろしいですか？"
 
 #: ../plugins/windowlist/windowlist.c:428
 #, c-format
@@ -639,53 +639,49 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"アプケーションが何らかの注意を促す時に、<i>緊急通知</i>機能によってボタンが点"
+"滅します。"
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:160
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "起動通知を行う(_S)"
+msgstr "緊急通知"
 
 #: ../plugins/windowlist/windowlist-dialog.c:167
 msgid "_Disabled"
-msgstr ""
+msgstr "無効にする(_D)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:176
 msgid "For _other workspaces"
-msgstr ""
+msgstr "他のワークスペース(_O)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:185
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "全ワークスペースのタスクを表示する(_A)"
+msgstr "全てのワークスペース(_A)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:199
-#, fuzzy
 msgid "_Icon button"
-msgstr "アクションボタン"
+msgstr "アイコンボタン(_I)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:206
 msgid "A_rrow button"
-msgstr ""
+msgstr "矢印ボタン(_R)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:224
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "全ワークスペースのタスクを表示する(_A)"
+msgstr "全ワークスペースのウィンドウを表示する(_W)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:233
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "アプリケーション名を表示する(_N)"
+msgstr "アプリケーションアイコンを表示する(_P)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:242
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "ワークスペースアクションを表示する(_K)"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "パネル %d"
+msgstr "パネル"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -748,20 +744,5 @@ msgid "This plugin has no purpose"
 msgstr "このプログラムはテスト用です。"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "パネルマネージャー"
-
-#, fuzzy
-#~ msgid "Customize panel"
-#~ msgstr "パネルの設定"
-
-#, fuzzy
-#~ msgid "Customize panel settings"
-#~ msgstr "パネルの設定"
-
-#~ msgid "Include all Workspaces"
-#~ msgstr "全ワークスペースを含める"
-
-#~ msgid "Show Window Icons"
-#~ msgstr "ウィンドウアイコンを表示"
+msgstr "Xfce 4 パネルマネージャー"
