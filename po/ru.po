@@ -4,13 +4,14 @@
 # Poul Ionkin <wizzard@nmg.lv>, 2003.
 # Anthony Ivanoff <a-i@bk.ru>, 2004, 2005.
 # Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006.
+# Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-23 10:36+0200\n"
-"PO-Revision-Date: 2006-04-12 12:47+0600\n"
+"PO-Revision-Date: 2006-04-23 15:25+0600\n"
 "Last-Translator: Andrey Fedoseev <andrey.fedoseev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +24,7 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:175
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "Элемент был неожиданно удален: \"%s\"."
+msgstr "Элемент был неожиданно удалён: \"%s\"."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:572
 #, c-format
@@ -233,7 +234,7 @@ msgstr "Автоматически скрывать"
 
 #: ../panel/panel-dialogs.c:1052
 msgid "Orientation:"
-msgstr "Ориентация"
+msgstr "Ориентация:"
 
 #: ../panel/panel-dialogs.c:1064
 msgid "Horizontal"
@@ -264,11 +265,11 @@ msgstr "Внешний вид"
 #. size
 #: ../panel/panel-dialogs.c:1297
 msgid "Size (pixels):"
-msgstr "Размер (в пикселах)"
+msgstr "Размер (в пикселах):"
 
 #: ../panel/panel-dialogs.c:1320
 msgid "Transparency (%):"
-msgstr "Прозрачность (%)"
+msgstr "Прозрачность (%):"
 
 #: ../panel/panel-dialogs.c:1344
 msgid "Make active panel opaque"
@@ -543,7 +544,7 @@ msgstr "Системный лоток уже запущен на этом экр
 #: ../plugins/systray/systray.c:90
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "Невозможео зарегистрировать системный лоток: %s"
+msgstr "Невозможно зарегистрировать системный лоток: %s"
 
 #: ../plugins/systray/systray.c:394
 #: ../plugins/systray/systray.desktop.in.in.h:2
@@ -590,12 +591,12 @@ msgstr "Всегда группировать задачи"
 #: ../plugins/windowlist/windowlist.c:226
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Вы действительно хотите удалить рабочее место %d?"
 
 #: ../plugins/windowlist/windowlist.c:227
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Вы действительно хотите удалить рабочее место '%s'?"
 
 #: ../plugins/windowlist/windowlist.c:428
 #, c-format
@@ -632,50 +633,44 @@ msgstr ""
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:160
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Использовать уведомление о запуске"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist-dialog.c:167
 msgid "_Disabled"
-msgstr ""
+msgstr "Отключено"
 
 #: ../plugins/windowlist/windowlist-dialog.c:176
 msgid "For _other workspaces"
-msgstr ""
+msgstr "Для других рабочих мест"
 
 #: ../plugins/windowlist/windowlist-dialog.c:185
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Показывать задачи, запущенные на всех рабочих местах"
+msgstr "Для всех рабочих мест"
 
 #: ../plugins/windowlist/windowlist-dialog.c:199
-#, fuzzy
 msgid "_Icon button"
-msgstr "Системные действия"
+msgstr "Значок"
 
 #: ../plugins/windowlist/windowlist-dialog.c:206
 msgid "A_rrow button"
-msgstr ""
+msgstr "Стрелка"
 
 #: ../plugins/windowlist/windowlist-dialog.c:224
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Показывать задачи, запущенные на всех рабочих местах"
+msgstr "Показывать окна со всех рабочих мест"
 
 #: ../plugins/windowlist/windowlist-dialog.c:233
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Показывать названия приложений"
+msgstr "Показывать значки приложений"
 
 #: ../plugins/windowlist/windowlist-dialog.c:242
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "Показывать действия над рабочими местами"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "Панель %d"
+msgstr "Панель"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -691,7 +686,7 @@ msgstr "Который час?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr "Отображает значки всех запущеных приложений"
+msgstr "Отображает значки всех запущенных приложений"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -723,7 +718,7 @@ msgstr "Отображает значки уведомления"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Show all running applications"
-msgstr "Отображает все запущеные приложения"
+msgstr "Отображает все запущенные приложения"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
@@ -738,20 +733,5 @@ msgid "This plugin has no purpose"
 msgstr "Этот модуль ни для чего не предназначен"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "Диспетчер панелей"
-
-#, fuzzy
-#~ msgid "Customize panel"
-#~ msgstr "Настроить панель"
-
-#, fuzzy
-#~ msgid "Customize panel settings"
-#~ msgstr "Настроить панель"
-
-#~ msgid "Include all Workspaces"
-#~ msgstr "Включать все рабочие места"
-
-#~ msgid "Show Window Icons"
-#~ msgstr "Показывать значки окон"
+msgstr "Диспетчер панелей Xfce 4"
