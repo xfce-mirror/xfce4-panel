@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 22:03+0900\n"
-"PO-Revision-Date: 2006-02-25 22:55+0100\n"
+"POT-Creation-Date: 2006-04-23 10:36+0200\n"
+"PO-Revision-Date: 2006-04-23 10:34+0200\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: ../plugins/iconbox/iconbox.c:786 ../plugins/launcher/launcher-dialog.c:1307
 #: ../plugins/pager/pager.c:285 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:378 ../plugins/tasklist/tasklist.c:385
-#: ../plugins/windowlist/windowlist.c:540
+#: ../plugins/windowlist/windowlist-dialog.c:121
 msgid "Properties"
 msgstr "Eigenschappen"
 
@@ -70,6 +70,7 @@ msgid "Add New Item"
 msgstr "Nieuw item toevoegen"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Paneel configureren"
 
@@ -252,7 +253,9 @@ msgstr "Aan beide zijden"
 msgid "Select Monitor"
 msgstr "Monitor selecteren"
 
+#. Button Layout
 #: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Weergave"
 
@@ -284,6 +287,7 @@ msgid "New Panel"
 msgstr "Nieuw Paneel"
 
 #: ../panel/panel-dialogs.c:1558
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Paneel Manager"
 
@@ -369,14 +373,14 @@ msgstr "Kon \"%s\" niet uitvoeren"
 #: ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "Er was een fout in commando \"%s\""
 
-#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
+#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1285
 #: ../plugins/launcher/launcher-dialog.c:1142
 msgid "New Item"
 msgstr "Nieuw Item"
 
-#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1272
+#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1286
 msgid "This item has not yet been configured"
 msgstr "Dit item moet nog geconfigureerd worden"
 
@@ -485,6 +489,10 @@ msgid ""
 "\n"
 "For help using Zero Install, see http://0install.net"
 msgstr ""
+"Kon 0launch niet uitvoeren:\n"
+"%s\n"
+"\n"
+"Voor meer informatie zie http://0install.net"
 
 #: ../plugins/launcher/launcher-dialog.c:1469
 msgid ""
@@ -492,6 +500,9 @@ msgid ""
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
+"Het ZeroInstall proces is gereed maar het dialoogvenster van de "
+"snelkoppeling is verdwenen. De snelkoppeling wordt niet toegevoegd (maar "
+"opgehaalde bestanden zijn niet verloren gegaan)."
 
 #: ../plugins/launcher/launcher-dialog.c:1827
 msgid "Select file"
@@ -581,38 +592,91 @@ msgstr "Taken automatisch groeperen"
 msgid "Always group tasks"
 msgstr "Taken altijd groeperen"
 
-#: ../plugins/windowlist/windowlist.c:309
+#: ../plugins/windowlist/windowlist.c:226
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr "Virtueel bureaublad %d verwijderen?"
+
+#: ../plugins/windowlist/windowlist.c:227
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr "Virtueel bureaublad '%s' verwijderen?"
+
+#: ../plugins/windowlist/windowlist.c:428
 #, c-format
 msgid "Workspace %d"
-msgstr "Virtueel bureaublad %d"
+msgstr "Bureaublad %d"
 
-#: ../plugins/windowlist/windowlist.c:387
-#: ../plugins/windowlist/windowlist.c:393
+#: ../plugins/windowlist/windowlist.c:530
+#: ../plugins/windowlist/windowlist.c:536
 msgid "Add workspace"
-msgstr "Virtueel bureaublad toevoegen"
+msgstr "Bureaublad toevoegen"
 
-#: ../plugins/windowlist/windowlist.c:408
+#: ../plugins/windowlist/windowlist.c:549
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Virtueel bureaublad %d verwijderen"
+msgstr "Bureaublad %d verwijderen"
 
-#: ../plugins/windowlist/windowlist.c:410
+#: ../plugins/windowlist/windowlist.c:550
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr "Virtueel bureaublad '%s' verwijderen"
+msgstr "Bureaublad '%s' verwijderen"
 
-#: ../plugins/windowlist/windowlist.c:555
+#. Windowlist Settings
+#: ../plugins/windowlist/windowlist-dialog.c:131
+#: ../plugins/windowlist/windowlist-dialog.c:215
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Lijst van vensters"
 
-#: ../plugins/windowlist/windowlist.c:566
-msgid "Include all Workspaces"
-msgstr "Vensters van alle bureaubladen tonen"
+#: ../plugins/windowlist/windowlist-dialog.c:153
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"<i>Urgentie-notificatie</i> zal de knop doen knipperen wanneer de toepassing "
+"aandacht vraagt."
 
-#: ../plugins/windowlist/windowlist.c:571
-msgid "Show Window Icons"
-msgstr "Venster-pictogrammen tonen"
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:160
+msgid "Urgency Notification"
+msgstr "Urgentie-notificatie"
+
+#: ../plugins/windowlist/windowlist-dialog.c:167
+msgid "_Disabled"
+msgstr "_Uitgeschakeld"
+
+#: ../plugins/windowlist/windowlist-dialog.c:176
+msgid "For _other workspaces"
+msgstr "Voor _andere bureaubladen"
+
+#: ../plugins/windowlist/windowlist-dialog.c:185
+msgid "For _all workspaces"
+msgstr "Voor _alle bureaubladen"
+
+#: ../plugins/windowlist/windowlist-dialog.c:199
+msgid "_Icon button"
+msgstr "Knop met pictogram"
+
+#: ../plugins/windowlist/windowlist-dialog.c:206
+msgid "A_rrow button"
+msgstr "Knop met _pijl"
+
+#: ../plugins/windowlist/windowlist-dialog.c:224
+msgid "Show _windows from all workspaces"
+msgstr "Vensters van alle _bureaubladen tonen"
+
+#: ../plugins/windowlist/windowlist-dialog.c:233
+msgid "Show a_pplication icons"
+msgstr "_Pictogrammen van applicaties tonen"
+
+#: ../plugins/windowlist/windowlist-dialog.c:242
+msgid "Show wor_kspace actions"
+msgstr "Acties voor _virtuele bureaubladen tonen"
+
+#: ../mcs-plugin/plugin.c:46
+msgid "Panel"
+msgstr "Paneel"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -673,3 +737,21 @@ msgstr "Test Plugin"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Deze plugin heeft geen doel"
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+msgid "Xfce 4 Panel Manager"
+msgstr "Xfce 4 Paneel Manager"
+
+#, fuzzy
+#~ msgid "Customize panel"
+#~ msgstr "Paneel configureren"
+
+#, fuzzy
+#~ msgid "Customize panel settings"
+#~ msgstr "Paneel configureren"
+
+#~ msgid "Include all Workspaces"
+#~ msgstr "Vensters van alle bureaubladen tonen"
+
+#~ msgid "Show Window Icons"
+#~ msgstr "Venster-pictogrammen tonen"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 22:03+0900\n"
+"POT-Creation-Date: 2006-04-23 10:36+0200\n"
 "PO-Revision-Date: 2005-09-29 20:38+0900\n"
 "Last-Translator: Nuno Donato <nunodonato@gmail.com>\n"
 "Language-Team: Portuguese <translation-team-pt@lists.sourceforge.net>\n"
@@ -45,7 +45,7 @@ msgstr ""
 #: ../plugins/iconbox/iconbox.c:786 ../plugins/launcher/launcher-dialog.c:1307
 #: ../plugins/pager/pager.c:285 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:378 ../plugins/tasklist/tasklist.c:385
-#: ../plugins/windowlist/windowlist.c:540
+#: ../plugins/windowlist/windowlist-dialog.c:121
 msgid "Properties"
 msgstr ""
 
@@ -71,6 +71,7 @@ msgid "Add New Item"
 msgstr "Adicionar novo item"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr ""
 
@@ -249,7 +250,9 @@ msgstr "Esconder Automáticamente"
 msgid "Select Monitor"
 msgstr "Editor"
 
+#. Button Layout
 #: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Aparência"
 
@@ -283,6 +286,7 @@ msgid "New Panel"
 msgstr "Painel do Xfce"
 
 #: ../panel/panel-dialogs.c:1558
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 #, fuzzy
 msgid "Panel Manager"
 msgstr "Camada do Painel:"
@@ -380,13 +384,13 @@ msgstr "Não foi possível criar o item \"%s\" do painel."
 msgid "Error in command \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
+#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1285
 #: ../plugins/launcher/launcher-dialog.c:1142
 #, fuzzy
 msgid "New Item"
 msgstr "Adicionar novo item"
 
-#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1272
+#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1286
 #, fuzzy
 msgid "This item has not yet been configured"
 msgstr "Este item não tem opções para configurar"
@@ -602,38 +606,95 @@ msgstr "A_grupar sempre as tarefas"
 msgid "Always group tasks"
 msgstr "A_grupar sempre as tarefas"
 
-#: ../plugins/windowlist/windowlist.c:309
+#: ../plugins/windowlist/windowlist.c:226
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:227
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:428
 #, c-format
 msgid "Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:387
-#: ../plugins/windowlist/windowlist.c:393
+#: ../plugins/windowlist/windowlist.c:530
+#: ../plugins/windowlist/windowlist.c:536
 msgid "Add workspace"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:408
+#: ../plugins/windowlist/windowlist.c:549
 #, c-format
 msgid "Remove Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:410
+#: ../plugins/windowlist/windowlist.c:550
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:555
+#. Windowlist Settings
+#: ../plugins/windowlist/windowlist-dialog.c:131
+#: ../plugins/windowlist/windowlist-dialog.c:215
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:566
-msgid "Include all Workspaces"
+#: ../plugins/windowlist/windowlist-dialog.c:153
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:571
-msgid "Show Window Icons"
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:160
+#, fuzzy
+msgid "Urgency Notification"
+msgstr "Usar notificação de arranque"
+
+#: ../plugins/windowlist/windowlist-dialog.c:167
+msgid "_Disabled"
 msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:176
+msgid "For _other workspaces"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:185
+#, fuzzy
+msgid "For _all workspaces"
+msgstr "Mostrar as tarefas de _todas as Áreas de Trabalho"
+
+#: ../plugins/windowlist/windowlist-dialog.c:199
+#, fuzzy
+msgid "_Icon button"
+msgstr "Ícone"
+
+#: ../plugins/windowlist/windowlist-dialog.c:206
+msgid "A_rrow button"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:224
+#, fuzzy
+msgid "Show _windows from all workspaces"
+msgstr "Mostrar as tarefas de _todas as Áreas de Trabalho"
+
+#: ../plugins/windowlist/windowlist-dialog.c:233
+#, fuzzy
+msgid "Show a_pplication icons"
+msgstr "Mostrar _nomes das aplicações"
+
+#: ../plugins/windowlist/windowlist-dialog.c:242
+msgid "Show wor_kspace actions"
+msgstr ""
+
+#: ../mcs-plugin/plugin.c:46
+#, fuzzy
+msgid "Panel"
+msgstr "Painel do Xfce"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -699,3 +760,8 @@ msgstr "Lançador"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr ""
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+#, fuzzy
+msgid "Xfce 4 Panel Manager"
+msgstr "Camada do Painel:"

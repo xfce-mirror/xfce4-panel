@@ -30,6 +30,7 @@ SUBDIRS =								\
 	libxfce4panel							\
 	panel								\
 	plugins								\
+	mcs-plugin							\
 	po								\
 	docs
 

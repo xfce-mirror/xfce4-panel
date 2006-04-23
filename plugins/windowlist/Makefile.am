@@ -7,7 +7,10 @@ libwindowlist_la_LDFLAGS =						\
 	-module
 
 libwindowlist_la_SOURCES = 						\
-	windowlist.c
+	windowlist.h						\
+	windowlist.c						\
+	windowlist-dialog.h						\
+	windowlist-dialog.c
 
 libwindowlist_la_CFLAGS =						\
 	-I$(top_srcdir)							\

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 22:03+0900\n"
+"POT-Creation-Date: 2006-04-23 10:36+0200\n"
 "PO-Revision-Date: 2006-02-19 14:24+0100\n"
 "Last-Translator: Roman Moravcik <roman.moravcik@gmail.com>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -46,7 +46,7 @@ msgstr "Položka bude odstránená z panelu a jej nastavenie bude stratené."
 #: ../plugins/iconbox/iconbox.c:786 ../plugins/launcher/launcher-dialog.c:1307
 #: ../plugins/pager/pager.c:285 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:378 ../plugins/tasklist/tasklist.c:385
-#: ../plugins/windowlist/windowlist.c:540
+#: ../plugins/windowlist/windowlist-dialog.c:121
 msgid "Properties"
 msgstr "Predvoľby"
 
@@ -69,6 +69,7 @@ msgid "Add New Item"
 msgstr "Pridať novú položku"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Prispôsobiť panel"
 
@@ -251,7 +252,9 @@ msgstr "Na obidvoch stranách"
 msgid "Select Monitor"
 msgstr ""
 
+#. Button Layout
 #: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Vzhľad"
 
@@ -284,6 +287,7 @@ msgid "New Panel"
 msgstr "Nový panel"
 
 #: ../panel/panel-dialogs.c:1558
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Nastavenie panelu"
 
@@ -371,12 +375,12 @@ msgstr "Nemôžem spusiť \"%s\"."
 msgid "Error in command \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
+#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1285
 #: ../plugins/launcher/launcher-dialog.c:1142
 msgid "New Item"
 msgstr "Nová položka"
 
-#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1272
+#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1286
 msgid "This item has not yet been configured"
 msgstr "Táto položka nebola ešte nastavená"
 
@@ -581,38 +585,95 @@ msgstr "Automaticky spájať podobné úlohy dohromady"
 msgid "Always group tasks"
 msgstr "Vždy spájať podobné úlohy dohromady"
 
-#: ../plugins/windowlist/windowlist.c:309
+#: ../plugins/windowlist/windowlist.c:226
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:227
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:428
 #, fuzzy, c-format
 msgid "Workspace %d"
 msgstr "Pridať pracovnú plochu"
 
-#: ../plugins/windowlist/windowlist.c:387
-#: ../plugins/windowlist/windowlist.c:393
+#: ../plugins/windowlist/windowlist.c:530
+#: ../plugins/windowlist/windowlist.c:536
 msgid "Add workspace"
 msgstr "Pridať pracovnú plochu"
 
-#: ../plugins/windowlist/windowlist.c:408
+#: ../plugins/windowlist/windowlist.c:549
 #, fuzzy, c-format
 msgid "Remove Workspace %d"
 msgstr "Odstrániť panel \"%d\"?"
 
-#: ../plugins/windowlist/windowlist.c:410
-#, c-format
+#: ../plugins/windowlist/windowlist.c:550
+#, fuzzy, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "Odstrániť panel \"%d\"?"
 
-#: ../plugins/windowlist/windowlist.c:555
+#. Windowlist Settings
+#: ../plugins/windowlist/windowlist-dialog.c:131
+#: ../plugins/windowlist/windowlist-dialog.c:215
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Zoznam okien"
 
-#: ../plugins/windowlist/windowlist.c:566
-msgid "Include all Workspaces"
-msgstr "Zahrnúť všetky pracovné plochy"
-
-#: ../plugins/windowlist/windowlist.c:571
-msgid "Show Window Icons"
+#: ../plugins/windowlist/windowlist-dialog.c:153
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
 msgstr ""
+
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:160
+#, fuzzy
+msgid "Urgency Notification"
+msgstr "Použiť štartovaciu _notifikáciu"
+
+#: ../plugins/windowlist/windowlist-dialog.c:167
+msgid "_Disabled"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:176
+msgid "For _other workspaces"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:185
+#, fuzzy
+msgid "For _all workspaces"
+msgstr "Zobraziť úlohy zo všetkých _plôch"
+
+#: ../plugins/windowlist/windowlist-dialog.c:199
+#, fuzzy
+msgid "_Icon button"
+msgstr "Tlačidlá akcií"
+
+#: ../plugins/windowlist/windowlist-dialog.c:206
+msgid "A_rrow button"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:224
+#, fuzzy
+msgid "Show _windows from all workspaces"
+msgstr "Zobraziť úlohy zo všetkých _plôch"
+
+#: ../plugins/windowlist/windowlist-dialog.c:233
+#, fuzzy
+msgid "Show a_pplication icons"
+msgstr "Zobraziť _názvy aplikácií"
+
+#: ../plugins/windowlist/windowlist-dialog.c:242
+msgid "Show wor_kspace actions"
+msgstr ""
+
+#: ../mcs-plugin/plugin.c:46
+#, fuzzy
+msgid "Panel"
+msgstr "Panel %d"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -673,3 +734,19 @@ msgstr "Ukážkový plugin"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Tento plugin nemá žiaden cieľ"
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+#, fuzzy
+msgid "Xfce 4 Panel Manager"
+msgstr "Nastavenie panelu"
+
+#, fuzzy
+#~ msgid "Customize panel"
+#~ msgstr "Prispôsobiť panel"
+
+#, fuzzy
+#~ msgid "Customize panel settings"
+#~ msgstr "Prispôsobiť panel"
+
+#~ msgid "Include all Workspaces"
+#~ msgstr "Zahrnúť všetky pracovné plochy"

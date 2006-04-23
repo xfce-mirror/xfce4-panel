@@ -835,8 +835,15 @@ static gboolean
 launcher_toggle_menu_timeout (GtkToggleButton *b, GdkEventButton *ev, 
                               LauncherPlugin *launcher)
 {
-    if (ev->button != 1)
+    guint modifiers;
+
+    modifiers = gtk_accelerator_get_default_mod_mask ();
+
+    if (ev->button != 1 || (ev->button == 1 && 
+        (ev->state & modifiers) == GDK_CONTROL_MASK))
+    {
         return FALSE;
+    }
 
     if (launcher->popup_timeout < 1)
     {
@@ -854,9 +861,16 @@ static gboolean
 launcher_toggle_menu (GtkToggleButton *b, GdkEventButton *ev, 
                       LauncherPlugin *launcher)
 {
-    if (ev->button != 1)
+    guint modifiers;
+
+    modifiers = gtk_accelerator_get_default_mod_mask ();
+
+    if (ev->button != 1 || (ev->button == 1 && 
+        (ev->state & modifiers) == GDK_CONTROL_MASK))
+    {
         return FALSE;
-    
+    }
+
     real_toggle_menu (launcher);
 
     return TRUE;

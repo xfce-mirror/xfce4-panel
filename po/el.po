@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 20:06+0300\n"
+"POT-Creation-Date: 2006-04-23 10:36+0200\n"
 "PO-Revision-Date: 2006-04-17 20:10+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg2002@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -48,7 +48,7 @@ msgstr ""
 #: ../plugins/iconbox/iconbox.c:786 ../plugins/launcher/launcher-dialog.c:1307
 #: ../plugins/pager/pager.c:285 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:378 ../plugins/tasklist/tasklist.c:385
-#: ../plugins/windowlist/windowlist.c:540
+#: ../plugins/windowlist/windowlist-dialog.c:121
 msgid "Properties"
 msgstr "Ιδιότητες"
 
@@ -71,6 +71,7 @@ msgid "Add New Item"
 msgstr "Νέο αντικείμενο"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Προσαρμογή ταμπλό"
 
@@ -254,7 +255,9 @@ msgstr "Και στις δυο πλευρές"
 msgid "Select Monitor"
 msgstr "Οθόνη"
 
+#. Button Layout
 #: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
@@ -286,6 +289,7 @@ msgid "New Panel"
 msgstr "Νέο ταμπλό"
 
 #: ../panel/panel-dialogs.c:1558
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Διαχειριστής ταμπλό"
 
@@ -373,12 +377,12 @@ msgstr "Αδυναμία εκτέλεσης \"%s\""
 msgid "Error in command \"%s\""
 msgstr "Σφάλμα στην εντολή \"%s\""
 
-#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
+#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1285
 #: ../plugins/launcher/launcher-dialog.c:1142
 msgid "New Item"
 msgstr "Νέο αντικείμενο"
 
-#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1272
+#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1286
 msgid "This item has not yet been configured"
 msgstr "Αυτό το αντικείμενο δεν έχει ρυθμιστεί ακόμα "
 
@@ -590,38 +594,95 @@ msgstr "Αυτόματη ομαδοποίηση εργασιών"
 msgid "Always group tasks"
 msgstr "Πάντα ομαδοποίηση εργασιών"
 
-#: ../plugins/windowlist/windowlist.c:309
+#: ../plugins/windowlist/windowlist.c:226
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:227
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:428
 #, c-format
 msgid "Workspace %d"
 msgstr "Χώρος εργασίας %d"
 
-#: ../plugins/windowlist/windowlist.c:387
-#: ../plugins/windowlist/windowlist.c:393
+#: ../plugins/windowlist/windowlist.c:530
+#: ../plugins/windowlist/windowlist.c:536
 msgid "Add workspace"
 msgstr "Προσθήκη χώρου εργασίας"
 
-#: ../plugins/windowlist/windowlist.c:408
+#: ../plugins/windowlist/windowlist.c:549
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Αφαίρεση χώρου εργασίας %d"
 
-#: ../plugins/windowlist/windowlist.c:410
+#: ../plugins/windowlist/windowlist.c:550
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Αφαίρεση χώρου εργασίας '%s'"
 
-#: ../plugins/windowlist/windowlist.c:555
+#. Windowlist Settings
+#: ../plugins/windowlist/windowlist-dialog.c:131
+#: ../plugins/windowlist/windowlist-dialog.c:215
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Λίστα παραθύρων"
 
-#: ../plugins/windowlist/windowlist.c:566
-msgid "Include all Workspaces"
-msgstr "Προβολή όλων των χώρων εργασίας"
+#: ../plugins/windowlist/windowlist-dialog.c:153
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:571
-msgid "Show Window Icons"
-msgstr "Εμφάνιση εικονιδίων παραθύρων"
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:160
+#, fuzzy
+msgid "Urgency Notification"
+msgstr "Χρήση γνω_στοποίηση εκκίνησης"
+
+#: ../plugins/windowlist/windowlist-dialog.c:167
+msgid "_Disabled"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:176
+msgid "For _other workspaces"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:185
+#, fuzzy
+msgid "For _all workspaces"
+msgstr "Προβολή εργασιών από ό_λους τους χώρους εργασίας"
+
+#: ../plugins/windowlist/windowlist-dialog.c:199
+#, fuzzy
+msgid "_Icon button"
+msgstr "Κουμπιά ενεργειών "
+
+#: ../plugins/windowlist/windowlist-dialog.c:206
+msgid "A_rrow button"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:224
+#, fuzzy
+msgid "Show _windows from all workspaces"
+msgstr "Προβολή εργασιών από ό_λους τους χώρους εργασίας"
+
+#: ../plugins/windowlist/windowlist-dialog.c:233
+#, fuzzy
+msgid "Show a_pplication icons"
+msgstr "Προβολή ο_νομάτων εφαρμογών"
+
+#: ../plugins/windowlist/windowlist-dialog.c:242
+msgid "Show wor_kspace actions"
+msgstr ""
+
+#: ../mcs-plugin/plugin.c:46
+#, fuzzy
+msgid "Panel"
+msgstr "Ταμπλό %d"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -682,3 +743,22 @@ msgstr "Δοκιμαστικό αρθρωμα"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Αυτό το άρθρωμα δεν έχει νόημα"
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+#, fuzzy
+msgid "Xfce 4 Panel Manager"
+msgstr "Διαχειριστής ταμπλό"
+
+#, fuzzy
+#~ msgid "Customize panel"
+#~ msgstr "Προσαρμογή ταμπλό"
+
+#, fuzzy
+#~ msgid "Customize panel settings"
+#~ msgstr "Προσαρμογή ταμπλό"
+
+#~ msgid "Include all Workspaces"
+#~ msgstr "Προβολή όλων των χώρων εργασίας"
+
+#~ msgid "Show Window Icons"
+#~ msgstr "Εμφάνιση εικονιδίων παραθύρων"

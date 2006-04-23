@@ -6,7 +6,7 @@ dnl 2005-2006 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl version info
-m4_define([xfce4_panel_version],[4.3.90.1])
+m4_define([xfce4_panel_version],[4.3.90.2])
 m4_define([libxfce4panel_verinfo], [2:0:1])
 
 dnl init autoconf
@@ -57,8 +57,10 @@ XDT_CHECK_LIBSM
 
 dnl Check for required packages
 XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90.1])
-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90.1])
 XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
+XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90.1])
+XDT_CHECK_PACKAGE(LIBXFCE4MCS_MANAGER, libxfce4mcs-manager-1.0, 4.3.90.1)
+XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.3.90.1])
 
 dnl Check for optional packages
 XDT_CHECK_OPTIONAL_PACKAGE([LIBSTARTUP_NOTIFICATION],
@@ -92,6 +94,7 @@ plugins/systray/Makefile
 plugins/tasklist/Makefile
 plugins/windowlist/Makefile
 plugins/testplugin/Makefile
+mcs-plugin/Makefile
 po/Makefile.in
 docs/Makefile
 docs/API/Makefile

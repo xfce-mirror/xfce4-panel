@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 22:03+0900\n"
+"POT-Creation-Date: 2006-04-23 10:36+0200\n"
 "PO-Revision-Date: 2006-03-18 20:21+0100\n"
 "Last-Translator: Pau Rul.lan Ferragut <paurullan@bulma.net>\n"
 "Language-Team: catalan\n"
@@ -46,7 +46,7 @@ msgstr "Això suprimirà l'element del quadre, perdent-se la seva configuració.
 #: ../plugins/iconbox/iconbox.c:786 ../plugins/launcher/launcher-dialog.c:1307
 #: ../plugins/pager/pager.c:285 ../plugins/separator/separator.c:255
 #: ../plugins/systray/systray.c:378 ../plugins/tasklist/tasklist.c:385
-#: ../plugins/windowlist/windowlist.c:540
+#: ../plugins/windowlist/windowlist-dialog.c:121
 msgid "Properties"
 msgstr "Propietats"
 
@@ -69,6 +69,7 @@ msgid "Add New Item"
 msgstr "Afegix un element nou"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Personalitza quadre"
 
@@ -250,7 +251,9 @@ msgstr "A ambdos costats"
 msgid "Select Monitor"
 msgstr "Seleccioneu monitor"
 
+#. Button Layout
 #: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Aparença"
 
@@ -282,6 +285,7 @@ msgid "New Panel"
 msgstr "Quadre nou"
 
 #: ../panel/panel-dialogs.c:1558
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Gestor de quadres"
 
@@ -369,12 +373,12 @@ msgstr "No s'ha pogut executar \"%s\""
 msgid "Error in command \"%s\""
 msgstr "S'ha produit un error a l'ordre \"%s\""
 
-#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1271
+#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1285
 #: ../plugins/launcher/launcher-dialog.c:1142
 msgid "New Item"
 msgstr "Element nou"
 
-#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1272
+#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1286
 msgid "This item has not yet been configured"
 msgstr "L'element encara no s'ha configurat"
 
@@ -586,38 +590,95 @@ msgstr "Agrupa automàticament les tasques"
 msgid "Always group tasks"
 msgstr "Agrupa sempre les tasques"
 
-#: ../plugins/windowlist/windowlist.c:309
+#: ../plugins/windowlist/windowlist.c:226
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:227
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist.c:428
 #, c-format
 msgid "Workspace %d"
 msgstr "Espai de treball %d"
 
-#: ../plugins/windowlist/windowlist.c:387
-#: ../plugins/windowlist/windowlist.c:393
+#: ../plugins/windowlist/windowlist.c:530
+#: ../plugins/windowlist/windowlist.c:536
 msgid "Add workspace"
 msgstr "Afegeix espai de treball"
 
-#: ../plugins/windowlist/windowlist.c:408
+#: ../plugins/windowlist/windowlist.c:549
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Suprimeix l'espai de treball %d"
 
-#: ../plugins/windowlist/windowlist.c:410
+#: ../plugins/windowlist/windowlist.c:550
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Suprimeix l'espai de treball '%s'"
 
-#: ../plugins/windowlist/windowlist.c:555
+#. Windowlist Settings
+#: ../plugins/windowlist/windowlist-dialog.c:131
+#: ../plugins/windowlist/windowlist-dialog.c:215
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Llista de finestres"
 
-#: ../plugins/windowlist/windowlist.c:566
-msgid "Include all Workspaces"
-msgstr "Inclou tots els espais de treball"
+#: ../plugins/windowlist/windowlist-dialog.c:153
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:571
-msgid "Show Window Icons"
-msgstr "Mostra icones de finestres"
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:160
+#, fuzzy
+msgid "Urgency Notification"
+msgstr "Mostra notificació d'engegada"
+
+#: ../plugins/windowlist/windowlist-dialog.c:167
+msgid "_Disabled"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:176
+msgid "For _other workspaces"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:185
+#, fuzzy
+msgid "For _all workspaces"
+msgstr "Mostr_a les tasques de totes les àrees de treball"
+
+#: ../plugins/windowlist/windowlist-dialog.c:199
+#, fuzzy
+msgid "_Icon button"
+msgstr "Botons d'accions"
+
+#: ../plugins/windowlist/windowlist-dialog.c:206
+msgid "A_rrow button"
+msgstr ""
+
+#: ../plugins/windowlist/windowlist-dialog.c:224
+#, fuzzy
+msgid "Show _windows from all workspaces"
+msgstr "Mostr_a les tasques de totes les àrees de treball"
+
+#: ../plugins/windowlist/windowlist-dialog.c:233
+#, fuzzy
+msgid "Show a_pplication icons"
+msgstr "Mostra els _noms de les aplicacions"
+
+#: ../plugins/windowlist/windowlist-dialog.c:242
+msgid "Show wor_kspace actions"
+msgstr ""
+
+#: ../mcs-plugin/plugin.c:46
+#, fuzzy
+msgid "Panel"
+msgstr "Quadre %d"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -678,3 +739,22 @@ msgstr "Connector de proves"
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:2
 msgid "This plugin has no purpose"
 msgstr "Aquest connector no té propòsit"
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+#, fuzzy
+msgid "Xfce 4 Panel Manager"
+msgstr "Gestor de quadres"
+
+#, fuzzy
+#~ msgid "Customize panel"
+#~ msgstr "Personalitza quadre"
+
+#, fuzzy
+#~ msgid "Customize panel settings"
+#~ msgstr "Personalitza quadre"
+
+#~ msgid "Include all Workspaces"
+#~ msgstr "Inclou tots els espais de treball"
+
+#~ msgid "Show Window Icons"
+#~ msgstr "Mostra icones de finestres"
