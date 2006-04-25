@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-23 10:36+0200\n"
-"PO-Revision-Date: 2006-04-08 21:56+0300\n"
+"POT-Creation-Date: 2006-04-24 12:22+0300\n"
+"PO-Revision-Date: 2006-04-24 12:50+0300\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,7 @@ msgstr ""
 "\n"
 " Xfce paneeli %s\n"
 "\n"
-" Xfce-työpöytäympäristön osa\n"
+" Osa Xfce-työpöytäympäristöä\n"
 " http://www.xfce.org\n"
 "\n"
 " Lisensoitu GNU GPL:n mukaisesti.\n"
@@ -287,7 +287,7 @@ msgstr "Lisää paneeli"
 #: ../panel/panel-dialogs.c:1558
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
-msgstr "Paneelien hallinta"
+msgstr "Paneelin hallinta"
 
 #: ../plugins/actions/actions.c:399
 msgid "Panel Actions"
@@ -572,7 +572,7 @@ msgstr "Käytä kaikki käytettävissä oleva tila"
 
 #: ../plugins/tasklist/tasklist.c:458
 msgid "Show tasks from _all workspaces"
-msgstr "Näytä _kaikkien työpöytien tehtävät"
+msgstr "Näytä _kaikkien työtilojen tehtävät"
 
 #: ../plugins/tasklist/tasklist.c:468
 msgid "Show application _names"
@@ -593,12 +593,12 @@ msgstr "Ryhmitä tehtävät aina"
 #: ../plugins/windowlist/windowlist.c:226
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa työtilan %d?"
 
 #: ../plugins/windowlist/windowlist.c:227
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa työtilan \"%s\"?"
 
 #: ../plugins/windowlist/windowlist.c:428
 #, c-format
@@ -632,57 +632,53 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"<i>Kiireellisyyshuomautus</i> vilkuttaa painiketta, kun sovellus vaatii "
+"huomiota."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:160
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Käytä käynnistyksen _huomautusta"
+msgstr "Kiireellisyyshuomautus"
 
 #: ../plugins/windowlist/windowlist-dialog.c:167
 msgid "_Disabled"
-msgstr ""
+msgstr "_Ei käytössä"
 
 #: ../plugins/windowlist/windowlist-dialog.c:176
 msgid "For _other workspaces"
-msgstr ""
+msgstr "_Muissa työtiloissa"
 
 #: ../plugins/windowlist/windowlist-dialog.c:185
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Näytä _kaikkien työpöytien tehtävät"
+msgstr "_Kaikissa työtiloissa"
 
 #: ../plugins/windowlist/windowlist-dialog.c:199
-#, fuzzy
 msgid "_Icon button"
-msgstr "Toimintapainikkeet"
+msgstr "K_uvakepainike"
 
 #: ../plugins/windowlist/windowlist-dialog.c:206
 msgid "A_rrow button"
-msgstr ""
+msgstr "_Nuolipainike"
 
 #: ../plugins/windowlist/windowlist-dialog.c:224
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Näytä _kaikkien työpöytien tehtävät"
+msgstr "Näytä k_aikkien työtilojen ikkunat"
 
 #: ../plugins/windowlist/windowlist-dialog.c:233
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Näytä sovellusten _nimet"
+msgstr "Näytä s_ovellusten kuvakkeet"
 
 #: ../plugins/windowlist/windowlist-dialog.c:242
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "Näytä _työtilatoiminnot"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "Paneeli %d"
+msgstr "Paneeli"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr "Toimintapainikkeet"
+msgstr "Toimintopainikkeet"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -741,20 +737,5 @@ msgid "This plugin has no purpose"
 msgstr "Tällä liitännäisellä ei ole käyttötarkoitusta"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "Paneelien hallinta"
-
-#, fuzzy
-#~ msgid "Customize panel"
-#~ msgstr "Mukauta paneelia"
-
-#, fuzzy
-#~ msgid "Customize panel settings"
-#~ msgstr "Mukauta paneelia"
-
-#~ msgid "Include all Workspaces"
-#~ msgstr "Näytä kaikki työtilat"
-
-#~ msgid "Show Window Icons"
-#~ msgstr "Näytä ikkunoiden kuvakkeet"
+msgstr "Paneelin hallinta"
