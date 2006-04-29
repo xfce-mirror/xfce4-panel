@@ -9,13 +9,14 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-23 10:36+0200\n"
-"PO-Revision-Date: 2006-03-30 02:42+0300\n"
-"Last-Translator: Phan Vinh Thinh <teppi@vnlinux.org>\n"
-"Language-Team: Vietnamese <none@li.org>\n"
+"PO-Revision-Date: 2006-04-26 01:37+0400\n"
+"Last-Translator: Phan Vĩnh Thịnh <teppi@vnlinux.org>\n"
+"Language-Team: Vietnamese <vi_VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.10\n"
+"Plural-Forms: nplurals=1; nplural=0\n"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -594,12 +595,12 @@ msgstr "Luôn luôn nhóm các tác vụ"
 #: ../plugins/windowlist/windowlist.c:226
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Bạn có chắc muốn xóa không gian '%d'?"
 
 #: ../plugins/windowlist/windowlist.c:227
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Bạn có chắc muốn xóa không gian '%s'?"
 
 #: ../plugins/windowlist/windowlist.c:428
 #, c-format
@@ -632,54 +633,48 @@ msgstr "Danh sách cửa sổ"
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
-msgstr ""
+msgstr "<i>Thông báo gấp</i> sẽ nhấp nháy nút khi ứng dụng cần sự chú ý."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:160
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Dùng thô_ng báo khởi động"
+msgstr "Thông báo gấp"
 
 #: ../plugins/windowlist/windowlist-dialog.c:167
 msgid "_Disabled"
-msgstr ""
+msgstr "_Tắt"
 
 #: ../plugins/windowlist/windowlist-dialog.c:176
 msgid "For _other workspaces"
-msgstr ""
+msgstr "Cho _không gian khác"
 
 #: ../plugins/windowlist/windowlist-dialog.c:185
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Hiển thị các tác vụ từ _mọi không gian làm việc"
+msgstr "Cho _mọi không gian"
 
 #: ../plugins/windowlist/windowlist-dialog.c:199
-#, fuzzy
 msgid "_Icon button"
-msgstr "Nút thao tác"
+msgstr "_Nút biểu tượng"
 
 #: ../plugins/windowlist/windowlist-dialog.c:206
 msgid "A_rrow button"
-msgstr ""
+msgstr "_Nút mũi tên"
 
 #: ../plugins/windowlist/windowlist-dialog.c:224
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Hiển thị các tác vụ từ _mọi không gian làm việc"
+msgstr "Hiển thị cửa sổ từ _mọi không gian làm việc"
 
 #: ../plugins/windowlist/windowlist-dialog.c:233
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Hiển thị _tên ứng dụng"
+msgstr "Hiển thị _biểu tượng ứng dụng"
 
 #: ../plugins/windowlist/windowlist-dialog.c:242
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "Hiển thị hành động không _gian làm việc"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "Panel %d"
+msgstr "Thanh Panel"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -742,20 +737,5 @@ msgid "This plugin has no purpose"
 msgstr "Plugin không thực hiện thao tác nào"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "Quản lý panel"
-
-#, fuzzy
-#~ msgid "Customize panel"
-#~ msgstr "Tùy chỉnh thanh Panel"
-
-#, fuzzy
-#~ msgid "Customize panel settings"
-#~ msgstr "Tùy chỉnh thanh Panel"
-
-#~ msgid "Include all Workspaces"
-#~ msgstr "Trên mọi không gian"
-
-#~ msgid "Show Window Icons"
-#~ msgstr "Hiện biểu tượng cửa sổ"
+msgstr "Trình quản lý thanh Panel Xfce 4"
