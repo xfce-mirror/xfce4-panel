@@ -92,11 +92,9 @@ msgid "About the Xfce Panel"
 msgstr "O Panelu Xfce"
 
 #: ../panel/panel-item-manager.c:363 ../panel/panel-item-manager.c:371
-#, fuzzy, c-format
+#, c-format
 msgid "Could not open \"%s\" module"
-msgstr ""
-"Błąd uruchomienia \"%s\":\n"
-"%s"
+msgstr "Nie mogę otworzyć modułu \"%s\""
 
 #: ../panel/panel-app.c:241 ../panel/panel-app.c:736
 msgid "Exit Xfce Panel?"
@@ -182,19 +180,16 @@ msgid ""
 msgstr "Przenieś elementy z listy na panel lub z panelu na listę by je usunąć."
 
 #: ../panel/panel-dialogs.c:577
-#, fuzzy
 msgid "Available Items"
-msgstr "Dostępne elementy"
+msgstr "Dostępne Elementy"
 
 #: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
-#, fuzzy
 msgid "Normal Width"
-msgstr "_Pełna długość"
+msgstr "Normalna Długość"
 
 #: ../panel/panel-dialogs.c:796 ../panel/panel-dialogs.c:1020
-#, fuzzy
 msgid "Full Width"
-msgstr "_Pełna długość"
+msgstr "Pełna Długość"
 
 #: ../panel/panel-dialogs.c:802 ../panel/panel-dialogs.c:1026
 #, fuzzy
@@ -270,9 +265,8 @@ msgid "Size (pixels):"
 msgstr "Rozmiar (piksele)"
 
 #: ../panel/panel-dialogs.c:1320
-#, fuzzy
 msgid "Transparency (%):"
-msgstr "Przezroczystość"
+msgstr "Przezroczystość (%):"
 
 #: ../panel/panel-dialogs.c:1344
 msgid "Make active panel opaque"
@@ -372,11 +366,9 @@ msgid "Only show minimized applications"
 msgstr "Pokazuj tylko zminimalizowane aplikacje"
 
 #: ../plugins/launcher/launcher.c:410 ../plugins/launcher/launcher.c:472
-#, fuzzy, c-format
+#, c-format
 msgid "Could not run \"%s\""
-msgstr ""
-"Błąd uruchomienia \"%s\":\n"
-"%s"
+msgstr "Nie mogę uruchomić \"%s\""
 
 #: ../plugins/launcher/launcher.c:435
 #, c-format
@@ -529,13 +521,12 @@ msgstr "Ilość kolumn:"
 
 #: ../plugins/separator/separator.c:271
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "Separator"
+msgstr "Separator lub Odstęp"
 
 #: ../plugins/separator/separator.c:284
 msgid "_Draw Separator"
-msgstr "_Separator"
+msgstr "_Rysuj Separator"
 
 #: ../plugins/separator/separator.c:293
 msgid "_Expand"
@@ -603,12 +594,12 @@ msgstr "Zawsze grupuj zadania"
 #: ../plugins/windowlist/windowlist.c:226
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Czy chcesz usunąć pulpit %d?"
 
 #: ../plugins/windowlist/windowlist.c:227
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Czy chcesz usunąć pulput '%s'?"
 
 #: ../plugins/windowlist/windowlist.c:428
 #, c-format
@@ -621,9 +612,9 @@ msgid "Add workspace"
 msgstr "Dodaj pulpit"
 
 #: ../plugins/windowlist/windowlist.c:549
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace %d"
-msgstr "Usunąć Panel \"%d\"?"
+msgstr "Usunąć Pulpit %d"
 
 #: ../plugins/windowlist/windowlist.c:550
 #, c-format
@@ -642,53 +633,49 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"<i>Pilne powiadomienie</i> spowoduje miganie przycisku aplikacji potrzebującej "
+"uwagi użytkownika"
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:160
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Użyj p_owiadomienia o uruchamianiu"
+msgstr "Pilne Powiadomienie"
 
 #: ../plugins/windowlist/windowlist-dialog.c:167
 msgid "_Disabled"
-msgstr ""
+msgstr "_Wyłączone"
 
 #: ../plugins/windowlist/windowlist-dialog.c:176
 msgid "For _other workspaces"
-msgstr ""
+msgstr "Dla _innych pulpitów"
 
 #: ../plugins/windowlist/windowlist-dialog.c:185
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Pokaż z_adania z wszystkich biurek"
+msgstr "Dla _wszystkich pulpitów"
 
 #: ../plugins/windowlist/windowlist-dialog.c:199
-#, fuzzy
 msgid "_Icon button"
-msgstr "Przyciski Akcji"
+msgstr "Przyciski _Ikony"
 
 #: ../plugins/windowlist/windowlist-dialog.c:206
 msgid "A_rrow button"
-msgstr ""
+msgstr "Przycisk _Strzałki"
 
 #: ../plugins/windowlist/windowlist-dialog.c:224
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Pokaż z_adania z wszystkich biurek"
+msgstr "Pokaż _okna ze wszystkich pulpitów"
 
 #: ../plugins/windowlist/windowlist-dialog.c:233
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Pokaż _nazwy programów"
+msgstr "Pokaż ikony _aplikacji"
 
 #: ../plugins/windowlist/windowlist-dialog.c:242
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "Pokaż akcje pulpitu"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "Panel %d"
+msgstr "Panel"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -751,6 +738,5 @@ msgid "This plugin has no purpose"
 msgstr "Ta wtyczka nic nie robi"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "Menadżer Panelu"
+msgstr "Menadżer Panelu Xfce 4"
