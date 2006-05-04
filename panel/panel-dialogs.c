@@ -500,7 +500,7 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
 {
     PanelItemsDialog *pid;
     Panel *panel;
-    GtkWidget *dlg, *header, *vbox, *img, *hbox, *label;
+    GtkWidget *dlg, *vbox, *img, *hbox, *label;
     char *markup;
     
     if (items_dialog_widget)
@@ -523,12 +523,13 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
     
     /* main dialog widget */
     items_dialog_widget = pid->dlg = dlg = 
-        gtk_dialog_new_with_buttons (_("Xfce Panel"), NULL,
-                                     GTK_DIALOG_NO_SEPARATOR,
-                                     GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-                                     GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
-                                     GTK_STOCK_ADD, GTK_RESPONSE_OK,
-                                     NULL);
+        xfce_titled_dialog_new_with_buttons (_("Add Items to the Panel"), NULL,
+                                             GTK_DIALOG_NO_SEPARATOR,
+                                             GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+                                             GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
+                                             GTK_STOCK_ADD, GTK_RESPONSE_OK,
+                                             NULL);
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-panel");
     
     g_signal_connect (dlg, "response", G_CALLBACK (item_dialog_response), pid);
     pid->panel_destroy_id = 
@@ -536,20 +537,11 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
                                   G_CALLBACK (items_dialog_panel_destroyed), 
                                   pid);
 
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-    
     pid->items_box = vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox, TRUE, TRUE, 0);
 
-    img = gtk_image_new_from_icon_name ("xfce4-panel", GTK_ICON_SIZE_DIALOG);
-    gtk_widget_show (img);
-
-    header = xfce_create_header_with_image (img, _("Add Items"));
-    gtk_widget_show (header);
-    gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, FALSE, 0);
-    
     /* info */
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -1511,7 +1503,7 @@ void
 panel_manager_dialog (GPtrArray *panels)
 {
     PanelManagerDialog *pmd;
-    GtkWidget *header, *vbox, *img, *sel;
+    GtkWidget *vbox, *img, *sel;
     Panel *panel;
 
     if (panel_dialog_widget)
@@ -1530,15 +1522,13 @@ panel_manager_dialog (GPtrArray *panels)
 
     /* main dialog widget */
     panel_dialog_widget = pmd->dlg = 
-        gtk_dialog_new_with_buttons (_("Xfce Panel"), NULL, 
-                                     GTK_DIALOG_NO_SEPARATOR,
-                                     GTK_STOCK_HELP, GTK_RESPONSE_HELP,
-                                     GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
-                                     NULL);
-    
+        xfce_titled_dialog_new_with_buttons (_("Panel Manager"), NULL, 
+                                             GTK_DIALOG_NO_SEPARATOR,
+                                             GTK_STOCK_HELP, GTK_RESPONSE_HELP,
+                                             GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
+                                             NULL);
     gtk_dialog_set_default_response (GTK_DIALOG (pmd->dlg), GTK_RESPONSE_OK);
-
-    gtk_container_set_border_width (GTK_CONTAINER (pmd->dlg), 2);
+    gtk_window_set_icon_name (GTK_WINDOW (pmd->dlg), "xfce4-panel");
 
     pmd->tips = gtk_tooltips_new ();
     g_object_ref (pmd->tips);
@@ -1550,14 +1540,6 @@ panel_manager_dialog (GPtrArray *panels)
     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pmd->dlg)->vbox), vbox, 
                         TRUE, TRUE, 0);
-
-    /* header */
-    img = gtk_image_new_from_icon_name ("xfce4-panel", GTK_ICON_SIZE_DIALOG);
-    gtk_widget_show (img);
-
-    header = xfce_create_header_with_image (img, _("Panel Manager"));
-    gtk_widget_show (header);
-    gtk_box_pack_start (GTK_BOX (vbox), header, FALSE, FALSE, 0);
 
     pmd->updating = TRUE;
     
