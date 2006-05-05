@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-23 10:36+0200\n"
+"POT-Creation-Date: 2006-05-06 04:20+0900\n"
 "PO-Revision-Date: 2006-04-13 14:16+0300\n"
 "Last-Translator: Mart Tõnso <mart.tonso@ttu.ee>\n"
 "Language-Team: Estonian <et@li.org>\n"
@@ -29,7 +29,6 @@ msgstr "Kas eemaldame: \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
 #: ../panel/panel-app.c:766 ../panel/panel-app.c:799
-#: ../panel/panel-dialogs.c:526 ../panel/panel-dialogs.c:1533
 #: ../plugins/launcher/launcher.c:412 ../plugins/launcher/launcher.c:438
 #: ../plugins/launcher/launcher.c:474
 msgid "Xfce Panel"
@@ -73,7 +72,7 @@ msgstr "Lisa uus asi"
 msgid "Customize Panel"
 msgstr "Kohanda paneeli"
 
-#: ../panel/panel.c:667 ../panel/panel-dialogs.c:549
+#: ../panel/panel.c:667
 msgid "Add Items"
 msgstr "Lisa asju"
 
@@ -171,120 +170,124 @@ msgstr ""
 " -a, --add       Lisa uued asjad\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:564
+#: ../panel/panel-dialogs.c:526
+msgid "Add Items to the Panel"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:556
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 "Kanna asjad nimekirjast paneelile või eemalda kandes nad tagasi nimekirja."
 
-#: ../panel/panel-dialogs.c:577
+#: ../panel/panel-dialogs.c:569
 msgid "Available Items"
 msgstr "Saada olevad asjad"
 
-#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
+#: ../panel/panel-dialogs.c:786 ../panel/panel-dialogs.c:1010
 msgid "Normal Width"
 msgstr "Normaalne laius"
 
-#: ../panel/panel-dialogs.c:796 ../panel/panel-dialogs.c:1020
+#: ../panel/panel-dialogs.c:788 ../panel/panel-dialogs.c:1012
 msgid "Full Width"
 msgstr "Täislaius"
 
-#: ../panel/panel-dialogs.c:802 ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
 msgid "Span Monitors"
 msgstr "Vahe monitorid"
 
-#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1091
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1083
 msgid "Left"
 msgstr "Vasakul"
 
-#: ../panel/panel-dialogs.c:864 ../panel/panel-dialogs.c:1093
+#: ../panel/panel-dialogs.c:856 ../panel/panel-dialogs.c:1085
 msgid "Right"
 msgstr "Paremal"
 
-#: ../panel/panel-dialogs.c:869 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:861 ../panel/panel-dialogs.c:1090
 msgid "Top"
 msgstr "Ülal"
 
-#: ../panel/panel-dialogs.c:871 ../panel/panel-dialogs.c:1100
+#: ../panel/panel-dialogs.c:863 ../panel/panel-dialogs.c:1092
 msgid "Bottom"
 msgstr "All"
 
 #. position
-#: ../panel/panel-dialogs.c:899
+#: ../panel/panel-dialogs.c:891
 msgid "Position"
 msgstr "Asukoht"
 
-#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:905
 msgid "Fixed Position"
 msgstr "Fikseeritud asukoht"
 
-#: ../panel/panel-dialogs.c:919
+#: ../panel/panel-dialogs.c:911
 msgid "Freely Moveable"
 msgstr "Vabalt liigudatav"
 
-#: ../panel/panel-dialogs.c:1034
+#: ../panel/panel-dialogs.c:1026
 msgid "Auto_hide"
 msgstr "Automaatne_varjamine"
 
-#: ../panel/panel-dialogs.c:1052
+#: ../panel/panel-dialogs.c:1044
 msgid "Orientation:"
 msgstr "Orientatsioon:"
 
-#: ../panel/panel-dialogs.c:1064
+#: ../panel/panel-dialogs.c:1056
 msgid "Horizontal"
 msgstr "Horisontaalne"
 
-#: ../panel/panel-dialogs.c:1066
+#: ../panel/panel-dialogs.c:1058
 msgid "Vertical"
 msgstr "Vertikaalne"
 
-#: ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:1067
 msgid "Handle:"
 msgstr "Sang:"
 
-#: ../panel/panel-dialogs.c:1087
+#: ../panel/panel-dialogs.c:1079
 msgid "At both sides"
 msgstr "Mõlemal küljel"
 
-#: ../panel/panel-dialogs.c:1168
+#: ../panel/panel-dialogs.c:1160
 msgid "Select Monitor"
 msgstr "Vali monitor"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../panel/panel-dialogs.c:1278 ../plugins/clock/clock.c:431
 #: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Väljanägemine"
 
 #. size
-#: ../panel/panel-dialogs.c:1297
+#: ../panel/panel-dialogs.c:1289
 msgid "Size (pixels):"
 msgstr "Suurus (punktides):"
 
-#: ../panel/panel-dialogs.c:1320
+#: ../panel/panel-dialogs.c:1312
 msgid "Transparency (%):"
 msgstr "Läbipaistvus (%):"
 
-#: ../panel/panel-dialogs.c:1344
+#: ../panel/panel-dialogs.c:1336
 msgid "Make active panel opaque"
 msgstr "Tee aktiivne paneel läbipaistvaks"
 
-#: ../panel/panel-dialogs.c:1383 ../panel/panel-dialogs.c:1419
-#: ../panel/panel-dialogs.c:1444
+#: ../panel/panel-dialogs.c:1375 ../panel/panel-dialogs.c:1411
+#: ../panel/panel-dialogs.c:1436
 #, c-format
 msgid "Panel %d"
 msgstr "Paneel %d"
 
-#: ../panel/panel-dialogs.c:1463
+#: ../panel/panel-dialogs.c:1455
 msgid "Remove Panel"
 msgstr "Eemalda paneel"
 
-#: ../panel/panel-dialogs.c:1476
+#: ../panel/panel-dialogs.c:1468
 msgid "New Panel"
 msgstr "Uus Paneel"
 
-#: ../panel/panel-dialogs.c:1558
+#: ../panel/panel-dialogs.c:1525
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Paneeli haldur"
@@ -742,9 +745,3 @@ msgstr "Sellel jublunnil ei ole mõtet"
 #, fuzzy
 msgid "Xfce 4 Panel Manager"
 msgstr "Paneeli haldur"
-
-#~ msgid "Include all Workspaces"
-#~ msgstr "Lisa kõik tööruumid"
-
-#~ msgid "Show Window Icons"
-#~ msgstr "Näita akende ikoone"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-23 10:36+0200\n"
+"POT-Creation-Date: 2006-05-06 04:20+0900\n"
 "PO-Revision-Date: 2006-04-26 01:37+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi@vnlinux.org>\n"
 "Language-Team: Vietnamese <vi_VN@googlegroups.com>\n"
@@ -31,7 +31,6 @@ msgstr "Gỡ bỏ \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
 #: ../panel/panel-app.c:766 ../panel/panel-app.c:799
-#: ../panel/panel-dialogs.c:526 ../panel/panel-dialogs.c:1533
 #: ../plugins/launcher/launcher.c:412 ../plugins/launcher/launcher.c:438
 #: ../plugins/launcher/launcher.c:474
 msgid "Xfce Panel"
@@ -75,7 +74,7 @@ msgstr "Thêm mục mới"
 msgid "Customize Panel"
 msgstr "Tùy chỉnh thanh Panel"
 
-#: ../panel/panel.c:667 ../panel/panel-dialogs.c:549
+#: ../panel/panel.c:667
 msgid "Add Items"
 msgstr "Thêm mục"
 
@@ -172,7 +171,11 @@ msgstr ""
 " -a, --add       Thêm mục mới\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:564
+#: ../panel/panel-dialogs.c:526
+msgid "Add Items to the Panel"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:556
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -180,113 +183,113 @@ msgstr ""
 "Kéo mục từ danh sách tới một thanh panel để thêm hoặc kéo chúng từ thanh "
 "panel ngược lại danh sách để gỡ bỏ chúng."
 
-#: ../panel/panel-dialogs.c:577
+#: ../panel/panel-dialogs.c:569
 msgid "Available Items"
 msgstr "Các mục có"
 
-#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
+#: ../panel/panel-dialogs.c:786 ../panel/panel-dialogs.c:1010
 msgid "Normal Width"
 msgstr "Chiều rộng thông thường"
 
-#: ../panel/panel-dialogs.c:796 ../panel/panel-dialogs.c:1020
+#: ../panel/panel-dialogs.c:788 ../panel/panel-dialogs.c:1012
 msgid "Full Width"
 msgstr "Chiều rộng đầy đủ"
 
-#: ../panel/panel-dialogs.c:802 ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
 msgid "Span Monitors"
 msgstr "Nối các màn hình"
 
-#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1091
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1083
 msgid "Left"
 msgstr "Trái"
 
-#: ../panel/panel-dialogs.c:864 ../panel/panel-dialogs.c:1093
+#: ../panel/panel-dialogs.c:856 ../panel/panel-dialogs.c:1085
 msgid "Right"
 msgstr "Phải"
 
-#: ../panel/panel-dialogs.c:869 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:861 ../panel/panel-dialogs.c:1090
 msgid "Top"
 msgstr "Trên"
 
-#: ../panel/panel-dialogs.c:871 ../panel/panel-dialogs.c:1100
+#: ../panel/panel-dialogs.c:863 ../panel/panel-dialogs.c:1092
 msgid "Bottom"
 msgstr "Dưới"
 
 #. position
-#: ../panel/panel-dialogs.c:899
+#: ../panel/panel-dialogs.c:891
 msgid "Position"
 msgstr "Vị trí"
 
-#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:905
 msgid "Fixed Position"
 msgstr "Vị trí cố định"
 
-#: ../panel/panel-dialogs.c:919
+#: ../panel/panel-dialogs.c:911
 msgid "Freely Moveable"
 msgstr "Di chuyển tự do"
 
-#: ../panel/panel-dialogs.c:1034
+#: ../panel/panel-dialogs.c:1026
 msgid "Auto_hide"
 msgstr "_Tự động ẩn"
 
-#: ../panel/panel-dialogs.c:1052
+#: ../panel/panel-dialogs.c:1044
 msgid "Orientation:"
 msgstr "Hướng:"
 
-#: ../panel/panel-dialogs.c:1064
+#: ../panel/panel-dialogs.c:1056
 msgid "Horizontal"
 msgstr "Ngang"
 
-#: ../panel/panel-dialogs.c:1066
+#: ../panel/panel-dialogs.c:1058
 msgid "Vertical"
 msgstr "Dọc"
 
-#: ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:1067
 msgid "Handle:"
 msgstr "Điều khiển:"
 
-#: ../panel/panel-dialogs.c:1087
+#: ../panel/panel-dialogs.c:1079
 msgid "At both sides"
 msgstr "Ở cả hai phái"
 
-#: ../panel/panel-dialogs.c:1168
+#: ../panel/panel-dialogs.c:1160
 msgid "Select Monitor"
 msgstr "Chọn màn hình"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../panel/panel-dialogs.c:1278 ../plugins/clock/clock.c:431
 #: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Diện mạo"
 
 #. size
-#: ../panel/panel-dialogs.c:1297
+#: ../panel/panel-dialogs.c:1289
 msgid "Size (pixels):"
 msgstr "Kích thước (điểm):"
 
-#: ../panel/panel-dialogs.c:1320
+#: ../panel/panel-dialogs.c:1312
 msgid "Transparency (%):"
 msgstr "Trong suốt (%s):"
 
-#: ../panel/panel-dialogs.c:1344
+#: ../panel/panel-dialogs.c:1336
 msgid "Make active panel opaque"
 msgstr "Làm cho thanh hiện thời mờ đục"
 
-#: ../panel/panel-dialogs.c:1383 ../panel/panel-dialogs.c:1419
-#: ../panel/panel-dialogs.c:1444
+#: ../panel/panel-dialogs.c:1375 ../panel/panel-dialogs.c:1411
+#: ../panel/panel-dialogs.c:1436
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1463
+#: ../panel/panel-dialogs.c:1455
 msgid "Remove Panel"
 msgstr "Gỡ bỏ panel"
 
-#: ../panel/panel-dialogs.c:1476
+#: ../panel/panel-dialogs.c:1468
 msgid "New Panel"
 msgstr "Panel mới"
 
-#: ../panel/panel-dialogs.c:1558
+#: ../panel/panel-dialogs.c:1525
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Quản lý panel"

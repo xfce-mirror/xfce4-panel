@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-23 10:36+0200\n"
+"POT-Creation-Date: 2006-05-06 04:20+0900\n"
 "PO-Revision-Date: 2005-11-07 22:12+0900\n"
 "Last-Translator: Rudy Godoy <rudy@kernel-panik.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -29,7 +29,6 @@ msgstr "¿Eliminar «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
 #: ../panel/panel-app.c:766 ../panel/panel-app.c:799
-#: ../panel/panel-dialogs.c:526 ../panel/panel-dialogs.c:1533
 #: ../plugins/launcher/launcher.c:412 ../plugins/launcher/launcher.c:438
 #: ../plugins/launcher/launcher.c:474
 msgid "Xfce Panel"
@@ -75,7 +74,7 @@ msgstr "Nuevo elemento"
 msgid "Customize Panel"
 msgstr "Personalizar panel"
 
-#: ../panel/panel.c:667 ../panel/panel-dialogs.c:549
+#: ../panel/panel.c:667
 msgid "Add Items"
 msgstr ""
 
@@ -172,7 +171,11 @@ msgstr ""
 " -x, --exit      Finaliza los paneles\n"
 " -a, --add       Añade nuevos elementos\n"
 
-#: ../panel/panel-dialogs.c:564
+#: ../panel/panel-dialogs.c:526
+msgid "Add Items to the Panel"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:556
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -180,120 +183,120 @@ msgstr ""
 "Arrastre elementos de la lista hacia un panel, o para eliminarlos,\n"
 "desde éste hacia la lista."
 
-#: ../panel/panel-dialogs.c:577
+#: ../panel/panel-dialogs.c:569
 #, fuzzy
 msgid "Available Items"
 msgstr "Elementos disponibles"
 
-#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
+#: ../panel/panel-dialogs.c:786 ../panel/panel-dialogs.c:1010
 #, fuzzy
 msgid "Normal Width"
 msgstr "_Todo el ancho"
 
-#: ../panel/panel-dialogs.c:796 ../panel/panel-dialogs.c:1020
+#: ../panel/panel-dialogs.c:788 ../panel/panel-dialogs.c:1012
 #, fuzzy
 msgid "Full Width"
 msgstr "_Todo el ancho"
 
-#: ../panel/panel-dialogs.c:802 ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
 #, fuzzy
 msgid "Span Monitors"
 msgstr "Monitor"
 
-#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1091
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1083
 msgid "Left"
 msgstr "Izquierda"
 
-#: ../panel/panel-dialogs.c:864 ../panel/panel-dialogs.c:1093
+#: ../panel/panel-dialogs.c:856 ../panel/panel-dialogs.c:1085
 msgid "Right"
 msgstr "Derecha"
 
-#: ../panel/panel-dialogs.c:869 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:861 ../panel/panel-dialogs.c:1090
 msgid "Top"
 msgstr "Superior"
 
-#: ../panel/panel-dialogs.c:871 ../panel/panel-dialogs.c:1100
+#: ../panel/panel-dialogs.c:863 ../panel/panel-dialogs.c:1092
 msgid "Bottom"
 msgstr "Inferior"
 
 #. position
-#: ../panel/panel-dialogs.c:899
+#: ../panel/panel-dialogs.c:891
 msgid "Position"
 msgstr "Posición"
 
-#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:905
 msgid "Fixed Position"
 msgstr "Posición fija"
 
-#: ../panel/panel-dialogs.c:919
+#: ../panel/panel-dialogs.c:911
 msgid "Freely Moveable"
 msgstr "Desplazable"
 
-#: ../panel/panel-dialogs.c:1034
+#: ../panel/panel-dialogs.c:1026
 msgid "Auto_hide"
 msgstr "Ocultar automáticamente"
 
-#: ../panel/panel-dialogs.c:1052
+#: ../panel/panel-dialogs.c:1044
 msgid "Orientation:"
 msgstr "Orientación:"
 
-#: ../panel/panel-dialogs.c:1064
+#: ../panel/panel-dialogs.c:1056
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1066
+#: ../panel/panel-dialogs.c:1058
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ../panel/panel-dialogs.c:1075
+#: ../panel/panel-dialogs.c:1067
 #, fuzzy
 msgid "Handle:"
 msgstr "Gestionar posición"
 
-#: ../panel/panel-dialogs.c:1087
+#: ../panel/panel-dialogs.c:1079
 msgid "At both sides"
 msgstr "A ambos lados"
 
-#: ../panel/panel-dialogs.c:1168
+#: ../panel/panel-dialogs.c:1160
 #, fuzzy
 msgid "Select Monitor"
 msgstr "Monitor"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1286 ../plugins/clock/clock.c:431
+#: ../panel/panel-dialogs.c:1278 ../plugins/clock/clock.c:431
 #: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "Appearance"
 msgstr "Aspecto"
 
 #. size
-#: ../panel/panel-dialogs.c:1297
+#: ../panel/panel-dialogs.c:1289
 msgid "Size (pixels):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1320
+#: ../panel/panel-dialogs.c:1312
 #, fuzzy
 msgid "Transparency (%):"
 msgstr "Transparencia"
 
-#: ../panel/panel-dialogs.c:1344
+#: ../panel/panel-dialogs.c:1336
 msgid "Make active panel opaque"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1383 ../panel/panel-dialogs.c:1419
-#: ../panel/panel-dialogs.c:1444
+#: ../panel/panel-dialogs.c:1375 ../panel/panel-dialogs.c:1411
+#: ../panel/panel-dialogs.c:1436
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1463
+#: ../panel/panel-dialogs.c:1455
 msgid "Remove Panel"
 msgstr "Eliminar panel"
 
-#: ../panel/panel-dialogs.c:1476
+#: ../panel/panel-dialogs.c:1468
 msgid "New Panel"
 msgstr "Nuevo panel"
 
-#: ../panel/panel-dialogs.c:1558
+#: ../panel/panel-dialogs.c:1525
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 #, fuzzy
 msgid "Panel Manager"
