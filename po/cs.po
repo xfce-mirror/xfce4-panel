@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-04-23 10:36+0200\n"
-"PO-Revision-Date: 2006-04-28 22:43+0200\n"
+"PO-Revision-Date: 2006-05-04 20:30+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgstr "Přesunout"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:800
 msgid "Remove"
-msgstr "Ostranit"
+msgstr "Odstranit"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:817
 msgid "Add New Item"
@@ -362,7 +362,7 @@ msgstr "Panel pro ikony"
 
 #: ../plugins/iconbox/iconbox.c:816
 msgid "Only show minimized applications"
-msgstr "Ukázovat jen minimalizované aplikace"
+msgstr "Ukazovat jen minimalizované aplikace"
 
 #: ../plugins/launcher/launcher.c:410 ../plugins/launcher/launcher.c:472
 #, c-format
@@ -593,12 +593,12 @@ msgstr "Vždy seskupovat úkoly"
 #: ../plugins/windowlist/windowlist.c:226
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Jste si jisti, že chcete odebrat pracovní plochu %d?"
 
 #: ../plugins/windowlist/windowlist.c:227
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Jste si jisti, že chcete odebrat pracovní plochu '%s'?"
 
 #: ../plugins/windowlist/windowlist.c:428
 #, c-format
@@ -632,53 +632,49 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"<i>Urgentní oznámení</i> způsobí blikání tlačítka, pokud aplikace vyžaduje "
+"odezvu od uživatele."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:160
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Použít oznámení při _startu"
+msgstr "Urgentní oznámení"
 
 #: ../plugins/windowlist/windowlist-dialog.c:167
 msgid "_Disabled"
-msgstr ""
+msgstr "_Zakázáno"
 
 #: ../plugins/windowlist/windowlist-dialog.c:176
 msgid "For _other workspaces"
-msgstr ""
+msgstr "Pr_o jiné pracovní plochy"
 
 #: ../plugins/windowlist/windowlist-dialog.c:185
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Uk_azovat úlohy ze všech pracovních ploch"
+msgstr "Pro všechny pr_acovní plochy"
 
 #: ../plugins/windowlist/windowlist-dialog.c:199
-#, fuzzy
 msgid "_Icon button"
-msgstr "Akční tlačítka"
+msgstr "Tlačítka s _ikonami"
 
 #: ../plugins/windowlist/windowlist-dialog.c:206
 msgid "A_rrow button"
-msgstr ""
+msgstr "Tlačítko se šipkou"
 
 #: ../plugins/windowlist/windowlist-dialog.c:224
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Uk_azovat úlohy ze všech pracovních ploch"
+msgstr "Uk_azovat okna ze všech pracovních ploch"
 
 #: ../plugins/windowlist/windowlist-dialog.c:233
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Ukazovat _jména aplikací"
+msgstr "Ukazovat ikony a_plikací"
 
 #: ../plugins/windowlist/windowlist-dialog.c:242
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "Zobrazit a_kce pracovní plochy"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "Panel %d"
+msgstr "Panel"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -694,7 +690,7 @@ msgstr "Kolik je hodin?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr "Ukázovat ikony všech běžících aplikací"
+msgstr "Ukazovat ikony všech běžících aplikací"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -702,7 +698,7 @@ msgstr "Spouštěč"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Spouštěč progrmů s volitelnou nabídkou"
+msgstr "Spouštěč programů s volitelnou nabídkou"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
@@ -718,7 +714,7 @@ msgstr "Ukázat pracovní plochu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr "Ukázet/skrýt pracovní plochu"
+msgstr "Ukázat/skrýt pracovní plochu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
@@ -730,7 +726,7 @@ msgstr "Ukázat všechny běžící aplikace"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr "Ukázat seznam věech dostupných oken"
+msgstr "Ukázat seznam všech dostupných oken"
 
 #: ../plugins/testplugin/testplugin.desktop.in.in.h:1
 msgid "Test Plugin"
@@ -741,6 +737,5 @@ msgid "This plugin has no purpose"
 msgstr "Tento modul je bezúčelný"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "Správce panelu:"
+msgstr "Správce panelu Xfce4:"
