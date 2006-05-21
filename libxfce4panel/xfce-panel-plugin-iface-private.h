@@ -90,8 +90,6 @@ void xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin);
 
 void xfce_panel_plugin_move (XfcePanelPlugin *plugin);
 
-void xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin, GtkMenu *menu);
-
 
 G_END_DECLS
 

@@ -33,7 +33,7 @@
  * Licensed under the GNU GPL
  */
 
-const static GtkTargetEntry dest_target_list[] = 
+static const GtkTargetEntry dest_target_list[] = 
 {
     { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME },
     { "application/x-xfce-panel-plugin-widget", 
@@ -43,16 +43,16 @@ const static GtkTargetEntry dest_target_list[] =
     { "UTF8_STRING", 0, TARGET_FILE }
 };
 
-static guint n_dest_targets = G_N_ELEMENTS (dest_target_list);
+static const guint n_dest_targets = G_N_ELEMENTS (dest_target_list);
 
-static GtkTargetEntry name_target_list[] = 
+static const GtkTargetEntry name_target_list[] = 
 {
     { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME }
 };
 
-static guint n_name_targets = G_N_ELEMENTS (name_target_list);
+static const guint n_name_targets = G_N_ELEMENTS (name_target_list);
 
-static GtkTargetEntry widget_target_list[] = 
+static const GtkTargetEntry widget_target_list[] = 
 {
     { "application/x-xfce-panel-plugin-widget", 0, TARGET_PLUGIN_WIDGET }
 };

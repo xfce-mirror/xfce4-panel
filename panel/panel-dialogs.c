@@ -36,6 +36,7 @@
 #include "panel-private.h"
 #include "panel-item-manager.h"
 #include "panel-dnd.h"
+#include "panel-dialogs.h"
 
 #define BORDER  8
 
@@ -170,6 +171,8 @@ add_selected_item (PanelItemsDialog *pid)
 
     if (item)
         g_idle_add ((GSourceFunc)item_configure_timeout, item);
+    else
+        xfce_err (_("Could not open \"%s\" module"), info->name);
     
     return TRUE;
 }
@@ -1503,7 +1506,7 @@ void
 panel_manager_dialog (GPtrArray *panels)
 {
     PanelManagerDialog *pmd;
-    GtkWidget *vbox, *img, *sel;
+    GtkWidget *vbox, *sel;
     Panel *panel;
 
     if (panel_dialog_widget)

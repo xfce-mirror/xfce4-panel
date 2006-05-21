@@ -75,13 +75,6 @@ struct _XfceExternalPanelPluginPrivate
 static void xfce_external_panel_plugin_interface_init (gpointer g_iface,
                                                        gpointer data);
 
-static void
-xfce_external_panel_plugin_class_init (XfceExternalPanelPluginClass * class);
-
-static void 
-xfce_external_panel_plugin_init (XfceExternalPanelPlugin * plugin);
-
-
 /* GObject */
 static void xfce_external_panel_plugin_finalize (GObject * object);
 

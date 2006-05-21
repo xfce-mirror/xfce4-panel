@@ -360,16 +360,16 @@ xfce_panel_item_manager_create_item (GdkScreen *screen, const char *name,
             
             if (!(class->gmodule = g_module_open (class->file, 0)))
             {
-                xfce_err (_("Could not open \"%s\" module"), class->name);
-                g_critical ("%s", g_module_error ());
+                g_critical ("Could not open \"%s\": %s", 
+                            class->name, g_module_error ());
                 return NULL;
             }
 
             if (!g_module_symbol (class->gmodule, 
                                   "xfce_panel_plugin_get_construct", &symbol))
             {
-                xfce_err (_("Could not open \"%s\" module"), class->name);
-                g_critical ("%s", g_module_error ());
+                g_critical ("Could not open \"%s\": %s", 
+                            class->name, g_module_error ());
                 g_module_close (class->gmodule);
                 class->gmodule = NULL;
                 return NULL;

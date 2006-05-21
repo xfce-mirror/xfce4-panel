@@ -189,14 +189,14 @@ static LauncherPlugin *open_launcher = NULL;
 /* DND *
  * --- */
 
-static GtkTargetEntry target_list [] =
+static const GtkTargetEntry target_list [] =
 {
     { "text/uri-list", 0, TARGET_URI_LIST },
     { "text/x-moz-url", 0, TARGET_MOZ_URL },
     { "STRING", 0, TARGET_URI_LIST }
 };
 
-static guint n_targets = G_N_ELEMENTS (target_list);
+static const guint n_targets = G_N_ELEMENTS (target_list);
 
 /* Mozilla uses its own weird format. */
 static void
