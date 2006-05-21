@@ -444,6 +444,8 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                 if (plugin->parent != widget)
                 {
                     PanelPrivate *priv = panel->priv;
+                    gboolean expand = 
+                        xfce_panel_item_get_expand (XFCE_PANEL_ITEM (plugin));
 
                     g_object_freeze_notify (G_OBJECT (widget));
                     
@@ -461,9 +463,7 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                     g_object_thaw_notify (G_OBJECT (widget));
 
                     xfce_itembar_set_child_expand (
-                            XFCE_ITEMBAR (priv->itembar), plugin,
-                            xfce_panel_item_get_expand (
-                                XFCE_PANEL_ITEM (plugin)));
+                            XFCE_ITEMBAR (priv->itembar), plugin, expand);
                 }
                 else /* only when moving on the same panel */
                 {

@@ -140,5 +140,7 @@ test_construct (XfcePanelPlugin *plugin)
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
                       G_CALLBACK (test_configure), NULL);
+    
+    xfce_panel_plugin_set_expand (plugin, TRUE);
 }
 

@@ -433,6 +433,7 @@ _item_event_received (XfceExternalPanelItem * item, GdkEventClient * ev)
                 xfce_panel_item_free_data (XFCE_PANEL_ITEM (item));
                 break;
             case XFCE_PANEL_PLUGIN_EXPAND:
+                priv->expand = ev->data.s[1];
                 xfce_panel_item_expand_changed (XFCE_PANEL_ITEM (item),
                                                 ev->data.s[1]);
                 break;
