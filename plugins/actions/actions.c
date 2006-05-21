@@ -123,11 +123,10 @@ actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
         border = 2 + 2 * GTK_WIDGET(plugin)->style->xthickness;
     }
     
-    width = MIN(size - border, MAX(16, size/2 - border));
-
     switch (action->type)
     {
         case ACTION_QUIT_LOCK:
+            width = size / 2 - 2 * border;
             pb = actions_load_icon (ACTION_LOCK, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
             g_object_unref (pb);
@@ -139,6 +138,7 @@ actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
             break;
         case ACTION_QUIT:
         case ACTION_LOCK:
+            width = MIN(size - border, MAX(16, size/2 - border));
             pb = actions_load_icon (action->type, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
             g_object_unref (pb);
