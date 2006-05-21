@@ -401,32 +401,25 @@ clock_dialog_response (GtkWidget *dlg, int reponse,
 static void
 clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
 {
-    GtkWidget *dlg, *header, *frame, *bin, *vbox, *cb;
+    GtkWidget *dlg, *frame, *bin, *vbox, *cb;
 
     xfce_panel_plugin_block_menu (plugin);
     
-    dlg = gtk_dialog_new_with_buttons (_("Properties"), 
+    dlg = xfce_titled_dialog_new_with_buttons (_("Clock"),
                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-                GTK_DIALOG_DESTROY_WITH_PARENT |
-                GTK_DIALOG_NO_SEPARATOR,
+                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
-    
+
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
     
     g_signal_connect (dlg, "response", G_CALLBACK (clock_dialog_response),
                       clock);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-    
-    header = xfce_create_header (NULL, _("Clock"));
-    gtk_widget_set_size_request (GTK_BIN (header)->child, 200, 32);
-    gtk_container_set_border_width (GTK_CONTAINER (header), 6);
-    gtk_widget_show (header);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), header,
-                        FALSE, TRUE, 0);
     
     frame = xfce_create_framebox (_("Appearance"), &bin);
     gtk_container_set_border_width (GTK_CONTAINER (frame), 6);

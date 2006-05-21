@@ -92,11 +92,11 @@ windowlist_button_toggled (GtkWidget *button,
 }
 
 static void
-windowlist_properties_response (GtkWidget *dialog, 
+windowlist_properties_response (GtkWidget *dlg, 
 				int response,
 				WindowlistDialog *wd)
 {
-    gtk_widget_destroy (dialog);
+    gtk_widget_destroy (dlg);
     
     xfce_panel_plugin_unblock_menu (wd->wl->plugin);
     
@@ -109,7 +109,7 @@ windowlist_properties (XfcePanelPlugin *plugin,
 {
     WindowlistDialog *wd;
     
-    GtkWidget *dialog, *header, *vbox, *vbox2, *frame, *hbox,
+    GtkWidget *dlg, *vbox, *vbox2, *frame, *hbox,
 	      *alignment, *label, *button, *image;
     
     wd = g_new0 (WindowlistDialog, 1);
@@ -118,27 +118,22 @@ windowlist_properties (XfcePanelPlugin *plugin,
     
     xfce_panel_plugin_block_menu (wd->wl->plugin);
     
-    dialog = gtk_dialog_new_with_buttons (_("Properties"), 
+    dlg = xfce_titled_dialog_new_with_buttons (_("Window List"),
                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-                GTK_DIALOG_DESTROY_WITH_PARENT |
-                GTK_DIALOG_NO_SEPARATOR,
+                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
-    gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-    gtk_container_set_border_width (GTK_CONTAINER (dialog), 2);
-    gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PROPERTIES);
+
+    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
     
-    header = xfce_create_header (NULL, _("Window List"));
-    gtk_widget_set_size_request (GTK_BIN (header)->child, -1, 32);
-    gtk_container_set_border_width (GTK_CONTAINER (header), BORDER - 2);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), header,
-			FALSE, TRUE, 0);
+    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), vbox,
+    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox,
                         TRUE, TRUE, 0);
-			
+
     /* Urgency help */
     hbox = gtk_hbox_new (FALSE, 6);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
@@ -248,8 +243,8 @@ windowlist_properties (XfcePanelPlugin *plugin,
                       G_CALLBACK (windowlist_button_toggled), wd);
 
     /* Show Dialog */
-    g_signal_connect (dialog, "response", 
+    g_signal_connect (dlg, "response", 
                       G_CALLBACK (windowlist_properties_response), wd);
     
-    gtk_widget_show_all (dialog);
+    gtk_widget_show_all (dlg);
 }

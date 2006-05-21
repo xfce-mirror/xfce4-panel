@@ -1294,7 +1294,7 @@ void
 launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
 {
     LauncherDialog *ld;
-    GtkWidget *header, *vbox, *hbox;
+    GtkWidget *vbox, *hbox;
 
     ld = g_new0 (LauncherDialog, 1);
     
@@ -1304,26 +1304,19 @@ launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
     
     xfce_panel_plugin_block_menu (ld->plugin);
     
-    ld->dlg = gtk_dialog_new_with_buttons (_("Properties"), 
+    ld->dlg = xfce_titled_dialog_new_with_buttons (_("Program Launcher"),
                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-                GTK_DIALOG_DESTROY_WITH_PARENT |
-                GTK_DIALOG_NO_SEPARATOR,
+                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
-    
+
     g_object_set_data (G_OBJECT (plugin), "dialog", ld->dlg);
     g_object_set_data (G_OBJECT (plugin), "launcher-dialog", ld);
 
     gtk_window_set_position (GTK_WINDOW (ld->dlg), GTK_WIN_POS_CENTER);
+    gtk_window_set_icon_name (GTK_WINDOW (ld->dlg), "xfce4-settings");
     
     gtk_container_set_border_width (GTK_CONTAINER (ld->dlg), 2);
-    
-    header = xfce_create_header (NULL, _("Program Launcher"));
-    gtk_widget_set_size_request (GTK_BIN (header)->child, -1, 32);
-    gtk_container_set_border_width (GTK_CONTAINER (header), BORDER - 2);
-    gtk_widget_show (header);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (ld->dlg)->vbox), header,
-                        FALSE, TRUE, 0);
     
     launcher_dialog_add_explanation (GTK_BOX (GTK_DIALOG (ld->dlg)->vbox));
     

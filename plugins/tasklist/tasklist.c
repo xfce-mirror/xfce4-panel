@@ -377,33 +377,26 @@ tasklist_dialog_response (GtkWidget *dlg, int reponse,
 static void
 tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
 {
-    GtkWidget *dlg, *header, *mainvbox, *vbox, *frame, *cb, 
+    GtkWidget *dlg, *mainvbox, *vbox, *frame, *cb, 
               *hbox, *label, *spin;
 
     xfce_panel_plugin_block_menu (plugin);
     
-    dlg = gtk_dialog_new_with_buttons (_("Properties"), 
+    dlg = xfce_titled_dialog_new_with_buttons (_("Task List"),
                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-                GTK_DIALOG_DESTROY_WITH_PARENT |
-                GTK_DIALOG_NO_SEPARATOR,
+                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
-    
+
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
     
     g_signal_connect (dlg, "response", G_CALLBACK (tasklist_dialog_response),
                       tasklist);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-    
-    header = xfce_create_header (NULL, _("Task List"));
-    gtk_widget_set_size_request (GTK_BIN (header)->child, 200, 32);
-    gtk_container_set_border_width (GTK_CONTAINER (header), 6);
-    gtk_widget_show (header);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), header,
-                        FALSE, TRUE, 0);
     
     mainvbox = gtk_vbox_new (FALSE, 8);
     gtk_container_set_border_width (GTK_CONTAINER (mainvbox), 5);
