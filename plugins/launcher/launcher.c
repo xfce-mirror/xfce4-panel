@@ -813,11 +813,11 @@ launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
 static gboolean
 real_toggle_menu (LauncherPlugin *launcher)
 {
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), 
-                                                     TRUE);
-    
-    if (launcher->entries->len > 1)
+    if (launcher->menu)
     {
+        gtk_toggle_button_set_active (
+                GTK_TOGGLE_BUTTON (launcher->arrowbutton), TRUE);
+    
         xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (launcher->plugin), 
                                          GTK_MENU (launcher->menu));
 
