@@ -31,7 +31,7 @@
 #define MIN_ICON_SIZE              12 
 
 /* A bit of a hack: Don't use icons without xfce- default */
-#define NUM_CATEGORIES             (XFCE_N_BUILTIN_ICON_CATEGORIES - 4)
+#define NUM_CATEGORIES             (XFCE_N_BUILTIN_ICON_CATEGORIES - 3)
 
 typedef enum    _LauncherIconType  LauncherIconType;
 typedef struct  _LauncherIcon      LauncherIcon;

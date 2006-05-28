@@ -109,8 +109,10 @@ static const char *category_icons [] = {
     N_("Graphics"),
     N_("Printer"),
     N_("Productivity"),
+    N_("Office"),
     N_("Sound"),
-    N_("Terminal")
+    N_("Terminal"),
+    N_("Development")
 };
 
 /* DND */

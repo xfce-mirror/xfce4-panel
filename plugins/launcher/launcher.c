@@ -162,27 +162,6 @@ launcher_construct (XfcePanelPlugin *plugin)
  *                   Launcher Plugin Interface                          *
  * -------------------------------------------------------------------- */
 
-static const char *icon_categories[XFCE_N_BUILTIN_ICON_CATEGORIES][2] =
-{
-	{ "xfce-unknown",       "dialog-question" },
-	{ "xfce-edit",          "accessories-text-editor" },
-	{ "xfce-filemanager",   "system-file-manager" },
-	{ "xfce-utils",         "applications-accessories" },
-	{ "xfce-games",         "applications-games" },
-	{ "xfce-man",           "system-help" },
-	{ "xfce-multimedia",    "applications-multimedia" },
-	{ "xfce-internet",      "applications-internet" },
-	{ "xfce-graphics",      "applications-graphics" },
-	{ "xfce-printer",       "printer" },
-	{ "xfce-schedule",      "clock" },
-	{ "xfce-sound",         "audio-volume-medium" },
-	{ "xfce-terminal",      "utilities-terminal" },
-	{ "xfce-devel",         "applications-development" },
-	{ "xfce-settings",      "preferences-desktop" },
-	{ "xfce-system",        "applications-system" },
-	{ "xfce-wine",          "wine" }
-};
-
 static LauncherPlugin *open_launcher = NULL;
 
 
@@ -346,28 +325,12 @@ launcher_icon_load_pixbuf (GtkWidget *w, LauncherIcon * icon, int size)
     }
     else if (icon->type == LAUNCHER_ICON_TYPE_CATEGORY)
     {
-        /* first try name from icon nameing spec... */
-        pb = xfce_themed_icon_load (icon_categories[icon->icon.category][1],
-                                    size);
-        /* ...then try xfce name, if necessary */
-        if (!pb)
-        {
-            pb = 
-                xfce_themed_icon_load (icon_categories[icon->icon.category][0],
-                                       size);
-        }
+        pb = xfce_themed_icon_load_category (icon->icon.category, size);
     }
 
     if (!pb)
     {
-        /* first try name from icon nameing spec... */
-        pb = xfce_themed_icon_load (icon_categories[0][1], size);
-        
-        /* ...then try xfce name, if necessary */
-        if (!pb)
-        {
-            pb = xfce_themed_icon_load (icon_categories[0][0], size);
-        }
+        pb = xfce_themed_icon_load_category (XFCE_ICON_CATEGORY_UNKNOWN, size);
     }
 
     return pb;
