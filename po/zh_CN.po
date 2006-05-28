@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-06 04:20+0900\n"
+"POT-Creation-Date: 2006-05-28 17:45+0200\n"
 "PO-Revision-Date: 2006-04-20 21:45+0800\n"
 "Last-Translator: Jick Nan <jick.nan@gmail.com>\n"
 "Language-Team: Chinese/Simplified <i18n-translation@lists.linux.net.cn>\n"
@@ -32,8 +32,8 @@ msgstr "移除 \"%s\"？"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
 #: ../panel/panel-app.c:766 ../panel/panel-app.c:799
-#: ../plugins/launcher/launcher.c:412 ../plugins/launcher/launcher.c:438
-#: ../plugins/launcher/launcher.c:474
+#: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
+#: ../plugins/launcher/launcher.c:437
 msgid "Xfce Panel"
 msgstr "Xfce面板"
 
@@ -44,11 +44,6 @@ msgstr "当前项目将被从面板上移除，配置文件也将丢失。"
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:748
-#: ../plugins/actions/actions.c:383 ../plugins/clock/clock.c:408
-#: ../plugins/iconbox/iconbox.c:786 ../plugins/launcher/launcher-dialog.c:1307
-#: ../plugins/pager/pager.c:285 ../plugins/separator/separator.c:255
-#: ../plugins/systray/systray.c:378 ../plugins/tasklist/tasklist.c:385
-#: ../plugins/windowlist/windowlist-dialog.c:121
 msgid "Properties"
 msgstr "属性"
 
@@ -79,7 +74,7 @@ msgstr "自定义面板"
 msgid "Add Items"
 msgstr "添加项目"
 
-#: ../panel/panel.c:682 ../plugins/actions/actions.c:424
+#: ../panel/panel.c:682 ../plugins/actions/actions.c:417
 msgid "Quit"
 msgstr "退出"
 
@@ -90,11 +85,6 @@ msgstr "重新启动"
 #: ../panel/panel.c:706
 msgid "About the Xfce Panel"
 msgstr "关于Xfce面板"
-
-#: ../panel/panel-item-manager.c:363 ../panel/panel-item-manager.c:371
-#, c-format
-msgid "Could not open \"%s\" module"
-msgstr "无法打开 “%s ”模块。"
 
 #: ../panel/panel-app.c:241 ../panel/panel-app.c:736
 msgid "Exit Xfce Panel?"
@@ -172,141 +162,146 @@ msgstr ""
 " -a, --add       添加新项目\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:526
+#: ../panel/panel-dialogs.c:175
+#, c-format
+msgid "Could not open \"%s\" module"
+msgstr "无法打开 “%s ”模块。"
+
+#: ../panel/panel-dialogs.c:529
 msgid "Add Items to the Panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:556
+#: ../panel/panel-dialogs.c:559
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr "拖动列表上的项目至面板或通过拖动它们回到列表上而移除。"
 
-#: ../panel/panel-dialogs.c:569
+#: ../panel/panel-dialogs.c:572
 msgid "Available Items"
 msgstr "以存在项目"
 
-#: ../panel/panel-dialogs.c:786 ../panel/panel-dialogs.c:1010
+#: ../panel/panel-dialogs.c:789 ../panel/panel-dialogs.c:1013
 msgid "Normal Width"
 msgstr "普通宽度"
 
-#: ../panel/panel-dialogs.c:788 ../panel/panel-dialogs.c:1012
+#: ../panel/panel-dialogs.c:791 ../panel/panel-dialogs.c:1015
 msgid "Full Width"
 msgstr "全屏宽度"
 
-#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
+#: ../panel/panel-dialogs.c:797 ../panel/panel-dialogs.c:1021
 #, fuzzy
 msgid "Span Monitors"
 msgstr "跨显示器"
 
-#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1083
+#: ../panel/panel-dialogs.c:857 ../panel/panel-dialogs.c:1086
 msgid "Left"
 msgstr "左"
 
-#: ../panel/panel-dialogs.c:856 ../panel/panel-dialogs.c:1085
+#: ../panel/panel-dialogs.c:859 ../panel/panel-dialogs.c:1088
 msgid "Right"
 msgstr "右"
 
-#: ../panel/panel-dialogs.c:861 ../panel/panel-dialogs.c:1090
+#: ../panel/panel-dialogs.c:864 ../panel/panel-dialogs.c:1093
 msgid "Top"
 msgstr "顶部"
 
-#: ../panel/panel-dialogs.c:863 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1095
 msgid "Bottom"
 msgstr "底部"
 
 #. position
-#: ../panel/panel-dialogs.c:891
+#: ../panel/panel-dialogs.c:894
 msgid "Position"
 msgstr "位置"
 
-#: ../panel/panel-dialogs.c:905
+#: ../panel/panel-dialogs.c:908
 msgid "Fixed Position"
 msgstr "填充位置："
 
-#: ../panel/panel-dialogs.c:911
+#: ../panel/panel-dialogs.c:914
 msgid "Freely Moveable"
 msgstr "自由移动"
 
-#: ../panel/panel-dialogs.c:1026
+#: ../panel/panel-dialogs.c:1029
 msgid "Auto_hide"
 msgstr "自动隐藏(_h)："
 
-#: ../panel/panel-dialogs.c:1044
+#: ../panel/panel-dialogs.c:1047
 msgid "Orientation:"
 msgstr "面板方向："
 
-#: ../panel/panel-dialogs.c:1056
+#: ../panel/panel-dialogs.c:1059
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-dialogs.c:1058
+#: ../panel/panel-dialogs.c:1061
 msgid "Vertical"
 msgstr "竖直"
 
-#: ../panel/panel-dialogs.c:1067
+#: ../panel/panel-dialogs.c:1070
 msgid "Handle:"
 msgstr "处理："
 
-#: ../panel/panel-dialogs.c:1079
+#: ../panel/panel-dialogs.c:1082
 msgid "At both sides"
 msgstr "在两边"
 
-#: ../panel/panel-dialogs.c:1160
+#: ../panel/panel-dialogs.c:1163
 msgid "Select Monitor"
 msgstr "选择监视器"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1278 ../plugins/clock/clock.c:431
-#: ../plugins/windowlist/windowlist-dialog.c:193
+#: ../panel/panel-dialogs.c:1281 ../plugins/clock/clock.c:424
+#: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "外观"
 
 #. size
-#: ../panel/panel-dialogs.c:1289
+#: ../panel/panel-dialogs.c:1292
 msgid "Size (pixels):"
 msgstr "大小（象素）："
 
-#: ../panel/panel-dialogs.c:1312
+#: ../panel/panel-dialogs.c:1315
 msgid "Transparency (%):"
 msgstr "透明度 (%)"
 
-#: ../panel/panel-dialogs.c:1336
+#: ../panel/panel-dialogs.c:1339
 msgid "Make active panel opaque"
 msgstr "使活动面板不透明"
 
-#: ../panel/panel-dialogs.c:1375 ../panel/panel-dialogs.c:1411
-#: ../panel/panel-dialogs.c:1436
+#: ../panel/panel-dialogs.c:1378 ../panel/panel-dialogs.c:1414
+#: ../panel/panel-dialogs.c:1439
 #, c-format
 msgid "Panel %d"
 msgstr "面板%d"
 
-#: ../panel/panel-dialogs.c:1455
+#: ../panel/panel-dialogs.c:1458
 msgid "Remove Panel"
 msgstr "移除面板"
 
-#: ../panel/panel-dialogs.c:1468
+#: ../panel/panel-dialogs.c:1471
 msgid "New Panel"
 msgstr "新建面板"
 
-#: ../panel/panel-dialogs.c:1525
+#: ../panel/panel-dialogs.c:1528
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "面板管理器"
 
-#: ../plugins/actions/actions.c:399
+#: ../plugins/actions/actions.c:383
 msgid "Panel Actions"
 msgstr "面板动作"
 
-#: ../plugins/actions/actions.c:416
+#: ../plugins/actions/actions.c:409
 msgid "Select action type:"
 msgstr "选择动作类型："
 
-#: ../plugins/actions/actions.c:425
+#: ../plugins/actions/actions.c:418
 msgid "Lock screen"
 msgstr "锁住屏幕"
 
-#: ../plugins/actions/actions.c:426
+#: ../plugins/actions/actions.c:419
 msgid "Quit + Lock screen"
 msgstr "退出 + 锁住屏幕"
 
@@ -322,68 +317,68 @@ msgstr "退出 + 锁住屏幕"
 msgid "%A %d %B %Y"
 msgstr "%Y 年 %B 月 %d 日  %A"
 
-#: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:408 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "时钟"
 
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:446
+#: ../plugins/clock/clock.c:439
 msgid "Analog"
 msgstr "模拟式"
 
-#: ../plugins/clock/clock.c:447
+#: ../plugins/clock/clock.c:440
 msgid "Digital"
 msgstr "数字式"
 
-#: ../plugins/clock/clock.c:448
+#: ../plugins/clock/clock.c:441
 msgid "LED"
 msgstr "数字液晶显示"
 
-#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:407
+#: ../plugins/clock/clock.c:446 ../plugins/systray/systray.c:400
 msgid "Show _frame"
 msgstr "显示帧数(_f)"
 
-#: ../plugins/clock/clock.c:461
+#: ../plugins/clock/clock.c:454
 msgid "Clock Options"
 msgstr "时钟选项"
 
-#: ../plugins/clock/clock.c:471
+#: ../plugins/clock/clock.c:464
 msgid "Use 24-_hour clock"
 msgstr "使用24小时(_h)时钟显示"
 
-#: ../plugins/clock/clock.c:479
+#: ../plugins/clock/clock.c:472
 msgid "Show AM/PM"
 msgstr "显示AM/PM"
 
-#: ../plugins/clock/clock.c:487
+#: ../plugins/clock/clock.c:480
 msgid "Display seconds"
 msgstr "显示秒钟"
 
-#: ../plugins/iconbox/iconbox.c:802
+#: ../plugins/iconbox/iconbox.c:786
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "图标盒"
 
-#: ../plugins/iconbox/iconbox.c:816
+#: ../plugins/iconbox/iconbox.c:809
 msgid "Only show minimized applications"
 msgstr "仅显示最小化程序"
 
-#: ../plugins/launcher/launcher.c:410 ../plugins/launcher/launcher.c:472
+#: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "无法运行 \"%s\""
 
-#: ../plugins/launcher/launcher.c:435
+#: ../plugins/launcher/launcher.c:398
 #, c-format
 msgid "Error in command \"%s\""
 msgstr "命令 \"%s\" 出错"
 
-#: ../plugins/launcher/launcher.c:682 ../plugins/launcher/launcher.c:1285
-#: ../plugins/launcher/launcher-dialog.c:1142
+#: ../plugins/launcher/launcher.c:689 ../plugins/launcher/launcher.c:1309
+#: ../plugins/launcher/launcher-dialog.c:1144
 msgid "New Item"
 msgstr "新项目"
 
-#: ../plugins/launcher/launcher.c:740 ../plugins/launcher/launcher.c:1286
+#: ../plugins/launcher/launcher.c:747 ../plugins/launcher/launcher.c:1310
 msgid "This item has not yet been configured"
 msgstr "该项目没有被配置"
 
@@ -432,57 +427,66 @@ msgid "Productivity"
 msgstr "生产力"
 
 #: ../plugins/launcher/launcher-dialog.c:112
+msgid "Office"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:113
 msgid "Sound"
 msgstr "声音"
 
-#: ../plugins/launcher/launcher-dialog.c:113
+#: ../plugins/launcher/launcher-dialog.c:114
 msgid "Terminal"
 msgstr "终端"
 
-#: ../plugins/launcher/launcher-dialog.c:400
+#: ../plugins/launcher/launcher-dialog.c:115
+#, fuzzy
+msgid "Development"
+msgstr "开发者"
+
+#: ../plugins/launcher/launcher-dialog.c:402
 msgid "Select image file"
 msgstr "选择图形文件"
 
-#: ../plugins/launcher/launcher-dialog.c:446
+#: ../plugins/launcher/launcher-dialog.c:448
 msgid "Select command"
 msgstr "选择命令"
 
-#: ../plugins/launcher/launcher-dialog.c:469
+#: ../plugins/launcher/launcher-dialog.c:471
 msgid "Name"
 msgstr "名称"
 
-#: ../plugins/launcher/launcher-dialog.c:487
+#: ../plugins/launcher/launcher-dialog.c:489
 msgid "Description"
 msgstr "描述"
 
-#: ../plugins/launcher/launcher-dialog.c:542
+#: ../plugins/launcher/launcher-dialog.c:544
 msgid "Other..."
 msgstr "其它..."
 
-#: ../plugins/launcher/launcher-dialog.c:628
+#: ../plugins/launcher/launcher-dialog.c:630
 msgid "Command"
 msgstr "命令"
 
-#: ../plugins/launcher/launcher-dialog.c:664
+#: ../plugins/launcher/launcher-dialog.c:666
 msgid "Run in _terminal"
 msgstr "在终端中运行(_T)"
 
-#: ../plugins/launcher/launcher-dialog.c:682
+#: ../plugins/launcher/launcher-dialog.c:684
 msgid "Use _startup notification"
 msgstr "使用启动提示(_N)"
 
-#: ../plugins/launcher/launcher-dialog.c:1264
+#: ../plugins/launcher/launcher-dialog.c:1266
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr "列表中的第一个项目会显示在面板上。后加上的项目将出现在菜单中。"
 
-#: ../plugins/launcher/launcher-dialog.c:1321
+#: ../plugins/launcher/launcher-dialog.c:1309
 msgid "Program Launcher"
 msgstr "程序起动器"
 
-#: ../plugins/launcher/launcher-dialog.c:1403
-#: ../plugins/launcher/launcher-dialog.c:1504
+#: ../plugins/launcher/launcher-dialog.c:1398
+#: ../plugins/launcher/launcher-dialog.c:1499
 #, c-format
 msgid ""
 "Failed to run 0launch:\n"
@@ -491,39 +495,39 @@ msgid ""
 "For help using Zero Install, see http://0install.net"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1469
+#: ../plugins/launcher/launcher-dialog.c:1464
 msgid ""
 "The Zero Install GUI has finished, but the launcher dialog has disappeared "
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1827
+#: ../plugins/launcher/launcher-dialog.c:1822
 msgid "Select file"
 msgstr "选择文件"
 
-#: ../plugins/pager/pager.c:301 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:285 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "页面切换器"
 
-#: ../plugins/pager/pager.c:321
+#: ../plugins/pager/pager.c:314
 msgid "Number of rows:"
 msgstr "行数："
 
-#: ../plugins/pager/pager.c:325
+#: ../plugins/pager/pager.c:318
 msgid "Number of columns:"
 msgstr "列数："
 
-#: ../plugins/separator/separator.c:271
+#: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator or Spacing"
 msgstr "分隔符或间隔"
 
-#: ../plugins/separator/separator.c:284
+#: ../plugins/separator/separator.c:277
 msgid "_Draw Separator"
 msgstr "绘制(_D)分隔符"
 
-#: ../plugins/separator/separator.c:293
+#: ../plugins/separator/separator.c:286
 msgid "_Expand"
 msgstr "展开(_E)"
 
@@ -544,45 +548,45 @@ msgstr "已经有一个系统托盘在运行"
 msgid "Unable to register system tray: %s"
 msgstr "不能注册系统托盘：%s"
 
-#: ../plugins/systray/systray.c:394
+#: ../plugins/systray/systray.c:378
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "系统托盘"
 
-#: ../plugins/tasklist/tasklist.c:401 ../plugins/tasklist/tasklist.c:454
+#: ../plugins/tasklist/tasklist.c:385 ../plugins/tasklist/tasklist.c:447
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "任务列表"
 
-#: ../plugins/tasklist/tasklist.c:418
+#: ../plugins/tasklist/tasklist.c:411
 msgid "Size"
 msgstr "大小"
 
-#: ../plugins/tasklist/tasklist.c:426
+#: ../plugins/tasklist/tasklist.c:419
 msgid "Minimum Width:"
 msgstr "最小宽度："
 
-#: ../plugins/tasklist/tasklist.c:441
+#: ../plugins/tasklist/tasklist.c:434
 msgid "Use all available space"
 msgstr "使用所有可用空间"
 
-#: ../plugins/tasklist/tasklist.c:458
+#: ../plugins/tasklist/tasklist.c:451
 msgid "Show tasks from _all workspaces"
 msgstr "显示所有(_A)工具区的任务。"
 
-#: ../plugins/tasklist/tasklist.c:468
+#: ../plugins/tasklist/tasklist.c:461
 msgid "Show application _names"
 msgstr "显示程序名称(_N)"
 
-#: ../plugins/tasklist/tasklist.c:482
+#: ../plugins/tasklist/tasklist.c:475
 msgid "Never group tasks"
 msgstr "永不分组任务"
 
-#: ../plugins/tasklist/tasklist.c:485
+#: ../plugins/tasklist/tasklist.c:478
 msgid "Automatically group tasks"
 msgstr "自动分组任务"
 
-#: ../plugins/tasklist/tasklist.c:488
+#: ../plugins/tasklist/tasklist.c:481
 msgid "Always group tasks"
 msgstr "总是分组任务"
 
@@ -617,57 +621,57 @@ msgid "Remove Workspace '%s'"
 msgstr "移除工作区 '%s'"
 
 #. Windowlist Settings
-#: ../plugins/windowlist/windowlist-dialog.c:131
-#: ../plugins/windowlist/windowlist-dialog.c:215
+#: ../plugins/windowlist/windowlist-dialog.c:121
+#: ../plugins/windowlist/windowlist-dialog.c:210
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "窗口列表"
 
-#: ../plugins/windowlist/windowlist-dialog.c:153
+#: ../plugins/windowlist/windowlist-dialog.c:148
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:160
+#: ../plugins/windowlist/windowlist-dialog.c:155
 #, fuzzy
 msgid "Urgency Notification"
 msgstr "使用启动提示(_N)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:167
+#: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:176
+#: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:185
+#: ../plugins/windowlist/windowlist-dialog.c:180
 #, fuzzy
 msgid "For _all workspaces"
 msgstr "显示所有(_A)工具区的任务。"
 
-#: ../plugins/windowlist/windowlist-dialog.c:199
+#: ../plugins/windowlist/windowlist-dialog.c:194
 #, fuzzy
 msgid "_Icon button"
 msgstr "动作按钮"
 
-#: ../plugins/windowlist/windowlist-dialog.c:206
+#: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:224
+#: ../plugins/windowlist/windowlist-dialog.c:219
 #, fuzzy
 msgid "Show _windows from all workspaces"
 msgstr "显示所有(_A)工具区的任务。"
 
-#: ../plugins/windowlist/windowlist-dialog.c:233
+#: ../plugins/windowlist/windowlist-dialog.c:228
 #, fuzzy
 msgid "Show a_pplication icons"
 msgstr "显示程序名称(_N)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:242
+#: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
 msgstr ""
 
