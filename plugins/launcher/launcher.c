@@ -483,6 +483,35 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
 }
 
 static void
+launcher_entry_clipboard_cb (GdkScreen *screen, LauncherEntry *entry)
+{
+    char *paste = NULL;
+    GtkClipboard *clip;
+
+    clip = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
+    if (clip)
+        paste = gtk_clipboard_wait_for_text (clip);
+
+    if (paste != NULL)
+    {
+        GPtrArray *files;
+        char *tmp;
+
+        tmp = g_strescape (paste, NULL);
+        g_free (paste);
+        paste = tmp;
+
+        files = g_ptr_array_sized_new (1);
+        g_ptr_array_add (files, paste);
+
+        launcher_entry_drop_cb (screen, entry, files);
+
+        g_free (paste);
+        g_ptr_array_free (files, TRUE);
+    }
+}
+
+static void
 launcher_entry_data_received (GtkWidget *widget, GdkDragContext *context, 
                               gint x, gint y, GtkSelectionData *data, 
                               guint info, guint time, LauncherEntry *entry)
@@ -558,6 +587,21 @@ launcher_button_released (GtkWidget *mi, GdkEventButton *ev,
         return TRUE;
     }
     
+    if (ev->button == 2)
+    {
+        LauncherEntry *entry = 
+            g_object_get_data (G_OBJECT (mi), "launcher_entry");
+
+        if (entry != NULL)
+        {
+            launcher_entry_clipboard_cb (gtk_widget_get_screen (mi), entry);
+
+            gtk_menu_popdown (GTK_MENU (launcher->menu));
+            launcher_menu_deactivated(launcher->menu, launcher);
+        }
+        return TRUE;
+    }
+
     /* don't activate on right-click */
     if (ev->button == 3)
         return TRUE;
@@ -947,6 +991,20 @@ launcher_clicked (GtkWidget *w, LauncherPlugin *launcher)
                          g_ptr_array_index (launcher->entries, 0));
 }
 
+static gboolean
+launcher_released (GtkWidget *b, GdkEventButton *ev, LauncherPlugin *launcher)
+{
+    if (ev->button == 2)
+    {
+        LauncherEntry *entry = g_ptr_array_index (launcher->entries, 0);
+
+        launcher_entry_clipboard_cb (gtk_widget_get_screen (b), entry);
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
 
 /* Read Configuration Data */
 
@@ -1250,6 +1308,9 @@ launcher_new (XfcePanelPlugin *plugin)
     
     g_signal_connect (launcher->iconbutton, "clicked",
                       G_CALLBACK (launcher_clicked), launcher);
+    
+    g_signal_connect (launcher->iconbutton, "button-release-event",
+                      G_CALLBACK (launcher_released), launcher);
     
     g_signal_connect (launcher->arrowbutton, "button-press-event",
                       G_CALLBACK (launcher_toggle_menu), launcher);
