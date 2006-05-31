@@ -341,14 +341,15 @@ menulist_menu_item (NetkWindow *window,
         w = gdk_pixbuf_get_width (icon);
         h = gdk_pixbuf_get_height (icon);
 
-        if (G_LIKELY (w != size || h != size))
+        if (G_LIKELY (w > size || h > size))
         {
-            tmp = gdk_pixbuf_scale_simple (icon, size, size, GDK_INTERP_BILINEAR);
+            tmp = gdk_pixbuf_scale_simple (icon, size, size, 
+                                           GDK_INTERP_BILINEAR);
             icon = tmp;
         }
     
         text = menulist_utf8_string (label->str);
-        mi = gtk_image_menu_item_new_with_label (text);
+        mi = gtk_image_menu_item_new_with_label (text ? text : "?");
         g_free (text);
         
         img = gtk_image_new_from_pixbuf (icon);
@@ -362,14 +363,14 @@ menulist_menu_item (NetkWindow *window,
         char *text;
     
         text = menulist_utf8_string (label->str);
-        mi = gtk_menu_item_new_with_label (text);
+        mi = gtk_menu_item_new_with_label (text ? text : "?");
         g_free (text);
     }
     
     if (truncated)
     {
         char *text = menulist_utf8_string ((char *)window_name);
-    	gtk_tooltips_set_tip (wl->tooltips, mi, text, NULL);
+    	gtk_tooltips_set_tip (wl->tooltips, mi, text ? text : "?", NULL);
         g_free (text);
     }
 
