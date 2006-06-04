@@ -45,6 +45,9 @@ rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
 	@rm -f $(PACKAGE)-$(VERSION).tar.gz
 
+html:
+	make -C docs html
+
 DISTCHECK_CONFIGURE_FLAGS = --enable-gtk-doc
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

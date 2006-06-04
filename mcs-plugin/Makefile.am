@@ -29,8 +29,8 @@ libxfce4settings_la_LIBADD =						\
 desktop_in_files = xfce4-panel-manager.desktop.in
 desktop_files = $(desktop_in_files:.desktop.in=.desktop)
 	
-appsdir = $(datadir)/applications
-apps_DATA = xfce4-panel-manager.desktop
+desktopdir = $(datadir)/applications
+desktop_DATA = $(desktop_files)
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -38,5 +38,5 @@ EXTRA_DIST = 								\
 	$(desktop_in_files)
 
 DISTCLEANFILES =							\
-	$(desktop_DATA) $(desktop_files)
+	$(desktop_files)
 	
