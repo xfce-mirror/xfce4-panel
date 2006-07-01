@@ -315,6 +315,11 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
 			 gdk_atom_intern ("CARDINAL", FALSE), 32,
 			 GDK_PROP_MODE_REPLACE, (guchar *) & data, 12);
 
+    gdk_property_change (GTK_WIDGET (panel)->window,
+			 gdk_atom_intern ("_NET_WM_STRUT", FALSE),
+			 gdk_atom_intern ("CARDINAL", FALSE), 32,
+			 GDK_PROP_MODE_REPLACE, (guchar *) & data, 4);
+
     gdk_error_trap_pop ();
 }
 
