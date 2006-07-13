@@ -18,6 +18,7 @@ EXTRA_DIST = 								\
 	xfce4-panel.spec
 
 DISTCLEANFILES =							\
+	configure.ac							\
 	intltool-extract						\
 	intltool-merge							\
 	intltool-update

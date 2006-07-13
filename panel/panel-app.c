@@ -31,6 +31,7 @@
 #include <X11/Xlib.h>
 #include <gtk/gtk.h>
 #include <libxfcegui4/libxfcegui4.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 #include "panel-app.h"
 #include "panel-app-messages.h"
@@ -655,19 +656,22 @@ panel_app_queue_save (void)
 void 
 panel_app_customize (void)
 {
-    panel_manager_dialog (panel_app.panel_list);
+    if (xfce_allow_panel_customization())
+        panel_manager_dialog (panel_app.panel_list);
 }
 
 void 
 panel_app_customize_items (GtkWidget *active_item)
 {
-    add_items_dialog (panel_app.panel_list, active_item);
+    if (xfce_allow_panel_customization())
+        add_items_dialog (panel_app.panel_list, active_item);
 }
 
 void 
 panel_app_save (void)
 {
-    panel_config_save_panels (panel_app.panel_list);
+    if (xfce_allow_panel_customization())
+        panel_config_save_panels (panel_app.panel_list);
 }
 
 void 
@@ -703,6 +707,9 @@ panel_app_add_panel (void)
 {
     Panel *panel;
 
+    if (!xfce_allow_panel_customization())
+        return;
+
     panel = panel_new ();
 
     if (G_UNLIKELY (panel_app.panel_list == NULL))
@@ -728,6 +735,9 @@ panel_app_remove_panel (GtkWidget *panel)
     int response = GTK_RESPONSE_NONE, n;
     char *first;
 
+    if (xfce_allow_panel_customization())
+        return;
+        
     if (panel_app.panel_list->len == 1)
     {
         response = 

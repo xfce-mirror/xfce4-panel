@@ -23,6 +23,7 @@
 #include <config.h>
 #endif
 
+#include <libxfce4util/libxfce4util.h>
 #include <gtk/gtk.h>
 
 #include "xfce-panel-convenience.h"
@@ -64,3 +65,32 @@ GtkWidget *xfce_create_panel_toggle_button (void)
 
     return button;
 }
+
+/**
+ * xfce_allow_panel_customization:
+ *
+ * Check if the user is allowed to customize the panel. Uses the kiosk mode
+ * implementation from libxfce4util.
+ *
+ * Returns: %TRUE if the user is allowed to customize the panel, %FALSE
+ *          otherwise.
+ **/
+gboolean 
+xfce_allow_panel_customization (void )
+{
+    static gboolean allow_customization = FALSE;
+    static gboolean checked = FALSE;
+
+    if (G_UNLIKELY (!checked))
+    {
+        XfceKiosk *kiosk = NULL;
+
+        kiosk = xfce_kiosk_new ("xfce4-panel");
+        allow_customization = xfce_kiosk_query (kiosk, "CustomizePanel");
+        xfce_kiosk_free (kiosk);
+        checked = TRUE;
+    }
+
+    return allow_customization;
+}
+

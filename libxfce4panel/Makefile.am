@@ -54,6 +54,7 @@ xfce4_panelinclude_HEADERS =				\
 libxfce4panel_la_CFLAGS =				\
 	-I$(top_srcdir)					\
 	-DLOCALEDIR=\"$(localedir)\"			\
+	@LIBXFCE4UTIL_CFLAGS@				\
 	@LIBXFCEGUI4_CFLAGS@
 	
 libxfce4panel_la_LDFLAGS = 				\

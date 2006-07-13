@@ -30,9 +30,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/stat.h>
-#include <libxfce4util/libxfce4util.h>
 #include <gdk/gdkx.h>
 #include <gtk/gtkenums.h>
+
+#include <libxfce4util/libxfce4util.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 #include "panel-config.h"
 #include "panel-private.h"
@@ -94,14 +96,11 @@ create_panel_array_from_config (const char *file)
 GPtrArray *
 panel_config_create_panels (void)
 {
-    XfceKiosk *kiosk = NULL;
-    gboolean use_user_config = TRUE;
     char *file = NULL;
     GPtrArray *array = NULL;
+    gboolean use_user_config;
 
-    kiosk = xfce_kiosk_new ("xfce4-panel");
-    use_user_config = xfce_kiosk_query (kiosk, "CustomizePanel");
-    xfce_kiosk_free (kiosk);
+    use_user_config = xfce_allow_panel_customization ();
 
     if (G_UNLIKELY (!use_user_config))
     {
@@ -150,14 +149,11 @@ panel_config_create_panels (void)
 gboolean
 panel_config_save_panels (GPtrArray * panels)
 {
-    XfceKiosk *kiosk = NULL;
-    gboolean use_user_config = TRUE;
     char *file = NULL;
     gboolean failed = FALSE;
+    gboolean use_user_config;
 
-    kiosk = xfce_kiosk_new ("xfce4-panel");
-    use_user_config = xfce_kiosk_query (kiosk, "CustomizePanel");
-    xfce_kiosk_free (kiosk);
+    use_user_config = xfce_allow_panel_customization ();
 
     if (use_user_config)
     {

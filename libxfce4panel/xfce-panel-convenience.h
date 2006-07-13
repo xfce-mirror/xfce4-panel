@@ -22,11 +22,19 @@
 #ifndef _XFCE_PANEL_CONVENIENCE_H
 #define _XFCE_PANEL_CONVENIENCE_H
 
+#include <gtk/gtkwidget.h>
+
 G_BEGIN_DECLS
+
+/* widgets */
 
 GtkWidget *xfce_create_panel_button (void);
 
 GtkWidget *xfce_create_panel_toggle_button (void);
+
+/* configuration */
+
+gboolean xfce_allow_panel_customization (void );
 
 G_END_DECLS
 

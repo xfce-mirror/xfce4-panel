@@ -25,6 +25,7 @@ xfce4_panel_CFLAGS = 							\
 	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
 	@LIBX11_CFLAGS@							\
+	@LIBXFCE4UTIL_CFLAGS@						\
 	@LIBXFCEGUI4_CFLAGS@						\
 	-DDATADIR=\"$(datadir)\"					\
 	-DLIBDIR=\"$(libdir)/xfce4\"					\
@@ -43,6 +44,7 @@ xfce4_panel_LDADD =							\
 	../libxfce4panel/libxfce4panel.la				\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
+	@LIBXFCE4UTIL_LIBS@						\
 	@LIBXFCEGUI4_LIBS@
 
 xfce4_panel_DEPENDENCIES =						\
