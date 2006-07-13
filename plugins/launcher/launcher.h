@@ -30,8 +30,6 @@
 #define PANEL_ICON_SIZE            48
 #define MIN_ICON_SIZE              12 
 
-/* A bit of a hack: Don't use icons without xfce- default */
-
 typedef enum    _LauncherIconType  LauncherIconType;
 typedef struct  _LauncherIcon      LauncherIcon;
 typedef struct  _LauncherEntry     LauncherEntry;
