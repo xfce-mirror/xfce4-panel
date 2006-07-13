@@ -115,6 +115,8 @@ static const char *category_icons [] = {
     N_("Development")
 };
 
+#define NUM_CATEGORIES  G_N_ELEMENTS(category_icons)
+
 /* DND */
 static void entry_dialog_data_received (GtkWidget *w, 
                                         GdkDragContext *context, 
