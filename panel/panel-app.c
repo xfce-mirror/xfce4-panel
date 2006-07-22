@@ -735,7 +735,7 @@ panel_app_remove_panel (GtkWidget *panel)
     int response = GTK_RESPONSE_NONE, n;
     char *first;
 
-    if (xfce_allow_panel_customization())
+    if (!xfce_allow_panel_customization())
         return;
         
     if (panel_app.panel_list->len == 1)
