@@ -322,6 +322,8 @@ clock_construct (XfcePanelPlugin *plugin)
     gtk_widget_show (clock->clock);
     gtk_container_add (GTK_CONTAINER (clock->frame), clock->clock);
 
+    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
+
     clock_read_rc_file (plugin, clock);
     
     clock->tips = gtk_tooltips_new ();
