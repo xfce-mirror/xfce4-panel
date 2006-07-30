@@ -52,6 +52,7 @@ typedef struct
 
     int icon_size;
     guint only_hidden:1;
+    guint all_workspaces:1;
 }
 Iconbox;
 
@@ -111,8 +112,8 @@ update_visibility (Icon *icon, NetkWorkspace *optional_active_ws)
                 (netk_window_get_screen (icon->window));
     }
     
-    if (ws == netk_window_get_workspace (icon->window) ||
-        netk_window_is_sticky (icon->window))
+    if (icon->ib->all_workspaces || netk_window_is_sticky (icon->window) ||
+        ws == netk_window_get_workspace (icon->window))
     {
         gtk_widget_show (icon->button);
     }
@@ -594,6 +595,7 @@ iconbox_read_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
     char *file;
     XfceRc *rc;
     int only_hidden = 0;
+    int all_workspaces = 0;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
@@ -603,12 +605,14 @@ iconbox_read_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
         if (rc != NULL)
         {
             only_hidden = xfce_rc_read_int_entry (rc, "only_hidden", 0);
+            all_workspaces = xfce_rc_read_int_entry (rc, "all_workspaces", 0);
             
             xfce_rc_close (rc);
         }
     }
 
     iconbox->only_hidden = (only_hidden == 1);
+    iconbox->all_workspaces = (all_workspaces == 1);
 }
 
 static void
@@ -627,6 +631,7 @@ iconbox_write_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
         return;
     
     xfce_rc_write_int_entry (rc, "only_hidden", iconbox->only_hidden);
+    xfce_rc_write_int_entry (rc, "all_workspaces", iconbox->all_workspaces);
 
     xfce_rc_close (rc);
 }
@@ -766,6 +771,22 @@ only_hidden_toggled (GtkToggleButton *tb, Iconbox *ib)
 }
 
 static void
+all_workspaces_toggled (GtkToggleButton *tb, Iconbox *ib)
+{
+    GSList *l;
+    
+    ib->all_workspaces = gtk_toggle_button_get_active (tb);
+
+    for (l = ib->iconlist; l != NULL; l = l->next)
+    {
+        Icon *icon = l->data;        
+
+        update_visibility (icon, NULL);
+    }
+}
+
+
+static void
 iconbox_dialog_response (GtkWidget *dlg, int reponse, 
                          Iconbox *ib)
 {
@@ -813,7 +834,16 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
                                   iconbox->only_hidden);
     g_signal_connect (cb, "toggled", G_CALLBACK (only_hidden_toggled),
                       iconbox);
-  
+    
+    cb = gtk_check_button_new_with_mnemonic (
+                _("Show applications of all workspaces"));
+    gtk_widget_show (cb);
+    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
+                                  iconbox->all_workspaces);
+    g_signal_connect (cb, "toggled", G_CALLBACK (all_workspaces_toggled),
+                      iconbox);
+    
     gtk_widget_show (dlg);
 }
 

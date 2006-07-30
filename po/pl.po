@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-28 17:45+0200\n"
+"POT-Creation-Date: 2006-07-30 23:08+0200\n"
 "PO-Revision-Date: 2006-06-08 23:00+0200\n"
 "Last-Translator: Szymon Kałasz <szymon_maestro@gazeta.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -25,85 +25,84 @@ msgstr ""
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Obiekt \"%s\" został niespodziewanie usunięty."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:572
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:573
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Usunąć element %s?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
-#: ../panel/panel-app.c:766 ../panel/panel-app.c:799
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:576 ../panel/panel-app.c:744
+#: ../panel/panel-app.c:776 ../panel/panel-app.c:809
 #: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
 #: ../plugins/launcher/launcher.c:437
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:577
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:578
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "Obiekt zostanie usunięty wraz z konfiguracją"
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:748
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:752
 msgid "Properties"
 msgstr "Opcje"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:765
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:769
 msgid "About"
 msgstr "O obiekcie"
 
-#. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:783
 msgid "Move"
 msgstr "Przesuń"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:800
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:803
 msgid "Remove"
 msgstr "Usuń"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:820
 msgid "Add New Item"
 msgstr "Nowy element"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:832 ../panel/panel.c:659
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Dopasuj Panel"
 
-#: ../panel/panel.c:667
+#: ../panel/panel.c:670
 msgid "Add Items"
 msgstr "Dodaj elementy"
 
-#: ../panel/panel.c:682 ../plugins/actions/actions.c:417
+#: ../panel/panel.c:686 ../plugins/actions/actions.c:417
 msgid "Quit"
 msgstr "Wyjdź"
 
-#: ../panel/panel.c:692
+#: ../panel/panel.c:696
 msgid "Restart"
 msgstr "Restart"
 
-#: ../panel/panel.c:706
+#: ../panel/panel.c:710
 msgid "About the Xfce Panel"
 msgstr "O Panelu Xfce"
 
-#: ../panel/panel-app.c:241 ../panel/panel-app.c:736
+#: ../panel/panel-app.c:242 ../panel/panel-app.c:746
 msgid "Exit Xfce Panel?"
 msgstr "Panel Xfce"
 
-#: ../panel/panel-app.c:737
+#: ../panel/panel-app.c:747
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Nie możesz usunąć ostatniego panelu, zamknąć program?"
 
-#: ../panel/panel-app.c:764
+#: ../panel/panel-app.c:774
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Usunąć Panel \"%d\"?"
 
-#: ../panel/panel-app.c:768
+#: ../panel/panel-app.c:778
 msgid "The selected panel and all its items will be removed."
 msgstr "Panel wraz z elementami zostanie usunięty"
 
-#: ../panel/panel-app.c:807
+#: ../panel/panel-app.c:817
 msgid "Developer"
 msgstr "Twórca"
 
@@ -252,7 +251,7 @@ msgid "Select Monitor"
 msgstr "Wybierz Monitor"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1281 ../plugins/clock/clock.c:424
+#: ../panel/panel-dialogs.c:1281 ../plugins/clock/clock.c:426
 #: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "Wygląd"
@@ -317,51 +316,56 @@ msgstr "Wyjdź i Zablokuj ekran"
 msgid "%A %d %B %Y"
 msgstr "%A, %e %B %Y"
 
-#: ../plugins/clock/clock.c:408 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:410 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Zegar"
 
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:439
+#: ../plugins/clock/clock.c:441
 msgid "Analog"
 msgstr "Analogowy"
 
-#: ../plugins/clock/clock.c:440
+#: ../plugins/clock/clock.c:442
 msgid "Digital"
 msgstr "Cyfrowy"
 
-#: ../plugins/clock/clock.c:441
+#: ../plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:446 ../plugins/systray/systray.c:400
+#: ../plugins/clock/clock.c:448 ../plugins/systray/systray.c:400
 msgid "Show _frame"
 msgstr "Pokaż _ramkę"
 
-#: ../plugins/clock/clock.c:454
+#: ../plugins/clock/clock.c:456
 msgid "Clock Options"
 msgstr "Opcję Zegara"
 
-#: ../plugins/clock/clock.c:464
+#: ../plugins/clock/clock.c:466
 msgid "Use 24-_hour clock"
 msgstr "Użyj trybu 24-_godzinnego"
 
-#: ../plugins/clock/clock.c:472
+#: ../plugins/clock/clock.c:474
 msgid "Show AM/PM"
 msgstr "AM/PM"
 
-#: ../plugins/clock/clock.c:480
+#: ../plugins/clock/clock.c:482
 msgid "Display seconds"
 msgstr "Pokaż zegar przed ikonami"
 
-#: ../plugins/iconbox/iconbox.c:786
+#: ../plugins/iconbox/iconbox.c:807
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "Boks Ikon"
 
-#: ../plugins/iconbox/iconbox.c:809
+#: ../plugins/iconbox/iconbox.c:830
 msgid "Only show minimized applications"
 msgstr "Pokazuj tylko zminimalizowane aplikacje"
+
+#: ../plugins/iconbox/iconbox.c:839
+#, fuzzy
+msgid "Show applications of all workspaces"
+msgstr "Pokaż _okna ze wszystkich pulpitów"
 
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
@@ -374,7 +378,7 @@ msgid "Error in command \"%s\""
 msgstr "Błąd w poleceniu \"%s\""
 
 #: ../plugins/launcher/launcher.c:689 ../plugins/launcher/launcher.c:1309
-#: ../plugins/launcher/launcher-dialog.c:1144
+#: ../plugins/launcher/launcher-dialog.c:1146
 msgid "New Item"
 msgstr "Nowy element"
 
@@ -442,39 +446,39 @@ msgstr "Terminal"
 msgid "Development"
 msgstr "Rozwój"
 
-#: ../plugins/launcher/launcher-dialog.c:402
+#: ../plugins/launcher/launcher-dialog.c:404
 msgid "Select image file"
 msgstr "Wybierz plik graficzny"
 
-#: ../plugins/launcher/launcher-dialog.c:448
+#: ../plugins/launcher/launcher-dialog.c:450
 msgid "Select command"
 msgstr "Wybierz polecenie"
 
-#: ../plugins/launcher/launcher-dialog.c:471
+#: ../plugins/launcher/launcher-dialog.c:473
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../plugins/launcher/launcher-dialog.c:489
+#: ../plugins/launcher/launcher-dialog.c:491
 msgid "Description"
 msgstr "Opis"
 
-#: ../plugins/launcher/launcher-dialog.c:544
+#: ../plugins/launcher/launcher-dialog.c:546
 msgid "Other..."
 msgstr "Inne..."
 
-#: ../plugins/launcher/launcher-dialog.c:630
+#: ../plugins/launcher/launcher-dialog.c:632
 msgid "Command"
 msgstr "Polecenie"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:668
 msgid "Run in _terminal"
 msgstr "Uruchom w _terminalu"
 
-#: ../plugins/launcher/launcher-dialog.c:684
+#: ../plugins/launcher/launcher-dialog.c:686
 msgid "Use _startup notification"
 msgstr "Użyj p_owiadomienia o uruchamianiu"
 
-#: ../plugins/launcher/launcher-dialog.c:1266
+#: ../plugins/launcher/launcher-dialog.c:1268
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -482,12 +486,12 @@ msgstr ""
 "Pierwszy element na liście jest widoczny w panelu. Pozostałe elementy "
 "pojawią się w menu."
 
-#: ../plugins/launcher/launcher-dialog.c:1309
+#: ../plugins/launcher/launcher-dialog.c:1311
 msgid "Program Launcher"
 msgstr "Aktywator"
 
-#: ../plugins/launcher/launcher-dialog.c:1398
-#: ../plugins/launcher/launcher-dialog.c:1499
+#: ../plugins/launcher/launcher-dialog.c:1400
+#: ../plugins/launcher/launcher-dialog.c:1501
 #, c-format
 msgid ""
 "Failed to run 0launch:\n"
@@ -500,7 +504,7 @@ msgstr ""
 "\n"
 "Opis Zero Install na stronie http://0install.net"
 
-#: ../plugins/launcher/launcher-dialog.c:1464
+#: ../plugins/launcher/launcher-dialog.c:1466
 msgid ""
 "The Zero Install GUI has finished, but the launcher dialog has disappeared "
 "in the meantime. Not adding launcher (but any files downloaded have not been "
@@ -509,7 +513,7 @@ msgstr ""
 "GUI Zero Install zakończyło operacje lecz okno dialogowe zniknęło. Nie "
 "dodaję żadnych wyzwalaczy."
 
-#: ../plugins/launcher/launcher-dialog.c:1822
+#: ../plugins/launcher/launcher-dialog.c:1824
 msgid "Select file"
 msgstr "Wybierz plik"
 
@@ -607,22 +611,22 @@ msgstr "Czy chcesz usunąć pulpit %d?"
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Czy chcesz usunąć pulpit '%s'?"
 
-#: ../plugins/windowlist/windowlist.c:428
+#: ../plugins/windowlist/windowlist.c:429
 #, c-format
 msgid "Workspace %d"
 msgstr "Pulpit %d"
 
-#: ../plugins/windowlist/windowlist.c:530
-#: ../plugins/windowlist/windowlist.c:536
+#: ../plugins/windowlist/windowlist.c:531
+#: ../plugins/windowlist/windowlist.c:537
 msgid "Add workspace"
 msgstr "Dodaj pulpit"
 
-#: ../plugins/windowlist/windowlist.c:549
+#: ../plugins/windowlist/windowlist.c:550
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Usunąć Pulpit %d"
 
-#: ../plugins/windowlist/windowlist.c:550
+#: ../plugins/windowlist/windowlist.c:551
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Usuń pulpit '%s'"

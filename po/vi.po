@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-05-28 17:45+0200\n"
+"POT-Creation-Date: 2006-07-30 23:08+0200\n"
 "PO-Revision-Date: 2006-04-26 01:37+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi@vnlinux.org>\n"
 "Language-Team: Vietnamese <vi_VN@googlegroups.com>\n"
@@ -24,85 +24,84 @@ msgstr ""
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Một mục tình cờ bị xóa bỏ: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:572
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:573
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Gỡ bỏ \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
-#: ../panel/panel-app.c:766 ../panel/panel-app.c:799
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:576 ../panel/panel-app.c:744
+#: ../panel/panel-app.c:776 ../panel/panel-app.c:809
 #: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
 #: ../plugins/launcher/launcher.c:437
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:577
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:578
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "Mục này sẽ bị gỡ khỏi thanh panel và cấu hình của nó sẽ mất."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:748
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:752
 msgid "Properties"
 msgstr "Thuộc tính"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:765
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:769
 msgid "About"
 msgstr "Về"
 
-#. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:783
 msgid "Move"
 msgstr "Di chuyển"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:800
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:803
 msgid "Remove"
 msgstr "Xóa bỏ"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:820
 msgid "Add New Item"
 msgstr "Thêm mục mới"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:832 ../panel/panel.c:659
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Tùy chỉnh thanh Panel"
 
-#: ../panel/panel.c:667
+#: ../panel/panel.c:670
 msgid "Add Items"
 msgstr "Thêm mục"
 
-#: ../panel/panel.c:682 ../plugins/actions/actions.c:417
+#: ../panel/panel.c:686 ../plugins/actions/actions.c:417
 msgid "Quit"
 msgstr "Thoát"
 
-#: ../panel/panel.c:692
+#: ../panel/panel.c:696
 msgid "Restart"
 msgstr "Khởi động lại"
 
-#: ../panel/panel.c:706
+#: ../panel/panel.c:710
 msgid "About the Xfce Panel"
 msgstr "Về thanh Panel Xfce"
 
-#: ../panel/panel-app.c:241 ../panel/panel-app.c:736
+#: ../panel/panel-app.c:242 ../panel/panel-app.c:746
 msgid "Exit Xfce Panel?"
 msgstr "Thoát Panel Xfce?"
 
-#: ../panel/panel-app.c:737
+#: ../panel/panel-app.c:747
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Không thể gỡ bỏ thanh panel cuối cùng. Thoát chương trình?"
 
-#: ../panel/panel-app.c:764
+#: ../panel/panel-app.c:774
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Gỡ bỏ thanh panel \"%d\"?"
 
-#: ../panel/panel-app.c:768
+#: ../panel/panel-app.c:778
 msgid "The selected panel and all its items will be removed."
 msgstr "Thanh panel đã chọn và các mục của nó sẽ bị xóa."
 
-#: ../panel/panel-app.c:807
+#: ../panel/panel-app.c:817
 msgid "Developer"
 msgstr "Nhà phát triển"
 
@@ -252,7 +251,7 @@ msgid "Select Monitor"
 msgstr "Chọn màn hình"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1281 ../plugins/clock/clock.c:424
+#: ../panel/panel-dialogs.c:1281 ../plugins/clock/clock.c:426
 #: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "Diện mạo"
@@ -317,51 +316,56 @@ msgstr "Thoát + Khoá màn hình"
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:408 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:410 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Đồng hồ"
 
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:439
+#: ../plugins/clock/clock.c:441
 msgid "Analog"
 msgstr "Tương tự"
 
-#: ../plugins/clock/clock.c:440
+#: ../plugins/clock/clock.c:442
 msgid "Digital"
 msgstr "Số"
 
-#: ../plugins/clock/clock.c:441
+#: ../plugins/clock/clock.c:443
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:446 ../plugins/systray/systray.c:400
+#: ../plugins/clock/clock.c:448 ../plugins/systray/systray.c:400
 msgid "Show _frame"
 msgstr "Hiển thị _khung"
 
-#: ../plugins/clock/clock.c:454
+#: ../plugins/clock/clock.c:456
 msgid "Clock Options"
 msgstr "Tùy chọn đồng hồ"
 
-#: ../plugins/clock/clock.c:464
+#: ../plugins/clock/clock.c:466
 msgid "Use 24-_hour clock"
 msgstr "Dùng đồng hồ dạng _24 giờ"
 
-#: ../plugins/clock/clock.c:472
+#: ../plugins/clock/clock.c:474
 msgid "Show AM/PM"
 msgstr "Hiển thị AM/PM"
 
-#: ../plugins/clock/clock.c:480
+#: ../plugins/clock/clock.c:482
 msgid "Display seconds"
 msgstr "Hiển thị kim chỉ giây"
 
-#: ../plugins/iconbox/iconbox.c:786
+#: ../plugins/iconbox/iconbox.c:807
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "Hộp biểu tượng"
 
-#: ../plugins/iconbox/iconbox.c:809
+#: ../plugins/iconbox/iconbox.c:830
 msgid "Only show minimized applications"
 msgstr "Chỉ hiển thị các ứng dụng thu nhỏ"
+
+#: ../plugins/iconbox/iconbox.c:839
+#, fuzzy
+msgid "Show applications of all workspaces"
+msgstr "Hiển thị cửa sổ từ _mọi không gian làm việc"
 
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
@@ -374,7 +378,7 @@ msgid "Error in command \"%s\""
 msgstr "Lỗi trong câu lệnh \"%s\""
 
 #: ../plugins/launcher/launcher.c:689 ../plugins/launcher/launcher.c:1309
-#: ../plugins/launcher/launcher-dialog.c:1144
+#: ../plugins/launcher/launcher-dialog.c:1146
 msgid "New Item"
 msgstr "Mục mới"
 
@@ -443,39 +447,39 @@ msgstr "Trạm cuối"
 msgid "Development"
 msgstr "Nhà phát triển"
 
-#: ../plugins/launcher/launcher-dialog.c:402
+#: ../plugins/launcher/launcher-dialog.c:404
 msgid "Select image file"
 msgstr "Chọn tập tin hình ảnh"
 
-#: ../plugins/launcher/launcher-dialog.c:448
+#: ../plugins/launcher/launcher-dialog.c:450
 msgid "Select command"
 msgstr "Chọn lệnh"
 
-#: ../plugins/launcher/launcher-dialog.c:471
+#: ../plugins/launcher/launcher-dialog.c:473
 msgid "Name"
 msgstr "Tên"
 
-#: ../plugins/launcher/launcher-dialog.c:489
+#: ../plugins/launcher/launcher-dialog.c:491
 msgid "Description"
 msgstr "Mô tả"
 
-#: ../plugins/launcher/launcher-dialog.c:544
+#: ../plugins/launcher/launcher-dialog.c:546
 msgid "Other..."
 msgstr "Khác..."
 
-#: ../plugins/launcher/launcher-dialog.c:630
+#: ../plugins/launcher/launcher-dialog.c:632
 msgid "Command"
 msgstr "Câu lệnh"
 
-#: ../plugins/launcher/launcher-dialog.c:666
+#: ../plugins/launcher/launcher-dialog.c:668
 msgid "Run in _terminal"
 msgstr "Chạy ở _trạm cuối"
 
-#: ../plugins/launcher/launcher-dialog.c:684
+#: ../plugins/launcher/launcher-dialog.c:686
 msgid "Use _startup notification"
 msgstr "Dùng thô_ng báo khởi động"
 
-#: ../plugins/launcher/launcher-dialog.c:1266
+#: ../plugins/launcher/launcher-dialog.c:1268
 msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
@@ -483,12 +487,12 @@ msgstr ""
 "Mục đầu tiên trong danh sách hiển thị trong panel. Các mục khác sẽ nằm trong "
 "một thực đơn."
 
-#: ../plugins/launcher/launcher-dialog.c:1309
+#: ../plugins/launcher/launcher-dialog.c:1311
 msgid "Program Launcher"
 msgstr "Trình chạy chương trình"
 
-#: ../plugins/launcher/launcher-dialog.c:1398
-#: ../plugins/launcher/launcher-dialog.c:1499
+#: ../plugins/launcher/launcher-dialog.c:1400
+#: ../plugins/launcher/launcher-dialog.c:1501
 #, c-format
 msgid ""
 "Failed to run 0launch:\n"
@@ -501,7 +505,7 @@ msgstr ""
 "\n"
 "Xem hướng dẫn sử dụng Cài đặt Zero trên http://0install.net"
 
-#: ../plugins/launcher/launcher-dialog.c:1464
+#: ../plugins/launcher/launcher-dialog.c:1466
 msgid ""
 "The Zero Install GUI has finished, but the launcher dialog has disappeared "
 "in the meantime. Not adding launcher (but any files downloaded have not been "
@@ -511,7 +515,7 @@ msgstr ""
 "biến mất trong lúc đó. Không thêm trình chạy (nhưng không làm mất các tập "
 "tin đã tải xuống)."
 
-#: ../plugins/launcher/launcher-dialog.c:1822
+#: ../plugins/launcher/launcher-dialog.c:1824
 msgid "Select file"
 msgstr "Chọn tập tin"
 
@@ -609,22 +613,22 @@ msgstr "Bạn có chắc muốn xóa không gian '%d'?"
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Bạn có chắc muốn xóa không gian '%s'?"
 
-#: ../plugins/windowlist/windowlist.c:428
+#: ../plugins/windowlist/windowlist.c:429
 #, c-format
 msgid "Workspace %d"
 msgstr "Không gian %d"
 
-#: ../plugins/windowlist/windowlist.c:530
-#: ../plugins/windowlist/windowlist.c:536
+#: ../plugins/windowlist/windowlist.c:531
+#: ../plugins/windowlist/windowlist.c:537
 msgid "Add workspace"
 msgstr "Thêm không gian"
 
-#: ../plugins/windowlist/windowlist.c:549
+#: ../plugins/windowlist/windowlist.c:550
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Xóa không gian %d"
 
-#: ../plugins/windowlist/windowlist.c:550
+#: ../plugins/windowlist/windowlist.c:551
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Xóa không gian '%s'"
