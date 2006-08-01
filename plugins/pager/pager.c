@@ -39,7 +39,8 @@ typedef struct
     int ws_destroyed_id;
     int screen_changed_id;
 
-    int rows;
+    int rows:16;        /* limited size should be ok */
+    guint scrolling:1;
     
     GtkWidget *pager;
 }
@@ -119,6 +120,7 @@ pager_read_rc_file (XfcePanelPlugin *plugin, Pager *pager)
     char *file;
     XfceRc *rc;
     int rows = 1;
+    gboolean scrolling = TRUE;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
@@ -128,10 +130,12 @@ pager_read_rc_file (XfcePanelPlugin *plugin, Pager *pager)
         if (rc != NULL)
         {
             rows = xfce_rc_read_int_entry (rc, "rows", 1);
+	    scrolling = xfce_rc_read_bool_entry (rc, "scrolling", TRUE);
         }
     }
 
     pager->rows = rows;
+    pager->scrolling = scrolling;
 }
 
 static void
@@ -150,6 +154,8 @@ pager_write_rc_file (XfcePanelPlugin *plugin, Pager *pager)
         return;
     
     xfce_rc_write_int_entry (rc, "rows", pager->rows);
+    
+    xfce_rc_write_bool_entry (rc, "scrolling", pager->scrolling);
 
     xfce_rc_close (rc);
 }
@@ -229,6 +235,7 @@ pager_construct (XfcePanelPlugin *plugin)
     netk_pager_set_orientation (NETK_PAGER (pager->pager), 
                                 xfce_panel_plugin_get_orientation (plugin));
     netk_pager_set_n_rows (NETK_PAGER (pager->pager), pager->rows);
+    netk_pager_set_workspace_scrolling (NETK_PAGER (pager->pager), pager->scrolling);
     gtk_widget_show (pager->pager);
     gtk_container_add (GTK_CONTAINER (plugin), pager->pager);
     
@@ -265,6 +272,19 @@ rows_changed (GtkSpinButton * spin, Pager * pager)
 }
 
 static void
+workspace_scrolling_toggled (GtkWidget *button, Pager *pager)
+{
+    gboolean scrolling = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
+    
+    if (pager->scrolling != scrolling)
+    {
+	pager->scrolling = scrolling;
+	
+	netk_pager_set_workspace_scrolling (NETK_PAGER (pager->pager), scrolling);
+    }
+}
+
+static void
 pager_dialog_response (GtkWidget *dlg, int reponse, Pager *pager)
 {
     g_object_set_data (G_OBJECT (pager->plugin), "dialog", NULL);
@@ -277,7 +297,7 @@ pager_dialog_response (GtkWidget *dlg, int reponse, Pager *pager)
 static void
 pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
 {
-    GtkWidget *dlg, *vbox, *hbox, *label, *spin;
+    GtkWidget *dlg, *vbox, *hbox, *label, *spin, *scrolling;
     int max;
 
     xfce_panel_plugin_block_menu (plugin);
@@ -340,6 +360,14 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
         gtk_widget_show (label);
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     }
+    
+    scrolling = gtk_check_button_new_with_mnemonic (_("Switch workspaces using the mouse wheel"));
+    gtk_widget_show (scrolling);
+    gtk_box_pack_start (GTK_BOX (vbox), scrolling, FALSE, FALSE, 0);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scrolling), pager->scrolling);
+    
+    g_signal_connect (scrolling, "toggled",
+        G_CALLBACK (workspace_scrolling_toggled), pager);
   
     gtk_widget_show (dlg);
 }

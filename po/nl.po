@@ -7,13 +7,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-30 23:08+0200\n"
-"PO-Revision-Date: 2006-07-30 23:15+0200\n"
+"POT-Creation-Date: 2006-08-01 20:04+0200\n"
+"PO-Revision-Date: 2006-08-01 19:29+0200\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../config/launcher-7.rc.in.h:1
+msgid "Command Prompt"
+msgstr "Commando-regel"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr "X terminal emulator"
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr "Tekstbestanden bewerken"
+
+#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "Editor"
+
+#: ../config/launcher-9.rc.in.h:1
+msgid "File Manager"
+msgstr "Bestandsbeheer"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr "Bestanden en mappen beheren"
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr "Surfen op internet"
+
+#: ../config/launcher-10.rc.in.h:2
+msgid "Web Browser"
+msgstr "Web browser"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -389,10 +421,6 @@ msgstr "Dit item moet nog geconfigureerd worden"
 msgid "Default"
 msgstr "Standaard"
 
-#: ../plugins/launcher/launcher-dialog.c:102
-msgid "Editor"
-msgstr "Editor"
-
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
 msgstr "Bestandsbeheer"
@@ -517,17 +545,21 @@ msgstr ""
 msgid "Select file"
 msgstr "Bestand selecteren"
 
-#: ../plugins/pager/pager.c:285 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Pager"
 
-#: ../plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
 msgstr "Aantal rijen:"
 
-#: ../plugins/pager/pager.c:318
+#: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "Aantal kolommen:"
+
+#: ../plugins/pager/pager.c:364
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Bureaublad wisselen met muis-wiel."
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -750,4 +782,3 @@ msgstr "Deze plugin heeft geen doel"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 Paneel Manager"
-

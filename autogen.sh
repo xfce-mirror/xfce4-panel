@@ -34,6 +34,9 @@ sed -e "s/@LINGUAS@/${linguas}/g" \
     -e "s/@REVISION@/${revision}/g" \
     < "configure.ac.in" > "configure.ac"
 
-exec xdt-autogen $@
+xdt-autogen $@
 
+(test "clean" == "$1") && {
+  rm configure.ac
+} || true
 # vi:set ts=2 sw=2 et ai:

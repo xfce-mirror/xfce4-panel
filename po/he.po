@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-30 23:08+0200\n"
+"POT-Creation-Date: 2006-08-01 20:04+0200\n"
 "PO-Revision-Date: 2006-05-31 02:02+0300\n"
 "Last-Translator: Yuval Tanny <tanai@int.gov.il>\n"
 "Language-Team: Hebrew\n"
@@ -18,6 +18,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
+
+#: ../config/launcher-7.rc.in.h:1
+#, fuzzy
+msgid "Command Prompt"
+msgstr "פקודה"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "עורך"
+
+#: ../config/launcher-9.rc.in.h:1
+#, fuzzy
+msgid "File Manager"
+msgstr "מנהל הקבצים"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:2
+#, fuzzy
+msgid "Web Browser"
+msgstr "דפדפן העזרה"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -389,10 +424,6 @@ msgstr "פריט זה עדיין לא אופיין"
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: ../plugins/launcher/launcher-dialog.c:102
-msgid "Editor"
-msgstr "עורך"
-
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
 msgstr "מנהל הקבצים"
@@ -514,17 +545,21 @@ msgstr ""
 msgid "Select file"
 msgstr "בחר קובץ:"
 
-#: ../plugins/pager/pager.c:285 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "מחליף סביבות עבודה"
 
-#: ../plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
 msgstr "מספר שורות:"
 
-#: ../plugins/pager/pager.c:318
+#: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "מספר טורים:"
+
+#: ../plugins/pager/pager.c:364
+msgid "Switch workspaces using the mouse wheel"
+msgstr ""
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2

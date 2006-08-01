@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-30 23:08+0200\n"
+"POT-Creation-Date: 2006-08-01 20:04+0200\n"
 "PO-Revision-Date: 2005-09-29 20:25+0900\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian <translation-team-fa@lists.sourceforge.net>\n"
@@ -15,6 +15,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3\n"
+
+#: ../config/launcher-7.rc.in.h:1
+#, fuzzy
+msgid "Command Prompt"
+msgstr "فرمان:"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "ویرایشگر"
+
+#: ../config/launcher-9.rc.in.h:1
+#, fuzzy
+msgid "File Manager"
+msgstr "مدیریت پرونده"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:2
+#, fuzzy
+msgid "Web Browser"
+msgstr "مرورگر راهنما"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -401,10 +436,6 @@ msgstr "این آیتم هیچ گزینه‌های تنظیمی ندارد"
 msgid "Default"
 msgstr "پیش‌فرض"
 
-#: ../plugins/launcher/launcher-dialog.c:102
-msgid "Editor"
-msgstr "ویرایشگر"
-
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
 msgstr "مدیریت پرونده"
@@ -526,17 +557,21 @@ msgstr ""
 msgid "Select file"
 msgstr "انتخاب کردن پرونده"
 
-#: ../plugins/pager/pager.c:285 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "صفحه‌نما"
 
-#: ../plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
 msgstr "تعداد ردیف‌ها:"
 
-#: ../plugins/pager/pager.c:318
+#: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "تعداد ستون‌ها:"
+
+#: ../plugins/pager/pager.c:364
+msgid "Switch workspaces using the mouse wheel"
+msgstr ""
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2

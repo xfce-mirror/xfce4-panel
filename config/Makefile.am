@@ -10,5 +10,5 @@ conf_DATA = panels.xml	$(conf_files)
 
 EXTRA_DIST = panels.xml $(conf_in_files)
 
-DISTCLEANFILES = $(conf_files)
-
+distclean-local:	
+	rm -f *.rc

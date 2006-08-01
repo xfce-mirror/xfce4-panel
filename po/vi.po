@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-30 23:08+0200\n"
+"POT-Creation-Date: 2006-08-01 20:04+0200\n"
 "PO-Revision-Date: 2006-04-26 01:37+0400\n"
 "Last-Translator: Phan Vĩnh Thịnh <teppi@vnlinux.org>\n"
 "Language-Team: Vietnamese <vi_VN@googlegroups.com>\n"
@@ -17,6 +17,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10\n"
 "Plural-Forms: nplurals=1; nplural=0\n"
+
+#: ../config/launcher-7.rc.in.h:1
+#, fuzzy
+msgid "Command Prompt"
+msgstr "Câu lệnh"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "Trình biên tập"
+
+#: ../config/launcher-9.rc.in.h:1
+#, fuzzy
+msgid "File Manager"
+msgstr "Quản lí tập tin"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:2
+#, fuzzy
+msgid "Web Browser"
+msgstr "Trình duyệt giúp đỡ"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -390,10 +425,6 @@ msgstr "Mục này chưa được cấu hình"
 msgid "Default"
 msgstr "Mặc định"
 
-#: ../plugins/launcher/launcher-dialog.c:102
-msgid "Editor"
-msgstr "Trình biên tập"
-
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
 msgstr "Quản lí tập tin"
@@ -519,17 +550,21 @@ msgstr ""
 msgid "Select file"
 msgstr "Chọn tập tin"
 
-#: ../plugins/pager/pager.c:285 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Trình chuyển trang"
 
-#: ../plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
 msgstr "Số hàng:"
 
-#: ../plugins/pager/pager.c:318
+#: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "Số cột:"
+
+#: ../plugins/pager/pager.c:364
+msgid "Switch workspaces using the mouse wheel"
+msgstr ""
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2

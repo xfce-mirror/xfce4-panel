@@ -8,13 +8,48 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-30 23:08+0200\n"
+"POT-Creation-Date: 2006-08-01 20:04+0200\n"
 "PO-Revision-Date: 2006-05-30 21:14+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg2002@freemail.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../config/launcher-7.rc.in.h:1
+#, fuzzy
+msgid "Command Prompt"
+msgstr "Εντολή"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "Επεξεργαστής κειμένου"
+
+#: ../config/launcher-9.rc.in.h:1
+#, fuzzy
+msgid "File Manager"
+msgstr "Διαχείριση αρχείων"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:2
+#, fuzzy
+msgid "Web Browser"
+msgstr "Περιηγητής βοήθειας"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -392,10 +427,6 @@ msgstr "Αυτό το αντικείμενο δεν έχει ρυθμιστεί 
 msgid "Default"
 msgstr "Προκαθορισμένο"
 
-#: ../plugins/launcher/launcher-dialog.c:102
-msgid "Editor"
-msgstr "Επεξεργαστής κειμένου"
-
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
 msgstr "Διαχείριση αρχείων"
@@ -520,17 +551,21 @@ msgstr ""
 msgid "Select file"
 msgstr "Επιλογή αρχείου"
 
-#: ../plugins/pager/pager.c:285 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Ειδοποιητής"
 
-#: ../plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
 msgstr "Αριθμός γραμμών:"
 
-#: ../plugins/pager/pager.c:318
+#: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "Αριθμός στηλών:"
+
+#: ../plugins/pager/pager.c:364
+msgid "Switch workspaces using the mouse wheel"
+msgstr ""
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2

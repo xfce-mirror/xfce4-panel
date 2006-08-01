@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-07-30 23:08+0200\n"
+"POT-Creation-Date: 2006-08-01 20:04+0200\n"
 "PO-Revision-Date: 2005-09-29 20:31+0900\n"
 "Last-Translator: Norayr Chilingaryan <norik@freenet.am>\n"
 "Language-Team: Armenian <en@li.org>\n"
@@ -15,6 +15,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
+
+#: ../config/launcher-7.rc.in.h:1
+#, fuzzy
+msgid "Command Prompt"
+msgstr "Հրաման՝"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr ""
+
+#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "Խմբագրիչ"
+
+#: ../config/launcher-9.rc.in.h:1
+#, fuzzy
+msgid "File Manager"
+msgstr "Ֆայլերի կառավորում"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr ""
+
+#: ../config/launcher-10.rc.in.h:2
+#, fuzzy
+msgid "Web Browser"
+msgstr "Ձեռնարկի զննիչ"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -400,10 +435,6 @@ msgstr "Այս միավորը չունի կարգավորվող հատկությ
 msgid "Default"
 msgstr "Սկզբնական"
 
-#: ../plugins/launcher/launcher-dialog.c:102
-msgid "Editor"
-msgstr "Խմբագրիչ"
-
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
 msgstr "Ֆայլերի կառավորում"
@@ -525,18 +556,22 @@ msgstr ""
 msgid "Select file"
 msgstr "Ընտրել ֆայլ"
 
-#: ../plugins/pager/pager.c:285 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
 #, fuzzy
 msgid "Pager"
 msgstr "Մեծ"
 
-#: ../plugins/pager/pager.c:314
+#: ../plugins/pager/pager.c:334
 msgid "Number of rows:"
 msgstr "Շարքերի քանակը՝"
 
-#: ../plugins/pager/pager.c:318
+#: ../plugins/pager/pager.c:338
 msgid "Number of columns:"
 msgstr "Սյուներիի քանակը՝"
+
+#: ../plugins/pager/pager.c:364
+msgid "Switch workspaces using the mouse wheel"
+msgstr ""
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2

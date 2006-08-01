@@ -36,7 +36,13 @@ AC_PROG_CC()
 AC_PROG_INSTALL()
 AC_PROG_LN_S()
 AC_PROG_LIBTOOL()
+
 AC_PROG_INTLTOOL([0.31], [no-xml])
+
+dnl patch intltool-update to support *.rc.in config files
+AC_CONFIG_COMMANDS([intltool-update],
+	[(sed -e 's/^\("desktop.*".*\)/\1\n"rc(?:\\\\.in)+|"\./' intltool-update > intltool-update-tmp && 
+	  mv intltool-update-tmp intltool-update && chmod 755 intltool-update)])
 
 LIBXFCE4PANEL_VERINFO=libxfce4panel_verinfo()
 AC_SUBST([LIBXFCE4PANEL_VERINFO])
