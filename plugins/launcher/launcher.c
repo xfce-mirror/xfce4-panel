@@ -578,12 +578,6 @@ launcher_menu_item_activate (GtkWidget *mi, LauncherEntry *entry)
     launcher_entry_exec (gtk_widget_get_screen (mi), entry);
 }
 
-static void
-menu_detached (void)
-{
-    /* do nothing */
-}
-
 static gboolean
 launcher_menu_drag_leave_timeout (LauncherPlugin *launcher)
 {
@@ -615,28 +609,6 @@ launcher_menu_drag_leave (GtkWidget *w, GdkDragContext *drag_context,
 }
 
 static void
-launcher_create_menu (LauncherPlugin *launcher)
-{
-    launcher->menu = gtk_menu_new ();
-
-    g_signal_connect (launcher->menu, "button-release-event", 
-                      G_CALLBACK (launcher_button_released),
-                      launcher);
-    
-    g_signal_connect (launcher->menu, "deactivate", 
-                      G_CALLBACK (launcher_menu_deactivated), launcher);
-
-    gtk_menu_attach_to_widget (GTK_MENU (launcher->menu), 
-                               launcher->arrowbutton,
-                               (GtkMenuDetachFunc)menu_detached);
-
-    launcher_set_drag_dest (launcher->menu);
-    
-    g_signal_connect (launcher->menu, "drag-leave", 
-                      G_CALLBACK (launcher_menu_drag_leave), launcher);
-}
-
-static void
 launcher_destroy_menu (LauncherPlugin *launcher)
 {
     gtk_widget_destroy (launcher->menu);
@@ -645,14 +617,24 @@ launcher_destroy_menu (LauncherPlugin *launcher)
 }
 
 static gboolean
-load_menu_icon (GtkImageMenuItem *mi)
+load_menu_icons (LauncherPlugin *launcher)
 {
-    GtkWidget *img;
+    GtkWidget *img, *mi;
     GdkPixbuf *pb;
     LauncherEntry *entry;
+    int i;
+    GList *children, *li;
     
-    if ((entry = g_object_get_data (G_OBJECT (mi), "launcher_entry")) != NULL)
+    if (!launcher->menu)
+        return FALSE;
+
+    children = gtk_container_get_children (GTK_CONTAINER (launcher->menu));
+
+    for (li = children, i = 1; li != 0; li = li->next, ++i)
     {
+        entry = g_ptr_array_index (launcher->entries, i);
+        mi = li->data;
+
         pb = launcher_icon_load_pixbuf (GTK_WIDGET (mi), &entry->icon, 
                                         MENU_ICON_SIZE);
         img = gtk_image_new_from_pixbuf (pb);
@@ -660,6 +642,8 @@ load_menu_icon (GtkImageMenuItem *mi)
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
         g_object_unref (pb);
     }
+
+    g_list_free (children);
 
     return FALSE;
 }
@@ -678,8 +662,8 @@ launcher_recreate_menu (LauncherPlugin *launcher)
         return;
     }
     
-    launcher_create_menu (launcher);
-    
+    launcher->menu = gtk_menu_new ();
+
     for (i = launcher->entries->len - 1; i > 0; --i)
     {
         GtkWidget *mi;
@@ -692,7 +676,6 @@ launcher_recreate_menu (LauncherPlugin *launcher)
 
         /* delayed loading of icons */
         g_object_set_data (G_OBJECT (mi), "launcher_entry", entry);
-        g_idle_add ((GSourceFunc) load_menu_icon, mi);
         
         g_signal_connect (mi, "button-release-event", 
                           G_CALLBACK (launcher_button_released),
@@ -710,6 +693,23 @@ launcher_recreate_menu (LauncherPlugin *launcher)
 
         g_signal_connect (mi, "drag-leave", 
                           G_CALLBACK (launcher_menu_drag_leave), launcher);
+    }
+
+    g_signal_connect (launcher->menu, "button-release-event", 
+                      G_CALLBACK (launcher_button_released),
+                      launcher);
+    
+    g_signal_connect (launcher->menu, "deactivate", 
+                      G_CALLBACK (launcher_menu_deactivated), launcher);
+
+    launcher_set_drag_dest (launcher->menu);
+    
+    g_signal_connect (launcher->menu, "drag-leave", 
+                      G_CALLBACK (launcher_menu_drag_leave), launcher);
+    
+    if (launcher->entries->len > 1)
+    {
+        g_idle_add ((GSourceFunc) load_menu_icons, launcher);
     }
 }
 
@@ -1201,10 +1201,6 @@ plugin_icon_theme_changed (GtkWidget *w, gpointer ignored,
 
     launcher_update_panel_entry (launcher);
 
-    /* improve interactivity */
-    while (gtk_events_pending ())
-        gtk_main_iteration();
-    
     launcher_recreate_menu (launcher);
 }
 
