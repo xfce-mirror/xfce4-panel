@@ -72,6 +72,18 @@ typedef struct
 }
 Clock;
 
+typedef struct
+{
+    Clock *clock;
+    
+    GtkWidget *cb_mode;
+    GtkWidget *cb_frame;
+    GtkWidget *cb_military;
+    GtkWidget *cb_ampm;
+    GtkWidget *cb_secs;
+}
+ClockDialog;
+
 static void clock_properties_dialog (XfcePanelPlugin *plugin, 
                                      Clock *clock);
 
@@ -341,71 +353,95 @@ clock_construct (XfcePanelPlugin *plugin)
  * -------------------------------------------------------------------- */
 
 static void
-clock_show_frame_toggled (GtkToggleButton *cb, Clock *clock)
+clock_set_sensative (ClockDialog *cd)
 {
-    clock->show_frame = gtk_toggle_button_get_active (cb);
-
-    gtk_frame_set_shadow_type (GTK_FRAME (clock->frame), clock->show_frame ?
-                               GTK_SHADOW_IN : GTK_SHADOW_NONE);
+    if (cd->clock->mode == XFCE_CLOCK_ANALOG)
+    {
+	gtk_widget_set_sensitive (cd->cb_military, FALSE);
+	gtk_widget_set_sensitive (cd->cb_ampm, FALSE);
+    }
+    else
+    {
+	gtk_widget_set_sensitive (cd->cb_military, TRUE);
+	
+	if (cd->clock->military)
+	    gtk_widget_set_sensitive (cd->cb_ampm, FALSE);
+        else
+	    gtk_widget_set_sensitive (cd->cb_ampm, TRUE);
+    }
 }
 
 static void
-clock_military_toggled (GtkToggleButton *cb, Clock *clock)
+clock_button_toggled (GtkWidget *cb, ClockDialog *cd)
 {
-    clock->military = gtk_toggle_button_get_active (cb);
-    xfce_clock_show_military (XFCE_CLOCK (clock->clock), clock->military);
+    gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cb));
     
-    clock_update_size (clock, 
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (clock->plugin)));
+    if (cb == cd->cb_frame)
+    {
+	cd->clock->show_frame = active;
+	gtk_frame_set_shadow_type (GTK_FRAME (cd->clock->frame),
+	                           active ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
+    }
+    else if (cb == cd->cb_military)
+    {
+	cd->clock->military = active;
+	xfce_clock_show_military (XFCE_CLOCK (cd->clock->clock),
+	                          active);
+	
+	clock_set_sensative (cd);
+    }
+    else if (cb == cd->cb_ampm)
+    {
+	cd->clock->ampm = active;
+	xfce_clock_show_ampm (XFCE_CLOCK (cd->clock->clock),
+	                      active);
+    }
+    else if (cb == cd->cb_secs)
+    {
+	cd->clock->secs = active;
+	xfce_clock_show_secs (XFCE_CLOCK (cd->clock->clock),
+	                      active);
+    }
+    
+    clock_update_size (cd->clock, 
+            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (cd->clock->plugin)));
 }
 
 static void
-clock_ampm_toggled (GtkToggleButton *cb, Clock *clock)
+clock_mode_changed (GtkComboBox *cb, ClockDialog *cd)
 {
-    clock->ampm = gtk_toggle_button_get_active(cb);
-    xfce_clock_show_ampm (XFCE_CLOCK (clock->clock), clock->ampm);
+    cd->clock->mode = gtk_combo_box_get_active(cb);
+    xfce_clock_set_mode (XFCE_CLOCK (cd->clock->clock), cd->clock->mode);
     
-    clock_update_size (clock, 
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (clock->plugin)));
-}
-
-static void
-clock_secs_toggled (GtkToggleButton *cb, Clock *clock)
-{
-    clock->secs = gtk_toggle_button_get_active(cb);
-    xfce_clock_show_secs (XFCE_CLOCK (clock->clock), clock->secs);
+    clock_set_sensative (cd);
     
-    clock_update_size (clock, 
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (clock->plugin)));
-}
-
-static void
-clock_mode_changed (GtkComboBox *cb, Clock *clock)
-{
-    clock->mode = gtk_combo_box_get_active(cb);
-    xfce_clock_set_mode (XFCE_CLOCK (clock->clock), clock->mode);
-    
-    clock_update_size (clock, 
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (clock->plugin)));
+    clock_update_size (cd->clock, 
+            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (cd->clock->plugin)));
 }
 
 static void
 clock_dialog_response (GtkWidget *dlg, int reponse, 
-                       Clock *clock)
+                       ClockDialog *cd)
 {
-    g_object_set_data (G_OBJECT (clock->plugin), "dialog", NULL);
+    g_object_set_data (G_OBJECT (cd->clock->plugin), "dialog", NULL);
 
     gtk_widget_destroy (dlg);
-    xfce_panel_plugin_unblock_menu (clock->plugin);
-    clock_write_rc_file (clock->plugin, clock);
+    xfce_panel_plugin_unblock_menu (cd->clock->plugin);
+    clock_write_rc_file (cd->clock->plugin, cd->clock);
+    
+    g_free (cd);
 }
 
 static void
 clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
 {
     GtkWidget *dlg, *frame, *bin, *vbox, *cb;
+    ClockDialog *cd;
 
     xfce_panel_plugin_block_menu (plugin);
+    
+    cd = g_new0 (ClockDialog, 1);
+    cd->clock = clock;
     
     dlg = xfce_titled_dialog_new_with_buttons (_("Clock"),
                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
@@ -418,23 +454,17 @@ clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
     
-    g_signal_connect (dlg, "response", G_CALLBACK (clock_dialog_response),
-                      clock);
-
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
     frame = xfce_create_framebox (_("Appearance"), &bin);
     gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-    gtk_widget_show (frame);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), frame,
                         FALSE, FALSE, 0);
     
     vbox = gtk_vbox_new (FALSE, 8);
-    gtk_widget_show (vbox);
     gtk_container_add (GTK_CONTAINER (bin), vbox);
 
-    cb = gtk_combo_box_new_text ();
-    gtk_widget_show (cb);
+    cd->cb_mode = cb = gtk_combo_box_new_text ();
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
 
     /* Keep order in sync with XfceClockMode */
@@ -443,50 +473,49 @@ clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("LED"));
     gtk_combo_box_set_active (GTK_COMBO_BOX (cb), clock->mode);
     g_signal_connect (cb, "changed", 
-            G_CALLBACK (clock_mode_changed), clock);
+            G_CALLBACK (clock_mode_changed), cd);
 
-    cb = gtk_check_button_new_with_mnemonic (_("Show _frame"));
-    gtk_widget_show (cb);
+    cd->cb_frame = cb = gtk_check_button_new_with_mnemonic (_("Show _frame"));
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
             clock->show_frame);
-    g_signal_connect (cb, "toggled", G_CALLBACK (clock_show_frame_toggled), 
-                      clock);
+    g_signal_connect (cb, "toggled",
+            G_CALLBACK (clock_button_toggled), cd);
     
     frame = xfce_create_framebox (_("Clock Options"), &bin);
     gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-    gtk_widget_show (frame);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), frame,
                         FALSE, FALSE, 0);
     
     vbox = gtk_vbox_new (FALSE, 8);
-    gtk_widget_show (vbox);
     gtk_container_add (GTK_CONTAINER (bin), vbox);
 
-    cb = gtk_check_button_new_with_mnemonic (_("Use 24-_hour clock"));
-    gtk_widget_show (cb);
+    cd->cb_military = cb = gtk_check_button_new_with_mnemonic (_("Use 24-_hour clock"));
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
             clock->military);
-    g_signal_connect (cb, "toggled", G_CALLBACK (clock_military_toggled), 
-            clock);
-
-    cb = gtk_check_button_new_with_mnemonic (_("Show AM/PM"));
-    gtk_widget_show (cb);
+    g_signal_connect (cb, "toggled",
+            G_CALLBACK (clock_button_toggled), cd);
+    
+    cd->cb_ampm = cb = gtk_check_button_new_with_mnemonic (_("Show AM/PM"));
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
             clock->ampm);
-    g_signal_connect (cb, "toggled", G_CALLBACK (clock_ampm_toggled), 
-            clock);
+    g_signal_connect (cb, "toggled",
+            G_CALLBACK (clock_button_toggled), cd);
 
-    cb = gtk_check_button_new_with_mnemonic (_("Display seconds"));
-    gtk_widget_show (cb);
+    cd->cb_secs = cb = gtk_check_button_new_with_mnemonic (_("Display seconds"));
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
             clock->secs);
-    g_signal_connect (cb, "toggled", G_CALLBACK (clock_secs_toggled), 
-            clock);
+    g_signal_connect (cb, "toggled",
+            G_CALLBACK (clock_button_toggled), cd);
 
-    gtk_widget_show (dlg);
+    clock_set_sensative (cd);
+
+    g_signal_connect (dlg, "response",
+            G_CALLBACK (clock_dialog_response), cd);
+
+    gtk_widget_show_all (dlg);
 }
 
