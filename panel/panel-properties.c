@@ -1181,10 +1181,6 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
             priv->xoffset = priv->yoffset = 0;
         }
 
-        /* let changes take effect */
-        while (gtk_events_pending ())
-            gtk_main_iteration ();
-
         xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (panel),
                 (XfcePanelWindowMoveFunc)panel_move_function, panel);
 

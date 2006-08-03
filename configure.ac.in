@@ -5,9 +5,20 @@ dnl
 dnl 2005-2006 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
-dnl version info
-m4_define([xfce4_panel_version],[4.3.90.2])
+dnl library version info
 m4_define([libxfce4panel_verinfo], [2:0:1])
+
+dnl panel version info
+m4_define([xfce4_panel_version_major], [4])
+m4_define([xfce4_panel_version_minor], [3])
+m4_define([xfce4_panel_version_micro], [90])
+m4_define([xfce4_panel_version_nano],  [2])   dnl leave this empty to have no nano version
+m4_define([xfce4_panel_version_build], [@REVISION@])
+m4_define([xfce4_panel_version_tag],   [svn])
+
+m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_version_minor().xfce4_panel_version_micro()ifelse(xfce4_panel_version_nano(), [], [], [.xfce4_panel_version_nano()])ifelse(xfce4_panel_version_tag(), [svn], [xfce4_panel_version_tag()-xfce4_panel_version_build()], [xfce4_panel_version_tag()])])
+
+
 
 dnl init autoconf
 AC_COPYRIGHT([Copyright (c) 2002-2006

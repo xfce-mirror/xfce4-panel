@@ -253,6 +253,10 @@ check_signal_state (void)
 
     if (quit)
     {
+        if (panel_app.save_id)
+            g_source_remove (panel_app.save_id);
+        panel_app.save_id = 0;
+
         /* this is necessary, because the function is not only called from the
          * timeout, so just returning FALSE is not enough. */
         g_source_remove (panel_app.check_id);
@@ -607,7 +611,7 @@ panel_app_run (int argc, char **argv)
 
     /* Run Forrest, Run! */
     panel_app.check_id = 
-        g_timeout_add (250, (GSourceFunc) check_signal_state, NULL);
+        g_timeout_add (1000, (GSourceFunc) check_signal_state, NULL);
     panel_app.runstate = PANEL_RUN_STATE_NORMAL;
     TIMER_ELAPSED("start main loop");
     gtk_main ();
@@ -684,6 +688,7 @@ panel_app_restart (void)
 void 
 panel_app_quit (void)
 {
+    panel_app_save();
     panel_app.runstate = PANEL_RUN_STATE_QUIT;
     check_signal_state ();
 }

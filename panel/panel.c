@@ -256,6 +256,9 @@ panel_init (Panel * panel)
     gtk_widget_show (priv->itembar);
     gtk_container_add (GTK_CONTAINER (panel), priv->itembar);
 
+    /* don't allow the wm to close the panel window */
+    g_signal_connect (panel, "delete-event", G_CALLBACK (gtk_true), NULL);
+
     /* DND */
     g_signal_connect (priv->itembar, "drag-data-received", 
                       G_CALLBACK (_panel_drag_data_received), panel);
@@ -520,7 +523,7 @@ _panel_drag_begin (GtkWidget *widget, GdkDragContext *drag_context,
         plugin = priv->drag_widget;
 
         /* allow menu to close, in order to not mess up the snapshot of the
-         * plugin */
+         * plugin -- TODO: find a better way to do this */
         while (gtk_events_pending ())
             gtk_main_iteration ();
     }
@@ -763,7 +766,7 @@ panel_free_data (Panel *panel)
     {
         DBG (" + %d item(s) on the panel", 
              xfce_itembar_get_n_items (XFCE_ITEMBAR (priv->itembar)));
-        g_usleep (100000); /* 1/10 sec */
+        g_usleep (200000); /* 0.2 sec */
 
         while (gtk_events_pending ())
             gtk_main_iteration ();

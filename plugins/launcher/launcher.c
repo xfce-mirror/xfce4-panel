@@ -750,13 +750,6 @@ launcher_update_panel_entry (LauncherPlugin *launcher)
     gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
 }
 
-static gboolean
-update_panel_entry_idle (LauncherPlugin *launcher)
-{
-    launcher_update_panel_entry (launcher);
-    return FALSE;
-}
-
 static void
 launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
                         GtkWidget *b)
@@ -1044,7 +1037,7 @@ launcher_read_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
     
     xfce_rc_close (rc);
     
-    g_idle_add ((GSourceFunc)update_panel_entry_idle, launcher);
+    launcher_update_panel_entry (launcher);
     launcher_recreate_menu (launcher);
 }
 
@@ -1307,7 +1300,7 @@ launcher_new (XfcePanelPlugin *plugin)
 
         g_ptr_array_add (launcher->entries, entry);
 
-        g_idle_add ((GSourceFunc)update_panel_entry_idle, launcher);
+        launcher_update_panel_entry (launcher);
     }
     else if (launcher->entries->len > 1)
     {
