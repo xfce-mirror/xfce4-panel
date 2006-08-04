@@ -791,6 +791,8 @@ launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
             *y += widget->allocation.y - req.height
                 + widget->allocation.height;
             break;
+        default:
+            break;
     }
 
     screen = gtk_widget_get_screen (widget);

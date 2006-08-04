@@ -454,6 +454,10 @@ _item_event_received (XfceExternalPanelItem * item, GdkEventClient * ev)
                 break;
             case XFCE_PANEL_PLUGIN_FOCUS:
                 xfce_panel_item_focus_panel (XFCE_PANEL_ITEM (item));
+            case XFCE_PANEL_PLUGIN_SET_HIDDEN:
+                xfce_panel_item_set_panel_hidden (XFCE_PANEL_ITEM (item),
+                                                  ev->data.s[1]);
+                break;
             default:
                 DBG ("Unknown message: %d", ev->data.s[0]);
                 return FALSE;

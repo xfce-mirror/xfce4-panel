@@ -123,6 +123,9 @@ xfce_internal_panel_plugin_register_menu (XfcePanelPlugin * plugin,
 
 static void xfce_internal_panel_plugin_move (XfcePanelPlugin * plugin);
 
+static void 
+xfce_internal_panel_plugin_set_panel_hidden (XfcePanelPlugin * plugin,
+                                             gboolean hidden);
 
 /* properties */
 static void xfce_internal_panel_plugin_set_name (XfcePanelPlugin * plugin,
@@ -187,13 +190,14 @@ xfce_internal_panel_plugin_init_plugin_interface (gpointer g_iface,
 {
     XfcePanelPluginInterface *iface = g_iface;
 
-    iface->remove          = xfce_internal_panel_plugin_remove;
-    iface->set_expand      = xfce_internal_panel_plugin_set_expand;
-    iface->customize_panel = xfce_internal_panel_plugin_customize_panel;
-    iface->customize_items = xfce_internal_panel_plugin_customize_items;
-    iface->move            = xfce_internal_panel_plugin_move;
-    iface->register_menu   = xfce_internal_panel_plugin_register_menu;
-    iface->focus_panel     = xfce_internal_panel_plugin_focus_panel;
+    iface->remove           = xfce_internal_panel_plugin_remove;
+    iface->set_expand       = xfce_internal_panel_plugin_set_expand;
+    iface->customize_panel  = xfce_internal_panel_plugin_customize_panel;
+    iface->customize_items  = xfce_internal_panel_plugin_customize_items;
+    iface->move             = xfce_internal_panel_plugin_move;
+    iface->set_panel_hidden = xfce_internal_panel_plugin_set_panel_hidden;
+    iface->register_menu    = xfce_internal_panel_plugin_register_menu;
+    iface->focus_panel      = xfce_internal_panel_plugin_focus_panel;
 }
 
 static void
@@ -536,6 +540,13 @@ static void
 xfce_internal_panel_plugin_move (XfcePanelPlugin * plugin)
 {
     xfce_panel_item_move (XFCE_PANEL_ITEM (plugin));
+}
+
+static void 
+xfce_internal_panel_plugin_set_panel_hidden (XfcePanelPlugin * plugin,
+                                             gboolean hidden)
+{
+    xfce_panel_item_set_panel_hidden (XFCE_PANEL_ITEM (plugin), hidden);
 }
 
 static void 

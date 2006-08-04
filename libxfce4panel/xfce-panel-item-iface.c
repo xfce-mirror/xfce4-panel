@@ -36,6 +36,7 @@ enum
     CUSTOMIZE_PANEL,
     CUSTOMIZE_ITEMS,
     MOVE,
+    SET_HIDDEN,
     LAST_SIGNAL
 };
 
@@ -147,6 +148,22 @@ xfce_panel_item_base_init (gpointer g_class)
                            NULL, NULL, NULL,
                            g_cclosure_marshal_VOID__VOID, 
                            G_TYPE_NONE, 0, NULL);
+
+        /**
+         * XfcePanelItem::set-hidden
+         * @item   : #XfcePanelItem
+         * @hidden : %FALSE to unhide the panel, %TRUE to hide it
+         *
+         * The signal is emitted when a plugin requests the panel to unhide.
+         **/
+        xfce_panel_item_signals [SET_HIDDEN] =
+            g_signal_newv ("set-hidden",
+                           XFCE_TYPE_PANEL_ITEM,
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                                 G_SIGNAL_NO_HOOKS,
+                           NULL, NULL, NULL,
+                           g_cclosure_marshal_VOID__BOOLEAN, 
+                           G_TYPE_NONE, 1, ptypes);
 
         initialized = TRUE;
     }
@@ -296,6 +313,21 @@ xfce_panel_item_move (XfcePanelItem *item)
     g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (item, xfce_panel_item_signals[MOVE], 0, NULL);
+}
+
+/**
+ * xfce_panel_item_set_panel_hidden
+ * @item   : #XfcePanelItem
+ *
+ * Emits the "set-hidden" signal on the item. Should only be called by
+ * item implementations.
+ **/
+void 
+xfce_panel_item_set_panel_hidden (XfcePanelItem *item, gboolean hidden)
+{
+    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+
+    g_signal_emit (item, xfce_panel_item_signals[SET_HIDDEN], 0, hidden, NULL);
 }
 
 /* properties */

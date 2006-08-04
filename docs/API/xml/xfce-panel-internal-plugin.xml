@@ -3,18 +3,21 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="XfceInternalPanelPlugin">
 <refmeta>
-<refentrytitle>XfceInternalPanelPlugin</refentrytitle>
+<refentrytitle id="top_of_page">XfceInternalPanelPlugin</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>XfceInternalPanelPlugin</refname><refpurpose><para>
+<refname>XfceInternalPanelPlugin</refname>
+<refpurpose><para>
 Internal panel plugin.
 </para></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv><title>Synopsis</title>
+<refsynopsisdiv id="synopsis">
+<title id="synopsis.title">Synopsis</title>
 
 <synopsis>
 
@@ -31,25 +34,26 @@ Internal panel plugin.
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1>
-<title>Object Hierarchy</title>
+<refsect1 id="object_hierarchy">
+<title id="object_hierarchy.title">Object Hierarchy</title>
 <synopsis>
 
   <link linkend="GObject">GObject</link>
-   +----<link linkend="GtkObject">GtkObject</link>
-         +----<link linkend="GtkWidget">GtkWidget</link>
-               +----<link linkend="GtkContainer">GtkContainer</link>
-                     +----<link linkend="GtkBin">GtkBin</link>
-                           +----<link linkend="GtkEventBox">GtkEventBox</link>
-                                 +----XfceInternalPanelPlugin
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="GtkObject">GtkObject</link>
+               +----<link linkend="GtkWidget">GtkWidget</link>
+                     +----<link linkend="GtkContainer">GtkContainer</link>
+                           +----<link linkend="GtkBin">GtkBin</link>
+                                 +----<link linkend="GtkEventBox">GtkEventBox</link>
+                                       +----XfceInternalPanelPlugin
 </synopsis>
 
 </refsect1>
 
 
 
-<refsect1>
-<title>Implemented Interfaces</title>
+<refsect1 id="impl_interfaces">
+<title id="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 XfceInternalPanelPlugin implements
  <link linkend="AtkImplementorIface">AtkImplementorIface</link>,  <link linkend="XfcePanelPlugin">XfcePanelPlugin</link> and  <link linkend="XfcePanelItem">XfcePanelItem</link>.</para>
@@ -60,18 +64,18 @@ XfceInternalPanelPlugin implements
 
 
 
-<refsect1>
-<title>Description</title>
+<refsect1 id="desc">
+<title id="desc.title">Description</title>
 <para>
 Implements the <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
 for internal plugins (loadable modules).
 </para>
 </refsect1>
 
-<refsect1>
-<title>Details</title>
+<refsect1 id="details">
+<title id="details.title">Details</title>
 <refsect2>
-<title><anchor id="XfceInternalPanelPlugin-struct"/>XfceInternalPanelPlugin</title>
+<title><anchor id="XfceInternalPanelPlugin-struct" role="struct"/>XfceInternalPanelPlugin</title>
 <indexterm><primary>XfceInternalPanelPlugin</primary></indexterm><programlisting>typedef struct _XfceInternalPanelPlugin XfceInternalPanelPlugin;</programlisting>
 <para>
 The <link linkend="XfceInternalPanelPlugin-struct"><type>XfceInternalPanelPlugin-struct</type></link> struct contains private data only, and
@@ -79,7 +83,7 @@ should be accessed using the functions for the
 <link linkend="XfcePanelPlugin">XfcePanelPlugin Interface</link>.
 </para></refsect2>
 <refsect2>
-<title><anchor id="xfce-internal-panel-plugin-new"/>xfce_internal_panel_plugin_new ()</title>
+<title><anchor id="xfce-internal-panel-plugin-new" role="function"/>xfce_internal_panel_plugin_new ()</title>
 <indexterm><primary>xfce_internal_panel_plugin_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_internal_panel_plugin_new  (const <link linkend="char">char</link> *name,
                                              const <link linkend="char">char</link> *id,
                                              const <link linkend="char">char</link> *display_name,

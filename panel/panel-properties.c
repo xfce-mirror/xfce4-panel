@@ -529,8 +529,8 @@ _set_transparent (Panel *panel, gboolean transparent)
     }
 }
 
-static void
-_set_hidden (Panel *panel, gboolean hide)
+void
+panel_set_hidden (Panel *panel, gboolean hide)
 {
     PanelPrivate *priv;
     int w = 0, h = 0;
@@ -602,7 +602,7 @@ _hide_timeout (Panel *panel)
     priv->hide_timeout = 0;
 
     if (!priv->hidden && !priv->block_autohide)
-        _set_hidden (panel, TRUE);
+        panel_set_hidden (panel, TRUE);
     
     return FALSE;
 }
@@ -616,7 +616,7 @@ _unhide_timeout (Panel *panel)
     priv->unhide_timeout = 0;
 
     if (priv->hidden)
-        _set_hidden (panel, FALSE);
+        panel_set_hidden (panel, FALSE);
     
     return FALSE;
 }
@@ -854,10 +854,10 @@ void panel_set_autohide (Panel *panel, gboolean autohide)
     
     if (autohide)
     {
-        _set_hidden (panel, TRUE);
+        panel_set_hidden (panel, TRUE);
 
         /* If autohide is blocked unhide again.
-         * We use the first _set_hidden() call to give the user
+         * We use the first panel_set_hidden() call to give the user
          * some visual feedback. */
         if (priv->block_autohide)
         {
@@ -865,12 +865,12 @@ void panel_set_autohide (Panel *panel, gboolean autohide)
                 gtk_main_iteration ();
 
             g_usleep (500000); /* 1/2 sec */
-            _set_hidden (panel, FALSE);
+            panel_set_hidden (panel, FALSE);
         }
     }
     else if (priv->hidden)
     {
-        _set_hidden (panel, FALSE);
+        panel_set_hidden (panel, FALSE);
     }        
     else
     {
@@ -897,7 +897,7 @@ void panel_block_autohide (Panel *panel)
     priv->block_autohide++;
 
     if (priv->hidden)
-        _set_hidden (panel, FALSE);
+        panel_set_hidden (panel, FALSE);
 
     _set_transparent (panel, FALSE);
 }
@@ -927,7 +927,7 @@ void panel_unblock_autohide (Panel *panel)
             if (px < x || px > x + w || py < y || py > y + h)
             {
                 if (priv->autohide && !priv->hidden)
-                    _set_hidden (panel, TRUE);
+                    panel_set_hidden (panel, TRUE);
             
                 _set_transparent (panel, TRUE);
             }

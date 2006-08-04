@@ -118,6 +118,9 @@ char *xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
 void xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
                                      GtkWidget *widget);
 
+/* unhide panel */
+void xfce_panel_plugin_set_panel_hidden (XfcePanelPlugin *plugin,
+                                         gboolean hidden);
 
 G_END_DECLS
 

@@ -277,6 +277,8 @@ windowlist_position_menu (GtkMenu *menu,
             *x += widget->allocation.x + widget->allocation.width;
             *y += - req.height + widget->allocation.height;
             break;
+        default:
+            break;
     }
 
     screen = gtk_widget_get_screen (widget);
@@ -1129,6 +1131,8 @@ windowlist_set_size (XfcePanelPlugin *plugin,
 		    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
 					 ARROW_WIDTH, size);
 		    break;
+                default:
+                    break;
 	    }
 	    break;
     }

@@ -90,6 +90,8 @@ void xfce_panel_item_customize_items (XfcePanelItem *item);
 
 void xfce_panel_item_move (XfcePanelItem *item);
 
+void xfce_panel_item_set_panel_hidden (XfcePanelItem *item, gboolean hidden);
+
 
 /* vtable */
 

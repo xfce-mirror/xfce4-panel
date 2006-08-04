@@ -3,18 +3,21 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="XfceHVBox">
 <refmeta>
-<refentrytitle>XfceHVBox</refentrytitle>
+<refentrytitle id="top_of_page">XfceHVBox</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>XfceHVBox</refname><refpurpose><para>
+<refname>XfceHVBox</refname>
+<refpurpose><para>
 Container widget with configurable orienation.
 </para></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv><title>Synopsis</title>
+<refsynopsisdiv id="synopsis">
+<title id="synopsis.title">Synopsis</title>
 
 <synopsis>
 
@@ -30,24 +33,25 @@ Container widget with configurable orienation.
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1>
-<title>Object Hierarchy</title>
+<refsect1 id="object_hierarchy">
+<title id="object_hierarchy.title">Object Hierarchy</title>
 <synopsis>
 
   <link linkend="GObject">GObject</link>
-   +----<link linkend="GtkObject">GtkObject</link>
-         +----<link linkend="GtkWidget">GtkWidget</link>
-               +----<link linkend="GtkContainer">GtkContainer</link>
-                     +----<link linkend="GtkBox">GtkBox</link>
-                           +----XfceHVBox
+   +----<link linkend="GInitiallyUnowned">GInitiallyUnowned</link>
+         +----<link linkend="GtkObject">GtkObject</link>
+               +----<link linkend="GtkWidget">GtkWidget</link>
+                     +----<link linkend="GtkContainer">GtkContainer</link>
+                           +----<link linkend="GtkBox">GtkBox</link>
+                                 +----XfceHVBox
 </synopsis>
 
 </refsect1>
 
 
 
-<refsect1>
-<title>Implemented Interfaces</title>
+<refsect1 id="impl_interfaces">
+<title id="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 XfceHVBox implements
  <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
@@ -58,24 +62,24 @@ XfceHVBox implements
 
 
 
-<refsect1>
-<title>Description</title>
+<refsect1 id="desc">
+<title id="desc.title">Description</title>
 <para>
 <link linkend="XfceHVBox"><type>XfceHVBox</type></link> is a <link linkend="GtkBox"><type>GtkBox</type></link> widget that allows the user to change its orientation.
 It is in fact a combination of <link linkend="GtkHBox"><type>GtkHBox</type></link> and <link linkend="GtkVBox"><type>GtkVBox</type></link>.
 </para>
 </refsect1>
 
-<refsect1>
-<title>Details</title>
+<refsect1 id="details">
+<title id="details.title">Details</title>
 <refsect2>
-<title><anchor id="XfceHVBox-struct"/>XfceHVBox</title>
+<title><anchor id="XfceHVBox-struct" role="struct"/>XfceHVBox</title>
 <indexterm><primary>XfceHVBox</primary></indexterm><programlisting>typedef struct _XfceHVBox XfceHVBox;</programlisting>
 <para>
 
 </para></refsect2>
 <refsect2>
-<title><anchor id="xfce-hvbox-new"/>xfce_hvbox_new ()</title>
+<title><anchor id="xfce-hvbox-new" role="function"/>xfce_hvbox_new ()</title>
 <indexterm><primary>xfce_hvbox_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_hvbox_new                  (<link linkend="GtkOrientation">GtkOrientation</link> orientation,
                                              <link linkend="gboolean">gboolean</link> homogeneous,
                                              <link linkend="int">int</link> spacing);</programlisting>
@@ -97,7 +101,7 @@ Creates a new <link linkend="XfceHVBox"><type>XfceHVBox</type></link> container 
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-hvbox-set-orientation"/>xfce_hvbox_set_orientation ()</title>
+<title><anchor id="xfce-hvbox-set-orientation" role="function"/>xfce_hvbox_set_orientation ()</title>
 <indexterm><primary>xfce_hvbox_set_orientation</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_hvbox_set_orientation      (<link linkend="XfceHVBox">XfceHVBox</link> *hvbox,
                                              <link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
 <para>

@@ -1,6 +1,7 @@
 <SECTION>
 <FILE>xfce-panel-external-plugin</FILE>
 <TITLE>XfceExternalPanelPlugin</TITLE>
+XfceExternalPanelPlugin
 xfce_external_panel_plugin_new
 <SUBSECTION Standard>
 XFCE_EXTERNAL_PANEL_PLUGIN
@@ -15,6 +16,7 @@ XFCE_EXTERNAL_PANEL_PLUGIN_GET_CLASS
 <SECTION>
 <FILE>xfce-itembar</FILE>
 <TITLE>XfceItembar</TITLE>
+XfceItembar
 xfce_itembar_new
 xfce_itembar_set_orientation
 xfce_itembar_get_orientation
@@ -48,6 +50,7 @@ XFCE_PANEL_PLUGIN_GET_INTERFACE
 XfcePanelPlugin
 XfcePanelPluginInterface
 XfcePanelPluginFunc
+XfcePanelPluginCheck
 xfce_panel_plugin_get_name
 xfce_panel_plugin_get_id
 xfce_panel_plugin_get_display_name
@@ -66,6 +69,7 @@ xfce_panel_plugin_register_menu
 xfce_panel_plugin_lookup_rc_file
 xfce_panel_plugin_save_location
 xfce_panel_plugin_focus_widget
+xfce_panel_plugin_set_panel_hidden
 <SUBSECTION Standard>
 XFCE_PANEL_PLUGIN
 XFCE_IS_PANEL_PLUGIN
@@ -76,6 +80,7 @@ xfce_panel_plugin_get_type
 <SECTION>
 <FILE>xfce-arrow-button</FILE>
 <TITLE>XfceArrowButton</TITLE>
+XfceArrowButton
 xfce_arrow_button_new
 xfce_arrow_button_set_arrow_type
 xfce_arrow_button_get_arrow_type
@@ -95,6 +100,7 @@ XfceHandleStyle
 XfcePanelWindowMoveFunc
 XfcePanelWindowResizeFunc
 <TITLE>XfcePanelWindow</TITLE>
+XfcePanelWindow
 xfce_panel_window_new
 xfce_panel_window_set_orientation
 xfce_panel_window_get_orientation
@@ -119,6 +125,7 @@ XFCE_PANEL_WINDOW_GET_CLASS
 <SECTION>
 <FILE>xfce-panel-internal-plugin</FILE>
 <TITLE>XfceInternalPanelPlugin</TITLE>
+XfceInternalPanelPlugin
 xfce_internal_panel_plugin_new
 <SUBSECTION Standard>
 XFCE_INTERNAL_PANEL_PLUGIN
@@ -133,6 +140,7 @@ XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS
 <SECTION>
 <FILE>xfce-hvbox</FILE>
 <TITLE>XfceHVBox</TITLE>
+XfceHVBox
 xfce_hvbox_new
 xfce_hvbox_set_orientation
 <SUBSECTION Standard>
@@ -160,7 +168,9 @@ xfce_screen_position_is_bottom
 <SECTION>
 <FILE>xfce-panel-plugin</FILE>
 XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
 XFCE_PANEL_PLUGIN_REGISTER_INTERNAL
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK
 </SECTION>
 
 <SECTION>
@@ -175,5 +185,6 @@ XFCE_TYPE_SCREEN_POSITION
 <FILE>xfce-panel-convenience</FILE>
 xfce_create_panel_button
 xfce_create_panel_toggle_button
+xfce_allow_panel_customization
 </SECTION>
 

@@ -819,6 +819,21 @@ _item_start_move (GtkWidget *item, Panel *panel)
     panel_dnd_begin_drag (priv->itembar);
 }
 
+extern void panel_set_hidden (Panel *panel, gboolean hide);
+
+static void
+_item_set_panel_hidden (GtkWidget *item, gboolean hidden, Panel *panel)
+{
+    PanelPrivate *priv;
+
+    g_return_if_fail (PANEL_IS_PANEL (panel));
+    
+    priv = panel->priv;
+    
+    if (priv->autohide)
+        panel_set_hidden (panel, hidden);
+}
+
 static GtkWidget *
 panel_create_item (Panel *panel, const char *name, const char *id)
 {
@@ -849,6 +864,9 @@ panel_create_item (Panel *panel, const char *name, const char *id)
         
         g_signal_connect (item, "move", 
                           G_CALLBACK (_item_start_move), panel);
+        
+        g_signal_connect (item, "set-hidden", 
+                          G_CALLBACK (_item_set_panel_hidden), panel);
     }
 
     return item;

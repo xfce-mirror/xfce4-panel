@@ -109,6 +109,10 @@ xfce_external_panel_plugin_register_menu (XfcePanelPlugin * plugin,
 
 static void xfce_external_panel_plugin_focus_panel (XfcePanelPlugin * plugin);
 
+static void 
+xfce_external_panel_plugin_set_panel_hidden (XfcePanelPlugin * plugin,
+                                             gboolean hidden);
+
 
 /* properties */
 static void xfce_external_panel_plugin_set_name (XfceExternalPanelPlugin *
@@ -160,13 +164,14 @@ xfce_external_panel_plugin_interface_init (gpointer g_iface, gpointer data)
 {
     XfcePanelPluginInterface *iface = g_iface;
 
-    iface->remove          = xfce_external_panel_plugin_remove;
-    iface->set_expand      = xfce_external_panel_plugin_set_expand;
-    iface->customize_panel = xfce_external_panel_plugin_customize_panel;
-    iface->customize_items = xfce_external_panel_plugin_customize_items;
-    iface->move            = xfce_external_panel_plugin_move;
-    iface->register_menu   = xfce_external_panel_plugin_register_menu;
-    iface->focus_panel     = xfce_external_panel_plugin_focus_panel;
+    iface->remove           = xfce_external_panel_plugin_remove;
+    iface->set_expand       = xfce_external_panel_plugin_set_expand;
+    iface->customize_panel  = xfce_external_panel_plugin_customize_panel;
+    iface->customize_items  = xfce_external_panel_plugin_customize_items;
+    iface->move             = xfce_external_panel_plugin_move;
+    iface->register_menu    = xfce_external_panel_plugin_register_menu;
+    iface->focus_panel      = xfce_external_panel_plugin_focus_panel;
+    iface->set_panel_hidden = xfce_external_panel_plugin_set_panel_hidden;
 }
 
 static void
@@ -417,6 +422,19 @@ xfce_external_panel_plugin_focus_panel (XfcePanelPlugin * plugin)
     xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
                                     priv->socket_id,
                                     XFCE_PANEL_PLUGIN_FOCUS, 0);
+}
+
+static void 
+xfce_external_panel_plugin_set_panel_hidden (XfcePanelPlugin * plugin,
+                                             gboolean hidden)
+{
+    XfceExternalPanelPluginPrivate *priv;
+
+    priv = XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
+
+    xfce_panel_plugin_message_send (GTK_WIDGET (plugin)->window,
+                                    priv->socket_id,
+                                    XFCE_PANEL_PLUGIN_SET_HIDDEN, hidden);
 }
 
 /* item/plugin interaction */

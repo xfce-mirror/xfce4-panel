@@ -680,6 +680,19 @@ xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin, GtkWidget *widget)
     gtk_widget_grab_focus (widget);
 }
 
+/**
+ * xfce_panel_plugin_set_panel_hidden
+ * @plugin : an #XfcePanelPlugin
+ * @hidden : %FALSE to unhide, %TRUE to hide the panel
+ *
+ * Ask the panel to hide or unhide. This only has effect when autohide is
+ * enabled.
+ **/
+void xfce_panel_plugin_set_panel_hidden (XfcePanelPlugin *plugin, gboolean hidden)
+{
+    XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->set_panel_hidden (plugin, hidden);
+}
+
 /* menu */
 
 static void

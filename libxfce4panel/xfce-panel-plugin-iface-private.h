@@ -47,9 +47,11 @@ struct _XfcePanelPluginInterface
 
     void (*focus_panel)       (XfcePanelPlugin *plugin);
     
+    void (*set_panel_hidden)  (XfcePanelPlugin *plugin,
+                               gboolean hidden);
+    
     void (*_xfce_reserved1)   (void);
     void (*_xfce_reserved2)   (void);
-    void (*_xfce_reserved3)   (void);
 };
 
 /* menu */
