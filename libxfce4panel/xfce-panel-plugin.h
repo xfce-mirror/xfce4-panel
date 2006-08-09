@@ -24,6 +24,7 @@
 
 #include <stdlib.h>
 #include <libxfce4panel/xfce-panel-enums.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-plugin-iface.h>
 #include <libxfce4panel/xfce-panel-internal-plugin.h> 
 #include <libxfce4panel/xfce-panel-external-plugin.h>

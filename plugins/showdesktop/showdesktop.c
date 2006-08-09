@@ -91,7 +91,7 @@ showdesktop_free_data (XfcePanelPlugin * plugin, ShowDesktopData * sdd)
     
     sdd->netk_id = sdd->screen_id = sdd->style_id = 0;
     gtk_object_sink (GTK_OBJECT (sdd->tooltips));
-    g_free (sdd);
+    panel_slice_free (ShowDesktopData, sdd);
 }
 
 static void
@@ -171,7 +171,7 @@ showdesktop_style_set (XfcePanelPlugin *plugin, gpointer ignored,
 static void
 showdesktop_construct (XfcePanelPlugin * plugin)
 {
-    ShowDesktopData *sdd = g_new0 (ShowDesktopData, 1);
+    ShowDesktopData *sdd = panel_slice_new0 (ShowDesktopData);
 
     sdd->plugin = plugin;
 

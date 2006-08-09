@@ -34,6 +34,7 @@
 #include <gtk/gtkenums.h>
 
 #include <libxfce4util/libxfce4util.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 
 #include "panel-config.h"
@@ -64,7 +65,7 @@ create_fallback_panel_array (void)
     DBG ("No suitable panel configuration was found.");
     
     panel = panel_new ();
-    g_object_ref (panel);
+    g_object_ref (G_OBJECT (panel));
     gtk_object_sink (GTK_OBJECT (panel));
 
     panel_add_item (panel, PANEL_LAUNCHER);
@@ -527,7 +528,8 @@ config_parse_file (const char *filename)
      
     if (contents == NULL)
     {
-        contents = g_malloc ((size_t) sb.st_size);
+        contents = panel_slice_alloc ((size_t) sb.st_size);
+
         if (contents == NULL)
         {
             g_critical ("Unable to allocate %lu bytes of memory to load "
@@ -595,7 +597,7 @@ finished:
 #endif
 
     if (contents != NULL)
-        g_free (contents);
+        panel_slice_free1 ((size_t) sb.st_size, contents);
 
     if (close (fd) < 0)
     {

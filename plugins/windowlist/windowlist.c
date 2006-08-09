@@ -64,8 +64,8 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (windowlist_construct);
 /**
  * Common functions
  **/
-static gchar *
-menulist_utf8_string (gchar *string)
+static char *
+menulist_utf8_string (const char *string)
 {
     char *utf8 = NULL;
     if (!g_utf8_validate(string, -1, NULL))
@@ -358,7 +358,7 @@ menulist_menu_item (NetkWindow *window,
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 	
 	if (G_LIKELY (tmp))
-	    g_object_unref (tmp);
+	    g_object_unref (G_OBJECT (tmp));
     }
     else
     {
@@ -821,7 +821,7 @@ windowlist_create_button (Windowlist * wl)
 					 GTK_ICON_SIZE_MENU, NULL);
 	    wl->icon = xfce_scaled_image_new_from_pixbuf (pb);
 	    gtk_container_add (GTK_CONTAINER (wl->button), wl->icon);
-	    g_object_unref (pb);
+	    g_object_unref (G_OBJECT (pb));
 	
 	    wl->screen_callback_id =
 		g_signal_connect (wl->screen, "active-window-changed",
@@ -1058,7 +1058,7 @@ windowlist_new (XfcePanelPlugin * plugin)
     GdkScreen *screen;
     int screen_idx;
     
-    Windowlist *wl = g_new0 (Windowlist, 1);
+    Windowlist *wl = panel_slice_new0 (Windowlist);
     
     /* Some default values if everything goes wrong */
     wl->layout			= DEF_BUTTON_LAYOUT;
@@ -1079,7 +1079,7 @@ windowlist_new (XfcePanelPlugin * plugin)
     wl->plugin = plugin;
     
     wl->tooltips = gtk_tooltips_new ();
-    g_object_ref (wl->tooltips);
+    g_object_ref (G_OBJECT (wl->tooltips));
     gtk_object_sink (GTK_OBJECT (wl->tooltips));
 
     /* get the screen where the widget is, for dual screen */
@@ -1144,7 +1144,7 @@ static void
 windowlist_free (XfcePanelPlugin * plugin,
 		 Windowlist * wl)
 {
-    g_object_unref (wl->tooltips);
+    g_object_unref (G_OBJECT (wl->tooltips));
     
     if (wl->screen_callback_id)
 	g_signal_handler_disconnect (wl->screen, wl->screen_callback_id);
@@ -1169,7 +1169,7 @@ windowlist_free (XfcePanelPlugin * plugin,
     if (wl->button)
 	gtk_widget_destroy (wl->button);
     
-    g_free (wl);
+    panel_slice_free (Windowlist, wl);
 }
 
 static void

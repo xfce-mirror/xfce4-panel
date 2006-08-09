@@ -168,7 +168,7 @@ icon_update_image (Icon *icon)
             xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image), 
                                                scaled);
 
-            g_object_unref (scaled);
+            g_object_unref (G_OBJECT (scaled));
 
             icon->was_minimized = TRUE;
         }
@@ -254,12 +254,12 @@ icon_icon_changed (NetkWindow *window, gpointer data)
     Icon *icon = (Icon *)data;
     
     if (icon->pb)
-        g_object_unref (icon->pb);
+        g_object_unref (G_OBJECT (icon->pb));
 
     icon->pb = netk_window_get_icon (icon->window);
 
     if (icon->pb)
-        g_object_ref (icon->pb);
+        g_object_ref (G_OBJECT (icon->pb));
     
     icon_update_image (icon);
 }
@@ -278,15 +278,15 @@ icon_destroy (Icon *icon)
     }
     
     if (icon->pb)
-        g_object_unref (icon->pb);
+        g_object_unref (G_OBJECT (icon->pb));
     
-    g_free (icon);
+    panel_slice_free (Icon, icon);
 }
 
 static Icon *
 icon_new (NetkWindow *window, Iconbox *ib)
 {
-    Icon *icon = g_new0 (Icon, 1);
+    Icon *icon = panel_slice_new0 (Icon);
     int i = 0;
 
     icon->ib = ib;
@@ -307,7 +307,7 @@ icon_new (NetkWindow *window, Iconbox *ib)
     {
         xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image), 
                                            icon->pb);
-        g_object_ref (icon->pb);
+        g_object_ref (G_OBJECT (icon->pb));
     }
     
     icon->connections[i++] = 
@@ -481,9 +481,9 @@ cleanup_iconbox (Iconbox *ib)
 {
     cleanup_icons (ib);
 
-    g_object_unref (ib->icon_tooltips);
+    g_object_unref (G_OBJECT (ib->icon_tooltips));
     
-    g_free (ib);
+    panel_slice_free (Iconbox, ib);
 }
 
 
@@ -678,7 +678,7 @@ iconbox_screen_changed (GtkWidget *plugin, GdkScreen *screen, Iconbox *ib)
 static void
 iconbox_construct (XfcePanelPlugin *plugin)
 {
-    Iconbox *iconbox = g_new0 (Iconbox, 1);
+    Iconbox *iconbox = panel_slice_new0 (Iconbox);
 
     g_signal_connect (plugin, "orientation-changed", 
                       G_CALLBACK (iconbox_orientation_changed), iconbox);
@@ -739,7 +739,7 @@ iconbox_construct (XfcePanelPlugin *plugin)
                       G_CALLBACK (handle_expose), iconbox);
     
     iconbox->icon_tooltips = gtk_tooltips_new ();
-    g_object_ref (iconbox->icon_tooltips);
+    g_object_ref (G_OBJECT (iconbox->icon_tooltips));
     gtk_object_sink (GTK_OBJECT (iconbox->icon_tooltips));
 
     iconbox->screen_changed_id = 

@@ -31,6 +31,7 @@
 #include <X11/Xlib.h>
 #include <gtk/gtk.h>
 #include <libxfcegui4/libxfcegui4.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 
 #include "panel-app.h"
@@ -151,7 +152,7 @@ cleanup_panels (void)
     for (i = 0; i < panel_app.monitor_list->len; ++i)
     {
         XfceMonitor *xmon = g_ptr_array_index (panel_app.monitor_list, i);
-        g_free (xmon);
+        panel_slice_free (XfceMonitor, xmon);
     }
     g_ptr_array_free (panel_app.monitor_list, TRUE);
 }
@@ -337,7 +338,7 @@ create_monitor_list (void)
 
         for (j = 0; j < n_monitors; ++j)
         {
-            monitor = g_new0 (XfceMonitor, 1);
+            monitor = panel_slice_new0 (XfceMonitor);
 
             monitor->screen = screen;
             monitor->num = j;
@@ -358,7 +359,7 @@ create_monitor_list (void)
             h = monitor->geometry.height;
             
 #if TEST_MULTIPLE_MONITORS
-            monitor = g_new0 (XfceMonitor, 1);
+            monitor = panel_slice_new0 (XfceMonitor);
 
             monitor->screen = screen;
             monitor->num = j;
@@ -825,7 +826,7 @@ panel_app_about (GtkWidget *panel)
     dlg = xfce_about_dialog_new_with_values (NULL, info, pb);
     gtk_window_set_screen (GTK_WINDOW (dlg),
                            gtk_widget_get_screen (panel));
-    g_object_unref (pb);
+    g_object_unref (G_OBJECT (pb));
 
     gtk_widget_set_size_request (dlg, 400, 300);
 

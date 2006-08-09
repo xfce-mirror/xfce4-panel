@@ -30,6 +30,7 @@
 #include <libxfcegui4/libxfcegui4.h>
 
 #include <libxfce4panel/xfce-itembar.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-item-iface.h>
 
 #include "panel-properties.h"
@@ -481,7 +482,7 @@ item_dialog_response (GtkWidget *dlg, int response, PanelItemsDialog *pid)
         gtk_widget_destroy (dlg);
         
         g_signal_handler_disconnect (pid->panel, pid->panel_destroy_id);
-        g_free (pid);
+        panel_slice_free (PanelItemsDialog, pid);
 
         panel_app_save ();
     }
@@ -512,7 +513,7 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
         return;
     }
     
-    pid = g_new0 (PanelItemsDialog, 1);
+    pid = panel_slice_new0 (PanelItemsDialog);
 
     /* panels */
     pid->panels = panels;
@@ -1098,7 +1099,7 @@ add_position_options (GtkBox *box, PanelManagerDialog *pmd)
     g_signal_connect (pmd->handle_style, "changed", 
                       G_CALLBACK (handle_style_changed), pmd);
     
-    g_object_unref (sg);
+    g_object_unref (G_OBJECT (sg));
 }
 
 /* monitors */
@@ -1490,8 +1491,8 @@ panel_dialog_response (GtkWidget *dlg, int response, PanelManagerDialog *pmd)
         
         gtk_widget_destroy (dlg);
         
-        g_object_unref (pmd->tips);
-        g_free (pmd);
+        g_object_unref (G_OBJECT (pmd->tips));
+        panel_slice_free (PanelManagerDialog, pmd);
 
         panel_app_save ();
     }
@@ -1515,7 +1516,7 @@ panel_manager_dialog (GPtrArray *panels)
         return;
     }
     
-    pmd = g_new0 (PanelManagerDialog, 1);
+    pmd = panel_slice_new0 (PanelManagerDialog);
 
     /* panels */
     pmd->panels = panels;
@@ -1534,7 +1535,7 @@ panel_manager_dialog (GPtrArray *panels)
     gtk_window_set_icon_name (GTK_WINDOW (pmd->dlg), "xfce4-panel");
 
     pmd->tips = gtk_tooltips_new ();
-    g_object_ref (pmd->tips);
+    g_object_ref (G_OBJECT (pmd->tips));
     gtk_object_sink (GTK_OBJECT (pmd->tips));
 
     /* main container */

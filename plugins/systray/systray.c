@@ -224,7 +224,7 @@ systray_free_data (XfcePanelPlugin *plugin, Systray *systray)
         gtk_widget_destroy (dlg);
     
     systray_stop (systray);
-    g_free (systray);
+    panel_slice_free (Systray, systray);
 }
 
 static void
@@ -274,7 +274,7 @@ systray_write_rc_file (XfcePanelPlugin *plugin, Systray *systray)
 static void 
 systray_construct (XfcePanelPlugin *plugin)
 {
-    Systray *systray = g_new0 (Systray, 1);
+    Systray *systray = panel_slice_new0 (Systray);
 
     g_signal_connect (plugin, "orientation-changed", 
                       G_CALLBACK (systray_orientation_changed), systray);

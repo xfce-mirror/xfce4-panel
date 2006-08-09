@@ -208,7 +208,7 @@ update_entry_icon (LauncherDialog *ld)
         pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
                                         DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
     }
     else if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_NAME || 
              strcmp (text, ld->entry->icon.icon.name) != 0)
@@ -222,7 +222,7 @@ update_entry_icon (LauncherDialog *ld)
         pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
                                         DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
     }
 
     gtk_widget_queue_draw (ld->tree);
@@ -382,7 +382,7 @@ icon_menu_activated (GtkWidget *mi, LauncherDialog *ld)
         pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
                                         DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
 
         if (ld->entry == g_ptr_array_index (ld->launcher->entries, 0))
             set_panel_icon (ld);
@@ -415,7 +415,7 @@ icon_browse (GtkWidget *b, LauncherDialog *ld)
         pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
                                         DLG_ICON_SIZE);
         gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
 
         if (ld->entry == g_ptr_array_index (ld->launcher->entries, 0))
             set_panel_icon (ld);
@@ -536,7 +536,7 @@ create_icon_category_menu (LauncherDialog *ld)
         img = gtk_image_new_from_pixbuf (pb);
         gtk_widget_show (img);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
     }
 
     mi = gtk_separator_menu_item_new ();
@@ -718,7 +718,7 @@ launcher_dialog_update_entry_properties (LauncherDialog *ld)
     pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
                                     DLG_ICON_SIZE);
     gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-    g_object_unref (pb);
+    g_object_unref (G_OBJECT (pb));
 
     if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_CATEGORY)
         gtk_widget_show (ld->icon_file_align);
@@ -783,7 +783,7 @@ launcher_dialog_add_entry_properties (LauncherDialog *ld, GtkBox *box)
     
     add_entry_exec_options (ld, GTK_BOX (vbox), sg);
     
-    g_object_unref (sg);
+    g_object_unref (G_OBJECT (sg));
     
     launcher_dialog_update_entry_properties (ld);
     
@@ -877,7 +877,7 @@ render_icon (GtkTreeViewColumn * col, GtkCellRenderer * cell,
     {
         pb = launcher_icon_load_pixbuf (tree, &entry->icon, DLG_ICON_SIZE);
         g_object_set (cell, "pixbuf", pb, NULL);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
     }
     else
     {
@@ -1291,7 +1291,7 @@ launcher_dialog_response (GtkWidget *dlg, int response, LauncherDialog *ld)
 
     launcher_save (ld->plugin, ld->launcher);
     
-    g_free (ld);
+    panel_slice_free (LauncherDialog, ld);
 }
 
 void
@@ -1300,7 +1300,7 @@ launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
     LauncherDialog *ld;
     GtkWidget *vbox, *hbox;
 
-    ld = g_new0 (LauncherDialog, 1);
+    ld = panel_slice_new0 (LauncherDialog);
     
     ld->plugin = plugin;
     ld->launcher = launcher;
@@ -1469,9 +1469,9 @@ zero_install_launch_done (GPid pid, gint status, ZeroInstallProcess *info)
         }
     }
     
-    g_object_unref(info->plugin);
+    g_object_unref(G_OBJECT (info->plugin));
     g_free(info->interface_uri);
-    g_free(info);
+    panel_slice_free(ZeroInstallProcess, info);
 }
 
 /** The user wants to add a launcher for 'interface'. Confirm that it
@@ -1506,13 +1506,13 @@ start_entry_from_interface_file (LauncherDialog *ld,
     else
     {
         ZeroInstallProcess *info;
-        info = g_new0 (ZeroInstallProcess, 1);
+        info = panel_slice_new0 (ZeroInstallProcess);
 
         info->interface_uri = g_strdup(interface);
         info->plugin = G_OBJECT(ld->plugin);
         info->entry = entry;
 
-        g_object_ref (info->plugin);
+        g_object_ref (G_OBJECT (info->plugin));
         g_child_watch_add (pid,
                            (GChildWatchFunc) zero_install_launch_done,
                            info);
@@ -1612,7 +1612,7 @@ update_entry_from_desktop_file (LauncherEntry *e, const char *path)
             g_free (value);
         }
         
-        g_object_unref (dentry);
+        g_object_unref (G_OBJECT (dentry));
 
         return e;
     }
@@ -1709,7 +1709,7 @@ entry_dialog_data_received (GtkWidget *w, GdkDragContext *context,
             pb = launcher_icon_load_pixbuf (ld->icon_img, &e->icon, 
                                             DLG_ICON_SIZE);
             gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-            g_object_unref (pb);
+            g_object_unref (G_OBJECT (pb));
         }
     }
 
@@ -1797,7 +1797,7 @@ update_preview_cb (GtkFileChooser *chooser, gpointer data)
             }
 
             tmp = gdk_pixbuf_scale_simple (pb, w, h, GDK_INTERP_BILINEAR);
-            g_object_unref (pb);
+            g_object_unref (G_OBJECT (pb));
             pb = tmp;
         }
     }
@@ -1807,7 +1807,7 @@ update_preview_cb (GtkFileChooser *chooser, gpointer data)
     gtk_image_set_from_pixbuf(preview, pb);
 
     if (pb)
-        g_object_unref(pb);
+        g_object_unref(G_OBJECT (pb));
 }
 
 /* Any of the arguments may be NULL */

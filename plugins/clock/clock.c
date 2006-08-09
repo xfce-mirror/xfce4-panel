@@ -228,8 +228,8 @@ clock_free_data (XfcePanelPlugin *plugin, Clock *clock)
         gtk_widget_destroy (dlg);
     
     g_source_remove (clock->timeout_id);
-    g_object_unref (clock->tips);
-    g_free (clock);
+    g_object_unref (G_OBJECT (clock->tips));
+    panel_slice_free (Clock, clock);
 }
 
 static void
@@ -309,7 +309,7 @@ clock_write_rc_file (XfcePanelPlugin *plugin, Clock *clock)
 static void 
 clock_construct (XfcePanelPlugin *plugin)
 {
-    Clock *clock = g_new0 (Clock, 1);
+    Clock *clock = panel_slice_new0 (Clock);
 
     clock->plugin = plugin;
 
@@ -339,7 +339,7 @@ clock_construct (XfcePanelPlugin *plugin)
     clock_read_rc_file (plugin, clock);
     
     clock->tips = gtk_tooltips_new ();
-    g_object_ref (clock->tips);
+    g_object_ref (G_OBJECT (clock->tips));
     gtk_object_sink (GTK_OBJECT (clock->tips));
         
     clock_date_tooltip (clock);

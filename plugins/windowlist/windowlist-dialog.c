@@ -100,7 +100,7 @@ windowlist_properties_response (GtkWidget *dlg,
     
     xfce_panel_plugin_unblock_menu (wd->wl->plugin);
     
-    g_free (wd);
+    panel_slice_free (WindowlistDialog, wd);
 }
 
 void
@@ -112,7 +112,7 @@ windowlist_properties (XfcePanelPlugin *plugin,
     GtkWidget *dlg, *vbox, *vbox2, *frame, *hbox,
 	      *alignment, *label, *button, *image;
     
-    wd = g_new0 (WindowlistDialog, 1);
+    wd = panel_slice_new0 (WindowlistDialog);
     
     wd->wl = wl;
     

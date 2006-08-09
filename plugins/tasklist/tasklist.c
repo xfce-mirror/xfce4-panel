@@ -122,7 +122,7 @@ tasklist_free_data (XfcePanelPlugin *plugin, Tasklist *tasklist)
         gtk_widget_destroy (dlg);
     
     g_signal_handler_disconnect (plugin, tasklist->screen_changed_id);
-    g_free (tasklist);
+    panel_slice_free (Tasklist, tasklist);
 }
 
 static void
@@ -240,7 +240,7 @@ tasklist_construct (XfcePanelPlugin *plugin)
 {
     GdkScreen *screen;
     int screen_idx;
-    Tasklist *tasklist = g_new0 (Tasklist, 1);
+    Tasklist *tasklist = panel_slice_new0 (Tasklist);
 
     tasklist->plugin = plugin;
     

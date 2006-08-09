@@ -49,6 +49,7 @@ xfce4_panelinclude_HEADERS =				\
 	xfce-panel-plugin-iface.h			\
 	xfce-panel-internal-plugin.h			\
 	xfce-panel-external-plugin.h			\
+	xfce-panel-macros.h				\
 	xfce-panel-plugin.h
 							
 libxfce4panel_la_CFLAGS =				\

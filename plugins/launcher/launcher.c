@@ -339,7 +339,7 @@ launcher_icon_load_pixbuf (GtkWidget *w, LauncherIcon * icon, int size)
 LauncherEntry *
 launcher_entry_new (void)
 {
-    return g_new0 (LauncherEntry, 1);
+    return panel_slice_new0 (LauncherEntry);
 }
 
 void
@@ -352,7 +352,7 @@ launcher_entry_free (LauncherEntry *e)
     g_free (e->exec);
     g_free (e->real_exec);
 
-    g_free (e);
+    panel_slice_free (LauncherEntry, e);
 }
 
 static void
@@ -640,7 +640,7 @@ load_menu_icons (LauncherPlugin *launcher)
         img = gtk_image_new_from_pixbuf (pb);
         gtk_widget_show (img);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
     }
 
     g_list_free (children);
@@ -732,7 +732,7 @@ launcher_update_panel_entry (LauncherPlugin *launcher)
     
     pb = launcher_icon_load_pixbuf (launcher->image, &(entry->icon), size);
     gtk_image_set_from_pixbuf (GTK_IMAGE (launcher->image), pb);
-    g_object_unref (pb);
+    g_object_unref (G_OBJECT (pb));
     
     if (entry->name)
     {
@@ -1211,12 +1211,12 @@ launcher_new (XfcePanelPlugin *plugin)
     size = xfce_panel_plugin_get_size (plugin);
     screen_position = xfce_panel_plugin_get_screen_position (plugin);
     
-    launcher = g_new0 (LauncherPlugin, 1);
+    launcher = panel_slice_new0 (LauncherPlugin);
     
     launcher->plugin = GTK_WIDGET (plugin);
     
     launcher->tips = gtk_tooltips_new ();
-    g_object_ref (launcher->tips);
+    g_object_ref (G_OBJECT (launcher->tips));
     gtk_object_sink (GTK_OBJECT (launcher->tips));
     
     launcher->entries = g_ptr_array_new ();
@@ -1295,7 +1295,7 @@ launcher_new (XfcePanelPlugin *plugin)
 
     if (launcher->entries->len == 0)
     {
-        LauncherEntry *entry = entry = g_new0 (LauncherEntry, 1);
+        LauncherEntry *entry = entry = panel_slice_new0 (LauncherEntry);
 
         entry->name = g_strdup (_("New Item"));
         entry->comment = g_strdup (_("This item has not yet been configured"));
@@ -1322,7 +1322,7 @@ launcher_free (LauncherPlugin *launcher)
 {
     int i;
 
-    g_object_unref (launcher->tips);
+    g_object_unref (G_OBJECT (launcher->tips));
     
     for (i = 0; i < launcher->entries->len; ++i)
     {
@@ -1337,5 +1337,5 @@ launcher_free (LauncherPlugin *launcher)
         gtk_widget_destroy (launcher->menu);
     
     launcher->plugin = NULL;
-    g_free (launcher);
+    panel_slice_free (LauncherPlugin, launcher);
 }

@@ -31,6 +31,7 @@
 #include <libxfcegui4/libxfcegui4.h>
 
 #include <libxfce4panel/xfce-panel-item-iface.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-internal-plugin.h>
 #include <libxfce4panel/xfce-panel-external-item.h>
 #include <libxfce4panel/xfce-panel-enums.h>
@@ -85,7 +86,7 @@ _free_item_class (XfcePanelItemClass *class)
 
     g_free (class->file);
 
-    g_free (class);
+    panel_slice_free (XfcePanelItemClass, class);
 }
 
 static void
@@ -95,7 +96,7 @@ _add_item_info_to_array (char *plugin_name, XfcePanelItemClass *class,
     GPtrArray *array = data;
     XfcePanelItemInfo *info;
 
-    info = g_new0 (XfcePanelItemInfo, 1);
+    info = panel_slice_new0 (XfcePanelItemInfo);
     
     info->name         = plugin_name;
     info->display_name = class->name;
@@ -158,7 +159,7 @@ _new_plugin_class_from_desktop_file (const char *file)
             g_file_test (value, G_FILE_TEST_EXISTS))
 
         {
-            class = g_new0 (XfcePanelItemClass, 1);
+            class = panel_slice_new0 (XfcePanelItemClass);
             
             class->file = g_strdup (value);
             
@@ -169,7 +170,7 @@ _new_plugin_class_from_desktop_file (const char *file)
         else if ((value = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL)) &&
                  g_file_test (value, G_FILE_TEST_EXISTS))
         {
-            class = g_new0 (XfcePanelItemClass, 1);
+            class = panel_slice_new0 (XfcePanelItemClass);
             
             class->file = g_strdup (value);
             
@@ -485,9 +486,9 @@ xfce_panel_item_manager_free_item_info_list (GPtrArray *info_list)
         XfcePanelItemInfo *info = g_ptr_array_index (info_list, i);
 
         if (info->icon)
-            g_object_unref (info->icon);
+            g_object_unref (G_OBJECT (info->icon));
 
-        g_free (info);
+        panel_slice_free (XfcePanelItemInfo, info);
     }
 
     g_ptr_array_free (info_list, TRUE);

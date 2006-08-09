@@ -546,7 +546,7 @@ _panel_drag_begin (GtkWidget *widget, GdkDragContext *drag_context,
         gdk_drawable_get_size (d, &w, &h);
         pb = gdk_pixbuf_get_from_drawable (NULL, d, NULL, 0, 0, 0, 0, w, h);
         gtk_drag_set_icon_pixbuf (drag_context, pb, 0, 0);
-        g_object_unref (pb);
+        g_object_unref (G_OBJECT (pb));
 
         priv->drag_widget = plugin;
     }

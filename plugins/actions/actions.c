@@ -129,11 +129,11 @@ actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
             width = size / 2 - 2 * border;
             pb = actions_load_icon (ACTION_LOCK, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
-            g_object_unref (pb);
+            g_object_unref (G_OBJECT (pb));
             
             pb = actions_load_icon (ACTION_QUIT, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image2), pb);
-            g_object_unref (pb);
+            g_object_unref (G_OBJECT (pb));
             
             break;
         case ACTION_QUIT:
@@ -141,7 +141,7 @@ actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
             width = MIN(size - border, MAX(16, size/2 - border));
             pb = actions_load_icon (action->type, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
-            g_object_unref (pb);
+            g_object_unref (G_OBJECT (pb));
             
             break;
     }
@@ -209,7 +209,7 @@ actions_free_data (XfcePanelPlugin *plugin, Action *action)
     if (dlg)
         gtk_widget_destroy (dlg);
 
-    g_free (action);
+    panel_slice_free (Action, action);
 }
 
 /* create widgets and connect to signals */
@@ -314,7 +314,7 @@ actions_icontheme_changed (XfcePanelPlugin *plugin, gpointer ignored,
 static void 
 actions_construct (XfcePanelPlugin *plugin)
 {
-    Action *action = g_new0 (Action, 1);
+    Action *action = panel_slice_new0 (Action);
 
     action->plugin = plugin;
     

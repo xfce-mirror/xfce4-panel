@@ -111,7 +111,7 @@ pager_free_data (XfcePanelPlugin *plugin, Pager *pager)
     }
 
     
-    g_free (pager);
+    panel_slice_free (Pager, pager);
 }
 
 static void
@@ -205,7 +205,7 @@ pager_construct (XfcePanelPlugin *plugin)
 {
     GdkScreen *screen;
     int screen_idx;
-    Pager *pager = g_new0 (Pager, 1);
+    Pager *pager = panel_slice_new0 (Pager);
 
     g_signal_connect (plugin, "orientation-changed", 
                       G_CALLBACK (pager_orientation_changed), pager);

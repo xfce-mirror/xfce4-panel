@@ -35,6 +35,7 @@
 #include "xfce-marshal.h"
 #include "xfce-panel-enum-types.h"
 #include "xfce-itembar.h"
+#include "xfce-panel-macros.h"
 
 #define XFCE_ITEMBAR_GET_PRIVATE(o) \
     (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_ITEMBAR, XfceItembarPrivate))
@@ -653,7 +654,7 @@ xfce_itembar_realize (GtkWidget * widget)
     priv = XFCE_ITEMBAR_GET_PRIVATE (widget);
 
     widget->window = gtk_widget_get_parent_window (widget);
-    g_object_ref (widget->window);
+    g_object_ref (G_OBJECT (widget->window));
 
     priv->event_window = gdk_window_new (widget->window,
                                          &attributes, attributes_mask);
@@ -857,7 +858,7 @@ xfce_itembar_remove (GtkContainer * container, GtkWidget *child)
             
             gtk_widget_unparent (ic->widget);
 
-            g_free (ic);
+            panel_slice_free (XfceItembarChild, ic);
 
             if (was_visible)
                 gtk_widget_queue_resize (GTK_WIDGET (container));
@@ -1073,7 +1074,7 @@ xfce_itembar_insert (XfceItembar * itembar, GtkWidget * item, int position)
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
     
-    child = g_new0 (XfceItembarChild, 1);
+    child = panel_slice_new0 (XfceItembarChild);
     child->widget = item;
     
     priv->children = g_list_insert (priv->children, child, position);
