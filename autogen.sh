@@ -36,7 +36,7 @@ sed -e "s/@LINGUAS@/${linguas}/g" \
 
 xdt-autogen $@
 
-(test "clean" == "$1") && {
+(test x"clean" = x"$1") && {
   rm configure.ac
 } || true
 # vi:set ts=2 sw=2 et ai:
