@@ -77,7 +77,10 @@ menulist_utf8_string (const char *string)
     {
         utf8 = g_strdup (string);
     }
-    
+
+    if (!utf8)
+        utf8 = g_strdup ("?");
+
     return utf8;
 }
 
@@ -307,28 +310,25 @@ menulist_menu_item (NetkWindow *window,
 		    gint size)
 {
     GtkWidget *mi;
-    const char *window_name = NULL;
+    char *window_name = NULL;
     GString *label;
     GdkPixbuf *icon = NULL, *tmp = NULL;
-    gboolean truncated = FALSE;
     
-    window_name = netk_window_get_name (window);
+    window_name = menulist_utf8_string (netk_window_get_name (window));
     label = g_string_new (window_name);
     
-    if (label->len >= 20)
-    {
-        g_string_truncate (label, 20);
-        g_string_append (label, " ...");
-	truncated = TRUE;
+    if (netk_window_is_active (window))
+     {
+        g_string_prepend (label, "<b>");
+        g_string_append (label, "</b>");
     }
-
-    if (netk_window_is_minimized (window))
+    else if (netk_window_is_minimized (window))
     {
         g_string_prepend (label, "[");
         g_string_append (label, "]");
     }
     
-    /* Italic fonts are not completely shown */
+    /* hack: italic fonts are not completely shown, otherwise */
     g_string_append (label, " ");
     
     if (wl->show_window_icons)
@@ -338,7 +338,6 @@ menulist_menu_item (NetkWindow *window,
     {
         GtkWidget *img;
         gint w, h;
-        char *text;
     
         w = gdk_pixbuf_get_width (icon);
         h = gdk_pixbuf_get_height (icon);
@@ -350,9 +349,7 @@ menulist_menu_item (NetkWindow *window,
             icon = tmp;
         }
     
-        text = menulist_utf8_string (label->str);
-        mi = gtk_image_menu_item_new_with_label (text ? text : "?");
-        g_free (text);
+        mi = gtk_image_menu_item_new_with_label (label->str);
         
         img = gtk_image_new_from_pixbuf (icon);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
@@ -362,21 +359,18 @@ menulist_menu_item (NetkWindow *window,
     }
     else
     {
-        char *text;
-    
-        text = menulist_utf8_string (label->str);
-        mi = gtk_menu_item_new_with_label (text ? text : "?");
-        g_free (text);
+        mi = gtk_menu_item_new_with_label (label->str);
     }
     
-    if (truncated)
-    {
-        char *text = menulist_utf8_string ((char *)window_name);
-    	gtk_tooltips_set_tip (wl->tooltips, mi, text ? text : "?", NULL);
-        g_free (text);
-    }
+    gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (mi)->child), TRUE);
+    gtk_label_set_ellipsize (GTK_LABEL (GTK_BIN (mi)->child), 
+                             PANGO_ELLIPSIZE_END);
+    gtk_label_set_max_width_chars (GTK_LABEL (GTK_BIN (mi)->child), 24);
+    
+    gtk_tooltips_set_tip (wl->tooltips, mi, window_name, NULL);
 
     g_string_free (label, TRUE);
+    g_free (window_name);
     
     return mi;
 }
