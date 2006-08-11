@@ -1,6 +1,8 @@
 bin_PROGRAMS = xfce4-panel
 
 xfce4_panel_SOURCES =						\
+	frap-icon-entry.c					\
+	frap-icon-entry.h					\
 	main.c							\
 	panel-app.c						\
 	panel-app.h						\

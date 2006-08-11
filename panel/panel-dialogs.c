@@ -3,6 +3,7 @@
 /*  $Id$
  *
  *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright © 2006 Benedikt Meurer <benny@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published 
@@ -33,6 +34,7 @@
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-item-iface.h>
 
+#include "frap-icon-entry.h"
 #include "panel-properties.h"
 #include "panel-private.h"
 #include "panel-item-manager.h"
@@ -55,6 +57,7 @@ struct _PanelItemsDialog
     GtkWidget *active;
     
     GPtrArray *items;
+    GtkWidget *search_entry;
     GtkWidget *tree;
     GtkWidget *items_box;
 
@@ -209,7 +212,7 @@ treeview_destroyed (GtkWidget * tv)
 {
     GtkTreeModel *store;
 
-    store = gtk_tree_view_get_model (GTK_TREE_VIEW (tv));
+    store = gtk_tree_model_filter_get_model (GTK_TREE_MODEL_FILTER (gtk_tree_view_get_model (GTK_TREE_VIEW (tv))));
     gtk_list_store_clear (GTK_LIST_STORE (store));
 }
 
@@ -330,6 +333,55 @@ treeview_data_get (GtkWidget *widget, GdkDragContext *drag_context,
     }
 }
 
+static gboolean
+item_visible_func (GtkTreeModel *model,
+                   GtkTreeIter  *iter,
+                   gpointer      user_data)
+{
+    XfcePanelItemInfo *info;
+    const gchar       *text;
+    GtkWidget         *entry = GTK_WIDGET (user_data);
+    gboolean           visible;
+    gchar             *text_casefolded;
+    gchar             *info_casefolded;
+    gchar             *normalized;
+
+    text = gtk_entry_get_text (GTK_ENTRY (entry));
+    if (G_UNLIKELY (*text == '\0'))
+        return TRUE;
+
+    gtk_tree_model_get (model, iter, 0, &info, -1);
+    if (G_UNLIKELY (info == NULL))
+        return TRUE;
+
+    normalized = g_utf8_normalize (text, -1, G_NORMALIZE_ALL);
+    text_casefolded = g_utf8_casefold (normalized, -1);
+    g_free (normalized);
+
+    normalized = g_utf8_normalize (info->display_name, -1, G_NORMALIZE_ALL);
+    info_casefolded = g_utf8_casefold (normalized, -1);
+    g_free (normalized);
+
+    visible = (strstr (info_casefolded, text_casefolded) != NULL);
+
+    g_free (info_casefolded);
+
+    if (!visible && info->comment)
+    {
+        normalized = g_utf8_normalize (info->comment, -1, G_NORMALIZE_ALL);
+        info_casefolded = g_utf8_casefold (normalized, -1);
+        g_free (normalized);
+
+        visible = (strstr (info_casefolded, text_casefolded) != NULL);
+
+        g_free (info_casefolded);
+    }
+
+    g_free (text_casefolded);
+
+    return visible;
+}
+
 static void
 add_item_treeview (PanelItemsDialog *pid)
 {
@@ -337,6 +389,7 @@ add_item_treeview (PanelItemsDialog *pid)
     GtkCellRenderer *cell;
     GtkTreeViewColumn *col;
     GtkListStore *store;
+    GtkTreeModel *filter;
     GtkTreeModel *model;
     GtkTreePath *path;
     GtkTreeIter iter;
@@ -355,7 +408,11 @@ add_item_treeview (PanelItemsDialog *pid)
     store = gtk_list_store_new (1, G_TYPE_POINTER);
     model = GTK_TREE_MODEL (store);
 
-    pid->tree = tv = gtk_tree_view_new_with_model (model);
+    filter = gtk_tree_model_filter_new (model, NULL);
+    gtk_tree_model_filter_set_visible_func (GTK_TREE_MODEL_FILTER (filter), item_visible_func, pid->search_entry, NULL);
+    g_signal_connect_swapped (G_OBJECT (pid->search_entry), "changed", G_CALLBACK (gtk_tree_model_filter_refilter), filter);
+
+    pid->tree = tv = gtk_tree_view_new_with_model (filter);
     gtk_widget_show (tv);
     gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tv), TRUE);
     gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tv), FALSE);
@@ -363,6 +420,7 @@ add_item_treeview (PanelItemsDialog *pid)
 
     g_signal_connect (tv, "destroy", G_CALLBACK (treeview_destroyed), NULL);
 
+    g_object_unref (G_OBJECT (filter));
     g_object_unref (G_OBJECT (store));
 
     /* dnd */
@@ -553,27 +611,37 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
 
     img = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, 
                                     GTK_ICON_SIZE_LARGE_TOOLBAR);
-    gtk_misc_set_alignment (GTK_MISC (img), 0, 0);
+    gtk_misc_set_alignment (GTK_MISC (img), 0.0f, 0.5f);
     gtk_widget_show (img);
     gtk_box_pack_start (GTK_BOX (hbox), img, FALSE, FALSE, 0);
 
     label = gtk_label_new (_("Drag items from the list to a panel or remove "
                              "them by dragging them back to the list."));
     gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0);
+    gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
-    
+
     /* treeview */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
     label = gtk_label_new (NULL);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 1.0f);
     gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
     markup = g_strdup_printf ("<b>%s</b>", _("Available Items"));
     gtk_label_set_markup (GTK_LABEL (label), markup);
     g_free (markup);
 
+    /* the list filter entry (FIXME: Add tooltip? Jasper?) */
+    pid->search_entry = frap_icon_entry_new ();
+    frap_icon_entry_set_stock_id (FRAP_ICON_ENTRY (pid->search_entry), GTK_STOCK_FIND);
+    gtk_widget_show (pid->search_entry);
+    gtk_box_pack_end (GTK_BOX (hbox), pid->search_entry, FALSE, FALSE, 0);
+    
     add_item_treeview (pid);
 
      /* make panels insensitive and set up dnd */
@@ -587,6 +655,8 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
     gtk_widget_show (dlg);
 
     panel_app_register_dialog (dlg);
+
+    gtk_window_present (GTK_WINDOW (dlg));
 }
 
 /* 
