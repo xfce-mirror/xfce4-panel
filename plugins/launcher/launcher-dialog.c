@@ -136,6 +136,15 @@ static void launcher_dialog_data_received (GtkWidget *w,
                                            guint time, 
                                            LauncherDialog *ld);
 
+static void icon_entry_data_received (GtkWidget *w, 
+                                      GdkDragContext *context, 
+                                      gint x, 
+                                      gint y, 
+                                      GtkSelectionData *data, 
+                                      guint info, 
+                                      guint time, 
+                                      LauncherDialog *ld);
+        
 /* File dialog with preview */
 static char *select_file_with_preview (const char *title, 
                                        const char *path,
@@ -617,6 +626,18 @@ add_entry_icon_options (LauncherDialog *ld, GtkBox *box, GtkSizeGroup *sg)
     gtk_misc_set_alignment (GTK_MISC (ld->icon_label), 0, 0.5);
 
     gtk_box_pack_start (GTK_BOX (hbox), ld->icon_label, TRUE, TRUE, 0);
+
+    launcher_set_drag_dest (ld->icon_button);
+    g_signal_connect (ld->icon_button, "drag-data-received",
+                      G_CALLBACK (icon_entry_data_received), ld);
+
+    launcher_set_drag_dest (ld->icon_file);
+    g_signal_connect (ld->icon_file, "drag-data-received",
+                      G_CALLBACK (icon_entry_data_received), ld);
+
+    launcher_set_drag_dest (ld->icon_browse);
+    g_signal_connect (ld->icon_browse, "drag-data-received",
+                      G_CALLBACK (icon_entry_data_received), ld);
 }
 
 /* exec widgets */
@@ -1748,6 +1769,55 @@ launcher_dialog_data_received (GtkWidget *w, GdkDragContext *context,
 
             if (e)
                 launcher_dialog_add_entry_after (ld, NULL, e);
+        }
+
+        g_free (file);
+    }
+
+    g_ptr_array_free (files, TRUE);
+}
+        
+static void 
+icon_entry_data_received (GtkWidget *w, GdkDragContext *context, 
+                          gint x, gint y, GtkSelectionData *data, 
+                          guint info, guint time, LauncherDialog *ld)
+{
+    GPtrArray *files;
+    int i;
+    
+    if (!data || data->length < 1)
+        return;
+    
+    if (!(files = launcher_get_file_list_from_selection_data (data, info)))
+        return;
+
+    for (i = 0; i < files->len; ++i)
+    {
+        char *file = g_ptr_array_index (files, i);
+
+        if (file && g_file_test (file, G_FILE_TEST_IS_REGULAR))
+        {
+            GdkPixbuf *pb = gdk_pixbuf_new_from_file (file, NULL);
+            
+            if (pb)
+            {
+                g_object_unref (G_OBJECT (pb));
+
+                gtk_widget_hide (ld->icon_label);
+                gtk_widget_show (ld->icon_file_align);
+
+                gtk_entry_set_text (GTK_ENTRY (ld->icon_file), file);
+                gtk_editable_set_position (GTK_EDITABLE (ld->icon_file), -1);
+                update_entry_icon (ld);
+
+                pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
+                                                DLG_ICON_SIZE);
+                gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
+                g_object_unref (G_OBJECT (pb));
+
+                if (ld->entry == g_ptr_array_index (ld->launcher->entries, 0))
+                    set_panel_icon (ld);
+            }
         }
 
         g_free (file);
