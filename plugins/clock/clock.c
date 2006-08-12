@@ -244,7 +244,7 @@ clock_read_rc_file (XfcePanelPlugin *plugin, Clock* clock)
     military = TRUE;
     ampm = FALSE;
     secs = FALSE;
-    show_frame = TRUE;
+    show_frame = FALSE;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
@@ -257,7 +257,7 @@ clock_read_rc_file (XfcePanelPlugin *plugin, Clock* clock)
             military = xfce_rc_read_bool_entry (rc, "military", TRUE);
             ampm = xfce_rc_read_bool_entry (rc, "ampm", FALSE);
             secs = xfce_rc_read_bool_entry (rc, "secs", FALSE);
-            show_frame = xfce_rc_read_bool_entry (rc, "show_frame", TRUE);
+            show_frame = xfce_rc_read_bool_entry (rc, "show_frame", FALSE);
             xfce_rc_close (rc);
         }
     }

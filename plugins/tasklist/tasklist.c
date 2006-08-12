@@ -42,9 +42,10 @@ typedef struct
     int screen_changed_id;
     
     NetkTasklistGroupingType grouping;
-    gboolean all_workspaces;
+    guint all_workspaces:1;
     guint show_label:1;
     guint expand:1;
+    guint flat_buttons:1;
 }
 Tasklist;
 
@@ -130,12 +131,13 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
 {
     char *file;
     XfceRc *rc;
-    int grouping, all_workspaces, labels, expand, width;
+    int grouping, all_workspaces, labels, expand, flat_buttons, width;
     
     grouping       = NETK_TASKLIST_AUTO_GROUP;
     all_workspaces = 0;
     labels         = 1;
     expand         = 1;
+    flat_buttons   = 1;
     width          = 300;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
@@ -157,6 +159,8 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
                 expand = xfce_rc_read_int_entry (rc, "expand", expand);
             }
             
+            flat_buttons = xfce_rc_read_int_entry (rc, "flat_buttons", flat_buttons);
+
             width = xfce_rc_read_int_entry (rc, "width", width);
             
             xfce_rc_close (rc);
@@ -167,6 +171,7 @@ tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
     tasklist->all_workspaces = (all_workspaces == 1);
     tasklist->show_label     = (labels != 0);
     tasklist->expand         = (expand != 0);
+    tasklist->flat_buttons   = (flat_buttons != 0);
     tasklist->width          = MAX (100, width);
 }
 
@@ -192,6 +197,8 @@ tasklist_write_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
     xfce_rc_write_int_entry (rc, "show_label", tasklist->show_label);
 
     xfce_rc_write_int_entry (rc, "expand", tasklist->expand);
+
+    xfce_rc_write_int_entry (rc, "flat_buttons", tasklist->flat_buttons);
 
     xfce_rc_write_int_entry (rc, "width", tasklist->width);
 
@@ -309,6 +316,10 @@ tasklist_construct (XfcePanelPlugin *plugin)
     netk_tasklist_set_show_label (NETK_TASKLIST (tasklist->list),
                                   tasklist->show_label);
 
+    netk_tasklist_set_button_relief (NETK_TASKLIST (tasklist->list), 
+                                     tasklist->flat_buttons ? 
+                                        GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
+
     tasklist->screen_changed_id = 
         g_signal_connect (plugin, "screen-changed", 
                           G_CALLBACK (tasklist_screen_changed), tasklist);
@@ -351,6 +362,16 @@ expand_toggled (GtkToggleButton *tb, Tasklist *tasklist)
     tasklist->expand = gtk_toggle_button_get_active (tb);
 
     xfce_panel_plugin_set_expand (tasklist->plugin, tasklist->expand);
+}
+
+static void
+flat_buttons_toggled (GtkToggleButton *tb, Tasklist *tasklist)
+{
+    tasklist->flat_buttons = gtk_toggle_button_get_active (tb);
+
+    netk_tasklist_set_button_relief (NETK_TASKLIST (tasklist->list),
+                                     tasklist->flat_buttons ?
+                                        GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
 }
 
 static void
@@ -408,7 +429,7 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
     vbox = gtk_vbox_new (FALSE, 8);
     gtk_widget_show (vbox);
 
-    frame = xfce_create_framebox_with_content (_("Size"), vbox);
+    frame = xfce_create_framebox_with_content (_("Appearance"), vbox);
     gtk_widget_show (frame);
     gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
     
@@ -439,6 +460,15 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
         g_signal_connect (cb, "toggled", G_CALLBACK (expand_toggled),
                           tasklist);
     }
+
+    cb = gtk_check_button_new_with_mnemonic (_("Use flat buttons"));
+    gtk_widget_show (cb);
+    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
+                                  tasklist->flat_buttons);
+
+    g_signal_connect (cb, "toggled", G_CALLBACK (flat_buttons_toggled),
+                      tasklist);
 
     /* Tasks */
     vbox = gtk_vbox_new (FALSE, 8);
