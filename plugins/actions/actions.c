@@ -44,6 +44,7 @@ ActionType;
 typedef struct
 {
     XfcePanelPlugin *plugin;
+    GtkTooltips *tips;
     
     ActionType type;
     GtkWidget *button1;
@@ -209,6 +210,8 @@ actions_free_data (XfcePanelPlugin *plugin, Action *action)
     if (dlg)
         gtk_widget_destroy (dlg);
 
+    gtk_object_sink (GTK_OBJECT (action->tips));
+
     panel_slice_free (Action, action);
 }
 
@@ -255,6 +258,8 @@ actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
             g_signal_connect (button, "clicked", 
                               G_CALLBACK (actions_do_lock), plugin);
     
+            gtk_tooltips_set_tip (action->tips, action->button1, _("Lock screen"), NULL);
+
             img = action->image1 = gtk_image_new ();
             gtk_widget_show (img);
             gtk_container_add (GTK_CONTAINER (button), img);
@@ -272,6 +277,8 @@ actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
             gtk_widget_show (img);
             gtk_container_add (GTK_CONTAINER (button), img);
             
+            gtk_tooltips_set_tip (action->tips, action->button2, _("Quit"), NULL);
+
             break;
         case ACTION_LOCK:
             action->button1 = button = xfce_create_panel_button ();
@@ -287,6 +294,8 @@ actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
             gtk_widget_show (img);
             gtk_container_add (GTK_CONTAINER (button), img);
             
+            gtk_tooltips_set_tip (action->tips, action->button1, _("Lock screen"), NULL);
+
             break;
         default:
             action->button1 = button = xfce_create_panel_button ();
@@ -301,6 +310,8 @@ actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
             img = action->image1 = gtk_image_new ();
             gtk_widget_show (img);
             gtk_container_add (GTK_CONTAINER (button), img);
+
+            gtk_tooltips_set_tip (action->tips, action->button1, _("Quit"), NULL);
     }
 }
 
@@ -317,6 +328,8 @@ actions_construct (XfcePanelPlugin *plugin)
     Action *action = panel_slice_new0 (Action);
 
     action->plugin = plugin;
+
+    action->tips = gtk_tooltips_new();
     
     g_signal_connect (plugin, "orientation-changed", 
                       G_CALLBACK (actions_orientation_changed), action);
