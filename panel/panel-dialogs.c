@@ -647,7 +647,6 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
      /* make panels insensitive and set up dnd */
     g_ptr_array_foreach (panels, (GFunc)item_dialog_opened, NULL);
 
-    gtk_window_set_keep_above (GTK_WINDOW (dlg), TRUE);
     gtk_window_stick(GTK_WINDOW (dlg));
     gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_UTILITY);
 
@@ -1643,7 +1642,6 @@ panel_manager_dialog (GPtrArray *panels)
     g_signal_connect (pmd->dlg, "response", 
                       G_CALLBACK (panel_dialog_response), pmd);
     
-    gtk_window_set_keep_above (GTK_WINDOW (pmd->dlg), TRUE);
     gtk_window_stick(GTK_WINDOW (pmd->dlg));
     gtk_window_set_type_hint (GTK_WINDOW (pmd->dlg), 
                               GDK_WINDOW_TYPE_HINT_UTILITY);
