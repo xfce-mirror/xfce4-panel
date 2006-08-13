@@ -173,6 +173,6 @@ main (int argc, char **argv)
         execvp (argv[0], argv);
     }
 
-    return 0;
+    return success;
 }
 

@@ -23,6 +23,10 @@
 #include <config.h>
 #endif
 
+#include <stdio.h> 
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <signal.h>
 #include <string.h>
 #include <errno.h>
@@ -100,7 +104,6 @@ struct _PanelApp
     GPtrArray *panel_list;
     GPtrArray *monitor_list;
 
-    int check_id;
     int save_id;
 
     int current_panel;
@@ -115,6 +118,7 @@ struct _PanelApp
 };
 
 static PanelApp panel_app = {0};
+static int signal_pipe[2];
 
 
 /* cleanup */
@@ -186,27 +190,9 @@ sighandler (int sig)
      * that tests the flag.
      * This will prevent problems with gtk main loop threads and stuff
      */
-    switch (sig)
+    if (write (signal_pipe[1], &sig, sizeof (int)) != sizeof (int))
     {
-	case SIGUSR1:
-            DBG ("USR1 signal caught");
-	    panel_app.runstate = PANEL_RUN_STATE_RESTART;
-	    break;
-
-	case SIGUSR2:
-            DBG ("USR2 signal caught");
-	    panel_app.runstate = PANEL_RUN_STATE_QUIT;
-	    break;
-
-	case SIGINT:
-        case SIGABRT:
-            DBG ("INT or ABRT signal caught");
-            panel_app.runstate = PANEL_RUN_STATE_QUIT_NOSAVE;
-            break;
-
-	default:
-            DBG ("Signal caught: %d", sig);
-	    panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
+        g_printerr ("unix signal %d lost\n", sig);
     }
 }
 
@@ -260,7 +246,6 @@ check_signal_state (void)
 
         /* this is necessary, because the function is not only called from the
          * timeout, so just returning FALSE is not enough. */
-        g_source_remove (panel_app.check_id);
         gtk_main_quit ();
         return FALSE;
     }
@@ -268,6 +253,75 @@ check_signal_state (void)
     recursive--;
 
     return TRUE;
+}
+
+static gboolean
+set_signal_state (GIOChannel * source, GIOCondition cond, gpointer d)
+{
+    GError *error = NULL;
+    GIOStatus status;
+    gsize bytes_read;
+    /* 
+     * There is no g_io_channel_read or g_io_channel_read_int, so we read
+     * char's and use a union to recover the unix signal number.
+     */
+    union
+    {
+        gchar chars[sizeof (int)];
+        int signal;
+    } buf;
+
+    while ((status = 
+                g_io_channel_read_chars (source, buf.chars, sizeof (int),
+                                         &bytes_read, &error)
+           ) == G_IO_STATUS_NORMAL)
+    {
+        if (bytes_read != sizeof (int))
+        {
+            g_printerr ("lost data in signal pipe: expected %d, receieved %d",
+                        sizeof (int), bytes_read);
+            /* always at least quite if we receieved data */
+            panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
+            continue;
+        }
+
+        switch (buf.signal)
+        {
+            case SIGUSR1:
+                DBG ("USR1 signal caught");
+                panel_app.runstate = PANEL_RUN_STATE_RESTART;
+                break;
+
+            case SIGUSR2:
+                DBG ("USR2 signal caught");
+                panel_app.runstate = PANEL_RUN_STATE_QUIT;
+                break;
+
+            case SIGINT:
+            case SIGABRT:
+                DBG ("INT or ABRT signal caught");
+                panel_app.runstate = PANEL_RUN_STATE_QUIT_NOSAVE;
+                break;
+
+            default:
+                DBG ("Signal caught: %d", sig);
+                panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
+        }
+    }
+
+    if (error != NULL)
+    {
+        g_printerr ("reading signal pipe failed: %s\n", error->message);
+        g_error_free (error);
+        panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
+    }
+    if (status != G_IO_STATUS_AGAIN)
+    {
+        g_printerr ("signal pipe has been closed\n");
+        panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
+    }
+
+    return check_signal_state ();
 }
 
 /* session */
@@ -550,7 +604,56 @@ panel_app_run (int argc, char **argv)
 {
 #ifdef HAVE_SIGACTION
     struct sigaction act;
-    
+#endif    
+    GIOChannel *g_signal_in;
+    GError *error = NULL;
+    long fd_flags;
+
+    /* create pipe and set writing end in non-blocking mode */
+    if (pipe (signal_pipe))
+    {
+        perror ("pipe");
+        return -1;
+    }
+    fd_flags = fcntl (signal_pipe[1], F_GETFL);
+    if (fd_flags == -1)
+    {
+        perror ("read descriptor flags");
+        return -1;
+    }
+    if (fcntl (signal_pipe[1], F_SETFL, fd_flags | O_NONBLOCK) == -1)
+    {
+        perror ("write descriptor flags");
+        return -1;
+    }
+
+    /* convert the reading end of the pipe into a GIOChannel */
+    g_signal_in = g_io_channel_unix_new (signal_pipe[0]);
+    g_io_channel_set_encoding (g_signal_in, NULL, &error);
+    if (error != NULL)
+    {                           /* handle potential errors */
+        g_printerr ("g_io_channel_set_encoding failed %s\n",
+                    error->message);
+        g_error_free (error);
+        return -1;
+    }
+
+    /* put the reading end also into non-blocking mode */
+    g_io_channel_set_flags (g_signal_in,
+                            g_io_channel_get_flags (g_signal_in) |
+                            G_IO_FLAG_NONBLOCK, &error);
+    if (error != NULL)
+    {
+        g_printerr ("g_io_set_flags failed %s\n", error->message);
+        g_error_free (error);
+        return -1;
+    }
+
+    /* register the reading end with the event loop */
+    g_io_add_watch (g_signal_in, G_IO_IN | G_IO_PRI, set_signal_state, NULL);
+
+    /* register signals */
+#ifdef HAVE_SIGACTION
     act.sa_handler = sighandler;
     sigemptyset (&act.sa_mask);
 #ifdef SA_RESTART
@@ -611,8 +714,6 @@ panel_app_run (int argc, char **argv)
                          NULL);
 
     /* Run Forrest, Run! */
-    panel_app.check_id = 
-        g_timeout_add (1000, (GSourceFunc) check_signal_state, NULL);
     panel_app.runstate = PANEL_RUN_STATE_NORMAL;
     TIMER_ELAPSED("start main loop");
     gtk_main ();
