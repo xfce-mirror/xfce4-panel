@@ -252,8 +252,7 @@ separator_properties_dialog (XfcePanelPlugin *plugin)
 
     xfce_panel_plugin_block_menu (plugin);
     
-    dlg = xfce_titled_dialog_new_with_buttons (_("Separator or Spacing"),
-                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
+    dlg = xfce_titled_dialog_new_with_buttons (_("Separator or Spacing"), NULL,
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
