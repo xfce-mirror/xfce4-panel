@@ -34,15 +34,17 @@ typedef struct
     XfcePanelPlugin *plugin;
 
     NetkScreen *screen;
+    GdkScreen *gdk_screen;
+    GtkWidget *pager;
+
     
     int ws_created_id;
     int ws_destroyed_id;
     int screen_changed_id;
+    int screen_size_changed_id;
 
-    int rows:16;        /* limited size should be ok */
+    int rows;
     guint scrolling:1;
-    
-    GtkWidget *pager;
 }
 Pager;
 
@@ -110,7 +112,12 @@ pager_free_data (XfcePanelPlugin *plugin, Pager *pager)
         pager->ws_destroyed_id = 0;
     }
 
-    
+    if (pager->screen_size_changed_id)
+    {
+        g_signal_handler_disconnect (pager->gdk_screen, pager->screen_size_changed_id);
+        pager->screen_size_changed_id = 0;
+    }
+
     panel_slice_free (Pager, pager);
 }
 
@@ -169,6 +176,8 @@ pager_n_workspaces_changed (NetkScreen * screen, NetkWorkspace * ws,
                     xfce_panel_plugin_get_size (pager->plugin));
 }
 
+static void pager_screen_size_changed (GdkScreen *screen, Pager *pager);
+
 static void
 pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
 {
@@ -187,6 +196,13 @@ pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
         pager->ws_destroyed_id = 0;
     }
 
+    if (pager->screen_size_changed_id)
+    {
+        g_signal_handler_disconnect (pager->gdk_screen, pager->screen_size_changed_id);
+        pager->screen_size_changed_id = 0;
+    }
+
+    pager->gdk_screen = screen;
     pager->screen = netk_screen_get (gdk_screen_get_number (screen));
 
     netk_pager_set_screen (NETK_PAGER (pager->pager), pager->screen);
@@ -198,8 +214,19 @@ pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
     pager->ws_destroyed_id =
 	g_signal_connect (pager->screen, "workspace-destroyed",
 			  G_CALLBACK (pager_n_workspaces_changed), pager);
+
+    pager->screen_size_changed_id = 
+        g_signal_connect (screen, "size-changed", 
+                          G_CALLBACK (pager_screen_size_changed), pager);
 }
-        
+
+static void
+pager_screen_size_changed (GdkScreen *screen, Pager *pager)
+{
+    pager_screen_changed (GTK_WIDGET (pager->plugin), screen, pager);
+    gtk_widget_queue_resize (GTK_WIDGET (pager->plugin));
+}
+
 static void 
 pager_construct (XfcePanelPlugin *plugin)
 {
@@ -225,7 +252,7 @@ pager_construct (XfcePanelPlugin *plugin)
 
     pager->plugin = plugin;
 
-    screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+    pager->gdk_screen = screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
     screen_idx = gdk_screen_get_number (screen);
     pager->screen = netk_screen_get (screen_idx);
     
@@ -252,6 +279,10 @@ pager_construct (XfcePanelPlugin *plugin)
     pager->screen_changed_id = 
         g_signal_connect (plugin, "screen-changed", 
                           G_CALLBACK (pager_screen_changed), pager);
+
+    pager->screen_size_changed_id = 
+        g_signal_connect (screen, "size-changed", 
+                          G_CALLBACK (pager_screen_size_changed), pager);
 }
 
 /* -------------------------------------------------------------------- *
