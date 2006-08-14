@@ -317,12 +317,7 @@ menulist_menu_item (NetkWindow *window,
     window_name = menulist_utf8_string (netk_window_get_name (window));
     label = g_string_new (window_name);
     
-    if (netk_window_is_active (window))
-     {
-        g_string_prepend (label, "<b>");
-        g_string_append (label, "</b>");
-    }
-    else if (netk_window_is_minimized (window))
+    if (netk_window_is_minimized (window))
     {
         g_string_prepend (label, "[");
         g_string_append (label, "]");
@@ -362,7 +357,6 @@ menulist_menu_item (NetkWindow *window,
         mi = gtk_menu_item_new_with_label (label->str);
     }
     
-    gtk_label_set_use_markup (GTK_LABEL (GTK_BIN (mi)->child), TRUE);
     gtk_label_set_ellipsize (GTK_LABEL (GTK_BIN (mi)->child), 
                              PANGO_ELLIPSIZE_END);
     gtk_label_set_max_width_chars (GTK_LABEL (GTK_BIN (mi)->child), 24);
@@ -466,6 +460,15 @@ menulist_toggle_menu (GtkToggleButton *button,
 	    if (G_UNLIKELY (!mi))
                 continue;
 	    
+	    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	    
+            if (netk_window_is_active (window))
+            {
+                gtk_widget_set_state (mi, GTK_STATE_PRELIGHT);
+                gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
+			bold);
+            }
+
 	    /* Apply some styles for windows on !current workspace and 
              * if they are urgent */
 	    if(state & NETK_WINDOW_STATE_URGENT && 
@@ -490,8 +493,6 @@ menulist_toggle_menu (GtkToggleButton *button,
 		gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
 			italic);
             }
-	    
-	    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	 
 	    /* Connect some signals */
 	    g_signal_connect (mi, "button-release-event",
