@@ -381,7 +381,7 @@ menulist_toggle_menu (GtkToggleButton *button,
     gchar *ws_label, *rm_label;
     gint size, i, wscount;
     GList *windows, *li;
-    PangoFontDescription *italic, *bold, *bold_italic;
+    PangoFontDescription *italic, *bold;
     
     if (ev->button != 1)
 	return FALSE;
@@ -389,7 +389,6 @@ menulist_toggle_menu (GtkToggleButton *button,
     /* Menu item styles */
     italic = pango_font_description_from_string ("italic");
     bold = pango_font_description_from_string ("bold");
-    bold_italic = pango_font_description_from_string ("bold italic");
     
     menu = gtk_menu_new ();
     xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (wl->plugin), 
@@ -464,9 +463,8 @@ menulist_toggle_menu (GtkToggleButton *button,
 	    
             if (netk_window_is_active (window))
             {
-                gtk_widget_set_state (mi, GTK_STATE_PRELIGHT);
                 gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
-			bold);
+			italic);
             }
 
 	    /* Apply some styles for windows on !current workspace and 
@@ -483,15 +481,13 @@ menulist_toggle_menu (GtkToggleButton *button,
                         GTK_STATE_NORMAL,
                         &(menu->style->fg[GTK_STATE_INSENSITIVE]));
 		gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
-			bold_italic);
+			bold);
 	    }
 	    else if (netk_workspace != active_workspace)
             {
                 gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
                         GTK_STATE_NORMAL,
                         &(menu->style->fg[GTK_STATE_INSENSITIVE]));
-		gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
-			italic);
             }
 	 
 	    /* Connect some signals */
@@ -514,7 +510,6 @@ menulist_toggle_menu (GtkToggleButton *button,
     
     pango_font_description_free(italic);
     pango_font_description_free(bold);
-    pango_font_description_free(bold_italic);
     
     /* Show add/remove workspace buttons */
     if (wl->show_workspace_actions)
