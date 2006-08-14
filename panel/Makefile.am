@@ -1,3 +1,8 @@
+# dummy scripts to replace 4.2 versions
+bin_SCRIPTS = @DUMMY_SCRIPTS@
+
+EXTRA_SCRIPTS = xftaskbar4 xfce4-iconbox
+
 bin_PROGRAMS = xfce4-panel
 
 xfce4_panel_SOURCES =						\
