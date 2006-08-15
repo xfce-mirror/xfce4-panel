@@ -37,11 +37,17 @@
 #include <config.h>
 #endif
 
+#include <string.h>
+#include <gdk/gdkkeysyms.h>
+
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfcegui4/netk-window-action-menu.h>
 
 #include "windowlist.h"
 #include "windowlist-dialog.h"
+#include "xfce4-popup-windowlist.h"
+
+typedef enum { WS_ADD = 1, WS_REMOVE } WorkspaceAction;
 
 static gboolean
 windowlist_blink (gpointer data);
@@ -152,10 +158,10 @@ mi_destroyed (GtkObject *object,
 
 static void
 action_menu_deactivated (GtkMenu *menu,
-			 GtkMenu *parent)
+                         GtkMenu *parent)
 {
     DBG ("Destroy Action Menu");
-    
+
     gtk_menu_popdown (parent);
     g_signal_emit_by_name (parent, "deactivate", 0);
 }
@@ -171,11 +177,11 @@ popup_action_menu (GtkWidget * widget,
 
     menu = netk_create_window_action_menu (window);
 
+    g_signal_connect (menu, "deactivate",
+                      G_CALLBACK (action_menu_deactivated), widget->parent);
+
     gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 0,
                     GDK_CURRENT_TIME);
-
-    g_signal_connect (menu, "deactivate", 
-                      G_CALLBACK (action_menu_deactivated), widget->parent);
 }
 
 static gboolean
@@ -185,17 +191,20 @@ menulist_goto_window (GtkWidget *mi,
 {
     if (ev->button == 1) /* Goto workspace and show window */
     {
+        gtk_menu_popdown (GTK_MENU (mi->parent));
         netk_workspace_activate(netk_window_get_workspace(window));
 	netk_window_activate (window);
+        g_signal_emit_by_name (mi->parent, "deactivate", 0);
     }
     else if (ev->button == 2) /* Show window on current workspace */
     {
+        gtk_menu_popdown (GTK_MENU (mi->parent));
 	netk_window_activate (window);
+        g_signal_emit_by_name (mi->parent, "deactivate", 0);
     }
     else if (ev->button == 3) /* Show the popup menu */
     {
         popup_action_menu (mi, window);
-        return TRUE;
     }
 
     return FALSE;
@@ -237,6 +246,87 @@ menulist_remove_screen (GtkWidget *mi,
 
     g_free (text);
     
+    return FALSE;
+}
+
+static gboolean
+menulist_keypress (GtkWidget *menu, GdkEventKey *ev, Windowlist *wl)
+{
+    GdkEventButton evb;
+    GList *l;
+    GtkWidget *mi = NULL;
+    NetkWindow *window;
+    NetkWorkspace *workspace;
+    gpointer ws_action;
+    guint state;
+
+    for (l = GTK_MENU_SHELL (menu)->children; l != NULL; l = l->next)
+    {
+        if (GTK_WIDGET_STATE (l->data) == GTK_STATE_PRELIGHT)
+        {
+            mi = l->data;
+            break;
+        }
+    }
+
+    if (mi == NULL)
+        return FALSE;
+
+    state = ev->state & gtk_accelerator_get_default_mod_mask ();
+
+    switch (ev->keyval)
+    {
+        case GDK_space:
+        case GDK_Return:
+        case GDK_KP_Space:
+        case GDK_KP_Enter:
+            evb.button = 1;
+            break;
+        case GDK_Menu:
+            evb.button = 3;
+            break;
+        default:
+            return FALSE;
+    }
+
+    if (evb.button == 1)
+    {
+        if (state == GDK_SHIFT_MASK)
+            evb.button = 2;
+        else if (state == GDK_CONTROL_MASK)
+            evb.button = 3;
+    }
+
+    if((window = g_object_get_data (G_OBJECT (mi), "netk-window")) != NULL)
+    {
+        if (!NETK_IS_WINDOW (window))
+            return FALSE;
+
+        return menulist_goto_window (mi, &evb, window);
+    }
+    else if (evb.button == 1 && 
+             (workspace = g_object_get_data (G_OBJECT (mi), "netk-workspace")) 
+                != NULL)
+    {
+        if (!NETK_IS_WORKSPACE (workspace))
+            return FALSE;
+
+        return menulist_goto_workspace (mi, NULL, workspace);
+    }
+    else if (evb.button == 1 && 
+             (ws_action = g_object_get_data (G_OBJECT (mi), "ws-action"))
+                != NULL)
+    {
+        if (GPOINTER_TO_INT (ws_action) == WS_REMOVE)
+        {
+            return menulist_remove_screen (mi, NULL, wl);
+        }
+        else 
+        {
+            return menulist_add_screen (mi, NULL, wl);
+        }
+    }
+
     return FALSE;
 }
 
@@ -370,9 +460,9 @@ menulist_menu_item (NetkWindow *window,
 }
 
 static gboolean
-menulist_toggle_menu (GtkToggleButton *button,
-                      GdkEventButton *ev, 
-                      Windowlist * wl)
+menulist_popup_menu (Windowlist * wl,
+                     GdkEventButton *ev,
+                     gboolean at_pointer)
 {
     GtkWidget *menu, *mi, *icon;
     NetkWindow *window;
@@ -382,9 +472,6 @@ menulist_toggle_menu (GtkToggleButton *button,
     gint size, i, wscount;
     GList *windows, *li;
     PangoFontDescription *italic, *bold;
-    
-    if (ev->button != 1)
-	return FALSE;
     
     /* Menu item styles */
     italic = pango_font_description_from_string ("italic");
@@ -420,6 +507,9 @@ menulist_toggle_menu (GtkToggleButton *button,
         mi = gtk_menu_item_new_with_label (ws_label);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	g_free (ws_label);
+
+        g_object_set_data (G_OBJECT (mi), "netk-workspace", netk_workspace);
+
         g_signal_connect (mi, "button-release-event",
 		G_CALLBACK (menulist_goto_workspace), netk_workspace);
 	
@@ -490,6 +580,8 @@ menulist_toggle_menu (GtkToggleButton *button,
                         &(menu->style->fg[GTK_STATE_INSENSITIVE]));
             }
 	 
+            g_object_set_data (G_OBJECT (mi), "netk-window", window);
+
 	    /* Connect some signals */
 	    g_signal_connect (mi, "button-release-event",
                     G_CALLBACK (menulist_goto_window), window);
@@ -510,10 +602,12 @@ menulist_toggle_menu (GtkToggleButton *button,
     
     pango_font_description_free(italic);
     pango_font_description_free(bold);
-    
+
     /* Show add/remove workspace buttons */
     if (wl->show_workspace_actions)
     {
+        int ws_action;
+
 	mi = gtk_separator_menu_item_new ();
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 	
@@ -529,6 +623,9 @@ menulist_toggle_menu (GtkToggleButton *button,
 	    mi = gtk_menu_item_new_with_label (_("Add workspace"));
 	}
 	
+        ws_action = WS_ADD;
+        g_object_set_data (G_OBJECT (mi), "ws-action", GINT_TO_POINTER (ws_action));
+
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
 	g_signal_connect (mi, "button-release-event",
@@ -536,34 +633,47 @@ menulist_toggle_menu (GtkToggleButton *button,
 	
 	/* Remove workspace */
 	wscount = netk_screen_get_workspace_count (wl->screen);
-	netk_workspace = netk_screen_get_workspace (wl->screen, wscount-1);
-	
-	rm_label = menulist_workspace_name (netk_workspace,
-					    _("Remove Workspace %d"),
-					    _("Remove Workspace '%s'"));
-	
-	if (wl->show_window_icons)
-	{
-	    mi = gtk_image_menu_item_new_with_label (rm_label);
-	    icon = gtk_image_new_from_stock (GTK_STOCK_REMOVE, 
-                                             GTK_ICON_SIZE_MENU);
-	    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), icon);
-	}
-	else
-	{
-	    mi = gtk_menu_item_new_with_label (rm_label);
-	}
-	
-	g_free (rm_label);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-	g_signal_connect (mi, "button-release-event",
-		G_CALLBACK (menulist_remove_screen), wl);
+        if (wscount > 1)
+        {
+            netk_workspace = netk_screen_get_workspace (wl->screen, wscount-1);
+            
+            rm_label = menulist_workspace_name (netk_workspace,
+                                                _("Remove Workspace %d"),
+                                                _("Remove Workspace '%s'"));
+            
+            if (wl->show_window_icons)
+            {
+                mi = gtk_image_menu_item_new_with_label (rm_label);
+                icon = gtk_image_new_from_stock (GTK_STOCK_REMOVE, 
+                                                 GTK_ICON_SIZE_MENU);
+                gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), icon);
+            }
+            else
+            {
+                mi = gtk_menu_item_new_with_label (rm_label);
+            }
 
+            g_free (rm_label);
+
+            ws_action = WS_REMOVE;
+            g_object_set_data (G_OBJECT (mi), "ws-action", GINT_TO_POINTER (ws_action));
+
+            gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+            g_signal_connect (mi, "button-release-event",
+                    G_CALLBACK (menulist_remove_screen), wl);
+        }
     }
     
+    /* key presses work on the menu, not the items */
+    g_signal_connect (menu, "key-press-event",
+            G_CALLBACK (menulist_keypress), 
+            wl);
+
     /* Activate toggle button */
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (wl->button), TRUE);
+    if (!at_pointer)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (wl->button), TRUE);
     
     /* Connect signal, show widgets and popup */
     g_signal_connect (menu, "deactivate",
@@ -572,10 +682,21 @@ menulist_toggle_menu (GtkToggleButton *button,
     gtk_widget_show_all (menu);
     
     gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 
-                    (GtkMenuPositionFunc)windowlist_position_menu,
-		    wl, 0, ev->time);
+                    at_pointer ? NULL
+                               : (GtkMenuPositionFunc)windowlist_position_menu,
+		    wl, 0, ev ? ev->time : GDK_CURRENT_TIME);
     
     return TRUE;
+}
+
+static gboolean
+menulist_toggle_menu (GtkToggleButton *button,
+                      GdkEventButton *ev, 
+                      Windowlist * wl)
+{
+    if (ev->button != 1)
+	return FALSE;
+    return menulist_popup_menu (wl, ev, FALSE);
 }
 
 /**
@@ -783,6 +904,59 @@ windowlist_active_window_changed (GtkWidget * w,
 }
 
 /**
+ * Handle user messages
+ **/
+static gboolean
+wl_message_received (GtkWidget *w, GdkEventClient *ev, gpointer user_data)
+{
+    Windowlist *wl = user_data;
+
+    if (ev->data_format == 8 && *(ev->data.b) != '\0')
+    {
+        if (!strcmp (XFCE_WINDOW_LIST_MESSAGE, ev->data.b))
+            return menulist_popup_menu (wl, NULL, FALSE);
+
+        if (!strcmp (XFCE_WINDOW_LIST_AT_POINTER_MESSAGE, ev->data.b))
+            return menulist_popup_menu (wl, NULL, TRUE);
+    }
+
+    return FALSE;
+}
+
+static gboolean
+wl_set_selection (Windowlist *wl)
+{
+    GdkScreen *gscreen;
+    gchar selection_name[32];
+    Atom selection_atom;
+    GtkWidget *win;
+    Window xwin;
+
+    win = gtk_invisible_new ();
+    gtk_widget_realize (win);
+    xwin = GDK_WINDOW_XID (GTK_WIDGET (win)->window);
+
+    gscreen = gtk_widget_get_screen (win);
+    g_snprintf (selection_name, sizeof (selection_name), 
+                XFCE_WINDOW_LIST_SELECTION"%d", gdk_screen_get_number (gscreen));
+    selection_atom = XInternAtom (GDK_DISPLAY (), selection_name, False);
+
+    if (XGetSelectionOwner (GDK_DISPLAY (), selection_atom))
+    {
+        gtk_widget_destroy (win);
+        return FALSE;
+    }
+
+    XSelectInput (GDK_DISPLAY (), xwin, PropertyChangeMask);
+    XSetSelectionOwner (GDK_DISPLAY (), selection_atom, xwin, GDK_CURRENT_TIME);
+
+    g_signal_connect (G_OBJECT (win), "client-event",
+                      G_CALLBACK (wl_message_received), wl);
+    
+    return TRUE;
+}
+
+/**
  * Build the panel button and connect signals and styles
  **/
 void
@@ -849,7 +1023,9 @@ windowlist_create_button (Windowlist * wl)
     
     g_signal_connect (wl->button, "state-changed",
                       G_CALLBACK (windowlist_state_changed), wl);
-    
+
+    wl_set_selection (wl);
+
     gtk_widget_show_all (wl->button);
     gtk_container_add (GTK_CONTAINER (wl->plugin), wl->button);
     

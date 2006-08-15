@@ -1,3 +1,18 @@
+bin_PROGRAMS = xfce4-popup-windowlist
+
+xfce4_popup_windowlist_SOURCES = \
+	xfce4-popup-windowlist.c \
+	xfce4-popup-windowlist.h
+
+xfce4_popup_windowlist_CFLAGS = \
+	$(LIBX11_CFLAGS) \
+	$(GTK_CFLAGS)
+
+xfce4_popup_windowlist_LDADD = \
+	$(LIBX11_LDFLAGS) \
+	$(LIBX11_LIBS) \
+	$(GTK_LIBS)
+
 plugindir = $(libdir)/xfce4/panel-plugins
 
 plugin_LTLIBRARIES = libwindowlist.la
@@ -10,7 +25,8 @@ libwindowlist_la_SOURCES = 						\
 	windowlist.h						\
 	windowlist.c						\
 	windowlist-dialog.h						\
-	windowlist-dialog.c
+	windowlist-dialog.c						\
+	xfce4-popup-windowlist.h
 
 libwindowlist_la_CFLAGS =						\
 	-I$(top_srcdir)							\
