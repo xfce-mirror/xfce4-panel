@@ -550,7 +550,7 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
     XfceScreenPosition screen_position;
     
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), 
-                          XFCE_SCREEN_POSITION_S);
+                          GTK_ORIENTATION_HORIZONTAL);
 
     g_object_get (G_OBJECT (plugin), "screen-position", &screen_position, 
                   NULL);
@@ -623,7 +623,7 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin, gboolean expand)
 void 
 xfce_panel_plugin_customize_panel (XfcePanelPlugin *plugin)
 {
-    return XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->customize_panel (plugin);
+    XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->customize_panel (plugin);
 }
 
 /**
