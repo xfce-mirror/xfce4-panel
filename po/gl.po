@@ -1,0 +1,737 @@
+# Galician translation for xfce4-panel
+# Copyright (c) (c) 2006 Canonical Ltd, and Rosetta Contributors 2006
+# This file is distributed under the same license as the xfce4-panel package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2006.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2006-05-29 20:39+0000\n"
+"PO-Revision-Date: 2006-06-06 12:38+0000\n"
+"Last-Translator: Ricardo Domínguez Rouco <riklaren@gmail.com>\n"
+"Language-Team: Galician <gl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../libxfce4panel/xfce-panel-external-item.c:175
+#, c-format
+msgid "An item was unexpectedly removed: \"%s\"."
+msgstr "Un elemento foi inesperadamente eliminado: \"%s\""
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:572
+#, c-format
+msgid "Remove \"%s\"?"
+msgstr "¿Eliminar \"%s\"?"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:575 ../panel/panel-app.c:734
+#: ../panel/panel-app.c:766 ../panel/panel-app.c:799
+#: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
+#: ../plugins/launcher/launcher.c:437
+msgid "Xfce Panel"
+msgstr "Panel de XFCE"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:577
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr "O item será eliminado do panel a súa configuración se perderá."
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:748
+#: ../plugins/actions/actions.c:383 ../plugins/clock/clock.c:408
+#: ../plugins/iconbox/iconbox.c:786 ../plugins/launcher/launcher-dialog.c:1309
+#: ../plugins/pager/pager.c:285 ../plugins/separator/separator.c:255
+#: ../plugins/systray/systray.c:378 ../plugins/tasklist/tasklist.c:385
+#: ../plugins/windowlist/windowlist-dialog.c:121
+msgid "Properties"
+msgstr "Propiedades"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:765
+msgid "About"
+msgstr "Acerca de"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:778
+msgid "Move"
+msgstr "Mover"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:800
+msgid "Remove"
+msgstr "Suprimir"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
+msgid "Add New Item"
+msgstr "Engadir novo elemento"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:829 ../panel/panel.c:656
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
+msgid "Customize Panel"
+msgstr "Personalizar panel"
+
+#: ../panel/panel.c:667
+msgid "Add Items"
+msgstr "Engadir elementos"
+
+#: ../panel/panel.c:682 ../plugins/actions/actions.c:424
+msgid "Quit"
+msgstr "Saír"
+
+#: ../panel/panel.c:692
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: ../panel/panel.c:706
+msgid "About the Xfce Panel"
+msgstr "Sobre o panel de XFCE"
+
+#: ../panel/panel-item-manager.c:363 ../panel/panel-item-manager.c:371
+#, c-format
+msgid "Could not open \"%s\" module"
+msgstr "Non se pode abrir o módulo \"%s\""
+
+#: ../panel/panel-app.c:241 ../panel/panel-app.c:736
+msgid "Exit Xfce Panel?"
+msgstr "¿Saír do panel de XFCE?"
+
+#: ../panel/panel-app.c:737
+msgid "You can't remove the last panel. Would you like to exit the program?"
+msgstr "Non pode borrar o derradeiro panel. ¿Quere sair da aplicación?"
+
+#: ../panel/panel-app.c:764
+#, c-format
+msgid "Remove Panel \"%d\"?"
+msgstr "¿Quitar o panel \"%d\"?"
+
+#: ../panel/panel-app.c:768
+msgid "The selected panel and all its items will be removed."
+msgstr "O panel seleccionado e todos os seus elementos serán eliminados."
+
+#: ../panel/panel-app.c:807
+msgid "Developer"
+msgstr "Desenrrolador"
+
+#: ../panel/main.c:46
+#, c-format
+msgid ""
+"\n"
+" Xfce Panel %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
+msgstr ""
+"\n"
+" Panel de XFCE %s\n"
+"\n"
+"Parte do XFCE Desktop Environment\n"
+"http://www.xfce.org\n"
+"\n"
+"Licencia baixo GPL GNU.\n"
+"\n"
+
+#: ../panel/main.c:52
+#, c-format
+msgid ""
+" Usage: %s [OPTIONS]\n"
+"\n"
+msgstr ""
+" Usar: %s [OPCIÓNS]\n"
+"\n"
+
+#: ../panel/main.c:55
+msgid ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save configuration\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Close all panels and end the program\n"
+" -a, --add       Add new items\n"
+"\n"
+msgstr ""
+" OPCIÓNS\n"
+"-h, --help Mostra esta mensaxe e sae.\n"
+"-v, --version Mostra esta mensaxe e sae.\n"
+"-c, --customice Mostra o diálogo de personalización.\n"
+"-s, --save Almacena a configuarción\n"
+"-r, --restart Reinicia os paneles\n"
+"-q, --quit Termina a sesión\n"
+"-x, --exit Pecha todolos paneles e remata a aplicacion\n"
+"-a, --add Añade un novo compoñente\n"
+"\n"
+
+#: ../panel/panel-dialogs.c:526
+msgid "Add Items to the Panel"
+msgstr "Añadir compoñentes ó panel"
+
+#: ../panel/panel-dialogs.c:556
+msgid ""
+"Drag items from the list to a panel or remove them by dragging them back to "
+"the list."
+msgstr ""
+"Arrastre os elementos dende a lista ata o panel, ou elimíneos movendoos do "
+"panel á lista."
+
+#: ../panel/panel-dialogs.c:569
+msgid "Available Items"
+msgstr "Elementos dispoñibles"
+
+#: ../panel/panel-dialogs.c:786 ../panel/panel-dialogs.c:1010
+msgid "Normal Width"
+msgstr "Largo normal"
+
+#: ../panel/panel-dialogs.c:788 ../panel/panel-dialogs.c:1012
+msgid "Full Width"
+msgstr "Largo máximo"
+
+#: ../panel/panel-dialogs.c:794 ../panel/panel-dialogs.c:1018
+msgid "Span Monitors"
+msgstr "Separar Monitores"
+
+#: ../panel/panel-dialogs.c:854 ../panel/panel-dialogs.c:1083
+msgid "Left"
+msgstr "Esquerda"
+
+#: ../panel/panel-dialogs.c:856 ../panel/panel-dialogs.c:1085
+msgid "Right"
+msgstr "Dereita"
+
+#: ../panel/panel-dialogs.c:861 ../panel/panel-dialogs.c:1090
+msgid "Top"
+msgstr "Arriba"
+
+#: ../panel/panel-dialogs.c:863 ../panel/panel-dialogs.c:1092
+msgid "Bottom"
+msgstr "Abaixo"
+
+#: ../panel/panel-dialogs.c:891
+msgid "Position"
+msgstr "Posición"
+
+#: ../panel/panel-dialogs.c:905
+msgid "Fixed Position"
+msgstr "Posición fixa"
+
+#: ../panel/panel-dialogs.c:911
+msgid "Freely Moveable"
+msgstr "Libremente posicionable"
+
+#: ../panel/panel-dialogs.c:1026
+msgid "Auto_hide"
+msgstr "Auto ocultar"
+
+#: ../panel/panel-dialogs.c:1044
+msgid "Orientation:"
+msgstr "Orientación:"
+
+#: ../panel/panel-dialogs.c:1056
+msgid "Horizontal"
+msgstr "Horizontal"
+
+#: ../panel/panel-dialogs.c:1058
+msgid "Vertical"
+msgstr "Vertical"
+
+#: ../panel/panel-dialogs.c:1067
+msgid "Handle:"
+msgstr "Enlace:"
+
+#: ../panel/panel-dialogs.c:1079
+msgid "At both sides"
+msgstr "En todas as caras"
+
+#: ../panel/panel-dialogs.c:1160
+msgid "Select Monitor"
+msgstr "Seleccione monitor"
+
+#: ../panel/panel-dialogs.c:1278 ../plugins/clock/clock.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:193
+msgid "Appearance"
+msgstr "Apariencia"
+
+#: ../panel/panel-dialogs.c:1289
+msgid "Size (pixels):"
+msgstr "Superficie (pixeles)"
+
+#: ../panel/panel-dialogs.c:1312
+msgid "Transparency (%):"
+msgstr "Transparencia (%):"
+
+#: ../panel/panel-dialogs.c:1336
+msgid "Make active panel opaque"
+msgstr "Facer opaco o panel activo"
+
+#: ../panel/panel-dialogs.c:1375 ../panel/panel-dialogs.c:1411
+#: ../panel/panel-dialogs.c:1436
+#, c-format
+msgid "Panel %d"
+msgstr "Panel %d"
+
+#: ../panel/panel-dialogs.c:1455
+msgid "Remove Panel"
+msgstr "Borrar panel"
+
+#: ../panel/panel-dialogs.c:1468
+msgid "New Panel"
+msgstr "Novo panel"
+
+#: ../panel/panel-dialogs.c:1525
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel Manager"
+msgstr "Administrador de paneles"
+
+#: ../plugins/actions/actions.c:399
+msgid "Panel Actions"
+msgstr "Accións sobre paneles"
+
+#: ../plugins/actions/actions.c:416
+msgid "Select action type:"
+msgstr "Seleccionar un tipo de acción:"
+
+#: ../plugins/actions/actions.c:425
+msgid "Lock screen"
+msgstr "Bloquear a pantalla"
+
+#: ../plugins/actions/actions.c:426
+msgid "Quit + Lock screen"
+msgstr "Sair e bloquear a pantalla"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#: ../plugins/clock/clock.c:109
+msgid "%A %d %B %Y"
+msgstr "%A, %d de %B de %Y"
+
+#: ../plugins/clock/clock.c:424 ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Reloxo"
+
+#: ../plugins/clock/clock.c:446
+msgid "Analog"
+msgstr "Analoxico"
+
+#: ../plugins/clock/clock.c:447
+msgid "Digital"
+msgstr "Dixital"
+
+#: ../plugins/clock/clock.c:448
+msgid "LED"
+msgstr "LED"
+
+#: ../plugins/clock/clock.c:453 ../plugins/systray/systray.c:407
+msgid "Show _frame"
+msgstr "Mostrar _marco"
+
+#: ../plugins/clock/clock.c:461
+msgid "Clock Options"
+msgstr "Opcións do reloxo"
+
+#: ../plugins/clock/clock.c:471
+msgid "Use 24-_hour clock"
+msgstr "Usar reloxo en formato 24h"
+
+#: ../plugins/clock/clock.c:479
+msgid "Show AM/PM"
+msgstr "Mostrar AM/PM"
+
+#: ../plugins/clock/clock.c:487
+msgid "Display seconds"
+msgstr "Mostrar os segundos"
+
+#: ../plugins/iconbox/iconbox.c:802
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+msgid "Icon Box"
+msgstr "Caixa de iconas"
+
+#: ../plugins/iconbox/iconbox.c:816
+msgid "Only show minimized applications"
+msgstr "Mostrar somentes as aplicacións minimizadas"
+
+#: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Non se puido executar \"%s\""
+
+#: ../plugins/launcher/launcher.c:398
+#, c-format
+msgid "Error in command \"%s\""
+msgstr "Erro no comando \"%s\""
+
+#: ../plugins/launcher/launcher.c:645 ../plugins/launcher/launcher.c:1248
+#: ../plugins/launcher/launcher-dialog.c:1144
+msgid "New Item"
+msgstr "Novo Elemento"
+
+#: ../plugins/launcher/launcher.c:703 ../plugins/launcher/launcher.c:1249
+msgid "This item has not yet been configured"
+msgstr "Este elemento aínda non foi configurado"
+
+#: ../plugins/launcher/launcher-dialog.c:101
+msgid "Default"
+msgstr "Predeterminado"
+
+#: ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "Editor"
+
+#: ../plugins/launcher/launcher-dialog.c:103
+msgid "File management"
+msgstr "Administrador de arquivos"
+
+#: ../plugins/launcher/launcher-dialog.c:104
+msgid "Utilities"
+msgstr "Útiles"
+
+#: ../plugins/launcher/launcher-dialog.c:105
+msgid "Games"
+msgstr "Xogos"
+
+#: ../plugins/launcher/launcher-dialog.c:106
+msgid "Help browser"
+msgstr "Visor de axuda"
+
+#: ../plugins/launcher/launcher-dialog.c:107
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: ../plugins/launcher/launcher-dialog.c:108
+msgid "Network"
+msgstr "Redes"
+
+#: ../plugins/launcher/launcher-dialog.c:109
+msgid "Graphics"
+msgstr "Gráficos"
+
+#: ../plugins/launcher/launcher-dialog.c:110
+msgid "Printer"
+msgstr "Impresora"
+
+#: ../plugins/launcher/launcher-dialog.c:111
+msgid "Productivity"
+msgstr "Productividade"
+
+#: ../plugins/launcher/launcher-dialog.c:112
+msgid "Office"
+msgstr "Oficina"
+
+#: ../plugins/launcher/launcher-dialog.c:113
+msgid "Sound"
+msgstr "Son"
+
+#: ../plugins/launcher/launcher-dialog.c:114
+msgid "Terminal"
+msgstr "Terminal"
+
+#: ../plugins/launcher/launcher-dialog.c:115
+msgid "Development"
+msgstr "Desenvolvemento"
+
+#: ../plugins/launcher/launcher-dialog.c:402
+msgid "Select image file"
+msgstr "Seleccione un arquivo de imaxe"
+
+#: ../plugins/launcher/launcher-dialog.c:448
+msgid "Select command"
+msgstr "Seleccione un comando"
+
+#: ../plugins/launcher/launcher-dialog.c:471
+msgid "Name"
+msgstr "Nome"
+
+#: ../plugins/launcher/launcher-dialog.c:489
+msgid "Description"
+msgstr "Descrición"
+
+#: ../plugins/launcher/launcher-dialog.c:544
+msgid "Other..."
+msgstr "Outro..."
+
+#: ../plugins/launcher/launcher-dialog.c:630
+msgid "Command"
+msgstr "Comando"
+
+#: ../plugins/launcher/launcher-dialog.c:666
+msgid "Run in _terminal"
+msgstr "Executar nun _terminal"
+
+#: ../plugins/launcher/launcher-dialog.c:684
+msgid "Use _startup notification"
+msgstr "Usar unha notificación de _comezo"
+
+#: ../plugins/launcher/launcher-dialog.c:1266
+msgid ""
+"The first item in the list is shown on the panel. Additional items will "
+"appear in a menu."
+msgstr ""
+"O primeiro elemento da lista é mostrado no panel. Os outro elementos serán "
+"mostrados no menu."
+
+#: ../plugins/launcher/launcher-dialog.c:1323
+msgid "Program Launcher"
+msgstr "Lanzador de aplicacións"
+
+#: ../plugins/launcher/launcher-dialog.c:1405
+#: ../plugins/launcher/launcher-dialog.c:1506
+#, c-format
+msgid ""
+"Failed to run 0launch:\n"
+"%s\n"
+"\n"
+"For help using Zero Install, see http://0install.net"
+msgstr ""
+"Fallou a execución:\n"
+"%s"
+
+#: ../plugins/launcher/launcher-dialog.c:1471
+msgid ""
+"The Zero Install GUI has finished, but the launcher dialog has disappeared "
+"in the meantime. Not adding launcher (but any files downloaded have not been "
+"lost)."
+msgstr ""
+"A GUI da instalación de Zero rematou, pero o diálogo lanzador desapareceu "
+"namentres. Non se pode añadir o lanzador (pero ningún dos arquivos "
+"descargados foi perdido)"
+
+#: ../plugins/launcher/launcher-dialog.c:1829
+msgid "Select file"
+msgstr "Seleccionar ficheiro"
+
+#: ../plugins/pager/pager.c:301 ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Pager"
+msgstr "Paxinador"
+
+#: ../plugins/pager/pager.c:321
+msgid "Number of rows:"
+msgstr "Número de liñas:"
+
+#: ../plugins/pager/pager.c:325
+msgid "Number of columns:"
+msgstr "Número de columnas:"
+
+#: ../plugins/separator/separator.c:271
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator or Spacing"
+msgstr "Separador ou espaciado"
+
+#: ../plugins/separator/separator.c:284
+msgid "_Draw Separator"
+msgstr "_Debuxar separador"
+
+#: ../plugins/separator/separator.c:293
+msgid "_Expand"
+msgstr "_Expandir"
+
+#: ../plugins/showdesktop/showdesktop.c:32
+msgid "Restore hidden windows"
+msgstr "Restaurar fiestras ocultas"
+
+#: ../plugins/showdesktop/showdesktop.c:33
+msgid "Hide windows and show desktop"
+msgstr "Ocultar fiestras e mostrar o escritorio"
+
+#: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
+msgid "There is already a system tray running on this screen"
+msgstr "Actualmente xa existe unha bandexa de sistema nesta pantalla"
+
+#: ../plugins/systray/systray.c:90
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Non se pode rexistrar a bandexa de sistema: %s"
+
+#: ../plugins/systray/systray.c:394
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid "System Tray"
+msgstr "Bandexa do Sistema"
+
+#: ../plugins/tasklist/tasklist.c:401 ../plugins/tasklist/tasklist.c:454
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+msgid "Task List"
+msgstr "Lista de _Tarefas"
+
+#: ../plugins/tasklist/tasklist.c:418
+msgid "Size"
+msgstr "Tamaño"
+
+#: ../plugins/tasklist/tasklist.c:426
+msgid "Minimum Width:"
+msgstr "Largo mínimo:"
+
+#: ../plugins/tasklist/tasklist.c:441
+msgid "Use all available space"
+msgstr "Usar todo o espacio dispoñible"
+
+#: ../plugins/tasklist/tasklist.c:458
+msgid "Show tasks from _all workspaces"
+msgstr "Mostrar as tarefas de todos os escritorios virtuales"
+
+#: ../plugins/tasklist/tasklist.c:468
+msgid "Show application _names"
+msgstr "Mostrar todos os nomes de aplicación"
+
+#: ../plugins/tasklist/tasklist.c:482
+msgid "Never group tasks"
+msgstr "Non agrupar tarefas nunca"
+
+#: ../plugins/tasklist/tasklist.c:485
+msgid "Automatically group tasks"
+msgstr "Agrupar tarefas automáticamente"
+
+#: ../plugins/tasklist/tasklist.c:488
+msgid "Always group tasks"
+msgstr "Agrupar tarefas sempre"
+
+#: ../plugins/windowlist/windowlist.c:226
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr "¿Está seguro de que desexa eliminar o escritorio virtual \"%d\"?"
+
+#: ../plugins/windowlist/windowlist.c:227
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr "¿Está seguro de que quere borrar o escritorio virtual '%s'?"
+
+#: ../plugins/windowlist/windowlist.c:428
+#, c-format
+msgid "Workspace %d"
+msgstr "Escritorio virtual %d"
+
+#: ../plugins/windowlist/windowlist.c:530
+#: ../plugins/windowlist/windowlist.c:536
+msgid "Add workspace"
+msgstr "Engadir escritorio virtual"
+
+#: ../plugins/windowlist/windowlist.c:549
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Eliminar escritorio virtual %d"
+
+#: ../plugins/windowlist/windowlist.c:550
+#, c-format
+msgid "Remove Workspace '%s'"
+msgstr "Eliminar escritorio virtual '%s'"
+
+#: ../plugins/windowlist/windowlist-dialog.c:131
+#: ../plugins/windowlist/windowlist-dialog.c:215
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:2
+msgid "Window List"
+msgstr "Lista de Fiestras"
+
+#: ../plugins/windowlist/windowlist-dialog.c:153
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"<i>Aviso urxente</i> o botón parpadeará cando unha aplicación precise da súa "
+"atención."
+
+#: ../plugins/windowlist/windowlist-dialog.c:160
+msgid "Urgency Notification"
+msgstr "Aviso urxente"
+
+#: ../plugins/windowlist/windowlist-dialog.c:167
+msgid "_Disabled"
+msgstr "_Desactivado"
+
+#: ../plugins/windowlist/windowlist-dialog.c:176
+msgid "For _other workspaces"
+msgstr "Para _outros escritorios virtuales"
+
+#: ../plugins/windowlist/windowlist-dialog.c:185
+msgid "For _all workspaces"
+msgstr "Para _todos os escritorios virtuales"
+
+#: ../plugins/windowlist/windowlist-dialog.c:199
+msgid "_Icon button"
+msgstr "Botón de _icona"
+
+#: ../plugins/windowlist/windowlist-dialog.c:206
+msgid "A_rrow button"
+msgstr "Botón de _flecha"
+
+#: ../plugins/windowlist/windowlist-dialog.c:224
+msgid "Show _windows from all workspaces"
+msgstr "Mostrar _fiestras de todos os escritorios virtuales"
+
+#: ../plugins/windowlist/windowlist-dialog.c:233
+msgid "Show a_pplication icons"
+msgstr "Mostrar iconas de _aplicación"
+
+#: ../plugins/windowlist/windowlist-dialog.c:242
+msgid "Show wor_kspace actions"
+msgstr "Mostrar accións do _escritorio virtual"
+
+#: ../mcs-plugin/plugin.c:46
+msgid "Panel"
+msgstr "Panel"
+
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "Botóns de accións"
+
+#: ../plugins/actions/actions.desktop.in.in.h:2
+msgid "Log out or lock the screen"
+msgstr "Pechar a sesión ou bloquear o escritorio"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "¿Que hora é?"
+
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+msgid "Show icons of all running applications"
+msgstr "Mostrar iconas de tódalas aplicacións en execución"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Lanzador"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr "Lanzador de aplicacións con menu opcional"
+
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Miniature view of all virtual desktops"
+msgstr "Vista en miniatura de todos os escritorios virtuais"
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr "Engadir un espacio ou unha liña entre os compoñentes do panel"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Show Desktop"
+msgstr "Mostrar Escritorio"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Toggle desktop show/hide"
+msgstr "Trocar escritorio mostrar/ocultar"
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Show notification icons"
+msgstr "Mostrar iconas de notificación"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Show all running applications"
+msgstr "Mostrar todas as aplicacións en execución"
+
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:1
+msgid "Show list of available windows"
+msgstr "Mostrar a lista de fiestras dispoñibles"
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:1
+msgid "Test Plugin"
+msgstr "Plugin de test"
+
+#: ../plugins/testplugin/testplugin.desktop.in.in.h:2
+msgid "This plugin has no purpose"
+msgstr "Este plugin non ten ningún propósito"
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+msgid "Xfce 4 Panel Manager"
+msgstr "Administrador de paneis de XFCE 4"
