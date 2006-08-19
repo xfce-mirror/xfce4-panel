@@ -9,11 +9,11 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.90.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-12 17:05+0200\n"
-"PO-Revision-Date: 2006-08-03 17:21+0100\n"
-"Last-Translator: Gerald Barre <g.barre@free.fr>\n"
+"PO-Revision-Date: 2006-08-19 18:36+0100\n"
+"Last-Translator: Maximilian Schleiss <maxschleiss@bluewin.ch>\n"
 "Language-Team: French <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../config/launcher-7.rc.in.h:1
@@ -28,7 +28,8 @@ msgstr "Émulateur de terminal X"
 msgid "Edit text files"
 msgstr "Éditer des fichiers texte"
 
-#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+#: ../config/launcher-8.rc.in.h:2
+#: ../plugins/launcher/launcher-dialog.c:102
 msgid "Editor"
 msgstr "Éditeur"
 
@@ -59,16 +60,18 @@ msgstr "Un élément a été inopinément supprimé: \"%s\"."
 msgid "Remove \"%s\"?"
 msgstr "Supprimer \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:576 ../panel/panel-app.c:750
-#: ../panel/panel-app.c:782 ../panel/panel-app.c:815
-#: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:576
+#: ../panel/panel-app.c:750
+#: ../panel/panel-app.c:782
+#: ../panel/panel-app.c:815
+#: ../plugins/launcher/launcher.c:375
+#: ../plugins/launcher/launcher.c:401
 #: ../plugins/launcher/launcher.c:437
 msgid "Xfce Panel"
 msgstr "Panneau Xfce"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:578
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "L'élément va être enlevé du panneau et sa configuration sera perdue."
 
 #. configure, hide by default
@@ -93,7 +96,8 @@ msgstr "Supprimer"
 msgid "Add New Item"
 msgstr "Ajouter un Nouvel Élément"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:845 ../panel/panel.c:662
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:845
+#: ../panel/panel.c:662
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Configurer le Pannneau"
@@ -102,7 +106,8 @@ msgstr "Configurer le Pannneau"
 msgid "Add Items"
 msgstr "Ajouter des Éléments"
 
-#: ../panel/panel.c:689 ../plugins/actions/actions.c:417
+#: ../panel/panel.c:689
+#: ../plugins/actions/actions.c:417
 msgid "Quit"
 msgstr "Quitter"
 
@@ -114,15 +119,14 @@ msgstr "Redémarrer"
 msgid "About the Xfce Panel"
 msgstr "À propos du panneau Xfce"
 
-#: ../panel/panel-app.c:243 ../panel/panel-app.c:752
+#: ../panel/panel-app.c:243
+#: ../panel/panel-app.c:752
 msgid "Exit Xfce Panel?"
 msgstr "Quitter le panneau Xfce?"
 
 #: ../panel/panel-app.c:753
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"Vous ne pouvez pas enlever le dernier panneau. Voulez-vous quitter le "
-"programme?"
+msgstr "Vous ne pouvez pas enlever le dernier panneau. Voulez-vous quitter le programme?"
 
 #: ../panel/panel-app.c:780
 #, c-format
@@ -203,42 +207,45 @@ msgid "Add Items to the Panel"
 msgstr "Ajouter des Éléments au Panneau"
 
 #: ../panel/panel-dialogs.c:618
-msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
-msgstr ""
-"Faire glisser des éléments de la liste vers le panneau ou les enlever en les "
-"refaisant glisser vers la liste."
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Faire glisser des éléments de la liste vers le panneau ou les enlever en les refaisant glisser vers la liste."
 
 #: ../panel/panel-dialogs.c:635
 msgid "Available Items"
 msgstr "Éléments disponibles"
 
-#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1084
+#: ../panel/panel-dialogs.c:860
+#: ../panel/panel-dialogs.c:1084
 msgid "Normal Width"
 msgstr "Largeur normale"
 
-#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1086
+#: ../panel/panel-dialogs.c:862
+#: ../panel/panel-dialogs.c:1086
 msgid "Full Width"
 msgstr "Pleine largeur"
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:868
+#: ../panel/panel-dialogs.c:1092
 msgid "Span Monitors"
 msgstr "Étendre à tous les moniteurs"
 
-#: ../panel/panel-dialogs.c:928 ../panel/panel-dialogs.c:1157
+#: ../panel/panel-dialogs.c:928
+#: ../panel/panel-dialogs.c:1157
 msgid "Left"
 msgstr "à Gauche"
 
-#: ../panel/panel-dialogs.c:930 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:930
+#: ../panel/panel-dialogs.c:1159
 msgid "Right"
 msgstr "à Droite"
 
-#: ../panel/panel-dialogs.c:935 ../panel/panel-dialogs.c:1164
+#: ../panel/panel-dialogs.c:935
+#: ../panel/panel-dialogs.c:1164
 msgid "Top"
 msgstr "en Haut"
 
-#: ../panel/panel-dialogs.c:937 ../panel/panel-dialogs.c:1166
+#: ../panel/panel-dialogs.c:937
+#: ../panel/panel-dialogs.c:1166
 msgid "Bottom"
 msgstr "en Bas"
 
@@ -284,7 +291,8 @@ msgid "Select Monitor"
 msgstr "Sélerctionner le moniteur"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1352 ../plugins/clock/clock.c:459
+#: ../panel/panel-dialogs.c:1352
+#: ../plugins/clock/clock.c:459
 #: ../plugins/tasklist/tasklist.c:432
 #: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
@@ -303,7 +311,8 @@ msgstr "Transparence (%):"
 msgid "Make active panel opaque"
 msgstr "Rendre opaque le panneau actif"
 
-#: ../panel/panel-dialogs.c:1449 ../panel/panel-dialogs.c:1485
+#: ../panel/panel-dialogs.c:1449
+#: ../panel/panel-dialogs.c:1485
 #: ../panel/panel-dialogs.c:1510
 #, c-format
 msgid "Panel %d"
@@ -350,7 +359,8 @@ msgstr "Quitter + Verrouiller l'écran"
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:446 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:446
+#: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Horloge"
 
@@ -367,7 +377,8 @@ msgstr "Numérique"
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:478 ../plugins/systray/systray.c:400
+#: ../plugins/clock/clock.c:478
+#: ../plugins/systray/systray.c:400
 msgid "Show _frame"
 msgstr "Afficher _cadre"
 
@@ -400,7 +411,8 @@ msgstr "Afficher seulement les applications minimisées"
 msgid "Show applications of all workspaces"
 msgstr "Afficher les applications de tous les espaces de travail"
 
-#: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
+#: ../plugins/launcher/launcher.c:373
+#: ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "Impossible d'exécuter \"%s\"."
@@ -410,12 +422,14 @@ msgstr "Impossible d'exécuter \"%s\"."
 msgid "Error in command \"%s\""
 msgstr "Erreur dans la commande \"%s\""
 
-#: ../plugins/launcher/launcher.c:673 ../plugins/launcher/launcher.c:1300
+#: ../plugins/launcher/launcher.c:673
+#: ../plugins/launcher/launcher.c:1300
 #: ../plugins/launcher/launcher-dialog.c:1167
 msgid "New Item"
 msgstr "Nouvel Élément"
 
-#: ../plugins/launcher/launcher.c:747 ../plugins/launcher/launcher.c:1301
+#: ../plugins/launcher/launcher.c:747
+#: ../plugins/launcher/launcher.c:1301
 msgid "This item has not yet been configured"
 msgstr "Cet élément n'a pas encore été configuré"
 
@@ -508,12 +522,8 @@ msgid "Use _startup notification"
 msgstr "Utiliser la _notification de démarrage"
 
 #: ../plugins/launcher/launcher-dialog.c:1289
-msgid ""
-"The first item in the list is shown on the panel. Additional items will "
-"appear in a menu."
-msgstr ""
-"Le premier élément dans la liste est montré sur le panneau. Les éléments "
-"additionnels apparaîtront dans un menu."
+msgid "The first item in the list is shown on the panel. Additional items will appear in a menu."
+msgstr "Le premier élément dans la liste est montré sur le panneau. Les éléments additionnels apparaîtront dans un menu."
 
 #: ../plugins/launcher/launcher-dialog.c:1332
 msgid "Program Launcher"
@@ -534,19 +544,15 @@ msgstr ""
 "Allez à http://0install.net pour de l'aide à l'utilisation de Zero Install"
 
 #: ../plugins/launcher/launcher-dialog.c:1487
-msgid ""
-"The Zero Install GUI has finished, but the launcher dialog has disappeared "
-"in the meantime. Not adding launcher (but any files downloaded have not been "
-"lost)."
-msgstr ""
-"Zero Install GUI a fini, entretemps la fenêtre du lanceur a disparu. Le "
-"lanceur n'est pas ajouté (les fichiers téléchargés ne sont pas perdus)."
+msgid "The Zero Install GUI has finished, but the launcher dialog has disappeared in the meantime. Not adding launcher (but any files downloaded have not been lost)."
+msgstr "Zero Install GUI a fini, entretemps la fenêtre du lanceur a disparu. Le lanceur n'est pas ajouté (les fichiers téléchargés ne sont pas perdus)."
 
 #: ../plugins/launcher/launcher-dialog.c:1894
 msgid "Select file"
 msgstr "Sélection de fichier"
 
-#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:305
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Bureaux"
 
@@ -583,7 +589,8 @@ msgstr "Restaurer les fenêtres cachées"
 msgid "Hide windows and show desktop"
 msgstr "Cacher les fenêtres et afficher le bureau"
 
-#: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
+#: ../plugins/systray/systray.c:69
+#: ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
 msgstr "Il y a déjà une zone de notification système active pour cet écran"
 
@@ -597,7 +604,8 @@ msgstr "Impossible d'activer le système de notification: %s"
 msgid "System Tray"
 msgstr "Notification système"
 
-#: ../plugins/tasklist/tasklist.c:406 ../plugins/tasklist/tasklist.c:477
+#: ../plugins/tasklist/tasklist.c:406
+#: ../plugins/tasklist/tasklist.c:477
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Liste des tâches"
@@ -612,7 +620,7 @@ msgstr "Utiliser l'espace disponible"
 
 #: ../plugins/tasklist/tasklist.c:464
 msgid "Use flat buttons"
-msgstr ""
+msgstr "Utiliser des boutons plats"
 
 #: ../plugins/tasklist/tasklist.c:481
 msgid "Show tasks from _all workspaces"
@@ -674,12 +682,8 @@ msgid "Window List"
 msgstr "Liste des fenêtres"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Notification d'urgence</i> fera clignoter le bouton lorsqu'une "
-"application a besoin d'être suivie."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Notification d'urgence</i> fera clignoter le bouton lorsqu'une application a besoin d'être suivie."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -788,3 +792,4 @@ msgstr "Gestionnaire du Panneau Xfce 4"
 
 #~ msgid "Size"
 #~ msgstr "Taille"
+
