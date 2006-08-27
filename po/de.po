@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.3.90.2\n"
+"Project-Id-Version: xfce4-panel 4.3.28\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-12 17:05+0200\n"
-"PO-Revision-Date: 2006-02-19 12:14+0100\n"
+"PO-Revision-Date: 2006-07-23 12:46+0100\n"
 "Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,50 +17,47 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../config/launcher-7.rc.in.h:1
-#, fuzzy
 msgid "Command Prompt"
-msgstr "Befehl"
+msgstr "Befehlseingabe"
 
 #: ../config/launcher-7.rc.in.h:2
 msgid "X terminal emulator"
-msgstr ""
+msgstr "X-Terminalemulator"
 
 #: ../config/launcher-8.rc.in.h:1
 msgid "Edit text files"
-msgstr ""
+msgstr "Testdateien bearbeiten"
 
 #: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
 msgid "Editor"
 msgstr "Editor"
 
 #: ../config/launcher-9.rc.in.h:1
-#, fuzzy
 msgid "File Manager"
-msgstr "Dateimanagement"
+msgstr "Dateimanager"
 
 #: ../config/launcher-9.rc.in.h:2
 msgid "Manage files and folders"
-msgstr ""
+msgstr "Dateien und Ordner verwalten"
 
 #: ../config/launcher-10.rc.in.h:1
 msgid "Surf the internet"
-msgstr ""
+msgstr "Im Internet surfen"
 
 #: ../config/launcher-10.rc.in.h:2
-#, fuzzy
 msgid "Web Browser"
-msgstr "Hilfe"
+msgstr "Webbrowser"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "Ein Element wurde unerwartet entfernt: \"%s\"."
+msgstr "Ein Element wurde unerwartet entfernt: »%s«."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:573
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "Entferne \"%s\"?"
+msgstr "Entferne »%s«?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:576 ../panel/panel-app.c:750
 #: ../panel/panel-app.c:782 ../panel/panel-app.c:815
@@ -73,7 +70,7 @@ msgstr "Xfce Panel"
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
-"Das Element wird aus der Leiste entfernt und seine Einstellungen gehen "
+"Das Element wird aus der Leiste entfernt, und seine Einstellungen gehen "
 "verloren."
 
 #. configure, hide by default
@@ -117,11 +114,11 @@ msgstr "Neu starten"
 
 #: ../panel/panel.c:713
 msgid "About the Xfce Panel"
-msgstr "Über die Xfce Leiste"
+msgstr "Über die Xfce-Leiste"
 
 #: ../panel/panel-app.c:243 ../panel/panel-app.c:752
 msgid "Exit Xfce Panel?"
-msgstr "Xfce Leiste beenden?"
+msgstr "Xfce-Leiste beenden?"
 
 #: ../panel/panel-app.c:753
 msgid "You can't remove the last panel. Would you like to exit the program?"
@@ -132,11 +129,11 @@ msgstr ""
 #: ../panel/panel-app.c:780
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Leiste \"%d\" entfernen?"
+msgstr "Leiste »%d« entfernen?"
 
 #: ../panel/panel-app.c:784
 msgid "The selected panel and all its items will be removed."
-msgstr "Die ausgewqählte Leiste und ihre gesamter Inhalt werden entfernt."
+msgstr "Die ausgewählte Leiste und ihr gesamter Inhalt werden entfernt."
 
 #: ../panel/panel-app.c:823
 msgid "Developer"
@@ -155,9 +152,9 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Die Xfce Leiste %s\n"
+"Xfce-Leiste %s\n"
 "\n"
-"Teil der Xfce Desktop Umgebung\n"
+"Teil der Xfce Desktop-Umgebung\n"
 "http://www.xfce.org\n"
 "\n"
 "Lizensiert unter GNU GPL.\n"
@@ -200,11 +197,11 @@ msgstr ""
 #: ../panel/panel-dialogs.c:179
 #, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Konnte Modul \"%s\" nicht öffnen."
+msgstr "Konnte Modul »%s« nicht öffnen."
 
 #: ../panel/panel-dialogs.c:588
 msgid "Add Items to the Panel"
-msgstr ""
+msgstr "Objekte zur Leiste hinzufügen"
 
 #: ../panel/panel-dialogs.c:618
 msgid ""
@@ -228,7 +225,7 @@ msgstr "Volle Breite"
 
 #: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
 msgid "Span Monitors"
-msgstr "Monitore umfassen"
+msgstr "Auf Monitore verteilen"
 
 #: ../panel/panel-dialogs.c:928 ../panel/panel-dialogs.c:1157
 msgid "Left"
@@ -297,16 +294,15 @@ msgstr "Aussehen"
 #. size
 #: ../panel/panel-dialogs.c:1363
 msgid "Size (pixels):"
-msgstr ""
+msgstr "Größe (in Pixel)"
 
 #: ../panel/panel-dialogs.c:1386
-#, fuzzy
 msgid "Transparency (%):"
-msgstr "Durchsichtigkeit"
+msgstr "Durchsichtigkeit (%):"
 
 #: ../panel/panel-dialogs.c:1410
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "Die aktive Leiste undurchsichtig machen"
 
 #: ../panel/panel-dialogs.c:1449 ../panel/panel-dialogs.c:1485
 #: ../panel/panel-dialogs.c:1510
@@ -395,26 +391,25 @@ msgstr "Sekunden anzeigen"
 #: ../plugins/iconbox/iconbox.c:807
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr "Icon Box"
+msgstr "Icon-Box"
 
 #: ../plugins/iconbox/iconbox.c:830
 msgid "Only show minimized applications"
 msgstr "Nur minimierte Anwendungen anzeigen"
 
 #: ../plugins/iconbox/iconbox.c:839
-#, fuzzy
 msgid "Show applications of all workspaces"
-msgstr "Sämtliche Tasks _anzeigen"
+msgstr "Sämtliche Anwendungen _anzeigen"
 
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Could not run \"%s\""
-msgstr "Konnte \"%s\" nicht ausführen."
+msgstr "Konnte »%s« nicht ausführen."
 
 #: ../plugins/launcher/launcher.c:398
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "Fehler im Befehl »%s«"
 
 #: ../plugins/launcher/launcher.c:673 ../plugins/launcher/launcher.c:1300
 #: ../plugins/launcher/launcher-dialog.c:1167
@@ -423,7 +418,7 @@ msgstr "Neuer Eintrag"
 
 #: ../plugins/launcher/launcher.c:747 ../plugins/launcher/launcher.c:1301
 msgid "This item has not yet been configured"
-msgstr "Diese Eintrag wurde noch nicht bearbeitet"
+msgstr "Dieser Eintrag wurde noch nicht bearbeitet"
 
 #: ../plugins/launcher/launcher-dialog.c:101
 msgid "Default"
@@ -431,7 +426,7 @@ msgstr "Standard"
 
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
-msgstr "Dateimanagement"
+msgstr "Dateiverwaltung"
 
 #: ../plugins/launcher/launcher-dialog.c:104
 msgid "Utilities"
@@ -467,7 +462,7 @@ msgstr "Produktivität"
 
 #: ../plugins/launcher/launcher-dialog.c:112
 msgid "Office"
-msgstr ""
+msgstr "Büro"
 
 #: ../plugins/launcher/launcher-dialog.c:113
 msgid "Sound"
@@ -478,9 +473,8 @@ msgid "Terminal"
 msgstr "Terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:115
-#, fuzzy
 msgid "Development"
-msgstr "Entwickler"
+msgstr "Entwicklung"
 
 #: ../plugins/launcher/launcher-dialog.c:413
 msgid "Select image file"
@@ -512,7 +506,7 @@ msgstr "In _Terminal ausführen"
 
 #: ../plugins/launcher/launcher-dialog.c:707
 msgid "Use _startup notification"
-msgstr "Benutze _Startup Notifikation"
+msgstr "Benutze _grafische Rückmeldung"
 
 #: ../plugins/launcher/launcher-dialog.c:1289
 msgid ""
@@ -535,6 +529,10 @@ msgid ""
 "\n"
 "For help using Zero Install, see http://0install.net"
 msgstr ""
+"Konnte 0launch nicht ausführe:\n"
+"%s\n"
+"\n"
+"Für Hilfe zur Verwendung von »Zero Install«, besuchen sie http://0install.net"
 
 #: ../plugins/launcher/launcher-dialog.c:1487
 msgid ""
@@ -542,6 +540,9 @@ msgid ""
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
+"Die Oberfläche »Zero Install« wurde beendet, aber der Starterdialog ist in "
+"der Zwischenzeit verschwunden. Füge den Starter daher nicht hinzu (aber "
+"sämtliche gespeicherte Dateien bleiben erhalten)."
 
 #: ../plugins/launcher/launcher-dialog.c:1894
 msgid "Select file"
@@ -561,13 +562,12 @@ msgstr "Anzahl der Spalten:"
 
 #: ../plugins/pager/pager.c:364
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Arbeitsflächen mit dem Mausrad wechseln"
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "Trennlinie"
+msgstr "Trennlinie oder Abstand"
 
 #: ../plugins/separator/separator.c:277
 msgid "_Draw Separator"
@@ -587,7 +587,7 @@ msgstr "Fenster verstecken und Arbeitsfläche anzeigen"
 
 #: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
-msgstr "Es läuft bereits ein Systemtray"
+msgstr "Es läuft bereits eine Systemleiste auf diesem Bildschirm"
 
 #: ../plugins/systray/systray.c:90
 #, c-format
@@ -614,7 +614,7 @@ msgstr "Gesamten verfügbaren Platz verwenden"
 
 #: ../plugins/tasklist/tasklist.c:464
 msgid "Use flat buttons"
-msgstr ""
+msgstr "Flache Knöpfe verwenden"
 
 #: ../plugins/tasklist/tasklist.c:481
 msgid "Show tasks from _all workspaces"
@@ -639,17 +639,17 @@ msgstr "Tasks immer gruppieren"
 #: ../plugins/windowlist/windowlist.c:229
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Soll die Arbeitsfläche %d wirklich entfernt werden?"
 
 #: ../plugins/windowlist/windowlist.c:230
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Soll die Arbeitsfläche »%s« wirklich entfernt werden?"
 
 #: ../plugins/windowlist/windowlist.c:425
-#, fuzzy, c-format
+#, c-format
 msgid "Workspace %d"
-msgstr "Arbeitsfläche hinzufügen"
+msgstr "Arbeitsfläche %d"
 
 #: ../plugins/windowlist/windowlist.c:527
 #: ../plugins/windowlist/windowlist.c:533
@@ -657,14 +657,14 @@ msgid "Add workspace"
 msgstr "Arbeitsfläche hinzufügen"
 
 #: ../plugins/windowlist/windowlist.c:546
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace %d"
-msgstr "Leiste \"%d\" entfernen?"
+msgstr "Arbeitsfläche %d entfernen?"
 
 #: ../plugins/windowlist/windowlist.c:547
-#, fuzzy, c-format
+#, c-format
 msgid "Remove Workspace '%s'"
-msgstr "Leiste \"%d\" entfernen?"
+msgstr "Arbeitsfläche »s« entfernen?"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
@@ -678,53 +678,49 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"Die <i>Dringlichkeitsbenachrichtigung<i> lässt den Knopf blinken, wenn eine "
+"Anwendung Aufmerksamkeit benötigt."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Benutze _Startup Notifikation"
+msgstr "Dringlichkeitsbenachrichtigung"
 
 #: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
-msgstr ""
+msgstr "A_usgeschaltet"
 
 #: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
-msgstr ""
+msgstr "Für a_ndere Arbeitsflächen"
 
 #: ../plugins/windowlist/windowlist-dialog.c:180
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Sämtliche Tasks _anzeigen"
+msgstr "Für _alle Arbeitsflächen"
 
 #: ../plugins/windowlist/windowlist-dialog.c:194
-#, fuzzy
 msgid "_Icon button"
-msgstr "Aktive Knöpfe"
+msgstr "_Symbolknopf"
 
 #: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
-msgstr ""
+msgstr "_Pfeilknopf"
 
 #: ../plugins/windowlist/windowlist-dialog.c:219
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Sämtliche Tasks _anzeigen"
+msgstr "_Fenster aller Arbeitsflächen anzeigen"
 
 #: ../plugins/windowlist/windowlist-dialog.c:228
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Programmnamen a_nzeigen"
+msgstr "Programmsymbole a_nzeigen"
 
 #: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "A_ktionen für die Arbeitsfläche anzeigen"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "Leiste %d"
+msgstr "Leiste"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -788,9 +784,8 @@ msgid "This plugin has no purpose"
 msgstr "Dieses Plugin hat keinen Nutzen"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "Verwaltung der Leisten"
+msgstr "Xfce 4 Leistenverwaltung"
 
 #~ msgid "Size"
 #~ msgstr "Größe"
