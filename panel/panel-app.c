@@ -304,7 +304,7 @@ set_signal_state (GIOChannel * source, GIOCondition cond, gpointer d)
                 break;
 
             default:
-                DBG ("Signal caught: %d", sig);
+                DBG ("Signal caught: %d", buf.signal);
                 panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
         }
     }
