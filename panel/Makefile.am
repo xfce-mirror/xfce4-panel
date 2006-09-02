@@ -2,6 +2,7 @@
 bin_SCRIPTS = @DUMMY_SCRIPTS@
 
 EXTRA_SCRIPTS = xftaskbar4 xfce4-iconbox
+EXTRA_DIST = $(EXTRA_SCRIPTS)
 
 bin_PROGRAMS = xfce4-panel
 

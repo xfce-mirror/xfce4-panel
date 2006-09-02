@@ -1,4 +1,8 @@
-conf_in_files =	$(wildcard $(srcdir)/*.rc.in)
+conf_in_files =								\
+	launcher-7.rc.in						\
+	launcher-8.rc.in						\
+	launcher-9.rc.in						\
+	launcher-10.rc.in
 
 conf_files = $(conf_in_files:.rc.in=.rc)
 

@@ -8,45 +8,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-12 17:05+0200\n"
+"POT-Creation-Date: 2006-09-02 17:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr ""
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr ""
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr ""
-
-#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
-msgid "Editor"
-msgstr ""
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr ""
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr ""
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr ""
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr ""
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -59,8 +27,8 @@ msgstr ""
 msgid "Remove \"%s\"?"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:576 ../panel/panel-app.c:750
-#: ../panel/panel-app.c:782 ../panel/panel-app.c:815
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:576 ../panel/panel-app.c:851
+#: ../panel/panel-app.c:883 ../panel/panel-app.c:916
 #: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
 #: ../plugins/launcher/launcher.c:437
 msgid "Xfce Panel"
@@ -102,7 +70,8 @@ msgstr ""
 msgid "Add Items"
 msgstr ""
 
-#: ../panel/panel.c:689 ../plugins/actions/actions.c:417
+#: ../panel/panel.c:689 ../plugins/actions/actions.c:280
+#: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:429
 msgid "Quit"
 msgstr ""
 
@@ -114,24 +83,24 @@ msgstr ""
 msgid "About the Xfce Panel"
 msgstr ""
 
-#: ../panel/panel-app.c:243 ../panel/panel-app.c:752
+#: ../panel/panel-app.c:229 ../panel/panel-app.c:853
 msgid "Exit Xfce Panel?"
 msgstr ""
 
-#: ../panel/panel-app.c:753
+#: ../panel/panel-app.c:854
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 
-#: ../panel/panel-app.c:780
+#: ../panel/panel-app.c:881
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
-#: ../panel/panel-app.c:784
+#: ../panel/panel-app.c:885
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:823
+#: ../panel/panel-app.c:924
 msgid "Developer"
 msgstr ""
 
@@ -189,127 +158,128 @@ msgstr ""
 msgid "Available Items"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1084
+#: ../panel/panel-dialogs.c:859 ../panel/panel-dialogs.c:1083
 msgid "Normal Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1086
+#: ../panel/panel-dialogs.c:861 ../panel/panel-dialogs.c:1085
 msgid "Full Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:867 ../panel/panel-dialogs.c:1091
 msgid "Span Monitors"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:928 ../panel/panel-dialogs.c:1157
+#: ../panel/panel-dialogs.c:927 ../panel/panel-dialogs.c:1156
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:930 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:929 ../panel/panel-dialogs.c:1158
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:935 ../panel/panel-dialogs.c:1164
+#: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:937 ../panel/panel-dialogs.c:1166
+#: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
 msgid "Bottom"
 msgstr ""
 
 #. position
-#: ../panel/panel-dialogs.c:965
+#: ../panel/panel-dialogs.c:964
 msgid "Position"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:979
+#: ../panel/panel-dialogs.c:978
 msgid "Fixed Position"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:984
 msgid "Freely Moveable"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1100
+#: ../panel/panel-dialogs.c:1099
 msgid "Auto_hide"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1118
+#: ../panel/panel-dialogs.c:1117
 msgid "Orientation:"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1130
+#: ../panel/panel-dialogs.c:1129
 msgid "Horizontal"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:1131
 msgid "Vertical"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1141
+#: ../panel/panel-dialogs.c:1140
 msgid "Handle:"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1153
+#: ../panel/panel-dialogs.c:1152
 msgid "At both sides"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1234
+#: ../panel/panel-dialogs.c:1233
 msgid "Select Monitor"
 msgstr ""
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1352 ../plugins/clock/clock.c:459
-#: ../plugins/tasklist/tasklist.c:432
-#: ../plugins/windowlist/windowlist-dialog.c:188
+#: ../panel/panel-dialogs.c:1351 ../plugins/clock/clock.c:458
+#: ../plugins/tasklist/tasklist.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr ""
 
 #. size
-#: ../panel/panel-dialogs.c:1363
+#: ../panel/panel-dialogs.c:1362
 msgid "Size (pixels):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1386
+#: ../panel/panel-dialogs.c:1385
 msgid "Transparency (%):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1410
+#: ../panel/panel-dialogs.c:1409
 msgid "Make active panel opaque"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1449 ../panel/panel-dialogs.c:1485
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1448 ../panel/panel-dialogs.c:1484
+#: ../panel/panel-dialogs.c:1509
 #, c-format
 msgid "Panel %d"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1529
+#: ../panel/panel-dialogs.c:1528
 msgid "Remove Panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1542
+#: ../panel/panel-dialogs.c:1541
 msgid "New Panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1598
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr ""
 
-#: ../plugins/actions/actions.c:383
-msgid "Panel Actions"
-msgstr ""
-
-#: ../plugins/actions/actions.c:409
-msgid "Select action type:"
-msgstr ""
-
-#: ../plugins/actions/actions.c:418
+#: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
+#: ../plugins/actions/actions.c:430
 msgid "Lock screen"
 msgstr ""
 
-#: ../plugins/actions/actions.c:419
+#: ../plugins/actions/actions.c:396
+msgid "Panel Actions"
+msgstr ""
+
+#: ../plugins/actions/actions.c:421
+msgid "Select action type:"
+msgstr ""
+
+#: ../plugins/actions/actions.c:431
 msgid "Quit + Lock screen"
 msgstr ""
 
@@ -330,35 +300,35 @@ msgid "Clock"
 msgstr ""
 
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:471
+#: ../plugins/clock/clock.c:470
 msgid "Analog"
 msgstr ""
 
-#: ../plugins/clock/clock.c:472
+#: ../plugins/clock/clock.c:471
 msgid "Digital"
 msgstr ""
 
-#: ../plugins/clock/clock.c:473
+#: ../plugins/clock/clock.c:472
 msgid "LED"
 msgstr ""
 
-#: ../plugins/clock/clock.c:478 ../plugins/systray/systray.c:400
+#: ../plugins/clock/clock.c:477 ../plugins/systray/systray.c:399
 msgid "Show _frame"
 msgstr ""
 
-#: ../plugins/clock/clock.c:485
+#: ../plugins/clock/clock.c:484
 msgid "Clock Options"
 msgstr ""
 
-#: ../plugins/clock/clock.c:493
+#: ../plugins/clock/clock.c:492
 msgid "Use 24-_hour clock"
 msgstr ""
 
-#: ../plugins/clock/clock.c:500
+#: ../plugins/clock/clock.c:499
 msgid "Show AM/PM"
 msgstr ""
 
-#: ../plugins/clock/clock.c:507
+#: ../plugins/clock/clock.c:506
 msgid "Display seconds"
 msgstr ""
 
@@ -367,11 +337,11 @@ msgstr ""
 msgid "Icon Box"
 msgstr ""
 
-#: ../plugins/iconbox/iconbox.c:830
+#: ../plugins/iconbox/iconbox.c:829
 msgid "Only show minimized applications"
 msgstr ""
 
-#: ../plugins/iconbox/iconbox.c:839
+#: ../plugins/iconbox/iconbox.c:838
 msgid "Show applications of all workspaces"
 msgstr ""
 
@@ -396,6 +366,10 @@ msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.c:101
 msgid "Default"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
 msgstr ""
 
 #: ../plugins/launcher/launcher-dialog.c:103
@@ -492,8 +466,8 @@ msgstr ""
 msgid "Program Launcher"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1421
-#: ../plugins/launcher/launcher-dialog.c:1522
+#: ../plugins/launcher/launcher-dialog.c:1420
+#: ../plugins/launcher/launcher-dialog.c:1521
 #, c-format
 msgid ""
 "Failed to run 0launch:\n"
@@ -502,30 +476,30 @@ msgid ""
 "For help using Zero Install, see http://0install.net"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1487
+#: ../plugins/launcher/launcher-dialog.c:1486
 msgid ""
 "The Zero Install GUI has finished, but the launcher dialog has disappeared "
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1894
+#: ../plugins/launcher/launcher-dialog.c:1893
 msgid "Select file"
 msgstr ""
 
-#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr ""
 
-#: ../plugins/pager/pager.c:334
+#: ../plugins/pager/pager.c:364
 msgid "Number of rows:"
 msgstr ""
 
-#: ../plugins/pager/pager.c:338
+#: ../plugins/pager/pager.c:368
 msgid "Number of columns:"
 msgstr ""
 
-#: ../plugins/pager/pager.c:364
+#: ../plugins/pager/pager.c:394
 msgid "Switch workspaces using the mouse wheel"
 msgstr ""
 
@@ -534,11 +508,11 @@ msgstr ""
 msgid "Separator or Spacing"
 msgstr ""
 
-#: ../plugins/separator/separator.c:277
+#: ../plugins/separator/separator.c:276
 msgid "_Draw Separator"
 msgstr ""
 
-#: ../plugins/separator/separator.c:286
+#: ../plugins/separator/separator.c:285
 msgid "_Expand"
 msgstr ""
 
@@ -564,120 +538,120 @@ msgstr ""
 msgid "System Tray"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:406 ../plugins/tasklist/tasklist.c:477
+#: ../plugins/tasklist/tasklist.c:406 ../plugins/tasklist/tasklist.c:476
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:440
+#: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:455
+#: ../plugins/tasklist/tasklist.c:454
 msgid "Use all available space"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:464
+#: ../plugins/tasklist/tasklist.c:463
 msgid "Use flat buttons"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:481
+#: ../plugins/tasklist/tasklist.c:480
 msgid "Show tasks from _all workspaces"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:491
+#: ../plugins/tasklist/tasklist.c:490
 msgid "Show application _names"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:505
+#: ../plugins/tasklist/tasklist.c:504
 msgid "Never group tasks"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:508
+#: ../plugins/tasklist/tasklist.c:507
 msgid "Automatically group tasks"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:511
+#: ../plugins/tasklist/tasklist.c:510
 msgid "Always group tasks"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:229
+#: ../plugins/windowlist/windowlist.c:238
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:230
+#: ../plugins/windowlist/windowlist.c:239
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:425
+#: ../plugins/windowlist/windowlist.c:505
 #, c-format
 msgid "Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:527
-#: ../plugins/windowlist/windowlist.c:533
+#: ../plugins/windowlist/windowlist.c:617
+#: ../plugins/windowlist/windowlist.c:623
 msgid "Add workspace"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:546
+#: ../plugins/windowlist/windowlist.c:642
 #, c-format
 msgid "Remove Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:547
+#: ../plugins/windowlist/windowlist.c:643
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr ""
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:210
+#: ../plugins/windowlist/windowlist-dialog.c:209
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:148
+#: ../plugins/windowlist/windowlist-dialog.c:147
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:155
+#: ../plugins/windowlist/windowlist-dialog.c:154
 msgid "Urgency Notification"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:162
+#: ../plugins/windowlist/windowlist-dialog.c:161
 msgid "_Disabled"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:171
+#: ../plugins/windowlist/windowlist-dialog.c:170
 msgid "For _other workspaces"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:180
+#: ../plugins/windowlist/windowlist-dialog.c:179
 msgid "For _all workspaces"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:194
+#: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "_Icon button"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:201
+#: ../plugins/windowlist/windowlist-dialog.c:200
 msgid "A_rrow button"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:219
+#: ../plugins/windowlist/windowlist-dialog.c:218
 msgid "Show _windows from all workspaces"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:228
+#: ../plugins/windowlist/windowlist-dialog.c:227
 msgid "Show a_pplication icons"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:237
+#: ../plugins/windowlist/windowlist-dialog.c:236
 msgid "Show wor_kspace actions"
 msgstr ""
 
