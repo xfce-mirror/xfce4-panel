@@ -205,6 +205,9 @@ menulist_goto_window (GtkWidget *mi,
     else if (ev->button == 3) /* Show the popup menu */
     {
         popup_action_menu (mi, window);
+
+	/* the right-click menu will pop down the main menu */
+	return TRUE;
     }
 
     return FALSE;
