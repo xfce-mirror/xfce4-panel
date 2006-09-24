@@ -53,7 +53,7 @@ enum
 enum
 {
     PROP_0,
-    PROP_ORIENTATION,
+    PROP_ORIENTATION
 };
 
 enum
@@ -185,6 +185,7 @@ xfce_itembar_get_type (void)
 	    sizeof (XfceItembar),
 	    0,			/* n_preallocs */
 	    (GInstanceInitFunc) xfce_itembar_init,
+            NULL
 	};
 
 	type = g_type_register_static (GTK_TYPE_CONTAINER, "XfceItembar", 

@@ -573,8 +573,8 @@ xfce_external_panel_item_new (const char *name,
     priv->size            = size;
     priv->screen_position = position;
 
-    g_signal_connect (item, "realize", G_CALLBACK (_item_setup),
-                      (gpointer) file);
+    g_signal_connect_after (item, "realize", G_CALLBACK (_item_setup),
+			    (gpointer) file);
 
     return item;
 }

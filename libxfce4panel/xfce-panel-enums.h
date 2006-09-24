@@ -74,7 +74,7 @@ typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
 
     /* floating */
     XFCE_SCREEN_POSITION_FLOATING_H,    /* Floating Horizontal */
-    XFCE_SCREEN_POSITION_FLOATING_V,    /* Floating Vertical */
+    XFCE_SCREEN_POSITION_FLOATING_V     /* Floating Vertical */
 }
 XfceScreenPosition;
 

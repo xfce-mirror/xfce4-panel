@@ -697,8 +697,8 @@ xfce_internal_panel_plugin_new (const char *name,
     xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin),
                                          GTK_WIDGET (plugin));
 
-    g_signal_connect (plugin, "realize", G_CALLBACK (_plugin_setup), 
-                      construct);
+    g_signal_connect_after (plugin, "realize", G_CALLBACK (_plugin_setup), 
+			    construct);
 
     return plugin;
 }

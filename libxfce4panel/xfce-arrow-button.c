@@ -50,7 +50,7 @@ enum
 enum
 {
     PROP_0,
-    PROP_ARROW_TYPE,
+    PROP_ARROW_TYPE
 };
 
 
@@ -104,6 +104,7 @@ xfce_arrow_button_get_type (void)
 	    sizeof (XfceArrowButton),
 	    0,			/* n_preallocs */
 	    (GInstanceInitFunc) xfce_arrow_button_init,
+            NULL
 	};
 
 	type = g_type_register_static (GTK_TYPE_TOGGLE_BUTTON,

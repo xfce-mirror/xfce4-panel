@@ -171,6 +171,7 @@ xfce_panel_window_get_type (void)
             sizeof (XfcePanelWindow),
             0,                  /* n_preallocs */
             (GInstanceInitFunc) xfce_panel_window_init,
+            NULL
         };
 
         type = g_type_register_static (GTK_TYPE_WINDOW,
