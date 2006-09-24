@@ -256,7 +256,7 @@ check_signal_state (void)
 }
 
 static gboolean
-set_signal_state (GIOChannel * source, GIOCondition cond, gpointer d)
+set_signal_state (GIOChannel * source, GIOCondition cond, gpointer data)
 {
     GError *error = NULL;
     GIOStatus status;

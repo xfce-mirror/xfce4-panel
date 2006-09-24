@@ -359,7 +359,8 @@ xfce_panel_item_manager_create_item (GdkScreen *screen, const char *name,
             XfcePanelPluginFunc (*get_construct) (void);
             XfcePanelPluginCheck (*get_check) (void);
             
-            if (!(class->gmodule = g_module_open (class->file, 0)))
+	    class->gmodule = g_module_open (class->file, G_MODULE_BIND_LOCAL);
+            if (G_UNLIKELY (class->gmodule == NULL))
             {
                 g_critical ("Could not open \"%s\": %s", 
                             class->name, g_module_error ());
