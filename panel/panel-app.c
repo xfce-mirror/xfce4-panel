@@ -110,7 +110,7 @@ struct _PanelApp
 
     GList *dialogs;
 
-    guint initialized:1;
+    guint initialized:1; /* also unset before cleanup */
 
     /* check whether monitors in Xinerama are aligned */
     guint xinerama_and_equal_width:1;
@@ -128,6 +128,11 @@ cleanup_panels (void)
 {
     int i;
     GList *l;
+
+    if (!panel_app.initialized)
+        return;
+
+    panel_app.initialized = FALSE;
 
     l = panel_app.dialogs;
     panel_app.dialogs = NULL;
@@ -776,6 +781,9 @@ panel_app_customize_items (GtkWidget *active_item)
 void 
 panel_app_save (void)
 {
+    if (!panel_app.initialized)
+        return;
+
     if (xfce_allow_panel_customization())
         panel_config_save_panels (panel_app.panel_list);
 }
@@ -790,7 +798,6 @@ panel_app_restart (void)
 void 
 panel_app_quit (void)
 {
-    panel_app_save();
     panel_app.runstate = PANEL_RUN_STATE_QUIT;
     check_signal_state ();
 }
