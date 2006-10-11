@@ -24,7 +24,7 @@
 
 #define MENU_TIMEOUT               250
 #define BORDER                     8
-#define W_ARROW                    16
+#define W_ARROW                    12
 #define MENU_ICON_SIZE             24
 #define DLG_ICON_SIZE              32
 #define PANEL_ICON_SIZE            48

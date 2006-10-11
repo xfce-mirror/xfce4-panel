@@ -499,6 +499,8 @@ launcher_entry_data_received (GtkWidget *widget, GdkDragContext *context,
                 GTK_TOGGLE_BUTTON (open_launcher->arrowbutton), FALSE);
         open_launcher = NULL;
     }
+    
+    gtk_drag_finish (context, TRUE, FALSE, time);
 }
 
 static void

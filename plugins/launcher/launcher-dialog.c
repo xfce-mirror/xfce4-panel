@@ -1737,6 +1737,8 @@ entry_dialog_data_received (GtkWidget *w, GdkDragContext *context,
         g_free (g_ptr_array_index (files, i));
 
     g_ptr_array_free (files, TRUE);
+    
+    gtk_drag_finish (context, TRUE, FALSE, time);
 }
         
 static void 
@@ -1774,6 +1776,8 @@ launcher_dialog_data_received (GtkWidget *w, GdkDragContext *context,
     }
 
     g_ptr_array_free (files, TRUE);
+    
+    gtk_drag_finish (context, TRUE, FALSE, time);
 }
         
 static void 
@@ -1823,6 +1827,8 @@ icon_entry_data_received (GtkWidget *w, GdkDragContext *context,
     }
 
     g_ptr_array_free (files, TRUE);
+    
+    gtk_drag_finish (context, TRUE, FALSE, time);
 }
         
 /*  File open dialog
