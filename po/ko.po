@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.99.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-08-12 17:05+0200\n"
-"PO-Revision-Date: 2005-11-02 02:03+0900\n"
+"PO-Revision-Date: 2006-10-09 16:42+0900\n"
 "Last-Translator: ByungHyun Choi <byunghyun.choi@gmail.com>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
 "net>\n"
@@ -17,39 +17,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../config/launcher-7.rc.in.h:1
-#, fuzzy
 msgid "Command Prompt"
-msgstr "명령"
+msgstr "명령어 입력"
 
 #: ../config/launcher-7.rc.in.h:2
 msgid "X terminal emulator"
-msgstr ""
+msgstr "X 터미널"
 
 #: ../config/launcher-8.rc.in.h:1
 msgid "Edit text files"
-msgstr ""
+msgstr "텍스트 화일 수정"
 
 #: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
 msgid "Editor"
 msgstr "편집기"
 
 #: ../config/launcher-9.rc.in.h:1
-#, fuzzy
 msgid "File Manager"
-msgstr "화일 관리"
+msgstr "화일 관리자"
 
 #: ../config/launcher-9.rc.in.h:2
 msgid "Manage files and folders"
-msgstr ""
+msgstr "화일과 디렉토리를 관리합니다."
 
 #: ../config/launcher-10.rc.in.h:1
 msgid "Surf the internet"
-msgstr ""
+msgstr "정보의 바다로"
 
 #: ../config/launcher-10.rc.in.h:2
-#, fuzzy
 msgid "Web Browser"
-msgstr "도움말 브라우져"
+msgstr "웹 브라우져"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:175
@@ -198,7 +195,7 @@ msgstr "\"%s\"를(을) 열지 못 했습니다."
 
 #: ../panel/panel-dialogs.c:588
 msgid "Add Items to the Panel"
-msgstr ""
+msgstr "패널에 항목추가"
 
 #: ../panel/panel-dialogs.c:618
 msgid ""
@@ -290,7 +287,7 @@ msgstr "겉 모습"
 #. size
 #: ../panel/panel-dialogs.c:1363
 msgid "Size (pixels):"
-msgstr ""
+msgstr "크기 (픽셀):"
 
 #: ../panel/panel-dialogs.c:1386
 msgid "Transparency (%):"
@@ -394,9 +391,8 @@ msgid "Only show minimized applications"
 msgstr "최소화된 것만 보이기"
 
 #: ../plugins/iconbox/iconbox.c:839
-#, fuzzy
 msgid "Show applications of all workspaces"
-msgstr "모든 작업공간의 태스크 보이기(_a)"
+msgstr "모든 작업공간의 태스크 보이기"
 
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
@@ -406,7 +402,7 @@ msgstr "\"%s\"를(을) 실행하지 못 했습니다."
 #: ../plugins/launcher/launcher.c:398
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "명령어 \"%s\"를(을) 실행하다가 오류가 발생했습니다."
 
 #: ../plugins/launcher/launcher.c:673 ../plugins/launcher/launcher.c:1300
 #: ../plugins/launcher/launcher-dialog.c:1167
@@ -459,7 +455,7 @@ msgstr "개발도구"
 
 #: ../plugins/launcher/launcher-dialog.c:112
 msgid "Office"
-msgstr ""
+msgstr "사무도구"
 
 #: ../plugins/launcher/launcher-dialog.c:113
 msgid "Sound"
@@ -470,7 +466,6 @@ msgid "Terminal"
 msgstr "터미널"
 
 #: ../plugins/launcher/launcher-dialog.c:115
-#, fuzzy
 msgid "Development"
 msgstr "만든이"
 
@@ -557,7 +552,7 @@ msgstr "몇 열:"
 
 #: ../plugins/pager/pager.c:364
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "마우스 휠로 작업공간 전환"
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -609,7 +604,7 @@ msgstr "이용가능한 모든 영역 사용"
 
 #: ../plugins/tasklist/tasklist.c:464
 msgid "Use flat buttons"
-msgstr ""
+msgstr "밋밋한 버튼 사용"
 
 #: ../plugins/tasklist/tasklist.c:481
 msgid "Show tasks from _all workspaces"
@@ -634,12 +629,12 @@ msgstr "같은 태스크는 항상 모으기"
 #: ../plugins/windowlist/windowlist.c:229
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "작업공간%d를 없애시렵니까?"
 
 #: ../plugins/windowlist/windowlist.c:230
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "작업공간 '%s'를(을) 없애시렵니까?"
 
 #: ../plugins/windowlist/windowlist.c:425
 #, c-format
@@ -673,57 +668,52 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"<i>긴급통보</i> 기능은 필요한 경우 버튼을 깜빡거리게 합니다."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "시작과 동시에 알림(_s)"
+msgstr "긴급통보"
 
 #: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
-msgstr ""
+msgstr "안함(_D)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
-msgstr ""
+msgstr "다른 작업공간(_o)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:180
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "모든 작업공간의 태스크 보이기(_a)"
+msgstr "모든 작업공간(_a)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:194
-#, fuzzy
 msgid "_Icon button"
-msgstr "아이콘 박스"
+msgstr "아이콘 박스(_I)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
-msgstr ""
+msgstr "방향키(_r)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:219
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "모든 작업공간의 태스크 보이기(_a)"
+msgstr "모든 작업공간의 태스크 보이기(_w)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:228
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "프로그램 이름 보이기(_n)"
+msgstr "프로그램 아이콘 보이기(_p)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "작업공간 움직임 보이기(_k)"
 
 #: ../mcs-plugin/plugin.c:46
-#, fuzzy
 msgid "Panel"
-msgstr "패널 %d"
+msgstr "패널"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "동작 버튼"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -782,9 +772,8 @@ msgid "This plugin has no purpose"
 msgstr "아무런 의미 없는 플러그인입니다."
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "패널 관리자"
+msgstr "Xfce 4 패널 관리자"
 
 #~ msgid "Size"
 #~ msgstr "크기"
