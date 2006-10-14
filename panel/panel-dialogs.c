@@ -1377,8 +1377,13 @@ add_appearance_options (GtkBox *box, PanelManagerDialog *pmd)
 
     /* transparency */
     if (G_UNLIKELY (!composite_atom))
+    {
+        char text[16];
+        g_snprintf (text, 16, "_NET_WM_CM_S%d", 
+                    GDK_SCREEN_XNUMBER(gdk_screen_get_default()));
         composite_atom = 
-            XInternAtom (GDK_DISPLAY (), "COMPOSITING_MANAGER", False);
+            XInternAtom (GDK_DISPLAY (), text, False);
+    }
 
     if (XGetSelectionOwner (GDK_DISPLAY (), composite_atom))
     {
