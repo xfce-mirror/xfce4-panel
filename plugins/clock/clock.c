@@ -169,21 +169,30 @@ clock_update_size (Clock *clock, int size)
      * can use them here (e.g. 10*2 => DIGIT_SMALL_HEIGHT*2)
      * */
 
-    if (size <= 10*2)
+    if (xfce_panel_plugin_get_orientation (clock->plugin) 
+            == GTK_ORIENTATION_HORIZONTAL)
     {
+        if (size <= 10*2)
+        {
+            xfce_clock_set_led_size (clk, DIGIT_SMALL);
+        }
+        else if (size <= 14*2) 
+        {
+            xfce_clock_set_led_size (clk, DIGIT_MEDIUM);
+        } 
+        else if (size <= 20*2) 
+        {
+            xfce_clock_set_led_size (clk, DIGIT_LARGE);
+        }
+        else 
+        {
+            xfce_clock_set_led_size (clk, DIGIT_HUGE);
+        }
+    }
+    else
+    {
+        /* Always use small size in vertical mode */
         xfce_clock_set_led_size (clk, DIGIT_SMALL);
-    }
-    else if (size <= 14*2) 
-    {
-        xfce_clock_set_led_size (clk, DIGIT_MEDIUM);
-    } 
-    else if (size <= 20*2) 
-    {
-        xfce_clock_set_led_size (clk, DIGIT_LARGE);
-    }
-    else 
-    {
-        xfce_clock_set_led_size (clk, DIGIT_HUGE);
     }
 
     if ((xfce_clock_get_mode (clk) == XFCE_CLOCK_LEDS) ||
