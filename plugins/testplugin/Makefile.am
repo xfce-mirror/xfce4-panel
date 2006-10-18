@@ -38,6 +38,8 @@ DISTCLEANFILES =							\
 	
 # get full path into .desktop file
 %.desktop.in: %.desktop.in.in
-	sed -e "s^@EXTERNAL_PLUGIN_PATH@^$(libexecdir)/xfce4/panel-plugins^" \
+# 	plugin_name=`grep dlname= $(plugin_LTLIBRARIES) | sed "s/dlname='\(.*\)'/\1/"`; \
+	sed	-e "s^@EXTERNAL_PLUGIN_PATH@^$(libexecdir)/xfce4/panel-plugins^" \
+		-e "s^@PLUGIN_NAME@^$$plugin_name^" \
 		$< > $@
 

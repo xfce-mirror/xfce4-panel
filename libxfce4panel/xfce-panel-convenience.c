@@ -44,6 +44,8 @@ GtkWidget *xfce_create_panel_button (void)
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
     gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
 
+    gtk_widget_set_name (button, "xfce_panel_button");
+
     return button;
 }
 
@@ -62,6 +64,8 @@ GtkWidget *xfce_create_panel_toggle_button (void)
     GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
     gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+
+    gtk_widget_set_name (button, "xfce_panel_toggle_button");
 
     return button;
 }

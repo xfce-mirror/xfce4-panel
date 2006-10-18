@@ -1,9 +1,10 @@
-plugindir = $(libdir)/xfce4/panel-plugins
+liblauncherdir = $(libdir)/xfce4/panel-plugins
 
-plugin_LTLIBRARIES = liblauncher.la
+liblauncher_LTLIBRARIES = liblauncher.la
 
 liblauncher_la_LDFLAGS =						\
 	-avoid-version							\
+	-export-dynamic							\
 	-module
 
 liblauncher_la_SOURCES = 						\
@@ -14,7 +15,7 @@ liblauncher_la_SOURCES = 						\
 
 liblauncher_la_CFLAGS =							\
 	-I$(top_srcdir)							\
-	@LIBXFCEGUI4_CFLAGS@						\
+	$(LIBXFCEGUI4_CFLAGS)						\
 	-DLOCALEDIR=\"$(localedir)\"
 
 liblauncher_la_LIBADD =							\
@@ -25,11 +26,11 @@ liblauncher_la_DEPENDENCIES =						\
 	../../libxfce4panel/libxfce4panel.la
 	
 if HAVE_CYGWIN
-liblauncher_la_LDFLAGS +=                        	                \
-	-no-undefined                                                   \
-	@LIBX11_LDFLAGS@                                                \
-	@LIBXFCEGUI4_LIBS@                                              \
-	@LIBX11_LIBS@
+liblauncher_la_LDFLAGS +=						\
+	-no-undefined							\
+	$(LIBX11_LDFLAGS)						\
+	$(LIBXFCEGUI4_LIBS)						\
+	$(LIBX11_LIBS)
 endif
 
 # .desktop file
@@ -54,6 +55,8 @@ DISTCLEANFILES =							\
 	
 # get full path into .desktop file
 %.desktop.in: %.desktop.in.in
-	sed -e "s^@INTERNAL_PLUGIN_PATH@^$(libdir)/xfce4/panel-plugins^" \
+	plugin_name=`grep dlname= liblauncher.la | sed "s/dlname='\(.*\)'/\1/"`; \
+	sed	-e "s^@INTERNAL_PLUGIN_PATH@^$(libdir)/xfce4/panel-plugins^" \
+		-e "s^@PLUGIN_NAME@^$$plugin_name^" \
 		$< > $@
 
