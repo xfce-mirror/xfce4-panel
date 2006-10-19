@@ -2,11 +2,11 @@ plugindir = $(libdir)/xfce4/panel-plugins
 
 plugin_LTLIBRARIES = libpager.la
 
-libpager_la_LDFLAGS =						\
+libpager_la_LDFLAGS =							\
 	-avoid-version							\
 	-module
 
-libpager_la_SOURCES = 						\
+libpager_la_SOURCES = 							\
 	pager.c
 
 libpager_la_CFLAGS =							\
@@ -22,10 +22,10 @@ libpager_la_DEPENDENCIES =						\
 	../../libxfce4panel/libxfce4panel.la
 	
 if HAVE_CYGWIN
-libpager_la_LDFLAGS +=                        	                \
-	-no-undefined                                                   \
-	@LIBX11_LDFLAGS@                                                \
-	@LIBXFCEGUI4_LIBS@                                              \
+libpager_la_LDFLAGS +=							\
+	-no-undefined							\
+	@LIBX11_LDFLAGS@						\
+	@LIBXFCEGUI4_LIBS@						\
 	@LIBX11_LIBS@
 endif
 
@@ -50,7 +50,7 @@ DISTCLEANFILES =							\
 	$(desktop_DATA) $(desktop_in_files)
 	
 # get full path into .desktop file
-%.desktop.in: %.desktop.in.in
+%.desktop.in: %.desktop.in.in $(plugin_LTLIBRARIES)
 	plugin_name=`grep dlname= $(plugin_LTLIBRARIES) | sed "s/dlname='\(.*\)'/\1/"`; \
 	sed	-e "s^@INTERNAL_PLUGIN_PATH@^$(libdir)/xfce4/panel-plugins^" \
 		-e "s^@PLUGIN_NAME@^$$plugin_name^" \

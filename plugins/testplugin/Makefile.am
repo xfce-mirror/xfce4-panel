@@ -2,16 +2,16 @@
 #plugin_PROGRAMS = testplugin
 noinst_PROGRAMS = testplugin
 
-testplugin_SOURCES =					\
+testplugin_SOURCES =							\
 	testplugin.c
 
-testplugin_CFLAGS =					\
-	-I$(top_srcdir)					\
-	@LIBXFCEGUI4_CFLAGS@				\
+testplugin_CFLAGS =							\
+	-I$(top_srcdir)							\
+	@LIBXFCEGUI4_CFLAGS@						\
 	-DLOCALEDIR=\"$(localedir)\"
 
-testplugin_LDFLAGS =					\
-	../../libxfce4panel/libxfce4panel.la		\
+testplugin_LDFLAGS =							\
+	../../libxfce4panel/libxfce4panel.la				\
 	@LIBXFCEGUI4_LIBS@
 
 # .desktop file
@@ -37,9 +37,10 @@ DISTCLEANFILES =							\
 #	$(desktop_DATA) $(desktop_in_files)
 	
 # get full path into .desktop file
-%.desktop.in: %.desktop.in.in
-# 	plugin_name=`grep dlname= $(plugin_LTLIBRARIES) | sed "s/dlname='\(.*\)'/\1/"`; \
-	sed	-e "s^@EXTERNAL_PLUGIN_PATH@^$(libexecdir)/xfce4/panel-plugins^" \
-		-e "s^@PLUGIN_NAME@^$$plugin_name^" \
+%.desktop.in: %.desktop.in.in $(plugin_LTLIBRARIES)
+#	plugin_name=`grep dlname= $(plugin_LTLIBRARIES) | sed "s/dlname='\(.*\)'/\1/"`; \
+#	sed	-e "s^@INTERNAL_PLUGIN_PATH@^$(libdir)/xfce4/panel-plugins^" \
+#		-e "s^@PLUGIN_NAME@^$$plugin_name^" \
+#		$< > $@
+	sed -e "s^@EXTERNAL_PLUGIN_PATH@^$(libexecdir)/xfce4/panel-plugins^" \
 		$< > $@
-

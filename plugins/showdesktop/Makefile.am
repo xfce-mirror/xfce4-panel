@@ -9,23 +9,23 @@ libshowdesktop_la_LDFLAGS =						\
 libshowdesktop_la_SOURCES = 						\
 	showdesktop.c
 
-libshowdesktop_la_CFLAGS =							\
+libshowdesktop_la_CFLAGS =						\
 	-I$(top_srcdir)							\
 	@LIBXFCEGUI4_CFLAGS@						\
 	-DLOCALEDIR=\"$(localedir)\"
 
-libshowdesktop_la_LIBADD =							\
+libshowdesktop_la_LIBADD =						\
 	../../libxfce4panel/libxfce4panel.la				\
 	@LIBS@
 
-libshowdesktop_la_DEPENDENCIES =						\
+libshowdesktop_la_DEPENDENCIES =					\
 	../../libxfce4panel/libxfce4panel.la
 	
 if HAVE_CYGWIN
-libshowdesktop_la_LDFLAGS +=                        	                \
-	-no-undefined                                                   \
-	@LIBX11_LDFLAGS@                                                \
-	@LIBXFCEGUI4_LIBS@                                              \
+libshowdesktop_la_LDFLAGS +=						\
+	-no-undefined							\
+	@LIBX11_LDFLAGS@						\
+	@LIBXFCEGUI4_LIBS@						\
 	@LIBX11_LIBS@
 endif
 
@@ -50,7 +50,7 @@ DISTCLEANFILES =							\
 	$(desktop_DATA) $(desktop_in_files)
 	
 # get full path into .desktop file
-%.desktop.in: %.desktop.in.in
+%.desktop.in: %.desktop.in.in $(plugin_LTLIBRARIES)
 	plugin_name=`grep dlname= $(plugin_LTLIBRARIES) | sed "s/dlname='\(.*\)'/\1/"`; \
 	sed	-e "s^@INTERNAL_PLUGIN_PATH@^$(libdir)/xfce4/panel-plugins^" \
 		-e "s^@PLUGIN_NAME@^$$plugin_name^" \
