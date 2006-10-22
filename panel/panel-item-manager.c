@@ -167,16 +167,40 @@ _new_plugin_class_from_desktop_file (const char *file)
 
             DBG ("External plugin: %s", value);
         }
-        else if ((value = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL)) &&
-                 g_file_test (value, G_FILE_TEST_EXISTS))
+        else if ((value = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL)))
         {
-            class = panel_slice_new0 (XfcePanelItemClass);
-            
-            class->file = g_strdup (value);
-            
-            class->is_external = FALSE;
+            const char *dir;
 
-            DBG ("Internal plugin: %s", value);
+            if (g_file_test (value, G_FILE_TEST_EXISTS))
+            {
+                class = panel_slice_new0 (XfcePanelItemClass);
+                
+                class->file = g_strdup (value);
+                
+                class->is_external = FALSE;
+
+                DBG ("Internal plugin: %s", value);
+            }
+            else if ((dir = xfce_rc_read_entry (rc, "X-XFCE-Module-Path", 
+                                                NULL)))
+            {
+                char *path;
+
+                path = g_module_build_path (dir, value);
+
+                if (g_file_test (path, G_FILE_TEST_EXISTS))
+                {
+                    class = panel_slice_new0 (XfcePanelItemClass);
+                    
+                    class->file = g_strdup (path);
+                    
+                    class->is_external = FALSE;
+
+                    DBG ("Internal plugin: %s", path);
+                }
+
+                g_free (path);
+            }
         }
 
         if (class)
