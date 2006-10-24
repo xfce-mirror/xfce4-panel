@@ -155,7 +155,7 @@ clock_update_size (Clock *clock, int size)
     /* keep in sync with systray */
     if (size > 26)
     {
-        gtk_container_set_border_width (GTK_CONTAINER (clock->frame), 2);
+        gtk_container_set_border_width (GTK_CONTAINER (clock->frame), 1);
         size -= 3;
     }
     else

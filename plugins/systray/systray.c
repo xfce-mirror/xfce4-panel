@@ -195,11 +195,11 @@ systray_orientation_changed (XfcePanelPlugin *plugin,
 static gboolean 
 systray_set_size (XfcePanelPlugin *plugin, int size, Systray *systray)
 {
-    int border = size > 26 ? 2 : 0;
+    int border = size > 26 ? 1 : 0;
 
     gtk_container_set_border_width (GTK_CONTAINER (systray->frame), border);
     
-    size = size - border - 2 - MAX (systray->frame->style->xthickness,
+    size = size - (2*border) - 2 - MAX (systray->frame->style->xthickness,
                                     systray->frame->style->ythickness);
     
     if (xfce_panel_plugin_get_orientation (plugin) 
