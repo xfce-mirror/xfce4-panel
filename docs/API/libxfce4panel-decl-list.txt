@@ -1,7 +1,6 @@
 <SECTION>
 <FILE>xfce-panel-external-plugin</FILE>
 <TITLE>XfceExternalPanelPlugin</TITLE>
-XfceExternalPanelPlugin
 xfce_external_panel_plugin_new
 <SUBSECTION Standard>
 XFCE_EXTERNAL_PANEL_PLUGIN
@@ -16,7 +15,6 @@ XFCE_EXTERNAL_PANEL_PLUGIN_GET_CLASS
 <SECTION>
 <FILE>xfce-itembar</FILE>
 <TITLE>XfceItembar</TITLE>
-XfceItembar
 xfce_itembar_new
 xfce_itembar_set_orientation
 xfce_itembar_get_orientation
@@ -80,7 +78,6 @@ xfce_panel_plugin_get_type
 <SECTION>
 <FILE>xfce-arrow-button</FILE>
 <TITLE>XfceArrowButton</TITLE>
-XfceArrowButton
 xfce_arrow_button_new
 xfce_arrow_button_set_arrow_type
 xfce_arrow_button_get_arrow_type
@@ -100,7 +97,6 @@ XfceHandleStyle
 XfcePanelWindowMoveFunc
 XfcePanelWindowResizeFunc
 <TITLE>XfcePanelWindow</TITLE>
-XfcePanelWindow
 xfce_panel_window_new
 xfce_panel_window_set_orientation
 xfce_panel_window_get_orientation
@@ -125,7 +121,6 @@ XFCE_PANEL_WINDOW_GET_CLASS
 <SECTION>
 <FILE>xfce-panel-internal-plugin</FILE>
 <TITLE>XfceInternalPanelPlugin</TITLE>
-XfceInternalPanelPlugin
 xfce_internal_panel_plugin_new
 <SUBSECTION Standard>
 XFCE_INTERNAL_PANEL_PLUGIN
@@ -140,7 +135,6 @@ XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS
 <SECTION>
 <FILE>xfce-hvbox</FILE>
 <TITLE>XfceHVBox</TITLE>
-XfceHVBox
 xfce_hvbox_new
 xfce_hvbox_set_orientation
 <SUBSECTION Standard>
@@ -179,6 +173,16 @@ xfce_handle_style_get_type
 XFCE_TYPE_HANDLE_STYLE
 xfce_screen_position_get_type
 XFCE_TYPE_SCREEN_POSITION
+</SECTION>
+
+<SECTION>
+<FILE>xfce-panel-macros</FILE>
+panel_slice_alloc
+panel_slice_alloc0
+panel_slice_free1
+panel_slice_new
+panel_slice_new0
+panel_slice_free
 </SECTION>
 
 <SECTION>

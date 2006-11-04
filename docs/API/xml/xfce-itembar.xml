@@ -3,21 +3,18 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="XfceItembar">
 <refmeta>
-<refentrytitle id="top_of_page">XfceItembar</refentrytitle>
+<refentrytitle>XfceItembar</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>XfceItembar</refname>
-<refpurpose><para>
+<refname>XfceItembar</refname><refpurpose><para>
 Container widget with configurable orientation.
 </para></refpurpose>
-<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv id="synopsis">
-<title id="synopsis.title">Synopsis</title>
+<refsynopsisdiv><title>Synopsis</title>
 
 <synopsis>
 
@@ -62,8 +59,8 @@ Container widget with configurable orientation.
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 id="object_hierarchy">
-<title id="object_hierarchy.title">Object Hierarchy</title>
+<refsect1>
+<title>Object Hierarchy</title>
 <synopsis>
 
   <link linkend="GObject">GObject</link>
@@ -78,8 +75,8 @@ Container widget with configurable orientation.
 
 
 
-<refsect1 id="impl_interfaces">
-<title id="impl_interfaces.title">Implemented Interfaces</title>
+<refsect1>
+<title>Implemented Interfaces</title>
 <para>
 XfceItembar implements
  <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
@@ -87,55 +84,55 @@ XfceItembar implements
 </refsect1>
 
 
-<refsect1 id="properties">
-<title id="properties.title">Properties</title>
+<refsect1>
+<title>Properties</title>
 <synopsis>
 
   &quot;<link linkend="XfceItembar--orientation">orientation</link>&quot;          <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write
 </synopsis>
 </refsect1>
-<refsect1 id="child_properties">
-<title id="child_properties.title">Child Properties</title>
+<refsect1>
+<title>Child Properties</title>
 <synopsis>
 
   &quot;<link linkend="XfceItembar--expand">expand</link>&quot;               <link linkend="gboolean">gboolean</link>              : Read / Write
 </synopsis>
 </refsect1>
 
-<refsect1 id="signal_proto">
-<title id="signal_proto.title">Signals</title>
+<refsect1>
+<title>Signal Prototypes</title>
 <synopsis>
 
 &quot;<link linkend="XfceItembar-contents-changed">contents-changed</link>&quot;
             <link linkend="void">void</link>        user_function      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                            <link linkend="gpointer">gpointer</link>     user_data)      : Run first
+                                            <link linkend="gpointer">gpointer</link> user_data);
 &quot;<link linkend="XfceItembar-orientation-changed">orientation-changed</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="XfceItembar">XfceItembar</link>    *itembar,
-                                            <link linkend="GtkOrientation">GtkOrientation</link> *orientation,
-                                            <link linkend="gpointer">gpointer</link>        user_data)        : Run first
+            <link linkend="void">void</link>        user_function      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                            <link linkend="GtkOrientation">GtkOrientation</link> orientation,
+                                            <link linkend="gpointer">gpointer</link> user_data);
 </synopsis>
 </refsect1>
 
 
-<refsect1 id="desc">
-<title id="desc.title">Description</title>
+<refsect1>
+<title>Description</title>
 <para>
 <link linkend="XfceItembar"><type>XfceItembar</type></link> is a container widget that can hold multiple widgets. The
 orientation of the bar is configurable and can be changed at any time. 
 </para>
 </refsect1>
 
-<refsect1 id="details">
-<title id="details.title">Details</title>
+<refsect1>
+<title>Details</title>
 <refsect2>
-<title><anchor id="XfceItembar-struct" role="struct"/>XfceItembar</title>
+<title><anchor id="XfceItembar-struct"/>XfceItembar</title>
 <indexterm><primary>XfceItembar</primary></indexterm><programlisting>typedef struct _XfceItembar XfceItembar;</programlisting>
 <para>
 The <link linkend="XfceItembar-struct"><type>XfceItembar-struct</type></link> struct contains private data only, and
 should be accessed using the functions below.
 </para></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-new" role="function"/>xfce_itembar_new ()</title>
+<title><anchor id="xfce-itembar-new"/>xfce_itembar_new ()</title>
 <indexterm><primary>xfce_itembar_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_itembar_new                (<link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
 <para>
 </para>
@@ -149,7 +146,7 @@ should be accessed using the functions below.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-set-orientation" role="function"/>xfce_itembar_set_orientation ()</title>
+<title><anchor id="xfce-itembar-set-orientation"/>xfce_itembar_set_orientation ()</title>
 <indexterm><primary>xfce_itembar_set_orientation</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_set_orientation    (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
 <para>
@@ -165,7 +162,7 @@ Set the orienation of <parameter>itembar</parameter>.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-get-orientation" role="function"/>xfce_itembar_get_orientation ()</title>
+<title><anchor id="xfce-itembar-get-orientation"/>xfce_itembar_get_orientation ()</title>
 <indexterm><primary>xfce_itembar_get_orientation</primary></indexterm><programlisting><link linkend="GtkOrientation">GtkOrientation</link> xfce_itembar_get_orientation (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 </para>
@@ -179,7 +176,7 @@ Set the orienation of <parameter>itembar</parameter>.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-insert" role="function"/>xfce_itembar_insert ()</title>
+<title><anchor id="xfce-itembar-insert"/>xfce_itembar_insert ()</title>
 <indexterm><primary>xfce_itembar_insert</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_insert             (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkWidget">GtkWidget</link> *item,
                                              <link linkend="int">int</link> position);</programlisting>
@@ -199,7 +196,7 @@ Insert new item at <parameter>position</parameter> on <parameter>itembar</parame
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-append" role="function"/>xfce_itembar_append ()</title>
+<title><anchor id="xfce-itembar-append"/>xfce_itembar_append ()</title>
 <indexterm><primary>xfce_itembar_append</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_append             (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
@@ -215,7 +212,7 @@ Add a new item at the end of <parameter>itembar</parameter>.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-prepend" role="function"/>xfce_itembar_prepend ()</title>
+<title><anchor id="xfce-itembar-prepend"/>xfce_itembar_prepend ()</title>
 <indexterm><primary>xfce_itembar_prepend</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_prepend            (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
@@ -231,7 +228,7 @@ Add a new item at the start of <parameter>itembar</parameter>.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-reorder-child" role="function"/>xfce_itembar_reorder_child ()</title>
+<title><anchor id="xfce-itembar-reorder-child"/>xfce_itembar_reorder_child ()</title>
 <indexterm><primary>xfce_itembar_reorder_child</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_reorder_child      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkWidget">GtkWidget</link> *item,
                                              <link linkend="int">int</link> position);</programlisting>
@@ -251,7 +248,7 @@ Move <parameter>item</parameter> to a new position on <parameter>itembar</parame
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-set-child-expand" role="function"/>xfce_itembar_set_child_expand ()</title>
+<title><anchor id="xfce-itembar-set-child-expand"/>xfce_itembar_set_child_expand ()</title>
 <indexterm><primary>xfce_itembar_set_child_expand</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_set_child_expand   (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkWidget">GtkWidget</link> *item,
                                              <link linkend="gboolean">gboolean</link> expand);</programlisting>
@@ -271,7 +268,7 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-get-child-expand" role="function"/>xfce_itembar_get_child_expand ()</title>
+<title><anchor id="xfce-itembar-get-child-expand"/>xfce_itembar_get_child_expand ()</title>
 <indexterm><primary>xfce_itembar_get_child_expand</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    xfce_itembar_get_child_expand   (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
@@ -285,12 +282,12 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 <varlistentry><term><parameter>item</parameter>&nbsp;:</term>
 <listitem><simpara> a child <link linkend="GtkWidget"><type>GtkWidget</type></link> of <parameter>itembar</parameter>
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if <parameter>item</parameter> will expand when the size of <parameter>itembar</parameter> increases,
-         otherwise <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if <parameter>item</parameter> will expand when the size of <parameter>itembar</parameter> increases,
+         otherwise <literal>FALSE</literal>.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-get-n-items" role="function"/>xfce_itembar_get_n_items ()</title>
+<title><anchor id="xfce-itembar-get-n-items"/>xfce_itembar_get_n_items ()</title>
 <indexterm><primary>xfce_itembar_get_n_items</primary></indexterm><programlisting><link linkend="int">int</link>         xfce_itembar_get_n_items        (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 </para>
@@ -304,7 +301,7 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-get-item-index" role="function"/>xfce_itembar_get_item_index ()</title>
+<title><anchor id="xfce-itembar-get-item-index"/>xfce_itembar_get_item_index ()</title>
 <indexterm><primary>xfce_itembar_get_item_index</primary></indexterm><programlisting><link linkend="int">int</link>         xfce_itembar_get_item_index     (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
@@ -322,7 +319,7 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-get-nth-item" role="function"/>xfce_itembar_get_nth_item ()</title>
+<title><anchor id="xfce-itembar-get-nth-item"/>xfce_itembar_get_nth_item ()</title>
 <indexterm><primary>xfce_itembar_get_nth_item</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_itembar_get_nth_item       (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="int">int</link> n);</programlisting>
 <para>
@@ -336,12 +333,12 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 <varlistentry><term><parameter>n</parameter>&nbsp;:</term>
 <listitem><simpara> a position on the itembar
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <parameter>n</parameter><!-- -->'s item on <parameter>itembar</parameter>, or <link linkend="NULL:CAPS"><literal>NULL</literal></link> if the
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> the <parameter>n</parameter><!-- -->'s item on <parameter>itembar</parameter>, or <literal>NULL</literal> if the
 itembar does not contain an <parameter>n</parameter><!-- -->'th item.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-raise-event-window" role="function"/>xfce_itembar_raise_event_window ()</title>
+<title><anchor id="xfce-itembar-raise-event-window"/>xfce_itembar_raise_event_window ()</title>
 <indexterm><primary>xfce_itembar_raise_event_window</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_raise_event_window (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 Raise the event window of <parameter>itembar</parameter>. This causes all events, like
@@ -358,7 +355,7 @@ See also: <link linkend="xfce-itembar-lower-event-window"><function>xfce_itembar
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-lower-event-window" role="function"/>xfce_itembar_lower_event_window ()</title>
+<title><anchor id="xfce-itembar-lower-event-window"/>xfce_itembar_lower_event_window ()</title>
 <indexterm><primary>xfce_itembar_lower_event_window</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_lower_event_window (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 Lower the event window of <parameter>itembar</parameter>. This causes all events, like
@@ -375,7 +372,7 @@ See also: <link linkend="xfce-itembar-raise-event-window"><function>xfce_itembar
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-event-window-is-raised" role="function"/>xfce_itembar_event_window_is_raised ()</title>
+<title><anchor id="xfce-itembar-event-window-is-raised"/>xfce_itembar_event_window_is_raised ()</title>
 <indexterm><primary>xfce_itembar_event_window_is_raised</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    xfce_itembar_event_window_is_raised
                                             (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
@@ -386,11 +383,11 @@ See also: <link linkend="xfce-itembar-raise-event-window"><function>xfce_itembar
 <varlistentry><term><parameter>itembar</parameter>&nbsp;:</term>
 <listitem><simpara> an <link linkend="XfceItembar"><type>XfceItembar</type></link>
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if event window is raised.
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if event window is raised.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-get-item-at-point" role="function"/>xfce_itembar_get_item_at_point ()</title>
+<title><anchor id="xfce-itembar-get-item-at-point"/>xfce_itembar_get_item_at_point ()</title>
 <indexterm><primary>xfce_itembar_get_item_at_point</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_itembar_get_item_at_point  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="int">int</link> x,
                                              <link linkend="int">int</link> y);</programlisting>
@@ -408,11 +405,11 @@ See also: <link linkend="xfce-itembar-raise-event-window"><function>xfce_itembar
 <varlistentry><term><parameter>y</parameter>&nbsp;:</term>
 <listitem><simpara> y coordinate relative to the itembar window
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link> or <link linkend="NULL:CAPS"><literal>NULL</literal></link>.
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> a <link linkend="GtkWidget"><type>GtkWidget</type></link> or <literal>NULL</literal>.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-itembar-get-drop-index" role="function"/>xfce_itembar_get_drop_index ()</title>
+<title><anchor id="xfce-itembar-get-drop-index"/>xfce_itembar_get_drop_index ()</title>
 <indexterm><primary>xfce_itembar_get_drop_index</primary></indexterm><programlisting><link linkend="int">int</link>         xfce_itembar_get_drop_index     (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                              <link linkend="int">int</link> x,
                                              <link linkend="int">int</link> y);</programlisting>
@@ -442,10 +439,10 @@ itembar.
 </variablelist></refsect2>
 
 </refsect1>
-<refsect1 id="property_details">
-<title id="property_details.title">Property Details</title>
+<refsect1>
+<title>Properties</title>
 <refsect2><title><anchor id="XfceItembar--orientation"/>The &quot;<literal>orientation</literal>&quot; property</title>
-<indexterm><primary>XfceItembar:orientation</primary></indexterm><programlisting>  &quot;orientation&quot;          <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
+<programlisting>  &quot;orientation&quot;          <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
 <para>
 The orientation of the <link linkend="XfceItembar"><type>XfceItembar</type></link>.</para>
 <para>
@@ -454,10 +451,10 @@ The orientation of the <link linkend="XfceItembar"><type>XfceItembar</type></lin
 </refsect2>
 
 </refsect1>
-<refsect1 id="child_property_details">
-<title id="child_property_details.title">Child Property Details</title>
+<refsect1>
+<title>Child Properties</title>
 <refsect2><title><anchor id="XfceItembar--expand"/>The &quot;<literal>expand</literal>&quot; child property</title>
-<indexterm><primary>XfceItembar:expand</primary></indexterm><programlisting>  &quot;expand&quot;               <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<programlisting>  &quot;expand&quot;               <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>
 Whether the child of the <link linkend="XfceItembar"><type>XfceItembar</type></link> should fill available space.</para>
 <para>
@@ -467,11 +464,11 @@ Whether the child of the <link linkend="XfceItembar"><type>XfceItembar</type></l
 
 </refsect1>
 
-<refsect1 id="signals">
-<title id="signals.title">Signal Details</title>
+<refsect1>
+<title>Signals</title>
 <refsect2><title><anchor id="XfceItembar-contents-changed"/>The &quot;contents-changed&quot; signal</title>
-<indexterm><primary>XfceItembar::contents-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                            <link linkend="gpointer">gpointer</link>     user_data)      : Run first</programlisting>
+<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
 <para>
 Emitted when the contents of the itembar change, either by adding
 a child, removing a child, or reordering a child.</para>
@@ -484,9 +481,9 @@ a child, removing a child, or reordering a child.</para>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfceItembar-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
-<indexterm><primary>XfceItembar::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link>    *itembar,
-                                            <link linkend="GtkOrientation">GtkOrientation</link> *orientation,
-                                            <link linkend="gpointer">gpointer</link>        user_data)        : Run first</programlisting>
+<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                            <link linkend="GtkOrientation">GtkOrientation</link> orientation,
+                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
 <para>
 Emitted when the orientation of the itembar changes.</para>
 <para>
