@@ -798,9 +798,9 @@ launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
     }
 
     screen = gtk_widget_get_screen (widget);
-
     num = gdk_screen_get_monitor_at_window (screen, widget->window);
 
+    gtk_menu_set_screen (menu, screen); 
     gdk_screen_get_monitor_geometry (screen, num, &geom);
 
     if (*x > geom.x + geom.width - req.width)
