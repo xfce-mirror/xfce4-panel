@@ -53,6 +53,7 @@ typedef struct
     int icon_size;
     guint only_hidden:1;
     guint all_workspaces:1;
+    guint expand:1;
 }
 Iconbox;
 
@@ -261,6 +262,8 @@ icon_icon_changed (NetkWindow *window, gpointer data)
     if (icon->pb)
         g_object_ref (G_OBJECT (icon->pb));
     
+    /* make sure the icon is actually updated */
+    icon->was_minimized = !netk_window_is_minimized (icon->window);
     icon_update_image (icon);
 }
 
@@ -596,6 +599,7 @@ iconbox_read_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
     XfceRc *rc;
     int only_hidden = 0;
     int all_workspaces = 0;
+    int expand = 1;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
@@ -606,13 +610,14 @@ iconbox_read_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
         {
             only_hidden = xfce_rc_read_int_entry (rc, "only_hidden", 0);
             all_workspaces = xfce_rc_read_int_entry (rc, "all_workspaces", 0);
-            
+            expand = xfce_rc_read_int_entry (rc, "expand", 1);
             xfce_rc_close (rc);
         }
     }
 
     iconbox->only_hidden = (only_hidden == 1);
     iconbox->all_workspaces = (all_workspaces == 1);
+    iconbox->expand = (expand != 0);
 }
 
 static void
@@ -632,6 +637,7 @@ iconbox_write_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
     
     xfce_rc_write_int_entry (rc, "only_hidden", iconbox->only_hidden);
     xfce_rc_write_int_entry (rc, "all_workspaces", iconbox->all_workspaces);
+    xfce_rc_write_int_entry (rc, "expand", iconbox->expand);
 
     xfce_rc_close (rc);
 }
@@ -680,27 +686,11 @@ iconbox_construct (XfcePanelPlugin *plugin)
 {
     Iconbox *iconbox = panel_slice_new0 (Iconbox);
 
-    g_signal_connect (plugin, "orientation-changed", 
-                      G_CALLBACK (iconbox_orientation_changed), iconbox);
-    
-    g_signal_connect (plugin, "size-changed", 
-                      G_CALLBACK (iconbox_set_size), iconbox);
-    
-    g_signal_connect (plugin, "free-data", 
-                      G_CALLBACK (iconbox_free_data), iconbox);
-    
-    g_signal_connect (plugin, "save", 
-                      G_CALLBACK (iconbox_write_rc_file), iconbox);
-    
-    xfce_panel_plugin_menu_show_configure (plugin);
-    g_signal_connect (plugin, "configure-plugin", 
-                      G_CALLBACK (iconbox_properties_dialog), iconbox);
-
-    xfce_panel_plugin_set_expand (plugin, TRUE);
+    iconbox->plugin = plugin;
     
     iconbox_read_rc_file (plugin, iconbox);
 
-    iconbox->plugin = plugin;
+    xfce_panel_plugin_set_expand (plugin, iconbox->expand);
     
     iconbox->box = (xfce_panel_plugin_get_orientation (plugin) == 
                         GTK_ORIENTATION_HORIZONTAL) ?
@@ -741,6 +731,22 @@ iconbox_construct (XfcePanelPlugin *plugin)
     iconbox->icon_tooltips = gtk_tooltips_new ();
     g_object_ref (G_OBJECT (iconbox->icon_tooltips));
     gtk_object_sink (GTK_OBJECT (iconbox->icon_tooltips));
+
+    g_signal_connect (plugin, "orientation-changed", 
+                      G_CALLBACK (iconbox_orientation_changed), iconbox);
+    
+    g_signal_connect (plugin, "size-changed", 
+                      G_CALLBACK (iconbox_set_size), iconbox);
+    
+    g_signal_connect (plugin, "free-data", 
+                      G_CALLBACK (iconbox_free_data), iconbox);
+    
+    g_signal_connect (plugin, "save", 
+                      G_CALLBACK (iconbox_write_rc_file), iconbox);
+    
+    xfce_panel_plugin_menu_show_configure (plugin);
+    g_signal_connect (plugin, "configure-plugin", 
+                      G_CALLBACK (iconbox_properties_dialog), iconbox);
 
     iconbox->screen_changed_id = 
         g_signal_connect (plugin, "screen-changed", 
@@ -785,6 +791,13 @@ all_workspaces_toggled (GtkToggleButton *tb, Iconbox *ib)
     }
 }
 
+static void
+expand_toggled (GtkToggleButton *tb, Iconbox *ib)
+{
+    ib->expand = gtk_toggle_button_get_active (tb);
+
+    xfce_panel_plugin_set_expand (ib->plugin, ib->expand);
+}
 
 static void
 iconbox_dialog_response (GtkWidget *dlg, int reponse, 
@@ -843,6 +856,14 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
     g_signal_connect (cb, "toggled", G_CALLBACK (all_workspaces_toggled),
                       iconbox);
     
+    cb = gtk_check_button_new_with_mnemonic (_("Use all available space"));
+    gtk_widget_show (cb);
+    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
+                                  iconbox->expand);
+    g_signal_connect (cb, "toggled", G_CALLBACK (expand_toggled),
+                      iconbox);
+
     gtk_widget_show (dlg);
 }
 
