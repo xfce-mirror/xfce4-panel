@@ -674,6 +674,8 @@ iconbox_screen_changed (GtkWidget *plugin, GdkScreen *screen, Iconbox *ib)
     if (!screen)
         return;
 
+    gtk_container_foreach (GTK_CONTAINER (ib->iconbox), 
+                           (GtkCallback) gtk_widget_destroy, NULL);
     cleanup_icons (ib);
     
     ib->netk_screen = netk_screen_get (gdk_screen_get_number (screen));
