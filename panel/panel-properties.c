@@ -244,6 +244,10 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
 
     priv = panel->priv;
 
+    /* use edit_mode property to test if we are changing position */
+    if (G_UNLIKELY (priv->edit_mode))
+        return;
+
     if (!priv->autohide && 
             !xfce_screen_position_is_floating (priv->screen_position))
     {
@@ -1132,6 +1136,9 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
         GtkOrientation orientation;
         XfcePanelWidthType full_width = priv->full_width;
         
+        /* use edit_mode property to test if we are changing position */
+        priv->edit_mode = TRUE;
+
         xfce_panel_window_set_move_function (XFCE_PANEL_WINDOW (panel),
                                              NULL, NULL);
 
@@ -1196,6 +1203,9 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
         }
 
         gtk_widget_queue_draw (GTK_WIDGET (panel));
+
+        /* use edit_mode property to test if we are changing position */
+        priv->edit_mode = FALSE;
     }
 }
 
