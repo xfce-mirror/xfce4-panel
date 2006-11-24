@@ -327,6 +327,25 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
     gdk_error_trap_pop ();
 }
 
+static gboolean
+unblock_struts (Panel *panel)
+{
+    PanelPrivate *      priv;
+    XfceMonitor *       xmon;
+    int                 x, y, w, h;
+
+    priv = PANEL (panel)->priv;
+    priv->edit_mode = FALSE;
+
+    gtk_window_get_position (GTK_WINDOW (panel), &x, &y);
+    gtk_window_get_size (GTK_WINDOW (panel), &w, &h);
+
+    xmon = panel_app_get_monitor (priv->monitor);
+
+    _set_struts (panel, xmon, x, y, w, h);
+    return FALSE;
+}
+
 static void 
 panel_move_end (XfcePanelWindow *window, int x, int y)
 {
@@ -1204,8 +1223,7 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
 
         gtk_widget_queue_draw (GTK_WIDGET (panel));
 
-        /* use edit_mode property to test if we are changing position */
-        priv->edit_mode = FALSE;
+        g_idle_add((GSourceFunc)unblock_struts, panel);
     }
 }
 
