@@ -13,7 +13,7 @@ For the impatient, you can have a look at the plugins provided with the panel
 to see how the system is suposed to work.
 
 The API documentation is installed with the panel and also available from 
-http://www.loculus.nl/xfce/documentation/API/
+http://www.xfce.org/documentation/api-4.4/
 
 
 == .desktop file ==
@@ -44,7 +44,7 @@ you add this line:
 The necessary widgets are provided by libxfce4panel. In your configure.ac you
 should add a line like this:
 
-XDT_CHECK_PACKAGE ([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.22])
+XDT_CHECK_PACKAGE ([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.99.2])
 
 The above assumes that you are using the xfce4-dev-tools package, which you
 really should, because it makes you life easier. Otherwise, you'd have to
