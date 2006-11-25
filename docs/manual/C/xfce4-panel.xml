@@ -2,7 +2,7 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY manrevision "1.0"> 
-  <!ENTITY date "June 2006"> 
+  <!ENTITY date "November 2006"> 
   <!ENTITY appversion "4.4.0"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
@@ -90,114 +90,283 @@ maintainers, etc. Commented out by default.
     the panel to your liking.
   </para>
 
+  <sect2 id="panel-getting-started">
+    <title>Getting Started</title>
+    
+    <para>
+      The panel will usually be started as part of your Xfce session. For
+      convenience, Xfce provides the <application>startxfce4</application> 
+      script. The command for the panel is &app;.
+    </para>
+
+    <para>
+      When you first start the panel you will see a bar appearing at the top
+      of the screen and a smaller one at the bottom. Both panels are managed
+      by the same &app; program. You can add and remove panels from the 
+      <ulink url="#panel-manager">Panel Manager</ulink>.
+    </para>
+
+    <figure id="default-panel-fig">
+      <title>Default Xfce Panel Configuration</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/default_panel.png" format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/default_panel.eps" format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>The default Xfce Panel configuration.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+  </sect2>
+
+  <sect2 id="panel-getting-started-mouse">
+    <title>Mouse Actions</title>
+
+    <para>
+      The Xfce Panel makes extensive use of left and right mouse buttons. Left
+      clicking performs the default action of an item, while right-clicking
+      brings up a context menu. Ctrl + left click may generally be used instead
+      of a right-click. Note that this manual assumes the use of a
+      right-handed mouse configuration. Hovering the mouse over an item will
+      often show a tooltip.
+    </para>
+  </sect2>
+
+  <sect2 id="panel-getting-started-configure">
+    <title>Customizing the Panel</title>
+
+    <para>
+      Right-clicking on an item will pop up a menu from which you can
+      configure the item, move it to a new location, or remove it from the
+      panel. The menu also allows you to configure the panel or add new items.
+    </para>
+
+    <figure id="item-popup-fig">
+      <title>Item Popup Menu</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/item-popup.png" format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/item-popup.eps" format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Popup Menu of a launcher item.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+  </sect2>
+
 </sect1>
 
   <!-- extra space -->
   <para>&nbsp;</para>
   
-<sect1 id="panel-getting-started">
-  <title>Getting Started</title>
+<sect1 id="panel-getting-started-items">
+  <title>Panel Items</title>
   
   <para>
-    You will usually start the panel as part of your Xfce session. For
-    convenience Xfce provides the <application>startxfce4</application> 
-    script. The command for the panel is &app;.
+    The Xfce 4 panel has the possibility to load external plugins as well
+    as builtin ones. In this section we will only describe panel items that 
+    are installed with the panel.
   </para>
 
-  <para>
-    When you start the panel you will see a bar appearing at the top of the
-    screen and a smaller one at the bottom, looking like this:
-  </para>
+  <sect2 id="launcher-item-dialog">
+    <title>Add New Items</title>
 
-  <figure id="default-panel-fig">
-    <title>Default Xfce Panel Configuration</title> 
-    <screenshot>
-      <mediaobject>
-	<imageobject>
-	  <imagedata fileref="images/default_panel.png" format="PNG"/>
-	</imageobject> 
-	<!-- 
-	<imageobject>
-	  <imagedata fileref="images/default_panel.eps" format="EPS"/>
-	</imageobject> 
-	--> 
-	<textobject>
-	  <phrase>The default Xfce Panel configuration.</phrase>
-	</textobject>
-      </mediaobject>
-    </screenshot>
-  </figure>
-
-  <para>
-    The figure above shows the default panel configuration. Hovering the mouse
-    over an item will show a tooltip. The Xfce Panel makes extensive use of
-    left and right mouse buttons. Left clicking performs the default action of
-    an item, while right-clicking usually brings up a context menu. Ctrl +
-    left click may commonly be used instead of a right-click. Note that this
-    manual assumes the use of a right-handed mouse.
-  </para>
-
-  <para>
-    The panel comes with several items that may be added to the panel. 
-    The available items are are described in the 
-    "<ulink url="#panel-items">Panel Items</ulink>" section. 
-  </para>
-
-  <para>
-    Right-clicking on an item will popup a menu from which you can configure 
-    the item, move it to a new location, or remove it from the panel. The menu
-    also allows you to configure the panel or add new items.
-  </para>
-
-  <figure id="item-popup-fig">
-    <title>Item Popup Menu</title> 
-    <screenshot>
-      <mediaobject>
-	<imageobject>
-	  <imagedata fileref="images/item-popup.png" format="PNG"/>
-	</imageobject> 
-	<!-- 
-	<imageobject>
-	  <imagedata fileref="images/item-popup.eps" format="EPS"/>
-	</imageobject> 
-	--> 
-	<textobject>
-	  <phrase>Popup Menu of a launcher item.</phrase>
-	</textobject>
-      </mediaobject>
-    </screenshot>
-  </figure>
-
-  <para>
-    When you want to add an item, a dialog is opened showing all
-    available panel items. Some items can appear only once in the panel,
-    e.g. the system tray, and they will appear greyed out when one is
-    already present.
-  </para>
+    <para>
+      When you choose the 'Add Items' option from the right-click mouse menu of
+      a panel item, a dialog is opened showing all available panel items. Some
+      items can appear only once on the panel, e.g. the system tray, and they
+      will appear greyed out when another instance is already present. A search 
+      box allows you to type a filter term to limit the number of choices in 
+      the list.
+    </para>
   
-  <figure id="add-item-dialog-fig">
-    <title>Add Item Dialog</title> 
-    <screenshot>
-      <mediaobject>
-	<imageobject>
-	  <imagedata fileref="images/add-item-dialog.png" format="PNG"/>
-	</imageobject> 
-	<!-- 
-	<imageobject>
-	  <imagedata fileref="images/add-item-dialog.eps" format="EPS"/>
-	</imageobject> 
-	--> 
-	<textobject>
-	  <phrase>Dialog with available panel items.</phrase>
-	</textobject>
-      </mediaobject>
-    </screenshot>
-  </figure>
+    <figure id="add-item-dialog-fig">
+      <title>Add Item Dialog</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/add-item-dialog.png" format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/add-item-dialog.eps" format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Dialog with available panel items.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+  </sect2>
 
-  <para>
-    Configuration of the panels, as well as adding and removing panels can be
-    done from the <ulink url="#panel-manager">Panel Manager</ulink>.
-  </para>
+  <sect2 id="launcher-item">
+    <title>Launcher</title>
+
+    <para>The most common panel item is the launcher item. It allows you to
+      start programs from the panel. The properties dialog allows you to edit
+      or add one or more programs. 
+    </para>
+
+    <para>
+      The first entry in the list is shown on the panel. When more programs 
+      are added they are shown in a menu that can be accessed by clicking the
+      small arrow button that will appear next to the main launcher icon.
+    </para>
+
+    <para>
+      Every item has several options you can edit: name, comment (tooltip),
+      icon and command. You can select whether the command should be run in a
+      terminal and whether the program supports startup notification. This
+      last option allows the window manager to show an hourglass while the 
+      program is loading.
+    </para>
+
+    <figure id="launcher-fig">
+      <title>Launcher Item Properties</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/launcher-properties.png" 
+		       format="PNG"/>
+	  </imageobject> 
+	  <!-- 
+	  <imageobject>
+	    <imagedata fileref="images/launcher-properties.eps" 
+		       format="EPS"/>
+	  </imageobject> 
+	  --> 
+	  <textobject>
+	    <phrase>Shows properties dialog for a launcher item.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+  </sect2>
+
+  <sect2 id="other-items">
+    <title>Other Items</title>
+
+    <para>
+      Besides launchers the panel comes with several other items. We will
+      shortly list them here. As always, the best way to find out if they may
+      be useful is to try them.
+    </para>
+
+    <variablelist>
+
+      <varlistentry>
+	<term>Xfce Clock</term>
+	<listitem>
+	  <para>
+	    Shows the time. Has LED, digital and analog modes.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Graphical Pager</term>
+	<listitem>
+	  <para>
+	    Shows a miniature view of the workspaces and even allows you to
+	    move windows to another workspace by dragging the mini-window in
+	    the pager. You can change workspaces by using the mouse scroll
+	    wheel when the mouse is over the pager.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Task List</term>
+	<listitem>
+	  <para>
+	    Shows running applications in a button with icon and application
+	    name. Clicking on the button will focus or minimize the
+	    application.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Window List</term>
+	<listitem>
+	  <para>
+	    Shows running applications in a popup menu. Optionally shows
+	    active application on the panel.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Icon Box</term>
+	<listitem>
+	  <para>
+	    A third alternative to show running applications, in this case
+	    using a button with only an icon.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>System Tray</term>
+	<listitem>
+	  <para>
+	    Allows applications to show a so called notification or status
+	    icon. This is used for example by some media players and instant
+	    messaging clients.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Show Desktop Button</term>
+	<listitem>
+	  <para>
+	    When clicked it will show the desktop by minimizing all programs.
+	    Clicking again will restore the windows to their previous state.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Action Buttons</term>
+	<listitem>
+	  <para>
+	    Show one or two small buttons with two possible actions: quit the
+	    session or lock the screen.
+          </para>
+	</listitem>
+      </varlistentry>
+
+      <varlistentry>
+	<term>Separator</term>
+	<listitem>
+	  <para>
+	    A separator item shows a line or an empty space between two other
+	    items. Can optionally expand to fill all available space. This can
+	    be used on a full width panel to have items on both ends of the
+	    panel and nothing in between.
+          </para>
+	</listitem>
+      </varlistentry>
+
+    </variablelist>
+
+  </sect2>
 
 </sect1>
 
@@ -236,10 +405,10 @@ maintainers, etc. Commented out by default.
     <title>Select Panel</title>
 
     <para>
-      The current active panel is selected by default or the one that was last
-      active if there is no active panel. You can choose another panel from 
-      the option menu. Next to this menu are two buttons to add a new panel or 
-      remove the current panel.
+      The currently active panel is selected by default or the one that was
+      last active if there is no active panel. You can choose another panel
+      from the option menu. Next to this menu are two buttons to add a new
+      panel or remove the current panel.
     </para>
     
   </sect2>
@@ -288,7 +457,7 @@ maintainers, etc. Commented out by default.
 	    A panel can be placed in one of twelve positions on the edge of
 	    the screen. You can choose whether the panel should be stretched
 	    to fit the entire width or height of the screen. When the autohide
-	    option is selected the panel will collapse to a small line and
+	    option is selected the panel will collapse to a thin line and
 	    reappear when the mouse is moved over it.
 	  </para>
 	</listitem>
@@ -323,260 +492,13 @@ maintainers, etc. Commented out by default.
   <!-- extra space -->
   <para>&nbsp;</para>
 
-<sect1 id="panel-items">
-  <title>Panel Items</title>
-
-  <para>
-    The Xfce 4 panel has the possibility to load external plugins as well
-    as builtin ones. In this section we will only describe panel items that 
-    are installed with the panel.
-  </para>
-  
-  <sect2 id="launcher-item">
-    <title>Launcher</title>
-
-    <para>The most common panel item is the launcher item. It allows you to
-      start programs from the panel. The properties dialog allows you to edit
-      or add one or more programs. 
-    </para>
-
-    <para>
-      When more than one program is added to the list a small arrow button
-      will appear next to the panel button that will open a menu with the
-      other programs.
-    </para>
-
-    <para>
-      Every item has several option you can edit:
-    </para>
-
-    <variablelist>
-      <varlistentry>
-	<term>Name</term>
-	<listitem>
-	  <para>The label to show in a menu item.</para>
-	</listitem>
-      </varlistentry>
-      
-      <varlistentry>
-	<term>Comment</term>
-	<listitem>
-	  <para>
-	    Additional information that will be shown in a tooltip.
-	  </para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-	<term>Icon</term>
-	<listitem>
-	  <para>
-	    The icons you choose from the icon button will follow the icon 
-	    theme you choose  from the 
-	    <ulink url="xfce-mcs-plugins.html#ui-settings">User 
-	      Interface</ulink> settings dialog.
-	  </para>
-	  <para>
-	    Of course you can also choose a custom icon, either by browsing
-	    the file system from the button next to the entry or by dragging
-	    an image on the icon button from a file manager.
-	  </para>
-        </listitem>
-      </varlistentry>
-      
-      <varlistentry>
-	<term>Command</term>
-	<listitem>
-	  <para>
-	    You can type the command to run or browse the file system. There
-	    is an option to start in a terminal and one to use startup
-	    notification. This last option means that the window manager can
-	    show an hourglass while the program is loading. But, the
-	    application has to support it as well. Programs build with Gtk 2.2
-	    should support it.
-	  </para>
-        </listitem>
-      </varlistentry>
-      
-    </variablelist>
-    
-    <figure id="launcher-fig">
-      <title>Launcher Item</title> 
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="images/launcher-properties.png" 
-		       format="PNG"/>
-	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/launcher-properties.eps" 
-		       format="EPS"/>
-	  </imageobject> 
-	  --> 
-	  <textobject>
-	    <phrase>Shows properties dialog for a launcher item.</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-    </figure>
-
-
-  </sect2>
-
-  <sect2 id="clock-item">
-    <title>Xfce Clock</title>
-
-    <para>The Xfce Clock has a number of options to change the way it looks. 
-      There are three clock types available: analog, digital and LED.
-      There is an option to show seconds and for the digital and LED clock
-      types you can choose whether the clock will be in 24 hour mode, 12
-      hour mode, or 12 hour mode with AM/PM indication. The clock shows the
-      current date as a tooltip. 
-    </para>
-    
-    <figure id="clock-fig">
-      <title>Clock Item</title> 
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="images/clock-properties.png" 
-		       format="PNG"/>
-	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/clock-properties.eps" 
-		       format="EPS"/>
-	  </imageobject> 
-	  --> 
-	  <textobject>
-	    <phrase>Shows properties dialog for a clock item.</phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-    </figure>
-
-
-  </sect2>
-
-  <sect2 id="switcher-item">
-    <title>Graphical Pager</title>
-
-    <para>
-      The graphical pager shows a miniature view of the desktops and
-      even allows you to move windows to another workspace by dragging the
-      mini-window in the pager. The pager also allows you to change workspaces 
-      by using the mouse scrollwheel. You can set the number of rows to use, 
-      or columns when the panel is in vertical orientation.
-    </para>
-    
-    <figure id="pager-fig">
-      <title>Graphical Pager</title> 
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="images/pager-properties.png" 
-		       format="PNG"/>
-	  </imageobject> 
-	  <textobject>
-	    <phrase>Shows properties dialog for the graphical pager.
-	    </phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-    </figure>
-
-  </sect2>
-
-  <sect2 id="actionbuttons-item">
-    <title>Action Buttons</title>
-
-    <para>This item shows one or two buttons which can perform
-      special system actions. The buttons follow your panel icon theme.
-      There are two buttons available:</para>
-
-    <variablelist>
-      <varlistentry>
-	<term>Lock</term>
-	<listitem><para>Runs the <application>xflock4</application> script that
-	  will attempt to lock the screen using either xscreensaver or if
-	  that fails xlock.</para></listitem>
-      </varlistentry>
-      <varlistentry>
-	<term>Exit</term>
-	<listitem><para>This will popup a logout dialog to end your Xfce 
-	  session.</para></listitem>
-      </varlistentry>
-    </variablelist>
-    
-    <figure id="actionbuttons-fig">
-      <title>Action Button Item</title> 
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="images/actionbuttons-properties.png" 
-		       format="PNG"/>
-	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/systembuttons-properties.eps" 
-		       format="EPS"/>
-	  </imageobject> 
-	  --> 
-	  <textobject>
-	    <phrase>Shows properties dialog for an action buttons item.
-	    </phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-    </figure>
-
-  </sect2>
-
-  <sect2 id="separator-item">
-    <title>Separator</title>
-
-    <para>This item simply adds a separator line to the panel. You can choose
-      to draw a separator line and if the item should expand to fill the
-      available space (for full width panels).
-    </para>
-    
-    <figure id="separator-fig">
-      <title>Separator Item</title> 
-      <screenshot>
-	<mediaobject>
-	  <imageobject>
-	    <imagedata fileref="images/separator-properties.png" 
-		       format="PNG"/>
-	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/nooptions-properties.eps" 
-		       format="EPS"/>
-	  </imageobject> 
-	  --> 
-	  <textobject>
-	    <phrase>Shows properties dialog for separator item.
-	    </phrase>
-	  </textobject>
-	</mediaobject>
-      </screenshot>
-    </figure>
-    
-  </sect2>
-
-  <!-- extra space -->
-  <para>&nbsp;</para>
-
-</sect1>
-
 <sect1 id="panel-advanced">
-  <title>Advanced</title>
+  <title>Advanced Configuration</title>
 
   <sect2 id="panel-config-files">
     <title>Configuration Files</title>
     
-    <para>Xfce now uses the Basedir Specification as defined on <ulink
+    <para>Xfce uses the Basedir Specification as defined on <ulink
 	url="http://freedesktop.org">Freedesktop.org</ulink> to locate its 
       data and configuration files. This means that file locations will
       be specified as a path relative to the directories described in
