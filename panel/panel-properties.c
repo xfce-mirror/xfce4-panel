@@ -1221,7 +1221,7 @@ panel_set_screen_position (Panel *panel, XfceScreenPosition position)
             panel_set_full_width (panel, full_width);
         }
 
-        gtk_widget_queue_draw (GTK_WIDGET (panel));
+        gtk_widget_queue_resize (GTK_WIDGET (panel));
 
         g_idle_add((GSourceFunc)unblock_struts, panel);
     }
