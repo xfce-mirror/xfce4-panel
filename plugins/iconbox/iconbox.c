@@ -194,9 +194,24 @@ icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
     if (ev->button == 1)
     {
         if (netk_window_is_active (icon->window))
+        {
             netk_window_minimize (icon->window);
+        }
         else
+        {
+            NetkScreen    *scr;
+            NetkWorkspace *aws, *ws;
+
+            scr = netk_window_get_screen (icon->window);
+            aws = netk_screen_get_active_workspace (scr);
+            ws  = netk_window_get_workspace (icon->window);
+
+            if (aws != ws)
+            {
+                netk_workspace_activate (ws);
+            }
             netk_window_activate (icon->window);
+        }
 
         return TRUE;
     }
