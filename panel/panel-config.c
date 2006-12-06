@@ -97,16 +97,18 @@ create_panel_array_from_config (const char *file)
 GPtrArray *
 panel_config_create_panels (void)
 {
-    char *file = NULL;
-    GPtrArray *array = NULL;
-    gboolean use_user_config;
+    gboolean   use_user_config;
+    char      *file     = NULL;
+    GPtrArray *array    = NULL;
+    char      *path     = "xfce4" G_DIR_SEPARATOR_S 
+                          "panel" G_DIR_SEPARATOR_S
+                          "panels.xml";
 
     use_user_config = xfce_allow_panel_customization ();
 
     if (G_UNLIKELY (!use_user_config))
     {
-        file = g_build_filename (SYSCONFDIR, "xdg", "xfce4", "panel",
-                                 "panels.xml", NULL);
+        file = g_build_filename (SYSCONFDIR, "xdg", path, NULL);
 
         if (!g_file_test (file, G_FILE_TEST_IS_REGULAR))
         {
@@ -117,26 +119,21 @@ panel_config_create_panels (void)
     }
     else
     {
-        char *path = g_build_filename ("xfce4", "panel", "panels.xml", NULL);
-
         file = xfce_resource_lookup (XFCE_RESOURCE_CONFIG, path);
 
-        g_free (path);
-    }
-
-    if (G_UNLIKELY (!file && use_user_config))
-    {
-        file = g_build_filename (SYSCONFDIR, "xdg", "xfce4", "panel",
-                                 "panels.xml", NULL);
-
-        if (!g_file_test (file, G_FILE_TEST_IS_REGULAR))
+        if (G_UNLIKELY (!file))
         {
-            g_free (file);
+            file = g_build_filename (SYSCONFDIR, path, NULL);
 
-            file = NULL;
+            if (!g_file_test (file, G_FILE_TEST_IS_REGULAR))
+            {
+                g_free (file);
+
+                file = NULL;
+            }
         }
     }
-    
+
     if (file)
         array = create_panel_array_from_config (file);
     else
@@ -158,14 +155,12 @@ panel_config_save_panels (GPtrArray * panels)
 
     if (use_user_config)
     {
-        int i;
-        char *path;
-        
-        path = g_build_filename ("xfce4", "panel", "panels.xml", NULL);
+        int   i;
+        char *path = "xfce4" G_DIR_SEPARATOR_S 
+                     "panel" G_DIR_SEPARATOR_S
+                     "panels.xml";
 
         file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
-
-        g_free (path);
 
         failed = !config_save_to_file (panels, file);
 

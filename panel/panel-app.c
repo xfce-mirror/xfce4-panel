@@ -345,7 +345,7 @@ session_die (gpointer client_data)
 }
 
 /* screen layout */
- static void
+static void
 monitor_size_changed (GdkScreen *screen)
 {
     int i;
@@ -928,6 +928,9 @@ panel_app_about (GtkWidget *panel)
     xfce_about_info_set_homepage (info, "http://www.xfce.org");
 
     xfce_about_info_add_credit (info, "Jasper Huijsmans", "jasper@xfce.org",
+                                _("Developer"));
+
+    xfce_about_info_add_credit (info, "Nick Schermer", "nick@xfce.org",
                                 _("Developer"));
 
     pb = xfce_themed_icon_load ("xfce4-panel", 48);

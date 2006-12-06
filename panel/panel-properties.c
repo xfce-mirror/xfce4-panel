@@ -397,13 +397,16 @@ panel_resize_function (XfcePanelWindow *window, Panel *panel,
                        GtkAllocation *old, GtkAllocation *new, int *x, int *y)
 {
     PanelPrivate *priv;
-    XfceMonitor *xmon;
+    XfceMonitor  *xmon;
+
+    DBG ("old: %dx%d\tnew: %dx%d", 
+	 old ? old->width : 0, old ? old->height : 0,
+	 new->width, new->height );
 
     if (!GTK_WIDGET_VISIBLE (panel))
         return;
-    
-    priv = panel->priv;
 
+    priv = panel->priv;
     xmon = panel_app_get_monitor (priv->monitor);
     
     _calculate_coordinates (priv->screen_position, &(xmon->geometry),
@@ -412,8 +415,18 @@ panel_resize_function (XfcePanelWindow *window, Panel *panel,
     priv->xoffset = *x - xmon->geometry.x;
     priv->yoffset = *y - xmon->geometry.y;
     
-    DBG ("\n + Position: %d\n + Offset: (%d, %d)", 
-         priv->screen_position, priv->xoffset, priv->yoffset);
+    /* No change. We do need to calculate the position above, but we only need 
+     * to update the struts when the size actually changes. */
+    if (old && new->width == old->width && new->height == old->height)
+	    return;
+
+    /* Catch incorrect intermediate values when changing orientation:
+     * check if both height and width are larger than half the screen. */
+    if (new->width * 2 > xmon->geometry.width && 
+	new->height * 2 > xmon->geometry.height)
+    {
+	return;
+    }
 
     _set_struts (panel, xmon, *x, *y, new->width, new->height);
 }
