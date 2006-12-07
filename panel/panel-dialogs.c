@@ -653,8 +653,9 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
     g_ptr_array_foreach (panels, (GFunc)item_dialog_opened, NULL);
 
     gtk_window_stick(GTK_WINDOW (dlg));
+    /* Note sure why this is set to type UTILITY, but it's causing more bad than good.
     gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_UTILITY);
-
+     */
     xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
     gtk_widget_show (dlg);
 
@@ -1653,9 +1654,10 @@ panel_manager_dialog (GPtrArray *panels)
                       G_CALLBACK (panel_dialog_response), pmd);
     
     gtk_window_stick(GTK_WINDOW (pmd->dlg));
+    /* Note sure why this is set to type UTILITY, but it's causing more bad than good.
     gtk_window_set_type_hint (GTK_WINDOW (pmd->dlg), 
                               GDK_WINDOW_TYPE_HINT_UTILITY);
-
+     */
     xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (pmd->dlg));
     gtk_widget_show (pmd->dlg);
 
