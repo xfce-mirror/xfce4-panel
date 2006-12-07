@@ -656,6 +656,8 @@ add_items_dialog (GPtrArray *panels, GtkWidget *active_item)
     /* Note sure why this is set to type UTILITY, but it's causing more bad than good.
     gtk_window_set_type_hint (GTK_WINDOW (dlg), GDK_WINDOW_TYPE_HINT_UTILITY);
      */
+    gdk_x11_window_set_user_time (GTK_WIDGET (dlg)->window,
+        gdk_x11_get_server_time (GTK_WIDGET (dlg)->window));
     xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (dlg));
     gtk_widget_show (dlg);
 
@@ -1658,6 +1660,8 @@ panel_manager_dialog (GPtrArray *panels)
     gtk_window_set_type_hint (GTK_WINDOW (pmd->dlg), 
                               GDK_WINDOW_TYPE_HINT_UTILITY);
      */
+    gdk_x11_window_set_user_time (GTK_WIDGET (pmd->dlg)->window,
+        gdk_x11_get_server_time (GTK_WIDGET (pmd->dlg)->window));
     xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (pmd->dlg));
     gtk_widget_show (pmd->dlg);
 

@@ -3,18 +3,21 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="XfcePanelWindow">
 <refmeta>
-<refentrytitle>XfcePanelWindow</refentrytitle>
+<refentrytitle role="top_of_page">XfcePanelWindow</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>XfcePanelWindow</refname><refpurpose><para>
+<refname>XfcePanelWindow</refname>
+<refpurpose><para>
 A toplevel borderless window with optional move handles.
 </para></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv><title>Synopsis</title>
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
 
 <synopsis>
 
@@ -70,8 +73,8 @@ enum        <link linkend="XfceHandleStyle">XfceHandleStyle</link>;
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1>
-<title>Object Hierarchy</title>
+<refsect1 role="object_hierarchy">
+<title role="object_hierarchy.title">Object Hierarchy</title>
 <synopsis>
 
   <link linkend="GObject">GObject</link>
@@ -88,8 +91,8 @@ enum        <link linkend="XfceHandleStyle">XfceHandleStyle</link>;
 
 
 
-<refsect1>
-<title>Implemented Interfaces</title>
+<refsect1 role="impl_interfaces">
+<title role="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 XfcePanelWindow implements
  <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
@@ -97,8 +100,8 @@ XfcePanelWindow implements
 </refsect1>
 
 
-<refsect1>
-<title>Properties</title>
+<refsect1 role="properties">
+<title role="properties.title">Properties</title>
 <synopsis>
 
   &quot;<link linkend="XfcePanelWindow--handle-style">handle-style</link>&quot;         <link linkend="XfceHandleStyle">XfceHandleStyle</link>       : Read / Write
@@ -106,48 +109,48 @@ XfcePanelWindow implements
 </synopsis>
 </refsect1>
 
-<refsect1>
-<title>Signal Prototypes</title>
+<refsect1 role="signal_proto">
+<title role="signal_proto.title">Signals</title>
 <synopsis>
 
 &quot;<link linkend="XfcePanelWindow-move">move</link>&quot;      <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="gint">gint</link> x,
-                                            <link linkend="gint">gint</link> y,
-                                            <link linkend="gpointer">gpointer</link> user_data);
+                                            <link linkend="gint">gint</link>             x,
+                                            <link linkend="gint">gint</link>             y,
+                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last
 &quot;<link linkend="XfcePanelWindow-move-end">move-end</link>&quot;  <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="gint">gint</link> x,
-                                            <link linkend="gint">gint</link> y,
-                                            <link linkend="gpointer">gpointer</link> user_data);
+                                            <link linkend="gint">gint</link>             x,
+                                            <link linkend="gint">gint</link>             y,
+                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last
 &quot;<link linkend="XfcePanelWindow-move-start">move-start</link>&quot;
             <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="gpointer">gpointer</link> user_data);
+                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last
 &quot;<link linkend="XfcePanelWindow-orientation-changed">orientation-changed</link>&quot;
             <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="GtkOrientation">GtkOrientation</link> orientation,
-                                            <link linkend="gpointer">gpointer</link> user_data);
+                                            <link linkend="GtkOrientation">GtkOrientation</link>  *orientation,
+                                            <link linkend="gpointer">gpointer</link>         user_data)        : Run first
 </synopsis>
 </refsect1>
 
 
-<refsect1>
-<title>Description</title>
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
 <para>
 A widget derived from <link linkend="GtkWindow"><type>GtkWindow</type></link> that implements a toplevel window for panels.
 It optionally can have one or two move handles.
 </para>
 </refsect1>
 
-<refsect1>
-<title>Details</title>
+<refsect1 role="details">
+<title role="details.title">Details</title>
 <refsect2>
-<title><anchor id="XfcePanelWindow-struct"/>XfcePanelWindow</title>
+<title><anchor id="XfcePanelWindow-struct" role="struct"/>XfcePanelWindow</title>
 <indexterm><primary>XfcePanelWindow</primary></indexterm><programlisting>typedef struct _XfcePanelWindow XfcePanelWindow;</programlisting>
 <para>
-The <link linkend="XfcePanelWindow-struct"><type>XfcePanelWindow-struct</type></link> struct contains private data only, and
+The <link linkend="XfcePanelWindow-struct"><type>XfcePanelWindow</type></link> struct contains private data only, and
 should be accessed using the functions below.
 </para></refsect2>
 <refsect2>
-<title><anchor id="XfceHandleStyle"/>enum XfceHandleStyle</title>
+<title><anchor id="XfceHandleStyle" role="enum"/>enum XfceHandleStyle</title>
 <indexterm><primary>XfceHandleStyle</primary></indexterm><programlisting>typedef enum /*&lt;enum,prefix=XFCE_HANDLE_STYLE &gt;*/
 {
     XFCE_HANDLE_STYLE_NONE,
@@ -163,28 +166,28 @@ Style of the handles on an <link linkend="XfcePanelWindow"><type>XfcePanelWindow
 
 </para><variablelist role="enum">
 <varlistentry>
-<term><literal>XFCE_HANDLE_STYLE_NONE</literal></term>
+<term><anchor id="XFCE-HANDLE-STYLE-NONE:CAPS" role="constant"/><literal>XFCE_HANDLE_STYLE_NONE</literal></term>
 <listitem><simpara> No handles.
 </simpara></listitem>
 </varlistentry>
 <varlistentry>
-<term><literal>XFCE_HANDLE_STYLE_BOTH</literal></term>
+<term><anchor id="XFCE-HANDLE-STYLE-BOTH:CAPS" role="constant"/><literal>XFCE_HANDLE_STYLE_BOTH</literal></term>
 <listitem><simpara> Two handles, one on each side.
 </simpara></listitem>
 </varlistentry>
 <varlistentry>
-<term><literal>XFCE_HANDLE_STYLE_START</literal></term>
+<term><anchor id="XFCE-HANDLE-STYLE-START:CAPS" role="constant"/><literal>XFCE_HANDLE_STYLE_START</literal></term>
 <listitem><simpara> One handle at the start.
 </simpara></listitem>
 </varlistentry>
 <varlistentry>
-<term><literal>XFCE_HANDLE_STYLE_END</literal></term>
+<term><anchor id="XFCE-HANDLE-STYLE-END:CAPS" role="constant"/><literal>XFCE_HANDLE_STYLE_END</literal></term>
 <listitem><simpara> One handle at the end.
 </simpara></listitem>
 </varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="XfcePanelWindowMoveFunc"/>XfcePanelWindowMoveFunc ()</title>
+<title><anchor id="XfcePanelWindowMoveFunc" role="function"/>XfcePanelWindowMoveFunc ()</title>
 <indexterm><primary>XfcePanelWindowMoveFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*XfcePanelWindowMoveFunc)      (<link linkend="GtkWidget">GtkWidget</link> *widget,
                                              <link linkend="gpointer">gpointer</link> data,
                                              <link linkend="int">int</link> *x,
@@ -210,7 +213,7 @@ position.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="XfcePanelWindowResizeFunc"/>XfcePanelWindowResizeFunc ()</title>
+<title><anchor id="XfcePanelWindowResizeFunc" role="function"/>XfcePanelWindowResizeFunc ()</title>
 <indexterm><primary>XfcePanelWindowResizeFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*XfcePanelWindowResizeFunc)    (<link linkend="GtkWidget">GtkWidget</link> *widget,
                                              <link linkend="gpointer">gpointer</link> data,
                                              <link linkend="GtkAllocation">GtkAllocation</link> *previous,
@@ -244,7 +247,7 @@ and <parameter>y</parameter> to set the new position.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-new"/>xfce_panel_window_new ()</title>
+<title><anchor id="xfce-panel-window-new" role="function"/>xfce_panel_window_new ()</title>
 <indexterm><primary>xfce_panel_window_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_panel_window_new           (void);</programlisting>
 <para>
 Create new panel window.</para>
@@ -255,7 +258,7 @@ Create new panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-set-orientation"/>xfce_panel_window_set_orientation ()</title>
+<title><anchor id="xfce-panel-window-set-orientation" role="function"/>xfce_panel_window_set_orientation ()</title>
 <indexterm><primary>xfce_panel_window_set_orientation</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_window_set_orientation
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                              <link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
@@ -272,7 +275,7 @@ Set orientation for panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-get-orientation"/>xfce_panel_window_get_orientation ()</title>
+<title><anchor id="xfce-panel-window-get-orientation" role="function"/>xfce_panel_window_get_orientation ()</title>
 <indexterm><primary>xfce_panel_window_get_orientation</primary></indexterm><programlisting><link linkend="GtkOrientation">GtkOrientation</link> xfce_panel_window_get_orientation
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window);</programlisting>
 <para>
@@ -287,7 +290,7 @@ Get orientation of panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-set-handle-style"/>xfce_panel_window_set_handle_style ()</title>
+<title><anchor id="xfce-panel-window-set-handle-style" role="function"/>xfce_panel_window_set_handle_style ()</title>
 <indexterm><primary>xfce_panel_window_set_handle_style</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_window_set_handle_style
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                              <link linkend="XfceHandleStyle">XfceHandleStyle</link> handle_style);</programlisting>
@@ -304,7 +307,7 @@ Set handle style for panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-get-handle-style"/>xfce_panel_window_get_handle_style ()</title>
+<title><anchor id="xfce-panel-window-get-handle-style" role="function"/>xfce_panel_window_get_handle_style ()</title>
 <indexterm><primary>xfce_panel_window_get_handle_style</primary></indexterm><programlisting><link linkend="XfceHandleStyle">XfceHandleStyle</link> xfce_panel_window_get_handle_style
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window);</programlisting>
 <para>
@@ -319,7 +322,7 @@ Get handle style of panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-set-show-border"/>xfce_panel_window_set_show_border ()</title>
+<title><anchor id="xfce-panel-window-set-show-border" role="function"/>xfce_panel_window_set_show_border ()</title>
 <indexterm><primary>xfce_panel_window_set_show_border</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_window_set_show_border
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                              <link linkend="gboolean">gboolean</link> top_border,
@@ -348,7 +351,7 @@ Set border visibility for the panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-get-show-border"/>xfce_panel_window_get_show_border ()</title>
+<title><anchor id="xfce-panel-window-get-show-border" role="function"/>xfce_panel_window_get_show_border ()</title>
 <indexterm><primary>xfce_panel_window_get_show_border</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_window_get_show_border
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                              <link linkend="gboolean">gboolean</link> *top_border,
@@ -364,20 +367,20 @@ Get visibility of panel window borders.</para>
 <listitem><simpara> <link linkend="XfcePanelWindow"><type>XfcePanelWindow</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>top_border</parameter>&nbsp;:</term>
-<listitem><simpara> location for top border or <literal>NULL</literal>
+<listitem><simpara> location for top border or <link linkend="NULL:CAPS"><literal>NULL</literal></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>bottom_border</parameter>&nbsp;:</term>
-<listitem><simpara> location for bottom border or <literal>NULL</literal>
+<listitem><simpara> location for bottom border or <link linkend="NULL:CAPS"><literal>NULL</literal></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>left_border</parameter>&nbsp;:</term>
-<listitem><simpara> location for left border or <literal>NULL</literal>
+<listitem><simpara> location for left border or <link linkend="NULL:CAPS"><literal>NULL</literal></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>right_border</parameter>&nbsp;:</term>
-<listitem><simpara> location for right border or <literal>NULL</literal>
+<listitem><simpara> location for right border or <link linkend="NULL:CAPS"><literal>NULL</literal></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-set-resize-function"/>xfce_panel_window_set_resize_function ()</title>
+<title><anchor id="xfce-panel-window-set-resize-function" role="function"/>xfce_panel_window_set_resize_function ()</title>
 <indexterm><primary>xfce_panel_window_set_resize_function</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_window_set_resize_function
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                              <link linkend="XfcePanelWindowResizeFunc">XfcePanelWindowResizeFunc</link> function,
@@ -398,7 +401,7 @@ Set a function to modify resize behaviour of the panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-set-move-function"/>xfce_panel_window_set_move_function ()</title>
+<title><anchor id="xfce-panel-window-set-move-function" role="function"/>xfce_panel_window_set_move_function ()</title>
 <indexterm><primary>xfce_panel_window_set_move_function</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_window_set_move_function
                                             (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                              <link linkend="XfcePanelWindowMoveFunc">XfcePanelWindowMoveFunc</link> function,
@@ -419,7 +422,7 @@ Set a function to modify move behaviour of the panel window.</para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-set-movable"/>xfce_panel_window_set_movable ()</title>
+<title><anchor id="xfce-panel-window-set-movable" role="function"/>xfce_panel_window_set_movable ()</title>
 <indexterm><primary>xfce_panel_window_set_movable</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_window_set_movable   (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                              <link linkend="gboolean">gboolean</link> movable);</programlisting>
 <para>
@@ -431,30 +434,30 @@ Set if the panel window can be moved by the user.</para>
 <listitem><simpara> <link linkend="XfcePanelWindow"><type>XfcePanelWindow</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>movable</parameter>&nbsp;:</term>
-<listitem><simpara> <literal>TRUE</literal> or <literal>FALSE</literal>.
+<listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> or <link linkend="FALSE:CAPS"><literal>FALSE</literal></link>.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-panel-window-get-movable"/>xfce_panel_window_get_movable ()</title>
+<title><anchor id="xfce-panel-window-get-movable" role="function"/>xfce_panel_window_get_movable ()</title>
 <indexterm><primary>xfce_panel_window_get_movable</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    xfce_panel_window_get_movable   (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window);</programlisting>
 <para>
 Check if the panel window can be moved by the user.
-By default this is <literal>TRUE</literal>.</para>
+By default this is <link linkend="TRUE:CAPS"><literal>TRUE</literal></link>.</para>
 <para>
 
 </para><variablelist role="params">
 <varlistentry><term><parameter>window</parameter>&nbsp;:</term>
 <listitem><simpara> <link linkend="XfcePanelWindow"><type>XfcePanelWindow</type></link>
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <literal>TRUE</literal> if the user is allowed to move <parameter>window</parameter>, <literal>FALSE</literal> if not.
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the user is allowed to move <parameter>window</parameter>, <link linkend="FALSE:CAPS"><literal>FALSE</literal></link> if not.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 
 </refsect1>
-<refsect1>
-<title>Properties</title>
+<refsect1 role="property_details">
+<title role="property_details.title">Property Details</title>
 <refsect2><title><anchor id="XfcePanelWindow--handle-style"/>The &quot;<literal>handle-style</literal>&quot; property</title>
-<programlisting>  &quot;handle-style&quot;         <link linkend="XfceHandleStyle">XfceHandleStyle</link>       : Read / Write</programlisting>
+<indexterm><primary>XfcePanelWindow:handle-style</primary></indexterm><programlisting>  &quot;handle-style&quot;         <link linkend="XfceHandleStyle">XfceHandleStyle</link>       : Read / Write</programlisting>
 <para>
 The <link linkend="XfceHandleStyle"><type>XfceHandleStyle</type></link> to use when drawing handles.</para>
 <para>
@@ -462,7 +465,7 @@ The <link linkend="XfceHandleStyle"><type>XfceHandleStyle</type></link> to use w
 </para><para>Default value: XFCE_HANDLE_STYLE_BOTH</para>
 </refsect2>
 <refsect2><title><anchor id="XfcePanelWindow--orientation"/>The &quot;<literal>orientation</literal>&quot; property</title>
-<programlisting>  &quot;orientation&quot;          <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
+<indexterm><primary>XfcePanelWindow:orientation</primary></indexterm><programlisting>  &quot;orientation&quot;          <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
 <para>
 The orientation of the window. This the determines the way the handles
 are drawn.</para>
@@ -473,13 +476,13 @@ are drawn.</para>
 
 </refsect1>
 
-<refsect1>
-<title>Signals</title>
+<refsect1 role="signals">
+<title role="signals.title">Signal Details</title>
 <refsect2><title><anchor id="XfcePanelWindow-move"/>The &quot;move&quot; signal</title>
-<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="gint">gint</link> x,
-                                            <link linkend="gint">gint</link> y,
-                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<indexterm><primary>XfcePanelWindow::move</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
+                                            <link linkend="gint">gint</link>             x,
+                                            <link linkend="gint">gint</link>             y,
+                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last</programlisting>
 <para>
 Emitted when the user moves the <link linkend="XfcePanelWindow"><type>XfcePanelWindow</type></link> to a new position with
 coordinates (<parameter>x</parameter>, <parameter>y</parameter>).</para>
@@ -498,10 +501,10 @@ coordinates (<parameter>x</parameter>, <parameter>y</parameter>).</para>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-move-end"/>The &quot;move-end&quot; signal</title>
-<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="gint">gint</link> x,
-                                            <link linkend="gint">gint</link> y,
-                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<indexterm><primary>XfcePanelWindow::move-end</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
+                                            <link linkend="gint">gint</link>             x,
+                                            <link linkend="gint">gint</link>             y,
+                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last</programlisting>
 <para>
 Emitted when the user stops dragging the <link linkend="XfcePanelWindow"><type>XfcePanelWindow</type></link>. The latest
 position has coordinates (<parameter>x</parameter>, <parameter>y</parameter>).</para>
@@ -520,8 +523,8 @@ position has coordinates (<parameter>x</parameter>, <parameter>y</parameter>).</
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-move-start"/>The &quot;move-start&quot; signal</title>
-<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<indexterm><primary>XfcePanelWindow::move-start</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
+                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last</programlisting>
 <para>
 Emitted when the user starts to drag the <link linkend="XfcePanelWindow"><type>XfcePanelWindow</type></link>.</para>
 <para>
@@ -533,9 +536,9 @@ Emitted when the user starts to drag the <link linkend="XfcePanelWindow"><type>X
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
-<programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
-                                            <link linkend="GtkOrientation">GtkOrientation</link> orientation,
-                                            <link linkend="gpointer">gpointer</link> user_data);</programlisting>
+<indexterm><primary>XfcePanelWindow::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
+                                            <link linkend="GtkOrientation">GtkOrientation</link>  *orientation,
+                                            <link linkend="gpointer">gpointer</link>         user_data)        : Run first</programlisting>
 <para>
 Emitted when the orientation of the <link linkend="XfcePanelWindow"><type>XfcePanelWindow</type></link> changes.</para>
 <para>
