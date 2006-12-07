@@ -76,6 +76,8 @@ struct _PanelPrivate
     guint activetrans:1;
     guint hidden:1;
     guint edit_mode:1;
+
+    gulong struts[12];
 };
 
 #endif /* _PANEL_PRIVATE_H */

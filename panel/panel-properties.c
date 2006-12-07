@@ -37,7 +37,7 @@
 #include "panel-properties.h"
 #include "panel-private.h"
 
-#define HIDDEN_SIZE	3
+#define HIDDEN_SIZE     3
 #define OPAQUE          0xffffffff
 #define HIDE_TIMEOUT    350
 #define UNHIDE_TIMEOUT  200
@@ -230,7 +230,9 @@ static void
 _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
 {
     PanelPrivate *priv;
-    gulong data[12] = { 0, };
+    gulong        data[12] = { 0, };
+    int           i;
+    gboolean      update = FALSE;
 
     /* _NET_WM_STRUT_PARTIAL: CARDINAL[12]/32
      * 
@@ -260,8 +262,8 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
             {
                 data[0] = xmon->geometry.x 
                           + w;          /* left           */
-                data[4] = y;	        /* left_start_y   */
-                data[5] = y + h;	/* left_end_y     */
+                data[4] = y;            /* left_start_y   */
+                data[5] = y + h;        /* left_end_y     */
             }
         }
         else if (xfce_screen_position_is_right (priv->screen_position))
@@ -274,8 +276,8 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
                 data[1] =  gdk_screen_get_width (xmon->screen) 
                            - xmon->geometry.x - xmon->geometry.width 
                            + w;         /* right          */
-                data[6] = y;	        /* right_start_y  */
-                data[7] = y + h;	/* right_end_y    */
+                data[6] = y;            /* right_start_y  */
+                data[7] = y + h;        /* right_end_y    */
             }
         }
         else if (xfce_screen_position_is_top (priv->screen_position))
@@ -286,9 +288,9 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
             if (!xmon->has_neighbor_above)
             {
                 data[2] = xmon->geometry.y 
-                          + h;	        /* top            */
-                data[8] = x;	        /* top_start_x    */
-                data[9] = x + w;	/* top_end_x      */
+                          + h;          /* top            */
+                data[8] = x;            /* top_start_x    */
+                data[9] = x + w;        /* top_end_x      */
             }
         }
         else
@@ -300,39 +302,64 @@ _set_struts (Panel *panel, XfceMonitor *xmon, int x, int y, int w, int h)
             {
                 data[3] = gdk_screen_get_height (xmon->screen) 
                            - xmon->geometry.y - xmon->geometry.height 
-                           + h;	        /* bottom         */
-                data[10] = x;	        /* bottom_start_x */
-                data[11] = x + w;	/* bottom_end_x   */
+                           + h;         /* bottom         */
+                data[10] = x;           /* bottom_start_x */
+                data[11] = x + w;       /* bottom_end_x   */
             }
-	}
+        }
     }
 
-    DBG ("\nStruts: "
-	 "%ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld, %ld",
-	 data[0], data[1], data[2], data[3], data[4], data[5],
-	 data[6], data[7], data[8], data[9], data[10], data[11]);
+    DBG ("\nStruts\n"
+         "%ld\t%ld\t%ld\t%ld\n"
+         "%ld\t%ld\t%ld\t%ld\n"
+         "%ld\t%ld\t%ld\t%ld\n",
+         data[0], data[1], data[2], data[3], 
+         data[4], data[5], data[6], data[7], 
+         data[8], data[9], data[10], data[11]);
 
-    gdk_error_trap_push ();
+    /* Check for invalid values. */
+    for (i = 0; i < 4; i++)
+    {
+        if (data[i] > MIN(xmon->geometry.width,xmon->geometry.height) / 4)
+        {
+            return;
+        }
+    }
+    
+    /* Check if values have changed. */
+    for (i = 0; i < 12; i++)
+    {
+        if (data[i] != priv->struts[i])
+        {
+            update = TRUE;
+            priv->struts[i] = data[i];
+        }
+    }
+    
+    if (update)
+    {
+        gdk_error_trap_push ();
 
-    gdk_property_change (GTK_WIDGET (panel)->window,
-			 gdk_atom_intern ("_NET_WM_STRUT_PARTIAL", FALSE),
-			 gdk_atom_intern ("CARDINAL", FALSE), 32,
-			 GDK_PROP_MODE_REPLACE, (guchar *) & data, 12);
+        gdk_property_change (GTK_WIDGET (panel)->window,
+                             gdk_atom_intern ("_NET_WM_STRUT_PARTIAL", FALSE),
+                             gdk_atom_intern ("CARDINAL", FALSE), 32,
+                             GDK_PROP_MODE_REPLACE, (guchar *) & data, 12);
 
-    gdk_property_change (GTK_WIDGET (panel)->window,
-			 gdk_atom_intern ("_NET_WM_STRUT", FALSE),
-			 gdk_atom_intern ("CARDINAL", FALSE), 32,
-			 GDK_PROP_MODE_REPLACE, (guchar *) & data, 4);
+        gdk_property_change (GTK_WIDGET (panel)->window,
+                             gdk_atom_intern ("_NET_WM_STRUT", FALSE),
+                             gdk_atom_intern ("CARDINAL", FALSE), 32,
+                             GDK_PROP_MODE_REPLACE, (guchar *) & data, 4);
 
-    gdk_error_trap_pop ();
+        gdk_error_trap_pop ();
+    }
 }
 
 static gboolean
 unblock_struts (Panel *panel)
 {
-    PanelPrivate *      priv;
-    XfceMonitor *       xmon;
-    int                 x, y, w, h;
+    PanelPrivate *priv;
+    XfceMonitor  *xmon;
+    int           x, y, w, h;
 
     priv = PANEL (panel)->priv;
     priv->edit_mode = FALSE;
@@ -400,8 +427,8 @@ panel_resize_function (XfcePanelWindow *window, Panel *panel,
     XfceMonitor  *xmon;
 
     DBG ("old: %dx%d\tnew: %dx%d", 
-	 old ? old->width : 0, old ? old->height : 0,
-	 new->width, new->height );
+         old ? old->width : 0, old ? old->height : 0,
+         new->width, new->height );
 
     if (!GTK_WIDGET_VISIBLE (panel))
         return;
@@ -415,19 +442,6 @@ panel_resize_function (XfcePanelWindow *window, Panel *panel,
     priv->xoffset = *x - xmon->geometry.x;
     priv->yoffset = *y - xmon->geometry.y;
     
-    /* No change. We do need to calculate the position above, but we only need 
-     * to update the struts when the size actually changes. */
-    if (old && new->width == old->width && new->height == old->height)
-	    return;
-
-    /* Catch incorrect intermediate values when changing orientation:
-     * check if both height and width are larger than half the screen. */
-    if (new->width * 2 > xmon->geometry.width && 
-	new->height * 2 > xmon->geometry.height)
-    {
-	return;
-    }
-
     _set_struts (panel, xmon, *x, *y, new->width, new->height);
 }
 
