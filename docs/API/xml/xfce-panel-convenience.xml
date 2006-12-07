@@ -3,21 +3,18 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="libxfce4panel-Convenience-Functions">
 <refmeta>
-<refentrytitle role="top_of_page">Convenience Functions</refentrytitle>
+<refentrytitle>Convenience Functions</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>Convenience Functions</refname>
-<refpurpose><para>
+<refname>Convenience Functions</refname><refpurpose><para>
 Special purpose widgets and utilities.
 </para></refpurpose>
-<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
-<title role="synopsis.title">Synopsis</title>
+<refsynopsisdiv><title>Synopsis</title>
 
 <synopsis>
 
@@ -36,22 +33,22 @@ Special purpose widgets and utilities.
 
 
 
-<refsect1 role="desc">
-<title role="desc.title">Description</title>
+<refsect1>
+<title>Description</title>
 <para>
 This section describes a number of functions that were created to help
 developers of Xfce Panel plugins.
 </para>
 </refsect1>
 
-<refsect1 role="details">
-<title role="details.title">Details</title>
+<refsect1>
+<title>Details</title>
 <refsect2>
-<title><anchor id="xfce-create-panel-button" role="function"/>xfce_create_panel_button ()</title>
+<title><anchor id="xfce-create-panel-button"/>xfce_create_panel_button ()</title>
 <indexterm><primary>xfce_create_panel_button</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_create_panel_button        (void);</programlisting>
 <para>
 Create regular <link linkend="GtkToggleButton"><type>GtkToggleButton</type></link> with a few properties set to be useful in 
-Xfce panel: Flat (<link linkend="GTK-RELIEF-NONE:CAPS"><literal>GTK_RELIEF_NONE</literal></link>), no focus on click and minimal padding.</para>
+Xfce panel: Flat (<literal>GTK_RELIEF_NONE</literal>), no focus on click and minimal padding.</para>
 <para>
 
 </para><variablelist role="params">
@@ -59,7 +56,7 @@ Xfce panel: Flat (<link linkend="GTK-RELIEF-NONE:CAPS"><literal>GTK_RELIEF_NONE<
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="xfce-create-panel-toggle-button" role="function"/>xfce_create_panel_toggle_button ()</title>
+<title><anchor id="xfce-create-panel-toggle-button"/>xfce_create_panel_toggle_button ()</title>
 <indexterm><primary>xfce_create_panel_toggle_button</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_create_panel_toggle_button (void);</programlisting>
 <para>
 

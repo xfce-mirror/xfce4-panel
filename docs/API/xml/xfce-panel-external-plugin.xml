@@ -3,21 +3,18 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="XfceExternalPanelPlugin">
 <refmeta>
-<refentrytitle role="top_of_page">XfceExternalPanelPlugin</refentrytitle>
+<refentrytitle>XfceExternalPanelPlugin</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>XfceExternalPanelPlugin</refname>
-<refpurpose><para>
+<refname>XfceExternalPanelPlugin</refname><refpurpose><para>
 External plugin widget.
 </para></refpurpose>
-<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
-<title role="synopsis.title">Synopsis</title>
+<refsynopsisdiv><title>Synopsis</title>
 
 <synopsis>
 
@@ -31,8 +28,8 @@ External plugin widget.
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 role="object_hierarchy">
-<title role="object_hierarchy.title">Object Hierarchy</title>
+<refsect1>
+<title>Object Hierarchy</title>
 <synopsis>
 
   <link linkend="GObject">GObject</link>
@@ -50,8 +47,8 @@ External plugin widget.
 
 
 
-<refsect1 role="impl_interfaces">
-<title role="impl_interfaces.title">Implemented Interfaces</title>
+<refsect1>
+<title>Implemented Interfaces</title>
 <para>
 XfceExternalPanelPlugin implements
  <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="XfcePanelPlugin">XfcePanelPlugin</link>.</para>
@@ -62,26 +59,26 @@ XfceExternalPanelPlugin implements
 
 
 
-<refsect1 role="desc">
-<title role="desc.title">Description</title>
+<refsect1>
+<title>Description</title>
 <para>
 Implements the <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
 for external plugins.
 </para>
 </refsect1>
 
-<refsect1 role="details">
-<title role="details.title">Details</title>
+<refsect1>
+<title>Details</title>
 <refsect2>
-<title><anchor id="XfceExternalPanelPlugin-struct" role="struct"/>XfceExternalPanelPlugin</title>
+<title><anchor id="XfceExternalPanelPlugin-struct"/>XfceExternalPanelPlugin</title>
 <indexterm><primary>XfceExternalPanelPlugin</primary></indexterm><programlisting>typedef struct _XfceExternalPanelPlugin XfceExternalPanelPlugin;</programlisting>
 <para>
-The <link linkend="XfceExternalPanelPlugin-struct"><type>XfceExternalPanelPlugin</type></link> struct contains private data only, and
+The <link linkend="XfceExternalPanelPlugin-struct"><type>XfceExternalPanelPlugin-struct</type></link> struct contains private data only, and
 should be accessed using the functions for the 
 <link linkend="XfcePanelPlugin">XfcePanelPlugin Interface</link>.
 </para></refsect2>
 <refsect2>
-<title><anchor id="xfce-external-panel-plugin-new" role="function"/>xfce_external_panel_plugin_new ()</title>
+<title><anchor id="xfce-external-panel-plugin-new"/>xfce_external_panel_plugin_new ()</title>
 <indexterm><primary>xfce_external_panel_plugin_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_external_panel_plugin_new  (<link linkend="int">int</link> argc,
                                              <link linkend="char">char</link> **argv,
                                              <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);</programlisting>

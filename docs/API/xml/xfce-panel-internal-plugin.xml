@@ -3,21 +3,18 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="XfceInternalPanelPlugin">
 <refmeta>
-<refentrytitle role="top_of_page">XfceInternalPanelPlugin</refentrytitle>
+<refentrytitle>XfceInternalPanelPlugin</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>XfceInternalPanelPlugin</refname>
-<refpurpose><para>
+<refname>XfceInternalPanelPlugin</refname><refpurpose><para>
 Internal panel plugin.
 </para></refpurpose>
-<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv role="synopsis">
-<title role="synopsis.title">Synopsis</title>
+<refsynopsisdiv><title>Synopsis</title>
 
 <synopsis>
 
@@ -34,8 +31,8 @@ Internal panel plugin.
 </synopsis>
 </refsynopsisdiv>
 
-<refsect1 role="object_hierarchy">
-<title role="object_hierarchy.title">Object Hierarchy</title>
+<refsect1>
+<title>Object Hierarchy</title>
 <synopsis>
 
   <link linkend="GObject">GObject</link>
@@ -52,8 +49,8 @@ Internal panel plugin.
 
 
 
-<refsect1 role="impl_interfaces">
-<title role="impl_interfaces.title">Implemented Interfaces</title>
+<refsect1>
+<title>Implemented Interfaces</title>
 <para>
 XfceInternalPanelPlugin implements
  <link linkend="AtkImplementorIface">AtkImplementorIface</link>,  <link linkend="XfcePanelPlugin">XfcePanelPlugin</link> and  <link linkend="XfcePanelItem">XfcePanelItem</link>.</para>
@@ -64,26 +61,26 @@ XfceInternalPanelPlugin implements
 
 
 
-<refsect1 role="desc">
-<title role="desc.title">Description</title>
+<refsect1>
+<title>Description</title>
 <para>
 Implements the <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
 for internal plugins (loadable modules).
 </para>
 </refsect1>
 
-<refsect1 role="details">
-<title role="details.title">Details</title>
+<refsect1>
+<title>Details</title>
 <refsect2>
-<title><anchor id="XfceInternalPanelPlugin-struct" role="struct"/>XfceInternalPanelPlugin</title>
+<title><anchor id="XfceInternalPanelPlugin-struct"/>XfceInternalPanelPlugin</title>
 <indexterm><primary>XfceInternalPanelPlugin</primary></indexterm><programlisting>typedef struct _XfceInternalPanelPlugin XfceInternalPanelPlugin;</programlisting>
 <para>
-The <link linkend="XfceInternalPanelPlugin-struct"><type>XfceInternalPanelPlugin</type></link> struct contains private data only, and
+The <link linkend="XfceInternalPanelPlugin-struct"><type>XfceInternalPanelPlugin-struct</type></link> struct contains private data only, and
 should be accessed using the functions for the 
 <link linkend="XfcePanelPlugin">XfcePanelPlugin Interface</link>.
 </para></refsect2>
 <refsect2>
-<title><anchor id="xfce-internal-panel-plugin-new" role="function"/>xfce_internal_panel_plugin_new ()</title>
+<title><anchor id="xfce-internal-panel-plugin-new"/>xfce_internal_panel_plugin_new ()</title>
 <indexterm><primary>xfce_internal_panel_plugin_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_internal_panel_plugin_new  (const <link linkend="char">char</link> *name,
                                              const <link linkend="char">char</link> *id,
                                              const <link linkend="char">char</link> *display_name,
