@@ -35,6 +35,7 @@
 #include <libxfce4panel/xfce-panel-internal-plugin.h>
 #include <libxfce4panel/xfce-panel-external-item.h>
 #include <libxfce4panel/xfce-panel-enums.h>
+#include <libxfce4panel/xfce-panel-convenience.h>
 
 #include "panel-item-manager.h"
 
@@ -242,14 +243,9 @@ _new_plugin_class_from_desktop_file (const char *file)
 static void
 _update_plugin_list (void)
 {
-    char **dirs, **d;
-    gboolean datadir_used = FALSE;
-    XfceKiosk *kiosk = NULL;
-    gboolean use_user_config = TRUE;
-
-    kiosk = xfce_kiosk_new ("xfce4-panel");
-    use_user_config = xfce_kiosk_query (kiosk, "CustomizePanel");
-    xfce_kiosk_free (kiosk);
+    char     **dirs, **d;
+    gboolean   datadir_used    = FALSE;
+    gboolean   use_user_config = xfce_allow_panel_customization();
 
     if (G_UNLIKELY (!use_user_config))
     {
