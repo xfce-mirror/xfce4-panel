@@ -1656,9 +1656,12 @@ panel_manager_dialog (GPtrArray *panels)
                       G_CALLBACK (panel_dialog_response), pmd);
     
     gtk_window_stick(GTK_WINDOW (pmd->dlg));
+    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (pmd->dlg));
+    gtk_widget_realize (pmd->dlg);
+
+    /* window needs to be realized */
     gdk_x11_window_set_user_time (GTK_WIDGET (pmd->dlg)->window,
         gdk_x11_get_server_time (GTK_WIDGET (pmd->dlg)->window));
-    xfce_gtk_window_center_on_monitor_with_pointer (GTK_WINDOW (pmd->dlg));
     gtk_widget_show (pmd->dlg);
 
     panel_app_register_dialog (pmd->dlg);
