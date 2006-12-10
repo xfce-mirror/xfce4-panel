@@ -97,12 +97,12 @@ create_panel_array_from_config (const char *file)
 GPtrArray *
 panel_config_create_panels (void)
 {
-    gboolean   use_user_config;
-    char      *file     = NULL;
-    GPtrArray *array    = NULL;
-    char      *path     = "xfce4" G_DIR_SEPARATOR_S 
-                          "panel" G_DIR_SEPARATOR_S
-                          "panels.xml";
+    gboolean    use_user_config;
+    char       *file  = NULL;
+    GPtrArray  *array = NULL;
+    const char *path  = "xfce4" G_DIR_SEPARATOR_S 
+                        "panel" G_DIR_SEPARATOR_S
+                        "panels.xml";
 
     use_user_config = xfce_allow_panel_customization ();
 
@@ -139,6 +139,8 @@ panel_config_create_panels (void)
     else
         array = create_fallback_panel_array ();
 
+    g_free (file);
+
     DBG ("Successfully configured %d panel(s).", array->len);
 
     return array;
@@ -156,13 +158,15 @@ panel_config_save_panels (GPtrArray * panels)
     if (use_user_config)
     {
         int   i;
-        char *path = "xfce4" G_DIR_SEPARATOR_S 
-                     "panel" G_DIR_SEPARATOR_S
-                     "panels.xml";
+        const char *path = "xfce4" G_DIR_SEPARATOR_S 
+                           "panel" G_DIR_SEPARATOR_S
+                           "panels.xml";
 
         file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
 
         failed = !config_save_to_file (panels, file);
+
+        g_free (file);
 
         for (i = 0; i < panels->len; ++i)
         {
