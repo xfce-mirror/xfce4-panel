@@ -60,8 +60,9 @@ AC_SUBST([LIBXFCE4PANEL_VERINFO])
 
 dnl Check for standard header files
 AC_HEADER_STDC
-AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h string.h])
+AC_CHECK_HEADERS([signal.h stddef.h sys/wait.h time.h string.h sys/mman.h])
 AC_CHECK_FUNCS([sigaction])
+AC_FUNC_MMAP()
 
 dnl Check for i18n support
 XDT_I18N([@LINGUAS@])

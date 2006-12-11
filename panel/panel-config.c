@@ -33,6 +33,10 @@
 #include <gdk/gdkx.h>
 #include <gtk/gtkenums.h>
 
+#ifdef HAVE_SYS_MMAN_H
+#include <sys/mman.h>   
+#endif
+
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
@@ -51,7 +55,8 @@
 
 static GPtrArray *config_parse_file (const char *filename);
 
-static gboolean config_save_to_file (GPtrArray *panels, const char *filename);
+static gboolean config_save_to_file (GPtrArray *panels, 
+                                     const char *filename);
 
 
 /* fallback panel */
@@ -60,7 +65,7 @@ static GPtrArray *
 create_fallback_panel_array (void)
 {
     GPtrArray *array;
-    Panel *panel;
+    Panel     *panel;
 
     DBG ("No suitable panel configuration was found.");
     
@@ -77,36 +82,18 @@ create_fallback_panel_array (void)
     return array;
 }
 
-/* parsing the config file */
-
-static GPtrArray *
-create_panel_array_from_config (const char *file)
-{
-    GPtrArray *array;
-
-    array = config_parse_file (file);
-
-    if (!array)
-        array = create_fallback_panel_array ();
-
-    return array;
-}
-
 /* public API */
 
 GPtrArray *
 panel_config_create_panels (void)
 {
-    gboolean    use_user_config;
     char       *file  = NULL;
     GPtrArray  *array = NULL;
     const char *path  = "xfce4" G_DIR_SEPARATOR_S 
                         "panel" G_DIR_SEPARATOR_S
                         "panels.xml";
 
-    use_user_config = xfce_allow_panel_customization ();
-
-    if (G_UNLIKELY (!use_user_config))
+    if (G_UNLIKELY (!xfce_allow_panel_customization ()))
     {
         file = g_build_filename (SYSCONFDIR, "xdg", path, NULL);
 
@@ -135,11 +122,13 @@ panel_config_create_panels (void)
     }
 
     if (file)
-        array = create_panel_array_from_config (file);
-    else
+    {
+        array = config_parse_file (file);
+        g_free (file);
+    }
+    
+    if (!array)
         array = create_fallback_panel_array ();
-
-    g_free (file);
 
     DBG ("Successfully configured %d panel(s).", array->len);
 
@@ -149,15 +138,12 @@ panel_config_create_panels (void)
 gboolean
 panel_config_save_panels (GPtrArray * panels)
 {
-    char *file = NULL;
     gboolean failed = FALSE;
-    gboolean use_user_config;
 
-    use_user_config = xfce_allow_panel_customization ();
-
-    if (use_user_config)
+    if (xfce_allow_panel_customization ())
     {
-        int   i;
+        int         i;
+        char       *file = NULL;
         const char *path = "xfce4" G_DIR_SEPARATOR_S 
                            "panel" G_DIR_SEPARATOR_S
                            "panels.xml";
@@ -195,24 +181,23 @@ ParserState;
 typedef struct _ConfigParser ConfigParser;
 struct _ConfigParser
 {
-    GPtrArray *panels;
-    Panel *current_panel;
-    ParserState state;
+    GPtrArray   *panels;
+    Panel       *current_panel;
+    ParserState  state;
 
-    gboolean properties_set;
-    gboolean monitor_set;
+    gboolean     properties_set;
+    gboolean     monitor_set;
     
-    /* properties */
-    int size;
-    int monitor;
-    int screen_position;
-    int full_width;
-    int xoffset;
-    int yoffset;
-    int handle_style;
-    gboolean autohide;
-    int transparency;
-    gboolean activetrans;
+    int          size;
+    int          monitor;
+    int          screen_position;
+    int          full_width;
+    int          xoffset;
+    int          yoffset;
+    int          handle_style;
+    gboolean     autohide;
+    int          transparency;
+    gboolean     activetrans;
 };
 
 static void
@@ -235,7 +220,8 @@ init_properties (ConfigParser *parser)
 
 static void
 config_set_property (ConfigParser *parser, 
-                     const char *name, const char *value)
+                     const char   *name, 
+                     const char   *value)
 {
     g_return_if_fail (name != NULL && value != NULL);
 
@@ -285,17 +271,17 @@ config_set_property (ConfigParser *parser,
 }
 
 static void
-start_element_handler (GMarkupParseContext * context,
-                       const char *element_name,
-                       const char **attribute_names,
-                       const char **attribute_values,
-                       gpointer user_data, 
-                       GError ** error)
+start_element_handler (GMarkupParseContext  *context,
+                       const char           *element_name,
+                       const char          **attribute_names,
+                       const char          **attribute_values,
+                       gpointer              user_data, 
+                       GError              **error)
 {
     ConfigParser *parser = user_data;
-    char *name = NULL;
-    char *value = NULL;
-    int i = 0;
+    char         *name   = NULL;
+    char         *value  = NULL;
+    int           i      = 0;
 
     switch (parser->state)
     {
@@ -305,6 +291,7 @@ start_element_handler (GMarkupParseContext * context,
                 parser->state = PANELS;
             }
             break;
+
         case PANELS:
             if (strcmp (element_name, "panel") == 0)
             {
@@ -394,10 +381,10 @@ start_element_handler (GMarkupParseContext * context,
 }
 
 static void
-end_element_handler (GMarkupParseContext * context,
-                     const char *element_name,
-                     gpointer user_data, 
-                     GError ** error)
+end_element_handler (GMarkupParseContext  *context,
+                     const char           *element_name,
+                     gpointer              user_data, 
+                     GError              **error)
 {
     ConfigParser *parser = user_data;
 
@@ -406,10 +393,12 @@ end_element_handler (GMarkupParseContext * context,
         case START:
             g_warning ("end unexpected element: \"%s\"", element_name);
             break;
+
         case PANELS:
             if (strcmp ("panels", element_name) == 0)
                 parser->state = START;
             break;
+
         case PANEL:
             if (strcmp ("panel", element_name) == 0)
             {
@@ -434,18 +423,17 @@ end_element_handler (GMarkupParseContext * context,
                         parser->monitor = DefaultScreen (GDK_DISPLAY());
                     }
 
-                    
                     g_object_set (G_OBJECT (parser->current_panel),
-                                  "size", parser->size,
-                                  "monitor", parser->monitor,
+                                  "size",            parser->size,
+                                  "monitor",         parser->monitor,
                                   "screen-position", parser->screen_position,
-                                  "fullwidth", parser->full_width,
-                                  "xoffset", parser->xoffset,
-                                  "yoffset", parser->yoffset,
-                                  "handle-style", parser->handle_style,
-                                  "autohide", parser->autohide,
-                                  "transparency", parser->transparency,
-                                  "activetrans", parser->activetrans,
+                                  "fullwidth",       parser->full_width,
+                                  "xoffset",         parser->xoffset,
+                                  "yoffset",         parser->yoffset,
+                                  "handle-style",    parser->handle_style,
+                                  "autohide",        parser->autohide,
+                                  "transparency",    parser->transparency,
+                                  "activetrans",     parser->activetrans,
                                   NULL);
                 }
                 TIMER_ELAPSED(" ++ end properties");
@@ -477,16 +465,16 @@ static GMarkupParser markup_parser = {
 static GPtrArray *
 config_parse_file (const char *filename)
 {
-    GPtrArray *array = NULL;
-    char *contents;
-    GError *error;
+    GPtrArray           *array = NULL;
+    char                *contents;
+    GError              *error;
     GMarkupParseContext *context;
-    ConfigParser parser;
-    struct stat sb;
-    size_t bytes;
-    int fd, rc;
+    ConfigParser         parser;
+    struct stat          sb;
+    size_t               bytes;
+    int                  fd, rc;
 #ifdef HAVE_MMAP
-    void *addr;
+    void                *addr;
 #endif
 
     g_return_val_if_fail (filename != NULL && strlen (filename) > 0, NULL);
@@ -586,9 +574,8 @@ finished:
     {
         if (munmap (addr, sb.st_size) < 0)
         {
-            g_critical ("Unable to unmap file %s with contents for channel "
-                        "\"%s\": %s. This should not happen!",
-                        filename, channel_name, g_strerror (errno));
+            g_critical ("Unable to unmap file %s: %s. This should not happen!", 
+                        filename, g_strerror (errno));
         }
 
         contents = NULL;
@@ -617,8 +604,8 @@ gboolean
 config_save_to_file (GPtrArray *array, const char *filename)
 {
     FILE *fp;
-    char tmp_path[PATH_MAX];
-    int i;
+    char  tmp_path[PATH_MAX];
+    int   i;
 
     g_return_val_if_fail (array != NULL, FALSE);
     g_return_val_if_fail (filename != NULL || (strlen (filename) > 0), FALSE);
@@ -642,31 +629,35 @@ config_save_to_file (GPtrArray *array, const char *filename)
 
     for (i = 0; i < array->len; ++i)
     {
-        Panel *panel;
-        int size, monitor, screen_position, xoffset, yoffset, handle_style,
-            transparency, fullwidth, j;
-        gboolean autohide, activetrans;
         XfcePanelItemConfig *configlist;
+        Panel               *panel;
+        int                  size            = 0;
+        int                  monitor         = 0;
+        int                  screen_position = 0;
+        int                  fullwidth       = 0;
+        int                  xoffset         = 0;
+        int                  yoffset         = 0;
+        int                  handle_style    = 0;
+        int                  transparency    = 0;
+        gboolean             autohide        = FALSE;
+        gboolean             activetrans     = FALSE;
+        int                  j;
         
         DBG ("Saving panel %d", i + 1);
 
         panel = g_ptr_array_index (array, i);
 
-        size = monitor = screen_position = xoffset = yoffset = 
-            transparency = fullwidth = 0;
-        autohide = activetrans = FALSE;
-
         g_object_get (G_OBJECT (panel),
-                      "size", &size,
-                      "monitor", &monitor,
+                      "size",            &size,
+                      "monitor",         &monitor,
                       "screen-position", &screen_position,
-                      "fullwidth", &fullwidth,
-                      "xoffset", &xoffset,
-                      "yoffset", &yoffset,
-                      "handle-style", &handle_style,
-                      "autohide", &autohide,
-                      "transparency", &transparency,
-                      "activetrans", &activetrans,
+                      "fullwidth",       &fullwidth,
+                      "xoffset",         &xoffset,
+                      "yoffset",         &yoffset,
+                      "handle-style",    &handle_style,
+                      "transparency",    &transparency,
+                      "autohide",        &autohide,
+                      "activetrans",     &activetrans,
                       NULL);
         
         /* grouping */

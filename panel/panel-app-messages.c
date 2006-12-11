@@ -41,7 +41,8 @@
 /* client messages */
 
 static gboolean
-client_event_received (GtkWidget *win, GdkEventClient *ev)
+client_event_received (GtkWidget      *win, 
+                       GdkEventClient *ev)
 {
     GdkAtom atom = gdk_atom_intern (PANEL_APP_ATOM, FALSE);
     
@@ -103,19 +104,19 @@ panel_app_send (PanelAppMessage message)
 
     if (win)
     {
-        GdkEventClient gev;
-        GtkWidget *invisible;
+        GdkEventClient  gev;
+        GtkWidget      *invisible;
 
         invisible = gtk_invisible_new ();
         gtk_widget_realize (invisible);
         
-	gev.type = GDK_CLIENT_EVENT;
-	gev.window = invisible->window;
-	gev.send_event = TRUE;
+	gev.type         = GDK_CLIENT_EVENT;
+	gev.window       = invisible->window;
+	gev.send_event   = TRUE;
 	gev.message_type = gdk_atom_intern (PANEL_APP_ATOM, FALSE);
-	gev.data_format = 16;
-        gev.data.s[0] = message;
-        gev.data.s[1] = 0;
+	gev.data_format  = 16;
+        gev.data.s[0]    = message;
+        gev.data.s[1]    = 0;
 
 	gdk_event_send_client_message ((GdkEvent *) & gev,
 				       (GdkNativeWindow) win);
