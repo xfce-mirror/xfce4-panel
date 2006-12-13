@@ -386,10 +386,20 @@ static void
 panel_size_request  (GtkWidget      *widget, 
                      GtkRequisition *requisition)
 {
+    PanelPrivate *priv = PANEL(widget)->priv;
+
     GTK_WIDGET_CLASS (panel_parent_class)->size_request (widget, requisition);
 
-    requisition->width  = MAX (MIN_SIZE, requisition->width);
-    requisition->height = MAX (MIN_SIZE, requisition->height);
+    if (panel_is_horizontal (PANEL (widget)))
+    {
+        requisition->width  = MAX (MIN_SIZE,   requisition->width);
+        requisition->height = MAX (priv->size, requisition->height);
+    }
+    else
+    {
+        requisition->width  = MAX (priv->size, requisition->width);
+        requisition->height = MAX (MIN_SIZE,   requisition->height);
+    }
 }
 
 static gboolean 

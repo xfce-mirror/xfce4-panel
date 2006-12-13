@@ -56,6 +56,7 @@
 
 #define SELECTION_NAME "XFCE4_PANEL"
 #define PANEL_LAUNCHER "launcher"
+#define SAVE_TIMEOUT   30000
 
 #if defined(TIMER) && defined(G_HAVE_ISO_VARARGS)
 void
@@ -767,11 +768,14 @@ save_timeout (void)
 void 
 panel_app_queue_save (void)
 {
+    if (!panel_app.initialized)
+        return;
+
     if (panel_app.runstate == PANEL_RUN_STATE_NORMAL)
     {
         if (!panel_app.save_id)
             panel_app.save_id = 
-                g_timeout_add (30000, (GSourceFunc)save_timeout, NULL);
+                g_timeout_add (SAVE_TIMEOUT, (GSourceFunc)save_timeout, NULL);
     }
 }
 
