@@ -40,7 +40,6 @@ G_BEGIN_DECLS
 
 typedef struct _Panel               Panel;
 typedef struct _PanelClass          PanelClass;
-typedef struct _XfcePanelItemConfig XfcePanelItemConfig;
 
 struct _Panel
 {
@@ -52,12 +51,6 @@ struct _Panel
 struct _PanelClass
 {
     XfcePanelWindowClass parent_class;
-};
-
-struct _XfcePanelItemConfig
-{
-    const char *name;
-    const char *id;
 };
 
 GType panel_get_type (void) G_GNUC_CONST;
@@ -76,7 +69,7 @@ GtkWidget *panel_add_item_with_id (Panel *panel, const char *name,
                                    const char *id);
 
 /* configuration */
-XfcePanelItemConfig *panel_get_item_config_list (Panel *panel);
+GList *panel_get_item_list (Panel *panel);
 
 void panel_save_items (Panel *panel);
 

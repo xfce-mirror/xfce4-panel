@@ -66,21 +66,21 @@ enum
 /* GObject */
 static void panel_finalize     (GObject * object);
 
-static void panel_get_property (GObject * object,
-                                guint prop_id,
-                                GValue * value, 
-                                GParamSpec * pspec);
+static void panel_get_property (GObject    *object,
+                                guint       prop_id,
+                                GValue     *value, 
+                                GParamSpec *pspec);
 
-static void panel_set_property (GObject * object,
-                                guint prop_id,
-                                const GValue * value,
-                                GParamSpec * pspec);
+static void panel_set_property (GObject      *object,
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec);
 
 /* GtkWidget */
-static void panel_size_request  (GtkWidget * widget,
-			         GtkRequisition * requisition);
+static void panel_size_request  (GtkWidget      *widget,
+			         GtkRequisition *requisition);
 
-static gboolean panel_button_pressed (GtkWidget *widget, 
+static gboolean panel_button_pressed (GtkWidget      *widget, 
                                       GdkEventButton *ev);
 
 /* plugin menu */
@@ -89,46 +89,46 @@ static void panel_menu_deactivated (GtkWidget *item);
 static void panel_menu_opened (GtkWidget *item);
 
 /* DND dest */
-static void _panel_drag_data_received (GtkWidget *widget, 
-                                       GdkDragContext *context, 
-                                       gint x, 
-                                       gint y, 
+static void _panel_drag_data_received (GtkWidget        *widget, 
+                                       GdkDragContext   *context, 
+                                       gint              x, 
+                                       gint              y, 
                                        GtkSelectionData *data, 
-                                       guint info, 
-                                       guint time, 
-                                       Panel *panel);
+                                       guint             info, 
+                                       guint             time, 
+                                       Panel            *panel);
 
-static gboolean _panel_drag_drop (GtkWidget *widget, 
+static gboolean _panel_drag_drop (GtkWidget      *widget, 
                                   GdkDragContext *context, 
-                                  gint x, 
-                                  gint y, 
-                                  guint time, 
-                                  Panel *panel);
+                                  gint            x, 
+                                  gint            y, 
+                                  guint           time, 
+                                  Panel          *panel);
 
 /* DND source */
-static void _panel_drag_begin (GtkWidget *widget, 
+static void _panel_drag_begin (GtkWidget      *widget, 
                                GdkDragContext *drag_context, 
-                               Panel *panel);
+                               Panel          *panel);
 
-static void _panel_drag_end (GtkWidget *widget, 
+static void _panel_drag_end (GtkWidget      *widget, 
                              GdkDragContext *drag_context, 
-                             Panel *panel);
+                             Panel          *panel);
 
-static void _panel_drag_data_get (GtkWidget *widget, 
-                                  GdkDragContext *drag_context, 
+static void _panel_drag_data_get (GtkWidget        *widget, 
+                                  GdkDragContext   *drag_context, 
                                   GtkSelectionData *data, 
-                                  guint info, 
-                                  guint time, 
-                                  Panel *panel);
+                                  guint             info, 
+                                  guint             time, 
+                                  Panel            *panel);
 
-static void _panel_drag_data_delete (GtkWidget *widget, 
+static void _panel_drag_data_delete (GtkWidget      *widget, 
                                      GdkDragContext *drag_context, 
-                                     Panel *panel);
+                                     Panel          *panel);
 
 /* pass through button press events */
-static gboolean _panel_itembar_button_pressed (GtkWidget *widget, 
+static gboolean _panel_itembar_button_pressed (GtkWidget      *widget, 
                                                GdkEventButton *ev, 
-                                               Panel *panel);
+                                               Panel          *panel);
 
 /* menu */
 static GtkWidget *_panel_create_menu (Panel *panel);
@@ -140,9 +140,9 @@ G_DEFINE_TYPE (Panel, panel, XFCE_TYPE_PANEL_WINDOW);
 static void
 panel_class_init (PanelClass * klass)
 {
-    GObjectClass *object_class;
+    GObjectClass   *object_class;
     GtkWidgetClass *widget_class;
-    GParamSpec *pspec;
+    GParamSpec     *pspec;
 
     g_type_class_add_private (klass, sizeof (PanelPrivate));
 
@@ -297,8 +297,10 @@ panel_finalize (GObject * object)
 }
 
 static void
-panel_get_property (GObject * object, guint prop_id,
-                    GValue * value, GParamSpec * pspec)
+panel_get_property (GObject    *object, 
+                    guint       prop_id,
+                    GValue     *value, 
+                    GParamSpec *pspec)
 {
     PanelPrivate *priv = PANEL(object)->priv;
 
@@ -338,8 +340,10 @@ panel_get_property (GObject * object, guint prop_id,
 }
 
 static void
-panel_set_property (GObject * object, guint prop_id,
-                         const GValue * value, GParamSpec * pspec)
+panel_set_property (GObject      *object, 
+                    guint         prop_id,
+                    const GValue *value, 
+                    GParamSpec   *pspec)
 {
     Panel *panel = PANEL (object);
 
@@ -379,7 +383,8 @@ panel_set_property (GObject * object, guint prop_id,
 }
 
 static void 
-panel_size_request  (GtkWidget * widget, GtkRequisition * requisition)
+panel_size_request  (GtkWidget      *widget, 
+                     GtkRequisition *requisition)
 {
     GTK_WIDGET_CLASS (panel_parent_class)->size_request (widget, requisition);
 
@@ -388,7 +393,8 @@ panel_size_request  (GtkWidget * widget, GtkRequisition * requisition)
 }
 
 static gboolean 
-panel_button_pressed (GtkWidget *widget, GdkEventButton *ev)
+panel_button_pressed (GtkWidget      *widget, 
+                      GdkEventButton *ev)
 {
     guint modifiers;
 
@@ -410,15 +416,20 @@ panel_button_pressed (GtkWidget *widget, GdkEventButton *ev)
         return TRUE;
     }
     
-    return GTK_WIDGET_CLASS (panel_parent_class)->button_press_event (widget,
-                                                                      ev);
+    return 
+        GTK_WIDGET_CLASS (panel_parent_class)->button_press_event (widget, ev);
 }
 
 /* DND dest */
 static void
-_panel_drag_data_received (GtkWidget *widget, GdkDragContext *context, 
-                           gint x, gint y, GtkSelectionData *data, 
-                           guint info, guint time, Panel *panel)
+_panel_drag_data_received (GtkWidget        *widget, 
+                           GdkDragContext   *context, 
+                           gint              x, 
+                           gint              y, 
+                           GtkSelectionData *data, 
+                           guint             info, 
+                           guint             time, 
+                           Panel            *panel)
 {
     gboolean handled = FALSE;
 
@@ -426,15 +437,21 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
     
     if (data->length > 0)
     {
-        GtkWidget *plugin;
-        int index, oldindex = -1;
-        
+        XfceItembar   *itembar;
+        PanelPrivate  *priv;
+        XfcePanelItem *item;
+        GtkWidget     *plugin;
+        int            index;
+        int            oldindex = -1;
+        gboolean       expand;
+
+        itembar = XFCE_ITEMBAR (widget);
+
         switch (info)
         {
             case TARGET_PLUGIN_NAME:
                 handled = TRUE;
-                index = xfce_itembar_get_drop_index (XFCE_ITEMBAR (widget),
-                                                     x, y);
+                index = xfce_itembar_get_drop_index (itembar, x, y);
                 panel_insert_item (panel, (const char *)data->data, index);
                 break;
                 
@@ -442,45 +459,40 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
                 plugin = panel_dnd_get_plugin_from_data (data);
                 if (!plugin || !GTK_IS_WIDGET (plugin))
                     break;                
+
                 handled = TRUE;
-                index = xfce_itembar_get_drop_index (XFCE_ITEMBAR (widget),
-                                                     x, y);
+                index = xfce_itembar_get_drop_index (itembar, x, y);
+
                 if (plugin->parent != widget)
                 {
-                    PanelPrivate *priv = panel->priv;
-                    gboolean expand = 
-                        xfce_panel_item_get_expand (XFCE_PANEL_ITEM (plugin));
+                    item   = XFCE_PANEL_ITEM (plugin);
+                    expand = xfce_panel_item_get_expand (item);
+                    priv   = panel->priv;
 
                     g_object_freeze_notify (G_OBJECT (widget));
                     
                     gtk_widget_reparent (GTK_WIDGET (plugin), widget);
                     
-                    xfce_panel_item_set_size (XFCE_PANEL_ITEM (plugin),
-                                              priv->size);
+                    xfce_panel_item_set_size (item, priv->size);
                     
-                    xfce_panel_item_set_screen_position (
-                            XFCE_PANEL_ITEM (plugin), priv->screen_position);
+                    xfce_panel_item_set_screen_position (item,
+                                                         priv->screen_position);
                     
-                    xfce_itembar_reorder_child (XFCE_ITEMBAR (widget), plugin, 
-                                                index);
+                    xfce_itembar_reorder_child (itembar, plugin, index);
 
                     g_object_thaw_notify (G_OBJECT (widget));
 
-                    xfce_itembar_set_child_expand (
-                            XFCE_ITEMBAR (priv->itembar), plugin, expand);
+                    xfce_itembar_set_child_expand (itembar, plugin, expand);
                 }
                 else /* only when moving on the same panel */
                 {
-                    oldindex = 
-                        xfce_itembar_get_item_index (XFCE_ITEMBAR (widget),
-                                                     plugin);
+                    oldindex = xfce_itembar_get_item_index (itembar, plugin);
+
                     if (index > oldindex) index--;
                     
                     if (index != oldindex)
-                        xfce_itembar_reorder_child (XFCE_ITEMBAR (widget), plugin, 
-                                                    index);
+                        xfce_itembar_reorder_child (itembar, plugin, index);
                 }
-                
                 break;
                 
             default:
@@ -492,8 +504,12 @@ _panel_drag_data_received (GtkWidget *widget, GdkDragContext *context,
 }
 
 static gboolean
-_panel_drag_drop (GtkWidget *widget, GdkDragContext *context, 
-                  gint x, gint y, guint time, Panel *panel)
+_panel_drag_drop (GtkWidget      *widget, 
+                  GdkDragContext *context, 
+                  gint            x, 
+                  gint            y, 
+                  guint           time, 
+                  Panel          *panel)
 {
     GdkAtom atom = gtk_drag_dest_find_target (widget, context, NULL);
 
@@ -508,12 +524,13 @@ _panel_drag_drop (GtkWidget *widget, GdkDragContext *context,
 
 /* DND source */
 static void
-_panel_drag_begin (GtkWidget *widget, GdkDragContext *drag_context, 
-                   Panel *panel)
+_panel_drag_begin (GtkWidget      *widget, 
+                   GdkDragContext *drag_context, 
+                   Panel          *panel)
 {
-    int x, y, rootx, rooty, w, h;
-    GtkWidget *plugin;
-    GdkPixbuf *pb;
+    int           x, y, rootx, rooty, w, h;
+    GtkWidget    *plugin;
+    GdkPixbuf    *pb;
     PanelPrivate *priv = panel->priv;
 
     DBG (" + drag begin");
@@ -555,8 +572,9 @@ _panel_drag_begin (GtkWidget *widget, GdkDragContext *drag_context,
 }
 
 static void
-_panel_drag_end (GtkWidget *widget, GdkDragContext *drag_context, 
-                 Panel *panel)
+_panel_drag_end (GtkWidget      *widget, 
+                 GdkDragContext *drag_context, 
+                 Panel          *panel)
 {
     PanelPrivate *priv = panel->priv;
 
@@ -584,9 +602,12 @@ _panel_drag_end (GtkWidget *widget, GdkDragContext *drag_context,
 }
 
 static void
-_panel_drag_data_get (GtkWidget *widget, GdkDragContext *drag_context, 
-                      GtkSelectionData *data, guint info, 
-                      guint time, Panel *panel)
+_panel_drag_data_get (GtkWidget        *widget, 
+                      GdkDragContext   *drag_context, 
+                      GtkSelectionData *data, 
+                      guint             info, 
+                      guint             time, 
+                      Panel            *panel)
 {
     if (info == TARGET_PLUGIN_WIDGET)
     {
@@ -600,22 +621,25 @@ _panel_drag_data_get (GtkWidget *widget, GdkDragContext *drag_context,
 }
 
 static void
-_panel_drag_data_delete (GtkWidget *widget, GdkDragContext *drag_context, 
-                         Panel *panel)
+_panel_drag_data_delete (GtkWidget      *widget, 
+                         GdkDragContext *drag_context, 
+                         Panel          *panel)
 {
     PanelPrivate *priv = panel->priv;
 
     if (priv->drag_widget)
+    {
         xfce_panel_item_remove (XFCE_PANEL_ITEM (priv->drag_widget));
-    
-    priv->drag_widget = NULL;
+        priv->drag_widget = NULL;
+    }
 }
 
 /* pass through right-click events when the event window of itembar is raised
  */
 static gboolean
-_panel_itembar_button_pressed (GtkWidget *widget, GdkEventButton *ev, 
-                               Panel *panel)
+_panel_itembar_button_pressed (GtkWidget      *widget,
+                               GdkEventButton *ev, 
+                               Panel          *panel)
 {
     if (xfce_itembar_event_window_is_raised (XFCE_ITEMBAR (widget)))
     {
@@ -650,6 +674,7 @@ _panel_itembar_button_pressed (GtkWidget *widget, GdkEventButton *ev,
 }
 
 /* menu */
+
 static GtkWidget *
 _panel_create_menu (Panel *panel)
 {
@@ -736,8 +761,8 @@ void
 panel_free_data (Panel *panel)
 {
     PanelPrivate *priv;
-    GList *l;
-    int i;
+    GList        *l;
+    int           i;
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
     
@@ -749,9 +774,10 @@ panel_free_data (Panel *panel)
                                          NULL, NULL);
     xfce_panel_window_set_resize_function (XFCE_PANEL_WINDOW (panel), 
                                            NULL, NULL);
- 
+
     for (l = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
-         l != NULL; l = l->next)
+         l != NULL; 
+         l = l->next)
     {
         XfcePanelItem *item = l->data;
 
@@ -776,248 +802,10 @@ panel_free_data (Panel *panel)
 
 /* items */
 
-static void
-_item_expand_changed (GtkWidget *item, gboolean expand, Panel *panel)
-{
-    PanelPrivate *priv;
-
-    g_return_if_fail (PANEL_IS_PANEL (panel));
-    
-    priv = panel->priv;
-
-    xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item, expand);
-}
-
-static void
-_item_start_move (GtkWidget *item, Panel *panel)
-{
-    const GPtrArray *panels = panel_app_get_panel_list ();
-    PanelPrivate *priv;
-    int i;
-    
-    for (i = 0; i < panels->len; ++i)
-    {
-        Panel *p = g_ptr_array_index (panels, i);
-        
-        priv = p->priv;
-
-        if (!priv->edit_mode)
-        {
-            panel_set_items_sensitive (p, FALSE);
-
-            panel_dnd_set_dest (priv->itembar);
-            panel_dnd_set_widget_source (priv->itembar);
-            xfce_itembar_raise_event_window (XFCE_ITEMBAR (priv->itembar));
-
-            panel_block_autohide (p);
-        }
-    }
-
-    priv = panel->priv;
-    priv->drag_widget = item;
-
-    panel_dnd_begin_drag (priv->itembar);
-}
-
-extern void panel_set_hidden (Panel *panel, gboolean hide);
-
-static void
-_item_set_panel_hidden (GtkWidget *item, gboolean hidden, Panel *panel)
-{
-    PanelPrivate *priv;
-
-    g_return_if_fail (PANEL_IS_PANEL (panel));
-    
-    priv = panel->priv;
-    
-    if (priv->autohide)
-        panel_set_hidden (panel, hidden);
-}
-
-static GtkWidget *
-panel_create_item (Panel *panel, const char *name, const char *id)
-{
-    PanelPrivate *priv;
-    GtkWidget *item = NULL;
-    XfceMonitor *xmon;
-
-    priv = panel->priv;
-    xmon = panel_app_get_monitor (priv->monitor);
-
-    if ((item = xfce_panel_item_manager_create_item (xmon->screen,
-                    name, id, priv->size, priv->screen_position)) != NULL)
-    {
-        g_signal_connect (item, "menu-deactivated", 
-                          G_CALLBACK (panel_menu_deactivated), panel);
-        
-        g_signal_connect (item, "menu-opened", 
-                          G_CALLBACK (panel_menu_opened), panel);
-        
-        g_signal_connect (item, "expand-changed", 
-                          G_CALLBACK (_item_expand_changed), panel);
-        
-        g_signal_connect (item, "customize-panel", 
-                          G_CALLBACK (panel_app_customize), NULL);
-        
-        g_signal_connect (item, "customize-items", 
-                          G_CALLBACK (panel_app_customize_items), NULL);
-        
-        g_signal_connect (item, "move", 
-                          G_CALLBACK (_item_start_move), panel);
-        
-        g_signal_connect (item, "set-hidden", 
-                          G_CALLBACK (_item_set_panel_hidden), panel);
-    }
-
-    return item;
-}
-
-static void
-panel_insert_widget (Panel *panel, GtkWidget *item, int position)
-{
-    PanelPrivate *priv = panel->priv;
-
-    gtk_widget_show (item);
-
-    if (position == -1)
-        xfce_itembar_append (XFCE_ITEMBAR (priv->itembar), item);
-    else
-        xfce_itembar_insert (XFCE_ITEMBAR (priv->itembar), item, position);
-
-    xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item,
-            xfce_panel_item_get_expand (XFCE_PANEL_ITEM (item)));
-
-    if (xfce_itembar_event_window_is_raised (XFCE_ITEMBAR (priv->itembar)))
-        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (item), FALSE);
-
-    g_signal_connect (item, "destroy", G_CALLBACK (panel_app_queue_save),
-                      NULL);
-}
-
-GtkWidget *
-panel_add_item_with_id (Panel * panel, const char *name,
-                        const char *id)
-{
-    GtkWidget *item = NULL;
-
-    if ((item = panel_create_item (panel, name, id)) != NULL)
-    {
-        panel_insert_widget (panel, item, -1);
-    }
-
-    return item;
-}
-
-static char *
-_panel_get_new_id (void)
-{
-    static int counter = 0;
-    static char id[30];
-    
-    /* unique number: pseudo-random time() + counter */
-    g_snprintf (id, 30, "%ld%d", (glong) time (NULL), counter++);
-    
-    return id;
-}
-
-GtkWidget *
-panel_add_item (Panel * panel, const char *name)
-{
-    return panel_add_item_with_id (panel, name, _panel_get_new_id ());
-}
-
-GtkWidget * 
-panel_insert_item (Panel *panel, const char *name, int position)
-{
-    GtkWidget *item = NULL;
-
-    if ((item = panel_create_item (panel, name, _panel_get_new_id ())) != NULL)
-    {
-        panel_insert_widget (panel, item, position);
-    }
-
-    return item;
-}
-
-/* configuration */
-
-XfcePanelItemConfig *
-panel_get_item_config_list (Panel * panel)
-{
-    PanelPrivate *priv;
-    XfcePanelItemConfig *configlist = NULL;
-    GList *children, *l;
-    int len, i;
-
-    priv = panel->priv;
-
-    children = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
-    
-    len = g_list_length (children);
-    
-    if (len != 0)
-    {
-        configlist = g_new (XfcePanelItemConfig, len + 1);
-
-        configlist[len].name = NULL;
-        configlist[len].id = NULL;
-
-        for (i = 0, l = children; l != NULL; l = l->next, ++i)
-        {
-            XfcePanelItem *item = l->data;
-
-            configlist[i].name = xfce_panel_item_get_name (item);
-            configlist[i].id   = xfce_panel_item_get_id (item);
-        }
-    }
-    
-    g_list_free (children);
-
-    return configlist;
-}
-
-void
-panel_save_items (Panel *panel)
-{
-    PanelPrivate *priv;
-
-    g_return_if_fail (PANEL_IS_PANEL (panel));
-    
-    priv = panel->priv;
-
-    gtk_container_foreach (GTK_CONTAINER (priv->itembar), 
-                           (GtkCallback)xfce_panel_item_save, NULL);
-}
-
-/* convenience */
-
-gboolean 
-panel_is_horizontal (Panel *panel)
-{
-    return (GTK_ORIENTATION_HORIZONTAL ==
-            xfce_panel_window_get_orientation (XFCE_PANEL_WINDOW (panel)));
-}
-
-void 
-panel_set_items_sensitive (Panel *panel, gboolean sensitive)
-{
-    PanelPrivate *priv = panel->priv;
-    GList *l, *children;
-
-    children = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
-
-    for (l = children; l != NULL; l = l->next)
-    {
-        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (l->data), sensitive);
-    }
-
-    g_list_free (children);
-}
-
 static void 
 panel_menu_deactivated (GtkWidget *item)
 {
-    int x, y, w, h, px, py;
+    int    x, y, w, h, px, py;
     Panel *panel = PANEL (item->parent->parent);
 
     g_return_if_fail (PANEL_IS_PANEL (panel));
@@ -1048,4 +836,241 @@ panel_menu_opened (GtkWidget *item)
     g_return_if_fail (PANEL_IS_PANEL (item->parent->parent));
 
     panel_block_autohide (PANEL (item->parent->parent));
+}
+
+static void
+_item_expand_changed (GtkWidget *item, 
+                      gboolean   expand, 
+                      Panel     *panel)
+{
+    PanelPrivate *priv;
+
+    g_return_if_fail (PANEL_IS_PANEL (panel));
+    
+    priv = panel->priv;
+
+    xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item, expand);
+}
+
+static void
+_item_start_move (GtkWidget *item, 
+                  Panel     *panel)
+{
+    const GPtrArray *panels = panel_app_get_panel_list ();
+    PanelPrivate    *priv;
+    Panel           *p;
+    int              i;
+    
+    for (i = 0; i < panels->len; ++i)
+    {
+        p    = g_ptr_array_index (panels, i);
+        priv = p->priv;
+
+        if (!priv->edit_mode)
+        {
+            panel_set_items_sensitive (p, FALSE);
+
+            panel_dnd_set_dest (priv->itembar);
+            panel_dnd_set_widget_source (priv->itembar);
+            xfce_itembar_raise_event_window (XFCE_ITEMBAR (priv->itembar));
+
+            panel_block_autohide (p);
+        }
+    }
+
+    priv = panel->priv;
+    priv->drag_widget = item;
+
+    panel_dnd_begin_drag (priv->itembar);
+}
+
+extern void panel_set_hidden (Panel    *panel, 
+                              gboolean  hide);
+
+static void
+_item_set_panel_hidden (GtkWidget *item, 
+                        gboolean   hidden, 
+                        Panel     *panel)
+{
+    PanelPrivate *priv;
+
+    g_return_if_fail (PANEL_IS_PANEL (panel));
+    
+    priv = panel->priv;
+    
+    if (priv->autohide)
+        panel_set_hidden (panel, hidden);
+}
+
+static void
+panel_insert_widget (Panel     *panel, 
+                     GtkWidget *item, 
+                     int        position)
+{
+    PanelPrivate *priv = panel->priv;
+
+    gtk_widget_show (item);
+
+    if (position == -1)
+        xfce_itembar_append (XFCE_ITEMBAR (priv->itembar), item);
+    else
+        xfce_itembar_insert (XFCE_ITEMBAR (priv->itembar), item, position);
+
+    xfce_itembar_set_child_expand (XFCE_ITEMBAR (priv->itembar), item,
+            xfce_panel_item_get_expand (XFCE_PANEL_ITEM (item)));
+
+    if (xfce_itembar_event_window_is_raised (XFCE_ITEMBAR (priv->itembar)))
+        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (item), FALSE);
+
+    g_signal_connect (item, "destroy", G_CALLBACK (panel_app_queue_save),
+                      NULL);
+}
+
+static GtkWidget *
+panel_create_item (Panel      *panel, 
+                   const char *name, 
+                   const char *id)
+{
+    PanelPrivate *priv;
+    GtkWidget    *item = NULL;
+    XfceMonitor  *xmon;
+
+    priv = panel->priv;
+    xmon = panel_app_get_monitor (priv->monitor);
+
+    item = xfce_panel_item_manager_create_item (xmon->screen,
+                                                name, 
+                                                id, 
+                                                priv->size, 
+                                                priv->screen_position);
+
+    if (item != NULL)
+    {
+        g_signal_connect (item, "menu-deactivated", 
+                          G_CALLBACK (panel_menu_deactivated), panel);
+        
+        g_signal_connect (item, "menu-opened", 
+                          G_CALLBACK (panel_menu_opened), panel);
+        
+        g_signal_connect (item, "expand-changed", 
+                          G_CALLBACK (_item_expand_changed), panel);
+        
+        g_signal_connect (item, "customize-panel", 
+                          G_CALLBACK (panel_app_customize), NULL);
+        
+        g_signal_connect (item, "customize-items", 
+                          G_CALLBACK (panel_app_customize_items), NULL);
+        
+        g_signal_connect (item, "move", 
+                          G_CALLBACK (_item_start_move), panel);
+        
+        g_signal_connect (item, "set-hidden", 
+                          G_CALLBACK (_item_set_panel_hidden), panel);
+    }
+
+    return item;
+}
+
+static char *
+_panel_get_new_id (void)
+{
+    static int  counter = 0;
+    static char id[30];
+    
+    /* unique number: pseudo-random time() + counter */
+    g_snprintf (id, 30, "%ld%d", (glong) time (NULL), counter++);
+    
+    return id;
+}
+
+GtkWidget *
+panel_add_item_with_id (Panel      *panel, 
+                        const char *name,
+                        const char *id)
+{
+    GtkWidget *item;
+
+    item = panel_create_item (panel, name, id);
+
+    if (item != NULL)
+    {
+        panel_insert_widget (panel, item, -1);
+    }
+
+    return item;
+}
+
+GtkWidget *
+panel_add_item (Panel      *panel, 
+                const char *name)
+{
+    return panel_add_item_with_id (panel, name, _panel_get_new_id ());
+}
+
+GtkWidget * 
+panel_insert_item (Panel      *panel, 
+                   const char *name, 
+                   int         position)
+{
+    GtkWidget *item;
+
+    item = panel_create_item (panel, name, _panel_get_new_id ());
+
+    if (item != NULL)
+    {
+        panel_insert_widget (panel, item, position);
+    }
+
+    return item;
+}
+
+/* configuration */
+
+GList *
+panel_get_item_list (Panel * panel)
+{
+    PanelPrivate *priv;
+
+    priv = panel->priv;
+
+    return gtk_container_get_children (GTK_CONTAINER (priv->itembar));
+}
+
+void
+panel_save_items (Panel *panel)
+{
+    PanelPrivate *priv;
+
+    g_return_if_fail (PANEL_IS_PANEL (panel));
+    
+    priv = panel->priv;
+
+    gtk_container_foreach (GTK_CONTAINER (priv->itembar), 
+                           (GtkCallback)xfce_panel_item_save, NULL);
+}
+
+/* convenience */
+
+gboolean 
+panel_is_horizontal (Panel *panel)
+{
+    return (GTK_ORIENTATION_HORIZONTAL ==
+            xfce_panel_window_get_orientation (XFCE_PANEL_WINDOW (panel)));
+}
+
+void 
+panel_set_items_sensitive (Panel    *panel, 
+                           gboolean  sensitive)
+{
+    PanelPrivate *priv = panel->priv;
+    GList        *l, *children;
+
+    children = gtk_container_get_children (GTK_CONTAINER (priv->itembar));
+
+    for (l = children; l != NULL; l = l->next)
+    {
+        xfce_panel_item_set_sensitive (XFCE_PANEL_ITEM (l->data), sensitive);
+    }
+
+    g_list_free (children);
 }

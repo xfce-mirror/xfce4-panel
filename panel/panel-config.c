@@ -40,6 +40,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/xfce-panel-item-iface.h>
 
 #include "panel-config.h"
 #include "panel-private.h"
@@ -629,19 +630,18 @@ config_save_to_file (GPtrArray *array, const char *filename)
 
     for (i = 0; i < array->len; ++i)
     {
-        XfcePanelItemConfig *configlist;
-        Panel               *panel;
-        int                  size            = 0;
-        int                  monitor         = 0;
-        int                  screen_position = 0;
-        int                  fullwidth       = 0;
-        int                  xoffset         = 0;
-        int                  yoffset         = 0;
-        int                  handle_style    = 0;
-        int                  transparency    = 0;
-        gboolean             autohide        = FALSE;
-        gboolean             activetrans     = FALSE;
-        int                  j;
+        GList    *configlist, *l;
+        Panel    *panel;
+        int       size            = 0;
+        int       monitor         = 0;
+        int       screen_position = 0;
+        int       fullwidth       = 0;
+        int       xoffset         = 0;
+        int       yoffset         = 0;
+        int       handle_style    = 0;
+        int       transparency    = 0;
+        gboolean  autohide        = FALSE;
+        gboolean  activetrans     = FALSE;
         
         DBG ("Saving panel %d", i + 1);
 
@@ -700,23 +700,22 @@ config_save_to_file (GPtrArray *array, const char *filename)
                      "\t\t<items>\n");
 
         /* panel items */
-        configlist = panel_get_item_config_list (panel);
+        configlist = panel_get_item_list (panel);
 
-        if (configlist)
+        for (l = configlist; l != NULL; l = l->next)
         {
-            for (j = 0; configlist[j].name != NULL; ++j)
-            {
-                fprintf (fp, "\t\t\t<item name=\"%s\" id=\"%s\"/>\n",
-                             configlist[j].name, configlist[j].id);
-            }
-            
-            g_free (configlist);
+            XfcePanelItem *item = l->data;
+
+            fprintf (fp, "\t\t\t<item name=\"%s\" id=\"%s\"/>\n",
+                         xfce_panel_item_get_name (item),
+                         xfce_panel_item_get_id   (item));
         }
+            
+        g_list_free (configlist);
 
         /* grouping */
         fprintf (fp, "\t\t</items>\n"
                      "\t</panel>\n");
-
     }
 
     /* closing */
