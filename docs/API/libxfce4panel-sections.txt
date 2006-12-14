@@ -69,6 +69,7 @@ XfceHVBox
 xfce_hvbox_new
 xfce_hvbox_set_orientation
 <SUBSECTION Standard>
+XfceHVBoxClass
 XFCE_HVBOX
 XFCE_IS_HVBOX
 XFCE_TYPE_HVBOX
@@ -83,6 +84,7 @@ XFCE_HVBOX_GET_CLASS
 <TITLE>XfcePanelPlugin</TITLE>
 XfcePanelPlugin
 XfcePanelPluginFunc
+XfcePanelPluginCheck
 xfce_panel_plugin_get_name
 xfce_panel_plugin_get_id
 xfce_panel_plugin_get_display_name
@@ -100,6 +102,8 @@ xfce_panel_plugin_unblock_menu
 xfce_panel_plugin_register_menu
 xfce_panel_plugin_lookup_rc_file
 xfce_panel_plugin_save_location
+xfce_panel_plugin_focus_widget
+xfce_panel_plugin_set_panel_hidden
 <SUBSECTION Standard>
 XfcePanelPluginInterface
 XFCE_PANEL_PLUGIN_GET_INTERFACE
@@ -131,7 +135,6 @@ XFCE_ARROW_BUTTON_GET_CLASS
 <FILE>xfce-panel-window</FILE>
 <TITLE>XfcePanelWindow</TITLE>
 XfcePanelWindow
-XfceHandleStyle
 XfcePanelWindowMoveFunc
 XfcePanelWindowResizeFunc
 xfce_panel_window_new
@@ -167,6 +170,12 @@ xfce_screen_position_is_top
 xfce_screen_position_is_left
 xfce_screen_position_is_right
 xfce_screen_position_is_bottom
+XfceHandleStyle
+<SUBSECTION Standard>
+XFCE_TYPE_SCREEN_POSITION
+xfce_screen_position_get_type
+XFCE_TYPE_HANDLE_STYLE
+xfce_handle_style_get_type
 </SECTION>
 
 <SECTION>
@@ -175,6 +184,8 @@ xfce_screen_position_is_bottom
 <INCLUDE>libxfce4panel/libxfce4panel</INCLUDE>
 XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL
 XFCE_PANEL_PLUGIN_REGISTER_INTERNAL
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK
 </SECTION>
 
 <SECTION>
@@ -182,5 +193,12 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL
 <TITLE>Convenience Functions</TITLE>
 xfce_create_panel_button
 xfce_create_panel_toggle_button
+xfce_allow_panel_customization
+panel_slice_alloc
+panel_slice_alloc0
+panel_slice_free
+panel_slice_free1
+panel_slice_new
+panel_slice_new0
 </SECTION>
 

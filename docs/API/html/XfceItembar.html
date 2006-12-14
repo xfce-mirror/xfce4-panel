@@ -8,7 +8,7 @@
 <link rel="up" href="ch01.html" title="API Reference">
 <link rel="prev" href="XfcePanelWindow.html" title="XfcePanelWindow">
 <link rel="next" href="XfceHVBox.html" title="XfceHVBox">
-<meta name="generator" content="GTK-Doc V1.6 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.7 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="chapter" href="ch01.html" title="API Reference">
 </head>
@@ -21,23 +21,27 @@
 <th width="100%" align="center">libxfce4panel Reference Manual</th>
 <td><a accesskey="n" href="XfceHVBox.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#top_of_page" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2540294" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#desc" class="shortcut">Description</a>
+                  <a href="#id2573546" class="shortcut">Description</a>
                   &#160;|&#160;
-                  <a href="#object_hierarchy" class="shortcut">Object Hierarchy</a>
+                  <a href="#id2550226" class="shortcut">Object Hierarchy</a>
                   &#160;|&#160;
-                  <a href="#properties" class="shortcut">Properties</a>
+                  <a href="#id2550275" class="shortcut">Implemented Interfaces</a>
                   &#160;|&#160;
-                  <a href="#child_properties" class="shortcut">Child Properties</a>
+                  <a href="#id2550297" class="shortcut">Properties</a>
                   &#160;|&#160;
-                  <a href="#signal_proto" class="shortcut">Signals</a></nobr></td></tr>
+                  <a href="#id2550327" class="shortcut">Child Properties</a>
+                  &#160;|&#160;
+                  <a href="#id2550358" class="shortcut">Signals</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="XfceItembar"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
-<h2><span class="refentrytitle"><a name="top_of_page"></a>XfceItembar</span></h2>
+<h2>
+<a name="id2540294"></a><span class="refentrytitle">XfceItembar</span>
+</h2>
 <p>XfceItembar &#8212; <p>
 Container widget with configurable orientation.
 </p></p>
@@ -45,41 +49,67 @@ Container widget with configurable orientation.
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
-<a name="synopsis"></a><h2>Synopsis</h2>
+<h2>Synopsis</h2>
 <pre class="synopsis">
 
 
 
             <a href="XfceItembar.html#XfceItembar-struct">XfceItembar</a>;
-GtkWidget*  <a href="XfceItembar.html#xfce-itembar-new">xfce_itembar_new</a>                (GtkOrientation orientation);
+<a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*  <a href="XfceItembar.html#xfce-itembar-new">xfce_itembar_new</a>                (<a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> orientation);
 void        <a href="XfceItembar.html#xfce-itembar-set-orientation">xfce_itembar_set_orientation</a>    (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkOrientation orientation);
-GtkOrientation <a href="XfceItembar.html#xfce-itembar-get-orientation">xfce_itembar_get_orientation</a> (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> orientation);
+<a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> <a href="XfceItembar.html#xfce-itembar-get-orientation">xfce_itembar_get_orientation</a> (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);
 void        <a href="XfceItembar.html#xfce-itembar-insert">xfce_itembar_insert</a>             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item,
                                              int position);
 void        <a href="XfceItembar.html#xfce-itembar-append">xfce_itembar_append</a>             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);
 void        <a href="XfceItembar.html#xfce-itembar-prepend">xfce_itembar_prepend</a>            (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);
 void        <a href="XfceItembar.html#xfce-itembar-reorder-child">xfce_itembar_reorder_child</a>      (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item,
                                              int position);
 void        <a href="XfceItembar.html#xfce-itembar-set-child-expand">xfce_itembar_set_child_expand</a>   (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item,
                                              gboolean expand);
 gboolean    <a href="XfceItembar.html#xfce-itembar-get-child-expand">xfce_itembar_get_child_expand</a>   (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);
 int         <a href="XfceItembar.html#xfce-itembar-get-n-items">xfce_itembar_get_n_items</a>        (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);
 int         <a href="XfceItembar.html#xfce-itembar-get-item-index">xfce_itembar_get_item_index</a>     (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);
-GtkWidget*  <a href="XfceItembar.html#xfce-itembar-get-nth-item">xfce_itembar_get_nth_item</a>       (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);
+<a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*  <a href="XfceItembar.html#xfce-itembar-get-nth-item">xfce_itembar_get_nth_item</a>       (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
                                              int n);
 void        <a href="XfceItembar.html#xfce-itembar-raise-event-window">xfce_itembar_raise_event_window</a> (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);
 void        <a href="XfceItembar.html#xfce-itembar-lower-event-window">xfce_itembar_lower_event_window</a> (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);
 gboolean    <a href="XfceItembar.html#xfce-itembar-event-window-is-raised">xfce_itembar_event_window_is_raised</a>
                                             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);
-GtkWidget*  <a href="XfceItembar.html#xfce-itembar-get-item-at-point">xfce_itembar_get_item_at_point</a>  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+<a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*  <a href="XfceItembar.html#xfce-itembar-get-item-at-point">xfce_itembar_get_item_at_point</a>  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
                                              int x,
                                              int y);
 int         <a href="XfceItembar.html#xfce-itembar-get-drop-index">xfce_itembar_get_drop_index</a>     (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
@@ -89,39 +119,47 @@ int         <a href="XfceItembar.html#xfce-itembar-get-drop-index">xfce_itembar_
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="object_hierarchy"></a><h2>Object Hierarchy</h2>
+<a name="id2550226"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
 
   GObject
    +----GInitiallyUnowned
-         +----GtkObject
-               +----GtkWidget
-                     +----GtkContainer
+         +----<a
+href="/usr/share/gtk-doc/html/gtk/GtkObject.html"
+>GtkObject</a>
+               +----<a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>
+                     +----<a
+href="/usr/share/gtk-doc/html/gtk/GtkContainer.html"
+>GtkContainer</a>
                            +----XfceItembar
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="impl_interfaces"></a><h2>Implemented Interfaces</h2>
+<a name="id2550275"></a><h2>Implemented Interfaces</h2>
 <p>
 XfceItembar implements
  AtkImplementorIface.</p>
 </div>
 <div class="refsect1" lang="en">
-<a name="properties"></a><h2>Properties</h2>
+<a name="id2550297"></a><h2>Properties</h2>
 <pre class="synopsis">
 
-  "<a href="XfceItembar.html#XfceItembar--orientation">orientation</a>"          GtkOrientation        : Read / Write
+  "<a href="XfceItembar.html#XfceItembar--orientation">orientation</a>"          <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a>        : Read / Write
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="child_properties"></a><h2>Child Properties</h2>
+<a name="id2550327"></a><h2>Child Properties</h2>
 <pre class="synopsis">
 
   "<a href="XfceItembar.html#XfceItembar--expand">expand</a>"               gboolean              : Read / Write
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="signal_proto"></a><h2>Signals</h2>
+<a name="id2550358"></a><h2>Signals</h2>
 <pre class="synopsis">
 
 "<a href="XfceItembar.html#XfceItembar-contents-changed">contents-changed</a>"
@@ -129,33 +167,39 @@ XfceItembar implements
                                             gpointer     user_data)      : Run first
 "<a href="XfceItembar.html#XfceItembar-orientation-changed">orientation-changed</a>"
             void        user_function      (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a>    *itembar,
-                                            GtkOrientation *orientation,
+                                            <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> *orientation,
                                             gpointer        user_data)        : Run first
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="desc"></a><h2>Description</h2>
+<a name="id2573546"></a><h2>Description</h2>
 <p>
 <a href="XfceItembar.html" title="XfceItembar"><span class="type">XfceItembar</span></a> is a container widget that can hold multiple widgets. The
 orientation of the bar is configurable and can be changed at any time. 
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="details"></a><h2>Details</h2>
+<a name="id2573571"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2580345"></a><h3>
+<a name="id2573581"></a><h3>
 <a name="XfceItembar-struct"></a>XfceItembar</h3>
-<a class="indexterm" name="id2580357"></a><pre class="programlisting">typedef struct _XfceItembar XfceItembar;</pre>
+<a class="indexterm" name="id2573594"></a><pre class="programlisting">typedef struct _XfceItembar XfceItembar;</pre>
 <p>
-The <a href="XfceItembar.html#XfceItembar-struct"><span class="type">XfceItembar-struct</span></a> struct contains private data only, and
+The <a href="XfceItembar.html#XfceItembar-struct"><span class="type">XfceItembar</span></a> struct contains private data only, and
 should be accessed using the functions below.
 </p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2580381"></a><h3>
+<a name="id2573618"></a><h3>
 <a name="xfce-itembar-new"></a>xfce_itembar_new ()</h3>
-<a class="indexterm" name="id2580393"></a><pre class="programlisting">GtkWidget*  xfce_itembar_new                (GtkOrientation orientation);</pre>
+<a class="indexterm" name="id2573630"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*  xfce_itembar_new                (<a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> orientation);</pre>
 <p>
 </p>
 <p>
@@ -167,7 +211,9 @@ should be accessed using the functions below.
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>orientation</code></em>&#160;:</span></td>
-<td> <span class="type">GtkOrientation</span> for new itembar.
+<td> <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+><span class="type">GtkOrientation</span></a> for new itembar.
 </td>
 </tr>
 <tr>
@@ -181,10 +227,12 @@ should be accessed using the functions below.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2580474"></a><h3>
+<a name="id2573710"></a><h3>
 <a name="xfce-itembar-set-orientation"></a>xfce_itembar_set_orientation ()</h3>
-<a class="indexterm" name="id2580487"></a><pre class="programlisting">void        xfce_itembar_set_orientation    (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkOrientation orientation);</pre>
+<a class="indexterm" name="id2573724"></a><pre class="programlisting">void        xfce_itembar_set_orientation    (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> orientation);</pre>
 <p>
 Set the orienation of <em class="parameter"><code>itembar</code></em>.</p>
 <p>
@@ -202,7 +250,9 @@ Set the orienation of <em class="parameter"><code>itembar</code></em>.</p>
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>orientation</code></em>&#160;:</span></td>
-<td> new <span class="type">GtkOrientation</span>
+<td> new <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+><span class="type">GtkOrientation</span></a>
 </td>
 </tr>
 </tbody>
@@ -210,9 +260,11 @@ Set the orienation of <em class="parameter"><code>itembar</code></em>.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584138"></a><h3>
+<a name="id2585274"></a><h3>
 <a name="xfce-itembar-get-orientation"></a>xfce_itembar_get_orientation ()</h3>
-<a class="indexterm" name="id2584150"></a><pre class="programlisting">GtkOrientation xfce_itembar_get_orientation (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
+<a class="indexterm" name="id2585286"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> xfce_itembar_get_orientation (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
 <p>
 </p>
 <p>
@@ -238,10 +290,12 @@ Set the orienation of <em class="parameter"><code>itembar</code></em>.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584223"></a><h3>
+<a name="id2585358"></a><h3>
 <a name="xfce-itembar-insert"></a>xfce_itembar_insert ()</h3>
-<a class="indexterm" name="id2584235"></a><pre class="programlisting">void        xfce_itembar_insert             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item,
+<a class="indexterm" name="id2585371"></a><pre class="programlisting">void        xfce_itembar_insert             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item,
                                              int position);</pre>
 <p>
 Insert new item at <em class="parameter"><code>position</code></em> on <em class="parameter"><code>itembar</code></em>.</p>
@@ -260,7 +314,9 @@ Insert new item at <em class="parameter"><code>position</code></em> on <em class
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
-<td> <span class="type">GtkWidget</span> to insert
+<td> <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> to insert
 </td>
 </tr>
 <tr>
@@ -274,10 +330,12 @@ Insert new item at <em class="parameter"><code>position</code></em> on <em class
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584358"></a><h3>
+<a name="id2585494"></a><h3>
 <a name="xfce-itembar-append"></a>xfce_itembar_append ()</h3>
-<a class="indexterm" name="id2584371"></a><pre class="programlisting">void        xfce_itembar_append             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);</pre>
+<a class="indexterm" name="id2585506"></a><pre class="programlisting">void        xfce_itembar_append             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);</pre>
 <p>
 Add a new item at the end of <em class="parameter"><code>itembar</code></em>.</p>
 <p>
@@ -295,7 +353,9 @@ Add a new item at the end of <em class="parameter"><code>itembar</code></em>.</p
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
-<td> <span class="type">GtkWidget</span> to add
+<td> <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> to add
 </td>
 </tr>
 </tbody>
@@ -303,10 +363,12 @@ Add a new item at the end of <em class="parameter"><code>itembar</code></em>.</p
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584462"></a><h3>
+<a name="id2585597"></a><h3>
 <a name="xfce-itembar-prepend"></a>xfce_itembar_prepend ()</h3>
-<a class="indexterm" name="id2584473"></a><pre class="programlisting">void        xfce_itembar_prepend            (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);</pre>
+<a class="indexterm" name="id2585608"></a><pre class="programlisting">void        xfce_itembar_prepend            (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);</pre>
 <p>
 Add a new item at the start of <em class="parameter"><code>itembar</code></em>.</p>
 <p>
@@ -324,7 +386,9 @@ Add a new item at the start of <em class="parameter"><code>itembar</code></em>.<
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
-<td> <span class="type">GtkWidget</span> to add
+<td> <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> to add
 </td>
 </tr>
 </tbody>
@@ -332,10 +396,12 @@ Add a new item at the start of <em class="parameter"><code>itembar</code></em>.<
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584564"></a><h3>
+<a name="id2585699"></a><h3>
 <a name="xfce-itembar-reorder-child"></a>xfce_itembar_reorder_child ()</h3>
-<a class="indexterm" name="id2584575"></a><pre class="programlisting">void        xfce_itembar_reorder_child      (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item,
+<a class="indexterm" name="id2585711"></a><pre class="programlisting">void        xfce_itembar_reorder_child      (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item,
                                              int position);</pre>
 <p>
 Move <em class="parameter"><code>item</code></em> to a new position on <em class="parameter"><code>itembar</code></em>.</p>
@@ -354,7 +420,9 @@ Move <em class="parameter"><code>item</code></em> to a new position on <em class
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
-<td> a child <span class="type">GtkWidget</span> of <em class="parameter"><code>itembar</code></em>
+<td> a child <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> of <em class="parameter"><code>itembar</code></em>
 </td>
 </tr>
 <tr>
@@ -368,10 +436,12 @@ Move <em class="parameter"><code>item</code></em> to a new position on <em class
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584705"></a><h3>
+<a name="id2585840"></a><h3>
 <a name="xfce-itembar-set-child-expand"></a>xfce_itembar_set_child_expand ()</h3>
-<a class="indexterm" name="id2584718"></a><pre class="programlisting">void        xfce_itembar_set_child_expand   (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item,
+<a class="indexterm" name="id2585854"></a><pre class="programlisting">void        xfce_itembar_set_child_expand   (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item,
                                              gboolean expand);</pre>
 <p>
 Sets whether <em class="parameter"><code>item</code></em> should expand when the size of <em class="parameter"><code>itembar</code></em> increases.</p>
@@ -390,7 +460,9 @@ Sets whether <em class="parameter"><code>item</code></em> should expand when the
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
-<td> a child <span class="type">GtkWidget</span> of <em class="parameter"><code>itembar</code></em>
+<td> a child <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> of <em class="parameter"><code>itembar</code></em>
 </td>
 </tr>
 <tr>
@@ -404,10 +476,12 @@ Sets whether <em class="parameter"><code>item</code></em> should expand when the
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584843"></a><h3>
+<a name="id2585979"></a><h3>
 <a name="xfce-itembar-get-child-expand"></a>xfce_itembar_get_child_expand ()</h3>
-<a class="indexterm" name="id2584856"></a><pre class="programlisting">gboolean    xfce_itembar_get_child_expand   (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);</pre>
+<a class="indexterm" name="id2585992"></a><pre class="programlisting">gboolean    xfce_itembar_get_child_expand   (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);</pre>
 <p>
 </p>
 <p>
@@ -425,7 +499,9 @@ Sets whether <em class="parameter"><code>item</code></em> should expand when the
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
-<td> a child <span class="type">GtkWidget</span> of <em class="parameter"><code>itembar</code></em>
+<td> a child <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> of <em class="parameter"><code>itembar</code></em>
 </td>
 </tr>
 <tr>
@@ -440,9 +516,9 @@ Sets whether <em class="parameter"><code>item</code></em> should expand when the
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2584989"></a><h3>
+<a name="id2586125"></a><h3>
 <a name="xfce-itembar-get-n-items"></a>xfce_itembar_get_n_items ()</h3>
-<a class="indexterm" name="id2585001"></a><pre class="programlisting">int         xfce_itembar_get_n_items        (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
+<a class="indexterm" name="id2586136"></a><pre class="programlisting">int         xfce_itembar_get_n_items        (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
 <p>
 </p>
 <p>
@@ -468,10 +544,12 @@ Sets whether <em class="parameter"><code>item</code></em> should expand when the
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2585073"></a><h3>
+<a name="id2586209"></a><h3>
 <a name="xfce-itembar-get-item-index"></a>xfce_itembar_get_item_index ()</h3>
-<a class="indexterm" name="id2585085"></a><pre class="programlisting">int         xfce_itembar_get_item_index     (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
-                                             GtkWidget *item);</pre>
+<a class="indexterm" name="id2586221"></a><pre class="programlisting">int         xfce_itembar_get_item_index     (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+                                             <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a> *item);</pre>
 <p>
 </p>
 <p>
@@ -489,7 +567,9 @@ Sets whether <em class="parameter"><code>item</code></em> should expand when the
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>item</code></em>&#160;:</span></td>
-<td> a child <span class="type">GtkWidget</span> of <em class="parameter"><code>itembar</code></em>
+<td> a child <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> of <em class="parameter"><code>itembar</code></em>
 </td>
 </tr>
 <tr>
@@ -503,9 +583,11 @@ Sets whether <em class="parameter"><code>item</code></em> should expand when the
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2585204"></a><h3>
+<a name="id2586314"></a><h3>
 <a name="xfce-itembar-get-nth-item"></a>xfce_itembar_get_nth_item ()</h3>
-<a class="indexterm" name="id2585216"></a><pre class="programlisting">GtkWidget*  xfce_itembar_get_nth_item       (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+<a class="indexterm" name="id2586325"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*  xfce_itembar_get_nth_item       (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
                                              int n);</pre>
 <p>
 </p>
@@ -539,9 +621,9 @@ itembar does not contain an <em class="parameter"><code>n</code></em>'th item.
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2585335"></a><h3>
+<a name="id2586430"></a><h3>
 <a name="xfce-itembar-raise-event-window"></a>xfce_itembar_raise_event_window ()</h3>
-<a class="indexterm" name="id2585348"></a><pre class="programlisting">void        xfce_itembar_raise_event_window (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
+<a class="indexterm" name="id2586442"></a><pre class="programlisting">void        xfce_itembar_raise_event_window (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
 <p>
 Raise the event window of <em class="parameter"><code>itembar</code></em>. This causes all events, like
 mouse clicks or key presses to be send to the itembar and not to 
@@ -564,9 +646,9 @@ See also: <a href="XfceItembar.html#xfce-itembar-lower-event-window"><code class
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2585425"></a><h3>
+<a name="id2586512"></a><h3>
 <a name="xfce-itembar-lower-event-window"></a>xfce_itembar_lower_event_window ()</h3>
-<a class="indexterm" name="id2585438"></a><pre class="programlisting">void        xfce_itembar_lower_event_window (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
+<a class="indexterm" name="id2586524"></a><pre class="programlisting">void        xfce_itembar_lower_event_window (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
 <p>
 Lower the event window of <em class="parameter"><code>itembar</code></em>. This causes all events, like
 mouse clicks or key presses to be send to the items, before reaching the
@@ -589,9 +671,9 @@ See also: <a href="XfceItembar.html#xfce-itembar-raise-event-window"><code class
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2585515"></a><h3>
+<a name="id2586594"></a><h3>
 <a name="xfce-itembar-event-window-is-raised"></a>xfce_itembar_event_window_is_raised ()</h3>
-<a class="indexterm" name="id2585529"></a><pre class="programlisting">gboolean    xfce_itembar_event_window_is_raised
+<a class="indexterm" name="id2586607"></a><pre class="programlisting">gboolean    xfce_itembar_event_window_is_raised
                                             (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar);</pre>
 <p>
 </p>
@@ -618,9 +700,11 @@ See also: <a href="XfceItembar.html#xfce-itembar-raise-event-window"><code class
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2585606"></a><h3>
+<a name="id2586676"></a><h3>
 <a name="xfce-itembar-get-item-at-point"></a>xfce_itembar_get_item_at_point ()</h3>
-<a class="indexterm" name="id2585619"></a><pre class="programlisting">GtkWidget*  xfce_itembar_get_item_at_point  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+<a class="indexterm" name="id2586689"></a><pre class="programlisting"><a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+>GtkWidget</a>*  xfce_itembar_get_item_at_point  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
                                              int x,
                                              int y);</pre>
 <p>
@@ -652,7 +736,9 @@ See also: <a href="XfceItembar.html#xfce-itembar-raise-event-window"><code class
 <tr>
 <td>
 <span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
-<td> a <span class="type">GtkWidget</span> or <code class="literal">NULL</code>.
+<td> a <a
+href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"
+><span class="type">GtkWidget</span></a> or <code class="literal">NULL</code>.
 </td>
 </tr>
 </tbody>
@@ -660,9 +746,9 @@ See also: <a href="XfceItembar.html#xfce-itembar-raise-event-window"><code class
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2585747"></a><h3>
+<a name="id2586803"></a><h3>
 <a name="xfce-itembar-get-drop-index"></a>xfce_itembar_get_drop_index ()</h3>
-<a class="indexterm" name="id2585759"></a><pre class="programlisting">int         xfce_itembar_get_drop_index     (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+<a class="indexterm" name="id2586814"></a><pre class="programlisting">int         xfce_itembar_get_drop_index     (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
                                              int x,
                                              int y);</pre>
 <p>
@@ -709,11 +795,13 @@ itembar.
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="property_details"></a><h2>Property Details</h2>
+<a name="id2586953"></a><h2>Property Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2585923"></a><h3>
+<a name="id2586962"></a><h3>
 <a name="XfceItembar--orientation"></a>The "<code class="literal">orientation</code>" property</h3>
-<a class="indexterm" name="id2585937"></a><pre class="programlisting">  "orientation"          GtkOrientation        : Read / Write</pre>
+<a class="indexterm" name="id2586975"></a><pre class="programlisting">  "orientation"          <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a>        : Read / Write</pre>
 <p>
 The orientation of the <a href="XfceItembar.html" title="XfceItembar"><span class="type">XfceItembar</span></a>.</p>
 <p>
@@ -723,11 +811,11 @@ The orientation of the <a href="XfceItembar.html" title="XfceItembar"><span clas
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="child_property_details"></a><h2>Child Property Details</h2>
+<a name="id2587008"></a><h2>Child Property Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2585986"></a><h3>
+<a name="id2587018"></a><h3>
 <a name="XfceItembar--expand"></a>The "<code class="literal">expand</code>" child property</h3>
-<a class="indexterm" name="id2586000"></a><pre class="programlisting">  "expand"               gboolean              : Read / Write</pre>
+<a class="indexterm" name="id2587031"></a><pre class="programlisting">  "expand"               gboolean              : Read / Write</pre>
 <p>
 Whether the child of the <a href="XfceItembar.html" title="XfceItembar"><span class="type">XfceItembar</span></a> should fill available space.</p>
 <p>
@@ -737,11 +825,11 @@ Whether the child of the <a href="XfceItembar.html" title="XfceItembar"><span cl
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="signals"></a><h2>Signal Details</h2>
+<a name="id2587064"></a><h2>Signal Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2586027"></a><h3>
+<a name="id2587074"></a><h3>
 <a name="XfceItembar-contents-changed"></a>The "contents-changed" signal</h3>
-<a class="indexterm" name="id2586036"></a><pre class="programlisting">void        user_function                  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
+<a class="indexterm" name="id2587083"></a><pre class="programlisting">void        user_function                  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a> *itembar,
                                             gpointer     user_data)      : Run first</pre>
 <p>
 Emitted when the contents of the itembar change, either by adding
@@ -768,10 +856,12 @@ a child, removing a child, or reordering a child.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2586103"></a><h3>
+<a name="id2587150"></a><h3>
 <a name="XfceItembar-orientation-changed"></a>The "orientation-changed" signal</h3>
-<a class="indexterm" name="id2586112"></a><pre class="programlisting">void        user_function                  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a>    *itembar,
-                                            GtkOrientation *orientation,
+<a class="indexterm" name="id2587159"></a><pre class="programlisting">void        user_function                  (<a href="XfceItembar.html" title="XfceItembar">XfceItembar</a>    *itembar,
+                                            <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+>GtkOrientation</a> *orientation,
                                             gpointer        user_data)        : Run first</pre>
 <p>
 Emitted when the orientation of the itembar changes.</p>
@@ -790,7 +880,9 @@ Emitted when the orientation of the itembar changes.</p>
 <tr>
 <td>
 <span class="term"><em class="parameter"><code>orientation</code></em>&#160;:</span></td>
-<td> the new <span class="type">GtkOrientation</span> of the itembar
+<td> the new <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+><span class="type">GtkOrientation</span></a> of the itembar
 </td>
 </tr>
 <tr>
@@ -803,9 +895,13 @@ Emitted when the orientation of the itembar changes.</p>
 </div>
 </div>
 <div class="refsect1" lang="en">
-<a name="id2586206"></a><h2>See Also</h2>
+<a name="id2587253"></a><h2>See Also</h2>
 <p>
-<span class="type">GtkHBox</span> and <span class="type">GtkVBox</span>.
+<a
+href="/usr/share/gtk-doc/html/gtk/GtkHBox.html"
+><span class="type">GtkHBox</span></a> and <a
+href="/usr/share/gtk-doc/html/gtk/GtkVBox.html"
+><span class="type">GtkVBox</span></a>.
 </p>
 </div>
 </div>

@@ -1,9 +1,12 @@
 <ANCHOR id="libxfce4panel-Writing-Plugins" href="libxfce4panel/libxfce4panel-Writing-Plugins.html">
 <ANCHOR id="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS" href="libxfce4panel/libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS">
 <ANCHOR id="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS" href="libxfce4panel/libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS">
+<ANCHOR id="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS" href="libxfce4panel/libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS">
+<ANCHOR id="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS" href="libxfce4panel/libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS">
 <ANCHOR id="XfcePanelPlugin" href="libxfce4panel/XfcePanelPlugin.html">
 <ANCHOR id="XfcePanelPlugin-struct" href="libxfce4panel/XfcePanelPlugin.html#XfcePanelPlugin-struct">
 <ANCHOR id="XfcePanelPluginFunc" href="libxfce4panel/XfcePanelPlugin.html#XfcePanelPluginFunc">
+<ANCHOR id="XfcePanelPluginCheck" href="libxfce4panel/XfcePanelPlugin.html#XfcePanelPluginCheck">
 <ANCHOR id="xfce-panel-plugin-get-name" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-get-name">
 <ANCHOR id="xfce-panel-plugin-get-id" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-get-id">
 <ANCHOR id="xfce-panel-plugin-get-display-name" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-get-display-name">
@@ -21,6 +24,8 @@
 <ANCHOR id="xfce-panel-plugin-register-menu" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-register-menu">
 <ANCHOR id="xfce-panel-plugin-lookup-rc-file" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-lookup-rc-file">
 <ANCHOR id="xfce-panel-plugin-save-location" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-save-location">
+<ANCHOR id="xfce-panel-plugin-focus-widget" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-focus-widget">
+<ANCHOR id="xfce-panel-plugin-set-panel-hidden" href="libxfce4panel/XfcePanelPlugin.html#xfce-panel-plugin-set-panel-hidden">
 <ANCHOR id="XfcePanelPlugin--display-name" href="libxfce4panel/XfcePanelPlugin.html#XfcePanelPlugin--display-name">
 <ANCHOR id="XfcePanelPlugin--expand" href="libxfce4panel/XfcePanelPlugin.html#XfcePanelPlugin--expand">
 <ANCHOR id="XfcePanelPlugin--id" href="libxfce4panel/XfcePanelPlugin.html#XfcePanelPlugin--id">
@@ -43,6 +48,13 @@
 <ANCHOR id="libxfce4panel-Convenience-Functions" href="libxfce4panel/libxfce4panel-Convenience-Functions.html">
 <ANCHOR id="xfce-create-panel-button" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#xfce-create-panel-button">
 <ANCHOR id="xfce-create-panel-toggle-button" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#xfce-create-panel-toggle-button">
+<ANCHOR id="xfce-allow-panel-customization" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#xfce-allow-panel-customization">
+<ANCHOR id="panel-slice-alloc" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#panel-slice-alloc">
+<ANCHOR id="panel-slice-alloc0" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#panel-slice-alloc0">
+<ANCHOR id="panel-slice-free" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#panel-slice-free">
+<ANCHOR id="panel-slice-free1" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#panel-slice-free1">
+<ANCHOR id="panel-slice-new" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#panel-slice-new">
+<ANCHOR id="panel-slice-new0" href="libxfce4panel/libxfce4panel-Convenience-Functions.html#panel-slice-new0">
 <ANCHOR id="XfceArrowButton" href="libxfce4panel/XfceArrowButton.html">
 <ANCHOR id="XfceArrowButton-struct" href="libxfce4panel/XfceArrowButton.html#XfceArrowButton-struct">
 <ANCHOR id="xfce-arrow-button-new" href="libxfce4panel/XfceArrowButton.html#xfce-arrow-button-new">
@@ -52,11 +64,6 @@
 <ANCHOR id="XfceArrowButton-arrow-type-changed" href="libxfce4panel/XfceArrowButton.html#XfceArrowButton-arrow-type-changed">
 <ANCHOR id="XfcePanelWindow" href="libxfce4panel/XfcePanelWindow.html">
 <ANCHOR id="XfcePanelWindow-struct" href="libxfce4panel/XfcePanelWindow.html#XfcePanelWindow-struct">
-<ANCHOR id="XfceHandleStyle" href="libxfce4panel/XfcePanelWindow.html#XfceHandleStyle">
-<ANCHOR id="XFCE-HANDLE-STYLE-NONE:CAPS" href="libxfce4panel/XfcePanelWindow.html#XFCE-HANDLE-STYLE-NONE:CAPS">
-<ANCHOR id="XFCE-HANDLE-STYLE-BOTH:CAPS" href="libxfce4panel/XfcePanelWindow.html#XFCE-HANDLE-STYLE-BOTH:CAPS">
-<ANCHOR id="XFCE-HANDLE-STYLE-START:CAPS" href="libxfce4panel/XfcePanelWindow.html#XFCE-HANDLE-STYLE-START:CAPS">
-<ANCHOR id="XFCE-HANDLE-STYLE-END:CAPS" href="libxfce4panel/XfcePanelWindow.html#XFCE-HANDLE-STYLE-END:CAPS">
 <ANCHOR id="XfcePanelWindowMoveFunc" href="libxfce4panel/XfcePanelWindow.html#XfcePanelWindowMoveFunc">
 <ANCHOR id="XfcePanelWindowResizeFunc" href="libxfce4panel/XfcePanelWindow.html#XfcePanelWindowResizeFunc">
 <ANCHOR id="xfce-panel-window-new" href="libxfce4panel/XfcePanelWindow.html#xfce-panel-window-new">
@@ -127,3 +134,8 @@
 <ANCHOR id="xfce-screen-position-is-left" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-left">
 <ANCHOR id="xfce-screen-position-is-right" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-right">
 <ANCHOR id="xfce-screen-position-is-bottom" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-bottom">
+<ANCHOR id="XfceHandleStyle" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#XfceHandleStyle">
+<ANCHOR id="XFCE-HANDLE-STYLE-NONE:CAPS" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#XFCE-HANDLE-STYLE-NONE:CAPS">
+<ANCHOR id="XFCE-HANDLE-STYLE-BOTH:CAPS" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#XFCE-HANDLE-STYLE-BOTH:CAPS">
+<ANCHOR id="XFCE-HANDLE-STYLE-START:CAPS" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#XFCE-HANDLE-STYLE-START:CAPS">
+<ANCHOR id="XFCE-HANDLE-STYLE-END:CAPS" href="libxfce4panel/libxfce4panel-Standard-Enumerations.html#XFCE-HANDLE-STYLE-END:CAPS">

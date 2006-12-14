@@ -107,9 +107,13 @@ xfce_panel_plugin_base_init (gpointer g_class)
          * @plugin      : a #XfcePanelPlugin widget
          * @size        : new panel size
          *
-         * Emitted when the panel size changes.
+         * Emitted when the panel size changes. By default a plugin will 
+         * get a geometry of @size x @size. This means that a plugin writer 
+         * must handle this signal for any other behavior, even to 'do nothing'.
          *
-         * Returns: %TRUE when handled, %FALSE otherwise.
+         * Return value: A callback function should return %TRUE when the signal
+         *               is handled and %FALSE otherwise, in which case the 
+         *               default handler will run.
          **/
         xfce_panel_plugin_signals [SIZE_CHANGED] =
             g_signal_newv ("size-changed",

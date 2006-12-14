@@ -141,7 +141,7 @@ xfce_hvbox_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
 
 /**
  * xfce_hvbox_new:
- * @orienation  : Orientation of the #XfceHVBox
+ * @orientation : Orientation of the #XfceHVBox
  * @homogeneous : whether all children should be allocated the same size
  * @spacing     : spacing between #XfceHVBox children
  *

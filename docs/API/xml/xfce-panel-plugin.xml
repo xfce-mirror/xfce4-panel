@@ -3,18 +3,21 @@
                "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
 <refentry id="libxfce4panel-Writing-Plugins">
 <refmeta>
-<refentrytitle>Writing Plugins</refentrytitle>
+<refentrytitle role="top_of_page">Writing Plugins</refentrytitle>
 <manvolnum>3</manvolnum>
 <refmiscinfo>LIBXFCE4PANEL Library</refmiscinfo>
 </refmeta>
 
 <refnamediv>
-<refname>Writing Plugins</refname><refpurpose><para>
+<refname>Writing Plugins</refname>
+<refpurpose><para>
 Information for plugin writers
 </para></refpurpose>
+<!--[<xref linkend="desc" endterm="desc.title"/>]-->
 </refnamediv>
 
-<refsynopsisdiv><title>Synopsis</title>
+<refsynopsisdiv role="synopsis">
+<title role="synopsis.title">Synopsis</title>
 
 <synopsis>
 
@@ -23,6 +26,8 @@ Information for plugin writers
 
 #define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS">XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</link>(construct)
 #define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS">XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</link>(construct)
+#define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS">XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</link>(construct,check)
+#define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS">XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</link>(construct,check)
 </synopsis>
 </refsynopsisdiv>
 
@@ -34,17 +39,17 @@ Information for plugin writers
 
 
 
-<refsect1>
-<title>Description</title>
+<refsect1 role="desc">
+<title role="desc.title">Description</title>
 <para>
 Macros to register a plugin with the Xfce Panel.
 </para>
 </refsect1>
 
-<refsect1>
-<title>Details</title>
+<refsect1 role="details">
+<title role="details.title">Details</title>
 <refsect2>
-<title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS"/>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()</title>
+<title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()</title>
 <indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct)</programlisting>
 <para>
 Registers and initializes the plugin. This is the only thing that is 
@@ -60,7 +65,7 @@ See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
-<title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS"/>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL()</title>
+<title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL()</title>
 <indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct)</programlisting>
 <para>
 Registers and initializes the plugin. This is the only thing that is 
@@ -78,6 +83,56 @@ See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
 </para><variablelist role="params">
 <varlistentry><term><parameter>construct</parameter>&nbsp;:</term>
 <listitem><simpara> name of a function that can be cast to an <link linkend="XfcePanelPluginFunc"><type>XfcePanelPluginFunc</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK()</title>
+<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check)</programlisting>
+<para>
+Registers and initializes the plugin. This is the only thing that is 
+required to create a panel plugin. The <parameter>check</parameter> functions is run before
+creating the plugin, and should return FALSE if plugin creation is not
+possible.
+</para>
+<para>
+See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>construct</parameter>&nbsp;:</term>
+<listitem><simpara> name of a function that can be cast to an 
+             <link linkend="XfcePanelPluginFunc"><type>XfcePanelPluginFunc</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>check</parameter>&nbsp;:</term>
+<listitem><simpara> name of a function that can be cast to an
+             <link linkend="XfcePanelPluginCheck"><type>XfcePanelPluginCheck</type></link>
+</simpara></listitem></varlistentry>
+</variablelist></refsect2>
+<refsect2>
+<title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()</title>
+<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK(construct,check)</programlisting>
+<para>
+Registers and initializes the plugin. This is the only thing that is 
+required to create a panel plugin. The <parameter>check</parameter> function is run before
+creating the plugin, and should return FALSE if plugin creation is not
+possible.
+</para>
+<para>
+This macro is for plugins implemented as a loadable module. Generally it is
+preferred to create an external plugin, for which you have to use
+<link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()</function></link> .
+</para>
+<para>
+See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
+<para>
+
+</para><variablelist role="params">
+<varlistentry><term><parameter>construct</parameter>&nbsp;:</term>
+<listitem><simpara> name of a function that can be cast to an <link linkend="XfcePanelPluginFunc"><type>XfcePanelPluginFunc</type></link>
+</simpara></listitem></varlistentry>
+<varlistentry><term><parameter>check</parameter>&nbsp;:</term>
+<listitem><simpara> name of a function that can be cast to an
+             <link linkend="XfcePanelPluginCheck"><type>XfcePanelPluginCheck</type></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 

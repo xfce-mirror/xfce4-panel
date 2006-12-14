@@ -7,7 +7,7 @@
 <link rel="start" href="index.html" title="libxfce4panel Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference">
 <link rel="prev" href="XfceHVBox.html" title="XfceHVBox">
-<meta name="generator" content="GTK-Doc V1.6 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.7 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 <link rel="chapter" href="ch01.html" title="API Reference">
 </head>
@@ -20,15 +20,17 @@
 <th width="100%" align="center">libxfce4panel Reference Manual</th>
 <td>&#160;</td>
 </tr>
-<tr><td colspan="5" class="shortcuts"><nobr><a href="#top_of_page" class="shortcut">Top</a>
+<tr><td colspan="5" class="shortcuts"><nobr><a href="#id2537940" class="shortcut">Top</a>
                   &#160;|&#160;
-                  <a href="#desc" class="shortcut">Description</a></nobr></td></tr>
+                  <a href="#id2574512" class="shortcut">Description</a></nobr></td></tr>
 </table>
 <div class="refentry" lang="en">
 <a name="libxfce4panel-Standard-Enumerations"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
-<h2><span class="refentrytitle"><a name="top_of_page"></a>Standard Enumerations</span></h2>
+<h2>
+<a name="id2537940"></a><span class="refentrytitle">Standard Enumerations</span>
+</h2>
 <p>Standard Enumerations &#8212; <p>
 Standard enumerations used by the Xfce Panel.
 </p></p>
@@ -36,7 +38,7 @@ Standard enumerations used by the Xfce Panel.
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
-<a name="synopsis"></a><h2>Synopsis</h2>
+<h2>Synopsis</h2>
 <pre class="synopsis">
 
 
@@ -49,20 +51,22 @@ enum        <a href="libxfce4panel-Standard-Enumerations.html#XfceScreenPosition
 #define     <a href="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-left">xfce_screen_position_is_left</a>    (position)
 #define     <a href="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-right">xfce_screen_position_is_right</a>   (position)
 #define     <a href="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-bottom">xfce_screen_position_is_bottom</a>  (position)
+enum        <a href="libxfce4panel-Standard-Enumerations.html#XfceHandleStyle">XfceHandleStyle</a>;
+
 </pre>
 </div>
 <div class="refsect1" lang="en">
-<a name="desc"></a><h2>Description</h2>
+<a name="id2574512"></a><h2>Description</h2>
 <p>
 Currently only contains the definition of <a href="libxfce4panel-Standard-Enumerations.html#XfceScreenPosition"><span class="type">XfceScreenPosition</span></a>.
 </p>
 </div>
 <div class="refsect1" lang="en">
-<a name="details"></a><h2>Details</h2>
+<a name="id2574535"></a><h2>Details</h2>
 <div class="refsect2" lang="en">
-<a name="id2545982"></a><h3>
+<a name="id2574546"></a><h3>
 <a name="XfceScreenPosition"></a>enum XfceScreenPosition</h3>
-<a class="indexterm" name="id2545994"></a><pre class="programlisting">typedef enum /*&lt;enum,prefix=XFCE_SCREEN_POSITION &gt;*/
+<a class="indexterm" name="id2574558"></a><pre class="programlisting">typedef enum /*&lt;enum,prefix=XFCE_SCREEN_POSITION &gt;*/
 {
     XFCE_SCREEN_POSITION_NONE,
     
@@ -88,7 +92,7 @@ Currently only contains the definition of <a href="libxfce4panel-Standard-Enumer
 
     /* floating */
     XFCE_SCREEN_POSITION_FLOATING_H,    /* Floating Horizontal */
-    XFCE_SCREEN_POSITION_FLOATING_V,    /* Floating Vertical */
+    XFCE_SCREEN_POSITION_FLOATING_V     /* Floating Vertical */
 }
 XfceScreenPosition;
 </pre>
@@ -199,9 +203,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2573088"></a><h3>
+<a name="id2581290"></a><h3>
 <a name="xfce-screen-position-is-horizontal"></a>xfce_screen_position_is_horizontal()</h3>
-<a class="indexterm" name="id2573101"></a><pre class="programlisting">#define     xfce_screen_position_is_horizontal(position)</pre>
+<a class="indexterm" name="id2581303"></a><pre class="programlisting">#define     xfce_screen_position_is_horizontal(position)</pre>
 <p>
 </p>
 <p>
@@ -227,9 +231,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2573177"></a><h3>
+<a name="id2581379"></a><h3>
 <a name="xfce-screen-position-get-orientation"></a>xfce_screen_position_get_orientation()</h3>
-<a class="indexterm" name="id2573190"></a><pre class="programlisting">#define     xfce_screen_position_get_orientation(position)</pre>
+<a class="indexterm" name="id2581392"></a><pre class="programlisting">#define     xfce_screen_position_get_orientation(position)</pre>
 <p>
 </p>
 <p>
@@ -247,7 +251,9 @@ positions, horizontal and vertical.</p>
 <tr>
 <td>
 <span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
-<td> the <span class="type">GtkOrientation</span> corresponding to <em class="parameter"><code>position</code></em>.
+<td> the <a
+href="/usr/share/gtk-doc/html/gtk/gtk-Standard-Enumerations.html#GtkOrientation"
+><span class="type">GtkOrientation</span></a> corresponding to <em class="parameter"><code>position</code></em>.
 </td>
 </tr>
 </tbody>
@@ -255,9 +261,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2573422"></a><h3>
+<a name="id2579725"></a><h3>
 <a name="xfce-screen-position-is-floating"></a>xfce_screen_position_is_floating()</h3>
-<a class="indexterm" name="id2573435"></a><pre class="programlisting">#define     xfce_screen_position_is_floating(position)</pre>
+<a class="indexterm" name="id2579738"></a><pre class="programlisting">#define     xfce_screen_position_is_floating(position)</pre>
 <p>
 </p>
 <p>
@@ -283,9 +289,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2573512"></a><h3>
+<a name="id2579815"></a><h3>
 <a name="xfce-screen-position-is-top"></a>xfce_screen_position_is_top()</h3>
-<a class="indexterm" name="id2573523"></a><pre class="programlisting">#define     xfce_screen_position_is_top(position)</pre>
+<a class="indexterm" name="id2579827"></a><pre class="programlisting">#define     xfce_screen_position_is_top(position)</pre>
 <p>
 </p>
 <p>
@@ -311,9 +317,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2573599"></a><h3>
+<a name="id2579902"></a><h3>
 <a name="xfce-screen-position-is-left"></a>xfce_screen_position_is_left()</h3>
-<a class="indexterm" name="id2573612"></a><pre class="programlisting">#define     xfce_screen_position_is_left(position)</pre>
+<a class="indexterm" name="id2579916"></a><pre class="programlisting">#define     xfce_screen_position_is_left(position)</pre>
 <p>
 </p>
 <p>
@@ -339,9 +345,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2583268"></a><h3>
+<a name="id2575516"></a><h3>
 <a name="xfce-screen-position-is-right"></a>xfce_screen_position_is_right()</h3>
-<a class="indexterm" name="id2583281"></a><pre class="programlisting">#define     xfce_screen_position_is_right(position)</pre>
+<a class="indexterm" name="id2575529"></a><pre class="programlisting">#define     xfce_screen_position_is_right(position)</pre>
 <p>
 </p>
 <p>
@@ -367,9 +373,9 @@ positions, horizontal and vertical.</p>
 </div>
 <hr>
 <div class="refsect2" lang="en">
-<a name="id2583357"></a><h3>
+<a name="id2575605"></a><h3>
 <a name="xfce-screen-position-is-bottom"></a>xfce_screen_position_is_bottom()</h3>
-<a class="indexterm" name="id2583371"></a><pre class="programlisting">#define     xfce_screen_position_is_bottom(position)</pre>
+<a class="indexterm" name="id2575618"></a><pre class="programlisting">#define     xfce_screen_position_is_bottom(position)</pre>
 <p>
 </p>
 <p>
@@ -388,6 +394,54 @@ positions, horizontal and vertical.</p>
 <td>
 <span class="term"><span class="emphasis"><em>Returns</em></span>&#160;:</span></td>
 <td> <code class="literal">TRUE</code> if on the bottom of the screen, <code class="literal">FALSE</code> otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" lang="en">
+<a name="id2575695"></a><h3>
+<a name="XfceHandleStyle"></a>enum XfceHandleStyle</h3>
+<a class="indexterm" name="id2575707"></a><pre class="programlisting">typedef enum /*&lt;enum,prefix=XFCE_HANDLE_STYLE &gt;*/
+{
+    XFCE_HANDLE_STYLE_NONE,
+    XFCE_HANDLE_STYLE_BOTH,
+    XFCE_HANDLE_STYLE_START,
+    XFCE_HANDLE_STYLE_END
+}
+XfceHandleStyle;
+</pre>
+<p>
+Style of the handles on an <a href="XfcePanelWindow.html" title="XfcePanelWindow"><span class="type">XfcePanelWindow</span></a>.</p>
+<p>
+
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td>
+<span class="term"><a name="XFCE-HANDLE-STYLE-NONE:CAPS"></a><code class="literal">XFCE_HANDLE_STYLE_NONE</code></span></td>
+<td> No handles.
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><a name="XFCE-HANDLE-STYLE-BOTH:CAPS"></a><code class="literal">XFCE_HANDLE_STYLE_BOTH</code></span></td>
+<td> Two handles, one on each side.
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><a name="XFCE-HANDLE-STYLE-START:CAPS"></a><code class="literal">XFCE_HANDLE_STYLE_START</code></span></td>
+<td> One handle at the start.
+</td>
+</tr>
+<tr>
+<td>
+<span class="term"><a name="XFCE-HANDLE-STYLE-END:CAPS"></a><code class="literal">XFCE_HANDLE_STYLE_END</code></span></td>
+<td> One handle at the end.
 </td>
 </tr>
 </tbody>

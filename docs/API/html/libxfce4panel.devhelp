@@ -18,8 +18,11 @@
   <functions>
     <function name="XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS"/>
     <function name="XFCE_PANEL_PLUGIN_REGISTER_INTERNAL()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS"/>
+    <function name="XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS"/>
+    <function name="XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()" link="libxfce4panel-Writing-Plugins.html#XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS"/>
     <function name="XfcePanelPlugin" link="XfcePanelPlugin.html#XfcePanelPlugin-struct"/>
     <function name="XfcePanelPluginFunc ()" link="XfcePanelPlugin.html#XfcePanelPluginFunc"/>
+    <function name="XfcePanelPluginCheck ()" link="XfcePanelPlugin.html#XfcePanelPluginCheck"/>
     <function name="xfce_panel_plugin_get_name ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-name"/>
     <function name="xfce_panel_plugin_get_id ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-id"/>
     <function name="xfce_panel_plugin_get_display_name ()" link="XfcePanelPlugin.html#xfce-panel-plugin-get-display-name"/>
@@ -37,6 +40,8 @@
     <function name="xfce_panel_plugin_register_menu ()" link="XfcePanelPlugin.html#xfce-panel-plugin-register-menu"/>
     <function name="xfce_panel_plugin_lookup_rc_file ()" link="XfcePanelPlugin.html#xfce-panel-plugin-lookup-rc-file"/>
     <function name="xfce_panel_plugin_save_location ()" link="XfcePanelPlugin.html#xfce-panel-plugin-save-location"/>
+    <function name="xfce_panel_plugin_focus_widget ()" link="XfcePanelPlugin.html#xfce-panel-plugin-focus-widget"/>
+    <function name="xfce_panel_plugin_set_panel_hidden ()" link="XfcePanelPlugin.html#xfce-panel-plugin-set-panel-hidden"/>
     <function name="The &quot;display-name&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--display-name"/>
     <function name="The &quot;expand&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--expand"/>
     <function name="The &quot;id&quot; property" link="XfcePanelPlugin.html#XfcePanelPlugin--id"/>
@@ -56,6 +61,13 @@
     <function name="xfce_internal_panel_plugin_new ()" link="XfceInternalPanelPlugin.html#xfce-internal-panel-plugin-new"/>
     <function name="xfce_create_panel_button ()" link="libxfce4panel-Convenience-Functions.html#xfce-create-panel-button"/>
     <function name="xfce_create_panel_toggle_button ()" link="libxfce4panel-Convenience-Functions.html#xfce-create-panel-toggle-button"/>
+    <function name="xfce_allow_panel_customization ()" link="libxfce4panel-Convenience-Functions.html#xfce-allow-panel-customization"/>
+    <function name="panel_slice_alloc()" link="libxfce4panel-Convenience-Functions.html#panel-slice-alloc"/>
+    <function name="panel_slice_alloc0()" link="libxfce4panel-Convenience-Functions.html#panel-slice-alloc0"/>
+    <function name="panel_slice_free()" link="libxfce4panel-Convenience-Functions.html#panel-slice-free"/>
+    <function name="panel_slice_free1()" link="libxfce4panel-Convenience-Functions.html#panel-slice-free1"/>
+    <function name="panel_slice_new()" link="libxfce4panel-Convenience-Functions.html#panel-slice-new"/>
+    <function name="panel_slice_new0()" link="libxfce4panel-Convenience-Functions.html#panel-slice-new0"/>
     <function name="XfceArrowButton" link="XfceArrowButton.html#XfceArrowButton-struct"/>
     <function name="xfce_arrow_button_new ()" link="XfceArrowButton.html#xfce-arrow-button-new"/>
     <function name="xfce_arrow_button_set_arrow_type ()" link="XfceArrowButton.html#xfce-arrow-button-set-arrow-type"/>
@@ -63,7 +75,6 @@
     <function name="The &quot;arrow-type&quot; property" link="XfceArrowButton.html#XfceArrowButton--arrow-type"/>
     <function name="The &quot;arrow-type-changed&quot; signal" link="XfceArrowButton.html#XfceArrowButton-arrow-type-changed"/>
     <function name="XfcePanelWindow" link="XfcePanelWindow.html#XfcePanelWindow-struct"/>
-    <function name="enum XfceHandleStyle" link="XfcePanelWindow.html#XfceHandleStyle"/>
     <function name="XfcePanelWindowMoveFunc ()" link="XfcePanelWindow.html#XfcePanelWindowMoveFunc"/>
     <function name="XfcePanelWindowResizeFunc ()" link="XfcePanelWindow.html#XfcePanelWindowResizeFunc"/>
     <function name="xfce_panel_window_new ()" link="XfcePanelWindow.html#xfce-panel-window-new"/>
@@ -116,5 +127,6 @@
     <function name="xfce_screen_position_is_left()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-left"/>
     <function name="xfce_screen_position_is_right()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-right"/>
     <function name="xfce_screen_position_is_bottom()" link="libxfce4panel-Standard-Enumerations.html#xfce-screen-position-is-bottom"/>
+    <function name="enum XfceHandleStyle" link="libxfce4panel-Standard-Enumerations.html#XfceHandleStyle"/>
   </functions>
 </book>

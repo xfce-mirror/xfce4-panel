@@ -53,10 +53,13 @@ typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
 
 /**
  * XfcePanelPluginCheck:
+ * @screen : The #GdkScreen that the plugin should be run on.
  *
  * Callback function that is run before creating a plugin. It should return
  * if the plugin is not available for whatever reason. It should be given as 
  * the argument to the registration macros.
+ *
+ * Returns: %TRUE if the plugin can be started, %FALSE other wise.
  *
  * See also: XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK() and
  *           XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()
