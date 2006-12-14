@@ -736,20 +736,21 @@ launcher_update_panel_entry (LauncherPlugin *launcher)
     gtk_image_set_from_pixbuf (GTK_IMAGE (launcher->image), pb);
     g_object_unref (G_OBJECT (pb));
     
-    if (entry->name)
+    if (entry->name || entry->comment)
     {
-        if (entry->comment)
+        if (entry->name && entry->comment)
             g_snprintf (tip, 521, "%s\n%s", entry->name, entry->comment);
-        else
+        else if (entry->name)
             g_strlcpy (tip, entry->name, 521);
+        else
+            g_strlcpy (tip, entry->comment, 521);
 
+        gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
     }
     else
     {
-        g_strlcpy (tip, _("This item has not yet been configured"), 512);
+        gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, NULL, NULL);
     }
-
-    gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
 }
 
 static void
