@@ -1,4 +1,4 @@
-/* $Id: frap-icon-entry.h 22609 2006-08-01 13:27:16Z benny $ */
+/* $Id$ */
 /*-
  * Copyright (c) 2005-2006 Benedikt Meurer <benny@xfce.org>
  *

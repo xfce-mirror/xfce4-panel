@@ -1,6 +1,6 @@
 /* vim: set expandtab ts=8 sw=4: */
 
-/*  $Id: xfce-panel-plugin.h 20349 2006-03-12 09:04:43Z jasper $
+/*  $Id$
  *
  *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
  *
