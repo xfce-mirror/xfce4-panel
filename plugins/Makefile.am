@@ -8,5 +8,4 @@ SUBDIRS = 				\
 	showdesktop			\
 	systray				\
 	tasklist			\
-	windowlist			\
-	testplugin
+	windowlist

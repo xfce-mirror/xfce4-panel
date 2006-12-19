@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.99.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-08-12 17:05+0200\n"
+"POT-Creation-Date: 2006-12-19 19:30+0100\n"
 "PO-Revision-Date: 2006-09-20 13:11+0200\n"
 "Last-Translator: Pau Rul.lan Ferragut <paurullan@bulma.net>\n"
 "Language-Team: catalan\n"
@@ -54,84 +54,85 @@ msgstr "Navegador web"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "S'ha esborrat un ítem de manera inesperada: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:573
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:578
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Suprimir \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:576 ../panel/panel-app.c:750
-#: ../panel/panel-app.c:782 ../panel/panel-app.c:815
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:581 ../panel/panel-app.c:874
+#: ../panel/panel-app.c:906 ../panel/panel-app.c:940
 #: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
 #: ../plugins/launcher/launcher.c:437
 msgid "Xfce Panel"
 msgstr "Quadre Xfce"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:578
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:583
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "Això suprimirà l'element del quadre, perdent-se la seva configuració."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:765
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:770
 msgid "Properties"
 msgstr "Propietats"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:782
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:787
 msgid "About"
 msgstr "Quant a"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:796
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:801
 msgid "Move"
 msgstr "Mou"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:816
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:821
 msgid "Remove"
 msgstr "Suprimeix"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:833
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:838
 msgid "Add New Item"
 msgstr "Afegix un element nou"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:845 ../panel/panel.c:662
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:850 ../panel/panel.c:697
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Personalitza quadre"
 
-#: ../panel/panel.c:673
+#: ../panel/panel.c:708
 msgid "Add Items"
 msgstr "Afegir element"
 
-#: ../panel/panel.c:689 ../plugins/actions/actions.c:417
+#: ../panel/panel.c:724 ../plugins/actions/actions.c:280
+#: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:429
 msgid "Quit"
 msgstr "Surt"
 
-#: ../panel/panel.c:699
+#: ../panel/panel.c:734
 msgid "Restart"
 msgstr "Reinicia"
 
-#: ../panel/panel.c:713
+#: ../panel/panel.c:748
 msgid "About the Xfce Panel"
 msgstr "Quant al quadre Xfce"
 
-#: ../panel/panel-app.c:243 ../panel/panel-app.c:752
+#: ../panel/panel-app.c:238 ../panel/panel-app.c:876
 msgid "Exit Xfce Panel?"
 msgstr "Sortir del quadre Xfce?"
 
-#: ../panel/panel-app.c:753
+#: ../panel/panel-app.c:877
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "No podeu eliminar el darrer quadre. Desitgeu tancar el programa?"
 
-#: ../panel/panel-app.c:780
+#: ../panel/panel-app.c:904
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Suprimir el quadre \"%d\"?"
 
-#: ../panel/panel-app.c:784
+#: ../panel/panel-app.c:908
 msgid "The selected panel and all its items will be removed."
 msgstr "S'eliminaran el quadre seleccionat i tots els seus elements."
 
-#: ../panel/panel-app.c:823
+#: ../panel/panel-app.c:947 ../panel/panel-app.c:950
 msgid "Developer"
 msgstr "Desenvolupador"
 
@@ -190,16 +191,16 @@ msgstr ""
 "\" -a, --add       Afegeix elements\n"
 "\n"
 
-#: ../panel/panel-dialogs.c:179
+#: ../panel/panel-dialogs.c:184
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "No s'ha pogut obrir el mòdul \"%s\""
 
-#: ../panel/panel-dialogs.c:588
+#: ../panel/panel-dialogs.c:593
 msgid "Add Items to the Panel"
 msgstr "Afegeix elements al quadre"
 
-#: ../panel/panel-dialogs.c:618
+#: ../panel/panel-dialogs.c:623
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -207,131 +208,132 @@ msgstr ""
 "Arrossega elements del llistat al quadre o elimina-los movent-los de nou al "
 "llistat."
 
-#: ../panel/panel-dialogs.c:635
+#: ../panel/panel-dialogs.c:640
 msgid "Available Items"
 msgstr "Elements disponibles"
 
-#: ../panel/panel-dialogs.c:860 ../panel/panel-dialogs.c:1084
+#: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1090
 msgid "Normal Width"
 msgstr "Amplada normal"
 
-#: ../panel/panel-dialogs.c:862 ../panel/panel-dialogs.c:1086
+#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
 msgid "Full Width"
 msgstr "Tota l'amplada"
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:874 ../panel/panel-dialogs.c:1098
 msgid "Span Monitors"
 msgstr "Amplada dels monitors"
 
-#: ../panel/panel-dialogs.c:928 ../panel/panel-dialogs.c:1157
+#: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
 msgid "Left"
 msgstr "Esquerra"
 
-#: ../panel/panel-dialogs.c:930 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
 msgid "Right"
 msgstr "Dreta"
 
-#: ../panel/panel-dialogs.c:935 ../panel/panel-dialogs.c:1164
+#: ../panel/panel-dialogs.c:941 ../panel/panel-dialogs.c:1170
 msgid "Top"
 msgstr "Superior"
 
-#: ../panel/panel-dialogs.c:937 ../panel/panel-dialogs.c:1166
+#: ../panel/panel-dialogs.c:943 ../panel/panel-dialogs.c:1172
 msgid "Bottom"
 msgstr "Inferior"
 
 #. position
-#: ../panel/panel-dialogs.c:965
+#: ../panel/panel-dialogs.c:971
 msgid "Position"
 msgstr "Posició"
 
-#: ../panel/panel-dialogs.c:979
+#: ../panel/panel-dialogs.c:985
 msgid "Fixed Position"
 msgstr "Posició fixa"
 
-#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:991
 msgid "Freely Moveable"
 msgstr "Col·locar lliurement"
 
-#: ../panel/panel-dialogs.c:1100
+#: ../panel/panel-dialogs.c:1106
 msgid "Auto_hide"
 msgstr "Oculta _automàticament"
 
-#: ../panel/panel-dialogs.c:1118
+#: ../panel/panel-dialogs.c:1124
 msgid "Orientation:"
 msgstr "Orientació:"
 
-#: ../panel/panel-dialogs.c:1130
+#: ../panel/panel-dialogs.c:1136
 msgid "Horizontal"
 msgstr "Horitzontal"
 
-#: ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:1138
 msgid "Vertical"
 msgstr "Vertical "
 
-#: ../panel/panel-dialogs.c:1141
+#: ../panel/panel-dialogs.c:1147
 msgid "Handle:"
 msgstr "Gestor:"
 
-#: ../panel/panel-dialogs.c:1153
+#: ../panel/panel-dialogs.c:1159
 msgid "At both sides"
 msgstr "A ambdos costats"
 
-#: ../panel/panel-dialogs.c:1234
+#: ../panel/panel-dialogs.c:1240
 msgid "Select Monitor"
 msgstr "Seleccioneu monitor"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1352 ../plugins/clock/clock.c:459
-#: ../plugins/tasklist/tasklist.c:432
-#: ../plugins/windowlist/windowlist-dialog.c:188
+#: ../panel/panel-dialogs.c:1358 ../plugins/clock/clock.c:467
+#: ../plugins/tasklist/tasklist.c:431
+#: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Aparença"
 
 #. size
-#: ../panel/panel-dialogs.c:1363
+#: ../panel/panel-dialogs.c:1369
 msgid "Size (pixels):"
 msgstr "Tamany (píxels):"
 
-#: ../panel/panel-dialogs.c:1386
+#: ../panel/panel-dialogs.c:1397
 msgid "Transparency (%):"
 msgstr "Transparència (%):"
 
-#: ../panel/panel-dialogs.c:1410
+#: ../panel/panel-dialogs.c:1421
 msgid "Make active panel opaque"
 msgstr "Mostra opac el quadre actiu"
 
-#: ../panel/panel-dialogs.c:1449 ../panel/panel-dialogs.c:1485
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1460 ../panel/panel-dialogs.c:1496
+#: ../panel/panel-dialogs.c:1521
 #, c-format
 msgid "Panel %d"
 msgstr "Quadre %d"
 
-#: ../panel/panel-dialogs.c:1529
+#: ../panel/panel-dialogs.c:1540
 msgid "Remove Panel"
 msgstr "Suprimeix quadre"
 
-#: ../panel/panel-dialogs.c:1542
+#: ../panel/panel-dialogs.c:1553
 msgid "New Panel"
 msgstr "Quadre nou"
 
-#: ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1610
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Gestor de quadres"
 
-#: ../plugins/actions/actions.c:383
-msgid "Panel Actions"
-msgstr "Accions del quadre"
-
-#: ../plugins/actions/actions.c:409
-msgid "Select action type:"
-msgstr "Seleccioneu tipus d'acció:"
-
-#: ../plugins/actions/actions.c:418
+#: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
+#: ../plugins/actions/actions.c:430
 msgid "Lock screen"
 msgstr "Bloca la pantalla"
 
-#: ../plugins/actions/actions.c:419
+#: ../plugins/actions/actions.c:396
+msgid "Panel Actions"
+msgstr "Accions del quadre"
+
+#: ../plugins/actions/actions.c:421
+msgid "Select action type:"
+msgstr "Seleccioneu tipus d'acció:"
+
+#: ../plugins/actions/actions.c:431
 msgid "Quit + Lock screen"
 msgstr "Surt + Bloca pantalla"
 
@@ -347,55 +349,59 @@ msgstr "Surt + Bloca pantalla"
 msgid "%A %d %B %Y"
 msgstr "%A %d %B %Y"
 
-#: ../plugins/clock/clock.c:446 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:455 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Rellotge"
 
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:471
+#: ../plugins/clock/clock.c:479
 msgid "Analog"
 msgstr "Analògic"
 
-#: ../plugins/clock/clock.c:472
+#: ../plugins/clock/clock.c:480
 msgid "Digital"
 msgstr "Digital "
 
-#: ../plugins/clock/clock.c:473
+#: ../plugins/clock/clock.c:481
 msgid "LED"
 msgstr "LED "
 
-#: ../plugins/clock/clock.c:478 ../plugins/systray/systray.c:400
+#: ../plugins/clock/clock.c:486 ../plugins/systray/systray.c:399
 msgid "Show _frame"
 msgstr "Mostra _marc"
 
-#: ../plugins/clock/clock.c:485
+#: ../plugins/clock/clock.c:493
 msgid "Clock Options"
 msgstr "Opcions del rellotge"
 
-#: ../plugins/clock/clock.c:493
+#: ../plugins/clock/clock.c:501
 msgid "Use 24-_hour clock"
 msgstr "Utilitza estil de 24 _hores"
 
-#: ../plugins/clock/clock.c:500
+#: ../plugins/clock/clock.c:508
 msgid "Show AM/PM"
 msgstr "Mostra AM/PM"
 
-#: ../plugins/clock/clock.c:507
+#: ../plugins/clock/clock.c:515
 msgid "Display seconds"
 msgstr "Mostra segons"
 
-#: ../plugins/iconbox/iconbox.c:807
+#: ../plugins/iconbox/iconbox.c:837
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "Caixa d'icona"
 
-#: ../plugins/iconbox/iconbox.c:830
+#: ../plugins/iconbox/iconbox.c:859
 msgid "Only show minimized applications"
 msgstr "Sols mostra les aplicacions minimitzades"
 
-#: ../plugins/iconbox/iconbox.c:839
+#: ../plugins/iconbox/iconbox.c:868
 msgid "Show applications of all workspaces"
 msgstr "Mostra les aplicacions de totes les àrees de treball"
+
+#: ../plugins/iconbox/iconbox.c:876 ../plugins/tasklist/tasklist.c:454
+msgid "Use all available space"
+msgstr "Usa tot l'espai disponible"
 
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
@@ -407,12 +413,12 @@ msgstr "No s'ha pogut executar \"%s\""
 msgid "Error in command \"%s\""
 msgstr "S'ha produit un error a l'ordre \"%s\""
 
-#: ../plugins/launcher/launcher.c:673 ../plugins/launcher/launcher.c:1300
+#: ../plugins/launcher/launcher.c:675 ../plugins/launcher/launcher.c:1303
 #: ../plugins/launcher/launcher-dialog.c:1167
 msgid "New Item"
 msgstr "Element nou"
 
-#: ../plugins/launcher/launcher.c:747 ../plugins/launcher/launcher.c:1301
+#: ../plugins/launcher/launcher.c:1304
 msgid "This item has not yet been configured"
 msgstr "L'element encara no s'ha configurat"
 
@@ -516,8 +522,8 @@ msgstr ""
 msgid "Program Launcher"
 msgstr "Programa llançadora"
 
-#: ../plugins/launcher/launcher-dialog.c:1421
-#: ../plugins/launcher/launcher-dialog.c:1522
+#: ../plugins/launcher/launcher-dialog.c:1420
+#: ../plugins/launcher/launcher-dialog.c:1521
 #, c-format
 msgid ""
 "Failed to run 0launch:\n"
@@ -530,7 +536,7 @@ msgstr ""
 "\n"
 "Per obtenir ajuda a l'instal·lador Zero, visiteu http://0install.net"
 
-#: ../plugins/launcher/launcher-dialog.c:1487
+#: ../plugins/launcher/launcher-dialog.c:1486
 msgid ""
 "The Zero Install GUI has finished, but the launcher dialog has disappeared "
 "in the meantime. Not adding launcher (but any files downloaded have not been "
@@ -540,23 +546,23 @@ msgstr ""
 "procés. No s'afegirà la llançadora (però cap dels fitxers descarregats "
 "s'haurà perdut)."
 
-#: ../plugins/launcher/launcher-dialog.c:1894
+#: ../plugins/launcher/launcher-dialog.c:1899
 msgid "Select file"
 msgstr "Seleccioneu el fitxer"
 
-#: ../plugins/pager/pager.c:305 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Paginador"
 
-#: ../plugins/pager/pager.c:334
+#: ../plugins/pager/pager.c:364
 msgid "Number of rows:"
 msgstr "Nombre de files:"
 
-#: ../plugins/pager/pager.c:338
+#: ../plugins/pager/pager.c:368
 msgid "Number of columns:"
 msgstr "Nombre de columnes:"
 
-#: ../plugins/pager/pager.c:364
+#: ../plugins/pager/pager.c:394
 msgid "Switch workspaces using the mouse wheel"
 msgstr "Commuta entre escriptoris amb la roda del ratolí"
 
@@ -565,11 +571,11 @@ msgstr "Commuta entre escriptoris amb la roda del ratolí"
 msgid "Separator or Spacing"
 msgstr "Separador o espaiat"
 
-#: ../plugins/separator/separator.c:277
+#: ../plugins/separator/separator.c:276
 msgid "_Draw Separator"
 msgstr "_Dibuixa Separador"
 
-#: ../plugins/separator/separator.c:286
+#: ../plugins/separator/separator.c:285
 msgid "_Expand"
 msgstr "_Expandeix"
 
@@ -595,81 +601,77 @@ msgstr "No es por registrar la safata del sistema: %s"
 msgid "System Tray"
 msgstr "Safa del sistema"
 
-#: ../plugins/tasklist/tasklist.c:406 ../plugins/tasklist/tasklist.c:477
+#: ../plugins/tasklist/tasklist.c:406 ../plugins/tasklist/tasklist.c:476
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Llistat de tasques"
 
-#: ../plugins/tasklist/tasklist.c:440
+#: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
 msgstr "Mida mínima"
 
-#: ../plugins/tasklist/tasklist.c:455
-msgid "Use all available space"
-msgstr "Usa tot l'espai disponible"
-
-#: ../plugins/tasklist/tasklist.c:464
+#: ../plugins/tasklist/tasklist.c:463
 msgid "Use flat buttons"
 msgstr "Usa botons plans"
 
-#: ../plugins/tasklist/tasklist.c:481
+#: ../plugins/tasklist/tasklist.c:480
 msgid "Show tasks from _all workspaces"
 msgstr "Mostr_a les tasques de totes les àrees de treball"
 
-#: ../plugins/tasklist/tasklist.c:491
+#: ../plugins/tasklist/tasklist.c:490
 msgid "Show application _names"
 msgstr "Mostra els _noms de les aplicacions"
 
-#: ../plugins/tasklist/tasklist.c:505
+#: ../plugins/tasklist/tasklist.c:504
 msgid "Never group tasks"
 msgstr "No agrupis mai les tasques"
 
-#: ../plugins/tasklist/tasklist.c:508
+#: ../plugins/tasklist/tasklist.c:507
 msgid "Automatically group tasks"
 msgstr "Agrupa automàticament les tasques"
 
-#: ../plugins/tasklist/tasklist.c:511
+#: ../plugins/tasklist/tasklist.c:510
 msgid "Always group tasks"
 msgstr "Agrupa sempre les tasques"
 
-#: ../plugins/windowlist/windowlist.c:229
+#: ../plugins/windowlist/windowlist.c:241
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr "Esteu segurs de voler suprimir l'espai de treball %d?"
 
-#: ../plugins/windowlist/windowlist.c:230
+#: ../plugins/windowlist/windowlist.c:242
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Esteu segurs de voler suprimir l'espai de treball '%s'?"
 
-#: ../plugins/windowlist/windowlist.c:425
+#: ../plugins/windowlist/windowlist.c:508
 #, c-format
 msgid "Workspace %d"
 msgstr "Espai de treball %d"
 
-#: ../plugins/windowlist/windowlist.c:527
-#: ../plugins/windowlist/windowlist.c:533
+#: ../plugins/windowlist/windowlist.c:620
+#: ../plugins/windowlist/windowlist.c:626
 msgid "Add workspace"
 msgstr "Afegeix espai de treball"
 
-#: ../plugins/windowlist/windowlist.c:546
+#: ../plugins/windowlist/windowlist.c:645
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Suprimeix l'espai de treball %d"
 
-#: ../plugins/windowlist/windowlist.c:547
+#: ../plugins/windowlist/windowlist.c:646
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Suprimeix l'espai de treball '%s'"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:210
+#: ../plugins/windowlist/windowlist-dialog.c:209
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Llista de finestres"
 
-#: ../plugins/windowlist/windowlist-dialog.c:148
+#: ../plugins/windowlist/windowlist-dialog.c:147
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
@@ -678,39 +680,39 @@ msgstr ""
 "aplicació demani de la vostra atenció."
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:155
+#: ../plugins/windowlist/windowlist-dialog.c:154
 msgid "Urgency Notification"
 msgstr "Notificació urgent"
 
-#: ../plugins/windowlist/windowlist-dialog.c:162
+#: ../plugins/windowlist/windowlist-dialog.c:161
 msgid "_Disabled"
 msgstr "_Desactivat"
 
-#: ../plugins/windowlist/windowlist-dialog.c:171
+#: ../plugins/windowlist/windowlist-dialog.c:170
 msgid "For _other workspaces"
 msgstr "Per els _altres espais de treball"
 
-#: ../plugins/windowlist/windowlist-dialog.c:180
+#: ../plugins/windowlist/windowlist-dialog.c:179
 msgid "For _all workspaces"
 msgstr "Per totes les àrees de treb_all"
 
-#: ../plugins/windowlist/windowlist-dialog.c:194
+#: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "_Icon button"
 msgstr "Botó d'_icones"
 
-#: ../plugins/windowlist/windowlist-dialog.c:201
+#: ../plugins/windowlist/windowlist-dialog.c:200
 msgid "A_rrow button"
 msgstr "B_otó fletxa"
 
-#: ../plugins/windowlist/windowlist-dialog.c:219
+#: ../plugins/windowlist/windowlist-dialog.c:218
 msgid "Show _windows from all workspaces"
 msgstr "Mostr_a les finestres de totes les àrees de treball"
 
-#: ../plugins/windowlist/windowlist-dialog.c:228
+#: ../plugins/windowlist/windowlist-dialog.c:227
 msgid "Show a_pplication icons"
 msgstr "Mostra les icones de les a_plicacions"
 
-#: ../plugins/windowlist/windowlist-dialog.c:237
+#: ../plugins/windowlist/windowlist-dialog.c:236
 msgid "Show wor_kspace actions"
 msgstr "_Mostra les accions dels espais de treball"
 
@@ -770,14 +772,12 @@ msgstr "Mostra totes les aplicacions en execució"
 msgid "Show list of available windows"
 msgstr "Mostra el llistat de les finestres disponibles"
 
-#: ../plugins/testplugin/testplugin.desktop.in.in.h:1
-msgid "Test Plugin"
-msgstr "Connector de proves"
-
-#: ../plugins/testplugin/testplugin.desktop.in.in.h:2
-msgid "This plugin has no purpose"
-msgstr "Aquest connector no té propòsit"
-
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Gestor de quadres Xfce4"
+
+#~ msgid "Test Plugin"
+#~ msgstr "Connector de proves"
+
+#~ msgid "This plugin has no purpose"
+#~ msgstr "Aquest connector no té propòsit"
