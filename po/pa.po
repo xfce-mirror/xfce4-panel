@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-12-19 19:30+0100\n"
-"PO-Revision-Date: 2006-12-15 22:41+0530\n"
+"PO-Revision-Date: 2006-12-20 07:20+0530\n"
 "Last-Translator: A S Alam <apbrar@gmail.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgstr "ਫਾਇਲ ਮੈਨੇਜਰ"
 
 #: ../config/launcher-9.rc.in.h:2
 msgid "Manage files and folders"
-msgstr "ਫਾਇਲਾਂ ਅਤੇ ਫੋਲਡਰ ਪ੍ਰਬੰਧ"
+msgstr "ਫਾਇਲਾਂ ਅਤੇ ਫੋਲਡਰ ਪਰਬੰਧ"
 
 #: ../config/launcher-10.rc.in.h:1
 msgid "Surf the internet"
@@ -56,7 +56,7 @@ msgstr "ਵੈੱਬ ਬਰਾਊਂਜ਼ਰ"
 #: ../libxfce4panel/xfce-panel-external-item.c:175
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr ""
+msgstr "ਇੱਕ ਆਈਟਮ ਅਚਾਨਕ ਹਟਾਈ ਗਈ: \"%s\"."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:578
 #, c-format
@@ -71,19 +71,18 @@ msgid "Xfce Panel"
 msgstr "Xfce ਪੈਨਲ"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:583
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
-msgstr ""
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "ਆਈਟਮ ਪੈਨਲ 'ਚੋਂ ਹਟਾਈ ਜਾਵੇਗੀ ਅਤੇ ਇਸ ਦੀ ਸੰਰਚਨਾ ਖਤਮ ਹੋ ਜਾਵੇਗੀ।"
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:770
 msgid "Properties"
-msgstr ""
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
 
 #. about item, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:787
 msgid "About"
-msgstr ""
+msgstr "ਇਸ ਬਾਰੇ"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:801
 msgid "Move"
@@ -104,12 +103,12 @@ msgstr "ਪਸੰਦੀਦਾ ਪੈਨਲ"
 
 #: ../panel/panel.c:708
 msgid "Add Items"
-msgstr ""
+msgstr "ਆਈਟਮ ਸ਼ਾਮਲ"
 
 #: ../panel/panel.c:724 ../plugins/actions/actions.c:280
 #: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:429
 msgid "Quit"
-msgstr ""
+msgstr "ਬੰਦ ਕਰੋ"
 
 #: ../panel/panel.c:734
 msgid "Restart"
@@ -125,20 +124,20 @@ msgstr "ਕੀ Xfce ਪੈਨਲ ਬੰਦ ਕਰਨਾ ਹੈ?"
 
 #: ../panel/panel-app.c:877
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
+msgstr "ਤੁਸੀਂ ਆਖਰੀ ਪੈਨਲ ਨਹੀਂ ਹਟਾ ਸਕਦੇ। ਕੀ ਤੁਸੀਂ ਪ੍ਰੋਗਰਾਮ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: ../panel/panel-app.c:904
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr ""
+msgstr "ਕੀ ਪੈਨਲ \"%d\" ਹਟਾਉਣਾ ਹੈ?"
 
 #: ../panel/panel-app.c:908
 msgid "The selected panel and all its items will be removed."
-msgstr ""
+msgstr "ਚੁਣਿਆ ਪੈਨਲ ਅਤੇ ਇਸ ਦੀਆਂ ਸਭ ਆਈਟਮਾਂ ਹਟਾਈਆਂ ਜਾਣਗੀਆਂ।"
 
 #: ../panel/panel-app.c:947 ../panel/panel-app.c:950
 msgid "Developer"
-msgstr ""
+msgstr "ਡੀਵੈਲਪਰ"
 
 #: ../panel/main.c:46
 #, c-format
@@ -167,6 +166,8 @@ msgid ""
 " Usage: %s [OPTIONS]\n"
 "\n"
 msgstr ""
+" ਵਰਤੋਂ: %s [OPTIONS]\n"
+"\n"
 
 #. Only translate the descriptions, not the options itself
 #: ../panel/main.c:55
@@ -182,6 +183,16 @@ msgid ""
 " -a, --add       Add new items\n"
 "\n"
 msgstr ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save configuration\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Close all panels and end the program\n"
+" -a, --add       Add new items\n"
+"\n"
 
 #: ../panel/panel-dialogs.c:184
 #, c-format
@@ -190,25 +201,25 @@ msgstr "ਮੋਡੀਊਲ \"%s\" ਖੋਲ੍ਹਿਆ ਨਹੀਂ ਜਾ ਸ�
 
 #: ../panel/panel-dialogs.c:593
 msgid "Add Items to the Panel"
-msgstr ""
+msgstr "ਪੈਨਲ 'ਚ ਆਈਟਮ ਜੋੜ੍ਹੋ"
 
 #: ../panel/panel-dialogs.c:623
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
-msgstr ""
+msgstr "ਸੂਚੀ ਤੋਂ ਪੈਨਲ 'ਚ ਆਈਟਮ ਸੁੱਟੋ ਜਾਂ ਉਨ੍ਹਾਂ ਨੂੰ ਹਟਾਉਣ ਲਈ ਸੂਚੀ 'ਚ ਵਾਪਿਸ ਸੁੱਟੋ।"
 
 #: ../panel/panel-dialogs.c:640
 msgid "Available Items"
-msgstr ""
+msgstr "ਉਪਲੱਬਧ ਆਈਟਮਾਂ"
 
 #: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1090
 msgid "Normal Width"
-msgstr ""
+msgstr "ਸਧਾਰਨ ਚੌੜਾਈ"
 
 #: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
 msgid "Full Width"
-msgstr ""
+msgstr "ਪੂਰੀ ਚੌੜਾਈ"
 
 #: ../panel/panel-dialogs.c:874 ../panel/panel-dialogs.c:1098
 msgid "Span Monitors"
@@ -216,19 +227,19 @@ msgstr "ਸਪੈਮ ਮਾਨੀਟਰ"
 
 #: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
 msgid "Left"
-msgstr ""
+msgstr "ਖੱਬੇ"
 
 #: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
 msgid "Right"
-msgstr ""
+msgstr "ਸੱਜੇ"
 
 #: ../panel/panel-dialogs.c:941 ../panel/panel-dialogs.c:1170
 msgid "Top"
-msgstr ""
+msgstr "ਉੱਤੇ"
 
 #: ../panel/panel-dialogs.c:943 ../panel/panel-dialogs.c:1172
 msgid "Bottom"
-msgstr ""
+msgstr "ਥੱਲੇ"
 
 #. position
 #: ../panel/panel-dialogs.c:971
@@ -237,15 +248,15 @@ msgstr "ਸਥਿਤੀ"
 
 #: ../panel/panel-dialogs.c:985
 msgid "Fixed Position"
-msgstr "ਸਥਿਤੀ ਸਥਿਤੀ"
+msgstr "ਸਥਿਰ ਸਥਿਤੀ"
 
 #: ../panel/panel-dialogs.c:991
 msgid "Freely Moveable"
-msgstr ""
+msgstr "ਖੁੱਲ੍ਹੀ ਹਿਲਣਯੋਗ"
 
 #: ../panel/panel-dialogs.c:1106
 msgid "Auto_hide"
-msgstr "ਆਟੋ-ਓਹਲੇ(_h)"
+msgstr "ਸਵੈ-ਓਹਲੇ(_h)"
 
 #: ../panel/panel-dialogs.c:1124
 msgid "Orientation:"
@@ -281,15 +292,15 @@ msgstr "ਦਿੱਖ"
 #. size
 #: ../panel/panel-dialogs.c:1369
 msgid "Size (pixels):"
-msgstr ""
+msgstr "ਆਕਾਰ (ਪਿਕਸਲ):"
 
 #: ../panel/panel-dialogs.c:1397
 msgid "Transparency (%):"
-msgstr ""
+msgstr "ਪਾਰਦਰਸ਼ਤਾ (%):"
 
 #: ../panel/panel-dialogs.c:1421
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "ਸਰਗਰਮ ਪੈਨਲ ਅਲਪ-ਪਾਰਦਰਸ਼ੀ ਬਣਾਓ"
 
 #: ../panel/panel-dialogs.c:1460 ../panel/panel-dialogs.c:1496
 #: ../panel/panel-dialogs.c:1521
@@ -313,7 +324,7 @@ msgstr "ਪੈਨਲ ਮੈਨੇਜਰ"
 #: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
 #: ../plugins/actions/actions.c:430
 msgid "Lock screen"
-msgstr "ਸਕਰੀਲ ਲਾਕ"
+msgstr "ਸਕਰੀਨ ਲਾਕ"
 
 #: ../plugins/actions/actions.c:396
 msgid "Panel Actions"
@@ -346,7 +357,7 @@ msgstr "ਘੜੀ"
 #. Keep order in sync with XfceClockMode
 #: ../plugins/clock/clock.c:479
 msgid "Analog"
-msgstr "ਐਨਾਲੌਗ"
+msgstr "ਐਨਾਲਾਗ"
 
 #: ../plugins/clock/clock.c:480
 msgid "Digital"
@@ -354,7 +365,7 @@ msgstr "ਡਿਜ਼ੀਟਲ"
 
 #: ../plugins/clock/clock.c:481
 msgid "LED"
-msgstr "ਐਲਈਡੀ"
+msgstr "LED"
 
 #: ../plugins/clock/clock.c:486 ../plugins/systray/systray.c:399
 msgid "Show _frame"
@@ -362,7 +373,7 @@ msgstr "ਫਰੇਮ ਵੇਖਾਓ(_f)"
 
 #: ../plugins/clock/clock.c:493
 msgid "Clock Options"
-msgstr ""
+msgstr "ਘੜੀ ਚੋਣਾਂ"
 
 #: ../plugins/clock/clock.c:501
 msgid "Use 24-_hour clock"
@@ -374,12 +385,12 @@ msgstr "AM/PM ਵੇਖਾਓ"
 
 #: ../plugins/clock/clock.c:515
 msgid "Display seconds"
-msgstr ""
+msgstr "ਸਕਿੰਟ ਵੇਖਾਓ"
 
 #: ../plugins/iconbox/iconbox.c:837
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr ""
+msgstr "ਆਈਕਾਨ ਬਕਸਾ"
 
 #: ../plugins/iconbox/iconbox.c:859
 msgid "Only show minimized applications"
@@ -391,7 +402,7 @@ msgstr "ਸਭ ਵਰਕਸਪੇਸਾਂ ਦੇ ਕਾਰਜ ਵੇਖਾਓ"
 
 #: ../plugins/iconbox/iconbox.c:876 ../plugins/tasklist/tasklist.c:454
 msgid "Use all available space"
-msgstr ""
+msgstr "ਸਭ ਉਪਲੱਬਧ ਥਾਂ ਵਰਤੋਂ"
 
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
@@ -401,16 +412,16 @@ msgstr "\"%s\" ਨੂੰ ਚਲਾਇਆ ਨਹੀਂ ਜਾ ਸਕਿਆ"
 #: ../plugins/launcher/launcher.c:398
 #, c-format
 msgid "Error in command \"%s\""
-msgstr ""
+msgstr "ਕਮਾਂਡ \"%s\" 'ਚ ਗਲਤੀ"
 
 #: ../plugins/launcher/launcher.c:675 ../plugins/launcher/launcher.c:1303
 #: ../plugins/launcher/launcher-dialog.c:1167
 msgid "New Item"
-msgstr "ਨਵੀਂ ਇਕਾਈ"
+msgstr "ਨਵੀਂ ਆਈਟਮ"
 
 #: ../plugins/launcher/launcher.c:1304
 msgid "This item has not yet been configured"
-msgstr "ਇਹ ਇਕਾਈ ਹਾਲੇ ਸੰਰਚਿਤ ਨਹੀਂ ਹੈ"
+msgstr "ਇਹ ਆਈਟਮ ਹਾਲੇ ਸੰਰਚਿਤ ਨਹੀਂ ਹੈ"
 
 #: ../plugins/launcher/launcher-dialog.c:101
 msgid "Default"
@@ -418,11 +429,11 @@ msgstr "ਮੂਲ"
 
 #: ../plugins/launcher/launcher-dialog.c:103
 msgid "File management"
-msgstr "ਫਾਇਲ ਪ੍ਰਬੰਧਨ"
+msgstr "ਫਾਇਲ ਮੈਨੇਜ਼ਮਿੰਟ"
 
 #: ../plugins/launcher/launcher-dialog.c:104
 msgid "Utilities"
-msgstr "ਉਪਯੋਗਤਾ"
+msgstr "ਸਹੂਲਤਾਂ"
 
 #: ../plugins/launcher/launcher-dialog.c:105
 msgid "Games"
@@ -430,11 +441,11 @@ msgstr "ਖੇਡਾਂ"
 
 #: ../plugins/launcher/launcher-dialog.c:106
 msgid "Help browser"
-msgstr "ਸਹਾਇਤਾ ਝਲਕਾਰਾ"
+msgstr "ਸਹਾਇਤਾ ਬਰਾਊਜ਼ਰ"
 
 #: ../plugins/launcher/launcher-dialog.c:107
 msgid "Multimedia"
-msgstr "ਗਾਉਣ ਵਜਾਉਣ"
+msgstr "ਮਲਟੀਮੀਡਿਆ"
 
 #: ../plugins/launcher/launcher-dialog.c:108
 msgid "Network"
@@ -446,7 +457,7 @@ msgstr "ਚਿੱਤਰਕਾਰੀ"
 
 #: ../plugins/launcher/launcher-dialog.c:110
 msgid "Printer"
-msgstr "ਪ੍ਰਿੰਟਰ"
+msgstr "ਪਰਿੰਟਰ"
 
 #: ../plugins/launcher/launcher-dialog.c:111
 msgid "Productivity"
@@ -454,7 +465,7 @@ msgstr "ਉਤਾਪਦਨ"
 
 #: ../plugins/launcher/launcher-dialog.c:112
 msgid "Office"
-msgstr ""
+msgstr "ਦਫ਼ਤਰ"
 
 #: ../plugins/launcher/launcher-dialog.c:113
 msgid "Sound"
@@ -466,7 +477,7 @@ msgstr "ਟਰਮੀਨਲ"
 
 #: ../plugins/launcher/launcher-dialog.c:115
 msgid "Development"
-msgstr ""
+msgstr "ਡੀਵੈਲਪਮਿੰਟ"
 
 #: ../plugins/launcher/launcher-dialog.c:413
 msgid "Select image file"
@@ -486,7 +497,7 @@ msgstr "ਵੇਰਵਾ"
 
 #: ../plugins/launcher/launcher-dialog.c:555
 msgid "Other..."
-msgstr ""
+msgstr "ਹੋਰ..."
 
 #: ../plugins/launcher/launcher-dialog.c:653
 msgid "Command"
@@ -494,7 +505,7 @@ msgstr "ਕਮਾਂਡ"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Run in _terminal"
-msgstr "_ਟਰਮੀਨਲ ਵਿੱਚ ਚਲਾਉ"
+msgstr "ਟਰਮੀਨਲ 'ਚ ਚਲਾਓ(_t)"
 
 #: ../plugins/launcher/launcher-dialog.c:707
 msgid "Use _startup notification"
@@ -505,6 +516,8 @@ msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
+"ਪੈਨਲ ਉੱਤੇ ਸੂਚੀ ਵਿੱਚ ਪਹਿਲੀਂ ਆਈਟਮ ਵੇਖਾਈ ਜਾਂਦੀ ਹੈ। ਹੋਰ ਆਈਟਮਾਂ ਇੱਕ "
+"ਮੇਨੂ ਵਿੱਚ ਦਿੱਸਣਗੀਆਂ।"
 
 #: ../plugins/launcher/launcher-dialog.c:1332
 msgid "Program Launcher"
@@ -519,6 +532,10 @@ msgid ""
 "\n"
 "For help using Zero Install, see http://0install.net"
 msgstr ""
+"0launch ਚਲਾਉਣ ਲਈ ਫੇਲ੍ਹ:\n"
+"%s\n"
+"\n"
+"Zero ਇੰਸਟਾਲ ਦੀ ਵਰਤੋਂ ਬਾਰੇ ਸਹਾਇਤਾ ਲਈ, http://0install.net ਵੇਖੋ।"
 
 #: ../plugins/launcher/launcher-dialog.c:1486
 msgid ""
@@ -526,6 +543,8 @@ msgid ""
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
+"ਜ਼ੀਰੋ ਇੰਸਟਾਲ GUI ਮੁਕੰਮਲ ਹੋ ਗਿਆ ਹੈ, ਪਰ ਲਾਂਚਰ ਡਾਈਲਾਗ ਕਿਤੇ ਗੁੰਮ ਹੋ ਗਿਆ ਹੈ। "
+"ਲਾਂਚਰ ਨਹੀਂ ਜੋੜਿਆ ਜਾ ਰਿਹਾ ਹੈ (ਪਰ ਕੋਈ ਡਾਊਨਲੋਡ ਕੀਤੀ ਫਾਇਲ ਨਹੀਂ ਗੁਆਚੀ ਹੈ)।"
 
 #: ../plugins/launcher/launcher-dialog.c:1899
 msgid "Select file"
@@ -545,28 +564,28 @@ msgstr "ਕਾਲਮਾਂ ਦੀ ਗਿਣਤੀ:"
 
 #: ../plugins/pager/pager.c:394
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "ਮਾਊਸ ਵੀਲ ਨਾਲ ਵਰਕਸਪੇਸ ਬਦਲੋ"
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator or Spacing"
-msgstr "ਵੱਖਰੇਵਾਂ ਜਾਂ ਖਾਲੀ ਥਾਂ"
+msgstr "ਸੈਪਰੇਟਰ ਜਾਂ ਸਪੇਸ"
 
 #: ../plugins/separator/separator.c:276
 msgid "_Draw Separator"
-msgstr ""
+msgstr "ਸੈਪਰੇਟਰ ਬਣਾਓ(_D)"
 
 #: ../plugins/separator/separator.c:285
 msgid "_Expand"
-msgstr ""
+msgstr "ਫੈਲਾਓ(_E)"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
-msgstr ""
+msgstr "ਲੁਕਵੀਂ ਵਿੰਡੋ ਮੁੜ-ਪ੍ਰਾਪਤ ਕਰੋ"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
-msgstr ""
+msgstr "ਵਿੰਡੋ ਓਹਲੇ ਕਰੋ ਅਤੇ ਝਰੋਖਾ ਵੇਖਾਓ"
 
 #: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
@@ -575,12 +594,12 @@ msgstr "ਇਸ ਟਰੇ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਸਿਸਟਮ 
 #: ../plugins/systray/systray.c:90
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "ਸਿਸਟਮ ਟਰੇ ਰਜਿਸਟਰ ਕਰਨ ਵਿੱਚ ਅਯੋਗਃ %s"
+msgstr "ਸਿਸਟਮ ਟਰੇ ਰਜਿਸਟਰ ਕਰਨ ਵਿੱਚ ਅਯੋਗ: %s"
 
 #: ../plugins/systray/systray.c:378
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr ""
+msgstr "ਸਿਸਟਮ ਟਰੇ"
 
 #: ../plugins/tasklist/tasklist.c:406 ../plugins/tasklist/tasklist.c:476
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
@@ -589,19 +608,19 @@ msgstr "ਟਾਸਕ ਲਿਸਟ"
 
 #: ../plugins/tasklist/tasklist.c:439
 msgid "Minimum Width:"
-msgstr ""
+msgstr "ਘੱਟੋ-ਘੱਟ ਚੌੜਾਈ:"
 
 #: ../plugins/tasklist/tasklist.c:463
 msgid "Use flat buttons"
-msgstr ""
+msgstr "ਸਮਤਲ ਬਟਨ ਵਰਤੋਂ"
 
 #: ../plugins/tasklist/tasklist.c:480
 msgid "Show tasks from _all workspaces"
-msgstr "ਸਾਰੇ ਵਰਕਸਪੇਸਾਂ ਵਿੱਚ ਕਾਰਜ ਵਿਖਾਓ"
+msgstr "ਸਭ ਵਰਕਸਪੇਸਾਂ ਵਿੱਚ ਕਾਰਜ ਵੇਖਾਓ(_A)"
 
 #: ../plugins/tasklist/tasklist.c:490
 msgid "Show application _names"
-msgstr "ਕਾਰਜ _ਨਾਂ ਵਿਖਾਓ"
+msgstr "ਕਾਰਜ ਨਾਂ ਵੇਖਾਓ(_N)"
 
 #: ../plugins/tasklist/tasklist.c:504
 msgid "Never group tasks"
@@ -618,12 +637,12 @@ msgstr "ਹਮੇਸ਼ਾਂ ਗਰੁੱਪ ਟਾਸਕ"
 #: ../plugins/windowlist/windowlist.c:241
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "ਕੀ ਤੁਸੀਂ ਵਰਕਸਪੇਸ %d ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: ../plugins/windowlist/windowlist.c:242
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "ਕੀ ਤੁਸੀਂ ਵਰਕਸਪੇਸ '%s' ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
 #: ../plugins/windowlist/windowlist.c:508
 #, c-format
@@ -633,43 +652,45 @@ msgstr "ਵਰਕਸਪੇਸ %d"
 #: ../plugins/windowlist/windowlist.c:620
 #: ../plugins/windowlist/windowlist.c:626
 msgid "Add workspace"
-msgstr ""
+msgstr "ਵਰਕਸਪੇਸ ਸ਼ਾਮਲ"
 
 #: ../plugins/windowlist/windowlist.c:645
 #, c-format
 msgid "Remove Workspace %d"
-msgstr ""
+msgstr "ਵਰਕਸਪੇਸ %d ਹਟਾਓ"
 
 #: ../plugins/windowlist/windowlist.c:646
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr ""
+msgstr "ਵਰਕਸਪੇਸ '%s' ਹਟਾਓ"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
 #: ../plugins/windowlist/windowlist-dialog.c:209
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr ""
+msgstr "ਵਿੰਡੋ ਸੂਚੀ"
 
 #: ../plugins/windowlist/windowlist-dialog.c:147
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"<i>ਜ਼ਰੂਰੀ ਸੂਚਨਾ</i> ਬਟਨ ਨੂੰ ਝਪਕਾਏਗੀ, ਜਦੋਂ ਇੱਕ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਧਿਆਨ ਦੇਣ ਦੀ ਲੋੜ "
+"ਹੋਵੇਗੀ।"
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:154
 msgid "Urgency Notification"
-msgstr "ਲਾਜ਼ਮੀ ਸੂਚਨਾ"
+msgstr "ਜ਼ਰੂਰੀ ਸੂਚਨਾ"
 
 #: ../plugins/windowlist/windowlist-dialog.c:161
 msgid "_Disabled"
-msgstr ""
+msgstr "ਆਯੋਗ ਕੀਤਾ(_D)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:170
 msgid "For _other workspaces"
-msgstr ""
+msgstr "ਹੋਰ ਵਰਕਸਪੇਸਾਂ ਲਈ(_o)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:179
 msgid "For _all workspaces"
@@ -677,11 +698,11 @@ msgstr "ਸਭ ਵਰਕਸਪੇਸਾਂ ਲਈ(_a)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:193
 msgid "_Icon button"
-msgstr ""
+msgstr "ਆਈਕਾਨ ਬਟਨ(_I)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:200
 msgid "A_rrow button"
-msgstr ""
+msgstr "ਤੀਰ ਬਟਨ(_r)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:218
 msgid "Show _windows from all workspaces"
@@ -693,7 +714,7 @@ msgstr "ਕਾਰਜ ਆਈਕਾਨ ਵੇਖਾਓ(_p)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:236
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "ਵਰਕਸਪੇਸ ਕਾਰਵਾਈਆਂ ਵੇਖਾਓ(_k)"
 
 #: ../mcs-plugin/plugin.c:46
 msgid "Panel"
@@ -701,7 +722,7 @@ msgstr "ਪੈਨਲ"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "ਕਾਰਵਾਈ ਬਟਨ"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -709,7 +730,7 @@ msgstr "ਲਾਗਆਉਟ ਜਾਂ ਸਕਰੀਨ ਲਾਕ"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr ""
+msgstr "ਇਹ ਕਿਹੜਾ ਸਮਾਂ ਹੈ?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
@@ -721,23 +742,23 @@ msgstr "ਸ਼ੁਰੂਆਤੀ"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "ਚੋਣਵੇਂ ਮੇਨੂ ਨਾਲ ਪ੍ਰੋਗਰਾਮ ਲਾਂਚਰ"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr ""
+msgstr "ਸਭ ਵੁਰਚੁਅਲ ਡਿਸਕਟਾਪਾਂ ਦੀ ਸਾਂਝੀ ਝਲਕ"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr ""
+msgstr "ਪੈਨਲ ਆਈਟਮਾਂ 'ਚ ਇੱਕ ਸਪੇਸ ਜਾਂ ਇੱਕ ਲਾਈਨ ਸ਼ਾਮਲ ਕਰੋ"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr ""
+msgstr "ਡਿਸਕਟਾਪ ਵੇਖਾਓ"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "ਡਿਸਕਟਾਪ ਵੇਖਾਓ/ਓਹਲੇ"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
@@ -749,11 +770,9 @@ msgstr "ਸਭ ਚੱਲਦੇ ਕਾਰਜ ਵੇਖਾਓ"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr ""
+msgstr "ਉਪਲੱਬਧ ਵਿੰਡੋ ਦੀ ਸੂਚੀ ਵੇਖਾਓ"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 ਪੈਨਲ ਮੈਨੇਜਰ"
 
-#~ msgid "Test Plugin"
-#~ msgstr "ਟੈਸਟ ਪਲੱਗਇਨ"
