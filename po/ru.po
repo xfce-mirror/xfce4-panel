@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.3.99.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-12-19 19:30+0100\n"
-"PO-Revision-Date: 2006-04-23 15:25+0600\n"
+"PO-Revision-Date: 2006-09-24 20:50+0600\n"
 "Last-Translator: Andrey Fedoseev <andrey.fedoseev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -206,7 +206,7 @@ msgstr "Не удалось открыть модуль \"%s\""
 
 #: ../panel/panel-dialogs.c:593
 msgid "Add Items to the Panel"
-msgstr ""
+msgstr "Добавить элементы на панель"
 
 #: ../panel/panel-dialogs.c:623
 msgid ""
@@ -263,7 +263,7 @@ msgstr "Свободно перемещаемая"
 
 #: ../panel/panel-dialogs.c:1106
 msgid "Auto_hide"
-msgstr "Автоматически скрывать"
+msgstr "_Автоматически скрывать"
 
 #: ../panel/panel-dialogs.c:1124
 msgid "Orientation:"
@@ -376,7 +376,7 @@ msgstr "ЖК"
 
 #: ../plugins/clock/clock.c:486 ../plugins/systray/systray.c:399
 msgid "Show _frame"
-msgstr "_Отображать рамку"
+msgstr "_Показывать рамку"
 
 #: ../plugins/clock/clock.c:493
 msgid "Clock Options"
@@ -401,12 +401,11 @@ msgstr "Переключатель окон"
 
 #: ../plugins/iconbox/iconbox.c:859
 msgid "Only show minimized applications"
-msgstr "Отображать только свёрнутые окна"
+msgstr "Показывать только свёрнутые окна"
 
 #: ../plugins/iconbox/iconbox.c:868
-#, fuzzy
 msgid "Show applications of all workspaces"
-msgstr "Показывать _окна со всех рабочих мест"
+msgstr "Показывать приложения со всех рабочих мест"
 
 #: ../plugins/iconbox/iconbox.c:876 ../plugins/tasklist/tasklist.c:454
 msgid "Use all available space"
@@ -473,7 +472,7 @@ msgstr "Производительность"
 
 #: ../plugins/launcher/launcher-dialog.c:112
 msgid "Office"
-msgstr ""
+msgstr "Оффис"
 
 #: ../plugins/launcher/launcher-dialog.c:113
 msgid "Sound"
@@ -484,9 +483,8 @@ msgid "Terminal"
 msgstr "Терминал"
 
 #: ../plugins/launcher/launcher-dialog.c:115
-#, fuzzy
 msgid "Development"
-msgstr "Разработчик"
+msgstr "Разработка"
 
 #: ../plugins/launcher/launcher-dialog.c:413
 msgid "Select image file"
@@ -525,7 +523,7 @@ msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
-"Первый элемент списка будет отображен на панели. Остальные элементы будут "
+"Первый элемент списка будет отображён на панели. Остальные элементы будут "
 "доступны через меню."
 
 #: ../plugins/launcher/launcher-dialog.c:1332
@@ -541,6 +539,10 @@ msgid ""
 "\n"
 "For help using Zero Install, see http://0install.net"
 msgstr ""
+"Не удалось запустить 0launch:\n"
+"%s\n"
+"\n"
+"За справкой по использованию Zero Install, обратитесь на http://0install.net"
 
 #: ../plugins/launcher/launcher-dialog.c:1486
 msgid ""
@@ -567,7 +569,7 @@ msgstr "Число столбцов:"
 
 #: ../plugins/pager/pager.c:394
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Переключать рабочие места с помощью колёсика мыши"
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -615,7 +617,7 @@ msgstr "Минимальная ширина:"
 
 #: ../plugins/tasklist/tasklist.c:463
 msgid "Use flat buttons"
-msgstr ""
+msgstr "Плоские кнопки"
 
 #: ../plugins/tasklist/tasklist.c:480
 msgid "Show tasks from _all workspaces"
@@ -679,11 +681,13 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"<i>Уведомление о срочности:</i> кнопка будет мигать, когда приложение будет  "
+"нуждаться в вашем внимании."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:154
 msgid "Urgency Notification"
-msgstr ""
+msgstr "Уведомление о срочности"
 
 #: ../plugins/windowlist/windowlist-dialog.c:161
 msgid "_Disabled"
@@ -782,6 +786,3 @@ msgstr "Диспетчер панелей Xfce 4"
 
 #~ msgid "This plugin has no purpose"
 #~ msgstr "Этот модуль ни для чего не предназначен"
-
-#~ msgid "Size"
-#~ msgstr "Размер"
