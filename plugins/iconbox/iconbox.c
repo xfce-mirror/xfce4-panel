@@ -31,6 +31,7 @@
 #include <libxfcegui4/netk-window-action-menu.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/xfce-hvbox.h>
 
 #define N_ICONBOX_CONNECTIONS  4
 #define N_ICON_CONNECTIONS     4
@@ -44,7 +45,6 @@ typedef struct
     int screen_changed_id;
     GtkWidget *box;
     GtkWidget *handle;
-    GtkWidget *handle2;
     GtkWidget *iconbox;
 
     GSList *iconlist;
@@ -518,49 +518,13 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (iconbox_construct);
 
 static void
 iconbox_orientation_changed (XfcePanelPlugin *plugin, 
-                              GtkOrientation orientation, 
-                              Iconbox *iconbox)
+                             GtkOrientation orientation, 
+                             Iconbox *iconbox)
 {
-    GtkWidget *box;
-    GList *children, *l;
-
-    /* iconbox */
-    box = (orientation == GTK_ORIENTATION_HORIZONTAL) ?
-            gtk_hbox_new (TRUE, 0) : gtk_vbox_new (TRUE, 0);
-    gtk_container_set_reallocate_redraws (GTK_CONTAINER (box), TRUE);
-    gtk_widget_show (box);
-
-    children = gtk_container_get_children (GTK_CONTAINER (iconbox->iconbox));
-
-    for (l = children; l != NULL; l = l->next)
-    {
-        gtk_widget_reparent (GTK_WIDGET (l->data), box);
-    }
-    
-    g_list_free (children);
-
-    iconbox->iconbox = box;
-    
-    box = (orientation == GTK_ORIENTATION_HORIZONTAL) ?
-            gtk_hbox_new (FALSE, 0) : gtk_vbox_new (FALSE, 0);
-    gtk_widget_show (box);
-    
-    gtk_widget_reparent (iconbox->handle, box);
-    gtk_box_set_child_packing (GTK_BOX (box), iconbox->handle,
-                               FALSE, FALSE, 0, GTK_PACK_START);
-    
-    gtk_box_pack_start (GTK_BOX (box), iconbox->iconbox, FALSE, FALSE, 0);
-    
-    gtk_widget_reparent (iconbox->handle2, box);
-    gtk_box_set_child_packing (GTK_BOX (box), iconbox->handle2,
-                               FALSE, FALSE, 0, GTK_PACK_START);
-    
-    gtk_widget_destroy (iconbox->box);
-    iconbox->box = box;
-    gtk_container_add (GTK_CONTAINER (plugin), box);
+    xfce_hvbox_set_orientation (XFCE_HVBOX(iconbox->box), orientation);
+    xfce_hvbox_set_orientation (XFCE_HVBOX(iconbox->iconbox), orientation);
 
     gtk_widget_queue_draw (iconbox->handle);
-    gtk_widget_queue_draw (iconbox->handle2);
 }
 
 static gboolean 
@@ -665,17 +629,33 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Iconbox *iconbox)
     {
         GtkAllocation *allocation = &(widget->allocation);
         int x, y, w, h;
+        gboolean horizontal;
 
-        x = allocation->x + widget->style->xthickness;
-        y = allocation->y + widget->style->ythickness;
-        w = allocation->width - 2 * widget->style->xthickness;
-        h = allocation->height - 2 * widget->style->ythickness;
+        horizontal = (xfce_panel_plugin_get_orientation (iconbox->plugin) 
+                      == GTK_ORIENTATION_HORIZONTAL);
 
-        gtk_paint_box (widget->style, widget->window, 
-                       GTK_WIDGET_STATE (widget),
-                       GTK_SHADOW_OUT,
-                       &(ev->area), widget, "xfce-panel",
-                       x, y, w, h);        
+        x = allocation->x;
+        y = allocation->y;
+        w = allocation->width;
+        h = allocation->height;
+        
+        if (horizontal)
+        {
+            y += widget->style->ythickness;
+            h -= 2 * widget->style->ythickness;
+        }
+        else
+        {
+            x += widget->style->xthickness;
+            w -= 2 * widget->style->xthickness;
+        }
+
+        gtk_paint_handle (widget->style, widget->window,
+                          GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE, 
+                          &(ev->area), widget, "handlebox",
+                          x, y, w, h,
+                          horizontal ? GTK_ORIENTATION_VERTICAL :
+                                       GTK_ORIENTATION_HORIZONTAL);
 
         return TRUE;
     }
@@ -709,15 +689,14 @@ iconbox_construct (XfcePanelPlugin *plugin)
 
     xfce_panel_plugin_set_expand (plugin, iconbox->expand);
     
-    iconbox->box = (xfce_panel_plugin_get_orientation (plugin) == 
-                        GTK_ORIENTATION_HORIZONTAL) ?
-                    gtk_hbox_new (FALSE, 0) : gtk_vbox_new (FALSE, 0);
+    iconbox->box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), 
+                                   FALSE, 0);
     gtk_container_set_reallocate_redraws (GTK_CONTAINER (iconbox->box), TRUE);
     gtk_widget_show (iconbox->box);
     gtk_container_add (GTK_CONTAINER (plugin), iconbox->box);
 
     iconbox->handle = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_set_size_request (iconbox->handle, 6, 6);
+    gtk_widget_set_size_request (iconbox->handle, 8, 8);
     gtk_widget_show (iconbox->handle);
     gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->handle, 
                         FALSE, FALSE, 0);
@@ -727,23 +706,11 @@ iconbox_construct (XfcePanelPlugin *plugin)
     g_signal_connect (iconbox->handle, "expose-event", 
                       G_CALLBACK (handle_expose), iconbox);
     
-    iconbox->iconbox = (xfce_panel_plugin_get_orientation (plugin) == 
-                        GTK_ORIENTATION_HORIZONTAL) ?
-                       gtk_hbox_new (TRUE, 0) : gtk_vbox_new (TRUE, 0);
+    iconbox->iconbox = 
+        xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), FALSE, 0);
     gtk_widget_show (iconbox->iconbox);
     gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->iconbox, 
                         FALSE, FALSE, 0);
-    
-    iconbox->handle2 = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_set_size_request (iconbox->handle2, 6, 6);
-    gtk_widget_show (iconbox->handle2);
-    gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->handle2, 
-                        FALSE, FALSE, 0);
-
-    xfce_panel_plugin_add_action_widget (plugin, iconbox->handle2);
-
-    g_signal_connect (iconbox->handle2, "expose-event", 
-                      G_CALLBACK (handle_expose), iconbox);
     
     iconbox->icon_tooltips = gtk_tooltips_new ();
     g_object_ref (G_OBJECT (iconbox->icon_tooltips));

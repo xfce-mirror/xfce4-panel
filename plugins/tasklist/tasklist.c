@@ -28,6 +28,7 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4panel/xfce-hvbox.h>
 
 typedef struct
 {
@@ -35,7 +36,6 @@ typedef struct
 
     GtkWidget *box;
     GtkWidget *handle;
-    GtkWidget *handle2;
     GtkWidget *list;
 
     int width;
@@ -72,28 +72,9 @@ tasklist_orientation_changed (XfcePanelPlugin *plugin,
                               GtkOrientation orientation, 
                               Tasklist *tasklist)
 {
-    GtkWidget *box;
-
-    box = (orientation == GTK_ORIENTATION_HORIZONTAL) ?
-            gtk_hbox_new (FALSE, 0) : gtk_vbox_new (FALSE, 0);
-    gtk_container_set_reallocate_redraws (GTK_CONTAINER (box), TRUE);
-    gtk_widget_show (box);
-
-    gtk_widget_reparent (tasklist->handle, box);
-    gtk_box_set_child_packing (GTK_BOX (box), tasklist->handle,
-                               FALSE, FALSE, 0, GTK_PACK_START);
-    gtk_widget_reparent (tasklist->list, box);
-    gtk_widget_reparent (tasklist->handle2, box);
-    gtk_box_set_child_packing (GTK_BOX (box), tasklist->handle2,
-                               FALSE, FALSE, 0, GTK_PACK_START);
-
-    gtk_widget_destroy (tasklist->box);
-    tasklist->box = box;
-    
-    gtk_container_add (GTK_CONTAINER (plugin), box);
+    xfce_hvbox_set_orientation (XFCE_HVBOX (tasklist->box), orientation);
 
     gtk_widget_queue_draw (tasklist->handle);
-    gtk_widget_queue_draw (tasklist->handle2);
 }
 
 static gboolean 
@@ -213,17 +194,33 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Tasklist *tasklist)
     {
         GtkAllocation *allocation = &(widget->allocation);
         int x, y, w, h;
+        gboolean horizontal;
 
-        x = allocation->x + widget->style->xthickness;
-        y = allocation->y + widget->style->ythickness;
-        w = allocation->width - 2 * widget->style->xthickness;
-        h = allocation->height - 2 * widget->style->ythickness;
+        horizontal = (xfce_panel_plugin_get_orientation (tasklist->plugin) 
+                      == GTK_ORIENTATION_HORIZONTAL);
 
-        gtk_paint_box (widget->style, widget->window, 
-                       GTK_WIDGET_STATE (widget),
-                       GTK_SHADOW_OUT,
-                       &(ev->area), widget, "xfce-panel",
-                       x, y, w, h);        
+        x = allocation->x;
+        y = allocation->y;
+        w = allocation->width;
+        h = allocation->height;
+        
+        if (horizontal)
+        {
+            y += widget->style->ythickness;
+            h -= 2 * widget->style->ythickness;
+        }
+        else
+        {
+            x += widget->style->xthickness;
+            w -= 2 * widget->style->xthickness;
+        }
+
+        gtk_paint_handle (widget->style, widget->window,
+                          GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE, 
+                          &(ev->area), widget, "handlebox",
+                          x, y, w, h,
+                          horizontal ? GTK_ORIENTATION_VERTICAL :
+                                       GTK_ORIENTATION_HORIZONTAL);
 
         return TRUE;
     }
@@ -271,15 +268,14 @@ tasklist_construct (XfcePanelPlugin *plugin)
 
     xfce_panel_plugin_set_expand (plugin, tasklist->expand);
     
-    tasklist->box = (xfce_panel_plugin_get_orientation (plugin) == 
-                        GTK_ORIENTATION_HORIZONTAL) ?
-                    gtk_hbox_new (FALSE, 0) : gtk_vbox_new (FALSE, 0);
+    tasklist->box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), 
+                                    FALSE, 0);
     gtk_container_set_reallocate_redraws (GTK_CONTAINER (tasklist->box), TRUE);
     gtk_widget_show (tasklist->box);
     gtk_container_add (GTK_CONTAINER (plugin), tasklist->box);
 
     tasklist->handle = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_set_size_request (tasklist->handle, 6, 6);
+    gtk_widget_set_size_request (tasklist->handle, 8, 8);
     gtk_widget_show (tasklist->handle);
     gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->handle, 
                         FALSE, FALSE, 0);
@@ -296,17 +292,6 @@ tasklist_construct (XfcePanelPlugin *plugin)
     gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->list, 
                         TRUE, TRUE, 0);
             
-    tasklist->handle2 = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_set_size_request (tasklist->handle2, 6, 6);
-    gtk_widget_show (tasklist->handle2);
-    gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->handle2, 
-                        FALSE, FALSE, 0);
-
-    xfce_panel_plugin_add_action_widget (plugin, tasklist->handle2);
-
-    g_signal_connect (tasklist->handle2, "expose-event", 
-                      G_CALLBACK (handle_expose), tasklist);
-
     netk_tasklist_set_include_all_workspaces (NETK_TASKLIST (tasklist->list), 
                                               tasklist->all_workspaces);
 
