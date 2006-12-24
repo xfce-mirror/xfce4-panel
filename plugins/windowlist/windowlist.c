@@ -469,7 +469,6 @@ menulist_popup_menu (Windowlist * wl,
 {
     GtkWidget *menu, *mi, *icon;
     NetkWindow *window;
-    NetkWindowState state;
     NetkWorkspace *netk_workspace, *active_workspace, *window_workspace;
     gchar *ws_label, *rm_label;
     gint size, i, wscount;
@@ -541,9 +540,6 @@ menulist_popup_menu (Windowlist * wl,
 		netk_window_is_skip_tasklist (window))
 		    continue;
 	    
-	    /* Get Workspace state */
-	    state = netk_window_get_state (window);
-	    
 	    /* Create menu item */
 	    mi = menulist_menu_item (window,
 				     wl,
@@ -562,20 +558,22 @@ menulist_popup_menu (Windowlist * wl,
 
 	    /* Apply some styles for windows on !current workspace and 
              * if they are urgent */
-	    if(state & NETK_WINDOW_STATE_URGENT && 
-               netk_workspace == active_workspace)
-	    {
-		gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
-			bold);
-	    }
-	    else if (state & NETK_WINDOW_STATE_URGENT)
-	    {
-		gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
-                        GTK_STATE_NORMAL,
-                        &(menu->style->fg[GTK_STATE_INSENSITIVE]));
-		gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
-			bold);
-	    }
+	    if (netk_window_or_transient_demands_attention (window)) 
+            {
+                if (netk_workspace == active_workspace)
+                {
+                    gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
+                                            bold);
+                }
+                else
+                {
+                    gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
+                             GTK_STATE_NORMAL,
+                             &(menu->style->fg[GTK_STATE_INSENSITIVE]));
+                    gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
+                                            bold);
+                }
+            }
 	    else if (netk_workspace != active_workspace)
             {
                 gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
@@ -709,13 +707,9 @@ static gboolean
 windowlist_search_urgent (gpointer data)
 {
     Windowlist * wl = (Windowlist *) data;
-    
     NetkWindow *window;
-    NetkWindowState state;
     NetkWorkspace *active_workspace, *window_workspace;
-    
     gboolean blink = FALSE;
-    
     GList *windows, *li;
     
     windows = netk_screen_get_windows_stacked (wl->screen);
@@ -739,11 +733,7 @@ windowlist_search_urgent (gpointer data)
 	    netk_window_is_skip_tasklist (window))
 		continue;
 	
-	/* Get window state */
-	state = netk_window_get_state (window);
-	
-	/* Check if window is urgent */
-	if(G_UNLIKELY (state & NETK_WINDOW_STATE_URGENT))
+        if (netk_window_or_transient_demands_attention (window)) 
 	    blink = TRUE;
     }
     
