@@ -35,6 +35,7 @@
 
 #define N_ICONBOX_CONNECTIONS  4
 #define N_ICON_CONNECTIONS     4
+#define URGENT_TIMEOUT         500
 
 typedef struct
 {
@@ -69,6 +70,7 @@ typedef struct
     GtkWidget *button;
     GtkWidget *image;
     gboolean was_minimized;
+    guint urgent_id;
 }
 Icon;
 
@@ -113,8 +115,10 @@ update_visibility (Icon *icon, NetkWorkspace *optional_active_ws)
                 (netk_window_get_screen (icon->window));
     }
     
-    if (icon->ib->all_workspaces || netk_window_is_sticky (icon->window) ||
-        ws == netk_window_get_workspace (icon->window))
+    if (icon->ib->all_workspaces 
+        || netk_window_is_sticky (icon->window) 
+        || ws == netk_window_get_workspace (icon->window) 
+        || netk_window_or_transient_demands_attention (icon->window))
     {
         gtk_widget_show (icon->button);
     }
@@ -185,6 +189,75 @@ icon_update_image (Icon *icon)
     update_visibility (icon, NULL);
 }
 
+/* blinking */
+static void
+update_blink (Icon *icon, gboolean blink)
+{
+    GtkStyle   *style;
+    GtkRcStyle *mod;
+    GdkColor    c;
+
+    style = gtk_widget_get_style (icon->button);
+    mod   = gtk_widget_get_modifier_style (icon->button);
+    c     = style->bg[GTK_STATE_SELECTED];
+
+    if (blink)
+    {
+	gtk_button_set_relief (GTK_BUTTON (icon->button), GTK_RELIEF_NORMAL);
+	
+	if(mod->color_flags[GTK_STATE_NORMAL] & GTK_RC_BG)
+        {
+            mod->color_flags[GTK_STATE_NORMAL] &= ~(GTK_RC_BG);
+            gtk_widget_modify_style(icon->button, mod);
+        }
+        else
+        {
+            mod->color_flags[GTK_STATE_NORMAL] |= GTK_RC_BG;
+            mod->bg[GTK_STATE_NORMAL] = c;
+            gtk_widget_modify_style(icon->button, mod);
+        }
+    }
+    else
+    {
+        gtk_button_set_relief (GTK_BUTTON (icon->button), GTK_RELIEF_NONE);
+	mod->color_flags[GTK_STATE_NORMAL] &= ~(GTK_RC_BG);
+	gtk_widget_modify_style(icon->button, mod);
+    }
+}
+
+static gboolean
+urgent_timeout (Icon *icon)
+{
+    update_visibility (icon, NULL);
+    update_blink (icon, TRUE);
+    return TRUE;;
+}
+
+static void
+queue_urgent_timeout (Icon *icon)
+{
+    if (icon->urgent_id == 0)
+    {
+        icon->urgent_id = 
+            g_timeout_add (URGENT_TIMEOUT, (GSourceFunc)urgent_timeout, icon);
+    }
+}
+
+static void
+unqueue_urgent_timeout (Icon *icon)
+{
+    if (icon->urgent_id > 0)
+    {
+        g_source_remove (icon->urgent_id);
+        icon->urgent_id = 0;
+        if (icon->button)
+        {
+            update_blink (icon, FALSE);
+            update_visibility (icon, NULL);
+        }
+    }
+}
+
 /* callbacks */
 static gboolean
 icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
@@ -248,6 +321,19 @@ icon_state_changed (NetkWindow *window, NetkWindowState changed_mask,
 {
     Icon *icon = (Icon *)data;
 
+    if (changed_mask & NETK_WINDOW_STATE_DEMANDS_ATTENTION
+        || changed_mask & NETK_WINDOW_STATE_URGENT)
+    {
+        if (netk_window_or_transient_demands_attention (window))
+        {
+            queue_urgent_timeout (icon);
+        }
+        else
+        {
+            unqueue_urgent_timeout (icon);
+        }
+    }
+
     if (changed_mask & NETK_WINDOW_STATE_MINIMIZED)
     {
         update_visibility (icon, NULL);
@@ -287,6 +373,8 @@ icon_destroy (Icon *icon)
 {
     int i;
 
+    unqueue_urgent_timeout (icon);
+    
     for (i = 0; i < N_ICON_CONNECTIONS; i++)
     {
         if (icon->connections[i])
@@ -419,6 +507,7 @@ iconbox_window_closed (NetkScreen *screen, NetkWindow *window, gpointer data)
         if (window == icon->window)
         {
             gtk_widget_destroy (icon->button);
+            icon->button = NULL;
             icon_destroy (icon);
 
             ib->iconlist = g_slist_delete_link (ib->iconlist, l);
