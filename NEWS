@@ -1,8 +1,52 @@
 NEWS for xfce4-panel
 ====================
 
-4.3.x
-=====
+4.3.99.3 (4.4-RC3)
+==================
+- Update or add blinking for urgent windows in taslist, windowlist and iconbox. 
+  (Jasper)
+
+- Move test plugin to Xfce Goodies. (Nick)
+
+- Several fixes for (re)sizing and positioning behavior. (Jasper)
+
+- Lots of small fixes and polish. (Jasper, Nick, Olivier, Benedikt)
+
+- Update manual. (Jasper)
+
+- Many translation updates. (Xfce Translation Team)
+
+
+4.3.99.2 (4.4-RC2)
+==================
+- Adjust the plugin system to improve support for other platforms 
+  (read: windows). (Jasper, Olivier)
+
+- Many small fixes. (Jasper, Nick, Olivier, Jean-Francois)
+
+- Translation updates. (Xfce Translation Team)
+
+
+4.3.99.1 (4.4-RC1)
+==================
+- Add helper utility to open windowlist, useful for keyboard shortcuts.
+  Patch by Darren Salt. (Jasper)
+
+- Create dummy scripts for obsolete xftaskbar4 and xfce4-iconbox.
+
+- Change unix signal handling to use a pipe with an io watch, instead
+  of a timeout. (Jasper)
+
+- Add search box to new item dialog. Patch by Benedikt. (Jasper)
+
+- Fixes and improvements to memory management, and timeout handling.
+  (Nick, Jasper)
+
+- Translation updates. (Xfce Translation Team)
+
+
+4.3.x (changes from 4.2.x)
+==========================
 - Major rewrite of the panel
 
 - New plugin API supporting out-of-process plugins
