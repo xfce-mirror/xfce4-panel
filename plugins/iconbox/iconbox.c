@@ -334,7 +334,8 @@ icon_state_changed (NetkWindow *window, NetkWindowState changed_mask,
         }
     }
 
-    if (changed_mask & NETK_WINDOW_STATE_MINIMIZED)
+    if (changed_mask & NETK_WINDOW_STATE_MINIMIZED
+        || changed_mask & NETK_WINDOW_STATE_SKIP_TASKLIST)
     {
         update_visibility (icon, NULL);
 
