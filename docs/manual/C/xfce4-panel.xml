@@ -2,7 +2,7 @@
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
           "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
   <!ENTITY manrevision "1.0"> 
-  <!ENTITY date "November 2006"> 
+  <!ENTITY date "December 2006"> 
   <!ENTITY appversion "4.4.0"> 
   <!ENTITY app "<application>xfce4-panel</application>">
 ]>
@@ -75,9 +75,6 @@ maintainers, etc. Commented out by default.
 
 </articleinfo>
 
-  <!-- extra space -->
-  <para>&nbsp;</para>
-  
 <sect1 id="panel-intro">
   <title>Introduction</title>
 
@@ -106,20 +103,29 @@ maintainers, etc. Commented out by default.
       <ulink url="#panel-manager">Panel Manager</ulink>.
     </para>
 
-    <figure id="default-panel-fig">
-      <title>Default Xfce Panel Configuration</title> 
+    <figure id="default-top-panel-fig">
+      <title>Default Top Panel</title> 
       <screenshot>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="images/default_panel.png" format="PNG"/>
+	    <imagedata fileref="images/default_top_panel.png" format="PNG"/>
 	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/default_panel.eps" format="EPS"/>
-	  </imageobject> 
-	  --> 
 	  <textobject>
-	    <phrase>The default Xfce Panel configuration.</phrase>
+	    <phrase>The default top panel configuration.</phrase>
+	  </textobject>
+	</mediaobject>
+      </screenshot>
+    </figure>
+
+    <figure id="default-bottom-panel-fig">
+      <title>Default Bottom Panel</title> 
+      <screenshot>
+	<mediaobject>
+	  <imageobject>
+	    <imagedata fileref="images/default_bottom_panel.png" format="PNG"/>
+	  </imageobject> 
+	  <textobject>
+	    <phrase>The default bottom panel configuration.</phrase>
 	  </textobject>
 	</mediaobject>
       </screenshot>
@@ -131,11 +137,10 @@ maintainers, etc. Commented out by default.
 
     <para>
       The Xfce Panel makes extensive use of left and right mouse buttons. Left
-      clicking performs the default action of an item, while right-clicking
-      brings up a context menu. Ctrl + left click may generally be used instead
-      of a right-click. Note that this manual assumes the use of a
-      right-handed mouse configuration. Hovering the mouse over an item will
-      often show a tooltip.
+      clicking performs the default action of an item and right-clicking
+      brings up a context menu. Ctrl + left click may generally be used as 
+      alternative for a right-click. Note that this manual assumes the use of a 
+      right-handed mouse configuration. 
     </para>
   </sect2>
 
@@ -145,7 +150,8 @@ maintainers, etc. Commented out by default.
     <para>
       Right-clicking on an item will pop up a menu from which you can
       configure the item, move it to a new location, or remove it from the
-      panel. The menu also allows you to configure the panel or add new items.
+      panel. The menu also allows you to configure the panel(s) or add new 
+      items.
     </para>
 
     <figure id="item-popup-fig">
@@ -153,15 +159,10 @@ maintainers, etc. Commented out by default.
       <screenshot>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="images/item-popup.png" format="PNG"/>
+	    <imagedata fileref="images/item_popup.png" format="PNG"/>
 	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/item-popup.eps" format="EPS"/>
-	  </imageobject> 
-	  --> 
 	  <textobject>
-	    <phrase>Popup Menu of a launcher item.</phrase>
+	    <phrase>Popup menu of a launcher item.</phrase>
 	  </textobject>
 	</mediaobject>
       </screenshot>
@@ -170,9 +171,6 @@ maintainers, etc. Commented out by default.
 
 </sect1>
 
-  <!-- extra space -->
-  <para>&nbsp;</para>
-  
 <sect1 id="panel-getting-started-items">
   <title>Panel Items</title>
   
@@ -199,15 +197,10 @@ maintainers, etc. Commented out by default.
       <screenshot>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="images/add-item-dialog.png" format="PNG"/>
+	    <imagedata fileref="images/add_item_dialog.png" format="PNG"/>
 	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/add-item-dialog.eps" format="EPS"/>
-	  </imageobject> 
-	  --> 
 	  <textobject>
-	    <phrase>Dialog with available panel items.</phrase>
+	    <phrase>Dialog with all available panel items.</phrase>
 	  </textobject>
 	</mediaobject>
       </screenshot>
@@ -241,15 +234,9 @@ maintainers, etc. Commented out by default.
       <screenshot>
 	<mediaobject>
 	  <imageobject>
-	    <imagedata fileref="images/launcher-properties.png" 
+	    <imagedata fileref="images/launcher_properties.png" 
 		       format="PNG"/>
 	  </imageobject> 
-	  <!-- 
-	  <imageobject>
-	    <imagedata fileref="images/launcher-properties.eps" 
-		       format="EPS"/>
-	  </imageobject> 
-	  --> 
 	  <textobject>
 	    <phrase>Shows properties dialog for a launcher item.</phrase>
 	  </textobject>
@@ -273,7 +260,8 @@ maintainers, etc. Commented out by default.
 	<term>Xfce Clock</term>
 	<listitem>
 	  <para>
-	    Shows the time. Has LED, digital and analog modes.
+	    Simple clock item. You can choose between LED, digital and analog 
+            mode.
           </para>
 	</listitem>
       </varlistentry>
@@ -296,7 +284,8 @@ maintainers, etc. Commented out by default.
 	  <para>
 	    Shows running applications in a button with icon and application
 	    name. Clicking on the button will focus or minimize the
-	    application.
+	    application. There's also a right-click menu with more window 
+            actions.
           </para>
 	</listitem>
       </varlistentry>
@@ -346,8 +335,8 @@ maintainers, etc. Commented out by default.
 	<term>Action Buttons</term>
 	<listitem>
 	  <para>
-	    Show one or two small buttons with two possible actions: quit the
-	    session or lock the screen.
+	    Show one or two small buttons that execute a special system action.
+            Two actions are available: quit the session and lock the screen.
           </para>
 	</listitem>
       </varlistentry>
@@ -357,27 +346,34 @@ maintainers, etc. Commented out by default.
 	<listitem>
 	  <para>
 	    A separator item shows a line or an empty space between two other
-	    items. Can optionally expand to fill all available space. This can
+	    items. Can optionally expand to fill all available space; this can
 	    be used on a full width panel to have items on both ends of the
-	    panel and nothing in between.
+	    panel and empty space in between.
           </para>
 	</listitem>
       </varlistentry>
 
     </variablelist>
+  </sect2>
 
+  <sect2 id="xfce-goodies">
+    <title>Xfce Goodies</title>
+
+    <para>
+      Many more plugins for the Xfce Panel are available from the
+      <ulink url="http://goodies.xfce.org" type="html">Xfce Goodies</ulink>
+      project.
+    </para>
   </sect2>
 
 </sect1>
 
-  <!-- extra space -->
-  <para>&nbsp;</para>
-  
 <sect1 id="panel-manager">
   <title>Panel Manager</title>
 
-  <para>The Panel Manager can be opened from the Xfce 4 Settings Manager or 
-    from the right-click menu on one of the panel items.
+  <para>
+    The Panel Manager can be opened from the Xfce Settings Manager or from the 
+    right-click menu on one of the panel items.
   </para>
 
   <figure id="panel-manager-fig">
@@ -385,15 +381,9 @@ maintainers, etc. Commented out by default.
     <screenshot>
       <mediaobject>
 	<imageobject>
-	  <imagedata fileref="images/panel-manager.png" 
+	  <imagedata fileref="images/panel_manager.png" 
 		     format="PNG"/>
 	</imageobject> 
-	<!-- 
-	<imageobject>
-	  <imagedata fileref="images/panel-manager.eps" 
-		     format="EPS"/>
-	</imageobject> 
-	--> 
 	<textobject>
 	  <phrase>Panel Manager dialog.</phrase>
 	</textobject>
@@ -410,7 +400,6 @@ maintainers, etc. Commented out by default.
       from the option menu. Next to this menu are two buttons to add a new
       panel or remove the current panel.
     </para>
-    
   </sect2>
 
   <sect2 id="panel-appearance">
@@ -438,7 +427,6 @@ maintainers, etc. Commented out by default.
 	</listitem>
       </varlistentry> 
     </variablelist>
-    
   </sect2>
 
   <sect2 id="panel-position">
@@ -474,7 +462,6 @@ maintainers, etc. Commented out by default.
 	</listitem>
       </varlistentry> 
     </variablelist>
-    
   </sect2>
 
   <sect2 id="panel-monitor">
@@ -484,13 +471,9 @@ maintainers, etc. Commented out by default.
       If you use a Xinerama or multihead setup, you can choose on which
       monitor you would like the panel to appear.
     </para>
-
   </sect2>
 
 </sect1>
-
-  <!-- extra space -->
-  <para>&nbsp;</para>
 
 <sect1 id="panel-advanced">
   <title>Advanced Configuration</title>
@@ -498,60 +481,74 @@ maintainers, etc. Commented out by default.
   <sect2 id="panel-config-files">
     <title>Configuration Files</title>
     
-    <para>Xfce uses the Basedir Specification as defined on <ulink
-	url="http://freedesktop.org">Freedesktop.org</ulink> to locate its 
-      data and configuration files. This means that file locations will
-      be specified as a path relative to the directories described in
-      the specification.
+    <para>
+      Xfce uses the Basedir Specification as defined on 
+      <ulink url="http://freedesktop.org">Freedesktop.org</ulink> to locate its
+      data and configuration files. This means that file locations will be 
+      specified as a path relative to the directories described in the 
+      specification.
     </para>
 
     <variablelist>
       <varlistentry>
 	<term>${XDG_CONFIG_HOME}</term>
-	<listitem><para>The first base directory to look for configuration 
-	  files. By default this is set to <filename
-	    role="directory">~/.config/</filename>.</para></listitem>
+	<listitem>
+          <para>
+            The first base directory to look for configuration 
+	    files. By default this is set to <filename
+	      role="directory">~/.config/</filename>.
+          </para>
+        </listitem>
       </varlistentry>
 
       <varlistentry>
 	<term>${XDG_CONFIG_DIRS}</term>
-	<listitem><para>A list of system directories that contain configuration
-	  data. By default the panel will look in <filename 
-	    role="directory">${sysconfdir}/xdg/</filename> and 
-	  <filename role="directory">/etc/xdg/</filename>. The value of
-	  ${sysconfdir} depends on how the program was build and will often be
-	  <filename role="directory">/etc/</filename> for binary
-	  packages.</para></listitem>
+	<listitem>
+          <para>
+            A list of system directories that contain configuration data. By 
+            default the panel will look in <filename 
+              role="directory">${sysconfdir}/xdg/</filename> and 
+	    <filename role="directory">/etc/xdg/</filename>. The value of
+	    ${sysconfdir} depends on how the program was build and will often be
+	    <filename role="directory">/etc/</filename> for binary packages.
+          </para>
+        </listitem>
       </varlistentry>
     
       <varlistentry>
 	<term>&lt;basedir&gt;/xfce4/panel/panels.xml</term>
-	<listitem><para>This is the location of the xml configuration file
-	  that describes the contents of the panel, relative to the base
-	  directories metioned above.</para></listitem>
+	<listitem>
+          <para>
+            This is the location of the xml configuration file that describes 
+            the contents of the panel, relative to the base directories metioned 
+            above.
+          </para>
+        </listitem>
       </varlistentry>
       
       <varlistentry>
 	<term>&lt;basedir&gt;/xfce4/kiosk/kioskrc</term>
-	<listitem><para>Kiosk Mode configuration file. See <ulink
-	    url="#panel-kiosk">below</ulink> for an explanation.
-	</para></listitem>
+	<listitem>
+          <para>
+            Kiosk Mode configuration file. See <ulink
+	      url="#panel-kiosk">below</ulink> for an explanation.
+          </para>
+        </listitem>
       </varlistentry>
-
     </variablelist>
 
-    <para>None of the configuration files, except 
-      <filename>kioskrc</filename> , are designed to be edited by hand; in 
-      fact the changes will be overwritten if you edit them while the panel 
-      is running.
+    <para>
+      None of the configuration files, except <filename>kioskrc</filename>, are 
+      designed to be edited by hand; in fact the changes will be overwritten if 
+      you edit them while the panel is running.
     </para>
-
   </sect2>
 
   <sect2 id="panel-data-files">
     <title>Data Files</title>
     
-    <para>The Xfce Panel will look under the data directories specified by the 
+    <para>
+      The Xfce Panel will look under the data directories specified by the 
       Basedir Specification for data files, such as panel plugin description
       files.
     </para>
@@ -567,31 +564,32 @@ maintainers, etc. Commented out by default.
 	  </para>
         </listitem>
       </varlistentry>
-
       <varlistentry>
 	<term>${XDG_DATA_DIRS}</term>
 	<listitem>
-	  <para>A list of system directories that contain data files.  By
-	    default this is <filename role="directory">/usr/share</filename>
-	    and <filename role="directory">/usr/local/share</filename>.
+	  <para>
+            A list of system directories that contain data files.  By default 
+            this is <filename role="directory">/usr/share</filename> and 
+            <filename role="directory">/usr/local/share</filename>.
 	  </para>
         </listitem>
       </varlistentry>
     </variablelist>
-    
   </sect2>
 
   <sect2 id="panel-kiosk">
     <title>Kiosk Mode</title>
 
-    <para>The panel now has support for Kiosk Mode, that will prevent users 
-      from making changes to their panel configuration. To use it you have to 
-      edit or create the file 
+    <para>
+      The panel now has support for Kiosk Mode, that will prevent users from 
+      making changes to their panel configuration. To use it you have to edit 
+      or create the file 
       <filename>${sysconfdir}/xdg/xfce4/kiosk/kioskrc</filename>.
     </para>
 
-    <para>The best way to explain the format of this file is by using an 
-      example. The xfce4-panel section of your kioskrc might look like this:
+    <para>
+      The best way to explain the format of this file is by using an example. 
+      The xfce4-panel section of your kioskrc might look like this:
     </para>
 
 <programlisting>
@@ -599,49 +597,52 @@ maintainers, etc. Commented out by default.
 CustomizePanel=%powerusers,foo
 </programlisting>
 
-    <para>This allows only users in the group powerusers and the user foo to 
+    <para>
+      This allows only users in the group powerusers and the user foo to 
       customize their panels.
     </para>
-    
   </sect2>
   
 </sect1>
   
-  <!-- extra space -->
-  <para>&nbsp;</para>
-  
 <sect1 id="panel-copyright">
   <title>About &app;</title>
 
-  <para>&app; was written by Jasper Huijsmans 
-    (<email>jasper@xfce.org</email>). To find more information, please visit 
-    the <ulink url="http://www.xfce.org" type="http">Xfce web site</ulink>. 
+  <para>
+    The maintainers of &app; are Jasper Huijsmans
+    <email>jasper@xfce.org</email> and Nick Schermer
+    <email>nick@xfce.org</email>. For more information about Xfce and its
+    components, visit the 
+    <ulink url="http://www.xfce.org" type="http">Xfce web site</ulink>.
   </para>
 
-  <para>To report a bug or make a suggestion regarding this application or
-    this manual, use the bug tracking system at <ulink 
-      url="http://bugzilla.xfce.org/" 
-      type="http">http://bugzilla.xfce.org/</ulink>. 
+  <para>
+    To report a bug or make a suggestion regarding this application or this 
+    manual, please use the bug tracking system at 
+    <ulink url="http://bugzilla.xfce.org/" 
+           type="http">http://bugzilla.xfce.org/</ulink>. 
   </para>
 
-  <para>If you have questions about the use or installation of this package,
-    please ask on the <ulink 
-      url="http://foo-projects.org/mailman/listinfo/xfce"
-      type="http">xfce</ulink> mailing list. Development discussion takes
-    place on the <ulink 
-      url="http://foo-projects.org/mailman/listinfo/xfce4-dev"
-      type="http">xfce4-dev</ulink> mailing list.
+  <para>
+    If you have questions about the use or installation of this package, please 
+    ask on the 
+    <ulink url="http://foo-projects.org/mailman/listinfo/xfce"
+           type="http">xfce</ulink> mailing list. Development discussion takes
+    place on the 
+    <ulink url="http://foo-projects.org/mailman/listinfo/xfce4-dev"
+           type="http">xfce4-dev</ulink> mailing list.
   </para>
     
-  <para>&app; is distributed under the terms of the
-    GNU General Public License as published by the Free Software Foundation; 
-    either version 2 of the License, or (at your option) any later version.
+  <para>
+    &app; is distributed under the terms of the GNU General Public License as 
+    published by the Free Software Foundation; either version 2 of the License, 
+    or (at your option) any later version.
   </para>
 
-  <para>You should have received a copy of the GNU General Public License 
-    along with this program; if not, write to the Free Software 
-    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, 
-    USA.
+  <para>
+    You should have received a copy of the GNU General Public License along with
+    this program; if not, write to the Free Software Foundation, Inc., 
+    59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
   </para>
 
 </sect1>
