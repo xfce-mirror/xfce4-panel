@@ -181,6 +181,8 @@ static void pager_screen_size_changed (GdkScreen *screen, Pager *pager);
 static void
 pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
 {
+    screen = gtk_widget_get_screen (plugin);
+
     if (!screen)
         return;
 
@@ -343,6 +345,9 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
     
+    gtk_window_set_screen (GTK_WINDOW (dlg), 
+                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
+
     g_signal_connect (dlg, "response", G_CALLBACK (pager_dialog_response),
                       pager);
 

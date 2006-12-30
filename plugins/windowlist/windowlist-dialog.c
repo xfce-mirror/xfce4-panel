@@ -123,6 +123,9 @@ windowlist_properties (XfcePanelPlugin *plugin,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
 
+    gtk_window_set_screen (GTK_WINDOW (dlg), 
+                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
+
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
     

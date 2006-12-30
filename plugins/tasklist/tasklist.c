@@ -232,11 +232,16 @@ static void
 tasklist_screen_changed (GtkWidget *plugin, GdkScreen *screen, 
                          Tasklist *tasklist)
 {
+    NetkScreen *ns;
+
+    screen = gtk_widget_get_screen (plugin);
+
     if (!screen)
         return;
 
-    netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), 
-            netk_screen_get (gdk_screen_get_number (screen)));
+    ns = netk_screen_get (gdk_screen_get_number (screen));
+
+    netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), ns);
 }
 
 static void 
@@ -392,6 +397,9 @@ tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
+
+    gtk_window_set_screen (GTK_WINDOW (dlg), 
+                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
 
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 

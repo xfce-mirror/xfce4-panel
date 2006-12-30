@@ -145,8 +145,12 @@ showdesktop_screen_changed (XfcePanelPlugin *plugin, GdkScreen *screen,
                             ShowDesktopData *sdd)
 {
     if (sdd->netk_id)
+    {
         g_signal_handler_disconnect (sdd->screen, sdd->netk_id);
-    sdd->netk_id = 0;
+        sdd->netk_id = 0;
+    }
+
+    screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
     if (screen)
     {
         sdd->screen = netk_screen_get (gdk_screen_get_number (screen));

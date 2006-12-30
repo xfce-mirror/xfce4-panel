@@ -457,6 +457,9 @@ clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
 
+    gtk_window_set_screen (GTK_WINDOW (dlg), 
+                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
+
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);

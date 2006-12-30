@@ -756,6 +756,8 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Iconbox *iconbox)
 static void
 iconbox_screen_changed (GtkWidget *plugin, GdkScreen *screen, Iconbox *ib)
 {
+    screen = gtk_widget_get_screen (plugin);
+
     if (!screen)
         return;
 
@@ -895,6 +897,9 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
+
+    gtk_window_set_screen (GTK_WINDOW (dlg), 
+                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
 
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
