@@ -61,6 +61,7 @@ typedef struct
     GtkTooltips *tips;
 
     int timeout_id;
+    int screen_changed_id;
 
     /* Settings */
     int mode;
@@ -235,6 +236,8 @@ clock_free_data (XfcePanelPlugin *plugin, Clock *clock)
 
     if (dlg)
         gtk_widget_destroy (dlg);
+        
+    g_signal_handler_disconnect (plugin, clock->screen_changed_id);
     
     g_source_remove (clock->timeout_id);
     g_object_unref (G_OBJECT (clock->tips));
@@ -290,6 +293,21 @@ clock_read_rc_file (XfcePanelPlugin *plugin, Clock* clock)
 }
 
 static void
+clock_screen_changed (GtkWidget *plugin, GdkScreen *screen, 
+                      Clock *clock)
+{
+	gtk_widget_destroy (clock->clock);
+	
+	clock->clock = xfce_clock_new ();
+    gtk_widget_show (clock->clock);
+    gtk_container_add (GTK_CONTAINER (clock->frame), clock->clock);
+
+    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
+    
+    clock_read_rc_file (clock->plugin, clock);
+}
+
+static void
 clock_write_rc_file (XfcePanelPlugin *plugin, Clock *clock)
 {
     char *file;
@@ -334,6 +352,10 @@ clock_construct (XfcePanelPlugin *plugin)
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin", 
                       G_CALLBACK (clock_properties_dialog), clock);
+                      
+    clock->screen_changed_id = 
+        g_signal_connect (plugin, "screen-changed", 
+                          G_CALLBACK (clock_screen_changed), clock);
 
     clock->frame = gtk_frame_new (NULL);
     gtk_widget_show (clock->frame);
