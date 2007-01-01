@@ -372,6 +372,8 @@ _set_struts (Panel       *panel,
 
         gdk_error_trap_pop ();
     }
+    
+    DBG ("all struts are checked and updated");
 }
 
 static gboolean
