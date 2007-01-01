@@ -493,6 +493,11 @@ iconbox_window_opened (NetkScreen *screen, NetkWindow *window, gpointer data)
     ib->iconlist = g_slist_append (ib->iconlist, icon);
 
     gtk_box_pack_start (GTK_BOX (ib->iconbox), icon->button, FALSE, FALSE, 0);
+
+    if (netk_window_or_transient_demands_attention (window))
+    {
+        queue_urgent_timeout (icon);
+    }
 }
 
 static void
