@@ -580,8 +580,13 @@ xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
     dialog = gtk_message_dialog_new (NULL,
                                      GTK_DIALOG_MODAL,
                                      GTK_MESSAGE_QUESTION,
-                                     GTK_BUTTONS_YES_NO,
+                                     GTK_BUTTONS_NONE,
                                      _("Remove \"%s\"?"), name);
+
+    gtk_dialog_add_buttons (GTK_DIALOG (dialog), 
+                            GTK_STOCK_CANCEL, GTK_RESPONSE_NO,
+                            GTK_STOCK_REMOVE, GTK_RESPONSE_YES,
+                            NULL);
 
     g_free (name);
     
