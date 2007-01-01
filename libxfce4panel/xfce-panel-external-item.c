@@ -51,6 +51,9 @@ struct _XfceExternalPanelItemPrivate
     guint expand:1;
     /* detect problems */
     guint to_be_removed:1;
+    guint restart:1;
+
+    char *file;
 };
 
 
@@ -100,6 +103,8 @@ static gboolean _item_event_received (XfceExternalPanelItem * item,
                                       GdkEventClient * ev);
 
 static void _item_construct (XfceExternalPanelItem * item);
+
+static void _item_screen_changed (XfceExternalPanelItem * item, GdkScreen *screen);
 
 static void _item_setup (XfceExternalPanelItem * item, const char *file);
 
@@ -159,6 +164,8 @@ xfce_external_panel_item_init (XfceExternalPanelItem * item)
     priv->screen_position = XFCE_SCREEN_POSITION_NONE;
     priv->expand          = FALSE;
     priv->to_be_removed   = FALSE;
+    priv->restart         = FALSE;
+    priv->file            = NULL;
 }
 
 /* GObject */
@@ -179,6 +186,7 @@ xfce_external_panel_item_finalize (GObject * object)
     g_free (priv->name);
     g_free (priv->id);
     g_free (priv->display_name);
+    g_free (priv->file);
 
     G_OBJECT_CLASS (xfce_external_panel_item_parent_class)->finalize (object);
 }
@@ -480,6 +488,33 @@ _item_construct (XfceExternalPanelItem * item)
 }
 
 static void
+_item_screen_changed (XfceExternalPanelItem *item, 
+                      GdkScreen             *screen)
+{
+    XfceExternalPanelItemPrivate *priv;
+
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+
+    screen = gtk_widget_get_screen (GTK_WIDGET (item));
+    g_message ("%s: screen changed: %d\n",
+               xfce_external_panel_item_get_display_name (XFCE_PANEL_ITEM (item)),
+               gdk_screen_get_number (screen));
+
+    if (GTK_SOCKET(item)->plug_window)
+    {
+        xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
+            GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
+            XFCE_PANEL_PLUGIN_SIZE, priv->size);
+    }
+    else
+    {
+        g_message ("No valid plug window.");
+        priv->restart = TRUE;
+        _item_setup (item, priv->file);
+    }
+}
+
+static void
 _item_setup (XfceExternalPanelItem * item, const char *file)
 {
     GdkScreen *gscreen;
@@ -507,10 +542,13 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
     argv[6] = g_strdup_printf ("screen_position=%d", priv->screen_position);
     argv[7] = NULL;
 
-    g_signal_connect (item, "plug-added", G_CALLBACK (_item_construct), NULL);
+    if (!priv->restart)
+    {
+        g_signal_connect (item, "plug-added", G_CALLBACK (_item_construct), NULL);
 
-    g_signal_connect (item, "client-event",
-                      G_CALLBACK (_item_event_received), NULL);
+        g_signal_connect (item, "client-event",
+                          G_CALLBACK (_item_event_received), NULL);
+    }
 
     gscreen = gtk_widget_get_screen (GTK_WIDGET (item));
     gdkdisplay_name = gdk_screen_make_display_name (gscreen);
@@ -521,6 +559,7 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
             g_critical ("Could not run plugin: %s", g_strerror (errno));
             gtk_widget_destroy (GTK_WIDGET (item));
             break;
+
         case 0:
             xfce_setenv ("DISPLAY", gdkdisplay_name, TRUE);
             g_free (gdkdisplay_name);
@@ -529,8 +568,16 @@ _item_setup (XfceExternalPanelItem * item, const char *file)
             g_critical ("Could not run plugin: %s", g_strerror (errno));
             gtk_widget_destroy (GTK_WIDGET (item));
             _exit (1);
+            break;
+
         default:
             /* parent: do nothing */;
+            if (!priv->restart)
+            {
+                g_signal_connect (item, "screen-changed", 
+                                  G_CALLBACK (_item_screen_changed), NULL);
+            }
+            break;
     }
     
     g_free (gdkdisplay_name);
@@ -572,6 +619,7 @@ xfce_external_panel_item_new (const char *name,
     priv->display_name    = g_strdup (display_name);
     priv->size            = size;
     priv->screen_position = position;
+    priv->file            = g_strdup (file);
 
     g_signal_connect_after (item, "realize", G_CALLBACK (_item_setup),
 			    (gpointer) file);
