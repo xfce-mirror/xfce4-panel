@@ -72,11 +72,11 @@ GType xfce_panel_plugin_get_type (void) G_GNUC_CONST;
 
 /* properties */
 
-G_CONST_RETURN char *xfce_panel_plugin_get_name (XfcePanelPlugin *plugin);
+gchar *xfce_panel_plugin_get_name (XfcePanelPlugin *plugin);
 
-G_CONST_RETURN char *xfce_panel_plugin_get_id (XfcePanelPlugin *plugin);
+gchar *xfce_panel_plugin_get_id (XfcePanelPlugin *plugin);
 
-G_CONST_RETURN char * xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin);
+gchar * xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin);
 
 int xfce_panel_plugin_get_size (XfcePanelPlugin *plugin);
 

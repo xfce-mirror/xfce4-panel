@@ -25,7 +25,6 @@
 
 #include <string.h>
 #include <gtk/gtk.h>
-#include <libxfcegui4/dialogs.h>
 
 #include "xfce-panel-convenience.h"
 #include "xfce-panel-plugin-iface.h"
@@ -431,10 +430,10 @@ xfce_panel_plugin_signal_configure (XfcePanelPlugin * plugin)
  * 
  * Returns: the plugin name.
  **/
-G_CONST_RETURN char *
+gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 {
-    const char *name = NULL;
+    gchar *name = NULL;
     
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
@@ -452,10 +451,10 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
  *
  * Returns: the plugin id.
  **/
-G_CONST_RETURN char *
+gchar *
 xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
 {
-    const char *id = NULL;
+    gchar *id = NULL;
     
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
@@ -473,10 +472,10 @@ xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
  *
  * Returns: the display name of @plugin.
  **/
-G_CONST_RETURN char *
+gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 {
-    const char *name = NULL;
+    gchar *name = NULL;
     
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
@@ -572,23 +571,34 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
 void
 xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
 {
-    int response = GTK_RESPONSE_NONE;
-    char *first;
+    GtkWidget *dialog;
+    gint       response;
+    gchar     *name;
+
+    name = xfce_panel_plugin_get_display_name (plugin);
+
+    dialog = gtk_message_dialog_new (NULL,
+                                     GTK_DIALOG_MODAL,
+                                     GTK_MESSAGE_QUESTION,
+                                     GTK_BUTTONS_YES_NO,
+                                     _("Remove \"%s\"?"), name);
+
+    g_free (name);
     
-    first = g_strdup_printf (_("Remove \"%s\"?"), 
-                             xfce_panel_plugin_get_display_name (plugin));
-    
-    response = xfce_message_dialog (NULL, _("Xfce Panel"), 
-                                    GTK_STOCK_DIALOG_QUESTION, first, 
-                                    _("The item will be removed from "
-                                      "the panel and its configuration "
-                                      "will be lost."),
-                                    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                    GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT,
-                                    NULL);
-    g_free (first);
-                                    
-    if (response == GTK_RESPONSE_ACCEPT)
+    gtk_window_set_screen (GTK_WINDOW (dialog),
+                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
+
+    gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_YES);
+
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                              _("The item will be removed from "
+                                                "the panel and its configuration "
+                                                "will be lost."));
+
+    response = gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
+
+    if (G_LIKELY (response == GTK_RESPONSE_YES))
         xfce_panel_plugin_remove (plugin);
 }
 
@@ -745,6 +755,8 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     int insert_position;
     int configure_position;
     gboolean allow_customization;
+    gchar *name;
+    
     
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
@@ -755,8 +767,9 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     menu = gtk_menu_new ();
 
     /* title */
-    mi = gtk_menu_item_new_with_label (
-            xfce_panel_plugin_get_display_name (plugin));
+    name = xfce_panel_plugin_get_display_name (plugin);
+    mi = gtk_menu_item_new_with_label (name);
+    g_free (name);
     gtk_widget_set_sensitive (mi, FALSE);
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -1112,13 +1125,19 @@ char *
 xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
 {
     char path[255];
+    gchar *name, *id;
+    
+    name = xfce_panel_plugin_get_name (plugin);
+    id = xfce_panel_plugin_get_id (plugin);
 
     g_snprintf (path, 255, 
                 "xfce4" G_DIR_SEPARATOR_S
                 "panel" G_DIR_SEPARATOR_S 
                 "%s-%s.rc", 
-                xfce_panel_plugin_get_name (plugin), 
-                xfce_panel_plugin_get_id (plugin));
+                name, id);
+                
+    g_free (name);
+    g_free (id);
 
     return xfce_resource_lookup (XFCE_RESOURCE_CONFIG, path);
 }
@@ -1140,13 +1159,19 @@ char *
 xfce_panel_plugin_save_location (XfcePanelPlugin *plugin, gboolean create)
 {
     char path[255];
+    gchar *name, *id;
+    
+    name = xfce_panel_plugin_get_name (plugin);
+    id = xfce_panel_plugin_get_id (plugin);
 
     g_snprintf (path, 255, 
                 "xfce4" G_DIR_SEPARATOR_S
                 "panel" G_DIR_SEPARATOR_S 
                 "%s-%s.rc", 
-                xfce_panel_plugin_get_name (plugin), 
-                xfce_panel_plugin_get_id (plugin));
+                name, id);
+                
+    g_free (name);
+    g_free (id);
 
     return xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, create);
 }
