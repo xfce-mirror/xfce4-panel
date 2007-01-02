@@ -236,8 +236,8 @@ tasklist_screen_changed (GtkWidget *plugin, GdkScreen *screen,
 
     screen = gtk_widget_get_screen (plugin);
 
-    if (!screen)
-        return;
+    if (G_UNLIKELY (screen == NULL))
+        screen = gdk_screen_get_default ();
 
     ns = netk_screen_get (gdk_screen_get_number (screen));
 
