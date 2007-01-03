@@ -32,7 +32,6 @@ xfce4_panel_SOURCES =						\
 xfce4_panel_CFLAGS = 							\
 	-I$(top_srcdir)							\
 	@LIBSTARTUP_NOTIFICATION_CFLAGS@				\
-	@GTHREAD_CFLAGS@						\
 	@LIBX11_CFLAGS@							\
 	@LIBXFCE4UTIL_CFLAGS@						\
 	@LIBXFCEGUI4_CFLAGS@						\
@@ -51,7 +50,6 @@ endif
 
 xfce4_panel_LDADD =							\
 	../libxfce4panel/libxfce4panel.la				\
-	@GTHREAD_LIBS@							\
 	@LIBSTARTUP_NOTIFICATION_LIBS@					\
 	@LIBX11_LIBS@							\
 	@LIBXFCE4UTIL_LIBS@						\

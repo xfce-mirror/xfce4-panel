@@ -27,7 +27,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <locale.h>
-#include <glib.h>
 #include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -144,10 +143,6 @@ main (int argc, char **argv)
     int success = 0;
     
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
-    
-    /* initialize the GThread system (needed for slice allocator) */
-    if (!g_thread_supported ())
-        g_thread_init (NULL);
     
     if (handle_options (argc, argv, &success))
         exit (success);

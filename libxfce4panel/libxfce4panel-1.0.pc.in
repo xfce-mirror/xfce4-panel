@@ -12,7 +12,7 @@ desktopdatadir=${datadir}/xfce4/panel-plugins
 
 Name: libxfce4panel
 Description: Library for the Xfce Panel
-Requires: gthread-2.0 gtk+-2.0 libxfcegui4-1.0 libxfce4util-1.0
+Requires: libxfcegui4-1.0 libxfce4util-1.0
 Version: @VERSION@
 Libs: -L${libdir} -lxfce4panel
 Cflags: -I${includedir}/xfce4/
