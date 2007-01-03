@@ -23,6 +23,7 @@
 #define _XFCE_PANEL_PLUGIN_H
 
 #include <stdlib.h>
+#include <glib.h>
 #include <libxfce4panel/xfce-panel-enums.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-plugin-iface.h>
@@ -43,6 +44,8 @@
     main (int argc, char **argv) \
     { \
         GtkWidget *plugin; \
+        if (!g_thread_supported ()) \
+            g_thread_init (NULL); \
         gtk_init (&argc, &argv); \
         plugin = xfce_external_panel_plugin_new (argc, argv, \
                      (XfcePanelPluginFunc)construct); \
@@ -74,6 +77,8 @@
     { \
         GtkWidget *plugin; \
         XfcePanelPluginCheck test = (XfcePanelPluginCheck)check; \
+        if (!g_thread_supported ()) \
+            g_thread_init (NULL); \
         gtk_init (&argc, &argv); \
         if (!test(gdk_screen_get_default())) return 2; \
         plugin = xfce_external_panel_plugin_new (argc, argv, \
