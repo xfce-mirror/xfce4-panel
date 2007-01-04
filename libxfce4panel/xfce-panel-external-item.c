@@ -494,6 +494,10 @@ _item_screen_changed (XfceExternalPanelItem *item,
     XfceExternalPanelItemPrivate *priv;
 
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    
+    /* quit when we're going to close the plugin */
+    if (priv->to_be_removed == TRUE)
+        return;
 
     screen = gtk_widget_get_screen (GTK_WIDGET (item));
     g_message ("%s: screen changed: %d\n",
