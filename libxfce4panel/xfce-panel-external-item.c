@@ -352,12 +352,7 @@ static void
 xfce_external_panel_item_set_sensitive (XfcePanelItem * item, 
                                         gboolean sensitive)
 {
-    XfceExternalPanelItemPrivate *priv;
-
     g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
-
-    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (
-                XFCE_EXTERNAL_PANEL_ITEM (item));
 
     if (GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
     {
@@ -377,12 +372,7 @@ xfce_external_panel_item_set_sensitive (XfcePanelItem * item,
 static void 
 xfce_external_panel_item_remove (XfcePanelItem * item)
 {
-    XfceExternalPanelItemPrivate *priv;
-
     g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
-
-    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (
-                XFCE_EXTERNAL_PANEL_ITEM (item));
 
     xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
             GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
@@ -402,12 +392,7 @@ delayed_configure(XfcePanelItem *item)
 static void 
 xfce_external_panel_item_configure (XfcePanelItem * item)
 {
-    XfceExternalPanelItemPrivate *priv;
-
     g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
-
-    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (
-                XFCE_EXTERNAL_PANEL_ITEM (item));
 
     if (GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
     {
