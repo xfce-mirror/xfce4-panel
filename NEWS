@@ -1,19 +1,15 @@
 NEWS for xfce4-panel
 ====================
 
-4.3.99.3 (4.4-RC3)
-==================
+4.4.0
+=====
+- Many fixes when using the panel in a multiscreen setup (Jasper, Nick)
 - Update or add blinking for urgent windows in taslist, windowlist and iconbox. 
   (Jasper)
-
 - Move test plugin to Xfce Goodies. (Nick)
-
 - Several fixes for (re)sizing and positioning behavior. (Jasper)
-
 - Lots of small fixes and polish. (Jasper, Nick, Olivier, Benedikt)
-
 - Update manual. (Jasper)
-
 - Many translation updates. (Xfce Translation Team)
 
 
@@ -21,9 +17,7 @@ NEWS for xfce4-panel
 ==================
 - Adjust the plugin system to improve support for other platforms 
   (read: windows). (Jasper, Olivier)
-
 - Many small fixes. (Jasper, Nick, Olivier, Jean-Francois)
-
 - Translation updates. (Xfce Translation Team)
 
 
@@ -31,28 +25,20 @@ NEWS for xfce4-panel
 ==================
 - Add helper utility to open windowlist, useful for keyboard shortcuts.
   Patch by Darren Salt. (Jasper)
-
 - Create dummy scripts for obsolete xftaskbar4 and xfce4-iconbox.
-
 - Change unix signal handling to use a pipe with an io watch, instead
   of a timeout. (Jasper)
-
 - Add search box to new item dialog. Patch by Benedikt. (Jasper)
-
 - Fixes and improvements to memory management, and timeout handling.
   (Nick, Jasper)
-
 - Translation updates. (Xfce Translation Team)
 
 
 4.3.x (changes from 4.2.x)
 ==========================
 - Major rewrite of the panel
-
 - New plugin API supporting out-of-process plugins
-
 - Support for multiple panels
-
 - Xinerama and multi-head support
 
 
@@ -60,11 +46,8 @@ NEWS for xfce4-panel
 ==================
 - Fix type mismatch when writing backup files. Fixes infinite loop on non-x86.
   Patch by Michele Baldessari <michele@pupazzo.org> (Jasper)
-
 - Fix edge snapping for very big panels (Jasper)
-
 - Properly setting dock type hint (Olivier)
-
 - Translation updates (Jean-Francois)
 
 
@@ -72,30 +55,21 @@ NEWS for xfce4-panel
 ==================
 - Increase plugin API version. Plugins build against a panel older than RC1
   need to be rebuild (Jasper)
-
 - Fix two bugs in the graphical pager (Jasper, Olivier)
-
 - Prevent resizing during panel unhide (Jasper)
-
 - Translation updates (Jean-Francois)
 
 
 4.1.99.1 (4.2 RC1)
 ==================
 - Updated documentation screenshots (Jasper)
-
 - Fix POP3 mail checking, patch by Piotr Chmura (Jasper)
-
 - Make transparency configurable with a 'hidden' option (Jasper)
-
 - Increase API version, but still support old plugins (Jasper)
-
 - Use new gtk 2.4 file chooser (Jasper)
-
 - Improve focus management (in combination with xfwm4) by setting the dock
   type hint. Panel will now always be on top; the option is gone. 
   (Olivier, Jasper)
-
 - Transparency is always on, but toggled off when the mouse is over the panel
   (Jasper)
 
@@ -103,11 +77,8 @@ NEWS for xfce4-panel
 4.1.91 (4.2 BETA2)
 ==================
 - Several translation updates (Jean-Francois)
-
 - Some autohide fixes with open dialogs (Jasper)
-
 - Fix multihead support (Jasper)
-
 - Translucent panel when set on top. Needs xfwm4 with composite support 
   and XOrg >= 6.8.0 with composite extension enabled. (Olivier)
 
@@ -115,47 +86,29 @@ NEWS for xfce4-panel
 4.1.90 (4.2 BETA1)
 ==================
 - Use basedir spec to locate config file. (Jasper)
-
 - Rename xfce4rc to contents.xml. (Jasper)
-
 - Change the fallback (default) icons to the ones from the Rodent theme 
   by Francois, very pretty. (Jasper)
-
 - Add support for new KIOSK mode. Much better than env variables. (Benedikt)
-
 - Fix autohide and right-click menu interaction. (Jasper)
-
 - Icon theme support : no more panel-specific themes, the panel will now
   follow the icon theme set in the user interface dialog. (Jasper)
-
 - Set partial struts (Jasper)
-
 - Add multihead support. The user needs to set DISPLAY properly to start a 
   new panel on another screen. (Jasper)
-
 - Update list of module list when opening dialog: remove uninstalled modules
   (when not in use) and add newly installed ones. Based on idea of Scott 
   Barron. (Jasper)
-
 - Use a dialog to add items to the panel, instead of a submenu. (Jasper)
-
 - Reduce handle width to show only one line of dots. (Jasper)
-
 - Split out the code for choosing a command and choosing an icon from
   item_dialog.c. to make it available for use in other dialogs (plugins). 
   The mailcheck plugin makes use of it and of course the launcher dialog. 
   (Jasper)
-
 - Implement module unloading. Add uniqueness setting to plugins. (Jasper)
-
 - Add pop3 email checking: Use 'pop3://username:password@host' as mailbox.
   (Olivier)
-
 - Properly update arrow direction. Use this info to position the menus. 
   Much better. (Jasper)
-
 - Add xrandr awareness. (Jasper)
-
 - Add xinerama aware smart positioning. (Jasper)
-
-
