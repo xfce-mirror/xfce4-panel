@@ -10,11 +10,11 @@ m4_define([libxfce4panel_verinfo], [2:1:1])
 
 dnl panel version info
 m4_define([xfce4_panel_version_major], [4])
-m4_define([xfce4_panel_version_minor], [3])
-m4_define([xfce4_panel_version_micro], [99])
-m4_define([xfce4_panel_version_nano],  [3])   dnl leave this empty to have no nano version
+m4_define([xfce4_panel_version_minor], [4])
+m4_define([xfce4_panel_version_micro], [0])
+m4_define([xfce4_panel_version_nano],  [])   dnl leave this empty to have no nano version
 m4_define([xfce4_panel_version_build], [@REVISION@])
-m4_define([xfce4_panel_version_tag],   [svn])
+m4_define([xfce4_panel_version_tag],   [])
 
 m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_version_minor().xfce4_panel_version_micro()ifelse(xfce4_panel_version_nano(), [], [], [.xfce4_panel_version_nano()])ifelse(xfce4_panel_version_tag(), [svn], [xfce4_panel_version_tag()-xfce4_panel_version_build()], [xfce4_panel_version_tag()])])
 
@@ -72,11 +72,11 @@ XDT_CHECK_LIBX11_REQUIRE
 XDT_CHECK_LIBSM
 
 dnl Check for required packages
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.99.2])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.4.0])
 XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.99.2])
-XDT_CHECK_PACKAGE(LIBXFCE4MCS_MANAGER, libxfce4mcs-manager-1.0, 4.3.99.2)
-XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.3.99.1])
+XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.4.0])
+XDT_CHECK_PACKAGE(LIBXFCE4MCS_MANAGER, libxfce4mcs-manager-1.0, 4.4.0)
+XFCE_MCS_PLUGIN([XFCE_MCS_MANAGER], [4.4.0])
 
 dnl Check for optional packages
 XDT_CHECK_OPTIONAL_PACKAGE([LIBSTARTUP_NOTIFICATION],
