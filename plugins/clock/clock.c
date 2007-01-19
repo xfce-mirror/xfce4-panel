@@ -296,6 +296,10 @@ static void
 clock_screen_changed (GtkWidget *plugin, GdkScreen *screen, 
                       Clock *clock)
 {
+	/* return when the widget is not visible (when moving the plugin) */
+	if (GTK_IS_INVISIBLE (clock->clock) == FALSE)
+	    return;
+	
 	gtk_widget_destroy (clock->clock);
 	
 	clock->clock = xfce_clock_new ();

@@ -38,6 +38,7 @@
 #endif
 
 #include <string.h>
+#include <stdlib.h>
 #include <gdk/gdkkeysyms.h>
 
 #include <libxfce4panel/xfce-arrow-button.h>
@@ -102,7 +103,7 @@ menulist_workspace_name (NetkWorkspace *workspace,
     ws_num  = netk_workspace_get_number (workspace);    
     ws_name = netk_workspace_get_name (workspace);
 	    
-    if(!ws_name || atoi(ws_name) == ws_num + 1)
+    if(!ws_name || atoi((const char *)ws_name) == ws_num + 1)
 	ws_title = g_strdup_printf(num_title, ws_num + 1);
     else
 	ws_title = g_markup_printf_escaped(name_title, ws_name);
