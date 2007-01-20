@@ -2,11 +2,11 @@ dnl configure.ac
 dnl
 dnl xfce4 - panel for the Xfce Desktop environment
 dnl
-dnl 2005-2006 Jasper Huijsmans <jasper@xfce.org>
+dnl 2005-2007 Jasper Huijsmans <jasper@xfce.org>
 dnl
 
 dnl library version info
-m4_define([libxfce4panel_verinfo], [2:1:1])
+m4_define([libxfce4panel_verinfo], [2:2:1])
 
 dnl panel version info
 m4_define([xfce4_panel_version_major], [4])
@@ -21,7 +21,7 @@ m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_versio
 
 
 dnl init autoconf
-AC_COPYRIGHT([Copyright (c) 2002-2006
+AC_COPYRIGHT([Copyright (c) 2002-2007
         The Xfce development team. All rights reserved.
 
 Written for Xfce by Jasper Huijsmans <jasper@xfce.org>.])
