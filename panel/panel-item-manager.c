@@ -297,6 +297,13 @@ update_plugin_list (void)
     else
     {
         dirs = xfce_resource_dirs (XFCE_RESOURCE_DATA);
+
+        if (G_UNLIKELY(!dirs))
+        {
+            dirs    = g_new (char*, 2);
+            dirs[0] = g_strdup (DATADIR);
+            dirs[1] = NULL;
+        }
     }
     
     for (d = dirs; *d != NULL || !datadir_used; ++d)
@@ -343,9 +350,12 @@ update_plugin_list (void)
                 {
                     DBG (" + class \"%s\": "
                          "name=%s, comment=%s, icon=%s, external=%d, path=%s", 
-                         class->plugin_name,
-                         class->name, class->comment, class->icon,
-                         class->is_external, class->file);
+                         class->plugin_name ? class->plugin_name : "(null)",
+                         class->name        ? class->name        : "(null)", 
+                         class->comment     ? class->comment     : "(null)", 
+                         class->icon        ? class->icon        : "(null)",
+                         class->is_external, 
+                         class->file        ? class->file        : "(null)");
                 
                     g_hash_table_insert (plugin_classes, 
                                          class->plugin_name, 
