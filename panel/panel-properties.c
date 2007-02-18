@@ -36,6 +36,7 @@
 
 #include "panel-properties.h"
 #include "panel-private.h"
+#include "panel-dnd.h"
 
 #define HIDDEN_SIZE     3
 #define OPAQUE          0xffffffff
@@ -754,6 +755,73 @@ _unhide_timeout (Panel *panel)
     return FALSE;
 }
 
+static gboolean
+drag_motion (Panel          *panel, 
+             GdkDragContext *context,
+             int             x, 
+             int             y, 
+             guint           time, 
+             gpointer        user_data)
+{
+    PanelPrivate *priv;
+
+    priv = panel->priv;
+
+    if (!priv->hidden || priv->block_autohide)
+        return TRUE;
+
+    if (priv->hide_timeout)
+    {
+        g_source_remove (priv->hide_timeout);
+        priv->hide_timeout = 0;
+    }
+
+    if (!priv->unhide_timeout)
+    {
+        priv->unhide_timeout =
+            g_timeout_add (UNHIDE_TIMEOUT,
+                           (GSourceFunc) _unhide_timeout, panel);
+    }
+
+    return TRUE;
+}
+
+static void
+drag_leave (Panel          *panel,
+            GdkDragContext *drag_context,
+            guint           time,
+            gpointer        user_data)
+{
+    int    x, y, w, h, px, py;
+    PanelPrivate *priv;
+
+    priv = panel->priv;
+
+    if (priv->hidden || priv->block_autohide)
+        return;
+
+    /* check if pointer is inside the window */
+    gdk_display_get_pointer (gdk_display_get_default (), NULL, &px, &py, NULL);
+    gtk_window_get_position (GTK_WINDOW (panel), &x, &y);
+    gtk_window_get_size (GTK_WINDOW (panel), &w, &h);
+
+    if (px < x || px > x + w || py < y || py > y + h)
+    {
+        if (priv->unhide_timeout)
+        {
+            g_source_remove (priv->unhide_timeout);
+            priv->unhide_timeout = 0;
+        }
+
+        if (!priv->hide_timeout)
+        {
+            priv->hide_timeout =
+                g_timeout_add (HIDE_TIMEOUT,
+                               (GSourceFunc) _hide_timeout, panel);
+        }
+    }
+}
+
 static void 
 panel_enter (Panel            *panel, 
              GdkEventCrossing *event)
@@ -867,6 +935,10 @@ void panel_init_signals (Panel *panel)
     g_signal_connect (panel, "map", G_CALLBACK (_window_mapped), NULL);
     
     g_signal_connect (panel, "move-end", G_CALLBACK (panel_move_end), NULL);
+
+    panel_dnd_set_dest (GTK_WIDGET (panel));
+    g_signal_connect (panel, "drag-motion", G_CALLBACK (drag_motion), NULL);
+    g_signal_connect (panel, "drag-leave", G_CALLBACK (drag_leave), NULL);
 }
 
 void 
