@@ -360,7 +360,7 @@ start_element_handler (GMarkupParseContext  *context,
                     ++i;
                 }
 
-                if (name != NULL)
+                if (name != NULL && value != NULL)
                 {
                     DBG ("Add item: name=\"%s\", id=\"%s\"", name, value);
 
