@@ -36,7 +36,9 @@ sed -e "s/@LINGUAS@/${linguas}/g" \
 
 xdt-autogen $@
 
+# xdt-autogen clean does not remove all generated files
 (test x"clean" = x"$1") && {
-  rm configure.ac
+  rm -f configure.ac
+  rm -f INSTALL
 } || true
 # vi:set ts=2 sw=2 et ai:
