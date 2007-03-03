@@ -1,5 +1,11 @@
 2007-03-03 21:00  nick
 
+	* panel/*: Import all the code from my branch to trunk. Only the main.c
+	  file is different in the branch because it contains a problem that 
+	  causes Xfce to start very slowly (the session manager).
+
+2007-03-03 21:00  nick
+
 	* Import my 4_5_nick branch into trunk:
 	  - Completely rewritten launcher (Bugs 2336, 2365, 1323, 2262 and 1225)
 	  - Various improvements in libxfce4panel (memory leaks, G_GNUC_INTERNAL,

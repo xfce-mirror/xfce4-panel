@@ -1,42 +1,59 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2005 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published 
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <stdio.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#ifdef HAVE_SYS_STAT_H
 #include <sys/stat.h>
-#include <gdk/gdkx.h>
-#include <gtk/gtkenums.h>
-
+#endif
+#ifdef HAVE_MEMORY_H
+#include <memory.h>
+#endif
 #ifdef HAVE_SYS_MMAN_H
-#include <sys/mman.h>   
+#include <sys/mman.h>
+#endif
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+#ifdef HAVE_FCNTL_H
+#include <fcntl.h>
+#endif
+#ifdef HAVE_STDIO_H
+#include <stdio.h>
+#endif
+#ifdef HAVE_ERRNO_H
+#include <errno.h>
+#endif
+#ifdef HAVE_STDLIB_H
+#include <stdlib.h>
 #endif
 
+#include <gdk/gdkx.h>
+#include <gtk/gtkenums.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
@@ -54,10 +71,9 @@
 
 #define PANEL_LAUNCHER  "launcher"
 
-static GPtrArray *config_parse_file (const char *filename);
+static GPtrArray *config_parse_file (const gchar *filename);
 
-static gboolean config_save_to_file (GPtrArray *panels, 
-                                     const char *filename);
+static gboolean config_save_to_file (GPtrArray *panels, const gchar *filename);
 
 
 /* fallback panel */
@@ -69,7 +85,7 @@ create_fallback_panel_array (void)
     Panel     *panel;
 
     DBG ("No suitable panel configuration was found.");
-    
+
     panel = panel_new ();
     g_object_ref (G_OBJECT (panel));
     gtk_object_sink (GTK_OBJECT (panel));
@@ -88,11 +104,11 @@ create_fallback_panel_array (void)
 GPtrArray *
 panel_config_create_panels (void)
 {
-    char       *file  = NULL;
-    GPtrArray  *array = NULL;
-    const char *path  = "xfce4" G_DIR_SEPARATOR_S 
-                        "panel" G_DIR_SEPARATOR_S
-                        "panels.xml";
+    gchar       *file;
+    GPtrArray   *array = NULL;
+    const gchar *path  = "xfce4" G_DIR_SEPARATOR_S
+                         "panel" G_DIR_SEPARATOR_S
+                         "panels.xml";
 
     if (G_UNLIKELY (!xfce_allow_panel_customization ()))
     {
@@ -122,12 +138,12 @@ panel_config_create_panels (void)
         }
     }
 
-    if (file)
+    if (G_LIKELY (file))
     {
         array = config_parse_file (file);
         g_free (file);
     }
-    
+
     if (!array)
         array = create_fallback_panel_array ();
 
@@ -139,16 +155,15 @@ panel_config_create_panels (void)
 gboolean
 panel_config_save_panels (GPtrArray * panels)
 {
-    gboolean failed = FALSE;
+    gchar       *file;
+    gboolean     failed = FALSE;
+    gint         i;
+    const gchar *path = "xfce4" G_DIR_SEPARATOR_S
+                        "panel" G_DIR_SEPARATOR_S
+                        "panels.xml";
 
     if (xfce_allow_panel_customization ())
     {
-        int         i;
-        char       *file = NULL;
-        const char *path = "xfce4" G_DIR_SEPARATOR_S 
-                           "panel" G_DIR_SEPARATOR_S
-                           "panels.xml";
-
         file = xfce_resource_save_location (XFCE_RESOURCE_CONFIG, path, TRUE);
 
         failed = !config_save_to_file (panels, file);
@@ -186,27 +201,28 @@ struct _ConfigParser
     Panel       *current_panel;
     ParserState  state;
 
-    gboolean     properties_set;
-    gboolean     monitor_set;
-    
-    int          size;
-    int          monitor;
-    int          screen_position;
-    int          full_width;
-    int          xoffset;
-    int          yoffset;
-    int          handle_style;
-    gboolean     autohide;
-    int          transparency;
-    gboolean     activetrans;
+    guint        properties_set : 1;
+    guint        monitor_set : 1;
+
+    /* properties */
+    gint         size;
+    gint         monitor;
+    gint         screen_position;
+    gint         full_width;
+    gint         xoffset;
+    gint         yoffset;
+    gint         handle_style;
+    guint        autohide : 1;
+    gint         transparency;
+    guint        activetrans : 1;
 };
 
 static void
 init_properties (ConfigParser *parser)
 {
     parser->properties_set  = FALSE;
-    parser->monitor_set     = FALSE;   
-    
+    parser->monitor_set     = FALSE;
+
     parser->size            = DEFAULT_SIZE;
     parser->monitor         = 0;
     parser->screen_position = DEFAULT_SCREEN_POSITION;
@@ -220,69 +236,69 @@ init_properties (ConfigParser *parser)
 }
 
 static void
-config_set_property (ConfigParser *parser, 
-                     const char   *name, 
-                     const char   *value)
+config_set_property (ConfigParser *parser,
+                     const gchar  *name,
+                     const gchar  *value)
 {
     g_return_if_fail (name != NULL && value != NULL);
 
     parser->properties_set = TRUE;
-    
+
     if (strcmp (name, "size") == 0)
     {
-        parser->size = (int) strtol (value, NULL, 0);
+        parser->size = (gint) strtol (value, NULL, 0);
     }
     else if (strcmp (name, "monitor") == 0)
     {
-        parser->monitor = (int) strtol (value, NULL, 0);
+        parser->monitor = (gint) strtol (value, NULL, 0);
         parser->monitor_set = TRUE;
     }
     else if (strcmp (name, "screen-position") == 0)
     {
-        parser->screen_position = (int) strtol (value, NULL, 0);
+        parser->screen_position = (gint) strtol (value, NULL, 0);
     }
     else if (strcmp (name, "fullwidth") == 0)
     {
-        parser->full_width = ((int) strtol (value, NULL, 0));
+        parser->full_width = ((gint) strtol (value, NULL, 0));
     }
     else if (strcmp (name, "xoffset") == 0)
     {
-        parser->xoffset = (int) strtol (value, NULL, 0);
+        parser->xoffset = (gint) strtol (value, NULL, 0);
     }
     else if (strcmp (name, "yoffset") == 0)
     {
-        parser->yoffset = (int) strtol (value, NULL, 0);
+        parser->yoffset = (gint) strtol (value, NULL, 0);
     }
     else if (strcmp (name, "handlestyle") == 0)
     {
-        parser->handle_style = (int) strtol (value, NULL, 0);
+        parser->handle_style = (gint) strtol (value, NULL, 0);
     }
     else if (strcmp (name, "autohide") == 0)
     {
-        parser->autohide = ((int) strtol (value, NULL, 0) == 1);
+        parser->autohide = ((gint) strtol (value, NULL, 0) == 1);
     }
     else if (strcmp (name, "transparency") == 0)
     {
-        parser->transparency = (int) strtol (value, NULL, 0);
+        parser->transparency = (gint) strtol (value, NULL, 0);
     }
     else if (strcmp (name, "activetrans") == 0)
     {
-        parser->activetrans = ((int) strtol (value, NULL, 0) == 1);
+        parser->activetrans = ((gint) strtol (value, NULL, 0) == 1);
     }
 }
 
 static void
 start_element_handler (GMarkupParseContext  *context,
-                       const char           *element_name,
-                       const char          **attribute_names,
-                       const char          **attribute_values,
-                       gpointer              user_data, 
+                       const gchar          *element_name,
+                       const gchar         **attribute_names,
+                       const gchar         **attribute_values,
+                       gpointer              user_data,
                        GError              **error)
 {
     ConfigParser *parser = user_data;
-    char         *name   = NULL;
-    char         *value  = NULL;
-    int           i      = 0;
+    gchar        *name = NULL;
+    gchar        *value = NULL;
+    gint          i = 0;
 
     switch (parser->state)
     {
@@ -365,7 +381,7 @@ start_element_handler (GMarkupParseContext  *context,
                     DBG ("Add item: name=\"%s\", id=\"%s\"", name, value);
 
                     TIMER_ELAPSED(" +++ add item: %s", name);
-                    panel_add_item_with_id (parser->current_panel, 
+                    panel_add_item_with_id (parser->current_panel,
                                                 name, value);
                 }
                 else
@@ -382,9 +398,9 @@ start_element_handler (GMarkupParseContext  *context,
 }
 
 static void
-end_element_handler (GMarkupParseContext  *context,
-                     const char           *element_name,
-                     gpointer              user_data, 
+end_element_handler (GMarkupParseContext *context,
+                     const gchar          *element_name,
+                     gpointer              user_data,
                      GError              **error)
 {
     ConfigParser *parser = user_data;
@@ -416,13 +432,14 @@ end_element_handler (GMarkupParseContext  *context,
                 if (parser->properties_set)
                 {
                     if (parser->screen_position == XFCE_SCREEN_POSITION_NONE)
-                        parser->screen_position = 
+                        parser->screen_position =
                             XFCE_SCREEN_POSITION_FLOATING_H;
 
                     if (!parser->monitor_set)
                     {
                         parser->monitor = DefaultScreen (GDK_DISPLAY());
                     }
+
 
                     g_object_set (G_OBJECT (parser->current_panel),
                                   "size",            parser->size,
@@ -464,16 +481,16 @@ static GMarkupParser markup_parser = {
 };
 
 static GPtrArray *
-config_parse_file (const char *filename)
+config_parse_file (const gchar *filename)
 {
     GPtrArray           *array = NULL;
-    char                *contents;
+    gchar               *contents;
     GError              *error;
     GMarkupParseContext *context;
     ConfigParser         parser;
     struct stat          sb;
     size_t               bytes;
-    int                  fd, rc;
+    gint                 fd, rc;
 #ifdef HAVE_MMAP
     void                *addr;
 #endif
@@ -491,11 +508,12 @@ config_parse_file (const char *filename)
     }
 
     contents = NULL;
-    
+
 #ifdef HAVE_MMAP
     /* Try to mmap(2) the config file, as this save us a lot of
      * kernelspace -> userspace copying
      */
+
 #ifdef MAP_FILE
     addr = mmap (NULL, sb.st_size, PROT_READ, MAP_FILE | MAP_PRIVATE, fd, 0);
 #else
@@ -513,15 +531,15 @@ config_parse_file (const char *filename)
                    "Using read fallback.", filename, g_strerror (errno));
     }
 #endif /* HAVE_MMAP */
-     
+
     if (contents == NULL)
     {
-        contents = panel_slice_alloc ((size_t) sb.st_size);
+            contents = panel_slice_alloc ((size_t) sb.st_size);
 
         if (contents == NULL)
         {
             g_critical ("Unable to allocate %lu bytes of memory to load "
-                        "contents of file %s: %s", 
+                        "contents of file %s: %s",
                         (gulong) sb.st_size, filename, g_strerror (errno));
             goto finished;
         }
@@ -552,7 +570,7 @@ config_parse_file (const char *filename)
 
     /* parse the file */
     error = NULL;
-    
+
     parser.state = START;
     parser.panels = array = g_ptr_array_new ();
     parser.current_panel = NULL;
@@ -573,9 +591,9 @@ finished:
 #ifdef HAVE_MMAP
     if (addr != NULL)
     {
-        if (munmap (addr, sb.st_size) < 0)
+        if (munmap (addr, sb.st_size))
         {
-            g_critical ("Unable to unmap file %s: %s. This should not happen!", 
+            g_critical ("Unable to unmap file %s: %s. This should not happen!",
                         filename, g_strerror (errno));
         }
 
@@ -602,11 +620,12 @@ finished:
 }
 
 gboolean
-config_save_to_file (GPtrArray *array, const char *filename)
+config_save_to_file (GPtrArray   *array,
+                     const gchar *filename)
 {
-    FILE *fp;
-    char  tmp_path[PATH_MAX];
-    int   i;
+    FILE                *fp;
+    gchar                tmp_path[PATH_MAX];
+    gint                 i;
 
     g_return_val_if_fail (array != NULL, FALSE);
     g_return_val_if_fail (filename != NULL || (strlen (filename) > 0), FALSE);
@@ -630,19 +649,20 @@ config_save_to_file (GPtrArray *array, const char *filename)
 
     for (i = 0; i < array->len; ++i)
     {
-        GList    *configlist, *l;
-        Panel    *panel;
-        int       size            = 0;
-        int       monitor         = 0;
-        int       screen_position = 0;
-        int       fullwidth       = 0;
-        int       xoffset         = 0;
-        int       yoffset         = 0;
-        int       handle_style    = 0;
-        int       transparency    = 0;
-        gboolean  autohide        = FALSE;
-        gboolean  activetrans     = FALSE;
-        
+        gint            size            = 0;
+        gint            monitor         = 0;
+        gint            screen_position = 0;
+        gint            fullwidth       = 0;
+        gint            xoffset         = 0;
+        gint            yoffset         = 0;
+        gint            handle_style    = 0;
+        gint            transparency    = 0;
+        gboolean        autohide        = FALSE;
+        gboolean        activetrans     = FALSE;
+        Panel          *panel;
+        GList          *configlist, *l;
+        XfcePanelItem  *item;
+
         DBG ("Saving panel %d", i + 1);
 
         panel = g_ptr_array_index (array, i);
@@ -655,46 +675,46 @@ config_save_to_file (GPtrArray *array, const char *filename)
                       "xoffset",         &xoffset,
                       "yoffset",         &yoffset,
                       "handle-style",    &handle_style,
-                      "transparency",    &transparency,
                       "autohide",        &autohide,
+                      "transparency",    &transparency,
                       "activetrans",     &activetrans,
                       NULL);
-        
+
         /* grouping */
         fprintf (fp, "\t<panel>\n"
                      "\t\t<properties>\n");
 
-        /* properties */                 
+        /* properties */
         fprintf (fp, "\t\t\t<property name=\"size\" value=\"%d\"/>\n",
                      size);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"monitor\" value=\"%d\"/>\n",
                      monitor);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"screen-position\" "
                      "value=\"%d\"/>\n", screen_position);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"fullwidth\" value=\"%d\"/>\n",
                      fullwidth);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"xoffset\" value=\"%d\"/>\n",
                      xoffset);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"yoffset\" value=\"%d\"/>\n",
                      yoffset);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"handlestyle\" value=\"%d\"/>\n",
                      handle_style);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"autohide\" value=\"%d\"/>\n",
                      autohide);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"transparency\" value=\"%d\"/>\n",
                      transparency);
-                 
+
         fprintf (fp, "\t\t\t<property name=\"activetrans\" value=\"%d\"/>\n",
                      activetrans);
-                 
+
         /* grouping */
         fprintf (fp, "\t\t</properties>\n"
                      "\t\t<items>\n");
@@ -704,18 +724,19 @@ config_save_to_file (GPtrArray *array, const char *filename)
 
         for (l = configlist; l != NULL; l = l->next)
         {
-            XfcePanelItem *item = l->data;
+            item = l->data;
 
             fprintf (fp, "\t\t\t<item name=\"%s\" id=\"%s\"/>\n",
-                         xfce_panel_item_get_name (item),
-                         xfce_panel_item_get_id   (item));
+                     xfce_panel_item_get_name (item),
+                     xfce_panel_item_get_id (item));
         }
-            
+
         g_list_free (configlist);
 
         /* grouping */
         fprintf (fp, "\t\t</items>\n"
                      "\t</panel>\n");
+
     }
 
     /* closing */

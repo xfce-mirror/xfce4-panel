@@ -1,35 +1,34 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2005-2006 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2005 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published 
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
+#ifdef HAVE_STRING_H
 #include <string.h>
+#endif
+
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
-
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
-
 #include <libxfce4panel/xfce-panel-item-iface.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-internal-plugin.h>
@@ -48,72 +47,77 @@ typedef struct _XfcePanelItemClass XfcePanelItemClass;
 struct _XfcePanelItemClass
 {
     /* info from .desktop file */
-    char                 *plugin_name;
-    char                 *name;
-    char                 *comment;
-    char                 *icon;
-    guint                 unique:1;
-    guint                 is_external:1;
+    gchar                *plugin_name;
+
+    gchar                *name;
+    gchar                *comment;
+    gchar                *icon;
+
+    guint                 unique : 1;
+    guint                 is_external : 1;
 
     /* either executable or loadable module */
-    char                 *file;
+    gchar                *file;
+
+    /* using the plugin */
+    gint                  use_count;
 
     /* for loadable modules only */
-    int                   use_count;
     GModule              *gmodule;
     XfcePanelPluginFunc   construct;
     XfcePanelPluginCheck  check;
 };
 
-static GHashTable *plugin_classes = NULL;
+static GHashTable *plugin_klasses = NULL;
 
 /* hash table */
 
 static void
-free_item_class (XfcePanelItemClass *class)
+free_item_klass (XfcePanelItemClass *klass)
 {
-    DBG ("Free item class: %s", class->plugin_name);
+    DBG ("Free item klass: %s", klass->plugin_name);
 
-    if (class->gmodule != NULL)
-        g_module_close (class->gmodule);
-    
-    g_free (class->plugin_name);
-    g_free (class->name);
-    g_free (class->comment);
-    g_free (class->icon);
+    if (klass->gmodule != NULL)
+        g_module_close (klass->gmodule);
 
-    g_free (class->file);
+    g_free (klass->plugin_name);
+    g_free (klass->name);
+    g_free (klass->comment);
+    g_free (klass->icon);
 
-    panel_slice_free (XfcePanelItemClass, class);
+    g_free (klass->file);
+
+    panel_slice_free (XfcePanelItemClass, klass);
 }
 
 static void
-add_item_info_to_array (char *plugin_name, 
-                        XfcePanelItemClass *class, 
-                        gpointer data)
+add_item_info_to_array (char               *plugin_name,
+                        XfcePanelItemClass *klass,
+                        gpointer            data)
 {
     GPtrArray         *array = data;
     XfcePanelItemInfo *info;
 
     info = panel_slice_new0 (XfcePanelItemInfo);
-    
+
     info->name         = plugin_name;
-    info->display_name = class->name;
-    info->comment      = class->comment;
-    
+    info->display_name = klass->name;
+    info->comment      = klass->comment;
+
     /* for the item list in the 'Add Items' dialog */
-    if (class->icon)
-        info->icon = xfce_themed_icon_load (class->icon, 48);
+    if (klass->icon)
+        info->icon = xfce_themed_icon_load (klass->icon, 48);
 
     g_ptr_array_add (array, info);
 }
 
 static gboolean
-check_class_removal (gpointer key, XfcePanelItemClass *class)
+check_klass_removal (gpointer            key,
+                     XfcePanelItemClass *klass)
 {
-    if (!g_file_test (class->file, G_FILE_TEST_EXISTS))
+    if (!g_file_test (klass->file, G_FILE_TEST_EXISTS))
     {
-        if (class->is_external || !class->use_count)
+        if (klass->is_external || !klass->use_count)
             return TRUE;
     }
 
@@ -121,10 +125,11 @@ check_class_removal (gpointer key, XfcePanelItemClass *class)
 }
 
 static int
-compare_classes (gpointer *a, gpointer *b)
+compare_klasses (gpointer *a,
+                 gpointer *b)
 {
-    XfcePanelItemClass *class_a, *class_b;
-    
+    XfcePanelItemClass *klass_a, *klass_b;
+
     if (!a || !(*a))
         return 1;
 
@@ -134,110 +139,105 @@ compare_classes (gpointer *a, gpointer *b)
     if (*a == *b)
         return 0;
 
-    class_a = *a;
-    class_b = *b;
+    klass_a = *a;
+    klass_b = *b;
 
-    if (strcmp (class_a->plugin_name, "launcher") == 0)
+    if (!strcmp (klass_a->plugin_name, "launcher"))
         return -1;
 
-    if (strcmp (class_b->plugin_name, "launcher") == 0)
+    if (!strcmp (klass_b->plugin_name, "launcher"))
         return 1;
 
-    return strcmp (class_a->name ? class_a->name : "z",
-                   class_b->name ? class_b->name : "z");
+    return strcmp (klass_a->name ? klass_a->name : "x",
+                   klass_b->name ? klass_b->name : "x");
 }
 
 /* plugin desktop files */
 
-static char *
-plugin_name_from_filename (const char *file)
+static gchar *
+plugin_name_from_filename (const gchar *file)
 {
-    const char *s, *p;
-    char       *name;
+    const gchar *s, *p;
+    gchar       *name;
 
-    if ((s = strrchr (file, G_DIR_SEPARATOR)) != NULL) 
-    {
+    if ((s = strrchr (file, G_DIR_SEPARATOR)) != NULL)
         s++;
-    }
     else
-    {
         s = file;
-    }
 
     if ((p = strrchr (s, '.')) != NULL)
-    {
         name = g_strndup (s, p - s);
-    }
     else
-    {
         name = g_strdup (s);
-    }
 
     return name;
 }
 
 static XfcePanelItemClass *
-create_item_class (const char *file, 
-                   gboolean is_external)
-{
-    XfcePanelItemClass *class;
+create_item_klass (const gchar *file,
+                   gboolean     is_external)
+ {
+    XfcePanelItemClass *klass;
 
-    class              = panel_slice_new0 (XfcePanelItemClass);
-    class->file        = g_strdup (file);
-    class->is_external = is_external;
+    klass              = panel_slice_new0 (XfcePanelItemClass);
+    klass->file        = g_strdup (file);
+    klass->is_external = is_external;
 
-    return class;
+    return klass;
 }
 
 static XfcePanelItemClass *
-new_plugin_class_from_desktop_file (const char *file)
+new_plugin_klass_from_desktop_file (const gchar *file)
 {
-    XfcePanelItemClass *class = NULL;
+    XfcePanelItemClass *klass = NULL;
     XfceRc             *rc;
-    char               *name;
-    const char         *value;
-    const char         *dir;
-    char               *path;
+    gchar              *name;
+    const gchar        *value;
+    const gchar        *dir;
+    gchar              *path;
 
     DBG ("Plugin .desktop file: %s", file);
-    
+
     name = plugin_name_from_filename (file);
-    
-    if (g_hash_table_lookup (plugin_classes, name) != NULL)
+
+    if (g_hash_table_lookup (plugin_klasses, name) != NULL)
     {
         DBG ("Already loaded");
         g_free (name);
         return NULL;
     }
-    
+
     rc = xfce_rc_simple_open (file, TRUE);
 
     if (rc && xfce_rc_has_group (rc, "Xfce Panel"))
     {
         xfce_rc_set_group (rc, "Xfce Panel");
 
-        if ((value = xfce_rc_read_entry (rc, "X-XFCE-Exec", NULL)) 
-            && g_file_test (value, G_FILE_TEST_EXISTS))
+        if ((value = xfce_rc_read_entry (rc, "X-XFCE-Exec", NULL)) &&
+            g_file_test (value, G_FILE_TEST_EXISTS))
 
         {
-            class = create_item_class (value, TRUE);
+            klass = create_item_klass (value, TRUE);
+
             DBG ("External plugin: %s", value);
         }
         else if ((value = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL)))
         {
             if (g_file_test (value, G_FILE_TEST_EXISTS))
             {
-                class = create_item_class (value, FALSE);
+                klass = create_item_klass (value, FALSE);
+
                 DBG ("Internal plugin: %s", value);
             }
-            else if ((dir = xfce_rc_read_entry (rc, "X-XFCE-Module-Path", 
+            else if ((dir = xfce_rc_read_entry (rc, "X-XFCE-Module-Path",
                                                 NULL)))
             {
                 path = g_module_build_path (dir, value);
 
                 if (g_file_test (path, G_FILE_TEST_EXISTS))
                 {
-                    class = create_item_class (path, FALSE);
+                    klass = create_item_klass (path, FALSE);
+
                     DBG ("Internal plugin: %s", path);
                 }
 
@@ -245,27 +245,27 @@ new_plugin_class_from_desktop_file (const char *file)
             }
         }
 
-        if (class)
+        if (klass)
         {
-            class->plugin_name = name;
-            
+            klass->plugin_name = name;
+
             if ((value = xfce_rc_read_entry (rc, "Name", NULL)))
-                class->name = g_strdup (value);
+                klass->name = g_strdup (value);
             else
-                class->name = g_strdup (class->plugin_name);
+                klass->name = g_strdup (klass->plugin_name);
 
             if ((value = xfce_rc_read_entry (rc, "Comment", NULL)))
-                class->comment = g_strdup (value);
+                klass->comment = g_strdup (value);
 
             if ((value = xfce_rc_read_entry (rc, "Icon", NULL)))
-                class->icon = g_strdup (value);
+                klass->icon = g_strdup (value);
 
-            class->unique = 
+            klass->unique =
                 xfce_rc_read_bool_entry (rc, "X-XFCE-Unique", FALSE);
         }
         else
         {
-            DBG ("No plugin class found");
+            DBG ("No plugin klass found");
             g_free (name);
         }
     }
@@ -277,20 +277,23 @@ new_plugin_class_from_desktop_file (const char *file)
 
     if (rc)
         xfce_rc_close (rc);
-    
-    return class;
+
+    return klass;
 }
 
 static void
 update_plugin_list (void)
 {
-    char     **dirs;
-    char     **d;
-    gboolean   datadir_used = FALSE;
+    gchar             **dirs, **d;
+    gboolean            datadir_used = FALSE;
+    GDir               *gdir;
+    gchar              *dirname, *path;
+    const gchar        *file;
+    XfcePanelItemClass *klass;
 
     if (G_UNLIKELY (!xfce_allow_panel_customization()))
     {
-        dirs    = g_new (char*, 2);
+        dirs    = g_new (gchar*, 2);
         dirs[0] = g_strdup (DATADIR);
         dirs[1] = NULL;
     }
@@ -300,24 +303,18 @@ update_plugin_list (void)
 
         if (G_UNLIKELY(!dirs))
         {
-            dirs    = g_new (char*, 2);
+            dirs    = g_new (gchar*, 2);
             dirs[0] = g_strdup (DATADIR);
             dirs[1] = NULL;
         }
     }
-    
+
     for (d = dirs; *d != NULL || !datadir_used; ++d)
     {
-        GDir               *gdir;
-        char               *dirname;
-        const char         *file;
-        XfcePanelItemClass *class;
-        char               *path;
-    
         /* check if resource dirs include our prefix */
         if (*d == NULL)
         {
-            dirname = g_build_filename (DATADIR, "xfce4", "panel-plugins", 
+            dirname = g_build_filename (DATADIR, "xfce4", "panel-plugins",
                                         NULL);
             datadir_used = TRUE;
         }
@@ -325,14 +322,20 @@ update_plugin_list (void)
         {
             if (strcmp (DATADIR, *d) == 0)
                 datadir_used = TRUE;
-        
+
             dirname = g_build_filename (*d, "xfce4", "panel-plugins", NULL);
         }
-        
+
         gdir = g_dir_open (dirname, 0, NULL);
 
         DBG (" + directory: %s", dirname);
-        
+
+        if (!gdir)
+        {
+            g_free (dirname);
+            continue;
+        }
+
         if (gdir)
         {
             while ((file = g_dir_read_name (gdir)) != NULL)
@@ -340,26 +343,24 @@ update_plugin_list (void)
                 if (!g_str_has_suffix (file, ".desktop"))
                     continue;
 
-                path = g_build_filename (dirname, file, NULL);
+                path  = g_build_filename (dirname, file, NULL);
+                klass = new_plugin_klass_from_desktop_file (path);
 
-                class = new_plugin_class_from_desktop_file (path);
-            
                 g_free (path);
 
-                if (class)
+                if (klass)
                 {
-                    DBG (" + class \"%s\": "
-                         "name=%s, comment=%s, icon=%s, external=%d, path=%s", 
-                         class->plugin_name ? class->plugin_name : "(null)",
-                         class->name        ? class->name        : "(null)", 
-                         class->comment     ? class->comment     : "(null)", 
-                         class->icon        ? class->icon        : "(null)",
-                         class->is_external, 
-                         class->file        ? class->file        : "(null)");
-                
-                    g_hash_table_insert (plugin_classes, 
-                                         class->plugin_name, 
-                                         class);
+                    DBG (" + klass \"%s\": "
+                         "name=%s, comment=%s, icon=%s, external=%d, path=%s",
+                         klass->plugin_name ? klass->plugin_name : "(null)",
+                         klass->name        ? klass->name        : "(null)", 
+                         klass->comment     ? klass->comment     : "(null)", 
+                         klass->icon        ? klass->icon        : "(null)",
+                         klass->is_external, 
+                         klass->file        ? klass->file        : "(null)");
+
+                    g_hash_table_insert (plugin_klasses,
+                                         klass->plugin_name, klass);
                 }
             }
 
@@ -376,54 +377,57 @@ update_plugin_list (void)
 }
 
 static gboolean
-load_module (XfcePanelItemClass *class)
+load_module (XfcePanelItemClass *klass)
 {
     gpointer               symbol;
     XfcePanelPluginFunc  (*get_construct) (void);
     XfcePanelPluginCheck (*get_check)     (void);
-            
-    class->gmodule = g_module_open (class->file, G_MODULE_BIND_LOCAL);
 
-    if (G_UNLIKELY (class->gmodule == NULL))
+    klass->gmodule = g_module_open (klass->file, G_MODULE_BIND_LOCAL);
+
+    if (G_UNLIKELY (klass->gmodule == NULL))
     {
-        g_critical ("Could not open \"%s\": %s", 
-                    class->name, g_module_error ());
+        g_critical ("Could not open \"%s\": %s",
+                    klass->name, g_module_error ());
         return FALSE;
     }
 
-    if (!g_module_symbol (class->gmodule, 
-                          "xfce_panel_plugin_get_construct", &symbol))
+    if (G_UNLIKELY (!g_module_symbol (klass->gmodule,
+                                      "xfce_panel_plugin_get_construct",
+                                      &symbol)))
     {
-        g_critical ("Could not open \"%s\": %s", 
-                    class->name, g_module_error ());
-        g_module_close (class->gmodule);
-        class->gmodule = NULL;
+        g_critical ("Could not open \"%s\": %s",
+                    klass->name, g_module_error ());
+
+        g_module_close (klass->gmodule);
+        klass->gmodule = NULL;
+
         return FALSE;
     }
-            
+
     get_construct    = symbol;
-    class->construct = get_construct ();
-            
-    if (g_module_symbol (class->gmodule, 
+    klass->construct = get_construct ();
+
+    if (g_module_symbol (klass->gmodule,
                          "xfce_panel_plugin_get_check", &symbol))
     {
         get_check    = symbol;
-        class->check = get_check ();
+        klass->check = get_check ();
     }
     else
     {
-        class->check = NULL;
+        klass->check = NULL;
     }
 
     return TRUE;
 }
 
 static void
-decrease_use_count (GtkWidget *item, 
-                    XfcePanelItemClass *class)
+decrease_use_count (GtkWidget          *item,
+                    XfcePanelItemClass *klass)
 {
-    if (class->use_count > 0)
-        class->use_count--;
+    if (klass->use_count > 0)
+        klass->use_count--;
 }
 
 /* public API */
@@ -431,65 +435,62 @@ decrease_use_count (GtkWidget *item,
 void
 xfce_panel_item_manager_init (void)
 {
-    plugin_classes = g_hash_table_new_full ((GHashFunc) g_str_hash, 
-                                            (GEqualFunc)  g_str_equal,
+    plugin_klasses = g_hash_table_new_full ((GHashFunc) g_str_hash,
+                                            (GEqualFunc) g_str_equal,
                                             NULL,
-                                            (GDestroyNotify) free_item_class);
+                                            (GDestroyNotify) free_item_klass);
 
     update_plugin_list ();
 }
 
-void 
+void
 xfce_panel_item_manager_cleanup (void)
 {
-    g_hash_table_destroy (plugin_classes);
+    g_hash_table_destroy (plugin_klasses);
 
-    plugin_classes = NULL;
+    plugin_klasses = NULL;
 }
 
 GtkWidget *
-xfce_panel_item_manager_create_item (GdkScreen          *screen, 
-                                     const char         *name, 
-                                     const char         *id, 
-                                     int                 size, 
+xfce_panel_item_manager_create_item (GdkScreen          *screen,
+                                     const gchar        *name,
+                                     const gchar        *id,
+                                     gint                size,
                                      XfceScreenPosition  position)
 {
-    XfcePanelItemClass *class;
+    XfcePanelItemClass *klass;
     GtkWidget          *item = NULL;
 
-    if ((class = g_hash_table_lookup (plugin_classes, name)) == NULL)
+    if ((klass = g_hash_table_lookup (plugin_klasses, name)) == NULL)
         return NULL;
 
-    if (class->is_external)
+    if (klass->is_external)
     {
-        item = xfce_external_panel_item_new (class->plugin_name, 
-                                             id, 
-                                             class->name, 
-                                             class->file, 
-                                             size, 
-                                             position);
+        item = xfce_external_panel_item_new (klass->plugin_name, id,
+                                             klass->name, klass->file,
+                                             size, position);
     }
     else
     {
-        if (!class->gmodule && !load_module (class))
+        if (!klass->gmodule && !load_module (klass))
             return NULL;
 
-        if (class->check == NULL || class->check(screen) == TRUE )
+        if (klass->check == NULL || klass->check(screen) == TRUE )
         {
-            item = xfce_internal_panel_plugin_new (class->plugin_name, 
-                                                   id, 
-                                                   class->name, 
-                                                   size, 
-                                                   position, 
-                                                   class->construct);
+            item = xfce_internal_panel_plugin_new (klass->plugin_name,
+                                                   id,
+                                                   klass->name,
+                                                   size,
+                                                   position,
+                                                   klass->construct);
         }
     }
 
     if (item)
     {
-        class->use_count++;
-        g_signal_connect (item, "destroy", 
-                          G_CALLBACK (decrease_use_count), class);
+        klass->use_count++;
+        g_signal_connect (G_OBJECT (item), "destroy",
+                          G_CALLBACK (decrease_use_count), klass);
     }
 
     return item;
@@ -499,26 +500,26 @@ GPtrArray *
 xfce_panel_item_manager_get_item_info_list (void)
 {
     GPtrArray *array;
-    
-    update_plugin_list ();
-    
-    g_hash_table_foreach_remove (plugin_classes, 
-                                 (GHRFunc)check_class_removal, NULL);
-    
-    array = g_ptr_array_sized_new (g_hash_table_size (plugin_classes));
-    
-    g_hash_table_foreach (plugin_classes, 
-                          (GHFunc)add_item_info_to_array, array);
 
-    g_ptr_array_sort (array, (GCompareFunc)compare_classes);
-    
+    update_plugin_list ();
+
+    g_hash_table_foreach_remove (plugin_klasses, (GHRFunc)check_klass_removal,
+                                 NULL);
+
+    array = g_ptr_array_sized_new (g_hash_table_size (plugin_klasses));
+
+    g_hash_table_foreach (plugin_klasses, (GHFunc)add_item_info_to_array,
+                          array);
+
+    g_ptr_array_sort (array, (GCompareFunc)compare_klasses);
+
     return array;
 }
 
-void 
+void
 xfce_panel_item_manager_free_item_info_list (GPtrArray *info_list)
 {
-    int i;
+    gint i;
 
     for (i = 0; i < info_list->len; ++i)
     {
@@ -534,12 +535,12 @@ xfce_panel_item_manager_free_item_info_list (GPtrArray *info_list)
 }
 
 gboolean
-xfce_panel_item_manager_is_available (const char *name)
+xfce_panel_item_manager_is_available (const gchar *name)
 {
-    XfcePanelItemClass *class;
-    
-    if ((class = g_hash_table_lookup (plugin_classes, name)) == NULL)
+    XfcePanelItemClass *klass;
+
+    if ((klass = g_hash_table_lookup (plugin_klasses, name)) == NULL)
         return FALSE;
 
-    return (!(class->unique && class->use_count));
+    return (!(klass->unique && klass->use_count));
 }

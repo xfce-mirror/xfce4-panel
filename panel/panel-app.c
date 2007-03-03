@@ -1,36 +1,50 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2005-2006 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2005 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published 
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#include <stdio.h> 
+#ifdef HAVE_STDIO_H
+#include <stdio.h>
+#endif
+#ifdef HAVE_STDLIB_H
 #include <stdlib.h>
+#endif
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
+#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
+#endif
+#ifdef HAVE_SIGNAL_H
 #include <signal.h>
+#endif
+#ifdef HAVE_STRING_H
 #include <string.h>
+#endif
+#ifdef HAVE_ERRNO_H
 #include <errno.h>
+#endif
+#ifdef HAVE_SYS_WAIT_H
 #include <sys/wait.h>
+#endif
 
 #include <X11/Xlib.h>
 #include <gtk/gtk.h>
@@ -60,20 +74,20 @@
 
 #if defined(TIMER) && defined(G_HAVE_ISO_VARARGS)
 void
-xfce_panel_program_log (const char *file, 
-                        const int   line, 
-                        const char *format, 
+xfce_panel_program_log (const gchar *file,
+                        const gint   line,
+                        const gchar *format,
                         ...)
 {
-    va_list args;
-    gchar  *formatted;
-    gchar  *message;
+    va_list  args;
+    gchar   *formatted;
+    gchar   *message;
 
     va_start (args, format);
     formatted = g_strdup_vprintf (format, args);
     va_end (args);
 
-    message = g_strdup_printf ("MARK: %s: %s:%d: %s", 
+    message = g_strdup_printf ("MARK: %s: %s:%d: %s",
                                g_get_prgname(), file, line, formatted);
 
     access (message, F_OK);
@@ -107,20 +121,21 @@ struct _PanelApp
     GPtrArray     *panel_list;
     GPtrArray     *monitor_list;
 
-    int            save_id;
-    int            current_panel;
+    gint           save_id;
+    gint           current_panel;
+
     GList         *dialogs;
 
     /* Initialization. Also unset before cleanup. */
-    guint          initialized:1; 
+    guint          initialized : 1;
 
     /* Check whether monitors in Xinerama are aligned. */
-    guint          xinerama_and_equal_width:1;
-    guint          xinerama_and_equal_height:1;
+    guint          xinerama_and_equal_width : 1;
+    guint          xinerama_and_equal_height : 1;
 };
 
 static PanelApp panel_app = {0};
-static int signal_pipe[2];
+static gint     signal_pipe[2];
 
 
 /* cleanup */
@@ -128,8 +143,10 @@ static int signal_pipe[2];
 static void
 cleanup_panels (void)
 {
-    int    i;
-    GList *l;
+    gint         i;
+    GList       *l;
+    Panel       *panel;
+    XfceMonitor *xmon;
 
     if (!panel_app.initialized)
         return;
@@ -138,7 +155,7 @@ cleanup_panels (void)
 
     l = panel_app.dialogs;
     panel_app.dialogs = NULL;
-    
+
     while (l)
     {
         gtk_dialog_response (GTK_DIALOG (l->data), GTK_RESPONSE_NONE);
@@ -147,7 +164,7 @@ cleanup_panels (void)
 
     for (i = 0; i < panel_app.panel_list->len; ++i)
     {
-        Panel *panel = g_ptr_array_index (panel_app.panel_list, i);
+        panel = g_ptr_array_index (panel_app.panel_list, i);
 
         gtk_widget_hide (GTK_WIDGET (panel));
 
@@ -162,7 +179,7 @@ cleanup_panels (void)
 
     for (i = 0; i < panel_app.monitor_list->len; ++i)
     {
-        XfceMonitor *xmon = g_ptr_array_index (panel_app.monitor_list, i);
+        xmon = g_ptr_array_index (panel_app.monitor_list, i);
         panel_slice_free (XfceMonitor, xmon);
     }
     g_ptr_array_free (panel_app.monitor_list, TRUE);
@@ -172,9 +189,9 @@ cleanup_panels (void)
 
 /** copied from glibc manual, does this prevent zombies? */
 static void
-sigchld_handler (int sig)
+sigchld_handler (gint sig)
 {
-    int pid, status, serrno;
+    gint pid, status, serrno;
 
     serrno = errno;
 
@@ -190,7 +207,7 @@ sigchld_handler (int sig)
 }
 
 static void
-sighandler (int sig)
+sighandler (gint sig)
 {
     /* Don't do any real stuff here.
      * Only set a signal state flag. There's a timeout in the main loop
@@ -206,16 +223,16 @@ sighandler (int sig)
 static gboolean
 check_run_state (void)
 {
-    static int recursive = 0;
-    gboolean   quit      = FALSE;
- 
+    static gint recursive = 0;
+    gboolean    quit = FALSE;
+
     /* micro-optimization */
     if (G_LIKELY (panel_app.runstate == PANEL_RUN_STATE_NORMAL))
         return TRUE;
-    
+
     if (G_UNLIKELY (recursive))
         return TRUE;
-    
+
     recursive++;
 
     switch (panel_app.runstate)
@@ -241,7 +258,7 @@ check_run_state (void)
                 panel_app_save ();
                 quit = TRUE;
             }
-            
+
             /* don't forget to set back the run state */
             panel_app.runstate = PANEL_RUN_STATE_NORMAL;
             break;
@@ -265,21 +282,21 @@ check_run_state (void)
 }
 
 static gboolean
-set_run_state (GIOChannel   *source, 
-               GIOCondition  cond, 
+set_run_state (GIOChannel   *source,
+               GIOCondition  cond,
                gpointer      data)
 {
     GError    *error = NULL;
     GIOStatus  status;
     gsize      bytes_read;
-    /* 
+    /*
      * There is no g_io_channel_read or g_io_channel_read_int, so we read
      * char's and use a union to recover the unix signal number.
      */
     union
     {
-        gchar chars[sizeof (int)];
-        int   signal;
+        gchar chars[sizeof (gint)];
+        gint  signal;
     } buf;
 
     while ((status = g_io_channel_read_chars (source, buf.chars, sizeof (int),
@@ -337,10 +354,10 @@ set_run_state (GIOChannel   *source,
 /* session */
 
 static void
-session_save_yourself (gpointer data, 
-                       int      save_style, 
+session_save_yourself (gpointer data,
+                       gint     save_style,
                        gboolean shutdown,
-                       int      interact_style, 
+                       gint     interact_style,
                        gboolean fast)
 {
     panel_app_save ();
@@ -356,7 +373,7 @@ session_die (gpointer client_data)
 static void
 monitor_size_changed (GdkScreen *screen)
 {
-    int          i;
+    gint         i;
     XfceMonitor *monitor;
     GtkWidget   *panel;
 
@@ -366,7 +383,7 @@ monitor_size_changed (GdkScreen *screen)
 
         if (monitor->screen == screen)
         {
-            gdk_screen_get_monitor_geometry (screen, monitor->num, 
+            gdk_screen_get_monitor_geometry (screen, monitor->num,
                                              &(monitor->geometry));
         }
     }
@@ -386,12 +403,13 @@ create_monitor_list (void)
     GdkDisplay  *display;
     GdkScreen   *screen;
     XfceMonitor *monitor;
-    int          n_screens;
-    int          n_monitors = 0;
-    int          i, j;
-    int          w = 0, h = 0;
+    gint         n_screens;
+    gint         n_monitors = 0;
+    gint         i, j;
+    gint         w = 0, h = 0;
     gboolean     equal_w, equal_h;
-    
+    XfceMonitor *mon1, *mon2;
+
     panel_app.monitor_list = g_ptr_array_new ();
 
     display = gdk_display_get_default ();
@@ -399,7 +417,7 @@ create_monitor_list (void)
     n_screens = gdk_display_get_n_screens (display);
 
     equal_w = equal_h = TRUE;
-    
+
     for (i = 0; i < n_screens; ++i)
     {
         screen = gdk_display_get_screen (display, i);
@@ -416,7 +434,7 @@ create_monitor_list (void)
             gdk_screen_get_monitor_geometry (screen, j, &(monitor->geometry));
 
             g_ptr_array_add (panel_app.monitor_list, monitor);
-            
+
             if (j > 0)
             {
                 if (w != monitor->geometry.width)
@@ -427,7 +445,7 @@ create_monitor_list (void)
 
             w = monitor->geometry.width;
             h = monitor->geometry.height;
-            
+
 #if TEST_MULTIPLE_MONITORS
             monitor = panel_slice_new0 (XfceMonitor);
 
@@ -440,7 +458,7 @@ create_monitor_list (void)
 #endif
         }
 
-        g_signal_connect (screen, "size-changed", 
+        g_signal_connect (G_OBJECT (screen), "size-changed",
                           G_CALLBACK (monitor_size_changed), NULL);
     }
 
@@ -453,8 +471,6 @@ create_monitor_list (void)
     /* check layout */
     for (i = 0; i < panel_app.monitor_list->len; ++i)
     {
-        XfceMonitor *mon1, *mon2;
-
         mon1 = g_ptr_array_index (panel_app.monitor_list, i);
 
         for (j = 0; j < panel_app.monitor_list->len; ++j)
@@ -523,23 +539,23 @@ unregister_dialog (GtkWidget *dialog)
  * Initialize application. Creates ipc window if no other instance is
  * running or sets the ipc window from the running instance.
  *
- * Returns: 0 on success, 1 when an xfce4-panel instance already exists, 
+ * Returns: 0 on success, 1 when an xfce4-panel instance already exists,
  *          and -1 on failure.
  **/
 int
 panel_app_init (void)
 {
-    Atom                 selection_atom;
-    Atom                 manager_atom;
+    Atom                 selection_atom, manager_atom;
     GtkWidget           *invisible;
     XClientMessageEvent  xev;
 
     if (panel_app.initialized)
         return 0;
-    
+
     panel_app.initialized = TRUE;
-    
+
     selection_atom = XInternAtom (GDK_DISPLAY (), SELECTION_NAME, False);
+
     panel_app.ipc_window = XGetSelectionOwner (GDK_DISPLAY (), selection_atom);
 
     if (panel_app.ipc_window)
@@ -547,25 +563,25 @@ panel_app_init (void)
 
     invisible = gtk_invisible_new ();
     gtk_widget_realize (invisible);
-    
+
     panel_app.gtk_ipc_window = invisible;
     panel_app.ipc_window = GDK_WINDOW_XWINDOW (invisible->window);
-    
+
     XSelectInput (GDK_DISPLAY (), panel_app.ipc_window, PropertyChangeMask);
-    
-    XSetSelectionOwner (GDK_DISPLAY (), selection_atom, panel_app.ipc_window, 
+
+    XSetSelectionOwner (GDK_DISPLAY (), selection_atom, panel_app.ipc_window,
                         GDK_CURRENT_TIME);
-    
-    if (XGetSelectionOwner (GDK_DISPLAY (), selection_atom) != 
+
+    if (XGetSelectionOwner (GDK_DISPLAY (), selection_atom) !=
             panel_app.ipc_window)
     {
         g_critical ("Could not set ownership of selection \"%s\"",
                     SELECTION_NAME);
         return -1;
     }
-    
+
     manager_atom = XInternAtom (GDK_DISPLAY (), "MANAGER", False);
-    
+
     xev.type         = ClientMessage;
     xev.window       = GDK_ROOT_WINDOW ();
     xev.message_type = manager_atom;
@@ -573,8 +589,8 @@ panel_app_init (void)
     xev.data.l[0]    = GDK_CURRENT_TIME;
     xev.data.l[1]    = selection_atom;
     xev.data.l[2]    = panel_app.ipc_window;
-    xev.data.l[3]    = 0;	/* manager specific data */
-    xev.data.l[4]    = 0;	/* manager specific data */
+    xev.data.l[3]    = 0;    /* manager specific data */
+    xev.data.l[4]    = 0;    /* manager specific data */
 
     XSendEvent (GDK_DISPLAY (), GDK_ROOT_WINDOW (), False,
                 StructureNotifyMask, (XEvent *) & xev);
@@ -604,26 +620,26 @@ panel_app_init_panel (GtkWidget *panel)
     TIMER_ELAPSED(" + end show panel");
     g_idle_add ((GSourceFunc)expose_timeout, panel);
     TIMER_ELAPSED("end panel_app_init_panel");
-}    
+}
 
 /**
  * panel_app_run
- * 
+ *
  * Run the panel application. Reads the configuration file(s) and sets up the
  * panels, before turning over control to the main event loop.
  *
  * Returns: 1 to restart and 0 to quit.
  **/
-int
-panel_app_run (int    argc, 
-               char **argv)
+gint
+panel_app_run (gint    argc,
+               gchar **argv)
 {
 #ifdef HAVE_SIGACTION
     struct sigaction  act;
-#endif    
+#endif
     GIOChannel       *g_signal_in;
     GError           *error = NULL;
-    long              fd_flags;
+    glong             fd_flags;
 
     /* create pipe and set writing end in non-blocking mode */
     if (pipe (signal_pipe))
@@ -677,19 +693,19 @@ panel_app_run (int    argc,
 #else
     act.sa_flags = 0;
 #endif
-    sigaction (SIGHUP,  &act, NULL);
+    sigaction (SIGHUP, &act, NULL);
     sigaction (SIGUSR1, &act, NULL);
     sigaction (SIGUSR2, &act, NULL);
-    sigaction (SIGINT,  &act, NULL);
+    sigaction (SIGINT, &act, NULL);
     sigaction (SIGABRT, &act, NULL);
     sigaction (SIGTERM, &act, NULL);
     act.sa_handler = sigchld_handler;
     sigaction (SIGCHLD, &act, NULL);
 #else
-    signal (SIGHUP,  sighandler);
+    signal (SIGHUP, sighandler);
     signal (SIGUSR1, sighandler);
     signal (SIGUSR2, sighandler);
-    signal (SIGINT,  sighandler);
+    signal (SIGINT, sighandler);
     signal (SIGABRT, sighandler);
     signal (SIGTERM, sighandler);
     signal (SIGCHLD, sigchld_handler);
@@ -697,27 +713,27 @@ panel_app_run (int    argc,
 
     /* environment */
     xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default ()),
-		 TRUE);
-    
+         TRUE);
+
     /* session management */
-    panel_app.session_client = 
-        client_session_new (argc, argv, NULL /* data */, 
+    panel_app.session_client =
+        client_session_new (argc, argv, NULL /* data */,
                             SESSION_RESTART_IF_RUNNING, 40);
 
     panel_app.session_client->save_yourself = session_save_yourself;
-    panel_app.session_client->die           = session_die;
+    panel_app.session_client->die = session_die;
 
     TIMER_ELAPSED("connect to session manager");
     if (!session_init (panel_app.session_client))
     {
         g_free (panel_app.session_client);
         panel_app.session_client = NULL;
-    }   
-    
+    }
+
     /* screen layout and geometry */
     TIMER_ELAPSED("start monitor list creation");
     create_monitor_list ();
-    
+
     /* configuration */
     TIMER_ELAPSED("start init item manager");
     xfce_panel_item_manager_init ();
@@ -726,14 +742,14 @@ panel_app_run (int    argc,
     panel_app.panel_list = panel_config_create_panels ();
     TIMER_ELAPSED("end panel creation");
 
-    g_ptr_array_foreach (panel_app.panel_list, (GFunc)panel_app_init_panel, 
+    g_ptr_array_foreach (panel_app.panel_list, (GFunc)panel_app_init_panel,
                          NULL);
 
     /* Run Forrest, Run! */
     panel_app.runstate = PANEL_RUN_STATE_NORMAL;
     TIMER_ELAPSED("start main loop");
     gtk_main ();
-    
+
     /* cleanup */
     g_free (panel_app.session_client);
     panel_app.session_client = NULL;
@@ -751,7 +767,7 @@ static gboolean
 save_timeout (void)
 {
     DBG (" ++ save timeout");
-    
+
     if (panel_app.save_id)
         g_source_remove (panel_app.save_id);
     panel_app.save_id = 0;
@@ -765,7 +781,7 @@ save_timeout (void)
     return FALSE;
 }
 
-void 
+void
 panel_app_queue_save (void)
 {
     if (!panel_app.initialized)
@@ -774,26 +790,26 @@ panel_app_queue_save (void)
     if (panel_app.runstate == PANEL_RUN_STATE_NORMAL)
     {
         if (!panel_app.save_id)
-            panel_app.save_id = 
+            panel_app.save_id =
                 g_timeout_add (SAVE_TIMEOUT, (GSourceFunc)save_timeout, NULL);
     }
 }
 
-void 
+void
 panel_app_customize (void)
 {
     if (xfce_allow_panel_customization())
         panel_manager_dialog (panel_app.panel_list);
 }
 
-void 
+void
 panel_app_customize_items (GtkWidget *active_item)
 {
     if (xfce_allow_panel_customization())
         add_items_dialog (panel_app.panel_list, active_item);
 }
 
-void 
+void
 panel_app_save (void)
 {
     if (!panel_app.initialized)
@@ -803,35 +819,35 @@ panel_app_save (void)
         panel_config_save_panels (panel_app.panel_list);
 }
 
-void 
+void
 panel_app_restart (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_RESTART;
     check_run_state ();
 }
 
-void 
+void
 panel_app_quit (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_QUIT;
     check_run_state ();
 }
 
-void 
+void
 panel_app_quit_noconfirm (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
     check_run_state ();
 }
 
-void 
+void
 panel_app_quit_nosave (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_QUIT_NOSAVE;
     check_run_state ();
 }
 
-void 
+void
 panel_app_add_panel (void)
 {
     Panel *panel;
@@ -843,7 +859,7 @@ panel_app_add_panel (void)
 
     if (G_UNLIKELY (panel_app.panel_list == NULL))
         panel_app.panel_list = g_ptr_array_sized_new (1);
-    
+
     g_ptr_array_add (panel_app.panel_list, panel);
 
     panel_set_screen_position (panel, XFCE_SCREEN_POSITION_FLOATING_H);
@@ -858,22 +874,22 @@ panel_app_add_panel (void)
     panel_app_customize ();
 }
 
-void 
+void
 panel_app_remove_panel (GtkWidget *panel)
 {
-    int   response = GTK_RESPONSE_NONE;
-    int   n;
-    char *first;
+    gint   response = GTK_RESPONSE_NONE;
+    gint   n;
+    gchar *first;
 
     if (!xfce_allow_panel_customization())
         return;
-        
+
     if (panel_app.panel_list->len == 1)
     {
-        response = 
+        response =
             xfce_message_dialog (NULL, _("Xfce Panel"),
-                                 GTK_STOCK_DIALOG_WARNING, 
-                                 _("Exit Xfce Panel?"), 
+                                 GTK_STOCK_DIALOG_WARNING,
+                                 _("Exit Xfce Panel?"),
                                  _("You can't remove the last panel. "
                                    "Would you like to exit the program?"),
                                  GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -885,7 +901,7 @@ panel_app_remove_panel (GtkWidget *panel)
 
         return;
     }
-    
+
     for (n = 0; n < panel_app.panel_list->len; ++n)
     {
         if (panel == g_ptr_array_index (panel_app.panel_list, n))
@@ -894,24 +910,24 @@ panel_app_remove_panel (GtkWidget *panel)
 
     if (n == panel_app.panel_list->len)
         return;
-    
+
     panel_block_autohide (PANEL (panel));
-    
+
     panel_set_items_sensitive (PANEL (panel), FALSE);
     gtk_widget_set_sensitive (panel, FALSE);
     gtk_drag_highlight (panel);
-    
+
     first = g_strdup_printf (_("Remove Panel \"%d\"?"), n + 1);
-    
+
     response = xfce_message_dialog (GTK_WINDOW (panel), _("Xfce Panel"),
-                                    GTK_STOCK_DIALOG_WARNING, first, 
+                                    GTK_STOCK_DIALOG_WARNING, first,
                                     _("The selected panel and all its items "
                                       "will be removed."),
                                     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                     GTK_STOCK_REMOVE, GTK_RESPONSE_ACCEPT,
                                     NULL);
     g_free (first);
-                                    
+
     if (response != GTK_RESPONSE_ACCEPT)
     {
         gtk_drag_unhighlight (panel);
@@ -929,36 +945,34 @@ panel_app_remove_panel (GtkWidget *panel)
     }
 }
 
-void 
+void
 panel_app_about (GtkWidget *panel)
 {
     XfceAboutInfo *info;
     GtkWidget     *dlg;
     GdkPixbuf     *pb;
 
-    info = 
-        xfce_about_info_new (_("Xfce Panel"), "", _("Xfce Panel"), 
-                             XFCE_COPYRIGHT_TEXT ("2006", "Jasper Huijsmans"),
-                             XFCE_LICENSE_GPL);
+    info = xfce_about_info_new (_("Xfce Panel"), "", _("Xfce Panel"),
+                                XFCE_COPYRIGHT_TEXT ("2006", "Jasper Huijsmans"),
+                                XFCE_LICENSE_GPL);
 
     xfce_about_info_set_homepage (info, "http://www.xfce.org");
 
-    xfce_about_info_add_credit (info, "Jasper Huijsmans", "jasper@xfce.org",
-                                _("Developer"));
-
-    xfce_about_info_add_credit (info, "Nick Schermer", "nick@xfce.org",
-                                _("Developer"));
+    xfce_about_info_add_credit (info, "Jasper Huijsmans", "jasper@xfce.org", _("Developer"));
+    xfce_about_info_add_credit (info, "Nick Schermer", "nick@xfce.org", _("Developer"));
 
     pb = xfce_themed_icon_load ("xfce4-panel", 48);
     dlg = xfce_about_dialog_new_with_values (NULL, info, pb);
     g_object_unref (G_OBJECT (pb));
 
     gtk_window_set_screen (GTK_WINDOW (dlg), gtk_widget_get_screen (panel));
+
     gtk_widget_set_size_request (dlg, 400, 300);
 
     gtk_dialog_run (GTK_DIALOG (dlg));
 
     gtk_widget_destroy (dlg);
+
     xfce_about_info_free (info);
 }
 
@@ -971,37 +985,38 @@ panel_app_get_ipc_window (void)
 }
 
 XfceMonitor *
-panel_app_get_monitor (int n)
+panel_app_get_monitor (gint n)
 {
-    return g_ptr_array_index (panel_app.monitor_list, 
+    return g_ptr_array_index (panel_app.monitor_list,
                               CLAMP (n, 0, panel_app.monitor_list->len - 1));
 }
 
-int
+gint
 panel_app_get_n_monitors (void)
 {
     return panel_app.monitor_list->len;
 }
 
 /* open dialogs */
-void 
+void
 panel_app_register_dialog (GtkWidget *dialog)
 {
     g_return_if_fail (GTK_IS_WIDGET (dialog));
 
-    g_signal_connect (dialog, "destroy", G_CALLBACK (unregister_dialog), NULL);
+    g_signal_connect (G_OBJECT (dialog), "destroy",
+                      G_CALLBACK (unregister_dialog), NULL);
 
     panel_app.dialogs = g_list_prepend (panel_app.dialogs, dialog);
 }
 
 /* current panel */
-void 
+void
 panel_app_set_current_panel (gpointer *panel)
 {
-    int i;
+    gint i;
 
     panel_app.current_panel = 0;
-    
+
     for (i = 0; i < panel_app.panel_list->len; ++i)
     {
         if (g_ptr_array_index (panel_app.panel_list, i) == panel)
@@ -1014,10 +1029,10 @@ panel_app_set_current_panel (gpointer *panel)
     DBG ("Current panel: %d", panel_app.current_panel);
 }
 
-void 
+void
 panel_app_unset_current_panel (gpointer *panel)
 {
-    int i;
+    gint i;
 
     for (i = 0; i < panel_app.panel_list->len; ++i)
     {
@@ -1032,13 +1047,13 @@ panel_app_unset_current_panel (gpointer *panel)
     DBG ("Current panel: %d", panel_app.current_panel);
 }
 
-int 
+gint
 panel_app_get_current_panel (void)
 {
     return panel_app.current_panel;
 }
 
-G_CONST_RETURN GPtrArray *
+const GPtrArray *
 panel_app_get_panel_list (void)
 {
     return panel_app.panel_list;
