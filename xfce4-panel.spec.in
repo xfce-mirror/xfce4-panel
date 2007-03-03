@@ -1,18 +1,21 @@
-Summary: 	Xfce Panel
-Name: 		@PACKAGE_TARNAME@
-Version: 	@PACKAGE_VERSION@
-Release: 	1
-License:	GPL, LGPL
-URL: 		http://www.xfce.org/
-Source0: 	%{name}-%{version}.tar.gz
-Group: 		User Interface/Desktops
-BuildRoot: 	%{_tmppath}/%{name}-root
-Requires:	libxfce4util >= @LIBXFCEGUI4_REQUIRED_VERSION@
-Requires:	libxfcegui4 >= @LIBXFCEGUI4_REQUIRED_VERSION@
-BuildRequires: 	libxfce4util-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
-BuildRequires: 	libxfcegui4-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
-Requires:	gtk2 >= @GTK_REQUIRED_VERSION@
-BuildRequires: 	gtk2-devel >= @GTK_REQUIRED_VERSION@
+Summary: 		Xfce Panel
+Name: 			@PACKAGE_TARNAME@
+Version: 		@PACKAGE_VERSION@
+Release: 		1
+License:		GPL, LGPL
+URL: 			http://www.xfce.org/
+Source0: 		%{name}-%{version}.tar.gz
+Group: 			User Interface/Desktops
+BuildRoot: 		%{_tmppath}/%{name}-root
+Requires:		libxfce4util >= @LIBXFCEGUI4_REQUIRED_VERSION@
+Requires:		libxfcegui4 >= @LIBXFCEGUI4_REQUIRED_VERSION@
+Requires:		exo0.3 >= @EXO_REQUIRED_VERSION@
+Requires:		gtk2 >= @GTK_REQUIRED_VERSION@
+Requires:		startup-notification >= @LIBSTARTUP_NOTIFICATION_REQUIRED_VERSION@
+BuildRequires:		libxfce4util-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
+BuildRequires:		libxfcegui4-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
+BuildRequires:		exo0.3-devel >= @EXO_REQUIRED_VERSION@
+BuildRequires:		gtk2-devel >= @GTK_REQUIRED_VERSION@
 
 %description
 xfce4-panel is the panel for the Xfce desktop environment
@@ -55,7 +58,7 @@ fi
 
 %files
 %defattr(-,root,root)
-%doc README README.Kiosk ChangeLog NEWS INSTALL COPYING COPYING_LIBS AUTHORS HACKING
+%doc README COPYING COPYING.LIB HACKING INSTALL
 %config(noreplace) %{_sysconfdir}/xdg/xfce4/
 %{_datadir}/icons/
 %{_datadir}/locale/
@@ -66,7 +69,7 @@ fi
 %{_libexecdir}/xfce4/panel-plugins/
 
 %files devel
-%defattr(-, root, root)
+%defattr(-,root,root)
 %{_libdir}/lib*.so
 %{_libdir}/*a
 %{_libdir}/pkgconfig/*.pc

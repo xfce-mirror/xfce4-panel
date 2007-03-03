@@ -1,11 +1,9 @@
-/* vim: set expandtab ts=8 sw=4: */
-
 /*  $Id$
  *
  *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
+ *  it under the terms of the GNU Library General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -61,12 +59,12 @@ Iconbox;
 typedef struct
 {
     Iconbox *ib;
-    
+
     NetkWindow *window;
     int connections[N_ICON_CONNECTIONS];
 
     GdkPixbuf *pb;
-    
+
     GtkWidget *button;
     GtkWidget *image;
     gboolean was_minimized;
@@ -75,7 +73,7 @@ typedef struct
 Icon;
 
 
-static void iconbox_properties_dialog (XfcePanelPlugin *plugin, 
+static void iconbox_properties_dialog (XfcePanelPlugin *plugin,
                                        Iconbox *iconbox);
 
 static void iconbox_construct (XfcePanelPlugin *plugin);
@@ -86,7 +84,7 @@ static void iconbox_construct (XfcePanelPlugin *plugin);
  * -------------------------------------------------------------------- */
 
 /* icons */
-static void 
+static void
 update_visibility (Icon *icon, NetkWorkspace *optional_active_ws)
 {
     NetkWorkspace *ws;
@@ -98,26 +96,26 @@ update_visibility (Icon *icon, NetkWorkspace *optional_active_ws)
         gtk_widget_hide (icon->button);
         return;
     }
-    
+
     if (icon->ib->only_hidden && !netk_window_is_minimized (icon->window))
     {
         gtk_widget_hide (icon->button);
         return;
     }
-    
+
     if (optional_active_ws)
     {
         ws = optional_active_ws;
     }
     else
     {
-        ws = netk_screen_get_active_workspace 
+        ws = netk_screen_get_active_workspace
                 (netk_window_get_screen (icon->window));
     }
-    
-    if (icon->ib->all_workspaces 
-        || netk_window_is_sticky (icon->window) 
-        || ws == netk_window_get_workspace (icon->window) 
+
+    if (icon->ib->all_workspaces
+        || netk_window_is_sticky (icon->window)
+        || ws == netk_window_get_workspace (icon->window)
         || netk_window_or_transient_demands_attention (icon->window))
     {
         gtk_widget_show (icon->button);
@@ -134,7 +132,7 @@ icon_update_image (Icon *icon)
     GdkPixbuf *scaled;
 
     g_return_if_fail (GDK_IS_PIXBUF (icon->pb));
-    
+
     if (netk_window_is_minimized (icon->window))
     {
         if (!icon->was_minimized)
@@ -147,7 +145,7 @@ icon_update_image (Icon *icon)
                 scaled = gdk_pixbuf_copy (icon->pb);
             else
                 scaled = gdk_pixbuf_add_alpha (icon->pb, FALSE, 0, 0, 0);
-        
+
             w = gdk_pixbuf_get_width (scaled);
             h = gdk_pixbuf_get_height (scaled);
 
@@ -170,7 +168,7 @@ icon_update_image (Icon *icon)
                 row += row_stride;
             }
 
-            xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image), 
+            xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image),
                                                scaled);
 
             g_object_unref (G_OBJECT (scaled));
@@ -180,7 +178,7 @@ icon_update_image (Icon *icon)
     }
     else if (icon->was_minimized)
     {
-        xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image), 
+        xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image),
                                            icon->pb);
 
         icon->was_minimized = FALSE;
@@ -204,7 +202,7 @@ update_blink (Icon *icon, gboolean blink)
     if (blink)
     {
 	gtk_button_set_relief (GTK_BUTTON (icon->button), GTK_RELIEF_NORMAL);
-	
+
 	if(mod->color_flags[GTK_STATE_NORMAL] & GTK_RC_BG)
         {
             mod->color_flags[GTK_STATE_NORMAL] &= ~(GTK_RC_BG);
@@ -238,7 +236,7 @@ queue_urgent_timeout (Icon *icon)
 {
     if (icon->urgent_id == 0)
     {
-        icon->urgent_id = 
+        icon->urgent_id =
             g_timeout_add (URGENT_TIMEOUT, (GSourceFunc)urgent_timeout, icon);
     }
 }
@@ -291,13 +289,13 @@ icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
     else if (ev->button == 3)
     {
         GtkWidget *action_menu;
-        
+
         action_menu = netk_create_window_action_menu(icon->window);
-        
-        g_signal_connect(G_OBJECT(action_menu), "selection-done", 
+
+        g_signal_connect(G_OBJECT(action_menu), "selection-done",
                          G_CALLBACK(gtk_widget_destroy), NULL);
-        
-        gtk_menu_popup(GTK_MENU(action_menu), NULL, NULL, NULL, NULL, 
+
+        gtk_menu_popup(GTK_MENU(action_menu), NULL, NULL, NULL, NULL,
                        ev->button, ev->time);
 
         return TRUE;
@@ -311,7 +309,7 @@ icon_name_changed (NetkWindow *window, gpointer data)
 {
     Icon *icon = (Icon *)data;
 
-    gtk_tooltips_set_tip (icon->ib->icon_tooltips, icon->button, 
+    gtk_tooltips_set_tip (icon->ib->icon_tooltips, icon->button,
                           netk_window_get_name (window), NULL);
 }
 
@@ -355,7 +353,7 @@ static void
 icon_icon_changed (NetkWindow *window, gpointer data)
 {
     Icon *icon = (Icon *)data;
-    
+
     if (icon->pb)
         g_object_unref (G_OBJECT (icon->pb));
 
@@ -363,7 +361,7 @@ icon_icon_changed (NetkWindow *window, gpointer data)
 
     if (icon->pb)
         g_object_ref (G_OBJECT (icon->pb));
-    
+
     /* make sure the icon is actually updated */
     icon->was_minimized = !netk_window_is_minimized (icon->window);
     icon_update_image (icon);
@@ -375,18 +373,18 @@ icon_destroy (Icon *icon)
     int i;
 
     unqueue_urgent_timeout (icon);
-    
+
     for (i = 0; i < N_ICON_CONNECTIONS; i++)
     {
         if (icon->connections[i])
             g_signal_handler_disconnect (icon->window, icon->connections[i]);
-        
+
         icon->connections[i] = 0;
     }
-    
+
     if (icon->pb)
         g_object_unref (G_OBJECT (icon->pb));
-    
+
     panel_slice_free (Icon, icon);
 }
 
@@ -397,44 +395,44 @@ icon_new (NetkWindow *window, Iconbox *ib)
     int i = 0;
 
     icon->ib = ib;
-        
-    icon->window = window;    
+
+    icon->window = window;
 
     icon->button = xfce_create_panel_toggle_button ();
-    
+
     g_signal_connect (icon->button, "button-press-event",
                       G_CALLBACK (icon_button_pressed), icon);
-    
+
     icon->image = xfce_scaled_image_new ();
     gtk_widget_show (icon->image);
     gtk_container_add (GTK_CONTAINER (icon->button), icon->image);
-    
+
     icon->pb = netk_window_get_icon (window);
     if (icon->pb)
     {
-        xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image), 
+        xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image),
                                            icon->pb);
         g_object_ref (G_OBJECT (icon->pb));
     }
-    
-    icon->connections[i++] = 
-        g_signal_connect (window, "name-changed", 
+
+    icon->connections[i++] =
+        g_signal_connect (window, "name-changed",
                                  G_CALLBACK (icon_name_changed), icon);
-    
-    icon->connections[i++] = 
-        g_signal_connect (window, "state-changed", 
+
+    icon->connections[i++] =
+        g_signal_connect (window, "state-changed",
                                  G_CALLBACK (icon_state_changed), icon);
-    
-    icon->connections[i++] = 
-        g_signal_connect (window, "workspace-changed", 
+
+    icon->connections[i++] =
+        g_signal_connect (window, "workspace-changed",
                                  G_CALLBACK (icon_workspace_changed), icon);
-    
-    icon->connections[i++] = 
-        g_signal_connect (window, "icon-changed", 
+
+    icon->connections[i++] =
+        g_signal_connect (window, "icon-changed",
                                  G_CALLBACK (icon_icon_changed), icon);
-    
+
     g_assert (i == N_ICON_CONNECTIONS);
-    
+
     if (netk_window_is_skip_tasklist (window))
     {
         return icon;
@@ -442,7 +440,7 @@ icon_new (NetkWindow *window, Iconbox *ib)
 
     icon_update_image (icon);
 
-    gtk_tooltips_set_tip (ib->icon_tooltips, icon->button, 
+    gtk_tooltips_set_tip (ib->icon_tooltips, icon->button,
                           netk_window_get_name (window), NULL);
 
     update_visibility (icon, NULL);
@@ -457,12 +455,12 @@ iconbox_active_window_changed (NetkScreen *screen, gpointer data)
     Iconbox *ib = (Iconbox *)data;
     GSList *l;
     NetkWindow *window = netk_screen_get_active_window (screen);
-    
+
     for (l = ib->iconlist; l != NULL; l = l->next)
     {
         Icon *icon = l->data;
-        
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (icon->button), 
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (icon->button),
                                       (window == icon->window));
     }
 }
@@ -473,11 +471,11 @@ iconbox_active_workspace_changed (NetkScreen *screen, gpointer data)
     Iconbox *ib = (Iconbox *)data;
     GSList *l;
     NetkWorkspace *ws = netk_screen_get_active_workspace (screen);
-    
+
     for (l = ib->iconlist; l != NULL; l = l->next)
     {
         Icon *icon = l->data;
-        
+
         update_visibility (icon, ws);
     }
 }
@@ -505,11 +503,11 @@ iconbox_window_closed (NetkScreen *screen, NetkWindow *window, gpointer data)
 {
     Iconbox *ib = (Iconbox *)data;
     GSList *l;
-    
+
     for (l = ib->iconlist; l != NULL; l = l->next)
     {
         Icon *icon = l->data;
-        
+
         if (window == icon->window)
         {
             gtk_widget_destroy (icon->button);
@@ -528,27 +526,27 @@ iconbox_init_icons (Iconbox * ib)
 {
     int i = 0;
     GList *windows, *l;
-    
+
     netk_screen_force_update (ib->netk_screen);
 
     ib->connections[i++] =
         g_signal_connect (ib->netk_screen, "active_window_changed",
-                                 G_CALLBACK (iconbox_active_window_changed), 
+                                 G_CALLBACK (iconbox_active_window_changed),
                                  ib);
 
     ib->connections[i++] =
         g_signal_connect (ib->netk_screen, "active_workspace_changed",
-                                 G_CALLBACK (iconbox_active_workspace_changed), 
+                                 G_CALLBACK (iconbox_active_workspace_changed),
                                  ib);
 
     ib->connections[i++] =
         g_signal_connect (ib->netk_screen, "window_opened",
-                                 G_CALLBACK (iconbox_window_opened), 
+                                 G_CALLBACK (iconbox_window_opened),
                                  ib);
 
     ib->connections[i++] =
         g_signal_connect (ib->netk_screen, "window_closed",
-                                 G_CALLBACK (iconbox_window_closed), 
+                                 G_CALLBACK (iconbox_window_closed),
                                  ib);
 
     g_assert (i == N_ICONBOX_CONNECTIONS);
@@ -595,7 +593,7 @@ cleanup_iconbox (Iconbox *ib)
     cleanup_icons (ib);
 
     g_object_unref (G_OBJECT (ib->icon_tooltips));
-    
+
     panel_slice_free (Iconbox, ib);
 }
 
@@ -612,8 +610,8 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (iconbox_construct);
 /* Interface Implementation */
 
 static void
-iconbox_orientation_changed (XfcePanelPlugin *plugin, 
-                             GtkOrientation orientation, 
+iconbox_orientation_changed (XfcePanelPlugin *plugin,
+                             GtkOrientation orientation,
                              Iconbox *iconbox)
 {
     xfce_hvbox_set_orientation (XFCE_HVBOX(iconbox->box), orientation);
@@ -622,24 +620,24 @@ iconbox_orientation_changed (XfcePanelPlugin *plugin,
     gtk_widget_queue_draw (iconbox->handle);
 }
 
-static gboolean 
+static gboolean
 iconbox_set_size (XfcePanelPlugin *plugin, int size, Iconbox *ib)
 {
     GSList *l;
     Icon *icon = ib->iconlist ? ib->iconlist->data : NULL;
     GtkWidget *widget = icon ? icon->button : ib->iconbox;
-    
+
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
         ib->icon_size = size - 2 * widget->style->xthickness - 2;
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
                                      -1, size);
     }
     else
     {
         ib->icon_size = size - 2 * widget->style->ythickness - 2;
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
                                      size, -1);
     }
 
@@ -649,7 +647,7 @@ iconbox_set_size (XfcePanelPlugin *plugin, int size, Iconbox *ib)
 
         icon_update_image (icon);
     }
-    
+
     return TRUE;
 }
 
@@ -660,7 +658,7 @@ iconbox_free_data (XfcePanelPlugin *plugin, Iconbox *iconbox)
 
     if (dlg)
         gtk_widget_destroy (dlg);
-    
+
     g_signal_handler_disconnect (plugin, iconbox->screen_changed_id);
 
     cleanup_iconbox (iconbox);
@@ -674,7 +672,7 @@ iconbox_read_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
     int only_hidden = 0;
     int all_workspaces = 0;
     int expand = 1;
-    
+
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
         rc = xfce_rc_simple_open (file, TRUE);
@@ -699,7 +697,7 @@ iconbox_write_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
 {
     char *file;
     XfceRc *rc;
-    
+
     if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
         return;
 
@@ -708,7 +706,7 @@ iconbox_write_rc_file (XfcePanelPlugin *plugin, Iconbox *iconbox)
 
     if (!rc)
         return;
-    
+
     xfce_rc_write_int_entry (rc, "only_hidden", iconbox->only_hidden);
     xfce_rc_write_int_entry (rc, "all_workspaces", iconbox->all_workspaces);
     xfce_rc_write_int_entry (rc, "expand", iconbox->expand);
@@ -726,14 +724,14 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Iconbox *iconbox)
         int x, y, w, h;
         gboolean horizontal;
 
-        horizontal = (xfce_panel_plugin_get_orientation (iconbox->plugin) 
+        horizontal = (xfce_panel_plugin_get_orientation (iconbox->plugin)
                       == GTK_ORIENTATION_HORIZONTAL);
 
         x = allocation->x;
         y = allocation->y;
         w = allocation->width;
         h = allocation->height;
-        
+
         if (horizontal)
         {
             y += widget->style->ythickness;
@@ -746,7 +744,7 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Iconbox *iconbox)
         }
 
         gtk_paint_handle (widget->style, widget->window,
-                          GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE, 
+                          GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
                           &(ev->area), widget, "handlebox",
                           x, y, w, h,
                           horizontal ? GTK_ORIENTATION_VERTICAL :
@@ -761,17 +759,15 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Iconbox *iconbox)
 static void
 iconbox_screen_changed (GtkWidget *plugin, GdkScreen *screen, Iconbox *ib)
 {
-    screen = gtk_widget_get_screen (plugin);
-
     if (!screen)
         return;
 
-    gtk_container_foreach (GTK_CONTAINER (ib->iconbox), 
+    gtk_container_foreach (GTK_CONTAINER (ib->iconbox),
                            (GtkCallback) gtk_widget_destroy, NULL);
     cleanup_icons (ib);
-    
+
     ib->netk_screen = netk_screen_get (gdk_screen_get_number (screen));
-    
+
     iconbox_init_icons (ib);
 }
 
@@ -781,12 +777,12 @@ iconbox_construct (XfcePanelPlugin *plugin)
     Iconbox *iconbox = panel_slice_new0 (Iconbox);
 
     iconbox->plugin = plugin;
-    
+
     iconbox_read_rc_file (plugin, iconbox);
 
     xfce_panel_plugin_set_expand (plugin, iconbox->expand);
-    
-    iconbox->box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), 
+
+    iconbox->box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin),
                                    FALSE, 0);
     gtk_container_set_reallocate_redraws (GTK_CONTAINER (iconbox->box), TRUE);
     gtk_widget_show (iconbox->box);
@@ -795,46 +791,46 @@ iconbox_construct (XfcePanelPlugin *plugin)
     iconbox->handle = gtk_alignment_new (0, 0, 0, 0);
     gtk_widget_set_size_request (iconbox->handle, 8, 8);
     gtk_widget_show (iconbox->handle);
-    gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->handle, 
+    gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->handle,
                         FALSE, FALSE, 0);
 
     xfce_panel_plugin_add_action_widget (plugin, iconbox->handle);
 
-    g_signal_connect (iconbox->handle, "expose-event", 
+    g_signal_connect (iconbox->handle, "expose-event",
                       G_CALLBACK (handle_expose), iconbox);
-    
-    iconbox->iconbox = 
+
+    iconbox->iconbox =
         xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), FALSE, 0);
     gtk_widget_show (iconbox->iconbox);
-    gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->iconbox, 
+    gtk_box_pack_start (GTK_BOX (iconbox->box), iconbox->iconbox,
                         FALSE, FALSE, 0);
-    
+
     iconbox->icon_tooltips = gtk_tooltips_new ();
     g_object_ref (G_OBJECT (iconbox->icon_tooltips));
     gtk_object_sink (GTK_OBJECT (iconbox->icon_tooltips));
 
-    g_signal_connect (plugin, "orientation-changed", 
+    g_signal_connect (plugin, "orientation-changed",
                       G_CALLBACK (iconbox_orientation_changed), iconbox);
-    
-    g_signal_connect (plugin, "size-changed", 
+
+    g_signal_connect (plugin, "size-changed",
                       G_CALLBACK (iconbox_set_size), iconbox);
-    
-    g_signal_connect (plugin, "free-data", 
+
+    g_signal_connect (plugin, "free-data",
                       G_CALLBACK (iconbox_free_data), iconbox);
-    
-    g_signal_connect (plugin, "save", 
+
+    g_signal_connect (plugin, "save",
                       G_CALLBACK (iconbox_write_rc_file), iconbox);
-    
+
     xfce_panel_plugin_menu_show_configure (plugin);
-    g_signal_connect (plugin, "configure-plugin", 
+    g_signal_connect (plugin, "configure-plugin",
                       G_CALLBACK (iconbox_properties_dialog), iconbox);
 
-    iconbox->screen_changed_id = 
-        g_signal_connect (plugin, "screen-changed", 
+    iconbox->screen_changed_id =
+        g_signal_connect (plugin, "screen-changed",
                           G_CALLBACK (iconbox_screen_changed), iconbox);
-    
+
     iconbox_screen_changed (GTK_WIDGET (plugin),
-                            gtk_widget_get_screen (GTK_WIDGET (plugin)), 
+                            gtk_widget_get_screen (GTK_WIDGET (plugin)),
                             iconbox);
 }
 
@@ -846,12 +842,12 @@ static void
 only_hidden_toggled (GtkToggleButton *tb, Iconbox *ib)
 {
     GSList *l;
-    
+
     ib->only_hidden = gtk_toggle_button_get_active (tb);
 
     for (l = ib->iconlist; l != NULL; l = l->next)
     {
-        Icon *icon = l->data;        
+        Icon *icon = l->data;
 
         update_visibility (icon, NULL);
     }
@@ -861,12 +857,12 @@ static void
 all_workspaces_toggled (GtkToggleButton *tb, Iconbox *ib)
 {
     GSList *l;
-    
+
     ib->all_workspaces = gtk_toggle_button_get_active (tb);
 
     for (l = ib->iconlist; l != NULL; l = l->next)
     {
-        Icon *icon = l->data;        
+        Icon *icon = l->data;
 
         update_visibility (icon, NULL);
     }
@@ -881,7 +877,7 @@ expand_toggled (GtkToggleButton *tb, Iconbox *ib)
 }
 
 static void
-iconbox_dialog_response (GtkWidget *dlg, int reponse, 
+iconbox_dialog_response (GtkWidget *dlg, int reponse,
                          Iconbox *ib)
 {
     g_object_set_data (G_OBJECT (ib->plugin), "dialog", NULL);
@@ -897,25 +893,25 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
     GtkWidget *dlg, *vbox, *cb;
 
     xfce_panel_plugin_block_menu (plugin);
-    
+
     dlg = xfce_titled_dialog_new_with_buttons (_("Icon Box"), NULL,
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
 
-    gtk_window_set_screen (GTK_WINDOW (dlg), 
+    gtk_window_set_screen (GTK_WINDOW (dlg),
                            gtk_widget_get_screen (GTK_WIDGET (plugin)));
 
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
-    
+
     g_signal_connect (dlg, "response", G_CALLBACK (iconbox_dialog_response),
                       iconbox);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-    
+
     vbox = gtk_vbox_new (FALSE, 8);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_widget_show (vbox);
@@ -930,7 +926,7 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
                                   iconbox->only_hidden);
     g_signal_connect (cb, "toggled", G_CALLBACK (only_hidden_toggled),
                       iconbox);
-    
+
     cb = gtk_check_button_new_with_mnemonic (
                 _("Show applications of all workspaces"));
     gtk_widget_show (cb);
@@ -939,7 +935,7 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
                                   iconbox->all_workspaces);
     g_signal_connect (cb, "toggled", G_CALLBACK (all_workspaces_toggled),
                       iconbox);
-    
+
     cb = gtk_check_button_new_with_mnemonic (_("Use all available space"));
     gtk_widget_show (cb);
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
@@ -950,4 +946,3 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
 
     gtk_widget_show (dlg);
 }
-

@@ -1,11 +1,10 @@
-/* vim: set expandtab ts=8 sw=4: */
-
 /*  $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2006-2007 Nick Schermer <nick@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
+ *  it under the terms of the GNU Library General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -22,760 +21,556 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-
-#include <stdio.h>
-#include <ctype.h>
+#ifdef HAVE_MEMORY_H
+#include <memory.h>
+#endif
+#ifdef HAVE_STRING_H
 #include <string.h>
-#include <gtk/gtk.h>
+#endif
 
 #include <libxfce4util/libxfce4util.h>
-#include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-arrow-button.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/xfce-hvbox.h>
 
 #include "launcher.h"
+#include "launcher-exec.h"
 #include "launcher-dialog.h"
 
+/**
+ * Prototypes
+ **/
+static void             launcher_g_list_move_first           (GList                 *li);
+static gboolean         launcher_theme_changed               (GSignalInvocationHint *ihint,
+                                                              guint                  n_param_values,
+                                                              const GValue          *param_values,
+                                                              LauncherPlugin        *launcher);
+static void             launcher_button_drag_data_received   (GtkWidget             *widget,
+                                                              GdkDragContext        *context,
+                                                              gint                   x,
+                                                              gint                   y,
+                                                              GtkSelectionData      *selection_data,
+                                                              guint                  info,
+                                                              guint                  time,
+                                                              LauncherPlugin        *launcher);
+static void             launcher_menu_drag_data_received     (GtkWidget             *widget,
+                                                              GdkDragContext        *context,
+                                                              gint                   x,
+                                                              gint                   y,
+                                                              GtkSelectionData      *selection_data,
+                                                              guint                  info,
+                                                              guint                  time,
+                                                              LauncherEntry         *entry);
+static void             launcher_button_clicked              (GtkWidget             *button,
+                                                              LauncherPlugin        *launcher);
+static void             launcher_button_pointer              (GtkWidget             *button_a,
+                                                              GtkWidget             *button_b);
+static gboolean         launcher_button_pressed              (LauncherPlugin        *launcher,
+                                                              GdkEventButton        *ev);
+static gboolean         launcher_button_released             (GtkWidget             *button,
+                                                              GdkEventButton        *ev,
+                                                              LauncherPlugin        *launcher);
+static gboolean         launcher_arrow_pressed               (LauncherPlugin        *launcher,
+                                                              GdkEventButton        *ev);
+static void             launcher_menu_item_activate          (GtkWidget             *mi,
+                                                              GList                 *li);
+static gboolean         launcher_menu_item_released          (GtkWidget             *mi,
+                                                              GdkEventButton        *ev,
+                                                              GList                 *li);
+static void             launcher_menu_position               (GtkMenu               *menu,
+                                                              gint                  *x,
+                                                              gint                  *y,
+                                                              gboolean              *push_in,
+                                                              GtkWidget             *button);
+static gboolean         launcher_menu_popup                  (LauncherPlugin        *launcher);
+static void             launcher_menu_deactivated            (LauncherPlugin        *launcher);
+static gboolean         launcher_menu_update                 (LauncherPlugin        *launcher);
+static LauncherPlugin  *launcher_new                         (XfcePanelPlugin       *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+static GtkArrowType     launcher_calculate_floating_arrow    (LauncherPlugin        *launcher,
+                                                              XfceScreenPosition     position);
+static void             launcher_screen_position_changed     (LauncherPlugin        *launcher,
+                                                              XfceScreenPosition     position);
+static void             launcher_orientation_changed         (LauncherPlugin        *launcher,
+                                                              GtkOrientation         orientation);
+static gboolean         launcher_set_size                    (LauncherPlugin        *launcher,
+                                                              guint                  size);
+static void             launcher_free                        (LauncherPlugin        *launcher);
+static void             launcher_construct                   (XfcePanelPlugin       *plugin);
 
-static LauncherPlugin * launcher_new (XfcePanelPlugin *plugin);
 
-static void launcher_free (LauncherPlugin *launcher);
 
-static void launcher_set_orientation (XfcePanelPlugin *plugin, 
-                                      LauncherPlugin *launcher, 
-                                      GtkOrientation orientation);
+/* global setting */
+static gboolean move_first = FALSE;
 
-static void launcher_set_screen_position (LauncherPlugin *launcher, 
-                                          XfceScreenPosition position);
 
-static void launcher_write_rc_file (XfcePanelPlugin *plugin, 
-                                    LauncherPlugin *launcher);
 
-static void launcher_construct (XfcePanelPlugin *plugin);
-
-/* -------------------------------------------------------------------- *
- *                     Panel Plugin Interface                           *
- * -------------------------------------------------------------------- */
-
-/* Register with the panel */
-
+/* register the plugin */
 XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (launcher_construct);
 
 
-/* Interface Implementation */
 
-static void
-launcher_screen_position_changed (XfcePanelPlugin *plugin, 
-                                  XfceScreenPosition position, 
-                                  LauncherPlugin *launcher)
+/**
+ * Utility functions
+ **/
+void
+launcher_g_list_swap (GList *li_a,
+                          GList *li_b)
 {
-    launcher_set_screen_position (launcher, position);
+    gpointer data;
+
+    /* swap data between the items */
+    data = li_a->data;
+    li_a->data = li_b->data;
+    li_b->data = data;
 }
 
+
+
 static void
-launcher_orientation_changed (XfcePanelPlugin *plugin, 
-                              GtkOrientation orientation, 
-                              LauncherPlugin *launcher)
+launcher_g_list_move_first (GList *li)
 {
-    launcher_set_orientation (plugin, launcher, orientation);
+    /* quit if we're not going to sort */
+    if (move_first == FALSE)
+        return;
+
+    /* swap items till we reached the beginning of the list */
+    while (li->prev != NULL)
+{
+        launcher_g_list_swap (li, li->prev);
+        li = li->prev;
+    }
 }
 
-static gboolean 
-launcher_set_size (XfcePanelPlugin *plugin, int size, LauncherPlugin *launcher)
-{
-    gtk_widget_set_size_request (launcher->iconbutton, size, size);
-    launcher_update_panel_entry (launcher);
 
+
+/**
+ * Miscelanious function
+ **/
+static gboolean
+launcher_theme_changed (GSignalInvocationHint *ihint,
+                        guint                  n_param_values,
+                        const GValue          *param_values,
+                        LauncherPlugin        *launcher)
+{
+    /* only update if we already have an image, this fails when the signal is connected */
+    if (G_LIKELY (gtk_image_get_storage_type (GTK_IMAGE (launcher->image)) == GTK_IMAGE_EMPTY))
+        return TRUE;
+
+    /* update the icon button */
+    launcher->icon_update_required = TRUE;
+    launcher_button_update (launcher);
+
+    /* destroy the menu */
+    launcher_menu_prepare (launcher);
+
+    /* keep hook alive */
     return TRUE;
 }
 
-static void 
-launcher_free_data (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
-{
-    GtkWidget *dlg;
-    
-    if (launcher->screen_id)
-        g_signal_handler_disconnect (launcher->image, launcher->screen_id);
-    
-    if (launcher->style_id)
-        g_signal_handler_disconnect (launcher->image, launcher->style_id);
-    
-    launcher->screen_id = launcher->style_id = 0;
 
-    dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
-
-    if (dlg)
-        gtk_widget_destroy (dlg);
-    
-    launcher_free (launcher);
-}
-
-void 
-launcher_save (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
-{
-    launcher_write_rc_file (plugin, launcher);
-}
-
-static void 
-launcher_configure (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
-{
-    launcher_properties_dialog (plugin, launcher);
-}
-
-/* create widgets and connect to signals */
-static void 
-launcher_construct (XfcePanelPlugin *plugin)
-{
-    LauncherPlugin *launcher = launcher_new (plugin);
-
-    gtk_container_add (GTK_CONTAINER (plugin), launcher->box);
-
-    xfce_panel_plugin_add_action_widget (plugin, launcher->iconbutton);
-    xfce_panel_plugin_add_action_widget (plugin, launcher->arrowbutton);
-
-    g_signal_connect (plugin, "screen-position-changed", 
-                      G_CALLBACK (launcher_screen_position_changed), launcher);
-
-    g_signal_connect (plugin, "orientation-changed", 
-                      G_CALLBACK (launcher_orientation_changed), launcher);
-    
-    g_signal_connect (plugin, "size-changed", 
-                      G_CALLBACK (launcher_set_size), launcher);
-    
-    g_signal_connect (plugin, "free-data", 
-                      G_CALLBACK (launcher_free_data), launcher);
-    
-    g_signal_connect (plugin, "save", 
-                      G_CALLBACK (launcher_save), launcher);
-    
-    xfce_panel_plugin_menu_show_configure (plugin);
-    g_signal_connect (plugin, "configure-plugin", 
-                      G_CALLBACK (launcher_configure), launcher);
-
-    launcher_set_screen_position (launcher, 
-            xfce_panel_plugin_get_screen_position (plugin));
-}
-
-/* -------------------------------------------------------------------- *
- *                   Launcher Plugin Interface                          *
- * -------------------------------------------------------------------- */
-
-static LauncherPlugin *open_launcher = NULL;
-
-
-/* DND *
- * --- */
-
-static const GtkTargetEntry target_list [] =
-{
-    { "text/uri-list", 0, TARGET_URI_LIST },
-    { "text/x-moz-url", 0, TARGET_MOZ_URL },
-    { "STRING", 0, TARGET_URI_LIST }
-};
-
-static const guint n_targets = G_N_ELEMENTS (target_list);
-
-/* Mozilla uses its own weird format. */
-static void
-add_mozilla_files (GPtrArray *files, GtkSelectionData *data)
-{
-    gchar *utf8, *eol;
-
-    utf8 = g_utf16_to_utf8((gunichar2 *) data->data,
-            (glong) data->length,
-            NULL, NULL, NULL);
-
-    eol = utf8 ? strchr(utf8, '\n') : NULL;
-    if (eol) {
-        gchar *s1 = utf8;
-        if (!strncmp (s1, "file:", 5))
-        {
-            s1 += 5;
-            while (*(s1 + 1) == '/')
-                ++s1;
-        }
-        g_ptr_array_add (files, g_strndup(s1, eol - s1));
-    }
-    else
-    {
-        g_warning ("Invalid UTF16 from text/x-moz-url target");
-    }
-    g_free(utf8);
-}
-
-GPtrArray *
-launcher_get_file_list_from_selection_data (GtkSelectionData *data, guint info)
-{
-    GPtrArray *files;
-    const char *s1, *s2;
-
-    if (data->length < 1)
-        return NULL;
-
-    files = g_ptr_array_new ();
-
-    if (info == TARGET_MOZ_URL)
-    {
-        add_mozilla_files(files, data);
-        return files;
-    }
-
-    /* Assume text/uri-list (RFC2483):
-     * - Commented lines are allowed; they start with #.
-     * - Lines are separated by CRLF (\r\n)
-     * - We also allow LF (\n) as separator
-     * - We strip "file:" and multiple slashes ("/") at the start
-     */
-    for (s1 = (const char *)data->data; s1 != NULL && strlen(s1); ++s1)
-    {
-        if (*s1 != '#')
-        {
-            while (isspace ((int)*s1))
-                ++s1;
-            
-            if (!strncmp (s1, "file:", 5))
-            {
-                s1 += 5;
-                while (*(s1 + 1) == '/')
-                    ++s1;
-            }
-            
-            for (s2 = s1; *s2 != '\0' && *s2 != '\r' && *s2 != '\n'; ++s2)
-                /* */;
-            
-            if (s2 > s1)
-            {
-                while (isspace ((int)*(s2-1)))
-                    --s2;
-                
-                if (s2 > s1)
-                {
-                    int len, i;
-                    char *file;
-                    
-                    len = s2 - s1;
-                    file = g_new (char, len + 1);
-                    
-                    /* decode % escaped characters */
-                    for (i = 0, s2 = s1; s2 - s1 <= len; ++i, ++s2)
-                    {
-                        if (*s2 != '%' || s2 + 3 -s1 > len)
-                        {
-                            file[i] = *s2;
-                        }
-                        else
-                        {
-                            guint c;
-                            
-                            if (sscanf (s2+1, "%2x", &c) == 1)
-                                file[i] = (char)c;
-
-                            s2 += 2;
-                        }
-                    }
-
-                    file[i-1] = '\0';
-                    g_ptr_array_add (files, file);
-                }
-            }
-        }
-        
-        if (!(s1 = strchr (s1, '\n')))
-            break;
-    }
-    
-    if (files->len > 0)
-    {
-        return files;
-    }
-
-    g_ptr_array_free (files, TRUE);
-
-    return NULL;    
-}
-
-void launcher_set_drag_dest (GtkWidget *widget)
-{
-    gtk_drag_dest_set (widget, GTK_DEST_DEFAULT_ALL, 
-                       target_list, n_targets, GDK_ACTION_COPY);
-}
-
-
-/* utility functions *
- * ----------------- */
 
 GdkPixbuf *
-launcher_icon_load_pixbuf (GtkWidget *w, LauncherIcon * icon, int size)
+launcher_load_pixbuf (GtkWidget   *widget,
+                      const gchar *icon_name,
+                      guint        size,
+                      gboolean     fallback)
 {
-    GdkPixbuf *pb = NULL;
+    GdkPixbuf    *icon = NULL;
+    GdkPixbuf    *icon_scaled;
+    GtkIconTheme *icon_theme;
 
-    if (icon->type == LAUNCHER_ICON_TYPE_NAME)
+    if (G_LIKELY (icon_name != NULL) &&
+          G_UNLIKELY (g_path_is_absolute (icon_name)))
     {
-        if (g_path_is_absolute (icon->icon.name))
-        {
-            pb = gdk_pixbuf_new_from_file_at_size (icon->icon.name,
-                                                   size, size, NULL);
-        }
+        /* load the icon from the file */
+        icon = exo_gdk_pixbuf_new_from_file_at_max_size (icon_name, size, size, TRUE, NULL);
+    }
+    else if (G_LIKELY (icon_name != NULL))
+    {
+        /* determine the appropriate icon theme */
+        if (G_LIKELY (gtk_widget_has_screen (widget)))
+            icon_theme = gtk_icon_theme_get_for_screen (gtk_widget_get_screen (widget));
         else
-        {
-            pb = xfce_themed_icon_load (icon->icon.name, size);
-        }
-    }
-    else if (icon->type == LAUNCHER_ICON_TYPE_CATEGORY)
-    {
-        pb = xfce_themed_icon_load_category (icon->icon.category, size);
+            icon_theme = gtk_icon_theme_get_default ();
+
+        /* try to load the named icon */
+        icon = gtk_icon_theme_load_icon (icon_theme, icon_name, size, 0, NULL);
     }
 
-    if (!pb)
+    /* scale down the icon (function above is a convenience function) */
+    if (G_LIKELY (icon != NULL))
     {
-        pb = xfce_themed_icon_load_category (XFCE_ICON_CATEGORY_UNKNOWN, size);
+        /* scale down the icon if required */
+        icon_scaled = exo_gdk_pixbuf_scale_down (icon, TRUE, size, size);
+        g_object_unref (G_OBJECT (icon));
+        icon = icon_scaled;
+    }
+    else if (fallback) /* create empty pixbuf */
+    {
+        /* this is a transparent pixbuf, used for tree convenience */
+        icon = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, size, size);
+        gdk_pixbuf_fill (icon, 0x00000000);
     }
 
-    return pb;
+    return icon;
 }
 
-LauncherEntry *
-launcher_entry_new (void)
-{
-    return panel_slice_new0 (LauncherEntry);
-}
+
 
 void
-launcher_entry_free (LauncherEntry *e)
+launcher_set_move_first (gboolean activate)
 {
-    g_free (e->name);
-    g_free (e->comment);
-    if (e->icon.type == LAUNCHER_ICON_TYPE_NAME)
-        g_free (e->icon.icon.name);
-    g_free (e->exec);
-    g_free (e->real_exec);
-
-    panel_slice_free (LauncherEntry, e);
+    /* set the value of the move first boolean */
+    move_first = activate;
 }
 
+
+
+/**
+ * Drag and Drop
+ **/
 static void
-launcher_entry_exec (GdkScreen *screen, LauncherEntry *entry)
+launcher_button_drag_data_received (GtkWidget        *widget,
+                                    GdkDragContext   *context,
+                                    gint              x,
+                                    gint              y,
+                                    GtkSelectionData *selection_data,
+                                    guint             info,
+                                    guint             time,
+                                    LauncherPlugin   *launcher)
 {
-    GError *error = NULL;
-    
-    if (!entry->exec || !strlen (entry->exec))
-        return;
-    
-    xfce_exec_on_screen (screen, entry->real_exec, entry->terminal, 
-                         entry->startup, &error);
-        
-    if (error)
-    {
-        char first[256];
-
-        g_snprintf (first, 256, _("Could not run \"%s\""), entry->name);
-    
-        xfce_message_dialog (NULL, _("Xfce Panel"), 
-                             GTK_STOCK_DIALOG_ERROR, first, error->message,
-                             GTK_STOCK_CLOSE, GTK_RESPONSE_OK, NULL);
-
-        g_error_free (error);
-    }
+    /* run the 'entry' dnd with first item from the list */
+    launcher_menu_drag_data_received (widget, context, x, y,
+                                      selection_data, info, time,
+                                      g_list_first (launcher->entries)->data);
 }
 
-static void
-launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry, 
-                        GPtrArray *files)
-{
-    char **argv, **execv;
-    int i, n;
-    GError *error = NULL;
 
-    if (G_UNLIKELY (!entry->exec))
-        return;
-
-    if (!g_shell_parse_argv (entry->real_exec, &n, &execv, &error))
-    {
-        char first[256];
-        
-        g_snprintf (first, 256, _("Error in command \"%s\""), 
-                    entry->real_exec);
-    
-        xfce_message_dialog (NULL, _("Xfce Panel"), 
-                             GTK_STOCK_DIALOG_ERROR, first, error->message,
-                             GTK_STOCK_CLOSE, GTK_RESPONSE_OK, NULL);
-
-        g_error_free (error);
-        return;
-    }
-    
-    if (entry->terminal)
-    {
-        argv = g_new (char *, n + files->len + 3);
-        argv[0] = "xfterm4";
-        argv[1] = "-e";
-        for (i = 0; i < n; ++i)
-            argv[i+2] = execv[i];
-        n += 2;
-    }
-    else
-    {
-        argv = g_new (char *, n + files->len + 1);
-        for (i = 0; i < n; ++i)
-            argv[i] = execv[i];
-    }
-
-    for (i = 0; i < files->len; ++i)
-        argv[n+i] = g_ptr_array_index (files, i);
-
-    argv[n+i] = NULL;
-    
-    if (!xfce_exec_argv_on_screen (screen, argv, entry->terminal, 
-                                   entry->startup, &error))
-    {
-        char first[256];
-        
-        g_snprintf (first, 256, _("Could not run \"%s\""), entry->name);
-    
-        xfce_message_dialog (NULL, _("Xfce Panel"), 
-                             GTK_STOCK_DIALOG_ERROR, first, error->message,
-                             GTK_STOCK_CLOSE, GTK_RESPONSE_OK, NULL);
-
-        g_error_free (error);
-    }
-
-    g_strfreev (execv);
-    g_free (argv);
-}
 
 static void
-launcher_entry_clipboard_cb (GdkScreen *screen, LauncherEntry *entry)
+launcher_menu_drag_data_received (GtkWidget        *widget,
+                                  GdkDragContext   *context,
+                                  gint              x,
+                                  gint              y,
+                                  GtkSelectionData *selection_data,
+                                  guint             info,
+                                  guint             time,
+                                  LauncherEntry    *entry)
 {
-    char *paste = NULL;
-    GtkClipboard *clip;
+    GSList *file_list = NULL;
 
-    clip = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
-    if (clip)
-        paste = gtk_clipboard_wait_for_text (clip);
+    /* create list from all the uri list */
+    file_list = launcher_file_list_from_selection (selection_data);
 
-    if (paste != NULL)
+    if (G_LIKELY (file_list != NULL))
     {
-        GPtrArray *files;
-        char *tmp;
+        launcher_execute (gtk_widget_get_screen (widget), entry, file_list);
 
-        tmp = g_strescape (paste, NULL);
-        g_free (paste);
-        paste = tmp;
-
-        files = g_ptr_array_sized_new (1);
-        g_ptr_array_add (files, paste);
-
-        launcher_entry_drop_cb (screen, entry, files);
-
-        g_free (paste);
-        g_ptr_array_free (files, TRUE);
-    }
-}
-
-static void
-launcher_entry_data_received (GtkWidget *widget, GdkDragContext *context, 
-                              gint x, gint y, GtkSelectionData *data, 
-                              guint info, guint time, LauncherEntry *entry)
-{
-    GPtrArray *files;
-    
-    if (!data || data->length < 1)
-        return;
-    
-    files = launcher_get_file_list_from_selection_data (data, info);
-
-    if (files)
-    {
-        launcher_entry_drop_cb (gtk_widget_get_screen (widget), entry, files);
-        g_ptr_array_free (files, TRUE);
+        /* cleanup */
+        g_slist_free_all (file_list);
     }
 
-    if (open_launcher)
-    {
-        gtk_widget_hide (GTK_MENU (open_launcher->menu)->toplevel);
-        gtk_toggle_button_set_active (
-                GTK_TOGGLE_BUTTON (open_launcher->arrowbutton), FALSE);
-        open_launcher = NULL;
-    }
-    
+    /* finish drag */
     gtk_drag_finish (context, TRUE, FALSE, time);
 }
 
-static void
-launcher_drag_data_received (GtkWidget *widget, GdkDragContext *context, 
-                             gint x, gint y, GtkSelectionData *data, 
-                             guint info, guint time, LauncherPlugin *launcher)
+
+
+GSList *
+launcher_file_list_from_selection (GtkSelectionData *selection_data)
 {
-    GPtrArray *files;
-    
-    if (!data || data->length < 1)
-        return;
-    
-    files = launcher_get_file_list_from_selection_data (data, info);
+    gchar  **uri_list;
+    GSList  *file_list = NULL;
+    gchar   *filename;
+    guint    i;
 
-    if (files)
+    /* check whether the retrieval worked */
+    if (G_LIKELY (selection_data->length > 0))
     {
-        launcher_entry_drop_cb (gtk_widget_get_screen (widget), 
-                                g_ptr_array_index (launcher->entries, 0), 
-                                files);
+        /* split the received uri list */
+        uri_list = g_uri_list_extract_uris ((gchar *) selection_data->data);
 
-        g_ptr_array_free (files, TRUE);
-    }
-
-    if (open_launcher)
-    {
-        gtk_widget_hide (GTK_MENU (open_launcher->menu)->toplevel);
-        gtk_toggle_button_set_active (
-                GTK_TOGGLE_BUTTON (open_launcher->arrowbutton), FALSE);
-        open_launcher = NULL;
-    }
-}
-
-static void
-launcher_menu_deactivated (GtkWidget *menu, LauncherPlugin *launcher)
-{
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), 
-                                  FALSE);
-    launcher->from_timeout = FALSE;
-}
-
-static gboolean
-launcher_button_released (GtkWidget *mi, GdkEventButton *ev, 
-                          LauncherPlugin *launcher)
-{
-    if (launcher->from_timeout)
-    {
-        launcher->from_timeout = FALSE;
-        /* don't activate on button release */
-        return TRUE;
-    }
-    
-    if (ev->button == 2)
-    {
-        LauncherEntry *entry = 
-            g_object_get_data (G_OBJECT (mi), "launcher_entry");
-
-        if (entry != NULL)
+        /* walk though the list */
+        for (i = 0; uri_list[i] != NULL; i++)
         {
-            launcher_entry_clipboard_cb (gtk_widget_get_screen (mi), entry);
+            /* escape the ascii-encoded uri */
+            filename = g_filename_from_uri (uri_list[i], NULL, NULL);
 
-            gtk_menu_popdown (GTK_MENU (launcher->menu));
-            launcher_menu_deactivated(launcher->menu, launcher);
+            /* append the uri, if uri -> filename conversion failed */
+            if (G_UNLIKELY (filename == NULL))
+                filename = g_strdup (uri_list[i]);
+
+            /* append the filename */
+            file_list = g_slist_append (file_list, filename);
         }
-        return TRUE;
+
+        /* cleanup */
+        g_strfreev (uri_list);
     }
 
-    /* don't activate on right-click */
-    if (ev->button == 3)
-        return TRUE;
-
-    return FALSE;
+    return file_list;
 }
 
-static void
-launcher_menu_item_activate (GtkWidget *mi, LauncherEntry *entry)
-{
-    launcher_entry_exec (gtk_widget_get_screen (mi), entry);
-}
 
-static gboolean
-launcher_menu_drag_leave_timeout (LauncherPlugin *launcher)
-{
-    GdkScreen *screen = gtk_widget_get_screen (launcher->arrowbutton);
-    GdkDisplay *dpy = gdk_screen_get_display (screen);
-    int x, y, wx, wy, ww, wh;
-    
-    gdk_display_get_pointer (dpy, NULL, &x, &y, NULL);
-    
-    gdk_window_get_root_origin (launcher->menu->window, &wx, &wy);
-    gdk_drawable_get_size (GDK_DRAWABLE (launcher->menu->window), &ww, &wh);
-    
-    if (x < wx || x > wx + ww || y < wy || y > wy +wh)
-    {
-        gtk_widget_hide (GTK_MENU (launcher->menu)->toplevel);
-        gtk_toggle_button_set_active (
-                GTK_TOGGLE_BUTTON (launcher->arrowbutton), FALSE);
-    }
-    
-    return FALSE;
-}
 
-static void
-launcher_menu_drag_leave (GtkWidget *w, GdkDragContext *drag_context,
-                          guint time, LauncherPlugin *launcher)
+/**
+ * (Icon) Button Functions
+ **/
+gboolean
+launcher_button_update (LauncherPlugin *launcher)
 {
-    g_timeout_add (100, (GSourceFunc)launcher_menu_drag_leave_timeout, 
-                   launcher);
-}
-
-static void
-launcher_destroy_menu (LauncherPlugin *launcher)
-{
-    gtk_widget_destroy (launcher->menu);
-
-    launcher->menu = NULL;
-}
-
-static gboolean
-load_menu_icons (LauncherPlugin *launcher)
-{
-    GtkWidget *img, *mi;
-    GdkPixbuf *pb;
+    GdkPixbuf     *icon;
     LauncherEntry *entry;
-    int i;
-    GList *children, *li;
-    
-    if (!launcher->menu)
+    guint          size;
+    gchar         *tooltip = NULL;
+
+    /* safety check */
+    if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
         return FALSE;
 
-    children = gtk_container_get_children (GTK_CONTAINER (launcher->menu));
+    /* get first entry */
+    entry = g_list_first (launcher->entries)->data;
 
-    for (li = children, i = 1; li != 0; li = li->next, ++i)
-    {
-        entry = g_ptr_array_index (launcher->entries, i);
-        mi = li->data;
+    /* check if we really need to update the button icon */
+    if (launcher->icon_update_required == FALSE)
+        goto updatetooltip;
 
-        pb = launcher_icon_load_pixbuf (GTK_WIDGET (mi), &entry->icon, 
-                                        MENU_ICON_SIZE);
-        img = gtk_image_new_from_pixbuf (pb);
-        gtk_widget_show (img);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-        g_object_unref (G_OBJECT (pb));
-    }
+    /* reset button update */
+    launcher->icon_update_required = FALSE;
 
-    g_list_free (children);
-
-    return FALSE;
-}
-
-void
-launcher_recreate_menu (LauncherPlugin *launcher)
-{
-    int i;
-    
-    if (launcher->menu)
-        launcher_destroy_menu (launcher);
-
-    if (launcher->entries->len <= 1)
-    {
-        gtk_widget_hide (launcher->arrowbutton);
-        return;
-    }
-    
-    launcher->menu = gtk_menu_new ();
-
-    for (i = launcher->entries->len - 1; i > 0; --i)
-    {
-        GtkWidget *mi;
-        LauncherEntry *entry = g_ptr_array_index (launcher->entries, i);
-        
-        mi = gtk_image_menu_item_new_with_label (entry->name ? 
-                entry->name : _("New Item"));
-        gtk_widget_show (mi);
-        gtk_menu_shell_prepend (GTK_MENU_SHELL (launcher->menu), mi);
-
-        /* delayed loading of icons */
-        g_object_set_data (G_OBJECT (mi), "launcher_entry", entry);
-        
-        g_signal_connect (mi, "button-release-event", 
-                          G_CALLBACK (launcher_button_released),
-                          launcher);
-        
-        g_signal_connect (mi, "activate", 
-                          G_CALLBACK (launcher_menu_item_activate), entry);
-
-        gtk_tooltips_set_tip (launcher->tips, mi, entry->comment, NULL);
-
-        launcher_set_drag_dest (mi);
-        
-        g_signal_connect (mi, "drag-data-received", 
-                          G_CALLBACK (launcher_entry_data_received), entry);
-
-        g_signal_connect (mi, "drag-leave", 
-                          G_CALLBACK (launcher_menu_drag_leave), launcher);
-    }
-
-    g_signal_connect (launcher->menu, "button-release-event", 
-                      G_CALLBACK (launcher_button_released),
-                      launcher);
-    
-    g_signal_connect (launcher->menu, "deactivate", 
-                      G_CALLBACK (launcher_menu_deactivated), launcher);
-
-    launcher_set_drag_dest (launcher->menu);
-    
-    g_signal_connect (launcher->menu, "drag-leave", 
-                      G_CALLBACK (launcher_menu_drag_leave), launcher);
-    
-    if (launcher->entries->len > 1)
-    {
-        g_idle_add ((GSourceFunc) load_menu_icons, launcher);
-    }
-}
-
-void
-launcher_update_panel_entry (LauncherPlugin *launcher)
-{    
-    char tip[512];
-    GdkPixbuf *pb;
-    int size;
-    LauncherEntry *entry;
-
-    if (launcher->entries->len == 0)
-        return;
-    
-    entry = g_ptr_array_index (launcher->entries, 0);
-
-    size = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (launcher->plugin)) 
+    /* calculate icon size */
+    size = xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (launcher->plugin))
            - 2 - 2 * MAX (launcher->iconbutton->style->xthickness,
                           launcher->iconbutton->style->ythickness);
-    
-    pb = launcher_icon_load_pixbuf (launcher->image, &(entry->icon), size);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (launcher->image), pb);
-    g_object_unref (G_OBJECT (pb));
-    
-    if (entry->name || entry->comment)
-    {
-        if (entry->name && entry->comment)
-            g_snprintf (tip, 521, "%s\n%s", entry->name, entry->comment);
-        else if (entry->name)
-            g_strlcpy (tip, entry->name, 521);
-        else
-            g_strlcpy (tip, entry->comment, 521);
 
-        gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
+    /* load the pixbuf, we use the fallback image here because else
+     * the theme signal fails when xfce-mcs-manager restarts */
+    icon = launcher_load_pixbuf (launcher->iconbutton, entry->icon, size, TRUE);
+
+    /* set the new button icon */
+    if (G_LIKELY (icon != NULL))
+    {
+        gtk_image_set_from_pixbuf (GTK_IMAGE (launcher->image), icon);
+
+        /* release the icon */
+        g_object_unref (G_OBJECT (icon));
     }
     else
     {
-        gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, NULL, NULL);
+        /* clear image if no (valid) icon is set */
+        gtk_image_clear (GTK_IMAGE (launcher->image));
     }
+
+updatetooltip:
+
+    /* create tooltip text */
+    if (G_LIKELY (entry->name))
+    {
+        if (entry->comment)
+            tooltip = g_strdup_printf ("%s\n%s", entry->name, entry->comment);
+        else
+            tooltip = g_strdup_printf ("%s", entry->name);
+    }
+
+    /* set the tooltip */
+    gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton,
+                          tooltip, NULL);
+
+    /* free string */
+    if (G_LIKELY (tooltip))
+        g_free (tooltip);
+
+    return FALSE;
 }
 
-static void
-launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
-                        GtkWidget *b)
-{
-    GtkWidget *widget;
-    GtkRequisition req;
-    GdkScreen *screen;
-    GdkRectangle geom;
-    int num;
 
-    widget = b->parent->parent;
-    
+
+static void
+launcher_button_pointer (GtkWidget *button_a,
+                             GtkWidget *button_b)
+{
+    /* sync the button states */
+    gtk_widget_set_state (button_b, GTK_WIDGET_STATE (button_a));
+}
+
+
+
+static void
+launcher_button_clicked (GtkWidget      *button,
+                         LauncherPlugin *launcher)
+{
+    LauncherEntry *entry;
+
+    /* remove popup timeout */
+    if (launcher->popup_timeout_id)
+    {
+        g_source_remove (launcher->popup_timeout_id);
+        launcher->popup_timeout_id = 0;
+    }
+
+    /* get first entry */
+    entry = g_list_first (launcher->entries)->data;
+
+    /* execute command */
+    launcher_execute (gtk_widget_get_screen (button), entry, NULL);
+}
+
+
+
+static gboolean
+launcher_button_pressed (LauncherPlugin  *launcher,
+                         GdkEventButton  *ev)
+{
+    guint modifiers;
+
+    modifiers = gtk_accelerator_get_default_mod_mask ();
+
+    /* exit if control is pressed, or pressed != button 1 */
+    if (G_LIKELY (ev->button != 1) ||
+        (ev->button == 1 && (ev->state & modifiers) == GDK_CONTROL_MASK))
+    {
+        return FALSE;
+    }
+
+    /* start new popup timeout */
+    if (launcher->popup_timeout_id == 0)
+    {
+        launcher->popup_timeout_id =
+            g_timeout_add (MENU_POPUP_DELAY,
+                           (GSourceFunc) launcher_menu_popup,
+                           launcher);
+    }
+
+    return FALSE;
+}
+
+
+
+static gboolean
+launcher_button_released (GtkWidget       *button,
+                          GdkEventButton  *ev,
+                          LauncherPlugin  *launcher)
+{
+    LauncherEntry *entry;
+
+    /* stop the timeout (from button press) if it's still running */
+    if (launcher->popup_timeout_id > 0)
+    {
+        g_source_remove (launcher->popup_timeout_id);
+        launcher->popup_timeout_id = 0;
+    }
+
+    /* if button is 2, start command with arg from clipboard */
+    if (ev->button == 2)
+    {
+        entry = g_list_first (launcher->entries)->data;
+
+        launcher_execute_from_clipboard (gtk_widget_get_screen (button), entry);
+    }
+
+    return FALSE;
+}
+
+
+
+/**
+ * Arrow button functions
+ **/
+static gboolean
+launcher_arrow_pressed (LauncherPlugin  *launcher,
+                        GdkEventButton  *ev)
+{
+    /* only popup on 1st button */
+    if (G_UNLIKELY (ev->button != 1))
+        return FALSE;
+
+    /* popup menu */
+    launcher_menu_popup (launcher);
+
+    return FALSE;
+}
+
+
+
+static gboolean
+launcher_arrow_drag_motion (GtkToggleButton *button,
+                            GdkDragContext  *drag_context,
+                            gint             x,
+                            gint             y,
+                            guint            time,
+                            LauncherPlugin  *launcher)
+{
+    /* we need to popup the menu to allow a drop in a menu item, but
+     * since there is no good way to do this (because the pointer is grabbed)
+     * we do nothing... */
+    return TRUE;
+}
+
+
+
+/**
+ * Menu functions
+ **/
+static void
+launcher_menu_item_activate (GtkWidget     *mi,
+                             GList         *li)
+{
+    /* execute command */
+    launcher_execute (gtk_widget_get_screen (mi), li->data, NULL);
+
+    /* reorder list, if needed */
+    launcher_g_list_move_first (li);
+}
+
+
+
+static gboolean
+launcher_menu_item_released (GtkWidget      *mi,
+                             GdkEventButton *ev,
+                             GList          *li)
+{
+    if (ev->button == 2)
+    {
+        /* execute command with arg from clipboard */
+        launcher_execute_from_clipboard (gtk_widget_get_screen (mi), li->data);
+
+        /* reorder list, if needed */
+        launcher_g_list_move_first (li);
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+
+
+static void
+launcher_menu_position (GtkMenu   *menu,
+                        gint      *x,
+                        gint      *y,
+                        gboolean  *push_in,
+                        GtkWidget *button)
+{
+    GtkWidget      *widget;
+    GtkRequisition  req;
+    GdkScreen      *screen;
+    GdkRectangle    geom;
+    gint            num;
+
     if (!GTK_WIDGET_REALIZED (GTK_WIDGET (menu)))
         gtk_widget_realize (GTK_WIDGET (menu));
 
     gtk_widget_size_request (GTK_WIDGET (menu), &req);
 
+    widget = button->parent->parent;
     gdk_window_get_origin (widget->window, x, y);
 
-    widget = b->parent;
- 
-    switch (xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (b)))
+    widget = button->parent;
+
+    switch (xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (button)))
     {
+        case GTK_ARROW_NONE:
         case GTK_ARROW_UP:
             *x += widget->allocation.x;
             *y += widget->allocation.y - req.height;
@@ -787,21 +582,19 @@ launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
         case GTK_ARROW_LEFT:
             *x += widget->allocation.x - req.width;
             *y += widget->allocation.y - req.height
-                + widget->allocation.height;
+                  + widget->allocation.height;
             break;
         case GTK_ARROW_RIGHT:
             *x += widget->allocation.x + widget->allocation.width;
             *y += widget->allocation.y - req.height
-                + widget->allocation.height;
-            break;
-        default:
+                  + widget->allocation.height;
             break;
     }
 
     screen = gtk_widget_get_screen (widget);
+
     num = gdk_screen_get_monitor_at_window (screen, widget->window);
 
-    gtk_menu_set_screen (menu, screen); 
     gdk_screen_get_monitor_geometry (screen, num, &geom);
 
     if (*x > geom.x + geom.width - req.width)
@@ -815,309 +608,474 @@ launcher_position_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in,
         *y = geom.y;
 }
 
-static gboolean
-real_toggle_menu (LauncherPlugin *launcher)
-{
-    if (launcher->menu)
-    {
-        gtk_toggle_button_set_active (
-                GTK_TOGGLE_BUTTON (launcher->arrowbutton), TRUE);
-    
-        xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (launcher->plugin), 
-                                         GTK_MENU (launcher->menu));
 
-        gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL, 
-                        (GtkMenuPositionFunc) launcher_position_menu, 
-                        launcher->arrowbutton, 0, 
-                        gtk_get_current_event_time ());
+
+static gboolean
+launcher_menu_popup (LauncherPlugin *launcher)
+{
+    /* stop timeout if needed */
+    if (launcher->popup_timeout_id > 0)
+    {
+        g_source_remove (launcher->popup_timeout_id);
+        launcher->popup_timeout_id = 0;
     }
 
-    launcher->popup_timeout = 0;
-    return FALSE;
-}
-
-static gboolean
-launcher_toggle_menu_timeout (GtkToggleButton *b, GdkEventButton *ev, 
-                              LauncherPlugin *launcher)
-{
-    guint modifiers;
-
-    modifiers = gtk_accelerator_get_default_mod_mask ();
-
-    if (ev->button != 1 || (ev->button == 1 && 
-        (ev->state & modifiers) == GDK_CONTROL_MASK))
-    {
+    /* check if menu is needed, or it needs an update */
+    if (g_list_length (launcher->entries) <= 1)
         return FALSE;
-    }
+    else if (launcher->menu == NULL)
+        launcher_menu_update (launcher);
 
-    if (launcher->popup_timeout < 1)
-    {
-        launcher->from_timeout = TRUE;
-        
-        launcher->popup_timeout = 
-            g_timeout_add (MENU_TIMEOUT, (GSourceFunc)real_toggle_menu, 
-                           launcher);
-    }
+    /* toggle the arrow button */
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), TRUE);
 
-    return FALSE;
-}
-
-static gboolean
-launcher_toggle_menu (GtkToggleButton *b, GdkEventButton *ev, 
-                      LauncherPlugin *launcher)
-{
-    guint modifiers;
-
-    modifiers = gtk_accelerator_get_default_mod_mask ();
-
-    if (ev->button != 1 || (ev->button == 1 && 
-        (ev->state & modifiers) == GDK_CONTROL_MASK))
-    {
-        return FALSE;
-    }
-
-    real_toggle_menu (launcher);
+    /* popup menu */
+    gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL,
+                    (GtkMenuPositionFunc) launcher_menu_position,
+                    launcher->arrowbutton, 0,
+                    gtk_get_current_event_time ());
 
     return TRUE;
 }
 
-static gboolean
-launcher_arrow_drag (GtkToggleButton * tb, GdkDragContext *drag_context,
-                     gint x, gint y, guint time, LauncherPlugin * launcher)
-{
-    int push_in;
 
-    if (open_launcher && open_launcher != launcher)
-    {
-        gtk_widget_hide (open_launcher->menu);
-        gtk_toggle_button_set_active (
-                GTK_TOGGLE_BUTTON (open_launcher->arrowbutton), FALSE);
-        open_launcher = NULL;
-    }
-    
-    gtk_toggle_button_set_active (tb, TRUE);
-
-    gtk_widget_show (launcher->menu);
-
-    {
-        GtkRequisition tmp_request;
-        GtkAllocation tmp_allocation = { 0, };
-
-        gtk_widget_size_request (GTK_MENU (launcher->menu)->toplevel, 
-                                 &tmp_request);
-
-        tmp_allocation.width = tmp_request.width;
-        tmp_allocation.height = tmp_request.height;
-
-        gtk_widget_size_allocate (GTK_MENU (launcher->menu)->toplevel, 
-                                  &tmp_allocation);
-
-        gtk_widget_realize (launcher->menu);
-    }
-
-    launcher_position_menu (GTK_MENU (launcher->menu), &x, &y, &push_in,
-                            GTK_WIDGET (tb));
-
-    gtk_window_move (GTK_WINDOW (GTK_MENU (launcher->menu)->toplevel),
-                     x, y);
-
-    gtk_widget_show (GTK_MENU (launcher->menu)->toplevel);
-
-    open_launcher = launcher;
-
-    return TRUE;
-}
 
 static void
-launcher_state_changed (GtkWidget *b1, GtkStateType state, GtkWidget *b2)
+launcher_menu_deactivated (LauncherPlugin *launcher)
 {
-    if (GTK_WIDGET_STATE (b2) != GTK_WIDGET_STATE (b1)
-        && GTK_WIDGET_STATE (b1) != GTK_STATE_INSENSITIVE)
+    /* deactivate arrow button */
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrowbutton), FALSE);
+
+    /* rebuild menu and button */
+    if (move_first)
     {
-        gtk_widget_set_state (b2, GTK_WIDGET_STATE (b1));
+        launcher->icon_update_required = TRUE;
+        g_idle_add ((GSourceFunc) launcher_button_update, launcher);
+
+        g_idle_add ((GSourceFunc) launcher_menu_prepare, launcher);
     }
 }
 
-static void
-launcher_clicked (GtkWidget *w, LauncherPlugin *launcher)
+
+
+gboolean
+launcher_menu_prepare (LauncherPlugin *launcher)
 {
-    if (launcher->popup_timeout > 0)
+    if (launcher->menu != NULL)
     {
-        g_source_remove (launcher->popup_timeout);
-        launcher->popup_timeout = 0;
-        launcher->from_timeout = FALSE;
+        g_signal_emit_by_name (G_OBJECT (launcher->menu), "deactivate");
+        gtk_widget_destroy (launcher->menu);
+        launcher->menu = NULL;
     }
 
-    launcher_entry_exec (gtk_widget_get_screen (w),
-                         g_ptr_array_index (launcher->entries, 0));
-}
-
-static gboolean
-launcher_released (GtkWidget *b, GdkEventButton *ev, LauncherPlugin *launcher)
-{
-    if (ev->button == 2)
-    {
-        LauncherEntry *entry = g_ptr_array_index (launcher->entries, 0);
-
-        launcher_entry_clipboard_cb (gtk_widget_get_screen (b), entry);
-
-        return TRUE;
-    }
-
-    return FALSE;
-}
-
-/* Read Configuration Data */
-
-static LauncherEntry*
-launcher_entry_from_rc_file (XfceRc *rc)
-{
-    LauncherEntry *entry = launcher_entry_new ();
-    const char *s;
-
-    if ((s = xfce_rc_read_entry (rc, "Name", NULL)) != NULL)
-        entry->name = g_strdup (s);
-
-    if ((s = xfce_rc_read_entry (rc, "Exec", NULL)) != NULL)
-    {
-        entry->exec = g_strdup (s);
-        
-        if (!(entry->real_exec = xfce_expand_variables (entry->exec, NULL)))
-                entry->real_exec = g_strdup (entry->exec);
-    }
-
-    entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
-    
-    entry->startup = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
-
-    if ((s = xfce_rc_read_entry (rc, "Comment", NULL)) != NULL)
-        entry->comment = g_strdup (s);
-
-    if ((s = xfce_rc_read_entry (rc, "Icon", NULL)) != NULL)
-    {
-        entry->icon.type = LAUNCHER_ICON_TYPE_NAME;
-        entry->icon.icon.name = g_strdup (s);
-    }
+    /* show or hide the arrow button */
+    if (g_list_length (launcher->entries) <= 1)
+        gtk_widget_hide (launcher->arrowbutton);
     else
+        gtk_widget_show (launcher->arrowbutton);
+
+    return FALSE;
+}
+
+
+
+static gboolean
+launcher_menu_update (LauncherPlugin *launcher)
+{
+    GList         *li;
+    GtkWidget     *mi, *image;
+    GdkPixbuf     *icon;
+    LauncherEntry *entry;
+
+    /* destroy the old menu, if needed */
+    if (G_UNLIKELY (launcher->menu != NULL))
+        launcher_menu_prepare (launcher);
+
+    /* create new menu */
+    launcher->menu = gtk_menu_new ();
+
+    /* make sure the menu popups up in right screen */
+    gtk_menu_set_screen (GTK_MENU (launcher->menu),
+                         gtk_widget_get_screen (GTK_WIDGET (launcher->plugin)));
+
+    /* append all entries, except first one */
+    for (li = g_list_nth (launcher->entries, 1); li != NULL; li = li->next)
     {
-        entry->icon.type = LAUNCHER_ICON_TYPE_CATEGORY;
-        entry->icon.icon.category = 
-            xfce_rc_read_int_entry (rc, "X-XFCE-IconCategory", 0);
+        entry = li->data;
+
+        /* create new menu item */
+        mi = gtk_image_menu_item_new_with_label (entry->name ? entry->name : _("New Item"));
+        gtk_widget_show (mi);
+        gtk_menu_shell_prepend (GTK_MENU_SHELL (launcher->menu), mi);
+
+        /* load and set menu icon */
+        icon = launcher_load_pixbuf (launcher->iconbutton, entry->icon, MENU_ICON_SIZE, FALSE);
+
+        if (G_LIKELY (icon != NULL))
+        {
+            image = gtk_image_new_from_pixbuf (icon);
+            gtk_widget_show (image);
+            gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), image);
+
+            /* release pixbuf */
+            g_object_unref (G_OBJECT (icon));
+        }
+
+        /* connect signals */
+        g_signal_connect (G_OBJECT (mi), "activate",
+                          G_CALLBACK (launcher_menu_item_activate), li);
+
+        g_signal_connect (G_OBJECT (mi), "button-release-event",
+                          G_CALLBACK (launcher_menu_item_released), li);
+
+        /* dnd support */
+        gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL,
+                           drop_targets, G_N_ELEMENTS (drop_targets),
+                           GDK_ACTION_COPY);
+
+        g_signal_connect (G_OBJECT (mi), "drag-data-received",
+                          G_CALLBACK (launcher_menu_drag_data_received), entry);
+
+        /* set tooltip */
+        if (G_LIKELY (entry->comment))
+            gtk_tooltips_set_tip (launcher->tips, mi, entry->comment, NULL);
     }
+
+    /* connect deactivate signal */
+    g_signal_connect_swapped (G_OBJECT (launcher->menu), "deactivate",
+                                G_CALLBACK (launcher_menu_deactivated), launcher);
+
+    return FALSE;
+}
+
+
+
+/**
+ * Save and load settings
+ **/
+static gchar *
+launcher_read_entry (XfceRc      *rc,
+                         const gchar *name)
+{
+    const gchar *temp;
+    gchar       *value = NULL;
+
+    temp = xfce_rc_read_entry (rc, name, NULL);
+    if (G_LIKELY (temp != NULL && *temp != '\0'))
+        value = g_strdup (temp);
+
+    return value;
+}
+
+
+
+void
+launcher_read (LauncherPlugin *launcher)
+{
+    gchar         *file;
+    gchar          group[10];
+    XfceRc        *rc;
+    guint          i;
+    LauncherEntry *entry;
+
+    /* get rc file name, create it if needed */
+    file = xfce_panel_plugin_save_location (launcher->plugin, TRUE);
+
+    if (G_UNLIKELY (file == NULL))
+        return;
+
+    /* open rc, read-only */
+    rc = xfce_rc_simple_open (file, TRUE);
+    g_free (file);
+
+    if (G_UNLIKELY (rc == NULL))
+        return;
+
+    /* read global settings */
+    xfce_rc_set_group (rc, "Global");
+
+    launcher->move_first = xfce_rc_read_bool_entry (rc, "MoveFirst", FALSE);
+
+    for (i = 0; i < 100 /* arbitrary */; ++i)
+    {
+        /* create group name */
+        g_snprintf (group, sizeof (group), "Entry %d", i);
+
+        /* break if no more entries found */
+        if (xfce_rc_has_group (rc, group) == FALSE)
+            break;
+
+        /* set the group */
+        xfce_rc_set_group (rc, group);
+
+        /* create new entry structure */
+        entry = panel_slice_new0 (LauncherEntry);
+
+        /* read all the entry settings */
+        entry->name = launcher_read_entry (rc, "Name");
+        entry->comment = launcher_read_entry (rc, "Comment");
+        entry->icon = launcher_read_entry (rc, "Icon");
+        entry->exec = launcher_read_entry (rc, "Exec");
+        entry->path = launcher_read_entry (rc, "Path");
+
+        entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+        entry->startup = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
+#endif
+        /* append the entry */
+        launcher->entries = g_list_append (launcher->entries, entry);
+    }
+
+    /* close the rc file */
+    xfce_rc_close (rc);
+}
+
+
+
+void
+launcher_write (LauncherPlugin *launcher)
+{
+    gchar          *file;
+    gchar         **groups;
+    gchar           group[10];
+    XfceRc         *rc;
+    GList          *li;
+    guint           i = 0, n;
+    guint           block;
+    LauncherEntry  *entry;
+
+    /* HACK:
+     * sometimes the panel emits a save signal, this is cool, unless we're working
+     * in the properties dialog. This because the cancel button won't work then. */
+    block = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (launcher->plugin),
+                                                  "xfce-panel-plugin-block"));
+    if (G_UNLIKELY (block > 0))
+        return;
+
+    /* get rc file name, create it if needed */
+    file = xfce_panel_plugin_save_location (launcher->plugin, TRUE);
+
+    if (G_UNLIKELY (file == NULL))
+        return;
+
+    /* open rc, read/write */
+    rc = xfce_rc_simple_open (file, FALSE);
+    g_free (file);
+
+    if (G_UNLIKELY (rc == NULL))
+        return;
+
+    /* retreive all the groups in the config file */
+    groups = xfce_rc_get_groups (rc);
+
+    /* remove all the groups
+     * note: you can use g_unlink to remove the file, but first you need some
+     * stdio library and some benchmarking showed this is almost 2x faster for
+     * 'normal' situations */
+    for (n = 0; groups[n] != NULL; ++n)
+        xfce_rc_delete_group (rc, groups[n], TRUE);
+
+    /* cleanup */
+    g_strfreev (groups);
+
+    /* save global launcher settings */
+    xfce_rc_set_group (rc, "Global");
+
+    xfce_rc_write_bool_entry (rc, "MoveFirst", launcher->move_first);
+
+    /* save all the entries */
+    for (li = launcher->entries; li != NULL; li = li->next, ++i)
+    {
+        entry = li->data;
+
+        /* set entry group */
+        g_snprintf (group, sizeof (group), "Entry %d", i);
+        xfce_rc_set_group (rc, group);
+
+        /* write entry settings */
+        if (G_LIKELY (entry->name))
+            xfce_rc_write_entry (rc, "Name", entry->name);
+
+        if (G_LIKELY (entry->comment))
+            xfce_rc_write_entry (rc, "Comment", entry->comment);
+
+        if (G_LIKELY (entry->icon))
+            xfce_rc_write_entry (rc, "Icon", entry->icon);
+
+        if (G_LIKELY (entry->exec))
+            xfce_rc_write_entry (rc, "Exec", entry->exec);
+
+        if (G_LIKELY (entry->path))
+            xfce_rc_write_entry (rc, "Path", entry->path);
+
+        xfce_rc_write_bool_entry (rc, "Terminal", entry->terminal);
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+        xfce_rc_write_bool_entry (rc, "StartupNotify", entry->startup);
+#endif
+    }
+
+    /* close the rc file */
+    xfce_rc_close (rc);
+}
+
+
+
+LauncherEntry *
+launcher_new_entry (void)
+{
+    LauncherEntry *entry;
+
+    /* create new entry slice */
+    entry = panel_slice_new0 (LauncherEntry);
+
+    /* set some default values */
+    entry->name    = g_strdup (_("New Item"));
+    entry->comment = NULL; /* _("This item has not yet been configured")); */
+    entry->icon    = g_strdup ("applications-other");
+
+    /* fill others */
+    entry->exec     = NULL;
+    entry->path     = NULL;
+    entry->terminal = FALSE;
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+    entry->startup  = FALSE;
+#endif
 
     return entry;
 }
 
-static void
-launcher_read_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
+
+
+/**
+ * Plugin create function and signal handling
+ **/
+static LauncherPlugin*
+launcher_new (XfcePanelPlugin *plugin)
 {
-    XfceRc *rc;
-    char *file;
-    int i;
-    
-    if (!(file = xfce_panel_plugin_lookup_rc_file (plugin)))
-        return;
+    LauncherPlugin     *launcher;
+    LauncherEntry      *entry;
+    GtkWidget          *box;
+    XfceScreenPosition  position;
+    gpointer            klass;
 
-    rc = xfce_rc_simple_open (file, TRUE);
-    g_free (file);
+    /* get panel information */
+    position = xfce_panel_plugin_get_screen_position (plugin);
 
-    if (!rc)
-        return;
-    
-    for (i = 0; i < 100 /* arbitrary */; ++i)
+    launcher = panel_slice_new0 (LauncherPlugin);
+
+    /* link plugin */
+    launcher->plugin = plugin;
+
+    /* defaults */
+    launcher->menu = NULL;
+
+    /* create tooltips */
+    launcher->tips = gtk_tooltips_new ();
+    exo_gtk_object_ref_sink (GTK_OBJECT (launcher->tips));
+
+    /* create widgets */
+    box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
+    gtk_container_add (GTK_CONTAINER (plugin), box);
+    gtk_widget_show (box);
+
+    launcher->iconbutton = xfce_create_panel_button ();
+    gtk_widget_show (launcher->iconbutton);
+    gtk_box_pack_start (GTK_BOX (box), launcher->iconbutton, TRUE, TRUE, 0);
+
+    gtk_drag_dest_set (launcher->iconbutton, GTK_DEST_DEFAULT_ALL,
+                       drop_targets, G_N_ELEMENTS (drop_targets),
+                       GDK_ACTION_COPY);
+
+    launcher->image = gtk_image_new ();
+    gtk_widget_show (launcher->image);
+    gtk_container_add (GTK_CONTAINER (launcher->iconbutton), launcher->image);
+
+    launcher->arrowbutton = xfce_arrow_button_new (GTK_ARROW_UP);
+    GTK_WIDGET_UNSET_FLAGS (launcher->arrowbutton, GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
+    gtk_box_pack_start (GTK_BOX (box), launcher->arrowbutton, FALSE, FALSE, 0);
+    gtk_widget_set_size_request (launcher->arrowbutton, ARROW_WIDTH, ARROW_WIDTH);
+    gtk_button_set_relief (GTK_BUTTON (launcher->arrowbutton), GTK_RELIEF_NONE);
+    gtk_button_set_focus_on_click (GTK_BUTTON (launcher->arrowbutton), FALSE);
+
+    gtk_drag_dest_set (launcher->arrowbutton, GTK_DEST_DEFAULT_ALL,
+                       drop_targets, G_N_ELEMENTS (drop_targets),
+                       GDK_ACTION_COPY);
+
+    /* signals for button state sync */
+    g_signal_connect (G_OBJECT (launcher->iconbutton), "enter",
+                      G_CALLBACK (launcher_button_pointer), launcher->arrowbutton);
+    g_signal_connect (G_OBJECT (launcher->iconbutton), "leave",
+                      G_CALLBACK (launcher_button_pointer), launcher->arrowbutton);
+    g_signal_connect (G_OBJECT (launcher->arrowbutton), "enter",
+                      G_CALLBACK (launcher_button_pointer), launcher->iconbutton);
+    g_signal_connect (G_OBJECT (launcher->arrowbutton), "leave",
+                      G_CALLBACK (launcher_button_pointer), launcher->iconbutton);
+
+    /* hook for icon themes changes */
+    klass = g_type_class_ref (GTK_TYPE_ICON_THEME);
+    launcher->theme_timeout_id = g_signal_add_emission_hook (g_signal_lookup ("changed", GTK_TYPE_ICON_THEME),
+                                                             0, (GSignalEmissionHook) launcher_theme_changed,
+                                                             launcher, NULL);
+    g_type_class_unref (klass);
+
+    /* icon button signals */
+    g_signal_connect (G_OBJECT (launcher->iconbutton), "clicked",
+                      G_CALLBACK (launcher_button_clicked), launcher);
+
+    g_signal_connect_swapped (G_OBJECT (launcher->iconbutton), "button-press-event",
+                              G_CALLBACK (launcher_button_pressed), launcher);
+
+    g_signal_connect (G_OBJECT (launcher->iconbutton), "button-release-event",
+                      G_CALLBACK (launcher_button_released), launcher);
+
+    g_signal_connect (G_OBJECT (launcher->iconbutton), "drag-data-received",
+                      G_CALLBACK (launcher_button_drag_data_received), launcher);
+
+    /* this signal with update the button (show icon) when the button is realizde */
+    launcher->icon_update_required = TRUE;
+    g_signal_connect_swapped (G_OBJECT (launcher->iconbutton), "realize",
+                              G_CALLBACK (launcher_button_update), launcher);
+
+    /* arrow button signals */
+    g_signal_connect_swapped (G_OBJECT (launcher->arrowbutton), "button-press-event",
+                              G_CALLBACK (launcher_arrow_pressed), launcher);
+
+    g_signal_connect (G_OBJECT (launcher->arrowbutton), "drag-motion",
+                      G_CALLBACK (launcher_arrow_drag_motion), launcher);
+
+    /* read the user settings */
+    launcher_read (launcher);
+
+    /* set move_first boolean */
+    launcher_set_move_first (launcher->move_first);
+
+    /* append new entry if no entries loaded */
+    if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
     {
-        LauncherEntry *entry;
-        char group[10];
-        
-        g_snprintf (group, 10, "Entry %d", i);
-        
-        if (!xfce_rc_has_group (rc, group))
-            break;
-        
-        xfce_rc_set_group (rc, group);
+          entry = launcher_new_entry ();
 
-        if ((entry = launcher_entry_from_rc_file (rc)) != NULL)
-            g_ptr_array_add (launcher->entries, entry);
+          launcher->entries = g_list_append (launcher->entries, entry);
     }
-    
-    xfce_rc_close (rc);
-    
-    launcher_update_panel_entry (launcher);
-    launcher_recreate_menu (launcher);
+
+    /* set arrow position */
+    launcher_screen_position_changed (launcher, position);
+
+    /* prepare the menu */
+    launcher_menu_prepare (launcher);
+
+    return launcher;
 }
 
-/* Write Configuration Data */
 
-static void
-launcher_entry_write_rc_file (LauncherEntry *entry, XfceRc *rc)
-{
-    if (entry->name)
-        xfce_rc_write_entry (rc, "Name", entry->name);
 
-    if (entry->exec)
-        xfce_rc_write_entry (rc, "Exec", entry->exec);
-
-    xfce_rc_write_bool_entry (rc, "Terminal", entry->terminal);
-    
-    xfce_rc_write_bool_entry (rc, "StartupNotify", entry->startup);
-    
-    if (entry->comment)
-        xfce_rc_write_entry (rc, "Comment", entry->comment);
-
-    if (entry->icon.type == LAUNCHER_ICON_TYPE_CATEGORY)
-    {
-        xfce_rc_write_int_entry (rc, "X-XFCE-IconCategory", 
-                                 entry->icon.icon.category);
-    }
-    else if (entry->icon.type == LAUNCHER_ICON_TYPE_NAME)
-    {
-        xfce_rc_write_entry (rc, "Icon", entry->icon.icon.name);
-    }
-}
-
-static void
-launcher_write_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
-{
-    char *file;
-    XfceRc *rc;
-    char group[10];
-    int i;
-
-    if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
-        return;
-
-    unlink (file);
-    
-    rc = xfce_rc_simple_open (file, FALSE);
-    g_free (file);
-
-    if (!rc)
-        return;
-    
-    for (i = 0; i < launcher->entries->len; ++i)
-    {
-        LauncherEntry *entry = g_ptr_array_index (launcher->entries, i);
-
-        g_snprintf (group, 10, "Entry %d", i);
-
-        xfce_rc_set_group (rc, group);
-
-        launcher_entry_write_rc_file (entry, rc);
-    }
-
-    xfce_rc_close (rc);
-}
-
-/* position and orientation */
 static GtkArrowType
-calculate_floating_arrow_type (LauncherPlugin *launcher, 
-                               XfceScreenPosition position)
+launcher_calculate_floating_arrow (LauncherPlugin     *launcher,
+                                   XfceScreenPosition  position)
 {
-    GtkArrowType type = GTK_ARROW_UP;
-    int mon, x, y;
-    GdkScreen *screen;
-    GdkRectangle geom;
-    
+    gint          mon, x, y;
+    GdkScreen    *screen;
+    GdkRectangle  geom;
+
     if (!GTK_WIDGET_REALIZED (launcher->iconbutton))
     {
         if (xfce_screen_position_is_horizontal (position))
@@ -1125,220 +1083,165 @@ calculate_floating_arrow_type (LauncherPlugin *launcher,
         else
             return GTK_ARROW_LEFT;
     }
-    
+
     screen = gtk_widget_get_screen (launcher->iconbutton);
-    mon = gdk_screen_get_monitor_at_window (screen, 
+    mon = gdk_screen_get_monitor_at_window (screen,
                                             launcher->iconbutton->window);
     gdk_screen_get_monitor_geometry (screen, mon, &geom);
-    
+
     gdk_window_get_root_origin (launcher->iconbutton->window, &x, &y);
-    
+
     if (xfce_screen_position_is_horizontal (position))
     {
         if (y > geom.y + geom.height / 2)
-            type = GTK_ARROW_UP;
+            return GTK_ARROW_UP;
         else
-            type = GTK_ARROW_DOWN;
+            return GTK_ARROW_DOWN;
     }
     else
     {
         if (x > geom.x + geom.width / 2)
-            type = GTK_ARROW_LEFT;
+            return GTK_ARROW_LEFT;
         else
-            type = GTK_ARROW_RIGHT;
+            return GTK_ARROW_RIGHT;
     }
-
-    return type;
 }
 
+
+
 static void
-launcher_set_screen_position (LauncherPlugin *launcher, 
-                              XfceScreenPosition position)
+launcher_screen_position_changed (LauncherPlugin     *launcher,
+                                  XfceScreenPosition  position)
 {
-    GtkArrowType type = GTK_ARROW_UP;
-    
-    if (xfce_screen_position_is_floating (position))
-    {
-        type = calculate_floating_arrow_type (launcher, position);
-    }
-    else if (xfce_screen_position_is_top (position))
-    {
-        type = GTK_ARROW_DOWN;
-    }
-    else if (xfce_screen_position_is_left (position))
-    {
-        type = GTK_ARROW_RIGHT;
-    }
-    else if (xfce_screen_position_is_right (position))
-    {
-        type = GTK_ARROW_LEFT;
-    }
-    else if (xfce_screen_position_is_bottom (position))
-    {
+    GtkArrowType type;
+
+    if (xfce_screen_position_is_bottom (position))
         type = GTK_ARROW_UP;
-    }
-    
-    xfce_arrow_button_set_arrow_type (
-            XFCE_ARROW_BUTTON (launcher->arrowbutton), type);
+    else if (xfce_screen_position_is_top (position))
+        type = GTK_ARROW_DOWN;
+    else if (xfce_screen_position_is_left (position))
+        type = GTK_ARROW_RIGHT;
+    else if (xfce_screen_position_is_right (position))
+        type = GTK_ARROW_LEFT;
+    else /* floating */
+        type = launcher_calculate_floating_arrow (launcher, position);
+
+    /* set the arrow direction */
+    xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (launcher->arrowbutton), type);
 }
+
+
 
 static void
-launcher_set_orientation (XfcePanelPlugin *plugin,
-                          LauncherPlugin *launcher, 
-                          GtkOrientation orientation)
+launcher_orientation_changed (LauncherPlugin  *launcher,
+                              GtkOrientation   orientation)
 {
-    xfce_hvbox_set_orientation (XFCE_HVBOX (launcher->box), orientation);
+    /* noting yet */
 }
 
-static void
-plugin_icon_theme_changed (GtkWidget *w, gpointer ignored,
-                           LauncherPlugin *launcher)
+
+
+static gboolean
+launcher_set_size (LauncherPlugin  *launcher,
+                       guint            size)
 {
-    if (!launcher->plugin)
-        return;
-
-    launcher_update_panel_entry (launcher);
-
-    launcher_recreate_menu (launcher);
-}
-
-/* Create Launcher Plugin Contents */
-
-static LauncherPlugin *
-launcher_new (XfcePanelPlugin *plugin)
-{
-    LauncherPlugin *launcher;
-    int size;
-    XfceScreenPosition screen_position;
-    
-    size = xfce_panel_plugin_get_size (plugin);
-    screen_position = xfce_panel_plugin_get_screen_position (plugin);
-    
-    launcher = panel_slice_new0 (LauncherPlugin);
-    
-    launcher->plugin = GTK_WIDGET (plugin);
-    
-    launcher->tips = gtk_tooltips_new ();
-    g_object_ref (G_OBJECT (launcher->tips));
-    gtk_object_sink (GTK_OBJECT (launcher->tips));
-    
-    launcher->entries = g_ptr_array_new ();
-    
-    if (xfce_screen_position_is_horizontal (screen_position))
-        launcher->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
-    else
-        launcher->box = xfce_hvbox_new (GTK_ORIENTATION_VERTICAL, FALSE, 0);
-    gtk_widget_show (launcher->box);
-
-    launcher->iconbutton = xfce_create_panel_button ();
-    gtk_widget_show (launcher->iconbutton);
-    gtk_box_pack_start (GTK_BOX (launcher->box), launcher->iconbutton,
-                        TRUE, TRUE, 0);
+    /* set fixed button size */
     gtk_widget_set_size_request (launcher->iconbutton, size, size);
 
-    launcher->image = gtk_image_new ();
-    gtk_widget_show (launcher->image);
-    gtk_container_add (GTK_CONTAINER (launcher->iconbutton), launcher->image);
-    
-    launcher->arrowbutton = xfce_arrow_button_new (GTK_ARROW_UP);
-    GTK_WIDGET_UNSET_FLAGS (launcher->arrowbutton, 
-                            GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
-    gtk_box_pack_start (GTK_BOX (launcher->box), launcher->arrowbutton,
-                        FALSE, FALSE, 0);
-    gtk_widget_set_size_request (launcher->arrowbutton, W_ARROW, W_ARROW);
-    gtk_button_set_relief (GTK_BUTTON (launcher->arrowbutton), 
-                           GTK_RELIEF_NONE);
-    gtk_button_set_focus_on_click (GTK_BUTTON (launcher->arrowbutton), FALSE);
-    launcher_set_screen_position (launcher, screen_position);
-
-    /* signals */
-    launcher->style_id =
-        g_signal_connect (launcher->image, "style-set", 
-                          G_CALLBACK (plugin_icon_theme_changed), launcher);
-    
-    launcher->screen_id =
-        g_signal_connect (launcher->image, "screen-changed", 
-                          G_CALLBACK (plugin_icon_theme_changed), launcher);
-
-    g_signal_connect (launcher->iconbutton, "button-press-event",
-                      G_CALLBACK (launcher_toggle_menu_timeout), launcher);
-    
-    g_signal_connect (launcher->iconbutton, "clicked",
-                      G_CALLBACK (launcher_clicked), launcher);
-    
-    g_signal_connect (launcher->iconbutton, "button-release-event",
-                      G_CALLBACK (launcher_released), launcher);
-    
-    g_signal_connect (launcher->arrowbutton, "button-press-event",
-                      G_CALLBACK (launcher_toggle_menu), launcher);
-    
-    g_signal_connect (launcher->iconbutton, "state-changed",
-                      G_CALLBACK (launcher_state_changed), 
-                      launcher->arrowbutton);
-    
-    g_signal_connect (launcher->arrowbutton, "state-changed",
-                      G_CALLBACK (launcher_state_changed), 
-                      launcher->iconbutton);
-
-    g_signal_connect (launcher->iconbutton, "destroy", 
-                      G_CALLBACK (gtk_widget_destroyed), 
-                      &(launcher->iconbutton));
-    
-    g_signal_connect (launcher->iconbutton, "drag-data-received",
-                      G_CALLBACK (launcher_drag_data_received), launcher);
-
-    g_signal_connect (launcher->arrowbutton, "drag-motion",
-                      G_CALLBACK (launcher_arrow_drag), launcher);
-    
-    g_signal_connect (launcher->arrowbutton, "drag-leave", 
-                      G_CALLBACK (launcher_menu_drag_leave), launcher);
-    
-    /* configuration */
-    launcher_read_rc_file (plugin, launcher);
-
-    if (launcher->entries->len == 0)
+    /* reload the icon button */
+    if (GTK_WIDGET_REALIZED (launcher->iconbutton))
     {
-        LauncherEntry *entry = entry = panel_slice_new0 (LauncherEntry);
-
-        entry->name = g_strdup (_("New Item"));
-        entry->comment = g_strdup (_("This item has not yet been configured"));
-
-        g_ptr_array_add (launcher->entries, entry);
-
-        launcher_update_panel_entry (launcher);
-    }
-    else if (launcher->entries->len > 1)
-    {
-        gtk_widget_show (launcher->arrowbutton);
+        launcher->icon_update_required = TRUE;
+        launcher_button_update (launcher);
     }
 
-    launcher_set_drag_dest (launcher->iconbutton);
-    launcher_set_drag_dest (launcher->arrowbutton);
-    
-    return launcher;
+    return TRUE;
 }
 
-/* Free Launcher Data */
+
+
+void
+launcher_free_entry (LauncherEntry  *entry,
+                     LauncherPlugin *launcher)
+{
+    /* remove from the list */
+    if (G_LIKELY (launcher != NULL))
+        launcher->entries = g_list_remove (launcher->entries, entry);
+
+    /* free variables */
+    g_free (entry->name);
+    g_free (entry->comment);
+    g_free (entry->path);
+    g_free (entry->icon);
+    g_free (entry->exec);
+
+    /* free structure */
+    panel_slice_free (LauncherEntry, entry);
+}
+
+
 
 static void
 launcher_free (LauncherPlugin *launcher)
 {
-    int i;
+    GtkWidget *dialog;
 
-    g_object_unref (G_OBJECT (launcher->tips));
-    
-    for (i = 0; i < launcher->entries->len; ++i)
-    {
-        LauncherEntry *e = g_ptr_array_index (launcher->entries, i);
+    /* check if we still need to destroy the dialog */
+    dialog = g_object_get_data (G_OBJECT (launcher->plugin), "dialog");
+    if (G_UNLIKELY (dialog != NULL))
+        gtk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
 
-        launcher_entry_free (e);
-    }
+    /* stop timeout */
+    if (G_UNLIKELY (launcher->popup_timeout_id))
+        g_source_remove (launcher->popup_timeout_id);
 
-    g_ptr_array_free (launcher->entries, TRUE);
+    /* remove icon theme change */
+    g_signal_remove_emission_hook (g_signal_lookup ("changed", GTK_TYPE_ICON_THEME),
+                                   launcher->theme_timeout_id);
 
+    /* destroy the popup menu */
     if (launcher->menu)
         gtk_widget_destroy (launcher->menu);
-    
-    launcher->plugin = NULL;
+
+    /* remove the entries */
+    g_list_foreach (launcher->entries,
+                    (GFunc) launcher_free_entry, launcher);
+    g_list_free (launcher->entries);
+
+    /* release the tooltips */
+    g_object_unref (G_OBJECT (launcher->tips));
+
+    /* free launcher structure */
     panel_slice_free (LauncherPlugin, launcher);
+}
+
+
+
+static void
+launcher_construct (XfcePanelPlugin *plugin)
+{
+    LauncherPlugin *launcher = launcher_new (plugin);
+
+    xfce_panel_plugin_add_action_widget (plugin, launcher->iconbutton);
+    xfce_panel_plugin_add_action_widget (plugin, launcher->arrowbutton);
+    xfce_panel_plugin_menu_show_configure (plugin);
+
+    /* connect signals */
+    g_signal_connect_swapped (G_OBJECT (plugin), "screen-position-changed",
+                              G_CALLBACK (launcher_screen_position_changed), launcher);
+
+    g_signal_connect_swapped (G_OBJECT (plugin), "orientation-changed",
+                              G_CALLBACK (launcher_orientation_changed), launcher);
+
+    g_signal_connect_swapped (G_OBJECT (plugin), "size-changed",
+                              G_CALLBACK (launcher_set_size), launcher);
+
+    g_signal_connect_swapped (G_OBJECT (plugin), "free-data",
+		              G_CALLBACK (launcher_free), launcher);
+
+    g_signal_connect_swapped (G_OBJECT (plugin), "save",
+                              G_CALLBACK (launcher_write), launcher);
+
+    g_signal_connect_swapped (G_OBJECT (plugin), "configure-plugin",
+                              G_CALLBACK (launcher_dialog_show), launcher);
 }

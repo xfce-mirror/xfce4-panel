@@ -1,23 +1,8 @@
 # $Id$
 
-hicolor48dir = $(datadir)/icons/hicolor/48x48/apps
-
-hicolor16dir = $(datadir)/icons/hicolor/16x16/apps
-
-hicolor48_DATA = \
-	xfce4-panel.png \
-	xfce4-iconbox.png \
-	xfce4-taskbar.png \
-	xfce-mouse.png \
-	xfce-mail.png
-
-hicolor16_DATA = \
-	xfce-system-exit.png \
-	xfce-system-info.png \
-	xfce-system-lock.png \
-	xfce-system-settings.png
-
-EXTRA_DIST = $(hicolor48_DATA) $(hicolor16_DATA)
+SUBDIRS =								\
+	16x16								\
+	48x48
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
 
@@ -32,4 +17,4 @@ install-data-hook:
 		echo "***";						\
         fi
 
-# vi:set ts=8 sw=8 noet ai nocindent:
+# vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

@@ -1,9 +1,16 @@
-NEWS for xfce4-panel
-====================
-
-4.4.0
+4.5.x
 =====
-- Many fixes when using the panel in a multiscreen setup (Jasper, Nick)
+- Completely rewritten launcher (Bugs 2336, 2365, 1323, 2262 and 1225)
+- Various improvements in libxfce4panel (memory leaks, G_GNUC_INTERNAL,
+  GSList, canonical strings and fixed pedantic warnings).
+- Libxfce4panel does no longer depend on libxfcegui4. This might cause
+  some problems with plugins. Plugin developers should add libxfcegui4
+  to the dependencies of their package (including cflags and libadd in
+  the makefiles).
+
+
+4.3.99.3 (4.4-RC3)
+==================
 - Update or add blinking for urgent windows in taslist, windowlist and iconbox. 
   (Jasper)
 - Move test plugin to Xfce Goodies. (Nick)

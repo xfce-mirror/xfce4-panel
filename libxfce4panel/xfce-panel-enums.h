@@ -1,29 +1,27 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
-#ifndef _XFCE_PANEL_ENUMS_H
-#define _XFCE_PANEL_ENUMS_H
+#ifndef __XFCE_PANEL_ENUMS_H__
+#define __XFCE_PANEL_ENUMS_H__
 
 G_BEGIN_DECLS
-
 /**
  * XfceScreenPosition
  * @XFCE_SCREEN_POSITION_NONE       : No position has been set.
@@ -45,13 +43,13 @@ G_BEGIN_DECLS
  * There are three screen positions for each side of the screen:
  * LEFT/TOP, CENTER and RIGHT/BOTTOM. The XfceScreenPosition is expressed
  * as navigational direction, with possible addition of H or V to denote
- * horizontal and vertical orientation. Additionally there are two floating 
+ * horizontal and vertical orientation. Additionally there are two floating
  * positions, horizontal and vertical.
  **/
 typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
 {
     XFCE_SCREEN_POSITION_NONE,
-    
+
     /* top */
     XFCE_SCREEN_POSITION_NW_H,          /* North West Horizontal */
     XFCE_SCREEN_POSITION_N,             /* North                 */
@@ -61,7 +59,7 @@ typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
     XFCE_SCREEN_POSITION_NW_V,          /* North West Vertical   */
     XFCE_SCREEN_POSITION_W,             /* West                  */
     XFCE_SCREEN_POSITION_SW_V,          /* South West Vertical   */
-    
+
     /* right */
     XFCE_SCREEN_POSITION_NE_V,          /* North East Vertical   */
     XFCE_SCREEN_POSITION_E,             /* East                  */
@@ -150,5 +148,4 @@ XfceScreenPosition;
 
 G_END_DECLS
 
-#endif /* _PANEL_ENUMS_H */
-
+#endif /* !__PANEL_ENUMS_H__ */

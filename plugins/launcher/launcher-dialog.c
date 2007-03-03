@@ -1,8 +1,8 @@
-/* vim: set expandtab ts=8 sw=4: */
-
 /*  $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2006-2007 Nick Schermer <nick@xfce.org>
+ *  Copyright (c) 2005-2006 Benedikt Meurer <benny@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,1938 +19,1541 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-
-#include <stdio.h>
+#endif
+#ifdef HAVE_MEMORY_H
+#include <memory.h>
+#endif
+#ifdef HAVE_STRING_H
 #include <string.h>
-#include <math.h>
-#include <gtk/gtk.h>
+#endif
 
-#include <libxfce4util/libxfce4util.h>
-#include <libxfcegui4/libxfcegui4.h>
-#include <libxfce4panel/xfce-arrow-button.h>
+#include <libxfcegui4/xfce-titled-dialog.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
+#include "launcher.h"
 #include "launcher-dialog.h"
 
-
-typedef struct
+enum
 {
-    XfcePanelPlugin *plugin;
-    LauncherPlugin *launcher;
-
-    GtkWidget *dlg;
-    
-    /* launchers */
-    GtkWidget *tree;
-    GtkWidget *scroll;
-
-    GtkWidget *up;
-    GtkWidget *down;
-    GtkWidget *add;
-    GtkWidget *remove;
-    
-    /* edit current entry */
-    gboolean updating;
-
-    LauncherEntry *entry;
-    
-    GtkWidget *exec_name;
-    GtkWidget *exec_comment;
-
-    GtkWidget *icon_button;
-    GtkWidget *icon_img;
-    GtkWidget *icon_category;
-    GtkWidget *icon_file_align;
-    GtkWidget *icon_file;
-    GtkWidget *icon_browse;
-    GtkWidget *icon_label;
-
-    GtkWidget *exec;
-    GtkWidget *exec_browse;
-    GtkWidget *exec_terminal;
-    GtkWidget *exec_startup;
-}
-LauncherDialog;
-
-/* Adding a new Zero Install interface requires using the
- * network, so we do it asynchronously. This structure records
- * the details for the callback handler.
- */
-typedef struct
-{
-    /* LauncherDialog objects are not ref-counted, so we ref-count
-     * the plugin object instead and use that to check that the
-     * LauncherDialog is still available.
-     */
-    GObject *plugin;
-
-    /* The package we are checking. */
-    char *interface_uri;
-
-    /* The entry to update, or NULL to add a new one.
-     * Need to check that this is still valid when the callback is
-     * invoked.
-     */
-    LauncherEntry *entry;
-}
-ZeroInstallProcess;
-
-/* Keep in sync with XfceIconTheme */
-static const char *category_icons [] = {
-    N_("Default"),
-    N_("Editor"),
-    N_("File management"),
-    N_("Utilities"),
-    N_("Games"),
-    N_("Help browser"),
-    N_("Multimedia"),
-    N_("Network"),
-    N_("Graphics"),
-    N_("Printer"),
-    N_("Productivity"),
-    N_("Office"),
-    N_("Sound"),
-    N_("Terminal"),
-    N_("Development")
+    COL_ICON = 0,
+    COL_TEXT
 };
 
-#define NUM_CATEGORIES  G_N_ELEMENTS(category_icons)
+typedef struct _LauncherDialog LauncherDialog;
 
-/* DND */
-static void entry_dialog_data_received (GtkWidget *w, 
-                                        GdkDragContext *context, 
-                                        gint x, 
-                                        gint y, 
-                                        GtkSelectionData *data, 
-                                        guint info, 
-                                        guint time, 
-                                        LauncherDialog *ld);
-        
-static void launcher_dialog_data_received (GtkWidget *w, 
-                                           GdkDragContext *context, 
-                                           gint x, 
-                                           gint y, 
-                                           GtkSelectionData *data, 
-                                           guint info, 
-                                           guint time, 
-                                           LauncherDialog *ld);
-
-static void icon_entry_data_received (GtkWidget *w, 
-                                      GdkDragContext *context, 
-                                      gint x, 
-                                      gint y, 
-                                      GtkSelectionData *data, 
-                                      guint info, 
-                                      guint time, 
-                                      LauncherDialog *ld);
-        
-/* File dialog with preview */
-static char *select_file_with_preview (const char *title, 
-                                       const char *path,
-                                       GtkWidget * parent,
-                                       gboolean with_preview);
-
-
-/* LauncherEntry Properties *
- * ------------------------ */
-
-/* update entry from dialog */
-static void
-update_entry_info (LauncherDialog *ld)
+struct _LauncherDialog
 {
-    const char *text;
-    
-    text = gtk_entry_get_text (GTK_ENTRY (ld->exec_name));
+    LauncherPlugin *launcher;
 
-    if (!text || !strlen (text))
+    /* entries list */
+    GtkWidget      *treeview;
+    GtkListStore   *store;
+
+    /* tree buttons */
+    GtkWidget      *up;
+    GtkWidget      *down;
+    GtkWidget      *add;
+    GtkWidget      *remove;
+
+    /* lock */
+    guint           updating : 1;
+
+    /* active entry */
+    LauncherEntry  *entry;
+
+    /* entry widgets */
+    GtkWidget      *entry_name;
+    GtkWidget      *entry_comment;
+    GtkWidget      *entry_icon;
+    GtkWidget      *entry_exec;
+    GtkWidget      *entry_path;
+    GtkWidget      *entry_terminal;
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+    GtkWidget      *entry_startup;
+#endif
+};
+
+
+
+/**
+ * Prototypes
+ **/
+static gchar      *launcher_dialog_parse_exec                (const gchar           *exec) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+static gboolean    launcher_dialog_read_desktop_file         (const gchar           *file,
+                                                              LauncherEntry         *entry);
+static void        launcher_dialog_tree_drag_data_received   (GtkWidget             *widget,
+                                                              GdkDragContext        *context,
+                                                              gint                   x,
+                                                              gint                   y,
+                                                              GtkSelectionData      *selection_data,
+                                                              guint                  info,
+                                                              guint                  time,
+                                                              LauncherDialog        *ld);
+static void        launcher_dialog_frame_drag_data_received  (GtkWidget             *widget,
+                                                              GdkDragContext        *context,
+                                                              gint                   x,
+                                                              gint                   y,
+                                                              GtkSelectionData      *selection_data,
+                                                              guint                  info,
+                                                              guint                  time,
+                                                              LauncherDialog        *ld);
+static void        launcher_dialog_update_panel              (LauncherDialog        *ld);
+static void        launcher_dialog_save_entry                (GtkWidget             *entry,
+                                                               LauncherDialog        *ld);
+static void        launcher_dialog_save_button               (GtkWidget             *button,
+                                                              LauncherDialog        *ld);
+static void        launcher_dialog_update_entries            (LauncherDialog        *ld);
+static void        launcher_dialog_update_icon               (LauncherDialog        *ld);
+static void        launcher_dialog_folder_chooser            (LauncherDialog        *ld);
+static void        launcher_dialog_command_chooser           (LauncherDialog        *ld);
+static void        launcher_dialog_icon_chooser              (LauncherDialog        *ld);
+static void        launcher_dialog_tree_free_store           (LauncherDialog        *ld);
+static void        launcher_dialog_tree_update_row           (LauncherDialog        *ld,
+                                                              gint                   column);
+static void        launcher_dialog_tree_selection_changed    (LauncherDialog        *ld,
+                                                              GtkTreeSelection      *selection);
+static void        launcher_dialog_tree_button_clicked       (GtkWidget             *button,
+                                                              LauncherDialog        *ld);
+static GtkWidget  *launcher_dialog_add_properties            (LauncherDialog        *ld) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+static GtkWidget  *launcher_dialog_add_tree                  (LauncherDialog        *ld) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+static GtkWidget  *launcher_dialog_add_tree_buttons          (LauncherDialog        *ld) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+static void        launcher_dialog_response                  (GtkWidget             *dialog,
+                                                              gint                   response,
+                                                              LauncherDialog        *ld);
+
+
+
+/**
+ * .Desktop entry
+ **/
+static gchar *
+launcher_dialog_parse_exec (const gchar *exec)
+{
+    gchar *expanded, *command = NULL;
+
+    /* quit if nothing is set */
+    if (exec == NULL)
+        return NULL;
+
+    /* expand enviorement variables like ~/ and ~user/ */
+    expanded = xfce_expand_variables (exec, NULL);
+
+    /* use %f if an application hasn't set anything else */
+    if (expanded != NULL &&
+        strstr (exec, "%f") == NULL && strstr (exec, "%F") == NULL &&
+        strstr (exec, "%u") == NULL && strstr (exec, "%U") == NULL)
     {
-        if (ld->entry->name)
-        {
-            g_free (ld->entry->name);
-            ld->entry->name = NULL;
-        }
+        command = g_strconcat (expanded, " %f", NULL);
+        g_free (expanded);
     }
-    else if (!ld->entry->name || strcmp (text, ld->entry->name) != 0)
+    else
+    {
+        command = expanded;
+    }
+
+    return command;
+}
+
+
+
+static gboolean
+launcher_dialog_read_desktop_file (const gchar   *path,
+                                   LauncherEntry *entry)
+{
+    XfceRc      *rc = NULL;
+    const gchar *value = NULL;
+    const gchar *p;
+
+    /* we only support .desktop files */
+    if (G_UNLIKELY (g_str_has_suffix (path, ".desktop") == FALSE ||
+                    g_path_is_absolute (path) == FALSE))
+        return FALSE;
+
+    /* open de .desktop file */
+    rc = xfce_rc_simple_open (path, TRUE);
+    if (G_UNLIKELY (rc == NULL))
+        return FALSE;
+
+    /* set the desktop entry group */
+    xfce_rc_set_group (rc, "Desktop Entry");
+
+    /* name */
+    value = xfce_rc_read_entry (rc, "Name", NULL);
+    if (G_LIKELY (value != NULL))
+    {
+        g_free (entry->name);
+        entry->name = g_strdup (value);
+    }
+
+    /* comment */
+    value = xfce_rc_read_entry (rc, "Comment", NULL);
+    if (G_LIKELY (value != NULL))
+    {
+        g_free (entry->comment);
+        entry->comment = g_strdup (value);
+    }
+
+    /* icon */
+    value = xfce_rc_read_entry_untranslated (rc, "Icon", NULL);
+    if (G_LIKELY (value != NULL))
+    {
+        g_free (entry->icon);
+
+        /* get rid of extensions in non-absolute names */
+        if (G_UNLIKELY (g_path_is_absolute (value) == FALSE) &&
+            ((p = g_strrstr (value, ".")) && strlen (p) < 6))
+            entry->icon = g_strndup (value, p-value);
+        else
+            entry->icon = g_strdup (value);
+    }
+
+    /* exec */
+    value = xfce_rc_read_entry_untranslated (rc, "Exec", NULL);
+    if (G_LIKELY (value != NULL))
+    {
+        g_free (entry->exec);
+
+        /* expand variables and store */
+        entry->exec = launcher_dialog_parse_exec (value);
+    }
+
+    /* working directory */
+    value = xfce_rc_read_entry_untranslated (rc, "Path", NULL);
+    if (G_UNLIKELY (value != NULL))
+    {
+        g_free (entry->path);
+
+        /* expand variables and store */
+        entry->path = value ? xfce_expand_variables (value, NULL) : NULL;
+    }
+
+    /* terminal */
+    entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
+
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+    /* startup notification */
+    entry->startup = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
+#endif
+
+    /* release rc file */
+    xfce_rc_close (rc);
+
+    return TRUE;
+}
+
+
+
+static void
+launcher_dialog_tree_drag_data_received (GtkWidget        *widget,
+                                         GdkDragContext   *context,
+                                         gint              x,
+                                         gint              y,
+                                         GtkSelectionData *selection_data,
+                                         guint             info,
+                                         guint             time,
+                                         LauncherDialog   *ld)
+{
+    GtkTreePath             *path = NULL;
+    GtkTreeViewDropPosition  position;
+    GtkTreeModel            *model;
+    GtkTreeIter              iter_a;
+    GtkTreeIter              iter_b;
+    GSList                  *file_list = NULL;
+    GSList                  *li;
+    gchar                   *file;
+    gboolean                 insert_before = FALSE;
+    gint                     i = 0;
+    LauncherEntry           *entry;
+    GdkPixbuf               *icon = NULL;
+
+    /* get drop position in the tree */
+    if (gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (ld->treeview),
+                                           x, y, &path, &position) == FALSE)
+    {
+        /* probably droped in empty tree space, drop after last item */
+        path = gtk_tree_path_new_from_indices (g_list_length (ld->launcher->entries) -1 , -1);
+        position = GTK_TREE_VIEW_DROP_AFTER;
+    }
+
+    if (G_LIKELY (path != NULL))
+    {
+        /* get the iter we're going to drop after */
+        model = gtk_tree_view_get_model (GTK_TREE_VIEW (ld->treeview));
+        gtk_tree_model_get_iter (model,  &iter_a, path);
+
+        /* array position or current item */
+        i = gtk_tree_path_get_indices (path)[0];
+
+        /* insert position, array correction and the path we select afterwards */
+        switch (position)
+        {
+            case GTK_TREE_VIEW_DROP_BEFORE:
+            case GTK_TREE_VIEW_DROP_INTO_OR_BEFORE:
+                insert_before = TRUE;
+                break;
+
+            case GTK_TREE_VIEW_DROP_AFTER:
+            case GTK_TREE_VIEW_DROP_INTO_OR_AFTER:
+                gtk_tree_path_next (path);
+                ++i;
+                insert_before = FALSE;
+                break;
+         }
+
+        /* we need to update the button icon if something was dropped on the first position */
+        if (i == 0)
+            ld->launcher->icon_update_required = TRUE;
+
+        /* create list from selection data */
+        file_list = launcher_file_list_from_selection (selection_data);
+    }
+
+    if (G_LIKELY (file_list != NULL))
+    {
+        for (li = file_list; li != NULL; li = li->next)
+        {
+            file = (gchar *) li->data;
+
+            /* create new entry */
+            entry = launcher_new_entry ();
+
+            /* try to parse desktop file */
+            if (G_LIKELY (launcher_dialog_read_desktop_file (file, entry) == TRUE))
+            {
+                /* try to load the pixbuf */
+                icon = launcher_load_pixbuf (ld->treeview, entry->icon, TREE_ICON_SIZE, TRUE);
+
+                /* insert new row in store */
+                if (insert_before)
+                    gtk_list_store_insert_before (ld->store, &iter_b, &iter_a);
+                else
+                    gtk_list_store_insert_after (ld->store, &iter_b, &iter_a);
+
+                /* set tree data */
+                gtk_list_store_set (ld->store, &iter_b,
+                                    COL_ICON, icon,
+                                    COL_TEXT, entry->name,
+                                    -1);
+
+                /* release pixbuf */
+                if (G_LIKELY (icon != NULL))
+                    g_object_unref (G_OBJECT (icon));
+
+                /* insert in list */
+                ld->launcher->entries = g_list_insert (ld->launcher->entries,
+                                                        entry, i);
+
+                /* copy iter, so we add after last item */
+                iter_a = iter_b;
+
+                /* raise position counter */
+                ++i;
+
+                /* 1st item is inserted before existing item, after
+                 * that we insert after the 1st item */
+                insert_before = FALSE;
+            }
+            else
+            {
+                /* desktop file pasring failed, free new entry */
+                launcher_free_entry (entry, NULL);
+            }
+        }
+
+        /* select the new item (also updates treeview buttons) */
+        gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->treeview), path, NULL, FALSE);
+
+        /* update the panel */
+        launcher_dialog_update_panel (ld);
+
+        /* cleanup */
+        g_slist_free_all (file_list);
+    }
+
+    /* free path */
+    if (G_LIKELY (path != NULL))
+        gtk_tree_path_free (path);
+
+    /* finish drag */
+    gtk_drag_finish (context, TRUE, FALSE, time);
+}
+
+
+
+static void
+launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
+                                          GdkDragContext   *context,
+                                          gint              x,
+                                          gint              y,
+                                          GtkSelectionData *selection_data,
+                                          guint             info,
+                                          guint             time,
+                                          LauncherDialog   *ld)
+{
+    GSList *file_list = NULL;
+    GSList *li;
+    gchar  *file;
+
+    /* create list from all the uri list */
+    file_list = launcher_file_list_from_selection (selection_data);
+
+    if (G_LIKELY (file_list != NULL))
+    {
+        for (li = file_list; li != NULL; li = li->next)
+        {
+            file = (gchar *) li->data;
+
+            /* try to update the current entry settings */
+            if (G_LIKELY (launcher_dialog_read_desktop_file (file, ld->entry) == TRUE))
+            {
+                /* update the widgets */
+                launcher_dialog_update_entries (ld);
+
+                /* update the tree */
+                launcher_dialog_tree_update_row (ld, COL_TEXT);
+                launcher_dialog_tree_update_row (ld, COL_ICON);
+
+                /* update the panel */
+                launcher_dialog_update_panel (ld);
+
+                /* stop trying */
+                break;
+            }
+        }
+
+        /* cleanup */
+        g_slist_free_all (file_list);
+    }
+
+    /* finish drag */
+    gtk_drag_finish (context, TRUE, FALSE, time);
+}
+
+
+
+/**
+ * Properties update and save functions
+ **/
+static void
+launcher_dialog_update_panel (LauncherDialog *ld)
+{
+    g_idle_add ((GSourceFunc) launcher_button_update, ld->launcher);
+    g_idle_add ((GSourceFunc) launcher_menu_prepare, ld->launcher);
+}
+
+
+
+static void
+launcher_dialog_save_entry (GtkWidget      *entry,
+                            LauncherDialog *ld)
+{
+    const gchar *text;
+
+    /* quit if locked or no active entry set */
+    if (G_UNLIKELY (ld->updating == TRUE || ld->entry == NULL))
+        return;
+
+    /* get entry text */
+    text = gtk_entry_get_text (GTK_ENTRY (entry));
+
+    /* set text to null, if there is no valid text */
+    if (G_UNLIKELY (text == NULL || *text == '\0'))
+        text = NULL;
+
+    /* save new value */
+    if (entry == ld->entry_name)
     {
         g_free (ld->entry->name);
         ld->entry->name = g_strdup (text);
-    }
 
-    text = gtk_entry_get_text (GTK_ENTRY (ld->exec_comment));
-
-    if (!text || !strlen (text))
-    {
-        if (ld->entry->comment)
-        {
-            g_free (ld->entry->comment);
-            ld->entry->comment = NULL;
-        }
+        /* update tree, when triggered by widget */
+        launcher_dialog_tree_update_row (ld, COL_TEXT);
     }
-    else if (!ld->entry->comment || strcmp (text, ld->entry->comment) != 0)
+    else if (entry == ld->entry_comment)
     {
         g_free (ld->entry->comment);
         ld->entry->comment = g_strdup (text);
     }
-
-    gtk_widget_queue_draw (ld->tree);
-}
-
-static void
-update_entry_icon (LauncherDialog *ld)
-{
-    const char *text;
-    GdkPixbuf *pb;
-
-    text = gtk_entry_get_text (GTK_ENTRY (ld->icon_file));
-        
-    if (!text || !strlen (text))
-    {
-        if (ld->entry->icon.type == LAUNCHER_ICON_TYPE_NAME)
-        {
-            g_free (ld->entry->icon.icon.name);
-            ld->entry->icon.icon.name = NULL;
-        }
-
-        ld->entry->icon.type = LAUNCHER_ICON_TYPE_NONE;
-
-        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
-                                        DLG_ICON_SIZE);
-        gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (G_OBJECT (pb));
-    }
-    else if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_NAME || 
-             strcmp (text, ld->entry->icon.icon.name) != 0)
-    {
-        if (ld->entry->icon.type == LAUNCHER_ICON_TYPE_NAME)
-            g_free (ld->entry->icon.icon.name);
-
-        ld->entry->icon.type = LAUNCHER_ICON_TYPE_NAME;
-        ld->entry->icon.icon.name = g_strdup (text);
-        
-        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
-                                        DLG_ICON_SIZE);
-        gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (G_OBJECT (pb));
-    }
-
-    gtk_widget_queue_draw (ld->tree);
-}
-
-static void
-update_entry_exec (LauncherDialog *ld)
-{
-    const char *text;
-    
-    text = gtk_entry_get_text (GTK_ENTRY (ld->exec));
-
-    if (!text || !strlen (text))
-    {
-        if (ld->entry->exec)
-        {
-            g_free (ld->entry->exec);
-            ld->entry->exec = NULL;
-            g_free (ld->entry->real_exec);
-            ld->entry->real_exec = NULL;
-        }
-    }
-    else if (!ld->entry->exec || strcmp (text, ld->entry->exec) != 0)
+    else if (entry == ld->entry_exec)
     {
         g_free (ld->entry->exec);
-        ld->entry->exec = g_strdup (text);
-        g_free (ld->entry->real_exec);
-        if (!(ld->entry->real_exec = 
-                    xfce_expand_variables (ld->entry->exec, NULL)))
-        {
-                ld->entry->real_exec = g_strdup (ld->entry->exec);
-        }
+        ld->entry->exec = launcher_dialog_parse_exec (text);
     }
+    else if (entry == ld->entry_path)
+    {
+        g_free (ld->entry->path);
+        ld->entry->path = text ? xfce_expand_variables (text, NULL) : NULL;
+    }
+
+    /* update panel */
+    launcher_dialog_update_panel (ld);
 }
 
-/* text entries */
-static gboolean
-entry_lost_focus (GtkWidget *gentry, GdkEventFocus *ev, LauncherDialog *ld)
-{
-    if (ld->updating)
-        return FALSE;
-    
-    if (gentry == ld->exec_name || gentry == ld->exec_comment)
-    {
-        update_entry_info (ld);
-    }
-    else if (gentry == ld->icon_file)
-    {
-        update_entry_icon (ld);
-    }
-    else if (gentry == ld->exec)
-    {
-        update_entry_exec (ld);
-    }
 
-    return FALSE;
-}
 
-/* toggle buttons */
 static void
-check_button_toggled (GtkWidget *tb, LauncherDialog *ld)
+launcher_dialog_save_button (GtkWidget      *button,
+                             LauncherDialog *ld)
 {
-    if (ld->updating)
+    gboolean active;
+
+    /* quit if locked or no active entry set */
+    if (G_UNLIKELY (ld->updating == TRUE || ld->entry == NULL))
         return;
-    
-    if (tb == ld->exec_terminal)
-        ld->entry->terminal = 
-            gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (tb));
-    else if (tb == ld->exec_startup)
-        ld->entry->startup = 
-            gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (tb));
-}
 
-/* icon callbacks */
-static void
-set_panel_icon (LauncherDialog *ld)
-{
-    launcher_update_panel_entry(ld->launcher);
-}
+    /* get toggle button state */
+    active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-static void
-icon_menu_deactivated (GtkWidget *menu, LauncherDialog *ld)
-{
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ld->icon_button), FALSE);
-}
-
-static void
-position_icon_menu (GtkMenu * menu, int *x, int *y, gboolean * push_in, 
-                    GtkWidget *b)
-{
-    GtkRequisition req;
-    GdkScreen *screen;
-    GdkRectangle geom;
-    int num;
-
-    if (!GTK_WIDGET_REALIZED (GTK_WIDGET (menu)))
-        gtk_widget_realize (GTK_WIDGET (menu));
-
-    gtk_widget_size_request (GTK_WIDGET (menu), &req);
-
-    gdk_window_get_origin (b->window, x, y);
-
-    *x += b->allocation.x;
-    *y += b->allocation.y - req.height;
-
-    screen = gtk_widget_get_screen (b);
-
-    num = gdk_screen_get_monitor_at_window (screen, b->window);
-
-    gdk_screen_get_monitor_geometry (screen, num, &geom);
-
-    if (*x > geom.x + geom.width - req.width)
-        *x = geom.x + geom.width - req.width;
-    if (*x < geom.x)
-        *x = geom.x;
-
-    if (*y > geom.y + geom.height - req.height)
-        *y = geom.y + geom.height - req.height;
-    if (*y < geom.y)
-        *y = geom.y;
-}
-
-static void
-popup_icon_menu (GtkWidget *tb, LauncherDialog *ld)
-{
-    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (tb)))
+    /* update entry or global setting */
+    if (button == ld->entry_terminal)
     {
-        gtk_menu_popup (GTK_MENU (ld->icon_category), NULL, NULL, 
-                        (GtkMenuPositionFunc) position_icon_menu, tb,
-                        0, gtk_get_current_event_time ());
+        ld->entry->terminal = active;
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+        gtk_widget_set_sensitive (ld->entry_startup, !active);
+#endif
     }
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+    else if (button == ld->entry_startup)
+        ld->entry->startup = active;
+#endif
 }
+
+
 
 static void
-icon_menu_activated (GtkWidget *mi, LauncherDialog *ld)
+launcher_dialog_update_entries (LauncherDialog *ld)
 {
-    int n = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (mi), "category"));
-
-    n = CLAMP (n, 0, NUM_CATEGORIES);
-
-    if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_CATEGORY 
-        || ld->entry->icon.icon.category != n)
-    {
-        GdkPixbuf *pb;
-        
-        gtk_label_set_text (GTK_LABEL (ld->icon_label), _(category_icons[n]));
-        gtk_widget_hide (ld->icon_file_align);
-        gtk_widget_show (ld->icon_label);
-        
-        if (ld->entry->icon.type == LAUNCHER_ICON_TYPE_NAME)
-            g_free (ld->entry->icon.icon.name);
-        ld->entry->icon.icon.name = NULL;
-
-        ld->entry->icon.type = LAUNCHER_ICON_TYPE_CATEGORY;
-        ld->entry->icon.icon.category = (XfceIconThemeCategory) n;
-
-        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
-                                        DLG_ICON_SIZE);
-        gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (G_OBJECT (pb));
-
-        if (ld->entry == g_ptr_array_index (ld->launcher->entries, 0))
-            set_panel_icon (ld);
-    }
-
-    gtk_widget_queue_draw (ld->tree);
-}
-
-static void
-icon_browse (GtkWidget *b, LauncherDialog *ld)
-{
-    char *file, *path;
-    
-    path = 
-        (ld->entry->icon.type == LAUNCHER_ICON_TYPE_NAME 
-         && g_path_is_absolute (ld->entry->icon.icon.name)) ?
-                ld->entry->icon.icon.name : NULL;
-    
-    file = select_file_with_preview (_("Select image file"), path, ld->dlg, 
-                                     TRUE);
-
-    if (file && g_file_test (file, G_FILE_TEST_IS_REGULAR))
-    {
-        GdkPixbuf *pb;
-        
-        gtk_entry_set_text (GTK_ENTRY (ld->icon_file), file);
-        gtk_editable_set_position (GTK_EDITABLE (ld->icon_file), -1);
-        update_entry_icon (ld);
-
-        pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
-                                        DLG_ICON_SIZE);
-        gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-        g_object_unref (G_OBJECT (pb));
-
-        if (ld->entry == g_ptr_array_index (ld->launcher->entries, 0))
-            set_panel_icon (ld);
-    }
-
-    g_free (file);
-
-    gtk_widget_queue_draw (ld->tree);
-}
-
-static void
-icon_menu_browse (GtkWidget *mi, LauncherDialog *ld)
-{
-    gtk_widget_hide (ld->icon_label);
-    gtk_widget_show (ld->icon_file_align);
-
-    update_entry_icon (ld);
-
-    if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_NAME || 
-        !ld->entry->icon.icon.name)
-    {
-        icon_browse (NULL, ld);
-    }
-}
-
-/* exec callback */
-static void
-exec_browse (GtkWidget *b, LauncherDialog *ld)
-{
-    char *file;
-    
-    file = select_file_with_preview (_("Select command"), ld->entry->exec, 
-                                     ld->dlg, FALSE);
-
-    if (file)
-    {
-        gtk_entry_set_text (GTK_ENTRY (ld->exec), file);
-        gtk_editable_set_position (GTK_EDITABLE (ld->exec), -1);
-        update_entry_exec (ld);
-    }
-
-    g_free (file);
-}
-
-/* info widgets */
-static void
-add_entry_info_options(LauncherDialog *ld, GtkBox *box, GtkSizeGroup *sg)
-{
-    GtkWidget *hbox, *label;
-    
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-
-    label = gtk_label_new (_("Name"));
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-    gtk_size_group_add_widget (sg, label);
-
-    ld->exec_name = gtk_entry_new ();
-    gtk_widget_show (ld->exec_name);
-    gtk_box_pack_start (GTK_BOX (hbox), ld->exec_name, TRUE, TRUE, 0);
-
-    g_signal_connect (ld->exec_name, "focus-out-event",
-                      G_CALLBACK (entry_lost_focus), ld);
-    
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-
-    label = gtk_label_new (_("Description"));
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-    gtk_size_group_add_widget (sg, label);
-
-    ld->exec_comment = gtk_entry_new ();
-    gtk_widget_show (ld->exec_comment);
-    gtk_box_pack_start (GTK_BOX (hbox), ld->exec_comment, TRUE, TRUE, 0);
-    gtk_widget_set_size_request (ld->exec_comment, 300, -1);
-    
-    g_signal_connect (ld->exec_comment, "focus-out-event",
-                      G_CALLBACK (entry_lost_focus), ld);
-}
-
-/* icon widgets */
-static GtkWidget *
-create_icon_category_menu (LauncherDialog *ld)
-{
-    GtkWidget *menu, *mi, *img;
-    GdkPixbuf *pb;
-    int i;
-    LauncherIcon icon;
-
-    menu = gtk_menu_new ();
-    
-    g_signal_connect (menu, "deactivate", 
-                      G_CALLBACK (icon_menu_deactivated), ld);
-    
-    icon.type = LAUNCHER_ICON_TYPE_CATEGORY;
-    
-    for (i = 1; i < NUM_CATEGORIES; ++i)
-    {
-        mi = gtk_image_menu_item_new_with_label (_(category_icons[i]));
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-
-        g_object_set_data (G_OBJECT (mi), "category", GINT_TO_POINTER (i));
-
-        g_signal_connect (mi, "activate", 
-                          G_CALLBACK (icon_menu_activated), ld);
-
-        icon.icon.category = i;
-        pb = launcher_icon_load_pixbuf (mi, &icon, MENU_ICON_SIZE);
-        img = gtk_image_new_from_pixbuf (pb);
-        gtk_widget_show (img);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-        g_object_unref (G_OBJECT (pb));
-    }
-
-    mi = gtk_separator_menu_item_new ();
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    mi = gtk_menu_item_new_with_label (_("Other..."));
-    gtk_widget_show (mi);
-    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
-    g_signal_connect (mi, "activate", 
-                      G_CALLBACK (icon_menu_browse), ld);
-    
-    gtk_menu_set_screen (GTK_MENU (menu), 
-                         gtk_widget_get_screen (ld->launcher->iconbutton));
-
-    return menu;
-}
-
-static void
-add_entry_icon_options (LauncherDialog *ld, GtkBox *box, GtkSizeGroup *sg)
-{
-    GtkWidget *hbox, *hbox2, *arrow, *align, *img;
-
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-
-    ld->icon_button = gtk_toggle_button_new ();
-    gtk_widget_show (ld->icon_button);
-    gtk_box_pack_start (GTK_BOX (hbox), ld->icon_button, FALSE, FALSE, 0);
-
-    gtk_size_group_add_widget (sg, ld->icon_button);
-
-    ld->icon_category = create_icon_category_menu (ld);
-
-    g_signal_connect (ld->icon_button, "toggled", 
-                      G_CALLBACK (popup_icon_menu), ld);
-    
-    hbox2 = gtk_hbox_new (FALSE, 2);
-    gtk_widget_show (hbox2);
-    gtk_container_add (GTK_CONTAINER (ld->icon_button), hbox2);
-
-    ld->icon_img = gtk_image_new ();
-    gtk_widget_show (ld->icon_img);
-    gtk_box_pack_start (GTK_BOX (hbox2), ld->icon_img, TRUE, TRUE, 0);
-
-    arrow = gtk_arrow_new (GTK_ARROW_UP, GTK_SHADOW_IN);
-    gtk_widget_show (arrow);
-    gtk_box_pack_start (GTK_BOX (hbox2), arrow, TRUE, TRUE, 0);
-    
-    align = ld->icon_file_align = gtk_alignment_new (0, 0.5, 1, 0);
-    gtk_box_pack_start (GTK_BOX (hbox), align, TRUE, TRUE, 0);
-    
-    hbox2 = gtk_hbox_new (FALSE, 2);
-    gtk_widget_show (hbox2);
-    gtk_container_add (GTK_CONTAINER (align), hbox2);
-
-    ld->icon_file = gtk_entry_new ();
-    gtk_widget_show (ld->icon_file);
-    gtk_box_pack_start (GTK_BOX (hbox2), ld->icon_file, TRUE, TRUE, 0);
-    
-    g_signal_connect (ld->icon_file, "focus-out-event",
-                      G_CALLBACK (entry_lost_focus), ld);
-    
-    ld->icon_browse = gtk_button_new ();
-    gtk_widget_show (ld->icon_browse);
-    gtk_box_pack_start (GTK_BOX (hbox2), ld->icon_browse, FALSE, FALSE, 0);
-
-    g_signal_connect (ld->icon_browse, "clicked", G_CALLBACK (icon_browse), 
-                      ld);
-
-    img = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (ld->icon_browse), img);
-    
-    ld->icon_label = gtk_label_new (NULL);
-    gtk_misc_set_alignment (GTK_MISC (ld->icon_label), 0, 0.5);
-
-    gtk_box_pack_start (GTK_BOX (hbox), ld->icon_label, TRUE, TRUE, 0);
-
-    launcher_set_drag_dest (ld->icon_button);
-    g_signal_connect (ld->icon_button, "drag-data-received",
-                      G_CALLBACK (icon_entry_data_received), ld);
-
-    launcher_set_drag_dest (ld->icon_file);
-    g_signal_connect (ld->icon_file, "drag-data-received",
-                      G_CALLBACK (icon_entry_data_received), ld);
-
-    launcher_set_drag_dest (ld->icon_browse);
-    g_signal_connect (ld->icon_browse, "drag-data-received",
-                      G_CALLBACK (icon_entry_data_received), ld);
-}
-
-/* exec widgets */
-static void
-add_entry_exec_options (LauncherDialog *ld, GtkBox *box, GtkSizeGroup *sg)
-{
-    GtkWidget *hbox, *label, *button, *img;
-
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-
-    label = gtk_label_new (_("Command"));
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-
-    gtk_size_group_add_widget (sg, label);
-
-    ld->exec = gtk_entry_new ();
-    gtk_widget_show (ld->exec);
-    gtk_box_pack_start (GTK_BOX (hbox), ld->exec, TRUE, TRUE, 0);
-    
-    g_signal_connect (ld->exec, "focus-out-event",
-                      G_CALLBACK (entry_lost_focus), ld);
-
-    ld->exec_browse = button = gtk_button_new ();
-    gtk_widget_show (button);
-    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-    g_signal_connect (ld->exec_browse, "clicked", G_CALLBACK (exec_browse), 
-                      ld);
-
-    img = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (button), img);
-
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-
-    label = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-    gtk_size_group_add_widget (sg, label);
-
-    ld->exec_terminal = 
-        gtk_check_button_new_with_mnemonic (_("Run in _terminal"));
-    gtk_widget_show (ld->exec_terminal);
-    gtk_box_pack_start (GTK_BOX (hbox), ld->exec_terminal, TRUE, TRUE, 0);
-
-    g_signal_connect (ld->exec_terminal, "toggled",
-                      G_CALLBACK (check_button_toggled), ld);
-
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-
-    label = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-
-    gtk_size_group_add_widget (sg, label);
-
-    ld->exec_startup = 
-        gtk_check_button_new_with_mnemonic (_("Use _startup notification"));
-    gtk_widget_show (ld->exec_startup);
-    gtk_box_pack_start (GTK_BOX (hbox), ld->exec_startup, TRUE, TRUE, 0);
-
-    g_signal_connect (ld->exec_startup, "toggled",
-                      G_CALLBACK (check_button_toggled), ld);
-}
-
-/* entry properties */
-static void
-launcher_dialog_update_entry_properties (LauncherDialog *ld)
-{
-    char *value;
-    GdkPixbuf *pb;
-    
+    /* quit if locked or no active entry set */
+    if (G_UNLIKELY (ld->updating == TRUE || ld->entry == NULL))
+        return;
+
+    /* lock the save functions */
     ld->updating = TRUE;
 
-    value = ld->entry->name ? ld->entry->name : "";
-    gtk_entry_set_text (GTK_ENTRY (ld->exec_name), value);
-    
-    value = ld->entry->comment ? ld->entry->comment : "";
-    gtk_entry_set_text (GTK_ENTRY (ld->exec_comment), value);
-    
-    value = ld->entry->exec ? ld->entry->exec : "";
-    gtk_entry_set_text (GTK_ENTRY (ld->exec), value);
-    
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ld->exec_terminal), 
+    /* set new entry values */
+    gtk_entry_set_text (GTK_ENTRY (ld->entry_name),
+                        (ld->entry->name != NULL) ? ld->entry->name : "");
+
+    gtk_entry_set_text (GTK_ENTRY (ld->entry_comment),
+                        (ld->entry->comment != NULL) ? ld->entry->comment : "");
+
+    gtk_entry_set_text (GTK_ENTRY (ld->entry_exec),
+                        (ld->entry->exec != NULL) ? ld->entry->exec : "");
+
+    gtk_entry_set_text (GTK_ENTRY (ld->entry_path),
+                        (ld->entry->path != NULL) ? ld->entry->path : "");
+
+    /* set toggle buttons */
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ld->entry_terminal),
                                   ld->entry->terminal);
-    
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ld->exec_startup), 
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ld->entry_startup),
                                   ld->entry->startup);
 
-    pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
-                                    DLG_ICON_SIZE);
-    gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-    g_object_unref (G_OBJECT (pb));
+    gtk_widget_set_sensitive (ld->entry_startup, !ld->entry->terminal);
+#endif
 
-    if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_CATEGORY)
-        gtk_widget_show (ld->icon_file_align);
-    else
-        gtk_widget_hide (ld->icon_file_align);
-    
-    if (ld->entry->icon.type == LAUNCHER_ICON_TYPE_NAME && 
-        ld->entry->icon.icon.name)
-    {
-        gtk_entry_set_text (GTK_ENTRY (ld->icon_file), 
-                            ld->entry->icon.icon.name);
-    }
-    else
-    {
-        gtk_entry_set_text (GTK_ENTRY (ld->icon_file), "");
-    }
+    /* update icon button */
+    launcher_dialog_update_icon (ld);
 
-    if (ld->entry->icon.type == LAUNCHER_ICON_TYPE_CATEGORY)
-    {
-        gtk_label_set_text (GTK_LABEL (ld->icon_label), 
-                _(category_icons [ld->entry->icon.icon.category]));
-        gtk_widget_show (ld->icon_label);
-    }
-    else
-    {
-        gtk_widget_hide (ld->icon_label);
-    }
-    
+    /* unlock */
     ld->updating = FALSE;
 }
 
+
+
 static void
-launcher_dialog_add_entry_properties (LauncherDialog *ld, GtkBox *box)
+launcher_dialog_update_icon (LauncherDialog *ld)
 {
-    GtkWidget *frame, *vbox, *align;
+    GdkPixbuf *icon = NULL;
+    GtkWidget *child;
+
+    /* drop the previous button child */
+    if (GTK_BIN (ld->entry_icon)->child != NULL)
+        gtk_widget_destroy (GTK_BIN (ld->entry_icon)->child);
+
+    if (G_LIKELY (ld->entry->icon))
+        icon = launcher_load_pixbuf (ld->entry_icon, ld->entry->icon, CHOOSER_ICON_SIZE, FALSE);
+
+    /* create icon button */
+    if (G_LIKELY (icon != NULL))
+    {
+        child = gtk_image_new_from_pixbuf (icon);
+
+        /* release icon */
+        g_object_unref (G_OBJECT (icon));
+    }
+    else
+    {
+        child = gtk_label_new (_("No icon"));
+
+        gtk_widget_set_size_request (child, -1, CHOOSER_ICON_SIZE);
+    }
+
+    gtk_container_add (GTK_CONTAINER (ld->entry_icon), child);
+    gtk_widget_show (child);
+}
+
+
+
+/**
+ * Icon and command search dialogs
+ **/
+static void
+launcher_dialog_folder_chooser (LauncherDialog *ld)
+{
+    GtkWidget *chooser;
+    gchar     *path;
+
+    chooser = gtk_file_chooser_dialog_new (_("Select a Directory"),
+                                           NULL,
+                                           GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+                                           GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                           GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                           NULL);
+
+    /* only here */
+    gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
+
+    /* use the bindir as default folder */
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser), BINDIR);
+
+    /* select folder from field */
+    if (G_LIKELY (ld->entry->path != NULL))
+    {
+        if (G_LIKELY (g_path_is_absolute (ld->entry->path)))
+            gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (chooser), ld->entry->path);
+    }
+
+    /* run the chooser dialog */
+    if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
+    {
+        path = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+
+        /* set the new entry text */
+        gtk_entry_set_text (GTK_ENTRY (ld->entry_path), path);
+
+        /* cleanup */
+        g_free (path);
+    }
+
+    /* destroy dialog */
+    gtk_widget_destroy (chooser);
+}
+
+static void
+launcher_dialog_command_chooser (LauncherDialog *ld)
+{
+    GtkFileFilter *filter;
+    GtkWidget     *chooser;
+    gchar         *filename;
+    gchar         *s;
+
+    chooser = gtk_file_chooser_dialog_new (_("Select an Application"),
+                                           NULL,
+                                           GTK_FILE_CHOOSER_ACTION_OPEN,
+                                           GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                           GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                           NULL);
+    gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
+
+    /* add file chooser filters */
+    filter = gtk_file_filter_new ();
+    gtk_file_filter_set_name (filter, _("All Files"));
+    gtk_file_filter_add_pattern (filter, "*");
+    gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+    filter = gtk_file_filter_new ();
+    gtk_file_filter_set_name (filter, _("Executable Files"));
+    gtk_file_filter_add_mime_type (filter, "application/x-csh");
+    gtk_file_filter_add_mime_type (filter, "application/x-executable");
+    gtk_file_filter_add_mime_type (filter, "application/x-perl");
+    gtk_file_filter_add_mime_type (filter, "application/x-python");
+    gtk_file_filter_add_mime_type (filter, "application/x-ruby");
+    gtk_file_filter_add_mime_type (filter, "application/x-shellscript");
+    gtk_file_filter_add_pattern (filter, "*.pl");
+    gtk_file_filter_add_pattern (filter, "*.py");
+    gtk_file_filter_add_pattern (filter, "*.rb");
+    gtk_file_filter_add_pattern (filter, "*.sh");
+    gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+    gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+    filter = gtk_file_filter_new ();
+    gtk_file_filter_set_name (filter, _("Perl Scripts"));
+    gtk_file_filter_add_mime_type (filter, "application/x-perl");
+    gtk_file_filter_add_pattern (filter, "*.pl");
+    gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+    filter = gtk_file_filter_new ();
+    gtk_file_filter_set_name (filter, _("Python Scripts"));
+    gtk_file_filter_add_mime_type (filter, "application/x-python");
+    gtk_file_filter_add_pattern (filter, "*.py");
+    gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+    filter = gtk_file_filter_new ();
+    gtk_file_filter_set_name (filter, _("Ruby Scripts"));
+    gtk_file_filter_add_mime_type (filter, "application/x-ruby");
+    gtk_file_filter_add_pattern (filter, "*.rb");
+    gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+    filter = gtk_file_filter_new ();
+    gtk_file_filter_set_name (filter, _("Shell Scripts"));
+    gtk_file_filter_add_mime_type (filter, "application/x-csh");
+    gtk_file_filter_add_mime_type (filter, "application/x-shellscript");
+    gtk_file_filter_add_pattern (filter, "*.sh");
+    gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (chooser), filter);
+
+    /* use the bindir as default folder */
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser), BINDIR);
+
+    /* get the current command */
+    filename = gtk_editable_get_chars (GTK_EDITABLE (ld->entry_exec), 0, -1);
+    if (G_LIKELY (filename != NULL))
+    {
+        /* use only the first argument */
+        s = strchr (filename, ' ');
+        if (G_UNLIKELY (s != NULL))
+            *s = '\0';
+
+        /* check if we have a file name */
+        if (G_LIKELY (*filename != '\0'))
+        {
+            /* check if the filename is not an absolute path */
+            if (G_LIKELY (!g_path_is_absolute (filename)))
+            {
+                /* try to lookup the filename in $PATH */
+                s = g_find_program_in_path (filename);
+                if (G_LIKELY (s != NULL))
+                {
+                    /* use the absolute path instead */
+                    g_free (filename);
+                    filename = s;
+                }
+            }
+
+            /* check if we have an absolute path now */
+            if (G_LIKELY (g_path_is_absolute (filename)))
+                gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (chooser), filename);
+        }
+
+        /* release the filename */
+        g_free (filename);
+    }
+
+    /* run the chooser dialog */
+    if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
+    {
+        filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+        s = g_strconcat (filename, " %f", NULL);
+
+        /* set the new entry text */
+        gtk_entry_set_text (GTK_ENTRY (ld->entry_exec), s);
+
+        /* cleanup */
+        g_free (filename);
+        g_free (s);
+    }
+
+    /* destroy dialog */
+    gtk_widget_destroy (chooser);
+}
+
+
+
+static void
+launcher_dialog_icon_chooser (LauncherDialog *ld)
+{
+    const gchar *name;
+    GtkWidget   *chooser;
+    gchar       *title;
+
+    /* determine the name of the entry being edited */
+    name = gtk_entry_get_text (GTK_ENTRY (ld->entry_name));
+    if (G_UNLIKELY (name == NULL || *name == '\0'))
+        name = _("Unknown");
+
+    /* allocate the chooser dialog */
+    title = g_strdup_printf (_("Select an Icon for \"%s\""), name);
+    chooser = exo_icon_chooser_dialog_new (title, NULL,
+                                           GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                           GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+                                           NULL);
+    gtk_dialog_set_alternative_button_order (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT, GTK_RESPONSE_CANCEL, -1);
+    gtk_dialog_set_default_response (GTK_DIALOG (chooser), GTK_RESPONSE_ACCEPT);
+    g_free (title);
+
+    /* set the current icon, if there is any */
+    if (G_LIKELY (ld->entry->icon))
+        exo_icon_chooser_dialog_set_icon (EXO_ICON_CHOOSER_DIALOG (chooser), ld->entry->icon);
+
+    /* run the icon chooser dialog */
+    if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
+    {
+        /* free the old icon name */
+        if (G_LIKELY (ld->entry->icon))
+            g_free (ld->entry->icon);
+
+        /* set new icon */
+        ld->entry->icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
+
+        /* update the icon button */
+        launcher_dialog_update_icon (ld);
+
+        /* update the icon column in the tree */
+        launcher_dialog_tree_update_row (ld, COL_ICON);
+
+        /* check if we need to update the icon button image */
+        if (g_list_index (ld->launcher->entries, ld->entry) == 0)
+            ld->launcher->icon_update_required = TRUE;
+
+        /* update the panel widgets */
+        launcher_dialog_update_panel (ld);
+    }
+
+    /* destroy the chooser */
+    gtk_widget_destroy (chooser);
+}
+
+
+
+/**
+ * Tree functions
+ **/
+static void
+launcher_dialog_tree_free_store (LauncherDialog *ld)
+{
+    /* clear the store */
+    gtk_list_store_clear (ld->store);
+
+    /* release the store */
+    g_object_unref (G_OBJECT (ld->store));
+}
+
+
+
+static void
+launcher_dialog_tree_update_row (LauncherDialog *ld,
+                                 gint            column)
+{
+    GtkTreeSelection *selection;
+    GtkTreeIter       iter;
+    GdkPixbuf        *icon = NULL;
+
+    selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ld->treeview));
+
+    if (G_LIKELY (gtk_tree_selection_get_selected (selection, NULL, &iter)))
+    {
+        switch (column)
+        {
+            case COL_ICON:
+                /* load entry icon */
+                icon = launcher_load_pixbuf (ld->treeview, ld->entry->icon, TREE_ICON_SIZE, TRUE);
+
+                /* set new icon */
+                gtk_list_store_set (ld->store, &iter,
+                                    COL_ICON, icon,
+                                    -1);
+
+                /* release icon */
+                if (G_LIKELY (icon != NULL))
+                    g_object_unref (G_OBJECT (icon));
+
+                break;
+
+            case COL_TEXT:
+                /* set new name */
+                gtk_list_store_set (ld->store, &iter,
+                                    COL_TEXT, ld->entry->name,
+                                    -1);
+
+                break;
+        }
+    }
+}
+
+
+
+static void
+launcher_dialog_tree_selection_changed (LauncherDialog   *ld,
+                                        GtkTreeSelection *selection)
+{
+    GtkTreeModel *model;
+    GtkTreePath  *path;
+    GtkTreeIter   iter;
+    gboolean      selected;
+    gint          position = 0;
+    gint          items;
+
+    if (G_UNLIKELY (ld->updating == TRUE))
+        return;
+
+    g_return_if_fail (GTK_IS_TREE_SELECTION (selection));
+
+    /* check if we have currently selected an item */
+    selected = gtk_tree_selection_get_selected (selection, &model, &iter);
+
+    if (G_LIKELY (selected))
+    {
+        /* determine the path for the selected iter */
+        path = gtk_tree_model_get_path (model, &iter);
+
+        /* get position */
+        position = gtk_tree_path_get_indices (path)[0];
+
+        /* set new active entry */
+        ld->entry = (LauncherEntry *) g_list_nth (ld->launcher->entries, position)->data;
+
+        /* update fields */
+        launcher_dialog_update_entries (ld);
+
+        /* scroll new item to center of window */
+        gtk_tree_view_scroll_to_cell (GTK_TREE_VIEW (ld->treeview), path, NULL,
+                                      TRUE, 0.5, 0.0);
+
+        /* release path */
+        gtk_tree_path_free (path);
+    }
+
+    /* items in the list */
+    items = gtk_tree_model_iter_n_children (model, NULL);
+
+    /* change sensitivity of buttons */
+    gtk_widget_set_sensitive (ld->up, selected && (position > 0));
+    gtk_widget_set_sensitive (ld->down, selected && (position < items - 1));
+    gtk_widget_set_sensitive (ld->remove, selected && (items > 1));
+}
+
+
+
+static void
+launcher_dialog_tree_button_clicked (GtkWidget      *button,
+                                     LauncherDialog *ld)
+{
+    GtkTreeSelection *selection;
+    GtkTreeModel     *model;
+    GtkTreePath      *path;
+    GtkTreeIter       iter_a;
+    GtkTreeIter       iter_b;
+    guint             position;
+    GList            *li;
+    GdkPixbuf        *icon = NULL;
+    LauncherEntry    *entry;
+
+    /* get the selected items in the treeview */
+    selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ld->treeview));
+
+    /* get selected iter, quit if no iter found */
+    if (G_UNLIKELY (gtk_tree_selection_get_selected (selection, &model, &iter_a) == FALSE))
+        return;
+
+    /* run the requested button action */
+    if (button == ld->up)
+    {
+        /* get path */
+        path = gtk_tree_model_get_path (model, &iter_a);
+
+        /* position of the item in the list */
+        position = gtk_tree_path_get_indices (path)[0];
+
+        /* check if we need to update the icon button image*/
+        if (position == 1)
+            ld->launcher->icon_update_required = TRUE;
+
+        /* get previous path */
+        if (G_LIKELY (gtk_tree_path_prev (path)))
+        {
+            /* get iter for previous item */
+            gtk_tree_model_get_iter (model, &iter_b, path);
+
+            /* swap the entries */
+            gtk_list_store_swap (ld->store, &iter_a, &iter_b);
+
+            /* swap items in the list */
+            li = g_list_nth (ld->launcher->entries, position);
+            launcher_g_list_swap (li, li->prev);
+        }
+
+        /* release the path */
+        gtk_tree_path_free (path);
+
+        /* update tree view */
+        launcher_dialog_tree_selection_changed (ld, selection);
+    }
+    else if (button == ld->down)
+    {
+        /* get path of selected item */
+        path = gtk_tree_model_get_path (model, &iter_a);
+
+        /* get position of item we're going to move */
+        position = gtk_tree_path_get_indices (path)[0];
+
+        /* check if we need to update the icon button image*/
+        if (position == 0)
+            ld->launcher->icon_update_required = TRUE;
+
+        /* get next item in the list */
+        gtk_tree_path_next (path);
+
+        /* get next iter */
+        if (G_LIKELY (gtk_tree_model_get_iter (model, &iter_b, path)))
+        {
+            /* swap the entries */
+            gtk_list_store_swap (ld->store, &iter_a, &iter_b);
+
+            /* swap items in the list */
+            li = g_list_nth (ld->launcher->entries, position);
+            launcher_g_list_swap (li, li->next);
+        }
+
+        /* release the path */
+        gtk_tree_path_free (path);
+
+        /* update tree view */
+        launcher_dialog_tree_selection_changed (ld, selection);
+    }
+    else if (button == ld->add)
+    {
+        /* create new entry */
+        entry = launcher_new_entry ();
+
+        /* load new launcher icon */
+        icon = launcher_load_pixbuf (ld->treeview, entry->icon, TREE_ICON_SIZE, TRUE);
+
+        /* append new entry */
+        gtk_list_store_insert_after (ld->store, &iter_b, &iter_a);
+        gtk_list_store_set (ld->store, &iter_b,
+                            COL_ICON, icon,
+                            COL_TEXT, entry->name,
+                            -1);
+
+        /* release the pixbuf */
+        if (G_LIKELY (icon != NULL))
+            g_object_unref (G_OBJECT (icon));
+
+        /* get path of new item */
+        path = gtk_tree_model_get_path (model, &iter_b);
+
+        /* position in the list */
+        position = gtk_tree_path_get_indices (path)[0];
+
+        /* insert in list */
+        ld->launcher->entries = g_list_insert (ld->launcher->entries,
+                                               entry, position);
+
+        /* select the new item (also updates treeview buttons) */
+        gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->treeview), path, NULL, FALSE);
+
+        /* cleanup */
+        gtk_tree_path_free (path);
+
+    }
+    else if (button == ld->remove)
+    {
+        /* path from row to remove */
+        path = gtk_tree_model_get_path (model, &iter_a);
+
+        /* get position of the item to remove */
+        position = gtk_tree_path_get_indices (path)[0];
+
+        /* check if we need to update the icon button image*/
+        if (position == 0)
+            ld->launcher->icon_update_required = TRUE;
+
+        /* lock */
+        ld->updating = TRUE;
+
+        /* remove active entry */
+        launcher_free_entry (ld->entry, ld->launcher);
+        ld->entry = NULL;
+
+        /* remove row from store */
+        gtk_list_store_remove (ld->store, &iter_a);
+
+        /* unlock */
+        ld->updating = FALSE;
+
+        /* select previous item, if last item was removed */
+        if (position >= g_list_length (ld->launcher->entries))
+            gtk_tree_path_prev (path);
+
+        /* select the new item (also updates treeview buttons) */
+        gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->treeview), path, NULL, FALSE);
+
+        /* cleanup */
+        gtk_tree_path_free (path);
+    }
+
+    /* update panel */
+    launcher_dialog_update_panel (ld);
+}
+
+
+
+/**
+ * Launcher dialog widgets
+ **/
+static GtkWidget *
+launcher_dialog_add_properties (LauncherDialog *ld)
+{
+    GtkWidget    *frame, *vbox, *hbox;
+    GtkWidget    *label, *button, *image;
     GtkSizeGroup *sg;
 
     frame = gtk_frame_new (NULL);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (box), frame, TRUE, TRUE, 0);
-    
+
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
-    gtk_widget_show (vbox);
     gtk_container_add (GTK_CONTAINER (frame), vbox);
 
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-    add_entry_info_options (ld, GTK_BOX (vbox), sg);
-
-    align = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_show (align);
-    gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
-    gtk_widget_set_size_request (align, BORDER, BORDER);
-    
-    add_entry_icon_options (ld, GTK_BOX (vbox), sg);
-
-    align = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_show (align);
-    gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
-    gtk_widget_set_size_request (align, BORDER, BORDER);
-    
-    add_entry_exec_options (ld, GTK_BOX (vbox), sg);
-    
-    g_object_unref (G_OBJECT (sg));
-    
-    launcher_dialog_update_entry_properties (ld);
-    
-    launcher_set_drag_dest (frame);
-    g_signal_connect (frame, "drag-data-received",
-                      G_CALLBACK (entry_dialog_data_received), ld);
-}
-
-
-/* LauncherPlugin Dialog *
- * --------------------- */
-
-/* treeview */
-static void
-treeview_destroyed (GtkWidget * tv)
-{
-    GtkTreeModel *store;
-
-    store = gtk_tree_view_get_model (GTK_TREE_VIEW (tv));
-    gtk_list_store_clear (GTK_LIST_STORE (store));
-}
-
-static void
-cursor_changed (GtkTreeView * tv, LauncherDialog *ld)
-{
-    GtkTreeSelection *sel;
-    GtkTreeModel *model;
-    GtkTreeIter iter;
-    LauncherEntry *e;
-    
-    /* update current item */
-    update_entry_info (ld);
-    update_entry_exec (ld);
-    if (ld->entry->icon.type != LAUNCHER_ICON_TYPE_CATEGORY)
-        update_entry_icon (ld);
-    
-    sel = gtk_tree_view_get_selection (tv);
-    gtk_tree_selection_get_selected (sel, &model, &iter);
-
-    gtk_tree_model_get (model, &iter, 0, &e, -1);
-
-    if (e)
-    {
-        int i;
-        
-        ld->entry = e;
-
-	gtk_widget_set_sensitive (ld->up, TRUE);
-	gtk_widget_set_sensitive (ld->down, TRUE);
-        gtk_widget_set_sensitive (ld->remove, 
-                                  (ld->launcher->entries->len > 1));
-
-        for (i = 0; i < ld->launcher->entries->len; ++i)
-        {
-            LauncherEntry *tmp = g_ptr_array_index (ld->launcher->entries, i);
-
-            if (tmp != e)
-                continue;
-            
-            if (i == 0)
-            {
-                gtk_widget_set_sensitive (ld->up, FALSE);
-            }
-            
-            if (i == ld->launcher->entries->len - 1)
-                gtk_widget_set_sensitive (ld->down, FALSE);
-
-            break;
-        }
-    }
-    else
-    {
-	gtk_widget_set_sensitive (ld->up, FALSE);
-	gtk_widget_set_sensitive (ld->down, FALSE);
-	gtk_widget_set_sensitive (ld->remove, FALSE);
-    }
-
-    launcher_dialog_update_entry_properties (ld);
-}
-
-static void
-render_icon (GtkTreeViewColumn * col, GtkCellRenderer * cell,
-	     GtkTreeModel * model, GtkTreeIter * iter, GtkWidget *tree)
-{
-    LauncherEntry *entry;
-    GdkPixbuf *pb;
-
-    gtk_tree_model_get (model, iter, 0, &entry, -1);
-
-    if (entry)
-    {
-        pb = launcher_icon_load_pixbuf (tree, &entry->icon, DLG_ICON_SIZE);
-        g_object_set (cell, "pixbuf", pb, NULL);
-        g_object_unref (G_OBJECT (pb));
-    }
-    else
-    {
-        g_object_set (cell, "pixbuf", NULL, NULL);
-    }
-}
-
-static void
-render_text (GtkTreeViewColumn * col, GtkCellRenderer * cell,
-	     GtkTreeModel * model, GtkTreeIter * iter, GtkWidget * treeview)
-{
-    LauncherEntry *entry;
-
-    gtk_tree_model_get (model, iter, 0, &entry, -1);
-
-    if (entry)
-        g_object_set (cell, "markup", entry->name, NULL);
-    else
-        g_object_set (cell, "markup", "", NULL);
-}
-
-static void
-launcher_dialog_add_item_tree (LauncherDialog *ld, GtkBox *box)
-{
-    GtkWidget *tv;
-    GtkCellRenderer *cell;
-    GtkTreeViewColumn *col;
-    GtkListStore *store;
-    GtkTreeModel *model;
-    GtkTreePath *path;
-    GtkTreeIter iter;
-    LauncherEntry *e;
-    int i;
-
-    ld->scroll = gtk_scrolled_window_new (NULL, NULL);
-    gtk_widget_show (ld->scroll);
-    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (ld->scroll),
-				    GTK_POLICY_NEVER, 
-                                    GTK_POLICY_NEVER);
-    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (ld->scroll),
-					 GTK_SHADOW_IN);
-    gtk_box_pack_start (box, ld->scroll, TRUE, TRUE, 0);
-    
-    store = gtk_list_store_new (1, G_TYPE_POINTER);
-    model = GTK_TREE_MODEL (store);
-
-    ld->tree = tv = gtk_tree_view_new_with_model (model);
-    gtk_widget_show (tv);
-    gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (tv), FALSE);
-    gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (tv), FALSE);
-    gtk_container_add (GTK_CONTAINER (ld->scroll), tv);
-
-    g_signal_connect (tv, "destroy", G_CALLBACK (treeview_destroyed), NULL);
-
-    g_object_unref (G_OBJECT (store));
-
-    launcher_set_drag_dest (tv);
-    g_signal_connect (tv, "drag-data-received", 
-                      G_CALLBACK (launcher_dialog_data_received), ld);
-    
-    /* create the view */
-    col = gtk_tree_view_column_new ();
-    gtk_tree_view_column_set_spacing (col, BORDER);
-    gtk_tree_view_append_column (GTK_TREE_VIEW (tv), col);
-
-    cell = gtk_cell_renderer_pixbuf_new ();
-    gtk_tree_view_column_pack_start (col, cell, FALSE);
-    gtk_tree_view_column_set_cell_data_func (col, cell,
-					     (GtkTreeCellDataFunc)
-					     render_icon, tv, NULL);
-
-    cell = gtk_cell_renderer_text_new ();
-    gtk_tree_view_column_pack_start (col, cell, TRUE);
-    gtk_tree_view_column_set_cell_data_func (col, cell,
-					     (GtkTreeCellDataFunc)
-					     render_text, tv, NULL);
-
-    /* fill model */
-    for (i = 0; i < ld->launcher->entries->len; ++i)
-    {
-        if (i == 7)
-        {
-            GtkRequisition req;
-
-            gtk_widget_size_request (tv, &req);
-
-            gtk_widget_set_size_request (tv, -1, req.height);
-
-            gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (ld->scroll),
-                                            GTK_POLICY_NEVER, 
-                                            GTK_POLICY_ALWAYS);
-        }
-
-	e = g_ptr_array_index (ld->launcher->entries, i);
-	gtk_list_store_append (store, &iter);
-	gtk_list_store_set (store, &iter, 0, e, -1);
-    }
-
-    path = gtk_tree_path_new_from_string ("0");
-    gtk_tree_view_set_cursor (GTK_TREE_VIEW (tv), path, NULL, FALSE);
-    gtk_tree_path_free (path);
-
-    g_signal_connect (tv, "cursor_changed", G_CALLBACK (cursor_changed), ld);
-}
-
-/* treeview buttons */
-static void
-launcher_dialog_add_entry_after (LauncherDialog *ld, GtkTreeIter *prev_iter, 
-                                 LauncherEntry *new_e)
-{
-    LauncherEntry *e = NULL;
-    GtkTreeIter iter;
-    GtkTreeModel *model;
-    GtkTreePath *path;
-    
-    g_return_if_fail (new_e != NULL);
-
-    if (ld->launcher->entries->len == 6)
-    {
-        GtkRequisition req;
-
-        gtk_widget_size_request (ld->tree, &req);
-
-        gtk_widget_set_size_request (ld->tree, -1, req.height);
-
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (ld->scroll),
-                                        GTK_POLICY_NEVER, 
-                                        GTK_POLICY_ALWAYS);
-    }
-
-    model = gtk_tree_view_get_model (GTK_TREE_VIEW (ld->tree));
-    
-    if (prev_iter)
-        gtk_tree_model_get (model, prev_iter, 0, &e, -1);
-    
-    if (!e)
-    {
-        g_ptr_array_add (ld->launcher->entries, new_e);
-        gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, new_e, -1);
-    }
-    else
-    {
-        int i;
-
-        g_ptr_array_add (ld->launcher->entries, NULL);
-        
-        for (i = ld->launcher->entries->len; i > 0; --i)
-        {
-            LauncherEntry *tmp = 
-                g_ptr_array_index (ld->launcher->entries, i - 1);
-
-            if (tmp == e)
-            {
-                ld->launcher->entries->pdata[i] = new_e;
-                break;
-            }
-        
-            ld->launcher->entries->pdata[i] = tmp;
-        }
-
-        gtk_list_store_insert_after (GTK_LIST_STORE (model), &iter, 
-                                     prev_iter);
-        gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, new_e, -1);
-    }
-
-    path = gtk_tree_model_get_path (model, &iter);
-    gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, FALSE);
-    gtk_tree_path_free (path);
-
-    gtk_widget_show (ld->launcher->arrowbutton);
-}
-
-static void
-tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
-{
-    GtkTreeSelection *sel;
-    GtkTreeModel *model;
-    GtkTreeIter iter, iter2;
-    GtkTreePath *path;
-    LauncherEntry *e;
-    int i;
-
-    sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (ld->tree));
-    gtk_tree_selection_get_selected (sel, &model, &iter);
-
-    gtk_tree_model_get (model, &iter, 0, &e, -1);
-
-    if (b == ld->up)
-    {
-        if (!e)
-            return;
-
-        path = gtk_tree_model_get_path (model, &iter);
-
-        if (gtk_tree_path_prev (path) &&
-                gtk_tree_model_get_iter (model, &iter2, path))
-        {
-            gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &iter2);
-
-            gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, 
-                                      FALSE);
-
-            for (i = 1; i < ld->launcher->entries->len; ++i)
-            {
-                LauncherEntry *tmp = 
-                    g_ptr_array_index (ld->launcher->entries, i);
-                
-                if (tmp == e)
-                {
-                    ld->launcher->entries->pdata[i] = 
-                        ld->launcher->entries->pdata[i-1];
-                    ld->launcher->entries->pdata[i-1] = tmp;
-
-                    if (i == 1)
-                        set_panel_icon (ld);
-
-                    break;
-                }
-            }
-        }
-            
-        gtk_tree_path_free (path);
-    }
-    else if (b == ld->down)
-    {
-        if (!e)
-            return;
-
-        path = gtk_tree_model_get_path (model, &iter);
-        gtk_tree_path_next (path);
-        
-        if (gtk_tree_model_get_iter (model, &iter2, path))
-        {
-            gtk_list_store_swap (GTK_LIST_STORE (model), &iter, &iter2);
-
-            gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, 
-                                      FALSE);
-
-            for (i = 0; i < ld->launcher->entries->len - 1; ++i)
-            {
-                LauncherEntry *tmp = 
-                    g_ptr_array_index (ld->launcher->entries, i);
-                
-                if (tmp == e)
-                {
-                    ld->launcher->entries->pdata[i] = 
-                        ld->launcher->entries->pdata[i+1];
-                    ld->launcher->entries->pdata[i+1] = tmp;
-
-                    if (i == 0)
-                        set_panel_icon (ld);
-
-                    break;
-                }
-            }
-        }
-
-        gtk_tree_path_free (path);
-    }
-    else if (b == ld->add)
-    {
-        LauncherEntry *e2;
-        
-        e2 = launcher_entry_new ();
-        e2->name = g_strdup (_("New Item"));
-        
-        launcher_dialog_add_entry_after (ld, &iter, e2);
-    }
-    else if (b == ld->remove)
-    {
-        gboolean is_first;
-        
-        if (!e)
-            return;
-
-        if (gtk_list_store_remove (GTK_LIST_STORE (model), &iter))
-        {
-            path = gtk_tree_model_get_path (model, &iter);
-        }
-        else
-        {
-            char last[3];
-
-            g_snprintf (last, 3, "%d", ld->launcher->entries->len - 2);
-            path = gtk_tree_path_new_from_string (last);
-        }
-        
-        gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->tree), path, NULL, FALSE);
-        
-        gtk_tree_path_free (path);
-        
-        is_first = (e == g_ptr_array_index (ld->launcher->entries, 0));
-
-        g_ptr_array_remove (ld->launcher->entries, e);
-        launcher_entry_free (e);
-        
-        if (ld->launcher->entries->len == 1)
-        {
-            gtk_widget_hide (ld->launcher->arrowbutton);
-            gtk_widget_set_sensitive (ld->remove, FALSE);
-        }
-
-        if (is_first)
-            set_panel_icon (ld);
-    }
-
-    cursor_changed (GTK_TREE_VIEW (ld->tree), ld);
-}
-
-static void
-launcher_dialog_add_buttons (LauncherDialog *ld, GtkBox *box)
-{
-    GtkWidget *hbox, *b, *align, *img;
-
+    /* entry name field */
     hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-    
-    ld->up = b = gtk_button_new ();
-    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
-    gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
-    img = gtk_image_new_from_stock (GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (b), img);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
-
-    gtk_widget_set_sensitive (b, FALSE);
-
-    ld->down = b = gtk_button_new ();
-    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
-    gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
-    img = gtk_image_new_from_stock (GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (b), img);
-
-    g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
-
-    align = gtk_alignment_new (0, 0, 0, 0);
-    gtk_widget_show (align);
-    gtk_widget_set_size_request (align, 1, 1);
-    gtk_box_pack_start (GTK_BOX (hbox), align, FALSE, FALSE, 0);
-    
-    ld->add = b = gtk_button_new ();
-    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
-    gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
-    img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (b), img);
-
-    g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
-
-    ld->remove = b = gtk_button_new ();
-    gtk_button_set_focus_on_click (GTK_BUTTON (b), FALSE);
-    gtk_widget_show (b);
-    gtk_box_pack_start (GTK_BOX (hbox), b, FALSE, FALSE, 0);
-    img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_BUTTON);
-    gtk_widget_show (img);
-    gtk_container_add (GTK_CONTAINER (b), img);
-
-    g_signal_connect (b, "clicked", G_CALLBACK (tree_button_clicked), ld);
-
-    gtk_widget_set_sensitive (b, FALSE);
-}
-
-/* explanation */
-static void
-launcher_dialog_add_explanation (GtkBox *box)
-{
-    GtkWidget *hbox, *img, *label;
-
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER - 2);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (box, hbox, FALSE, FALSE, 0);
-    
-    img = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, 
-                                    GTK_ICON_SIZE_LARGE_TOOLBAR);
-    gtk_misc_set_alignment (GTK_MISC (img), 0, 0);
-    gtk_widget_show (img);
-    gtk_box_pack_start (GTK_BOX (hbox), img, FALSE, FALSE, 0);
-    
-    label = 
-        gtk_label_new (_("The first item in the list is shown on the panel. "
-                         "Additional items will appear in a menu."));
-    gtk_widget_show (label);
+    label = gtk_label_new_with_mnemonic (_("_Name"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+    gtk_size_group_add_widget (sg, label);
+
+    ld->entry_name = gtk_entry_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), ld->entry_name, TRUE, TRUE, 0);
+
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), ld->entry_name);
+
+    g_signal_connect (G_OBJECT (ld->entry_name), "changed",
+                      G_CALLBACK (launcher_dialog_save_entry), ld);
+
+    /* entry comment field */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_label_new_with_mnemonic (_("_Description"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+    gtk_size_group_add_widget (sg, label);
+
+    ld->entry_comment = gtk_entry_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), ld->entry_comment, TRUE, TRUE, 0);
+    gtk_widget_set_size_request (ld->entry_comment, 300, -1);
+
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), ld->entry_comment);
+
+    g_signal_connect (G_OBJECT (ld->entry_comment), "changed",
+                      G_CALLBACK (launcher_dialog_save_entry), ld);
+
+    /* entry icon chooser button */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_label_new_with_mnemonic (_("_Icon"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+    gtk_size_group_add_widget (sg, label);
+
+    ld->entry_icon = gtk_button_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), ld->entry_icon, FALSE, FALSE, 0);
+
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), ld->entry_icon);
+
+    g_signal_connect_swapped (G_OBJECT (ld->entry_icon), "clicked",
+                              G_CALLBACK (launcher_dialog_icon_chooser), ld);
+
+    /* entry command field and button */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_label_new_with_mnemonic (_("Co_mmand"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+    gtk_size_group_add_widget (sg, label);
+
+    ld->entry_exec = gtk_entry_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), ld->entry_exec, TRUE, TRUE, 0);
+
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), ld->entry_exec);
+
+    g_signal_connect (G_OBJECT (ld->entry_exec), "changed",
+                      G_CALLBACK (launcher_dialog_save_entry), ld);
+
+    button = gtk_button_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    g_signal_connect_swapped (G_OBJECT (button), "clicked",
+                              G_CALLBACK (launcher_dialog_command_chooser), ld);
+
+    image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
+    /* working directory field */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_label_new_with_mnemonic (_("_Working Directory"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+
+    gtk_size_group_add_widget (sg, label);
+
+    ld->entry_path = gtk_entry_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), ld->entry_path, TRUE, TRUE, 0);
+
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), ld->entry_path);
+
+    g_signal_connect (G_OBJECT (ld->entry_path), "changed",
+                      G_CALLBACK (launcher_dialog_save_entry), ld);
+
+    button = gtk_button_new ();
+    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    g_signal_connect_swapped (G_OBJECT (button), "clicked",
+                              G_CALLBACK (launcher_dialog_folder_chooser), ld);
+
+    image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
+    /* entry terminal toggle button with spacer */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_alignment_new (0, 0, 0, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    gtk_size_group_add_widget (sg, label);
+
+    ld->entry_terminal = gtk_check_button_new_with_mnemonic (_("Run in _terminal"));
+    gtk_box_pack_start (GTK_BOX (hbox), ld->entry_terminal, TRUE, TRUE, 0);
+
+    g_signal_connect (G_OBJECT (ld->entry_terminal), "toggled",
+                      G_CALLBACK (launcher_dialog_save_button), ld);
+
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+    /* startup notification */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_alignment_new (0, 0, 0, 0);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    gtk_size_group_add_widget (sg, label);
+
+    ld->entry_startup = gtk_check_button_new_with_mnemonic (_("Use _startup notification"));
+    gtk_box_pack_start (GTK_BOX (hbox), ld->entry_startup, TRUE, TRUE, 0);
+
+    g_signal_connect (G_OBJECT (ld->entry_startup), "toggled",
+                      G_CALLBACK (launcher_dialog_save_button), ld);
+#endif
+
+    /* release size group */
+    g_object_unref (G_OBJECT (sg));
+
+    /* setup dnd in frame */
+    gtk_drag_dest_set (frame, GTK_DEST_DEFAULT_ALL,
+                       drop_targets, G_N_ELEMENTS (drop_targets),
+                       GDK_ACTION_COPY);
+
+    g_signal_connect (frame, "drag-data-received",
+                        G_CALLBACK (launcher_dialog_frame_drag_data_received), ld);
+
+    return frame;
 }
 
-/* launcher plugin dialog */
-static void
-launcher_dialog_response (GtkWidget *dlg, int response, LauncherDialog *ld)
+
+
+
+static GtkWidget *
+launcher_dialog_add_tree (LauncherDialog *ld)
 {
-    g_object_set_data (G_OBJECT (ld->plugin), "dialog", NULL);
-    g_object_set_data (G_OBJECT (ld->plugin), "launcher-dialog", NULL);
+    GtkWidget         *scroll;
+    GtkTreeViewColumn *column;
+    GtkTreeSelection  *selection;
+    GtkCellRenderer   *renderer;
+    GtkTreeIter        iter;
+    GList             *li;
+    LauncherEntry     *entry;
+    GdkPixbuf         *icon;
 
-    gtk_widget_hide (dlg);
-    
-    launcher_update_panel_entry (ld->launcher);
-    launcher_recreate_menu (ld->launcher);
-    
-    gtk_widget_destroy (ld->icon_category);
-    gtk_widget_destroy (dlg);
+    /* scrolled window */
+    scroll = gtk_scrolled_window_new (NULL, NULL);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scroll),
+                                    GTK_POLICY_NEVER,
+                                    GTK_POLICY_AUTOMATIC);
+    gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scroll),
+                                         GTK_SHADOW_IN);
 
-    xfce_panel_plugin_unblock_menu (ld->plugin);
+    /* create new list store */
+    ld->store = gtk_list_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_STRING);
 
-    launcher_save (ld->plugin, ld->launcher);
-    
+    /* create tree view */
+    ld->treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL (ld->store));
+    gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (ld->treeview), FALSE);
+    gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (ld->treeview), TRUE);
+    gtk_container_add (GTK_CONTAINER (scroll), ld->treeview);
+
+    g_signal_connect_swapped (G_OBJECT (ld->treeview), "destroy",
+                              G_CALLBACK (launcher_dialog_tree_free_store), ld);
+
+    /* create columns and cell renders */
+    column = gtk_tree_view_column_new ();
+    gtk_tree_view_column_set_expand (column, TRUE);
+    gtk_tree_view_column_set_resizable (column, FALSE);
+    gtk_tree_view_append_column (GTK_TREE_VIEW (ld->treeview), column);
+
+    renderer = gtk_cell_renderer_pixbuf_new();
+    gtk_tree_view_column_pack_start (column, renderer, FALSE);
+    gtk_tree_view_column_set_attributes (column, renderer, "pixbuf", COL_ICON, NULL);
+
+    renderer = gtk_cell_renderer_text_new ();
+    gtk_tree_view_column_pack_start (column, renderer, TRUE);
+    gtk_tree_view_column_set_attributes (column, renderer, "text", COL_TEXT, NULL);
+    g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
+
+    /* set selection change signal */
+    selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ld->treeview));
+    gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+    g_signal_connect_swapped (G_OBJECT (selection), "changed",
+                              G_CALLBACK (launcher_dialog_tree_selection_changed), ld);
+
+    /* append current items */
+    for (li = ld->launcher->entries; li != NULL; li = li->next)
+    {
+        entry = li->data;
+
+        if (G_LIKELY (entry && entry->name))
+        {
+            /* load icon */
+            icon = launcher_load_pixbuf (ld->treeview, entry->icon, TREE_ICON_SIZE, TRUE);
+
+            /* create new row and add the data */
+            gtk_list_store_append (ld->store, &iter);
+            gtk_list_store_set (ld->store, &iter,
+                                COL_ICON, icon,
+                                COL_TEXT, entry->name,
+                                -1);
+
+            /* release the pixbuf */
+            if (G_LIKELY (icon))
+                g_object_unref (G_OBJECT (icon));
+        }
+    }
+
+    /* dnd support */
+    gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (ld->treeview),
+                                          drop_targets, G_N_ELEMENTS (drop_targets),
+                                          GDK_ACTION_COPY);
+
+    g_signal_connect (G_OBJECT (ld->treeview), "drag-data-received",
+                      G_CALLBACK (launcher_dialog_tree_drag_data_received), ld);
+
+    return scroll;
+}
+
+
+
+static GtkWidget *
+launcher_dialog_add_tree_buttons (LauncherDialog *ld)
+{
+    GtkWidget *hbox, *button, *align, *image;
+
+    hbox = gtk_hbox_new (FALSE, BORDER);
+
+    /* up button */
+    ld->up = button = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    image = gtk_image_new_from_stock (GTK_STOCK_GO_UP, GTK_ICON_SIZE_BUTTON);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
+    g_signal_connect (G_OBJECT (button), "clicked",
+                      G_CALLBACK (launcher_dialog_tree_button_clicked), ld);
+
+    gtk_widget_set_sensitive (button, FALSE);
+
+    /* down button */
+    ld->down = button = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    image = gtk_image_new_from_stock (GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_BUTTON);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
+    g_signal_connect (G_OBJECT (button), "clicked",
+                      G_CALLBACK (launcher_dialog_tree_button_clicked), ld);
+
+    gtk_widget_set_sensitive (button, FALSE);
+
+    /* free space between buttons */
+    align = gtk_alignment_new (0, 0, 0, 0);
+    gtk_widget_set_size_request (align, 1, 1);
+    gtk_box_pack_start (GTK_BOX (hbox), align, TRUE, TRUE, 0);
+
+    /* add button */
+    ld->add = button = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
+    g_signal_connect (G_OBJECT (button), "clicked",
+                      G_CALLBACK (launcher_dialog_tree_button_clicked), ld);
+
+    /* remove button */
+    ld->remove = button = gtk_button_new ();
+    gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
+    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+
+    image = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_BUTTON);
+    gtk_container_add (GTK_CONTAINER (button), image);
+
+    g_signal_connect (G_OBJECT (button), "clicked",
+                      G_CALLBACK (launcher_dialog_tree_button_clicked), ld);
+
+    gtk_widget_set_sensitive (button, FALSE);
+
+    return hbox;
+}
+
+
+
+/**
+ * Dialog functions
+ **/
+static void
+launcher_dialog_response (GtkWidget      *dialog,
+                            gint            response,
+                            LauncherDialog *ld)
+{
+    /* hide the dialog */
+    gtk_widget_hide (dialog);
+
+    /* lock for further updates */
+    ld->updating = TRUE;
+    ld->entry = NULL;
+
+    /* remove link */
+    g_object_set_data (G_OBJECT (ld->launcher->plugin), "dialog", NULL);
+
+    /* destroy the dialog */
+    gtk_widget_destroy (dialog);
+
+    /* unlock plugin menu (do this before writing -> see hack in write function) */
+    xfce_panel_plugin_unblock_menu (ld->launcher->plugin);
+
+    /* revert settings made */
+    if (response == GTK_RESPONSE_CANCEL)
+    {
+        /* remove all entries from the list */
+        g_list_foreach (ld->launcher->entries,
+                        (GFunc) launcher_free_entry, ld->launcher);
+
+        /* read last saved settings */
+        launcher_read (ld->launcher);
+
+        /* update the panel again */
+        launcher_dialog_update_panel (ld);
+    }
+    else /* save changes */
+    {
+        /* write new settings */
+        launcher_write (ld->launcher);
+    }
+
+    /* enable/disable auto sort again */
+    launcher_set_move_first (ld->launcher->move_first);
+
+    /* free the panel structure */
     panel_slice_free (LauncherDialog, ld);
 }
 
+
+
 void
-launcher_properties_dialog (XfcePanelPlugin *plugin, LauncherPlugin * launcher)
+launcher_dialog_show (LauncherPlugin  *launcher)
 {
     LauncherDialog *ld;
-    GtkWidget *vbox, *hbox;
+    GtkWidget      *dialog;
+    GtkWidget      *dialog_vbox;
+    GtkWidget      *paned, *vbox;
+    GtkWidget      *widget;
+    GtkTreePath    *path;
 
+    /* create new structure */
     ld = panel_slice_new0 (LauncherDialog);
-    
-    ld->plugin = plugin;
+
     ld->launcher = launcher;
-    ld->entry = g_ptr_array_index (launcher->entries, 0);
-    
-    xfce_panel_plugin_block_menu (ld->plugin);
-    
-    ld->dlg = xfce_titled_dialog_new_with_buttons (_("Program Launcher"), NULL,
-                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
-                GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
-                NULL);
 
-    g_object_set_data (G_OBJECT (plugin), "dialog", ld->dlg);
-    g_object_set_data (G_OBJECT (plugin), "launcher-dialog", ld);
+    /* get first entry */
+    ld->entry = g_list_first (launcher->entries)->data;
 
-    gtk_window_set_position (GTK_WINDOW (ld->dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (ld->dlg), "xfce4-settings");
-    
-    gtk_container_set_border_width (GTK_CONTAINER (ld->dlg), 2);
-    
-    launcher_dialog_add_explanation (GTK_BOX (GTK_DIALOG (ld->dlg)->vbox));
-    
-    hbox = gtk_hbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (hbox), BORDER - 2);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (ld->dlg)->vbox), hbox,
-                        TRUE, TRUE, 0);
+    /* lock right-click plugin menu */
+    xfce_panel_plugin_block_menu (launcher->plugin);
+
+    /* disable the auto sort of the list, while working in properties */
+    launcher_set_move_first (FALSE);
+
+    /* create new dialog */
+    dialog = xfce_titled_dialog_new_with_buttons (_("Program Launcher"),
+                                                  NULL,
+                                                  GTK_DIALOG_NO_SEPARATOR,
+                                                  GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                                  GTK_STOCK_OK, GTK_RESPONSE_OK,
+                                                  NULL);
+
+    gtk_window_set_screen (GTK_WINDOW (dialog),
+                           gtk_widget_get_screen (GTK_WIDGET (launcher->plugin)));
+
+    gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
+    gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+    /* connect dialog to plugin, so we can destroy it when plugin is closed */
+    g_object_set_data (G_OBJECT (ld->launcher->plugin), "dialog", dialog);
+
+    dialog_vbox = GTK_DIALOG (dialog)->vbox;
+
+    /* added the horizontal panes */
+    paned = gtk_hpaned_new ();
+    gtk_box_pack_start (GTK_BOX (dialog_vbox), paned, TRUE, TRUE, 0);
+    gtk_container_set_border_width (GTK_CONTAINER (paned), BORDER - 2);
 
     vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_widget_show (vbox);
-    gtk_box_pack_start (GTK_BOX (hbox), vbox, TRUE, TRUE, 0);
-    
-    launcher_dialog_add_item_tree (ld, GTK_BOX (vbox));
+    gtk_paned_pack1 (GTK_PANED (paned), vbox, FALSE, FALSE);
 
-    launcher_dialog_add_buttons (ld, GTK_BOX (vbox));
+    /* add the entries list */
+    widget = launcher_dialog_add_tree (ld);
+    gtk_box_pack_start (GTK_BOX (vbox), widget, TRUE, TRUE, 0);
 
-    launcher_dialog_add_entry_properties (ld, GTK_BOX (hbox));
-    
-    cursor_changed (GTK_TREE_VIEW (ld->tree), ld);
+    /* add the tree navigation buttons */
+    widget = launcher_dialog_add_tree_buttons (ld);
+    gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 0);
 
-    g_signal_connect (ld->dlg, "response", 
+    /* add the entry widgets */
+    widget = launcher_dialog_add_properties (ld);
+    gtk_paned_pack2 (GTK_PANED (paned), widget, TRUE, FALSE);
+
+    /* show all widgets inside dialog */
+    gtk_widget_show_all (dialog_vbox);
+
+    /* focus the title entry */
+    gtk_widget_grab_focus (ld->entry_name);
+
+    /* select first item in the tree (this also updates the fields) */
+    path = gtk_tree_path_new_first ();
+    gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->treeview), path, NULL, FALSE);
+    gtk_tree_path_free (path);
+
+    /* connect response signal */
+    g_signal_connect (G_OBJECT (dialog), "response",
                       G_CALLBACK (launcher_dialog_response), ld);
 
-    gtk_widget_show (ld->dlg);
+    /* show the dialog */
+    gtk_widget_show (dialog);
 }
-
-
-/* DND *
- * --- */
-
-static const char *dentry_keys [] = {
-    "Name",
-    "GenericName",
-    "Comment",
-    "Exec",
-    "Icon",
-    "Terminal",
-    "StartupNotify",
-    "OnlyShowIn"
-};
-
-static LauncherEntry *
-launcher_entry_update_from_interface (LauncherEntry *e, const char *iface)
-{
-    const gchar *argv[] = {"python", "-c",
-        "import sys;"
-        "from zeroinstall.injector.iface_cache import iface_cache;"
-        "iface = iface_cache.get_interface(sys.argv[1]);"
-        "print iface.name;"
-        "print iface.summary.replace('\\n', ' ');"
-        "hasattr(iface_cache, 'get_icon_path') and "
-        "  sys.stdout.write(iface_cache.get_icon_path(iface));",
-        NULL, NULL};
-    GError *error = NULL;
-    char *child_stdout = NULL;
-
-    /* Set the command to "0launch iface" */
-    g_free (e->exec);
-    g_free (e->real_exec);
-
-    e->exec = g_strconcat ("0launch ", iface, NULL);
-    e->real_exec = g_strdup (e->exec);
-
-    /* Get the name and summary from the interface file. Since 0launch
-     * worked, the user should have Python...
-     */
-    argv[3] = iface;
-    g_spawn_sync (NULL, (gchar **) argv, NULL,
-           G_SPAWN_SEARCH_PATH,
-           NULL, NULL,
-           &child_stdout, NULL,
-           NULL, &error);
-
-    if (error)
-    {
-        xfce_warn (_("Failed to run 0launch:\n%s\n\n"
-                        "For help using Zero Install, "
-                        "see http://0install.net"), error->message);
-        g_error_free (error);
-    }
-    else if (child_stdout)
-    {
-        gchar **lines;
-        
-        lines = g_strsplit(child_stdout, "\n", 3);
-
-        if (lines[0])
-        {
-            g_free(e->name);
-            e->name = lines[0];
-
-            if (lines[1])
-            {
-                g_free(e->comment);
-                e->comment = lines[1];
-
-                if (lines[2]) {
-                    g_free(e->icon.icon.name);
-                    e->icon.type = LAUNCHER_ICON_TYPE_NAME;
-                    e->icon.icon.name = lines[2];
-                }
-            }
-        }
-
-        g_free (lines); /* Not strvfree(); we used all the lines */
-    }
-
-    g_free (child_stdout);
-
-    return e;
-}
-
-static void
-zero_install_launch_done (GPid pid, gint status, ZeroInstallProcess *info)
-{
-    g_spawn_close_pid (pid);
-
-    if (status == 0)
-    {
-        /* Success! Let's add the application's details... */
-        LauncherDialog *ld;
-        ld = g_object_get_data (G_OBJECT (info->plugin), "launcher-dialog");
-        if (ld)
-        {
-            LauncherEntry *e = NULL;
-
-            if (info->entry && ld->entry == info->entry)
-            {
-                e = info->entry;
-                launcher_entry_update_from_interface (e, info->interface_uri);
-                launcher_dialog_update_entry_properties (ld);
-            }
-            else
-            {
-                e = launcher_entry_new ();
-                launcher_entry_update_from_interface (e, info->interface_uri);
-                launcher_dialog_add_entry_after (ld, NULL, e);
-            }
-        }
-        else
-        {
-            xfce_warn(_("The Zero Install GUI has finished, but the launcher dialog "
-                      "has disappeared in the meantime. Not adding launcher "
-                      "(but any files downloaded have not been lost)."));
-        }
-    }
-    
-    g_object_unref(G_OBJECT (info->plugin));
-    g_free(info->interface_uri);
-    panel_slice_free(ZeroInstallProcess, info);
-}
-
-/** The user wants to add a launcher for 'interface'. Confirm that it
- * is a valid Zero Install interface, download archives needed to run
- * the program, and then add it as a launcher.
- * Note: This function will return immediately without adding or updating
- * the entry. The update happens later in a callback.
- */
-static void
-start_entry_from_interface_file (LauncherDialog *ld,
-                                 const char *interface,
-                                 LauncherEntry *entry)
-{
-    GPid pid;
-    GError *error = NULL;
-    const gchar *argv[] = {"0launch", "-dg", "--", NULL, NULL};
-
-    argv[3] = interface;
-
-    g_spawn_async(NULL, (gchar **) argv, NULL,
-           G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-           NULL, NULL,
-           &pid, &error);
-
-    if (error)
-    {
-        xfce_warn (_("Failed to run 0launch:\n%s\n\n"
-                        "For help using Zero Install, "
-                        "see http://0install.net"), error->message);
-        g_error_free (error);
-    }
-    else
-    {
-        ZeroInstallProcess *info;
-        info = panel_slice_new0 (ZeroInstallProcess);
-
-        info->interface_uri = g_strdup(interface);
-        info->plugin = G_OBJECT(ld->plugin);
-        info->entry = entry;
-
-        g_object_ref (G_OBJECT (info->plugin));
-        g_child_watch_add (pid,
-                           (GChildWatchFunc) zero_install_launch_done,
-                           info);
-    }
-}
-
-static LauncherEntry *
-update_entry_from_desktop_file (LauncherEntry *e, const char *path)
-{
-    XfceDesktopEntry *dentry;
-
-    if ((dentry = xfce_desktop_entry_new (path, dentry_keys, 
-                                          G_N_ELEMENTS (dentry_keys))))
-    {
-        char *value = NULL, *p;
-
-        g_free (e->name);
-        g_free (e->comment);
-        g_free (e->exec);
-        g_free (e->real_exec);
-        if (e->icon.type == LAUNCHER_ICON_TYPE_NAME)
-            g_free (e->icon.icon.name);
-
-        e->name = e->comment = e->exec = NULL;
-        e->terminal = e->startup = FALSE;
-        e->icon.icon.name = NULL;
-        e->icon.type = LAUNCHER_ICON_TYPE_NONE;        
-        
-        xfce_desktop_entry_get_string (dentry, "OnlyShowIn", FALSE, 
-                                       &value);
-
-        if (value && !strcmp ("XFCE", value))
-        {
-            xfce_desktop_entry_get_string (dentry, "GenericName", FALSE,
-                                           &(e->name));            
-        }
-
-        g_free (value);
-
-        if (!e->name)
-        {
-            xfce_desktop_entry_get_string (dentry, "Name", FALSE,
-                                           &(e->name));            
-        }
-        
-        xfce_desktop_entry_get_string (dentry, "Comment", FALSE,
-                                       &(e->comment));
-        
-        value = NULL;
-        xfce_desktop_entry_get_string (dentry, "Icon", FALSE,
-                                       &value);
-
-        if (value)
-        {
-            e->icon.type = LAUNCHER_ICON_TYPE_NAME;
-            e->icon.icon.name = value;
-        }
-
-        xfce_desktop_entry_get_string (dentry, "Exec", FALSE,
-                                       &(e->exec));
-
-        if (e->exec)
-        {
-            /* if command contains % variables, like %U or %f, discard all
-             * arguments. This is not very good solution, but it is simple 
-             * and fast.
-             */
-            if (strchr (e->exec, '%') && (p = strchr (e->exec, ' ')))
-                *p = '\0';
-            
-            /* expand variables */
-            if (!(e->real_exec = xfce_expand_variables (e->exec, NULL)))
-                e->real_exec = g_strdup (e->exec);
-        }
-                    
-
-
-        value = NULL;
-        xfce_desktop_entry_get_string (dentry, "Terminal", FALSE,
-                                       &value);
-
-        if (value && (!strcmp ("1", value) || !strcmp ("true", value)))
-        {
-            e->terminal = TRUE;
-
-            g_free (value);
-        }
-        
-        value = NULL;
-        xfce_desktop_entry_get_string (dentry, "StartupNotify", FALSE,
-                                       &value);
-
-        if (value && (!strcmp ("1", value) || !strcmp ("true", value)))
-        {
-            e->startup = TRUE;
-
-            g_free (value);
-        }
-        
-        g_object_unref (G_OBJECT (dentry));
-
-        return e;
-    }
-
-    return NULL;
-}
-
-static LauncherEntry *
-create_entry_from_file (const char *path)
-{
-    LauncherEntry *e = launcher_entry_new ();
-
-    if (g_str_has_suffix (path, ".desktop"))
-    {
-        update_entry_from_desktop_file (e, path);
-    }
-    else 
-    {
-        const char *start, *end;
-        char *utf8;
-        
-        if (!g_utf8_validate (path, -1, NULL))
-            utf8 = g_locale_to_utf8 (path, -1, NULL, NULL, NULL);
-        else
-            utf8 = g_strdup (path);
-        
-        e->exec = g_strdup (path);
-        if (!(e->real_exec = xfce_expand_variables (e->exec, NULL)))
-            e->real_exec = g_strdup (e->exec);
-        
-        if (!(start = strrchr (utf8, G_DIR_SEPARATOR)))
-            start = utf8;
-        else
-            start++;
-        end = strrchr (start, '.');
-        e->name = g_strndup (start, end ? end - start : strlen (start));
-        e->icon.type = LAUNCHER_ICON_TYPE_NAME;
-        e->icon.icon.name = g_strdup (e->name);
-
-        g_free (utf8);
-    }
-
-    return e;
-}
-
-static void 
-entry_dialog_data_received (GtkWidget *w, GdkDragContext *context, 
-                            gint x, gint y, GtkSelectionData *data, 
-                            guint info, guint time, LauncherDialog *ld)
-{
-    LauncherEntry *e = NULL;
-    GPtrArray *files;
-    int i;
-    
-    if (!data || data->length < 1)
-        return;
-
-    if (!(files = launcher_get_file_list_from_selection_data (data, info)))
-        return;
-    
-    if (files->len > 0)
-    {
-        char *file = g_ptr_array_index (files, 0);
-
-        if (g_str_has_suffix (file, ".xml") ||
-            g_str_has_prefix (file, "http://"))
-        {
-            start_entry_from_interface_file (ld, file, ld->entry);
-        }
-        else if (g_str_has_suffix (file, ".desktop"))
-        {
-            e = update_entry_from_desktop_file (ld->entry, file);
-        }
-        else
-        {
-            /* do stuff based on the widget the file was dropped on */
-        }
-
-        if (e)
-        {
-            GdkPixbuf *pb;
-            
-            gtk_entry_set_text (GTK_ENTRY (ld->exec_name), e->name);
-            gtk_entry_set_text (GTK_ENTRY (ld->exec_comment), e->comment);
-            if (e->icon.type == LAUNCHER_ICON_TYPE_NAME)
-                gtk_entry_set_text (GTK_ENTRY (ld->icon_file), 
-                                    e->icon.icon.name);
-            gtk_entry_set_text (GTK_ENTRY (ld->exec), e->exec);
-            gtk_toggle_button_set_active (
-                    GTK_TOGGLE_BUTTON (ld->exec_terminal), e->terminal);
-            gtk_toggle_button_set_active (
-                    GTK_TOGGLE_BUTTON (ld->exec_startup), e->startup);
-
-            pb = launcher_icon_load_pixbuf (ld->icon_img, &e->icon, 
-                                            DLG_ICON_SIZE);
-            gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-            g_object_unref (G_OBJECT (pb));
-        }
-    }
-
-    for (i = 0; i < files->len; ++i)
-        g_free (g_ptr_array_index (files, i));
-
-    g_ptr_array_free (files, TRUE);
-    
-    gtk_drag_finish (context, TRUE, FALSE, time);
-}
-        
-static void 
-launcher_dialog_data_received (GtkWidget *w, GdkDragContext *context, 
-                               gint x, gint y, GtkSelectionData *data, 
-                               guint info, guint time, LauncherDialog *ld)
-{
-    GPtrArray *files;
-    int i;
-    
-    if (!data || data->length < 1)
-        return;
-    
-    if (!(files = launcher_get_file_list_from_selection_data (data, info)))
-        return;
-    
-    for (i = 0; i < files->len; ++i)
-    {
-        char *file = g_ptr_array_index (files, i);
-
-        if (g_str_has_suffix (file, ".xml") ||
-            g_str_has_prefix (file, "http://"))
-        {
-            start_entry_from_interface_file (ld, file, NULL);
-        }
-        else
-        {
-            LauncherEntry *e = create_entry_from_file (file);
-
-            if (e)
-                launcher_dialog_add_entry_after (ld, NULL, e);
-        }
-
-        g_free (file);
-    }
-
-    g_ptr_array_free (files, TRUE);
-    
-    gtk_drag_finish (context, TRUE, FALSE, time);
-}
-        
-static void 
-icon_entry_data_received (GtkWidget *w, GdkDragContext *context, 
-                          gint x, gint y, GtkSelectionData *data, 
-                          guint info, guint time, LauncherDialog *ld)
-{
-    GPtrArray *files;
-    int i;
-    
-    if (!data || data->length < 1)
-        return;
-    
-    if (!(files = launcher_get_file_list_from_selection_data (data, info)))
-        return;
-
-    for (i = 0; i < files->len; ++i)
-    {
-        char *file = g_ptr_array_index (files, i);
-
-        if (file && g_file_test (file, G_FILE_TEST_IS_REGULAR))
-        {
-            GdkPixbuf *pb = gdk_pixbuf_new_from_file (file, NULL);
-            
-            if (pb)
-            {
-                g_object_unref (G_OBJECT (pb));
-
-                gtk_widget_hide (ld->icon_label);
-                gtk_widget_show (ld->icon_file_align);
-
-                gtk_entry_set_text (GTK_ENTRY (ld->icon_file), file);
-                gtk_editable_set_position (GTK_EDITABLE (ld->icon_file), -1);
-                update_entry_icon (ld);
-
-                pb = launcher_icon_load_pixbuf (ld->icon_img, &ld->entry->icon, 
-                                                DLG_ICON_SIZE);
-                gtk_image_set_from_pixbuf (GTK_IMAGE (ld->icon_img), pb);
-                g_object_unref (G_OBJECT (pb));
-
-                if (ld->entry == g_ptr_array_index (ld->launcher->entries, 0))
-                    set_panel_icon (ld);
-            }
-        }
-
-        g_free (file);
-    }
-
-    g_ptr_array_free (files, TRUE);
-    
-    gtk_drag_finish (context, TRUE, FALSE, time);
-}
-        
-/*  File open dialog
- *  ----------------
- */
-static void
-update_preview_cb (GtkFileChooser *chooser, gpointer data)
-{
-    GtkImage *preview;
-    char *filename;
-    GdkPixbuf *pb = NULL;
-    
-    preview = GTK_IMAGE(data);
-    filename = gtk_file_chooser_get_filename(chooser);
-
-    if(filename && g_file_test(filename, G_FILE_TEST_EXISTS)
-       && (pb = gdk_pixbuf_new_from_file (filename, NULL)))
-    {
-        int w, h;
-        
-        w = gdk_pixbuf_get_width (pb);
-        h = gdk_pixbuf_get_height (pb);
-
-        if (h > 120 || w > 120)
-        {
-            double wratio, hratio;
-            GdkPixbuf *tmp;
-            
-            wratio = (double)120 / w;
-            hratio = (double)120 / h;
-
-            if (hratio < wratio)
-            {
-                w = rint (hratio * w);
-                h = 120;
-            }
-            else
-            {
-                w = 120;
-                h = rint (wratio * h);
-            }
-
-            tmp = gdk_pixbuf_scale_simple (pb, w, h, GDK_INTERP_BILINEAR);
-            g_object_unref (G_OBJECT (pb));
-            pb = tmp;
-        }
-    }
-    
-    g_free(filename);
-    
-    gtk_image_set_from_pixbuf(preview, pb);
-
-    if (pb)
-        g_object_unref(G_OBJECT (pb));
-}
-
-/* Any of the arguments may be NULL */
-static char *
-select_file_with_preview (const char *title, const char *path,
-			  GtkWidget * parent, gboolean with_preview)
-{
-    const char *t;
-    GtkWidget *fs, *frame, *preview;
-    char *name = NULL;
-
-    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
-
-    t = (title) ? title : _("Select file");
-    
-    fs = gtk_file_chooser_dialog_new (t, GTK_WINDOW(parent), 
-                               GTK_FILE_CHOOSER_ACTION_OPEN, 
-                               GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, 
-                               GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, 
-                               NULL);
-
-    if (path && *path && g_file_test (path, G_FILE_TEST_EXISTS))
-    {
-        if (!g_path_is_absolute (path))
-        {
-            char *current, *full;
-
-            current = g_get_current_dir ();
-            full = g_build_filename (current, path, NULL);
-
-            gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(fs), full);
-
-            g_free (current);
-            g_free (full);
-        }
-        else
-        {
-            gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(fs), path);
-        }
-    }
-
-    if (with_preview)
-    {
-        frame = gtk_frame_new (NULL);
-        gtk_widget_set_size_request (frame, 130, 130);
-        gtk_widget_show (frame);
-        
-        preview = gtk_image_new();
-        gtk_widget_show(preview);
-        gtk_container_add (GTK_CONTAINER (frame), preview);
-        
-        gtk_file_chooser_set_preview_widget(GTK_FILE_CHOOSER(fs), frame);
-        
-        g_signal_connect (G_OBJECT(fs), "update-preview", G_CALLBACK (update_preview_cb), preview);
-        gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER(fs), FALSE);
-
-        if (path)
-            update_preview_cb (GTK_FILE_CHOOSER(fs), preview);
-    }
-    
-    if (gtk_dialog_run (GTK_DIALOG (fs)) == GTK_RESPONSE_ACCEPT)
-    {
-	name = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(fs));
-    }
-
-    gtk_widget_destroy (fs);
-
-    return name;
-}
-
-

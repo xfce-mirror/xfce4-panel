@@ -4,12 +4,12 @@
  *
  *  Copyright (c) 2003 Andre Lerche <a.lerche@gmx.net>
  *  Copyright (c) 2003 Benedikt Meurer <benedikt.meurer@unix-ag.uni-siegen.de>
- *  Copyright (c) 2006 Jani Monoses <jani@ubuntu.com> 
+ *  Copyright (c) 2006 Jani Monoses <jani@ubuntu.com>
  *  Copyright (c) 2006 Jasper Huijsmans <jasper@xfce.org>
  *  Copyright (c) 2006 Nick Schermer <nick@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
+ *  it under the terms of the GNU Library General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -59,21 +59,21 @@ typedef struct
 
     NetkScreen	*screen;
     guint	 screen_callback_id;
-    
+
     /* Settings */
     ButtonLayout layout;
-    
-    gboolean show_all_workspaces;
-    gboolean show_window_icons;
-    gboolean show_workspace_actions;
-    
+
+    guint show_all_workspaces : 1;
+    guint show_window_icons : 1;
+    guint show_workspace_actions : 1;
+
     UrgencyNotify notify;
-    
+
     /* Blink button stuff */
     guint search_timeout_id;
     guint blink_timeout_id;
-    gboolean blink;
-    gboolean block_blink;
+    guint blink : 1;
+    guint block_blink : 1;
 }
 Windowlist;
 

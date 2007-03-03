@@ -1,8 +1,7 @@
-/* vim: set expandtab ts=8 sw=4: */
-
 /*  $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2006-2007 Nick Schermer <nick@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,102 +18,85 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _XFCE_PANEL_LAUNCHER_H
-#define _XFCE_PANEL_LAUNCHER_H
+#ifndef __XFCE_PANEL_LAUNCHER_H__
+#define __XFCE_PANEL_LAUNCHER_H__
 
-#define MENU_TIMEOUT               250
-#define BORDER                     8
-#define W_ARROW                    12
-#define MENU_ICON_SIZE             24
-#define DLG_ICON_SIZE              32
-#define PANEL_ICON_SIZE            48
-#define MIN_ICON_SIZE              12 
+#include <gtk/gtk.h>
+#include <exo/exo.h>
+#include <libxfce4panel/xfce-panel-plugin.h>
 
-typedef enum    _LauncherIconType  LauncherIconType;
-typedef struct  _LauncherIcon      LauncherIcon;
-typedef struct  _LauncherEntry     LauncherEntry;
-typedef struct  _LauncherPlugin    LauncherPlugin;
+#define STARTUP_TIMEOUT   (30 * 1000)
+#define ARROW_WIDTH       16
+#define MENU_ICON_SIZE    24
+#define MENU_POPUP_DELAY  225
+#define BORDER            8
+#define TREE_ICON_SIZE    24
+#define CHOOSER_ICON_SIZE 48
 
-/* Drag-and-drop data formats (for the 'info' parameter).  */
-enum {
-    TARGET_URI_LIST,    /* text/uri-list */
-    TARGET_MOZ_URL      /* text/x-moz-url */
-};
+#define g_free_null(mem)          g_free (mem); mem = NULL
+#define g_slist_free_all(list)    g_slist_foreach (list, (GFunc) g_free, NULL); g_slist_free (list)
 
-enum _LauncherIconType
-{
-    LAUNCHER_ICON_TYPE_NONE,
-    LAUNCHER_ICON_TYPE_NAME,
-    LAUNCHER_ICON_TYPE_CATEGORY
-};
-
-struct _LauncherIcon
-{
-    LauncherIconType type;
-    union {
-        XfceIconThemeCategory category;
-        char *name;
-    } icon;
-};
+typedef struct _LauncherEntry  LauncherEntry;
+typedef struct _LauncherPlugin LauncherPlugin;
 
 struct _LauncherEntry
 {
-    char *name;
-    char *comment;
-    char *exec;
-    char *real_exec;
+    gchar    *name;
+    gchar    *comment;
+    gchar    *exec;
+    gchar    *path;
+    gchar    *icon;
 
-    LauncherIcon icon; 
-
-    guint terminal:1;
-    guint startup:1;
+    guint     terminal : 1;
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+    guint     startup : 1;
+#endif
 };
 
 struct _LauncherPlugin
 {
-    GPtrArray *entries;
+    /* globals */
+    XfcePanelPlugin *plugin;
+    GtkTooltips     *tips;
+    GList           *entries;
 
-    GtkWidget *plugin;
-    GtkTooltips *tips;
+    /* cpu saver */
+    guint            icon_update_required : 1;
 
-    /* button + menu */
-    GtkWidget *box;
-    GtkWidget *arrowbutton;
-    GtkWidget *iconbutton;
-    GtkWidget *image;
-    GtkWidget *menu;
+    /* panel widgets */
+    GtkWidget       *arrowbutton;
+    GtkWidget       *iconbutton;
+    GtkWidget       *image;
+    GtkWidget       *menu;
 
-    int screen_id;
-    int style_id;
-    int popup_timeout;
-    guint from_timeout:1;
+    /* global settings */
+    guint            move_first : 1;
+
+    /* timeouts */
+    guint            popup_timeout_id;
+    guint            theme_timeout_id;
 };
 
+/* target types for dropping in the launcher plugin */
+static const GtkTargetEntry drop_targets[] =
+{
+    { "text/uri-list", 0, 0, },
+};
 
-/* launcher */
-void launcher_update_panel_entry (LauncherPlugin *launcher);
+void                     launcher_g_list_swap                (GList              *li_a,
+                                                              GList              *li_b)           G_GNUC_INTERNAL;
+GdkPixbuf               *launcher_load_pixbuf                (GtkWidget          *widget,
+                                                              const gchar        *icon_name,
+                                                              guint               size,
+                                                              gboolean            fallback)       G_GNUC_INTERNAL G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+void                     launcher_set_move_first             (gboolean            activate)       G_GNUC_INTERNAL;
+GSList                  *launcher_file_list_from_selection   (GtkSelectionData   *selection_data) G_GNUC_INTERNAL G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+gboolean                 launcher_button_update              (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
+gboolean                 launcher_menu_prepare               (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
+void                     launcher_read                       (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
+void                     launcher_write                      (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
+void                     launcher_free_entry                 (LauncherEntry      *entry,
+                                                              LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
+LauncherEntry           *launcher_new_entry                  (void)                               G_GNUC_INTERNAL G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
-void launcher_recreate_menu (LauncherPlugin *launcher);
-
-void launcher_save (XfcePanelPlugin *plugin, LauncherPlugin *launcher);
-
-
-/* entry */
-LauncherEntry *launcher_entry_new (void);
-
-void launcher_entry_free (LauncherEntry *entry);
-
-
-/* icon */
-GdkPixbuf * launcher_icon_load_pixbuf (GtkWidget *w, 
-                                       LauncherIcon *icon, 
-                                       int size);
-
-
-/* DND */
-void launcher_set_drag_dest (GtkWidget *widget);
-
-GPtrArray *launcher_get_file_list_from_selection_data (GtkSelectionData *data,
-                                                       guint info);
-
-#endif /* _XFCE_PANEL_LAUNCHER_H */
+#endif /* !__XFCE_PANEL_LAUNCHER_H__ */

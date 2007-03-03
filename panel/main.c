@@ -5,7 +5,7 @@
  *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published 
+ *  it under the terms of the GNU General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -74,7 +74,7 @@ handle_options (int argc, char **argv, int *success)
     if (argc > 1 && argv[1][0] == '-')
     {
         /* help / version */
-        if (!strcmp (argv[1], "-h")     || 
+        if (!strcmp (argv[1], "-h")     ||
             !strcmp (argv[1], "-v")     ||
             !strcmp (argv[1], "--help") ||
             !strcmp (argv[1], "--version"))
@@ -86,7 +86,7 @@ handle_options (int argc, char **argv, int *success)
         else
         {
             int msg = -1;
-            
+
             if (!strcmp (argv[1], "-c") ||
                 !strcmp (argv[1], "--customize"))
             {
@@ -131,7 +131,7 @@ handle_options (int argc, char **argv, int *success)
             }
         }
     }
-    
+
     return handled;
 }
 
@@ -141,18 +141,18 @@ int
 main (int argc, char **argv)
 {
     int success = 0;
-    
-    xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
-    
+
+    xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+
     if (handle_options (argc, argv, &success))
         exit (success);
 
     TIMER_ELAPSED("start gtk_init()");
     gtk_init (&argc, &argv);
-    
+
     TIMER_ELAPSED("start panel_init()");
     success = panel_app_init ();
-    
+
     if (success == -1)
     {
         return 1;
@@ -165,7 +165,7 @@ main (int argc, char **argv)
 
     TIMER_ELAPSED("start panel_app_run()");
     success = panel_app_run (argc, argv);
-    
+
     if (success == 1)
     {
         /* restart */

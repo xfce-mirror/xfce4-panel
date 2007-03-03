@@ -5,7 +5,7 @@
  *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
+ *  it under the terms of the GNU Library General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -37,7 +37,7 @@ typedef struct
     GdkScreen *gdk_screen;
     GtkWidget *pager;
 
-    
+
     int ws_created_id;
     int ws_destroyed_id;
     int screen_changed_id;
@@ -48,7 +48,7 @@ typedef struct
 }
 Pager;
 
-static void pager_properties_dialog (XfcePanelPlugin *plugin, 
+static void pager_properties_dialog (XfcePanelPlugin *plugin,
                                      Pager *pager);
 
 static void pager_construct (XfcePanelPlugin *plugin);
@@ -65,25 +65,25 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (pager_construct);
 /* Interface Implementation */
 
 static void
-pager_orientation_changed (XfcePanelPlugin *plugin, 
-                           GtkOrientation orientation, 
+pager_orientation_changed (XfcePanelPlugin *plugin,
+                           GtkOrientation orientation,
                            Pager *pager)
 {
     netk_pager_set_orientation (NETK_PAGER (pager->pager), orientation);
 }
 
-static gboolean 
+static gboolean
 pager_set_size (XfcePanelPlugin *plugin, int size)
 {
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
                                      -1, size);
     }
     else
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
                                      size, -1);
     }
 
@@ -97,7 +97,7 @@ pager_free_data (XfcePanelPlugin *plugin, Pager *pager)
 
     if (dlg)
         gtk_widget_destroy (dlg);
-    
+
     g_signal_handler_disconnect (plugin, pager->screen_changed_id);
 
     if (pager->ws_created_id)
@@ -105,7 +105,7 @@ pager_free_data (XfcePanelPlugin *plugin, Pager *pager)
         g_signal_handler_disconnect (pager->screen, pager->ws_created_id);
         pager->ws_created_id = 0;
     }
-    
+
     if (pager->ws_destroyed_id)
     {
         g_signal_handler_disconnect (pager->screen, pager->ws_destroyed_id);
@@ -128,7 +128,7 @@ pager_read_rc_file (XfcePanelPlugin *plugin, Pager *pager)
     XfceRc *rc;
     int rows = 1;
     gboolean scrolling = TRUE;
-    
+
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
         rc = xfce_rc_simple_open (file, TRUE);
@@ -150,7 +150,7 @@ pager_write_rc_file (XfcePanelPlugin *plugin, Pager *pager)
 {
     char *file;
     XfceRc *rc;
-    
+
     if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
         return;
 
@@ -159,9 +159,9 @@ pager_write_rc_file (XfcePanelPlugin *plugin, Pager *pager)
 
     if (!rc)
         return;
-    
+
     xfce_rc_write_int_entry (rc, "rows", pager->rows);
-    
+
     xfce_rc_write_bool_entry (rc, "scrolling", pager->scrolling);
 
     xfce_rc_close (rc);
@@ -169,10 +169,10 @@ pager_write_rc_file (XfcePanelPlugin *plugin, Pager *pager)
 
 /* create widgets and connect to signals */
 static void
-pager_n_workspaces_changed (NetkScreen * screen, NetkWorkspace * ws, 
+pager_n_workspaces_changed (NetkScreen * screen, NetkWorkspace * ws,
                             Pager * pager)
 {
-    pager_set_size (pager->plugin, 
+    pager_set_size (pager->plugin,
                     xfce_panel_plugin_get_size (pager->plugin));
 }
 
@@ -181,8 +181,6 @@ static void pager_screen_size_changed (GdkScreen *screen, Pager *pager);
 static void
 pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
 {
-    screen = gtk_widget_get_screen (plugin);
-
     if (!screen)
         return;
 
@@ -191,7 +189,7 @@ pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
         g_signal_handler_disconnect (pager->screen, pager->ws_created_id);
         pager->ws_created_id = 0;
     }
-    
+
     if (pager->ws_destroyed_id)
     {
         g_signal_handler_disconnect (pager->screen, pager->ws_destroyed_id);
@@ -208,17 +206,17 @@ pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
     pager->screen = netk_screen_get (gdk_screen_get_number (screen));
 
     netk_pager_set_screen (NETK_PAGER (pager->pager), pager->screen);
-    
+
     pager->ws_created_id =
 	g_signal_connect (pager->screen, "workspace-created",
 			  G_CALLBACK (pager_n_workspaces_changed), pager);
-    
+
     pager->ws_destroyed_id =
 	g_signal_connect (pager->screen, "workspace-destroyed",
 			  G_CALLBACK (pager_n_workspaces_changed), pager);
 
-    pager->screen_size_changed_id = 
-        g_signal_connect (screen, "size-changed", 
+    pager->screen_size_changed_id =
+        g_signal_connect (screen, "size-changed",
                           G_CALLBACK (pager_screen_size_changed), pager);
 }
 
@@ -229,27 +227,27 @@ pager_screen_size_changed (GdkScreen *screen, Pager *pager)
     gtk_widget_queue_resize (GTK_WIDGET (pager->plugin));
 }
 
-static void 
+static void
 pager_construct (XfcePanelPlugin *plugin)
 {
     GdkScreen *screen;
     int screen_idx;
     Pager *pager = panel_slice_new0 (Pager);
 
-    g_signal_connect (plugin, "orientation-changed", 
+    g_signal_connect (plugin, "orientation-changed",
                       G_CALLBACK (pager_orientation_changed), pager);
-    
-    g_signal_connect (plugin, "size-changed", 
+
+    g_signal_connect (plugin, "size-changed",
                       G_CALLBACK (pager_set_size), NULL);
-    
-    g_signal_connect (plugin, "free-data", 
+
+    g_signal_connect (plugin, "free-data",
                       G_CALLBACK (pager_free_data), pager);
-    
-    g_signal_connect (plugin, "save", 
+
+    g_signal_connect (plugin, "save",
                       G_CALLBACK (pager_write_rc_file), pager);
 
     xfce_panel_plugin_menu_show_configure (plugin);
-    g_signal_connect (plugin, "configure-plugin", 
+    g_signal_connect (plugin, "configure-plugin",
                       G_CALLBACK (pager_properties_dialog), pager);
 
     pager->plugin = plugin;
@@ -257,33 +255,33 @@ pager_construct (XfcePanelPlugin *plugin)
     pager->gdk_screen = screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
     screen_idx = gdk_screen_get_number (screen);
     pager->screen = netk_screen_get (screen_idx);
-    
+
     pager_read_rc_file (plugin, pager);
 
     pager->pager = netk_pager_new (pager->screen);
-    netk_pager_set_orientation (NETK_PAGER (pager->pager), 
+    netk_pager_set_orientation (NETK_PAGER (pager->pager),
                                 xfce_panel_plugin_get_orientation (plugin));
     netk_pager_set_n_rows (NETK_PAGER (pager->pager), pager->rows);
     netk_pager_set_workspace_scrolling (NETK_PAGER (pager->pager), pager->scrolling);
     gtk_widget_show (pager->pager);
     gtk_container_add (GTK_CONTAINER (plugin), pager->pager);
-    
+
     pager->ws_created_id =
 	g_signal_connect (pager->screen, "workspace-created",
 			  G_CALLBACK (pager_n_workspaces_changed), pager);
-    
+
     pager->ws_destroyed_id =
 	g_signal_connect (pager->screen, "workspace-destroyed",
 			  G_CALLBACK (pager_n_workspaces_changed), pager);
-    
+
     xfce_panel_plugin_add_action_widget (plugin, pager->pager);
-    
-    pager->screen_changed_id = 
-        g_signal_connect (plugin, "screen-changed", 
+
+    pager->screen_changed_id =
+        g_signal_connect (plugin, "screen-changed",
                           G_CALLBACK (pager_screen_changed), pager);
 
-    pager->screen_size_changed_id = 
-        g_signal_connect (screen, "size-changed", 
+    pager->screen_size_changed_id =
+        g_signal_connect (screen, "size-changed",
                           G_CALLBACK (pager_screen_size_changed), pager);
 }
 
@@ -308,11 +306,11 @@ static void
 workspace_scrolling_toggled (GtkWidget *button, Pager *pager)
 {
     gboolean scrolling = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
-    
+
     if (pager->scrolling != scrolling)
     {
 	pager->scrolling = scrolling;
-	
+
 	netk_pager_set_workspace_scrolling (NETK_PAGER (pager->pager), scrolling);
     }
 }
@@ -334,25 +332,25 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
     int max;
 
     xfce_panel_plugin_block_menu (plugin);
-    
+
     dlg = xfce_titled_dialog_new_with_buttons (_("Pager"), NULL,
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
 
+    gtk_window_set_screen (GTK_WINDOW (dlg),
+                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
+
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
-    
-    gtk_window_set_screen (GTK_WINDOW (dlg), 
-                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
 
     g_signal_connect (dlg, "response", G_CALLBACK (pager_dialog_response),
                       pager);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-    
+
     vbox = gtk_vbox_new (FALSE, 8);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_widget_show (vbox);
@@ -363,7 +361,7 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    if (xfce_panel_plugin_get_orientation (plugin) == 
+    if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
 	label = gtk_label_new (_("Number of rows:"));
@@ -371,7 +369,7 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
     else
     {
 	label = gtk_label_new (_("Number of columns:"));
-    }    
+    }
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
@@ -395,15 +393,15 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
         gtk_widget_show (label);
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     }
-    
+
     scrolling = gtk_check_button_new_with_mnemonic (_("Switch workspaces using the mouse wheel"));
     gtk_widget_show (scrolling);
     gtk_box_pack_start (GTK_BOX (vbox), scrolling, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scrolling), pager->scrolling);
-    
+
     g_signal_connect (scrolling, "toggled",
         G_CALLBACK (workspace_scrolling_toggled), pager);
-  
+
     gtk_widget_show (dlg);
 }
 

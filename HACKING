@@ -1,58 +1,85 @@
-This file describes the coding style I prefer for the panel. If you want to
-help out with panel development, please try to conform to these 'rules'.
--- Jasper
+Bug tracking system
+===================
 
-* 2006-12-26
+To report bugs or file feature requests for xfce4-panel, please
+use the Xfce bugzilla at http://bugzilla.xfce.org/. The product
+is Xfce, component xfce4-panel.
+Before reporting the bug, please search the bug tracker, to make
+sure it wasn't reported already before.
 
-Nick prefers to align variable declarations, so here is an updated set of rules:
 
-- Coding style:
-  o Indentation is 4 spaces. Expand tabs, i.e. only use spaces for indentation.
-  o Braces are on a new line. For one-line if statements braces may be omitted.
-  o Return type of function definitions on a separate line.
-  o Function arguments on separate lines with the same alignment rules as 
-    variable declarations.
-  o Variable declarations are aligned on the variable name. Short variable 
-    declarations may be combined. Example:
+Patches
+=======
 
-    static gboolean
-    example_function (GtkWidget *widget,
-                      Panel     *panel,
-                      int        value)
-    {
-        XfceHandleType  type;
-        const char     *string;
-        int             important_value;
-        int             i, n, x, y;
-        /* ... */
-    }
+Please submit patches to the Xfce bug tracking system or use the
+xfce4-dev mailinglists.
 
-  o In header files and for static prototypes, you may align functions names as
-    well as arguments. No need to limit the line length. Example:
+Please send a patch againts a recent version of xfce4-panel. Patches
+against the Subversion trunk branch are most preferable. You can always
+access the trunk branch from
 
-    static gboolean     xfce_panel_long_name_for_example_function        (GtkWidget  *widget,
-                                                                          Panel      *panel,
-                                                                          int         value);
+  http://svn.xfce.org/svn/xfce/xfce4-panel/trunk
 
-    static void         example_function_2                               (Panel      *panel,
-                                                                          const char *value);
+or using an installed Subversion client
 
-- ChangeLog: I use the svn2cl package to create the changelog from the SVN log
-  messages. 
-  o Website: http://ch.tudelft.nl/~arthur/svn2cl/ . 
-  o Current version: 0.8. 
-  o Command line: svn2cl.sh --linelen=74 --break-before-msg .
-  Note: I don't care about linelen, but with this parameter the changes with
-        previous ChangeLog were smallest.
+  svn co http://svn.xfce.org/svn/xfce/xfce4-panel/trunk xfce4-panel
 
-- Patches: use 'svn diff' to create patches if possible, or 'diff -u'.
 
+Coding Style
+============
+
+ - Always expand tabs, so the code is not dependent from a gives tab
+   setting.
+ - Braces are on a new line. For one-line if statements braces may be omitted.
+ - Return type of function definitions on a separate line.
+ - Function arguments on separate lines with the same alignment rules as 
+   variable declarations.
+ - Use 3 empty lines between functions.
+ - Variable declarations are aligned on the variable name. Short variable 
+   declarations may be combined. Example:
+
+   static gboolean
+   example_function (GtkWidget *widget,
+                     Panel     *panel,
+                     gint       value)
+   {
+       XfceHandleType  type;
+       const gchar    *string;
+       gint            important_value;
+       gint            i, n, x, y;
+       /* ... */
+   }
+
+ - In header files and for static prototypes, you may align functions names as
+   well as arguments. No need to limit the line length. Example:
+
+    static gboolean    xfce_panel_long_name_for_example_function    (GtkWidget   *widget,
+                                                                     Panel       *panel,
+                                                                     gint         value);
+    static void        example_function_2                           (Panel       *panel,
+                                                                     const gchar *value);
+ - Write ChangeLog entries.
+
+
+ChangeLogs
+==========
+
+I use the svn2cl package to create the changelog from the SVN log messages.
+
+  - Website: http://ch.tudelft.nl/~arthur/svn2cl/ . 
+  - Current version: 0.8. 
+  - Command line: svn2cl.sh --linelen=74 --break-before-msg.
+
+Note: I don't care about linelen, but with this parameter the changes with
+      previous ChangeLog were smallest.
+
+
+Misc
+====
 - If you have SVN access it is ok to commit trivial changes directly, but 
   please send a patch to the mailing list for discussion for any non-trivial
   or non-obvious changes.
-
 - As an exception to the rule above, if you are managing an Xfce release, feel 
   free to do anything you need to achieve that goal.
-
 - Managing the po/ directory, including the ChangeLog found there is left 
   completely in the hands of the Xfce Translation Team.

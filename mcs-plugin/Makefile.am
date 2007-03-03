@@ -19,7 +19,7 @@ plugin_LTLIBRARIES =							\
 	libxfce4settings.la
 
 libxfce4settings_la_SOURCES =						\
-	mcs_plugin.c
+	plugin.c
 
 libxfce4settings_la_CFLAGS =						\
 	$(LIBXFCEGUI4_CFLAGS)						\

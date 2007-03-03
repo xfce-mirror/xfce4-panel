@@ -1,11 +1,8 @@
-/* vim: set expandtab ts=8 sw=4: */
-
 /*  $Id$
  *
- *  OBox Copyright © 2002 Red Hat Inc. based on GtkHBox 
- *  Copyright © 2006 Jani Monoses (jani@ubuntu.com) 
- *  Copyright © 2006 Jasper Huijsmans <jasper@xfce.org>
- *
+ *  OBox Copyright (c) 2002      Red Hat Inc. based on GtkHBox
+ *  Copyright      (c) 2006      Jani Monoses <jani@ubuntu.com>
+ *  Copyright      (c) 2006-2007 Jasper Huijsmans <jasper@xfce.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -31,66 +28,73 @@
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkvbox.h>
 
+#include "xfce-panel-macros.h"
 #include "xfce-hvbox.h"
 
-/* Forward declarations */
 
-static void xfce_hvbox_class_init    (XfceHVBoxClass * class);
 
-static void xfce_hvbox_init          (XfceHVBox * hvbox);
+/* prototypes */
+static void  xfce_hvbox_class_init     (XfceHVBoxClass *klass);
+static void  xfce_hvbox_init           (XfceHVBox      *hvbox);
+static void  xfce_hvbox_size_request   (GtkWidget      *widget,
+                                        GtkRequisition *requisition);
+static void  xfce_hvbox_size_allocate  (GtkWidget      *widget,
+                                        GtkAllocation  *allocation);
 
-static void xfce_hvbox_size_request  (GtkWidget * widget,
-                                      GtkRequisition * requisition);
-
-static void xfce_hvbox_size_allocate (GtkWidget * widget,
-                                      GtkAllocation * allocation);
 
 
 GtkType
 xfce_hvbox_get_type (void)
 {
-    static GtkType hvbox_type = 0;
+  static GtkType hvbox_type = G_TYPE_INVALID;
 
-    if (!hvbox_type)
+  if (G_UNLIKELY (hvbox_type == G_TYPE_INVALID))
     {
         static const GTypeInfo hvbox_info = {
             sizeof (XfceHVBoxClass),
-            NULL,               /* base_init */
-            NULL,               /* base_finalize */
+            NULL,
+            NULL,
             (GClassInitFunc) xfce_hvbox_class_init,
-            NULL,               /* class_finalize */
-            NULL,               /* class_data */
+            NULL,
+            NULL,
             sizeof (XfceHVBox),
-            0,                  /* n_preallocs */
+            0,
             (GInstanceInitFunc) xfce_hvbox_init,
-            NULL                /* value_table */
+            NULL
         };
 
-        hvbox_type = 
-            g_type_register_static (GTK_TYPE_BOX, "XfceHVBox", &hvbox_info, 0);
+        hvbox_type =
+            g_type_register_static (GTK_TYPE_BOX, I_("XfceHVBox"), &hvbox_info, 0);
     }
 
     return hvbox_type;
 }
 
+
+
 static void
-xfce_hvbox_class_init (XfceHVBoxClass * class)
+xfce_hvbox_class_init (XfceHVBoxClass *klass)
 {
     GtkWidgetClass *widget_class;
 
-    widget_class = (GtkWidgetClass *) class;
+    widget_class = (GtkWidgetClass *) klass;
 
     widget_class->size_request  = xfce_hvbox_size_request;
     widget_class->size_allocate = xfce_hvbox_size_allocate;
 }
 
+
+
 static void
-xfce_hvbox_init (XfceHVBox * hvbox)
+xfce_hvbox_init (XfceHVBox *hvbox)
 {
+    /* empty */
 }
 
+
+
 static GtkWidgetClass *
-get_class (XfceHVBox * hvbox)
+get_class (XfceHVBox *hvbox)
 {
     GtkWidgetClass *klass;
 
@@ -111,11 +115,14 @@ get_class (XfceHVBox * hvbox)
     return klass;
 }
 
+
+
 static void
-xfce_hvbox_size_request (GtkWidget * widget, GtkRequisition * requisition)
+xfce_hvbox_size_request (GtkWidget      *widget,
+                         GtkRequisition *requisition)
 {
     GtkWidgetClass *klass;
-    XfceHVBox *hvbox;
+    XfceHVBox      *hvbox;
 
     hvbox = XFCE_HVBOX (widget);
 
@@ -124,11 +131,14 @@ xfce_hvbox_size_request (GtkWidget * widget, GtkRequisition * requisition)
     klass->size_request (widget, requisition);
 }
 
+
+
 static void
-xfce_hvbox_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
+xfce_hvbox_size_allocate (GtkWidget     *widget,
+                          GtkAllocation *allocation)
 {
     GtkWidgetClass *klass;
-    XfceHVBox *hvbox;
+    XfceHVBox      *hvbox;
 
     hvbox = XFCE_HVBOX (widget);
 
@@ -137,11 +147,11 @@ xfce_hvbox_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
     klass->size_allocate (widget, allocation);
 }
 
-/* public interface */
+
 
 /**
  * xfce_hvbox_new:
- * @orientation : Orientation of the #XfceHVBox
+ * @orienation  : Orientation of the #XfceHVBox
  * @homogeneous : whether all children should be allocated the same size
  * @spacing     : spacing between #XfceHVBox children
  *
@@ -150,7 +160,9 @@ xfce_hvbox_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
  * Return value: the newly allocated #XfceHVBox container widget.
  **/
 GtkWidget *
-xfce_hvbox_new (GtkOrientation orientation, gboolean homogeneous, int spacing)
+xfce_hvbox_new (GtkOrientation orientation,
+                gboolean       homogeneous,
+                gint           spacing)
 {
     GtkWidget *box = GTK_WIDGET (g_object_new (xfce_hvbox_get_type (), NULL));
 
@@ -161,12 +173,22 @@ xfce_hvbox_new (GtkOrientation orientation, gboolean homogeneous, int spacing)
     return box;
 }
 
+
+
+/**
+ * xfce_hvbox_set_orientation:
+ * @hvbox       : #XfceHVBox
+ * @orientation : the new orientation of the #XfceHVBox
+ *
+ * Set the new orientation of the #XfceHVBox container widget.
+ **/
 void
-xfce_hvbox_set_orientation (XfceHVBox * hvbox, GtkOrientation orientation)
+xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
+                            GtkOrientation  orientation)
 {
     g_return_if_fail (XFCE_IS_HVBOX (hvbox));
 
-    if (hvbox->orientation == orientation)
+    if (G_UNLIKELY (hvbox->orientation == orientation))
         return;
 
     hvbox->orientation = orientation;

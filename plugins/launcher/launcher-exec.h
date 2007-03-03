@@ -1,6 +1,5 @@
 /*  $Id$
  *
- *  Copyright © 2005-2007 Jasper Huijsmans <jasper@xfce.org>
  *  Copyright (c) 2006-2007 Nick Schermer <nick@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -18,9 +17,13 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __XFCE_PANEL_LAUNCHER_DIALOG_H__
-#define __XFCE_PANEL_LAUNCHER_DIALOG_H__
+#ifndef __XFCE_PANEL_EXEC_H__
+#define __XFCE_PANEL_EXEC_H__
 
-void                    launcher_dialog_show                      (LauncherPlugin  *launcher) G_GNUC_INTERNAL;
+void                    launcher_execute                     (GdkScreen             *screen,
+                                                              LauncherEntry         *entry,
+                                                              GSList                *file_list) G_GNUC_INTERNAL;
+void                    launcher_execute_from_clipboard      (GdkScreen             *screen,
+                                                              LauncherEntry         *entry)     G_GNUC_INTERNAL;
 
-#endif /* !__XFCE_PANEL_LAUNCHER_DIALOG_H__ */
+#endif /* !__XFCE_PANEL_EXEC_H__ */

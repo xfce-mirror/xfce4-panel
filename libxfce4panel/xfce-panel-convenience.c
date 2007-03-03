@@ -1,22 +1,21 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2006 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2006-2007 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -36,10 +35,11 @@
  *
  * Returns: newly created #GtkButton.
  **/
-GtkWidget *xfce_create_panel_button (void)
+GtkWidget *
+xfce_create_panel_button (void)
 {
     GtkWidget *button = gtk_button_new ();
-    
+
     GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
     gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
@@ -49,18 +49,21 @@ GtkWidget *xfce_create_panel_button (void)
     return button;
 }
 
+
+
 /**
  * xfce_create_panel_button:
  *
- * Create regular #GtkToggleButton with a few properties set to be useful in 
+ * Create regular #GtkToggleButton with a few properties set to be useful in
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.
  *
  * Returns: newly created #GtkToggleButton.
  **/
-GtkWidget *xfce_create_panel_toggle_button (void)
+GtkWidget *
+xfce_create_panel_toggle_button (void)
 {
     GtkWidget *button = gtk_toggle_button_new ();
-    
+
     GTK_WIDGET_UNSET_FLAGS (button, GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
     gtk_button_set_focus_on_click (GTK_BUTTON (button), FALSE);
@@ -69,6 +72,8 @@ GtkWidget *xfce_create_panel_toggle_button (void)
 
     return button;
 }
+
+
 
 /**
  * xfce_allow_panel_customization:
@@ -79,16 +84,15 @@ GtkWidget *xfce_create_panel_toggle_button (void)
  * Returns: %TRUE if the user is allowed to customize the panel, %FALSE
  *          otherwise.
  **/
-gboolean 
+gboolean
 xfce_allow_panel_customization (void )
 {
-    static gboolean allow_customization = FALSE;
-    static gboolean checked = FALSE;
+    static gboolean  allow_customization = FALSE;
+    static gboolean  checked = FALSE;
+    XfceKiosk       *kiosk;
 
     if (G_UNLIKELY (!checked))
     {
-        XfceKiosk *kiosk = NULL;
-
         kiosk = xfce_kiosk_new ("xfce4-panel");
         allow_customization = xfce_kiosk_query (kiosk, "CustomizePanel");
         xfce_kiosk_free (kiosk);
@@ -97,4 +101,3 @@ xfce_allow_panel_customization (void )
 
     return allow_customization;
 }
-

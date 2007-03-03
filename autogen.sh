@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# $Id: autogen.sh 4312 2005-01-27 10:10:04Z jasper $
+# $Id: autogen.sh 25025 2007-02-24 09:54:07Z jasper $
 #
 # Copyright (c) 2002-2005
 #         The Xfce development team. All rights reserved.
@@ -32,13 +32,13 @@ linguas=`sed -e '/^#/d' po/LINGUAS`
 revision=`LC_ALL=C svn info $0 | awk '/^Revision: / {printf "%05d\n", $2}'`
 sed -e "s/@LINGUAS@/${linguas}/g" \
     -e "s/@REVISION@/${revision}/g" \
-    < "configure.ac.in" > "configure.ac"
+    < "configure.in.in" > "configure.in"
 
 xdt-autogen $@
 
 # xdt-autogen clean does not remove all generated files
 (test x"clean" = x"$1") && {
-  rm -f configure.ac
+  rm -f configure.in
   rm -f INSTALL
 } || true
 # vi:set ts=2 sw=2 et ai:

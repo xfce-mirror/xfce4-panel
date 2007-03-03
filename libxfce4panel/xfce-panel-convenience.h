@@ -1,41 +1,34 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2006 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2006-2007 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
-#ifndef _XFCE_PANEL_CONVENIENCE_H
-#define _XFCE_PANEL_CONVENIENCE_H
+#ifndef __XFCE_PANEL_CONVENIENCE_H__
+#define __XFCE_PANEL_CONVENIENCE_H__
 
 #include <gtk/gtkwidget.h>
 
 G_BEGIN_DECLS
 
-/* widgets */
-
-GtkWidget *xfce_create_panel_button (void);
-
-GtkWidget *xfce_create_panel_toggle_button (void);
-
-/* configuration */
-
-gboolean xfce_allow_panel_customization (void );
+GtkWidget  *xfce_create_panel_button         (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+GtkWidget  *xfce_create_panel_toggle_button  (void) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+gboolean    xfce_allow_panel_customization   (void);
 
 G_END_DECLS
 
-#endif /* _XFCE_PANEL_CONVENIENCE_H */
+#endif /* !__XFCE_PANEL_CONVENIENCE_H__ */

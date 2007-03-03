@@ -5,7 +5,7 @@
  *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
+ *  it under the terms of the GNU Library General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -50,7 +50,7 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (separator_construct);
 /* Interface Implementation */
 
 static gboolean
-separator_expose (GtkWidget *widget, GdkEventExpose *event, 
+separator_expose (GtkWidget *widget, GdkEventExpose *event,
                   XfcePanelPlugin *plugin)
 {
     if (GTK_WIDGET_DRAWABLE (widget))
@@ -64,7 +64,7 @@ separator_expose (GtkWidget *widget, GdkEventExpose *event,
             start = allocation->y + SEP_START * allocation->height;
             end = allocation->y + SEP_END * allocation->height;
             position = allocation->x + allocation->width / 2;
-        
+
             gtk_paint_vline (widget->style, widget->window,
                              GTK_STATE_NORMAL,
                              &(event->area), widget, "separator",
@@ -75,8 +75,8 @@ separator_expose (GtkWidget *widget, GdkEventExpose *event,
             start = allocation->x + SEP_START * allocation->width;
             end = allocation->x + SEP_END * allocation->width;
             position = allocation->y + allocation->height / 2;
-        
-            gtk_paint_hline (widget->style, widget->window, 
+
+            gtk_paint_hline (widget->style, widget->window,
                              GTK_STATE_NORMAL,
                              &(event->area), widget, "separator",
                              start, end, position);
@@ -92,35 +92,35 @@ static void
 separator_add_widget (XfcePanelPlugin *plugin)
 {
     GtkWidget *widget;
-    
+
     widget = gtk_drawing_area_new ();
     gtk_widget_show (widget);
     gtk_container_add (GTK_CONTAINER (plugin), widget);
-    
-    g_signal_connect (widget, "expose-event", 
+
+    g_signal_connect (widget, "expose-event",
                       G_CALLBACK (separator_expose), plugin);
 }
 
 static void
-separator_orientation_changed (XfcePanelPlugin *plugin, 
+separator_orientation_changed (XfcePanelPlugin *plugin,
                                GtkOrientation orientation)
 {
     if (GTK_BIN (plugin)->child)
         gtk_widget_queue_draw (GTK_BIN (plugin)->child);
 }
 
-static gboolean 
+static gboolean
 separator_set_size (XfcePanelPlugin *plugin, int size)
 {
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
                                      SEPARATOR_WIDTH, size);
     }
     else
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (plugin),
                                      size, SEPARATOR_WIDTH);
     }
 
@@ -133,10 +133,10 @@ separator_read_rc_file (XfcePanelPlugin *plugin)
     char *file;
     XfceRc *rc;
     int line, expand;
-    
+
     line = 1;
     expand = 0;
-    
+
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
         rc = xfce_rc_simple_open (file, TRUE);
@@ -145,16 +145,16 @@ separator_read_rc_file (XfcePanelPlugin *plugin)
         if (rc != NULL)
         {
             line = xfce_rc_read_int_entry (rc, "draw-separator", 1);
-            
+
             expand = xfce_rc_read_int_entry (rc, "expand", 0);
-            
+
             xfce_rc_close (rc);
         }
     }
 
     if (line)
         separator_add_widget (plugin);
-    
+
     if (expand)
         xfce_panel_plugin_set_expand (plugin, TRUE);
 }
@@ -164,7 +164,7 @@ separator_write_rc_file (XfcePanelPlugin *plugin)
 {
     char *file;
     XfceRc *rc;
-    
+
     if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
         return;
 
@@ -173,13 +173,13 @@ separator_write_rc_file (XfcePanelPlugin *plugin)
 
     if (!rc)
         return;
-    
-    xfce_rc_write_int_entry (rc, "draw-separator", 
+
+    xfce_rc_write_int_entry (rc, "draw-separator",
                              GTK_BIN (plugin)->child ? 1 : 0);
 
-    xfce_rc_write_int_entry (rc, "expand", 
-                             xfce_panel_plugin_get_expand (plugin) ? 1 : 0);    
-    
+    xfce_rc_write_int_entry (rc, "expand",
+                             xfce_panel_plugin_get_expand (plugin) ? 1 : 0);
+
     xfce_rc_close (rc);
 }
 
@@ -193,23 +193,23 @@ separator_free_data (XfcePanelPlugin *plugin)
 }
 
 /* create widgets and connect to signals */
-static void 
+static void
 separator_construct (XfcePanelPlugin *plugin)
 {
-    g_signal_connect (plugin, "orientation-changed", 
+    g_signal_connect (plugin, "orientation-changed",
                       G_CALLBACK (separator_orientation_changed), NULL);
-    
-    g_signal_connect (plugin, "size-changed", 
+
+    g_signal_connect (plugin, "size-changed",
                       G_CALLBACK (separator_set_size), NULL);
-    
-    g_signal_connect (plugin, "save", 
+
+    g_signal_connect (plugin, "save",
                       G_CALLBACK (separator_write_rc_file), NULL);
-    
-    g_signal_connect (plugin, "free-data", 
+
+    g_signal_connect (plugin, "free-data",
                       G_CALLBACK (separator_free_data), NULL);
-    
+
     xfce_panel_plugin_menu_show_configure (plugin);
-    g_signal_connect (plugin, "configure-plugin", 
+    g_signal_connect (plugin, "configure-plugin",
                       G_CALLBACK (separator_properties_dialog), NULL);
 
     separator_read_rc_file (plugin);
@@ -235,7 +235,7 @@ expand_toggled (GtkToggleButton *tb, XfcePanelPlugin *plugin)
 }
 
 static void
-separator_dialog_response (GtkWidget *dlg, int reponse, 
+separator_dialog_response (GtkWidget *dlg, int reponse,
                           XfcePanelPlugin *plugin)
 {
     g_object_set_data (G_OBJECT (plugin), "dialog", NULL);
@@ -251,25 +251,25 @@ separator_properties_dialog (XfcePanelPlugin *plugin)
     GtkWidget *dlg, *vbox, *tb;
 
     xfce_panel_plugin_block_menu (plugin);
-    
+
     dlg = xfce_titled_dialog_new_with_buttons (_("Separator or Spacing"), NULL,
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
 
-    gtk_window_set_screen (GTK_WINDOW (dlg), 
+    gtk_window_set_screen (GTK_WINDOW (dlg),
                            gtk_widget_get_screen (GTK_WIDGET (plugin)));
 
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
-    
+
     g_signal_connect (dlg, "response", G_CALLBACK (separator_dialog_response),
                       plugin);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-    
+
     vbox = gtk_vbox_new (FALSE, 8);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_widget_show (vbox);
@@ -284,7 +284,7 @@ separator_properties_dialog (XfcePanelPlugin *plugin)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tb), TRUE);
 
     g_signal_connect (tb, "toggled", G_CALLBACK (separator_toggled), plugin);
-    
+
     tb = gtk_check_button_new_with_mnemonic (_("_Expand"));
     gtk_widget_show (tb);
     gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
@@ -293,7 +293,7 @@ separator_properties_dialog (XfcePanelPlugin *plugin)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tb), TRUE);
 
     g_signal_connect (tb, "toggled", G_CALLBACK (expand_toggled), plugin);
-    
+
     gtk_widget_show (dlg);
 }
 

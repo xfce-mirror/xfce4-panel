@@ -1,11 +1,9 @@
-/* vim: set expandtab ts=8 sw=4: */
-
 /*  $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2005-2007 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
+ *  it under the terms of the GNU Library General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -23,188 +21,175 @@
 #include <config.h>
 #endif
 
-#include <gtk/gtk.h>
-
 #include <libxfce4util/libxfce4util.h>
-#include <libxfcegui4/libxfcegui4.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-hvbox.h>
 
-typedef struct
-{
-    XfcePanelPlugin *plugin;
+#include "tasklist.h"
+#include "tasklist-dialogs.h"
 
-    GtkWidget *box;
-    GtkWidget *handle;
-    GtkWidget *list;
 
-    int width;
-    int screen_changed_id;
-    
-    NetkTasklistGroupingType grouping;
-    guint all_workspaces:1;
-    guint show_label:1;
-    guint expand:1;
-    guint flat_buttons:1;
-}
-Tasklist;
+/* prototypes */
+static void        tasklist_orientation_changed     (Tasklist        *tasklist,
+                                                     GtkOrientation   orientation);
+static void        tasklist_free_data               (Tasklist        *tasklist);
+static void        tasklist_read_rc_file            (Tasklist        *tasklist);
+static gboolean    tasklist_handle_exposed          (GtkWidget       *widget,
+                                                     GdkEventExpose  *ev,
+                                                     Tasklist        *tasklist);
+static void        tasklist_screen_changed          (Tasklist        *tasklist,
+                                                     GdkScreen       *screen);
+static void        tasklist_construct               (XfcePanelPlugin *plugin);
 
-static void tasklist_properties_dialog (XfcePanelPlugin *plugin, 
-                                        Tasklist *tasklist);
 
-static void tasklist_construct (XfcePanelPlugin *plugin);
 
-static gboolean using_xinerama (XfcePanelPlugin *plugin);
-
-/* -------------------------------------------------------------------- *
- *                     Panel Plugin Interface                           *
- * -------------------------------------------------------------------- */
-
-/* Register with the panel */
-
+/* register with the panel */
 XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (tasklist_construct);
 
 
-/* Interface Implementation */
 
 static void
-tasklist_orientation_changed (XfcePanelPlugin *plugin, 
-                              GtkOrientation orientation, 
-                              Tasklist *tasklist)
+tasklist_orientation_changed (Tasklist       *tasklist,
+                              GtkOrientation  orientation)
 {
+
     xfce_hvbox_set_orientation (XFCE_HVBOX (tasklist->box), orientation);
 
     gtk_widget_queue_draw (tasklist->handle);
 }
 
-static gboolean 
-tasklist_set_size (XfcePanelPlugin *plugin, int size, Tasklist *tasklist)
+
+
+gboolean
+tasklist_set_size (Tasklist *tasklist,
+                   gint      size)
 {
-    if (xfce_panel_plugin_get_orientation (plugin) ==
-            GTK_ORIENTATION_HORIZONTAL)
+    GtkOrientation orientation;
+
+    orientation = xfce_panel_plugin_get_orientation (tasklist->plugin);
+
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (tasklist->plugin),
                                      tasklist->width, size);
     }
     else
     {
-        gtk_widget_set_size_request (GTK_WIDGET (plugin), 
+        gtk_widget_set_size_request (GTK_WIDGET (tasklist->plugin),
                                      size, tasklist->width);
     }
 
     return TRUE;
 }
 
-static void
-tasklist_free_data (XfcePanelPlugin *plugin, Tasklist *tasklist)
-{
-    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
 
-    if (dlg)
+
+static void
+tasklist_free_data (Tasklist *tasklist)
+{
+    GtkWidget *dlg = g_object_get_data (G_OBJECT (tasklist->plugin), "dialog");
+
+    if (G_UNLIKELY (dlg))
         gtk_widget_destroy (dlg);
-    
-    g_signal_handler_disconnect (plugin, tasklist->screen_changed_id);
+
+    /* disconnect the screen changed signal */
+    g_signal_handler_disconnect (G_OBJECT (tasklist->plugin),
+                                 tasklist->screen_changed_id);
+                                 
     panel_slice_free (Tasklist, tasklist);
 }
 
+
+
 static void
-tasklist_read_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
+tasklist_read_rc_file (Tasklist *tasklist)
 {
-    char *file;
+    gchar  *file;
     XfceRc *rc;
-    int grouping, all_workspaces, labels, expand, flat_buttons, width;
-    
-    grouping       = NETK_TASKLIST_AUTO_GROUP;
-    all_workspaces = 0;
-    labels         = 1;
-    expand         = 1;
-    flat_buttons   = 1;
-    width          = 300;
-    
-    if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
+
+    /* defaults */
+    tasklist->grouping       = NETK_TASKLIST_AUTO_GROUP;
+    tasklist->all_workspaces = FALSE;
+    tasklist->show_label     = TRUE;
+    tasklist->expand         = TRUE;
+    tasklist->flat_buttons   = TRUE;
+    tasklist->show_handles   = TRUE;
+    tasklist->width          = 300;
+
+    if ((file = xfce_panel_plugin_lookup_rc_file (tasklist->plugin)) != NULL)
     {
         rc = xfce_rc_simple_open (file, TRUE);
         g_free (file);
 
-        if (rc != NULL)
+        if (G_UNLIKELY (rc != NULL))
         {
-            grouping = xfce_rc_read_int_entry (rc, "grouping", grouping);
-            
-            all_workspaces = xfce_rc_read_int_entry (rc, "all_workspaces", 
-                                                     all_workspaces);
-            
-            labels = xfce_rc_read_int_entry (rc, "show_label", labels);
-            
-            if (using_xinerama (plugin))
-            {
-                expand = xfce_rc_read_int_entry (rc, "expand", expand);
-            }
-            
-            flat_buttons = xfce_rc_read_int_entry (rc, "flat_buttons", flat_buttons);
+            /* read user settings */
+            tasklist->grouping       = xfce_rc_read_int_entry  (rc, "grouping", tasklist->grouping);
+            tasklist->all_workspaces = xfce_rc_read_bool_entry (rc, "all_workspaces", tasklist->all_workspaces);
+            tasklist->show_label     = xfce_rc_read_bool_entry (rc, "show_label", tasklist->show_label);
+            tasklist->flat_buttons   = xfce_rc_read_bool_entry (rc, "flat_buttons", tasklist->flat_buttons);
+            tasklist->show_handles   = xfce_rc_read_bool_entry (rc, "show_handles", tasklist->show_handles);
+            tasklist->width          = xfce_rc_read_int_entry  (rc, "width",tasklist->width);
 
-            width = xfce_rc_read_int_entry (rc, "width", width);
-            
+            if (tasklist_using_xinerama (tasklist->plugin))
+                tasklist->expand = xfce_rc_read_int_entry (rc, "expand", tasklist->expand);
+
             xfce_rc_close (rc);
         }
     }
-
-    tasklist->grouping       = grouping;
-    tasklist->all_workspaces = (all_workspaces == 1);
-    tasklist->show_label     = (labels != 0);
-    tasklist->expand         = (expand != 0);
-    tasklist->flat_buttons   = (flat_buttons != 0);
-    tasklist->width          = MAX (100, width);
 }
 
-static void
-tasklist_write_rc_file (XfcePanelPlugin *plugin, Tasklist *tasklist)
+
+
+void
+tasklist_write_rc_file (Tasklist *tasklist)
 {
-    char *file;
-    XfceRc *rc;
-    
-    if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
+    gchar  *file;
+    XfceRc *rc = NULL;
+
+    file = xfce_panel_plugin_save_location (tasklist->plugin, TRUE);
+
+    if (G_UNLIKELY (file == NULL))
         return;
 
     rc = xfce_rc_simple_open (file, FALSE);
     g_free (file);
 
-    if (!rc)
-        return;
-    
-    xfce_rc_write_int_entry (rc, "grouping", tasklist->grouping);
+    if (G_LIKELY (rc != NULL))
+    {
+        xfce_rc_write_int_entry (rc, "grouping", tasklist->grouping);
+        xfce_rc_write_int_entry (rc, "width", tasklist->width);
 
-    xfce_rc_write_int_entry (rc, "all_workspaces", tasklist->all_workspaces);
+        xfce_rc_write_bool_entry (rc, "all_workspaces", tasklist->all_workspaces);
+        xfce_rc_write_bool_entry (rc, "show_label", tasklist->show_label);
+        xfce_rc_write_bool_entry (rc, "expand", tasklist->expand);
+        xfce_rc_write_bool_entry (rc, "flat_buttons", tasklist->flat_buttons);
+        xfce_rc_write_bool_entry (rc, "show_handles", tasklist->show_handles);
 
-    xfce_rc_write_int_entry (rc, "show_label", tasklist->show_label);
-
-    xfce_rc_write_int_entry (rc, "expand", tasklist->expand);
-
-    xfce_rc_write_int_entry (rc, "flat_buttons", tasklist->flat_buttons);
-
-    xfce_rc_write_int_entry (rc, "width", tasklist->width);
-
-    xfce_rc_close (rc);
+        xfce_rc_close (rc);
+    }
 }
 
-/* create widgets and connect to signals */
+
+
 static gboolean
-handle_expose (GtkWidget *widget, GdkEventExpose *ev, Tasklist *tasklist)
+tasklist_handle_exposed (GtkWidget      *widget,
+                         GdkEventExpose *ev,
+                         Tasklist       *tasklist)
 {
+    GtkAllocation  *allocation = &(widget->allocation);
+    gint            x, y, w, h;
+    GtkOrientation  orientation;
+
     if (GTK_WIDGET_DRAWABLE (widget))
     {
-        GtkAllocation *allocation = &(widget->allocation);
-        int x, y, w, h;
-        gboolean horizontal;
-
-        horizontal = (xfce_panel_plugin_get_orientation (tasklist->plugin) 
-                      == GTK_ORIENTATION_HORIZONTAL);
+        orientation = xfce_panel_plugin_get_orientation (tasklist->plugin);
 
         x = allocation->x;
         y = allocation->y;
         w = allocation->width;
         h = allocation->height;
-        
-        if (horizontal)
+
+        if (orientation == GTK_ORIENTATION_HORIZONTAL)
         {
             y += widget->style->ythickness;
             h -= 2 * widget->style->ythickness;
@@ -216,11 +201,10 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Tasklist *tasklist)
         }
 
         gtk_paint_handle (widget->style, widget->window,
-                          GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE, 
+                          GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
                           &(ev->area), widget, "handlebox",
                           x, y, w, h,
-                          horizontal ? GTK_ORIENTATION_VERTICAL :
-                                       GTK_ORIENTATION_HORIZONTAL);
+                          orientation);
 
         return TRUE;
     }
@@ -228,293 +212,102 @@ handle_expose (GtkWidget *widget, GdkEventExpose *ev, Tasklist *tasklist)
     return FALSE;
 }
 
+
+
+gboolean
+tasklist_using_xinerama (XfcePanelPlugin *plugin)
+{
+    return (gdk_screen_get_n_monitors (gtk_widget_get_screen (GTK_WIDGET (plugin))) > 1);
+}
+
+
+
 static void
-tasklist_screen_changed (GtkWidget *plugin, GdkScreen *screen, 
-                         Tasklist *tasklist)
+tasklist_screen_changed (Tasklist  *tasklist,
+                         GdkScreen *screen)
 {
     NetkScreen *ns;
-
-    screen = gtk_widget_get_screen (plugin);
-
+	
+    /* get the new screen */
+    screen = gtk_widget_get_screen (GTK_WIDGET (tasklist->plugin));
+	
+	/* be secure */
     if (G_UNLIKELY (screen == NULL))
         screen = gdk_screen_get_default ();
-
+        
     ns = netk_screen_get (gdk_screen_get_number (screen));
 
     netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), ns);
 }
 
-static void 
+
+
+static void
 tasklist_construct (XfcePanelPlugin *plugin)
 {
     GdkScreen *screen;
-    int screen_idx;
-    Tasklist *tasklist = panel_slice_new0 (Tasklist);
+    gint       screen_idx;
+    Tasklist  *tasklist = panel_slice_new0 (Tasklist);
 
     tasklist->plugin = plugin;
-    
-    g_signal_connect (plugin, "orientation-changed", 
-                      G_CALLBACK (tasklist_orientation_changed), tasklist);
-    
-    g_signal_connect (plugin, "size-changed", 
-                      G_CALLBACK (tasklist_set_size), tasklist);
-    
-    g_signal_connect (plugin, "free-data", 
-                      G_CALLBACK (tasklist_free_data), tasklist);
-    
-    g_signal_connect (plugin, "save", 
-                      G_CALLBACK (tasklist_write_rc_file), tasklist);
 
+    /* show the properties menu item in the right-click menu */
     xfce_panel_plugin_menu_show_configure (plugin);
-    g_signal_connect (plugin, "configure-plugin", 
-                      G_CALLBACK (tasklist_properties_dialog), tasklist);
 
-    tasklist_read_rc_file (plugin, tasklist);
+    /* connect panel signals */
+    g_signal_connect_swapped (G_OBJECT (plugin), "orientation-changed",
+                              G_CALLBACK (tasklist_orientation_changed), tasklist);
+    g_signal_connect_swapped (G_OBJECT (plugin), "size-changed",
+                              G_CALLBACK (tasklist_set_size), tasklist);
+    g_signal_connect_swapped (G_OBJECT (plugin), "free-data",
+                              G_CALLBACK (tasklist_free_data), tasklist);
+    g_signal_connect_swapped (G_OBJECT (plugin), "save",
+                              G_CALLBACK (tasklist_write_rc_file), tasklist);
+    g_signal_connect_swapped (G_OBJECT (plugin), "configure-plugin",
+                              G_CALLBACK (tasklist_properties_dialog), tasklist);
 
+    /* read user settings / defaults */
+    tasklist_read_rc_file (tasklist);
+
+    /* whether to expand the plugin */
     xfce_panel_plugin_set_expand (plugin, tasklist->expand);
-    
-    tasklist->box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), 
-                                    FALSE, 0);
-    gtk_container_set_reallocate_redraws (GTK_CONTAINER (tasklist->box), TRUE);
+
+    /* create the main box */
+    tasklist->box = xfce_hvbox_new (xfce_panel_plugin_get_orientation (plugin), FALSE, 0);
     gtk_widget_show (tasklist->box);
     gtk_container_add (GTK_CONTAINER (plugin), tasklist->box);
 
+    /* create left handle */
     tasklist->handle = gtk_alignment_new (0, 0, 0, 0);
     gtk_widget_set_size_request (tasklist->handle, 8, 8);
-    gtk_widget_show (tasklist->handle);
-    gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->handle, 
-                        FALSE, FALSE, 0);
-
+    gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->handle, FALSE, FALSE, 0);
     xfce_panel_plugin_add_action_widget (plugin, tasklist->handle);
+    g_signal_connect (tasklist->handle, "expose-event",
+                      G_CALLBACK (tasklist_handle_exposed), tasklist);
 
-    g_signal_connect (tasklist->handle, "expose-event", 
-                      G_CALLBACK (handle_expose), tasklist);
-
+    /* create netk tasklist */
     screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
     screen_idx = gdk_screen_get_number (screen);
     tasklist->list = netk_tasklist_new (netk_screen_get (screen_idx));
     gtk_widget_show (tasklist->list);
-    gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->list, 
-                        TRUE, TRUE, 0);
-            
-    netk_tasklist_set_include_all_workspaces (NETK_TASKLIST (tasklist->list), 
-                                              tasklist->all_workspaces);
+    gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->list, TRUE, TRUE, 0);
 
-    netk_tasklist_set_grouping (NETK_TASKLIST (tasklist->list),
-                                tasklist->grouping);
+    /* show the handles */
+    if (tasklist->show_handles)
+        gtk_widget_show (tasklist->handle);
 
-    netk_tasklist_set_show_label (NETK_TASKLIST (tasklist->list),
-                                  tasklist->show_label);
-
-    netk_tasklist_set_button_relief (NETK_TASKLIST (tasklist->list), 
-                                     tasklist->flat_buttons ? 
-                                        GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
-
-    tasklist->screen_changed_id = 
-        g_signal_connect (plugin, "screen-changed", 
-                          G_CALLBACK (tasklist_screen_changed), tasklist);
-}
-
-/* -------------------------------------------------------------------- *
- *                        Configuration Dialog                          *
- * -------------------------------------------------------------------- */
-
-static void
-all_workspaces_toggled (GtkToggleButton *tb, Tasklist *tasklist)
-{
-    tasklist->all_workspaces = gtk_toggle_button_get_active (tb);
-
+    /* set netk tasklist settings */
     netk_tasklist_set_include_all_workspaces (NETK_TASKLIST (tasklist->list),
                                               tasklist->all_workspaces);
+    netk_tasklist_set_grouping               (NETK_TASKLIST (tasklist->list),
+                                              tasklist->grouping);
+    netk_tasklist_set_show_label             (NETK_TASKLIST (tasklist->list),
+                                              tasklist->show_label);
+    netk_tasklist_set_button_relief          (NETK_TASKLIST (tasklist->list),
+                                              tasklist->flat_buttons ? GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
+
+    /* connect screen changed signal */
+    tasklist->screen_changed_id =
+        g_signal_connect_swapped (G_OBJECT (plugin), "screen-changed",
+                                  G_CALLBACK (tasklist_screen_changed), tasklist);
 }
-
-static void
-grouping_changed (GtkComboBox *cb, Tasklist *tasklist)
-{
-    tasklist->grouping = gtk_combo_box_get_active (cb);
-
-    netk_tasklist_set_grouping (NETK_TASKLIST (tasklist->list),
-                                tasklist->grouping);
-}
-
-static void
-show_label_toggled (GtkToggleButton *tb, Tasklist *tasklist)
-{
-    tasklist->show_label = gtk_toggle_button_get_active (tb);
-
-    netk_tasklist_set_show_label (NETK_TASKLIST (tasklist->list),
-                                  tasklist->show_label);
-}
-
-static void
-expand_toggled (GtkToggleButton *tb, Tasklist *tasklist)
-{
-    tasklist->expand = gtk_toggle_button_get_active (tb);
-
-    xfce_panel_plugin_set_expand (tasklist->plugin, tasklist->expand);
-}
-
-static void
-flat_buttons_toggled (GtkToggleButton *tb, Tasklist *tasklist)
-{
-    tasklist->flat_buttons = gtk_toggle_button_get_active (tb);
-
-    netk_tasklist_set_button_relief (NETK_TASKLIST (tasklist->list),
-                                     tasklist->flat_buttons ?
-                                        GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
-}
-
-static void
-width_changed (GtkSpinButton *sb, Tasklist *tasklist)
-{
-    tasklist->width = gtk_spin_button_get_value_as_int (sb);
-
-    tasklist_set_size (tasklist->plugin, 
-                       xfce_panel_plugin_get_size (tasklist->plugin), 
-                       tasklist);
-}
-
-static void
-tasklist_dialog_response (GtkWidget *dlg, int reponse, 
-                          Tasklist *tasklist)
-{
-    g_object_set_data (G_OBJECT (tasklist->plugin), "dialog", NULL);
-
-    gtk_widget_destroy (dlg);
-    xfce_panel_plugin_unblock_menu (tasklist->plugin);
-    tasklist_write_rc_file (tasklist->plugin, tasklist);
-}
-
-static void
-tasklist_properties_dialog (XfcePanelPlugin *plugin, Tasklist *tasklist)
-{
-    GtkWidget *dlg, *mainvbox, *vbox, *frame, *cb, 
-              *hbox, *label, *spin;
-
-    xfce_panel_plugin_block_menu (plugin);
-    
-    dlg = xfce_titled_dialog_new_with_buttons (_("Task List"), NULL,
-                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
-                GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
-                NULL);
-
-    gtk_window_set_screen (GTK_WINDOW (dlg), 
-                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
-
-    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
-
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
-    
-    g_signal_connect (dlg, "response", G_CALLBACK (tasklist_dialog_response),
-                      tasklist);
-
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-    
-    mainvbox = gtk_vbox_new (FALSE, 8);
-    gtk_container_set_border_width (GTK_CONTAINER (mainvbox), 5);
-    gtk_widget_show (mainvbox);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), mainvbox,
-                        TRUE, TRUE, 0);
-
-    /* Size */
-    vbox = gtk_vbox_new (FALSE, 8);
-    gtk_widget_show (vbox);
-
-    frame = xfce_create_framebox_with_content (_("Appearance"), vbox);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
-    
-    hbox = gtk_hbox_new (FALSE, 8);
-    gtk_widget_show (hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-    
-    label = gtk_label_new (_("Minimum Width:"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_widget_show (label);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    
-    /* an arbitrary max of 4000 should be future proof, right? */
-    spin = gtk_spin_button_new_with_range (100, 4000, 10);
-    gtk_widget_show (spin);
-    gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
-    gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), tasklist->width);
-    g_signal_connect (spin, "value-changed", G_CALLBACK (width_changed),
-                      tasklist);
-
-    if (using_xinerama (plugin))
-    {
-        cb = gtk_check_button_new_with_mnemonic (_("Use all available space"));
-        gtk_widget_show (cb);
-        gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-                                      tasklist->expand);
-        g_signal_connect (cb, "toggled", G_CALLBACK (expand_toggled),
-                          tasklist);
-    }
-
-    cb = gtk_check_button_new_with_mnemonic (_("Use flat buttons"));
-    gtk_widget_show (cb);
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-                                  tasklist->flat_buttons);
-
-    g_signal_connect (cb, "toggled", G_CALLBACK (flat_buttons_toggled),
-                      tasklist);
-
-    /* Tasks */
-    vbox = gtk_vbox_new (FALSE, 8);
-    gtk_widget_show (vbox);
-
-    frame = xfce_create_framebox_with_content (_("Task List"), vbox);
-    gtk_widget_show (frame);
-    gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
-    
-    cb = gtk_check_button_new_with_mnemonic (_("Show tasks "
-                                               "from _all workspaces"));
-    gtk_widget_show (cb);
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-                                  tasklist->all_workspaces);
-
-    g_signal_connect (cb, "toggled", G_CALLBACK (all_workspaces_toggled),
-                      tasklist);
-
-    cb = gtk_check_button_new_with_mnemonic (_("Show application _names"));
-    gtk_widget_show (cb);
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-                                  tasklist->show_label);
-    g_signal_connect (cb, "toggled", G_CALLBACK (show_label_toggled),
-                      tasklist);
-
-    cb = gtk_combo_box_new_text ();
-    gtk_widget_show (cb);
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-        
-    /* keep order in sync with NetkTasklistGroupingType */
-    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), 
-                               _("Never group tasks"));
-    
-    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), 
-                               _("Automatically group tasks"));
-    
-    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), 
-                               _("Always group tasks"));
-
-    gtk_combo_box_set_active (GTK_COMBO_BOX (cb), tasklist->grouping);
-    
-    g_signal_connect (cb, "changed", G_CALLBACK (grouping_changed),
-                      tasklist);
-  
-    gtk_widget_show (dlg);
-}
-
-static gboolean 
-using_xinerama (XfcePanelPlugin *plugin)
-{
-    return ( gdk_screen_get_n_monitors (
-                gtk_widget_get_screen (GTK_WIDGET (plugin))) > 1 );
-}
-
-

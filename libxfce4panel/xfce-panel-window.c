@@ -1,22 +1,21 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2004-2005 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2004-2007 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
  *
- *  You should have received a copy of the GNU Library General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -28,6 +27,7 @@
 
 #include <gtk/gtk.h>
 
+#include "xfce-panel-macros.h"
 #include "xfce-marshal.h"
 #include "xfce-panel-enum-types.h"
 #include "xfce-panel-window.h"
@@ -38,7 +38,7 @@
 
 #define DEFAULT_ORIENTATION   GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_HANDLE_STYLE  XFCE_HANDLE_STYLE_BOTH
-#define HANDLE_WIDTH  8
+#define HANDLE_WIDTH          8
 
 enum
 {
@@ -57,137 +57,114 @@ enum
 };
 
 
-typedef struct _XfcePanelWindowPrivate 	XfcePanelWindowPrivate;
+typedef struct _XfcePanelWindowPrivate XfcePanelWindowPrivate;
 
 struct _XfcePanelWindowPrivate
 {
-    GtkOrientation orientation;
-    XfceHandleStyle handle_style;
+    GtkOrientation            orientation;
+    XfceHandleStyle           handle_style;
 
-    GtkAllocation allocation;
+    GtkAllocation             allocation;
 
-    int x_offset;
-    int y_offset;
-    int x_root;
-    int y_root;
+    gint                      x_offset;
+    gint                      y_offset;
+    gint                      x_root;
+    gint                      y_root;
 
-    XfcePanelWindowMoveFunc move_func;
-    gpointer move_data;
+    XfcePanelWindowMoveFunc   move_func;
+    gpointer                  move_data;
 
     XfcePanelWindowResizeFunc resize_func;
-    gpointer resize_data;
+    gpointer                  resize_data;
 
-    guint shown:1;
-    guint in_move:1;
-    guint top_border:1;
-    guint bottom_border:1;
-    guint left_border:1;
-    guint right_border:1;
-    guint movable:1;
+    guint                     shown : 1;
+    guint                     in_move : 1;
+    guint                     top_border : 1;
+    guint                     bottom_border : 1;
+    guint                     left_border : 1;
+    guint                     right_border : 1;
+    guint                     movable : 1;
 };
 
 
-/* init */
-static void xfce_panel_window_class_init   (XfcePanelWindowClass * klass);
-
-static void xfce_panel_window_init         (XfcePanelWindow * window);
 
 
-/* GObject */
-static void xfce_panel_window_get_property (GObject * object,
-				            guint prop_id,
-				            GValue * value, 
-                                            GParamSpec * pspec);
+static void      xfce_panel_window_class_init      (XfcePanelWindowClass  *klass);
+static void      xfce_panel_window_init            (XfcePanelWindow       *window);
+static void      xfce_panel_window_get_property    (GObject               *object,
+                                                    guint                  prop_id,
+                                                    GValue                *value,
+                                                    GParamSpec            *pspec);
+static void      xfce_panel_window_set_property    (GObject               *object,
+                                                    guint                  prop_id,
+                                                    const GValue          *value,
+                                                    GParamSpec            *pspec);
+static void      xfce_panel_window_realize         (GtkWidget             *widget);
+static void      xfce_panel_window_unrealize       (GtkWidget             *widget);
+static void      xfce_panel_window_map             (GtkWidget             *widget);
+static void      xfce_panel_window_unmap           (GtkWidget             *widget);
+static void      xfce_panel_window_show            (GtkWidget             *widget);
+static void      xfce_panel_window_hide            (GtkWidget             *widget);
+static gint      xfce_panel_window_expose          (GtkWidget             *widget,
+                                                    GdkEventExpose        *event);
+static void      xfce_panel_window_size_request    (GtkWidget             *widget,
+                                                    GtkRequisition        *requisition);
+static void      xfce_panel_window_size_allocate   (GtkWidget             *widget,
+                                                    GtkAllocation         *allocation);
+static gboolean  xfce_panel_window_button_press    (GtkWidget             *widget,
+                                                    GdkEventButton        *event);
+static gboolean  xfce_panel_window_button_release  (GtkWidget             *widget,
+                                                    GdkEventButton        *event);
+static gboolean  xfce_panel_window_motion_notify   (GtkWidget             *widget,
+                                                    GdkEventMotion        *event);
+static void      _paint_handle                     (XfcePanelWindow       *panel_window,
+                                                    gboolean               start,
+                                                    GdkRectangle          *area);
 
-static void xfce_panel_window_set_property (GObject * object,
-				            guint prop_id,
-				            const GValue * value,
-				            GParamSpec * pspec);
-
-
-/* GtkWidget */
-static void xfce_panel_window_realize    (GtkWidget * widget);
-
-static void xfce_panel_window_unrealize  (GtkWidget * widget);
-
-static void xfce_panel_window_map        (GtkWidget * widget);
-
-static void xfce_panel_window_unmap      (GtkWidget * widget);
-
-static void xfce_panel_window_show       (GtkWidget * widget);
-
-static void xfce_panel_window_hide       (GtkWidget * widget);
-
-
-/* drawing, size and style */
-static gint xfce_panel_window_expose        (GtkWidget * widget,
-				             GdkEventExpose * event);
-
-static void xfce_panel_window_size_request  (GtkWidget * widget,
-					     GtkRequisition * requisition);
-
-static void xfce_panel_window_size_allocate (GtkWidget * widget,
-					     GtkAllocation * allocation);
-
-
-/* keyboard and mouse events */
-static gboolean xfce_panel_window_button_press   (GtkWidget * widget,
-					          GdkEventButton * event);
-
-static gboolean xfce_panel_window_button_release (GtkWidget * widget,
-					          GdkEventButton * event);
-
-static gboolean xfce_panel_window_motion_notify  (GtkWidget * widget,
-					          GdkEventMotion * event);
-
-
-/* internal functions */
-static void _paint_handle         (XfcePanelWindow * panel_window, 
-                                   gboolean start, 
-                                   GdkRectangle * area);
 
 
 /* global vars */
 static GtkWindowClass *parent_class = NULL;
+static guint           panel_window_signals[LAST_SIGNAL] = { 0 };
 
-static guint panel_window_signals[LAST_SIGNAL] = { 0 };
 
 
 /* public GType function */
 GType
 xfce_panel_window_get_type (void)
 {
-    static GtkType type = 0;
+    static GtkType type = G_TYPE_INVALID;
 
-    if (!type)
+    if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
         static const GTypeInfo type_info = {
             sizeof (XfcePanelWindowClass),
-            (GBaseInitFunc) NULL,
-            (GBaseFinalizeFunc) NULL,
+            NULL,
+            NULL,
             (GClassInitFunc) xfce_panel_window_class_init,
-            (GClassFinalizeFunc) NULL,
+            NULL,
             NULL,
             sizeof (XfcePanelWindow),
-            0,                  /* n_preallocs */
+            0,
             (GInstanceInitFunc) xfce_panel_window_init,
             NULL
         };
 
         type = g_type_register_static (GTK_TYPE_WINDOW,
-                                       "XfcePanelWindow", &type_info, 0);
+                                       I_("XfcePanelWindow"), &type_info, 0);
     }
 
     return type;
 }
 
 
+
 /* init */
 static void
-xfce_panel_window_class_init (XfcePanelWindowClass * klass)
+xfce_panel_window_class_init (XfcePanelWindowClass *klass)
 {
-    GObjectClass *gobject_class;
-    GtkWidgetClass *widget_class;
+    GObjectClass      *gobject_class;
+    GtkWidgetClass    *widget_class;
     GtkContainerClass *container_class;
 
     g_type_class_add_private (klass, sizeof (XfcePanelWindowPrivate));
@@ -225,15 +202,17 @@ xfce_panel_window_class_init (XfcePanelWindowClass * klass)
     * Emitted when the orientation of the #XfcePanelWindow changes.
     **/
     panel_window_signals[ORIENTATION_CHANGED] =
-        g_signal_new ("orientation-changed",
+        g_signal_new (I_("orientation-changed"),
                       G_OBJECT_CLASS_TYPE (klass),
                       G_SIGNAL_RUN_FIRST,
                       G_STRUCT_OFFSET (XfcePanelWindowClass,
                                        orientation_changed),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__ENUM,
-                      G_TYPE_NONE, 1, GTK_TYPE_ORIENTATION);
-    
+                      G_TYPE_NONE,
+                      1,
+                      GTK_TYPE_ORIENTATION);
+
     /**
      * XfcePanelWindow::move-start
      * @window: the #XfcePanelWindow which emitted the signal
@@ -241,11 +220,15 @@ xfce_panel_window_class_init (XfcePanelWindowClass * klass)
      * Emitted when the user starts to drag the #XfcePanelWindow.
      **/
     panel_window_signals[MOVE_START] =
-        g_signal_new ("move-start", G_OBJECT_CLASS_TYPE (widget_class),
+        g_signal_new (I_("move-start"),
+                      G_OBJECT_CLASS_TYPE (widget_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (XfcePanelWindowClass, move_start),
+                      G_STRUCT_OFFSET (XfcePanelWindowClass,
+                                       move_start),
                       NULL, NULL,
-                      g_cclosure_marshal_VOID__VOID, G_TYPE_NONE, 0);
+                      g_cclosure_marshal_VOID__VOID,
+                      G_TYPE_NONE,
+                      0);
 
     /**
      * XfcePanelWindow::move
@@ -254,15 +237,20 @@ xfce_panel_window_class_init (XfcePanelWindowClass * klass)
      * @y: y coordinate of the new position
      *
      * Emitted when the user moves the #XfcePanelWindow to a new position with
-     * coordinates (@x, @y). 
+     * coordinates (@x, @y).
      **/
     panel_window_signals[MOVE] =
-        g_signal_new ("move", G_OBJECT_CLASS_TYPE (widget_class),
+        g_signal_new (I_("move"),
+                      G_OBJECT_CLASS_TYPE (widget_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (XfcePanelWindowClass, move),
+                      G_STRUCT_OFFSET (XfcePanelWindowClass,
+                                       move),
                       NULL, NULL,
                       _xfce_marshal_VOID__INT_INT,
-                      G_TYPE_NONE, 2, G_TYPE_INT, G_TYPE_INT);
+                      G_TYPE_NONE,
+                      2,
+                      G_TYPE_INT,
+                      G_TYPE_INT);
 
     /**
      * XfcePanelWindow::move-end
@@ -274,12 +262,17 @@ xfce_panel_window_class_init (XfcePanelWindowClass * klass)
      * position has coordinates (@x, @y).
      **/
     panel_window_signals[MOVE_END] =
-        g_signal_new ("move-end", G_OBJECT_CLASS_TYPE (widget_class),
+        g_signal_new (I_("move-end"),
+                      G_OBJECT_CLASS_TYPE (widget_class),
                       G_SIGNAL_RUN_LAST,
-                      G_STRUCT_OFFSET (XfcePanelWindowClass, move_end),
+                      G_STRUCT_OFFSET (XfcePanelWindowClass,
+                                       move_end),
                       NULL, NULL,
                       _xfce_marshal_VOID__INT_INT,
-                      G_TYPE_NONE, 2, G_TYPE_INT, G_TYPE_INT);
+                      G_TYPE_NONE,
+                      2,
+                      G_TYPE_INT,
+                      G_TYPE_INT);
 
     /* properties */
 
@@ -289,13 +282,14 @@ xfce_panel_window_class_init (XfcePanelWindowClass * klass)
      * The orientation of the window. This the determines the way the handles
      * are drawn.
      **/
-    g_object_class_install_property (gobject_class, 
-            PROP_ORIENTATION, 
-            g_param_spec_enum ("orientation",
-                               "Orientation",
-                               "The orientation of the itembar",
-                               GTK_TYPE_ORIENTATION,
-                               GTK_ORIENTATION_HORIZONTAL, G_PARAM_READWRITE));
+    g_object_class_install_property (gobject_class,
+                                     PROP_ORIENTATION,
+                                     g_param_spec_enum ("orientation",
+                                                        "Orientation",
+                                                        "The orientation of the itembar",
+                                                        GTK_TYPE_ORIENTATION,
+                                                        GTK_ORIENTATION_HORIZONTAL,
+                                                        G_PARAM_READWRITE));
 
 
     /**
@@ -303,18 +297,20 @@ xfce_panel_window_class_init (XfcePanelWindowClass * klass)
      *
      * The #XfceHandleStyle to use when drawing handles.
      **/
-    g_object_class_install_property (gobject_class, 
-        PROP_HANDLE_STYLE, 
-        g_param_spec_enum ("handle-style",
-                           "Handle style",
-                           "Type of handles to draw",
-                           XFCE_TYPE_HANDLE_STYLE,
-                           DEFAULT_HANDLE_STYLE, G_PARAM_READWRITE));
-
+    g_object_class_install_property (gobject_class,
+                                     PROP_HANDLE_STYLE,
+                                     g_param_spec_enum ("handle-style",
+                                                        "Handle style",
+                                                        "Type of handles to draw",
+                                                        XFCE_TYPE_HANDLE_STYLE,
+                                                        DEFAULT_HANDLE_STYLE,
+                                                        G_PARAM_READWRITE));
 }
 
+
+
 static void
-xfce_panel_window_init (XfcePanelWindow * panel_window)
+xfce_panel_window_init (XfcePanelWindow *panel_window)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -328,7 +324,7 @@ xfce_panel_window_init (XfcePanelWindow * panel_window)
                   NULL);
 
     gtk_window_stick (GTK_WINDOW (panel_window));
-    
+
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
 
     priv->handle_style      = DEFAULT_HANDLE_STYLE;
@@ -351,23 +347,26 @@ xfce_panel_window_init (XfcePanelWindow * panel_window)
     priv->bottom_border     = TRUE;
     priv->left_border       = TRUE;
     priv->right_border      = TRUE;
-    priv->movable          = TRUE;
+    priv->movable           = TRUE;
 
     gtk_widget_set_events (GTK_WIDGET (panel_window),
                            gtk_widget_get_events (GTK_WIDGET (panel_window))
                            | GDK_BUTTON_MOTION_MASK
                            | GDK_BUTTON_PRESS_MASK
                            | GDK_BUTTON_RELEASE_MASK
-                           | GDK_EXPOSURE_MASK 
-                           | GDK_ENTER_NOTIFY_MASK 
+                           | GDK_EXPOSURE_MASK
+                           | GDK_ENTER_NOTIFY_MASK
                            | GDK_LEAVE_NOTIFY_MASK);
 }
 
+
+
 /* GObject */
 static void
-xfce_panel_window_get_property (GObject * object,
-                                guint prop_id, GValue * value,
-                                GParamSpec * pspec)
+xfce_panel_window_get_property (GObject    *object,
+                                guint       prop_id,
+                                GValue     *value,
+                                GParamSpec *pspec)
 {
     XfcePanelWindowPrivate *priv = XFCE_PANEL_WINDOW_GET_PRIVATE (object);
 
@@ -385,21 +384,23 @@ xfce_panel_window_get_property (GObject * object,
     }
 }
 
+
+
 static void
-xfce_panel_window_set_property (GObject * object, guint prop_id,
-                                const GValue * value, GParamSpec * pspec)
+xfce_panel_window_set_property (GObject      *object,
+                                guint         prop_id,
+                                const GValue *value,
+                                GParamSpec   *pspec)
 {
     XfcePanelWindow *window = XFCE_PANEL_WINDOW (object);
 
     switch (prop_id)
     {
         case PROP_ORIENTATION:
-            xfce_panel_window_set_orientation (window,
-                                               g_value_get_enum (value));
+            xfce_panel_window_set_orientation (window, g_value_get_enum (value));
             break;
         case PROP_HANDLE_STYLE:
-            xfce_panel_window_set_handle_style (window,
-                                                g_value_get_enum (value));
+            xfce_panel_window_set_handle_style (window, g_value_get_enum (value));
             break;
         default:
             G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -407,35 +408,45 @@ xfce_panel_window_set_property (GObject * object, guint prop_id,
     }
 }
 
+
+
 /* GtkWidget */
 static void
-xfce_panel_window_realize (GtkWidget * widget)
+xfce_panel_window_realize (GtkWidget *widget)
 {
     gtk_window_stick (GTK_WINDOW (widget));
 
     GTK_WIDGET_CLASS (parent_class)->realize (widget);
 }
 
+
+
 static void
-xfce_panel_window_unrealize (GtkWidget * widget)
+xfce_panel_window_unrealize (GtkWidget *widget)
 {
     GTK_WIDGET_CLASS (parent_class)->unrealize (widget);
 }
 
+
+
 static void
-xfce_panel_window_map (GtkWidget * widget)
+xfce_panel_window_map (GtkWidget *widget)
 {
     GTK_WIDGET_CLASS (parent_class)->map (widget);
 }
 
+
+
 static void
-xfce_panel_window_unmap (GtkWidget * widget)
+xfce_panel_window_unmap (GtkWidget *widget)
 {
     GTK_WIDGET_CLASS (parent_class)->unmap (widget);
 }
 
+
+
 static void
-xfce_panel_window_show (GtkWidget * widget)
+xfce_panel_window_show (GtkWidget *widget)
 {
     XfcePanelWindowPrivate *priv = XFCE_PANEL_WINDOW_GET_PRIVATE (widget);
 
@@ -450,8 +461,10 @@ xfce_panel_window_show (GtkWidget * widget)
     }
 }
 
+
+
 static void
-xfce_panel_window_hide (GtkWidget * widget)
+xfce_panel_window_hide (GtkWidget *widget)
 {
     XfcePanelWindowPrivate *priv = XFCE_PANEL_WINDOW_GET_PRIVATE (widget);
 
@@ -460,26 +473,29 @@ xfce_panel_window_hide (GtkWidget * widget)
     priv->shown = FALSE;
 }
 
+
+
 /* drawing, size and style */
 static void
-_panel_window_paint_border (XfcePanelWindow * panel)
+_panel_window_paint_border (XfcePanelWindow *panel)
 {
-    XfcePanelWindowPrivate *priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel);
-    GdkWindow *window = GTK_WIDGET (panel)->window;
-    GtkAllocation *a = &(GTK_WIDGET (panel)->allocation);
-    GtkStyle *style = GTK_WIDGET (panel)->style;
-    GtkStateType state_type = GTK_WIDGET_STATE (GTK_WIDGET (panel));
-    int top, bottom, left, right;
+    XfcePanelWindowPrivate *priv       = XFCE_PANEL_WINDOW_GET_PRIVATE (panel);
+    GdkWindow              *window     = GTK_WIDGET (panel)->window;
+    GtkAllocation          *a          = &(GTK_WIDGET (panel)->allocation);
+    GtkStyle               *style      = GTK_WIDGET (panel)->style;
+    GtkStateType            state_type = GTK_WIDGET_STATE (GTK_WIDGET (panel));
+    gint                    top, bottom, left, right;
+    gint                    x1, x2, y1, y2;
 
     top    = priv->top_border    ? style->ythickness : 0;
     bottom = priv->bottom_border ? style->ythickness : 0;
     left   = priv->left_border   ? style->xthickness : 0;
     right  = priv->right_border  ? style->xthickness : 0;
-    
+
     /* Code based on gtk-xfce-engine-2 */
 
     /* Attempt to explain the code below with some ASCII 'art'
-     * 
+     *
      * joining lines: - = horizontal, + = vertical
      *
      * single       double
@@ -489,140 +505,134 @@ _panel_window_paint_border (XfcePanelWindow * panel)
      * +         +  ++       ++
      * +         +  ++--------+
      * +----------  +----------
-     * 
+     *
      */
-    
+
     if (top > 0)
     {
-        int x1, y1, x2;
-
         x1 = a->x;
         y1 = a->y;
         x2 = x1 + a->width - 1;
 
-        if (right > 0) x2--;
-        
+        if (right > 0)
+            x2--;
+
         if (top > 1)
         {
-            gdk_draw_line (window, style->dark_gc[state_type], 
-                           x1, y1, x2, y1);
-            
-            if (left > 0) x1++;
+            gdk_draw_line (window, style->dark_gc[state_type], x1, y1, x2, y1);
 
-            if (right > 1) x2--;
+            if (left > 0)
+                x1++;
+
+            if (right > 1)
+                x2--;
 
             y1++;
-            
-            gdk_draw_line (window, style->light_gc[state_type], 
-                           x1, y1, x2, y1);
+
+            gdk_draw_line (window, style->light_gc[state_type], x1, y1, x2, y1);
         }
         else
         {
-            gdk_draw_line (window, style->light_gc[state_type], 
-                           x1, y1, x2, y1);
+            gdk_draw_line (window, style->light_gc[state_type], x1, y1, x2, y1);
         }
     }
-    
+
     if (bottom > 0)
     {
-        int x1, y1, x2;
-
-        x1 = a->x;
+            x1 = a->x;
         y1 = a->y + a->height - 1;
         x2 = x1 + a->width - 1;
-        
-        if (left > 0) x1++;
-        
+
+        if (left > 0)
+            x1++;
+
         if (bottom > 1)
-        {        
-            gdk_draw_line (window, style->dark_gc[state_type], 
-                           x1, y1, x2, y1);
+        {
+            gdk_draw_line (window, style->dark_gc[state_type], x1, y1, x2, y1);
 
-            if (left > 1) x1++;
+            if (left > 1)
+                x1++;
 
-            if (right > 0) x2--;
+            if (right > 0)
+                x2--;
 
             y1--;
-            
-            gdk_draw_line (window, style->mid_gc[state_type],
-                           x1, y1, x2, y1);
+
+            gdk_draw_line (window, style->mid_gc[state_type], x1, y1, x2, y1);
         }
         else
         {
-            gdk_draw_line (window, style->dark_gc[state_type], 
-                           x1, y1, x2, y1);
+            gdk_draw_line (window, style->dark_gc[state_type], x1, y1, x2, y1);
         }
     }
 
     if (left > 0)
     {
-        int x1, y1, y2;
-
         x1 = a->x;
         y1 = a->y;
         y2 = a->y + a->height - 1;
-        
-        if (top > 0) y1++;
-        
+
+        if (top > 0)
+            y1++;
+
         if (left > 1)
         {
-            gdk_draw_line (window, style->dark_gc[state_type], 
-                           x1, y1, x1, y2);
+            gdk_draw_line (window, style->dark_gc[state_type], x1, y1, x1, y2);
 
-            if (top > 1) y1++;
+            if (top > 1)
+                y1++;
 
-            if (bottom > 0) y2--;
+            if (bottom > 0)
+                y2--;
 
             x1++;
-            
-            gdk_draw_line (window, style->light_gc[state_type], 
-                           x1, y1, x1, y2);
+
+            gdk_draw_line (window, style->light_gc[state_type], x1, y1, x1, y2);
         }
-        else 
+        else
         {
-            gdk_draw_line (window, style->light_gc[state_type], 
-                           x1, y1, x1, y2);
+            gdk_draw_line (window, style->light_gc[state_type], x1, y1, x1, y2);
         }
     }
 
     if (right > 0)
     {
-        int x1, y1, y2;
-
         x1 = a->x + a->width - 1;
         y1 = a->y;
         y2 = a->y + a->height - 1;
-        
-        if (bottom > 0) y2--;
-        
+
+        if (bottom > 0)
+            y2--;
+
         if (right > 1)
         {
-            gdk_draw_line (window, style->dark_gc[state_type], 
-                           x1, y1, x1, y2);
-            
-            if (top > 0) y1++;
+            gdk_draw_line (window, style->dark_gc[state_type], x1, y1, x1, y2);
 
-            if (bottom > 1) y2--;
+            if (top > 0)
+                y1++;
+
+            if (bottom > 1)
+                y2--;
 
             x1--;
-            
-            gdk_draw_line (window, style->mid_gc[state_type], 
-                           x1, y1, x1, y2);
+
+            gdk_draw_line (window, style->mid_gc[state_type], x1, y1, x1, y2);
         }
         else
         {
-            gdk_draw_line (window, style->dark_gc[state_type],
-                           x1, y1, x1, y2);
+            gdk_draw_line (window, style->dark_gc[state_type], x1, y1, x1, y2);
         }
     }
 }
 
+
+
 static gint
-xfce_panel_window_expose (GtkWidget * widget, GdkEventExpose * event)
+xfce_panel_window_expose (GtkWidget      *widget,
+                          GdkEventExpose *event)
 {
-    XfcePanelWindow *panel_window = XFCE_PANEL_WINDOW (widget);
-    XfcePanelWindowPrivate *priv =
-        XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
+    XfcePanelWindow        *panel_window = XFCE_PANEL_WINDOW (widget);
+    XfcePanelWindowPrivate *priv         = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
 
     if (GTK_WIDGET_DRAWABLE (widget))
     {
@@ -647,21 +657,22 @@ xfce_panel_window_expose (GtkWidget * widget, GdkEventExpose * event)
             default:
                 break;
         }
-    
+
         _panel_window_paint_border (panel_window);
     }
 
     return FALSE;
 }
 
+
+
 static void
-xfce_panel_window_size_request (GtkWidget * widget,
-                                GtkRequisition * requisition)
+xfce_panel_window_size_request (GtkWidget      *widget,
+                                GtkRequisition *requisition)
 {
-    XfcePanelWindow *panel_window = XFCE_PANEL_WINDOW (widget);
-    XfcePanelWindowPrivate *priv =
-        XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
-    int handle_size, thick;
+    XfcePanelWindow        *panel_window = XFCE_PANEL_WINDOW (widget);
+    XfcePanelWindowPrivate *priv         = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
+    gint                    handle_size, thick;
 
     requisition->width = requisition->height = 0;
 
@@ -669,7 +680,7 @@ xfce_panel_window_size_request (GtkWidget * widget,
     {
         gtk_widget_size_request (GTK_BIN (widget)->child, requisition);
     }
-    
+
     if (priv->top_border)
         requisition->height += widget->style->ythickness;
     if (priv->bottom_border)
@@ -680,23 +691,21 @@ xfce_panel_window_size_request (GtkWidget * widget,
         requisition->width += widget->style->xthickness;
 
     if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
-    {
         thick = 2 * widget->style->xthickness;
-    }
     else
-    {
         thick = 2 * widget->style->ythickness;
-    }
 
     switch (priv->handle_style)
     {
         case XFCE_HANDLE_STYLE_BOTH:
             handle_size = 2 * (HANDLE_WIDTH + thick);
             break;
+        
         case XFCE_HANDLE_STYLE_START:
         case XFCE_HANDLE_STYLE_END:
             handle_size = HANDLE_WIDTH + thick;
             break;
+        
         default:
             handle_size = 0;
     }
@@ -707,11 +716,15 @@ xfce_panel_window_size_request (GtkWidget * widget,
         requisition->height += handle_size;
 }
 
+
+
 static void
-xfce_panel_window_size_allocate (GtkWidget * widget,
-                                 GtkAllocation * allocation)
+xfce_panel_window_size_allocate (GtkWidget     *widget,
+                                 GtkAllocation *allocation)
 {
     XfcePanelWindowPrivate *priv = XFCE_PANEL_WINDOW_GET_PRIVATE (widget);
+    GtkAllocation           old, new, childalloc;
+    gint                    start_handle_size, end_handle_size, thick;
 
     widget->allocation = *allocation;
 
@@ -727,8 +740,6 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
 
             if (priv->resize_func && priv->shown)
             {
-                GtkAllocation old, new;
-
                 old = priv->allocation;
                 new = *allocation;
 
@@ -745,9 +756,6 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
 
     if (GTK_BIN (widget)->child)
     {
-        GtkAllocation childalloc;
-        int start_handle_size, end_handle_size, thick;
-
         if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
             thick = 2 * widget->style->xthickness;
         else
@@ -777,19 +785,19 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
             childalloc.y += widget->style->ythickness;
             childalloc.height -= widget->style->ythickness;
         }
-        
+
         if (priv->bottom_border)
             childalloc.height -= widget->style->ythickness;
-        
+
         if (priv->left_border)
         {
             childalloc.x += widget->style->xthickness;
             childalloc.width -= widget->style->xthickness;
         }
-        
+
         if (priv->right_border)
             childalloc.width -= widget->style->xthickness;
-            
+
         if (priv->orientation == GTK_ORIENTATION_HORIZONTAL)
         {
             childalloc.x += start_handle_size;
@@ -807,23 +815,25 @@ xfce_panel_window_size_allocate (GtkWidget * widget,
     priv->allocation = *allocation;
 }
 
+
+
 /* keyboard and mouse events */
 static gboolean
-xfce_panel_window_button_press (GtkWidget * widget, GdkEventButton * event)
+xfce_panel_window_button_press (GtkWidget      *widget,
+                                GdkEventButton *event)
 {
-    XfcePanelWindow *panel_window;
+    XfcePanelWindow        *panel_window;
     XfcePanelWindowPrivate *priv;
+    GdkCursor              *fleur;
 
     g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
 
     panel_window = XFCE_PANEL_WINDOW (widget);
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
 
-    if (priv->movable && 
+    if (priv->movable &&
         event->button == 1 && (event->window == widget->window))
     {
-        GdkCursor *fleur;
-
         gdk_window_get_root_origin (widget->window,
                                     &(priv->x_root), &(priv->y_root));
 
@@ -843,17 +853,20 @@ xfce_panel_window_button_press (GtkWidget * widget, GdkEventButton * event)
         }
         gdk_cursor_unref (fleur);
 
-        g_signal_emit (widget, panel_window_signals[MOVE_START], 0);
+        g_signal_emit (G_OBJECT (widget), panel_window_signals[MOVE_START], 0);
         return TRUE;
     }
 
     return FALSE;
 }
 
+
+
 static gboolean
-xfce_panel_window_button_release (GtkWidget * widget, GdkEventButton * event)
+xfce_panel_window_button_release (GtkWidget      *widget,
+                                  GdkEventButton *event)
 {
-    XfcePanelWindow *panel_window;
+    XfcePanelWindow        *panel_window;
     XfcePanelWindowPrivate *priv;
 
     g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
@@ -868,18 +881,21 @@ xfce_panel_window_button_release (GtkWidget * widget, GdkEventButton * event)
     priv->in_move = FALSE;
     gdk_window_get_origin (widget->window, &(priv->x_root), &(priv->y_root));
 
-    g_signal_emit (widget, panel_window_signals[MOVE_END], 0,
+    g_signal_emit (G_OBJECT (widget), panel_window_signals[MOVE_END], 0,
                    priv->x_root, priv->y_root);
 
     return TRUE;
 }
 
+
+
 static gboolean
-xfce_panel_window_motion_notify (GtkWidget * widget, GdkEventMotion * event)
+xfce_panel_window_motion_notify (GtkWidget      *widget,
+                                 GdkEventMotion *event)
 {
-    XfcePanelWindow *panel_window;
+    XfcePanelWindow        *panel_window;
     XfcePanelWindowPrivate *priv;
-    int new_x, new_y;
+    gint                    new_x, new_y;
 
     g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
 
@@ -887,40 +903,38 @@ xfce_panel_window_motion_notify (GtkWidget * widget, GdkEventMotion * event)
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
 
     if (!priv->in_move)
-    {
         return FALSE;
-    }
 
     gdk_window_get_pointer (NULL, &new_x, &new_y, NULL);
     new_x += priv->x_offset;
     new_y += priv->y_offset;
 
     if (priv->move_func)
-    {
         priv->move_func (widget, priv->move_data, &new_x, &new_y);
-    }
 
     priv->x_root = new_x;
     priv->y_root = new_y;
 
     gdk_window_move (widget->window, new_x, new_y);
 
-    g_signal_emit (widget, panel_window_signals[MOVE], 0, new_x, new_y);
+    g_signal_emit (G_OBJECT (widget), panel_window_signals[MOVE], 0, new_x, new_y);
 
     return TRUE;
 }
 
-/* internal functions */
+
+
+/* ginternal functions */
 static void
-_paint_handle (XfcePanelWindow * panel_window, gboolean start,
-               GdkRectangle * area)
+_paint_handle (XfcePanelWindow *panel_window,
+               gboolean         start,
+               GdkRectangle    *area)
 {
-    XfcePanelWindowPrivate *priv =
-        XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
-    GtkWidget *widget = GTK_WIDGET (panel_window);
-    GtkAllocation *alloc = &(widget->allocation);
-    int x, y, w, h, xthick, ythick;
-    gboolean horizontal = priv->orientation == GTK_ORIENTATION_HORIZONTAL;
+    XfcePanelWindowPrivate *priv   = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
+    GtkWidget              *widget = GTK_WIDGET (panel_window);
+    GtkAllocation          *alloc  = &(widget->allocation);
+    gint                    x, y, w, h, xthick, ythick;
+    gboolean                horizontal = priv->orientation == GTK_ORIENTATION_HORIZONTAL;
 
     xthick = widget->style->xthickness;
     ythick = widget->style->ythickness;
@@ -987,14 +1001,14 @@ _paint_handle (XfcePanelWindow * panel_window, gboolean start,
     }
 
     gtk_paint_handle (widget->style, widget->window,
-                      GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE, 
+                      GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
                       area, widget, "handlebox",
                       x, y, w, h,
                       horizontal ? GTK_ORIENTATION_VERTICAL :
                                    GTK_ORIENTATION_HORIZONTAL);
 }
 
-/* public interface */
+
 
 /**
  * xfce_panel_window_new
@@ -1009,16 +1023,18 @@ xfce_panel_window_new (void)
     return GTK_WIDGET (g_object_new (XFCE_TYPE_PANEL_WINDOW, NULL));
 }
 
+
+
 /**
  * xfce_panel_window_get_orientation
  * @window: #XfcePanelWindow
- * 
+ *
  * Get orientation of panel window.
  *
  * Returns: #GtkOrientation of @window
  **/
 GtkOrientation
-xfce_panel_window_get_orientation (XfcePanelWindow * window)
+xfce_panel_window_get_orientation (XfcePanelWindow *window)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1029,16 +1045,18 @@ xfce_panel_window_get_orientation (XfcePanelWindow * window)
     return priv->orientation;
 }
 
+
+
 /**
  * xfce_panel_window_set_orientation
  * @window     : #XfcePanelWindow
  * @orientation: new #GtkOrientation
- * 
+ *
  * Set orientation for panel window.
  **/
 void
-xfce_panel_window_set_orientation (XfcePanelWindow * window,
-                                   GtkOrientation orientation)
+xfce_panel_window_set_orientation (XfcePanelWindow *window,
+                                   GtkOrientation   orientation)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1054,37 +1072,40 @@ xfce_panel_window_set_orientation (XfcePanelWindow * window,
     g_object_notify (G_OBJECT (window), "orientation");
 }
 
+
+
 /**
  * xfce_panel_window_get_handle_style
  * @window: #XfcePanelWindow
- * 
+ *
  * Get handle style of panel window.
  *
  * Returns: #XfceHandleStyle of @window
  **/
 XfceHandleStyle
-xfce_panel_window_get_handle_style (XfcePanelWindow * window)
+xfce_panel_window_get_handle_style (XfcePanelWindow *window)
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window),
-                          DEFAULT_HANDLE_STYLE);
+    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), DEFAULT_HANDLE_STYLE);
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
     return priv->handle_style;
 }
 
+
+
 /**
  * xfce_panel_window_set_handle_style
  * @window      : #XfcePanelWindow
  * @handle_style: new #XfceHandleStyle
- * 
+ *
  * Set handle style for panel window.
  **/
 void
-xfce_panel_window_set_handle_style (XfcePanelWindow * window,
-                                    XfceHandleStyle handle_style)
+xfce_panel_window_set_handle_style (XfcePanelWindow *window,
+                                    XfceHandleStyle  handle_style)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1102,6 +1123,8 @@ xfce_panel_window_set_handle_style (XfcePanelWindow * window,
     gtk_widget_queue_resize (GTK_WIDGET (window));
 }
 
+
+
 /**
  * xfce_panel_window_get_show_border
  * @window        : #XfcePanelWindow
@@ -1109,15 +1132,15 @@ xfce_panel_window_set_handle_style (XfcePanelWindow * window,
  * @bottom_border: location for bottom border or %NULL
  * @left_border  : location for left border or %NULL
  * @right_border : location for right border or %NULL
- * 
+ *
  * Get visibility of panel window borders.
  **/
 void
-xfce_panel_window_get_show_border (XfcePanelWindow * window, 
-                                   gboolean *top_border, 
-                                   gboolean *bottom_border, 
-                                   gboolean *left_border, 
-                                   gboolean *right_border)
+xfce_panel_window_get_show_border (XfcePanelWindow *window,
+                                   gboolean        *top_border,
+                                   gboolean        *bottom_border,
+                                   gboolean        *left_border,
+                                   gboolean        *right_border)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1135,6 +1158,8 @@ xfce_panel_window_get_show_border (XfcePanelWindow * window,
         *right_border = priv->right_border;
 }
 
+
+
 /**
  * xfce_panel_window_set_show_border
  * @window        : #XfcePanelWindow
@@ -1142,15 +1167,15 @@ xfce_panel_window_get_show_border (XfcePanelWindow * window,
  * @bottom_border: show bottom border
  * @left_border  : show left border
  * @right_border : show right border
- * 
+ *
  * Set border visibility for the panel window.
  **/
 void
-xfce_panel_window_set_show_border (XfcePanelWindow * window, 
-                                   gboolean top_border, 
-                                   gboolean bottom_border, 
-                                   gboolean left_border, 
-                                   gboolean right_border)
+xfce_panel_window_set_show_border (XfcePanelWindow *window,
+                                   gboolean         top_border,
+                                   gboolean         bottom_border,
+                                   gboolean         left_border,
+                                   gboolean         right_border)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1172,18 +1197,20 @@ xfce_panel_window_set_show_border (XfcePanelWindow * window,
     }
 }
 
+
+
 /**
  * xfce_panel_window_set_move_function
  * @window  : #XfcePanelWindow
  * @function: #XfcePanelWindowMoveFunc
  * @data    : user data
- * 
+ *
  * Set a function to modify move behaviour of the panel window.
  **/
 void
-xfce_panel_window_set_move_function (XfcePanelWindow * window,
-                                     XfcePanelWindowMoveFunc function,
-                                     gpointer data)
+xfce_panel_window_set_move_function (XfcePanelWindow         *window,
+                                     XfcePanelWindowMoveFunc  function,
+                                     gpointer                 data)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1195,18 +1222,20 @@ xfce_panel_window_set_move_function (XfcePanelWindow * window,
     priv->move_data = data;
 }
 
+
+
 /**
  * xfce_panel_window_set_resize_function
  * @window  : #XfcePanelWindow
  * @function: #XfcePanelWindowResizeFunc
  * @data    : user data
- * 
+ *
  * Set a function to modify resize behaviour of the panel window.
  **/
 void
-xfce_panel_window_set_resize_function (XfcePanelWindow * window,
-                                       XfcePanelWindowResizeFunc function, 
-                                       gpointer data)
+xfce_panel_window_set_resize_function (XfcePanelWindow           *window,
+                                       XfcePanelWindowResizeFunc  function,
+                                       gpointer                   data)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1218,6 +1247,8 @@ xfce_panel_window_set_resize_function (XfcePanelWindow * window,
     priv->resize_data = data;
 }
 
+
+
 /**
  * xfce_panel_window_get_movable
  * @window  : #XfcePanelWindow
@@ -1228,7 +1259,7 @@ xfce_panel_window_set_resize_function (XfcePanelWindow * window,
  * Returns: %TRUE if the user is allowed to move @window, %FALSE if not.
  **/
 gboolean
-xfce_panel_window_get_movable (XfcePanelWindow * window)
+xfce_panel_window_get_movable (XfcePanelWindow *window)
 {
     XfcePanelWindowPrivate *priv;
 
@@ -1239,6 +1270,8 @@ xfce_panel_window_get_movable (XfcePanelWindow * window)
     return priv->movable;
 }
 
+
+
 /**
  * xfce_panel_window_set_movable
  * @window  : #XfcePanelWindow
@@ -1247,7 +1280,8 @@ xfce_panel_window_get_movable (XfcePanelWindow * window)
  * Set if the panel window can be moved by the user.
  **/
 void
-xfce_panel_window_set_movable (XfcePanelWindow * window, gboolean movable)
+xfce_panel_window_set_movable (XfcePanelWindow *window,
+                               gboolean         movable)
 {
     XfcePanelWindowPrivate *priv;
 

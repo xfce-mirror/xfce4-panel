@@ -559,11 +559,11 @@ menulist_popup_menu (Windowlist * wl,
 
 	    /* Apply some styles for windows on !current workspace and 
              * if they are urgent */
-	    if (netk_window_or_transient_demands_attention (window)) 
+	    if (netk_window_or_transient_demands_attention (window))
             {
                 if (netk_workspace == active_workspace)
                 {
-                    gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
+                    gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)),
                                             bold);
                 }
                 else
@@ -571,7 +571,7 @@ menulist_popup_menu (Windowlist * wl,
                     gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
                              GTK_STATE_NORMAL,
                              &(menu->style->fg[GTK_STATE_INSENSITIVE]));
-                    gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
+                    gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)),
                                             bold);
                 }
             }
@@ -734,7 +734,8 @@ windowlist_search_urgent (gpointer data)
 	    netk_window_is_skip_tasklist (window))
 		continue;
 	
-        if (netk_window_or_transient_demands_attention (window)) 
+	/* Check if window is urgent */
+	if (netk_window_or_transient_demands_attention (window))
 	    blink = TRUE;
     }
     
