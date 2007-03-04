@@ -85,7 +85,9 @@ struct _PanelManagerDialog
     GtkWidget   *size;
     GtkWidget   *transparency;
     GtkWidget   *activetrans;
+#if 0
     GtkWidget   *position;
+#endif
 
     /* monitors */
     GPtrArray   *monitors;
@@ -1383,7 +1385,7 @@ activetrans_toggled (GtkToggleButton    *tb,
 
     panel_set_activetrans (pmd->panel, !gtk_toggle_button_get_active (tb));
 }
-
+#if 0
 static void
 popup_position_changed (GtkComboBox        *box,
                         PanelManagerDialog *pmd)
@@ -1391,7 +1393,7 @@ popup_position_changed (GtkComboBox        *box,
     if (pmd->updating)
         return;
 }
-
+#endif
 static void
 add_appearance_options (GtkBox             *box,
                         PanelManagerDialog *pmd)
@@ -1490,7 +1492,7 @@ add_appearance_options (GtkBox             *box,
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_size_group_add_widget (size_group, label);
-
+#if 0
     pmd->position = gtk_combo_box_new_text ();
     gtk_widget_show (pmd->position);
     gtk_box_pack_start (GTK_BOX (hbox), pmd->position, TRUE, TRUE, 0);
@@ -1503,7 +1505,7 @@ add_appearance_options (GtkBox             *box,
 
     g_signal_connect (G_OBJECT (pmd->position), "value-changed",
                       G_CALLBACK (popup_position_changed), pmd);
-
+#endif
     g_object_unref (G_OBJECT (size_group));
 }
 
