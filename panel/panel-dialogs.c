@@ -1481,7 +1481,7 @@ add_appearance_options (GtkBox             *box,
         g_signal_connect (G_OBJECT (pmd->activetrans), "toggled",
                           G_CALLBACK (activetrans_toggled), pmd);
     }
-
+#if 0
     /* popup position */
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_widget_show (hbox);
@@ -1492,7 +1492,7 @@ add_appearance_options (GtkBox             *box,
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_size_group_add_widget (size_group, label);
-#if 0
+
     pmd->position = gtk_combo_box_new_text ();
     gtk_widget_show (pmd->position);
     gtk_box_pack_start (GTK_BOX (hbox), pmd->position, TRUE, TRUE, 0);
