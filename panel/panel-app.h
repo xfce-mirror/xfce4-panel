@@ -57,7 +57,7 @@ struct _XfceMonitor
 
 int panel_app_init (void);
 
-int panel_app_run (int argc, char **argv);
+int panel_app_run (gchar *client_id);
 
 void panel_app_queue_save (void);
 

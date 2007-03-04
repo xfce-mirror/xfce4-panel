@@ -1,32 +1,39 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ * Copyright (c) 2005 Jasper Huijsmans <jasper@xfce.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Library General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
+#ifdef HAVE_STDLIB_H
 #include <stdlib.h>
+#endif
+#ifdef HAVE_UNISTD_H
 #include <unistd.h>
+#endif
+#ifdef HAVE_STRING_H
 #include <string.h>
+#endif
+#ifdef HAVE_LOCALE_H
 #include <locale.h>
+#endif
+
 #include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
 
@@ -37,142 +44,112 @@
 #define _(x) x
 #endif
 
-/* handle options */
+/* globals */
+static gboolean  opt_version = FALSE;
+static gboolean  opt_customize = FALSE;
+static gboolean  opt_save = FALSE;
+static gboolean  opt_restart = FALSE;
+static gboolean  opt_quit = FALSE;
+static gboolean  opt_exit = FALSE;
+static gboolean  opt_add = FALSE;
+static gchar    *opt_client_id = NULL;
 
-static void
-version_and_usage (void)
+/* command line options */
+static GOptionEntry option_entries[] =
 {
-    setlocale(LC_ALL, "");
-    g_print (_("\n"
-               " Xfce Panel %s\n\n"
-               " Part of the Xfce Desktop Environment\n"
-               " http://www.xfce.org\n\n"
-               " Licensed under the GNU GPL.\n\n"), VERSION);
-
-    g_print (_(" Usage: %s [OPTIONS]\n\n"), PACKAGE);
-
-    /* Only translate the descriptions, not the options itself */
-    g_print (_(" OPTIONS\n"
-               " -h, --help      Show this message and exit\n"
-               " -v, --version   Show this message and exit\n"
-               " -c, --customize Show configuration dialog\n"
-               " -s, --save      Save configuration\n"
-               " -r, --restart   Restart panels\n"
-               " -q, --quit      End the session\n"
-               " -x, --exit      Close all panels and end the program\n"
-               " -a, --add       Add new items\n\n"
-               ));
-}
-
-static gboolean
-handle_options (int argc, char **argv, int *success)
-{
-    gboolean handled = FALSE;
-
-    *success = 0;
-
-    if (argc > 1 && argv[1][0] == '-')
-    {
-        /* help / version */
-        if (!strcmp (argv[1], "-h")     ||
-            !strcmp (argv[1], "-v")     ||
-            !strcmp (argv[1], "--help") ||
-            !strcmp (argv[1], "--version"))
-        {
-            handled = TRUE;
-
-            version_and_usage ();
-        }
-        else
-        {
-            int msg = -1;
-
-            if (!strcmp (argv[1], "-c") ||
-                !strcmp (argv[1], "--customize"))
-            {
-                handled = TRUE;
-                msg = PANEL_APP_CUSTOMIZE;
-            }
-            else if (!strcmp (argv[1], "-s") ||
-                     !strcmp (argv[1], "--save"))
-            {
-                handled = TRUE;
-                msg = PANEL_APP_SAVE;
-            }
-            else if (!strcmp (argv[1], "-r") ||
-                     !strcmp (argv[1], "--restart"))
-            {
-                handled = TRUE;
-                msg = PANEL_APP_RESTART;
-            }
-            else if (!strcmp (argv[1], "-q") ||
-                     !strcmp (argv[1], "--quit"))
-            {
-                handled = TRUE;
-                msg = PANEL_APP_QUIT;
-            }
-            else if (!strcmp (argv[1], "-x") ||
-                     !strcmp (argv[1], "--exit"))
-            {
-                handled = TRUE;
-                msg = PANEL_APP_EXIT;
-            }
-            else if (!strcmp (argv[1], "-a") ||
-                     !strcmp (argv[1], "--add"))
-            {
-                handled = TRUE;
-                msg = PANEL_APP_ADD;
-            }
-
-            if (msg >= 0)
-            {
-                gtk_init (&argc, &argv);
-                panel_app_send (msg);
-            }
-        }
-    }
-
-    return handled;
-}
+    { "version", 'v', 0, G_OPTION_ARG_NONE, &opt_version, N_ ("Show this message and exit"), NULL },
+    { "customize", 'c', 0, G_OPTION_ARG_NONE, &opt_customize, N_ ("Show configuration dialog"), NULL },
+    { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_ ("Save configuration"), NULL },
+    { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_ ("Restart panels"), NULL },
+    { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_ ("End the session"), NULL },
+    { "exit", 'x', 0, G_OPTION_ARG_NONE, &opt_exit, N_ ("Close all panels and end the program"), NULL },
+    { "add", 'a', 0, G_OPTION_ARG_NONE, &opt_add, N_ ("Add new items"), NULL },
+    { "sm-client-id", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_client_id, NULL, NULL },
+    { NULL }
+};
 
 /* main program */
-
-int
-main (int argc, char **argv)
+gint
+main (gint argc, gchar **argv)
 {
-    int success = 0;
+    gint    msg = -1;
+    GError *error = NULL;
 
+    /* translation domain */
     xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 
-    if (handle_options (argc, argv, &success))
-        exit (success);
+    /* application name */
+    g_set_application_name (PACKAGE_NAME);
 
-    TIMER_ELAPSED("start gtk_init()");
-    gtk_init (&argc, &argv);
+    TIMER_ELAPSED ("start gtk_init_with_args ()");
 
-    TIMER_ELAPSED("start panel_init()");
-    success = panel_app_init ();
-
-    if (success == -1)
+    /* initialize gtk */
+    if (!gtk_init_with_args (&argc, &argv, "", option_entries, GETTEXT_PACKAGE, &error))
     {
-        return 1;
-    }
-    else if (success == 1)
-    {
-        g_message ("%s already running", PACKAGE);
-        return 0;
+        g_print ("%s: %s\n", PACKAGE_NAME, error ? error->message : _("Failed to open display"));
+
+        if (error != NULL)
+            g_error_free (error);
+
+        return EXIT_FAILURE;
     }
 
-    TIMER_ELAPSED("start panel_app_run()");
-    success = panel_app_run (argc, argv);
+    /* handle the options */
+    if (G_UNLIKELY (opt_version))
+    {
+        g_print ("%s %s (Xfce %s)\n\n", PACKAGE_NAME, PACKAGE_VERSION, xfce_version_string ());
+        g_print ("%s\n", _("Copyright (c) 2004-2007"));
+        g_print ("\t%s\n\n", _("The Xfce development team. All rights reserved."));
+        g_print (_("Please report bugs to <%s>."), PACKAGE_BUGREPORT);
+        g_print ("\n");
 
-    if (success == 1)
+        return EXIT_SUCCESS;
+    }
+    else if (G_UNLIKELY (opt_customize))
+    	msg = PANEL_APP_CUSTOMIZE;
+    else if (G_UNLIKELY (opt_save))
+    	msg = PANEL_APP_SAVE;
+    else if (G_UNLIKELY (opt_restart))
+    	msg = PANEL_APP_RESTART;
+    else if (G_UNLIKELY (opt_quit))
+    	msg = PANEL_APP_QUIT;
+    else if (G_UNLIKELY (opt_exit))
+    	msg = PANEL_APP_EXIT;
+    else if (G_UNLIKELY (opt_add))
+    	msg = PANEL_APP_ADD;
+
+    /* handle the message, if there is any */
+    if (G_UNLIKELY (msg >= 0))
+    {
+        panel_app_send (msg);
+
+        return EXIT_SUCCESS;
+    }
+
+    TIMER_ELAPSED ("start panel_init()");
+    msg = panel_app_init ();
+
+    if (G_UNLIKELY (msg == -1))
+    {
+    	return EXIT_FAILURE;
+    }
+    else if (G_UNLIKELY (msg == 1))
+    {
+        g_message (_("xfce4-panel already running"));
+
+        return EXIT_SUCCESS;
+    }
+
+    TIMER_ELAPSED ("start panel_app_run()");
+    msg = panel_app_run (opt_client_id);
+
+    if (G_UNLIKELY (msg == 1))
     {
         /* restart */
-        g_message ("Restarting %s...", argv[0]);
+        g_message (_("Restarting xfce4-panel..."));
         execvp (argv[0], argv);
     }
 
-    return success;
+    return EXIT_SUCCESS;
 }
 

@@ -631,15 +631,15 @@ panel_app_init_panel (GtkWidget *panel)
  * Returns: 1 to restart and 0 to quit.
  **/
 gint
-panel_app_run (gint    argc,
-               gchar **argv)
+panel_app_run (gchar *client_id)
 {
 #ifdef HAVE_SIGACTION
     struct sigaction  act;
 #endif
-    GIOChannel       *g_signal_in;
-    GError           *error = NULL;
-    glong             fd_flags;
+    GIOChannel  *g_signal_in;
+    GError      *error = NULL;
+    glong        fd_flags;
+    gchar      **restart_command;
 
     /* create pipe and set writing end in non-blocking mode */
     if (pipe (signal_pipe))
@@ -712,14 +712,18 @@ panel_app_run (gint    argc,
 #endif
 
     /* environment */
-    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default ()),
-         TRUE);
+    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default ()), TRUE);
 
     /* session management */
-    panel_app.session_client =
-        client_session_new (argc, argv, NULL /* data */,
-                            SESSION_RESTART_IF_RUNNING, 40);
+    restart_command = g_new (gchar *, 2);
+    restart_command[0] = "xfce4-panel";
+    restart_command[1] = "-r";
+    restart_command[2] = NULL;
 
+    panel_app.session_client = client_session_new_full (NULL, SESSION_RESTART_IF_RUNNING,
+					                                    40, client_id, PACKAGE_NAME, NULL,
+					                                    restart_command, restart_command,
+					                                    NULL, NULL, NULL);
     panel_app.session_client->save_yourself = session_save_yourself;
     panel_app.session_client->die = session_die;
 
