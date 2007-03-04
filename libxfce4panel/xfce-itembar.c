@@ -149,23 +149,15 @@ xfce_itembar_get_type (void)
 {
   static GtkType type = G_TYPE_INVALID;
 
-  if (G_UNLIKELY (type == G_TYPE_INVALID))
+    if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        static const GTypeInfo type_info = {
-            sizeof (XfceItembarClass),
-            NULL,
-            NULL,
-            (GClassInitFunc) xfce_itembar_class_init,
-            NULL,
-            NULL,
-            sizeof (XfceItembar),
-            0,                        /* n_preallocs */
-            (GInstanceInitFunc) xfce_itembar_init,
-            NULL
-        };
-
-      type =
-          g_type_register_static (GTK_TYPE_CONTAINER, I_("XfceItembar"), &type_info, 0);
+        type = g_type_register_static_simple (GTK_TYPE_CONTAINER,
+                                              I_("XfceItembar"),
+                                              sizeof (XfceItembarClass),
+                                              (GClassInitFunc) xfce_itembar_class_init,
+                                              sizeof (XfceItembar),
+                                              (GInstanceInitFunc) xfce_itembar_init,
+                                              0);
     }
 
     return type;

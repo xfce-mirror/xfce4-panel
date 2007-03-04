@@ -47,6 +47,17 @@ G_BEGIN_DECLS
 #define I_(string) (g_quark_to_string (g_quark_from_static_string ((string))))
 #endif
 
+#if (!GLIB_CHECK_VERSION(2,12,0))
+GType
+g_type_register_static_simple (GType              parent_type,
+                               const gchar       *type_name,
+                               guint              class_size,
+                               GClassInitFunc     class_init,
+                               guint              instance_size,
+                               GInstanceInitFunc  instance_init,
+                               GTypeFlags         flags);
+#endif
+
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_MACROS_H__ */

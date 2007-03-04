@@ -1,3 +1,10 @@
+2007-03-04 20:32  nick
+
+	* libxfce4panel/xfce-panel-macros.{c,h}: Add a macro for
+	  g_type_register_static_simple which is only available in Glib 2.12.
+	* libxfce4panel/*.c: Use g_type_register_static_simple where possible to
+	  reduce the number of relocations.
+
 2007-03-04 16:14  nick
 
 	* panel/main.c, panel/panel-app.{c,h}: Fix problem with session management

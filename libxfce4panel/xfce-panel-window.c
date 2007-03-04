@@ -137,21 +137,13 @@ xfce_panel_window_get_type (void)
 
     if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        static const GTypeInfo type_info = {
-            sizeof (XfcePanelWindowClass),
-            NULL,
-            NULL,
-            (GClassInitFunc) xfce_panel_window_class_init,
-            NULL,
-            NULL,
-            sizeof (XfcePanelWindow),
-            0,
-            (GInstanceInitFunc) xfce_panel_window_init,
-            NULL
-        };
-
-        type = g_type_register_static (GTK_TYPE_WINDOW,
-                                       I_("XfcePanelWindow"), &type_info, 0);
+        type = g_type_register_static_simple (GTK_TYPE_WINDOW,
+                                              I_("XfcePanelWindow"),
+                                              sizeof (XfcePanelWindowClass),
+                                              (GClassInitFunc) xfce_panel_window_class_init,
+                                              sizeof (XfcePanelWindow),
+                                              (GInstanceInitFunc) xfce_panel_window_init,
+                                              0);
     }
 
     return type;
@@ -700,12 +692,12 @@ xfce_panel_window_size_request (GtkWidget      *widget,
         case XFCE_HANDLE_STYLE_BOTH:
             handle_size = 2 * (HANDLE_WIDTH + thick);
             break;
-        
+
         case XFCE_HANDLE_STYLE_START:
         case XFCE_HANDLE_STYLE_END:
             handle_size = HANDLE_WIDTH + thick;
             break;
-        
+
         default:
             handle_size = 0;
     }

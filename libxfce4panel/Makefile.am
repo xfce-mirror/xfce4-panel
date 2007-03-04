@@ -33,6 +33,7 @@ libxfce4panel_la_SOURCES =						\
 	xfce-panel-plugin-iface.c					\
 	xfce-panel-plugin-iface.h					\
 	xfce-panel-plugin-iface-private.h				\
+	xfce-panel-macros.c						\
 	xfce-panel-plugin-messages.c					\
 	xfce-panel-plugin-messages.h
 

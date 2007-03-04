@@ -86,21 +86,13 @@ xfce_arrow_button_get_type (void)
 
     if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        static const GTypeInfo type_info = {
-            sizeof (XfceArrowButtonClass),
-            NULL,
-            NULL,
-            (GClassInitFunc) xfce_arrow_button_class_init,
-            NULL,
-            NULL,
-            sizeof (XfceArrowButton),
-            0,
-            (GInstanceInitFunc) xfce_arrow_button_init,
-            NULL
-        };
-
-        type =
-            g_type_register_static (GTK_TYPE_TOGGLE_BUTTON, I_("XfceArrowButton"), &type_info, 0);
+        type = g_type_register_static_simple (GTK_TYPE_TOGGLE_BUTTON,
+                                              I_("XfceArrowButton"),
+                                              sizeof (XfceArrowButtonClass),
+                                              (GClassInitFunc) xfce_arrow_button_class_init,
+                                              sizeof (XfceArrowButton),
+                                              (GInstanceInitFunc) xfce_arrow_button_init,
+                                              0);
     }
 
     return type;

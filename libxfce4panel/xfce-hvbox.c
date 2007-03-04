@@ -46,28 +46,20 @@ static void  xfce_hvbox_size_allocate  (GtkWidget      *widget,
 GtkType
 xfce_hvbox_get_type (void)
 {
-  static GtkType hvbox_type = G_TYPE_INVALID;
+  static GtkType type = G_TYPE_INVALID;
 
-  if (G_UNLIKELY (hvbox_type == G_TYPE_INVALID))
+  if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        static const GTypeInfo hvbox_info = {
-            sizeof (XfceHVBoxClass),
-            NULL,
-            NULL,
-            (GClassInitFunc) xfce_hvbox_class_init,
-            NULL,
-            NULL,
-            sizeof (XfceHVBox),
-            0,
-            (GInstanceInitFunc) xfce_hvbox_init,
-            NULL
-        };
-
-        hvbox_type =
-            g_type_register_static (GTK_TYPE_BOX, I_("XfceHVBox"), &hvbox_info, 0);
+        type = g_type_register_static_simple (GTK_TYPE_BOX,
+                                              I_("XfceHVBox"),
+                                              sizeof (XfceHVBoxClass),
+                                              (GClassInitFunc) xfce_hvbox_class_init,
+                                              sizeof (XfceHVBox),
+                                              (GInstanceInitFunc) xfce_hvbox_init,
+                                              0);
     }
 
-    return hvbox_type;
+    return type;
 }
 
 
