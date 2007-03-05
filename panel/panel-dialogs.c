@@ -898,10 +898,17 @@ screen_position_pressed (GtkToggleButton    *tb,
                                 pmd->n_width_items - 1);
                     }
 
-                    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
-                                               _("Normal Width"));
-                    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
-                                               _("Full Width"));
+                    if (xfce_screen_position_is_horizontal (i+1))
+                    {
+                        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Normal Width"));
+                        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Full Width"));
+                    }
+                    else
+                    {
+                        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Normal Height"));
+                        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Full Height"));
+                    }
+
                     pmd->n_width_items = 2;
                     if (can_span_monitors(pmd->panel))
                     {
@@ -1127,10 +1134,18 @@ add_position_options (GtkBox             *box,
     gtk_widget_show (pmd->fullwidth);
     gtk_box_pack_start (GTK_BOX (vbox), pmd->fullwidth, FALSE, FALSE, 0);
 
-    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
-                               _("Normal Width"));
-    gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth),
-                               _("Full Width"));
+    if (panel_is_horizontal (pmd->panel))
+    {
+        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Normal Width"));
+        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Full Width"));
+    }
+    else
+    {
+        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Normal Height"));
+        gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->fullwidth), _("Full Height"));
+    }
+
+
     pmd->n_width_items = 2;
     if (can_span_monitors (pmd->panel))
     {
