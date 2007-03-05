@@ -27,7 +27,7 @@
 
 /* Partly based on the example on
  * http://live.gnome.org/GnomeLove/DragNDropTutorial
- * Copyright © 2005 Ryan McDougall
+ * Copyright (c) 2005 Ryan McDougall
  * Licensed under the GNU GPL
  */
 

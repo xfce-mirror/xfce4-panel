@@ -23,36 +23,35 @@
 #endif
 
 #include <glib.h>
+#include <glib-object.h>
+
+#include "xfce-panel-macros.h"
 
 
 
-#if (!GLIB_CHECK_VERSION(2,12,0))
-/*
- * We can remove this code when the panel depends on Glib 2.12
- */
 GType
-g_type_register_static_simple (GType              parent_type,
-                               const gchar       *type_name,
-                               guint              class_size,
-                               GClassInitFunc     class_init,
-                               guint              instance_size,
-                               GInstanceInitFunc  instance_init,
-                               GTypeFlags         flags)
+_panel_g_type_register_simple (GType        type_parent,
+                               const gchar *type_name_static,
+                               guint        class_size,
+                               gpointer     class_init,
+                               guint        instance_size,
+                               gpointer     instance_init)
 {
-  GTypeInfo info;
+  /* generate the type info (on the stack) */
+  GTypeInfo info =
+  {
+    class_size,
+    NULL,
+    NULL,
+    class_init,
+    NULL,
+    NULL,
+    instance_size,
+    0,
+    instance_init,
+    NULL,
+  };
 
-  info.class_size     = class_size;
-  info.base_init      = NULL;
-  info.base_finalize  = NULL;
-  info.class_init     = class_init;
-  info.class_finalize = NULL;
-  info.class_data     = NULL;
-  info.instance_size  = instance_size;
-  info.n_preallocs    = 0;
-  info.instance_init  = instance_init;
-  info.value_table    = NULL;
-
-  return g_type_register_static (parent_type, type_name, &info, flags);
+  /* register the static type */
+  return g_type_register_static (type_parent, I_(type_name_static), &info, 0);
 }
-#endif
-

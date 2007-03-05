@@ -1,11 +1,9 @@
-/* vim: set expandtab ts=8 sw=4: */
-
 /*  $Id$
  *
- *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
+ *  Copyright (c) 2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published 
+ *  it under the terms of the GNU General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -19,8 +17,8 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef _PANEL_H
-#define _PANEL_H
+#ifndef __PANEL_H__
+#define __PANEL_H__
 
 #include <glib-object.h>
 #include <gtk/gtkwidget.h>
@@ -65,7 +63,7 @@ GtkWidget *panel_add_item (Panel *panel, const char *name);
 
 GtkWidget *panel_insert_item (Panel *panel, const char *name, int position);
 
-GtkWidget *panel_add_item_with_id (Panel *panel, const char *name, 
+GtkWidget *panel_add_item_with_id (Panel *panel, const char *name,
                                    const char *id);
 
 /* configuration */
@@ -83,4 +81,4 @@ void panel_set_items_sensitive (Panel *panel, gboolean sensitive);
 
 G_END_DECLS
 
-#endif /* _PANEL_H */
+#endif /* !__PANEL_H__ */

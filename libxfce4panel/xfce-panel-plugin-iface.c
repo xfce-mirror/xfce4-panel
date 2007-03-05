@@ -285,7 +285,8 @@ xfce_panel_plugin_get_type (void)
 
     if (type == 0)
     {
-        static const GTypeInfo info = {
+        GTypeInfo info =
+        {
             sizeof (XfcePanelPluginInterface),
             xfce_panel_plugin_base_init,
             NULL,
@@ -298,9 +299,7 @@ xfce_panel_plugin_get_type (void)
             NULL
         };
 
-        type = g_type_register_static (G_TYPE_INTERFACE, I_("XfcePanelPlugin"),
-                                       &info, 0);
-
+        type = g_type_register_static (G_TYPE_INTERFACE, I_("XfcePanelPlugin"), &info, 0);
         g_type_interface_add_prerequisite(type, GTK_TYPE_CONTAINER);
     }
 
@@ -608,12 +607,12 @@ xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
                                      GTK_BUTTONS_NONE,
                                      _("Remove \"%s\"?"), name);
 
-    gtk_dialog_add_buttons (GTK_DIALOG (dialog), 
+    gtk_dialog_add_buttons (GTK_DIALOG (dialog),
                             GTK_STOCK_CANCEL, GTK_RESPONSE_NO,
                             GTK_STOCK_REMOVE, GTK_RESPONSE_YES,
                             NULL);
     g_free (name);
-    
+
     gtk_window_set_screen (GTK_WINDOW (dialog),
                            gtk_widget_get_screen (GTK_WIDGET (plugin)));
 

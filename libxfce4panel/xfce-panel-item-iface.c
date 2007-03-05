@@ -179,7 +179,8 @@ xfce_panel_item_get_type (void)
 
     if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        static const GTypeInfo info = {
+        GTypeInfo info =
+        {
             sizeof (XfcePanelItemInterface),
             xfce_panel_item_base_init,
             NULL,
@@ -192,8 +193,7 @@ xfce_panel_item_get_type (void)
             NULL
         };
 
-        type = g_type_register_static (G_TYPE_INTERFACE, I_("XfcePanelItem"),
-                                       &info, 0);
+        type = g_type_register_static (G_TYPE_INTERFACE, I_("XfcePanelItem"), &info, 0);
     }
 
     return type;

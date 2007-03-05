@@ -47,16 +47,13 @@ G_BEGIN_DECLS
 #define I_(string) (g_quark_to_string (g_quark_from_static_string ((string))))
 #endif
 
-#if (!GLIB_CHECK_VERSION(2,12,0))
-GType
-g_type_register_static_simple (GType              parent_type,
-                               const gchar       *type_name,
-                               guint              class_size,
-                               GClassInitFunc     class_init,
-                               guint              instance_size,
-                               GInstanceInitFunc  instance_init,
-                               GTypeFlags         flags);
-#endif
+
+GType  _panel_g_type_register_simple  (GType        type_parent,
+                                       const gchar *type_name_static,
+                                       guint        class_size,
+                                       gpointer     class_init,
+                                       guint        instance_size,
+                                       gpointer     instance_init) G_GNUC_INTERNAL;
 
 G_END_DECLS
 

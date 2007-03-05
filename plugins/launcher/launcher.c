@@ -570,21 +570,23 @@ launcher_menu_position (GtkMenu   *menu,
 
     switch (xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (button)))
     {
-        case GTK_ARROW_NONE:
         case GTK_ARROW_UP:
             *x += widget->allocation.x;
             *y += widget->allocation.y - req.height;
             break;
+
         case GTK_ARROW_DOWN:
             *x += widget->allocation.x;
             *y += widget->allocation.y + widget->allocation.height;
             break;
+
         case GTK_ARROW_LEFT:
             *x += widget->allocation.x - req.width;
             *y += widget->allocation.y - req.height
                   + widget->allocation.height;
             break;
-        case GTK_ARROW_RIGHT:
+
+        default: /* GTK_ARROW_RIGHT and GTK_ARROW_NONE */
             *x += widget->allocation.x + widget->allocation.width;
             *y += widget->allocation.y - req.height
                   + widget->allocation.height;

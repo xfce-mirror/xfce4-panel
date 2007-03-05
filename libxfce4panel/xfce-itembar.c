@@ -151,13 +151,12 @@ xfce_itembar_get_type (void)
 
     if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        type = g_type_register_static_simple (GTK_TYPE_CONTAINER,
-                                              I_("XfceItembar"),
+        type = _panel_g_type_register_simple (GTK_TYPE_CONTAINER,
+                                              "XfceItembar",
                                               sizeof (XfceItembarClass),
-                                              (GClassInitFunc) xfce_itembar_class_init,
+                                              xfce_itembar_class_init,
                                               sizeof (XfceItembar),
-                                              (GInstanceInitFunc) xfce_itembar_init,
-                                              0);
+                                              xfce_itembar_init);
     }
 
     return type;

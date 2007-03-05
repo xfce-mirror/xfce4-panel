@@ -137,13 +137,12 @@ xfce_panel_window_get_type (void)
 
     if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        type = g_type_register_static_simple (GTK_TYPE_WINDOW,
-                                              I_("XfcePanelWindow"),
+        type = _panel_g_type_register_simple (GTK_TYPE_WINDOW,
+                                              "XfcePanelWindow",
                                               sizeof (XfcePanelWindowClass),
-                                              (GClassInitFunc) xfce_panel_window_class_init,
+                                              xfce_panel_window_class_init,
                                               sizeof (XfcePanelWindow),
-                                              (GInstanceInitFunc) xfce_panel_window_init,
-                                              0);
+                                              xfce_panel_window_init);
     }
 
     return type;

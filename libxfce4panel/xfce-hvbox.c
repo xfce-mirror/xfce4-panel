@@ -50,13 +50,12 @@ xfce_hvbox_get_type (void)
 
   if (G_UNLIKELY (type == G_TYPE_INVALID))
     {
-        type = g_type_register_static_simple (GTK_TYPE_BOX,
-                                              I_("XfceHVBox"),
+        type = _panel_g_type_register_simple (GTK_TYPE_BOX,
+                                              "XfceHVBox",
                                               sizeof (XfceHVBoxClass),
-                                              (GClassInitFunc) xfce_hvbox_class_init,
+                                              xfce_hvbox_class_init,
                                               sizeof (XfceHVBox),
-                                              (GInstanceInitFunc) xfce_hvbox_init,
-                                              0);
+                                              xfce_hvbox_init);
     }
 
     return type;
