@@ -64,6 +64,7 @@ static void             launcher_menu_drag_data_received     (GtkWidget         
 static void             launcher_button_clicked              (GtkWidget             *button,
                                                               LauncherPlugin        *launcher);
 static void             launcher_button_pointer              (GtkWidget             *button_a,
+                                                              GtkStateType           state,
                                                               GtkWidget             *button_b);
 static gboolean         launcher_button_pressed              (LauncherPlugin        *launcher,
                                                               GdkEventButton        *ev);
@@ -386,8 +387,9 @@ updatetooltip:
 
 
 static void
-launcher_button_pointer (GtkWidget *button_a,
-                             GtkWidget *button_b)
+launcher_button_pointer (GtkWidget    *button_a,
+                         GtkStateType  state,
+                         GtkWidget    *button_b)
 {
     /* sync the button states */
     gtk_widget_set_state (button_b, GTK_WIDGET_STATE (button_a));
@@ -1004,13 +1006,9 @@ launcher_new (XfcePanelPlugin *plugin)
                        GDK_ACTION_COPY);
 
     /* signals for button state sync */
-    g_signal_connect (G_OBJECT (launcher->iconbutton), "enter",
+    g_signal_connect (G_OBJECT (launcher->iconbutton), "state-changed",
                       G_CALLBACK (launcher_button_pointer), launcher->arrowbutton);
-    g_signal_connect (G_OBJECT (launcher->iconbutton), "leave",
-                      G_CALLBACK (launcher_button_pointer), launcher->arrowbutton);
-    g_signal_connect (G_OBJECT (launcher->arrowbutton), "enter",
-                      G_CALLBACK (launcher_button_pointer), launcher->iconbutton);
-    g_signal_connect (G_OBJECT (launcher->arrowbutton), "leave",
+    g_signal_connect (G_OBJECT (launcher->arrowbutton), "state-changed",
                       G_CALLBACK (launcher_button_pointer), launcher->iconbutton);
 
     /* hook for icon themes changes */
@@ -1239,7 +1237,7 @@ launcher_construct (XfcePanelPlugin *plugin)
                               G_CALLBACK (launcher_set_size), launcher);
 
     g_signal_connect_swapped (G_OBJECT (plugin), "free-data",
-		              G_CALLBACK (launcher_free), launcher);
+                      G_CALLBACK (launcher_free), launcher);
 
     g_signal_connect_swapped (G_OBJECT (plugin), "save",
                               G_CALLBACK (launcher_write), launcher);
