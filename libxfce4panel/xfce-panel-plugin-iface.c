@@ -5,7 +5,7 @@
  *  Copyright © 2005 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published 
+ *  it under the terms of the GNU Library General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -56,12 +56,12 @@ xfce_panel_plugin_base_init (gpointer g_class)
     if (!initialized)
     {
         GType ptypes[1];
-        
+
         /* signals (note: there are no class closures here) */
 
         /* screen position */
         ptypes[0] = XFCE_TYPE_SCREEN_POSITION;
-        
+
         /**
          * XfcePanelPlugin::screen-position-changed
          * @plugin   : a #XfcePanelPlugin widget
@@ -73,15 +73,15 @@ xfce_panel_plugin_base_init (gpointer g_class)
         xfce_panel_plugin_signals [SCREEN_POSITION_CHANGED] =
             g_signal_newv ("screen-position-changed",
                            XFCE_TYPE_PANEL_PLUGIN,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE |
                                  G_SIGNAL_NO_HOOKS,
                            NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__ENUM, 
+                           g_cclosure_marshal_VOID__ENUM,
                            G_TYPE_NONE, 1, ptypes);
 
         /* orientation */
         ptypes[0] = GTK_TYPE_ORIENTATION;
-        
+
         /**
          * XfcePanelPlugin::orientation-changed
          * @plugin      : a #XfcePanelPlugin widget
@@ -92,35 +92,35 @@ xfce_panel_plugin_base_init (gpointer g_class)
         xfce_panel_plugin_signals [ORIENTATION_CHANGED] =
             g_signal_newv ("orientation-changed",
                            XFCE_TYPE_PANEL_PLUGIN,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE |
                                  G_SIGNAL_NO_HOOKS,
                            NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__ENUM, 
+                           g_cclosure_marshal_VOID__ENUM,
                            G_TYPE_NONE, 1, ptypes);
 
         /* size */
         ptypes[0] = G_TYPE_INT;
-        
+
         /**
          * XfcePanelPlugin::size-changed
          * @plugin      : a #XfcePanelPlugin widget
          * @size        : new panel size
          *
-         * Emitted when the panel size changes. By default a plugin will 
-         * get a geometry of @size x @size. This means that a plugin writer 
+         * Emitted when the panel size changes. By default a plugin will
+         * get a geometry of @size x @size. This means that a plugin writer
          * must handle this signal for any other behavior, even to 'do nothing'.
          *
          * Return value: A callback function should return %TRUE when the signal
-         *               is handled and %FALSE otherwise, in which case the 
+         *               is handled and %FALSE otherwise, in which case the
          *               default handler will run.
          **/
         xfce_panel_plugin_signals [SIZE_CHANGED] =
             g_signal_newv ("size-changed",
                            XFCE_TYPE_PANEL_PLUGIN,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE |
                                  G_SIGNAL_NO_HOOKS,
                            NULL, g_signal_accumulator_true_handled, NULL,
-                           _xfce_marshal_BOOLEAN__INT, 
+                           _xfce_marshal_BOOLEAN__INT,
                            G_TYPE_BOOLEAN, 1, ptypes);
 
         /**
@@ -135,10 +135,10 @@ xfce_panel_plugin_base_init (gpointer g_class)
         xfce_panel_plugin_signals [FREE_DATA] =
             g_signal_newv ("free-data",
                            XFCE_TYPE_PANEL_PLUGIN,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE |
                                  G_SIGNAL_NO_HOOKS,
                            NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID, 
+                           g_cclosure_marshal_VOID__VOID,
                            G_TYPE_NONE, 0, NULL);
 
         /**
@@ -147,24 +147,24 @@ xfce_panel_plugin_base_init (gpointer g_class)
          *
          * Emitted before the panel is closing. May be called more than once
          * while the panel is running. Plugin writers should connect to
-         * this signal to save the plugins configuration. 
+         * this signal to save the plugins configuration.
          *
          * See also: xfce_panel_plugin_get_rc_file()
          **/
         xfce_panel_plugin_signals [SAVE] =
             g_signal_newv ("save",
                            XFCE_TYPE_PANEL_PLUGIN,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE |
                                  G_SIGNAL_NO_HOOKS,
                            NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID, 
+                           g_cclosure_marshal_VOID__VOID,
                            G_TYPE_NONE, 0, NULL);
 
         /**
          * XfcePanelPlugin::about
          * @plugin      : a #XfcePanelPlugin widget
          *
-         * Emitted when the 'About' menu item is clicked. Plugin writers 
+         * Emitted when the 'About' menu item is clicked. Plugin writers
          * should connect to this signal to show information about their
          * plugin (and its authors).
          *
@@ -173,17 +173,17 @@ xfce_panel_plugin_base_init (gpointer g_class)
         xfce_panel_plugin_signals [ABOUT] =
             g_signal_newv ("about",
                            XFCE_TYPE_PANEL_PLUGIN,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE |
                                  G_SIGNAL_NO_HOOKS,
                            NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID, 
+                           g_cclosure_marshal_VOID__VOID,
                            G_TYPE_NONE, 0, NULL);
 
         /**
          * XfcePanelPlugin::configure-plugin
          * @plugin      : a #XfcePanelPlugin widget
          *
-         * Emitted when the 'Configure' menu item is clicked. Plugin writers 
+         * Emitted when the 'Configure' menu item is clicked. Plugin writers
          * should connect to this signal to show a settings dialog.
          *
          * See also: xfce_panel_plugin_menu_show_configure()
@@ -191,67 +191,67 @@ xfce_panel_plugin_base_init (gpointer g_class)
         xfce_panel_plugin_signals [CONFIGURE] =
             g_signal_newv ("configure-plugin",
                            XFCE_TYPE_PANEL_PLUGIN,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | 
+                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE |
                                  G_SIGNAL_NO_HOOKS,
                            NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID, 
+                           g_cclosure_marshal_VOID__VOID,
                            G_TYPE_NONE, 0, NULL);
 
         /* properties */
 
         /**
          * XfcePanelPlugin:name
-         * 
-         * Untranslated plugin name. This identifies the plugin type and 
+         *
+         * Untranslated plugin name. This identifies the plugin type and
          * therefore has to be unique.
          **/
-        g_object_interface_install_property (g_class, 
-                g_param_spec_string ("name", 
+        g_object_interface_install_property (g_class,
+                g_param_spec_string ("name",
                                      "xfce_panel_plugin_name",
                                      "Plugin name",
                                      NULL, G_PARAM_READABLE));
 
         /**
          * XfcePanelPlugin:id
-         * 
+         *
          * Unique identifier string created for every #XfcePanelPlugin instance.
          **/
-        g_object_interface_install_property (g_class, 
-                g_param_spec_string ("id", 
+        g_object_interface_install_property (g_class,
+                g_param_spec_string ("id",
                                      "xfce_panel_plugin_id",
                                      "Plugin id",
                                      NULL, G_PARAM_READABLE));
 
         /**
          * XfcePanelPlugin:display-name
-         * 
+         *
          * Translated plugin name. This is the name that can be presented to
          * the user, e.g. in dialogs or menus.
          **/
-        g_object_interface_install_property (g_class, 
-                g_param_spec_string ("display-name", 
+        g_object_interface_install_property (g_class,
+                g_param_spec_string ("display-name",
                                      "xfce_panel_plugin_display_name",
                                      "Plugin display name",
                                      NULL, G_PARAM_READABLE));
 
         /**
          * XfcePanelPlugin:size
-         * 
+         *
          * The current panel size.
          **/
-        g_object_interface_install_property (g_class, 
-                g_param_spec_int ("size", 
+        g_object_interface_install_property (g_class,
+                g_param_spec_int ("size",
                                   "xfce_panel_plugin_size",
                                   "Panel size",
                                   10, 128, 32, G_PARAM_READABLE));
 
         /**
          * XfcePanelPlugin:screen-position
-         * 
+         *
          * The current #XfceScreenPosition of the panel.
          **/
-        g_object_interface_install_property (g_class, 
-                g_param_spec_enum ("screen-position", 
+        g_object_interface_install_property (g_class,
+                g_param_spec_enum ("screen-position",
                                    "xfce_panel_plugin_screen_position",
                                    "Panel screen position",
                                    XFCE_TYPE_SCREEN_POSITION,
@@ -260,11 +260,11 @@ xfce_panel_plugin_base_init (gpointer g_class)
 
         /**
          * XfcePanelPlugin:expand
-         * 
+         *
          * Whether to expand the plugin when the panel width increases.
          **/
-        g_object_interface_install_property (g_class, 
-                g_param_spec_boolean ("expand", 
+        g_object_interface_install_property (g_class,
+                g_param_spec_boolean ("expand",
                                       "xfce_panel_plugin_expand",
                                       "Whether to expand the plugin",
                                       FALSE, G_PARAM_READWRITE));
@@ -280,7 +280,7 @@ xfce_panel_plugin_get_type (void)
 
     if (type == 0)
     {
-        static const GTypeInfo info = 
+        static const GTypeInfo info =
         {
             sizeof (XfcePanelPluginInterface),
             xfce_panel_plugin_base_init,  /* base_init */
@@ -293,12 +293,12 @@ xfce_panel_plugin_get_type (void)
             NULL,                        /* instance_init */
             NULL
         };
-        type = g_type_register_static (G_TYPE_INTERFACE, "XfcePanelPlugin", 
+        type = g_type_register_static (G_TYPE_INTERFACE, "XfcePanelPlugin",
                                        &info, 0);
 
         g_type_interface_add_prerequisite(type, GTK_TYPE_CONTAINER);
     }
-    
+
     return type;
 }
 
@@ -319,7 +319,7 @@ xfce_panel_plugin_signal_screen_position (XfcePanelPlugin * plugin,
 {
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
-    g_signal_emit (plugin, xfce_panel_plugin_signals[SCREEN_POSITION_CHANGED], 
+    g_signal_emit (plugin, xfce_panel_plugin_signals[SCREEN_POSITION_CHANGED],
                    0, position);
 }
 
@@ -336,7 +336,7 @@ xfce_panel_plugin_signal_orientation (XfcePanelPlugin * plugin,
 {
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
-    g_signal_emit (plugin, xfce_panel_plugin_signals[ORIENTATION_CHANGED], 0, 
+    g_signal_emit (plugin, xfce_panel_plugin_signals[ORIENTATION_CHANGED], 0,
                    orientation);
 }
 
@@ -347,14 +347,14 @@ xfce_panel_plugin_signal_orientation (XfcePanelPlugin * plugin,
  *
  * Should be called by implementations of the interface.
  **/
-void 
+void
 xfce_panel_plugin_signal_size (XfcePanelPlugin * plugin, int size)
 {
     gboolean handled = FALSE;
-    
+
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
-    g_signal_emit (plugin, xfce_panel_plugin_signals[SIZE_CHANGED], 0, 
+    g_signal_emit (plugin, xfce_panel_plugin_signals[SIZE_CHANGED], 0,
                    size, &handled);
 
     if (!handled)
@@ -369,7 +369,7 @@ xfce_panel_plugin_signal_size (XfcePanelPlugin * plugin, int size)
  *
  * Should be called by implementations of the interface.
  **/
-void 
+void
 xfce_panel_plugin_signal_free_data (XfcePanelPlugin * plugin)
 {
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -383,7 +383,7 @@ xfce_panel_plugin_signal_free_data (XfcePanelPlugin * plugin)
  *
  * Should be called by implementations of the interface.
  **/
-void 
+void
 xfce_panel_plugin_signal_save (XfcePanelPlugin * plugin)
 {
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -397,7 +397,7 @@ xfce_panel_plugin_signal_save (XfcePanelPlugin * plugin)
  *
  * Should be called by implementations of the interface.
  **/
-static void 
+static void
 xfce_panel_plugin_signal_about (XfcePanelPlugin * plugin)
 {
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -411,7 +411,7 @@ xfce_panel_plugin_signal_about (XfcePanelPlugin * plugin)
  *
  * Should be called by implementations of the interface.
  **/
-void 
+void
 xfce_panel_plugin_signal_configure (XfcePanelPlugin * plugin)
 {
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
@@ -427,14 +427,14 @@ xfce_panel_plugin_signal_configure (XfcePanelPlugin * plugin)
  * @plugin : an #XfcePanelPlugin
  *
  * The plugin name identifies a plugin type and therefore must be unique.
- * 
+ *
  * Returns: the plugin name.
  **/
 gchar *
 xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 {
     gchar *name = NULL;
-    
+
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
     g_object_get (G_OBJECT (plugin), "name", &name, NULL);
@@ -455,7 +455,7 @@ gchar *
 xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
 {
     gchar *id = NULL;
-    
+
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
     g_object_get (G_OBJECT (plugin), "id", &id, NULL);
@@ -476,7 +476,7 @@ gchar *
 xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 {
     gchar *name = NULL;
-    
+
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), NULL);
 
     g_object_get (G_OBJECT (plugin), "display-name", &name, NULL);
@@ -490,11 +490,11 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
  *
  * Returns: the current panel size.
  **/
-int 
+int
 xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
 {
     int size;
-    
+
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), 48);
 
     g_object_get (G_OBJECT (plugin), "size", &size, NULL);
@@ -508,15 +508,15 @@ xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
  *
  * Returns: the current #XfceScreenPosition of the panel.
  **/
-XfceScreenPosition 
+XfceScreenPosition
 xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
 {
     XfceScreenPosition screen_position;
-    
-    g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), 
+
+    g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin),
                           XFCE_SCREEN_POSITION_S);
 
-    g_object_get (G_OBJECT (plugin), "screen-position", &screen_position, 
+    g_object_get (G_OBJECT (plugin), "screen-position", &screen_position,
                   NULL);
 
     return screen_position;
@@ -528,11 +528,11 @@ xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
  *
  * Returns: whether the plugin will expand when the panel width increases.
  **/
-gboolean 
+gboolean
 xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
 {
     gboolean expand;
-    
+
     g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), FALSE);
 
     g_object_get (G_OBJECT (plugin), "expand", &expand, NULL);
@@ -552,11 +552,11 @@ GtkOrientation
 xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
 {
     XfceScreenPosition screen_position;
-    
-    g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), 
+
+    g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin),
                           GTK_ORIENTATION_HORIZONTAL);
 
-    g_object_get (G_OBJECT (plugin), "screen-position", &screen_position, 
+    g_object_get (G_OBJECT (plugin), "screen-position", &screen_position,
                   NULL);
 
     return xfce_screen_position_get_orientation (screen_position);
@@ -583,13 +583,13 @@ xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
                                      GTK_BUTTONS_NONE,
                                      _("Remove \"%s\"?"), name);
 
-    gtk_dialog_add_buttons (GTK_DIALOG (dialog), 
+    gtk_dialog_add_buttons (GTK_DIALOG (dialog),
                             GTK_STOCK_CANCEL, GTK_RESPONSE_NO,
                             GTK_STOCK_REMOVE, GTK_RESPONSE_YES,
                             NULL);
 
     g_free (name);
-    
+
     gtk_window_set_screen (GTK_WINDOW (dialog),
                            gtk_widget_get_screen (GTK_WIDGET (plugin)));
 
@@ -615,7 +615,7 @@ xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
  *
  * Remove the plugin from the panel.
  **/
-void 
+void
 xfce_panel_plugin_remove (XfcePanelPlugin *plugin)
 {
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->remove (plugin);
@@ -628,7 +628,7 @@ xfce_panel_plugin_remove (XfcePanelPlugin *plugin)
  *
  * Sets whether to expand the plugin when the width of the panel increases.
  **/
-void 
+void
 xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin, gboolean expand)
 {
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->set_expand (plugin, expand);
@@ -640,7 +640,7 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin, gboolean expand)
  *
  * Ask the panel to show the settings dialog.
  **/
-void 
+void
 xfce_panel_plugin_customize_panel (XfcePanelPlugin *plugin)
 {
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->customize_panel (plugin);
@@ -652,7 +652,7 @@ xfce_panel_plugin_customize_panel (XfcePanelPlugin *plugin)
  *
  * Ask the panel to show the settings dialog, with the 'Add Items' tab shown.
  **/
-void 
+void
 xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin)
 {
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->customize_items (plugin);
@@ -692,11 +692,11 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin, GtkMenu *menu)
  * Grab the focus on @widget. Asks the panel to allow focus on its items and
  * set the focus to the requested widget.
  **/
-void 
+void
 xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin, GtkWidget *widget)
 {
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->focus_panel (plugin);
-    
+
     gtk_widget_grab_focus (widget);
 }
 
@@ -718,28 +718,28 @@ void xfce_panel_plugin_set_panel_hidden (XfcePanelPlugin *plugin, gboolean hidde
 static void
 _plugin_menu_deactivate (GtkWidget *menu)
 {
-    int id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu), 
+    int id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu),
                 "xfce-panel-plugin-button-release-callback"));
 
     if (id)
     {
         g_signal_handler_disconnect (menu, id);
-        g_object_set_data (G_OBJECT (menu), 
+        g_object_set_data (G_OBJECT (menu),
                 "xfce-panel-plugin-button-release-callback", NULL);
     }
 }
 
 static gboolean
-_plugin_menu_button_released (GtkWidget *menu, GdkEventButton *ev, 
+_plugin_menu_button_released (GtkWidget *menu, GdkEventButton *ev,
                               XfcePanelPlugin *plugin)
 {
-    int id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu), 
+    int id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu),
                 "xfce-panel-plugin-button-release-callback"));
 
     if (id)
     {
         g_signal_handler_disconnect (menu, id);
-        g_object_set_data (G_OBJECT (menu), 
+        g_object_set_data (G_OBJECT (menu),
                 "xfce-panel-plugin-button-release-callback", NULL);
         return TRUE;
     }
@@ -759,13 +759,13 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     GtkWidget *menu, *mi, *img;
     int insert_position;
     int configure_position;
-    gboolean allow_customization;
     gchar *name;
-    
-    
+
+    /* just quit when the user is not allowed to edit the menu */
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
-    allow_customization = xfce_allow_panel_customization ();
+    if (G_UNLIKELY (xfce_allow_panel_customization () == FALSE))
+      return;
 
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
@@ -778,13 +778,13 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_widget_set_sensitive (mi, FALSE);
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
+
     mi = gtk_separator_menu_item_new ();
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-    
+
     /* configure, hide by default */
-    
+
     mi = gtk_image_menu_item_new_with_label (_("Properties"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -792,15 +792,15 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_widget_show (img);
     gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_signal_configure), 
+    g_signal_connect_swapped (mi, "activate",
+                              G_CALLBACK (xfce_panel_plugin_signal_configure),
                               plugin);
 
     configure_position = 2;
-    g_object_set_data (G_OBJECT (plugin), 
-                       "xfce-panel-plugin-configure-position", 
+    g_object_set_data (G_OBJECT (plugin),
+                       "xfce-panel-plugin-configure-position",
                        GINT_TO_POINTER (configure_position));
-    
+
     /* about item, hide by default */
     mi = gtk_image_menu_item_new_with_label (_("About"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -809,88 +809,80 @@ xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_widget_show (img);
     gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
-    g_signal_connect_swapped (mi, "activate", 
-                              G_CALLBACK (xfce_panel_plugin_signal_about), 
+    g_signal_connect_swapped (mi, "activate",
+                              G_CALLBACK (xfce_panel_plugin_signal_about),
                               plugin);
 
     /* move */
-    if (allow_customization)
-    {
-        mi = gtk_image_menu_item_new_with_label (_("Move"));
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-        
-        img = gtk_image_new_from_stock (GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_MENU);
-        gtk_widget_show (img);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+	mi = gtk_image_menu_item_new_with_label (_("Move"));
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-        g_signal_connect_swapped (mi, "activate", 
-                                  G_CALLBACK (xfce_panel_plugin_move), 
-                                  plugin);
+	img = gtk_image_new_from_stock (GTK_STOCK_GO_FORWARD, GTK_ICON_SIZE_MENU);
+	gtk_widget_show (img);
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
-        /* insert custom items after move */
-        insert_position = 5;
-    
-        /* remove */
-        mi = gtk_separator_menu_item_new();
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	g_signal_connect_swapped (mi, "activate",
+							  G_CALLBACK (xfce_panel_plugin_move),
+							  plugin);
 
-        mi = gtk_image_menu_item_new_with_label (_("Remove"));
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-        
-        img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
-        gtk_widget_show (img);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+	/* insert custom items after move */
+	insert_position = 5;
 
-        g_signal_connect_swapped (mi, "activate", 
-                                  G_CALLBACK (xfce_panel_plugin_remove_confirm), 
-                                  plugin);
+	/* remove */
+	mi = gtk_separator_menu_item_new();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-        /* panel section */
-        mi = gtk_separator_menu_item_new();
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+	mi = gtk_image_menu_item_new_with_label (_("Remove"));
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-        mi = gtk_image_menu_item_new_with_label (_("Add New Item"));
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-        
-        img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
-        gtk_widget_show (img);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+	img = gtk_image_new_from_stock (GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU);
+	gtk_widget_show (img);
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
-        g_signal_connect_swapped (mi, "activate", 
-                                  G_CALLBACK (xfce_panel_plugin_customize_items), 
-                                  plugin);
+	g_signal_connect_swapped (mi, "activate",
+							  G_CALLBACK (xfce_panel_plugin_remove_confirm),
+							  plugin);
 
-        mi = gtk_image_menu_item_new_with_label (_("Customize Panel"));
-        gtk_widget_show (mi);
-        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-        
-        img = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
-        gtk_widget_show (img);
-        gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+	/* panel section */
+	mi = gtk_separator_menu_item_new();
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-        g_signal_connect_swapped (mi, "activate", 
-                                  G_CALLBACK (xfce_panel_plugin_customize_panel), 
-                                  plugin);
-    }
-    else
-    {
-        /* insert custom items after about */
-        insert_position = 4;
-    }
+	mi = gtk_image_menu_item_new_with_label (_("Add New Item"));
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-insert-position", 
+	img = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+	gtk_widget_show (img);
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+
+	g_signal_connect_swapped (mi, "activate",
+							  G_CALLBACK (xfce_panel_plugin_customize_items),
+							  plugin);
+
+	mi = gtk_image_menu_item_new_with_label (_("Customize Panel"));
+	gtk_widget_show (mi);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+	img = gtk_image_new_from_stock (GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU);
+	gtk_widget_show (img);
+	gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
+
+	g_signal_connect_swapped (mi, "activate",
+							  G_CALLBACK (xfce_panel_plugin_customize_panel),
+							  plugin);
+
+    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-insert-position",
                        GINT_TO_POINTER (insert_position));
-    
+
     /* deactivation */
-    g_signal_connect (menu, "deactivate", 
+    g_signal_connect (menu, "deactivate",
                       G_CALLBACK (_plugin_menu_deactivate), NULL);
-    
-    g_object_set_data_full (G_OBJECT (plugin), "xfce-panel-plugin-menu", menu, 
+
+    g_object_set_data_full (G_OBJECT (plugin), "xfce-panel-plugin-menu", menu,
                             (GDestroyNotify)gtk_widget_destroy);
 }
 
@@ -906,41 +898,41 @@ xfce_panel_plugin_popup_menu (XfcePanelPlugin *plugin)
     GtkMenu *menu;
     int block;
 
-    block = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), 
+    block = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin),
                                                 "xfce-panel-plugin-block"));
 
     if (block > 0)
         return;
-    
+
     menu = g_object_get_data (G_OBJECT (plugin), "xfce-panel-plugin-menu");
 
     if (menu)
     {
-        int id = g_signal_connect (menu, "button-release-event", 
+        int id = g_signal_connect (menu, "button-release-event",
                       G_CALLBACK (_plugin_menu_button_released), plugin);
-    
-        g_object_set_data (G_OBJECT (menu), 
+
+        g_object_set_data (G_OBJECT (menu),
                 "xfce-panel-plugin-button-release-callback",
                 GINT_TO_POINTER (id));
 
         xfce_panel_plugin_register_menu (plugin, menu);
 
-        gtk_menu_set_screen (menu, 
+        gtk_menu_set_screen (menu,
                              gtk_widget_get_screen (GTK_WIDGET (plugin)));
-        
+
         gtk_menu_popup (menu, NULL, NULL, NULL, NULL, 0, GDK_CURRENT_TIME);
     }
 }
 
 static gboolean
-_plugin_popup_menu (GtkWidget *widget, GdkEventButton *ev, 
+_plugin_popup_menu (GtkWidget *widget, GdkEventButton *ev,
                     XfcePanelPlugin *plugin)
 {
     GtkMenu *menu;
     guint modifiers;
     int block;
 
-    block = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), 
+    block = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin),
                                                 "xfce-panel-plugin-block"));
 
     if (block > 0)
@@ -950,11 +942,11 @@ _plugin_popup_menu (GtkWidget *widget, GdkEventButton *ev,
 
     modifiers = gtk_accelerator_get_default_mod_mask ();
 
-    if (ev->button == 3 || (ev->button == 1 && 
+    if (ev->button == 3 || (ev->button == 1 &&
         (ev->state & modifiers) == GDK_CONTROL_MASK))
     {
         gtk_menu_set_screen (menu, gtk_widget_get_screen (widget));
-        
+
         xfce_panel_plugin_register_menu (plugin, menu);
 
         gtk_menu_popup (menu, NULL, NULL, NULL, NULL, ev->button, ev->time);
@@ -972,18 +964,18 @@ _plugin_popup_menu (GtkWidget *widget, GdkEventButton *ev,
  * Attach the plugin menu to this widget. Plugin writers should call this
  * for every widget that can receive mouse events. If you forget to call this
  * the plugin will not have a right-click menu and the user won't be able to
- * remove it. 
+ * remove it.
  **/
-void 
-xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin, 
+void
+xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
                                      GtkWidget *widget)
 {
-    GtkWidget *menu = 
+    GtkWidget *menu =
         g_object_get_data (G_OBJECT (plugin), "xfce-panel-plugin-menu");
 
     if (menu)
     {
-        g_signal_connect (widget, "button-press-event", 
+        g_signal_connect (widget, "button-press-event",
                           G_CALLBACK (_plugin_popup_menu), plugin);
     }
 }
@@ -995,29 +987,29 @@ xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
  *
  * Insert custom menu item.
  **/
-void 
-xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin, 
+void
+xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
                                     GtkMenuItem *item)
 {
-    GtkWidget *menu = 
+    GtkWidget *menu =
         g_object_get_data (G_OBJECT (plugin), "xfce-panel-plugin-menu");
 
     if (menu)
     {
         int position;
 
-        position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), 
+        position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin),
                     "xfce-panel-plugin-insert-position"));
 
-        gtk_menu_shell_insert (GTK_MENU_SHELL (menu), GTK_WIDGET (item), 
+        gtk_menu_shell_insert (GTK_MENU_SHELL (menu), GTK_WIDGET (item),
                                position);
 
         position++;
-        g_object_set_data (G_OBJECT (plugin), 
-                           "xfce-panel-plugin-insert-position", 
+        g_object_set_data (G_OBJECT (plugin),
+                           "xfce-panel-plugin-insert-position",
                            GINT_TO_POINTER (position));
     }
-}    
+}
 
 /**
  * xfce_panel_plugin_menu_show_about
@@ -1026,10 +1018,10 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
  * Show the 'About' item in the menu. Clicking on the menu item will emit
  * the "about" signal.
  **/
-void 
+void
 xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 {
-    GtkWidget *menu = 
+    GtkWidget *menu =
         g_object_get_data (G_OBJECT (plugin), "xfce-panel-plugin-menu");
 
     if (menu)
@@ -1037,7 +1029,7 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
         int position;
         GList *l;
 
-        position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), 
+        position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin),
                     "xfce-panel-plugin-configure-position"));
 
         l = g_list_nth (GTK_MENU_SHELL (menu)->children, position+1);
@@ -1054,11 +1046,11 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
  * Show the 'Configure' item in the menu. Clicking on the menu item will emit
  * the "configure-plugin" signal.
  **/
-void 
+void
 xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
 {
     GtkWidget *menu;
-    
+
     if (!xfce_allow_panel_customization())
         return;
 
@@ -1069,7 +1061,7 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
         int position;
         GList *l;
 
-        position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin), 
+        position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (plugin),
                     "xfce-panel-plugin-configure-position"));
 
         l = g_list_nth (GTK_MENU_SHELL (menu)->children, position);
@@ -1088,12 +1080,12 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
  *
  * See also: xfce_panel_plugin_unblock_menu()
  **/
-void 
+void
 xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
 {
     int n = 1;
 
-    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-block", 
+    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-block",
                        GINT_TO_POINTER (n));
 }
 
@@ -1105,10 +1097,10 @@ xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
  *
  * See also: xfce_panel_plugin_block_menu()
  **/
-void 
+void
 xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
 {
-    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-block", 
+    g_object_set_data (G_OBJECT (plugin), "xfce-panel-plugin-block",
                        NULL);
 }
 
@@ -1121,7 +1113,7 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  * Looks up unique filename associated with @plugin in standard configuration
  * locations. Uses xfce_resource_lookup() internally.
  *
- * Returns: path to configuration file or %NULL if none was found.  The 
+ * Returns: path to configuration file or %NULL if none was found.  The
  *          returned string must be freed using g_free().
  *
  * See also: xfce_panel_plugin_save_location()
@@ -1131,16 +1123,16 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
 {
     char path[255];
     gchar *name, *id;
-    
+
     name = xfce_panel_plugin_get_name (plugin);
     id = xfce_panel_plugin_get_id (plugin);
 
-    g_snprintf (path, 255, 
+    g_snprintf (path, 255,
                 "xfce4" G_DIR_SEPARATOR_S
-                "panel" G_DIR_SEPARATOR_S 
-                "%s-%s.rc", 
+                "panel" G_DIR_SEPARATOR_S
+                "%s-%s.rc",
                 name, id);
-                
+
     g_free (name);
     g_free (id);
 
@@ -1158,23 +1150,23 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
  * Returns: path to configuration file or %NULL is the file could not be
  *          created. The returned string must be freed using g_free().
  *
- * See also: xfce_panel_plugin_lookup_rc_file() 
+ * See also: xfce_panel_plugin_lookup_rc_file()
  **/
 char *
 xfce_panel_plugin_save_location (XfcePanelPlugin *plugin, gboolean create)
 {
     char path[255];
     gchar *name, *id;
-    
+
     name = xfce_panel_plugin_get_name (plugin);
     id = xfce_panel_plugin_get_id (plugin);
 
-    g_snprintf (path, 255, 
+    g_snprintf (path, 255,
                 "xfce4" G_DIR_SEPARATOR_S
-                "panel" G_DIR_SEPARATOR_S 
-                "%s-%s.rc", 
+                "panel" G_DIR_SEPARATOR_S
+                "%s-%s.rc",
                 name, id);
-                
+
     g_free (name);
     g_free (id);
 
@@ -1188,13 +1180,13 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin, gboolean create)
  *
  * This should only be called by plugin implementations.
  **/
-void 
+void
 xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin, gboolean sensitive)
 {
     if (GTK_BIN (plugin)->child)
         gtk_widget_set_sensitive (GTK_BIN (plugin)->child, sensitive);
     else
-        g_signal_connect_after (plugin, "realize", 
+        g_signal_connect_after (plugin, "realize",
                                 G_CALLBACK (xfce_panel_plugin_set_sensitive),
                                 GINT_TO_POINTER (sensitive));
 }
