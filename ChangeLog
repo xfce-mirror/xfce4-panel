@@ -1,3 +1,10 @@
+2007-03-07 19:35  nick
+
+	* libxfce4panel/xfce-panel-plugin-iface.c: Don't show the right-click menu
+	  when the user is not allowed to customize the panel. This way the
+	  xfce_panel_plugin_menu_insert_item items are never show (also the
+	  'save' ones), but they are hardly used (bad excuse, I know).
+
 2007-03-05 21:55  nick
 
 	* panel/panel-dialogs.c: Set Full Height or Full Width based on the panel position.
