@@ -131,27 +131,14 @@ static void        launcher_dialog_response                  (GtkWidget         
 static gchar *
 launcher_dialog_parse_exec (const gchar *exec)
 {
-    gchar *expanded, *command = NULL;
+    gchar *command;
 
     /* quit if nothing is set */
     if (exec == NULL)
         return NULL;
 
     /* expand enviorement variables like ~/ and ~user/ */
-    expanded = xfce_expand_variables (exec, NULL);
-
-    /* use %f if an application hasn't set anything else */
-    if (expanded != NULL &&
-        strstr (exec, "%f") == NULL && strstr (exec, "%F") == NULL &&
-        strstr (exec, "%u") == NULL && strstr (exec, "%U") == NULL)
-    {
-        command = g_strconcat (expanded, " %f", NULL);
-        g_free (expanded);
-    }
-    else
-    {
-        command = expanded;
-    }
+    command = xfce_expand_variables (exec, NULL);
 
     return command;
 }
@@ -746,14 +733,12 @@ launcher_dialog_command_chooser (LauncherDialog *ld)
     if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
     {
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
-        s = g_strconcat (filename, " %f", NULL);
 
         /* set the new entry text */
-        gtk_entry_set_text (GTK_ENTRY (ld->entry_exec), s);
+        gtk_entry_set_text (GTK_ENTRY (ld->entry_exec), filename);
 
         /* cleanup */
         g_free (filename);
-        g_free (s);
     }
 
     /* destroy dialog */
