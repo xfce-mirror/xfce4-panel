@@ -40,6 +40,7 @@
 
 
 
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
 typedef struct
 {
   SnLauncherContext *sn_launcher;
@@ -47,6 +48,7 @@ typedef struct
   guint              watch_id;
   GPid               pid;
 } LauncherStartupData;
+#endif
 
 
 
@@ -421,7 +423,7 @@ launcher_exec_on_screen (GdkScreen     *screen,
                 /* append the startup notification id */
                 envp[m++] = g_strconcat ("DESKTOP_STARTUP_ID=", sn_launcher_context_get_startup_id (sn_launcher), NULL);
                 envp[m] = NULL;
-                
+
                 /* we want to watch the child process */
                 flags |= G_SPAWN_DO_NOT_REAP_CHILD;
             }
