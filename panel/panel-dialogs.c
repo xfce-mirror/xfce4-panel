@@ -205,9 +205,12 @@ cursor_changed (GtkTreeView * tv, PanelItemsDialog *pid)
     GtkTreeModel *model;
     GtkTreeIter iter;
     XfcePanelItemInfo *info;
-    
-    sel = gtk_tree_view_get_selection (tv);
-    gtk_tree_selection_get_selected (sel, &model, &iter);
+
+    if (!(sel = gtk_tree_view_get_selection (tv)))
+        return;
+
+    if (!gtk_tree_selection_get_selected (sel, &model, &iter))
+        return;
 
     gtk_tree_model_get (model, &iter, 0, &info, -1);
 }
@@ -325,7 +328,8 @@ treeview_data_get (GtkWidget *widget, GdkDragContext *drag_context,
             return;
         }
         
-        gtk_tree_selection_get_selected (sel, &model, &iter);
+        if (!gtk_tree_selection_get_selected (sel, &model, &iter))
+            return;
 
         gtk_tree_model_get (model, &iter, 0, &info, -1);
 
