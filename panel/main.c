@@ -45,13 +45,13 @@
 #endif
 
 /* globals */
-static gboolean  opt_version = FALSE;
+static gboolean  opt_version   = FALSE;
 static gboolean  opt_customize = FALSE;
-static gboolean  opt_save = FALSE;
-static gboolean  opt_restart = FALSE;
-static gboolean  opt_quit = FALSE;
-static gboolean  opt_exit = FALSE;
-static gboolean  opt_add = FALSE;
+static gboolean  opt_save      = FALSE;
+static gboolean  opt_restart   = FALSE;
+static gboolean  opt_quit      = FALSE;
+static gboolean  opt_exit      = FALSE;
+static gboolean  opt_add       = FALSE;
 static gchar    *opt_client_id = NULL;
 
 /* command line options */
