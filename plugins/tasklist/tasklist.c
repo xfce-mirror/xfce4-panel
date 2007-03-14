@@ -94,7 +94,7 @@ tasklist_free_data (Tasklist *tasklist)
     /* disconnect the screen changed signal */
     g_signal_handler_disconnect (G_OBJECT (tasklist->plugin),
                                  tasklist->screen_changed_id);
-                                 
+
     panel_slice_free (Tasklist, tasklist);
 }
 
@@ -129,9 +129,7 @@ tasklist_read_rc_file (Tasklist *tasklist)
             tasklist->flat_buttons   = xfce_rc_read_bool_entry (rc, "flat_buttons", tasklist->flat_buttons);
             tasklist->show_handles   = xfce_rc_read_bool_entry (rc, "show_handles", tasklist->show_handles);
             tasklist->width          = xfce_rc_read_int_entry  (rc, "width",tasklist->width);
-
-            if (tasklist_using_xinerama (tasklist->plugin))
-                tasklist->expand = xfce_rc_read_int_entry (rc, "expand", tasklist->expand);
+            tasklist->expand         = xfce_rc_read_bool_entry (rc, "expand", tasklist->expand);
 
             xfce_rc_close (rc);
         }
@@ -227,14 +225,14 @@ tasklist_screen_changed (Tasklist  *tasklist,
                          GdkScreen *screen)
 {
     NetkScreen *ns;
-	
+
     /* get the new screen */
     screen = gtk_widget_get_screen (GTK_WIDGET (tasklist->plugin));
-	
+
 	/* be secure */
     if (G_UNLIKELY (screen == NULL))
         screen = gdk_screen_get_default ();
-        
+
     ns = netk_screen_get (gdk_screen_get_number (screen));
 
     netk_tasklist_set_screen (NETK_TASKLIST (tasklist->list), ns);
