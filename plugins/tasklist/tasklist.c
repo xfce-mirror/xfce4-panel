@@ -129,7 +129,10 @@ tasklist_read_rc_file (Tasklist *tasklist)
             tasklist->flat_buttons   = xfce_rc_read_bool_entry (rc, "flat_buttons", tasklist->flat_buttons);
             tasklist->show_handles   = xfce_rc_read_bool_entry (rc, "show_handles", tasklist->show_handles);
             tasklist->width          = xfce_rc_read_int_entry  (rc, "width",tasklist->width);
-            tasklist->expand         = xfce_rc_read_bool_entry (rc, "expand", tasklist->expand);
+
+
+            if (tasklist_using_xinerama (tasklist->plugin))
+                tasklist->expand = xfce_rc_read_bool_entry (rc, "expand", tasklist->expand);
 
             xfce_rc_close (rc);
         }
