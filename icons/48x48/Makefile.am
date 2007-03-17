@@ -6,6 +6,9 @@ icons_DATA =								\
 	xfce4-panel.png							\
 	xfce4-iconbox.png						\
 	xfce4-taskbar.png						\
+	xfce4-clock.png							\
+	xfce4-separator.png						\
+	xfce4-systray.png						\
 	xfce-mouse.png
 
 EXTRA_DIST =								\
