@@ -1,0 +1,199 @@
+/* $Id$ */
+/*-
+ * Copyright (c) 2007 Nick Schermer <nick@xfce.org>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the
+ * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+/* This file lists all exported symbols. It is used to generate
+ * the gobject.def file used to control exports on Windows and the
+ * libxfce4panelvfs-alias.h/libxfce4panel-aliasdef.c files used to avoid PLT
+ * entries for * internal uses of exported functions (see
+ * make-libxfce4panel-alias.pl).
+ *
+ * Every symbol must be included in the right
+ * #ifdef IN_HEADER(sym) #endif and
+ * #ifdef IN_SOURCE(sym) #endif sections.
+ */
+
+#ifdef ALL_FILES
+#define IN_SOURCE(x) 1
+#define IN_HEADER(x) 1
+#endif
+
+
+
+#if IN_HEADER(__XFCE_ARROW_BUTTON_H__)
+#if IN_SOURCE(__XFCE_ARROW_BUTTON_C__)
+xfce_arrow_button_get_type G_GNUC_CONST
+xfce_arrow_button_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_arrow_button_set_arrow_type
+xfce_arrow_button_get_arrow_type
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_HVBOX_H__)
+#if IN_SOURCE(__XFCE_HVBOX_C__)
+xfce_hvbox_get_type G_GNUC_CONST
+xfce_hvbox_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_hvbox_set_orientation
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_ITEMBAR_H__)
+#if IN_SOURCE(__XFCE_ITEMBAR_C__)
+xfce_itembar_get_type G_GNUC_CONST
+xfce_itembar_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_itembar_set_orientation
+xfce_itembar_get_orientation
+xfce_itembar_insert
+xfce_itembar_append
+xfce_itembar_prepend
+xfce_itembar_reorder_child
+xfce_itembar_set_child_expand
+xfce_itembar_get_child_expand
+xfce_itembar_get_n_items
+xfce_itembar_get_item_index
+xfce_itembar_get_nth_item G_GNUC_WARN_UNUSED_RESULT
+xfce_itembar_raise_event_window
+xfce_itembar_lower_event_window
+xfce_itembar_event_window_is_raised
+xfce_itembar_get_item_at_point G_GNUC_WARN_UNUSED_RESULT
+xfce_itembar_get_drop_index
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_PANEL_CONVENIENCE_H__)
+#if IN_SOURCE(__XFCE_PANEL_CONVENIENCE_C__)
+xfce_create_panel_button G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_create_panel_toggle_button G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_allow_panel_customization
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_EXTERNAL_PANEL_ITEM_H__)
+#if IN_SOURCE(__XFCE_EXTERNAL_PANEL_ITEM_C__)
+xfce_external_panel_item_get_type G_GNUC_CONST
+xfce_external_panel_item_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_EXTERNAL_PANEL_PLUGIN_H__)
+#if IN_SOURCE(__XFCE_EXTERNAL_PANEL_PLUGIN_C__)
+xfce_external_panel_plugin_get_type G_GNUC_CONST
+xfce_external_panel_plugin_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_INTERNAL_PANEL_PLUGIN_H__)
+#if IN_SOURCE(__XFCE_INTERNAL_PANEL_PLUGIN_C__)
+xfce_internal_panel_plugin_get_type G_GNUC_CONST
+xfce_internal_panel_plugin_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_PANEL_ITEM_IFACE_H__)
+#if IN_SOURCE(__XFCE_PANEL_ITEM_IFACE_C__)
+xfce_panel_item_get_type G_GNUC_CONST
+xfce_panel_item_focus_panel
+xfce_panel_item_expand_changed
+xfce_panel_item_menu_deactivated
+xfce_panel_item_menu_opened
+xfce_panel_item_customize_panel
+xfce_panel_item_customize_items
+xfce_panel_item_move
+xfce_panel_item_set_panel_hidden
+xfce_panel_item_get_name
+xfce_panel_item_get_id
+xfce_panel_item_get_display_name
+xfce_panel_item_get_expand
+xfce_panel_item_save
+xfce_panel_item_free_data
+xfce_panel_item_set_size
+xfce_panel_item_set_screen_position
+xfce_panel_item_set_sensitive
+xfce_panel_item_remove
+xfce_panel_item_configure
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_PANEL_PLUGIN_IFACE_H__)
+#if IN_SOURCE(__XFCE_PANEL_PLUGIN_IFACE_C__)
+xfce_panel_plugin_get_type G_GNUC_CONST
+xfce_panel_plugin_get_name G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_panel_plugin_get_id G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_panel_plugin_get_display_name G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_panel_plugin_get_size
+xfce_panel_plugin_get_screen_position
+xfce_panel_plugin_set_expand
+xfce_panel_plugin_get_expand
+xfce_panel_plugin_get_orientation
+xfce_panel_plugin_add_action_widget
+xfce_panel_plugin_menu_insert_item
+xfce_panel_plugin_menu_show_about
+xfce_panel_plugin_menu_show_configure
+xfce_panel_plugin_block_menu
+xfce_panel_plugin_unblock_menu
+xfce_panel_plugin_register_menu
+xfce_panel_plugin_lookup_rc_file G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_panel_plugin_save_location G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_panel_plugin_focus_widget
+xfce_panel_plugin_set_panel_hidden
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_PANEL_PLUGIN_MESSAGES_H__)
+#if IN_SOURCE(__XFCE_PANEL_PLUGIN_MESSAGES_C__)
+xfce_panel_plugin_message_send
+#endif
+#endif
+
+
+
+#if IN_HEADER(__XFCE_PANEL_WINDOW_H__)
+#if IN_SOURCE(__XFCE_PANEL_WINDOW_C__)
+xfce_panel_window_get_type G_GNUC_CONST
+xfce_panel_window_new G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT
+xfce_panel_window_set_orientation
+xfce_panel_window_get_orientation
+xfce_panel_window_set_handle_style
+xfce_panel_window_get_handle_style
+xfce_panel_window_set_show_border
+xfce_panel_window_get_show_border
+xfce_panel_window_set_resize_function
+xfce_panel_window_set_move_function
+xfce_panel_window_set_movable
+xfce_panel_window_get_movable
+#endif
+#endif

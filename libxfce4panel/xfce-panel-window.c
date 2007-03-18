@@ -27,10 +27,11 @@
 
 #include <gtk/gtk.h>
 
-#include "xfce-panel-macros.h"
-#include "xfce-marshal.h"
-#include "xfce-panel-enum-types.h"
-#include "xfce-panel-window.h"
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/libxfce4panel-marshal.h>
+#include <libxfce4panel/libxfce4panel-enum-types.h>
+#include <libxfce4panel/xfce-panel-window.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 #define XFCE_PANEL_WINDOW_GET_PRIVATE(o) \
     (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_PANEL_WINDOW, \
@@ -156,29 +157,25 @@ xfce_panel_window_class_init (XfcePanelWindowClass *klass)
 {
     GObjectClass      *gobject_class;
     GtkWidgetClass    *widget_class;
-    GtkContainerClass *container_class;
 
     g_type_class_add_private (klass, sizeof (XfcePanelWindowPrivate));
 
     parent_class    = g_type_class_peek_parent (klass);
-    gobject_class   = (GObjectClass *) klass;
-    widget_class    = (GtkWidgetClass *) klass;
-    container_class = (GtkContainerClass *) klass;
 
-    gobject_class->get_property        = xfce_panel_window_get_property;
-    gobject_class->set_property        = xfce_panel_window_set_property;
+    gobject_class = G_OBJECT_CLASS (klass);
+    gobject_class->get_property = xfce_panel_window_get_property;
+    gobject_class->set_property = xfce_panel_window_set_property;
 
+    widget_class = GTK_WIDGET_CLASS (klass);
     widget_class->realize              = xfce_panel_window_realize;
     widget_class->unrealize            = xfce_panel_window_unrealize;
     widget_class->map                  = xfce_panel_window_map;
     widget_class->unmap                = xfce_panel_window_unmap;
     widget_class->show                 = xfce_panel_window_show;
     widget_class->hide                 = xfce_panel_window_hide;
-
     widget_class->expose_event         = xfce_panel_window_expose;
     widget_class->size_request         = xfce_panel_window_size_request;
     widget_class->size_allocate        = xfce_panel_window_size_allocate;
-
     widget_class->button_press_event   = xfce_panel_window_button_press;
     widget_class->button_release_event = xfce_panel_window_button_release;
     widget_class->motion_notify_event  = xfce_panel_window_motion_notify;
@@ -237,7 +234,7 @@ xfce_panel_window_class_init (XfcePanelWindowClass *klass)
                       G_STRUCT_OFFSET (XfcePanelWindowClass,
                                        move),
                       NULL, NULL,
-                      _xfce_marshal_VOID__INT_INT,
+                      _libxfce4panel_marshal_VOID__INT_INT,
                       G_TYPE_NONE,
                       2,
                       G_TYPE_INT,
@@ -259,7 +256,7 @@ xfce_panel_window_class_init (XfcePanelWindowClass *klass)
                       G_STRUCT_OFFSET (XfcePanelWindowClass,
                                        move_end),
                       NULL, NULL,
-                      _xfce_marshal_VOID__INT_INT,
+                      _libxfce4panel_marshal_VOID__INT_INT,
                       G_TYPE_NONE,
                       2,
                       G_TYPE_INT,
@@ -280,7 +277,7 @@ xfce_panel_window_class_init (XfcePanelWindowClass *klass)
                                                         "The orientation of the itembar",
                                                         GTK_TYPE_ORIENTATION,
                                                         GTK_ORIENTATION_HORIZONTAL,
-                                                        G_PARAM_READWRITE));
+                                                        PANEL_PARAM_READWRITE));
 
 
     /**
@@ -295,7 +292,7 @@ xfce_panel_window_class_init (XfcePanelWindowClass *klass)
                                                         "Type of handles to draw",
                                                         XFCE_TYPE_HANDLE_STYLE,
                                                         DEFAULT_HANDLE_STYLE,
-                                                        G_PARAM_READWRITE));
+                                                        PANEL_PARAM_READWRITE));
 }
 
 
@@ -817,7 +814,7 @@ xfce_panel_window_button_press (GtkWidget      *widget,
     XfcePanelWindowPrivate *priv;
     GdkCursor              *fleur;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
+    _panel_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
 
     panel_window = XFCE_PANEL_WINDOW (widget);
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
@@ -860,7 +857,7 @@ xfce_panel_window_button_release (GtkWidget      *widget,
     XfcePanelWindow        *panel_window;
     XfcePanelWindowPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
+    _panel_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
 
     panel_window = XFCE_PANEL_WINDOW (widget);
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
@@ -888,7 +885,7 @@ xfce_panel_window_motion_notify (GtkWidget      *widget,
     XfcePanelWindowPrivate *priv;
     gint                    new_x, new_y;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
+    _panel_return_val_if_fail (XFCE_IS_PANEL_WINDOW (widget), FALSE);
 
     panel_window = XFCE_PANEL_WINDOW (widget);
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (panel_window);
@@ -1011,7 +1008,7 @@ _paint_handle (XfcePanelWindow *panel_window,
 GtkWidget *
 xfce_panel_window_new (void)
 {
-    return GTK_WIDGET (g_object_new (XFCE_TYPE_PANEL_WINDOW, NULL));
+    return g_object_new (XFCE_TYPE_PANEL_WINDOW, NULL);
 }
 
 
@@ -1029,7 +1026,7 @@ xfce_panel_window_get_orientation (XfcePanelWindow *window)
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), DEFAULT_ORIENTATION);
+    _panel_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), DEFAULT_ORIENTATION);
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1051,7 +1048,7 @@ xfce_panel_window_set_orientation (XfcePanelWindow *window,
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
+    _panel_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1078,7 +1075,7 @@ xfce_panel_window_get_handle_style (XfcePanelWindow *window)
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), DEFAULT_HANDLE_STYLE);
+    _panel_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), DEFAULT_HANDLE_STYLE);
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1100,7 +1097,7 @@ xfce_panel_window_set_handle_style (XfcePanelWindow *window,
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
+    _panel_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1135,7 +1132,7 @@ xfce_panel_window_get_show_border (XfcePanelWindow *window,
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
+    _panel_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1170,7 +1167,7 @@ xfce_panel_window_set_show_border (XfcePanelWindow *window,
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
+    _panel_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1205,7 +1202,7 @@ xfce_panel_window_set_move_function (XfcePanelWindow         *window,
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
+    _panel_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1230,7 +1227,7 @@ xfce_panel_window_set_resize_function (XfcePanelWindow           *window,
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
+    _panel_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1254,7 +1251,7 @@ xfce_panel_window_get_movable (XfcePanelWindow *window)
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), TRUE);
+    _panel_return_val_if_fail (XFCE_IS_PANEL_WINDOW (window), TRUE);
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
@@ -1276,9 +1273,15 @@ xfce_panel_window_set_movable (XfcePanelWindow *window,
 {
     XfcePanelWindowPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
+    _panel_return_if_fail (XFCE_IS_PANEL_WINDOW (window));
 
     priv = XFCE_PANEL_WINDOW_GET_PRIVATE (window);
 
     priv->movable = movable;
 }
+
+
+
+#define __XFCE_PANEL_WINDOW_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

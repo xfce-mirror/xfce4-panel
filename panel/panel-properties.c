@@ -37,6 +37,7 @@
 #include <libxfce4panel/xfce-itembar.h>
 #include <libxfce4panel/xfce-panel-item-iface.h>
 #include <libxfce4panel/xfce-panel-enums.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 
 #include "panel-properties.h"
 #include "panel-private.h"
@@ -376,7 +377,7 @@ _set_struts (Panel       *panel,
 
         gdk_error_trap_pop ();
     }
-    
+
     DBG ("all struts are checked and updated");
 }
 
@@ -758,11 +759,11 @@ _unhide_timeout (Panel *panel)
 }
 
 static gboolean
-drag_motion (Panel          *panel, 
+drag_motion (Panel          *panel,
              GdkDragContext *context,
-             int             x, 
-             int             y, 
-             guint           time, 
+             int             x,
+             int             y,
+             guint           time,
              gpointer        user_data)
 {
     PanelPrivate *priv;

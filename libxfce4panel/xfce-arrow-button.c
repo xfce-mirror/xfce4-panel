@@ -22,15 +22,19 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STDIO_H
 #include <stdio.h>
+#endif
+#ifdef HAVE_STRING_H
 #include <string.h>
+#endif
 
 #include <gtk/gtk.h>
-
-#include "xfce-marshal.h"
-#include "xfce-panel-macros.h"
-#include "xfce-panel-enum-types.h"
-#include "xfce-arrow-button.h"
+#include <libxfce4panel/libxfce4panel-marshal.h>
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/libxfce4panel-enum-types.h>
+#include <libxfce4panel/xfce-arrow-button.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 #define ARROW_WIDTH          8
 #define ARROW_PADDING        2
@@ -106,17 +110,17 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
     GtkWidgetClass    *widget_class;
     GtkContainerClass *container_class;
 
-    parent_class    = g_type_class_peek_parent (klass);
-    gobject_class   = (GObjectClass *) klass;
-    widget_class    = (GtkWidgetClass *) klass;
-    container_class = (GtkContainerClass *) klass;
+    parent_class = g_type_class_peek_parent (klass);
 
+    gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->get_property = xfce_arrow_button_get_property;
     gobject_class->set_property = xfce_arrow_button_set_property;
 
+    widget_class = GTK_WIDGET_CLASS (klass);
     widget_class->expose_event  = xfce_arrow_button_expose;
     widget_class->size_request  = xfce_arrow_button_size_request;
 
+    container_class = GTK_CONTAINER_CLASS (klass);
     container_class->add        = xfce_arrow_button_add;
     container_class->child_type = xfce_arrow_button_child_type;
 
@@ -131,14 +135,13 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
     * This value also determines the direction of the popup menu.
     **/
     arrow_button_signals[ARROW_TYPE_CHANGED] =
-    g_signal_new (I_("arrow-type-changed"),
-                  G_OBJECT_CLASS_TYPE (klass),
-                  G_SIGNAL_RUN_FIRST,
-                  G_STRUCT_OFFSET (XfceArrowButtonClass,
-                                   arrow_type_changed),
-                  NULL, NULL,
-                  g_cclosure_marshal_VOID__ENUM,
-                  G_TYPE_NONE, 1, GTK_TYPE_ARROW_TYPE);
+        g_signal_new (I_("arrow-type-changed"),
+                      G_OBJECT_CLASS_TYPE (klass),
+                      G_SIGNAL_RUN_FIRST,
+                      G_STRUCT_OFFSET (XfceArrowButtonClass, arrow_type_changed),
+                      NULL, NULL,
+                      g_cclosure_marshal_VOID__ENUM,
+                      G_TYPE_NONE, 1, GTK_TYPE_ARROW_TYPE);
 
     /* properties */
 
@@ -155,7 +158,7 @@ xfce_arrow_button_class_init (XfceArrowButtonClass * klass)
                                                         "The arrow type of the menu button",
                                                         GTK_TYPE_ARROW_TYPE,
                                                         GTK_ARROW_UP,
-                                                        G_PARAM_READWRITE));
+                                                        PANEL_PARAM_READWRITE));
 }
 
 
@@ -281,11 +284,7 @@ xfce_arrow_button_child_type (GtkContainer *container)
 GtkWidget *
 xfce_arrow_button_new (GtkArrowType type)
 {
-    XfceArrowButton *button;
-
-    button = g_object_new (XFCE_TYPE_ARROW_BUTTON, "arrow_type", type, NULL);
-
-    return GTK_WIDGET (button);
+    return g_object_new (XFCE_TYPE_ARROW_BUTTON, "arrow_type", type, NULL);
 }
 
 
@@ -301,7 +300,7 @@ void
 xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
                                   GtkArrowType     type)
 {
-    g_return_if_fail (XFCE_IS_ARROW_BUTTON (button));
+    _panel_return_if_fail (XFCE_IS_ARROW_BUTTON (button));
 
     button->arrow_type = type;
 
@@ -323,7 +322,13 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
 GtkArrowType
 xfce_arrow_button_get_arrow_type (XfceArrowButton *button)
 {
-    g_return_val_if_fail (XFCE_IS_ARROW_BUTTON (button), DEFAULT_ARROW_TYPE);
+    _panel_return_val_if_fail (XFCE_IS_ARROW_BUTTON (button), DEFAULT_ARROW_TYPE);
 
     return button->arrow_type;
 }
+
+
+
+#define __XFCE_ARROW_BUTTON_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

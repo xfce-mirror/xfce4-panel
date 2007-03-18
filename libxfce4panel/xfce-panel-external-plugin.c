@@ -29,17 +29,16 @@
 
 #include <gtk/gtk.h>
 
-#include "xfce-panel-macros.h"
-#include "xfce-panel-enum-types.h"
-#include "xfce-panel-plugin-iface.h"
-#include "xfce-panel-plugin-iface-private.h"
-#include "xfce-panel-external-plugin.h"
-#include "xfce-panel-plugin-messages.h"
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/libxfce4panel-enum-types.h>
+#include <libxfce4panel/xfce-panel-plugin-iface.h>
+#include <libxfce4panel/xfce-panel-plugin-iface-private.h>
+#include <libxfce4panel/xfce-panel-external-plugin.h>
+#include <libxfce4panel/xfce-panel-plugin-messages.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
-#define XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE(o) \
-    (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, \
-                                  XfceExternalPanelPluginPrivate))
-                                  
+#define XFCE_EXTERNAL_PANEL_PLUGIN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, XfceExternalPanelPluginPrivate))
+
 /* Required arguments: socket_id, name, id, display_name, size, screen_position */
 #define REQUIRED_ARGS  6
 
@@ -151,30 +150,18 @@ xfce_external_panel_plugin_class_init (XfceExternalPanelPluginClass *klass)
 
     g_type_class_add_private (klass, sizeof (XfceExternalPanelPluginPrivate));
 
-    object_class = (GObjectClass *) klass;
-
+    object_class = G_OBJECT_CLASS (klass);
     object_class->finalize     = xfce_external_panel_plugin_finalize;
     object_class->get_property = xfce_external_panel_plugin_get_property;
     object_class->set_property = xfce_external_panel_plugin_set_property;
 
     /* properties */
-    g_object_class_override_property (object_class, PROP_NAME,
-                                      "name");
-
-    g_object_class_override_property (object_class, PROP_ID,
-                                     "id");
-
-    g_object_class_override_property (object_class, PROP_DISPLAY_NAME,
-                                      "display-name");
-
-    g_object_class_override_property (object_class, PROP_SIZE,
-                                      "size");
-
-    g_object_class_override_property (object_class, PROP_SCREEN_POSITION,
-                                      "screen-position");
-
-    g_object_class_override_property (object_class, PROP_EXPAND,
-                                      "expand");
+    g_object_class_override_property (object_class, PROP_NAME, "name");
+    g_object_class_override_property (object_class, PROP_ID, "id");
+    g_object_class_override_property (object_class, PROP_DISPLAY_NAME, "display-name");
+    g_object_class_override_property (object_class, PROP_SIZE, "size");
+    g_object_class_override_property (object_class, PROP_SCREEN_POSITION, "screen-position");
+    g_object_class_override_property (object_class, PROP_EXPAND, "expand");
 }
 
 
@@ -446,7 +433,7 @@ xfce_external_panel_plugin_construct (XfceExternalPanelPlugin *plugin)
 
     /* this should be run here to make sure the default size function
      * is called when the plugin doesn't handle this signal */
-    xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
+    _xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
 }
 
 
@@ -454,7 +441,7 @@ xfce_external_panel_plugin_construct (XfceExternalPanelPlugin *plugin)
 static void
 xfce_external_panel_plugin_save (XfceExternalPanelPlugin *plugin)
 {
-    xfce_panel_plugin_signal_save (XFCE_PANEL_PLUGIN (plugin));
+    _xfce_panel_plugin_signal_save (XFCE_PANEL_PLUGIN (plugin));
 }
 
 
@@ -462,7 +449,7 @@ xfce_external_panel_plugin_save (XfceExternalPanelPlugin *plugin)
 static void
 xfce_external_panel_plugin_free_data (XfceExternalPanelPlugin *plugin)
 {
-    xfce_panel_plugin_signal_free_data (XFCE_PANEL_PLUGIN (plugin));
+    _xfce_panel_plugin_signal_free_data (XFCE_PANEL_PLUGIN (plugin));
 
     gtk_widget_destroy (GTK_WIDGET (plugin));
 }
@@ -526,14 +513,13 @@ xfce_external_panel_plugin_set_screen_position (XfceExternalPanelPlugin *plugin,
 
     priv->screen_position = position;
 
-    xfce_panel_plugin_signal_screen_position (XFCE_PANEL_PLUGIN (plugin),
-                                              position);
+    _xfce_panel_plugin_signal_screen_position (XFCE_PANEL_PLUGIN (plugin), position);
 
     if (orientation_changed)
-        xfce_panel_plugin_signal_orientation (XFCE_PANEL_PLUGIN (plugin),
-                                              xfce_screen_position_get_orientation (position));
+       _xfce_panel_plugin_signal_orientation (XFCE_PANEL_PLUGIN (plugin),
+                                               xfce_screen_position_get_orientation (position));
 
-    xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
+    _xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
 }
 
 
@@ -550,7 +536,7 @@ xfce_external_panel_plugin_set_size (XfceExternalPanelPlugin *plugin,
     {
         priv->size = size;
 
-        xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), size);
+        _xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), size);
     }
 }
 
@@ -609,17 +595,17 @@ _plugin_event_received (GtkWidget               *win,
                                                                 ev->data.s[1]);
                 break;
             case XFCE_PANEL_PLUGIN_POPUP_MENU:
-                xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin));
+                _xfce_panel_plugin_popup_menu (XFCE_PANEL_PLUGIN (plugin));
                 break;
             case XFCE_PANEL_PLUGIN_SENSITIVE:
-                xfce_panel_plugin_set_sensitive (XFCE_PANEL_PLUGIN (plugin),
-                                                 ev->data.s[1] == 1);
+                _xfce_panel_plugin_set_sensitive (XFCE_PANEL_PLUGIN (plugin),
+                                                  ev->data.s[1] == 1);
                 break;
             case XFCE_PANEL_PLUGIN_REMOVE:
-                xfce_panel_plugin_remove_confirm (XFCE_PANEL_PLUGIN (plugin));
+                _xfce_panel_plugin_remove_confirm (XFCE_PANEL_PLUGIN (plugin));
                 break;
             case XFCE_PANEL_PLUGIN_CUSTOMIZE:
-                xfce_panel_plugin_signal_configure (XFCE_PANEL_PLUGIN (plugin));
+                _xfce_panel_plugin_signal_configure (XFCE_PANEL_PLUGIN (plugin));
                 break;
             default:
                 return FALSE;
@@ -710,7 +696,7 @@ xfce_external_panel_plugin_new (gint                  argc,
         gtk_widget_show (GTK_WIDGET (plugin));
 
         /* add menu */
-        xfce_panel_plugin_create_menu (plugin);
+        _xfce_panel_plugin_create_menu (plugin);
 
         xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin),
                                              GTK_WIDGET (plugin));
@@ -727,3 +713,9 @@ xfce_external_panel_plugin_new (gint                  argc,
 
     return NULL;
 }
+
+
+
+#define __XFCE_PANEL_EXTERNAL_PLUGIN_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

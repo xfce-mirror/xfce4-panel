@@ -10,13 +10,15 @@ lib_LTLIBRARIES =							\
 	libxfce4panel.la
 
 libxfce4panel_public_built_sources =					\
-	xfce-panel-enum-types.h
+	libxfce4panel-enum-types.h
 
 libxfce4panel_built_sources = 						\
 	$(libxfce4panel_public_built_sources)				\
-	xfce-panel-enum-types.c						\
-	xfce-marshal.c							\
-	xfce-marshal.h
+	libxfce4panel-enum-types.c					\
+	libxfce4panel-alias.h						\
+	libxfce4panel-aliasdef.c					\
+	libxfce4panel-marshal.c						\
+	libxfce4panel-marshal.h
 
 libxfce4panel_headers =							\
 	xfce-panel-window.h						\
@@ -65,6 +67,7 @@ libxfce4panel_la_CFLAGS =						\
 
 libxfce4panel_la_LDFLAGS = 						\
 	-export-dynamic							\
+	-export-symbols-regex "^[^_].*"					\
 	-version-info $(LIBXFCE4PANEL_VERINFO)				\
 	$(PLATFORM_LDFLAGS)
 
@@ -77,60 +80,93 @@ libxfce4panel_la_LIBADD = 						\
 	$(GTK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)
 
+##
+## Pkg-config information
+##
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libxfce4panel-1.0.pc
 
 CLEANFILES =								\
+	actual-abi							\
+	expected-abi							\
 	xgen-etc							\
 	xgen-eth							\
 	xgen-mh								\
 	xgen-mc
 
 EXTRA_DIST = 								\
-	xfce-marshal.list
+	abicheck.sh							\
+	make-libxfce4panel-alias.pl					\
+	libxfce4panel.symbols						\
+	libxfce4panel-alias.h						\
+	libxfce4panel-aliasdef.c					\
+	libxfce4panel-marshal.list
 
+##
+## Rules to auto-generate built sources
+##
 if MAINTAINER_MODE
 DISTCLEANFILES =							\
+	stamp-libxfce4panel-enum-types.h				\
+	stamp-libxfce4panel-marshal.h					\
 	$(libxfce4panel_built_sources)
 
 BUILT_SOURCES =								\
 	$(libxfce4panel_built_sources)
 
-xfce-panel-enum-types.h: $(libxfce4panel_headers)
+if HAVE_GNUC_VISIBILITY
+TESTS =									\
+	abicheck.sh
+endif
+
+libxfce4panel-alias.h: make-libxfce4panel-alias.pl libxfce4panel.symbols
+	$(PERL) $(srcdir)/make-libxfce4panel-alias.pl < $(srcdir)/libxfce4panel.symbols > libxfce4panel-alias.h
+
+libxfce4panel-aliasdef.c: make-libxfce4panel-alias.pl libxfce4panel.symbols
+	$(PERL) $(srcdir)/make-libxfce4panel-alias.pl -def < $(srcdir)/libxfce4panel.symbols > libxfce4panel-aliasdef.c
+
+libxfce4panel-enum-types.h: stamp-libxfce4panel-enum-types.h
+	@true
+stamp-libxfce4panel-enum-types.h: $(libxfce4panel_headers) Makefile
 	( cd $(srcdir) && glib-mkenums \
-		--fhead "#ifndef __XFCE_PANEL_ENUM_TYPES_H__\n#define __XFCE_PANEL_ENUM_TYPES_H__\n#include <libxfce4util/libxfce4util.h>\nG_BEGIN_DECLS\n" 		\
+		--fhead "#ifndef __LIBXFCE4PANEL_ENUM_TYPES_H__\n#define __LIBXFCE4PANEL_ENUM_TYPES_H__\n#include <libxfce4util/libxfce4util.h>\nG_BEGIN_DECLS\n" 		\
 		--fprod "/* enumerations from \"@filename@\" */\n#include <libxfce4panel/@filename@>\n" \
 		--vhead "GType @enum_name@_get_type (void) G_GNUC_CONST;\n#define XFCE_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" \
-		--ftail "G_END_DECLS\n\n#endif /* !__XFCE_PANEL_ENUM_TYPES_H__ */" \
+		--ftail "G_END_DECLS\n\n#endif /* !__LIBXFCE4PANEL_ENUM_TYPES_H__ */" \
 		$(libxfce4panel_headers) ) >> xgen-eth \
-	&& (cmp -s xgen-eth xfce-panel-enum-types.h || cp xgen-eth xfce-panel-enum-types.h ) \
-	&& rm -f xgen-eth xgen-eth~
+	&& (cmp -s xgen-eth libxfce4panel-enum-types.h || cp xgen-eth libxfce4panel-enum-types.h ) \
+	&& rm -f xgen-eth \
+	&& echo timestamp > $(@F)
 
-xfce-panel-enum-types.c: xfce-panel-enum-types.h
+libxfce4panel-enum-types.c: $(libxfce4panel_headers) Makefile
 	( cd $(srcdir) && glib-mkenums \
-		--fhead "#include <xfce-panel-enum-types.h>\n" \
+		--fhead "#include <libxfce4panel-enum-types.h>\n#include <libxfce4panel/libxfce4panel-alias.h>" \
 		--fprod "\n/* enumerations from \"@filename@\" */\n" \
 		--vhead "GType\n@enum_name@_get_type (void)\n{\n\tstatic GType type = 0;\n\tif (type == 0) {\n\tstatic const G@Type@Value values[] = {" \
 		--vprod "\t{ @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
 		--vtail "\t{ 0, NULL, NULL }\n\t};\n\ttype = g_@type@_register_static (\"@EnumName@\", values);\n  }\n\treturn type;\n}\n" \
-		$(libxfce4panel_headers) ) > xgen-etc \
-	&& cp xgen-etc xfce-panel-enum-types.c \
-	&& rm -f xgen-etc xgen-etc~
+		--ftail "\n#define __LIBXFCE4PANEL_ENUM_TYPES_C__\n#include \"libxfce4panel-aliasdef.c\"\n" \
+		$(libxfce4panel_headers) ) >> xgen-etc \
+	&& cp xgen-etc libxfce4panel-enum-types.c \
+	&& rm -f xgen-etc
 
-xfce-marshal.h: $(srcdir)/xfce-marshal.list
+libxfce4panel-marshal.h: stamp-libxfce4panel-marshal.h
+	@true
+stamp-libxfce4panel-marshal.h: $(srcdir)/libxfce4panel-marshal.list Makefile
 	( cd $(srcdir) && glib-genmarshal \
-		--prefix="_xfce_marshal" \
-		--header xfce-marshal.list \
-		| sed -e 's/marshal_data);$$/marshal_data) G_GNUC_INTERNAL;/' ) > xgen-mh \
-	&& cp xgen-mh $(@F) \
-	&& rm -f xgen-mh xgen-mh~
+		--prefix="_libxfce4panel_marshal" \
+		--header libxfce4panel-marshal.list \
+		| sed -e 's/marshal_data);$$/marshal_data) G_GNUC_INTERNAL;/' ) >> xgen-mh \
+	&& ( cmp -s xgen-mh libxfce4panel-marshal.h || cp xgen-mh libxfce4panel-marshal.h ) \
+	&& rm -f xgen-mh \
+	&& echo timestamp > $(@F)
 
-xfce-marshal.c: xfce-marshal.h
+libxfce4panel-marshal.c: libxfce4panel-marshal.h Makefile
 	( cd $(srcdir) && glib-genmarshal \
-		--prefix="_xfce_marshal" \
-		--body xfce-marshal.list ) > xgen-mc \
-	&& cp xgen-mc xfce-marshal.c \
-	&& rm -f xgen-mc xgen-mc~
+		--prefix="_libxfce4panel_marshal" \
+		--body libxfce4panel-marshal.list ) >> xgen-mc \
+	&& cp xgen-mc libxfce4panel-marshal.c \
+	&& rm -f xgen-mc
 endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

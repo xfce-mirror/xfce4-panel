@@ -18,8 +18,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __XFCE_EXTERNAL_PANEL_PLUGIN_H__
-#define __XFCE_EXTERNAL_PANEL_PLUGIN_H__
+#ifndef __XFCE_PANEL_EXTERNAL_PLUGIN_H__
+#define __XFCE_PANEL_EXTERNAL_PLUGIN_H__
 
 #include <gtk/gtkplug.h>
 #include <libxfce4panel/xfce-panel-plugin-iface.h>
@@ -53,4 +53,4 @@ GtkWidget   *xfce_external_panel_plugin_new       (gint                   argc,
 
 G_END_DECLS
 
-#endif /* !__XFCE_EXTERNAL_PANEL_PLUGIN_H__ */
+#endif /* !__XFCE_PANEL_EXTERNAL_PLUGIN_H__ */

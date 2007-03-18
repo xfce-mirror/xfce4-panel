@@ -26,8 +26,9 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
 
-#include "xfce-panel-macros.h"
-#include "xfce-panel-item-iface.h"
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/xfce-panel-item-iface.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 enum
 {
@@ -46,17 +47,12 @@ static guint xfce_panel_item_signals[LAST_SIGNAL] = { 0 };
 
 
 static void
-xfce_panel_item_base_init (gpointer g_class)
+xfce_panel_item_base_init (gpointer klass)
 {
     static gboolean initialized = FALSE;
 
-    if (initialized == FALSE)
+    if (G_UNLIKELY (!initialized))
     {
-        GType ptypes[1];
-
-        /* signals (note: there are no class closures here) */
-        ptypes[0] = G_TYPE_BOOLEAN;
-
         /**
          * XfcePanelItem::expand-changed
          * @item   : #XfcePanelItem
@@ -66,13 +62,13 @@ xfce_panel_item_base_init (gpointer g_class)
          * expand behaviour.
          **/
         xfce_panel_item_signals [EXPAND_CHANGED] =
-            g_signal_newv (I_("expand-changed"),
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__BOOLEAN,
-                           G_TYPE_NONE,
-                           1, ptypes);
+            g_signal_new (I_("expand-changed"),
+                          G_OBJECT_CLASS_TYPE (klass),
+                          G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                          0, NULL, NULL,
+                          g_cclosure_marshal_VOID__BOOLEAN,
+                          G_TYPE_NONE,
+                          1, G_TYPE_BOOLEAN);
 
         /**
          * XfcePanelItem::menu-deactivated
@@ -81,13 +77,13 @@ xfce_panel_item_base_init (gpointer g_class)
          * The signal is emitted when a plugin menu is deactivated.
          **/
         xfce_panel_item_signals [MENU_DEACTIVATED] =
-            g_signal_newv (I_("menu-deactivated"),
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID,
-                           G_TYPE_NONE,
-                           0, NULL);
+            g_signal_new (I_("menu-deactivated"),
+                          G_OBJECT_CLASS_TYPE (klass),
+                          G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                          0, NULL, NULL,
+                          g_cclosure_marshal_VOID__VOID,
+                          G_TYPE_NONE,
+                          0);
 
         /**
          * XfcePanelItem::menu-opened
@@ -96,13 +92,13 @@ xfce_panel_item_base_init (gpointer g_class)
          * The signal is emitted when a plugin menu is opened.
          **/
         xfce_panel_item_signals [MENU_OPENED] =
-            g_signal_newv (I_("menu-opened"),
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID,
-                           G_TYPE_NONE,
-                           0, NULL);
+            g_signal_new (I_("menu-opened"),
+                          G_OBJECT_CLASS_TYPE (klass),
+                          G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                          0, NULL, NULL,
+                          g_cclosure_marshal_VOID__VOID,
+                          G_TYPE_NONE,
+                          0);
 
         /**
          * XfcePanelItem::customize-panel
@@ -112,13 +108,13 @@ xfce_panel_item_base_init (gpointer g_class)
          * be shown.
          **/
         xfce_panel_item_signals [CUSTOMIZE_PANEL] =
-            g_signal_newv (I_("customize-panel"),
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID,
-                           G_TYPE_NONE,
-                           0, NULL);
+            g_signal_new (I_("customize-panel"),
+                          G_OBJECT_CLASS_TYPE (klass),
+                          G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                          0, NULL, NULL,
+                          g_cclosure_marshal_VOID__VOID,
+                          G_TYPE_NONE,
+                          0);
 
         /**
          * XfcePanelItem::customize-items
@@ -127,13 +123,13 @@ xfce_panel_item_base_init (gpointer g_class)
          * The signal is emitted when a plugin requests the 'Add Items' dialog.
          **/
         xfce_panel_item_signals [CUSTOMIZE_ITEMS] =
-            g_signal_newv (I_("customize-items"),
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID,
-                           G_TYPE_NONE,
-                           0, NULL);
+            g_signal_new (I_("customize-items"),
+                          G_OBJECT_CLASS_TYPE (klass),
+                          G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                          0, NULL, NULL,
+                          g_cclosure_marshal_VOID__VOID,
+                          G_TYPE_NONE,
+                          0);
 
         /**
          * XfcePanelItem::move
@@ -142,13 +138,13 @@ xfce_panel_item_base_init (gpointer g_class)
          * The signal is emitted when a plugin requests the item to be moved.
          **/
         xfce_panel_item_signals [MOVE] =
-            g_signal_newv (I_("move"),
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__VOID,
-                           G_TYPE_NONE,
-                           0, NULL);
+            g_signal_new (I_("move"),
+                          G_OBJECT_CLASS_TYPE (klass),
+                          G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                          0, NULL, NULL,
+                          g_cclosure_marshal_VOID__VOID,
+                          G_TYPE_NONE,
+                          0);
 
         /**
          * XfcePanelItem::set-hidden
@@ -158,13 +154,13 @@ xfce_panel_item_base_init (gpointer g_class)
          * The signal is emitted when a plugin requests the panel to unhide.
          **/
         xfce_panel_item_signals [SET_HIDDEN] =
-            g_signal_newv (I_("set-hidden"),
-                           XFCE_TYPE_PANEL_ITEM,
-                           G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                           NULL, NULL, NULL,
-                           g_cclosure_marshal_VOID__BOOLEAN,
-                           G_TYPE_NONE,
-                           1, ptypes);
+            g_signal_new (I_("set-hidden"),
+                          G_OBJECT_CLASS_TYPE (klass),
+                          G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
+                          0, NULL, NULL,
+                          g_cclosure_marshal_VOID__BOOLEAN,
+                          G_TYPE_NONE,
+                          1, G_TYPE_BOOLEAN);
 
         initialized = TRUE;
     }
@@ -241,7 +237,7 @@ void
 xfce_panel_item_expand_changed (XfcePanelItem *item,
                                 gboolean       expand)
 {
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (G_OBJECT (item), xfce_panel_item_signals[EXPAND_CHANGED],
                    0, expand, NULL);
@@ -259,7 +255,7 @@ xfce_panel_item_expand_changed (XfcePanelItem *item,
 void
 xfce_panel_item_menu_deactivated (XfcePanelItem *item)
 {
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (G_OBJECT (item), xfce_panel_item_signals[MENU_DEACTIVATED], 0, NULL);
 }
@@ -276,7 +272,7 @@ xfce_panel_item_menu_deactivated (XfcePanelItem *item)
 void
 xfce_panel_item_menu_opened (XfcePanelItem *item)
 {
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (G_OBJECT (item), xfce_panel_item_signals[MENU_OPENED], 0, NULL);
 }
@@ -293,7 +289,7 @@ xfce_panel_item_menu_opened (XfcePanelItem *item)
 void
 xfce_panel_item_customize_panel (XfcePanelItem *item)
 {
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (G_OBJECT (item), xfce_panel_item_signals[CUSTOMIZE_PANEL], 0, NULL);
 }
@@ -310,7 +306,7 @@ xfce_panel_item_customize_panel (XfcePanelItem *item)
 void
 xfce_panel_item_customize_items (XfcePanelItem *item)
 {
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (G_OBJECT (item), xfce_panel_item_signals[CUSTOMIZE_ITEMS], 0, NULL);
 }
@@ -327,7 +323,7 @@ xfce_panel_item_customize_items (XfcePanelItem *item)
 void
 xfce_panel_item_move (XfcePanelItem *item)
 {
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (G_OBJECT (item), xfce_panel_item_signals[MOVE], 0, NULL);
 }
@@ -345,7 +341,7 @@ void
 xfce_panel_item_set_panel_hidden (XfcePanelItem *item,
                                   gboolean       hidden)
 {
-    g_return_if_fail (XFCE_IS_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_PANEL_ITEM (item));
 
     g_signal_emit (G_OBJECT (item), xfce_panel_item_signals[SET_HIDDEN],
                    0, hidden, NULL);
@@ -510,3 +506,9 @@ xfce_panel_item_configure (XfcePanelItem *item)
 {
     XFCE_PANEL_ITEM_GET_INTERFACE (item)->configure (item);
 }
+
+
+
+#define __XFCE_PANEL_ITEM_IFACE_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

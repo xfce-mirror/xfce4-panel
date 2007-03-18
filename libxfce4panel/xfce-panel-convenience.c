@@ -25,7 +25,8 @@
 #include <libxfce4util/libxfce4util.h>
 #include <gtk/gtk.h>
 
-#include "xfce-panel-convenience.h"
+#include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 /**
  * xfce_create_panel_button:
@@ -101,3 +102,9 @@ xfce_allow_panel_customization (void )
 
     return allow_customization;
 }
+
+
+
+#define __XFCE_PANEL_CONVENIENCE_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

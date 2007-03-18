@@ -25,7 +25,8 @@
 #include <glib.h>
 #include <glib-object.h>
 
-#include "xfce-panel-macros.h"
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 
@@ -55,3 +56,8 @@ _panel_g_type_register_simple (GType        type_parent,
   /* register the static type */
   return g_type_register_static (type_parent, I_(type_name_static), &info, 0);
 }
+
+
+
+#define __XFCE_PANEL_MACROS_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

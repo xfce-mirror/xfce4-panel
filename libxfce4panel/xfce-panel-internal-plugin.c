@@ -26,16 +26,15 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 
-#include "xfce-panel-macros.h"
-#include "xfce-panel-enum-types.h"
-#include "xfce-panel-internal-plugin.h"
-#include "xfce-panel-item-iface.h"
-#include "xfce-panel-plugin-iface-private.h"
-#include "xfce-panel-plugin-iface.h"
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/libxfce4panel-enum-types.h>
+#include <libxfce4panel/xfce-panel-internal-plugin.h>
+#include <libxfce4panel/xfce-panel-item-iface.h>
+#include <libxfce4panel/xfce-panel-plugin-iface-private.h>
+#include <libxfce4panel/xfce-panel-plugin-iface.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
-#define XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE(o) \
-    (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, \
-                                  XfceInternalPanelPluginPrivate))
+#define XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginPrivate))
 
 
 enum
@@ -167,8 +166,7 @@ xfce_internal_panel_plugin_class_init (XfceInternalPanelPluginClass *klass)
 
     g_type_class_add_private (klass, sizeof (XfceInternalPanelPluginPrivate));
 
-    object_class = (GObjectClass *) klass;
-
+    object_class = G_OBJECT_CLASS (klass);
     object_class->finalize = xfce_internal_panel_plugin_finalize;
     object_class->get_property = xfce_internal_panel_plugin_get_property;
     object_class->set_property = xfce_internal_panel_plugin_set_property;
@@ -307,10 +305,9 @@ xfce_internal_panel_plugin_get_name (XfcePanelItem *plugin)
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), NULL);
+    _panel_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), NULL);
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     return priv->name;
 }
@@ -322,10 +319,9 @@ xfce_internal_panel_plugin_get_id (XfcePanelItem *plugin)
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), NULL);
+    _panel_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), NULL);
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     return priv->id;
 }
@@ -337,10 +333,9 @@ xfce_internal_panel_plugin_get_display_name (XfcePanelItem *plugin)
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), NULL);
+    _panel_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), NULL);
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     return priv->display_name;
 }
@@ -352,10 +347,9 @@ xfce_internal_panel_plugin_get_expand (XfcePanelItem *plugin)
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), FALSE);
+    _panel_return_val_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin), FALSE);
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     return priv->expand;
 }
@@ -367,12 +361,11 @@ xfce_internal_panel_plugin_free_data (XfcePanelItem * plugin)
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
-    xfce_panel_plugin_signal_free_data (XFCE_PANEL_PLUGIN (plugin));
+    _xfce_panel_plugin_signal_free_data (XFCE_PANEL_PLUGIN (plugin));
 
     gtk_widget_destroy (GTK_WIDGET (plugin));
 }
@@ -384,12 +377,11 @@ xfce_internal_panel_plugin_save (XfcePanelItem * plugin)
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
-    xfce_panel_plugin_signal_save (XFCE_PANEL_PLUGIN (plugin));
+    _xfce_panel_plugin_signal_save (XFCE_PANEL_PLUGIN (plugin));
 }
 
 
@@ -401,10 +393,9 @@ xfce_internal_panel_plugin_set_screen_position (XfcePanelItem      *plugin,
     XfceInternalPanelPluginPrivate *priv;
     gboolean                        orientation_changed;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     orientation_changed =
         (xfce_screen_position_is_horizontal (position) !=
@@ -412,15 +403,13 @@ xfce_internal_panel_plugin_set_screen_position (XfcePanelItem      *plugin,
 
     priv->screen_position = position;
 
-    xfce_panel_plugin_signal_screen_position (XFCE_PANEL_PLUGIN (plugin),
-                                              position);
+    _xfce_panel_plugin_signal_screen_position (XFCE_PANEL_PLUGIN (plugin), position);
 
     if (orientation_changed)
-        xfce_panel_plugin_signal_orientation (XFCE_PANEL_PLUGIN (plugin),
-                                          xfce_screen_position_get_orientation
-                                          (position));
+        _xfce_panel_plugin_signal_orientation (XFCE_PANEL_PLUGIN (plugin),
+                                               xfce_screen_position_get_orientation (position));
 
-    xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
+    _xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
 }
 
 
@@ -431,16 +420,15 @@ xfce_internal_panel_plugin_set_size (XfcePanelItem *plugin,
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     if (size != priv->size)
     {
         priv->size = size;
 
-        xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), size);
+        _xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), size);
     }
 }
 
@@ -450,7 +438,7 @@ static void
 xfce_internal_panel_plugin_set_sensitive (XfcePanelItem *plugin,
                                           gboolean       sensitive)
 {
-    xfce_panel_plugin_set_sensitive (XFCE_PANEL_PLUGIN (plugin), sensitive);
+    _xfce_panel_plugin_set_sensitive (XFCE_PANEL_PLUGIN (plugin), sensitive);
 }
 
 
@@ -458,7 +446,7 @@ xfce_internal_panel_plugin_set_sensitive (XfcePanelItem *plugin,
 static void
 xfce_internal_panel_plugin_remove_item (XfcePanelItem *plugin)
 {
-    xfce_panel_plugin_remove_confirm (XFCE_PANEL_PLUGIN (plugin));
+    _xfce_panel_plugin_remove_confirm (XFCE_PANEL_PLUGIN (plugin));
 }
 
 
@@ -466,7 +454,7 @@ xfce_internal_panel_plugin_remove_item (XfcePanelItem *plugin)
 static void
 xfce_internal_panel_plugin_configure_item (XfcePanelItem *plugin)
 {
-    xfce_panel_plugin_signal_configure (XFCE_PANEL_PLUGIN (plugin));
+    _xfce_panel_plugin_signal_configure (XFCE_PANEL_PLUGIN (plugin));
 }
 
 
@@ -477,7 +465,7 @@ xfce_internal_panel_plugin_remove (XfcePanelPlugin *plugin)
 {
     gchar *file;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
     file = xfce_panel_plugin_save_location (plugin, FALSE);
 
@@ -498,10 +486,9 @@ xfce_internal_panel_plugin_set_expand (XfcePanelPlugin *plugin,
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     if (expand != priv->expand)
     {
@@ -580,10 +567,9 @@ xfce_internal_panel_plugin_set_name (XfcePanelPlugin *plugin,
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     g_free (priv->name);
     priv->name = g_strdup (name);
@@ -597,10 +583,9 @@ xfce_internal_panel_plugin_set_id (XfcePanelPlugin *plugin,
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     g_free (priv->id);
     priv->id = g_strdup (id);
@@ -614,10 +599,9 @@ xfce_internal_panel_plugin_set_display_name (XfcePanelPlugin *plugin,
 {
     XfceInternalPanelPluginPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (XFCE_IS_INTERNAL_PANEL_PLUGIN (plugin));
 
-    priv =
-        XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
+    priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (XFCE_INTERNAL_PANEL_PLUGIN (plugin));
 
     g_free (priv->display_name);
     priv->display_name = g_strdup (name);
@@ -660,7 +644,7 @@ _plugin_setup (XfceInternalPanelPlugin *plugin,
     construct (XFCE_PANEL_PLUGIN (plugin));
 
     /* make sure the plugin has the proper size */
-    xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
+    _xfce_panel_plugin_signal_size (XFCE_PANEL_PLUGIN (plugin), priv->size);
 }
 
 
@@ -691,7 +675,7 @@ xfce_internal_panel_plugin_new (const gchar         *name,
     GtkWidget                      *plugin;
     XfceInternalPanelPluginPrivate *priv;
 
-    plugin = GTK_WIDGET (g_object_new (XFCE_TYPE_INTERNAL_PANEL_PLUGIN, NULL));
+    plugin = g_object_new (XFCE_TYPE_INTERNAL_PANEL_PLUGIN, NULL);
 
     priv = XFCE_INTERNAL_PANEL_PLUGIN_GET_PRIVATE (plugin);
 
@@ -702,7 +686,7 @@ xfce_internal_panel_plugin_new (const gchar         *name,
     priv->size            = size;
 
     /* add menu */
-    xfce_panel_plugin_create_menu (XFCE_PANEL_PLUGIN (plugin));
+    _xfce_panel_plugin_create_menu (XFCE_PANEL_PLUGIN (plugin));
     xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin),
                                          GTK_WIDGET (plugin));
 
@@ -711,3 +695,9 @@ xfce_internal_panel_plugin_new (const gchar         *name,
 
     return plugin;
 }
+
+
+
+#define __XFCE_PANEL_INTERNAL_PLUGIN_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

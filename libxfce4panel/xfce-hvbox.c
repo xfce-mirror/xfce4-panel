@@ -28,14 +28,14 @@
 #include <gtk/gtkhbox.h>
 #include <gtk/gtkvbox.h>
 
-#include "xfce-panel-macros.h"
-#include "xfce-hvbox.h"
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/xfce-hvbox.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 
 /* prototypes */
 static void  xfce_hvbox_class_init     (XfceHVBoxClass *klass);
-static void  xfce_hvbox_init           (XfceHVBox      *hvbox);
 static void  xfce_hvbox_size_request   (GtkWidget      *widget,
                                         GtkRequisition *requisition);
 static void  xfce_hvbox_size_allocate  (GtkWidget      *widget,
@@ -55,7 +55,7 @@ xfce_hvbox_get_type (void)
                                               sizeof (XfceHVBoxClass),
                                               xfce_hvbox_class_init,
                                               sizeof (XfceHVBox),
-                                              xfce_hvbox_init);
+                                              NULL);
     }
 
     return type;
@@ -72,14 +72,6 @@ xfce_hvbox_class_init (XfceHVBoxClass *klass)
 
     widget_class->size_request  = xfce_hvbox_size_request;
     widget_class->size_allocate = xfce_hvbox_size_allocate;
-}
-
-
-
-static void
-xfce_hvbox_init (XfceHVBox *hvbox)
-{
-    /* empty */
 }
 
 
@@ -155,13 +147,11 @@ xfce_hvbox_new (GtkOrientation orientation,
                 gboolean       homogeneous,
                 gint           spacing)
 {
-    GtkWidget *box = GTK_WIDGET (g_object_new (xfce_hvbox_get_type (), NULL));
-
-    XFCE_HVBOX (box)->orientation = orientation;
-    GTK_BOX (box)->spacing        = spacing;
-    GTK_BOX (box)->homogeneous    = homogeneous;
-
-    return box;
+    return g_object_new (XFCE_TYPE_HVBOX,
+                         "orientation", orientation,
+                         "homogeneous", homogeneous,
+                         "spacing", spacing,
+                         NULL);
 }
 
 
@@ -177,7 +167,7 @@ void
 xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
                             GtkOrientation  orientation)
 {
-    g_return_if_fail (XFCE_IS_HVBOX (hvbox));
+    _panel_return_if_fail (XFCE_IS_HVBOX (hvbox));
 
     if (G_UNLIKELY (hvbox->orientation == orientation))
         return;
@@ -186,3 +176,9 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
 
     gtk_widget_queue_resize (GTK_WIDGET (hvbox));
 }
+
+
+
+#define __XFCE_HVBOX_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

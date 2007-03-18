@@ -49,11 +49,14 @@ struct _XfceHVBoxClass
 };
 
 GType       xfce_hvbox_get_type         (void) G_GNUC_CONST;
+
 GtkWidget  *xfce_hvbox_new              (GtkOrientation   orientation,
                                          gboolean         homogeneous,
                                          gint             spacing) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
 void        xfce_hvbox_set_orientation  (XfceHVBox       *hvbox,
                                          GtkOrientation   orientation);
+
 G_END_DECLS
 
 #endif /* !__XFCE_HVBOX_H__ */

@@ -85,7 +85,7 @@ static void             launcher_menu_position               (GtkMenu           
                                                               GtkWidget             *button);
 static gboolean         launcher_menu_popup                  (LauncherPlugin        *launcher);
 static void             launcher_menu_deactivated            (LauncherPlugin        *launcher);
-static gboolean         launcher_menu_update                 (LauncherPlugin        *launcher);
+static void             launcher_menu_update                 (LauncherPlugin        *launcher);
 static LauncherPlugin  *launcher_new                         (XfcePanelPlugin       *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 static GtkArrowType     launcher_calculate_floating_arrow    (LauncherPlugin        *launcher,
                                                               XfceScreenPosition     position);
@@ -687,7 +687,7 @@ launcher_menu_prepare (LauncherPlugin *launcher)
 
 
 
-static gboolean
+static void
 launcher_menu_update (LauncherPlugin *launcher)
 {
     GList         *li;
@@ -752,8 +752,6 @@ launcher_menu_update (LauncherPlugin *launcher)
     /* connect deactivate signal */
     g_signal_connect_swapped (G_OBJECT (launcher->menu), "deactivate",
                                 G_CALLBACK (launcher_menu_deactivated), launcher);
-
-    return FALSE;
 }
 
 

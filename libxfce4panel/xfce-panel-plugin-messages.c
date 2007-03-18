@@ -23,7 +23,8 @@
 #endif
 
 #include <gdk/gdk.h>
-#include "xfce-panel-plugin-messages.h"
+#include <libxfce4panel/xfce-panel-plugin-messages.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
 
 
@@ -57,3 +58,9 @@ xfce_panel_plugin_message_send (GdkWindow              *from,
     gdk_flush ();
     gdk_error_trap_pop ();
 }
+
+
+
+#define __XFCE_PANEL_PLUGIN_MESSAGES_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>
+

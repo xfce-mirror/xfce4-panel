@@ -2,7 +2,7 @@
 =====
 - Completely rewritten launcher (Bugs 2336, 2365, 1323, 2262 and 1225)
 - Various improvements in libxfce4panel (memory leaks, G_GNUC_INTERNAL,
-  GSList, canonical strings and fixed pedantic warnings).
+  GSList, visibility support, canonical strings and fixed pedantic warnings).
 - Libxfce4panel does no longer depend on libxfcegui4. This might cause
   some problems with plugins. Plugin developers should add libxfcegui4
   to the dependencies of their package (including cflags and libadd in
@@ -12,7 +12,7 @@
 
 4.3.99.3 (4.4-RC3)
 ==================
-- Update or add blinking for urgent windows in taslist, windowlist and iconbox. 
+- Update or add blinking for urgent windows in taslist, windowlist and iconbox.
   (Jasper)
 - Move test plugin to Xfce Goodies. (Nick)
 - Several fixes for (re)sizing and positioning behavior. (Jasper)
@@ -23,7 +23,7 @@
 
 4.3.99.2 (4.4-RC2)
 ==================
-- Adjust the plugin system to improve support for other platforms 
+- Adjust the plugin system to improve support for other platforms
   (read: windows). (Jasper, Olivier)
 - Many small fixes. (Jasper, Nick, Olivier, Jean-Francois)
 - Translation updates. (Xfce Translation Team)
@@ -76,7 +76,7 @@
 - Increase API version, but still support old plugins (Jasper)
 - Use new gtk 2.4 file chooser (Jasper)
 - Improve focus management (in combination with xfwm4) by setting the dock
-  type hint. Panel will now always be on top; the option is gone. 
+  type hint. Panel will now always be on top; the option is gone.
   (Olivier, Jasper)
 - Transparency is always on, but toggled off when the mouse is over the panel
   (Jasper)
@@ -87,7 +87,7 @@
 - Several translation updates (Jean-Francois)
 - Some autohide fixes with open dialogs (Jasper)
 - Fix multihead support (Jasper)
-- Translucent panel when set on top. Needs xfwm4 with composite support 
+- Translucent panel when set on top. Needs xfwm4 with composite support
   and XOrg >= 6.8.0 with composite extension enabled. (Olivier)
 
 
@@ -95,28 +95,28 @@
 ==================
 - Use basedir spec to locate config file. (Jasper)
 - Rename xfce4rc to contents.xml. (Jasper)
-- Change the fallback (default) icons to the ones from the Rodent theme 
+- Change the fallback (default) icons to the ones from the Rodent theme
   by Francois, very pretty. (Jasper)
 - Add support for new KIOSK mode. Much better than env variables. (Benedikt)
 - Fix autohide and right-click menu interaction. (Jasper)
 - Icon theme support : no more panel-specific themes, the panel will now
   follow the icon theme set in the user interface dialog. (Jasper)
 - Set partial struts (Jasper)
-- Add multihead support. The user needs to set DISPLAY properly to start a 
+- Add multihead support. The user needs to set DISPLAY properly to start a
   new panel on another screen. (Jasper)
 - Update list of module list when opening dialog: remove uninstalled modules
-  (when not in use) and add newly installed ones. Based on idea of Scott 
+  (when not in use) and add newly installed ones. Based on idea of Scott
   Barron. (Jasper)
 - Use a dialog to add items to the panel, instead of a submenu. (Jasper)
 - Reduce handle width to show only one line of dots. (Jasper)
 - Split out the code for choosing a command and choosing an icon from
-  item_dialog.c. to make it available for use in other dialogs (plugins). 
-  The mailcheck plugin makes use of it and of course the launcher dialog. 
+  item_dialog.c. to make it available for use in other dialogs (plugins).
+  The mailcheck plugin makes use of it and of course the launcher dialog.
   (Jasper)
 - Implement module unloading. Add uniqueness setting to plugins. (Jasper)
 - Add pop3 email checking: Use 'pop3://username:password@host' as mailbox.
   (Olivier)
-- Properly update arrow direction. Use this info to position the menus. 
+- Properly update arrow direction. Use this info to position the menus.
   Much better. (Jasper)
 - Add xrandr awareness. (Jasper)
 - Add xinerama aware smart positioning. (Jasper)

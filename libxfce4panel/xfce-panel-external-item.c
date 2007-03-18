@@ -29,14 +29,14 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "xfce-panel-enum-types.h"
-#include "xfce-panel-item-iface.h"
-#include "xfce-panel-external-item.h"
-#include "xfce-panel-plugin-messages.h"
+#include <libxfce4panel/libxfce4panel-enum-types.h>
+#include <libxfce4panel/xfce-panel-item-iface.h>
+#include <libxfce4panel/xfce-panel-external-item.h>
+#include <libxfce4panel/xfce-panel-plugin-messages.h>
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
-#define XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE(o) \
-    (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_EXTERNAL_PANEL_ITEM, \
-                                  XfceExternalPanelItemPrivate))
+#define XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_EXTERNAL_PANEL_ITEM, XfceExternalPanelItemPrivate))
 
 
 
@@ -127,13 +127,11 @@ xfce_external_panel_item_class_init (XfceExternalPanelItemClass *klass)
 
     g_type_class_add_private (klass, sizeof (XfceExternalPanelItemPrivate));
 
-    object_class = (GObjectClass *) klass;
-    widget_class = (GtkWidgetClass *) klass;
-
+    object_class = G_OBJECT_CLASS (klass);
     object_class->finalize = xfce_external_panel_item_finalize;
 
-    widget_class->button_press_event =
-        xfce_external_panel_item_button_press_event;
+    widget_class = GTK_WIDGET_CLASS (klass);
+    widget_class->button_press_event = xfce_external_panel_item_button_press_event;
 }
 
 
@@ -214,10 +212,9 @@ xfce_external_panel_item_get_name (XfcePanelItem *item)
 {
     XfceExternalPanelItemPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), NULL);
+    _panel_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), NULL);
 
-    priv =
-        XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     return priv->name;
 }
@@ -229,10 +226,9 @@ xfce_external_panel_item_get_id (XfcePanelItem *item)
 {
     XfceExternalPanelItemPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), NULL);
+    _panel_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), NULL);
 
-    priv =
-        XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     return priv->id;
 }
@@ -244,10 +240,9 @@ xfce_external_panel_item_get_display_name (XfcePanelItem *item)
 {
     XfceExternalPanelItemPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), NULL);
+    _panel_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), NULL);
 
-    priv =
-        XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     return priv->display_name;
 }
@@ -259,10 +254,9 @@ xfce_external_panel_item_get_expand (XfcePanelItem *item)
 {
     XfceExternalPanelItemPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), FALSE);
+    _panel_return_val_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item), FALSE);
 
-    priv =
-         XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     return priv->expand;
 }
@@ -274,10 +268,9 @@ xfce_external_panel_item_free_data (XfcePanelItem *item)
 {
     XfceExternalPanelItemPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
 
-    priv =
-        XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     priv->to_be_removed = TRUE;
 
@@ -292,7 +285,7 @@ xfce_external_panel_item_free_data (XfcePanelItem *item)
 static void
 xfce_external_panel_item_save (XfcePanelItem *item)
 {
-    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
 
     if (!GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
         return;
@@ -311,10 +304,9 @@ xfce_external_panel_item_set_size (XfcePanelItem *item,
 {
     XfceExternalPanelItemPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
 
-    priv =
-        XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     if (size != priv->size)
     {
@@ -335,10 +327,9 @@ xfce_external_panel_item_set_screen_position (XfcePanelItem      *item,
 {
     XfceExternalPanelItemPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
 
-    priv =
-        XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     priv->screen_position = position;
 
@@ -368,7 +359,7 @@ static void
 xfce_external_panel_item_set_sensitive (XfcePanelItem *item,
                                         gboolean       sensitive)
 {
-    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
 
     if (GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
     {
@@ -391,8 +382,8 @@ xfce_external_panel_item_set_sensitive (XfcePanelItem *item,
 static void
 xfce_external_panel_item_remove (XfcePanelItem *item)
 {
-    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
-    
+    _panel_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+
     xfce_panel_plugin_message_send (GTK_WIDGET (item)->window,
                                     GDK_WINDOW_XID (GTK_SOCKET (item)->plug_window),
                                     XFCE_PANEL_PLUGIN_REMOVE, 0);
@@ -414,7 +405,7 @@ delayed_configure(XfcePanelItem *item)
 static void
 xfce_external_panel_item_configure (XfcePanelItem * item)
 {
-    g_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
+    _panel_return_if_fail (XFCE_IS_EXTERNAL_PANEL_ITEM (item));
 
     if (GDK_IS_WINDOW (GTK_SOCKET (item)->plug_window))
     {
@@ -507,9 +498,9 @@ _item_screen_changed (XfceExternalPanelItem *item,
                       GdkScreen             *screen)
 {
     XfceExternalPanelItemPrivate *priv;
-    
+
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
-    
+
     /* quit when we're going to close the plugin */
     if (priv->to_be_removed == TRUE)
         return;
@@ -548,8 +539,7 @@ _item_setup (XfceExternalPanelItem *item,
     g_signal_handlers_disconnect_by_func (G_OBJECT (item), G_CALLBACK (_item_setup),
                                           (gpointer) file);
 
-    priv =
-        XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
+    priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (XFCE_EXTERNAL_PANEL_ITEM (item));
 
     sock = gtk_socket_get_id (GTK_SOCKET (item));
 
@@ -630,7 +620,7 @@ xfce_external_panel_item_new (const gchar        *name,
     GtkWidget                    *item;
     XfceExternalPanelItemPrivate *priv;
 
-    item = GTK_WIDGET (g_object_new (XFCE_TYPE_EXTERNAL_PANEL_ITEM, NULL));
+    item = g_object_new (XFCE_TYPE_EXTERNAL_PANEL_ITEM, NULL);
 
     priv = XFCE_EXTERNAL_PANEL_ITEM_GET_PRIVATE (item);
 
@@ -641,8 +631,13 @@ xfce_external_panel_item_new (const gchar        *name,
     priv->screen_position = position;
     priv->file            = g_strdup (file);
 
-    g_signal_connect_after (G_OBJECT (item), "realize", G_CALLBACK (_item_setup),
-                            (gpointer) file);
+    g_signal_connect_after (G_OBJECT (item), "realize",
+                            G_CALLBACK (_item_setup), (gpointer) file);
 
     return item;
 }
+
+
+
+#define __XFCE_PANEL_EXTERNAL_ITEM_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

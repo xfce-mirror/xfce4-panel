@@ -30,8 +30,9 @@
 #include <libxfce4panel/xfce-itembar.h>
 #include <libxfce4panel/xfce-panel-item-iface.h>
 
-#include <libxfce4panel/xfce-panel-enum-types.h>
+#include <libxfce4panel/libxfce4panel-enum-types.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/xfce-panel-macros.h>
 
 #include "panel.h"
 #include "panel-app.h"
@@ -772,7 +773,7 @@ panel_free_data (Panel *panel)
     GList        *l;
     int           i;
 
-    g_return_if_fail (PANEL_IS_PANEL (panel));
+    _panel_return_if_fail (PANEL_IS_PANEL (panel));
 
     priv = panel->priv;
 
@@ -816,7 +817,7 @@ panel_menu_deactivated (GtkWidget *item)
     int    x, y, w, h, px, py;
     Panel *panel = PANEL (item->parent->parent);
 
-    g_return_if_fail (PANEL_IS_PANEL (panel));
+    _panel_return_if_fail (PANEL_IS_PANEL (panel));
 
     panel_unblock_autohide (panel);
 
@@ -841,7 +842,7 @@ panel_menu_deactivated (GtkWidget *item)
 static void
 panel_menu_opened (GtkWidget *item)
 {
-    g_return_if_fail (PANEL_IS_PANEL (item->parent->parent));
+    _panel_return_if_fail (PANEL_IS_PANEL (item->parent->parent));
 
     panel_block_autohide (PANEL (item->parent->parent));
 }
@@ -853,7 +854,7 @@ _item_expand_changed (GtkWidget *item,
 {
     PanelPrivate *priv;
 
-    g_return_if_fail (PANEL_IS_PANEL (panel));
+    _panel_return_if_fail (PANEL_IS_PANEL (panel));
 
     priv = panel->priv;
 
@@ -902,7 +903,7 @@ _item_set_panel_hidden (GtkWidget *item,
 {
     PanelPrivate *priv;
 
-    g_return_if_fail (PANEL_IS_PANEL (panel));
+    _panel_return_if_fail (PANEL_IS_PANEL (panel));
 
     priv = panel->priv;
 
@@ -1049,7 +1050,7 @@ panel_save_items (Panel *panel)
 {
     PanelPrivate *priv;
 
-    g_return_if_fail (PANEL_IS_PANEL (panel));
+    _panel_return_if_fail (PANEL_IS_PANEL (panel));
 
     priv = panel->priv;
 

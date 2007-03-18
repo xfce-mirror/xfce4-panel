@@ -18,8 +18,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __XFCE_EXTERNAL_PANEL_ITEM_H__
-#define __XFCE_EXTERNAL_PANEL_ITEM_H__
+#ifndef __XFCE_PANEL_EXTERNAL_ITEM_H__
+#define __XFCE_PANEL_EXTERNAL_ITEM_H__
 
 #include <gtk/gtksocket.h>
 #include <libxfce4panel/xfce-panel-enums.h>
@@ -56,4 +56,4 @@ GtkWidget  *xfce_external_panel_item_new       (const gchar         *name,
 
 G_END_DECLS
 
-#endif /* !__XFCE_EXTERNAL_PANEL_ITEM_H__ */
+#endif /* !__XFCE_PANEL_EXTERNAL_ITEM_H__ */

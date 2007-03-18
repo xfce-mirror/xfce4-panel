@@ -47,24 +47,24 @@ struct _XfcePanelPluginInterface
     void (*reserved2) (void);
 };
 
-void  xfce_panel_plugin_create_menu             (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_popup_menu              (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_signal_screen_position  (XfcePanelPlugin     *plugin,
-                                                 XfceScreenPosition   position)    G_GNUC_INTERNAL;
-void  xfce_panel_plugin_signal_orientation      (XfcePanelPlugin     *plugin,
+void  _xfce_panel_plugin_create_menu            (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_popup_menu             (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_signal_screen_position (XfcePanelPlugin     *plugin,
+                                                 XfceScreenPosition   position) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_signal_orientation     (XfcePanelPlugin     *plugin,
                                                  GtkOrientation       orientation) G_GNUC_INTERNAL;
-void  xfce_panel_plugin_signal_size             (XfcePanelPlugin     *plugin,
-                                                 gint                 size)        G_GNUC_INTERNAL;
-void  xfce_panel_plugin_signal_free_data        (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_signal_save             (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_signal_configure        (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_set_sensitive           (XfcePanelPlugin     *plugin,
-                                                 gboolean             sensitive)   G_GNUC_INTERNAL;
-void  xfce_panel_plugin_remove_confirm          (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_remove                  (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_customize_panel         (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_customize_items         (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
-void  xfce_panel_plugin_move                    (XfcePanelPlugin     *plugin)      G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_signal_size            (XfcePanelPlugin     *plugin,
+                                                 gint                 size) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_signal_free_data       (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_signal_save            (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_signal_configure       (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_set_sensitive          (XfcePanelPlugin     *plugin,
+                                                 gboolean             sensitive) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_remove_confirm         (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_remove                 (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_customize_panel        (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_customize_items        (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
+void  _xfce_panel_plugin_move                   (XfcePanelPlugin     *plugin) G_GNUC_INTERNAL;
 
 G_END_DECLS
 

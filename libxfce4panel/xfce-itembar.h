@@ -38,17 +38,17 @@ typedef struct _XfceItembarClass XfceItembarClass;
 
 struct _XfceItembar
 {
-    GtkContainer parent;
+    GtkContainer __parent__;
 };
 
 struct _XfceItembarClass
 {
-    GtkContainerClass parent_class;
+    GtkContainerClass __parent__;
 
     /* signals */
-    void (*orientation_changed)   (XfceItembar    *itembar,
-                                   GtkOrientation  orientation);
-    void (*contents_changed)      (XfceItembar    *itembar);
+    void (*orientation_changed) (XfceItembar    *itembar,
+                                 GtkOrientation  orientation);
+    void (*contents_changed)    (XfceItembar    *itembar);
 
     /* reserved for future expansion */
     void (*reserved1) (void);
@@ -58,36 +58,53 @@ struct _XfceItembarClass
 };
 
 GType           xfce_itembar_get_type               (void) G_GNUC_CONST;
+
 GtkWidget      *xfce_itembar_new                    (GtkOrientation        orientation) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
 void            xfce_itembar_set_orientation        (XfceItembar          *itembar,
                                                      GtkOrientation        orientation);
+
 GtkOrientation  xfce_itembar_get_orientation        (XfceItembar          *itembar);
+
 void            xfce_itembar_insert                 (XfceItembar          *itembar,
                                                      GtkWidget            *item,
                                                      gint                  position);
+
 void            xfce_itembar_append                 (XfceItembar          *itembar,
                                                      GtkWidget            *item);
+
 void            xfce_itembar_prepend                (XfceItembar          *itembar,
                                                      GtkWidget            *item);
+
 void            xfce_itembar_reorder_child          (XfceItembar          *itembar,
                                                      GtkWidget            *item,
                                                      gint                  position);
+
 void            xfce_itembar_set_child_expand       (XfceItembar          *itembar,
                                                      GtkWidget            *item,
                                                      gboolean              expand);
+
 gboolean        xfce_itembar_get_child_expand       (XfceItembar          *itembar,
                                                      GtkWidget            *item);
+
 gint            xfce_itembar_get_n_items            (XfceItembar          *itembar);
+
 gint            xfce_itembar_get_item_index         (XfceItembar          *itembar,
                                                     GtkWidget            *item);
+
 GtkWidget      *xfce_itembar_get_nth_item           (XfceItembar          *itembar,
-                                                    gint                  n) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+                                                    gint                  n) G_GNUC_WARN_UNUSED_RESULT;
+
 void            xfce_itembar_raise_event_window     (XfceItembar          *itembar);
+
 void            xfce_itembar_lower_event_window     (XfceItembar          *itembar);
+
 gboolean        xfce_itembar_event_window_is_raised (XfceItembar          *itembar);
+
 GtkWidget      *xfce_itembar_get_item_at_point      (XfceItembar          *itembar,
                                                      gint                  x,
-                                                     gint                  y) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+                                                     gint                  y) G_GNUC_WARN_UNUSED_RESULT;
+
 gint            xfce_itembar_get_drop_index         (XfceItembar          *itembar,
                                                      gint                  x,
                                                      gint                  y);

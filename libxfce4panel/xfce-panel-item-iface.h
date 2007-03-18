@@ -18,8 +18,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef _XFCE_PANEL_ITEM_H
-#define _XFCE_PANEL_ITEM_H
+#ifndef __XFCE_PANEL_ITEM_IFACE_H__
+#define __XFCE_PANEL_ITEM_IFACE_H__
 
 #include <glib-object.h>
 #include <libxfce4panel/xfce-panel-enums.h>
@@ -88,4 +88,4 @@ void          xfce_panel_item_configure            (XfcePanelItem       *item);
 
 G_END_DECLS
 
-#endif /* !__XFCE_PANEL_ITEM_H__ */
+#endif /* !__XFCE_PANEL_ITEM_IFACE_H__ */

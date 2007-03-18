@@ -30,13 +30,13 @@
 
 #include <gtk/gtk.h>
 
-#include "xfce-marshal.h"
-#include "xfce-panel-enum-types.h"
-#include "xfce-itembar.h"
-#include "xfce-panel-macros.h"
+#include <libxfce4panel/libxfce4panel-marshal.h>
+#include <libxfce4panel/libxfce4panel-enum-types.h>
+#include <libxfce4panel/xfce-itembar.h>
+#include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/libxfce4panel-alias.h>
 
-#define XFCE_ITEMBAR_GET_PRIVATE(o) \
-    (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_ITEMBAR, XfceItembarPrivate))
+#define XFCE_ITEMBAR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), XFCE_TYPE_ITEMBAR, XfceItembarPrivate))
 
 #define DEFAULT_ORIENTATION     GTK_ORIENTATION_HORIZONTAL
 #define DEFAULT_CHILD_EXPAND    FALSE
@@ -174,25 +174,25 @@ xfce_itembar_class_init (XfceItembarClass *klass)
 
     g_type_class_add_private (klass, sizeof (XfceItembarPrivate));
 
-    parent_class    = g_type_class_peek_parent (klass);
-    gobject_class   = (GObjectClass *) klass;
-    widget_class    = (GtkWidgetClass *) klass;
-    container_class = (GtkContainerClass *) klass;
+    parent_class = g_type_class_peek_parent (klass);
 
-    gobject_class->finalize             = xfce_itembar_finalize;
-    gobject_class->get_property         = xfce_itembar_get_property;
-    gobject_class->set_property         = xfce_itembar_set_property;
+    gobject_class = G_OBJECT_CLASS (klass);
+    gobject_class->finalize     = xfce_itembar_finalize;
+    gobject_class->get_property = xfce_itembar_get_property;
+    gobject_class->set_property = xfce_itembar_set_property;
 
-    widget_class->expose_event          = xfce_itembar_expose;
-    widget_class->size_request          = xfce_itembar_size_request;
-    widget_class->size_allocate         = xfce_itembar_size_allocate;
-    widget_class->realize               = xfce_itembar_realize;
-    widget_class->unrealize             = xfce_itembar_unrealize;
-    widget_class->map                   = xfce_itembar_map;
-    widget_class->unmap                 = xfce_itembar_unmap;
-    widget_class->drag_leave            = xfce_itembar_drag_leave;
-    widget_class->drag_motion           = xfce_itembar_drag_motion;
+    widget_class = GTK_WIDGET_CLASS (klass);
+    widget_class->expose_event  = xfce_itembar_expose;
+    widget_class->size_request  = xfce_itembar_size_request;
+    widget_class->size_allocate = xfce_itembar_size_allocate;
+    widget_class->realize       = xfce_itembar_realize;
+    widget_class->unrealize     = xfce_itembar_unrealize;
+    widget_class->map           = xfce_itembar_map;
+    widget_class->unmap         = xfce_itembar_unmap;
+    widget_class->drag_leave    = xfce_itembar_drag_leave;
+    widget_class->drag_motion   = xfce_itembar_drag_motion;
 
+    container_class = GTK_CONTAINER_CLASS (klass);
     container_class->forall             = xfce_itembar_forall;
     container_class->child_type         = xfce_itembar_child_type;
     container_class->add                = xfce_itembar_add;
@@ -213,8 +213,7 @@ xfce_itembar_class_init (XfceItembarClass *klass)
         g_signal_new (I_("orientation-changed"),
                       G_OBJECT_CLASS_TYPE (klass),
                       G_SIGNAL_RUN_FIRST,
-                      G_STRUCT_OFFSET (XfceItembarClass,
-                                       orientation_changed),
+                      G_STRUCT_OFFSET (XfceItembarClass, orientation_changed),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__ENUM,
                       G_TYPE_NONE, 1, GTK_TYPE_ORIENTATION);
@@ -230,8 +229,7 @@ xfce_itembar_class_init (XfceItembarClass *klass)
         g_signal_new (I_("contents-changed"),
                       G_OBJECT_CLASS_TYPE (klass),
                       G_SIGNAL_RUN_FIRST,
-                      G_STRUCT_OFFSET (XfceItembarClass,
-                                       contents_changed),
+                      G_STRUCT_OFFSET (XfceItembarClass, contents_changed),
                       NULL, NULL,
                       g_cclosure_marshal_VOID__VOID,
                       G_TYPE_NONE, 0);
@@ -250,7 +248,7 @@ xfce_itembar_class_init (XfceItembarClass *klass)
                                                         "The orientation of the itembar",
                                                         GTK_TYPE_ORIENTATION,
                                                         DEFAULT_ORIENTATION,
-                                                        G_PARAM_READWRITE));
+                                                        PANEL_PARAM_READWRITE));
 
     /* child properties */
 
@@ -265,7 +263,7 @@ xfce_itembar_class_init (XfceItembarClass *klass)
                                                                       "Expand",
                                                                       "Whether to grow with parent",
                                                                        DEFAULT_CHILD_EXPAND,
-                                                                       G_PARAM_READWRITE));
+                                                                       PANEL_PARAM_READWRITE));
 }
 
 
@@ -343,7 +341,7 @@ static gint
 xfce_itembar_expose (GtkWidget      *widget,
                      GdkEventExpose *event)
 {
-  XfceItembarPrivate *priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (widget));
+    XfceItembarPrivate *priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (widget));
 
     GTK_WIDGET_CLASS (parent_class)->expose_event (widget, event);
 
@@ -851,8 +849,8 @@ xfce_itembar_remove (GtkContainer *container,
     gboolean            was_visible;
     GSList             *l;
 
-    g_return_if_fail (XFCE_IS_ITEMBAR (container));
-    g_return_if_fail (child != NULL && child->parent == GTK_WIDGET (container));
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (container));
+    _panel_return_if_fail (child != NULL && child->parent == GTK_WIDGET (container));
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (container));
 
@@ -1023,12 +1021,8 @@ _find_drop_index (XfceItembar *itembar,
 GtkWidget *
 xfce_itembar_new (GtkOrientation orientation)
 {
-    XfceItembar *itembar;
-
-    itembar = g_object_new (XFCE_TYPE_ITEMBAR, "orientation", orientation,
-                            NULL);
-
-    return GTK_WIDGET (itembar);
+    return g_object_new (XFCE_TYPE_ITEMBAR,
+                         "orientation", orientation, NULL);
 }
 
 
@@ -1044,7 +1038,7 @@ xfce_itembar_get_orientation (XfceItembar *itembar)
 {
     XfceItembarPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), DEFAULT_ORIENTATION);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), DEFAULT_ORIENTATION);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1066,7 +1060,7 @@ xfce_itembar_set_orientation (XfceItembar    *itembar,
 {
     XfceItembarPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (itembar));
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1101,8 +1095,8 @@ xfce_itembar_insert (XfceItembar *itembar,
     XfceItembarPrivate *priv;
     XfceItembarChild   *child;
 
-    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
-    g_return_if_fail (item != NULL && GTK_WIDGET (item)->parent == NULL);
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+    _panel_return_if_fail (item != NULL && GTK_WIDGET (item)->parent == NULL);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1170,8 +1164,8 @@ xfce_itembar_reorder_child (XfceItembar *itembar,
     XfceItembarChild   *child;
     GSList             *l;
 
-    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
-    g_return_if_fail (item != NULL
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+    _panel_return_if_fail (item != NULL
                       && GTK_WIDGET (item)->parent == GTK_WIDGET (itembar));
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (itembar));
@@ -1214,10 +1208,9 @@ xfce_itembar_get_child_expand (XfceItembar *itembar,
     XfceItembarChild   *child;
     GSList             *l;
 
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
-    g_return_val_if_fail (item != NULL &&
-                          GTK_WIDGET (item)->parent == GTK_WIDGET (itembar),
-                          FALSE);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
+    _panel_return_val_if_fail (item != NULL && GTK_WIDGET (item)->parent == GTK_WIDGET (itembar),
+                               FALSE);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (itembar));
 
@@ -1251,9 +1244,8 @@ xfce_itembar_set_child_expand (XfceItembar *itembar,
     XfceItembarChild   *child;
     GSList             *l;
 
-    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
-    g_return_if_fail (item != NULL
-                      && GTK_WIDGET (item)->parent == GTK_WIDGET (itembar));
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+    _panel_return_if_fail (item != NULL && GTK_WIDGET (item)->parent == GTK_WIDGET (itembar));
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (itembar));
 
@@ -1284,7 +1276,7 @@ xfce_itembar_get_n_items (XfceItembar *itembar)
 {
     XfceItembarPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), 0);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), 0);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (itembar));
 
@@ -1309,10 +1301,8 @@ xfce_itembar_get_item_index (XfceItembar *itembar,
     GSList             *l;
     gint                n;
 
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), -1);
-    g_return_val_if_fail (item != NULL
-                                && GTK_WIDGET (item)->parent
-                                        == GTK_WIDGET (itembar), -1);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), -1);
+    _panel_return_val_if_fail (item != NULL && GTK_WIDGET (item)->parent == GTK_WIDGET (itembar), -1);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (itembar));
 
@@ -1347,7 +1337,7 @@ xfce_itembar_get_nth_item (XfceItembar *itembar,
     XfceItembarChild   *child;
     gint                n_items;
 
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), NULL);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), NULL);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1378,7 +1368,7 @@ xfce_itembar_raise_event_window (XfceItembar *itembar)
 {
     XfceItembarPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (itembar));
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1405,7 +1395,7 @@ xfce_itembar_lower_event_window (XfceItembar *itembar)
 {
     XfceItembarPrivate *priv;
 
-    g_return_if_fail (XFCE_IS_ITEMBAR (itembar));
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (itembar));
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1428,7 +1418,7 @@ xfce_itembar_event_window_is_raised (XfceItembar *itembar)
 {
     XfceItembarPrivate *priv;
 
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1456,7 +1446,7 @@ xfce_itembar_get_item_at_point (XfceItembar *itembar,
     GtkWidget          *w;
     GtkAllocation      *a;
 
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), NULL);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), NULL);
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
@@ -1502,7 +1492,12 @@ xfce_itembar_get_drop_index (XfceItembar *itembar,
                              gint         x,
                              gint         y)
 {
-    g_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), FALSE);
 
     return _find_drop_index (itembar, x, y);
 }
+
+
+
+#define __XFCE_ITEMBAR_C__
+#include <libxfce4panel/libxfce4panel-aliasdef.c>

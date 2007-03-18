@@ -18,8 +18,8 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef __XFCE_INTERNAL_PANEL_PLUGIN_H__
-#define __XFCE_INTERNAL_PANEL_PLUGIN_H__
+#ifndef __XFCE_PANEL_INTERNAL_PLUGIN_H__
+#define __XFCE_PANEL_INTERNAL_PLUGIN_H__
 
 #include <gtk/gtkeventbox.h>
 #include <libxfce4panel/xfce-panel-plugin-iface.h>
@@ -56,4 +56,4 @@ GtkWidget  *xfce_internal_panel_plugin_new       (const gchar          *name,
 
 G_END_DECLS
 
-#endif /* !__XFCE_INTERNAL_PANEL_PLUGIN_H__ */
+#endif /* !__XFCE_PANEL_INTERNAL_PLUGIN_H__ */
