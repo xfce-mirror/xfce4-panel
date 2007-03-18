@@ -63,7 +63,7 @@ static void             launcher_menu_drag_data_received     (GtkWidget         
                                                               LauncherEntry         *entry);
 static void             launcher_button_clicked              (GtkWidget             *button,
                                                               LauncherPlugin        *launcher);
-static void             launcher_button_pointer              (GtkWidget             *button_a,
+static void             launcher_button_state_changed        (GtkWidget             *button_a,
                                                               GtkStateType           state,
                                                               GtkWidget             *button_b);
 static gboolean         launcher_button_pressed              (LauncherPlugin        *launcher,
@@ -387,12 +387,16 @@ updatetooltip:
 
 
 static void
-launcher_button_pointer (GtkWidget    *button_a,
-                         GtkStateType  state,
-                         GtkWidget    *button_b)
+launcher_button_state_changed (GtkWidget    *button_a,
+                               GtkStateType  state,
+                               GtkWidget    *button_b)
 {
-    /* sync the button states */
-    gtk_widget_set_state (button_b, GTK_WIDGET_STATE (button_a));
+    if (GTK_WIDGET_STATE (button_b) != GTK_WIDGET_STATE (button_a) &&
+        GTK_WIDGET_STATE (button_a) != GTK_STATE_INSENSITIVE)
+    {
+        /* sync the button states */
+        gtk_widget_set_state (button_b, GTK_WIDGET_STATE (button_a));
+    }
 }
 
 
@@ -852,7 +856,7 @@ launcher_write (LauncherPlugin *launcher)
      * sometimes the panel emits a save signal, this is cool, unless we're working
      * in the properties dialog. This because the cancel button won't work then. */
     block = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (launcher->plugin),
-                                                  "xfce-panel-plugin-block"));
+                                                "xfce-panel-plugin-block"));
     if (G_UNLIKELY (block > 0))
         return;
 
@@ -1007,9 +1011,9 @@ launcher_new (XfcePanelPlugin *plugin)
 
     /* signals for button state sync */
     g_signal_connect (G_OBJECT (launcher->iconbutton), "state-changed",
-                      G_CALLBACK (launcher_button_pointer), launcher->arrowbutton);
+                      G_CALLBACK (launcher_button_state_changed), launcher->arrowbutton);
     g_signal_connect (G_OBJECT (launcher->arrowbutton), "state-changed",
-                      G_CALLBACK (launcher_button_pointer), launcher->iconbutton);
+                      G_CALLBACK (launcher_button_state_changed), launcher->iconbutton);
 
     /* hook for icon themes changes */
     klass = g_type_class_ref (GTK_TYPE_ICON_THEME);
@@ -1085,10 +1089,8 @@ launcher_calculate_floating_arrow (LauncherPlugin     *launcher,
     }
 
     screen = gtk_widget_get_screen (launcher->iconbutton);
-    mon = gdk_screen_get_monitor_at_window (screen,
-                                            launcher->iconbutton->window);
+    mon = gdk_screen_get_monitor_at_window (screen, launcher->iconbutton->window);
     gdk_screen_get_monitor_geometry (screen, mon, &geom);
-
     gdk_window_get_root_origin (launcher->iconbutton->window, &x, &y);
 
     if (xfce_screen_position_is_horizontal (position))
