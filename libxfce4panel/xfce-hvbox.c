@@ -147,11 +147,16 @@ xfce_hvbox_new (GtkOrientation orientation,
                 gboolean       homogeneous,
                 gint           spacing)
 {
-    return g_object_new (XFCE_TYPE_HVBOX,
-                         "orientation", orientation,
-                         "homogeneous", homogeneous,
-                         "spacing", spacing,
-                         NULL);
+    GtkWidget *box;
+
+    box = g_object_new (XFCE_TYPE_HVBOX,
+                        "homogeneous", homogeneous,
+                        "spacing", spacing,
+                        NULL);
+
+    XFCE_HVBOX (box)->orientation = orientation;
+
+    return box;
 }
 
 
