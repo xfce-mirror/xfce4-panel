@@ -85,8 +85,10 @@ client_event_received (GtkWidget      *win,
  * @message: %PanelAppMesssage
  *
  * Send a message to a running instance of xfce4-panel.
+ *
+ * Return value: %FALSE if no panel instance is running, or %TRUE otherwise.
  **/
-void
+gboolean
 panel_app_send (PanelAppMessage message)
 {
     Window win;
@@ -96,7 +98,7 @@ panel_app_send (PanelAppMessage message)
     if (panel_app_init () != 1)
     {
         g_warning ("xfce4-panel is not running");
-        return;
+        return FALSE;
     }
 
     win = panel_app_get_ipc_window ();
@@ -120,6 +122,7 @@ panel_app_send (PanelAppMessage message)
 
         gtk_widget_destroy (invisible);
     }
+    return TRUE;
 }
 
 /**

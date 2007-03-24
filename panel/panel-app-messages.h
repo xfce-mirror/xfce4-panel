@@ -35,7 +35,7 @@ typedef enum
 }
 PanelAppMessage;
 
-void panel_app_send (PanelAppMessage message);
+gboolean panel_app_send (PanelAppMessage message);
 
 void panel_app_listen (GtkWidget *ipc_window);
 

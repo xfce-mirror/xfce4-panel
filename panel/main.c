@@ -121,9 +121,18 @@ main (gint argc, gchar **argv)
     /* handle the message, if there is any */
     if (G_UNLIKELY (msg >= 0))
     {
-        panel_app_send (msg);
-
-        return EXIT_SUCCESS;
+        if (!panel_app_send (msg))
+        {
+            if (msg != PANEL_APP_RESTART )
+            {
+                return EXIT_FAILURE;
+            }
+            /* else: continue and start new panel */
+        }
+        else
+        {
+            return EXIT_SUCCESS;
+        }
     }
 
     TIMER_ELAPSED ("start panel_init()");

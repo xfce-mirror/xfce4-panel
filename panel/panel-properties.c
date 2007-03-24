@@ -43,7 +43,7 @@
 #include "panel-private.h"
 #include "panel-dnd.h"
 
-#define HIDDEN_SIZE     3
+#define HIDDEN_SIZE     2
 #define OPAQUE          0xffffffff
 #define HIDE_TIMEOUT    350
 #define UNHIDE_TIMEOUT  200
