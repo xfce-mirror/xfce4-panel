@@ -3,10 +3,17 @@ NEWS for xfce4-panel
 
 4.4.1
 =====
-- Completely hide the right-click menu when kiosk mode is enabled (Bug #2984).
+- Completely hide the right-click menu when kiosk mode is enabled (Bug #2984). (Nick)
 - Show the system tray border in the default layout and increase the top panel
-  size to 30px, so users can actually see the system tray.
-- Allow freely movable panels on the screen edges (bug #3039).
+  size to 30px, so users can actually see the system tray. (Nick)
+- Allow freely movable panels on the screen edges (bug #3039). (Nick)
+- Improve the icon size of the actions plugin and add an option to change the
+  orientation of the buttons (Bug #2999). (Nick)
+- Unhide when dragging over the panel (Bug #2914). (Jasper)
+- Check for NULL pointers in DBG messages to prevent crashes on Solaris, based on 
+  patch from William Bonnet (bug #2922). (Jasper)
+- Add some checks for valid tree selection (Bug #2933). (Jasper)
+- Many translation updates. (Xfce Translation Team)
 
 4.4.0
 =====

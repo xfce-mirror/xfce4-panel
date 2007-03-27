@@ -1,9 +1,16 @@
-2007-04-27 14:01  nick
+2007-03-27 15:30  nick
+
+	* plugins/actions.c: Improve the icon size of the actions plugin and add an 
+	  option to change the orientation of the buttons (Bug #2999). The 3 words that have
+	  been added were already present in the translations, so they are merged with po-update.
+	* NEWS: Update the news file to reflect the current status of xfce4-panel for the 4.4.1 release.
+
+2007-03-27 14:01  nick
 
 	* panel/panel-properties.c: Mm I think this one is saver, if Jasper uses (0,0) for other
 	  stuff...
 
-2007-04-27 14:01  nick
+2007-03-27 14:01  nick
 
 	* config/systray-4.rc, config/panels.xml: Show system tray border and increase panel size
 	  to 30px, so people can actually see the system tray.

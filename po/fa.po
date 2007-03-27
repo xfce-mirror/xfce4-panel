@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-19 19:30+0100\n"
+"POT-Creation-Date: 2007-03-27 15:28+0200\n"
 "PO-Revision-Date: 2005-09-29 20:25+0900\n"
 "Last-Translator: Abbas Izad <abbasizad@hotmail.com>\n"
 "Language-Team: Persian <translation-team-fa@lists.sourceforge.net>\n"
@@ -52,54 +52,48 @@ msgid "Web Browser"
 msgstr "مرورگر راهنما"
 
 #. dialogs are annoying, just spit out a warning
-#: ../libxfce4panel/xfce-panel-external-item.c:175
+#: ../libxfce4panel/xfce-panel-external-item.c:182
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:578
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:584
 #, fuzzy, c-format
 msgid "Remove \"%s\"?"
 msgstr "_برداشتن"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:581 ../panel/panel-app.c:874
-#: ../panel/panel-app.c:906 ../panel/panel-app.c:940
-#: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
-#: ../plugins/launcher/launcher.c:437
-msgid "Xfce Panel"
-msgstr "تابلوی Xfce"
-
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:583
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:599
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:770
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:788
 msgid "Properties"
 msgstr ""
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:787
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:805
 msgid "About"
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:801
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
 #, fuzzy
 msgid "Move"
 msgstr "_برداشتن"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:821
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
 #, fuzzy
 msgid "Remove"
 msgstr "_برداشتن"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:838
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
 #, fuzzy
 msgid "Add New Item"
 msgstr "افزودن آیتم جدید"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:850 ../panel/panel.c:697
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:866 ../panel/panel.c:697
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr ""
@@ -108,8 +102,8 @@ msgstr ""
 msgid "Add Items"
 msgstr ""
 
-#: ../panel/panel.c:724 ../plugins/actions/actions.c:280
-#: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:429
+#: ../panel/panel.c:724 ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr ""
 
@@ -126,6 +120,12 @@ msgstr "تابلوی Xfce"
 #: ../panel/panel-app.c:238 ../panel/panel-app.c:876
 #, fuzzy
 msgid "Exit Xfce Panel?"
+msgstr "تابلوی Xfce"
+
+#: ../panel/panel-app.c:874 ../panel/panel-app.c:906 ../panel/panel-app.c:940
+#: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
+#: ../plugins/launcher/launcher.c:437
+msgid "Xfce Panel"
 msgstr "تابلوی Xfce"
 
 #: ../panel/panel-app.c:877
@@ -194,155 +194,155 @@ msgstr ""
 msgid "Could not open \"%s\" module"
 msgstr "نمی‌توان آیتم \"%s\" تابلو را ایجاد کرد."
 
-#: ../panel/panel-dialogs.c:593
+#: ../panel/panel-dialogs.c:597
 msgid "Add Items to the Panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:623
+#: ../panel/panel-dialogs.c:627
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:640
+#: ../panel/panel-dialogs.c:644
 msgid "Available Items"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1090
+#: ../panel/panel-dialogs.c:870 ../panel/panel-dialogs.c:1094
 msgid "Normal Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:872 ../panel/panel-dialogs.c:1096
 msgid "Full Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:874 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1102
 #, fuzzy
 msgid "Span Monitors"
 msgstr "ویرایشگر"
 
-#: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
+#: ../panel/panel-dialogs.c:938 ../panel/panel-dialogs.c:1167
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
+#: ../panel/panel-dialogs.c:940 ../panel/panel-dialogs.c:1169
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:941 ../panel/panel-dialogs.c:1170
+#: ../panel/panel-dialogs.c:945 ../panel/panel-dialogs.c:1174
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:943 ../panel/panel-dialogs.c:1172
+#: ../panel/panel-dialogs.c:947 ../panel/panel-dialogs.c:1176
 msgid "Bottom"
 msgstr ""
 
 #. position
-#: ../panel/panel-dialogs.c:971
+#: ../panel/panel-dialogs.c:975
 msgid "Position"
 msgstr "موقعیت"
 
-#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:989
 #, fuzzy
 msgid "Fixed Position"
 msgstr "موقعیت"
 
-#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:995
 msgid "Freely Moveable"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1106
+#: ../panel/panel-dialogs.c:1110
 #, fuzzy
 msgid "Auto_hide"
 msgstr "پنهان‌سازی خودکار"
 
-#: ../panel/panel-dialogs.c:1124
+#: ../panel/panel-dialogs.c:1128 ../plugins/actions/actions.c:471
 #, fuzzy
 msgid "Orientation:"
 msgstr "جهت تابلو:"
 
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:1140 ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "افقی"
 
-#: ../panel/panel-dialogs.c:1138
+#: ../panel/panel-dialogs.c:1142 ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "عمودی"
 
-#: ../panel/panel-dialogs.c:1147
+#: ../panel/panel-dialogs.c:1151
 #, fuzzy
 msgid "Handle:"
 msgstr "موقعیت"
 
-#: ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:1163
 #, fuzzy
 msgid "At both sides"
 msgstr "پنهان‌سازی خودکار"
 
-#: ../panel/panel-dialogs.c:1240
+#: ../panel/panel-dialogs.c:1236
 #, fuzzy
 msgid "Select Monitor"
 msgstr "ویرایشگر"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1358 ../plugins/clock/clock.c:467
-#: ../plugins/tasklist/tasklist.c:431
-#: ../plugins/windowlist/windowlist-dialog.c:187
+#: ../panel/panel-dialogs.c:1354 ../plugins/clock/clock.c:496
+#: ../plugins/tasklist/tasklist.c:424
+#: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
 msgstr "ظاهر"
 
 #. size
-#: ../panel/panel-dialogs.c:1369
+#: ../panel/panel-dialogs.c:1365
 msgid "Size (pixels):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1397
+#: ../panel/panel-dialogs.c:1393
 msgid "Transparency (%):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1421
+#: ../panel/panel-dialogs.c:1417
 msgid "Make active panel opaque"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1460 ../panel/panel-dialogs.c:1496
-#: ../panel/panel-dialogs.c:1521
+#: ../panel/panel-dialogs.c:1456 ../panel/panel-dialogs.c:1492
+#: ../panel/panel-dialogs.c:1517
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "تابلوی Xfce"
 
-#: ../panel/panel-dialogs.c:1540
+#: ../panel/panel-dialogs.c:1536
 #, fuzzy
 msgid "Remove Panel"
 msgstr "_برداشتن"
 
-#: ../panel/panel-dialogs.c:1553
+#: ../panel/panel-dialogs.c:1549
 #, fuzzy
 msgid "New Panel"
 msgstr "تابلوی Xfce"
 
-#: ../panel/panel-dialogs.c:1610
+#: ../panel/panel-dialogs.c:1606
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 #, fuzzy
 msgid "Panel Manager"
 msgstr "اندازه‌ی تابلو:"
 
-#: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
-#: ../plugins/actions/actions.c:430
+#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:459
 #, fuzzy
 msgid "Lock screen"
 msgstr "_قفل کردن صفحه"
 
-#: ../plugins/actions/actions.c:396
+#: ../plugins/actions/actions.c:419
 #, fuzzy
 msgid "Panel Actions"
 msgstr "تنظیمات تابلوی Xfce"
 
-#: ../plugins/actions/actions.c:421
+#: ../plugins/actions/actions.c:449
 #, fuzzy
 msgid "Select action type:"
 msgstr "انتخاب کردن فرمان"
 
-#: ../plugins/actions/actions.c:431
+#: ../plugins/actions/actions.c:460
 #, fuzzy
 msgid "Quit + Lock screen"
 msgstr "_قفل کردن صفحه"
@@ -355,66 +355,66 @@ msgstr "_قفل کردن صفحه"
 #. * %B  : full month name
 #. * %Y  : four digit year
 #.
-#: ../plugins/clock/clock.c:121
+#: ../plugins/clock/clock.c:122
 #, fuzzy
 msgid "%A %d %B %Y"
 msgstr "%A, %d %B %Y"
 
-#: ../plugins/clock/clock.c:455 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:481 ../plugins/clock/clock.desktop.in.in.h:1
 #, fuzzy
 msgid "Clock"
 msgstr "قفل کردن"
 
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:479
+#: ../plugins/clock/clock.c:508
 msgid "Analog"
 msgstr "آنالوگ"
 
-#: ../plugins/clock/clock.c:480
+#: ../plugins/clock/clock.c:509
 msgid "Digital"
 msgstr "ارقامی"
 
-#: ../plugins/clock/clock.c:481
+#: ../plugins/clock/clock.c:510
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:486 ../plugins/systray/systray.c:399
+#: ../plugins/clock/clock.c:515 ../plugins/systray/systray.c:402
 msgid "Show _frame"
 msgstr ""
 
-#: ../plugins/clock/clock.c:493
+#: ../plugins/clock/clock.c:522
 msgid "Clock Options"
 msgstr ""
 
-#: ../plugins/clock/clock.c:501
+#: ../plugins/clock/clock.c:530
 msgid "Use 24-_hour clock"
 msgstr ""
 
-#: ../plugins/clock/clock.c:508
+#: ../plugins/clock/clock.c:537
 #, fuzzy
 msgid "Show AM/PM"
 msgstr "ق‌ظ/ب‌ظ"
 
-#: ../plugins/clock/clock.c:515
+#: ../plugins/clock/clock.c:544
 msgid "Display seconds"
 msgstr ""
 
-#: ../plugins/iconbox/iconbox.c:837
+#: ../plugins/iconbox/iconbox.c:901
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr ""
 
-#: ../plugins/iconbox/iconbox.c:859
+#: ../plugins/iconbox/iconbox.c:926
 #, fuzzy
 msgid "Only show minimized applications"
 msgstr "نشان دادن _نام‌های برنامه"
 
-#: ../plugins/iconbox/iconbox.c:868
+#: ../plugins/iconbox/iconbox.c:935
 #, fuzzy
 msgid "Show applications of all workspaces"
 msgstr "نشان دادن کارها از _همه‌ی فضاهای کاری"
 
-#: ../plugins/iconbox/iconbox.c:876 ../plugins/tasklist/tasklist.c:454
+#: ../plugins/iconbox/iconbox.c:943 ../plugins/tasklist/tasklist.c:447
 msgid "Use all available space"
 msgstr ""
 
@@ -564,19 +564,19 @@ msgstr ""
 msgid "Select file"
 msgstr "انتخاب کردن پرونده"
 
-#: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:338 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "صفحه‌نما"
 
-#: ../plugins/pager/pager.c:364
+#: ../plugins/pager/pager.c:369
 msgid "Number of rows:"
 msgstr "تعداد ردیف‌ها:"
 
-#: ../plugins/pager/pager.c:368
+#: ../plugins/pager/pager.c:373
 msgid "Number of columns:"
 msgstr "تعداد ستون‌ها:"
 
-#: ../plugins/pager/pager.c:394
+#: ../plugins/pager/pager.c:399
 msgid "Switch workspaces using the mouse wheel"
 msgstr ""
 
@@ -586,12 +586,12 @@ msgstr ""
 msgid "Separator or Spacing"
 msgstr "جداساز"
 
-#: ../plugins/separator/separator.c:276
+#: ../plugins/separator/separator.c:279
 #, fuzzy
 msgid "_Draw Separator"
 msgstr "جداساز"
 
-#: ../plugins/separator/separator.c:285
+#: ../plugins/separator/separator.c:288
 msgid "_Expand"
 msgstr ""
 
@@ -617,49 +617,49 @@ msgstr "نمیتوان سینی سیستم را ثبت کرد: %s"
 msgid "System Tray"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:406 ../plugins/tasklist/tasklist.c:476
+#: ../plugins/tasklist/tasklist.c:396 ../plugins/tasklist/tasklist.c:469
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 #, fuzzy
 msgid "Task List"
 msgstr "کارها"
 
-#: ../plugins/tasklist/tasklist.c:439
+#: ../plugins/tasklist/tasklist.c:432
 msgid "Minimum Width:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:463
+#: ../plugins/tasklist/tasklist.c:456
 msgid "Use flat buttons"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist.c:480
+#: ../plugins/tasklist/tasklist.c:473
 msgid "Show tasks from _all workspaces"
 msgstr "نشان دادن کارها از _همه‌ی فضاهای کاری"
 
-#: ../plugins/tasklist/tasklist.c:490
+#: ../plugins/tasklist/tasklist.c:483
 msgid "Show application _names"
 msgstr "نشان دادن _نام‌های برنامه"
 
-#: ../plugins/tasklist/tasklist.c:504
+#: ../plugins/tasklist/tasklist.c:497
 #, fuzzy
 msgid "Never group tasks"
 msgstr "همیشه کارهای _گروه"
 
-#: ../plugins/tasklist/tasklist.c:507
+#: ../plugins/tasklist/tasklist.c:500
 #, fuzzy
 msgid "Automatically group tasks"
 msgstr "همیشه کارهای _گروه"
 
-#: ../plugins/tasklist/tasklist.c:510
+#: ../plugins/tasklist/tasklist.c:503
 #, fuzzy
 msgid "Always group tasks"
 msgstr "همیشه کارهای _گروه"
 
-#: ../plugins/windowlist/windowlist.c:241
+#: ../plugins/windowlist/windowlist.c:242
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:242
+#: ../plugins/windowlist/windowlist.c:243
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr ""
@@ -669,72 +669,72 @@ msgstr ""
 msgid "Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:620
-#: ../plugins/windowlist/windowlist.c:626
+#: ../plugins/windowlist/windowlist.c:619
+#: ../plugins/windowlist/windowlist.c:625
 msgid "Add workspace"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:645
+#: ../plugins/windowlist/windowlist.c:644
 #, c-format
 msgid "Remove Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:646
+#: ../plugins/windowlist/windowlist.c:645
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr ""
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:209
+#: ../plugins/windowlist/windowlist-dialog.c:212
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:147
+#: ../plugins/windowlist/windowlist-dialog.c:150
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:154
+#: ../plugins/windowlist/windowlist-dialog.c:157
 #, fuzzy
 msgid "Urgency Notification"
 msgstr "استفاده کردن از یادآوری _آغازین"
 
-#: ../plugins/windowlist/windowlist-dialog.c:161
+#: ../plugins/windowlist/windowlist-dialog.c:164
 msgid "_Disabled"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:170
+#: ../plugins/windowlist/windowlist-dialog.c:173
 msgid "For _other workspaces"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:179
+#: ../plugins/windowlist/windowlist-dialog.c:182
 #, fuzzy
 msgid "For _all workspaces"
 msgstr "نشان دادن کارها از _همه‌ی فضاهای کاری"
 
-#: ../plugins/windowlist/windowlist-dialog.c:193
+#: ../plugins/windowlist/windowlist-dialog.c:196
 msgid "_Icon button"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:200
+#: ../plugins/windowlist/windowlist-dialog.c:203
 msgid "A_rrow button"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:218
+#: ../plugins/windowlist/windowlist-dialog.c:221
 #, fuzzy
 msgid "Show _windows from all workspaces"
 msgstr "نشان دادن کارها از _همه‌ی فضاهای کاری"
 
-#: ../plugins/windowlist/windowlist-dialog.c:227
+#: ../plugins/windowlist/windowlist-dialog.c:230
 #, fuzzy
 msgid "Show a_pplication icons"
 msgstr "نشان دادن _نام‌های برنامه"
 
-#: ../plugins/windowlist/windowlist-dialog.c:236
+#: ../plugins/windowlist/windowlist-dialog.c:239
 msgid "Show wor_kspace actions"
 msgstr ""
 

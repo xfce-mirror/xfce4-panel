@@ -51,9 +51,13 @@ typedef struct
     GtkWidget *image1;
     GtkWidget *button2;
     GtkWidget *image2;
+    
+    GtkWidget *box;
 
     int screen_id;
     int style_id;
+    
+    GtkOrientation orientation;
 }
 Action;
 
@@ -110,40 +114,44 @@ actions_load_icon (ActionType type, int size)
 static gboolean 
 actions_set_size (XfcePanelPlugin *plugin, int size, Action *action)
 {
-    int width;
+    gint       width;
     GdkPixbuf *pb = NULL;
-    int border;
     
-    if (xfce_panel_plugin_get_orientation (plugin) ==
-            GTK_ORIENTATION_HORIZONTAL)
-    {
-        border = 2 + 2 * GTK_WIDGET(plugin)->style->ythickness;
-    }
-    else
-    {
-        border = 2 + 2 * GTK_WIDGET(plugin)->style->xthickness;
-    }
+    width = size - 2 - 2 * MAX (action->button1->style->xthickness,
+                                action->button1->style->ythickness);
     
     switch (action->type)
     {
         case ACTION_QUIT_LOCK:
-            width = size / 2 - 2 * border;
+            if (xfce_panel_plugin_get_orientation (plugin) != action->orientation)
+            {
+                width = (size / 2) - 4 - 4 * MAX (action->button1->style->xthickness,
+                                                  action->button1->style->ythickness);
+                width = MAX (width, 5);
+            }
+            else
+            {
+                gtk_widget_set_size_request (GTK_WIDGET (action->button1), size, size);
+                gtk_widget_set_size_request (GTK_WIDGET (action->button2), size, size);
+            }
+             
+            gtk_widget_set_size_request (GTK_WIDGET (plugin), -1, -1);  
+                
             pb = actions_load_icon (ACTION_LOCK, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
             g_object_unref (G_OBJECT (pb));
             
             pb = actions_load_icon (ACTION_QUIT, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image2), pb);
-            g_object_unref (G_OBJECT (pb));
-            
+            g_object_unref (G_OBJECT (pb));           
             break;
+            
         case ACTION_QUIT:
         case ACTION_LOCK:
-            width = MIN(size - border, MAX(16, size/2 - border));
             pb = actions_load_icon (action->type, width);
             gtk_image_set_from_pixbuf (GTK_IMAGE (action->image1), pb);
             g_object_unref (G_OBJECT (pb));
-            
+            gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
             break;
     }
             
@@ -155,6 +163,7 @@ actions_read_rc_file (XfcePanelPlugin *plugin, Action *action)
 {
     char *file;
     XfceRc *rc;
+    GtkOrientation orientation = GTK_ORIENTATION_VERTICAL;
     int type = ACTION_QUIT;
     
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
@@ -165,12 +174,14 @@ actions_read_rc_file (XfcePanelPlugin *plugin, Action *action)
         if (rc != NULL)
         {
             type = xfce_rc_read_int_entry (rc, "type", ACTION_QUIT);
+            orientation = (xfce_rc_read_int_entry (rc, "orientation", 1) == 0 ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL);
             
             xfce_rc_close (rc);
         }
     }
 
     action->type = type;
+    action->orientation = orientation;
 }
 
 static void
@@ -189,6 +200,7 @@ actions_write_rc_file (XfcePanelPlugin *plugin, Action *action)
         return;
     
     xfce_rc_write_int_entry (rc, "type", action->type);
+    xfce_rc_write_int_entry (rc, "orientation", action->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 1);
 
     xfce_rc_close (rc);
 }
@@ -233,19 +245,13 @@ static void
 actions_create_widgets (XfcePanelPlugin *plugin, Action *action)
 {
     GtkWidget *widget, *box, *button, *img;
-    GtkOrientation orientation;
     
     widget = GTK_WIDGET (plugin);
 
     switch (action->type)
     {
         case ACTION_QUIT_LOCK:
-            orientation = (xfce_panel_plugin_get_orientation (plugin) == 
-                           GTK_ORIENTATION_HORIZONTAL) ?
-                                GTK_ORIENTATION_VERTICAL : 
-                                GTK_ORIENTATION_HORIZONTAL;
-
-            box = xfce_hvbox_new (orientation, TRUE, 0);
+            box = xfce_hvbox_new (action->orientation, TRUE, 0);
             gtk_widget_show (box);
             gtk_container_add (GTK_CONTAINER (plugin), box);
 
@@ -368,7 +374,23 @@ static void
 action_type_changed (GtkComboBox *box, Action *action)
 {
     action->type = gtk_combo_box_get_active (box);
+    
+    /* orientation only sensitive when 2 buttons are shown */
+    gtk_widget_set_sensitive (action->box, action->type == 2 ? TRUE : FALSE);
 
+    gtk_widget_destroy (GTK_BIN (action->plugin)->child);
+    actions_create_widgets (action->plugin, action);
+
+    actions_set_size (action->plugin, 
+                      xfce_panel_plugin_get_size (action->plugin), action);
+}
+
+static void
+orientation_changed (GtkComboBox *box, Action *action)
+{
+    action->orientation = (gtk_combo_box_get_active (box) == 0 ? 
+                             GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL);
+                             
     gtk_widget_destroy (GTK_BIN (action->plugin)->child);
     actions_create_widgets (action->plugin, action);
 
@@ -389,7 +411,8 @@ actions_dialog_response (GtkWidget *dlg, int reponse, Action *action)
 static void
 actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
 {
-    GtkWidget *dlg, *vbox, *hbox, *label, *box;
+    GtkWidget *dlg, *vbox, *hbox, *label, *box, *box2;
+    GtkSizeGroup *sg;
 
     xfce_panel_plugin_block_menu (plugin);
     
@@ -411,6 +434,8 @@ actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
+    sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+    
     vbox = gtk_vbox_new (FALSE, 8);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_widget_show (vbox);
@@ -423,6 +448,7 @@ actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
 
     label = gtk_label_new (_("Select action type:"));
     gtk_widget_show (label);
+    gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     box = gtk_combo_box_new_text ();
@@ -437,6 +463,34 @@ actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
     
     g_signal_connect (box, "changed", G_CALLBACK (action_type_changed), 
                       action);
+                      
+    hbox = gtk_hbox_new (FALSE, 8);
+    gtk_widget_show (hbox);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    
+    label = gtk_label_new (_("Orientation:"));
+    gtk_widget_show (label);
+    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
+    gtk_size_group_add_widget (sg, label);
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    
+    box2 = action->box = gtk_combo_box_new_text ();
+    gtk_widget_show (box2);
+    gtk_box_pack_start (GTK_BOX (hbox), box2, TRUE, TRUE, 0);
+    
+    /* only sensitive when 2 buttons are shown */
+    gtk_widget_set_sensitive (action->box, action->type == 2 ? TRUE : FALSE);
+    
+    gtk_combo_box_append_text (GTK_COMBO_BOX (box2), _("Horizontal"));
+    gtk_combo_box_append_text (GTK_COMBO_BOX (box2), _("Vertical"));
+    
+    gtk_combo_box_set_active (GTK_COMBO_BOX (box2), 
+        action->orientation == GTK_ORIENTATION_HORIZONTAL ? 0 : 1);
+    
+    g_signal_connect (box2, "changed", G_CALLBACK (orientation_changed), 
+                      action);
+    
+    g_object_unref (G_OBJECT (sg));
     
     gtk_widget_show (dlg);
 }

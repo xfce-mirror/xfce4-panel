@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-18 21:59+0100\n"
+"POT-Creation-Date: 2007-03-27 15:28+0200\n"
 "PO-Revision-Date: 2005-08-21 17:48+0900\n"
 "Last-Translator: Alexander Toresson <alexander.toresson@gmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -76,19 +76,20 @@ msgstr "Inställningar"
 msgid "About"
 msgstr "Om"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:819
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
 msgid "Move"
 msgstr "Flytta"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:839
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
 msgid "Remove"
 msgstr "Ta bort"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:856
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
 msgid "Add New Item"
 msgstr "Lägg till nytt objekt"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:868 ../panel/panel.c:697
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:866 ../panel/panel.c:697
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Konfigurera panelen"
@@ -97,8 +98,8 @@ msgstr "Konfigurera panelen"
 msgid "Add Items"
 msgstr "Lägg till objekt"
 
-#: ../panel/panel.c:724 ../plugins/actions/actions.c:280
-#: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:432
+#: ../panel/panel.c:724 ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -198,11 +199,11 @@ msgstr ""
 msgid "Could not open \"%s\" module"
 msgstr "Kunde inte öppna modulen \"%s\""
 
-#: ../panel/panel-dialogs.c:593
+#: ../panel/panel-dialogs.c:597
 msgid "Add Items to the Panel"
 msgstr "Lägg till objekt till panelen"
 
-#: ../panel/panel-dialogs.c:623
+#: ../panel/panel-dialogs.c:627
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -210,132 +211,132 @@ msgstr ""
 "Dra objekt från listan till en panel för att lägga till dem och ta bort dem "
 "genom att dra dem tillbaka till listan"
 
-#: ../panel/panel-dialogs.c:640
+#: ../panel/panel-dialogs.c:644
 msgid "Available Items"
 msgstr "Tillgängliga objekt"
 
-#: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1090
+#: ../panel/panel-dialogs.c:870 ../panel/panel-dialogs.c:1094
 msgid "Normal Width"
 msgstr "Normal bredd"
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:872 ../panel/panel-dialogs.c:1096
 msgid "Full Width"
 msgstr "Full bredd"
 
-#: ../panel/panel-dialogs.c:874 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1102
 msgid "Span Monitors"
 msgstr "Låt panelen sträcka sig över flera monitorer"
 
-#: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
+#: ../panel/panel-dialogs.c:938 ../panel/panel-dialogs.c:1167
 msgid "Left"
 msgstr "Vänster"
 
-#: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
+#: ../panel/panel-dialogs.c:940 ../panel/panel-dialogs.c:1169
 msgid "Right"
 msgstr "Höger"
 
-#: ../panel/panel-dialogs.c:941 ../panel/panel-dialogs.c:1170
+#: ../panel/panel-dialogs.c:945 ../panel/panel-dialogs.c:1174
 msgid "Top"
 msgstr "Överst"
 
-#: ../panel/panel-dialogs.c:943 ../panel/panel-dialogs.c:1172
+#: ../panel/panel-dialogs.c:947 ../panel/panel-dialogs.c:1176
 msgid "Bottom"
 msgstr "Nederst"
 
 #. position
-#: ../panel/panel-dialogs.c:971
+#: ../panel/panel-dialogs.c:975
 msgid "Position"
 msgstr "Position"
 
-#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:989
 msgid "Fixed Position"
 msgstr "Ej flyttbar"
 
-#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:995
 msgid "Freely Moveable"
 msgstr "Flyttbar"
 
-#: ../panel/panel-dialogs.c:1106
+#: ../panel/panel-dialogs.c:1110
 msgid "Auto_hide"
 msgstr "Auto_göm"
 
-#: ../panel/panel-dialogs.c:1124
+#: ../panel/panel-dialogs.c:1128 ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "orientering:"
 
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:1140 ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Horisontell"
 
-#: ../panel/panel-dialogs.c:1138
+#: ../panel/panel-dialogs.c:1142 ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: ../panel/panel-dialogs.c:1147
+#: ../panel/panel-dialogs.c:1151
 msgid "Handle:"
 msgstr "Handtag:"
 
-#: ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:1163
 msgid "At both sides"
 msgstr "PÅ båda sidorna"
 
-#: ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1236
 msgid "Select Monitor"
 msgstr "Välj monitor"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1350 ../plugins/clock/clock.c:492
+#: ../panel/panel-dialogs.c:1354 ../plugins/clock/clock.c:496
 #: ../plugins/tasklist/tasklist.c:424
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
 msgstr "Utseende"
 
 #. size
-#: ../panel/panel-dialogs.c:1361
+#: ../panel/panel-dialogs.c:1365
 msgid "Size (pixels):"
 msgstr "Storlek (pixlar):"
 
-#: ../panel/panel-dialogs.c:1389
+#: ../panel/panel-dialogs.c:1393
 msgid "Transparency (%):"
 msgstr "Genomskinlighet (%):"
 
-#: ../panel/panel-dialogs.c:1413
+#: ../panel/panel-dialogs.c:1417
 msgid "Make active panel opaque"
 msgstr "Gör aktiv panel ogenomskinlig"
 
-#: ../panel/panel-dialogs.c:1452 ../panel/panel-dialogs.c:1488
-#: ../panel/panel-dialogs.c:1513
+#: ../panel/panel-dialogs.c:1456 ../panel/panel-dialogs.c:1492
+#: ../panel/panel-dialogs.c:1517
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:1536
 msgid "Remove Panel"
 msgstr "Ta bort panel"
 
-#: ../panel/panel-dialogs.c:1545
+#: ../panel/panel-dialogs.c:1549
 msgid "New Panel"
 msgstr "Skapa ny panel"
 
-#: ../panel/panel-dialogs.c:1602
+#: ../panel/panel-dialogs.c:1606
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Panelhanteraren"
 
-#: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
-#: ../plugins/actions/actions.c:433
+#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Lås skärmen"
 
-#: ../plugins/actions/actions.c:396
+#: ../plugins/actions/actions.c:419
 msgid "Panel Actions"
 msgstr "Panelhandlingar"
 
-#: ../plugins/actions/actions.c:424
+#: ../plugins/actions/actions.c:449
 msgid "Select action type:"
 msgstr "Välj typ av handling:"
 
-#: ../plugins/actions/actions.c:434
+#: ../plugins/actions/actions.c:460
 msgid "Quit + Lock screen"
 msgstr "Avsluta och lås skärmen"
 
@@ -351,40 +352,40 @@ msgstr "Avsluta och lås skärmen"
 msgid "%A %d %B %Y"
 msgstr "%A den %d %B %Y"
 
-#: ../plugins/clock/clock.c:477 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:481 ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Klockan"
 
 #. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:504
+#: ../plugins/clock/clock.c:508
 msgid "Analog"
 msgstr "Analog"
 
-#: ../plugins/clock/clock.c:505
+#: ../plugins/clock/clock.c:509
 msgid "Digital"
 msgstr "Digital"
 
-#: ../plugins/clock/clock.c:506
+#: ../plugins/clock/clock.c:510
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:511 ../plugins/systray/systray.c:402
+#: ../plugins/clock/clock.c:515 ../plugins/systray/systray.c:402
 msgid "Show _frame"
 msgstr "Visa _ram"
 
-#: ../plugins/clock/clock.c:518
+#: ../plugins/clock/clock.c:522
 msgid "Clock Options"
 msgstr "Inställningar för klockan"
 
-#: ../plugins/clock/clock.c:526
+#: ../plugins/clock/clock.c:530
 msgid "Use 24-_hour clock"
 msgstr "Använd 24-_timmars klocka"
 
-#: ../plugins/clock/clock.c:533
+#: ../plugins/clock/clock.c:537
 msgid "Show AM/PM"
 msgstr "Visa AM/PM"
 
-#: ../plugins/clock/clock.c:540
+#: ../plugins/clock/clock.c:544
 msgid "Display seconds"
 msgstr "Visa sekunder"
 
@@ -637,32 +638,32 @@ msgstr "Gruppera aktiviteter automatiskt"
 msgid "Always group tasks"
 msgstr "Gruppera alltid aktiviteter"
 
-#: ../plugins/windowlist/windowlist.c:241
+#: ../plugins/windowlist/windowlist.c:242
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr "Är du säker på att du vill ta bort arbetsyta %d?"
 
-#: ../plugins/windowlist/windowlist.c:242
+#: ../plugins/windowlist/windowlist.c:243
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Är du säker på att du vill ta bort arbetsyta '%s'?"
 
-#: ../plugins/windowlist/windowlist.c:507
+#: ../plugins/windowlist/windowlist.c:508
 #, c-format
 msgid "Workspace %d"
 msgstr "Arbetsyta %d"
 
-#: ../plugins/windowlist/windowlist.c:618
-#: ../plugins/windowlist/windowlist.c:624
+#: ../plugins/windowlist/windowlist.c:619
+#: ../plugins/windowlist/windowlist.c:625
 msgid "Add workspace"
 msgstr "Lägg till en arbetsyta"
 
-#: ../plugins/windowlist/windowlist.c:643
+#: ../plugins/windowlist/windowlist.c:644
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "Ta bort arbetsyta %d"
 
-#: ../plugins/windowlist/windowlist.c:644
+#: ../plugins/windowlist/windowlist.c:645
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "Ta bort arbetsyta '%s'"
