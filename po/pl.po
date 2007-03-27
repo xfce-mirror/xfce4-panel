@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-03 20:30+0100\n"
+"POT-Creation-Date: 2007-03-27 16:30+0200\n"
 "PO-Revision-Date: 2006-06-08 23:00+0200\n"
 "Last-Translator: Szymon Kałasz <szymon_maestro@gazeta.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -52,287 +52,312 @@ msgid "Web Browser"
 msgstr "Przeglądarka"
 
 #. dialogs are annoying, just spit out a warning
-#: ../libxfce4panel/xfce-panel-external-item.c:171
+#: ../libxfce4panel/xfce-panel-external-item.c:169
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Obiekt \"%s\" został niespodziewanie usunięty."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:609
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:594
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Usunąć element %s?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:623
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:608
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "Obiekt zostanie usunięty wraz z konfiguracją"
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:823
 msgid "Properties"
 msgstr "Opcje"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:840
 msgid "About"
 msgstr "O obiekcie"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:868
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:852
 msgid "Move"
 msgstr "Przesuń"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:887
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:871
 msgid "Remove"
 msgstr "Usuń"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:904
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:888
 msgid "Add New Item"
 msgstr "Nowy element"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:697
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:899 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Dopasuj Panel"
 
-#: ../panel/panel.c:708
+#: ../panel/panel.c:707
 msgid "Add Items"
 msgstr "Dodaj elementy"
 
-#: ../panel/panel.c:724 ../plugins/actions/actions.c:280
-#: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:432
+#: ../panel/panel.c:723 ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Wyjdź"
 
-#: ../panel/panel.c:734
+#: ../panel/panel.c:733
 msgid "Restart"
 msgstr "Restart"
 
-#: ../panel/panel.c:748
+#: ../panel/panel.c:747
 msgid "About the Xfce Panel"
 msgstr "O Panelu Xfce"
 
-#: ../panel/panel-app.c:238 ../panel/panel-app.c:876
+#: ../panel/panel-app.c:255 ../panel/panel-app.c:896
 msgid "Exit Xfce Panel?"
 msgstr "Panel Xfce"
 
-#: ../panel/panel-app.c:874 ../panel/panel-app.c:906 ../panel/panel-app.c:940
+#: ../panel/panel-app.c:894 ../panel/panel-app.c:926 ../panel/panel-app.c:959
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: ../panel/panel-app.c:877
+#: ../panel/panel-app.c:897
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Nie możesz usunąć ostatniego panelu, zamknąć program?"
 
-#: ../panel/panel-app.c:904
+#: ../panel/panel-app.c:924
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Usunąć Panel \"%d\"?"
 
-#: ../panel/panel-app.c:908
+#: ../panel/panel-app.c:928
 msgid "The selected panel and all its items will be removed."
 msgstr "Panel wraz z elementami zostanie usunięty"
 
-#: ../panel/panel-app.c:947 ../panel/panel-app.c:950
+#: ../panel/panel-app.c:965 ../panel/panel-app.c:966
 msgid "Developer"
 msgstr "Twórca"
 
-#: ../panel/main.c:46
+#: ../panel/main.c:60
+msgid "Show this message and exit"
+msgstr ""
+
+#: ../panel/main.c:61
+#, fuzzy
+msgid "Show configuration dialog"
+msgstr "Pokaż ikony powiadomie_nia"
+
+#: ../panel/main.c:62
+msgid "Save configuration"
+msgstr ""
+
+#: ../panel/main.c:63
+#, fuzzy
+msgid "Restart panels"
+msgstr "Restart"
+
+#: ../panel/main.c:64
+msgid "End the session"
+msgstr ""
+
+#: ../panel/main.c:65
+msgid "Close all panels and end the program"
+msgstr ""
+
+#: ../panel/main.c:66
+#, fuzzy
+msgid "Add new items"
+msgstr "Nowy element"
+
+#: ../panel/main.c:89
+#, fuzzy
+msgid "Failed to open display"
+msgstr "Nie mogę uruchomić \"%s\""
+
+#: ../panel/main.c:101
+msgid "Copyright (c) 2004-2007"
+msgstr ""
+
+#: ../panel/main.c:102
+msgid "The Xfce development team. All rights reserved."
+msgstr ""
+
+#: ../panel/main.c:103
 #, c-format
-msgid ""
-"\n"
-" Xfce Panel %s\n"
-"\n"
-" Part of the Xfce Desktop Environment\n"
-" http://www.xfce.org\n"
-"\n"
-" Licensed under the GNU GPL.\n"
-"\n"
+msgid "Please report bugs to <%s>."
 msgstr ""
-"\n"
-" Panel Xfce\n"
-" Wersja %s\n"
-"\n"
-" Część środowiska graficznego Xfce\n"
-" http://www.xfce.org\n"
-"\n"
-" Program na licencji GNU GPL.\n"
-"\n"
 
-#: ../panel/main.c:52
-#, c-format
-msgid ""
-" Usage: %s [OPTIONS]\n"
-"\n"
+#: ../panel/main.c:147
+msgid "xfce4-panel already running"
 msgstr ""
-" Używanie: %s [OPCJE]\n"
-"\n"
 
-#. Only translate the descriptions, not the options itself
-#: ../panel/main.c:55
-msgid ""
-" OPTIONS\n"
-" -h, --help      Show this message and exit\n"
-" -v, --version   Show this message and exit\n"
-" -c, --customize Show configuration dialog\n"
-" -s, --save      Save configuration\n"
-" -r, --restart   Restart panels\n"
-" -q, --quit      End the session\n"
-" -x, --exit      Close all panels and end the program\n"
-" -a, --add       Add new items\n"
-"\n"
+#. restart
+#: ../panel/main.c:158
+msgid "Restarting xfce4-panel..."
 msgstr ""
-" OPCJE\n"
-" -h, --help      pokazuje ten tekst\n"
-" -v, --version   pokazuje numer wersji\n"
-" -c, --customize pokazuje dane konfiguracyjne\n"
-" -s, --save      zapisuje konfiguracje\n"
-" -r, --restart   restartuje panele\n"
-" -q, --quit      kończy sesję\n"
-" -x, --exit      zamyka panele i kończy program\n"
-" -a, --add       dodaje nowe elementy\n"
-"\n"
 
-#: ../panel/panel-dialogs.c:184
+#: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Nie mogę otworzyć modułu \"%s\""
 
-#: ../panel/panel-dialogs.c:593
+#: ../panel/panel-dialogs.c:633
 msgid "Add Items to the Panel"
 msgstr "Dodaj elementy do panelu"
 
-#: ../panel/panel-dialogs.c:623
+#: ../panel/panel-dialogs.c:664
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr "Przenieś elementy z listy na panel lub z panelu na listę by je usunąć."
 
-#: ../panel/panel-dialogs.c:640
+#: ../panel/panel-dialogs.c:681
 msgid "Available Items"
 msgstr "Dostępne Elementy"
 
-#: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1090
+#: ../panel/panel-dialogs.c:907 ../panel/panel-dialogs.c:1143
 msgid "Normal Width"
 msgstr "Normalna Długość"
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
 msgid "Full Width"
 msgstr "Pełna Długość"
 
-#: ../panel/panel-dialogs.c:874 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
+#, fuzzy
+msgid "Normal Height"
+msgstr "Normalna Długość"
+
+#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#, fuzzy
+msgid "Full Height"
+msgstr "Pełna Długość"
+
+#: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
 msgstr "Marginesy Monitora"
 
-#: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
+#: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
+#: ../panel/panel-dialogs.c:1520
 msgid "Left"
 msgstr "Lewo"
 
-#: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
+#: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
+#: ../panel/panel-dialogs.c:1521
 msgid "Right"
 msgstr "Prawo"
 
-#: ../panel/panel-dialogs.c:941 ../panel/panel-dialogs.c:1170
+#: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
+#: ../panel/panel-dialogs.c:1522
 msgid "Top"
 msgstr "Góra"
 
-#: ../panel/panel-dialogs.c:943 ../panel/panel-dialogs.c:1172
+#: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1523
 msgid "Bottom"
 msgstr "Dół"
 
 #. position
-#: ../panel/panel-dialogs.c:971
+#: ../panel/panel-dialogs.c:1023
 msgid "Position"
 msgstr "Pozycja"
 
-#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:1037
 msgid "Fixed Position"
 msgstr "Pozycja"
 
-#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:1043
 msgid "Freely Moveable"
 msgstr "Ruchomy"
 
-#: ../panel/panel-dialogs.c:1106
+#: ../panel/panel-dialogs.c:1166
 msgid "Auto_hide"
 msgstr "Automatyczne ukrywanie"
 
-#: ../panel/panel-dialogs.c:1124
+#: ../panel/panel-dialogs.c:1184 ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Położenie panelu:"
 
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:1196 ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Poziome"
 
-#: ../panel/panel-dialogs.c:1138
+#: ../panel/panel-dialogs.c:1198 ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Pionowe"
 
-#: ../panel/panel-dialogs.c:1147
+#: ../panel/panel-dialogs.c:1207
 msgid "Handle:"
 msgstr "Uchwyt:"
 
-#: ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:1219
 msgid "At both sides"
 msgstr "Na obu brzegach"
 
-#: ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1299
 msgid "Select Monitor"
 msgstr "Wybierz Monitor"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1350 ../plugins/clock/clock.c:496
+#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock.c:496
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
 msgstr "Wygląd"
 
-#. size
-#: ../panel/panel-dialogs.c:1361
+#: ../panel/panel-dialogs.c:1440
 msgid "Size (pixels):"
 msgstr "Rozmiar (piksele)"
 
-#: ../panel/panel-dialogs.c:1389
+#: ../panel/panel-dialogs.c:1470
 msgid "Transparency (%):"
 msgstr "Przezroczystość (%):"
 
-#: ../panel/panel-dialogs.c:1413
+#: ../panel/panel-dialogs.c:1496
 msgid "Make active panel opaque"
 msgstr "Uczyń aktywny panel przeźroczystym"
 
-#: ../panel/panel-dialogs.c:1452 ../panel/panel-dialogs.c:1488
-#: ../panel/panel-dialogs.c:1513
+#: ../panel/panel-dialogs.c:1509
+#, fuzzy
+msgid "Popup position:"
+msgstr "Pozycja"
+
+#: ../panel/panel-dialogs.c:1519
+msgid "Automatic"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1623
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:1642
 msgid "Remove Panel"
 msgstr "Usunąć Panel"
 
-#: ../panel/panel-dialogs.c:1545
+#: ../panel/panel-dialogs.c:1655
 msgid "New Panel"
 msgstr "Nowy Panel"
 
-#: ../panel/panel-dialogs.c:1602
+#: ../panel/panel-dialogs.c:1715
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Menadżer Panelu"
 
-#: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
-#: ../plugins/actions/actions.c:433
+#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Zablokuj ekran"
 
-#: ../plugins/actions/actions.c:396
+#: ../plugins/actions/actions.c:419
 msgid "Panel Actions"
 msgstr "Ustawienia panelu"
 
-#: ../plugins/actions/actions.c:424
+#: ../plugins/actions/actions.c:449
 msgid "Select action type:"
 msgstr "Wybierz polecenie:"
 
-#: ../plugins/actions/actions.c:434
+#: ../plugins/actions/actions.c:460
 msgid "Quit + Lock screen"
 msgstr "Wyjdź i Zablokuj ekran"
 
@@ -404,97 +429,97 @@ msgstr "Użyj całej dostępnej przestrzeni"
 
 #. create new menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:707 ../plugins/launcher/launcher.c:932
+#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
 msgid "New Item"
 msgstr "Nowy element"
 
-#: ../plugins/launcher/launcher-exec.c:485
+#: ../plugins/launcher/launcher-exec.c:487
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Nie mogę uruchomić \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:590
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:610
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Wybierz Monitor"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Wybierz polecenie:"
 
-#: ../plugins/launcher/launcher-dialog.c:664
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:669
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:684
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:690
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:696
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:702
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:775
+#: ../plugins/launcher/launcher-dialog.c:760
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:778
+#: ../plugins/launcher/launcher-dialog.c:763
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1116
+#: ../plugins/launcher/launcher-dialog.c:1101
 #, fuzzy
 msgid "_Name"
 msgstr "Nazwa"
 
-#: ../plugins/launcher/launcher-dialog.c:1134
+#: ../plugins/launcher/launcher-dialog.c:1119
 #, fuzzy
 msgid "_Description"
 msgstr "Opis"
 
-#: ../plugins/launcher/launcher-dialog.c:1153
+#: ../plugins/launcher/launcher-dialog.c:1138
 #, fuzzy
 msgid "_Icon"
 msgstr "Boks Ikon"
 
-#: ../plugins/launcher/launcher-dialog.c:1171
+#: ../plugins/launcher/launcher-dialog.c:1156
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Polecenie"
 
-#: ../plugins/launcher/launcher-dialog.c:1198
+#: ../plugins/launcher/launcher-dialog.c:1183
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1230
+#: ../plugins/launcher/launcher-dialog.c:1215
 msgid "Run in _terminal"
 msgstr "Uruchom w _terminalu"
 
-#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Use _startup notification"
 msgstr "Użyj p_owiadomienia o uruchamianiu"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1488
 msgid "Program Launcher"
 msgstr "Aktywator"
 
@@ -734,6 +759,56 @@ msgstr "Pokaż listę dostępnych okien"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Menadżer Panelu Xfce 4"
+
+#~ msgid ""
+#~ "\n"
+#~ " Xfce Panel %s\n"
+#~ "\n"
+#~ " Part of the Xfce Desktop Environment\n"
+#~ " http://www.xfce.org\n"
+#~ "\n"
+#~ " Licensed under the GNU GPL.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ " Panel Xfce\n"
+#~ " Wersja %s\n"
+#~ "\n"
+#~ " Część środowiska graficznego Xfce\n"
+#~ " http://www.xfce.org\n"
+#~ "\n"
+#~ " Program na licencji GNU GPL.\n"
+#~ "\n"
+
+#~ msgid ""
+#~ " Usage: %s [OPTIONS]\n"
+#~ "\n"
+#~ msgstr ""
+#~ " Używanie: %s [OPCJE]\n"
+#~ "\n"
+
+#~ msgid ""
+#~ " OPTIONS\n"
+#~ " -h, --help      Show this message and exit\n"
+#~ " -v, --version   Show this message and exit\n"
+#~ " -c, --customize Show configuration dialog\n"
+#~ " -s, --save      Save configuration\n"
+#~ " -r, --restart   Restart panels\n"
+#~ " -q, --quit      End the session\n"
+#~ " -x, --exit      Close all panels and end the program\n"
+#~ " -a, --add       Add new items\n"
+#~ "\n"
+#~ msgstr ""
+#~ " OPCJE\n"
+#~ " -h, --help      pokazuje ten tekst\n"
+#~ " -v, --version   pokazuje numer wersji\n"
+#~ " -c, --customize pokazuje dane konfiguracyjne\n"
+#~ " -s, --save      zapisuje konfiguracje\n"
+#~ " -r, --restart   restartuje panele\n"
+#~ " -q, --quit      kończy sesję\n"
+#~ " -x, --exit      zamyka panele i kończy program\n"
+#~ " -a, --add       dodaje nowe elementy\n"
+#~ "\n"
 
 #~ msgid "Error in command \"%s\""
 #~ msgstr "Błąd w poleceniu \"%s\""

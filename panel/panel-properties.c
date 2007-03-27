@@ -1004,7 +1004,7 @@ panel_init_position (Panel *panel)
     x = xmon->geometry.x;
     y = xmon->geometry.y;
 
-    if (priv->xoffset > 0 && priv->yoffset > 0)
+    if (priv->xoffset > 0 || priv->yoffset > 0)
     {
         x += priv->xoffset;
         y += priv->yoffset;

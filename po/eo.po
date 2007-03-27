@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-03 20:30+0100\n"
+"POT-Creation-Date: 2007-03-27 16:30+0200\n"
 "PO-Revision-Date: 2006-09-21 12:14+0200\n"
 "Last-Translator: Jarbas Araujo Jr <jarbasaraujojr@yahoo.com.br>\n"
 "Language-Team: Esperanto <debian-l10n-esperanto@lists.debian.org>\n"
@@ -51,155 +51,159 @@ msgid "Web Browser"
 msgstr "TTT-Krozilo"
 
 #. dialogs are annoying, just spit out a warning
-#: ../libxfce4panel/xfce-panel-external-item.c:171
+#: ../libxfce4panel/xfce-panel-external-item.c:169
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Elemento estis neatendite forigita: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:609
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:594
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Ĉu forigu \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:623
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:608
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "La elemento estos forigita el la panelo kaj ĝies agordo perdita."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:823
 msgid "Properties"
 msgstr "Parametroj"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:840
 msgid "About"
 msgstr "Pri"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:868
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:852
 msgid "Move"
 msgstr "Movu"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:887
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:871
 msgid "Remove"
 msgstr "Forigu"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:904
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:888
 msgid "Add New Item"
 msgstr "Aldonu Novan elementon"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:697
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:899 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Agordu Panelon"
 
-#: ../panel/panel.c:708
+#: ../panel/panel.c:707
 msgid "Add Items"
 msgstr "Aldonu Elementojn"
 
-#: ../panel/panel.c:724 ../plugins/actions/actions.c:280
-#: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:432
+#: ../panel/panel.c:723 ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Adiaŭu"
 
-#: ../panel/panel.c:734
+#: ../panel/panel.c:733
 msgid "Restart"
 msgstr "Restartigu"
 
-#: ../panel/panel.c:748
+#: ../panel/panel.c:747
 msgid "About the Xfce Panel"
 msgstr "Pri la Xfce Panelo"
 
-#: ../panel/panel-app.c:238 ../panel/panel-app.c:876
+#: ../panel/panel-app.c:255 ../panel/panel-app.c:896
 msgid "Exit Xfce Panel?"
 msgstr "Ĉu Audiaŭi la Xfce Panelon?"
 
-#: ../panel/panel-app.c:874 ../panel/panel-app.c:906 ../panel/panel-app.c:940
+#: ../panel/panel-app.c:894 ../panel/panel-app.c:926 ../panel/panel-app.c:959
 msgid "Xfce Panel"
 msgstr "Xfce Panelo"
 
-#: ../panel/panel-app.c:877
+#: ../panel/panel-app.c:897
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Vi ne povas forigi la lastan panelon. Ĉu vi volas adiaŭi la programon?"
 
-#: ../panel/panel-app.c:904
+#: ../panel/panel-app.c:924
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Ĉu Forigi Panelon \"%d\"?"
 
-#: ../panel/panel-app.c:908
+#: ../panel/panel-app.c:928
 msgid "The selected panel and all its items will be removed."
 msgstr "La elektita panelo kaj ĉiuj ĝiaj elementoj estos forigitaj."
 
-#: ../panel/panel-app.c:947 ../panel/panel-app.c:950
+#: ../panel/panel-app.c:965 ../panel/panel-app.c:966
 msgid "Developer"
 msgstr "Programisto"
 
-#: ../panel/main.c:46
+#: ../panel/main.c:60
+msgid "Show this message and exit"
+msgstr ""
+
+#: ../panel/main.c:61
+#, fuzzy
+msgid "Show configuration dialog"
+msgstr "Montru la avizpiktogramojn"
+
+#: ../panel/main.c:62
+msgid "Save configuration"
+msgstr ""
+
+#: ../panel/main.c:63
+#, fuzzy
+msgid "Restart panels"
+msgstr "Restartigu"
+
+#: ../panel/main.c:64
+msgid "End the session"
+msgstr ""
+
+#: ../panel/main.c:65
+msgid "Close all panels and end the program"
+msgstr ""
+
+#: ../panel/main.c:66
+#, fuzzy
+msgid "Add new items"
+msgstr "Aldonu Novan elementon"
+
+#: ../panel/main.c:89
+#, fuzzy
+msgid "Failed to open display"
+msgstr "Malsukcesis startigi \"%s\""
+
+#: ../panel/main.c:101
+msgid "Copyright (c) 2004-2007"
+msgstr ""
+
+#: ../panel/main.c:102
+msgid "The Xfce development team. All rights reserved."
+msgstr ""
+
+#: ../panel/main.c:103
 #, c-format
-msgid ""
-"\n"
-" Xfce Panel %s\n"
-"\n"
-" Part of the Xfce Desktop Environment\n"
-" http://www.xfce.org\n"
-"\n"
-" Licensed under the GNU GPL.\n"
-"\n"
+msgid "Please report bugs to <%s>."
 msgstr ""
-"\n"
-" Xfce Panelo %s\n"
-" \n"
-" Parto de la Xfce Labortabla Medio\n"
-" http://www.xfce.org\n"
-"\n"
-" Disdonita laŭ la GNU GPL.\n"
-"\n"
 
-#: ../panel/main.c:52
-#, c-format
-msgid ""
-" Usage: %s [OPTIONS]\n"
-"\n"
+#: ../panel/main.c:147
+msgid "xfce4-panel already running"
 msgstr ""
-" Uzado: %s [OPCIOJ]\n"
-"\n"
 
-#. Only translate the descriptions, not the options itself
-#: ../panel/main.c:55
-msgid ""
-" OPTIONS\n"
-" -h, --help      Show this message and exit\n"
-" -v, --version   Show this message and exit\n"
-" -c, --customize Show configuration dialog\n"
-" -s, --save      Save configuration\n"
-" -r, --restart   Restart panels\n"
-" -q, --quit      End the session\n"
-" -x, --exit      Close all panels and end the program\n"
-" -a, --add       Add new items\n"
-"\n"
+#. restart
+#: ../panel/main.c:158
+msgid "Restarting xfce4-panel..."
 msgstr ""
-" OPCIOJ\n"
-" -h, --help      Montru ĉi-tiun mesaĝon kaj adiaŭu\n"
-" -v, --version   Montru ĉi-tiun mesaĝon kaj adiaŭu\n"
-" -c, --customize Montru agordan mesaĝon\n"
-" -s, --save      Konservu la agordon\n"
-" -r, --restart   Restartigu la panelojn\n"
-" -q, --quit      Fermu la seancon\n"
-" -x, --exit      Fermu ĉiujn panelojn kaj adiaŭu la programon\n"
-" -a, --add       Aldonu novajn elementojn\n"
-"\n"
 
-#: ../panel/panel-dialogs.c:184
+#: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Malsukcesis malfermi la modulon \"%s\""
 
-#: ../panel/panel-dialogs.c:593
+#: ../panel/panel-dialogs.c:633
 msgid "Add Items to the Panel"
 msgstr "Aldonu aĵojn al la panelo"
 
-#: ../panel/panel-dialogs.c:623
+#: ../panel/panel-dialogs.c:664
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -207,132 +211,154 @@ msgstr ""
 "Mustrenu elementojn el la listo al panelo aŭ mustrenante forigu ilin reen al "
 "la listo."
 
-#: ../panel/panel-dialogs.c:640
+#: ../panel/panel-dialogs.c:681
 msgid "Available Items"
 msgstr "Disponeblaj Elementoj"
 
-#: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1090
+#: ../panel/panel-dialogs.c:907 ../panel/panel-dialogs.c:1143
 msgid "Normal Width"
 msgstr "Normala Larĝo"
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
 msgid "Full Width"
 msgstr "Plena larĝo"
 
-#: ../panel/panel-dialogs.c:874 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
+#, fuzzy
+msgid "Normal Height"
+msgstr "Normala Larĝo"
+
+#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#, fuzzy
+msgid "Full Height"
+msgstr "Plena larĝo"
+
+#: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
 msgstr "Kunmetu Ekranojn"
 
-#: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
+#: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
+#: ../panel/panel-dialogs.c:1520
 msgid "Left"
 msgstr "Maldekstre"
 
-#: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
+#: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
+#: ../panel/panel-dialogs.c:1521
 msgid "Right"
 msgstr "Dekstre"
 
-#: ../panel/panel-dialogs.c:941 ../panel/panel-dialogs.c:1170
+#: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
+#: ../panel/panel-dialogs.c:1522
 msgid "Top"
 msgstr "Supre"
 
-#: ../panel/panel-dialogs.c:943 ../panel/panel-dialogs.c:1172
+#: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1523
 msgid "Bottom"
 msgstr "Malsupre"
 
 #. position
-#: ../panel/panel-dialogs.c:971
+#: ../panel/panel-dialogs.c:1023
 msgid "Position"
 msgstr "Pozicio"
 
-#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:1037
 msgid "Fixed Position"
 msgstr "Fiksa Pozicio"
 
-#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:1043
 msgid "Freely Moveable"
 msgstr "Libere Movebla"
 
-#: ../panel/panel-dialogs.c:1106
+#: ../panel/panel-dialogs.c:1166
 msgid "Auto_hide"
 msgstr "Aŭtomate _kaŝu"
 
-#: ../panel/panel-dialogs.c:1124
+#: ../panel/panel-dialogs.c:1184 ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Direkto:"
 
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:1196 ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Horizontala"
 
-#: ../panel/panel-dialogs.c:1138
+#: ../panel/panel-dialogs.c:1198 ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Vertikala"
 
-#: ../panel/panel-dialogs.c:1147
+#: ../panel/panel-dialogs.c:1207
 msgid "Handle:"
 msgstr "Anso:"
 
-#: ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:1219
 msgid "At both sides"
 msgstr "Ĉe la du flankoj"
 
-#: ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1299
 msgid "Select Monitor"
 msgstr "Elektu Ekranon"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1350 ../plugins/clock/clock.c:496
+#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock.c:496
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
 msgstr "Aspekto"
 
-#. size
-#: ../panel/panel-dialogs.c:1361
+#: ../panel/panel-dialogs.c:1440
 msgid "Size (pixels):"
 msgstr "Dimensio (rastrumeroj):"
 
-#: ../panel/panel-dialogs.c:1389
+#: ../panel/panel-dialogs.c:1470
 msgid "Transparency (%):"
 msgstr "Travidebleco (%):"
 
-#: ../panel/panel-dialogs.c:1413
+#: ../panel/panel-dialogs.c:1496
 msgid "Make active panel opaque"
 msgstr "Opakigu la aktivan panelon"
 
-#: ../panel/panel-dialogs.c:1452 ../panel/panel-dialogs.c:1488
-#: ../panel/panel-dialogs.c:1513
+#: ../panel/panel-dialogs.c:1509
+#, fuzzy
+msgid "Popup position:"
+msgstr "Pozicio"
+
+#: ../panel/panel-dialogs.c:1519
+msgid "Automatic"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1623
 #, c-format
 msgid "Panel %d"
 msgstr "Panelo %d"
 
-#: ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:1642
 msgid "Remove Panel"
 msgstr "Forigu Panelon"
 
-#: ../panel/panel-dialogs.c:1545
+#: ../panel/panel-dialogs.c:1655
 msgid "New Panel"
 msgstr "Novan Panelon"
 
-#: ../panel/panel-dialogs.c:1602
+#: ../panel/panel-dialogs.c:1715
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Administrilo de Panelo"
 
-#: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
-#: ../plugins/actions/actions.c:433
+#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Ŝlosu la ekranon"
 
-#: ../plugins/actions/actions.c:396
+#: ../plugins/actions/actions.c:419
 msgid "Panel Actions"
 msgstr "Panelaj Agoj"
 
-#: ../plugins/actions/actions.c:424
+#: ../plugins/actions/actions.c:449
 msgid "Select action type:"
 msgstr "Elektu specon de ago:"
 
-#: ../plugins/actions/actions.c:434
+#: ../plugins/actions/actions.c:460
 msgid "Quit + Lock screen"
 msgstr "Audiaŭa + Ŝlosa ekrano"
 
@@ -404,97 +430,97 @@ msgstr "Uzu la tutan disponeblan spacon"
 
 #. create new menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:707 ../plugins/launcher/launcher.c:932
+#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
 msgid "New Item"
 msgstr "Novan Elementon"
 
-#: ../plugins/launcher/launcher-exec.c:485
+#: ../plugins/launcher/launcher-exec.c:487
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Malsukcesis startigi \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:590
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:610
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Elektu Ekranon"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Elektu specon de ago:"
 
-#: ../plugins/launcher/launcher-dialog.c:664
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:669
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:684
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:690
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:696
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:702
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:775
+#: ../plugins/launcher/launcher-dialog.c:760
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:778
+#: ../plugins/launcher/launcher-dialog.c:763
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1116
+#: ../plugins/launcher/launcher-dialog.c:1101
 #, fuzzy
 msgid "_Name"
 msgstr "Nomo"
 
-#: ../plugins/launcher/launcher-dialog.c:1134
+#: ../plugins/launcher/launcher-dialog.c:1119
 #, fuzzy
 msgid "_Description"
 msgstr "Priskribo"
 
-#: ../plugins/launcher/launcher-dialog.c:1153
+#: ../plugins/launcher/launcher-dialog.c:1138
 #, fuzzy
 msgid "_Icon"
 msgstr "Piktogramkesto"
 
-#: ../plugins/launcher/launcher-dialog.c:1171
+#: ../plugins/launcher/launcher-dialog.c:1156
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Komando"
 
-#: ../plugins/launcher/launcher-dialog.c:1198
+#: ../plugins/launcher/launcher-dialog.c:1183
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1230
+#: ../plugins/launcher/launcher-dialog.c:1215
 msgid "Run in _terminal"
 msgstr "Lanĉu en _terminalo"
 
-#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Use _startup notification"
 msgstr "Uzu _lanĉa informigo"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1488
 msgid "Program Launcher"
 msgstr "Lanĉilo de Programo"
 
@@ -732,6 +758,55 @@ msgstr "Montru la liston de la disponeblaj fenestroj"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 Administrilo de Panelo"
+
+#~ msgid ""
+#~ "\n"
+#~ " Xfce Panel %s\n"
+#~ "\n"
+#~ " Part of the Xfce Desktop Environment\n"
+#~ " http://www.xfce.org\n"
+#~ "\n"
+#~ " Licensed under the GNU GPL.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ " Xfce Panelo %s\n"
+#~ " \n"
+#~ " Parto de la Xfce Labortabla Medio\n"
+#~ " http://www.xfce.org\n"
+#~ "\n"
+#~ " Disdonita laŭ la GNU GPL.\n"
+#~ "\n"
+
+#~ msgid ""
+#~ " Usage: %s [OPTIONS]\n"
+#~ "\n"
+#~ msgstr ""
+#~ " Uzado: %s [OPCIOJ]\n"
+#~ "\n"
+
+#~ msgid ""
+#~ " OPTIONS\n"
+#~ " -h, --help      Show this message and exit\n"
+#~ " -v, --version   Show this message and exit\n"
+#~ " -c, --customize Show configuration dialog\n"
+#~ " -s, --save      Save configuration\n"
+#~ " -r, --restart   Restart panels\n"
+#~ " -q, --quit      End the session\n"
+#~ " -x, --exit      Close all panels and end the program\n"
+#~ " -a, --add       Add new items\n"
+#~ "\n"
+#~ msgstr ""
+#~ " OPCIOJ\n"
+#~ " -h, --help      Montru ĉi-tiun mesaĝon kaj adiaŭu\n"
+#~ " -v, --version   Montru ĉi-tiun mesaĝon kaj adiaŭu\n"
+#~ " -c, --customize Montru agordan mesaĝon\n"
+#~ " -s, --save      Konservu la agordon\n"
+#~ " -r, --restart   Restartigu la panelojn\n"
+#~ " -q, --quit      Fermu la seancon\n"
+#~ " -x, --exit      Fermu ĉiujn panelojn kaj adiaŭu la programon\n"
+#~ " -a, --add       Aldonu novajn elementojn\n"
+#~ "\n"
 
 #~ msgid "Error in command \"%s\""
 #~ msgstr "Eraro kun la komando \"%s\""

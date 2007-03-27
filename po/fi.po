@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-03 20:30+0100\n"
+"POT-Creation-Date: 2007-03-27 16:30+0200\n"
 "PO-Revision-Date: 2006-08-12 21:36+0300\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -52,155 +52,159 @@ msgid "Web Browser"
 msgstr "Ohjeselain"
 
 #. dialogs are annoying, just spit out a warning
-#: ../libxfce4panel/xfce-panel-external-item.c:171
+#: ../libxfce4panel/xfce-panel-external-item.c:169
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Osa poistettiin odottamatta: \"%s\""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:609
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:594
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Poistetaanko \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:623
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:608
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "Tämä osa poistetaan paneelista ja sen asetukset menetetään."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:823
 msgid "Properties"
 msgstr "Ominaisuudet"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:840
 msgid "About"
 msgstr "Tietoja"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:868
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:852
 msgid "Move"
 msgstr "Siirrä"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:887
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:871
 msgid "Remove"
 msgstr "Poista"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:904
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:888
 msgid "Add New Item"
 msgstr "Lisää uusi osa"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:697
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:899 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Mukauta paneelia"
 
-#: ../panel/panel.c:708
+#: ../panel/panel.c:707
 msgid "Add Items"
 msgstr "Lisää osia"
 
-#: ../panel/panel.c:724 ../plugins/actions/actions.c:280
-#: ../plugins/actions/actions.c:314 ../plugins/actions/actions.c:432
+#: ../panel/panel.c:723 ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Lopeta"
 
-#: ../panel/panel.c:734
+#: ../panel/panel.c:733
 msgid "Restart"
 msgstr "Käynnistä uudelleen"
 
-#: ../panel/panel.c:748
+#: ../panel/panel.c:747
 msgid "About the Xfce Panel"
 msgstr "Tietoja Xfce:n paneelista"
 
-#: ../panel/panel-app.c:238 ../panel/panel-app.c:876
+#: ../panel/panel-app.c:255 ../panel/panel-app.c:896
 msgid "Exit Xfce Panel?"
 msgstr "Poistutaanko Xfce:n paneelista?"
 
-#: ../panel/panel-app.c:874 ../panel/panel-app.c:906 ../panel/panel-app.c:940
+#: ../panel/panel-app.c:894 ../panel/panel-app.c:926 ../panel/panel-app.c:959
 msgid "Xfce Panel"
 msgstr "Xfce paneeli"
 
-#: ../panel/panel-app.c:877
+#: ../panel/panel-app.c:897
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Et voi poistaa ainoaa paneelia. Haluatko sulkea sovelluksen?"
 
-#: ../panel/panel-app.c:904
+#: ../panel/panel-app.c:924
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Poistetaanko paneeli \"%d\"?"
 
-#: ../panel/panel-app.c:908
+#: ../panel/panel-app.c:928
 msgid "The selected panel and all its items will be removed."
 msgstr "Valittu paneeli ja kaikki sen osat poistetaan."
 
-#: ../panel/panel-app.c:947 ../panel/panel-app.c:950
+#: ../panel/panel-app.c:965 ../panel/panel-app.c:966
 msgid "Developer"
 msgstr "Kehittäjä"
 
-#: ../panel/main.c:46
+#: ../panel/main.c:60
+msgid "Show this message and exit"
+msgstr ""
+
+#: ../panel/main.c:61
+#, fuzzy
+msgid "Show configuration dialog"
+msgstr "Näytä järjestelmäkuvakkeet"
+
+#: ../panel/main.c:62
+msgid "Save configuration"
+msgstr ""
+
+#: ../panel/main.c:63
+#, fuzzy
+msgid "Restart panels"
+msgstr "Käynnistä uudelleen"
+
+#: ../panel/main.c:64
+msgid "End the session"
+msgstr ""
+
+#: ../panel/main.c:65
+msgid "Close all panels and end the program"
+msgstr ""
+
+#: ../panel/main.c:66
+#, fuzzy
+msgid "Add new items"
+msgstr "Lisää uusi osa"
+
+#: ../panel/main.c:89
+#, fuzzy
+msgid "Failed to open display"
+msgstr "Kohdetta \"%s\" ei voitu suorittaa"
+
+#: ../panel/main.c:101
+msgid "Copyright (c) 2004-2007"
+msgstr ""
+
+#: ../panel/main.c:102
+msgid "The Xfce development team. All rights reserved."
+msgstr ""
+
+#: ../panel/main.c:103
 #, c-format
-msgid ""
-"\n"
-" Xfce Panel %s\n"
-"\n"
-" Part of the Xfce Desktop Environment\n"
-" http://www.xfce.org\n"
-"\n"
-" Licensed under the GNU GPL.\n"
-"\n"
+msgid "Please report bugs to <%s>."
 msgstr ""
-"\n"
-" Xfce paneeli %s\n"
-"\n"
-" Osa Xfce-työpöytäympäristöä\n"
-" http://www.xfce.org\n"
-"\n"
-" Lisensoitu GNU GPL:n mukaisesti.\n"
-"\n"
 
-#: ../panel/main.c:52
-#, c-format
-msgid ""
-" Usage: %s [OPTIONS]\n"
-"\n"
+#: ../panel/main.c:147
+msgid "xfce4-panel already running"
 msgstr ""
-" Käyttö: %s [VALITSIMET]\n"
-"\n"
 
-#. Only translate the descriptions, not the options itself
-#: ../panel/main.c:55
-msgid ""
-" OPTIONS\n"
-" -h, --help      Show this message and exit\n"
-" -v, --version   Show this message and exit\n"
-" -c, --customize Show configuration dialog\n"
-" -s, --save      Save configuration\n"
-" -r, --restart   Restart panels\n"
-" -q, --quit      End the session\n"
-" -x, --exit      Close all panels and end the program\n"
-" -a, --add       Add new items\n"
-"\n"
+#. restart
+#: ../panel/main.c:158
+msgid "Restarting xfce4-panel..."
 msgstr ""
-" OPTIONS\n"
-" -h, --help      Näytä tämä viesti ja poistu\n"
-" -v, --version   Näytä tämä viesti ja poistu\n"
-" -c, --customize Näytä asetusdialogi\n"
-" -s, --save      Tallenna asetukset\n"
-" -r, --restart   Käynnistä paneelit uudelleen\n"
-" -q, --quit      Lopeta istunto\n"
-" -x, --exit      Sulje kaikki paneelit ja poistu sovelluksesta\n"
-" -a, --add       Lisää uusia osia\n"
-"\n"
 
-#: ../panel/panel-dialogs.c:184
+#: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Moduulin \"%s\" avaaminen epäonnistui"
 
-#: ../panel/panel-dialogs.c:593
+#: ../panel/panel-dialogs.c:633
 msgid "Add Items to the Panel"
 msgstr "Lisää osia paneeliin"
 
-#: ../panel/panel-dialogs.c:623
+#: ../panel/panel-dialogs.c:664
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -208,132 +212,154 @@ msgstr ""
 "Raahaa kohteita listalta paneeliin tai poista niitä raahaamalla takaisin "
 "listan päälle."
 
-#: ../panel/panel-dialogs.c:640
+#: ../panel/panel-dialogs.c:681
 msgid "Available Items"
 msgstr "Käytettävissä olevat osat"
 
-#: ../panel/panel-dialogs.c:866 ../panel/panel-dialogs.c:1090
+#: ../panel/panel-dialogs.c:907 ../panel/panel-dialogs.c:1143
 msgid "Normal Width"
 msgstr "Normaali leveys"
 
-#: ../panel/panel-dialogs.c:868 ../panel/panel-dialogs.c:1092
+#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
 msgid "Full Width"
 msgstr "Täysi leveys"
 
-#: ../panel/panel-dialogs.c:874 ../panel/panel-dialogs.c:1098
+#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
+#, fuzzy
+msgid "Normal Height"
+msgstr "Normaali leveys"
+
+#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#, fuzzy
+msgid "Full Height"
+msgstr "Täysi leveys"
+
+#: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
 msgstr "Levitä kaikille näytöille"
 
-#: ../panel/panel-dialogs.c:934 ../panel/panel-dialogs.c:1163
+#: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
+#: ../panel/panel-dialogs.c:1520
 msgid "Left"
 msgstr "Vasemmalla"
 
-#: ../panel/panel-dialogs.c:936 ../panel/panel-dialogs.c:1165
+#: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
+#: ../panel/panel-dialogs.c:1521
 msgid "Right"
 msgstr "Oikealla"
 
-#: ../panel/panel-dialogs.c:941 ../panel/panel-dialogs.c:1170
+#: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
+#: ../panel/panel-dialogs.c:1522
 msgid "Top"
 msgstr "Ylhäällä"
 
-#: ../panel/panel-dialogs.c:943 ../panel/panel-dialogs.c:1172
+#: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1523
 msgid "Bottom"
 msgstr "Alhaalla"
 
 #. position
-#: ../panel/panel-dialogs.c:971
+#: ../panel/panel-dialogs.c:1023
 msgid "Position"
 msgstr "Sijainti"
 
-#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:1037
 msgid "Fixed Position"
 msgstr "Kiinteä"
 
-#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:1043
 msgid "Freely Moveable"
 msgstr "Liikuteltava"
 
-#: ../panel/panel-dialogs.c:1106
+#: ../panel/panel-dialogs.c:1166
 msgid "Auto_hide"
 msgstr "_Piilota automaattisesti"
 
-#: ../panel/panel-dialogs.c:1124
+#: ../panel/panel-dialogs.c:1184 ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Paneelin suunta:"
 
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:1196 ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Vaaka"
 
-#: ../panel/panel-dialogs.c:1138
+#: ../panel/panel-dialogs.c:1198 ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Pysty"
 
-#: ../panel/panel-dialogs.c:1147
+#: ../panel/panel-dialogs.c:1207
 msgid "Handle:"
 msgstr "Kahva:"
 
-#: ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:1219
 msgid "At both sides"
 msgstr "Molemmissa päissä"
 
-#: ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1299
 msgid "Select Monitor"
 msgstr "Valitse näyttö"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1350 ../plugins/clock/clock.c:496
+#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock.c:496
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
 msgstr "Ulkonäkö"
 
-#. size
-#: ../panel/panel-dialogs.c:1361
+#: ../panel/panel-dialogs.c:1440
 msgid "Size (pixels):"
 msgstr "Koko (Kuvapisteinä)"
 
-#: ../panel/panel-dialogs.c:1389
+#: ../panel/panel-dialogs.c:1470
 msgid "Transparency (%):"
 msgstr "Läpinäkyvyys (%)"
 
-#: ../panel/panel-dialogs.c:1413
+#: ../panel/panel-dialogs.c:1496
 msgid "Make active panel opaque"
 msgstr "Tee aktiivisesta paneelista läpinäkymätön"
 
-#: ../panel/panel-dialogs.c:1452 ../panel/panel-dialogs.c:1488
-#: ../panel/panel-dialogs.c:1513
+#: ../panel/panel-dialogs.c:1509
+#, fuzzy
+msgid "Popup position:"
+msgstr "Sijainti"
+
+#: ../panel/panel-dialogs.c:1519
+msgid "Automatic"
+msgstr ""
+
+#: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1623
 #, c-format
 msgid "Panel %d"
 msgstr "Paneeli %d"
 
-#: ../panel/panel-dialogs.c:1532
+#: ../panel/panel-dialogs.c:1642
 msgid "Remove Panel"
 msgstr "Poista paneeli"
 
-#: ../panel/panel-dialogs.c:1545
+#: ../panel/panel-dialogs.c:1655
 msgid "New Panel"
 msgstr "Lisää paneeli"
 
-#: ../panel/panel-dialogs.c:1602
+#: ../panel/panel-dialogs.c:1715
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Paneelin hallinta"
 
-#: ../plugins/actions/actions.c:261 ../plugins/actions/actions.c:297
-#: ../plugins/actions/actions.c:433
+#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Lukitse näyttö"
 
-#: ../plugins/actions/actions.c:396
+#: ../plugins/actions/actions.c:419
 msgid "Panel Actions"
 msgstr "Paneelin toiminnot"
 
-#: ../plugins/actions/actions.c:424
+#: ../plugins/actions/actions.c:449
 msgid "Select action type:"
 msgstr "Valitse toimintotyyppi:"
 
-#: ../plugins/actions/actions.c:434
+#: ../plugins/actions/actions.c:460
 msgid "Quit + Lock screen"
 msgstr "Lopeta + lukitse näyttö"
 
@@ -405,97 +431,97 @@ msgstr "Käytä kaikki käytettävissä oleva tila"
 
 #. create new menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:707 ../plugins/launcher/launcher.c:932
+#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
 msgid "New Item"
 msgstr "Uusi osa"
 
-#: ../plugins/launcher/launcher-exec.c:485
+#: ../plugins/launcher/launcher-exec.c:487
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Kohdetta \"%s\" ei voitu suorittaa"
 
-#: ../plugins/launcher/launcher-dialog.c:590
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:610
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Valitse näyttö"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Valitse toimintotyyppi:"
 
-#: ../plugins/launcher/launcher-dialog.c:664
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:669
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:684
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:690
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:696
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:702
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:775
+#: ../plugins/launcher/launcher-dialog.c:760
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:778
+#: ../plugins/launcher/launcher-dialog.c:763
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1116
+#: ../plugins/launcher/launcher-dialog.c:1101
 #, fuzzy
 msgid "_Name"
 msgstr "Nimi"
 
-#: ../plugins/launcher/launcher-dialog.c:1134
+#: ../plugins/launcher/launcher-dialog.c:1119
 #, fuzzy
 msgid "_Description"
 msgstr "Kuvaus"
 
-#: ../plugins/launcher/launcher-dialog.c:1153
+#: ../plugins/launcher/launcher-dialog.c:1138
 #, fuzzy
 msgid "_Icon"
 msgstr "Kuvakelaatikko"
 
-#: ../plugins/launcher/launcher-dialog.c:1171
+#: ../plugins/launcher/launcher-dialog.c:1156
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Komento"
 
-#: ../plugins/launcher/launcher-dialog.c:1198
+#: ../plugins/launcher/launcher-dialog.c:1183
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1230
+#: ../plugins/launcher/launcher-dialog.c:1215
 msgid "Run in _terminal"
 msgstr "Suorita _päätteessä"
 
-#: ../plugins/launcher/launcher-dialog.c:1246
+#: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Use _startup notification"
 msgstr "Käytä käynnistyksen _huomautusta"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1488
 msgid "Program Launcher"
 msgstr "Sovelluskäynnistin"
 
@@ -735,6 +761,55 @@ msgstr "Näytä lista käytettävissä olevista ikkunoista"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Paneelin hallinta"
+
+#~ msgid ""
+#~ "\n"
+#~ " Xfce Panel %s\n"
+#~ "\n"
+#~ " Part of the Xfce Desktop Environment\n"
+#~ " http://www.xfce.org\n"
+#~ "\n"
+#~ " Licensed under the GNU GPL.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ " Xfce paneeli %s\n"
+#~ "\n"
+#~ " Osa Xfce-työpöytäympäristöä\n"
+#~ " http://www.xfce.org\n"
+#~ "\n"
+#~ " Lisensoitu GNU GPL:n mukaisesti.\n"
+#~ "\n"
+
+#~ msgid ""
+#~ " Usage: %s [OPTIONS]\n"
+#~ "\n"
+#~ msgstr ""
+#~ " Käyttö: %s [VALITSIMET]\n"
+#~ "\n"
+
+#~ msgid ""
+#~ " OPTIONS\n"
+#~ " -h, --help      Show this message and exit\n"
+#~ " -v, --version   Show this message and exit\n"
+#~ " -c, --customize Show configuration dialog\n"
+#~ " -s, --save      Save configuration\n"
+#~ " -r, --restart   Restart panels\n"
+#~ " -q, --quit      End the session\n"
+#~ " -x, --exit      Close all panels and end the program\n"
+#~ " -a, --add       Add new items\n"
+#~ "\n"
+#~ msgstr ""
+#~ " OPTIONS\n"
+#~ " -h, --help      Näytä tämä viesti ja poistu\n"
+#~ " -v, --version   Näytä tämä viesti ja poistu\n"
+#~ " -c, --customize Näytä asetusdialogi\n"
+#~ " -s, --save      Tallenna asetukset\n"
+#~ " -r, --restart   Käynnistä paneelit uudelleen\n"
+#~ " -q, --quit      Lopeta istunto\n"
+#~ " -x, --exit      Sulje kaikki paneelit ja poistu sovelluksesta\n"
+#~ " -a, --add       Lisää uusia osia\n"
+#~ "\n"
 
 #~ msgid "Error in command \"%s\""
 #~ msgstr "Virhe komennossa \"%s\""
