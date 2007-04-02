@@ -1,51 +1,23 @@
 # Ukrainian translation of xfce4-panel.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-# Maxim Dziumanenko <dziumanenko@gmail.com>, 2003-2007.
 #
+# Maxim Dziumanenko <dziumanenko@gmail.com>, 2003-2007.
+# Dmitry Nikitin <luckas_fb@mail.ru>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.4.0\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-27 16:30+0200\n"
-"PO-Revision-Date: 2007-03-03 20:43+0900\n"
+"POT-Creation-Date: 2007-04-02 16:15+0300\n"
+"PO-Revision-Date: 2007-04-02 17:29+0200\n"
 "Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
-"Language-Team: Ukrainian <translation-team-uk@lists.sourceforge.net>\n"
+"Language-Team: Ukrainian <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr "Командний рядок"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr "Емулятор X-терміналу"
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr "Правка текстових файлів"
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "Редактор"
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr "Менеджер файлів"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr "Робота з файлами та теками"
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr "Огляд інтернет"
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr "Веб-переглядач"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -93,7 +65,7 @@ msgstr "Налаштувати панель"
 
 #: ../panel/panel.c:707
 msgid "Add Items"
-msgstr "Додати об'єкт"
+msgstr "Додати об'єкти"
 
 #: ../panel/panel.c:723 ../plugins/actions/actions.c:286
 #: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
@@ -127,7 +99,7 @@ msgstr "Видалити панель \"%d\"?"
 
 #: ../panel/panel-app.c:928
 msgid "The selected panel and all its items will be removed."
-msgstr "Вибрана панель на усі її об'єкти будуть видалені."
+msgstr "Вибрана панель та усі її об'єкти будуть видалені."
 
 #: ../panel/panel-app.c:965 ../panel/panel-app.c:966
 msgid "Developer"
@@ -135,78 +107,74 @@ msgstr "Розробник"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "Показати це повідомлення та вийти."
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "Показ значків сповіщення"
+msgstr "Показати конфігураційний діалог"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "Зберегти конфігурацію"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "Перезапустити"
+msgstr "Перезапустити панелі"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "Завершити сеанс"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Закрити усі панелі та завершити програму"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "Додати новий об'єкт"
+msgstr "Додати нові пункти"
 
 #: ../panel/main.c:89
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Не вдається запустити \"%s\""
+msgstr "Помилка відкривання дисплею"
 
 #: ../panel/main.c:101
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Copyright (c) 2004-2007"
 
 #: ../panel/main.c:102
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Команда розробки Xfce. Всі права захищені."
 
 #: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Сповістіть про помилку на <%s>."
 
 #: ../panel/main.c:147
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "xfce4-panel вже запущено"
 
 #. restart
 #: ../panel/main.c:158
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "Перезапускається xfce4-panel..."
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Не вдається відкрити модуль \"%s\"."
+msgstr "Не вдається відкрити модуль \"%s\""
 
 #: ../panel/panel-dialogs.c:633
 msgid "Add Items to the Panel"
-msgstr "Додати елементи на панель"
+msgstr "Додати елементи до панелі"
 
 #: ../panel/panel-dialogs.c:664
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
-"Перетягуйте об'єкти зі списку на панель або видаляйте їх, перетягуючи назад "
-"у список."
+"Перетягуйте об'єкти зі списку на панель або видаляйте об'єкти, перетягуючи "
+"їх назад у список."
 
 #: ../panel/panel-dialogs.c:681
 msgid "Available Items"
@@ -221,14 +189,12 @@ msgid "Full Width"
 msgstr "Повна ширина"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, fuzzy
 msgid "Normal Height"
-msgstr "Звичайна ширина"
+msgstr "Звичайна висота"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
 msgid "Full Height"
-msgstr "Повна ширина"
+msgstr "Повна висота"
 
 #: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
@@ -315,13 +281,12 @@ msgid "Make active panel opaque"
 msgstr "Зробити активну панель непрозорою"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Popup position:"
-msgstr "Розташування"
+msgstr "Позиція появи:"
 
 #: ../panel/panel-dialogs.c:1519
 msgid "Automatic"
-msgstr ""
+msgstr "Автоматично"
 
 #: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
@@ -340,7 +305,7 @@ msgstr "Нова панель"
 #: ../panel/panel-dialogs.c:1715
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
-msgstr "Менеджер панелей:"
+msgstr "Менеджер панелей"
 
 #: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
@@ -432,81 +397,75 @@ msgid "New Item"
 msgstr "Новий об'єкт"
 
 #: ../plugins/launcher/launcher-exec.c:487
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Не вдається запустити \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
-msgstr ""
+msgstr "Без значка"
 
 #: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
 msgid "Select a Directory"
-msgstr "Виберіть екран"
+msgstr "Вибрати теку"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Select an Application"
-msgstr "Виберіть тип дії:"
+msgstr "Вибрати програму"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
-msgstr ""
+msgstr "Всі файли"
 
 #: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
-msgstr ""
+msgstr "Виконувані файли"
 
 #: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Perl скрипти"
 
 #: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
-msgstr ""
+msgstr "Python скрипти"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Ruby скрипти"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Скрипти оболонки"
 
 #: ../plugins/launcher/launcher-dialog.c:760
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомий"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:763
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Вибрати значок для \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1101
-#, fuzzy
 msgid "_Name"
-msgstr "Назва"
+msgstr "_Назва"
 
 #: ../plugins/launcher/launcher-dialog.c:1119
-#, fuzzy
 msgid "_Description"
-msgstr "Опис"
+msgstr "_Опис"
 
 #: ../plugins/launcher/launcher-dialog.c:1138
-#, fuzzy
 msgid "_Icon"
-msgstr "Перемикач вікон"
+msgstr "_Значок"
 
 #: ../plugins/launcher/launcher-dialog.c:1156
-#, fuzzy
 msgid "Co_mmand"
-msgstr "Команда"
+msgstr "_Команда"
 
 #: ../plugins/launcher/launcher-dialog.c:1183
 msgid "_Working Directory"
-msgstr ""
+msgstr "_Робоча тека"
 
 #: ../plugins/launcher/launcher-dialog.c:1215
 msgid "Run in _terminal"
@@ -587,9 +546,8 @@ msgid "Use flat buttons"
 msgstr "Плоскі кнопки"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:215
-#, fuzzy
 msgid "Show handle"
-msgstr "Відображати _рамку"
+msgstr "Відображати рамку"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:227
 msgid "Show tasks from _all workspaces"
@@ -615,7 +573,7 @@ msgstr "Завжди групувати задачі"
 #: ../plugins/windowlist/windowlist.c:242
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr "Ви дійсно бажаєте видалити робочу область %d?"
+msgstr "Ви впевнені, що бажаєте видалити робочу область %d?"
 
 #: ../plugins/windowlist/windowlist.c:243
 #, c-format
@@ -654,8 +612,8 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
-"<i>Термінове сповіщення</i> - кнопка, що блимає, коли програма потребує "
-"уваги."
+"<i>Термінове сповіщення</i> буде блимаюча кнопка, коли програма "
+"потребуватиме уваги."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
@@ -684,7 +642,7 @@ msgstr "Кнопка зі _стрілкою"
 
 #: ../plugins/windowlist/windowlist-dialog.c:221
 msgid "Show _windows from all workspaces"
-msgstr "Показувати _вікна усіх робочих областей"
+msgstr "Показувати _вікна з усіх робочих областей"
 
 #: ../plugins/windowlist/windowlist-dialog.c:230
 msgid "Show a_pplication icons"
@@ -696,7 +654,7 @@ msgstr "Показувати дії ро_бочого столу"
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "Не вдалось запустити 'xfce4-panel -c'"
 
 #: ../mcs-plugin/plugin.c:57
 msgid "Panel"
@@ -704,7 +662,7 @@ msgstr "Панель"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr "Системні дії"
+msgstr "Кнопки дій"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -724,11 +682,11 @@ msgstr "Запуск програм"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Кнопка запуску з додатковим меню"
+msgstr "Кнопка запуску програм з додатковим меню"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr "Мініатюрне представлення усіх робочих областей"
+msgstr "Мініатюрне представлення всіх робочих стільниць"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
@@ -736,27 +694,51 @@ msgstr "Додавання інтервалу або розділювача мі
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr "Показати робочий стіл"
+msgstr "Показати Стільницю"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr "Кнопка для очищення робочого столу"
+msgstr "Перемикач Стільниці показати/сховати"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
-msgstr "Показ значків сповіщення"
+msgstr "Відображення значків сповіщення"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Show all running applications"
-msgstr "Показ усіх запущених програм"
+msgstr "Відбражати всі запущені програми"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr "Показ списку вікон"
+msgstr "Відображати список доступних вікон"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Менеджер панелей Xfce 4"
+
+#~ msgid "Command Prompt"
+#~ msgstr "Командний рядок"
+
+#~ msgid "X terminal emulator"
+#~ msgstr "Емулятор X-терміналу"
+
+#~ msgid "Edit text files"
+#~ msgstr "Редагування текстових файлів"
+
+#~ msgid "Editor"
+#~ msgstr "Редактор"
+
+#~ msgid "File Manager"
+#~ msgstr "Менеджер файлів"
+
+#~ msgid "Manage files and folders"
+#~ msgstr "Робота з файлами та теками"
+
+#~ msgid "Surf the internet"
+#~ msgstr "Огляд Інтернет"
+
+#~ msgid "Web Browser"
+#~ msgstr "Веб-переглядач"
 
 #~ msgid ""
 #~ "\n"
@@ -797,99 +779,12 @@ msgstr "Менеджер панелей Xfce 4"
 #~ "\n"
 #~ msgstr ""
 #~ " ПАРАМЕТРИ\n"
-#~ " -h, --help      Вивести це повідомлення та завершити роботу\n"
-#~ " -v, --version   Вивести це повідомлення та завершити роботу\n"
-#~ " -c, --customize Показати діалогове вікно налаштовування\n"
+#~ " -h, --help      Вивести це повідомлення та вийти\n"
+#~ " -v, --version   Вивести це повідомлення та вийти\n"
+#~ " -c, --customize Показати діалог властивостей\n"
 #~ " -s, --save      Зберегти конфігурацію\n"
 #~ " -r, --restart   Перезапустити панелі\n"
 #~ " -q, --quit      Завершити сеанс\n"
-#~ " -x, --exit      Закрити усі панелі та вийти з програми\n"
+#~ " -x, --exit      Закрити усі панелі та завершити програму\n"
 #~ " -a, --add       Додати новий об'єкт\n"
 #~ "\n"
-
-#~ msgid "Error in command \"%s\""
-#~ msgstr "Помилка у команді \"%s\""
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "Об'єкт ще не був налаштований"
-
-#~ msgid "Default"
-#~ msgstr "Типова"
-
-#~ msgid "File management"
-#~ msgstr "Менеджер файлів"
-
-#~ msgid "Utilities"
-#~ msgstr "Утиліти"
-
-#~ msgid "Games"
-#~ msgstr "Ігри"
-
-#~ msgid "Help browser"
-#~ msgstr "Довідка"
-
-#~ msgid "Multimedia"
-#~ msgstr "Мультимедіа"
-
-#~ msgid "Network"
-#~ msgstr "Мережа"
-
-#~ msgid "Graphics"
-#~ msgstr "Графіка"
-
-#~ msgid "Printer"
-#~ msgstr "Принтер"
-
-#~ msgid "Productivity"
-#~ msgstr "Продуктивність"
-
-#~ msgid "Office"
-#~ msgstr "Офіс"
-
-#~ msgid "Sound"
-#~ msgstr "Звук"
-
-#~ msgid "Terminal"
-#~ msgstr "Термінал"
-
-#~ msgid "Development"
-#~ msgstr "Розробка"
-
-#~ msgid "Select image file"
-#~ msgstr "Вибір файлу зображення"
-
-#~ msgid "Select command"
-#~ msgstr "Вибір програми"
-
-#~ msgid "Other..."
-#~ msgstr "Інший..."
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "Перший елемент списку буде відображений на панелі. Інші елементи будуть "
-#~ "доступні через меню."
-
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "Не вдається запустити 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Докладніше про використання Zero Install, дивіться http://0install.net"
-
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "Графічний інтерфейс Zero Install завершений, але тим часом зникло "
-#~ "діалогове вікно запуску. Не додається кнопка запуску (але будь-які "
-#~ "завантажені файли не втрачені)."
-
-#~ msgid "Select file"
-#~ msgstr "Вибір файлу"
