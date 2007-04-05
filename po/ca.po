@@ -3,14 +3,15 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004.
-# Pau Rul.lan Ferragut <paurullan@bulma.net> 2005, 2006
+# Pau Rul.lan Ferragut <paurullan@bulma.net> 2005-2007
+# Ivà Burgos <debian.public@gmail.com>, 2007
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-27 16:30+0200\n"
-"PO-Revision-Date: 2007-01-09 13:14+0100\n"
-"Last-Translator: Ivà Burgos <debian.public@gmail.com>\n"
+"PO-Revision-Date: 2007-04-05 15:25+0200\n"
+"Last-Translator: Pau Rul.lan Ferragut <paurullan@bulma.net>\n"
 "Language-Team: catalan\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,12 +53,12 @@ msgstr "Navegador web"
 #: ../libxfce4panel/xfce-panel-external-item.c:169
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "S'ha esborrat un ítem de manera inesperada: \"%s\"."
+msgstr "S'ha esborrat un ítem de manera inesperada: «%s»."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:594
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "Suprimir \"%s\"?"
+msgstr "Suprimir «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:608
 msgid ""
@@ -124,7 +125,7 @@ msgstr "No podeu eliminar el darrer quadre. Desitgeu tancar el programa?"
 #: ../panel/panel-app.c:924
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Suprimir el quadre \"%d\"?"
+msgstr "Suprimir el quadre «%d»?"
 
 #: ../panel/panel-app.c:928
 msgid "The selected panel and all its items will be removed."
@@ -136,66 +137,62 @@ msgstr "Desenvolupador"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "Mostra el missatge i surt"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "Mostra icones de notificació"
+msgstr "Mostre el diàleg de configuració"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "Desa la configuració"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "Reinicia"
+msgstr "Reinicia els quadres"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "Tanca la sessió"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Tanca tots els quadres i acaba el programa"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "Afegeix un element nou"
+msgstr "Afegeix elements nous"
 
 #: ../panel/main.c:89
-#, fuzzy
 msgid "Failed to open display"
-msgstr "No s'ha pogut executar \"%s\""
+msgstr "No s’ha pogut mostrar la pantalla"
 
 #: ../panel/main.c:101
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Copyright (C) 2004-2007"
 
 #: ../panel/main.c:102
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "L’equip de desenvolupament d’Xfce. Tots els drets reservats."
 
 #: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Si us plau envieu els errors a <%s>."
 
 #: ../panel/main.c:147
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "Ja s’està executant Xfce4-Panel"
 
 #. restart
 #: ../panel/main.c:158
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "S’està reiniciant l’Xfce4-Panel"
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "Could not open \"%s\" module"
-msgstr "No s'ha pogut obrir el mòdul \"%s\""
+msgstr "No s'ha pogut obrir el mòdul «%s»"
 
 #: ../panel/panel-dialogs.c:633
 msgid "Add Items to the Panel"
@@ -222,14 +219,12 @@ msgid "Full Width"
 msgstr "Tota l'amplada"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, fuzzy
 msgid "Normal Height"
-msgstr "Amplada normal"
+msgstr "Alçada normal"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
 msgid "Full Height"
-msgstr "Tota l'amplada"
+msgstr "Alçada completa"
 
 #: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
@@ -316,13 +311,12 @@ msgid "Make active panel opaque"
 msgstr "Mostra opac el quadre actiu"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Popup position:"
-msgstr "Posició"
+msgstr "Posició del diàleg emergent:"
 
 #: ../panel/panel-dialogs.c:1519
 msgid "Automatic"
-msgstr ""
+msgstr "Automàtica"
 
 #: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
@@ -433,81 +427,75 @@ msgid "New Item"
 msgstr "Element nou"
 
 #: ../plugins/launcher/launcher-exec.c:487
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
-msgstr "No s'ha pogut executar \"%s\""
+msgstr "No s'ha pogut llançar «%s»"
 
 #: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
-msgstr ""
+msgstr "Sense icones"
 
 #: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
 msgid "Select a Directory"
-msgstr "Seleccioneu monitor"
+msgstr "Seleccioneu un directori"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Select an Application"
-msgstr "Seleccioneu tipus d'acció:"
+msgstr "Seleccioneu una aplicació"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
-msgstr ""
+msgstr "Tots els fitxers"
 
 #: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
-msgstr ""
+msgstr "Fitxers executables"
 
 #: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Seqüències de perl"
 
 #: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
-msgstr ""
+msgstr "Seqüències de python"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Seqüències de ruby"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Seqüències de terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:760
 msgid "Unknown"
-msgstr ""
+msgstr "Desconegut"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:763
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Seleccioneu una icona per «%s»"
 
 #: ../plugins/launcher/launcher-dialog.c:1101
-#, fuzzy
 msgid "_Name"
-msgstr "Nom"
+msgstr "_Nom"
 
 #: ../plugins/launcher/launcher-dialog.c:1119
-#, fuzzy
 msgid "_Description"
-msgstr "Descripció"
+msgstr "_Descripció"
 
 #: ../plugins/launcher/launcher-dialog.c:1138
-#, fuzzy
 msgid "_Icon"
-msgstr "Caixa d'icona"
+msgstr "Caixa d’_icona"
 
 #: ../plugins/launcher/launcher-dialog.c:1156
-#, fuzzy
 msgid "Co_mmand"
-msgstr "Ordre"
+msgstr "_Ordre"
 
 #: ../plugins/launcher/launcher-dialog.c:1183
 msgid "_Working Directory"
-msgstr ""
+msgstr "Directori de _treball"
 
 #: ../plugins/launcher/launcher-dialog.c:1215
 msgid "Run in _terminal"
@@ -588,9 +576,8 @@ msgid "Use flat buttons"
 msgstr "Usa botons plans"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:215
-#, fuzzy
 msgid "Show handle"
-msgstr "Mostra _marc"
+msgstr "Mostra identificador"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:227
 msgid "Show tasks from _all workspaces"
@@ -621,7 +608,7 @@ msgstr "Esteu segurs de voler suprimir l'espai de treball %d?"
 #: ../plugins/windowlist/windowlist.c:243
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr "Esteu segurs de voler suprimir l'espai de treball '%s'?"
+msgstr "Esteu segurs de voler suprimir l'espai de treball «%s»?"
 
 #: ../plugins/windowlist/windowlist.c:508
 #, c-format
@@ -641,7 +628,7 @@ msgstr "Suprimeix l'espai de treball %d"
 #: ../plugins/windowlist/windowlist.c:645
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr "Suprimeix l'espai de treball '%s'"
+msgstr "Suprimeix l'espai de treball «%s»"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
@@ -697,7 +684,7 @@ msgstr "_Mostra les accions dels espais de treball"
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "No s’ha pogut llançar «xfce4-panel -c»"
 
 #: ../mcs-plugin/plugin.c:57
 msgid "Panel"
@@ -758,145 +745,3 @@ msgstr "Mostra el llistat de les finestres disponibles"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Gestor de quadres Xfce4"
-
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Quadre Xfce %s\n"
-#~ "\n"
-#~ "Part de l'entorn d'escriptori Xfce\n"
-#~ "http://www.xfce.org\n"
-#~ "\n"
-#~ "Llicenciat baix la GNU GPL.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Ús: %s [OPCIONS]\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ "OPCIONS\n"
-#~ "\" -h, --help      Mostra aquest missatge i surt\"\n"
-#~ "\" -v, --version   Mostra aquest missatge i surt\"\n"
-#~ "\" -c, --customize Mostra el dialeg de configuració\"\n"
-#~ "\" -s, --save      Desa la configuració\n"
-#~ "\" -r, --restart   Reinicia els quadres\n"
-#~ "\" -q, --quit      Acaba la sessió\n"
-#~ "\" -x, --exit      Tanca tots els quadres i acaba el programa\n"
-#~ "\" -a, --add       Afegeix elements\n"
-#~ "\n"
-
-#~ msgid "Error in command \"%s\""
-#~ msgstr "S'ha produit un error a l'ordre \"%s\""
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "L'element encara no s'ha configurat"
-
-#~ msgid "Default"
-#~ msgstr "Per defecte"
-
-#~ msgid "File management"
-#~ msgstr "Gestió de fitxers"
-
-#~ msgid "Utilities"
-#~ msgstr "Utilitats"
-
-#~ msgid "Games"
-#~ msgstr "Jocs"
-
-#~ msgid "Help browser"
-#~ msgstr "Navegador d'ajuda"
-
-#~ msgid "Multimedia"
-#~ msgstr "Multimèdia"
-
-#~ msgid "Network"
-#~ msgstr "Xarxa"
-
-#~ msgid "Graphics"
-#~ msgstr "Gràfics"
-
-#~ msgid "Printer"
-#~ msgstr "Impressora"
-
-#~ msgid "Productivity"
-#~ msgstr "Productivitat"
-
-#~ msgid "Office"
-#~ msgstr "Oficina"
-
-#~ msgid "Sound"
-#~ msgstr "So"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "Development"
-#~ msgstr "Desenvolupament"
-
-#~ msgid "Select image file"
-#~ msgstr "Selecciona el fitxer d'imatge"
-
-#~ msgid "Select command"
-#~ msgstr "Seleccioneu ordre"
-
-#~ msgid "Other..."
-#~ msgstr "Altre..."
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "El primer element del llistat es mostrarà al quadre. Els elements "
-#~ "adicionals apareixeran al menú."
-
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "Impossible executar 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Per obtenir ajuda a l'instal·lador Zero, visiteu http://0install.net"
-
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "L'instal·lador Zero IGU ha acabat però el diàleg ha desaparegut durant el "
-#~ "procés. No s'afegirà la llançadora (però cap dels fitxers descarregats "
-#~ "s'haurà perdut)."
-
-#~ msgid "Select file"
-#~ msgstr "Seleccioneu el fitxer"
-
-#~ msgid "Test Plugin"
-#~ msgstr "Connector de proves"
-
-#~ msgid "This plugin has no purpose"
-#~ msgstr "Aquest connector no té propòsit"
