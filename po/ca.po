@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-27 15:28+0200\n"
-"PO-Revision-Date: 2007-01-09 13:14+0100\n"
+"PO-Revision-Date: 2007-04-05 12:44+0200\n"
 "Last-Translator: Ivà Burgos <debian.public@gmail.com>\n"
 "Language-Team: catalan\n"
 "MIME-Version: 1.0\n"
@@ -52,12 +52,12 @@ msgstr "Navegador web"
 #: ../libxfce4panel/xfce-panel-external-item.c:182
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "S'ha esborrat un ítem de manera inesperada: \"%s\"."
+msgstr "S'ha esborrat un ítem de manera inesperada: «%s»."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:584
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "Suprimir \"%s\"?"
+msgstr "Suprimir «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:599
 msgid ""
@@ -181,15 +181,14 @@ msgid ""
 "\n"
 msgstr ""
 "OPCIONS\n"
-"\" -h, --help      Mostra aquest missatge i surt\"\n"
-"\" -v, --version   Mostra aquest missatge i surt\"\n"
-"\" -c, --customize Mostra el dialeg de configuració\"\n"
-"\" -s, --save      Desa la configuració\n"
-"\" -r, --restart   Reinicia els quadres\n"
-"\" -q, --quit      Acaba la sessió\n"
-"\" -x, --exit      Tanca tots els quadres i acaba el programa\n"
-"\" -a, --add       Afegeix elements\n"
-"\n"
+" -h, --help      Mostra aquest missatge i surt\"\n"
+" -v, --version   Mostra aquest missatge i surt\"\n"
+" -c, --customize Mostra el dialeg de configuració\"\n"
+" -s, --save      Desa la configuració\n"
+" -r, --restart   Reinicia els quadres\n"
+" -q, --quit      Acaba la sessió\n"
+" -x, --exit      Tanca tots els quadres i acaba el programa\n"
+" -a, --add       Afegeix elements\n"
 
 #: ../panel/panel-dialogs.c:184
 #, c-format
@@ -406,12 +405,12 @@ msgstr "Usa tot l'espai disponible"
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Could not run \"%s\""
-msgstr "No s'ha pogut executar \"%s\""
+msgstr "No s'ha pogut executar «%s»"
 
 #: ../plugins/launcher/launcher.c:398
 #, c-format
 msgid "Error in command \"%s\""
-msgstr "S'ha produit un error a l'ordre \"%s\""
+msgstr "S'ha produit un error a l'ordre «%s»"
 
 #: ../plugins/launcher/launcher.c:675 ../plugins/launcher/launcher.c:1303
 #: ../plugins/launcher/launcher-dialog.c:1167
@@ -496,7 +495,7 @@ msgstr "Descripció"
 
 #: ../plugins/launcher/launcher-dialog.c:555
 msgid "Other..."
-msgstr "Altre..."
+msgstr "Altre"
 
 #: ../plugins/launcher/launcher-dialog.c:653
 msgid "Command"
@@ -662,7 +661,7 @@ msgstr "Suprimeix l'espai de treball %d"
 #: ../plugins/windowlist/windowlist.c:645
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr "Suprimeix l'espai de treball '%s'"
+msgstr "Suprimeix l'espai de treball «%s»"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
@@ -775,9 +774,3 @@ msgstr "Mostra el llistat de les finestres disponibles"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Gestor de quadres Xfce4"
-
-#~ msgid "Test Plugin"
-#~ msgstr "Connector de proves"
-
-#~ msgid "This plugin has no purpose"
-#~ msgstr "Aquest connector no té propòsit"
