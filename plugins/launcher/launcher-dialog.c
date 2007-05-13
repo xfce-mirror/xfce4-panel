@@ -1442,6 +1442,13 @@ launcher_dialog_response (GtkWidget      *dialog,
         /* read last saved settings */
         launcher_read (ld->launcher);
 
+        /* if this is a newly created item, there is no saved data yet */
+        if (G_UNLIKELY (g_list_length (ld->launcher->entries) == 0))
+        {
+              ld->launcher->entries = g_list_append (ld->launcher->entries, 
+                                                     launcher_new_entry ());
+        }
+
         /* update the panel again */
         launcher_dialog_update_panel (ld);
     }
@@ -1476,7 +1483,12 @@ launcher_dialog_show (LauncherPlugin  *launcher)
     ld->launcher = launcher;
 
     /* get first entry */
-    ld->entry = g_list_first (launcher->entries)->data;
+    if (G_UNLIKELY (g_list_length (launcher->entries) == 0)) 
+    {
+        launcher->entries = g_list_append (launcher->entries, 
+                                           launcher_new_entry ());
+    }
+    ld->entry = launcher->entries->data;
 
     /* lock right-click plugin menu */
     xfce_panel_plugin_block_menu (launcher->plugin);
