@@ -242,6 +242,14 @@ _set_borders (Panel *panel)
                                        top, bottom, left, right);
 }
 
+/* fairly arbitrary maximum strut size */
+static gboolean
+_validate_strut( gint width,
+                 gint offset )
+{
+    return ( offset < width / 4 );
+}
+
 static void
 _set_struts (Panel       *panel, 
              XfceMonitor *xmon, 
@@ -279,7 +287,8 @@ _set_struts (Panel       *panel,
             /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the left (see fd.o spec).
              */
-            if (!xmon->has_neighbor_left)
+            if (!xmon->has_neighbor_left 
+                && _validate_strut (xmon->geometry.width, w))
             {
                 data[0] = xmon->geometry.x 
                           + w;          /* left           */
@@ -292,7 +301,8 @@ _set_struts (Panel       *panel,
             /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the right (see fd.o spec).
              */
-            if (!xmon->has_neighbor_right)
+            if (!xmon->has_neighbor_right 
+                && _validate_strut (xmon->geometry.width, w))
             {
                 data[1] =  gdk_screen_get_width (xmon->screen) 
                            - xmon->geometry.x - xmon->geometry.width 
@@ -306,7 +316,8 @@ _set_struts (Panel       *panel,
             /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the top (see fd.o spec).
              */
-            if (!xmon->has_neighbor_above)
+            if (!xmon->has_neighbor_above 
+                && _validate_strut (xmon->geometry.height, h))
             {
                 data[2] = xmon->geometry.y 
                           + h;          /* top            */
@@ -319,7 +330,8 @@ _set_struts (Panel       *panel,
             /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the bottom (see fd.o spec).
              */
-            if (!xmon->has_neighbor_below)
+            if (!xmon->has_neighbor_below
+                && _validate_strut (xmon->geometry.height, h))
             {
                 data[3] = gdk_screen_get_height (xmon->screen) 
                            - xmon->geometry.y - xmon->geometry.height 
@@ -338,15 +350,6 @@ _set_struts (Panel       *panel,
          data[4], data[5], data[6], data[7], 
          data[8], data[9], data[10], data[11]);
 
-    /* Check for invalid values. */
-    for (i = 0; i < 4; i++)
-    {
-        if (data[i] > MIN(xmon->geometry.width,xmon->geometry.height) / 4)
-        {
-            return;
-        }
-    }
-    
     /* Check if values have changed. */
     for (i = 0; i < 12; i++)
     {
@@ -360,17 +363,17 @@ _set_struts (Panel       *panel,
     if (update)
     {
         gdk_error_trap_push ();
-
         gdk_property_change (GTK_WIDGET (panel)->window,
                              gdk_atom_intern ("_NET_WM_STRUT_PARTIAL", FALSE),
                              gdk_atom_intern ("CARDINAL", FALSE), 32,
                              GDK_PROP_MODE_REPLACE, (guchar *) & data, 12);
+        gdk_error_trap_pop ();
 
+        gdk_error_trap_push ();
         gdk_property_change (GTK_WIDGET (panel)->window,
                              gdk_atom_intern ("_NET_WM_STRUT", FALSE),
                              gdk_atom_intern ("CARDINAL", FALSE), 32,
                              GDK_PROP_MODE_REPLACE, (guchar *) & data, 4);
-
         gdk_error_trap_pop ();
     }
     
