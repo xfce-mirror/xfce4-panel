@@ -49,14 +49,36 @@ typedef struct _XfcePanelPluginInterface XfcePanelPluginInterface;
 typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
 
 /**
+ * XfcePanelPluginPreInit:
+ * @argc : number of arguments to the plugin
+ * @argv : argument array
+ *
+ * Callback function that is run in an external plugin before gtk_init(). It 
+ * should return %FALSE if the plugin is not available for whatever reason. 
+ * The function can be given as argument to one of the registration macros.
+ *
+ * The main purpose of this callback is to allow multithreaded plugins to call
+ * g_thread_init().
+ *
+ * Returns: %TRUE on success, %FALSE otherwise.
+ *
+ * See also: XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL()
+ **/
+typedef gboolean (*XfcePanelPluginPreInit) (int argc, char **argv);
+
+/**
  * XfcePanelPluginCheck:
+ * @screen : the #GdkScreen the panel is running on
  *
  * Callback function that is run before creating a plugin. It should return
- * if the plugin is not available for whatever reason. It should be given as
- * the argument to the registration macros.
+ * %FALSE if the plugin is not available for whatever reason. The function 
+ * can be given as argument to one of the registration macros.
  *
- * See also: XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK() and
- *           XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()
+ * Returns: %TRUE if the plugin can be started, %FALSE otherwise.
+ *
+ * See also: XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(),
+ *           XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK() and
+ *           XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL()
  **/
 typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 
