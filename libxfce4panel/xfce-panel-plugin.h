@@ -33,57 +33,89 @@
  * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL
  * @construct : name of a function that can be cast to an #XfcePanelPluginFunc
  *
- * Registers and initializes the plugin. This is the only thing that is 
+ * Registers and initializes the plugin. This is the only thing that is
  * required to create a panel plugin.
  *
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
  **/
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct) \
-    int \
-    main (int argc, char **argv) \
-    { \
-        GtkWidget *plugin; \
-        gtk_init (&argc, &argv); \
-        plugin = xfce_external_panel_plugin_new (argc, argv, \
-                     (XfcePanelPluginFunc)construct); \
-        if (!plugin) return 1; \
-        g_signal_connect_after (plugin, "destroy", \
-                                G_CALLBACK (exit), NULL); \
-        gtk_widget_show (plugin); \
-        gtk_main (); \
-        return 0; \
-    }
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct)	\
+    		XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,NULL)
 
 /**
  * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
- * @construct : name of a function that can be cast to an 
+ * @construct : name of a function that can be cast to an
  *              #XfcePanelPluginFunc
  * @check     : name of a function that can be cast to an
  *              #XfcePanelPluginCheck
  *
- * Registers and initializes the plugin. This is the only thing that is 
+ * Registers and initializes the plugin. This is the only thing that is
  * required to create a panel plugin. The @check functions is run before
  * creating the plugin, and should return FALSE if plugin creation is not
  * possible.
  *
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
  **/
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check) \
-    int \
-    main (int argc, char **argv) \
-    { \
-        GtkWidget *plugin; \
-        XfcePanelPluginCheck test = (XfcePanelPluginCheck)check; \
-        gtk_init (&argc, &argv); \
-        if (!test(gdk_screen_get_default())) return 2; \
-        plugin = xfce_external_panel_plugin_new (argc, argv, \
-                     (XfcePanelPluginFunc)construct); \
-        if (!plugin) return 1; \
-        g_signal_connect_after (plugin, "destroy", \
-                                G_CALLBACK (exit), NULL); \
-        gtk_widget_show (plugin); \
-        gtk_main (); \
-        return 0; \
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check)	\
+    		XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,check)
+
+/**
+ * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL
+ * @construct : name of a function that can be cast to #XfcePanelPluginFunc
+ * @init      : name of a function that can be case to #XfcePanelPluginPreInit
+ * 		or NULL
+ * @check     : name of a function that can be cast to #XfcePanelPluginCheck
+ * 		or NULL
+ *
+ * Registers and initializes the plugin. This is the only thing that is
+ * required to create a panel plugin.
+ *
+ * The @init argument should be a function that takes two parameters:
+ *
+ *   gboolean init( int argc, char **argv );
+ *
+ * The @check functions is run aftern gtk_init() and before creating the 
+ * plugin; it takes one argument and should return FALSE if plugin creation 
+ * is not possible:
+ *
+ *   gboolean check( GdkScreen *screen );
+ *
+ * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
+ **/
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,init,check)		\
+    gint                                                           		\
+    main (gint argc, gchar **argv)                                 		\
+    {                                                              		\
+        GtkWidget              *plugin;                                         \
+	XfcePanelPluginFunc     create  = (XfcePanelPluginFunc)construct	\
+        XfcePanelPluginPreInit  preinit = (XfcePanelPluginPreInit)init;		\
+        XfcePanelPluginCheck    test    = (XfcePanelPluginCheck)check;		\
+										\
+	if ( init )								\
+	{									\
+	    if (G_UNLIKELY (init(argc,argv) == FALSE))       			\
+	    	return 3;                                                   	\
+	}									\
+										\
+        gtk_init (&argc, &argv);                                   		\
+                                                                   		\
+	if ( test )								\
+	{									\
+	    if (G_UNLIKELY (test(gdk_screen_get_default()) == FALSE))       	\
+	    	return 2;                                                   	\
+	}									\
+										\
+        plugin = xfce_external_panel_plugin_new (argc, argv, create); 		\
+                                                                   		\
+        if (G_UNLIKELY (plugin == NULL))                           		\
+            return 1;                                              		\
+                                                                   		\
+        g_signal_connect_after (G_OBJECT (plugin), "destroy",      		\
+                                G_CALLBACK (gtk_main_quit), NULL); 		\
+										\
+        gtk_widget_show (plugin);                                  		\
+        gtk_main ();                                               		\
+                                                                   		\
+        return 0;                                                  		\
     }
 
 /**
