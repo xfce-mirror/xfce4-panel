@@ -70,6 +70,7 @@ typedef struct
     gboolean secs;
 
     gboolean show_frame;
+    gint mday;
 }
 Clock;
 
@@ -100,16 +101,15 @@ clock_date_tooltip (Clock *clock)
 {
     time_t ticks;
     struct tm *tm;
-    static gint mday = -1;
     char date_s[255];
     char *utf8date = NULL;
 
     ticks = time (0);
     tm = localtime (&ticks);
 
-    if (mday != tm->tm_mday)
+    if (clock->mday != tm->tm_mday)
     {
-        mday = tm->tm_mday;
+        clock->mday = tm->tm_mday;
 
         /* Use format characters from strftime(3)
 	 * to get the proper string for your locale.
@@ -293,25 +293,6 @@ clock_read_rc_file (XfcePanelPlugin *plugin, Clock* clock)
 }
 
 static void
-clock_screen_changed (GtkWidget *plugin, GdkScreen *screen, 
-                      Clock *clock)
-{
-	/* return when the widget is not visible (when moving the plugin) */
-	if (GTK_IS_INVISIBLE (clock->clock) == FALSE)
-	    return;
-	
-	gtk_widget_destroy (clock->clock);
-	
-	clock->clock = xfce_clock_new ();
-    gtk_widget_show (clock->clock);
-    gtk_container_add (GTK_CONTAINER (clock->frame), clock->clock);
-
-    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
-    
-    clock_read_rc_file (clock->plugin, clock);
-}
-
-static void
 clock_write_rc_file (XfcePanelPlugin *plugin, Clock *clock)
 {
     char *file;
@@ -333,6 +314,27 @@ clock_write_rc_file (XfcePanelPlugin *plugin, Clock *clock)
     xfce_rc_write_bool_entry (rc, "show_frame", clock->show_frame);
     
     xfce_rc_close (rc);
+}
+
+static void
+clock_screen_changed (GtkWidget *plugin, GdkScreen *screen, 
+                      Clock *clock)
+{
+    /* return when the widget is not visible (when moving the plugin) */
+    if (GTK_IS_INVISIBLE (clock->clock) == FALSE)
+        return;
+
+    gtk_widget_destroy (clock->clock);
+
+    clock->clock = xfce_clock_new ();
+    gtk_widget_show (clock->clock);
+    gtk_container_add (GTK_CONTAINER (clock->frame), clock->clock);
+
+    clock->mday = -1;
+
+    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
+    
+    clock_read_rc_file (clock->plugin, clock);
 }
 
 /* Create widgets and connect to signals */
@@ -373,6 +375,8 @@ clock_construct (XfcePanelPlugin *plugin)
 
     clock_read_rc_file (plugin, clock);
     
+    clock->mday = -1;
+
     clock->tips = gtk_tooltips_new ();
     g_object_ref (G_OBJECT (clock->tips));
     gtk_object_sink (GTK_OBJECT (clock->tips));
@@ -388,7 +392,7 @@ clock_construct (XfcePanelPlugin *plugin)
  * -------------------------------------------------------------------- */
 
 static void
-clock_set_sensative (ClockDialog *cd)
+clock_set_sensitive (ClockDialog *cd)
 {
     if (cd->clock->mode == XFCE_CLOCK_ANALOG)
     {
@@ -423,7 +427,7 @@ clock_button_toggled (GtkWidget *cb, ClockDialog *cd)
 	xfce_clock_show_military (XFCE_CLOCK (cd->clock->clock),
 	                          active);
 	
-	clock_set_sensative (cd);
+	clock_set_sensitive (cd);
     }
     else if (cb == cd->cb_ampm)
     {
@@ -448,7 +452,7 @@ clock_mode_changed (GtkComboBox *cb, ClockDialog *cd)
     cd->clock->mode = gtk_combo_box_get_active(cb);
     xfce_clock_set_mode (XFCE_CLOCK (cd->clock->clock), cd->clock->mode);
     
-    clock_set_sensative (cd);
+    clock_set_sensitive (cd);
     
     clock_update_size (cd->clock, 
             xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (cd->clock->plugin)));
@@ -548,7 +552,7 @@ clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
     g_signal_connect (cb, "toggled",
             G_CALLBACK (clock_button_toggled), cd);
 
-    clock_set_sensative (cd);
+    clock_set_sensitive (cd);
 
     g_signal_connect (dlg, "response",
             G_CALLBACK (clock_dialog_response), cd);
