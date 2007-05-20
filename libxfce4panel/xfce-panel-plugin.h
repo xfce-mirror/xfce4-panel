@@ -86,13 +86,13 @@
     main (gint argc, gchar **argv)                                 		\
     {                                                              		\
         GtkWidget              *plugin;                                         \
-	XfcePanelPluginFunc     create  = (XfcePanelPluginFunc)construct	\
+	XfcePanelPluginFunc     create  = (XfcePanelPluginFunc)construct;	\
         XfcePanelPluginPreInit  preinit = (XfcePanelPluginPreInit)init;		\
         XfcePanelPluginCheck    test    = (XfcePanelPluginCheck)check;		\
 										\
-	if ( init )								\
+	if ( preinit )								\
 	{									\
-	    if (G_UNLIKELY (init(argc,argv) == FALSE))       			\
+	    if (G_UNLIKELY (preinit(argc,argv) == FALSE))       			\
 	    	return 3;                                                   	\
 	}									\
 										\
