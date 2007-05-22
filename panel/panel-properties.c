@@ -804,7 +804,7 @@ drag_leave (Panel          *panel,
 
     priv = panel->priv;
 
-    if (priv->hidden || priv->block_autohide)
+    if (!priv->autohide || priv->hidden || priv->block_autohide)
         return;
 
     /* check if pointer is inside the window */

@@ -168,7 +168,6 @@ static void
 launcher_exec_startup_timeout_destroy (gpointer data)
 {
     LauncherStartupData *startup_data = data;
-    gint                 status;
 
     g_return_if_fail (startup_data->sn_launcher == NULL);
 
