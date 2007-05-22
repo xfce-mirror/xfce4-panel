@@ -26,6 +26,15 @@
 #ifdef HAVE_STRING_H
 #include <string.h>
 #endif
+#ifdef HAVE_ERRNO_H
+#include <errno.h>
+#endif
+#ifdef HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+#ifdef HAVE_SYS_WAIT_H
+#include <sys/wait.h>
+#endif
 
 #include "launcher.h"
 #include "launcher-exec.h"
@@ -159,6 +168,7 @@ static void
 launcher_exec_startup_timeout_destroy (gpointer data)
 {
     LauncherStartupData *startup_data = data;
+    gint                 status;
 
     g_return_if_fail (startup_data->sn_launcher == NULL);
 
@@ -180,19 +190,34 @@ launcher_exec_startup_watch (GPid     pid,
                              gint     status,
                              gpointer data)
 {
-  LauncherStartupData *startup_data = data;
+    LauncherStartupData *startup_data = data;
+    gint                 ret, serrno;
 
-  g_return_if_fail (startup_data->sn_launcher != NULL);
-  g_return_if_fail (startup_data->watch_id != 0);
-  g_return_if_fail (startup_data->pid == pid);
+    g_return_if_fail (startup_data->sn_launcher != NULL);
+    g_return_if_fail (startup_data->watch_id != 0);
+    g_return_if_fail (startup_data->pid == pid);
 
-  /* abort the startup notification (application exited) */
-  sn_launcher_context_complete (startup_data->sn_launcher);
-  sn_launcher_context_unref (startup_data->sn_launcher);
-  startup_data->sn_launcher = NULL;
+    /* abort the startup notification (application exited) */
+    sn_launcher_context_complete (startup_data->sn_launcher);
+    sn_launcher_context_unref (startup_data->sn_launcher);
+    startup_data->sn_launcher = NULL;
 
-  /* cancel the startup notification timeout */
-  g_source_remove (startup_data->timeout_id);
+    /* avoid zombie processes */
+    serrno = errno;
+    while (1)
+      {
+        /* get the child process state without hanging */
+        ret = waitpid (WAIT_ANY, NULL, WNOHANG);
+        
+        /* exit if there is nothing to wait for */
+        if (ret == 0 || ret < 0)
+          break;
+      }
+    errno = serrno;
+
+    /* cancel the startup notification timeout */
+    /* this will also activate the timeout_destroy function */
+    g_source_remove (startup_data->timeout_id);
 }
 #endif
 

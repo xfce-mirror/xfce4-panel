@@ -84,7 +84,7 @@ dnl **********************************
 AC_HEADER_STDC()
 AC_CHECK_HEADERS([stdlib.h unistd.h locale.h stdio.h fcntl.h errno.h \
                   math.h signal.h stddef.h sys/wait.h  sys/stat.h \
-                  sys/type.h sys/mman.h time.h string.h])
+                  sys/type.h sys/types.h sys/mman.h sys/wait.h time.h string.h])
 
 dnl ************************************
 dnl *** Check for standard functions ***
