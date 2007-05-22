@@ -401,6 +401,9 @@ launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
                 /* update the tree */
                 launcher_dialog_tree_update_row (ld, COL_TEXT);
                 launcher_dialog_tree_update_row (ld, COL_ICON);
+                
+                /* also update the panel button icon */
+                ld->launcher->icon_update_required = TRUE;
 
                 /* update the panel */
                 launcher_dialog_update_panel (ld);
