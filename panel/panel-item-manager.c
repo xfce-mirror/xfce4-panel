@@ -27,6 +27,7 @@
 
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
+#include <gmodule.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-item-iface.h>
@@ -77,16 +78,18 @@ free_item_klass (XfcePanelItemClass *klass)
 {
     DBG ("Free item klass: %s", klass->plugin_name);
 
+    /* close the module if needed */
     if (klass->gmodule != NULL)
         g_module_close (klass->gmodule);
 
+    /* cleanup */
     g_free (klass->plugin_name);
     g_free (klass->name);
     g_free (klass->comment);
     g_free (klass->icon);
-
     g_free (klass->file);
 
+    /* free the structure */
     panel_slice_free (XfcePanelItemClass, klass);
 }
 
@@ -154,25 +157,6 @@ compare_klasses (gpointer *a,
 
 /* plugin desktop files */
 
-static gchar *
-plugin_name_from_filename (const gchar *file)
-{
-    const gchar *s, *p;
-    gchar       *name;
-
-    if ((s = strrchr (file, G_DIR_SEPARATOR)) != NULL)
-        s++;
-    else
-        s = file;
-
-    if ((p = strrchr (s, '.')) != NULL)
-        name = g_strndup (s, p - s);
-    else
-        name = g_strdup (s);
-
-    return name;
-}
-
 static XfcePanelItemClass *
 create_item_klass (const gchar *file,
                    gboolean     is_external)
@@ -187,96 +171,118 @@ create_item_klass (const gchar *file,
 }
 
 static XfcePanelItemClass *
-new_plugin_klass_from_desktop_file (const gchar *file)
+new_plugin_klass_from_desktop_file (const gchar *directory,
+                                    const gchar *filename)
 {
     XfcePanelItemClass *klass = NULL;
     XfceRc             *rc;
-    gchar              *name;
-    const gchar        *value;
+    gchar              *name, *file;
+    const gchar        *value, *p;
     const gchar        *dir;
     gchar              *path;
 
-    DBG ("Plugin .desktop file: %s", file);
+    /* create the full desktop filename */
+    file = g_build_filename (directory, filename, NULL);
+    
+    /* get the plugin (fallback) name */
+    /* NOTE: this cannot fail since the filename passed the suffix test */
+    p = strrchr (filename, '.');
+    name = g_strndup (filename, p - filename);
+   
+    /* check if the plugin already exisits in the table */
+    if (G_UNLIKELY (g_hash_table_lookup (plugin_klasses, name) != NULL))
+        goto already_exists;
 
-    name = plugin_name_from_filename (file);
-
-    if (g_hash_table_lookup (plugin_klasses, name) != NULL)
-    {
-        DBG ("Already loaded");
-        g_free (name);
-        return NULL;
-    }
-
+    /* open the desktop file */
     rc = xfce_rc_simple_open (file, TRUE);
 
-    if (rc && xfce_rc_has_group (rc, "Xfce Panel"))
+    if (G_LIKELY (rc != NULL))
     {
-        xfce_rc_set_group (rc, "Xfce Panel");
-
-        if ((value = xfce_rc_read_entry (rc, "X-XFCE-Exec", NULL)) &&
-            g_file_test (value, G_FILE_TEST_EXISTS))
-
+        if (G_LIKELY (xfce_rc_has_group (rc, "Xfce Panel")))
         {
-            klass = create_item_klass (value, TRUE);
+            /* set the xfce panel group */
+            xfce_rc_set_group (rc, "Xfce Panel");
 
-            DBG ("External plugin: %s", value);
-        }
-        else if ((value = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL)))
-        {
-            if (g_file_test (value, G_FILE_TEST_EXISTS))
+            /* check if this is an external plugin and if it exists */
+            if ((value = xfce_rc_read_entry (rc, "X-XFCE-Exec", NULL)) &&
+                g_path_is_absolute (value) &&
+                g_file_test (value, G_FILE_TEST_EXISTS))
+
             {
-                klass = create_item_klass (value, FALSE);
+                klass = create_item_klass (value, TRUE);
 
-                DBG ("Internal plugin: %s", value);
+                DBG ("External plugin: %s", value);
             }
-            else if ((dir = xfce_rc_read_entry (rc, "X-XFCE-Module-Path",
-                                                NULL)))
+            /* an internal plugin then ... ? */
+            else if (G_LIKELY ((value = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL))))
             {
-                path = g_module_build_path (dir, value);
-
-                if (g_file_test (path, G_FILE_TEST_EXISTS))
+                /* read the module path */
+                dir = xfce_rc_read_entry (rc, "X-XFCE-Module-Path", NULL);
+                
+                if (G_LIKELY (dir != NULL))
                 {
-                    klass = create_item_klass (path, FALSE);
-
-                    DBG ("Internal plugin: %s", path);
+                    /* build the module filename */
+                    path = g_module_build_path (dir, value);
+                    
+                    /* test if the module exists */
+                    if (G_LIKELY (g_file_test (path, G_FILE_TEST_EXISTS)))
+                    {
+                        klass = create_item_klass (path, FALSE);
+                        
+                        DBG ("Internal plugin: %s", path);
+                    }
+                    
+                    /* cleanup */
+                    g_free (path);
                 }
-
-                g_free (path);
+                else
+                {
+                    g_warning ("Internal plugins need the \"X-XFCE-Module-Path\" entry to work properly.");
+                }
+            }
+            else
+            {
+                g_warning ("No X-XFCE-{Module,Exec} entry found in \"%s\".", file);
             }
         }
-
-        if (klass)
+        
+        if (G_LIKELY (klass != NULL))
         {
+            /* set the plugin name */
             klass->plugin_name = name;
-
-            if ((value = xfce_rc_read_entry (rc, "Name", NULL)))
-                klass->name = g_strdup (value);
-            else
-                klass->name = g_strdup (klass->plugin_name);
-
-            if ((value = xfce_rc_read_entry (rc, "Comment", NULL)))
-                klass->comment = g_strdup (value);
-
-            if ((value = xfce_rc_read_entry (rc, "Icon", NULL)))
-                klass->icon = g_strdup (value);
-
-            klass->unique =
-                xfce_rc_read_bool_entry (rc, "X-XFCE-Unique", FALSE);
+            
+            /* set the plugin name with our generated name as fallback */
+            value = xfce_rc_read_entry (rc, "Name", name);
+            klass->name = g_strdup (value);
+            
+            /* reset the name since it is now pointed to klass->plugin_name */
+            name = NULL;
+                
+            /* set a comment from the desktop file */
+            value = xfce_rc_read_entry (rc, "Comment", NULL);
+            klass->comment = g_strdup (value);
+                
+            /* set the plugin icon */
+            value = xfce_rc_read_entry (rc, "Icon", NULL);
+            klass->icon = g_strdup (value);
+            
+            /* whether this plugin can only be placed once on the panel(s) */
+            klass->unique = xfce_rc_read_bool_entry (rc, "X-XFCE-Unique", FALSE);
         }
         else
         {
-            DBG ("No plugin klass found");
-            g_free (name);
+            g_warning ("Failed to create plugin \"%s\"", name);
         }
-    }
-    else
-    {
-        DBG ("No Xfce Panel group");
-        g_free (name);
+        
+        /* close the rc file */
+        xfce_rc_close (rc);
     }
 
-    if (rc)
-        xfce_rc_close (rc);
+    already_exists:
+        
+    /* cleanup */
+    g_free (name);
+    g_free (file);
 
     return klass;
 }
@@ -284,71 +290,56 @@ new_plugin_klass_from_desktop_file (const gchar *file)
 static void
 update_plugin_list (void)
 {
-    gchar             **dirs, **d;
-    gboolean            datadir_used = FALSE;
-    GDir               *gdir;
-    gchar              *dirname, *path;
-    const gchar        *file;
-    XfcePanelItemClass *klass;
+    gchar              **directories;
+    gint                 n;
+    GDir                *gdir;
+    gchar               *dirname;
+    const gchar         *file;
+    XfcePanelItemClass  *klass;
 
-    if (G_UNLIKELY (!xfce_allow_panel_customization()))
+    if (G_LIKELY (xfce_allow_panel_customization() == TRUE))
+        /* if panel customization is allowed, we search all resource dirs */
+        directories = xfce_resource_dirs (XFCE_RESOURCE_DATA);
+    else 
+        /* only append the data directory */
+        *directories = NULL;
+
+    /* check if the DATADIR is in the list */
+    for (n = 0; directories[n] != NULL; ++n)
+        if (strcmp (directories[n], DATADIR) == 0)
+            goto has_datadir;
+
+    /* append the datadir path */
+    directories      = g_realloc (directories, (n + 2) * sizeof (gchar*));
+    directories[n]   = g_strdup (DATADIR);
+    directories[n+1] = NULL;
+    
+    has_datadir:
+
+    /* walk through the directories */
+    for (n = 0; directories[n] != NULL; ++n)
     {
-        dirs    = g_new (gchar*, 2);
-        dirs[0] = g_strdup (DATADIR);
-        dirs[1] = NULL;
-    }
-    else
-    {
-        dirs = xfce_resource_dirs (XFCE_RESOURCE_DATA);
-
-        if (G_UNLIKELY(!dirs))
-        {
-            dirs    = g_new (gchar*, 2);
-            dirs[0] = g_strdup (DATADIR);
-            dirs[1] = NULL;
-        }
-    }
-
-    for (d = dirs; *d != NULL || !datadir_used; ++d)
-    {
-        /* check if resource dirs include our prefix */
-        if (*d == NULL)
-        {
-            dirname = g_build_filename (DATADIR, "xfce4", "panel-plugins",
-                                        NULL);
-            datadir_used = TRUE;
-        }
-        else
-        {
-            if (strcmp (DATADIR, *d) == 0)
-                datadir_used = TRUE;
-
-            dirname = g_build_filename (*d, "xfce4", "panel-plugins", NULL);
-        }
-
+        /* build the plugins directory name */
+        dirname = g_build_filename (directories[n], "xfce4", "panel-plugins", NULL);
+        
+        /* open the directory */
         gdir = g_dir_open (dirname, 0, NULL);
 
         DBG (" + directory: %s", dirname);
 
-        if (!gdir)
+        if (G_LIKELY (gdir != NULL))
         {
-            g_free (dirname);
-            continue;
-        }
-
-        if (gdir)
-        {
+            /* walk though all the files in the directory */
             while ((file = g_dir_read_name (gdir)) != NULL)
             {
+                /* continue if it's not a .desktop file */
                 if (!g_str_has_suffix (file, ".desktop"))
                     continue;
 
-                path  = g_build_filename (dirname, file, NULL);
-                klass = new_plugin_klass_from_desktop_file (path);
+                /* try to create a klass */
+                klass = new_plugin_klass_from_desktop_file (dirname, file);
 
-                g_free (path);
-
-                if (klass)
+                if (G_LIKELY (klass))
                 {
                     DBG (" + klass \"%s\": "
                          "name=%s, comment=%s, icon=%s, external=%d, path=%s",
@@ -359,21 +350,21 @@ update_plugin_list (void)
                          klass->is_external, 
                          klass->file        ? klass->file        : "(null)");
 
-                    g_hash_table_insert (plugin_klasses,
-                                         klass->plugin_name, klass);
+                    /* insert the class in the hash table */
+                    g_hash_table_insert (plugin_klasses, klass->plugin_name, klass);
                 }
             }
 
+            /* close the directory */
             g_dir_close (gdir);
         }
 
+        /* cleanup */
         g_free (dirname);
-
-        if (*d == NULL)
-            break;
     }
 
-    g_strfreev (dirs);
+    /* cleanup */
+    g_strfreev (directories);
 }
 
 static gboolean
@@ -383,22 +374,29 @@ load_module (XfcePanelItemClass *klass)
     XfcePanelPluginFunc  (*get_construct) (void);
     XfcePanelPluginCheck (*get_check)     (void);
 
+    /* try to open the module */
     klass->gmodule = g_module_open (klass->file, G_MODULE_BIND_LOCAL);
 
+    /* check */
     if (G_UNLIKELY (klass->gmodule == NULL))
     {
+        /* show a warning */
         g_critical ("Could not open module \"%s\" (%s): %s",
                     klass->name, klass->file, g_module_error ());
+
         return FALSE;
     }
 
+    /* check */
     if (G_UNLIKELY (!g_module_symbol (klass->gmodule,
                                       "xfce_panel_plugin_get_construct",
                                       &symbol)))
     {
+        /* show a warning */
         g_critical ("Could not open symbol in module \"%s\" (%s): %s",
                     klass->name, klass->file, g_module_error ());
 
+        /* close the module */
         g_module_close (klass->gmodule);
         klass->gmodule = NULL;
 
@@ -408,6 +406,7 @@ load_module (XfcePanelItemClass *klass)
     get_construct    = symbol;
     klass->construct = get_construct ();
 
+    /* check of the check function ^_^ */
     if (g_module_symbol (klass->gmodule,
                          "xfce_panel_plugin_get_check", &symbol))
     {

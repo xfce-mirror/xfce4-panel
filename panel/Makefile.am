@@ -41,6 +41,7 @@ xfce4_panel_CFLAGS =								\
 	$(LIBSTARTUP_NOTIFICATION_CFLAGS)					\
 	$(LIBXFCE4UTIL_CFLAGS)							\
 	$(LIBXFCEGUI4_CFLAGS)							\
+	$(GMODULE_CFLAGS)							\
 	$(PLATFORM_CFLAGS)
 
 xfce4_panel_LDFLAGS =								\
@@ -52,6 +53,7 @@ xfce4_panel_LDADD =								\
 	$(LIBXFCE4UTIL_LIBS)							\
 	$(LIBXFCEGUI4_LIBS)							\
 	$(LIBSTARTUP_NOTIFICATION_LIBS)						\
+	$(GMODULE_LIBS)								\
 	$(LIBX11_LIBS)
 
 xfce4_panel_DEPENDENCIES =							\
