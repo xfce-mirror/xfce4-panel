@@ -217,6 +217,7 @@ new_plugin_class_from_desktop_file (const char *file)
         xfce_rc_set_group (rc, "Xfce Panel");
 
         if ((value = xfce_rc_read_entry (rc, "X-XFCE-Exec", NULL)) 
+            && g_path_is_absolute (value)
             && g_file_test (value, G_FILE_TEST_EXISTS))
 
         {
@@ -225,23 +226,26 @@ new_plugin_class_from_desktop_file (const char *file)
         }
         else if ((value = xfce_rc_read_entry (rc, "X-XFCE-Module", NULL)))
         {
-            if (g_file_test (value, G_FILE_TEST_EXISTS))
-            {
-                class = create_item_class (value, FALSE);
-                DBG ("Internal plugin: %s", value);
-            }
-            else if ((dir = xfce_rc_read_entry (rc, "X-XFCE-Module-Path", 
-                                                NULL)))
+            if ((dir = xfce_rc_read_entry (rc, "X-XFCE-Module-Path", NULL)))
             {
                 path = g_module_build_path (dir, value);
 
-                if (g_file_test (path, G_FILE_TEST_EXISTS))
+                if (g_path_is_absolute (path)
+                    && g_file_test (path, G_FILE_TEST_EXISTS))
                 {
                     class = create_item_class (path, FALSE);
+                    
                     DBG ("Internal plugin: %s", path);
                 }
 
                 g_free (path);
+            }
+            else if (g_path_is_absolute (value)
+                     && g_file_test (value, G_FILE_TEST_EXISTS))
+            {
+                class = create_item_class (value, FALSE);
+                
+                DBG ("Internal plugin: %s", value);
             }
         }
 
