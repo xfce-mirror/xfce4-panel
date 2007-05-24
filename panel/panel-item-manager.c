@@ -387,8 +387,8 @@ load_module (XfcePanelItemClass *klass)
 
     if (G_UNLIKELY (klass->gmodule == NULL))
     {
-        g_critical ("Could not open \"%s\": %s",
-                    klass->name, g_module_error ());
+        g_critical ("Could not open module \"%s\" (%s): %s",
+                    klass->name, klass->file, g_module_error ());
         return FALSE;
     }
 
@@ -396,8 +396,8 @@ load_module (XfcePanelItemClass *klass)
                                       "xfce_panel_plugin_get_construct",
                                       &symbol)))
     {
-        g_critical ("Could not open \"%s\": %s",
-                    klass->name, g_module_error ());
+        g_critical ("Could not open symbol in module \"%s\" (%s): %s",
+                    klass->name, klass->file, g_module_error ());
 
         g_module_close (klass->gmodule);
         klass->gmodule = NULL;
