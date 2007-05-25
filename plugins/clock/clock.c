@@ -516,6 +516,8 @@ clock_mode_changed (GtkComboBox *cb, ClockDialog *cd)
     cd->clock->mode = gtk_combo_box_get_active(cb);
     xfce_clock_set_mode (XFCE_CLOCK (cd->clock->clock), cd->clock->mode);
     
+    clock_reschedule (cd->clock);
+    
     clock_set_sensitive (cd);
     
     clock_update_size (cd->clock, 
