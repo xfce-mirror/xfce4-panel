@@ -61,6 +61,7 @@ typedef struct
     GtkTooltips *tips;
 
     int timeout_id;
+    int reschedule_id;
     int screen_changed_id;
 
     /* Settings */
@@ -95,6 +96,59 @@ static void clock_construct (XfcePanelPlugin *plugin);
 /* -------------------------------------------------------------------- *
  *                               Clock                                  *
  * -------------------------------------------------------------------- */
+ 
+static gboolean
+clock_reschedule_callback (Clock *clock)
+{
+    g_return_val_if_fail (clock->secs == FALSE, FALSE);
+    
+    /* update the clock every minute */
+    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 60 * 1000);
+    
+    return FALSE;
+}
+
+static void
+clock_reschedule_callback_destroy (Clock *clock)
+{
+    clock->reschedule_id = 0;
+}
+
+static void
+clock_reschedule (Clock *clock)
+{
+    time_t ticks;
+    struct tm *tm;
+    gint interval;
+    
+    /* stop running reschudule */
+    if (clock->reschedule_id)
+        g_source_remove (clock->reschedule_id);
+        
+    /* update every second if seconds are displayed or the led clock is used */
+    if (clock->secs || clock->mode == XFCE_CLOCK_LEDS)
+    {
+    	/* update every second */
+    	xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
+    }
+    else
+    {
+        /* get the time */
+        time (&ticks);
+        tm = localtime (&ticks);
+    
+        /* get the interval up to the next minute */
+        interval = ((60 - tm->tm_sec) * 1000) + 500;
+        
+        /* set the new clock timeout (for this minute) */
+        xfce_clock_set_interval (XFCE_CLOCK (clock->clock), interval);
+        
+        /* start a new reschedule event */
+        clock->reschedule_id = 
+            g_timeout_add_full (G_PRIORITY_LOW, interval, (GSourceFunc)clock_reschedule_callback, 
+                                clock, (GDestroyNotify)clock_reschedule_callback_destroy);
+    }
+}
 
 static gboolean 
 clock_date_tooltip (Clock *clock)
@@ -237,6 +291,9 @@ clock_free_data (XfcePanelPlugin *plugin, Clock *clock)
     if (dlg)
         gtk_widget_destroy (dlg);
         
+    if (clock->reschedule_id)
+        g_source_remove (clock->reschedule_id);
+        
     g_signal_handler_disconnect (plugin, clock->screen_changed_id);
     
     g_source_remove (clock->timeout_id);
@@ -332,9 +389,10 @@ clock_screen_changed (GtkWidget *plugin, GdkScreen *screen,
 
     clock->mday = -1;
 
-    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
-    
     clock_read_rc_file (clock->plugin, clock);
+    
+    /* set the clock timeout */
+    clock_reschedule (clock);
 }
 
 /* Create widgets and connect to signals */
@@ -345,6 +403,7 @@ clock_construct (XfcePanelPlugin *plugin)
     Clock *clock = panel_slice_new0 (Clock);
 
     clock->plugin = plugin;
+    clock->reschedule_id = 0;
 
     g_signal_connect (plugin, "size-changed", 
                       G_CALLBACK (clock_set_size), clock);
@@ -371,8 +430,6 @@ clock_construct (XfcePanelPlugin *plugin)
     gtk_widget_show (clock->clock);
     gtk_container_add (GTK_CONTAINER (clock->frame), clock->clock);
 
-    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
-
     clock_read_rc_file (plugin, clock);
     
     clock->mday = -1;
@@ -382,9 +439,13 @@ clock_construct (XfcePanelPlugin *plugin)
     gtk_object_sink (GTK_OBJECT (clock->tips));
         
     clock_date_tooltip (clock);
-
+    
+    /* set the clock timeout */
+    clock_reschedule (clock);
+ 
+    /* update the tooltip every minute */
     clock->timeout_id = 
-        g_timeout_add (60000, (GSourceFunc) clock_date_tooltip, clock);
+        g_timeout_add (60 * 1000, (GSourceFunc) clock_date_tooltip, clock);
 }
 
 /* -------------------------------------------------------------------- *
@@ -440,6 +501,9 @@ clock_button_toggled (GtkWidget *cb, ClockDialog *cd)
 	cd->clock->secs = active;
 	xfce_clock_show_secs (XFCE_CLOCK (cd->clock->clock),
 	                      active);
+	                      
+	/* set the clock timeout */
+        clock_reschedule (cd->clock);
     }
     
     clock_update_size (cd->clock, 
