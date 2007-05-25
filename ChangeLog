@@ -1,3 +1,10 @@
+2007-05-26 12:07 nick
+
+	* plugins/clock/clock.c: Only update the clock once a minute when
+	  seconds are disabled. That should give Auke a couple of minutes
+	  extra laptop fun ^_^. (Does not work for the led clock because
+	  we always want blinking dots).
+
 2007-05-24 20:30 nick
 
 	* panel/panel-item-manager.c: Rewrite some code, internal plugins
