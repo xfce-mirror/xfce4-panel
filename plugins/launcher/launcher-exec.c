@@ -36,6 +36,10 @@
 #include <sys/wait.h>
 #endif
 
+#ifndef WAIT_ANY
+#define WAIT_ANY (-1)
+#endif
+
 #include "launcher.h"
 #include "launcher-exec.h"
 

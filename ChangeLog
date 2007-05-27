@@ -1,3 +1,8 @@
+2007-05-27 10:50 nick
+
+	* plugins/launcher/launcher-exec.c: Define WAIT_ANY if it's not 
+	  available in wait.h. Reported by Daichi.
+
 2007-05-26 12:25 nick
 
 	* plugins/clock/clock.c: Also reschedule when the clock type changes.
