@@ -272,12 +272,12 @@ render_text (GtkTreeViewColumn *col,
 
         if (info->comment)
         {
-            g_snprintf (text, 512, "<b>%s</b>\n%s", info->display_name,
+            g_snprintf (text, sizeof(text), "<b>%s</b>\n%s", info->display_name,
                                     info->comment);
         }
         else
         {
-            g_snprintf (text, 512, "<b>%s</b>", info->display_name);
+            g_snprintf (text, sizeof(text), "<b>%s</b>", info->display_name);
         }
 
         g_object_set (G_OBJECT (cell),
@@ -1333,7 +1333,7 @@ add_monitor_selector (GtkBox             *box,
                 gtk_widget_set_size_request (scroll, req.width, -1);
             }
 
-            g_snprintf (markup, 10, "<b>%d</b>", i + 1);
+            g_snprintf (markup, sizeof(markup), "<b>%d</b>", i + 1);
 
             ebox = gtk_event_box_new ();
             style = gtk_widget_get_style (ebox);
@@ -1455,7 +1455,7 @@ add_appearance_options (GtkBox             *box,
     /* transparency */
     if (G_UNLIKELY (!composite_atom))
     {
-        g_snprintf (text, 16, "_NET_WM_CM_S%d",
+        g_snprintf (text, sizeof(text), "_NET_WM_CM_S%d",
                     GDK_SCREEN_XNUMBER(gdk_screen_get_default()));
         composite_atom =
             XInternAtom (GDK_DISPLAY (), text, False);
@@ -1560,7 +1560,7 @@ add_panel (GtkWidget          *w,
 
     panel_block_autohide (PANEL (g_ptr_array_index (pmd->panels, n)));
 
-    g_snprintf (name, 20, _("Panel %d"), pmd->panels->len);
+    g_snprintf (name, sizeof(name), _("Panel %d"), pmd->panels->len);
 
     gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->panel_selector), name);
 
@@ -1596,7 +1596,7 @@ remove_panel (GtkWidget          *w,
 
     for (i = 0; i < pmd->panels->len; ++i)
     {
-        g_snprintf (name, 20, _("Panel %d"), i + 1);
+        g_snprintf (name, sizeof(name), _("Panel %d"), i + 1);
 
         gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->panel_selector), name);
     }
@@ -1620,7 +1620,7 @@ create_panel_selector (PanelManagerDialog *pmd)
 
     for (i = 0; i < pmd->panels->len; ++i)
     {
-        g_snprintf (name, 20, _("Panel %d"), i + 1);
+        g_snprintf (name, sizeof(name), _("Panel %d"), i + 1);
 
         gtk_combo_box_append_text (GTK_COMBO_BOX (pmd->panel_selector), name);
     }

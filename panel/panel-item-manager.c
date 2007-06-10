@@ -298,23 +298,30 @@ update_plugin_list (void)
     XfcePanelItemClass  *klass;
 
     if (G_LIKELY (xfce_allow_panel_customization() == TRUE))
+    {
         /* if panel customization is allowed, we search all resource dirs */
         directories = xfce_resource_dirs (XFCE_RESOURCE_DATA);
+
+        /* check if the DATADIR is in the list */
+        for (n = 0; directories[n] != NULL; ++n)
+            if (strcmp (directories[n], DATADIR) == 0)
+                break;
+
+        if (G_UNLIKELY (directories[n] == NULL))
+        {
+            /* append the datadir path */
+            directories      = g_realloc (directories, (n + 2) * sizeof (gchar*));
+            directories[n]   = g_strdup (DATADIR);
+            directories[n+1] = NULL;
+        }
+    }
     else 
+    {
         /* only append the data directory */
-        *directories = NULL;
-
-    /* check if the DATADIR is in the list */
-    for (n = 0; directories[n] != NULL; ++n)
-        if (strcmp (directories[n], DATADIR) == 0)
-            goto has_datadir;
-
-    /* append the datadir path */
-    directories      = g_realloc (directories, (n + 2) * sizeof (gchar*));
-    directories[n]   = g_strdup (DATADIR);
-    directories[n+1] = NULL;
-    
-    has_datadir:
+        directories    = g_new0 ( char*, 2 );
+        directories[0] = g_strdup (DATADIR);
+        directories[1] = NULL;
+    }
 
     /* walk through the directories */
     for (n = 0; directories[n] != NULL; ++n)

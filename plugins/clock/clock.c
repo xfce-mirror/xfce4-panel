@@ -173,7 +173,7 @@ clock_date_tooltip (Clock *clock)
 	 * %B  : full month name
 	 * %Y  : four digit year
 	 */
-        strftime(date_s, 255, _("%A %d %B %Y"), tm);
+        strftime(date_s, sizeof(date_s), _("%A %d %B %Y"), tm);
 
         /* Conversion to utf8
          * Patch by Oliver M. Bolzer <oliver@fakeroot.net>
