@@ -1183,7 +1183,7 @@ tree_button_clicked (GtkWidget *b, LauncherDialog *ld)
         {
             char last[3];
 
-            g_snprintf (last, 3, "%d", ld->launcher->entries->len - 2);
+            g_snprintf (last, sizeof(last), "%d", ld->launcher->entries->len - 2);
             path = gtk_tree_path_new_from_string (last);
         }
         

@@ -1127,7 +1127,7 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
     name = xfce_panel_plugin_get_name (plugin);
     id = xfce_panel_plugin_get_id (plugin);
 
-    g_snprintf (path, 255,
+    g_snprintf (path, sizeof(path),
                 "xfce4" G_DIR_SEPARATOR_S
                 "panel" G_DIR_SEPARATOR_S
                 "%s-%s.rc",
@@ -1161,7 +1161,7 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin, gboolean create)
     name = xfce_panel_plugin_get_name (plugin);
     id = xfce_panel_plugin_get_id (plugin);
 
-    g_snprintf (path, 255,
+    g_snprintf (path, sizeof(path),
                 "xfce4" G_DIR_SEPARATOR_S
                 "panel" G_DIR_SEPARATOR_S
                 "%s-%s.rc",

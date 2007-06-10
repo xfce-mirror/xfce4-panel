@@ -370,7 +370,7 @@ launcher_entry_exec (GdkScreen *screen, LauncherEntry *entry)
     {
         char first[256];
 
-        g_snprintf (first, 256, _("Could not run \"%s\""), entry->name);
+        g_snprintf (first, sizeof(first), _("Could not run \"%s\""), entry->name);
     
         xfce_message_dialog (NULL, _("Xfce Panel"), 
                              GTK_STOCK_DIALOG_ERROR, first, error->message,
@@ -395,7 +395,7 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
     {
         char first[256];
         
-        g_snprintf (first, 256, _("Error in command \"%s\""), 
+        g_snprintf (first, sizeof(first), _("Error in command \"%s\""), 
                     entry->real_exec);
     
         xfce_message_dialog (NULL, _("Xfce Panel"), 
@@ -432,7 +432,7 @@ launcher_entry_drop_cb (GdkScreen *screen, LauncherEntry *entry,
     {
         char first[256];
         
-        g_snprintf (first, 256, _("Could not run \"%s\""), entry->name);
+        g_snprintf (first, sizeof(first), _("Could not run \"%s\""), entry->name);
     
         xfce_message_dialog (NULL, _("Xfce Panel"), 
                              GTK_STOCK_DIALOG_ERROR, first, error->message,
@@ -739,11 +739,11 @@ launcher_update_panel_entry (LauncherPlugin *launcher)
     if (entry->name || entry->comment)
     {
         if (entry->name && entry->comment)
-            g_snprintf (tip, 521, "%s\n%s", entry->name, entry->comment);
+            g_snprintf (tip, sizeof(tip), "%s\n%s", entry->name, entry->comment);
         else if (entry->name)
-            g_strlcpy (tip, entry->name, 521);
+            g_strlcpy (tip, entry->name, sizeof(tip));
         else
-            g_strlcpy (tip, entry->comment, 521);
+            g_strlcpy (tip, entry->comment, sizeof(tip));
 
         gtk_tooltips_set_tip (launcher->tips, launcher->iconbutton, tip, NULL);
     }
@@ -1029,7 +1029,7 @@ launcher_read_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
         LauncherEntry *entry;
         char group[10];
         
-        g_snprintf (group, 10, "Entry %d", i);
+        g_snprintf (group, sizeof(group), "Entry %d", i);
         
         if (!xfce_rc_has_group (rc, group))
             break;
@@ -1098,7 +1098,7 @@ launcher_write_rc_file (XfcePanelPlugin *plugin, LauncherPlugin *launcher)
     {
         LauncherEntry *entry = g_ptr_array_index (launcher->entries, i);
 
-        g_snprintf (group, 10, "Entry %d", i);
+        g_snprintf (group, sizeof(group), "Entry %d", i);
 
         xfce_rc_set_group (rc, group);
 
