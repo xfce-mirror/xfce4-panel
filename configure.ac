@@ -33,7 +33,7 @@ AC_CHECK_FUNCS([sigaction])
 
 dnl Check for i18n support
 BM_I18N([xfce4-panel], [ar az bg ca cs de es es_MX et eu fa_IR fr fi he hi hu
-		        it lt ms nl ja ko no pl pt_BR pt_PT ru sv ta tr uk vi
+		        it lt ms nl ja ka ko no pl pt_BR pt_PT ru sv ta tr uk vi
 			zh_CN zh_TW])
 
 dnl Check for X11 installed
