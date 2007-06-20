@@ -193,7 +193,10 @@ menulist_goto_window (GtkWidget *mi,
     if (ev->button == 1) /* Goto workspace and show window */
     {
         gtk_menu_popdown (GTK_MENU (mi->parent));
-        netk_workspace_activate(netk_window_get_workspace(window));
+        if (!netk_window_is_sticky (window))
+        {
+            netk_workspace_activate(netk_window_get_workspace(window));
+        }
 	netk_window_activate (window);
         g_signal_emit_by_name (mi->parent, "deactivate", 0);
     }
@@ -575,7 +578,8 @@ menulist_popup_menu (Windowlist * wl,
                                             bold);
                 }
             }
-	    else if (netk_workspace != active_workspace)
+	    else if (netk_workspace != active_workspace && 
+                     !netk_window_is_sticky (window))
             {
                 gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
                         GTK_STATE_NORMAL,
