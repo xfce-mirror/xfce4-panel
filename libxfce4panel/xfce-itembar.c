@@ -1044,7 +1044,7 @@ xfce_itembar_set_allow_expand (XfceItembar *itembar,
 {
     XfceItembarPrivate *priv;
 
-    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), DEFAULT_ORIENTATION);
+    _panel_return_if_fail (XFCE_IS_ITEMBAR (itembar));
 
     priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
 
