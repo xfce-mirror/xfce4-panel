@@ -30,13 +30,37 @@
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
-#define SEPARATOR_WIDTH  10
+#define SEPARATOR_WIDTH  8
 #define SEP_START        0.15
 #define SEP_END          0.85
 
-static void separator_properties_dialog (XfcePanelPlugin *plugin);
+typedef enum 
+{
+    SEP_SPACE,
+    SEP_EXPAND,
+    SEP_LINE,
+    SEP_HANDLE,
+    SEP_DOTS
+}
+SeparatorType;
+
+typedef struct _Separator
+{
+    XfcePanelPlugin *plugin;
+    SeparatorType    type;
+}
+Separator;
+
+static void separator_properties_dialog (XfcePanelPlugin *plugin, Separator *sep);
 
 static void separator_construct (XfcePanelPlugin *plugin);
+
+static void separator_paint_dots (GtkWidget *widget, GdkRectangle * area, Separator *sep);
+
+static const unsigned char dark_bits[]  = { 0x00, 0x0e, 0x02, 0x02, 0x00, 0x00, };
+static const unsigned char light_bits[] = { 0x00, 0x00, 0x10, 0x10, 0x1c, 0x00, };
+static const unsigned char mid_bits[]   = { 0x00, 0x00, 0x0c, 0x0c, 0x00, 0x00, };
+
 
 /* -------------------------------------------------------------------- *
  *                     Panel Plugin Interface                           *
@@ -50,36 +74,80 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (separator_construct);
 /* Interface Implementation */
 
 static gboolean
-separator_expose (GtkWidget *widget, GdkEventExpose *event,
-                  XfcePanelPlugin *plugin)
+separator_expose (GtkWidget      *widget, 
+                  GdkEventExpose *event,
+                  Separator      *sep)
 {
     if (GTK_WIDGET_DRAWABLE (widget))
     {
-        GtkAllocation *allocation = &(widget->allocation);
-        int start, end, position;
+        GtkAllocation  *allocation;
+        gboolean        horizontal;
+        int             start, end, position;
+        int             x, y, w, h;
 
-        if (xfce_panel_plugin_get_orientation (plugin) ==
-                GTK_ORIENTATION_HORIZONTAL)
+        allocation = &(widget->allocation);
+        horizontal = (xfce_panel_plugin_get_orientation (sep->plugin)
+                       == GTK_ORIENTATION_HORIZONTAL);
+
+        switch (sep->type)
         {
-            start = allocation->y + SEP_START * allocation->height;
-            end = allocation->y + SEP_END * allocation->height;
-            position = allocation->x + allocation->width / 2;
+            case SEP_SPACE:
+            case SEP_EXPAND:
+                /* do nothing */
+                break;
+            case SEP_LINE:
+                if (horizontal)
+                {
+                    start = allocation->y + SEP_START * allocation->height;
+                    end   = allocation->y + SEP_END   * allocation->height;
+                    position = allocation->x + allocation->width / 2;
 
-            gtk_paint_vline (widget->style, widget->window,
-                             GTK_STATE_NORMAL,
-                             &(event->area), widget, "separator",
-                             start, end, position);
-        }
-        else
-        {
-            start = allocation->x + SEP_START * allocation->width;
-            end = allocation->x + SEP_END * allocation->width;
-            position = allocation->y + allocation->height / 2;
+                    gtk_paint_vline (widget->style, 
+                                     widget->window,
+                                     GTK_WIDGET_STATE (widget), 
+                                     &(event->area), 
+                                     widget, 
+                                     "separator",
+                                     start, end, position);
+                }
+                else
+                {
+                    start = allocation->x + SEP_START * allocation->width;
+                    end   = allocation->x + SEP_END   * allocation->width;
+                    position = allocation->y + allocation->height / 2;
 
-            gtk_paint_hline (widget->style, widget->window,
-                             GTK_STATE_NORMAL,
-                             &(event->area), widget, "separator",
-                             start, end, position);
+                    gtk_paint_hline (widget->style, 
+                                     widget->window,
+                                     GTK_WIDGET_STATE (widget), 
+                                     &(event->area), 
+                                     widget, 
+                                     "separator",
+                                     start, end, position);
+                }
+                break;
+            case SEP_HANDLE:
+                x = allocation->x;
+                y = allocation->y;
+                w = allocation->width;
+                h = allocation->height;
+
+                gtk_paint_handle (widget->style, 
+                                  widget->window,
+                                  GTK_WIDGET_STATE (widget), 
+                                  GTK_SHADOW_NONE,
+                                  &(event->area), 
+                                  widget, 
+                                  "handlebox",
+                                  x, y, w, h,
+                                  horizontal ? GTK_ORIENTATION_VERTICAL :
+                                               GTK_ORIENTATION_HORIZONTAL);
+                break;
+            case SEP_DOTS:
+                separator_paint_dots (widget, &(event->area), sep);
+                break;
+            default:
+                /* do nothing */
+                break;
         }
 
         return TRUE;
@@ -89,28 +157,30 @@ separator_expose (GtkWidget *widget, GdkEventExpose *event,
 }
 
 static void
-separator_add_widget (XfcePanelPlugin *plugin)
+separator_add_widget (Separator *sep)
 {
     GtkWidget *widget;
 
     widget = gtk_drawing_area_new ();
     gtk_widget_show (widget);
-    gtk_container_add (GTK_CONTAINER (plugin), widget);
+    gtk_container_add (GTK_CONTAINER (sep->plugin), widget);
 
-    g_signal_connect (widget, "expose-event",
-                      G_CALLBACK (separator_expose), plugin);
+    g_signal_connect_after (widget, "expose-event",
+                            G_CALLBACK (separator_expose), sep);
 }
 
 static void
 separator_orientation_changed (XfcePanelPlugin *plugin,
-                               GtkOrientation orientation)
+                               GtkOrientation   orientation,
+                               Separator       *sep)
 {
-    if (GTK_BIN (plugin)->child)
-        gtk_widget_queue_draw (GTK_BIN (plugin)->child);
+    gtk_widget_queue_draw(GTK_WIDGET(plugin));
 }
 
 static gboolean
-separator_set_size (XfcePanelPlugin *plugin, int size)
+separator_set_size (XfcePanelPlugin *plugin, 
+                    int              size,
+                    Separator       *sep)
 {
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
@@ -128,14 +198,12 @@ separator_set_size (XfcePanelPlugin *plugin, int size)
 }
 
 static void
-separator_read_rc_file (XfcePanelPlugin *plugin)
+separator_read_rc_file (XfcePanelPlugin *plugin, 
+                        Separator       *sep)
 {
-    char *file;
+    char   *file;
     XfceRc *rc;
-    int line, expand;
-
-    line = 1;
-    expand = 0;
+    int     type = SEP_LINE;
 
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
@@ -144,25 +212,38 @@ separator_read_rc_file (XfcePanelPlugin *plugin)
 
         if (rc != NULL)
         {
-            line = xfce_rc_read_int_entry (rc, "draw-separator", 1);
+            type = xfce_rc_read_int_entry (rc, "separator-type", SEP_LINE);
 
-            expand = xfce_rc_read_int_entry (rc, "expand", 0);
+            /* backward compatibility with xfce 4.4 */
+            if (type == SEP_LINE && xfce_rc_has_entry (rc, "expand"))
+            {
+                if (xfce_rc_read_int_entry (rc, "expand", 0) == 1)
+                {
+                    type = SEP_EXPAND;
+                }
+                else if (xfce_rc_read_int_entry (rc, "draw-separator", 1) == 0)
+                {
+                    type = SEP_SPACE;
+                }
+            }
 
             xfce_rc_close (rc);
         }
     }
 
-    if (line)
-        separator_add_widget (plugin);
+    sep->type = type;
 
-    if (expand)
+    if (sep->type > SEP_EXPAND)
+        separator_add_widget (sep);
+    else if (sep->type == SEP_EXPAND)
         xfce_panel_plugin_set_expand (plugin, TRUE);
 }
 
 static void
-separator_write_rc_file (XfcePanelPlugin *plugin)
+separator_write_rc_file (XfcePanelPlugin *plugin,
+                         Separator       *sep)
 {
-    char *file;
+    char   *file;
     XfceRc *rc;
 
     if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
@@ -174,45 +255,49 @@ separator_write_rc_file (XfcePanelPlugin *plugin)
     if (!rc)
         return;
 
-    xfce_rc_write_int_entry (rc, "draw-separator",
-                             GTK_BIN (plugin)->child ? 1 : 0);
-
-    xfce_rc_write_int_entry (rc, "expand",
-                             xfce_panel_plugin_get_expand (plugin) ? 1 : 0);
+    xfce_rc_write_int_entry (rc, "separator-type", sep->type);
 
     xfce_rc_close (rc);
 }
 
 static void
-separator_free_data (XfcePanelPlugin *plugin)
+separator_free_data (XfcePanelPlugin *plugin, 
+                     Separator       *sep)
 {
     GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
 
     if (dlg)
         gtk_widget_destroy (dlg);
+
+    panel_slice_free (Separator, sep);
 }
 
 /* create widgets and connect to signals */
 static void
 separator_construct (XfcePanelPlugin *plugin)
 {
+    Separator *sep = panel_slice_new0 (Separator);
+
+    sep->plugin = plugin;
+    sep->type   = SEP_LINE;
+
     g_signal_connect (plugin, "orientation-changed",
-                      G_CALLBACK (separator_orientation_changed), NULL);
+                      G_CALLBACK (separator_orientation_changed), sep);
 
     g_signal_connect (plugin, "size-changed",
-                      G_CALLBACK (separator_set_size), NULL);
+                      G_CALLBACK (separator_set_size), sep);
 
     g_signal_connect (plugin, "save",
-                      G_CALLBACK (separator_write_rc_file), NULL);
+                      G_CALLBACK (separator_write_rc_file), sep);
 
     g_signal_connect (plugin, "free-data",
-                      G_CALLBACK (separator_free_data), NULL);
+                      G_CALLBACK (separator_free_data), sep);
 
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin",
-                      G_CALLBACK (separator_properties_dialog), NULL);
+                      G_CALLBACK (separator_properties_dialog), sep);
 
-    separator_read_rc_file (plugin);
+    separator_read_rc_file (plugin, sep);
 }
 
 /* -------------------------------------------------------------------- *
@@ -220,35 +305,92 @@ separator_construct (XfcePanelPlugin *plugin)
  * -------------------------------------------------------------------- */
 
 static void
-separator_toggled (GtkToggleButton *tb, XfcePanelPlugin *plugin)
+space_toggled (GtkToggleButton *tb, 
+               Separator       *sep)
 {
     if (gtk_toggle_button_get_active (tb))
-        separator_add_widget (plugin);
-    else
-        gtk_widget_destroy (GTK_BIN (plugin)->child);
+    {
+        sep->type = SEP_SPACE;
+        if (GTK_BIN(sep->plugin)->child)
+            gtk_widget_destroy (GTK_BIN(sep->plugin)->child);
+        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
+        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
+    }
 }
 
 static void
-expand_toggled (GtkToggleButton *tb, XfcePanelPlugin *plugin)
+expand_toggled (GtkToggleButton *tb, 
+                Separator       *sep)
 {
-    xfce_panel_plugin_set_expand (plugin, gtk_toggle_button_get_active (tb));
+    if (gtk_toggle_button_get_active (tb))
+    {
+        sep->type = SEP_EXPAND;
+        if (GTK_BIN(sep->plugin)->child)
+            gtk_widget_destroy (GTK_BIN(sep->plugin)->child);
+        xfce_panel_plugin_set_expand (sep->plugin, TRUE);
+        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
+    }
 }
 
 static void
-separator_dialog_response (GtkWidget *dlg, int reponse,
-                          XfcePanelPlugin *plugin)
+line_toggled (GtkToggleButton *tb, 
+              Separator       *sep)
 {
-    g_object_set_data (G_OBJECT (plugin), "dialog", NULL);
+    if (gtk_toggle_button_get_active (tb))
+    {
+        sep->type = SEP_LINE;
+        if (!GTK_BIN(sep->plugin)->child)
+            separator_add_widget (sep);
+        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
+        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
+    }
+}
+
+static void
+handle_toggled (GtkToggleButton *tb, 
+                Separator       *sep)
+{
+    if (gtk_toggle_button_get_active (tb))
+    {
+        sep->type = SEP_HANDLE;
+        if (!GTK_BIN(sep->plugin)->child)
+            separator_add_widget (sep);
+        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
+        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
+    }
+}
+
+static void
+dots_toggled (GtkToggleButton *tb, 
+              Separator       *sep)
+{
+    if (gtk_toggle_button_get_active (tb))
+    {
+        sep->type = SEP_DOTS;
+        if (!GTK_BIN(sep->plugin)->child)
+            separator_add_widget (sep);
+        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
+        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
+    }
+}
+
+static void
+separator_dialog_response (GtkWidget *dlg, 
+                           int        reponse,
+                           Separator *sep)
+{
+    g_object_set_data (G_OBJECT (sep->plugin), "dialog", NULL);
 
     gtk_widget_destroy (dlg);
-    xfce_panel_plugin_unblock_menu (plugin);
-    separator_write_rc_file (plugin);
+    xfce_panel_plugin_unblock_menu (sep->plugin);
+    separator_write_rc_file (sep->plugin, sep);
 }
 
 static void
-separator_properties_dialog (XfcePanelPlugin *plugin)
+separator_properties_dialog (XfcePanelPlugin *plugin,
+                             Separator       *sep)
 {
-    GtkWidget *dlg, *vbox, *tb;
+    GtkWidget *dlg, *vbox, *frame, *tb;
 
     xfce_panel_plugin_block_menu (plugin);
 
@@ -270,30 +412,142 @@ separator_properties_dialog (XfcePanelPlugin *plugin)
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
 
-    vbox = gtk_vbox_new (FALSE, 8);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+    vbox = gtk_vbox_new (FALSE, 4);
     gtk_widget_show (vbox);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox,
+
+    frame = xfce_create_framebox_with_content(_("Separator Style"), vbox);
+    gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
+    gtk_widget_show (frame);
+    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), frame,
                         TRUE, TRUE, 0);
 
-    tb = gtk_check_button_new_with_mnemonic (_("_Draw Separator"));
+    /* space */
+    tb = gtk_radio_button_new_with_mnemonic (NULL, _("_Empty Space"));
     gtk_widget_show (tb);
     gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
-
-    if (GTK_BIN (plugin)->child != NULL)
+    if (sep->type == SEP_SPACE)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tb), TRUE);
+    g_signal_connect (tb, "toggled", G_CALLBACK (space_toggled), sep);
 
-    g_signal_connect (tb, "toggled", G_CALLBACK (separator_toggled), plugin);
-
-    tb = gtk_check_button_new_with_mnemonic (_("_Expand"));
+    /* expand */
+    tb = gtk_radio_button_new_with_mnemonic_from_widget (
+            GTK_RADIO_BUTTON(tb), _("_Expanding Empty Space"));
     gtk_widget_show (tb);
     gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
-
-    if (xfce_panel_plugin_get_expand (plugin))
+    if (sep->type == SEP_EXPAND)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tb), TRUE);
+    g_signal_connect (tb, "toggled", G_CALLBACK (expand_toggled), sep);
 
-    g_signal_connect (tb, "toggled", G_CALLBACK (expand_toggled), plugin);
+    /* line */
+    tb = gtk_radio_button_new_with_mnemonic_from_widget (
+            GTK_RADIO_BUTTON(tb), _("_Line"));
+    gtk_widget_show (tb);
+    gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
+    if (sep->type == SEP_LINE)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tb), TRUE);
+    g_signal_connect (tb, "toggled", G_CALLBACK (line_toggled), sep);
+
+    /* handle */
+    tb = gtk_radio_button_new_with_mnemonic_from_widget (
+            GTK_RADIO_BUTTON(tb), _("_Handle"));
+    gtk_widget_show (tb);
+    gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
+    if (sep->type == SEP_HANDLE)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tb), TRUE);
+    g_signal_connect (tb, "toggled", G_CALLBACK (handle_toggled), sep);
+
+    /* dots */
+    tb = gtk_radio_button_new_with_mnemonic_from_widget (
+            GTK_RADIO_BUTTON(tb), _("_Dots"));
+    gtk_widget_show (tb);
+    gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
+    if (sep->type == SEP_DOTS)
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tb), TRUE);
+    g_signal_connect (tb, "toggled", G_CALLBACK (dots_toggled), sep);
 
     gtk_widget_show (dlg);
 }
+
+static void
+separator_paint_dots (GtkWidget *widget, GdkRectangle * area, Separator *sep)
+{
+    GdkBitmap *dark_bmap, *mid_bmap, *light_bmap;
+    gint       x, y, w, h, rows;
+    guint      width  = widget->allocation.width;
+    guint      height = widget->allocation.height;
+
+    dark_bmap = gdk_bitmap_create_from_data (widget->window, 
+                                             (const gchar*) dark_bits,
+                                             6, 6);
+    mid_bmap = gdk_bitmap_create_from_data (widget->window, 
+                                             (const gchar*) mid_bits,
+                                             6, 6);
+    light_bmap = gdk_bitmap_create_from_data (widget->window, 
+                                             (const gchar*) light_bits,
+                                             6, 6);
+    if (area)
+    {
+        gdk_gc_set_clip_rectangle (widget->style->light_gc[widget->state],
+                                   area);
+        gdk_gc_set_clip_rectangle (widget->style->dark_gc[widget->state],
+                                   area);
+        gdk_gc_set_clip_rectangle (widget->style->mid_gc[widget->state],
+                                   area);
+    }
+
+    rows = MAX (height / 6, 1);
+
+    w = 6;
+    h = rows * 6;
+    x = (width - w) / 2;
+    y = (height - h) / 2;
+
+
+    gdk_gc_set_stipple (widget->style->light_gc[widget->state],
+                        light_bmap);
+    gdk_gc_set_stipple (widget->style->mid_gc[widget->state],
+                        mid_bmap);
+    gdk_gc_set_stipple (widget->style->dark_gc[widget->state],
+                        dark_bmap);
+
+    gdk_gc_set_fill (widget->style->light_gc[widget->state], GDK_STIPPLED);
+    gdk_gc_set_fill (widget->style->mid_gc[widget->state], GDK_STIPPLED);
+    gdk_gc_set_fill (widget->style->dark_gc[widget->state], GDK_STIPPLED);
+
+    gdk_gc_set_ts_origin (widget->style->light_gc[widget->state], x, y);
+    gdk_gc_set_ts_origin (widget->style->mid_gc[widget->state], x, y);
+    gdk_gc_set_ts_origin (widget->style->dark_gc[widget->state], x, y);
+
+    gdk_draw_rectangle (widget->window,
+                        widget->style->light_gc[widget->state], 
+                        TRUE, 
+                        x, y, w, h);
+    gdk_draw_rectangle (widget->window,
+                        widget->style->mid_gc[widget->state], 
+                        TRUE, 
+                        x, y, w, h);
+    gdk_draw_rectangle (widget->window,
+                        widget->style->dark_gc[widget->state], 
+                        TRUE, 
+                        x, y, w, h);
+
+    gdk_gc_set_fill (widget->style->light_gc[widget->state], GDK_SOLID);
+    gdk_gc_set_fill (widget->style->mid_gc[widget->state], GDK_SOLID);
+    gdk_gc_set_fill (widget->style->dark_gc[widget->state], GDK_SOLID);
+
+    if (area)
+    {
+        gdk_gc_set_clip_rectangle (widget->style->light_gc[widget->state],
+                                   NULL);
+        gdk_gc_set_clip_rectangle (widget->style->dark_gc[widget->state],
+                                   NULL);
+        gdk_gc_set_clip_rectangle (widget->style->mid_gc[widget->state],
+                                   NULL);
+    }
+
+    g_object_unref (dark_bmap);
+    g_object_unref (mid_bmap);
+    g_object_unref (light_bmap);
+}
+
 
