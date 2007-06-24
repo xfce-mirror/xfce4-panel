@@ -61,6 +61,9 @@ GType           xfce_itembar_get_type               (void) G_GNUC_CONST;
 
 GtkWidget      *xfce_itembar_new                    (GtkOrientation        orientation) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 
+void            xfce_itembar_set_allow_expand       (XfceItembar          *itembar,
+                                                     gboolean              allow);
+
 void            xfce_itembar_set_orientation        (XfceItembar          *itembar,
                                                      GtkOrientation        orientation);
 

@@ -75,6 +75,7 @@ struct _XfceItembarPrivate
 
     gint            drop_index;
     guint           raised : 1;
+    guint           expand_allowed : 1;
 };
 
 struct _XfceItembarChild
@@ -281,6 +282,8 @@ xfce_itembar_init (XfceItembar *itembar)
     priv->event_window   = NULL;
     priv->drag_highlight = NULL;
     priv->drop_index     = -1;
+    priv->raised         = FALSE;
+    priv->expand_allowed = FALSE;
 }
 
 
@@ -485,7 +488,7 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
         {
             height = bar_height;
 
-            if (child->expand)
+            if (child->expand && priv->expand_allowed)
             {
                 n_expand++;
                 max_expand = MAX (max_expand, width);
@@ -499,7 +502,7 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
         {
             width = bar_height;
 
-            if (child->expand)
+            if (child->expand && priv->expand_allowed)
             {
                 n_expand++;
                 max_expand = MAX (max_expand, height);
@@ -512,7 +515,7 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
 
         props[i].allocation.width = width;
         props[i].allocation.height = height;
-        props[i].expand = child->expand;
+        props[i].expand = (child->expand && priv->expand_allowed);
     }
 
     total_expand = expand_width;
@@ -1023,6 +1026,30 @@ xfce_itembar_new (GtkOrientation orientation)
 {
     return g_object_new (XFCE_TYPE_ITEMBAR,
                          "orientation", orientation, NULL);
+}
+
+
+
+/**
+ * xfce_itembar_set_allow_expand:
+ * @allow : %TRUE when the expansion is allowed.
+ *
+ * Set whether the 'expand' child property is honored.
+ *
+ * See also: xfce_itembar_set_child_expand().
+ **/
+void
+xfce_itembar_set_allow_expand (XfceItembar *itembar,
+                               gboolean     allow)
+{
+    XfceItembarPrivate *priv;
+
+    _panel_return_val_if_fail (XFCE_IS_ITEMBAR (itembar), DEFAULT_ORIENTATION);
+
+    priv = XFCE_ITEMBAR_GET_PRIVATE (itembar);
+
+    priv->expand_allowed = allow;
+    gtk_widget_queue_resize (GTK_WIDGET(itembar));
 }
 
 
