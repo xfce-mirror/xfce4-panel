@@ -969,6 +969,7 @@ panel_init_position (Panel *panel)
     
     if (priv->full_width > XFCE_PANEL_NORMAL_WIDTH)
     {
+        xfce_itembar_set_allow_expand (XFCE_ITEMBAR (priv->itembar), TRUE);
         if (xfce_screen_position_is_horizontal (priv->screen_position))
         {
             int w;
@@ -1199,10 +1200,14 @@ panel_set_full_width (Panel *panel,
             {
                 case XFCE_PANEL_NORMAL_WIDTH:
                     w = h = -1;
+                    xfce_itembar_set_allow_expand (XFCE_ITEMBAR (priv->itembar),
+                                                   FALSE);
                     break;
                     
                 case XFCE_PANEL_FULL_WIDTH:
                 case XFCE_PANEL_SPAN_MONITORS:
+                    xfce_itembar_set_allow_expand (XFCE_ITEMBAR (priv->itembar), 
+                                                   TRUE);
                     if (xfce_screen_position_is_horizontal (
                                 priv->screen_position))
                     {
