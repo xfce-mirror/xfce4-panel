@@ -185,6 +185,7 @@ cleanup_panels (void)
     g_ptr_array_free (panel_app.monitor_list, TRUE);
 }
 
+
 /* signal handling */
 
 /** copied from glibc manual, does this prevent zombies? */
@@ -210,9 +211,9 @@ static void
 sighandler (gint sig)
 {
     /* Don't do any real stuff here.
-     * Only set a signal state flag. There's a timeout in the main loop
-     * that tests the flag.
-     * This will prevent problems with gtk main loop threads and stuff
+     * Only write the signal to a pipe. The value will be picked up by a
+     * g_io_channel watch.  This will prevent problems with gtk main loop 
+     * threads and stuff.
      */
     if (write (signal_pipe[1], &sig, sizeof (int)) != sizeof (int))
     {
@@ -221,7 +222,7 @@ sighandler (gint sig)
 }
 
 static gboolean
-check_run_state (void)
+evaluate_run_state (void)
 {
     static gint recursive = 0;
     gboolean    quit = FALSE;
@@ -267,12 +268,16 @@ check_run_state (void)
     if (quit)
     {
         if (panel_app.save_id)
+        {
             g_source_remove (panel_app.save_id);
-        panel_app.save_id = 0;
+            panel_app.save_id = 0;
+        }
 
-        /* this is necessary, because the function is not only called from the
-         * timeout, so just returning FALSE is not enough. */
+        close (signal_pipe[0]);
+        close (signal_pipe[1]);
+
         gtk_main_quit ();
+
         return FALSE;
     }
 
@@ -282,37 +287,19 @@ check_run_state (void)
 }
 
 static gboolean
-set_run_state (GIOChannel   *source,
-               GIOCondition  cond,
-               gpointer      data)
+signal_pipe_io (GIOChannel   *source,
+                GIOCondition  cond,
+                gpointer      data)
 {
-    GError    *error = NULL;
-    GIOStatus  status;
-    gsize      bytes_read;
-    /*
-     * There is no g_io_channel_read or g_io_channel_read_int, so we read
-     * char's and use a union to recover the unix signal number.
-     */
-    union
-    {
-        gchar chars[sizeof (gint)];
-        gint  signal;
-    } buf;
+    gint  signal;
+    gsize bytes_read;
 
-    while ((status = g_io_channel_read_chars (source, buf.chars, sizeof (int),
-                                              &bytes_read, &error)
-           ) == G_IO_STATUS_NORMAL)
+    if (G_IO_ERROR_NONE == g_io_channel_read (source, (gchar *)&signal, 
+                                              sizeof (signal),
+                                              &bytes_read)
+        && sizeof(signal) == bytes_read)
     {
-        if (bytes_read != sizeof (int))
-        {
-            g_printerr ("lost data in signal pipe: expected %d, receieved %d",
-                        sizeof (int), bytes_read);
-            /* always at least quit if we received data */
-            panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
-            continue;
-        }
-
-        switch (buf.signal)
+        switch (signal)
         {
             case SIGUSR1:
                 DBG ("USR1 signal caught");
@@ -336,19 +323,77 @@ set_run_state (GIOChannel   *source,
         }
     }
 
-    if (error != NULL)
+    return evaluate_run_state ();
+}
+
+static gboolean
+init_signal_pipe ( void )
+{
+    GIOChannel *g_signal_in;
+    glong       fd_flags;
+
+    /* create pipe and set writing end in non-blocking mode */
+    if (pipe (signal_pipe))
     {
-        g_printerr ("reading signal pipe failed: %s\n", error->message);
-        g_error_free (error);
-        panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
-    }
-    if (status != G_IO_STATUS_AGAIN)
-    {
-        g_printerr ("signal pipe has been closed\n");
-        panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
+        return FALSE;
     }
 
-    return check_run_state ();
+    fd_flags = fcntl (signal_pipe[1], F_GETFL);
+    if (fd_flags == -1)
+    {
+        return FALSE;
+    }
+
+    if (fcntl (signal_pipe[1], F_SETFL, fd_flags | O_NONBLOCK) == -1)
+    {
+        close (signal_pipe[0]);
+        close (signal_pipe[1]);
+
+        return FALSE;
+    }
+
+    /* convert the reading end of the pipe into a GIOChannel */
+    g_signal_in = g_io_channel_unix_new (signal_pipe[0]);
+    g_io_channel_set_encoding (g_signal_in, NULL, NULL);
+    g_io_channel_set_close_on_unref (g_signal_in, FALSE);
+
+    /* register the reading end with the event loop */
+    g_io_add_watch (g_signal_in, G_IO_IN | G_IO_PRI, signal_pipe_io, NULL);
+    g_io_channel_unref (g_signal_in);
+
+    return TRUE;
+}
+
+static void
+init_signal_handlers ( void )
+{
+#ifdef HAVE_SIGACTION
+    struct sigaction  act;
+
+    act.sa_handler = sighandler;
+    sigemptyset (&act.sa_mask);
+# ifdef SA_RESTART
+    act.sa_flags = SA_RESTART;
+# else
+    act.sa_flags = 0;
+# endif
+    sigaction (SIGHUP, &act, NULL);
+    sigaction (SIGUSR1, &act, NULL);
+    sigaction (SIGUSR2, &act, NULL);
+    sigaction (SIGINT, &act, NULL);
+    sigaction (SIGABRT, &act, NULL);
+    sigaction (SIGTERM, &act, NULL);
+    act.sa_handler = sigchld_handler;
+    sigaction (SIGCHLD, &act, NULL);
+#else
+    signal (SIGHUP, sighandler);
+    signal (SIGUSR1, sighandler);
+    signal (SIGUSR2, sighandler);
+    signal (SIGINT, sighandler);
+    signal (SIGABRT, sighandler);
+    signal (SIGTERM, sighandler);
+    signal (SIGCHLD, sigchld_handler);
+#endif
 }
 
 /* session */
@@ -539,8 +584,8 @@ unregister_dialog (GtkWidget *dialog)
  * Initialize application. Creates ipc window if no other instance is
  * running or sets the ipc window from the running instance.
  *
- * Returns: 0 on success, 1 when an xfce4-panel instance already exists,
- *          and -1 on failure.
+ * Returns: INIT_SUCCESS (0) on success, INIT_RUNNING (1) when an xfce4-panel 
+ *          instance already exists, and INIT_FAILURE (2) on failure.
  **/
 int
 panel_app_init (void)
@@ -550,7 +595,7 @@ panel_app_init (void)
     XClientMessageEvent  xev;
 
     if (panel_app.initialized)
-        return 0;
+        return INIT_SUCCESS;
 
     panel_app.initialized = TRUE;
 
@@ -559,7 +604,7 @@ panel_app_init (void)
     panel_app.ipc_window = XGetSelectionOwner (GDK_DISPLAY (), selection_atom);
 
     if (panel_app.ipc_window)
-        return 1;
+        return INIT_RUNNING;
 
     invisible = gtk_invisible_new ();
     gtk_widget_realize (invisible);
@@ -577,7 +622,7 @@ panel_app_init (void)
     {
         g_critical ("Could not set ownership of selection \"%s\"",
                     SELECTION_NAME);
-        return -1;
+        return INIT_FAILURE;
     }
 
     manager_atom = XInternAtom (GDK_DISPLAY (), "MANAGER", False);
@@ -598,7 +643,7 @@ panel_app_init (void)
     /* listen for client messages */
     panel_app_listen (invisible);
 
-    return 0;
+    return INIT_SUCCESS;
 }
 
 /* fix position after showing panel for the first time */
@@ -612,14 +657,14 @@ expose_timeout (GtkWidget *panel)
 static void
 panel_app_init_panel (GtkWidget *panel)
 {
-    TIMER_ELAPSED("start panel_app_init_panel: %p", panel);
+    MARK("start panel_app_init_panel: %p", panel);
     panel_init_position (PANEL (panel));
     panel_init_signals (PANEL (panel));
-    TIMER_ELAPSED(" + start show panel");
+    MARK(" + start show panel");
     gtk_widget_show (panel);
-    TIMER_ELAPSED(" + end show panel");
+    MARK(" + end show panel");
     g_idle_add ((GSourceFunc)expose_timeout, panel);
-    TIMER_ELAPSED("end panel_app_init_panel");
+    MARK("end panel_app_init_panel");
 }
 
 /**
@@ -628,106 +673,50 @@ panel_app_init_panel (GtkWidget *panel)
  * Run the panel application. Reads the configuration file(s) and sets up the
  * panels, before turning over control to the main event loop.
  *
- * Returns: 1 to restart and 0 to quit.
+ * Returns: RUN_FAILURE (2) if something goes wrong, RUN_RESTART (1) to restart 
+ *          and RUN_SUCCESS (0) to quit.
  **/
 gint
 panel_app_run (gchar *client_id)
 {
-#ifdef HAVE_SIGACTION
-    struct sigaction  act;
-#endif
-    GIOChannel  *g_signal_in;
-    GError      *error = NULL;
-    glong        fd_flags;
     gchar      **restart_command;
 
-    /* create pipe and set writing end in non-blocking mode */
-    if (pipe (signal_pipe))
+    /* initialize signal handling */
+    if (!init_signal_pipe ())
     {
-        perror ("pipe");
-        return -1;
+        g_critical ("Unable to create signal-watch pipe: %s.", 
+                    strerror(errno));
+        return RUN_FAILURE;
     }
-    fd_flags = fcntl (signal_pipe[1], F_GETFL);
-    if (fd_flags == -1)
-    {
-        perror ("read descriptor flags");
-        return -1;
-    }
-    if (fcntl (signal_pipe[1], F_SETFL, fd_flags | O_NONBLOCK) == -1)
-    {
-        perror ("write descriptor flags");
-        return -1;
-    }
-
-    /* convert the reading end of the pipe into a GIOChannel */
-    g_signal_in = g_io_channel_unix_new (signal_pipe[0]);
-    g_io_channel_set_encoding (g_signal_in, NULL, &error);
-    if (error != NULL)
-    {                           /* handle potential errors */
-        g_printerr ("g_io_channel_set_encoding failed %s\n",
-                    error->message);
-        g_error_free (error);
-        return -1;
-    }
-
-    /* put the reading end also into non-blocking mode */
-    g_io_channel_set_flags (g_signal_in,
-                            g_io_channel_get_flags (g_signal_in) |
-                            G_IO_FLAG_NONBLOCK, &error);
-    if (error != NULL)
-    {
-        g_printerr ("g_io_set_flags failed %s\n", error->message);
-        g_error_free (error);
-        return -1;
-    }
-
-    /* register the reading end with the event loop */
-    g_io_add_watch (g_signal_in, G_IO_IN | G_IO_PRI, set_run_state, NULL);
-
-    /* register signals */
-#ifdef HAVE_SIGACTION
-    act.sa_handler = sighandler;
-    sigemptyset (&act.sa_mask);
-#ifdef SA_RESTART
-    act.sa_flags = SA_RESTART;
-#else
-    act.sa_flags = 0;
-#endif
-    sigaction (SIGHUP, &act, NULL);
-    sigaction (SIGUSR1, &act, NULL);
-    sigaction (SIGUSR2, &act, NULL);
-    sigaction (SIGINT, &act, NULL);
-    sigaction (SIGABRT, &act, NULL);
-    sigaction (SIGTERM, &act, NULL);
-    act.sa_handler = sigchld_handler;
-    sigaction (SIGCHLD, &act, NULL);
-#else
-    signal (SIGHUP, sighandler);
-    signal (SIGUSR1, sighandler);
-    signal (SIGUSR2, sighandler);
-    signal (SIGINT, sighandler);
-    signal (SIGABRT, sighandler);
-    signal (SIGTERM, sighandler);
-    signal (SIGCHLD, sigchld_handler);
-#endif
+    init_signal_handlers ();
 
     /* environment */
-    xfce_setenv ("DISPLAY", gdk_display_get_name (gdk_display_get_default ()), TRUE);
+    xfce_setenv ("DISPLAY", 
+                 gdk_display_get_name (gdk_display_get_default ()),
+                 TRUE);
 
     /* session management */
-    restart_command = g_new (gchar *, 2);
+    restart_command    = g_new (gchar *, 2);
     restart_command[0] = "xfce4-panel";
     restart_command[1] = "-r";
     restart_command[2] = NULL;
 
-    panel_app.session_client = client_session_new_full (NULL, SESSION_RESTART_IF_RUNNING,
-					                                    40, client_id, PACKAGE_NAME, NULL,
-					                                    restart_command, restart_command,
-					                                    NULL, NULL, NULL);
+    panel_app.session_client = 
+        client_session_new_full (NULL, 
+                                 SESSION_RESTART_IF_RUNNING, 
+                                 40, 
+                                 client_id,
+                                 PACKAGE_NAME,
+                                 NULL,
+                                 restart_command, 
+                                 restart_command,
+                                 NULL,
+                                 NULL,
+                                 NULL);
     panel_app.session_client->save_yourself = session_save_yourself;
     panel_app.session_client->die = session_die;
 
-    TIMER_ELAPSED("connect to session manager");
+    MARK("connect to session manager");
     if (!session_init (panel_app.session_client))
     {
         g_free (panel_app.session_client);
@@ -735,24 +724,25 @@ panel_app_run (gchar *client_id)
     }
 
     /* screen layout and geometry */
-    TIMER_ELAPSED("start monitor list creation");
+    MARK("start monitor list creation");
     create_monitor_list ();
 
     /* configuration */
-    TIMER_ELAPSED("start init item manager");
+    MARK("start init item manager");
     xfce_panel_item_manager_init ();
 
-    TIMER_ELAPSED("start panel creation");
+    MARK("start panel creation");
     panel_app.panel_list = panel_config_create_panels ();
-    TIMER_ELAPSED("end panel creation");
+    MARK("end panel creation");
 
     g_ptr_array_foreach (panel_app.panel_list, (GFunc)panel_app_init_panel,
                          NULL);
 
     /* Run Forrest, Run! */
     panel_app.runstate = PANEL_RUN_STATE_NORMAL;
-    TIMER_ELAPSED("start main loop");
+    MARK("start main loop");
     gtk_main ();
+    MARK("end main loop");
 
     /* cleanup */
     g_free (panel_app.session_client);
@@ -762,9 +752,9 @@ panel_app_run (gchar *client_id)
     xfce_panel_item_manager_cleanup ();
 
     if (panel_app.runstate == PANEL_RUN_STATE_RESTART)
-        return 1;
+        return RUN_RESTART;
 
-    return 0;
+    return RUN_SUCCESS;
 }
 
 static gboolean
@@ -827,28 +817,28 @@ void
 panel_app_restart (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_RESTART;
-    check_run_state ();
+    evaluate_run_state ();
 }
 
 void
 panel_app_quit (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_QUIT;
-    check_run_state ();
+    evaluate_run_state ();
 }
 
 void
 panel_app_quit_noconfirm (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_QUIT_NOCONFIRM;
-    check_run_state ();
+    evaluate_run_state ();
 }
 
 void
 panel_app_quit_nosave (void)
 {
     panel_app.runstate = PANEL_RUN_STATE_QUIT_NOSAVE;
-    check_run_state ();
+    evaluate_run_state ();
 }
 
 void

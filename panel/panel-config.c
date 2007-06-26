@@ -316,19 +316,19 @@ start_element_handler (GMarkupParseContext  *context,
                 parser->current_panel = panel_new ();
                 g_ptr_array_add (parser->panels, parser->current_panel);
                 init_properties (parser);
-                TIMER_ELAPSED(" + start config panel");
+                MARK(" + start config panel");
             }
             break;
 
         case PANEL:
             if (strcmp (element_name, "properties") == 0)
             {
-                TIMER_ELAPSED(" ++ start properties");
+                MARK(" ++ start properties");
                 parser->state = PROPERTIES;
             }
             else if (strcmp (element_name, "items") == 0)
             {
-                TIMER_ELAPSED(" ++ start items");
+                MARK(" ++ start items");
                 parser->state = ITEMS;
             }
             break;
@@ -380,7 +380,7 @@ start_element_handler (GMarkupParseContext  *context,
                 {
                     DBG ("Add item: name=\"%s\", id=\"%s\"", name, value);
 
-                    TIMER_ELAPSED(" +++ add item: %s", name);
+                    MARK(" +++ add item: %s", name);
                     panel_add_item_with_id (parser->current_panel,
                                                 name, value);
                 }
@@ -421,7 +421,7 @@ end_element_handler (GMarkupParseContext *context,
             {
                 parser->state = PANELS;
                 parser->current_panel = NULL;
-                TIMER_ELAPSED(" + end config panel");
+                MARK(" + end config panel");
             }
             break;
 
@@ -454,7 +454,7 @@ end_element_handler (GMarkupParseContext *context,
                                   "activetrans",     parser->activetrans,
                                   NULL);
                 }
-                TIMER_ELAPSED(" ++ end properties");
+                MARK(" ++ end properties");
             }
             break;
 
@@ -462,7 +462,7 @@ end_element_handler (GMarkupParseContext *context,
             if (strcmp ("items", element_name) == 0)
             {
                 parser->state = PANEL;
-                TIMER_ELAPSED(" ++ end items");
+                MARK(" ++ end items");
             }
             break;
 

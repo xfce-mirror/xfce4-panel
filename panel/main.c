@@ -57,13 +57,14 @@ static gchar    *opt_client_id = NULL;
 /* command line options */
 static GOptionEntry option_entries[] =
 {
-    { "version", 'v', 0, G_OPTION_ARG_NONE, &opt_version, N_ ("Show this message and exit"), NULL },
+    { "version",   'v', 0, G_OPTION_ARG_NONE, &opt_version,   N_ ("Show this message and exit"), NULL },
     { "customize", 'c', 0, G_OPTION_ARG_NONE, &opt_customize, N_ ("Show configuration dialog"), NULL },
-    { "save", 's', 0, G_OPTION_ARG_NONE, &opt_save, N_ ("Save configuration"), NULL },
-    { "restart", 'r', 0, G_OPTION_ARG_NONE, &opt_restart, N_ ("Restart panels"), NULL },
-    { "quit", 'q', 0, G_OPTION_ARG_NONE, &opt_quit, N_ ("End the session"), NULL },
-    { "exit", 'x', 0, G_OPTION_ARG_NONE, &opt_exit, N_ ("Close all panels and end the program"), NULL },
-    { "add", 'a', 0, G_OPTION_ARG_NONE, &opt_add, N_ ("Add new items"), NULL },
+    { "save",      's', 0, G_OPTION_ARG_NONE, &opt_save,      N_ ("Save configuration"), NULL },
+    { "restart",   'r', 0, G_OPTION_ARG_NONE, &opt_restart,   N_ ("Restart panels"), NULL },
+    { "quit",      'q', 0, G_OPTION_ARG_NONE, &opt_quit,      N_ ("End the session"), NULL },
+    { "exit",      'x', 0, G_OPTION_ARG_NONE, &opt_exit,      N_ ("Close all panels and end the program"), NULL },
+    { "add",       'a', 0, G_OPTION_ARG_NONE, &opt_add,       N_ ("Add new items"), NULL },
+
     { "sm-client-id", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_client_id, NULL, NULL },
     { NULL }
 };
@@ -81,7 +82,7 @@ main (gint argc, gchar **argv)
     /* application name */
     g_set_application_name (PACKAGE_NAME);
 
-    TIMER_ELAPSED ("start gtk_init_with_args ()");
+    MARK ("start gtk_init_with_args ()");
 
     /* initialize gtk */
     if (!gtk_init_with_args (&argc, &argv, "", option_entries, GETTEXT_PACKAGE, &error))
@@ -135,30 +136,31 @@ main (gint argc, gchar **argv)
         }
     }
 
-    TIMER_ELAPSED ("start panel_init()");
+    MARK ("start panel_init()");
     msg = panel_app_init ();
 
-    if (G_UNLIKELY (msg == -1))
+    if (G_UNLIKELY (msg == INIT_FAILURE))
     {
     	return EXIT_FAILURE;
     }
-    else if (G_UNLIKELY (msg == 1))
+    else if (G_UNLIKELY (msg == INIT_RUNNING))
     {
         g_message (_("xfce4-panel already running"));
 
         return EXIT_SUCCESS;
     }
 
-    TIMER_ELAPSED ("start panel_app_run()");
+    MARK ("start panel_app_run()");
     msg = panel_app_run (opt_client_id);
+    MARK ("end panel_app_run()");
 
-    if (G_UNLIKELY (msg == 1))
+    if (G_UNLIKELY (msg == RUN_RESTART))
     {
         /* restart */
         g_message (_("Restarting xfce4-panel..."));
         execvp (argv[0], argv);
     }
 
-    return EXIT_SUCCESS;
+    return G_UNLIKELY (msg == RUN_FAILURE) ? EXIT_FAILURE : EXIT_SUCCESS;
 }
 

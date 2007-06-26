@@ -31,15 +31,14 @@ typedef struct _XfceMonitor XfceMonitor;
 void xfce_panel_program_log (const char *file, const int line,
                              const char *format, ...);
 
-#define TIMER_ELAPSED(...) \
+#define MARK(...) \
     xfce_panel_program_log (__FILE__, __LINE__, __VA_ARGS__)
 
 #else
 
-#define TIMER_ELAPSED(fmt,args...) do {} while(0)
+#define MARK(fmt,args...) do {} while(0)
 
 #endif /* TIMER */
-
 
 
 struct _XfceMonitor
@@ -52,6 +51,21 @@ struct _XfceMonitor
     guint         has_neighbor_above : 1;
     guint         has_neighbor_below : 1;
 };
+
+
+/* return status */
+enum {
+    INIT_SUCCESS,
+    INIT_RUNNING,
+    INIT_FAILURE
+};
+
+enum {
+    RUN_SUCCESS,
+    RUN_RESTART,
+    RUN_FAILURE,
+};
+
 
 /* run control */
 
