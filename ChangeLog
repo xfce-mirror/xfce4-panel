@@ -1,6 +1,14 @@
+2007-07-06 10:50 nick
+
+    * plugins/clock/*: Import code.
+    * NEWS: update.
+    * Configure.in.in: Bump GTK dependency to 2.8.0 and add cairo as
+      new dependency.
+    * po/*: Merge new strings.
+
 2007-05-27 10:50 nick
 
-	* plugins/launcher/launcher-exec.c: Define WAIT_ANY if it's not 
+	* plugins/launcher/launcher-exec.c: Define WAIT_ANY if it's not
 	  available in wait.h. Reported by Daichi.
 
 2007-05-26 12:25 nick
@@ -19,7 +27,7 @@
 	* panel/panel-item-manager.c: Rewrite some code, internal plugins
 	  now need the X-XFCE-Module-Path entry in the desktop file. A
 	  warning is shown if they don't have it. This to avoid wrong module
-	  loading (and yes this might break internal plugins, but the plugin's 
+	  loading (and yes this might break internal plugins, but the plugin's
 	  desktop file needs to be fixed instead!). Also fixes bug #3279.
 
 2007-05-24 14:00 nick

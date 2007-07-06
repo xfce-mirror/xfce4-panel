@@ -13,11 +13,23 @@ plugin_LTLIBRARIES =							\
 	libclock.la
 
 libclock_la_SOURCES = 							\
-	clock.c
+	clock.c								\
+	clock.h								\
+	clock-analog.c							\
+	clock-analog.h							\
+	clock-binary.c							\
+	clock-binary.h							\
+	clock-dialog.c							\
+	clock-dialog.h							\
+	clock-digital.c							\
+	clock-digital.h							\
+	clock-lcd.c							\
+	clock-lcd.h
 
 libclock_la_CFLAGS =							\
 	$(GTK_CFLAGS)							\
 	$(LIBXFCE4UTIL_CFLAGS)						\
+	$(CAIRO_CFLAGS)							\
 	$(LIBXFCEGUI4_CFLAGS)						\
 	$(PLATFORM_CFLAGS)
 
@@ -34,6 +46,7 @@ endif
 libclock_la_LIBADD =							\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la			\
 	$(GTK_LIBS)							\
+	$(CAIRO_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)						\
 	$(LIBXFCEGUI4_LIBS)
 

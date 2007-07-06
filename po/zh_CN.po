@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-27 16:30+0200\n"
+"POT-Creation-Date: 2007-07-06 21:54+0200\n"
 "PO-Revision-Date: 2007-03-30 23:41+0800\n"
 "Last-Translator: wuli <wurisky@gmail.com>\n"
 "Language-Team: Simplified Chinese <xfce-i18n@xfce.org>\n"
@@ -111,28 +111,28 @@ msgstr "重新启动"
 msgid "About the Xfce Panel"
 msgstr "关于Xfce面板"
 
-#: ../panel/panel-app.c:255 ../panel/panel-app.c:896
+#: ../panel/panel-app.c:256 ../panel/panel-app.c:886
 msgid "Exit Xfce Panel?"
 msgstr "退出Xfce面板？"
 
-#: ../panel/panel-app.c:894 ../panel/panel-app.c:926 ../panel/panel-app.c:959
+#: ../panel/panel-app.c:884 ../panel/panel-app.c:916 ../panel/panel-app.c:949
 msgid "Xfce Panel"
 msgstr "Xfce面板"
 
-#: ../panel/panel-app.c:897
+#: ../panel/panel-app.c:887
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "你不能移除最后一个面板。你想退出面板程序吗？"
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:914
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "移除面板\"%d\"？"
 
-#: ../panel/panel-app.c:928
+#: ../panel/panel-app.c:918
 msgid "The selected panel and all its items will be removed."
 msgstr "所选面板及其上面的项目都将被移除。"
 
-#: ../panel/panel-app.c:965 ../panel/panel-app.c:966
+#: ../panel/panel-app.c:955 ../panel/panel-app.c:956
 msgid "Developer"
 msgstr "开发者"
 
@@ -141,7 +141,6 @@ msgid "Show this message and exit"
 msgstr "显示这条消息然后退出"
 
 #: ../panel/main.c:61
-#, 
 msgid "Show configuration dialog"
 msgstr "显示配置对话框"
 
@@ -150,7 +149,6 @@ msgid "Save configuration"
 msgstr "保存配置"
 
 #: ../panel/main.c:63
-#, 
 msgid "Restart panels"
 msgstr "重新启动面板"
 
@@ -163,34 +161,32 @@ msgid "Close all panels and end the program"
 msgstr "关闭所有面板和结束程序"
 
 #: ../panel/main.c:66
-#, 
 msgid "Add new items"
 msgstr "添加新项目"
 
-#: ../panel/main.c:89
-#, 
+#: ../panel/main.c:90
 msgid "Failed to open display"
 msgstr "无法打开显示"
 
-#: ../panel/main.c:101
+#: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
 msgstr "版权 (c) 2004-2007"
 
-#: ../panel/main.c:102
+#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce开发团队。保留所有权利。"
 
-#: ../panel/main.c:103
+#: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "请报告bugs到<%s>."
 
-#: ../panel/main.c:147
+#: ../panel/main.c:148
 msgid "xfce4-panel already running"
 msgstr "xfce4-panel已经运行"
 
 #. restart
-#: ../panel/main.c:158
+#: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
 msgstr "正在重新启动 xfce4-panel..."
 
@@ -222,12 +218,10 @@ msgid "Full Width"
 msgstr "全屏宽度"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, 
 msgid "Normal Height"
 msgstr "普通高度"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, 
 msgid "Full Height"
 msgstr "全屏高度"
 
@@ -296,8 +290,9 @@ msgstr "在两边"
 msgid "Select Monitor"
 msgstr "选择监视器"
 
+#. appearance settings
 #. Button Layout
-#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock.c:496
+#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:481
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -316,7 +311,6 @@ msgid "Make active panel opaque"
 msgstr "使活动面板不透明"
 
 #: ../panel/panel-dialogs.c:1509
-#, 
 msgid "Popup position:"
 msgstr "弹出位置："
 
@@ -360,54 +354,64 @@ msgstr "选择动作类型："
 msgid "Quit + Lock screen"
 msgstr "退出 + 锁住屏幕"
 
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %d  : day of the month
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: ../plugins/clock/clock.c:122
-msgid "%A %d %B %Y"
-msgstr "%Y 年 %B 月 %d 日  %A"
+#: ../plugins/clock/clock-dialog.c:346
+msgid "Custom"
+msgstr ""
 
-#: ../plugins/clock/clock.c:481 ../plugins/clock/clock.desktop.in.in.h:1
-msgid "Clock"
-msgstr "时钟"
+#: ../plugins/clock/clock-dialog.c:400
+#, fuzzy
+msgid "Display _seconds"
+msgstr "显示秒钟"
 
-#. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:508
-msgid "Analog"
-msgstr "模拟式"
-
-#: ../plugins/clock/clock.c:509
-msgid "Digital"
-msgstr "数字式"
-
-#: ../plugins/clock/clock.c:510
-msgid "LED"
-msgstr "数字液晶显示"
-
-#: ../plugins/clock/clock.c:515 ../plugins/systray/systray.c:402
-msgid "Show _frame"
-msgstr "显示框架(_f)"
-
-#: ../plugins/clock/clock.c:522
-msgid "Clock Options"
-msgstr "时钟选项"
-
-#: ../plugins/clock/clock.c:530
+#: ../plugins/clock/clock-dialog.c:409
 msgid "Use 24-_hour clock"
 msgstr "使用24小时时钟显示(_h)"
 
-#: ../plugins/clock/clock.c:537
-msgid "Show AM/PM"
+#: ../plugins/clock/clock-dialog.c:415
+#, fuzzy
+msgid "Sho_w AM/PM"
 msgstr "显示AM/PM"
 
-#: ../plugins/clock/clock.c:544
-msgid "Display seconds"
-msgstr "显示秒钟"
+#: ../plugins/clock/clock-dialog.c:424
+msgid "True _binary clock"
+msgstr ""
+
+#. create dialog
+#: ../plugins/clock/clock-dialog.c:466
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "时钟"
+
+#: ../plugins/clock/clock-dialog.c:491
+msgid "Analog"
+msgstr "模拟式"
+
+#: ../plugins/clock/clock-dialog.c:492
+msgid "Binary"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.c:493
+msgid "Digital"
+msgstr "数字式"
+
+#: ../plugins/clock/clock-dialog.c:494
+#, fuzzy
+msgid "LCD"
+msgstr "数字液晶显示"
+
+#: ../plugins/clock/clock-dialog.c:499 ../plugins/systray/systray.c:402
+msgid "Show _frame"
+msgstr "显示框架(_f)"
+
+#. tooltip settings
+#: ../plugins/clock/clock-dialog.c:506
+msgid "Tooltip Format"
+msgstr ""
+
+#. clock settings
+#: ../plugins/clock/clock-dialog.c:532
+msgid "Clock Options"
+msgstr "时钟选项"
 
 #: ../plugins/iconbox/iconbox.c:897
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -432,93 +436,87 @@ msgstr "使用所有可用空间"
 msgid "New Item"
 msgstr "新项目"
 
-#: ../plugins/launcher/launcher-exec.c:487
-#, , c-format
+#: ../plugins/launcher/launcher-exec.c:515
+#, c-format
 msgid "Failed to launch \"%s\""
 msgstr "无法启动 \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:580
 msgid "No icon"
 msgstr "无图标"
 
-#: ../plugins/launcher/launcher-dialog.c:597
-#, 
+#: ../plugins/launcher/launcher-dialog.c:600
 msgid "Select a Directory"
 msgstr "选择一个目录"
 
-#: ../plugins/launcher/launcher-dialog.c:641
-#, 
+#: ../plugins/launcher/launcher-dialog.c:644
 msgid "Select an Application"
 msgstr "选择一个应用程序："
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:654
 msgid "All Files"
 msgstr "所以文件"
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:659
 msgid "Executable Files"
 msgstr "可以执行文件"
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:674
 msgid "Perl Scripts"
 msgstr "Perl Scripts"
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:680
 msgid "Python Scripts"
 msgstr "Python Scripts"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:686
 msgid "Ruby Scripts"
 msgstr "Ruby Scripts"
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:692
 msgid "Shell Scripts"
 msgstr "Shell Scripts"
 
-#: ../plugins/launcher/launcher-dialog.c:760
+#: ../plugins/launcher/launcher-dialog.c:763
 msgid "Unknown"
 msgstr "未知"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:766
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "为 \"%s\" 选择一个图标"
 
-#: ../plugins/launcher/launcher-dialog.c:1101
-#, 
+#: ../plugins/launcher/launcher-dialog.c:1104
 msgid "_Name"
 msgstr "名称(_N)"
 
-#: ../plugins/launcher/launcher-dialog.c:1119
-#, 
+#: ../plugins/launcher/launcher-dialog.c:1122
 msgid "_Description"
 msgstr "描述(_D)"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
-#, 
+#: ../plugins/launcher/launcher-dialog.c:1141
 msgid "_Icon"
 msgstr "图标盒(_I)"
 
-#: ../plugins/launcher/launcher-dialog.c:1156
-#, 
+#: ../plugins/launcher/launcher-dialog.c:1159
 msgid "Co_mmand"
 msgstr "命令(_M)"
 
-#: ../plugins/launcher/launcher-dialog.c:1183
+#: ../plugins/launcher/launcher-dialog.c:1186
 msgid "_Working Directory"
 msgstr "工作目录(_W)"
 
-#: ../plugins/launcher/launcher-dialog.c:1215
+#: ../plugins/launcher/launcher-dialog.c:1218
 msgid "Run in _terminal"
 msgstr "在终端中运行(_T)"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1234
 msgid "Use _startup notification"
 msgstr "使用启动提示(_N)"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1488
+#: ../plugins/launcher/launcher-dialog.c:1503
 msgid "Program Launcher"
 msgstr "程序启动器"
 
@@ -538,18 +536,37 @@ msgstr "列数："
 msgid "Switch workspaces using the mouse wheel"
 msgstr "用鼠标滚轮切换工作区"
 
-#: ../plugins/separator/separator.c:255
+#: ../plugins/separator/separator.c:397
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator or Spacing"
 msgstr "分隔符或间隔"
 
-#: ../plugins/separator/separator.c:279
-msgid "_Draw Separator"
-msgstr "绘制分隔符(_D)"
+#: ../plugins/separator/separator.c:418
+#, fuzzy
+msgid "Separator Style"
+msgstr "分隔符或间隔"
 
-#: ../plugins/separator/separator.c:288
-msgid "_Expand"
-msgstr "展开(_E)"
+#. space
+#: ../plugins/separator/separator.c:425
+msgid "_Empty Space"
+msgstr ""
+
+#: ../plugins/separator/separator.c:434
+msgid "_Expanding Empty Space"
+msgstr ""
+
+#: ../plugins/separator/separator.c:443
+msgid "_Line"
+msgstr ""
+
+#: ../plugins/separator/separator.c:452
+#, fuzzy
+msgid "_Handle"
+msgstr "处理："
+
+#: ../plugins/separator/separator.c:461
+msgid "_Dots"
+msgstr ""
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -588,7 +605,6 @@ msgid "Use flat buttons"
 msgstr "使用平板按钮"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:215
-#, 
 msgid "Show handle"
 msgstr "显示手柄"
 
@@ -613,32 +629,32 @@ msgstr "自动分组任务"
 msgid "Always group tasks"
 msgstr "总是分组任务"
 
-#: ../plugins/windowlist/windowlist.c:242
+#: ../plugins/windowlist/windowlist.c:245
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr "你确认要移除工作区 %d 吗？"
 
-#: ../plugins/windowlist/windowlist.c:243
+#: ../plugins/windowlist/windowlist.c:246
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "你确认要移除工作区 '%s' 吗？"
 
-#: ../plugins/windowlist/windowlist.c:508
+#: ../plugins/windowlist/windowlist.c:511
 #, c-format
 msgid "Workspace %d"
 msgstr "工作区 %d"
 
-#: ../plugins/windowlist/windowlist.c:619
-#: ../plugins/windowlist/windowlist.c:625
+#: ../plugins/windowlist/windowlist.c:623
+#: ../plugins/windowlist/windowlist.c:629
 msgid "Add workspace"
 msgstr "添加工作区"
 
-#: ../plugins/windowlist/windowlist.c:644
+#: ../plugins/windowlist/windowlist.c:648
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "移除工作区 %d"
 
-#: ../plugins/windowlist/windowlist.c:645
+#: ../plugins/windowlist/windowlist.c:649
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "移除工作区 '%s'"
@@ -756,6 +772,15 @@ msgstr "显示可用窗口的列表"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "xfce4 面板管理器"
+
+#~ msgid "%A %d %B %Y"
+#~ msgstr "%Y 年 %B 月 %d 日  %A"
+
+#~ msgid "_Draw Separator"
+#~ msgstr "绘制分隔符(_D)"
+
+#~ msgid "_Expand"
+#~ msgstr "展开(_E)"
 
 #~ msgid ""
 #~ "\n"

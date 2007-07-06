@@ -90,7 +90,7 @@ dnl ************************************
 dnl *** Check for standard functions ***
 dnl ************************************
 AC_FUNC_MMAP()
-AC_CHECK_FUNCS([sigaction])
+AC_CHECK_FUNCS([sigaction localtime_r])
 
 dnl ******************************
 dnl *** Check for i18n support ***
@@ -107,11 +107,12 @@ dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
 XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.4.0])
-XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.4])
-XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.6.4])
-XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.6.4])
+XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.8.0])
+XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.8.0])
+XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.8.0])
 XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.4.0])
 XDT_CHECK_PACKAGE([LIBEXO], [exo-0.3], [0.3.1.11])
+XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 
 dnl ***********************************
 dnl *** Check for optional packages ***

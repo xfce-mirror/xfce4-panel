@@ -1,627 +1,598 @@
-/* vim: set expandtab ts=8 sw=4: */
-
-/*  $Id$
+/* $Id$ */
+/*
+ * Copyright (c) 2007 Nick Schermer <nick@xfce.org>
  *
- *  Copyright © 2005 - 2007 The Xfce Development Team
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Library General Public License as published
- *  by the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Library General Public License for more details.
- *
- *  You should have received a copy of the GNU Library General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
- *  Authors:
- *      Jasper Huijsmans <jasper@xfce.org>
- *      Jannis Pohlmann <info@sten-net.de>
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+ * Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
 
-#ifdef HAVE_SYS_STAT_H
-#include <sys/stat.h>
-#endif
-
-#ifdef HAVE_MEMORY_H
-#include <memory.h>
-#endif
-#include <stdio.h>
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
 #ifdef HAVE_TIME_H
 #include <time.h>
 #endif
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
 
-#include <gtk/gtk.h>
-#include <gdk/gdkevents.h>
+#include "clock.h"
+#include "clock-analog.h"
+#include "clock-binary.h"
+#include "clock-dialog.h"
+#include "clock-digital.h"
+#include "clock-lcd.h"
 
-#include <libxfce4util/libxfce4util.h>
-#include <libxfcegui4/libxfcegui4.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
 
-typedef struct
+
+/** prototypes **/
+static guint        xfce_clock_util_interval_from_format (const gchar     *format);
+static guint        xfce_clock_util_next_interval        (guint            timeout_interval);
+static gboolean     xfce_clock_tooltip_update            (gpointer         user_data);
+static gboolean     xfce_clock_tooltip_sync_timeout      (gpointer         user_data);
+static gboolean     xfce_clock_widget_sync_timeout       (gpointer         user_data);
+static ClockPlugin *xfce_clock_plugin_init               (XfcePanelPlugin *plugin);
+static void         xfce_clock_plugin_read               (ClockPlugin     *clock);
+static void         xfce_clock_plugin_write              (ClockPlugin     *clock);
+static void         xfce_clock_plugin_free               (ClockPlugin     *clock);
+static void         xfce_clock_plugin_construct          (XfcePanelPlugin *plugin);
+
+
+
+/** register the plugin **/
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (xfce_clock_plugin_construct);
+
+
+
+/** utilities **/
+static guint
+xfce_clock_util_interval_from_format (const gchar *format)
 {
-    XfcePanelPlugin *plugin;
+    const gchar *p;
+    guint        interval = CLOCK_INTERVAL_HOUR;
 
-    GtkWidget *frame;
-    GtkWidget *clock;
-    GtkTooltips *tips;
+    g_return_val_if_fail (format != NULL, CLOCK_INTERVAL_HOUR);
 
-    int timeout_id;
-    int reschedule_id;
-    int screen_changed_id;
+    for (p = format; *p != '\0'; ++p)
+    {
+        if (p[0] == '%' && p[1] != '\0')
+        {
+            switch (*++p)
+            {
+                case 'c':
+                case 'N':
+                case 'r':
+                case 's':
+                case 'S':
+                case 'T':
+                case 'X':
+                    return CLOCK_INTERVAL_SECOND;
 
-    /* Settings */
-    int mode;
-    gboolean military;
-    gboolean ampm;
-    gboolean secs;
+                case 'M':
+                case 'R':
+                    interval = CLOCK_INTERVAL_MINUTE;
+                    break;
+            }
+        }
+    }
 
-    gboolean show_frame;
-    gint mday;
+    return interval;
 }
-Clock;
 
-typedef struct
+
+
+static guint
+xfce_clock_util_next_interval (guint timeout_interval)
 {
-    Clock *clock;
+    time_t    now = time (0);
+    struct tm tm;
+    GTimeVal  timeval;
+    guint     interval;
 
-    GtkWidget *cb_mode;
-    GtkWidget *cb_frame;
-    GtkWidget *cb_military;
-    GtkWidget *cb_ampm;
-    GtkWidget *cb_secs;
+    /* get the precise time */
+    g_get_current_time (&timeval);
+
+    /* ms to next second */
+    interval = 1000 - (timeval.tv_usec / 1000);
+
+    /* get current time */
+    localtime_r (&now, &tm);
+
+    /* add the interval time to the next update */
+    switch (timeout_interval)
+    {
+        case CLOCK_INTERVAL_HOUR:
+            /* ms to next hour */
+            interval += (60 - tm.tm_min) * CLOCK_INTERVAL_MINUTE;
+
+            /* fall-through to add the minutes */
+
+        case CLOCK_INTERVAL_MINUTE:
+            /* ms to next minute */
+            interval += (60 - tm.tm_sec) * CLOCK_INTERVAL_SECOND;
+            break;
+
+        default:
+            break;
+    }
+
+    return interval;
 }
-ClockDialog;
-
-static void clock_properties_dialog (XfcePanelPlugin *plugin,
-                                     Clock *clock);
-
-static void clock_construct (XfcePanelPlugin *plugin);
 
 
-/* -------------------------------------------------------------------- *
- *                               Clock                                  *
- * -------------------------------------------------------------------- */
- 
+
+gchar *
+xfce_clock_util_strdup_strftime (const gchar *format,
+                                 const struct tm *tm)
+{
+    gchar *converted, *result;
+    gsize  length;
+    gchar  buffer[BUFFER_SIZE];
+
+    /* convert to locale, because that's what strftime uses */
+    converted = g_locale_from_utf8 (format, -1, NULL, NULL, NULL);
+    if (G_UNLIKELY (converted == NULL))
+        return NULL;
+
+    /* parse the time string */
+    length = strftime (buffer, sizeof (buffer), converted, tm);
+    if (G_UNLIKELY (length == 0))
+        buffer[0] = '\0';
+
+    /* convert the string back to utf-8 */
+    result = g_locale_to_utf8 (buffer, -1, NULL, NULL, NULL);
+
+    /* cleanup */
+    g_free (converted);
+
+    return result;
+}
+
+
+
+/** tooltip functions **/
 static gboolean
-clock_reschedule_callback (Clock *clock)
+xfce_clock_tooltip_update (gpointer user_data)
 {
-    g_return_val_if_fail (clock->secs == FALSE, FALSE);
-    
-    /* update the clock every minute */
-    xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 60 * 1000);
-    
+    ClockPlugin        *clock = (ClockPlugin *) user_data;
+    gchar              *string;
+    time_t              now = time (0);
+    struct tm           tm;
+    static GtkTooltips *tooltips = NULL;
+
+    g_return_val_if_fail (clock->tooltip_format != NULL, TRUE);
+
+    /* allocate the tooltip on-demand */
+    if (G_UNLIKELY (tooltips == NULL))
+        tooltips = gtk_tooltips_new ();
+
+    /* get the local time */
+    localtime_r (&now, &tm);
+
+    /* get the string */
+    string = xfce_clock_util_strdup_strftime (clock->tooltip_format, &tm);
+
+    /* set the tooltip */
+    gtk_tooltips_set_tip (tooltips, clock->ebox, string, NULL);
+
+    /* cleanup */
+    g_free (string);
+
+    return TRUE;
+}
+
+
+
+static gboolean
+xfce_clock_tooltip_sync_timeout (gpointer user_data)
+{
+    ClockPlugin *clock = (ClockPlugin *) user_data;
+
+    /* start the tooltip update interval */
+    clock->clock_timeout_id = g_timeout_add (clock->tooltip_interval, xfce_clock_tooltip_update, clock);
+
+    /* manual update for this timeout */
+    xfce_clock_tooltip_update (clock);
+
+    /* stop the sync timeout */
     return FALSE;
 }
 
-static void
-clock_reschedule_callback_destroy (Clock *clock)
+
+
+void
+xfce_clock_tooltip_sync (ClockPlugin *clock)
 {
-    clock->reschedule_id = 0;
+    guint interval;
+
+    if (clock->tooltip_timeout_id)
+    {
+        /* stop old and reset timeout */
+        g_source_remove (clock->tooltip_timeout_id);
+        clock->tooltip_timeout_id = 0;
+    }
+
+    /* detect the tooltip interval from the string */
+    clock->tooltip_interval = xfce_clock_util_interval_from_format (clock->tooltip_format);
+
+    /* get the interval to the next update */
+    interval = xfce_clock_util_next_interval (clock->tooltip_interval);
+
+    /* start the sync timeout */
+    clock->tooltip_timeout_id = g_timeout_add (interval, xfce_clock_tooltip_sync_timeout, clock);
+
+    /* update the tooltip */
+    xfce_clock_tooltip_update (clock);
 }
 
-static void
-clock_reschedule (Clock *clock)
+
+
+/** clock widget functions **/
+static gboolean
+xfce_clock_widget_sync_timeout (gpointer user_data)
 {
-    time_t ticks;
-    struct tm *tm;
-    gint interval;
-    
-    /* stop running reschudule */
-    if (clock->reschedule_id)
-        g_source_remove (clock->reschedule_id);
-        
-    /* update every second if seconds are displayed or the led clock is used */
-    if (clock->secs || clock->mode == XFCE_CLOCK_LEDS)
+    ClockPlugin *clock = (ClockPlugin *) user_data;
+
+    if (G_LIKELY (clock->widget))
     {
-    	/* update every second */
-    	xfce_clock_set_interval (XFCE_CLOCK (clock->clock), 1000);
+        /* start the clock update timeout */
+        clock->clock_timeout_id = g_timeout_add (clock->interval, clock->update, clock->widget);
+
+        /* manual update for this interval */
+        (clock->update) (clock->widget);
     }
     else
     {
-        /* get the time */
-        time (&ticks);
-        tm = localtime (&ticks);
-    
-        /* get the interval up to the next minute */
-        interval = ((60 - tm->tm_sec) * 1000) + 500;
-        
-        /* set the new clock timeout (for this minute) */
-        xfce_clock_set_interval (XFCE_CLOCK (clock->clock), interval);
-        
-        /* start a new reschedule event */
-        clock->reschedule_id = 
-            g_timeout_add_full (G_PRIORITY_LOW, interval, (GSourceFunc)clock_reschedule_callback, 
-                                clock, (GDestroyNotify)clock_reschedule_callback_destroy);
+        /* remove timer id */
+        clock->clock_timeout_id = 0;
+    }
+
+    /* stop the sync timeout */
+    return FALSE;
+}
+
+
+
+void
+xfce_clock_widget_sync (ClockPlugin *clock)
+{
+    guint interval;
+
+    if (clock->clock_timeout_id)
+    {
+        /* stop old and reset timeout */
+        g_source_remove (clock->clock_timeout_id);
+        clock->clock_timeout_id = 0;
+    }
+
+    if (G_LIKELY (clock->widget))
+    {
+        /* get the interval to the next update */
+        interval = xfce_clock_util_next_interval (clock->interval);
+
+        /* start the sync timeout */
+        clock->clock_timeout_id = g_timeout_add (interval, xfce_clock_widget_sync_timeout, clock);
     }
 }
 
-static gboolean
-clock_date_tooltip (Clock *clock)
+
+
+void
+xfce_clock_widget_update_settings (ClockPlugin *clock)
 {
-    time_t ticks;
-    struct tm *tm;
-    char date_s[255];
-    char *utf8date = NULL;
+    g_return_if_fail (clock->widget != NULL);
 
-    ticks = time (0);
-    tm = localtime (&ticks);
-
-    if (clock->mday != tm->tm_mday)
+    /* send the settings based on the clock mode */
+    switch (clock->mode)
     {
-        clock->mday = tm->tm_mday;
+        case XFCE_CLOCK_ANALOG:
+            /* set settings */
+            g_object_set (G_OBJECT (clock->widget),
+                          "show-seconds", clock->show_seconds, NULL);
+            break;
 
-        /* Use format characters from strftime(3)
-	 * to get the proper string for your locale.
-	 * I used these:
-	 * %A  : full weekday name
-	 * %d  : day of the month
-	 * %B  : full month name
-	 * %Y  : four digit year
-	 */
-        strftime(date_s, sizeof(date_s), _("%A %d %B %Y"), tm);
+        case XFCE_CLOCK_BINARY:
+            /* set settings */
+            g_object_set (G_OBJECT (clock->widget),
+                          "show-seconds", clock->show_seconds,
+                          "true-binary", clock->true_binary, NULL);
+            break;
 
-        /* Conversion to utf8
-         * Patch by Oliver M. Bolzer <oliver@fakeroot.net>
-         */
-        if (!g_utf8_validate(date_s, -1, NULL))
-        {
-            utf8date = g_locale_to_utf8(date_s, -1, NULL, NULL, NULL);
-        }
+        case XFCE_CLOCK_DIGITAL:
+            /* set settings */
+            g_object_set (G_OBJECT (clock->widget),
+                          "digital-format", clock->digital_format, NULL);
+            break;
 
-        if (utf8date)
-        {
-            gtk_tooltips_set_tip (clock->tips, GTK_WIDGET (clock->plugin),
-                                  utf8date, NULL);
-            g_free (utf8date);
-        }
-        else
-        {
-            gtk_tooltips_set_tip (clock->tips, GTK_WIDGET (clock->plugin),
-                                  date_s, NULL);
-        }
+        case XFCE_CLOCK_LCD:
+            /* set settings */
+            g_object_set (G_OBJECT (clock->widget),
+                          "show-seconds", clock->show_seconds,
+                          "show-military", clock->show_military,
+                          "show-meridiem", clock->show_meridiem, NULL);
+            break;
     }
+
+    /* get update interval */
+    if (clock->mode == XFCE_CLOCK_DIGITAL)
+    {
+        /* get interval from string */
+        clock->interval = xfce_clock_util_interval_from_format (clock->digital_format);
+    }
+    else
+    {
+        /* interval from setting */
+        clock->interval = clock->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
+    }
+}
+
+
+
+void
+xfce_clock_widget_set_mode (ClockPlugin *clock)
+{
+    GtkWidget *widget;
+
+    /* stop runing timeout */
+    if (clock->clock_timeout_id)
+    {
+        g_source_remove (clock->clock_timeout_id);
+        clock->clock_timeout_id = 0;
+    }
+
+    /* destroy the old widget */
+    if (clock->widget)
+    {
+        gtk_widget_destroy (clock->widget);
+        clock->widget = NULL;
+    }
+
+    switch (clock->mode)
+    {
+        case XFCE_CLOCK_ANALOG:
+            widget = xfce_clock_analog_new ();
+            clock->update = xfce_clock_analog_update;
+            break;
+
+        case XFCE_CLOCK_BINARY:
+            widget = xfce_clock_binary_new ();
+            clock->update = xfce_clock_binary_update;
+            break;
+
+        case XFCE_CLOCK_DIGITAL:
+            widget = xfce_clock_digital_new ();
+            clock->update = xfce_clock_digital_update;
+            break;
+
+        case XFCE_CLOCK_LCD:
+            widget = xfce_clock_lcd_new ();
+            clock->update = xfce_clock_lcd_update;
+            break;
+
+        default:
+            g_error ("Unknown clock type");
+            return;
+    }
+
+    /* set the clock */
+    clock->widget = widget;
+
+    /* add and show the clock */
+    gtk_container_add (GTK_CONTAINER (clock->frame), widget);
+    gtk_widget_show (widget);
+}
+
+
+
+/** plugin functions **/
+static ClockPlugin *
+xfce_clock_plugin_init (XfcePanelPlugin *plugin)
+{
+    ClockPlugin *clock;
+
+    /* create structure */
+    clock = panel_slice_new0 (ClockPlugin);
+
+    /* set plugin */
+    clock->plugin = plugin;
+
+    /* initialize */
+    clock->clock_timeout_id = 0;
+    clock->tooltip_timeout_id = 0;
+    clock->widget = NULL;
+    clock->tooltip_format = NULL;
+    clock->digital_format = NULL;
+
+    /* read the user settings */
+    xfce_clock_plugin_read (clock);
+
+    /* build widgets */
+    clock->ebox = gtk_event_box_new ();
+    gtk_container_add (GTK_CONTAINER (plugin), clock->ebox);
+    gtk_event_box_set_visible_window (GTK_EVENT_BOX (clock->ebox), FALSE);
+    gtk_widget_show (clock->ebox);
+
+    clock->frame = gtk_frame_new (NULL);
+    gtk_container_add (GTK_CONTAINER (clock->ebox), clock->frame);
+    gtk_frame_set_shadow_type (GTK_FRAME (clock->frame), clock->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
+    gtk_widget_show (clock->frame);
+
+    /* set the clock */
+    xfce_clock_widget_set_mode (clock);
+
+    /* set the clock settings */
+    xfce_clock_widget_update_settings (clock);
+
+    /* start the timeout */
+    xfce_clock_widget_sync (clock);
+
+    /* start the tooltip sync */
+    xfce_clock_tooltip_sync (clock);
+
+    return clock;
+}
+
+
+
+gboolean
+xfce_clock_plugin_set_size (ClockPlugin *clock,
+                            guint        size)
+{
+    GtkOrientation orientation;
+
+    /* set the frame border */
+    gtk_container_set_border_width (GTK_CONTAINER (clock->frame), size > 26 ? 1 : 0);
+
+    /* get the clock size */
+    size -= size > 26 ? 6 : 4;
+
+    /* get plugin orientation */
+    orientation = xfce_panel_plugin_get_orientation (clock->plugin);
+
+    /* set the clock size */
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        gtk_widget_set_size_request (clock->widget, -1, size);
+    else
+        gtk_widget_set_size_request (clock->widget, size, -1);
 
     return TRUE;
 }
 
-static void
-clock_update_size (Clock *clock, int size)
-{
-    XfceClock *clk = XFCE_CLOCK (clock->clock);
 
-    g_return_if_fail (clk != NULL);
-    g_return_if_fail (GTK_IS_WIDGET (clk));
-
-    /* keep in sync with systray */
-    if (size > 26)
-    {
-        gtk_container_set_border_width (GTK_CONTAINER (clock->frame), 1);
-        size -= 3;
-    }
-    else
-    {
-        gtk_container_set_border_width (GTK_CONTAINER (clock->frame), 0);
-        size -= 1;
-    }
-
-    /* Replaced old 4-stage switch; Perhaps DIGIT_*_HEIGHT
-     * should be moved from xfce_clock.c to xfce_clock.h so we
-     * can use them here (e.g. 10*2 => DIGIT_SMALL_HEIGHT*2)
-     * */
-
-    if (xfce_panel_plugin_get_orientation (clock->plugin)
-            == GTK_ORIENTATION_HORIZONTAL)
-    {
-        if (size <= 10*2)
-        {
-            xfce_clock_set_led_size (clk, DIGIT_SMALL);
-        }
-        else if (size <= 14*2)
-        {
-            xfce_clock_set_led_size (clk, DIGIT_MEDIUM);
-        }
-        else if (size <= 20*2)
-        {
-            xfce_clock_set_led_size (clk, DIGIT_LARGE);
-        }
-        else
-        {
-            xfce_clock_set_led_size (clk, DIGIT_HUGE);
-        }
-    }
-    else
-    {
-        /* Always use small size in vertical mode */
-        xfce_clock_set_led_size (clk, DIGIT_SMALL);
-    }
-
-    if ((xfce_clock_get_mode (clk) == XFCE_CLOCK_LEDS) ||
-        (xfce_clock_get_mode (clk) == XFCE_CLOCK_DIGITAL))
-    {
-        gtk_widget_set_size_request (GTK_WIDGET (clk), -1, -1);
-    }
-    else
-    {
-        gtk_widget_set_size_request (GTK_WIDGET (clk), size, size);
-    }
-
-    gtk_widget_queue_resize (GTK_WIDGET (clk));
-}
-
-
-/* -------------------------------------------------------------------- *
- *                     Panel Plugin Interface                           *
- * -------------------------------------------------------------------- */
-
-/* Register with the panel */
-
-XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (clock_construct);
-
-
-/* Interface Implementation */
-
-static gboolean
-clock_set_size (XfcePanelPlugin *plugin, int size, Clock *clock)
-{
-    clock_update_size(clock, size);
-
-    return TRUE;
-}
 
 static void
-clock_free_data (XfcePanelPlugin *plugin, Clock *clock)
+xfce_clock_plugin_read (ClockPlugin *clock)
 {
-    GtkWidget *dlg = g_object_get_data (G_OBJECT (plugin), "dialog");
+    gchar       *filename;
+    const gchar *value;
+    XfceRc      *rc;
 
-    if (dlg)
-        gtk_widget_destroy (dlg);
-        
-    if (clock->reschedule_id)
-        g_source_remove (clock->reschedule_id);
-        
-    g_signal_handler_disconnect (plugin, clock->screen_changed_id);
+    /* config filename */
+    filename = xfce_panel_plugin_save_location (clock->plugin, TRUE);
 
-    g_source_remove (clock->timeout_id);
-    g_object_unref (G_OBJECT (clock->tips));
-    panel_slice_free (Clock, clock);
-}
-
-static void
-clock_read_rc_file (XfcePanelPlugin *plugin, Clock* clock)
-{
-    char *file;
-    XfceRc *rc;
-    int mode;
-    gboolean military, ampm, secs, show_frame;
-
-    mode = XFCE_CLOCK_DIGITAL;
-    military = TRUE;
-    ampm = FALSE;
-    secs = FALSE;
-    show_frame = FALSE;
-
-    if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
+    if (G_LIKELY (filename))
     {
-        rc = xfce_rc_simple_open (file, TRUE);
-        g_free (file);
+        /* open rc file (readonly) and cleanup */
+        rc = xfce_rc_simple_open (filename, TRUE);
+        g_free (filename);
 
-        if (rc != NULL)
+        if (G_LIKELY (rc))
         {
-            mode = xfce_rc_read_int_entry (rc, "mode", XFCE_CLOCK_DIGITAL);
-            military = xfce_rc_read_bool_entry (rc, "military", TRUE);
-            ampm = xfce_rc_read_bool_entry (rc, "ampm", FALSE);
-            secs = xfce_rc_read_bool_entry (rc, "secs", FALSE);
-            show_frame = xfce_rc_read_bool_entry (rc, "show_frame", FALSE);
+            /* read strings */
+            value = xfce_rc_read_entry (rc, "DigitalFormat", DEFAULT_DIGITAL_FORMAT);
+            if (G_LIKELY (value != NULL && *value != '\0'))
+                clock->digital_format = g_strdup (value);
+
+            value = xfce_rc_read_entry (rc, "TooltipFormat", DEFAULT_TOOLTIP_FORMAT);
+            if (G_LIKELY (value != NULL && *value != '\0'))
+                clock->tooltip_format = g_strdup (value);
+
+            /* read clock type */
+            clock->mode = xfce_rc_read_int_entry (rc, "ClockType", XFCE_CLOCK_DIGITAL);
+
+            /* read boolean settings */
+            clock->show_frame    = xfce_rc_read_bool_entry (rc, "ShowFrame", TRUE);
+            clock->show_seconds  = xfce_rc_read_bool_entry (rc, "ShowSeconds", FALSE);
+            clock->show_military = xfce_rc_read_bool_entry (rc, "ShowMilitary", TRUE);
+            clock->show_meridiem = xfce_rc_read_bool_entry (rc, "ShowMeridiem", FALSE);
+            clock->true_binary   = xfce_rc_read_bool_entry (rc, "TrueBinary", FALSE);
+
+            /* close the rc file */
             xfce_rc_close (rc);
         }
     }
-
-    clock->mode = mode;
-    clock->military = military;
-    clock->ampm = ampm;
-    clock->secs = secs;
-
-    xfce_clock_set_mode (XFCE_CLOCK (clock->clock), mode);
-    xfce_clock_show_military (XFCE_CLOCK (clock->clock), military);
-    xfce_clock_show_ampm (XFCE_CLOCK (clock->clock), ampm);
-    xfce_clock_show_secs (XFCE_CLOCK (clock->clock), secs);
-
-    clock->show_frame = show_frame;
-    gtk_frame_set_shadow_type (GTK_FRAME (clock->frame),
-                               show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-
-    clock_update_size (clock,
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
 }
 
+
+
 static void
-clock_write_rc_file (XfcePanelPlugin *plugin, Clock *clock)
+xfce_clock_plugin_write (ClockPlugin *clock)
 {
-    char *file;
+    gchar  *filename;
     XfceRc *rc;
 
-    if (!(file = xfce_panel_plugin_save_location (plugin, TRUE)))
-        return;
+    /* config filename */
+    filename = xfce_panel_plugin_save_location (clock->plugin, TRUE);
 
-    rc = xfce_rc_simple_open (file, FALSE);
-    g_free (file);
+    if (G_LIKELY (filename))
+    {
+        /* open rc file and cleanup */
+        rc = xfce_rc_simple_open (filename, FALSE);
+        g_free (filename);
 
-    if (!rc)
-        return;
+        if (G_LIKELY (rc))
+        {
+            /* write settings */
+            if (G_LIKELY (clock->digital_format && *clock->digital_format != '\0'))
+                xfce_rc_write_entry (rc, "DigitalFormat", clock->digital_format);
 
-    xfce_rc_write_int_entry (rc, "mode", clock->mode);
-    xfce_rc_write_bool_entry (rc, "military", clock->military);
-    xfce_rc_write_bool_entry (rc, "ampm", clock->ampm);
-    xfce_rc_write_bool_entry (rc, "secs", clock->secs);
-    xfce_rc_write_bool_entry (rc, "show_frame", clock->show_frame);
+            if (G_LIKELY (clock->tooltip_format && *clock->tooltip_format != '\0'))
+                xfce_rc_write_entry (rc, "TooltipFormat", clock->tooltip_format);
 
-    xfce_rc_close (rc);
+            xfce_rc_write_int_entry (rc, "ClockType", clock->mode);
+            xfce_rc_write_bool_entry (rc, "ShowFrame", clock->show_frame);
+            xfce_rc_write_bool_entry (rc, "ShowSeconds", clock->show_seconds);
+            xfce_rc_write_bool_entry (rc, "ShowMilitary", clock->show_military);
+            xfce_rc_write_bool_entry (rc, "ShowMeridiem", clock->show_meridiem);
+            xfce_rc_write_bool_entry (rc, "TrueBinary", clock->true_binary);
+
+            /* close the rc file */
+            xfce_rc_close (rc);
+        }
+    }
 }
 
+
+
 static void
-clock_screen_changed (GtkWidget *plugin, GdkScreen *screen,
-                      Clock *clock)
+xfce_clock_plugin_free (ClockPlugin *clock)
 {
-	/* return when the widget is not visible (when moving the plugin) */
-	if (GTK_IS_INVISIBLE (clock->clock) == FALSE)
-	    return;
-	
-    gtk_widget_destroy (clock->clock);
+    GtkWidget *dialog;
 
-    clock->clock = xfce_clock_new ();
-    gtk_widget_show (clock->clock);
-    gtk_container_add (GTK_CONTAINER (clock->frame), clock->clock);
+    /* stop timeouts */
+    if (G_LIKELY (clock->clock_timeout_id))
+        g_source_remove (clock->clock_timeout_id);
 
-    clock->mday = -1;
-    
-    clock_read_rc_file (clock->plugin, clock);
-    
-    /* set the clock timeout */
-    clock_reschedule (clock);
+    if (G_LIKELY (clock->tooltip_timeout_id))
+        g_source_remove (clock->tooltip_timeout_id);
+
+    /* destroy the configure dialog if it's still open */
+    dialog = g_object_get_data (G_OBJECT (clock->plugin), I_("configure-dialog"));
+    if (G_UNLIKELY (dialog != NULL))
+        gtk_widget_destroy (dialog);
+
+    /* cleanup */
+    g_free (clock->tooltip_format);
+    g_free (clock->digital_format);
+
+    /* free structure */
+    panel_slice_free (ClockPlugin, clock);
 }
 
-/* Create widgets and connect to signals */
+
 
 static void
-clock_construct (XfcePanelPlugin *plugin)
+xfce_clock_plugin_construct (XfcePanelPlugin *plugin)
 {
-    Clock *clock = panel_slice_new0 (Clock);
+    ClockPlugin *clock = xfce_clock_plugin_init (plugin);
 
-    clock->plugin = plugin;
-    clock->reschedule_id = 0;
-
-    g_signal_connect (plugin, "size-changed",
-                      G_CALLBACK (clock_set_size), clock);
-
-    g_signal_connect (plugin, "free-data",
-                      G_CALLBACK (clock_free_data), clock);
-
-    g_signal_connect (plugin, "save",
-                      G_CALLBACK (clock_write_rc_file), clock);
-
+    /* plugin settings */
+    xfce_panel_plugin_add_action_widget (plugin, clock->ebox);
     xfce_panel_plugin_menu_show_configure (plugin);
-    g_signal_connect (plugin, "configure-plugin",
-                      G_CALLBACK (clock_properties_dialog), clock);
-                      
-    clock->screen_changed_id =
-        g_signal_connect (plugin, "screen-changed",
-                          G_CALLBACK (clock_screen_changed), clock);
 
-    clock->frame = gtk_frame_new (NULL);
-    gtk_widget_show (clock->frame);
-    gtk_container_add (GTK_CONTAINER (plugin), clock->frame);
-
-    clock->clock = xfce_clock_new ();
-    gtk_widget_show (clock->clock);
-    gtk_container_add (GTK_CONTAINER (clock->frame), clock->clock);
-
-    clock_read_rc_file (plugin, clock);
-    clock->mday = -1;
-
-    clock->tips = gtk_tooltips_new ();
-    g_object_ref (G_OBJECT (clock->tips));
-    gtk_object_sink (GTK_OBJECT (clock->tips));
-
-    clock_date_tooltip (clock);
-    
-    /* set the clock timeout */
-    clock_reschedule (clock);
-
-    /* update the tooltip every minute */
-    clock->timeout_id =
-        g_timeout_add (60 * 1000, (GSourceFunc) clock_date_tooltip, clock);
-}
-
-/* -------------------------------------------------------------------- *
- *                        Configuration Dialog                          *
- * -------------------------------------------------------------------- */
-
-static void
-clock_set_sensitive (ClockDialog *cd)
-{
-    if (cd->clock->mode == XFCE_CLOCK_ANALOG)
-    {
-	gtk_widget_set_sensitive (cd->cb_military, FALSE);
-	gtk_widget_set_sensitive (cd->cb_ampm, FALSE);
-    }
-    else
-    {
-	gtk_widget_set_sensitive (cd->cb_military, TRUE);
-
-	if (cd->clock->military)
-	    gtk_widget_set_sensitive (cd->cb_ampm, FALSE);
-        else
-	    gtk_widget_set_sensitive (cd->cb_ampm, TRUE);
-    }
-}
-
-static void
-clock_button_toggled (GtkWidget *cb, ClockDialog *cd)
-{
-    gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (cb));
-
-    if (cb == cd->cb_frame)
-    {
-	cd->clock->show_frame = active;
-	gtk_frame_set_shadow_type (GTK_FRAME (cd->clock->frame),
-	                           active ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-    }
-    else if (cb == cd->cb_military)
-    {
-	cd->clock->military = active;
-	xfce_clock_show_military (XFCE_CLOCK (cd->clock->clock),
-	                          active);
-
-	clock_set_sensitive (cd);
-    }
-    else if (cb == cd->cb_ampm)
-    {
-	cd->clock->ampm = active;
-	xfce_clock_show_ampm (XFCE_CLOCK (cd->clock->clock),
-	                      active);
-    }
-    else if (cb == cd->cb_secs)
-    {
-	cd->clock->secs = active;
-	xfce_clock_show_secs (XFCE_CLOCK (cd->clock->clock),
-	                      active);
-	
-	/* set the clock timeout */
-        clock_reschedule (cd->clock);
-    }
-
-    clock_update_size (cd->clock,
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (cd->clock->plugin)));
-}
-
-static void
-clock_mode_changed (GtkComboBox *cb, ClockDialog *cd)
-{
-    cd->clock->mode = gtk_combo_box_get_active(cb);
-    xfce_clock_set_mode (XFCE_CLOCK (cd->clock->clock), cd->clock->mode);
-    
-    clock_reschedule (cd->clock);
-
-    clock_set_sensitive (cd);
-
-    clock_update_size (cd->clock,
-            xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (cd->clock->plugin)));
-}
-
-static void
-clock_dialog_response (GtkWidget *dlg, int reponse,
-                       ClockDialog *cd)
-{
-    g_object_set_data (G_OBJECT (cd->clock->plugin), "dialog", NULL);
-
-    gtk_widget_destroy (dlg);
-    xfce_panel_plugin_unblock_menu (cd->clock->plugin);
-    clock_write_rc_file (cd->clock->plugin, cd->clock);
-
-    g_free (cd);
-}
-
-static void
-clock_properties_dialog (XfcePanelPlugin *plugin, Clock *clock)
-{
-    GtkWidget *dlg, *frame, *bin, *vbox, *cb;
-    ClockDialog *cd;
-
-    xfce_panel_plugin_block_menu (plugin);
-
-    cd = g_new0 (ClockDialog, 1);
-    cd->clock = clock;
-
-    dlg = xfce_titled_dialog_new_with_buttons (_("Clock"), NULL,
-                GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
-                GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
-                NULL);
-
-    gtk_window_set_screen (GTK_WINDOW (dlg),
-                           gtk_widget_get_screen (GTK_WIDGET (plugin)));
-
-    g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
-
-    gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
-
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-
-    frame = xfce_create_framebox (_("Appearance"), &bin);
-    gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), frame,
-                        FALSE, FALSE, 0);
-
-    vbox = gtk_vbox_new (FALSE, 8);
-    gtk_container_add (GTK_CONTAINER (bin), vbox);
-
-    cd->cb_mode = cb = gtk_combo_box_new_text ();
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-
-    /* Keep order in sync with XfceClockMode */
-    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Analog"));
-    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Digital"));
-    gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("LED"));
-    gtk_combo_box_set_active (GTK_COMBO_BOX (cb), clock->mode);
-    g_signal_connect (cb, "changed",
-            G_CALLBACK (clock_mode_changed), cd);
-
-    cd->cb_frame = cb = gtk_check_button_new_with_mnemonic (_("Show _frame"));
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-            clock->show_frame);
-    g_signal_connect (cb, "toggled",
-            G_CALLBACK (clock_button_toggled), cd);
-
-    frame = xfce_create_framebox (_("Clock Options"), &bin);
-    gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), frame,
-                        FALSE, FALSE, 0);
-
-    vbox = gtk_vbox_new (FALSE, 8);
-    gtk_container_add (GTK_CONTAINER (bin), vbox);
-
-    cd->cb_military = cb = gtk_check_button_new_with_mnemonic (_("Use 24-_hour clock"));
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-            clock->military);
-    g_signal_connect (cb, "toggled",
-            G_CALLBACK (clock_button_toggled), cd);
-
-    cd->cb_ampm = cb = gtk_check_button_new_with_mnemonic (_("Show AM/PM"));
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-            clock->ampm);
-    g_signal_connect (cb, "toggled",
-            G_CALLBACK (clock_button_toggled), cd);
-
-    cd->cb_secs = cb = gtk_check_button_new_with_mnemonic (_("Display seconds"));
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
-            clock->secs);
-    g_signal_connect (cb, "toggled",
-            G_CALLBACK (clock_button_toggled), cd);
-
-    clock_set_sensitive (cd);
-
-    g_signal_connect (dlg, "response",
-            G_CALLBACK (clock_dialog_response), cd);
-
-    gtk_widget_show_all (dlg);
+    /* connect signals */
+    g_signal_connect_swapped (G_OBJECT (plugin), "size-changed", G_CALLBACK (xfce_clock_plugin_set_size), clock);
+    g_signal_connect_swapped (G_OBJECT (plugin), "save", G_CALLBACK (xfce_clock_plugin_write), clock);
+    g_signal_connect_swapped (G_OBJECT (plugin), "free-data", G_CALLBACK (xfce_clock_plugin_free), clock);
+    g_signal_connect_swapped (G_OBJECT (plugin), "configure-plugin", G_CALLBACK (xfce_clock_dialog_show), clock);
 }
 

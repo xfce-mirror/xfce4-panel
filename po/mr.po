@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-27 16:30+0200\n"
+"POT-Creation-Date: 2007-07-06 21:54+0200\n"
 "PO-Revision-Date: 2005-09-29 20:35+0900\n"
 "Last-Translator: Pallavi Nikam <pallavi_edu@rediffmail.com>\n"
 "Language-Team: Marathi <en@li.org>\n"
@@ -117,29 +117,29 @@ msgstr " पुनः सुरुवात (_R)"
 msgid "About the Xfce Panel"
 msgstr "Xfce पॅनेल"
 
-#: ../panel/panel-app.c:255 ../panel/panel-app.c:896
+#: ../panel/panel-app.c:256 ../panel/panel-app.c:886
 #, fuzzy
 msgid "Exit Xfce Panel?"
 msgstr "Xfce पॅनेल"
 
-#: ../panel/panel-app.c:894 ../panel/panel-app.c:926 ../panel/panel-app.c:959
+#: ../panel/panel-app.c:884 ../panel/panel-app.c:916 ../panel/panel-app.c:949
 msgid "Xfce Panel"
 msgstr "Xfce पॅनेल"
 
-#: ../panel/panel-app.c:897
+#: ../panel/panel-app.c:887
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:914
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
-#: ../panel/panel-app.c:928
+#: ../panel/panel-app.c:918
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:965 ../panel/panel-app.c:966
+#: ../panel/panel-app.c:955 ../panel/panel-app.c:956
 msgid "Developer"
 msgstr "निर्माता"
 
@@ -174,32 +174,32 @@ msgstr ""
 msgid "Add new items"
 msgstr "नवीन आयटम"
 
-#: ../panel/main.c:89
+#: ../panel/main.c:90
 #, fuzzy
 msgid "Failed to open display"
 msgstr ""
 "सुरु होऊ शकत नाही \"%s\":\n"
 "%s"
 
-#: ../panel/main.c:101
+#: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
 msgstr ""
 
-#: ../panel/main.c:102
+#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr ""
 
-#: ../panel/main.c:103
+#: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr ""
 
-#: ../panel/main.c:147
+#: ../panel/main.c:148
 msgid "xfce4-panel already running"
 msgstr ""
 
 #. restart
-#: ../panel/main.c:158
+#: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
 msgstr ""
 
@@ -315,8 +315,9 @@ msgstr "दोन्हि बाजूस"
 msgid "Select Monitor"
 msgstr "संपादक"
 
+#. appearance settings
 #. Button Layout
-#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock.c:496
+#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:481
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -387,56 +388,64 @@ msgstr "आज्ञा निवडा"
 msgid "Quit + Lock screen"
 msgstr "पडदा  ताळेबंद करा (_L)"
 
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %d  : day of the month
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: ../plugins/clock/clock.c:122
-msgid "%A %d %B %Y"
-msgstr "%ए %d %बी %वाय"
+#: ../plugins/clock/clock-dialog.c:346
+msgid "Custom"
+msgstr ""
 
-#: ../plugins/clock/clock.c:481 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock-dialog.c:400
+msgid "Display _seconds"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.c:409
+msgid "Use 24-_hour clock"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.c:415
+#, fuzzy
+msgid "Sho_w AM/PM"
+msgstr " एम / पीम"
+
+#: ../plugins/clock/clock-dialog.c:424
+msgid "True _binary clock"
+msgstr ""
+
+#. create dialog
+#: ../plugins/clock/clock-dialog.c:466
+#: ../plugins/clock/clock.desktop.in.in.h:1
 #, fuzzy
 msgid "Clock"
 msgstr "टाळेबंद"
 
-#. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:508
+#: ../plugins/clock/clock-dialog.c:491
 msgid "Analog"
 msgstr "अनॅलॉग"
 
-#: ../plugins/clock/clock.c:509
+#: ../plugins/clock/clock-dialog.c:492
+msgid "Binary"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.c:493
 msgid "Digital"
 msgstr "डिजिटल"
 
-#: ../plugins/clock/clock.c:510
-msgid "LED"
+#: ../plugins/clock/clock-dialog.c:494
+#, fuzzy
+msgid "LCD"
 msgstr "लेड"
 
-#: ../plugins/clock/clock.c:515 ../plugins/systray/systray.c:402
+#: ../plugins/clock/clock-dialog.c:499 ../plugins/systray/systray.c:402
 #, fuzzy
 msgid "Show _frame"
 msgstr "वेळ दाखवा (_t)"
 
-#: ../plugins/clock/clock.c:522
+#. tooltip settings
+#: ../plugins/clock/clock-dialog.c:506
+msgid "Tooltip Format"
+msgstr ""
+
+#. clock settings
+#: ../plugins/clock/clock-dialog.c:532
 msgid "Clock Options"
-msgstr ""
-
-#: ../plugins/clock/clock.c:530
-msgid "Use 24-_hour clock"
-msgstr ""
-
-#: ../plugins/clock/clock.c:537
-#, fuzzy
-msgid "Show AM/PM"
-msgstr " एम / पीम"
-
-#: ../plugins/clock/clock.c:544
-msgid "Display seconds"
 msgstr ""
 
 #: ../plugins/iconbox/iconbox.c:897
@@ -466,95 +475,95 @@ msgstr ""
 msgid "New Item"
 msgstr "नवीन आयटम"
 
-#: ../plugins/launcher/launcher-exec.c:487
+#: ../plugins/launcher/launcher-exec.c:515
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr ""
 "सुरु होऊ शकत नाही \"%s\":\n"
 "%s"
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:580
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:597
+#: ../plugins/launcher/launcher-dialog.c:600
 #, fuzzy
 msgid "Select a Directory"
 msgstr "संपादक"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:644
 #, fuzzy
 msgid "Select an Application"
 msgstr "आज्ञा निवडा"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:654
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:659
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:674
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:680
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:686
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:692
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:760
+#: ../plugins/launcher/launcher-dialog.c:763
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:766
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1101
+#: ../plugins/launcher/launcher-dialog.c:1104
 #, fuzzy
 msgid "_Name"
 msgstr "नाव"
 
-#: ../plugins/launcher/launcher-dialog.c:1119
+#: ../plugins/launcher/launcher-dialog.c:1122
 #, fuzzy
 msgid "_Description"
 msgstr "माहीती"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
+#: ../plugins/launcher/launcher-dialog.c:1141
 #, fuzzy
 msgid "_Icon"
 msgstr "आयकॉन बॉक्स"
 
-#: ../plugins/launcher/launcher-dialog.c:1156
+#: ../plugins/launcher/launcher-dialog.c:1159
 #, fuzzy
 msgid "Co_mmand"
 msgstr "आज्ञा"
 
-#: ../plugins/launcher/launcher-dialog.c:1183
+#: ../plugins/launcher/launcher-dialog.c:1186
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1215
+#: ../plugins/launcher/launcher-dialog.c:1218
 msgid "Run in _terminal"
 msgstr "टर्मिनलमध्ये सुरु करा (_t)"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1234
 msgid "Use _startup notification"
 msgstr "सुरुवातीची सुचना वापरा (_s)"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1488
+#: ../plugins/launcher/launcher-dialog.c:1503
 #, fuzzy
 msgid "Program Launcher"
 msgstr " पर्यायी लॉनचर"
@@ -575,19 +584,37 @@ msgstr "स्तंभाची संख्या:"
 msgid "Switch workspaces using the mouse wheel"
 msgstr ""
 
-#: ../plugins/separator/separator.c:255
+#: ../plugins/separator/separator.c:397
 #: ../plugins/separator/separator.desktop.in.in.h:2
 #, fuzzy
 msgid "Separator or Spacing"
 msgstr "विभक्त रेषा"
 
-#: ../plugins/separator/separator.c:279
+#: ../plugins/separator/separator.c:418
 #, fuzzy
-msgid "_Draw Separator"
+msgid "Separator Style"
 msgstr "विभक्त रेषा"
 
-#: ../plugins/separator/separator.c:288
-msgid "_Expand"
+#. space
+#: ../plugins/separator/separator.c:425
+msgid "_Empty Space"
+msgstr ""
+
+#: ../plugins/separator/separator.c:434
+msgid "_Expanding Empty Space"
+msgstr ""
+
+#: ../plugins/separator/separator.c:443
+msgid "_Line"
+msgstr ""
+
+#: ../plugins/separator/separator.c:452
+#, fuzzy
+msgid "_Handle"
+msgstr "जागा"
+
+#: ../plugins/separator/separator.c:461
+msgid "_Dots"
 msgstr ""
 
 #: ../plugins/showdesktop/showdesktop.c:32
@@ -656,32 +683,32 @@ msgstr "नेहमी कार्यांचे संघटन करा (_
 msgid "Always group tasks"
 msgstr "नेहमी कार्यांचे संघटन करा (_g)"
 
-#: ../plugins/windowlist/windowlist.c:242
+#: ../plugins/windowlist/windowlist.c:245
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:243
+#: ../plugins/windowlist/windowlist.c:246
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:508
+#: ../plugins/windowlist/windowlist.c:511
 #, c-format
 msgid "Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:619
-#: ../plugins/windowlist/windowlist.c:625
+#: ../plugins/windowlist/windowlist.c:623
+#: ../plugins/windowlist/windowlist.c:629
 msgid "Add workspace"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:644
+#: ../plugins/windowlist/windowlist.c:648
 #, c-format
 msgid "Remove Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:645
+#: ../plugins/windowlist/windowlist.c:649
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr ""
@@ -810,6 +837,13 @@ msgstr ""
 #, fuzzy
 msgid "Xfce 4 Panel Manager"
 msgstr "पॅनेलचा आकार:"
+
+#~ msgid "%A %d %B %Y"
+#~ msgstr "%ए %d %बी %वाय"
+
+#, fuzzy
+#~ msgid "_Draw Separator"
+#~ msgstr "विभक्त रेषा"
 
 #, fuzzy
 #~ msgid ""

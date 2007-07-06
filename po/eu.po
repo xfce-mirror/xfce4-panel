@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-27 16:30+0200\n"
+"POT-Creation-Date: 2007-07-06 21:54+0200\n"
 "PO-Revision-Date: 2006-08-12 22:23+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: librezale <librezale@librezale.org>\n"
@@ -114,28 +114,28 @@ msgstr "Berrabiarazi"
 msgid "About the Xfce Panel"
 msgstr "Xfce Panela-ri buruz"
 
-#: ../panel/panel-app.c:255 ../panel/panel-app.c:896
+#: ../panel/panel-app.c:256 ../panel/panel-app.c:886
 msgid "Exit Xfce Panel?"
 msgstr "Xfce Panela Itxi?"
 
-#: ../panel/panel-app.c:894 ../panel/panel-app.c:926 ../panel/panel-app.c:959
+#: ../panel/panel-app.c:884 ../panel/panel-app.c:916 ../panel/panel-app.c:949
 msgid "Xfce Panel"
 msgstr "Xfce Panela"
 
-#: ../panel/panel-app.c:897
+#: ../panel/panel-app.c:887
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Ezin duzu azken panela ezabatu. Agian programatik irten nahi duzu?"
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:914
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "\"%d\" Panela Ezabatu?"
 
-#: ../panel/panel-app.c:928
+#: ../panel/panel-app.c:918
 msgid "The selected panel and all its items will be removed."
 msgstr "Aukeratutako panela eta bere elementu guztiak ezabatu egingo dira."
 
-#: ../panel/panel-app.c:965 ../panel/panel-app.c:966
+#: ../panel/panel-app.c:955 ../panel/panel-app.c:956
 msgid "Developer"
 msgstr "Garatzailea"
 
@@ -170,30 +170,30 @@ msgstr ""
 msgid "Add new items"
 msgstr "Elementu Berria Gehitu"
 
-#: ../panel/main.c:89
+#: ../panel/main.c:90
 #, fuzzy
 msgid "Failed to open display"
 msgstr "Ezin da \"%s\" abiarazi."
 
-#: ../panel/main.c:101
+#: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
 msgstr ""
 
-#: ../panel/main.c:102
+#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr ""
 
-#: ../panel/main.c:103
+#: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr ""
 
-#: ../panel/main.c:147
+#: ../panel/main.c:148
 msgid "xfce4-panel already running"
 msgstr ""
 
 #. restart
-#: ../panel/main.c:158
+#: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
 msgstr ""
 
@@ -301,8 +301,9 @@ msgstr "Bi alboetan"
 msgid "Select Monitor"
 msgstr "Monitorea Aukeratu"
 
+#. appearance settings
 #. Button Layout
-#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock.c:496
+#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:481
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -365,54 +366,64 @@ msgstr "Ekintza mota hautatu:"
 msgid "Quit + Lock screen"
 msgstr "Pantaila blokeatu + Itxi"
 
-#. Use format characters from strftime(3)
-#. * to get the proper string for your locale.
-#. * I used these:
-#. * %A  : full weekday name
-#. * %d  : day of the month
-#. * %B  : full month name
-#. * %Y  : four digit year
-#.
-#: ../plugins/clock/clock.c:122
-msgid "%A %d %B %Y"
-msgstr "%A, %Y %B %d"
+#: ../plugins/clock/clock-dialog.c:346
+msgid "Custom"
+msgstr ""
 
-#: ../plugins/clock/clock.c:481 ../plugins/clock/clock.desktop.in.in.h:1
-msgid "Clock"
-msgstr "Ordularia"
+#: ../plugins/clock/clock-dialog.c:400
+#, fuzzy
+msgid "Display _seconds"
+msgstr "Segunduak bistarazi"
 
-#. Keep order in sync with XfceClockMode
-#: ../plugins/clock/clock.c:508
-msgid "Analog"
-msgstr "Analogikoa"
-
-#: ../plugins/clock/clock.c:509
-msgid "Digital"
-msgstr "Digitala"
-
-#: ../plugins/clock/clock.c:510
-msgid "LED"
-msgstr "LED"
-
-#: ../plugins/clock/clock.c:515 ../plugins/systray/systray.c:402
-msgid "Show _frame"
-msgstr "_Markoa Bistarazi"
-
-#: ../plugins/clock/clock.c:522
-msgid "Clock Options"
-msgstr "Ordulari Aukerak"
-
-#: ../plugins/clock/clock.c:530
+#: ../plugins/clock/clock-dialog.c:409
 msgid "Use 24-_hour clock"
 msgstr "24 _orduko ordularia erabili"
 
-#: ../plugins/clock/clock.c:537
-msgid "Show AM/PM"
+#: ../plugins/clock/clock-dialog.c:415
+#, fuzzy
+msgid "Sho_w AM/PM"
 msgstr "AM/PM bistarazi"
 
-#: ../plugins/clock/clock.c:544
-msgid "Display seconds"
-msgstr "Segunduak bistarazi"
+#: ../plugins/clock/clock-dialog.c:424
+msgid "True _binary clock"
+msgstr ""
+
+#. create dialog
+#: ../plugins/clock/clock-dialog.c:466
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Ordularia"
+
+#: ../plugins/clock/clock-dialog.c:491
+msgid "Analog"
+msgstr "Analogikoa"
+
+#: ../plugins/clock/clock-dialog.c:492
+msgid "Binary"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.c:493
+msgid "Digital"
+msgstr "Digitala"
+
+#: ../plugins/clock/clock-dialog.c:494
+#, fuzzy
+msgid "LCD"
+msgstr "LED"
+
+#: ../plugins/clock/clock-dialog.c:499 ../plugins/systray/systray.c:402
+msgid "Show _frame"
+msgstr "_Markoa Bistarazi"
+
+#. tooltip settings
+#: ../plugins/clock/clock-dialog.c:506
+msgid "Tooltip Format"
+msgstr ""
+
+#. clock settings
+#: ../plugins/clock/clock-dialog.c:532
+msgid "Clock Options"
+msgstr "Ordulari Aukerak"
 
 #: ../plugins/iconbox/iconbox.c:897
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -437,87 +448,87 @@ msgstr "Erabilgarri dagoen leku dena erabili"
 msgid "New Item"
 msgstr "Elementu berria"
 
-#: ../plugins/launcher/launcher-exec.c:487
+#: ../plugins/launcher/launcher-exec.c:515
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Ezin da \"%s\" abiarazi."
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:580
 msgid "No icon"
 msgstr "Ikonorik ez"
 
-#: ../plugins/launcher/launcher-dialog.c:597
+#: ../plugins/launcher/launcher-dialog.c:600
 msgid "Select a Directory"
 msgstr "Direktorio bat Aukeratu"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:644
 msgid "Select an Application"
 msgstr "Aplikazio bat Hautatu:"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:654
 msgid "All Files"
 msgstr "Fixtategi Guztiak"
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:659
 msgid "Executable Files"
 msgstr "Fixatetgi exekutagarriak"
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:674
 msgid "Perl Scripts"
 msgstr "Pero Script-ak"
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:680
 msgid "Python Scripts"
 msgstr "Python Script-ak"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:686
 msgid "Ruby Scripts"
 msgstr "Ruby Script-ak"
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:692
 msgid "Shell Scripts"
 msgstr "Shell Script-ak"
 
-#: ../plugins/launcher/launcher-dialog.c:760
+#: ../plugins/launcher/launcher-dialog.c:763
 msgid "Unknown"
 msgstr "Ezezaguna"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:766
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Hauatatu ikono bat \"%s\"-entzat"
 
-#: ../plugins/launcher/launcher-dialog.c:1101
+#: ../plugins/launcher/launcher-dialog.c:1104
 msgid "_Name"
 msgstr "Ize_na"
 
-#: ../plugins/launcher/launcher-dialog.c:1119
+#: ../plugins/launcher/launcher-dialog.c:1122
 msgid "_Description"
 msgstr "A_zalpena"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
+#: ../plugins/launcher/launcher-dialog.c:1141
 msgid "_Icon"
 msgstr "_Ikonoa"
 
-#: ../plugins/launcher/launcher-dialog.c:1156
+#: ../plugins/launcher/launcher-dialog.c:1159
 msgid "Co_mmand"
 msgstr "Ko_mandoa"
 
-#: ../plugins/launcher/launcher-dialog.c:1183
+#: ../plugins/launcher/launcher-dialog.c:1186
 msgid "_Working Directory"
 msgstr "_Lan Direktorioa"
 
-#: ../plugins/launcher/launcher-dialog.c:1215
+#: ../plugins/launcher/launcher-dialog.c:1218
 msgid "Run in _terminal"
 msgstr "_terminalean exekutatu"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1234
 msgid "Use _startup notification"
 msgstr "Erabili _hasiera berri emateak"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1488
+#: ../plugins/launcher/launcher-dialog.c:1503
 msgid "Program Launcher"
 msgstr "Abiarazleari menua gehitu"
 
@@ -537,18 +548,37 @@ msgstr "Zutabe kopurua:"
 msgid "Switch workspaces using the mouse wheel"
 msgstr "Idazmahai birtualak sagu erruberaren bidez txandakatu"
 
-#: ../plugins/separator/separator.c:255
+#: ../plugins/separator/separator.c:397
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator or Spacing"
 msgstr "Bereizlea edo Lekua"
 
-#: ../plugins/separator/separator.c:279
-msgid "_Draw Separator"
-msgstr "Bereizlea _Ipini"
+#: ../plugins/separator/separator.c:418
+#, fuzzy
+msgid "Separator Style"
+msgstr "Bereizlea edo Lekua"
 
-#: ../plugins/separator/separator.c:288
-msgid "_Expand"
-msgstr "_Zabaldu"
+#. space
+#: ../plugins/separator/separator.c:425
+msgid "_Empty Space"
+msgstr ""
+
+#: ../plugins/separator/separator.c:434
+msgid "_Expanding Empty Space"
+msgstr ""
+
+#: ../plugins/separator/separator.c:443
+msgid "_Line"
+msgstr ""
+
+#: ../plugins/separator/separator.c:452
+#, fuzzy
+msgid "_Handle"
+msgstr "Kudeatu:"
+
+#: ../plugins/separator/separator.c:461
+msgid "_Dots"
+msgstr ""
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -611,32 +641,32 @@ msgstr "Automatikoki taldekatu lanak"
 msgid "Always group tasks"
 msgstr "Beti _taldekatu lanak"
 
-#: ../plugins/windowlist/windowlist.c:242
+#: ../plugins/windowlist/windowlist.c:245
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
 msgstr "Ziur al zaude %d idazmahaia ezabatu nahi duzula?"
 
-#: ../plugins/windowlist/windowlist.c:243
+#: ../plugins/windowlist/windowlist.c:246
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr "Ziur al zaude '%s' idazmahaia ezabatu nahi duzula?"
 
-#: ../plugins/windowlist/windowlist.c:508
+#: ../plugins/windowlist/windowlist.c:511
 #, c-format
 msgid "Workspace %d"
 msgstr "%d Idazmahai"
 
-#: ../plugins/windowlist/windowlist.c:619
-#: ../plugins/windowlist/windowlist.c:625
+#: ../plugins/windowlist/windowlist.c:623
+#: ../plugins/windowlist/windowlist.c:629
 msgid "Add workspace"
 msgstr "Idazmahai gehitu"
 
-#: ../plugins/windowlist/windowlist.c:644
+#: ../plugins/windowlist/windowlist.c:648
 #, c-format
 msgid "Remove Workspace %d"
 msgstr "%d Idazmahai Ezabatu"
 
-#: ../plugins/windowlist/windowlist.c:645
+#: ../plugins/windowlist/windowlist.c:649
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr "'%s' Idazmahai Ezabatu"
@@ -756,6 +786,15 @@ msgstr "Leiho erabilgarri zerrenda bistarazi"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 Panel Kudeatzailea:"
+
+#~ msgid "%A %d %B %Y"
+#~ msgstr "%A, %Y %B %d"
+
+#~ msgid "_Draw Separator"
+#~ msgstr "Bereizlea _Ipini"
+
+#~ msgid "_Expand"
+#~ msgstr "_Zabaldu"
 
 #~ msgid ""
 #~ "\n"
