@@ -315,7 +315,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
         if (ticks >= 10)
         {
             /* draw the number and increase the offset*/
-            offset_x = xfce_clock_lcd_draw_digit (cr, ticks >= 20 ? 2 : 8, size, offset_x, offset_y);
+            offset_x = xfce_clock_lcd_draw_digit (cr, ticks >= 20 ? 2 : 1, size, offset_x, offset_y);
         }
 
         /* draw the other number of the hour and increase the offset */
