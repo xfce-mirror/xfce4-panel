@@ -232,7 +232,6 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
     gdouble          xc, yc;
     gdouble          angle, radius;
     cairo_t         *cr;
-    time_t           now = time (0);
     struct tm        tm;
 
     g_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (clock), FALSE);
@@ -252,7 +251,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
     if (G_LIKELY (cr != NULL))
     {
         /* get the local time */
-        localtime_r (&now, &tm);
+        xfce_clock_util_get_localtime (&tm);
 
         /* set the line properties */
         cairo_set_line_width (cr, 1);

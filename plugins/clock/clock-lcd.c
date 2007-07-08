@@ -282,7 +282,6 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
     gdouble       offset_x, offset_y;
     gint          ticks, i;
     gdouble       size;
-    time_t        now = time (0);
     struct tm     tm;
 
     g_return_val_if_fail (XFCE_CLOCK_IS_LCD (clock), FALSE);
@@ -303,7 +302,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
     if (G_LIKELY (cr != NULL))
     {
         /* get the local time */
-        localtime_r (&now, &tm);
+        xfce_clock_util_get_localtime (&tm);
 
         /* draw the hours */
         ticks = tm.tm_hour;
@@ -372,11 +371,10 @@ xfce_clock_lcd_get_ratio (XfceClockLcd *clock)
 {
     gdouble   ratio;
     gint      ticks;
-    time_t    now = time (0);
     struct tm tm;
 
     /* get the local time */
-    localtime_r (&now, &tm);
+    xfce_clock_util_get_localtime (&tm);
 
     /* hour + minutes */
     ratio = (3 * 0.5 + 6 * RELATIVE_SPACE);

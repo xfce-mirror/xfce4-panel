@@ -318,13 +318,12 @@ xfce_clock_dialog_append_combobox_formats (GtkComboBox *combo,
                                            const gchar *current_format)
 {
     gint       i;
-    time_t     now = time (0);
     struct tm  tm;
     gchar     *string;
     gboolean   has_active = FALSE;
 
     /* get the local time */
-    localtime_r (&now, &tm);
+    xfce_clock_util_get_localtime (&tm);
 
     for (i = 0; formats[i] != NULL; i++)
     {

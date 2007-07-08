@@ -121,6 +121,9 @@ xfce_clock_digital_init (XfceClockDigital *clock)
 {
     /* init */
     clock->format = NULL;
+
+    /* center text */
+    gtk_label_set_justify (GTK_LABEL (clock), GTK_JUSTIFY_CENTER);
 }
 
 
@@ -202,20 +205,19 @@ xfce_clock_digital_update (gpointer user_data)
 {
     XfceClockDigital *clock = XFCE_CLOCK_DIGITAL (user_data);
     gchar            *string;
-    time_t            now = time (0);
     struct tm         tm;
 
     g_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (clock), FALSE);
     g_return_val_if_fail (clock->format != NULL, FALSE);
 
     /* get the local time */
-    localtime_r (&now, &tm);
+    xfce_clock_util_get_localtime (&tm);
 
     /* get the string */
     string = xfce_clock_util_strdup_strftime (clock->format, &tm);
 
     /* set the new label */
-    gtk_label_set_text (GTK_LABEL (clock), string);
+    gtk_label_set_markup (GTK_LABEL (clock), string);
 
     /* cleanup */
     g_free (string);

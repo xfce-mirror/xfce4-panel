@@ -264,7 +264,6 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
     gint             decimal_bcd[] = {80, 40, 20, 10, 8, 4, 2, 1};
     cairo_t         *cr;
     GdkColor         active, inactive;
-    time_t           now = time (0);
     struct tm        tm;
 
     g_return_val_if_fail (XFCE_CLOCK_IS_BINARY (clock), FALSE);
@@ -298,7 +297,7 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
     if (G_LIKELY (cr != NULL))
     {
         /* get the current time */
-        localtime_r (&now, &tm);
+        xfce_clock_util_get_localtime (&tm);
 
         /* walk the three or two time parts */
         for (i = 0; i < columns; i++)

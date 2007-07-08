@@ -82,6 +82,9 @@ struct _ClockPlugin
 };
 
 
+
+void      xfce_clock_util_get_localtime     (struct tm       *tm)    G_GNUC_INTERNAL;
+
 gchar    *xfce_clock_util_strdup_strftime   (const gchar     *format,
                                              const struct tm *tm)    G_GNUC_MALLOC G_GNUC_INTERNAL;
 

@@ -54,6 +54,23 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (xfce_clock_plugin_construct);
 
 
 /** utilities **/
+void
+xfce_clock_util_get_localtime (struct tm *tm)
+{
+    time_t now = time (0);
+
+#ifndef HAVE_LOCALTIME_R
+    struct tm *tmbuf;
+
+    tmbuf = localtime (&now);
+    *tm = *tmbuf;
+#else
+    localtime_r (&now, tm);
+#endif
+}
+
+
+
 static guint
 xfce_clock_util_interval_from_format (const gchar *format)
 {
@@ -93,7 +110,6 @@ xfce_clock_util_interval_from_format (const gchar *format)
 static guint
 xfce_clock_util_next_interval (guint timeout_interval)
 {
-    time_t    now = time (0);
     struct tm tm;
     GTimeVal  timeval;
     guint     interval;
@@ -105,7 +121,7 @@ xfce_clock_util_next_interval (guint timeout_interval)
     interval = 1000 - (timeval.tv_usec / 1000);
 
     /* get current time */
-    localtime_r (&now, &tm);
+    xfce_clock_util_get_localtime (&tm);
 
     /* add the interval time to the next update */
     switch (timeout_interval)
@@ -165,9 +181,8 @@ xfce_clock_tooltip_update (gpointer user_data)
 {
     ClockPlugin        *clock = (ClockPlugin *) user_data;
     gchar              *string;
-    time_t              now = time (0);
-    struct tm           tm;
     static GtkTooltips *tooltips = NULL;
+    struct tm           tm;
 
     g_return_val_if_fail (clock->tooltip_format != NULL, TRUE);
 
@@ -176,7 +191,7 @@ xfce_clock_tooltip_update (gpointer user_data)
         tooltips = gtk_tooltips_new ();
 
     /* get the local time */
-    localtime_r (&now, &tm);
+    xfce_clock_util_get_localtime (&tm);
 
     /* get the string */
     string = xfce_clock_util_strdup_strftime (clock->tooltip_format, &tm);
