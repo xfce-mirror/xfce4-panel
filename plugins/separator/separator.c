@@ -95,6 +95,7 @@ separator_expose (GtkWidget      *widget,
             case SEP_EXPAND:
                 /* do nothing */
                 break;
+
             case SEP_LINE:
                 if (horizontal)
                 {
@@ -125,6 +126,7 @@ separator_expose (GtkWidget      *widget,
                                      start, end, position);
                 }
                 break;
+
             case SEP_HANDLE:
                 x = allocation->x;
                 y = allocation->y;
@@ -142,9 +144,11 @@ separator_expose (GtkWidget      *widget,
                                   horizontal ? GTK_ORIENTATION_VERTICAL :
                                                GTK_ORIENTATION_HORIZONTAL);
                 break;
+
             case SEP_DOTS:
                 separator_paint_dots (widget, &(event->area), sep);
                 break;
+
             default:
                 /* do nothing */
                 break;
@@ -164,6 +168,8 @@ separator_add_widget (Separator *sep)
     widget = gtk_drawing_area_new ();
     gtk_widget_show (widget);
     gtk_container_add (GTK_CONTAINER (sep->plugin), widget);
+
+    xfce_panel_plugin_add_action_widget (sep->plugin, widget);
 
     g_signal_connect_after (widget, "expose-event",
                             G_CALLBACK (separator_expose), sep);
@@ -305,73 +311,79 @@ separator_construct (XfcePanelPlugin *plugin)
  * -------------------------------------------------------------------- */
 
 static void
-space_toggled (GtkToggleButton *tb, 
-               Separator       *sep)
+change_style (GtkToggleButton *tb, 
+              Separator       *sep,
+              SeparatorType    type)
 {
     if (gtk_toggle_button_get_active (tb))
     {
-        sep->type = SEP_SPACE;
-        if (GTK_BIN(sep->plugin)->child)
+        gboolean add_widget = FALSE;
+        gboolean expand     = FALSE;
+
+        sep->type = type;
+
+        switch( type )
+        {
+            case SEP_SPACE:
+                /* do nothing */
+                break;
+            case SEP_EXPAND:
+                expand = TRUE;
+                break;
+            case SEP_LINE:
+            case SEP_HANDLE:
+            case SEP_DOTS:
+                add_widget = TRUE;
+                break;
+        }
+
+        if (add_widget && !GTK_BIN(sep->plugin)->child)
+        {
+            separator_add_widget (sep);
+        }
+        else if (!add_widget && GTK_BIN(sep->plugin)->child)
+        {
             gtk_widget_destroy (GTK_BIN(sep->plugin)->child);
-        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
+        }
+
+        xfce_panel_plugin_set_expand (sep->plugin, expand);
         gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
     }
+}
+
+static void
+space_toggled (GtkToggleButton *tb, 
+               Separator       *sep)
+{
+    change_style (tb, sep, SEP_SPACE);
 }
 
 static void
 expand_toggled (GtkToggleButton *tb, 
                 Separator       *sep)
 {
-    if (gtk_toggle_button_get_active (tb))
-    {
-        sep->type = SEP_EXPAND;
-        if (GTK_BIN(sep->plugin)->child)
-            gtk_widget_destroy (GTK_BIN(sep->plugin)->child);
-        xfce_panel_plugin_set_expand (sep->plugin, TRUE);
-        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
-    }
+    change_style (tb, sep, SEP_EXPAND);
 }
 
 static void
 line_toggled (GtkToggleButton *tb, 
               Separator       *sep)
 {
-    if (gtk_toggle_button_get_active (tb))
-    {
-        sep->type = SEP_LINE;
-        if (!GTK_BIN(sep->plugin)->child)
-            separator_add_widget (sep);
-        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
-        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
-    }
+    change_style (tb, sep, SEP_LINE);
 }
 
 static void
 handle_toggled (GtkToggleButton *tb, 
                 Separator       *sep)
 {
-    if (gtk_toggle_button_get_active (tb))
-    {
-        sep->type = SEP_HANDLE;
-        if (!GTK_BIN(sep->plugin)->child)
-            separator_add_widget (sep);
-        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
-        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
-    }
+    change_style (tb, sep, SEP_HANDLE);
 }
 
 static void
 dots_toggled (GtkToggleButton *tb, 
               Separator       *sep)
 {
-    if (gtk_toggle_button_get_active (tb))
-    {
-        sep->type = SEP_DOTS;
-        if (!GTK_BIN(sep->plugin)->child)
-            separator_add_widget (sep);
-        xfce_panel_plugin_set_expand (sep->plugin, FALSE);
-        gtk_widget_queue_draw (GTK_WIDGET(sep->plugin));
-    }
+    change_style (tb, sep, SEP_DOTS);
 }
 
 static void
@@ -408,7 +420,7 @@ separator_properties_dialog (XfcePanelPlugin *plugin,
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
 
     g_signal_connect (dlg, "response", G_CALLBACK (separator_dialog_response),
-                      plugin);
+                      sep);
 
     gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
 
