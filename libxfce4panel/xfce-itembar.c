@@ -360,11 +360,11 @@ static void
 xfce_itembar_size_request (GtkWidget      *widget,
                            GtkRequisition *requisition)
 {
-  XfceItembarPrivate *priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (widget));
-  XfceItembarChild   *child;
-  GSList             *l;
-  GtkRequisition      req;
-  gint                max, other_size;
+    XfceItembarPrivate *priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (widget));
+    XfceItembarChild   *child;
+    GSList             *l;
+    GtkRequisition      req;
+    gint                max, other_size;
 
     requisition->width = requisition->height =
         2 * GTK_CONTAINER (widget)->border_width;
@@ -397,11 +397,11 @@ xfce_itembar_size_request (GtkWidget      *widget,
     if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
     {
         requisition->height += max;
-        requisition->width += other_size;
+        requisition->width  += other_size;
     }
     else
     {
-        requisition->width += max;
+        requisition->width  += max;
         requisition->height += other_size;
     }
 }
@@ -412,64 +412,67 @@ static void
 xfce_itembar_size_allocate (GtkWidget     *widget,
                             GtkAllocation *allocation)
 {
-    XfceItembarPrivate *priv = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (widget));
+    XfceItembarPrivate *priv;
     XfceItembarChild   *child;
-    gint                n, i, x, y, bar_height, total_size;
-    gint                n_expand, expand_width, max_expand, total_expand;
-    gint                border_width;
-    GSList             *l;
-    gint                width, height;
-    gint                real_expand_width, size;
     GtkRequisition      req;
     GtkTextDirection    direction;
-
+    GSList             *l;
+    gint                n_total, i;
+    gint                x, y, width, height, size;
+    gint                border_width, bar_height, total_size;
+    gint                n_expand, expand_width, max_expand, total_expand;
+    gboolean            horizontal;
     struct ItemProps
     {
-        GtkAllocation allocation;
-        guint         expand : 1;
-    } *props;
+        GtkAllocation       allocation;
+        gboolean            expand;
+    }                  *props;
 
+    /* itembar allocation */
     widget->allocation = *allocation;
 
+    priv         = XFCE_ITEMBAR_GET_PRIVATE (XFCE_ITEMBAR (widget));
+    horizontal   = (GTK_ORIENTATION_HORIZONTAL == priv->orientation);
+
     border_width = GTK_CONTAINER (widget)->border_width;
+    x            = allocation->x + border_width;
+    y            = allocation->y + border_width;
 
-    n_expand = expand_width = max_expand = 0;
-    bar_height = total_size = 0;
-
-    x = allocation->x + border_width;
-    y = allocation->y + border_width;
-
-    if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
+    if (horizontal)
     {
-        expand_width = allocation->width - 2 * border_width;
+        total_size = allocation->width - 2 * border_width;
         bar_height = allocation->height - 2 * border_width;
 
         if (priv->event_window != NULL)
         {
             gdk_window_move_resize (priv->event_window,
-                                    x, y, expand_width, bar_height);
+                                    x, y, total_size, bar_height);
         }
     }
     else
     {
-        expand_width = allocation->height - 2 * border_width;
+        total_size = allocation->height - 2 * border_width;
         bar_height = allocation->width - 2 * border_width;
 
         if (priv->event_window != NULL)
         {
             gdk_window_move_resize (priv->event_window,
-                                    x, y, bar_height, expand_width);
+                                    x, y, bar_height, total_size);
         }
     }
 
-    total_size = expand_width;
-    direction = gtk_widget_get_direction (widget);
+    total_expand = total_size;
+    direction    = gtk_widget_get_direction (widget);
+    n_total      = g_slist_length (priv->children);
+    props        = g_new (struct ItemProps, n_total);
 
-    n = g_slist_length (priv->children);
+    n_expand = expand_width = max_expand = 0;
 
-    props = g_new (struct ItemProps, n);
-
-    /* first pass */
+    /* - get size request for all items
+     * - get number of expanding items
+     * - determine space available for expanding items
+     * - determine largest width of expanding items 
+     */
     for (l = priv->children, i = 0; l != NULL; l = l->next, i++)
     {
         child = l->data;
@@ -481,11 +484,10 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
         }
 
         gtk_widget_size_request (child->widget, &req);
-        width = req.width;
-        height = req.height;
 
-        if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
+        if (horizontal)
         {
+            width  = req.width;
             height = bar_height;
 
             if (child->expand && priv->expand_allowed)
@@ -495,12 +497,13 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
             }
             else
             {
-                expand_width -= width;
+                total_expand -= width;
             }
         }
         else
         {
-            width = bar_height;
+            height = req.height;
+            width  = bar_height;
 
             if (child->expand && priv->expand_allowed)
             {
@@ -509,45 +512,46 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
             }
             else
             {
-                expand_width -= height;
+                total_expand -= height;
             }
         }
 
-        props[i].allocation.width = width;
+        props[i].allocation.width  = width;
         props[i].allocation.height = height;
         props[i].expand = (child->expand && priv->expand_allowed);
     }
 
-    total_expand = expand_width;
-
+    /* check if expanding items fit */
     while (n_expand > 0)
     {
-        real_expand_width = MAX (expand_width / n_expand, 0);
+        /* space available for 1 expanding item */
+        expand_width = MAX (total_expand / n_expand, 0);
 
-        /* if it fits, continue */
-        if (real_expand_width >= max_expand)
+        /* if it fits, we're done */
+        if (expand_width >= max_expand)
         {
-            expand_width = real_expand_width;
             break;
         }
 
         max_expand = 0;
 
-        /* remove bigger items from expand list */
-        for (i = 0; i < n; ++i)
+        /* - remove bigger items from expand list 
+         * - recalculate n_expand, total_expand and max_expand
+         */
+        for (i = 0; i < n_total; ++i)
         {
             if (!props[i].expand)
                 continue;
 
-            if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
+            if (horizontal)
                 size = props[i].allocation.width;
             else
                 size = props[i].allocation.height;
 
-            if (size > real_expand_width)
+            if (size > expand_width)
             {
                 props[i].expand = FALSE;
-                expand_width -= size;
+                total_expand -= size;
                 n_expand--;
             }
             else
@@ -559,7 +563,7 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
 
     x = y = border_width;
 
-    /* second pass */
+    /* allocate items */
     for (l = priv->children, i = 0; l != NULL; l = l->next, i++)
     {
         child = l->data;
@@ -570,7 +574,7 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
         props[i].allocation.x = x + allocation->x;
         props[i].allocation.y = y + allocation->y;
 
-        if (GTK_ORIENTATION_HORIZONTAL == priv->orientation)
+        if (horizontal)
         {
             /* to cope with rounding errors, the last expanded child
              * gets all of the remaining expanded space */
