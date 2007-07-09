@@ -53,8 +53,8 @@ typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
  * @argc : number of arguments to the plugin
  * @argv : argument array
  *
- * Callback function that is run in an external plugin before gtk_init(). It 
- * should return %FALSE if the plugin is not available for whatever reason. 
+ * Callback function that is run in an external plugin before gtk_init(). It
+ * should return %FALSE if the plugin is not available for whatever reason.
  * The function can be given as argument to one of the registration macros.
  *
  * The main purpose of this callback is to allow multithreaded plugins to call
@@ -63,6 +63,7 @@ typedef void (*XfcePanelPluginFunc) (XfcePanelPlugin *plugin);
  * Returns: %TRUE on success, %FALSE otherwise.
  *
  * See also: XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL()
+ * Since: 4.5
  **/
 typedef gboolean (*XfcePanelPluginPreInit) (int argc, char **argv);
 
@@ -71,7 +72,7 @@ typedef gboolean (*XfcePanelPluginPreInit) (int argc, char **argv);
  * @screen : the #GdkScreen the panel is running on
  *
  * Callback function that is run before creating a plugin. It should return
- * %FALSE if the plugin is not available for whatever reason. The function 
+ * %FALSE if the plugin is not available for whatever reason. The function
  * can be given as argument to one of the registration macros.
  *
  * Returns: %TRUE if the plugin can be started, %FALSE otherwise.

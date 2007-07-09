@@ -74,13 +74,14 @@ G_BEGIN_DECLS
  *
  *   gboolean init( int argc, char **argv );
  *
- * The @check functions is run aftern gtk_init() and before creating the 
- * plugin; it takes one argument and should return FALSE if plugin creation 
+ * The @check functions is run aftern gtk_init() and before creating the
+ * plugin; it takes one argument and should return FALSE if plugin creation
  * is not possible:
  *
  *   gboolean check( GdkScreen *screen );
  *
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
+ * Since: 4.5
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,init,check)		\
     gint                                                           		\
