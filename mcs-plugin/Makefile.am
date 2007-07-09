@@ -17,7 +17,9 @@ libxfce4settings_la_SOURCES =						\
 
 libxfce4settings_la_CFLAGS =						\
 	-I$(top_srcdir)							\
+	-DDATADIR=\"$(datadir)\"					\
 	-DLOCALEDIR=\"$(localedir)\"					\
+	-DG_LOG_DOMAIN=\"panel-mcs-plugin\"				\
 	@LIBXFCEGUI4_CFLAGS@						\
 	@XFCE_MCS_MANAGER_CFLAGS@
 

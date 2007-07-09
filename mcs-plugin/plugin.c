@@ -5,7 +5,7 @@
  *  Copyright © 2006 Jasper Huijsmans <jasper@xfce.org>
  *
  *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published 
+ *  it under the terms of the GNU General Public License as published
  *  by the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
@@ -33,27 +33,37 @@ static void run_dialog (McsPlugin * mcs_plugin);
 
 /* plugin init */
 McsPluginInitResult
-mcs_plugin_init (McsPlugin * mcs_plugin)
+mcs_plugin_init (McsPlugin * plugin)
 {
-    /* 
-       This is required for UTF-8 at least - Please don't remove it
-       And it needs to be done here for the label to be properly
-       localized....
-     */
+    GtkIconTheme *icon_theme;
+
+    /* setup i18n support */
     xfce_textdomain (GETTEXT_PACKAGE, LOCALEDIR, "UTF-8");
 
-    mcs_plugin->plugin_name = g_strdup ("xfce4panel");
-    mcs_plugin->caption = g_strdup (_("Panel"));
-    mcs_plugin->run_dialog = run_dialog;
-    mcs_plugin->icon = xfce_themed_icon_load ("xfce4-panel", 48);
+    /* initialize plugin structure */
+    plugin->plugin_name = g_strdup ("xfce4panel");
+    plugin->caption = g_strdup (_("Panel"));
+    plugin->run_dialog = run_dialog;
 
-    return (MCS_PLUGIN_INIT_OK);
+    /* lookup the icon (on the default icon theme, *sigh*) */
+    icon_theme = gtk_icon_theme_get_default ();
+    plugin->icon = gtk_icon_theme_load_icon (icon_theme, "xfce4-panel", 48, 0, NULL);
+
+    /* if that didn't work, we know where we installed the icon, so load it directly */
+    if (G_UNLIKELY (plugin->icon == NULL))
+        plugin->icon = gdk_pixbuf_new_from_file (DATADIR "/icons/hicolor/48x48/apps/xfce4-panel.png", NULL);
+
+    /* attach icon name to the plugin icon (if any) */
+    if (G_LIKELY (plugin->icon != NULL))
+        g_object_set_data_full (G_OBJECT (plugin->icon), "mcs-plugin-icon-name", g_strdup ("xfce4-panel"), g_free);
+
+    return MCS_PLUGIN_INIT_OK;
 }
 
 /* settings dialog */
 static void
 run_dialog (McsPlugin * mcs_plugin)
 {
-    g_spawn_command_line_async("xfce4-panel -c", NULL);
+    g_spawn_command_line_async ("xfce4-panel -c", NULL);
 }
 
