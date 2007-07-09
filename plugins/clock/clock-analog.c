@@ -35,7 +35,7 @@
 #include "clock-analog.h"
 
 #ifndef M_PI
-#define M_PI 3.141592654
+#define M_PI 3.14159265358979323846
 #endif
 
 #define CLOCK_SCALE 0.1

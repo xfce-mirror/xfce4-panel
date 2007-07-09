@@ -77,8 +77,10 @@ typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
 XfceScreenPosition;
 
 /**
- * xfce_screen_position_is_horizontal
+ * xfce_screen_position_is_horizontal:
  * @position : the #XfceScreenPosition
+ *
+ * Whether the current #XfceScreenPosition is horizontal.
  *
  * Returns: %TRUE if horizontal, %FALSE otherwise
  **/
@@ -88,8 +90,10 @@ XfceScreenPosition;
       position <= XFCE_SCREEN_POSITION_FLOATING_H))
 
 /**
- * xfce_screen_position_get_orientation
+ * xfce_screen_position_get_orientation:
  * @position : the #XfceScreenPosition
+ *
+ * Converts the current #XfceScreenPosition into a #GtkOrientation.
  *
  * Returns: the #GtkOrientation corresponding to @position.
  **/
@@ -98,8 +102,10 @@ XfceScreenPosition;
         GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL)
 
 /**
- * xfce_screen_position_is_floating
+ * xfce_screen_position_is_floating:
  * @position : the #XfceScreenPosition
+ *
+ * Whether the current #XfceScreenPosition is floating on the screen.
  *
  * Returns: %TRUE if floating, %FALSE otherwise.
  **/
@@ -108,8 +114,11 @@ XfceScreenPosition;
      position == XFCE_SCREEN_POSITION_NONE)
 
 /**
- * xfce_screen_position_is_top
+ * xfce_screen_position_is_top:
  * @position : the #XfceScreenPosition
+ *
+ * Whether the current #XfceScreenPosition is above of the center of
+ * the screen.
  *
  * Returns: %TRUE if on the top of the screen, %FALSE otherwise
  **/
@@ -118,8 +127,11 @@ XfceScreenPosition;
      position <= XFCE_SCREEN_POSITION_NE_H)
 
 /**
- * xfce_screen_position_is_left
+ * xfce_screen_position_is_left:
  * @position : the #XfceScreenPosition
+ *
+ * Whether the current #XfceScreenPosition is left of the center of
+ * the screen.
  *
  * Returns: %TRUE if on the left of the screen, %FALSE otherwise
  **/
@@ -128,8 +140,11 @@ XfceScreenPosition;
      position <= XFCE_SCREEN_POSITION_SW_V)
 
 /**
- * xfce_screen_position_is_right
+ * xfce_screen_position_is_right:
  * @position : the #XfceScreenPosition
+ *
+ * Whether the current #XfceScreenPosition is right of the center of
+ * the screen.
  *
  * Returns: %TRUE if on the right of the screen, %FALSE otherwise
  **/
@@ -138,8 +153,11 @@ XfceScreenPosition;
      position <= XFCE_SCREEN_POSITION_SE_V)
 
 /**
- * xfce_screen_position_is_bottom
+ * xfce_screen_position_is_bottom:
  * @position : the #XfceScreenPosition
+ *
+ * Whether the current #XfceScreenPosition is below of the center of
+ * the screen.
  *
  * Returns: %TRUE if on the bottom of the screen, %FALSE otherwise
  **/

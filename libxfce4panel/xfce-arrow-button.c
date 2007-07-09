@@ -279,20 +279,22 @@ xfce_arrow_button_child_type (GtkContainer *container)
  * xfce_arrow_button_new:
  * @type : #GtkArrowType for the arrow button
  *
- * Returns: newly created #XfceArrowButton widget.
+ * Creates a new #XfceArrowButton widget.
+ *
+ * Returns: The newly created #XfceArrowButton widget.
  **/
 GtkWidget *
 xfce_arrow_button_new (GtkArrowType type)
 {
-    return g_object_new (XFCE_TYPE_ARROW_BUTTON, "arrow_type", type, NULL);
+    return g_object_new (XFCE_TYPE_ARROW_BUTTON, "arrow-type", type, NULL);
 }
 
 
 
 /**
  * xfce_arrow_button_set_arrow_type:
- * @button : an #XfceArrowButton
- * @type   : new #GtkArrowType to set
+ * @button : a #XfceArrowButton
+ * @type   : a valid  #GtkArrowType
  *
  * Sets the arrow type for @button.
  **/
@@ -315,7 +317,9 @@ xfce_arrow_button_set_arrow_type (XfceArrowButton *button,
 
 /**
  * xfce_arrow_button_get_arrow_type:
- * @button : an #XfceArrowButton
+ * @button : a #XfceArrowButton
+ *
+ * Returns the value of the ::arrow-type property.
  *
  * Returns: the #GtkArrowType of @button.
  **/

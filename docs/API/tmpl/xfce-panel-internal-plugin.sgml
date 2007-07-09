@@ -2,9 +2,7 @@
 XfceInternalPanelPlugin
 
 <!-- ##### SECTION Short_Description ##### -->
-<para>
 Internal panel plugin.
-</para>
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -23,10 +21,11 @@ for internal plugins (loadable modules).
 <!-- ##### STRUCT XfceInternalPanelPlugin ##### -->
 <para>
 The #XfceInternalPanelPlugin-struct struct contains private data only, and
-should be accessed using the functions for the 
+should be accessed using the functions for the
 <link linkend="XfcePanelPlugin">XfcePanelPlugin Interface</link>.
 </para>
 
+@parent: 
 
 <!-- ##### FUNCTION xfce_internal_panel_plugin_new ##### -->
 <para>

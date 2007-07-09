@@ -2,9 +2,7 @@
 XfceHVBox
 
 <!-- ##### SECTION Short_Description ##### -->
-<para>
 Container widget with configurable orienation.
-</para>
 
 <!-- ##### SECTION Long_Description ##### -->
 <para>
@@ -22,7 +20,8 @@ It is in fact a combination of #GtkHBox and #GtkVBox.
 
 <!-- ##### STRUCT XfceHVBox ##### -->
 <para>
-
+The #XfceHVBox struct contains private data only, and
+should be accessed using the functions below.
 </para>
 
 
@@ -31,10 +30,10 @@ It is in fact a combination of #GtkHBox and #GtkVBox.
 
 </para>
 
-@orientation: 
-@homogeneous: 
-@spacing: 
-@Returns: 
+@orientation:
+@homogeneous:
+@spacing:
+@Returns:
 
 
 <!-- ##### FUNCTION xfce_hvbox_set_orientation ##### -->
@@ -42,7 +41,7 @@ It is in fact a combination of #GtkHBox and #GtkVBox.
 
 </para>
 
-@hvbox: 
-@orientation: 
+@hvbox:
+@orientation:
 
 

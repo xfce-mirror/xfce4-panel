@@ -471,7 +471,7 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
     /* - get size request for all items
      * - get number of expanding items
      * - determine space available for expanding items
-     * - determine largest width of expanding items 
+     * - determine largest width of expanding items
      */
     for (l = priv->children, i = 0; l != NULL; l = l->next, i++)
     {
@@ -535,7 +535,7 @@ xfce_itembar_size_allocate (GtkWidget     *widget,
 
         max_expand = 0;
 
-        /* - remove bigger items from expand list 
+        /* - remove bigger items from expand list
          * - recalculate n_expand, total_expand and max_expand
          */
         for (i = 0; i < n_total; ++i)
@@ -1023,6 +1023,8 @@ _find_drop_index (XfceItembar *itembar,
  * xfce_itembar_new:
  * @orientation : #GtkOrientation for new itembar.
  *
+ * Creates a new #XfceItembar widget.
+ *
  * Returns: new #XfceItembar widget with @orientation.
  **/
 GtkWidget *
@@ -1036,7 +1038,8 @@ xfce_itembar_new (GtkOrientation orientation)
 
 /**
  * xfce_itembar_set_allow_expand:
- * @allow : %TRUE when the expansion is allowed.
+ * @itembar: a #XfceItembar
+ * @allow   : %TRUE when the expansion is allowed.
  *
  * Set whether the 'expand' child property is honored.
  *
@@ -1060,7 +1063,9 @@ xfce_itembar_set_allow_expand (XfceItembar *itembar,
 
 /**
  * xfce_itembar_get_orientation:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
+ *
+ * Return the orientation of the #XfceItembar.
  *
  * Returns: #GtkOrienation of @itembar.
  **/
@@ -1080,7 +1085,7 @@ xfce_itembar_get_orientation (XfceItembar *itembar)
 
 /**
  * xfce_itembar_set_orientation:
- * @itembar     : an #XfceItembar
+ * @itembar     : a #XfceItembar
  * @orientation : new #GtkOrientation
  *
  * Set the orienation of @itembar.
@@ -1112,7 +1117,7 @@ xfce_itembar_set_orientation (XfceItembar    *itembar,
 
 /**
  * xfce_itembar_insert:
- * @itembar  : an #XfceItembar
+ * @itembar  : a #XfceItembar
  * @item     : #GtkWidget to insert
  * @position : position for @item
  *
@@ -1148,7 +1153,7 @@ xfce_itembar_insert (XfceItembar *itembar,
 
 /**
  * xfce_itembar_append:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @item    : #GtkWidget to add
  *
  * Add a new item at the end of @itembar.
@@ -1164,7 +1169,7 @@ xfce_itembar_append (XfceItembar *itembar,
 
 /**
  * xfce_itembar_prepend:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @item    : #GtkWidget to add
  *
  * Add a new item at the start of @itembar.
@@ -1180,7 +1185,7 @@ xfce_itembar_prepend (XfceItembar *itembar,
 
 /**
  * xfce_itembar_reorder_child:
- * @itembar  : an #XfceItembar
+ * @itembar  : a #XfceItembar
  * @item     : a child #GtkWidget of @itembar
  * @position : new index for @item
  *
@@ -1225,8 +1230,11 @@ xfce_itembar_reorder_child (XfceItembar *itembar,
 
 /**
  * xfce_itembar_get_child_expand:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @item    : a child #GtkWidget of @itembar
+ *
+ * Return if the #GtkWidget in the #XfceItembar expands when the panel
+ * is resized.
  *
  * Returns: %TRUE if @item will expand when the size of @itembar increases,
  *          otherwise %FALSE.
@@ -1260,7 +1268,7 @@ xfce_itembar_get_child_expand (XfceItembar *itembar,
 
 /**
  * xfce_itembar_set_child_expand:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @item    : a child #GtkWidget of @itembar
  * @expand  : whether to expand the item
  *
@@ -1298,7 +1306,9 @@ xfce_itembar_set_child_expand (XfceItembar *itembar,
 
 /**
  * xfce_itembar_get_n_items:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
+ *
+ * Return the number of items on a #XfceItembar.
  *
  * Returns: the number of items on @itembar.
  **/
@@ -1318,8 +1328,10 @@ xfce_itembar_get_n_items (XfceItembar *itembar)
 
 /**
  * xfce_itembar_get_item_index:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @item    : a child #GtkWidget of @itembar
+ *
+ * The index if the child #GtkWidget in a #XfceItembar.
  *
  * Returns: the index of @item or -1 if @itembar does not contain @item.
  **/
@@ -1354,8 +1366,11 @@ xfce_itembar_get_item_index (XfceItembar *itembar,
 
 /**
  * xfce_itembar_get_nth_item:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @n       : a position on the itembar
+ *
+ * Return the #GtkWidget inside the #XfceItembar with the @n<!-- -->'s
+ * index.
  *
  * Returns: the @n<!-- -->'s item on @itembar, or %NULL if the
  * itembar does not contain an @n<!-- -->'th item.
@@ -1386,7 +1401,7 @@ xfce_itembar_get_nth_item (XfceItembar *itembar,
 
 /**
  * xfce_itembar_raise_event_window:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  *
  * Raise the event window of @itembar. This causes all events, like
  * mouse clicks or key presses to be send to the itembar and not to
@@ -1413,7 +1428,7 @@ xfce_itembar_raise_event_window (XfceItembar *itembar)
 
 /**
  * xfce_itembar_lower_event_window:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  *
  * Lower the event window of @itembar. This causes all events, like
  * mouse clicks or key presses to be send to the items, before reaching the
@@ -1440,7 +1455,9 @@ xfce_itembar_lower_event_window (XfceItembar *itembar)
 
 /**
  * xfce_itembar_event_window_is_raised:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
+ *
+ * Whether the event window of the #XfceItembar is raised.
  *
  * Returns: %TRUE if event window is raised.
  **/
@@ -1460,9 +1477,12 @@ xfce_itembar_event_window_is_raised (XfceItembar *itembar)
 
 /**
  * xfce_itembar_get_item_at_point:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @x       : x coordinate relative to the itembar window
  * @y       : y coordinate relative to the itembar window
+ *
+ * Return the #GtkWidget in the #XfceItembar that is below the (x,y)
+ * coordinate.
  *
  * Returns: a #GtkWidget or %NULL.
  **/
@@ -1504,7 +1524,7 @@ xfce_itembar_get_item_at_point (XfceItembar *itembar,
 
 /**
  * xfce_itembar_get_drop_index:
- * @itembar : an #XfceItembar
+ * @itembar : a #XfceItembar
  * @x       : x coordinate of a point on the itembar
  * @y       : y coordinate of a point on the itembar
  *

@@ -1,22 +1,75 @@
-<?xml version="1.0"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
-               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
-<book id="index" xmlns:xi="http://www.w3.org/2003/XInclude">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
+               "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+
+<!ENTITY XfcePanelMacros SYSTEM "xml/libxfce4panel-macros.xml">
+<!ENTITY StandardEnumerations SYSTEM "xml/xfce-panel-enums.xml">
+<!ENTITY RegisterPanelPlugin SYSTEM "xml/xfce-panel-plugin.xml">
+<!ENTITY XfcePanelPlugin SYSTEM "xml/xfce-panel-plugin-iface.xml">
+<!ENTITY XfceExternalPanelPlugin SYSTEM "xml/xfce-panel-external-plugin.xml">
+<!ENTITY XfceInternalPanelPlugin SYSTEM "xml/xfce-panel-internal-plugin.xml">
+<!ENTITY XfceHVBox SYSTEM "xml/xfce-hvbox.xml">
+<!ENTITY XfceArrowButton SYSTEM "xml/xfce-arrow-button.xml">
+<!ENTITY XfcePanelWindow SYSTEM "xml/xfce-panel-window.xml">
+<!ENTITY XfceItembar SYSTEM "xml/xfce-itembar.xml">
+<!ENTITY PanelConvenience SYSTEM "xml/xfce-panel-convenience.xml">
+
+<!ENTITY version SYSTEM "version.xml">
+<!ENTITY date "July 2007">
+]>
+
+<book id="index">
   <bookinfo>
-    <title>libxfce4panel Reference Manual</title>
+    <title>Libxfce4panel Reference Manual</title>
+    <releaseinfo>Version &version;</releaseinfo>
+    <pubdate>&date;</pubdate>
+
+    <copyright>
+      <year>2006</year>
+      <year>2007</year>
+      <holder>Jasper Huijsmans</holder>
+      <holder>Nick Schermer</holder>
+    </copyright>
+
+    <legalnotice id="legalnotice">
+      <para>
+        Permission is granted to copy, distribute and/or modify this document
+        under the terms of the GNU Free Documentation License, Version 1.1 or
+        any later version published by the Free Software Foundation; with no
+        Invariant Sections, with no Front-Cover Texts, and with no Back-Cover
+        Texts. The complete license text is available from the <ulink
+        type="http" url="http://www.gnu.org/">Free Software Foundation</ulink>.
+      </para>
+    </legalnotice>
   </bookinfo>
 
-  <chapter>
-    <title>API Reference</title>
-    <xi:include href="xml/xfce-panel-plugin.xml"/>
-    <xi:include href="xml/xfce-panel-plugin-iface.xml"/>
-    <xi:include href="xml/xfce-panel-external-plugin.xml"/>
-    <xi:include href="xml/xfce-panel-internal-plugin.xml"/>
-    <xi:include href="xml/xfce-panel-convenience.xml"/>
-    <xi:include href="xml/xfce-arrow-button.xml"/>
-    <xi:include href="xml/xfce-panel-window.xml"/>
-    <xi:include href="xml/xfce-itembar.xml"/>
-    <xi:include href="xml/xfce-hvbox.xml"/>
-    <xi:include href="xml/xfce-panel-enums.xml"/>
+  <chapter id="libxfce4panel-fundamentals">
+    <title>Fundamentals</title>
+
+    &XfcePanelMacros;
+    &StandardEnumerations;
   </chapter>
+
+  <chapter id="libxfce4panel-panel">
+    <title>Panel Plugins</title>
+
+    &RegisterPanelPlugin;
+    &XfcePanelPlugin;
+    &XfceExternalPanelPlugin;
+    &XfceInternalPanelPlugin;
+  </chapter>
+
+  <chapter id="libxfce4panel-widgets">
+    <title>Widgets</title>
+
+    &XfceArrowButton;
+    &XfceHVBox;
+    &XfceItembar;
+    &XfcePanelWindow;
+    &PanelConvenience;
+  </chapter>
+
+  <index>
+    <title>Index</title>
+  </index>
 </book>

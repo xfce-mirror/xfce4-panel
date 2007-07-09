@@ -53,7 +53,7 @@ xfce_create_panel_button (void)
 
 
 /**
- * xfce_create_panel_button:
+ * xfce_create_panel_toggle_button:
  *
  * Create regular #GtkToggleButton with a few properties set to be useful in
  * Xfce panel: Flat (%GTK_RELIEF_NONE), no focus on click and minimal padding.

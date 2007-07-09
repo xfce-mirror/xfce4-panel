@@ -296,7 +296,7 @@ xfce_panel_plugin_get_type (void)
 
 /**
  * _xfce_panel_plugin_signal_screen_position
- * @plugin   : an #XfcePanelPlugin
+ * @plugin   : a #XfcePanelPlugin
  * @position : the new #XfceScreenPosition of the panel.
  *
  * Should be called by implementations of the interface.
@@ -315,7 +315,7 @@ _xfce_panel_plugin_signal_screen_position (XfcePanelPlugin    *plugin,
 
 /**
  * _xfce_panel_plugin_signal_orientation
- * @plugin      : an #XfcePanelPlugin
+ * @plugin      : a #XfcePanelPlugin
  * @orientation : the new #GtkOrientation of the panel.
  *
  * Should be called by implementations of the interface.
@@ -334,7 +334,7 @@ _xfce_panel_plugin_signal_orientation (XfcePanelPlugin *plugin,
 
 /**
  * _xfce_panel_plugin_signal_size
- * @plugin      : an #XfcePanelPlugin
+ * @plugin      : a #XfcePanelPlugin
  * @size        : the new size of the panel.
  *
  * Should be called by implementations of the interface.
@@ -358,7 +358,7 @@ _xfce_panel_plugin_signal_size (XfcePanelPlugin *plugin,
 
 /**
  * _xfce_panel_plugin_signal_free_data
- * @plugin      : an #XfcePanelPlugin
+ * @plugin      : a #XfcePanelPlugin
  *
  * Should be called by implementations of the interface.
  **/
@@ -374,7 +374,7 @@ _xfce_panel_plugin_signal_free_data (XfcePanelPlugin *plugin)
 
 /**
  * _xfce_panel_plugin_signal_save
- * @plugin      : an #XfcePanelPlugin
+ * @plugin      : a #XfcePanelPlugin
  *
  * Should be called by implementations of the interface.
  **/
@@ -390,7 +390,7 @@ _xfce_panel_plugin_signal_save (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_signal_about
- * @plugin      : an #XfcePanelPlugin
+ * @plugin      : a #XfcePanelPlugin
  *
  * Should be called by implementations of the interface.
  **/
@@ -406,7 +406,7 @@ xfce_panel_plugin_signal_about (XfcePanelPlugin *plugin)
 
 /**
  * _xfce_panel_plugin_signal_configure
- * @plugin      : an #XfcePanelPlugin
+ * @plugin      : a #XfcePanelPlugin
  *
  * Should be called by implementations of the interface.
  **/
@@ -422,7 +422,7 @@ _xfce_panel_plugin_signal_configure (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_get_name
- * @plugin : an #XfcePanelPlugin
+ * @plugin : a #XfcePanelPlugin
  *
  * The plugin name identifies a plugin type and therefore must be unique.
  *
@@ -443,11 +443,11 @@ xfce_panel_plugin_get_name (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_get_id
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_get_id:
+ * @plugin : a #XfcePanelPlugin
  *
  * The plugin id is a unique identifier string that is given to every instance
- * of a panel plugin.
+ * of a panel plugin. The returned string must be free using g_free().
  *
  * Returns: the plugin id.
  **/
@@ -466,8 +466,8 @@ xfce_panel_plugin_get_id (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_get_display_name
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_get_display_name:
+ * @plugin : a #XfcePanelPlugin
  *
  * The display name is the (translated) plugin name that can be used in a user
  * interface, e.g. a dialog or a menu.
@@ -490,7 +490,9 @@ xfce_panel_plugin_get_display_name (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_get_size
- * @plugin : an #XfcePanelPlugin
+ * @plugin : a #XfcePanelPlugin
+ *
+ * The size of the panel that the plugin is part of.
  *
  * Returns: the current panel size.
  **/
@@ -510,7 +512,9 @@ xfce_panel_plugin_get_size (XfcePanelPlugin *plugin)
 
 /**
  * xfce_panel_plugin_get_screen_position
- * @plugin : an #XfcePanelPlugin
+ * @plugin : a #XfcePanelPlugin
+ *
+ * The #XfceScreenPosition of the panel that the plugin is part of.
  *
  * Returns: the current #XfceScreenPosition of the panel.
  **/
@@ -520,7 +524,7 @@ xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
     XfceScreenPosition screen_position;
 
     _panel_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin),
-                          XFCE_SCREEN_POSITION_S);
+                               XFCE_SCREEN_POSITION_S);
 
     g_object_get (G_OBJECT (plugin), I_("screen-position"), &screen_position,
                   NULL);
@@ -531,10 +535,12 @@ xfce_panel_plugin_get_screen_position (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_get_expand
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_get_expand:
+ * @plugin : a #XfcePanelPlugin
  *
- * Returns: whether the plugin will expand when the panel width increases.
+ * Return if this plugin will expand when the panel width increases.
+ *
+ * Returns: %TRUE when it will expand.
  **/
 gboolean
 xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
@@ -551,8 +557,10 @@ xfce_panel_plugin_get_expand (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_get_orientation
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_get_orientation:
+ * @plugin : a #XfcePanelPlugin
+ *
+ * Return the #GtkOrientation of the panel that the plugin is part of.
  *
  * Returns: the current #GtkOrientation of the panel.
  **/
@@ -573,8 +581,8 @@ xfce_panel_plugin_get_orientation (XfcePanelPlugin *plugin)
 
 
 /**
- * _xfce_panel_plugin_remove_confirm
- * @plugin : an #XfcePanelPlugin
+ * _xfce_panel_plugin_remove_confirm:
+ * @plugin : a #XfcePanelPlugin
  *
  * Ask the plugin to be removed.
  **/
@@ -619,8 +627,8 @@ _xfce_panel_plugin_remove_confirm (XfcePanelPlugin *plugin)
 
 
 /**
- * _xfce_panel_plugin_remove
- * @plugin : an #XfcePanelPlugin
+ * _xfce_panel_plugin_remove:
+ * @plugin : a #XfcePanelPlugin
  *
  * Remove the plugin from the panel.
  **/
@@ -633,8 +641,8 @@ _xfce_panel_plugin_remove (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_set_expand
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_set_expand:
+ * @plugin : a #XfcePanelPlugin
  * @expand : whether to expand the plugin
  *
  * Sets whether to expand the plugin when the width of the panel increases.
@@ -649,8 +657,8 @@ xfce_panel_plugin_set_expand (XfcePanelPlugin *plugin,
 
 
 /**
- * _xfce_panel_plugin_customize_panel
- * @plugin : an #XfcePanelPlugin
+ * _xfce_panel_plugin_customize_panel:
+ * @plugin : a #XfcePanelPlugin
  *
  * Ask the panel to show the settings dialog.
  **/
@@ -663,8 +671,8 @@ _xfce_panel_plugin_customize_panel (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_customize_items
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_customize_items:
+ * @plugin : a #XfcePanelPlugin
  *
  * Ask the panel to show the settings dialog, with the 'Add Items' tab shown.
  **/
@@ -677,8 +685,8 @@ _xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin)
 
 
 /**
- * _xfce_panel_plugin_move
- * @plugin : an #XfcePanelPlugin
+ * _xfce_panel_plugin_move:
+ * @plugin : a #XfcePanelPlugin
  *
  * Ask the panel to start a move operation.
  **/
@@ -691,8 +699,8 @@ xfce_panel_plugin_move (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_register_menu
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_register_menu:
+ * @plugin : a #XfcePanelPlugin
  * @menu   : a #GtkMenu that will be opened
  *
  * Register an open menu. This will make sure the panel will properly handle
@@ -708,8 +716,8 @@ xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
 
 
 /**
- * xfce_panel_plugin_focus_widget
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_focus_widget:
+ * @plugin : a #XfcePanelPlugin
  * @widget : widget to focus
  *
  * Grab the focus on @widget. Asks the panel to allow focus on its items and
@@ -727,8 +735,8 @@ xfce_panel_plugin_focus_widget (XfcePanelPlugin *plugin,
 
 
 /**
- * xfce_panel_plugin_set_panel_hidden
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_set_panel_hidden:
+ * @plugin : a #XfcePanelPlugin
  * @hidden : %FALSE to unhide, %TRUE to hide the panel
  *
  * Ask the panel to hide or unhide. This only has effect when autohide is
@@ -782,12 +790,6 @@ _plugin_menu_button_released (GtkWidget       *menu,
 
 
 
-/**
- * _xfce_panel_plugin_create_menu
- * @plugin          : an #XfcePanelPlugin
- *
- * This should only be called by implementors of the panel plugin interface.
- **/
 void
 _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
 {
@@ -922,8 +924,8 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
 
 
 /**
- * _xfce_panel_plugin_popup_menu
- * @plugin : an #XfcePanelPlugin
+ * _xfce_panel_plugin_popup_menu:
+ * @plugin : a #XfcePanelPlugin
  *
  * Shows the right-click menu.
  **/
@@ -998,8 +1000,8 @@ _plugin_popup_menu (GtkWidget       *widget,
 
 
 /**
- * xfce_panel_plugin_add_action_widget
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_add_action_widget:
+ * @plugin : a #XfcePanelPlugin
  * @widget : a #GtkWidget that receives mouse events
  *
  * Attach the plugin menu to this widget. Plugin writers should call this
@@ -1024,8 +1026,8 @@ xfce_panel_plugin_add_action_widget (XfcePanelPlugin *plugin,
 
 
 /**
- * xfce_panel_plugin_menu_insert_item
- * @plugin   : an #XfcePanelPlugin
+ * xfce_panel_plugin_menu_insert_item:
+ * @plugin   : a #XfcePanelPlugin
  * @item     : the menu item to add
  *
  * Insert custom menu item.
@@ -1057,8 +1059,8 @@ xfce_panel_plugin_menu_insert_item (XfcePanelPlugin *plugin,
 
 
 /**
- * xfce_panel_plugin_menu_show_about
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_menu_show_about:
+ * @plugin : a #XfcePanelPlugin
  *
  * Show the 'About' item in the menu. Clicking on the menu item will emit
  * the "about" signal.
@@ -1086,8 +1088,8 @@ xfce_panel_plugin_menu_show_about (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_menu_show_configure
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_menu_show_configure:
+ * @plugin : a #XfcePanelPlugin
  *
  * Show the 'Configure' item in the menu. Clicking on the menu item will emit
  * the "configure-plugin" signal.
@@ -1119,8 +1121,8 @@ xfce_panel_plugin_menu_show_configure (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_block_menu
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_block_menu:
+ * @plugin : a #XfcePanelPlugin
  *
  * Temporarily block the menu from being shown. This can be used by plugin
  * writers when the configuration dialog is active.
@@ -1139,8 +1141,8 @@ xfce_panel_plugin_block_menu (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_unblock_menu
- * @plugin : an #XfcePanelPlugin
+ * xfce_panel_plugin_unblock_menu:
+ * @plugin : a #XfcePanelPlugin
  *
  * Don't block the menu from being shown.
  *
@@ -1155,8 +1157,8 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_lookup_rc_file
- * @plugin    : an #XfcePanelPlugin
+ * xfce_panel_plugin_lookup_rc_file:
+ * @plugin    : a #XfcePanelPlugin
  *
  * Looks up unique filename associated with @plugin in standard configuration
  * locations. Uses xfce_resource_lookup() ginternally.
@@ -1188,8 +1190,8 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
 
 
 /**
- * xfce_panel_plugin_save_location
- * @plugin    : an #XfcePanelPlugin
+ * xfce_panel_plugin_save_location:
+ * @plugin    : a #XfcePanelPlugin
  * @create    : whether the file should be created
  *
  * Unique file location that can be used to store configuration information.
@@ -1222,13 +1224,6 @@ xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,
 
 
 
-/**
- * _xfce_panel_plugin_set_sensitive
- * @plugin    : an #XfcePanelPlugin
- * @sensitive : whether to make the widget sensitive
- *
- * This should only be called by plugin implementations.
- **/
 void
 _xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin,
                                   gboolean         sensitive)
