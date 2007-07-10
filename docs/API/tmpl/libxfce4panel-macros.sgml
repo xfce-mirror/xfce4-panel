@@ -19,7 +19,7 @@ when possible.
 
 <!-- ##### MACRO panel_slice_alloc ##### -->
 <para>
-Use g_slice_alloc is available, fallback to g_malloc.
+Use #g_slice_alloc when available, fallback to #g_malloc.
 </para>
 
 @block_size: the number of bytes to allocate
@@ -27,7 +27,7 @@ Use g_slice_alloc is available, fallback to g_malloc.
 
 <!-- ##### MACRO panel_slice_alloc0 ##### -->
 <para>
-Use g_slice_alloc0 is available, fallback to g_malloc0.
+Use #g_slice_alloc0 when available, fallback to #g_malloc0.
 </para>
 
 @block_size: the number of bytes to allocate
@@ -35,7 +35,7 @@ Use g_slice_alloc0 is available, fallback to g_malloc0.
 
 <!-- ##### MACRO panel_slice_free ##### -->
 <para>
-Use g_slice_free is available, fallback to g_free.
+Use #g_slice_free when available, fallback to #g_free.
 </para>
 
 @type: the type to allocate, typically a structure name
@@ -44,7 +44,7 @@ Use g_slice_free is available, fallback to g_free.
 
 <!-- ##### MACRO panel_slice_free1 ##### -->
 <para>
-Use g_slice_free1 is available, fallback to g_free.
+Use #g_slice_free1 when available, fallback to #g_free.
 </para>
 
 @block_size: the number of bytes to allocate
@@ -53,7 +53,7 @@ Use g_slice_free1 is available, fallback to g_free.
 
 <!-- ##### MACRO panel_slice_new ##### -->
 <para>
-Use g_slice_new is available, fallback to g_new.
+Use #g_slice_new when available, fallback to #g_new.
 </para>
 
 @type: 	the type to allocate, typically a structure name
@@ -61,7 +61,7 @@ Use g_slice_new is available, fallback to g_new.
 
 <!-- ##### MACRO panel_slice_new0 ##### -->
 <para>
-Use g_slice_new0 is available, fallback to g_new0.
+Use #g_slice_new0 when available, fallback to #g_new0.
 </para>
 
 @type: 	the type to allocate, typically a structure name
@@ -69,27 +69,27 @@ Use g_slice_new0 is available, fallback to g_new0.
 
 <!-- ##### MACRO PANEL_PARAM_READABLE ##### -->
 <para>
-Alias for G_PARAM_READABLE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB
+Alias for #G_PARAM_READABLE | #G_PARAM_STATIC_NAME | #G_PARAM_STATIC_NICK | #G_PARAM_STATIC_BLURB
 </para>
 
 
 
 <!-- ##### MACRO PANEL_PARAM_READWRITE ##### -->
 <para>
-Alias for G_PARAM_WRITABLE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB
+Alias for #G_PARAM_WRITABLE | #G_PARAM_STATIC_NAME | #G_PARAM_STATIC_NICK | #G_PARAM_STATIC_BLURB
 </para>
 
 
 
 <!-- ##### MACRO PANEL_PARAM_WRITABLE ##### -->
 <para>
-Alias for G_PARAM_READWRITE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB
+Alias for #G_PARAM_READWRITE | #G_PARAM_STATIC_NAME | #G_PARAM_STATIC_NICK | #G_PARAM_STATIC_BLURB
 </para>
 
 
 <!-- ##### MACRO I_ ##### -->
 <para>
-canonical representation for @string. This can be use in functions like g_object_get_data.
+Canonical representation for @string. This can be use in functions like #g_object_get_data.
 </para>
 
 @string: a string
