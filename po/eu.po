@@ -1,22 +1,22 @@
-# translation of eu.po to librezale
+# translation of eu.po to Euskara
 # Euskera translations for xfce4-panel package.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 #
 # Jon Latorre Martinez <patataman@airtel.net>, 2003.
-# Piarres Beobide Egaña <pi@beobide.net>, 2004, 2005, 2006.
+# Piarres Beobide Egaña <pi@beobide.net>, 2004, 2005, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.4.0\n"
+"Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-06 21:54+0200\n"
-"PO-Revision-Date: 2006-08-12 22:23+0200\n"
+"PO-Revision-Date: 2007-07-13 13:19+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
-"Language-Team: librezale <librezale@librezale.org>\n"
+"Language-Team: Euskara <Librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: ../config/launcher-7.rc.in.h:1
@@ -63,8 +63,7 @@ msgid "Remove \"%s\"?"
 msgstr "\"%s\" Ezabatu?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:608
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
 "Elementu hau paneletik ezabatua izango da eta bere konfigurazioa galdu "
 "egingo da."
@@ -141,61 +140,57 @@ msgstr "Garatzailea"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "Mezu hau bistarazi eta irten"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "Bistarazi notifikazio ikonoak"
+msgstr "Konfigurazio elkarrizketa bistarazi"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "Konfigurazioa gorde"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "Berrabiarazi"
+msgstr "Panelak berrabiarazi"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "Saioa amaitu"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Panel guztiak itxi eta programa amaitu"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "Elementu Berria Gehitu"
+msgstr "Elementu berriak gehitu"
 
 #: ../panel/main.c:90
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Ezin da \"%s\" abiarazi."
+msgstr "Huts panataila irekitzean"
 
 #: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Copyright (c) 2004-2007"
 
 #: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Xfce garapen taldea. Eskubide guztiak erreserbaturik."
 
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Mesedez programa erroreeen berri <%s>-n eman"
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "xfce4-panel dagoeneko martxan dago"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "xfce4-panel berrabiarazten..."
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
@@ -227,18 +222,16 @@ msgid "Full Width"
 msgstr "Zabalera Osoa"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, fuzzy
 msgid "Normal Height"
-msgstr "Zabalera Arrunta"
+msgstr "Altuera Arrunta"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
 msgid "Full Height"
-msgstr "Zabalera Osoa"
+msgstr "Altuera Osoa"
 
 #: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
-msgstr "Monitoreak Hedatu"
+msgstr "Zabor-posta monitoreak"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
 #: ../panel/panel-dialogs.c:1520
@@ -322,13 +315,12 @@ msgid "Make active panel opaque"
 msgstr "Panel aktiboa belztu"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Popup position:"
-msgstr "Kokalekua"
+msgstr "Popup Kokalekua"
 
 #: ../panel/panel-dialogs.c:1519
 msgid "Automatic"
-msgstr ""
+msgstr "Automatikoa"
 
 #: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
@@ -368,25 +360,23 @@ msgstr "Pantaila blokeatu + Itxi"
 
 #: ../plugins/clock/clock-dialog.c:346
 msgid "Custom"
-msgstr ""
+msgstr "Pertsonalizatu"
 
 #: ../plugins/clock/clock-dialog.c:400
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Segunduak bistarazi"
+msgstr "_Segunduak bistarazi"
 
 #: ../plugins/clock/clock-dialog.c:409
 msgid "Use 24-_hour clock"
 msgstr "24 _orduko ordularia erabili"
 
 #: ../plugins/clock/clock-dialog.c:415
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "AM/PM bistarazi"
+msgstr "AM/_PM bistarazi"
 
 #: ../plugins/clock/clock-dialog.c:424
 msgid "True _binary clock"
-msgstr ""
+msgstr "Egiazko ordulari _bitarra"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:466
@@ -400,16 +390,15 @@ msgstr "Analogikoa"
 
 #: ../plugins/clock/clock-dialog.c:492
 msgid "Binary"
-msgstr ""
+msgstr "Bitarra"
 
 #: ../plugins/clock/clock-dialog.c:493
 msgid "Digital"
 msgstr "Digitala"
 
 #: ../plugins/clock/clock-dialog.c:494
-#, fuzzy
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.c:499 ../plugins/systray/systray.c:402
 msgid "Show _frame"
@@ -418,7 +407,7 @@ msgstr "_Markoa Bistarazi"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:506
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Aholku Formatua"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:532
@@ -554,31 +543,29 @@ msgid "Separator or Spacing"
 msgstr "Bereizlea edo Lekua"
 
 #: ../plugins/separator/separator.c:418
-#, fuzzy
 msgid "Separator Style"
-msgstr "Bereizlea edo Lekua"
+msgstr "Bereizle Estiloa"
 
 #. space
 #: ../plugins/separator/separator.c:425
 msgid "_Empty Space"
-msgstr ""
+msgstr "L_eku librea"
 
 #: ../plugins/separator/separator.c:434
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "L_eku Librea Hedatzen"
 
 #: ../plugins/separator/separator.c:443
 msgid "_Line"
-msgstr ""
+msgstr "_Lerroa"
 
 #: ../plugins/separator/separator.c:452
-#, fuzzy
 msgid "_Handle"
-msgstr "Kudeatu:"
+msgstr "_Kudeatu"
 
 #: ../plugins/separator/separator.c:461
 msgid "_Dots"
-msgstr ""
+msgstr "_Puntuak"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -787,152 +774,3 @@ msgstr "Leiho erabilgarri zerrenda bistarazi"
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 Panel Kudeatzailea:"
 
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%A, %Y %B %d"
-
-#~ msgid "_Draw Separator"
-#~ msgstr "Bereizlea _Ipini"
-
-#~ msgid "_Expand"
-#~ msgstr "_Zabaldu"
-
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ " Xfce Panela %s\n"
-#~ "\n"
-#~ "XFCE-ren idazmahai ingurunearen zatia\n"
-#~ "http://www.xfce.org\n"
-#~ "\n"
-#~ " GNU GPL Lizentziapean.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ " Erabilera: %s [AUKERAK]\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ " AUKERAK\n"
-#~ " -h, --help      Mezu hau bistarazi eta irten\n"
-#~ " -v, --version   Mezu hau bistarazi eta irten\n"
-#~ " -c, --customize Konfigurazio elkarrizketa bistarazi\n"
-#~ " -s, --save      Konfigurazioa gorde\n"
-#~ " -r, --restart   Panelak berrabiarazi\n"
-#~ " -q, --quit      Saioa amaitu\n"
-#~ " -x, --exit      Panel guztiak itxi eta programa amaitu\n"
-#~ " -a, --add       Elementu berriak gehitu\n"
-
-#~ msgid "Error in command \"%s\""
-#~ msgstr "Errorea \"%s\" komandoan"
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "Elementu hau ez da konfiguratua izan"
-
-#~ msgid "Default"
-#~ msgstr "Lehenetsia"
-
-#~ msgid "File management"
-#~ msgstr "Fitxategi kudeatzailea"
-
-#~ msgid "Utilities"
-#~ msgstr "Erabilgarriak"
-
-#~ msgid "Games"
-#~ msgstr "Jokoak"
-
-#~ msgid "Help browser"
-#~ msgstr "Laguntza"
-
-#~ msgid "Multimedia"
-#~ msgstr "Multimedia"
-
-#~ msgid "Network"
-#~ msgstr "Sarea"
-
-#~ msgid "Graphics"
-#~ msgstr "Grafikoak"
-
-#~ msgid "Printer"
-#~ msgstr "Inprimagailuak"
-
-#~ msgid "Productivity"
-#~ msgstr "Produktibitatea"
-
-#~ msgid "Office"
-#~ msgstr "Ofimatika"
-
-#~ msgid "Sound"
-#~ msgstr "Soinua"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminala"
-
-#~ msgid "Development"
-#~ msgstr "Garapena"
-
-#~ msgid "Select image file"
-#~ msgstr "Irudi fitxategia aukeratu"
-
-#~ msgid "Select command"
-#~ msgstr "Komandoa hautatu"
-
-#~ msgid "Other..."
-#~ msgstr "Besterik..."
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "Zerrendako lehenengo elementua panelean bistaraziko da. Hurrengoak menu "
-#~ "batetan agertu beharko lirateke."
-
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "Huts 0launch abiaraztean:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Zero Instalatzaileari buruzko argibideentzat begiratu http://0install.net"
-
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "Zero Instalatzaile Interfazea amaitu da, baina abiarazte elkarrizketa "
-#~ "desagertu egin da bitartean. Ez da abiarazlea gehituko (baina "
-#~ "deskargaturiko edozein fitxategi ez da galdu)."
-
-#~ msgid "Select file"
-#~ msgstr "Fitxategia aukeratu"
-
-#~ msgid "Test Plugin"
-#~ msgstr "Proba Plugina"
-
-#~ msgid "This plugin has no purpose"
-#~ msgstr "Plugin honek ez du zereginik"
