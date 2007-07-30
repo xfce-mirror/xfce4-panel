@@ -297,7 +297,7 @@ _set_struts (Panel       *panel,
             {
                 data[0] = xmon->geometry.x + w; /* left           */
                 data[4] = y;                    /* left_start_y   */
-                data[5] = y + h;                /* left_end_y     */
+                data[5] = y + h - 1;            /* left_end_y     */
             }
         }
         else if (xfce_screen_position_is_right (priv->screen_position))
@@ -312,7 +312,7 @@ _set_struts (Panel       *panel,
                            - xmon->geometry.x - xmon->geometry.width
                            + w;         /* right          */
                 data[6] = y;            /* right_start_y  */
-                data[7] = y + h;        /* right_end_y    */
+                data[7] = y + h - 1;    /* right_end_y    */
             }
         }
         else if (xfce_screen_position_is_top (priv->screen_position))
@@ -326,7 +326,7 @@ _set_struts (Panel       *panel,
                 data[2] = xmon->geometry.y
                           + h;          /* top            */
                 data[8] = x;            /* top_start_x    */
-                data[9] = x + w;        /* top_end_x      */
+                data[9] = x + w - 1;    /* top_end_x      */
             }
         }
         else
@@ -341,7 +341,7 @@ _set_struts (Panel       *panel,
                            - xmon->geometry.y - xmon->geometry.height
                            + h;         /* bottom         */
                 data[10] = x;           /* bottom_start_x */
-                data[11] = x + w;       /* bottom_end_x   */
+                data[11] = x + w - 1;   /* bottom_end_x   */
             }
         }
     }
