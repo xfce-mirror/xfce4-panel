@@ -1161,12 +1161,14 @@ xfce_panel_plugin_unblock_menu (XfcePanelPlugin *plugin)
  * @plugin    : a #XfcePanelPlugin
  *
  * Looks up unique filename associated with @plugin in standard configuration
- * locations. Uses xfce_resource_lookup() ginternally.
+ * locations. Only use this function when you want the read location of the
+ * configuration file, since the path might point to a not writable file (for
+ * example the default- or kiosk-configuration).
+ *
+ * See also: xfce_panel_plugin_save_location() and #xfce_resource_lookup ()
  *
  * Returns: path to configuration file or %NULL if none was found.  The
- *          returned string must be freed using g_free().
- *
- * See also: xfce_panel_plugin_save_location()
+ *          returned string must be freed using g_free ().
  **/
 gchar *
 xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
@@ -1194,13 +1196,14 @@ xfce_panel_plugin_lookup_rc_file (XfcePanelPlugin *plugin)
  * @plugin    : a #XfcePanelPlugin
  * @create    : whether the file should be created
  *
- * Unique file location that can be used to store configuration information.
- * Uses xfce_resource_save_location() ginternally.
+ * Returns the path that can be used to store configuration information. Don't use
+ * this function when you want to read the configuration file, then use
+ * #xfce_panel_plugin_lookup_rc_file.
+ *
+ * See also xfce_panel_plugin_lookup_rc_file() and #xfce_resource_save_location().
  *
  * Returns: path to configuration file or %NULL is the file could not be
- *          created. The returned string must be freed using g_free().
- *
- * See also: xfce_panel_plugin_lookup_rc_file()
+ *          created. The returned string must be freed using g_free ().
  **/
 gchar *
 xfce_panel_plugin_save_location (XfcePanelPlugin *plugin,

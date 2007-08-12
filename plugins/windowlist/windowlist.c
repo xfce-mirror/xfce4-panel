@@ -1110,7 +1110,7 @@ windowlist_read (Windowlist * wl)
     XfceRc *rc;
     gchar  *file;
     
-    if (!(file = xfce_panel_plugin_save_location (wl->plugin, TRUE)))
+    if (!(file = xfce_panel_plugin_lookup_rc_file (wl->plugin)))
 	return;
     
     DBG("Read from file: %s", file);

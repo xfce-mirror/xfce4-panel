@@ -492,7 +492,7 @@ xfce_clock_plugin_read (ClockPlugin *clock)
     XfceRc      *rc;
 
     /* config filename */
-    filename = xfce_panel_plugin_save_location (clock->plugin, TRUE);
+    filename = xfce_panel_plugin_lookup_rc_file (clock->plugin);
 
     if (G_LIKELY (filename))
     {

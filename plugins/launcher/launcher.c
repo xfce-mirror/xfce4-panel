@@ -785,7 +785,7 @@ launcher_read (LauncherPlugin *launcher)
     LauncherEntry *entry;
 
     /* get rc file name, create it if needed */
-    file = xfce_panel_plugin_save_location (launcher->plugin, TRUE);
+    file = xfce_panel_plugin_lookup_rc_file (launcher->plugin);
 
     if (G_UNLIKELY (file == NULL))
         return;
