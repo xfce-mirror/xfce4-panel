@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-06 21:54+0200\n"
-"PO-Revision-Date: 2006-08-18 22:37+0100\n"
+"PO-Revision-Date: 2007-08-14 21:47+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -61,8 +61,7 @@ msgid "Remove \"%s\"?"
 msgstr "Odstranit \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:608
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "Položka bude odstraněna z panelu a její konfigurace ztracena."
 
 #. configure, hide by default
@@ -88,7 +87,8 @@ msgstr "Odstranit"
 msgid "Add New Item"
 msgstr "Přidat novou položku"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:899 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:899
+#: ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Přizpůsobit panel"
@@ -97,8 +97,10 @@ msgstr "Přizpůsobit panel"
 msgid "Add Items"
 msgstr "Přidat položky"
 
-#: ../panel/panel.c:723 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:723
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Ukončit"
 
@@ -110,11 +112,14 @@ msgstr "Restartovat"
 msgid "About the Xfce Panel"
 msgstr "O Panelu Xfce"
 
-#: ../panel/panel-app.c:256 ../panel/panel-app.c:886
+#: ../panel/panel-app.c:256
+#: ../panel/panel-app.c:886
 msgid "Exit Xfce Panel?"
 msgstr "Ukončit Panel Xfce?"
 
-#: ../panel/panel-app.c:884 ../panel/panel-app.c:916 ../panel/panel-app.c:949
+#: ../panel/panel-app.c:884
+#: ../panel/panel-app.c:916
+#: ../panel/panel-app.c:949
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
@@ -131,67 +136,64 @@ msgstr "Odstranit Panel \"%d\"?"
 msgid "The selected panel and all its items will be removed."
 msgstr "Vybraný panel a všechny jeho položky budou odstraněny."
 
-#: ../panel/panel-app.c:955 ../panel/panel-app.c:956
+#: ../panel/panel-app.c:955
+#: ../panel/panel-app.c:956
 msgid "Developer"
 msgstr "Vývojář"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "Zobrazí tuto zprávu a ukončí se"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "Zobrazit oznamovací ikony"
+msgstr "Zobrazit konfigurační dialogové okno"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "Uložit nastavení"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "Restartovat"
+msgstr "Restartovat panely"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "Ukončit sezení"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Zavřít všechny panely a ukončit program"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "Přidat novou položku"
+msgstr "Přidat nové položky"
 
 #: ../panel/main.c:90
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Nelze spustit \"%s\"."
+msgstr "Nepodařilo se otevřít displej"
 
 #: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Copyright (c) 2004-2007"
 
 #: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Tým vývojářů Xfce. Všechna práva vyhrazena."
 
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Prosíme, abyste chyby hlásili na adresu <%s>."
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "aplikace xfce4-panel je již spuštěna"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "Restartuji aplikaci xfce4-panel"
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
@@ -203,55 +205,58 @@ msgid "Add Items to the Panel"
 msgstr "Přidat položky do Panelu"
 
 #: ../panel/panel-dialogs.c:664
-msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
-msgstr ""
-"Přetáhněte položky ze seznamu na panel nebo je odstraňte z panelu přetažením "
-"do seznamu."
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Přetáhněte položky ze seznamu na panel nebo je odstraňte z panelu přetažením do seznamu."
 
 #: ../panel/panel-dialogs.c:681
 msgid "Available Items"
 msgstr "Dostupné položky"
 
-#: ../panel/panel-dialogs.c:907 ../panel/panel-dialogs.c:1143
+#: ../panel/panel-dialogs.c:907
+#: ../panel/panel-dialogs.c:1143
 msgid "Normal Width"
 msgstr "Běžná šířka"
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:908
+#: ../panel/panel-dialogs.c:1144
 msgid "Full Width"
 msgstr "Roztáhnout"
 
-#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, fuzzy
+#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:1148
 msgid "Normal Height"
 msgstr "Běžná šířka"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
+#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:1149
 msgid "Full Height"
-msgstr "Roztáhnout"
+msgstr "Roztáhnout na šířku"
 
-#: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
+#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
 msgstr "Roztáhnout přes více monitorů"
 
-#: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
+#: ../panel/panel-dialogs.c:984
+#: ../panel/panel-dialogs.c:1223
 #: ../panel/panel-dialogs.c:1520
 msgid "Left"
 msgstr "Vlevo"
 
-#: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
+#: ../panel/panel-dialogs.c:986
+#: ../panel/panel-dialogs.c:1225
 #: ../panel/panel-dialogs.c:1521
 msgid "Right"
 msgstr "Vpravo"
 
-#: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
+#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:1230
 #: ../panel/panel-dialogs.c:1522
 msgid "Top"
 msgstr "Nahoře"
 
-#: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:993
+#: ../panel/panel-dialogs.c:1232
 #: ../panel/panel-dialogs.c:1523
 msgid "Bottom"
 msgstr "Dole"
@@ -273,15 +278,18 @@ msgstr "Přizpůsobitelná"
 msgid "Auto_hide"
 msgstr "_Automaticky skrývat"
 
-#: ../panel/panel-dialogs.c:1184 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1184
+#: ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Orientace:"
 
-#: ../panel/panel-dialogs.c:1196 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1196
+#: ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Vodorovná"
 
-#: ../panel/panel-dialogs.c:1198 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1198
+#: ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Svislá"
 
@@ -299,7 +307,8 @@ msgstr "Vyberte monitor"
 
 #. appearance settings
 #. Button Layout
-#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:481
+#: ../panel/panel-dialogs.c:1427
+#: ../plugins/clock/clock-dialog.c:481
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -318,15 +327,15 @@ msgid "Make active panel opaque"
 msgstr "Aktivní panel neprůhledný"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Popup position:"
-msgstr "Pozice"
+msgstr "Pozice vyskakovacího okna:"
 
 #: ../panel/panel-dialogs.c:1519
 msgid "Automatic"
-msgstr ""
+msgstr "Automatický"
 
-#: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1563
+#: ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
 #, c-format
 msgid "Panel %d"
@@ -345,7 +354,8 @@ msgstr "Nový Panel"
 msgid "Panel Manager"
 msgstr "Správce panelu"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Uzamknout obrazovku"
@@ -364,25 +374,23 @@ msgstr "Ukončit a uzamknout obrazovku"
 
 #: ../plugins/clock/clock-dialog.c:346
 msgid "Custom"
-msgstr ""
+msgstr "Vlastní"
 
 #: ../plugins/clock/clock-dialog.c:400
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Zobrazovat vteřiny"
+msgstr "Zobrazovat _sekundy"
 
 #: ../plugins/clock/clock-dialog.c:409
 msgid "Use 24-_hour clock"
 msgstr "Používat 24_hodinový cyklus"
 
 #: ../plugins/clock/clock-dialog.c:415
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "Zobrazovat AM/PM (dopoledne/odpoledne)"
+msgstr "Zo_brazovat AM a PM (dopoledne a odpoledne)"
 
 #: ../plugins/clock/clock-dialog.c:424
 msgid "True _binary clock"
-msgstr ""
+msgstr "Pravé _binární hodiny"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:466
@@ -396,25 +404,25 @@ msgstr "Ručičkové"
 
 #: ../plugins/clock/clock-dialog.c:492
 msgid "Binary"
-msgstr ""
+msgstr "Binární"
 
 #: ../plugins/clock/clock-dialog.c:493
 msgid "Digital"
 msgstr "Digitální"
 
 #: ../plugins/clock/clock-dialog.c:494
-#, fuzzy
 msgid "LCD"
-msgstr "LED diody"
+msgstr "Displej LCD"
 
-#: ../plugins/clock/clock-dialog.c:499 ../plugins/systray/systray.c:402
+#: ../plugins/clock/clock-dialog.c:499
+#: ../plugins/systray/systray.c:402
 msgid "Show _frame"
 msgstr "Zobrazovat _rámeček"
 
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:506
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Formát tipu"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:532
@@ -434,92 +442,88 @@ msgstr "Zobrazovat pouze minimalizované aplikace"
 msgid "Show applications of all workspaces"
 msgstr "Zobrazovat aplikace ze všech pracovních ploch"
 
-#: ../plugins/iconbox/iconbox.c:939 ../plugins/tasklist/tasklist-dialogs.c:202
+#: ../plugins/iconbox/iconbox.c:939
+#: ../plugins/tasklist/tasklist-dialogs.c:202
 msgid "Use all available space"
 msgstr "Použít veškerý dostupný prostor"
 
 #. create new menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:715
+#: ../plugins/launcher/launcher.c:938
 msgid "New Item"
 msgstr "Přidat novou položku"
 
 #: ../plugins/launcher/launcher-exec.c:515
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
-msgstr "Nelze spustit \"%s\"."
+msgstr "Nepodařilo se spustit \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:580
 msgid "No icon"
-msgstr ""
+msgstr "Bez ikony"
 
 #: ../plugins/launcher/launcher-dialog.c:600
-#, fuzzy
 msgid "Select a Directory"
-msgstr "Vyberte monitor"
+msgstr "Vyberte adresář"
 
 #: ../plugins/launcher/launcher-dialog.c:644
-#, fuzzy
 msgid "Select an Application"
-msgstr "Vyberte typ akce:"
+msgstr "Vyberte aplikaci"
 
 #: ../plugins/launcher/launcher-dialog.c:654
 msgid "All Files"
-msgstr ""
+msgstr "Všechny soubory"
 
 #: ../plugins/launcher/launcher-dialog.c:659
 msgid "Executable Files"
-msgstr ""
+msgstr "Spustitelné soubory"
 
 #: ../plugins/launcher/launcher-dialog.c:674
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Skripty jazyka Perl"
 
 #: ../plugins/launcher/launcher-dialog.c:680
 msgid "Python Scripts"
-msgstr ""
+msgstr "Skripty jazyka Python"
 
 #: ../plugins/launcher/launcher-dialog.c:686
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Skripty jazyka Ruby"
 
 #: ../plugins/launcher/launcher-dialog.c:692
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Shellové skripty"
 
 #: ../plugins/launcher/launcher-dialog.c:763
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámý"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:766
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Vyberte ikonu pro \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1104
-#, fuzzy
 msgid "_Name"
-msgstr "Název"
+msgstr "_Název"
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Description"
-msgstr "Popis"
+msgstr "_Popis"
 
 #: ../plugins/launcher/launcher-dialog.c:1141
-#, fuzzy
 msgid "_Icon"
-msgstr "Panel pro ikony"
+msgstr "_Ikona"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "Co_mmand"
-msgstr "Příkaz"
+msgstr "Pří_kaz"
 
 #: ../plugins/launcher/launcher-dialog.c:1186
 msgid "_Working Directory"
-msgstr ""
+msgstr "_Pracovní adresář"
 
 #: ../plugins/launcher/launcher-dialog.c:1218
 msgid "Run in _terminal"
@@ -534,7 +538,8 @@ msgstr "Použít oznámení při _spuštění"
 msgid "Program Launcher"
 msgstr "Spouštěč programu"
 
-#: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:336
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Přepínač ploch"
 
@@ -556,31 +561,29 @@ msgid "Separator or Spacing"
 msgstr "Oddělovač"
 
 #: ../plugins/separator/separator.c:418
-#, fuzzy
 msgid "Separator Style"
-msgstr "Oddělovač"
+msgstr "Styl oddělovače"
 
 #. space
 #: ../plugins/separator/separator.c:425
 msgid "_Empty Space"
-msgstr ""
+msgstr "_Prázdné místo"
 
 #: ../plugins/separator/separator.c:434
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_Rozšířit prázdné místo"
 
 #: ../plugins/separator/separator.c:443
 msgid "_Line"
-msgstr ""
+msgstr "_Řádek"
 
 #: ../plugins/separator/separator.c:452
-#, fuzzy
 msgid "_Handle"
-msgstr "Úchytka"
+msgstr "Ú_chytka"
 
 #: ../plugins/separator/separator.c:461
 msgid "_Dots"
-msgstr ""
+msgstr "_Tečky"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -590,7 +593,8 @@ msgstr "Obnovit skrytá okna"
 msgid "Hide windows and show desktop"
 msgstr "Skrýt okna a zobrazit pracovní plochu"
 
-#: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
+#: ../plugins/systray/systray.c:69
+#: ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
 msgstr "Na této obrazovce již jedna upozorňovací oblast běží"
 
@@ -619,9 +623,8 @@ msgid "Use flat buttons"
 msgstr "Použít plochá tlačítka"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:215
-#, fuzzy
 msgid "Show handle"
-msgstr "Zobrazovat _rámeček"
+msgstr "Zobrazova_t úchytku"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:227
 msgid "Show tasks from _all workspaces"
@@ -682,12 +685,8 @@ msgid "Window List"
 msgstr "Seznam oken"
 
 #: ../plugins/windowlist/windowlist-dialog.c:150
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Urgentní oznámení</i> způsobí blikání tlačítka, pokud aplikace vyžaduje "
-"odezvu od uživatele."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Urgentní oznámení</i> způsobí blikání tlačítka, pokud aplikace vyžaduje odezvu od uživatele."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
@@ -728,7 +727,7 @@ msgstr "Zobrazit a_kce pracovní plochy"
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "Nepodařilo se spustit aplikaci 'xfce4-panel -c'"
 
 #: ../mcs-plugin/plugin.c:57
 msgid "Panel"
@@ -792,13 +791,10 @@ msgstr "Správce panelu Xfce 4"
 
 #~ msgid "%A %d %B %Y"
 #~ msgstr "%A, %d. %B %Y"
-
 #~ msgid "_Draw Separator"
 #~ msgstr "_Vykreslit oddělovač"
-
 #~ msgid "_Expand"
 #~ msgstr "_Rozšířit"
-
 #~ msgid ""
 #~ "\n"
 #~ " Xfce Panel %s\n"
@@ -817,14 +813,12 @@ msgstr "Správce panelu Xfce 4"
 #~ "\n"
 #~ " Licencováno pod GNU GPL.\n"
 #~ "\n"
-
 #~ msgid ""
 #~ " Usage: %s [OPTIONS]\n"
 #~ "\n"
 #~ msgstr ""
 #~ " Použití: %s [PŘEPÍNAČE]\n"
 #~ "\n"
-
 #~ msgid ""
 #~ " OPTIONS\n"
 #~ " -h, --help      Show this message and exit\n"
@@ -847,71 +841,50 @@ msgstr "Správce panelu Xfce 4"
 #~ " -x, --exit      Zavře všechny panely a ukončí program\n"
 #~ " -a, --add       Přidá nové položky\n"
 #~ "\n"
-
 #~ msgid "Error in command \"%s\""
 #~ msgstr "Chyba v příkazu \"%s\""
-
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Tato položka ještě nebyla nakonfigurována"
-
 #~ msgid "Default"
 #~ msgstr "Výchozí"
-
 #~ msgid "File management"
 #~ msgstr "Správa souborů"
-
 #~ msgid "Utilities"
 #~ msgstr "Nástroje"
-
 #~ msgid "Games"
 #~ msgstr "Hry"
-
 #~ msgid "Help browser"
 #~ msgstr "Prohlížeč nápovědy"
-
 #~ msgid "Multimedia"
 #~ msgstr "Multimédia"
-
 #~ msgid "Network"
 #~ msgstr "Síť"
-
 #~ msgid "Graphics"
 #~ msgstr "Grafika"
-
 #~ msgid "Printer"
 #~ msgstr "Tiskárna"
-
 #~ msgid "Productivity"
 #~ msgstr "Produktivita"
-
 #~ msgid "Office"
 #~ msgstr "Kancelář"
-
 #~ msgid "Sound"
 #~ msgstr "Zvuk"
-
 #~ msgid "Terminal"
 #~ msgstr "Terminál"
-
 #~ msgid "Development"
 #~ msgstr "Vývoj"
-
 #~ msgid "Select image file"
 #~ msgstr "Vyberte obrázek"
-
 #~ msgid "Select command"
 #~ msgstr "Vyberte příkaz"
-
 #~ msgid "Other..."
 #~ msgstr "Ostatní..."
-
 #~ msgid ""
 #~ "The first item in the list is shown on the panel. Additional items will "
 #~ "appear in a menu."
 #~ msgstr ""
 #~ "První položka v seznamu se zobrazí na panelu. Další položky se zobrazí v "
 #~ "nabídce."
-
 #~ msgid ""
 #~ "Failed to run 0launch:\n"
 #~ "%s\n"
@@ -922,7 +895,6 @@ msgstr "Správce panelu Xfce 4"
 #~ "%s\n"
 #~ "\n"
 #~ "Nápovědu k použití Zero Install najdete na http://0install.net"
-
 #~ msgid ""
 #~ "The Zero Install GUI has finished, but the launcher dialog has "
 #~ "disappeared in the meantime. Not adding launcher (but any files "
@@ -930,15 +902,12 @@ msgstr "Správce panelu Xfce 4"
 #~ msgstr ""
 #~ "Zero Install GUI skončil, spouštěcí dialogové okno však mezitím zmizelo. "
 #~ "Spouštěč nebude přidán (žádné stažené soubory však nebyly ztraceny)."
-
 #~ msgid "Select file"
 #~ msgstr "Vyberte soubor"
-
 #~ msgid "Test Plugin"
 #~ msgstr "Testovací modul"
-
 #~ msgid "This plugin has no purpose"
 #~ msgstr "Tento modul je bezúčelný"
-
 #~ msgid "Size"
 #~ msgstr "Velikost"
+
