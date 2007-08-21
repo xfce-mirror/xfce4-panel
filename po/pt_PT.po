@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-panel 4.4.0\n"
+"Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-06 21:54+0200\n"
-"PO-Revision-Date: 2007-06-16 22:26+0100\n"
+"PO-Revision-Date: 2007-07-08 22:17+0100\n"
 "Last-Translator: Nuno Miguel <nunis@netcabo.pt>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -60,8 +60,7 @@ msgid "Remove \"%s\"?"
 msgstr "Remover \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:608
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "O item será removido do painel e a configuração será perdida."
 
 #. configure, hide by default
@@ -87,7 +86,8 @@ msgstr "Remover"
 msgid "Add New Item"
 msgstr "Adicionar novo item"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:899 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:899
+#: ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Personalizar Painel"
@@ -96,8 +96,10 @@ msgstr "Personalizar Painel"
 msgid "Add Items"
 msgstr "Adicionar itens"
 
-#: ../panel/panel.c:723 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:723
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Sair"
 
@@ -109,11 +111,14 @@ msgstr "Reiniciar"
 msgid "About the Xfce Panel"
 msgstr "Acerca do Painel do Xfce"
 
-#: ../panel/panel-app.c:256 ../panel/panel-app.c:886
+#: ../panel/panel-app.c:256
+#: ../panel/panel-app.c:886
 msgid "Exit Xfce Panel?"
 msgstr "Sair do Painel do Xfce"
 
-#: ../panel/panel-app.c:884 ../panel/panel-app.c:916 ../panel/panel-app.c:949
+#: ../panel/panel-app.c:884
+#: ../panel/panel-app.c:916
+#: ../panel/panel-app.c:949
 msgid "Xfce Panel"
 msgstr "Painel do Xfce"
 
@@ -130,7 +135,8 @@ msgstr "Remover Painel \"%d\"?"
 msgid "The selected panel and all its items will be removed."
 msgstr "Painel seleccionado e todos os itens serão removidos."
 
-#: ../panel/panel-app.c:955 ../panel/panel-app.c:956
+#: ../panel/panel-app.c:955
+#: ../panel/panel-app.c:956
 msgid "Developer"
 msgstr "Desenvolvedor"
 
@@ -198,53 +204,58 @@ msgid "Add Items to the Panel"
 msgstr "Adicionar itens ao Painel"
 
 #: ../panel/panel-dialogs.c:664
-msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
-msgstr ""
-"Arraste itens da lista para um painel ou remova-os arrastando-os de novo "
-"para a lista."
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Arraste itens da lista para um painel ou remova-os arrastando-os de novo para a lista."
 
 #: ../panel/panel-dialogs.c:681
 msgid "Available Items"
 msgstr "Itens disponíveis"
 
-#: ../panel/panel-dialogs.c:907 ../panel/panel-dialogs.c:1143
+#: ../panel/panel-dialogs.c:907
+#: ../panel/panel-dialogs.c:1143
 msgid "Normal Width"
 msgstr "Largura normal"
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:908
+#: ../panel/panel-dialogs.c:1144
 msgid "Full Width"
 msgstr "Toda a largura"
 
-#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
+#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:1148
 msgid "Normal Height"
 msgstr "Altura Normal"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:1149
 msgid "Full Height"
 msgstr "Altura Total"
 
-#: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
+#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
 msgstr "Expandir Monitores"
 
-#: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
+#: ../panel/panel-dialogs.c:984
+#: ../panel/panel-dialogs.c:1223
 #: ../panel/panel-dialogs.c:1520
 msgid "Left"
 msgstr "Esquerda"
 
-#: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
+#: ../panel/panel-dialogs.c:986
+#: ../panel/panel-dialogs.c:1225
 #: ../panel/panel-dialogs.c:1521
 msgid "Right"
 msgstr "Direita"
 
-#: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
+#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:1230
 #: ../panel/panel-dialogs.c:1522
 msgid "Top"
 msgstr "Topo"
 
-#: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:993
+#: ../panel/panel-dialogs.c:1232
 #: ../panel/panel-dialogs.c:1523
 msgid "Bottom"
 msgstr "Em baixo"
@@ -266,15 +277,18 @@ msgstr "Mover livremente"
 msgid "Auto_hide"
 msgstr "Esconder _automaticamente"
 
-#: ../panel/panel-dialogs.c:1184 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1184
+#: ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Orientação:"
 
-#: ../panel/panel-dialogs.c:1196 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1196
+#: ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1198 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1198
+#: ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Vertical"
 
@@ -292,7 +306,8 @@ msgstr "Seleccionar Monitor"
 
 #. appearance settings
 #. Button Layout
-#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:481
+#: ../panel/panel-dialogs.c:1427
+#: ../plugins/clock/clock-dialog.c:481
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -318,7 +333,8 @@ msgstr "Posição popup:"
 msgid "Automatic"
 msgstr "Automático"
 
-#: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1563
+#: ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
 #, c-format
 msgid "Panel %d"
@@ -337,14 +353,15 @@ msgstr "Novo Painel"
 msgid "Panel Manager"
 msgstr "Gestor do Painel:"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Trancar ecrã"
 
 #: ../plugins/actions/actions.c:419
 msgid "Panel Actions"
-msgstr "Definições do Painel Xfce"
+msgstr "Acções do Painel"
 
 #: ../plugins/actions/actions.c:449
 msgid "Select action type:"
@@ -356,25 +373,23 @@ msgstr "Sair e Trancar ecrã"
 
 #: ../plugins/clock/clock-dialog.c:346
 msgid "Custom"
-msgstr ""
+msgstr "Personalizado"
 
 #: ../plugins/clock/clock-dialog.c:400
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Mostrar segundos"
+msgstr "Mostrar _segundos"
 
 #: ../plugins/clock/clock-dialog.c:409
 msgid "Use 24-_hour clock"
 msgstr "Usar relógio 24-_horas"
 
 #: ../plugins/clock/clock-dialog.c:415
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "AM/PM"
+msgstr "Mostra_r AM/PM"
 
 #: ../plugins/clock/clock-dialog.c:424
 msgid "True _binary clock"
-msgstr ""
+msgstr "Verdadeiro relógio _binário"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:466
@@ -388,25 +403,25 @@ msgstr "Analógico"
 
 #: ../plugins/clock/clock-dialog.c:492
 msgid "Binary"
-msgstr ""
+msgstr "Binário"
 
 #: ../plugins/clock/clock-dialog.c:493
 msgid "Digital"
 msgstr "Digital"
 
 #: ../plugins/clock/clock-dialog.c:494
-#, fuzzy
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
-#: ../plugins/clock/clock-dialog.c:499 ../plugins/systray/systray.c:402
+#: ../plugins/clock/clock-dialog.c:499
+#: ../plugins/systray/systray.c:402
 msgid "Show _frame"
 msgstr "Mostrar _borda"
 
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:506
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Formato de Dica"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:532
@@ -426,13 +441,15 @@ msgstr "Mostrar apenas aplicações minimizadas"
 msgid "Show applications of all workspaces"
 msgstr "Mostrar as tarefas de todas as Áreas de Trabalho"
 
-#: ../plugins/iconbox/iconbox.c:939 ../plugins/tasklist/tasklist-dialogs.c:202
+#: ../plugins/iconbox/iconbox.c:939
+#: ../plugins/tasklist/tasklist-dialogs.c:202
 msgid "Use all available space"
 msgstr "Usar todo o espaça disponível"
 
 #. create new menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:715
+#: ../plugins/launcher/launcher.c:938
 msgid "New Item"
 msgstr "Novo item"
 
@@ -520,7 +537,8 @@ msgstr "Usar _notificação de arranque"
 msgid "Program Launcher"
 msgstr "Lançar Programa"
 
-#: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:336
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Alternador de Areas de Trabalho"
 
@@ -542,31 +560,29 @@ msgid "Separator or Spacing"
 msgstr "Separador ou Espaço"
 
 #: ../plugins/separator/separator.c:418
-#, fuzzy
 msgid "Separator Style"
-msgstr "Separador ou Espaço"
+msgstr "Separador de Estilo"
 
 #. space
 #: ../plugins/separator/separator.c:425
 msgid "_Empty Space"
-msgstr ""
+msgstr "_Espaço Vazio"
 
 #: ../plugins/separator/separator.c:434
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_Expandir Espaço Vazio"
 
 #: ../plugins/separator/separator.c:443
 msgid "_Line"
-msgstr ""
+msgstr "_Linha"
 
 #: ../plugins/separator/separator.c:452
-#, fuzzy
 msgid "_Handle"
-msgstr "Manipulador"
+msgstr "_Manipulo"
 
 #: ../plugins/separator/separator.c:461
 msgid "_Dots"
-msgstr ""
+msgstr "_Pontos"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -576,7 +592,8 @@ msgstr "Restaurar janelas ocultas"
 msgid "Hide windows and show desktop"
 msgstr "Ocultar janelas e mostrar ambiente de trabalho"
 
-#: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
+#: ../plugins/systray/systray.c:69
+#: ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
 msgstr "Já existe uma area de notificação a correr neste ecrã"
 
@@ -667,12 +684,8 @@ msgid "Window List"
 msgstr "Lista de Janelas"
 
 #: ../plugins/windowlist/windowlist-dialog.c:150
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Notificação de urgência</i> o botão irá piscar quando uma aplicação "
-"precisar de atenção."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Notificação de urgência</i> o botão irá piscar quando uma aplicação precisar de atenção."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
@@ -777,9 +790,8 @@ msgstr "Gestor do Painel Xfce 4:"
 
 #~ msgid "%A %d %B %Y"
 #~ msgstr "%A, %d %B %Y"
-
 #~ msgid "_Draw Separator"
 #~ msgstr "_Mostrar Separador"
-
 #~ msgid "_Expand"
 #~ msgstr "_Expandir"
+
