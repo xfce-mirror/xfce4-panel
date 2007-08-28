@@ -3,22 +3,24 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Rodrigo Coacci <rcoacci@gmail.com>, 2004.
 # Adriano Winter Bess <awbess@gmail.com>, 2006.
+# Fábio Nogueira <deb-user-ba@ubuntu.com>, 2007.
+# Og Maciel <ogmaciel@gnome.org>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-27 15:28+0200\n"
-"PO-Revision-Date: 2006-09-03 15:12-0300\n"
-"Last-Translator: Rodrigo Coacci <rcoacci@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <ldp-br@bazar.conectiva.com.br>\n"
+"PO-Revision-Date: 2007-08-27 22:26-0500\n"
+"Last-Translator: Og Maciel <ogmaciel@gnome.org>\n"
+"Language-Team: Brazilian Portuguese <ldp-br@bazar2.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../config/launcher-7.rc.in.h:1
 msgid "Command Prompt"
-msgstr "Prompt de Comandos"
+msgstr "Prompt de Comando"
 
 #: ../config/launcher-7.rc.in.h:2
 msgid "X terminal emulator"
@@ -28,7 +30,8 @@ msgstr "Emulador de terminal do X"
 msgid "Edit text files"
 msgstr "Editar arquivos de texto"
 
-#: ../config/launcher-8.rc.in.h:2 ../plugins/launcher/launcher-dialog.c:102
+#: ../config/launcher-8.rc.in.h:2
+#: ../plugins/launcher/launcher-dialog.c:102
 msgid "Editor"
 msgstr "Editor"
 
@@ -60,8 +63,7 @@ msgid "Remove \"%s\"?"
 msgstr "Remover \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:599
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "O item será removido do painel e sua configuração será perdida."
 
 #. configure, hide by default
@@ -87,7 +89,8 @@ msgstr "Remover"
 msgid "Add New Item"
 msgstr "Adicionar Novo Item"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:866 ../panel/panel.c:697
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:866
+#: ../panel/panel.c:697
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Personalizar o Painel"
@@ -96,8 +99,10 @@ msgstr "Personalizar o Painel"
 msgid "Add Items"
 msgstr "Adicionar Itens"
 
-#: ../panel/panel.c:724 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:724
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Sair"
 
@@ -109,20 +114,23 @@ msgstr "Reiniciar"
 msgid "About the Xfce Panel"
 msgstr "Sobre o Painel do Xfce"
 
-#: ../panel/panel-app.c:238 ../panel/panel-app.c:876
+#: ../panel/panel-app.c:238
+#: ../panel/panel-app.c:876
 msgid "Exit Xfce Panel?"
-msgstr "Terminar o Painel do Xfce?"
+msgstr "Sair do Painel do Xfce?"
 
-#: ../panel/panel-app.c:874 ../panel/panel-app.c:906 ../panel/panel-app.c:940
-#: ../plugins/launcher/launcher.c:375 ../plugins/launcher/launcher.c:401
+#: ../panel/panel-app.c:874
+#: ../panel/panel-app.c:906
+#: ../panel/panel-app.c:940
+#: ../plugins/launcher/launcher.c:375
+#: ../plugins/launcher/launcher.c:401
 #: ../plugins/launcher/launcher.c:437
 msgid "Xfce Panel"
-msgstr "Painel Xfce"
+msgstr "Painel do Xfce"
 
 #: ../panel/panel-app.c:877
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"Você não pode remover o último painel. Você gostaria de terminar o programa?"
+msgstr "Você não pode remover o último painel. Você gostaria de sair do programa?"
 
 #: ../panel/panel-app.c:904
 #, c-format
@@ -133,7 +141,8 @@ msgstr "Remover o Painel \"%d\"?"
 msgid "The selected panel and all its items will be removed."
 msgstr "O painel selecionado e todos os seus itens serão removidos."
 
-#: ../panel/panel-app.c:947 ../panel/panel-app.c:950
+#: ../panel/panel-app.c:947
+#: ../panel/panel-app.c:950
 msgid "Developer"
 msgstr "Desenvolvedor"
 
@@ -155,7 +164,7 @@ msgstr ""
 " Parte do Ambiente de Trabalho Xfce\n"
 " http://www.xfce.org\n"
 "\n"
-" Licenciado sob o GNU GPL.\n"
+" Licenciado sob a GNU GPL.\n"
 "\n"
 
 #: ../panel/main.c:52
@@ -182,13 +191,13 @@ msgid ""
 "\n"
 msgstr ""
 " OPÇÕES\n"
-" -h, --help      Mostrar esta mensagem e terminar\n"
-" -v, --version   Mostrar esta mensagem e terminar\n"
+" -h, --help      Mostrar esta mensagem e sair\n"
+" -v, --version   Mostrar esta mensagem e sair\n"
 " -c, --customize Mostrar diálogo de configuração\n"
 " -s, --save      Salvar a configuração\n"
 " -r, --restart   Reiniciar os painéis\n"
 " -q, --quit      Finalizar a sessão\n"
-" -x, --exit      Fechar todos os painéis e terminar o programa\n"
+" -x, --exit      Fechar todos os painéis e sair do programa\n"
 " -a, --add       Adicionar novos itens\n"
 "\n"
 
@@ -202,42 +211,45 @@ msgid "Add Items to the Panel"
 msgstr "Adicionar Itens ao Painel"
 
 #: ../panel/panel-dialogs.c:627
-msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
-msgstr ""
-"Arraste itens da lista para um painel ou remova-os arrastando de volta para "
-"a lista"
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Arraste os itens da lista para um painel ou remova-os arrastando de volta para a lista."
 
 #: ../panel/panel-dialogs.c:644
 msgid "Available Items"
 msgstr "Itens Disponíveis"
 
-#: ../panel/panel-dialogs.c:870 ../panel/panel-dialogs.c:1094
+#: ../panel/panel-dialogs.c:870
+#: ../panel/panel-dialogs.c:1094
 msgid "Normal Width"
 msgstr "Largura Normal"
 
-#: ../panel/panel-dialogs.c:872 ../panel/panel-dialogs.c:1096
+#: ../panel/panel-dialogs.c:872
+#: ../panel/panel-dialogs.c:1096
 msgid "Full Width"
 msgstr "Largura Total"
 
-#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1102
+#: ../panel/panel-dialogs.c:878
+#: ../panel/panel-dialogs.c:1102
 msgid "Span Monitors"
 msgstr "Estender-se nos Monitores"
 
-#: ../panel/panel-dialogs.c:938 ../panel/panel-dialogs.c:1167
+#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:1167
 msgid "Left"
 msgstr "Esquerda"
 
-#: ../panel/panel-dialogs.c:940 ../panel/panel-dialogs.c:1169
+#: ../panel/panel-dialogs.c:940
+#: ../panel/panel-dialogs.c:1169
 msgid "Right"
 msgstr "Direita"
 
-#: ../panel/panel-dialogs.c:945 ../panel/panel-dialogs.c:1174
+#: ../panel/panel-dialogs.c:945
+#: ../panel/panel-dialogs.c:1174
 msgid "Top"
-msgstr "Topo"
+msgstr "Acima"
 
-#: ../panel/panel-dialogs.c:947 ../panel/panel-dialogs.c:1176
+#: ../panel/panel-dialogs.c:947
+#: ../panel/panel-dialogs.c:1176
 msgid "Bottom"
 msgstr "Abaixo"
 
@@ -256,23 +268,26 @@ msgstr "Movimentar Livremente"
 
 #: ../panel/panel-dialogs.c:1110
 msgid "Auto_hide"
-msgstr "Auto-O_cultar"
+msgstr "Auto-o_cultar"
 
-#: ../panel/panel-dialogs.c:1128 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1128
+#: ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Orientação:"
 
-#: ../panel/panel-dialogs.c:1140 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1140
+#: ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1142 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1142
+#: ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Vertical"
 
 #: ../panel/panel-dialogs.c:1151
 msgid "Handle:"
-msgstr "Manipulador"
+msgstr "Manipulador:"
 
 #: ../panel/panel-dialogs.c:1163
 msgid "At both sides"
@@ -283,7 +298,8 @@ msgid "Select Monitor"
 msgstr "Selecione o Monitor"
 
 #. Button Layout
-#: ../panel/panel-dialogs.c:1354 ../plugins/clock/clock.c:496
+#: ../panel/panel-dialogs.c:1354
+#: ../plugins/clock/clock.c:496
 #: ../plugins/tasklist/tasklist.c:424
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -302,7 +318,8 @@ msgstr "Transparência (%):"
 msgid "Make active panel opaque"
 msgstr "Tornar opaco o painel ativo"
 
-#: ../panel/panel-dialogs.c:1456 ../panel/panel-dialogs.c:1492
+#: ../panel/panel-dialogs.c:1456
+#: ../panel/panel-dialogs.c:1492
 #: ../panel/panel-dialogs.c:1517
 #, c-format
 msgid "Panel %d"
@@ -321,7 +338,8 @@ msgstr "Novo Painel"
 msgid "Panel Manager"
 msgstr "Gerenciador do Painel"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Travar tela"
@@ -350,7 +368,8 @@ msgstr "Sair + Travar tela"
 msgid "%A %d %B %Y"
 msgstr "%A, %d de %B de %Y"
 
-#: ../plugins/clock/clock.c:481 ../plugins/clock/clock.desktop.in.in.h:1
+#: ../plugins/clock/clock.c:481
+#: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Relógio"
 
@@ -367,9 +386,10 @@ msgstr "Digital"
 msgid "LED"
 msgstr "LED"
 
-#: ../plugins/clock/clock.c:515 ../plugins/systray/systray.c:402
+#: ../plugins/clock/clock.c:515
+#: ../plugins/systray/systray.c:402
 msgid "Show _frame"
-msgstr "Mostrar _borda"
+msgstr "Mostrar _quadro"
 
 #: ../plugins/clock/clock.c:522
 msgid "Clock Options"
@@ -394,17 +414,19 @@ msgstr "Caixa de Ícones"
 
 #: ../plugins/iconbox/iconbox.c:926
 msgid "Only show minimized applications"
-msgstr "Mostrar apenas aplicações minimizadas"
+msgstr "Mostrar apenas as aplicações minimizadas"
 
 #: ../plugins/iconbox/iconbox.c:935
 msgid "Show applications of all workspaces"
-msgstr "Mostrar programas de todas as áreas de trabalho"
+msgstr "Mostrar os programas de todas os espaços de trabalho"
 
-#: ../plugins/iconbox/iconbox.c:943 ../plugins/tasklist/tasklist.c:447
+#: ../plugins/iconbox/iconbox.c:943
+#: ../plugins/tasklist/tasklist.c:447
 msgid "Use all available space"
-msgstr "Usar todo o espaço disponível"
+msgstr "Utilizar todo o espaço disponível"
 
-#: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
+#: ../plugins/launcher/launcher.c:373
+#: ../plugins/launcher/launcher.c:435
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "Não foi possível executar \"%s\""
@@ -414,7 +436,8 @@ msgstr "Não foi possível executar \"%s\""
 msgid "Error in command \"%s\""
 msgstr "Erro no comando \"%s\""
 
-#: ../plugins/launcher/launcher.c:675 ../plugins/launcher/launcher.c:1303
+#: ../plugins/launcher/launcher.c:675
+#: ../plugins/launcher/launcher.c:1303
 #: ../plugins/launcher/launcher-dialog.c:1167
 msgid "New Item"
 msgstr "Novo Item"
@@ -445,7 +468,7 @@ msgstr "Navegador da ajuda"
 
 #: ../plugins/launcher/launcher-dialog.c:107
 msgid "Multimedia"
-msgstr "Multimidia"
+msgstr "Multimídia"
 
 #: ../plugins/launcher/launcher-dialog.c:108
 msgid "Network"
@@ -509,19 +532,15 @@ msgstr "Executar no _terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:707
 msgid "Use _startup notification"
-msgstr "Usar _notificação de inicialização"
+msgstr "Utilizar _notificação de inicialização"
 
 #: ../plugins/launcher/launcher-dialog.c:1289
-msgid ""
-"The first item in the list is shown on the panel. Additional items will "
-"appear in a menu."
-msgstr ""
-"O primeiro item na lista é mostrado no painel. Itens adicionais serão "
-"mostrados em um menu."
+msgid "The first item in the list is shown on the panel. Additional items will appear in a menu."
+msgstr "O primeiro item na lista é exibido no painel. Itens adicionais irão aparecer em um menu."
 
 #: ../plugins/launcher/launcher-dialog.c:1332
 msgid "Program Launcher"
-msgstr "Executor de programa"
+msgstr "Lançador de Programa"
 
 #: ../plugins/launcher/launcher-dialog.c:1420
 #: ../plugins/launcher/launcher-dialog.c:1521
@@ -535,25 +554,20 @@ msgstr ""
 "Falhou ao executar 0launch:\n"
 "%s\n"
 "\n"
-"Para auxílio na utilização do Zero Install, veja http://0install.net"
+"Para uma ajuda na utilização do Zero Install, veja http://0install.net"
 
 #: ../plugins/launcher/launcher-dialog.c:1486
-msgid ""
-"The Zero Install GUI has finished, but the launcher dialog has disappeared "
-"in the meantime. Not adding launcher (but any files downloaded have not been "
-"lost)."
-msgstr ""
-"O Zero Install terminou, mas o diálogo do lançador desapareceu durante este "
-"tempo. O lançador não será adicionado (mas quaisquer arquivos abaixados não "
-"foram perdidos)."
+msgid "The Zero Install GUI has finished, but the launcher dialog has disappeared in the meantime. Not adding launcher (but any files downloaded have not been lost)."
+msgstr "A interface do Zero Install terminou, mas o diálogo do lançador desapareceu durante este tempo. O lançador não será adicionado (mas quaisquer arquivos baixados não foram perdidos)."
 
 #: ../plugins/launcher/launcher-dialog.c:1899
 msgid "Select file"
 msgstr "Selecionar arquivo"
 
-#: ../plugins/pager/pager.c:338 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:338
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
-msgstr "Paginador"
+msgstr "Seletor de Espaço de Trabalho"
 
 #: ../plugins/pager/pager.c:369
 msgid "Number of rows:"
@@ -565,7 +579,7 @@ msgstr "Número de colunas:"
 
 #: ../plugins/pager/pager.c:399
 msgid "Switch workspaces using the mouse wheel"
-msgstr "Mudar de área de trabalho usando a roda do mouse"
+msgstr "Trocar de espaço de trabalho utilizando a roda do mouse"
 
 #: ../plugins/separator/separator.c:255
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -582,27 +596,29 @@ msgstr "_Expandir"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
-msgstr "Restaurar janelas escondidas"
+msgstr "Restaurar janelas ocultas"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
-msgstr "Esconder janelas e mostrar o ambiente de trabalho"
+msgstr "Ocultar janelas e mostrar a área de trabalho"
 
-#: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
+#: ../plugins/systray/systray.c:69
+#: ../plugins/systray/systray.c:84
 msgid "There is already a system tray running on this screen"
-msgstr "Há uma bandeja de sistema sendo executada nesta tela"
+msgstr "Já existe uma bandeja do sistema sendo executada nesta tela"
 
 #: ../plugins/systray/systray.c:90
 #, c-format
 msgid "Unable to register system tray: %s"
-msgstr "Não foi possível registrar a bandeja de sitema: %s"
+msgstr "Não foi possível registrar a bandeja do sistema: %s"
 
 #: ../plugins/systray/systray.c:378
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr "Área de Notificação"
+msgstr "Bandeja do Sistema"
 
-#: ../plugins/tasklist/tasklist.c:396 ../plugins/tasklist/tasklist.c:469
+#: ../plugins/tasklist/tasklist.c:396
+#: ../plugins/tasklist/tasklist.c:469
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Lista de Tarefas"
@@ -613,15 +629,15 @@ msgstr "Largura Mínima:"
 
 #: ../plugins/tasklist/tasklist.c:456
 msgid "Use flat buttons"
-msgstr "Usar botões planos"
+msgstr "Utilizar botões planos"
 
 #: ../plugins/tasklist/tasklist.c:473
 msgid "Show tasks from _all workspaces"
-msgstr "Exibir tarefas de _todas as áreas de trabalho"
+msgstr "Mostrar taref_as de todos os espaços de trabalho"
 
 #: ../plugins/tasklist/tasklist.c:483
 msgid "Show application _names"
-msgstr "Mostrar _nomes do aplicativos"
+msgstr "Mostrar os _nomes dos aplicativos"
 
 #: ../plugins/tasklist/tasklist.c:497
 msgid "Never group tasks"
@@ -629,41 +645,41 @@ msgstr "Nunca agrupar tarefas"
 
 #: ../plugins/tasklist/tasklist.c:500
 msgid "Automatically group tasks"
-msgstr "Agrupar tarefas automaticamente"
+msgstr "Agrupar as tarefas automaticamente"
 
 #: ../plugins/tasklist/tasklist.c:503
 msgid "Always group tasks"
-msgstr "Sempre agrupar tarefas"
+msgstr "Sempre agrupar as tarefas"
 
 #: ../plugins/windowlist/windowlist.c:242
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr "Você tem certeza que deseja remover a área de trabalho %d?"
+msgstr "Você tem certeza que deseja remover o espaço de trabalho %d?"
 
 #: ../plugins/windowlist/windowlist.c:243
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr "Você tem certeza que deseja remover a área de trabalho '%s'?"
+msgstr "Você tem certeza que deseja remover o espaço de trabalho \"%s\"?"
 
 #: ../plugins/windowlist/windowlist.c:508
 #, c-format
 msgid "Workspace %d"
-msgstr "Área de Trabalho %d"
+msgstr "Espaço de Trabalho %d"
 
 #: ../plugins/windowlist/windowlist.c:619
 #: ../plugins/windowlist/windowlist.c:625
 msgid "Add workspace"
-msgstr "Adicionar área de trabalho"
+msgstr "Adicionar espaço de trabalho"
 
 #: ../plugins/windowlist/windowlist.c:644
 #, c-format
 msgid "Remove Workspace %d"
-msgstr "Remover a Área de Trabalho %d"
+msgstr "Remover o Espaço de Trabalho %d"
 
 #: ../plugins/windowlist/windowlist.c:645
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr "Remover a Área de Trabalho '%s'"
+msgstr "Remover o Espaço de Trabalho \"%s\""
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
@@ -673,12 +689,8 @@ msgid "Window List"
 msgstr "Lista de Janelas"
 
 #: ../plugins/windowlist/windowlist-dialog.c:150
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Notificação de urgência</i> irá piscar o botão quando uma aplicação "
-"necessita de atenção."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Notificação de urgência</i> irá piscar o botão quando uma aplicação necessita de atenção."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
@@ -691,11 +703,11 @@ msgstr "_Desabilitado"
 
 #: ../plugins/windowlist/windowlist-dialog.c:173
 msgid "For _other workspaces"
-msgstr "Para _outras áreas de trabalho"
+msgstr "Para _outros espaços de trabalho"
 
 #: ../plugins/windowlist/windowlist-dialog.c:182
 msgid "For _all workspaces"
-msgstr "Para todas _as áreas de trabalho"
+msgstr "Par_a todos espaços de trabalho"
 
 #: ../plugins/windowlist/windowlist-dialog.c:196
 msgid "_Icon button"
@@ -707,15 +719,15 @@ msgstr "Botão em fo_rma de seta"
 
 #: ../plugins/windowlist/windowlist-dialog.c:221
 msgid "Show _windows from all workspaces"
-msgstr "Mostrar _janelas de todas as áreas de trabalho"
+msgstr "Mostrar as _janelas de todos os espaços de trabalho"
 
 #: ../plugins/windowlist/windowlist-dialog.c:230
 msgid "Show a_pplication icons"
-msgstr "Mostrar ícones das a_plicações"
+msgstr "Mostrar os ícones das a_plicações"
 
 #: ../plugins/windowlist/windowlist-dialog.c:239
 msgid "Show wor_kspace actions"
-msgstr "Mostrar ações da área de tra_balho"
+msgstr "Mostrar as ações do espaço de tra_balho"
 
 #: ../mcs-plugin/plugin.c:46
 msgid "Panel"
@@ -735,7 +747,7 @@ msgstr "Que horas são?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr "Mostrar ícones de todas as aplicações rodando"
+msgstr "Mostrar os ícones de todas as aplicações em execução"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -743,11 +755,11 @@ msgstr "Lançador"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Executor de programas com menu opcional"
+msgstr "Lançador de programas com menu opcional"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr "Vista em miniatura de todos as áreas de trabalho virtuais"
+msgstr "Visualização em miniatura de todas as áreas de trabalho virtuais"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
@@ -755,19 +767,19 @@ msgstr "Adiciona um espaço ou uma linha entre itens no painel"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr "Mostrar o Ambiente de Trabalho"
+msgstr "Mostrar a Área de Trabalho"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr "Alterna a visibilidade do ambiente de trabalho"
+msgstr "Alternar a visibilidade da área de trabalho"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
-msgstr "Mostra ícones de notificação"
+msgstr "Mostrar os ícones de notificação"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Show all running applications"
-msgstr "Mostra todas as aplicações rodando"
+msgstr "Mostrar todas as aplicações em execução"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
@@ -779,9 +791,8 @@ msgstr "Gerenciador do Painel do Xfce 4"
 
 #~ msgid "Test Plugin"
 #~ msgstr "Item de Teste"
-
 #~ msgid "This plugin has no purpose"
 #~ msgstr "Este item não tem nenhum propósito"
-
 #~ msgid "Size"
 #~ msgstr "Tamanho"
+
