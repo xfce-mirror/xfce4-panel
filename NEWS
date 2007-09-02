@@ -7,6 +7,11 @@
 - Separator can have different styles: space, expanded space, line (default),
   handle and old-style dotted handle. Initial patch by Landry Breuil. (Jasper)
 - Complete rewrite of the clock plugin. (Nick)
+- Rewrite of the system tray plugin. This should fix the icon size problems
+  (Bugs 3213, 3176, 962, 3478 and 3417), add option to hide icons in the
+  tray, sort icons by application name and support multiple lines based on the
+  panel size. The tray manager code is now integrated in the plugin, so it
+  can be removed from libxfcegui4. (Nick)
 - Fix area that is off-limits to other windows (_NET_WM_STRUT hints) for a
   Xinerama setup with differently sized monitors (Bug #3097). (Jasper)
 - Completely rewritten launcher (Bugs 2336, 2365, 1323, 2262 and 1225)

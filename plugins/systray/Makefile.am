@@ -11,11 +11,24 @@ plugindir =								\
 
 plugin_LTLIBRARIES =							\
 	libsystray.la
+	
+libsystray_built_sources =						\
+	xfce-tray-marshal.c						\
+	xfce-tray-marshal.h
 
 libsystray_la_SOURCES = 						\
-	systray.c
+	$(libsystray_built_sources)					\
+	xfce-tray-dialogs.c						\
+	xfce-tray-dialogs.h						\
+	xfce-tray-manager.c						\
+	xfce-tray-manager.h						\
+	xfce-tray-plugin.c						\
+	xfce-tray-plugin.h						\
+	xfce-tray-widget.c						\
+	xfce-tray-widget.h
 
 libsystray_la_CFLAGS =							\
+	$(LIBX11_CFLAGS)						\
 	$(GTK_CFLAGS)							\
 	$(LIBXFCE4UTIL_CFLAGS)						\
 	$(LIBXFCEGUI4_CFLAGS)						\
@@ -33,6 +46,7 @@ endif
 
 libsystray_la_LIBADD =							\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la			\
+	$(LIBX11_LIBS)							\
 	$(GTK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)						\
 	$(LIBXFCEGUI4_LIBS)
@@ -59,10 +73,44 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = 								\
-	$(desktop_in_in_files)
+	$(desktop_in_in_files)						\
+	xfce-tray-marshal.list
+	
+CLEANFILES =								\
+	xgen-xtmc							\
+	xgen-xtmh
 
+#
+# Rules to auto-generate built sources
+#
+
+if MAINTAINER_MODE
 DISTCLEANFILES =							\
 	$(desktop_DATA)							\
-	$(desktop_in_files)
+	$(desktop_in_files)						\
+	$(libsystray_built_sources)					\
+	stamp-xfce-tray-marshal.h
+
+BUILT_SOURCES =								\
+	$(libsystray_built_sources)
+
+xfce-tray-marshal.h: stamp-xfce-tray-marshal.h
+	@true
+stamp-xfce-tray-marshal.h: $(srcdir)/xfce-tray-marshal.list Makefile
+	( cd $(srcdir) && glib-genmarshal \
+		--prefix="_xfce_tray_marshal" \
+		--header xfce-tray-marshal.list \
+		| sed -e 's/marshal_data);$$/marshal_data) G_GNUC_INTERNAL;/' ) >> xgen-xtmh \
+	&& ( cmp -s xgen-xtmh xfce-tray-marshal.h || cp xgen-xtmh xfce-tray-marshal.h ) \
+	&& rm -f xgen-xtmh \
+	&& echo timestamp > $(@F)
+
+xfce-tray-marshal.c: xfce-tray-marshal.h Makefile
+	( cd $(srcdir) && glib-genmarshal \
+		--prefix="_xfce_tray_marshal" \
+		--body xfce-tray-marshal.list ) >> xgen-xtmc \
+	&& cp xgen-xtmc xfce-tray-marshal.c \
+	&& rm -f xgen-xtmc
+endif
 
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:

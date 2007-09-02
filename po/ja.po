@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.5.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-10 20:11+0900\n"
+"POT-Creation-Date: 2007-09-02 13:40+0200\n"
 "PO-Revision-Date: 2007-07-10 20:29+0900\n"
 "Last-Translator: Daichi Kawahata <daichi@xfce.org>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
@@ -55,40 +55,40 @@ msgstr "ウェブブラウザー"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "アイテムが突然削除されました: %s"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:594
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:602
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "「%s」を削除しますか？"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:608
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:616
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "パネルからアイテムが削除されると、その設定も失われます。"
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:823
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:825
 msgid "Properties"
 msgstr "プロパティ"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:840
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:842
 msgid "About"
 msgstr "このプログラムについて"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:852
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
 msgid "Move"
 msgstr "移動"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:871
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:873
 msgid "Remove"
 msgstr "削除"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:888
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:890
 msgid "Add New Item"
 msgstr "アイテムを追加"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:899 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:901 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "パネルの設定"
@@ -293,8 +293,10 @@ msgid "Select Monitor"
 msgstr "モニターの選択"
 
 #. appearance settings
+#. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
+#: ../plugins/systray/xfce-tray-dialogs.c:238
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -400,7 +402,9 @@ msgstr "デジタル"
 msgid "LCD"
 msgstr "LCD"
 
-#: ../plugins/clock/clock-dialog.c:498 ../plugins/systray/systray.c:402
+#. show frame
+#: ../plugins/clock/clock-dialog.c:498
+#: ../plugins/systray/xfce-tray-dialogs.c:244
 msgid "Show _frame"
 msgstr "枠を表示する(_F)"
 
@@ -575,19 +579,28 @@ msgstr "隠したウィンドウを元に戻す"
 msgid "Hide windows and show desktop"
 msgstr "ウィンドウを隠してデスクトップを表示する"
 
-#: ../plugins/systray/systray.c:69 ../plugins/systray/systray.c:84
-msgid "There is already a system tray running on this screen"
-msgstr "この画面には既に実行しているシステムトレイがあります"
-
-#: ../plugins/systray/systray.c:90
-#, c-format
-msgid "Unable to register system tray: %s"
-msgstr "システムトレイを登録できません: %s"
-
-#: ../plugins/systray/systray.c:378
+#. create a dialog
+#. create dialog
+#: ../plugins/systray/xfce-tray-plugin.c:71
+#: ../plugins/systray/xfce-tray-dialogs.c:224
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "システムトレイ"
+
+#: ../plugins/systray/xfce-tray-plugin.c:97
+msgid "There is already a system tray running on this screen"
+msgstr "この画面には既に実行しているシステムトレイがあります"
+
+#. applications
+#: ../plugins/systray/xfce-tray-dialogs.c:251
+#, fuzzy
+msgid "Hidden Applications"
+msgstr "アプリを選択してください"
+
+#: ../plugins/systray/xfce-tray-manager.c:431
+#, c-format
+msgid "Failed to acquire manager selection for screen %d"
+msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialogs.c:157
 #: ../plugins/tasklist/tasklist-dialogs.c:224
@@ -773,3 +786,6 @@ msgstr "利用可能なウィンドウのリストを表示します。"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 パネルマネージャー"
+
+#~ msgid "Unable to register system tray: %s"
+#~ msgstr "システムトレイを登録できません: %s"
