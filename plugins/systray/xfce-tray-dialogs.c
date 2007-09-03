@@ -19,7 +19,11 @@
 #include <config.h>
 #endif
 
-#define XFCE_TRAY_DIALOG_ICON_SIZE 16
+#ifdef HAVE_STRING_H
+#include <string.h>
+#endif
+
+#define XFCE_TRAY_DIALOG_ICON_SIZE 22
 
 #include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
@@ -105,16 +109,47 @@ static GdkPixbuf *
 xfce_tray_dialogs_icon (GtkIconTheme *icon_theme,
                         const gchar  *name)
 {
-    GdkPixbuf *icon;
+    GdkPixbuf   *icon;
+    guint        i;
+    gchar       *first_occ;
+    const gchar *p, *fallback[][2] = 
+    {
+        { "xfce-mcs-manager", "input-mouse" },
+        { "bluetooth-applet", "stock_bluetooth" }
+    };
+    
+    /* return null on no name */
+    if (G_UNLIKELY (name == NULL))
+        return NULL;
     
     /* try to load the icon from the theme */
     icon = gtk_icon_theme_load_icon (icon_theme, name, XFCE_TRAY_DIALOG_ICON_SIZE, 0, NULL);
+    if (G_LIKELY (icon))
+        return icon;
     
-    /* if no icon was found, we could check the childeren it the name is currently in the
-     * tray, if so, create a pixbuf from the window data
-     */
+    /* try the first part when the name contains a space */
+    p = g_utf8_strchr (name, -1, ' ');
+    if (p)
+    {
+        /* get the string before the first occurrence */
+        first_occ = g_strndup (name, p - name);
+        
+        /* try to load the icon from the theme */
+        icon = gtk_icon_theme_load_icon (icon_theme, first_occ, XFCE_TRAY_DIALOG_ICON_SIZE, 0, NULL);
+            
+        /* cleanup */
+        g_free (first_occ);
+        
+        if (icon)
+            return icon;
+    }
+        
+    /* find and return a fall-back icon */
+    for (i = 0; i < G_N_ELEMENTS (fallback); i++)
+        if (strcmp (name, fallback[i][0]) == 0)
+            return gtk_icon_theme_load_icon (icon_theme, fallback[i][1], XFCE_TRAY_DIALOG_ICON_SIZE, 0, NULL);
     
-    return icon;
+    return NULL;
 }
 
 
@@ -229,7 +264,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin)));
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
-    gtk_window_set_default_size (GTK_WINDOW (dialog), 250, 300);
+    gtk_window_set_default_size (GTK_WINDOW (dialog), 280, 350);
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
     g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (xfce_tray_dialogs_configure_response), plugin);
     
@@ -267,6 +302,9 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     /* create treeview */
     treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
     gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (treeview), FALSE);
+    gtk_tree_view_set_search_column (GTK_TREE_VIEW (treeview), APPLICATION_NAME);
+    gtk_tree_view_set_enable_search (GTK_TREE_VIEW (treeview), TRUE);
+    gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (treeview), TRUE);
     gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (treeview), TRUE);
     g_signal_connect_swapped (G_OBJECT (treeview), "destroy", G_CALLBACK (xfce_tray_dialogs_free_store), store);
     gtk_container_add (GTK_CONTAINER (scroll), treeview);
@@ -277,19 +315,25 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     
     /* create column */
     column = gtk_tree_view_column_new ();
+    gtk_tree_view_column_set_spacing (column, 2);
     gtk_tree_view_column_set_expand (column, TRUE);
     gtk_tree_view_column_set_resizable (column, FALSE);
+    gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
     gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
-    
-    /* create renders */
+
+    /* renderer for the icon */
     renderer = gtk_cell_renderer_pixbuf_new();
+    gtk_cell_renderer_set_fixed_size (renderer, XFCE_TRAY_DIALOG_ICON_SIZE, XFCE_TRAY_DIALOG_ICON_SIZE);
     gtk_tree_view_column_pack_start (column, renderer, FALSE);
     gtk_tree_view_column_set_attributes (column, renderer, "pixbuf", APPLICATION_ICON, NULL);
     
+    /* renderer for the name */
     renderer = gtk_cell_renderer_text_new ();
     gtk_tree_view_column_pack_start (column, renderer, TRUE);
     gtk_tree_view_column_set_attributes (column, renderer, "text", APPLICATION_NAME, NULL);
+    g_object_set (G_OBJECT (renderer), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
     
+    /* renderer for the toggle button */
     renderer = gtk_cell_renderer_toggle_new ();
     gtk_tree_view_column_pack_start (column, renderer, FALSE);
     gtk_tree_view_column_set_attributes (column, renderer, "active", APPLICATION_HIDDEN, NULL);
