@@ -229,6 +229,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin)));
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
+    gtk_window_set_default_size (GTK_WINDOW (dialog), 250, 300);
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
     g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (xfce_tray_dialogs_configure_response), plugin);
     
@@ -237,7 +238,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     /* appearance */
     frame = xfce_create_framebox (_("Appearance"), &bin);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
-    //gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
+    gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
     gtk_widget_show (frame);
     
     /* show frame */
@@ -250,7 +251,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     /* applications */
     frame = xfce_create_framebox (_("Hidden Applications"), &bin);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, TRUE, TRUE, 0);
-    //gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
+    gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
     gtk_widget_show (frame);
     
     /* scrolled window */

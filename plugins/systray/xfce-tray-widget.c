@@ -43,29 +43,32 @@
 
 
 /* prototypes */
-static void xfce_tray_widget_class_init       (XfceTrayWidgetClass *klass);
-static void xfce_tray_widget_init             (XfceTrayWidget      *tray);
-static void xfce_tray_widget_finalize         (GObject             *object);
-static void xfce_tray_widget_size_request     (GtkWidget           *widget, 
-                                               GtkRequisition      *requisition);
-static void xfce_tray_widget_size_allocate    (GtkWidget           *widget, 
-                                               GtkAllocation       *allocation);
-static void xfce_tray_widget_style_set        (GtkWidget           *widget,
-                                               GtkStyle            *previous_style);
-static void xfce_tray_widget_map              (GtkWidget           *widget);
-static gint xfce_tray_widget_expose_event     (GtkWidget           *widget, 
-                                               GdkEventExpose      *event);
-static void xfce_tray_widget_button_set_arrow (XfceTrayWidget      *tray);
-static void xfce_tray_widget_button_clicked   (GtkToggleButton     *button, 
-                                               XfceTrayWidget      *tray);
-static gint xfce_tray_widget_compare_function (gconstpointer        a, 
-                                               gconstpointer        b);
-static void xfce_tray_widget_icon_added       (XfceTrayManager     *manager, 
-                                               GtkWidget           *icon,
-                                               XfceTrayWidget      *tray);
-static void xfce_tray_widget_icon_removed     (XfceTrayManager     *manager, 
-                                               GtkWidget           *icon, 
-                                               XfceTrayWidget      *tray);
+static void     xfce_tray_widget_class_init         (XfceTrayWidgetClass *klass);
+static void     xfce_tray_widget_init               (XfceTrayWidget      *tray);
+static void     xfce_tray_widget_finalize           (GObject             *object);
+static void     xfce_tray_widget_size_request       (GtkWidget           *widget, 
+                                                     GtkRequisition      *requisition);
+static void     xfce_tray_widget_size_allocate      (GtkWidget           *widget, 
+                                                     GtkAllocation       *allocation);
+static void     xfce_tray_widget_style_set          (GtkWidget           *widget,
+                                                     GtkStyle            *previous_style);
+static void     xfce_tray_widget_map                (GtkWidget           *widget);
+static gint     xfce_tray_widget_expose_event       (GtkWidget           *widget, 
+                                                     GdkEventExpose      *event);
+static void     xfce_tray_widget_button_set_arrow   (XfceTrayWidget      *tray);
+static void     xfce_tray_widget_button_clicked     (GtkToggleButton     *button, 
+                                                     XfceTrayWidget      *tray);
+static gboolean xfce_tray_widget_button_press_event (GtkWidget           *widget,
+                                                     GdkEventButton      *event,
+                                                     GtkWidget           *tray);
+static gint     xfce_tray_widget_compare_function   (gconstpointer        a, 
+                                                     gconstpointer        b);
+static void     xfce_tray_widget_icon_added         (XfceTrayManager     *manager, 
+                                                     GtkWidget           *icon,
+                                                     XfceTrayWidget      *tray);
+static void     xfce_tray_widget_icon_removed       (XfceTrayManager     *manager, 
+                                                     GtkWidget           *icon, 
+                                                     XfceTrayWidget      *tray);
 
 
 
@@ -92,7 +95,7 @@ struct _XfceTrayWidget
     guint             n_hidden_childeren;
     
     /* whether hidden icons are visible */
-    guint             all_visible :    1;
+    guint             all_visible : 1;
     
     /* reqested icon size */
     guint             req_child_size;
@@ -390,6 +393,7 @@ xfce_tray_widget_map (GtkWidget *widget)
     GTK_WIDGET_UNSET_FLAGS (tray->button, GTK_CAN_DEFAULT | GTK_CAN_FOCUS);
     gtk_button_set_focus_on_click (GTK_BUTTON (tray->button), FALSE);
     g_signal_connect (G_OBJECT (tray->button), "clicked", G_CALLBACK (xfce_tray_widget_button_clicked), tray);
+    g_signal_connect (G_OBJECT (tray->button), "button-press-event", G_CALLBACK (xfce_tray_widget_button_press_event), tray);
     gtk_widget_set_parent (tray->button, widget);
     gtk_widget_show (tray->button);
 }
@@ -421,16 +425,29 @@ xfce_tray_widget_button_set_arrow (XfceTrayWidget *tray)
 
 static void 
 xfce_tray_widget_button_clicked (GtkToggleButton *button, 
-                                 XfceTrayWidget        *tray)
+                                 XfceTrayWidget  *tray)
 {
     /* set the new visible state */
     tray->all_visible = gtk_toggle_button_get_active (button);
-        
+    
     /* set the button arrow */
     xfce_tray_widget_button_set_arrow (tray);
     
     /* update the tray */
     gtk_widget_queue_resize (GTK_WIDGET (tray));
+}
+
+
+
+static gboolean
+xfce_tray_widget_button_press_event (GtkWidget      *widget,
+                                     GdkEventButton *event,
+                                     GtkWidget      *tray)
+{
+    /* send the event to the tray for poping up the menu */
+    gtk_widget_event (tray, (GdkEvent *)event);
+    
+    return FALSE;
 }
 
 
