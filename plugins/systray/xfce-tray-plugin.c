@@ -46,6 +46,9 @@ static void            xfce_tray_plugin_screen_position_changed (XfceTrayPlugin 
                                                                  XfceScreenPosition  position);
 static void            xfce_tray_plugin_orientation_changed     (XfceTrayPlugin     *plugin, 
                                                                  GtkOrientation      orientation);
+static void            xfce_tray_plugin_size_allocated          (GtkWidget          *widget,
+                                                                 GtkAllocation      *allocation,
+                                                                 XfceTrayPlugin     *plugin);
 static gboolean        xfce_tray_plugin_size_changed            (XfceTrayPlugin     *plugin, 
                                                                  guint               size);
 static void            xfce_tray_plugin_read                    (XfceTrayPlugin     *plugin);
@@ -201,6 +204,10 @@ xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
         /* add the tray */
         gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->tray);
         gtk_widget_show (plugin->tray);
+        
+        /* signal to monitor the real panel size */
+        g_signal_connect (G_OBJECT (panel_plugin), "size-allocate", 
+                          G_CALLBACK (xfce_tray_plugin_size_allocated), plugin);
     }
     else
     {
@@ -244,13 +251,37 @@ xfce_tray_plugin_orientation_changed (XfceTrayPlugin *plugin,
 
 
 
+static void
+xfce_tray_plugin_size_allocated (GtkWidget      *widget,
+                                 GtkAllocation  *allocation,
+                                 XfceTrayPlugin *plugin)
+{
+    GtkOrientation orientation;
+    gint           size;    
+
+    /* get the orientation of the plugin */
+    orientation = xfce_panel_plugin_get_orientation (plugin->panel_plugin);
+    
+    /* get the allocated size */
+    if (orientation == GTK_ORIENTATION_HORIZONTAL)
+        size = allocation->height;
+    else
+        size = allocation->width;
+        
+    /* if the allocated size is bigger, resize the plugin again */
+    if (G_UNLIKELY (size > xfce_panel_plugin_get_size (plugin->panel_plugin)))
+        xfce_tray_plugin_size_changed (plugin, size);
+}
+
+
+
 static gboolean 
 xfce_tray_plugin_size_changed (XfceTrayPlugin *plugin, 
                                guint           size)
 {
     /* set the frame border size */
     gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), size > 26 ? 1 : 0);
-    
+
     /* extract the frame from the size for the tray */
     size -= size > 26 ? 6 : 4;
     
