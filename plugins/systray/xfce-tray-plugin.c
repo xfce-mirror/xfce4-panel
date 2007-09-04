@@ -256,6 +256,7 @@ xfce_tray_plugin_size_allocated (GtkWidget      *widget,
                                  GtkAllocation  *allocation,
                                  XfceTrayPlugin *plugin)
 {
+#if 0
     GtkOrientation orientation;
     gint           size;    
 
@@ -271,6 +272,7 @@ xfce_tray_plugin_size_allocated (GtkWidget      *widget,
     /* if the allocated size is bigger, resize the plugin again */
     if (G_UNLIKELY (size > xfce_panel_plugin_get_size (plugin->panel_plugin)))
         xfce_tray_plugin_size_changed (plugin, size);
+#endif
 }
 
 

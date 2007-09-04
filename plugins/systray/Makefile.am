@@ -98,7 +98,7 @@ xfce-tray-marshal.h: stamp-xfce-tray-marshal.h
 	@true
 stamp-xfce-tray-marshal.h: $(srcdir)/xfce-tray-marshal.list Makefile
 	( cd $(srcdir) && glib-genmarshal \
-		--prefix="_xfce_tray_marshal" \
+		--prefix=_xfce_tray_marshal \
 		--header xfce-tray-marshal.list \
 		| sed -e 's/marshal_data);$$/marshal_data) G_GNUC_INTERNAL;/' ) >> xgen-xtmh \
 	&& ( cmp -s xgen-xtmh xfce-tray-marshal.h || cp xgen-xtmh xfce-tray-marshal.h ) \
@@ -107,7 +107,7 @@ stamp-xfce-tray-marshal.h: $(srcdir)/xfce-tray-marshal.list Makefile
 
 xfce-tray-marshal.c: xfce-tray-marshal.h Makefile
 	( cd $(srcdir) && glib-genmarshal \
-		--prefix="_xfce_tray_marshal" \
+		--prefix=_xfce_tray_marshal \
 		--body xfce-tray-marshal.list ) >> xgen-xtmc \
 	&& cp xgen-xtmc xfce-tray-marshal.c \
 	&& rm -f xgen-xtmc
