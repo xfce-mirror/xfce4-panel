@@ -1429,7 +1429,7 @@ panel_selected (GtkComboBox * combo, PanelManagerDialog * pmd)
 {
     int n = gtk_combo_box_get_active (combo);
 
-    if (n == pmd->current)
+    if (n == pmd->current || n < 0)
         return;
 
     pmd->current = n;
