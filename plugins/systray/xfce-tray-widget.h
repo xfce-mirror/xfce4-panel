@@ -42,8 +42,8 @@ XfceTrayManager *xfce_tray_widget_get_manager        (XfceTrayWidget   *tray) G_
 
 void             xfce_tray_widget_set_arrow_position (XfceTrayWidget   *tray, 
                                                       GtkArrowType     arrow_position) G_GNUC_INTERNAL;
-                                            
-void             xfce_tray_widget_set_lines          (XfceTrayWidget   *tray,
-                                                      guint            lines) G_GNUC_INTERNAL;
+
+void             xfce_tray_widget_set_size_request   (XfceTrayWidget   *tray,
+                                                      gint              size) G_GNUC_INTERNAL;
 
 #endif /* !__XFCE_TRAY_WIDGET_H__ */

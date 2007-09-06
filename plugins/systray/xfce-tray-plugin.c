@@ -21,7 +21,7 @@
 #include <config.h>
 #endif
 
-#define XFCE_TRAY_PLUGIN_LINE_HEIGHT (24 + 2)
+#define SMALL_PANEL_SIZE (26)
 
 #include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
@@ -46,10 +46,9 @@ static void            xfce_tray_plugin_screen_position_changed (XfceTrayPlugin 
                                                                  XfceScreenPosition  position);
 static void            xfce_tray_plugin_orientation_changed     (XfceTrayPlugin     *plugin, 
                                                                  GtkOrientation      orientation);
-static void            xfce_tray_plugin_size_allocated          (GtkWidget          *widget,
-                                                                 GtkAllocation      *allocation,
-                                                                 XfceTrayPlugin     *plugin);
-static gboolean        xfce_tray_plugin_size_changed            (XfceTrayPlugin     *plugin, 
+static void            xfce_tray_plugin_tray_size_changed       (XfceTrayPlugin     *plugin,
+                                                                 gint                size);
+static gboolean        xfce_tray_plugin_size_changed            (XfceTrayPlugin     *plugin,
                                                                  guint               size);
 static void            xfce_tray_plugin_read                    (XfceTrayPlugin     *plugin);
 static void            xfce_tray_plugin_write                   (XfceTrayPlugin     *plugin);
@@ -120,7 +119,7 @@ xfce_tray_plugin_button_position (XfcePanelPlugin *panel_plugin)
     /* get the button position */
     switch (position)
     {
-        /*	horizontal west */
+        /*    horizontal west */
         case XFCE_SCREEN_POSITION_NW_H:
         case XFCE_SCREEN_POSITION_SW_H:
             return GTK_ARROW_RIGHT;
@@ -205,9 +204,9 @@ xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
         gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->tray);
         gtk_widget_show (plugin->tray);
         
-        /* signal to monitor the real panel size */
-        g_signal_connect (G_OBJECT (panel_plugin), "size-allocate", 
-                          G_CALLBACK (xfce_tray_plugin_size_allocated), plugin);
+        /* connect signal to handle the real plugin size */
+        g_signal_connect_swapped (G_OBJECT (plugin->tray), "tray-size-changed",
+                                  G_CALLBACK (xfce_tray_plugin_tray_size_changed), plugin);
     }
     else
     {
@@ -234,9 +233,6 @@ xfce_tray_plugin_screen_position_changed (XfceTrayPlugin     *plugin,
     
     /* set the position */
     xfce_tray_widget_set_arrow_position (XFCE_TRAY_WIDGET (plugin->tray), button_position);
-    
-    /* set the size again */
-    xfce_tray_plugin_size_changed (plugin, xfce_panel_plugin_get_size (plugin->panel_plugin));
 }
 
 
@@ -252,49 +248,40 @@ xfce_tray_plugin_orientation_changed (XfceTrayPlugin *plugin,
 
 
 static void
-xfce_tray_plugin_size_allocated (GtkWidget      *widget,
-                                 GtkAllocation  *allocation,
-                                 XfceTrayPlugin *plugin)
+xfce_tray_plugin_tray_size_changed (XfceTrayPlugin *plugin,
+                                    gint            size)
 {
-#if 0
-    GtkOrientation orientation;
-    gint           size;    
-
-    /* get the orientation of the plugin */
-    orientation = xfce_panel_plugin_get_orientation (plugin->panel_plugin);
+    gint panel_size;
     
-    /* get the allocated size */
-    if (orientation == GTK_ORIENTATION_HORIZONTAL)
-        size = allocation->height;
+    /* get the panel size */
+    panel_size = xfce_panel_plugin_get_size (plugin->panel_plugin);
+    
+    /* correct the requested plugin size */
+    size += panel_size > SMALL_PANEL_SIZE ? 6 : 4;
+    
+    /* update the plugin size */
+    if (xfce_panel_plugin_get_orientation (plugin->panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
+        gtk_widget_set_size_request (GTK_WIDGET (plugin->panel_plugin), size, panel_size);
     else
-        size = allocation->width;
-        
-    /* if the allocated size is bigger, resize the plugin again */
-    if (G_UNLIKELY (size > xfce_panel_plugin_get_size (plugin->panel_plugin)))
-        xfce_tray_plugin_size_changed (plugin, size);
-#endif
+        gtk_widget_set_size_request (GTK_WIDGET (plugin->panel_plugin), panel_size, size);
 }
 
 
 
 static gboolean 
-xfce_tray_plugin_size_changed (XfceTrayPlugin *plugin, 
-                               guint           size)
+xfce_tray_plugin_size_changed (XfceTrayPlugin  *plugin,
+                               guint            size)
 {
+    gint border;
+    
     /* set the frame border size */
-    gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), size > 26 ? 1 : 0);
-
-    /* extract the frame from the size for the tray */
-    size -= size > 26 ? 6 : 4;
+    gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), size > SMALL_PANEL_SIZE ? 1 : 0);
     
-    /* set the number of lines */
-    xfce_tray_widget_set_lines (XFCE_TRAY_WIDGET (plugin->tray), MAX (1, size / XFCE_TRAY_PLUGIN_LINE_HEIGHT));
+    /* get the border size */
+    border = size > SMALL_PANEL_SIZE ? 6 : 4;
     
-    /* set the size */
-    if (xfce_panel_plugin_get_orientation (plugin->panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
-        gtk_widget_set_size_request (plugin->tray, -1, size);
-    else
-        gtk_widget_set_size_request (plugin->tray, size, -1);
+    /* set the new plugin size */
+    xfce_tray_widget_set_size_request (XFCE_TRAY_WIDGET (plugin->tray), size - border);
     
     /* we handled the size of the plugin */
     return TRUE;
