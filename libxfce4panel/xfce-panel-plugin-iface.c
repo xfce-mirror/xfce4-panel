@@ -343,15 +343,35 @@ void
 _xfce_panel_plugin_signal_size (XfcePanelPlugin *plugin,
                                 gint             size)
 {
-    gboolean handled = FALSE;
+    gboolean       handled = FALSE;
+    GtkOrientation orientation;
+    gint           width, height;
 
     _panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
+    /* emit signal */
     g_signal_emit (G_OBJECT (plugin), xfce_panel_plugin_signals[SIZE_CHANGED], 0,
                    size, &handled);
 
     if (!handled)
+    {
+        /* size was not handled by the plugin, so we set it */
         gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
+    }
+    else
+    {
+        /* get the orientation of the panel */
+        orientation = xfce_panel_plugin_get_orientation (plugin);
+
+        /* get the requested plugin size */
+        gtk_widget_get_size_request (GTK_WIDGET (plugin), &width, &height);
+
+        /* force the plugin size */
+        if (orientation == GTK_ORIENTATION_HORIZONTAL)
+            gtk_widget_set_size_request (GTK_WIDGET (plugin), width, size);
+        else
+            gtk_widget_set_size_request (GTK_WIDGET (plugin), size, height);
+    }
 }
 
 

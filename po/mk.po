@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 13:40+0200\n"
+"POT-Creation-Date: 2007-09-10 14:03+0200\n"
 "PO-Revision-Date: 2006-12-24 01:15+0100\n"
 "Last-Translator: Jovan Naumovski <jovan@lugola.net>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -54,12 +54,12 @@ msgstr "Веб прелистувач"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Предметот беше неочекувано отстранет: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:602
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:622
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Да го отстранам \"%s\"?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:616
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:636
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
@@ -67,29 +67,29 @@ msgstr ""
 "изгубена."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:845
 msgid "Properties"
 msgstr "Својсвта"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:842
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:862
 msgid "About"
 msgstr "За"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:874
 msgid "Move"
 msgstr "Премести"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:873
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:893
 msgid "Remove"
 msgstr "Отстрани"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:890
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:910
 msgid "Add New Item"
 msgstr "Додај нов предмет"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:901 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:921 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Прилагоди го панелот"
@@ -240,22 +240,22 @@ msgid "Span Monitors"
 msgstr "Прошири на монитор"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
 msgid "Left"
 msgstr "Лево"
 
 #: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
-#: ../panel/panel-dialogs.c:1521
+#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1551
 msgid "Right"
 msgstr "Десно"
 
 #: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
-#: ../panel/panel-dialogs.c:1522
+#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1552
 msgid "Top"
 msgstr "Горе"
 
 #: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
-#: ../panel/panel-dialogs.c:1523
+#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1553
 msgid "Bottom"
 msgstr "Долу "
 
@@ -304,7 +304,7 @@ msgstr "Одбери монитор"
 #. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:238
+#: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -414,7 +414,7 @@ msgstr "LED"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
-#: ../plugins/systray/xfce-tray-dialogs.c:244
+#: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Show _frame"
 msgstr "Прикажи _рамка"
 
@@ -445,101 +445,115 @@ msgstr "Прикажувај апликации од сите работни п�
 msgid "Use all available space"
 msgstr "Користи го целиот слободен простор"
 
-#. create new menu item
+#. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:743 ../plugins/launcher/launcher.c:803
 msgid "New Item"
 msgstr "Нов предмет"
 
-#: ../plugins/launcher/launcher-exec.c:515
+#: ../plugins/launcher/launcher-exec.c:517
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Не можам да извршам \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:580
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:600
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Одбери монитор"
 
-#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Одберете го типот на дејство:"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:674
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:680
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:686
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:692
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:766
+#: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1116
 #, fuzzy
 msgid "_Name"
 msgstr "Име"
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1134
 #, fuzzy
 msgid "_Description"
 msgstr "Опис"
 
-#: ../plugins/launcher/launcher-dialog.c:1141
+#: ../plugins/launcher/launcher-dialog.c:1153
 #, fuzzy
 msgid "_Icon"
 msgstr "Поле со икони"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1171
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Команда"
 
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1218
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
 msgstr "Изврши во _терминал"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1246
 msgid "Use _startup notification"
 msgstr "Користи известување при _подигнување"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1515
 msgid "Program Launcher"
 msgstr "Пуштач на програми"
+
+#: ../plugins/launcher/launcher-dialog.c:1543
+#, fuzzy
+msgid "A_rrow:"
+msgstr "Копче со с_трелка"
+
+#: ../plugins/launcher/launcher-dialog.c:1549
+msgid "Default"
+msgstr "Стандардно"
+
+#: ../plugins/launcher/launcher-dialog.c:1554
+#, fuzzy
+msgid "Inside Button"
+msgstr "Копче со _икона"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -599,18 +613,18 @@ msgstr "Скриј ги прозорците и прикажи ја работн
 
 #. create a dialog
 #. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:224
+#: ../plugins/systray/xfce-tray-plugin.c:73
+#: ../plugins/systray/xfce-tray-dialogs.c:259
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "Системска лента"
 
-#: ../plugins/systray/xfce-tray-plugin.c:97
+#: ../plugins/systray/xfce-tray-plugin.c:99
 msgid "There is already a system tray running on this screen"
 msgstr "Има веќе системска лента на овој екран"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:251
+#: ../plugins/systray/xfce-tray-dialogs.c:287
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "Одберете го типот на дејство:"
@@ -872,9 +886,6 @@ msgstr "Xfce 4 менаџер на панели"
 
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Овој предмет сѐ уште не е конфигуриран"
-
-#~ msgid "Default"
-#~ msgstr "Стандардно"
 
 #~ msgid "File management"
 #~ msgstr "Менаџмент на датотеки"

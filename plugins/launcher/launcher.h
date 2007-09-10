@@ -25,16 +25,23 @@
 #include <exo/exo.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
-#define STARTUP_TIMEOUT   (30 * 1000)
-#define ARROW_WIDTH       16
-#define MENU_ICON_SIZE    24
-#define MENU_POPUP_DELAY  225
-#define BORDER            8
-#define TREE_ICON_SIZE    24
-#define CHOOSER_ICON_SIZE 48
+#define BORDER                     (8)
+#define LAUNCHER_NEW_TOOLTIP_API   (GTK_CHECK_VERSION (2,11,6))
+#define LAUNCHER_ARROW_SIZE        (16)
+#define LAUNCHER_POPUP_DELAY       (225)
+#define LAUNCHER_TOOLTIP_SIZE      (32)
+#define LAUNCHER_MENU_SIZE	       (24)
+#define LAUNCHER_STARTUP_TIMEOUT   (30 * 1000)
+#define LAUNCHER_TREE_ICON_SIZE    (24)
+#define LAUNCHER_CHOOSER_ICON_SIZE (48)
 
-#define g_free_null(mem)          g_free (mem); mem = NULL
-#define g_slist_free_all(list)    g_slist_foreach (list, (GFunc) g_free, NULL); g_slist_free (list)
+
+/* frequently used code */
+#define launcher_free_filenames(list) G_STMT_START{ \
+    g_slist_foreach (list, (GFunc) g_free, NULL); \
+    g_slist_free (list); \
+    }G_STMT_END
+
 
 typedef struct _LauncherEntry  LauncherEntry;
 typedef struct _LauncherPlugin LauncherPlugin;
@@ -55,26 +62,43 @@ struct _LauncherEntry
 
 struct _LauncherPlugin
 {
-    /* globals */
-    XfcePanelPlugin *plugin;
-    GtkTooltips     *tips;
+    /* panel plugin */
+    XfcePanelPlugin *panel_plugin;
+
+    /* whether saving is allowed */
+    guint            plugin_can_save : 1;
+    gint             image_size;
+
+    /* list of launcher entries */
     GList           *entries;
 
-    /* cpu saver */
-    guint            icon_update_required : 1;
-
     /* panel widgets */
-    GtkWidget       *arrowbutton;
-    GtkWidget       *iconbutton;
+    GtkWidget       *box;
+    GtkWidget       *icon_button;
+    GtkWidget       *arrow_button;
     GtkWidget       *image;
     GtkWidget       *menu;
+#if !LAUNCHER_NEW_TOOLTIP_API
+    GtkTooltips     *tips;
+#endif
 
-    /* global settings */
-    guint            move_first : 1;
-
-    /* timeouts */
+    /* event source ids */
     guint            popup_timeout_id;
     guint            theme_timeout_id;
+
+    /* settings */
+    guint            move_first : 1;
+    guint            arrow_position;
+};
+
+enum
+{
+    LAUNCHER_ARROW_DEFAULT = 0,
+    LAUNCHER_ARROW_LEFT,
+    LAUNCHER_ARROW_RIGHT,
+    LAUNCHER_ARROW_TOP,
+    LAUNCHER_ARROW_BOTTOM,
+    LAUNCHER_ARROW_INSIDE_BUTTON
 };
 
 /* target types for dropping in the launcher plugin */
@@ -83,20 +107,18 @@ static const GtkTargetEntry drop_targets[] =
     { "text/uri-list", 0, 0, },
 };
 
-void                     launcher_g_list_swap                (GList              *li_a,
-                                                              GList              *li_b)           G_GNUC_INTERNAL;
-GdkPixbuf               *launcher_load_pixbuf                (GtkWidget          *widget,
-                                                              const gchar        *icon_name,
-                                                              guint               size,
-                                                              gboolean            fallback)       G_GNUC_INTERNAL G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
-void                     launcher_set_move_first             (gboolean            activate)       G_GNUC_INTERNAL;
-GSList                  *launcher_file_list_from_selection   (GtkSelectionData   *selection_data) G_GNUC_INTERNAL G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
-gboolean                 launcher_button_update              (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
-gboolean                 launcher_menu_prepare               (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
-void                     launcher_read                       (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
-void                     launcher_write                      (LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
-void                     launcher_free_entry                 (LauncherEntry      *entry,
-                                                              LauncherPlugin     *launcher)       G_GNUC_INTERNAL;
-LauncherEntry           *launcher_new_entry                  (void)                               G_GNUC_INTERNAL G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
+
+GSList        *launcher_utility_filenames_from_selection_data (GtkSelectionData *selection_data) G_GNUC_MALLOC G_GNUC_INTERNAL;
+GdkPixbuf     *launcher_utility_load_pixbuf                   (GdkScreen        *screen,
+                                                               const gchar      *name,
+                                                               guint             size) G_GNUC_MALLOC G_GNUC_INTERNAL;
+LauncherEntry *launcher_entry_new                             (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
+void           launcher_entry_free                            (LauncherEntry    *entry,
+                                                               LauncherPlugin   *launcher) G_GNUC_INTERNAL;
+void           launcher_plugin_rebuild                        (LauncherPlugin   *launcher,
+                                                               gboolean          update_icon) G_GNUC_INTERNAL;
+void           launcher_plugin_read                           (LauncherPlugin   *launcher) G_GNUC_INTERNAL;
+void           launcher_plugin_save                           (LauncherPlugin   *launcher) G_GNUC_INTERNAL;
 
 #endif /* !__XFCE_PANEL_LAUNCHER_H__ */

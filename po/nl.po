@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 13:40+0200\n"
+"POT-Creation-Date: 2007-09-10 14:03+0200\n"
 "PO-Revision-Date: 2006-08-12 17:06+0200\n"
 "Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -53,12 +53,12 @@ msgstr "Web browser"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Een item was onverwacht verwijderd: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:602
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:622
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "\"%s\" verwijderen?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:616
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:636
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
@@ -66,29 +66,29 @@ msgstr ""
 "configuratie gaat verloren."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:845
 msgid "Properties"
 msgstr "Eigenschappen"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:842
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:862
 msgid "About"
 msgstr "Info"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:874
 msgid "Move"
 msgstr "Verplaatsen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:873
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:893
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:890
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:910
 msgid "Add New Item"
 msgstr "Nieuw item toevoegen"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:901 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:921 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Paneel configureren"
@@ -238,22 +238,22 @@ msgid "Span Monitors"
 msgstr "Over meerdere monitoren"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
 msgid "Left"
 msgstr "Links"
 
 #: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
-#: ../panel/panel-dialogs.c:1521
+#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1551
 msgid "Right"
 msgstr "Rechts"
 
 #: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
-#: ../panel/panel-dialogs.c:1522
+#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1552
 msgid "Top"
 msgstr "Boven"
 
 #: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
-#: ../panel/panel-dialogs.c:1523
+#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1553
 msgid "Bottom"
 msgstr "Onder"
 
@@ -302,7 +302,7 @@ msgstr "Monitor selecteren"
 #. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:238
+#: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -412,7 +412,7 @@ msgstr "LED"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
-#: ../plugins/systray/xfce-tray-dialogs.c:244
+#: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Show _frame"
 msgstr "_Frame tonen"
 
@@ -443,101 +443,115 @@ msgstr "Vensters van alle bureaubladen tonen"
 msgid "Use all available space"
 msgstr "Alle beschikbare ruimte opvullen"
 
-#. create new menu item
+#. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:743 ../plugins/launcher/launcher.c:803
 msgid "New Item"
 msgstr "Nieuw Item"
 
-#: ../plugins/launcher/launcher-exec.c:515
+#: ../plugins/launcher/launcher-exec.c:517
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Kon \"%s\" niet uitvoeren"
 
-#: ../plugins/launcher/launcher-dialog.c:580
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:600
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Monitor selecteren"
 
-#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Actie selecteren:"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:674
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:680
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:686
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:692
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:766
+#: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1116
 #, fuzzy
 msgid "_Name"
 msgstr "Naam"
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1134
 #, fuzzy
 msgid "_Description"
 msgstr "Beschrijving"
 
-#: ../plugins/launcher/launcher-dialog.c:1141
+#: ../plugins/launcher/launcher-dialog.c:1153
 #, fuzzy
 msgid "_Icon"
 msgstr "Iconbox"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1171
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Commando"
 
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1218
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
 msgstr "Uitvoeren in _terminal"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1246
 msgid "Use _startup notification"
 msgstr "Opstart-_notificatie gebruiken"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1515
 msgid "Program Launcher"
 msgstr "Snelkoppeling"
+
+#: ../plugins/launcher/launcher-dialog.c:1543
+#, fuzzy
+msgid "A_rrow:"
+msgstr "Knop met _pijl"
+
+#: ../plugins/launcher/launcher-dialog.c:1549
+msgid "Default"
+msgstr "Standaard"
+
+#: ../plugins/launcher/launcher-dialog.c:1554
+#, fuzzy
+msgid "Inside Button"
+msgstr "Knop met pictogram"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -597,18 +611,18 @@ msgstr "Vensters verbergen en bureaublad tonen"
 
 #. create a dialog
 #. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:224
+#: ../plugins/systray/xfce-tray-plugin.c:73
+#: ../plugins/systray/xfce-tray-dialogs.c:259
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "Systeemvak"
 
-#: ../plugins/systray/xfce-tray-plugin.c:97
+#: ../plugins/systray/xfce-tray-plugin.c:99
 msgid "There is already a system tray running on this screen"
 msgstr "Er is al een systeemvak actief op dit scherm"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:251
+#: ../plugins/systray/xfce-tray-dialogs.c:287
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "Actie selecteren:"
@@ -870,9 +884,6 @@ msgstr "Xfce 4 Paneel Manager"
 
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Dit item moet nog geconfigureerd worden"
-
-#~ msgid "Default"
-#~ msgstr "Standaard"
 
 #~ msgid "File management"
 #~ msgstr "Bestandsbeheer"

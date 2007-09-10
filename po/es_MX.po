@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 13:40+0200\n"
+"POT-Creation-Date: 2007-09-10 14:03+0200\n"
 "PO-Revision-Date: 2005-08-18 01:08+0900\n"
 "Last-Translator: Edscott Wilson García <edscott@xfce.org>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -56,43 +56,43 @@ msgstr "Navegador de ayuda"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr ""
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:602
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:622
 #, fuzzy, c-format
 msgid "Remove \"%s\"?"
 msgstr "_Eliminar"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:616
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:636
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:845
 msgid "Properties"
 msgstr ""
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:842
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:862
 msgid "About"
 msgstr ""
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:874
 #, fuzzy
 msgid "Move"
 msgstr "_Eliminar"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:873
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:893
 #, fuzzy
 msgid "Remove"
 msgstr "_Eliminar"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:890
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:910
 #, fuzzy
 msgid "Add New Item"
 msgstr "Añadir nuevo elemento"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:901 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:921 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr ""
@@ -241,22 +241,22 @@ msgid "Span Monitors"
 msgstr "Editor"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
 msgid "Left"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
-#: ../panel/panel-dialogs.c:1521
+#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1551
 msgid "Right"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
-#: ../panel/panel-dialogs.c:1522
+#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1552
 msgid "Top"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
-#: ../panel/panel-dialogs.c:1523
+#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1553
 msgid "Bottom"
 msgstr ""
 
@@ -311,7 +311,7 @@ msgstr "Editor"
 #. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:238
+#: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -429,7 +429,7 @@ msgstr "LED"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
-#: ../plugins/systray/xfce-tray-dialogs.c:244
+#: ../plugins/systray/xfce-tray-dialogs.c:280
 #, fuzzy
 msgid "Show _frame"
 msgstr "Mostrar tiempo"
@@ -464,104 +464,117 @@ msgstr "Mostrar tareas de todos los escritorios virtuales"
 msgid "Use all available space"
 msgstr ""
 
-#. create new menu item
+#. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:743 ../plugins/launcher/launcher.c:803
 #, fuzzy
 msgid "New Item"
 msgstr "Añadir nuevo elemento"
 
-#: ../plugins/launcher/launcher-exec.c:515
+#: ../plugins/launcher/launcher-exec.c:517
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "No se pudo crear el elemento de panel \"%s\"."
 
-#: ../plugins/launcher/launcher-dialog.c:580
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:600
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Editor"
 
-#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Seleccionar comando"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:674
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:680
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:686
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:692
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:766
+#: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1116
 #, fuzzy
 msgid "_Name"
 msgstr "Juegos"
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1134
 #, fuzzy
 msgid "_Description"
 msgstr "Posición"
 
-#: ../plugins/launcher/launcher-dialog.c:1141
+#: ../plugins/launcher/launcher-dialog.c:1153
 #, fuzzy
 msgid "_Icon"
 msgstr "Caja de íconos"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1171
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Comando:"
 
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1218
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
 msgstr "Ejecutar en _terminal"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1246
 #, fuzzy
 msgid "Use _startup notification"
 msgstr "Usar notificación de arranque"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1515
 #, fuzzy
 msgid "Program Launcher"
 msgstr "Anexarle un menú al lanzador"
+
+#: ../plugins/launcher/launcher-dialog.c:1543
+msgid "A_rrow:"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1549
+msgid "Default"
+msgstr "Por defecto"
+
+#: ../plugins/launcher/launcher-dialog.c:1554
+#, fuzzy
+msgid "Inside Button"
+msgstr "Caja de íconos"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -622,18 +635,18 @@ msgstr ""
 
 #. create a dialog
 #. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:224
+#: ../plugins/systray/xfce-tray-plugin.c:73
+#: ../plugins/systray/xfce-tray-dialogs.c:259
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr ""
 
-#: ../plugins/systray/xfce-tray-plugin.c:97
+#: ../plugins/systray/xfce-tray-plugin.c:99
 msgid "There is already a system tray running on this screen"
 msgstr "Ya hay una bandeja de iconos funcionando en esta pantalla"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:251
+#: ../plugins/systray/xfce-tray-dialogs.c:287
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "Seleccionar comando"
@@ -875,9 +888,6 @@ msgstr "Tamaño del panel:"
 #, fuzzy
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Este elemento no tiene opciones de configuración"
-
-#~ msgid "Default"
-#~ msgstr "Por defecto"
 
 #~ msgid "File management"
 #~ msgstr "Administración de archivos"

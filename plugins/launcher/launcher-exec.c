@@ -20,20 +20,22 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#ifdef HAVE_MEMORY_H
-#include <memory.h>
-#endif
-#ifdef HAVE_STRING_H
-#include <string.h>
-#endif
-#ifdef HAVE_ERRNO_H
-#include <errno.h>
-#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
 #ifdef HAVE_SYS_WAIT_H
 #include <sys/wait.h>
+#endif
+
+#ifdef HAVE_ERRNO_H
+#include <errno.h>
+#endif
+#ifdef HAVE_MEMORY_H
+#include <memory.h>
+#endif
+#ifdef HAVE_STRING_H
+#include <string.h>
 #endif
 
 #ifndef WAIT_ANY
@@ -154,7 +156,7 @@ launcher_exec_startup_timeout (gpointer data)
     elapsed = (((gdouble) now.tv_sec - tv_sec) * G_USEC_PER_SEC + (now.tv_usec - tv_usec)) / 1000.0;
 
     /* check if the timeout was reached */
-    if (elapsed >= STARTUP_TIMEOUT)
+    if (elapsed >= LAUNCHER_STARTUP_TIMEOUT)
     {
         /* abort the startup notification */
         sn_launcher_context_complete (startup_data->sn_launcher);
@@ -163,7 +165,7 @@ launcher_exec_startup_timeout (gpointer data)
     }
 
     /* keep the startup timeout if not elapsed */
-    return (elapsed < STARTUP_TIMEOUT);
+    return (elapsed < LAUNCHER_STARTUP_TIMEOUT);
 }
 
 
@@ -211,7 +213,7 @@ launcher_exec_startup_watch (GPid     pid,
       {
         /* get the child process state without hanging */
         ret = waitpid (WAIT_ANY, NULL, WNOHANG);
-        
+
         /* exit if there is nothing to wait for */
         if (ret == 0 || ret < 0)
           break;
@@ -487,7 +489,7 @@ launcher_exec_on_screen (GdkScreen     *screen,
             /* schedule a startup notification timeout */
             startup_data = panel_slice_new (LauncherStartupData);
             startup_data->sn_launcher = sn_launcher;
-            startup_data->timeout_id = g_timeout_add_full (G_PRIORITY_LOW, STARTUP_TIMEOUT,
+            startup_data->timeout_id = g_timeout_add_full (G_PRIORITY_LOW, LAUNCHER_STARTUP_TIMEOUT,
                                                            launcher_exec_startup_timeout,
                                                            startup_data, launcher_exec_startup_timeout_destroy);
             startup_data->watch_id = g_child_watch_add_full (G_PRIORITY_LOW, pid, launcher_exec_startup_watch,
@@ -547,7 +549,7 @@ launcher_execute (GdkScreen     *screen,
         screen = gdk_screen_get_default ();
 
     /* maybe no command have been filed yet */
-    if (G_UNLIKELY (entry->exec == NULL))
+    if (G_UNLIKELY (entry->exec == NULL || *entry->exec == '\0'))
         return;
 
     /* check if the launcher supports (and needs) multiple instances */
@@ -583,12 +585,8 @@ launcher_execute_from_clipboard (GdkScreen     *screen,
 {
     GtkClipboard     *clipboard;
     gchar            *text = NULL;
-    GSList           *file_list = NULL;
+    GSList           *filenames;
     GtkSelectionData  selection_data;
-
-    /* maybe no command have been filed yet */
-    if (G_UNLIKELY (entry->exec == NULL))
-        return;
 
     /* get the clipboard */
     clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
@@ -605,26 +603,26 @@ launcher_execute_from_clipboard (GdkScreen     *screen,
 
         /* get clipboard text */
         if (G_LIKELY (clipboard))
-        text = gtk_clipboard_wait_for_text (clipboard);
+            text = gtk_clipboard_wait_for_text (clipboard);
     }
 
-    if (G_LIKELY (text != NULL))
+    if (G_LIKELY (text))
     {
         /* create some fake selection data */
         selection_data.data = (guchar *) text;
         selection_data.length = strlen (text);
 
         /* parse the filelist, this way we can handle 'copied' file from thunar */
-        file_list = launcher_file_list_from_selection (&selection_data);
+        filenames = launcher_utility_filenames_from_selection_data (&selection_data);
 
-        if (G_LIKELY (file_list != NULL))
+        if (G_LIKELY (filenames))
         {
             /* run the command with argument from clipboard */
-            launcher_exec_on_screen (screen, entry, file_list);
+            launcher_execute (screen, entry, filenames);
 
             /* cleanup */
-            g_slist_free_all (file_list);
-    }
+            launcher_free_filenames (filenames);
+        }
 
         /* cleanup */
         g_free (text);

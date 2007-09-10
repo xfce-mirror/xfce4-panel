@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 13:40+0200\n"
+"POT-Creation-Date: 2007-09-10 14:03+0200\n"
 "PO-Revision-Date: 2006-08-24 18:15+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg@serverhive.com>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -54,12 +54,12 @@ msgstr "Περιηγητής ιστοσελίδων"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Ένα αντικείμενο αφαιρέθηκε αναπάντεχα: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:602
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:622
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Να διαγραφεί το \"%s\";"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:616
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:636
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
@@ -67,29 +67,29 @@ msgstr ""
 "χαθούν."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:845
 msgid "Properties"
 msgstr "Ιδιότητες"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:842
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:862
 msgid "About"
 msgstr "Περί"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:874
 msgid "Move"
 msgstr "Μετακίνηση"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:873
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:893
 msgid "Remove"
 msgstr "Διαγραφή"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:890
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:910
 msgid "Add New Item"
 msgstr "Νέο αντικείμενο"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:901 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:921 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Προσαρμογή ταμπλό"
@@ -240,22 +240,22 @@ msgid "Span Monitors"
 msgstr "Σε όλες τις οθόνες"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
 msgid "Left"
 msgstr "Αριστερά"
 
 #: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
-#: ../panel/panel-dialogs.c:1521
+#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1551
 msgid "Right"
 msgstr "Δεξιά"
 
 #: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
-#: ../panel/panel-dialogs.c:1522
+#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1552
 msgid "Top"
 msgstr "Επάνω"
 
 #: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
-#: ../panel/panel-dialogs.c:1523
+#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1553
 msgid "Bottom"
 msgstr "Κάτω"
 
@@ -304,7 +304,7 @@ msgstr "Οθόνη"
 #. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:238
+#: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -414,7 +414,7 @@ msgstr "LED"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
-#: ../plugins/systray/xfce-tray-dialogs.c:244
+#: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Show _frame"
 msgstr "Εμ_φάνιση πλαισίου"
 
@@ -445,101 +445,115 @@ msgstr "Προβολή εφαρμογών από όλους τους χώρων 
 msgid "Use all available space"
 msgstr "Χρήση όλου του διαθέσιμου χώρου"
 
-#. create new menu item
+#. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:743 ../plugins/launcher/launcher.c:803
 msgid "New Item"
 msgstr "Νέο αντικείμενο"
 
-#: ../plugins/launcher/launcher-exec.c:515
+#: ../plugins/launcher/launcher-exec.c:517
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Δεν ήταν δυνατή η εκτέλεση του \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:580
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:600
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Οθόνη"
 
-#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Επιλογή τύπου ενέργειας:"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:674
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:680
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:686
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:692
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:766
+#: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1116
 #, fuzzy
 msgid "_Name"
 msgstr "Όνομα"
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1134
 #, fuzzy
 msgid "_Description"
 msgstr "Περιγραφή"
 
-#: ../plugins/launcher/launcher-dialog.c:1141
+#: ../plugins/launcher/launcher-dialog.c:1153
 #, fuzzy
 msgid "_Icon"
 msgstr "Εικονοθήκη"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1171
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Εντολή"
 
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1218
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
 msgstr "Εκτέλεση σε _τερματικό"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1246
 msgid "Use _startup notification"
 msgstr "Χρήση γνω_στοποίηση εκκίνησης"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1515
 msgid "Program Launcher"
 msgstr "Εκκινητής προγράμματος"
+
+#: ../plugins/launcher/launcher-dialog.c:1543
+#, fuzzy
+msgid "A_rrow:"
+msgstr "_Βέλος"
+
+#: ../plugins/launcher/launcher-dialog.c:1549
+msgid "Default"
+msgstr "Προκαθορισμένο"
+
+#: ../plugins/launcher/launcher-dialog.c:1554
+#, fuzzy
+msgid "Inside Button"
+msgstr "_Εικονίδιο"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -599,18 +613,18 @@ msgstr "Απόκρυψη των παραθύρων και εμφάνιση τη�
 
 #. create a dialog
 #. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:224
+#: ../plugins/systray/xfce-tray-plugin.c:73
+#: ../plugins/systray/xfce-tray-dialogs.c:259
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "Πίνακας συστήματος"
 
-#: ../plugins/systray/xfce-tray-plugin.c:97
+#: ../plugins/systray/xfce-tray-plugin.c:99
 msgid "There is already a system tray running on this screen"
 msgstr "Υπάρχει ήδη μια εργαλειοθήκη συστήματος σε αυτή την οθόνη"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:251
+#: ../plugins/systray/xfce-tray-dialogs.c:287
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "Επιλογή τύπου ενέργειας:"
@@ -872,9 +886,6 @@ msgstr "Διαχειριστής ταμπλό Xfce 4"
 
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Αυτό το αντικείμενο δεν έχει ρυθμιστεί ακόμα "
-
-#~ msgid "Default"
-#~ msgstr "Προκαθορισμένο"
 
 #~ msgid "File management"
 #~ msgstr "Διαχείριση αρχείων"

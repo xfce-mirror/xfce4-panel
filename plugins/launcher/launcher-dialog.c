@@ -35,10 +35,11 @@
 #include "launcher.h"
 #include "launcher-dialog.h"
 
+
 enum
 {
-    COL_ICON = 0,
-    COL_TEXT
+    COLUMN_ICON = 0,
+    COLUMN_NAME
 };
 
 typedef struct _LauncherDialog LauncherDialog;
@@ -46,6 +47,12 @@ typedef struct _LauncherDialog LauncherDialog;
 struct _LauncherDialog
 {
     LauncherPlugin *launcher;
+
+    /* stored setting */
+    guint           stored_move_first : 1;
+
+    /* arrow position */
+    GtkWidget      *arrow_position;
 
     /* entries list */
     GtkWidget      *treeview;
@@ -80,7 +87,8 @@ struct _LauncherDialog
 /**
  * Prototypes
  **/
-static gchar      *launcher_dialog_parse_exec                (const gchar           *exec) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+static void        launcher_dialog_g_list_swap               (GList                 *li_a,
+                                                              GList                 *li_b);
 static gboolean    launcher_dialog_read_desktop_file         (const gchar           *file,
                                                               LauncherEntry         *entry);
 static void        launcher_dialog_tree_drag_data_received   (GtkWidget             *widget,
@@ -99,7 +107,6 @@ static void        launcher_dialog_frame_drag_data_received  (GtkWidget         
                                                               guint                  info,
                                                               guint                  time,
                                                               LauncherDialog        *ld);
-static void        launcher_dialog_update_panel              (LauncherDialog        *ld);
 static void        launcher_dialog_save_entry                (GtkWidget             *entry,
                                                                LauncherDialog        *ld);
 static void        launcher_dialog_save_button               (GtkWidget             *button,
@@ -109,7 +116,6 @@ static void        launcher_dialog_update_icon               (LauncherDialog    
 static void        launcher_dialog_folder_chooser            (LauncherDialog        *ld);
 static void        launcher_dialog_command_chooser           (LauncherDialog        *ld);
 static void        launcher_dialog_icon_chooser              (LauncherDialog        *ld);
-static void        launcher_dialog_tree_free_store           (LauncherDialog        *ld);
 static void        launcher_dialog_tree_update_row           (LauncherDialog        *ld,
                                                               gint                   column);
 static void        launcher_dialog_tree_selection_changed    (LauncherDialog        *ld,
@@ -128,21 +134,17 @@ static void        launcher_dialog_response                  (GtkWidget         
 /**
  * .Desktop entry
  **/
-static gchar *
-launcher_dialog_parse_exec (const gchar *exec)
+static void
+launcher_dialog_g_list_swap (GList *li_a,
+                             GList *li_b)
 {
-    gchar *command;
+    gpointer data;
 
-    /* quit if nothing is set */
-    if (exec == NULL)
-        return NULL;
-
-    /* expand enviorement variables like ~/ and ~user/ */
-    command = xfce_expand_variables (exec, NULL);
-
-    return command;
+    /* swap the data pointers */
+    data = li_a->data;
+    li_a->data = li_b->data;
+    li_b->data = data;
 }
-
 
 
 static gboolean
@@ -203,7 +205,7 @@ launcher_dialog_read_desktop_file (const gchar   *path,
         g_free (entry->exec);
 
         /* expand variables and store */
-        entry->exec = launcher_dialog_parse_exec (value);
+        entry->exec = value ? xfce_expand_variables (value, NULL) : NULL;
     }
 
     /* working directory */
@@ -247,13 +249,14 @@ launcher_dialog_tree_drag_data_received (GtkWidget        *widget,
     GtkTreeModel            *model;
     GtkTreeIter              iter_a;
     GtkTreeIter              iter_b;
-    GSList                  *file_list = NULL;
+    GSList                  *filenames = NULL;
     GSList                  *li;
-    gchar                   *file;
+    const gchar             *file;
     gboolean                 insert_before = FALSE;
+    gboolean                 update_icon = FALSE;
     gint                     i = 0;
     LauncherEntry           *entry;
-    GdkPixbuf               *icon = NULL;
+    GdkPixbuf               *pixbuf;
 
     /* get drop position in the tree */
     if (gtk_tree_view_get_dest_row_at_pos (GTK_TREE_VIEW (ld->treeview),
@@ -289,48 +292,47 @@ launcher_dialog_tree_drag_data_received (GtkWidget        *widget,
                 break;
          }
 
-        /* we need to update the button icon if something was dropped on the first position */
+        /* we need to update the button icon afterwards */
         if (i == 0)
-            ld->launcher->icon_update_required = TRUE;
+            update_icon = TRUE;
 
         /* create list from selection data */
-        file_list = launcher_file_list_from_selection (selection_data);
+        filenames = launcher_utility_filenames_from_selection_data (selection_data);
     }
 
-    if (G_LIKELY (file_list != NULL))
+    if (G_LIKELY (filenames != NULL))
     {
-        for (li = file_list; li != NULL; li = li->next)
+        for (li = filenames; li != NULL; li = li->next)
         {
-            file = (gchar *) li->data;
+            file = li->data;
 
             /* create new entry */
-            entry = launcher_new_entry ();
+            entry = launcher_entry_new ();
 
             /* try to parse desktop file */
             if (G_LIKELY (launcher_dialog_read_desktop_file (file, entry) == TRUE))
             {
-                /* try to load the pixbuf */
-                icon = launcher_load_pixbuf (ld->treeview, entry->icon, TREE_ICON_SIZE, TRUE);
-
                 /* insert new row in store */
                 if (insert_before)
                     gtk_list_store_insert_before (ld->store, &iter_b, &iter_a);
                 else
                     gtk_list_store_insert_after (ld->store, &iter_b, &iter_a);
 
+                /* try to load the pixbuf */
+                pixbuf = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->treeview), entry->icon, LAUNCHER_TREE_ICON_SIZE);
+
                 /* set tree data */
                 gtk_list_store_set (ld->store, &iter_b,
-                                    COL_ICON, icon,
-                                    COL_TEXT, entry->name,
+                                    COLUMN_ICON, pixbuf,
+                                    COLUMN_NAME, entry->name,
                                     -1);
 
                 /* release pixbuf */
-                if (G_LIKELY (icon != NULL))
-                    g_object_unref (G_OBJECT (icon));
+                if (G_LIKELY (pixbuf != NULL))
+                    g_object_unref (G_OBJECT (pixbuf));
 
                 /* insert in list */
-                ld->launcher->entries = g_list_insert (ld->launcher->entries,
-                                                        entry, i);
+                ld->launcher->entries = g_list_insert (ld->launcher->entries, entry, i);
 
                 /* copy iter, so we add after last item */
                 iter_a = iter_b;
@@ -345,7 +347,7 @@ launcher_dialog_tree_drag_data_received (GtkWidget        *widget,
             else
             {
                 /* desktop file pasring failed, free new entry */
-                launcher_free_entry (entry, NULL);
+                launcher_entry_free (entry, NULL);
             }
         }
 
@@ -353,10 +355,10 @@ launcher_dialog_tree_drag_data_received (GtkWidget        *widget,
         gtk_tree_view_set_cursor (GTK_TREE_VIEW (ld->treeview), path, NULL, FALSE);
 
         /* update the panel */
-        launcher_dialog_update_panel (ld);
+        launcher_plugin_rebuild (ld->launcher, update_icon);
 
         /* cleanup */
-        g_slist_free_all (file_list);
+        launcher_free_filenames (filenames);
     }
 
     /* free path */
@@ -379,16 +381,16 @@ launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
                                           guint             time,
                                           LauncherDialog   *ld)
 {
-    GSList *file_list = NULL;
-    GSList *li;
-    gchar  *file;
+    GSList   *filenames, *li;
+    gchar    *file;
+    gboolean  update_icon = FALSE;
 
     /* create list from all the uri list */
-    file_list = launcher_file_list_from_selection (selection_data);
+    filenames = launcher_utility_filenames_from_selection_data (selection_data);
 
-    if (G_LIKELY (file_list != NULL))
+    if (G_LIKELY (filenames != NULL))
     {
-        for (li = file_list; li != NULL; li = li->next)
+        for (li = filenames; li != NULL; li = li->next)
         {
             file = (gchar *) li->data;
 
@@ -399,14 +401,15 @@ launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
                 launcher_dialog_update_entries (ld);
 
                 /* update the tree */
-                launcher_dialog_tree_update_row (ld, COL_TEXT);
-                launcher_dialog_tree_update_row (ld, COL_ICON);
-                
+                launcher_dialog_tree_update_row (ld, COLUMN_NAME);
+                launcher_dialog_tree_update_row (ld, COLUMN_ICON);
+
                 /* also update the panel button icon */
-                ld->launcher->icon_update_required = TRUE;
+                if (g_list_index (ld->launcher->entries, ld->entry) == 0)
+                    update_icon = TRUE;
 
                 /* update the panel */
-                launcher_dialog_update_panel (ld);
+                launcher_plugin_rebuild (ld->launcher, update_icon);
 
                 /* stop trying */
                 break;
@@ -414,7 +417,7 @@ launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
         }
 
         /* cleanup */
-        g_slist_free_all (file_list);
+        launcher_free_filenames (filenames);
     }
 
     /* finish drag */
@@ -426,15 +429,6 @@ launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
 /**
  * Properties update and save functions
  **/
-static void
-launcher_dialog_update_panel (LauncherDialog *ld)
-{
-    g_idle_add ((GSourceFunc) launcher_button_update, ld->launcher);
-    g_idle_add ((GSourceFunc) launcher_menu_prepare, ld->launcher);
-}
-
-
-
 static void
 launcher_dialog_save_entry (GtkWidget      *entry,
                             LauncherDialog *ld)
@@ -459,7 +453,7 @@ launcher_dialog_save_entry (GtkWidget      *entry,
         ld->entry->name = g_strdup (text);
 
         /* update tree, when triggered by widget */
-        launcher_dialog_tree_update_row (ld, COL_TEXT);
+        launcher_dialog_tree_update_row (ld, COLUMN_NAME);
     }
     else if (entry == ld->entry_comment)
     {
@@ -469,7 +463,7 @@ launcher_dialog_save_entry (GtkWidget      *entry,
     else if (entry == ld->entry_exec)
     {
         g_free (ld->entry->exec);
-        ld->entry->exec = launcher_dialog_parse_exec (text);
+        ld->entry->exec = text ? xfce_expand_variables (text, NULL) : NULL;
     }
     else if (entry == ld->entry_path)
     {
@@ -478,7 +472,7 @@ launcher_dialog_save_entry (GtkWidget      *entry,
     }
 
     /* update panel */
-    launcher_dialog_update_panel (ld);
+    launcher_plugin_rebuild (ld->launcher, FALSE);
 }
 
 
@@ -565,21 +559,24 @@ launcher_dialog_update_icon (LauncherDialog *ld)
         gtk_widget_destroy (GTK_BIN (ld->entry_icon)->child);
 
     if (G_LIKELY (ld->entry->icon))
-        icon = launcher_load_pixbuf (ld->entry_icon, ld->entry->icon, CHOOSER_ICON_SIZE, FALSE);
+        icon = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->entry_icon), ld->entry->icon, LAUNCHER_CHOOSER_ICON_SIZE);
 
     /* create icon button */
     if (G_LIKELY (icon != NULL))
     {
+        /* create image from pixbuf */
         child = gtk_image_new_from_pixbuf (icon);
 
         /* release icon */
         g_object_unref (G_OBJECT (icon));
+
+        gtk_widget_set_size_request (child, LAUNCHER_CHOOSER_ICON_SIZE, LAUNCHER_CHOOSER_ICON_SIZE);
     }
     else
     {
         child = gtk_label_new (_("No icon"));
 
-        gtk_widget_set_size_request (child, -1, CHOOSER_ICON_SIZE);
+        gtk_widget_set_size_request (child, -1, LAUNCHER_CHOOSER_ICON_SIZE);
     }
 
     gtk_container_add (GTK_CONTAINER (ld->entry_icon), child);
@@ -756,6 +753,7 @@ launcher_dialog_icon_chooser (LauncherDialog *ld)
     const gchar *name;
     GtkWidget   *chooser;
     gchar       *title;
+    gboolean     update_icon = FALSE;
 
     /* determine the name of the entry being edited */
     name = gtk_entry_get_text (GTK_ENTRY (ld->entry_name));
@@ -790,14 +788,14 @@ launcher_dialog_icon_chooser (LauncherDialog *ld)
         launcher_dialog_update_icon (ld);
 
         /* update the icon column in the tree */
-        launcher_dialog_tree_update_row (ld, COL_ICON);
+        launcher_dialog_tree_update_row (ld, COLUMN_ICON);
 
         /* check if we need to update the icon button image */
         if (g_list_index (ld->launcher->entries, ld->entry) == 0)
-            ld->launcher->icon_update_required = TRUE;
+            update_icon = TRUE;
 
         /* update the panel widgets */
-        launcher_dialog_update_panel (ld);
+        launcher_plugin_rebuild (ld->launcher, update_icon);
     }
 
     /* destroy the chooser */
@@ -809,18 +807,6 @@ launcher_dialog_icon_chooser (LauncherDialog *ld)
 /**
  * Tree functions
  **/
-static void
-launcher_dialog_tree_free_store (LauncherDialog *ld)
-{
-    /* clear the store */
-    gtk_list_store_clear (ld->store);
-
-    /* release the store */
-    g_object_unref (G_OBJECT (ld->store));
-}
-
-
-
 static void
 launcher_dialog_tree_update_row (LauncherDialog *ld,
                                  gint            column)
@@ -835,13 +821,13 @@ launcher_dialog_tree_update_row (LauncherDialog *ld,
     {
         switch (column)
         {
-            case COL_ICON:
+            case COLUMN_ICON:
                 /* load entry icon */
-                icon = launcher_load_pixbuf (ld->treeview, ld->entry->icon, TREE_ICON_SIZE, TRUE);
+                icon = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->treeview), ld->entry->icon, LAUNCHER_TREE_ICON_SIZE);
 
                 /* set new icon */
                 gtk_list_store_set (ld->store, &iter,
-                                    COL_ICON, icon,
+                                    COLUMN_ICON, icon,
                                     -1);
 
                 /* release icon */
@@ -850,10 +836,10 @@ launcher_dialog_tree_update_row (LauncherDialog *ld,
 
                 break;
 
-            case COL_TEXT:
+            case COLUMN_NAME:
                 /* set new name */
                 gtk_list_store_set (ld->store, &iter,
-                                    COL_TEXT, ld->entry->name,
+                                    COLUMN_NAME, ld->entry->name,
                                     -1);
 
                 break;
@@ -925,9 +911,11 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
     GtkTreeIter       iter_a;
     GtkTreeIter       iter_b;
     guint             position;
+    gint              list_length;
     GList            *li;
     GdkPixbuf        *icon = NULL;
     LauncherEntry    *entry;
+    gboolean          update_icon = FALSE;
 
     /* get the selected items in the treeview */
     selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ld->treeview));
@@ -945,9 +933,9 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
         /* position of the item in the list */
         position = gtk_tree_path_get_indices (path)[0];
 
-        /* check if we need to update the icon button image*/
+        /* check if we need to update the icon button image */
         if (position == 1)
-            ld->launcher->icon_update_required = TRUE;
+            update_icon = TRUE;
 
         /* get previous path */
         if (G_LIKELY (gtk_tree_path_prev (path)))
@@ -960,7 +948,7 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
 
             /* swap items in the list */
             li = g_list_nth (ld->launcher->entries, position);
-            launcher_g_list_swap (li, li->prev);
+            launcher_dialog_g_list_swap (li, li->prev);
         }
 
         /* release the path */
@@ -979,7 +967,7 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
 
         /* check if we need to update the icon button image*/
         if (position == 0)
-            ld->launcher->icon_update_required = TRUE;
+            update_icon = TRUE;
 
         /* get next item in the list */
         gtk_tree_path_next (path);
@@ -992,7 +980,7 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
 
             /* swap items in the list */
             li = g_list_nth (ld->launcher->entries, position);
-            launcher_g_list_swap (li, li->next);
+            launcher_dialog_g_list_swap (li, li->next);
         }
 
         /* release the path */
@@ -1004,16 +992,16 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
     else if (button == ld->add)
     {
         /* create new entry */
-        entry = launcher_new_entry ();
+        entry = launcher_entry_new ();
 
         /* load new launcher icon */
-        icon = launcher_load_pixbuf (ld->treeview, entry->icon, TREE_ICON_SIZE, TRUE);
+        icon = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->treeview), entry->icon, LAUNCHER_TREE_ICON_SIZE);
 
         /* append new entry */
         gtk_list_store_insert_after (ld->store, &iter_b, &iter_a);
         gtk_list_store_set (ld->store, &iter_b,
-                            COL_ICON, icon,
-                            COL_TEXT, entry->name,
+                            COLUMN_ICON, icon,
+                            COLUMN_NAME, entry->name,
                             -1);
 
         /* release the pixbuf */
@@ -1036,6 +1024,9 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
         /* cleanup */
         gtk_tree_path_free (path);
 
+        /* allow to set the arrow position */
+        gtk_widget_set_sensitive (ld->arrow_position, TRUE);
+
     }
     else if (button == ld->remove)
     {
@@ -1047,13 +1038,13 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
 
         /* check if we need to update the icon button image*/
         if (position == 0)
-            ld->launcher->icon_update_required = TRUE;
+            update_icon = TRUE;
 
         /* lock */
         ld->updating = TRUE;
 
         /* remove active entry */
-        launcher_free_entry (ld->entry, ld->launcher);
+        launcher_entry_free (ld->entry, ld->launcher);
         ld->entry = NULL;
 
         /* remove row from store */
@@ -1062,8 +1053,11 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
         /* unlock */
         ld->updating = FALSE;
 
+        /* list length */
+        list_length = g_list_length (ld->launcher->entries);
+
         /* select previous item, if last item was removed */
-        if (position >= g_list_length (ld->launcher->entries))
+        if (position >= list_length)
             gtk_tree_path_prev (path);
 
         /* select the new item (also updates treeview buttons) */
@@ -1071,10 +1065,28 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
 
         /* cleanup */
         gtk_tree_path_free (path);
+
+        /* allow to set the arrow position */
+        gtk_widget_set_sensitive (ld->arrow_position, list_length > 1);
+
+        /* don't allow menu arrows */
+        if (list_length == 1 && ld->launcher->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
+            gtk_combo_box_set_active (GTK_COMBO_BOX (ld->arrow_position), LAUNCHER_ARROW_DEFAULT);
     }
 
     /* update panel */
-    launcher_dialog_update_panel (ld);
+    launcher_plugin_rebuild (ld->launcher, update_icon);
+}
+
+
+
+static void
+launcher_dialog_arrow_position_changed (GtkComboBox    *combo,
+                                        LauncherDialog *ld)
+{
+    ld->launcher->arrow_position = gtk_combo_box_get_active (combo);
+
+    launcher_plugin_rebuild (ld->launcher, TRUE);
 }
 
 
@@ -1281,25 +1293,27 @@ launcher_dialog_add_tree (LauncherDialog *ld)
     /* create tree view */
     ld->treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL (ld->store));
     gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (ld->treeview), FALSE);
+    gtk_tree_view_set_search_column (GTK_TREE_VIEW (ld->treeview), COLUMN_NAME);
+    gtk_tree_view_set_enable_search (GTK_TREE_VIEW (ld->treeview), TRUE);
+    gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW (ld->treeview), TRUE);
     gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (ld->treeview), TRUE);
     gtk_container_add (GTK_CONTAINER (scroll), ld->treeview);
-
-    g_signal_connect_swapped (G_OBJECT (ld->treeview), "destroy",
-                              G_CALLBACK (launcher_dialog_tree_free_store), ld);
 
     /* create columns and cell renders */
     column = gtk_tree_view_column_new ();
     gtk_tree_view_column_set_expand (column, TRUE);
     gtk_tree_view_column_set_resizable (column, FALSE);
+    gtk_tree_view_column_set_sizing (column, GTK_TREE_VIEW_COLUMN_FIXED);
     gtk_tree_view_append_column (GTK_TREE_VIEW (ld->treeview), column);
 
     renderer = gtk_cell_renderer_pixbuf_new();
+    gtk_cell_renderer_set_fixed_size (renderer, LAUNCHER_TREE_ICON_SIZE, LAUNCHER_TREE_ICON_SIZE);
     gtk_tree_view_column_pack_start (column, renderer, FALSE);
-    gtk_tree_view_column_set_attributes (column, renderer, "pixbuf", COL_ICON, NULL);
+    gtk_tree_view_column_set_attributes (column, renderer, "pixbuf", COLUMN_ICON, NULL);
 
     renderer = gtk_cell_renderer_text_new ();
     gtk_tree_view_column_pack_start (column, renderer, TRUE);
-    gtk_tree_view_column_set_attributes (column, renderer, "text", COL_TEXT, NULL);
+    gtk_tree_view_column_set_attributes (column, renderer, "text", COLUMN_NAME, NULL);
     g_object_set (renderer, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 
     /* set selection change signal */
@@ -1316,14 +1330,13 @@ launcher_dialog_add_tree (LauncherDialog *ld)
         if (G_LIKELY (entry && entry->name))
         {
             /* load icon */
-            icon = launcher_load_pixbuf (ld->treeview, entry->icon, TREE_ICON_SIZE, TRUE);
+            icon = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->treeview), entry->icon, LAUNCHER_TREE_ICON_SIZE);
 
             /* create new row and add the data */
             gtk_list_store_append (ld->store, &iter);
             gtk_list_store_set (ld->store, &iter,
-                                COL_ICON, icon,
-                                COL_TEXT, entry->name,
-                                -1);
+                                COLUMN_ICON, icon,
+                                COLUMN_NAME, entry->name, -1);
 
             /* release the pixbuf */
             if (G_LIKELY (icon))
@@ -1416,9 +1429,11 @@ launcher_dialog_add_tree_buttons (LauncherDialog *ld)
  **/
 static void
 launcher_dialog_response (GtkWidget      *dialog,
-                            gint            response,
-                            LauncherDialog *ld)
+                          gint            response,
+                          LauncherDialog *ld)
 {
+    LauncherPlugin *launcher = ld->launcher;
+
     /* hide the dialog */
     gtk_widget_hide (dialog);
 
@@ -1426,43 +1441,42 @@ launcher_dialog_response (GtkWidget      *dialog,
     ld->updating = TRUE;
     ld->entry = NULL;
 
-    /* remove link */
-    g_object_set_data (G_OBJECT (ld->launcher->plugin), "dialog", NULL);
+    /* cleanup the store */
+    gtk_list_store_clear (ld->store);
+    g_object_unref (G_OBJECT (ld->store));
+
+    /* the launcher dialog dataS */
+    g_object_set_data (G_OBJECT (launcher->panel_plugin), I_("launcher-dialog"), NULL);
 
     /* destroy the dialog */
     gtk_widget_destroy (dialog);
 
-    /* unlock plugin menu (do this before writing -> see hack in write function) */
-    xfce_panel_plugin_unblock_menu (ld->launcher->plugin);
+    /* unlock plugin menu */
+    xfce_panel_plugin_unblock_menu (launcher->panel_plugin);
 
-    /* revert settings made */
-    if (response == GTK_RESPONSE_CANCEL)
-    {
-        /* remove all entries from the list */
-        g_list_foreach (ld->launcher->entries,
-                        (GFunc) launcher_free_entry, ld->launcher);
+    /* restore move first */
+    launcher->move_first = ld->stored_move_first;
 
-        /* read last saved settings */
-        launcher_read (ld->launcher);
+    /* allow saving again */
+    launcher->plugin_can_save = TRUE;
 
-        /* if this is a newly created item, there is no saved data yet */
-        if (G_UNLIKELY (g_list_length (ld->launcher->entries) == 0))
-        {
-              ld->launcher->entries = g_list_append (ld->launcher->entries, 
-                                                     launcher_new_entry ());
-        }
-
-        /* update the panel again */
-        launcher_dialog_update_panel (ld);
-    }
-    else /* save changes */
+    if (response == GTK_RESPONSE_OK)
     {
         /* write new settings */
-        launcher_write (ld->launcher);
+        launcher_plugin_save (launcher);
     }
+    else /* revert changes */
+    {
+        /* remove all the entries */
+        g_list_foreach (launcher->entries, (GFunc) launcher_entry_free, launcher);
 
-    /* enable/disable auto sort again */
-    launcher_set_move_first (ld->launcher->move_first);
+        /* read the last saved settings */
+        launcher_plugin_read (launcher);
+
+        /* add new item if there are no entries yet */
+        if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
+            launcher->entries = g_list_append (launcher->entries, launcher_entry_new ());
+    }
 
     /* free the panel structure */
     panel_slice_free (LauncherDialog, ld);
@@ -1476,28 +1490,26 @@ launcher_dialog_show (LauncherPlugin  *launcher)
     LauncherDialog *ld;
     GtkWidget      *dialog;
     GtkWidget      *dialog_vbox;
-    GtkWidget      *paned, *vbox;
-    GtkWidget      *widget;
+    GtkWidget      *paned, *vbox, *hbox;
+    GtkWidget      *widget, *label, *combo;
     GtkTreePath    *path;
 
     /* create new structure */
     ld = panel_slice_new0 (LauncherDialog);
 
+    /* init */
     ld->launcher = launcher;
+    ld->entry = g_list_first (launcher->entries)->data;
 
-    /* get first entry */
-    if (G_UNLIKELY (g_list_length (launcher->entries) == 0)) 
-    {
-        launcher->entries = g_list_append (launcher->entries, 
-                                           launcher_new_entry ());
-    }
-    ld->entry = launcher->entries->data;
+    /* prevent saving to be able to use the cancel button */
+    launcher->plugin_can_save = FALSE;
 
     /* lock right-click plugin menu */
-    xfce_panel_plugin_block_menu (launcher->plugin);
+    xfce_panel_plugin_block_menu (launcher->panel_plugin);
 
     /* disable the auto sort of the list, while working in properties */
-    launcher_set_move_first (FALSE);
+    ld->stored_move_first = launcher->move_first;
+    launcher->move_first = FALSE;
 
     /* create new dialog */
     dialog = xfce_titled_dialog_new_with_buttons (_("Program Launcher"),
@@ -1506,16 +1518,13 @@ launcher_dialog_show (LauncherPlugin  *launcher)
                                                   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                                   GTK_STOCK_OK, GTK_RESPONSE_OK,
                                                   NULL);
-
-    gtk_window_set_screen (GTK_WINDOW (dialog),
-                           gtk_widget_get_screen (GTK_WIDGET (launcher->plugin)));
-
+    gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (launcher->panel_plugin)));
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
     /* connect dialog to plugin, so we can destroy it when plugin is closed */
-    g_object_set_data (G_OBJECT (ld->launcher->plugin), "dialog", dialog);
+    g_object_set_data (G_OBJECT (ld->launcher->panel_plugin), "dialog", dialog);
 
     dialog_vbox = GTK_DIALOG (dialog)->vbox;
 
@@ -1526,6 +1535,27 @@ launcher_dialog_show (LauncherPlugin  *launcher)
 
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_paned_pack1 (GTK_PANED (paned), vbox, FALSE, FALSE);
+
+    /* arrow button position */
+    hbox = gtk_hbox_new (FALSE, BORDER);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+    label = gtk_label_new_with_mnemonic (_("A_rrow:"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+
+    ld->arrow_position = combo = gtk_combo_box_new_text ();
+    gtk_box_pack_start (GTK_BOX (hbox), combo, TRUE, TRUE, 0);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), combo);
+    gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Default"));
+    gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Left"));
+    gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Right"));
+    gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Top"));
+    gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Bottom"));
+    gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("Inside Button"));
+    gtk_widget_set_sensitive (combo, g_list_length (launcher->entries) > 1);
+    gtk_combo_box_set_active (GTK_COMBO_BOX (combo), launcher->arrow_position);
+    g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (launcher_dialog_arrow_position_changed), ld);
+    gtk_widget_show (combo);
 
     /* add the entries list */
     widget = launcher_dialog_add_tree (ld);

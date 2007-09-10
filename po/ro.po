@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 13:40+0200\n"
+"POT-Creation-Date: 2007-09-10 14:03+0200\n"
 "PO-Revision-Date: 2007-01-20 23:09+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -55,40 +55,40 @@ msgstr "Navigator documentaţie"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "Un element a dispărut în mod neaşteptat: „%s”."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:602
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:622
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "Ştergeţi „%s”?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:616
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:636
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "Elementul va fi şters din panou şi proprietăţile sale vor fi pierdute."
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:845
 msgid "Properties"
 msgstr "Proprietăţi"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:842
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:862
 msgid "About"
 msgstr "Despre"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:874
 msgid "Move"
 msgstr "Mutare"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:873
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:893
 msgid "Remove"
 msgstr "Ştergere"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:890
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:910
 msgid "Add New Item"
 msgstr "Adăugare element nou"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:901 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:921 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Preferinţe panou"
@@ -239,22 +239,22 @@ msgid "Span Monitors"
 msgstr "Pe toate monitoarele"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
 msgid "Left"
 msgstr "Stânga"
 
 #: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
-#: ../panel/panel-dialogs.c:1521
+#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1551
 msgid "Right"
 msgstr "Dreapta"
 
 #: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
-#: ../panel/panel-dialogs.c:1522
+#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1552
 msgid "Top"
 msgstr "Sus"
 
 #: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
-#: ../panel/panel-dialogs.c:1523
+#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1553
 msgid "Bottom"
 msgstr "Jos"
 
@@ -303,7 +303,7 @@ msgstr "Selectare monitor"
 #. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:238
+#: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -413,7 +413,7 @@ msgstr "LED"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
-#: ../plugins/systray/xfce-tray-dialogs.c:244
+#: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Show _frame"
 msgstr "Arată ca_drul"
 
@@ -444,101 +444,115 @@ msgstr "Arată aplicaţiile din toate spaţiile de lucru"
 msgid "Use all available space"
 msgstr "Utilizează tot spaţiul disponibil"
 
-#. create new menu item
+#. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:743 ../plugins/launcher/launcher.c:803
 msgid "New Item"
 msgstr "Element nou"
 
-#: ../plugins/launcher/launcher-exec.c:515
+#: ../plugins/launcher/launcher-exec.c:517
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Nu s-a putut porni „%s”"
 
-#: ../plugins/launcher/launcher-dialog.c:580
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:600
+#: ../plugins/launcher/launcher-dialog.c:597
 #, fuzzy
 msgid "Select a Directory"
 msgstr "Selectare monitor"
 
-#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:641
 #, fuzzy
 msgid "Select an Application"
 msgstr "Selectare tip acţiuni:"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:674
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:680
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:686
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:692
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:766
+#: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1116
 #, fuzzy
 msgid "_Name"
 msgstr "Nume"
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1134
 #, fuzzy
 msgid "_Description"
 msgstr "Descriere"
 
-#: ../plugins/launcher/launcher-dialog.c:1141
+#: ../plugins/launcher/launcher-dialog.c:1153
 #, fuzzy
 msgid "_Icon"
 msgstr "Cutia cu iconiţe"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1171
 #, fuzzy
 msgid "Co_mmand"
 msgstr "Comandă"
 
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1218
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
 msgstr "Porneşte în _terminal"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1246
 msgid "Use _startup notification"
 msgstr "Utilizează _notificare la pornire"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1515
 msgid "Program Launcher"
 msgstr "Lansator de aplicaţii"
+
+#: ../plugins/launcher/launcher-dialog.c:1543
+#, fuzzy
+msgid "A_rrow:"
+msgstr "Buton tip _săgeată"
+
+#: ../plugins/launcher/launcher-dialog.c:1549
+msgid "Default"
+msgstr "Implicită"
+
+#: ../plugins/launcher/launcher-dialog.c:1554
+#, fuzzy
+msgid "Inside Button"
+msgstr "Buton tip _iconiţă"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -598,18 +612,18 @@ msgstr "Ascunde ferestrele şi arată desktopul"
 
 #. create a dialog
 #. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:224
+#: ../plugins/systray/xfce-tray-plugin.c:73
+#: ../plugins/systray/xfce-tray-dialogs.c:259
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "Zonă sistem de notificare"
 
-#: ../plugins/systray/xfce-tray-plugin.c:97
+#: ../plugins/systray/xfce-tray-plugin.c:99
 msgid "There is already a system tray running on this screen"
 msgstr "Există deja o zonă sistem de notificare în acest ecran"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:251
+#: ../plugins/systray/xfce-tray-dialogs.c:287
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "Selectare tip acţiuni:"
@@ -871,9 +885,6 @@ msgstr "Administratorul de panouri Xfce 4"
 
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Acest element nu are opţiuni de configurare"
-
-#~ msgid "Default"
-#~ msgstr "Implicită"
 
 #~ msgid "File management"
 #~ msgstr "Administrare de fişiere"

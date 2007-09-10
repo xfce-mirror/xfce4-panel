@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-09-02 13:40+0200\n"
+"POT-Creation-Date: 2007-09-10 14:03+0200\n"
 "PO-Revision-Date: 2007-07-05 07:24+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
@@ -59,40 +59,40 @@ msgstr "ਵੈੱਬ ਬਰਾਊਂਜ਼ਰ"
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr "ਇੱਕ ਆਈਟਮ ਅਚਾਨਕ ਹਟਾਈ ਗਈ: \"%s\"."
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:602
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:622
 #, c-format
 msgid "Remove \"%s\"?"
 msgstr "ਕੀ \"%s\" ਹਟਾਉਣਾ ਹੈ?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:616
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:636
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr "ਆਈਟਮ ਪੈਨਲ 'ਚੋਂ ਹਟਾਈ ਜਾਵੇਗੀ ਅਤੇ ਇਸ ਦੀ ਕੰਨਫੀਗਰੇਸ਼ਨ ਖਤਮ ਹੋ ਜਾਵੇਗੀ।"
 
 #. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:825
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:845
 msgid "Properties"
 msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
 
 #. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:842
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:862
 msgid "About"
 msgstr "ਇਸ ਬਾਰੇ"
 
 #. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:874
 msgid "Move"
 msgstr "ਭੇਜੋ"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:873
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:893
 msgid "Remove"
 msgstr "ਹਟਾਓ"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:890
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:910
 msgid "Add New Item"
 msgstr "ਨਵੀਂ ਆਈਟਮ ਸ਼ਾਮਿਲ"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:901 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:921 ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "ਪਸੰਦੀਦਾ ਪੈਨਲ"
@@ -233,22 +233,22 @@ msgid "Span Monitors"
 msgstr "ਸਪੈਨ ਮਾਨੀਟਰ"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
 msgid "Left"
 msgstr "ਖੱਬੇ"
 
 #: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
-#: ../panel/panel-dialogs.c:1521
+#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1551
 msgid "Right"
 msgstr "ਸੱਜੇ"
 
 #: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
-#: ../panel/panel-dialogs.c:1522
+#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1552
 msgid "Top"
 msgstr "ਉੱਤੇ"
 
 #: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
-#: ../panel/panel-dialogs.c:1523
+#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1553
 msgid "Bottom"
 msgstr "ਥੱਲੇ"
 
@@ -297,7 +297,7 @@ msgstr "ਮਾਨੀਟਰ ਚੁਣੋ"
 #. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:238
+#: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -406,7 +406,7 @@ msgstr "LED"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
-#: ../plugins/systray/xfce-tray-dialogs.c:244
+#: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Show _frame"
 msgstr "ਫਰੇਮ ਵੇਖਾਓ(_f)"
 
@@ -437,95 +437,109 @@ msgstr "ਸਭ ਵਰਕਸਪੇਸਾਂ ਦੇ ਕਾਰਜ ਵੇਖਾਓ"
 msgid "Use all available space"
 msgstr "ਸਭ ਉਪਲੱਬਧ ਥਾਂ ਵਰਤੋਂ"
 
-#. create new menu item
+#. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:715 ../plugins/launcher/launcher.c:938
+#: ../plugins/launcher/launcher.c:743 ../plugins/launcher/launcher.c:803
 msgid "New Item"
 msgstr "ਨਵੀਂ ਆਈਟਮ"
 
-#: ../plugins/launcher/launcher-exec.c:515
+#: ../plugins/launcher/launcher-exec.c:517
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "\"%s\" ਲਾਂਚ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../plugins/launcher/launcher-dialog.c:580
+#: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
 msgstr "ਆਈਕਾਨ ਨਹੀਂ"
 
-#: ../plugins/launcher/launcher-dialog.c:600
+#: ../plugins/launcher/launcher-dialog.c:597
 msgid "Select a Directory"
 msgstr "ਇੱਕ ਡਾਇਰੈਕਟਰੀ ਚੁਣੋ"
 
-#: ../plugins/launcher/launcher-dialog.c:644
+#: ../plugins/launcher/launcher-dialog.c:641
 msgid "Select an Application"
 msgstr "ਇੱਕ ਕਾਰਜ ਚੁਣੋ"
 
-#: ../plugins/launcher/launcher-dialog.c:654
+#: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
 msgstr "ਸਭ ਫਾਇਲਾਂ"
 
-#: ../plugins/launcher/launcher-dialog.c:659
+#: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
 msgstr "ਐਕਜ਼ੀਕਿਊਟਿਵ ਫਾਇਲਾਂ"
 
-#: ../plugins/launcher/launcher-dialog.c:674
+#: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
 msgstr "ਪਰਲ ਸਕ੍ਰਿਪਟਾਂ"
 
-#: ../plugins/launcher/launcher-dialog.c:680
+#: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
 msgstr "ਪਾਈਥਨ ਸਕ੍ਰਿਪਟਾਂ"
 
-#: ../plugins/launcher/launcher-dialog.c:686
+#: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
 msgstr "ਰੂਬੀ ਸਕ੍ਰਿਪਟਾਂ"
 
-#: ../plugins/launcher/launcher-dialog.c:692
+#: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
 msgstr "ਸ਼ੈਲ ਸਕ੍ਰਿਪਟਾਂ"
 
-#: ../plugins/launcher/launcher-dialog.c:763
+#: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
 msgstr "ਅਣਜਾਣ"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:766
+#: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "\"%s\" ਲਈ ਆਈਕਾਨ ਚੁਣੋ"
 
-#: ../plugins/launcher/launcher-dialog.c:1104
+#: ../plugins/launcher/launcher-dialog.c:1116
 msgid "_Name"
 msgstr "ਨਾਂ(_N)"
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1134
 msgid "_Description"
 msgstr "ਵੇਰਵਾ(_D)"
 
-#: ../plugins/launcher/launcher-dialog.c:1141
+#: ../plugins/launcher/launcher-dialog.c:1153
 msgid "_Icon"
 msgstr "ਆਈਕਾਨ(_I)"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1171
 msgid "Co_mmand"
 msgstr "ਕਮਾਂਡ(_m)"
 
-#: ../plugins/launcher/launcher-dialog.c:1186
+#: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
 msgstr "ਵਰਕਿੰਗ ਡਾਇਰੈਕਟਰੀ(_W)"
 
-#: ../plugins/launcher/launcher-dialog.c:1218
+#: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
 msgstr "ਟਰਮੀਨਲ 'ਚ ਚਲਾਓ(_t)"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1246
 msgid "Use _startup notification"
 msgstr "ਸ਼ੁਰੂਆਤੀ ਨੋਟੀਫਿਕੇਸ਼ਨ ਵਰਤੋਂ(_s)"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1503
+#: ../plugins/launcher/launcher-dialog.c:1515
 msgid "Program Launcher"
 msgstr "ਪ੍ਰੋਗਰਾਮ ਲਾਂਚਰ"
+
+#: ../plugins/launcher/launcher-dialog.c:1543
+#, fuzzy
+msgid "A_rrow:"
+msgstr "ਤੀਰ ਬਟਨ(_r)"
+
+#: ../plugins/launcher/launcher-dialog.c:1549
+msgid "Default"
+msgstr ""
+
+#: ../plugins/launcher/launcher-dialog.c:1554
+#, fuzzy
+msgid "Inside Button"
+msgstr "ਆਈਕਾਨ ਬਟਨ(_I)"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -585,18 +599,18 @@ msgstr "ਵਿੰਡੋ ਓਹਲੇ ਕਰੋ ਅਤੇ ਡਿਸਕਟਾਪ �
 
 #. create a dialog
 #. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:224
+#: ../plugins/systray/xfce-tray-plugin.c:73
+#: ../plugins/systray/xfce-tray-dialogs.c:259
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "ਸਿਸਟਮ ਟਰੇ"
 
-#: ../plugins/systray/xfce-tray-plugin.c:97
+#: ../plugins/systray/xfce-tray-plugin.c:99
 msgid "There is already a system tray running on this screen"
 msgstr "ਇਸ ਟਰੇ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਸਿਸਟਮ ਟਰੇ ਚੱਲ ਰਹੀ ਹੈ"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:251
+#: ../plugins/systray/xfce-tray-dialogs.c:287
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "ਇੱਕ ਕਾਰਜ ਚੁਣੋ"
