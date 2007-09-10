@@ -14,7 +14,7 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA  02111-1307  USA
  */
- 
+
 #ifndef __XFCE_TRAY_DIALOGS_H__
 #define __XFCE_TRAY_DIALOGS_H__
 

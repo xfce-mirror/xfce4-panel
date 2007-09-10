@@ -33,6 +33,7 @@
 #include "xfce-tray-widget.h"
 
 #define XFCE_TRAY_WIDGET_BUTTON_SIZE          (16)
+#define XFCE_TRAY_WIDGET_REDRAW_DELAY         (250)
 #define XFCE_TRAY_WIDGET_SPACING              (1)
 #define XFCE_TRAY_WIDGET_LINE_HEIGHT          (24 + 2 * XFCE_TRAY_WIDGET_SPACING)
 #define XFCE_TRAY_WIDGET_OFFSCREEN            (-9999)
@@ -71,7 +72,8 @@ static gint     xfce_tray_widget_size_request       (XfceTrayWidget      *tray,
                                                      gint                 size);
 static gboolean xfce_tray_widget_redraw_idle        (gpointer             user_data);
 static void     xfce_tray_widget_redraw_destroyed   (gpointer             user_data);
-static void     xfce_tray_widget_redraw             (XfceTrayWidget      *tray);
+static void     xfce_tray_widget_redraw             (XfceTrayWidget      *tray,
+                                                     gboolean             delayed);
 
 
 
@@ -304,7 +306,7 @@ xfce_tray_widget_button_clicked (GtkToggleButton *button,
     xfce_tray_widget_button_set_arrow (tray);
 
     /* update the tray */
-    xfce_tray_widget_redraw (tray);
+    xfce_tray_widget_redraw (tray, FALSE);
 }
 
 
@@ -374,14 +376,11 @@ xfce_tray_widget_icon_added (XfceTrayManager *manager,
     if (hidden)
         tray->n_hidden_childeren++;
 
-    /* show the icon */
-    gtk_widget_show (icon);
-
     /* set the parent window */
     gtk_widget_set_parent (icon, GTK_WIDGET (tray));
 
     /* update the tray */
-    xfce_tray_widget_redraw (tray);
+    xfce_tray_widget_redraw (tray, TRUE);
 }
 
 
@@ -413,7 +412,7 @@ xfce_tray_widget_icon_removed (XfceTrayManager *manager,
     }
 
     /* update the tray */
-    xfce_tray_widget_redraw (tray);
+    xfce_tray_widget_redraw (tray, FALSE);
 }
 
 
@@ -608,7 +607,7 @@ xfce_tray_widget_redraw_idle (gpointer user_data)
             else if (tray->arrow_position == GTK_ARROW_DOWN)
                 child_allocation.y = height - child_allocation.y - child_size;
 
-            /* add the tray coordinates */
+            /* add the tray coordinates and spacing */
             child_allocation.x += x + XFCE_TRAY_WIDGET_SPACING;
             child_allocation.y += y + XFCE_TRAY_WIDGET_SPACING;
         }
@@ -636,15 +635,23 @@ xfce_tray_widget_redraw_destroyed (gpointer user_data)
 
 
 static void
-xfce_tray_widget_redraw (XfceTrayWidget *tray)
+xfce_tray_widget_redraw (XfceTrayWidget *tray,
+                         gboolean        delayed)
 {
+    g_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+
     /* ignore if there is already a redraw scheduled */
     if (tray->idle_redraw_id != 0)
         return;
 
-    /* schedule a new idle redraw */
-    tray->idle_redraw_id = g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, xfce_tray_widget_redraw_idle,
-                                            tray, xfce_tray_widget_redraw_destroyed);
+    /* schedule an idle or delayed redraw */
+    if (delayed)
+        tray->idle_redraw_id = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, XFCE_TRAY_WIDGET_REDRAW_DELAY,
+                                                   xfce_tray_widget_redraw_idle, tray,
+                                                   xfce_tray_widget_redraw_destroyed);
+    else
+        tray->idle_redraw_id = g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, xfce_tray_widget_redraw_idle,
+                                                tray, xfce_tray_widget_redraw_destroyed);
 }
 
 
@@ -681,7 +688,7 @@ xfce_tray_widget_sort (XfceTrayWidget *tray)
         tray->n_hidden_childeren = n_hidden_childeren;
 
         /* update the tray */
-        xfce_tray_widget_redraw (tray);
+        xfce_tray_widget_redraw (tray, FALSE);
     }
 }
 
@@ -715,7 +722,7 @@ xfce_tray_widget_set_arrow_position (XfceTrayWidget *tray,
         xfce_tray_widget_button_set_arrow (tray);
 
         /* update the tray */
-        xfce_tray_widget_redraw (tray);
+        xfce_tray_widget_redraw (tray, FALSE);
     }
 }
 
@@ -733,6 +740,6 @@ xfce_tray_widget_set_size_request (XfceTrayWidget *tray,
         tray->size = size;
 
         /* redraw the tray */
-        xfce_tray_widget_redraw (tray);
+        xfce_tray_widget_redraw (tray, FALSE);
     }
 }

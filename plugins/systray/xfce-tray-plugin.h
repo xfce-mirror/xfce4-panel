@@ -16,7 +16,7 @@
  * this program; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA  02111-1307  USA
  */
- 
+
 #ifndef __XFCE_TRAY_PLUGIN_H__
 #define __XFCE_TRAY_PLUGIN_H__
 
@@ -26,14 +26,14 @@ struct _XfceTrayPlugin
 {
     /* panel plugin */
     XfcePanelPlugin *panel_plugin;
-    
+
     /* tray manager */
     XfceTrayManager *manager;
-    
+
     /* widgets */
     GtkWidget       *frame;
     GtkWidget       *tray;
-    
+
     /* properties */
     guint            show_frame : 1;
 };
