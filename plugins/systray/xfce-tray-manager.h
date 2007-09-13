@@ -43,6 +43,9 @@ enum
     XFCE_TRAY_MANAGER_ERROR_SELECTION_FAILED
 };
 
+#define XFCE_TRAY_MANAGER_ENABLE_MESSAGES 0
+
+
 #define XFCE_TYPE_TRAY_MANAGER            (xfce_tray_manager_get_type ())
 #define XFCE_TRAY_MANAGER(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TRAY_MANAGER, XfceTrayManager))
 #define XFCE_TRAY_MANAGER_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_TRAY_MANAGER, XfceTrayManagerClass))

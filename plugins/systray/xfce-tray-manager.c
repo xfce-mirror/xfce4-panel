@@ -40,7 +40,9 @@
 #include <libxfce4util/libxfce4util.h>
 
 #include "xfce-tray-manager.h"
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 #include "xfce-tray-marshal.h"
+#endif
 
 
 
@@ -61,6 +63,7 @@ static void                 xfce_tray_manager_unregister                        
 static GdkFilterReturn      xfce_tray_manager_window_filter                      (GdkXEvent            *xev,
                                                                                   GdkEvent             *event,
                                                                                   gpointer              user_data);
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 static GdkFilterReturn      xfce_tray_manager_handle_client_message_opcode       (GdkXEvent            *xevent,
                                                                                   GdkEvent             *event,
                                                                                   gpointer              user_data);
@@ -71,6 +74,7 @@ static void                 xfce_tray_manager_handle_begin_message              
                                                                                   XClientMessageEvent  *xevent);
 static void                 xfce_tray_manager_handle_cancel_message              (XfceTrayManager      *manager,
                                                                                   XClientMessageEvent  *xevent);
+#endif
 static void                 xfce_tray_manager_handle_dock_request                (XfceTrayManager      *manager,
                                                                                   XClientMessageEvent  *xevent);
 static gboolean             xfce_tray_manager_handle_undock_request              (GtkSocket            *socket,
@@ -83,17 +87,21 @@ static XfceTrayApplication *xfce_tray_manager_application_find                  
 static void                 xfce_tray_manager_application_set_socket             (XfceTrayManager      *manager,
                                                                                   GtkWidget            *socket,
                                                                                   Window                xwindow);
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 static void                 xfce_tray_message_free                               (XfceTrayMessage      *message);
 static void                 xfce_tray_message_remove_from_list                   (XfceTrayManager      *manager,
                                                                                   XClientMessageEvent  *xevent);
+#endif
 
 
 enum
 {
   TRAY_ICON_ADDED,
   TRAY_ICON_REMOVED,
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
   TRAY_MESSAGE_SENT,
   TRAY_MESSAGE_CANCELLED,
+#endif
   TRAY_LOST_SELECTION,
   LAST_SIGNAL
 };
@@ -116,8 +124,10 @@ struct _XfceTrayManager
     /* orientation of the tray */
     GtkOrientation  orientation;
 
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
     /* list of pending messages */
     GSList         *messages;
+#endif
 
     /* _net_system_tray_opcode atom */
     Atom            opcode_atom;
@@ -203,6 +213,7 @@ xfce_tray_manager_class_init (XfceTrayManagerClass *klass)
                       G_TYPE_NONE, 1,
                       GTK_TYPE_SOCKET);
 
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
     xfce_tray_manager_signals[TRAY_MESSAGE_SENT] =
         g_signal_new (I_("tray-message-sent"),
                       G_OBJECT_CLASS_TYPE (klass),
@@ -224,6 +235,7 @@ xfce_tray_manager_class_init (XfceTrayManagerClass *klass)
                       G_TYPE_NONE, 2,
                       GTK_TYPE_SOCKET,
                       G_TYPE_LONG);
+#endif
 
     xfce_tray_manager_signals[TRAY_LOST_SELECTION] =
         g_signal_new (I_("tray-lost-selection"),
@@ -240,10 +252,12 @@ static void
 xfce_tray_manager_init (XfceTrayManager *manager)
 {
   /* initialize */
-  manager->messages = NULL;
   manager->invisible = NULL;
   manager->orientation = GTK_ORIENTATION_HORIZONTAL;
   manager->applications = NULL;
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
+  manager->messages = NULL;
+#endif
 
   /* create new sockets table */
   manager->sockets = g_hash_table_new (NULL, NULL);
@@ -277,6 +291,7 @@ xfce_tray_manager_finalize (GObject *object)
     /* destroy the hash table */
     g_hash_table_destroy (manager->sockets);
 
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
     if (manager->messages)
     {
         /* cleanup all pending messages */
@@ -285,6 +300,7 @@ xfce_tray_manager_finalize (GObject *object)
         /* free the list */
         g_slist_free (manager->messages);
     }
+#endif
 
     if (manager->applications)
     {
@@ -409,6 +425,7 @@ xfce_tray_manager_register (XfceTrayManager  *manager,
         opcode_atom = gdk_atom_intern ("_NET_SYSTEM_TRAY_OPCODE", FALSE);
         manager->opcode_atom = gdk_x11_atom_to_xatom_for_display (display, opcode_atom);
 
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
         /* system_tray_begin_message and system_tray_cancel_message */
         gdk_display_add_client_message_filter (display,
                                                opcode_atom,
@@ -420,6 +437,7 @@ xfce_tray_manager_register (XfceTrayManager  *manager,
                                                gdk_atom_intern ("_NET_SYSTEM_TRAY_MESSAGE_DATA", FALSE),
                                                xfce_tray_manager_handle_client_message_message_data,
                                                manager);
+#endif
     }
     else
     {
@@ -508,6 +526,7 @@ xfce_tray_manager_window_filter (GdkXEvent *xev,
 
 
 
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 static GdkFilterReturn
 xfce_tray_manager_handle_client_message_opcode (GdkXEvent *xevent,
                                                 GdkEvent  *event,
@@ -669,7 +688,7 @@ xfce_tray_manager_handle_cancel_message (XfceTrayManager     *manager,
                        socket, xevent->data.l[2]);
     }
 }
-
+#endif
 
 
 static void
@@ -1010,6 +1029,7 @@ xfce_tray_manager_application_get_hidden (GtkWidget *socket)
 /**
  * tray messages
  **/
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 static void
 xfce_tray_message_free (XfceTrayMessage *message)
 {
@@ -1047,4 +1067,4 @@ xfce_tray_message_remove_from_list (XfceTrayManager     *manager,
         }
     }
 }
-
+#endif
