@@ -3,19 +3,18 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Saleh Alhathal <hathalsal@hotmail.com>, 2004.
 #
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-10 14:03+0200\n"
-"PO-Revision-Date: 2007-02-02 10:45+0200\n"
-"Last-Translator: Mohamed Magdy <alnokta@yahoo.com>\n"
+"PO-Revision-Date: 2007-09-21 00:43+0200\n"
+"Last-Translator: Mohamed Magdy <mohamed.m.k@gmail.com>\n"
 "Language-Team: Arabeyes Translation & Documentation <admin@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Arabic\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #: ../config/launcher-7.rc.in.h:1
 msgid "Command Prompt"
@@ -63,7 +62,7 @@ msgstr "ازل \"%s\"?"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:636
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
-msgstr ""
+msgstr "سيتم حذف العنصر من الائحة و سيتم فقدان خياراته"
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:845
@@ -120,7 +119,7 @@ msgstr "شريط Xfce"
 
 #: ../panel/panel-app.c:887
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
+msgstr "لا يمكنك حذف الائحة الأخيرة. هل تود إنهاء البرنامج؟"
 
 #: ../panel/panel-app.c:914
 #, c-format
@@ -129,7 +128,7 @@ msgstr "ازل الشريط \"%d\"?"
 
 #: ../panel/panel-app.c:918
 msgid "The selected panel and all its items will be removed."
-msgstr ""
+msgstr "الائخة المختارة وجميع خياراتها سيتم حذفها."
 
 #: ../panel/panel-app.c:955 ../panel/panel-app.c:956
 msgid "Developer"
@@ -137,66 +136,62 @@ msgstr "مطوّر"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "أظهر هذه الرسالة وانهاء"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
 msgstr "اظهر أيقونات التذكير"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "حفظ الاعدادات"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "أعد البدأ"
+msgstr "أعد البدأ اللوحة"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "انهاء الجلسة"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "غلق جميع اللوائح وإنهاء البرنامج"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "أضف شيء جديد"
+msgstr "أضف عنصر جديد"
 
 #: ../panel/main.c:90
-#, fuzzy
 msgid "Failed to open display"
-msgstr "لم أستطع تشغيل \"%s\""
+msgstr "فشل في فتح الشاشة"
 
 #: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "جميع الحقوق محفوظة (c)·2004-2007"
 
 #: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "اكسفس فريق التطوير.جميع الحقوق محفوظة."
 
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "أرسل من قضلك الأخطاء الى<%s>."
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "لائحة اكسفس تشتغل مسبقا"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "اعادة تشغيل لائحة اكسفس..."
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
 msgid "Could not open \"%s\" module"
-msgstr ""
+msgstr "فشل في فتح\"%s\"·الوحدة النمطية"
 
 #: ../panel/panel-dialogs.c:633
 msgid "Add Items to the Panel"
@@ -207,6 +202,7 @@ msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
+"اسحب العناصر من المجموعة الى اللائحة أو قم بحذفها وذالك بجرها الى الائحة."
 
 #: ../panel/panel-dialogs.c:681
 msgid "Available Items"
@@ -221,19 +217,16 @@ msgid "Full Width"
 msgstr "العرض الكامل"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, fuzzy
 msgid "Normal Height"
 msgstr "العرض العادي"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
 msgid "Full Height"
 msgstr "العرض الكامل"
 
 #: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
-#, fuzzy
 msgid "Span Monitors"
-msgstr "محرر"
+msgstr "الشاشات"
 
 #: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
 #: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
@@ -261,23 +254,20 @@ msgid "Position"
 msgstr "موقع"
 
 #: ../panel/panel-dialogs.c:1037
-#, fuzzy
 msgid "Fixed Position"
-msgstr "موقع"
+msgstr "موقع مثبت"
 
 #: ../panel/panel-dialogs.c:1043
 msgid "Freely Moveable"
 msgstr "متحرك بحرية"
 
 #: ../panel/panel-dialogs.c:1166
-#, fuzzy
 msgid "Auto_hide"
 msgstr "إخفاء تلقائي"
 
 #: ../panel/panel-dialogs.c:1184 ../plugins/actions/actions.c:471
-#, fuzzy
 msgid "Orientation:"
-msgstr "توجيه الشريط :"
+msgstr "الاتجاه :"
 
 #: ../panel/panel-dialogs.c:1196 ../plugins/actions/actions.c:484
 msgid "Horizontal"
@@ -288,19 +278,16 @@ msgid "Vertical"
 msgstr "عمودي"
 
 #: ../panel/panel-dialogs.c:1207
-#, fuzzy
 msgid "Handle:"
-msgstr "موقع"
+msgstr "المؤشر:"
 
 #: ../panel/panel-dialogs.c:1219
-#, fuzzy
 msgid "At both sides"
-msgstr "إخفاء تلقائي"
+msgstr "على الجانبين"
 
 #: ../panel/panel-dialogs.c:1299
-#, fuzzy
 msgid "Select Monitor"
-msgstr "محرر"
+msgstr "اختيار الشاشة"
 
 #. appearance settings
 #. appearance
@@ -322,16 +309,15 @@ msgstr "الشفافية (%):"
 
 #: ../panel/panel-dialogs.c:1496
 msgid "Make active panel opaque"
-msgstr ""
+msgstr "جعل اللائحة الحالية غير شفافة"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Popup position:"
-msgstr "موقع"
+msgstr "موقع الظهور:"
 
 #: ../panel/panel-dialogs.c:1519
 msgid "Automatic"
-msgstr ""
+msgstr "تلقائي"
 
 #: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
@@ -349,37 +335,31 @@ msgstr "شريط جديد"
 
 #: ../panel/panel-dialogs.c:1715
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
-#, fuzzy
 msgid "Panel Manager"
-msgstr "حجم شريط المهام :"
+msgstr "مدير الائحة :"
 
 #: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
-#, fuzzy
 msgid "Lock screen"
-msgstr "/_إغلاق الشاشة"
+msgstr "إغلاق الشاشة"
 
 #: ../plugins/actions/actions.c:419
-#, fuzzy
 msgid "Panel Actions"
-msgstr "إعدادات شريط Xfce"
+msgstr "لوحة الاعمال"
 
 #: ../plugins/actions/actions.c:449
-#, fuzzy
 msgid "Select action type:"
-msgstr "إختر أمر"
+msgstr "إختر نوع أمر"
 
 #: ../plugins/actions/actions.c:460
-#, fuzzy
 msgid "Quit + Lock screen"
-msgstr "/_إغلاق الشاشة"
+msgstr "خروج + إغلاق الشاشة"
 
 #: ../plugins/clock/clock-dialog.c:345
 msgid "Custom"
-msgstr ""
+msgstr "خاص"
 
 #: ../plugins/clock/clock-dialog.c:399
-#, fuzzy
 msgid "Display _seconds"
 msgstr "اعرض الثواني"
 
@@ -388,13 +368,12 @@ msgid "Use 24-_hour clock"
 msgstr "استخدم ساعة ال 24"
 
 #: ../plugins/clock/clock-dialog.c:414
-#, fuzzy
 msgid "Sho_w AM/PM"
 msgstr "اظهر صباحاً/مساء"
 
 #: ../plugins/clock/clock-dialog.c:423
 msgid "True _binary clock"
-msgstr ""
+msgstr "ساعة رقمية حقيقية"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:465
@@ -408,27 +387,26 @@ msgstr "عقارب"
 
 #: ../plugins/clock/clock-dialog.c:491
 msgid "Binary"
-msgstr ""
+msgstr "رفمي"
 
 #: ../plugins/clock/clock-dialog.c:492
 msgid "Digital"
 msgstr "رقمية"
 
 #: ../plugins/clock/clock-dialog.c:493
-#, fuzzy
 msgid "LCD"
-msgstr "لمبة"
+msgstr "لسيدي"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
 #: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Show _frame"
-msgstr ""
+msgstr "أظهر النافذة"
 
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:505
 msgid "Tooltip Format"
-msgstr ""
+msgstr "ترميز التلميحة"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:531
@@ -445,9 +423,8 @@ msgid "Only show minimized applications"
 msgstr "اظهر التطبيقات المصغرة فقط"
 
 #: ../plugins/iconbox/iconbox.c:931
-#, fuzzy
 msgid "Show applications of all workspaces"
-msgstr "أظهر"
+msgstr "أظهر البرامج من جميع ساحات العمل"
 
 #: ../plugins/iconbox/iconbox.c:939 ../plugins/tasklist/tasklist-dialogs.c:202
 msgid "Use all available space"
@@ -460,109 +437,100 @@ msgid "New Item"
 msgstr "عنصر جديد"
 
 #: ../plugins/launcher/launcher-exec.c:517
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
 msgstr "لم أستطع تشغيل \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
-msgstr ""
+msgstr "لا أيقونة"
 
 #: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
 msgid "Select a Directory"
-msgstr "محرر"
+msgstr "إختر مجلد"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Select an Application"
-msgstr "إختر أمر"
+msgstr "إختر برنامج"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
-msgstr ""
+msgstr "جميع الملفات"
 
 #: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
-msgstr ""
+msgstr "الملفات التنفيذية"
 
 #: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
-msgstr ""
+msgstr "بيرل سكريبت"
 
 #: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
-msgstr ""
+msgstr "بايذن سكريبت"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "روبي سكريبت"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
-msgstr ""
+msgstr "شيل سكريبت"
 
 #: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
-msgstr ""
+msgstr "مجهول"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "اختر أيقونة لـ·\"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1116
-#, fuzzy
 msgid "_Name"
 msgstr "الاسم"
 
 #: ../plugins/launcher/launcher-dialog.c:1134
-#, fuzzy
 msgid "_Description"
 msgstr "الوصف"
 
 #: ../plugins/launcher/launcher-dialog.c:1153
-#, fuzzy
 msgid "_Icon"
-msgstr "صندوق الأيقونات"
+msgstr "أيقونة"
 
 #: ../plugins/launcher/launcher-dialog.c:1171
-#, fuzzy
 msgid "Co_mmand"
 msgstr "أمر "
 
 #: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
-msgstr ""
+msgstr "_المجلد الحالي"
 
 #: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
 msgstr "تنفيذ في _سطر اﻷوامر"
 
 #: ../plugins/launcher/launcher-dialog.c:1246
-#, fuzzy
 msgid "Use _startup notification"
 msgstr "أستخدم _تنبية بدأ التشغيل"
 
 #. create new dialog
 #: ../plugins/launcher/launcher-dialog.c:1515
-#, fuzzy
 msgid "Program Launcher"
-msgstr "برنامج"
+msgstr "مقلع البرامج"
 
 #: ../plugins/launcher/launcher-dialog.c:1543
 msgid "A_rrow:"
-msgstr ""
+msgstr "_سهم:"
 
 #: ../plugins/launcher/launcher-dialog.c:1549
 msgid "Default"
 msgstr "تلقائي"
 
 #: ../plugins/launcher/launcher-dialog.c:1554
-#, fuzzy
 msgid "Inside Button"
-msgstr "_زر الأيقونة"
+msgstr "داخل الزر"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -578,40 +546,37 @@ msgstr "عدد الأعمدة:"
 
 #: ../plugins/pager/pager.c:397
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "تغيير ساحة العمل بالستعمال الفأرة"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
-#, fuzzy
 msgid "Separator or Spacing"
-msgstr "فاصل"
+msgstr "فاصل أو مساحة"
 
 #: ../plugins/separator/separator.c:430
-#, fuzzy
 msgid "Separator Style"
-msgstr "فاصل"
+msgstr "نوع فاصل"
 
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr ""
+msgstr "_مساخة فارغة"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_زيادة المساخة الفارغة"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
-msgstr ""
+msgstr "_سطر"
 
 #: ../plugins/separator/separator.c:464
-#, fuzzy
 msgid "_Handle"
-msgstr "موقع"
+msgstr "_مؤشر"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
-msgstr ""
+msgstr "_نقط"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -635,14 +600,13 @@ msgstr "هناك صينية نظام تعمل مسبقا على الشاشة"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:287
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "إختر أمر"
+msgstr "البرامج المحجوبة"
 
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "فشل في الحصول على الإختيار من أجل الشاشة·%d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:157
 #: ../plugins/tasklist/tasklist-dialogs.c:224
@@ -660,7 +624,7 @@ msgstr "استخدم ازرار مفلطحة"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:215
 msgid "Show handle"
-msgstr ""
+msgstr "أظهر المؤشر"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:227
 msgid "Show tasks from _all workspaces"
@@ -668,7 +632,7 @@ msgstr "اظهر المهام من كل _مساحات العمل"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:233
 msgid "Show application _names"
-msgstr ""
+msgstr "أظهر أسماء البرامج"
 
 #. keep order in sync with NetkTasklistGroupingType
 #: ../plugins/tasklist/tasklist-dialogs.c:243
@@ -686,12 +650,12 @@ msgstr "اجمع المهام دوماً"
 #: ../plugins/windowlist/windowlist.c:245
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "هل أنت متأكد من أنك تريد حذف ساحة العمل·%d؟"
 
 #: ../plugins/windowlist/windowlist.c:246
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "هل أنت متأكد من أنك تود حذف ساخة العمل·'%s'؟"
 
 #: ../plugins/windowlist/windowlist.c:511
 #, c-format
@@ -724,11 +688,10 @@ msgstr "قائمة النوافذ"
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
-msgstr ""
+msgstr "<i>تحذير عاجل</i>·سيقوم الزر باشارة عندما يحتاج البرنامج الى الاهتمام."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
-#, fuzzy
 msgid "Urgency Notification"
 msgstr "أستخدم _تنبية بدأ التشغيل"
 
@@ -738,12 +701,11 @@ msgstr "_معطب"
 
 #: ../plugins/windowlist/windowlist-dialog.c:173
 msgid "For _other workspaces"
-msgstr ""
+msgstr "من أجل باقي ساحات العمل"
 
 #: ../plugins/windowlist/windowlist-dialog.c:182
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "أظهر"
+msgstr "لجميع ساحات العمل"
 
 #: ../plugins/windowlist/windowlist-dialog.c:196
 msgid "_Icon button"
@@ -751,24 +713,23 @@ msgstr "_زر الأيقونة"
 
 #: ../plugins/windowlist/windowlist-dialog.c:203
 msgid "A_rrow button"
-msgstr ""
+msgstr "زر السهم"
 
 #: ../plugins/windowlist/windowlist-dialog.c:221
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "أظهر"
+msgstr "أظهر النوافذ من جميع ساحات العمل"
 
 #: ../plugins/windowlist/windowlist-dialog.c:230
 msgid "Show a_pplication icons"
-msgstr ""
+msgstr "أظهر_أيقونات البرامج"
 
 #: ../plugins/windowlist/windowlist-dialog.c:239
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "أظهر أفعال ساحات العمل"
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "فشل في اطلاق لائحة اكسفس"
 
 #: ../mcs-plugin/plugin.c:57
 msgid "Panel"
@@ -776,12 +737,11 @@ msgstr "الشريط"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr ""
+msgstr "زر العمل"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
-#, fuzzy
 msgid "Log out or lock the screen"
-msgstr "إغلاق الشاشة"
+msgstr "الخروج أو إغلاق الشاشة"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
@@ -789,7 +749,7 @@ msgstr "ماهى الساعة؟"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr ""
+msgstr "أظهر أيقونات لكل البرامج المشتغلة"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -797,15 +757,15 @@ msgstr "برنامج"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr ""
+msgstr "مطلق البرامج مع قائمة اختيارية"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
-msgstr ""
+msgstr "صورة مصغرة عن جميع المكاتب الافتراضية"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr ""
+msgstr "أضف مساحة أو سطر بين عناصر اللائحة"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
@@ -813,7 +773,7 @@ msgstr "اظهر سطح المكتب"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr ""
+msgstr "تفعيل إظهار/إخفاء المكتب"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
