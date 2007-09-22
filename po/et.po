@@ -9,47 +9,44 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-10 14:03+0200\n"
-"PO-Revision-Date: 2006-04-13 14:16+0300\n"
-"Last-Translator: Mart Tõnso <mart.tonso@ttu.ee>\n"
-"Language-Team: Estonian <et@li.org>\n"
+"PO-Revision-Date: 2007-09-14 17:01+0300\n"
+"Last-Translator: Indrek Ardel <fps.intz@gmail.com>\n"
+"Language-Team: Estonian <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../config/launcher-7.rc.in.h:1
-#, fuzzy
 msgid "Command Prompt"
-msgstr "Käsklus"
+msgstr "Käsuviip"
 
 #: ../config/launcher-7.rc.in.h:2
 msgid "X terminal emulator"
-msgstr ""
+msgstr "X terminal emulaator"
 
 #: ../config/launcher-8.rc.in.h:1
 msgid "Edit text files"
-msgstr ""
+msgstr "Muuda tekstifaile"
 
 #: ../config/launcher-8.rc.in.h:2
 msgid "Editor"
-msgstr "Redaktor"
+msgstr "Tekstiredaktor"
 
 #: ../config/launcher-9.rc.in.h:1
-#, fuzzy
 msgid "File Manager"
-msgstr "Failide haldamine"
+msgstr "Failihaldur"
 
 #: ../config/launcher-9.rc.in.h:2
 msgid "Manage files and folders"
-msgstr ""
+msgstr "Halda faile ja kaustu"
 
 #: ../config/launcher-10.rc.in.h:1
 msgid "Surf the internet"
-msgstr ""
+msgstr "Sirvi veebi"
 
 #: ../config/launcher-10.rc.in.h:2
-#, fuzzy
 msgid "Web Browser"
-msgstr "Abi sirvija"
+msgstr "Veebisirvija"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -63,8 +60,7 @@ msgid "Remove \"%s\"?"
 msgstr "Kas eemaldame: \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:636
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "Asi eemaldatakse paneelilt ja selle seadistused kaovad."
 
 #. configure, hide by default
@@ -90,7 +86,8 @@ msgstr "Eemalda"
 msgid "Add New Item"
 msgstr "Lisa uus asi"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:921 ../panel/panel.c:696
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:921
+#: ../panel/panel.c:696
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Kohanda paneeli"
@@ -99,8 +96,10 @@ msgstr "Kohanda paneeli"
 msgid "Add Items"
 msgstr "Lisa asju"
 
-#: ../panel/panel.c:723 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:723
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Välju"
 
@@ -112,18 +111,20 @@ msgstr "Käivita uuesti"
 msgid "About the Xfce Panel"
 msgstr "Xfce Paneelist"
 
-#: ../panel/panel-app.c:256 ../panel/panel-app.c:886
+#: ../panel/panel-app.c:256
+#: ../panel/panel-app.c:886
 msgid "Exit Xfce Panel?"
 msgstr "Kas väljume Xfce Paneelist?"
 
-#: ../panel/panel-app.c:884 ../panel/panel-app.c:916 ../panel/panel-app.c:949
+#: ../panel/panel-app.c:884
+#: ../panel/panel-app.c:916
+#: ../panel/panel-app.c:949
 msgid "Xfce Panel"
 msgstr "Xfce Paneel"
 
 #: ../panel/panel-app.c:887
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"Te ei saa eemaldada viimast paneeli. Kas te soovite programmist väljuda?"
+msgstr "Te ei saa eemaldada viimast paneeli. Kas te soovite programmist väljuda?"
 
 #: ../panel/panel-app.c:914
 #, c-format
@@ -134,67 +135,64 @@ msgstr "Kas eemaldame paneeli \"%d\"?"
 msgid "The selected panel and all its items will be removed."
 msgstr "Valitud panel ja kõik selle asjad eemaldatakse."
 
-#: ../panel/panel-app.c:955 ../panel/panel-app.c:956
+#: ../panel/panel-app.c:955
+#: ../panel/panel-app.c:956
 msgid "Developer"
 msgstr "Arendaja"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "Näita seda sõnumit ning välju"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "Näita märguannete ikoone"
+msgstr "Näita seadistuste dialoogi"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "Salvesta häälestus"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "Käivita uuesti"
+msgstr "Taaskäivita paneelid"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "Lõpeta seanss"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Sulge kõik paneelid ja lõpeta programm"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "Lisa uus asi"
+msgstr "Lisa uued asjad"
 
 #: ../panel/main.c:90
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Ei suutnud käivitada \"%s\"."
+msgstr "Ebaõnnestus avada "
 
 #: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Kopeerimisõigus (c) 2004-2007"
 
 #: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Xfce arendusmeeskond. Kõik õigused reserveeritud."
 
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Palun teata vigadest <%s>."
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "xfce4-panel juba töötab"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "Taaskäivitan xfce4-paneli..."
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
@@ -203,58 +201,66 @@ msgstr "Ei suuda avada paneeli \"%s\" moodulit"
 
 #: ../panel/panel-dialogs.c:633
 msgid "Add Items to the Panel"
-msgstr ""
+msgstr "Lisa Paneelile Asju"
 
 #: ../panel/panel-dialogs.c:664
-msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
-msgstr ""
-"Kanna asjad nimekirjast paneelile või eemalda kandes nad tagasi nimekirja."
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Kanna asjad nimekirjast paneelile või eemalda kandes nad tagasi nimekirja."
 
 #: ../panel/panel-dialogs.c:681
 msgid "Available Items"
 msgstr "Saada olevad asjad"
 
-#: ../panel/panel-dialogs.c:907 ../panel/panel-dialogs.c:1143
+#: ../panel/panel-dialogs.c:907
+#: ../panel/panel-dialogs.c:1143
 msgid "Normal Width"
 msgstr "Normaalne laius"
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:908
+#: ../panel/panel-dialogs.c:1144
 msgid "Full Width"
 msgstr "Täislaius"
 
-#: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, fuzzy
+#: ../panel/panel-dialogs.c:912
+#: ../panel/panel-dialogs.c:1148
 msgid "Normal Height"
-msgstr "Normaalne laius"
+msgstr "Normaalne Kõrgus"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
+#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:1149
 msgid "Full Height"
-msgstr "Täislaius"
+msgstr "Täielik Kõrgus"
 
-#: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
+#: ../panel/panel-dialogs.c:921
+#: ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
 msgstr "Vahe monitorid"
 
-#: ../panel/panel-dialogs.c:984 ../panel/panel-dialogs.c:1223
-#: ../panel/panel-dialogs.c:1520 ../plugins/launcher/launcher-dialog.c:1550
+#: ../panel/panel-dialogs.c:984
+#: ../panel/panel-dialogs.c:1223
+#: ../panel/panel-dialogs.c:1520
+#: ../plugins/launcher/launcher-dialog.c:1550
 msgid "Left"
 msgstr "Vasakul"
 
-#: ../panel/panel-dialogs.c:986 ../panel/panel-dialogs.c:1225
-#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1551
+#: ../panel/panel-dialogs.c:986
+#: ../panel/panel-dialogs.c:1225
+#: ../panel/panel-dialogs.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1551
 msgid "Right"
 msgstr "Paremal"
 
-#: ../panel/panel-dialogs.c:991 ../panel/panel-dialogs.c:1230
-#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1552
+#: ../panel/panel-dialogs.c:991
+#: ../panel/panel-dialogs.c:1230
+#: ../panel/panel-dialogs.c:1522
+#: ../plugins/launcher/launcher-dialog.c:1552
 msgid "Top"
 msgstr "Ülal"
 
-#: ../panel/panel-dialogs.c:993 ../panel/panel-dialogs.c:1232
-#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1553
+#: ../panel/panel-dialogs.c:993
+#: ../panel/panel-dialogs.c:1232
+#: ../panel/panel-dialogs.c:1523
+#: ../plugins/launcher/launcher-dialog.c:1553
 msgid "Bottom"
 msgstr "All"
 
@@ -275,15 +281,18 @@ msgstr "Vabalt liigudatav"
 msgid "Auto_hide"
 msgstr "Automaatne_varjamine"
 
-#: ../panel/panel-dialogs.c:1184 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1184
+#: ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Orientatsioon:"
 
-#: ../panel/panel-dialogs.c:1196 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1196
+#: ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Horisontaalne"
 
-#: ../panel/panel-dialogs.c:1198 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1198
+#: ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Vertikaalne"
 
@@ -302,7 +311,8 @@ msgstr "Vali monitor"
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1427 ../plugins/clock/clock-dialog.c:480
+#: ../panel/panel-dialogs.c:1427
+#: ../plugins/clock/clock-dialog.c:480
 #: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/tasklist/tasklist-dialogs.c:183
 #: ../plugins/windowlist/windowlist-dialog.c:190
@@ -322,15 +332,15 @@ msgid "Make active panel opaque"
 msgstr "Tee aktiivne paneel läbipaistvaks"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Popup position:"
-msgstr "Asukoht"
+msgstr "Hüpikakna asukoht:"
 
 #: ../panel/panel-dialogs.c:1519
 msgid "Automatic"
-msgstr ""
+msgstr "Automaatne"
 
-#: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
+#: ../panel/panel-dialogs.c:1563
+#: ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
 #, c-format
 msgid "Panel %d"
@@ -349,7 +359,8 @@ msgstr "Uus Paneel"
 msgid "Panel Manager"
 msgstr "Paneeli haldur"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Lukusta ekraan"
@@ -368,25 +379,23 @@ msgstr "Välju + lukusta ekraan"
 
 #: ../plugins/clock/clock-dialog.c:345
 msgid "Custom"
-msgstr ""
+msgstr "Kohandatud"
 
 #: ../plugins/clock/clock-dialog.c:399
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Näita sekundeid"
+msgstr "Näita _sekundeid"
 
 #: ../plugins/clock/clock-dialog.c:408
 msgid "Use 24-_hour clock"
 msgstr "Kasuta 24 _h kella"
 
 #: ../plugins/clock/clock-dialog.c:414
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "Näita EL/PL"
+msgstr "_Näita EL/PL"
 
 #: ../plugins/clock/clock-dialog.c:423
 msgid "True _binary clock"
-msgstr ""
+msgstr "Tõene _kahendsüsteemi kell"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:465
@@ -400,16 +409,15 @@ msgstr "Analoog"
 
 #: ../plugins/clock/clock-dialog.c:491
 msgid "Binary"
-msgstr ""
+msgstr "Kahendsüsteemne"
 
 #: ../plugins/clock/clock-dialog.c:492
 msgid "Digital"
 msgstr "Digitaal"
 
 #: ../plugins/clock/clock-dialog.c:493
-#, fuzzy
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
@@ -420,7 +428,7 @@ msgstr "Näita _raami"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:505
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Vihje Formaat"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:531
@@ -437,96 +445,91 @@ msgid "Only show minimized applications"
 msgstr "Näita ainult vähendatud rakendusi"
 
 #: ../plugins/iconbox/iconbox.c:931
-#, fuzzy
 msgid "Show applications of all workspaces"
-msgstr "Näita kõigi tööruumide rakendusi."
+msgstr "Näita kõikide tööalade rakendusi"
 
-#: ../plugins/iconbox/iconbox.c:939 ../plugins/tasklist/tasklist-dialogs.c:202
+#: ../plugins/iconbox/iconbox.c:939
+#: ../plugins/tasklist/tasklist-dialogs.c:202
 msgid "Use all available space"
 msgstr "Kasuta kogu saadavat ruumi"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:743 ../plugins/launcher/launcher.c:803
+#: ../plugins/launcher/launcher.c:743
+#: ../plugins/launcher/launcher.c:803
 msgid "New Item"
 msgstr "Uus asi"
 
 #: ../plugins/launcher/launcher-exec.c:517
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
-msgstr "Ei suutnud käivitada \"%s\"."
+msgstr "Ebaõnnestus käivitada \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
-msgstr ""
+msgstr "Ikoon puudub"
 
 #: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
 msgid "Select a Directory"
-msgstr "Vali monitor"
+msgstr "Vali Kaust"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Select an Application"
-msgstr "Vali tegevuse tüüp"
+msgstr "Vali Rakendus"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
-msgstr ""
+msgstr "Kõik Failid"
 
 #: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
-msgstr ""
+msgstr "Käivitatavad Failid"
 
 #: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Perli Skriptid"
 
 #: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
-msgstr ""
+msgstr "Pythoni Skriptid"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Ruby Skriptid"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Shelli Skriptid"
 
 #: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
-msgstr ""
+msgstr "Tundmatu"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Vali ikoon \"%s\" jaoks"
 
 #: ../plugins/launcher/launcher-dialog.c:1116
-#, fuzzy
 msgid "_Name"
-msgstr "Nimi"
+msgstr "_Nimi"
 
 #: ../plugins/launcher/launcher-dialog.c:1134
-#, fuzzy
 msgid "_Description"
-msgstr "Kirjeldus"
+msgstr "_Kirjeldus"
 
 #: ../plugins/launcher/launcher-dialog.c:1153
-#, fuzzy
 msgid "_Icon"
-msgstr "Ikoonikasti"
+msgstr "_Ikoon"
 
 #: ../plugins/launcher/launcher-dialog.c:1171
-#, fuzzy
 msgid "Co_mmand"
-msgstr "Käsklus"
+msgstr "_Käsklus"
 
 #: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
-msgstr ""
+msgstr "_Töökataloog"
 
 #: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
@@ -543,18 +546,18 @@ msgstr "Programmi startija"
 
 #: ../plugins/launcher/launcher-dialog.c:1543
 msgid "A_rrow:"
-msgstr ""
+msgstr "N_ool:"
 
 #: ../plugins/launcher/launcher-dialog.c:1549
 msgid "Default"
 msgstr "Vaikimisi"
 
 #: ../plugins/launcher/launcher-dialog.c:1554
-#, fuzzy
 msgid "Inside Button"
-msgstr "Tegevuse nupud"
+msgstr "Sisemine Nupp"
 
-#: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:336
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Lehitseja"
 
@@ -568,7 +571,7 @@ msgstr "Veergude arv:"
 
 #: ../plugins/pager/pager.c:397
 msgid "Switch workspaces using the mouse wheel"
-msgstr ""
+msgstr "Vaheta tööalasid kasutades hiire rullikut"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -576,31 +579,29 @@ msgid "Separator or Spacing"
 msgstr "Eraldaja või vahe"
 
 #: ../plugins/separator/separator.c:430
-#, fuzzy
 msgid "Separator Style"
-msgstr "Eraldaja või vahe"
+msgstr "Eraldaja Stiil"
 
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr ""
+msgstr "_Tühi Ruum"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_Laienev Tühi Ruum"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
-msgstr ""
+msgstr "_Joon"
 
 #: ../plugins/separator/separator.c:464
-#, fuzzy
 msgid "_Handle"
-msgstr "Sang:"
+msgstr "_Käepide"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
-msgstr ""
+msgstr "_Täpid"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -624,14 +625,13 @@ msgstr "Sellel ekraanil juba töötab süsteemi teateala"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:287
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "Vali tegevuse tüüp"
+msgstr "Peidetud Rakendused"
 
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Ebaõnnestus hankida halduri valikut ekraanile %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:157
 #: ../plugins/tasklist/tasklist-dialogs.c:224
@@ -645,12 +645,11 @@ msgstr "Vähim laius:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:209
 msgid "Use flat buttons"
-msgstr ""
+msgstr "Kasuta lamedaid nuppe"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:215
-#, fuzzy
 msgid "Show handle"
-msgstr "Näita _raami"
+msgstr "Näita käepidemeid"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:227
 msgid "Show tasks from _all workspaces"
@@ -676,12 +675,12 @@ msgstr "Grupita tegevusi alati"
 #: ../plugins/windowlist/windowlist.c:245
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Oled sa kindel, et soovid eemaldada tööala %d?"
 
 #: ../plugins/windowlist/windowlist.c:246
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Oled sa kindel, et soovid eemaldada tööala '%s'?"
 
 #: ../plugins/windowlist/windowlist.c:511
 #, c-format
@@ -711,61 +710,53 @@ msgid "Window List"
 msgstr "Ekende nimekiri"
 
 #: ../plugins/windowlist/windowlist-dialog.c:150
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Tähelepanu märguanne</i> vilgutab nuppu, kui programm vajab tähelepanu."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Kasuta _stardi teavitust"
+msgstr "Tähelepanu märguanne"
 
 #: ../plugins/windowlist/windowlist-dialog.c:164
 msgid "_Disabled"
-msgstr ""
+msgstr "_Keelatud"
 
 #: ../plugins/windowlist/windowlist-dialog.c:173
 msgid "For _other workspaces"
-msgstr ""
+msgstr "T_eistele tööaladele"
 
 #: ../plugins/windowlist/windowlist-dialog.c:182
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Näita kõigi tööruumide rakendusi."
+msgstr "_Kõikidele tööaladele"
 
 #: ../plugins/windowlist/windowlist-dialog.c:196
-#, fuzzy
 msgid "_Icon button"
-msgstr "Tegevuse nupud"
+msgstr "_Ikooni nupp"
 
 #: ../plugins/windowlist/windowlist-dialog.c:203
 msgid "A_rrow button"
-msgstr ""
+msgstr "N_oole nupp"
 
 #: ../plugins/windowlist/windowlist-dialog.c:221
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Näita kõigi tööruumide rakendusi."
+msgstr "Näita kõikide tööalade _aknaid"
 
 #: ../plugins/windowlist/windowlist-dialog.c:230
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Näita rakenduste _nimesid"
+msgstr "Näita rakenduste _ikoone"
 
 #: ../plugins/windowlist/windowlist-dialog.c:239
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "Näita tööala tegevusi"
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "Ebaõnnestus käivitada 'xfce4-panel -c'"
 
 #: ../mcs-plugin/plugin.c:57
-#, fuzzy
 msgid "Panel"
-msgstr "Paneel %d"
+msgstr "Paneel"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
@@ -820,22 +811,17 @@ msgid "Show list of available windows"
 msgstr "Näita saadavate akende nimistut"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-#, fuzzy
 msgid "Xfce 4 Panel Manager"
-msgstr "Paneeli haldur"
+msgstr "Xfce 4 Paneeli haldur"
 
 #~ msgid "Unable to register system tray: %s"
 #~ msgstr "Ei suutnud süsteemi teateala registreerida: %s"
-
 #~ msgid "%A %d %B %Y"
 #~ msgstr "%A %d %B %Y"
-
 #~ msgid "_Draw Separator"
 #~ msgstr "_Joonista eraldaja"
-
 #~ msgid "_Expand"
 #~ msgstr "_Paisuta"
-
 #~ msgid ""
 #~ "\n"
 #~ " Xfce Panel %s\n"
@@ -854,14 +840,12 @@ msgstr "Paneeli haldur"
 #~ "\n"
 #~ " Litsentseeritud GNU GPL litsentsi all.\n"
 #~ "\n"
-
 #~ msgid ""
 #~ " Usage: %s [OPTIONS]\n"
 #~ "\n"
 #~ msgstr ""
 #~ " Kasutus: %s [VALIKUD]\n"
 #~ "\n"
-
 #~ msgid ""
 #~ " OPTIONS\n"
 #~ " -h, --help      Show this message and exit\n"
@@ -884,66 +868,48 @@ msgstr "Paneeli haldur"
 #~ " -x, --exit      Sulge kõik paneelid ja välju\n"
 #~ " -a, --add       Lisa uued asjad\n"
 #~ "\n"
-
 #~ msgid "Error in command \"%s\""
 #~ msgstr "Käsus \"%s\" on viga"
-
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Seda asja ei ole veel sätitud"
-
 #~ msgid "File management"
 #~ msgstr "Failide haldamine"
-
 #~ msgid "Utilities"
 #~ msgstr "Asjakesed"
-
 #~ msgid "Games"
 #~ msgstr "Mängud"
-
 #~ msgid "Help browser"
 #~ msgstr "Abi sirvija"
-
 #~ msgid "Multimedia"
 #~ msgstr "Multimeedia"
-
 #~ msgid "Network"
 #~ msgstr "Võrgundus"
-
 #~ msgid "Graphics"
 #~ msgstr "Graafika"
-
 #~ msgid "Printer"
 #~ msgstr "Printimine"
-
 #~ msgid "Productivity"
 #~ msgstr "Tootlikkus"
-
 #~ msgid "Sound"
 #~ msgstr "Heli"
-
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
 
 #, fuzzy
 #~ msgid "Development"
 #~ msgstr "Arendaja"
-
 #~ msgid "Select image file"
 #~ msgstr "Vali pildi fail"
-
 #~ msgid "Select command"
 #~ msgstr "Vali käsklus"
-
 #~ msgid "Other..."
 #~ msgstr "Muu..."
-
 #~ msgid ""
 #~ "The first item in the list is shown on the panel. Additional items will "
 #~ "appear in a menu."
 #~ msgstr ""
 #~ "Esimene nimekirja asi on näidatud paneelil.Lisanduvad asjad ilmnevad "
 #~ "menüüs."
-
 #~ msgid ""
 #~ "Failed to run 0launch:\n"
 #~ "%s\n"
@@ -954,7 +920,6 @@ msgstr "Paneeli haldur"
 #~ "%s\n"
 #~ "\n"
 #~ "Rohkem infot leiate http://0intall.net"
-
 #~ msgid ""
 #~ "The Zero Install GUI has finished, but the launcher dialog has "
 #~ "disappeared in the meantime. Not adding launcher (but any files "
@@ -962,15 +927,12 @@ msgstr "Paneeli haldur"
 #~ msgstr ""
 #~ "0 installi GUI lõpetas, kuid startija dialoog kadus vahepeal ära. "
 #~ "Startijat ei lisata(kõik allalaetud failid on alles)."
-
 #~ msgid "Select file"
 #~ msgstr "Vali fail"
-
 #~ msgid "Test Plugin"
 #~ msgstr "Testjublunn"
-
 #~ msgid "This plugin has no purpose"
 #~ msgstr "Sellel jublunnil ei ole mõtet"
-
 #~ msgid "Size"
 #~ msgstr "Suurus"
+
