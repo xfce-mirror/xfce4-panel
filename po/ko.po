@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-09-10 14:03+0200\n"
-"PO-Revision-Date: 2006-10-09 16:42+0900\n"
+"PO-Revision-Date: 2007-09-24 03:27+0900\n"
 "Last-Translator: ByungHyun Choi <byunghyun.choi@gmail.com>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
 "net>\n"
@@ -136,61 +136,57 @@ msgstr "만든이"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "이 메시지를 보이고 종료"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "알림 아이콘 보이기"
+msgstr "설정화면 보이기"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "설정 저장"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
 msgstr "다시 시작"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "세션 종료"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "모든 패널을 닫고 프로그램 종료"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
 msgstr "새로운 항목 추가"
 
 #: ../panel/main.c:90
-#, fuzzy
 msgid "Failed to open display"
-msgstr "\"%s\"를(을) 실행하지 못 했습니다."
+msgstr "화면을 열지 못 했습니다."
 
 #: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Copyright (c) 2004-2007"
 
 #: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "(저) Xfce 개발팀"
 
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "버그는 <%s>에게 보내주십시오."
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "xfce4-panel이 동작 중입니다."
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "xfce4-panel을 다시 시작 중..."
 
 #: ../panel/panel-dialogs.c:188
 #, c-format
@@ -218,17 +214,15 @@ msgstr "보통 폭"
 
 #: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
 msgid "Full Width"
-msgstr "최대 폭(_F)"
+msgstr "최대 폭"
 
 #: ../panel/panel-dialogs.c:912 ../panel/panel-dialogs.c:1148
-#, fuzzy
 msgid "Normal Height"
-msgstr "보통 폭"
+msgstr "보통 높이"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
 msgid "Full Height"
-msgstr "최대 폭(_F)"
+msgstr "최대 높이"
 
 #: ../panel/panel-dialogs.c:921 ../panel/panel-dialogs.c:1158
 msgid "Span Monitors"
@@ -318,13 +312,12 @@ msgid "Make active panel opaque"
 msgstr "활성화된 패널을 흐릭하게"
 
 #: ../panel/panel-dialogs.c:1509
-#, fuzzy
 msgid "Popup position:"
-msgstr "위치"
+msgstr "팝업 위치"
 
 #: ../panel/panel-dialogs.c:1519
 msgid "Automatic"
-msgstr ""
+msgstr "자동"
 
 #: ../panel/panel-dialogs.c:1563 ../panel/panel-dialogs.c:1599
 #: ../panel/panel-dialogs.c:1623
@@ -364,25 +357,23 @@ msgstr "종료 + 화면잠금"
 
 #: ../plugins/clock/clock-dialog.c:345
 msgid "Custom"
-msgstr ""
+msgstr "사용자 정의"
 
 #: ../plugins/clock/clock-dialog.c:399
-#, fuzzy
 msgid "Display _seconds"
-msgstr "초 표시"
+msgstr "초 표시(_s)"
 
 #: ../plugins/clock/clock-dialog.c:408
 msgid "Use 24-_hour clock"
 msgstr "24시간 사용(_h)"
 
 #: ../plugins/clock/clock-dialog.c:414
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "오전/오후 표시"
+msgstr "오전/오후 표시(_w)"
 
 #: ../plugins/clock/clock-dialog.c:423
 msgid "True _binary clock"
-msgstr ""
+msgstr "바이너리 시계(_b)"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:465
@@ -396,14 +387,13 @@ msgstr "아날로그"
 
 #: ../plugins/clock/clock-dialog.c:491
 msgid "Binary"
-msgstr ""
+msgstr "바이너리"
 
 #: ../plugins/clock/clock-dialog.c:492
 msgid "Digital"
 msgstr "디지탈"
 
 #: ../plugins/clock/clock-dialog.c:493
-#, fuzzy
 msgid "LCD"
 msgstr "전광판"
 
@@ -416,7 +406,7 @@ msgstr "틀 보이기(_f)"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:505
 msgid "Tooltip Format"
-msgstr ""
+msgstr "도움말 형식"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:531
@@ -447,81 +437,75 @@ msgid "New Item"
 msgstr "새로운 항목"
 
 #: ../plugins/launcher/launcher-exec.c:517
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
 msgstr "\"%s\"를(을) 실행하지 못 했습니다."
 
 #: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
-msgstr ""
+msgstr "아이콘 없음"
 
 #: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
 msgid "Select a Directory"
-msgstr "감시자 선택"
+msgstr "디렉토리 선택"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Select an Application"
-msgstr "동작 종류 선택"
+msgstr "프로그램 선택"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
-msgstr ""
+msgstr "모든 화일"
 
 #: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
-msgstr ""
+msgstr "실행 화일"
 
 #: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
-msgstr ""
+msgstr "펄 스크립트"
 
 #: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
-msgstr ""
+msgstr "파이썬 스크립드"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "루비 스크립트"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
-msgstr ""
+msgstr "쉘 스크립트"
 
 #: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
-msgstr ""
+msgstr "모름"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "\"%s\"에 대한 아이콘 선택"
 
 #: ../plugins/launcher/launcher-dialog.c:1116
-#, fuzzy
 msgid "_Name"
-msgstr "이름"
+msgstr "이름(_N)"
 
 #: ../plugins/launcher/launcher-dialog.c:1134
-#, fuzzy
 msgid "_Description"
-msgstr "설명"
+msgstr "설명(_D)"
 
 #: ../plugins/launcher/launcher-dialog.c:1153
-#, fuzzy
 msgid "_Icon"
-msgstr "아이콘 박스"
+msgstr "아이콘(_I)"
 
 #: ../plugins/launcher/launcher-dialog.c:1171
-#, fuzzy
 msgid "Co_mmand"
-msgstr "명령"
+msgstr "명령(_m)"
 
 #: ../plugins/launcher/launcher-dialog.c:1198
 msgid "_Working Directory"
-msgstr ""
+msgstr "작업 디렉토리(_W)"
 
 #: ../plugins/launcher/launcher-dialog.c:1230
 msgid "Run in _terminal"
@@ -537,18 +521,16 @@ msgid "Program Launcher"
 msgstr "프로그램 실행기"
 
 #: ../plugins/launcher/launcher-dialog.c:1543
-#, fuzzy
 msgid "A_rrow:"
-msgstr "방향키(_r)"
+msgstr "방향키(_r):"
 
 #: ../plugins/launcher/launcher-dialog.c:1549
 msgid "Default"
 msgstr "기본"
 
 #: ../plugins/launcher/launcher-dialog.c:1554
-#, fuzzy
 msgid "Inside Button"
-msgstr "아이콘 박스(_I)"
+msgstr "안쪽 버튼"
 
 #: ../plugins/pager/pager.c:336 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -572,31 +554,29 @@ msgid "Separator or Spacing"
 msgstr "분리표시 또는 띄우기"
 
 #: ../plugins/separator/separator.c:430
-#, fuzzy
 msgid "Separator Style"
-msgstr "분리표시 또는 띄우기"
+msgstr "분리표시 스타일"
 
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr ""
+msgstr "빈 공간(_E)"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "빈 공간 늘리기(_E)"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
-msgstr ""
+msgstr "선(_L)"
 
 #: ../plugins/separator/separator.c:464
-#, fuzzy
 msgid "_Handle"
-msgstr "핸들 위치:"
+msgstr "핸들(_H)"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
-msgstr ""
+msgstr "점(_D)"
 
 #: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
@@ -620,14 +600,13 @@ msgstr "이 화면에는 시스템 트레이가 이미 동작 중입니다."
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:287
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "동작 종류 선택"
+msgstr "숨겨진 프로그램"
 
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "화면 %d에 대한 관리자 선택 실패"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:157
 #: ../plugins/tasklist/tasklist-dialogs.c:224
@@ -644,9 +623,8 @@ msgid "Use flat buttons"
 msgstr "밋밋한 버튼 사용"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:215
-#, fuzzy
 msgid "Show handle"
-msgstr "틀 보이기(_f)"
+msgstr "핸들 보이기"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:227
 msgid "Show tasks from _all workspaces"
@@ -751,7 +729,7 @@ msgstr "작업공간 움직임 보이기(_k)"
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "'xfce4-panel -c' 실행 실패"
 
 #: ../mcs-plugin/plugin.c:57
 msgid "Panel"
