@@ -50,23 +50,23 @@
 
 typedef enum { WS_ADD = 1, WS_REMOVE } WorkspaceAction;
 
-static gboolean
-windowlist_blink (gpointer data);
+static gboolean         windowlist_blink                (gpointer         data);
+static void             windowlist_update_arrow_type    (Windowlist      *wl);
+static void             windowlist_set_arrow_type       (Windowlist      *wl,
+                                                         GtkArrowType     arrow_type);
+static gboolean         windowlist_set_size             (XfcePanelPlugin *plugin,
+                                                         int              size,
+                                                         Windowlist      *wl);
+static void             windowlist_construct            (XfcePanelPlugin *plugin);
 
-static GtkArrowType
-windowlist_arrow_type (XfcePanelPlugin * plugin);
 
-static gboolean
-windowlist_set_size (XfcePanelPlugin *plugin,
-		     int size,
-		     Windowlist * wl);
 
 /**
  * REGISTER PLUGIN
  **/
-static void windowlist_construct (XfcePanelPlugin *plugin);
-
 XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (windowlist_construct);
+
+
 
 /**
  * Common functions
@@ -77,8 +77,8 @@ menulist_utf8_string (const char *string)
     char *utf8 = NULL;
     if (!g_utf8_validate(string, -1, NULL))
     {
-	utf8 = g_locale_to_utf8(string, -1, NULL, NULL, NULL);
-	DBG("Title was not UTF-8 complaint");
+        utf8 = g_locale_to_utf8(string, -1, NULL, NULL, NULL);
+        DBG("Title was not UTF-8 complaint");
     }
     else
     {
@@ -91,71 +91,83 @@ menulist_utf8_string (const char *string)
     return utf8;
 }
 
+
+
 static gchar *
 menulist_workspace_name (NetkWorkspace *workspace,
-			 const gchar *num_title,
-			 const gchar *name_title)
+                         const gchar   *num_title,
+                         const gchar   *name_title)
 {
     const gchar *ws_name = NULL;
-    gchar *ws_title;
-    gint ws_num;
-    
+    gchar       *ws_title;
+    gint         ws_num;
+
     ws_num  = netk_workspace_get_number (workspace);    
     ws_name = netk_workspace_get_name (workspace);
-	    
-    if(!ws_name || atoi((const char *)ws_name) == ws_num + 1)
-	ws_title = g_strdup_printf(num_title, ws_num + 1);
+
+    if (!ws_name || strtol((const char *)ws_name, NULL, 0) == ws_num + 1)
+        ws_title = g_strdup_printf (num_title, ws_num + 1);
     else
-	ws_title = g_markup_printf_escaped(name_title, ws_name);
-    
+        ws_title = g_markup_printf_escaped (name_title, ws_name);
+
     return ws_title;
 }
+
+
 
 /**
  * Menu Actions
  **/
 static void
 menu_deactivated (GtkWidget *menu,
-		  GtkWidget *button)
+                  GtkWidget *button)
 {
     DBG ("Destroy menu");
-    
+
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), 
                                   FALSE);
     if (menu)
-	gtk_widget_destroy (menu);
+        gtk_widget_destroy (menu);
 }
 
+
+
 static gboolean
-menulist_goto_workspace (GtkWidget *mi,
-			 GdkEventButton *ev,
-			 NetkWorkspace *workspace)
+menulist_goto_workspace (GtkWidget      *mi,
+                         GdkEventButton *ev,
+                         NetkWorkspace  *workspace)
 {
     netk_workspace_activate (workspace);
-    
+
     return FALSE;
 }
 
+
+
 static void
-window_destroyed (gpointer data,
-		  GObject *object)
+window_destroyed (gpointer  data,
+                  GObject  *object)
 {
     GtkWidget *mi   = data;
     GtkWidget *menu = gtk_widget_get_parent(mi);
-    
+
     if(mi && menu)
         gtk_container_remove (GTK_CONTAINER(menu), mi);
-    
+
     gtk_menu_reposition (GTK_MENU(menu));
 }
 
+
+
 static void
 mi_destroyed (GtkObject *object,
-	      gpointer data)
+              gpointer   data)
 {
     g_object_weak_unref (G_OBJECT(data),
-            (GWeakNotify)window_destroyed, object);
+                         (GWeakNotify)window_destroyed, object);
 }
+
+
 
 static void
 action_menu_deactivated (GtkMenu *menu,
@@ -167,14 +179,16 @@ action_menu_deactivated (GtkMenu *menu,
     g_signal_emit_by_name (parent, "deactivate", 0);
 }
 
+
+
 static void
-popup_action_menu (GtkWidget * widget,
-		   NetkWindow *window)
+popup_action_menu (GtkWidget  *widget,
+                   NetkWindow *window)
 {
     static GtkWidget *menu = NULL;
 
     if (menu)
-	gtk_widget_destroy (menu);
+        gtk_widget_destroy (menu);
 
     menu = netk_create_window_action_menu (window);
 
@@ -182,13 +196,15 @@ popup_action_menu (GtkWidget * widget,
                       G_CALLBACK (action_menu_deactivated), widget->parent);
 
     gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 0,
-                    GDK_CURRENT_TIME);
+                    gtk_get_current_event_time());
 }
 
+
+
 static gboolean
-menulist_goto_window (GtkWidget *mi,
-		      GdkEventButton *ev,
-		      NetkWindow *window)
+menulist_goto_window (GtkWidget      *mi,
+                      GdkEventButton *ev,
+                      NetkWindow     *window)
 {
     if (ev->button == 1) /* Goto workspace and show window */
     {
@@ -197,75 +213,83 @@ menulist_goto_window (GtkWidget *mi,
         {
             netk_workspace_activate(netk_window_get_workspace(window));
         }
-	netk_window_activate (window);
+        netk_window_activate (window);
         g_signal_emit_by_name (mi->parent, "deactivate", 0);
     }
     else if (ev->button == 2) /* Show window on current workspace */
     {
         gtk_menu_popdown (GTK_MENU (mi->parent));
-	netk_window_activate (window);
+        netk_window_activate (window);
         g_signal_emit_by_name (mi->parent, "deactivate", 0);
     }
     else if (ev->button == 3) /* Show the popup menu */
     {
         popup_action_menu (mi, window);
 
-	/* the right-click menu will pop down the main menu */
-	return TRUE;
+        /* the right-click menu will pop down the main menu */
+        return TRUE;
     }
 
     return FALSE;
 }
 
+
+
 static gboolean
-menulist_add_screen (GtkWidget *mi,
-		     GdkEventButton *ev,
-		     Windowlist *wl)
+menulist_add_screen (GtkWidget      *mi,
+                     GdkEventButton *ev,
+                     Windowlist     *wl)
 {
     gint num = netk_screen_get_workspace_count (wl->screen) + 1;
-    
+
     netk_screen_change_workspace_count (netk_screen_get_default (), num);
-    
+
     return FALSE;
 }
 
+
+
 static gboolean
-menulist_remove_screen (GtkWidget *mi,
-		        GdkEventButton *ev,
-		        Windowlist *wl)
+menulist_remove_screen (GtkWidget      *mi,
+                        GdkEventButton *ev,
+                        Windowlist     *wl)
 {
     NetkWorkspace *workspace;
-    gint ws_num;
-    char *text;
-    
+    gint           ws_num;
+    char          *text;
+
     ws_num    = netk_screen_get_workspace_count (wl->screen) - 1;
     workspace = netk_screen_get_workspace (wl->screen, ws_num);
-    
+
     text = menulist_workspace_name (workspace,
-                _("Are you sure you want to remove workspace %d?"),
-                _("Are you sure you want to remove workspace '%s'?"));
-    
+            _("Are you sure you want to remove workspace %d?"),
+            _("Are you sure you want to remove workspace '%s'?"));
+
     if (xfce_confirm (text, GTK_STOCK_REMOVE, NULL))
     {
-	netk_screen_change_workspace_count (netk_screen_get_default (),
-					    ws_num);
+        netk_screen_change_workspace_count (netk_screen_get_default (),
+                                            ws_num);
     }
 
     g_free (text);
-    
+
     return FALSE;
 }
 
+
+
 static gboolean
-menulist_keypress (GtkWidget *menu, GdkEventKey *ev, Windowlist *wl)
+menulist_keypress (GtkWidget   *menu, 
+                   GdkEventKey *ev,
+                   Windowlist  *wl)
 {
-    GdkEventButton evb;
-    GList *l;
-    GtkWidget *mi = NULL;
-    NetkWindow *window;
-    NetkWorkspace *workspace;
-    gpointer ws_action;
-    guint state;
+    GdkEventButton  evb;
+    GList          *l;
+    GtkWidget      *mi = NULL;
+    NetkWindow     *window;
+    NetkWorkspace  *workspace;
+    gpointer        ws_action;
+    guint           state;
 
     for (l = GTK_MENU_SHELL (menu)->children; l != NULL; l = l->next)
     {
@@ -313,7 +337,7 @@ menulist_keypress (GtkWidget *menu, GdkEventKey *ev, Windowlist *wl)
     }
     else if (evb.button == 1 && 
              (workspace = g_object_get_data (G_OBJECT (mi), "netk-workspace")) 
-                != NULL)
+             != NULL)
     {
         if (!NETK_IS_WORKSPACE (workspace))
             return FALSE;
@@ -322,7 +346,7 @@ menulist_keypress (GtkWidget *menu, GdkEventKey *ev, Windowlist *wl)
     }
     else if (evb.button == 1 && 
              (ws_action = g_object_get_data (G_OBJECT (mi), "ws-action"))
-                != NULL)
+             != NULL)
     {
         if (GPOINTER_TO_INT (ws_action) == WS_REMOVE)
         {
@@ -337,100 +361,42 @@ menulist_keypress (GtkWidget *menu, GdkEventKey *ev, Windowlist *wl)
     return FALSE;
 }
 
-/**
- * Menu position function
- **/
-static void
-windowlist_position_menu (GtkMenu *menu,
-			  int *x,
-			  int *y,
-			  gboolean * push_in,
-                          Windowlist *wl)
-{
-    GtkWidget *widget;
-    GtkRequisition req;
-    GdkScreen *screen;
-    GdkRectangle geom;
-    int num;
 
-    widget = GTK_WIDGET (wl->plugin);
-    
-    if (!GTK_WIDGET_REALIZED (GTK_WIDGET (menu)))
-        gtk_widget_realize (GTK_WIDGET (menu));
-
-    gtk_widget_size_request (GTK_WIDGET (menu), &req);
-    gdk_window_get_origin (widget->window, x, y);
- 
-    switch (wl->arrowtype)
-    {
-        case GTK_ARROW_UP:
-            *y += widget->allocation.y - req.height;
-            break;
-        case GTK_ARROW_DOWN:
-            *y += widget->allocation.y + widget->allocation.height;
-            break;
-        case GTK_ARROW_LEFT:
-            *x += widget->allocation.x - req.width;
-            *y += - req.height + widget->allocation.height;
-            break;
-        case GTK_ARROW_RIGHT:
-            *x += widget->allocation.x + widget->allocation.width;
-            *y += - req.height + widget->allocation.height;
-            break;
-        default:
-            break;
-    }
-
-    screen = gtk_widget_get_screen (widget);
-    num = gdk_screen_get_monitor_at_window (screen, widget->window);
-    gdk_screen_get_monitor_geometry (screen, num, &geom);
-    
-    gtk_menu_set_screen (menu, screen);
-
-    if (*x > geom.x + geom.width - req.width)
-        *x = geom.x + geom.width - req.width;
-    if (*x < geom.x)
-        *x = geom.x;
-
-    if (*y > geom.y + geom.height - req.height)
-        *y = geom.y + geom.height - req.height;
-    if (*y < geom.y)
-        *y = geom.y;
-}
 
 /**
  * Window List Menu functions
  **/
 static GtkWidget *
 menulist_menu_item (NetkWindow *window,
-		    Windowlist *wl,
-		    gint size)
+                    Windowlist *wl,
+                    gint        size)
 {
     GtkWidget *mi;
-    char *window_name = NULL;
-    GString *label;
-    GdkPixbuf *icon = NULL, *tmp = NULL;
-    
+    char      *window_name = NULL;
+    GString   *label;
+    GdkPixbuf *icon = NULL;
+    GdkPixbuf *tmp = NULL;
+
     window_name = menulist_utf8_string (netk_window_get_name (window));
     label = g_string_new (window_name);
-    
+
     if (netk_window_is_minimized (window))
     {
         g_string_prepend (label, "[");
         g_string_append (label, "]");
     }
-    
+
     /* hack: italic fonts are not completely shown, otherwise */
     g_string_append (label, " ");
-    
+
     if (wl->show_window_icons)
-	icon = netk_window_get_icon (window);
+        icon = netk_window_get_icon (window);
 
     if (icon)
     {
         GtkWidget *img;
         gint w, h;
-    
+
         w = gdk_pixbuf_get_width (icon);
         h = gdk_pixbuf_get_height (icon);
 
@@ -440,129 +406,135 @@ menulist_menu_item (NetkWindow *window,
                                            GDK_INTERP_BILINEAR);
             icon = tmp;
         }
-    
+
         mi = gtk_image_menu_item_new_with_label (label->str);
-        
+
         img = gtk_image_new_from_pixbuf (icon);
         gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
-	
-	if (G_LIKELY (tmp))
-	    g_object_unref (G_OBJECT (tmp));
+
+        if (G_LIKELY (tmp))
+            g_object_unref (G_OBJECT (tmp));
     }
     else
     {
         mi = gtk_menu_item_new_with_label (label->str);
     }
-    
+
     gtk_label_set_ellipsize (GTK_LABEL (GTK_BIN (mi)->child), 
                              PANGO_ELLIPSIZE_END);
     gtk_label_set_max_width_chars (GTK_LABEL (GTK_BIN (mi)->child), 24);
-    
+
     gtk_tooltips_set_tip (wl->tooltips, mi, window_name, NULL);
 
     g_string_free (label, TRUE);
     g_free (window_name);
-    
+
     return mi;
 }
 
+
+
 static gboolean
-menulist_popup_menu (Windowlist * wl,
+menulist_popup_menu (Windowlist     *wl,
                      GdkEventButton *ev,
-                     gboolean at_pointer)
+                     gboolean        at_pointer)
 {
-    GtkWidget *menu, *mi, *icon;
-    NetkWindow *window;
-    NetkWorkspace *netk_workspace, *active_workspace, *window_workspace;
-    gchar *ws_label, *rm_label;
-    gint size, i, wscount;
-    GList *windows, *li;
+    GtkWidget            *menu, *mi, *icon;
+    NetkWindow           *window;
+    NetkWorkspace        *netk_workspace;
+    NetkWorkspace        *active_workspace;
+    NetkWorkspace        *window_workspace;
+    gchar                *ws_label, *rm_label;
+    gint                  size, i, wscount;
+    GList                *windows, *li;
+    GtkArrowType          arrow_type;
     PangoFontDescription *italic, *bold;
-    
+
     /* Menu item styles */
     italic = pango_font_description_from_string ("italic");
-    bold = pango_font_description_from_string ("bold");
-    
+    bold   = pango_font_description_from_string ("bold");
+
     menu = gtk_menu_new ();
-    xfce_panel_plugin_register_menu (XFCE_PANEL_PLUGIN (wl->plugin), 
-                                     GTK_MENU (menu));
-    
+
     gtk_icon_size_lookup(GTK_ICON_SIZE_MENU, &size, NULL);
-    
+
     windows = netk_screen_get_windows_stacked (wl->screen);
     active_workspace = netk_screen_get_active_workspace (wl->screen);
-    
+
     if (wl->show_all_workspaces)
-	wscount = netk_screen_get_workspace_count (wl->screen);
+        wscount = netk_screen_get_workspace_count (wl->screen);
     else
-	wscount = 1;
-    
+        wscount = 1;
+
     /* For Each Workspace */
     for (i = 0; i < wscount; i++)
     {
-	/* Load workspace */
-	if (wl->show_all_workspaces)
-	    netk_workspace = netk_screen_get_workspace (wl->screen, i);
+        /* Load workspace */
+        if (wl->show_all_workspaces)
+            netk_workspace = netk_screen_get_workspace (wl->screen, i);
         else
-	    netk_workspace = netk_screen_get_active_workspace (wl->screen);
-	
-	/* Create workspace menu item */
-	ws_label = 
+            netk_workspace = netk_screen_get_active_workspace (wl->screen);
+
+        /* Create workspace menu item */
+        ws_label = 
             menulist_workspace_name (netk_workspace, _("Workspace %d"), "%s");
 
         mi = gtk_menu_item_new_with_label (ws_label);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-	g_free (ws_label);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+        g_free (ws_label);
 
         g_object_set_data (G_OBJECT (mi), "netk-workspace", netk_workspace);
 
         g_signal_connect (mi, "button-release-event",
-		G_CALLBACK (menulist_goto_workspace), netk_workspace);
-	
-	/* Apply layout */
-	if (netk_workspace == active_workspace)
-	    gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), bold);
+                          G_CALLBACK (menulist_goto_workspace), 
+                          netk_workspace);
+
+        /* Apply layout */
+        if (netk_workspace == active_workspace)
+            gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), bold);
         else
             gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), italic); 
 
         mi = gtk_separator_menu_item_new ();
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-	
-	/* Foreach Window */
-	for (li = windows; li; li = li->next)
+
+        /* Foreach Window */
+        for (li = windows; li; li = li->next)
         {
             /* If window is not on current workspace; continue */
-	    window = li->data;
+            window = li->data;
             window_workspace = netk_window_get_workspace (window);
-	    
+
             if (netk_workspace != window_workspace && 
-		!(netk_window_is_sticky (window) && 
-		netk_workspace == active_workspace))
-		    continue;
-	    
-	    if (netk_window_is_skip_pager (window) || 
-		netk_window_is_skip_tasklist (window))
-		    continue;
-	    
-	    /* Create menu item */
-	    mi = menulist_menu_item (window,
-				     wl,
-				     size);
-	    
-	    if (G_UNLIKELY (!mi))
+                !(netk_window_is_sticky (window) && 
+                netk_workspace == active_workspace))
+            {
                 continue;
-	    
-	    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-	    
+            }
+
+            if (netk_window_is_skip_pager (window) || 
+                netk_window_is_skip_tasklist (window))
+            {
+                continue;
+            }
+
+            /* Create menu item */
+            mi = menulist_menu_item (window, wl, size);
+
+            if (G_UNLIKELY (!mi))
+                continue;
+
+            gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
             if (netk_window_is_active (window))
             {
                 gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)), 
-			italic);
+                        italic);
             }
 
-	    /* Apply some styles for windows on !current workspace and 
+            /* Apply some styles for windows on !current workspace and 
              * if they are urgent */
-	    if (netk_window_or_transient_demands_attention (window))
+            if (netk_window_or_transient_demands_attention (window))
             {
                 if (netk_workspace == active_workspace)
                 {
@@ -572,40 +544,40 @@ menulist_popup_menu (Windowlist * wl,
                 else
                 {
                     gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
-                             GTK_STATE_NORMAL,
-                             &(menu->style->fg[GTK_STATE_INSENSITIVE]));
+                                          GTK_STATE_NORMAL,
+                                          &(menu->style->fg[GTK_STATE_INSENSITIVE]));
                     gtk_widget_modify_font (gtk_bin_get_child (GTK_BIN (mi)),
                                             bold);
                 }
             }
-	    else if (netk_workspace != active_workspace && 
+            else if (netk_workspace != active_workspace && 
                      !netk_window_is_sticky (window))
             {
                 gtk_widget_modify_fg (gtk_bin_get_child (GTK_BIN (mi)),
                         GTK_STATE_NORMAL,
                         &(menu->style->fg[GTK_STATE_INSENSITIVE]));
             }
-	 
+
             g_object_set_data (G_OBJECT (mi), "netk-window", window);
 
-	    /* Connect some signals */
-	    g_signal_connect (mi, "button-release-event",
-                    G_CALLBACK (menulist_goto_window), window);
-	    
-	    g_object_weak_ref(G_OBJECT(window),
-                    (GWeakNotify)window_destroyed, mi);
-	    
-	    g_signal_connect(G_OBJECT(mi), "destroy",
-                    G_CALLBACK(mi_destroyed), window);
-	}
-	
-	if (i < wscount-1)
-	{
-	    mi = gtk_separator_menu_item_new ();
-	    gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-	}
+            /* Connect some signals */
+            g_signal_connect (mi, "button-release-event",
+                              G_CALLBACK (menulist_goto_window), window);
+
+            g_object_weak_ref(G_OBJECT(window),
+                              (GWeakNotify)window_destroyed, mi);
+
+            g_signal_connect(G_OBJECT(mi), "destroy",
+                             G_CALLBACK(mi_destroyed), window);
+        }
+
+        if (i < wscount-1)
+        {
+            mi = gtk_separator_menu_item_new ();
+            gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+        }
     }
-    
+
     pango_font_description_free(italic);
     pango_font_description_free(bold);
 
@@ -614,40 +586,40 @@ menulist_popup_menu (Windowlist * wl,
     {
         int ws_action;
 
-	mi = gtk_separator_menu_item_new ();
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
-	
-	/* Add workspace */
-	if (wl->show_window_icons)
-	{
-	    mi = gtk_image_menu_item_new_with_label (_("Add workspace"));
-	    icon = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
-	    gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), icon);
-	}
-	else
-	{
-	    mi = gtk_menu_item_new_with_label (_("Add workspace"));
-	}
-	
+        mi = gtk_separator_menu_item_new ();
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+
+        /* Add workspace */
+        if (wl->show_window_icons)
+        {
+            mi = gtk_image_menu_item_new_with_label (_("Add workspace"));
+            icon = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_MENU);
+            gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), icon);
+        }
+        else
+        {
+            mi = gtk_menu_item_new_with_label (_("Add workspace"));
+        }
+
         ws_action = WS_ADD;
         g_object_set_data (G_OBJECT (mi), "ws-action", GINT_TO_POINTER (ws_action));
 
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
+        gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-	g_signal_connect (mi, "button-release-event",
-		G_CALLBACK (menulist_add_screen), wl);
-	
-	/* Remove workspace */
-	wscount = netk_screen_get_workspace_count (wl->screen);
+        g_signal_connect (mi, "button-release-event",
+                          G_CALLBACK (menulist_add_screen), wl);
+
+        /* Remove workspace */
+        wscount = netk_screen_get_workspace_count (wl->screen);
 
         if (wscount > 1)
         {
             netk_workspace = netk_screen_get_workspace (wl->screen, wscount-1);
-            
+
             rm_label = menulist_workspace_name (netk_workspace,
                                                 _("Remove Workspace %d"),
                                                 _("Remove Workspace '%s'"));
-            
+
             if (wl->show_window_icons)
             {
                 mi = gtk_image_menu_item_new_with_label (rm_label);
@@ -668,42 +640,54 @@ menulist_popup_menu (Windowlist * wl,
             gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
             g_signal_connect (mi, "button-release-event",
-                    G_CALLBACK (menulist_remove_screen), wl);
+                              G_CALLBACK (menulist_remove_screen), wl);
         }
     }
-    
+
     /* key presses work on the menu, not the items */
     g_signal_connect (menu, "key-press-event",
-            G_CALLBACK (menulist_keypress), 
-            wl);
+                      G_CALLBACK (menulist_keypress), 
+                      wl);
 
     /* Activate toggle button */
     if (!at_pointer)
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (wl->button), TRUE);
-    
+
     /* Connect signal, show widgets and popup */
     g_signal_connect (menu, "deactivate",
-		    G_CALLBACK (menu_deactivated), wl->button);
+                      G_CALLBACK (menu_deactivated), wl->button);
 
     gtk_widget_show_all (menu);
-    
-    gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 
-                    at_pointer ? NULL
-                               : (GtkMenuPositionFunc)windowlist_position_menu,
-		    wl, 0, ev ? ev->time : GDK_CURRENT_TIME);
-    
+
+    if (!at_pointer)
+    {
+        gtk_menu_attach_to_widget (GTK_MENU (menu),
+                                   wl->button, NULL);
+    }
+
+    arrow_type = 
+        xfce_panel_plugin_menu_popup (XFCE_PANEL_PLUGIN (wl->plugin), 
+                                      GTK_MENU (menu),
+                                      ev ? ev->button : 0, 
+                                      ev ? ev->time : gtk_get_current_event_time());
+    windowlist_set_arrow_type(wl, arrow_type);
+
     return TRUE;
 }
 
+
+
 static gboolean
 menulist_toggle_menu (GtkToggleButton *button,
-                      GdkEventButton *ev, 
-                      Windowlist * wl)
+                      GdkEventButton  *ev, 
+                      Windowlist      *wl)
 {
     if (ev->button != 1)
-	return FALSE;
+        return FALSE;
     return menulist_popup_menu (wl, ev, FALSE);
 }
+
+
 
 /**
  * Check for urgent on workspaces
@@ -711,63 +695,70 @@ menulist_toggle_menu (GtkToggleButton *button,
 static gboolean
 windowlist_search_urgent (gpointer data)
 {
-    Windowlist * wl = (Windowlist *) data;
-    NetkWindow *window;
-    NetkWorkspace *active_workspace, *window_workspace;
-    gboolean blink = FALSE;
-    GList *windows, *li;
-    
+    Windowlist    *wl = (Windowlist *) data;
+    NetkWindow    *window;
+    NetkWorkspace *active_workspace;
+    NetkWorkspace *window_workspace;
+    gboolean       blink = FALSE;
+    GList         *windows, *li;
+
     windows = netk_screen_get_windows_stacked (wl->screen);
     active_workspace = netk_screen_get_active_workspace (wl->screen);
 
     /* For Each Window (stop when we've found an urgent window) */
     for (li = windows; li && !blink; li = li->next)
     {
-	window = li->data;
-	window_workspace = netk_window_get_workspace (window);
-	
-	/* Don't check for urgent windows on current workspace
-	   if enabled in properties */
-	if (window_workspace == active_workspace && 
-	    wl->notify == OTHER_WORKSPACES)
-		continue;
-	    
-	/* Skip windows that are not in the tasklist */	
-	if (netk_window_is_sticky (window)	   ||
-	    netk_window_is_skip_pager (window)	   ||
-	    netk_window_is_skip_tasklist (window))
-		continue;
-	
-	/* Check if window is urgent */
-	if (netk_window_or_transient_demands_attention (window))
-	    blink = TRUE;
+        window = li->data;
+        window_workspace = netk_window_get_workspace (window);
+
+        /* Don't check for urgent windows on current workspace
+           if enabled in properties */
+        if (window_workspace == active_workspace && 
+            wl->notify == OTHER_WORKSPACES)
+        {
+            continue;
+        }
+
+        /* Skip windows that are not in the tasklist */	
+        if (netk_window_is_sticky (window)	   ||
+            netk_window_is_skip_pager (window)	   ||
+            netk_window_is_skip_tasklist (window))
+        {
+            continue;
+        }
+
+        /* Check if window is urgent */
+        if (netk_window_or_transient_demands_attention (window))
+            blink = TRUE;
     }
-    
+
     wl->blink = blink;
-    
+
     if (G_UNLIKELY (blink && !wl->blink_timeout_id))
     {
-	wl->blink_timeout_id = 
-                    g_timeout_add (FLASH_TIMEOUT, windowlist_blink, wl);
-	
-	DBG ("New blink source started: %d", wl->blink_timeout_id);
-	
-	/* Start the blink and don't wait 0,5 second */
-	windowlist_blink (wl);
+        wl->blink_timeout_id = 
+            g_timeout_add (FLASH_TIMEOUT, windowlist_blink, wl);
+
+        DBG ("New blink source started: %d", wl->blink_timeout_id);
+
+        /* Start the blink and don't wait 0,5 second */
+        windowlist_blink (wl);
     }
-	
-    
+
+
     if (G_UNLIKELY (!blink && wl->blink_timeout_id))
     {
-	DBG ("Blink source stopped: %d", wl->blink_timeout_id);
-	
-	g_source_remove (wl->blink_timeout_id);
-	wl->blink_timeout_id = 0;
-	windowlist_blink (wl);
+        DBG ("Blink source stopped: %d", wl->blink_timeout_id);
+
+        g_source_remove (wl->blink_timeout_id);
+        wl->blink_timeout_id = 0;
+        windowlist_blink (wl);
     }
-    
+
     return TRUE;
 }
+
+
 
 void
 windowlist_start_blink (Windowlist * wl)
@@ -775,35 +766,37 @@ windowlist_start_blink (Windowlist * wl)
     /* Stop the Search function */
     if (wl->search_timeout_id)
     {
-	DBG ("Search source stopped: %d", wl->search_timeout_id);
-	g_source_remove (wl->search_timeout_id);
-	wl->search_timeout_id = 0;
+        DBG ("Search source stopped: %d", wl->search_timeout_id);
+        g_source_remove (wl->search_timeout_id);
+        wl->search_timeout_id = 0;
     }
-    
+
     /* Stop the blink if it's running */
     if (wl->blink_timeout_id)
     {
-	DBG ("Blink source stopped: %d", wl->blink_timeout_id);
-	g_source_remove (wl->blink_timeout_id);
-	wl->blink_timeout_id = 0;
+        DBG ("Blink source stopped: %d", wl->blink_timeout_id);
+        g_source_remove (wl->blink_timeout_id);
+        wl->blink_timeout_id = 0;
     }
-    
+
     /* force normal button normal */
     wl->blink = FALSE;
-    
+
     if (wl->notify != DISABLED)
     {
-	wl->search_timeout_id =
-		g_timeout_add (SEARCH_TIMEOUT, windowlist_search_urgent, wl);
-	
-	DBG ("New search source started: %d", wl->search_timeout_id);
-	
-	windowlist_search_urgent (wl);
+        wl->search_timeout_id =
+            g_timeout_add (SEARCH_TIMEOUT, windowlist_search_urgent, wl);
+
+        DBG ("New search source started: %d", wl->search_timeout_id);
+
+        windowlist_search_urgent (wl);
     }
-    
+
     /* Make sure button is normal */
     windowlist_blink (wl);
 }
+
+
 
 /**
  * Button functions
@@ -812,14 +805,14 @@ static gboolean
 windowlist_blink (gpointer data)
 {
     Windowlist * wl = (Windowlist *) data;
-    
+
     GtkStyle *style;
     GtkRcStyle *mod;
     GdkColor c;
-    
+
     g_return_val_if_fail (wl, FALSE);
     g_return_val_if_fail (wl->button, FALSE);
-    
+
     style = gtk_widget_get_style (wl->button);
     mod = gtk_widget_get_modifier_style (wl->button);
     c = style->bg[GTK_STATE_SELECTED];
@@ -827,11 +820,11 @@ windowlist_blink (gpointer data)
     if(wl->blink && !wl->block_blink)
     {
         /* Paint the button */
-	
-	gtk_button_set_relief (GTK_BUTTON (wl->button),
-				GTK_RELIEF_NORMAL);
-	
-	if(mod->color_flags[GTK_STATE_NORMAL] & GTK_RC_BG)
+
+        gtk_button_set_relief (GTK_BUTTON (wl->button),
+                GTK_RELIEF_NORMAL);
+
+        if(mod->color_flags[GTK_STATE_NORMAL] & GTK_RC_BG)
         {
             mod->color_flags[GTK_STATE_NORMAL] &= ~(GTK_RC_BG);
             gtk_widget_modify_style(wl->button, mod);
@@ -845,50 +838,54 @@ windowlist_blink (gpointer data)
     }
     else
     {
-	if (!wl->blink)
-	    gtk_button_set_relief (GTK_BUTTON (wl->button),
-				GTK_RELIEF_NONE);
-	
-	mod->color_flags[GTK_STATE_NORMAL] &= ~(GTK_RC_BG);
-	gtk_widget_modify_style(wl->button, mod);
+        if (!wl->blink)
+            gtk_button_set_relief (GTK_BUTTON (wl->button),
+                                   GTK_RELIEF_NONE);
+
+        mod->color_flags[GTK_STATE_NORMAL] &= ~(GTK_RC_BG);
+        gtk_widget_modify_style(wl->button, mod);
     }
-    
+
     return wl->blink;
 }
+
+
 
 /**
  * This will block the blink function on mouse over
  **/
 static void
 windowlist_state_changed (GtkWidget *button,
-			  GtkStateType state,
-			  Windowlist * wl)
+                          GtkStateType state,
+                          Windowlist * wl)
 {
     if (G_LIKELY(wl->notify == DISABLED || wl->blink == FALSE))
-	return;
-    
+        return;
+
     DBG ("Button State changed");
-    
+
     if (GTK_WIDGET_STATE (button) == 0)
-	wl->block_blink = FALSE;
-    
+        wl->block_blink = FALSE;
+
     else   
     {
-	wl->block_blink = TRUE;
-	windowlist_blink (wl);
+        wl->block_blink = TRUE;
+        windowlist_blink (wl);
     }
 }
+
+
 
 /**
  *
  **/
 static void
-windowlist_active_window_changed (GtkWidget * w,
-				  Windowlist * wl)
+windowlist_active_window_changed (GtkWidget  *w,
+                                  Windowlist *wl)
 {
     NetkWindow *win;
-    GdkPixbuf *pb;
-    
+    GdkPixbuf  *pb;
+
     if ((win = netk_screen_get_active_window (wl->screen)) != NULL)
     {
         pb = netk_window_get_icon (win);
@@ -902,11 +899,15 @@ windowlist_active_window_changed (GtkWidget * w,
     }
 }
 
+
+
 /**
  * Handle user messages
  **/
 static gboolean
-wl_message_received (GtkWidget *w, GdkEventClient *ev, gpointer user_data)
+wl_message_received (GtkWidget      *w, 
+                     GdkEventClient *ev, 
+                     gpointer        user_data)
 {
     Windowlist *wl = user_data;
 
@@ -922,14 +923,16 @@ wl_message_received (GtkWidget *w, GdkEventClient *ev, gpointer user_data)
     return FALSE;
 }
 
+
+
 static gboolean
 wl_set_selection (Windowlist *wl)
 {
     GdkScreen *gscreen;
-    gchar selection_name[32];
-    Atom selection_atom;
+    gchar      selection_name[32];
+    Atom       selection_atom;
     GtkWidget *win;
-    Window xwin;
+    Window     xwin;
 
     win = gtk_invisible_new ();
     gtk_widget_realize (win);
@@ -951,75 +954,93 @@ wl_set_selection (Windowlist *wl)
 
     g_signal_connect (G_OBJECT (win), "client-event",
                       G_CALLBACK (wl_message_received), wl);
-    
+
     return TRUE;
 }
+
+
+
+/**
+ * When the arrow is about to be drawn, set its orientation
+ **/
+static void
+windowlist_init_arrow (GtkWidget      *button, 
+                       GdkEventExpose *event,
+                       Windowlist     *wl)
+{
+    windowlist_update_arrow_type (wl);
+    g_signal_handlers_disconnect_by_func (G_OBJECT (button), 
+            G_CALLBACK (windowlist_init_arrow), 
+            wl);
+}
+
+
 
 /**
  * Build the panel button and connect signals and styles
  **/
 void
-windowlist_create_button (Windowlist * wl)
+windowlist_create_button (Windowlist *wl)
 {
     GdkPixbuf *pb;
-    
+
     if (wl->button)
-	gtk_widget_destroy (wl->button);
-    
+        gtk_widget_destroy (wl->button);
+
     if (wl->screen_callback_id)
     {
-	g_signal_handler_disconnect (wl->screen, wl->screen_callback_id);
-	wl->screen_callback_id = 0;
+        g_signal_handler_disconnect (wl->screen, wl->screen_callback_id);
+        wl->screen_callback_id = 0;
     }
-    
+
     switch (wl->layout)
     {
-	case ICON_BUTTON:
-	    DBG ("Create Icon Button");
-	    
-	    wl->button = gtk_toggle_button_new ();
-	    
-	    pb = gtk_widget_render_icon (GTK_WIDGET (wl->plugin),
-					 GTK_STOCK_MISSING_IMAGE,
-					 GTK_ICON_SIZE_MENU, NULL);
-	    wl->icon = xfce_scaled_image_new_from_pixbuf (pb);
-	    gtk_container_add (GTK_CONTAINER (wl->button), wl->icon);
-	    g_object_unref (G_OBJECT (pb));
-	
-	    wl->screen_callback_id =
-		g_signal_connect (wl->screen, "active-window-changed",
-                          G_CALLBACK (windowlist_active_window_changed), wl);
-	
-	    windowlist_active_window_changed (wl->button,
-					      wl);
-	    
-	    break;
-	
-	case ARROW_BUTTON:
-	    DBG ("Create Arrow Button");
-	    
-	    wl->button = xfce_arrow_button_new (GTK_ARROW_UP);
-	
-	    xfce_arrow_button_set_arrow_type (
-		XFCE_ARROW_BUTTON (wl->button), wl->arrowtype);
-	
-	    break;
+        case ICON_BUTTON:
+            DBG ("Create Icon Button");
+
+            wl->button = gtk_toggle_button_new ();
+
+            pb = gtk_widget_render_icon (GTK_WIDGET (wl->plugin),
+                                         GTK_STOCK_MISSING_IMAGE,
+                                         GTK_ICON_SIZE_MENU, NULL);
+            wl->icon = xfce_scaled_image_new_from_pixbuf (pb);
+            gtk_container_add (GTK_CONTAINER (wl->button), wl->icon);
+            g_object_unref (G_OBJECT (pb));
+
+            wl->screen_callback_id =
+                g_signal_connect (wl->screen, "active-window-changed",
+                                  G_CALLBACK (windowlist_active_window_changed), wl);
+
+            windowlist_active_window_changed (wl->button, wl);
+
+            break;
+
+        case ARROW_BUTTON:
+            DBG ("Create Arrow Button");
+
+            wl->arrowtype = GTK_ARROW_NONE;
+            wl->button = xfce_arrow_button_new (GTK_ARROW_NONE);
+
+            break;
     }
+
+    g_signal_connect (G_OBJECT (wl->button), "expose-event", 
+                      G_CALLBACK (windowlist_init_arrow), wl);
 
     /* Button layout */
     GTK_WIDGET_UNSET_FLAGS (wl->button, GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
     gtk_button_set_relief (GTK_BUTTON (wl->button), GTK_RELIEF_NONE);
     gtk_button_set_focus_on_click (GTK_BUTTON (wl->button), FALSE);
-    
+
     /* Set the button sizes again */
     windowlist_set_size (wl->plugin,
-			 xfce_panel_plugin_get_size (wl->plugin),
-			 wl);
-    
+                         xfce_panel_plugin_get_size (wl->plugin),
+                         wl);
+
     /* Show, add and connect signals */
     g_signal_connect (wl->button, "button-press-event",
                       G_CALLBACK (menulist_toggle_menu), wl);
-    
+
     g_signal_connect (wl->button, "state-changed",
                       G_CALLBACK (windowlist_state_changed), wl);
 
@@ -1027,222 +1048,203 @@ windowlist_create_button (Windowlist * wl)
 
     gtk_widget_show_all (wl->button);
     gtk_container_add (GTK_CONTAINER (wl->plugin), wl->button);
-    
+
     /* Add action widget */
     xfce_panel_plugin_add_action_widget (wl->plugin, wl->button);
 }
 
+
+
 /**
  * Arrow type functions
  **/
-static GtkArrowType
-calculate_floating_arrow_type (XfcePanelPlugin * plugin,
-			       XfceScreenPosition position)
+static void
+windowlist_update_arrow_type (Windowlist *wl)
 {
-    GtkWidget *widget = GTK_WIDGET (plugin);
-    GtkArrowType type = GTK_ARROW_UP;
-    int mon, x, y;
-    GdkScreen *screen;
-    GdkRectangle geom;
-    
-    if (!GTK_WIDGET_REALIZED (widget))
-    {
-        if (xfce_screen_position_is_horizontal (position))
-            return GTK_ARROW_UP;
-        else
-            return GTK_ARROW_LEFT;
-    }
+    GtkArrowType type = GTK_ARROW_NONE;
 
-    screen = gtk_widget_get_screen (widget);
-    mon = gdk_screen_get_monitor_at_window (screen, 
-                                            widget->window);
-    gdk_screen_get_monitor_geometry (screen, mon, &geom);
-    gdk_window_get_root_origin (widget->window, &x, &y);
-    
-    if (xfce_screen_position_is_horizontal (position))
-    {
-        if (y > geom.y + geom.height / 2)
-	    type = GTK_ARROW_UP;
-        else
-	    type = GTK_ARROW_DOWN;
-    }
-    else
-    {
-        if (x > geom.x + geom.width / 2)
-	    type = GTK_ARROW_LEFT;
-	else
-	    type = GTK_ARROW_RIGHT;
-    }
+    if (!GTK_IS_WIDGET (wl->button))
+        return;
 
-    return type;
+    type = 
+        xfce_panel_plugin_popup_direction (XFCE_PANEL_PLUGIN (wl->plugin),
+                                           GTK_WIDGET (wl->button));
+    if (type != GTK_ARROW_NONE)
+        windowlist_set_arrow_type (wl, type);
 }
 
-static GtkArrowType
-windowlist_arrow_type (XfcePanelPlugin * plugin)
+
+
+static void
+windowlist_set_arrow_type (Windowlist   *wl, 
+                           GtkArrowType  new_arrow_type)
 {
-    GtkArrowType type = GTK_ARROW_UP;
-    XfceScreenPosition position = xfce_panel_plugin_get_screen_position (plugin);
-    
-    if (xfce_screen_position_is_floating (position))
-	type = calculate_floating_arrow_type (plugin, position);
-    
-    else if (xfce_screen_position_is_top (position))
-	type = GTK_ARROW_DOWN;
-    
-    else if (xfce_screen_position_is_left (position))
-	type = GTK_ARROW_RIGHT;
-    
-    else if (xfce_screen_position_is_right (position))
-	type = GTK_ARROW_LEFT;
-    
-    else if (xfce_screen_position_is_bottom (position))
-	type = GTK_ARROW_UP;
-    
-    return type;
+    g_return_if_fail (wl->button != NULL);
+
+    if (new_arrow_type == GTK_ARROW_NONE || new_arrow_type == wl->arrowtype)
+        return;
+
+    wl->arrowtype = new_arrow_type;
+
+    if (wl->layout == ARROW_BUTTON)
+    {
+        xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (wl->button),
+                                          wl->arrowtype);
+
+        windowlist_set_size (wl->plugin,
+                             xfce_panel_plugin_get_size (wl->plugin),
+                             wl);
+    }
 }
+
+
 
 /**
  * Read and write user settings
  **/
 static void
-windowlist_read (Windowlist * wl)
+windowlist_read (Windowlist *wl)
 {
     XfceRc *rc;
     gchar  *file;
-    
+
     if (!(file = xfce_panel_plugin_lookup_rc_file (wl->plugin)))
-	return;
-    
+        return;
+
     DBG("Read from file: %s", file);
 
     rc = xfce_rc_simple_open (file, TRUE);
     g_free (file);
-    
+
     if (!rc)
         return;
-    
+
     switch (xfce_rc_read_int_entry (rc, "button_layout", DEF_BUTTON_LAYOUT))
     {
-	case 0: 
-	    wl->layout = ICON_BUTTON;
-	    break;
-	
-	default: 
-	    wl->layout = ARROW_BUTTON;
-	    break;
+        case 0: 
+            wl->layout = ICON_BUTTON;
+            break;
+
+        default: 
+            wl->layout = ARROW_BUTTON;
+            break;
     }
-    
+
     switch (xfce_rc_read_int_entry (rc, "urgency_notify", DEF_NOTIFY))
     {
-	case 0: 
-	    wl->notify = DISABLED;
-	    break;
-	
-	case 1:
-	    wl->notify = OTHER_WORKSPACES;
-	    break;
-	
-	default: 
-	    wl->notify = ALL_WORKSPACES;
-	    break;
+        case 0: 
+            wl->notify = DISABLED;
+            break;
+
+        case 1:
+            wl->notify = OTHER_WORKSPACES;
+            break;
+
+        default: 
+            wl->notify = ALL_WORKSPACES;
+            break;
     }
-    
+
     wl->show_all_workspaces = 
-	xfce_rc_read_bool_entry (rc, "show_all_workspaces",	
+        xfce_rc_read_bool_entry (rc, "show_all_workspaces",	
                                  DEF_SHOW_ALL_WORKSPACES);
     wl->show_window_icons = 
-	xfce_rc_read_bool_entry (rc, "show_window_icons",	
+        xfce_rc_read_bool_entry (rc, "show_window_icons",	
                                  DEF_SHOW_WINDOW_ICONS);
     wl->show_workspace_actions = 
-	xfce_rc_read_bool_entry (rc, "show_workspace_actions",	
+        xfce_rc_read_bool_entry (rc, "show_workspace_actions",	
                                  DEF_SHOW_WORKSPACE_ACTIONS);
-    
+
     xfce_rc_close (rc);
 }
 
+
+
 static void
-windowlist_write (XfcePanelPlugin * plugin,
-		  Windowlist * wl)
+windowlist_write (XfcePanelPlugin *plugin,
+                  Windowlist      *wl)
 {
     XfceRc *rc;
     gchar  *file;
-    
+
     if (!(file = xfce_panel_plugin_save_location (wl->plugin, TRUE)))
-	return;
-    
+        return;
+
     DBG("Write to file: %s", file);
-    
+
     rc = xfce_rc_simple_open (file, FALSE);
     g_free (file);
-    
+
     if (!rc)
         return;
-    
+
     switch (wl->layout)
     {
-	case ICON_BUTTON:
-	    xfce_rc_write_int_entry (rc, "button_layout", 0);
-	    break;
-	
-	case ARROW_BUTTON:
-	    xfce_rc_write_int_entry (rc, "button_layout", 1);
-	    break;
+        case ICON_BUTTON:
+            xfce_rc_write_int_entry (rc, "button_layout", 0);
+            break;
+
+        case ARROW_BUTTON:
+            xfce_rc_write_int_entry (rc, "button_layout", 1);
+            break;
     }
-    
+
     switch (wl->notify)
     {
-	case DISABLED:
-	    xfce_rc_write_int_entry (rc, "urgency_notify", 0);
-	    break;
-	
-	case OTHER_WORKSPACES:
-	    xfce_rc_write_int_entry (rc, "urgency_notify", 1);
-	    break;
-	
-	case ALL_WORKSPACES:
-	    xfce_rc_write_int_entry (rc, "urgency_notify", 2);
-	    break;
+        case DISABLED:
+            xfce_rc_write_int_entry (rc, "urgency_notify", 0);
+            break;
+
+        case OTHER_WORKSPACES:
+            xfce_rc_write_int_entry (rc, "urgency_notify", 1);
+            break;
+
+        case ALL_WORKSPACES:
+            xfce_rc_write_int_entry (rc, "urgency_notify", 2);
+            break;
     }
-    
+
     xfce_rc_write_bool_entry (rc, "show_all_workspaces",	
                               wl->show_all_workspaces);
     xfce_rc_write_bool_entry (rc, "show_window_icons",		
                               wl->show_window_icons);
     xfce_rc_write_bool_entry (rc, "show_workspace_actions",	
                               wl->show_workspace_actions);
-    
+
     xfce_rc_close (rc);
 }
+
+
 
 /**
  * Initialize plugin
  **/
 static Windowlist *
-windowlist_new (XfcePanelPlugin * plugin)
+windowlist_new (XfcePanelPlugin *plugin)
 {
     GdkScreen *screen;
     int screen_idx;
-    
+
     Windowlist *wl = panel_slice_new0 (Windowlist);
-    
+
     /* Some default values if everything goes wrong */
     wl->layout			= DEF_BUTTON_LAYOUT;
     wl->show_all_workspaces	= DEF_SHOW_ALL_WORKSPACES;
     wl->show_window_icons	= DEF_SHOW_WINDOW_ICONS;
     wl->show_workspace_actions	= DEF_SHOW_WORKSPACE_ACTIONS;
     wl->notify			= DEF_NOTIFY;
-    
+
     /* Reset */
     wl->screen_callback_id = 0;
-    
+
     /* Reset Urgency Stuff */
     wl->search_timeout_id = 0;
     wl->blink_timeout_id = 0;
     wl->blink = FALSE;
     wl->block_blink = FALSE;
-    
+
     wl->plugin = plugin;
-    
+
     wl->tooltips = gtk_tooltips_new ();
     g_object_ref (G_OBJECT (wl->tooltips));
     gtk_object_sink (GTK_OBJECT (wl->tooltips));
@@ -1250,138 +1252,138 @@ windowlist_new (XfcePanelPlugin * plugin)
     /* get the screen where the widget is, for dual screen */
     screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
     screen_idx = gdk_screen_get_number (screen);
-    
+
     wl->screen = netk_screen_get (screen_idx);
-    
+
     /* Read user settings */
     windowlist_read (wl);
-    
-    /* Read arrow type, this is also used for the popup function */
-    wl->arrowtype = windowlist_arrow_type (wl->plugin);
-    
+
     /* Build the panel button */
+
     windowlist_create_button (wl);
-    
+
     return wl;
 }
+
+
 
 /**
  * Common plugin functions
  **/
 static gboolean
 windowlist_set_size (XfcePanelPlugin *plugin,
-		     int size,
-		     Windowlist * wl)
+                     int              size,
+                     Windowlist      *wl)
 {
     DBG ("Size: %d", size);
-    
+
     switch (wl->layout)
     {
-	case ICON_BUTTON:
-	    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
-					 size, size);
-	    break;
-	
-	case ARROW_BUTTON:
-	    switch (wl->arrowtype)
-	    {
-		case GTK_ARROW_LEFT:
-		case GTK_ARROW_RIGHT:
-		    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
-					 size, ARROW_WIDTH);
-		    break;
-		    
-		case GTK_ARROW_UP:
-		case GTK_ARROW_DOWN:
-		    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
-					 ARROW_WIDTH, size);
-		    break;
+        case ICON_BUTTON:
+            gtk_widget_set_size_request (GTK_WIDGET (wl->button),
+                    size, size);
+            break;
+
+        case ARROW_BUTTON:
+            switch (xfce_panel_plugin_get_orientation (wl->plugin))
+            {
+                case GTK_ORIENTATION_VERTICAL:
+                    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
+                            size, ARROW_WIDTH);
+                    break;
+
+                case GTK_ORIENTATION_HORIZONTAL:
+                    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
+                            ARROW_WIDTH, size);
+                    break;
                 default:
                     break;
-	    }
-	    break;
+            }
+            break;
+
     }
-    
+
     return TRUE;
 }
 
+
+
 static void
-windowlist_free (XfcePanelPlugin * plugin,
-		 Windowlist * wl)
+windowlist_free (XfcePanelPlugin *plugin,
+                 Windowlist      *wl)
 {
     g_object_unref (G_OBJECT (wl->tooltips));
-    
+
     if (wl->screen_callback_id)
-	g_signal_handler_disconnect (wl->screen, wl->screen_callback_id);
-    
+        g_signal_handler_disconnect (wl->screen, wl->screen_callback_id);
+
     if (wl->search_timeout_id)
     {
-	DBG ("Stop urgent source: %d", wl->search_timeout_id);
-	g_source_remove (wl->search_timeout_id);
-	wl->search_timeout_id = 0;
+        DBG ("Stop urgent source: %d", wl->search_timeout_id);
+        g_source_remove (wl->search_timeout_id);
+        wl->search_timeout_id = 0;
     }
-    
+
     if (wl->blink_timeout_id)
     {
-	DBG ("Stop blink source: %d", wl->blink_timeout_id);
-	g_source_remove (wl->blink_timeout_id);
-	wl->blink_timeout_id = 0;
+        DBG ("Stop blink source: %d", wl->blink_timeout_id);
+        g_source_remove (wl->blink_timeout_id);
+        wl->blink_timeout_id = 0;
     }
-    
+
     if (wl->icon)
-	gtk_widget_destroy (wl->icon);
-    
+        gtk_widget_destroy (wl->icon);
+
     if (wl->button)
-	gtk_widget_destroy (wl->button);
-    
+        gtk_widget_destroy (wl->button);
+
     panel_slice_free (Windowlist, wl);
 }
 
+
+
 static void
-windowlist_screen_position_changed (XfcePanelPlugin *plugin, 
-                                  XfceScreenPosition position, 
-                                  Windowlist * wl)
+windowlist_screen_position_changed (XfcePanelPlugin    *plugin, 
+                                    XfceScreenPosition  position, 
+                                    Windowlist         *wl)
 {
     DBG ("...");
-    
-    wl->arrowtype = windowlist_arrow_type (plugin);
-    
-    if (wl->layout == ARROW_BUTTON)
-	xfce_arrow_button_set_arrow_type (
-		XFCE_ARROW_BUTTON (wl->button), wl->arrowtype);
+
+    windowlist_update_arrow_type (wl);
+
 }
+
+
 
 static void
 windowlist_orientation_changed (XfcePanelPlugin *plugin, 
-                                GtkOrientation orientation, 
-                                Windowlist * wl)
+                                GtkOrientation   orientation,
+                                Windowlist      *wl)
 {
     DBG ("...");
-    
-    wl->arrowtype = windowlist_arrow_type (plugin);
-    
-    if (wl->layout == ARROW_BUTTON)
-	xfce_arrow_button_set_arrow_type (
-		XFCE_ARROW_BUTTON (wl->button), wl->arrowtype);
+
+    windowlist_update_arrow_type (wl);
 }
+
+
 
 /**
  * Construct plugin
  **/
 static void
-windowlist_construct (XfcePanelPlugin * plugin)
+windowlist_construct (XfcePanelPlugin *plugin)
 {
     Windowlist *wl = windowlist_new (plugin);
-    
+
     g_signal_connect (plugin, "free-data",
                       G_CALLBACK (windowlist_free), wl);
 
     g_signal_connect (plugin, "save",
                       G_CALLBACK (windowlist_write), wl);
-    
+
     g_signal_connect (plugin, "size-changed", 
                       G_CALLBACK (windowlist_set_size), wl);
-    
+
     g_signal_connect (plugin, "screen-position-changed", 
                       G_CALLBACK (windowlist_screen_position_changed), wl);
 
@@ -1392,7 +1394,8 @@ windowlist_construct (XfcePanelPlugin * plugin)
     g_signal_connect (plugin, "configure-plugin",
                       G_CALLBACK (windowlist_properties), wl);
 
-    
+
     /* Start Urgency Search (if enabled ^_^) */
     windowlist_start_blink (wl);
 }
+

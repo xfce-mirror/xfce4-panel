@@ -42,6 +42,9 @@ static gboolean        launcher_utility_icon_theme_changed          (GSignalInvo
                                                                      guint                  n_param_values,
                                                                      const GValue          *param_values,
                                                                      LauncherPlugin        *launcher);
+static void            launcher_utility_expose_event_init_arrow     (GtkWidget             *button,
+                                                                     GdkEventExpose        *event,
+                                                                     LauncherPlugin        *launcher);
 static gboolean        launcher_icon_button_expose_event            (GtkWidget             *widget,
                                                                      GdkEventExpose        *event,
                                                                      LauncherPlugin        *launcher);
@@ -79,11 +82,6 @@ static void            launcher_button_state_changed                (GtkWidget  
 static gboolean        launcher_menu_item_released                  (GtkWidget             *mi,
                                                                      GdkEventButton        *event,
                                                                      LauncherPlugin        *launcher);
-static void            launcher_menu_position                       (GtkMenu               *menu,
-                                                                     gint                  *x,
-                                                                     gint                  *y,
-                                                                     gboolean              *push_in,
-                                                                     LauncherPlugin        *launcher);
 static void            launcher_menu_popup_destroyed                (gpointer               user_data);
 static gboolean        launcher_menu_popup                          (gpointer               user_data);
 static void            launcher_menu_deactivated                    (LauncherPlugin        *launcher);
@@ -93,7 +91,6 @@ static LauncherPlugin *launcher_plugin_new                          (XfcePanelPl
 static void            launcher_plugin_pack_buttons                 (LauncherPlugin        *launcher);
 static gchar          *launcher_plugin_read_entry                   (XfceRc                *rc,
                                                                      const gchar           *name) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
-static GtkArrowType    launcher_plugin_calculate_arrow_type         (XfcePanelPlugin       *panel_plugin);
 static void            launcher_plugin_screen_position_changed      (LauncherPlugin        *launcher);
 static void            launcher_plugin_orientation_changed          (LauncherPlugin        *launcher);
 static gboolean        launcher_plugin_set_size                     (LauncherPlugin        *launcher,
@@ -268,6 +265,21 @@ launcher_utility_query_tooltip (GtkWidget     *widget,
 
 
 
+static void
+launcher_utility_expose_event_init_arrow (GtkWidget      *button, 
+                                          GdkEventExpose *event, 
+                                          LauncherPlugin *launcher)
+{
+    launcher_plugin_screen_position_changed (launcher);
+
+    /* no need to run this again */
+    g_signal_handlers_disconnect_by_func (G_OBJECT (button), 
+                                          G_CALLBACK (launcher_utility_expose_event_init_arrow),
+                                          launcher);
+}
+
+
+
 /**
  * Icon Button Functions
  **/
@@ -279,7 +291,7 @@ launcher_icon_button_expose_event (GtkWidget      *widget,
     gint         x, y, w;
     GtkArrowType arrow_type;
 
-    /* only show the arrow when the arrow button is hidden */
+    /* only paint the arrow when the arrow button is hidden */
     if (launcher->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
     {
         /* calculate the width of the arrow */
@@ -598,44 +610,6 @@ launcher_menu_item_released (GtkWidget      *mi,
 
 
 static void
-launcher_menu_position (GtkMenu        *menu,
-                        gint           *x,
-                        gint           *y,
-                        gboolean       *push_in,
-                        LauncherPlugin *launcher)
-{
-    GtkWidget      *widget = GTK_WIDGET (launcher->panel_plugin);
-    GtkRequisition  req;
-
-    if (!GTK_WIDGET_REALIZED (GTK_WIDGET (menu)))
-        gtk_widget_realize (GTK_WIDGET (menu));
-
-    gtk_widget_size_request (GTK_WIDGET (menu), &req);
-    gdk_window_get_origin (widget->window, x, y);
-
-    switch (xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (launcher->arrow_button)))
-    {
-        case GTK_ARROW_UP:
-            *y -= req.height;
-            break;
-
-        case GTK_ARROW_DOWN:
-            *y += widget->allocation.height;
-            break;
-
-        case GTK_ARROW_LEFT:
-            *x -= req.width;
-            break;
-
-        default: /* GTK_ARROW_RIGHT and GTK_ARROW_NONE */
-            *x += widget->allocation.width;
-            break;
-    }
-}
-
-
-
-static void
 launcher_menu_popup_destroyed (gpointer user_data)
 {
     LauncherPlugin *launcher = user_data;
@@ -649,6 +623,7 @@ static gboolean
 launcher_menu_popup (gpointer user_data)
 {
     LauncherPlugin *launcher = user_data;
+    GtkArrowType    arrow_type;
 
     GDK_THREADS_ENTER ();
 
@@ -660,9 +635,12 @@ launcher_menu_popup (gpointer user_data)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrow_button), TRUE);
 
     /* popup menu */
-    gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL,
-                    (GtkMenuPositionFunc) launcher_menu_position,
-                    launcher, 1, gtk_get_current_event_time ());
+    arrow_type = xfce_panel_plugin_menu_popup (XFCE_PANEL_PLUGIN (launcher->panel_plugin),
+                                               GTK_MENU (launcher->menu),
+                                               1, gtk_get_current_event_time ());
+    if (arrow_type != GTK_ARROW_NONE)
+        xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON(launcher->arrow_button), 
+                                          arrow_type);
 
     GDK_THREADS_LEAVE ();
 
@@ -723,6 +701,9 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
 
     /* create new menu */
     launcher->menu = gtk_menu_new ();
+    gtk_menu_attach_to_widget (GTK_MENU (launcher->menu),
+                               launcher->box,
+                               NULL);
 
     /* get the plugin screen */
     screen = gtk_widget_get_screen (GTK_WIDGET (launcher->panel_plugin));
@@ -837,7 +818,6 @@ launcher_entry_free (LauncherEntry  *entry,
 }
 
 
-
 /**
  * Panel Plugin Functions
  **/
@@ -927,14 +907,25 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
         launcher->entries = g_list_prepend (launcher->entries, launcher_entry_new ());
 
-    /* set the arrow direction */
-    launcher_plugin_screen_position_changed (launcher);
-
     /* set the buttons in the correct position */
     launcher_plugin_pack_buttons (launcher);
 
     /* change the visiblity of the arrow button */
     launcher_menu_destroy (launcher);
+
+    /* set the arrow direction */
+    if (launcher->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
+    {
+            g_signal_connect (G_OBJECT (launcher->image), "expose-event",
+                              G_CALLBACK (launcher_utility_expose_event_init_arrow), 
+                              launcher);
+    }
+    else
+    {
+            g_signal_connect (G_OBJECT (launcher->arrow_button), "expose-event",
+                              G_CALLBACK (launcher_utility_expose_event_init_arrow), 
+                              launcher);
+    }
 
 #if !LAUNCHER_NEW_TOOLTIP_API
     /* set the button tooltip */
@@ -1186,74 +1177,19 @@ launcher_plugin_save (LauncherPlugin *launcher)
 
 
 
-static GtkArrowType
-launcher_plugin_calculate_arrow_type (XfcePanelPlugin *panel_plugin)
-{
-    XfceScreenPosition  position;
-    GdkScreen          *screen;
-    GdkRectangle        geom;
-    gint                mon, x, y;
-
-    g_return_val_if_fail (GTK_WIDGET_REALIZED (panel_plugin), GTK_ARROW_UP);
-
-    /* get the plugin position */
-    position = xfce_panel_plugin_get_screen_position (panel_plugin);
-
-    /* get the arrow direction */
-    switch (position)
-    {
-        /* top */
-        case XFCE_SCREEN_POSITION_NW_H:
-        case XFCE_SCREEN_POSITION_N:
-        case XFCE_SCREEN_POSITION_NE_H:
-            return GTK_ARROW_DOWN;
-
-        /* left */
-        case XFCE_SCREEN_POSITION_NW_V:
-        case XFCE_SCREEN_POSITION_W:
-        case XFCE_SCREEN_POSITION_SW_V:
-            return GTK_ARROW_RIGHT;
-
-        /* right */
-        case XFCE_SCREEN_POSITION_NE_V:
-        case XFCE_SCREEN_POSITION_E:
-        case XFCE_SCREEN_POSITION_SE_V:
-            return GTK_ARROW_LEFT;
-
-        /* bottom */
-        case XFCE_SCREEN_POSITION_SW_H:
-        case XFCE_SCREEN_POSITION_S:
-        case XFCE_SCREEN_POSITION_SE_H:
-            return GTK_ARROW_UP;
-
-        /* floating */
-        default:
-            /* get the screen information */
-            screen = gtk_widget_get_screen (GTK_WIDGET (panel_plugin));
-            mon = gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (panel_plugin)->window);
-            gdk_screen_get_monitor_geometry (screen, mon, &geom);
-            gdk_window_get_root_origin (GTK_WIDGET (panel_plugin)->window, &x, &y);
-
-            /* get the position based on the screen position */
-            if (position == XFCE_SCREEN_POSITION_FLOATING_H)
-                return ((y < (geom.y + geom.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP);
-            else
-                return ((x < (geom.x + geom.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT);
-    }
-}
-
-
-
 static void
 launcher_plugin_screen_position_changed (LauncherPlugin *launcher)
 {
     GtkArrowType arrow_type;
 
     /* get the arrow type */
-    arrow_type = launcher_plugin_calculate_arrow_type (launcher->panel_plugin);
+    arrow_type = xfce_panel_plugin_popup_direction (XFCE_PANEL_PLUGIN (launcher->panel_plugin),
+                                                    GTK_WIDGET (launcher->box));
 
     /* set the arrow direction */
-    xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (launcher->arrow_button), arrow_type);
+    if (arrow_type != GTK_ARROW_NONE)
+        xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON(launcher->arrow_button), 
+                                          arrow_type);
 }
 
 

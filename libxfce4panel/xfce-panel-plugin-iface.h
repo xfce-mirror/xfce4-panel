@@ -84,6 +84,8 @@ typedef gboolean (*XfcePanelPluginPreInit) (int argc, char **argv);
 typedef gboolean (*XfcePanelPluginCheck) (GdkScreen *screen);
 
 GType                xfce_panel_plugin_get_type             (void) G_GNUC_CONST;
+
+
 gchar               *xfce_panel_plugin_get_name             (XfcePanelPlugin  *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 gchar               *xfce_panel_plugin_get_id               (XfcePanelPlugin  *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 gchar               *xfce_panel_plugin_get_display_name     (XfcePanelPlugin  *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
@@ -93,6 +95,8 @@ void                 xfce_panel_plugin_set_expand           (XfcePanelPlugin  *p
                                                              gboolean          expand);
 gboolean             xfce_panel_plugin_get_expand           (XfcePanelPlugin  *plugin);
 GtkOrientation       xfce_panel_plugin_get_orientation      (XfcePanelPlugin  *plugin);
+
+
 void                 xfce_panel_plugin_add_action_widget    (XfcePanelPlugin  *plugin,
                                                              GtkWidget        *widget);
 void                 xfce_panel_plugin_menu_insert_item     (XfcePanelPlugin  *plugin,
@@ -101,11 +105,28 @@ void                 xfce_panel_plugin_menu_show_about      (XfcePanelPlugin  *p
 void                 xfce_panel_plugin_menu_show_configure  (XfcePanelPlugin  *plugin);
 void                 xfce_panel_plugin_block_menu           (XfcePanelPlugin  *plugin);
 void                 xfce_panel_plugin_unblock_menu         (XfcePanelPlugin  *plugin);
+
+
 void                 xfce_panel_plugin_register_menu        (XfcePanelPlugin  *plugin,
                                                              GtkMenu          *menu);
+GtkArrowType         xfce_panel_plugin_menu_popup           (XfcePanelPlugin  *plugin,
+                                                             GtkMenu          *menu,
+                                                             gint              button,
+                                                             guint32           time);
+GtkArrowType         xfce_panel_plugin_popup_direction      (XfcePanelPlugin  *plugin,
+                                                             GtkWidget        *attach_widget);
+GtkArrowType         xfce_panel_plugin_position_popup       (XfcePanelPlugin  *plugin,
+                                                             GtkWidget        *attach_widget,
+                                                             GtkRequisition   *popup_requisition,
+                                                             gint             *x, 
+                                                             gint             *y);
+
+
 gchar               *xfce_panel_plugin_lookup_rc_file       (XfcePanelPlugin  *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
 gchar               *xfce_panel_plugin_save_location        (XfcePanelPlugin  *plugin,
                                                              gboolean          create) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
+
 void                 xfce_panel_plugin_focus_widget         (XfcePanelPlugin  *plugin,
                                                              GtkWidget        *widget);
 void                 xfce_panel_plugin_set_panel_hidden     (XfcePanelPlugin  *plugin,
@@ -114,3 +135,4 @@ void                 xfce_panel_plugin_set_panel_hidden     (XfcePanelPlugin  *p
 G_END_DECLS
 
 #endif /* !__XFCE_PANEL_PLUGIN_IFACE_H__ */
+
