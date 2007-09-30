@@ -51,9 +51,6 @@
 typedef enum { WS_ADD = 1, WS_REMOVE } WorkspaceAction;
 
 static gboolean         windowlist_blink                (gpointer         data);
-static void             windowlist_update_arrow_type    (Windowlist      *wl);
-static void             windowlist_set_arrow_type       (Windowlist      *wl,
-                                                         GtkArrowType     arrow_type);
 static gboolean         windowlist_set_size             (XfcePanelPlugin *plugin,
                                                          int              size,
                                                          Windowlist      *wl);
@@ -447,7 +444,6 @@ menulist_popup_menu (Windowlist     *wl,
     gchar                *ws_label, *rm_label;
     gint                  size, i, wscount;
     GList                *windows, *li;
-    GtkArrowType          arrow_type;
     PangoFontDescription *italic, *bold;
 
     /* Menu item styles */
@@ -659,18 +655,10 @@ menulist_popup_menu (Windowlist     *wl,
 
     gtk_widget_show_all (menu);
 
-    if (!at_pointer)
-    {
-        gtk_menu_attach_to_widget (GTK_MENU (menu),
-                                   wl->button, NULL);
-    }
-
-    arrow_type = 
-        xfce_panel_plugin_menu_popup (XFCE_PANEL_PLUGIN (wl->plugin), 
-                                      GTK_MENU (menu),
-                                      ev ? ev->button : 0, 
-                                      ev ? ev->time : gtk_get_current_event_time());
-    windowlist_set_arrow_type(wl, arrow_type);
+    gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
+                    xfce_panel_plugin_position_menu, wl->plugin,
+                    ev ? ev->button : 0, 
+                    ev ? ev->time : gtk_get_current_event_time());
 
     return TRUE;
 }
@@ -961,22 +949,6 @@ wl_set_selection (Windowlist *wl)
 
 
 /**
- * When the arrow is about to be drawn, set its orientation
- **/
-static void
-windowlist_init_arrow (GtkWidget      *button, 
-                       GdkEventExpose *event,
-                       Windowlist     *wl)
-{
-    windowlist_update_arrow_type (wl);
-    g_signal_handlers_disconnect_by_func (G_OBJECT (button), 
-            G_CALLBACK (windowlist_init_arrow), 
-            wl);
-}
-
-
-
-/**
  * Build the panel button and connect signals and styles
  **/
 void
@@ -1018,14 +990,11 @@ windowlist_create_button (Windowlist *wl)
         case ARROW_BUTTON:
             DBG ("Create Arrow Button");
 
-            wl->arrowtype = GTK_ARROW_NONE;
-            wl->button = xfce_arrow_button_new (GTK_ARROW_NONE);
+            wl->arrowtype = xfce_panel_plugin_arrow_type (wl->plugin);
+            wl->button = xfce_arrow_button_new (wl->arrowtype);
 
             break;
     }
-
-    g_signal_connect (G_OBJECT (wl->button), "expose-event", 
-                      G_CALLBACK (windowlist_init_arrow), wl);
 
     /* Button layout */
     GTK_WIDGET_UNSET_FLAGS (wl->button, GTK_CAN_DEFAULT|GTK_CAN_FOCUS);
@@ -1051,50 +1020,6 @@ windowlist_create_button (Windowlist *wl)
 
     /* Add action widget */
     xfce_panel_plugin_add_action_widget (wl->plugin, wl->button);
-}
-
-
-
-/**
- * Arrow type functions
- **/
-static void
-windowlist_update_arrow_type (Windowlist *wl)
-{
-    GtkArrowType type = GTK_ARROW_NONE;
-
-    if (!GTK_IS_WIDGET (wl->button))
-        return;
-
-    type = 
-        xfce_panel_plugin_popup_direction (XFCE_PANEL_PLUGIN (wl->plugin),
-                                           GTK_WIDGET (wl->button));
-    if (type != GTK_ARROW_NONE)
-        windowlist_set_arrow_type (wl, type);
-}
-
-
-
-static void
-windowlist_set_arrow_type (Windowlist   *wl, 
-                           GtkArrowType  new_arrow_type)
-{
-    g_return_if_fail (wl->button != NULL);
-
-    if (new_arrow_type == GTK_ARROW_NONE || new_arrow_type == wl->arrowtype)
-        return;
-
-    wl->arrowtype = new_arrow_type;
-
-    if (wl->layout == ARROW_BUTTON)
-    {
-        xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (wl->button),
-                                          wl->arrowtype);
-
-        windowlist_set_size (wl->plugin,
-                             xfce_panel_plugin_get_size (wl->plugin),
-                             wl);
-    }
 }
 
 
@@ -1280,22 +1205,25 @@ windowlist_set_size (XfcePanelPlugin *plugin,
     switch (wl->layout)
     {
         case ICON_BUTTON:
-            gtk_widget_set_size_request (GTK_WIDGET (wl->button),
-                    size, size);
+            gtk_widget_set_size_request (GTK_WIDGET (plugin),
+                                         size, size);
             break;
 
         case ARROW_BUTTON:
-            switch (xfce_panel_plugin_get_orientation (wl->plugin))
+            switch (wl->arrowtype)
             {
-                case GTK_ORIENTATION_VERTICAL:
-                    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
-                            size, ARROW_WIDTH);
+		case GTK_ARROW_LEFT:
+		case GTK_ARROW_RIGHT:
+                    gtk_widget_set_size_request (GTK_WIDGET (plugin),
+                                                 size, ARROW_WIDTH);
                     break;
 
-                case GTK_ORIENTATION_HORIZONTAL:
-                    gtk_widget_set_size_request (GTK_WIDGET (wl->button),
-                            ARROW_WIDTH, size);
+		case GTK_ARROW_UP:
+		case GTK_ARROW_DOWN:
+                    gtk_widget_set_size_request (GTK_WIDGET (plugin),
+                                                 ARROW_WIDTH, size);
                     break;
+
                 default:
                     break;
             }
@@ -1349,20 +1277,11 @@ windowlist_screen_position_changed (XfcePanelPlugin    *plugin,
 {
     DBG ("...");
 
-    windowlist_update_arrow_type (wl);
-
-}
-
-
-
-static void
-windowlist_orientation_changed (XfcePanelPlugin *plugin, 
-                                GtkOrientation   orientation,
-                                Windowlist      *wl)
-{
-    DBG ("...");
-
-    windowlist_update_arrow_type (wl);
+    wl->arrowtype = xfce_panel_plugin_arrow_type (plugin);
+    
+    if (wl->layout == ARROW_BUTTON)
+	xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (wl->button),
+                                          wl->arrowtype);
 }
 
 
@@ -1386,9 +1305,6 @@ windowlist_construct (XfcePanelPlugin *plugin)
 
     g_signal_connect (plugin, "screen-position-changed", 
                       G_CALLBACK (windowlist_screen_position_changed), wl);
-
-    g_signal_connect (plugin, "orientation-changed", 
-                      G_CALLBACK (windowlist_orientation_changed), wl);
 
     xfce_panel_plugin_menu_show_configure (plugin);
     g_signal_connect (plugin, "configure-plugin",

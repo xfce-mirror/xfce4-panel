@@ -42,9 +42,6 @@ static gboolean        launcher_utility_icon_theme_changed          (GSignalInvo
                                                                      guint                  n_param_values,
                                                                      const GValue          *param_values,
                                                                      LauncherPlugin        *launcher);
-static void            launcher_utility_expose_event_init_arrow     (GtkWidget             *button,
-                                                                     GdkEventExpose        *event,
-                                                                     LauncherPlugin        *launcher);
 static gboolean        launcher_icon_button_expose_event            (GtkWidget             *widget,
                                                                      GdkEventExpose        *event,
                                                                      LauncherPlugin        *launcher);
@@ -262,21 +259,6 @@ launcher_utility_query_tooltip (GtkWidget     *widget,
     return FALSE;
 }
 #endif
-
-
-
-static void
-launcher_utility_expose_event_init_arrow (GtkWidget      *button, 
-                                          GdkEventExpose *event, 
-                                          LauncherPlugin *launcher)
-{
-    launcher_plugin_screen_position_changed (launcher);
-
-    /* no need to run this again */
-    g_signal_handlers_disconnect_by_func (G_OBJECT (button), 
-                                          G_CALLBACK (launcher_utility_expose_event_init_arrow),
-                                          launcher);
-}
 
 
 
@@ -623,7 +605,6 @@ static gboolean
 launcher_menu_popup (gpointer user_data)
 {
     LauncherPlugin *launcher = user_data;
-    GtkArrowType    arrow_type;
 
     GDK_THREADS_ENTER ();
 
@@ -635,12 +616,10 @@ launcher_menu_popup (gpointer user_data)
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrow_button), TRUE);
 
     /* popup menu */
-    arrow_type = xfce_panel_plugin_menu_popup (XFCE_PANEL_PLUGIN (launcher->panel_plugin),
-                                               GTK_MENU (launcher->menu),
-                                               1, gtk_get_current_event_time ());
-    if (arrow_type != GTK_ARROW_NONE)
-        xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON(launcher->arrow_button), 
-                                          arrow_type);
+    gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL,
+                    xfce_panel_plugin_position_menu,
+                    launcher->panel_plugin, 
+                    1, gtk_get_current_event_time ());
 
     GDK_THREADS_LEAVE ();
 
@@ -701,9 +680,6 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
 
     /* create new menu */
     launcher->menu = gtk_menu_new ();
-    gtk_menu_attach_to_widget (GTK_MENU (launcher->menu),
-                               launcher->box,
-                               NULL);
 
     /* get the plugin screen */
     screen = gtk_widget_get_screen (GTK_WIDGET (launcher->panel_plugin));
@@ -818,6 +794,7 @@ launcher_entry_free (LauncherEntry  *entry,
 }
 
 
+
 /**
  * Panel Plugin Functions
  **/
@@ -907,25 +884,14 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
         launcher->entries = g_list_prepend (launcher->entries, launcher_entry_new ());
 
+    /* set the arrow direction */
+    launcher_plugin_screen_position_changed (launcher);
+
     /* set the buttons in the correct position */
     launcher_plugin_pack_buttons (launcher);
 
     /* change the visiblity of the arrow button */
     launcher_menu_destroy (launcher);
-
-    /* set the arrow direction */
-    if (launcher->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
-    {
-            g_signal_connect (G_OBJECT (launcher->image), "expose-event",
-                              G_CALLBACK (launcher_utility_expose_event_init_arrow), 
-                              launcher);
-    }
-    else
-    {
-            g_signal_connect (G_OBJECT (launcher->arrow_button), "expose-event",
-                              G_CALLBACK (launcher_utility_expose_event_init_arrow), 
-                              launcher);
-    }
 
 #if !LAUNCHER_NEW_TOOLTIP_API
     /* set the button tooltip */
@@ -1183,13 +1149,10 @@ launcher_plugin_screen_position_changed (LauncherPlugin *launcher)
     GtkArrowType arrow_type;
 
     /* get the arrow type */
-    arrow_type = xfce_panel_plugin_popup_direction (XFCE_PANEL_PLUGIN (launcher->panel_plugin),
-                                                    GTK_WIDGET (launcher->box));
+    arrow_type = xfce_panel_plugin_arrow_type (launcher->panel_plugin);
 
     /* set the arrow direction */
-    if (arrow_type != GTK_ARROW_NONE)
-        xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON(launcher->arrow_button), 
-                                          arrow_type);
+    xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (launcher->arrow_button), arrow_type);
 }
 
 

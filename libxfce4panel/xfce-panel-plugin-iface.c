@@ -1259,268 +1259,214 @@ _xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin,
                                 GINT_TO_POINTER (sensitive));
 }
 
+
+
 /* user menus & popups */
 
 /**
- * xfce_panel_plugin_position_popup
+ * xfce_panel_plugin_arrow_type:
  * @plugin        : an #XfcePanelPlugin
- * @attach_widget : a #GtkWidget associated with the menu/popup
- * @req           : a #GtkRequisition for the menu/popup
- * @x             : a pointer for the x position, or NULL
- * @y             : a pointer for the y position, or NULL
- *
- * This function positions a menu or small popup along the edge of
- *  attach_widget, usually a button on the panel.
- *
- * @attach_widget needs to have its x and y coordinates already set.
- *
- * If you are not interested in the actual position but desire the returned
- *  direction only, you may set @x and @y to be NULL.
- *
- * If you don't know how large your menu or popup will be, you should use
- *  xfce_panel_plugin_popup_direction() instead.
- *
- * See also: xfce_panel_plugin_menu_popup()
- *
- * Returns: The direction in which a menu will be opened relative to the
- *          attached widget or GTK_ARROW_NONE. 
- *          If the return value is GTK_ARROW_NONE, the values in x and y 
- *          should not be used.
+ * 
+ * Determine the #GtkArrowType for a widget that opens a menu and uses
+ *  xfce_panel_plugin_position_menu() to position the menu.
+ * 
+ * Returns: The #GtkArrowType to use.
  **/
 GtkArrowType
-xfce_panel_plugin_position_popup (XfcePanelPlugin *plugin,
-                                  GtkWidget       *attach_widget,
-                                  GtkRequisition  *req,
-                                  gint            *x, 
-                                  gint            *y)
+xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
 {
-    GtkArrowType    direction = GTK_ARROW_NONE;
-    GtkAllocation  *attach;
+    XfceScreenPosition  position;
+    GdkScreen          *screen;
+    GdkRectangle        geom;
+    gint                mon, x, y;
+
+    if (!GTK_WIDGET_REALIZED (plugin))
+        return GTK_ARROW_UP;
+
+    position = xfce_panel_plugin_get_screen_position (plugin);
+    switch (position)
+    {
+        /* top */
+        case XFCE_SCREEN_POSITION_NW_H:
+        case XFCE_SCREEN_POSITION_N:
+        case XFCE_SCREEN_POSITION_NE_H:
+            return GTK_ARROW_DOWN;
+
+        /* left */
+        case XFCE_SCREEN_POSITION_NW_V:
+        case XFCE_SCREEN_POSITION_W:
+        case XFCE_SCREEN_POSITION_SW_V:
+            return GTK_ARROW_RIGHT;
+
+        /* right */
+        case XFCE_SCREEN_POSITION_NE_V:
+        case XFCE_SCREEN_POSITION_E:
+        case XFCE_SCREEN_POSITION_SE_V:
+            return GTK_ARROW_LEFT;
+
+        /* bottom */
+        case XFCE_SCREEN_POSITION_SW_H:
+        case XFCE_SCREEN_POSITION_S:
+        case XFCE_SCREEN_POSITION_SE_H:
+            return GTK_ARROW_UP;
+
+        /* floating */
+        default:
+            /* get the screen information */
+            screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
+            mon = gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (plugin)->window);
+            gdk_screen_get_monitor_geometry (screen, mon, &geom);
+            gdk_window_get_root_origin (GTK_WIDGET (plugin)->window, &x, &y);
+
+            /* get the position based on the screen position */
+            if (position == XFCE_SCREEN_POSITION_FLOATING_H)
+                return ((y < (geom.y + geom.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP);
+            else
+                return ((x < (geom.x + geom.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT);
+    }
+}
+
+
+
+/**
+ * xfce_panel_plugin_position_widget:
+ * @plugin        : an #XfcePanelPlugin
+ * @menu_widget   : a #GtkWidget that will be used as popup menu
+ * @attach_widget : a #GtkWidget relative to which the menu should be positioned
+ * @x             : return location for the x coordinate
+ * @y             : return location for the y coordinate
+ *
+ * The menu widget is positioned relative to the plugin. This function is
+ *  intended for custom menu widgets. 
+ *
+ * For a regular #GtkMenu you should use xfce_panel_plugin_position_menu()
+ *  instead (as callback argument to gtk_menu_popup()).
+ *
+ * See also: xfce_panel_plugin_position_menu().
+ **/
+void
+xfce_panel_plugin_position_widget (XfcePanelPlugin  *plugin,
+                                   GtkWidget        *menu_widget,
+                                   GtkWidget        *attach_widget,
+                                   gint             *x,
+                                   gint             *y)
+{
+    GtkRequisition  req;
     GdkScreen      *screen;
     GdkRectangle    geom;
-    gint            trash_x;
-    gint            trash_y;
-    gint            num;
+    gint            mon;
 
-    g_return_val_if_fail (XFCE_IS_PANEL_PLUGIN (plugin), GTK_ARROW_NONE);
-    g_return_val_if_fail (GTK_IS_WIDGET (attach_widget), GTK_ARROW_NONE);
+    g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+    g_return_if_fail (GTK_IS_WIDGET (menu_widget));
+    g_return_if_fail (GTK_IS_WIDGET (attach_widget));
 
-    if (x == NULL)
-        x = &trash_x;
-    if (y == NULL)
-        y = &trash_y;
+    if (!GTK_WIDGET_REALIZED (menu_widget))
+        gtk_widget_realize (menu_widget);
 
-    attach = &attach_widget->allocation;
-
+    gtk_widget_size_request (menu_widget, &req);
     gdk_window_get_origin (attach_widget->window, x, y);
-    g_return_val_if_fail (*x > 0 && *y > 0, GTK_ARROW_NONE);
 
-    screen = gtk_widget_get_screen (attach_widget);
-    num = gdk_screen_get_monitor_at_window (screen, attach_widget->window);
-    gdk_screen_get_monitor_geometry (screen, num, &geom);
-
-    switch (xfce_panel_plugin_get_orientation (plugin))
+    switch (xfce_panel_plugin_arrow_type (plugin))
     {
-        case GTK_ORIENTATION_HORIZONTAL:
-
-            if (*y + attach->height + req->height > geom.height)
-            {
-                /* Position above */
-                *y -= req->height;
-                direction = GTK_ARROW_UP;
-            }
-            else
-            {
-                /* Position below */
-                *y += attach->height;
-                direction = GTK_ARROW_DOWN;
-            }
+        case GTK_ARROW_UP:
+            *y -= req.height;
             break;
 
-        case GTK_ORIENTATION_VERTICAL:
-
-            if (*x + attach->width + req->width > geom.width)
-            {
-                /* Position on right */
-                *x -= req->width;
-                direction = GTK_ARROW_RIGHT;
-            }
-            else
-            {
-                /* Position on left */
-                *x += attach->width;
-                direction = GTK_ARROW_LEFT;
-            }
+        case GTK_ARROW_DOWN:
+            *y += attach_widget->allocation.height;
             break;
 
-        default:
+        case GTK_ARROW_LEFT:
+            *x -= req.width;
+            break;
+
+        default: /* GTK_ARROW_RIGHT and GTK_ARROW_NONE */
+            *x += attach_widget->allocation.width;
             break;
     }
 
+    screen = gtk_widget_get_screen (attach_widget);
+    mon = gdk_screen_get_monitor_at_window (screen, attach_widget->window);
+    gdk_screen_get_monitor_geometry (screen, mon, &geom);
+
     /* keep inside the screen */
-    if (*x > geom.x + geom.width - req->width)
-        *x = geom.x + geom.width - req->width;
+    if (*x > geom.x + geom.width - req.width)
+        *x = geom.x + geom.width - req.width;
     if (*x < geom.x)
         *x = geom.x;
-
-    if (*y > geom.y + geom.height - req->height)
-        *y = geom.y + geom.height - req->height;
+    if (*y > geom.y + geom.height - req.height)
+        *y = geom.y + geom.height - req.height;
     if (*y < geom.y)
         *y = geom.y;
 
-    return direction;
+    if (G_LIKELY (GTK_IS_MENU (menu_widget)))
+        gtk_menu_set_screen (GTK_MENU (menu_widget), screen);
+    else if (GTK_IS_WINDOW (menu_widget))
+        gtk_window_set_screen (GTK_WINDOW (menu_widget), screen);
 }
+
+
 
 /**
- * xfce_panel_plugin_popup_direction
- * @plugin        : an #XfcePanelPlugin
- * @attach_widget : a #GtkWidget associated with the menu/popup
+ * xfce_panel_plugin_position_menu:
+ * @menu         : a #GtkMenu
+ * @x            : return location for the x coordinate
+ * @y            : return location for the y coordinate
+ * @push_in      : keep inside the screen (see #GtkMenuPositionFunc)
+ * @panel_plugin : a pointer to an #XfcePanelPlugin 
  *
- * This function tries to guess which direction a menu or small popup will be
- *  opened. It can be used, for example, to initialize the direction of an 
- *  arrow button before its associated menu has been built.
+ * Function to be used as #GtkMenuPositionFunc in a call to gtk_menu_popup(). 
+ *  As data argument it needs an #XfcePanelPlugin.
  *
- * @attach_widget needs to have its x and y coordinates already set.
+ * The menu is normally positioned relative to @attach_widget. If you want the
+ *  menu to be positioned relative to another widget, you can use 
+ *  gtk_menu_attach_to_widget() to explicitly set a 'parent' widget.
  *
- * If you know how large your menu or popup will be, you should use
- *  xfce_panel_plugin_position_popup() instead.
+ * As a convenience, xfce_panel_plugin_position_menu() calls 
+ *  xfce_panel_plugin_register_menu() for the menu.
  *
- * See also: xfce_panel_plugin_position_popup()
+ * <example>
+ * void
+ * myplugin_popup_menu (XfcePanelPlugin *plugin,
+ *                      GtkMenu         *menu,
+ *                      GdkEventButton  *ev)
+ * {
+ *     gtk_menu_popup (menu, NULL, NULL,
+ *                     xfce_panel_plugin_position_menu, plugin,
+ *                     ev->button, ev->time );
+ * }
+ * </example>
  *
- * Returns: The direction in which a popup will probably be opened relative to
- *          the attached widget, or GTK_ARROW_NONE.
+ * For a custom widget that will be used as a popup menu, use 
+ *  xfce_panel_plugin_position_widget() instead.
+ *
+ * See also: gtk_menu_popup().
  **/
-GtkArrowType
-xfce_panel_plugin_popup_direction (XfcePanelPlugin *plugin,
-                                   GtkWidget       *attach_widget)
+void
+xfce_panel_plugin_position_menu (GtkMenu  *menu,
+                                 gint     *x,
+                                 gint     *y,
+                                 gboolean *push_in,
+                                 gpointer  panel_plugin)
 {
-    GtkArrowType    direction;
-    GtkRequisition  req;
+    XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (panel_plugin);
+    GtkWidget       *attach_widget;
 
-    /* these values are fairly arbitrary, but consistency is what matters most */
-    req.width  = 100;
-    req.height = 200;
+    if ((attach_widget = gtk_menu_get_attach_widget (menu)) == NULL)
+        attach_widget = GTK_WIDGET (plugin);
 
-    direction = xfce_panel_plugin_position_popup (plugin,
-                                                  attach_widget,
-                                                  &req,
-                                                  NULL, NULL);
+    xfce_panel_plugin_position_widget (plugin, 
+                                       GTK_WIDGET (menu), 
+                                       attach_widget, 
+                                       x, y);
 
-    return direction;
-}
-
-#define GTK_ARROW_TYPE_TO_POINTER(a) ((gpointer) (((gint) a)+1))
-#define POINTER_IS_GTK_ARROW_TYPE(a) (a != NULL && (gint) a < 10 && (gint) a > 0)
-#define POINTER_TO_GTK_ARROW_TYPE(a) ((GtkArrowType) (((gint) a)-1))
-
-static void
-_plugin_user_menu_position (GtkMenu         *menu,
-                            gint            *x, 
-                            gint            *y,
-                            gboolean        *push_in,
-                            XfcePanelPlugin *plugin)
-{
-    GtkRequisition  req;
-    GtkWidget      *attach_widget;
-    GtkArrowType    direction = GTK_ARROW_NONE;
-
-    g_return_if_fail (GTK_IS_MENU (menu));
-    g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-
-    attach_widget = gtk_menu_get_attach_widget (menu);
-    g_return_if_fail (GTK_IS_WIDGET (attach_widget));
-
-    if (!GTK_WIDGET_REALIZED (GTK_WIDGET (menu)))
-        gtk_widget_realize (GTK_WIDGET (menu));
-
-    /* NULL indicates use the attach widget's screen */
-    gtk_menu_set_screen (menu, NULL);
-
-    gtk_widget_size_request (GTK_WIDGET (menu), &req);
-
-    direction = xfce_panel_plugin_position_popup (plugin,
-                                                  attach_widget,
-                                                  &req,
-                                                  x, y);
-
-    g_object_set_data (G_OBJECT (menu),
-                       "open_direction",
-                       GTK_ARROW_TYPE_TO_POINTER (direction));
-
-    *push_in = FALSE;
-}
-
-/**
- * xfce_panel_plugin_menu_popup
- * @plugin : an #XfcePanelPlugin
- * @menu   : a #GtkMenu to pop up
- * @button : the mouse button clicked or 0
- * @time   : time at which the activation event occurred
- *
- * This is a wrapper around gtk_menu_popup().
- *
- * It will call xfce_panel_plugin_register_menu() for you, so don't do that
- *  again in the plugin code.
- *
- * If desired, set the widget associated with the menu using 
- *  gtk_menu_attach_to_widget() before calling this function.
- *  Setting the attach widget positions the menu along its edge.
- *  That widget needs to have its x and y coordinates already.
- *
- * If you do not set the attach widget, the menu will be positioned
- *  on your mouse cursor (GTK default behavior).
- *
- * See also: xfce_panel_plugin_position_popup().
- *
- * Returns: The direction in which the menu opened relative to the attached
- *          widget, or GTK_ARROW_NONE.
- **/
-GtkArrowType
-xfce_panel_plugin_menu_popup (XfcePanelPlugin *plugin, 
-                              GtkMenu         *menu,
-                              gint             button,
-                              guint32          time)
-{
-    GtkWidget *attach_widget;
-    gpointer _direction;
-
-    if (!XFCE_IS_PANEL_PLUGIN (plugin) ||
-        !GTK_IS_MENU (menu) ||
-        GTK_WIDGET_VISIBLE (menu))
-    {
-        /* we shouldn't be here */
-        return GTK_ARROW_NONE;
-    }
+    /* keep inside screen */
+    *push_in = TRUE;
 
     xfce_panel_plugin_register_menu (plugin, menu);
-
-    attach_widget = gtk_menu_get_attach_widget (menu);
-    if (GTK_IS_WIDGET (attach_widget))
-    {
-        gtk_menu_popup (menu,
-                        NULL, NULL,
-                        (GtkMenuPositionFunc) _plugin_user_menu_position,
-                        plugin,
-                        button, 
-                        time);
-
-        _direction = g_object_steal_data (G_OBJECT (menu), "open_direction");
-        if(POINTER_IS_GTK_ARROW_TYPE(_direction))
-            return POINTER_TO_GTK_ARROW_TYPE(_direction);
-        else
-            return GTK_ARROW_NONE;
-    }
-    else
-    {
-        gtk_menu_popup (menu,
-                        NULL, NULL,
-                        NULL,
-                        NULL,
-                        button, 
-                        time);
-        return GTK_ARROW_NONE;
-    }
 }
+
+
 
 #define __XFCE_PANEL_PLUGIN_IFACE_C__
 #include <libxfce4panel/libxfce4panel-aliasdef.c>

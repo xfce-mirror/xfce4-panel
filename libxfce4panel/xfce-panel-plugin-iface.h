@@ -109,17 +109,17 @@ void                 xfce_panel_plugin_unblock_menu         (XfcePanelPlugin  *p
 
 void                 xfce_panel_plugin_register_menu        (XfcePanelPlugin  *plugin,
                                                              GtkMenu          *menu);
-GtkArrowType         xfce_panel_plugin_menu_popup           (XfcePanelPlugin  *plugin,
-                                                             GtkMenu          *menu,
-                                                             gint              button,
-                                                             guint32           time);
-GtkArrowType         xfce_panel_plugin_popup_direction      (XfcePanelPlugin  *plugin,
-                                                             GtkWidget        *attach_widget);
-GtkArrowType         xfce_panel_plugin_position_popup       (XfcePanelPlugin  *plugin,
-                                                             GtkWidget        *attach_widget,
-                                                             GtkRequisition   *popup_requisition,
-                                                             gint             *x, 
+GtkArrowType         xfce_panel_plugin_arrow_type           (XfcePanelPlugin  *plugin);
+void                 xfce_panel_plugin_position_widget      (XfcePanelPlugin  *plugin,
+                                                             GtkWidget        *menu_widget,
+				                             GtkWidget        *attach_widget,
+                                                             gint             *x,
                                                              gint             *y);
+void                 xfce_panel_plugin_position_menu        (GtkMenu          *menu,
+                                                             gint             *x,
+                                                             gint             *y,
+                                                             gboolean         *push_in,
+                                                             gpointer          panel_plugin);
 
 
 gchar               *xfce_panel_plugin_lookup_rc_file       (XfcePanelPlugin  *plugin) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
