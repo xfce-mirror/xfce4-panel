@@ -1297,6 +1297,15 @@ panel_set_size (Panel *panel,
 
     priv = panel->priv;
 
+    if (xfce_screen_position_is_horizontal (priv->screen_position))
+    {
+        gtk_widget_set_size_request (priv->itembar, -1, size);
+    }
+    else
+    {
+        gtk_widget_set_size_request (priv->itembar, size, -1);
+    }
+
     if (size != priv->size)
     {
         priv->size = size;

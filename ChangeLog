@@ -1,3 +1,15 @@
+2007-10-01 21:21 jasper
+
+        * libxfce4panel/xfce-panel-plugin-iface.c,
+          panel/panel-properties.c: To prevent panel items from increasing the
+          panel size, set the height of the XfceItembar instead of setting the
+          size specifically for all items.
+        * libxfce4panel/xfce-panel-plugin-iface.c: Allow attach_widget to be
+          NULL in call to xfce_panel_plugin_position_widget() and fix up the
+          API documentation. Patch by Diego Ongaro and a few bits from me.
+        * plugins/windowlist/windowlist.c: fix for popup menu at pointer
+          position. Another patch by Diego.
+
 2007-09-30 20:14 jasper
 
 	* libxfce4panel/xfce-panel-plugin-iface.c,

@@ -343,9 +343,7 @@ void
 _xfce_panel_plugin_signal_size (XfcePanelPlugin *plugin,
                                 gint             size)
 {
-    gboolean       handled = FALSE;
-    GtkOrientation orientation;
-    gint           width, height;
+    gboolean handled = FALSE;
 
     _panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
 
@@ -357,20 +355,6 @@ _xfce_panel_plugin_signal_size (XfcePanelPlugin *plugin,
     {
         /* size was not handled by the plugin, so we set it */
         gtk_widget_set_size_request (GTK_WIDGET (plugin), size, size);
-    }
-    else
-    {
-        /* get the orientation of the panel */
-        orientation = xfce_panel_plugin_get_orientation (plugin);
-
-        /* get the requested plugin size */
-        gtk_widget_get_size_request (GTK_WIDGET (plugin), &width, &height);
-
-        /* force the plugin size */
-        if (orientation == GTK_ORIENTATION_HORIZONTAL)
-            gtk_widget_set_size_request (GTK_WIDGET (plugin), width, size);
-        else
-            gtk_widget_set_size_request (GTK_WIDGET (plugin), size, height);
     }
 }
 
@@ -705,7 +689,7 @@ _xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin)
 
 
 /**
- * _xfce_panel_plugin_move:
+ * xfce_panel_plugin_move:
  * @plugin : a #XfcePanelPlugin
  *
  * Ask the panel to start a move operation.
@@ -724,7 +708,15 @@ xfce_panel_plugin_move (XfcePanelPlugin *plugin)
  * @menu   : a #GtkMenu that will be opened
  *
  * Register an open menu. This will make sure the panel will properly handle
- * its autohide behaviour.
+ * its autohide behaviour. You have to call this function every time the menu
+ * is opened (e.g. using gtk_popup_menu()).
+ *
+ * If you want to open the menu aligned to the side of the panel (and the
+ * plugin), you should use xfce_panel_plugin_position_menu() as
+ * #GtkMenuPositionFunc. This callback function will take care of calling
+ * xfce_panel_plugin_register_menu() as well.
+ *
+ * See also: xfce_panel_plugin_position_menu().
  **/
 void
 xfce_panel_plugin_register_menu (XfcePanelPlugin *plugin,
@@ -1336,11 +1328,13 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * @x             : return location for the x coordinate
  * @y             : return location for the y coordinate
  *
- * The menu widget is positioned relative to the plugin. This function is
- *  intended for custom menu widgets. 
+ * The menu widget is positioned relative to @attach_widget.
+ * If @attach_widget is NULL, the menu widget is instead positioned
+ * relative to @panel_plugin.
  *
+ * This function is intended for custom menu widgets. 
  * For a regular #GtkMenu you should use xfce_panel_plugin_position_menu()
- *  instead (as callback argument to gtk_menu_popup()).
+ * instead (as callback argument to gtk_menu_popup()).
  *
  * See also: xfce_panel_plugin_position_menu().
  **/
@@ -1356,9 +1350,12 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin  *plugin,
     GdkRectangle    geom;
     gint            mon;
 
-    g_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
-    g_return_if_fail (GTK_IS_WIDGET (menu_widget));
-    g_return_if_fail (GTK_IS_WIDGET (attach_widget));
+    _panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin));
+    _panel_return_if_fail (GTK_IS_WIDGET (menu_widget));
+    _panel_return_if_fail (attach_widget == NULL || GTK_IS_WIDGET (attach_widget));
+
+    if (attach_widget == NULL)
+        attach_widget = GTK_WIDGET (plugin);
 
     if (!GTK_WIDGET_REALIZED (menu_widget))
         gtk_widget_realize (menu_widget);
@@ -1416,14 +1413,14 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin  *plugin,
  * @panel_plugin : a pointer to an #XfcePanelPlugin 
  *
  * Function to be used as #GtkMenuPositionFunc in a call to gtk_menu_popup(). 
- *  As data argument it needs an #XfcePanelPlugin.
+ * As data argument it needs an #XfcePanelPlugin.
  *
- * The menu is normally positioned relative to @attach_widget. If you want the
- *  menu to be positioned relative to another widget, you can use 
- *  gtk_menu_attach_to_widget() to explicitly set a 'parent' widget.
+ * The menu is normally positioned relative to @panel_plugin. If you want the
+ * menu to be positioned relative to another widget, you can use 
+ * gtk_menu_attach_to_widget() to explicitly set a 'parent' widget.
  *
  * As a convenience, xfce_panel_plugin_position_menu() calls 
- *  xfce_panel_plugin_register_menu() for the menu.
+ * xfce_panel_plugin_register_menu() for the menu.
  *
  * <example>
  * void
@@ -1438,7 +1435,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin  *plugin,
  * </example>
  *
  * For a custom widget that will be used as a popup menu, use 
- *  xfce_panel_plugin_position_widget() instead.
+ * xfce_panel_plugin_position_widget() instead.
  *
  * See also: gtk_menu_popup().
  **/
@@ -1452,8 +1449,7 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
     XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (panel_plugin);
     GtkWidget       *attach_widget;
 
-    if ((attach_widget = gtk_menu_get_attach_widget (menu)) == NULL)
-        attach_widget = GTK_WIDGET (plugin);
+    attach_widget = gtk_menu_get_attach_widget (menu);
 
     xfce_panel_plugin_position_widget (plugin, 
                                        GTK_WIDGET (menu), 

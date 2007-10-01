@@ -656,7 +656,8 @@ menulist_popup_menu (Windowlist     *wl,
     gtk_widget_show_all (menu);
 
     gtk_menu_popup (GTK_MENU (menu), NULL, NULL,
-                    xfce_panel_plugin_position_menu, wl->plugin,
+                    at_pointer ? NULL : xfce_panel_plugin_position_menu,
+                    at_pointer ? NULL : wl->plugin,
                     ev ? ev->button : 0, 
                     ev ? ev->time : gtk_get_current_event_time());
 
