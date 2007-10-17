@@ -33,8 +33,14 @@
 #include "clock-lcd.h"
 
 
+#define USE_DEBUG_TIME (0)
+
+
 
 /** prototypes **/
+#if USE_DEBUG_TIME
+static void         xfce_clock_util_get_debug_localtime  (struct tm       *tm);
+#endif
 static guint        xfce_clock_util_interval_from_format (const gchar     *format);
 static guint        xfce_clock_util_next_interval        (guint            timeout_interval);
 static gboolean     xfce_clock_tooltip_update            (gpointer         user_data);
@@ -67,7 +73,47 @@ xfce_clock_util_get_localtime (struct tm *tm)
 #else
     localtime_r (&now, tm);
 #endif
+
+#if USE_DEBUG_TIME
+    xfce_clock_util_get_debug_localtime (tm);
+#endif
 }
+
+
+
+#if USE_DEBUG_TIME
+static void
+xfce_clock_util_get_debug_localtime (struct tm *tm)
+{
+    static gint hour = 23;
+    static gint min = 59;
+    static gint sec = 45;
+    
+    /* add 1 seconds */
+    sec++;
+    
+    /* update times */
+    if (sec > 59)
+    {
+        sec = 0;
+        min++;
+    }
+    if (min > 59)
+    {
+        min = 0;
+        hour++;
+    }
+    if (hour > 23)
+    {
+        hour = 0;
+    }
+    
+    /* set time structure */
+    tm->tm_sec = sec;
+    tm->tm_min = min;
+    tm->tm_hour = hour;
+}
+#endif
 
 
 

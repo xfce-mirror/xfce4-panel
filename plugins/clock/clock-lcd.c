@@ -303,13 +303,17 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
     {
         /* get the local time */
         xfce_clock_util_get_localtime (&tm);
-
+        
         /* draw the hours */
         ticks = tm.tm_hour;
 
         /* convert 24h clock to 12h clock */
         if (!clock->show_military && ticks > 12)
             ticks -= 12;
+            
+        /* queue a resize when the number of hour digits changed */
+        if (G_UNLIKELY ((ticks == 10 || ticks == 0) && tm.tm_min == 0 && tm.tm_sec == 0))
+          gtk_widget_queue_resize (widget);
 
         if (ticks >= 10)
         {
