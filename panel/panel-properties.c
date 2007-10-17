@@ -1460,6 +1460,9 @@ panel_set_screen_position (Panel              *panel,
         {
             panel_set_full_width (panel, full_width);
         }
+        
+        /* update itembar size request */
+        panel_set_size (panel, priv->size);
 
         gtk_widget_queue_resize (GTK_WIDGET (panel));
 
