@@ -814,6 +814,7 @@ launcher_dialog_tree_update_row (LauncherDialog *ld,
     GtkTreeSelection *selection;
     GtkTreeIter       iter;
     GdkPixbuf        *icon = NULL;
+    const gchar      *name;
 
     selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ld->treeview));
 
@@ -837,9 +838,12 @@ launcher_dialog_tree_update_row (LauncherDialog *ld,
                 break;
 
             case COLUMN_NAME:
+                /* build name */
+                name = ld->entry->name ? ld->entry->name : _("Unnamed");
+            
                 /* set new name */
                 gtk_list_store_set (ld->store, &iter,
-                                    COLUMN_NAME, ld->entry->name,
+                                    COLUMN_NAME, name,
                                     -1);
 
                 break;
@@ -1278,6 +1282,7 @@ launcher_dialog_add_tree (LauncherDialog *ld)
     GList             *li;
     LauncherEntry     *entry;
     GdkPixbuf         *icon;
+    const gchar       *name;
 
     /* scrolled window */
     scroll = gtk_scrolled_window_new (NULL, NULL);
@@ -1327,16 +1332,19 @@ launcher_dialog_add_tree (LauncherDialog *ld)
     {
         entry = li->data;
 
-        if (G_LIKELY (entry && entry->name))
+        if (G_LIKELY (entry))
         {
             /* load icon */
             icon = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->treeview), entry->icon, LAUNCHER_TREE_ICON_SIZE);
+            
+            /* build name */
+            name = entry->name ? entry->name : _("Unnamed");
 
             /* create new row and add the data */
             gtk_list_store_append (ld->store, &iter);
             gtk_list_store_set (ld->store, &iter,
                                 COLUMN_ICON, icon,
-                                COLUMN_NAME, entry->name, -1);
+                                COLUMN_NAME, name, -1);
 
             /* release the pixbuf */
             if (G_LIKELY (icon))
