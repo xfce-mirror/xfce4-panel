@@ -32,9 +32,7 @@ typedef struct _XfceTrayWidget      XfceTrayWidget;
 
 GType            xfce_tray_widget_get_type           (void) G_GNUC_CONST G_GNUC_INTERNAL;
 
-GtkWidget       *xfce_tray_widget_new_for_screen     (GdkScreen       *screen,
-                                                      GtkArrowType     arrow_position,
-                                                      GError         **error) G_GNUC_MALLOC G_GNUC_INTERNAL;
+GtkWidget       *xfce_tray_widget_new                (void) G_GNUC_MALLOC G_GNUC_INTERNAL;
 
 void             xfce_tray_widget_sort               (XfceTrayWidget   *tray) G_GNUC_INTERNAL;
 

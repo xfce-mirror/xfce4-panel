@@ -38,5 +38,9 @@ struct _XfceTrayPlugin
     guint            show_frame : 1;
 };
 
+void xfce_tray_plugin_message (GtkMessageType  type,
+                               GdkScreen      *screen,
+                               const gchar    *message);
+
 
 #endif /* !__XFCE_TRAY_PLUGIN_H__ */

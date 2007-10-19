@@ -36,9 +36,6 @@
 
 
 /* prototypes */
-static void            xfce_tray_plugin_message                 (GtkMessageType      type,
-                                                                 GdkScreen          *screen,
-                                                                 const gchar        *message);
 static gboolean        xfce_tray_plugin_check                   (GdkScreen          *screen);
 static GtkArrowType    xfce_tray_plugin_button_position         (XfcePanelPlugin    *panel_plugin);
 static XfceTrayPlugin *xfce_tray_plugin_new                     (XfcePanelPlugin    *panel_plugin);
@@ -62,7 +59,7 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK (xfce_tray_plugin_construct, xfce
 
 
 
-static void
+void
 xfce_tray_plugin_message (GtkMessageType  type,
                           GdkScreen      *screen,
                           const gchar    *message)
@@ -111,7 +108,7 @@ xfce_tray_plugin_button_position (XfcePanelPlugin *panel_plugin)
     GdkRectangle        geom;
     gint                mon, x, y;
 
-    g_return_val_if_fail (GTK_WIDGET_REALIZED (panel_plugin), GTK_ARROW_LEFT);
+    _panel_return_val_if_fail (GTK_WIDGET_REALIZED (panel_plugin), GTK_ARROW_LEFT);
 
     /* get the plugin position */
     position = xfce_panel_plugin_get_screen_position (panel_plugin);
@@ -165,9 +162,7 @@ static XfceTrayPlugin *
 xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
 {
     XfceTrayPlugin *plugin;
-    GError         *error = NULL;
     GtkArrowType    position;
-    GdkScreen      *screen;
 
     /* create structure */
     plugin = panel_slice_new0 (XfceTrayPlugin);
@@ -177,45 +172,32 @@ xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
     plugin->manager = NULL;
     plugin->show_frame = TRUE;
 
-    /* get the button position */
-    position = xfce_tray_plugin_button_position (panel_plugin);
-
-    /* get the screen of the plugin */
-    screen = gtk_widget_get_screen (GTK_WIDGET (panel_plugin));
-
     /* try to create the tray */
-    plugin->tray = xfce_tray_widget_new_for_screen (screen, position, &error);
+    plugin->tray = xfce_tray_widget_new ();
 
-    if (G_LIKELY (plugin->tray))
-    {
-        /* get the manager */
-        plugin->manager = xfce_tray_widget_get_manager (XFCE_TRAY_WIDGET (plugin->tray));
+    /* get the manager */
+    plugin->manager = xfce_tray_widget_get_manager (XFCE_TRAY_WIDGET (plugin->tray));
 
-        /* read the plugin settings */
-        xfce_tray_plugin_read (plugin);
+    /* set arrow postion */
+    position = xfce_tray_plugin_button_position (panel_plugin);
+    xfce_tray_widget_set_arrow_position (XFCE_TRAY_WIDGET (plugin->tray), position);
 
-        /* create the frame */
-        plugin->frame = gtk_frame_new (NULL);
-        gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), plugin->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-        gtk_container_add (GTK_CONTAINER (panel_plugin), plugin->frame);
-        gtk_widget_show (plugin->frame);
+    /* read the plugin settings */
+    xfce_tray_plugin_read (plugin);
 
-        /* add the tray */
-        gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->tray);
-        gtk_widget_show (plugin->tray);
+    /* create the frame */
+    plugin->frame = gtk_frame_new (NULL);
+    gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), plugin->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
+    gtk_container_add (GTK_CONTAINER (panel_plugin), plugin->frame);
+    gtk_widget_show (plugin->frame);
 
-        /* connect signal to handle the real plugin size */
-        g_signal_connect_swapped (G_OBJECT (plugin->tray), "tray-size-changed",
-                                  G_CALLBACK (xfce_tray_plugin_tray_size_changed), plugin);
-    }
-    else
-    {
-        /* show the message */
-        xfce_tray_plugin_message (GTK_MESSAGE_ERROR, screen, error->message);
+    /* add the tray */
+    gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->tray);
+    gtk_widget_show (plugin->tray);
 
-        /* cleanup */
-        g_error_free (error);
-    }
+    /* connect signal to handle the real plugin size */
+    g_signal_connect_swapped (G_OBJECT (plugin->tray), "tray-size-changed",
+                              G_CALLBACK (xfce_tray_plugin_tray_size_changed), plugin);
 
     return plugin;
 }

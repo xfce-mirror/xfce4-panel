@@ -66,6 +66,8 @@ gboolean             xfce_tray_manager_register               (XfceTrayManager  
                                                                GdkScreen        *screen,
                                                                GError          **error) G_GNUC_INTERNAL;
 
+void                 xfce_tray_manager_unregister             (XfceTrayManager  *manager) G_GNUC_INTERNAL;
+
 GtkOrientation       xfce_tray_manager_get_orientation        (XfceTrayManager  *manager) G_GNUC_INTERNAL;
 
 void                 xfce_tray_manager_set_orientation        (XfceTrayManager  *manager,

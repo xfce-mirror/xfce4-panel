@@ -28,9 +28,12 @@
 #include <gtk/gtk.h>
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-panel-macros.h>
+#include <libxfce4panel/xfce-panel-plugin.h>
+#include <libxfce4util/libxfce4util.h>
 
 #include "xfce-tray-manager.h"
 #include "xfce-tray-widget.h"
+#include "xfce-tray-plugin.h"
 
 #define XFCE_TRAY_WIDGET_BUTTON_SIZE          (16)
 #define XFCE_TRAY_WIDGET_REDRAW_DELAY         (250)
@@ -52,6 +55,8 @@ static void     xfce_tray_widget_finalize           (GObject             *object
 static void     xfce_tray_widget_style_set          (GtkWidget           *widget,
                                                      GtkStyle            *previous_style);
 static void     xfce_tray_widget_map                (GtkWidget           *widget);
+static void     xfce_tray_widget_screen_changed     (GtkWidget           *widget,
+                                                     GdkScreen           *previous_screen);
 static gint     xfce_tray_widget_expose_event       (GtkWidget           *widget,
                                                      GdkEventExpose      *event);
 static void     xfce_tray_widget_button_set_arrow   (XfceTrayWidget      *tray);
@@ -72,8 +77,7 @@ static gint     xfce_tray_widget_size_request       (XfceTrayWidget      *tray,
                                                      gint                 size);
 static gboolean xfce_tray_widget_redraw_idle        (gpointer             user_data);
 static void     xfce_tray_widget_redraw_destroyed   (gpointer             user_data);
-static void     xfce_tray_widget_redraw             (XfceTrayWidget      *tray,
-                                                     gboolean             delayed);
+static void     xfce_tray_widget_redraw             (XfceTrayWidget      *tray);
 
 
 
@@ -160,6 +164,7 @@ xfce_tray_widget_class_init (XfceTrayWidgetClass *klass)
     gtkwidget_class->style_set = xfce_tray_widget_style_set;
     gtkwidget_class->expose_event = xfce_tray_widget_expose_event;
     gtkwidget_class->map = xfce_tray_widget_map;
+    gtkwidget_class->screen_changed = xfce_tray_widget_screen_changed;
 
     gtkcontainer_class = GTK_CONTAINER_CLASS (klass);
     gtkcontainer_class->add = NULL;
@@ -237,14 +242,22 @@ xfce_tray_widget_style_set (GtkWidget *widget,
 {
     XfceTrayWidget *tray = XFCE_TRAY_WIDGET (widget);
     GSList         *li;
+    GtkStyle       *style;
 
-    /* set the button style */
-    if (tray->button)
-        gtk_widget_set_style (tray->button, widget->style);
+    /* get the style */
+    style = gtk_widget_get_style (widget);
 
-    /* send the style to all the childeren */
-    for (li = tray->childeren; li != NULL; li = li->next)
-        gtk_widget_set_style (GTK_WIDGET (li->data), widget->style);
+    /* style must be attached an widget must be realized */
+    if (style && GTK_STYLE_ATTACHED (style) && GTK_WIDGET_REALIZED (widget))
+    {
+        /* set the button style */
+        if (tray->button)
+	        gtk_widget_set_style (tray->button, style);
+
+	    /* send the style to all the childeren */
+        for (li = tray->childeren; li != NULL; li = li->next)
+            gtk_widget_set_style (GTK_WIDGET (li->data), style);
+    }
 
     /* invoke the parent */
     GTK_WIDGET_CLASS (xfce_tray_widget_parent_class)->style_set (widget, previous_style);
@@ -260,6 +273,10 @@ xfce_tray_widget_map (GtkWidget *widget)
     /* we've been mapped */
     GTK_WIDGET_SET_FLAGS (widget, GTK_MAPPED);
 
+    /* destroy old button on remap (screen changed) */
+    if (G_UNLIKELY (tray->button))
+        gtk_widget_destroy (tray->button);
+
     /* create the arrow button (needs a mapped tray before the parent is set) */
     tray->button = xfce_arrow_button_new (tray->arrow_position);
     GTK_WIDGET_UNSET_FLAGS (tray->button, GTK_CAN_DEFAULT | GTK_CAN_FOCUS);
@@ -268,6 +285,45 @@ xfce_tray_widget_map (GtkWidget *widget)
     g_signal_connect (G_OBJECT (tray->button), "button-press-event", G_CALLBACK (xfce_tray_widget_button_press_event), tray);
     gtk_widget_set_parent (tray->button, widget);
     gtk_widget_show (tray->button);
+}
+
+
+
+static void
+xfce_tray_widget_screen_changed (GtkWidget *widget,
+                                 GdkScreen *previous_screen)
+{
+    XfceTrayWidget *tray = XFCE_TRAY_WIDGET (widget);
+    gboolean        succeed;
+    GdkScreen      *screen;
+    gchar          *message;
+
+    /* unregister the manager */
+    xfce_tray_manager_unregister (tray->manager);
+
+    /* get screen */
+    screen = gtk_widget_get_screen (widget);
+
+    /* register the manager for this screen */
+    succeed = xfce_tray_manager_register (tray->manager, screen, NULL);
+
+    if (G_LIKELY (succeed))
+    {
+        /* set the orienation */
+        xfce_tray_manager_set_orientation (tray->manager, XFCE_TRAY_WIDGET_GET_ORIENTATION (tray));
+    }
+    else
+    {
+        /* create message */
+        message = g_strdup_printf (_("Failed to register the system tray for screen %d"),
+                                   gdk_screen_get_number (screen));
+
+        /* show message */
+        xfce_tray_plugin_message (GTK_MESSAGE_ERROR, screen, message);
+
+        /* cleanup */
+        g_free (message);
+    }
 }
 
 
@@ -306,7 +362,7 @@ xfce_tray_widget_button_clicked (GtkToggleButton *button,
     xfce_tray_widget_button_set_arrow (tray);
 
     /* update the tray */
-    xfce_tray_widget_redraw (tray, FALSE);
+    xfce_tray_widget_redraw (tray);
 }
 
 
@@ -353,15 +409,30 @@ xfce_tray_widget_compare_function (gconstpointer a,
 
 
 static void
+xfce_tray_widget_icon_set_parent (XfceTrayManager *manager,
+                                  GtkWidget       *icon,
+                                  XfceTrayWidget  *tray)
+{
+    _panel_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
+    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+    _panel_return_if_fail (GTK_IS_WIDGET (icon));
+
+    /* set the parent window */
+    gtk_widget_set_parent (icon, GTK_WIDGET (tray));
+}
+
+
+
+static void
 xfce_tray_widget_icon_added (XfceTrayManager *manager,
                              GtkWidget       *icon,
                              XfceTrayWidget  *tray)
 {
     gboolean hidden;
 
-    g_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
-    g_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
-    g_return_if_fail (GTK_IS_WIDGET (icon));
+    _panel_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
+    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+    _panel_return_if_fail (GTK_IS_WIDGET (icon));
 
     /* add the icon to the list */
     tray->childeren = g_slist_insert_sorted (tray->childeren, icon, xfce_tray_widget_compare_function);
@@ -376,11 +447,8 @@ xfce_tray_widget_icon_added (XfceTrayManager *manager,
     if (hidden)
         tray->n_hidden_childeren++;
 
-    /* set the parent window */
-    gtk_widget_set_parent (icon, GTK_WIDGET (tray));
-
     /* update the tray */
-    xfce_tray_widget_redraw (tray, TRUE);
+    xfce_tray_widget_redraw (tray);
 }
 
 
@@ -390,9 +458,9 @@ xfce_tray_widget_icon_removed (XfceTrayManager *manager,
                                GtkWidget       *icon,
                                XfceTrayWidget  *tray)
 {
-    g_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
-    g_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
-    g_return_if_fail (GTK_IS_WIDGET (icon));
+    _panel_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
+    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+    _panel_return_if_fail (GTK_IS_WIDGET (icon));
 
     /* decrease counter */
     tray->n_childeren--;
@@ -412,50 +480,29 @@ xfce_tray_widget_icon_removed (XfceTrayManager *manager,
     }
 
     /* update the tray */
-    xfce_tray_widget_redraw (tray, FALSE);
+    xfce_tray_widget_redraw (tray);
 }
 
 
 
 GtkWidget *
-xfce_tray_widget_new_for_screen (GdkScreen     *screen,
-                                 GtkArrowType   arrow_position,
-                                 GError       **error)
+xfce_tray_widget_new (void)
 {
-    XfceTrayWidget  *tray = NULL;
-    XfceTrayManager *manager;
+    XfceTrayWidget  *tray;
 
-    g_return_val_if_fail (GDK_IS_SCREEN (screen), NULL);
-    g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+    /* create a tray */
+    tray = g_object_new (XFCE_TYPE_TRAY_WIDGET, NULL);
 
     /* new tray manager */
-    manager = xfce_tray_manager_new ();
+    tray->manager = xfce_tray_manager_new ();
 
-    /* register the manager for this screen */
-    if (G_LIKELY (xfce_tray_manager_register (manager, screen, error) == TRUE))
-    {
-        /* create a tray */
-        tray = g_object_new (XFCE_TYPE_TRAY_WIDGET, NULL);
-
-        /* set the manager */
-        tray->manager = manager;
-
-        /* set the orientations */
-        tray->arrow_position = arrow_position;
-        xfce_tray_manager_set_orientation (manager, XFCE_TRAY_WIDGET_GET_ORIENTATION (tray));
-
-        /* manager signals */
-        g_signal_connect (G_OBJECT (manager), "tray-icon-added", G_CALLBACK (xfce_tray_widget_icon_added), tray);
-        g_signal_connect (G_OBJECT (manager), "tray-icon-removed", G_CALLBACK (xfce_tray_widget_icon_removed), tray);
-        //g_signal_connect (G_OBJECT (manager), "tray-message-sent", G_CALLBACK (xfce_tray_widget_message_sent), tray);
-        //g_signal_connect (G_OBJECT (manager), "tray-message-cancelled", G_CALLBACK (xfce_tray_widget_message_cancelled), tray);
-        //g_signal_connect (G_OBJECT (manager), "tray-lost-selection", G_CALLBACK (xfce_tray_widget_lost_selection), tray);
-    }
-    else
-    {
-        /* release the manager */
-        g_object_unref (G_OBJECT (manager));
-    }
+    /* manager signals */
+    g_signal_connect (G_OBJECT (tray->manager), "tray-icon-set-parent", G_CALLBACK (xfce_tray_widget_icon_set_parent), tray);
+    g_signal_connect (G_OBJECT (tray->manager), "tray-icon-added", G_CALLBACK (xfce_tray_widget_icon_added), tray);
+    g_signal_connect (G_OBJECT (tray->manager), "tray-icon-removed", G_CALLBACK (xfce_tray_widget_icon_removed), tray);
+    //g_signal_connect (G_OBJECT (tray->manager), "tray-message-sent", G_CALLBACK (xfce_tray_widget_message_sent), tray);
+    //g_signal_connect (G_OBJECT (tray->manager), "tray-message-cancelled", G_CALLBACK (xfce_tray_widget_message_cancelled), tray);
+    //g_signal_connect (G_OBJECT (tray->manager), "tray-lost-selection", G_CALLBACK (xfce_tray_widget_lost_selection), tray);
 
     return GTK_WIDGET (tray);
 }
@@ -582,10 +629,8 @@ xfce_tray_widget_redraw_idle (gpointer user_data)
         /* get the child */
         child = li->data;
 
-        /* handle hidden icons */
         if (!tray->all_visible && i < tray->n_hidden_childeren)
         {
-            /* put the widget offscreen */
             child_allocation.x = child_allocation.y = XFCE_TRAY_WIDGET_OFFSCREEN;
         }
         else
@@ -635,23 +680,17 @@ xfce_tray_widget_redraw_destroyed (gpointer user_data)
 
 
 static void
-xfce_tray_widget_redraw (XfceTrayWidget *tray,
-                         gboolean        delayed)
+xfce_tray_widget_redraw (XfceTrayWidget *tray)
 {
-    g_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
 
     /* ignore if there is already a redraw scheduled */
     if (tray->idle_redraw_id != 0)
         return;
 
-    /* schedule an idle or delayed redraw */
-    if (delayed)
-        tray->idle_redraw_id = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, XFCE_TRAY_WIDGET_REDRAW_DELAY,
-                                                   xfce_tray_widget_redraw_idle, tray,
-                                                   xfce_tray_widget_redraw_destroyed);
-    else
-        tray->idle_redraw_id = g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, xfce_tray_widget_redraw_idle,
-                                                tray, xfce_tray_widget_redraw_destroyed);
+    /* schedule an idle redraw */
+    tray->idle_redraw_id = g_idle_add_full (G_PRIORITY_DEFAULT_IDLE, xfce_tray_widget_redraw_idle,
+                                            tray, xfce_tray_widget_redraw_destroyed);
 }
 
 
@@ -662,7 +701,7 @@ xfce_tray_widget_sort (XfceTrayWidget *tray)
     GSList *li;
     guint   n_hidden_childeren = 0;
 
-    g_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
 
     /* sort the list */
     tray->childeren = g_slist_sort (tray->childeren, xfce_tray_widget_compare_function);
@@ -688,7 +727,7 @@ xfce_tray_widget_sort (XfceTrayWidget *tray)
         tray->n_hidden_childeren = n_hidden_childeren;
 
         /* update the tray */
-        xfce_tray_widget_redraw (tray, FALSE);
+        xfce_tray_widget_redraw (tray);
     }
 }
 
@@ -697,7 +736,7 @@ xfce_tray_widget_sort (XfceTrayWidget *tray)
 XfceTrayManager *
 xfce_tray_widget_get_manager (XfceTrayWidget *tray)
 {
-    g_return_val_if_fail (XFCE_IS_TRAY_WIDGET (tray), NULL);
+    _panel_return_val_if_fail (XFCE_IS_TRAY_WIDGET (tray), NULL);
 
     return tray->manager;
 }
@@ -708,7 +747,7 @@ void
 xfce_tray_widget_set_arrow_position (XfceTrayWidget *tray,
                                      GtkArrowType    arrow_position)
 {
-    g_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
 
     if (G_LIKELY (tray->arrow_position != arrow_position))
     {
@@ -722,7 +761,7 @@ xfce_tray_widget_set_arrow_position (XfceTrayWidget *tray,
         xfce_tray_widget_button_set_arrow (tray);
 
         /* update the tray */
-        xfce_tray_widget_redraw (tray, FALSE);
+        xfce_tray_widget_redraw (tray);
     }
 }
 
@@ -732,7 +771,7 @@ void
 xfce_tray_widget_set_size_request (XfceTrayWidget *tray,
                                    gint            size)
 {
-    g_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
+    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
 
     if (G_LIKELY (tray->size != size))
     {
@@ -740,6 +779,6 @@ xfce_tray_widget_set_size_request (XfceTrayWidget *tray,
         tray->size = size;
 
         /* redraw the tray */
-        xfce_tray_widget_redraw (tray, FALSE);
+        xfce_tray_widget_redraw (tray);
     }
 }
