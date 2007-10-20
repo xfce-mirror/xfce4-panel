@@ -115,6 +115,13 @@ XDT_CHECK_PACKAGE([LIBEXO], [exo-0.3], [0.3.1.11])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.12])
 
+dnl ***************************
+dnl *** Check for wnck 2.20 ***
+dnl ***************************
+AC_CHECK_LIB(wnck-1, wnck_screen_get_number,
+    [AC_DEFINE([HAVE_WNCK_TWO_POINT_TWENTY], [1],
+        [Define if wnck_screen_get_number is present])])
+
 dnl ***********************************
 dnl *** Check for optional packages ***
 dnl ***********************************

@@ -451,7 +451,11 @@ icon_new (WnckWindow *window, Iconbox *ib)
 
 /* iconlist */
 static void
-iconbox_active_window_changed (WnckScreen *screen, WnckScreen *previous, gpointer data)
+iconbox_active_window_changed (WnckScreen *screen,
+#ifdef HAVE_WNCK_TWO_POINT_TWENTY
+                               WnckScreen *previous,
+#endif
+                               gpointer data)
 {
     Iconbox *ib = (Iconbox *)data;
     GSList *l;
@@ -467,7 +471,11 @@ iconbox_active_window_changed (WnckScreen *screen, WnckScreen *previous, gpointe
 }
 
 static void
-iconbox_active_workspace_changed (WnckScreen *screen, WnckWorkspace *previous_workspace, gpointer data)
+iconbox_active_workspace_changed (WnckScreen *screen,
+#ifdef HAVE_WNCK_TWO_POINT_TWENTY
+                                  WnckWorkspace *previous_workspace,
+#endif
+                                  gpointer data)
 {
     Iconbox *ib = (Iconbox *)data;
     GSList *l;

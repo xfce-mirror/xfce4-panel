@@ -871,7 +871,9 @@ windowlist_state_changed (GtkWidget *button,
  **/
 static void
 windowlist_active_window_changed (WnckScreen *screen,
+#ifdef HAVE_WNCK_TWO_POINT_TWENTY
                                   WnckWindow *previous_window,
+#endif
                                   Windowlist *wl)
 {
     WnckWindow *window;
