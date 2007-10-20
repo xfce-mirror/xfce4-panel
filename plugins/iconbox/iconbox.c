@@ -24,9 +24,10 @@
 #include <math.h>
 #include <gtk/gtk.h>
 
+#include <libwnck/libwnck.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
-#include <libxfcegui4/netk-window-action-menu.h>
+#include <libwnck/window-action-menu.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 #include <libxfce4panel/xfce-hvbox.h>
@@ -39,7 +40,7 @@ typedef struct
 {
     XfcePanelPlugin *plugin;
 
-    NetkScreen *netk_screen;
+    WnckScreen *wnck_screen;
     int connections[N_ICONBOX_CONNECTIONS];
     int screen_changed_id;
     GtkWidget *box;
@@ -60,7 +61,7 @@ typedef struct
 {
     Iconbox *ib;
 
-    NetkWindow *window;
+    WnckWindow *window;
     int connections[N_ICON_CONNECTIONS];
 
     GdkPixbuf *pb;
@@ -85,19 +86,19 @@ static void iconbox_construct (XfcePanelPlugin *plugin);
 
 /* icons */
 static void
-update_visibility (Icon *icon, NetkWorkspace *optional_active_ws)
+update_visibility (Icon *icon, WnckWorkspace *optional_active_ws)
 {
-    NetkWorkspace *ws;
+    WnckWorkspace *ws;
 
     gdk_flush ();
 
-    if (netk_window_is_skip_tasklist (icon->window))
+    if (wnck_window_is_skip_tasklist (icon->window))
     {
         gtk_widget_hide (icon->button);
         return;
     }
 
-    if (icon->ib->only_hidden && !netk_window_is_minimized (icon->window))
+    if (icon->ib->only_hidden && !wnck_window_is_minimized (icon->window))
     {
         gtk_widget_hide (icon->button);
         return;
@@ -109,14 +110,14 @@ update_visibility (Icon *icon, NetkWorkspace *optional_active_ws)
     }
     else
     {
-        ws = netk_screen_get_active_workspace
-                (netk_window_get_screen (icon->window));
+        ws = wnck_screen_get_active_workspace
+                (wnck_window_get_screen (icon->window));
     }
 
     if (icon->ib->all_workspaces
-        || netk_window_is_sticky (icon->window)
-        || ws == netk_window_get_workspace (icon->window)
-        || netk_window_or_transient_demands_attention (icon->window))
+        || wnck_window_is_sticky (icon->window)
+        || ws == wnck_window_get_workspace (icon->window)
+        || wnck_window_or_transient_needs_attention (icon->window))
     {
         gtk_widget_show (icon->button);
     }
@@ -133,11 +134,11 @@ icon_update_image (Icon *icon)
 
     g_return_if_fail (GDK_IS_PIXBUF (icon->pb));
 
-    if (netk_window_is_minimized (icon->window))
+    if (wnck_window_is_minimized (icon->window))
     {
         if (!icon->was_minimized)
         {
-            /* copied from netk-tasklist.c: dimm_icon */
+            /* copied from wnck-tasklist.c: dimm_icon */
             int x, y, w, h, pixel_stride, row_stride;
             guchar *row, *pixels;
 
@@ -264,24 +265,24 @@ icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
 
     if (ev->button == 1)
     {
-        if (netk_window_is_active (icon->window))
+        if (wnck_window_is_active (icon->window))
         {
-            netk_window_minimize (icon->window);
+            wnck_window_minimize (icon->window);
         }
         else
         {
-            NetkScreen    *scr;
-            NetkWorkspace *aws, *ws;
+            WnckScreen    *scr;
+            WnckWorkspace *aws, *ws;
 
-            scr = netk_window_get_screen (icon->window);
-            aws = netk_screen_get_active_workspace (scr);
-            ws  = netk_window_get_workspace (icon->window);
+            scr = wnck_window_get_screen (icon->window);
+            aws = wnck_screen_get_active_workspace (scr);
+            ws  = wnck_window_get_workspace (icon->window);
 
             if (aws != ws)
             {
-                netk_workspace_activate (ws);
+                wnck_workspace_activate (ws, ev->time);
             }
-            netk_window_activate (icon->window);
+            wnck_window_activate (icon->window, ev->time);
         }
 
         return TRUE;
@@ -290,7 +291,7 @@ icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
     {
         GtkWidget *action_menu;
 
-        action_menu = netk_create_window_action_menu(icon->window);
+        action_menu = wnck_create_window_action_menu(icon->window);
 
         g_signal_connect(G_OBJECT(action_menu), "selection-done",
                          G_CALLBACK(gtk_widget_destroy), NULL);
@@ -305,24 +306,24 @@ icon_button_pressed (GtkWidget *button, GdkEventButton *ev, gpointer data)
 }
 
 static void
-icon_name_changed (NetkWindow *window, gpointer data)
+icon_name_changed (WnckWindow *window, gpointer data)
 {
     Icon *icon = (Icon *)data;
 
     gtk_tooltips_set_tip (icon->ib->icon_tooltips, icon->button,
-                          netk_window_get_name (window), NULL);
+                          wnck_window_get_name (window), NULL);
 }
 
 static void
-icon_state_changed (NetkWindow *window, NetkWindowState changed_mask,
-               NetkWindowState new_state, gpointer data)
+icon_state_changed (WnckWindow *window, WnckWindowState changed_mask,
+                    WnckWindowState new_state, gpointer data)
 {
     Icon *icon = (Icon *)data;
 
-    if (changed_mask & NETK_WINDOW_STATE_DEMANDS_ATTENTION
-        || changed_mask & NETK_WINDOW_STATE_URGENT)
+    if (changed_mask & WNCK_WINDOW_STATE_DEMANDS_ATTENTION
+        || changed_mask & WNCK_WINDOW_STATE_URGENT)
     {
-        if (netk_window_or_transient_demands_attention (window))
+        if (wnck_window_or_transient_needs_attention (window))
         {
             queue_urgent_timeout (icon);
         }
@@ -332,8 +333,8 @@ icon_state_changed (NetkWindow *window, NetkWindowState changed_mask,
         }
     }
 
-    if (changed_mask & NETK_WINDOW_STATE_MINIMIZED
-        || changed_mask & NETK_WINDOW_STATE_SKIP_TASKLIST)
+    if (changed_mask & WNCK_WINDOW_STATE_MINIMIZED
+        || changed_mask & WNCK_WINDOW_STATE_SKIP_TASKLIST)
     {
         update_visibility (icon, NULL);
 
@@ -342,7 +343,7 @@ icon_state_changed (NetkWindow *window, NetkWindowState changed_mask,
 }
 
 static void
-icon_workspace_changed (NetkWindow *window, gpointer data)
+icon_workspace_changed (WnckWindow *window, gpointer data)
 {
     Icon *icon = (Icon *)data;
 
@@ -350,20 +351,20 @@ icon_workspace_changed (NetkWindow *window, gpointer data)
 }
 
 static void
-icon_icon_changed (NetkWindow *window, gpointer data)
+icon_icon_changed (WnckWindow *window, gpointer data)
 {
     Icon *icon = (Icon *)data;
 
     if (icon->pb)
         g_object_unref (G_OBJECT (icon->pb));
 
-    icon->pb = netk_window_get_icon (icon->window);
+    icon->pb = wnck_window_get_icon (icon->window);
 
     if (icon->pb)
         g_object_ref (G_OBJECT (icon->pb));
 
     /* make sure the icon is actually updated */
-    icon->was_minimized = !netk_window_is_minimized (icon->window);
+    icon->was_minimized = !wnck_window_is_minimized (icon->window);
     icon_update_image (icon);
 }
 
@@ -389,7 +390,7 @@ icon_destroy (Icon *icon)
 }
 
 static Icon *
-icon_new (NetkWindow *window, Iconbox *ib)
+icon_new (WnckWindow *window, Iconbox *ib)
 {
     Icon *icon = panel_slice_new0 (Icon);
     int i = 0;
@@ -407,7 +408,7 @@ icon_new (NetkWindow *window, Iconbox *ib)
     gtk_widget_show (icon->image);
     gtk_container_add (GTK_CONTAINER (icon->button), icon->image);
 
-    icon->pb = netk_window_get_icon (window);
+    icon->pb = wnck_window_get_icon (window);
     if (icon->pb)
     {
         xfce_scaled_image_set_from_pixbuf (XFCE_SCALED_IMAGE (icon->image),
@@ -433,7 +434,7 @@ icon_new (NetkWindow *window, Iconbox *ib)
 
     g_assert (i == N_ICON_CONNECTIONS);
 
-    if (netk_window_is_skip_tasklist (window))
+    if (wnck_window_is_skip_tasklist (window))
     {
         return icon;
     }
@@ -441,7 +442,7 @@ icon_new (NetkWindow *window, Iconbox *ib)
     icon_update_image (icon);
 
     gtk_tooltips_set_tip (ib->icon_tooltips, icon->button,
-                          netk_window_get_name (window), NULL);
+                          wnck_window_get_name (window), NULL);
 
     update_visibility (icon, NULL);
 
@@ -450,11 +451,11 @@ icon_new (NetkWindow *window, Iconbox *ib)
 
 /* iconlist */
 static void
-iconbox_active_window_changed (NetkScreen *screen, gpointer data)
+iconbox_active_window_changed (WnckScreen *screen, WnckScreen *previous, gpointer data)
 {
     Iconbox *ib = (Iconbox *)data;
     GSList *l;
-    NetkWindow *window = netk_screen_get_active_window (screen);
+    WnckWindow *window = wnck_screen_get_active_window (screen);
 
     for (l = ib->iconlist; l != NULL; l = l->next)
     {
@@ -466,11 +467,11 @@ iconbox_active_window_changed (NetkScreen *screen, gpointer data)
 }
 
 static void
-iconbox_active_workspace_changed (NetkScreen *screen, gpointer data)
+iconbox_active_workspace_changed (WnckScreen *screen, WnckWorkspace *previous_workspace, gpointer data)
 {
     Iconbox *ib = (Iconbox *)data;
     GSList *l;
-    NetkWorkspace *ws = netk_screen_get_active_workspace (screen);
+    WnckWorkspace *ws = wnck_screen_get_active_workspace (screen);
 
     for (l = ib->iconlist; l != NULL; l = l->next)
     {
@@ -481,7 +482,7 @@ iconbox_active_workspace_changed (NetkScreen *screen, gpointer data)
 }
 
 static void
-iconbox_window_opened (NetkScreen *screen, NetkWindow *window, gpointer data)
+iconbox_window_opened (WnckScreen *screen, WnckWindow *window, gpointer data)
 {
     Iconbox *ib = (Iconbox *)data;
     Icon *icon;
@@ -492,14 +493,14 @@ iconbox_window_opened (NetkScreen *screen, NetkWindow *window, gpointer data)
 
     gtk_box_pack_start (GTK_BOX (ib->iconbox), icon->button, FALSE, FALSE, 0);
 
-    if (netk_window_or_transient_demands_attention (window))
+    if (wnck_window_or_transient_needs_attention (window))
     {
         queue_urgent_timeout (icon);
     }
 }
 
 static void
-iconbox_window_closed (NetkScreen *screen, NetkWindow *window, gpointer data)
+iconbox_window_closed (WnckScreen *screen, WnckWindow *window, gpointer data)
 {
     Iconbox *ib = (Iconbox *)data;
     GSList *l;
@@ -527,40 +528,40 @@ iconbox_init_icons (Iconbox * ib)
     int i = 0;
     GList *windows, *l;
 
-    netk_screen_force_update (ib->netk_screen);
+    wnck_screen_force_update (ib->wnck_screen);
 
     ib->connections[i++] =
-        g_signal_connect (ib->netk_screen, "active_window_changed",
+        g_signal_connect (ib->wnck_screen, "active_window_changed",
                                  G_CALLBACK (iconbox_active_window_changed),
                                  ib);
 
     ib->connections[i++] =
-        g_signal_connect (ib->netk_screen, "active_workspace_changed",
+        g_signal_connect (ib->wnck_screen, "active_workspace_changed",
                                  G_CALLBACK (iconbox_active_workspace_changed),
                                  ib);
 
     ib->connections[i++] =
-        g_signal_connect (ib->netk_screen, "window_opened",
+        g_signal_connect (ib->wnck_screen, "window_opened",
                                  G_CALLBACK (iconbox_window_opened),
                                  ib);
 
     ib->connections[i++] =
-        g_signal_connect (ib->netk_screen, "window_closed",
+        g_signal_connect (ib->wnck_screen, "window_closed",
                                  G_CALLBACK (iconbox_window_closed),
                                  ib);
 
     g_assert (i == N_ICONBOX_CONNECTIONS);
 
-    windows = netk_screen_get_windows (ib->netk_screen);
+    windows = wnck_screen_get_windows (ib->wnck_screen);
 
     for (l = windows; l != NULL; l = l->next)
     {
-        NetkWindow *w = l->data;
+        WnckWindow *w = l->data;
 
-        iconbox_window_opened (ib->netk_screen, w, ib);
+        iconbox_window_opened (ib->wnck_screen, w, ib);
     }
 
-    iconbox_active_window_changed (ib->netk_screen, ib);
+    iconbox_active_window_changed (ib->wnck_screen, NULL, ib);
 }
 
 /* cleanup */
@@ -573,7 +574,7 @@ cleanup_icons (Iconbox *ib)
     for (i = 0; i < N_ICONBOX_CONNECTIONS; i++)
     {
         if (ib->connections[i])
-            g_signal_handler_disconnect (ib->netk_screen, ib->connections[i]);
+            g_signal_handler_disconnect (ib->wnck_screen, ib->connections[i]);
 
         ib->connections[i] = 0;
     }
@@ -766,7 +767,7 @@ iconbox_screen_changed (GtkWidget *plugin, GdkScreen *screen, Iconbox *ib)
                            (GtkCallback) gtk_widget_destroy, NULL);
     cleanup_icons (ib);
 
-    ib->netk_screen = netk_screen_get (gdk_screen_get_number (screen));
+    ib->wnck_screen = wnck_screen_get (gdk_screen_get_number (screen));
 
     iconbox_init_icons (ib);
 }

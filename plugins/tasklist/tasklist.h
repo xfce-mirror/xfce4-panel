@@ -21,14 +21,16 @@
 #define __TASKLIST_H__
 
 #include <gtk/gtk.h>
+#include <libwnck/libwnck.h>
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
-typedef struct _Tasklist Tasklist;
+typedef struct _TasklistPlugin TasklistPlugin;
 
-struct _Tasklist
+struct _TasklistPlugin
 {
-    XfcePanelPlugin          *plugin;
+    /* the panel plugin */
+    XfcePanelPlugin          *panel_plugin;
 
     /* widgets */
     GtkWidget                *box;
@@ -38,9 +40,12 @@ struct _Tasklist
     /* signals */
     gint                      screen_changed_id;
 
+    /* icon theme */
+    GtkIconTheme             *icon_theme;
+
     /* settings */
     gint                      width;
-    NetkTasklistGroupingType  grouping;
+    WnckTasklistGroupingType  grouping;
     guint                     all_workspaces : 1;
     guint                     show_label : 1;
     guint                     expand : 1;
@@ -48,9 +53,8 @@ struct _Tasklist
     guint                     show_handles : 1;
 };
 
-void        tasklist_write_rc_file           (Tasklist        *tasklist) G_GNUC_INTERNAL;
-gboolean    tasklist_set_size                (Tasklist        *tasklist,
-                                              gint             size)     G_GNUC_INTERNAL;
-gboolean    tasklist_using_xinerama          (XfcePanelPlugin *plugin)   G_GNUC_INTERNAL;
+
+void     tasklist_plugin_write   (TasklistPlugin  *tasklist) G_GNUC_INTERNAL;
+gboolean tasklist_using_xinerama (XfcePanelPlugin *panel_plugin) G_GNUC_INTERNAL;
 
 #endif /* !__TASKLIST_H__ */

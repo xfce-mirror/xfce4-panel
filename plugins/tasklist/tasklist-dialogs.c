@@ -28,79 +28,65 @@
 
 /* prototypes */
 static void        tasklist_all_workspaces_toggled     (GtkToggleButton *tb,
-                                                        Tasklist        *tasklist);
+                                                        TasklistPlugin  *tasklist);
 static void        tasklist_grouping_changed           (GtkComboBox     *cb,
-                                                        Tasklist        *tasklist);
-static void        tasklist_show_label_toggled         (GtkToggleButton *tb,
-                                                        Tasklist        *tasklist);
+                                                        TasklistPlugin  *tasklist);
 static void        tasklist_expand_toggled             (GtkToggleButton *tb,
-                                                        Tasklist        *tasklist);
+                                                        TasklistPlugin  *tasklist);
 static void        tasklist_flat_buttons_toggled       (GtkToggleButton *tb,
-                                                       Tasklist         *tasklist);
+                                                        TasklistPlugin  *tasklist);
 static void        tasklist_show_handle_toggled        (GtkToggleButton *tb,
-                                                       Tasklist         *tasklist);
+                                                        TasklistPlugin  *tasklist);
 static void        tasklist_width_changed              (GtkSpinButton   *sb,
-                                                        Tasklist        *tasklist);
+                                                        TasklistPlugin  *tasklist);
 static void        tasklist_dialog_response            (GtkWidget       *dlg,
                                                         gint             reponse,
-                                                        Tasklist        *tasklist);
+                                                        TasklistPlugin  *tasklist);
 
 
 
 static void
 tasklist_all_workspaces_toggled (GtkToggleButton *tb,
-                                 Tasklist        *tasklist)
+                                 TasklistPlugin  *tasklist)
 {
     tasklist->all_workspaces = gtk_toggle_button_get_active (tb);
 
-    netk_tasklist_set_include_all_workspaces (NETK_TASKLIST (tasklist->list),
+    wnck_tasklist_set_include_all_workspaces (WNCK_TASKLIST (tasklist->list),
                                               tasklist->all_workspaces);
 }
 
 
 
 static void
-tasklist_grouping_changed (GtkComboBox *cb,
-                           Tasklist    *tasklist)
+tasklist_grouping_changed (GtkComboBox    *cb,
+                           TasklistPlugin *tasklist)
 {
     tasklist->grouping = gtk_combo_box_get_active (cb);
 
-    netk_tasklist_set_grouping (NETK_TASKLIST (tasklist->list),
+    wnck_tasklist_set_grouping (WNCK_TASKLIST (tasklist->list),
                                 tasklist->grouping);
 }
 
 
 
 static void
-tasklist_show_label_toggled (GtkToggleButton *tb,
-                             Tasklist        *tasklist)
-{
-    tasklist->show_label = gtk_toggle_button_get_active (tb);
-
-    netk_tasklist_set_show_label (NETK_TASKLIST (tasklist->list),
-                                  tasklist->show_label);
-}
-
-
-
-static void
 tasklist_expand_toggled (GtkToggleButton *tb,
-                         Tasklist        *tasklist)
+                         TasklistPlugin  *tasklist)
 {
     tasklist->expand = gtk_toggle_button_get_active (tb);
 
-    xfce_panel_plugin_set_expand (tasklist->plugin, tasklist->expand);
+    xfce_panel_plugin_set_expand (tasklist->panel_plugin, tasklist->expand);
 }
 
 
 
 static void
 tasklist_flat_buttons_toggled (GtkToggleButton *tb,
-                               Tasklist        *tasklist)
+                               TasklistPlugin  *tasklist)
 {
     tasklist->flat_buttons = gtk_toggle_button_get_active (tb);
 
-    netk_tasklist_set_button_relief (NETK_TASKLIST (tasklist->list),
+    wnck_tasklist_set_button_relief (WNCK_TASKLIST (tasklist->list),
                                      tasklist->flat_buttons ?
                                         GTK_RELIEF_NONE : GTK_RELIEF_NORMAL);
 }
@@ -109,7 +95,7 @@ tasklist_flat_buttons_toggled (GtkToggleButton *tb,
 
 static void
 tasklist_show_handle_toggled (GtkToggleButton *tb,
-                              Tasklist        *tasklist)
+                              TasklistPlugin  *tasklist)
 {
     tasklist->show_handles = gtk_toggle_button_get_active (tb);
 
@@ -122,47 +108,46 @@ tasklist_show_handle_toggled (GtkToggleButton *tb,
 
 
 static void
-tasklist_width_changed (GtkSpinButton *sb,
-                        Tasklist      *tasklist)
+tasklist_width_changed (GtkSpinButton  *sb,
+                        TasklistPlugin *tasklist)
 {
     tasklist->width = gtk_spin_button_get_value_as_int (sb);
 
-    tasklist_set_size (tasklist, xfce_panel_plugin_get_size (tasklist->plugin));
+    gtk_widget_queue_resize (GTK_WIDGET (tasklist->panel_plugin));
 }
 
 
 
 static void
-tasklist_dialog_response (GtkWidget *dlg,
-                          gint       reponse,
-                          Tasklist  *tasklist)
+tasklist_dialog_response (GtkWidget       *dlg,
+                          gint             reponse,
+                          TasklistPlugin  *tasklist)
 {
-    g_object_set_data (G_OBJECT (tasklist->plugin), "dialog", NULL);
+    g_object_set_data (G_OBJECT (tasklist->panel_plugin), I_("dialog"), NULL);
 
     gtk_widget_destroy (dlg);
-    xfce_panel_plugin_unblock_menu (tasklist->plugin);
-    tasklist_write_rc_file (tasklist);
+    xfce_panel_plugin_unblock_menu (tasklist->panel_plugin);
+    tasklist_plugin_write (tasklist);
 }
 
 
 
 void
-tasklist_properties_dialog (Tasklist *tasklist)
+tasklist_dialogs_configure (TasklistPlugin *tasklist)
 {
     GtkWidget *dlg, *mainvbox, *vbox, *frame, *cb,
               *hbox, *label, *spin;
 
-    xfce_panel_plugin_block_menu (tasklist->plugin);
+    xfce_panel_plugin_block_menu (tasklist->panel_plugin);
 
     dlg = xfce_titled_dialog_new_with_buttons (_("Task List"), NULL,
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
 
-    gtk_window_set_screen (GTK_WINDOW (dlg),
-                           gtk_widget_get_screen (GTK_WIDGET (tasklist->plugin)));
+    gtk_window_set_screen (GTK_WINDOW (dlg), gtk_widget_get_screen (GTK_WIDGET (tasklist->panel_plugin)));
 
-    g_object_set_data (G_OBJECT (tasklist->plugin), "dialog", dlg);
+    g_object_set_data (G_OBJECT (tasklist->panel_plugin), I_("dialog"), dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
@@ -197,7 +182,7 @@ tasklist_properties_dialog (Tasklist *tasklist)
     g_signal_connect (G_OBJECT (spin), "value-changed",
                       G_CALLBACK (tasklist_width_changed), tasklist);
 
-    if (tasklist_using_xinerama (tasklist->plugin))
+    if (tasklist_using_xinerama (tasklist->panel_plugin))
     {
         cb = gtk_check_button_new_with_mnemonic (_("Use all available space"));
         gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
@@ -230,16 +215,10 @@ tasklist_properties_dialog (Tasklist *tasklist)
     g_signal_connect (G_OBJECT (cb), "toggled",
                       G_CALLBACK (tasklist_all_workspaces_toggled), tasklist);
 
-    cb = gtk_check_button_new_with_mnemonic (_("Show application _names"));
-    gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb), tasklist->show_label);
-    g_signal_connect (G_OBJECT (cb), "toggled",
-                      G_CALLBACK (tasklist_show_label_toggled), tasklist);
-
     cb = gtk_combo_box_new_text ();
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
 
-    /* keep order in sync with NetkTasklistGroupingType */
+    /* keep order in sync with WnckTasklistGroupingType */
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Never group tasks"));
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Automatically group tasks"));
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Always group tasks"));

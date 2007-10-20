@@ -24,6 +24,7 @@
 #endif
 
 #include <gtk/gtk.h>
+#include <libwnck/libwnck.h>
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
@@ -40,8 +41,8 @@ typedef struct
     GtkWidget *image;
 
     GtkTooltips *tooltips;
-    NetkScreen *screen;
-    int netk_id;
+    WnckScreen *screen;
+    int wnck_id;
     int screen_id;
     int style_id;
 
@@ -80,8 +81,8 @@ showdesktop_set_size (XfcePanelPlugin *plugin, int size, ShowDesktopData *sdd)
 static void
 showdesktop_free_data (XfcePanelPlugin * plugin, ShowDesktopData * sdd)
 {
-    if (sdd->netk_id)
-        g_signal_handler_disconnect (sdd->screen, sdd->netk_id);
+    if (sdd->wnck_id)
+        g_signal_handler_disconnect (sdd->screen, sdd->wnck_id);
     
     if (sdd->screen_id)
         g_signal_handler_disconnect (plugin, sdd->screen_id);
@@ -89,7 +90,7 @@ showdesktop_free_data (XfcePanelPlugin * plugin, ShowDesktopData * sdd)
     if (sdd->style_id)
         g_signal_handler_disconnect (plugin, sdd->style_id);
     
-    sdd->netk_id = sdd->screen_id = sdd->style_id = 0;
+    sdd->wnck_id = sdd->screen_id = sdd->style_id = 0;
     gtk_object_sink (GTK_OBJECT (sdd->tooltips));
     panel_slice_free (ShowDesktopData, sdd);
 }
@@ -127,16 +128,16 @@ button_toggled (GtkWidget * button, ShowDesktopData * sdd)
 
     active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
-    netk_screen_toggle_showing_desktop (sdd->screen, active);
+    wnck_screen_toggle_showing_desktop (sdd->screen, active);
 
     sdd->showing = active;
     update_button_display (sdd);
 }
 
 static void
-showing_desktop_changed (NetkScreen * screen, ShowDesktopData * sdd)
+showing_desktop_changed (WnckScreen * screen, ShowDesktopData * sdd)
 {
-    sdd->showing = netk_screen_get_showing_desktop (screen);
+    sdd->showing = wnck_screen_get_showing_desktop (screen);
     update_button (sdd);
 }
 
@@ -144,23 +145,23 @@ static void
 showdesktop_screen_changed (XfcePanelPlugin *plugin, GdkScreen *screen,
                             ShowDesktopData *sdd)
 {
-    if (sdd->netk_id)
+    if (sdd->wnck_id)
     {
-        g_signal_handler_disconnect (sdd->screen, sdd->netk_id);
-        sdd->netk_id = 0;
+        g_signal_handler_disconnect (sdd->screen, sdd->wnck_id);
+        sdd->wnck_id = 0;
     }
 
     screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
 
     if (screen)
     {
-        sdd->screen = netk_screen_get (gdk_screen_get_number (screen));
+        sdd->screen = wnck_screen_get (gdk_screen_get_number (screen));
         
-        sdd->netk_id = 
+        sdd->wnck_id = 
                 g_signal_connect (sdd->screen, "showing_desktop_changed",
                                   G_CALLBACK (showing_desktop_changed), sdd);
 
-        sdd->showing = netk_screen_get_showing_desktop (sdd->screen);
+        sdd->showing = wnck_screen_get_showing_desktop (sdd->screen);
         update_button (sdd);
         showdesktop_set_size (plugin, xfce_panel_plugin_get_size (plugin), sdd);
     }

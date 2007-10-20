@@ -4,6 +4,7 @@ INCLUDES = 								\
 	-I$(top_srcdir)							\
 	-DG_LOG_DOMAIN=\"libshowdesktop\"				\
 	-DLOCALEDIR=\"$(localedir)\"					\
+	-DWNCK_I_KNOW_THIS_IS_UNSTABLE					\
 	$(PLATFORM_CPPFLAGS)
 
 plugindir =								\
@@ -19,6 +20,7 @@ libshowdesktop_la_CFLAGS =						\
 	$(GTK_CFLAGS)							\
 	$(LIBXFCE4UTIL_CFLAGS)						\
 	$(LIBXFCEGUI4_CFLAGS)						\
+	$(LIBWNCK_CFLAGS)						\
 	$(PLATFORM_CFLAGS)
 
 libshowdesktop_la_LDFLAGS =						\
@@ -35,7 +37,8 @@ libshowdesktop_la_LIBADD =						\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la			\
 	$(GTK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)						\
-	$(LIBXFCEGUI4_LIBS)
+	$(LIBXFCEGUI4_LIBS)						\
+	$(LIBWNCK_LIBS)
 
 libshowdesktop_la_DEPENDENCIES =					\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la

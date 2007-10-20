@@ -4,6 +4,7 @@ INCLUDES = 								\
 	-I$(top_srcdir)							\
 	-DG_LOG_DOMAIN=\"libpager\"					\
 	-DLOCALEDIR=\"$(localedir)\"					\
+	-DWNCK_I_KNOW_THIS_IS_UNSTABLE					\
 	$(PLATFORM_CPPFLAGS)
 
 plugindir =								\
@@ -13,12 +14,15 @@ plugin_LTLIBRARIES =							\
 	libpager.la
 
 libpager_la_SOURCES = 							\
-	pager.c
+	pager.c 							\
+	xfce-pager.c 							\
+	xfce-pager.h
 
 libpager_la_CFLAGS =							\
 	$(GTK_CFLAGS)							\
 	$(LIBXFCE4UTIL_CFLAGS)						\
 	$(LIBXFCEGUI4_CFLAGS)						\
+	$(LIBWNCK_CFLAGS)						\
 	$(PLATFORM_CFLAGS)
 
 libpager_la_LDFLAGS =							\
@@ -35,7 +39,8 @@ libpager_la_LIBADD =							\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la			\
 	$(GTK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)						\
-	$(LIBXFCEGUI4_LIBS)
+	$(LIBXFCEGUI4_LIBS)						\
+	$(LIBWNCK_LIBS)
 
 libpager_la_DEPENDENCIES =						\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la

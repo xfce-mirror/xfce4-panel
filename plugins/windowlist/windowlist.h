@@ -28,6 +28,7 @@
 #ifndef _WINDOWLIST_H
 #define _WINDOWLIST_H
 
+#include <libwnck/libwnck.h>
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <gtk/gtk.h>
@@ -57,7 +58,7 @@ typedef struct
     GtkArrowType arrowtype;
     GtkTooltips *tooltips;
 
-    NetkScreen	*screen;
+    WnckScreen	*screen;
     guint	 screen_callback_id;
 
     /* Settings */

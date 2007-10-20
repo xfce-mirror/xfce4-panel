@@ -4,6 +4,7 @@ INCLUDES = 								\
 	-I$(top_srcdir)							\
 	-DG_LOG_DOMAIN=\"libwindowlist\"				\
 	-DLOCALEDIR=\"$(localedir)\"					\
+	-DWNCK_I_KNOW_THIS_IS_UNSTABLE					\
 	$(PLATFORM_CPPFLAGS)
 
 bin_PROGRAMS =								\
@@ -40,6 +41,7 @@ libwindowlist_la_CFLAGS =						\
 	$(GTK_CFLAGS)							\
 	$(LIBXFCE4UTIL_CFLAGS)						\
 	$(LIBXFCEGUI4_CFLAGS)						\
+	$(LIBWNCK_CFLAGS)						\
 	$(PLATFORM_CFLAGS)
 
 libwindowlist_la_LDFLAGS =						\
@@ -55,6 +57,7 @@ endif
 libwindowlist_la_LIBADD =						\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la			\
 	$(GTK_LIBS)							\
+	$(LIBWNCK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)						\
 	$(LIBXFCEGUI4_LIBS)
 
