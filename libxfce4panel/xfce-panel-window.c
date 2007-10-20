@@ -309,6 +309,7 @@ xfce_panel_window_init (XfcePanelWindow *panel_window)
                   "decorated", FALSE,
                   "resizable", FALSE,
                   "type-hint", GDK_WINDOW_TYPE_HINT_DOCK,
+                  "title", PACKAGE_NAME " " PACKAGE_VERSION,
                   NULL);
 
     gtk_window_stick (GTK_WINDOW (panel_window));

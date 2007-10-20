@@ -249,8 +249,6 @@ panel_init (Panel * panel)
     priv->transparency    = DEFAULT_TRANSPARENCY;
     priv->activetrans     = DEFAULT_ACTIVE_TRANS;
 
-    gtk_window_set_title (GTK_WINDOW (panel), "Xfce Panel");
-
     priv->itembar = xfce_itembar_new (GTK_ORIENTATION_HORIZONTAL);
     gtk_widget_show (priv->itembar);
     gtk_container_add (GTK_CONTAINER (panel), priv->itembar);

@@ -47,7 +47,9 @@
 #endif
 
 #include <X11/Xlib.h>
+#include <X11/Xatom.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include <libxfcegui4/libxfcegui4.h>
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-panel-convenience.h>

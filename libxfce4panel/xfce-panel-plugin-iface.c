@@ -1258,10 +1258,10 @@ _xfce_panel_plugin_set_sensitive (XfcePanelPlugin *plugin,
 /**
  * xfce_panel_plugin_arrow_type:
  * @plugin        : an #XfcePanelPlugin
- * 
+ *
  * Determine the #GtkArrowType for a widget that opens a menu and uses
  *  xfce_panel_plugin_position_menu() to position the menu.
- * 
+ *
  * Returns: The #GtkArrowType to use.
  **/
 GtkArrowType
@@ -1332,7 +1332,7 @@ xfce_panel_plugin_arrow_type (XfcePanelPlugin *plugin)
  * If @attach_widget is NULL, the menu widget is instead positioned
  * relative to @panel_plugin.
  *
- * This function is intended for custom menu widgets. 
+ * This function is intended for custom menu widgets.
  * For a regular #GtkMenu you should use xfce_panel_plugin_position_menu()
  * instead (as callback argument to gtk_menu_popup()).
  *
@@ -1410,16 +1410,16 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin  *plugin,
  * @x            : return location for the x coordinate
  * @y            : return location for the y coordinate
  * @push_in      : keep inside the screen (see #GtkMenuPositionFunc)
- * @panel_plugin : a pointer to an #XfcePanelPlugin 
+ * @panel_plugin : a pointer to an #XfcePanelPlugin
  *
- * Function to be used as #GtkMenuPositionFunc in a call to gtk_menu_popup(). 
+ * Function to be used as #GtkMenuPositionFunc in a call to gtk_menu_popup().
  * As data argument it needs an #XfcePanelPlugin.
  *
  * The menu is normally positioned relative to @panel_plugin. If you want the
- * menu to be positioned relative to another widget, you can use 
+ * menu to be positioned relative to another widget, you can use
  * gtk_menu_attach_to_widget() to explicitly set a 'parent' widget.
  *
- * As a convenience, xfce_panel_plugin_position_menu() calls 
+ * As a convenience, xfce_panel_plugin_position_menu() calls
  * xfce_panel_plugin_register_menu() for the menu.
  *
  * <example>
@@ -1434,7 +1434,7 @@ xfce_panel_plugin_position_widget (XfcePanelPlugin  *plugin,
  * }
  * </example>
  *
- * For a custom widget that will be used as a popup menu, use 
+ * For a custom widget that will be used as a popup menu, use
  * xfce_panel_plugin_position_widget() instead.
  *
  * See also: gtk_menu_popup().
@@ -1451,9 +1451,9 @@ xfce_panel_plugin_position_menu (GtkMenu  *menu,
 
     attach_widget = gtk_menu_get_attach_widget (menu);
 
-    xfce_panel_plugin_position_widget (plugin, 
-                                       GTK_WIDGET (menu), 
-                                       attach_widget, 
+    xfce_panel_plugin_position_widget (plugin,
+                                       GTK_WIDGET (menu),
+                                       attach_widget,
                                        x, y);
 
     /* keep inside screen */

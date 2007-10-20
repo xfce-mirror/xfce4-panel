@@ -26,8 +26,9 @@
 
 G_BEGIN_DECLS
 
-typedef struct _XfceItembar      XfceItembar;
-typedef struct _XfceItembarClass XfceItembarClass;
+typedef struct _XfceItembar        XfceItembar;
+typedef struct _XfceItembarClass   XfceItembarClass;
+typedef struct _XfceItembarPrivate XfceItembarPrivate;
 
 #define XFCE_TYPE_ITEMBAR            (xfce_itembar_get_type ())
 #define XFCE_ITEMBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ITEMBAR, XfceItembar))
@@ -39,6 +40,9 @@ typedef struct _XfceItembarClass XfceItembarClass;
 struct _XfceItembar
 {
     GtkContainer __parent__;
+
+    /* private */
+    XfceItembarPrivate *priv;
 };
 
 struct _XfceItembarClass
@@ -60,6 +64,9 @@ struct _XfceItembarClass
 GType           xfce_itembar_get_type               (void) G_GNUC_CONST;
 
 GtkWidget      *xfce_itembar_new                    (GtkOrientation        orientation) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;
+
+void            xfce_itembar_set_maximum_size       (XfceItembar          *itembar,
+                                                     gint                  size);
 
 void            xfce_itembar_set_allow_expand       (XfceItembar          *itembar,
                                                      gboolean              allow);

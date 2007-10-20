@@ -292,7 +292,7 @@ _set_struts (Panel       *panel,
             /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the left (see fd.o spec).
              */
-            if (!xmon->has_neighbor_left 
+            if (!xmon->has_neighbor_left
                 && _validate_strut (xmon->geometry.width, w))
             {
                 data[0] = xmon->geometry.x + w; /* left           */
@@ -305,7 +305,7 @@ _set_struts (Panel       *panel,
             /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the right (see fd.o spec).
              */
-            if (!xmon->has_neighbor_right 
+            if (!xmon->has_neighbor_right
                 && _validate_strut (xmon->geometry.width, w))
             {
                 data[1] =  gdk_screen_get_width (xmon->screen)
@@ -320,7 +320,7 @@ _set_struts (Panel       *panel,
             /* no struts possible on Xinerama screens when this monitor
              * has neighbors on the top (see fd.o spec).
              */
-            if (!xmon->has_neighbor_above 
+            if (!xmon->has_neighbor_above
                 && _validate_strut (xmon->geometry.height, h))
             {
                 data[2] = xmon->geometry.y
@@ -695,7 +695,6 @@ panel_set_hidden (Panel    *panel,
         }
 
         gtk_widget_hide (priv->itembar);
-        gtk_widget_set_size_request (GTK_WIDGET (panel), w, h);
     }
     else
     {
@@ -729,8 +728,9 @@ panel_set_hidden (Panel    *panel,
         }
 
         gtk_widget_show (priv->itembar);
-        gtk_widget_set_size_request (GTK_WIDGET (panel), w, h);
     }
+
+    gtk_widget_set_size_request (GTK_WIDGET (panel), w, h);
 }
 
 static gboolean
@@ -958,7 +958,7 @@ panel_init_position (Panel *panel)
     PanelPrivate   *priv;
     GtkOrientation  orientation;
     XfceMonitor    *xmon;
-    gint            x, y, w, h;
+    gint            x, y, w, h, max;
     GtkRequisition  req;
     GdkRectangle    rect;
 
@@ -975,28 +975,34 @@ panel_init_position (Panel *panel)
 
     gtk_window_set_screen (GTK_WINDOW (panel), xmon->screen);
 
+    w = h = -1;
+
     if (priv->full_width > XFCE_PANEL_NORMAL_WIDTH)
-    {
         xfce_itembar_set_allow_expand (XFCE_ITEMBAR (priv->itembar), TRUE);
-        if (xfce_screen_position_is_horizontal (priv->screen_position))
-        {
-            if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
-                w = xmon->geometry.width;
-            else
-                w = gdk_screen_get_width (xmon->screen);
 
-            gtk_widget_set_size_request (GTK_WIDGET (panel), w, -1);
-        }
+    if (xfce_screen_position_is_horizontal (priv->screen_position))
+    {
+        if (priv->full_width < XFCE_PANEL_SPAN_MONITORS)
+            w = xmon->geometry.width;
         else
-        {
-            if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
-                h = xmon->geometry.height;
-            else
-                h = gdk_screen_get_height (xmon->screen);
+            w = gdk_screen_get_width (xmon->screen);
 
-            gtk_widget_set_size_request (GTK_WIDGET (panel), -1, h);
-        }
+        max = w;
     }
+    else
+    {
+        if (priv->full_width < XFCE_PANEL_SPAN_MONITORS)
+            h = xmon->geometry.height;
+        else
+            h = gdk_screen_get_height (xmon->screen);
+
+        max = h;
+    }
+
+    xfce_itembar_set_maximum_size (XFCE_ITEMBAR (priv->itembar), max);
+
+    if (priv->full_width > XFCE_PANEL_NORMAL_WIDTH)
+        gtk_widget_set_size_request (GTK_WIDGET (panel), w, -1);
 
     if (!xfce_screen_position_is_floating (priv->screen_position))
     {
@@ -1184,7 +1190,7 @@ panel_set_full_width (Panel *panel,
 {
     PanelPrivate *priv;
     XfceMonitor  *xmon;
-    gint          w, h;
+    gint          w = -1, h = -1, max = -1;
 
     priv = panel->priv;
 
@@ -1196,46 +1202,52 @@ panel_set_full_width (Panel *panel,
         {
             xmon = panel_app_get_monitor (priv->monitor);
 
-            w = h = 0;
-
             switch (priv->full_width)
             {
                 case XFCE_PANEL_NORMAL_WIDTH:
-                    w = h = -1;
                     xfce_itembar_set_allow_expand (XFCE_ITEMBAR (priv->itembar),
                                                    FALSE);
+
+                    if (xfce_screen_position_is_horizontal (priv->screen_position))
+                        max = xmon->geometry.width;
+                    else
+                        max = xmon->geometry.height;
                     break;
 
                 case XFCE_PANEL_FULL_WIDTH:
                 case XFCE_PANEL_SPAN_MONITORS:
-                    xfce_itembar_set_allow_expand (XFCE_ITEMBAR (priv->itembar), 
+                    xfce_itembar_set_allow_expand (XFCE_ITEMBAR (priv->itembar),
                                                    TRUE);
                     if (xfce_screen_position_is_horizontal (
                                 priv->screen_position))
                     {
-                        h = -1;
                         if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
                             w = xmon->geometry.width;
                         else
                             w = gdk_screen_get_width (xmon->screen);
+
+                        max = w;
                     }
                     else
                     {
-                        w = -1;
                         if (priv->full_width == XFCE_PANEL_FULL_WIDTH)
                             h = xmon->geometry.height;
                         else
                             h = gdk_screen_get_height (xmon->screen);
+
+                        max = h;
                     }
                     break;
             }
+
+            xfce_itembar_set_maximum_size (XFCE_ITEMBAR (priv->itembar), max);
 
             gtk_widget_set_size_request (GTK_WIDGET (panel), w, h);
 
             panel_set_position (panel, priv->screen_position,
                                 priv->xoffset, priv->yoffset);
 
-            gtk_widget_queue_draw (GTK_WIDGET (panel));
+            gtk_widget_queue_resize (GTK_WIDGET (panel));
         }
     }
 }
@@ -1460,7 +1472,7 @@ panel_set_screen_position (Panel              *panel,
         {
             panel_set_full_width (panel, full_width);
         }
-        
+
         /* update itembar size request */
         panel_set_size (panel, priv->size);
 

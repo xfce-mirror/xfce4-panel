@@ -28,6 +28,7 @@
 
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtk.h>
+#include <gdk/gdkx.h>
 #include <libxfcegui4/libxfcegui4.h>
 
 #include <libxfce4panel/xfce-itembar.h>

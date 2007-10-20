@@ -112,7 +112,7 @@ void                 xfce_panel_plugin_register_menu        (XfcePanelPlugin  *p
 GtkArrowType         xfce_panel_plugin_arrow_type           (XfcePanelPlugin  *plugin);
 void                 xfce_panel_plugin_position_widget      (XfcePanelPlugin  *plugin,
                                                              GtkWidget        *menu_widget,
-				                             GtkWidget        *attach_widget,
+                                                             GtkWidget        *attach_widget,
                                                              gint             *x,
                                                              gint             *y);
 void                 xfce_panel_plugin_position_menu        (GtkMenu          *menu,
