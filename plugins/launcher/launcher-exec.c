@@ -436,6 +436,15 @@ launcher_exec_on_screen (GdkScreen     *screen,
                 sn_workspace = launcher_exec_get_active_workspace_number (screen);
                 sn_launcher_context_set_binary_name (sn_launcher, argv[0]);
                 sn_launcher_context_set_workspace (sn_launcher, sn_workspace);
+
+                /* set name */
+                if (entry->name || entry->comment)
+                  sn_launcher_context_set_name (sn_launcher, entry->name ? entry->name : entry->comment);
+
+                /* set icon */
+                if (entry->icon)
+                  sn_launcher_context_set_icon_name (sn_launcher, entry->icon);
+
                 sn_launcher_context_initiate (sn_launcher, g_get_prgname (), argv[0], CurrentTime);
 
                 /* count environ items */
