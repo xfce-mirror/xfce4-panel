@@ -992,7 +992,11 @@ windowlist_create_button (Windowlist *wl)
                 g_signal_connect (wl->screen, "active-window-changed",
                                   G_CALLBACK (windowlist_active_window_changed), wl);
 
-            windowlist_active_window_changed (wl->screen, NULL, wl);
+            windowlist_active_window_changed (wl->screen,
+#ifdef HAVE_WNCK_TWO_POINT_TWENTY
+                                              NULL,
+#endif
+                                              wl);
 
             break;
 

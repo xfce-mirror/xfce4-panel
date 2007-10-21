@@ -569,7 +569,11 @@ iconbox_init_icons (Iconbox * ib)
         iconbox_window_opened (ib->wnck_screen, w, ib);
     }
 
-    iconbox_active_window_changed (ib->wnck_screen, NULL, ib);
+    iconbox_active_window_changed (ib->wnck_screen,
+#ifdef HAVE_WNCK_TWO_POINT_TWENTY
+                                   NULL,
+#endif
+                                   ib);
 }
 
 /* cleanup */
