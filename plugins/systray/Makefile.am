@@ -76,23 +76,24 @@ EXTRA_DIST = 								\
 	$(desktop_in_in_files)						\
 	xfce-tray-marshal.list
 	
+DISTCLEANFILES =							\
+	$(desktop_DATA)							\
+	$(desktop_in_files)
+	
+#
+# Rules to auto-generate built sources
+#
+if MAINTAINER_MODE
 CLEANFILES =								\
 	xgen-xtmc							\
 	xgen-xtmh
 
-#
-# Rules to auto-generate built sources
-#
-
-if MAINTAINER_MODE
-DISTCLEANFILES =							\
-	$(desktop_DATA)							\
-	$(desktop_in_files)						\
-	$(libsystray_built_sources)					\
-	stamp-xfce-tray-marshal.h
-
 BUILT_SOURCES =								\
 	$(libsystray_built_sources)
+
+DISTCLEANFILES +=							\
+	$(libsystray_built_sources)					\
+	stamp-xfce-tray-marshal.h
 
 xfce-tray-marshal.h: stamp-xfce-tray-marshal.h
 	@true
