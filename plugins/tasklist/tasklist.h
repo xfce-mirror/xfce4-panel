@@ -43,6 +43,9 @@ struct _TasklistPlugin
     /* icon theme */
     GtkIconTheme             *icon_theme;
 
+    /* requested width */
+    gint                      req_size;
+
     /* settings */
     gint                      width;
     WnckTasklistGroupingType  grouping;

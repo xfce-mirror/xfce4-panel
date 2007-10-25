@@ -171,7 +171,6 @@ static TasklistPlugin *
 tasklist_plugin_new (XfcePanelPlugin *panel_plugin)
 {
     TasklistPlugin *tasklist;
-    GtkWidget      *alignment;
     GdkScreen      *screen;
     gint            screen_n;
 
@@ -204,14 +203,9 @@ tasklist_plugin_new (XfcePanelPlugin *panel_plugin)
     /* set the icon theme */
     tasklist->icon_theme = gtk_icon_theme_get_for_screen (screen);
 
-    /* alignment to avoid streched buttons */
-    alignment = gtk_alignment_new (0.00,  0.50,  0.00,  1.00);
-    gtk_box_pack_start (GTK_BOX (tasklist->box), alignment, TRUE, TRUE, 0);
-    gtk_widget_show (alignment);
-
     /* create tasklist */
     tasklist->list = wnck_tasklist_new (wnck_screen_get (screen_n));
-    gtk_container_add (GTK_CONTAINER (alignment), tasklist->list);
+    gtk_box_pack_start (GTK_BOX (tasklist->box), tasklist->list, FALSE, FALSE, 0);
     gtk_widget_show (tasklist->list);
 
     /* set the tasklist settings */
@@ -315,7 +309,39 @@ tasklist_plugin_size_request (TasklistPlugin *tasklist,
             requisition->width = size;
         else
             requisition->height = size;
+
+        /* save the requested size */
+        tasklist->req_size = size;
     }
+}
+
+
+static void
+tasklist_plugin_size_allocate (TasklistPlugin *tasklist,
+                               GtkAllocation  *allocation)
+{
+  GtkOrientation  orientation;
+  gint            a_size, p_size;
+
+  /* get orientation */
+  orientation = xfce_panel_plugin_get_orientation (tasklist->panel_plugin);
+
+  /* get plugin size */
+  p_size = xfce_panel_plugin_get_size (tasklist->panel_plugin);
+
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    a_size = MIN (tasklist->req_size, allocation->width);
+  else
+    a_size = MIN (tasklist->req_size, allocation->height);
+
+  if (tasklist->show_handles)
+    a_size -= TASKLIST_HANDLE_SIZE;
+
+  /* force the size request of the taskbar */
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    gtk_widget_set_size_request (GTK_WIDGET (tasklist->list), a_size, p_size);
+  else
+    gtk_widget_set_size_request (GTK_WIDGET (tasklist->list), p_size, a_size);
 }
 
 
@@ -441,6 +467,8 @@ tasklist_plugin_construct (XfcePanelPlugin *panel_plugin)
                               G_CALLBACK (tasklist_plugin_size_changed), tasklist);
     g_signal_connect_swapped (G_OBJECT (panel_plugin), "size-request",
                               G_CALLBACK (tasklist_plugin_size_request), tasklist);
+    g_signal_connect_swapped (G_OBJECT (panel_plugin), "size-allocate",
+                              G_CALLBACK (tasklist_plugin_size_allocate), tasklist);
     g_signal_connect_swapped (G_OBJECT (panel_plugin), "save",
                               G_CALLBACK (tasklist_plugin_write), tasklist);
     g_signal_connect_swapped (G_OBJECT (panel_plugin), "free-data",
