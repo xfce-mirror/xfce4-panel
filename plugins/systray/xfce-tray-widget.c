@@ -333,6 +333,10 @@ xfce_tray_widget_button_set_arrow (XfceTrayWidget *tray)
 {
     GtkArrowType arrow_type;
 
+    /* return when the button has not been mapped */
+    if (tray->button == NULL)
+      return;
+
     /* get the origional arrow type */
     arrow_type = tray->arrow_position;
 
@@ -475,7 +479,7 @@ xfce_tray_widget_icon_removed (XfceTrayManager *manager,
         tray->n_hidden_childeren--;
 
         /* collapse the hidden button */
-        if (tray->n_hidden_childeren == 0)
+        if (tray->n_hidden_childeren == 0 && tray->button)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tray->button), FALSE);
     }
 
@@ -685,7 +689,7 @@ xfce_tray_widget_redraw (XfceTrayWidget *tray)
     _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
 
     /* ignore if there is already a redraw scheduled */
-    if (tray->idle_redraw_id != 0)
+    if (tray->idle_redraw_id != 0 || tray->button == NULL)
         return;
 
     /* schedule an idle redraw */
@@ -720,7 +724,7 @@ xfce_tray_widget_sort (XfceTrayWidget *tray)
     if (tray->n_hidden_childeren != n_hidden_childeren)
     {
         /* collapse the button if there are no hidden childeren */
-        if (n_hidden_childeren == 0)
+        if (n_hidden_childeren == 0 && tray->button)
             gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tray->button), FALSE);
 
         /* set new value */
