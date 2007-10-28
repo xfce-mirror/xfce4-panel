@@ -739,7 +739,6 @@ xfce_tray_manager_handle_plug_added (GtkSocket       *socket,
 
 
 
-
 static void
 xfce_tray_manager_handle_dock_request (XfceTrayManager     *manager,
                                        XClientMessageEvent *xevent)
@@ -756,6 +755,7 @@ xfce_tray_manager_handle_dock_request (XfceTrayManager     *manager,
 
     /* allow applications to draw on this widget */
     gtk_widget_set_app_paintable (socket, TRUE);
+    gtk_widget_set_double_buffered (socket, FALSE);
 
     /* allocate and set the xwindow */
     xwindow = g_new (Window, 1);

@@ -227,9 +227,14 @@ xfce_tray_widget_expose_event (GtkWidget      *widget,
                                GdkEventExpose *event)
 {
     XfceTrayWidget *tray = XFCE_TRAY_WIDGET (widget);
+    GSList         *li;
 
     /* expose the button, because it doesn't have its own window */
     gtk_container_propagate_expose (GTK_CONTAINER (widget), tray->button, event);
+
+    /* do a reallocate to the tray icons */
+    for (li = tray->childeren; li != NULL; li = li->next)
+        gtk_widget_size_allocate (li->data, &GTK_WIDGET (li->data)->allocation);
 
     return FALSE;
 }
@@ -437,6 +442,8 @@ xfce_tray_widget_icon_added (XfceTrayManager *manager,
     _panel_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
     _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
     _panel_return_if_fail (GTK_IS_WIDGET (icon));
+    _panel_return_if_fail (GTK_WIDGET_DRAWABLE (tray));
+    _panel_return_if_fail (GTK_WIDGET_DRAWABLE (icon));
 
     /* add the icon to the list */
     tray->childeren = g_slist_insert_sorted (tray->childeren, icon, xfce_tray_widget_compare_function);
@@ -632,6 +639,8 @@ xfce_tray_widget_redraw_idle (gpointer user_data)
     {
         /* get the child */
         child = li->data;
+
+        _panel_return_val_if_fail (GTK_WIDGET_REALIZED (child), FALSE);
 
         if (!tray->all_visible && i < tray->n_hidden_childeren)
         {
