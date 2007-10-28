@@ -242,6 +242,7 @@ pager_construct (XfcePanelPlugin *plugin)
     GdkScreen *screen;
     int screen_idx;
     Pager *pager = panel_slice_new0 (Pager);
+    GtkSettings *settings;
 
     g_signal_connect (plugin, "orientation-changed",
                       G_CALLBACK (pager_orientation_changed), pager);
@@ -292,6 +293,11 @@ pager_construct (XfcePanelPlugin *plugin)
     pager->screen_size_changed_id =
         g_signal_connect (screen, "size-changed",
                           G_CALLBACK (pager_screen_size_changed), pager);
+
+    /* override default dnd icon size. wnck multiplies the dnd size with 3 for the
+     * drag icon, so we do 32 / 3 to get a normal drag icon */
+    settings = gtk_widget_get_settings (pager->pager);
+    g_object_set (G_OBJECT (settings), "gtk-icon-sizes", "gtk-dnd=11,11:", NULL);
 }
 
 /* -------------------------------------------------------------------- *
@@ -332,8 +338,8 @@ workspace_show_names_toggled (GtkWidget *button, Pager *pager)
     if (pager->show_names != show_names)
     {
 	pager->show_names = show_names;
-	
-	wnck_pager_set_display_mode (WNCK_PAGER (pager->pager), 
+
+	wnck_pager_set_display_mode (WNCK_PAGER (pager->pager),
 	                             show_names ? WNCK_PAGER_DISPLAY_NAME : WNCK_PAGER_DISPLAY_CONTENT);
     }
 }
