@@ -62,8 +62,7 @@ msgstr "_Fjerne \"%s\"?"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:599
 msgid ""
 "The item will be removed from the panel and its configuration will be lost."
-msgstr ""
-"Elementet vil ble fjernet fra panelet og konfigurasjonen vil gå tapt."
+msgstr "Elementet vil ble fjernet fra panelet og konfigurasjonen vil gå tapt."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:788
@@ -138,6 +137,7 @@ msgid "Developer"
 msgstr "Utvikler"
 
 #: ../panel/main.c:46
+#, c-format
 msgid ""
 "\n"
 " Xfce Panel %s\n"
@@ -192,6 +192,7 @@ msgstr ""
 "\n"
 
 #: ../panel/panel-dialogs.c:184
+#, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Kunne ikke åpne \"%s\" modulen"
 
@@ -204,8 +205,8 @@ msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
 msgstr ""
-"Dra elementer fra listen til panelet eller fjern elementer fra panelet ved "
-"å dra de tilbake til listen."
+"Dra elementer fra listen til panelet eller fjern elementer fra panelet ved å "
+"dra de tilbake til listen."
 
 #: ../panel/panel-dialogs.c:644
 msgid "Available Items"
@@ -302,6 +303,7 @@ msgstr "Gjør aktivt panel ugjennomsiktig"
 
 #: ../panel/panel-dialogs.c:1456 ../panel/panel-dialogs.c:1492
 #: ../panel/panel-dialogs.c:1517
+#, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
@@ -402,10 +404,12 @@ msgid "Use all available space"
 msgstr "Bruk all tilgjengelig plass"
 
 #: ../plugins/launcher/launcher.c:373 ../plugins/launcher/launcher.c:435
+#, c-format
 msgid "Could not run \"%s\""
 msgstr "Kunne ikke kjøre «%s»."
 
 #: ../plugins/launcher/launcher.c:398
+#, c-format
 msgid "Error in command \"%s\""
 msgstr "Feil i kommandoen «%s»"
 
@@ -511,8 +515,8 @@ msgid ""
 "The first item in the list is shown on the panel. Additional items will "
 "appear in a menu."
 msgstr ""
-"Det første elementet i listen vises på panelet. Øvrige elementer blir "
-"vist som en meny."
+"Det første elementet i listen vises på panelet. Øvrige elementer blir vist "
+"som en meny."
 
 #: ../plugins/launcher/launcher-dialog.c:1332
 msgid "Program Launcher"
@@ -538,9 +542,8 @@ msgid ""
 "in the meantime. Not adding launcher (but any files downloaded have not been "
 "lost)."
 msgstr ""
-"«The Zero Install GUI» er fullført, men startbilde har forsvunnet "
-"i mellomtiden. Legger ikke til starter (filer lastet ned har ikke "
-"gått tapt)."
+"«The Zero Install GUI» er fullført, men startbilde har forsvunnet i "
+"mellomtiden. Legger ikke til starter (filer lastet ned har ikke gått tapt)."
 
 #: ../plugins/launcher/launcher-dialog.c:1899
 msgid "Select file"
@@ -588,6 +591,7 @@ msgid "There is already a system tray running on this screen"
 msgstr "Det kjører allerede en systemkurv på denne skjermen"
 
 #: ../plugins/systray/systray.c:90
+#, c-format
 msgid "Unable to register system tray: %s"
 msgstr "Klarte ikke registrere systemkurv: %s"
 
