@@ -1,20 +1,21 @@
 # Turkish translations for xfce4-panel package.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
+#
 # Erçin EKER <ercin.eker@linux.org.tr>, 2004.
 # Eren Türkay <turkay.eren@gmail.com>, 2007.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-23 11:15+0200\n"
-"PO-Revision-Date: 2007-03-29 21:35+0300\n"
+"PO-Revision-Date: 2007-11-03 07:40+0200\n"
 "Last-Translator: Eren Türkay <turkay.eren@gmail.com>\n"
 "Language-Team: Turkish <turkce@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../config/launcher-7.rc.in.h:1
 msgid "Command Prompt"
@@ -60,8 +61,7 @@ msgid "Remove \"%s\"?"
 msgstr "\"%s\" öğesini kaldır?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "Öğe panelden silinecek ve ayarları kaybedilecek."
 
 #. configure, hide by default
@@ -358,25 +358,23 @@ msgstr "Çık + Ekranı kilitle"
 
 #: ../plugins/clock/clock-dialog.c:345
 msgid "Custom"
-msgstr ""
+msgstr "Özel"
 
 #: ../plugins/clock/clock-dialog.c:399
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Saniyeleri göster"
+msgstr "S_aniyeleri göster"
 
 #: ../plugins/clock/clock-dialog.c:408
 msgid "Use 24-_hour clock"
 msgstr "24'lük _saat sistemi kullan"
 
 #: ../plugins/clock/clock-dialog.c:414
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "AM/PM'i Göster"
+msgstr "AM/PM'i Gö_ster"
 
 #: ../plugins/clock/clock-dialog.c:423
 msgid "True _binary clock"
-msgstr ""
+msgstr "İki_li saat"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:465
@@ -390,16 +388,15 @@ msgstr "Analog"
 
 #: ../plugins/clock/clock-dialog.c:491
 msgid "Binary"
-msgstr ""
+msgstr "İkili"
 
 #: ../plugins/clock/clock-dialog.c:492
 msgid "Digital"
 msgstr "Sayısal"
 
 #: ../plugins/clock/clock-dialog.c:493
-#, fuzzy
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:498
@@ -410,7 +407,7 @@ msgstr "Ç_erçeve göster"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:505
 msgid "Tooltip Format"
-msgstr ""
+msgstr "İpucu Biçimi"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:531
@@ -495,7 +492,7 @@ msgstr "\"%s\" için simge seç"
 #: ../plugins/launcher/launcher-dialog.c:842
 #: ../plugins/launcher/launcher-dialog.c:1341
 msgid "Unnamed"
-msgstr ""
+msgstr "İsimsiz"
 
 #: ../plugins/launcher/launcher-dialog.c:1120
 msgid "_Name"
@@ -531,18 +528,16 @@ msgid "Program Launcher"
 msgstr "Program Başlatıcısı"
 
 #: ../plugins/launcher/launcher-dialog.c:1551
-#, fuzzy
 msgid "A_rrow:"
-msgstr "O_k düğmesi"
+msgstr "O_k:"
 
 #: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Default"
 msgstr "Öntanımlı"
 
 #: ../plugins/launcher/launcher-dialog.c:1562
-#, fuzzy
 msgid "Inside Button"
-msgstr "_Simge düğmesi"
+msgstr "Düğmenin Yanında"
 
 #: ../plugins/pager/pager.c:359 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -561,9 +556,8 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "Çalışma alanları arasında fare topu kullanarak geçiş yap"
 
 #: ../plugins/pager/pager.c:428
-#, fuzzy
 msgid "Show workspace names"
-msgstr "Çalışma alanları _hareketlerini göster"
+msgstr "Çalışma alanı isimlerini göster"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -571,31 +565,29 @@ msgid "Separator or Spacing"
 msgstr "Ayırıcı veya Boşluk"
 
 #: ../plugins/separator/separator.c:430
-#, fuzzy
 msgid "Separator Style"
-msgstr "Ayırıcı veya Boşluk"
+msgstr "Ayırıcı Tarzı"
 
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr ""
+msgstr "_Boş Alan"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_Uzayan Boş Alan"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
-msgstr ""
+msgstr "Sa_tır"
 
 #: ../plugins/separator/separator.c:464
-#, fuzzy
 msgid "_Handle"
-msgstr "İşle:"
+msgstr "İ_şle"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
-msgstr ""
+msgstr "_Noktalar"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
@@ -619,20 +611,19 @@ msgstr "Bu ekranda zaten çalışan bir sistem çekmecesi var"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:287
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "Uygulama Seç"
+msgstr "Gizlenen Uygulamalar"
 
 #. create message
 #: ../plugins/systray/xfce-tray-widget.c:318
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to register the system tray for screen %d"
-msgstr "Sistem çekmecesi kaydedilemiyor: %s"
+msgstr "%d ekranı için sistem çekmecesi kaydedilemedi"
 
 #: ../plugins/systray/xfce-tray-manager.c:461
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "%d ekranı için yönetim seçimi elde edilemedi"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:209
@@ -815,153 +806,3 @@ msgstr "Kullanılabilir masaüstlerinin listesini göster"
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 Panel Yöneticisi"
 
-#~ msgid "Show application _names"
-#~ msgstr "Uygulama _isimlerini göster"
-
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%d %B %Y, %A"
-
-#~ msgid "_Draw Separator"
-#~ msgstr "Ayırıcı _Çiz"
-
-#~ msgid "_Expand"
-#~ msgstr "_Genişlet"
-
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ " Xfce Paneli %s\n"
-#~ "\n"
-#~ " Xfce Masaüstü Ortamının bir parçası\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " GNU GPL Lisanslı.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ " Kullanım: %s [Seçenekler]\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ " Seçenekler\n"
-#~ " -h, --help      Bu mesajı yazar ve çıkar\n"
-#~ " -v, --version   Bu mesajı yazar ve çıkar\n"
-#~ " -c, --customize Ayar penceresini göster\n"
-#~ " -s, --save      Ayarı kaydet\n"
-#~ " -r, --restart   Panelleri yeniden başlat\n"
-#~ " -q, --quit      Oturumu kapat\n"
-#~ " -x, --exit      Tüm panelleri kapat ve programı sonlandır\n"
-#~ " -a, --add       Yeni öğeler ekle\n"
-#~ "\n"
-
-#~ msgid "Error in command \"%s\""
-#~ msgstr "\"%s\" komutunda hata"
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "Bu nesne henüz ayarlanmamış"
-
-#~ msgid "File management"
-#~ msgstr "Dosya yönetimi"
-
-#~ msgid "Utilities"
-#~ msgstr "Araçlar"
-
-#~ msgid "Games"
-#~ msgstr "Oyunlar"
-
-#~ msgid "Help browser"
-#~ msgstr "Yardım Merkezi"
-
-#~ msgid "Multimedia"
-#~ msgstr "Çoklu Ortam"
-
-#~ msgid "Network"
-#~ msgstr "Ağ"
-
-#~ msgid "Graphics"
-#~ msgstr "Grafik"
-
-#~ msgid "Printer"
-#~ msgstr "Yazıcı"
-
-#~ msgid "Productivity"
-#~ msgstr "Üretkenlik"
-
-#~ msgid "Office"
-#~ msgstr "Ofis"
-
-#~ msgid "Sound"
-#~ msgstr "Ses"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "Development"
-#~ msgstr "Geliştirme"
-
-#~ msgid "Select image file"
-#~ msgstr "Resim dosyası seç"
-
-#~ msgid "Select command"
-#~ msgstr "Komut seç"
-
-#~ msgid "Other..."
-#~ msgstr "Diğer..."
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "Listedeki ilk öğe panel üzerinde gösterilir. Ek öğeler menü içerisinde "
-#~ "gösterilecek."
-
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "0launch çalıştırılamadı:\n"
-#~ "%s\n"
-#~ "Zero Install yardımı için; http://0install.net"
-
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "Zero Install GUI kurulumu tamamlandı, ancak bu sırada başlatıcı penceresi "
-#~ "kayboldu. Başlatıcı eklenmiyor (ama indirilen herhangi bir dosya "
-#~ "kaybedilmedi)"
-
-#~ msgid "Select file"
-#~ msgstr "Dosya seç"
-
-#, fuzzy
-#~ msgid "Test Plugin"
-#~ msgstr "Başlatıcı"
-
-#~ msgid "Size"
-#~ msgstr "Boyut"
