@@ -1,0 +1,788 @@
+# Latvian translations for xfce4-panel package.
+# Copyright (C) 2002-2007 The Xfce development team.
+# This file is distributed under the same license as the xfce4-pane package.
+# Rihards Prieditis <rprieditis@inbox.lv>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel 4.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-10-23 11:15+0200\n"
+"PO-Revision-Date: 2007-11-10 14:13+0300\n"
+"Last-Translator: Rihards Priedītis <rprieditis@inbox.lv>\n"
+"Language-Team: Latvian <rprieditis@inbox.lv>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../config/launcher-7.rc.in.h:1
+msgid "Command Prompt"
+msgstr "Komandu Līnija"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr "X termināļa emulators"
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr "Rediģēt teksta failus"
+
+#: ../config/launcher-8.rc.in.h:2
+#: ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "Redaktors"
+
+#: ../config/launcher-9.rc.in.h:1
+msgid "File Manager"
+msgstr "Faila Pārvaldnieks"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr "Pārvaldīt failus un mapes"
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr "Pārlūkot internetu"
+
+#: ../config/launcher-10.rc.in.h:2
+msgid "Web Browser"
+msgstr "Tīmekļa Pārlūks"
+
+#. dialogs are annoying, just spit out a warning
+#: ../libxfce4panel/xfce-panel-external-item.c:182
+#, c-format
+msgid "An item was unexpectedly removed: \"%s\"."
+msgstr "Vienums tika negaidīti noņemts: \"%s\"."
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:584
+#, c-format
+msgid "Remove \"%s\"?"
+msgstr "Noņemt \"%s\"?"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:599
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Šis vienums tiks noņemts no paneļa un tā saglabātā konfigurācija pazudīs."
+
+#. configure, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:788
+msgid "Properties"
+msgstr "Rekvizīti"
+
+#. about item, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:805
+msgid "About"
+msgstr "Par"
+
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
+msgid "Move"
+msgstr "Pārvietot"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+msgid "Remove"
+msgstr "Noņemt"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+msgid "Add New Item"
+msgstr "Pievienot Jaunu Vienumu"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:866
+#: ../panel/panel.c:697
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
+msgid "Customize Panel"
+msgstr "Pielāgot Paneli"
+
+#: ../panel/panel.c:708
+msgid "Add Items"
+msgstr "Pievienot Vienumus"
+
+#: ../panel/panel.c:724
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
+msgid "Quit"
+msgstr "Iziet"
+
+#: ../panel/panel.c:734
+msgid "Restart"
+msgstr "Restartēt"
+
+#: ../panel/panel.c:748
+msgid "About the Xfce Panel"
+msgstr "Par Xfce Paneli"
+
+#: ../panel/panel-app.c:238
+#: ../panel/panel-app.c:876
+msgid "Exit Xfce Panel?"
+msgstr "Iziet no Xfce Panelis?"
+
+#: ../panel/panel-app.c:874
+#: ../panel/panel-app.c:906
+#: ../panel/panel-app.c:940
+#: ../plugins/launcher/launcher.c:375
+#: ../plugins/launcher/launcher.c:401
+#: ../plugins/launcher/launcher.c:437
+msgid "Xfce Panel"
+msgstr "Xfce Panelis"
+
+#: ../panel/panel-app.c:877
+msgid "You can't remove the last panel. Would you like to exit the program?"
+msgstr "Jūs nevarat noņemt pēdējo paneli. Vai vēlaties iziet no programmas?"
+
+#: ../panel/panel-app.c:904
+#, c-format
+msgid "Remove Panel \"%d\"?"
+msgstr "Noņemt Paneli \"%d\"?"
+
+#: ../panel/panel-app.c:908
+msgid "The selected panel and all its items will be removed."
+msgstr "Izvēlētais panelis un visi tā vienumi tiks noņemti."
+
+#: ../panel/panel-app.c:947
+#: ../panel/panel-app.c:950
+msgid "Developer"
+msgstr "Izstrādātājs"
+
+#: ../panel/main.c:46
+#, c-format
+msgid ""
+"\n"
+" Xfce Panel %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
+msgstr ""
+"\n"
+" Xfce Panelis %s\n"
+"\n"
+" Daļa no Xfce Vides\n"
+" http://www.xfce.org\n"
+"\n"
+" Licencēta zem GNU GPL.\n"
+"\n"
+
+#: ../panel/main.c:52
+#, c-format
+msgid ""
+" Usage: %s [OPTIONS]\n"
+"\n"
+msgstr ""
+" Lietošana: %s [OPCIJAS]\n"
+"\n"
+
+#. Only translate the descriptions, not the options itself
+#: ../panel/main.c:55
+msgid ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save configuration\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Close all panels and end the program\n"
+" -a, --add       Add new items\n"
+"\n"
+msgstr ""
+" OPCIJAS\n"
+" -h, --help      Rāda šo ziņu un iziet\n"
+" -v, --version   Rāda šo ziņu un iziet\n"
+" -c, --customize Rāda konfigurācijas dialogu\n"
+" -s, --save      Saglabā konfigurāciju\n"
+" -r, --restart   Restartē paneļus\n"
+" -q, --quit      Pārtrauc sesiju\n"
+" -x, --exit      Aizver visus paneļus un aizver programmu\n"
+" -a, --add       Pievieno jaunus vienumus\n"
+"\n"
+
+#: ../panel/panel-dialogs.c:184
+#, c-format
+msgid "Could not open \"%s\" module"
+msgstr "Nevarēju atvērt moduli \"%s\""
+
+#: ../panel/panel-dialogs.c:597
+msgid "Add Items to the Panel"
+msgstr "Pievienot Vienumus Panelim"
+
+#: ../panel/panel-dialogs.c:627
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Velciet vienumus no saraksta uz paneli, vai noņemiet velkot no paneļa atpakaļ sarakstā."
+
+#: ../panel/panel-dialogs.c:644
+msgid "Available Items"
+msgstr "Pieejamie Vienumi"
+
+#: ../panel/panel-dialogs.c:870
+#: ../panel/panel-dialogs.c:1094
+msgid "Normal Width"
+msgstr "Normāls Platums"
+
+#: ../panel/panel-dialogs.c:872
+#: ../panel/panel-dialogs.c:1096
+msgid "Full Width"
+msgstr "Pilns Platums"
+
+#: ../panel/panel-dialogs.c:878
+#: ../panel/panel-dialogs.c:1102
+msgid "Span Monitors"
+msgstr "Savienot Monitorus"
+
+#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:1167
+msgid "Left"
+msgstr "Kreisā"
+
+#: ../panel/panel-dialogs.c:940
+#: ../panel/panel-dialogs.c:1169
+msgid "Right"
+msgstr "Labā"
+
+#: ../panel/panel-dialogs.c:945
+#: ../panel/panel-dialogs.c:1174
+msgid "Top"
+msgstr "Augšā"
+
+#: ../panel/panel-dialogs.c:947
+#: ../panel/panel-dialogs.c:1176
+msgid "Bottom"
+msgstr "Apakšā"
+
+#. position
+#: ../panel/panel-dialogs.c:975
+msgid "Position"
+msgstr "Pozīcija"
+
+#: ../panel/panel-dialogs.c:989
+msgid "Fixed Position"
+msgstr "Fiksēta Pozīcija"
+
+#: ../panel/panel-dialogs.c:995
+msgid "Freely Moveable"
+msgstr "Brīvi Pārvietojams"
+
+#: ../panel/panel-dialogs.c:1110
+msgid "Auto_hide"
+msgstr "Autmātiska _slēpšana"
+
+#: ../panel/panel-dialogs.c:1128
+#: ../plugins/actions/actions.c:471
+msgid "Orientation:"
+msgstr "Novietojums:"
+
+#: ../panel/panel-dialogs.c:1140
+#: ../plugins/actions/actions.c:484
+msgid "Horizontal"
+msgstr "Horizontāls"
+
+#: ../panel/panel-dialogs.c:1142
+#: ../plugins/actions/actions.c:485
+msgid "Vertical"
+msgstr "Vertikāls"
+
+#: ../panel/panel-dialogs.c:1151
+msgid "Handle:"
+msgstr "Tureklis:"
+
+#: ../panel/panel-dialogs.c:1163
+msgid "At both sides"
+msgstr "Abās pusēs"
+
+#: ../panel/panel-dialogs.c:1236
+msgid "Select Monitor"
+msgstr "Norādīt Monitoru"
+
+#. Button Layout
+#: ../panel/panel-dialogs.c:1354
+#: ../plugins/clock/clock.c:496
+#: ../plugins/tasklist/tasklist.c:424
+#: ../plugins/windowlist/windowlist-dialog.c:190
+msgid "Appearance"
+msgstr "Izskats"
+
+#. size
+#: ../panel/panel-dialogs.c:1365
+msgid "Size (pixels):"
+msgstr "Izmērs (pikseļos):"
+
+#: ../panel/panel-dialogs.c:1393
+msgid "Transparency (%):"
+msgstr "Caurspīdība (%s):"
+
+#: ../panel/panel-dialogs.c:1417
+msgid "Make active panel opaque"
+msgstr "Padarīt aktīvo paneli puscaurspīdīgu"
+
+#: ../panel/panel-dialogs.c:1456
+#: ../panel/panel-dialogs.c:1492
+#: ../panel/panel-dialogs.c:1517
+#, c-format
+msgid "Panel %d"
+msgstr "Panelis %d"
+
+#: ../panel/panel-dialogs.c:1536
+msgid "Remove Panel"
+msgstr "Noņemt Paneli"
+
+#: ../panel/panel-dialogs.c:1549
+msgid "New Panel"
+msgstr "Jauns Panelis"
+
+#: ../panel/panel-dialogs.c:1606
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel Manager"
+msgstr "Paneļu Pārvaldnieks"
+
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:459
+msgid "Lock screen"
+msgstr "Aizslēgt ekrānu"
+
+#: ../plugins/actions/actions.c:419
+msgid "Panel Actions"
+msgstr "Paneļa Darbības"
+
+#: ../plugins/actions/actions.c:449
+msgid "Select action type:"
+msgstr "Norādiet darbības tipu:"
+
+#: ../plugins/actions/actions.c:460
+msgid "Quit + Lock screen"
+msgstr "Iziet + Noslēgt ekrānu"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: ../plugins/clock/clock.c:122
+msgid "%A %d %B %Y"
+msgstr "%A %d %B %Y"
+
+#: ../plugins/clock/clock.c:481
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Pulkstenis"
+
+#. Keep order in sync with XfceClockMode
+#: ../plugins/clock/clock.c:508
+msgid "Analog"
+msgstr "Analogs"
+
+#: ../plugins/clock/clock.c:509
+msgid "Digital"
+msgstr "Digitāls"
+
+#: ../plugins/clock/clock.c:510
+msgid "LED"
+msgstr "LED"
+
+#: ../plugins/clock/clock.c:515
+#: ../plugins/systray/systray.c:402
+msgid "Show _frame"
+msgstr "Rādīt _rāmi"
+
+#: ../plugins/clock/clock.c:522
+msgid "Clock Options"
+msgstr "Pulksteņa Uzstādījumi"
+
+#: ../plugins/clock/clock.c:530
+msgid "Use 24-_hour clock"
+msgstr "Izmantot 24-_stundu pulksteni"
+
+#: ../plugins/clock/clock.c:537
+msgid "Show AM/PM"
+msgstr "Rādīt AM/PM"
+
+#: ../plugins/clock/clock.c:544
+msgid "Display seconds"
+msgstr "Attēlot sekundes"
+
+#: ../plugins/iconbox/iconbox.c:901
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+msgid "Icon Box"
+msgstr "Ikonu Kaste"
+
+#: ../plugins/iconbox/iconbox.c:926
+msgid "Only show minimized applications"
+msgstr "Rādīt tikai minimizētās lietotnes"
+
+#: ../plugins/iconbox/iconbox.c:935
+msgid "Show applications of all workspaces"
+msgstr "Rādīt lietotnes no visām darbavietām"
+
+#: ../plugins/iconbox/iconbox.c:943
+#: ../plugins/tasklist/tasklist.c:447
+msgid "Use all available space"
+msgstr "Izmantot visu pieejamo vietu"
+
+#: ../plugins/launcher/launcher.c:373
+#: ../plugins/launcher/launcher.c:435
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Nevarēju palaist \"%s\""
+
+#: ../plugins/launcher/launcher.c:398
+#, c-format
+msgid "Error in command \"%s\""
+msgstr "Kļūda komandā \"%s\""
+
+#: ../plugins/launcher/launcher.c:675
+#: ../plugins/launcher/launcher.c:1303
+#: ../plugins/launcher/launcher-dialog.c:1167
+msgid "New Item"
+msgstr "Jauns Vienums"
+
+#: ../plugins/launcher/launcher.c:1304
+msgid "This item has not yet been configured"
+msgstr "Šis vienums vēl nav konfigurēts"
+
+#: ../plugins/launcher/launcher-dialog.c:101
+msgid "Default"
+msgstr "Noklusētais"
+
+#: ../plugins/launcher/launcher-dialog.c:103
+msgid "File management"
+msgstr "Failu pārvaldnieks"
+
+#: ../plugins/launcher/launcher-dialog.c:104
+msgid "Utilities"
+msgstr "Utilītas"
+
+#: ../plugins/launcher/launcher-dialog.c:105
+msgid "Games"
+msgstr "Spēles"
+
+#: ../plugins/launcher/launcher-dialog.c:106
+msgid "Help browser"
+msgstr "Palīdzības Pārlūks"
+
+#: ../plugins/launcher/launcher-dialog.c:107
+msgid "Multimedia"
+msgstr "Multimēdia"
+
+#: ../plugins/launcher/launcher-dialog.c:108
+msgid "Network"
+msgstr "Tīkls"
+
+#: ../plugins/launcher/launcher-dialog.c:109
+msgid "Graphics"
+msgstr "Grafika"
+
+#: ../plugins/launcher/launcher-dialog.c:110
+msgid "Printer"
+msgstr "Printeris"
+
+#: ../plugins/launcher/launcher-dialog.c:111
+msgid "Productivity"
+msgstr "Produktivitāte"
+
+#: ../plugins/launcher/launcher-dialog.c:112
+msgid "Office"
+msgstr "Birojs"
+
+#: ../plugins/launcher/launcher-dialog.c:113
+msgid "Sound"
+msgstr "Skaņa"
+
+#: ../plugins/launcher/launcher-dialog.c:114
+msgid "Terminal"
+msgstr "Terminālis"
+
+#: ../plugins/launcher/launcher-dialog.c:115
+msgid "Development"
+msgstr "Izstrādāja"
+
+#: ../plugins/launcher/launcher-dialog.c:413
+msgid "Select image file"
+msgstr "Norādiet attēla failu"
+
+#: ../plugins/launcher/launcher-dialog.c:459
+msgid "Select command"
+msgstr "Norādiet komandu"
+
+#: ../plugins/launcher/launcher-dialog.c:482
+msgid "Name"
+msgstr "Nosaukums"
+
+#: ../plugins/launcher/launcher-dialog.c:500
+msgid "Description"
+msgstr "Apraksts"
+
+#: ../plugins/launcher/launcher-dialog.c:555
+msgid "Other..."
+msgstr "Citi..."
+
+#: ../plugins/launcher/launcher-dialog.c:653
+msgid "Command"
+msgstr "Komanda"
+
+#: ../plugins/launcher/launcher-dialog.c:689
+msgid "Run in _terminal"
+msgstr "Izpildīt _terminālī"
+
+#: ../plugins/launcher/launcher-dialog.c:707
+msgid "Use _startup notification"
+msgstr "Izmantot _sāknēšanas paziņošanu"
+
+#: ../plugins/launcher/launcher-dialog.c:1289
+msgid "The first item in the list is shown on the panel. Additional items will appear in a menu."
+msgstr "Pirmais saraksta vienums tiek rādīts uz paneļa. Papildus vienumi parādīsies izvēlnē."
+
+#: ../plugins/launcher/launcher-dialog.c:1332
+msgid "Program Launcher"
+msgstr "Programmu Palaidējs"
+
+#: ../plugins/launcher/launcher-dialog.c:1420
+#: ../plugins/launcher/launcher-dialog.c:1521
+#, c-format
+msgid ""
+"Failed to run 0launch:\n"
+"%s\n"
+"\n"
+"For help using Zero Install, see http://0install.net"
+msgstr ""
+"Neizdevas palaist 0launch:\n"
+"%s\n"
+"\n"
+"Palīdziba par Nulles Installācijas izmantošanu pieejama http://0install.net"
+
+#: ../plugins/launcher/launcher-dialog.c:1486
+msgid "The Zero Install GUI has finished, but the launcher dialog has disappeared in the meantime. Not adding launcher (but any files downloaded have not been lost)."
+msgstr "Nulles Instalācijas GUI izpildījis uzdevumu, bet palaidēja dialogs ir pazudis šai laikā. Nepievienoju palaidēju (bet lejupielādētie faili nav zuduši)."
+
+#: ../plugins/launcher/launcher-dialog.c:1899
+msgid "Select file"
+msgstr "Norādiet Failu"
+
+#: ../plugins/pager/pager.c:338
+#: ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Pager"
+msgstr "Peidžeris"
+
+#: ../plugins/pager/pager.c:369
+msgid "Number of rows:"
+msgstr "Rindu skaits:"
+
+#: ../plugins/pager/pager.c:373
+msgid "Number of columns:"
+msgstr "Kolonnu skaits:"
+
+#: ../plugins/pager/pager.c:399
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Pārslēgt darbavietas izmantojot peles ritentiņu"
+
+#: ../plugins/separator/separator.c:255
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator or Spacing"
+msgstr "Atdalītājs vai Atkāpe"
+
+#: ../plugins/separator/separator.c:279
+msgid "_Draw Separator"
+msgstr "_Zīmēt Atdalītāju"
+
+#: ../plugins/separator/separator.c:288
+msgid "_Expand"
+msgstr "_Paplašināt"
+
+#: ../plugins/showdesktop/showdesktop.c:32
+msgid "Restore hidden windows"
+msgstr "Atjaunot slēptos logus"
+
+#: ../plugins/showdesktop/showdesktop.c:33
+msgid "Hide windows and show desktop"
+msgstr "Slēpt logus un rādīt darbavirsmu"
+
+#: ../plugins/systray/systray.c:69
+#: ../plugins/systray/systray.c:84
+msgid "There is already a system tray running on this screen"
+msgstr "Sistēmas Josla jau skrien šai ekrānā"
+
+#: ../plugins/systray/systray.c:90
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Neizdevās reģistrēt sistēmas joslu: %s"
+
+#: ../plugins/systray/systray.c:378
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid "System Tray"
+msgstr "Sistēmas Josla"
+
+#: ../plugins/tasklist/tasklist.c:396
+#: ../plugins/tasklist/tasklist.c:469
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+msgid "Task List"
+msgstr "Uzdevumu Saraksts"
+
+#: ../plugins/tasklist/tasklist.c:432
+msgid "Minimum Width:"
+msgstr "Minimālais Platums:"
+
+#: ../plugins/tasklist/tasklist.c:456
+msgid "Use flat buttons"
+msgstr "Izmantot plakanās pogas"
+
+#: ../plugins/tasklist/tasklist.c:473
+msgid "Show tasks from _all workspaces"
+msgstr "Rādīt uzdevumus no _visām darbavietām"
+
+#: ../plugins/tasklist/tasklist.c:483
+msgid "Show application _names"
+msgstr "Rādīt lietotnes _nosaukumus"
+
+#: ../plugins/tasklist/tasklist.c:497
+msgid "Never group tasks"
+msgstr "Nekad negrupēt uzdevumus"
+
+#: ../plugins/tasklist/tasklist.c:500
+msgid "Automatically group tasks"
+msgstr "Automātiski grupēt uzdevumus"
+
+#: ../plugins/tasklist/tasklist.c:503
+msgid "Always group tasks"
+msgstr "Vienmēr grupēt uzdevumus"
+
+#: ../plugins/windowlist/windowlist.c:242
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr "Esat drošs, ka vēlaties noņemt darbavietu %d?"
+
+#: ../plugins/windowlist/windowlist.c:243
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr "Esat drošs, ka vēlaties noņemt darbavietu '%s'?"
+
+#: ../plugins/windowlist/windowlist.c:508
+#, c-format
+msgid "Workspace %d"
+msgstr "Darbavieta %d"
+
+#: ../plugins/windowlist/windowlist.c:619
+#: ../plugins/windowlist/windowlist.c:625
+msgid "Add workspace"
+msgstr "Pievienot darbavietu"
+
+#: ../plugins/windowlist/windowlist.c:644
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Noņemt Darbavietu %d"
+
+#: ../plugins/windowlist/windowlist.c:645
+#, c-format
+msgid "Remove Workspace '%s'"
+msgstr "Noņemt Darbavietu '%s'"
+
+#. Windowlist Settings
+#: ../plugins/windowlist/windowlist-dialog.c:121
+#: ../plugins/windowlist/windowlist-dialog.c:212
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:2
+msgid "Window List"
+msgstr "Logu Saraksts"
+
+#: ../plugins/windowlist/windowlist-dialog.c:150
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Steidzamā paziņošana</i> mirkšķinās pogu, kad lietotnei nepieciešama uzmanība."
+
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:157
+msgid "Urgency Notification"
+msgstr "Steidzamā Paziņošana"
+
+#: ../plugins/windowlist/windowlist-dialog.c:164
+msgid "_Disabled"
+msgstr "_Atspējots"
+
+#: ../plugins/windowlist/windowlist-dialog.c:173
+msgid "For _other workspaces"
+msgstr "Priekš _citām darbavietām"
+
+#: ../plugins/windowlist/windowlist-dialog.c:182
+msgid "For _all workspaces"
+msgstr "Visām _darbavietām"
+
+#: ../plugins/windowlist/windowlist-dialog.c:196
+msgid "_Icon button"
+msgstr "_Ikonas poga"
+
+#: ../plugins/windowlist/windowlist-dialog.c:203
+msgid "A_rrow button"
+msgstr "B_ultas poga"
+
+#: ../plugins/windowlist/windowlist-dialog.c:221
+msgid "Show _windows from all workspaces"
+msgstr "Rādīt _logus no visām darbavietām"
+
+#: ../plugins/windowlist/windowlist-dialog.c:230
+msgid "Show a_pplication icons"
+msgstr "Rādīt _lietotnes ikonas"
+
+#: ../plugins/windowlist/windowlist-dialog.c:239
+msgid "Show wor_kspace actions"
+msgstr "Rādīt dar_bavietas darbības"
+
+#: ../mcs-plugin/plugin.c:46
+msgid "Panel"
+msgstr "Panelis"
+
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "Darbību Pogas"
+
+#: ../plugins/actions/actions.desktop.in.in.h:2
+msgid "Log out or lock the screen"
+msgstr "Atteikties vai noslēgt ekrānu"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "Cik rāda pulkstenis?"
+
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+msgid "Show icons of all running applications"
+msgstr "Rādīt ikonas no visām skrejošām lietotnēm"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Palaidējs"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr "Programu palaidējs ar iespējamu izvēlni"
+
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Miniature view of all virtual desktops"
+msgstr "Miniatūras skats uz visām virtuālajām darbavirsmām"
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr "Pievieno atstarpi vai līniju starp paneļa vienumiem"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Show Desktop"
+msgstr "Rādīt Darbavirsmu"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Toggle desktop show/hide"
+msgstr "Pārslēgt darbavirsmu rādit/slēpt"
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Show notification icons"
+msgstr "Rādīt paziņošanas ikonas"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Show all running applications"
+msgstr "Rādīt visas skrejošās lietotnes"
+
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:1
+msgid "Show list of available windows"
+msgstr "Rādīt sarakstu ar visiem pieejamajiem logiem"
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+msgid "Xfce 4 Panel Manager"
+msgstr "Xfce 4 Paneļu Pārvaldnieks"
+
