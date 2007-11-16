@@ -1,6 +1,3 @@
-NEWS for xfce4-panel
-====================
-
 4.4.2
 =====
 - Fix window manager hints reporting width 1 pixel too wide (bug #3402).
@@ -19,6 +16,12 @@ NEWS for xfce4-panel
 - Use 'exo-open --launch TerminalEmulator' in the default configuration
   (Bug #3384). (Nick)
 - Fix crash when removing a panel in Gtk+ 2.11.x (bug #3496). (Nick)
+- Remove trailing parens on AC_INIT version info to work around bug
+  in intltool 0.35.x and 0.36.x. (Brian)
+- Updated translations: Pau Rul-lan Ferragut (ca), Fabio Riga (it),
+  Terje Uriansrud (nb_NO), Nuno Miguel (pt_PT), Vincent Tunru (nl),
+  Dimitri Gogelia (ka), Ivan Masár (sk), Fábio Nogueira (pt_BR).
+- New translations: Tegegne Tefera (am), RPrieditis (lv).
 
 
 4.4.1
