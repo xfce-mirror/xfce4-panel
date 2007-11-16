@@ -24,26 +24,21 @@
 #ifndef __XFCE_TRAY_MANAGER_H__
 #define __XFCE_TRAY_MANAGER_H__
 
+#define XFCE_TRAY_MANAGER_ENABLE_MESSAGES 0
+
+
+
 typedef struct _XfceTrayManagerClass XfceTrayManagerClass;
 typedef struct _XfceTrayManager      XfceTrayManager;
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 typedef struct _XfceTrayMessage      XfceTrayMessage;
-typedef struct _XfceTrayApplication  XfceTrayApplication;
-
-struct _XfceTrayApplication
-{
-    /* the name of the applications */
-    gchar          *name;
-
-    /* whether it should be hidden */
-    guint           hidden : 1;
-};
+#endif
 
 enum
 {
     XFCE_TRAY_MANAGER_ERROR_SELECTION_FAILED
 };
 
-#define XFCE_TRAY_MANAGER_ENABLE_MESSAGES 0
 
 
 #define XFCE_TYPE_TRAY_MANAGER            (xfce_tray_manager_get_type ())
@@ -53,6 +48,8 @@ enum
 #define XFCE_IS_TRAY_MANAGER_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_TRAY_MANAGER))
 #define XFCE_TRAY_MANAGER_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_TRAY_MANAGER, XfceTrayManagerClass))
 #define XFCE_TRAY_MANAGER_ERROR           (xfce_tray_manager_error_quark())
+
+
 
 GType                xfce_tray_manager_get_type               (void) G_GNUC_CONST G_GNUC_INTERNAL;
 
@@ -73,20 +70,7 @@ GtkOrientation       xfce_tray_manager_get_orientation        (XfceTrayManager  
 void                 xfce_tray_manager_set_orientation        (XfceTrayManager  *manager,
                                                                GtkOrientation    orientation) G_GNUC_INTERNAL;
 
-XfceTrayApplication *xfce_tray_manager_application_add        (XfceTrayManager  *manager,
-                                                               const gchar      *name,
-                                                               gboolean          hidden) G_GNUC_INTERNAL;
-
-void                 xfce_tray_manager_application_update     (XfceTrayManager  *manager,
-                                                               const gchar      *name,
-                                                               gboolean          hidden) G_GNUC_INTERNAL;
-
-GSList              *xfce_tray_manager_application_list       (XfceTrayManager  *manager,
-                                                               gboolean          sorted) G_GNUC_MALLOC G_GNUC_INTERNAL;
-
-const gchar         *xfce_tray_manager_application_get_name   (GtkWidget        *socket) G_GNUC_INTERNAL;
-
-gboolean             xfce_tray_manager_application_get_hidden (GtkWidget        *socket) G_GNUC_INTERNAL;
+gchar               *xfce_tray_manager_get_application_name   (GtkWidget        *socket) G_GNUC_MALLOC G_GNUC_INTERNAL;
 
 
 #endif /* !__XFCE_TRAY_MANAGER_H__ */

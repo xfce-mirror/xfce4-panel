@@ -81,14 +81,6 @@ static void                 xfce_tray_manager_handle_dock_request               
                                                                                   XClientMessageEvent  *xevent);
 static gboolean             xfce_tray_manager_handle_undock_request              (GtkSocket            *socket,
                                                                                   gpointer              user_data);
-static gint                 xfce_tray_manager_application_list_compare           (gconstpointer         a,
-                                                                                  gconstpointer         b);
-static void                 xfce_tray_manager_application_free                   (XfceTrayApplication  *application);
-static XfceTrayApplication *xfce_tray_manager_application_find                   (XfceTrayManager      *manager,
-                                                                                  const gchar          *name);
-static void                 xfce_tray_manager_application_set_socket             (XfceTrayManager      *manager,
-                                                                                  GtkWidget            *socket,
-                                                                                  Window                xwindow);
 #if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 static void                 xfce_tray_message_free                               (XfceTrayMessage      *message);
 static void                 xfce_tray_message_remove_from_list                   (XfceTrayManager      *manager,
@@ -98,7 +90,6 @@ static void                 xfce_tray_message_remove_from_list                  
 
 enum
 {
-  TRAY_ICON_SET_PARENT,
   TRAY_ICON_ADDED,
   TRAY_ICON_REMOVED,
 #if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
@@ -137,11 +128,9 @@ struct _XfceTrayManager
 
     /* _net_system_tray_s%d atom */
     GdkAtom         selection_atom;
-
-    /* list of known and hidden applications */
-    GSList         *applications;
 };
 
+#if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
 struct _XfceTrayMessage
 {
     /* message string */
@@ -158,6 +147,7 @@ struct _XfceTrayMessage
     glong           remaining_length;
     glong           timeout;
 };
+#endif
 
 
 
@@ -197,15 +187,6 @@ xfce_tray_manager_class_init (XfceTrayManagerClass *klass)
 
     gobject_class = (GObjectClass *)klass;
     gobject_class->finalize = xfce_tray_manager_finalize;
-
-    xfce_tray_manager_signals[TRAY_ICON_SET_PARENT] =
-        g_signal_new (I_("tray-icon-set-parent"),
-                      G_OBJECT_CLASS_TYPE (klass),
-                      G_SIGNAL_RUN_LAST,
-                      0, NULL, NULL,
-                      g_cclosure_marshal_VOID__OBJECT,
-                      G_TYPE_NONE, 1,
-                      GTK_TYPE_SOCKET);
 
     xfce_tray_manager_signals[TRAY_ICON_ADDED] =
         g_signal_new (I_("tray-icon-added"),
@@ -266,7 +247,6 @@ xfce_tray_manager_init (XfceTrayManager *manager)
   /* initialize */
   manager->invisible = NULL;
   manager->orientation = GTK_ORIENTATION_HORIZONTAL;
-  manager->applications = NULL;
 #if XFCE_TRAY_MANAGER_ENABLE_MESSAGES
   manager->messages = NULL;
 #endif
@@ -297,9 +277,6 @@ xfce_tray_manager_finalize (GObject *object)
 {
     XfceTrayManager *manager = XFCE_TRAY_MANAGER (object);
 
-    /* unregsiter the manager */
-    xfce_tray_manager_unregister (manager);
-
     /* destroy the hash table */
     g_hash_table_destroy (manager->sockets);
 
@@ -314,17 +291,9 @@ xfce_tray_manager_finalize (GObject *object)
     }
 #endif
 
-    if (manager->applications)
-    {
-        /* free all items */
-        g_slist_foreach (manager->applications, (GFunc) xfce_tray_manager_application_free, NULL);
-
-        /* free the list */
-        g_slist_free (manager->applications);
-    }
-
     G_OBJECT_CLASS (xfce_tray_manager_parent_class)->finalize (object);
 }
+
 
 
 XfceTrayManager *
@@ -332,6 +301,7 @@ xfce_tray_manager_new (void)
 {
     return g_object_new (XFCE_TYPE_TRAY_MANAGER, NULL);
 }
+
 
 
 gboolean
@@ -471,8 +441,14 @@ xfce_tray_manager_remove_socket (gpointer key,
                                  gpointer value,
                                  gpointer user_data)
 {
-    /* undock the socket */
-    xfce_tray_manager_handle_undock_request (value, user_data);
+    XfceTrayManager *manager = XFCE_TRAY_MANAGER (user_data);
+    GtkSocket       *socket = GTK_SOCKET (value);
+
+    _panel_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
+    _panel_return_if_fail (GTK_IS_SOCKET (socket));
+
+    /* properly undock from the tray */
+    g_signal_emit (manager, xfce_tray_manager_signals[TRAY_ICON_REMOVED], 0, socket);
 }
 
 
@@ -719,27 +695,6 @@ xfce_tray_manager_handle_cancel_message (XfceTrayManager     *manager,
 
 
 static void
-xfce_tray_manager_handle_plug_added (GtkSocket       *socket,
-                                     XfceTrayManager *manager)
-{
-    /* this function works the same as gtk_widget_show_now, but waits
-     * until the remote window is mapped. this is needed to fix problems
-     * with empty icons in the tray when they are added. */
-
-    /* show the socket */
-    gtk_widget_show (GTK_WIDGET (socket));
-
-    /* enter the main loop until the socket is mapped */
-    while (GTK_SOCKET (socket)->is_mapped == FALSE)
-        gtk_main_iteration ();
-
-    /* add the icon to the tray */
-    g_signal_emit (manager, xfce_tray_manager_signals[TRAY_ICON_ADDED], 0, socket);
-}
-
-
-
-static void
 xfce_tray_manager_handle_dock_request (XfceTrayManager     *manager,
                                        XClientMessageEvent *xevent)
 {
@@ -764,18 +719,14 @@ xfce_tray_manager_handle_dock_request (XfceTrayManager     *manager,
     /* connect the xwindow data to the socket */
     g_object_set_data_full (G_OBJECT (socket), I_("xfce-tray-manager-xwindow"), xwindow, g_free);
 
-    /* set the application on the socket */
-    xfce_tray_manager_application_set_socket (manager, socket, *xwindow);
-
-    /* set the parent of the icon */
-    g_signal_emit (manager, xfce_tray_manager_signals[TRAY_ICON_SET_PARENT], 0, socket);
+    /* add the icon to the tray */
+    g_signal_emit (manager, xfce_tray_manager_signals[TRAY_ICON_ADDED], 0, socket);
 
     /* check if the widget has been attached. if the widget has no
        toplevel window, we cannot set the socket id. */
     if (G_LIKELY (GTK_IS_WINDOW (gtk_widget_get_toplevel (socket))))
     {
         /* signal to monitor if the client is removed from the socket */
-        g_signal_connect (G_OBJECT (socket), "plug-added", G_CALLBACK (xfce_tray_manager_handle_plug_added), manager);
         g_signal_connect (G_OBJECT (socket), "plug-removed", G_CALLBACK (xfce_tray_manager_handle_undock_request), manager);
 
         /* register the xembed client window id for this socket */
@@ -786,6 +737,9 @@ xfce_tray_manager_handle_dock_request (XfceTrayManager     *manager,
     }
     else
     {
+        /* warning */
+        g_warning ("No parent window set, destroying socket");
+
         /* not attached successfully, destroy it */
         gtk_widget_destroy (socket);
     }
@@ -813,7 +767,6 @@ xfce_tray_manager_handle_undock_request (GtkSocket *socket,
 
     /* unset object data */
     g_object_set_data (G_OBJECT (socket), I_("xfce-tray-manager-xwindow"), NULL);
-    g_object_set_data (G_OBJECT (socket), I_("xfce-tray-manager-application"), NULL);
 
     /* destroy the socket */
     return FALSE;
@@ -869,206 +822,49 @@ xfce_tray_manager_set_orientation (XfceTrayManager *manager,
 
 
 
-/**
- * known tray applications
- **/
-XfceTrayApplication *
-xfce_tray_manager_application_add (XfceTrayManager *manager,
-                                   const gchar     *name,
-                                   gboolean         hidden)
+gchar *
+xfce_tray_manager_get_application_name (GtkWidget *socket)
 {
-    XfceTrayApplication *application;
+    gchar         *name = NULL;
+    GdkDisplay    *display;
+    gint           succeed;
+    XTextProperty  xprop;
+    Window        *xwindow;
 
-    _panel_return_val_if_fail (XFCE_IS_TRAY_MANAGER (manager), NULL);
-    _panel_return_val_if_fail (name, NULL);
+    /* get the xwindow */
+    xwindow = g_object_get_data (G_OBJECT (socket), I_("xfce-tray-manager-xwindow"));
 
-    /* create structure */
-    application = panel_slice_new0 (XfceTrayApplication);
-
-    /* set values */
-    application->name = g_strdup (name);
-    application->hidden = hidden;
-
-    /* add to the list */
-    manager->applications = g_slist_prepend (manager->applications, application);
-
-    /* return the pointer */
-    return application;
-}
-
-
-
-void
-xfce_tray_manager_application_update (XfceTrayManager *manager,
-                                      const gchar     *name,
-                                      gboolean         hidden)
-{
-    GSList              *li;
-    XfceTrayApplication *application;
-
-    _panel_return_if_fail (XFCE_IS_TRAY_MANAGER (manager));
-    _panel_return_if_fail (name);
-
-    /* walk through the known window names */
-    for (li = manager->applications; li != NULL; li = li->next)
+    if (G_LIKELY (xwindow))
     {
-        application = li->data;
+        /* get the display of the socket */
+        display = gtk_widget_get_display (socket);
 
-        /* check if the names match */
-        if (strcmp (application->name, name) == 0)
+        /* avoid exiting the application on X errors */
+        gdk_error_trap_push ();
+
+        /* try to get the wm name (this is more relaiable with qt applications) */
+        succeed = XGetWMName (GDK_DISPLAY_XDISPLAY (display), *xwindow, &xprop);
+
+        /* check if everything went fine */
+        if (G_LIKELY (gdk_error_trap_pop () == 0 && succeed >= Success))
         {
-            /* set the new hidden state */
-            application->hidden = hidden;
-
-            /* stop searching */
-            break;
-        }
-    }
-}
-
-
-
-static gint
-xfce_tray_manager_application_list_compare (gconstpointer a,
-                                            gconstpointer b)
-{
-    XfceTrayApplication *app_a = (XfceTrayApplication *)a;
-    XfceTrayApplication *app_b = (XfceTrayApplication *)b;
-
-    /* sort order when one of the names is null */
-    if (G_UNLIKELY (app_a->name == NULL || app_b->name == NULL))
-        return (app_a->name == app_b->name ? 0 : (app_a->name == NULL ? -1 : 1));
-
-    return strcmp (app_a->name, app_b->name);
-}
-
-
-
-GSList *
-xfce_tray_manager_application_list (XfceTrayManager *manager,
-                                    gboolean         sorted)
-{
-    _panel_return_val_if_fail (XFCE_IS_TRAY_MANAGER (manager), NULL);
-
-    /* sort the list if requested */
-    if (sorted)
-        manager->applications = g_slist_sort (manager->applications, xfce_tray_manager_application_list_compare);
-
-    /* return the list */
-    return manager->applications;
-}
-
-
-
-static void
-xfce_tray_manager_application_free (XfceTrayApplication *application)
-{
-    /* free name */
-    g_free (application->name);
-
-    /* free structure */
-    panel_slice_free (XfceTrayApplication, application);
-}
-
-
-
-static XfceTrayApplication *
-xfce_tray_manager_application_find (XfceTrayManager *manager,
-                                    const gchar     *name)
-{
-    GSList              *li;
-    XfceTrayApplication *application;
-
-    _panel_return_val_if_fail (name, NULL);
-
-    /* walk through the known window names */
-    for (li = manager->applications; li != NULL; li = li->next)
-    {
-        application = li->data;
-
-        /* find a matching name and return the pointer */
-        if (strcmp (application->name, name) == 0)
-            return application;
-    }
-
-    /* no match was found, add the application and return the pointer */
-    return xfce_tray_manager_application_add (manager, name, FALSE);
-}
-
-
-
-static void
-xfce_tray_manager_application_set_socket (XfceTrayManager *manager,
-                                          GtkWidget       *socket,
-                                          Window           xwindow)
-{
-    gchar               *name;
-    GdkDisplay          *display;
-    gint                 succeed;
-    XTextProperty        xprop;
-    XfceTrayApplication *application;
-
-    /* get the display of the socket */
-    display = gtk_widget_get_display (socket);
-
-    /* avoid exiting the application on X errors */
-    gdk_error_trap_push ();
-
-    /* try to get the wm name (this is more relaiable with qt applications) */
-    succeed = XGetWMName (GDK_DISPLAY_XDISPLAY (display), xwindow, &xprop);
-
-    /* check if everything went fine */
-    if (G_LIKELY (gdk_error_trap_pop () == 0 && succeed >= Success))
-    {
-        /* check the xprop content */
-        if (G_LIKELY (xprop.value && xprop.nitems > 0))
-        {
-            /* if the string is utf-8 valid, set the name */
-            if (G_LIKELY (g_utf8_validate ((const gchar *) xprop.value, xprop.nitems, NULL)))
+            /* check the xprop content */
+            if (G_LIKELY (xprop.value && xprop.nitems > 0))
             {
-                /* create the application name (lower case) */
-                name = g_utf8_strdown ((const gchar *) xprop.value, xprop.nitems);
-
-                /* find or create a structure */
-                application = xfce_tray_manager_application_find (manager, name);
+                /* if the string is utf-8 valid, set the name */
+                if (G_LIKELY (g_utf8_validate ((const gchar *) xprop.value, xprop.nitems, NULL)))
+                {
+                    /* create the application name (lower case) */
+                    name = g_utf8_strdown ((const gchar *) xprop.value, xprop.nitems);
+                }
 
                 /* cleanup */
-                g_free (name);
-
-                /* set the object data */
-                g_object_set_data (G_OBJECT (socket), I_("xfce-tray-manager-application"), application);
+                XFree (xprop.value);
             }
-
-            /* cleanup */
-            XFree (xprop.value);
         }
     }
-}
 
-
-
-const gchar *
-xfce_tray_manager_application_get_name (GtkWidget *socket)
-{
-    XfceTrayApplication *application;
-
-    /* get the application data */
-    application = g_object_get_data (G_OBJECT (socket), I_("xfce-tray-manager-application"));
-
-    return (application ? application->name : NULL);
-}
-
-
-
-gboolean
-xfce_tray_manager_application_get_hidden (GtkWidget *socket)
-{
-    XfceTrayApplication *application;
-
-    /* get the application data */
-    application = g_object_get_data (G_OBJECT (socket), I_("xfce-tray-manager-application"));
-
-    return (application ? application->hidden : FALSE);
+    return name;
 }
 
 

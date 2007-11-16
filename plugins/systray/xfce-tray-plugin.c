@@ -36,15 +36,16 @@
 
 
 /* prototypes */
+static void            xfce_tray_plugin_message                 (GtkMessageType      type,
+                                                                 GdkScreen          *screen,
+                                                                 const gchar        *message);
 static gboolean        xfce_tray_plugin_check                   (GdkScreen          *screen);
-static GtkArrowType    xfce_tray_plugin_button_position         (XfcePanelPlugin    *panel_plugin);
+static void            xfce_tray_plugin_update_position         (XfceTrayPlugin     *plugin);
 static XfceTrayPlugin *xfce_tray_plugin_new                     (XfcePanelPlugin    *panel_plugin);
 static void            xfce_tray_plugin_screen_position_changed (XfceTrayPlugin     *plugin,
                                                                  XfceScreenPosition  position);
 static void            xfce_tray_plugin_orientation_changed     (XfceTrayPlugin     *plugin,
                                                                  GtkOrientation      orientation);
-static void            xfce_tray_plugin_tray_size_changed       (XfceTrayPlugin     *plugin,
-                                                                 gint                size);
 static gboolean        xfce_tray_plugin_size_changed            (XfceTrayPlugin     *plugin,
                                                                  guint               size);
 static void            xfce_tray_plugin_read                    (XfceTrayPlugin     *plugin);
@@ -59,7 +60,7 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK (xfce_tray_plugin_construct, xfce
 
 
 
-void
+static void
 xfce_tray_plugin_message (GtkMessageType  type,
                           GdkScreen      *screen,
                           const gchar    *message)
@@ -100,18 +101,19 @@ xfce_tray_plugin_check (GdkScreen *screen)
 
 
 
-static GtkArrowType
-xfce_tray_plugin_button_position (XfcePanelPlugin *panel_plugin)
+static void
+xfce_tray_plugin_update_position (XfceTrayPlugin *plugin)
 {
     XfceScreenPosition  position;
     GdkScreen          *screen;
     GdkRectangle        geom;
     gint                mon, x, y;
+    GtkArrowType        arrow_type;
 
-    _panel_return_val_if_fail (GTK_WIDGET_REALIZED (panel_plugin), GTK_ARROW_LEFT);
+    _panel_return_if_fail (GTK_WIDGET_REALIZED (plugin->panel_plugin));
 
     /* get the plugin position */
-    position = xfce_panel_plugin_get_screen_position (panel_plugin);
+    position = xfce_panel_plugin_get_screen_position (plugin->panel_plugin);
 
     /* get the button position */
     switch (position)
@@ -119,41 +121,100 @@ xfce_tray_plugin_button_position (XfcePanelPlugin *panel_plugin)
         /*    horizontal west */
         case XFCE_SCREEN_POSITION_NW_H:
         case XFCE_SCREEN_POSITION_SW_H:
-            return GTK_ARROW_RIGHT;
+            arrow_type = GTK_ARROW_RIGHT;
+            break;
 
         /* horizontal east */
         case XFCE_SCREEN_POSITION_N:
         case XFCE_SCREEN_POSITION_NE_H:
         case XFCE_SCREEN_POSITION_S:
         case XFCE_SCREEN_POSITION_SE_H:
-            return GTK_ARROW_LEFT;
+            arrow_type = GTK_ARROW_LEFT;
+            break;
 
         /* vertical north */
         case XFCE_SCREEN_POSITION_NW_V:
         case XFCE_SCREEN_POSITION_NE_V:
-            return GTK_ARROW_DOWN;
+            arrow_type = GTK_ARROW_DOWN;
+            break;
 
         /* vertical south */
         case XFCE_SCREEN_POSITION_W:
         case XFCE_SCREEN_POSITION_SW_V:
         case XFCE_SCREEN_POSITION_E:
         case XFCE_SCREEN_POSITION_SE_V:
-            return GTK_ARROW_UP;
+            arrow_type = GTK_ARROW_UP;
+            break;
 
         /* floating */
         default:
             /* get the screen information */
-            screen = gtk_widget_get_screen (GTK_WIDGET (panel_plugin));
-            mon = gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (panel_plugin)->window);
+            screen = gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin));
+            mon = gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (plugin->panel_plugin)->window);
             gdk_screen_get_monitor_geometry (screen, mon, &geom);
-            gdk_window_get_root_origin (GTK_WIDGET (panel_plugin)->window, &x, &y);
+            gdk_window_get_root_origin (GTK_WIDGET (plugin->panel_plugin)->window, &x, &y);
 
             /* get the position based on the screen position */
             if (position == XFCE_SCREEN_POSITION_FLOATING_H)
-                return ((x < (geom.x + geom.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT);
+                arrow_type = ((x < (geom.x + geom.width / 2)) ? GTK_ARROW_RIGHT : GTK_ARROW_LEFT);
             else
-                return ((y < (geom.y + geom.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP);
+                arrow_type = ((y < (geom.y + geom.height / 2)) ? GTK_ARROW_DOWN : GTK_ARROW_UP);
+            break;
     }
+
+    /* set the arrow type of the tray widget */
+    xfce_tray_widget_set_arrow_type (XFCE_TRAY_WIDGET (plugin->tray), arrow_type);
+
+    /* update the manager orientation */
+    xfce_tray_manager_set_orientation (plugin->manager, xfce_screen_position_get_orientation (position));
+}
+
+
+
+static void
+xfce_tray_plugin_icon_added (XfceTrayManager *manager,
+                             GtkWidget       *icon,
+                             XfceTrayPlugin  *plugin)
+{
+    gchar *name;
+
+    /* get the application name */
+    name = xfce_tray_manager_get_application_name (icon);
+
+    /* add the icon to the widget */
+    xfce_tray_widget_add_with_name (XFCE_TRAY_WIDGET (plugin->tray), icon, name);
+
+    /* cleanup */
+    g_free (name);
+
+    /* show icon */
+    gtk_widget_show (icon);
+}
+
+
+
+static void
+xfce_tray_plugin_icon_removed (XfceTrayManager *manager,
+                               GtkWidget       *icon,
+                               XfceTrayPlugin  *plugin)
+{
+    /* remove from the tray */
+    gtk_container_remove (GTK_CONTAINER (plugin->tray), icon);
+}
+
+
+
+static void
+xfce_tray_plugin_lost_selection (XfceTrayManager *manager,
+                                 XfceTrayPlugin  *plugin)
+{
+    GdkScreen *screen;
+
+    /* get screen */
+    screen = gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin));
+
+    /* message */
+    xfce_tray_plugin_message (GTK_MESSAGE_WARNING, screen, _("The tray manager lost selection"));
 }
 
 
@@ -162,7 +223,9 @@ static XfceTrayPlugin *
 xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
 {
     XfceTrayPlugin *plugin;
-    GtkArrowType    position;
+    gboolean        result;
+    GError         *error = NULL;
+    GdkScreen      *screen;
 
     /* create structure */
     plugin = panel_slice_new0 (XfceTrayPlugin);
@@ -172,32 +235,53 @@ xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
     plugin->manager = NULL;
     plugin->show_frame = TRUE;
 
-    /* try to create the tray */
+    /* create the frame */
+    plugin->frame = gtk_frame_new (NULL);
+    gtk_container_add (GTK_CONTAINER (panel_plugin), plugin->frame);
+    gtk_widget_show (plugin->frame);
+
+    /* create tray widget */
     plugin->tray = xfce_tray_widget_new ();
+    gtk_container_set_border_width (GTK_CONTAINER (plugin->tray), 1);
+    gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->tray);
+    gtk_widget_show (plugin->tray);
 
-    /* get the manager */
-    plugin->manager = xfce_tray_widget_get_manager (XFCE_TRAY_WIDGET (plugin->tray));
-
-    /* set arrow postion */
-    position = xfce_tray_plugin_button_position (panel_plugin);
-    xfce_tray_widget_set_arrow_position (XFCE_TRAY_WIDGET (plugin->tray), position);
+    /* create a tray manager */
+    plugin->manager = xfce_tray_manager_new ();
 
     /* read the plugin settings */
     xfce_tray_plugin_read (plugin);
 
-    /* create the frame */
-    plugin->frame = gtk_frame_new (NULL);
+    /* set frame shadow */
     gtk_frame_set_shadow_type (GTK_FRAME (plugin->frame), plugin->show_frame ? GTK_SHADOW_IN : GTK_SHADOW_NONE);
-    gtk_container_add (GTK_CONTAINER (panel_plugin), plugin->frame);
-    gtk_widget_show (plugin->frame);
 
-    /* add the tray */
-    gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->tray);
-    gtk_widget_show (plugin->tray);
+    /* get screen */
+    screen = gtk_widget_get_screen (GTK_WIDGET (panel_plugin));
 
-    /* connect signal to handle the real plugin size */
-    g_signal_connect_swapped (G_OBJECT (plugin->tray), "tray-size-changed",
-                              G_CALLBACK (xfce_tray_plugin_tray_size_changed), plugin);
+    /* register the tray */
+    result = xfce_tray_manager_register (plugin->manager, screen, &error);
+
+    /* check for problems */
+    if (G_LIKELY (result == TRUE))
+    {
+        /* connect signals */
+        g_signal_connect (G_OBJECT (plugin->manager), "tray-icon-added", G_CALLBACK (xfce_tray_plugin_icon_added), plugin);
+        g_signal_connect (G_OBJECT (plugin->manager), "tray-icon-removed", G_CALLBACK (xfce_tray_plugin_icon_removed), plugin);
+        g_signal_connect (G_OBJECT (plugin->manager), "tray-lost-selection", G_CALLBACK (xfce_tray_plugin_lost_selection), plugin);
+
+        /* update the plugin position */
+        xfce_tray_plugin_update_position (plugin);
+    }
+    else
+    {
+        /* show error */
+        xfce_tray_plugin_message (GTK_MESSAGE_ERROR, screen, error->message);
+
+        /* free error */
+        g_error_free (error);
+    }
+
+
 
     return plugin;
 }
@@ -208,13 +292,8 @@ static void
 xfce_tray_plugin_screen_position_changed (XfceTrayPlugin     *plugin,
                                           XfceScreenPosition  position)
 {
-    GtkArrowType button_position;
-
-    /* get the new position */
-    button_position = xfce_tray_plugin_button_position (plugin->panel_plugin);
-
-    /* set the position */
-    xfce_tray_widget_set_arrow_position (XFCE_TRAY_WIDGET (plugin->tray), button_position);
+    /* update the plugin position */
+    xfce_tray_plugin_update_position (plugin);
 }
 
 
@@ -223,29 +302,8 @@ static void
 xfce_tray_plugin_orientation_changed (XfceTrayPlugin *plugin,
                                       GtkOrientation  orientation)
 {
-    /* invoke the function above */
-    xfce_tray_plugin_screen_position_changed (plugin, XFCE_SCREEN_POSITION_NONE);
-}
-
-
-
-static void
-xfce_tray_plugin_tray_size_changed (XfceTrayPlugin *plugin,
-                                    gint            size)
-{
-    gint panel_size;
-
-    /* get the panel size */
-    panel_size = xfce_panel_plugin_get_size (plugin->panel_plugin);
-
-    /* correct the requested plugin size */
-    size += panel_size > SMALL_PANEL_SIZE ? 6 : 4;
-
-    /* update the plugin size */
-    if (xfce_panel_plugin_get_orientation (plugin->panel_plugin) == GTK_ORIENTATION_HORIZONTAL)
-        gtk_widget_set_size_request (GTK_WIDGET (plugin->panel_plugin), size, panel_size);
-    else
-        gtk_widget_set_size_request (GTK_WIDGET (plugin->panel_plugin), panel_size, size);
+    /* update the plugin position */
+    xfce_tray_plugin_update_position (plugin);
 }
 
 
@@ -262,9 +320,6 @@ xfce_tray_plugin_size_changed (XfceTrayPlugin  *plugin,
     /* get the border size */
     border = size > SMALL_PANEL_SIZE ? 6 : 4;
 
-    /* set the new plugin size */
-    xfce_tray_widget_set_size_request (XFCE_TRAY_WIDGET (plugin->tray), size - border);
-
     /* we handled the size of the plugin */
     return TRUE;
 }
@@ -275,7 +330,7 @@ static void
 xfce_tray_plugin_read (XfceTrayPlugin *plugin)
 {
     gchar     *file;
-    gchar    **applications;
+    gchar    **names;
     gboolean   hidden;
     XfceRc    *rc;
     guint      i;
@@ -299,28 +354,31 @@ xfce_tray_plugin_read (XfceTrayPlugin *plugin)
             /* frame setting */
             plugin->show_frame = xfce_rc_read_bool_entry (rc, "ShowFrame", TRUE);
 
+            /* set number of rows */
+            xfce_tray_widget_set_rows (XFCE_TRAY_WIDGET (plugin->tray), xfce_rc_read_int_entry (rc, "Rows", 1));
+
             if (G_LIKELY (plugin->manager))
             {
                 /* list of known applications */
-                applications = xfce_rc_get_entries (rc, "Applications");
+                names = xfce_rc_get_entries (rc, "Applications");
 
-                if (G_LIKELY (applications))
+                if (G_LIKELY (names))
                 {
                     /* set the group */
                     xfce_rc_set_group (rc, "Applications");
 
                     /* read their visibility */
-                    for (i = 0; applications[i] != NULL; i++)
+                    for (i = 0; names[i] != NULL; i++)
                     {
                         /* whether the application is hidden */
-                        hidden = xfce_rc_read_bool_entry (rc, applications[i], FALSE);
+                        hidden = xfce_rc_read_bool_entry (rc, names[i], FALSE);
 
                         /* add the application name */
-                        xfce_tray_manager_application_add (plugin->manager, applications[i], hidden);
+                        xfce_tray_widget_name_add (XFCE_TRAY_WIDGET (plugin->tray), names[i], hidden);
                     }
 
                     /* cleanup */
-                    g_strfreev (applications);
+                    g_strfreev (names);
                 }
             }
 
@@ -335,10 +393,11 @@ xfce_tray_plugin_read (XfceTrayPlugin *plugin)
 static void
 xfce_tray_plugin_write (XfceTrayPlugin *plugin)
 {
-    gchar               *file;
-    GSList              *applications, *li;
-    XfceRc              *rc;
-    XfceTrayApplication *application;
+    gchar       *file;
+    GList       *names, *li;
+    XfceRc      *rc;
+    const gchar *name;
+    gboolean     hidden;
 
     /* get rc file name, create it if needed */
     file = xfce_panel_plugin_save_location (plugin->panel_plugin, TRUE);
@@ -358,6 +417,7 @@ xfce_tray_plugin_write (XfceTrayPlugin *plugin)
 
             /* write setting */
             xfce_rc_write_bool_entry (rc, "ShowFrame", plugin->show_frame);
+            xfce_rc_write_int_entry (rc, "Rows", xfce_tray_widget_get_rows (XFCE_TRAY_WIDGET (plugin->tray)));
 
             if (G_LIKELY (plugin->manager))
             {
@@ -365,16 +425,21 @@ xfce_tray_plugin_write (XfceTrayPlugin *plugin)
                 xfce_rc_set_group (rc, "Applications");
 
                 /* get the list of known applications */
-                applications = xfce_tray_manager_application_list (plugin->manager, FALSE);
+                names = xfce_tray_widget_name_list (XFCE_TRAY_WIDGET (plugin->tray));
 
                 /* save their state */
-                for (li = applications; li != NULL; li = li->next)
+                for (li = names; li != NULL; li = li->next)
                 {
-                    application = li->data;
+                    /* get name and status */
+                    name = li->data;
+                    hidden = xfce_tray_widget_name_hidden (XFCE_TRAY_WIDGET (plugin->tray), name);
 
-                    if (G_LIKELY (application->name))
-                        xfce_rc_write_bool_entry (rc, application->name, application->hidden);
+                    /* write entry */
+                    xfce_rc_write_bool_entry (rc, name, hidden);
                 }
+
+                /* cleanup */
+                g_list_free (names);
             }
 
             /* close the rc file */
@@ -388,6 +453,12 @@ xfce_tray_plugin_write (XfceTrayPlugin *plugin)
 static void
 xfce_tray_plugin_free (XfceTrayPlugin *plugin)
 {
+    /* unregister manager */
+    xfce_tray_manager_unregister (plugin->manager);
+
+    /* release */
+    g_object_unref (G_OBJECT (plugin->manager));
+
     /* free slice */
     panel_slice_free (XfceTrayPlugin, plugin);
 }

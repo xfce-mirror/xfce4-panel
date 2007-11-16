@@ -1,5 +1,7 @@
 /* $Id$ */
 /*
+ * Copyright (c) 2007 Nick Schermer <nick@xfce.org>
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
  * Software Foundation; either version 2 of the License, or (at your option)
@@ -44,7 +46,6 @@ enum
     APPLICATION_ICON,
     APPLICATION_NAME,
     APPLICATION_HIDDEN,
-    APPLICATION_DATA,
     N_COLUMNS
 };
 
@@ -55,6 +56,8 @@ static gchar     *xfce_tray_dialogs_camel_case         (const gchar           *t
 static GdkPixbuf *xfce_tray_dialogs_icon               (GtkIconTheme          *icon_theme,
                                                         const gchar           *name);
 static void       xfce_tray_dialogs_show_frame_toggled (GtkToggleButton       *button,
+                                                        XfceTrayPlugin        *plugin);
+static void       xfce_tray_dialogs_n_rows_changed     (GtkSpinButton         *button,
                                                         XfceTrayPlugin        *plugin);
 static void       xfce_tray_dialogs_treeview_toggled   (GtkCellRendererToggle *widget,
                                                         gchar                 *path,
@@ -112,8 +115,10 @@ xfce_tray_dialogs_icon (GtkIconTheme *icon_theme,
     GdkPixbuf   *icon;
     guint        i;
     gchar       *first_occ;
-    const gchar *p, *fallback[][2] =
+    const gchar *p;
+    const gchar *fallback[][2] =
     {
+        /* application name ,  fallback icon name */
         { "xfce-mcs-manager", "input-mouse" },
         { "bluetooth-applet", "stock_bluetooth" }
     };
@@ -173,14 +178,30 @@ xfce_tray_dialogs_show_frame_toggled (GtkToggleButton *button,
 
 
 static void
+xfce_tray_dialogs_n_rows_changed (GtkSpinButton  *button,
+                                  XfceTrayPlugin *plugin)
+{
+   gint value;
+
+   /* get value */
+   value = gtk_spin_button_get_value_as_int (button);
+
+   /* set rows */
+   xfce_tray_widget_set_rows (XFCE_TRAY_WIDGET (plugin->tray), value);
+}
+
+
+
+static void
 xfce_tray_dialogs_treeview_toggled (GtkCellRendererToggle *widget,
                                     gchar                 *path,
                                     GtkWidget             *treeview)
 {
-    GtkTreeModel        *model;
-    GtkTreeIter          iter;
-    XfceTrayApplication *application;
-    XfceTrayPlugin      *plugin;
+    GtkTreeModel   *model;
+    GtkTreeIter     iter;
+    gchar          *tmp, *name;
+    gboolean        hidden;
+    XfceTrayPlugin *plugin;
 
     /* get the tree model */
     model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
@@ -188,23 +209,25 @@ xfce_tray_dialogs_treeview_toggled (GtkCellRendererToggle *widget,
     /* get the tree iter */
     if (G_LIKELY (gtk_tree_model_get_iter_from_string (model, &iter, path)))
     {
-        /* get the application data */
-        gtk_tree_model_get (model, &iter, APPLICATION_DATA, &application, -1);
+        /* get the lower case application name and hidden state */
+        gtk_tree_model_get (model, &iter, APPLICATION_NAME, &tmp, APPLICATION_HIDDEN, &hidden, -1);
+        name = g_utf8_strdown (tmp, -1);
+        g_free (tmp);
 
         /* get tray plugin */
         plugin = g_object_get_data (G_OBJECT (treeview), I_("xfce-tray-plugin"));
 
-        if (G_LIKELY (application && plugin))
+        if (G_LIKELY (name && plugin))
         {
            /* update the manager */
-           xfce_tray_manager_application_update (plugin->manager, application->name, !application->hidden);
-
-           /* sort and update the tray widget */
-           xfce_tray_widget_sort (XFCE_TRAY_WIDGET (plugin->tray));
+           xfce_tray_widget_name_update (XFCE_TRAY_WIDGET (plugin->tray), name, !hidden);
 
            /* set the new list value */
-           gtk_list_store_set (GTK_LIST_STORE (model), &iter, APPLICATION_HIDDEN, application->hidden, -1);
+           gtk_list_store_set (GTK_LIST_STORE (model), &iter, APPLICATION_HIDDEN, !hidden, -1);
         }
+
+        /* cleanup */
+        g_free (name);
     }
 }
 
@@ -242,13 +265,15 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     GtkWidget           *dialog, *dialog_vbox;
     GtkWidget           *frame, *bin, *button;
     GtkWidget           *scroll, *treeview;
+    GtkWidget           *vbox, *label, *hbox, *spin;
     GtkListStore        *store;
     GtkTreeViewColumn   *column;
     GtkCellRenderer     *renderer;
     GtkTreeIter          iter;
-    XfceTrayApplication *application;
-    GSList              *applications, *li;
-    gchar               *name;
+    GList               *names, *li;
+    const gchar         *name;
+    gchar               *camelcase;
+    gboolean             hidden;
     GtkIconTheme        *icon_theme;
     GdkPixbuf           *pixbuf;
 
@@ -264,7 +289,8 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin)));
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
-    gtk_window_set_default_size (GTK_WINDOW (dialog), 280, 350);
+    gtk_window_set_default_size (GTK_WINDOW (dialog), 280, 400);
+    gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
     g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (xfce_tray_dialogs_configure_response), plugin);
 
@@ -273,20 +299,45 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     /* appearance */
     frame = xfce_create_framebox (_("Appearance"), &bin);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
+    gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
     gtk_widget_show (frame);
+
+    /* vbox */
+    vbox = gtk_vbox_new (FALSE, 6);
+    gtk_container_add (GTK_CONTAINER (bin), vbox);
+    gtk_widget_show (vbox);
 
     /* show frame */
     button = gtk_check_button_new_with_mnemonic (_("Show _frame"));
-    gtk_container_add (GTK_CONTAINER (bin), button);
+    gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), plugin->show_frame);
     g_signal_connect (button, "toggled", G_CALLBACK (xfce_tray_dialogs_show_frame_toggled), plugin);
     gtk_widget_show (button);
 
+    /* box */
+    hbox = gtk_hbox_new (FALSE, 12);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+    gtk_widget_show (hbox);
+
+    /* number of rows */
+    label = gtk_label_new_with_mnemonic (_("_Number of rows:"));
+    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    gtk_widget_show (label);
+
+    /* spin */
+    spin = gtk_spin_button_new_with_range (1, 6, 1);
+    gtk_spin_button_set_digits (GTK_SPIN_BUTTON (spin), 0);
+    gtk_spin_button_set_numeric (GTK_SPIN_BUTTON (spin), TRUE);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), xfce_tray_widget_get_rows (XFCE_TRAY_WIDGET (plugin->tray)));
+    g_signal_connect (G_OBJECT (spin), "value-changed", G_CALLBACK (xfce_tray_dialogs_n_rows_changed), plugin);
+    gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
+    gtk_widget_show (spin);
+
     /* applications */
     frame = xfce_create_framebox (_("Hidden Applications"), &bin);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, TRUE, TRUE, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (frame), 4);
+    gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
     gtk_widget_show (frame);
 
     /* scrolled window */
@@ -297,7 +348,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_widget_show (scroll);
 
     /* create list store */
-    store = gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_BOOLEAN, G_TYPE_POINTER);
+    store = gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_BOOLEAN);
 
     /* create treeview */
     treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
@@ -346,30 +397,32 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
         icon_theme = gtk_icon_theme_get_default ();
 
     /* get the sorted list of applications */
-    applications = xfce_tray_manager_application_list (plugin->manager, TRUE);
+    names = xfce_tray_widget_name_list (XFCE_TRAY_WIDGET (plugin->tray));
 
     /* add all the application to the list */
-    for (li = applications; li != NULL; li = li->next)
+    for (li = names; li != NULL; li = li->next)
     {
-        application = li->data;
+        name = li->data;
 
         /* create a camel case name of the application */
-        name = xfce_tray_dialogs_camel_case (application->name);
+        camelcase = xfce_tray_dialogs_camel_case (name);
+
+        /* whether this name is hidden */
+        hidden = xfce_tray_widget_name_hidden (XFCE_TRAY_WIDGET (plugin->tray), name);
 
         /* append the application */
         gtk_list_store_append (store, &iter);
         gtk_list_store_set (store, &iter,
-                            APPLICATION_NAME, name,
-                            APPLICATION_HIDDEN, application->hidden,
-                            APPLICATION_DATA, application, -1);
+                            APPLICATION_NAME, camelcase,
+                            APPLICATION_HIDDEN, hidden, -1);
 
         /* cleanup */
-        g_free (name);
+        g_free (camelcase);
 
         /* get the application icon */
-        pixbuf = xfce_tray_dialogs_icon (icon_theme, application->name);
+        pixbuf = xfce_tray_dialogs_icon (icon_theme, name);
 
-        if (pixbuf)
+        if (G_LIKELY (pixbuf))
         {
             /* set the icon */
             gtk_list_store_set (store, &iter, APPLICATION_ICON, pixbuf, -1);
@@ -378,6 +431,9 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
             g_object_unref (G_OBJECT (pixbuf));
         }
     }
+
+    /* cleanup */
+    g_list_free (names);
 
     /* show the dialog */
     gtk_widget_show (dialog);
