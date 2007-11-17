@@ -23,41 +23,40 @@ Container widget with configurable orientation.
 
 
 
-            <link linkend="XfceItembar-struct">XfceItembar</link>;
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-itembar-new">xfce_itembar_new</link>                (<link linkend="GtkOrientation">GtkOrientation</link> orientation);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-set-orientation">xfce_itembar_set_orientation</link>    (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkOrientation">GtkOrientation</link> orientation);
-<link linkend="GtkOrientation">GtkOrientation</link> <link linkend="xfce-itembar-get-orientation">xfce_itembar_get_orientation</link> (<link linkend="XfceItembar">XfceItembar</link> *itembar);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-insert">xfce_itembar_insert</link>             (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item,
-                                             <link linkend="int">int</link> position);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-append">xfce_itembar_append</link>             (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-prepend">xfce_itembar_prepend</link>            (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-reorder-child">xfce_itembar_reorder_child</link>      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item,
-                                             <link linkend="int">int</link> position);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-set-child-expand">xfce_itembar_set_child_expand</link>   (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item,
-                                             <link linkend="gboolean">gboolean</link> expand);
-<link linkend="gboolean">gboolean</link>    <link linkend="xfce-itembar-get-child-expand">xfce_itembar_get_child_expand</link>   (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);
-<link linkend="int">int</link>         <link linkend="xfce-itembar-get-n-items">xfce_itembar_get_n_items</link>        (<link linkend="XfceItembar">XfceItembar</link> *itembar);
-<link linkend="int">int</link>         <link linkend="xfce-itembar-get-item-index">xfce_itembar_get_item_index</link>     (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-itembar-get-nth-item">xfce_itembar_get_nth_item</link>       (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="int">int</link> n);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-raise-event-window">xfce_itembar_raise_event_window</link> (<link linkend="XfceItembar">XfceItembar</link> *itembar);
-<link linkend="void">void</link>        <link linkend="xfce-itembar-lower-event-window">xfce_itembar_lower_event_window</link> (<link linkend="XfceItembar">XfceItembar</link> *itembar);
-<link linkend="gboolean">gboolean</link>    <link linkend="xfce-itembar-event-window-is-raised">xfce_itembar_event_window_is_raised</link>
-                                            (<link linkend="XfceItembar">XfceItembar</link> *itembar);
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-itembar-get-item-at-point">xfce_itembar_get_item_at_point</link>  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="int">int</link> x,
-                                             <link linkend="int">int</link> y);
-<link linkend="int">int</link>         <link linkend="xfce-itembar-get-drop-index">xfce_itembar_get_drop_index</link>     (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="int">int</link> x,
-                                             <link linkend="int">int</link> y);
+                    <link linkend="XfceItembar-struct">XfceItembar</link>;
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-itembar-new">xfce_itembar_new</link>                    (<link linkend="GtkOrientation">GtkOrientation</link> orientation);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-set-orientation">xfce_itembar_set_orientation</link>        (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkOrientation">GtkOrientation</link> orientation);
+<link linkend="GtkOrientation">GtkOrientation</link>      <link linkend="xfce-itembar-get-orientation">xfce_itembar_get_orientation</link>        (<link linkend="XfceItembar">XfceItembar</link> *itembar);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-insert">xfce_itembar_insert</link>                 (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item,
+                                                         <link linkend="int">int</link> position);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-append">xfce_itembar_append</link>                 (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-prepend">xfce_itembar_prepend</link>                (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-reorder-child">xfce_itembar_reorder_child</link>          (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item,
+                                                         <link linkend="int">int</link> position);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-set-child-expand">xfce_itembar_set_child_expand</link>       (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item,
+                                                         <link linkend="gboolean">gboolean</link> expand);
+<link linkend="gboolean">gboolean</link>            <link linkend="xfce-itembar-get-child-expand">xfce_itembar_get_child_expand</link>       (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);
+<link linkend="int">int</link>                 <link linkend="xfce-itembar-get-n-items">xfce_itembar_get_n_items</link>            (<link linkend="XfceItembar">XfceItembar</link> *itembar);
+<link linkend="int">int</link>                 <link linkend="xfce-itembar-get-item-index">xfce_itembar_get_item_index</link>         (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-itembar-get-nth-item">xfce_itembar_get_nth_item</link>           (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="int">int</link> n);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-raise-event-window">xfce_itembar_raise_event_window</link>     (<link linkend="XfceItembar">XfceItembar</link> *itembar);
+<link linkend="void">void</link>                <link linkend="xfce-itembar-lower-event-window">xfce_itembar_lower_event_window</link>     (<link linkend="XfceItembar">XfceItembar</link> *itembar);
+<link linkend="gboolean">gboolean</link>            <link linkend="xfce-itembar-event-window-is-raised">xfce_itembar_event_window_is_raised</link> (<link linkend="XfceItembar">XfceItembar</link> *itembar);
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-itembar-get-item-at-point">xfce_itembar_get_item_at_point</link>      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="int">int</link> x,
+                                                         <link linkend="int">int</link> y);
+<link linkend="int">int</link>                 <link linkend="xfce-itembar-get-drop-index">xfce_itembar_get_drop_index</link>         (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="int">int</link> x,
+                                                         <link linkend="int">int</link> y);
 
 </synopsis>
 </refsynopsisdiv>
@@ -82,7 +81,7 @@ Container widget with configurable orientation.
 <title role="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 XfceItembar implements
- <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="GtkBuildable">GtkBuildable</link>.</para>
 
 </refsect1>
 
@@ -91,14 +90,14 @@ XfceItembar implements
 <title role="properties.title">Properties</title>
 <synopsis>
 
-  &quot;<link linkend="XfceItembar--orientation">orientation</link>&quot;          <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write
+  &quot;<link linkend="XfceItembar--orientation">orientation</link>&quot;              <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write
 </synopsis>
 </refsect1>
 <refsect1 role="child_properties">
 <title role="child_properties.title">Child Properties</title>
 <synopsis>
 
-  &quot;<link linkend="XfceItembar--expand">expand</link>&quot;               <link linkend="gboolean">gboolean</link>              : Read / Write
+  &quot;<link linkend="XfceItembar--expand">expand</link>&quot;                   <link linkend="gboolean">gboolean</link>              : Read / Write
 </synopsis>
 </refsect1>
 
@@ -106,13 +105,8 @@ XfceItembar implements
 <title role="signal_proto.title">Signals</title>
 <synopsis>
 
-&quot;<link linkend="XfceItembar-contents-changed">contents-changed</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                            <link linkend="gpointer">gpointer</link>     user_data)      : Run first
-&quot;<link linkend="XfceItembar-orientation-changed">orientation-changed</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="XfceItembar">XfceItembar</link>    *itembar,
-                                            <link linkend="GtkOrientation">GtkOrientation</link> *orientation,
-                                            <link linkend="gpointer">gpointer</link>        user_data)        : Run first
+  &quot;<link linkend="XfceItembar-contents-changed">contents-changed</link>&quot;                               : Run First
+  &quot;<link linkend="XfceItembar-orientation-changed">orientation-changed</link>&quot;                            : Run First
 </synopsis>
 </refsect1>
 
@@ -136,7 +130,7 @@ should be accessed using the functions below.
 </para></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-new" role="function"/>xfce_itembar_new ()</title>
-<indexterm><primary>xfce_itembar_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_itembar_new                (<link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
+<indexterm><primary>xfce_itembar_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_itembar_new                    (<link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
 <para>
 </para>
 <para>
@@ -150,8 +144,8 @@ should be accessed using the functions below.
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-set-orientation" role="function"/>xfce_itembar_set_orientation ()</title>
-<indexterm><primary>xfce_itembar_set_orientation</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_set_orientation    (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
+<indexterm><primary>xfce_itembar_set_orientation</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_set_orientation        (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkOrientation">GtkOrientation</link> orientation);</programlisting>
 <para>
 Set the orienation of <parameter>itembar</parameter>.</para>
 <para>
@@ -166,7 +160,7 @@ Set the orienation of <parameter>itembar</parameter>.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-get-orientation" role="function"/>xfce_itembar_get_orientation ()</title>
-<indexterm><primary>xfce_itembar_get_orientation</primary></indexterm><programlisting><link linkend="GtkOrientation">GtkOrientation</link> xfce_itembar_get_orientation (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
+<indexterm><primary>xfce_itembar_get_orientation</primary></indexterm><programlisting><link linkend="GtkOrientation">GtkOrientation</link>      xfce_itembar_get_orientation        (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 </para>
 <para>
@@ -180,9 +174,9 @@ Set the orienation of <parameter>itembar</parameter>.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-insert" role="function"/>xfce_itembar_insert ()</title>
-<indexterm><primary>xfce_itembar_insert</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_insert             (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item,
-                                             <link linkend="int">int</link> position);</programlisting>
+<indexterm><primary>xfce_itembar_insert</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_insert                 (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item,
+                                                         <link linkend="int">int</link> position);</programlisting>
 <para>
 Insert new item at <parameter>position</parameter> on <parameter>itembar</parameter>.</para>
 <para>
@@ -200,8 +194,8 @@ Insert new item at <parameter>position</parameter> on <parameter>itembar</parame
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-append" role="function"/>xfce_itembar_append ()</title>
-<indexterm><primary>xfce_itembar_append</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_append             (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
+<indexterm><primary>xfce_itembar_append</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_append                 (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
 Add a new item at the end of <parameter>itembar</parameter>.</para>
 <para>
@@ -216,8 +210,8 @@ Add a new item at the end of <parameter>itembar</parameter>.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-prepend" role="function"/>xfce_itembar_prepend ()</title>
-<indexterm><primary>xfce_itembar_prepend</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_prepend            (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
+<indexterm><primary>xfce_itembar_prepend</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_prepend                (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
 Add a new item at the start of <parameter>itembar</parameter>.</para>
 <para>
@@ -232,9 +226,9 @@ Add a new item at the start of <parameter>itembar</parameter>.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-reorder-child" role="function"/>xfce_itembar_reorder_child ()</title>
-<indexterm><primary>xfce_itembar_reorder_child</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_reorder_child      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item,
-                                             <link linkend="int">int</link> position);</programlisting>
+<indexterm><primary>xfce_itembar_reorder_child</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_reorder_child          (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item,
+                                                         <link linkend="int">int</link> position);</programlisting>
 <para>
 Move <parameter>item</parameter> to a new position on <parameter>itembar</parameter>.</para>
 <para>
@@ -252,9 +246,9 @@ Move <parameter>item</parameter> to a new position on <parameter>itembar</parame
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-set-child-expand" role="function"/>xfce_itembar_set_child_expand ()</title>
-<indexterm><primary>xfce_itembar_set_child_expand</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_set_child_expand   (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item,
-                                             <link linkend="gboolean">gboolean</link> expand);</programlisting>
+<indexterm><primary>xfce_itembar_set_child_expand</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_set_child_expand       (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item,
+                                                         <link linkend="gboolean">gboolean</link> expand);</programlisting>
 <para>
 Sets whether <parameter>item</parameter> should expand when the size of <parameter>itembar</parameter> increases.</para>
 <para>
@@ -272,8 +266,8 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-get-child-expand" role="function"/>xfce_itembar_get_child_expand ()</title>
-<indexterm><primary>xfce_itembar_get_child_expand</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    xfce_itembar_get_child_expand   (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
+<indexterm><primary>xfce_itembar_get_child_expand</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            xfce_itembar_get_child_expand       (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
 </para>
 <para>
@@ -291,7 +285,7 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-get-n-items" role="function"/>xfce_itembar_get_n_items ()</title>
-<indexterm><primary>xfce_itembar_get_n_items</primary></indexterm><programlisting><link linkend="int">int</link>         xfce_itembar_get_n_items        (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
+<indexterm><primary>xfce_itembar_get_n_items</primary></indexterm><programlisting><link linkend="int">int</link>                 xfce_itembar_get_n_items            (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 </para>
 <para>
@@ -305,8 +299,8 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-get-item-index" role="function"/>xfce_itembar_get_item_index ()</title>
-<indexterm><primary>xfce_itembar_get_item_index</primary></indexterm><programlisting><link linkend="int">int</link>         xfce_itembar_get_item_index     (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
+<indexterm><primary>xfce_itembar_get_item_index</primary></indexterm><programlisting><link linkend="int">int</link>                 xfce_itembar_get_item_index         (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *item);</programlisting>
 <para>
 </para>
 <para>
@@ -323,8 +317,8 @@ Sets whether <parameter>item</parameter> should expand when the size of <paramet
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-get-nth-item" role="function"/>xfce_itembar_get_nth_item ()</title>
-<indexterm><primary>xfce_itembar_get_nth_item</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_itembar_get_nth_item       (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="int">int</link> n);</programlisting>
+<indexterm><primary>xfce_itembar_get_nth_item</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_itembar_get_nth_item           (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="int">int</link> n);</programlisting>
 <para>
 </para>
 <para>
@@ -342,10 +336,10 @@ itembar does not contain an <parameter>n</parameter><!-- -->'th item.
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-raise-event-window" role="function"/>xfce_itembar_raise_event_window ()</title>
-<indexterm><primary>xfce_itembar_raise_event_window</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_raise_event_window (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
+<indexterm><primary>xfce_itembar_raise_event_window</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_raise_event_window     (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 Raise the event window of <parameter>itembar</parameter>. This causes all events, like
-mouse clicks or key presses to be send to the itembar and not to 
+mouse clicks or key presses to be send to the itembar and not to
 any item.
 </para>
 <para>
@@ -359,7 +353,7 @@ See also: <link linkend="xfce-itembar-lower-event-window"><function>xfce_itembar
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-lower-event-window" role="function"/>xfce_itembar_lower_event_window ()</title>
-<indexterm><primary>xfce_itembar_lower_event_window</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_itembar_lower_event_window (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
+<indexterm><primary>xfce_itembar_lower_event_window</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_itembar_lower_event_window     (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 Lower the event window of <parameter>itembar</parameter>. This causes all events, like
 mouse clicks or key presses to be send to the items, before reaching the
@@ -376,8 +370,7 @@ See also: <link linkend="xfce-itembar-raise-event-window"><function>xfce_itembar
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-event-window-is-raised" role="function"/>xfce_itembar_event_window_is_raised ()</title>
-<indexterm><primary>xfce_itembar_event_window_is_raised</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    xfce_itembar_event_window_is_raised
-                                            (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
+<indexterm><primary>xfce_itembar_event_window_is_raised</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            xfce_itembar_event_window_is_raised (<link linkend="XfceItembar">XfceItembar</link> *itembar);</programlisting>
 <para>
 </para>
 <para>
@@ -391,9 +384,9 @@ See also: <link linkend="xfce-itembar-raise-event-window"><function>xfce_itembar
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-get-item-at-point" role="function"/>xfce_itembar_get_item_at_point ()</title>
-<indexterm><primary>xfce_itembar_get_item_at_point</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_itembar_get_item_at_point  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="int">int</link> x,
-                                             <link linkend="int">int</link> y);</programlisting>
+<indexterm><primary>xfce_itembar_get_item_at_point</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_itembar_get_item_at_point      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="int">int</link> x,
+                                                         <link linkend="int">int</link> y);</programlisting>
 <para>
 </para>
 <para>
@@ -413,9 +406,9 @@ See also: <link linkend="xfce-itembar-raise-event-window"><function>xfce_itembar
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-itembar-get-drop-index" role="function"/>xfce_itembar_get_drop_index ()</title>
-<indexterm><primary>xfce_itembar_get_drop_index</primary></indexterm><programlisting><link linkend="int">int</link>         xfce_itembar_get_drop_index     (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                             <link linkend="int">int</link> x,
-                                             <link linkend="int">int</link> y);</programlisting>
+<indexterm><primary>xfce_itembar_get_drop_index</primary></indexterm><programlisting><link linkend="int">int</link>                 xfce_itembar_get_drop_index         (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                         <link linkend="int">int</link> x,
+                                                         <link linkend="int">int</link> y);</programlisting>
 <para>
 Returns the position corresponding to the indicated point on
 <parameter>itembar</parameter>. This is useful when dragging items to the itembar:
@@ -436,7 +429,7 @@ inserted.
 <varlistentry><term><parameter>y</parameter>&nbsp;:</term>
 <listitem><simpara> y coordinate of a point on the itembar
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The position corresponding to the point (<parameter>x</parameter>, <parameter>y</parameter>) on the 
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> The position corresponding to the point (<parameter>x</parameter>, <parameter>y</parameter>) on the
 itembar.
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
@@ -445,7 +438,7 @@ itembar.
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
 <refsect2><title><anchor id="XfceItembar--orientation"/>The &quot;<literal>orientation</literal>&quot; property</title>
-<indexterm><primary>XfceItembar:orientation</primary></indexterm><programlisting>  &quot;orientation&quot;          <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
+<indexterm><primary>XfceItembar:orientation</primary></indexterm><programlisting>  &quot;orientation&quot;              <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
 <para>
 The orientation of the <link linkend="XfceItembar"><type>XfceItembar</type></link>.</para>
 <para>
@@ -457,7 +450,7 @@ The orientation of the <link linkend="XfceItembar"><type>XfceItembar</type></lin
 <refsect1 role="child_property_details">
 <title role="child_property_details.title">Child Property Details</title>
 <refsect2><title><anchor id="XfceItembar--expand"/>The &quot;<literal>expand</literal>&quot; child property</title>
-<indexterm><primary>XfceItembar:expand</primary></indexterm><programlisting>  &quot;expand&quot;               <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<indexterm><primary>XfceItembar:expand</primary></indexterm><programlisting>  &quot;expand&quot;                   <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>
 Whether the child of the <link linkend="XfceItembar"><type>XfceItembar</type></link> should fill available space.</para>
 <para>
@@ -470,8 +463,8 @@ Whether the child of the <link linkend="XfceItembar"><type>XfceItembar</type></l
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
 <refsect2><title><anchor id="XfceItembar-contents-changed"/>The &quot;contents-changed&quot; signal</title>
-<indexterm><primary>XfceItembar::contents-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link> *itembar,
-                                            <link linkend="gpointer">gpointer</link>     user_data)      : Run first</programlisting>
+<indexterm><primary>XfceItembar::contents-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
+                                                        <link linkend="gpointer">gpointer</link>     user_data)      : Run First</programlisting>
 <para>
 Emitted when the contents of the itembar change, either by adding
 a child, removing a child, or reordering a child.</para>
@@ -484,9 +477,9 @@ a child, removing a child, or reordering a child.</para>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfceItembar-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
-<indexterm><primary>XfceItembar::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceItembar">XfceItembar</link>    *itembar,
-                                            <link linkend="GtkOrientation">GtkOrientation</link> *orientation,
-                                            <link linkend="gpointer">gpointer</link>        user_data)        : Run first</programlisting>
+<indexterm><primary>XfceItembar::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfceItembar">XfceItembar</link>   *itembar,
+                                                        <link linkend="GtkOrientation">GtkOrientation</link> orientation,
+                                                        <link linkend="gpointer">gpointer</link>       user_data)        : Run First</programlisting>
 <para>
 Emitted when the orientation of the itembar changes.</para>
 <para>

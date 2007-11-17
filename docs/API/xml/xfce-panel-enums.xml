@@ -23,15 +23,15 @@ Standard enumerations used by the Xfce Panel.
 
 
 
-enum        <link linkend="XfceScreenPosition">XfceScreenPosition</link>;
-#define     <link linkend="xfce-screen-position-is-horizontal">xfce_screen_position_is_horizontal</link>(position)
-#define     <link linkend="xfce-screen-position-get-orientation">xfce_screen_position_get_orientation</link>(position)
-#define     <link linkend="xfce-screen-position-is-floating">xfce_screen_position_is_floating</link>(position)
-#define     <link linkend="xfce-screen-position-is-top">xfce_screen_position_is_top</link>     (position)
-#define     <link linkend="xfce-screen-position-is-left">xfce_screen_position_is_left</link>    (position)
-#define     <link linkend="xfce-screen-position-is-right">xfce_screen_position_is_right</link>   (position)
-#define     <link linkend="xfce-screen-position-is-bottom">xfce_screen_position_is_bottom</link>  (position)
-enum        <link linkend="XfceHandleStyle">XfceHandleStyle</link>;
+enum                <link linkend="XfceScreenPosition">XfceScreenPosition</link>;
+#define             <link linkend="xfce-screen-position-is-horizontal">xfce_screen_position_is_horizontal</link>  (position)
+#define             <link linkend="xfce-screen-position-get-orientation">xfce_screen_position_get_orientation</link>(position)
+#define             <link linkend="xfce-screen-position-is-floating">xfce_screen_position_is_floating</link>    (position)
+#define             <link linkend="xfce-screen-position-is-top">xfce_screen_position_is_top</link>         (position)
+#define             <link linkend="xfce-screen-position-is-left">xfce_screen_position_is_left</link>        (position)
+#define             <link linkend="xfce-screen-position-is-right">xfce_screen_position_is_right</link>       (position)
+#define             <link linkend="xfce-screen-position-is-bottom">xfce_screen_position_is_bottom</link>      (position)
+enum                <link linkend="XfceHandleStyle">XfceHandleStyle</link>;
 
 </synopsis>
 </refsynopsisdiv>
@@ -172,7 +172,7 @@ positions, horizontal and vertical.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-screen-position-is-horizontal" role="macro"/>xfce_screen_position_is_horizontal()</title>
-<indexterm><primary>xfce_screen_position_is_horizontal</primary></indexterm><programlisting>#define     xfce_screen_position_is_horizontal(position)</programlisting>
+<indexterm><primary>xfce_screen_position_is_horizontal</primary></indexterm><programlisting>#define             xfce_screen_position_is_horizontal(position)</programlisting>
 <para>
 </para>
 <para>
@@ -186,7 +186,7 @@ positions, horizontal and vertical.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-screen-position-get-orientation" role="macro"/>xfce_screen_position_get_orientation()</title>
-<indexterm><primary>xfce_screen_position_get_orientation</primary></indexterm><programlisting>#define     xfce_screen_position_get_orientation(position)</programlisting>
+<indexterm><primary>xfce_screen_position_get_orientation</primary></indexterm><programlisting>#define             xfce_screen_position_get_orientation(position)</programlisting>
 <para>
 </para>
 <para>
@@ -200,7 +200,7 @@ positions, horizontal and vertical.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-screen-position-is-floating" role="macro"/>xfce_screen_position_is_floating()</title>
-<indexterm><primary>xfce_screen_position_is_floating</primary></indexterm><programlisting>#define     xfce_screen_position_is_floating(position)</programlisting>
+<indexterm><primary>xfce_screen_position_is_floating</primary></indexterm><programlisting>#define             xfce_screen_position_is_floating(position)</programlisting>
 <para>
 </para>
 <para>
@@ -214,7 +214,7 @@ positions, horizontal and vertical.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-screen-position-is-top" role="macro"/>xfce_screen_position_is_top()</title>
-<indexterm><primary>xfce_screen_position_is_top</primary></indexterm><programlisting>#define     xfce_screen_position_is_top(position)</programlisting>
+<indexterm><primary>xfce_screen_position_is_top</primary></indexterm><programlisting>#define             xfce_screen_position_is_top(position)</programlisting>
 <para>
 </para>
 <para>
@@ -228,7 +228,7 @@ positions, horizontal and vertical.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-screen-position-is-left" role="macro"/>xfce_screen_position_is_left()</title>
-<indexterm><primary>xfce_screen_position_is_left</primary></indexterm><programlisting>#define     xfce_screen_position_is_left(position)</programlisting>
+<indexterm><primary>xfce_screen_position_is_left</primary></indexterm><programlisting>#define             xfce_screen_position_is_left(position)</programlisting>
 <para>
 </para>
 <para>
@@ -242,7 +242,7 @@ positions, horizontal and vertical.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-screen-position-is-right" role="macro"/>xfce_screen_position_is_right()</title>
-<indexterm><primary>xfce_screen_position_is_right</primary></indexterm><programlisting>#define     xfce_screen_position_is_right(position)</programlisting>
+<indexterm><primary>xfce_screen_position_is_right</primary></indexterm><programlisting>#define             xfce_screen_position_is_right(position)</programlisting>
 <para>
 </para>
 <para>
@@ -256,7 +256,7 @@ positions, horizontal and vertical.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-screen-position-is-bottom" role="macro"/>xfce_screen_position_is_bottom()</title>
-<indexterm><primary>xfce_screen_position_is_bottom</primary></indexterm><programlisting>#define     xfce_screen_position_is_bottom(position)</programlisting>
+<indexterm><primary>xfce_screen_position_is_bottom</primary></indexterm><programlisting>#define             xfce_screen_position_is_bottom(position)</programlisting>
 <para>
 </para>
 <para>

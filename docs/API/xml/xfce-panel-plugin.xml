@@ -24,10 +24,10 @@ Information for plugin writers
 #include &lt;libxfce4panel/libxfce4panel&gt;
 
 
-#define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS">XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</link>(construct)
-#define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS">XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</link>(construct)
-#define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS">XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</link>(construct,check)
-#define     <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS">XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</link>(construct,check)
+#define             <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS">XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</link> (construct)
+#define             <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS">XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</link> (construct)
+#define             <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS">XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</link>(construct,check)
+#define             <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS">XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</link>(construct,check)
 </synopsis>
 </refsynopsisdiv>
 
@@ -50,9 +50,9 @@ Macros to register a plugin with the Xfce Panel.
 <title role="details.title">Details</title>
 <refsect2>
 <title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()</title>
-<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct)</programlisting>
+<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</primary></indexterm><programlisting>#define             XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct)</programlisting>
 <para>
-Registers and initializes the plugin. This is the only thing that is 
+Registers and initializes the plugin. This is the only thing that is
 required to create a panel plugin.
 </para>
 <para>
@@ -66,7 +66,7 @@ See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL()</title>
-<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct)</programlisting>
+<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</primary></indexterm><programlisting>#define             XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct)</programlisting>
 <para>
 Registers and initializes the plugin. This is the only thing that is 
 required to create a panel plugin.
@@ -87,9 +87,9 @@ See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK()</title>
-<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check)</programlisting>
+<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</primary></indexterm><programlisting>#define             XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check)</programlisting>
 <para>
-Registers and initializes the plugin. This is the only thing that is 
+Registers and initializes the plugin. This is the only thing that is
 required to create a panel plugin. The <parameter>check</parameter> functions is run before
 creating the plugin, and should return FALSE if plugin creation is not
 possible.
@@ -100,7 +100,7 @@ See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
 
 </para><variablelist role="params">
 <varlistentry><term><parameter>construct</parameter>&nbsp;:</term>
-<listitem><simpara> name of a function that can be cast to an 
+<listitem><simpara> name of a function that can be cast to an
              <link linkend="XfcePanelPluginFunc"><type>XfcePanelPluginFunc</type></link>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>check</parameter>&nbsp;:</term>
@@ -110,7 +110,7 @@ See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link></para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS" role="macro"/>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()</title>
-<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</primary></indexterm><programlisting>#define     XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK(construct,check)</programlisting>
+<indexterm><primary>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</primary></indexterm><programlisting>#define             XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK(construct,check)</programlisting>
 <para>
 Registers and initializes the plugin. This is the only thing that is 
 required to create a panel plugin. The <parameter>check</parameter> function is run before

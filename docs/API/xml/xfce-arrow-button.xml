@@ -23,13 +23,11 @@ Toggle button with arrow.
 
 
 
-            <link linkend="XfceArrowButton-struct">XfceArrowButton</link>;
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-arrow-button-new">xfce_arrow_button_new</link>           (<link linkend="GtkArrowType">GtkArrowType</link> type);
-<link linkend="void">void</link>        <link linkend="xfce-arrow-button-set-arrow-type">xfce_arrow_button_set_arrow_type</link>
-                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
-                                             <link linkend="GtkArrowType">GtkArrowType</link> type);
-<link linkend="GtkArrowType">GtkArrowType</link> <link linkend="xfce-arrow-button-get-arrow-type">xfce_arrow_button_get_arrow_type</link>
-                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button);
+                    <link linkend="XfceArrowButton-struct">XfceArrowButton</link>;
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-arrow-button-new">xfce_arrow_button_new</link>               (<link linkend="GtkArrowType">GtkArrowType</link> type);
+<link linkend="void">void</link>                <link linkend="xfce-arrow-button-set-arrow-type">xfce_arrow_button_set_arrow_type</link>    (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
+                                                         <link linkend="GtkArrowType">GtkArrowType</link> type);
+<link linkend="GtkArrowType">GtkArrowType</link>        <link linkend="xfce-arrow-button-get-arrow-type">xfce_arrow_button_get_arrow_type</link>    (<link linkend="XfceArrowButton">XfceArrowButton</link> *button);
 
 </synopsis>
 </refsynopsisdiv>
@@ -57,7 +55,7 @@ Toggle button with arrow.
 <title role="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 XfceArrowButton implements
- <link linkend="AtkImplementorIface">AtkImplementorIface</link>.</para>
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="GtkBuildable">GtkBuildable</link>.</para>
 
 </refsect1>
 
@@ -66,7 +64,7 @@ XfceArrowButton implements
 <title role="properties.title">Properties</title>
 <synopsis>
 
-  &quot;<link linkend="XfceArrowButton--arrow-type">arrow-type</link>&quot;           <link linkend="GtkArrowType">GtkArrowType</link>          : Read / Write
+  &quot;<link linkend="XfceArrowButton--arrow-type">arrow-type</link>&quot;               <link linkend="GtkArrowType">GtkArrowType</link>          : Read / Write
 </synopsis>
 </refsect1>
 
@@ -74,10 +72,7 @@ XfceArrowButton implements
 <title role="signal_proto.title">Signals</title>
 <synopsis>
 
-&quot;<link linkend="XfceArrowButton-arrow-type-changed">arrow-type-changed</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
-                                            <link linkend="GtkArrowType">GtkArrowType</link>    *type,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run first
+  &quot;<link linkend="XfceArrowButton-arrow-type-changed">arrow-type-changed</link>&quot;                             : Run First
 </synopsis>
 </refsect1>
 
@@ -101,7 +96,7 @@ should be accessed using the functions below.
 </para></refsect2>
 <refsect2>
 <title><anchor id="xfce-arrow-button-new" role="function"/>xfce_arrow_button_new ()</title>
-<indexterm><primary>xfce_arrow_button_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_arrow_button_new           (<link linkend="GtkArrowType">GtkArrowType</link> type);</programlisting>
+<indexterm><primary>xfce_arrow_button_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_arrow_button_new               (<link linkend="GtkArrowType">GtkArrowType</link> type);</programlisting>
 <para>
 </para>
 <para>
@@ -115,9 +110,8 @@ should be accessed using the functions below.
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-arrow-button-set-arrow-type" role="function"/>xfce_arrow_button_set_arrow_type ()</title>
-<indexterm><primary>xfce_arrow_button_set_arrow_type</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_arrow_button_set_arrow_type
-                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
-                                             <link linkend="GtkArrowType">GtkArrowType</link> type);</programlisting>
+<indexterm><primary>xfce_arrow_button_set_arrow_type</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_arrow_button_set_arrow_type    (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
+                                                         <link linkend="GtkArrowType">GtkArrowType</link> type);</programlisting>
 <para>
 Sets the arrow type for <parameter>button</parameter>.</para>
 <para>
@@ -132,8 +126,7 @@ Sets the arrow type for <parameter>button</parameter>.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-arrow-button-get-arrow-type" role="function"/>xfce_arrow_button_get_arrow_type ()</title>
-<indexterm><primary>xfce_arrow_button_get_arrow_type</primary></indexterm><programlisting><link linkend="GtkArrowType">GtkArrowType</link> xfce_arrow_button_get_arrow_type
-                                            (<link linkend="XfceArrowButton">XfceArrowButton</link> *button);</programlisting>
+<indexterm><primary>xfce_arrow_button_get_arrow_type</primary></indexterm><programlisting><link linkend="GtkArrowType">GtkArrowType</link>        xfce_arrow_button_get_arrow_type    (<link linkend="XfceArrowButton">XfceArrowButton</link> *button);</programlisting>
 <para>
 </para>
 <para>
@@ -150,7 +143,7 @@ Sets the arrow type for <parameter>button</parameter>.</para>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
 <refsect2><title><anchor id="XfceArrowButton--arrow-type"/>The &quot;<literal>arrow-type</literal>&quot; property</title>
-<indexterm><primary>XfceArrowButton:arrow-type</primary></indexterm><programlisting>  &quot;arrow-type&quot;           <link linkend="GtkArrowType">GtkArrowType</link>          : Read / Write</programlisting>
+<indexterm><primary>XfceArrowButton:arrow-type</primary></indexterm><programlisting>  &quot;arrow-type&quot;               <link linkend="GtkArrowType">GtkArrowType</link>          : Read / Write</programlisting>
 <para>
 The arrow type of the button. This value also determines the direction
 of the popup menu.</para>
@@ -164,9 +157,9 @@ of the popup menu.</para>
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
 <refsect2><title><anchor id="XfceArrowButton-arrow-type-changed"/>The &quot;arrow-type-changed&quot; signal</title>
-<indexterm><primary>XfceArrowButton::arrow-type-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
-                                            <link linkend="GtkArrowType">GtkArrowType</link>    *type,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run first</programlisting>
+<indexterm><primary>XfceArrowButton::arrow-type-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfceArrowButton">XfceArrowButton</link> *button,
+                                                        <link linkend="GtkArrowType">GtkArrowType</link>     type,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run First</programlisting>
 <para>
 Emitted when the arrow direction of the menu button changes.
 This value also determines the direction of the popup menu.</para>

@@ -23,10 +23,10 @@ External plugin widget.
 
 
 
-            <link linkend="XfceExternalPanelPlugin-struct">XfceExternalPanelPlugin</link>;
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-external-panel-plugin-new">xfce_external_panel_plugin_new</link>  (<link linkend="int">int</link> argc,
-                                             <link linkend="char">char</link> **argv,
-                                             <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);
+                    <link linkend="XfceExternalPanelPlugin-struct">XfceExternalPanelPlugin</link>;
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-external-panel-plugin-new">xfce_external_panel_plugin_new</link>      (<link linkend="int">int</link> argc,
+                                                         <link linkend="char">char</link> **argv,
+                                                         <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);
 
 </synopsis>
 </refsynopsisdiv>
@@ -54,7 +54,7 @@ External plugin widget.
 <title role="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 XfceExternalPanelPlugin implements
- <link linkend="AtkImplementorIface">AtkImplementorIface</link> and  <link linkend="XfcePanelPlugin">XfcePanelPlugin</link>.</para>
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link>,  <link linkend="GtkBuildable">GtkBuildable</link> and  <link linkend="XfcePanelPlugin">XfcePanelPlugin</link>.</para>
 
 </refsect1>
 
@@ -82,9 +82,9 @@ should be accessed using the functions for the
 </para></refsect2>
 <refsect2>
 <title><anchor id="xfce-external-panel-plugin-new" role="function"/>xfce_external_panel_plugin_new ()</title>
-<indexterm><primary>xfce_external_panel_plugin_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_external_panel_plugin_new  (<link linkend="int">int</link> argc,
-                                             <link linkend="char">char</link> **argv,
-                                             <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);</programlisting>
+<indexterm><primary>xfce_external_panel_plugin_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_external_panel_plugin_new      (<link linkend="int">int</link> argc,
+                                                         <link linkend="char">char</link> **argv,
+                                                         <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);</programlisting>
 <para>
 Creates a new external plugin. This function should not be used directly
 but only through the <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL()</function></link> macro.</para>

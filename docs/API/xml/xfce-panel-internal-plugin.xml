@@ -23,13 +23,13 @@ Internal panel plugin.
 
 
 
-            <link linkend="XfceInternalPanelPlugin-struct">XfceInternalPanelPlugin</link>;
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-internal-panel-plugin-new">xfce_internal_panel_plugin_new</link>  (const <link linkend="char">char</link> *name,
-                                             const <link linkend="char">char</link> *id,
-                                             const <link linkend="char">char</link> *display_name,
-                                             <link linkend="int">int</link> size,
-                                             <link linkend="XfceScreenPosition">XfceScreenPosition</link> position,
-                                             <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);
+                    <link linkend="XfceInternalPanelPlugin-struct">XfceInternalPanelPlugin</link>;
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-internal-panel-plugin-new">xfce_internal_panel_plugin_new</link>      (const <link linkend="char">char</link> *name,
+                                                         const <link linkend="char">char</link> *id,
+                                                         const <link linkend="char">char</link> *display_name,
+                                                         <link linkend="int">int</link> size,
+                                                         <link linkend="XfceScreenPosition">XfceScreenPosition</link> position,
+                                                         <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);
 
 </synopsis>
 </refsynopsisdiv>
@@ -56,7 +56,7 @@ Internal panel plugin.
 <title role="impl_interfaces.title">Implemented Interfaces</title>
 <para>
 XfceInternalPanelPlugin implements
- <link linkend="AtkImplementorIface">AtkImplementorIface</link>,  <link linkend="XfcePanelPlugin">XfcePanelPlugin</link> and  <link linkend="XfcePanelItem">XfcePanelItem</link>.</para>
+ <link linkend="AtkImplementorIface">AtkImplementorIface</link>,  <link linkend="GtkBuildable">GtkBuildable</link>,  <link linkend="XfcePanelPlugin">XfcePanelPlugin</link> and  <link linkend="XfcePanelItem">XfcePanelItem</link>.</para>
 
 </refsect1>
 
@@ -84,12 +84,12 @@ should be accessed using the functions for the
 </para></refsect2>
 <refsect2>
 <title><anchor id="xfce-internal-panel-plugin-new" role="function"/>xfce_internal_panel_plugin_new ()</title>
-<indexterm><primary>xfce_internal_panel_plugin_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_internal_panel_plugin_new  (const <link linkend="char">char</link> *name,
-                                             const <link linkend="char">char</link> *id,
-                                             const <link linkend="char">char</link> *display_name,
-                                             <link linkend="int">int</link> size,
-                                             <link linkend="XfceScreenPosition">XfceScreenPosition</link> position,
-                                             <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);</programlisting>
+<indexterm><primary>xfce_internal_panel_plugin_new</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_internal_panel_plugin_new      (const <link linkend="char">char</link> *name,
+                                                         const <link linkend="char">char</link> *id,
+                                                         const <link linkend="char">char</link> *display_name,
+                                                         <link linkend="int">int</link> size,
+                                                         <link linkend="XfceScreenPosition">XfceScreenPosition</link> position,
+                                                         <link linkend="XfcePanelPluginFunc">XfcePanelPluginFunc</link> construct);</programlisting>
 <para>
 Creates a new internal plugin. This function should not be used directly,
 but only throught the <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL()</function></link> macro.</para>

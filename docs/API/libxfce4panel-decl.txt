@@ -1,4 +1,331 @@
 <MACRO>
+<NAME>XFCE_TYPE_EXTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_TYPE_EXTERNAL_PANEL_PLUGIN            (xfce_external_panel_plugin_get_type ())
+</MACRO>
+<MACRO>
+<NAME>XFCE_EXTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_EXTERNAL_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, XfceExternalPanelPlugin))
+</MACRO>
+<MACRO>
+<NAME>XFCE_EXTERNAL_PANEL_PLUGIN_CLASS</NAME>
+#define XFCE_EXTERNAL_PANEL_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, XfceExternalPanelPluginClass))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_EXTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_IS_EXTERNAL_PANEL_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_EXTERNAL_PANEL_PLUGIN_CLASS</NAME>
+#define XFCE_IS_EXTERNAL_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN))
+</MACRO>
+<MACRO>
+<NAME>XFCE_EXTERNAL_PANEL_PLUGIN_GET_CLASS</NAME>
+#define XFCE_EXTERNAL_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, XfceExternalPanelPluginClass))
+</MACRO>
+<STRUCT>
+<NAME>XfceExternalPanelPlugin</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceExternalPanelPluginClass</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceExternalPanelPlugin</NAME>
+struct _XfceExternalPanelPlugin
+{
+    GtkPlug parent;
+};
+</STRUCT>
+<STRUCT>
+<NAME>XfceExternalPanelPluginClass</NAME>
+struct _XfceExternalPanelPluginClass
+{
+    GtkPlugClass parent_class;
+};
+</STRUCT>
+<FUNCTION>
+<NAME>xfce_external_panel_plugin_get_type</NAME>
+<RETURNS>GType </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_external_panel_plugin_new</NAME>
+<RETURNS>GtkWidget *</RETURNS>
+int argc,char **argv,XfcePanelPluginFunc construct
+</FUNCTION>
+<MACRO>
+<NAME>panel_slice_alloc</NAME>
+#define panel_slice_alloc(block_size)             (g_slice_alloc ((block_size)))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_alloc0</NAME>
+#define panel_slice_alloc0(block_size)            (g_slice_alloc0 ((block_size)))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_free1</NAME>
+#define panel_slice_free1(block_size, mem_block)  G_STMT_START{ g_slice_free1 ((block_size), (mem_block)); }G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>panel_slice_new</NAME>
+#define panel_slice_new(type)                     (g_slice_new (type))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_new0</NAME>
+#define panel_slice_new0(type)                    (g_slice_new0 (type))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_free</NAME>
+#define panel_slice_free(type, ptr)               G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>panel_slice_alloc</NAME>
+#define panel_slice_alloc(block_size)             (g_malloc ((block_size)))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_alloc0</NAME>
+#define panel_slice_alloc0(block_size)            (g_malloc0 ((block_size)))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_free1</NAME>
+#define panel_slice_free1(block_size, mem_block)  G_STMT_START{ g_free ((mem_block)); }G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>panel_slice_new</NAME>
+#define panel_slice_new(type)                     (g_new (type, 1))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_new0</NAME>
+#define panel_slice_new0(type)                    (g_new0 (type, 1))
+</MACRO>
+<MACRO>
+<NAME>panel_slice_free</NAME>
+#define panel_slice_free(type, ptr)               G_STMT_START{ g_free ((ptr)); }G_STMT_END
+</MACRO>
+<MACRO>
+<NAME>XFCE_TYPE_ITEMBAR</NAME>
+#define XFCE_TYPE_ITEMBAR            (xfce_itembar_get_type ())
+</MACRO>
+<MACRO>
+<NAME>XFCE_ITEMBAR</NAME>
+#define XFCE_ITEMBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ITEMBAR, XfceItembar))
+</MACRO>
+<MACRO>
+<NAME>XFCE_ITEMBAR_CLASS</NAME>
+#define XFCE_ITEMBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_ITEMBAR, XfceItembarClass))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_ITEMBAR</NAME>
+#define XFCE_IS_ITEMBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_ITEMBAR))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_ITEMBAR_CLASS</NAME>
+#define XFCE_IS_ITEMBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_ITEMBAR))
+</MACRO>
+<MACRO>
+<NAME>XFCE_ITEMBAR_GET_CLASS</NAME>
+#define XFCE_ITEMBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_ITEMBAR, XfceItembarClass))
+</MACRO>
+<STRUCT>
+<NAME>XfceItembar</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceItembarClass</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceItembar</NAME>
+struct _XfceItembar
+{
+    GtkContainer parent;
+};
+</STRUCT>
+<STRUCT>
+<NAME>XfceItembarClass</NAME>
+struct _XfceItembarClass
+{
+    GtkContainerClass parent_class;
+
+    /* signals */
+    void (*orientation_changed)   (XfceItembar * itembar,
+                                   GtkOrientation orientation);
+
+    void (*contents_changed)      (XfceItembar * itembar);
+
+    /* Padding for future expansion */
+    void (*_xfce_reserved1)       (void);
+    void (*_xfce_reserved2)       (void);
+    void (*_xfce_reserved3)       (void);
+    void (*_xfce_reserved4)       (void);
+};
+</STRUCT>
+<FUNCTION>
+<NAME>xfce_itembar_get_type</NAME>
+<RETURNS>GType </RETURNS>
+void
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_new</NAME>
+<RETURNS>GtkWidget *</RETURNS>
+GtkOrientation orientation
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_set_allow_expand</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar * itembar,gboolean allow
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_set_orientation</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar * itembar,GtkOrientation orientation
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_get_orientation</NAME>
+<RETURNS>GtkOrientation </RETURNS>
+XfceItembar * itembar
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_insert</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar * itembar,GtkWidget * item,int position
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_append</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar * itembar,GtkWidget * item
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_prepend</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar * itembar,GtkWidget * item
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_reorder_child</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar * itembar,GtkWidget * item,int position
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_set_child_expand</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar * itembar,GtkWidget * item,gboolean expand
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_get_child_expand</NAME>
+<RETURNS>gboolean </RETURNS>
+XfceItembar * itembar,GtkWidget * item
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_get_n_items</NAME>
+<RETURNS>int </RETURNS>
+XfceItembar * itembar
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_get_item_index</NAME>
+<RETURNS>int </RETURNS>
+XfceItembar * itembar,GtkWidget * item
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_get_nth_item</NAME>
+<RETURNS>GtkWidget *</RETURNS>
+XfceItembar * itembar,int n
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_raise_event_window</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar *itembar
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_lower_event_window</NAME>
+<RETURNS>void </RETURNS>
+XfceItembar *itembar
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_event_window_is_raised</NAME>
+<RETURNS>gboolean </RETURNS>
+XfceItembar * itembar
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_get_item_at_point</NAME>
+<RETURNS>GtkWidget *</RETURNS>
+XfceItembar * itembar,int x,int y
+</FUNCTION>
+<FUNCTION>
+<NAME>xfce_itembar_get_drop_index</NAME>
+<RETURNS>int </RETURNS>
+XfceItembar * itembar,int x,int y
+</FUNCTION>
+<ENUM>
+<NAME>XfceScreenPosition</NAME>
+typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
+{
+    XFCE_SCREEN_POSITION_NONE,
+    
+    /* top */
+    XFCE_SCREEN_POSITION_NW_H,          /* North West Horizontal */
+    XFCE_SCREEN_POSITION_N,             /* North                 */
+    XFCE_SCREEN_POSITION_NE_H,          /* North East Horizontal */
+
+    /* left */
+    XFCE_SCREEN_POSITION_NW_V,          /* North West Vertical   */
+    XFCE_SCREEN_POSITION_W,             /* West                  */
+    XFCE_SCREEN_POSITION_SW_V,          /* South West Vertical   */
+    
+    /* right */
+    XFCE_SCREEN_POSITION_NE_V,          /* North East Vertical   */
+    XFCE_SCREEN_POSITION_E,             /* East                  */
+    XFCE_SCREEN_POSITION_SE_V,          /* South East Vertical   */
+
+    /* bottom */
+    XFCE_SCREEN_POSITION_SW_H,          /* South West Horizontal */
+    XFCE_SCREEN_POSITION_S,             /* South                 */
+    XFCE_SCREEN_POSITION_SE_H,          /* South East Horizontal */
+
+    /* floating */
+    XFCE_SCREEN_POSITION_FLOATING_H,    /* Floating Horizontal */
+    XFCE_SCREEN_POSITION_FLOATING_V     /* Floating Vertical */
+}
+XfceScreenPosition;
+</ENUM>
+<MACRO>
+<NAME>xfce_screen_position_is_horizontal</NAME>
+#define xfce_screen_position_is_horizontal(position)   \
+    (position <= XFCE_SCREEN_POSITION_NE_H ||          \
+     (position >= XFCE_SCREEN_POSITION_SW_H &&         \
+      position <= XFCE_SCREEN_POSITION_FLOATING_H))
+</MACRO>
+<MACRO>
+<NAME>xfce_screen_position_get_orientation</NAME>
+#define xfce_screen_position_get_orientation(position) \
+    (xfce_screen_position_is_horizontal (position) ? \
+        GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL)
+</MACRO>
+<MACRO>
+<NAME>xfce_screen_position_is_floating</NAME>
+#define xfce_screen_position_is_floating(position) \
+    (position >= XFCE_SCREEN_POSITION_FLOATING_H || \
+     position == XFCE_SCREEN_POSITION_NONE)
+</MACRO>
+<MACRO>
+<NAME>xfce_screen_position_is_top</NAME>
+#define xfce_screen_position_is_top(position) \
+    (position >= XFCE_SCREEN_POSITION_NW_H && \
+     position <= XFCE_SCREEN_POSITION_NE_H)
+</MACRO>
+<MACRO>
+<NAME>xfce_screen_position_is_left</NAME>
+#define xfce_screen_position_is_left(position) \
+    (position >= XFCE_SCREEN_POSITION_NW_V && \
+     position <= XFCE_SCREEN_POSITION_SW_V)
+</MACRO>
+<MACRO>
+<NAME>xfce_screen_position_is_right</NAME>
+#define xfce_screen_position_is_right(position) \
+    (position >= XFCE_SCREEN_POSITION_NE_V && \
+     position <= XFCE_SCREEN_POSITION_SE_V)
+</MACRO>
+<MACRO>
+<NAME>xfce_screen_position_is_bottom</NAME>
+#define xfce_screen_position_is_bottom(position) \
+    (position >= XFCE_SCREEN_POSITION_SW_H)
+</MACRO>
+<MACRO>
 <NAME>XFCE_TYPE_HVBOX</NAME>
 #define XFCE_TYPE_HVBOX            (xfce_hvbox_get_type())
 </MACRO>
@@ -58,60 +385,93 @@ GtkOrientation orientation,gboolean homogeneous,int spacing
 <RETURNS>void </RETURNS>
 XfceHVBox * hvbox,GtkOrientation orientation
 </FUNCTION>
-<MACRO>
-<NAME>XFCE_TYPE_INTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_TYPE_INTERNAL_PANEL_PLUGIN            (xfce_internal_panel_plugin_get_type ())
-</MACRO>
-<MACRO>
-<NAME>XFCE_INTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_INTERNAL_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPlugin))
-</MACRO>
-<MACRO>
-<NAME>XFCE_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
-#define XFCE_INTERNAL_PANEL_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_IS_INTERNAL_PANEL_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
-#define XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
-</MACRO>
-<MACRO>
-<NAME>XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS</NAME>
-#define XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
-</MACRO>
-<STRUCT>
-<NAME>XfceInternalPanelPlugin</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceInternalPanelPluginClass</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceInternalPanelPlugin</NAME>
-struct _XfceInternalPanelPlugin
-{
-    GtkEventBox parent;
-};
-</STRUCT>
-<STRUCT>
-<NAME>XfceInternalPanelPluginClass</NAME>
-struct _XfceInternalPanelPluginClass
-{
-    GtkEventBoxClass parent_class;
-};
-</STRUCT>
 <FUNCTION>
-<NAME>xfce_internal_panel_plugin_get_type</NAME>
-<RETURNS>GType </RETURNS>
+<NAME>xfce_create_panel_button</NAME>
+<RETURNS>GtkWidget *</RETURNS>
 void
 </FUNCTION>
 <FUNCTION>
-<NAME>xfce_internal_panel_plugin_new</NAME>
+<NAME>xfce_create_panel_toggle_button</NAME>
 <RETURNS>GtkWidget *</RETURNS>
-const char *name,const char *id,const char *display_name,int size,XfceScreenPosition position,XfcePanelPluginFunc construct
+void
 </FUNCTION>
+<FUNCTION>
+<NAME>xfce_allow_panel_customization</NAME>
+<RETURNS>gboolean </RETURNS>
+void
+</FUNCTION>
+<MACRO>
+<NAME>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</NAME>
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct)	\
+    		XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,NULL)
+</MACRO>
+<MACRO>
+<NAME>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</NAME>
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check)	\
+    		XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,check)
+</MACRO>
+<MACRO>
+<NAME>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL</NAME>
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,init,check)		\
+    gint                                                           		\
+    main (gint argc, gchar **argv)                                 		\
+    {                                                              		\
+        GtkWidget              *plugin;                                         \
+	XfcePanelPluginFunc     create  = (XfcePanelPluginFunc)construct;	\
+        XfcePanelPluginPreInit  preinit = (XfcePanelPluginPreInit)init;		\
+        XfcePanelPluginCheck    test    = (XfcePanelPluginCheck)check;		\
+										\
+	if ( preinit )								\
+	{									\
+	    if (G_UNLIKELY (preinit(argc,argv) == FALSE))       			\
+	    	return 3;                                                   	\
+	}									\
+										\
+        gtk_init (&argc, &argv);                                   		\
+                                                                   		\
+	if ( test )								\
+	{									\
+	    if (G_UNLIKELY (test(gdk_screen_get_default()) == FALSE))       	\
+	    	return 2;                                                   	\
+	}									\
+										\
+        plugin = xfce_external_panel_plugin_new (argc, argv, create); 		\
+                                                                   		\
+        if (G_UNLIKELY (plugin == NULL))                           		\
+            return 1;                                              		\
+                                                                   		\
+        g_signal_connect_after (G_OBJECT (plugin), "destroy",      		\
+                                G_CALLBACK (gtk_main_quit), NULL); 		\
+										\
+        gtk_widget_show (plugin);                                  		\
+        gtk_main ();                                               		\
+                                                                   		\
+        return 0;                                                  		\
+    }
+</MACRO>
+<MACRO>
+<NAME>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</NAME>
+#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct) \
+    XfcePanelPluginFunc \
+    xfce_panel_plugin_get_construct (void) \
+    { \
+        return (XfcePanelPluginFunc)construct; \
+    }
+</MACRO>
+<MACRO>
+<NAME>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</NAME>
+#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK(construct,check) \
+    XfcePanelPluginFunc \
+    xfce_panel_plugin_get_construct (void) \
+    { \
+        return (XfcePanelPluginFunc)construct; \
+    } \
+    XfcePanelPluginCheck \
+    xfce_panel_plugin_get_check (void) \
+    { \
+        return (XfcePanelPluginCheck)check; \
+    }
+</MACRO>
 <MACRO>
 <NAME>XFCE_TYPE_PANEL_PLUGIN</NAME>
 #define XFCE_TYPE_PANEL_PLUGIN                (xfce_panel_plugin_get_type ())
@@ -138,6 +498,11 @@ const char *name,const char *id,const char *display_name,int size,XfceScreenPosi
 <NAME>XfcePanelPluginFunc</NAME>
 <RETURNS>void </RETURNS>
 XfcePanelPlugin *plugin
+</USER_FUNCTION>
+<USER_FUNCTION>
+<NAME>XfcePanelPluginPreInit</NAME>
+<RETURNS>gboolean </RETURNS>
+int argc, char **argv
 </USER_FUNCTION>
 <USER_FUNCTION>
 <NAME>XfcePanelPluginCheck</NAME>
@@ -245,314 +610,75 @@ XfcePanelPlugin *plugin,GtkWidget *widget
 XfcePanelPlugin *plugin,gboolean hidden
 </FUNCTION>
 <MACRO>
-<NAME>XFCE_TYPE_EXTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_TYPE_EXTERNAL_PANEL_PLUGIN            (xfce_external_panel_plugin_get_type ())
+<NAME>XFCE_TYPE_ARROW_BUTTON</NAME>
+#define XFCE_TYPE_ARROW_BUTTON            (xfce_arrow_button_get_type ())
 </MACRO>
 <MACRO>
-<NAME>XFCE_EXTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_EXTERNAL_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, XfceExternalPanelPlugin))
+<NAME>XFCE_ARROW_BUTTON</NAME>
+#define XFCE_ARROW_BUTTON(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButton))
 </MACRO>
 <MACRO>
-<NAME>XFCE_EXTERNAL_PANEL_PLUGIN_CLASS</NAME>
-#define XFCE_EXTERNAL_PANEL_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, XfceExternalPanelPluginClass))
+<NAME>XFCE_ARROW_BUTTON_CLASS</NAME>
+#define XFCE_ARROW_BUTTON_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
 </MACRO>
 <MACRO>
-<NAME>XFCE_IS_EXTERNAL_PANEL_PLUGIN</NAME>
-#define XFCE_IS_EXTERNAL_PANEL_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN))
+<NAME>XFCE_IS_ARROW_BUTTON</NAME>
+#define XFCE_IS_ARROW_BUTTON(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_ARROW_BUTTON))
 </MACRO>
 <MACRO>
-<NAME>XFCE_IS_EXTERNAL_PANEL_PLUGIN_CLASS</NAME>
-#define XFCE_IS_EXTERNAL_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN))
+<NAME>XFCE_IS_ARROW_BUTTON_CLASS</NAME>
+#define XFCE_IS_ARROW_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_ARROW_BUTTON))
 </MACRO>
 <MACRO>
-<NAME>XFCE_EXTERNAL_PANEL_PLUGIN_GET_CLASS</NAME>
-#define XFCE_EXTERNAL_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_EXTERNAL_PANEL_PLUGIN, XfceExternalPanelPluginClass))
+<NAME>XFCE_ARROW_BUTTON_GET_CLASS</NAME>
+#define XFCE_ARROW_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
 </MACRO>
 <STRUCT>
-<NAME>XfceExternalPanelPlugin</NAME>
+<NAME>XfceArrowButton</NAME>
 </STRUCT>
 <STRUCT>
-<NAME>XfceExternalPanelPluginClass</NAME>
+<NAME>XfceArrowButtonClass</NAME>
 </STRUCT>
 <STRUCT>
-<NAME>XfceExternalPanelPlugin</NAME>
-struct _XfceExternalPanelPlugin
+<NAME>XfceArrowButton</NAME>
+struct _XfceArrowButton
 {
-    GtkPlug parent;
+    GtkToggleButton parent;
+
+    GtkArrowType arrow_type;
 };
 </STRUCT>
 <STRUCT>
-<NAME>XfceExternalPanelPluginClass</NAME>
-struct _XfceExternalPanelPluginClass
+<NAME>XfceArrowButtonClass</NAME>
+struct _XfceArrowButtonClass
 {
-    GtkPlugClass parent_class;
-};
-</STRUCT>
-<FUNCTION>
-<NAME>xfce_external_panel_plugin_get_type</NAME>
-<RETURNS>GType </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_external_panel_plugin_new</NAME>
-<RETURNS>GtkWidget *</RETURNS>
-int argc,char **argv,XfcePanelPluginFunc construct
-</FUNCTION>
-<MACRO>
-<NAME>XFCE_TYPE_ITEMBAR</NAME>
-#define XFCE_TYPE_ITEMBAR            (xfce_itembar_get_type ())
-</MACRO>
-<MACRO>
-<NAME>XFCE_ITEMBAR</NAME>
-#define XFCE_ITEMBAR(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ITEMBAR, XfceItembar))
-</MACRO>
-<MACRO>
-<NAME>XFCE_ITEMBAR_CLASS</NAME>
-#define XFCE_ITEMBAR_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_ITEMBAR, XfceItembarClass))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_ITEMBAR</NAME>
-#define XFCE_IS_ITEMBAR(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_ITEMBAR))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_ITEMBAR_CLASS</NAME>
-#define XFCE_IS_ITEMBAR_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_ITEMBAR))
-</MACRO>
-<MACRO>
-<NAME>XFCE_ITEMBAR_GET_CLASS</NAME>
-#define XFCE_ITEMBAR_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_ITEMBAR, XfceItembarClass))
-</MACRO>
-<STRUCT>
-<NAME>XfceItembar</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceItembarClass</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceItembar</NAME>
-struct _XfceItembar
-{
-    GtkContainer parent;
-};
-</STRUCT>
-<STRUCT>
-<NAME>XfceItembarClass</NAME>
-struct _XfceItembarClass
-{
-    GtkContainerClass parent_class;
+    GtkToggleButtonClass parent_class;
 
     /* signals */
-    void (*orientation_changed)   (XfceItembar * itembar,
-                                   GtkOrientation orientation);
-
-    void (*contents_changed)      (XfceItembar * itembar);
-
-    /* Padding for future expansion */
-    void (*_xfce_reserved1)       (void);
-    void (*_xfce_reserved2)       (void);
-    void (*_xfce_reserved3)       (void);
-    void (*_xfce_reserved4)       (void);
+    void (*arrow_type_changed)     (GtkWidget * widget,
+                                    GtkArrowType type);
 };
 </STRUCT>
 <FUNCTION>
-<NAME>xfce_itembar_get_type</NAME>
+<NAME>xfce_arrow_button_get_type</NAME>
 <RETURNS>GType </RETURNS>
 void
 </FUNCTION>
 <FUNCTION>
-<NAME>xfce_itembar_new</NAME>
+<NAME>xfce_arrow_button_new</NAME>
 <RETURNS>GtkWidget *</RETURNS>
-GtkOrientation orientation
+GtkArrowType type
 </FUNCTION>
 <FUNCTION>
-<NAME>xfce_itembar_set_orientation</NAME>
+<NAME>xfce_arrow_button_set_arrow_type</NAME>
 <RETURNS>void </RETURNS>
-XfceItembar * itembar,GtkOrientation orientation
+XfceArrowButton * button,GtkArrowType type
 </FUNCTION>
 <FUNCTION>
-<NAME>xfce_itembar_get_orientation</NAME>
-<RETURNS>GtkOrientation </RETURNS>
-XfceItembar * itembar
+<NAME>xfce_arrow_button_get_arrow_type</NAME>
+<RETURNS>GtkArrowType </RETURNS>
+XfceArrowButton * button
 </FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_insert</NAME>
-<RETURNS>void </RETURNS>
-XfceItembar * itembar,GtkWidget * item,int position
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_append</NAME>
-<RETURNS>void </RETURNS>
-XfceItembar * itembar,GtkWidget * item
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_prepend</NAME>
-<RETURNS>void </RETURNS>
-XfceItembar * itembar,GtkWidget * item
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_reorder_child</NAME>
-<RETURNS>void </RETURNS>
-XfceItembar * itembar,GtkWidget * item,int position
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_set_child_expand</NAME>
-<RETURNS>void </RETURNS>
-XfceItembar * itembar,GtkWidget * item,gboolean expand
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_get_child_expand</NAME>
-<RETURNS>gboolean </RETURNS>
-XfceItembar * itembar,GtkWidget * item
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_get_n_items</NAME>
-<RETURNS>int </RETURNS>
-XfceItembar * itembar
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_get_item_index</NAME>
-<RETURNS>int </RETURNS>
-XfceItembar * itembar,GtkWidget * item
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_get_nth_item</NAME>
-<RETURNS>GtkWidget *</RETURNS>
-XfceItembar * itembar,int n
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_raise_event_window</NAME>
-<RETURNS>void </RETURNS>
-XfceItembar *itembar
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_lower_event_window</NAME>
-<RETURNS>void </RETURNS>
-XfceItembar *itembar
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_event_window_is_raised</NAME>
-<RETURNS>gboolean </RETURNS>
-XfceItembar * itembar
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_get_item_at_point</NAME>
-<RETURNS>GtkWidget *</RETURNS>
-XfceItembar * itembar,int x,int y
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_itembar_get_drop_index</NAME>
-<RETURNS>int </RETURNS>
-XfceItembar * itembar,int x,int y
-</FUNCTION>
-<MACRO>
-<NAME>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL</NAME>
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct) \
-    int \
-    main (int argc, char **argv) \
-    { \
-        GtkWidget *plugin; \
-        gtk_init (&argc, &argv); \
-        plugin = xfce_external_panel_plugin_new (argc, argv, \
-                     (XfcePanelPluginFunc)construct); \
-        if (!plugin) return 1; \
-        g_signal_connect_after (plugin, "destroy", \
-                                G_CALLBACK (exit), NULL); \
-        gtk_widget_show (plugin); \
-        gtk_main (); \
-        return 0; \
-    }
-</MACRO>
-<MACRO>
-<NAME>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK</NAME>
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check) \
-    int \
-    main (int argc, char **argv) \
-    { \
-        GtkWidget *plugin; \
-        XfcePanelPluginCheck test = (XfcePanelPluginCheck)check; \
-        gtk_init (&argc, &argv); \
-        if (!test(gdk_screen_get_default())) return 2; \
-        plugin = xfce_external_panel_plugin_new (argc, argv, \
-                     (XfcePanelPluginFunc)construct); \
-        if (!plugin) return 1; \
-        g_signal_connect_after (plugin, "destroy", \
-                                G_CALLBACK (exit), NULL); \
-        gtk_widget_show (plugin); \
-        gtk_main (); \
-        return 0; \
-    }
-</MACRO>
-<MACRO>
-<NAME>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL</NAME>
-#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct) \
-    XfcePanelPluginFunc \
-    xfce_panel_plugin_get_construct (void) \
-    { \
-        return (XfcePanelPluginFunc)construct; \
-    }
-</MACRO>
-<MACRO>
-<NAME>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK</NAME>
-#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK(construct,check) \
-    XfcePanelPluginFunc \
-    xfce_panel_plugin_get_construct (void) \
-    { \
-        return (XfcePanelPluginFunc)construct; \
-    } \
-    XfcePanelPluginCheck \
-    xfce_panel_plugin_get_check (void) \
-    { \
-        return (XfcePanelPluginCheck)check; \
-    }
-</MACRO>
-<MACRO>
-<NAME>panel_slice_alloc</NAME>
-#define panel_slice_alloc(block_size)             (g_slice_alloc ((block_size)))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_alloc0</NAME>
-#define panel_slice_alloc0(block_size)            (g_slice_alloc0 ((block_size)))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_free1</NAME>
-#define panel_slice_free1(block_size, mem_block)  G_STMT_START{ g_slice_free1 ((block_size), (mem_block)); }G_STMT_END
-</MACRO>
-<MACRO>
-<NAME>panel_slice_new</NAME>
-#define panel_slice_new(type)                     (g_slice_new (type))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_new0</NAME>
-#define panel_slice_new0(type)                    (g_slice_new0 (type))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_free</NAME>
-#define panel_slice_free(type, ptr)               G_STMT_START{ g_slice_free (type, (ptr)); }G_STMT_END
-</MACRO>
-<MACRO>
-<NAME>panel_slice_alloc</NAME>
-#define panel_slice_alloc(block_size)             (g_malloc ((block_size)))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_alloc0</NAME>
-#define panel_slice_alloc0(block_size)            (g_malloc0 ((block_size)))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_free1</NAME>
-#define panel_slice_free1(block_size, mem_block)  G_STMT_START{ g_free ((mem_block)); }G_STMT_END
-</MACRO>
-<MACRO>
-<NAME>panel_slice_new</NAME>
-#define panel_slice_new(type)                     (g_new (type, 1))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_new0</NAME>
-#define panel_slice_new0(type)                    (g_new0 (type, 1))
-</MACRO>
-<MACRO>
-<NAME>panel_slice_free</NAME>
-#define panel_slice_free(type, ptr)               G_STMT_START{ g_free ((ptr)); }G_STMT_END
-</MACRO>
 <MACRO>
 <NAME>XFCE_TYPE_PANEL_WINDOW</NAME>
 #define XFCE_TYPE_PANEL_WINDOW            (xfce_panel_window_get_type ())
@@ -705,20 +831,59 @@ XfcePanelWindow * window,gboolean movable
 <RETURNS>gboolean </RETURNS>
 XfcePanelWindow * window
 </FUNCTION>
+<MACRO>
+<NAME>XFCE_TYPE_INTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_TYPE_INTERNAL_PANEL_PLUGIN            (xfce_internal_panel_plugin_get_type ())
+</MACRO>
+<MACRO>
+<NAME>XFCE_INTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_INTERNAL_PANEL_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPlugin))
+</MACRO>
+<MACRO>
+<NAME>XFCE_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
+#define XFCE_INTERNAL_PANEL_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN</NAME>
+#define XFCE_IS_INTERNAL_PANEL_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
+</MACRO>
+<MACRO>
+<NAME>XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS</NAME>
+#define XFCE_IS_INTERNAL_PANEL_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_INTERNAL_PANEL_PLUGIN))
+</MACRO>
+<MACRO>
+<NAME>XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS</NAME>
+#define XFCE_INTERNAL_PANEL_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_INTERNAL_PANEL_PLUGIN, XfceInternalPanelPluginClass))
+</MACRO>
+<STRUCT>
+<NAME>XfceInternalPanelPlugin</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceInternalPanelPluginClass</NAME>
+</STRUCT>
+<STRUCT>
+<NAME>XfceInternalPanelPlugin</NAME>
+struct _XfceInternalPanelPlugin
+{
+    GtkEventBox parent;
+};
+</STRUCT>
+<STRUCT>
+<NAME>XfceInternalPanelPluginClass</NAME>
+struct _XfceInternalPanelPluginClass
+{
+    GtkEventBoxClass parent_class;
+};
+</STRUCT>
 <FUNCTION>
-<NAME>xfce_create_panel_button</NAME>
-<RETURNS>GtkWidget *</RETURNS>
+<NAME>xfce_internal_panel_plugin_get_type</NAME>
+<RETURNS>GType </RETURNS>
 void
 </FUNCTION>
 <FUNCTION>
-<NAME>xfce_create_panel_toggle_button</NAME>
+<NAME>xfce_internal_panel_plugin_new</NAME>
 <RETURNS>GtkWidget *</RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_allow_panel_customization</NAME>
-<RETURNS>gboolean </RETURNS>
-void
+const char *name,const char *id,const char *display_name,int size,XfceScreenPosition position,XfcePanelPluginFunc construct
 </FUNCTION>
 <FUNCTION>
 <NAME>xfce_handle_style_get_type</NAME>
@@ -738,147 +903,3 @@ void
 <NAME>XFCE_TYPE_SCREEN_POSITION</NAME>
 #define XFCE_TYPE_SCREEN_POSITION (xfce_screen_position_get_type())
 </MACRO>
-<ENUM>
-<NAME>XfceScreenPosition</NAME>
-typedef enum /*<enum,prefix=XFCE_SCREEN_POSITION >*/
-{
-    XFCE_SCREEN_POSITION_NONE,
-    
-    /* top */
-    XFCE_SCREEN_POSITION_NW_H,          /* North West Horizontal */
-    XFCE_SCREEN_POSITION_N,             /* North                 */
-    XFCE_SCREEN_POSITION_NE_H,          /* North East Horizontal */
-
-    /* left */
-    XFCE_SCREEN_POSITION_NW_V,          /* North West Vertical   */
-    XFCE_SCREEN_POSITION_W,             /* West                  */
-    XFCE_SCREEN_POSITION_SW_V,          /* South West Vertical   */
-    
-    /* right */
-    XFCE_SCREEN_POSITION_NE_V,          /* North East Vertical   */
-    XFCE_SCREEN_POSITION_E,             /* East                  */
-    XFCE_SCREEN_POSITION_SE_V,          /* South East Vertical   */
-
-    /* bottom */
-    XFCE_SCREEN_POSITION_SW_H,          /* South West Horizontal */
-    XFCE_SCREEN_POSITION_S,             /* South                 */
-    XFCE_SCREEN_POSITION_SE_H,          /* South East Horizontal */
-
-    /* floating */
-    XFCE_SCREEN_POSITION_FLOATING_H,    /* Floating Horizontal */
-    XFCE_SCREEN_POSITION_FLOATING_V     /* Floating Vertical */
-}
-XfceScreenPosition;
-</ENUM>
-<MACRO>
-<NAME>xfce_screen_position_is_horizontal</NAME>
-#define xfce_screen_position_is_horizontal(position)   \
-    (position <= XFCE_SCREEN_POSITION_NE_H ||          \
-     (position >= XFCE_SCREEN_POSITION_SW_H &&         \
-      position <= XFCE_SCREEN_POSITION_FLOATING_H))
-</MACRO>
-<MACRO>
-<NAME>xfce_screen_position_get_orientation</NAME>
-#define xfce_screen_position_get_orientation(position) \
-    (xfce_screen_position_is_horizontal (position) ? \
-        GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL)
-</MACRO>
-<MACRO>
-<NAME>xfce_screen_position_is_floating</NAME>
-#define xfce_screen_position_is_floating(position) \
-    (position >= XFCE_SCREEN_POSITION_FLOATING_H || \
-     position == XFCE_SCREEN_POSITION_NONE)
-</MACRO>
-<MACRO>
-<NAME>xfce_screen_position_is_top</NAME>
-#define xfce_screen_position_is_top(position) \
-    (position >= XFCE_SCREEN_POSITION_NW_H && \
-     position <= XFCE_SCREEN_POSITION_NE_H)
-</MACRO>
-<MACRO>
-<NAME>xfce_screen_position_is_left</NAME>
-#define xfce_screen_position_is_left(position) \
-    (position >= XFCE_SCREEN_POSITION_NW_V && \
-     position <= XFCE_SCREEN_POSITION_SW_V)
-</MACRO>
-<MACRO>
-<NAME>xfce_screen_position_is_right</NAME>
-#define xfce_screen_position_is_right(position) \
-    (position >= XFCE_SCREEN_POSITION_NE_V && \
-     position <= XFCE_SCREEN_POSITION_SE_V)
-</MACRO>
-<MACRO>
-<NAME>xfce_screen_position_is_bottom</NAME>
-#define xfce_screen_position_is_bottom(position) \
-    (position >= XFCE_SCREEN_POSITION_SW_H)
-</MACRO>
-<MACRO>
-<NAME>XFCE_TYPE_ARROW_BUTTON</NAME>
-#define XFCE_TYPE_ARROW_BUTTON            (xfce_arrow_button_get_type ())
-</MACRO>
-<MACRO>
-<NAME>XFCE_ARROW_BUTTON</NAME>
-#define XFCE_ARROW_BUTTON(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButton))
-</MACRO>
-<MACRO>
-<NAME>XFCE_ARROW_BUTTON_CLASS</NAME>
-#define XFCE_ARROW_BUTTON_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_ARROW_BUTTON</NAME>
-#define XFCE_IS_ARROW_BUTTON(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_ARROW_BUTTON))
-</MACRO>
-<MACRO>
-<NAME>XFCE_IS_ARROW_BUTTON_CLASS</NAME>
-#define XFCE_IS_ARROW_BUTTON_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_ARROW_BUTTON))
-</MACRO>
-<MACRO>
-<NAME>XFCE_ARROW_BUTTON_GET_CLASS</NAME>
-#define XFCE_ARROW_BUTTON_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_ARROW_BUTTON, XfceArrowButtonClass))
-</MACRO>
-<STRUCT>
-<NAME>XfceArrowButton</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceArrowButtonClass</NAME>
-</STRUCT>
-<STRUCT>
-<NAME>XfceArrowButton</NAME>
-struct _XfceArrowButton
-{
-    GtkToggleButton parent;
-
-    GtkArrowType arrow_type;
-};
-</STRUCT>
-<STRUCT>
-<NAME>XfceArrowButtonClass</NAME>
-struct _XfceArrowButtonClass
-{
-    GtkToggleButtonClass parent_class;
-
-    /* signals */
-    void (*arrow_type_changed)     (GtkWidget * widget,
-                                    GtkArrowType type);
-};
-</STRUCT>
-<FUNCTION>
-<NAME>xfce_arrow_button_get_type</NAME>
-<RETURNS>GType </RETURNS>
-void
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_arrow_button_new</NAME>
-<RETURNS>GtkWidget *</RETURNS>
-GtkArrowType type
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_arrow_button_set_arrow_type</NAME>
-<RETURNS>void </RETURNS>
-XfceArrowButton * button,GtkArrowType type
-</FUNCTION>
-<FUNCTION>
-<NAME>xfce_arrow_button_get_arrow_type</NAME>
-<RETURNS>GtkArrowType </RETURNS>
-XfceArrowButton * button
-</FUNCTION>

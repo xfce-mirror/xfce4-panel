@@ -23,44 +23,37 @@ Panel plugin interface.
 
 
 
-            <link linkend="XfcePanelPlugin-struct">XfcePanelPlugin</link>;
-<link linkend="void">void</link>        (<link linkend="XfcePanelPluginFunc">*XfcePanelPluginFunc</link>)          (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="gboolean">gboolean</link>    (<link linkend="XfcePanelPluginCheck">*XfcePanelPluginCheck</link>)         (<link linkend="GdkScreen">GdkScreen</link> *screen);
-<link linkend="gchar">gchar</link>*      <link linkend="xfce-panel-plugin-get-name">xfce_panel_plugin_get_name</link>      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="gchar">gchar</link>*      <link linkend="xfce-panel-plugin-get-id">xfce_panel_plugin_get_id</link>        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="gchar">gchar</link>*      <link linkend="xfce-panel-plugin-get-display-name">xfce_panel_plugin_get_display_name</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="int">int</link>         <link linkend="xfce-panel-plugin-get-size">xfce_panel_plugin_get_size</link>      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="XfceScreenPosition">XfceScreenPosition</link> <link linkend="xfce-panel-plugin-get-screen-position">xfce_panel_plugin_get_screen_position</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-set-expand">xfce_panel_plugin_set_expand</link>    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="gboolean">gboolean</link> expand);
-<link linkend="gboolean">gboolean</link>    <link linkend="xfce-panel-plugin-get-expand">xfce_panel_plugin_get_expand</link>    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="GtkOrientation">GtkOrientation</link> <link linkend="xfce-panel-plugin-get-orientation">xfce_panel_plugin_get_orientation</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-add-action-widget">xfce_panel_plugin_add_action_widget</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkWidget">GtkWidget</link> *widget);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-menu-insert-item">xfce_panel_plugin_menu_insert_item</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkMenuItem">GtkMenuItem</link> *item);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-menu-show-about">xfce_panel_plugin_menu_show_about</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-menu-show-configure">xfce_panel_plugin_menu_show_configure</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-block-menu">xfce_panel_plugin_block_menu</link>    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-unblock-menu">xfce_panel_plugin_unblock_menu</link>  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-register-menu">xfce_panel_plugin_register_menu</link> (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkMenu">GtkMenu</link> *menu);
-<link linkend="char">char</link>*       <link linkend="xfce-panel-plugin-lookup-rc-file">xfce_panel_plugin_lookup_rc_file</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
-<link linkend="char">char</link>*       <link linkend="xfce-panel-plugin-save-location">xfce_panel_plugin_save_location</link> (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="gboolean">gboolean</link> create);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-focus-widget">xfce_panel_plugin_focus_widget</link>  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkWidget">GtkWidget</link> *widget);
-<link linkend="void">void</link>        <link linkend="xfce-panel-plugin-set-panel-hidden">xfce_panel_plugin_set_panel_hidden</link>
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="gboolean">gboolean</link> hidden);
+                    <link linkend="XfcePanelPlugin-struct">XfcePanelPlugin</link>;
+<link linkend="void">void</link>                (<link linkend="XfcePanelPluginFunc">*XfcePanelPluginFunc</link>)              (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="gboolean">gboolean</link>            (<link linkend="XfcePanelPluginCheck">*XfcePanelPluginCheck</link>)             (<link linkend="GdkScreen">GdkScreen</link> *screen);
+<link linkend="gchar">gchar</link>*              <link linkend="xfce-panel-plugin-get-name">xfce_panel_plugin_get_name</link>          (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="gchar">gchar</link>*              <link linkend="xfce-panel-plugin-get-id">xfce_panel_plugin_get_id</link>            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="gchar">gchar</link>*              <link linkend="xfce-panel-plugin-get-display-name">xfce_panel_plugin_get_display_name</link>  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="int">int</link>                 <link linkend="xfce-panel-plugin-get-size">xfce_panel_plugin_get_size</link>          (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="XfceScreenPosition">XfceScreenPosition</link>  <link linkend="xfce-panel-plugin-get-screen-position">xfce_panel_plugin_get_screen_position</link>
+                                                        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-set-expand">xfce_panel_plugin_set_expand</link>        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> expand);
+<link linkend="gboolean">gboolean</link>            <link linkend="xfce-panel-plugin-get-expand">xfce_panel_plugin_get_expand</link>        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="GtkOrientation">GtkOrientation</link>      <link linkend="xfce-panel-plugin-get-orientation">xfce_panel_plugin_get_orientation</link>   (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-add-action-widget">xfce_panel_plugin_add_action_widget</link> (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-menu-insert-item">xfce_panel_plugin_menu_insert_item</link>  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkMenuItem">GtkMenuItem</link> *item);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-menu-show-about">xfce_panel_plugin_menu_show_about</link>   (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-menu-show-configure">xfce_panel_plugin_menu_show_configure</link>
+                                                        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-block-menu">xfce_panel_plugin_block_menu</link>        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-unblock-menu">xfce_panel_plugin_unblock_menu</link>      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-register-menu">xfce_panel_plugin_register_menu</link>     (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkMenu">GtkMenu</link> *menu);
+<link linkend="char">char</link>*               <link linkend="xfce-panel-plugin-lookup-rc-file">xfce_panel_plugin_lookup_rc_file</link>    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);
+<link linkend="char">char</link>*               <link linkend="xfce-panel-plugin-save-location">xfce_panel_plugin_save_location</link>     (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> create);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-focus-widget">xfce_panel_plugin_focus_widget</link>      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget);
+<link linkend="void">void</link>                <link linkend="xfce-panel-plugin-set-panel-hidden">xfce_panel_plugin_set_panel_hidden</link>  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> hidden);
 
 </synopsis>
 </refsynopsisdiv>
@@ -97,12 +90,12 @@ XfcePanelPlugin is implemented by
 <title role="properties.title">Properties</title>
 <synopsis>
 
-  &quot;<link linkend="XfcePanelPlugin--display-name">display-name</link>&quot;         <link linkend="gchararray">gchararray</link>            : Read
-  &quot;<link linkend="XfcePanelPlugin--expand">expand</link>&quot;               <link linkend="gboolean">gboolean</link>              : Read / Write
-  &quot;<link linkend="XfcePanelPlugin--id">id</link>&quot;                   <link linkend="gchararray">gchararray</link>            : Read
-  &quot;<link linkend="XfcePanelPlugin--name">name</link>&quot;                 <link linkend="gchararray">gchararray</link>            : Read
-  &quot;<link linkend="XfcePanelPlugin--screen-position">screen-position</link>&quot;      <link linkend="XfceScreenPosition">XfceScreenPosition</link>    : Read
-  &quot;<link linkend="XfcePanelPlugin--size">size</link>&quot;                 <link linkend="gint">gint</link>                  : Read
+  &quot;<link linkend="XfcePanelPlugin--display-name">display-name</link>&quot;             <link linkend="gchararray">gchararray</link>            : Read
+  &quot;<link linkend="XfcePanelPlugin--expand">expand</link>&quot;                   <link linkend="gboolean">gboolean</link>              : Read / Write
+  &quot;<link linkend="XfcePanelPlugin--id">id</link>&quot;                       <link linkend="gchararray">gchararray</link>            : Read
+  &quot;<link linkend="XfcePanelPlugin--name">name</link>&quot;                     <link linkend="gchararray">gchararray</link>            : Read
+  &quot;<link linkend="XfcePanelPlugin--screen-position">screen-position</link>&quot;          <link linkend="XfceScreenPosition">XfceScreenPosition</link>    : Read
+  &quot;<link linkend="XfcePanelPlugin--size">size</link>&quot;                     <link linkend="gint">gint</link>                  : Read
 </synopsis>
 </refsect1>
 
@@ -110,27 +103,13 @@ XfcePanelPlugin is implemented by
 <title role="signal_proto.title">Signals</title>
 <synopsis>
 
-&quot;<link linkend="XfcePanelPlugin-about">about</link>&quot;     <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks
-&quot;<link linkend="XfcePanelPlugin-configure-plugin">configure-plugin</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks
-&quot;<link linkend="XfcePanelPlugin-free-data">free-data</link>&quot; <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks
-&quot;<link linkend="XfcePanelPlugin-orientation-changed">orientation-changed</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="GtkOrientation">GtkOrientation</link>  *orientation,
-                                            <link linkend="gpointer">gpointer</link>         user_data)        : Run last / No recursion / No hooks
-&quot;<link linkend="XfcePanelPlugin-save">save</link>&quot;      <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks
-&quot;<link linkend="XfcePanelPlugin-screen-position-changed">screen-position-changed</link>&quot;
-            <link linkend="void">void</link>        user_function      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link>    *plugin,
-                                            <link linkend="XfceScreenPosition">XfceScreenPosition</link> *position,
-                                            <link linkend="gpointer">gpointer</link>            user_data)      : Run last / No recursion / No hooks
-&quot;<link linkend="XfcePanelPlugin-size-changed">size-changed</link>&quot;
-            <link linkend="gboolean">gboolean</link>    user_function      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gint">gint</link>             size,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks
+  &quot;<link linkend="XfcePanelPlugin-about">about</link>&quot;                                          : Run Last / No Recursion / No Hooks
+  &quot;<link linkend="XfcePanelPlugin-configure-plugin">configure-plugin</link>&quot;                               : Run Last / No Recursion / No Hooks
+  &quot;<link linkend="XfcePanelPlugin-free-data">free-data</link>&quot;                                      : Run Last / No Recursion / No Hooks
+  &quot;<link linkend="XfcePanelPlugin-orientation-changed">orientation-changed</link>&quot;                            : Run Last / No Recursion / No Hooks
+  &quot;<link linkend="XfcePanelPlugin-save">save</link>&quot;                                           : Run Last / No Recursion / No Hooks
+  &quot;<link linkend="XfcePanelPlugin-screen-position-changed">screen-position-changed</link>&quot;                        : Run Last / No Recursion / No Hooks
+  &quot;<link linkend="XfcePanelPlugin-size-changed">size-changed</link>&quot;                                   : Run Last / No Recursion / No Hooks
 </synopsis>
 </refsect1>
 
@@ -155,7 +134,7 @@ of a widget implementing the panel plugin interface.
 </para></refsect2>
 <refsect2>
 <title><anchor id="XfcePanelPluginFunc" role="function"/>XfcePanelPluginFunc ()</title>
-<indexterm><primary>XfcePanelPluginFunc</primary></indexterm><programlisting><link linkend="void">void</link>        (*XfcePanelPluginFunc)          (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>XfcePanelPluginFunc</primary></indexterm><programlisting><link linkend="void">void</link>                (*XfcePanelPluginFunc)              (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 Callback function to create the plugin contents. It should be given as 
 the argument to the registration macros.
@@ -172,26 +151,27 @@ See also: <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL:CAPS"><function>XFC
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="XfcePanelPluginCheck" role="function"/>XfcePanelPluginCheck ()</title>
-<indexterm><primary>XfcePanelPluginCheck</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    (*XfcePanelPluginCheck)         (<link linkend="GdkScreen">GdkScreen</link> *screen);</programlisting>
+<indexterm><primary>XfcePanelPluginCheck</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            (*XfcePanelPluginCheck)             (<link linkend="GdkScreen">GdkScreen</link> *screen);</programlisting>
 <para>
 Callback function that is run before creating a plugin. It should return
-if the plugin is not available for whatever reason. It should be given as 
-the argument to the registration macros.</para>
+<link linkend="FALSE:CAPS"><literal>FALSE</literal></link> if the plugin is not available for whatever reason. The function 
+can be given as argument to one of the registration macros.</para>
 <para>
 
 </para><variablelist role="params">
 <varlistentry><term><parameter>screen</parameter>&nbsp;:</term>
-<listitem><simpara> The <link linkend="GdkScreen"><type>GdkScreen</type></link> that the plugin should be run on.
+<listitem><simpara> the <link linkend="GdkScreen"><type>GdkScreen</type></link> the panel is running on
 </simpara></listitem></varlistentry>
-<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the plugin can be started, <link linkend="FALSE:CAPS"><literal>FALSE</literal></link> other wise.
+<varlistentry><term><emphasis>Returns</emphasis>&nbsp;:</term><listitem><simpara> <link linkend="TRUE:CAPS"><literal>TRUE</literal></link> if the plugin can be started, <link linkend="FALSE:CAPS"><literal>FALSE</literal></link> otherwise.
 
-See also: <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK()</function></link> and
-          <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()</function></link>
+See also: <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-WITH-CHECK:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK()</function></link>,
+          <link linkend="XFCE-PANEL-PLUGIN-REGISTER-INTERNAL-WITH-CHECK:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK()</function></link> and
+          <link linkend="XFCE-PANEL-PLUGIN-REGISTER-EXTERNAL-FULL:CAPS"><function>XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL()</function></link>
 </simpara></listitem></varlistentry>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-get-name" role="function"/>xfce_panel_plugin_get_name ()</title>
-<indexterm><primary>xfce_panel_plugin_get_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*      xfce_panel_plugin_get_name      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_get_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              xfce_panel_plugin_get_name          (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 The plugin name identifies a plugin type and therefore must be unique.</para>
 <para>
@@ -205,7 +185,7 @@ The plugin name identifies a plugin type and therefore must be unique.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-get-id" role="function"/>xfce_panel_plugin_get_id ()</title>
-<indexterm><primary>xfce_panel_plugin_get_id</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*      xfce_panel_plugin_get_id        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_get_id</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              xfce_panel_plugin_get_id            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 The plugin id is a unique identifier string that is given to every instance
 of a panel plugin.</para>
@@ -220,8 +200,7 @@ of a panel plugin.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-get-display-name" role="function"/>xfce_panel_plugin_get_display_name ()</title>
-<indexterm><primary>xfce_panel_plugin_get_display_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*      xfce_panel_plugin_get_display_name
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_get_display_name</primary></indexterm><programlisting><link linkend="gchar">gchar</link>*              xfce_panel_plugin_get_display_name  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 The display name is the (translated) plugin name that can be used in a user
 interface, e.g. a dialog or a menu.</para>
@@ -236,7 +215,7 @@ interface, e.g. a dialog or a menu.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-get-size" role="function"/>xfce_panel_plugin_get_size ()</title>
-<indexterm><primary>xfce_panel_plugin_get_size</primary></indexterm><programlisting><link linkend="int">int</link>         xfce_panel_plugin_get_size      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_get_size</primary></indexterm><programlisting><link linkend="int">int</link>                 xfce_panel_plugin_get_size          (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 </para>
 <para>
@@ -250,8 +229,8 @@ interface, e.g. a dialog or a menu.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-get-screen-position" role="function"/>xfce_panel_plugin_get_screen_position ()</title>
-<indexterm><primary>xfce_panel_plugin_get_screen_position</primary></indexterm><programlisting><link linkend="XfceScreenPosition">XfceScreenPosition</link> xfce_panel_plugin_get_screen_position
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_get_screen_position</primary></indexterm><programlisting><link linkend="XfceScreenPosition">XfceScreenPosition</link>  xfce_panel_plugin_get_screen_position
+                                                        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 </para>
 <para>
@@ -265,8 +244,8 @@ interface, e.g. a dialog or a menu.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-set-expand" role="function"/>xfce_panel_plugin_set_expand ()</title>
-<indexterm><primary>xfce_panel_plugin_set_expand</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_set_expand    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="gboolean">gboolean</link> expand);</programlisting>
+<indexterm><primary>xfce_panel_plugin_set_expand</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_set_expand        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> expand);</programlisting>
 <para>
 Sets whether to expand the plugin when the width of the panel increases.</para>
 <para>
@@ -281,7 +260,7 @@ Sets whether to expand the plugin when the width of the panel increases.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-get-expand" role="function"/>xfce_panel_plugin_get_expand ()</title>
-<indexterm><primary>xfce_panel_plugin_get_expand</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    xfce_panel_plugin_get_expand    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_get_expand</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            xfce_panel_plugin_get_expand        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 </para>
 <para>
@@ -295,8 +274,7 @@ Sets whether to expand the plugin when the width of the panel increases.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-get-orientation" role="function"/>xfce_panel_plugin_get_orientation ()</title>
-<indexterm><primary>xfce_panel_plugin_get_orientation</primary></indexterm><programlisting><link linkend="GtkOrientation">GtkOrientation</link> xfce_panel_plugin_get_orientation
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_get_orientation</primary></indexterm><programlisting><link linkend="GtkOrientation">GtkOrientation</link>      xfce_panel_plugin_get_orientation   (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 </para>
 <para>
@@ -310,9 +288,8 @@ Sets whether to expand the plugin when the width of the panel increases.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-add-action-widget" role="function"/>xfce_panel_plugin_add_action_widget ()</title>
-<indexterm><primary>xfce_panel_plugin_add_action_widget</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_add_action_widget
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
+<indexterm><primary>xfce_panel_plugin_add_action_widget</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_add_action_widget (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
 <para>
 Attach the plugin menu to this widget. Plugin writers should call this
 for every widget that can receive mouse events. If you forget to call this
@@ -330,9 +307,8 @@ remove it.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-menu-insert-item" role="function"/>xfce_panel_plugin_menu_insert_item ()</title>
-<indexterm><primary>xfce_panel_plugin_menu_insert_item</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_menu_insert_item
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkMenuItem">GtkMenuItem</link> *item);</programlisting>
+<indexterm><primary>xfce_panel_plugin_menu_insert_item</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_menu_insert_item  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkMenuItem">GtkMenuItem</link> *item);</programlisting>
 <para>
 Insert custom menu item.</para>
 <para>
@@ -347,8 +323,7 @@ Insert custom menu item.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-menu-show-about" role="function"/>xfce_panel_plugin_menu_show_about ()</title>
-<indexterm><primary>xfce_panel_plugin_menu_show_about</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_menu_show_about
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_menu_show_about</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_menu_show_about   (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 Show the 'About' item in the menu. Clicking on the menu item will emit
 the "about" signal.</para>
@@ -361,8 +336,8 @@ the "about" signal.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-menu-show-configure" role="function"/>xfce_panel_plugin_menu_show_configure ()</title>
-<indexterm><primary>xfce_panel_plugin_menu_show_configure</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_menu_show_configure
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_menu_show_configure</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_menu_show_configure
+                                                        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 Show the 'Configure' item in the menu. Clicking on the menu item will emit
 the "configure-plugin" signal.</para>
@@ -375,7 +350,7 @@ the "configure-plugin" signal.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-block-menu" role="function"/>xfce_panel_plugin_block_menu ()</title>
-<indexterm><primary>xfce_panel_plugin_block_menu</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_block_menu    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_block_menu</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_block_menu        (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 Temporarily block the menu from being shown. This can be used by plugin
 writers when the configuration dialog is active.
@@ -391,7 +366,7 @@ See also: <link linkend="xfce-panel-plugin-unblock-menu"><function>xfce_panel_pl
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-unblock-menu" role="function"/>xfce_panel_plugin_unblock_menu ()</title>
-<indexterm><primary>xfce_panel_plugin_unblock_menu</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_unblock_menu  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_unblock_menu</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_unblock_menu      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 Don't block the menu from being shown.
 </para>
@@ -406,8 +381,8 @@ See also: <link linkend="xfce-panel-plugin-block-menu"><function>xfce_panel_plug
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-register-menu" role="function"/>xfce_panel_plugin_register_menu ()</title>
-<indexterm><primary>xfce_panel_plugin_register_menu</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_register_menu (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkMenu">GtkMenu</link> *menu);</programlisting>
+<indexterm><primary>xfce_panel_plugin_register_menu</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_register_menu     (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkMenu">GtkMenu</link> *menu);</programlisting>
 <para>
 Register an open menu. This will make sure the panel will properly handle
 its autohide behaviour.</para>
@@ -423,8 +398,7 @@ its autohide behaviour.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-lookup-rc-file" role="function"/>xfce_panel_plugin_lookup_rc_file ()</title>
-<indexterm><primary>xfce_panel_plugin_lookup_rc_file</primary></indexterm><programlisting><link linkend="char">char</link>*       xfce_panel_plugin_lookup_rc_file
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
+<indexterm><primary>xfce_panel_plugin_lookup_rc_file</primary></indexterm><programlisting><link linkend="char">char</link>*               xfce_panel_plugin_lookup_rc_file    (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin);</programlisting>
 <para>
 Looks up unique filename associated with <parameter>plugin</parameter> in standard configuration
 locations. Uses <link linkend="xfce-resource-lookup"><function>xfce_resource_lookup()</function></link> internally.</para>
@@ -442,8 +416,8 @@ See also: <link linkend="xfce-panel-plugin-save-location"><function>xfce_panel_p
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-save-location" role="function"/>xfce_panel_plugin_save_location ()</title>
-<indexterm><primary>xfce_panel_plugin_save_location</primary></indexterm><programlisting><link linkend="char">char</link>*       xfce_panel_plugin_save_location (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="gboolean">gboolean</link> create);</programlisting>
+<indexterm><primary>xfce_panel_plugin_save_location</primary></indexterm><programlisting><link linkend="char">char</link>*               xfce_panel_plugin_save_location     (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> create);</programlisting>
 <para>
 Unique file location that can be used to store configuration information.
 Uses <link linkend="xfce-resource-save-location"><function>xfce_resource_save_location()</function></link> internally.</para>
@@ -464,8 +438,8 @@ See also: <link linkend="xfce-panel-plugin-lookup-rc-file"><function>xfce_panel_
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-focus-widget" role="function"/>xfce_panel_plugin_focus_widget ()</title>
-<indexterm><primary>xfce_panel_plugin_focus_widget</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_focus_widget  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
+<indexterm><primary>xfce_panel_plugin_focus_widget</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_focus_widget      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="GtkWidget">GtkWidget</link> *widget);</programlisting>
 <para>
 Grab the focus on <parameter>widget</parameter>. Asks the panel to allow focus on its items and
 set the focus to the requested widget.</para>
@@ -481,9 +455,8 @@ set the focus to the requested widget.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-panel-plugin-set-panel-hidden" role="function"/>xfce_panel_plugin_set_panel_hidden ()</title>
-<indexterm><primary>xfce_panel_plugin_set_panel_hidden</primary></indexterm><programlisting><link linkend="void">void</link>        xfce_panel_plugin_set_panel_hidden
-                                            (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                             <link linkend="gboolean">gboolean</link> hidden);</programlisting>
+<indexterm><primary>xfce_panel_plugin_set_panel_hidden</primary></indexterm><programlisting><link linkend="void">void</link>                xfce_panel_plugin_set_panel_hidden  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                         <link linkend="gboolean">gboolean</link> hidden);</programlisting>
 <para>
 Ask the panel to hide or unhide. This only has effect when autohide is
 enabled.</para>
@@ -502,7 +475,7 @@ enabled.</para>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
 <refsect2><title><anchor id="XfcePanelPlugin--display-name"/>The &quot;<literal>display-name</literal>&quot; property</title>
-<indexterm><primary>XfcePanelPlugin:display-name</primary></indexterm><programlisting>  &quot;display-name&quot;         <link linkend="gchararray">gchararray</link>            : Read</programlisting>
+<indexterm><primary>XfcePanelPlugin:display-name</primary></indexterm><programlisting>  &quot;display-name&quot;             <link linkend="gchararray">gchararray</link>            : Read</programlisting>
 <para>
 Translated plugin name. This is the name that can be presented to
 the user, e.g. in dialogs or menus.</para>
@@ -511,7 +484,7 @@ the user, e.g. in dialogs or menus.</para>
 </para><para>Default value: NULL</para>
 </refsect2>
 <refsect2><title><anchor id="XfcePanelPlugin--expand"/>The &quot;<literal>expand</literal>&quot; property</title>
-<indexterm><primary>XfcePanelPlugin:expand</primary></indexterm><programlisting>  &quot;expand&quot;               <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
+<indexterm><primary>XfcePanelPlugin:expand</primary></indexterm><programlisting>  &quot;expand&quot;                   <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>
 Whether to expand the plugin when the panel width increases.</para>
 <para>
@@ -519,7 +492,7 @@ Whether to expand the plugin when the panel width increases.</para>
 </para><para>Default value: FALSE</para>
 </refsect2>
 <refsect2><title><anchor id="XfcePanelPlugin--id"/>The &quot;<literal>id</literal>&quot; property</title>
-<indexterm><primary>XfcePanelPlugin:id</primary></indexterm><programlisting>  &quot;id&quot;                   <link linkend="gchararray">gchararray</link>            : Read</programlisting>
+<indexterm><primary>XfcePanelPlugin:id</primary></indexterm><programlisting>  &quot;id&quot;                       <link linkend="gchararray">gchararray</link>            : Read</programlisting>
 <para>
 Unique identifier string created for every <link linkend="XfcePanelPlugin"><type>XfcePanelPlugin</type></link> instance.</para>
 <para>
@@ -527,7 +500,7 @@ Unique identifier string created for every <link linkend="XfcePanelPlugin"><type
 </para><para>Default value: NULL</para>
 </refsect2>
 <refsect2><title><anchor id="XfcePanelPlugin--name"/>The &quot;<literal>name</literal>&quot; property</title>
-<indexterm><primary>XfcePanelPlugin:name</primary></indexterm><programlisting>  &quot;name&quot;                 <link linkend="gchararray">gchararray</link>            : Read</programlisting>
+<indexterm><primary>XfcePanelPlugin:name</primary></indexterm><programlisting>  &quot;name&quot;                     <link linkend="gchararray">gchararray</link>            : Read</programlisting>
 <para>
 Untranslated plugin name. This identifies the plugin type and
 therefore has to be unique.</para>
@@ -536,7 +509,7 @@ therefore has to be unique.</para>
 </para><para>Default value: NULL</para>
 </refsect2>
 <refsect2><title><anchor id="XfcePanelPlugin--screen-position"/>The &quot;<literal>screen-position</literal>&quot; property</title>
-<indexterm><primary>XfcePanelPlugin:screen-position</primary></indexterm><programlisting>  &quot;screen-position&quot;      <link linkend="XfceScreenPosition">XfceScreenPosition</link>    : Read</programlisting>
+<indexterm><primary>XfcePanelPlugin:screen-position</primary></indexterm><programlisting>  &quot;screen-position&quot;          <link linkend="XfceScreenPosition">XfceScreenPosition</link>    : Read</programlisting>
 <para>
 The current <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link> of the panel.</para>
 <para>
@@ -544,7 +517,7 @@ The current <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></
 </para><para>Default value: XFCE_SCREEN_POSITION_S</para>
 </refsect2>
 <refsect2><title><anchor id="XfcePanelPlugin--size"/>The &quot;<literal>size</literal>&quot; property</title>
-<indexterm><primary>XfcePanelPlugin:size</primary></indexterm><programlisting>  &quot;size&quot;                 <link linkend="gint">gint</link>                  : Read</programlisting>
+<indexterm><primary>XfcePanelPlugin:size</primary></indexterm><programlisting>  &quot;size&quot;                     <link linkend="gint">gint</link>                  : Read</programlisting>
 <para>
 The current panel size.</para>
 <para>
@@ -558,8 +531,8 @@ The current panel size.</para>
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
 <refsect2><title><anchor id="XfcePanelPlugin-about"/>The &quot;about&quot; signal</title>
-<indexterm><primary>XfcePanelPlugin::about</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks</programlisting>
+<indexterm><primary>XfcePanelPlugin::about</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
 Emitted when the 'About' menu item is clicked. Plugin writers
 should connect to this signal to show information about their
@@ -576,8 +549,8 @@ See also: <link linkend="xfce-panel-plugin-menu-show-about"><function>xfce_panel
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-configure-plugin"/>The &quot;configure-plugin&quot; signal</title>
-<indexterm><primary>XfcePanelPlugin::configure-plugin</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks</programlisting>
+<indexterm><primary>XfcePanelPlugin::configure-plugin</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
 Emitted when the 'Configure' menu item is clicked. Plugin writers
 should connect to this signal to show a settings dialog.
@@ -593,8 +566,8 @@ See also: <link linkend="xfce-panel-plugin-menu-show-configure"><function>xfce_p
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-free-data"/>The &quot;free-data&quot; signal</title>
-<indexterm><primary>XfcePanelPlugin::free-data</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks</programlisting>
+<indexterm><primary>XfcePanelPlugin::free-data</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
 Emitted when the panel is closing. Plugin writers should connect to
 this signal to free any allocated resources.
@@ -610,9 +583,9 @@ See also: <link linkend="XfcePanelPlugin-save"><type>XfcePanelPlugin::save</type
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
-<indexterm><primary>XfcePanelPlugin::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="GtkOrientation">GtkOrientation</link>  *orientation,
-                                            <link linkend="gpointer">gpointer</link>         user_data)        : Run last / No recursion / No hooks</programlisting>
+<indexterm><primary>XfcePanelPlugin::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                        <link linkend="GtkOrientation">GtkOrientation</link>   orientation,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)        : Run Last / No Recursion / No Hooks</programlisting>
 <para>
 Emitted when the panel orientation changes.</para>
 <para>
@@ -627,8 +600,8 @@ Emitted when the panel orientation changes.</para>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-save"/>The &quot;save&quot; signal</title>
-<indexterm><primary>XfcePanelPlugin::save</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks</programlisting>
+<indexterm><primary>XfcePanelPlugin::save</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
 Emitted before the panel is closing. May be called more than once
 while the panel is running. Plugin writers should connect to
@@ -645,9 +618,9 @@ See also: <link linkend="xfce-panel-plugin-get-rc-file"><function>xfce_panel_plu
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-screen-position-changed"/>The &quot;screen-position-changed&quot; signal</title>
-<indexterm><primary>XfcePanelPlugin::screen-position-changed</primary></indexterm><programlisting><link linkend="void">void</link>        user_function                  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link>    *plugin,
-                                            <link linkend="XfceScreenPosition">XfceScreenPosition</link> *position,
-                                            <link linkend="gpointer">gpointer</link>            user_data)      : Run last / No recursion / No hooks</programlisting>
+<indexterm><primary>XfcePanelPlugin::screen-position-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link>   *plugin,
+                                                        <link linkend="XfceScreenPosition">XfceScreenPosition</link> position,
+                                                        <link linkend="gpointer">gpointer</link>           user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
 Emitted when the screen position changes. Most plugins will be
 more interested in the "orientation-changed" signal.</para>
@@ -663,9 +636,9 @@ more interested in the "orientation-changed" signal.</para>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
 </variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-size-changed"/>The &quot;size-changed&quot; signal</title>
-<indexterm><primary>XfcePanelPlugin::size-changed</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    user_function                  (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
-                                            <link linkend="gint">gint</link>             size,
-                                            <link linkend="gpointer">gpointer</link>         user_data)      : Run last / No recursion / No hooks</programlisting>
+<indexterm><primary>XfcePanelPlugin::size-changed</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
+                                                        <link linkend="gint">gint</link>             size,
+                                                        <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
 Emitted when the panel size changes. By default a plugin will
 get a geometry of <parameter>size</parameter> x <parameter>size</parameter>. This means that a plugin writer

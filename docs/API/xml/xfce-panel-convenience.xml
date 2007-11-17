@@ -23,15 +23,15 @@ Special purpose widgets and utilities.
 
 
 
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-create-panel-button">xfce_create_panel_button</link>        (void);
-<link linkend="GtkWidget">GtkWidget</link>*  <link linkend="xfce-create-panel-toggle-button">xfce_create_panel_toggle_button</link> (void);
-<link linkend="gboolean">gboolean</link>    <link linkend="xfce-allow-panel-customization">xfce_allow_panel_customization</link>  (void);
-#define     <link linkend="panel-slice-alloc">panel_slice_alloc</link>               (block_size)
-#define     <link linkend="panel-slice-alloc0">panel_slice_alloc0</link>              (block_size)
-#define     <link linkend="panel-slice-free">panel_slice_free</link>                (type, ptr)
-#define     <link linkend="panel-slice-free1">panel_slice_free1</link>               (block_size, mem_block)
-#define     <link linkend="panel-slice-new">panel_slice_new</link>                 (type)
-#define     <link linkend="panel-slice-new0">panel_slice_new0</link>                (type)
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-create-panel-button">xfce_create_panel_button</link>            (void);
+<link linkend="GtkWidget">GtkWidget</link>*          <link linkend="xfce-create-panel-toggle-button">xfce_create_panel_toggle_button</link>     (void);
+<link linkend="gboolean">gboolean</link>            <link linkend="xfce-allow-panel-customization">xfce_allow_panel_customization</link>      (void);
+#define             <link linkend="panel-slice-alloc">panel_slice_alloc</link>                   (block_size)
+#define             <link linkend="panel-slice-alloc0">panel_slice_alloc0</link>                  (block_size)
+#define             <link linkend="panel-slice-free">panel_slice_free</link>                    (type, ptr)
+#define             <link linkend="panel-slice-free1">panel_slice_free1</link>                   (block_size, mem_block)
+#define             <link linkend="panel-slice-new">panel_slice_new</link>                     (type)
+#define             <link linkend="panel-slice-new0">panel_slice_new0</link>                    (type)
 </synopsis>
 </refsynopsisdiv>
 
@@ -55,7 +55,7 @@ developers of Xfce Panel plugins.
 <title role="details.title">Details</title>
 <refsect2>
 <title><anchor id="xfce-create-panel-button" role="function"/>xfce_create_panel_button ()</title>
-<indexterm><primary>xfce_create_panel_button</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_create_panel_button        (void);</programlisting>
+<indexterm><primary>xfce_create_panel_button</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_create_panel_button            (void);</programlisting>
 <para>
 Create regular <link linkend="GtkToggleButton"><type>GtkToggleButton</type></link> with a few properties set to be useful in 
 Xfce panel: Flat (<link linkend="GTK-RELIEF-NONE:CAPS"><literal>GTK_RELIEF_NONE</literal></link>), no focus on click and minimal padding.</para>
@@ -67,7 +67,7 @@ Xfce panel: Flat (<link linkend="GTK-RELIEF-NONE:CAPS"><literal>GTK_RELIEF_NONE<
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-create-panel-toggle-button" role="function"/>xfce_create_panel_toggle_button ()</title>
-<indexterm><primary>xfce_create_panel_toggle_button</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*  xfce_create_panel_toggle_button (void);</programlisting>
+<indexterm><primary>xfce_create_panel_toggle_button</primary></indexterm><programlisting><link linkend="GtkWidget">GtkWidget</link>*          xfce_create_panel_toggle_button     (void);</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -78,7 +78,7 @@ Xfce panel: Flat (<link linkend="GTK-RELIEF-NONE:CAPS"><literal>GTK_RELIEF_NONE<
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="xfce-allow-panel-customization" role="function"/>xfce_allow_panel_customization ()</title>
-<indexterm><primary>xfce_allow_panel_customization</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>    xfce_allow_panel_customization  (void);</programlisting>
+<indexterm><primary>xfce_allow_panel_customization</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            xfce_allow_panel_customization      (void);</programlisting>
 <para>
 Check if the user is allowed to customize the panel. Uses the kiosk mode
 implementation from libxfce4util.</para>
@@ -91,7 +91,7 @@ implementation from libxfce4util.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="panel-slice-alloc" role="macro"/>panel_slice_alloc()</title>
-<indexterm><primary>panel_slice_alloc</primary></indexterm><programlisting>#define     panel_slice_alloc(block_size)</programlisting>
+<indexterm><primary>panel_slice_alloc</primary></indexterm><programlisting>#define             panel_slice_alloc(block_size)</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -103,7 +103,7 @@ implementation from libxfce4util.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="panel-slice-alloc0" role="macro"/>panel_slice_alloc0()</title>
-<indexterm><primary>panel_slice_alloc0</primary></indexterm><programlisting>#define     panel_slice_alloc0(block_size)</programlisting>
+<indexterm><primary>panel_slice_alloc0</primary></indexterm><programlisting>#define             panel_slice_alloc0(block_size)</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -115,7 +115,7 @@ implementation from libxfce4util.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="panel-slice-free" role="macro"/>panel_slice_free()</title>
-<indexterm><primary>panel_slice_free</primary></indexterm><programlisting>#define     panel_slice_free(type, ptr)</programlisting>
+<indexterm><primary>panel_slice_free</primary></indexterm><programlisting>#define             panel_slice_free(type, ptr)</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -130,7 +130,7 @@ implementation from libxfce4util.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="panel-slice-free1" role="macro"/>panel_slice_free1()</title>
-<indexterm><primary>panel_slice_free1</primary></indexterm><programlisting>#define     panel_slice_free1(block_size, mem_block)</programlisting>
+<indexterm><primary>panel_slice_free1</primary></indexterm><programlisting>#define             panel_slice_free1(block_size, mem_block)</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -145,7 +145,7 @@ implementation from libxfce4util.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="panel-slice-new" role="macro"/>panel_slice_new()</title>
-<indexterm><primary>panel_slice_new</primary></indexterm><programlisting>#define     panel_slice_new(type)</programlisting>
+<indexterm><primary>panel_slice_new</primary></indexterm><programlisting>#define             panel_slice_new(type)</programlisting>
 <para>
 
 </para><variablelist role="params">
@@ -157,7 +157,7 @@ implementation from libxfce4util.</para>
 </variablelist></refsect2>
 <refsect2>
 <title><anchor id="panel-slice-new0" role="macro"/>panel_slice_new0()</title>
-<indexterm><primary>panel_slice_new0</primary></indexterm><programlisting>#define     panel_slice_new0(type)</programlisting>
+<indexterm><primary>panel_slice_new0</primary></indexterm><programlisting>#define             panel_slice_new0(type)</programlisting>
 <para>
 
 </para><variablelist role="params">
