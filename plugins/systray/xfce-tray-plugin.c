@@ -178,6 +178,13 @@ xfce_tray_plugin_icon_added (XfceTrayManager *manager,
 {
     gchar *name;
 
+    /* initialize the size when needed */
+    if (G_UNLIKELY (plugin->initial_size == -1))
+       xfce_tray_plugin_size_changed (plugin, xfce_panel_plugin_get_size (plugin->panel_plugin));
+
+    /* set size request */
+    gtk_widget_set_size_request (icon, plugin->initial_size, plugin->initial_size);
+
     /* get the application name */
     name = xfce_tray_manager_get_application_name (icon);
 
@@ -234,6 +241,7 @@ xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
     plugin->panel_plugin = panel_plugin;
     plugin->manager = NULL;
     plugin->show_frame = TRUE;
+    plugin->initial_size = -1;
 
     /* create the frame */
     plugin->frame = gtk_frame_new (NULL);
@@ -281,8 +289,6 @@ xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
         g_error_free (error);
     }
 
-
-
     return plugin;
 }
 
@@ -309,16 +315,24 @@ xfce_tray_plugin_orientation_changed (XfceTrayPlugin *plugin,
 
 
 static gboolean
-xfce_tray_plugin_size_changed (XfceTrayPlugin  *plugin,
-                               guint            size)
+xfce_tray_plugin_size_changed (XfceTrayPlugin *plugin,
+                               guint           size)
 {
-    gint border;
+    gint n_rows;
 
     /* set the frame border size */
     gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), size > SMALL_PANEL_SIZE ? 1 : 0);
 
-    /* get the border size */
-    border = size > SMALL_PANEL_SIZE ? 6 : 4;
+    /* get tray rows */
+    n_rows = xfce_tray_widget_get_rows (XFCE_TRAY_WIDGET (plugin->tray));
+
+    /* calculate the initial tray icon size */
+    plugin->initial_size = (size
+                            - 2 * GTK_CONTAINER (plugin->frame)->border_width
+                            - 2 * GTK_CONTAINER (plugin->tray)->border_width
+                            - 2 * MAX (plugin->frame->style->xthickness, plugin->frame->style->ythickness)
+                            - XFCE_TRAY_WIDGET_SPACING * (n_rows - 1))
+                           / n_rows;
 
     /* we handled the size of the plugin */
     return TRUE;

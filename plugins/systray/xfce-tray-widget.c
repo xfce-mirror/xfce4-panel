@@ -96,9 +96,6 @@ struct _XfceTrayWidget
     /* whether hidden icons are visible */
     guint         show_hidden : 1;
 
-    /* spacing between the childeren */
-    gint          spacing;
-
     /* number of rows */
     gint          rows;
 };
@@ -178,7 +175,6 @@ xfce_tray_widget_init (XfceTrayWidget *tray)
     /* initialize */
     tray->childeren = NULL;
     tray->button = NULL;
-    tray->spacing = 1;
     tray->rows = 1;
     tray->n_hidden_childeren = 0;
     tray->arrow_type = GTK_ARROW_LEFT;
@@ -227,8 +223,9 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
     XfceTrayWidget      *tray = XFCE_TRAY_WIDGET (widget);
     GSList              *li;
     XfceTrayWidgetChild *child_info;
-    gint                 child_size = 1;
+    gint                 child_size = 128;
     gint                 n_columns;
+    GtkRequisition       child_requisition;
     gint                 n_visible_childeren = 0;
 
     _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (widget));
@@ -241,10 +238,11 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
         /* ship hidden icons if needed */
         if (child_info->hidden == FALSE || tray->show_hidden == TRUE)
         {
-            /* we use the child allocation for size request here, this is not entirely legal, but
-             * it seems to work better for tray icons since they request weird sizes sometimes */
-            child_size = MAX (child_size, MAX (child_info->widget->allocation.width,
-                                               child_info->widget->allocation.height));
+            /* get the icons size request */
+            gtk_widget_size_request (child_info->widget, &child_requisition);
+
+            /* get the child size (smallest icon) */
+            child_size = MIN (child_size, MAX (child_requisition.width, child_requisition.height));
 
             /* number of visible childeren */
             n_visible_childeren++;
@@ -259,8 +257,8 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
     /* set the width and height needed for the icons */
     if (n_visible_childeren > 0)
     {
-        requisition->width = ((child_size + tray->spacing) * n_columns) - tray->spacing;
-        requisition->height = ((child_size + tray->spacing) * tray->rows) - tray->spacing;
+        requisition->width = ((child_size + XFCE_TRAY_WIDGET_SPACING) * n_columns) - XFCE_TRAY_WIDGET_SPACING;
+        requisition->height = ((child_size + XFCE_TRAY_WIDGET_SPACING) * tray->rows) - XFCE_TRAY_WIDGET_SPACING;
     }
     else
     {
@@ -275,7 +273,7 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
 
         /* add space */
         if (n_visible_childeren > 0)
-             requisition->width += tray->spacing;
+             requisition->width += XFCE_TRAY_WIDGET_SPACING;
     }
 
     /* swap the sizes if the orientation is vertical */
@@ -319,7 +317,7 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
 
     /* child size */
     child_size = XFCE_TRAY_WIDGET_IS_HORIZONTAL (tray) ? height : width;
-    child_size -= tray->spacing * (tray->rows - 1);
+    child_size -= XFCE_TRAY_WIDGET_SPACING * (tray->rows - 1);
     child_size /= tray->rows;
 
     /* position arrow button */
@@ -348,7 +346,7 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
             child_allocation.y += height - child_allocation.height;
 
         /* set the offset for the icons */
-        offset = XFCE_TRAY_WIDGET_BUTTON_SIZE + tray->spacing;
+        offset = XFCE_TRAY_WIDGET_BUTTON_SIZE + XFCE_TRAY_WIDGET_SPACING;
 
         /* position the arrow button */
         gtk_widget_size_allocate (tray->button, &child_allocation);
@@ -376,8 +374,8 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
         else
         {
             /* set coordinates */
-            child_allocation.x = (child_size + tray->spacing) * (n / tray->rows) + offset;
-            child_allocation.y = (child_size + tray->spacing) * (n % tray->rows);
+            child_allocation.x = (child_size + XFCE_TRAY_WIDGET_SPACING) * (n / tray->rows) + offset;
+            child_allocation.y = (child_size + XFCE_TRAY_WIDGET_SPACING) * (n % tray->rows);
 
             /* increase item counter */
             n++;
@@ -403,6 +401,7 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
 
         /* allocate widget size */
         gtk_widget_size_allocate (child_info->widget, &child_allocation);
+        gtk_widget_set_size_request (child_info->widget, child_size, child_size);
     }
 }
 
@@ -628,7 +627,8 @@ xfce_tray_widget_set_arrow_type (XfceTrayWidget *tray,
         xfce_tray_widget_button_set_arrow (tray);
 
         /* queue a resize */
-        gtk_widget_queue_resize (GTK_WIDGET (tray));
+        if (tray->childeren != NULL)
+            gtk_widget_queue_resize (GTK_WIDGET (tray));
     }
 }
 
@@ -645,34 +645,6 @@ xfce_tray_widget_get_arrow_type (XfceTrayWidget *tray)
 
 
 void
-xfce_tray_widget_set_spacing (XfceTrayWidget *tray,
-                              gint            spacing)
-{
-    _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (tray));
-
-    if (G_LIKELY (spacing != tray->spacing))
-    {
-        /* set new setting */
-        tray->spacing = spacing;
-
-        /* queue a resize */
-        gtk_widget_queue_resize (GTK_WIDGET (tray));
-    }
-}
-
-
-
-gint
-xfce_tray_widget_get_spacing (XfceTrayWidget *tray)
-{
-    _panel_return_val_if_fail (XFCE_IS_TRAY_WIDGET (tray), 0);
-
-    return tray->spacing;
-}
-
-
-
-void
 xfce_tray_widget_set_rows (XfceTrayWidget *tray,
                            gint            rows)
 {
@@ -684,7 +656,8 @@ xfce_tray_widget_set_rows (XfceTrayWidget *tray,
         tray->rows = MAX (1, rows);
 
         /* queue a resize */
-        gtk_widget_queue_resize (GTK_WIDGET (tray));
+        if (tray->childeren != NULL)
+            gtk_widget_queue_resize (GTK_WIDGET (tray));
     }
 }
 

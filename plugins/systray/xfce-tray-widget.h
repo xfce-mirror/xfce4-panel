@@ -24,6 +24,8 @@ typedef struct _XfceTrayWidgetClass XfceTrayWidgetClass;
 typedef struct _XfceTrayWidget      XfceTrayWidget;
 typedef struct _XfceTrayWidgetChild XfceTrayWidgetChild;
 
+#define XFCE_TRAY_WIDGET_SPACING (2)
+
 #define XFCE_TYPE_TRAY_WIDGET            (xfce_tray_widget_get_type ())
 #define XFCE_TRAY_WIDGET(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TRAY_WIDGET, XfceTrayWidget))
 #define XFCE_TRAY_WIDGET_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_TRAY_WIDGET, XfceTrayWidgetClass))
@@ -43,11 +45,6 @@ void             xfce_tray_widget_set_arrow_type     (XfceTrayWidget *tray,
                                                       GtkArrowType    arrow_type) G_GNUC_INTERNAL;
 
 GtkArrowType     xfce_tray_widget_get_arrow_type     (XfceTrayWidget *tray) G_GNUC_INTERNAL;
-
-void             xfce_tray_widget_set_spacing        (XfceTrayWidget *tray,
-                                                      gint            spacing) G_GNUC_INTERNAL;
-
-gint             xfce_tray_widget_get_spacing        (XfceTrayWidget *tray) G_GNUC_INTERNAL;
 
 void             xfce_tray_widget_set_rows           (XfceTrayWidget *tray,
                                                       gint            rows) G_GNUC_INTERNAL;

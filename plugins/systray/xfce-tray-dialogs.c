@@ -188,6 +188,9 @@ xfce_tray_dialogs_n_rows_changed (GtkSpinButton  *button,
 
    /* set rows */
    xfce_tray_widget_set_rows (XFCE_TRAY_WIDGET (plugin->tray), value);
+
+   /* reset initial icon size */
+   plugin->initial_size = -1;
 }
 
 
