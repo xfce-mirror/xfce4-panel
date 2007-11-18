@@ -34,9 +34,6 @@ struct _XfceTrayPlugin
     GtkWidget       *frame;
     GtkWidget       *tray;
 
-    /* initial icon size */
-    gint             initial_size;
-
     /* properties */
     guint            show_frame : 1;
 };

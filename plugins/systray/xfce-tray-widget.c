@@ -108,6 +108,9 @@ struct _XfceTrayWidgetChild
     /* whether it could be hidden */
     guint         hidden : 1;
 
+    /* whether the icon is invisible */
+    guint         invisible : 1;
+
     /* the name of the applcation */
     gchar        *name;
 };
@@ -235,17 +238,43 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
     {
         child_info = li->data;
 
-        /* ship hidden icons if needed */
-        if (child_info->hidden == FALSE || tray->show_hidden == TRUE)
+        /* get the icons size request */
+        gtk_widget_size_request (child_info->widget, &child_requisition);
+
+        if (G_UNLIKELY (child_requisition.width == 1 || child_requisition.height == 1))
         {
-            /* get the icons size request */
-            gtk_widget_size_request (child_info->widget, &child_requisition);
+            /* don't do anything with already invisible icons */
+            if (child_info->invisible == FALSE)
+            {
+                /* this icon should not be visible */
+                child_info->invisible = TRUE;
 
-            /* get the child size (smallest icon) */
-            child_size = MIN (child_size, MAX (child_requisition.width, child_requisition.height));
+                /* decrease the hidden counter if needed */
+                if (child_info->hidden)
+                    tray->n_hidden_childeren--;
+            }
+        }
+        else
+        {
+            /* restore icon if it was previously invisible */
+            if (G_UNLIKELY (child_info->invisible))
+            {
+               /* visible icon */
+               child_info->invisible = FALSE;
 
-            /* number of visible childeren */
-            n_visible_childeren++;
+               /* update counter */
+               if (child_info->hidden)
+                   tray->n_hidden_childeren++;
+            }
+
+            if (child_info->hidden == FALSE || tray->show_hidden == TRUE)
+            {
+                /* update the child size (smallest icon) */
+                child_size = MIN (child_size, MAX (child_requisition.width, child_requisition.height));
+
+                /* increase number of visible childeren */
+                n_visible_childeren++;
+            }
         }
     }
 
@@ -366,7 +395,7 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
     {
         child_info = li->data;
 
-        if (child_info->hidden && !tray->show_hidden)
+        if (child_info->invisible || (child_info->hidden && !tray->show_hidden))
         {
             /* put icons offscreen */
             child_allocation.x = child_allocation.y = XFCE_TRAY_WIDGET_OFFSCREEN;
@@ -401,7 +430,6 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
 
         /* allocate widget size */
         gtk_widget_size_allocate (child_info->widget, &child_allocation);
-        gtk_widget_set_size_request (child_info->widget, child_size, child_size);
     }
 }
 
@@ -441,7 +469,7 @@ xfce_tray_widget_remove (GtkContainer *container,
             need_resize = !child_info->hidden;
 
             /* update hidden counter */
-            if (child_info->hidden)
+            if (child_info->hidden && !child_info->invisible)
                 tray->n_hidden_childeren--;
 
             /* remove from list */
@@ -596,6 +624,7 @@ xfce_tray_widget_add_with_name (XfceTrayWidget *tray,
     /* create child info */
     child_info = panel_slice_new (XfceTrayWidgetChild);
     child_info->widget = child;
+    child_info->invisible = FALSE;
     child_info->name = g_strdup (name);
     child_info->hidden = xfce_tray_widget_name_hidden (tray, child_info->name);
 
@@ -714,7 +743,7 @@ xfce_tray_widget_name_update (XfceTrayWidget *tray,
         child_info->hidden = xfce_tray_widget_name_hidden (tray, child_info->name);
 
         /* increase counter if needed */
-        if (child_info->hidden)
+        if (child_info->hidden && !child_info->invisible)
             n_hidden_childeren++;
     }
 
