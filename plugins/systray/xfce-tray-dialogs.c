@@ -164,6 +164,7 @@ xfce_tray_dialogs_show_frame_toggled (GtkToggleButton *button,
                                       XfceTrayPlugin  *plugin)
 {
     gboolean active;
+    gint     panel_size;
 
     /* get state */
     active = gtk_toggle_button_get_active (button);
@@ -173,6 +174,12 @@ xfce_tray_dialogs_show_frame_toggled (GtkToggleButton *button,
 
     /* save */
     plugin->show_frame = active;
+
+    /* get the panel size */
+    panel_size = xfce_panel_plugin_get_size (plugin->panel_plugin);
+
+    /* emit size-changed signal */
+    g_signal_emit_by_name (G_OBJECT (plugin->panel_plugin), "size-changed", panel_size, &active);
 }
 
 

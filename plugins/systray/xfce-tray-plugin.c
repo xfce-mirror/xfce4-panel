@@ -244,7 +244,6 @@ xfce_tray_plugin_new (XfcePanelPlugin *panel_plugin)
 
     /* create tray widget */
     plugin->tray = xfce_tray_widget_new ();
-    gtk_container_set_border_width (GTK_CONTAINER (plugin->tray), 1);
     gtk_container_add (GTK_CONTAINER (plugin->frame), plugin->tray);
     gtk_widget_show (plugin->tray);
 
@@ -312,8 +311,9 @@ static gboolean
 xfce_tray_plugin_size_changed (XfceTrayPlugin *plugin,
                                guint           size)
 {
-    /* set the frame border size */
-    gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), size > SMALL_PANEL_SIZE ? 1 : 0);
+    /* set the border sizes */
+    gtk_container_set_border_width (GTK_CONTAINER (plugin->frame), plugin->show_frame ? 1 : 0);
+    gtk_container_set_border_width (GTK_CONTAINER (plugin->tray), (size > SMALL_PANEL_SIZE && plugin->show_frame) ? 1 : 0);
 
     /* we handled the size of the plugin */
     return TRUE;
