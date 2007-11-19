@@ -230,14 +230,15 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
     XfceTrayWidget      *tray = XFCE_TRAY_WIDGET (widget);
     GSList              *li;
     XfceTrayWidgetChild *child_info;
-    gint                 child_size = 0;
     gint                 n_columns;
+    gint                 child_size = tray->last_alloc_child_size;
     GtkRequisition       child_requisition;
     gint                 n_visible_childeren = 0;
 
     _panel_return_if_fail (XFCE_IS_TRAY_WIDGET (widget));
     _panel_return_if_fail (requisition != NULL);
 
+    /* check if we need to hide or show any childeren */
     for (li = tray->childeren; li != NULL; li = li->next)
     {
         child_info = li->data;
@@ -271,12 +272,9 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
                    tray->n_hidden_childeren++;
             }
 
-            /* only allocate size for not hidden icons */
+            /* count the number of visible childeren */
             if (child_info->hidden == FALSE || tray->show_hidden == TRUE)
             {
-                /* update the child size (tray is homogeneous, so pick the largest icon) */
-                child_size = MAX (child_size, MAX (child_requisition.width, child_requisition.height));
-
                 /* increase number of visible childeren */
                 n_visible_childeren++;
             }
@@ -287,9 +285,6 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
     n_columns = n_visible_childeren / tray->rows;
     if (n_visible_childeren > (n_columns * tray->rows))
         n_columns++;
-
-    /* make sure the maximum child size does not overflow the tray */
-    child_size = MIN (child_size, tray->last_alloc_child_size);
 
     /* set the width and height needed for the icons */
     if (n_visible_childeren > 0)
