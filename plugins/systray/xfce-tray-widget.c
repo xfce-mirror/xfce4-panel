@@ -185,7 +185,7 @@ xfce_tray_widget_init (XfceTrayWidget *tray)
     tray->n_hidden_childeren = 0;
     tray->arrow_type = GTK_ARROW_LEFT;
     tray->show_hidden = FALSE;
-    tray->last_alloc_child_size = 0;
+    tray->last_alloc_child_size = -1;
 
     /* create hash table */
     tray->names = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
@@ -275,6 +275,13 @@ xfce_tray_widget_size_request (GtkWidget      *widget,
             /* count the number of visible childeren */
             if (child_info->hidden == FALSE || tray->show_hidden == TRUE)
             {
+                /* don't use the allocate child size if it's not set yet */
+                if (G_UNLIKELY (tray->last_alloc_child_size == -1))
+                {
+                    /* pick largest icon */
+                    child_size = MAX (child_size, MAX (child_requisition.width, child_requisition.height));
+                }
+
                 /* increase number of visible childeren */
                 n_visible_childeren++;
             }

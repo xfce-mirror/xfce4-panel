@@ -118,9 +118,10 @@ xfce_tray_dialogs_icon (GtkIconTheme *icon_theme,
     const gchar *p;
     const gchar *fallback[][2] =
     {
-        /* application name ,  fallback icon name */
+        /* application name ,  fallback icon name or path */
         { "xfce-mcs-manager", "input-mouse" },
-        { "bluetooth-applet", "stock_bluetooth" }
+        { "bluetooth-applet", "stock_bluetooth" },
+        { "gdl_box",          "/opt/google/desktop/resource/gdl_small.png" }
     };
 
     /* return null on no name */
@@ -152,7 +153,18 @@ xfce_tray_dialogs_icon (GtkIconTheme *icon_theme,
     /* find and return a fall-back icon */
     for (i = 0; i < G_N_ELEMENTS (fallback); i++)
         if (strcmp (name, fallback[i][0]) == 0)
-            return gtk_icon_theme_load_icon (icon_theme, fallback[i][1], XFCE_TRAY_DIALOG_ICON_SIZE, 0, NULL);
+        {
+            if (g_path_is_absolute (fallback[i][1]))
+            {
+               return gdk_pixbuf_new_from_file_at_size (fallback[i][1], XFCE_TRAY_DIALOG_ICON_SIZE,
+                                                        XFCE_TRAY_DIALOG_ICON_SIZE, NULL);
+            }
+            else
+            {
+               return gtk_icon_theme_load_icon (icon_theme, fallback[i][1], XFCE_TRAY_DIALOG_ICON_SIZE,
+                                                0, NULL);
+            }
+        }
 
     return NULL;
 }
