@@ -359,8 +359,17 @@ xfce_tray_widget_size_allocate (GtkWidget     *widget,
     child_size -= XFCE_TRAY_WIDGET_SPACING * (tray->rows - 1);
     child_size /= tray->rows;
 
-    /* set last allocated child size */
-    tray->last_alloc_child_size = child_size;
+    /* store or fix the calculated child size */
+    if (child_size > 0)
+    {
+        /* set last allocated child size */
+        tray->last_alloc_child_size = child_size;
+    }
+    else
+    {
+        /* child size is invalid (hidden panel), fall-back on old size */
+        child_size = MAX (1, tray->last_alloc_child_size);
+    }
 
     /* position arrow button */
     if (tray->n_hidden_childeren > 0)
