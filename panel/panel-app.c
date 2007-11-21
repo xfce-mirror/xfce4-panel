@@ -699,8 +699,8 @@ panel_app_run (gchar *client_id)
 
     /* session management */
     restart_command    = g_new (gchar *, 3);
-    restart_command[0] = "xfce4-panel";
-    restart_command[1] = "-r";
+    restart_command[0] = g_strdup ("xfce4-panel");
+    restart_command[1] = g_strdup ("-r");
     restart_command[2] = NULL;
 
     panel_app.session_client = 
@@ -711,7 +711,7 @@ panel_app_run (gchar *client_id)
                                  PACKAGE_NAME,
                                  NULL,
                                  restart_command, 
-                                 restart_command,
+                                 g_strdupv (restart_command),
                                  NULL,
                                  NULL,
                                  NULL);
@@ -721,6 +721,10 @@ panel_app_run (gchar *client_id)
     MARK("connect to session manager");
     if (!session_init (panel_app.session_client))
     {
+        /* no indeed we're not connected... */
+        panel_app.session_client->current_state = SESSION_CLIENT_DISCONNECTED;
+        
+        /* cleanup */
         client_session_free (panel_app.session_client);
         panel_app.session_client = NULL;
     }
