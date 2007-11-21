@@ -698,7 +698,7 @@ panel_app_run (gchar *client_id)
                  TRUE);
 
     /* session management */
-    restart_command    = g_new (gchar *, 2);
+    restart_command    = g_new (gchar *, 3);
     restart_command[0] = "xfce4-panel";
     restart_command[1] = "-r";
     restart_command[2] = NULL;
@@ -721,7 +721,7 @@ panel_app_run (gchar *client_id)
     MARK("connect to session manager");
     if (!session_init (panel_app.session_client))
     {
-        g_free (panel_app.session_client);
+        client_session_free (panel_app.session_client);
         panel_app.session_client = NULL;
     }
 
@@ -747,8 +747,8 @@ panel_app_run (gchar *client_id)
     MARK("end main loop");
 
     /* cleanup */
-    g_free (panel_app.session_client);
-    panel_app.session_client = NULL;
+    if (panel_app.session_client)
+        client_session_free (panel_app.session_client);
 
     cleanup_panels ();
     xfce_panel_item_manager_cleanup ();
