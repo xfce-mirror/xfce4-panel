@@ -710,7 +710,7 @@ panel_app_run (int    argc,
     TIMER_ELAPSED("connect to session manager");
     if (!session_init (panel_app.session_client))
     {
-        client_session_free (panel_app.session_client);
+        g_free (panel_app.session_client);
         panel_app.session_client = NULL;
     }   
     
@@ -735,8 +735,7 @@ panel_app_run (int    argc,
     gtk_main ();
     
     /* cleanup */
-    if (panel_app.session_client)
-        client_session_free (panel_app.session_client);
+    g_free (panel_app.session_client);
 
     cleanup_panels ();
     xfce_panel_item_manager_cleanup ();
