@@ -473,8 +473,11 @@ xfce_clock_dialog_show (ClockPlugin *clock)
     g_object_set_data (G_OBJECT (clock->plugin), I_("configure-dialog"), dialog);
     g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (xfce_clock_dialog_response), clock);
 
-    /* get dialog vbox */
-    dialog_vbox = GTK_DIALOG (dialog)->vbox;
+    /* main vbox */
+    dialog_vbox = gtk_vbox_new (FALSE, 8);
+    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), dialog_vbox, TRUE, TRUE, 0);
+    gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox), 6);
+    gtk_widget_show (dialog_vbox);
 
     /* appearance settings */
     frame = xfce_create_framebox (_("Appearance"), &bin);

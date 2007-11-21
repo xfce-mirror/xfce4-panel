@@ -31,10 +31,6 @@
 
 #define RELATIVE_SPACE 0.10
 
-/* the height varies between 12px -> 122px. in this range there is
-   a ratio from 1.0 -> 0.5 */
-#define HEIGHT_RATIO(x) (1.00 - (((x) - 12) * (0.50 / (122 -12))))
-
 
 
 /* prototypes */
@@ -261,13 +257,17 @@ xfce_clock_lcd_size_request (GtkWidget      *widget,
 
     if (width == -1)
     {
-        requisition->height = height;
-        requisition->width = height * ratio * HEIGHT_RATIO (height);
+        requisition->height = MAX (10, height - height % 10);
+        requisition->width = requisition->height * ratio;
     }
     else
     {
-        requisition->width = width;
-        requisition->height = width / (ratio - (2 * 0.1));
+        /* calc height */
+        height = width / ratio;
+        height = MAX (10, height - height % 10);
+
+        requisition->height = height;
+        requisition->width = height * ratio;
     }
 }
 
@@ -282,18 +282,19 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
     gdouble       offset_x, offset_y;
     gint          ticks, i;
     gdouble       size;
+    gdouble       ratio;
     struct tm     tm;
 
     g_return_val_if_fail (XFCE_CLOCK_IS_LCD (clock), FALSE);
 
-    /* widget sizes */
-    if (widget->allocation.width >= widget->allocation.height)
-        size = widget->allocation.height * HEIGHT_RATIO (widget->allocation.height);
-    else
-        size = widget->allocation.height;
+    /* size of a digit should be a fraction of 10 */
+    size = widget->allocation.height - widget->allocation.height % 10;
+    
+    /* get the width:height ratio */
+    ratio = xfce_clock_lcd_get_ratio (XFCE_CLOCK_LCD (widget));
 
     /* begin offsets */
-    offset_x = widget->allocation.x + size * RELATIVE_SPACE;
+    offset_x = widget->allocation.x + (widget->allocation.width - (size * ratio)) / 2;
     offset_y = widget->allocation.y + (widget->allocation.height - size) / 2;
 
     /* get the cairo context */
