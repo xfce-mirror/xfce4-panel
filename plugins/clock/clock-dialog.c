@@ -222,6 +222,19 @@ xfce_clock_dialog_show_meridiem_toggled (GtkToggleButton *button,
 
 
 static void
+xfce_clock_dialog_flash_separators_toggled (GtkToggleButton *button,
+                                            ClockPlugin     *clock)
+{
+    /* whether flash the separators */
+    clock->flash_separators = gtk_toggle_button_get_active (button);
+
+    /* update the clock */
+    xfce_clock_dialog_reload_settings (clock);
+}
+
+
+
+static void
 xfce_clock_dialog_true_binary_toggled (GtkToggleButton *button,
                                        ClockPlugin     *clock)
 {
@@ -409,6 +422,12 @@ xfce_clock_dialog_options (ClockPlugin *clock)
         gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), clock->show_military);
         g_signal_connect (button, "toggled", G_CALLBACK (xfce_clock_dialog_show_military_toggled), clock);
+        gtk_widget_show (button);
+
+        button = gtk_check_button_new_with_mnemonic (_("Fl_ash time separators"));
+        gtk_box_pack_start (GTK_BOX (vbox), button, TRUE, TRUE, 0);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), clock->flash_separators);
+        g_signal_connect (button, "toggled", G_CALLBACK (xfce_clock_dialog_flash_separators_toggled), clock);
         gtk_widget_show (button);
 
         button = gtk_check_button_new_with_mnemonic (_("Sho_w AM/PM"));

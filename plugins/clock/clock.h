@@ -79,6 +79,7 @@ struct _ClockPlugin
     guint            show_military : 1;
     guint            show_meridiem : 1;
     guint            true_binary : 1;
+    guint            flash_separators : 1;
 };
 
 

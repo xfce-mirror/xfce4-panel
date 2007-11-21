@@ -88,10 +88,10 @@ xfce_clock_util_get_debug_localtime (struct tm *tm)
     static gint hour = 23;
     static gint min = 59;
     static gint sec = 45;
-    
+
     /* add 1 seconds */
     sec++;
-    
+
     /* update times */
     if (sec > 59)
     {
@@ -107,7 +107,7 @@ xfce_clock_util_get_debug_localtime (struct tm *tm)
     {
         hour = 0;
     }
-    
+
     /* set time structure */
     tm->tm_sec = sec;
     tm->tm_min = min;
@@ -379,7 +379,8 @@ xfce_clock_widget_update_settings (ClockPlugin *clock)
             g_object_set (G_OBJECT (clock->widget),
                           "show-seconds", clock->show_seconds,
                           "show-military", clock->show_military,
-                          "show-meridiem", clock->show_meridiem, NULL);
+                          "show-meridiem", clock->show_meridiem,
+                          "flash-separators", clock->flash_separators, NULL);
             break;
     }
 
@@ -392,7 +393,10 @@ xfce_clock_widget_update_settings (ClockPlugin *clock)
     else
     {
         /* interval from setting */
-        clock->interval = clock->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
+        if (clock->mode == XFCE_CLOCK_LCD)
+            clock->interval = (clock->show_seconds || clock->flash_separators) ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
+        else
+            clock->interval = clock->show_seconds ? CLOCK_INTERVAL_SECOND : CLOCK_INTERVAL_MINUTE;
     }
 }
 
@@ -561,11 +565,12 @@ xfce_clock_plugin_read (ClockPlugin *clock)
             clock->mode = xfce_rc_read_int_entry (rc, "ClockType", XFCE_CLOCK_DIGITAL);
 
             /* read boolean settings */
-            clock->show_frame    = xfce_rc_read_bool_entry (rc, "ShowFrame", TRUE);
-            clock->show_seconds  = xfce_rc_read_bool_entry (rc, "ShowSeconds", FALSE);
-            clock->show_military = xfce_rc_read_bool_entry (rc, "ShowMilitary", TRUE);
-            clock->show_meridiem = xfce_rc_read_bool_entry (rc, "ShowMeridiem", FALSE);
-            clock->true_binary   = xfce_rc_read_bool_entry (rc, "TrueBinary", FALSE);
+            clock->show_frame       = xfce_rc_read_bool_entry (rc, "ShowFrame", TRUE);
+            clock->show_seconds     = xfce_rc_read_bool_entry (rc, "ShowSeconds", FALSE);
+            clock->show_military    = xfce_rc_read_bool_entry (rc, "ShowMilitary", TRUE);
+            clock->show_meridiem    = xfce_rc_read_bool_entry (rc, "ShowMeridiem", FALSE);
+            clock->true_binary      = xfce_rc_read_bool_entry (rc, "TrueBinary", FALSE);
+            clock->flash_separators = xfce_rc_read_bool_entry (rc, "FlashSeparators", FALSE);
 
             /* close the rc file */
             xfce_rc_close (rc);
@@ -605,6 +610,7 @@ xfce_clock_plugin_write (ClockPlugin *clock)
             xfce_rc_write_bool_entry (rc, "ShowMilitary", clock->show_military);
             xfce_rc_write_bool_entry (rc, "ShowMeridiem", clock->show_meridiem);
             xfce_rc_write_bool_entry (rc, "TrueBinary", clock->true_binary);
+            xfce_rc_write_bool_entry (rc, "FlashSeparators", clock->flash_separators);
 
             /* close the rc file */
             xfce_rc_close (rc);
