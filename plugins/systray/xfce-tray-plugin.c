@@ -416,25 +416,34 @@ xfce_tray_plugin_write (XfceTrayPlugin *plugin)
 
             if (G_LIKELY (plugin->manager))
             {
-                /* save the list of known applications and their visibility */
-                xfce_rc_set_group (rc, "Applications");
-
                 /* get the list of known applications */
                 names = xfce_tray_widget_name_list (XFCE_TRAY_WIDGET (plugin->tray));
 
-                /* save their state */
-                for (li = names; li != NULL; li = li->next)
+                if (names == NULL)
                 {
-                    /* get name and status */
-                    name = li->data;
-                    hidden = xfce_tray_widget_name_hidden (XFCE_TRAY_WIDGET (plugin->tray), name);
-
-                    /* write entry */
-                    xfce_rc_write_bool_entry (rc, name, hidden);
+                    /* delete group */
+                    if (xfce_rc_has_group (rc, "Applications"))
+                        xfce_rc_delete_group (rc, "Applications", FALSE);
                 }
+                else
+                {
+                    /* save the list of known applications and their visibility */
+                    xfce_rc_set_group (rc, "Applications");
 
-                /* cleanup */
-                g_list_free (names);
+                    /* save their state */
+                    for (li = names; li != NULL; li = li->next)
+                    {
+                        /* get name and status */
+                        name = li->data;
+                        hidden = xfce_tray_widget_name_hidden (XFCE_TRAY_WIDGET (plugin->tray), name);
+
+                        /* write entry */
+                        xfce_rc_write_bool_entry (rc, name, hidden);
+                    }
+
+                    /* cleanup */
+                    g_list_free (names);
+                }
             }
 
             /* close the rc file */

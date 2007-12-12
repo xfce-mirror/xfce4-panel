@@ -269,11 +269,41 @@ xfce_tray_dialogs_configure_response (GtkWidget      *dialog,
                                       gint            response,
                                       XfceTrayPlugin *plugin)
 {
-    /* destroy dialog */
-    gtk_widget_destroy (dialog);
+    GtkWidget    *question;
+    GtkListStore *store;
 
-    /* unblock plugin menu */
-    xfce_panel_plugin_unblock_menu (plugin->panel_plugin);
+    if (response == GTK_RESPONSE_YES)
+    {
+        /* create question dialog, with hig buttons */
+        question = gtk_message_dialog_new (GTK_WINDOW (dialog), GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+                                           GTK_MESSAGE_QUESTION, GTK_BUTTONS_NONE,
+                                           _("Are you sure you want to clear the list of known applications?"));
+        gtk_dialog_add_buttons (GTK_DIALOG (question), GTK_STOCK_CANCEL, GTK_RESPONSE_NO,
+                                GTK_STOCK_CLEAR, GTK_RESPONSE_YES, NULL);
+        gtk_dialog_set_default_response (GTK_DIALOG (question), GTK_RESPONSE_NO);
+
+        /* run dialog */
+        if (gtk_dialog_run (GTK_DIALOG (question)) == GTK_RESPONSE_YES)
+        {
+           /* clear hash table and update tray */
+           xfce_tray_widget_clear_name_list (XFCE_TRAY_WIDGET (plugin->tray));
+
+           /* clear store */
+           store = g_object_get_data (G_OBJECT (dialog), I_("xfce-tray-store"));
+           gtk_list_store_clear (store);
+        }
+
+       /* destroy */
+       gtk_widget_destroy (question);
+    }
+    else
+    {
+        /* destroy dialog */
+        gtk_widget_destroy (dialog);
+
+        /* unblock plugin menu */
+        xfce_panel_plugin_unblock_menu (plugin->panel_plugin);
+    }
 }
 
 
@@ -303,6 +333,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     dialog = xfce_titled_dialog_new_with_buttons (_("System Tray"),
                                                   NULL,
                                                   GTK_DIALOG_NO_SEPARATOR,
+                                                  GTK_STOCK_CLEAR, GTK_RESPONSE_YES,
                                                   GTK_STOCK_OK, GTK_RESPONSE_OK,
                                                   NULL);
     gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin)));
@@ -313,6 +344,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
     g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (xfce_tray_dialogs_configure_response), plugin);
 
+    /* main vbox */
     dialog_vbox = GTK_DIALOG (dialog)->vbox;
 
     /* appearance */
@@ -368,6 +400,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
 
     /* create list store */
     store = gtk_list_store_new (N_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_BOOLEAN);
+    g_object_set_data (G_OBJECT (dialog), I_("xfce-tray-store"), store);
 
     /* create treeview */
     treeview = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));

@@ -64,4 +64,6 @@ gboolean         xfce_tray_widget_name_hidden        (XfceTrayWidget *tray,
 
 GList           *xfce_tray_widget_name_list          (XfceTrayWidget *tray) G_GNUC_MALLOC G_GNUC_INTERNAL;
 
+void             xfce_tray_widget_clear_name_list    (XfceTrayWidget *tray) G_GNUC_INTERNAL;
+
 #endif /* !__XFCE_TRAY_WIDGET_H__ */

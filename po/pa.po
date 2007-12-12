@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-23 11:15+0200\n"
+"POT-Creation-Date: 2007-12-12 12:57+0100\n"
 "PO-Revision-Date: 2007-07-05 07:24+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
@@ -114,28 +114,28 @@ msgstr "ਰੀਸਟਾਰਟ"
 msgid "About the Xfce Panel"
 msgstr "Xfce ਪੈਨਲ ਬਾਰੇ"
 
-#: ../panel/panel-app.c:258 ../panel/panel-app.c:888
+#: ../panel/panel-app.c:258 ../panel/panel-app.c:892
 msgid "Exit Xfce Panel?"
 msgstr "ਕੀ Xfce ਪੈਨਲ ਬੰਦ ਕਰਨਾ ਹੈ?"
 
-#: ../panel/panel-app.c:886 ../panel/panel-app.c:918 ../panel/panel-app.c:951
+#: ../panel/panel-app.c:890 ../panel/panel-app.c:922 ../panel/panel-app.c:955
 msgid "Xfce Panel"
 msgstr "Xfce ਪੈਨਲ"
 
-#: ../panel/panel-app.c:889
+#: ../panel/panel-app.c:893
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "ਤੁਸੀਂ ਆਖਰੀ ਪੈਨਲ ਨਹੀਂ ਹਟਾ ਸਕਦੇ। ਕੀ ਤੁਸੀਂ ਪ੍ਰੋਗਰਾਮ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../panel/panel-app.c:916
+#: ../panel/panel-app.c:920
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "ਕੀ ਪੈਨਲ \"%d\" ਹਟਾਉਣਾ ਹੈ?"
 
-#: ../panel/panel-app.c:920
+#: ../panel/panel-app.c:924
 msgid "The selected panel and all its items will be removed."
 msgstr "ਚੁਣਿਆ ਪੈਨਲ ਅਤੇ ਇਸ ਦੀਆਂ ਸਭ ਆਈਟਮਾਂ ਹਟਾਈਆਂ ਜਾਣਗੀਆਂ।"
 
-#: ../panel/panel-app.c:957 ../panel/panel-app.c:958
+#: ../panel/panel-app.c:961 ../panel/panel-app.c:962
 msgid "Developer"
 msgstr "ਡਿਵੈਲਪਰ"
 
@@ -296,8 +296,8 @@ msgstr "ਮਾਨੀਟਰ ਚੁਣੋ"
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:274
+#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:502
+#: ../plugins/systray/xfce-tray-dialogs.c:351
 #: ../plugins/tasklist/tasklist-dialogs.c:168
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
@@ -359,64 +359,68 @@ msgstr "ਕਾਰਵਾਈ ਕਿਸਮ ਚੁਣੋ:"
 msgid "Quit + Lock screen"
 msgstr "ਬੰਦ ਕਰੋ + ਸਕਰੀਨ ਲਾਕ"
 
-#: ../plugins/clock/clock-dialog.c:345
+#: ../plugins/clock/clock-dialog.c:358
 msgid "Custom"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:399
+#: ../plugins/clock/clock-dialog.c:412
 #, fuzzy
 msgid "Display _seconds"
 msgstr "ਸਕਿੰਟ ਵੇਖਾਓ"
 
-#: ../plugins/clock/clock-dialog.c:408
+#: ../plugins/clock/clock-dialog.c:421
 msgid "Use 24-_hour clock"
 msgstr "24-ਘੰਟੇ ਘੜੀ ਵੇਖਾਓ(_h)"
 
-#: ../plugins/clock/clock-dialog.c:414
+#: ../plugins/clock/clock-dialog.c:427
+msgid "Fl_ash time separators"
+msgstr ""
+
+#: ../plugins/clock/clock-dialog.c:433
 #, fuzzy
 msgid "Sho_w AM/PM"
 msgstr "AM/PM ਵੇਖਾਓ"
 
-#: ../plugins/clock/clock-dialog.c:423
+#: ../plugins/clock/clock-dialog.c:442
 msgid "True _binary clock"
 msgstr ""
 
 #. create dialog
-#: ../plugins/clock/clock-dialog.c:465
+#: ../plugins/clock/clock-dialog.c:484
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "ਘੜੀ"
 
-#: ../plugins/clock/clock-dialog.c:490
+#: ../plugins/clock/clock-dialog.c:512
 msgid "Analog"
 msgstr "ਐਨਾਲਾਗ"
 
-#: ../plugins/clock/clock-dialog.c:491
+#: ../plugins/clock/clock-dialog.c:513
 msgid "Binary"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:492
+#: ../plugins/clock/clock-dialog.c:514
 msgid "Digital"
 msgstr "ਡਿਜ਼ੀਟਲ"
 
-#: ../plugins/clock/clock-dialog.c:493
+#: ../plugins/clock/clock-dialog.c:515
 #, fuzzy
 msgid "LCD"
 msgstr "LED"
 
 #. show frame
-#: ../plugins/clock/clock-dialog.c:498
-#: ../plugins/systray/xfce-tray-dialogs.c:280
+#: ../plugins/clock/clock-dialog.c:520
+#: ../plugins/systray/xfce-tray-dialogs.c:362
 msgid "Show _frame"
 msgstr "ਫਰੇਮ ਵੇਖਾਓ(_f)"
 
 #. tooltip settings
-#: ../plugins/clock/clock-dialog.c:505
+#: ../plugins/clock/clock-dialog.c:527
 msgid "Tooltip Format"
 msgstr ""
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:531
+#: ../plugins/clock/clock-dialog.c:553
 msgid "Clock Options"
 msgstr "ਘੜੀ ਚੋਣਾਂ"
 
@@ -547,23 +551,23 @@ msgstr ""
 msgid "Inside Button"
 msgstr "ਆਈਕਾਨ ਬਟਨ(_I)"
 
-#: ../plugins/pager/pager.c:359 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "ਪੇਜ਼ਰ"
 
-#: ../plugins/pager/pager.c:390
+#: ../plugins/pager/pager.c:396
 msgid "Number of rows:"
 msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ:"
 
-#: ../plugins/pager/pager.c:394
+#: ../plugins/pager/pager.c:400
 msgid "Number of columns:"
 msgstr "ਕਾਲਮਾਂ ਦੀ ਗਿਣਤੀ:"
 
-#: ../plugins/pager/pager.c:420
+#: ../plugins/pager/pager.c:426
 msgid "Switch workspaces using the mouse wheel"
 msgstr "ਮਾਊਸ ਵੀਲ ਨਾਲ ਵਰਕਸਪੇਸ ਬਦਲੋ"
 
-#: ../plugins/pager/pager.c:428
+#: ../plugins/pager/pager.c:434
 #, fuzzy
 msgid "Show workspace names"
 msgstr "ਵਰਕਸਪੇਸ ਕਾਰਵਾਈਆਂ ਵੇਖਾਓ(_k)"
@@ -610,29 +614,39 @@ msgstr "ਵਿੰਡੋ ਓਹਲੇ ਕਰੋ ਅਤੇ ਡਿਸਕਟਾਪ �
 
 #. create a dialog
 #. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:70
-#: ../plugins/systray/xfce-tray-dialogs.c:259
+#: ../plugins/systray/xfce-tray-plugin.c:71
+#: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
 msgstr "ਸਿਸਟਮ ਟਰੇ"
 
-#: ../plugins/systray/xfce-tray-plugin.c:96
+#: ../plugins/systray/xfce-tray-plugin.c:98
 msgid "There is already a system tray running on this screen"
 msgstr "ਇਸ ਟਰੇ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਸਿਸਟਮ ਟਰੇ ਚੱਲ ਰਹੀ ਹੈ"
 
+#. message
+#: ../plugins/systray/xfce-tray-plugin.c:219
+msgid "The tray manager lost selection"
+msgstr ""
+
+#: ../plugins/systray/xfce-tray-dialogs.c:280
+#, fuzzy
+msgid "Are you sure you want to clear the list of known applications?"
+msgstr "ਕੀ ਤੁਸੀਂ ਵਰਕਸਪੇਸ '%s' ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#. number of rows
+#: ../plugins/systray/xfce-tray-dialogs.c:374
+#, fuzzy
+msgid "_Number of rows:"
+msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ:"
+
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:287
+#: ../plugins/systray/xfce-tray-dialogs.c:389
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "ਇੱਕ ਕਾਰਜ ਚੁਣੋ"
 
-#. create message
-#: ../plugins/systray/xfce-tray-widget.c:318
-#, fuzzy, c-format
-msgid "Failed to register the system tray for screen %d"
-msgstr "ਸਿਸਟਮ ਟਰੇ ਰਜਿਸਟਰ ਕਰਨ ਵਿੱਚ ਅਯੋਗ: %s"
-
-#: ../plugins/systray/xfce-tray-manager.c:461
+#: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
@@ -815,6 +829,10 @@ msgstr "ਉਪਲੱਬਧ ਵਿੰਡੋ ਦੀ ਸੂਚੀ ਵੇਖਾਓ"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 ਪੈਨਲ ਮੈਨੇਜਰ"
+
+#, fuzzy
+#~ msgid "Failed to register the system tray for screen %d"
+#~ msgstr "ਸਿਸਟਮ ਟਰੇ ਰਜਿਸਟਰ ਕਰਨ ਵਿੱਚ ਅਯੋਗ: %s"
 
 #~ msgid "Show application _names"
 #~ msgstr "ਕਾਰਜ ਨਾਂ ਵੇਖਾਓ(_N)"

@@ -827,3 +827,44 @@ xfce_tray_widget_name_list (XfceTrayWidget *tray)
 
     return keys;
 }
+
+
+
+void
+xfce_tray_widget_clear_name_list (XfceTrayWidget *tray)
+{
+    XfceTrayWidgetChild *child_info;
+    GSList              *li;
+    gint                 n_hidden_childeren = 0;
+
+    /* remove all the entries from the list */
+    g_hash_table_remove_all (tray->names);
+
+    /* remove hidden flags from all childeren */
+    for (li = tray->childeren; li != NULL; li = li->next)
+    {
+        child_info = li->data;
+
+        /* update the hidden state */
+        if (child_info->hidden)
+        {
+            n_hidden_childeren++;
+
+            child_info->hidden = FALSE;
+        }
+    }
+
+    /* reset */
+    tray->n_hidden_childeren = 0;
+
+    /* update tray if needed */
+    if (n_hidden_childeren > 0)
+    {
+        /* sort the list again */
+        tray->childeren = g_slist_sort (tray->childeren, xfce_tray_widget_compare_function);
+
+        /* update the tray */
+        gtk_widget_queue_resize (GTK_WIDGET (tray));
+    }
+}
+
