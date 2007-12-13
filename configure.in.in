@@ -151,10 +151,11 @@ dnl *** Check for gtk-doc ***
 dnl *************************
 GTK_DOC_CHECK([1.0])
 
-dnl ******************************************
-dnl *** Disable deprecated Xfce components ***
-dnl ******************************************
+dnl *************************************
+dnl *** Disable deprecated components ***
+dnl *************************************
 AC_DEFINE([XFCE_DISABLE_DEPRECATED], [1], [Define to 1 to disable deprecated Xfce components])
+AC_DEFINE([G_DISABLE_DEPRECATED], [1], [Define to 1 to disable deprecated Glib components])
 
 dnl ***********************************
 dnl *** Check for debugging support ***

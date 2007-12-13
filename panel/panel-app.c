@@ -296,9 +296,9 @@ signal_pipe_io (GIOChannel   *source,
     gint  signal;
     gsize bytes_read;
 
-    if (G_IO_ERROR_NONE == g_io_channel_read (source, (gchar *)&signal, 
-                                              sizeof (signal),
-                                              &bytes_read)
+    if (G_IO_STATUS_NORMAL == g_io_channel_read_chars (source, (gchar *)&signal, 
+                                                       sizeof (signal),
+                                                       &bytes_read, NULL)
         && sizeof(signal) == bytes_read)
     {
         switch (signal)
