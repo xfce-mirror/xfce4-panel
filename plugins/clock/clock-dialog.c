@@ -29,7 +29,6 @@
 #include <libxfce4util/libxfce4util.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfcegui4/xfce-titled-dialog.h>
-#include <libxfcegui4/xfce_framebox.h>
 #include <libxfcegui4/xfce-widget-helpers.h>
 
 #include "clock.h"
