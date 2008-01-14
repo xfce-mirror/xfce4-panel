@@ -22,7 +22,7 @@ m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_versio
 dnl *******************************************
 dnl *** Debugging support for SVN snapshots ***
 dnl *******************************************
-m4_define([panel_debug_default], [ifelse(panel_version_tag(), [svn], [yes], [minimum])])
+m4_define([panel_debug_default], [ifelse(xfce4_panel_version_tag(), [svn], [yes], [minimum])])
 
 dnl ***************************
 dnl *** Initialize autoconf ***
