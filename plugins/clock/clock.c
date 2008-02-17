@@ -123,7 +123,8 @@ xfce_clock_util_interval_from_format (const gchar *format)
     const gchar *p;
     guint        interval = CLOCK_INTERVAL_HOUR;
 
-    g_return_val_if_fail (format != NULL, CLOCK_INTERVAL_HOUR);
+    if (G_UNLIKELY (format == NULL))
+      return CLOCK_INTERVAL_HOUR;
 
     for (p = format; *p != '\0'; ++p)
     {
