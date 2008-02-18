@@ -271,24 +271,18 @@ tasklist_plugin_size_request (TasklistPlugin *tasklist,
                               GtkRequisition *requisition)
 {
     const gint     *size_hints;
-    gint            length, i;
-    gint            size = 0;
+    gint            length;
+    gint            size;
     GtkOrientation  orientation;
 
     /* get the size hints */
     size_hints = wnck_tasklist_get_size_hint_list (WNCK_TASKLIST (tasklist->list), &length);
 
     /* check for pairs of 2 */
-    if (G_LIKELY (length % 2 == 0))
+    if (G_LIKELY (length > 0))
     {
-        /* get the smallest possible size */
-        for (i = 0; i < length; i += 2)
-        {
-            if (i == 0)
-               size = size_hints[i];
-            else
-               size = MIN (size_hints[i], size);
-        }
+        /* get the first size */
+        size = size_hints[0];
 
         /* add the handle size */
         if (tasklist->show_handles)
