@@ -124,7 +124,7 @@ xfce_clock_util_interval_from_format (const gchar *format)
     guint        interval = CLOCK_INTERVAL_HOUR;
 
     if (G_UNLIKELY (format == NULL))
-      return CLOCK_INTERVAL_HOUR;
+        return CLOCK_INTERVAL_HOUR;
 
     for (p = format; *p != '\0'; ++p)
     {
@@ -231,7 +231,8 @@ xfce_clock_tooltip_update (gpointer user_data)
     static GtkTooltips *tooltips = NULL;
     struct tm           tm;
 
-    g_return_val_if_fail (clock->tooltip_format != NULL, TRUE);
+    if (G_UNLIKELY (clock->tooltip_format == NULL))
+        return TRUE;
 
     /* allocate the tooltip on-demand */
     if (G_UNLIKELY (tooltips == NULL))
