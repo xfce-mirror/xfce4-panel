@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Poul Ionkin <wizzard@nmg.lv>, 2003.
 # Anthony Ivanoff <a-i@bk.ru>, 2004, 2005.
-# Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006.
+# Andrey Fedoseev <andrey.fedoseev@gmail.com>, 2006-2008.
 # Sergey Fedoseev <fedoseev.sergey@gmail.com>, 2006.
 #
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-12 12:57+0100\n"
-"PO-Revision-Date: 2006-09-24 20:50+0600\n"
+"PO-Revision-Date: 2008-01-15 13:00+0600\n"
 "Last-Translator: Andrey Fedoseev <andrey.fedoseev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,39 +21,36 @@ msgstr ""
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../config/launcher-7.rc.in.h:1
-#, fuzzy
 msgid "Command Prompt"
-msgstr "Команда"
+msgstr "Командная строка"
 
 #: ../config/launcher-7.rc.in.h:2
 msgid "X terminal emulator"
-msgstr ""
+msgstr "X эмулятор терминала"
 
 #: ../config/launcher-8.rc.in.h:1
 msgid "Edit text files"
-msgstr ""
+msgstr "Редактирование текстовыъ файлов"
 
 #: ../config/launcher-8.rc.in.h:2
 msgid "Editor"
 msgstr "Редактор"
 
 #: ../config/launcher-9.rc.in.h:1
-#, fuzzy
 msgid "File Manager"
 msgstr "Управление файлами"
 
 #: ../config/launcher-9.rc.in.h:2
 msgid "Manage files and folders"
-msgstr ""
+msgstr "Управление файлами и папками"
 
 #: ../config/launcher-10.rc.in.h:1
 msgid "Surf the internet"
-msgstr ""
+msgstr "Просмотр интернет сайтов"
 
 #: ../config/launcher-10.rc.in.h:2
-#, fuzzy
 msgid "Web Browser"
-msgstr "Справка"
+msgstr "Веб браузер"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -144,61 +141,57 @@ msgstr "Разработчик"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "Показать это сообщение и выйти"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "Отображает значки уведомления"
+msgstr "Показать диалог настройки"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "Сохранить конфигурацию"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "Перезапустить"
+msgstr "Перезапустить панели"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "Завершить сеанс"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Закрыть все панели и завершить работу программы"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "Добавить новый элемент"
+msgstr "Добавить новый элементы"
 
 #: ../panel/main.c:90
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Не удалось запустить \"%s\""
+msgstr "Не удалось открыть дисплей"
 
 #: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Copyright (c) 2004-2007"
 
 #: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Команда разработки Xfce. Все права защищены."
 
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Пожалуйста, отправляйте отчёты об ошибках на <%s>."
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "Панель xfce4-panel уже запущена"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "Перезапуск панели xfce4-panel..."
 
 #: ../panel/panel-dialogs.c:189
 #, c-format
@@ -230,14 +223,12 @@ msgid "Full Width"
 msgstr "Полная ширина"
 
 #: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
 msgid "Normal Height"
-msgstr "Нормальная ширина"
+msgstr "Нормальная высота"
 
 #: ../panel/panel-dialogs.c:914 ../panel/panel-dialogs.c:1150
-#, fuzzy
 msgid "Full Height"
-msgstr "Полная ширина"
+msgstr "Полная высота"
 
 #: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1159
 msgid "Span Monitors"
@@ -327,9 +318,8 @@ msgid "Make active panel opaque"
 msgstr "Сделать активную панель непрозрачной"
 
 #: ../panel/panel-dialogs.c:1510
-#, fuzzy
 msgid "Popup position:"
-msgstr "Положение"
+msgstr ""
 
 #: ../panel/panel-dialogs.c:1520
 msgid "Automatic"
@@ -376,9 +366,8 @@ msgid "Custom"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.c:412
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Показывать секунды"
+msgstr "Показывать _секунды"
 
 #: ../plugins/clock/clock-dialog.c:421
 msgid "Use 24-_hour clock"
@@ -386,16 +375,15 @@ msgstr "_Использовать 24-часовые часы"
 
 #: ../plugins/clock/clock-dialog.c:427
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "_Мигающий разделитель времени"
 
 #: ../plugins/clock/clock-dialog.c:433
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "Показывать AM/PM"
+msgstr "_Показывать AM/PM"
 
 #: ../plugins/clock/clock-dialog.c:442
 msgid "True _binary clock"
-msgstr ""
+msgstr "Настоящие _двоичные часы"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:484
@@ -409,14 +397,13 @@ msgstr "Аналоговые"
 
 #: ../plugins/clock/clock-dialog.c:513
 msgid "Binary"
-msgstr ""
+msgstr "Двоичные"
 
 #: ../plugins/clock/clock-dialog.c:514
 msgid "Digital"
 msgstr "Цифровые"
 
 #: ../plugins/clock/clock-dialog.c:515
-#, fuzzy
 msgid "LCD"
 msgstr "ЖК"
 
@@ -429,7 +416,7 @@ msgstr "_Показывать рамку"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:527
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Формат всплывающей подсказки"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:553
@@ -460,87 +447,81 @@ msgid "New Item"
 msgstr "Новый элемент"
 
 #: ../plugins/launcher/launcher-exec.c:526
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Не удалось запустить \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
-msgstr ""
+msgstr "Нет значка"
 
 #: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
 msgid "Select a Directory"
-msgstr "Выберите экран"
+msgstr "Выберите папку"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Select an Application"
-msgstr "Выберите тип:"
+msgstr "Выберите приложение"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
-msgstr ""
+msgstr "Все файлы"
 
 #: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
-msgstr ""
+msgstr "Исполняемые файлы"
 
 #: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Скрипты Perl"
 
 #: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
-msgstr ""
+msgstr "Скрипты Python"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Скрипты Ruby"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Скрипты Shell"
 
 #: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
-msgstr ""
+msgstr "Неизвестно"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Выберите значок для \"%s\""
 
 #. build name
 #: ../plugins/launcher/launcher-dialog.c:842
 #: ../plugins/launcher/launcher-dialog.c:1341
 msgid "Unnamed"
-msgstr ""
+msgstr "Без названия"
 
 #: ../plugins/launcher/launcher-dialog.c:1120
-#, fuzzy
 msgid "_Name"
-msgstr "Имя"
+msgstr "_Название"
 
 #: ../plugins/launcher/launcher-dialog.c:1138
-#, fuzzy
 msgid "_Description"
-msgstr "Описание"
+msgstr "_Описание"
 
 #: ../plugins/launcher/launcher-dialog.c:1157
-#, fuzzy
 msgid "_Icon"
-msgstr "Переключатель окон"
+msgstr "_Значок"
 
 #: ../plugins/launcher/launcher-dialog.c:1175
-#, fuzzy
 msgid "Co_mmand"
-msgstr "Команда"
+msgstr "_Команда"
 
 #: ../plugins/launcher/launcher-dialog.c:1202
 msgid "_Working Directory"
-msgstr ""
+msgstr "_Рабочий каталог"
 
 #: ../plugins/launcher/launcher-dialog.c:1234
 msgid "Run in _terminal"
@@ -556,18 +537,16 @@ msgid "Program Launcher"
 msgstr "Запуск приложений"
 
 #: ../plugins/launcher/launcher-dialog.c:1551
-#, fuzzy
 msgid "A_rrow:"
-msgstr "_Стрелка"
+msgstr "_Стрелка:"
 
 #: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Default"
-msgstr "Стандартная"
+msgstr "По умолчанию"
 
 #: ../plugins/launcher/launcher-dialog.c:1562
-#, fuzzy
 msgid "Inside Button"
-msgstr "_Значок"
+msgstr "Внутри кнопки"
 
 #: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -586,9 +565,8 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "Переключать рабочие места с помощью колёсика мыши"
 
 #: ../plugins/pager/pager.c:434
-#, fuzzy
 msgid "Show workspace names"
-msgstr "Показывать действия над _рабочими местами"
+msgstr "Показывать названия рабочих мест"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -596,31 +574,29 @@ msgid "Separator or Spacing"
 msgstr "Разделитель или промежуток"
 
 #: ../plugins/separator/separator.c:430
-#, fuzzy
 msgid "Separator Style"
-msgstr "Разделитель или промежуток"
+msgstr "Стиль разделителя"
 
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr ""
+msgstr "_Пустой промежуток"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_Расширяющийся промежуток"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
-msgstr ""
+msgstr "_Линия"
 
 #: ../plugins/separator/separator.c:464
-#, fuzzy
 msgid "_Handle"
-msgstr "Элементы управления:"
+msgstr "_Рукоятка"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
-msgstr ""
+msgstr "_Точки"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
@@ -648,21 +624,18 @@ msgid "The tray manager lost selection"
 msgstr ""
 
 #: ../plugins/systray/xfce-tray-dialogs.c:280
-#, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Вы действительно хотите удалить рабочее место '%s'?"
+msgstr "Вы уверены, что хотите очистить список известных приложений?"
 
 #. number of rows
 #: ../plugins/systray/xfce-tray-dialogs.c:374
-#, fuzzy
 msgid "_Number of rows:"
-msgstr "Число строк:"
+msgstr "_Число строк:"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:389
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "Выберите тип:"
+msgstr "Скрытые приложения"
 
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
@@ -684,7 +657,6 @@ msgid "Use flat buttons"
 msgstr "Плоские кнопки"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:200
-#, fuzzy
 msgid "Show handle"
 msgstr "_Показывать рамку"
 
@@ -789,7 +761,7 @@ msgstr "Показывать действия над _рабочими мест�
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "Не удалось запустить 'xfce4-panel -c'"
 
 #: ../mcs-plugin/plugin.c:57
 msgid "Panel"
@@ -850,150 +822,3 @@ msgstr "Отображает список окон"
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
 msgstr "Диспетчер панелей Xfce 4"
-
-#, fuzzy
-#~ msgid "Failed to register the system tray for screen %d"
-#~ msgstr "Невозможно зарегистрировать системный лоток: %s"
-
-#~ msgid "Show application _names"
-#~ msgstr "Показывать _названия приложений"
-
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%A, %d %B %Y"
-
-#~ msgid "_Draw Separator"
-#~ msgstr "_Отображать разделитель"
-
-#~ msgid "_Expand"
-#~ msgstr "_Расширять"
-
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ " Панель Xfce %s\n"
-#~ "\n"
-#~ " Часть рабочей среды Xfce\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Распространяется на условиях лицензии GNU GPL.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ " Использование: %s [ПАРАМЕТРЫ]\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ " ПАРАМЕТРЫ\n"
-#~ " -h, --help      Показать это сообщение и выйти\n"
-#~ " -v, --version   Показать это сообщение и выйти\n"
-#~ " -c, --customize Показать диалог настроек\n"
-#~ " -s, --save      Сохранить конфигурацию\n"
-#~ " -r, --restart   Перезапустить панели\n"
-#~ " -q, --quit      Закончить сессию\n"
-#~ " -x, --exit      Закрыть все панели и завершить программу\n"
-#~ " -a, --add       Добавить новые элементы\n"
-#~ "\n"
-
-#~ msgid "Error in command \"%s\""
-#~ msgstr "Ошибка в команде \"%s\""
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "Этот элемент ещё не настроен"
-
-#~ msgid "File management"
-#~ msgstr "Управление файлами"
-
-#~ msgid "Utilities"
-#~ msgstr "Инструменты"
-
-#~ msgid "Games"
-#~ msgstr "Игры"
-
-#~ msgid "Help browser"
-#~ msgstr "Справка"
-
-#~ msgid "Multimedia"
-#~ msgstr "Мультимедиа"
-
-#~ msgid "Network"
-#~ msgstr "Сеть"
-
-#~ msgid "Graphics"
-#~ msgstr "Графика"
-
-#~ msgid "Printer"
-#~ msgstr "Печать"
-
-#~ msgid "Productivity"
-#~ msgstr "Производительность"
-
-#~ msgid "Office"
-#~ msgstr "Оффис"
-
-#~ msgid "Sound"
-#~ msgstr "Звук"
-
-#~ msgid "Terminal"
-#~ msgstr "Терминал"
-
-#~ msgid "Development"
-#~ msgstr "Разработка"
-
-#~ msgid "Select image file"
-#~ msgstr "Выбор файла изображения"
-
-#~ msgid "Select command"
-#~ msgstr "Выбор команды"
-
-#~ msgid "Other..."
-#~ msgstr "Другой..."
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "Первый элемент списка будет отображён на панели. Остальные элементы будут "
-#~ "доступны через меню."
-
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "Не удалось запустить 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "За справкой по использованию Zero Install, обратитесь на http://0install."
-#~ "net"
-
-#~ msgid "Select file"
-#~ msgstr "Выбор файла"
-
-#~ msgid "Test Plugin"
-#~ msgstr "Тестовый модуль"
-
-#~ msgid "This plugin has no purpose"
-#~ msgstr "Этот модуль ни для чего не предназначен"
