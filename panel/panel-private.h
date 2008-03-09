@@ -53,7 +53,6 @@ struct _PanelPrivate
 {
     GtkWidget          *itembar;
     GtkWidget          *menu;
-    GtkWidget          *drag_widget;
 
     gint                size;
     gint                monitor;

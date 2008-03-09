@@ -22,29 +22,19 @@
 
 #include <gtk/gtk.h>
 
-enum
+enum 
 {
     TARGET_PLUGIN_NAME,
-    TARGET_PLUGIN_WIDGET,
-    TARGET_FILE
+    TARGET_PLUGIN_WIDGET
 };
 
-void panel_dnd_set_dest (GtkWidget *widget);
+void panel_dnd_set_dest_name_and_widget (GtkWidget *widget);
 
-void panel_dnd_set_widget_delete_dest (GtkWidget *widget);
+void panel_dnd_set_dest_widget (GtkWidget *widget);
 
-void panel_dnd_unset_dest (GtkWidget *widget);
+void panel_dnd_set_source_name (GtkWidget *widget);
 
-GtkWidget *panel_dnd_get_plugin_from_data (GtkSelectionData *data);
-
-
-void panel_dnd_set_name_source (GtkWidget *widget);
-
-void panel_dnd_set_widget_source (GtkWidget *widget);
-
-void panel_dnd_unset_source (GtkWidget *widget);
-
-void panel_dnd_set_widget_data (GtkSelectionData *data, GtkWidget *plugin);
+void panel_dnd_set_source_widget (GtkWidget *widget);
 
 void panel_dnd_begin_drag (GtkWidget *widget);
 

@@ -145,50 +145,60 @@ item_configure_timeout (XfcePanelItem *item)
 }
 
 
+static XfcePanelItemInfo *
+get_selected_tree_item (PanelItemsDialog *pid)
+{
+    GtkTreeSelection  *selection;
+    GtkTreeModel      *model;
+    GtkTreeIter        iter;
+    XfcePanelItemInfo *info = NULL;
+    
+    /* get the tree selection */
+    selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (pid->tree));
+    if (G_LIKELY (selection))
+    {
+        /* get the selected item */
+        if (gtk_tree_selection_get_selected (selection, &model, &iter))
+            gtk_tree_model_get (model, &iter, 0, &info, -1);
+    }
+    
+    return info;
+}
+
+
 static gboolean
 add_selected_item (PanelItemsDialog *pid)
 {
-    GtkTreeSelection  *sel;
-    GtkTreeModel      *model;
-    GtkTreeIter        iter;
     XfcePanelItemInfo *info;
     GtkWidget         *item = NULL;
-    gint               n;
-    PanelPrivate      *priv;
 
-    sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (pid->tree));
-
-    if (!sel)
-        return FALSE;
-
-    if (!gtk_tree_selection_get_selected (sel, &model, &iter))
-        return FALSE;
-
-    gtk_tree_model_get (model, &iter, 0, &info, -1);
-
-    if (!xfce_panel_item_manager_is_available (info->name))
-        return FALSE;
-
-    if (pid->active)
+    /* get the selected item */
+    info = get_selected_tree_item (pid);
+    if (G_LIKELY (info && xfce_panel_item_manager_is_available (info->name)))
     {
-        priv = PANEL_GET_PRIVATE (pid->panel);
+        if (pid->active)
+        {
+            PanelPrivate *priv = PANEL_GET_PRIVATE (pid->panel);
+            gint          n;
 
-        n = xfce_itembar_get_item_index (XFCE_ITEMBAR (priv->itembar),
-                                         pid->active);
+            n = xfce_itembar_get_item_index (XFCE_ITEMBAR (priv->itembar), pid->active);
 
-        item = panel_insert_item (pid->panel, info->name, n + 1);
+            item = panel_insert_item (pid->panel, info->name, n + 1);
+         }
+         else
+         {
+            item = panel_add_item (pid->panel, info->name);
+         }
+
+        if (item)
+            g_idle_add ((GSourceFunc)item_configure_timeout, item);
+        else
+            xfce_err (_("Could not open \"%s\" module"), info->name);
+    
+        return TRUE;
     }
-    else
-    {
-        item = panel_add_item (pid->panel, info->name);
-    }
-
-    if (G_LIKELY (item))
-        g_idle_add ((GSourceFunc)item_configure_timeout, item);
-    else
-        xfce_err (_("Could not open \"%s\" module"), info->name);
-
-    return TRUE;
+    
+    return FALSE;
 }
 
 static gboolean
@@ -200,24 +210,6 @@ treeview_dblclick (GtkWidget        *tv,
         return add_selected_item (pid);
 
     return FALSE;
-}
-
-static void
-cursor_changed (GtkTreeView      *tv,
-                PanelItemsDialog *pid)
-{
-    GtkTreeSelection  *sel;
-    GtkTreeModel      *model;
-    GtkTreeIter        iter;
-    XfcePanelItemInfo *info;
-
-    if (!(sel = gtk_tree_view_get_selection (tv)))
-        return;
-
-    if (!gtk_tree_selection_get_selected (sel, &model, &iter))
-        return;
- 
-    gtk_tree_model_get (model, &iter, 0, &info, -1);
 }
 
 static void
@@ -296,82 +288,85 @@ render_text (GtkTreeViewColumn *col,
 }
 
 static void
-treeview_data_received (GtkWidget        *widget,
-                        GdkDragContext   *context,
-                        gint              x,
-                        gint              y,
-                        GtkSelectionData *data,
-                        guint             info,
-                        guint             time,
-                        gpointer          user_data)
+treeview_data_received (GtkWidget *widget, GdkDragContext *context, 
+                        gint x, gint y, GtkSelectionData *data, 
+                        guint info, guint time, PanelItemsDialog *pid)
 {
-    gboolean handled = FALSE;
+    gboolean   succeeded = FALSE;
+    GtkWidget *item;
+    
+    /* get the drag source */
+    item = gtk_drag_get_source_widget (context);
+    
+    if (item && XFCE_IS_PANEL_ITEM (item))
+    {
+        /* ask to remove the item */
+        xfce_panel_item_remove (XFCE_PANEL_ITEM (item));
+        
+        succeeded = TRUE;
+    }
 
-    DBG (" + drag data received: %d", info);
-
-    if (data->length && info == TARGET_PLUGIN_WIDGET)
-        handled = TRUE;
-
-    gtk_drag_finish (context, handled, handled, time);
+    /* finish the drag */
+    gtk_drag_finish (context, succeeded, FALSE, time);
 }
 
 static gboolean
-treeview_drag_drop (GtkWidget      *widget,
-                    GdkDragContext *context,
-                    gint            x,
-                    gint            y,
-                    guint           time,
-                    gpointer        user_data)
+treeview_drag_drop (GtkWidget *widget, GdkDragContext *context, 
+                    gint x, gint y, guint time, PanelItemsDialog *pid)
 {
-    GdkAtom atom = gtk_drag_dest_find_target (widget, context, NULL);
+    GdkAtom target = gtk_drag_dest_find_target (widget, context, NULL);
+    
+    /* we cannot handle the drag data */
+    if (G_UNLIKELY (target == GDK_NONE))
+        return FALSE;
 
-    if (atom != GDK_NONE)
-    {
-        gtk_drag_get_data (widget, context, atom, time);
-        return TRUE;
-    }
-
-    return FALSE;
+    /* request the drag data */
+    gtk_drag_get_data (widget, context, target, time);
+  
+    /* we call gtk_drag_finish later */
+    return TRUE;
 }
 
 static void
-treeview_data_get (GtkWidget        *widget,
-                   GdkDragContext   *drag_context,
-                   GtkSelectionData *data,
-                   guint             info,
-                   guint             time,
-                   gpointer          user_data)
+treeview_drag_begin (GtkWidget *treeview, GdkDragContext *context, 
+                     PanelItemsDialog *pid)
 {
-    GtkTreeSelection  *sel;
-    GtkTreeModel      *model;
-    GtkTreeIter        iter;
     XfcePanelItemInfo *item_info;
+  
+    DBG (" + drag begin");
+    
+    /* set nice drag icon */
+    item_info = get_selected_tree_item (pid);
+    if (G_LIKELY (item_info && item_info->icon))
+        gtk_drag_set_icon_pixbuf (context, item_info->icon, 0, 0);
+}
 
+static void
+treeview_data_get (GtkWidget *widget, GdkDragContext *drag_context, 
+                   GtkSelectionData *data, guint info, 
+                   guint time, PanelItemsDialog *pid)
+{
+    XfcePanelItemInfo *item_info;
+    const gchar       *item_name;
+    
     DBG (" + drag data get: %d", info);
-
-    if (info == TARGET_PLUGIN_NAME)
+    
+    if (G_LIKELY (info == TARGET_PLUGIN_NAME))
     {
-        sel = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-
-        if (G_UNLIKELY (!sel))
+        /* get the selected item info */
+        item_info = get_selected_tree_item (pid);
+        if (G_LIKELY (item_info))
         {
-            DBG ("No selection!");
-            return;
+            item_name = item_info->name;
+            
+            if (xfce_panel_item_manager_is_available (item_name))
+            {
+                DBG (" + set selection data: %s", item_name);
+                
+                /* set the selection data */
+                gtk_selection_data_set (data, data->target, 8, (guchar *) item_name, strlen (item_name));
+            }
         }
-
-        if (!gtk_tree_selection_get_selected (sel, &model, &iter))
-            return;
-
-        gtk_tree_model_get (model, &iter, 0, &item_info, -1);
-
-        if (G_UNLIKELY (!xfce_panel_item_manager_is_available (item_info->name)))
-            return;
-
-        DBG (" + set data: %s", item_info->name);
-
-        gtk_selection_data_set (data, data->target, 8,
-                                (guchar *)item_info->name,
-                                strlen (item_info->name));
     }
 }
 
@@ -470,18 +465,13 @@ add_item_treeview (PanelItemsDialog *pid)
     g_object_unref (G_OBJECT (store));
 
     /* dnd */
-    panel_dnd_set_name_source (tv);
+    panel_dnd_set_source_name (tv);
+    panel_dnd_set_dest_name_and_widget (tv);
 
-    panel_dnd_set_widget_delete_dest (tv);
-
-    g_signal_connect (G_OBJECT (tv), "drag-data-get",
-                      G_CALLBACK (treeview_data_get), pid);
-
-    g_signal_connect (G_OBJECT (tv), "drag-data-received",
-                      G_CALLBACK (treeview_data_received), pid);
-
-    g_signal_connect (G_OBJECT (tv), "drag-drop",
-                      G_CALLBACK (treeview_drag_drop), pid);
+    g_signal_connect (tv, "drag-data-get", G_CALLBACK (treeview_data_get), pid);
+    g_signal_connect (tv, "drag-data-received", G_CALLBACK (treeview_data_received), pid);
+    g_signal_connect (tv, "drag-drop", G_CALLBACK (treeview_drag_drop), pid);
+    g_signal_connect (tv, "drag-begin", G_CALLBACK (treeview_drag_begin), pid);
 
     /* create the view */
     col = gtk_tree_view_column_new ();
@@ -521,9 +511,6 @@ add_item_treeview (PanelItemsDialog *pid)
                             g_ptr_array_index (pid->items, i), -1);
     }
 
-    g_signal_connect (G_OBJECT (tv), "cursor_changed",
-                      G_CALLBACK (cursor_changed), pid);
-
     g_signal_connect (G_OBJECT (tv), "button-press-event",
                       G_CALLBACK (treeview_dblclick), pid);
 
@@ -538,12 +525,7 @@ item_dialog_opened (Panel *panel)
     PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
 
     panel_block_autohide (panel);
-
     xfce_itembar_raise_event_window (XFCE_ITEMBAR (priv->itembar));
-
-    panel_dnd_set_dest (priv->itembar);
-    panel_dnd_set_widget_source (priv->itembar);
-
     panel_set_items_sensitive (panel, FALSE);
 
     priv->edit_mode = TRUE;
@@ -555,13 +537,8 @@ item_dialog_closed (Panel *panel)
     PanelPrivate *priv = PANEL_GET_PRIVATE (panel);
 
     panel_unblock_autohide (panel);
-
     xfce_itembar_lower_event_window (XFCE_ITEMBAR (priv->itembar));
-
     panel_set_items_sensitive (panel, TRUE);
-
-    panel_dnd_unset_dest (priv->itembar);
-    panel_dnd_unset_source (priv->itembar);
 
     priv->edit_mode = FALSE;
 }

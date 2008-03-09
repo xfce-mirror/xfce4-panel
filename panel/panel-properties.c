@@ -947,7 +947,7 @@ void panel_init_signals (Panel *panel)
     g_signal_connect (G_OBJECT (panel), "move-end",
                       G_CALLBACK (panel_move_end), NULL);
 
-    panel_dnd_set_dest (GTK_WIDGET (panel));
+    panel_dnd_set_dest_name_and_widget (GTK_WIDGET (panel));
     g_signal_connect (panel, "drag-motion", G_CALLBACK (drag_motion), NULL);
     g_signal_connect (panel, "drag-leave", G_CALLBACK (drag_leave), NULL);
 }
