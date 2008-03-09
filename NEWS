@@ -1,8 +1,8 @@
 4.4.3
 =====
-- Quite a bit code changed in the dnd code. Mostly to fix segfaul in
+- Quite a bit code changed in the dnd code. Mostly to fix a segfault in
   FreeBSD-amd64, but more problems were discovered and a lot of code
-  was simplified and a memory leak was plugged.
+  was simplified.
 - Don't respond the uri drags, we don't use it and it only causes problems
   like hiding the panel when a file was dragged over the panel (Bug #3815).
 
