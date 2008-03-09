@@ -421,7 +421,7 @@ _panel_drag_data_received (GtkWidget        *widget,
                            guint             time, 
                            Panel            *panel)
 {
-    XfceItembar   *itembar = XFCE_ITEMBAR (widget);;
+    XfceItembar   *itembar = XFCE_ITEMBAR (widget);
     PanelPrivate  *priv = panel->priv;
     XfcePanelItem *item;
     GtkWidget     *plugin;
