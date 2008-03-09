@@ -36,110 +36,72 @@
 static const GtkTargetEntry dest_target_list[] = 
 {
     { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME },
-    { "application/x-xfce-panel-plugin-widget", 
-      GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET },
-    { "text/plain", 0, TARGET_FILE },
-    { "text/uri-list", 0, TARGET_FILE },
-    { "UTF8_STRING", 0, TARGET_FILE }
+    { "application/x-xfce-panel-plugin-widget", GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
 };
-
-static const guint n_dest_targets = G_N_ELEMENTS (dest_target_list);
 
 static const GtkTargetEntry name_target_list[] = 
 {
     { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME }
 };
 
-static const guint n_name_targets = G_N_ELEMENTS (name_target_list);
-
 static const GtkTargetEntry widget_target_list[] = 
 {
-    { "application/x-xfce-panel-plugin-widget", 0, TARGET_PLUGIN_WIDGET }
+    { "application/x-xfce-panel-plugin-widget", GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
 };
-
-static guint n_widget_targets = G_N_ELEMENTS (widget_target_list);
 
 /* public API */
 
 void 
-panel_dnd_set_dest (GtkWidget *widget)
+panel_dnd_set_dest_name_and_widget (GtkWidget *widget)
 {
     gtk_drag_dest_set (widget, 
                        GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_MOTION,
-                       dest_target_list, n_dest_targets, GDK_ACTION_COPY);
+                       dest_target_list, G_N_ELEMENTS (dest_target_list),
+                       GDK_ACTION_MOVE | GDK_ACTION_COPY);
 }
 
 void 
-panel_dnd_set_widget_delete_dest (GtkWidget *widget)
+panel_dnd_set_dest_widget (GtkWidget *widget)
 {
     gtk_drag_dest_set (widget, 
                        GTK_DEST_DEFAULT_HIGHLIGHT | GTK_DEST_DEFAULT_MOTION,
-                       widget_target_list, n_widget_targets, 
-                       GDK_ACTION_MOVE);
+                       widget_target_list, G_N_ELEMENTS (widget_target_list), GDK_ACTION_MOVE);
 }
 
 void 
-panel_dnd_unset_dest (GtkWidget *widget)
-{
-    gtk_drag_dest_unset (widget);
-}
-
-GtkWidget *
-panel_dnd_get_plugin_from_data (GtkSelectionData *data)
-{
-    glong *n;
-
-    n = (glong *)data->data;
-    DBG (" + get pointer: %ld", *n);
-    
-    return GTK_WIDGET (GINT_TO_POINTER (*n));
-}
-
-void 
-panel_dnd_set_name_source (GtkWidget *widget)
+panel_dnd_set_source_name (GtkWidget *widget)
 {
     gtk_drag_source_set (widget, GDK_BUTTON1_MASK, 
-                         name_target_list, n_name_targets, 
-                         GDK_ACTION_COPY);
+                         name_target_list, G_N_ELEMENTS (name_target_list), GDK_ACTION_COPY);
 }
 
 void 
-panel_dnd_set_widget_source (GtkWidget *widget)
+panel_dnd_set_source_widget (GtkWidget *widget)
 {
     gtk_drag_source_set (widget, GDK_BUTTON1_MASK, 
-                         widget_target_list, n_widget_targets, 
-                         GDK_ACTION_COPY|GDK_ACTION_MOVE);
-}
-
-void panel_dnd_unset_source (GtkWidget *widget)
-{
-    gtk_drag_source_unset (widget);
-}
-
-void
-panel_dnd_set_widget_data (GtkSelectionData *data, GtkWidget *widget)
-{
-    glong n = GPOINTER_TO_INT (widget);
-    
-    DBG (" + set pointer: %ld", n);
-    
-    gtk_selection_data_set (data, data->target, 32, (guchar *) &n, sizeof (n));
+                         widget_target_list, G_N_ELEMENTS (widget_target_list), GDK_ACTION_COPY);
 }
 
 void
 panel_dnd_begin_drag (GtkWidget *widget)
 {
-    static GtkTargetList *list = NULL;
-    GdkEvent *ev;
+    GtkTargetList *target_list ;
+    GdkEvent      *event;
     
-    if (G_UNLIKELY (list == NULL))
+    event = gtk_get_current_event();
+    if (G_LIKELY (event))
     {
-        list = gtk_target_list_new (widget_target_list, n_widget_targets);
-    }
-    
-    ev = gtk_get_current_event();
-    gtk_drag_begin (widget, list, GDK_ACTION_COPY, 1, ev);
+        /* create a new target list */
+        target_list = gtk_target_list_new (widget_target_list, G_N_ELEMENTS (widget_target_list));
 
-    gdk_event_free (ev);
+        /* begin the drag */
+        gtk_drag_begin (widget, target_list, GDK_ACTION_MOVE, 1, event);
+    
+        /* release the target list */
+        gtk_target_list_unref (target_list);
+
+        /* free the event */
+        gdk_event_free (event);
+    }
 }
 
