@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-12 12:57+0100\n"
-"PO-Revision-Date: 2007-12-18 17:11+0100\n"
+"PO-Revision-Date: 2008-02-17 00:03+0100\n"
 "Last-Translator: Nuno Miguel <nunis@netcabo.pt>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -112,14 +112,10 @@ msgid "About the Xfce Panel"
 msgstr "Sobre o Painel do Xfce"
 
 #: ../panel/panel-app.c:258
-#: ../panel/panel-app.c:888
 #: ../panel/panel-app.c:892
 msgid "Exit Xfce Panel?"
 msgstr "Sair do Painel do Xfce"
 
-#: ../panel/panel-app.c:886
-#: ../panel/panel-app.c:918
-#: ../panel/panel-app.c:951
 #: ../panel/panel-app.c:890
 #: ../panel/panel-app.c:922
 #: ../panel/panel-app.c:955
@@ -139,8 +135,6 @@ msgstr "Remover Painel \"%d\"?"
 msgid "The selected panel and all its items will be removed."
 msgstr "O Painel seleccionado e todos os itens serão removidos."
 
-#: ../panel/panel-app.c:957
-#: ../panel/panel-app.c:958
 #: ../panel/panel-app.c:961
 #: ../panel/panel-app.c:962
 msgid "Developer"
@@ -318,8 +312,6 @@ msgstr "Seleccionar Monitor"
 #. appearance
 #. Button Layout
 #: ../panel/panel-dialogs.c:1428
-#: ../plugins/clock/clock-dialog.c:480
-#: ../plugins/systray/xfce-tray-dialogs.c:274
 #: ../plugins/clock/clock-dialog.c:502
 #: ../plugins/systray/xfce-tray-dialogs.c:351
 #: ../plugins/tasklist/tasklist-dialogs.c:168
@@ -463,7 +455,7 @@ msgstr "Mostrar as tarefas de todas as Áreas de Trabalho"
 #: ../plugins/iconbox/iconbox.c:952
 #: ../plugins/tasklist/tasklist-dialogs.c:187
 msgid "Use all available space"
-msgstr "Usar todo o espaça disponível"
+msgstr "Usar todo o espaço disponível"
 
 #. create menu item
 #. set some default values
@@ -574,9 +566,8 @@ msgstr "Padrão"
 msgid "Inside Button"
 msgstr "Dentro do Botão"
 
-#: ../plugins/pager/pager.c:359
-#: ../plugins/pager/pager.desktop.in.in.h:2
 #: ../plugins/pager/pager.c:365
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Paginador"
 
@@ -640,16 +631,16 @@ msgstr "Ocultar janelas e mostrar ambiente de trabalho"
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
 msgid "System Tray"
-msgstr "Área de notificação"
+msgstr "Bandeja de Sistema"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
 msgid "There is already a system tray running on this screen"
-msgstr "Já existe uma area de notificação a correr neste ecrã"
+msgstr "Já existe uma bandeja de sistema a correr neste ecrã"
 
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
 msgid "The tray manager lost selection"
-msgstr "O gestor de tray perdeu a selecção"
+msgstr "O gestor da bandeja perdeu a selecção"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Are you sure you want to clear the list of known applications?"
@@ -663,15 +654,8 @@ msgstr "_Número de linhas:"
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:389
 msgid "Hidden Applications"
-msgstr "Ocultar Aplicações"
+msgstr "Aplicações Ocultas"
 
-#. create message
-#: ../plugins/systray/xfce-tray-widget.c:318
-#, c-format
-msgid "Failed to register the system tray for screen %d"
-msgstr "Falhou o registo da área de notificação para ecrã %d"
-
-#: ../plugins/systray/xfce-tray-manager.c:461
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
@@ -685,7 +669,7 @@ msgstr "Lista de Tarefas"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:174
 msgid "Minimum Width:"
-msgstr "Largura mínima"
+msgstr "Largura Mínima:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:194
 msgid "Use flat buttons"
@@ -693,7 +677,7 @@ msgstr "Usar botões planos"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:200
 msgid "Show handle"
-msgstr "Mostrar Manípulo"
+msgstr "Mostrar manípulo"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:212
 msgid "Show tasks from _all workspaces"
@@ -756,7 +740,7 @@ msgstr "<i>Notificação de urgência</i> o botão irá piscar quando uma aplica
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
 msgid "Urgency Notification"
-msgstr "Usar notificação de arranque"
+msgstr "Notificação de Urgência"
 
 #: ../plugins/windowlist/windowlist-dialog.c:164
 msgid "_Disabled"
@@ -854,13 +838,6 @@ msgstr "Mostrar lista de janelas"
 msgid "Xfce 4 Panel Manager"
 msgstr "Gestor do Painel Xfce 4"
 
-#, fuzzy
-#~ msgid "Show application _names"
-#~ msgstr "Mostrar _nomes das aplicações"
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%A, %d %B %Y"
-#~ msgid "_Draw Separator"
-#~ msgstr "_Mostrar Separador"
-#~ msgid "_Expand"
-#~ msgstr "_Expandir"
+#~ msgid "Failed to register the system tray for screen %d"
+#~ msgstr "Falhou o registo da bandeja de sistema para ecrã %d"
 
