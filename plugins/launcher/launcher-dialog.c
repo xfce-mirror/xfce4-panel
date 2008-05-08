@@ -595,7 +595,7 @@ launcher_dialog_folder_chooser (LauncherDialog *ld)
     gchar     *path;
 
     chooser = gtk_file_chooser_dialog_new (_("Select a Directory"),
-                                           NULL,
+                                           GTK_WINDOW (gtk_widget_get_toplevel (ld->treeview)),
                                            GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
                                            GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                            GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
