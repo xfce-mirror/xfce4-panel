@@ -30,7 +30,7 @@ EOF
 # substitute revision and linguas
 linguas=`sed -e '/^#/d' po/LINGUAS`
 if test -d .git/svn; then
- revision=`LC_ALL=C git-svn find-rev trunk`
+ revision=`LC_ALL=C git svn find-rev master`
 else
  revision=`LC_ALL=C svn info $0 | awk '/^Revision: / {printf "%05d\n",
 $2}'`
