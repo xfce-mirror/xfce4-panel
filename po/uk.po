@@ -3,53 +3,21 @@
 # This file is distributed under the same license as the xfce4-panel package.
 #
 # Maxim Dziumanenko <dziumanenko@gmail.com>, 2003-2007.
-# Dmitry Nikitin <luckas_fb@mail.ru>, 2007.
+# Dmitry Nikitin <luckas_fb@mail.ru>, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 12:57+0100\n"
-"PO-Revision-Date: 2007-04-02 17:29+0200\n"
-"Last-Translator: Maxim Dziumanenko <dziumanenko@gmail.com>\n"
-"Language-Team: Ukrainian <xfce-i18n@xfce.org>\n"
+"POT-Creation-Date: 2008-07-09 12:51+0000\n"
+"PO-Revision-Date: 2008-07-01 22:18+0300\n"
+"Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
+"Language-Team: Ukrainian <xfce4-dev@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr "Командний рядок"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr "Емулятор X-терміналу"
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr "Редагування текстових файлів"
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "Редактор"
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr "Менеджер файлів"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr "Робота з файлами та теками"
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr "Огляд Інтернет"
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr "Веб-переглядач"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -90,25 +58,25 @@ msgstr "Видалити"
 msgid "Add New Item"
 msgstr "Додати новий об'єкт"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:694
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Налаштувати панель"
 
-#: ../panel/panel.c:705
+#: ../panel/panel.c:606
 msgid "Add Items"
 msgstr "Додати об'єкти"
 
-#: ../panel/panel.c:721 ../plugins/actions/actions.c:286
+#: ../panel/panel.c:622 ../plugins/actions/actions.c:286
 #: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Вийти"
 
-#: ../panel/panel.c:731
+#: ../panel/panel.c:632
 msgid "Restart"
 msgstr "Перезапустити"
 
-#: ../panel/panel.c:745
+#: ../panel/panel.c:646
 msgid "About the Xfce Panel"
 msgstr "Про панель Xfce"
 
@@ -191,16 +159,16 @@ msgstr "xfce4-panel вже запущено"
 msgid "Restarting xfce4-panel..."
 msgstr "Перезапускається xfce4-panel..."
 
-#: ../panel/panel-dialogs.c:189
+#: ../panel/panel-dialogs.c:196
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Не вдається відкрити модуль \"%s\""
 
-#: ../panel/panel-dialogs.c:634
+#: ../panel/panel-dialogs.c:611
 msgid "Add Items to the Panel"
 msgstr "Додати елементи до панелі"
 
-#: ../panel/panel-dialogs.c:665
+#: ../panel/panel-dialogs.c:642
 msgid ""
 "Drag items from the list to a panel or remove them by dragging them back to "
 "the list."
@@ -208,136 +176,136 @@ msgstr ""
 "Перетягуйте об'єкти зі списку на панель або видаляйте об'єкти, перетягуючи "
 "їх назад у список."
 
-#: ../panel/panel-dialogs.c:682
+#: ../panel/panel-dialogs.c:659
 msgid "Available Items"
 msgstr "Доступні об'єкти"
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:885 ../panel/panel-dialogs.c:1121
 msgid "Normal Width"
 msgstr "Звичайна ширина"
 
-#: ../panel/panel-dialogs.c:909 ../panel/panel-dialogs.c:1145
+#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
 msgid "Full Width"
 msgstr "Повна ширина"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:890 ../panel/panel-dialogs.c:1126
 msgid "Normal Height"
 msgstr "Звичайна висота"
 
-#: ../panel/panel-dialogs.c:914 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:891 ../panel/panel-dialogs.c:1127
 msgid "Full Height"
 msgstr "Повна висота"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:899 ../panel/panel-dialogs.c:1136
 msgid "Span Monitors"
 msgstr "Об'єднати екрани"
 
-#: ../panel/panel-dialogs.c:985 ../panel/panel-dialogs.c:1224
-#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1498 ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
 msgstr "Зліва"
 
-#: ../panel/panel-dialogs.c:987 ../panel/panel-dialogs.c:1226
-#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
+#: ../panel/panel-dialogs.c:1499 ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
 msgstr "Справа"
 
-#: ../panel/panel-dialogs.c:992 ../panel/panel-dialogs.c:1231
-#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:969 ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1500 ../plugins/launcher/launcher-dialog.c:1560
 msgid "Top"
 msgstr "Згори"
 
-#: ../panel/panel-dialogs.c:994 ../panel/panel-dialogs.c:1233
-#: ../panel/panel-dialogs.c:1524 ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:971 ../panel/panel-dialogs.c:1210
+#: ../panel/panel-dialogs.c:1501 ../plugins/launcher/launcher-dialog.c:1561
 msgid "Bottom"
 msgstr "Знизу"
 
 #. position
-#: ../panel/panel-dialogs.c:1024
+#: ../panel/panel-dialogs.c:1001
 msgid "Position"
 msgstr "Розташування"
 
-#: ../panel/panel-dialogs.c:1038
+#: ../panel/panel-dialogs.c:1015
 msgid "Fixed Position"
 msgstr "Фіксоване розташування"
 
-#: ../panel/panel-dialogs.c:1044
+#: ../panel/panel-dialogs.c:1021
 msgid "Freely Moveable"
 msgstr "Вільно переміщується"
 
-#: ../panel/panel-dialogs.c:1167
+#: ../panel/panel-dialogs.c:1144
 msgid "Auto_hide"
 msgstr "Автоматичне при_ховування"
 
-#: ../panel/panel-dialogs.c:1185 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1162 ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Орієнтація:"
 
-#: ../panel/panel-dialogs.c:1197 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1174 ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Горизонтальна"
 
-#: ../panel/panel-dialogs.c:1199 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1176 ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Вертикальна"
 
-#: ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1185
 msgid "Handle:"
 msgstr "Елементи керування:"
 
-#: ../panel/panel-dialogs.c:1220
+#: ../panel/panel-dialogs.c:1197
 msgid "At both sides"
 msgstr "З обох боків"
 
-#: ../panel/panel-dialogs.c:1300
+#: ../panel/panel-dialogs.c:1277
 msgid "Select Monitor"
 msgstr "Виберіть екран"
 
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:502
+#: ../panel/panel-dialogs.c:1405 ../plugins/clock/clock-dialog.c:501
 #: ../plugins/systray/xfce-tray-dialogs.c:351
 #: ../plugins/tasklist/tasklist-dialogs.c:168
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
 msgstr "Зовнішній вигляд"
 
-#: ../panel/panel-dialogs.c:1441
+#: ../panel/panel-dialogs.c:1418
 msgid "Size (pixels):"
 msgstr "Розмір (у точках):"
 
-#: ../panel/panel-dialogs.c:1471
+#: ../panel/panel-dialogs.c:1448
 msgid "Transparency (%):"
 msgstr "Прозорість (%):"
 
-#: ../panel/panel-dialogs.c:1497
+#: ../panel/panel-dialogs.c:1474
 msgid "Make active panel opaque"
 msgstr "Зробити активну панель непрозорою"
 
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1487
 msgid "Popup position:"
 msgstr "Позиція появи:"
 
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1497
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: ../panel/panel-dialogs.c:1564 ../panel/panel-dialogs.c:1600
-#: ../panel/panel-dialogs.c:1624
+#: ../panel/panel-dialogs.c:1541 ../panel/panel-dialogs.c:1577
+#: ../panel/panel-dialogs.c:1601
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
 
-#: ../panel/panel-dialogs.c:1643
+#: ../panel/panel-dialogs.c:1620
 msgid "Remove Panel"
 msgstr "Видалити панель"
 
-#: ../panel/panel-dialogs.c:1656
+#: ../panel/panel-dialogs.c:1633
 msgid "New Panel"
 msgstr "Нова панель"
 
-#: ../panel/panel-dialogs.c:1716
+#: ../panel/panel-dialogs.c:1693
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel Manager"
 msgstr "Менеджер панелей"
@@ -359,68 +327,65 @@ msgstr "Виберіть тип дії:"
 msgid "Quit + Lock screen"
 msgstr "Вихід + Блокувати екран"
 
-#: ../plugins/clock/clock-dialog.c:358
+#: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
-msgstr ""
+msgstr "Довільне"
 
-#: ../plugins/clock/clock-dialog.c:412
-#, fuzzy
+#: ../plugins/clock/clock-dialog.c:411
 msgid "Display _seconds"
-msgstr "Відображати секунди"
+msgstr "Відображати _секунди"
 
-#: ../plugins/clock/clock-dialog.c:421
+#: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
 msgstr "Використовувати 24-_годинний формат"
 
-#: ../plugins/clock/clock-dialog.c:427
+#: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "Б_лимання роздільників годинника"
 
-#: ../plugins/clock/clock-dialog.c:433
-#, fuzzy
+#: ../plugins/clock/clock-dialog.c:432
 msgid "Sho_w AM/PM"
-msgstr "Показувати AM/PM"
+msgstr "По_казувати AM/PM"
 
-#: ../plugins/clock/clock-dialog.c:442
+#: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
-msgstr ""
+msgstr "Справжній _двійковий годинник"
 
 #. create dialog
-#: ../plugins/clock/clock-dialog.c:484
+#: ../plugins/clock/clock-dialog.c:483
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Годинник"
 
-#: ../plugins/clock/clock-dialog.c:512
+#: ../plugins/clock/clock-dialog.c:511
 msgid "Analog"
 msgstr "Аналоговий"
 
-#: ../plugins/clock/clock-dialog.c:513
+#: ../plugins/clock/clock-dialog.c:512
 msgid "Binary"
-msgstr ""
+msgstr "Двійковий"
 
-#: ../plugins/clock/clock-dialog.c:514
+#: ../plugins/clock/clock-dialog.c:513
 msgid "Digital"
 msgstr "Цифровий"
 
-#: ../plugins/clock/clock-dialog.c:515
-#, fuzzy
+#: ../plugins/clock/clock-dialog.c:514
 msgid "LCD"
 msgstr "Рідкокристалічний"
 
 #. show frame
-#: ../plugins/clock/clock-dialog.c:520
+#: ../plugins/clock/clock-dialog.c:519
 #: ../plugins/systray/xfce-tray-dialogs.c:362
 msgid "Show _frame"
 msgstr "Відображати _рамку"
 
 #. tooltip settings
-#: ../plugins/clock/clock-dialog.c:527
+#: ../plugins/clock/clock-dialog.c:526
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Формат спливаючого повідомлення"
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:553
+#: ../plugins/clock/clock-dialog.c:552
 msgid "Clock Options"
 msgstr "Параметри годинника"
 
@@ -502,7 +467,7 @@ msgstr "Вибрати значок для \"%s\""
 #: ../plugins/launcher/launcher-dialog.c:842
 #: ../plugins/launcher/launcher-dialog.c:1341
 msgid "Unnamed"
-msgstr ""
+msgstr "Неназваний"
 
 #: ../plugins/launcher/launcher-dialog.c:1120
 msgid "_Name"
@@ -538,18 +503,16 @@ msgid "Program Launcher"
 msgstr "Запуск програм"
 
 #: ../plugins/launcher/launcher-dialog.c:1551
-#, fuzzy
 msgid "A_rrow:"
-msgstr "Кнопка зі _стрілкою"
+msgstr "_Стрілка:"
 
 #: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Default"
-msgstr ""
+msgstr "Типова"
 
 #: ../plugins/launcher/launcher-dialog.c:1562
-#, fuzzy
 msgid "Inside Button"
-msgstr "Кнопка зі _значком"
+msgstr "Всередині кнопки"
 
 #: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
@@ -568,9 +531,8 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "Перемикати робочі місця за допомогою колеса миші"
 
 #: ../plugins/pager/pager.c:434
-#, fuzzy
 msgid "Show workspace names"
-msgstr "Показувати дії ро_бочого столу"
+msgstr "Показувати назви робочих областей"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -578,31 +540,29 @@ msgid "Separator or Spacing"
 msgstr "Розділювач чи інтервал"
 
 #: ../plugins/separator/separator.c:430
-#, fuzzy
 msgid "Separator Style"
-msgstr "Розділювач чи інтервал"
+msgstr "Стиль роздільника"
 
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr ""
+msgstr "П_устий проміжок"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_Розширюваний проміжок"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
-msgstr ""
+msgstr "_Лінія"
 
 #: ../plugins/separator/separator.c:464
-#, fuzzy
 msgid "_Handle"
-msgstr "Елементи керування:"
+msgstr "_Елементи керування"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
-msgstr ""
+msgstr "_Крапки"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
@@ -627,29 +587,26 @@ msgstr "Системний лоток вже зареєстрований на �
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
 msgid "The tray manager lost selection"
-msgstr ""
+msgstr "Менеджер системного лотка втратив виділення"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:280
-#, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Дійсно бажаєте видалити робочу область '%s'?"
+msgstr "Ви впевнені, що бажаєте очистити список відомих програм?"
 
 #. number of rows
 #: ../plugins/systray/xfce-tray-dialogs.c:374
-#, fuzzy
 msgid "_Number of rows:"
-msgstr "Кількість рядків:"
+msgstr "Кількі_сть рядків:"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:389
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "Вибрати програму"
+msgstr "Приховані програми"
 
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Не вдалось отримати управління виділеним для екрану %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:209
@@ -832,67 +789,4 @@ msgstr "Відображати список доступних вікон"
 msgid "Xfce 4 Panel Manager"
 msgstr "Менеджер панелей Xfce 4"
 
-#, fuzzy
-#~ msgid "Failed to register the system tray for screen %d"
-#~ msgstr "Неможливо зареєструвати системний лоток: %s"
 
-#~ msgid "Show application _names"
-#~ msgstr "Показувати _назви програм"
-
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%A, %d %B %Y"
-
-#~ msgid "_Draw Separator"
-#~ msgstr "_Відображати розділювач"
-
-#~ msgid "_Expand"
-#~ msgstr "_Розширювати"
-
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ " Панель Xfce %s\n"
-#~ "\n"
-#~ " Частина робочого середовища Xfce\n"
-#~ "http://www.xfce.org\n"
-#~ "\n"
-#~ " Розповсюджується на умовах GNU GPL.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ " Використання: %s [ПАРАМЕТРИ]\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ " ПАРАМЕТРИ\n"
-#~ " -h, --help      Вивести це повідомлення та вийти\n"
-#~ " -v, --version   Вивести це повідомлення та вийти\n"
-#~ " -c, --customize Показати діалог властивостей\n"
-#~ " -s, --save      Зберегти конфігурацію\n"
-#~ " -r, --restart   Перезапустити панелі\n"
-#~ " -q, --quit      Завершити сеанс\n"
-#~ " -x, --exit      Закрити усі панелі та завершити програму\n"
-#~ " -a, --add       Додати новий об'єкт\n"
-#~ "\n"
