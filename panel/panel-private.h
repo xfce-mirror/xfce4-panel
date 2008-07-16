@@ -62,8 +62,8 @@ struct _PanelPrivate
     XfcePanelWidthType  full_width;
     gint                transparency;
 
-    guint               opacity;
-    guint               saved_opacity;
+    gulong              opacity;
+    gulong              saved_opacity;
 
     gint                block_autohide;
     gint                hide_timeout;

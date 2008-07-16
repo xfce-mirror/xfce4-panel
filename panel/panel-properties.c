@@ -627,7 +627,7 @@ _set_transparent (Panel    *panel,
                   gboolean  transparent)
 {
     PanelPrivate *priv;
-    guint         opacity;
+    gulong        opacity;
 
     if (!GTK_WIDGET (panel)->window)
         return;
