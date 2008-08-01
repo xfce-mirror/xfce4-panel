@@ -111,10 +111,6 @@ launcher_utility_icon_theme_changed (GSignalInvocationHint *ihint,
                                      const GValue          *param_values,
                                      LauncherPlugin        *launcher)
 {
-    /* only update if we already have an image, this fails when the signal is connected */
-    if (G_LIKELY (gtk_image_get_storage_type (GTK_IMAGE (launcher->image)) == GTK_IMAGE_EMPTY))
-        return TRUE;
-
     /* update the button icon */
     launcher_icon_button_set_icon (launcher);
 
@@ -133,21 +129,38 @@ launcher_utility_filenames_from_selection_data (GtkSelectionData *selection_data
     gchar  **uri_list;
     GSList  *filenames = NULL;
     gchar   *filename;
+    gboolean is_uri = TRUE;
     guint    i;
 
     /* check whether the retrieval worked */
     if (G_LIKELY (selection_data->length > 0))
     {
-        /* split the received uri list */
-        uri_list = g_uri_list_extract_uris ((gchar *) selection_data->data);
+        if (g_str_equal(gdk_atom_name(selection_data->target), "text/uri-list"))
+        {
+			/* split the received uri list */
+			uri_list = g_uri_list_extract_uris ((gchar *) selection_data->data);
+        }
+        else
+        {
+        	/* split input by \n, \r or \r\n, this might result in empty elements, we sort
+        	 * them out below */
+        	uri_list = g_strsplit_set ((gchar *) selection_data->data, "\n\r", 0);
+        	is_uri = FALSE;
+        }
 
         if (G_LIKELY (uri_list))
         {
-            /* walk though the list */
+            /* walk through the list */
             for (i = 0; uri_list[i] != NULL; i++)
             {
+                if (! uri_list[i][0]) /* skip emtpy elements */
+                    continue;
+
                 /* convert the uri to a filename */
-                filename = g_filename_from_uri (uri_list[i], NULL, NULL);
+                if (is_uri)
+                    filename = g_filename_from_uri (uri_list[i], NULL, NULL);
+                else
+					filename = g_strdup (uri_list[i]);
 
                 /* prepend the filename */
                 if (G_LIKELY (filename))

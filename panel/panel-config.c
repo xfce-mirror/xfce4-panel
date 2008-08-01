@@ -157,7 +157,7 @@ panel_config_save_panels (GPtrArray * panels)
 {
     gchar       *file;
     gboolean     failed = FALSE;
-    gint         i;
+    guint        i;
     const gchar *path = "xfce4" G_DIR_SEPARATOR_S
                         "panel" G_DIR_SEPARATOR_S
                         "panels.xml";
@@ -623,9 +623,9 @@ gboolean
 config_save_to_file (GPtrArray   *array,
                      const gchar *filename)
 {
-    FILE                *fp;
-    gchar                tmp_path[PATH_MAX];
-    gint                 i;
+    FILE  *fp;
+    gchar  tmp_path[PATH_MAX];
+    guint  i;
 
     g_return_val_if_fail (array != NULL, FALSE);
     g_return_val_if_fail (filename != NULL || (strlen (filename) > 0), FALSE);

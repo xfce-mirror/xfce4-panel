@@ -139,7 +139,7 @@ xfce_clock_dialog_tooltip_format_changed (GtkComboBox *combo,
     entry = g_object_get_data (G_OBJECT (combo), I_("entry"));
 
     /* set one of the default formats */
-    if (index < G_N_ELEMENTS (tooltip_formats))
+    if (index < (gint) G_N_ELEMENTS (tooltip_formats))
     {
         /* hide the entry */
         gtk_widget_hide (entry);
@@ -260,7 +260,7 @@ xfce_clock_dialog_digital_format_changed (GtkComboBox *combo,
     entry = g_object_get_data (G_OBJECT (combo), I_("entry"));
 
     /* set one of the default formats */
-    if (index < G_N_ELEMENTS (digital_formats))
+    if (index < (gint) G_N_ELEMENTS (digital_formats))
     {
         /* hide the entry */
         gtk_widget_hide (entry);

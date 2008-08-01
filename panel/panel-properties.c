@@ -1194,9 +1194,9 @@ panel_set_full_width (Panel *panel,
 
     priv = panel->priv;
 
-    if (fullwidth != priv->full_width)
+    if ((XfcePanelWidthType) fullwidth != priv->full_width)
     {
-        priv->full_width = fullwidth;
+        priv->full_width = (XfcePanelWidthType) fullwidth;
 
         if (GTK_WIDGET_VISIBLE (panel))
         {

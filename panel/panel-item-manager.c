@@ -525,7 +525,7 @@ xfce_panel_item_manager_get_item_info_list (void)
 void
 xfce_panel_item_manager_free_item_info_list (GPtrArray *info_list)
 {
-    gint i;
+    guint i;
 
     for (i = 0; i < info_list->len; ++i)
     {

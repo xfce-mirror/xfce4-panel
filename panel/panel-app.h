@@ -100,9 +100,9 @@ void panel_app_about (GtkWidget *panel);
 
 Window panel_app_get_ipc_window (void);
 
-XfceMonitor *panel_app_get_monitor (int n);
+XfceMonitor *panel_app_get_monitor (guint n);
 
-int panel_app_get_n_monitors (void);
+guint panel_app_get_n_monitors (void);
 
 gboolean panel_app_monitors_equal_height (void);
 

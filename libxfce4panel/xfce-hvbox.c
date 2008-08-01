@@ -76,26 +76,22 @@ xfce_hvbox_class_init (XfceHVBoxClass *klass)
 
 
 
-static GtkWidgetClass *
-get_class (XfceHVBox *hvbox)
+static gpointer
+xfce_hvbox_get_class (XfceHVBox *hvbox)
 {
-    GtkWidgetClass *klass;
+    GType    type;
+    gpointer klass;
 
-    switch (hvbox->orientation)
-    {
-        case GTK_ORIENTATION_HORIZONTAL:
-            klass = GTK_WIDGET_CLASS (gtk_type_class (GTK_TYPE_HBOX));
-            break;
-        case GTK_ORIENTATION_VERTICAL:
-            klass = GTK_WIDGET_CLASS (gtk_type_class (GTK_TYPE_VBOX));
-            break;
-        default:
-            g_assert_not_reached ();
-            klass = NULL;
-            break;
-    }
+    if (hvbox->orientation == GTK_ORIENTATION_HORIZONTAL)
+        type = GTK_TYPE_HBOX;
+    else
+        type = GTK_TYPE_VBOX;
 
-    return klass;
+    /* peek the class, this only works if the class already exists */
+    klass = g_type_class_peek (type);
+  
+    /* return the type or create the class */
+    return klass ? klass : g_type_class_ref (type);
 }
 
 
@@ -104,14 +100,13 @@ static void
 xfce_hvbox_size_request (GtkWidget      *widget,
                          GtkRequisition *requisition)
 {
-    GtkWidgetClass *klass;
-    XfceHVBox      *hvbox;
+    gpointer klass;
 
-    hvbox = XFCE_HVBOX (widget);
-
-    klass = get_class (hvbox);
-
-    klass->size_request (widget, requisition);
+    /* get the widget class */
+    klass = xfce_hvbox_get_class (XFCE_HVBOX (widget));
+  
+    /* request the size */
+    (*GTK_WIDGET_CLASS (klass)->size_request) (widget, requisition);
 }
 
 
@@ -120,14 +115,13 @@ static void
 xfce_hvbox_size_allocate (GtkWidget     *widget,
                           GtkAllocation *allocation)
 {
-    GtkWidgetClass *klass;
-    XfceHVBox      *hvbox;
+    gpointer klass;
 
-    hvbox = XFCE_HVBOX (widget);
+    /* get the widget class */
+    klass = xfce_hvbox_get_class (XFCE_HVBOX (widget));
 
-    klass = get_class (hvbox);
-
-    klass->size_allocate (widget, allocation);
+    /* allocate the size */
+    (*GTK_WIDGET_CLASS (klass)->size_allocate) (widget, allocation);
 }
 
 

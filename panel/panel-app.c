@@ -145,7 +145,7 @@ static gint     signal_pipe[2];
 static void
 cleanup_panels (void)
 {
-    gint         i;
+    guint        i;
     GList       *l;
     Panel       *panel;
     XfceMonitor *xmon;
@@ -420,7 +420,7 @@ session_die (gpointer client_data)
 static void
 monitor_size_changed (GdkScreen *screen)
 {
-    gint         i;
+    guint        i;
     XfceMonitor *monitor;
     GtkWidget   *panel;
 
@@ -453,6 +453,7 @@ create_monitor_list (void)
     gint         n_screens;
     gint         n_monitors = 0;
     gint         i, j;
+    guint        k, m;
     gint         w = 0, h = 0;
     gboolean     equal_w, equal_h;
     XfceMonitor *mon1, *mon2;
@@ -516,16 +517,16 @@ create_monitor_list (void)
     }
 
     /* check layout */
-    for (i = 0; i < panel_app.monitor_list->len; ++i)
+    for (k = 0; k < panel_app.monitor_list->len; ++k)
     {
-        mon1 = g_ptr_array_index (panel_app.monitor_list, i);
+        mon1 = g_ptr_array_index (panel_app.monitor_list, k);
 
-        for (j = 0; j < panel_app.monitor_list->len; ++j)
+        for (m = 0; m < panel_app.monitor_list->len; ++m)
         {
-            if (j == i)
+            if (m == k)
                 continue;
 
-            mon2 = g_ptr_array_index (panel_app.monitor_list, j);
+            mon2 = g_ptr_array_index (panel_app.monitor_list, m);
 
             if (mon2->geometry.x < mon1->geometry.x
                 && mon2->geometry.y < mon1->geometry.y + mon1->geometry.height
@@ -878,7 +879,7 @@ void
 panel_app_remove_panel (GtkWidget *panel)
 {
     gint   response = GTK_RESPONSE_NONE;
-    gint   n;
+    guint  n;
     gchar *first;
 
     if (!xfce_allow_panel_customization())
@@ -985,13 +986,13 @@ panel_app_get_ipc_window (void)
 }
 
 XfceMonitor *
-panel_app_get_monitor (gint n)
+panel_app_get_monitor (guint n)
 {
     return g_ptr_array_index (panel_app.monitor_list,
-                              CLAMP (n, 0, panel_app.monitor_list->len - 1));
+                              MIN (n, panel_app.monitor_list->len - 1));
 }
 
-gint
+guint
 panel_app_get_n_monitors (void)
 {
     return panel_app.monitor_list->len;
@@ -1013,7 +1014,7 @@ panel_app_register_dialog (GtkWidget *dialog)
 void
 panel_app_set_current_panel (gpointer *panel)
 {
-    gint i;
+    guint i;
 
     panel_app.current_panel = 0;
 
@@ -1032,13 +1033,13 @@ panel_app_set_current_panel (gpointer *panel)
 void
 panel_app_unset_current_panel (gpointer *panel)
 {
-    gint i;
+    guint i;
 
     for (i = 0; i < panel_app.panel_list->len; ++i)
     {
         if (g_ptr_array_index (panel_app.panel_list, i) == panel)
         {
-            if (i == panel_app.current_panel)
+            if (i == (guint) panel_app.current_panel)
                 panel_app.current_panel = 0;
             break;
         }

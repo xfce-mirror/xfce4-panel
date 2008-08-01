@@ -778,7 +778,7 @@ _item_start_move_end (GtkWidget      *item,
     if (!priv->edit_mode)
     {
         const GPtrArray *panels = panel_app_get_panel_list ();
-        gint i;
+        guint i;
 
         for (i = 0; i < panels->len; ++i)
         {
@@ -802,7 +802,7 @@ _item_start_move (GtkWidget *item,
     const GPtrArray *panels = panel_app_get_panel_list ();
     PanelPrivate    *priv;
     Panel           *p;
-    gint             i;
+    guint             i;
 
     for (i = 0; i < panels->len; ++i)
     {

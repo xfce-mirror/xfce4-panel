@@ -1061,7 +1061,7 @@ launcher_dialog_tree_button_clicked (GtkWidget      *button,
         list_length = g_list_length (ld->launcher->entries);
 
         /* select previous item, if last item was removed */
-        if (position >= list_length)
+        if (position >= (guint) list_length)
             gtk_tree_path_prev (path);
 
         /* select the new item (also updates treeview buttons) */

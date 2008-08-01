@@ -105,6 +105,9 @@ enum
 static const GtkTargetEntry drop_targets[] =
 {
     { "text/uri-list", 0, 0, },
+    { "STRING",	       0, 0 },
+    { "UTF8_STRING",   0, 0 },
+    { "text/plain",    0, 0 },
 };
 
 

@@ -430,7 +430,7 @@ add_item_treeview (PanelItemsDialog *pid)
     GtkTreeModel      *model;
     GtkTreePath       *path;
     GtkTreeIter        iter;
-    gint               i;
+    guint              i;
     GdkColor          *color;
     GtkRequisition     req;
 
@@ -701,7 +701,7 @@ static void
 update_widgets (PanelManagerDialog *pmd)
 {
     PanelPrivate    *priv = PANEL_GET_PRIVATE (pmd->panel);
-    gint             i;
+    guint            i;
     GtkToggleButton *tb;
     XfceHandleStyle  style;
 
@@ -714,7 +714,7 @@ update_widgets (PanelManagerDialog *pmd)
         {
             tb = g_ptr_array_index (pmd->monitors, i);
 
-            gtk_toggle_button_set_active (tb, i == priv->monitor);
+            gtk_toggle_button_set_active (tb, i == (guint) priv->monitor);
         }
     }
 
@@ -746,7 +746,7 @@ update_widgets (PanelManagerDialog *pmd)
         {
             gtk_toggle_button_set_active (
                     GTK_TOGGLE_BUTTON (pmd->screen_position[i]),
-                    (gint) priv->screen_position == i+1);
+                    priv->screen_position == i + 1);
         }
 
         gtk_combo_box_set_active (GTK_COMBO_BOX (pmd->fullwidth),
@@ -1222,7 +1222,7 @@ monitor_pressed (GtkToggleButton    *tb,
                  GdkEvent           *ev,
                  PanelManagerDialog *pmd)
 {
-	gint             i;
+	guint            i;
 	GtkToggleButton *mon;
 
     if (ev->type == GDK_KEY_PRESS &&
@@ -1527,7 +1527,8 @@ add_panel (GtkWidget          *w,
            PanelManagerDialog *pmd)
 {
     gchar name[20];
-    gint  n, x, y;
+    guint n;
+    gint  x, y;
 
     n = pmd->panels->len;
 
@@ -1558,8 +1559,8 @@ static void
 remove_panel (GtkWidget          *w,
               PanelManagerDialog *pmd)
 {
-    gint  n = pmd->panels->len;
-    gint  i;
+    guint n = pmd->panels->len;
+    guint i;
     gchar name[20];
 
     panel_app_remove_panel (GTK_WIDGET (pmd->panel));
@@ -1586,7 +1587,7 @@ static GtkWidget *
 create_panel_selector (PanelManagerDialog *pmd)
 {
     GtkWidget *hbox, *img;
-    gint       i;
+    guint      i;
     gchar      name[20];
 
     hbox = gtk_hbox_new (FALSE, BORDER);
