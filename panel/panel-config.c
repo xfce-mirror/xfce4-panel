@@ -623,29 +623,20 @@ gboolean
 config_save_to_file (GPtrArray   *array,
                      const gchar *filename)
 {
-    FILE  *fp;
-    gchar  tmp_path[PATH_MAX];
-    guint  i;
+    guint     i;
+    GString  *contents;
+    GError   *error = NULL;
+    gboolean  result;
 
     g_return_val_if_fail (array != NULL, FALSE);
     g_return_val_if_fail (filename != NULL || (strlen (filename) > 0), FALSE);
 
     DBG ("Save configuration of %d panels.", array->len);
 
-    g_snprintf (tmp_path, PATH_MAX, "%s.tmp", filename);
-
-    fp = fopen (tmp_path, "w");
-    if (fp == NULL)
-    {
-        g_critical ("Unable to open file %s: %s",
-                    tmp_path, g_strerror (errno));
-        return FALSE;
-    }
-
-    /* Write header */
-    fprintf (fp, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-                 "<!DOCTYPE config SYSTEM \"config.dtd\">\n"
-                 "<panels>\n");
+    /* write header */
+    contents = g_string_new ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                             "<!DOCTYPE config SYSTEM \"config.dtd\">\n"
+                             "<panels>\n");
 
     for (i = 0; i < array->len; ++i)
     {
@@ -661,7 +652,6 @@ config_save_to_file (GPtrArray   *array,
         gboolean        activetrans     = FALSE;
         Panel          *panel;
         GList          *configlist, *l;
-        XfcePanelItem  *item;
 
         DBG ("Saving panel %d", i + 1);
 
@@ -680,82 +670,68 @@ config_save_to_file (GPtrArray   *array,
                       "activetrans",     &activetrans,
                       NULL);
 
-        /* grouping */
-        fprintf (fp, "\t<panel>\n"
-                     "\t\t<properties>\n");
-
-        /* properties */
-        fprintf (fp, "\t\t\t<property name=\"size\" value=\"%d\"/>\n",
-                     size);
-
-        fprintf (fp, "\t\t\t<property name=\"monitor\" value=\"%d\"/>\n",
-                     monitor);
-
-        fprintf (fp, "\t\t\t<property name=\"screen-position\" "
-                     "value=\"%d\"/>\n", screen_position);
-
-        fprintf (fp, "\t\t\t<property name=\"fullwidth\" value=\"%d\"/>\n",
-                     fullwidth);
-
-        fprintf (fp, "\t\t\t<property name=\"xoffset\" value=\"%d\"/>\n",
-                     xoffset);
-
-        fprintf (fp, "\t\t\t<property name=\"yoffset\" value=\"%d\"/>\n",
-                     yoffset);
-
-        fprintf (fp, "\t\t\t<property name=\"handlestyle\" value=\"%d\"/>\n",
-                     handle_style);
-
-        fprintf (fp, "\t\t\t<property name=\"autohide\" value=\"%d\"/>\n",
-                     autohide);
-
-        fprintf (fp, "\t\t\t<property name=\"transparency\" value=\"%d\"/>\n",
-                     transparency);
-
-        fprintf (fp, "\t\t\t<property name=\"activetrans\" value=\"%d\"/>\n",
-                     activetrans);
-
-        /* grouping */
-        fprintf (fp, "\t\t</properties>\n"
-                     "\t\t<items>\n");
+        /* write the panel config */
+        g_string_append_printf (contents,
+                                "\t<panel>\n"
+                                "\t\t<properties>\n"
+                                "\t\t\t<property name=\"size\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"monitor\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"screen-position\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"fullwidth\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"xoffset\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"yoffset\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"handlestyle\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"autohide\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"transparency\" value=\"%d\"/>\n"
+                                "\t\t\t<property name=\"activetrans\" value=\"%d\"/>\n"
+                                "\t\t</properties>\n"
+                                "\t\t<items>\n",
+                                size,
+                                monitor,
+                                screen_position,
+                                fullwidth,
+                                xoffset,
+                                yoffset,
+                                handle_style,
+                                autohide,
+                                transparency,
+                                activetrans);
 
         /* panel items */
         configlist = panel_get_item_list (panel);
 
         for (l = configlist; l != NULL; l = l->next)
         {
-            item = l->data;
+            XfcePanelItem  *item = l->data;
 
-            fprintf (fp, "\t\t\t<item name=\"%s\" id=\"%s\"/>\n",
-                     xfce_panel_item_get_name (item),
-                     xfce_panel_item_get_id (item));
+            /* write item name and id */
+            g_string_append_printf (contents,
+                                    "\t\t\t<item name=\"%s\" id=\"%s\"/>\n",
+                                    xfce_panel_item_get_name (item),
+                                    xfce_panel_item_get_id (item));
         }
 
         g_list_free (configlist);
 
-        /* grouping */
-        fprintf (fp, "\t\t</items>\n"
-                     "\t</panel>\n");
-
+        /* close panel group */
+        contents = g_string_append (contents,
+                                    "\t\t</items>\n"
+                                    "\t</panel>\n");
     }
 
-    /* closing */
-    fprintf (fp, "</panels>\n");
+    /* closing panels group */
+    contents = g_string_append (contents, "</panels>\n");
 
-    if (fclose (fp) == EOF)
+    /* try to write the content to the config file */
+    result = g_file_set_contents (filename, contents->str, -1, &error);
+    if (G_UNLIKELY (result == FALSE))
     {
-        g_critical ("Unable to close file handle for %s: %s", tmp_path,
-                    g_strerror (errno));
-        unlink (tmp_path);
-        return FALSE;
+        g_critical ("Unable to write config file: %s", error->message);
+        g_error_free (error);
     }
 
-    if (rename (tmp_path, filename) < 0)
-    {
-        g_critical ("Unable to rename file %s to %s: %s", tmp_path, filename,
-                    g_strerror (errno));
-        return FALSE;
-    }
+    /* cleanup */
+    g_string_free (contents, TRUE);
 
-    return TRUE;
+    return result;
 }
