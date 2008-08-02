@@ -291,6 +291,9 @@ xfce_clock_lcd_size_request (GtkWidget      *widget,
         requisition->height = height;
         requisition->width = height * ratio;
     }
+    
+    /* increase the width with 1 px for rounding errors */
+    requisition->width++;
 }
 
 
@@ -340,7 +343,7 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 
         if (ticks >= 10)
         {
-            /* draw the number and increase the offset*/
+            /* draw the number and increase the offset */
             offset_x = xfce_clock_lcd_draw_digit (cr, ticks >= 20 ? 2 : 1, size, offset_x, offset_y);
         }
 
