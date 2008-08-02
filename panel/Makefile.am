@@ -59,17 +59,4 @@ xfce4_panel_LDADD =								\
 xfce4_panel_DEPENDENCIES =							\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
 
-#
-# Dummy Scripts
-#
-if ENABLE_DUMMY_SCRIPTS
-bin_SCRIPTS =									\
-	xftaskbar4								\
-	xfce4-iconbox
-
-EXTRA_DIST =									\
-	xftaskbar4								\
-	xfce4-iconbox
-endif
-
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
