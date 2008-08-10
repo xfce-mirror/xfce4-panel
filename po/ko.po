@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-12 12:57+0100\n"
-"PO-Revision-Date: 2007-09-24 03:27+0900\n"
-"Last-Translator: ByungHyun Choi <byunghyun.choi@gmail.com>\n"
+"PO-Revision-Date: 2008-07-25 01:13+0900\n"
+"Last-Translator: ByungHyun Choi <byunghyun.choi@debianusers.org>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge."
 "net>\n"
 "MIME-Version: 1.0\n"
@@ -309,7 +309,7 @@ msgstr "투명도(%):"
 
 #: ../panel/panel-dialogs.c:1497
 msgid "Make active panel opaque"
-msgstr "활성화된 패널을 흐릭하게"
+msgstr "활성화된 패널을 흐릿하게"
 
 #: ../panel/panel-dialogs.c:1510
 msgid "Popup position:"
@@ -369,7 +369,7 @@ msgstr "24시간 사용(_h)"
 
 #: ../plugins/clock/clock-dialog.c:427
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "Flash time separators(_a)"
 
 #: ../plugins/clock/clock-dialog.c:433
 msgid "Sho_w AM/PM"
@@ -495,7 +495,7 @@ msgstr "\"%s\"에 대한 아이콘 선택"
 #: ../plugins/launcher/launcher-dialog.c:842
 #: ../plugins/launcher/launcher-dialog.c:1341
 msgid "Unnamed"
-msgstr ""
+msgstr "이름 없음"
 
 #: ../plugins/launcher/launcher-dialog.c:1120
 msgid "_Name"
@@ -559,9 +559,8 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "마우스 휠로 작업공간 전환"
 
 #: ../plugins/pager/pager.c:434
-#, fuzzy
 msgid "Show workspace names"
-msgstr "작업공간 움직임 보이기(_k)"
+msgstr "작업공간 이름 보이기"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -616,18 +615,16 @@ msgstr "이 화면에는 시스템 트레이가 이미 동작 중입니다."
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
 msgid "The tray manager lost selection"
-msgstr ""
+msgstr "트레이 관리자가 헤메고 있습니다."
 
 #: ../plugins/systray/xfce-tray-dialogs.c:280
-#, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "작업공간 '%s'를(을) 없애시렵니까?"
+msgstr "응용 프로그램 목록을 없애시렵니까?"
 
 #. number of rows
 #: ../plugins/systray/xfce-tray-dialogs.c:374
-#, fuzzy
 msgid "_Number of rows:"
-msgstr "몇 줄:"
+msgstr "몇번째 줄(_N):"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:389
@@ -818,7 +815,6 @@ msgstr "이용가능한 창목록 보이기"
 msgid "Xfce 4 Panel Manager"
 msgstr "Xfce 4 패널 관리자"
 
-#, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"
 #~ msgstr "시스템 트레이에 %s를(을) 등록하지 못 했습니다."
 
