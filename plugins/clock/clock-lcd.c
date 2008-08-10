@@ -21,7 +21,9 @@
 #include <config.h>
 #endif
 
-
+#ifdef HAVE_MATH_H
+#include <math.h>
+#endif
 
 #include <gtk/gtk.h>
 #include <cairo/cairo.h>
@@ -95,28 +97,7 @@ struct _XfceClockLcd
 
 
 
-static GObjectClass *xfce_clock_lcd_parent_class;
-
-
-
-GType
-xfce_clock_lcd_get_type (void)
-{
-    static GType type = G_TYPE_INVALID;
-
-    if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-        type = g_type_register_static_simple (GTK_TYPE_IMAGE,
-                                              I_("XfceClockLcd"),
-                                              sizeof (XfceClockLcdClass),
-                                              (GClassInitFunc) xfce_clock_lcd_class_init,
-                                              sizeof (XfceClockLcd),
-                                              (GInstanceInitFunc) xfce_clock_lcd_init,
-                                              0);
-    }
-
-    return type;
-}
+G_DEFINE_TYPE (XfceClockLcd, xfce_clock_lcd, GTK_TYPE_IMAGE);
 
 
 
@@ -125,8 +106,6 @@ xfce_clock_lcd_class_init (XfceClockLcdClass *klass)
 {
     GObjectClass   *gobject_class;
     GtkWidgetClass *gtkwidget_class;
-
-    xfce_clock_lcd_parent_class = g_type_class_peek_parent (klass);
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_clock_lcd_finalize;
@@ -291,9 +270,6 @@ xfce_clock_lcd_size_request (GtkWidget      *widget,
         requisition->height = height;
         requisition->width = height * ratio;
     }
-    
-    /* increase the width with 1 px for rounding errors */
-    requisition->width++;
 }
 
 
@@ -312,15 +288,22 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
 
     g_return_val_if_fail (XFCE_CLOCK_IS_LCD (clock), FALSE);
 
-    /* size of a digit should be a fraction of 10 */
-    size = widget->allocation.height - widget->allocation.height % 10;
-
     /* get the width:height ratio */
     ratio = xfce_clock_lcd_get_ratio (XFCE_CLOCK_LCD (widget));
 
+    /* size of a digit should be a fraction of 10 */
+    size = widget->allocation.height - widget->allocation.height % 10;
+
+    /* make sure we also fit on small vertical panels */
+    size = MIN (floor ((gdouble) widget->allocation.width / ratio), size);
+
     /* begin offsets */
-    offset_x = widget->allocation.x + (widget->allocation.width - (size * ratio)) / 2;
-    offset_y = widget->allocation.y + (widget->allocation.height - size) / 2;
+    offset_x = rint ((widget->allocation.width - (size * ratio)) / 2.00);
+    offset_y = rint ((widget->allocation.height - size) / 2.00);
+
+    /* only allow positive values from the base point */
+    offset_x = widget->allocation.x + MAX (0.00, offset_x);
+    offset_y = widget->allocation.y + MAX (0.00, offset_y);
 
     /* get the cairo context */
     cr = gdk_cairo_create (widget->window);
@@ -511,11 +494,18 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
             x = segments_x[segment][j] * size + offset_x;
             y = segments_y[segment][j] * size + offset_y;
 
+            /* when 0.01 * size is larger then 1, round the numbers */
+            if (size >= 10)
+            {
+              x = floor (x);
+              y = floor (y);
+            }
+
             /* leave when there are no valid coordinates */
-            if (x < 0 || y < 0)
+            if (x < offset_x || y < offset_y)
                 break;
 
-            if (j == 0)
+            if (G_UNLIKELY (j == 0))
                 cairo_move_to (cr, x, y);
             else
                 cairo_line_to (cr, x, y);

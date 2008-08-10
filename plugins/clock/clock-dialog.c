@@ -454,7 +454,8 @@ xfce_clock_dialog_options (ClockPlugin *clock)
         g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (xfce_clock_dialog_digital_format_changed), clock);
         gtk_widget_show (combo);
 
-        entry = gtk_entry_new_with_max_length (BUFFER_SIZE-1);
+        entry = gtk_entry_new ();
+        gtk_entry_set_max_length (GTK_ENTRY (entry), BUFFER_SIZE - 1);
         gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
         g_object_set_data (G_OBJECT (combo), I_("entry"), entry);
         if (!has_active)
@@ -538,7 +539,8 @@ xfce_clock_dialog_show (ClockPlugin *clock)
     g_signal_connect (G_OBJECT (combo), "changed", G_CALLBACK (xfce_clock_dialog_tooltip_format_changed), clock);
     gtk_widget_show (combo);
 
-    entry = gtk_entry_new_with_max_length (BUFFER_SIZE-1);
+    entry = gtk_entry_new ();
+    gtk_entry_set_max_length (GTK_ENTRY (entry), BUFFER_SIZE - 1);
     gtk_box_pack_start (GTK_BOX (vbox), entry, TRUE, TRUE, 0);
     g_object_set_data (G_OBJECT (combo), I_("entry"), entry);
     if (!has_active)

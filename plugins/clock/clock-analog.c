@@ -95,28 +95,7 @@ struct _XfceClockAnalog
 
 
 
-static GObjectClass *xfce_clock_analog_parent_class;
-
-
-
-GType
-xfce_clock_analog_get_type (void)
-{
-    static GType type = G_TYPE_INVALID;
-
-    if (G_UNLIKELY (type == G_TYPE_INVALID))
-    {
-        type = g_type_register_static_simple (GTK_TYPE_IMAGE,
-                                              I_("XfceClockAnalog"),
-                                              sizeof (XfceClockAnalogClass),
-                                              (GClassInitFunc) xfce_clock_analog_class_init,
-                                              sizeof (XfceClockAnalog),
-                                              (GInstanceInitFunc) xfce_clock_analog_init,
-                                              0);
-    }
-
-    return type;
-}
+G_DEFINE_TYPE (XfceClockAnalog, xfce_clock_analog, GTK_TYPE_IMAGE);
 
 
 
@@ -125,8 +104,6 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
 {
     GObjectClass   *gobject_class;
     GtkWidgetClass *gtkwidget_class;
-
-    xfce_clock_analog_parent_class = g_type_class_peek_parent (klass);
 
     gobject_class = G_OBJECT_CLASS (klass);
     gobject_class->finalize = xfce_clock_analog_finalize;

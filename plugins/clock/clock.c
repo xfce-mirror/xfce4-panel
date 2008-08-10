@@ -228,15 +228,17 @@ xfce_clock_tooltip_update (gpointer user_data)
 {
     ClockPlugin        *clock = (ClockPlugin *) user_data;
     gchar              *string;
-    static GtkTooltips *tooltips = NULL;
     struct tm           tm;
-
-    if (G_UNLIKELY (clock->tooltip_format == NULL))
-        return TRUE;
+#if !GTK_CHECK_VERSION (2,12,0)
+    static GtkTooltips *tooltips = NULL;
 
     /* allocate the tooltip on-demand */
     if (G_UNLIKELY (tooltips == NULL))
         tooltips = gtk_tooltips_new ();
+#endif
+
+    if (G_UNLIKELY (clock->tooltip_format == NULL))
+        return TRUE;
 
     /* get the local time */
     xfce_clock_util_get_localtime (&tm);
@@ -245,7 +247,11 @@ xfce_clock_tooltip_update (gpointer user_data)
     string = xfce_clock_util_strdup_strftime (clock->tooltip_format, &tm);
 
     /* set the tooltip */
+#if GTK_CHECK_VERSION (2,12,0)
+    gtk_widget_set_tooltip_text (clock->ebox, string);
+#else
     gtk_tooltips_set_tip (tooltips, clock->ebox, string, NULL);
+#endif
 
     /* cleanup */
     g_free (string);
@@ -537,6 +543,15 @@ xfce_clock_plugin_set_size (ClockPlugin *clock,
 
 
 static void
+xfce_clock_plugin_set_orientation (ClockPlugin *clock)
+{
+    /* do a size request */
+    xfce_clock_plugin_set_size (clock, xfce_panel_plugin_get_size (clock->plugin));
+}
+
+
+
+static void
 xfce_clock_plugin_read (ClockPlugin *clock)
 {
     gchar       *filename;
@@ -663,5 +678,6 @@ xfce_clock_plugin_construct (XfcePanelPlugin *plugin)
     g_signal_connect_swapped (G_OBJECT (plugin), "save", G_CALLBACK (xfce_clock_plugin_write), clock);
     g_signal_connect_swapped (G_OBJECT (plugin), "free-data", G_CALLBACK (xfce_clock_plugin_free), clock);
     g_signal_connect_swapped (G_OBJECT (plugin), "configure-plugin", G_CALLBACK (xfce_clock_dialog_show), clock);
+    g_signal_connect_swapped (G_OBJECT (plugin), "orientation-changed", G_CALLBACK (xfce_clock_plugin_set_orientation), clock);
 }
 
