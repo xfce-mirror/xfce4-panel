@@ -273,6 +273,10 @@ xfce_clock_binary_expose_event (GtkWidget      *widget,
 
     if (G_LIKELY (cr != NULL))
     {
+        /* clip the drawing area */
+        gdk_cairo_rectangle (cr, &event->area);
+        cairo_clip (cr);
+        
         /* get the current time */
         xfce_clock_util_get_localtime (&tm);
 
