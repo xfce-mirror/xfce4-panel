@@ -185,13 +185,12 @@ xfce_clock_digital_update (gpointer user_data)
     struct tm         tm;
 
     g_return_val_if_fail (XFCE_CLOCK_IS_DIGITAL (clock), FALSE);
-    g_return_val_if_fail (clock->format != NULL, FALSE);
 
     /* get the local time */
     xfce_clock_util_get_localtime (&tm);
 
     /* get the string */
-    string = xfce_clock_util_strdup_strftime (clock->format, &tm);
+    string = xfce_clock_util_strdup_strftime (clock->format ? clock->format : DEFAULT_DIGITAL_FORMAT, &tm);
 
     /* set the new label */
     gtk_label_set_markup (GTK_LABEL (clock), string);
