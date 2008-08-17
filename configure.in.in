@@ -13,10 +13,10 @@ dnl ***************************
 m4_define([libxfce4panel_verinfo], [2:2:1])
 m4_define([xfce4_panel_version_major], [4])
 m4_define([xfce4_panel_version_minor], [5])
-m4_define([xfce4_panel_version_micro], [80])
+m4_define([xfce4_panel_version_micro], [90])
 m4_define([xfce4_panel_version_nano],  []) dnl leave this empty to have no nano version
 m4_define([xfce4_panel_version_build], [r@REVISION@])
-m4_define([xfce4_panel_version_tag],   [])
+m4_define([xfce4_panel_version_tag],   [svn])
 m4_define([xfce4_panel_version], [xfce4_panel_version_major().xfce4_panel_version_minor().xfce4_panel_version_micro()ifelse(xfce4_panel_version_nano(), [], [], [.xfce4_panel_version_nano()])ifelse(xfce4_panel_version_tag(), [svn], [xfce4_panel_version_tag()-xfce4_panel_version_build()], [xfce4_panel_version_tag()])])
 
 dnl *******************************************
