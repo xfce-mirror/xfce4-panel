@@ -24,7 +24,31 @@ The #XfceItembar-struct struct contains private data only, and
 should be accessed using the functions below.
 </para>
 
-@__parent__: 
+
+<!-- ##### SIGNAL XfceItembar::contents-changed ##### -->
+<para>
+
+</para>
+
+@xfceitembar: the object which received the signal.
+
+<!-- ##### SIGNAL XfceItembar::orientation-changed ##### -->
+<para>
+
+</para>
+
+@xfceitembar: the object which received the signal.
+@arg1: 
+
+<!-- ##### ARG XfceItembar:orientation ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfceItembar:expand ##### -->
+<para>
+
+</para>
 
 <!-- ##### FUNCTION xfce_itembar_new ##### -->
 <para>
@@ -109,6 +133,15 @@ should be accessed using the functions below.
 @itembar: 
 @item: 
 @Returns: 
+
+
+<!-- ##### FUNCTION xfce_itembar_set_allow_expand ##### -->
+<para>
+
+</para>
+
+@itembar: 
+@allow: 
 
 
 <!-- ##### FUNCTION xfce_itembar_get_n_items ##### -->

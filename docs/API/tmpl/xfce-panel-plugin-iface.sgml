@@ -26,6 +26,89 @@ of a widget implementing the panel plugin interface.
 </para>
 
 
+<!-- ##### SIGNAL XfcePanelPlugin::about ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::configure-plugin ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::free-data ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::orientation-changed ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL XfcePanelPlugin::save ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+
+<!-- ##### SIGNAL XfcePanelPlugin::screen-position-changed ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+@arg1: 
+
+<!-- ##### SIGNAL XfcePanelPlugin::size-changed ##### -->
+<para>
+
+</para>
+
+@xfcepanelplugin: the object which received the signal.
+@arg1: 
+@Returns: 
+
+<!-- ##### ARG XfcePanelPlugin:display-name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:expand ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:id ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:name ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:screen-position ##### -->
+<para>
+
+</para>
+
+<!-- ##### ARG XfcePanelPlugin:size ##### -->
+<para>
+
+</para>
+
 <!-- ##### USER_FUNCTION XfcePanelPluginFunc ##### -->
 <para>
 
@@ -40,6 +123,16 @@ of a widget implementing the panel plugin interface.
 </para>
 
 @screen: 
+@Returns: 
+
+
+<!-- ##### USER_FUNCTION XfcePanelPluginPreInit ##### -->
+<para>
+
+</para>
+
+@argc: 
+@argv: 
 @Returns: 
 
 
