@@ -113,14 +113,17 @@ XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.8.0])
 XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.5.90])
 XDT_CHECK_PACKAGE([LIBEXO], [exo-0.3], [0.3.80])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
-XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.12])
 
-dnl ***************************
-dnl *** Check for wnck 2.20 ***
-dnl ***************************
-AC_CHECK_LIB(wnck-1, wnck_screen_get_number,
-    [AC_DEFINE([HAVE_WNCK_TWO_POINT_TWENTY], [1],
-        [Define if wnck_screen_get_number is present])])
+dnl **********************
+dnl *** Check for wnck ***
+dnl **********************
+XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.20],
+[
+    AC_DEFINE([HAVE_WNCK_TWO_POINT_TWENTY], [1], [Use 2.20 API])
+],
+[
+    XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.12])
+])
 
 dnl ***********************************
 dnl *** Check for optional packages ***

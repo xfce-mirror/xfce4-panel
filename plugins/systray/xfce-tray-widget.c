@@ -814,13 +814,31 @@ xfce_tray_widget_name_hidden (XfceTrayWidget *tray,
 
 
 
+#if !GLIB_CHECK_VERSION (2,14,0)
+static void
+xfce_tray_widget_name_list_foreach (gpointer key,
+                                    gpointer value,
+                                    gpointer user_data)
+{
+    GList **keys = user_data;
+
+    *keys = g_list_prepend (*keys, key);
+}
+#endif
+
+
+
 GList *
 xfce_tray_widget_name_list (XfceTrayWidget *tray)
 {
-    GList *keys;
+    GList *keys = NULL;
 
+#if !GLIB_CHECK_VERSION (2,14,0)
+    g_hash_table_foreach (tray->names, xfce_tray_widget_name_list_foreach, &keys);
+#else
     /* get the hash table keys */
     keys = g_hash_table_get_keys (tray->names);
+#endif
 
     /* sort the list */
     keys = g_list_sort (keys, (GCompareFunc) strcmp);
