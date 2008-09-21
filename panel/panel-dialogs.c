@@ -1559,6 +1559,7 @@ static void
 remove_panel (GtkWidget          *w,
               PanelManagerDialog *pmd)
 {
+    GtkTreeModel *model;
     guint n = pmd->panels->len;
     guint i;
     gchar name[20];
@@ -1568,10 +1569,9 @@ remove_panel (GtkWidget          *w,
     if (pmd->panels->len == n)
         return;
 
-    pmd->panel = g_ptr_array_index (pmd->panels, 0);
 
-    for (i = pmd->panels->len; i >= 0; --i)
-        gtk_combo_box_remove_text (GTK_COMBO_BOX (pmd->panel_selector), i);
+    model = gtk_combo_box_get_model (GTK_COMBO_BOX (pmd->panel_selector));
+    gtk_list_store_clear (GTK_LIST_STORE (model));
 
     for (i = 0; i < pmd->panels->len; ++i)
     {

@@ -1,3 +1,11 @@
+2008-09-21 01:40 jannis
+
+	* panel/panel-dialogs.c: Use gtk_list_store_clear() on the model of 
+	  the panel selector combo box instead of calling 
+	  gtk_combo_box_remove_text() several times in a row when destroying 
+	  panel. This fixes bug #4401 (xfce4-panel halted when a panel was 
+	  removed).
+
 2008-08-30 22:04  jannis
 
 	* ChangeLog, autogen.sh:
