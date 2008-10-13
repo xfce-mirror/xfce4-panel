@@ -1,5 +1,6 @@
 4.5.x
 =====
+- This fixes bug #4401 (xfce4-panel halted when a panel was removed)
 - Fix window manager hints reporting width 1 pixel too wide (bug #3402).
   (Jasper)
 - Make itembar not care about expanded items when panel is not full width.
@@ -22,6 +23,7 @@
   to the dependencies of their package (including cflags and libadd in
   the makefiles).
 - Some new Tango icons.
+- Remove MCS plugin, MCS is deprecated.
 
 
 4.3.99.3 (4.4-RC3)

@@ -13,7 +13,7 @@ dnl ***************************
 m4_define([libxfce4panel_verinfo], [2:2:1])
 m4_define([xfce4_panel_version_major], [4])
 m4_define([xfce4_panel_version_minor], [5])
-m4_define([xfce4_panel_version_micro], [90])
+m4_define([xfce4_panel_version_micro], [91])
 m4_define([xfce4_panel_version_nano],  []) dnl leave this empty to have no nano version
 m4_define([xfce4_panel_version_build], [r@REVISION@])
 m4_define([xfce4_panel_version_tag],   [])
@@ -106,12 +106,12 @@ XDT_CHECK_LIBSM()
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.5.90])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.5.91])
 XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.8.0])
 XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.8.0])
 XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.8.0])
-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.5.90])
-XDT_CHECK_PACKAGE([LIBEXO], [exo-0.3], [0.3.80])
+XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.5.91])
+XDT_CHECK_PACKAGE([LIBEXO], [exo-0.3], [0.3.91])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 
 dnl **********************
@@ -128,11 +128,6 @@ XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.20],
 dnl ***********************************
 dnl *** Check for optional packages ***
 dnl ***********************************
-XDT_CHECK_OPTIONAL_PACKAGE([XFCE_MCS_MANAGER],
-                           [xfce-mcs-manager],
-                           [4.4.0], [mcs-plugin],
-                           [xfce-mcs-manager], [no])
-
 XDT_CHECK_OPTIONAL_PACKAGE([LIBSTARTUP_NOTIFICATION],
                            [libstartup-notification-1.0],
                            [0.5], [startup-notification],
@@ -270,7 +265,7 @@ plugins/showdesktop/Makefile
 plugins/systray/Makefile
 plugins/tasklist/Makefile
 plugins/windowlist/Makefile
-mcs-plugin/Makefile
+settings/Makefile
 po/Makefile.in
 docs/Makefile
 docs/API/Makefile
@@ -290,11 +285,6 @@ if test x"$LIBSTARTUP_NOTIFICATION_FOUND" = x"yes"; then
 echo "* Startup Notification:          yes"
 else
 echo "* Startup Notification:          no"
-fi
-if test x"$XFCE_MCS_MANAGER_FOUND" = x"yes"; then
-echo "* Xfce Settings Manager plugin:  yes"
-else
-echo "* Xfce Settings Manager plugin:  no"
 fi
 echo "* Debugging Support:             $enable_debug"
 echo "* Dummy Scripts:                 $enable_dummy_scripts"

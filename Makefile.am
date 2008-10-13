@@ -3,11 +3,11 @@
 SUBDIRS =								\
 	config								\
 	icons								\
-	libxfce4panel							\
+	libxfce4panel						\
 	panel								\
 	plugins								\
-	mcs-plugin							\
-	po								\
+	settings							\
+	po									\
 	docs
 
 distclean-local:
