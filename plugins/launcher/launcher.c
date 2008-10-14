@@ -38,9 +38,7 @@
 #include "launcher-dialog.h"
 
 /* prototypes */
-static gboolean        launcher_utility_icon_theme_changed          (GSignalInvocationHint *ihint,
-                                                                     guint                  n_param_values,
-                                                                     const GValue          *param_values,
+static void            launcher_utility_icon_theme_changed          (GtkIconTheme          *icon_theme,
                                                                      LauncherPlugin        *launcher);
 static gboolean        launcher_icon_button_expose_event            (GtkWidget             *widget,
                                                                      GdkEventExpose        *event,
@@ -105,20 +103,15 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (launcher_plugin_construct);
 /**
  * Utility Functions
  **/
-static gboolean
-launcher_utility_icon_theme_changed (GSignalInvocationHint *ihint,
-                                     guint                  n_param_values,
-                                     const GValue          *param_values,
-                                     LauncherPlugin        *launcher)
+static void
+launcher_utility_icon_theme_changed (GtkIconTheme   *icon_theme,
+                                     LauncherPlugin *launcher)
 {
     /* update the button icon */
     launcher_icon_button_set_icon (launcher);
 
     /* destroy the menu */
     launcher_menu_destroy (launcher);
-
-    /* keep hook alive */
-    return TRUE;
 }
 
 
@@ -815,7 +808,8 @@ static LauncherPlugin*
 launcher_plugin_new (XfcePanelPlugin *plugin)
 {
     LauncherPlugin *launcher;
-    gpointer        klass;
+    GtkIconTheme   *icon_theme;
+    GdkScreen      *screen;
 
     /* create launcher structure */
     launcher = panel_slice_new0 (LauncherPlugin);
@@ -851,12 +845,10 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     gtk_button_set_focus_on_click (GTK_BUTTON (launcher->arrow_button), FALSE);
 
     /* hook for icon themes changes */
-    klass = g_type_class_ref (GTK_TYPE_ICON_THEME);
-    launcher->theme_timeout_id =
-        g_signal_add_emission_hook (g_signal_lookup ("changed", GTK_TYPE_ICON_THEME),
-                                    0, (GSignalEmissionHook) launcher_utility_icon_theme_changed,
-                                    launcher, NULL);
-    g_type_class_unref (klass);
+    screen = gtk_widget_get_screen (launcher->image);
+    icon_theme = gtk_icon_theme_get_for_screen (screen);
+    g_signal_connect (G_OBJECT (icon_theme), "changed", 
+                      G_CALLBACK (launcher_utility_icon_theme_changed), launcher);
 
     /* icon button signals */
     g_signal_connect (G_OBJECT (launcher->icon_button), "state-changed",
