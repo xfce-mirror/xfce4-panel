@@ -1,3 +1,10 @@
+2008-10-14 15:49 jannis
+
+	* launcher/launcher.c: Change the way the icon theme change callback
+	  is installed: use gtk_icon_theme_for_screen() in combination with
+	  g_signal_connect() instead of adding a signal emission hook to the
+	  icon theme class. This should fix bug #4474.
+
 2008-10-13 11:42 stephan
 
 	* mcs-plugins/*, settings/*, 
