@@ -1,0 +1,791 @@
+# Danish translations for xfce4-panel package.
+# Copyright (C) 2002-2005 The Xfce development team.
+# This file is distributed under the same license as the xfce4-panel package.
+# Jesper Berth <bigsanta@berthit.dk>, 2005.
+# Lars Nielsen <lars@mit-web.dk>, 2008.
+# Per Kongstad <p_kongstad@op.pl>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-panel 4.4.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-27 15:28+0200\n"
+"PO-Revision-Date: 2008-10-20 08:27+0100\n"
+"Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
+"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: ../config/launcher-7.rc.in.h:1
+msgid "Command Prompt"
+msgstr "Kommandoprompt"
+
+#: ../config/launcher-7.rc.in.h:2
+msgid "X terminal emulator"
+msgstr "X-terminalemulering"
+
+#: ../config/launcher-8.rc.in.h:1
+msgid "Edit text files"
+msgstr "Redigér tekstfiler"
+
+#: ../config/launcher-8.rc.in.h:2
+#: ../plugins/launcher/launcher-dialog.c:102
+msgid "Editor"
+msgstr "Redigering"
+
+#: ../config/launcher-9.rc.in.h:1
+msgid "File Manager"
+msgstr "Filhåndtering"
+
+#: ../config/launcher-9.rc.in.h:2
+msgid "Manage files and folders"
+msgstr "Administrér filer og mapper"
+
+#: ../config/launcher-10.rc.in.h:1
+msgid "Surf the internet"
+msgstr "Surf på internettet"
+
+#: ../config/launcher-10.rc.in.h:2
+msgid "Web Browser"
+msgstr "Netlæser"
+
+#. dialogs are annoying, just spit out a warning
+#: ../libxfce4panel/xfce-panel-external-item.c:182
+#, c-format
+msgid "An item was unexpectedly removed: \"%s\"."
+msgstr "Et element blev fjernet uventet: \"%s\"."
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:584
+#, c-format
+msgid "Remove \"%s\"?"
+msgstr "Fjern \"%s\"?"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:599
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Elementet vil blive fjernet fra panelet, og indstillingerne mistes."
+
+#. configure, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:788
+msgid "Properties"
+msgstr "Egenskaber"
+
+#. about item, hide by default
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:805
+msgid "About"
+msgstr "Om"
+
+#. move
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:817
+msgid "Move"
+msgstr "Flyt"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+msgid "Remove"
+msgstr "Fjern"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+msgid "Add New Item"
+msgstr "Tilføj nyt element"
+
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:866
+#: ../panel/panel.c:697
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
+msgid "Customize Panel"
+msgstr "Tilpas panelet"
+
+#: ../panel/panel.c:708
+msgid "Add Items"
+msgstr "Tilføj nye elementer"
+
+#: ../panel/panel.c:724
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
+msgid "Quit"
+msgstr "Afslut"
+
+#: ../panel/panel.c:734
+msgid "Restart"
+msgstr "Genstart"
+
+#: ../panel/panel.c:748
+msgid "About the Xfce Panel"
+msgstr "Om Xfce-panelet"
+
+#: ../panel/panel-app.c:238
+#: ../panel/panel-app.c:876
+msgid "Exit Xfce Panel?"
+msgstr "Afslut Xfce-panelet?"
+
+#: ../panel/panel-app.c:874
+#: ../panel/panel-app.c:906
+#: ../panel/panel-app.c:940
+#: ../plugins/launcher/launcher.c:375
+#: ../plugins/launcher/launcher.c:401
+#: ../plugins/launcher/launcher.c:437
+msgid "Xfce Panel"
+msgstr "Xfce-panel"
+
+#: ../panel/panel-app.c:877
+msgid "You can't remove the last panel. Would you like to exit the program?"
+msgstr "Du kan ikke fjerne det sidste panel. Vil du afslutte programmet?"
+
+#: ../panel/panel-app.c:904
+#, c-format
+msgid "Remove Panel \"%d\"?"
+msgstr "Fjern panel \"%d\"?"
+
+#: ../panel/panel-app.c:908
+msgid "The selected panel and all its items will be removed."
+msgstr "Det valgte panel og alle dets elementer vil blive fjernet."
+
+#: ../panel/panel-app.c:947
+#: ../panel/panel-app.c:950
+msgid "Developer"
+msgstr "Udvikler"
+
+#: ../panel/main.c:46
+#, c-format
+msgid ""
+"\n"
+" Xfce Panel %s\n"
+"\n"
+" Part of the Xfce Desktop Environment\n"
+" http://www.xfce.org\n"
+"\n"
+" Licensed under the GNU GPL.\n"
+"\n"
+msgstr ""
+"\n"
+" Xfce Panel %s\n"
+"\n"
+" En del af Xfce Skrivebordsmiljø\n"
+" http://www.xfce.org\n"
+"\n"
+" Licenseret under GNU GPL.\n"
+"\n"
+
+#: ../panel/main.c:52
+#, c-format
+msgid ""
+" Usage: %s [OPTIONS]\n"
+"\n"
+msgstr ""
+" Brug: %s [TILVALG]\n"
+"\n"
+
+#. Only translate the descriptions, not the options itself
+#: ../panel/main.c:55
+msgid ""
+" OPTIONS\n"
+" -h, --help      Show this message and exit\n"
+" -v, --version   Show this message and exit\n"
+" -c, --customize Show configuration dialog\n"
+" -s, --save      Save configuration\n"
+" -r, --restart   Restart panels\n"
+" -q, --quit      End the session\n"
+" -x, --exit      Close all panels and end the program\n"
+" -a, --add       Add new items\n"
+"\n"
+msgstr ""
+" TILVALG\n"
+" -h, --help      Vis denne besked og afslut\n"
+" -v, --version   Vis denne besked og afslut\n"
+" -c, --customize Vis indstillingsdialog\n"
+" -s, --save      Gem indstilling\n"
+" -r, --restart   Genstart paneler\n"
+" -q, --quit      Afslut session\n"
+" -x, --exit      Luk alle paneler og afslut programmet\n"
+" -a, --add       Tilføj nye elementer\n"
+"\n"
+
+#: ../panel/panel-dialogs.c:184
+#, c-format
+msgid "Could not open \"%s\" module"
+msgstr "Kunne ikke åbne \"%s\" modulet"
+
+#: ../panel/panel-dialogs.c:597
+msgid "Add Items to the Panel"
+msgstr "Tilføj elementer til panelet"
+
+#: ../panel/panel-dialogs.c:627
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Træk elementer fra listen til et panel eller træk dem tilbage til listen for at fjerne dem."
+
+#: ../panel/panel-dialogs.c:644
+msgid "Available Items"
+msgstr "Tilgængelige elementer"
+
+#: ../panel/panel-dialogs.c:870
+#: ../panel/panel-dialogs.c:1094
+msgid "Normal Width"
+msgstr "Normal bredde"
+
+#: ../panel/panel-dialogs.c:872
+#: ../panel/panel-dialogs.c:1096
+msgid "Full Width"
+msgstr "Fuld bredde"
+
+#: ../panel/panel-dialogs.c:878
+#: ../panel/panel-dialogs.c:1102
+msgid "Span Monitors"
+msgstr "Udbred på skærme"
+
+#: ../panel/panel-dialogs.c:938
+#: ../panel/panel-dialogs.c:1167
+msgid "Left"
+msgstr "Venstre"
+
+#: ../panel/panel-dialogs.c:940
+#: ../panel/panel-dialogs.c:1169
+msgid "Right"
+msgstr "Højre"
+
+#: ../panel/panel-dialogs.c:945
+#: ../panel/panel-dialogs.c:1174
+msgid "Top"
+msgstr "Top"
+
+#: ../panel/panel-dialogs.c:947
+#: ../panel/panel-dialogs.c:1176
+msgid "Bottom"
+msgstr "Bund"
+
+#. position
+#: ../panel/panel-dialogs.c:975
+msgid "Position"
+msgstr "Placering"
+
+#: ../panel/panel-dialogs.c:989
+msgid "Fixed Position"
+msgstr "Fast placering"
+
+#: ../panel/panel-dialogs.c:995
+msgid "Freely Moveable"
+msgstr "Frit flytbart"
+
+#: ../panel/panel-dialogs.c:1110
+msgid "Auto_hide"
+msgstr "Sk_jul automatisk"
+
+#: ../panel/panel-dialogs.c:1128
+#: ../plugins/actions/actions.c:471
+msgid "Orientation:"
+msgstr "Panel orientering:"
+
+#: ../panel/panel-dialogs.c:1140
+#: ../plugins/actions/actions.c:484
+msgid "Horizontal"
+msgstr "Horisontal"
+
+#: ../panel/panel-dialogs.c:1142
+#: ../plugins/actions/actions.c:485
+msgid "Vertical"
+msgstr "Vertikal"
+
+#: ../panel/panel-dialogs.c:1151
+msgid "Handle:"
+msgstr "Håndtag:"
+
+#: ../panel/panel-dialogs.c:1163
+msgid "At both sides"
+msgstr "I begge sider"
+
+#: ../panel/panel-dialogs.c:1236
+msgid "Select Monitor"
+msgstr "Vælg skærm"
+
+#. Button Layout
+#: ../panel/panel-dialogs.c:1354
+#: ../plugins/clock/clock.c:496
+#: ../plugins/tasklist/tasklist.c:424
+#: ../plugins/windowlist/windowlist-dialog.c:190
+msgid "Appearance"
+msgstr "Udseende"
+
+#. size
+#: ../panel/panel-dialogs.c:1365
+msgid "Size (pixels):"
+msgstr "Størrelse (piksel):"
+
+#: ../panel/panel-dialogs.c:1393
+msgid "Transparency (%):"
+msgstr "Gennemsigtighed (%):"
+
+#: ../panel/panel-dialogs.c:1417
+msgid "Make active panel opaque"
+msgstr "Gør aktivt panel uigennemsigtigt"
+
+#: ../panel/panel-dialogs.c:1456
+#: ../panel/panel-dialogs.c:1492
+#: ../panel/panel-dialogs.c:1517
+#, c-format
+msgid "Panel %d"
+msgstr "Panel %d"
+
+#: ../panel/panel-dialogs.c:1536
+msgid "Remove Panel"
+msgstr "Fjern panel"
+
+#: ../panel/panel-dialogs.c:1549
+msgid "New Panel"
+msgstr "Nyt panel"
+
+#: ../panel/panel-dialogs.c:1606
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel Manager"
+msgstr "Panelhåndtering"
+
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:459
+msgid "Lock screen"
+msgstr "Lås skærm"
+
+#: ../plugins/actions/actions.c:419
+msgid "Panel Actions"
+msgstr "Panelhandlinger"
+
+#: ../plugins/actions/actions.c:449
+msgid "Select action type:"
+msgstr "Vælg handlingstype:"
+
+#: ../plugins/actions/actions.c:460
+msgid "Quit + Lock screen"
+msgstr "Afslut + Lås skærm"
+
+#. Use format characters from strftime(3)
+#. * to get the proper string for your locale.
+#. * I used these:
+#. * %A  : full weekday name
+#. * %d  : day of the month
+#. * %B  : full month name
+#. * %Y  : four digit year
+#.
+#: ../plugins/clock/clock.c:122
+msgid "%A %d %B %Y"
+msgstr "%A %d %B %Y"
+
+#: ../plugins/clock/clock.c:481
+#: ../plugins/clock/clock.desktop.in.in.h:1
+msgid "Clock"
+msgstr "Ur"
+
+#. Keep order in sync with XfceClockMode
+#: ../plugins/clock/clock.c:508
+msgid "Analog"
+msgstr "Analog"
+
+#: ../plugins/clock/clock.c:509
+msgid "Digital"
+msgstr "Digitalt"
+
+#: ../plugins/clock/clock.c:510
+msgid "LED"
+msgstr "LED"
+
+#: ../plugins/clock/clock.c:515
+#: ../plugins/systray/systray.c:402
+msgid "Show _frame"
+msgstr "Vis _ramme"
+
+#: ../plugins/clock/clock.c:522
+msgid "Clock Options"
+msgstr "Urindstillinger"
+
+#: ../plugins/clock/clock.c:530
+msgid "Use 24-_hour clock"
+msgstr "Brug 24-_timers ur"
+
+#: ../plugins/clock/clock.c:537
+msgid "Show AM/PM"
+msgstr "Vis AM/PM"
+
+#: ../plugins/clock/clock.c:544
+msgid "Display seconds"
+msgstr "Vis sekunder"
+
+#: ../plugins/iconbox/iconbox.c:901
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:1
+msgid "Icon Box"
+msgstr "Ikonboks"
+
+#: ../plugins/iconbox/iconbox.c:926
+msgid "Only show minimized applications"
+msgstr "Vis kun minimerede programmer"
+
+#: ../plugins/iconbox/iconbox.c:935
+msgid "Show applications of all workspaces"
+msgstr "Vis programmer fra alle arbejdsområder"
+
+#: ../plugins/iconbox/iconbox.c:943
+#: ../plugins/tasklist/tasklist.c:447
+msgid "Use all available space"
+msgstr "Brug al tilgængelig plads"
+
+#: ../plugins/launcher/launcher.c:373
+#: ../plugins/launcher/launcher.c:435
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Kunne ikke køre \"%s\""
+
+#: ../plugins/launcher/launcher.c:398
+#, c-format
+msgid "Error in command \"%s\""
+msgstr "Fejl i kommando \"%s\""
+
+#: ../plugins/launcher/launcher.c:675
+#: ../plugins/launcher/launcher.c:1303
+#: ../plugins/launcher/launcher-dialog.c:1167
+msgid "New Item"
+msgstr "Nyt element"
+
+#: ../plugins/launcher/launcher.c:1304
+msgid "This item has not yet been configured"
+msgstr "Dette element er endnu ikke blevet indstillet"
+
+#: ../plugins/launcher/launcher-dialog.c:101
+msgid "Default"
+msgstr "Standard"
+
+#: ../plugins/launcher/launcher-dialog.c:103
+msgid "File management"
+msgstr "Filhåndtering"
+
+#: ../plugins/launcher/launcher-dialog.c:104
+msgid "Utilities"
+msgstr "Værktøjer"
+
+#: ../plugins/launcher/launcher-dialog.c:105
+msgid "Games"
+msgstr "Spil"
+
+#: ../plugins/launcher/launcher-dialog.c:106
+msgid "Help browser"
+msgstr "Hjælp til netlæser"
+
+#: ../plugins/launcher/launcher-dialog.c:107
+msgid "Multimedia"
+msgstr "Multimedie"
+
+#: ../plugins/launcher/launcher-dialog.c:108
+msgid "Network"
+msgstr "Netværk"
+
+#: ../plugins/launcher/launcher-dialog.c:109
+msgid "Graphics"
+msgstr "Grafik"
+
+#: ../plugins/launcher/launcher-dialog.c:110
+msgid "Printer"
+msgstr "Printer"
+
+#: ../plugins/launcher/launcher-dialog.c:111
+msgid "Productivity"
+msgstr "Produktivitet"
+
+#: ../plugins/launcher/launcher-dialog.c:112
+msgid "Office"
+msgstr "Kontor"
+
+#: ../plugins/launcher/launcher-dialog.c:113
+msgid "Sound"
+msgstr "Lyd"
+
+#: ../plugins/launcher/launcher-dialog.c:114
+msgid "Terminal"
+msgstr "Terminal"
+
+#: ../plugins/launcher/launcher-dialog.c:115
+msgid "Development"
+msgstr "Udvikling"
+
+#: ../plugins/launcher/launcher-dialog.c:413
+msgid "Select image file"
+msgstr "Vælg ikonfil"
+
+#: ../plugins/launcher/launcher-dialog.c:459
+msgid "Select command"
+msgstr "Vælg kommando"
+
+#: ../plugins/launcher/launcher-dialog.c:482
+msgid "Name"
+msgstr "Navn"
+
+#: ../plugins/launcher/launcher-dialog.c:500
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: ../plugins/launcher/launcher-dialog.c:555
+msgid "Other..."
+msgstr "Anden..."
+
+#: ../plugins/launcher/launcher-dialog.c:653
+msgid "Command"
+msgstr "Kommando"
+
+#: ../plugins/launcher/launcher-dialog.c:689
+msgid "Run in _terminal"
+msgstr "Kør i _terminal"
+
+#: ../plugins/launcher/launcher-dialog.c:707
+msgid "Use _startup notification"
+msgstr "Brug _startopbesked"
+
+#: ../plugins/launcher/launcher-dialog.c:1289
+msgid "The first item in the list is shown on the panel. Additional items will appear in a menu."
+msgstr "Det første element på listen er vist i panelet. Andre elementer vil fremkomme på en menu."
+
+#: ../plugins/launcher/launcher-dialog.c:1332
+msgid "Program Launcher"
+msgstr "Programstarter"
+
+#: ../plugins/launcher/launcher-dialog.c:1420
+#: ../plugins/launcher/launcher-dialog.c:1521
+#, c-format
+msgid ""
+"Failed to run 0launch:\n"
+"%s\n"
+"\n"
+"For help using Zero Install, see http://0install.net"
+msgstr ""
+"Kunne ikke køre '0launch':\n"
+"%s\n"
+"\n"
+"Hjælp til brug af 'Zero Install', se http://0install.net"
+
+#: ../plugins/launcher/launcher-dialog.c:1486
+msgid "The Zero Install GUI has finished, but the launcher dialog has disappeared in the meantime. Not adding launcher (but any files downloaded have not been lost)."
+msgstr "Zero Install GUIen er afsluttet, men starterdialogen er forsvundet i mellemtiden. Tilføjer ikke starter (men alle nedtagne filer er ikke gået tabt)."
+
+#: ../plugins/launcher/launcher-dialog.c:1899
+msgid "Select file"
+msgstr "Vælg fil"
+
+#: ../plugins/pager/pager.c:338
+#: ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Pager"
+msgstr "Skrivebordsskifter"
+
+#: ../plugins/pager/pager.c:369
+msgid "Number of rows:"
+msgstr "Antal rækker:"
+
+#: ../plugins/pager/pager.c:373
+msgid "Number of columns:"
+msgstr "Antal kolonner:"
+
+#: ../plugins/pager/pager.c:399
+msgid "Switch workspaces using the mouse wheel"
+msgstr "Skift arbejdsområde med musehjulet"
+
+#: ../plugins/separator/separator.c:255
+#: ../plugins/separator/separator.desktop.in.in.h:2
+msgid "Separator or Spacing"
+msgstr "Adskiller eller mellemrum"
+
+#: ../plugins/separator/separator.c:279
+msgid "_Draw Separator"
+msgstr "_Tegn adskiller"
+
+#: ../plugins/separator/separator.c:288
+msgid "_Expand"
+msgstr "_Udvid"
+
+#: ../plugins/showdesktop/showdesktop.c:32
+msgid "Restore hidden windows"
+msgstr "Gendan skjulte vinduer"
+
+#: ../plugins/showdesktop/showdesktop.c:33
+msgid "Hide windows and show desktop"
+msgstr "Skjul vinduer og vis skrivebordet"
+
+#: ../plugins/systray/systray.c:69
+#: ../plugins/systray/systray.c:84
+msgid "There is already a system tray running on this screen"
+msgstr "Der kører allerede et statusfelt på denne skærm"
+
+#: ../plugins/systray/systray.c:90
+#, c-format
+msgid "Unable to register system tray: %s"
+msgstr "Kan ikke registrere statusfelt: %s"
+
+#: ../plugins/systray/systray.c:378
+#: ../plugins/systray/systray.desktop.in.in.h:2
+msgid "System Tray"
+msgstr "Statusfelt"
+
+#: ../plugins/tasklist/tasklist.c:396
+#: ../plugins/tasklist/tasklist.c:469
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:2
+msgid "Task List"
+msgstr "Opgaveliste"
+
+#: ../plugins/tasklist/tasklist.c:432
+msgid "Minimum Width:"
+msgstr "Mindste bredde:"
+
+#: ../plugins/tasklist/tasklist.c:456
+msgid "Use flat buttons"
+msgstr "Brug flade knapper"
+
+#: ../plugins/tasklist/tasklist.c:473
+msgid "Show tasks from _all workspaces"
+msgstr "Vis opgaver fra _alle arbejdsområder"
+
+#: ../plugins/tasklist/tasklist.c:483
+msgid "Show application _names"
+msgstr "Vis _programnavne"
+
+#: ../plugins/tasklist/tasklist.c:497
+msgid "Never group tasks"
+msgstr "Gruppér aldrig opgaver"
+
+#: ../plugins/tasklist/tasklist.c:500
+msgid "Automatically group tasks"
+msgstr "Automatisk gruppering af opgaver"
+
+#: ../plugins/tasklist/tasklist.c:503
+msgid "Always group tasks"
+msgstr "Gruppér altid opgaver"
+
+#: ../plugins/windowlist/windowlist.c:242
+#, c-format
+msgid "Are you sure you want to remove workspace %d?"
+msgstr "Er du sikker på, at du vil fjerne arbejdsområde %d?"
+
+#: ../plugins/windowlist/windowlist.c:243
+#, c-format
+msgid "Are you sure you want to remove workspace '%s'?"
+msgstr "Er du sikker på, at du vil fjerne arbejdsområdet '%s'?"
+
+#: ../plugins/windowlist/windowlist.c:508
+#, c-format
+msgid "Workspace %d"
+msgstr "Arbejdsområde %d"
+
+#: ../plugins/windowlist/windowlist.c:619
+#: ../plugins/windowlist/windowlist.c:625
+msgid "Add workspace"
+msgstr "Tilføj arbejdsområde"
+
+#: ../plugins/windowlist/windowlist.c:644
+#, c-format
+msgid "Remove Workspace %d"
+msgstr "Fjern arbejdsområde %d"
+
+#: ../plugins/windowlist/windowlist.c:645
+#, c-format
+msgid "Remove Workspace '%s'"
+msgstr "Fjern arbejdsområde '%s'"
+
+#. Windowlist Settings
+#: ../plugins/windowlist/windowlist-dialog.c:121
+#: ../plugins/windowlist/windowlist-dialog.c:212
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:2
+msgid "Window List"
+msgstr "Vindueliste"
+
+#: ../plugins/windowlist/windowlist-dialog.c:150
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Vigtig besked</i> knappen vil blinke, når et program skal have opmærksomhed."
+
+#. Button Urgency Notification
+#: ../plugins/windowlist/windowlist-dialog.c:157
+msgid "Urgency Notification"
+msgstr "Vigtig startopbesked"
+
+#: ../plugins/windowlist/windowlist-dialog.c:164
+msgid "_Disabled"
+msgstr "_Deaktiveret"
+
+#: ../plugins/windowlist/windowlist-dialog.c:173
+msgid "For _other workspaces"
+msgstr "For a_ndre arbejdsområder"
+
+#: ../plugins/windowlist/windowlist-dialog.c:182
+msgid "For _all workspaces"
+msgstr "For _alle arbejdsområder"
+
+#: ../plugins/windowlist/windowlist-dialog.c:196
+msgid "_Icon button"
+msgstr "_Ikonknap"
+
+#: ../plugins/windowlist/windowlist-dialog.c:203
+msgid "A_rrow button"
+msgstr "P_ilknap"
+
+#: ../plugins/windowlist/windowlist-dialog.c:221
+msgid "Show _windows from all workspaces"
+msgstr "Vis _vinduer fra alle arbejdsområder"
+
+#: ../plugins/windowlist/windowlist-dialog.c:230
+msgid "Show a_pplication icons"
+msgstr "Vis _programikoner"
+
+#: ../plugins/windowlist/windowlist-dialog.c:239
+msgid "Show wor_kspace actions"
+msgstr "Vis s_krivebordshandlinger"
+
+#: ../mcs-plugin/plugin.c:46
+msgid "Panel"
+msgstr "Panel"
+
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "Handlingsknapper"
+
+#: ../plugins/actions/actions.desktop.in.in.h:2
+msgid "Log out or lock the screen"
+msgstr "Log ud og lås skærmen"
+
+#: ../plugins/clock/clock.desktop.in.in.h:2
+msgid "What time is it?"
+msgstr "Hvad er klokken?"
+
+#: ../plugins/iconbox/iconbox.desktop.in.in.h:2
+msgid "Show icons of all running applications"
+msgstr "Vis ikoner for alle kørende programmer"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Starter"
+
+#: ../plugins/launcher/launcher.desktop.in.in.h:2
+msgid "Program launcher with optional menu"
+msgstr "Programstarter med valgfri menu"
+
+#: ../plugins/pager/pager.desktop.in.in.h:1
+msgid "Miniature view of all virtual desktops"
+msgstr "Miniaturevisning af alle virtuelle skriveborde"
+
+#: ../plugins/separator/separator.desktop.in.in.h:1
+msgid "Adds a space or a line between panel items"
+msgstr "Tilføj et mellemrum eller en linje mellem panelets elementer"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
+msgid "Show Desktop"
+msgstr "Vis skrivebord"
+
+#: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
+msgid "Toggle desktop show/hide"
+msgstr "Skrivebord - vis/skjul"
+
+#: ../plugins/systray/systray.desktop.in.in.h:1
+msgid "Show notification icons"
+msgstr "Vis beskedikoner"
+
+#: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+msgid "Show all running applications"
+msgstr "Vis alle kørende programmer"
+
+#: ../plugins/windowlist/windowlist.desktop.in.in.h:1
+msgid "Show list of available windows"
+msgstr "Vis liste over tilgængelige vinduer"
+
+#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+msgid "Xfce 4 Panel Manager"
+msgstr "Xfce4-panelhåndtering"
