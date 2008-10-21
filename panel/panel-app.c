@@ -364,7 +364,11 @@ monitor_size_changed (GdkScreen *screen)
     {
         monitor = g_ptr_array_index (panel_app.monitor_list, i);
 
-        if (monitor->screen == screen)
+        /* 
+         * With xrandr 1.2, monitors can be added/removed, so need 
+         * to double check the number of monitors (bug #3620)...
+         */
+        if ((monitor->screen == screen) && (monitor->num < gdk_screen_get_n_monitors (screen)))
         {
             gdk_screen_get_monitor_geometry (screen, monitor->num, 
                                              &(monitor->geometry));
