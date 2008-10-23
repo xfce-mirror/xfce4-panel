@@ -1,5 +1,25 @@
-4.5.x
-=====
+4.5.xx
+======
+- Remove signal disconnect left after the patch of bug #4474.
+- Fix xrandr problem so it's possible to change the panel's
+  monitor after a monitor has been removed (bug #3620).
+- Panel does not adhere to 'fullwidth' property when using 
+  vertical orientation after restarting (bug #4456).
+- Implement SmRestartImmediately (bug #4516).
+- Reverse the order of the launcher menu when the panel is on 
+  the top of the screen (bug #4450).
+
+
+4.5.91
+======
+- Remove MCS plugin, MCS is deprecated.
+- Use changed signal on GtkIconTheme for theme changes (bug #4474).
+- Fix crach when removing a panel (bug #4401).
+- Fix glib 2.14 dependency (bug #4376).
+
+
+4.5.90
+======
 - This fixes bug #4401 (xfce4-panel halted when a panel was removed)
 - Fix window manager hints reporting width 1 pixel too wide (bug #3402).
   (Jasper)
@@ -23,7 +43,6 @@
   to the dependencies of their package (including cflags and libadd in
   the makefiles).
 - Some new Tango icons.
-- Remove MCS plugin, MCS is deprecated.
 
 
 4.3.99.3 (4.4-RC3)
