@@ -84,7 +84,6 @@ struct _LauncherPlugin
 
     /* event source ids */
     guint            popup_timeout_id;
-    guint            theme_timeout_id;
 
     /* settings */
     guint            move_first : 1;

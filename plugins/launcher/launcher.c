@@ -1251,10 +1251,6 @@ launcher_plugin_free (LauncherPlugin  *launcher)
     if (G_UNLIKELY (launcher->popup_timeout_id))
         g_source_remove (launcher->popup_timeout_id);
 
-    /* remove icon theme change */
-    g_signal_remove_emission_hook (g_signal_lookup ("changed", GTK_TYPE_ICON_THEME),
-                                   launcher->theme_timeout_id);
-
     /* destroy the popup menu */
     if (launcher->menu)
         gtk_widget_destroy (launcher->menu);
