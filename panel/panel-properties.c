@@ -1002,7 +1002,7 @@ panel_init_position (Panel *panel)
     xfce_itembar_set_maximum_size (XFCE_ITEMBAR (priv->itembar), max);
 
     if (priv->full_width > XFCE_PANEL_NORMAL_WIDTH)
-        gtk_widget_set_size_request (GTK_WIDGET (panel), w, -1);
+        gtk_widget_set_size_request (GTK_WIDGET (panel), w, h);
 
     if (!xfce_screen_position_is_floating (priv->screen_position))
     {
