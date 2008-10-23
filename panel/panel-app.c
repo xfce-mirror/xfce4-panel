@@ -269,6 +269,10 @@ evaluate_run_state (void)
 
     if (quit)
     {
+        /* we quit on purpose, update session manager so 
+         * it does not restart the program immediately */
+        client_session_set_restart_style(panel_app.session_client, SESSION_RESTART_IF_RUNNING);
+        
         if (panel_app.save_id)
         {
             g_source_remove (panel_app.save_id);
@@ -710,7 +714,7 @@ panel_app_run (gchar *client_id)
 
     panel_app.session_client = 
         client_session_new_full (NULL, 
-                                 SESSION_RESTART_IF_RUNNING, 
+                                 SESSION_RESTART_IMMEDIATELY, 
                                  40, 
                                  client_id,
                                  PACKAGE_NAME,
