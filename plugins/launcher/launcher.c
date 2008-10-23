@@ -679,6 +679,7 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
     LauncherEntry *entry;
     GtkWidget     *mi, *image;
     GdkPixbuf     *pixbuf;
+    GtkArrowType   arrow_type;
 
     /* destroy the old menu */
     if (G_UNLIKELY (launcher->menu))
@@ -692,6 +693,9 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
 
     /* set the menu screen */
     gtk_menu_set_screen (GTK_MENU (launcher->menu), screen);
+    
+    /* get the arrow direction of the button */
+    arrow_type = xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (launcher->arrow_button));
 
     /* walk through the entries */
     for (li = launcher->entries; li != NULL; li = li->next, n++)
@@ -704,8 +708,13 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
 
         /* create menu item */
         mi = gtk_image_menu_item_new_with_label (entry->name ? entry->name : _("New Item"));
-        gtk_menu_shell_prepend (GTK_MENU_SHELL (launcher->menu), mi);
         gtk_widget_show (mi);
+        
+        /* fix menu order when it's on the top or bottom of the screen */
+        if (arrow_type == GTK_ARROW_DOWN)
+            gtk_menu_shell_append (GTK_MENU_SHELL (launcher->menu), mi);
+        else
+            gtk_menu_shell_prepend (GTK_MENU_SHELL (launcher->menu), mi);
 
         /* try to set an image */
         if (G_LIKELY (entry->icon))
@@ -1158,6 +1167,9 @@ launcher_plugin_screen_position_changed (LauncherPlugin *launcher)
 
     /* set the arrow direction */
     xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (launcher->arrow_button), arrow_type);
+    
+    /* destroy the menu, so menu items appear in the correct direction */
+    launcher_menu_destroy (launcher);
 }
 
 
