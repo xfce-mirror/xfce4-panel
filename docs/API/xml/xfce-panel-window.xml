@@ -393,7 +393,7 @@ By default this is <link linkend="TRUE:CAPS"><literal>TRUE</literal></link>.</pa
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="XfcePanelWindow--handle-style"/>The &quot;<literal>handle-style</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelWindow--handle-style"/>The <literal>&quot;handle-style&quot;</literal> property</title>
 <indexterm><primary>XfcePanelWindow:handle-style</primary></indexterm><programlisting>  &quot;handle-style&quot;             <link linkend="XfceHandleStyle">XfceHandleStyle</link>       : Read / Write</programlisting>
 <para>
 The <link linkend="XfceHandleStyle"><type>XfceHandleStyle</type></link> to use when drawing handles.</para>
@@ -401,7 +401,7 @@ The <link linkend="XfceHandleStyle"><type>XfceHandleStyle</type></link> to use w
 
 </para><para>Default value: XFCE_HANDLE_STYLE_BOTH</para>
 </refsect2>
-<refsect2><title><anchor id="XfcePanelWindow--orientation"/>The &quot;<literal>orientation</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelWindow--orientation"/>The <literal>&quot;orientation&quot;</literal> property</title>
 <indexterm><primary>XfcePanelWindow:orientation</primary></indexterm><programlisting>  &quot;orientation&quot;              <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
 <para>
 The orientation of the window. This the determines the way the handles
@@ -415,7 +415,7 @@ are drawn.</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="XfcePanelWindow-move"/>The &quot;move&quot; signal</title>
+<refsect2><title><anchor id="XfcePanelWindow-move"/>The <literal>&quot;move&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelWindow::move</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                                         <link linkend="gint">gint</link>             x,
                                                         <link linkend="gint">gint</link>             y,
@@ -437,7 +437,7 @@ coordinates (<parameter>x</parameter>, <parameter>y</parameter>).</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-move-end"/>The &quot;move-end&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-move-end"/>The <literal>&quot;move-end&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelWindow::move-end</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                                         <link linkend="gint">gint</link>             x,
                                                         <link linkend="gint">gint</link>             y,
@@ -459,7 +459,7 @@ position has coordinates (<parameter>x</parameter>, <parameter>y</parameter>).</
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-move-start"/>The &quot;move-start&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-move-start"/>The <literal>&quot;move-start&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelWindow::move-start</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                                         <link linkend="gpointer">gpointer</link>         user_data)      : Run Last</programlisting>
 <para>
@@ -472,7 +472,7 @@ Emitted when the user starts to drag the <link linkend="XfcePanelWindow"><type>X
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelWindow-orientation-changed"/>The <literal>&quot;orientation-changed&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelWindow::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelWindow">XfcePanelWindow</link> *window,
                                                         <link linkend="GtkOrientation">GtkOrientation</link>   orientation,
                                                         <link linkend="gpointer">gpointer</link>         user_data)        : Run First</programlisting>
@@ -494,4 +494,6 @@ Emitted when the orientation of the <link linkend="XfcePanelWindow"><type>XfcePa
 
 
 
+
+<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

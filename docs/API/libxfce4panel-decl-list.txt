@@ -62,6 +62,23 @@ XFCE_HVBOX_GET_CLASS
 </SECTION>
 
 <SECTION>
+<FILE>xfce-arrow-button</FILE>
+<TITLE>XfceArrowButton</TITLE>
+XfceArrowButton
+xfce_arrow_button_new
+xfce_arrow_button_set_arrow_type
+xfce_arrow_button_get_arrow_type
+<SUBSECTION Standard>
+XFCE_ARROW_BUTTON
+XFCE_IS_ARROW_BUTTON
+XFCE_TYPE_ARROW_BUTTON
+xfce_arrow_button_get_type
+XFCE_ARROW_BUTTON_CLASS
+XFCE_IS_ARROW_BUTTON_CLASS
+XFCE_ARROW_BUTTON_GET_CLASS
+</SECTION>
+
+<SECTION>
 <FILE>xfce-panel-plugin-iface</FILE>
 XFCE_PANEL_PLUGIN_GET_INTERFACE
 XfcePanelPlugin
@@ -93,23 +110,6 @@ XFCE_PANEL_PLUGIN
 XFCE_IS_PANEL_PLUGIN
 XFCE_TYPE_PANEL_PLUGIN
 xfce_panel_plugin_get_type
-</SECTION>
-
-<SECTION>
-<FILE>xfce-arrow-button</FILE>
-<TITLE>XfceArrowButton</TITLE>
-XfceArrowButton
-xfce_arrow_button_new
-xfce_arrow_button_set_arrow_type
-xfce_arrow_button_get_arrow_type
-<SUBSECTION Standard>
-XFCE_ARROW_BUTTON
-XFCE_IS_ARROW_BUTTON
-XFCE_TYPE_ARROW_BUTTON
-xfce_arrow_button_get_type
-XFCE_ARROW_BUTTON_CLASS
-XFCE_IS_ARROW_BUTTON_CLASS
-XFCE_ARROW_BUTTON_GET_CLASS
 </SECTION>
 
 <SECTION>
@@ -166,15 +166,12 @@ panel_slice_free
 </SECTION>
 
 <SECTION>
-<FILE>xfce-panel-enums</FILE>
-XfceScreenPosition
-xfce_screen_position_is_horizontal
-xfce_screen_position_get_orientation
-xfce_screen_position_is_floating
-xfce_screen_position_is_top
-xfce_screen_position_is_left
-xfce_screen_position_is_right
-xfce_screen_position_is_bottom
+<FILE>xfce-panel-plugin</FILE>
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
+XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL
+XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK
 </SECTION>
 
 <SECTION>
@@ -185,19 +182,22 @@ xfce_allow_panel_customization
 </SECTION>
 
 <SECTION>
-<FILE>xfce-panel-plugin</FILE>
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
-XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL
-XFCE_PANEL_PLUGIN_REGISTER_INTERNAL
-XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK
-</SECTION>
-
-<SECTION>
 <FILE>xfce-panel-enum-types</FILE>
 xfce_handle_style_get_type
 XFCE_TYPE_HANDLE_STYLE
 xfce_screen_position_get_type
 XFCE_TYPE_SCREEN_POSITION
+</SECTION>
+
+<SECTION>
+<FILE>xfce-panel-enums</FILE>
+XfceScreenPosition
+xfce_screen_position_is_horizontal
+xfce_screen_position_get_orientation
+xfce_screen_position_is_floating
+xfce_screen_position_is_top
+xfce_screen_position_is_left
+xfce_screen_position_is_right
+xfce_screen_position_is_bottom
 </SECTION>
 

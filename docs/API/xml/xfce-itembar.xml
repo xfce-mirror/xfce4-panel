@@ -437,7 +437,7 @@ itembar.
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="XfceItembar--orientation"/>The &quot;<literal>orientation</literal>&quot; property</title>
+<refsect2><title><anchor id="XfceItembar--orientation"/>The <literal>&quot;orientation&quot;</literal> property</title>
 <indexterm><primary>XfceItembar:orientation</primary></indexterm><programlisting>  &quot;orientation&quot;              <link linkend="GtkOrientation">GtkOrientation</link>        : Read / Write</programlisting>
 <para>
 The orientation of the <link linkend="XfceItembar"><type>XfceItembar</type></link>.</para>
@@ -449,7 +449,7 @@ The orientation of the <link linkend="XfceItembar"><type>XfceItembar</type></lin
 </refsect1>
 <refsect1 role="child_property_details">
 <title role="child_property_details.title">Child Property Details</title>
-<refsect2><title><anchor id="XfceItembar--expand"/>The &quot;<literal>expand</literal>&quot; child property</title>
+<refsect2><title><anchor id="XfceItembar--expand"/>The <literal>&quot;expand&quot;</literal> child property</title>
 <indexterm><primary>XfceItembar:expand</primary></indexterm><programlisting>  &quot;expand&quot;                   <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>
 Whether the child of the <link linkend="XfceItembar"><type>XfceItembar</type></link> should fill available space.</para>
@@ -462,7 +462,7 @@ Whether the child of the <link linkend="XfceItembar"><type>XfceItembar</type></l
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="XfceItembar-contents-changed"/>The &quot;contents-changed&quot; signal</title>
+<refsect2><title><anchor id="XfceItembar-contents-changed"/>The <literal>&quot;contents-changed&quot;</literal> signal</title>
 <indexterm><primary>XfceItembar::contents-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfceItembar">XfceItembar</link> *itembar,
                                                         <link linkend="gpointer">gpointer</link>     user_data)      : Run First</programlisting>
 <para>
@@ -476,7 +476,7 @@ a child, removing a child, or reordering a child.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfceItembar-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfceItembar-orientation-changed"/>The <literal>&quot;orientation-changed&quot;</literal> signal</title>
 <indexterm><primary>XfceItembar::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfceItembar">XfceItembar</link>   *itembar,
                                                         <link linkend="GtkOrientation">GtkOrientation</link> orientation,
                                                         <link linkend="gpointer">gpointer</link>       user_data)        : Run First</programlisting>
@@ -504,4 +504,6 @@ Emitted when the orientation of the itembar changes.</para>
 </para>
 </refsect1>
 
+
+<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>

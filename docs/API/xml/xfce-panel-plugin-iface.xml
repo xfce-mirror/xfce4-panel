@@ -474,7 +474,7 @@ enabled.</para>
 </refsect1>
 <refsect1 role="property_details">
 <title role="property_details.title">Property Details</title>
-<refsect2><title><anchor id="XfcePanelPlugin--display-name"/>The &quot;<literal>display-name</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelPlugin--display-name"/>The <literal>&quot;display-name&quot;</literal> property</title>
 <indexterm><primary>XfcePanelPlugin:display-name</primary></indexterm><programlisting>  &quot;display-name&quot;             <link linkend="gchararray">gchararray</link>            : Read</programlisting>
 <para>
 Translated plugin name. This is the name that can be presented to
@@ -483,7 +483,7 @@ the user, e.g. in dialogs or menus.</para>
 
 </para><para>Default value: NULL</para>
 </refsect2>
-<refsect2><title><anchor id="XfcePanelPlugin--expand"/>The &quot;<literal>expand</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelPlugin--expand"/>The <literal>&quot;expand&quot;</literal> property</title>
 <indexterm><primary>XfcePanelPlugin:expand</primary></indexterm><programlisting>  &quot;expand&quot;                   <link linkend="gboolean">gboolean</link>              : Read / Write</programlisting>
 <para>
 Whether to expand the plugin when the panel width increases.</para>
@@ -491,7 +491,7 @@ Whether to expand the plugin when the panel width increases.</para>
 
 </para><para>Default value: FALSE</para>
 </refsect2>
-<refsect2><title><anchor id="XfcePanelPlugin--id"/>The &quot;<literal>id</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelPlugin--id"/>The <literal>&quot;id&quot;</literal> property</title>
 <indexterm><primary>XfcePanelPlugin:id</primary></indexterm><programlisting>  &quot;id&quot;                       <link linkend="gchararray">gchararray</link>            : Read</programlisting>
 <para>
 Unique identifier string created for every <link linkend="XfcePanelPlugin"><type>XfcePanelPlugin</type></link> instance.</para>
@@ -499,7 +499,7 @@ Unique identifier string created for every <link linkend="XfcePanelPlugin"><type
 
 </para><para>Default value: NULL</para>
 </refsect2>
-<refsect2><title><anchor id="XfcePanelPlugin--name"/>The &quot;<literal>name</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelPlugin--name"/>The <literal>&quot;name&quot;</literal> property</title>
 <indexterm><primary>XfcePanelPlugin:name</primary></indexterm><programlisting>  &quot;name&quot;                     <link linkend="gchararray">gchararray</link>            : Read</programlisting>
 <para>
 Untranslated plugin name. This identifies the plugin type and
@@ -508,7 +508,7 @@ therefore has to be unique.</para>
 
 </para><para>Default value: NULL</para>
 </refsect2>
-<refsect2><title><anchor id="XfcePanelPlugin--screen-position"/>The &quot;<literal>screen-position</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelPlugin--screen-position"/>The <literal>&quot;screen-position&quot;</literal> property</title>
 <indexterm><primary>XfcePanelPlugin:screen-position</primary></indexterm><programlisting>  &quot;screen-position&quot;          <link linkend="XfceScreenPosition">XfceScreenPosition</link>    : Read</programlisting>
 <para>
 The current <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></link> of the panel.</para>
@@ -516,7 +516,7 @@ The current <link linkend="XfceScreenPosition"><type>XfceScreenPosition</type></
 
 </para><para>Default value: XFCE_SCREEN_POSITION_S</para>
 </refsect2>
-<refsect2><title><anchor id="XfcePanelPlugin--size"/>The &quot;<literal>size</literal>&quot; property</title>
+<refsect2><title><anchor id="XfcePanelPlugin--size"/>The <literal>&quot;size&quot;</literal> property</title>
 <indexterm><primary>XfcePanelPlugin:size</primary></indexterm><programlisting>  &quot;size&quot;                     <link linkend="gint">gint</link>                  : Read</programlisting>
 <para>
 The current panel size.</para>
@@ -530,7 +530,7 @@ The current panel size.</para>
 
 <refsect1 role="signals">
 <title role="signals.title">Signal Details</title>
-<refsect2><title><anchor id="XfcePanelPlugin-about"/>The &quot;about&quot; signal</title>
+<refsect2><title><anchor id="XfcePanelPlugin-about"/>The <literal>&quot;about&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelPlugin::about</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
                                                         <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
@@ -548,7 +548,7 @@ See also: <link linkend="xfce-panel-plugin-menu-show-about"><function>xfce_panel
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-configure-plugin"/>The &quot;configure-plugin&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-configure-plugin"/>The <literal>&quot;configure-plugin&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelPlugin::configure-plugin</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
                                                         <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
@@ -565,7 +565,7 @@ See also: <link linkend="xfce-panel-plugin-menu-show-configure"><function>xfce_p
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-free-data"/>The &quot;free-data&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-free-data"/>The <literal>&quot;free-data&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelPlugin::free-data</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
                                                         <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
@@ -573,7 +573,7 @@ Emitted when the panel is closing. Plugin writers should connect to
 this signal to free any allocated resources.
 </para>
 <para>
-See also: <link linkend="XfcePanelPlugin-save"><type>XfcePanelPlugin::save</type></link></para>
+See also: <link linkend="XfcePanelPlugin-save"><type>"save"</type></link></para>
 <para>
 
 </para><variablelist role="params">
@@ -582,7 +582,7 @@ See also: <link linkend="XfcePanelPlugin-save"><type>XfcePanelPlugin::save</type
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-orientation-changed"/>The &quot;orientation-changed&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-orientation-changed"/>The <literal>&quot;orientation-changed&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelPlugin::orientation-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
                                                         <link linkend="GtkOrientation">GtkOrientation</link>   orientation,
                                                         <link linkend="gpointer">gpointer</link>         user_data)        : Run Last / No Recursion / No Hooks</programlisting>
@@ -599,7 +599,7 @@ Emitted when the panel orientation changes.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-save"/>The &quot;save&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-save"/>The <literal>&quot;save&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelPlugin::save</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
                                                         <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
 <para>
@@ -617,7 +617,7 @@ See also: <link linkend="xfce-panel-plugin-get-rc-file"><function>xfce_panel_plu
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-screen-position-changed"/>The &quot;screen-position-changed&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-screen-position-changed"/>The <literal>&quot;screen-position-changed&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelPlugin::screen-position-changed</primary></indexterm><programlisting><link linkend="void">void</link>                user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link>   *plugin,
                                                         <link linkend="XfceScreenPosition">XfceScreenPosition</link> position,
                                                         <link linkend="gpointer">gpointer</link>           user_data)      : Run Last / No Recursion / No Hooks</programlisting>
@@ -635,7 +635,7 @@ more interested in the "orientation-changed" signal.</para>
 </simpara></listitem></varlistentry>
 <varlistentry><term><parameter>user_data</parameter>&nbsp;:</term>
 <listitem><simpara>user data set when the signal handler was connected.</simpara></listitem></varlistentry>
-</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-size-changed"/>The &quot;size-changed&quot; signal</title>
+</variablelist></refsect2><refsect2><title><anchor id="XfcePanelPlugin-size-changed"/>The <literal>&quot;size-changed&quot;</literal> signal</title>
 <indexterm><primary>XfcePanelPlugin::size-changed</primary></indexterm><programlisting><link linkend="gboolean">gboolean</link>            user_function                      (<link linkend="XfcePanelPlugin">XfcePanelPlugin</link> *plugin,
                                                         <link linkend="gint">gint</link>             size,
                                                         <link linkend="gpointer">gpointer</link>         user_data)      : Run Last / No Recursion / No Hooks</programlisting>
@@ -669,4 +669,6 @@ must handle this signal for any other behavior, even to 'do nothing'.</para>
 </para>
 </refsect1>
 
+
+<refsect1><refsect2 /><refsect2 /></refsect1>
 </refentry>
