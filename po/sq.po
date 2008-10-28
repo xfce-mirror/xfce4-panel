@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-12 12:57+0100\n"
-"PO-Revision-Date: 2007-01-21 19:54+0200\n"
+"PO-Revision-Date: 2008-10-25 10:13+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #: ../config/launcher-7.rc.in.h:1
 msgid "Command Prompt"
-msgstr ""
+msgstr "Gati për Urdhër"
 
 #: ../config/launcher-7.rc.in.h:2
 msgid "X terminal emulator"
@@ -58,8 +58,7 @@ msgid "Remove \"%s\"?"
 msgstr "Ta heq \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "Objekti do të hiqet prej panelit dhe formësimi i tij do të humbë."
 
 #. configure, hide by default
@@ -85,7 +84,8 @@ msgstr "Hiq"
 msgid "Add New Item"
 msgstr "Shto Element të Ri"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:694
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913
+#: ../panel/panel.c:694
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Përshtasni Panel"
@@ -94,8 +94,10 @@ msgstr "Përshtasni Panel"
 msgid "Add Items"
 msgstr "Shto elemente"
 
-#: ../panel/panel.c:721 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:721
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "Lër"
 
@@ -107,11 +109,14 @@ msgstr "Rinis"
 msgid "About the Xfce Panel"
 msgstr "Rreth Panelit Xfce"
 
-#: ../panel/panel-app.c:258 ../panel/panel-app.c:892
+#: ../panel/panel-app.c:258
+#: ../panel/panel-app.c:892
 msgid "Exit Xfce Panel?"
 msgstr "Të dal nga Paneli Xfce?"
 
-#: ../panel/panel-app.c:890 ../panel/panel-app.c:922 ../panel/panel-app.c:955
+#: ../panel/panel-app.c:890
+#: ../panel/panel-app.c:922
+#: ../panel/panel-app.c:955
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
@@ -128,67 +133,64 @@ msgstr "Të heq Panelin \"%d\"?"
 msgid "The selected panel and all its items will be removed."
 msgstr "Paneli i përzgjedhur dhe tërë elementet e tij do të hiqen."
 
-#: ../panel/panel-app.c:961 ../panel/panel-app.c:962
+#: ../panel/panel-app.c:961
+#: ../panel/panel-app.c:962
 msgid "Developer"
 msgstr "Zhvillues"
 
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr ""
+msgstr "Shfaq këtë mesazh dhe dil"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show configuration dialog"
-msgstr "Shfaq ikona njoftimesh"
+msgstr "Shfaq dialog formësimi"
 
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr ""
+msgstr "Ruaje formësimin"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart panels"
-msgstr "Rinis"
+msgstr "Rinisi panelet"
 
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr ""
+msgstr "Përfundoje sesionin"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Mbyll tërë panelet dhe përfundoje programin"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Add new items"
-msgstr "Shto Element të Ri"
+msgstr "Shtoni objekte të reja"
 
 #: ../panel/main.c:90
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Nuk xhirova dot \"%s\""
+msgstr "Dështoi hapja e ekranit"
 
 #: ../panel/main.c:102
 msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgstr "Të drejta kopjimi (c) 2004-2007"
 
 #: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Ekipi zhvillues i Xfce-sët. Tërë të drejtat të rezervuara."
 
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Ju lutem njoftoni të meta te <%s>."
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "xfce4-panel është në xhirim e sipër"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "Po riniset xfce4-panel..."
 
 #: ../panel/panel-dialogs.c:189
 #, c-format
@@ -200,56 +202,63 @@ msgid "Add Items to the Panel"
 msgstr "Shto elemente te Paneli"
 
 #: ../panel/panel-dialogs.c:665
-msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
-msgstr ""
-"Tërhiqni në panel elementë prej një liste ose hiqini duke i tërhequr "
-"mbrapsht deri te lista."
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
+msgstr "Tërhiqni në panel elementë prej një liste ose hiqini duke i tërhequr mbrapsht deri te lista."
 
 #: ../panel/panel-dialogs.c:682
 msgid "Available Items"
 msgstr "Elemente të Passhëm"
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:908
+#: ../panel/panel-dialogs.c:1144
 msgid "Normal Width"
 msgstr "Gjerësi Normale"
 
-#: ../panel/panel-dialogs.c:909 ../panel/panel-dialogs.c:1145
+#: ../panel/panel-dialogs.c:909
+#: ../panel/panel-dialogs.c:1145
 msgid "Full Width"
 msgstr "Gjerësi e Plotë"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
-#, fuzzy
+#: ../panel/panel-dialogs.c:913
+#: ../panel/panel-dialogs.c:1149
 msgid "Normal Height"
 msgstr "Gjerësi Normale"
 
-#: ../panel/panel-dialogs.c:914 ../panel/panel-dialogs.c:1150
-#, fuzzy
+#: ../panel/panel-dialogs.c:914
+#: ../panel/panel-dialogs.c:1150
 msgid "Full Height"
 msgstr "Gjerësi e Plotë"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:922
+#: ../panel/panel-dialogs.c:1159
 msgid "Span Monitors"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:985 ../panel/panel-dialogs.c:1224
-#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:985
+#: ../panel/panel-dialogs.c:1224
+#: ../panel/panel-dialogs.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
 msgstr "Majtas"
 
-#: ../panel/panel-dialogs.c:987 ../panel/panel-dialogs.c:1226
-#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:987
+#: ../panel/panel-dialogs.c:1226
+#: ../panel/panel-dialogs.c:1522
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
 msgstr "Djathtas"
 
-#: ../panel/panel-dialogs.c:992 ../panel/panel-dialogs.c:1231
-#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:992
+#: ../panel/panel-dialogs.c:1231
+#: ../panel/panel-dialogs.c:1523
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Top"
 msgstr "Sipër"
 
-#: ../panel/panel-dialogs.c:994 ../panel/panel-dialogs.c:1233
-#: ../panel/panel-dialogs.c:1524 ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:994
+#: ../panel/panel-dialogs.c:1233
+#: ../panel/panel-dialogs.c:1524
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Bottom"
 msgstr "Poshtë"
 
@@ -270,20 +279,22 @@ msgstr "Lirisht i Lëvizshëm"
 msgid "Auto_hide"
 msgstr "Vetëfshih"
 
-#: ../panel/panel-dialogs.c:1185 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1185
+#: ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "Drejtim:"
 
-#: ../panel/panel-dialogs.c:1197 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1197
+#: ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "Horizontalisht"
 
-#: ../panel/panel-dialogs.c:1199 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1199
+#: ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "Vertikalisht"
 
 #: ../panel/panel-dialogs.c:1208
-#, fuzzy
 msgid "Handle:"
 msgstr "Dorezë:"
 
@@ -298,7 +309,8 @@ msgstr "Përzgjidhni Monitor"
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:502
+#: ../panel/panel-dialogs.c:1428
+#: ../plugins/clock/clock-dialog.c:502
 #: ../plugins/systray/xfce-tray-dialogs.c:351
 #: ../plugins/tasklist/tasklist-dialogs.c:168
 #: ../plugins/windowlist/windowlist-dialog.c:190
@@ -318,15 +330,15 @@ msgid "Make active panel opaque"
 msgstr "Bëje panelin veprues të marrtë"
 
 #: ../panel/panel-dialogs.c:1510
-#, fuzzy
 msgid "Popup position:"
-msgstr "Vendndodhje"
+msgstr "Vend fllucke:"
 
 #: ../panel/panel-dialogs.c:1520
 msgid "Automatic"
-msgstr ""
+msgstr "Automatike"
 
-#: ../panel/panel-dialogs.c:1564 ../panel/panel-dialogs.c:1600
+#: ../panel/panel-dialogs.c:1564
+#: ../panel/panel-dialogs.c:1600
 #: ../panel/panel-dialogs.c:1624
 #, c-format
 msgid "Panel %d"
@@ -345,7 +357,8 @@ msgstr "Panel i Ri"
 msgid "Panel Manager"
 msgstr "Përgjegjës Panelesh"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "Kyç ekranin"
@@ -364,12 +377,11 @@ msgstr "Dil + Kyç ekranin"
 
 #: ../plugins/clock/clock-dialog.c:358
 msgid "Custom"
-msgstr ""
+msgstr "Vetjake"
 
 #: ../plugins/clock/clock-dialog.c:412
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Shfaq sekonda"
+msgstr "Shfaqi _sekondat"
 
 #: ../plugins/clock/clock-dialog.c:421
 msgid "Use 24-_hour clock"
@@ -380,13 +392,12 @@ msgid "Fl_ash time separators"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.c:433
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "Shfaq AM/PM"
+msgstr "_Shfaq AM/PM"
 
 #: ../plugins/clock/clock-dialog.c:442
 msgid "True _binary clock"
-msgstr ""
+msgstr "Orë vërtet _dyore"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:484
@@ -400,16 +411,15 @@ msgstr "Analoge"
 
 #: ../plugins/clock/clock-dialog.c:513
 msgid "Binary"
-msgstr ""
+msgstr "Dyore"
 
 #: ../plugins/clock/clock-dialog.c:514
 msgid "Digital"
 msgstr "Shifrore"
 
 #: ../plugins/clock/clock-dialog.c:515
-#, fuzzy
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:520
@@ -420,7 +430,7 @@ msgstr "Shfaq _kornizë"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:527
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Format Ndihmëzash"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:553
@@ -440,98 +450,94 @@ msgstr "Shfaq vetëm zbatime të minimizuara"
 msgid "Show applications of all workspaces"
 msgstr "Shfaq zbatimet në tërë hapësirat e punë"
 
-#: ../plugins/iconbox/iconbox.c:952 ../plugins/tasklist/tasklist-dialogs.c:187
+#: ../plugins/iconbox/iconbox.c:952
+#: ../plugins/tasklist/tasklist-dialogs.c:187
 msgid "Use all available space"
 msgstr "Përdor tërë hapësirën e mundshme"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:700 ../plugins/launcher/launcher.c:760
+#: ../plugins/launcher/launcher.c:700
+#: ../plugins/launcher/launcher.c:760
 msgid "New Item"
 msgstr "Element i Ri"
 
 #: ../plugins/launcher/launcher-exec.c:526
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
-msgstr "Nuk xhirova dot \"%s\""
+msgstr "Dështoi nisja e \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:577
 msgid "No icon"
-msgstr ""
+msgstr "Pa ikonë"
 
 #: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
 msgid "Select a Directory"
-msgstr "Përzgjidhni Monitor"
+msgstr "Përzgjidhni Drejtori"
 
 #: ../plugins/launcher/launcher-dialog.c:641
-#, fuzzy
 msgid "Select an Application"
-msgstr "Përzgjidhni tip veprimi"
+msgstr "Përzgjidhni Zbatim"
 
 #: ../plugins/launcher/launcher-dialog.c:651
 msgid "All Files"
-msgstr ""
+msgstr "Tërë Kartelat"
 
 #: ../plugins/launcher/launcher-dialog.c:656
 msgid "Executable Files"
-msgstr ""
+msgstr "Kartela të Ekzekutueshmish"
 
 #: ../plugins/launcher/launcher-dialog.c:671
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Programthe Perl"
 
 #: ../plugins/launcher/launcher-dialog.c:677
 msgid "Python Scripts"
-msgstr ""
+msgstr "Programthe Python"
 
 #: ../plugins/launcher/launcher-dialog.c:683
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Programthe Ruby"
 
 #: ../plugins/launcher/launcher-dialog.c:689
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Programthe Shell"
 
 #: ../plugins/launcher/launcher-dialog.c:761
 msgid "Unknown"
-msgstr ""
+msgstr "E panjohur"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:764
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Përzgjidhni një Ikonë për \"%s\""
 
 #. build name
 #: ../plugins/launcher/launcher-dialog.c:842
 #: ../plugins/launcher/launcher-dialog.c:1341
 msgid "Unnamed"
-msgstr ""
+msgstr "I paemërt"
 
 #: ../plugins/launcher/launcher-dialog.c:1120
-#, fuzzy
 msgid "_Name"
-msgstr "Emër"
+msgstr "_Emër"
 
 #: ../plugins/launcher/launcher-dialog.c:1138
-#, fuzzy
 msgid "_Description"
-msgstr "Përshkrim"
+msgstr "_Përshkrim"
 
 #: ../plugins/launcher/launcher-dialog.c:1157
-#, fuzzy
 msgid "_Icon"
-msgstr "Kuti Ikonash"
+msgstr "_Ikonë"
 
 #: ../plugins/launcher/launcher-dialog.c:1175
-#, fuzzy
 msgid "Co_mmand"
-msgstr "Urdhër"
+msgstr "_Urdhër"
 
 #: ../plugins/launcher/launcher-dialog.c:1202
 msgid "_Working Directory"
-msgstr ""
+msgstr "_Drejtoria e Punës"
 
 #: ../plugins/launcher/launcher-dialog.c:1234
 msgid "Run in _terminal"
@@ -547,20 +553,19 @@ msgid "Program Launcher"
 msgstr "Nisës Programesh"
 
 #: ../plugins/launcher/launcher-dialog.c:1551
-#, fuzzy
 msgid "A_rrow:"
-msgstr "Buton _shigjetë"
+msgstr "_Shigjetë:"
 
 #: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Default"
 msgstr "Parazgjedhje"
 
 #: ../plugins/launcher/launcher-dialog.c:1562
-#, fuzzy
 msgid "Inside Button"
-msgstr "Buton _Ikone"
+msgstr "Brenda Butonit"
 
-#: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:365
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Faques"
 
@@ -577,9 +582,8 @@ msgid "Switch workspaces using the mouse wheel"
 msgstr "Këmbe hapësira pune duke përdorur rrotëz miu"
 
 #: ../plugins/pager/pager.c:434
-#, fuzzy
 msgid "Show workspace names"
-msgstr "Shfaq veprime hapësire pune"
+msgstr "Shfaq emra hapësirash pune"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -587,31 +591,29 @@ msgid "Separator or Spacing"
 msgstr "Ndarës ose Hapësirë"
 
 #: ../plugins/separator/separator.c:430
-#, fuzzy
 msgid "Separator Style"
-msgstr "Ndarës ose Hapësirë"
+msgstr "Stil Ndarësi"
 
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr ""
+msgstr "Hapësirë _Bosh"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr ""
+msgstr "_Zgjerim Hapësire Bosh"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
-msgstr ""
+msgstr "_Vijë"
 
 #: ../plugins/separator/separator.c:464
-#, fuzzy
 msgid "_Handle"
-msgstr "Dorezë:"
+msgstr "_Dorëz"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
-msgstr ""
+msgstr "_Pika"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
@@ -639,26 +641,23 @@ msgid "The tray manager lost selection"
 msgstr ""
 
 #: ../plugins/systray/xfce-tray-dialogs.c:280
-#, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Jeni i sigurt se doni të hiqet hapësira e punës '%s'?"
+msgstr "Jeni i sigurt se doni të pastrohet lista e zbatimeve të njohura?"
 
 #. number of rows
 #: ../plugins/systray/xfce-tray-dialogs.c:374
-#, fuzzy
 msgid "_Number of rows:"
-msgstr "Numër rreshtash:"
+msgstr "_Numri i rreshtave:"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:389
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "Përzgjidhni tip veprimi"
+msgstr "Zbatime të Fshehur"
 
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Dështoi pasja e përzgjedhjes së administratorit për skenën %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:209
@@ -675,9 +674,8 @@ msgid "Use flat buttons"
 msgstr "Përdor butona të sheshtë"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:200
-#, fuzzy
 msgid "Show handle"
-msgstr "Shfaq _kornizë"
+msgstr "Shfaq dorezë"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:212
 msgid "Show tasks from _all workspaces"
@@ -734,12 +732,8 @@ msgid "Window List"
 msgstr "Listë Dritareje"
 
 #: ../plugins/windowlist/windowlist-dialog.c:150
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Njoftimi i urgjencës</i> do të xixëllojë butonin kur një zbatim lyp "
-"vëmendje."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Njoftimi i urgjencës</i> do të xixëllojë butonin kur një zbatim lyp vëmendje."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
@@ -780,7 +774,7 @@ msgstr "Shfaq veprime hapësire pune"
 
 #: ../mcs-plugin/plugin.c:39
 msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
+msgstr "Dështoi nisja e 'xfce4-panel -c'"
 
 #: ../mcs-plugin/plugin.c:57
 msgid "Panel"
@@ -842,150 +836,3 @@ msgstr "Shfaq listë dritaresh të mundshme"
 msgid "Xfce 4 Panel Manager"
 msgstr "Panel Rregullimesh Xfce 4"
 
-#, fuzzy
-#~ msgid "Failed to register the system tray for screen %d"
-#~ msgstr "I pazoti tëregjistroj shtyllë sistemi: %s"
-
-#~ msgid "Show application _names"
-#~ msgstr "Shfaq _emra zbatimesh"
-
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%A %d %B %Y"
-
-#~ msgid "_Draw Separator"
-#~ msgstr "_Vizato Ndarës"
-
-#~ msgid "_Expand"
-#~ msgstr "_Zgjero"
-
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Paneli Xfce %s\n"
-#~ "\n"
-#~ " Pjesë e Mjedisit Xfce për Desktop\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensuar sipas GNU GPL.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ "Përdorim: %s [MUNDËSI]\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ " MUNDËSI\n"
-#~ " -h, --help      Shfaq këtë mesazh dhe dil\n"
-#~ " -v, --version   Shfaq këtë mesazh dhe dil\n"
-#~ " -c, --customize Shfaq dialog formësimi\n"
-#~ " -s, --save      Ruaj formësimin\n"
-#~ " -r, --restart   Rinis panele\n"
-#~ " -q, --quit      Përfundo sesionin\n"
-#~ " -x, --exit      Mbyll tërë panelet dhe përfundo programin\n"
-#~ " -a, --add       Shto elementë të rinj\n"
-#~ "\n"
-
-#~ msgid "Error in command \"%s\""
-#~ msgstr "Gabim te urdhri \"%s\""
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "Ky objekt nuk është formësuar ende"
-
-#~ msgid "File management"
-#~ msgstr "Administrim kartelash"
-
-#~ msgid "Utilities"
-#~ msgstr "Përdorëse"
-
-#~ msgid "Games"
-#~ msgstr "Lojra"
-
-#~ msgid "Help browser"
-#~ msgstr "Shfletues ndihme"
-
-#~ msgid "Multimedia"
-#~ msgstr "Multimedia"
-
-#~ msgid "Network"
-#~ msgstr "Rrjet"
-
-#~ msgid "Graphics"
-#~ msgstr "Grafika"
-
-#~ msgid "Printer"
-#~ msgstr "Shtypës"
-
-#~ msgid "Productivity"
-#~ msgstr "Prodhimtari"
-
-#~ msgid "Office"
-#~ msgstr "Zyrë"
-
-#~ msgid "Sound"
-#~ msgstr "Zë"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "Development"
-#~ msgstr "Zhvillim"
-
-#~ msgid "Select image file"
-#~ msgstr "Përzgjidhni kartelë pamjeje"
-
-#~ msgid "Select command"
-#~ msgstr "Përzgjidhni urdhër"
-
-#~ msgid "Other..."
-#~ msgstr "Tjetër..."
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "Elementi i parë në listë tregohet te paneli. Elementë shtesë do të duken "
-#~ "në një menu."
-
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "Dështova në xhirimin e 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Për ndihmë në përdorimin e Instalimit Zero, shihni http://0install.net"
-
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "GUI Instalim Zero përfundoi punën e vet, por dialogu nisës ndërkohë është "
-#~ "zhdukur. Nuk po shtoj nisës (por asnjë kartelë e shkarkuar nuk ka humbur)."
-
-#~ msgid "Select file"
-#~ msgstr "Përzgjidhni kartelë"
