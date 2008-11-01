@@ -181,8 +181,10 @@ launcher_exec_startup_timeout_destroy (gpointer data)
     if (startup_data->watch_id != 0)
         g_source_remove (startup_data->watch_id);
 
-    /* close the PID */
-    g_spawn_close_pid (startup_data->pid);
+    /* make sure we don't leave zombies (see bug #2983 for details) */
+    g_child_watch_add_full (G_PRIORITY_LOW, startup_data->pid,
+                            (GChildWatchFunc) g_spawn_close_pid,
+                            NULL, NULL);
 
     /* release the startup data */
     panel_slice_free (LauncherStartupData, startup_data);
@@ -251,6 +253,10 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
     gchar        *t;
     GSList       *li;
     gchar       **argv = NULL;
+    gboolean      wait_with_escape;
+    
+    /* wait with escaping after the first space with non-absolute paths */
+    wait_with_escape = !g_path_is_absolute (entry->exec);
 
     /* build the full command */
     for (p = entry->exec; *p != '\0'; ++p)
@@ -356,6 +362,16 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
                     g_string_append_c (command_line, '%');
                     break;
             }
+        }
+        else if (*p == ' ')
+        {
+            /* code to work around files like 'command /path/to/file' */
+            if (!wait_with_escape)
+                g_string_append (command_line, "\\ ");
+            else
+                g_string_append_c (command_line, *p);
+                
+            wait_with_escape = FALSE;
         }
         else
         {
@@ -505,6 +521,11 @@ launcher_exec_on_screen (GdkScreen     *screen,
                                                              startup_data, NULL);
             startup_data->pid = pid;
         }
+    }
+    else if (G_LIKELY (succeed))
+    {
+        /* make sure we don't leave zombies (see bug #2983 for details) */
+        g_child_watch_add_full (G_PRIORITY_LOW, pid, (GChildWatchFunc) g_spawn_close_pid, NULL, NULL);
     }
 
     /* release the sn display */
