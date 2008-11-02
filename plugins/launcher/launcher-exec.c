@@ -253,10 +253,6 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
     gchar        *t;
     GSList       *li;
     gchar       **argv = NULL;
-    gboolean      wait_with_escape;
-    
-    /* wait with escaping after the first space with non-absolute paths */
-    wait_with_escape = !g_path_is_absolute (entry->exec);
 
     /* build the full command */
     for (p = entry->exec; *p != '\0'; ++p)
@@ -362,16 +358,6 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
                     g_string_append_c (command_line, '%');
                     break;
             }
-        }
-        else if (*p == ' ')
-        {
-            /* code to work around files like 'command /path/to/file' */
-            if (!wait_with_escape)
-                g_string_append (command_line, "\\ ");
-            else
-                g_string_append_c (command_line, *p);
-                
-            wait_with_escape = FALSE;
         }
         else
         {

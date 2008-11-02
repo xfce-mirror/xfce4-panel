@@ -154,6 +154,7 @@ launcher_dialog_read_desktop_file (const gchar   *path,
     XfceRc      *rc = NULL;
     const gchar *value = NULL;
     const gchar *p;
+    gchar       *tmp;
 
     /* we only support .desktop files */
     if (G_UNLIKELY (g_str_has_suffix (path, ".desktop") == FALSE ||
@@ -204,8 +205,10 @@ launcher_dialog_read_desktop_file (const gchar   *path,
     {
         g_free (entry->exec);
 
-        /* expand variables and store */
-        entry->exec = value ? xfce_expand_variables (value, NULL) : NULL;
+        /* expand and quote command and store */
+        tmp = xfce_expand_variables (value, NULL);
+        entry->exec = g_shell_quote (tmp);
+        g_free (tmp);
     }
 
     /* working directory */
@@ -215,7 +218,7 @@ launcher_dialog_read_desktop_file (const gchar   *path,
         g_free (entry->path);
 
         /* expand variables and store */
-        entry->path = value ? xfce_expand_variables (value, NULL) : NULL;
+        entry->path = xfce_expand_variables (value, NULL);
     }
 
     /* terminal */
@@ -732,7 +735,11 @@ launcher_dialog_command_chooser (LauncherDialog *ld)
     /* run the chooser dialog */
     if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
     {
+        /* get the filename and quote it */
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+        s = g_shell_quote (filename);
+        g_free (filename);
+        filename = s;
 
         /* set the new entry text */
         gtk_entry_set_text (GTK_ENTRY (ld->entry_exec), filename);
