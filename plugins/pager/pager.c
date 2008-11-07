@@ -142,8 +142,8 @@ pager_read_rc_file (XfcePanelPlugin *plugin, Pager *pager)
         if (rc != NULL)
         {
             rows = xfce_rc_read_int_entry (rc, "rows", 1);
-	    scrolling = xfce_rc_read_bool_entry (rc, "scrolling", TRUE);
-	    show_names = xfce_rc_read_bool_entry (rc, "show-names", FALSE);
+            scrolling = xfce_rc_read_bool_entry (rc, "scrolling", TRUE);
+            show_names = xfce_rc_read_bool_entry (rc, "show-names", FALSE);
         }
     }
 
@@ -217,12 +217,12 @@ pager_screen_changed (GtkWidget *plugin, GdkScreen *screen, Pager *pager)
     wnck_pager_set_screen (WNCK_PAGER (pager->pager), pager->screen);
 
     pager->ws_created_id =
-	g_signal_connect (pager->screen, "workspace-created",
-			  G_CALLBACK (pager_n_workspaces_changed), pager);
+        g_signal_connect (pager->screen, "workspace-created",
+                          G_CALLBACK (pager_n_workspaces_changed), pager);
 
     pager->ws_destroyed_id =
-	g_signal_connect (pager->screen, "workspace-destroyed",
-			  G_CALLBACK (pager_n_workspaces_changed), pager);
+        g_signal_connect (pager->screen, "workspace-destroyed",
+                          G_CALLBACK (pager_n_workspaces_changed), pager);
 
     pager->screen_size_changed_id =
         g_signal_connect (screen, "size-changed",
@@ -273,16 +273,19 @@ pager_construct (XfcePanelPlugin *plugin)
                                 xfce_panel_plugin_get_orientation (plugin));
     wnck_pager_set_n_rows (WNCK_PAGER (pager->pager), pager->rows);
     xfce_pager_set_workspace_scrolling (XFCE_PAGER (pager->pager), pager->scrolling);
+    wnck_pager_set_display_mode (WNCK_PAGER (pager->pager),
+                                 pager->show_names ? WNCK_PAGER_DISPLAY_NAME 
+                                 : WNCK_PAGER_DISPLAY_CONTENT);
     gtk_widget_show (pager->pager);
     gtk_container_add (GTK_CONTAINER (plugin), pager->pager);
 
     pager->ws_created_id =
-	g_signal_connect (pager->screen, "workspace-created",
-			  G_CALLBACK (pager_n_workspaces_changed), pager);
+        g_signal_connect (pager->screen, "workspace-created",
+                          G_CALLBACK (pager_n_workspaces_changed), pager);
 
     pager->ws_destroyed_id =
-	g_signal_connect (pager->screen, "workspace-destroyed",
-			  G_CALLBACK (pager_n_workspaces_changed), pager);
+        g_signal_connect (pager->screen, "workspace-destroyed",
+                          G_CALLBACK (pager_n_workspaces_changed), pager);
 
     xfce_panel_plugin_add_action_widget (plugin, pager->pager);
 
@@ -311,9 +314,9 @@ rows_changed (GtkSpinButton * spin, Pager * pager)
 
     if (rows != pager->rows)
     {
-	pager->rows = rows;
+        pager->rows = rows;
 
-	wnck_pager_set_n_rows (WNCK_PAGER (pager->pager), pager->rows);
+        wnck_pager_set_n_rows (WNCK_PAGER (pager->pager), pager->rows);
     }
 }
 
@@ -324,9 +327,9 @@ workspace_scrolling_toggled (GtkWidget *button, Pager *pager)
 
     if (pager->scrolling != scrolling)
     {
-	pager->scrolling = scrolling;
+        pager->scrolling = scrolling;
 
-	xfce_pager_set_workspace_scrolling (XFCE_PAGER (pager->pager), scrolling);
+        xfce_pager_set_workspace_scrolling (XFCE_PAGER (pager->pager), scrolling);
     }
 }
 
@@ -337,10 +340,10 @@ workspace_show_names_toggled (GtkWidget *button, Pager *pager)
 
     if (pager->show_names != show_names)
     {
-	pager->show_names = show_names;
+        pager->show_names = show_names;
 
-	wnck_pager_set_display_mode (WNCK_PAGER (pager->pager),
-	                             show_names ? WNCK_PAGER_DISPLAY_NAME : WNCK_PAGER_DISPLAY_CONTENT);
+        wnck_pager_set_display_mode (WNCK_PAGER (pager->pager),
+                                     show_names ? WNCK_PAGER_DISPLAY_NAME : WNCK_PAGER_DISPLAY_CONTENT);
     }
 }
 
@@ -393,11 +396,11 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
-	label = gtk_label_new (_("Number of rows:"));
+        label = gtk_label_new (_("Number of rows:"));
     }
     else
     {
-	label = gtk_label_new (_("Number of columns:"));
+        label = gtk_label_new (_("Number of columns:"));
     }
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
