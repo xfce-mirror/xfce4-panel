@@ -249,6 +249,7 @@ xfce_clock_tooltip_update (gpointer user_data)
     /* set the tooltip */
 #if GTK_CHECK_VERSION (2,12,0)
     gtk_widget_set_tooltip_text (clock->ebox, string);
+    gtk_widget_trigger_tooltip_query (GTK_WIDGET (clock->ebox));
 #else
     gtk_tooltips_set_tip (tooltips, clock->ebox, string, NULL);
 #endif
