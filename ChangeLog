@@ -1,22 +1,201 @@
-2008-10-14 15:49 jannis
+2008-11-09 13:21  nick
 
-	* launcher/launcher.c: Change the way the icon theme change callback
-	  is installed: use gtk_icon_theme_for_screen() in combination with
-	  g_signal_connect() instead of adding a signal emission hook to the
+	* NEWS, plugins/clock/clock.c:
+	  * Update the tooltip of the clock when it is visible.
+
+2008-11-09 09:38  nab
+
+	* po/ChangeLog, po/be.po:
+	  * be.po: Updated Belarusian translation
+
+2008-11-07 21:01  nick
+
+	* NEWS, plugins/pager/pager.c:
+	  * Fix bug 4589.
+	  * Remove some tabs in the code.
+
+2008-11-02 23:38  maximilian
+
+	* po/ChangeLog, po/es.po:
+	  Translation updates and additions - de es ku tr
+
+2008-11-02 10:08  nick
+
+	* NEWS, plugins/launcher/launcher-dialog.c,
+	  plugins/launcher/launcher-exec.c:
+	  - Don't escape command but quote them when browsing for an
+	  application.
+	  Since we accept command with arguments in 1 line, it's
+	  impossible to
+	  tell what's the command and the arguments (bug #4549).
+
+2008-11-01 22:56  majkl
+
+	* po/ChangeLog, po/cs.po:
+	  Czech translation updated
+
+2008-11-01 17:33  nick
+
+	* NEWS, plugins/launcher/launcher-exec.c:
+	  * Don't spawn zombies (bug #4490).
+	  * Escape spaces in launcher commands (bug #4507).
+
+2008-10-31 12:24  jari
+
+	* po/ChangeLog, po/fi.po:
+	  Update Finnish translations.
+
+2008-10-28 23:17  maximilian
+
+	* po/ChangeLog, po/sq.po:
+	  Translations updates and additions HUGE
+
+2008-10-23 18:06  nick
+
+	* NEWS:
+	  * Update news
+
+2008-10-23 17:50  nick
+
+	* plugins/launcher/launcher.c:
+	  * Reverse the order of the launcher menu when the panel is on
+	  the top of the screen (Bug #4450).
+
+2008-10-23 17:35  nick
+
+	* configure.in.in, panel/panel-app.c:
+	  * Implement SmRestartImmediately (Bug #4516).
+
+2008-10-23 17:21  nick
+
+	* panel/panel-properties.c:
+	  * Panel does not adhere to 'fullwidth' property when using
+	  vertical orientation after restarting (Bug #4456).
+
+2008-10-23 16:10  nick
+
+	* plugins/launcher/launcher.c, plugins/launcher/launcher.h:
+	  * Fully remove the emission hook from the launcher. This prints
+	  errors when removing a launcher.
+
+2008-10-21 20:12  olivier
+
+	* panel/panel-app.c:
+	  With xrandr 1.2, monitors can be added/removed, so need to
+	  double check the number of monitors (bug #3620)
+
+2008-10-18 14:25  maximilian
+
+	* po/ChangeLog, po/id.po:
+	  Translation updates and additions for many packages in es, fr,
+	  id, ja, nb_NO and tr
+
+2008-10-14 13:51  jannis
+
+	* ChangeLog, plugins/launcher/launcher.c:
+	  * launcher/launcher.c: Change the way the icon theme change
+	  callback
+	  is installed: use gtk_icon_theme_for_screen() in combination
+	  with
+	  g_signal_connect() instead of adding a signal emission hook to
+	  the
 	  icon theme class. This should fix bug #4474.
 
-2008-10-13 11:42 stephan
+2008-10-13 09:46  stephan
 
-	* mcs-plugins/*, settings/*, 
-	  configure.in.in, po/POTFILES.in: Remove last bits of mcs-history.
+	* ChangeLog, Makefile.am, NEWS, configure.in.in, mcs-plugin,
+	  po/POTFILES.in, settings, settings/Makefile.am,
+	  settings/plugin.c:
+	  Remove mcs plugin
+	  Bump version number
+	  Bump dependency-versions
 
-2008-09-21 01:40 jannis
+2008-10-09 05:01  sas
 
-	* panel/panel-dialogs.c: Use gtk_list_store_clear() on the model of 
-	  the panel selector combo box instead of calling 
-	  gtk_combo_box_remove_text() several times in a row when destroying 
-	  panel. This fixes bug #4401 (xfce4-panel halted when a panel was 
+	* po/hu.po:
+	  [intl:hu] little fixes
+
+2008-10-07 19:55  maximilian
+
+	* po/ChangeLog, po/ja.po, po/si.po:
+	  Translation updates:
+	  - xfce4-appfinder: ja, si
+	  - xfce-utils: ja, si
+	  - xfce4-mixer: si
+	  - xfce4-panel: ja, si
+	  - xfdesktop: ja
+	  - terminal: ja
+
+2008-10-05 17:52  maximilian
+
+	* po/ChangeLog, po/es.po:
+	  Updated and added Estonian translations for the libxfcegui4,
+	  terminal and mousepad trunk modules and libxfce4util branch 4.4
+	  module
+	  Updated Indonesian translations for the xfce-utils, xfce4-mixer,
+	  xarchiver, xfwm4, xfcalendar and xfdesktop trunk modules
+	  Updated and added Spanish translations for the xfce4-appfinder,
+	  squeeze, libexo, xfce-utils, libxfce4menu, xfce4-session,
+	  xfce4-mixer, libxfce4util, libxfce4ui, xfce4-icon-theme, thunar,
+	  libxfcegui4, xfce4-panel, xfdesktop, xfce4-trigger-launcher,
+	  terminal, mousepad and xfmedia trunk modules
+	  Updated Russian translation for the xarchiver, libexo and
+	  libxfcegui4 trunk modules
+	  Updated and added German translation of the xfce4-settings and
+	  xfwm4 trunk modules
+	  Updated Japanese translation for the thunar module
+	  Updated Sinhalese translation for the libxfcegui4 trunk module
+
+2008-09-23 20:06  lars
+
+	* po/da.po:
+	  
+
+2008-09-23 19:36  lars
+
+	* po/ChangeLog, po/da.po:
+	  * da.po: Danish translation updated
+	  
+	  
+
+2008-09-21 00:09  jannis
+
+	* ChangeLog, panel/panel-dialogs.c:
+	  * panel/panel-dialogs.c: Use gtk_list_store_clear() on the model
+	  of
+	  the panel selector combo box instead of calling
+	  gtk_combo_box_remove_text() several times in a row when
+	  destroying
+	  panel. This fixes bug #4401 (xfce4-panel halted when a panel was
 	  removed).
+
+2008-09-13 13:16  lars
+
+	* po/da.po:
+	  
+
+2008-09-12 10:04  mmassonnet
+
+	* po/ChangeLog, po/fr.po:
+	  update french translation
+
+2008-09-11 17:50  nick
+
+	* plugins/systray/xfce-tray-widget.c:
+	  Fix dependency on glib 2.14, bug 4376
+
+2008-09-08 19:55  nick
+
+	* configure.in.in:
+	  * Improve wnck version checking.
+
+2008-09-07 20:51  stephan
+
+	* ChangeLog, configure.in.in:
+	  Remove svn tag
+	  Remove xfce_4_6_alpha tag
+	  Bump version requirements for xfce libs
+	  Update ChangeLog
 
 2008-08-30 22:04  jannis
 
