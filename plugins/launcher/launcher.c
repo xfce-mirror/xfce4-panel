@@ -224,37 +224,33 @@ launcher_utility_query_tooltip (GtkWidget     *widget,
                                 GtkTooltip    *tooltip,
                                 LauncherEntry *entry)
 {
-    gchar     *string;
-    GdkPixbuf *pixbuf;
+    gchar *string;
 
     /* create tooltip text */
     if (G_LIKELY (entry && entry->name))
     {
         if (entry->comment)
+        {
             string = g_strdup_printf ("<b>%s</b>\n%s", entry->name, entry->comment);
+            gtk_tooltip_set_markup (tooltip, string);
+            g_free (string);
+        }
         else
-            string = g_strdup_printf ("%s", entry->name);
-
-        /* set the markup tooltip */
-        gtk_tooltip_set_markup (tooltip, string);
-
-        /* cleanup */
-        g_free (string);
+        {
+            gtk_tooltip_set_text (tooltip, entry->name);
+        }
 
         if (G_LIKELY (entry->icon))
         {
-            /* try to load an pixbuf */
-            pixbuf = launcher_utility_load_pixbuf (gtk_widget_get_screen (widget), entry->icon,
-                                                   LAUNCHER_TOOLTIP_SIZE);
+            /* load the cached pixbuf */
+            if (entry->tooltip_cache == NULL)
+                entry->tooltip_cache = launcher_utility_load_pixbuf (gtk_widget_get_screen (widget), 
+                                                                     entry->icon,
+                                                                     LAUNCHER_TOOLTIP_SIZE);
 
-            if (G_LIKELY (pixbuf))
-            {
-                /* set the tooltip icon */
-                gtk_tooltip_set_icon (tooltip, pixbuf);
-
-                /* releases */
-                g_object_unref (G_OBJECT (pixbuf));
-            }
+            /* set the tooltip icon */
+            if (G_LIKELY (entry->tooltip_cache))
+                gtk_tooltip_set_icon (tooltip, entry->tooltip_cache);
         }
 
         /* show the tooltip */
@@ -740,7 +736,7 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
         /* connect signals */
         g_signal_connect (G_OBJECT (mi), "button-release-event", G_CALLBACK (launcher_menu_item_released), launcher);
 #if LAUNCHER_NEW_TOOLTIP_API
-        g_object_set (G_OBJECT (mi), "has-tooltip", TRUE, NULL);
+        gtk_widget_set_has_tooltip (mi, TRUE);
         g_signal_connect (G_OBJECT (mi), "query-tooltip", G_CALLBACK (launcher_utility_query_tooltip), entry);
 #endif
 
@@ -783,6 +779,9 @@ launcher_entry_new (void)
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     entry->startup  = FALSE;
 #endif
+#if LAUNCHER_NEW_TOOLTIP_API
+    entry->tooltip_cache = NULL;
+#endif
 
     return entry;
 }
@@ -803,6 +802,12 @@ launcher_entry_free (LauncherEntry  *entry,
     g_free (entry->path);
     g_free (entry->icon);
     g_free (entry->exec);
+
+#if LAUNCHER_NEW_TOOLTIP_API
+    /* release cached tooltip icon */
+    if (entry->tooltip_cache)
+      g_object_unref (G_OBJECT (entry->tooltip_cache));
+#endif
 
     /* free structure */
     panel_slice_free (LauncherEntry, entry);
@@ -872,7 +877,7 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
                             G_CALLBACK (launcher_icon_button_expose_event), launcher);
 
 #if LAUNCHER_NEW_TOOLTIP_API
-    g_object_set (G_OBJECT (launcher->icon_button), "has-tooltip", TRUE, NULL);
+    gtk_widget_set_has_tooltip (launcher->icon_button, TRUE);
     g_signal_connect (G_OBJECT (launcher->icon_button), "query-tooltip",
                       G_CALLBACK (launcher_icon_button_query_tooltip), launcher);
 #endif

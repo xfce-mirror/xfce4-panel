@@ -30,7 +30,7 @@
 #define LAUNCHER_ARROW_SIZE        (16)
 #define LAUNCHER_POPUP_DELAY       (225)
 #define LAUNCHER_TOOLTIP_SIZE      (32)
-#define LAUNCHER_MENU_SIZE	       (24)
+#define LAUNCHER_MENU_SIZE         (24)
 #define LAUNCHER_STARTUP_TIMEOUT   (30 * 1000)
 #define LAUNCHER_TREE_ICON_SIZE    (24)
 #define LAUNCHER_CHOOSER_ICON_SIZE (48)
@@ -57,6 +57,10 @@ struct _LauncherEntry
     guint     terminal : 1;
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     guint     startup : 1;
+#endif
+
+#if LAUNCHER_NEW_TOOLTIP_API
+    GdkPixbuf *tooltip_cache;
 #endif
 };
 

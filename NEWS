@@ -1,3 +1,9 @@
+4.5.xx
+======
+- Cache tooltip icons. Since gtk queries it a lot, resulting in too many
+  open()'s for loading the pixbuf (bug #4616).
+
+
 4.5.92
 ======
 - Remove signal disconnect left after the patch of bug #4474.

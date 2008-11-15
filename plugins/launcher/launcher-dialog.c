@@ -197,6 +197,15 @@ launcher_dialog_read_desktop_file (const gchar   *path,
             entry->icon = g_strndup (value, p-value);
         else
             entry->icon = g_strdup (value);
+            
+#if LAUNCHER_NEW_TOOLTIP_API
+        /* release the cached icon */
+        if (entry->tooltip_cache)
+        {
+            g_object_unref (G_OBJECT (entry->tooltip_cache));
+            entry->tooltip_cache = NULL;
+        }
+#endif
     }
 
     /* exec */
@@ -790,6 +799,15 @@ launcher_dialog_icon_chooser (LauncherDialog *ld)
 
         /* set new icon */
         ld->entry->icon = exo_icon_chooser_dialog_get_icon (EXO_ICON_CHOOSER_DIALOG (chooser));
+
+#if LAUNCHER_NEW_TOOLTIP_API
+        /* release cached tooltip icon */
+        if (ld->entry->tooltip_cache)
+        {
+            g_object_unref (G_OBJECT (ld->entry->tooltip_cache));
+            ld->entry->tooltip_cache = NULL;
+        }
+#endif
 
         /* update the icon button */
         launcher_dialog_update_icon (ld);
