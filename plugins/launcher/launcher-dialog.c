@@ -1509,6 +1509,9 @@ launcher_dialog_response (GtkWidget      *dialog,
         /* add new item if there are no entries yet */
         if (G_UNLIKELY (g_list_length (launcher->entries) == 0))
             launcher->entries = g_list_append (launcher->entries, launcher_entry_new ());
+        
+        /* rebuild the plugin */
+        launcher_plugin_rebuild (launcher, TRUE);
     }
 
     /* free the panel structure */
