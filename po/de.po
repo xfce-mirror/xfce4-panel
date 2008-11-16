@@ -2,52 +2,20 @@
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Moritz Heiber <moe@xfce.org>, 2003-2005.
-# Fabian Nowak <timystery@arcor.de>, 2005-2007.
+# Fabian Nowak <timystery@arcor.de>, 2005-2008.
 # Enrico Tröger <enrico@xfce.org>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-12 08:30+0100\n"
-"PO-Revision-Date: 2008-03-12 08:22+0100\n"
-"Last-Translator: Enrico Tröger <enrico@xfce.org>\n"
+"POT-Creation-Date: 2008-11-13 23:33+0100\n"
+"PO-Revision-Date: 2008-07-18 21:27+0200\n"
+"Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr "Befehlseingabe"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr "X-Terminalemulator"
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr "Textdateien bearbeiten"
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "Editor"
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr "Dateimanager"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr "Dateien und Ordner verwalten"
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr "Im Internet surfen"
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr "Webbrowser"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -91,7 +59,7 @@ msgid "Add New Item"
 msgstr "Neues Objekt hinzufügen"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "Leiste einrichten"
 
@@ -99,43 +67,43 @@ msgstr "Leiste einrichten"
 msgid "Add Items"
 msgstr "Objekte hinzufügen"
 
-#: ../panel/panel.c:622 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:287
+#: ../plugins/actions/actions.c:321 ../plugins/actions/actions.c:459
 msgid "Quit"
 msgstr "Beenden"
 
-#: ../panel/panel.c:632
+#: ../panel/panel.c:631
 msgid "Restart"
 msgstr "Neu starten"
 
 #: ../panel/panel.c:646
 msgid "About the Xfce Panel"
-msgstr "Über die Xfce-Leiste"
+msgstr "Über die Leiste"
 
-#: ../panel/panel-app.c:258 ../panel/panel-app.c:892
+#: ../panel/panel-app.c:258 ../panel/panel-app.c:901
 msgid "Exit Xfce Panel?"
-msgstr "Xfce-Leiste beenden?"
+msgstr "Leiste beenden?"
 
-#: ../panel/panel-app.c:890 ../panel/panel-app.c:922 ../panel/panel-app.c:955
+#: ../panel/panel-app.c:899 ../panel/panel-app.c:931 ../panel/panel-app.c:964
 msgid "Xfce Panel"
-msgstr "Xfce-Leiste"
+msgstr "Leiste"
 
-#: ../panel/panel-app.c:893
+#: ../panel/panel-app.c:902
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "Die letze Leiste kann nicht entfernt werden. Soll das Programm beendet "
 "werden?"
 
-#: ../panel/panel-app.c:920
+#: ../panel/panel-app.c:929
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Leiste »%d« entfernen?"
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:933
 msgid "The selected panel and all its items will be removed."
 msgstr "Die ausgewählte Leiste und ihr gesamter Inhalt werden entfernt."
 
-#: ../panel/panel-app.c:961 ../panel/panel-app.c:962
+#: ../panel/panel-app.c:970 ../panel/panel-app.c:971
 msgid "Developer"
 msgstr "Entwickler"
 
@@ -182,7 +150,7 @@ msgstr "Das Xfce-Entwicklungsteam. Alle Rechte vorbehalten."
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Bitte senden Sie Bugs an <%s>"
+msgstr "Bitte senden Sie Fehlermeldungen an <%s>"
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
@@ -235,22 +203,22 @@ msgid "Span Monitors"
 msgstr "Auf Monitore verteilen"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1498 ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:1498 ../plugins/launcher/launcher-dialog.c:1885
 msgid "Left"
 msgstr "Links"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1499 ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:1499 ../plugins/launcher/launcher-dialog.c:1886
 msgid "Right"
 msgstr "Rechts"
 
 #: ../panel/panel-dialogs.c:969 ../panel/panel-dialogs.c:1208
-#: ../panel/panel-dialogs.c:1500 ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:1500 ../plugins/launcher/launcher-dialog.c:1887
 msgid "Top"
 msgstr "Oben"
 
 #: ../panel/panel-dialogs.c:971 ../panel/panel-dialogs.c:1210
-#: ../panel/panel-dialogs.c:1501 ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:1501 ../plugins/launcher/launcher-dialog.c:1888
 msgid "Bottom"
 msgstr "Unten"
 
@@ -271,15 +239,15 @@ msgstr "Frei bewegbar"
 msgid "Auto_hide"
 msgstr "Automatisch aus_blenden"
 
-#: ../panel/panel-dialogs.c:1162 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1162 ../plugins/actions/actions.c:472
 msgid "Orientation:"
 msgstr "Ausrichtung:"
 
-#: ../panel/panel-dialogs.c:1174 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1174 ../plugins/actions/actions.c:485
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1176 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1176 ../plugins/actions/actions.c:486
 msgid "Vertical"
 msgstr "Vertikal"
 
@@ -298,7 +266,7 @@ msgstr "Monitor auswählen"
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1405 ../plugins/clock/clock-dialog.c:501
+#: ../panel/panel-dialogs.c:1405 ../plugins/clock/clock-dialog.c:502
 #: ../plugins/systray/xfce-tray-dialogs.c:351
 #: ../plugins/tasklist/tasklist-dialogs.c:168
 #: ../plugins/windowlist/windowlist-dialog.c:190
@@ -325,39 +293,39 @@ msgstr "Position des Popups:"
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: ../panel/panel-dialogs.c:1541 ../panel/panel-dialogs.c:1577
-#: ../panel/panel-dialogs.c:1601
+#: ../panel/panel-dialogs.c:1542 ../panel/panel-dialogs.c:1578
+#: ../panel/panel-dialogs.c:1602
 #, c-format
 msgid "Panel %d"
 msgstr "Leiste %d"
 
-#: ../panel/panel-dialogs.c:1620
+#: ../panel/panel-dialogs.c:1621
 msgid "Remove Panel"
 msgstr "Leiste entfernen"
 
-#: ../panel/panel-dialogs.c:1633
+#: ../panel/panel-dialogs.c:1634
 msgid "New Panel"
 msgstr "Neue Leiste"
 
-#: ../panel/panel-dialogs.c:1693
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
+#: ../panel/panel-dialogs.c:1694
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Verwaltung der Leisten"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
-#: ../plugins/actions/actions.c:459
+#: ../plugins/actions/actions.c:268 ../plugins/actions/actions.c:304
+#: ../plugins/actions/actions.c:460
 msgid "Lock screen"
 msgstr "Bildschirm sperren"
 
-#: ../plugins/actions/actions.c:419
+#: ../plugins/actions/actions.c:420
 msgid "Panel Actions"
 msgstr "Leisten-Aktionen"
 
-#: ../plugins/actions/actions.c:449
+#: ../plugins/actions/actions.c:450
 msgid "Select action type:"
 msgstr "Aktion auswählen:"
 
-#: ../plugins/actions/actions.c:460
+#: ../plugins/actions/actions.c:461
 msgid "Quit + Lock screen"
 msgstr "Abmelden + Bildschirm sperren"
 
@@ -371,7 +339,7 @@ msgstr "_Sekunden anzeigen"
 
 #: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
-msgstr "24-_Stunden Uhr verwenden"
+msgstr "24-S_tunden Uhr verwenden"
 
 #: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
@@ -383,43 +351,43 @@ msgstr "AM/PM an_zeigen"
 
 #: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
-msgstr "Richtige _Binäruhr"
+msgstr "_Richtige Binäruhr"
 
 #. create dialog
-#: ../plugins/clock/clock-dialog.c:483
+#: ../plugins/clock/clock-dialog.c:484
 #: ../plugins/clock/clock.desktop.in.in.h:1
 msgid "Clock"
 msgstr "Uhr"
 
-#: ../plugins/clock/clock-dialog.c:511
+#: ../plugins/clock/clock-dialog.c:512
 msgid "Analog"
 msgstr "Analog"
 
-#: ../plugins/clock/clock-dialog.c:512
+#: ../plugins/clock/clock-dialog.c:513
 msgid "Binary"
 msgstr "Binär"
 
-#: ../plugins/clock/clock-dialog.c:513
+#: ../plugins/clock/clock-dialog.c:514
 msgid "Digital"
 msgstr "Digital"
 
-#: ../plugins/clock/clock-dialog.c:514
+#: ../plugins/clock/clock-dialog.c:515
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #. show frame
-#: ../plugins/clock/clock-dialog.c:519
+#: ../plugins/clock/clock-dialog.c:520
 #: ../plugins/systray/xfce-tray-dialogs.c:362
 msgid "Show _frame"
-msgstr "_Rahmen anzeigen"
+msgstr "Ra_hmen anzeigen"
 
 #. tooltip settings
-#: ../plugins/clock/clock-dialog.c:526
+#: ../plugins/clock/clock-dialog.c:527
 msgid "Tooltip Format"
 msgstr "Format der Tooltipps"
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:552
+#: ../plugins/clock/clock-dialog.c:554
 msgid "Clock Options"
 msgstr "Einstellungen für die Uhr"
 
@@ -442,131 +410,154 @@ msgstr "Gesamten verfügbaren Platz verwenden"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:700 ../plugins/launcher/launcher.c:760
+#: ../plugins/launcher/launcher.c:710 ../plugins/launcher/launcher.c:775
 msgid "New Item"
 msgstr "Neuer Eintrag"
 
-#: ../plugins/launcher/launcher-exec.c:526
+#: ../plugins/launcher/launcher-exec.c:533
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Konnte »%s« nicht ausführen."
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:737
 msgid "No icon"
 msgstr "Kein Symbol"
 
-#: ../plugins/launcher/launcher-dialog.c:597
+#: ../plugins/launcher/launcher-dialog.c:757
 msgid "Select a Directory"
-msgstr "Ordner auswählen"
+msgstr "Wählen Sie einen Ordner aus"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:801
 msgid "Select an Application"
-msgstr "Anwendung auswählen:"
+msgstr "Wählen Sie eine Anwendung aus"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:811
 msgid "All Files"
 msgstr "Alle Dateien"
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:816
 msgid "Executable Files"
 msgstr "Ausführbare Dateien"
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:831
 msgid "Perl Scripts"
 msgstr "Perl-Skripte"
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:837
 msgid "Python Scripts"
 msgstr "Python-Skripte"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:843
 msgid "Ruby Scripts"
 msgstr "Ruby-Skripte"
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:849
 msgid "Shell Scripts"
 msgstr "Shell-Skripte"
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:921
 msgid "Unknown"
 msgstr "Unbekannt"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:764
+#: ../plugins/launcher/launcher-dialog.c:924
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Symbol für »%s« auswählen"
 
 #. build name
-#: ../plugins/launcher/launcher-dialog.c:842
-#: ../plugins/launcher/launcher-dialog.c:1341
+#: ../plugins/launcher/launcher-dialog.c:1017
+#: ../plugins/launcher/launcher-dialog.c:1650
 msgid "Unnamed"
 msgstr "Unbenannt"
 
-#: ../plugins/launcher/launcher-dialog.c:1120
+#. build name
+#: ../plugins/launcher/launcher-dialog.c:1019
+#: ../plugins/launcher/launcher-dialog.c:1658
+msgid "--- Separator ---"
+msgstr "--- Trennlinie ---"
+
+#: ../plugins/launcher/launcher-dialog.c:1404
+msgid "_Image menu item"
+msgstr "_Menüeintrag mit Bild"
+
+#: ../plugins/launcher/launcher-dialog.c:1411
+msgid "_Separator item"
+msgstr "_Trennlinie"
+
+#: ../plugins/launcher/launcher-dialog.c:1421
 msgid "_Name"
 msgstr "_Name"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
+#: ../plugins/launcher/launcher-dialog.c:1439
 msgid "_Description"
 msgstr "_Bezeichnung"
 
-#: ../plugins/launcher/launcher-dialog.c:1157
+#: ../plugins/launcher/launcher-dialog.c:1458
 msgid "_Icon"
 msgstr "_Symbol"
 
-#: ../plugins/launcher/launcher-dialog.c:1175
+#: ../plugins/launcher/launcher-dialog.c:1482
 msgid "Co_mmand"
 msgstr "Be_fehl"
 
-#: ../plugins/launcher/launcher-dialog.c:1202
+#: ../plugins/launcher/launcher-dialog.c:1509
 msgid "_Working Directory"
 msgstr "_Arbeitsverzeichnis"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1541
 msgid "Run in _terminal"
 msgstr "In _Terminal ausführen"
 
-#: ../plugins/launcher/launcher-dialog.c:1250
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Use _startup notification"
 msgstr "_Visuelle Rückmeldung über Programmstart"
 
+#: ../plugins/launcher/launcher-dialog.c:1676
+msgid "--- Menu content below ---"
+msgstr "--- Menü siehe unten ---"
+
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1523
+#: ../plugins/launcher/launcher-dialog.c:1850
 msgid "Program Launcher"
 msgstr "Programmstarter"
 
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1878
 msgid "A_rrow:"
 msgstr "_Pfeilknopf"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1884
 msgid "Default"
 msgstr "Standard"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1889
 msgid "Inside Button"
 msgstr "Im Knopf"
 
-#: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
+#. FN: checkbox for selecting Nick's inverted sort order
+#: ../plugins/launcher/launcher-dialog.c:1896
+msgid "_Invert menu sort order"
+msgstr "_Reihenfolge beim Sortieren umdrehen"
+
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
 msgstr "Pager"
 
-#: ../plugins/pager/pager.c:396
+#: ../plugins/pager/pager.c:399
 msgid "Number of rows:"
 msgstr "Anzahl der Zeilen:"
 
-#: ../plugins/pager/pager.c:400
+#: ../plugins/pager/pager.c:403
 msgid "Number of columns:"
 msgstr "Anzahl der Spalten:"
 
-#: ../plugins/pager/pager.c:426
+#: ../plugins/pager/pager.c:429
 msgid "Switch workspaces using the mouse wheel"
 msgstr "Arbeitsflächen mit dem Mausrad wechseln"
 
-#: ../plugins/pager/pager.c:434
+#: ../plugins/pager/pager.c:437
 msgid "Show workspace names"
-msgstr "Zeige Arbeitsflächen-Namen"
+msgstr "Zeige Namen der Arbeitsflächen"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -580,11 +571,11 @@ msgstr "Trennlinie"
 #. space
 #: ../plugins/separator/separator.c:437
 msgid "_Empty Space"
-msgstr "_Leerzeichen"
+msgstr "_Freiraum"
 
 #: ../plugins/separator/separator.c:446
 msgid "_Expanding Empty Space"
-msgstr "_Erweiternde Leerzeichen"
+msgstr "_Erweiternder Freiraum"
 
 #: ../plugins/separator/separator.c:455
 msgid "_Line"
@@ -592,7 +583,7 @@ msgstr "_Linie"
 
 #: ../plugins/separator/separator.c:464
 msgid "_Handle"
-msgstr "R_outine"
+msgstr "_Griff"
 
 #: ../plugins/separator/separator.c:473
 msgid "_Dots"
@@ -621,7 +612,7 @@ msgstr "Es läuft bereits eine Systemleiste auf diesem Bildschirm"
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
 msgid "The tray manager lost selection"
-msgstr "Der Tray-Manager hat die Verbindung unerwartet verloren"
+msgstr "Die Systemleiste hat die Verbindung unerwartet verloren"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Are you sure you want to clear the list of known applications?"
@@ -641,7 +632,7 @@ msgstr "Versteckte Anwendungen"
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Konnte Manager-Auswahl für Bildschirm %d nicht erfragen."
+msgstr "Konnte Manager-Auswahl für Bildschirm %d nicht erhalten."
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:209
@@ -659,7 +650,7 @@ msgstr "Flache Knöpfe verwenden"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:200
 msgid "Show handle"
-msgstr "Handle anzeigen"
+msgstr "Griff anzeigen"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:212
 msgid "Show tasks from _all workspaces"
@@ -760,14 +751,6 @@ msgstr "Programmsymbole a_nzeigen"
 msgid "Show wor_kspace actions"
 msgstr "A_ktionen für die Arbeitsfläche anzeigen"
 
-#: ../mcs-plugin/plugin.c:39
-msgid "Failed to launch 'xfce4-panel -c'"
-msgstr "Konnte »xfce4-panel -c« nicht ausführen"
-
-#: ../mcs-plugin/plugin.c:57
-msgid "Panel"
-msgstr "Leiste"
-
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Aktionsknöpfe"
@@ -821,9 +804,40 @@ msgstr "Alle laufenden Anwendungen anzeigen"
 msgid "Show list of available windows"
 msgstr "Zeige eine Liste der verfügbaren Fenster"
 
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel"
+msgstr "Leiste"
+
+#: ../settings/xfce4-panel-manager.desktop.in.h:4
 msgid "Xfce 4 Panel Manager"
-msgstr "Xfce4-Leistenverwaltung"
+msgstr "Leistenverwaltung"
+
+#~ msgid "Command Prompt"
+#~ msgstr "Befehlseingabe"
+
+#~ msgid "X terminal emulator"
+#~ msgstr "X-Terminalemulator"
+
+#~ msgid "Edit text files"
+#~ msgstr "Textdateien bearbeiten"
+
+#~ msgid "Editor"
+#~ msgstr "Editor"
+
+#~ msgid "File Manager"
+#~ msgstr "Dateimanager"
+
+#~ msgid "Manage files and folders"
+#~ msgstr "Dateien und Ordner verwalten"
+
+#~ msgid "Surf the internet"
+#~ msgstr "Im Internet surfen"
+
+#~ msgid "Web Browser"
+#~ msgstr "Webbrowser"
+
+#~ msgid "Failed to launch 'xfce4-panel -c'"
+#~ msgstr "Konnte »xfce4-panel -c« nicht ausführen"
 
 #, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"
