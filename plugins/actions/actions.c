@@ -62,7 +62,8 @@ typedef struct
 Action;
 
 static void actions_properties_dialog (XfcePanelPlugin *plugin, Action *action);
-
+static gboolean actions_set_size (XfcePanelPlugin *plugin, int size, Action *action);
+static void actions_create_widgets (XfcePanelPlugin *plugin, Action *action);
 static void actions_construct (XfcePanelPlugin *plugin);
 
 /* -------------------------------------------------------------------- *
@@ -81,12 +82,9 @@ actions_orientation_changed (XfcePanelPlugin *plugin,
                              GtkOrientation orientation,
                              Action *action)
 {
-    if (action->type == ACTION_QUIT_LOCK)
-    {
-        xfce_hvbox_set_orientation (XFCE_HVBOX (GTK_BIN (plugin)->child), 
-                (orientation == GTK_ORIENTATION_HORIZONTAL) ?
-                        GTK_ORIENTATION_VERTICAL : GTK_ORIENTATION_HORIZONTAL);
-    }
+    gtk_widget_destroy (GTK_BIN (plugin)->child);
+    actions_create_widgets (plugin, action);
+    actions_set_size (plugin, xfce_panel_plugin_get_size (plugin), action);
 }
 
 static const char *action_icon_names[2][2] = {
@@ -163,9 +161,9 @@ actions_read_rc_file (XfcePanelPlugin *plugin, Action *action)
 {
     char *file;
     XfceRc *rc;
-    GtkOrientation orientation = GTK_ORIENTATION_VERTICAL;
+    GtkOrientation orientation = xfce_panel_plugin_get_orientation (plugin);
     int type = ACTION_QUIT;
-    
+       
     if ((file = xfce_panel_plugin_lookup_rc_file (plugin)) != NULL)
     {
         rc = xfce_rc_simple_open (file, TRUE);
@@ -173,8 +171,8 @@ actions_read_rc_file (XfcePanelPlugin *plugin, Action *action)
 
         if (rc != NULL)
         {
-            type = xfce_rc_read_int_entry (rc, "type", ACTION_QUIT);
-            orientation = (xfce_rc_read_int_entry (rc, "orientation", 1) == 0 ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL);
+            type = xfce_rc_read_int_entry (rc, "type", type);
+            orientation = (xfce_rc_read_int_entry (rc, "orientation", orientation) == 0 ? GTK_ORIENTATION_HORIZONTAL : GTK_ORIENTATION_VERTICAL);
             
             xfce_rc_close (rc);
         }
