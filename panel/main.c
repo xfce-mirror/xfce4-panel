@@ -57,7 +57,7 @@ static gchar    *opt_client_id = NULL;
 /* command line options */
 static GOptionEntry option_entries[] =
 {
-    { "version",   'v', 0, G_OPTION_ARG_NONE, &opt_version,   N_ ("Show this message and exit"), NULL },
+    { "version",   'V', 0, G_OPTION_ARG_NONE, &opt_version,   N_ ("Show this message and exit"), NULL },
     { "customize", 'c', 0, G_OPTION_ARG_NONE, &opt_customize, N_ ("Show configuration dialog"), NULL },
     { "save",      's', 0, G_OPTION_ARG_NONE, &opt_save,      N_ ("Save configuration"), NULL },
     { "restart",   'r', 0, G_OPTION_ARG_NONE, &opt_restart,   N_ ("Restart panels"), NULL },

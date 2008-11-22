@@ -612,7 +612,7 @@ launcher_execute_from_clipboard (GdkScreen     *screen,
         text = gtk_clipboard_wait_for_text (clipboard);
 
     /* try other clipboard if this one was empty */
-    if (text == NULL)
+    if (text == NULL || *text == '\0')
     {
         /* get the clipboard */
         clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
@@ -622,11 +622,12 @@ launcher_execute_from_clipboard (GdkScreen     *screen,
             text = gtk_clipboard_wait_for_text (clipboard);
     }
 
-    if (G_LIKELY (text))
+    if (G_LIKELY (text != NULL && *text != '\0'))
     {
         /* create some fake selection data */
         selection_data.data = (guchar *) text;
         selection_data.length = strlen (text);
+        selection_data.target = NULL;
 
         /* parse the filelist, this way we can handle 'copied' file from thunar */
         filenames = launcher_utility_filenames_from_selection_data (&selection_data);

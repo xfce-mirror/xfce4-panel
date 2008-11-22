@@ -128,17 +128,17 @@ launcher_utility_filenames_from_selection_data (GtkSelectionData *selection_data
     /* check whether the retrieval worked */
     if (G_LIKELY (selection_data->length > 0))
     {
-        if (g_str_equal(gdk_atom_name(selection_data->target), "text/uri-list"))
+        if (selection_data->target == gdk_atom_intern_static_string ("text/uri-list"))
         {
-			/* split the received uri list */
-			uri_list = g_uri_list_extract_uris ((gchar *) selection_data->data);
+                /* split the received uri list */
+                uri_list = g_uri_list_extract_uris ((gchar *) selection_data->data);
         }
         else
         {
-        	/* split input by \n, \r or \r\n, this might result in empty elements, we sort
-        	 * them out below */
-        	uri_list = g_strsplit_set ((gchar *) selection_data->data, "\n\r", 0);
-        	is_uri = FALSE;
+                /* split input by \n, \r or \r\n, this might result in empty elements, we sort
+                 * them out below */
+                uri_list = g_strsplit_set ((gchar *) selection_data->data, "\n\r", 0);
+                is_uri = FALSE;
         }
 
         if (G_LIKELY (uri_list))
@@ -153,7 +153,7 @@ launcher_utility_filenames_from_selection_data (GtkSelectionData *selection_data
                 if (is_uri)
                     filename = g_filename_from_uri (uri_list[i], NULL, NULL);
                 else
-					filename = g_strdup (uri_list[i]);
+                                        filename = g_strdup (uri_list[i]);
 
                 /* prepend the filename */
                 if (G_LIKELY (filename))
@@ -244,7 +244,7 @@ launcher_utility_query_tooltip (GtkWidget     *widget,
         {
             /* load the cached pixbuf */
             if (entry->tooltip_cache == NULL)
-                entry->tooltip_cache = launcher_utility_load_pixbuf (gtk_widget_get_screen (widget), 
+                entry->tooltip_cache = launcher_utility_load_pixbuf (gtk_widget_get_screen (widget),
                                                                      entry->icon,
                                                                      LAUNCHER_TOOLTIP_SIZE);
 
@@ -620,7 +620,7 @@ launcher_menu_popup (gpointer user_data)
     /* popup menu */
     gtk_menu_popup (GTK_MENU (launcher->menu), NULL, NULL,
                     xfce_panel_plugin_position_menu,
-                    launcher->panel_plugin, 
+                    launcher->panel_plugin,
                     1, gtk_get_current_event_time ());
 
     GDK_THREADS_LEAVE ();
@@ -689,7 +689,7 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
 
     /* set the menu screen */
     gtk_menu_set_screen (GTK_MENU (launcher->menu), screen);
-    
+
     /* get the arrow direction of the button */
     arrow_type = xfce_arrow_button_get_arrow_type (XFCE_ARROW_BUTTON (launcher->arrow_button));
 
@@ -705,7 +705,7 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
         /* create menu item */
         mi = gtk_image_menu_item_new_with_label (entry->name ? entry->name : _("New Item"));
         gtk_widget_show (mi);
-        
+
         /* fix menu order when it's on the top or bottom of the screen */
         if (arrow_type == GTK_ARROW_DOWN)
             gtk_menu_shell_append (GTK_MENU_SHELL (launcher->menu), mi);
@@ -861,7 +861,7 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     /* hook for icon themes changes */
     screen = gtk_widget_get_screen (launcher->image);
     icon_theme = gtk_icon_theme_get_for_screen (screen);
-    g_signal_connect (G_OBJECT (icon_theme), "changed", 
+    g_signal_connect (G_OBJECT (icon_theme), "changed",
                       G_CALLBACK (launcher_utility_icon_theme_changed), launcher);
 
     /* icon button signals */
@@ -1172,7 +1172,7 @@ launcher_plugin_screen_position_changed (LauncherPlugin *launcher)
 
     /* set the arrow direction */
     xfce_arrow_button_set_arrow_type (XFCE_ARROW_BUTTON (launcher->arrow_button), arrow_type);
-    
+
     /* destroy the menu, so menu items appear in the correct direction */
     launcher_menu_destroy (launcher);
 }
