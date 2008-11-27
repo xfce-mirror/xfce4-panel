@@ -404,9 +404,9 @@ launcher_exec_on_screen (GdkScreen     *screen,
     SnDisplay            *sn_display = NULL;
     LauncherStartupData  *startup_data;
     gint                  sn_workspace;
+#endif
     extern gchar        **environ;
     gint                  n, m;
-#endif
     gboolean              succeed = FALSE;
     GError               *error = NULL;
     gchar               **argv;
@@ -434,6 +434,8 @@ launcher_exec_on_screen (GdkScreen     *screen,
 
             if (G_LIKELY (sn_launcher != NULL && !sn_launcher_context_get_initiated (sn_launcher)))
             {
+                gchar *dpyname;
+
                 /* setup the startup notification context */
                 sn_workspace = launcher_exec_get_active_workspace_number (screen);
                 sn_launcher_context_set_binary_name (sn_launcher, argv[0]);
@@ -454,15 +456,21 @@ launcher_exec_on_screen (GdkScreen     *screen,
                     ;
 
                 /* alloc new envp string */
-                envp = g_new (gchar *, n + 2);
+                envp = g_new (gchar *, n + 3);
 
                 /* copy the environ vars into the envp */
                 for (n = m = 0; environ[n] != NULL; ++n)
-                    if (G_LIKELY (strncmp (environ[n], "DESKTOP_STARTUP_ID", 18) != 0))
+                    if (G_LIKELY (strncmp (environ[n], "DESKTOP_STARTUP_ID", 18) != 0 && strncmp (environ[n], "DISPLAY", 7) != 0))
                         envp[m++] = g_strdup (environ[n]);
 
                 /* append the startup notification id */
                 envp[m++] = g_strconcat ("DESKTOP_STARTUP_ID=", sn_launcher_context_get_startup_id (sn_launcher), NULL);
+
+                /* workaround for the failure of gdk_spawn_on_screen to setup the correct DISPLAY env */
+                dpyname = gdk_screen_make_display_name (screen);
+                envp[m++] = g_strconcat ("DISPLAY=", dpyname, NULL);
+                g_free (dpyname);
+
                 envp[m] = NULL;
 
                 /* we want to watch the child process */
@@ -470,6 +478,25 @@ launcher_exec_on_screen (GdkScreen     *screen,
             }
         }
     }
+#else
+    /* count environ items */
+    for (n = 0; environ[n] != NULL; ++n)
+        ;
+
+    /* alloc new envp string */
+    envp = g_new (gchar *, n + 2);
+
+    /* copy the environ vars into the envp */
+    for (n = m = 0; environ[n] != NULL; ++n)
+        if (G_LIKELY (strncmp (environ[n], "DISPLAY", 7) != 0))
+            envp[m++] = g_strdup (environ[n]);
+
+    /* workaround for the failure of gdk_spawn_on_screen to setup the correct DISPLAY env */
+    dpyname = gdk_screen_make_display_name (screen);
+    envp[m++] = g_strconcat ("DISPLAY=", dpyname, NULL);
+    g_free (dpyname);
+
+    envp[m] = NULL;
 #endif
 
     /* spawn the application */

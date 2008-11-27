@@ -3,6 +3,8 @@
 - Cache tooltip icons. Since gtk queries it a lot, resulting in too many
   open()'s for loading the pixbuf (bug #4616).
 - Rebuild the plugin if the properties dialog is cancelled (bug #4612).
+- Set DISPLAY variable so the launcher launches on the correct screen
+  (bug #4654).
 
 
 4.5.92
