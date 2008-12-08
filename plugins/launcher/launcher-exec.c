@@ -405,6 +405,7 @@ launcher_exec_on_screen (GdkScreen     *screen,
     LauncherStartupData  *startup_data;
     gint                  sn_workspace;
 #endif
+    gchar                *dpyname;
     extern gchar        **environ;
     gint                  n, m;
     gboolean              succeed = FALSE;
@@ -434,8 +435,6 @@ launcher_exec_on_screen (GdkScreen     *screen,
 
             if (G_LIKELY (sn_launcher != NULL && !sn_launcher_context_get_initiated (sn_launcher)))
             {
-                gchar *dpyname;
-
                 /* setup the startup notification context */
                 sn_workspace = launcher_exec_get_active_workspace_number (screen);
                 sn_launcher_context_set_binary_name (sn_launcher, argv[0]);
