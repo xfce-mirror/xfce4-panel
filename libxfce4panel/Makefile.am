@@ -21,6 +21,7 @@ libxfce4panel_built_sources = 						\
 	libxfce4panel-marshal.h
 
 libxfce4panel_headers =							\
+	libxfce4panel.h							\
 	xfce-panel-window.h						\
 	xfce-arrow-button.h						\
 	xfce-itembar.h							\

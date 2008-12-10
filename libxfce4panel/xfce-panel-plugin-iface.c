@@ -695,7 +695,7 @@ _xfce_panel_plugin_customize_items (XfcePanelPlugin *plugin)
  * Ask the panel to start a move operation.
  **/
 void
-xfce_panel_plugin_move (XfcePanelPlugin *plugin)
+_xfce_panel_plugin_move (XfcePanelPlugin *plugin)
 {
     XFCE_PANEL_PLUGIN_GET_INTERFACE (plugin)->move (plugin);
 }
@@ -872,7 +872,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (mi), img);
 
     g_signal_connect_swapped (G_OBJECT (mi), "activate",
-                              G_CALLBACK (xfce_panel_plugin_move), plugin);
+                              G_CALLBACK (_xfce_panel_plugin_move), plugin);
 
     /* insert custom items after move */
     insert_position = 5;

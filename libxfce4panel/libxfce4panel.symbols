@@ -36,6 +36,15 @@
 
 
 
+#if IN_HEADER(__LIBXFCE4PANEL_ENUM_TYPES_H__)
+#if IN_SOURCE(__LIBXFCE4PANEL_ENUM_TYPES_C__)
+xfce_handle_style_get_type G_GNUC_CONST
+xfce_screen_position_get_type G_GNUC_CONST
+#endif
+#endif
+
+
+
 #if IN_HEADER(__XFCE_ARROW_BUTTON_H__)
 #if IN_SOURCE(__XFCE_ARROW_BUTTON_C__)
 xfce_arrow_button_get_type G_GNUC_CONST
@@ -67,6 +76,7 @@ xfce_itembar_insert
 xfce_itembar_append
 xfce_itembar_prepend
 xfce_itembar_reorder_child
+xfce_itembar_set_allow_expand
 xfce_itembar_set_child_expand
 xfce_itembar_get_child_expand
 xfce_itembar_get_n_items
@@ -74,6 +84,7 @@ xfce_itembar_get_item_index
 xfce_itembar_get_nth_item G_GNUC_WARN_UNUSED_RESULT
 xfce_itembar_raise_event_window
 xfce_itembar_lower_event_window
+xfce_itembar_set_maximum_size
 xfce_itembar_event_window_is_raised
 xfce_itembar_get_item_at_point G_GNUC_WARN_UNUSED_RESULT
 xfce_itembar_get_drop_index
