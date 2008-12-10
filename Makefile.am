@@ -3,15 +3,15 @@
 SUBDIRS =								\
 	config								\
 	icons								\
-	libxfce4panel						\
+	libxfce4panel							\
 	panel								\
 	plugins								\
 	settings							\
-	po									\
+	po								\
 	docs
 
 distclean-local:
-	rm -rf *.spec *.cache *~
+	rm -rf *.spec *.cache *~ intltool-update-tmp
 
 rpm: dist
 	rpmbuild -ta $(PACKAGE)-$(VERSION).tar.gz
