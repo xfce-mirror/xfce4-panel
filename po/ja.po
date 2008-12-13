@@ -9,60 +9,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.5.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 12:57+0100\n"
-"PO-Revision-Date: 2008-10-07 20:29+0900\n"
+"POT-Creation-Date: 2008-11-22 18:00+0900\n"
+"PO-Revision-Date: 2008-12-07 17:30+0900\n"
 "Last-Translator: Masato Hashimoto <cabezon.hashimoto@gmail.com>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr "コマンドプロンプト"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr "X ターミナルエミュレータ"
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr "テキストファイルを編集します"
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "エディタ"
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr "ファイルマネージャー"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr "ファイルやフォルダを管理します"
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr "インターネットを閲覧します"
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr "ウェブブラウザ"
-
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "アイテムが突然削除されました: %s"
+msgstr "アイテムが突然削除されました: \"%s\""
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:606
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "「%s」を削除しますか?"
+msgstr "\"%s\" を削除しますか?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "パネルからアイテムが削除されると、その設定も失われます。"
 
 #. configure, hide by default
@@ -86,83 +53,96 @@ msgstr "削除"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:902
 msgid "Add New Item"
-msgstr "アイテムを追加"
+msgstr "アイテムの追加"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:694
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913
+#: ../panel/panel.c:595
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize Panel"
 msgstr "パネルの設定"
 
-#: ../panel/panel.c:705
+#: ../panel/panel.c:606
 msgid "Add Items"
 msgstr "アイテムの追加"
 
-#: ../panel/panel.c:721 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:621
+#: ../plugins/actions/actions.c:286
+#: ../plugins/actions/actions.c:320
+#: ../plugins/actions/actions.c:458
 msgid "Quit"
 msgstr "終了"
 
-#: ../panel/panel.c:731
+#: ../panel/panel.c:631
 msgid "Restart"
 msgstr "再起動"
 
-#: ../panel/panel.c:745
+#: ../panel/panel.c:646
 msgid "About the Xfce Panel"
 msgstr "Xfce パネルについて"
 
-#: ../panel/panel-app.c:258 ../panel/panel-app.c:892
+#: ../panel/panel-app.c:258
+#: ../panel/panel-app.c:901
 msgid "Exit Xfce Panel?"
 msgstr "Xfce パネルを終了しますか?"
 
-#: ../panel/panel-app.c:890 ../panel/panel-app.c:922 ../panel/panel-app.c:955
+#: ../panel/panel-app.c:899
+#: ../panel/panel-app.c:931
+#: ../panel/panel-app.c:964
 msgid "Xfce Panel"
 msgstr "Xfce パネル"
 
-#: ../panel/panel-app.c:893
+#: ../panel/panel-app.c:902
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"最後のパネルは削除できません。このプログラムを終了してもよろしいですか?"
+msgstr "最後のパネルは削除できません。このプログラムを終了してもよろしいですか?"
 
-#: ../panel/panel-app.c:920
+#: ../panel/panel-app.c:929
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "パネル「%d」を削除しますか?"
+msgstr "パネル \"%d\" を削除しますか?"
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:933
 msgid "The selected panel and all its items will be removed."
 msgstr "選択したパネルとそこにある全てのアイテムが削除されます。"
 
-#: ../panel/panel-app.c:961 ../panel/panel-app.c:962
+#: ../panel/panel-app.c:970
+#: ../panel/panel-app.c:971
 msgid "Developer"
 msgstr "開発者"
 
+# CLI --help
 #: ../panel/main.c:60
 msgid "Show this message and exit"
-msgstr "このメッセージを表示して終了します"
+msgstr "このメッセージを表示して終了する"
 
+# CLI --help
 #: ../panel/main.c:61
 msgid "Show configuration dialog"
-msgstr "設定ダイアログボックスを表示します"
+msgstr "設定ダイアログボックスを表示する"
 
+# CLI --help
 #: ../panel/main.c:62
 msgid "Save configuration"
-msgstr "設定を保存します"
+msgstr "設定を保存する"
 
+# CLI --help
 #: ../panel/main.c:63
 msgid "Restart panels"
-msgstr "パネルを再起動します"
+msgstr "パネルを再起動する"
 
+# CLI --help
 #: ../panel/main.c:64
 msgid "End the session"
-msgstr "パネルのセッションを終了します"
+msgstr "パネルのセッションを終了する"
 
+# CLI --help
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr "全てのパネルを閉じてパネルのセッションを終了します"
+msgstr "全てのパネルを閉じてパネルのセッションを終了する"
 
+# CLI --help
 #: ../panel/main.c:66
 msgid "Add new items"
-msgstr "新規アイテムを追加します"
+msgstr "新しいアイテムを追加する"
 
 #: ../panel/main.c:90
 msgid "Failed to open display"
@@ -179,171 +159,190 @@ msgstr "The Xfce development team. All rights reserved."
 #: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "バグは <%s> までご連絡ください。"
+msgstr "バグは <%s> まで報告してください。"
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr "xfce4-panel は既に実行されています。"
+msgstr "xfce4-panel は既に実行されています"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
 msgstr "xfce4-panel を再起動しています..."
 
-#: ../panel/panel-dialogs.c:189
+#: ../panel/panel-dialogs.c:196
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "\"%s\" モジュールを開けませんでした"
 
-#: ../panel/panel-dialogs.c:634
+#: ../panel/panel-dialogs.c:611
 msgid "Add Items to the Panel"
 msgstr "アイテムをパネルに追加します"
 
-#: ../panel/panel-dialogs.c:665
-msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
+#: ../panel/panel-dialogs.c:642
+msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
 msgstr ""
 "このリストからパネルへドラッグするとアイテムが追加されます。\n"
 "削除するにはパネルからこのリストへドラッグしてください。"
 
-#: ../panel/panel-dialogs.c:682
+#: ../panel/panel-dialogs.c:659
 msgid "Available Items"
 msgstr "利用可能なアイテム"
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:885
+#: ../panel/panel-dialogs.c:1121
 msgid "Normal Width"
 msgstr "通常の横幅にする"
 
-#: ../panel/panel-dialogs.c:909 ../panel/panel-dialogs.c:1145
+#: ../panel/panel-dialogs.c:886
+#: ../panel/panel-dialogs.c:1122
 msgid "Full Width"
 msgstr "最大の横幅にする"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:890
+#: ../panel/panel-dialogs.c:1126
 msgid "Normal Height"
 msgstr "通常の縦幅にする"
 
-#: ../panel/panel-dialogs.c:914 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:891
+#: ../panel/panel-dialogs.c:1127
 msgid "Full Height"
 msgstr "最大の縦幅にする"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:899
+#: ../panel/panel-dialogs.c:1136
 msgid "Span Monitors"
-msgstr "モニターをスパンする"
+msgstr "複数モニタをスパンする"
 
-#: ../panel/panel-dialogs.c:985 ../panel/panel-dialogs.c:1224
-#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:962
+#: ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1498
+#: ../plugins/launcher/launcher-dialog.c:1586
 msgid "Left"
 msgstr "左"
 
-#: ../panel/panel-dialogs.c:987 ../panel/panel-dialogs.c:1226
-#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:964
+#: ../panel/panel-dialogs.c:1203
+#: ../panel/panel-dialogs.c:1499
+#: ../plugins/launcher/launcher-dialog.c:1587
 msgid "Right"
 msgstr "右"
 
-#: ../panel/panel-dialogs.c:992 ../panel/panel-dialogs.c:1231
-#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:969
+#: ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1500
+#: ../plugins/launcher/launcher-dialog.c:1588
 msgid "Top"
 msgstr "上"
 
-#: ../panel/panel-dialogs.c:994 ../panel/panel-dialogs.c:1233
-#: ../panel/panel-dialogs.c:1524 ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:971
+#: ../panel/panel-dialogs.c:1210
+#: ../panel/panel-dialogs.c:1501
+#: ../plugins/launcher/launcher-dialog.c:1589
 msgid "Bottom"
 msgstr "下"
 
 #. position
-#: ../panel/panel-dialogs.c:1024
+#: ../panel/panel-dialogs.c:1001
 msgid "Position"
 msgstr "位置"
 
-#: ../panel/panel-dialogs.c:1038
+#: ../panel/panel-dialogs.c:1015
 msgid "Fixed Position"
 msgstr "位置を固定する"
 
-#: ../panel/panel-dialogs.c:1044
+#: ../panel/panel-dialogs.c:1021
 msgid "Freely Moveable"
 msgstr "自由に移動可能"
 
-#: ../panel/panel-dialogs.c:1167
+#: ../panel/panel-dialogs.c:1144
 msgid "Auto_hide"
 msgstr "自動的に隠す(_H)"
 
-#: ../panel/panel-dialogs.c:1185 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1162
+#: ../plugins/actions/actions.c:471
 msgid "Orientation:"
 msgstr "パネルの方向:"
 
-#: ../panel/panel-dialogs.c:1197 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1174
+#: ../plugins/actions/actions.c:484
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-dialogs.c:1199 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1176
+#: ../plugins/actions/actions.c:485
 msgid "Vertical"
 msgstr "垂直"
 
-#: ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1185
 msgid "Handle:"
 msgstr "取っ手:"
 
-#: ../panel/panel-dialogs.c:1220
+#: ../panel/panel-dialogs.c:1197
 msgid "At both sides"
 msgstr "両側に付ける"
 
-#: ../panel/panel-dialogs.c:1300
+#: ../panel/panel-dialogs.c:1277
 msgid "Select Monitor"
-msgstr "モニターの選択"
+msgstr "モニタの選択"
 
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:502
+#: ../panel/panel-dialogs.c:1405
+#: ../plugins/clock/clock-dialog.c:502
 #: ../plugins/systray/xfce-tray-dialogs.c:351
 #: ../plugins/tasklist/tasklist-dialogs.c:168
 #: ../plugins/windowlist/windowlist-dialog.c:190
 msgid "Appearance"
 msgstr "外観"
 
-#: ../panel/panel-dialogs.c:1441
+#: ../panel/panel-dialogs.c:1418
 msgid "Size (pixels):"
 msgstr "サイズ (ピクセル):"
 
 # FIXME: compositor won't work on irix, thus it's blind-translation
-#: ../panel/panel-dialogs.c:1471
+#: ../panel/panel-dialogs.c:1448
 msgid "Transparency (%):"
 msgstr "透明度 (%):"
 
 # FIXME: compositor won't work on irix, thus it's blind-translation
-#: ../panel/panel-dialogs.c:1497
+#: ../panel/panel-dialogs.c:1474
 msgid "Make active panel opaque"
-msgstr "有効なパネルを不透明にする"
+msgstr "アクティブなパネルを不透明にする"
 
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1487
 msgid "Popup position:"
 msgstr "ポップアップ位置:"
 
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1497
 msgid "Automatic"
 msgstr "自動"
 
-#: ../panel/panel-dialogs.c:1564 ../panel/panel-dialogs.c:1600
-#: ../panel/panel-dialogs.c:1624
+#: ../panel/panel-dialogs.c:1542
+#: ../panel/panel-dialogs.c:1578
+#: ../panel/panel-dialogs.c:1602
 #, c-format
 msgid "Panel %d"
 msgstr "パネル %d"
 
-#: ../panel/panel-dialogs.c:1643
+# Tip help
+#: ../panel/panel-dialogs.c:1621
 msgid "Remove Panel"
 msgstr "パネルを削除します"
 
-#: ../panel/panel-dialogs.c:1656
+# Tip help
+#: ../panel/panel-dialogs.c:1634
 msgid "New Panel"
 msgstr "パネルを追加します"
 
-#: ../panel/panel-dialogs.c:1716
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
+#: ../panel/panel-dialogs.c:1694
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
-msgstr "パネルマネージャー"
+msgstr "パネルマネージャ"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
+#: ../plugins/actions/actions.c:267
+#: ../plugins/actions/actions.c:303
 #: ../plugins/actions/actions.c:459
 msgid "Lock screen"
 msgstr "画面をロック"
@@ -352,35 +351,36 @@ msgstr "画面をロック"
 msgid "Panel Actions"
 msgstr "パネルアクション"
 
+# In ja translation: This is the label for combobox in Action button property dialog. Follow the usual style.
 #: ../plugins/actions/actions.c:449
 msgid "Select action type:"
-msgstr "アクションのタイプを選択してください"
+msgstr "アクションのタイプ:"
 
 #: ../plugins/actions/actions.c:460
 msgid "Quit + Lock screen"
 msgstr "終了して画面をロック"
 
-#: ../plugins/clock/clock-dialog.c:358
+#: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
 msgstr "カスタム"
 
-#: ../plugins/clock/clock-dialog.c:412
+#: ../plugins/clock/clock-dialog.c:411
 msgid "Display _seconds"
 msgstr "秒を表示する(_S)"
 
-#: ../plugins/clock/clock-dialog.c:421
+#: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
 msgstr "24時間制にする(_H)"
 
-#: ../plugins/clock/clock-dialog.c:427
+#: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
 msgstr "時刻の区切り記号を点滅する(_A)"
 
-#: ../plugins/clock/clock-dialog.c:433
+#: ../plugins/clock/clock-dialog.c:432
 msgid "Sho_w AM/PM"
 msgstr "AM/PMを表示する(_W)"
 
-#: ../plugins/clock/clock-dialog.c:442
+#: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
 msgstr "バイナリ表示にする(_B)"
 
@@ -418,7 +418,7 @@ msgid "Tooltip Format"
 msgstr "ツールチップの形式"
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:553
+#: ../plugins/clock/clock-dialog.c:554
 msgid "Clock Options"
 msgstr "時計のオプション"
 
@@ -435,142 +435,145 @@ msgstr "最小化したアプリのみ表示する"
 msgid "Show applications of all workspaces"
 msgstr "全ワークスペースのアプリケーションを表示する"
 
-#: ../plugins/iconbox/iconbox.c:952 ../plugins/tasklist/tasklist-dialogs.c:187
+#: ../plugins/iconbox/iconbox.c:952
+#: ../plugins/tasklist/tasklist-dialogs.c:187
 msgid "Use all available space"
 msgstr "利用可能な全スペースを使用する"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:700 ../plugins/launcher/launcher.c:760
+#: ../plugins/launcher/launcher.c:706
+#: ../plugins/launcher/launcher.c:771
 msgid "New Item"
 msgstr "新しいアイテム"
 
-#: ../plugins/launcher/launcher-exec.c:526
+#: ../plugins/launcher/launcher-exec.c:533
 #, c-format
 msgid "Failed to launch \"%s\""
-msgstr "「%s」を実行できませんでした"
+msgstr "\"%s\" を起動できませんでした"
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:589
 msgid "No icon"
 msgstr "アイコンはありません"
 
-#: ../plugins/launcher/launcher-dialog.c:597
+#: ../plugins/launcher/launcher-dialog.c:609
 msgid "Select a Directory"
 msgstr "フォルダを選択してください"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:653
 msgid "Select an Application"
-msgstr "アプリを選択してください"
+msgstr "アプリケーションを選択してください"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:663
 msgid "All Files"
 msgstr "全てのファイル"
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:668
 msgid "Executable Files"
-msgstr "実行可能なファイル"
-
-#: ../plugins/launcher/launcher-dialog.c:671
-msgid "Perl Scripts"
-msgstr "Perlスクリプト"
-
-#: ../plugins/launcher/launcher-dialog.c:677
-msgid "Python Scripts"
-msgstr "Pythonスクリプト"
+msgstr "実行可能ファイル"
 
 #: ../plugins/launcher/launcher-dialog.c:683
-msgid "Ruby Scripts"
-msgstr "Rubyスクリプト"
+msgid "Perl Scripts"
+msgstr "Perl スクリプト"
 
 #: ../plugins/launcher/launcher-dialog.c:689
+msgid "Python Scripts"
+msgstr "Python スクリプト"
+
+#: ../plugins/launcher/launcher-dialog.c:695
+msgid "Ruby Scripts"
+msgstr "Ruby スクリプト"
+
+#: ../plugins/launcher/launcher-dialog.c:701
 msgid "Shell Scripts"
 msgstr "シェルスクリプト"
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:777
 msgid "Unknown"
 msgstr "不明"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:764
+#: ../plugins/launcher/launcher-dialog.c:780
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr "「%s」のアイコンを選択してください"
+msgstr "\"%s\" のアイコンを選択してください"
 
 #. build name
-#: ../plugins/launcher/launcher-dialog.c:842
-#: ../plugins/launcher/launcher-dialog.c:1341
+#: ../plugins/launcher/launcher-dialog.c:867
+#: ../plugins/launcher/launcher-dialog.c:1366
 msgid "Unnamed"
 msgstr "未設定"
 
-#: ../plugins/launcher/launcher-dialog.c:1120
+#: ../plugins/launcher/launcher-dialog.c:1145
 msgid "_Name"
 msgstr "名前(_N)"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
+#: ../plugins/launcher/launcher-dialog.c:1163
 msgid "_Description"
 msgstr "説明(_D)"
 
-#: ../plugins/launcher/launcher-dialog.c:1157
+#: ../plugins/launcher/launcher-dialog.c:1182
 msgid "_Icon"
 msgstr "アイコン(_I)"
 
-#: ../plugins/launcher/launcher-dialog.c:1175
+#: ../plugins/launcher/launcher-dialog.c:1200
 msgid "Co_mmand"
 msgstr "コマンド(_M)"
 
-#: ../plugins/launcher/launcher-dialog.c:1202
+#: ../plugins/launcher/launcher-dialog.c:1227
 msgid "_Working Directory"
 msgstr "作業フォルダ(_W)"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1259
 msgid "Run in _terminal"
 msgstr "ターミナルで実行する(_T)"
 
-#: ../plugins/launcher/launcher-dialog.c:1250
+#: ../plugins/launcher/launcher-dialog.c:1275
 msgid "Use _startup notification"
 msgstr "起動通知を行う(_S)"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1523
-msgid "Program Launcher"
-msgstr "プログラムランチャー"
-
 #: ../plugins/launcher/launcher-dialog.c:1551
+msgid "Program Launcher"
+msgstr "プログラムランチャ"
+
+#: ../plugins/launcher/launcher-dialog.c:1579
 msgid "A_rrow:"
 msgstr "矢印ボタン(_R):"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1585
 msgid "Default"
 msgstr "デフォルト"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1590
 msgid "Inside Button"
 msgstr "アイコンボタン"
 
-#: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:368
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Pager"
-msgstr "ページャー"
+msgstr "ページャ"
 
-#: ../plugins/pager/pager.c:396
+#: ../plugins/pager/pager.c:399
 msgid "Number of rows:"
 msgstr "行数:"
 
-#: ../plugins/pager/pager.c:400
+#: ../plugins/pager/pager.c:403
 msgid "Number of columns:"
 msgstr "列数:"
 
-#: ../plugins/pager/pager.c:426
+#: ../plugins/pager/pager.c:429
 msgid "Switch workspaces using the mouse wheel"
 msgstr "マウスホイールを使用してワークスペースを切り替える"
 
-#: ../plugins/pager/pager.c:434
+#: ../plugins/pager/pager.c:437
 msgid "Show workspace names"
-msgstr "ワークスペースアクションを表示する"
+msgstr "ワークスペース名を表示する"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator or Spacing"
-msgstr "セパレータまたは間隔"
+msgstr "セパレータまたはスペース"
 
 #: ../plugins/separator/separator.c:430
 msgid "Separator Style"
@@ -597,13 +600,15 @@ msgstr "取っ手(_H)"
 msgid "_Dots"
 msgstr "点(_D)"
 
+# Tip help
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
-msgstr "隠したウィンドウを元に戻す"
+msgstr "隠したウィンドウを元に戻します"
 
+# Tip help
 #: ../plugins/showdesktop/showdesktop.c:34
 msgid "Hide windows and show desktop"
-msgstr "ウィンドウを隠してデスクトップを表示する"
+msgstr "ウィンドウを隠してデスクトップを表示します"
 
 #. create a dialog
 #. create dialog
@@ -615,12 +620,12 @@ msgstr "システムトレイ"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
 msgid "There is already a system tray running on this screen"
-msgstr "この画面には既に実行しているシステムトレイがあります"
+msgstr "この画面にはすでに実行しているシステムトレイがあります"
 
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
 msgid "The tray manager lost selection"
-msgstr "トレイマネージャーはセレクションを失いました"
+msgstr "トレイマネージャはセレクションを失いました"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:280
 msgid "Are you sure you want to clear the list of known applications?"
@@ -684,7 +689,7 @@ msgstr "ワークスペース %d を削除してもよろしいですか?"
 #: ../plugins/windowlist/windowlist.c:264
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr "ワークスペース「%s」を削除してもよろしいですか?"
+msgstr "ワークスペース '%s' を削除してもよろしいですか?"
 
 #: ../plugins/windowlist/windowlist.c:477
 #, c-format
@@ -694,7 +699,7 @@ msgstr "ワークスペース %d"
 #: ../plugins/windowlist/windowlist.c:592
 #: ../plugins/windowlist/windowlist.c:598
 msgid "Add workspace"
-msgstr "ワークスペースを追加"
+msgstr "ワークスペースの追加"
 
 #: ../plugins/windowlist/windowlist.c:617
 #, c-format
@@ -704,7 +709,7 @@ msgstr "ワークスペース %d を削除"
 #: ../plugins/windowlist/windowlist.c:618
 #, c-format
 msgid "Remove Workspace '%s'"
-msgstr "ワークスペース「%s」を削除"
+msgstr "ワークスペース '%s' を削除"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
@@ -714,12 +719,8 @@ msgid "Window List"
 msgstr "ウィンドウリスト"
 
 #: ../plugins/windowlist/windowlist-dialog.c:150
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"アプケーションが何らかの注意を促す時に、<i>緊急通知</i>機能によってボタンが点"
-"滅します。"
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "アプケーションが何らかの注意を促す時に、<i>緊急通知</i>機能によってボタンが点滅します。"
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:157
@@ -758,14 +759,6 @@ msgstr "アプリケーションアイコンを表示する(_P)"
 msgid "Show wor_kspace actions"
 msgstr "ワークスペースアクションを表示する(_K)"
 
-#: ../mcs-plugin/plugin.c:39
-msgid "Failed to launch 'xfce4-panel -c'"
-msgstr "'xfce4-panel -c' を実行できませんでした"
-
-#: ../mcs-plugin/plugin.c:57
-msgid "Panel"
-msgstr "パネル"
-
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "アクションボタン"
@@ -784,19 +777,20 @@ msgstr "実行している全てのアプリケーションのアイコンを表
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
-msgstr "ランチャー"
+msgstr "ランチャ"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "オプションでメニューが付くプログラムランチャーです"
+msgstr "オプションでメニューが付くプログラムランチャです"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
 msgid "Miniature view of all virtual desktops"
 msgstr "全ての仮想デスクトップのミニチュアを表示します"
 
+# In ja translation: Changed more appropriately
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "パネルのアイテム間に隙間か棒線を追加します"
+msgstr "パネルのアイテム間に区切りか空間を加えます"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
@@ -818,13 +812,11 @@ msgstr "実行している全てのアプリケーションを表示します"
 msgid "Show list of available windows"
 msgstr "利用可能なウィンドウのリストを表示します"
 
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel"
+msgstr "パネル"
+
+#: ../settings/xfce4-panel-manager.desktop.in.h:4
 msgid "Xfce 4 Panel Manager"
-msgstr "Xfce 4 パネルマネージャー"
+msgstr "Xfce 4 パネルマネージャ"
 
-#, fuzzy
-#~ msgid "Failed to register the system tray for screen %d"
-#~ msgstr "システムトレイを登録できません: %s"
-
-#~ msgid "Show application _names"
-#~ msgstr "アプリケーション名を表示する(_N)"
