@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-12 12:57+0100\n"
-"PO-Revision-Date: 2008-11-01 23:00+0100\n"
+"PO-Revision-Date: 2008-12-31 03:33+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "Správce souborů"
 
 #: ../config/launcher-9.rc.in.h:2
 msgid "Manage files and folders"
-msgstr "Spravovat soubory a adresáře"
+msgstr "Spravovat soubory a složky"
 
 #: ../config/launcher-10.rc.in.h:1
 msgid "Surf the internet"
@@ -58,11 +58,11 @@ msgstr "Položka byla neočekávaně odstraněna: \"%s\"."
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:606
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "Odstranit \"%s\"?"
+msgstr "Odebrat \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
 msgid "The item will be removed from the panel and its configuration will be lost."
-msgstr "Položka bude odstraněna z panelu a její konfigurace ztracena."
+msgstr "Položka bude odebrána z panelu a její konfigurace ztracena."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:837
@@ -81,7 +81,7 @@ msgstr "Přesunout"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:885
 msgid "Remove"
-msgstr "Odstranit"
+msgstr "Odebrat"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:902
 msgid "Add New Item"
@@ -130,7 +130,7 @@ msgstr "Není možné odstranit poslední panel. Chcete ukončit program?"
 #: ../panel/panel-app.c:920
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Odstranit Panel \"%d\"?"
+msgstr "Odstranit panel \"%d\"?"
 
 #: ../panel/panel-app.c:924
 msgid "The selected panel and all its items will be removed."
@@ -188,12 +188,12 @@ msgstr "Prosíme, abyste chyby hlásili na adresu <%s>."
 
 #: ../panel/main.c:148
 msgid "xfce4-panel already running"
-msgstr "aplikace xfce4-panel je již spuštěna"
+msgstr "Aplikace xfce4-panel je již spuštěna"
 
 #. restart
 #: ../panel/main.c:160
 msgid "Restarting xfce4-panel..."
-msgstr "Restartuji aplikaci xfce4-panel"
+msgstr "Restart aplikace xfce4-panel..."
 
 #: ../panel/panel-dialogs.c:189
 #, c-format
@@ -206,7 +206,7 @@ msgstr "Přidat položky do Panelu"
 
 #: ../panel/panel-dialogs.c:665
 msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
-msgstr "Přetáhněte položky ze seznamu na panel nebo je odstraňte z panelu přetažením do seznamu."
+msgstr "Přetáhněte položky ze seznamu na panel nebo je odeberte z panelu přetažením do seznamu."
 
 #: ../panel/panel-dialogs.c:682
 msgid "Available Items"
@@ -349,7 +349,7 @@ msgstr "Panel %d"
 
 #: ../panel/panel-dialogs.c:1643
 msgid "Remove Panel"
-msgstr "Odstranit Panel"
+msgstr "Odstranit panel"
 
 #: ../panel/panel-dialogs.c:1656
 msgid "New Panel"
@@ -591,7 +591,7 @@ msgstr "Zobrazit názvy pracovních ploch"
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator or Spacing"
-msgstr "Oddělovač"
+msgstr "Oddělovač nebo rozestupy"
 
 #: ../plugins/separator/separator.c:430
 msgid "Separator Style"
@@ -636,7 +636,7 @@ msgstr "Upozorňovací oblast"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
 msgid "There is already a system tray running on this screen"
-msgstr "Na této obrazovce již jedna upozorňovací oblast běží"
+msgstr "Na této obrazovce je již jedna upozorňovací oblast spuštěna"
 
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
@@ -660,7 +660,7 @@ msgstr "Skryté aplikace"
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "Nezdařilo se získat správce výběru pro obrazovku %d"
+msgstr "Nepodařilo se získat správce výběru pro obrazovku %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:209
@@ -687,7 +687,7 @@ msgstr "Zobr_azovat úlohy ze všech pracovních ploch"
 #. keep order in sync with WnckTasklistGroupingType
 #: ../plugins/tasklist/tasklist-dialogs.c:222
 msgid "Never group tasks"
-msgstr "Nikdy neseskupovat úkoly"
+msgstr "Nikdy neseskupovat úlohy"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Automatically group tasks"
@@ -700,12 +700,12 @@ msgstr "Vždy seskupovat úkoly"
 #: ../plugins/windowlist/windowlist.c:263
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr "Jste si jisti, že chcete odebrat pracovní plochu %d?"
+msgstr "Opravdu chcete odebrat pracovní plochu %d?"
 
 #: ../plugins/windowlist/windowlist.c:264
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr "Jste si jisti, že chcete odebrat pracovní plochu '%s'?"
+msgstr "Opravdu chcete odebrat pracovní plochu '%s'?"
 
 #: ../plugins/windowlist/windowlist.c:477
 #, c-format
@@ -785,11 +785,11 @@ msgstr "Panel"
 
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
-msgstr "Akční tlačítka"
+msgstr "Tlačítka akcí"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
-msgstr "Odhlásit se a uzamknout obrazovku"
+msgstr "Odhlašování a uzamykání obrazovky"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
@@ -797,7 +797,7 @@ msgstr "Kolik je hodin?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr "Zobrazovat ikony všech běžících aplikací"
+msgstr "Zobrazovat ikony všech spuštěných aplikací"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
@@ -813,27 +813,27 @@ msgstr "Zmenšený pohled na všechny virtuální pracovní plochy"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "Vloží mezeru nebo řádek mezi položky panelu"
+msgstr "Vkládá prázdný prostor nebo řádek mezi položky panelu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Show Desktop"
-msgstr "Zobrazit pracovní plochu"
+msgstr "Zobrazuje pracovní plochu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Toggle desktop show/hide"
-msgstr "Zobrazit/skrýt pracovní plochu"
+msgstr "Zobrazuje a skrývá pracovní plochu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Show notification icons"
-msgstr "Zobrazit oznamovací ikony"
+msgstr "Zobrazuje oznamovací ikony"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Show all running applications"
-msgstr "Zobrazit všechny běžící aplikace"
+msgstr "Zobrazuje všechny spuštěné aplikace"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Show list of available windows"
-msgstr "Zobrazit seznam všech dostupných oken"
+msgstr "Zobrazuje seznam všech dostupných oken"
 
 #: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
 msgid "Xfce 4 Panel Manager"
