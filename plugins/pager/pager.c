@@ -376,57 +376,46 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), GTK_STOCK_PROPERTIES);
 
     g_signal_connect (dlg, "response", G_CALLBACK (pager_dialog_response),
                       pager);
 
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox,
                         TRUE, TRUE, 0);
 
-    hbox = gtk_hbox_new (FALSE, 8);
+    hbox = gtk_hbox_new (FALSE, 6);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
     if (xfce_panel_plugin_get_orientation (plugin) ==
             GTK_ORIENTATION_HORIZONTAL)
     {
-        label = gtk_label_new (_("Number of rows:"));
+        label = gtk_label_new_with_mnemonic (_("Number _of rows:"));
     }
     else
     {
-        label = gtk_label_new (_("Number of columns:"));
+        label = gtk_label_new_with_mnemonic (_("Number _of columns:"));
     }
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     max = wnck_screen_get_workspace_count (pager->screen);
 
-    if (max > 1)
-    {
-        spin = gtk_spin_button_new_with_range (1, max, 1);
-        gtk_widget_show (spin);
-        gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+    spin = gtk_spin_button_new_with_range (1, max, 1);
+    gtk_widget_show (spin);
+    gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
 
-        gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), pager->rows);
+    gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), pager->rows);
 
-        g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed),
-                          pager);
-    }
-    else
-    {
-        label = gtk_label_new ("1");
+    g_signal_connect (spin, "value-changed", G_CALLBACK (rows_changed),
+                      pager);
 
-        gtk_widget_show (label);
-        gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
-    }
-
-    scrolling = gtk_check_button_new_with_mnemonic (_("Switch workspaces using the mouse wheel"));
+    scrolling = gtk_check_button_new_with_mnemonic (_("Switch workspaces using the mouse _wheel"));
     gtk_widget_show (scrolling);
     gtk_box_pack_start (GTK_BOX (vbox), scrolling, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scrolling), pager->scrolling);
@@ -434,7 +423,7 @@ pager_properties_dialog (XfcePanelPlugin *plugin, Pager *pager)
     g_signal_connect (scrolling, "toggled",
         G_CALLBACK (workspace_scrolling_toggled), pager);
 
-    show_names = gtk_check_button_new_with_mnemonic (_("Show workspace names"));
+    show_names = gtk_check_button_new_with_mnemonic (_("Show workspace _names"));
     gtk_widget_show (show_names);
     gtk_box_pack_start (GTK_BOX (vbox), show_names, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (show_names), pager->show_names);

@@ -118,10 +118,11 @@ xfce_tray_dialogs_icon (GtkIconTheme *icon_theme,
     const gchar *p;
     const gchar *fallback[][2] =
     {
-        /* application name ,  fallback icon name or path */
-        { "xfce-mcs-manager", "input-mouse" },
-        { "bluetooth-applet", "stock_bluetooth" },
-        { "gdl_box",          "/opt/google/desktop/resource/gdl_small.png" }
+        /* application name ,       fallback icon name or path */
+        { "xfce-mcs-manager",      "input-mouse" },
+        { "bluetooth-applet",      "stock_bluetooth" },
+        { "gdl_box",               "/opt/google/desktop/resource/gdl_small.png" },
+        { "networkmanager applet", "network-wireless" }
     };
 
     /* return null on no name */
@@ -330,7 +331,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     xfce_panel_plugin_block_menu (plugin->panel_plugin);
 
     /* create dialog */
-    dialog = xfce_titled_dialog_new_with_buttons (_("System Tray"),
+    dialog = xfce_titled_dialog_new_with_buttons (_("Notification Area"),
                                                   NULL,
                                                   GTK_DIALOG_NO_SEPARATOR,
                                                   GTK_STOCK_CLEAR, GTK_RESPONSE_YES,
@@ -338,7 +339,7 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
                                                   NULL);
     gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin)));
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PROPERTIES);
     gtk_window_set_default_size (GTK_WINDOW (dialog), 280, 400);
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);

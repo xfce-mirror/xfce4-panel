@@ -1,10 +1,8 @@
 # $Id$
 
-iconsdir = $(datadir)/icons/hicolor/16x16/apps
+iconsdir = $(datadir)/icons/hicolor/32x32/apps
 
 icons_DATA =								\
-	xfce-system-lock.png						\
-	xfce-system-exit.png						\
 	xfce4-panel.png
 
 EXTRA_DIST =								\

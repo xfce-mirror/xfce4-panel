@@ -42,7 +42,7 @@
 #include "panel-dnd.h"
 #include "panel-dialogs.h"
 
-#define BORDER  8
+#define BORDER  6
 
 typedef struct _PanelItemsDialog PanelItemsDialog;
 typedef struct _PanelManagerDialog PanelManagerDialog;
@@ -587,7 +587,6 @@ add_items_dialog (GPtrArray *panels,
     PanelItemsDialog *pid;
     Panel            *panel;
     GtkWidget        *dlg, *vbox, *img, *hbox, *label;
-    gchar            *markup;
 
     if (items_dialog_widget)
     {
@@ -608,13 +607,13 @@ add_items_dialog (GPtrArray *panels,
 
     /* main dialog widget */
     items_dialog_widget = pid->dlg = dlg =
-        xfce_titled_dialog_new_with_buttons (_("Add Items to the Panel"), NULL,
+        xfce_titled_dialog_new_with_buttons (_("Add New Items"), NULL,
                                              GTK_DIALOG_NO_SEPARATOR,
                                              GTK_STOCK_HELP, GTK_RESPONSE_HELP,
                                              GTK_STOCK_CLOSE, GTK_RESPONSE_CANCEL,
                                              GTK_STOCK_ADD, GTK_RESPONSE_OK,
                                              NULL);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-panel");
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), GTK_STOCK_ADD);
 
     g_signal_connect (G_OBJECT (dlg), "response",
                       G_CALLBACK (item_dialog_response), pid);
@@ -624,46 +623,40 @@ add_items_dialog (GPtrArray *panels,
                                   G_CALLBACK (items_dialog_panel_destroyed), pid);
 
     pid->items_box = vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
+    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox, TRUE, TRUE, 0);
 
     /* info */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 
-    img = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO,
-                                    GTK_ICON_SIZE_LARGE_TOOLBAR);
-    gtk_misc_set_alignment (GTK_MISC (img), 0.0f, 0.5f);
+    img = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_LARGE_TOOLBAR);
     gtk_widget_show (img);
     gtk_box_pack_start (GTK_BOX (hbox), img, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Drag items from the list to a panel or remove "
+    label = gtk_label_new (_("Drag items from the list to a panel or remove\n"
                              "them by dragging them back to the list."));
-    gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
     gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
 
     /* treeview */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (NULL);
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 1.0f);
+    label = gtk_label_new_with_mnemonic (_("_Search:"));
+    gtk_misc_set_alignment (GTK_MISC (label), 1.0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, TRUE, TRUE, 0);
-
-    markup = g_strdup_printf ("<b>%s</b>", _("Available Items"));
-    gtk_label_set_markup (GTK_LABEL (label), markup);
-    g_free (markup);
 
     /* the list filter entry (FIXME: Add tooltip? Jasper?) */
     pid->search_entry = frap_icon_entry_new ();
     frap_icon_entry_set_stock_id (FRAP_ICON_ENTRY (pid->search_entry), GTK_STOCK_FIND);
     gtk_widget_show (pid->search_entry);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), pid->search_entry);
     gtk_box_pack_end (GTK_BOX (hbox), pid->search_entry, FALSE, FALSE, 0);
 
     add_item_treeview (pid);
@@ -1012,13 +1005,13 @@ add_position_options (GtkBox             *box,
     gtk_box_pack_start (GTK_BOX (vbox2), hbox, TRUE, TRUE, 0);
 
     pmd->fixed =
-        gtk_radio_button_new_with_label (NULL, _("Fixed Position"));
+        gtk_radio_button_new_with_mnemonic (NULL, _("_Fixed position"));
     gtk_widget_show (pmd->fixed);
     gtk_box_pack_start (GTK_BOX (hbox), pmd->fixed, FALSE, FALSE, 0);
 
     pmd->floating =
-        gtk_radio_button_new_with_label_from_widget (
-                GTK_RADIO_BUTTON (pmd->fixed), _("Freely Moveable"));
+        gtk_radio_button_new_with_mnemonic_from_widget (
+                GTK_RADIO_BUTTON (pmd->fixed), _("Freely _moveable"));
     gtk_widget_show (pmd->floating);
     gtk_box_pack_start (GTK_BOX (hbox), pmd->floating, FALSE, FALSE, 0);
 
@@ -1415,7 +1408,7 @@ add_appearance_options (GtkBox             *box,
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (table), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Size (pixels):"));
+    label = gtk_label_new_with_mnemonic (_("_Size (pixels):"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_widget_show (label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -1423,6 +1416,7 @@ add_appearance_options (GtkBox             *box,
 
     pmd->size = gtk_hscale_new_with_range (MIN_SIZE, MAX_SIZE, 2);
     gtk_scale_set_value_pos (GTK_SCALE (pmd->size), GTK_POS_LEFT);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), pmd->size);
     gtk_range_set_update_policy (GTK_RANGE (pmd->size), GTK_UPDATE_DELAYED);
     gtk_widget_show (pmd->size);
     gtk_box_pack_start (GTK_BOX (hbox), pmd->size, TRUE, TRUE, 0);
@@ -1445,7 +1439,7 @@ add_appearance_options (GtkBox             *box,
         gtk_widget_show (hbox);
         gtk_box_pack_start (GTK_BOX (table), hbox, FALSE, FALSE, 0);
 
-        label = gtk_label_new (_("Transparency (%):"));
+        label = gtk_label_new_with_mnemonic (_("_Transparency (%):"));
         gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
         gtk_widget_show (label);
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -1453,6 +1447,7 @@ add_appearance_options (GtkBox             *box,
 
         pmd->transparency = gtk_hscale_new_with_range (0, 100, 5);
         gtk_scale_set_value_pos (GTK_SCALE (pmd->transparency), GTK_POS_LEFT);
+        gtk_label_set_mnemonic_widget (GTK_LABEL (label), pmd->transparency);
         gtk_range_set_update_policy (GTK_RANGE (pmd->transparency),
                                      GTK_UPDATE_DELAYED);
         gtk_widget_show (pmd->transparency);
@@ -1470,8 +1465,7 @@ add_appearance_options (GtkBox             *box,
         gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
         gtk_size_group_add_widget (size_group, label);
 
-        pmd->activetrans =
-            gtk_check_button_new_with_label (_("Make active panel opaque"));
+        pmd->activetrans = gtk_check_button_new_with_mnemonic (_("Make active panel _opaque"));
         gtk_widget_show (pmd->activetrans);
         gtk_box_pack_start (GTK_BOX (hbox), pmd->activetrans, TRUE, TRUE, 0);
 
@@ -1618,7 +1612,7 @@ create_panel_selector (PanelManagerDialog *pmd)
     gtk_widget_show (img);
     gtk_container_add (GTK_CONTAINER (pmd->rm_panel), img);
 
-    gtk_tooltips_set_tip (pmd->tips, pmd->rm_panel, _("Remove Panel"), NULL);
+    gtk_tooltips_set_tip (pmd->tips, pmd->rm_panel, _("Remove the currently selected panel"), NULL);
 
     g_signal_connect (G_OBJECT (pmd->rm_panel), "clicked",
                       G_CALLBACK (remove_panel), pmd);
@@ -1631,7 +1625,7 @@ create_panel_selector (PanelManagerDialog *pmd)
     gtk_widget_show (img);
     gtk_container_add (GTK_CONTAINER (pmd->add_panel), img);
 
-    gtk_tooltips_set_tip (pmd->tips, pmd->add_panel, _("New Panel"), NULL);
+    gtk_tooltips_set_tip (pmd->tips, pmd->add_panel, _("Add a new panel"), NULL);
 
     g_signal_connect (G_OBJECT (pmd->add_panel), "clicked",
                       G_CALLBACK (add_panel), pmd);
@@ -1672,7 +1666,7 @@ void
 panel_manager_dialog (GPtrArray *panels)
 {
     PanelManagerDialog *pmd;
-    GtkWidget          *vbox, *sel;
+    GtkWidget          *vbox, *sel, *separator;
     Panel              *panel;
 
     if (panel_dialog_widget)
@@ -1691,22 +1685,23 @@ panel_manager_dialog (GPtrArray *panels)
 
     /* main dialog widget */
     panel_dialog_widget = pmd->dlg =
-        xfce_titled_dialog_new_with_buttons (_("Panel Manager"), NULL,
+        xfce_titled_dialog_new_with_buttons (_("Panel"), NULL,
                                              GTK_DIALOG_NO_SEPARATOR,
                                              GTK_STOCK_HELP, GTK_RESPONSE_HELP,
                                              GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                                              NULL);
     gtk_dialog_set_default_response (GTK_DIALOG (pmd->dlg), GTK_RESPONSE_OK);
     gtk_window_set_icon_name (GTK_WINDOW (pmd->dlg), "xfce4-panel");
+    xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG (panel_dialog_widget), _("Customize the panel settings"));
 
     pmd->tips = gtk_tooltips_new ();
     g_object_ref (G_OBJECT (pmd->tips));
     gtk_object_sink (GTK_OBJECT (pmd->tips));
 
     /* main container */
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_widget_show (vbox);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
+    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pmd->dlg)->vbox), vbox,
                         TRUE, TRUE, 0);
 
@@ -1716,6 +1711,10 @@ panel_manager_dialog (GPtrArray *panels)
     sel = create_panel_selector (pmd);
     gtk_widget_show (sel);
     gtk_box_pack_start (GTK_BOX (vbox), sel, FALSE, FALSE, 0);
+    
+    separator = gtk_hseparator_new ();
+    gtk_box_pack_start (GTK_BOX (vbox), separator, FALSE, FALSE, 0);
+    gtk_widget_show (separator);
 
     /* appearance */
     add_appearance_options (GTK_BOX (vbox), pmd);

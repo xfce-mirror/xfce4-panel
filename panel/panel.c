@@ -592,7 +592,7 @@ _panel_create_menu (Panel *panel)
 
     if (xfce_allow_panel_customization ())
     {
-        mi = gtk_image_menu_item_new_with_label (_("Customize Panel"));
+        mi = gtk_image_menu_item_new_with_label (_("Customize Panel..."));
         gtk_widget_show (mi);
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -603,7 +603,7 @@ _panel_create_menu (Panel *panel)
         g_signal_connect (mi, "activate", G_CALLBACK (panel_app_customize),
                           NULL);
 
-        mi = gtk_image_menu_item_new_with_label (_("Add Items"));
+        mi = gtk_image_menu_item_new_with_label (_("Add New Items..."));
         gtk_widget_show (mi);
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 

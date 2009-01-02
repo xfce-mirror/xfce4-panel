@@ -113,7 +113,6 @@ static void        launcher_dialog_save_button               (GtkWidget         
                                                               LauncherDialog        *ld);
 static void        launcher_dialog_update_entries            (LauncherDialog        *ld);
 static void        launcher_dialog_update_icon               (LauncherDialog        *ld);
-static void        launcher_dialog_folder_chooser            (LauncherDialog        *ld);
 static void        launcher_dialog_command_chooser           (LauncherDialog        *ld);
 static void        launcher_dialog_icon_chooser              (LauncherDialog        *ld);
 static void        launcher_dialog_tree_update_row           (LauncherDialog        *ld,
@@ -446,41 +445,53 @@ launcher_dialog_save_entry (GtkWidget      *entry,
                             LauncherDialog *ld)
 {
     const gchar *text;
+    gchar       *filename;
 
     /* quit if locked or no active entry set */
     if (G_UNLIKELY (ld->updating == TRUE || ld->entry == NULL))
         return;
 
-    /* get entry text */
-    text = gtk_entry_get_text (GTK_ENTRY (entry));
-
-    /* set text to null, if there is no valid text */
-    if (G_UNLIKELY (text == NULL || *text == '\0'))
-        text = NULL;
-
-    /* save new value */
-    if (entry == ld->entry_name)
+    /* handle working directory changes */
+    if (entry == ld->entry_path)
     {
-        g_free (ld->entry->name);
-        ld->entry->name = g_strdup (text);
-
-        /* update tree, when triggered by widget */
-        launcher_dialog_tree_update_row (ld, COLUMN_NAME);
+        filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (ld->entry_path));
+        if (exo_str_is_equal (ld->entry->path, filename) == FALSE)
+        {
+            g_free (ld->entry->path);
+            ld->entry->path = filename;
+        }
+        else
+        {
+            g_free (filename);
+            return;
+        }
     }
-    else if (entry == ld->entry_comment)
+    else
     {
-        g_free (ld->entry->comment);
-        ld->entry->comment = g_strdup (text);
-    }
-    else if (entry == ld->entry_exec)
-    {
-        g_free (ld->entry->exec);
-        ld->entry->exec = text ? xfce_expand_variables (text, NULL) : NULL;
-    }
-    else if (entry == ld->entry_path)
-    {
-        g_free (ld->entry->path);
-        ld->entry->path = text ? xfce_expand_variables (text, NULL) : NULL;
+        /* set text to null, if there is no valid text */
+        text = gtk_entry_get_text (GTK_ENTRY (entry));
+        if (G_UNLIKELY (text == NULL || *text == '\0'))
+            text = NULL;
+
+        /* save new value */
+        if (entry == ld->entry_name)
+        {
+            g_free (ld->entry->name);
+            ld->entry->name = g_strdup (text);
+
+            /* update tree, when triggered by widget */
+            launcher_dialog_tree_update_row (ld, COLUMN_NAME);
+        }
+        else if (entry == ld->entry_comment)
+        {
+            g_free (ld->entry->comment);
+            ld->entry->comment = g_strdup (text);
+        }
+        else if (entry == ld->entry_exec)
+        {
+            g_free (ld->entry->exec);
+            ld->entry->exec = text ? xfce_expand_variables (text, NULL) : NULL;
+        }
     }
 
     /* update panel */
@@ -521,6 +532,8 @@ launcher_dialog_save_button (GtkWidget      *button,
 static void
 launcher_dialog_update_entries (LauncherDialog *ld)
 {
+    gchar *dir;
+    
     /* quit if locked or no active entry set */
     if (G_UNLIKELY (ld->updating == TRUE || ld->entry == NULL))
         return;
@@ -538,8 +551,15 @@ launcher_dialog_update_entries (LauncherDialog *ld)
     gtk_entry_set_text (GTK_ENTRY (ld->entry_exec),
                         (ld->entry->exec != NULL) ? ld->entry->exec : "");
 
-    gtk_entry_set_text (GTK_ENTRY (ld->entry_path),
-                        (ld->entry->path != NULL) ? ld->entry->path : "");
+    if (ld->entry->path != NULL)
+      dir = ld->entry->path;
+    else
+      dir = g_get_current_dir ();
+
+    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (ld->entry_path), dir);
+
+    if (dir != ld->entry->path)
+      g_free (dir);
 
     /* set toggle buttons */
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ld->entry_terminal),
@@ -600,48 +620,6 @@ launcher_dialog_update_icon (LauncherDialog *ld)
 /**
  * Icon and command search dialogs
  **/
-static void
-launcher_dialog_folder_chooser (LauncherDialog *ld)
-{
-    GtkWidget *chooser;
-    gchar     *path;
-
-    chooser = gtk_file_chooser_dialog_new (_("Select a Directory"),
-                                           GTK_WINDOW (gtk_widget_get_toplevel (ld->treeview)),
-                                           GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                           GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                           GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-                                           NULL);
-
-    /* only here */
-    gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
-
-    /* use the bindir as default folder */
-    gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser), BINDIR);
-
-    /* select folder from field */
-    if (G_LIKELY (ld->entry->path != NULL))
-    {
-        if (G_LIKELY (g_path_is_absolute (ld->entry->path)))
-            gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (chooser), ld->entry->path);
-    }
-
-    /* run the chooser dialog */
-    if (gtk_dialog_run (GTK_DIALOG (chooser)) == GTK_RESPONSE_ACCEPT)
-    {
-        path = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
-
-        /* set the new entry text */
-        gtk_entry_set_text (GTK_ENTRY (ld->entry_path), path);
-
-        /* cleanup */
-        g_free (path);
-    }
-
-    /* destroy dialog */
-    gtk_widget_destroy (chooser);
-}
-
 static void
 launcher_dialog_command_chooser (LauncherDialog *ld)
 {
@@ -1139,10 +1117,10 @@ launcher_dialog_add_properties (LauncherDialog *ld)
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
     /* entry name field */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new_with_mnemonic (_("_Name"));
+    label = gtk_label_new_with_mnemonic (_("_Name:"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
@@ -1157,10 +1135,10 @@ launcher_dialog_add_properties (LauncherDialog *ld)
                       G_CALLBACK (launcher_dialog_save_entry), ld);
 
     /* entry comment field */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new_with_mnemonic (_("_Description"));
+    label = gtk_label_new_with_mnemonic (_("_Description:"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
@@ -1176,10 +1154,10 @@ launcher_dialog_add_properties (LauncherDialog *ld)
                       G_CALLBACK (launcher_dialog_save_entry), ld);
 
     /* entry icon chooser button */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new_with_mnemonic (_("_Icon"));
+    label = gtk_label_new_with_mnemonic (_("_Icon:"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
@@ -1194,10 +1172,10 @@ launcher_dialog_add_properties (LauncherDialog *ld)
                               G_CALLBACK (launcher_dialog_icon_chooser), ld);
 
     /* entry command field and button */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new_with_mnemonic (_("Co_mmand"));
+    label = gtk_label_new_with_mnemonic (_("Co_mmand:"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
@@ -1221,34 +1199,29 @@ launcher_dialog_add_properties (LauncherDialog *ld)
     gtk_container_add (GTK_CONTAINER (button), image);
 
     /* working directory field */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new_with_mnemonic (_("_Working Directory"));
+    label = gtk_label_new_with_mnemonic (_("_Working Directory:"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
 
     gtk_size_group_add_widget (sg, label);
 
-    ld->entry_path = gtk_entry_new ();
+    ld->entry_path = gtk_file_chooser_button_new (_("Select a Working Directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
     gtk_box_pack_start (GTK_BOX (hbox), ld->entry_path, TRUE, TRUE, 0);
-
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), ld->entry_path);
 
-    g_signal_connect (G_OBJECT (ld->entry_path), "changed",
+#if 0 /* GTK_CHECK_VERSION (2, 12, 0) */
+    g_signal_connect (G_OBJECT (ld->entry_path), "file-set",
                       G_CALLBACK (launcher_dialog_save_entry), ld);
-
-    button = gtk_button_new ();
-    gtk_box_pack_start (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-
-    g_signal_connect_swapped (G_OBJECT (button), "clicked",
-                              G_CALLBACK (launcher_dialog_folder_chooser), ld);
-
-    image = gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
-    gtk_container_add (GTK_CONTAINER (button), image);
+#else
+    g_signal_connect (G_OBJECT (ld->entry_path), "selection-changed",
+                      G_CALLBACK (launcher_dialog_save_entry), ld);
+#endif
 
     /* entry terminal toggle button with spacer */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
     label = gtk_alignment_new (0, 0, 0, 0);
@@ -1264,7 +1237,7 @@ launcher_dialog_add_properties (LauncherDialog *ld)
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     /* startup notification */
-    hbox = gtk_hbox_new (FALSE, BORDER);
+    hbox = gtk_hbox_new (FALSE, BORDER * 2);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
     label = gtk_alignment_new (0, 0, 0, 0);
@@ -1548,7 +1521,7 @@ launcher_dialog_show (LauncherPlugin  *launcher)
     launcher->move_first = FALSE;
 
     /* create new dialog */
-    dialog = xfce_titled_dialog_new_with_buttons (_("Program Launcher"),
+    dialog = xfce_titled_dialog_new_with_buttons (_("Launcher"),
                                                   NULL,
                                                   GTK_DIALOG_NO_SEPARATOR,
                                                   GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -1556,7 +1529,7 @@ launcher_dialog_show (LauncherPlugin  *launcher)
                                                   NULL);
     gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (launcher->panel_plugin)));
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PROPERTIES);
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
     /* connect dialog to plugin, so we can destroy it when plugin is closed */
@@ -1567,7 +1540,7 @@ launcher_dialog_show (LauncherPlugin  *launcher)
     /* added the horizontal panes */
     paned = gtk_hpaned_new ();
     gtk_box_pack_start (GTK_BOX (dialog_vbox), paned, TRUE, TRUE, 0);
-    gtk_container_set_border_width (GTK_CONTAINER (paned), BORDER - 2);
+    gtk_container_set_border_width (GTK_CONTAINER (paned), BORDER);
 
     vbox = gtk_vbox_new (FALSE, BORDER);
     gtk_paned_pack1 (GTK_PANED (paned), vbox, FALSE, FALSE);

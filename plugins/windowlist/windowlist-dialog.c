@@ -127,17 +127,15 @@ windowlist_properties (XfcePanelPlugin *plugin,
                            gtk_widget_get_screen (GTK_WIDGET (plugin)));
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), GTK_STOCK_PROPERTIES);
 
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-
-    vbox = gtk_vbox_new (FALSE, BORDER);
-    gtk_container_set_border_width (GTK_CONTAINER (vbox), BORDER - 2);
+    vbox = gtk_vbox_new (FALSE, 6);
+    gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox,
                         TRUE, TRUE, 0);
 
     /* Urgency help */
-    hbox = gtk_hbox_new (FALSE, 6);
+    hbox = gtk_hbox_new (FALSE, 12);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, TRUE, 0);
 
     image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO,
@@ -213,7 +211,7 @@ windowlist_properties (XfcePanelPlugin *plugin,
     gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, TRUE, 0);
     gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
 
-    vbox2 = gtk_vbox_new (FALSE, 4);
+    vbox2 = gtk_vbox_new (FALSE, 6);
     gtk_container_add (GTK_CONTAINER (alignment), vbox2);
 
     button = wd->show_all_workspaces =

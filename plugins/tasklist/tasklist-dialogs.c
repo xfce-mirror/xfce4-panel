@@ -150,28 +150,26 @@ tasklist_dialogs_configure (TasklistPlugin *tasklist)
     g_object_set_data (G_OBJECT (tasklist->panel_plugin), I_("dialog"), dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), GTK_STOCK_PROPERTIES);
 
     g_signal_connect (G_OBJECT (dlg), "response",
                       G_CALLBACK (tasklist_dialog_response), tasklist);
 
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-
-    mainvbox = gtk_vbox_new (FALSE, 8);
-    gtk_container_set_border_width (GTK_CONTAINER (mainvbox), 5);
+    mainvbox = gtk_vbox_new (FALSE, 6);
+    gtk_container_set_border_width (GTK_CONTAINER (mainvbox), 6);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), mainvbox,
                         TRUE, TRUE, 0);
 
     /* Size */
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
 
     frame = xfce_create_framebox_with_content (_("Appearance"), vbox);
     gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);
 
-    hbox = gtk_hbox_new (FALSE, 8);
+    hbox = gtk_hbox_new (FALSE, 12);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Minimum Width:"));
+    label = gtk_label_new_with_mnemonic (_("_Minimum width:"));
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
@@ -179,32 +177,33 @@ tasklist_dialogs_configure (TasklistPlugin *tasklist)
     spin = gtk_spin_button_new_with_range (100, 4000, 10);
     gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), tasklist->width);
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
     g_signal_connect (G_OBJECT (spin), "value-changed",
                       G_CALLBACK (tasklist_width_changed), tasklist);
 
     if (tasklist_using_xinerama (tasklist->panel_plugin))
     {
-        cb = gtk_check_button_new_with_mnemonic (_("Use all available space"));
+        cb = gtk_check_button_new_with_mnemonic (_("Use all available _space"));
         gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb), tasklist->expand);
         g_signal_connect (G_OBJECT (cb), "toggled",
                           G_CALLBACK (tasklist_expand_toggled), tasklist);
     }
 
-    cb = gtk_check_button_new_with_mnemonic (_("Use flat buttons"));
+    cb = gtk_check_button_new_with_mnemonic (_("Use _flat buttons"));
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb), tasklist->flat_buttons);
     g_signal_connect (G_OBJECT (cb), "toggled",
                       G_CALLBACK (tasklist_flat_buttons_toggled), tasklist);
 
-    cb = gtk_check_button_new_with_mnemonic (_("Show handle"));
+    cb = gtk_check_button_new_with_mnemonic (_("Show _handle"));
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb), tasklist->show_handles);
     g_signal_connect (G_OBJECT (cb), "toggled",
                       G_CALLBACK (tasklist_show_handle_toggled), tasklist);
 
     /* Tasks */
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
 
     frame = xfce_create_framebox_with_content (_("Task List"), vbox);
     gtk_box_pack_start (GTK_BOX (mainvbox), frame, FALSE, FALSE, 0);

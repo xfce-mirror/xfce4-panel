@@ -899,7 +899,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-    mi = gtk_image_menu_item_new_with_label (_("Add New Item"));
+    mi = gtk_image_menu_item_new_with_label (_("Add New Items..."));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -910,7 +910,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     g_signal_connect_swapped (G_OBJECT (mi), "activate",
                               G_CALLBACK (_xfce_panel_plugin_customize_items), plugin);
 
-    mi = gtk_image_menu_item_new_with_label (_("Customize Panel"));
+    mi = gtk_image_menu_item_new_with_label (_("Customize Panel..."));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 

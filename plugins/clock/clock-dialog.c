@@ -402,7 +402,7 @@ xfce_clock_dialog_options (ClockPlugin *plugin)
     gtk_container_foreach (GTK_CONTAINER (bin), (GtkCallback) gtk_widget_destroy, NULL);
 
     /* main vbox */
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_container_add (GTK_CONTAINER (bin), vbox);
     gtk_widget_show (vbox);
 
@@ -487,13 +487,13 @@ xfce_clock_dialog_show (ClockPlugin *plugin)
                                                   NULL);
     gtk_window_set_screen (GTK_WINDOW (dialog), gtk_widget_get_screen (GTK_WIDGET (plugin->plugin)));
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dialog), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dialog), GTK_STOCK_PROPERTIES);
     gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CLOSE);
     g_object_set_data (G_OBJECT (plugin->plugin), I_("configure-dialog"), dialog);
     g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (xfce_clock_dialog_response), plugin);
 
     /* main vbox */
-    dialog_vbox = gtk_vbox_new (FALSE, 8);
+    dialog_vbox = gtk_vbox_new (FALSE, 6);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), dialog_vbox, TRUE, TRUE, 0);
     gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox), 6);
     gtk_widget_show (dialog_vbox);
@@ -503,7 +503,7 @@ xfce_clock_dialog_show (ClockPlugin *plugin)
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
     gtk_widget_show (frame);
 
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_container_add (GTK_CONTAINER (bin), vbox);
     gtk_widget_show (vbox);
 
@@ -528,7 +528,7 @@ xfce_clock_dialog_show (ClockPlugin *plugin)
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
     gtk_widget_show (frame);
 
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_container_add (GTK_CONTAINER (bin), vbox);
     gtk_widget_show (vbox);
 

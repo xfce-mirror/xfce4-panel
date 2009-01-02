@@ -417,14 +417,12 @@ separator_properties_dialog (XfcePanelPlugin *plugin,
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), GTK_STOCK_PROPERTIES);
 
     g_signal_connect (dlg, "response", G_CALLBACK (separator_dialog_response),
                       sep);
 
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-
-    vbox = gtk_vbox_new (FALSE, 4);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_widget_show (vbox);
 
     frame = xfce_create_framebox_with_content(_("Separator Style"), vbox);
@@ -434,7 +432,7 @@ separator_properties_dialog (XfcePanelPlugin *plugin,
                         TRUE, TRUE, 0);
 
     /* space */
-    tb = gtk_radio_button_new_with_mnemonic (NULL, _("_Empty Space"));
+    tb = gtk_radio_button_new_with_mnemonic (NULL, _("_Empty space"));
     gtk_widget_show (tb);
     gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
     if (sep->type == SEP_SPACE)
@@ -443,7 +441,7 @@ separator_properties_dialog (XfcePanelPlugin *plugin,
 
     /* expand */
     tb = gtk_radio_button_new_with_mnemonic_from_widget (
-            GTK_RADIO_BUTTON(tb), _("_Expanding Empty Space"));
+            GTK_RADIO_BUTTON(tb), _("E_xpanding empty space"));
     gtk_widget_show (tb);
     gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
     if (sep->type == SEP_EXPAND)

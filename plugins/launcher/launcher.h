@@ -25,7 +25,7 @@
 #include <exo/exo.h>
 #include <libxfce4panel/xfce-panel-plugin.h>
 
-#define BORDER                     (8)
+#define BORDER                     (6)
 #define LAUNCHER_NEW_TOOLTIP_API   (GTK_CHECK_VERSION (2,11,6))
 #define LAUNCHER_ARROW_SIZE        (16)
 #define LAUNCHER_POPUP_DELAY       (225)

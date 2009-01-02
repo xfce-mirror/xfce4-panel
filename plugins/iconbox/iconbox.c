@@ -914,21 +914,19 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), GTK_STOCK_PROPERTIES);
 
     g_signal_connect (dlg, "response", G_CALLBACK (iconbox_dialog_response),
                       iconbox);
 
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
-
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox,
                         TRUE, TRUE, 0);
 
     cb = gtk_check_button_new_with_mnemonic (
-                _("Only show minimized applications"));
+                _("Only show _minimized applications"));
     gtk_widget_show (cb);
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
@@ -937,7 +935,7 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
                       iconbox);
 
     cb = gtk_check_button_new_with_mnemonic (
-                _("Show applications of all workspaces"));
+                _("Show applications of _all workspaces"));
     gtk_widget_show (cb);
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),
@@ -945,7 +943,7 @@ iconbox_properties_dialog (XfcePanelPlugin *plugin, Iconbox *iconbox)
     g_signal_connect (cb, "toggled", G_CALLBACK (all_workspaces_toggled),
                       iconbox);
 
-    cb = gtk_check_button_new_with_mnemonic (_("Use all available space"));
+    cb = gtk_check_button_new_with_mnemonic (_("Use all available _space"));
     gtk_widget_show (cb);
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb),

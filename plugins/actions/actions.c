@@ -414,7 +414,7 @@ actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
 
     xfce_panel_plugin_block_menu (plugin);
     
-    dlg = xfce_titled_dialog_new_with_buttons (_("Panel Actions"), NULL,
+    dlg = xfce_titled_dialog_new_with_buttons (_("Action Buttons"), NULL,
                 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
                 GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
                 NULL);
@@ -425,31 +425,30 @@ actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
     g_object_set_data (G_OBJECT (plugin), "dialog", dlg);
 
     gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_CENTER);
-    gtk_window_set_icon_name (GTK_WINDOW (dlg), "xfce4-settings");
+    gtk_window_set_icon_name (GTK_WINDOW (dlg), GTK_STOCK_PROPERTIES);
     
     g_signal_connect (dlg, "response", G_CALLBACK (actions_dialog_response),
                       action);
-
-    gtk_container_set_border_width (GTK_CONTAINER (dlg), 2);
     
     sg = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
     
-    vbox = gtk_vbox_new (FALSE, 8);
+    vbox = gtk_vbox_new (FALSE, 6);
     gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
     gtk_widget_show (vbox);
     gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), vbox,
                         TRUE, TRUE, 0);
 
-    hbox = gtk_hbox_new (FALSE, 8);
+    hbox = gtk_hbox_new (FALSE, 12);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new (_("Select action type:"));
+    label = gtk_label_new_with_mnemonic (_("_Select action type:"));
     gtk_widget_show (label);
     gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 
     box = gtk_combo_box_new_text ();
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), box);
     gtk_widget_show (box);
     gtk_box_pack_start (GTK_BOX (hbox), box, TRUE, TRUE, 0);
     
@@ -462,17 +461,18 @@ actions_properties_dialog (XfcePanelPlugin *plugin, Action *action)
     g_signal_connect (box, "changed", G_CALLBACK (action_type_changed), 
                       action);
                       
-    hbox = gtk_hbox_new (FALSE, 8);
+    hbox = gtk_hbox_new (FALSE, 12);
     gtk_widget_show (hbox);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
     
-    label = gtk_label_new (_("Orientation:"));
+    label = gtk_label_new_with_mnemonic (_("_Orientation:"));
     gtk_widget_show (label);
     gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
     gtk_size_group_add_widget (sg, label);
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     
     box2 = action->box = gtk_combo_box_new_text ();
+    gtk_label_set_mnemonic_widget (GTK_LABEL (label), box2);
     gtk_widget_show (box2);
     gtk_box_pack_start (GTK_BOX (hbox), box2, TRUE, TRUE, 0);
     
