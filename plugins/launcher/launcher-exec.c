@@ -21,6 +21,7 @@
 #include <config.h>
 #endif
 
+#define _GNU_SOURCE
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
@@ -28,6 +29,9 @@
 #include <sys/wait.h>
 #endif
 
+#ifdef HAVE_FEATURES_H
+#include <features.h>
+#endif
 #ifdef HAVE_ERRNO_H
 #include <errno.h>
 #endif
