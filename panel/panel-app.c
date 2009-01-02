@@ -963,7 +963,7 @@ panel_app_about (GtkWidget *panel)
     GdkPixbuf     *pb;
 
     info = xfce_about_info_new (_("Xfce Panel"), "", _("Xfce Panel"),
-                                XFCE_COPYRIGHT_TEXT ("2006", "Jasper Huijsmans"),
+                                XFCE_COPYRIGHT_TEXT ("2009", "Jasper Huijsmans"),
                                 XFCE_LICENSE_GPL);
 
     xfce_about_info_set_homepage (info, "http://www.xfce.org");
