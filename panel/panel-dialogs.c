@@ -1414,7 +1414,7 @@ add_appearance_options (GtkBox             *box,
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_size_group_add_widget (size_group, label);
 
-    pmd->size = gtk_hscale_new_with_range (MIN_SIZE, MAX_SIZE, 2);
+    pmd->size = gtk_hscale_new_with_range (MIN_SIZE, MAX_SIZE, 1);
     gtk_scale_set_value_pos (GTK_SCALE (pmd->size), GTK_POS_LEFT);
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), pmd->size);
     gtk_range_set_update_policy (GTK_RANGE (pmd->size), GTK_UPDATE_DELAYED);
