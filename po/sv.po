@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-12-11 01:11+0100\n"
+"POT-Creation-Date: 2009-01-02 18:26+0100\n"
 "PO-Revision-Date: 2008-12-11 01:29+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -30,8 +30,11 @@ msgid "Remove \"%s\"?"
 msgstr "Ta bort \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
-msgstr "Objektet kommer att tas bort från panelen och dess konfiguration kommer att gå förlorad."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
+msgstr ""
+"Objektet kommer att tas bort från panelen och dess konfiguration kommer att "
+"gå förlorad."
 
 #. configure, hide by default
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:837
@@ -52,24 +55,18 @@ msgstr "Flytta"
 msgid "Remove"
 msgstr "Ta bort"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:902
-msgid "Add New Item"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
+#, fuzzy
+msgid "Add New Items..."
 msgstr "Lägg till nytt objekt"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913
-#: ../panel/panel.c:595
-#: ../settings/xfce4-panel-manager.desktop.in.h:1
-msgid "Customize Panel"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
+#, fuzzy
+msgid "Customize Panel..."
 msgstr "Anpassa panelen"
 
-#: ../panel/panel.c:606
-msgid "Add Items"
-msgstr "Lägg till objekt"
-
-#: ../panel/panel.c:621
-#: ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318
-#: ../plugins/actions/actions.c:456
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -81,32 +78,28 @@ msgstr "Starta om"
 msgid "About the Xfce Panel"
 msgstr "Om Xfce-panelen"
 
-#: ../panel/panel-app.c:258
-#: ../panel/panel-app.c:901
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
 msgstr "Avsluta Xfce-panelen?"
 
-#: ../panel/panel-app.c:899
-#: ../panel/panel-app.c:931
-#: ../panel/panel-app.c:964
+#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "Xfce-panelen"
 
-#: ../panel/panel-app.c:902
+#: ../panel/panel-app.c:903
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Du kan inte ta bort den sista panelen. Vill du stänga av programmet?"
 
-#: ../panel/panel-app.c:929
+#: ../panel/panel-app.c:930
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Ta bort panel \"%d\"?"
 
-#: ../panel/panel-app.c:933
+#: ../panel/panel-app.c:934
 msgid "The selected panel and all its items will be removed."
 msgstr "Den valda panelen och alla dess objekt kommer att tas bort."
 
-#: ../panel/panel-app.c:970
-#: ../panel/panel-app.c:971
+#: ../panel/panel-app.c:971 ../panel/panel-app.c:972
 msgid "Developer"
 msgstr "Utvecklare"
 
@@ -172,183 +165,189 @@ msgstr "Startar om xfce4-panel..."
 msgid "Could not open \"%s\" module"
 msgstr "Kunde inte öppna modulen \"%s\""
 
-#: ../panel/panel-dialogs.c:611
-msgid "Add Items to the Panel"
-msgstr "Lägg till objekt till panelen"
+#: ../panel/panel-dialogs.c:610
+#, fuzzy
+msgid "Add New Items"
+msgstr "Lägg till nytt objekt"
 
-#: ../panel/panel-dialogs.c:642
-msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
-msgstr "Dra objekt från listan till en panel eller ta bort dem genom att dra dem tillbaka till listan."
+#: ../panel/panel-dialogs.c:639
+#, fuzzy
+msgid ""
+"Drag items from the list to a panel or remove\n"
+"them by dragging them back to the list."
+msgstr ""
+"Dra objekt från listan till en panel eller ta bort dem genom att dra dem "
+"tillbaka till listan."
 
-#: ../panel/panel-dialogs.c:659
-msgid "Available Items"
-msgstr "Tillgängliga objekt"
+#: ../panel/panel-dialogs.c:650
+msgid "_Search:"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:885
-#: ../panel/panel-dialogs.c:1121
+#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
 msgid "Normal Width"
 msgstr "Normal bredd"
 
-#: ../panel/panel-dialogs.c:886
-#: ../panel/panel-dialogs.c:1122
+#: ../panel/panel-dialogs.c:879 ../panel/panel-dialogs.c:1115
 msgid "Full Width"
 msgstr "Full bredd"
 
-#: ../panel/panel-dialogs.c:890
-#: ../panel/panel-dialogs.c:1126
+#: ../panel/panel-dialogs.c:883 ../panel/panel-dialogs.c:1119
 msgid "Normal Height"
 msgstr "Normal höjd"
 
-#: ../panel/panel-dialogs.c:891
-#: ../panel/panel-dialogs.c:1127
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1120
 msgid "Full Height"
 msgstr "Full höjd"
 
-#: ../panel/panel-dialogs.c:899
-#: ../panel/panel-dialogs.c:1136
+#: ../panel/panel-dialogs.c:892 ../panel/panel-dialogs.c:1129
 msgid "Span Monitors"
 msgstr "Sträck över flera skärmar"
 
-#: ../panel/panel-dialogs.c:962
-#: ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1498
-#: ../plugins/launcher/launcher-dialog.c:1586
+#: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
+#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Vänster"
 
-#: ../panel/panel-dialogs.c:964
-#: ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1499
-#: ../plugins/launcher/launcher-dialog.c:1587
+#: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
+#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Höger"
 
-#: ../panel/panel-dialogs.c:969
-#: ../panel/panel-dialogs.c:1208
-#: ../panel/panel-dialogs.c:1500
-#: ../plugins/launcher/launcher-dialog.c:1588
+#: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Överst"
 
-#: ../panel/panel-dialogs.c:971
-#: ../panel/panel-dialogs.c:1210
-#: ../panel/panel-dialogs.c:1501
-#: ../plugins/launcher/launcher-dialog.c:1589
+#: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
+#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Nederst"
 
 #. position
-#: ../panel/panel-dialogs.c:1001
+#: ../panel/panel-dialogs.c:994
 msgid "Position"
 msgstr "Position"
 
-#: ../panel/panel-dialogs.c:1015
-msgid "Fixed Position"
+#: ../panel/panel-dialogs.c:1008
+#, fuzzy
+msgid "_Fixed position"
 msgstr "Fast position"
 
-#: ../panel/panel-dialogs.c:1021
-msgid "Freely Moveable"
+#: ../panel/panel-dialogs.c:1014
+#, fuzzy
+msgid "Freely _moveable"
 msgstr "Flyttbar"
 
-#: ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:1137
 msgid "Auto_hide"
 msgstr "Dölj a_utomatiskt"
 
-#: ../panel/panel-dialogs.c:1162
-#: ../plugins/actions/actions.c:469
+#: ../panel/panel-dialogs.c:1155
 msgid "Orientation:"
 msgstr "Orientering:"
 
-#: ../panel/panel-dialogs.c:1174
-#: ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1167 ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "Horisontell"
 
-#: ../panel/panel-dialogs.c:1176
-#: ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1169 ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "Vertikal"
 
-#: ../panel/panel-dialogs.c:1185
+#: ../panel/panel-dialogs.c:1178
 msgid "Handle:"
 msgstr "Handtag:"
 
-#: ../panel/panel-dialogs.c:1197
+#: ../panel/panel-dialogs.c:1190
 msgid "At both sides"
 msgstr "På båda sidor"
 
-#: ../panel/panel-dialogs.c:1277
+#: ../panel/panel-dialogs.c:1270
 msgid "Select Monitor"
 msgstr "Välj skärm"
 
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1405
-#: ../plugins/clock/clock-dialog.c:502
-#: ../plugins/systray/xfce-tray-dialogs.c:351
-#: ../plugins/tasklist/tasklist-dialogs.c:168
-#: ../plugins/windowlist/windowlist-dialog.c:190
+#: ../panel/panel-dialogs.c:1398 ../plugins/clock/clock-dialog.c:502
+#: ../plugins/systray/xfce-tray-dialogs.c:352
+#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "Utseende"
 
-#: ../panel/panel-dialogs.c:1418
-msgid "Size (pixels):"
+#: ../panel/panel-dialogs.c:1411
+#, fuzzy
+msgid "_Size (pixels):"
 msgstr "Storlek (bildpunkter):"
 
-#: ../panel/panel-dialogs.c:1448
-msgid "Transparency (%):"
+#: ../panel/panel-dialogs.c:1442
+#, fuzzy
+msgid "_Transparency (%):"
 msgstr "Genomskinlighet (%):"
 
-#: ../panel/panel-dialogs.c:1474
-msgid "Make active panel opaque"
+#: ../panel/panel-dialogs.c:1468
+#, fuzzy
+msgid "Make active panel _opaque"
 msgstr "Gör aktiv panel opak"
 
-#: ../panel/panel-dialogs.c:1487
+#: ../panel/panel-dialogs.c:1481
 msgid "Popup position:"
 msgstr "Position för popupruta:"
 
-#: ../panel/panel-dialogs.c:1497
+#: ../panel/panel-dialogs.c:1491
 msgid "Automatic"
 msgstr "Automatiskt"
 
-#: ../panel/panel-dialogs.c:1542
-#: ../panel/panel-dialogs.c:1578
-#: ../panel/panel-dialogs.c:1602
+#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:1596
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1621
-msgid "Remove Panel"
-msgstr "Ta bort panel"
+#: ../panel/panel-dialogs.c:1615
+msgid "Remove the currently selected panel"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1634
-msgid "New Panel"
-msgstr "Ny panel"
+#: ../panel/panel-dialogs.c:1628
+#, fuzzy
+msgid "Add a new panel"
+msgstr "Lägg till nya objekt"
 
-#: ../panel/panel-dialogs.c:1694
-#: ../settings/xfce4-panel-manager.desktop.in.h:3
-msgid "Panel Manager"
-msgstr "Panelhanterare"
+#: ../panel/panel-dialogs.c:1688
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel"
+msgstr "Panel"
 
-#: ../plugins/actions/actions.c:265
-#: ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:457
+#: ../panel/panel-dialogs.c:1695
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
+#, fuzzy
+msgid "Customize the panel settings"
+msgstr "Anpassa panelen"
+
+#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:456
 msgid "Lock screen"
 msgstr "Lås skärmen"
 
 #: ../plugins/actions/actions.c:417
-msgid "Panel Actions"
-msgstr "Panelåtgärder"
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "Åtgärdsknappar"
 
-#: ../plugins/actions/actions.c:447
-msgid "Select action type:"
+#: ../plugins/actions/actions.c:445
+#, fuzzy
+msgid "_Select action type:"
 msgstr "Välj åtgärdstyp:"
 
-#: ../plugins/actions/actions.c:458
+#: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Avsluta och lås skärmen"
+
+#: ../plugins/actions/actions.c:468
+#, fuzzy
+msgid "_Orientation:"
+msgstr "Orientering:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -398,7 +397,7 @@ msgstr "LCD"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:520
-#: ../plugins/systray/xfce-tray-dialogs.c:362
+#: ../plugins/systray/xfce-tray-dialogs.c:363
 msgid "Show _frame"
 msgstr "Visa _ram"
 
@@ -412,152 +411,164 @@ msgstr "Format för verktygstips"
 msgid "Clock Options"
 msgstr "Klockalternativ"
 
-#: ../plugins/iconbox/iconbox.c:910
+#: ../plugins/iconbox/iconbox.c:906
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "Ikonlåda"
 
-#: ../plugins/iconbox/iconbox.c:935
-msgid "Only show minimized applications"
+#: ../plugins/iconbox/iconbox.c:929
+#, fuzzy
+msgid "Only show _minimized applications"
 msgstr "Visa endast minimerade program"
 
-#: ../plugins/iconbox/iconbox.c:944
-msgid "Show applications of all workspaces"
+#: ../plugins/iconbox/iconbox.c:938
+#, fuzzy
+msgid "Show applications of _all workspaces"
 msgstr "Visa program för alla arbetsytor"
 
-#: ../plugins/iconbox/iconbox.c:952
-#: ../plugins/tasklist/tasklist-dialogs.c:187
-msgid "Use all available space"
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#, fuzzy
+msgid "Use all available _space"
 msgstr "Använd allt tillgängligt utrymme"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:706
-#: ../plugins/launcher/launcher.c:771
+#: ../plugins/launcher/launcher.c:706 ../plugins/launcher/launcher.c:771
 msgid "New Item"
 msgstr "Nytt objekt"
 
-#: ../plugins/launcher/launcher-exec.c:559
+#: ../plugins/launcher/launcher-exec.c:561
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Kunde inte starta \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:589
+#: ../plugins/launcher/launcher-dialog.c:609
 msgid "No icon"
 msgstr "Ingen ikon"
 
-#: ../plugins/launcher/launcher-dialog.c:609
-msgid "Select a Directory"
-msgstr "Välj en katalog"
-
-#: ../plugins/launcher/launcher-dialog.c:653
+#: ../plugins/launcher/launcher-dialog.c:631
 msgid "Select an Application"
 msgstr "Välj ett program"
 
-#: ../plugins/launcher/launcher-dialog.c:663
+#: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
 msgstr "Alla filer"
 
-#: ../plugins/launcher/launcher-dialog.c:668
+#: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
 msgstr "Körbara filer"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:661
 msgid "Perl Scripts"
 msgstr "Perl-skript"
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:667
 msgid "Python Scripts"
 msgstr "Python-skript"
 
-#: ../plugins/launcher/launcher-dialog.c:695
+#: ../plugins/launcher/launcher-dialog.c:673
 msgid "Ruby Scripts"
 msgstr "Ruby-skript"
 
-#: ../plugins/launcher/launcher-dialog.c:701
+#: ../plugins/launcher/launcher-dialog.c:679
 msgid "Shell Scripts"
 msgstr "Skalskript"
 
-#: ../plugins/launcher/launcher-dialog.c:777
+#: ../plugins/launcher/launcher-dialog.c:755
 msgid "Unknown"
 msgstr "Okänt"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:780
+#: ../plugins/launcher/launcher-dialog.c:758
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Välj en ikon för \"%s\""
 
 #. build name
-#: ../plugins/launcher/launcher-dialog.c:867
-#: ../plugins/launcher/launcher-dialog.c:1366
+#: ../plugins/launcher/launcher-dialog.c:845
+#: ../plugins/launcher/launcher-dialog.c:1339
 msgid "Unnamed"
 msgstr "Namnlös"
 
-#: ../plugins/launcher/launcher-dialog.c:1145
-msgid "_Name"
+#: ../plugins/launcher/launcher-dialog.c:1123
+#, fuzzy
+msgid "_Name:"
 msgstr "_Namn"
 
-#: ../plugins/launcher/launcher-dialog.c:1163
-msgid "_Description"
+#: ../plugins/launcher/launcher-dialog.c:1141
+#, fuzzy
+msgid "_Description:"
 msgstr "_Beskrivning"
 
-#: ../plugins/launcher/launcher-dialog.c:1182
-msgid "_Icon"
+#: ../plugins/launcher/launcher-dialog.c:1160
+#, fuzzy
+msgid "_Icon:"
 msgstr "_Ikon"
 
-#: ../plugins/launcher/launcher-dialog.c:1200
-msgid "Co_mmand"
+#: ../plugins/launcher/launcher-dialog.c:1178
+#, fuzzy
+msgid "Co_mmand:"
 msgstr "Ko_mmano"
 
-#: ../plugins/launcher/launcher-dialog.c:1227
-msgid "_Working Directory"
+#: ../plugins/launcher/launcher-dialog.c:1205
+#, fuzzy
+msgid "_Working Directory:"
 msgstr "_Arbetskatalog"
 
-#: ../plugins/launcher/launcher-dialog.c:1259
+#: ../plugins/launcher/launcher-dialog.c:1211
+#, fuzzy
+msgid "Select a Working Directory"
+msgstr "Välj en katalog"
+
+#: ../plugins/launcher/launcher-dialog.c:1232
 msgid "Run in _terminal"
 msgstr "Kör i _terminal"
 
-#: ../plugins/launcher/launcher-dialog.c:1275
+#: ../plugins/launcher/launcher-dialog.c:1248
 msgid "Use _startup notification"
 msgstr "Använd upp_startsnotifiering"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1551
-msgid "Program Launcher"
+#: ../plugins/launcher/launcher-dialog.c:1524
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
 msgstr "Programstartare"
 
-#: ../plugins/launcher/launcher-dialog.c:1579
+#: ../plugins/launcher/launcher-dialog.c:1552
 msgid "A_rrow:"
 msgstr "_Pil:"
 
-#: ../plugins/launcher/launcher-dialog.c:1585
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Default"
 msgstr "Standard"
 
-#: ../plugins/launcher/launcher-dialog.c:1590
+#: ../plugins/launcher/launcher-dialog.c:1563
 msgid "Inside Button"
 msgstr "Inne i knapp"
 
-#: ../plugins/pager/pager.c:368
-#: ../plugins/pager/pager.desktop.in.in.h:2
-msgid "Pager"
-msgstr "Skrivbordsbläddrare"
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
+#, fuzzy
+msgid "Workspace Switcher"
+msgstr "Arbetsyta %d"
 
-#: ../plugins/pager/pager.c:399
-msgid "Number of rows:"
+#: ../plugins/pager/pager.c:397
+#, fuzzy
+msgid "Number _of rows:"
 msgstr "Antal rader:"
 
-#: ../plugins/pager/pager.c:403
-msgid "Number of columns:"
+#: ../plugins/pager/pager.c:401
+#, fuzzy
+msgid "Number _of columns:"
 msgstr "Antal kolumner:"
 
-#: ../plugins/pager/pager.c:429
-msgid "Switch workspaces using the mouse wheel"
+#: ../plugins/pager/pager.c:418
+#, fuzzy
+msgid "Switch workspaces using the mouse _wheel"
 msgstr "Växla arbetsytor med mushjulet"
 
-#: ../plugins/pager/pager.c:437
-msgid "Show workspace names"
+#: ../plugins/pager/pager.c:426
+#, fuzzy
+msgid "Show workspace _names"
 msgstr "Visa namn på arbetsytor"
 
 #: ../plugins/separator/separator.c:409
@@ -565,28 +576,30 @@ msgstr "Visa namn på arbetsytor"
 msgid "Separator or Spacing"
 msgstr "Avgränsare eller mellanrum"
 
-#: ../plugins/separator/separator.c:430
+#: ../plugins/separator/separator.c:428
 msgid "Separator Style"
 msgstr "Stil för avgränsare"
 
 #. space
-#: ../plugins/separator/separator.c:437
-msgid "_Empty Space"
+#: ../plugins/separator/separator.c:435
+#, fuzzy
+msgid "_Empty space"
 msgstr "_Tomt utrymme"
 
-#: ../plugins/separator/separator.c:446
-msgid "_Expanding Empty Space"
+#: ../plugins/separator/separator.c:444
+#, fuzzy
+msgid "E_xpanding empty space"
 msgstr "_Expanderande tomt utrymme"
 
-#: ../plugins/separator/separator.c:455
+#: ../plugins/separator/separator.c:453
 msgid "_Line"
 msgstr "_Linje"
 
-#: ../plugins/separator/separator.c:464
+#: ../plugins/separator/separator.c:462
 msgid "_Handle"
 msgstr "_Handtag"
 
-#: ../plugins/separator/separator.c:473
+#: ../plugins/separator/separator.c:471
 msgid "_Dots"
 msgstr "_Punkter"
 
@@ -601,13 +614,15 @@ msgstr "Dölj fönster och visa skrivbordet"
 #. create a dialog
 #. create dialog
 #: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:333
+#: ../plugins/systray/xfce-tray-dialogs.c:334
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "System Tray"
-msgstr "Notifieringsfält"
+#, fuzzy
+msgid "Notification Area"
+msgstr "Uppmärksamhetsnotifiering"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
-msgid "There is already a system tray running on this screen"
+#, fuzzy
+msgid "There is already a notification area running on this screen"
 msgstr "Det finns redan ett notifieringsfält som körs på denna skärm"
 
 # Underlig sträng
@@ -616,17 +631,17 @@ msgstr "Det finns redan ett notifieringsfält som körs på denna skärm"
 msgid "The tray manager lost selection"
 msgstr "Notifieringsfältshanteraren förlorade markeringen"
 
-#: ../plugins/systray/xfce-tray-dialogs.c:280
+#: ../plugins/systray/xfce-tray-dialogs.c:281
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Är du säker på att du vill tömma listan över kända program?"
 
 #. number of rows
-#: ../plugins/systray/xfce-tray-dialogs.c:374
+#: ../plugins/systray/xfce-tray-dialogs.c:375
 msgid "_Number of rows:"
 msgstr "Antal _rader:"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:389
+#: ../plugins/systray/xfce-tray-dialogs.c:390
 msgid "Hidden Applications"
 msgstr "Dolda program"
 
@@ -636,37 +651,40 @@ msgid "Failed to acquire manager selection for screen %d"
 msgstr "Misslyckades med att komma över hanterarvalet för skärm %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:209
+#: ../plugins/tasklist/tasklist-dialogs.c:208
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Aktivitetslista"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:174
-msgid "Minimum Width:"
+#: ../plugins/tasklist/tasklist-dialogs.c:172
+#, fuzzy
+msgid "_Minimum width:"
 msgstr "Minsta bredd:"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:194
-msgid "Use flat buttons"
+#: ../plugins/tasklist/tasklist-dialogs.c:193
+#, fuzzy
+msgid "Use _flat buttons"
 msgstr "Använd platta knappar"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:200
-msgid "Show handle"
+#: ../plugins/tasklist/tasklist-dialogs.c:199
+#, fuzzy
+msgid "Show _handle"
 msgstr "Visa handtag"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:212
+#: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
 msgstr "Visa aktiviteter från _alla arbetsytor"
 
 #. keep order in sync with WnckTasklistGroupingType
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:221
 msgid "Never group tasks"
 msgstr "Gruppera aldrig aktiviteter"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:223
+#: ../plugins/tasklist/tasklist-dialogs.c:222
 msgid "Automatically group tasks"
 msgstr "Gruppera aktiviteter automatiskt"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:224
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Always group tasks"
 msgstr "Gruppera alltid aktiviteter"
 
@@ -702,55 +720,55 @@ msgstr "Ta bort arbetsytan \"%s\""
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:212
+#: ../plugins/windowlist/windowlist-dialog.c:210
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Fönsterlista"
 
-#: ../plugins/windowlist/windowlist-dialog.c:150
-msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
-msgstr "<i>Uppmärksamhetsnotifiering</i> kommer att blinka med knappen när ett program behöver uppmärksamhet."
+#: ../plugins/windowlist/windowlist-dialog.c:148
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"<i>Uppmärksamhetsnotifiering</i> kommer att blinka med knappen när ett "
+"program behöver uppmärksamhet."
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:157
+#: ../plugins/windowlist/windowlist-dialog.c:155
 msgid "Urgency Notification"
 msgstr "Uppmärksamhetsnotifiering"
 
-#: ../plugins/windowlist/windowlist-dialog.c:164
+#: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
 msgstr "I_naktiverad"
 
-#: ../plugins/windowlist/windowlist-dialog.c:173
+#: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
 msgstr "För a_ndra arbetsytor"
 
-#: ../plugins/windowlist/windowlist-dialog.c:182
+#: ../plugins/windowlist/windowlist-dialog.c:180
 msgid "For _all workspaces"
 msgstr "För _alla arbetsytor"
 
-#: ../plugins/windowlist/windowlist-dialog.c:196
+#: ../plugins/windowlist/windowlist-dialog.c:194
 msgid "_Icon button"
 msgstr "_Ikonknapp"
 
-#: ../plugins/windowlist/windowlist-dialog.c:203
+#: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
 msgstr "_Pilknapp"
 
-#: ../plugins/windowlist/windowlist-dialog.c:221
+#: ../plugins/windowlist/windowlist-dialog.c:219
 msgid "Show _windows from all workspaces"
 msgstr "Visa fönster från _alla arbetsytor"
 
-#: ../plugins/windowlist/windowlist-dialog.c:230
+#: ../plugins/windowlist/windowlist-dialog.c:228
 msgid "Show a_pplication icons"
 msgstr "Visa _programikoner"
 
-#: ../plugins/windowlist/windowlist-dialog.c:239
+#: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
 msgstr "Visa åtgärder för ar_betsytor"
-
-#: ../plugins/actions/actions.desktop.in.in.h:1
-msgid "Action Buttons"
-msgstr "Åtgärdsknappar"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -764,16 +782,13 @@ msgstr "Vad är klockan?"
 msgid "Show icons of all running applications"
 msgstr "Visa ikoner för alla körande program"
 
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "Programstartare"
-
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Programstartare med meny som tillval"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-msgid "Miniature view of all virtual desktops"
+#, fuzzy
+msgid "Switch between virtual desktops"
 msgstr "Miniatyrvy över alla virtuella skrivbord"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
@@ -789,7 +804,8 @@ msgid "Toggle desktop show/hide"
 msgstr "Växla mellan att visa och dölja skrivbordet"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Show notification icons"
+#, fuzzy
+msgid "Area where notification icons appear"
 msgstr "Visa notifieringsikoner"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -800,42 +816,80 @@ msgstr "Visa alla körande program"
 msgid "Show list of available windows"
 msgstr "Visa en lista över tillgängliga fönster"
 
-#: ../settings/xfce4-panel-manager.desktop.in.h:2
-msgid "Panel"
-msgstr "Panel"
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
+msgid "Panel Manager"
+msgstr "Panelhanterare"
 
-#: ../settings/xfce4-panel-manager.desktop.in.h:4
-msgid "Xfce 4 Panel Manager"
-msgstr "Xfce 4 Panelhanterare"
+#~ msgid "Pager"
+#~ msgstr "Skrivbordsbläddrare"
+
+#~ msgid "System Tray"
+#~ msgstr "Notifieringsfält"
+
+#~ msgid "Add Items"
+#~ msgstr "Lägg till objekt"
+
+#~ msgid "Add Items to the Panel"
+#~ msgstr "Lägg till objekt till panelen"
+
+#~ msgid "Available Items"
+#~ msgstr "Tillgängliga objekt"
+
+#~ msgid "Remove Panel"
+#~ msgstr "Ta bort panel"
+
+#~ msgid "New Panel"
+#~ msgstr "Ny panel"
+
+#~ msgid "Panel Actions"
+#~ msgstr "Panelåtgärder"
+
+#~ msgid "Program Launcher"
+#~ msgstr "Programstartare"
+
+#~ msgid "Xfce 4 Panel Manager"
+#~ msgstr "Xfce 4 Panelhanterare"
 
 #~ msgid "Command Prompt"
 #~ msgstr "Kommandorad"
+
 #~ msgid "X terminal emulator"
 #~ msgstr "Terminalemulator för X"
+
 #~ msgid "Edit text files"
 #~ msgstr "Redigera textfiler"
+
 #~ msgid "Editor"
 #~ msgstr "Textredigerare"
+
 #~ msgid "File Manager"
 #~ msgstr "Filhanterare"
+
 #~ msgid "Manage files and folders"
 #~ msgstr "Hantera filer och kataloger"
+
 #~ msgid "Surf the internet"
 #~ msgstr "Surfa på internet"
+
 #~ msgid "Web Browser"
 #~ msgstr "Webbläsare"
 
 #, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"
 #~ msgstr "Kan inte registrera notifieringsfält: %s"
+
 #~ msgid "Show application _names"
 #~ msgstr "Visa aktivitets_namn"
+
 #~ msgid "%A %d %B %Y"
 #~ msgstr "%A den %d %B %Y"
+
 #~ msgid "_Draw Separator"
 #~ msgstr "_Rita separator"
+
 #~ msgid "_Expand"
 #~ msgstr "_Expandera"
+
 #~ msgid ""
 #~ "\n"
 #~ " Xfce Panel %s\n"
@@ -855,12 +909,14 @@ msgstr "Xfce 4 Panelhanterare"
 #~ "\n"
 #~ "Licensierat under GNU GPL.\n"
 #~ "\n"
+
 #~ msgid ""
 #~ " Usage: %s [OPTIONS]\n"
 #~ "\n"
 #~ msgstr ""
 #~ " Användning: %s [INSTÄLLNINGAR]\n"
 #~ "\n"
+
 #~ msgid ""
 #~ " OPTIONS\n"
 #~ " -h, --help      Show this message and exit\n"
@@ -883,48 +939,68 @@ msgstr "Xfce 4 Panelhanterare"
 #~ " -x, --exit      Stänger alla paneler och avslutar sig själv sedan\n"
 #~ " -a, --add       Lägg till nya objekt\n"
 #~ "\n"
+
 #~ msgid "Error in command \"%s\""
 #~ msgstr "Fel i kommandot \"%s\""
+
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Detta objekt har ännu inte blivit konfigurerat"
+
 #~ msgid "File management"
 #~ msgstr "Filhantering"
+
 #~ msgid "Utilities"
 #~ msgstr "Verktyg"
+
 #~ msgid "Games"
 #~ msgstr "Spel"
+
 #~ msgid "Help browser"
 #~ msgstr "Hjälpläsare"
+
 #~ msgid "Multimedia"
 #~ msgstr "Multimedia"
+
 #~ msgid "Network"
 #~ msgstr "Nätverk"
+
 #~ msgid "Graphics"
 #~ msgstr "Grafik"
+
 #~ msgid "Printer"
 #~ msgstr "Skrivare"
+
 #~ msgid "Productivity"
 #~ msgstr "Produktivitet"
+
 #~ msgid "Office"
 #~ msgstr "Kontor"
+
 #~ msgid "Sound"
 #~ msgstr "Ljud"
+
 #~ msgid "Terminal"
 #~ msgstr "Terminal"
+
 #~ msgid "Development"
 #~ msgstr "Utveckling"
+
 #~ msgid "Select image file"
 #~ msgstr "Välj bildfil"
+
 #~ msgid "Select command"
 #~ msgstr "Välj kommando"
+
 #~ msgid "Other..."
 #~ msgstr "Annan..."
+
 #~ msgid ""
 #~ "The first item in the list is shown on the panel. Additional items will "
 #~ "appear in a menu."
 #~ msgstr ""
 #~ "Den första programstartaren i listan kommer att visas i panelen. Resten "
 #~ "kommer att visas i en meny."
+
 #~ msgid ""
 #~ "Failed to run 0launch:\n"
 #~ "%s\n"
@@ -936,6 +1012,7 @@ msgstr "Xfce 4 Panelhanterare"
 #~ "\n"
 #~ "För att få hjälp med hur man använder Zero Install, gå in på "
 #~ "http://0install.net"
+
 #~ msgid ""
 #~ "The Zero Install GUI has finished, but the launcher dialog has "
 #~ "disappeared in the meantime. Not adding launcher (but any files "
@@ -944,12 +1021,15 @@ msgstr "Xfce 4 Panelhanterare"
 #~ "Zero Install är färdigt, men programstartarfönstret har försvunnit under "
 #~ "tiden. Lägger inte till någon programstartare (men alla filer som har "
 #~ "laddats ner har inte förlorats)."
+
 #~ msgid "Select file"
 #~ msgstr "Välj fil"
+
 #~ msgid "Test Plugin"
 #~ msgstr "Test plugin"
+
 #~ msgid "This plugin has no purpose"
 #~ msgstr "Den här pluginnen har inge mening"
+
 #~ msgid "Size"
 #~ msgstr "Storlek"
-

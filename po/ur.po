@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 12:57+0100\n"
+"POT-Creation-Date: 2009-01-02 18:26+0100\n"
 "PO-Revision-Date: 2007-11-01 18:24+0500\n"
 "Last-Translator: Muhammad Ali Makki <makki.ma@gmai.com>\n"
 "Language-Team: urdu <makki.ma@gmail.com>\n"
@@ -18,38 +18,6 @@ msgstr ""
 "X-Poedit-Country: PAKISTAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: KBabel 1.11.4\n"
-
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr "کمانڈ پرمپٹ"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr "ایکس ٹرمنل ایمولیٹر"
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr "متن فائلیں مدون کریں"
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "مدون"
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr "فائل منیجر"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr "فائلوں اور فولڈروں کی ادارت کریں"
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr "انٹرنیٹ سرف کریں"
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr "ویب براؤزر"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -86,54 +54,51 @@ msgstr "منتقل"
 msgid "Remove"
 msgstr "حذف"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:902
-msgid "Add New Item"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
+#, fuzzy
+msgid "Add New Items..."
 msgstr "نیا عنصر شامل کریں"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:694
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
-msgid "Customize Panel"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
+#, fuzzy
+msgid "Customize Panel..."
 msgstr "پینل کسٹمائز کریں"
 
-#: ../panel/panel.c:705
-msgid "Add Items"
-msgstr "عنصر شامل کریں"
-
-#: ../panel/panel.c:721 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr "برخاست"
 
-#: ../panel/panel.c:731
+#: ../panel/panel.c:631
 msgid "Restart"
 msgstr "پھر چلائیں"
 
-#: ../panel/panel.c:745
+#: ../panel/panel.c:646
 msgid "About the Xfce Panel"
 msgstr "ایکسفس پینل کی بابت"
 
-#: ../panel/panel-app.c:258 ../panel/panel-app.c:892
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
 msgstr "ایکسفس پینل برخاست کریں؟"
 
-#: ../panel/panel-app.c:890 ../panel/panel-app.c:922 ../panel/panel-app.c:955
+#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "ایکسفس پینل"
 
-#: ../panel/panel-app.c:893
+#: ../panel/panel-app.c:903
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "آپ آخری پینل کو حذف نہیں کرسکتے. کیا آپ پروگرام بند کرنا چاہتے ہیں؟"
 
-#: ../panel/panel-app.c:920
+#: ../panel/panel-app.c:930
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "پینل \"%d\" حذف کریں؟"
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:934
 msgid "The selected panel and all its items will be removed."
 msgstr "منتخب پینل اور اس کے تمام عناصر حذف کردیے جائیں گے."
 
-#: ../panel/panel-app.c:961 ../panel/panel-app.c:962
+#: ../panel/panel-app.c:971 ../panel/panel-app.c:972
 msgid "Developer"
 msgstr "ڈویلپر"
 
@@ -191,195 +156,216 @@ msgstr "ایکسفس 4 پینل پہلے ہی چل رہا ہے"
 msgid "Restarting xfce4-panel..."
 msgstr "ایکسفس 4 پینل پھر چلایا جارہا ہے..."
 
-#: ../panel/panel-dialogs.c:189
+#: ../panel/panel-dialogs.c:196
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "ماڈیول \"%s\" نہیں کھولا جاسکا"
 
-#: ../panel/panel-dialogs.c:634
-msgid "Add Items to the Panel"
-msgstr "پینل میں عنصر شامل کریں"
+#: ../panel/panel-dialogs.c:610
+#, fuzzy
+msgid "Add New Items"
+msgstr "نیا عنصر شامل کریں"
 
-#: ../panel/panel-dialogs.c:665
+#: ../panel/panel-dialogs.c:639
+#, fuzzy
 msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
+"Drag items from the list to a panel or remove\n"
+"them by dragging them back to the list."
 msgstr ""
 "فہرست میں سے عناصر کو پینل میں گھسیٹیں یا انہیں حذف کرنے کے لیے واپس فہرسٹ "
 "میں گھسیٹیں."
 
-#: ../panel/panel-dialogs.c:682
-msgid "Available Items"
-msgstr "دستیاب عناصر"
+#: ../panel/panel-dialogs.c:650
+msgid "_Search:"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
 msgid "Normal Width"
 msgstr "سادہ چوڑائی"
 
-#: ../panel/panel-dialogs.c:909 ../panel/panel-dialogs.c:1145
+#: ../panel/panel-dialogs.c:879 ../panel/panel-dialogs.c:1115
 msgid "Full Width"
 msgstr "فل چوڑائی"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:883 ../panel/panel-dialogs.c:1119
 msgid "Normal Height"
 msgstr "سادہ اونچائی"
 
-#: ../panel/panel-dialogs.c:914 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1120
 msgid "Full Height"
 msgstr "فل اونچائی"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:892 ../panel/panel-dialogs.c:1129
 msgid "Span Monitors"
 msgstr "Span مانیٹرز"
 
-#: ../panel/panel-dialogs.c:985 ../panel/panel-dialogs.c:1224
-#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
+#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "بائیں"
 
-#: ../panel/panel-dialogs.c:987 ../panel/panel-dialogs.c:1226
-#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
+#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "دائیں"
 
-#: ../panel/panel-dialogs.c:992 ../panel/panel-dialogs.c:1231
-#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "اوپر"
 
-#: ../panel/panel-dialogs.c:994 ../panel/panel-dialogs.c:1233
-#: ../panel/panel-dialogs.c:1524 ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
+#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "نیچے"
 
 #. position
-#: ../panel/panel-dialogs.c:1024
+#: ../panel/panel-dialogs.c:994
 msgid "Position"
 msgstr "مقام"
 
-#: ../panel/panel-dialogs.c:1038
-msgid "Fixed Position"
+#: ../panel/panel-dialogs.c:1008
+#, fuzzy
+msgid "_Fixed position"
 msgstr "فکس مقام"
 
-#: ../panel/panel-dialogs.c:1044
-msgid "Freely Moveable"
+#: ../panel/panel-dialogs.c:1014
+#, fuzzy
+msgid "Freely _moveable"
 msgstr "آزادی سے قابل حرکت"
 
-#: ../panel/panel-dialogs.c:1167
+#: ../panel/panel-dialogs.c:1137
 msgid "Auto_hide"
 msgstr "خ_ودکار چھپائیں"
 
-#: ../panel/panel-dialogs.c:1185 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1155
 msgid "Orientation:"
 msgstr "جہتیابی:"
 
-#: ../panel/panel-dialogs.c:1197 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1167 ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "افقی"
 
-#: ../panel/panel-dialogs.c:1199 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1169 ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "عمودی"
 
-#: ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1178
 msgid "Handle:"
 msgstr "ہینڈل:"
 
-#: ../panel/panel-dialogs.c:1220
+#: ../panel/panel-dialogs.c:1190
 msgid "At both sides"
 msgstr "دونوں اطراف"
 
-#: ../panel/panel-dialogs.c:1300
+#: ../panel/panel-dialogs.c:1270
 msgid "Select Monitor"
 msgstr "مانیٹر منتخب کریں"
 
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:502
-#: ../plugins/systray/xfce-tray-dialogs.c:351
-#: ../plugins/tasklist/tasklist-dialogs.c:168
-#: ../plugins/windowlist/windowlist-dialog.c:190
+#: ../panel/panel-dialogs.c:1398 ../plugins/clock/clock-dialog.c:502
+#: ../plugins/systray/xfce-tray-dialogs.c:352
+#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "مظہر"
 
-#: ../panel/panel-dialogs.c:1441
-msgid "Size (pixels):"
+#: ../panel/panel-dialogs.c:1411
+#, fuzzy
+msgid "_Size (pixels):"
 msgstr "حجم (پکسل):"
 
-#: ../panel/panel-dialogs.c:1471
-msgid "Transparency (%):"
+#: ../panel/panel-dialogs.c:1442
+#, fuzzy
+msgid "_Transparency (%):"
 msgstr "شفافیت (%):"
 
-#: ../panel/panel-dialogs.c:1497
-msgid "Make active panel opaque"
+#: ../panel/panel-dialogs.c:1468
+#, fuzzy
+msgid "Make active panel _opaque"
 msgstr "فعال پینل کو معتم کردیں"
 
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1481
 msgid "Popup position:"
 msgstr "برخیزہ مقام:"
 
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1491
 msgid "Automatic"
 msgstr "خود کار"
 
-#: ../panel/panel-dialogs.c:1564 ../panel/panel-dialogs.c:1600
-#: ../panel/panel-dialogs.c:1624
+#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:1596
 #, c-format
 msgid "Panel %d"
 msgstr "پینل %d"
 
-#: ../panel/panel-dialogs.c:1643
-msgid "Remove Panel"
-msgstr "پینل حذف کریں"
+#: ../panel/panel-dialogs.c:1615
+msgid "Remove the currently selected panel"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1656
-msgid "New Panel"
-msgstr "نیا پینل"
+#: ../panel/panel-dialogs.c:1628
+#, fuzzy
+msgid "Add a new panel"
+msgstr "نیا عنصر شامل کریں"
 
-#: ../panel/panel-dialogs.c:1716
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
-msgid "Panel Manager"
-msgstr "پینل منیجر"
+#: ../panel/panel-dialogs.c:1688
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel"
+msgstr "پینل"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
-#: ../plugins/actions/actions.c:459
+#: ../panel/panel-dialogs.c:1695
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
+#, fuzzy
+msgid "Customize the panel settings"
+msgstr "پینل کسٹمائز کریں"
+
+#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:456
 msgid "Lock screen"
 msgstr "سکرین لاک کریں"
 
-#: ../plugins/actions/actions.c:419
-msgid "Panel Actions"
-msgstr "پینل حرکات"
+#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "حرکات بٹن"
 
-#: ../plugins/actions/actions.c:449
-msgid "Select action type:"
+#: ../plugins/actions/actions.c:445
+#, fuzzy
+msgid "_Select action type:"
 msgstr "حرکت کی قسم منتخب کریں:"
 
-#: ../plugins/actions/actions.c:460
+#: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "برخاست + سکرین مقفل"
 
-#: ../plugins/clock/clock-dialog.c:358
+#: ../plugins/actions/actions.c:468
+#, fuzzy
+msgid "_Orientation:"
+msgstr "جہتیابی:"
+
+#: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
 msgstr "صوابدیدی"
 
-#: ../plugins/clock/clock-dialog.c:412
+#: ../plugins/clock/clock-dialog.c:411
 msgid "Display _seconds"
 msgstr "_ڈسپلے سیکنڈ"
 
-#: ../plugins/clock/clock-dialog.c:421
+#: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
 msgstr "24 گ_ھنٹے گھڑی استعمال کریں"
 
-#: ../plugins/clock/clock-dialog.c:427
+#: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:433
+#: ../plugins/clock/clock-dialog.c:432
 msgid "Sho_w AM/PM"
 msgstr "AM/PM د_کھائیں"
 
-#: ../plugins/clock/clock-dialog.c:442
+#: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
 msgstr "حقیقی بائنری گھڑی"
 
@@ -407,7 +393,7 @@ msgstr "LCD"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:520
-#: ../plugins/systray/xfce-tray-dialogs.c:362
+#: ../plugins/systray/xfce-tray-dialogs.c:363
 msgid "Show _frame"
 msgstr "ف_ریم دکھائیں"
 
@@ -417,156 +403,170 @@ msgid "Tooltip Format"
 msgstr "ٹول ٹپ فارمیٹ"
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:553
+#: ../plugins/clock/clock-dialog.c:554
 msgid "Clock Options"
 msgstr "گھڑی اختیارات"
 
-#: ../plugins/iconbox/iconbox.c:910
+#: ../plugins/iconbox/iconbox.c:906
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "آئکن بکس"
 
-#: ../plugins/iconbox/iconbox.c:935
-msgid "Only show minimized applications"
+#: ../plugins/iconbox/iconbox.c:929
+#, fuzzy
+msgid "Only show _minimized applications"
 msgstr "صرف منمائزڈ اطلاقیے دکھائیں"
 
-#: ../plugins/iconbox/iconbox.c:944
-msgid "Show applications of all workspaces"
+#: ../plugins/iconbox/iconbox.c:938
+#, fuzzy
+msgid "Show applications of _all workspaces"
 msgstr "تمام ورک سپیس کے اطلاقیے دکھائیں"
 
-#: ../plugins/iconbox/iconbox.c:952 ../plugins/tasklist/tasklist-dialogs.c:187
-msgid "Use all available space"
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#, fuzzy
+msgid "Use all available _space"
 msgstr "تمام دستیاب خلا استعمال کریں"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:700 ../plugins/launcher/launcher.c:760
+#: ../plugins/launcher/launcher.c:706 ../plugins/launcher/launcher.c:771
 msgid "New Item"
 msgstr "نیا عنصر"
 
-#: ../plugins/launcher/launcher-exec.c:526
+#: ../plugins/launcher/launcher-exec.c:561
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "\"%s\" کو چلانے میں ناکامی"
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:609
 msgid "No icon"
 msgstr "بلا آئکن"
 
-#: ../plugins/launcher/launcher-dialog.c:597
-msgid "Select a Directory"
-msgstr "ڈائریکٹری منتخب کریں"
-
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:631
 msgid "Select an Application"
 msgstr "اطلاقیہ منتخب کریں"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
 msgstr "تمام فائلیں"
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
 msgstr "اطلاقی فائلیں"
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:661
 msgid "Perl Scripts"
 msgstr "پرل سکرپٹ"
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:667
 msgid "Python Scripts"
 msgstr "پائتھن سکرپٹ"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:673
 msgid "Ruby Scripts"
 msgstr "روبی سکرپٹ"
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:679
 msgid "Shell Scripts"
 msgstr "شیل سکرپٹ"
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:755
 msgid "Unknown"
 msgstr "نا معلوم"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:764
+#: ../plugins/launcher/launcher-dialog.c:758
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "\"%s\" کے لیے آئکن منتخب کریں"
 
 #. build name
-#: ../plugins/launcher/launcher-dialog.c:842
-#: ../plugins/launcher/launcher-dialog.c:1341
+#: ../plugins/launcher/launcher-dialog.c:845
+#: ../plugins/launcher/launcher-dialog.c:1339
 msgid "Unnamed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1120
-msgid "_Name"
+#: ../plugins/launcher/launcher-dialog.c:1123
+#, fuzzy
+msgid "_Name:"
 msgstr "_نام"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
-msgid "_Description"
+#: ../plugins/launcher/launcher-dialog.c:1141
+#, fuzzy
+msgid "_Description:"
 msgstr "_تفصیل"
 
-#: ../plugins/launcher/launcher-dialog.c:1157
-msgid "_Icon"
+#: ../plugins/launcher/launcher-dialog.c:1160
+#, fuzzy
+msgid "_Icon:"
 msgstr "_آئکن"
 
-#: ../plugins/launcher/launcher-dialog.c:1175
-msgid "Co_mmand"
+#: ../plugins/launcher/launcher-dialog.c:1178
+#, fuzzy
+msgid "Co_mmand:"
 msgstr "_کمانڈ"
 
-#: ../plugins/launcher/launcher-dialog.c:1202
-msgid "_Working Directory"
+#: ../plugins/launcher/launcher-dialog.c:1205
+#, fuzzy
+msgid "_Working Directory:"
 msgstr "کام کی _ڈائریکٹری"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1211
+#, fuzzy
+msgid "Select a Working Directory"
+msgstr "ڈائریکٹری منتخب کریں"
+
+#: ../plugins/launcher/launcher-dialog.c:1232
 msgid "Run in _terminal"
 msgstr "ٹرمنل میں چلا_ئیں"
 
-#: ../plugins/launcher/launcher-dialog.c:1250
+#: ../plugins/launcher/launcher-dialog.c:1248
 msgid "Use _startup notification"
 msgstr "ابتدائیہ اطلاع استعمال کریں"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1523
-msgid "Program Launcher"
-msgstr "پروگرام لاؤنچر"
+#: ../plugins/launcher/launcher-dialog.c:1524
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "لاؤنچر"
 
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1552
 #, fuzzy
 msgid "A_rrow:"
 msgstr "_تیر بٹن"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Default"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1563
 #, fuzzy
 msgid "Inside Button"
 msgstr "_آئکن بٹن"
 
-#: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
-msgid "Pager"
-msgstr "پیجر"
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
+#, fuzzy
+msgid "Workspace Switcher"
+msgstr "ورک سپیس %d"
 
-#: ../plugins/pager/pager.c:396
-msgid "Number of rows:"
+#: ../plugins/pager/pager.c:397
+#, fuzzy
+msgid "Number _of rows:"
 msgstr "صفوں کی تعداد:"
 
-#: ../plugins/pager/pager.c:400
-msgid "Number of columns:"
+#: ../plugins/pager/pager.c:401
+#, fuzzy
+msgid "Number _of columns:"
 msgstr "کالموں کی تعداد:"
 
-#: ../plugins/pager/pager.c:426
-msgid "Switch workspaces using the mouse wheel"
+#: ../plugins/pager/pager.c:418
+#, fuzzy
+msgid "Switch workspaces using the mouse _wheel"
 msgstr "ماؤس کے پہیہ سے ورک سپیس کے درمیان منتقلی"
 
-#: ../plugins/pager/pager.c:434
+#: ../plugins/pager/pager.c:426
 #, fuzzy
-msgid "Show workspace names"
+msgid "Show workspace _names"
 msgstr "ورک س_پیس کی حرکات ظاہر کریں"
 
 #: ../plugins/separator/separator.c:409
@@ -574,28 +574,30 @@ msgstr "ورک س_پیس کی حرکات ظاہر کریں"
 msgid "Separator or Spacing"
 msgstr "جداگار یا خلا"
 
-#: ../plugins/separator/separator.c:430
+#: ../plugins/separator/separator.c:428
 msgid "Separator Style"
 msgstr "جداگار کا  انداز"
 
 #. space
-#: ../plugins/separator/separator.c:437
-msgid "_Empty Space"
+#: ../plugins/separator/separator.c:435
+#, fuzzy
+msgid "_Empty space"
 msgstr "_خالی خلا"
 
-#: ../plugins/separator/separator.c:446
-msgid "_Expanding Empty Space"
+#: ../plugins/separator/separator.c:444
+#, fuzzy
+msgid "E_xpanding empty space"
 msgstr "خالی خلا کا پ_ھیلاؤ"
 
-#: ../plugins/separator/separator.c:455
+#: ../plugins/separator/separator.c:453
 msgid "_Line"
 msgstr "_لائن"
 
-#: ../plugins/separator/separator.c:464
+#: ../plugins/separator/separator.c:462
 msgid "_Handle"
 msgstr "_ہینڈل"
 
-#: ../plugins/separator/separator.c:473
+#: ../plugins/separator/separator.c:471
 msgid "_Dots"
 msgstr "_نقطے"
 
@@ -610,13 +612,15 @@ msgstr "ونڈوز چھپاکر ڈیسک ٹاپ دکھائیں"
 #. create a dialog
 #. create dialog
 #: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:333
+#: ../plugins/systray/xfce-tray-dialogs.c:334
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "System Tray"
-msgstr "نظام ٹرے"
+#, fuzzy
+msgid "Notification Area"
+msgstr "ضروری اطلاع"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
-msgid "There is already a system tray running on this screen"
+#, fuzzy
+msgid "There is already a notification area running on this screen"
 msgstr "اس سکرین میں پہلے ہیں نظام ٹرے چل رہی ہے"
 
 #. message
@@ -624,19 +628,19 @@ msgstr "اس سکرین میں پہلے ہیں نظام ٹرے چل رہی ہے"
 msgid "The tray manager lost selection"
 msgstr ""
 
-#: ../plugins/systray/xfce-tray-dialogs.c:280
+#: ../plugins/systray/xfce-tray-dialogs.c:281
 #, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "کیا آپ واقعی ورک سپیس '%s' کو حذف کرنا چاہتے ہیں؟"
 
 #. number of rows
-#: ../plugins/systray/xfce-tray-dialogs.c:374
+#: ../plugins/systray/xfce-tray-dialogs.c:375
 #, fuzzy
 msgid "_Number of rows:"
 msgstr "صفوں کی تعداد:"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:389
+#: ../plugins/systray/xfce-tray-dialogs.c:390
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "اطلاقیہ منتخب کریں"
@@ -647,37 +651,40 @@ msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:209
+#: ../plugins/tasklist/tasklist-dialogs.c:208
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "ٹاسک فہرست"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:174
-msgid "Minimum Width:"
+#: ../plugins/tasklist/tasklist-dialogs.c:172
+#, fuzzy
+msgid "_Minimum width:"
 msgstr "کم سے کم چوڑائی:"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:194
-msgid "Use flat buttons"
+#: ../plugins/tasklist/tasklist-dialogs.c:193
+#, fuzzy
+msgid "Use _flat buttons"
 msgstr "فلیٹ بٹن استعمال کریں"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:200
-msgid "Show handle"
+#: ../plugins/tasklist/tasklist-dialogs.c:199
+#, fuzzy
+msgid "Show _handle"
 msgstr "ہینڈل دکھائیں"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:212
+#: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
 msgstr "تمام ورک سپیس کی ٹاسک دکھائیں"
 
 #. keep order in sync with WnckTasklistGroupingType
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:221
 msgid "Never group tasks"
 msgstr "ٹاسک گروپ مت کریں"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:223
+#: ../plugins/tasklist/tasklist-dialogs.c:222
 msgid "Automatically group tasks"
 msgstr "خودکار ٹاسک گروپ کریں"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:224
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Always group tasks"
 msgstr "ہمیشہ ٹاسک گروپ کریں"
 
@@ -713,12 +720,12 @@ msgstr "ورک سپیس '%s' حذف کریں"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:212
+#: ../plugins/windowlist/windowlist-dialog.c:210
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "ونڈو فہرست"
 
-#: ../plugins/windowlist/windowlist-dialog.c:150
+#: ../plugins/windowlist/windowlist-dialog.c:148
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
@@ -726,53 +733,41 @@ msgstr ""
 "<i>ایمرجنسی اطلاع</i> جب اطلاقیے کو توجہ کی ظرورت ہوگی بٹن بلنک کیا جائے گا"
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:157
+#: ../plugins/windowlist/windowlist-dialog.c:155
 msgid "Urgency Notification"
 msgstr "ضروری اطلاع"
 
-#: ../plugins/windowlist/windowlist-dialog.c:164
+#: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
 msgstr "مع_طل شدہ"
 
-#: ../plugins/windowlist/windowlist-dialog.c:173
+#: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
 msgstr "برائ_ے دوسری ورک سپیس"
 
-#: ../plugins/windowlist/windowlist-dialog.c:182
+#: ../plugins/windowlist/windowlist-dialog.c:180
 msgid "For _all workspaces"
 msgstr "برا_ئے تمام ورک سپیس"
 
-#: ../plugins/windowlist/windowlist-dialog.c:196
+#: ../plugins/windowlist/windowlist-dialog.c:194
 msgid "_Icon button"
 msgstr "_آئکن بٹن"
 
-#: ../plugins/windowlist/windowlist-dialog.c:203
+#: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
 msgstr "_تیر بٹن"
 
-#: ../plugins/windowlist/windowlist-dialog.c:221
+#: ../plugins/windowlist/windowlist-dialog.c:219
 msgid "Show _windows from all workspaces"
 msgstr "تمام ور_ک سپیس کی ونڈوز دکھائیں"
 
-#: ../plugins/windowlist/windowlist-dialog.c:230
+#: ../plugins/windowlist/windowlist-dialog.c:228
 msgid "Show a_pplication icons"
 msgstr "ا_طلاقیوں کی آئکن ظاہر کریں"
 
-#: ../plugins/windowlist/windowlist-dialog.c:239
+#: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
 msgstr "ورک س_پیس کی حرکات ظاہر کریں"
-
-#: ../mcs-plugin/plugin.c:39
-msgid "Failed to launch 'xfce4-panel -c'"
-msgstr "'xfce4-panel -c' چلانے میں ناکامی"
-
-#: ../mcs-plugin/plugin.c:57
-msgid "Panel"
-msgstr "پینل"
-
-#: ../plugins/actions/actions.desktop.in.in.h:1
-msgid "Action Buttons"
-msgstr "حرکات بٹن"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -786,16 +781,13 @@ msgstr "کیا وقت ہے؟"
 msgid "Show icons of all running applications"
 msgstr "تمام چلتے اطلاقیوں کی آئکن ظاہر کریں"
 
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "لاؤنچر"
-
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "پروگرام لاؤنچر بمع اختیاری مینیو"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-msgid "Miniature view of all virtual desktops"
+#, fuzzy
+msgid "Switch between virtual desktops"
 msgstr "مصغر منظر برائے تمام ڈیسک ٹاپ"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
@@ -811,7 +803,8 @@ msgid "Toggle desktop show/hide"
 msgstr "ڈیسک ٹاپ ظاہر کریں/چھپائیں"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Show notification icons"
+#, fuzzy
+msgid "Area where notification icons appear"
 msgstr "اطلاعی آئکنز دکھائیں"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -822,9 +815,66 @@ msgstr "تمام چلے اطلاقیے ظاہر کریں"
 msgid "Show list of available windows"
 msgstr "دستیاب ونڈوز کی فہرست ظاہر کریں"
 
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-msgid "Xfce 4 Panel Manager"
-msgstr "ایکسفس 4 پینل منیجر"
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
+msgid "Panel Manager"
+msgstr "پینل منیجر"
+
+#~ msgid "Pager"
+#~ msgstr "پیجر"
+
+#~ msgid "System Tray"
+#~ msgstr "نظام ٹرے"
+
+#~ msgid "Command Prompt"
+#~ msgstr "کمانڈ پرمپٹ"
+
+#~ msgid "X terminal emulator"
+#~ msgstr "ایکس ٹرمنل ایمولیٹر"
+
+#~ msgid "Edit text files"
+#~ msgstr "متن فائلیں مدون کریں"
+
+#~ msgid "Editor"
+#~ msgstr "مدون"
+
+#~ msgid "File Manager"
+#~ msgstr "فائل منیجر"
+
+#~ msgid "Manage files and folders"
+#~ msgstr "فائلوں اور فولڈروں کی ادارت کریں"
+
+#~ msgid "Surf the internet"
+#~ msgstr "انٹرنیٹ سرف کریں"
+
+#~ msgid "Web Browser"
+#~ msgstr "ویب براؤزر"
+
+#~ msgid "Add Items"
+#~ msgstr "عنصر شامل کریں"
+
+#~ msgid "Add Items to the Panel"
+#~ msgstr "پینل میں عنصر شامل کریں"
+
+#~ msgid "Available Items"
+#~ msgstr "دستیاب عناصر"
+
+#~ msgid "Remove Panel"
+#~ msgstr "پینل حذف کریں"
+
+#~ msgid "New Panel"
+#~ msgstr "نیا پینل"
+
+#~ msgid "Panel Actions"
+#~ msgstr "پینل حرکات"
+
+#~ msgid "Program Launcher"
+#~ msgstr "پروگرام لاؤنچر"
+
+#~ msgid "Failed to launch 'xfce4-panel -c'"
+#~ msgstr "'xfce4-panel -c' چلانے میں ناکامی"
+
+#~ msgid "Xfce 4 Panel Manager"
+#~ msgstr "ایکسفس 4 پینل منیجر"
 
 #~ msgid "Unable to register system tray: %s"
 #~ msgstr "نظام ٹرے رجسٹر کرنے نہیں ہوسکی: %s"

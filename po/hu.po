@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 12:57+0100\n"
+"POT-Creation-Date: 2009-01-02 18:26+0100\n"
 "PO-Revision-Date: 2008-10-08 21:30+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Hungarian <translation-team-hu@lists.sourceforge.net>\n"
@@ -17,38 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr "Parancssor"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr "X terminál emulátor"
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr "Egyszerű szövegek írása"
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "Szerkesztő"
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr "Fájlkezelő"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr "Fájlok és mappák kezelése"
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr "Barangolás a weben"
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr "Web böngésző"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -62,7 +30,8 @@ msgid "Remove \"%s\"?"
 msgstr "Törlöd ezt: \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
 msgstr "Az elem lekerül a panelről, és beállítása elvész."
 
 #. configure, hide by default
@@ -84,61 +53,51 @@ msgstr "Mozgat"
 msgid "Remove"
 msgstr "Törlés"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:902
-msgid "Add New Item"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
+#, fuzzy
+msgid "Add New Items..."
 msgstr "Új elem hozzáadása"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913
-#: ../panel/panel.c:694
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
-msgid "Customize Panel"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
+#, fuzzy
+msgid "Customize Panel..."
 msgstr "Panel testreszabása"
 
-#: ../panel/panel.c:705
-msgid "Add Items"
-msgstr "Elemek hozzáadása"
-
-#: ../panel/panel.c:721
-#: ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320
-#: ../plugins/actions/actions.c:458
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr "Kilépés"
 
-#: ../panel/panel.c:731
+#: ../panel/panel.c:631
 msgid "Restart"
 msgstr "Újraindítás"
 
-#: ../panel/panel.c:745
+#: ../panel/panel.c:646
 msgid "About the Xfce Panel"
 msgstr "Xfce Panel névjegy"
 
-#: ../panel/panel-app.c:258
-#: ../panel/panel-app.c:892
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
 msgstr "Bezárod ezt az Xfce panelt?"
 
-#: ../panel/panel-app.c:890
-#: ../panel/panel-app.c:922
-#: ../panel/panel-app.c:955
+#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "Xfce panel"
 
-#: ../panel/panel-app.c:893
+#: ../panel/panel-app.c:903
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Nem törölheted az utolsó panelt. Kilépsz?"
 
-#: ../panel/panel-app.c:920
+#: ../panel/panel-app.c:930
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Törlöd e panelt: \"%d\"?"
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:934
 msgid "The selected panel and all its items will be removed."
 msgstr "A kijelölt panelt és elemeit törlöm."
 
-#: ../panel/panel-app.c:961
-#: ../panel/panel-app.c:962
+#: ../panel/panel-app.c:971 ../panel/panel-app.c:972
 msgid "Developer"
 msgstr "Fejlesztő"
 
@@ -196,210 +155,215 @@ msgstr "Az xfce4-panel már fut"
 msgid "Restarting xfce4-panel..."
 msgstr "Az xfce4-panel újraindítása..."
 
-#: ../panel/panel-dialogs.c:189
+#: ../panel/panel-dialogs.c:196
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Nem tudom megnyitni e modult: \"%s\""
 
-#: ../panel/panel-dialogs.c:634
-msgid "Add Items to the Panel"
-msgstr "Elemek hozzáadása a panelhoz"
+#: ../panel/panel-dialogs.c:610
+#, fuzzy
+msgid "Add New Items"
+msgstr "Új elem hozzáadása"
 
-#: ../panel/panel-dialogs.c:665
-msgid "Drag items from the list to a panel or remove them by dragging them back to the list."
-msgstr "Húzz elemeket a listából egy panelra vagy előbbibe visszahúzva töröld őket."
+#: ../panel/panel-dialogs.c:639
+#, fuzzy
+msgid ""
+"Drag items from the list to a panel or remove\n"
+"them by dragging them back to the list."
+msgstr ""
+"Húzz elemeket a listából egy panelra vagy előbbibe visszahúzva töröld őket."
 
-#: ../panel/panel-dialogs.c:682
-msgid "Available Items"
-msgstr "Elérhető elemek"
+#: ../panel/panel-dialogs.c:650
+msgid "_Search:"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:908
-#: ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
 msgid "Normal Width"
 msgstr "Sima szélesség"
 
-#: ../panel/panel-dialogs.c:909
-#: ../panel/panel-dialogs.c:1145
+#: ../panel/panel-dialogs.c:879 ../panel/panel-dialogs.c:1115
 msgid "Full Width"
 msgstr "Teljes szélesség"
 
-#: ../panel/panel-dialogs.c:913
-#: ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:883 ../panel/panel-dialogs.c:1119
 msgid "Normal Height"
 msgstr "Sima magasság"
 
-#: ../panel/panel-dialogs.c:914
-#: ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1120
 msgid "Full Height"
 msgstr "Teljes magasság"
 
-#: ../panel/panel-dialogs.c:922
-#: ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:892 ../panel/panel-dialogs.c:1129
 msgid "Span Monitors"
 msgstr "Monitorokon át"
 
-#: ../panel/panel-dialogs.c:985
-#: ../panel/panel-dialogs.c:1224
-#: ../panel/panel-dialogs.c:1521
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
+#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Balra"
 
-#: ../panel/panel-dialogs.c:987
-#: ../panel/panel-dialogs.c:1226
-#: ../panel/panel-dialogs.c:1522
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
+#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Jobbra"
 
-#: ../panel/panel-dialogs.c:992
-#: ../panel/panel-dialogs.c:1231
-#: ../panel/panel-dialogs.c:1523
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Fent"
 
-#: ../panel/panel-dialogs.c:994
-#: ../panel/panel-dialogs.c:1233
-#: ../panel/panel-dialogs.c:1524
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
+#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Lent"
 
 #. position
-#: ../panel/panel-dialogs.c:1024
+#: ../panel/panel-dialogs.c:994
 msgid "Position"
 msgstr "Helyzet"
 
-#: ../panel/panel-dialogs.c:1038
-msgid "Fixed Position"
+#: ../panel/panel-dialogs.c:1008
+#, fuzzy
+msgid "_Fixed position"
 msgstr "Rögzített helyzet"
 
-#: ../panel/panel-dialogs.c:1044
-msgid "Freely Moveable"
+#: ../panel/panel-dialogs.c:1014
+#, fuzzy
+msgid "Freely _moveable"
 msgstr "Szabadon mozgatható"
 
-#: ../panel/panel-dialogs.c:1167
+#: ../panel/panel-dialogs.c:1137
 msgid "Auto_hide"
 msgstr "Automatikus el_rejtés"
 
-#: ../panel/panel-dialogs.c:1185
-#: ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1155
 msgid "Orientation:"
 msgstr "Irány:"
 
-#: ../panel/panel-dialogs.c:1197
-#: ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1167 ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "Vízszintes"
 
-#: ../panel/panel-dialogs.c:1199
-#: ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1169 ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "Függőleges"
 
-#: ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1178
 msgid "Handle:"
 msgstr "Fogó:"
 
-#: ../panel/panel-dialogs.c:1220
+#: ../panel/panel-dialogs.c:1190
 msgid "At both sides"
 msgstr "Mindkét oldalon"
 
-#: ../panel/panel-dialogs.c:1300
+#: ../panel/panel-dialogs.c:1270
 msgid "Select Monitor"
 msgstr "Válassz monitort"
 
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428
-#: ../plugins/clock/clock-dialog.c:502
-#: ../plugins/systray/xfce-tray-dialogs.c:351
-#: ../plugins/tasklist/tasklist-dialogs.c:168
-#: ../plugins/windowlist/windowlist-dialog.c:190
+#: ../panel/panel-dialogs.c:1398 ../plugins/clock/clock-dialog.c:502
+#: ../plugins/systray/xfce-tray-dialogs.c:352
+#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: ../panel/panel-dialogs.c:1441
-msgid "Size (pixels):"
+#: ../panel/panel-dialogs.c:1411
+#, fuzzy
+msgid "_Size (pixels):"
 msgstr "Méret (pixelek):"
 
-#: ../panel/panel-dialogs.c:1471
-msgid "Transparency (%):"
+#: ../panel/panel-dialogs.c:1442
+#, fuzzy
+msgid "_Transparency (%):"
 msgstr "Átlátszóság (%):"
 
-#: ../panel/panel-dialogs.c:1497
-msgid "Make active panel opaque"
+#: ../panel/panel-dialogs.c:1468
+#, fuzzy
+msgid "Make active panel _opaque"
 msgstr "Az aktív panel átlátszatlan"
 
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1481
 msgid "Popup position:"
 msgstr "Előugró helyzet:"
 
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1491
 msgid "Automatic"
 msgstr "Önműködő"
 
-#: ../panel/panel-dialogs.c:1564
-#: ../panel/panel-dialogs.c:1600
-#: ../panel/panel-dialogs.c:1624
+#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:1596
 #, c-format
 msgid "Panel %d"
 msgstr "%d. panel"
 
-#: ../panel/panel-dialogs.c:1643
-msgid "Remove Panel"
-msgstr "Panel törlése"
+#: ../panel/panel-dialogs.c:1615
+msgid "Remove the currently selected panel"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1656
-msgid "New Panel"
-msgstr "Új panel"
+#: ../panel/panel-dialogs.c:1628
+#, fuzzy
+msgid "Add a new panel"
+msgstr "Új elemek hozzáadása"
 
-#: ../panel/panel-dialogs.c:1716
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
-msgid "Panel Manager"
-msgstr "Panel kezelő"
+#: ../panel/panel-dialogs.c:1688
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel"
+msgstr "Panel"
 
-#: ../plugins/actions/actions.c:267
-#: ../plugins/actions/actions.c:303
-#: ../plugins/actions/actions.c:459
+#: ../panel/panel-dialogs.c:1695
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
+#, fuzzy
+msgid "Customize the panel settings"
+msgstr "Panel testreszabása"
+
+#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:456
 msgid "Lock screen"
 msgstr "Képernyőzár"
 
-#: ../plugins/actions/actions.c:419
-msgid "Panel Actions"
-msgstr "Panel műveletek"
+#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "Műveletgombok"
 
-#: ../plugins/actions/actions.c:449
-msgid "Select action type:"
+#: ../plugins/actions/actions.c:445
+#, fuzzy
+msgid "_Select action type:"
 msgstr "Művelet típus:"
 
-#: ../plugins/actions/actions.c:460
+#: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Kilépés + Képernyőzár"
 
-#: ../plugins/clock/clock-dialog.c:358
+#: ../plugins/actions/actions.c:468
+#, fuzzy
+msgid "_Orientation:"
+msgstr "Irány:"
+
+#: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
 msgstr "Egyéni"
 
-#: ../plugins/clock/clock-dialog.c:412
+#: ../plugins/clock/clock-dialog.c:411
 msgid "Display _seconds"
 msgstr "Másodperceket kijelzése"
 
-#: ../plugins/clock/clock-dialog.c:421
+#: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
 msgstr "_24 órás óra"
 
-#: ../plugins/clock/clock-dialog.c:427
+#: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:433
+#: ../plugins/clock/clock-dialog.c:432
 msgid "Sho_w AM/PM"
 msgstr "de/du mutatása"
 
-#: ../plugins/clock/clock-dialog.c:442
+#: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
 msgstr "Igazi bináris óra"
 
@@ -427,7 +391,7 @@ msgstr "LCD"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:520
-#: ../plugins/systray/xfce-tray-dialogs.c:362
+#: ../plugins/systray/xfce-tray-dialogs.c:363
 msgid "Show _frame"
 msgstr "_Keret mutatása"
 
@@ -437,156 +401,168 @@ msgid "Tooltip Format"
 msgstr "Eszköztipp formája"
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:553
+#: ../plugins/clock/clock-dialog.c:554
 msgid "Clock Options"
 msgstr "Óra lehetőségek"
 
-#: ../plugins/iconbox/iconbox.c:910
+#: ../plugins/iconbox/iconbox.c:906
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "Ikondoboz"
 
-#: ../plugins/iconbox/iconbox.c:935
-msgid "Only show minimized applications"
+#: ../plugins/iconbox/iconbox.c:929
+#, fuzzy
+msgid "Only show _minimized applications"
 msgstr "Csak a minimalizált alkalmazások mutatása"
 
-#: ../plugins/iconbox/iconbox.c:944
-msgid "Show applications of all workspaces"
+#: ../plugins/iconbox/iconbox.c:938
+#, fuzzy
+msgid "Show applications of _all workspaces"
 msgstr "Alkalmazások mutatása minden munkaterületről"
 
-#: ../plugins/iconbox/iconbox.c:952
-#: ../plugins/tasklist/tasklist-dialogs.c:187
-msgid "Use all available space"
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#, fuzzy
+msgid "Use all available _space"
 msgstr "Teljes hely kitöltése"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:700
-#: ../plugins/launcher/launcher.c:760
+#: ../plugins/launcher/launcher.c:706 ../plugins/launcher/launcher.c:771
 msgid "New Item"
 msgstr "Új elem"
 
-#: ../plugins/launcher/launcher-exec.c:526
+#: ../plugins/launcher/launcher-exec.c:561
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "\"%s\" nem futtatható"
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:609
 msgid "No icon"
 msgstr "Nincs ikon"
 
-#: ../plugins/launcher/launcher-dialog.c:597
-msgid "Select a Directory"
-msgstr "Válassz könyvtárat"
-
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:631
 msgid "Select an Application"
 msgstr "Válassz alkalmazást"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
 msgstr "Minden fájl"
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
 msgstr "Futtatható fájlok"
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:661
 msgid "Perl Scripts"
 msgstr "Perl szkriptek"
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:667
 msgid "Python Scripts"
 msgstr "Python szkriptek"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:673
 msgid "Ruby Scripts"
 msgstr "Ruby szkriptek"
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:679
 msgid "Shell Scripts"
 msgstr "Shell szkriptek"
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:755
 msgid "Unknown"
 msgstr "Ismeretlen"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:764
+#: ../plugins/launcher/launcher-dialog.c:758
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Válassz ikont ehhez: \"%s\""
 
 #. build name
-#: ../plugins/launcher/launcher-dialog.c:842
-#: ../plugins/launcher/launcher-dialog.c:1341
+#: ../plugins/launcher/launcher-dialog.c:845
+#: ../plugins/launcher/launcher-dialog.c:1339
 msgid "Unnamed"
 msgstr "Névtelen"
 
-#: ../plugins/launcher/launcher-dialog.c:1120
-msgid "_Name"
+#: ../plugins/launcher/launcher-dialog.c:1123
+#, fuzzy
+msgid "_Name:"
 msgstr "_Név"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
-msgid "_Description"
+#: ../plugins/launcher/launcher-dialog.c:1141
+#, fuzzy
+msgid "_Description:"
 msgstr "_Leírás"
 
-#: ../plugins/launcher/launcher-dialog.c:1157
-msgid "_Icon"
+#: ../plugins/launcher/launcher-dialog.c:1160
+#, fuzzy
+msgid "_Icon:"
 msgstr "_Ikon"
 
-#: ../plugins/launcher/launcher-dialog.c:1175
-msgid "Co_mmand"
+#: ../plugins/launcher/launcher-dialog.c:1178
+#, fuzzy
+msgid "Co_mmand:"
 msgstr "_Parancs"
 
-#: ../plugins/launcher/launcher-dialog.c:1202
-msgid "_Working Directory"
+#: ../plugins/launcher/launcher-dialog.c:1205
+#, fuzzy
+msgid "_Working Directory:"
 msgstr "Munkakönyvtár"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1211
+#, fuzzy
+msgid "Select a Working Directory"
+msgstr "Válassz könyvtárat"
+
+#: ../plugins/launcher/launcher-dialog.c:1232
 msgid "Run in _terminal"
 msgstr "_Terminálban futtatás"
 
-#: ../plugins/launcher/launcher-dialog.c:1250
+#: ../plugins/launcher/launcher-dialog.c:1248
 msgid "Use _startup notification"
 msgstr "_Indításjelentés használata"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1523
-msgid "Program Launcher"
+#: ../plugins/launcher/launcher-dialog.c:1524
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
 msgstr "Indító"
 
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1552
 msgid "A_rrow:"
 msgstr "Nyíl:"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Default"
 msgstr "Alap"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1563
 msgid "Inside Button"
 msgstr "Belső gomb"
 
-#: ../plugins/pager/pager.c:365
-#: ../plugins/pager/pager.desktop.in.in.h:2
-msgid "Pager"
-msgstr "Lapozó"
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
+#, fuzzy
+msgid "Workspace Switcher"
+msgstr "%d. munkaterület"
 
-#: ../plugins/pager/pager.c:396
-msgid "Number of rows:"
+#: ../plugins/pager/pager.c:397
+#, fuzzy
+msgid "Number _of rows:"
 msgstr "Sorok száma:"
 
-#: ../plugins/pager/pager.c:400
-msgid "Number of columns:"
+#: ../plugins/pager/pager.c:401
+#, fuzzy
+msgid "Number _of columns:"
 msgstr "Oszlopok száma:"
 
-#: ../plugins/pager/pager.c:426
-msgid "Switch workspaces using the mouse wheel"
+#: ../plugins/pager/pager.c:418
+#, fuzzy
+msgid "Switch workspaces using the mouse _wheel"
 msgstr "Munkaterületek váltása egérgörgővel"
 
-#: ../plugins/pager/pager.c:434
-msgid "Show workspace names"
+#: ../plugins/pager/pager.c:426
+#, fuzzy
+msgid "Show workspace _names"
 msgstr "Munkaterület nevek mutatása"
 
 #: ../plugins/separator/separator.c:409
@@ -594,28 +570,30 @@ msgstr "Munkaterület nevek mutatása"
 msgid "Separator or Spacing"
 msgstr "Elválasztó vagy térköz"
 
-#: ../plugins/separator/separator.c:430
+#: ../plugins/separator/separator.c:428
 msgid "Separator Style"
 msgstr "Elválasztó stílus"
 
 #. space
-#: ../plugins/separator/separator.c:437
-msgid "_Empty Space"
+#: ../plugins/separator/separator.c:435
+#, fuzzy
+msgid "_Empty space"
 msgstr "Üres hely"
 
-#: ../plugins/separator/separator.c:446
-msgid "_Expanding Empty Space"
+#: ../plugins/separator/separator.c:444
+#, fuzzy
+msgid "E_xpanding empty space"
 msgstr "Üres hely nyújtása"
 
-#: ../plugins/separator/separator.c:455
+#: ../plugins/separator/separator.c:453
 msgid "_Line"
 msgstr "Vonal"
 
-#: ../plugins/separator/separator.c:464
+#: ../plugins/separator/separator.c:462
 msgid "_Handle"
 msgstr "Fogó"
 
-#: ../plugins/separator/separator.c:473
+#: ../plugins/separator/separator.c:471
 msgid "_Dots"
 msgstr "Pontok"
 
@@ -630,13 +608,15 @@ msgstr "Ablakok rejtése és a munkaasztal mutatása"
 #. create a dialog
 #. create dialog
 #: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:333
+#: ../plugins/systray/xfce-tray-dialogs.c:334
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "System Tray"
-msgstr "Rendszertálca"
+#, fuzzy
+msgid "Notification Area"
+msgstr "Sürgősségi értesítés"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
-msgid "There is already a system tray running on this screen"
+#, fuzzy
+msgid "There is already a notification area running on this screen"
 msgstr "Már fut egy rendszertálca e képernyőn"
 
 #. message
@@ -644,17 +624,17 @@ msgstr "Már fut egy rendszertálca e képernyőn"
 msgid "The tray manager lost selection"
 msgstr ""
 
-#: ../plugins/systray/xfce-tray-dialogs.c:280
+#: ../plugins/systray/xfce-tray-dialogs.c:281
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Biztosan eltávolítod az ismert alkalmazások listáját?"
 
 #. number of rows
-#: ../plugins/systray/xfce-tray-dialogs.c:374
+#: ../plugins/systray/xfce-tray-dialogs.c:375
 msgid "_Number of rows:"
 msgstr "Sorok száma:"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:389
+#: ../plugins/systray/xfce-tray-dialogs.c:390
 msgid "Hidden Applications"
 msgstr "Rejtett alkalmazások"
 
@@ -664,37 +644,40 @@ msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:209
+#: ../plugins/tasklist/tasklist-dialogs.c:208
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Feladatlista"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:174
-msgid "Minimum Width:"
+#: ../plugins/tasklist/tasklist-dialogs.c:172
+#, fuzzy
+msgid "_Minimum width:"
 msgstr "Minimum szélesség:"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:194
-msgid "Use flat buttons"
+#: ../plugins/tasklist/tasklist-dialogs.c:193
+#, fuzzy
+msgid "Use _flat buttons"
 msgstr "Lapos gombok használata"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:200
-msgid "Show handle"
+#: ../plugins/tasklist/tasklist-dialogs.c:199
+#, fuzzy
+msgid "Show _handle"
 msgstr "Fogó mutatása"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:212
+#: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
 msgstr "Feladatok mutatása v_alamennyi munkaterületről"
 
 #. keep order in sync with WnckTasklistGroupingType
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:221
 msgid "Never group tasks"
 msgstr "Feladatok csoportosítása soha"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:223
+#: ../plugins/tasklist/tasklist-dialogs.c:222
 msgid "Automatically group tasks"
 msgstr "Feladatok csoportosítása automatikusan"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:224
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Always group tasks"
 msgstr "Feladatok csoportosítása mindig"
 
@@ -730,63 +713,55 @@ msgstr "'%s' munkaterület törlése"
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:212
+#: ../plugins/windowlist/windowlist-dialog.c:210
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Ablak lista"
 
-#: ../plugins/windowlist/windowlist-dialog.c:150
-msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
-msgstr "A <i>Sürgősségi jelentés</i> villantja a gombot, ha egy alkalmazás figyelmet kér."
+#: ../plugins/windowlist/windowlist-dialog.c:148
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"A <i>Sürgősségi jelentés</i> villantja a gombot, ha egy alkalmazás figyelmet "
+"kér."
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:157
+#: ../plugins/windowlist/windowlist-dialog.c:155
 msgid "Urgency Notification"
 msgstr "Sürgősségi értesítés"
 
-#: ../plugins/windowlist/windowlist-dialog.c:164
+#: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
 msgstr "Kikapcsolva"
 
-#: ../plugins/windowlist/windowlist-dialog.c:173
+#: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
 msgstr "Más munkaterületekre"
 
-#: ../plugins/windowlist/windowlist-dialog.c:182
+#: ../plugins/windowlist/windowlist-dialog.c:180
 msgid "For _all workspaces"
 msgstr "V_alamennyi munkaterületre"
 
-#: ../plugins/windowlist/windowlist-dialog.c:196
+#: ../plugins/windowlist/windowlist-dialog.c:194
 msgid "_Icon button"
 msgstr "_Ikon gomb"
 
-#: ../plugins/windowlist/windowlist-dialog.c:203
+#: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
 msgstr "Nyíl gomb"
 
-#: ../plugins/windowlist/windowlist-dialog.c:221
+#: ../plugins/windowlist/windowlist-dialog.c:219
 msgid "Show _windows from all workspaces"
 msgstr "Ablakok mutatása minden munkaterületről"
 
-#: ../plugins/windowlist/windowlist-dialog.c:230
+#: ../plugins/windowlist/windowlist-dialog.c:228
 msgid "Show a_pplication icons"
 msgstr "_Programikonok mutatása"
 
-#: ../plugins/windowlist/windowlist-dialog.c:239
+#: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
 msgstr "Mun_katerület műveletek mutatása"
-
-#: ../mcs-plugin/plugin.c:39
-msgid "Failed to launch 'xfce4-panel -c'"
-msgstr "'xfce4-panel -c' futtatása sikertelen"
-
-#: ../mcs-plugin/plugin.c:57
-msgid "Panel"
-msgstr "Panel"
-
-#: ../plugins/actions/actions.desktop.in.in.h:1
-msgid "Action Buttons"
-msgstr "Műveletgombok"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -800,16 +775,13 @@ msgstr "Pontos idő"
 msgid "Show icons of all running applications"
 msgstr "Minden futó alkalmazásikon mutatása"
 
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "Indító"
-
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Programindító tetszőleges menüvel"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-msgid "Miniature view of all virtual desktops"
+#, fuzzy
+msgid "Switch between virtual desktops"
 msgstr "Virtuális asztalok mininézete"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
@@ -825,7 +797,8 @@ msgid "Toggle desktop show/hide"
 msgstr "Asztal mutatása/rejtése"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Show notification icons"
+#, fuzzy
+msgid "Area where notification icons appear"
 msgstr "Értesítőikonok mutatása"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -836,21 +809,83 @@ msgstr "Minden futó program mutatása"
 msgid "Show list of available windows"
 msgstr "Elérhető ablakok listájának mutatása"
 
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-msgid "Xfce 4 Panel Manager"
-msgstr "Xfce 4 panel kezelő"
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
+msgid "Panel Manager"
+msgstr "Panel kezelő"
+
+#~ msgid "Pager"
+#~ msgstr "Lapozó"
+
+#~ msgid "System Tray"
+#~ msgstr "Rendszertálca"
+
+#~ msgid "Command Prompt"
+#~ msgstr "Parancssor"
+
+#~ msgid "X terminal emulator"
+#~ msgstr "X terminál emulátor"
+
+#~ msgid "Edit text files"
+#~ msgstr "Egyszerű szövegek írása"
+
+#~ msgid "Editor"
+#~ msgstr "Szerkesztő"
+
+#~ msgid "File Manager"
+#~ msgstr "Fájlkezelő"
+
+#~ msgid "Manage files and folders"
+#~ msgstr "Fájlok és mappák kezelése"
+
+#~ msgid "Surf the internet"
+#~ msgstr "Barangolás a weben"
+
+#~ msgid "Web Browser"
+#~ msgstr "Web böngésző"
+
+#~ msgid "Add Items"
+#~ msgstr "Elemek hozzáadása"
+
+#~ msgid "Add Items to the Panel"
+#~ msgstr "Elemek hozzáadása a panelhoz"
+
+#~ msgid "Available Items"
+#~ msgstr "Elérhető elemek"
+
+#~ msgid "Remove Panel"
+#~ msgstr "Panel törlése"
+
+#~ msgid "New Panel"
+#~ msgstr "Új panel"
+
+#~ msgid "Panel Actions"
+#~ msgstr "Panel műveletek"
+
+#~ msgid "Program Launcher"
+#~ msgstr "Indító"
+
+#~ msgid "Failed to launch 'xfce4-panel -c'"
+#~ msgstr "'xfce4-panel -c' futtatása sikertelen"
+
+#~ msgid "Xfce 4 Panel Manager"
+#~ msgstr "Xfce 4 panel kezelő"
 
 #, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"
 #~ msgstr "Nem lehet bejegyezni a rendszertálcát: %s"
+
 #~ msgid "Show application _names"
 #~ msgstr "Program_nevek mutatása"
+
 #~ msgid "%A %d %B %Y"
 #~ msgstr "%Y. %B %d., %A"
+
 #~ msgid "_Draw Separator"
 #~ msgstr "Elválasztó húzása"
+
 #~ msgid "_Expand"
 #~ msgstr "_Nyújt"
+
 #~ msgid ""
 #~ "\n"
 #~ " Xfce Panel %s\n"
@@ -869,12 +904,14 @@ msgstr "Xfce 4 panel kezelő"
 #~ "\n"
 #~ " GNU GPL licenc alatt.\n"
 #~ "\n"
+
 #~ msgid ""
 #~ " Usage: %s [OPTIONS]\n"
 #~ "\n"
 #~ msgstr ""
 #~ " Használat: %s [LEHETŐSÉGEK]\n"
 #~ "\n"
+
 #~ msgid ""
 #~ " OPTIONS\n"
 #~ " -h, --help      Show this message and exit\n"
@@ -897,46 +934,66 @@ msgstr "Xfce 4 panel kezelő"
 #~ " -x, --exit      Kilépés a panelekből\n"
 #~ " -a, --add       Új elemek hozzáadása\n"
 #~ "\n"
+
 #~ msgid "Error in command \"%s\""
 #~ msgstr "Hiba a parancsban: \"%s\""
+
 #~ msgid "This item has not yet been configured"
 #~ msgstr "Beállítatlan elem"
+
 #~ msgid "File management"
 #~ msgstr "Fájlkezelő"
+
 #~ msgid "Utilities"
 #~ msgstr "Segédeszközök"
+
 #~ msgid "Games"
 #~ msgstr "Játékok"
+
 #~ msgid "Help browser"
 #~ msgstr "Súgó"
+
 #~ msgid "Multimedia"
 #~ msgstr "Multimédia"
+
 #~ msgid "Network"
 #~ msgstr "Hálózat"
+
 #~ msgid "Graphics"
 #~ msgstr "Grafika"
+
 #~ msgid "Printer"
 #~ msgstr "Nyomtató"
+
 #~ msgid "Productivity"
 #~ msgstr "Iroda"
+
 #~ msgid "Office"
 #~ msgstr "Iroda"
+
 #~ msgid "Sound"
 #~ msgstr "Hang"
+
 #~ msgid "Terminal"
 #~ msgstr "Terminál"
+
 #~ msgid "Development"
 #~ msgstr "Fejlesztés"
+
 #~ msgid "Select image file"
 #~ msgstr "Válassz képfájlt"
+
 #~ msgid "Select command"
 #~ msgstr "Parancs kiválasztása"
+
 #~ msgid "Other..."
 #~ msgstr "Más..."
+
 #~ msgid ""
 #~ "The first item in the list is shown on the panel. Additional items will "
 #~ "appear in a menu."
 #~ msgstr "Az lista 1. eleme a panelon. A többi a menüben."
+
 #~ msgid ""
 #~ "Failed to run 0launch:\n"
 #~ "%s\n"
@@ -947,6 +1004,7 @@ msgstr "Xfce 4 panel kezelő"
 #~ "%s\n"
 #~ "\n"
 #~ "Súgó a Zero Install használatához: http://0install.net"
+
 #~ msgid ""
 #~ "The Zero Install GUI has finished, but the launcher dialog has "
 #~ "disappeared in the meantime. Not adding launcher (but any files "
@@ -954,12 +1012,15 @@ msgstr "Xfce 4 panel kezelő"
 #~ msgstr ""
 #~ "A Zero Install GUI kész, de az indító párbeszéd közben eltűnt. Nem adtam "
 #~ "hozzá az indítót (de a letöltött fájlok megvannak)."
+
 #~ msgid "Select file"
 #~ msgstr "Válassz fájlt"
+
 #~ msgid "Test Plugin"
 #~ msgstr "Teszt beillesztés"
+
 #~ msgid "This plugin has no purpose"
 #~ msgstr "E beillesztés teszt célú"
+
 #~ msgid "Size"
 #~ msgstr "Méret"
-

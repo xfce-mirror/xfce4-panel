@@ -68,7 +68,7 @@ xfce_tray_plugin_message (GtkMessageType  type,
     GtkWidget *dialog;
 
     /* create a dialog */
-    dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, type, GTK_BUTTONS_CLOSE, _("System Tray"));
+    dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, type, GTK_BUTTONS_CLOSE, _("Notification Area"));
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s.", message);
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
     gtk_window_set_screen (GTK_WINDOW (dialog), screen);
@@ -95,7 +95,7 @@ xfce_tray_plugin_check (GdkScreen *screen)
     if (running)
     {
         xfce_tray_plugin_message (GTK_MESSAGE_INFO, screen,
-                                  _("There is already a system tray running on this screen"));
+                                  _("There is already a notification area running on this screen"));
     }
 
     return (!running);

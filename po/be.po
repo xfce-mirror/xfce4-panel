@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel trunk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 12:57+0100\n"
+"POT-Creation-Date: 2009-01-02 18:26+0100\n"
 "PO-Revision-Date: 2008-11-09 11:38+0200\n"
 "Last-Translator: Alexander Nyakhaychyk <nyakhaychyk@gmail.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -15,38 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Rosetta-Export-Date: 2007-01-03 10:28+0000\n"
-
-#: ../config/launcher-7.rc.in.h:1
-msgid "Command Prompt"
-msgstr "Загадны радок"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr "Эмулятар X тэрмінала"
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr "Рэдагаваньне тэкставых файлаў"
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "Рэдактар"
-
-#: ../config/launcher-9.rc.in.h:1
-msgid "File Manager"
-msgstr "Кіраўнік файлаў"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr "Кіраваньне файламі і тэчкамі"
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr "Вандроўкі ў Сеціве"
-
-#: ../config/launcher-10.rc.in.h:2
-msgid "Web Browser"
-msgstr "Гартач Сеціва"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -83,55 +51,52 @@ msgstr "Перамясьціць"
 msgid "Remove"
 msgstr "Выдаліць"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:902
-msgid "Add New Item"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
+#, fuzzy
+msgid "Add New Items..."
 msgstr "Дадаць новы элемэнт"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:694
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
-msgid "Customize Panel"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
+#, fuzzy
+msgid "Customize Panel..."
 msgstr "Наладзіць панэль"
 
-#: ../panel/panel.c:705
-msgid "Add Items"
-msgstr "Дадаць элемэнт"
-
-#: ../panel/panel.c:721 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr "Выхад"
 
-#: ../panel/panel.c:731
+#: ../panel/panel.c:631
 msgid "Restart"
 msgstr "Перазапуск"
 
-#: ../panel/panel.c:745
+#: ../panel/panel.c:646
 msgid "About the Xfce Panel"
 msgstr "Пра Панэль Xfce"
 
-#: ../panel/panel-app.c:258 ../panel/panel-app.c:892
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
 msgstr "Выйсьці з Панэлі Xfce?"
 
-#: ../panel/panel-app.c:890 ../panel/panel-app.c:922 ../panel/panel-app.c:955
+#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "Панэль XFce"
 
-#: ../panel/panel-app.c:893
+#: ../panel/panel-app.c:903
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "Вы ня можаце выдаліць апошнюю панэль. Ці жадаеце вы выйсьці з праграмы?"
 
-#: ../panel/panel-app.c:920
+#: ../panel/panel-app.c:930
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Выдаліць Панэль \"%d\"?"
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:934
 msgid "The selected panel and all its items will be removed."
 msgstr "Вылучаная панэль будзе выдалена з усімі яе элемэнтамі."
 
-#: ../panel/panel-app.c:961 ../panel/panel-app.c:962
+#: ../panel/panel-app.c:971 ../panel/panel-app.c:972
 msgid "Developer"
 msgstr "Распрацоўнік"
 
@@ -189,195 +154,216 @@ msgstr "xfce4-panel ужо выконваецца"
 msgid "Restarting xfce4-panel..."
 msgstr "Перазапуска xfce4-panel..."
 
-#: ../panel/panel-dialogs.c:189
+#: ../panel/panel-dialogs.c:196
 #, c-format
 msgid "Could not open \"%s\" module"
 msgstr "Немагчыма адчыніць модуль \"%s\""
 
-#: ../panel/panel-dialogs.c:634
-msgid "Add Items to the Panel"
-msgstr "Дадаць элемэнт на Панэль"
+#: ../panel/panel-dialogs.c:610
+#, fuzzy
+msgid "Add New Items"
+msgstr "Дадаць новы элемэнт"
 
-#: ../panel/panel-dialogs.c:665
+#: ../panel/panel-dialogs.c:639
+#, fuzzy
 msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
+"Drag items from the list to a panel or remove\n"
+"them by dragging them back to the list."
 msgstr ""
 "Перацягніце элемэнты са сьпісу на панэль, каб дадаць іх, альбо з панэлі ў "
 "сьпіс, каб выдаліць."
 
-#: ../panel/panel-dialogs.c:682
-msgid "Available Items"
-msgstr "Наяўныя элемэнты"
+#: ../panel/panel-dialogs.c:650
+msgid "_Search:"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
 msgid "Normal Width"
 msgstr "Звычайная шырыня"
 
-#: ../panel/panel-dialogs.c:909 ../panel/panel-dialogs.c:1145
+#: ../panel/panel-dialogs.c:879 ../panel/panel-dialogs.c:1115
 msgid "Full Width"
 msgstr "На шырыню экрана"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:883 ../panel/panel-dialogs.c:1119
 msgid "Normal Height"
 msgstr "Звычайная вышыня"
 
-#: ../panel/panel-dialogs.c:914 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1120
 msgid "Full Height"
 msgstr "На вышыню экрана"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:892 ../panel/panel-dialogs.c:1129
 msgid "Span Monitors"
 msgstr "Зьвязаныя маніторы"
 
-#: ../panel/panel-dialogs.c:985 ../panel/panel-dialogs.c:1224
-#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
+#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Леваруч"
 
-#: ../panel/panel-dialogs.c:987 ../panel/panel-dialogs.c:1226
-#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
+#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Праваруч"
 
-#: ../panel/panel-dialogs.c:992 ../panel/panel-dialogs.c:1231
-#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Зьверху"
 
-#: ../panel/panel-dialogs.c:994 ../panel/panel-dialogs.c:1233
-#: ../panel/panel-dialogs.c:1524 ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
+#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Унізе"
 
 #. position
-#: ../panel/panel-dialogs.c:1024
+#: ../panel/panel-dialogs.c:994
 msgid "Position"
 msgstr "Становішча"
 
-#: ../panel/panel-dialogs.c:1038
-msgid "Fixed Position"
+#: ../panel/panel-dialogs.c:1008
+#, fuzzy
+msgid "_Fixed position"
 msgstr "Замацаванае становішча"
 
-#: ../panel/panel-dialogs.c:1044
-msgid "Freely Moveable"
+#: ../panel/panel-dialogs.c:1014
+#, fuzzy
+msgid "Freely _moveable"
 msgstr "Вольнае становішча"
 
-#: ../panel/panel-dialogs.c:1167
+#: ../panel/panel-dialogs.c:1137
 msgid "Auto_hide"
 msgstr "Аўтах_аваньне"
 
-#: ../panel/panel-dialogs.c:1185 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1155
 msgid "Orientation:"
 msgstr "Арыентацыя:"
 
-#: ../panel/panel-dialogs.c:1197 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1167 ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "Гарызантальная"
 
-#: ../panel/panel-dialogs.c:1199 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1169 ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "Вэртыкальная"
 
-#: ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1178
 msgid "Handle:"
 msgstr "Зачэпка:"
 
-#: ../panel/panel-dialogs.c:1220
+#: ../panel/panel-dialogs.c:1190
 msgid "At both sides"
 msgstr "З абодвух бакоў"
 
-#: ../panel/panel-dialogs.c:1300
+#: ../panel/panel-dialogs.c:1270
 msgid "Select Monitor"
 msgstr "Вылучыце манітор"
 
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:502
-#: ../plugins/systray/xfce-tray-dialogs.c:351
-#: ../plugins/tasklist/tasklist-dialogs.c:168
-#: ../plugins/windowlist/windowlist-dialog.c:190
+#: ../panel/panel-dialogs.c:1398 ../plugins/clock/clock-dialog.c:502
+#: ../plugins/systray/xfce-tray-dialogs.c:352
+#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "Вонкавы выгляд"
 
-#: ../panel/panel-dialogs.c:1441
-msgid "Size (pixels):"
+#: ../panel/panel-dialogs.c:1411
+#, fuzzy
+msgid "_Size (pixels):"
 msgstr "Памер (піксэлі):"
 
-#: ../panel/panel-dialogs.c:1471
-msgid "Transparency (%):"
+#: ../panel/panel-dialogs.c:1442
+#, fuzzy
+msgid "_Transparency (%):"
 msgstr "Празрыстасьць (%):"
 
-#: ../panel/panel-dialogs.c:1497
-msgid "Make active panel opaque"
+#: ../panel/panel-dialogs.c:1468
+#, fuzzy
+msgid "Make active panel _opaque"
 msgstr "Зрабіць актыўную панэль непразрыстай"
 
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1481
 msgid "Popup position:"
 msgstr "Становішча ўсплыўнога мэню:"
 
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1491
 msgid "Automatic"
 msgstr "Аўтаматычна"
 
-#: ../panel/panel-dialogs.c:1564 ../panel/panel-dialogs.c:1600
-#: ../panel/panel-dialogs.c:1624
+#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:1596
 #, c-format
 msgid "Panel %d"
 msgstr "Панэль %d"
 
-#: ../panel/panel-dialogs.c:1643
-msgid "Remove Panel"
-msgstr "Выдаліць Панэль"
+#: ../panel/panel-dialogs.c:1615
+msgid "Remove the currently selected panel"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1656
-msgid "New Panel"
-msgstr "Стварыць Панэль"
+#: ../panel/panel-dialogs.c:1628
+#, fuzzy
+msgid "Add a new panel"
+msgstr "Дадаць новыя элемэнты"
 
-#: ../panel/panel-dialogs.c:1716
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
-msgid "Panel Manager"
-msgstr "Кіраўнік Панэляў"
+#: ../panel/panel-dialogs.c:1688
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+msgid "Panel"
+msgstr "Панэль"
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
-#: ../plugins/actions/actions.c:459
+#: ../panel/panel-dialogs.c:1695
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
+#, fuzzy
+msgid "Customize the panel settings"
+msgstr "Наладзіць панэль"
+
+#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:456
 msgid "Lock screen"
 msgstr "Замкнуць экран"
 
-#: ../plugins/actions/actions.c:419
-msgid "Panel Actions"
-msgstr "Дзяньні Панэлі"
+#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr "Кнопкі дзеяньняў"
 
-#: ../plugins/actions/actions.c:449
-msgid "Select action type:"
+#: ../plugins/actions/actions.c:445
+#, fuzzy
+msgid "_Select action type:"
 msgstr "Вылучыце тып дзеяньня:"
 
-#: ../plugins/actions/actions.c:460
+#: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Выйсьці і замкнуць экран"
 
-#: ../plugins/clock/clock-dialog.c:358
+#: ../plugins/actions/actions.c:468
+#, fuzzy
+msgid "_Orientation:"
+msgstr "Арыентацыя:"
+
+#: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
 msgstr "Асабісты"
 
-#: ../plugins/clock/clock-dialog.c:412
+#: ../plugins/clock/clock-dialog.c:411
 msgid "Display _seconds"
 msgstr "Паказваць _сэкунды"
 
-#: ../plugins/clock/clock-dialog.c:421
+#: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
 msgstr "24-х гадзінны фармат"
 
-#: ../plugins/clock/clock-dialog.c:427
+#: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
 msgstr "Мі_льгаць падзяляльнікамі"
 
-#: ../plugins/clock/clock-dialog.c:433
+#: ../plugins/clock/clock-dialog.c:432
 msgid "Sho_w AM/PM"
 msgstr "Паказ_ваць AM/PM"
 
-#: ../plugins/clock/clock-dialog.c:442
+#: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
 msgstr "Сапраўдны _бінарны гадзіньнік"
 
@@ -405,7 +391,7 @@ msgstr "Дыёдны"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:520
-#: ../plugins/systray/xfce-tray-dialogs.c:362
+#: ../plugins/systray/xfce-tray-dialogs.c:363
 msgid "Show _frame"
 msgstr "Паказаць _рамку"
 
@@ -415,153 +401,168 @@ msgid "Tooltip Format"
 msgstr "Фармат падказкі:"
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:553
+#: ../plugins/clock/clock-dialog.c:554
 msgid "Clock Options"
 msgstr "Опцыі гадзіньніа"
 
-#: ../plugins/iconbox/iconbox.c:910
+#: ../plugins/iconbox/iconbox.c:906
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
 msgstr "Скрыня значак"
 
-#: ../plugins/iconbox/iconbox.c:935
-msgid "Only show minimized applications"
+#: ../plugins/iconbox/iconbox.c:929
+#, fuzzy
+msgid "Only show _minimized applications"
 msgstr "Паказваць толькі найменшанныя дастасаваньні"
 
-#: ../plugins/iconbox/iconbox.c:944
-msgid "Show applications of all workspaces"
+#: ../plugins/iconbox/iconbox.c:938
+#, fuzzy
+msgid "Show applications of _all workspaces"
 msgstr "Паказваць дастасаваньні з усіх працоўных прастораў"
 
-#: ../plugins/iconbox/iconbox.c:952 ../plugins/tasklist/tasklist-dialogs.c:187
-msgid "Use all available space"
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#, fuzzy
+msgid "Use all available _space"
 msgstr "Выкарыстоўваць усю наяўную прастору"
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:700 ../plugins/launcher/launcher.c:760
+#: ../plugins/launcher/launcher.c:706 ../plugins/launcher/launcher.c:771
 msgid "New Item"
 msgstr "Новы элемэнт"
 
-#: ../plugins/launcher/launcher-exec.c:526
+#: ../plugins/launcher/launcher-exec.c:561
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Немагчыма запусьціць \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:609
 msgid "No icon"
 msgstr "Значка адсутнічае"
 
-#: ../plugins/launcher/launcher-dialog.c:597
-msgid "Select a Directory"
-msgstr "Вылучыце слоўнік"
-
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:631
 msgid "Select an Application"
 msgstr "Вылучыце дастасаваньне"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
 msgstr "Усе файлы"
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
 msgstr "Запускныя файлы"
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:661
 msgid "Perl Scripts"
 msgstr "Сцэнары Perl"
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:667
 msgid "Python Scripts"
 msgstr "Сцэнары Python"
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:673
 msgid "Ruby Scripts"
 msgstr "Сцэнары Ruby"
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:679
 msgid "Shell Scripts"
 msgstr "Сцэнары Shell"
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:755
 msgid "Unknown"
 msgstr "Невядома"
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:764
+#: ../plugins/launcher/launcher-dialog.c:758
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Вылучыце значку для \"%s\""
 
 #. build name
-#: ../plugins/launcher/launcher-dialog.c:842
-#: ../plugins/launcher/launcher-dialog.c:1341
+#: ../plugins/launcher/launcher-dialog.c:845
+#: ../plugins/launcher/launcher-dialog.c:1339
 msgid "Unnamed"
 msgstr "Безназоўны"
 
-#: ../plugins/launcher/launcher-dialog.c:1120
-msgid "_Name"
+#: ../plugins/launcher/launcher-dialog.c:1123
+#, fuzzy
+msgid "_Name:"
 msgstr "_Назва"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
-msgid "_Description"
+#: ../plugins/launcher/launcher-dialog.c:1141
+#, fuzzy
+msgid "_Description:"
 msgstr "Ап_ісаньне"
 
-#: ../plugins/launcher/launcher-dialog.c:1157
-msgid "_Icon"
+#: ../plugins/launcher/launcher-dialog.c:1160
+#, fuzzy
+msgid "_Icon:"
 msgstr "_Значка"
 
-#: ../plugins/launcher/launcher-dialog.c:1175
-msgid "Co_mmand"
+#: ../plugins/launcher/launcher-dialog.c:1178
+#, fuzzy
+msgid "Co_mmand:"
 msgstr "За_гад"
 
-#: ../plugins/launcher/launcher-dialog.c:1202
-msgid "_Working Directory"
+#: ../plugins/launcher/launcher-dialog.c:1205
+#, fuzzy
+msgid "_Working Directory:"
 msgstr "Пра_цоўная дырэкторыя"
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1211
+#, fuzzy
+msgid "Select a Working Directory"
+msgstr "Вылучыце слоўнік"
+
+#: ../plugins/launcher/launcher-dialog.c:1232
 msgid "Run in _terminal"
 msgstr "Выконваць у _тэрмінале"
 
-#: ../plugins/launcher/launcher-dialog.c:1250
+#: ../plugins/launcher/launcher-dialog.c:1248
 msgid "Use _startup notification"
 msgstr "Ін_фармаваньне пра запуск"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1523
-msgid "Program Launcher"
-msgstr "Запускальнік праграм"
+#: ../plugins/launcher/launcher-dialog.c:1524
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
+msgstr "Запускальнік"
 
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1552
 msgid "A_rrow:"
 msgstr "_Стрэлка:"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Default"
 msgstr "Прадвызначаны"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1563
 msgid "Inside Button"
 msgstr "Унутры кнопкі"
 
-#: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
-msgid "Pager"
-msgstr "Працоўныя прасторы"
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
+#, fuzzy
+msgid "Workspace Switcher"
+msgstr "Працоўная прастора %d"
 
-#: ../plugins/pager/pager.c:396
-msgid "Number of rows:"
+#: ../plugins/pager/pager.c:397
+#, fuzzy
+msgid "Number _of rows:"
 msgstr "Колькасьць радкоў:"
 
-#: ../plugins/pager/pager.c:400
-msgid "Number of columns:"
+#: ../plugins/pager/pager.c:401
+#, fuzzy
+msgid "Number _of columns:"
 msgstr "Колькасьць слупкоў:"
 
-#: ../plugins/pager/pager.c:426
-msgid "Switch workspaces using the mouse wheel"
+#: ../plugins/pager/pager.c:418
+#, fuzzy
+msgid "Switch workspaces using the mouse _wheel"
 msgstr "Пераключэньне працоўных прастораў паваротам кола мышы"
 
-#: ../plugins/pager/pager.c:434
-msgid "Show workspace names"
+#: ../plugins/pager/pager.c:426
+#, fuzzy
+msgid "Show workspace _names"
 msgstr "Паказваць назвы прастораў"
 
 #: ../plugins/separator/separator.c:409
@@ -569,28 +570,30 @@ msgstr "Паказваць назвы прастораў"
 msgid "Separator or Spacing"
 msgstr "Падзяляльнік ці прастора"
 
-#: ../plugins/separator/separator.c:430
+#: ../plugins/separator/separator.c:428
 msgid "Separator Style"
 msgstr "Стыль падзяляльніка"
 
 #. space
-#: ../plugins/separator/separator.c:437
-msgid "_Empty Space"
+#: ../plugins/separator/separator.c:435
+#, fuzzy
+msgid "_Empty space"
 msgstr "П_устая прастора"
 
-#: ../plugins/separator/separator.c:446
-msgid "_Expanding Empty Space"
+#: ../plugins/separator/separator.c:444
+#, fuzzy
+msgid "E_xpanding empty space"
 msgstr "Па_шырыць пустую прастору"
 
-#: ../plugins/separator/separator.c:455
+#: ../plugins/separator/separator.c:453
 msgid "_Line"
 msgstr "Л_інія"
 
-#: ../plugins/separator/separator.c:464
+#: ../plugins/separator/separator.c:462
 msgid "_Handle"
 msgstr "За_чэпка"
 
-#: ../plugins/separator/separator.c:473
+#: ../plugins/separator/separator.c:471
 msgid "_Dots"
 msgstr "Кр_опкі"
 
@@ -605,13 +608,15 @@ msgstr "Схаваць вокны й паказаць Сталец"
 #. create a dialog
 #. create dialog
 #: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:333
+#: ../plugins/systray/xfce-tray-dialogs.c:334
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "System Tray"
-msgstr "Сыстэмны сподак"
+#, fuzzy
+msgid "Notification Area"
+msgstr "Прыцягненьне ўвагі"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
-msgid "There is already a system tray running on this screen"
+#, fuzzy
+msgid "There is already a notification area running on this screen"
 msgstr "На гэтым экране ўжо прысутнічае сыстэмная прастора паведамленьняў"
 
 #. message
@@ -619,17 +624,17 @@ msgstr "На гэтым экране ўжо прысутнічае сыстэм�
 msgid "The tray manager lost selection"
 msgstr "Кіраўнік сподка згубіў вылучэньне"
 
-#: ../plugins/systray/xfce-tray-dialogs.c:280
+#: ../plugins/systray/xfce-tray-dialogs.c:281
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr "Вы насамрэч жадаеце ачысьціць сьпіс вядомых дастасаваньняў?"
 
 #. number of rows
-#: ../plugins/systray/xfce-tray-dialogs.c:374
+#: ../plugins/systray/xfce-tray-dialogs.c:375
 msgid "_Number of rows:"
 msgstr "_Колькасьць радкоў:"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:389
+#: ../plugins/systray/xfce-tray-dialogs.c:390
 msgid "Hidden Applications"
 msgstr "Схаваныя дастасаваньні"
 
@@ -639,37 +644,40 @@ msgid "Failed to acquire manager selection for screen %d"
 msgstr "Немагчыма атрымаць кіраўніка вылучэньня для экрана %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:209
+#: ../plugins/tasklist/tasklist-dialogs.c:208
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Сьпіс задач"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:174
-msgid "Minimum Width:"
+#: ../plugins/tasklist/tasklist-dialogs.c:172
+#, fuzzy
+msgid "_Minimum width:"
 msgstr "Найменшая шырыя:"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:194
-msgid "Use flat buttons"
+#: ../plugins/tasklist/tasklist-dialogs.c:193
+#, fuzzy
+msgid "Use _flat buttons"
 msgstr "Плоскія кнопкі"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:200
-msgid "Show handle"
+#: ../plugins/tasklist/tasklist-dialogs.c:199
+#, fuzzy
+msgid "Show _handle"
 msgstr "Паказаць за_чэпку"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:212
+#: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
 msgstr "Паказваць задачы з _усіх працоўных прастораў"
 
 #. keep order in sync with WnckTasklistGroupingType
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:221
 msgid "Never group tasks"
 msgstr "Ніолі не групаваць задачы"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:223
+#: ../plugins/tasklist/tasklist-dialogs.c:222
 msgid "Automatically group tasks"
 msgstr "Аўтаматычна групаваць задачы"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:224
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Always group tasks"
 msgstr "Заўсёды групаваць задачы"
 
@@ -705,12 +713,12 @@ msgstr "Выдаліць Прастору \"%s\""
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:212
+#: ../plugins/windowlist/windowlist-dialog.c:210
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr "Сьпіс вокнаў"
 
-#: ../plugins/windowlist/windowlist-dialog.c:150
+#: ../plugins/windowlist/windowlist-dialog.c:148
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
@@ -718,53 +726,41 @@ msgstr ""
 "<i>Прыцягненьне ўвагі</i> да праграмы праз мільганьне кнопкай дастасаваньня."
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:157
+#: ../plugins/windowlist/windowlist-dialog.c:155
 msgid "Urgency Notification"
 msgstr "Прыцягненьне ўвагі"
 
-#: ../plugins/windowlist/windowlist-dialog.c:164
+#: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
 msgstr "В_ыключана"
 
-#: ../plugins/windowlist/windowlist-dialog.c:173
+#: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
 msgstr "Для _іншых прастораў"
 
-#: ../plugins/windowlist/windowlist-dialog.c:182
+#: ../plugins/windowlist/windowlist-dialog.c:180
 msgid "For _all workspaces"
 msgstr "Для _ўсіх прастораў"
 
-#: ../plugins/windowlist/windowlist-dialog.c:196
+#: ../plugins/windowlist/windowlist-dialog.c:194
 msgid "_Icon button"
 msgstr "_Значка"
 
-#: ../plugins/windowlist/windowlist-dialog.c:203
+#: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
 msgstr "_Стрэлка"
 
-#: ../plugins/windowlist/windowlist-dialog.c:221
+#: ../plugins/windowlist/windowlist-dialog.c:219
 msgid "Show _windows from all workspaces"
 msgstr "Паказваць вокны з _усіх працоўных прастораў"
 
-#: ../plugins/windowlist/windowlist-dialog.c:230
+#: ../plugins/windowlist/windowlist-dialog.c:228
 msgid "Show a_pplication icons"
 msgstr "Паказваць значкі дас_тасаваньняў"
 
-#: ../plugins/windowlist/windowlist-dialog.c:239
+#: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
 msgstr "Паказваць дзяньні над _прасторамі"
-
-#: ../mcs-plugin/plugin.c:39
-msgid "Failed to launch 'xfce4-panel -c'"
-msgstr "Немагчыма выканаць \"xfce4-panel -c\""
-
-#: ../mcs-plugin/plugin.c:57
-msgid "Panel"
-msgstr "Панэль"
-
-#: ../plugins/actions/actions.desktop.in.in.h:1
-msgid "Action Buttons"
-msgstr "Кнопкі дзеяньняў"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -778,16 +774,13 @@ msgstr "Колькі зараз часу?"
 msgid "Show icons of all running applications"
 msgstr "Паказваць значкі для ўсіх дастасаваньняў што працуюць зараз"
 
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "Запускальнік"
-
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Запускальнік праграм з апцыянальным мэню"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-msgid "Miniature view of all virtual desktops"
+#, fuzzy
+msgid "Switch between virtual desktops"
 msgstr "Мініяцюрны выгляд усіх працоўных прастораў"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
@@ -803,7 +796,8 @@ msgid "Toggle desktop show/hide"
 msgstr "Паказвае/хавае Сталец"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-msgid "Show notification icons"
+#, fuzzy
+msgid "Area where notification icons appear"
 msgstr "Паказвае значкі нагадваньня"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -814,9 +808,66 @@ msgstr "Паказвае ўсе праграмы, што зараз працую
 msgid "Show list of available windows"
 msgstr "Паказвае сьпіс наяўных вокнаў"
 
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
-msgid "Xfce 4 Panel Manager"
-msgstr "Кіраўнік Панэлі Xfce 4"
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
+msgid "Panel Manager"
+msgstr "Кіраўнік Панэляў"
+
+#~ msgid "Pager"
+#~ msgstr "Працоўныя прасторы"
+
+#~ msgid "System Tray"
+#~ msgstr "Сыстэмны сподак"
+
+#~ msgid "Command Prompt"
+#~ msgstr "Загадны радок"
+
+#~ msgid "X terminal emulator"
+#~ msgstr "Эмулятар X тэрмінала"
+
+#~ msgid "Edit text files"
+#~ msgstr "Рэдагаваньне тэкставых файлаў"
+
+#~ msgid "Editor"
+#~ msgstr "Рэдактар"
+
+#~ msgid "File Manager"
+#~ msgstr "Кіраўнік файлаў"
+
+#~ msgid "Manage files and folders"
+#~ msgstr "Кіраваньне файламі і тэчкамі"
+
+#~ msgid "Surf the internet"
+#~ msgstr "Вандроўкі ў Сеціве"
+
+#~ msgid "Web Browser"
+#~ msgstr "Гартач Сеціва"
+
+#~ msgid "Add Items"
+#~ msgstr "Дадаць элемэнт"
+
+#~ msgid "Add Items to the Panel"
+#~ msgstr "Дадаць элемэнт на Панэль"
+
+#~ msgid "Available Items"
+#~ msgstr "Наяўныя элемэнты"
+
+#~ msgid "Remove Panel"
+#~ msgstr "Выдаліць Панэль"
+
+#~ msgid "New Panel"
+#~ msgstr "Стварыць Панэль"
+
+#~ msgid "Panel Actions"
+#~ msgstr "Дзяньні Панэлі"
+
+#~ msgid "Program Launcher"
+#~ msgstr "Запускальнік праграм"
+
+#~ msgid "Failed to launch 'xfce4-panel -c'"
+#~ msgstr "Немагчыма выканаць \"xfce4-panel -c\""
+
+#~ msgid "Xfce 4 Panel Manager"
+#~ msgstr "Кіраўнік Панэлі Xfce 4"
 
 #, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"

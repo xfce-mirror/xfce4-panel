@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-12 12:57+0100\n"
+"POT-Creation-Date: 2009-01-02 18:26+0100\n"
 "PO-Revision-Date: 2005-09-29 20:29+0900\n"
 "Last-Translator: Ankit Patel <ankit644@yahoo.com>\n"
 "Language-Team: Gujarati <indianoss-gujarati@lists.sourceforge.net>\n"
@@ -16,41 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-
-#: ../config/launcher-7.rc.in.h:1
-#, fuzzy
-msgid "Command Prompt"
-msgstr "આદેશ"
-
-#: ../config/launcher-7.rc.in.h:2
-msgid "X terminal emulator"
-msgstr ""
-
-#: ../config/launcher-8.rc.in.h:1
-msgid "Edit text files"
-msgstr ""
-
-#: ../config/launcher-8.rc.in.h:2
-msgid "Editor"
-msgstr "સંપાદક"
-
-#: ../config/launcher-9.rc.in.h:1
-#, fuzzy
-msgid "File Manager"
-msgstr "ફાઈલ વ્યવસ્થા"
-
-#: ../config/launcher-9.rc.in.h:2
-msgid "Manage files and folders"
-msgstr ""
-
-#: ../config/launcher-10.rc.in.h:1
-msgid "Surf the internet"
-msgstr ""
-
-#: ../config/launcher-10.rc.in.h:2
-#, fuzzy
-msgid "Web Browser"
-msgstr "મદદ શોધક"
 
 #. dialogs are annoying, just spit out a warning
 #: ../libxfce4panel/xfce-panel-external-item.c:169
@@ -89,58 +54,53 @@ msgstr "શું %s વસ્તુ દૂર કરવી છે?"
 msgid "Remove"
 msgstr "શું %s વસ્તુ દૂર કરવી છે?"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:902
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
 #, fuzzy
-msgid "Add New Item"
+msgid "Add New Items..."
 msgstr "નવી વસ્તુ"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:694
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:1
-msgid "Customize Panel"
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
+msgid "Customize Panel..."
 msgstr ""
 
-#: ../panel/panel.c:705
-msgid "Add Items"
-msgstr ""
-
-#: ../panel/panel.c:721 ../plugins/actions/actions.c:286
-#: ../plugins/actions/actions.c:320 ../plugins/actions/actions.c:458
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr ""
 
-#: ../panel/panel.c:731
+#: ../panel/panel.c:631
 #, fuzzy
 msgid "Restart"
 msgstr "ફરીથી શરુ કરો (_R)"
 
-#: ../panel/panel.c:745
+#: ../panel/panel.c:646
 #, fuzzy
 msgid "About the Xfce Panel"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-app.c:258 ../panel/panel-app.c:892
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
 #, fuzzy
 msgid "Exit Xfce Panel?"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-app.c:890 ../panel/panel-app.c:922 ../panel/panel-app.c:955
+#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-app.c:893
+#: ../panel/panel-app.c:903
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 
-#: ../panel/panel-app.c:920
+#: ../panel/panel-app.c:930
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr ""
 
-#: ../panel/panel-app.c:924
+#: ../panel/panel-app.c:934
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:961 ../panel/panel-app.c:962
+#: ../panel/panel-app.c:971 ../panel/panel-app.c:972
 msgid "Developer"
 msgstr "વિકાસકર્તા"
 
@@ -204,114 +164,115 @@ msgstr ""
 msgid "Restarting xfce4-panel..."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:189
+#: ../panel/panel-dialogs.c:196
 #, fuzzy, c-format
 msgid "Could not open \"%s\" module"
 msgstr ""
 "\"%s\" ચલાવી શક્યા નહિં:\n"
 "%s"
 
-#: ../panel/panel-dialogs.c:634
-msgid "Add Items to the Panel"
-msgstr ""
+#: ../panel/panel-dialogs.c:610
+#, fuzzy
+msgid "Add New Items"
+msgstr "નવી વસ્તુ"
 
-#: ../panel/panel-dialogs.c:665
+#: ../panel/panel-dialogs.c:639
 msgid ""
-"Drag items from the list to a panel or remove them by dragging them back to "
-"the list."
+"Drag items from the list to a panel or remove\n"
+"them by dragging them back to the list."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:682
-msgid "Available Items"
+#: ../panel/panel-dialogs.c:650
+msgid "_Search:"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:908 ../panel/panel-dialogs.c:1144
+#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
 #, fuzzy
 msgid "Normal Width"
 msgstr "સંપૂર્ણ પહોળાઈ:"
 
-#: ../panel/panel-dialogs.c:909 ../panel/panel-dialogs.c:1145
+#: ../panel/panel-dialogs.c:879 ../panel/panel-dialogs.c:1115
 #, fuzzy
 msgid "Full Width"
 msgstr "સંપૂર્ણ પહોળાઈ:"
 
-#: ../panel/panel-dialogs.c:913 ../panel/panel-dialogs.c:1149
+#: ../panel/panel-dialogs.c:883 ../panel/panel-dialogs.c:1119
 #, fuzzy
 msgid "Normal Height"
 msgstr "સંપૂર્ણ પહોળાઈ:"
 
-#: ../panel/panel-dialogs.c:914 ../panel/panel-dialogs.c:1150
+#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1120
 #, fuzzy
 msgid "Full Height"
 msgstr "સંપૂર્ણ પહોળાઈ:"
 
-#: ../panel/panel-dialogs.c:922 ../panel/panel-dialogs.c:1159
+#: ../panel/panel-dialogs.c:892 ../panel/panel-dialogs.c:1129
 #, fuzzy
 msgid "Span Monitors"
 msgstr "સંપાદક"
 
-#: ../panel/panel-dialogs.c:985 ../panel/panel-dialogs.c:1224
-#: ../panel/panel-dialogs.c:1521 ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
+#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:987 ../panel/panel-dialogs.c:1226
-#: ../panel/panel-dialogs.c:1522 ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
+#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:992 ../panel/panel-dialogs.c:1231
-#: ../panel/panel-dialogs.c:1523 ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
+#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:994 ../panel/panel-dialogs.c:1233
-#: ../panel/panel-dialogs.c:1524 ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
+#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr ""
 
 #. position
-#: ../panel/panel-dialogs.c:1024
+#: ../panel/panel-dialogs.c:994
 msgid "Position"
 msgstr "સ્થિતિ"
 
-#: ../panel/panel-dialogs.c:1038
+#: ../panel/panel-dialogs.c:1008
 #, fuzzy
-msgid "Fixed Position"
+msgid "_Fixed position"
 msgstr "સ્થિતિ"
 
-#: ../panel/panel-dialogs.c:1044
-msgid "Freely Moveable"
+#: ../panel/panel-dialogs.c:1014
+msgid "Freely _moveable"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1167
+#: ../panel/panel-dialogs.c:1137
 #, fuzzy
 msgid "Auto_hide"
 msgstr "આપોઆપ સંતાડો"
 
-#: ../panel/panel-dialogs.c:1185 ../plugins/actions/actions.c:471
+#: ../panel/panel-dialogs.c:1155
 #, fuzzy
 msgid "Orientation:"
 msgstr "પેનલની દિશા:"
 
-#: ../panel/panel-dialogs.c:1197 ../plugins/actions/actions.c:484
+#: ../panel/panel-dialogs.c:1167 ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "આડુ"
 
-#: ../panel/panel-dialogs.c:1199 ../plugins/actions/actions.c:485
+#: ../panel/panel-dialogs.c:1169 ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "ઊભુ"
 
-#: ../panel/panel-dialogs.c:1208
+#: ../panel/panel-dialogs.c:1178
 #, fuzzy
 msgid "Handle:"
 msgstr "સ્થિતિ"
 
-#: ../panel/panel-dialogs.c:1220
+#: ../panel/panel-dialogs.c:1190
 msgid "At both sides"
 msgstr "બંને બાજુઓએ"
 
-#: ../panel/panel-dialogs.c:1300
+#: ../panel/panel-dialogs.c:1270
 #, fuzzy
 msgid "Select Monitor"
 msgstr "સંપાદક"
@@ -319,101 +280,110 @@ msgstr "સંપાદક"
 #. appearance settings
 #. appearance
 #. Button Layout
-#: ../panel/panel-dialogs.c:1428 ../plugins/clock/clock-dialog.c:502
-#: ../plugins/systray/xfce-tray-dialogs.c:351
-#: ../plugins/tasklist/tasklist-dialogs.c:168
-#: ../plugins/windowlist/windowlist-dialog.c:190
+#: ../panel/panel-dialogs.c:1398 ../plugins/clock/clock-dialog.c:502
+#: ../plugins/systray/xfce-tray-dialogs.c:352
+#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/windowlist/windowlist-dialog.c:188
 msgid "Appearance"
 msgstr "દેખાવ"
 
-#: ../panel/panel-dialogs.c:1441
-msgid "Size (pixels):"
+#: ../panel/panel-dialogs.c:1411
+msgid "_Size (pixels):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1471
+#: ../panel/panel-dialogs.c:1442
 #, fuzzy
-msgid "Transparency (%):"
+msgid "_Transparency (%):"
 msgstr "પારદર્શકતા"
 
-#: ../panel/panel-dialogs.c:1497
-msgid "Make active panel opaque"
+#: ../panel/panel-dialogs.c:1468
+msgid "Make active panel _opaque"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1510
+#: ../panel/panel-dialogs.c:1481
 #, fuzzy
 msgid "Popup position:"
 msgstr "સ્થિતિ"
 
-#: ../panel/panel-dialogs.c:1520
+#: ../panel/panel-dialogs.c:1491
 msgid "Automatic"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1564 ../panel/panel-dialogs.c:1600
-#: ../panel/panel-dialogs.c:1624
+#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
+#: ../panel/panel-dialogs.c:1596
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-dialogs.c:1643
-#, fuzzy
-msgid "Remove Panel"
-msgstr "શું %s વસ્તુ દૂર કરવી છે?"
+#: ../panel/panel-dialogs.c:1615
+msgid "Remove the currently selected panel"
+msgstr ""
 
-#: ../panel/panel-dialogs.c:1656
+#: ../panel/panel-dialogs.c:1628
 #, fuzzy
-msgid "New Panel"
+msgid "Add a new panel"
+msgstr "નવી વસ્તુ"
+
+#: ../panel/panel-dialogs.c:1688
+#: ../settings/xfce4-panel-manager.desktop.in.h:2
+#, fuzzy
+msgid "Panel"
 msgstr "Xfce પેનલ"
 
-#: ../panel/panel-dialogs.c:1716
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:2
-#, fuzzy
-msgid "Panel Manager"
-msgstr "પેનલ માપ:"
+#: ../panel/panel-dialogs.c:1695
+#: ../settings/xfce4-panel-manager.desktop.in.h:1
+msgid "Customize the panel settings"
+msgstr ""
 
-#: ../plugins/actions/actions.c:267 ../plugins/actions/actions.c:303
-#: ../plugins/actions/actions.c:459
+#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:456
 #, fuzzy
 msgid "Lock screen"
 msgstr "સ્ક્રીનને તાળુ લગાવો (_L)"
 
-#: ../plugins/actions/actions.c:419
-#, fuzzy
-msgid "Panel Actions"
-msgstr "પેનલ સુયોજનો"
+#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.desktop.in.in.h:1
+msgid "Action Buttons"
+msgstr ""
 
-#: ../plugins/actions/actions.c:449
+#: ../plugins/actions/actions.c:445
 #, fuzzy
-msgid "Select action type:"
+msgid "_Select action type:"
 msgstr "આદેશ પસંદ કરો"
 
-#: ../plugins/actions/actions.c:460
+#: ../plugins/actions/actions.c:457
 #, fuzzy
 msgid "Quit + Lock screen"
 msgstr "સ્ક્રીનને તાળુ લગાવો (_L)"
 
-#: ../plugins/clock/clock-dialog.c:358
+#: ../plugins/actions/actions.c:468
+#, fuzzy
+msgid "_Orientation:"
+msgstr "પેનલની દિશા:"
+
+#: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:412
+#: ../plugins/clock/clock-dialog.c:411
 #, fuzzy
 msgid "Display _seconds"
 msgstr "ચિહ્નો પહેલાં સમય દર્શાવો"
 
-#: ../plugins/clock/clock-dialog.c:421
+#: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:427
+#: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:433
+#: ../plugins/clock/clock-dialog.c:432
 #, fuzzy
 msgid "Sho_w AM/PM"
 msgstr "AM/PM"
 
-#: ../plugins/clock/clock-dialog.c:442
+#: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
 msgstr ""
 
@@ -443,7 +413,7 @@ msgstr "LED"
 
 #. show frame
 #: ../plugins/clock/clock-dialog.c:520
-#: ../plugins/systray/xfce-tray-dialogs.c:362
+#: ../plugins/systray/xfce-tray-dialogs.c:363
 #, fuzzy
 msgid "Show _frame"
 msgstr "સમય બતાવો (_t)"
@@ -454,168 +424,170 @@ msgid "Tooltip Format"
 msgstr ""
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:553
+#: ../plugins/clock/clock-dialog.c:554
 msgid "Clock Options"
 msgstr ""
 
-#: ../plugins/iconbox/iconbox.c:910
+#: ../plugins/iconbox/iconbox.c:906
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 #, fuzzy
 msgid "Icon Box"
 msgstr "ચિહ્નબોક્સ"
 
-#: ../plugins/iconbox/iconbox.c:935
+#: ../plugins/iconbox/iconbox.c:929
 #, fuzzy
-msgid "Only show minimized applications"
+msgid "Only show _minimized applications"
 msgstr "માત્ર ન્યૂનતમ કરેલ કાર્યક્રમો જ બતાવો (_S)"
 
-#: ../plugins/iconbox/iconbox.c:944
+#: ../plugins/iconbox/iconbox.c:938
 #, fuzzy
-msgid "Show applications of all workspaces"
+msgid "Show applications of _all workspaces"
 msgstr "બધી કામ કરવાની જગ્યાઓમાંથી બાબતો બતાવો (_a)"
 
-#: ../plugins/iconbox/iconbox.c:952 ../plugins/tasklist/tasklist-dialogs.c:187
-msgid "Use all available space"
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+msgid "Use all available _space"
 msgstr ""
 
 #. create menu item
 #. set some default values
-#: ../plugins/launcher/launcher.c:700 ../plugins/launcher/launcher.c:760
+#: ../plugins/launcher/launcher.c:706 ../plugins/launcher/launcher.c:771
 #, fuzzy
 msgid "New Item"
 msgstr "નવી વસ્તુ"
 
-#: ../plugins/launcher/launcher-exec.c:526
+#: ../plugins/launcher/launcher-exec.c:561
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr ""
 "\"%s\" ચલાવી શક્યા નહિં:\n"
 "%s"
 
-#: ../plugins/launcher/launcher-dialog.c:577
+#: ../plugins/launcher/launcher-dialog.c:609
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:597
-#, fuzzy
-msgid "Select a Directory"
-msgstr "સંપાદક"
-
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:631
 #, fuzzy
 msgid "Select an Application"
 msgstr "આદેશ પસંદ કરો"
 
-#: ../plugins/launcher/launcher-dialog.c:651
+#: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:656
+#: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:671
+#: ../plugins/launcher/launcher-dialog.c:661
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:677
+#: ../plugins/launcher/launcher-dialog.c:667
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:683
+#: ../plugins/launcher/launcher-dialog.c:673
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:689
+#: ../plugins/launcher/launcher-dialog.c:679
 msgid "Shell Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:761
+#: ../plugins/launcher/launcher-dialog.c:755
 msgid "Unknown"
 msgstr ""
 
 #. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:764
+#: ../plugins/launcher/launcher-dialog.c:758
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
 #. build name
-#: ../plugins/launcher/launcher-dialog.c:842
-#: ../plugins/launcher/launcher-dialog.c:1341
+#: ../plugins/launcher/launcher-dialog.c:845
+#: ../plugins/launcher/launcher-dialog.c:1339
 msgid "Unnamed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1120
+#: ../plugins/launcher/launcher-dialog.c:1123
 #, fuzzy
-msgid "_Name"
+msgid "_Name:"
 msgstr "નામ"
 
-#: ../plugins/launcher/launcher-dialog.c:1138
+#: ../plugins/launcher/launcher-dialog.c:1141
 #, fuzzy
-msgid "_Description"
+msgid "_Description:"
 msgstr "વર્ણન"
 
-#: ../plugins/launcher/launcher-dialog.c:1157
+#: ../plugins/launcher/launcher-dialog.c:1160
 #, fuzzy
-msgid "_Icon"
+msgid "_Icon:"
 msgstr "ચિહ્નબોક્સ"
 
-#: ../plugins/launcher/launcher-dialog.c:1175
+#: ../plugins/launcher/launcher-dialog.c:1178
 #, fuzzy
-msgid "Co_mmand"
+msgid "Co_mmand:"
 msgstr "આદેશ"
 
-#: ../plugins/launcher/launcher-dialog.c:1202
-msgid "_Working Directory"
+#: ../plugins/launcher/launcher-dialog.c:1205
+msgid "_Working Directory:"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1234
+#: ../plugins/launcher/launcher-dialog.c:1211
+#, fuzzy
+msgid "Select a Working Directory"
+msgstr "સંપાદક"
+
+#: ../plugins/launcher/launcher-dialog.c:1232
 msgid "Run in _terminal"
 msgstr "ટર્મિનલમાં ચલાવો (_t)"
 
-#: ../plugins/launcher/launcher-dialog.c:1250
+#: ../plugins/launcher/launcher-dialog.c:1248
 msgid "Use _startup notification"
 msgstr "શરુઆત સૂચનો વાપરો (_s)"
 
 #. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1523
-#, fuzzy
-msgid "Program Launcher"
+#: ../plugins/launcher/launcher-dialog.c:1524
+#: ../plugins/launcher/launcher.desktop.in.in.h:1
+msgid "Launcher"
 msgstr "લોન્ચર"
 
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1552
 msgid "A_rrow:"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Default"
 msgstr "મૂળભુત"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1563
 #, fuzzy
 msgid "Inside Button"
 msgstr "ચિહ્નબોક્સ"
 
-#: ../plugins/pager/pager.c:365 ../plugins/pager/pager.desktop.in.in.h:2
-msgid "Pager"
-msgstr "પેજર"
-
-#: ../plugins/pager/pager.c:396
-msgid "Number of rows:"
-msgstr "હરોળોની સંખ્યા:"
-
-#: ../plugins/pager/pager.c:400
-msgid "Number of columns:"
-msgstr "સ્તંભોની સંખ્યા:"
-
-#: ../plugins/pager/pager.c:426
-msgid "Switch workspaces using the mouse wheel"
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
+msgid "Workspace Switcher"
 msgstr ""
 
-#: ../plugins/pager/pager.c:434
+#: ../plugins/pager/pager.c:397
 #, fuzzy
-msgid "Show workspace names"
+msgid "Number _of rows:"
+msgstr "હરોળોની સંખ્યા:"
+
+#: ../plugins/pager/pager.c:401
+#, fuzzy
+msgid "Number _of columns:"
+msgstr "સ્તંભોની સંખ્યા:"
+
+#: ../plugins/pager/pager.c:418
+msgid "Switch workspaces using the mouse _wheel"
+msgstr ""
+
+#: ../plugins/pager/pager.c:426
+#, fuzzy
+msgid "Show workspace _names"
 msgstr "બધી કામ કરવાની જગ્યાઓમાંથી બાબતો બતાવો (_a)"
 
 #: ../plugins/separator/separator.c:409
@@ -624,30 +596,30 @@ msgstr "બધી કામ કરવાની જગ્યાઓમાંથી
 msgid "Separator or Spacing"
 msgstr "વિભાજક"
 
-#: ../plugins/separator/separator.c:430
+#: ../plugins/separator/separator.c:428
 #, fuzzy
 msgid "Separator Style"
 msgstr "વિભાજક"
 
 #. space
-#: ../plugins/separator/separator.c:437
-msgid "_Empty Space"
+#: ../plugins/separator/separator.c:435
+msgid "_Empty space"
 msgstr ""
 
-#: ../plugins/separator/separator.c:446
-msgid "_Expanding Empty Space"
+#: ../plugins/separator/separator.c:444
+msgid "E_xpanding empty space"
 msgstr ""
 
-#: ../plugins/separator/separator.c:455
+#: ../plugins/separator/separator.c:453
 msgid "_Line"
 msgstr ""
 
-#: ../plugins/separator/separator.c:464
+#: ../plugins/separator/separator.c:462
 #, fuzzy
 msgid "_Handle"
 msgstr "સ્થિતિ"
 
-#: ../plugins/separator/separator.c:473
+#: ../plugins/separator/separator.c:471
 msgid "_Dots"
 msgstr ""
 
@@ -662,13 +634,15 @@ msgstr ""
 #. create a dialog
 #. create dialog
 #: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:333
+#: ../plugins/systray/xfce-tray-dialogs.c:334
 #: ../plugins/systray/systray.desktop.in.in.h:2
-msgid "System Tray"
-msgstr ""
+#, fuzzy
+msgid "Notification Area"
+msgstr "શરુઆત સૂચનો વાપરો (_s)"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
-msgid "There is already a system tray running on this screen"
+#, fuzzy
+msgid "There is already a notification area running on this screen"
 msgstr "ત્યાં પહેલાથી જ સિસ્ટમ ટ્રે સ્ક્રીન પર ચાલી રહેલી છે"
 
 #. message
@@ -676,18 +650,18 @@ msgstr "ત્યાં પહેલાથી જ સિસ્ટમ ટ્ર�
 msgid "The tray manager lost selection"
 msgstr ""
 
-#: ../plugins/systray/xfce-tray-dialogs.c:280
+#: ../plugins/systray/xfce-tray-dialogs.c:281
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr ""
 
 #. number of rows
-#: ../plugins/systray/xfce-tray-dialogs.c:374
+#: ../plugins/systray/xfce-tray-dialogs.c:375
 #, fuzzy
 msgid "_Number of rows:"
 msgstr "હરોળોની સંખ્યા:"
 
 #. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:389
+#: ../plugins/systray/xfce-tray-dialogs.c:390
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "આદેશ પસંદ કરો"
@@ -698,41 +672,41 @@ msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:209
+#: ../plugins/tasklist/tasklist-dialogs.c:208
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 #, fuzzy
 msgid "Task List"
 msgstr "બાબતયાદી"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:174
-msgid "Minimum Width:"
+#: ../plugins/tasklist/tasklist-dialogs.c:172
+msgid "_Minimum width:"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialogs.c:194
-msgid "Use flat buttons"
+#: ../plugins/tasklist/tasklist-dialogs.c:193
+msgid "Use _flat buttons"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialogs.c:200
+#: ../plugins/tasklist/tasklist-dialogs.c:199
 #, fuzzy
-msgid "Show handle"
+msgid "Show _handle"
 msgstr "સમય બતાવો (_t)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:212
+#: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
 msgstr "બધી કામ કરવાની જગ્યાઓમાંથી બાબતો બતાવો (_a)"
 
 #. keep order in sync with WnckTasklistGroupingType
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:221
 #, fuzzy
 msgid "Never group tasks"
 msgstr "હંમેશા જૂથની બાબતો (_g)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:223
+#: ../plugins/tasklist/tasklist-dialogs.c:222
 #, fuzzy
 msgid "Automatically group tasks"
 msgstr "હંમેશા જૂથની બાબતો (_g)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:224
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 #, fuzzy
 msgid "Always group tasks"
 msgstr "હંમેશા જૂથની બાબતો (_g)"
@@ -769,70 +743,57 @@ msgstr ""
 
 #. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:212
+#: ../plugins/windowlist/windowlist-dialog.c:210
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:150
+#: ../plugins/windowlist/windowlist-dialog.c:148
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
 
 #. Button Urgency Notification
-#: ../plugins/windowlist/windowlist-dialog.c:157
+#: ../plugins/windowlist/windowlist-dialog.c:155
 #, fuzzy
 msgid "Urgency Notification"
 msgstr "શરુઆત સૂચનો વાપરો (_s)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:164
+#: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:173
+#: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:182
+#: ../plugins/windowlist/windowlist-dialog.c:180
 #, fuzzy
 msgid "For _all workspaces"
 msgstr "બધી કામ કરવાની જગ્યાઓમાંથી બાબતો બતાવો (_a)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:196
+#: ../plugins/windowlist/windowlist-dialog.c:194
 #, fuzzy
 msgid "_Icon button"
 msgstr "ચિહ્નબોક્સ"
 
-#: ../plugins/windowlist/windowlist-dialog.c:203
+#: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:221
+#: ../plugins/windowlist/windowlist-dialog.c:219
 #, fuzzy
 msgid "Show _windows from all workspaces"
 msgstr "બધી કામ કરવાની જગ્યાઓમાંથી બાબતો બતાવો (_a)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:230
+#: ../plugins/windowlist/windowlist-dialog.c:228
 #, fuzzy
 msgid "Show a_pplication icons"
 msgstr "કાર્યક્રમ નામો બતાવો (_n)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:239
+#: ../plugins/windowlist/windowlist-dialog.c:237
 msgid "Show wor_kspace actions"
-msgstr ""
-
-#: ../mcs-plugin/plugin.c:39
-msgid "Failed to launch 'xfce4-panel -c'"
-msgstr ""
-
-#: ../mcs-plugin/plugin.c:57
-#, fuzzy
-msgid "Panel"
-msgstr "Xfce પેનલ"
-
-#: ../plugins/actions/actions.desktop.in.in.h:1
-msgid "Action Buttons"
 msgstr ""
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
@@ -849,16 +810,12 @@ msgstr ""
 msgid "Show icons of all running applications"
 msgstr "માત્ર ન્યૂનતમ કરેલ કાર્યક્રમો જ બતાવો (_S)"
 
-#: ../plugins/launcher/launcher.desktop.in.in.h:1
-msgid "Launcher"
-msgstr "લોન્ચર"
-
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr ""
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-msgid "Miniature view of all virtual desktops"
+msgid "Switch between virtual desktops"
 msgstr ""
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
@@ -875,7 +832,7 @@ msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
-msgid "Show notification icons"
+msgid "Area where notification icons appear"
 msgstr "સૂચક ચિહ્નો બતાવો (_n)"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
@@ -887,10 +844,48 @@ msgstr "માત્ર ન્યૂનતમ કરેલ કાર્યક્
 msgid "Show list of available windows"
 msgstr ""
 
-#: ../mcs-plugin/xfce4-panel-manager.desktop.in.h:3
+#: ../settings/xfce4-panel-manager.desktop.in.h:3
 #, fuzzy
-msgid "Xfce 4 Panel Manager"
+msgid "Panel Manager"
 msgstr "પેનલ માપ:"
+
+#~ msgid "Pager"
+#~ msgstr "પેજર"
+
+#, fuzzy
+#~ msgid "Command Prompt"
+#~ msgstr "આદેશ"
+
+#~ msgid "Editor"
+#~ msgstr "સંપાદક"
+
+#, fuzzy
+#~ msgid "File Manager"
+#~ msgstr "ફાઈલ વ્યવસ્થા"
+
+#, fuzzy
+#~ msgid "Web Browser"
+#~ msgstr "મદદ શોધક"
+
+#, fuzzy
+#~ msgid "Remove Panel"
+#~ msgstr "શું %s વસ્તુ દૂર કરવી છે?"
+
+#, fuzzy
+#~ msgid "New Panel"
+#~ msgstr "Xfce પેનલ"
+
+#, fuzzy
+#~ msgid "Panel Actions"
+#~ msgstr "પેનલ સુયોજનો"
+
+#, fuzzy
+#~ msgid "Program Launcher"
+#~ msgstr "લોન્ચર"
+
+#, fuzzy
+#~ msgid "Xfce 4 Panel Manager"
+#~ msgstr "પેનલ માપ:"
 
 #, fuzzy
 #~ msgid "Failed to register the system tray for screen %d"
