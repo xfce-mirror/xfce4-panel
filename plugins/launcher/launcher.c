@@ -66,7 +66,7 @@ static void            launcher_icon_button_drag_data_received      (GtkWidget  
                                                                      gint                   y,
                                                                      GtkSelectionData      *selection_data,
                                                                      guint                  info,
-                                                                     guint                  time,
+                                                                     guint                  time_,
                                                                      LauncherPlugin        *launcher);
 static gboolean        launcher_arrow_button_pressed                (GtkWidget             *button,
                                                                      GdkEventButton        *event,
@@ -474,7 +474,7 @@ launcher_icon_button_drag_data_received (GtkWidget        *widget,
                                          gint              y,
                                          GtkSelectionData *selection_data,
                                          guint             info,
-                                         guint             time,
+                                         guint             time_,
                                          LauncherPlugin   *launcher)
 {
     GSList        *filenames;
@@ -500,7 +500,7 @@ launcher_icon_button_drag_data_received (GtkWidget        *widget,
     }
 
     /* finish drag */
-    gtk_drag_finish (context, TRUE, FALSE, time);
+    gtk_drag_finish (context, TRUE, FALSE, time_);
 }
 
 

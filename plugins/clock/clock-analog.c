@@ -45,8 +45,6 @@
 
 
 /* prototypes */
-static void      xfce_clock_analog_class_init    (XfceClockAnalogClass *klass);
-static void      xfce_clock_analog_init          (XfceClockAnalog      *clock);
 static void      xfce_clock_analog_finalize      (GObject              *object);
 static void      xfce_clock_analog_set_property  (GObject              *object,
                                                   guint                 prop_id,
@@ -57,7 +55,7 @@ static void      xfce_clock_analog_get_property  (GObject              *object,
                                                   GValue               *value,
                                                   GParamSpec           *pspec);
 static void      xfce_clock_analog_size_request  (GtkWidget            *widget,
-			                                      GtkRequisition       *requisition);
+                                                  GtkRequisition       *requisition);
 static gboolean  xfce_clock_analog_expose_event  (GtkWidget            *widget,
                                                   GdkEventExpose       *event);
 static void      xfce_clock_analog_draw_ticks    (cairo_t              *cr,
@@ -126,10 +124,10 @@ xfce_clock_analog_class_init (XfceClockAnalogClass *klass)
 
 
 static void
-xfce_clock_analog_init (XfceClockAnalog *clock)
+xfce_clock_analog_init (XfceClockAnalog *analog)
 {
     /* init */
-    clock->show_seconds = FALSE;
+    analog->show_seconds = FALSE;
 }
 
 
@@ -148,12 +146,12 @@ xfce_clock_analog_set_property (GObject      *object,
                                 const GValue *value,
                                 GParamSpec   *pspec)
 {
-    XfceClockAnalog *clock = XFCE_CLOCK_ANALOG (object);
+    XfceClockAnalog *analog = XFCE_CLOCK_ANALOG (object);
 
     switch (prop_id)
     {
         case PROP_SHOW_SECONDS:
-            clock->show_seconds = g_value_get_boolean (value);
+            analog->show_seconds = g_value_get_boolean (value);
             break;
 
         default:
@@ -170,12 +168,12 @@ xfce_clock_analog_get_property (GObject    *object,
                                 GValue     *value,
                                 GParamSpec *pspec)
 {
-    XfceClockAnalog *clock = XFCE_CLOCK_ANALOG (object);
+    XfceClockAnalog *analog = XFCE_CLOCK_ANALOG (object);
 
     switch (prop_id)
     {
         case PROP_SHOW_SECONDS:
-            g_value_set_boolean (value, clock->show_seconds);
+            g_value_set_boolean (value, analog->show_seconds);
             break;
 
         default:
@@ -188,7 +186,7 @@ xfce_clock_analog_get_property (GObject    *object,
 
 static void
 xfce_clock_analog_size_request  (GtkWidget      *widget,
-			                     GtkRequisition *requisition)
+                           GtkRequisition *requisition)
 {
     gint width, height;
 
@@ -205,13 +203,13 @@ static gboolean
 xfce_clock_analog_expose_event (GtkWidget      *widget,
                                 GdkEventExpose *event)
 {
-    XfceClockAnalog *clock = XFCE_CLOCK_ANALOG (widget);
+    XfceClockAnalog *analog = XFCE_CLOCK_ANALOG (widget);
     gdouble          xc, yc;
     gdouble          angle, radius;
     cairo_t         *cr;
     struct tm        tm;
 
-    g_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (clock), FALSE);
+    g_return_val_if_fail (XFCE_CLOCK_IS_ANALOG (analog), FALSE);
 
     /* get center of the widget and the radius */
     xc = (widget->allocation.width / 2.0);
@@ -241,7 +239,7 @@ xfce_clock_analog_expose_event (GtkWidget      *widget,
         /* draw the ticks */
         xfce_clock_analog_draw_ticks (cr, xc, yc, radius);
 
-        if (clock->show_seconds)
+        if (analog->show_seconds)
         {
             /* second pointer */
             angle = TICKS_TO_RADIANS (tm.tm_sec);

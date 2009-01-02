@@ -253,7 +253,7 @@ launcher_dialog_tree_drag_data_received (GtkWidget        *widget,
                                          gint              y,
                                          GtkSelectionData *selection_data,
                                          guint             info,
-                                         guint             time,
+                                         guint             time_,
                                          LauncherDialog   *ld)
 {
     GtkTreePath             *path = NULL;
@@ -378,7 +378,7 @@ launcher_dialog_tree_drag_data_received (GtkWidget        *widget,
         gtk_tree_path_free (path);
 
     /* finish drag */
-    gtk_drag_finish (context, TRUE, FALSE, time);
+    gtk_drag_finish (context, TRUE, FALSE, time_);
 }
 
 
@@ -390,7 +390,7 @@ launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
                                           gint              y,
                                           GtkSelectionData *selection_data,
                                           guint             info,
-                                          guint             time,
+                                          guint             time_,
                                           LauncherDialog   *ld)
 {
     GSList   *filenames, *li;
@@ -433,7 +433,7 @@ launcher_dialog_frame_drag_data_received (GtkWidget        *widget,
     }
 
     /* finish drag */
-    gtk_drag_finish (context, TRUE, FALSE, time);
+    gtk_drag_finish (context, TRUE, FALSE, time_);
 }
 
 

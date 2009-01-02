@@ -766,7 +766,7 @@ drag_motion (Panel          *panel,
              GdkDragContext *context,
              int             x,
              int             y,
-             guint           time,
+             guint           time_,
              gpointer        user_data)
 {
     PanelPrivate *priv;
@@ -796,7 +796,7 @@ drag_motion (Panel          *panel,
 static void
 drag_leave (Panel          *panel,
             GdkDragContext *drag_context,
-            guint           time,
+            guint           time_,
             gpointer        user_data)
 {
     int    x, y, w, h, px, py;

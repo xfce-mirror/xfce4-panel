@@ -47,8 +47,6 @@ enum
 
 
 
-static void     frap_icon_entry_class_init          (FrapIconEntryClass *klass);
-static void     frap_icon_entry_init                (FrapIconEntry      *icon_entry);
 static void     frap_icon_entry_finalize            (GObject            *object);
 static void     frap_icon_entry_get_property        (GObject            *object,
                                                      guint               prop_id,

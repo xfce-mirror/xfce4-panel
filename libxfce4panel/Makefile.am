@@ -163,7 +163,8 @@ stamp-libxfce4panel-marshal.h: $(srcdir)/libxfce4panel-marshal.list Makefile
 	&& echo timestamp > $(@F)
 
 libxfce4panel-marshal.c: libxfce4panel-marshal.h Makefile
-	( cd $(srcdir) && glib-genmarshal \
+	echo "#include <libxfce4panel/libxfce4panel-marshal.h>" > xgen-mc \
+	&& ( cd $(srcdir) && glib-genmarshal \
 		--prefix="_libxfce4panel_marshal" \
 		--body libxfce4panel-marshal.list ) >> xgen-mc \
 	&& cp xgen-mc libxfce4panel-marshal.c \

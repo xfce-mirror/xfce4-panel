@@ -41,7 +41,7 @@
 #include <stdlib.h>
 #endif
 
-gboolean
+static gboolean
 xfce4_check_is_running (GtkWidget *widget, Window *xid)
 {
     GdkScreen *gscreen;

@@ -107,7 +107,8 @@ stamp-xfce-tray-marshal.h: $(srcdir)/xfce-tray-marshal.list Makefile
 	&& echo timestamp > $(@F)
 
 xfce-tray-marshal.c: xfce-tray-marshal.h Makefile
-	( cd $(srcdir) && glib-genmarshal \
+	echo "#include \"xfce-tray-marshal.h\"" > xgen-xtmc \
+	&& ( cd $(srcdir) && glib-genmarshal \
 		--prefix=_xfce_tray_marshal \
 		--body xfce-tray-marshal.list ) >> xgen-xtmc \
 	&& cp xgen-xtmc xfce-tray-marshal.c \

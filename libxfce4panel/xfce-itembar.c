@@ -893,7 +893,7 @@ _find_drop_index (XfceItembar *itembar,
 {
     GSList             *l;
     GtkTextDirection    direction;
-    gint                distance, cursor, pos, i, index;
+    gint                distance, cursor, pos, i, idx;
     XfceItembarChild   *child;
     XfceItembarPrivate *priv = itembar->priv;
     gint                best_distance = G_MAXINT;
@@ -903,7 +903,7 @@ _find_drop_index (XfceItembar *itembar,
 
     direction = gtk_widget_get_direction (GTK_WIDGET (itembar));
 
-    index = 0;
+    idx = 0;
 
     child = priv->children->data;
 
@@ -956,11 +956,11 @@ _find_drop_index (XfceItembar *itembar,
         if (distance <= best_distance)
         {
             best_distance = distance;
-            index = i;
+            idx = i;
         }
     }
 
-    return index;
+    return idx;
 }
 
 

@@ -73,6 +73,7 @@
 #define SELECTION_NAME "XFCE4_PANEL"
 #define PANEL_LAUNCHER "launcher"
 #define SAVE_TIMEOUT   30000
+#define TEST_MULTIPLE_MONITORS FALSE
 
 #if defined(TIMER) && defined(G_HAVE_ISO_VARARGS)
 void
@@ -297,15 +298,15 @@ signal_pipe_io (GIOChannel   *source,
                 GIOCondition  cond,
                 gpointer      data)
 {
-    gint  signal;
+    gint  signal_;
     gsize bytes_read;
 
-    if (G_IO_STATUS_NORMAL == g_io_channel_read_chars (source, (gchar *)&signal, 
-                                                       sizeof (signal),
+    if (G_IO_STATUS_NORMAL == g_io_channel_read_chars (source, (gchar *)&signal_, 
+                                                       sizeof (signal_),
                                                        &bytes_read, NULL)
-        && sizeof(signal) == bytes_read)
+        && sizeof(signal_) == bytes_read)
     {
-        switch (signal)
+        switch (signal_)
         {
             case SIGUSR1:
                 DBG ("USR1 signal caught");
@@ -717,7 +718,7 @@ panel_app_run (gchar *client_id)
                                  SESSION_RESTART_IMMEDIATELY, 
                                  40, 
                                  client_id,
-                                 PACKAGE_NAME,
+                                 (gchar *) PACKAGE_NAME,
                                  NULL,
                                  restart_command, 
                                  g_strdupv (restart_command),

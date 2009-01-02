@@ -85,7 +85,7 @@ main (gint argc, gchar **argv)
     MARK ("start gtk_init_with_args ()");
 
     /* initialize gtk */
-    if (!gtk_init_with_args (&argc, &argv, "", option_entries, GETTEXT_PACKAGE, &error))
+    if (!gtk_init_with_args (&argc, &argv, (gchar *) "", option_entries, (gchar *) GETTEXT_PACKAGE, &error))
     {
         g_print ("%s: %s\n", PACKAGE_NAME, error ? error->message : _("Failed to open display"));
 

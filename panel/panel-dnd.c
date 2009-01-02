@@ -33,18 +33,18 @@
 
 static const GtkTargetEntry dest_target_list[] = 
 {
-    { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME },
-    { "application/x-xfce-panel-plugin-widget", GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
+    { (gchar *) "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME },
+    { (gchar *) "application/x-xfce-panel-plugin-widget", GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
 };
 
 static const GtkTargetEntry name_target_list[] = 
 {
-    { "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME }
+    { (gchar *) "application/x-xfce-panel-plugin-name", 0, TARGET_PLUGIN_NAME }
 };
 
 static const GtkTargetEntry widget_target_list[] = 
 {
-    { "application/x-xfce-panel-plugin-widget", GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
+    { (gchar *) "application/x-xfce-panel-plugin-widget", GTK_TARGET_SAME_APP, TARGET_PLUGIN_WIDGET }
 };
 
 /* public API */

@@ -42,7 +42,7 @@ struct _XfcePagerClass
     WnckPagerClass __parent__;
 };
 
-GType      xfce_pager_get_type();
+GType      xfce_pager_get_type                (void) G_GNUC_CONST;
 GtkWidget *xfce_pager_new                     (WnckScreen *screen);
 
 void       xfce_pager_set_workspace_scrolling (XfcePager *pager, 

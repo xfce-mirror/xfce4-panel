@@ -290,7 +290,7 @@ render_text (GtkTreeViewColumn *col,
 static void
 treeview_data_received (GtkWidget *widget, GdkDragContext *context, 
                         gint x, gint y, GtkSelectionData *data, 
-                        guint info, guint time, PanelItemsDialog *pid)
+                        guint info, guint time_, PanelItemsDialog *pid)
 {
     gboolean   succeeded = FALSE;
     GtkWidget *item;
@@ -307,12 +307,12 @@ treeview_data_received (GtkWidget *widget, GdkDragContext *context,
     }
 
     /* finish the drag */
-    gtk_drag_finish (context, succeeded, FALSE, time);
+    gtk_drag_finish (context, succeeded, FALSE, time_);
 }
 
 static gboolean
 treeview_drag_drop (GtkWidget *widget, GdkDragContext *context, 
-                    gint x, gint y, guint time, PanelItemsDialog *pid)
+                    gint x, gint y, guint time_, PanelItemsDialog *pid)
 {
     GdkAtom target = gtk_drag_dest_find_target (widget, context, NULL);
     
@@ -321,7 +321,7 @@ treeview_drag_drop (GtkWidget *widget, GdkDragContext *context,
         return FALSE;
 
     /* request the drag data */
-    gtk_drag_get_data (widget, context, target, time);
+    gtk_drag_get_data (widget, context, target, time_);
   
     /* we call gtk_drag_finish later */
     return TRUE;
@@ -344,7 +344,7 @@ treeview_drag_begin (GtkWidget *treeview, GdkDragContext *context,
 static void
 treeview_data_get (GtkWidget *widget, GdkDragContext *drag_context, 
                    GtkSelectionData *data, guint info, 
-                   guint time, PanelItemsDialog *pid)
+                   guint time_, PanelItemsDialog *pid)
 {
     XfcePanelItemInfo *item_info;
     const gchar       *item_name;

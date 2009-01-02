@@ -39,8 +39,8 @@ G_BEGIN_DECLS
  *
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
  **/
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct)	\
-    		XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,NULL)
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL(construct)  \
+                XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,NULL)
 
 /**
  * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK
@@ -56,16 +56,16 @@ G_BEGIN_DECLS
  *
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
  **/
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check)	\
-    		XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,check)
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_WITH_CHECK(construct,check) \
+                XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,NULL,check)
 
 /**
  * XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL
  * @construct : name of a function that can be cast to #XfcePanelPluginFunc
  * @init      : name of a function that can be case to #XfcePanelPluginPreInit
- * 		or NULL
+ *              or NULL
  * @check     : name of a function that can be cast to #XfcePanelPluginCheck
- * 		or NULL
+ *              or NULL
  *
  * Registers and initializes the plugin. This is the only thing that is
  * required to create a panel plugin.
@@ -83,41 +83,41 @@ G_BEGIN_DECLS
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
  * Since: 4.5
  **/
-#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,init,check)		\
-    gint                                                           		\
-    main (gint argc, gchar **argv)                                 		\
-    {                                                              		\
+#define XFCE_PANEL_PLUGIN_REGISTER_EXTERNAL_FULL(construct,init,check)          \
+    gint                                                                        \
+    main (gint argc, gchar **argv)                                              \
+    {                                                                           \
         GtkWidget              *plugin;                                         \
-	XfcePanelPluginFunc     create  = (XfcePanelPluginFunc)construct;	\
-        XfcePanelPluginPreInit  preinit = (XfcePanelPluginPreInit)init;		\
-        XfcePanelPluginCheck    test    = (XfcePanelPluginCheck)check;		\
-										\
-	if ( preinit )								\
-	{									\
-	    if (G_UNLIKELY (preinit(argc,argv) == FALSE))       			\
-	    	return 3;                                                   	\
-	}									\
-										\
-        gtk_init (&argc, &argv);                                   		\
-                                                                   		\
-	if ( test )								\
-	{									\
-	    if (G_UNLIKELY (test(gdk_screen_get_default()) == FALSE))       	\
-	    	return 2;                                                   	\
-	}									\
-										\
-        plugin = xfce_external_panel_plugin_new (argc, argv, create); 		\
-                                                                   		\
-        if (G_UNLIKELY (plugin == NULL))                           		\
-            return 1;                                              		\
-                                                                   		\
-        g_signal_connect_after (G_OBJECT (plugin), "destroy",      		\
-                                G_CALLBACK (gtk_main_quit), NULL); 		\
-										\
-        gtk_widget_show (plugin);                                  		\
-        gtk_main ();                                               		\
-                                                                   		\
-        return 0;                                                  		\
+        XfcePanelPluginFunc     create  = (XfcePanelPluginFunc) construct;      \
+        XfcePanelPluginPreInit  preinit = (XfcePanelPluginPreInit) init;        \
+        XfcePanelPluginCheck    test    = (XfcePanelPluginCheck) check;         \
+                                                                                \
+        if ( preinit )                                                          \
+        {                                                                       \
+            if (G_UNLIKELY (preinit(argc,argv) == FALSE))                       \
+                return 3;                                                       \
+        }                                                                       \
+                                                                                \
+        gtk_init (&argc, &argv);                                                \
+                                                                                \
+        if ( test )                                                             \
+        {                                                                       \
+            if (G_UNLIKELY (test(gdk_screen_get_default()) == FALSE))           \
+                return 2;                                                       \
+        }                                                                       \
+                                                                                \
+        plugin = xfce_external_panel_plugin_new (argc, argv, create);           \
+                                                                                \
+        if (G_UNLIKELY (plugin == NULL))                                        \
+            return 1;                                                           \
+                                                                                \
+        g_signal_connect_after (G_OBJECT (plugin), "destroy",                   \
+                                G_CALLBACK (gtk_main_quit), NULL);              \
+                                                                                \
+        gtk_widget_show (plugin);                                               \
+        gtk_main ();                                                            \
+                                                                                \
+        return 0;                                                               \
     }
 
 /**
@@ -133,11 +133,13 @@ G_BEGIN_DECLS
  *
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
  **/
-#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct) \
-    XfcePanelPluginFunc                                \
-    xfce_panel_plugin_get_construct (void)             \
-    {                                                  \
-        return (XfcePanelPluginFunc)construct;         \
+#define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL(construct)          \
+    XfcePanelPluginFunc xfce_panel_plugin_get_construct (void); \
+                                                                \
+    XfcePanelPluginFunc                                         \
+    xfce_panel_plugin_get_construct (void)                      \
+    {                                                           \
+        return (XfcePanelPluginFunc) construct;                 \
     }
 
 /**
@@ -158,15 +160,18 @@ G_BEGIN_DECLS
  * See also: <link linkend="XfcePanelPlugin">Panel Plugin interface</link>
  **/
 #define XFCE_PANEL_PLUGIN_REGISTER_INTERNAL_WITH_CHECK(construct,check) \
+    XfcePanelPluginFunc  xfce_panel_plugin_get_construct (void);        \
+    XfcePanelPluginCheck xfce_panel_plugin_get_check     (void);        \
+                                                                        \
     XfcePanelPluginFunc                                                 \
     xfce_panel_plugin_get_construct (void)                              \
     {                                                                   \
-        return (XfcePanelPluginFunc)construct;                          \
+        return (XfcePanelPluginFunc) construct;                         \
     }                                                                   \
     XfcePanelPluginCheck                                                \
     xfce_panel_plugin_get_check (void)                                  \
     {                                                                   \
-        return (XfcePanelPluginCheck)check;                             \
+        return (XfcePanelPluginCheck) check;                            \
     }
 
 G_END_DECLS

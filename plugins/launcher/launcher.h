@@ -107,10 +107,10 @@ enum
 /* target types for dropping in the launcher plugin */
 static const GtkTargetEntry drop_targets[] =
 {
-    { "text/uri-list", 0, 0, },
-    { "STRING",	       0, 0 },
-    { "UTF8_STRING",   0, 0 },
-    { "text/plain",    0, 0 },
+    { (gchar *) "text/uri-list", 0, 0, },
+    { (gchar *) "STRING",	       0, 0 },
+    { (gchar *) "UTF8_STRING",   0, 0 },
+    { (gchar *) "text/plain",    0, 0 },
 };
 
 

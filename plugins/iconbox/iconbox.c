@@ -655,11 +655,7 @@ iconbox_set_size (XfcePanelPlugin *plugin, int size, Iconbox *ib)
     }
 
     for (l = ib->iconlist; l != NULL; l = l->next)
-    {
-        Icon *icon = l->data;
-
-        icon_update_image (icon);
-    }
+        icon_update_image (l->data);
 
     return TRUE;
 }

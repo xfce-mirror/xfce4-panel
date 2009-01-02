@@ -95,14 +95,14 @@ static void _panel_drag_data_received (GtkWidget        *widget,
                                        gint              y,
                                        GtkSelectionData *data,
                                        guint             info,
-                                       guint             time,
+                                       guint             time_,
                                        Panel            *panel);
 
 static gboolean _panel_drag_drop (GtkWidget      *widget,
                                   GdkDragContext *context,
                                   gint            x,
                                   gint            y,
-                                  guint           time,
+                                  guint           time_,
                                   Panel          *panel);
 
 /* DND source */
@@ -415,14 +415,14 @@ _panel_drag_data_received (GtkWidget        *widget,
                            gint              y,
                            GtkSelectionData *data,
                            guint             info,
-                           guint             time,
+                           guint             time_,
                            Panel            *panel)
 {
     XfceItembar   *itembar = XFCE_ITEMBAR (widget);
     PanelPrivate  *priv = panel->priv;
     XfcePanelItem *item;
     GtkWidget     *plugin;
-    gint           index;
+    gint           index_;
     gint           oldindex;
     gboolean       expand;
     gboolean       succeed = FALSE;
@@ -430,7 +430,7 @@ _panel_drag_data_received (GtkWidget        *widget,
     DBG (" + drag data received: %d", info);
 
     /* get the drop index */
-    index = xfce_itembar_get_drop_index (itembar, x, y);
+    index_ = xfce_itembar_get_drop_index (itembar, x, y);
 
     switch (info)
     {
@@ -438,7 +438,7 @@ _panel_drag_data_received (GtkWidget        *widget,
             if (data->length > 0)
             {
                 /* insert the new plugin */
-                panel_insert_item (panel, (const gchar *) data->data, index);
+                panel_insert_item (panel, (const gchar *) data->data, index_);
 
                 /* succeeded */
                 succeed = TRUE;
@@ -470,7 +470,7 @@ _panel_drag_data_received (GtkWidget        *widget,
                 xfce_panel_item_set_screen_position (item, priv->screen_position);
 
                 /* update the itembar */
-                xfce_itembar_reorder_child (itembar, plugin, index);
+                xfce_itembar_reorder_child (itembar, plugin, index_);
                 xfce_itembar_set_child_expand (itembar, plugin, expand);
 
                 /* thaw update notifications */
@@ -481,11 +481,11 @@ _panel_drag_data_received (GtkWidget        *widget,
                 /* get the old index */
                 oldindex = xfce_itembar_get_item_index (itembar, plugin);
 
-                if (index > oldindex)
-                    index--;
+                if (index_ > oldindex)
+                    index_--;
 
-                if (index != oldindex)
-                    xfce_itembar_reorder_child (itembar, plugin, index);
+                if (index_ != oldindex)
+                    xfce_itembar_reorder_child (itembar, plugin, index_);
             }
 
             /* properly handled */
@@ -498,7 +498,7 @@ _panel_drag_data_received (GtkWidget        *widget,
     }
 
     /* finish the drag */
-    gtk_drag_finish (context, succeed, FALSE, time);
+    gtk_drag_finish (context, succeed, FALSE, time_);
 }
 
 static gboolean
@@ -506,7 +506,7 @@ _panel_drag_drop (GtkWidget      *widget,
                   GdkDragContext *context,
                   gint            x,
                   gint            y,
-                  guint           time,
+                  guint           time_,
                   Panel          *panel)
 {
     GdkAtom target = gtk_drag_dest_find_target (widget, context, NULL);
@@ -516,7 +516,7 @@ _panel_drag_drop (GtkWidget      *widget,
         return FALSE;
 
     /* request the drag data */
-    gtk_drag_get_data (widget, context, target, time);
+    gtk_drag_get_data (widget, context, target, time_);
 
     /* we call gtk_drag_finish later */
     return TRUE;
@@ -824,8 +824,7 @@ _item_start_move (GtkWidget *item,
     g_signal_connect (G_OBJECT (item), "drag-end", G_CALLBACK (_item_start_move_end), panel);
 }
 
-extern void panel_set_hidden (Panel    *panel,
-                              gboolean  hide);
+
 
 static void
 _item_set_panel_hidden (GtkWidget *item,

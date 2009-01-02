@@ -67,6 +67,9 @@ void panel_screen_size_changed (GdkScreen *screen,
 
 void panel_set_autohide (Panel *panel,
                          gboolean autohide);
+                         
+void panel_set_hidden (Panel    *panel,
+                       gboolean  hide);
 
 void panel_block_autohide (Panel *panel);
 
