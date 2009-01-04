@@ -1,13 +1,21 @@
 4.5.xx
 ======
 - Cache tooltip icons. Since gtk queries it a lot, resulting in too many
-  open()'s for loading the pixbuf (bug #4616).
+  open()'s for loading the pixbuf (bug #4614).
 - Rebuild the plugin if the properties dialog is cancelled (bug #4612).
 - Set DISPLAY variable so the launcher launches on the correct screen
-  (bug #4654).
+  (bug #4654 and #4693)).
 - Add missing functions in the symbols file (bug #4700).
 - Added a libxfce4panel.h header that includes all other headers for
   plugin writers.
+- Use -V for version information.
+- Fix broken actions button when the panel orientation is changed (bug #4544).
+- Fix a lot of compiler warnings with -Werror.
+- Make all the labels mnemonic when possible.
+- Lot of dialog tweaks when it comes to strings and spacing.
+- New xfce4-panel icons.
+- Use a location selector for the launcher dialog's working directory.
+- Rename Pager to Workspace Switcher and Systray to Notification Area.
 
 
 4.5.92
