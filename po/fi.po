@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:55+0100\n"
 "PO-Revision-Date: 2009-01-03 14:11+0200\n"
 "Last-Translator: Jari Rahkonen <jari.rahkonen@pp1.inet.fi>\n"
 "Language-Team: Finnish <translation-team-fi@lists.sourceforge.net>\n"
@@ -98,57 +98,57 @@ msgid "Developer"
 msgstr "Kehittäjä"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "Näytä tämä viesti ja poistu"
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "Näytä asetusdialogi"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "Mukauta paneelia..."
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "Tallenna asetukset"
 
 #: ../panel/main.c:63
-msgid "Restart panels"
-msgstr "Käynnistä paneelit uudelleen"
+#, fuzzy
+msgid "Restart the running instance of xfce4-panel"
+msgstr "Käynnistetään xfce4-panel uudelleen"
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr "Lopeta istunto"
+#, fuzzy
+msgid "Log out the active session"
+msgstr "Kirjaudu ulos tai lukitse näyttö"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Sulje paneelit ja ohjelma"
 
 #: ../panel/main.c:66
-msgid "Add new items"
-msgstr "Lisää uusi osa"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
+msgstr "Lisää osia"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr "Näytön avaaminen epäonnistui"
 
 #: ../panel/main.c:102
-#, fuzzy
-msgid "Copyright (c) 2004-2007"
-msgstr "Tekijänoikeus (c) 2004-2009"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce:n kehitystiimi. Kaikki oikeudet pidätetään."
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Ilmoita virheistä osoitteeseen <%s>."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "Xfce4-panel on jo käynnissä"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "Käynnistetään xfce4-panel uudelleen"
 
@@ -194,22 +194,22 @@ msgid "Span Monitors"
 msgstr "Levitä kaikille näytöille"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Vasemmalla"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Oikealla"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Ylhäällä"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Alhaalla"
 
@@ -276,34 +276,26 @@ msgstr "Läpi_näkyvyys %:"
 msgid "Make active panel _opaque"
 msgstr "Tee aktiivisesta paneelista läpinäkymätön"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr "Ponnahdusvalikon sijainti"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr "Automaattinen"
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Paneeli %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr "Poista valittu paneeli"
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 msgid "Add a new panel"
 msgstr "Lisää paneeli"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Paneeli"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize the panel settings"
 msgstr "Mukauta paneelin asetuksia"
@@ -415,7 +407,7 @@ msgstr "_Täytä käytettävissä oleva tila"
 msgid "New Item"
 msgstr "Uusi osa"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Kohteen \"%s\" suoritus epäonnistui"
@@ -754,25 +746,60 @@ msgid "Adds a space or a line between panel items"
 msgstr "Lisää tyhjää tilaa tai viiva paneelin osien väliin"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Näytä työpöytä"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "Piilota ikkunat ja näytä työpöytä"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Näytä tai piilota työpöytä"
+msgid "Show Desktop"
+msgstr "Näytä työpöytä"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 msgid "Area where notification icons appear"
 msgstr "Ilmoituskuvakkeille varattu alue"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Näytä kaikki käynnissä olevat sovellukset"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Näytä lista käytettävissä olevista ikkunoista"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Paneelin hallinta"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "Näytä tämä viesti ja poistu"
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "Näytä asetusdialogi"
+
+#~ msgid "Restart panels"
+#~ msgstr "Käynnistä paneelit uudelleen"
+
+#~ msgid "End the session"
+#~ msgstr "Lopeta istunto"
+
+#~ msgid "Add new items"
+#~ msgstr "Lisää uusi osa"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2007"
+#~ msgstr "Tekijänoikeus (c) 2004-2009"
+
+#~ msgid "Popup position:"
+#~ msgstr "Ponnahdusvalikon sijainti"
+
+#~ msgid "Automatic"
+#~ msgstr "Automaattinen"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "Näytä tai piilota työpöytä"
+
+#~ msgid "Show all running applications"
+#~ msgstr "Näytä kaikki käynnissä olevat sovellukset"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "Näytä lista käytettävissä olevista ikkunoista"
