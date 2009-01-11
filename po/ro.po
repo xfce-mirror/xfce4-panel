@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2007-01-20 23:09+0200\n"
 "Last-Translator: Mişu Moldovan <dumol@gnome.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -103,26 +103,27 @@ msgid "Developer"
 msgstr "Dezvoltator"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
+msgid "Print version information and exit"
 msgstr ""
 
 #: ../panel/main.c:61
 #, fuzzy
-msgid "Show configuration dialog"
-msgstr "Arată iconiţele de notificare"
+msgid "Show 'Customize Panel' dialog"
+msgstr "Preferinţe panou"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
-msgstr ""
+#, fuzzy
+msgid "Save the panel configuration"
+msgstr "Arată iconiţele de notificare"
 
 #: ../panel/main.c:63
-#, fuzzy
-msgid "Restart panels"
-msgstr "Repornire"
+msgid "Restart the running instance of xfce4-panel"
+msgstr ""
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr ""
+#, fuzzy
+msgid "Log out the active session"
+msgstr "Ieşire sau blocare ecran"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
@@ -130,33 +131,29 @@ msgstr ""
 
 #: ../panel/main.c:66
 #, fuzzy
-msgid "Add new items"
+msgid "Show 'Add New Items' dialog"
 msgstr "Adăugare element nou"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 #, fuzzy
 msgid "Failed to open display"
 msgstr "Nu s-a putut porni „%s”"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr ""
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr ""
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr ""
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr ""
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr ""
 
@@ -206,22 +203,22 @@ msgid "Span Monitors"
 msgstr "Pe toate monitoarele"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Stânga"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Dreapta"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Sus"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Jos"
 
@@ -293,36 +290,27 @@ msgstr "Transparenţă (%):"
 msgid "Make active panel _opaque"
 msgstr "Fă panoul activ opac"
 
-#: ../panel/panel-dialogs.c:1481
-#, fuzzy
-msgid "Popup position:"
-msgstr "Poziţie"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Panoul %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "Adăugare element nou"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Panou"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -443,7 +431,7 @@ msgstr "Utilizează tot spaţiul disponibil"
 msgid "New Item"
 msgstr "Element nou"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Nu s-a putut porni „%s”"
@@ -806,12 +794,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "Adaugă un spaţiu ori o linie între elementele panoului"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Arată desktopul"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "Ascunde ferestrele şi arată desktopul"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Comută între desktop şi aplicaţii"
+msgid "Show Desktop"
+msgstr "Arată desktopul"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -819,16 +808,37 @@ msgid "Area where notification icons appear"
 msgstr "Arată iconiţele de notificare"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Arată toate aplicaţiile pornite"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Arată lista ferestrelor disponibile"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Administrator de panouri"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "Arată lista ferestrelor disponibile"
+
+#~ msgid "Show all running applications"
+#~ msgstr "Arată toate aplicaţiile pornite"
+
+#, fuzzy
+#~ msgid "Popup position:"
+#~ msgstr "Poziţie"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "Comută între desktop şi aplicaţii"
+
+#, fuzzy
+#~ msgid "Restart panels"
+#~ msgstr "Repornire"
+
+#, fuzzy
+#~ msgid "Add new items"
+#~ msgstr "Adăugare element nou"
 
 #~ msgid "Pager"
 #~ msgstr "Comutator"

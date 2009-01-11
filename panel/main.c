@@ -57,14 +57,13 @@ static gchar    *opt_client_id = NULL;
 /* command line options */
 static GOptionEntry option_entries[] =
 {
-    { "version",   'V', 0, G_OPTION_ARG_NONE, &opt_version,   N_ ("Show this message and exit"), NULL },
-    { "customize", 'c', 0, G_OPTION_ARG_NONE, &opt_customize, N_ ("Show configuration dialog"), NULL },
-    { "save",      's', 0, G_OPTION_ARG_NONE, &opt_save,      N_ ("Save configuration"), NULL },
-    { "restart",   'r', 0, G_OPTION_ARG_NONE, &opt_restart,   N_ ("Restart panels"), NULL },
-    { "quit",      'q', 0, G_OPTION_ARG_NONE, &opt_quit,      N_ ("End the session"), NULL },
+    { "version",   'V', 0, G_OPTION_ARG_NONE, &opt_version,   N_ ("Print version information and exit"), NULL },
+    { "customize", 'c', 0, G_OPTION_ARG_NONE, &opt_customize, N_ ("Show 'Customize Panel' dialog"), NULL },
+    { "save",      's', 0, G_OPTION_ARG_NONE, &opt_save,      N_ ("Save the panel configuration"), NULL },
+    { "restart",   'r', 0, G_OPTION_ARG_NONE, &opt_restart,   N_ ("Restart the running instance of xfce4-panel"), NULL },
+    { "quit",      'q', 0, G_OPTION_ARG_NONE, &opt_quit,      N_ ("Log out the active session"), NULL },
     { "exit",      'x', 0, G_OPTION_ARG_NONE, &opt_exit,      N_ ("Close all panels and end the program"), NULL },
-    { "add",       'a', 0, G_OPTION_ARG_NONE, &opt_add,       N_ ("Add new items"), NULL },
-
+    { "add",       'a', 0, G_OPTION_ARG_NONE, &opt_add,       N_ ("Show 'Add New Items' dialog"), NULL },
     { "sm-client-id", 0, G_OPTION_FLAG_HIDDEN, G_OPTION_ARG_STRING, &opt_client_id, NULL, NULL },
     { NULL }
 };
@@ -99,7 +98,7 @@ main (gint argc, gchar **argv)
     if (G_UNLIKELY (opt_version))
     {
         g_print ("%s %s (Xfce %s)\n\n", PACKAGE_NAME, PACKAGE_VERSION, xfce_version_string ());
-        g_print ("%s\n", _("Copyright (c) 2004-2009"));
+        g_print ("%s\n", "Copyright (c) 2004-2009");
         g_print ("\t%s\n\n", _("The Xfce development team. All rights reserved."));
         g_print (_("Please report bugs to <%s>."), PACKAGE_BUGREPORT);
         g_print ("\n");

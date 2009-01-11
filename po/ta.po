@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2005-09-29 20:42+0900\n"
 "Last-Translator: Dinesh Nadarajah <n_dinesh@yahoo.com>\n"
 "Language-Team: Tamil <tamilinix@yahoogroups.com>\n"
@@ -103,25 +103,25 @@ msgid "Developer"
 msgstr ""
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
+msgid "Print version information and exit"
 msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
+msgid "Show 'Customize Panel' dialog"
 msgstr ""
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+msgid "Save the panel configuration"
 msgstr ""
 
 #: ../panel/main.c:63
-#, fuzzy
-msgid "Restart panels"
-msgstr "_நிலைமீட்டு"
+msgid "Restart the running instance of xfce4-panel"
+msgstr ""
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr ""
+#, fuzzy
+msgid "Log out the active session"
+msgstr "திரையைப் பூட்டுக"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
@@ -129,32 +129,28 @@ msgstr ""
 
 #: ../panel/main.c:66
 #, fuzzy
-msgid "Add new items"
+msgid "Show 'Add New Items' dialog"
 msgstr "புதிய உருப்படி சேர்க்கவும்"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr ""
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr ""
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr ""
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr ""
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr ""
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr ""
 
@@ -200,22 +196,22 @@ msgid "Span Monitors"
 msgstr "பதிப்பான்"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr ""
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr ""
 
@@ -288,37 +284,28 @@ msgstr ""
 msgid "Make active panel _opaque"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1481
-#, fuzzy
-msgid "Popup position:"
-msgstr "இடம்"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "XFCE பலகை"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "புதிய உருப்படி சேர்க்கவும்"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 #, fuzzy
 msgid "Panel"
 msgstr "XFCE பலகை"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize the panel settings"
 msgstr ""
@@ -442,7 +429,7 @@ msgstr ""
 msgid "New Item"
 msgstr "புதிய உருப்படி சேர்க்கவும்"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr ""
@@ -810,11 +797,11 @@ msgid "Adds a space or a line between panel items"
 msgstr ""
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
+msgid "Hide all windows and show the desktop"
 msgstr ""
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
+msgid "Show Desktop"
 msgstr ""
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
@@ -822,17 +809,29 @@ msgid "Area where notification icons appear"
 msgstr ""
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
+msgid "Switch between open windows using buttons"
 msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
+msgid "Switch between open windows using a menu"
 msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 #, fuzzy
 msgid "Panel Manager"
 msgstr "பலகை அளவு:"
+
+#, fuzzy
+#~ msgid "Popup position:"
+#~ msgstr "இடம்"
+
+#, fuzzy
+#~ msgid "Restart panels"
+#~ msgstr "_நிலைமீட்டு"
+
+#, fuzzy
+#~ msgid "Add new items"
+#~ msgstr "புதிய உருப்படி சேர்க்கவும்"
 
 #~ msgid "Pager"
 #~ msgstr "பயனழையம்"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2008-01-15 13:00+0600\n"
 "Last-Translator: Andrey Fedoseev <andrey.fedoseev@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -105,56 +105,57 @@ msgid "Developer"
 msgstr "Разработчик"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "Показать это сообщение и выйти"
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "Показать диалог настройки"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "Настроить панель"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "Сохранить конфигурацию"
 
 #: ../panel/main.c:63
-msgid "Restart panels"
-msgstr "Перезапустить панели"
+#, fuzzy
+msgid "Restart the running instance of xfce4-panel"
+msgstr "Перезапуск панели xfce4-panel..."
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr "Завершить сеанс"
+#, fuzzy
+msgid "Log out the active session"
+msgstr "Завершение сеанса и/или блокировка экрана"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Закрыть все панели и завершить работу программы"
 
 #: ../panel/main.c:66
-msgid "Add new items"
-msgstr "Добавить новый элементы"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
+msgstr "Добавить новый элемент"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr "Не удалось открыть дисплей"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr "Copyright (c) 2004-2007"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Команда разработки Xfce. Все права защищены."
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Пожалуйста, отправляйте отчёты об ошибках на <%s>."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "Панель xfce4-panel уже запущена"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "Перезапуск панели xfce4-panel..."
 
@@ -202,22 +203,22 @@ msgid "Span Monitors"
 msgstr "Объединить экраны"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Слева"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Справа"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Сверху"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Снизу"
 
@@ -289,35 +290,27 @@ msgstr "Прозрачность (%):"
 msgid "Make active panel _opaque"
 msgstr "Сделать активную панель непрозрачной"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "Добавить новый элементы"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Панель"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -435,7 +428,7 @@ msgstr "Использовать всё доступное пространст�
 msgid "New Item"
 msgstr "Новый элемент"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Не удалось запустить \"%s\""
@@ -793,12 +786,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "Добавляет промежуток или разделитель между элементами панели"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Показать рабочий стол"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "Скрыть окна и показать рабочий стол"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Кнопка для очистки рабочего стола"
+msgid "Show Desktop"
+msgstr "Показать рабочий стол"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -806,16 +800,44 @@ msgid "Area where notification icons appear"
 msgstr "Отображает значки уведомления"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Отображает все запущенные приложения"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Отображает список окон"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Диспетчер панелей"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2009"
+#~ msgstr "Copyright (c) 2004-2007"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "Отображает список окон"
+
+#~ msgid "Show all running applications"
+#~ msgstr "Отображает все запущенные приложения"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "Кнопка для очистки рабочего стола"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "Показать это сообщение и выйти"
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "Показать диалог настройки"
+
+#~ msgid "Restart panels"
+#~ msgstr "Перезапустить панели"
+
+#~ msgid "End the session"
+#~ msgstr "Завершить сеанс"
+
+#~ msgid "Add new items"
+#~ msgstr "Добавить новый элементы"
 
 #~ msgid "Pager"
 #~ msgstr "Переключатель рабочих мест"

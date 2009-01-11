@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2008-12-17 02:32+0800\n"
 "Last-Translator: Hunt Xu <huntxu@live.cn>\n"
 "Language-Team: Simplified Chinese <xfce-i18n@xfce.org>\n"
@@ -103,56 +103,57 @@ msgid "Developer"
 msgstr "开发者"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "显示这条消息然后退出"
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "显示配置对话框"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "自定义面板"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "保存配置"
 
 #: ../panel/main.c:63
-msgid "Restart panels"
-msgstr "重新启动面板"
+#, fuzzy
+msgid "Restart the running instance of xfce4-panel"
+msgstr "正在重新启动 xfce4-panel..."
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr "结束会话"
+#, fuzzy
+msgid "Log out the active session"
+msgstr "注销或锁住屏幕"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "关闭所有面板和结束程序"
 
 #: ../panel/main.c:66
-msgid "Add new items"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
 msgstr "添加新项目"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr "无法打开显示"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr "版权 (c) 2004-2007"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce开发团队。保留所有权利。"
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "请报告bugs到<%s>."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "xfce4-panel已经运行"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "正在重新启动 xfce4-panel..."
 
@@ -198,22 +199,22 @@ msgid "Span Monitors"
 msgstr "跨显示器"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "左"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "右"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "顶部"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "底部"
 
@@ -285,35 +286,27 @@ msgstr "透明度 (%)"
 msgid "Make active panel _opaque"
 msgstr "使活动面板不透明"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr "弹出位置："
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr "自动"
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "面板%d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "添加新项目"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "面板"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -431,7 +424,7 @@ msgstr "使用所有可用空间"
 msgid "New Item"
 msgstr "新项目"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "无法启动 \"%s\""
@@ -787,12 +780,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "在面板项目之间添加一块空间或一条线"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "显示桌面"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "隐藏窗口并显示桌面"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "切换桌面显示／隐藏"
+msgid "Show Desktop"
+msgstr "显示桌面"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -800,16 +794,50 @@ msgid "Area where notification icons appear"
 msgstr "显示提示图标"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "显示所有运行中的程序"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "显示可用窗口的列表"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "面板管理器"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2009"
+#~ msgstr "版权 (c) 2004-2007"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "显示可用窗口的列表"
+
+#~ msgid "Show all running applications"
+#~ msgstr "显示所有运行中的程序"
+
+#~ msgid "Popup position:"
+#~ msgstr "弹出位置："
+
+#~ msgid "Automatic"
+#~ msgstr "自动"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "切换桌面显示／隐藏"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "显示这条消息然后退出"
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "显示配置对话框"
+
+#~ msgid "Restart panels"
+#~ msgstr "重新启动面板"
+
+#~ msgid "End the session"
+#~ msgstr "结束会话"
+
+#~ msgid "Add new items"
+#~ msgstr "添加新项目"
 
 #~ msgid "Pager"
 #~ msgstr "页面切换器"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2008-10-06 18:04+0530\n"
 "Last-Translator: Rashan Anushka <rashan.uoc@gmail.com>\n"
 "Language-Team: Sinhalese <en@li.org>\n"
@@ -100,56 +100,57 @@ msgid "Developer"
 msgstr "වැඩිදියුණුකරන්නා"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "මෙම පණුවිඩය පෙන්වා පිටවන්න"
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "වින්‍යාස කවුළුව පෙන්වන්න"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "පුවරුව සකසන්න"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "වින්‍යාසයන් සුරකින්න"
 
 #: ../panel/main.c:63
-msgid "Restart panels"
-msgstr "පැනලය යළි අරඹන්න"
+#, fuzzy
+msgid "Restart the running instance of xfce4-panel"
+msgstr "xfce4-panel යළි ආරම්භවේ..."
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr "සැසිය අවසන් කරන්න"
+#, fuzzy
+msgid "Log out the active session"
+msgstr "ලොගවුට් වන්න හෝ තිරය අඟුළුලන්න"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "සියළුම කවුළු වසා දමා යෙදුම අවසන් කරන්න"
 
 #: ../panel/main.c:66
-msgid "Add new items"
-msgstr "නව අයිතම් එක් කරන්න"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
+msgstr "නව අයිතමයක් එක් කරන්න"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr "සංදර්ශකය විවෘත කිරීම අසමත් විය"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr "කතුහිමිකම (c) 2004-2007"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce වැඩිදියුණු කිරීමේ කණ්ඩායම. සියළු හිමිකම් ඇවිරිණි."
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "කරුණාකර දෝෂයන් <%s> වෙත වාර්ථා කරන්න."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "xfce4-panel දැනටමත් ක්‍රියාත්මක වේ"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "xfce4-panel යළි ආරම්භවේ..."
 
@@ -195,22 +196,22 @@ msgid "Span Monitors"
 msgstr "පාරායණ මොනිටර"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "වම"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "දකුණ"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "ඉහළ"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "පහළ"
 
@@ -282,35 +283,27 @@ msgstr "පාරදෘශ්‍යතාව (%):"
 msgid "Make active panel _opaque"
 msgstr "සක්‍රිය පුවරු පාරාන්ධ කරන්න"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr "උත්පතන ස්ථානය:"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr "ස්වයංක්‍රීය"
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "%d පුවරුව"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "නව අයිතම් එක් කරන්න"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "පුවරුව"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -428,7 +421,7 @@ msgstr "පවතින සියළුම ඉඩ භාවිතා කරන�
 msgid "New Item"
 msgstr "නව අයිතමයක්"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "\"%s\" ක්‍රියාත්මක කිරීම අසමත් විය"
@@ -784,12 +777,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "පුවරු අයිතම අතර රේඛාවක් හෝ හිඩැසක් එක් කරයි"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "වැඩතලය පෙන්වන්න"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "කවුළු සඟවා වැඩතලය පෙන්වන්න"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "වැඩතලය පෙන්වන්න/සඟවන්න"
+msgid "Show Desktop"
+msgstr "වැඩතලය පෙන්වන්න"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -797,16 +791,50 @@ msgid "Area where notification icons appear"
 msgstr "නිවේදන නිරූපක පෙන්වන්න"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "ක්‍රියාත්මකවන සියළු යෙදුම් පෙන්වන්න"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "පවතින කවුළුවල ලැයිස්තුවක් පෙන්වන්න"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "පුවරු කළමණාකරු"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2009"
+#~ msgstr "කතුහිමිකම (c) 2004-2007"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "පවතින කවුළුවල ලැයිස්තුවක් පෙන්වන්න"
+
+#~ msgid "Show all running applications"
+#~ msgstr "ක්‍රියාත්මකවන සියළු යෙදුම් පෙන්වන්න"
+
+#~ msgid "Popup position:"
+#~ msgstr "උත්පතන ස්ථානය:"
+
+#~ msgid "Automatic"
+#~ msgstr "ස්වයංක්‍රීය"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "වැඩතලය පෙන්වන්න/සඟවන්න"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "මෙම පණුවිඩය පෙන්වා පිටවන්න"
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "වින්‍යාස කවුළුව පෙන්වන්න"
+
+#~ msgid "Restart panels"
+#~ msgstr "පැනලය යළි අරඹන්න"
+
+#~ msgid "End the session"
+#~ msgstr "සැසිය අවසන් කරන්න"
+
+#~ msgid "Add new items"
+#~ msgstr "නව අයිතම් එක් කරන්න"
 
 #~ msgid "Pager"
 #~ msgstr "පේජරය"

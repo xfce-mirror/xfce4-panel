@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2005-08-18 01:10+0900\n"
 "Last-Translator: Christian Lomsdalen <christian@vindstille.net>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
@@ -100,56 +100,57 @@ msgid "Developer"
 msgstr "Utvikler"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "Vis denne meldingen og avslutt"
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "Vis konfigurasjonsbilde"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "Tilpasse panel"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "Lagre konfigurasjon"
 
 #: ../panel/main.c:63
-msgid "Restart panels"
-msgstr "Omstart panel"
+#, fuzzy
+msgid "Restart the running instance of xfce4-panel"
+msgstr "Restarter xfce4-panel"
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr "Avslutt økten"
+#, fuzzy
+msgid "Log out the active session"
+msgstr "Logg ut eller lås skjermen"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Lukk alle paneler og avslutt programmet"
 
 #: ../panel/main.c:66
-msgid "Add new items"
-msgstr "Legg til nye elementer"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
+msgstr "Legg til nytt element"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr "Klarte ikke åpne skjerm"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr "Copyright (c) 2004-2007"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Xfce utviklingsteam. Alle rettigheter reververt."
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Vennligst rapporter feil til <%s>."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "xfce4-panel kjører allerede"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "Restarter xfce4-panel"
 
@@ -197,22 +198,22 @@ msgid "Span Monitors"
 msgstr "Flyt monitor"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Venstre"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Høyre"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Topp"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Bunn"
 
@@ -284,35 +285,27 @@ msgstr "Gjennomsiktighet (%)"
 msgid "Make active panel _opaque"
 msgstr "Gjør aktivt panel ugjennomsiktig"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr "Sprettopp posisjon:"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr "Automatisk"
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "Legg til nye elementer"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Panel"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -430,7 +423,7 @@ msgstr "Bruk all tilgjengelig plass"
 msgid "New Item"
 msgstr "Nytt element"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Klarte ikke starte «%s»."
@@ -788,12 +781,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "Lager mellomrom eller en linje mellom panelelementer"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Vis skrivebord"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "Skjul vinduer og vis skrivebordet"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Skifte skrivebord vis/skjul"
+msgid "Show Desktop"
+msgstr "Vis skrivebord"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -801,16 +795,50 @@ msgid "Area where notification icons appear"
 msgstr "Vis beskjedikoner"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Vis alle kjørende programmer"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Vis liste over alle tilgjengelige vinduer"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Panelbehandler"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2009"
+#~ msgstr "Copyright (c) 2004-2007"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "Vis liste over alle tilgjengelige vinduer"
+
+#~ msgid "Show all running applications"
+#~ msgstr "Vis alle kjørende programmer"
+
+#~ msgid "Popup position:"
+#~ msgstr "Sprettopp posisjon:"
+
+#~ msgid "Automatic"
+#~ msgstr "Automatisk"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "Skifte skrivebord vis/skjul"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "Vis denne meldingen og avslutt"
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "Vis konfigurasjonsbilde"
+
+#~ msgid "Restart panels"
+#~ msgstr "Omstart panel"
+
+#~ msgid "End the session"
+#~ msgstr "Avslutt økten"
+
+#~ msgid "Add new items"
+#~ msgstr "Legg til nye elementer"
 
 #~ msgid "Pager"
 #~ msgstr "Skrivebordsoversikt"

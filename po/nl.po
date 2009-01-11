@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2006-08-12 17:06+0200\n"
-"Last-Translator: Jasper Huijsmans <jasper@xfce.or>\n"
+"Last-Translator: Nick Schermer <nick@xfce.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,14 +53,12 @@ msgid "Remove"
 msgstr "Verwijderen"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Nieuw item toevoegen"
+msgstr "Nieuw item toevoegen..."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "Paneel configureren"
+msgstr "Paneel configureren..."
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:284
 #: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
@@ -102,62 +100,54 @@ msgid "Developer"
 msgstr "Ontwikkelaar"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr ""
+msgid "Print version information and exit"
+msgstr "Print versie-informatie en sluit af"
 
 #: ../panel/main.c:61
-#, fuzzy
-msgid "Show configuration dialog"
-msgstr "Notificatie-pictogrammen tonen"
+msgid "Show 'Customize Panel' dialog"
+msgstr "Open het 'Paneel configureer' dialoog"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
-msgstr ""
+msgid "Save the panel configuration"
+msgstr "Sla de paneel configuratie op"
 
 #: ../panel/main.c:63
-#, fuzzy
-msgid "Restart panels"
-msgstr "Herstarten"
+msgid "Restart the running instance of xfce4-panel"
+msgstr "Xfce4-panel opnieuw opstarten"
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr ""
+msgid "Log out the active session"
+msgstr "Sluit de actieve sessie af"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Sluit alle panelen af en stop het programma"
 
 #: ../panel/main.c:66
-#, fuzzy
-msgid "Add new items"
-msgstr "Nieuw item toevoegen"
+msgid "Show 'Add New Items' dialog"
+msgstr "Open het 'Nieuw item toevoeg' dialoog"
 
-#: ../panel/main.c:90
-#, fuzzy
+#: ../panel/main.c:89
 msgid "Failed to open display"
-msgstr "Kon \"%s\" niet uitvoeren"
+msgstr "Kon display niet openen"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr ""
+msgid "The Xfce development team. All rights reserved."
+msgstr "Het Xfce ontwikkelteam. Alle rechten voorbehouden."
 
 #: ../panel/main.c:103
-msgid "The Xfce development team. All rights reserved."
-msgstr ""
-
-#: ../panel/main.c:104
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Meld fouten a.u.b. op <%s>."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
-msgstr ""
+msgstr "Xfce4-panel draait al"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
-msgstr ""
+msgstr "Xfce4-panel is opnieuw aan het opstarten..."
 
 #: ../panel/panel-dialogs.c:196
 #, c-format
@@ -165,22 +155,20 @@ msgid "Could not open \"%s\" module"
 msgstr "Kon \"%s\" module niet openen"
 
 #: ../panel/panel-dialogs.c:610
-#, fuzzy
 msgid "Add New Items"
-msgstr "Nieuw item toevoegen"
+msgstr "Nieuwe items toevoegen"
 
 #: ../panel/panel-dialogs.c:639
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Sleep items van de lijst naar een paneel of verwijder ze door het item terug "
-"naar de lijst te slepen."
+"Sleep items van de lijst naar een paneel of verwijder\n"
+"ze door het item terug naar de lijst te slepen."
 
 #: ../panel/panel-dialogs.c:650
 msgid "_Search:"
-msgstr ""
+msgstr "_Zoeken:"
 
 #: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
 msgid "Normal Width"
@@ -191,36 +179,34 @@ msgid "Full Width"
 msgstr "Volledige breedte"
 
 #: ../panel/panel-dialogs.c:883 ../panel/panel-dialogs.c:1119
-#, fuzzy
 msgid "Normal Height"
-msgstr "Normale breedte"
+msgstr "Normale Hoogte"
 
 #: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1120
-#, fuzzy
 msgid "Full Height"
-msgstr "Volledige breedte"
+msgstr "Volledige Hoogte"
 
 #: ../panel/panel-dialogs.c:892 ../panel/panel-dialogs.c:1129
 msgid "Span Monitors"
 msgstr "Over meerdere monitoren"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Links"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Rechts"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Boven"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Onder"
 
@@ -230,18 +216,16 @@ msgid "Position"
 msgstr "Plaatsing"
 
 #: ../panel/panel-dialogs.c:1008
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Vaste positie"
+msgstr "_Vaste positie"
 
 #: ../panel/panel-dialogs.c:1014
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Vrij te verplaatsen"
+msgstr "Vrij te ver_plaatsen"
 
 #: ../panel/panel-dialogs.c:1137
 msgid "Auto_hide"
-msgstr "Automatisch _verbergen"
+msgstr "_Automatisch verbergen"
 
 #: ../panel/panel-dialogs.c:1155
 msgid "Orientation:"
@@ -278,52 +262,38 @@ msgid "Appearance"
 msgstr "Weergave"
 
 #: ../panel/panel-dialogs.c:1411
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Grootte (pixels):"
+msgstr "Grootte (pixel_s):"
 
 #: ../panel/panel-dialogs.c:1442
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Transparantie (%):"
+msgstr "_Transparantie (%):"
 
 #: ../panel/panel-dialogs.c:1468
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Maak actief paneel ondoorzichtig"
+msgstr "Maak actief paneel _ondoorzichtig"
 
-#: ../panel/panel-dialogs.c:1481
-#, fuzzy
-msgid "Popup position:"
-msgstr "Plaatsing"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr ""
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Paneel %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Verwijder het geselecteerde paneel"
 
-#: ../panel/panel-dialogs.c:1628
-#, fuzzy
+#: ../panel/panel-dialogs.c:1603
 msgid "Add a new panel"
-msgstr "Nieuw item toevoegen"
+msgstr "Nieuw paneel toevoegen"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Paneel"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
 msgstr "Paneel configureren"
 
@@ -338,27 +308,24 @@ msgid "Action Buttons"
 msgstr "Actieknoppen"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Actie selecteren:"
+msgstr "Actie _selecteren:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Afsluiten + Scherm beveiligen"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Oriëntatie:"
+msgstr "_Oriëntatie:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
-msgstr ""
+msgstr "Handmatig"
 
 #: ../plugins/clock/clock-dialog.c:411
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Secondes weergeven"
+msgstr "_Seconden weergeven"
 
 #: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
@@ -366,16 +333,15 @@ msgstr "24-_uursklok"
 
 #: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "Knipperende sch_eidingstekens"
 
 #: ../plugins/clock/clock-dialog.c:432
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "AM/PM tonen"
+msgstr "AM/PM t_onen"
 
 #: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
-msgstr ""
+msgstr "Volledig binaire klok"
 
 #. create dialog
 #: ../plugins/clock/clock-dialog.c:484
@@ -389,14 +355,13 @@ msgstr "Analoog"
 
 #: ../plugins/clock/clock-dialog.c:513
 msgid "Binary"
-msgstr ""
+msgstr "Binair"
 
 #: ../plugins/clock/clock-dialog.c:514
 msgid "Digital"
 msgstr "Digitaal"
 
 #: ../plugins/clock/clock-dialog.c:515
-#, fuzzy
 msgid "LCD"
 msgstr "LED"
 
@@ -409,12 +374,12 @@ msgstr "_Frame tonen"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:527
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Tooltip Formaat"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:554
 msgid "Clock Options"
-msgstr "Opties Klok"
+msgstr "Klok Opties"
 
 #: ../plugins/iconbox/iconbox.c:906
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
@@ -422,19 +387,16 @@ msgid "Icon Box"
 msgstr "Iconbox"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Enkel geminimaliseerde applicaties tonen"
+msgstr "Alleen ge_minimaliseerde toepassingen tonen"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Vensters van alle bureaubladen tonen"
+msgstr "Vensters van _alle bureaubladen tonen"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
 msgid "Use all available _space"
-msgstr "Alle beschikbare ruimte opvullen"
+msgstr "Alle be_schikbare ruimte opvullen"
 
 #. create menu item
 #. set some default values
@@ -442,88 +404,82 @@ msgstr "Alle beschikbare ruimte opvullen"
 msgid "New Item"
 msgstr "Nieuw Item"
 
-#: ../plugins/launcher/launcher-exec.c:561
-#, fuzzy, c-format
+#: ../plugins/launcher/launcher-exec.c:565
+#, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Kon \"%s\" niet uitvoeren"
 
 #: ../plugins/launcher/launcher-dialog.c:609
 msgid "No icon"
-msgstr ""
+msgstr "Geen pictogram"
 
 #: ../plugins/launcher/launcher-dialog.c:631
-#, fuzzy
 msgid "Select an Application"
-msgstr "Actie selecteren:"
+msgstr "Selecteer een Programma"
 
 #: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
-msgstr ""
+msgstr "Alle Bestanden"
 
 #: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
-msgstr ""
+msgstr "Uitvoerbare bestanden"
 
 #: ../plugins/launcher/launcher-dialog.c:661
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Perl Scripts"
 
 #: ../plugins/launcher/launcher-dialog.c:667
 msgid "Python Scripts"
-msgstr ""
+msgstr "Python Scripts"
 
 #: ../plugins/launcher/launcher-dialog.c:673
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Ruby Scripts"
 
 #: ../plugins/launcher/launcher-dialog.c:679
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Shell Scripts"
 
 #: ../plugins/launcher/launcher-dialog.c:755
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #. allocate the chooser dialog
 #: ../plugins/launcher/launcher-dialog.c:758
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Selecteer een Pictogram voor \"%s\""
 
 #. build name
 #: ../plugins/launcher/launcher-dialog.c:845
 #: ../plugins/launcher/launcher-dialog.c:1339
 msgid "Unnamed"
-msgstr ""
+msgstr "Naamloos"
 
 #: ../plugins/launcher/launcher-dialog.c:1123
-#, fuzzy
 msgid "_Name:"
-msgstr "Naam"
+msgstr "_Naam:"
 
 #: ../plugins/launcher/launcher-dialog.c:1141
-#, fuzzy
 msgid "_Description:"
-msgstr "Beschrijving"
+msgstr "_Beschrijving:"
 
 #: ../plugins/launcher/launcher-dialog.c:1160
-#, fuzzy
 msgid "_Icon:"
-msgstr "Iconbox"
+msgstr "P_ictogram:"
 
 #: ../plugins/launcher/launcher-dialog.c:1178
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "Commando"
+msgstr "Co_mmando:"
 
 #: ../plugins/launcher/launcher-dialog.c:1205
 msgid "_Working Directory:"
-msgstr ""
+msgstr "_Werkmap:"
 
 #: ../plugins/launcher/launcher-dialog.c:1211
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Monitor selecteren"
+msgstr "Selecteer een Werkmap"
 
 #: ../plugins/launcher/launcher-dialog.c:1232
 msgid "Run in _terminal"
@@ -531,7 +487,7 @@ msgstr "Uitvoeren in _terminal"
 
 #: ../plugins/launcher/launcher-dialog.c:1248
 msgid "Use _startup notification"
-msgstr "Opstart-_notificatie gebruiken"
+msgstr "Op_start-notificatie gebruiken"
 
 #. create new dialog
 #: ../plugins/launcher/launcher-dialog.c:1524
@@ -540,43 +496,36 @@ msgid "Launcher"
 msgstr "Snelkoppeling"
 
 #: ../plugins/launcher/launcher-dialog.c:1552
-#, fuzzy
 msgid "A_rrow:"
-msgstr "Knop met _pijl"
+msgstr "_Pijl:"
 
 #: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Default"
 msgstr "Standaard"
 
 #: ../plugins/launcher/launcher-dialog.c:1563
-#, fuzzy
 msgid "Inside Button"
-msgstr "Knop met pictogram"
+msgstr "In knop"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Bureaublad %d"
+msgstr "Bureabladwisselaar"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Aantal rijen:"
+msgstr "Aantal _rijen:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Aantal kolommen:"
+msgstr "Aantal _kolommen:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Bureaublad wisselen met muis-wiel."
+msgstr "Bureaublad _wisselen met muis-wiel"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Acties voor _virtuele bureaubladen tonen"
+msgstr "Laat bureaublad _namen zien"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -584,80 +533,73 @@ msgid "Separator or Spacing"
 msgstr "Scheidingslijn of Lege Ruimte"
 
 #: ../plugins/separator/separator.c:428
-#, fuzzy
 msgid "Separator Style"
-msgstr "Scheidingslijn of Lege Ruimte"
+msgstr "Scheidingslijn Stijl"
 
 #. space
 #: ../plugins/separator/separator.c:435
 msgid "_Empty space"
-msgstr ""
+msgstr "L_ege ruimte"
 
 #: ../plugins/separator/separator.c:444
 msgid "E_xpanding empty space"
-msgstr ""
+msgstr "Geë_xpandeerde lege ruimte"
 
 #: ../plugins/separator/separator.c:453
 msgid "_Line"
-msgstr ""
+msgstr "_Lijn"
 
 #: ../plugins/separator/separator.c:462
-#, fuzzy
 msgid "_Handle"
-msgstr "Handgreep:"
+msgstr "_Handgreep"
 
 #: ../plugins/separator/separator.c:471
 msgid "_Dots"
-msgstr ""
+msgstr "_Puntjes"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
-msgstr "Verborgen vensters weer tonen"
+msgstr "Verborgen vensters weer herstellen"
 
 #: ../plugins/showdesktop/showdesktop.c:34
 msgid "Hide windows and show desktop"
-msgstr "Vensters verbergen en bureaublad tonen"
+msgstr "Vensters verbergen en bureaublad weergeven"
 
 #. create a dialog
 #. create dialog
 #: ../plugins/systray/xfce-tray-plugin.c:71
 #: ../plugins/systray/xfce-tray-dialogs.c:334
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Urgentie-notificatie"
+msgstr "Mededelingengebied"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Er is al een systeemvak actief op dit scherm"
+msgstr "Er is al een mededelingengebied actief op dit scherm"
 
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
 msgid "The tray manager lost selection"
-msgstr ""
+msgstr "Het mededelingengebied is afgesloten"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:281
-#, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "Virtueel bureaublad '%s' verwijderen?"
+msgstr "Weet U zeker dat U de lijst met bekende toepassingen wilt wissen?"
 
 #. number of rows
 #: ../plugins/systray/xfce-tray-dialogs.c:375
-#, fuzzy
 msgid "_Number of rows:"
-msgstr "Aantal rijen:"
+msgstr "Aa_ntal rijen:"
 
 #. applications
 #: ../plugins/systray/xfce-tray-dialogs.c:390
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "Actie selecteren:"
+msgstr "Verborgen Toepassingen"
 
 #: ../plugins/systray/xfce-tray-manager.c:431
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Het is mislukt om het mededelingengebied op te starten voor scherm %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:208
@@ -666,19 +608,16 @@ msgid "Task List"
 msgstr "Takenlijst"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Minimale breedte:"
+msgstr "_Minimale breedte:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Platte knoppen gebruiken"
+msgstr "Platte _knoppen gebruiken"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "_Frame tonen"
+msgstr "_Handgreep tonen"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -705,7 +644,7 @@ msgstr "Virtueel bureaublad %d verwijderen?"
 #: ../plugins/windowlist/windowlist.c:264
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr "Virtueel bureaublad '%s' verwijderen?"
+msgstr "Weet U zeker dat U virtueel bureaublad '%s' wilt verwijderen?"
 
 #: ../plugins/windowlist/windowlist.c:477
 #, c-format
@@ -732,7 +671,7 @@ msgstr "Bureaublad '%s' verwijderen"
 #: ../plugins/windowlist/windowlist-dialog.c:210
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr "Lijst van vensters"
+msgstr "Vensterlijst"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
 msgid ""
@@ -753,7 +692,7 @@ msgstr "_Uitgeschakeld"
 
 #: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
-msgstr "Voor _andere bureaubladen"
+msgstr "Voor a_ndere bureaubladen"
 
 #: ../plugins/windowlist/windowlist-dialog.c:180
 msgid "For _all workspaces"
@@ -761,11 +700,11 @@ msgstr "Voor _alle bureaubladen"
 
 #: ../plugins/windowlist/windowlist-dialog.c:194
 msgid "_Icon button"
-msgstr "Knop met pictogram"
+msgstr "Knop met p_ictogram"
 
 #: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
-msgstr "Knop met _pijl"
+msgstr "Knop me_t pijl"
 
 #: ../plugins/windowlist/windowlist-dialog.c:219
 msgid "Show _windows from all workspaces"
@@ -789,254 +728,40 @@ msgstr "Hoe laat is het?"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr "Pictogrammen tonen voor alle lopende applicaties"
+msgstr "Pictogrammen tonen voor alle actieve toepassingen"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
 msgstr "Programma-starter met optioneel menu"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Miniatuuroverzicht van alle virtuele bureaubladen"
+msgstr "Wisselen tussen virtuele bureaubladen"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Spatie of scheidingslijn tussen items"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Bureaublad tonen"
+msgid "Hide all windows and show the desktop"
+msgstr "Vensters verbergen en bureaublad weergeven"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Wisselen tussen vensters verbergen en tonen"
+msgid "Show Desktop"
+msgstr "Bureaublad Tonen"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Notificatie-pictogrammen tonen"
+msgstr "Gebied waar mededelingspictogrammen verschijnen"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Alle lopende applicaties tonen"
+msgid "Switch between open windows using buttons"
+msgstr "Wisselen tussen open vensters met behulp van knoppen"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Lijst tonen van beschikbare vensters"
+msgid "Switch between open windows using a menu"
+msgstr "Wisselen tussen open vensters met behulp van een menu"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Paneel Manager"
-
-#~ msgid "Pager"
-#~ msgstr "Pager"
-
-#~ msgid "System Tray"
-#~ msgstr "Systeemvak"
-
-#~ msgid "Command Prompt"
-#~ msgstr "Commando-regel"
-
-#~ msgid "X terminal emulator"
-#~ msgstr "X terminal emulator"
-
-#~ msgid "Edit text files"
-#~ msgstr "Tekstbestanden bewerken"
-
-#~ msgid "Editor"
-#~ msgstr "Editor"
-
-#~ msgid "File Manager"
-#~ msgstr "Bestandsbeheer"
-
-#~ msgid "Manage files and folders"
-#~ msgstr "Bestanden en mappen beheren"
-
-#~ msgid "Surf the internet"
-#~ msgstr "Surfen op internet"
-
-#~ msgid "Web Browser"
-#~ msgstr "Web browser"
-
-#~ msgid "Add Items"
-#~ msgstr "Items toevoegen"
-
-#~ msgid "Add Items to the Panel"
-#~ msgstr "Items aan het paneel toevoegen"
-
-#~ msgid "Available Items"
-#~ msgstr "Beschikbare items"
-
-#~ msgid "Remove Panel"
-#~ msgstr "Paneel verwijderen"
-
-#~ msgid "New Panel"
-#~ msgstr "Nieuw Paneel"
-
-#~ msgid "Panel Actions"
-#~ msgstr "Paneelacties"
-
-#~ msgid "Program Launcher"
-#~ msgstr "Snelkoppeling"
-
-#~ msgid "Xfce 4 Panel Manager"
-#~ msgstr "Xfce 4 Paneel Manager"
-
-#, fuzzy
-#~ msgid "Failed to register the system tray for screen %d"
-#~ msgstr "Kan systeemvak niet registreren: %s"
-
-#~ msgid "Show application _names"
-#~ msgstr "_Namen van applicaties tonen"
-
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%A, %d %B %Y"
-
-#~ msgid "_Draw Separator"
-#~ msgstr "_Lijn tonen"
-
-#~ msgid "_Expand"
-#~ msgstr "_Groeien"
-
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ " Xfce Paneel %s\n"
-#~ "\n"
-#~ " Onderdeel van de Xfce Werkomgeving\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Distributie is toegestaan volgens de termen van de GNU GPL.\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ " Gebruik: %s [OPTIES]\n"
-#~ "\n"
-
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ " OPTIES\n"
-#~ " -h, --help      Dit bericht tonen en afsluiten\n"
-#~ " -v, --version   Dit bericht tonen en afsluiten\n"
-#~ " -c, --customize Panelen configureren\n"
-#~ " -s, --save      Instellingen opslaan\n"
-#~ " -r, --restart   Panelen herstarten\n"
-#~ " -q, --quit      Sessie beëindigen\n"
-#~ " -x, --exit      Instellingen opslaan en programma afsluiten\n"
-#~ " -a, --add       Nieuwe items toevoegen\n"
-#~ "\n"
-
-#~ msgid "Error in command \"%s\""
-#~ msgstr "Er was een fout in commando \"%s\""
-
-#~ msgid "This item has not yet been configured"
-#~ msgstr "Dit item moet nog geconfigureerd worden"
-
-#~ msgid "File management"
-#~ msgstr "Bestandsbeheer"
-
-#~ msgid "Utilities"
-#~ msgstr "Hulpmiddelen"
-
-#~ msgid "Games"
-#~ msgstr "Games"
-
-#~ msgid "Help browser"
-#~ msgstr "Handleiding"
-
-#~ msgid "Multimedia"
-#~ msgstr "Multimedia"
-
-#~ msgid "Network"
-#~ msgstr "Netwerk"
-
-#~ msgid "Graphics"
-#~ msgstr "Grafisch"
-
-#~ msgid "Printer"
-#~ msgstr "Printer"
-
-#~ msgid "Productivity"
-#~ msgstr "Productiviteit"
-
-#~ msgid "Office"
-#~ msgstr "Kantoor"
-
-#~ msgid "Sound"
-#~ msgstr "Geluid"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "Development"
-#~ msgstr "Ontwikkeling"
-
-#~ msgid "Select image file"
-#~ msgstr "Plaatje selecteren"
-
-#~ msgid "Select command"
-#~ msgstr "Commando selecteren"
-
-#~ msgid "Other..."
-#~ msgstr "Aangepast..."
-
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "Het eerste item word getoond op het paneel. Overige items worden in een "
-#~ "menu geplaatst."
-
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "Kon 0launch niet uitvoeren:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "Voor meer informatie zie http://0install.net"
-
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "Het ZeroInstall proces is gereed maar het dialoogvenster van de "
-#~ "snelkoppeling is verdwenen. De snelkoppeling wordt niet toegevoegd (maar "
-#~ "opgehaalde bestanden zijn niet verloren gegaan)."
-
-#~ msgid "Select file"
-#~ msgstr "Bestand selecteren"
-
-#~ msgid "Test Plugin"
-#~ msgstr "Test Plugin"
-
-#~ msgid "This plugin has no purpose"
-#~ msgstr "Deze plugin heeft geen doel"
-
-#~ msgid "Size"
-#~ msgstr "Grootte"

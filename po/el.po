@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2008-02-19 21:46+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -104,58 +104,58 @@ msgid "Developer"
 msgstr "Ανάπτυξη"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "Προβολή αυτού του μηνύματος και έξοδος"
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "Προβολή διαλόγου ρυθμίσεων"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "Προσαρμογή ταμπλό"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "Αποθήκευση ρυθμίσεων"
 
 #: ../panel/main.c:63
 #, fuzzy
-msgid "Restart panels"
-msgstr "Επανεκκίνηση"
+msgid "Restart the running instance of xfce4-panel"
+msgstr "Επανεκκίνηση του ταμπλό..."
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr ""
+#, fuzzy
+msgid "Log out the active session"
+msgstr "Αποσύνδεση ή κλείδωμα οθόνης"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr ""
 
 #: ../panel/main.c:66
-msgid "Add new items"
-msgstr "Προσθήκη νέων αντικειμένων"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
+msgstr "Νέο αντικείμενο"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 #, fuzzy
 msgid "Failed to open display"
 msgstr "Δεν ήταν δυνατή η εκτέλεση του \"%s\""
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr "Copyright (c) 2004-2007"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Η ομάδα ανάπτυξης του Xfce. All rights reserved."
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Παρακαλώ αναφέρετε τυχόν σφάλματα στο <%s>"
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "Το ταμπλό εκτελείται ήδη"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "Επανεκκίνηση του ταμπλό..."
 
@@ -203,22 +203,22 @@ msgid "Span Monitors"
 msgstr "Σε όλες τις οθόνες"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Αριστερά"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Δεξιά"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Επάνω"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Κάτω"
 
@@ -290,35 +290,27 @@ msgstr "Διαφάνεια (%):"
 msgid "Make active panel _opaque"
 msgstr "Να γίνεται αδιαφανές το ενεργό ταμπλό"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr "Θέση αναδυώμενου παραθύρου:"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr "Αυτόματη"
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Ταμπλό %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "Προσθήκη νέων αντικειμένων"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Ταμπλό"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -437,7 +429,7 @@ msgstr "Χρήση όλου του διαθέσιμου χώρου"
 msgid "New Item"
 msgstr "Νέο αντικείμενο"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Η εκτέλεση του \"%s\" απέτυχε"
@@ -795,12 +787,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "Προσθέτει ένα κενό ή μια γραμμή μεταξύ των αντικειμένων του ταμπλό"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Εμφάνιση επιφάνειας εργασίας"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "Απόκρυψη των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Εναλλαγή της απόκρυψης/εμφάνισης της επιφάνειας εργασίας"
+msgid "Show Desktop"
+msgstr "Εμφάνιση επιφάνειας εργασίας"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -808,16 +801,48 @@ msgid "Area where notification icons appear"
 msgstr "Εμφάνιση εικονιδίων ειδοποίησης"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Εμφάνιση όλων των εκτελούμενων εφαρμογών"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Προβολή λίστας των διαθέσιμων παραθύρων"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Διαχειριστής ταμπλό"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2009"
+#~ msgstr "Copyright (c) 2004-2007"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "Προβολή λίστας των διαθέσιμων παραθύρων"
+
+#~ msgid "Show all running applications"
+#~ msgstr "Εμφάνιση όλων των εκτελούμενων εφαρμογών"
+
+#~ msgid "Popup position:"
+#~ msgstr "Θέση αναδυώμενου παραθύρου:"
+
+#~ msgid "Automatic"
+#~ msgstr "Αυτόματη"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "Εναλλαγή της απόκρυψης/εμφάνισης της επιφάνειας εργασίας"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "Προβολή αυτού του μηνύματος και έξοδος"
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "Προβολή διαλόγου ρυθμίσεων"
+
+#, fuzzy
+#~ msgid "Restart panels"
+#~ msgstr "Επανεκκίνηση"
+
+#~ msgid "Add new items"
+#~ msgstr "Προσθήκη νέων αντικειμένων"
 
 #~ msgid "Pager"
 #~ msgstr "Ειδοποιητής"

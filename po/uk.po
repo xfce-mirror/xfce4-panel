@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2008-07-01 22:18+0300\n"
 "Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
 "Language-Team: Ukrainian <xfce4-dev@xfce.org>\n"
@@ -103,56 +103,57 @@ msgid "Developer"
 msgstr "Розробник"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "Показати це повідомлення та вийти."
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "Показати конфігураційний діалог"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "Налаштувати панель"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "Зберегти конфігурацію"
 
 #: ../panel/main.c:63
-msgid "Restart panels"
-msgstr "Перезапустити панелі"
+#, fuzzy
+msgid "Restart the running instance of xfce4-panel"
+msgstr "Перезапускається xfce4-panel..."
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr "Завершити сеанс"
+#, fuzzy
+msgid "Log out the active session"
+msgstr "Завершення сеансу чи блокування екрану"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Закрити усі панелі та завершити програму"
 
 #: ../panel/main.c:66
-msgid "Add new items"
-msgstr "Додати нові пункти"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
+msgstr "Додати новий об'єкт"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr "Помилка відкривання дисплею"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr "Copyright (c) 2004-2007"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Команда розробки Xfce. Всі права захищені."
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Сповістіть про помилку на <%s>."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "xfce4-panel вже запущено"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "Перезапускається xfce4-panel..."
 
@@ -200,22 +201,22 @@ msgid "Span Monitors"
 msgstr "Об'єднати екрани"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Зліва"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Справа"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Згори"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Знизу"
 
@@ -287,35 +288,27 @@ msgstr "Прозорість (%):"
 msgid "Make active panel _opaque"
 msgstr "Зробити активну панель непрозорою"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr "Позиція появи:"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr "Автоматично"
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Панель %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "Додати нові пункти"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Панель"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -433,7 +426,7 @@ msgstr "Використовувати весь доступний прості�
 msgid "New Item"
 msgstr "Новий об'єкт"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Не вдається запустити \"%s\""
@@ -791,12 +784,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "Додавання інтервалу або розділювача між елементами панелі"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Показати Стільницю"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "Сховати вікна та показати робочий стіл"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Перемикач Стільниці показати/сховати"
+msgid "Show Desktop"
+msgstr "Показати Стільницю"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -804,16 +798,50 @@ msgid "Area where notification icons appear"
 msgstr "Відображення значків сповіщення"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Відбражати всі запущені програми"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Відображати список доступних вікон"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Менеджер панелей"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2009"
+#~ msgstr "Copyright (c) 2004-2007"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "Відображати список доступних вікон"
+
+#~ msgid "Show all running applications"
+#~ msgstr "Відбражати всі запущені програми"
+
+#~ msgid "Popup position:"
+#~ msgstr "Позиція появи:"
+
+#~ msgid "Automatic"
+#~ msgstr "Автоматично"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "Перемикач Стільниці показати/сховати"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "Показати це повідомлення та вийти."
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "Показати конфігураційний діалог"
+
+#~ msgid "Restart panels"
+#~ msgstr "Перезапустити панелі"
+
+#~ msgid "End the session"
+#~ msgstr "Завершити сеанс"
+
+#~ msgid "Add new items"
+#~ msgstr "Додати нові пункти"
 
 #~ msgid "Pager"
 #~ msgstr "Графічний пейджер"

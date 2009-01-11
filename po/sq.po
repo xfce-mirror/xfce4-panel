@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-02 18:26+0100\n"
+"POT-Creation-Date: 2009-01-11 20:45+0100\n"
 "PO-Revision-Date: 2008-11-11 00:36+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
@@ -98,56 +98,57 @@ msgid "Developer"
 msgstr "Zhvillues"
 
 #: ../panel/main.c:60
-msgid "Show this message and exit"
-msgstr "Shfaq këtë mesazh dhe dil"
+msgid "Print version information and exit"
+msgstr ""
 
 #: ../panel/main.c:61
-msgid "Show configuration dialog"
-msgstr "Shfaq dialog formësimi"
+#, fuzzy
+msgid "Show 'Customize Panel' dialog"
+msgstr "Përshtasni Panel"
 
 #: ../panel/main.c:62
-msgid "Save configuration"
+#, fuzzy
+msgid "Save the panel configuration"
 msgstr "Ruaje formësimin"
 
 #: ../panel/main.c:63
-msgid "Restart panels"
-msgstr "Rinisi panelet"
+#, fuzzy
+msgid "Restart the running instance of xfce4-panel"
+msgstr "Po riniset xfce4-panel..."
 
 #: ../panel/main.c:64
-msgid "End the session"
-msgstr "Përfundoje sesionin"
+#, fuzzy
+msgid "Log out the active session"
+msgstr "Dil ose kyç ekranin"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Mbyll tërë panelet dhe përfundoje programin"
 
 #: ../panel/main.c:66
-msgid "Add new items"
-msgstr "Shtoni objekte të reja"
+#, fuzzy
+msgid "Show 'Add New Items' dialog"
+msgstr "Shto Element të Ri"
 
-#: ../panel/main.c:90
+#: ../panel/main.c:89
 msgid "Failed to open display"
 msgstr "Dështoi hapja e ekranit"
 
 #: ../panel/main.c:102
-msgid "Copyright (c) 2004-2007"
-msgstr "Të drejta kopjimi (c) 2004-2007"
-
-#: ../panel/main.c:103
 msgid "The Xfce development team. All rights reserved."
 msgstr "Ekipi zhvillues i Xfce-sët. Tërë të drejtat të rezervuara."
 
-#: ../panel/main.c:104
+#: ../panel/main.c:103
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr "Ju lutem njoftoni të meta te <%s>."
 
-#: ../panel/main.c:148
+#: ../panel/main.c:147
 msgid "xfce4-panel already running"
 msgstr "xfce4-panel është në xhirim e sipër"
 
 #. restart
-#: ../panel/main.c:160
+#: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
 msgstr "Po riniset xfce4-panel..."
 
@@ -196,22 +197,22 @@ msgid "Span Monitors"
 msgstr "Ndaji Monitorët"
 
 #: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../panel/panel-dialogs.c:1492 ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Left"
 msgstr "Majtas"
 
 #: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../panel/panel-dialogs.c:1493 ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Right"
 msgstr "Djathtas"
 
 #: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../panel/panel-dialogs.c:1494 ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Top"
 msgstr "Sipër"
 
 #: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../panel/panel-dialogs.c:1495 ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Bottom"
 msgstr "Poshtë"
 
@@ -283,35 +284,27 @@ msgstr "Tejdukshmëri (%):"
 msgid "Make active panel _opaque"
 msgstr "Bëje panelin veprues të marrtë"
 
-#: ../panel/panel-dialogs.c:1481
-msgid "Popup position:"
-msgstr "Vend fllucke:"
-
-#: ../panel/panel-dialogs.c:1491
-msgid "Automatic"
-msgstr "Automatike"
-
-#: ../panel/panel-dialogs.c:1536 ../panel/panel-dialogs.c:1572
-#: ../panel/panel-dialogs.c:1596
+#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
+#: ../panel/panel-dialogs.c:1571
 #, c-format
 msgid "Panel %d"
 msgstr "Panel %d"
 
-#: ../panel/panel-dialogs.c:1615
+#: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1628
+#: ../panel/panel-dialogs.c:1603
 #, fuzzy
 msgid "Add a new panel"
 msgstr "Shtoni objekte të reja"
 
-#: ../panel/panel-dialogs.c:1688
+#: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 msgid "Panel"
 msgstr "Panel"
 
-#: ../panel/panel-dialogs.c:1695
+#: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 #, fuzzy
 msgid "Customize the panel settings"
@@ -429,7 +422,7 @@ msgstr "Përdor tërë hapësirën e mundshme"
 msgid "New Item"
 msgstr "Element i Ri"
 
-#: ../plugins/launcher/launcher-exec.c:561
+#: ../plugins/launcher/launcher-exec.c:565
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Dështoi nisja e \"%s\""
@@ -788,12 +781,13 @@ msgid "Adds a space or a line between panel items"
 msgstr "Shto hapësirë ose vijë midis elementësh paneli"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-msgid "Show Desktop"
-msgstr "Shfaq Desktop"
+#, fuzzy
+msgid "Hide all windows and show the desktop"
+msgstr "Fshih dritare dhe shfaq desktopë"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
-msgid "Toggle desktop show/hide"
-msgstr "Këmbe shfaqjen/fshehjen e desktopit"
+msgid "Show Desktop"
+msgstr "Shfaq Desktop"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
@@ -801,16 +795,50 @@ msgid "Area where notification icons appear"
 msgstr "Shfaq ikona njoftimesh"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
-msgid "Show all running applications"
-msgstr "Shfaq tërë zbatimet xhirues"
+msgid "Switch between open windows using buttons"
+msgstr ""
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
-msgid "Show list of available windows"
-msgstr "Shfaq listë dritaresh të mundshme"
+msgid "Switch between open windows using a menu"
+msgstr ""
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Përgjegjës Panelesh"
+
+#, fuzzy
+#~ msgid "Copyright (c) 2004-2009"
+#~ msgstr "Të drejta kopjimi (c) 2004-2007"
+
+#~ msgid "Show list of available windows"
+#~ msgstr "Shfaq listë dritaresh të mundshme"
+
+#~ msgid "Show all running applications"
+#~ msgstr "Shfaq tërë zbatimet xhirues"
+
+#~ msgid "Popup position:"
+#~ msgstr "Vend fllucke:"
+
+#~ msgid "Automatic"
+#~ msgstr "Automatike"
+
+#~ msgid "Toggle desktop show/hide"
+#~ msgstr "Këmbe shfaqjen/fshehjen e desktopit"
+
+#~ msgid "Show this message and exit"
+#~ msgstr "Shfaq këtë mesazh dhe dil"
+
+#~ msgid "Show configuration dialog"
+#~ msgstr "Shfaq dialog formësimi"
+
+#~ msgid "Restart panels"
+#~ msgstr "Rinisi panelet"
+
+#~ msgid "End the session"
+#~ msgstr "Përfundoje sesionin"
+
+#~ msgid "Add new items"
+#~ msgstr "Shtoni objekte të reja"
 
 #~ msgid "Pager"
 #~ msgstr "Faques"
