@@ -2,15 +2,15 @@
 # xfce4-panel for XFce desktop environment.
 # Copyright (C) 2002-2006 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-# Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008.
-# Pau Rul.lan Ferragut <paurullan@bulma.net> 2005-2007
-# Ivà Burgos <debian.public@gmail.com>, 2007
+# Carles Muñoz Gorriz <carlesmu@internuatas.org>, 2003-2004, 2008-2009.
+# Pau Rul.lan Ferragut <paurullan@bulma.net> 2005-2007.
+# Ivà Burgos <debian.public@gmail.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-11 20:55+0100\n"
-"PO-Revision-Date: 2008-11-21 18:53+0100\n"
+"PO-Revision-Date: 2009-01-11 13:14+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: catalan\n"
 "MIME-Version: 1.0\n"
@@ -22,12 +22,12 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:169
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "S'ha esborrat un ítem de manera inesperada: «%s»."
+msgstr "S'ha esborrat un element de manera inesperada: «%s»."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:606
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "Suprimir «%s»?"
+msgstr "Voleu Suprimir «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
 msgid ""
@@ -54,14 +54,12 @@ msgid "Remove"
 msgstr "Suprimeix"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Afegeix un element nou"
+msgstr "Afegeix elements nou…"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "Personalitza el quadre"
+msgstr "Personalitza el quadre…"
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:284
 #: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
@@ -78,7 +76,7 @@ msgstr "Quant al quadre Xfce"
 
 #: ../panel/panel-app.c:259 ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
-msgstr "Sortir del quadre Xfce?"
+msgstr "Voleu sortir del quadre de Xfce?"
 
 #: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
 msgid "Xfce Panel"
@@ -91,11 +89,11 @@ msgstr "No podeu eliminar el darrer quadre. Desitgeu tancar el programa?"
 #: ../panel/panel-app.c:930
 #, c-format
 msgid "Remove Panel \"%d\"?"
-msgstr "Suprimir el quadre «%d»?"
+msgstr "Suprimeix el quadre «%d»?"
 
 #: ../panel/panel-app.c:934
 msgid "The selected panel and all its items will be removed."
-msgstr "S'eliminaran el quadre seleccionat i tots els seus elements."
+msgstr "S'eliminarà el quadre seleccionat i tots els seus elements."
 
 #: ../panel/panel-app.c:971 ../panel/panel-app.c:972
 msgid "Developer"
@@ -149,12 +147,12 @@ msgstr "Envieu els errors a <%s>."
 
 #: ../panel/main.c:147
 msgid "xfce4-panel already running"
-msgstr "Ja s’està executant Xfce4-Panel"
+msgstr "Ja s’està executant xfce4-panel"
 
 #. restart
 #: ../panel/main.c:159
 msgid "Restarting xfce4-panel..."
-msgstr "S’està reiniciant l’Xfce4-Panel"
+msgstr "S’està reiniciant xfce4-panel…"
 
 #: ../panel/panel-dialogs.c:196
 #, c-format
@@ -162,22 +160,20 @@ msgid "Could not open \"%s\" module"
 msgstr "No s'ha pogut obrir el mòdul «%s»"
 
 #: ../panel/panel-dialogs.c:610
-#, fuzzy
 msgid "Add New Items"
-msgstr "Afegeix un element nou"
+msgstr "Afegeix elements nous"
 
 #: ../panel/panel-dialogs.c:639
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Arrossegueu elements del llistat al quadre o elimineu-los movent-los de nou "
-"al llistat."
+"Arrossegueu elements del llistat al quadre o \n"
+"elimineu-los arrossegant-los de nou al llistat."
 
 #: ../panel/panel-dialogs.c:650
 msgid "_Search:"
-msgstr ""
+msgstr "_Cerca:"
 
 #: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
 msgid "Normal Width"
@@ -225,14 +221,12 @@ msgid "Position"
 msgstr "Posició"
 
 #: ../panel/panel-dialogs.c:1008
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Posició fixa"
+msgstr "Posició _fixa"
 
 #: ../panel/panel-dialogs.c:1014
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Col·locar lliurement"
+msgstr "Posició _lliura"
 
 #: ../panel/panel-dialogs.c:1137
 msgid "Auto_hide"
@@ -260,7 +254,7 @@ msgstr "A ambdos costats"
 
 #: ../panel/panel-dialogs.c:1270
 msgid "Select Monitor"
-msgstr "Seleccioneu monitor"
+msgstr "Seleccioneu el monitor"
 
 #. appearance settings
 #. appearance
@@ -273,19 +267,16 @@ msgid "Appearance"
 msgstr "Aparença"
 
 #: ../panel/panel-dialogs.c:1411
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Tamany (píxels):"
+msgstr "_Mida (píxels):"
 
 #: ../panel/panel-dialogs.c:1442
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Transparència (%):"
+msgstr "_Transparència (%):"
 
 #: ../panel/panel-dialogs.c:1468
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Mostra opac el quadre actiu"
+msgstr "Fes _opac el quadre actiu"
 
 #: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
 #: ../panel/panel-dialogs.c:1571
@@ -295,12 +286,11 @@ msgstr "Quadre %d"
 
 #: ../panel/panel-dialogs.c:1590
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Suprimeix el quadre seleccionat"
 
 #: ../panel/panel-dialogs.c:1603
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Afegeix elements nous"
+msgstr "Afegeix un quadre nou"
 
 #: ../panel/panel-dialogs.c:1663
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -309,9 +299,8 @@ msgstr "Quadre"
 
 #: ../panel/panel-dialogs.c:1670
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Personalitza el quadre"
+msgstr "Personalitza els ajustaments del quadre"
 
 #: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
@@ -324,18 +313,16 @@ msgid "Action Buttons"
 msgstr "Botons d'accions"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Seleccioneu tipus d'acció:"
+msgstr "_Seleccioneu el tipus d'acció:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Surt + Bloca pantalla"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Orientació:"
+msgstr "_Orientació:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -405,19 +392,16 @@ msgid "Icon Box"
 msgstr "Caixa d'icona"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Només mostra les aplicacions minimitzades"
+msgstr "Només mostra les aplicacions _minimitzades"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Mostra les aplicacions de totes les àrees de treball"
+msgstr "Mostra les aplicacions de _tots els espais de treball"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
 msgid "Use all available _space"
-msgstr "Usa tot l'espai disponible"
+msgstr "Empra tot l'_espai disponible"
 
 #. create menu item
 #. set some default values
@@ -479,34 +463,28 @@ msgid "Unnamed"
 msgstr "Sense nom"
 
 #: ../plugins/launcher/launcher-dialog.c:1123
-#, fuzzy
 msgid "_Name:"
-msgstr "_Nom"
+msgstr "_Nom:"
 
 #: ../plugins/launcher/launcher-dialog.c:1141
-#, fuzzy
 msgid "_Description:"
-msgstr "_Descripció"
+msgstr "_Descripció:"
 
 #: ../plugins/launcher/launcher-dialog.c:1160
-#, fuzzy
 msgid "_Icon:"
-msgstr "Caixa d’_icona"
+msgstr "_Icona:"
 
 #: ../plugins/launcher/launcher-dialog.c:1178
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "_Ordre"
+msgstr "_Ordre:"
 
 #: ../plugins/launcher/launcher-dialog.c:1205
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "Directori de _treball"
+msgstr "Directori de _treball:"
 
 #: ../plugins/launcher/launcher-dialog.c:1211
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Seleccioneu un directori"
+msgstr "Seleccioneu el directori de treball"
 
 #: ../plugins/launcher/launcher-dialog.c:1232
 msgid "Run in _terminal"
@@ -535,29 +513,24 @@ msgid "Inside Button"
 msgstr "Botó interior"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Espai de treball %d"
+msgstr "Canviador d'espais de treball"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Nombre de files:"
+msgstr "Nombre _de files:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Nombre de columnes:"
+msgstr "Nombre _de columnes:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Commuta entre escriptoris amb la roda del ratolí"
+msgstr "Canvia d'espais de treball amb la _roda del ratolí"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Mostra els noms dels espais de treball"
+msgstr "Mostra els _noms dels espais de treball"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -570,14 +543,12 @@ msgstr "Estil del separador"
 
 #. space
 #: ../plugins/separator/separator.c:435
-#, fuzzy
 msgid "_Empty space"
 msgstr "_Espai buit"
 
 #: ../plugins/separator/separator.c:444
-#, fuzzy
 msgid "E_xpanding empty space"
-msgstr "Expandeix els _espais buits"
+msgstr "E_xpandeix els espais buits"
 
 #: ../plugins/separator/separator.c:453
 msgid "_Line"
@@ -604,14 +575,12 @@ msgstr "Oculta les finestres i mostra l'escriptori"
 #: ../plugins/systray/xfce-tray-plugin.c:71
 #: ../plugins/systray/xfce-tray-dialogs.c:334
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Notificació urgent"
+msgstr "Espai de notificació"
 
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Ja hi ha una safata del sistema executant-se a la pantalla"
+msgstr "Ja hi ha un espai de notificació executant-se a la pantalla"
 
 #. message
 #: ../plugins/systray/xfce-tray-plugin.c:219
@@ -644,23 +613,20 @@ msgid "Task List"
 msgstr "Llistat de tasques"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Mida mínima"
+msgstr "amplada _mínima:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Usa botons plans"
+msgstr "Empra botons _plans"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Mostra identificador"
+msgstr "Mostra _identificador"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
-msgstr "Mostr_a les tasques de totes les àrees de treball"
+msgstr "Mostr_a les tasques de tots els espais de treball"
 
 #. keep order in sync with WnckTasklistGroupingType
 #: ../plugins/tasklist/tasklist-dialogs.c:221
@@ -735,19 +701,19 @@ msgstr "Per els _altres espais de treball"
 
 #: ../plugins/windowlist/windowlist-dialog.c:180
 msgid "For _all workspaces"
-msgstr "Per totes les àrees de treb_all"
+msgstr "Per _tots els espais de treball"
 
 #: ../plugins/windowlist/windowlist-dialog.c:194
 msgid "_Icon button"
-msgstr "Botó d'_icones"
+msgstr "Botó d'_icona"
 
 #: ../plugins/windowlist/windowlist-dialog.c:201
 msgid "A_rrow button"
-msgstr "B_otó fletxa"
+msgstr "Botó de _fletxa"
 
 #: ../plugins/windowlist/windowlist-dialog.c:219
 msgid "Show _windows from all workspaces"
-msgstr "Mostr_a les finestres de totes les àrees de treball"
+msgstr "Mostr_a les finestres de tots els espais de treball"
 
 #: ../plugins/windowlist/windowlist-dialog.c:228
 msgid "Show a_pplication icons"
@@ -774,13 +740,12 @@ msgid "Program launcher with optional menu"
 msgstr "Llançadora de programa amb menu opcional"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Vista en miniatura de tots els escriptoris virtuals"
+msgstr "Canvia entre escriptoris virtuals"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "Afegix un espai o una línea entre els elements del quadre"
+msgstr "Afegix un espai o una línia entre els elements del quadre"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 #, fuzzy
@@ -792,9 +757,8 @@ msgid "Show Desktop"
 msgstr "Mostra l'escriptori"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Mostra icones de notificació"
+msgstr "Espai on es mostraran las icones de notificació"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
