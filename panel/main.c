@@ -86,6 +86,8 @@ main (gint argc, gchar **argv)
     /* initialize gtk */
     if (!gtk_init_with_args (&argc, &argv, (gchar *) "", option_entries, (gchar *) GETTEXT_PACKAGE, &error))
     {
+        /* TRANSLATORS: Errors when gtk_init failed, probably the command
+           executed without xserver running */
         g_print ("%s: %s\n", PACKAGE_NAME, error ? error->message : _("Failed to open display"));
 
         if (error != NULL)
@@ -100,6 +102,8 @@ main (gint argc, gchar **argv)
         g_print ("%s %s (Xfce %s)\n\n", PACKAGE_NAME, PACKAGE_VERSION, xfce_version_string ());
         g_print ("%s\n", "Copyright (c) 2004-2009");
         g_print ("\t%s\n\n", _("The Xfce development team. All rights reserved."));
+        
+        /* TRANSLATORS: Bug report website, %s points to bugzilla.xfce.org */
         g_print (_("Please report bugs to <%s>."), PACKAGE_BUGREPORT);
         g_print ("\n");
 
@@ -144,7 +148,7 @@ main (gint argc, gchar **argv)
     }
     else if (G_UNLIKELY (msg == INIT_RUNNING))
     {
-        g_message (_("xfce4-panel already running"));
+        g_message (_("Xfce4-panel already running"));
 
         return EXIT_SUCCESS;
     }
@@ -155,8 +159,9 @@ main (gint argc, gchar **argv)
 
     if (G_UNLIKELY (msg == RUN_RESTART))
     {
-        /* restart */
         g_message (_("Restarting xfce4-panel..."));
+        
+        /* restart */
         execvp (argv[0], argv);
     }
 

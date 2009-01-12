@@ -67,7 +67,6 @@ xfce_tray_plugin_message (GtkMessageType  type,
 {
     GtkWidget *dialog;
 
-    /* create a dialog */
     dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, type, GTK_BUTTONS_CLOSE, _("Notification Area"));
     gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s.", message);
     gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
@@ -94,8 +93,9 @@ xfce_tray_plugin_check (GdkScreen *screen)
     /* message */
     if (running)
     {
-        xfce_tray_plugin_message (GTK_MESSAGE_INFO, screen,
-                                  _("There is already a notification area running on this screen"));
+        /* TRANSLATORS: This message is shown in an info dialog when the users 
+           add a notification area to a screen with a running systray manager. */
+        xfce_tray_plugin_message (GTK_MESSAGE_INFO, screen, _("There is already a notification area running on this screen"));
     }
 
     return (!running);
@@ -215,7 +215,9 @@ xfce_tray_plugin_lost_selection (XfceTrayManager *manager,
     /* get screen */
     screen = gtk_widget_get_screen (GTK_WIDGET (plugin->panel_plugin));
 
-    /* message */
+    /* TRANSLATORS: Bit of a weird text, but this is shown when for some
+       reason another tray takes the ownership of the tray icons and this
+        tray becomes unusable. */
     xfce_tray_plugin_message (GTK_MESSAGE_WARNING, screen, _("The tray manager lost selection"));
 }
 
@@ -349,7 +351,6 @@ xfce_tray_plugin_read (XfceTrayPlugin *plugin)
             /* frame setting */
             plugin->show_frame = xfce_rc_read_bool_entry (rc, "ShowFrame", TRUE);
 
-            /* set number of rows */
             xfce_tray_widget_set_rows (XFCE_TRAY_WIDGET (plugin->tray), xfce_rc_read_int_entry (rc, "Rows", 1));
 
             if (G_LIKELY (plugin->manager))

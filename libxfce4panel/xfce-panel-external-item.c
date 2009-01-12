@@ -165,7 +165,8 @@ xfce_external_panel_item_finalize (GObject *object)
 
     if (!priv->to_be_removed)
     {
-        /* dialogs are annoying, just spit out a warning */
+        /* TRANSLATORS: This warning is printed to the commandline when
+           an external plugin crashed */
         g_critical (_("An item was unexpectedly removed: \"%s\"."),
                     priv->display_name);
     }

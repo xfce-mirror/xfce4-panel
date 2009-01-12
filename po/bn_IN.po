@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-11 20:55+0100\n"
+"POT-Creation-Date: 2009-01-12 18:06+0100\n"
 "PO-Revision-Date: 2005-09-29 20:17+0900\n"
 "Last-Translator: Runa Bhattacharjee <runab@redhat.com>\n"
 "Language-Team: Bangla INDIA <LL@li.org>\n"
@@ -16,8 +16,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#. dialogs are annoying, just spit out a warning
-#: ../libxfce4panel/xfce-panel-external-item.c:169
+#. TRANSLATORS: This warning is printed to the commandline when
+#. an external plugin crashed
+#: ../libxfce4panel/xfce-panel-external-item.c:170
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
 msgstr ""
@@ -32,33 +33,36 @@ msgid ""
 "The item will be removed from the panel and its configuration will be lost."
 msgstr ""
 
-#. configure, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:837
+#. TRANSLATORS: Properties menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:836
 msgid "Properties"
 msgstr ""
 
-#. about item, hide by default
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:854
+#. TRANSLATORS: About menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:853
 msgid "About"
 msgstr ""
 
-#. move
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:866
+#. TRANSLATORS: Move menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:865
 #, fuzzy
 msgid "Move"
 msgstr "মুছে ফেলুন (_R)"
 
+#. TRANSLATORS: Remove menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:885
 #, fuzzy
 msgid "Remove"
 msgstr "মুছে ফেলুন (_R)"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:902 ../panel/panel.c:606
+#. TRANSLATORS: Add menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
 #, fuzzy
 msgid "Add New Items..."
 msgstr "নতুম বস্তু যোগ করুন"
 
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:913 ../panel/panel.c:595
+#. TRANSLATORS: Customize menu item in the right-click plugin menu
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
 msgid "Customize Panel..."
 msgstr ""
 
@@ -99,7 +103,8 @@ msgstr ""
 msgid "The selected panel and all its items will be removed."
 msgstr ""
 
-#: ../panel/panel-app.c:971 ../panel/panel-app.c:972
+#. TRANSLATORS: Used in the credits tab in the panel's about dialog
+#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
 msgid "Developer"
 msgstr "ডিভেলপার"
 
@@ -134,182 +139,186 @@ msgstr ""
 msgid "Show 'Add New Items' dialog"
 msgstr "নতুম বস্তু যোগ করুন"
 
-#: ../panel/main.c:89
+#. TRANSLATORS: Errors when gtk_init failed, probably the command
+#. executed without xserver running
+#: ../panel/main.c:91
 #, fuzzy
 msgid "Failed to open display"
 msgstr "প্যানেলের বস্তু নির্মাণ করা সম্ভব হয়নি \"%s\"।"
 
-#: ../panel/main.c:102
+#: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
 msgstr ""
 
-#: ../panel/main.c:103
+#. TRANSLATORS: Bug report website, %s points to bugzilla.xfce.org
+#: ../panel/main.c:107
 #, c-format
 msgid "Please report bugs to <%s>."
 msgstr ""
 
-#: ../panel/main.c:147
-msgid "xfce4-panel already running"
+#: ../panel/main.c:151
+msgid "Xfce4-panel already running"
 msgstr ""
 
-#. restart
-#: ../panel/main.c:159
+#: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:196
+#. TRANSLATORS: Warning when adding an item to the panel failed.
+#: ../panel/panel-dialogs.c:197
 #, fuzzy, c-format
 msgid "Could not open \"%s\" module"
 msgstr "প্যানেলের বস্তু নির্মাণ করা সম্ভব হয়নি \"%s\"।"
 
-#: ../panel/panel-dialogs.c:610
+#: ../panel/panel-dialogs.c:611
 #, fuzzy
 msgid "Add New Items"
 msgstr "নতুম বস্তু যোগ করুন"
 
-#: ../panel/panel-dialogs.c:639
+#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. since gtk labels do not update text wrapping on a dialog resize.
+#: ../panel/panel-dialogs.c:642
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
 
-#: ../panel/panel-dialogs.c:650
+#: ../panel/panel-dialogs.c:653
 msgid "_Search:"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:878 ../panel/panel-dialogs.c:1114
+#: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:879 ../panel/panel-dialogs.c:1115
+#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
 msgid "Full Width"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:883 ../panel/panel-dialogs.c:1119
+#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
 msgid "Normal Height"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:884 ../panel/panel-dialogs.c:1120
+#: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
 msgid "Full Height"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:892 ../panel/panel-dialogs.c:1129
+#: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
 #, fuzzy
 msgid "Span Monitors"
 msgstr "এডিটর"
 
-#: ../panel/panel-dialogs.c:955 ../panel/panel-dialogs.c:1194
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:957 ../panel/panel-dialogs.c:1196
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:962 ../panel/panel-dialogs.c:1201
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Top"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:964 ../panel/panel-dialogs.c:1203
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
+#: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Bottom"
 msgstr ""
 
 #. position
-#: ../panel/panel-dialogs.c:994
+#: ../panel/panel-dialogs.c:997
 msgid "Position"
 msgstr "অবস্থান"
 
-#: ../panel/panel-dialogs.c:1008
+#: ../panel/panel-dialogs.c:1011
 #, fuzzy
 msgid "_Fixed position"
 msgstr "অবস্থান"
 
-#: ../panel/panel-dialogs.c:1014
+#: ../panel/panel-dialogs.c:1017
 msgid "Freely _moveable"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1137
+#: ../panel/panel-dialogs.c:1140
 #, fuzzy
 msgid "Auto_hide"
 msgstr "অটোহাইড"
 
-#: ../panel/panel-dialogs.c:1155
+#: ../panel/panel-dialogs.c:1158
 #, fuzzy
 msgid "Orientation:"
 msgstr "প্যানেলের দিশা:"
 
-#: ../panel/panel-dialogs.c:1167 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "অনুভূমিক"
 
-#: ../panel/panel-dialogs.c:1169 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "উলম্ব"
 
-#: ../panel/panel-dialogs.c:1178
+#: ../panel/panel-dialogs.c:1181
 #, fuzzy
 msgid "Handle:"
 msgstr "অবস্থান"
 
-#: ../panel/panel-dialogs.c:1190
+#: ../panel/panel-dialogs.c:1193
 #, fuzzy
 msgid "At both sides"
 msgstr "অটোহাইড"
 
-#: ../panel/panel-dialogs.c:1270
+#: ../panel/panel-dialogs.c:1273
 #, fuzzy
 msgid "Select Monitor"
 msgstr "এডিটর"
 
-#. appearance settings
-#. appearance
-#. Button Layout
-#: ../panel/panel-dialogs.c:1398 ../plugins/clock/clock-dialog.c:502
-#: ../plugins/systray/xfce-tray-dialogs.c:352
+#: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
+#: ../plugins/systray/xfce-tray-dialogs.c:350
 #: ../plugins/tasklist/tasklist-dialogs.c:166
-#: ../plugins/windowlist/windowlist-dialog.c:188
+#: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "চেহারাছবি"
 
-#: ../panel/panel-dialogs.c:1411
+#: ../panel/panel-dialogs.c:1414
 msgid "_Size (pixels):"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1442
+#: ../panel/panel-dialogs.c:1445
 #, fuzzy
 msgid "_Transparency (%):"
 msgstr "স্বচ্ছতা"
 
-#: ../panel/panel-dialogs.c:1468
+#: ../panel/panel-dialogs.c:1471
 msgid "Make active panel _opaque"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1511 ../panel/panel-dialogs.c:1547
-#: ../panel/panel-dialogs.c:1571
+#: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
+#: ../panel/panel-dialogs.c:1574
 #, fuzzy, c-format
 msgid "Panel %d"
 msgstr "Xfce Panel"
 
-#: ../panel/panel-dialogs.c:1590
+#. TRANSLATORS: Tooltip for the add button in the customize panel dialog
+#: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:1603
+#. TRANSLATORS: Tooltip for the add button in the customize panel dialog
+#: ../panel/panel-dialogs.c:1608
 #, fuzzy
 msgid "Add a new panel"
 msgstr "নতুম বস্তু যোগ করুন"
 
-#: ../panel/panel-dialogs.c:1663
+#: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
 #, fuzzy
 msgid "Panel"
 msgstr "Xfce Panel"
 
-#: ../panel/panel-dialogs.c:1670
+#: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
 msgid "Customize the panel settings"
 msgstr ""
@@ -365,44 +374,42 @@ msgstr "পূর্বাহ্ন/অপরাহ্ন"
 msgid "True _binary clock"
 msgstr ""
 
-#. create dialog
-#: ../plugins/clock/clock-dialog.c:484
+#: ../plugins/clock/clock-dialog.c:483
 #: ../plugins/clock/clock.desktop.in.in.h:1
 #, fuzzy
 msgid "Clock"
 msgstr "লক"
 
-#: ../plugins/clock/clock-dialog.c:512
+#: ../plugins/clock/clock-dialog.c:510
 msgid "Analog"
 msgstr "অ্যানালগ"
 
-#: ../plugins/clock/clock-dialog.c:513
+#: ../plugins/clock/clock-dialog.c:511
 msgid "Binary"
 msgstr ""
 
-#: ../plugins/clock/clock-dialog.c:514
+#: ../plugins/clock/clock-dialog.c:512
 msgid "Digital"
 msgstr "ডিজিটাল"
 
-#: ../plugins/clock/clock-dialog.c:515
+#: ../plugins/clock/clock-dialog.c:513
 #, fuzzy
 msgid "LCD"
 msgstr "LED"
 
-#. show frame
-#: ../plugins/clock/clock-dialog.c:520
-#: ../plugins/systray/xfce-tray-dialogs.c:363
+#: ../plugins/clock/clock-dialog.c:518
+#: ../plugins/systray/xfce-tray-dialogs.c:360
 #, fuzzy
 msgid "Show _frame"
 msgstr "সময় প্রদর্শন করা হবে (_t)"
 
 #. tooltip settings
-#: ../plugins/clock/clock-dialog.c:527
+#: ../plugins/clock/clock-dialog.c:525
 msgid "Tooltip Format"
 msgstr ""
 
 #. clock settings
-#: ../plugins/clock/clock-dialog.c:554
+#: ../plugins/clock/clock-dialog.c:552
 msgid "Clock Options"
 msgstr ""
 
@@ -426,9 +433,8 @@ msgstr "সমস্ত ওয়ার্কস্পেসের কর্ম প
 msgid "Use all available _space"
 msgstr ""
 
-#. create menu item
-#. set some default values
-#: ../plugins/launcher/launcher.c:706 ../plugins/launcher/launcher.c:771
+#. TRANSLATORS: Name of a newly created launcher
+#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
 #, fuzzy
 msgid "New Item"
 msgstr "নতুম বস্তু যোগ করুন"
@@ -471,75 +477,72 @@ msgstr ""
 msgid "Shell Scripts"
 msgstr ""
 
+#. TRANSLATORS: Fallback name for a launcher item without a name
 #: ../plugins/launcher/launcher-dialog.c:755
-msgid "Unknown"
+#: ../plugins/launcher/launcher-dialog.c:844
+#: ../plugins/launcher/launcher-dialog.c:1337
+msgid "Unnamed"
 msgstr ""
 
-#. allocate the chooser dialog
-#: ../plugins/launcher/launcher-dialog.c:758
+#: ../plugins/launcher/launcher-dialog.c:757
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#. build name
-#: ../plugins/launcher/launcher-dialog.c:845
-#: ../plugins/launcher/launcher-dialog.c:1339
-msgid "Unnamed"
-msgstr ""
-
-#: ../plugins/launcher/launcher-dialog.c:1123
+#: ../plugins/launcher/launcher-dialog.c:1122
 #, fuzzy
 msgid "_Name:"
 msgstr "খেলা"
 
-#: ../plugins/launcher/launcher-dialog.c:1141
+#: ../plugins/launcher/launcher-dialog.c:1140
 #, fuzzy
 msgid "_Description:"
 msgstr "অবস্থান"
 
-#: ../plugins/launcher/launcher-dialog.c:1160
+#: ../plugins/launcher/launcher-dialog.c:1159
 #, fuzzy
 msgid "_Icon:"
 msgstr "আইকনবক্স"
 
-#: ../plugins/launcher/launcher-dialog.c:1178
+#: ../plugins/launcher/launcher-dialog.c:1177
 #, fuzzy
 msgid "Co_mmand:"
 msgstr "কমান্ড:"
 
-#: ../plugins/launcher/launcher-dialog.c:1205
+#: ../plugins/launcher/launcher-dialog.c:1204
 msgid "_Working Directory:"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1211
+#: ../plugins/launcher/launcher-dialog.c:1210
 #, fuzzy
 msgid "Select a Working Directory"
 msgstr "এডিটর"
 
-#: ../plugins/launcher/launcher-dialog.c:1232
+#: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
 msgstr "টার্মিনালে চালান (_t)"
 
-#: ../plugins/launcher/launcher-dialog.c:1248
+#: ../plugins/launcher/launcher-dialog.c:1247
 #, fuzzy
 msgid "Use _startup notification"
 msgstr "স্টার্ট-আপ নোটিফিকেশন ব্যবহার করা হবে (_n)"
 
-#. create new dialog
-#: ../plugins/launcher/launcher-dialog.c:1524
+#: ../plugins/launcher/launcher-dialog.c:1521
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "লঞ্চার"
 
-#: ../plugins/launcher/launcher-dialog.c:1552
+#. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
+#. string as short as possible.
+#: ../plugins/launcher/launcher-dialog.c:1551
 msgid "A_rrow:"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Default"
 msgstr "ডিফল্ট"
 
-#: ../plugins/launcher/launcher-dialog.c:1563
+#: ../plugins/launcher/launcher-dialog.c:1562
 #, fuzzy
 msgid "Inside Button"
 msgstr "আইকনবক্স"
@@ -578,25 +581,24 @@ msgstr "বিভাজন-রেখা"
 msgid "Separator Style"
 msgstr "বিভাজন-রেখা"
 
-#. space
-#: ../plugins/separator/separator.c:435
+#: ../plugins/separator/separator.c:436
 msgid "_Empty space"
 msgstr ""
 
-#: ../plugins/separator/separator.c:444
+#: ../plugins/separator/separator.c:445
 msgid "E_xpanding empty space"
 msgstr ""
 
-#: ../plugins/separator/separator.c:453
+#: ../plugins/separator/separator.c:454
 msgid "_Line"
 msgstr ""
 
-#: ../plugins/separator/separator.c:462
+#: ../plugins/separator/separator.c:463
 #, fuzzy
 msgid "_Handle"
 msgstr "অবস্থান"
 
-#: ../plugins/separator/separator.c:471
+#: ../plugins/separator/separator.c:472
 msgid "_Dots"
 msgstr ""
 
@@ -608,22 +610,24 @@ msgstr ""
 msgid "Hide windows and show desktop"
 msgstr ""
 
-#. create a dialog
-#. create dialog
-#: ../plugins/systray/xfce-tray-plugin.c:71
-#: ../plugins/systray/xfce-tray-dialogs.c:334
+#: ../plugins/systray/xfce-tray-plugin.c:70
+#: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
 #, fuzzy
 msgid "Notification Area"
 msgstr "স্টার্ট-আপ নোটিফিকেশন ব্যবহার করা হবে (_n)"
 
+#. TRANSLATORS: This message is shown in an info dialog when the users
+#. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
 #, fuzzy
 msgid "There is already a notification area running on this screen"
 msgstr "এই পর্দায় বর্তমানে একটি চলমান সিস্টেম ট্রে উপস্থিত রয়েছে"
 
-#. message
-#: ../plugins/systray/xfce-tray-plugin.c:219
+#. TRANSLATORS: Bit of a weird text, but this is shown when for some
+#. reason another tray takes the ownership of the tray icons and this
+#. tray becomes unusable.
+#: ../plugins/systray/xfce-tray-plugin.c:221
 msgid "The tray manager lost selection"
 msgstr ""
 
@@ -631,19 +635,19 @@ msgstr ""
 msgid "Are you sure you want to clear the list of known applications?"
 msgstr ""
 
-#. number of rows
-#: ../plugins/systray/xfce-tray-dialogs.c:375
+#: ../plugins/systray/xfce-tray-dialogs.c:371
 #, fuzzy
 msgid "_Number of rows:"
 msgstr "সারির সংখ্যা:"
 
-#. applications
-#: ../plugins/systray/xfce-tray-dialogs.c:390
+#: ../plugins/systray/xfce-tray-dialogs.c:385
 #, fuzzy
 msgid "Hidden Applications"
 msgstr "কমান্ড নির্বাচন করুন"
 
-#: ../plugins/systray/xfce-tray-manager.c:431
+#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. show up normally since this is already checked when the plugin is added.
+#: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
@@ -672,18 +676,17 @@ msgstr "সময় প্রদর্শন করা হবে (_t)"
 msgid "Show tasks from _all workspaces"
 msgstr "সমস্ত ওয়ার্কস্পেসের কর্ম প্রদর্শন করুন (_a)"
 
-#. keep order in sync with WnckTasklistGroupingType
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:220
 #, fuzzy
 msgid "Never group tasks"
 msgstr "কর্ম সর্বদা দলভুক্ত করা হবে (_g)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:221
 #, fuzzy
 msgid "Automatically group tasks"
 msgstr "কর্ম সর্বদা দলভুক্ত করা হবে (_g)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:223
+#: ../plugins/tasklist/tasklist-dialogs.c:222
 #, fuzzy
 msgid "Always group tasks"
 msgstr "কর্ম সর্বদা দলভুক্ত করা হবে (_g)"
@@ -698,29 +701,29 @@ msgstr ""
 msgid "Are you sure you want to remove workspace '%s'?"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:477
+#. TRANSLATORS: Fallback name in the windowlist when the workspace has no name
+#: ../plugins/windowlist/windowlist.c:476
 #, c-format
 msgid "Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:592
-#: ../plugins/windowlist/windowlist.c:598
+#: ../plugins/windowlist/windowlist.c:591
+#: ../plugins/windowlist/windowlist.c:597
 msgid "Add workspace"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:617
+#: ../plugins/windowlist/windowlist.c:616
 #, c-format
 msgid "Remove Workspace %d"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist.c:618
+#: ../plugins/windowlist/windowlist.c:617
 #, c-format
 msgid "Remove Workspace '%s'"
 msgstr ""
 
-#. Windowlist Settings
 #: ../plugins/windowlist/windowlist-dialog.c:121
-#: ../plugins/windowlist/windowlist-dialog.c:210
+#: ../plugins/windowlist/windowlist-dialog.c:208
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
 msgstr ""
@@ -750,26 +753,26 @@ msgstr ""
 msgid "For _all workspaces"
 msgstr "সমস্ত ওয়ার্কস্পেসের কর্ম প্রদর্শন করুন (_a)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:194
+#: ../plugins/windowlist/windowlist-dialog.c:193
 #, fuzzy
 msgid "_Icon button"
 msgstr "আইকনবক্স"
 
-#: ../plugins/windowlist/windowlist-dialog.c:201
+#: ../plugins/windowlist/windowlist-dialog.c:200
 msgid "A_rrow button"
 msgstr ""
 
-#: ../plugins/windowlist/windowlist-dialog.c:219
+#: ../plugins/windowlist/windowlist-dialog.c:217
 #, fuzzy
 msgid "Show _windows from all workspaces"
 msgstr "সমস্ত ওয়ার্কস্পেসের কর্ম প্রদর্শন করুন (_a)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:228
+#: ../plugins/windowlist/windowlist-dialog.c:226
 #, fuzzy
 msgid "Show a_pplication icons"
 msgstr "অ্যাপ্লিকেশনের নাম প্রদর্শন করা হবে (_n)"
 
-#: ../plugins/windowlist/windowlist-dialog.c:237
+#: ../plugins/windowlist/windowlist-dialog.c:235
 msgid "Show wor_kspace actions"
 msgstr ""
 

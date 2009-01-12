@@ -193,6 +193,7 @@ add_selected_item (PanelItemsDialog *pid)
         if (item)
             g_idle_add ((GSourceFunc)item_configure_timeout, item);
         else
+            /* TRANSLATORS: Warning when adding an item to the panel failed. */
             xfce_err (_("Could not open \"%s\" module"), info->name);
     
         return TRUE;
@@ -636,6 +637,8 @@ add_items_dialog (GPtrArray *panels,
     gtk_widget_show (img);
     gtk_box_pack_start (GTK_BOX (hbox), img, FALSE, FALSE, 0);
 
+    /* TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+       since gtk labels do not update text wrapping on a dialog resize. */
     label = gtk_label_new (_("Drag items from the list to a panel or remove\n"
                              "them by dragging them back to the list."));
     gtk_misc_set_alignment (GTK_MISC (label), 0.0f, 0.5f);
@@ -1587,6 +1590,7 @@ create_panel_selector (PanelManagerDialog *pmd)
     gtk_widget_show (img);
     gtk_container_add (GTK_CONTAINER (pmd->rm_panel), img);
 
+    /* TRANSLATORS: Tooltip for the add button in the customize panel dialog */
     gtk_tooltips_set_tip (pmd->tips, pmd->rm_panel, _("Remove the currently selected panel"), NULL);
 
     g_signal_connect (G_OBJECT (pmd->rm_panel), "clicked",
@@ -1600,6 +1604,7 @@ create_panel_selector (PanelManagerDialog *pmd)
     gtk_widget_show (img);
     gtk_container_add (GTK_CONTAINER (pmd->add_panel), img);
 
+    /* TRANSLATORS: Tooltip for the add button in the customize panel dialog */
     gtk_tooltips_set_tip (pmd->tips, pmd->add_panel, _("Add a new panel"), NULL);
 
     g_signal_connect (G_OBJECT (pmd->add_panel), "clicked",

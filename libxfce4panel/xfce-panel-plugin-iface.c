@@ -832,8 +832,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
-    /* configure, hide by default */
-
+    /* TRANSLATORS: Properties menu item in the right-click plugin menu */
     mi = gtk_image_menu_item_new_with_label (_("Properties"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -850,7 +849,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
                        I_("xfce-panel-plugin-configure-position"),
                        GINT_TO_POINTER (configure_position));
 
-    /* about item, hide by default */
+    /* TRANSLATORS: About menu item in the right-click plugin menu */
     mi = gtk_image_menu_item_new_with_label (_("About"));
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
@@ -862,7 +861,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
                               G_CALLBACK (xfce_panel_plugin_signal_about),
                               plugin);
 
-    /* move */
+    /* TRANSLATORS: Move menu item in the right-click plugin menu */
     mi = gtk_image_menu_item_new_with_label (_("Move"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -882,6 +881,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
+    /* TRANSLATORS: Remove menu item in the right-click plugin menu */
     mi = gtk_image_menu_item_new_with_label (_("Remove"));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -899,6 +899,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
 
+    /* TRANSLATORS: Add menu item in the right-click plugin menu */
     mi = gtk_image_menu_item_new_with_label (_("Add New Items..."));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);
@@ -910,6 +911,7 @@ _xfce_panel_plugin_create_menu (XfcePanelPlugin *plugin)
     g_signal_connect_swapped (G_OBJECT (mi), "activate",
                               G_CALLBACK (_xfce_panel_plugin_customize_items), plugin);
 
+    /* TRANSLATORS: Customize menu item in the right-click plugin menu */
     mi = gtk_image_menu_item_new_with_label (_("Customize Panel..."));
     gtk_widget_show (mi);
     gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);

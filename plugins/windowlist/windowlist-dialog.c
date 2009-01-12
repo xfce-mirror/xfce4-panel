@@ -184,7 +184,6 @@ windowlist_properties (XfcePanelPlugin *plugin,
     g_signal_connect (button, "toggled",
                       G_CALLBACK (windowlist_notify_toggled), wd);
 
-    /* Button Layout */
     frame = xfce_create_framebox (_("Appearance"), &alignment);
     gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, TRUE, 0);
 
@@ -206,7 +205,6 @@ windowlist_properties (XfcePanelPlugin *plugin,
     g_signal_connect (button, "toggled",
                       G_CALLBACK (windowlist_button_toggled), wd);
 
-    /* Windowlist Settings */
     frame = xfce_create_framebox (_("Window List"), &alignment);
     gtk_box_pack_start (GTK_BOX (vbox), frame, FALSE, TRUE, 0);
     gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
@@ -215,7 +213,7 @@ windowlist_properties (XfcePanelPlugin *plugin,
     gtk_container_add (GTK_CONTAINER (alignment), vbox2);
 
     button = wd->show_all_workspaces =
-	gtk_check_button_new_with_mnemonic (
+    gtk_check_button_new_with_mnemonic (
                 _("Show _windows from all workspaces"));
     gtk_box_pack_start (GTK_BOX (vbox2), button, FALSE, FALSE, 0);
 

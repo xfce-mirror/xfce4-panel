@@ -702,7 +702,6 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
 
         entry = li->data;
 
-        /* create menu item */
         mi = gtk_image_menu_item_new_with_label (entry->name ? entry->name : _("New Item"));
         gtk_widget_show (mi);
 
@@ -767,7 +766,7 @@ launcher_entry_new (void)
     /* allocate structure */
     entry = panel_slice_new0 (LauncherEntry);
 
-    /* set some default values */
+    /* TRANSLATORS: Name of a newly created launcher */
     entry->name    = g_strdup (_("New Item"));
     entry->comment = NULL;
     entry->icon    = g_strdup ("applications-other");

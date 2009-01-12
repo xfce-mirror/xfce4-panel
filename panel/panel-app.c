@@ -968,6 +968,7 @@ panel_app_about (GtkWidget *panel)
 
     xfce_about_info_set_homepage (info, "http://www.xfce.org");
 
+    /* TRANSLATORS: Used in the credits tab in the panel's about dialog */
     xfce_about_info_add_credit (info, "Jasper Huijsmans", "jasper@xfce.org", _("Developer"));
     xfce_about_info_add_credit (info, "Nick Schermer", "nick@xfce.org", _("Developer"));
 

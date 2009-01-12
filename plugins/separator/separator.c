@@ -432,7 +432,8 @@ separator_properties_dialog (XfcePanelPlugin *plugin,
                         TRUE, TRUE, 0);
 
     /* space */
-    tb = gtk_radio_button_new_with_mnemonic (NULL, _("_Empty space"));
+    tb = gtk_radio_button_new_with_mnemonic (NULL, 
+                                             _("_Empty space"));
     gtk_widget_show (tb);
     gtk_box_pack_start (GTK_BOX (vbox), tb, FALSE, FALSE, 0);
     if (sep->type == SEP_SPACE)

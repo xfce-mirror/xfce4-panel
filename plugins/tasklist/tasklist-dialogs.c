@@ -217,10 +217,11 @@ tasklist_dialogs_configure (TasklistPlugin *tasklist)
     cb = gtk_combo_box_new_text ();
     gtk_box_pack_start (GTK_BOX (vbox), cb, FALSE, FALSE, 0);
 
-    /* keep order in sync with WnckTasklistGroupingType */
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Never group tasks"));
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Automatically group tasks"));
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Always group tasks"));
+    
+    /* keep order above in sync with WnckTasklistGroupingType */
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (cb), tasklist->grouping);
 

@@ -472,9 +472,8 @@ menulist_popup_menu (Windowlist     *wl,
         else
             wnck_workspace = wnck_screen_get_active_workspace (wl->screen);
 
-        /* Create workspace menu item */
-        ws_label =
-            menulist_workspace_name (wnck_workspace, _("Workspace %d"), "%s");
+        /* TRANSLATORS: Fallback name in the windowlist when the workspace has no name */
+        ws_label = menulist_workspace_name (wnck_workspace, _("Workspace %d"), "%s");
 
         mi = gtk_menu_item_new_with_label (ws_label);
         gtk_menu_shell_append (GTK_MENU_SHELL (menu), mi);

@@ -428,6 +428,8 @@ xfce_tray_manager_register (XfceTrayManager  *manager,
 
         /* set an error */
         g_set_error (error, XFCE_TRAY_MANAGER_ERROR, XFCE_TRAY_MANAGER_ERROR_SELECTION_FAILED,
+                     /* TRANSALTORS: Error returned when the tray manager failed to start. This won't
+                        show up normally since this is already checked when the plugin is added. */
                      _("Failed to acquire manager selection for screen %d"), screen_number);
     }
 

@@ -752,9 +752,8 @@ launcher_dialog_icon_chooser (LauncherDialog *ld)
     /* determine the name of the entry being edited */
     name = gtk_entry_get_text (GTK_ENTRY (ld->entry_name));
     if (G_UNLIKELY (name == NULL || *name == '\0'))
-        name = _("Unknown");
+        name = _("Unnamed");
 
-    /* allocate the chooser dialog */
     title = g_strdup_printf (_("Select an Icon for \"%s\""), name);
     chooser = exo_icon_chooser_dialog_new (title, NULL,
                                            GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -841,7 +840,7 @@ launcher_dialog_tree_update_row (LauncherDialog *ld,
                 break;
 
             case COLUMN_NAME:
-                /* build name */
+                /* TRANSLATORS: Fallback name for a launcher item without a name */
                 name = ld->entry->name ? ld->entry->name : _("Unnamed");
             
                 /* set new name */
@@ -1335,7 +1334,6 @@ launcher_dialog_add_tree (LauncherDialog *ld)
             /* load icon */
             icon = launcher_utility_load_pixbuf (gtk_widget_get_screen (ld->treeview), entry->icon, LAUNCHER_TREE_ICON_SIZE);
             
-            /* build name */
             name = entry->name ? entry->name : _("Unnamed");
 
             /* create new row and add the data */
@@ -1520,7 +1518,6 @@ launcher_dialog_show (LauncherPlugin  *launcher)
     ld->stored_move_first = launcher->move_first;
     launcher->move_first = FALSE;
 
-    /* create new dialog */
     dialog = xfce_titled_dialog_new_with_buttons (_("Launcher"),
                                                   NULL,
                                                   GTK_DIALOG_NO_SEPARATOR,
@@ -1549,6 +1546,8 @@ launcher_dialog_show (LauncherPlugin  *launcher)
     hbox = gtk_hbox_new (FALSE, BORDER);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
+    /* TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
+       string as short as possible. */
     label = gtk_label_new_with_mnemonic (_("A_rrow:"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 

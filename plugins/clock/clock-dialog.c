@@ -480,7 +480,6 @@ xfce_clock_dialog_show (ClockPlugin *plugin)
     /* block the right-click menu */
     xfce_panel_plugin_block_menu (plugin->plugin);
 
-    /* create dialog */
     dialog = xfce_titled_dialog_new_with_buttons (_("Clock"), NULL,
                                                   GTK_DIALOG_NO_SEPARATOR,
                                                   GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
@@ -498,7 +497,6 @@ xfce_clock_dialog_show (ClockPlugin *plugin)
     gtk_container_set_border_width (GTK_CONTAINER (dialog_vbox), 6);
     gtk_widget_show (dialog_vbox);
 
-    /* appearance settings */
     frame = xfce_create_framebox (_("Appearance"), &bin);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
     gtk_widget_show (frame);

@@ -330,7 +330,6 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     /* lock plugin menu */
     xfce_panel_plugin_block_menu (plugin->panel_plugin);
 
-    /* create dialog */
     dialog = xfce_titled_dialog_new_with_buttons (_("Notification Area"),
                                                   NULL,
                                                   GTK_DIALOG_NO_SEPARATOR,
@@ -348,7 +347,6 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     /* main vbox */
     dialog_vbox = GTK_DIALOG (dialog)->vbox;
 
-    /* appearance */
     frame = xfce_create_framebox (_("Appearance"), &bin);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, FALSE, TRUE, 0);
     gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
@@ -359,7 +357,6 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_container_add (GTK_CONTAINER (bin), vbox);
     gtk_widget_show (vbox);
 
-    /* show frame */
     button = gtk_check_button_new_with_mnemonic (_("Show _frame"));
     gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), plugin->show_frame);
@@ -371,7 +368,6 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
     gtk_widget_show (hbox);
 
-    /* number of rows */
     label = gtk_label_new_with_mnemonic (_("_Number of rows:"));
     gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
     gtk_widget_show (label);
@@ -386,7 +382,6 @@ xfce_tray_dialogs_configure (XfceTrayPlugin *plugin)
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
     gtk_widget_show (spin);
 
-    /* applications */
     frame = xfce_create_framebox (_("Hidden Applications"), &bin);
     gtk_box_pack_start (GTK_BOX (dialog_vbox), frame, TRUE, TRUE, 0);
     gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
