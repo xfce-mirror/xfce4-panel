@@ -13,7 +13,7 @@ dnl ***************************
 m4_define([libxfce4panel_verinfo], [2:2:1])
 m4_define([xfce4_panel_version_major], [4])
 m4_define([xfce4_panel_version_minor], [5])
-m4_define([xfce4_panel_version_micro], [92])
+m4_define([xfce4_panel_version_micro], [93])
 m4_define([xfce4_panel_version_nano],  []) dnl leave this empty to have no nano version
 m4_define([xfce4_panel_version_build], [r@REVISION@])
 m4_define([xfce4_panel_version_tag],   [])
@@ -107,12 +107,12 @@ XDT_CHECK_LIBSM()
 dnl ***********************************
 dnl *** Check for required packages ***
 dnl ***********************************
-XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.5.92])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.5.93])
 XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.8.0])
 XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.8.0])
 XDT_CHECK_PACKAGE([GMODULE], [gmodule-2.0], [2.8.0])
-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.5.92])
-XDT_CHECK_PACKAGE([LIBEXO], [exo-0.3], [0.3.92])
+XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.5.93])
+XDT_CHECK_PACKAGE([LIBEXO], [exo-0.3], [0.3.93])
 XDT_CHECK_PACKAGE([CAIRO], [cairo], [1.0.0])
 
 dnl **********************
