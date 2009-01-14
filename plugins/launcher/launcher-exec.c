@@ -21,7 +21,10 @@
 #include <config.h>
 #endif
 
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
+
 #ifdef HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
