@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Eskild Hustvedt <eskild@goldenfiles.com>, 2004.
 # Christian Lomsdalen <christian@vindstille.net>, 2007.
+# Terje Uriansrud <terje@uriansrud.net>, 2009.
 #
 msgid ""
 msgstr ""
@@ -10,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-12 18:06+0100\n"
 "PO-Revision-Date: 2005-08-18 01:10+0900\n"
-"Last-Translator: Christian Lomsdalen <christian@vindstille.net>\n"
+"Last-Translator: Terje Uriansrud <terje@uriansrud.net>\n"
 "Language-Team: Norwegian Bokmal <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgstr "Et element ble uventet fjernet: \"%s\"."
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:606
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "_Fjerne \"%s\"?"
+msgstr "Fjerne «%s»?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
 msgid ""
@@ -55,15 +56,13 @@ msgstr "Fjern"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Legg til nytt element"
+msgstr "Legg til nye elementer..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "Tilpasse panel"
+msgstr "Tilpass panelet..."
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:284
 #: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
@@ -109,33 +108,28 @@ msgid "Print version information and exit"
 msgstr ""
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Tilpasse panel"
+msgstr "Vis «Tilpass panel» bildet"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Lagre konfigurasjon"
+msgstr "Lagre panelkonfigurasjon"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Restarter xfce4-panel"
+msgstr "Restart den kjørende instansen av xfce4-panel"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Logg ut eller lås skjermen"
+msgstr "Logg ut den aktive økten"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Lukk alle paneler og avslutt programmet"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Legg til nytt element"
+msgstr "Vis «Legg til nye elementer»"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -154,7 +148,6 @@ msgid "Please report bugs to <%s>."
 msgstr "Vennligst rapporter feil til <%s>."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
 msgstr "xfce4-panel kjører allerede"
 
@@ -169,24 +162,22 @@ msgid "Could not open \"%s\" module"
 msgstr "Klarte ikke åpne «%s» modulen."
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Legg til nytt element"
+msgstr "Legg til nye elementer"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Dra elementer fra listen til et panel eller fjerne elementer ved å dra de "
+"Dra elementer fra listen til et panel eller fjerne de ved å dra de "
 "tilbake til listen."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "_Søk:"
 
 #: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
@@ -234,14 +225,12 @@ msgid "Position"
 msgstr "Posisjon"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Fastsatt posisjon"
+msgstr "_Fastsatt posisjon"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Fritt flyttbar"
+msgstr "Fritt f_lyttbar"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -279,19 +268,16 @@ msgid "Appearance"
 msgstr "Utseende"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Størrelse (piksler)"
+msgstr "_Størrelse (piksler)"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Gjennomsiktighet (%)"
+msgstr "Gjennomsik_tighet (%)"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Gjør aktivt panel ugjennomsiktig"
+msgstr "Gjør aktivt panel _ugjennomsiktig"
 
 #: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
@@ -306,9 +292,8 @@ msgstr ""
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Legg til nye elementer"
+msgstr "Legg til nytt panel"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -317,9 +302,8 @@ msgstr "Panel"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Tilpasse panel"
+msgstr "Tilpass panelet"
 
 #: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
@@ -332,18 +316,16 @@ msgid "Action Buttons"
 msgstr "Handlingknapper"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Velg aksjonstype"
+msgstr "_Velg aksjonstype"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Avlsutt + Lås skjerm"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Orientering:"
+msgstr "_Orientering:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -411,19 +393,16 @@ msgid "Icon Box"
 msgstr "Ikonboks"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Vis bare minimerte programmer"
+msgstr "Vis bare _minimerte programmer"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Vis programmer fra alle skrivebord"
+msgstr "Vis programmer fra _alle skrivebord"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
 msgid "Use all available _space"
-msgstr "Bruk all tilgjengelig plass"
+msgstr "Bruk all tilgjengelig pla_ss"
 
 #. TRANSLATORS: Name of a newly created launcher
 #: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
@@ -480,34 +459,28 @@ msgid "Select an Icon for \"%s\""
 msgstr "Velg et ikon for \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "_Navn"
+msgstr "_Navn:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "_Beskrivelse"
+msgstr "_Beskrivelse:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "_Icon:"
-msgstr "_Ikon"
+msgstr "_Ikon:"
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "_Kommando:"
+msgstr "Ko_mmando:"
 
 #: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "_Gjeldende mappe"
+msgstr "_Arbeidsmappe:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Velg en mappe"
+msgstr "Velg en arbeidsmappe"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -537,29 +510,24 @@ msgid "Inside Button"
 msgstr "Innenfor knappen"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Skrivebord %d"
+msgstr "Arbeidsområdevelger"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Antall rader:"
+msgstr "Antall _rader:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Antall kolonner:"
+msgstr "Antall _kolonner:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Bytt skrivebord med musehjulet"
+msgstr "Bytt skrivebord med muse_hjulet"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Vis skrivebordnavn"
+msgstr "Vis arbeidsområde_navn"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -571,12 +539,10 @@ msgid "Separator Style"
 msgstr "Skillestil"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
 msgstr "_Tom plass"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
 msgstr "_Ekspander tom plass"
 
@@ -603,14 +569,12 @@ msgstr "Skjul vinduer og vis skrivebordet"
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Viktig beskjed"
+msgstr "Systemkurv"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
 msgstr "Det kjører allerede en systemkurv på denne skjermen"
 
@@ -647,19 +611,16 @@ msgid "Task List"
 msgstr "Oppgaveliste"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Minimum bredde:"
+msgstr "_Minimum bredde:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Bruk flate knapper"
+msgstr "Bruk _flate knapper"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Vis håndtak"
+msgstr "Vis _håndtak"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -776,27 +737,24 @@ msgid "Program launcher with optional menu"
 msgstr "Programstarter med valgfri undermeny"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Miniatyroversikt over alle virtuelle skrivebord"
+msgstr "Bytt mellom virtuelle arbeidsområder"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Lager mellomrom eller en linje mellom panelelementer"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Skjul vinduer og vis skrivebordet"
+msgstr "Skjul alle vinduer og vis skrivebordet"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
 msgstr "Vis skrivebord"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Vis beskjedikoner"
+msgstr "Område som viser beskjedikoner"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
@@ -809,97 +767,3 @@ msgstr ""
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Panelbehandler"
-
-#~ msgid "Unknown"
-#~ msgstr "Ukjent"
-
-#, fuzzy
-#~ msgid "Copyright (c) 2004-2009"
-#~ msgstr "Copyright (c) 2004-2007"
-
-#~ msgid "Show list of available windows"
-#~ msgstr "Vis liste over alle tilgjengelige vinduer"
-
-#~ msgid "Show all running applications"
-#~ msgstr "Vis alle kjørende programmer"
-
-#~ msgid "Popup position:"
-#~ msgstr "Sprettopp posisjon:"
-
-#~ msgid "Automatic"
-#~ msgstr "Automatisk"
-
-#~ msgid "Toggle desktop show/hide"
-#~ msgstr "Skifte skrivebord vis/skjul"
-
-#~ msgid "Show this message and exit"
-#~ msgstr "Vis denne meldingen og avslutt"
-
-#~ msgid "Show configuration dialog"
-#~ msgstr "Vis konfigurasjonsbilde"
-
-#~ msgid "Restart panels"
-#~ msgstr "Omstart panel"
-
-#~ msgid "End the session"
-#~ msgstr "Avslutt økten"
-
-#~ msgid "Add new items"
-#~ msgstr "Legg til nye elementer"
-
-#~ msgid "Pager"
-#~ msgstr "Skrivebordsoversikt"
-
-#~ msgid "System Tray"
-#~ msgstr "Systemkurv"
-
-#~ msgid "Command Prompt"
-#~ msgstr "Kommandolinje:"
-
-#~ msgid "X terminal emulator"
-#~ msgstr "X terminal emulator"
-
-#~ msgid "Edit text files"
-#~ msgstr "Rediger tekstfiler"
-
-#~ msgid "Editor"
-#~ msgstr "Redigerer"
-
-#~ msgid "File Manager"
-#~ msgstr "Filbehandler"
-
-#~ msgid "Manage files and folders"
-#~ msgstr "Behandle filer og mapper"
-
-#~ msgid "Surf the internet"
-#~ msgstr "Surfe på internett"
-
-#~ msgid "Web Browser"
-#~ msgstr "Nettleser"
-
-#~ msgid "Add Items"
-#~ msgstr "Legg til elementer"
-
-#~ msgid "Add Items to the Panel"
-#~ msgstr "Legg til elementer i panelet"
-
-#~ msgid "Available Items"
-#~ msgstr "Tilgjengelige elementer"
-
-#~ msgid "Remove Panel"
-#~ msgstr "Fjern panel"
-
-#~ msgid "New Panel"
-#~ msgstr "Nytt panel"
-
-#~ msgid "Panel Actions"
-#~ msgstr "Panelaksjoner"
-
-#~ msgid "Program Launcher"
-#~ msgstr "Programstarter"
-
-#~ msgid "Failed to launch 'xfce4-panel -c'"
-#~ msgstr "Klarte ikke starte 'xfce4-panel -c'"
-
-#~ msgid "Xfce 4 Panel Manager"
-#~ msgstr "Xfce 4 Panelbehandler"
