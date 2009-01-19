@@ -5,14 +5,15 @@
 # Adriano Winter Bess <awbess@gmail.com>, 2006.
 # Og Maciel <ogmaciel@gnome.org>, 2008.
 # Fábio Nogueira <deb-user-ba@ubuntu.com>, 2008.
+# Henrique P. Machado <zehrique@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-12 18:06+0100\n"
-"PO-Revision-Date: 2008-07-21 22:20-0300\n"
-"Last-Translator: Fábio Nogueira <deb-user-ba@ubuntu.com>\n"
+"POT-Creation-Date: 2009-01-19 17:19-0500\n"
+"PO-Revision-Date: 2009-01-19 17:26-0200\n"
+"Last-Translator: Henrique P. Machado <zehrique@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -57,15 +58,13 @@ msgstr "Remover"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Adicionar novo item"
+msgstr "Adicionar novos itens..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "Personalizar o painel"
+msgstr "Personalizar o painel..."
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:284
 #: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
@@ -109,36 +108,31 @@ msgstr "Desenvolvedor"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Imprimir informações de versão e sair"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Personalizar o painel"
+msgstr "Mostrar o dialogo \"Personalizar o painel\""
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Salvar configuração"
+msgstr "Salvar configuração do painel"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Reiniciando xfce4-panel..."
+msgstr "Reiniciar a instância em execução do xfce4-panel"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Sair ou travar a tela"
+msgstr "Encerrar a sessão ativa"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Fechar todos os paineis e terminar o programa"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Adicionar novo item"
+msgstr "Mostrar dialogo \"Adicionar Novos Itens\""
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -154,12 +148,11 @@ msgstr "A equipe de desenvolvimento do Xfce. Todos os direitos reservados."
 #: ../panel/main.c:107
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "Por favor reporte problemas para <%s>."
+msgstr "Por favor, relate problemas para <%s>."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
-msgstr "O xfce4-panel já esta rodando"
+msgstr "O Xfce4-panel já está em execução"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -172,24 +165,22 @@ msgid "Could not open \"%s\" module"
 msgstr "Não foi possível abrir o módulo \"%s\""
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Adicionar novo item"
+msgstr "Adicionar novos itens"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Arraste itens da lista para um painel ou remova-os arrastando de volta para "
-"a lista"
+"Arraste itens da lista para um painel ou remova-os\n"
+"arrastando-os de volta para a lista."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "Pe_squisar:"
 
 #: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
@@ -237,18 +228,16 @@ msgid "Position"
 msgstr "Posição"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Posição fixa"
+msgstr "Posição _fixa"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Movimentar livremente"
+msgstr "Movimentar livre_mente"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
-msgstr "Auto-O_cultar"
+msgstr "Auto-o_cultar"
 
 #: ../panel/panel-dialogs.c:1158
 msgid "Orientation:"
@@ -264,7 +253,7 @@ msgstr "Vertical"
 
 #: ../panel/panel-dialogs.c:1181
 msgid "Handle:"
-msgstr "Manipulador"
+msgstr "Manipulador:"
 
 #: ../panel/panel-dialogs.c:1193
 msgid "At both sides"
@@ -282,19 +271,16 @@ msgid "Appearance"
 msgstr "Aparência"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Tamanho (pixels):"
+msgstr "_Tamanho (pixels):"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Transparência (%):"
+msgstr "Tr_ansparência (%):"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Tornar opaco o painel ativo"
+msgstr "Tornar _opaco o painel ativo"
 
 #: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
@@ -305,13 +291,12 @@ msgstr "Painel %d"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Remove o painel selecionado atualmente"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Adicionar novos itens"
+msgstr "Adiciona um novo painel"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -320,9 +305,8 @@ msgstr "Painel"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Personalizar o painel"
+msgstr "Personalizar as configurações do painel"
 
 #: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
@@ -335,18 +319,16 @@ msgid "Action Buttons"
 msgstr "Botões de ação"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Selecione o tipo de ação:"
+msgstr "_Selecione o tipo de ação:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Sair + Travar tela"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Orientação:"
+msgstr "Orie_ntação:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -414,26 +396,23 @@ msgid "Icon Box"
 msgstr "Caixa de ícones"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Mostrar apenas aplicativos minimizados"
+msgstr "Mostrar apenas aplicativos _minimizados"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Mostrar aplicativos de todas as áreas de trabalho"
+msgstr "Mostr_ar aplicativos de todas as áreas de trabalho"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
 msgid "Use all available _space"
-msgstr "Usar todo o espaço disponível"
+msgstr "Usar todo o e_spaço disponível"
 
 #. TRANSLATORS: Name of a newly created launcher
 #: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
 msgid "New Item"
 msgstr "Novo item"
 
-#: ../plugins/launcher/launcher-exec.c:565
+#: ../plugins/launcher/launcher-exec.c:568
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Não foi possível executar \"%s\""
@@ -448,7 +427,7 @@ msgstr "Selecione um aplicativo"
 
 #: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
-msgstr "Todos arquivos"
+msgstr "Todos os arquivos"
 
 #: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
@@ -483,34 +462,28 @@ msgid "Select an Icon for \"%s\""
 msgstr "Selecione um ícone para \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "_Nome"
+msgstr "_Nome:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "_Descrição"
+msgstr "_Descrição:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "_Icon:"
-msgstr "Ca_ixa de ícones"
+msgstr "Í_cone:"
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "Co_mando"
+msgstr "Co_mando:"
 
 #: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "_Diretório de trabalho"
+msgstr "_Diretório de trabalho:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Selecione um diretório"
+msgstr "Selecione um diretório de trabalho"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -540,29 +513,24 @@ msgid "Inside Button"
 msgstr "Dentro do botão"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Área de trabalho %d"
+msgstr "Alternador de área de trabalho"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Número de linhas:"
+msgstr "Númer_o de linhas:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Número de colunas:"
+msgstr "Número _de colunas:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Mudar de área de trabalho usando a roda do mouse"
+msgstr "Alte_rnar de área de trabalho usando a roda do mouse"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Mostrar nome da área de trabalho"
+msgstr "Mostrar _nome da área de trabalho"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -574,14 +542,12 @@ msgid "Separator Style"
 msgstr "Estilo do separador"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
-msgstr "_Espaço vazio"
+msgstr "_Espaço em branco"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
-msgstr "_Expandindo o espaço vazio"
+msgstr "_Expandindo o espaço em branco"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -606,16 +572,14 @@ msgstr "Esconder janelas e mostrar o ambiente de trabalho"
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Notificação de urgência"
+msgstr "Área de notificação"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Há uma bandeja de sistema sendo executada nesta tela"
+msgstr "Já existe uma área de notificação executando nesta tela"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
@@ -650,19 +614,16 @@ msgid "Task List"
 msgstr "Lista de tarefas"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Largura Mínima:"
+msgstr "Largura _mínima:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Usar botões planos"
+msgstr "Usar botões _planos"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Mostrar _borda"
+msgstr "Mostrar _manipulador"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -756,7 +717,7 @@ msgstr "Mostrar _janelas de todas as áreas de trabalho"
 
 #: ../plugins/windowlist/windowlist-dialog.c:226
 msgid "Show a_pplication icons"
-msgstr "Mostrar ícones das a_plicações"
+msgstr "Mostrar ícones dos a_plicativos"
 
 #: ../plugins/windowlist/windowlist-dialog.c:235
 msgid "Show wor_kspace actions"
@@ -776,38 +737,35 @@ msgstr "Mostrar ícones de todos os aplicativos em execução"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Executor de programas com menu opcional"
+msgstr "Lançador de programas com menu opcional"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Vista em miniatura de todos as áreas de trabalho virtuais"
+msgstr "Alternar entre áreas de trabalho virtuais"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Adiciona um espaço ou uma linha entre itens no painel"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Esconder janelas e mostrar o ambiente de trabalho"
+msgstr "Esconder todas as janelas e mostrar o ambiente de trabalho"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
 msgstr "Mostrar a área de trabalho"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Mostra ícones de notificação"
+msgstr "Área onde o ícone de notificação aparece"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Alterna entre janelas abertas usando botões"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Alterna entre janelas abertas usando um menu"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
