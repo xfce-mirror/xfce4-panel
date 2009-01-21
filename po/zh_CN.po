@@ -6,13 +6,14 @@
 # Jick Nan <jick.nan@gmail.com>, 2006.
 # wuli <wurisky@gmail.com>,2007,2008
 # Hunt Xu <huntxu@live.cn>, 2008.
+# Chris K. Zhang <plutino@gmail.com>, 2009
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-12 18:06+0100\n"
-"PO-Revision-Date: 2008-12-17 02:32+0800\n"
+"PO-Revision-Date: 2009-01-19 12:16-0800\n"
 "Last-Translator: Hunt Xu <huntxu@live.cn>\n"
 "Language-Team: Simplified Chinese <xfce-i18n@xfce.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,13 +59,11 @@ msgstr "移除"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
 msgstr "添加新项目"
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
 msgstr "自定义面板"
 
@@ -79,15 +78,15 @@ msgstr "重新启动"
 
 #: ../panel/panel.c:646
 msgid "About the Xfce Panel"
-msgstr "关于Xfce面板"
+msgstr "关于 Xfce 面板"
 
 #: ../panel/panel-app.c:259 ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
-msgstr "退出Xfce面板？"
+msgstr "退出 Xfce 面板？"
 
 #: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
 msgid "Xfce Panel"
-msgstr "Xfce面板"
+msgstr "Xfce 面板"
 
 #: ../panel/panel-app.c:903
 msgid "You can't remove the last panel. Would you like to exit the program?"
@@ -109,36 +108,31 @@ msgstr "开发者"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "显示版本信息然后退出"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "自定义面板"
+msgstr "显示“自定义面板”对话框"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "保存配置"
+msgstr "保存面板配置"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "正在重新启动 xfce4-panel..."
+msgstr "重启运行中的 xfce4-panel..."
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "注销或锁住屏幕"
+msgstr "注销当前活动 Session"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr "关闭所有面板和结束程序"
+msgstr "关闭所有面板并结束程序"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "添加新项目"
+msgstr "显示“添加新项目”对话框"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -148,18 +142,17 @@ msgstr "无法打开显示"
 
 #: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
-msgstr "Xfce开发团队。保留所有权利。"
+msgstr "Xfce 开发组，版权所有。"
 
 #. TRANSLATORS: Bug report website, %s points to bugzilla.xfce.org
 #: ../panel/main.c:107
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr "请报告bugs到<%s>."
+msgstr "请向 <%s> 报告程序漏洞。"
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
-msgstr "xfce4-panel已经运行"
+msgstr "xfce4-panel 已经在运行"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -172,22 +165,20 @@ msgid "Could not open \"%s\" module"
 msgstr "无法打开 “%s ”模块。"
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
 msgstr "添加新项目"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
-msgstr "拖动列表上的项目至面板或通过拖动它们回到列表上而移除。"
+msgstr "把项目从列表拖到面板以添加，从面板拖回列表以移除。"
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "搜索(_S)："
 
 #: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
@@ -212,12 +203,12 @@ msgstr "跨显示器"
 #: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
 #: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
-msgstr "左"
+msgstr "左边"
 
 #: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
 #: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
-msgstr "右"
+msgstr "右边"
 
 #: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
 #: ../plugins/launcher/launcher-dialog.c:1560
@@ -235,18 +226,16 @@ msgid "Position"
 msgstr "位置"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "填充位置："
+msgstr "固定位置(_F)"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "自由移动"
+msgstr "自由移动(_M)"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
-msgstr "自动隐藏(_h)："
+msgstr "自动隐藏(_h)"
 
 #: ../panel/panel-dialogs.c:1158
 msgid "Orientation:"
@@ -280,36 +269,32 @@ msgid "Appearance"
 msgstr "外观"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "大小（像素）："
+msgstr "大小(_S)（像素）："
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "透明度 (%)"
+msgstr "透明度(_T)（％）："
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "使活动面板不透明"
+msgstr "使活动面板不透明(_O)"
 
 #: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
 #, c-format
 msgid "Panel %d"
-msgstr "面板%d"
+msgstr "面板 %d"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "移除选中的面板"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "添加新项目"
+msgstr "添加新面板"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -318,9 +303,8 @@ msgstr "面板"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "自定义面板"
+msgstr "自定义面板设置"
 
 #: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
@@ -333,18 +317,16 @@ msgid "Action Buttons"
 msgstr "动作按钮"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "选择动作类型："
+msgstr "选择动作类型(_S)："
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "退出 + 锁住屏幕"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "面板方向："
+msgstr "面板方向(_O)："
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -356,11 +338,11 @@ msgstr "显示秒(_S)"
 
 #: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
-msgstr "使用24小时时钟显示(_h)"
+msgstr "使用24小时时钟显示(_H)"
 
 #: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "闪烁时、分、秒的分隔符(_A)"
 
 #: ../plugins/clock/clock-dialog.c:432
 msgid "Sho_w AM/PM"
@@ -368,7 +350,7 @@ msgstr "显示 AM/PM (_W)"
 
 #: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
-msgstr ""
+msgstr "二进制时钟(_B)"
 
 #: ../plugins/clock/clock-dialog.c:483
 #: ../plugins/clock/clock.desktop.in.in.h:1
@@ -394,7 +376,7 @@ msgstr "液晶式"
 #: ../plugins/clock/clock-dialog.c:518
 #: ../plugins/systray/xfce-tray-dialogs.c:360
 msgid "Show _frame"
-msgstr "显示边框(_f)"
+msgstr "显示边框(_F)"
 
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:525
@@ -412,19 +394,16 @@ msgid "Icon Box"
 msgstr "图标盒"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "仅显示最小化程序"
+msgstr "仅显示最小化的程序(_M)"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "显示所有工作区的应用程序。"
+msgstr "显示所有工作区的应用程序(_A)"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
 msgid "Use all available _space"
-msgstr "使用所有可用空间"
+msgstr "使用所有可用空间(_S)"
 
 #. TRANSLATORS: Name of a newly created launcher
 #: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
@@ -481,34 +460,28 @@ msgid "Select an Icon for \"%s\""
 msgstr "为 \"%s\" 选择一个图标"
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "名称(_N)"
+msgstr "名称(_N)："
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "描述(_D)"
+msgstr "描述(_D)："
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "_Icon:"
-msgstr "图标盒(_I)"
+msgstr "图标盒(_I)："
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "命令(_M)"
+msgstr "命令(_M)："
 
 #: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "工作目录(_W)"
+msgstr "工作目录(_W)："
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "选择一个目录"
+msgstr "选择一个工作目录"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -538,29 +511,24 @@ msgid "Inside Button"
 msgstr "内置按钮(_I)"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "工作区 %d"
+msgstr "工作区选择器"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "行数："
+msgstr "行数(_O)："
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "列数："
+msgstr "列数(_O)："
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "用鼠标滚轮切换工作区"
+msgstr "用鼠标滚轮切换工作区(_W)"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "显示工作区名称(_K)"
+msgstr "显示工作区名称(_N)"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -572,14 +540,12 @@ msgid "Separator Style"
 msgstr "分隔符风格"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
-msgstr "空格(_E)"
+msgstr "空间距(_E)"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
-msgstr "展开空格(_E)"
+msgstr "弹性空间距(_X)"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -587,7 +553,7 @@ msgstr "线(_L)"
 
 #: ../plugins/separator/separator.c:463
 msgid "_Handle"
-msgstr "处理："
+msgstr "处理(_H)："
 
 #: ../plugins/separator/separator.c:472
 msgid "_Dots"
@@ -604,23 +570,21 @@ msgstr "隐藏窗口并显示桌面"
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "紧急提示"
+msgstr "系统提示区"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "已经有一个系统托盘在运行"
+msgstr "桌面已经有一个系统提示区"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
 #. tray becomes unusable.
 #: ../plugins/systray/xfce-tray-plugin.c:221
 msgid "The tray manager lost selection"
-msgstr ""
+msgstr "提示区管理失效"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:281
 msgid "Are you sure you want to clear the list of known applications?"
@@ -632,14 +596,14 @@ msgstr "行数(_N)："
 
 #: ../plugins/systray/xfce-tray-dialogs.c:385
 msgid "Hidden Applications"
-msgstr "隐藏应用程序："
+msgstr "隐藏应用程序"
 
 #. TRANSALTORS: Error returned when the tray manager failed to start. This won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr "不能获得管理选择器 %d"
+msgstr "无法给屏幕 %d 安装提示区"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:208
@@ -648,35 +612,32 @@ msgid "Task List"
 msgstr "任务列表"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "最小宽度："
+msgstr "最小宽度(_M)："
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "使用平板按钮"
+msgstr "使用平板按钮(_F)"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "显示手柄"
+msgstr "显示手柄(_H)"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
-msgstr "显示所有工具区的任务(_A)。"
+msgstr "显示所有工作区的任务(_A)。"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:220
 msgid "Never group tasks"
-msgstr "永不分组任务"
+msgstr "永不分组"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:221
 msgid "Automatically group tasks"
-msgstr "自动分组任务"
+msgstr "自动决定"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:222
 msgid "Always group tasks"
-msgstr "总是分组任务"
+msgstr "总是分组"
 
 #: ../plugins/windowlist/windowlist.c:263
 #, c-format
@@ -756,7 +717,7 @@ msgstr "显示应用程序图标(_P)"
 
 #: ../plugins/windowlist/windowlist-dialog.c:235
 msgid "Show wor_kspace actions"
-msgstr "显示工作区动作(_K)"
+msgstr "显示工作区行为(_K)"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -764,7 +725,7 @@ msgstr "注销或锁住屏幕"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
-msgstr "现在什么时间？"
+msgstr "现在几点？"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
@@ -772,38 +733,35 @@ msgstr "显示所有运行中程序的图标"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "带有选项菜单的程序起动器"
+msgstr "带有可选菜单的程序起动器"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "所有工作区的缩略显示"
+msgstr "在工作区之间切换"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "在面板项目之间添加一块空间或一条线"
+msgstr "在面板项目之间添加一块空白或分割线"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "隐藏窗口并显示桌面"
+msgstr "隐藏所有窗口并显示桌面"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
 msgstr "显示桌面"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "显示提示图标"
+msgstr "在这个区域显示提示图标"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "通过按钮在打开的窗口间切换"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "通过菜单在打开的窗口间切换"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
