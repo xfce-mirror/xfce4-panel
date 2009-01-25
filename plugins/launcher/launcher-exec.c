@@ -63,17 +63,6 @@
 #include <libsn/sn.h>
 #endif
 
-#ifdef __APPLE__
-/* apple doesn't have a environ symbol */
-#include <crt_externs.h>
-#define environ (*_NSGetEnviron())
-#elif !defined(__USE_GNU)
-/* when __USE_GNU is defined environ is defined in unistd.h
- * this to avoid a redundant redeclaration */
-extern gchar **environ;
-#endif
-
-
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
 typedef struct
@@ -434,10 +423,14 @@ launcher_exec_on_screen (GdkScreen     *screen,
     GtkWidget            *dialog;
     GSpawnFlags           flags = G_SPAWN_SEARCH_PATH;
     GPid                  pid;
+    gchar               **listenv;
 
     /* parse the full command */
     if ((argv = launcher_exec_parse_argv (entry, list, &error)) == NULL)
         goto error;
+        
+    /* get the environ variable */
+    listenv = g_listenv ();
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     /* setup startup notification, only when not running in terminal */
@@ -470,16 +463,16 @@ launcher_exec_on_screen (GdkScreen     *screen,
                 sn_launcher_context_initiate (sn_launcher, g_get_prgname (), argv[0], CurrentTime);
 
                 /* count environ items */
-                for (n = 0; environ[n] != NULL; ++n)
+                for (n = 0; listenv[n] != NULL; ++n)
                     ;
 
                 /* alloc new envp string */
                 envp = g_new (gchar *, n + 3);
 
                 /* copy the environ vars into the envp */
-                for (n = m = 0; environ[n] != NULL; ++n)
-                    if (G_LIKELY (strncmp (environ[n], "DESKTOP_STARTUP_ID", 18) != 0 && strncmp (environ[n], "DISPLAY", 7) != 0))
-                        envp[m++] = g_strdup (environ[n]);
+                for (n = m = 0; listenv[n] != NULL; ++n)
+                    if (G_LIKELY (strncmp (listenv[n], "DESKTOP_STARTUP_ID", 18) != 0 && strncmp (listenv[n], "DISPLAY", 7) != 0))
+                        envp[m++] = g_strdup (listenv[n]);
 
                 /* append the startup notification id */
                 envp[m++] = g_strconcat ("DESKTOP_STARTUP_ID=", sn_launcher_context_get_startup_id (sn_launcher), NULL);
@@ -498,16 +491,16 @@ launcher_exec_on_screen (GdkScreen     *screen,
     }
 #else
     /* count environ items */
-    for (n = 0; environ[n] != NULL; ++n)
+    for (n = 0; listenv[n] != NULL; ++n)
         ;
 
     /* alloc new envp string */
     envp = g_new (gchar *, n + 2);
 
     /* copy the environ vars into the envp */
-    for (n = m = 0; environ[n] != NULL; ++n)
-        if (G_LIKELY (strncmp (environ[n], "DISPLAY", 7) != 0))
-            envp[m++] = g_strdup (environ[n]);
+    for (n = m = 0; listenv[n] != NULL; ++n)
+        if (G_LIKELY (strncmp (listenv[n], "DISPLAY", 7) != 0))
+            envp[m++] = g_strdup (listenv[n]);
 
     /* workaround for the failure of gdk_spawn_on_screen to setup the correct DISPLAY env */
     dpyname = gdk_screen_make_display_name (screen);
@@ -566,6 +559,9 @@ launcher_exec_on_screen (GdkScreen     *screen,
     if (envp != NULL)
         g_strfreev (envp);
 #endif
+
+    /* cleanup */
+    g_strfreev (listenv);
 
 error:
     if (G_UNLIKELY (error != NULL))
