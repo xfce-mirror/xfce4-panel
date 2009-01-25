@@ -63,6 +63,16 @@
 #include <libsn/sn.h>
 #endif
 
+#ifdef __APPLE__
+/* apple doesn't have a environ symbol */
+#include <crt_externs.h>
+#define environ (*_NSGetEnviron())
+#elif !defined(__USE_GNU)
+/* when __USE_GNU is defined environ is defined in unistd.h
+ * this to avoid a redundant redeclaration */
+extern gchar **environ;
+#endif
+
 
 
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
