@@ -472,7 +472,7 @@ launcher_exec_on_screen (GdkScreen     *screen,
                 /* copy the environ vars into the envp */
                 for (n = m = 0; listenv[n] != NULL; ++n)
                     if (G_LIKELY (strncmp (listenv[n], "DESKTOP_STARTUP_ID", 18) != 0 && strncmp (listenv[n], "DISPLAY", 7) != 0))
-                        envp[m++] = g_strdup (listenv[n]);
+                        envp[m++] = g_strdup_printf ("%s=%s", listenv[n], g_getenv (listenv[n]));
 
                 /* append the startup notification id */
                 envp[m++] = g_strconcat ("DESKTOP_STARTUP_ID=", sn_launcher_context_get_startup_id (sn_launcher), NULL);
@@ -500,7 +500,7 @@ launcher_exec_on_screen (GdkScreen     *screen,
     /* copy the environ vars into the envp */
     for (n = m = 0; listenv[n] != NULL; ++n)
         if (G_LIKELY (strncmp (listenv[n], "DISPLAY", 7) != 0))
-            envp[m++] = g_strdup (listenv[n]);
+            envp[m++] = g_strdup_printf ("%s=%s", listenv[n], g_getenv (listenv[n]));
 
     /* workaround for the failure of gdk_spawn_on_screen to setup the correct DISPLAY env */
     dpyname = gdk_screen_make_display_name (screen);
