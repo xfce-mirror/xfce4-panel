@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2009-01-11 13:14+0100\n"
+"PO-Revision-Date: 2009-01-20 15:06+0100\n"
 "Last-Translator: Carles Muñoz Gorriz <carlesmu@internautas.org>\n"
 "Language-Team: catalan\n"
 "MIME-Version: 1.0\n"
@@ -106,36 +106,31 @@ msgstr "Desenvolupador"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Mostra informació sobre la versió i surt"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Personalitza el quadre"
+msgstr "Mostra el diàleg «Personalitza el quadre»"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Desa la configuració"
+msgstr "Desa la configuració del quadre"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "S’està reiniciant l’Xfce4-Panel"
+msgstr "Reinicia la instància de xfce4-panel que s'està executant"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Surt o bloca la pantalla"
+msgstr "Surt de la sessió activa"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Tanca tots els quadres i acaba el programa"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Afegeix un element nou"
+msgstr "Mostra el diàleg «Afegeix elements nous»"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -154,7 +149,6 @@ msgid "Please report bugs to <%s>."
 msgstr "Envieu els errors a <%s>."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
 msgstr "Ja s’està executant xfce4-panel"
 
@@ -200,7 +194,7 @@ msgstr "Alçada normal"
 
 #: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
 msgid "Full Height"
-msgstr "Alçada completa"
+msgstr "Tota l'alçada"
 
 #: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
 msgid "Span Monitors"
@@ -237,7 +231,7 @@ msgstr "Posició _fixa"
 
 #: ../panel/panel-dialogs.c:1017
 msgid "Freely _moveable"
-msgstr "Posició _lliura"
+msgstr "Posició _lliure"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -506,15 +500,15 @@ msgstr "Llançadora"
 #. string as short as possible.
 #: ../plugins/launcher/launcher-dialog.c:1551
 msgid "A_rrow:"
-msgstr "Flet_xa"
+msgstr "_Fletxa:"
 
 #: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Default"
-msgstr "Predeterminat"
+msgstr "Predeterminada"
 
 #: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Inside Button"
-msgstr "Botó interior"
+msgstr "Com a botó"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Workspace Switcher"
@@ -687,8 +681,8 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
-"Les <i>notificacions urgents</i> faran parpallejar els botons quan una "
-"aplicació demani de la vostra atenció."
+"Les <i>notificacions urgents</i> faran que els botons pampalluguegin quan "
+"una aplicació vulgui de la vostra atenció."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -752,9 +746,8 @@ msgid "Adds a space or a line between panel items"
 msgstr "Afegix un espai o una línia entre els elements del quadre"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Oculta les finestres i mostra l'escriptori"
+msgstr "Oculta totes les finestres i mostra l'escriptori"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
@@ -766,11 +759,11 @@ msgstr "Espai on es mostraran las icones de notificació"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Canvia entre les finestres obertes emprant botons"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Canvia entre les finestres obertes emprant un menú"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"

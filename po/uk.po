@@ -9,15 +9,14 @@ msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2008-07-01 22:18+0300\n"
+"PO-Revision-Date: 2009-01-26 15:54+0200\n"
 "Last-Translator: Dmitry Nikitin <luckas_fb@mail.ru>\n"
 "Language-Team: Ukrainian <xfce4-dev@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. TRANSLATORS: This warning is printed to the commandline when
 #. an external plugin crashed
@@ -32,8 +31,7 @@ msgid "Remove \"%s\"?"
 msgstr "Видалити \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "Об'єкт буде видалений з панелі та його конфігурація буде втрачена."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -58,15 +56,13 @@ msgstr "Видалити"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Додати новий об'єкт"
+msgstr "Додати нові елементи..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "Налаштувати панель"
+msgstr "Упорядкувати панель..."
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:284
 #: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
@@ -109,36 +105,31 @@ msgstr "Розробник"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Надрукувати інформацію про версію і вийти"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Налаштувати панель"
+msgstr "Показати діалог упорядкування панелі"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Зберегти конфігурацію"
+msgstr "Зберегти конфігурацію панелі"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Перезапускається xfce4-panel..."
+msgstr "Перезапустити діючі екземпляри xfce4-panel"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Завершення сеансу чи блокування екрану"
+msgstr "Вийти з активної сесії"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Закрити усі панелі та завершити програму"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Додати новий об'єкт"
+msgstr "Показати діалог 'Додати нові елементи'"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -157,9 +148,8 @@ msgid "Please report bugs to <%s>."
 msgstr "Сповістіть про помилку на <%s>."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
-msgstr "xfce4-panel вже запущено"
+msgstr "Xfce4-panel вже працює"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -172,24 +162,22 @@ msgid "Could not open \"%s\" module"
 msgstr "Не вдається відкрити модуль \"%s\""
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Додати новий об'єкт"
+msgstr "Додати нові елементи"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Перетягуйте об'єкти зі списку на панель або видаляйте об'єкти, перетягуючи "
-"їх назад у список."
+"Перетягуйте об'єкти зі списку на панель або\n"
+"видаляйте об'єкти, перетягуючи їх у список."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "_Пошук:"
 
 #: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
@@ -237,14 +225,12 @@ msgid "Position"
 msgstr "Розташування"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Фіксоване розташування"
+msgstr "Фіксов_ане розташування"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Вільно переміщується"
+msgstr "Вільно _переміщується"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -282,19 +268,16 @@ msgid "Appearance"
 msgstr "Зовнішній вигляд"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Розмір (у точках):"
+msgstr "Розм_ір (пікселів):"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Прозорість (%):"
+msgstr "_Прозорість (%):"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Зробити активну панель непрозорою"
+msgstr "Зробити активну панель непр_озорою"
 
 #: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
@@ -305,13 +288,12 @@ msgstr "Панель %d"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Видалити поточну виділену панель"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Додати нові пункти"
+msgstr "Додати нову панель"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -320,9 +302,8 @@ msgstr "Панель"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Налаштувати панель"
+msgstr "Налаштувати властивості панелі"
 
 #: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
@@ -335,18 +316,16 @@ msgid "Action Buttons"
 msgstr "Кнопки дій"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Виберіть тип дії:"
+msgstr "Вибер_іть тип дії:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Вихід + Блокувати екран"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Орієнтація:"
+msgstr "_Орієнтація:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -414,19 +393,16 @@ msgid "Icon Box"
 msgstr "Перемикач вікон"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Відображати лише згорнуті вікна"
+msgstr "Відображати лише _згорнуті вікна"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Показувати програми з усіх робочих областей"
+msgstr "Показувати програми з _усіх робочих областей"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
 msgid "Use all available _space"
-msgstr "Використовувати весь доступний простір"
+msgstr "Використовувати весь доступний прост_ір"
 
 #. TRANSLATORS: Name of a newly created launcher
 #: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
@@ -483,34 +459,28 @@ msgid "Select an Icon for \"%s\""
 msgstr "Вибрати значок для \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "_Назва"
+msgstr "_Назва:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "_Опис"
+msgstr "_Опис:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "_Icon:"
-msgstr "_Значок"
+msgstr "_Значок:"
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "_Команда"
+msgstr "_Команда:"
 
 #: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "_Робоча тека"
+msgstr "_Робоча тека:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Вибрати теку"
+msgstr "Вибрати робочу теку"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -540,29 +510,24 @@ msgid "Inside Button"
 msgstr "Всередині кнопки"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Робоча область %d"
+msgstr "Перемикач Робочих областей"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Кількість рядків:"
+msgstr "Кількість _рядків:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Кількість стовпчиків:"
+msgstr "Кількість _стовпчиків:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Перемикати робочі місця за допомогою колеса миші"
+msgstr "Перемикати робочі місця за допомогою _колеса миші"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Показувати назви робочих областей"
+msgstr "Показувати _назви робочих областей"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -574,12 +539,10 @@ msgid "Separator Style"
 msgstr "Стиль роздільника"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
 msgstr "П_устий проміжок"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
 msgstr "_Розширюваний проміжок"
 
@@ -606,16 +569,14 @@ msgstr "Сховати вікна та показати робочий стіл"
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Термінове сповіщення"
+msgstr "Область повідомлень"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Системний лоток вже зареєстрований на цьому екрані"
+msgstr "Область повідомлень вже запущена на цьому екрані"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
@@ -650,19 +611,16 @@ msgid "Task List"
 msgstr "Список задач"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Мінімальна ширина:"
+msgstr "_Мінімальна ширина:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Плоскі кнопки"
+msgstr "Використовувати пл_аскі кнопки"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Відображати рамку"
+msgstr "Відображати _заголовок"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -779,106 +737,34 @@ msgid "Program launcher with optional menu"
 msgstr "Кнопка запуску програм з додатковим меню"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Мініатюрне представлення всіх робочих стільниць"
+msgstr "Перемикатись між віртуальними стільницями"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Додавання інтервалу або розділювача між елементами панелі"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Сховати вікна та показати робочий стіл"
+msgstr "Сховати всі вікна та показати робочу стільницю"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
 msgstr "Показати Стільницю"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Відображення значків сповіщення"
+msgstr "Область де відображаються значки сповіщення"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Перемикатись між відкритими вікнами використовуючи кнопки"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Перемикатись між відкритими вікнами використовуючи меню"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Менеджер панелей"
 
-#~ msgid "Unknown"
-#~ msgstr "Невідомий"
-
-#, fuzzy
-#~ msgid "Copyright (c) 2004-2009"
-#~ msgstr "Copyright (c) 2004-2007"
-
-#~ msgid "Show list of available windows"
-#~ msgstr "Відображати список доступних вікон"
-
-#~ msgid "Show all running applications"
-#~ msgstr "Відбражати всі запущені програми"
-
-#~ msgid "Popup position:"
-#~ msgstr "Позиція появи:"
-
-#~ msgid "Automatic"
-#~ msgstr "Автоматично"
-
-#~ msgid "Toggle desktop show/hide"
-#~ msgstr "Перемикач Стільниці показати/сховати"
-
-#~ msgid "Show this message and exit"
-#~ msgstr "Показати це повідомлення та вийти."
-
-#~ msgid "Show configuration dialog"
-#~ msgstr "Показати конфігураційний діалог"
-
-#~ msgid "Restart panels"
-#~ msgstr "Перезапустити панелі"
-
-#~ msgid "End the session"
-#~ msgstr "Завершити сеанс"
-
-#~ msgid "Add new items"
-#~ msgstr "Додати нові пункти"
-
-#~ msgid "Pager"
-#~ msgstr "Графічний пейджер"
-
-#~ msgid "System Tray"
-#~ msgstr "Системний лоток"
-
-#~ msgid "Add Items"
-#~ msgstr "Додати об'єкти"
-
-#~ msgid "Add Items to the Panel"
-#~ msgstr "Додати елементи до панелі"
-
-#~ msgid "Available Items"
-#~ msgstr "Доступні об'єкти"
-
-#~ msgid "Remove Panel"
-#~ msgstr "Видалити панель"
-
-#~ msgid "New Panel"
-#~ msgstr "Нова панель"
-
-#~ msgid "Panel Actions"
-#~ msgstr "Дії панелі"
-
-#~ msgid "Program Launcher"
-#~ msgstr "Запуск програм"
-
-#~ msgid "Failed to launch 'xfce4-panel -c'"
-#~ msgstr "Не вдалось запустити 'xfce4-panel -c'"
-
-#~ msgid "Xfce 4 Panel Manager"
-#~ msgstr "Менеджер панелей Xfce 4"
