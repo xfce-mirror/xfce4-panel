@@ -68,6 +68,8 @@ static void     panel_enter             (Panel            *p,
                                          GdkEventCrossing *event);
 static void     panel_leave             (Panel            *p,
                                          GdkEventCrossing *event);
+static void     panel_grabbed           (Panel            *p,
+                                         gboolean          was_grabbed);
 
 
 
@@ -896,6 +898,19 @@ panel_leave (Panel            *panel,
 }
 
 static void
+panel_grabbed (Panel    *panel,
+               gboolean  was_grabbed)
+{
+    PanelPrivate *priv = panel->priv;
+
+    /* block the panel if the widget is grabbed */
+    if (was_grabbed)
+        priv->block_autohide--;
+    else
+        priv->block_autohide++;
+}
+
+static void
 _window_mapped (Panel *panel)
 {
     PanelPrivate *priv;
@@ -940,6 +955,9 @@ void panel_init_signals (Panel *panel)
 
     g_signal_connect (G_OBJECT (panel), "leave-notify-event",
                       G_CALLBACK (panel_leave), NULL);
+
+    g_signal_connect (G_OBJECT (panel), "grab-notify",
+                      G_CALLBACK (panel_grabbed), NULL);
 
     g_signal_connect (G_OBJECT (panel), "map",
                       G_CALLBACK (_window_mapped), NULL);
