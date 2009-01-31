@@ -522,6 +522,98 @@ launcher_arrow_button_pressed (GtkWidget      *button,
 
 
 
+static gboolean 
+launcher_arrow_button_drag_motion (GtkWidget      *widget,
+                                   GdkDragContext *drag_context,
+                                   gint            x,
+                                   gint            y,
+                                   guint           drag_time,
+                                   LauncherPlugin *launcher)
+{
+    /* do not try to popup if the arrow button is used and the signal
+     * is comming from the icon button */
+    if (launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON
+        && launcher->arrow_button != widget)
+        return TRUE;
+    
+    if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (launcher->arrow_button)))
+    {
+        /* make the toggle button active */
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrow_button), TRUE);
+
+        launcher->popup_timeout_id =
+                g_timeout_add_full (G_PRIORITY_DEFAULT, LAUNCHER_POPUP_DELAY, launcher_menu_popup,
+                                    launcher, launcher_menu_popup_destroyed);
+    }
+
+    return TRUE;
+}
+
+
+
+static gboolean
+launcher_arrow_button_drag_leave_timeout (gpointer user_data)
+{
+    LauncherPlugin *launcher = user_data;
+    GdkScreen      *screen;
+    GdkDisplay     *display;
+    gint            x, y;
+    gint            menu_x, menu_y, menu_w, menu_h;
+    
+    if (launcher->menu == NULL)
+        return FALSE;
+    
+    g_return_val_if_fail (GDK_IS_WINDOW (launcher->menu->window), FALSE);
+
+    /* get the current pointer position */
+    screen = gtk_widget_get_screen (launcher->arrow_button);
+    display = gdk_screen_get_display (screen);
+    gdk_display_get_pointer (display, NULL, &x, &y, NULL);
+
+    /* get the menu size and postion */
+    gdk_window_get_root_origin (launcher->menu->window, &menu_x, &menu_y);
+    gdk_drawable_get_size (GDK_DRAWABLE (launcher->menu->window), &menu_w, &menu_h);
+
+    /* check if we should hide the menu */
+    if (x < menu_x || x > menu_x + menu_w 
+        || y < menu_y || y > menu_y + menu_h)
+    {
+        /* hide the menu */
+        gtk_widget_hide (GTK_MENU (launcher->menu)->toplevel);
+        gtk_widget_hide (launcher->menu);
+
+        /* inactive the toggle button */
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrow_button), FALSE);
+    }
+
+    return FALSE;
+}
+
+
+
+static void
+launcher_arrow_button_drag_leave (GtkWidget      *widget,
+                                  GdkDragContext *drag_context,
+                                  guint           drag_time,
+                                  LauncherPlugin *launcher)
+{
+    if (launcher->popup_timeout_id != 0)
+    {
+        /* destroy the timeout */
+        g_source_remove (launcher->popup_timeout_id);
+        
+        /* restore button */
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrow_button), FALSE);
+    }
+    else
+    {
+        /* start a timeout to give the user some time to drag to the menu */
+        g_timeout_add (100, launcher_arrow_button_drag_leave_timeout, launcher);
+    }
+}
+
+
+
 /**
  * Global Button Functions
  **/
@@ -549,18 +641,13 @@ launcher_menu_item_released (GtkWidget      *mi,
                              LauncherPlugin *launcher)
 {
     GdkScreen     *screen;
-    gint           i;
     LauncherEntry *entry;
 
     /* get the widget screen */
     screen = gtk_widget_get_screen (mi);
 
     /* get the item number */
-    i = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (mi), I_("entry-number")));
-
-    /* get the entry from the list */
-    entry = g_list_nth_data (launcher->entries, i);
-
+    entry = g_object_get_data (G_OBJECT (mi), I_("entry"));
     if (G_LIKELY (entry))
     {
         if (event->button == 1)
@@ -569,7 +656,8 @@ launcher_menu_item_released (GtkWidget      *mi,
             launcher_execute_from_clipboard (screen, entry);
 
         /* move the item to the first position in the list */
-        if (G_UNLIKELY (launcher->move_first && i > 0))
+        if (launcher->move_first
+            && launcher->entries->data != entry)
         {
             /* remove from the list */
             launcher->entries = g_list_remove (launcher->entries, entry);
@@ -594,6 +682,48 @@ launcher_menu_item_released (GtkWidget      *mi,
 
 
 static void
+launcher_menu_item_drag_data_received (GtkWidget        *widget,
+                                       GdkDragContext   *context,
+                                       gint              x,
+                                       gint              y,
+                                       GtkSelectionData *selection_data,
+                                       guint             info,
+                                       guint             time_,
+                                       LauncherPlugin   *launcher)
+{
+    GSList        *filenames;
+    LauncherEntry *entry;
+    
+    entry = g_object_get_data (G_OBJECT (widget), I_("entry"));
+    if (G_LIKELY (entry != NULL))
+    {
+        /* create filenames list from all the uris */
+        filenames = launcher_utility_filenames_from_selection_data (selection_data);
+
+        if (G_LIKELY (filenames))
+        {
+            /* execute the entry with the filenames */
+            launcher_execute (gtk_widget_get_screen (widget), entry, filenames);
+
+            /* cleanup */
+            launcher_free_filenames (filenames);
+        }
+
+        /* finish drag */
+        gtk_drag_finish (context, TRUE, FALSE, time_);
+    }
+
+    /* hide the menu */
+    gtk_widget_hide (GTK_MENU (launcher->menu)->toplevel);
+    gtk_widget_hide (launcher->menu);
+
+    /* inactive the toggle button */
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (launcher->arrow_button), FALSE);
+}
+
+
+
+static void
 launcher_menu_popup_destroyed (gpointer user_data)
 {
     LauncherPlugin *launcher = user_data;
@@ -607,6 +737,7 @@ static gboolean
 launcher_menu_popup (gpointer user_data)
 {
     LauncherPlugin *launcher = user_data;
+    gint            x, y;
 
     GDK_THREADS_ENTER ();
 
@@ -622,6 +753,22 @@ launcher_menu_popup (gpointer user_data)
                     xfce_panel_plugin_position_menu,
                     launcher->panel_plugin,
                     1, gtk_get_current_event_time ());
+
+    if (!GTK_WIDGET_VISIBLE (launcher->menu))
+    {
+        /* make sure the size is allocated */
+        if (!GTK_WIDGET_REALIZED (launcher->menu))
+            gtk_widget_realize (launcher->menu);
+
+        /* use the widget position function to get the coordinates */
+        xfce_panel_plugin_position_widget (launcher->panel_plugin, launcher->menu,
+                                           NULL, &x, &y);
+
+        /* ugly, but it works most of the time... */
+        gtk_widget_show (launcher->menu);
+        gtk_window_move (GTK_WINDOW (GTK_MENU (launcher->menu)->toplevel), x, y);
+        gtk_widget_show (GTK_MENU (launcher->menu)->toplevel);
+    }
 
     GDK_THREADS_LEAVE ();
 
@@ -729,18 +876,20 @@ launcher_menu_rebuild (LauncherPlugin *launcher)
             }
         }
 
-        /* set entries list number */
-        g_object_set_data (G_OBJECT (mi), I_("entry-number"), GINT_TO_POINTER (n));
+        /* set entry */
+        g_object_set_data (G_OBJECT (mi), I_("entry"), entry);
+        
+        /* dnd support */
+        gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
 
         /* connect signals */
         g_signal_connect (G_OBJECT (mi), "button-release-event", G_CALLBACK (launcher_menu_item_released), launcher);
+        g_signal_connect (G_OBJECT (mi), "drag-data-received", G_CALLBACK (launcher_menu_item_drag_data_received), launcher);
+        g_signal_connect (G_OBJECT (mi), "drag-leave", G_CALLBACK (launcher_arrow_button_drag_leave), launcher);
 #if LAUNCHER_NEW_TOOLTIP_API
         gtk_widget_set_has_tooltip (mi, TRUE);
         g_signal_connect (G_OBJECT (mi), "query-tooltip", G_CALLBACK (launcher_utility_query_tooltip), entry);
 #endif
-
-        /* dnd support */
-        gtk_drag_dest_set (mi, GTK_DEST_DEFAULT_ALL, drop_targets, G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
 
 #if !LAUNCHER_NEW_TOOLTIP_API
         /* set tooltip */
@@ -874,6 +1023,10 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
                       G_CALLBACK (launcher_icon_button_drag_data_received), launcher);
     g_signal_connect_after (G_OBJECT (launcher->image), "expose-event",
                             G_CALLBACK (launcher_icon_button_expose_event), launcher);
+    g_signal_connect (G_OBJECT (launcher->icon_button), "drag-motion",
+                      G_CALLBACK (launcher_arrow_button_drag_motion), launcher);
+    g_signal_connect (G_OBJECT (launcher->icon_button), "drag-leave",
+                      G_CALLBACK (launcher_arrow_button_drag_leave), launcher);
 
 #if LAUNCHER_NEW_TOOLTIP_API
     gtk_widget_set_has_tooltip (launcher->icon_button, TRUE);
@@ -886,6 +1039,10 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
                       G_CALLBACK (launcher_button_state_changed), launcher->icon_button);
     g_signal_connect (G_OBJECT (launcher->arrow_button), "button-press-event",
                       G_CALLBACK (launcher_arrow_button_pressed), launcher);
+    g_signal_connect (G_OBJECT (launcher->arrow_button), "drag-motion",
+                      G_CALLBACK (launcher_arrow_button_drag_motion), launcher);
+    g_signal_connect (G_OBJECT (launcher->arrow_button), "drag-leave",
+                      G_CALLBACK (launcher_arrow_button_drag_leave), launcher);
 
     /* set drag destinations */
     gtk_drag_dest_set (launcher->icon_button, GTK_DEST_DEFAULT_ALL,
