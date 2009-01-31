@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: tr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2008-05-27 10:23+0300\n"
-"Last-Translator: Eren Türkay <turkay.eren@gmail.com>\n"
+"PO-Revision-Date: 2009-01-30 19:51+0200\n"
+"Last-Translator: Gökmen Görgen <gkmngrgn@gmail.com>\n"
 "Language-Team: Turkish <turkce@pardus.org.tr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,8 +31,7 @@ msgid "Remove \"%s\"?"
 msgstr "\"%s\" öğesini kaldır?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "Öğe panelden silinecek ve ayarları kaybedilecek."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -56,19 +55,21 @@ msgid "Remove"
 msgstr "Kaldır"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:903
+#: ../panel/panel.c:606
 msgid "Add New Items..."
-msgstr "Yeni Nesne Ekle"
+msgstr "Yeni Öğeler Ekle..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:915
+#: ../panel/panel.c:595
 msgid "Customize Panel..."
-msgstr "Paneli Özelleştir"
+msgstr "Paneli Özelleştir..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621
+#: ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318
+#: ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr "Çık"
 
@@ -80,11 +81,14 @@ msgstr "Yeniden Başlat"
 msgid "About the Xfce Panel"
 msgstr "Xfce Paneli Hakkında"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259
+#: ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
 msgstr "Xfce Panelinden Çık?"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:900
+#: ../panel/panel-app.c:932
+#: ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "Xfce Paneli"
 
@@ -102,42 +106,38 @@ msgid "The selected panel and all its items will be removed."
 msgstr "Seçilen panel ve tüm öğeleri silinecek."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:972
+#: ../panel/panel-app.c:973
 msgid "Developer"
 msgstr "Geliştirici"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Sürüm bilgisini yazdır ve çık"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Paneli Özelleştir"
+msgstr "'Panel Özelleştirme' penceresini göster"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Yapılandırmayı kaydet"
+msgstr "Panel yapılandırmasını kaydet"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Xfce4-panel yeniden başlatılıyor..."
+msgstr "Çalışan Xfce4 panelini yeniden başlat"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Çıkış yap veya ekranı kilitle"
+msgstr "Etkin oturumdan çık"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Tüm panelleri kapat ve programı sonlandır"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Yeni Nesne Ekle"
+msgstr "'Yeni Öğeler Ekle' penceresini göster"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -156,9 +156,8 @@ msgid "Please report bugs to <%s>."
 msgstr "Lütfen hataları <%s> adresine bildirin."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
-msgstr "xfce4-panel zaten çalışıyor"
+msgstr "Xfce4-panel zaten çalışıyor"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -171,61 +170,68 @@ msgid "Could not open \"%s\" module"
 msgstr "\"%s\" modülü açılamıyor"
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Yeni Nesne Ekle"
+msgstr "Yeni Öğeler Ekle"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Listeden panele öğeleri sürükleyin veya panelden listeye sürükleyerek geri "
-"döndürün"
+"Listeden panele öğeleri sürükleyin veya\n"
+"panelden listeye sürükleyerek geri döndürün"
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "A_ra:"
 
-#: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
+#: ../panel/panel-dialogs.c:881
+#: ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
 msgstr "Normal Genişlik"
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
+#: ../panel/panel-dialogs.c:882
+#: ../panel/panel-dialogs.c:1118
 msgid "Full Width"
 msgstr "Tam Genişlik"
 
-#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
+#: ../panel/panel-dialogs.c:886
+#: ../panel/panel-dialogs.c:1122
 msgid "Normal Height"
 msgstr "Normal Genişlik"
 
-#: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:887
+#: ../panel/panel-dialogs.c:1123
 msgid "Full Height"
 msgstr "Tam Genişlik"
 
-#: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:895
+#: ../panel/panel-dialogs.c:1132
 msgid "Span Monitors"
 msgstr "Monitörleri Yay"
 
-#: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
+#: ../panel/panel-dialogs.c:958
+#: ../panel/panel-dialogs.c:1197
 #: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
 msgstr "Sol"
 
-#: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
+#: ../panel/panel-dialogs.c:960
+#: ../panel/panel-dialogs.c:1199
 #: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
 msgstr "Sağ"
 
-#: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
+#: ../panel/panel-dialogs.c:965
+#: ../panel/panel-dialogs.c:1204
 #: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Top"
 msgstr "Üst"
 
-#: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
+#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:1206
 #: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Bottom"
 msgstr "Alt"
@@ -236,14 +242,12 @@ msgid "Position"
 msgstr "Konum"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Sabit Pozisyon"
+msgstr "Sa_bit konum"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Özgürce Taşınabilir"
+msgstr "Özgürce taşı_nabilir"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -253,11 +257,13 @@ msgstr "Otomatik _Gizle"
 msgid "Orientation:"
 msgstr "Yönelim:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170
+#: ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "Yatay"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172
+#: ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "Dikey"
 
@@ -273,7 +279,8 @@ msgstr "Her iki yanda"
 msgid "Select Monitor"
 msgstr "Monitör Seç"
 
-#: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
+#: ../panel/panel-dialogs.c:1401
+#: ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
 #: ../plugins/tasklist/tasklist-dialogs.c:166
 #: ../plugins/windowlist/windowlist-dialog.c:187
@@ -281,21 +288,19 @@ msgid "Appearance"
 msgstr "Görünüm"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Boyut (piksel):"
+msgstr "Bo_yut (piksel):"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Şeffaflık (%):"
+msgstr "Şeffaflı_k (%):"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Paneli opak yap"
+msgstr "Paneli _opak yap"
 
-#: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
+#: ../panel/panel-dialogs.c:1514
+#: ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
 #, c-format
 msgid "Panel %d"
@@ -304,13 +309,12 @@ msgstr "Panel %d"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Seçili paneli sil"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Yeni nesneler ekle"
+msgstr "Yeni bir panel ekle"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -319,11 +323,11 @@ msgstr "Panel"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Paneli Özelleştir"
+msgstr "Panel ayarlarını özelleştir"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:265
+#: ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
 msgid "Lock screen"
 msgstr "Ekranı kilitle"
@@ -334,18 +338,16 @@ msgid "Action Buttons"
 msgstr "Hareket Düğmeleri"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Davranış tipini seçin:"
+msgstr "Davranış tipini _seçin:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Çık + Ekranı kilitle"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Yönelim:"
+msgstr "Yönel_im:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -413,22 +415,21 @@ msgid "Icon Box"
 msgstr "Simge Kutusu"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Sadece simge halinde küçültülmüş uygulamaları göster"
+msgstr "Sadece si_mge durumuna küçültülmüş uygulamaları göster"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Tüm çalışma alanlarının uygulamalarını göster"
+msgstr "Tüm ç_alışma alanlarının uygulamalarını göster"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
+#: ../plugins/iconbox/iconbox.c:946
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 msgid "Use all available _space"
-msgstr "Kullanılabilir tüm boş alanı kullan"
+msgstr "Uy_gun tüm boş alanı kullan"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:705
+#: ../plugins/launcher/launcher.c:770
 msgid "New Item"
 msgstr "Yeni Nesne"
 
@@ -482,34 +483,28 @@ msgid "Select an Icon for \"%s\""
 msgstr "\"%s\" için simge seç"
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "_İsim"
+msgstr "_İsim:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "_Açıklama"
+msgstr "_Açıklama:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "_Icon:"
-msgstr "_Simge"
+msgstr "_Simge:"
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "Komu_t"
+msgstr "Ko_mut:"
 
 #: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "Ç_alışma Dizini"
+msgstr "Çalış_ma Dizini:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Dizin Seç"
+msgstr "Çalışma Dizinini Seç"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -538,30 +533,26 @@ msgstr "Öntanımlı"
 msgid "Inside Button"
 msgstr "Düğmenin Yanında"
 
-#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
+#: ../plugins/pager/pager.c:368
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Workspace Switcher"
-msgstr "Çalışma Alanı %d"
+msgstr "Çalışma Alanı Değiştiricisi"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Satır sayısı:"
+msgstr "Diz_eç sayısı:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Sütun sayısı:"
+msgstr "D_ikeç sayısı:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Çalışma alanları arasında fare topu kullanarak geçiş yap"
+msgstr "Çalış_ma alanları arasında fare topu kullanarak geçiş yap"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Çalışma alanı isimlerini göster"
+msgstr "Çalışma ala_nı isimlerini göster"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -573,14 +564,12 @@ msgid "Separator Style"
 msgstr "Ayırıcı Tarzı"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
 msgstr "_Boş Alan"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
-msgstr "_Uzayan Boş Alan"
+msgstr "_Genişleyen Boş Alan"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -605,14 +594,12 @@ msgstr "Pencereleri gizle ve masaüstünü göster"
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Acil Uyarı"
+msgstr "Sistem çekmecesi"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
 msgstr "Bu ekranda zaten çalışan bir sistem çekmecesi var"
 
@@ -649,19 +636,16 @@ msgid "Task List"
 msgstr "Görev Listesi"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "En Az Genişlik:"
+msgstr "E_n az genişlik:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Düz düğmeleri kullan"
+msgstr "_Düz düğmeleri kullan"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Çerçeve göster"
+msgstr "Çerçeve gös_ter"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -717,12 +701,8 @@ msgid "Window List"
 msgstr "Pencere Listesi"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Acil uyarı</i>, bir uygulama uyarıya ihtiyaç duyduğu zaman düğmeyi yanıp "
-"söndürür."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Acil uyarı</i>, bir uygulama uyarıya ihtiyaç duyduğu zaman düğmeyi yanıp söndürür."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -778,35 +758,32 @@ msgid "Program launcher with optional menu"
 msgstr "Uygulama çalıştırıcısı"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Tüm sanal masaüstlerinin minyatür görünümü"
+msgstr "Sanal masaüstleri arasında geçiş yap"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Panel öğeleri arasına boşluk veya satır ekler"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Pencereleri gizle ve masaüstünü göster"
+msgstr "Tüm pencereleri gizle ve masaüstünü göster"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
 msgstr "Masaüstünü Göster"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Uyarı simgelerini göster"
+msgstr "Bildirim simgelerinin göründüğü alan"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Açık pencereler arasında düğmeleri kullanarak geçiş yap"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Açık pencereler arasında bir menü kullanarak geçiş yap"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
@@ -818,90 +795,62 @@ msgstr "Panel Yöneticisi"
 #, fuzzy
 #~ msgid "Copyright (c) 2004-2009"
 #~ msgstr "Kopya Hakkı (c) 2004-2007"
-
 #~ msgid "Show list of available windows"
 #~ msgstr "Kullanılabilir masaüstlerinin listesini göster"
-
 #~ msgid "Show all running applications"
 #~ msgstr "Çalışan tüm uygulamaları göster"
-
 #~ msgid "Popup position:"
 #~ msgstr "Açılır pencere pozisyonu:"
-
 #~ msgid "Automatic"
 #~ msgstr "Otomatik"
-
 #~ msgid "Toggle desktop show/hide"
 #~ msgstr "Masaüstünü göster/gizle"
-
 #~ msgid "Show this message and exit"
 #~ msgstr "Bu mesajı göster ve çık"
-
 #~ msgid "Show configuration dialog"
 #~ msgstr "Yapılandırma penceresini göster"
-
 #~ msgid "Restart panels"
 #~ msgstr "Panelleri yeniden başlat"
-
 #~ msgid "End the session"
 #~ msgstr "Oturumu kapat"
-
 #~ msgid "Add new items"
 #~ msgstr "Yeni nesneler ekle"
-
 #~ msgid "Pager"
 #~ msgstr "Sayfalayıcı"
-
 #~ msgid "System Tray"
 #~ msgstr "Sistem Çekmecesi"
-
 #~ msgid "Command Prompt"
 #~ msgstr "Komut Satırı"
-
 #~ msgid "X terminal emulator"
 #~ msgstr "X Terminal Uygulaması"
-
 #~ msgid "Edit text files"
 #~ msgstr "Metin dosyalarını düzenle"
-
 #~ msgid "Editor"
 #~ msgstr "Düzenleyici"
-
 #~ msgid "File Manager"
 #~ msgstr "Dosya Yöneticisi"
-
 #~ msgid "Manage files and folders"
 #~ msgstr "Dosyaları ve dizinleri düzenle"
-
 #~ msgid "Surf the internet"
 #~ msgstr "İnternette gezin"
-
 #~ msgid "Web Browser"
 #~ msgstr "Web Tarayıcı"
-
 #~ msgid "Add Items"
 #~ msgstr "Öğeler Ekle"
-
 #~ msgid "Add Items to the Panel"
 #~ msgstr "Panele yeni öğeler ekle"
-
 #~ msgid "Available Items"
 #~ msgstr "Kullanılabilir Öğeler"
-
 #~ msgid "Remove Panel"
 #~ msgstr "Paneli Kaldır"
-
 #~ msgid "New Panel"
 #~ msgstr "Yeni Panel"
-
 #~ msgid "Panel Actions"
 #~ msgstr "Panel Davranışları"
-
 #~ msgid "Program Launcher"
 #~ msgstr "Program Başlatıcısı"
-
 #~ msgid "Failed to launch 'xfce4-panel -c'"
 #~ msgstr "'xfce4-panel -c' çalıştırılamadı"
-
 #~ msgid "Xfce 4 Panel Manager"
 #~ msgstr "Xfce 4 Panel Yöneticisi"
+
