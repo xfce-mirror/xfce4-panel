@@ -457,9 +457,9 @@ launcher_icon_button_released (GtkWidget      *button,
 
         /* execute the command on button 1 and 2 */
         if (event->button == 1)
-            launcher_execute (screen, entry, NULL);
+            launcher_execute (screen, entry, NULL, event->time);
         else if (event->button == 2)
-            launcher_execute_from_clipboard (screen, entry);
+            launcher_execute_from_clipboard (screen, entry, event->time);
     }
 
     return FALSE;
@@ -492,7 +492,7 @@ launcher_icon_button_drag_data_received (GtkWidget        *widget,
             entry = g_list_first (launcher->entries)->data;
 
             /* execute the entry with the filenames */
-            launcher_execute (gtk_widget_get_screen (widget), entry, filenames);
+            launcher_execute (gtk_widget_get_screen (widget), entry, filenames, time_);
 
             /* cleanup */
             launcher_free_filenames (filenames);
@@ -651,9 +651,9 @@ launcher_menu_item_released (GtkWidget      *mi,
     if (G_LIKELY (entry))
     {
         if (event->button == 1)
-            launcher_execute (screen, entry, NULL);
+            launcher_execute (screen, entry, NULL, event->time);
         else if (event->button == 2)
-            launcher_execute_from_clipboard (screen, entry);
+            launcher_execute_from_clipboard (screen, entry, event->time);
 
         /* move the item to the first position in the list */
         if (launcher->move_first
@@ -703,7 +703,7 @@ launcher_menu_item_drag_data_received (GtkWidget        *widget,
         if (G_LIKELY (filenames))
         {
             /* execute the entry with the filenames */
-            launcher_execute (gtk_widget_get_screen (widget), entry, filenames);
+            launcher_execute (gtk_widget_get_screen (widget), entry, filenames, time_);
 
             /* cleanup */
             launcher_free_filenames (filenames);

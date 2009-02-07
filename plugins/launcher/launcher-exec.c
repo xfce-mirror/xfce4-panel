@@ -92,7 +92,8 @@ static gchar          **launcher_exec_parse_argv                  (LauncherEntry
                                                                    GError               **error) G_GNUC_MALLOC G_GNUC_WARN_UNUSED_RESULT;;
 static gboolean         launcher_exec_on_screen                   (GdkScreen              *screen,
                                                                    LauncherEntry          *entry,
-                                                                   GSList                 *list);
+                                                                   GSList                 *list,
+                                                                   guint32                 event_time);
 
 
 
@@ -406,7 +407,8 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
 static gboolean
 launcher_exec_on_screen (GdkScreen     *screen,
                          LauncherEntry *entry,
-                         GSList        *list)
+                         GSList        *list,
+                         guint32        event_time)
 {
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
     SnLauncherContext    *sn_launcher = NULL;
@@ -460,7 +462,7 @@ launcher_exec_on_screen (GdkScreen     *screen,
                 if (entry->icon)
                   sn_launcher_context_set_icon_name (sn_launcher, entry->icon);
 
-                sn_launcher_context_initiate (sn_launcher, g_get_prgname (), argv[0], CurrentTime);
+                sn_launcher_context_initiate (sn_launcher, g_get_prgname (), argv[0], event_time);
 
                 /* count environ items */
                 for (n = 0; listenv[n] != NULL; ++n)
@@ -595,7 +597,8 @@ error:
 void
 launcher_execute (GdkScreen     *screen,
                   LauncherEntry *entry,
-                  GSList        *file_list)
+                  GSList        *file_list,
+                  guint32        event_time)
 {
     GSList   *li;
     GSList    fake;
@@ -624,13 +627,13 @@ launcher_execute (GdkScreen     *screen,
             fake.data = li->data;
 
             /* spawn */
-            proceed = launcher_exec_on_screen (screen, entry, &fake);
+            proceed = launcher_exec_on_screen (screen, entry, &fake, event_time);
         }
     }
     else
     {
         /* spawn */
-        launcher_exec_on_screen (screen, entry, file_list);
+        launcher_exec_on_screen (screen, entry, file_list, event_time);
     }
 }
 
@@ -638,7 +641,8 @@ launcher_execute (GdkScreen     *screen,
 
 void
 launcher_execute_from_clipboard (GdkScreen     *screen,
-                                 LauncherEntry *entry)
+                                 LauncherEntry *entry,
+                                 guint32        event_time)
 {
     GtkClipboard     *clipboard;
     gchar            *text = NULL;
@@ -676,7 +680,7 @@ launcher_execute_from_clipboard (GdkScreen     *screen,
         if (G_LIKELY (filenames))
         {
             /* run the command with argument from clipboard */
-            launcher_execute (screen, entry, filenames);
+            launcher_execute (screen, entry, filenames, event_time);
 
             /* cleanup */
             launcher_free_filenames (filenames);
