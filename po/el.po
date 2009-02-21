@@ -1,7 +1,7 @@
 # Greek translation of xfce4-panel
 # Copyright (C) 2002-2006, 2008 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
-# Stavros Giannouris <StavrosG2002@freemail.gr>, 2005-2006, 2008.
+# Stavros Giannouris <StavrosG2002@freemail.gr>, 2005, 2006, 2008, 2009.
 # Stathis Kamperis <ekamperi@auth.gr>, 2006.
 #
 msgid ""
@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2008-02-19 21:46+0200\n"
+"PO-Revision-Date: 2009-02-21 15:20+0200\n"
 "Last-Translator: Stavros Giannouris <stavrosg@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -29,11 +29,8 @@ msgid "Remove \"%s\"?"
 msgstr "Να διαγραφεί το \"%s\";"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
-msgstr ""
-"Αυτό το αντικείμενο θα διαγραφεί από το ταμπλό και οι ρυθμίσεις του θα "
-"χαθούν."
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Αυτό το αντικείμενο θα διαγραφεί από το ταμπλό και οι ρυθμίσεις του θα χαθούν."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:836
@@ -56,19 +53,21 @@ msgid "Remove"
 msgstr "Διαγραφή"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:903
+#: ../panel/panel.c:606
 msgid "Add New Items..."
-msgstr "Νέο αντικείμενο"
+msgstr "Προσθήκη νέων αντικειμένων..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:915
+#: ../panel/panel.c:595
 msgid "Customize Panel..."
-msgstr "Προσαρμογή ταμπλό"
+msgstr "Προσαρμογή ταμπλό..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621
+#: ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318
+#: ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr "Έξοδος"
 
@@ -80,19 +79,20 @@ msgstr "Επανεκκίνηση"
 msgid "About the Xfce Panel"
 msgstr "Περί Ταμπλό του Xfce"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259
+#: ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
 msgstr "Έξοδος από το Ταμπλό του Xfce;"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:900
+#: ../panel/panel-app.c:932
+#: ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "Ταμπλό του Xfce"
 
 #: ../panel/panel-app.c:903
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"Δεν μπορείτε να διαγράψετε το τελευταίο ταμπλό. Μήπως θέλετε να βγείτε από "
-"το πρόγραμμα;"
+msgstr "Δεν μπορείτε να διαγράψετε το τελευταίο ταμπλό. Μήπως θέλετε να βγείτε από το πρόγραμμα;"
 
 #: ../panel/panel-app.c:930
 #, c-format
@@ -104,49 +104,44 @@ msgid "The selected panel and all its items will be removed."
 msgstr "Το επιλεγμένο ταμπλό και όλα τα αντικείμενά του θα διαγραφούν."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:972
+#: ../panel/panel-app.c:973
 msgid "Developer"
 msgstr "Ανάπτυξη"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Εμφάνιση πληροφοριών έκδοσης"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Προσαρμογή ταμπλό"
+msgstr "Εμφάνιση του διαλόγου 'Προσαρμογή ταμπλό´"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
 msgstr "Αποθήκευση ρυθμίσεων"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Επανεκκίνηση του ταμπλό..."
+msgstr "Επανεκκίνηση του ταμπλό"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Αποσύνδεση ή κλείδωμα οθόνης"
+msgstr "Αποσύνδεση από την τρέχουσα συνεδρία"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr ""
+msgstr "Κλείσιμο όλων των ταμπλό και έξοδος από το πρόγραμμα"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Νέο αντικείμενο"
+msgstr "Εμφάνιση του διαλόγου 'Προσθήκη νέων αντικειμένων'"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
 #: ../panel/main.c:91
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Δεν ήταν δυνατή η εκτέλεση του \"%s\""
+msgstr "Δεν ήταν δυνατό το άνοιγμα της οθόνης"
 
 #: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
@@ -159,7 +154,6 @@ msgid "Please report bugs to <%s>."
 msgstr "Παρακαλώ αναφέρετε τυχόν σφάλματα στο <%s>"
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
 msgstr "Το ταμπλό εκτελείται ήδη"
 
@@ -174,61 +168,68 @@ msgid "Could not open \"%s\" module"
 msgstr "Δεν ήταν δυνατό το άνοιγμα του αρθρώματος \"%s\""
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Νέο αντικείμενο"
+msgstr "Προσθήκη νέων αντικειμένων"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Σύρετε αντικείμενα από τη λίστα στο ταμπλό ή διαγράψετε υπάρχοντα "
-"αντικείμενα μεταφέροντας τα πίσω στη λίστα."
+"Σύρετε αντικείμενα από τη λίστα στο ταμπλό ή διαγράψετε\n"
+" υπάρχοντα αντικείμενα μεταφέροντας τα πίσω στη λίστα."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "Ανα_ζήτηση:"
 
-#: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
+#: ../panel/panel-dialogs.c:881
+#: ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
 msgstr "Κανονικό πλάτος"
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
+#: ../panel/panel-dialogs.c:882
+#: ../panel/panel-dialogs.c:1118
 msgid "Full Width"
 msgstr "Πλήρες πλάτος"
 
-#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
+#: ../panel/panel-dialogs.c:886
+#: ../panel/panel-dialogs.c:1122
 msgid "Normal Height"
 msgstr "Κανονικό ύψος"
 
-#: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:887
+#: ../panel/panel-dialogs.c:1123
 msgid "Full Height"
 msgstr "Πλήρες ύψος"
 
-#: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:895
+#: ../panel/panel-dialogs.c:1132
 msgid "Span Monitors"
 msgstr "Σε όλες τις οθόνες"
 
-#: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
+#: ../panel/panel-dialogs.c:958
+#: ../panel/panel-dialogs.c:1197
 #: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
 msgstr "Αριστερά"
 
-#: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
+#: ../panel/panel-dialogs.c:960
+#: ../panel/panel-dialogs.c:1199
 #: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
 msgstr "Δεξιά"
 
-#: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
+#: ../panel/panel-dialogs.c:965
+#: ../panel/panel-dialogs.c:1204
 #: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Top"
 msgstr "Επάνω"
 
-#: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
+#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:1206
 #: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Bottom"
 msgstr "Κάτω"
@@ -239,14 +240,12 @@ msgid "Position"
 msgstr "Θέση"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Σταθερή θέση"
+msgstr "Σταθερή _θέση"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Ελεύθερα μετακινούμενο"
+msgstr "Ελεύθερα _μετακινούμενο"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -256,11 +255,13 @@ msgstr "_Αυτόματη απόκρυψη"
 msgid "Orientation:"
 msgstr "Προσανατολισμός:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170
+#: ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "Οριζόντιο"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172
+#: ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "Κάθετο"
 
@@ -276,7 +277,8 @@ msgstr "Και στις δυο πλευρές"
 msgid "Select Monitor"
 msgstr "Οθόνη"
 
-#: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
+#: ../panel/panel-dialogs.c:1401
+#: ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
 #: ../plugins/tasklist/tasklist-dialogs.c:166
 #: ../plugins/windowlist/windowlist-dialog.c:187
@@ -284,21 +286,19 @@ msgid "Appearance"
 msgstr "Εμφάνιση"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Μέγεθος (pixels):"
+msgstr "Μέγεθος (pixel_s):"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Διαφάνεια (%):"
+msgstr "_Διαφάνεια (%):"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Να γίνεται αδιαφανές το ενεργό ταμπλό"
+msgstr "Να γίνεται α_διαφανές το ενεργό ταμπλό"
 
-#: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
+#: ../panel/panel-dialogs.c:1514
+#: ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
 #, c-format
 msgid "Panel %d"
@@ -307,13 +307,12 @@ msgstr "Ταμπλό %d"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Διαγραφή του επιλεγμένου ταμπλό"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Προσθήκη νέων αντικειμένων"
+msgstr "Προσθήκη νέου ταμπλό"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -322,11 +321,11 @@ msgstr "Ταμπλό"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Προσαρμογή ταμπλό"
+msgstr "Προσαρμογή ρυθμίσεων ταμπλό"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:265
+#: ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
 msgid "Lock screen"
 msgstr "Κλείδωμα οθόνης"
@@ -337,18 +336,16 @@ msgid "Action Buttons"
 msgstr "Κουμπιά ενεργειών "
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Επιλογή τύπου ενέργειας:"
+msgstr "Επι_λογή τύπου ενέργειας:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Έξοδος + Κλείδωμα οθόνης"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Προσανατολισμός:"
+msgstr "Προ_σανατολισμός:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -367,9 +364,8 @@ msgid "Fl_ash time separators"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.c:432
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "Προβολ ΠΜ/ΜΜ"
+msgstr "Προ_βολή ΠΜ/ΜΜ"
 
 #: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
@@ -417,22 +413,21 @@ msgid "Icon Box"
 msgstr "Εικονοθήκη"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Εμφάνιση μόνο ελαχιστοποιημένων εφαρμογών"
+msgstr "Εμφάνιση μόνο ελα_χιστοποιημένων εφαρμογών"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Προβολή εφαρμογών από όλους τους χώρων εργασίας"
+msgstr "Προβολή εφαρμογών από όλους τους χώρ_ους εργασίας"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
+#: ../plugins/iconbox/iconbox.c:946
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 msgid "Use all available _space"
-msgstr "Χρήση όλου του διαθέσιμου χώρου"
+msgstr "Χρή_ση όλου του διαθέσιμου χώρου"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:705
+#: ../plugins/launcher/launcher.c:770
 msgid "New Item"
 msgstr "Νέο αντικείμενο"
 
@@ -486,34 +481,28 @@ msgid "Select an Icon for \"%s\""
 msgstr "Επιλέξτε εικονίδιο για το \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "Ό_νομα"
+msgstr "Ό_νομα:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "_Περιγραφή"
+msgstr "_Περιγραφή:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "_Icon:"
-msgstr "Ε_ικονίδιο"
+msgstr "Ε_ικονίδιο:"
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
 msgstr "Ε_ντολή:"
 
 #: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "_Κατάλογος εργασίας"
+msgstr "_Κατάλογος εργασίας:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Επιλογή καταλόγου"
+msgstr "Επιλογή καταλόγου εργασίας"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -542,30 +531,26 @@ msgstr "Προκαθορισμένο"
 msgid "Inside Button"
 msgstr "Εσωτερικό κουμπί"
 
-#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
+#: ../plugins/pager/pager.c:368
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Workspace Switcher"
-msgstr "Χώρος εργασίας %d"
+msgstr "Εναλλάκτης χώρων εργασίας"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Αριθμός γραμμών:"
+msgstr "Αριθμ_ος γραμμών:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Αριθμός στηλών:"
+msgstr "Αριθμ_ος στηλών:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Εναλλαγή χώρων εργασίας με χρήση της ροδέλας του ποντικιού"
+msgstr "Εναλλαγή χώρων εργασίας με χρήση της ροδέλα_ς του ποντικιού"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Προβολή ονομάτων χώρων εργασίας"
+msgstr "Προβολή ο_νομάτων χώρων εργασίας"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -577,12 +562,10 @@ msgid "Separator Style"
 msgstr "Στυλ διαχωριστικού"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
 msgstr "_Κενός χώρος"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
 msgstr "_Επεκτεινόμενος κενός χώρος"
 
@@ -609,16 +592,14 @@ msgstr "Απόκρυψη των παραθύρων και εμφάνιση τη�
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Ειδοποίηση προτεραιότητας"
+msgstr "Περιοχή ειδοποιήσεων"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Υπάρχει ήδη μια εργαλειοθήκη συστήματος σε αυτή την οθόνη"
+msgstr "Υπάρχει ήδη μια περιοχή ειδοποιήσεων σε αυτή την οθόνη"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
@@ -653,19 +634,16 @@ msgid "Task List"
 msgstr "Λίστα εργασιών"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Ελάχιστο πλάτος:"
+msgstr "Ε_λάχιστο πλάτος:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Χρήση επίπεδων κουμπιών"
+msgstr "Χρήση ε_πίπεδων κουμπιών"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Προβολή χειρολαβής"
+msgstr "Εμφάνιση _χειρολαβής"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -686,7 +664,7 @@ msgstr "Πάντα ομαδοποίηση εργασιών"
 #: ../plugins/windowlist/windowlist.c:263
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr "Σίγουρα θέλετε να αφαιρέσετε το χώρο εργασίας %d;"
+msgstr "Σίγουρα θέλετε να διαγράψετε το χώρο εργασίας %d;"
 
 #: ../plugins/windowlist/windowlist.c:264
 #, c-format
@@ -721,12 +699,8 @@ msgid "Window List"
 msgstr "Λίστα παραθύρων"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"H <i>Ειδοποίηση προτεραιότητας</i> θα κάνει το κουμπί να αναβοσβήνει όταν "
-"κάποια εφαρμογή απαιτήσει προσοχή."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "H <i>Ειδοποίηση προτεραιότητας</i> θα κάνει το κουμπί να αναβοσβήνει όταν κάποια εφαρμογή απαιτήσει προσοχή."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -782,16 +756,14 @@ msgid "Program launcher with optional menu"
 msgstr "Εκκινητής προγραμμάτων με προαιρετικό μενού"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Μικρογραφίες όλων των εικονικών επιφανειών εργασίας"
+msgstr "Εναλλαγή μεταξύ εικονικών επιφανειών εργασίας"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Προσθέτει ένα κενό ή μια γραμμή μεταξύ των αντικειμένων του ταμπλό"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
 msgstr "Απόκρυψη των παραθύρων και εμφάνιση της επιφάνειας εργασίας"
 
@@ -800,9 +772,8 @@ msgid "Show Desktop"
 msgstr "Εμφάνιση επιφάνειας εργασίας"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Εμφάνιση εικονιδίων ειδοποίησης"
+msgstr "Περιοχή που εμφανίζονται τα εικονίδια ειδοποίησης"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
@@ -822,88 +793,62 @@ msgstr "Διαχειριστής ταμπλό"
 #, fuzzy
 #~ msgid "Copyright (c) 2004-2009"
 #~ msgstr "Copyright (c) 2004-2007"
-
 #~ msgid "Show list of available windows"
 #~ msgstr "Προβολή λίστας των διαθέσιμων παραθύρων"
-
 #~ msgid "Show all running applications"
 #~ msgstr "Εμφάνιση όλων των εκτελούμενων εφαρμογών"
-
 #~ msgid "Popup position:"
 #~ msgstr "Θέση αναδυώμενου παραθύρου:"
-
 #~ msgid "Automatic"
 #~ msgstr "Αυτόματη"
-
 #~ msgid "Toggle desktop show/hide"
 #~ msgstr "Εναλλαγή της απόκρυψης/εμφάνισης της επιφάνειας εργασίας"
-
 #~ msgid "Show this message and exit"
 #~ msgstr "Προβολή αυτού του μηνύματος και έξοδος"
-
 #~ msgid "Show configuration dialog"
 #~ msgstr "Προβολή διαλόγου ρυθμίσεων"
 
 #, fuzzy
 #~ msgid "Restart panels"
 #~ msgstr "Επανεκκίνηση"
-
 #~ msgid "Add new items"
 #~ msgstr "Προσθήκη νέων αντικειμένων"
-
 #~ msgid "Pager"
 #~ msgstr "Ειδοποιητής"
-
 #~ msgid "System Tray"
 #~ msgstr "Πλαίσιο συστήματος"
-
 #~ msgid "Command Prompt"
 #~ msgstr "Γραμμή εντολών"
-
 #~ msgid "X terminal emulator"
 #~ msgstr "Προσομοίωτής τερματικού X"
-
 #~ msgid "Edit text files"
 #~ msgstr "Επεξεργασία αρχείων κειμένου"
-
 #~ msgid "Editor"
 #~ msgstr "Επεξεργαστής κειμένου"
-
 #~ msgid "File Manager"
 #~ msgstr "Διαχειριστής αρχείων"
-
 #~ msgid "Manage files and folders"
 #~ msgstr "Διαχείριση αρχείων και φακέλων"
-
 #~ msgid "Surf the internet"
 #~ msgstr "Περιήγηση στο διαδίκτυο"
-
 #~ msgid "Web Browser"
 #~ msgstr "Περιηγητής ιστοσελίδων"
-
 #~ msgid "Add Items"
 #~ msgstr "Προσθήκη αντικειμένων"
-
 #~ msgid "Add Items to the Panel"
 #~ msgstr "Προσθήκη αντικειμένων στο ταμπλό"
-
 #~ msgid "Available Items"
 #~ msgstr "Διαθέσιμα αντικείμενα"
-
 #~ msgid "Remove Panel"
 #~ msgstr "Διαγραφή ταμπλό"
-
 #~ msgid "New Panel"
 #~ msgstr "Νέο ταμπλό"
-
 #~ msgid "Panel Actions"
 #~ msgstr "Ενέργειες ταμπλό"
-
 #~ msgid "Program Launcher"
 #~ msgstr "Εκκινητής προγράμματος"
-
 #~ msgid "Failed to launch 'xfce4-panel -c'"
 #~ msgstr "Απέτυχε η εκτέλεση του 'xfce4-panel -c'"
-
 #~ msgid "Xfce 4 Panel Manager"
 #~ msgstr "Διαχειριστής ταμπλό Xfce 4"
+
