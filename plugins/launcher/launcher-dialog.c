@@ -153,7 +153,6 @@ launcher_dialog_read_desktop_file (const gchar   *path,
     XfceRc      *rc = NULL;
     const gchar *value = NULL;
     const gchar *p;
-    gchar       *tmp;
 
     /* we only support .desktop files */
     if (G_UNLIKELY (g_str_has_suffix (path, ".desktop") == FALSE ||
@@ -214,9 +213,7 @@ launcher_dialog_read_desktop_file (const gchar   *path,
         g_free (entry->exec);
 
         /* expand and quote command and store */
-        tmp = xfce_expand_variables (value, NULL);
-        entry->exec = g_shell_quote (tmp);
-        g_free (tmp);
+        entry->exec = xfce_expand_variables (value, NULL);
     }
 
     /* working directory */
