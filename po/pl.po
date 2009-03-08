@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2009-02-23 21:09+0100\n"
+"PO-Revision-Date: 2009-03-07 17:46+0100\n"
 "Last-Translator: Piotr Sokół <piotr.sokol@10g.pl>\n"
 "Language-Team: Polish\n"
 "MIME-Version: 1.0\n"
@@ -115,21 +115,19 @@ msgstr "Twórca"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr "Wypisuje informacje o wersji i kończy program"
+msgstr "Wypisuje informacje o wersji i kończy"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Dopasuj Panel"
+msgstr "Wyświetla okno konfiguracji paneli"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Zapis konfigurację"
+msgstr "Zapisuje konfigurację paneli"
 
 #: ../panel/main.c:63
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Uruchom ponownie program xfce4-panel"
+msgstr "Uruchamia ponownie program"
 
 #: ../panel/main.c:64
 msgid "Log out the active session"
@@ -137,18 +135,17 @@ msgstr "Wylogowywuje użytkownika z aktywnej sesji"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
-msgstr "Zamknij wszystkie panele i zakończ program."
+msgstr "Zamyka wszystkie panele i kończy"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Nowy element"
+msgstr "Wyświetla okno wyboru nowych elementów"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
 #: ../panel/main.c:91
 msgid "Failed to open display"
-msgstr "Nie udało się otworzyć ekranu."
+msgstr "Nie udało się otworzyć ekranu"
 
 #: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
@@ -166,17 +163,17 @@ msgstr "Program „xfce4-panel” jest już uruchomiony"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
-msgstr "Ponowne uruchamianie xfce4-panel..."
+msgstr "Ponowne uruchamianie programu „xfce4-panel”..."
 
 #. TRANSLATORS: Warning when adding an item to the panel failed.
 #: ../panel/panel-dialogs.c:197
 #, c-format
 msgid "Could not open \"%s\" module"
-msgstr "Nie można otworzyć modułu „%s”."
+msgstr "Nie można otworzyć modułu „%s”"
 
 #: ../panel/panel-dialogs.c:611
 msgid "Add New Items"
-msgstr "Dodawanie elementu"
+msgstr "Dodawanie elementów"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
@@ -185,12 +182,12 @@ msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Proszę przenieść elementy z listy na panel by je dodać\n"
-"lub z panelu na listę aby je usunąć."
+"Proszę przenieść element z listy na panel aby go dodać\n"
+"lub z panelu na listę aby go usunąć."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr "_Znajdź:"
+msgstr "_Wyszukiwanie:"
 
 #: ../panel/panel-dialogs.c:881
 #: ../panel/panel-dialogs.c:1117
@@ -221,25 +218,25 @@ msgstr "Marginesy monitora"
 #: ../panel/panel-dialogs.c:1197
 #: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
-msgstr "Lewo"
+msgstr "Po lewej"
 
 #: ../panel/panel-dialogs.c:960
 #: ../panel/panel-dialogs.c:1199
 #: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
-msgstr "Prawo"
+msgstr "Po prawej"
 
 #: ../panel/panel-dialogs.c:965
 #: ../panel/panel-dialogs.c:1204
 #: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Top"
-msgstr "Góra"
+msgstr "Powyżej"
 
 #: ../panel/panel-dialogs.c:967
 #: ../panel/panel-dialogs.c:1206
 #: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Bottom"
-msgstr "Dół"
+msgstr "Poniżej"
 
 #. position
 #: ../panel/panel-dialogs.c:997
@@ -493,7 +490,7 @@ msgstr "_Nazwa:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
 msgid "_Description:"
-msgstr "_Opis:"
+msgstr "O_pis:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
 msgid "_Icon:"
@@ -517,7 +514,7 @@ msgstr "Uruchamianie w _terminalu"
 
 #: ../plugins/launcher/launcher-dialog.c:1247
 msgid "Use _startup notification"
-msgstr "_Powiadamianie o uruchamianiu"
+msgstr "Po_wiadamianie o uruchamianiu"
 
 #: ../plugins/launcher/launcher-dialog.c:1521
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
@@ -536,7 +533,7 @@ msgstr "Domyślny"
 
 #: ../plugins/launcher/launcher-dialog.c:1562
 msgid "Inside Button"
-msgstr "Wewnątrz przycisku"
+msgstr "Wewnątrz"
 
 #: ../plugins/pager/pager.c:368
 #: ../plugins/pager/pager.desktop.in.in.h:2
@@ -639,7 +636,7 @@ msgstr "Nie udało się pozyskać wyboru menedżera dla ekranu %d"
 #: ../plugins/tasklist/tasklist-dialogs.c:208
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
-msgstr "Lista okien"
+msgstr "Przyciski okien"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
 msgid "_Minimum width:"
@@ -704,7 +701,7 @@ msgstr "Usuń obszar roboczy „%s”"
 #: ../plugins/windowlist/windowlist-dialog.c:208
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr "Menu okien"
+msgstr "Lista okien"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
 msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
@@ -749,7 +746,7 @@ msgstr "Akcje obszaru roboczego"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
-msgstr "Wyloguj lub zablokuj ekran"
+msgstr "Wylogowywuje lub blokuje ekran"
 
 #: ../plugins/clock/clock.desktop.in.in.h:2
 msgid "What time is it?"
@@ -757,7 +754,7 @@ msgstr "Wyświetla bieżący czas"
 
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:2
 msgid "Show icons of all running applications"
-msgstr "P_okazuj tylko zminimalizowane aplikacje"
+msgstr "Wyświetla ikony otwartych okien"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
