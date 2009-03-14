@@ -1,9 +1,9 @@
 # Galician translation of xfce4-panel
-# Copyright (C) 2008 Leandro Regueiro
+# Copyright (C) 2008-2009 Leandro Regueiro
 # This file is distributed under the same license as the xfce package.
 #
 # Ricardo Domínguez Rouco <riklaren@gmail.com>, 2006.
-# Leandro Regueiro <leandro.regueiro@gmail.com>, 2008.
+# Leandro Regueiro <leandro.regueiro@gmail.com>, 2008, 2009.
 #
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en <http://trasno.net>
@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Report-Msgid-Bugs-To: xfce-i18n@xfce.org\n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2009-02-11 17:31+0100\n"
+"PO-Revision-Date: 2009-03-07 22:15+0100\n"
 "Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -127,7 +127,7 @@ msgstr "Mostrar o diálogo ó iniciar"
 #: ../panel/main.c:62
 #, fuzzy
 msgid "Save the panel configuration"
-msgstr "Gardar coma _SVG"
+msgstr "Non se puido gardar o ficheiro de configuración.\n"
 
 #: ../panel/main.c:63
 #, fuzzy
@@ -137,7 +137,7 @@ msgstr "Reiniciando xfce4-panel..."
 #: ../panel/main.c:64
 #, fuzzy
 msgid "Log out the active session"
-msgstr "Pechar a sesión ou bloquear o escritorio"
+msgstr "Pechar e _terminar a sesión"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
@@ -153,7 +153,7 @@ msgstr "Engadir novo elemento"
 #: ../panel/main.c:91
 #, fuzzy
 msgid "Failed to open display"
-msgstr "Produciuse un erro ao abrir o ficheiro de GFlare '%s': %s"
+msgstr "Fallo ao abrir a pantalla do sistema de ventás X '%s'\n"
 
 #: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
@@ -168,7 +168,7 @@ msgstr "Por favor comuníquelle os erros a <%s>."
 #: ../panel/main.c:151
 #, fuzzy
 msgid "Xfce4-panel already running"
-msgstr "Xa está executando o script \"%s\"."
+msgstr "o punto de montaxe para %s xa se está usando"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -217,7 +217,7 @@ msgstr "Altura normal"
 #: ../panel/panel-dialogs.c:1123
 #, fuzzy
 msgid "Full Height"
-msgstr "Ancho, alto:"
+msgstr "Altura completa do fondo"
 
 #: ../panel/panel-dialogs.c:895
 #: ../panel/panel-dialogs.c:1132
@@ -326,7 +326,7 @@ msgstr "Panel %d"
 #: ../panel/panel-dialogs.c:1594
 #, fuzzy
 msgid "Remove the currently selected panel"
-msgstr "Aplicar o fractal seleccionado actualmente"
+msgstr "Eliminar a fonte de dicionarios actualmente seleccionada"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
@@ -358,7 +358,7 @@ msgstr "Botóns de accións"
 #: ../plugins/actions/actions.c:445
 #, fuzzy
 msgid "_Select action type:"
-msgstr "Seleccionar o _tipo de ficheiro (%s)"
+msgstr "Tipo de botón de acción"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
@@ -388,12 +388,12 @@ msgstr ""
 #: ../plugins/clock/clock-dialog.c:432
 #, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "Amosar a vista _previa na ventá da imaxe"
+msgstr "_12 horas (AM/PM)"
 
 #: ../plugins/clock/clock-dialog.c:441
 #, fuzzy
 msgid "True _binary clock"
-msgstr "_Manter os círculos de NCSA en verdadeiro"
+msgstr "Factoría da miniaplicación do reloxo"
 
 #: ../plugins/clock/clock-dialog.c:483
 #: ../plugins/clock/clock.desktop.in.in.h:1
@@ -440,18 +440,18 @@ msgstr "Caixa de iconas"
 #: ../plugins/iconbox/iconbox.c:929
 #, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Mostrar somentes as aplicacións minimizadas"
+msgstr "Mostrar unha lista das _aplicacións coñecidas"
 
 #: ../plugins/iconbox/iconbox.c:938
 #, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Amosar ou agochar tódolos d_iálogos abertos"
+msgstr "Mostrar _todos os espazos de traballo en:"
 
 #: ../plugins/iconbox/iconbox.c:946
 #: ../plugins/tasklist/tasklist-dialogs.c:186
 #, fuzzy
 msgid "Use all available _space"
-msgstr "Usar todo o espacio dispoñible"
+msgstr "Mostrar todos os motores de busca dispoñibles"
 
 #. TRANSLATORS: Name of a newly created launcher
 #: ../plugins/launcher/launcher.c:705
@@ -527,7 +527,7 @@ msgstr "Co_mando:"
 #: ../plugins/launcher/launcher-dialog.c:1204
 #, fuzzy
 msgid "_Working Directory:"
-msgstr "Directorio de traballo incorrecto: %s"
+msgstr "Directorio de traballo:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
 #, fuzzy
@@ -567,7 +567,7 @@ msgstr "Botón do rato"
 #: ../plugins/pager/pager.desktop.in.in.h:2
 #, fuzzy
 msgid "Workspace Switcher"
-msgstr "Espazo de traballo RGB (%s)"
+msgstr "Selector de espazos de traballo"
 
 #: ../plugins/pager/pager.c:397
 #, fuzzy
@@ -587,12 +587,12 @@ msgstr "Cambiar de escritorio usando a roda do rato"
 #: ../plugins/pager/pager.c:426
 #, fuzzy
 msgid "Show workspace _names"
-msgstr "Amosa-lo _bordo da páxina"
+msgstr "Mostrar os _nomes de espazo de traballo no selector"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
 msgid "Separator or Spacing"
-msgstr "Separador ou espaciado"
+msgstr "Separador ou espazamento"
 
 #: ../plugins/separator/separator.c:428
 #, fuzzy
@@ -602,12 +602,12 @@ msgstr "Pegar estilo"
 #: ../plugins/separator/separator.c:436
 #, fuzzy
 msgid "_Empty space"
-msgstr "Barra espazadora"
+msgstr "un espazo baleiro"
 
 #: ../plugins/separator/separator.c:445
 #, fuzzy
 msgid "E_xpanding empty space"
-msgstr "Espacio entre as copias:"
+msgstr "espazo baleiro no taboleiro"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -653,7 +653,7 @@ msgstr ""
 #: ../plugins/systray/xfce-tray-dialogs.c:281
 #, fuzzy
 msgid "Are you sure you want to clear the list of known applications?"
-msgstr "¿Está seguro de que quere borrar o escritorio virtual '%s'?"
+msgstr "Está seguro de que quere limpar a lista das localizacións que visitou?"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:371
 msgid "_Number of rows:"
@@ -679,7 +679,7 @@ msgstr "Lista de _Tarefas"
 #: ../plugins/tasklist/tasklist-dialogs.c:172
 #, fuzzy
 msgid "_Minimum width:"
-msgstr "Ancho, alto:"
+msgstr "Largura mínima"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
 #, fuzzy
@@ -689,7 +689,7 @@ msgstr "Mostrar _botóns de axuda"
 #: ../plugins/tasklist/tasklist-dialogs.c:199
 #, fuzzy
 msgid "Show _handle"
-msgstr "Cambiar a asa"
+msgstr "Mostrar o tirador"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -804,7 +804,7 @@ msgstr "Lanzador de aplicacións con menu opcional"
 #: ../plugins/pager/pager.desktop.in.in.h:1
 #, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Vista en miniatura de todos os escritorios virtuais"
+msgstr "Ferramenta para intercambiar entre os espazos de traballo"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
@@ -813,7 +813,7 @@ msgstr "Engadir un espacio ou unha liña entre os compoñentes do panel"
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 #, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Ocultar fiestras e mostrar o escritorio"
+msgstr "Ocultar as ventás de aplicacións e mostrar o escritorio"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
@@ -822,15 +822,17 @@ msgstr "Mostrar Escritorio"
 #: ../plugins/systray/systray.desktop.in.in.h:1
 #, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Mostrar iconas de notificación"
+msgstr "Área onde aparecen as iconas de notificación"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
+#, fuzzy
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Cambiar entre as ventás abertas usando botóns"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
+#, fuzzy
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Cambiar entre as ventás abertas usando un menú"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
