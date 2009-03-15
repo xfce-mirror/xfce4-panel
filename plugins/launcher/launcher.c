@@ -37,6 +37,29 @@
 #include "launcher-exec.h"
 #include "launcher-dialog.h"
 
+/* for 4.4 settings migration */
+static const gchar *icon_category_map[] = {
+    "applications-other",
+    "accessories-text-editor",
+    "system-file-manager",
+    "applications-accessories",
+    "applications-games",
+    "help-browser",
+    "applications-multimedia",
+    "applications-internet",
+    "applications-graphics",
+    "printer",
+    "office-calendar",
+    "applications-office",
+    "audio-card",
+    "utilities-terminal",
+    "applications-development",
+    "preferences-desktop",
+    "applications-system",
+    "applications-other",
+    "applications-accessories"
+};
+
 /* prototypes */
 static void            launcher_utility_icon_theme_changed          (GtkIconTheme          *icon_theme,
                                                                      LauncherPlugin        *launcher);
@@ -1178,6 +1201,7 @@ launcher_plugin_read (LauncherPlugin *launcher)
     XfceRc        *rc;
     guint          i;
     LauncherEntry *entry;
+    gint           icon_category;
 
     /* get rc file name, create it if needed */
     file = xfce_panel_plugin_lookup_rc_file ( launcher->panel_plugin);
@@ -1223,6 +1247,16 @@ launcher_plugin_read (LauncherPlugin *launcher)
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
                 entry->startup = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
 #endif
+
+                /* 4.4 category icon migration */
+                if (G_UNLIKELY (entry->icon == NULL))
+                {
+                  icon_category = xfce_rc_read_int_entry (rc, "X-XFCE-IconCategory", -1);
+                  if (icon_category >= 0
+                      && icon_category <= (gint) G_N_ELEMENTS (icon_category_map) - 1)
+                      entry->icon = g_strdup (icon_category_map[icon_category]);
+                }
+
                 /* prepend the entry */
                 launcher->entries = g_list_prepend (launcher->entries, entry);
             }
