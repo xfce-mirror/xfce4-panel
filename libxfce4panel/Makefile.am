@@ -78,6 +78,7 @@ libxfce4panel_la_LDFLAGS += 						\
 endif
 
 libxfce4panel_la_LIBADD = 						\
+	-lX11								\
 	$(GTK_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)
 
