@@ -229,8 +229,7 @@ actions_free_data (XfcePanelPlugin *plugin, Action *action)
 static void
 actions_do_quit (GtkWidget *b, XfcePanelPlugin *plugin)
 {
-    /* this only works with internal plugins */
-    raise (SIGUSR2);
+    g_spawn_command_line_async ("xfce4-panel -q", NULL);
 }
 
 static void
