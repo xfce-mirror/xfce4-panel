@@ -25,8 +25,7 @@
 #endif
 
 #include <gdk/gdk.h>
-#include <gtk/gtkhbox.h>
-#include <gtk/gtkvbox.h>
+#include <gtk/gtk.h>
 
 #include <libxfce4panel/xfce-panel-macros.h>
 #include <libxfce4panel/xfce-hvbox.h>
@@ -36,11 +35,12 @@
 
 /* prototypes */
 static void  xfce_hvbox_class_init     (XfceHVBoxClass *klass);
+#if ! GTK_CHECK_VERSION (2, 16, 0)
 static void  xfce_hvbox_size_request   (GtkWidget      *widget,
                                         GtkRequisition *requisition);
 static void  xfce_hvbox_size_allocate  (GtkWidget      *widget,
                                         GtkAllocation  *allocation);
-
+#endif
 
 
 GtkType
@@ -70,12 +70,15 @@ xfce_hvbox_class_init (XfceHVBoxClass *klass)
 
     widget_class = (GtkWidgetClass *) klass;
 
+#if ! GTK_CHECK_VERSION (2, 16, 0)
     widget_class->size_request  = xfce_hvbox_size_request;
     widget_class->size_allocate = xfce_hvbox_size_allocate;
+#endif
 }
 
 
 
+#if ! GTK_CHECK_VERSION (2, 16, 0)
 static gpointer
 xfce_hvbox_get_class (XfceHVBox *hvbox)
 {
@@ -123,6 +126,7 @@ xfce_hvbox_size_allocate (GtkWidget     *widget,
     /* allocate the size */
     (*GTK_WIDGET_CLASS (klass)->size_allocate) (widget, allocation);
 }
+#endif
 
 
 
@@ -148,6 +152,9 @@ xfce_hvbox_new (GtkOrientation orientation,
                         "spacing", spacing,
                         NULL);
 
+#if GTK_CHECK_VERSION (2, 16, 0)
+    gtk_orientable_set_orientation (GTK_ORIENTABLE (box), orientation);
+#endif
     XFCE_HVBOX (box)->orientation = orientation;
 
     return box;
@@ -171,9 +178,14 @@ xfce_hvbox_set_orientation (XfceHVBox      *hvbox,
     if (G_UNLIKELY (hvbox->orientation == orientation))
         return;
 
+    /* set the orientation also for GTK 2.16 just in case anyone reads this field directly */
     hvbox->orientation = orientation;
 
+#if GTK_CHECK_VERSION (2, 16, 0)
+    gtk_orientable_set_orientation (GTK_ORIENTABLE (hvbox), orientation);
+#else
     gtk_widget_queue_resize (GTK_WIDGET (hvbox));
+#endif
 }
 
 
