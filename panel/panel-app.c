@@ -252,7 +252,7 @@ evaluate_run_state (void)
             break;
 
         default:
-            if (panel_app.session_client)
+            if (panel_app.session_client != NULL)
             {
                 logout_session (panel_app.session_client);
             }
@@ -272,7 +272,9 @@ evaluate_run_state (void)
     {
         /* we quit on purpose, update session manager so 
          * it does not restart the program immediately */
-        client_session_set_restart_style(panel_app.session_client, SESSION_RESTART_IF_RUNNING);
+        if (panel_app.session_client != NULL)
+            client_session_set_restart_style (panel_app.session_client,
+                                              SESSION_RESTART_IF_RUNNING);
         
         if (panel_app.save_id)
         {
@@ -761,7 +763,7 @@ panel_app_run (gchar *client_id)
     MARK("end main loop");
 
     /* cleanup */
-    if (panel_app.session_client)
+    if (panel_app.session_client != NULL)
         client_session_free (panel_app.session_client);
 
     cleanup_panels ();
