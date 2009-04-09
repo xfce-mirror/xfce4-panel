@@ -764,7 +764,10 @@ panel_app_run (gchar *client_id)
 
     /* cleanup */
     if (panel_app.session_client != NULL)
+    {
         client_session_free (panel_app.session_client);
+        panel_app.session_client = NULL;
+    }
 
     cleanup_panels ();
     xfce_panel_item_manager_cleanup ();
