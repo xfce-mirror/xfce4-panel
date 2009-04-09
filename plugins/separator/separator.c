@@ -483,9 +483,11 @@ static void
 separator_paint_dots (GtkWidget *widget, GdkRectangle * area, Separator *sep)
 {
     GdkBitmap *dark_bmap, *mid_bmap, *light_bmap;
-    gint       x, y, w, h, rows;
-    guint      width  = widget->allocation.width;
-    guint      height = widget->allocation.height;
+    gint       x, y, w, h, rows, cols;
+    gint       width, height;
+    
+    width  = widget->allocation.width;
+    height = widget->allocation.height;
 
     dark_bmap = gdk_bitmap_create_from_data (widget->window, 
                                              (const gchar*) dark_bits,
@@ -506,10 +508,19 @@ separator_paint_dots (GtkWidget *widget, GdkRectangle * area, Separator *sep)
                                    area);
     }
 
-    rows = MAX (height / 6, 1);
+    if (xfce_panel_plugin_get_orientation (sep->plugin) == GTK_ORIENTATION_HORIZONTAL)
+      {
+        rows = MAX (height / 6, 1);
+        w = 6;
+        h = rows * 6;
+      }
+    else
+      {
+        cols = MAX (width / 6, 1);
+        h = 6;
+        w = cols * 6;
+      }
 
-    w = 6;
-    h = rows * 6;
     x = (width - w) / 2;
     y = (height - h) / 2;
 
