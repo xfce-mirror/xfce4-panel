@@ -92,6 +92,9 @@ struct _LauncherPlugin
     /* settings */
     guint            move_first : 1;
     guint            arrow_position;
+    
+    /* icon theme changed handler */
+    gulong           icon_theme_change_handler;
 };
 
 enum

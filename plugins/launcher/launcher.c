@@ -1020,7 +1020,6 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
 {
     LauncherPlugin *launcher;
     GtkIconTheme   *icon_theme;
-    GdkScreen      *screen;
 
     /* create launcher structure */
     launcher = panel_slice_new0 (LauncherPlugin);
@@ -1056,10 +1055,10 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
     gtk_button_set_focus_on_click (GTK_BUTTON (launcher->arrow_button), FALSE);
 
     /* hook for icon themes changes */
-    screen = gtk_widget_get_screen (launcher->image);
-    icon_theme = gtk_icon_theme_get_for_screen (screen);
-    g_signal_connect (G_OBJECT (icon_theme), "changed",
-                      G_CALLBACK (launcher_utility_icon_theme_changed), launcher);
+    icon_theme = gtk_icon_theme_get_default ();
+    launcher->icon_theme_change_handler = 
+        g_signal_connect (G_OBJECT (icon_theme), "changed",
+                          G_CALLBACK (launcher_utility_icon_theme_changed), launcher);
 
     /* icon button signals */
     g_signal_connect (G_OBJECT (launcher->icon_button), "state-changed",
@@ -1474,11 +1473,18 @@ static void
 launcher_plugin_free (LauncherPlugin  *launcher)
 {
     GtkWidget *dialog;
+    GtkIconTheme *icon_theme;
 
     /* check if we still need to destroy the properties dialog */
     dialog = g_object_get_data (G_OBJECT (launcher->panel_plugin), I_("launcher-dialog"));
     if (G_UNLIKELY (dialog != NULL))
         gtk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+        
+    /* disconnect icon theme change handler */
+    icon_theme = gtk_icon_theme_get_default ();
+    if (launcher->icon_theme_change_handler != 0)
+        g_signal_handler_disconnect (G_OBJECT (icon_theme), 
+            launcher->icon_theme_change_handler);
 
     /* stop timeout */
     if (G_UNLIKELY (launcher->popup_timeout_id))

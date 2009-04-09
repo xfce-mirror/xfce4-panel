@@ -7,6 +7,8 @@
 - Fix xfce-hvbox not working with gtk 2.16 (bug #5166).
 - Don't crash the launcher plugin when the launcher entry list is empty.
 - Add icon-name fallback to the show desktop plugin (bug #5117).
+- Disconnect the icon theme changed signal from a launcher when it
+  is destroyed to avoid crash when the icon theme changes.
 
 
 4.6.0
