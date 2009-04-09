@@ -29,7 +29,6 @@
 #include <libxfce4panel/xfce-panel-plugin.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 
-#define SHOW_DESKTOP_ICON_NAME  "gnome-fs-desktop"
 #define TIP_ACTIVE              _("Restore hidden windows")
 #define TIP_INACTIVE            _("Hide windows and show desktop")
 
@@ -66,9 +65,12 @@ showdesktop_set_size (XfcePanelPlugin *plugin, int size, ShowDesktopData *sdd)
     GdkPixbuf *pb;
     int width = size - 2 - 2 * MAX (sdd->button->style->xthickness,
                                     sdd->button->style->ythickness);
-    
-    pb = xfce_themed_icon_load (SHOW_DESKTOP_ICON_NAME, width);
-    if (pb) 
+
+    pb = xfce_themed_icon_load ("user-desktop", width);
+    if (G_UNLIKELY (pb == NULL))
+      pb = xfce_themed_icon_load ("gnome-fs-desktop", width);
+
+    if (pb != NULL) 
     {
         gtk_image_set_from_pixbuf (GTK_IMAGE (sdd->image), pb);
         g_object_unref (pb);
