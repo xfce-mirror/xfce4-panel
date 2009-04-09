@@ -603,6 +603,10 @@ launcher_execute (GdkScreen     *screen,
     GSList   *li;
     GSList    fake;
     gboolean  proceed = TRUE;
+    
+    /* leave when entry is null */
+    if (G_UNLIKELY (entry == NULL))
+        return;
 
     /* be secure */
     if (G_UNLIKELY (screen == NULL))

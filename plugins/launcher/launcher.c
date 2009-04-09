@@ -353,9 +353,16 @@ launcher_icon_button_set_icon (LauncherPlugin *launcher)
     GdkPixbuf     *pixbuf;
     LauncherEntry *entry;
     GdkScreen     *screen;
+    GList         *first = g_list_first (launcher->entries);
+    
+    /* leave when there is no list item */
+    if (G_UNLIKELY (first == NULL))
+        return;
 
     /* get the first entry in the list */
-    entry = g_list_first (launcher->entries)->data;
+    entry = first->data;
+    if (G_UNLIKELY (entry == NULL))
+        return;
 
     /* get widget screen */
     screen = gtk_widget_get_screen (launcher->image);
@@ -387,12 +394,15 @@ launcher_icon_button_query_tooltip (GtkWidget      *widget,
                                     GtkTooltip     *tooltip,
                                     LauncherPlugin *launcher)
 {
+    GList *first = g_list_first (launcher->entries);
+    
     /* don't show tooltips on a menu button */
-    if (launcher->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
-       return FALSE;
+    if (launcher->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON
+        || first == NULL)
+        return FALSE;
 
     return launcher_utility_query_tooltip (widget, x, y, keyboard_mode, tooltip,
-                                           g_list_first (launcher->entries)->data);
+                                           first->data);
 }
 
 
@@ -403,12 +413,19 @@ launcher_icon_button_set_tooltip (LauncherPlugin *launcher)
 {
     LauncherEntry *entry;
     gchar         *string = NULL;
+    GList         *first = g_list_first (launcher->entries);
+    
+    /* leave when there is no entry */
+    if (G_UNLIKELY (first == NULL))
+        return;
 
     /* get first entry */
-    entry = g_list_first (launcher->entries)->data;
+    entry = first->data;
 
     /* create tooltip text */
-    if (G_LIKELY (entry->name && launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON))
+    if (entry != NULL
+        && entry->name 
+        && launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON))
     {
         if (entry->comment)
             string = g_strdup_printf ("%s\n%s", entry->name, entry->comment);
@@ -464,6 +481,7 @@ launcher_icon_button_released (GtkWidget      *button,
 {
     LauncherEntry *entry;
     GdkScreen     *screen;
+    GList         *first;
 
     /* remove the timeout */
     if (G_LIKELY (launcher->popup_timeout_id > 0))
@@ -473,7 +491,10 @@ launcher_icon_button_released (GtkWidget      *button,
     if (GTK_BUTTON (button)->in_button && launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON)
     {
         /* get the first launcher entry */
-        entry = g_list_first (launcher->entries)->data;
+        first = g_list_first (launcher->entries);
+        if (G_UNLIKELY (first == NULL))
+            return FALSE;
+        entry = first->data;
 
         /* get the widget screen */
         screen = gtk_widget_get_screen (button);
@@ -502,6 +523,7 @@ launcher_icon_button_drag_data_received (GtkWidget        *widget,
 {
     GSList        *filenames;
     LauncherEntry *entry;
+    GList         *first;
 
     /* execute */
     if (launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON)
@@ -512,7 +534,10 @@ launcher_icon_button_drag_data_received (GtkWidget        *widget,
         if (G_LIKELY (filenames))
         {
             /* get entry */
-            entry = g_list_first (launcher->entries)->data;
+            first = g_list_first (launcher->entries);
+            if (G_UNLIKELY (first == NULL))
+                return;
+            entry = first->data;
 
             /* execute the entry with the filenames */
             launcher_execute (gtk_widget_get_screen (widget), entry, filenames, time_);
@@ -680,6 +705,7 @@ launcher_menu_item_released (GtkWidget      *mi,
 
         /* move the item to the first position in the list */
         if (launcher->move_first
+            && launcher->entries != NULL
             && launcher->entries->data != entry)
         {
             /* remove from the list */
