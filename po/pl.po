@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2009-03-27 17:40+0100\n"
+"PO-Revision-Date: 2009-04-14 19:28+0100\n"
 "Last-Translator: Piotr Sokół <piotr.sokol@10g.pl>\n"
 "Language-Team: Polish\n"
 "MIME-Version: 1.0\n"
@@ -25,16 +25,16 @@ msgstr ""
 #: ../libxfce4panel/xfce-panel-external-item.c:170
 #, c-format
 msgid "An item was unexpectedly removed: \"%s\"."
-msgstr "Element „%s” został niespodziewanie usunięty."
+msgstr "Aplet „%s” został niespodziewanie usunięty."
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:606
 #, c-format
 msgid "Remove \"%s\"?"
-msgstr "Usunąć element „%s”?"
+msgstr "Usunąć aplet „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
 msgid "The item will be removed from the panel and its configuration will be lost."
-msgstr "Element zostanie usunięty z panelu wraz z konfiguracją."
+msgstr "Aplet zostanie usunięty z panelu wraz z konfiguracją."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:836
@@ -44,7 +44,7 @@ msgstr "Preferencje..."
 #. TRANSLATORS: About menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:853
 msgid "About"
-msgstr "O elemencie"
+msgstr "O aplecie"
 
 #. TRANSLATORS: Move menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:865
@@ -60,7 +60,7 @@ msgstr "Usuń"
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903
 #: ../panel/panel.c:606
 msgid "Add New Items..."
-msgstr "Dodaj element..."
+msgstr "Dodaj aplet..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915
@@ -105,7 +105,7 @@ msgstr "Usunąć panel „%d”?"
 
 #: ../panel/panel-app.c:934
 msgid "The selected panel and all its items will be removed."
-msgstr "Panel wraz z elementami zostanie usunięty."
+msgstr "Panel zostanie usunięty wraz z apletami."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
 #: ../panel/panel-app.c:972
@@ -139,7 +139,7 @@ msgstr "Zamyka wszystkie panele i kończy"
 
 #: ../panel/main.c:66
 msgid "Show 'Add New Items' dialog"
-msgstr "Wyświetla okno wyboru nowych elementów"
+msgstr "Wyświetla okno wyboru nowych apletów"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -173,7 +173,7 @@ msgstr "Nie można otworzyć modułu „%s”"
 
 #: ../panel/panel-dialogs.c:611
 msgid "Add New Items"
-msgstr "Dodawanie elementów"
+msgstr "Dodawanie apletów"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
@@ -182,8 +182,8 @@ msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Proszę przenieść element z listy na panel aby go dodać\n"
-"lub z panelu na listę aby go usunąć."
+"Proszę przenieść aplet z listy na panel, aby go dodać\n"
+"lub z panelu na listę, by go usunąć."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
@@ -404,7 +404,7 @@ msgstr "_Ramka"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:525
 msgid "Tooltip Format"
-msgstr "Podpowiedź"
+msgstr "Format podpowiedzi"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:552
@@ -433,7 +433,7 @@ msgstr "Użycie całej dostępnej _przestrzeni"
 #: ../plugins/launcher/launcher.c:705
 #: ../plugins/launcher/launcher.c:770
 msgid "New Item"
-msgstr "Nowy element"
+msgstr "Nowy aplet"
 
 #: ../plugins/launcher/launcher-exec.c:574
 #, c-format
@@ -567,11 +567,11 @@ msgstr "Styl"
 
 #: ../plugins/separator/separator.c:436
 msgid "_Empty space"
-msgstr "_Pusta przestrzeń"
+msgstr "_Odstęp zwykły"
 
 #: ../plugins/separator/separator.c:445
 msgid "E_xpanding empty space"
-msgstr "_Rozciągnięta pusta przestrzeń"
+msgstr "Odstęp _rozsuwający"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -765,7 +765,7 @@ msgstr "Umożliwia przechodzenie pomiędzy obszarami roboczymi"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
-msgstr "Wyświetla odstęp lub separator pomiędzy elementami panelu"
+msgstr "Wyświetla odstęp lub separator pomiędzy apletami panelu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
 msgid "Hide all windows and show the desktop"
