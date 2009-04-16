@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
-"Report-Msgid-Bugs-To: xfce-i18n@xfce.org\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2009-03-07 22:15+0100\n"
-"Last-Translator: Leandro Regueiro <leandro DOT regueiro AT gmail DOT com>\n"
+"PO-Revision-Date: 2009-04-15 01:05+0100\n"
+"Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,9 +60,8 @@ msgstr "Suprimir"
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903
 #: ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Engadir unha unidade nova"
+msgstr "Engadir novos elementos..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915
@@ -181,9 +180,8 @@ msgid "Could not open \"%s\" module"
 msgstr "Non se pode abrir o módulo \"%s\""
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Engadir unha unidade nova"
+msgstr "Engadir novos elementos"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
@@ -215,9 +213,8 @@ msgstr "Altura normal"
 
 #: ../panel/panel-dialogs.c:887
 #: ../panel/panel-dialogs.c:1123
-#, fuzzy
 msgid "Full Height"
-msgstr "Altura completa do fondo"
+msgstr "Altura completa"
 
 #: ../panel/panel-dialogs.c:895
 #: ../panel/panel-dialogs.c:1132
@@ -254,9 +251,8 @@ msgid "Position"
 msgstr "Posición"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Posición: %0.4f"
+msgstr "Posición _fixa"
 
 #: ../panel/panel-dialogs.c:1017
 #, fuzzy
@@ -373,9 +369,8 @@ msgid "Custom"
 msgstr "Personalizado"
 
 #: ../plugins/clock/clock-dialog.c:411
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Segundos de demora"
+msgstr "Mostrar os _segundos"
 
 #: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
@@ -386,9 +381,8 @@ msgid "Fl_ash time separators"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.c:432
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "_12 horas (AM/PM)"
+msgstr "_Mostrar AM/PM"
 
 #: ../plugins/clock/clock-dialog.c:441
 #, fuzzy
@@ -423,9 +417,8 @@ msgstr "Mostrar _marco"
 
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:525
-#, fuzzy
 msgid "Tooltip Format"
-msgstr "Formato actual"
+msgstr "Formato da notificación"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:552
@@ -624,11 +617,11 @@ msgstr "_Puntos"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
-msgstr "Restaurar fiestras ocultas"
+msgstr "Restaurar as ventás ocultas"
 
 #: ../plugins/showdesktop/showdesktop.c:34
 msgid "Hide windows and show desktop"
-msgstr "Ocultar fiestras e mostrar o escritorio"
+msgstr "Ocultar as ventás e mostrar o escritorio"
 
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
@@ -742,7 +735,7 @@ msgstr "Eliminar escritorio virtual '%s'"
 #: ../plugins/windowlist/windowlist-dialog.c:208
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:2
 msgid "Window List"
-msgstr "Lista de Fiestras"
+msgstr "Lista de ventás"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
 msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
@@ -775,7 +768,7 @@ msgstr "Botón de _flecha"
 
 #: ../plugins/windowlist/windowlist-dialog.c:217
 msgid "Show _windows from all workspaces"
-msgstr "Mostrar _fiestras de todos os escritorios virtuales"
+msgstr "Mostrar as _ventás de tódolos espazos de traballo"
 
 #: ../plugins/windowlist/windowlist-dialog.c:226
 msgid "Show a_pplication icons"
@@ -837,185 +830,4 @@ msgstr "Cambiar entre as ventás abertas usando un menú"
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Administrador de paneles"
-
-#~ msgid "X terminal emulator"
-#~ msgstr "Emulador de terminal para X"
-#~ msgid "Edit text files"
-#~ msgstr "Editar ficheiros de texto"
-#~ msgid "Editor"
-#~ msgstr "Editor"
-#~ msgid "File Manager"
-#~ msgstr "Xestor de ficheiros"
-#~ msgid "Manage files and folders"
-#~ msgstr "Xestione ficheiros e cartafoles"
-#~ msgid "Surf the internet"
-#~ msgstr "Navegue pola internet"
-#~ msgid "Web Browser"
-#~ msgstr "Navegador web"
-#~ msgid "Add Items"
-#~ msgstr "Engadir elementos"
-#~ msgid "Show this message and exit"
-#~ msgstr "Mostra esta mensaxe e sae"
-#~ msgid "Show configuration dialog"
-#~ msgstr "Mostrar o diálogo de configuración"
-#~ msgid "Restart panels"
-#~ msgstr "Reiniciar os paneis"
-#~ msgid "End the session"
-#~ msgstr "Rematar a sesión"
-#~ msgid "Copyright (c) 2004-2007"
-#~ msgstr "Copyright (c) 2004-2007"
-#~ msgid "Add Items to the Panel"
-#~ msgstr "Añadir compoñentes ó panel"
-#~ msgid "Available Items"
-#~ msgstr "Elementos dispoñibles"
-#~ msgid "Automatic"
-#~ msgstr "Automatico"
-#~ msgid "Remove Panel"
-#~ msgstr "Borrar panel"
-#~ msgid "New Panel"
-#~ msgstr "Novo panel"
-#~ msgid "Panel Actions"
-#~ msgstr "Accións sobre paneles"
-#~ msgid "Unknown"
-#~ msgstr "Descoñecido"
-#~ msgid "Program Launcher"
-#~ msgstr "Lanzador de aplicacións"
-#~ msgid "Pager"
-#~ msgstr "Paxinador"
-#~ msgid "System Tray"
-#~ msgstr "Bandexa do Sistema"
-#~ msgid "Failed to launch 'xfce4-panel -c'"
-#~ msgstr "Fallo ó executar 'xfce4-panel -c'"
-#~ msgid "Toggle desktop show/hide"
-#~ msgstr "Trocar escritorio mostrar/ocultar"
-#~ msgid "Show all running applications"
-#~ msgstr "Mostrar todas as aplicacións en execución"
-#~ msgid "Show list of available windows"
-#~ msgstr "Mostrar a lista de fiestras dispoñibles"
-#~ msgid "Xfce 4 Panel Manager"
-#~ msgstr "Administrador de paneis de XFCE 4"
-
-#, fuzzy
-#~ msgid "Failed to register the system tray for screen %d"
-#~ msgstr "Non se pode rexistrar a bandexa de sistema: %s"
-#~ msgid "Show application _names"
-#~ msgstr "Mostrar todos os nomes de aplicación"
-#~ msgid "%A %d %B %Y"
-#~ msgstr "%A, %d de %B de %Y"
-#~ msgid "_Draw Separator"
-#~ msgstr "_Debuxar separador"
-#~ msgid "_Expand"
-#~ msgstr "_Expandir"
-#~ msgid ""
-#~ "\n"
-#~ " Xfce Panel %s\n"
-#~ "\n"
-#~ " Part of the Xfce Desktop Environment\n"
-#~ " http://www.xfce.org\n"
-#~ "\n"
-#~ " Licensed under the GNU GPL.\n"
-#~ "\n"
-#~ msgstr ""
-#~ "\n"
-#~ " Panel de XFCE %s\n"
-#~ "\n"
-#~ "Parte do XFCE Desktop Environment\n"
-#~ "http://www.xfce.org\n"
-#~ "\n"
-#~ "Licencia baixo GPL GNU.\n"
-#~ "\n"
-#~ msgid ""
-#~ " Usage: %s [OPTIONS]\n"
-#~ "\n"
-#~ msgstr ""
-#~ " Usar: %s [OPCIÓNS]\n"
-#~ "\n"
-#~ msgid ""
-#~ " OPTIONS\n"
-#~ " -h, --help      Show this message and exit\n"
-#~ " -v, --version   Show this message and exit\n"
-#~ " -c, --customize Show configuration dialog\n"
-#~ " -s, --save      Save configuration\n"
-#~ " -r, --restart   Restart panels\n"
-#~ " -q, --quit      End the session\n"
-#~ " -x, --exit      Close all panels and end the program\n"
-#~ " -a, --add       Add new items\n"
-#~ "\n"
-#~ msgstr ""
-#~ " OPCIÓNS\n"
-#~ "-h, --help Mostra esta mensaxe e sae.\n"
-#~ "-v, --version Mostra esta mensaxe e sae.\n"
-#~ "-c, --customice Mostra o diálogo de personalización.\n"
-#~ "-s, --save Almacena a configuarción\n"
-#~ "-r, --restart Reinicia os paneles\n"
-#~ "-q, --quit Termina a sesión\n"
-#~ "-x, --exit Pecha todolos paneles e remata a aplicacion\n"
-#~ "-a, --add Añade un novo compoñente\n"
-#~ "\n"
-#~ msgid "Error in command \"%s\""
-#~ msgstr "Erro no comando \"%s\""
-#~ msgid "This item has not yet been configured"
-#~ msgstr "Este elemento aínda non foi configurado"
-#~ msgid "File management"
-#~ msgstr "Administrador de arquivos"
-#~ msgid "Utilities"
-#~ msgstr "Útiles"
-#~ msgid "Games"
-#~ msgstr "Xogos"
-#~ msgid "Help browser"
-#~ msgstr "Visor de axuda"
-#~ msgid "Multimedia"
-#~ msgstr "Multimedia"
-#~ msgid "Network"
-#~ msgstr "Redes"
-#~ msgid "Graphics"
-#~ msgstr "Gráficos"
-#~ msgid "Printer"
-#~ msgstr "Impresora"
-#~ msgid "Productivity"
-#~ msgstr "Productividade"
-#~ msgid "Office"
-#~ msgstr "Oficina"
-#~ msgid "Sound"
-#~ msgstr "Son"
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-#~ msgid "Development"
-#~ msgstr "Desenvolvemento"
-#~ msgid "Select image file"
-#~ msgstr "Seleccione un arquivo de imaxe"
-#~ msgid "Select command"
-#~ msgstr "Seleccione un comando"
-#~ msgid "Other..."
-#~ msgstr "Outro..."
-#~ msgid ""
-#~ "The first item in the list is shown on the panel. Additional items will "
-#~ "appear in a menu."
-#~ msgstr ""
-#~ "O primeiro elemento da lista é mostrado no panel. Os outro elementos "
-#~ "serán mostrados no menu."
-#~ msgid ""
-#~ "Failed to run 0launch:\n"
-#~ "%s\n"
-#~ "\n"
-#~ "For help using Zero Install, see http://0install.net"
-#~ msgstr ""
-#~ "Fallou a execución:\n"
-#~ "%s"
-#~ msgid ""
-#~ "The Zero Install GUI has finished, but the launcher dialog has "
-#~ "disappeared in the meantime. Not adding launcher (but any files "
-#~ "downloaded have not been lost)."
-#~ msgstr ""
-#~ "A GUI da instalación de Zero rematou, pero o diálogo lanzador desapareceu "
-#~ "namentres. Non se pode añadir o lanzador (pero ningún dos arquivos "
-#~ "descargados foi perdido)"
-#~ msgid "Select file"
-#~ msgstr "Seleccionar ficheiro"
-#~ msgid "Test Plugin"
-#~ msgstr "Plugin de test"
-#~ msgid "This plugin has no purpose"
-#~ msgstr "Este plugin non ten ningún propósito"
-#~ msgid "Size"
-#~ msgstr "Tamaño"
 
