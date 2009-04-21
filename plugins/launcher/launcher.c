@@ -425,7 +425,7 @@ launcher_icon_button_set_tooltip (LauncherPlugin *launcher)
     /* create tooltip text */
     if (entry != NULL
         && entry->name 
-        && launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON))
+        && launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON)
     {
         if (entry->comment)
             string = g_strdup_printf ("%s\n%s", entry->name, entry->comment);
