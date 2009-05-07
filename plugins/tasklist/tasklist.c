@@ -105,7 +105,10 @@ tasklist_handle_exposed (GtkWidget      *widget,
         gtk_paint_handle (widget->style, widget->window,
                           GTK_WIDGET_STATE (widget), GTK_SHADOW_NONE,
                           &(event->area), widget, "handlebox",
-                          x, y, w, h, orientation);
+                          x, y, w, h,
+                          orientation == GTK_ORIENTATION_HORIZONTAL ?
+                              GTK_ORIENTATION_VERTICAL :
+                              GTK_ORIENTATION_HORIZONTAL);
 
         return TRUE;
     }
