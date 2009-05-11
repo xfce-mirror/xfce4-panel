@@ -265,7 +265,7 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
     gchar       **argv = NULL;
 
     if (entry->terminal)
-        g_string_append (command_line, "exo-open --launch TerminalEmulator");
+        g_string_append (command_line, "exo-open --launch TerminalEmulator ");
 
     /* build the full command */
     for (p = entry->exec; *p != '\0'; ++p)
