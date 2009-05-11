@@ -264,6 +264,9 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
     GSList       *li;
     gchar       **argv = NULL;
 
+    if (entry->terminal)
+        g_string_append (command_line, "exo-open --launch TerminalEmulator");
+
     /* build the full command */
     for (p = entry->exec; *p != '\0'; ++p)
     {
@@ -377,25 +380,9 @@ launcher_exec_parse_argv (LauncherEntry   *entry,
 
     DBG ("Execute: %s", command_line->str);
 
-    /* create the argv */
+    /* use glib to parge the argv */
     if (G_LIKELY (command_line->str != NULL))
-    {
-        if (entry->terminal == FALSE)
-        {
-            /* use glib to parge the argv */
-            g_shell_parse_argv (command_line->str, NULL, &argv, error);
-        }
-        else
-        {
-            /* we parse our own argv here so exo-open will handle all attributes without problems */
-            argv = g_new (gchar *, 5);
-            argv[0] = g_strdup ("exo-open");
-            argv[1] = g_strdup ("--launch");
-            argv[2] = g_strdup ("TerminalEmulator");
-            argv[3] = g_strdup (command_line->str);
-            argv[4] = NULL;
-        }
-    }
+        g_shell_parse_argv (command_line->str, NULL, &argv, error);
 
     /* cleanup */
     g_string_free (command_line, TRUE);
