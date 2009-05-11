@@ -10,15 +10,16 @@ msgstr ""
 "Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2008-04-06 20:45+0300\n"
-"Last-Translator: Rihards Prieditis <RPrieditis@gmail.com>\n"
-"Language-Team: Latvian <RPrieditis@gmail.com>\n"
+"PO-Revision-Date: 2009-05-01 20:51+0300\n"
+"Last-Translator: Rihards Priedītis <rprieditis@gmail.com>\n"
+"Language-Team: Latvian <rprieditis@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+"X-Poedit-Language: Latvian\n"
+"X-Poedit-Country: Latvia\n"
 
 #. TRANSLATORS: This warning is printed to the commandline when
 #. an external plugin crashed
@@ -33,10 +34,8 @@ msgid "Remove \"%s\"?"
 msgstr "Noņemt \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
-msgstr ""
-"Šis vienums tiks noņemts no paneļa un tā saglabātā konfigurācija pazudīs."
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Šis vienums tiks noņemts no paneļa un tā saglabātā konfigurācija pazudīs."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:836
@@ -59,19 +58,21 @@ msgid "Remove"
 msgstr "Noņemt"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:903
+#: ../panel/panel.c:606
 msgid "Add New Items..."
-msgstr "Pievienot jaunu vienumu"
+msgstr "Pievienot jaunus vienumus..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:915
+#: ../panel/panel.c:595
 msgid "Customize Panel..."
-msgstr "Pielāgot paneli"
+msgstr "Pielāgot paneli..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621
+#: ../plugins/actions/actions.c:284
+#: ../plugins/actions/actions.c:318
+#: ../plugins/actions/actions.c:455
 msgid "Quit"
 msgstr "Iziet"
 
@@ -83,11 +84,14 @@ msgstr "Restartēt"
 msgid "About the Xfce Panel"
 msgstr "Par Xfce paneli"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259
+#: ../panel/panel-app.c:902
 msgid "Exit Xfce Panel?"
 msgstr "Iziet no Xfce paneļa?"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:900
+#: ../panel/panel-app.c:932
+#: ../panel/panel-app.c:965
 msgid "Xfce Panel"
 msgstr "Xfce panelis"
 
@@ -105,42 +109,38 @@ msgid "The selected panel and all its items will be removed."
 msgstr "Izvēlētais panelis un visi tā vienumi tiks noņemti."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:972
+#: ../panel/panel-app.c:973
 msgid "Developer"
 msgstr "Izstrādātājs"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Izdrukāt versijas informāciju un iziet"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Pielāgot paneli"
+msgstr "Rādīt \"Pielāgot paneli\" dialoglogu"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Saglabāt konfigurāciju"
+msgstr "Saglabāt paneļa konfigurāciju"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Restartēju xfce4-panel..."
+msgstr "Restartēt skrejošo xfce4-panel instanci"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Atteikties vai noslēgt ekrānu"
+msgstr "Atteikties no aktīvās sezonas"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Aizvērt visus paneļus un iziet no programmas"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Pievienot jaunu vienumu"
+msgstr "Rādīt \"Pievienot jaunus vienumus\" dialoglogu"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -159,9 +159,8 @@ msgid "Please report bugs to <%s>."
 msgstr "Lūdzu ziņojiet pa kļūdām uz <%s>."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
-msgstr "xfce4-panel jau skrien"
+msgstr "Xfce4-panel jau skrien"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -174,61 +173,68 @@ msgid "Could not open \"%s\" module"
 msgstr "Nevarēju atvērt moduli \"%s\""
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Pievienot jaunu vienumu"
+msgstr "Pievienot jaunus vienumus"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Velciet vienumus no saraksta uz paneli, vai noņemiet velkot no paneļa "
-"atpakaļ sarakstā."
+"Velciet vienumus no saraksta uz paneli, vai \n"
+"noņemiet velkot no paneļa atpakaļ sarakstā."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "_Meklēt:"
 
-#: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
+#: ../panel/panel-dialogs.c:881
+#: ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
 msgstr "Normāls platums"
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
+#: ../panel/panel-dialogs.c:882
+#: ../panel/panel-dialogs.c:1118
 msgid "Full Width"
 msgstr "Pilns platums"
 
-#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
+#: ../panel/panel-dialogs.c:886
+#: ../panel/panel-dialogs.c:1122
 msgid "Normal Height"
 msgstr "Normāls augstums"
 
-#: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:887
+#: ../panel/panel-dialogs.c:1123
 msgid "Full Height"
 msgstr "Pilns augstums"
 
-#: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:895
+#: ../panel/panel-dialogs.c:1132
 msgid "Span Monitors"
 msgstr "Savienot monitorus"
 
-#: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
+#: ../panel/panel-dialogs.c:958
+#: ../panel/panel-dialogs.c:1197
 #: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Left"
 msgstr "Kreisā"
 
-#: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
+#: ../panel/panel-dialogs.c:960
+#: ../panel/panel-dialogs.c:1199
 #: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Right"
 msgstr "Labā"
 
-#: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
+#: ../panel/panel-dialogs.c:965
+#: ../panel/panel-dialogs.c:1204
 #: ../plugins/launcher/launcher-dialog.c:1560
 msgid "Top"
 msgstr "Augšā"
 
-#: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
+#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:1206
 #: ../plugins/launcher/launcher-dialog.c:1561
 msgid "Bottom"
 msgstr "Apakšā"
@@ -239,14 +245,12 @@ msgid "Position"
 msgstr "Pozīcija"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Fiksēta pozīcija"
+msgstr "_Fiksēta pozīcija"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Brīvi pārvietojams"
+msgstr "_Brīvi pārvietojams"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -256,11 +260,13 @@ msgstr "Automātiska _slēpšana"
 msgid "Orientation:"
 msgstr "Novietojums:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170
+#: ../plugins/actions/actions.c:482
 msgid "Horizontal"
 msgstr "Horizontāls"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172
+#: ../plugins/actions/actions.c:483
 msgid "Vertical"
 msgstr "Vertikāls"
 
@@ -276,7 +282,8 @@ msgstr "Abās pusēs"
 msgid "Select Monitor"
 msgstr "Norādīt monitoru"
 
-#: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
+#: ../panel/panel-dialogs.c:1401
+#: ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
 #: ../plugins/tasklist/tasklist-dialogs.c:166
 #: ../plugins/windowlist/windowlist-dialog.c:187
@@ -284,21 +291,19 @@ msgid "Appearance"
 msgstr "Izskats"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Izmērs (pikseļos):"
+msgstr "_Izmērs (pikseļos):"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Caurspīdība (%s):"
+msgstr "_Caurspīdība (%s):"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Padarīt aktīvo paneli puscaurspīdīgu"
+msgstr "Padarīt aktīvo paneli _puscaurspīdīgu"
 
-#: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
+#: ../panel/panel-dialogs.c:1514
+#: ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
 #, c-format
 msgid "Panel %d"
@@ -307,13 +312,12 @@ msgstr "Panelis %d"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Noņemt pašreiz atlasīto paneli"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Pievienot jaunus vienumus"
+msgstr "Pievienot jaunu paneli"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -322,11 +326,11 @@ msgstr "Panelis"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Pielāgot paneli"
+msgstr "Pielāgot paneļa uzstādījumus"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
+#: ../plugins/actions/actions.c:265
+#: ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
 msgid "Lock screen"
 msgstr "Aizslēgt ekrānu"
@@ -337,18 +341,16 @@ msgid "Action Buttons"
 msgstr "Darbību pogas"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Norādiet darbības tipu:"
+msgstr "Norādiet _darbības tipu:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
 msgstr "Iziet + Noslēgt ekrānu"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Novietojums:"
+msgstr "_Novietojums:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -416,22 +418,21 @@ msgid "Icon Box"
 msgstr "Ikonu kaste"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Rādīt tikai minimizētās lietotnes"
+msgstr "Rādīt tikai _minimizētās lietotnes"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Rādīt lietotnes no visām darbavietām"
+msgstr "Rādīt lietotnes no _visām darbavietām"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
+#: ../plugins/iconbox/iconbox.c:946
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 msgid "Use all available _space"
-msgstr "Izmantot visu pieejamo vietu"
+msgstr "Izmantot visu pieejamo _vietu"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:705
+#: ../plugins/launcher/launcher.c:770
 msgid "New Item"
 msgstr "Jauns vienums"
 
@@ -485,34 +486,28 @@ msgid "Select an Icon for \"%s\""
 msgstr "Norādiet ikonu priekš \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "_Nosaukums"
+msgstr "_Nosaukums:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "_Apraksts"
+msgstr "_Apraksts:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
 msgid "_Icon:"
-msgstr "_Ikona"
+msgstr "_Ikona:"
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "Ko_manda"
+msgstr "Ko_manda:"
 
 #: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
 msgid "_Working Directory:"
-msgstr "_Darba direktorija"
+msgstr "_Darba direktorija:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Norādiet direktoriju"
+msgstr "Norādiet darba direktoriju"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -541,30 +536,26 @@ msgstr "Noklusētais"
 msgid "Inside Button"
 msgstr "Iekšējā poga"
 
-#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
+#: ../plugins/pager/pager.c:368
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Workspace Switcher"
-msgstr "Darbavieta %d"
+msgstr "Darbavietu pārslēdzējs"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Rindu skaits:"
+msgstr "_Rindu skaits:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Kolonnu skaits:"
+msgstr "Kolonnu _skaits:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Pārslēgt darbavietas izmantojot peles ritentiņu"
+msgstr "Pārslēgt darbavietas izmantojot peles _ritentiņu"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Rādīt dar_bavietas nosaukumus"
+msgstr "Rādīt dar_bavietu nosaukumus"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -576,14 +567,12 @@ msgid "Separator Style"
 msgstr "Atdalītāja stils"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
-msgstr "_Atstarpe"
+msgstr "_Tukšā atstarpe"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
-msgstr "_Paplašinošā atstarpe"
+msgstr "_Paplašinošā tukšā atstarpe"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -608,16 +597,14 @@ msgstr "Slēpt logus un rādīt darbavirsmu"
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Steidzamā paziņošana"
+msgstr "Paziņošanas ikonu laukums"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Sistēmas josla jau skrien šai ekrānā"
+msgstr "Paziņošanas ikonas laukums, jau skrien šai ekrānā"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
@@ -652,19 +639,16 @@ msgid "Task List"
 msgstr "Uzdevumu saraksts"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Minimālais platums:"
+msgstr "_Minimālais platums:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
 msgid "Use _flat buttons"
-msgstr "Izmantot plakanās pogas"
+msgstr "Izmantot _plakanās pogas"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Rādīt turi"
+msgstr "Rādīt _turi"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -720,12 +704,8 @@ msgid "Window List"
 msgstr "Logu saraksts"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Steidzamā paziņošana</i> mirkšķinās pogu, kad lietotnei nepieciešama "
-"uzmanība."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Steidzamā paziņošana</i> mirkšķinās pogu, kad lietotnei nepieciešama uzmanība."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -778,38 +758,35 @@ msgstr "Rādīt ikonas no visām skrejošām lietotnēm"
 
 #: ../plugins/launcher/launcher.desktop.in.in.h:2
 msgid "Program launcher with optional menu"
-msgstr "Programu palaidējs ar iespējamu izvēlni"
+msgstr "Programmu palaidējs ar iespējamu izvēlni"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Miniatūras skats uz visām virtuālajām darbavirsmām"
+msgstr "Pārslēgtiem starp virtuālajām darbavirsmām"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Pievieno atstarpi vai līniju starp paneļa vienumiem"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Slēpt logus un rādīt darbavirsmu"
+msgstr "Slēpt visus logus un rādīt darbavirsmu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
 msgstr "Rādīt darbavirsmu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Rādīt paziņošanas ikonas"
+msgstr "Laukums, kur parādās paziņošanas ikonas"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Pārslēgties starp atvērtiem logiem izmantojot pogas"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Pārslēgties starp atvērtiem logiem izmantojot izvēlnes"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
@@ -821,90 +798,62 @@ msgstr "Paneļu pārvaldnieks"
 #, fuzzy
 #~ msgid "Copyright (c) 2004-2009"
 #~ msgstr "Autortiesības (c) 2004-2007"
-
 #~ msgid "Show list of available windows"
 #~ msgstr "Rādīt sarakstu ar visiem pieejamajiem logiem"
-
 #~ msgid "Show all running applications"
 #~ msgstr "Rādīt visas skrejošās lietotnes"
-
 #~ msgid "Popup position:"
 #~ msgstr "Izlecošo logu pozīcija:"
-
 #~ msgid "Automatic"
 #~ msgstr "Automātiska"
-
 #~ msgid "Toggle desktop show/hide"
 #~ msgstr "Pārslēgt darbavirsmu rādit/slēpt"
-
 #~ msgid "Show this message and exit"
 #~ msgstr "Rādīt šo ziņu un iziet"
-
 #~ msgid "Show configuration dialog"
 #~ msgstr "Rādīt konfigurācijas dialogu"
-
 #~ msgid "Restart panels"
 #~ msgstr "Restartēt paneļus"
-
 #~ msgid "End the session"
 #~ msgstr "Beigt šo sesiju"
-
 #~ msgid "Add new items"
 #~ msgstr "Pievienot jaunus vienumus"
-
 #~ msgid "Pager"
 #~ msgstr "Peidžeris"
-
 #~ msgid "System Tray"
 #~ msgstr "Sistēmas josla"
-
 #~ msgid "Command Prompt"
 #~ msgstr "Komandu līnija"
-
 #~ msgid "X terminal emulator"
 #~ msgstr "X termināla emulators"
-
 #~ msgid "Edit text files"
 #~ msgstr "Rediģēt teksta failus"
-
 #~ msgid "Editor"
 #~ msgstr "Redaktors"
-
 #~ msgid "File Manager"
 #~ msgstr "Failu pārvaldnieks"
-
 #~ msgid "Manage files and folders"
 #~ msgstr "Pārvaldīt failus un mapes"
-
 #~ msgid "Surf the internet"
 #~ msgstr "Pārlūkot internetu"
-
 #~ msgid "Web Browser"
 #~ msgstr "Tīmekļa pārlūks"
-
 #~ msgid "Add Items"
 #~ msgstr "Pievienot vienumus"
-
 #~ msgid "Add Items to the Panel"
 #~ msgstr "Pievienot vienumus panelim"
-
 #~ msgid "Available Items"
 #~ msgstr "Pieejamie vienumi"
-
 #~ msgid "Remove Panel"
 #~ msgstr "Noņemt paneli"
-
 #~ msgid "New Panel"
 #~ msgstr "Jauns panelis"
-
 #~ msgid "Panel Actions"
 #~ msgstr "Paneļa darbības"
-
 #~ msgid "Program Launcher"
 #~ msgstr "Programmu palaidējs"
-
 #~ msgid "Failed to launch 'xfce4-panel -c'"
 #~ msgstr "Neizdevāsa izpildīt 'xfce4-panel -c'"
-
 #~ msgid "Xfce 4 Panel Manager"
 #~ msgstr "Xfce 4 paneļu pārvaldnieks"
+
