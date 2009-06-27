@@ -710,10 +710,9 @@ panel_app_run (gchar *client_id)
                  TRUE);
 
     /* session management */
-    restart_command    = g_new (gchar *, 3);
+    restart_command    = g_new (gchar *, 2);
     restart_command[0] = g_strdup ("xfce4-panel");
-    restart_command[1] = g_strdup ("-r");
-    restart_command[2] = NULL;
+    restart_command[1] = NULL;
 
     panel_app.session_client = 
         client_session_new_full (NULL, 
