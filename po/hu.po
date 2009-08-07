@@ -5,10 +5,10 @@
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: untitled\n"
+"Project-Id-Version: hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-24 20:34+0200\n"
-"PO-Revision-Date: 2009-06-26 01:41+0200\n"
+"POT-Creation-Date: 2009-07-10 17:20+0200\n"
+"PO-Revision-Date: 2009-07-10 17:44+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at gnome dot hu>\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr "Eltávolítja ezt: „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
 msgid "The item will be removed from the panel and its configuration will be lost."
-msgstr "Az elem el lesz távolítva a panelről és beállításai elvesznek."
+msgstr "Az elem el lesz távolítva a panelről, beállításai elvesznek."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:836
@@ -76,29 +76,29 @@ msgstr "Újraindítás"
 msgid "About the Xfce Panel"
 msgstr "Az Xfce panel névjegye"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:907
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Kilép az Xfce panelből?"
 
-#: ../panel/panel-app.c:905 ../panel/panel-app.c:937 ../panel/panel-app.c:970
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Xfce panel"
 
-#: ../panel/panel-app.c:908
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Nem távolíthatja el az utolsó panelt. Ki szeretne lépni a programból?"
 
-#: ../panel/panel-app.c:935
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Eltávolítja a(z) %d. panelt?"
 
-#: ../panel/panel-app.c:939
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "A kiválasztott panel és minden eleme el lesz távolítva."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:977 ../panel/panel-app.c:978
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Fejlesztő"
 
@@ -162,7 +162,7 @@ msgstr "A modul („%s”) nem nyitható meg"
 
 #: ../panel/panel-dialogs.c:611
 msgid "Add New Items"
-msgstr "Új elemek felvétele"
+msgstr "Új elemek hozzáadása"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
@@ -229,7 +229,7 @@ msgstr "_Rögzített pozíció"
 
 #: ../panel/panel-dialogs.c:1017
 msgid "Freely _moveable"
-msgstr "Szabadon _mozgatható"
+msgstr "Szabadon m_ozgatható"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -408,7 +408,7 @@ msgstr "_Teljes rendelkezésre álló terület használata"
 msgid "New Item"
 msgstr "Új elem"
 
-#: ../plugins/launcher/launcher-exec.c:563
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "„%s” indítása meghiúsult"
@@ -459,7 +459,7 @@ msgstr "Válassza ki „%s” ikonját"
 
 #: ../plugins/launcher/launcher-dialog.c:1119
 msgid "_Name:"
-msgstr "_Név:"
+msgstr "Né_v:"
 
 #: ../plugins/launcher/launcher-dialog.c:1137
 msgid "_Description:"
@@ -678,7 +678,9 @@ msgstr "Ablaklista"
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
-msgstr "A <i>Sürgősségi értesítés</i> villogtatni fogja a gombot, ha az alkalmazás a figyelmét igényli."
+msgstr ""
+"A <i>Sürgősségi értesítés</i> villogtatni fogja a gombot, ha az alkalmazás a "
+"figyelmét igényli."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -755,11 +757,11 @@ msgstr "Terület, ahol az értesítési ikonok megjelennek"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr "Átváltás a nyitott ablakok között gombok használatával"
+msgstr "Átváltás a nyitott ablakok között, gombok használatával"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr "Átváltás a nyitott ablakok között menü használatával"
+msgstr "Átváltás a nyitott ablakok között, menü használatával"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
