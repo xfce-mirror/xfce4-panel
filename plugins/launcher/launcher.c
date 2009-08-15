@@ -1032,7 +1032,7 @@ launcher_plugin_new (XfcePanelPlugin *plugin)
 #if !LAUNCHER_NEW_TOOLTIP_API
     /* create tooltips */
     launcher->tips = gtk_tooltips_new ();
-    exo_gtk_object_ref_sink (GTK_OBJECT (launcher->tips));
+    g_object_ref_sink (G_OBJECT (launcher->tips));
 #endif
 
     /* create widgets */

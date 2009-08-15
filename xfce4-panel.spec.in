@@ -9,12 +9,12 @@ Group: 			User Interface/Desktops
 BuildRoot: 		%{_tmppath}/%{name}-root
 Requires:		libxfce4util >= @LIBXFCEGUI4_REQUIRED_VERSION@
 Requires:		libxfcegui4 >= @LIBXFCEGUI4_REQUIRED_VERSION@
-Requires:		exo0.3 >= @EXO_REQUIRED_VERSION@
+Requires:		exo1 >= @EXO_REQUIRED_VERSION@
 Requires:		gtk2 >= @GTK_REQUIRED_VERSION@
 Requires:		startup-notification >= @LIBSTARTUP_NOTIFICATION_REQUIRED_VERSION@
 BuildRequires:		libxfce4util-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
 BuildRequires:		libxfcegui4-devel >= @LIBXFCEGUI4_REQUIRED_VERSION@
-BuildRequires:		exo0.3-devel >= @EXO_REQUIRED_VERSION@
+BuildRequires:		exo1-devel >= @EXO_REQUIRED_VERSION@
 BuildRequires:		gtk2-devel >= @GTK_REQUIRED_VERSION@
 
 %description
