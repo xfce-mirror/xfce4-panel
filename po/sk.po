@@ -3,18 +3,18 @@
 # This file is distributed under the same license as the xfce4-panel package.
 # Juraj Brosz <juro@jurajbrosz.info>, 2004.
 # Roman Moravcik <roman.moravcik@gmail.com>, 2006.
-#
+# Robert Hartl <hartl.robert@gmail.com>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2006-03-28 16:32+0200\n"
-"Last-Translator: Roman Moravcik <roman.moravcik@gmail.com>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"PO-Revision-Date: 2009-09-08 18:18+0200\n"
+"Last-Translator: Robert Hartl <hartl.robert@gmail.com>\n"
+"Language-Team: slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
 
 #. TRANSLATORS: This warning is printed to the commandline when
 #. an external plugin crashed
@@ -55,15 +55,13 @@ msgstr "Odstrániť"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Pridať novú položku"
+msgstr "Pridať nové položky..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "Prispôsobiť panel"
+msgstr "Prispôsobiť panel..."
 
 #: ../panel/panel.c:621 ../plugins/actions/actions.c:284
 #: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
@@ -132,30 +130,28 @@ msgid "Close all panels and end the program"
 msgstr ""
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Pridať novú položku"
+msgstr "Zobraziť dialógové okno \"Pridať nové položky\""
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
 #: ../panel/main.c:91
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Nemôžem spusiť \"%s\"."
+msgstr "Nepodarilo sa otvoriť displej"
 
 #: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
-msgstr ""
+msgstr "Tým vývojárov Xfce. Všetky práva vyhradené."
 
 #. TRANSLATORS: Bug report website, %s points to bugzilla.xfce.org
 #: ../panel/main.c:107
 #, c-format
 msgid "Please report bugs to <%s>."
-msgstr ""
+msgstr "Prosíme, nahláste chyby na <%s>."
 
 #: ../panel/main.c:151
 msgid "Xfce4-panel already running"
-msgstr ""
+msgstr "Xfce4-panel je už spustený"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -168,9 +164,8 @@ msgid "Could not open \"%s\" module"
 msgstr "Nemôžem otvoriť modul \"%s\""
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Pridať novú položku"
+msgstr "Pridať nové položky"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
@@ -185,25 +180,23 @@ msgstr ""
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "_Hľadať:"
 
 #: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
-msgstr "Normálna šírka"
+msgstr "Bežná šírka"
 
 #: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
 msgid "Full Width"
 msgstr "Plná šírka"
 
 #: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
-#, fuzzy
 msgid "Normal Height"
-msgstr "Normálna šírka"
+msgstr "Bežná výška"
 
 #: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
-#, fuzzy
 msgid "Full Height"
-msgstr "Plná šírka"
+msgstr "Plná výška"
 
 #: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
 msgid "Span Monitors"
@@ -235,14 +228,12 @@ msgid "Position"
 msgstr "Pozícia"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Pevná pozícia"
+msgstr "_Pevná pozícia"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Voľná pozícia"
+msgstr "_Voľne pohyblivá"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -250,19 +241,19 @@ msgstr "_Automatické skrývanie"
 
 #: ../panel/panel-dialogs.c:1158
 msgid "Orientation:"
-msgstr "Orientácia panelu:"
+msgstr "Orientácia:"
 
 #: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
 msgid "Horizontal"
-msgstr "Horizontálna"
+msgstr "Vodorovná"
 
 #: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
 msgid "Vertical"
-msgstr "Vertikálna"
+msgstr "Zvislá"
 
 #: ../panel/panel-dialogs.c:1181
 msgid "Handle:"
-msgstr ""
+msgstr "Uško:"
 
 #: ../panel/panel-dialogs.c:1193
 msgid "At both sides"
@@ -303,25 +294,22 @@ msgstr "Panel %d"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Odstrániť práve vybraný panel"
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Pridať novú položku"
+msgstr "Pridať nový panel"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
-#, fuzzy
 msgid "Panel"
-msgstr "Panel %d"
+msgstr "Panel"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Prispôsobiť panel"
+msgstr "Prispôsobiť nastavenia panelu"
 
 #: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
 #: ../plugins/actions/actions.c:456
@@ -334,27 +322,24 @@ msgid "Action Buttons"
 msgstr "Tlačidlá akcií"
 
 #: ../plugins/actions/actions.c:445
-#, fuzzy
 msgid "_Select action type:"
-msgstr "Vyberte typ akcie"
+msgstr "_Vyberte typ akcie:"
 
 #: ../plugins/actions/actions.c:457
 msgid "Quit + Lock screen"
-msgstr "Koniec + Uzamknúť obrazovku"
+msgstr "Ukončiť a uzamknúť obrazovku"
 
 #: ../plugins/actions/actions.c:468
-#, fuzzy
 msgid "_Orientation:"
-msgstr "Orientácia panelu:"
+msgstr "_Orientácia:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
 msgstr ""
 
 #: ../plugins/clock/clock-dialog.c:411
-#, fuzzy
 msgid "Display _seconds"
-msgstr "Zobraziť sekundy"
+msgstr "Zobraziť _sekundy"
 
 #: ../plugins/clock/clock-dialog.c:420
 msgid "Use 24-_hour clock"
@@ -362,16 +347,15 @@ msgstr "Použiť 24-hodinový čas"
 
 #: ../plugins/clock/clock-dialog.c:426
 msgid "Fl_ash time separators"
-msgstr ""
+msgstr "_Blikajúci oddeľovač"
 
 #: ../plugins/clock/clock-dialog.c:432
-#, fuzzy
 msgid "Sho_w AM/PM"
-msgstr "Zobraziť Dopoludnia/Popoludní"
+msgstr "Zobraziť vo formáte AM/PM (dopoludnia/popoludní)"
 
 #: ../plugins/clock/clock-dialog.c:441
 msgid "True _binary clock"
-msgstr ""
+msgstr "Pravé _binárne hodiny"
 
 #: ../plugins/clock/clock-dialog.c:483
 #: ../plugins/clock/clock.desktop.in.in.h:1
@@ -384,16 +368,15 @@ msgstr "Analógové"
 
 #: ../plugins/clock/clock-dialog.c:511
 msgid "Binary"
-msgstr ""
+msgstr "Binárne"
 
 #: ../plugins/clock/clock-dialog.c:512
 msgid "Digital"
 msgstr "Digitálne"
 
 #: ../plugins/clock/clock-dialog.c:513
-#, fuzzy
 msgid "LCD"
-msgstr "LED"
+msgstr "LCD"
 
 #: ../plugins/clock/clock-dialog.c:518
 #: ../plugins/systray/xfce-tray-dialogs.c:360
@@ -403,32 +386,29 @@ msgstr "Zobraziť _rám"
 #. tooltip settings
 #: ../plugins/clock/clock-dialog.c:525
 msgid "Tooltip Format"
-msgstr ""
+msgstr "Formát tipu"
 
 #. clock settings
 #: ../plugins/clock/clock-dialog.c:552
 msgid "Clock Options"
-msgstr "Predvoľby hodín"
+msgstr "Možnosti hodín"
 
 #: ../plugins/iconbox/iconbox.c:906
 #: ../plugins/iconbox/iconbox.desktop.in.in.h:1
 msgid "Icon Box"
-msgstr ""
+msgstr "Panel pre ikony"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Zobraziť len minimalizované aplikácie"
+msgstr "Zobrazovať len _minimalizované aplikácie"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Zobraziť úlohy zo všetkých _plôch"
+msgstr "Zobrazovať aplikácie zo _všetkých plôch"
 
 #: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
 msgid "Use all available _space"
-msgstr "Použi všetok dostupný priestor"
+msgstr "Použi všetok dostupný _priestor"
 
 #. TRANSLATORS: Name of a newly created launcher
 #: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
@@ -436,82 +416,77 @@ msgid "New Item"
 msgstr "Nová položka"
 
 #: ../plugins/launcher/launcher-exec.c:574
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to launch \"%s\""
-msgstr "Nemôžem spusiť \"%s\"."
+msgstr "Nepodarilo sa  spustiť \"%s\"."
 
 #: ../plugins/launcher/launcher-dialog.c:609
 msgid "No icon"
-msgstr ""
+msgstr "Bez ikony"
 
 #: ../plugins/launcher/launcher-dialog.c:631
-#, fuzzy
 msgid "Select an Application"
-msgstr "Vyberte typ akcie"
+msgstr "Vyberte aplikáciu"
 
 #: ../plugins/launcher/launcher-dialog.c:641
 msgid "All Files"
-msgstr ""
+msgstr "Všetky súbory"
 
 #: ../plugins/launcher/launcher-dialog.c:646
 msgid "Executable Files"
-msgstr ""
+msgstr "Spustiteľné súbory"
 
 #: ../plugins/launcher/launcher-dialog.c:661
 msgid "Perl Scripts"
-msgstr ""
+msgstr "Skripty jazyka Perl"
 
 #: ../plugins/launcher/launcher-dialog.c:667
 msgid "Python Scripts"
-msgstr ""
+msgstr "Skripty jazyka Python"
 
 #: ../plugins/launcher/launcher-dialog.c:673
 msgid "Ruby Scripts"
-msgstr ""
+msgstr "Skripty jazyka Ruby"
 
 #: ../plugins/launcher/launcher-dialog.c:679
 msgid "Shell Scripts"
-msgstr ""
+msgstr "Shellové skripty"
 
 #. TRANSLATORS: Fallback name for a launcher item without a name
 #: ../plugins/launcher/launcher-dialog.c:755
 #: ../plugins/launcher/launcher-dialog.c:844
 #: ../plugins/launcher/launcher-dialog.c:1337
 msgid "Unnamed"
-msgstr ""
+msgstr "Nepomenovaný"
 
 #: ../plugins/launcher/launcher-dialog.c:757
 #, c-format
 msgid "Select an Icon for \"%s\""
-msgstr ""
+msgstr "Vyberte ikonu pre \"%s\""
 
 #: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
 msgid "_Name:"
-msgstr "Názov"
+msgstr "_Názov:"
 
 #: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
 msgid "_Description:"
-msgstr "Popis"
+msgstr "_Popis:"
 
 #: ../plugins/launcher/launcher-dialog.c:1159
 msgid "_Icon:"
-msgstr ""
+msgstr "_Ikona:"
 
 #: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
 msgid "Co_mmand:"
-msgstr "Príkaz"
+msgstr "_Príkaz:"
 
 #: ../plugins/launcher/launcher-dialog.c:1204
 msgid "_Working Directory:"
-msgstr ""
+msgstr "_Pracovný adresár:"
 
 #: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
 msgid "Select a Working Directory"
-msgstr "Zvoliť monitor"
+msgstr "Vyberte pracovný adresár"
 
 #: ../plugins/launcher/launcher-dialog.c:1231
 msgid "Run in _terminal"
@@ -530,11 +505,11 @@ msgstr "Spúšťač"
 #. string as short as possible.
 #: ../plugins/launcher/launcher-dialog.c:1551
 msgid "A_rrow:"
-msgstr ""
+msgstr "Š_ípka:"
 
 #: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Default"
-msgstr "Prednastavený"
+msgstr "Predvolený"
 
 #: ../plugins/launcher/launcher-dialog.c:1562
 #, fuzzy
@@ -542,28 +517,24 @@ msgid "Inside Button"
 msgstr "Tlačidlá akcií"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Pracovná plocha %d"
+msgstr "Prepínač pracovných plôch"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Počet riadkov:"
+msgstr "Počet _riadkov:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Počet stĺpcov:"
+msgstr "Počet _stĺpcov:"
 
 #: ../plugins/pager/pager.c:418
 msgid "Switch workspaces using the mouse _wheel"
-msgstr ""
+msgstr "Prepínať pracovné plochy _kolieskom myši"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Zobraziť úlohy zo všetkých _plôch"
+msgstr "Zobraziť _názvy pracovných plôch"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -571,29 +542,28 @@ msgid "Separator or Spacing"
 msgstr "Oddeľovač alebo medzera"
 
 #: ../plugins/separator/separator.c:428
-#, fuzzy
 msgid "Separator Style"
-msgstr "Oddeľovač alebo medzera"
+msgstr "Štýl oddeľovača"
 
 #: ../plugins/separator/separator.c:436
 msgid "_Empty space"
-msgstr ""
+msgstr "_Prázdne miesto"
 
 #: ../plugins/separator/separator.c:445
 msgid "E_xpanding empty space"
-msgstr ""
+msgstr "_Rozšíriť prázdny priestor"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
-msgstr ""
+msgstr "_Čiara"
 
 #: ../plugins/separator/separator.c:463
 msgid "_Handle"
-msgstr ""
+msgstr "_Uško"
 
 #: ../plugins/separator/separator.c:472
 msgid "_Dots"
-msgstr ""
+msgstr "_Bodky"
 
 #: ../plugins/showdesktop/showdesktop.c:33
 msgid "Restore hidden windows"
@@ -606,16 +576,14 @@ msgstr "Minimalizovať všetky okná a zobraziť pracovnú plochu"
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Použiť štartovaciu _notifikáciu"
+msgstr "Oznamovacia oblasť"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Na tejto obrazovke už jedna systémová lišta beží"
+msgstr "Na tejto obrazovke je už jedna oznamovacia oblasť spustená"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
@@ -629,21 +597,19 @@ msgid "Are you sure you want to clear the list of known applications?"
 msgstr ""
 
 #: ../plugins/systray/xfce-tray-dialogs.c:371
-#, fuzzy
 msgid "_Number of rows:"
-msgstr "Počet riadkov:"
+msgstr "Počet _riadkov:"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:385
-#, fuzzy
 msgid "Hidden Applications"
-msgstr "Vyberte typ akcie"
+msgstr "Skryté aplikácie"
 
 #. TRANSALTORS: Error returned when the tray manager failed to start. This won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
 msgid "Failed to acquire manager selection for screen %d"
-msgstr ""
+msgstr "Nepodarilo sa získať správcu výberu pre obrazovku %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:143
 #: ../plugins/tasklist/tasklist-dialogs.c:208
@@ -652,18 +618,16 @@ msgid "Task List"
 msgstr "Zoznam úloh"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:172
-#, fuzzy
 msgid "_Minimum width:"
-msgstr "Minimálna šírka:"
+msgstr "_Minimálna šírka:"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:193
 msgid "Use _flat buttons"
-msgstr ""
+msgstr "Použiť _ploché tlačidlá"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
 msgid "Show _handle"
-msgstr "Zobraziť _rám"
+msgstr "Zobraziť _uško"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Show tasks from _all workspaces"
@@ -671,7 +635,7 @@ msgstr "Zobraziť úlohy zo všetkých _plôch"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:220
 msgid "Never group tasks"
-msgstr "Nikdy nespájať podobné úlohy dohromady"
+msgstr "Nikdy nespájať úlohy skupín"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:221
 msgid "Automatically group tasks"
@@ -684,12 +648,12 @@ msgstr "Vždy spájať podobné úlohy dohromady"
 #: ../plugins/windowlist/windowlist.c:263
 #, c-format
 msgid "Are you sure you want to remove workspace %d?"
-msgstr ""
+msgstr "Naozaj chcete odobrať pracovnú plochu %d?"
 
 #: ../plugins/windowlist/windowlist.c:264
 #, c-format
 msgid "Are you sure you want to remove workspace '%s'?"
-msgstr ""
+msgstr "Naozaj chcete odobrať pracovnú plochu '%s'?"
 
 #. TRANSLATORS: Fallback name in the windowlist when the workspace has no name
 #: ../plugins/windowlist/windowlist.c:476
@@ -723,48 +687,45 @@ msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
 msgstr ""
+"<i>Urgentné oznámenie</i> spôsobí blikanie tlačidla, ak aplikácia vyžaduje "
+"odozvu od užívateľa."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
-#, fuzzy
 msgid "Urgency Notification"
-msgstr "Použiť štartovaciu _notifikáciu"
+msgstr "Urgentné oznámenie"
 
 #: ../plugins/windowlist/windowlist-dialog.c:162
 msgid "_Disabled"
-msgstr ""
+msgstr "_Zakázané"
 
 #: ../plugins/windowlist/windowlist-dialog.c:171
 msgid "For _other workspaces"
-msgstr ""
+msgstr "Pre _iné pracovné plochy"
 
 #: ../plugins/windowlist/windowlist-dialog.c:180
-#, fuzzy
 msgid "For _all workspaces"
-msgstr "Zobraziť úlohy zo všetkých _plôch"
+msgstr "Pre _všetky pracovné plochy"
 
 #: ../plugins/windowlist/windowlist-dialog.c:193
-#, fuzzy
 msgid "_Icon button"
-msgstr "Tlačidlá akcií"
+msgstr "Tlačidlá s _ikonami"
 
 #: ../plugins/windowlist/windowlist-dialog.c:200
 msgid "A_rrow button"
-msgstr ""
+msgstr "Tlačilo so _šípkou"
 
 #: ../plugins/windowlist/windowlist-dialog.c:217
-#, fuzzy
 msgid "Show _windows from all workspaces"
-msgstr "Zobraziť úlohy zo všetkých _plôch"
+msgstr "Zobraziť _okná zo všetkých pracovných plôch"
 
 #: ../plugins/windowlist/windowlist-dialog.c:226
-#, fuzzy
 msgid "Show a_pplication icons"
-msgstr "Zobraziť _názvy aplikácií"
+msgstr "Zobraziť _ikony aplikácií"
 
 #: ../plugins/windowlist/windowlist-dialog.c:235
 msgid "Show wor_kspace actions"
-msgstr ""
+msgstr "Zobraziť _akcie pracovných plôch"
 
 #: ../plugins/actions/actions.desktop.in.in.h:2
 msgid "Log out or lock the screen"
@@ -783,27 +744,24 @@ msgid "Program launcher with optional menu"
 msgstr "Programový spúšťač s nastaviteľnou ponukou"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Malý náhľad všetkých virtuálnych pracovných plôch"
+msgstr "Prepínač virtuálnych pracovných plôch"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Pridá medzeru alebo riadok medzi položkami panelu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Minimalizovať všetky okná a zobraziť pracovnú plochu"
+msgstr "Skryje všetky okná a zobrazí pracovnú plochu"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
-msgstr "Zobraziť pracovnú plochu"
+msgstr "Zobrazí pracovnú plochu"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Zobrazí notifikačné ikony"
+msgstr "Oblasť pre zobrazenie oznamovacích ikon"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
