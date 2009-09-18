@@ -59,3 +59,6 @@ include $(top_srcdir)/gtk-doc.make
 # Other files to distribute
 EXTRA_DIST +=								\
 	version.xml.in
+
+# required for gtk-doc
+dist-hook: all
