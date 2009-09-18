@@ -172,4 +172,7 @@ libxfce4panel-marshal.c: libxfce4panel-marshal.h Makefile
 	&& rm -f xgen-mc
 endif
 
+# required for gtk-doc
+dist-hook: all
+
 # vi:set ts=8 sw=8 noet ai nocindent syntax=automake:
