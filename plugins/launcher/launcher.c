@@ -254,7 +254,7 @@ launcher_utility_query_tooltip (GtkWidget     *widget,
     {
         if (entry->comment)
         {
-            string = g_strdup_printf ("<b>%s</b>\n%s", entry->name, entry->comment);
+            string = g_markup_printf_escaped ("<b>%s</b>\n%s", entry->name, entry->comment);
             gtk_tooltip_set_markup (tooltip, string);
             g_free (string);
         }
