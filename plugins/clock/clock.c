@@ -121,10 +121,9 @@ static guint
 xfce_clock_util_interval_from_format (const gchar *format)
 {
     const gchar *p;
-    guint        interval = CLOCK_INTERVAL_HOUR;
 
     if (G_UNLIKELY (format == NULL))
-        return CLOCK_INTERVAL_HOUR;
+        return CLOCK_INTERVAL_MINUTE;
 
     for (p = format; *p != '\0'; ++p)
     {
@@ -140,16 +139,11 @@ xfce_clock_util_interval_from_format (const gchar *format)
                 case 'T':
                 case 'X':
                     return CLOCK_INTERVAL_SECOND;
-
-                case 'M':
-                case 'R':
-                    interval = CLOCK_INTERVAL_MINUTE;
-                    break;
             }
         }
     }
 
-    return interval;
+    return CLOCK_INTERVAL_MINUTE;
 }
 
 
@@ -171,22 +165,11 @@ xfce_clock_util_next_interval (guint timeout_interval)
     xfce_clock_util_get_localtime (&tm);
 
     /* add the interval time to the next update */
-    switch (timeout_interval)
+    if (timeout_interval == CLOCK_INTERVAL_MINUTE)
     {
-        case CLOCK_INTERVAL_HOUR:
-            /* ms to next hour */
-            interval += (60 - tm.tm_min) * CLOCK_INTERVAL_MINUTE;
-
-            /* fall-through to add the minutes */
-
-        case CLOCK_INTERVAL_MINUTE:
-            /* ms to next minute */
-            interval += (60 - tm.tm_sec) * CLOCK_INTERVAL_SECOND;
-            break;
-
-        default:
-            break;
-    }
+        /* ms to next minute */
+        interval += (60 - tm.tm_sec) * CLOCK_INTERVAL_SECOND;
+	}
 
     return interval;
 }
