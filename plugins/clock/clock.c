@@ -75,7 +75,8 @@ XFCE_PANEL_PLUGIN_REGISTER_INTERNAL (xfce_clock_plugin_construct);
 void
 xfce_clock_util_get_localtime (struct tm *tm)
 {
-    time_t now = time (0);
+    time_t now;
+    time (&now);
 
 #ifndef HAVE_LOCALTIME_R
     struct tm *tmbuf;
