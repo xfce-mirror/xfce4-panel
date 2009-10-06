@@ -43,7 +43,7 @@ static void         xfce_clock_util_get_debug_localtime  (struct tm       *tm);
 #endif
 static guint        xfce_clock_util_interval_from_format (const gchar     *format);
 static guint        xfce_clock_util_next_interval        (guint            timeout_interval);
-static gboolean     xfce_clock_tooltip_update            (gpointer         user_data);
+static void         xfce_clock_tooltip_update            (ClockPlugin     *plugin);
 static gboolean     xfce_clock_tooltip_sync_timeout      (gpointer         user_data);
 static gboolean     xfce_clock_widget_sync_timeout       (gpointer         user_data);
 static ClockPlugin *xfce_clock_plugin_init               (XfcePanelPlugin *panel_plugin);
@@ -152,26 +152,16 @@ static guint
 xfce_clock_util_next_interval (guint timeout_interval)
 {
     struct tm tm;
-    GTimeVal  timeval;
-    guint     interval;
-
-    /* get the precise time */
-    g_get_current_time (&timeval);
-
-    /* ms to next second */
-    interval = 1000 - (timeval.tv_usec / 1000);
-
-    /* get current time */
-    xfce_clock_util_get_localtime (&tm);
 
     /* add the interval time to the next update */
     if (timeout_interval == CLOCK_INTERVAL_MINUTE)
     {
         /* ms to next minute */
-        interval += (60 - tm.tm_sec) * CLOCK_INTERVAL_SECOND;
-	}
+        xfce_clock_util_get_localtime (&tm);
+        return 60 - tm.tm_sec;
+    }
 
-    return interval;
+    return 0;
 }
 
 
@@ -206,10 +196,9 @@ xfce_clock_util_strdup_strftime (const gchar *format,
 
 
 /** tooltip functions **/
-static gboolean
-xfce_clock_tooltip_update (gpointer user_data)
+static void
+xfce_clock_tooltip_update (ClockPlugin *plugin)
 {
-    ClockPlugin        *plugin = (ClockPlugin *) user_data;
     gchar              *string;
     struct tm           tm;
 #if !GTK_CHECK_VERSION (2,12,0)
@@ -221,7 +210,7 @@ xfce_clock_tooltip_update (gpointer user_data)
 #endif
 
     if (G_UNLIKELY (plugin->tooltip_format == NULL))
-        return TRUE;
+        return;
 
     /* get the local time */
     xfce_clock_util_get_localtime (&tm);
@@ -239,8 +228,41 @@ xfce_clock_tooltip_update (gpointer user_data)
 
     /* cleanup */
     g_free (string);
+}
 
-    return TRUE;
+
+
+static gboolean
+xfce_clock_tooltip_timeout (gpointer user_data)
+{
+    ClockPlugin *plugin = (ClockPlugin *) user_data;
+    struct tm    tm;
+
+    xfce_clock_tooltip_update (plugin);
+
+    if (plugin->tooltip_interval == CLOCK_INTERVAL_MINUTE)
+    {
+        xfce_clock_util_get_localtime (&tm);
+        plugin->tooltip_restart = tm.tm_sec != 0;
+    }
+
+    return !plugin->tooltip_restart;
+}
+
+
+
+static void
+xfce_clock_tooltip_timeout_destroyed (gpointer user_data)
+{
+    ClockPlugin *plugin = (ClockPlugin *) user_data;
+
+    plugin->tooltip_timeout_id = 0;
+
+    if (plugin->tooltip_restart)
+    {
+        plugin->tooltip_restart = FALSE;
+        xfce_clock_tooltip_sync (plugin);
+    }
 }
 
 
@@ -251,7 +273,9 @@ xfce_clock_tooltip_sync_timeout (gpointer user_data)
     ClockPlugin *plugin = (ClockPlugin *) user_data;
 
     /* start the tooltip update interval */
-    plugin->clock_timeout_id = g_timeout_add (plugin->tooltip_interval, xfce_clock_tooltip_update, plugin);
+    plugin->tooltip_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, plugin->tooltip_interval * 1000,
+                                                      xfce_clock_tooltip_timeout, plugin,
+                                                      xfce_clock_tooltip_timeout_destroyed);
 
     /* manual update for this timeout */
     xfce_clock_tooltip_update (plugin);
@@ -280,8 +304,18 @@ xfce_clock_tooltip_sync (ClockPlugin *plugin)
     /* get the interval to the next update */
     interval = xfce_clock_util_next_interval (plugin->tooltip_interval);
 
-    /* start the sync timeout */
-    plugin->tooltip_timeout_id = g_timeout_add (interval, xfce_clock_tooltip_sync_timeout, plugin);
+    if (interval > 0 && plugin->tooltip_interval != CLOCK_INTERVAL_SECOND)
+    {
+         /* start the sync timeout */
+         plugin->tooltip_timeout_id = g_timeout_add (interval * 1000, xfce_clock_tooltip_sync_timeout, plugin);
+     }
+     else
+     {
+         /* start the real timeout */
+         plugin->tooltip_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, plugin->tooltip_interval * 1000,
+                                                          xfce_clock_tooltip_timeout, plugin,
+                                                          xfce_clock_tooltip_timeout_destroyed);
+     }
 
     /* update the tooltip */
     xfce_clock_tooltip_update (plugin);
@@ -291,6 +325,43 @@ xfce_clock_tooltip_sync (ClockPlugin *plugin)
 
 /** clock widget functions **/
 static gboolean
+xfce_clock_widget_timeout (gpointer user_data)
+{
+    ClockPlugin *plugin = (ClockPlugin *) user_data;
+    gboolean     result;
+    struct tm    tm;
+
+    /* update the widget */
+    result = (plugin->update) (plugin->widget);
+
+    if (result && plugin->interval == CLOCK_INTERVAL_MINUTE)
+    {
+        xfce_clock_util_get_localtime (&tm);
+        plugin->restart = tm.tm_sec != 0;
+    }
+
+    return result && !plugin->restart;
+}
+
+
+
+static void
+xfce_clock_widget_timeout_destroyed (gpointer user_data)
+{
+    ClockPlugin *plugin = (ClockPlugin *) user_data;
+
+    plugin->clock_timeout_id = 0;
+
+    if (plugin->restart)
+    {
+        plugin->restart = FALSE;
+        xfce_clock_widget_sync (plugin);
+    }
+}
+
+
+
+static gboolean
 xfce_clock_widget_sync_timeout (gpointer user_data)
 {
     ClockPlugin *plugin = (ClockPlugin *) user_data;
@@ -298,7 +369,9 @@ xfce_clock_widget_sync_timeout (gpointer user_data)
     if (G_LIKELY (plugin->widget))
     {
         /* start the clock update timeout */
-        plugin->clock_timeout_id = g_timeout_add (plugin->interval, plugin->update, plugin->widget);
+        plugin->clock_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, plugin->interval * 1000,
+                                                       xfce_clock_widget_timeout, plugin,
+                                                       xfce_clock_widget_timeout_destroyed);
 
         /* manual update for this interval */
         (plugin->update) (plugin->widget);
@@ -332,8 +405,20 @@ xfce_clock_widget_sync (ClockPlugin *plugin)
         /* get the interval to the next update */
         interval = xfce_clock_util_next_interval (plugin->interval);
 
-        /* start the sync timeout */
-        plugin->clock_timeout_id = g_timeout_add (interval, xfce_clock_widget_sync_timeout, plugin);
+        if (interval > 0 && plugin->interval != CLOCK_INTERVAL_SECOND)
+        {
+            /* start the sync timeout */
+            plugin->clock_timeout_id = g_timeout_add (interval * 1000, xfce_clock_widget_sync_timeout, plugin);
+        }
+        else
+        {
+            /* start the real timeout */
+            plugin->clock_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT_IDLE, plugin->interval * 1000,
+                                                           xfce_clock_widget_timeout, plugin,
+                                                           xfce_clock_widget_timeout_destroyed);
+        }
+
+
     }
 }
 

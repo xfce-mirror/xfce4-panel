@@ -26,8 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define CLOCK_INTERVAL_SECOND (1000)
-#define CLOCK_INTERVAL_MINUTE (60 * 1000)
+#define CLOCK_INTERVAL_SECOND (1)
+#define CLOCK_INTERVAL_MINUTE (60)
 
 #define BUFFER_SIZE            256
 #define DEFAULT_TOOLTIP_FORMAT "%A %d %B %Y"
@@ -57,18 +57,18 @@ struct _ClockPlugin
     GtkWidget       *widget;
 
     /* clock update function and timeout */
+    guint            clock_timeout_id;
     GSourceFunc      update;
     guint            interval;
+    guint            restart : 1;
 
     /* tooltip interval */
     guint            tooltip_interval;
+    guint            tooltip_timeout_id;
+    guint            tooltip_restart : 1;
 
     /* clock type */
     ClockPluginMode  mode;
-
-    /* timeouts */
-    guint            clock_timeout_id;
-    guint            tooltip_timeout_id;
 
     /* settings */
     gchar           *tooltip_format;
