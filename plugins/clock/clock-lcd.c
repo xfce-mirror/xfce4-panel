@@ -327,8 +327,12 @@ xfce_clock_lcd_expose_event (GtkWidget      *widget,
         if (!lcd->show_military && ticks > 12)
             ticks -= 12;
 
-        /* queue a resize when the number of hour digits changed */
-        if (G_UNLIKELY ((ticks == 10 || ticks == 0) && tm.tm_min == 0 && tm.tm_sec == 0))
+        /* queue a resize when the number of hour digits changed,
+         * because we might miss the exact second (due to slightly delayed
+         * timeout) we queue a resize the first 3 seconds or anything in
+         * the first minute when seconds are disabled */
+        if ((ticks == 10 || ticks == 0) && tm.tm_min == 0
+            && (!lcd->show_seconds || tm.tm_sec < 3))
           gtk_widget_queue_resize (widget);
 
         if (ticks >= 10)
@@ -500,7 +504,7 @@ xfce_clock_lcd_draw_digit (cairo_t *cr,
                              { 3, 2, 1, 0, 5, 6, -1 },
                              { 4, 5, 0, 1, 2, 6, -1 },
                              { 4, 5, 0, 1, 6, -1 } };
-                             
+
     g_return_val_if_fail ((gint) number >= 0 || number <= 11, offset_x);
 
     for (i = 0; i < 9; i++)
