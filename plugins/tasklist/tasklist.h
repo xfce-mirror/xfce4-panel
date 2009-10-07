@@ -48,6 +48,7 @@ struct _TasklistPlugin
 
     /* settings */
     gint                      width;
+    guint                     fixed_width : 1;
     WnckTasklistGroupingType  grouping;
     guint                     all_workspaces : 1;
     guint                     show_label : 1;
