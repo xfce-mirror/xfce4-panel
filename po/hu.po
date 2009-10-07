@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: untitled\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-06-24 20:34+0200\n"
+"POT-Creation-Date: 2009-10-07 22:00+0200\n"
 "PO-Revision-Date: 2009-06-26 01:41+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at gnome dot hu>\n"
@@ -30,7 +30,8 @@ msgid "Remove \"%s\"?"
 msgstr "Eltávolítja ezt: „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
 msgstr "Az elem el lesz távolítva a panelről, beállításai elvesznek."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -76,29 +77,29 @@ msgstr "Újraindítás"
 msgid "About the Xfce Panel"
 msgstr "Az Xfce panel névjegye"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:907
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Kilép az Xfce panelből?"
 
-#: ../panel/panel-app.c:905 ../panel/panel-app.c:937 ../panel/panel-app.c:970
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Xfce panel"
 
-#: ../panel/panel-app.c:908
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Nem távolíthatja el az utolsó panelt. Ki szeretne lépni a programból?"
 
-#: ../panel/panel-app.c:935
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Eltávolítja a(z) %d. panelt?"
 
-#: ../panel/panel-app.c:939
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "A kiválasztott panel és minden eleme el lesz távolítva."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:977 ../panel/panel-app.c:978
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Fejlesztő"
 
@@ -261,7 +262,7 @@ msgstr "Válasszon monitort"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Megjelenés"
@@ -399,7 +400,7 @@ msgstr "Csak mi_nimalizált alkalmazások megjelenítése"
 msgid "Show applications of _all workspaces"
 msgstr "Minden m_unkaterület alkalmazásainak megjelenítése"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Use all available _space"
 msgstr "_Teljes rendelkezésre álló terület használata"
 
@@ -603,37 +604,38 @@ msgstr "Rejtett alkalmazások"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "A kezelőkiválasztás megszerzése meghiúsult a(z) %d. képernyőhöz"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:233
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Feladatlista"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
-msgid "_Minimum width:"
-msgstr "_Minimális szélesség:"
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+#, fuzzy
+msgid "Fi_xed length (pixels):"
+msgstr "_Méret (képpont):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:218
 msgid "Use _flat buttons"
 msgstr "_Lapos gombok használata"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:224
 msgid "Show _handle"
 msgstr "F_ogantyú megjelenítése"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:236
 msgid "Show tasks from _all workspaces"
 msgstr "Összes m_unkaterület feladatainak megjelenítése"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Never group tasks"
 msgstr "Ne csoportosítsa a feladatokat"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Automatically group tasks"
 msgstr "Automatikusan csoportosítsa a feladatokat"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:247
 msgid "Always group tasks"
 msgstr "Mindig csoportosítsa a feladatokat"
 
@@ -678,7 +680,9 @@ msgstr "Ablaklista"
 msgid ""
 "<i>Urgency notification</i> will blink the button when an application needs "
 "attention."
-msgstr "A <i>Sürgősségi értesítés</i> villogtatni fogja a gombot, ha az alkalmazás a figyelmét igényli."
+msgstr ""
+"A <i>Sürgősségi értesítés</i> villogtatni fogja a gombot, ha az alkalmazás a "
+"figyelmét igényli."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -765,3 +769,5 @@ msgstr "Átváltás a nyitott ablakok között, menü használatával"
 msgid "Panel Manager"
 msgstr "Panelkezelő"
 
+#~ msgid "_Minimum width:"
+#~ msgstr "_Minimális szélesség:"

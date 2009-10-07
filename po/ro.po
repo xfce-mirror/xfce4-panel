@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-04-20 18:53+0300\n"
+"POT-Creation-Date: 2009-10-07 22:00+0200\n"
 "PO-Revision-Date: 2009-04-20 18:20+0300\n"
 "Last-Translator: Mișu Moldovan <dumol@xfce.org>\n"
 "Language-Team: Romanian <xfce-i18n@xfce.org>\n"
@@ -77,31 +77,31 @@ msgstr "Repornire"
 msgid "About the Xfce Panel"
 msgstr "Despre panoul Xfce"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:907
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Doriți să închideți panoul Xfce?"
 
-#: ../panel/panel-app.c:905 ../panel/panel-app.c:937 ../panel/panel-app.c:970
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Panou Xfce"
 
-#: ../panel/panel-app.c:908
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "Ultimul panou nu poate fi închis pur și simplu. Doriți să terminați "
 "aplicația xfce4-panel?"
 
-#: ../panel/panel-app.c:935
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Doriți să ștergeți panoul „%d”?"
 
-#: ../panel/panel-app.c:939
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "Panoul selectat și toate elementele sale vor fi șterse."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:977 ../panel/panel-app.c:978
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Dezvoltator"
 
@@ -264,7 +264,7 @@ msgstr "Selectare monitor"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Aspect"
@@ -402,7 +402,7 @@ msgstr "Arată doar aplicațiile _minimizate (ascunse)"
 msgid "Show applications of _all workspaces"
 msgstr "Arată aplicațiile din _toate spațiile de lucru"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Use all available _space"
 msgstr "Utilizează tot _spațiul disponibil"
 
@@ -411,7 +411,7 @@ msgstr "Utilizează tot _spațiul disponibil"
 msgid "New Item"
 msgstr "Element nou"
 
-#: ../plugins/launcher/launcher-exec.c:576
+#: ../plugins/launcher/launcher-exec.c:563
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Nu s-a putut porni „%s”"
@@ -606,37 +606,38 @@ msgstr "Aplicații ascunse"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Nu s-a putut obține selecția manager pentru ecranul %d"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:233
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Listă de aplicații"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
-msgid "_Minimum width:"
-msgstr "Lățime _minimă:"
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+#, fuzzy
+msgid "Fi_xed length (pixels):"
+msgstr "_Mărime (pixeli):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:218
 msgid "Use _flat buttons"
 msgstr "Utilizează _butoane plate"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:224
 msgid "Show _handle"
 msgstr "Arată ca_drul"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:236
 msgid "Show tasks from _all workspaces"
 msgstr "_Arată aplicațiile din toate spațiile de lucru"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Never group tasks"
 msgstr "Nu grupa niciodată aplicațiile"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Automatically group tasks"
 msgstr "Grupează automat aplicațiile"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:247
 msgid "Always group tasks"
 msgstr "Grupează întotdeauna aplicațiile"
 
@@ -769,3 +770,6 @@ msgstr "Schimbați fereastra activă folosind un meniu"
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Manager de panouri"
+
+#~ msgid "_Minimum width:"
+#~ msgstr "Lățime _minimă:"

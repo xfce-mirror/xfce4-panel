@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 23:16+0100\n"
+"POT-Creation-Date: 2009-10-07 22:00+0200\n"
 "PO-Revision-Date: 2006-09-02 04:46+0300\n"
 "Last-Translator: Yuval Tanny <tanai@int.gov.il>\n"
 "Language-Team: Hebrew\n"
@@ -68,8 +68,8 @@ msgstr "הוסף פריט חדש"
 msgid "Customize Panel..."
 msgstr "התאם אישית את הלוח"
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "יציאה"
 
@@ -81,29 +81,29 @@ msgstr "אתחל"
 msgid "About the Xfce Panel"
 msgstr "אודות לוח Xfce"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "לצאת מלוח Xfce?"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "לוח Xfce"
 
-#: ../panel/panel-app.c:903
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "אין אפשרות להסיר את הלוח האחרון, האם ברצונך לצאת מהתוכנית?"
 
-#: ../panel/panel-app.c:930
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "להסיר את לוח \"%d\"?"
 
-#: ../panel/panel-app.c:934
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "הלוח הנבחר וכל הפריטים בו יוסרו."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "מפתח"
 
@@ -211,22 +211,22 @@ msgid "Span Monitors"
 msgstr "החלף מסכים"
 
 #: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../plugins/launcher/launcher-dialog.c:1555
 msgid "Left"
 msgstr "שמאל"
 
 #: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1556
 msgid "Right"
 msgstr "ימין"
 
 #: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Top"
 msgstr "עליון"
 
 #: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Bottom"
 msgstr "תחתון"
 
@@ -253,11 +253,11 @@ msgstr "_הסתרה אוטומטית"
 msgid "Orientation:"
 msgstr "כיוון:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "אופקי"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "אנכי"
 
@@ -275,7 +275,7 @@ msgstr "בחירת צג"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "מראה"
@@ -323,26 +323,26 @@ msgstr "לוח"
 msgid "Customize the panel settings"
 msgstr "התאם אישית את הלוח"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:456
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "נעילת מסך"
 
-#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.c:416
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "כפתורי פעולות"
 
-#: ../plugins/actions/actions.c:445
+#: ../plugins/actions/actions.c:444
 #, fuzzy
 msgid "_Select action type:"
 msgstr "בחירת סוג פעולה:"
 
-#: ../plugins/actions/actions.c:457
+#: ../plugins/actions/actions.c:456
 msgid "Quit + Lock screen"
 msgstr "יציאה + נעילת מסך"
 
-#: ../plugins/actions/actions.c:468
+#: ../plugins/actions/actions.c:467
 #, fuzzy
 msgid "_Orientation:"
 msgstr "כיוון:"
@@ -425,120 +425,120 @@ msgstr "הצגת יישומים ממוזערים בלבד"
 msgid "Show applications of _all workspaces"
 msgstr "הצג יישומים מכל סביבות העבודה"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:211
 #, fuzzy
 msgid "Use all available _space"
 msgstr "השתמש במלוא השטח"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "פריט חדש"
 
-#: ../plugins/launcher/launcher-exec.c:574
+#: ../plugins/launcher/launcher-exec.c:563
 #, fuzzy, c-format
 msgid "Failed to launch \"%s\""
 msgstr "כשל בהרצת \"%s\"."
 
-#: ../plugins/launcher/launcher-dialog.c:609
+#: ../plugins/launcher/launcher-dialog.c:606
 msgid "No icon"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:631
+#: ../plugins/launcher/launcher-dialog.c:628
 #, fuzzy
 msgid "Select an Application"
 msgstr "בחירת סוג פעולה:"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:638
 msgid "All Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:646
+#: ../plugins/launcher/launcher-dialog.c:643
 msgid "Executable Files"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:661
+#: ../plugins/launcher/launcher-dialog.c:658
 msgid "Perl Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:664
 msgid "Python Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:673
+#: ../plugins/launcher/launcher-dialog.c:670
 msgid "Ruby Scripts"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:679
+#: ../plugins/launcher/launcher-dialog.c:676
 msgid "Shell Scripts"
 msgstr ""
 
 #. TRANSLATORS: Fallback name for a launcher item without a name
-#: ../plugins/launcher/launcher-dialog.c:755
-#: ../plugins/launcher/launcher-dialog.c:844
-#: ../plugins/launcher/launcher-dialog.c:1337
+#: ../plugins/launcher/launcher-dialog.c:752
+#: ../plugins/launcher/launcher-dialog.c:841
+#: ../plugins/launcher/launcher-dialog.c:1334
 msgid "Unnamed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:757
+#: ../plugins/launcher/launcher-dialog.c:754
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1119
 #, fuzzy
 msgid "_Name:"
 msgstr "שם"
 
-#: ../plugins/launcher/launcher-dialog.c:1140
+#: ../plugins/launcher/launcher-dialog.c:1137
 #, fuzzy
 msgid "_Description:"
 msgstr "תיאור"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1156
 #, fuzzy
 msgid "_Icon:"
 msgstr "תיבת סמלים"
 
-#: ../plugins/launcher/launcher-dialog.c:1177
+#: ../plugins/launcher/launcher-dialog.c:1174
 #, fuzzy
 msgid "Co_mmand:"
 msgstr "פקודה"
 
-#: ../plugins/launcher/launcher-dialog.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1201
 msgid "_Working Directory:"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:1210
+#: ../plugins/launcher/launcher-dialog.c:1207
 #, fuzzy
 msgid "Select a Working Directory"
 msgstr "בחירת צג"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1228
 msgid "Run in _terminal"
 msgstr "הרץ בתוך _מסוף"
 
-#: ../plugins/launcher/launcher-dialog.c:1247
+#: ../plugins/launcher/launcher-dialog.c:1244
 msgid "Use _startup notification"
 msgstr "השתמש בהתראת _פתיחה"
 
-#: ../plugins/launcher/launcher-dialog.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1518
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "משגר"
 
 #. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
 #. string as short as possible.
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1548
 #, fuzzy
 msgid "A_rrow:"
 msgstr "לחצן _חץ"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1554
 msgid "Default"
 msgstr "ברירת מחדל"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1559
 #, fuzzy
 msgid "Inside Button"
 msgstr "לחצן _סמל"
@@ -599,11 +599,11 @@ msgstr "ידית:"
 msgid "_Dots"
 msgstr ""
 
-#: ../plugins/showdesktop/showdesktop.c:33
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr "שחזר חלונות נסתרים"
 
-#: ../plugins/showdesktop/showdesktop.c:34
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr "הסתר חלונות והצג את שולחן העבודה"
 
@@ -650,40 +650,40 @@ msgstr "בחירת סוג פעולה:"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr ""
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:233
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "רשימת משימות"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
+#: ../plugins/tasklist/tasklist-dialogs.c:192
 #, fuzzy
-msgid "_Minimum width:"
-msgstr "רוחב מינימלי:"
+msgid "Fi_xed length (pixels):"
+msgstr "גודל (פיקסלים):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:218
 #, fuzzy
 msgid "Use _flat buttons"
 msgstr "השתמש בלחצנים שטוחים"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:224
 #, fuzzy
 msgid "Show _handle"
 msgstr "הצג _מסגרת"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:236
 msgid "Show tasks from _all workspaces"
 msgstr "הצג משימות מ_כל סביבות העבודה"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Never group tasks"
 msgstr "לעולם אל תקבץ משימות"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Automatically group tasks"
 msgstr "קבץ משימות באופן אוטומטי"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:247
 msgid "Always group tasks"
 msgstr "תמיד קבץ משימות"
 
@@ -817,6 +817,10 @@ msgstr ""
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "מנהל הלוח"
+
+#, fuzzy
+#~ msgid "_Minimum width:"
+#~ msgstr "רוחב מינימלי:"
 
 #~ msgid "Show list of available windows"
 #~ msgstr "הצג רשימת חלונות זמינים"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 23:16+0100\n"
+"POT-Creation-Date: 2009-10-07 22:00+0200\n"
 "PO-Revision-Date: 2009-01-27 22:49+0700\n"
 "Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -28,7 +28,8 @@ msgid "Remove \"%s\"?"
 msgstr "Hapus \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
 msgstr "Item akan dihapus dari panel dan konfigurasinya akan hilang."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -52,21 +53,17 @@ msgid "Remove"
 msgstr "Hapus"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:903
-#: ../panel/panel.c:606
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
 msgid "Add New Items..."
 msgstr "Tambah Item Baru..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915
-#: ../panel/panel.c:595
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
 msgid "Customize Panel..."
 msgstr "Kustomisasi Panel..."
 
-#: ../panel/panel.c:621
-#: ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318
-#: ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "Keluar"
 
@@ -78,33 +75,29 @@ msgstr "Start Ulang"
 msgid "About the Xfce Panel"
 msgstr "Tentang Panel Xfce"
 
-#: ../panel/panel-app.c:259
-#: ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Keluar Panel Xfce?"
 
-#: ../panel/panel-app.c:900
-#: ../panel/panel-app.c:932
-#: ../panel/panel-app.c:965
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: ../panel/panel-app.c:903
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Anda tak dapat menghapus panel terakhir. Anda ingin keluar program?"
 
-#: ../panel/panel-app.c:930
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Hapus Panel \"%d\"?"
 
-#: ../panel/panel-app.c:934
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "Panel terpilih dan seluruh itemnya akan dihapus."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972
-#: ../panel/panel-app.c:973
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Pengembang"
 
@@ -184,52 +177,43 @@ msgstr ""
 msgid "_Search:"
 msgstr "Te_lusuri:"
 
-#: ../panel/panel-dialogs.c:881
-#: ../panel/panel-dialogs.c:1117
+#: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
 msgstr "Lebar Normal"
 
-#: ../panel/panel-dialogs.c:882
-#: ../panel/panel-dialogs.c:1118
+#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
 msgid "Full Width"
 msgstr "Lebar Penuh"
 
-#: ../panel/panel-dialogs.c:886
-#: ../panel/panel-dialogs.c:1122
+#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
 msgid "Normal Height"
 msgstr "Tinggi Normal"
 
-#: ../panel/panel-dialogs.c:887
-#: ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
 msgid "Full Height"
 msgstr "Tinggi Penuh"
 
-#: ../panel/panel-dialogs.c:895
-#: ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
 msgid "Span Monitors"
 msgstr "Rentangkan Monitor"
 
-#: ../panel/panel-dialogs.c:958
-#: ../panel/panel-dialogs.c:1197
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
+#: ../plugins/launcher/launcher-dialog.c:1555
 msgid "Left"
 msgstr "Kiri"
 
-#: ../panel/panel-dialogs.c:960
-#: ../panel/panel-dialogs.c:1199
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
+#: ../plugins/launcher/launcher-dialog.c:1556
 msgid "Right"
 msgstr "Kanan"
 
-#: ../panel/panel-dialogs.c:965
-#: ../panel/panel-dialogs.c:1204
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Top"
 msgstr "Atas"
 
-#: ../panel/panel-dialogs.c:967
-#: ../panel/panel-dialogs.c:1206
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Bottom"
 msgstr "Bawah"
 
@@ -254,13 +238,11 @@ msgstr "Otomatis _sembunyi"
 msgid "Orientation:"
 msgstr "Orientasi:"
 
-#: ../panel/panel-dialogs.c:1170
-#: ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1172
-#: ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "Vertikal"
 
@@ -276,10 +258,9 @@ msgstr "Di kedua sisi"
 msgid "Select Monitor"
 msgstr "Pilih Monitor"
 
-#: ../panel/panel-dialogs.c:1401
-#: ../plugins/clock/clock-dialog.c:500
+#: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Tampilan"
@@ -296,8 +277,7 @@ msgstr "_Transparansi (%):"
 msgid "Make active panel _opaque"
 msgstr "Buat panel aktif _opaque"
 
-#: ../panel/panel-dialogs.c:1514
-#: ../panel/panel-dialogs.c:1550
+#: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
 #, c-format
 msgid "Panel %d"
@@ -323,26 +303,25 @@ msgstr "Panel"
 msgid "Customize the panel settings"
 msgstr "Kustomisasi pengaturan panel"
 
-#: ../plugins/actions/actions.c:265
-#: ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:456
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "Kunci layar"
 
-#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.c:416
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Tombol Aksi"
 
-#: ../plugins/actions/actions.c:445
+#: ../plugins/actions/actions.c:444
 msgid "_Select action type:"
 msgstr "P_ilih tipe aksi:"
 
-#: ../plugins/actions/actions.c:457
+#: ../plugins/actions/actions.c:456
 msgid "Quit + Lock screen"
 msgstr "Keluar + Kunci layar"
 
-#: ../plugins/actions/actions.c:468
+#: ../plugins/actions/actions.c:467
 msgid "_Orientation:"
 msgstr "_Orientasi:"
 
@@ -419,119 +398,116 @@ msgstr "Hanya tampilkan aplikasi _diminimalkan"
 msgid "Show applications of _all workspaces"
 msgstr "Tampilkan _aplikasi di semua ruang kerja"
 
-#: ../plugins/iconbox/iconbox.c:946
-#: ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Use all available _space"
 msgstr "Gunakan _semua ruang tersedia"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705
-#: ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "Item Baru"
 
-#: ../plugins/launcher/launcher-exec.c:574
+#: ../plugins/launcher/launcher-exec.c:563
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Gagal menjalankan \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:609
+#: ../plugins/launcher/launcher-dialog.c:606
 msgid "No icon"
 msgstr "Tak ada ikon"
 
-#: ../plugins/launcher/launcher-dialog.c:631
+#: ../plugins/launcher/launcher-dialog.c:628
 msgid "Select an Application"
 msgstr "Pilih Aplikasi"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:638
 msgid "All Files"
 msgstr "Semua Berkas"
 
-#: ../plugins/launcher/launcher-dialog.c:646
+#: ../plugins/launcher/launcher-dialog.c:643
 msgid "Executable Files"
 msgstr "Berkas Dapat Dieksekusi"
 
-#: ../plugins/launcher/launcher-dialog.c:661
+#: ../plugins/launcher/launcher-dialog.c:658
 msgid "Perl Scripts"
 msgstr "Skrip Perl"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:664
 msgid "Python Scripts"
 msgstr "Skrip Python"
 
-#: ../plugins/launcher/launcher-dialog.c:673
+#: ../plugins/launcher/launcher-dialog.c:670
 msgid "Ruby Scripts"
 msgstr "Skrip Ruby"
 
-#: ../plugins/launcher/launcher-dialog.c:679
+#: ../plugins/launcher/launcher-dialog.c:676
 msgid "Shell Scripts"
 msgstr "Skrip Shell"
 
 #. TRANSLATORS: Fallback name for a launcher item without a name
-#: ../plugins/launcher/launcher-dialog.c:755
-#: ../plugins/launcher/launcher-dialog.c:844
-#: ../plugins/launcher/launcher-dialog.c:1337
+#: ../plugins/launcher/launcher-dialog.c:752
+#: ../plugins/launcher/launcher-dialog.c:841
+#: ../plugins/launcher/launcher-dialog.c:1334
 msgid "Unnamed"
 msgstr "Tak bernama"
 
-#: ../plugins/launcher/launcher-dialog.c:757
+#: ../plugins/launcher/launcher-dialog.c:754
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Pilih Ikon untuk \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1119
 msgid "_Name:"
 msgstr "_Nama:"
 
-#: ../plugins/launcher/launcher-dialog.c:1140
+#: ../plugins/launcher/launcher-dialog.c:1137
 msgid "_Description:"
 msgstr "_Deskripsi:"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1156
 msgid "_Icon:"
 msgstr "_Ikon:"
 
-#: ../plugins/launcher/launcher-dialog.c:1177
+#: ../plugins/launcher/launcher-dialog.c:1174
 msgid "Co_mmand:"
 msgstr "Perin_tah:"
 
-#: ../plugins/launcher/launcher-dialog.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1201
 msgid "_Working Directory:"
 msgstr "_Direktori Kerja:"
 
-#: ../plugins/launcher/launcher-dialog.c:1210
+#: ../plugins/launcher/launcher-dialog.c:1207
 msgid "Select a Working Directory"
 msgstr "Pilih Direktori Kerja"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1228
 msgid "Run in _terminal"
 msgstr "Jalankan di _terminal"
 
-#: ../plugins/launcher/launcher-dialog.c:1247
+#: ../plugins/launcher/launcher-dialog.c:1244
 msgid "Use _startup notification"
 msgstr "Gunakan _pemberitahuan hidupkan"
 
-#: ../plugins/launcher/launcher-dialog.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1518
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Peluncur"
 
 #. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
 #. string as short as possible.
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1548
 msgid "A_rrow:"
 msgstr "Pana_h"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1554
 msgid "Default"
 msgstr "Standar"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Inside Button"
 msgstr "Dalam Tombol"
 
-#: ../plugins/pager/pager.c:368
-#: ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Workspace Switcher"
 msgstr "Penukar Ruang kerja"
 
@@ -580,11 +556,11 @@ msgstr "_Penanganan"
 msgid "_Dots"
 msgstr "_Titik"
 
-#: ../plugins/showdesktop/showdesktop.c:33
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr "Simpan ulang jendela tersembunyi"
 
-#: ../plugins/showdesktop/showdesktop.c:34
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr "Sembunyikan jendela dan tampilkan destop"
 
@@ -626,37 +602,38 @@ msgstr "Aplikasi Tersembunyi"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Gagal mengakuisisi manajer seleksi untuk layar %d"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:233
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Senarai Tugas"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
-msgid "_Minimum width:"
-msgstr "_Lebar minimum:"
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+#, fuzzy
+msgid "Fi_xed length (pixels):"
+msgstr "_Ukuran (piksel):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:218
 msgid "Use _flat buttons"
 msgstr "Gunakan _tombol rata"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:224
 msgid "Show _handle"
 msgstr "Tampilkan _penanganan"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:236
 msgid "Show tasks from _all workspaces"
 msgstr "Tampilkan tugas dari semu_a ruang kerja"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Never group tasks"
 msgstr "Jangan kelompokkan tugas"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Automatically group tasks"
 msgstr "Otomatis kelompokkan tugas"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:247
 msgid "Always group tasks"
 msgstr "Selalu kelompokkan tugas"
 
@@ -698,8 +675,12 @@ msgid "Window List"
 msgstr "Senarai Jendela"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
-msgstr "<i>Pemberitahuan Penting</i> akan mengedipkan tombol ketika sebuah aplikasi membutuhkan perhatian."
+msgid ""
+"<i>Urgency notification</i> will blink the button when an application needs "
+"attention."
+msgstr ""
+"<i>Pemberitahuan Penting</i> akan mengedipkan tombol ketika sebuah aplikasi "
+"membutuhkan perhatian."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -786,68 +767,99 @@ msgstr "Tukar diantara jendela yang terbuka dengan menggunakan menu"
 msgid "Panel Manager"
 msgstr "Manajer Panel"
 
+#~ msgid "_Minimum width:"
+#~ msgstr "_Lebar minimum:"
+
 #~ msgid "Unknown"
 #~ msgstr "Tak diketahui"
 
 #, fuzzy
 #~ msgid "Copyright (c) 2004-2009"
 #~ msgstr "Hak Cipta (c) 2004-2007"
+
 #~ msgid "Show list of available windows"
 #~ msgstr "Tampilkan senarai jendela yang tersedia"
+
 #~ msgid "Show all running applications"
 #~ msgstr "Tampilkan semua aplikasi berjalan"
+
 #~ msgid "Popup position:"
 #~ msgstr "Posisi muncul:"
+
 #~ msgid "Automatic"
 #~ msgstr "Otomatis"
+
 #~ msgid "Toggle desktop show/hide"
 #~ msgstr "Ubah tampilkan/sembunyikan destop"
+
 #~ msgid "Show this message and exit"
 #~ msgstr "Tampilkan pesan ini dan keluar"
+
 #~ msgid "Show configuration dialog"
 #~ msgstr "Tampilkan dialog konfigurasi"
+
 #~ msgid "Restart panels"
 #~ msgstr "Start ulang panel"
+
 #~ msgid "End the session"
 #~ msgstr "Akhiri sesi"
+
 #~ msgid "Add new items"
 #~ msgstr "Tambah item baru"
+
 #~ msgid "Pager"
 #~ msgstr "Pemisah"
+
 #~ msgid "System Tray"
 #~ msgstr "Baki Sistem"
+
 #~ msgid "Command Prompt"
 #~ msgstr "Siap Ketik Perintah"
+
 #~ msgid "X terminal emulator"
 #~ msgstr "Emulator terminal X"
+
 #~ msgid "Edit text files"
 #~ msgstr "Sunting berkas teks"
+
 #~ msgid "Editor"
 #~ msgstr "Penyunting"
+
 #~ msgid "File Manager"
 #~ msgstr "Manajer Berkas"
+
 #~ msgid "Manage files and folders"
 #~ msgstr "Atur berkas dan folder"
+
 #~ msgid "Surf the internet"
 #~ msgstr "Jelajahi internet"
+
 #~ msgid "Web Browser"
 #~ msgstr "Peramban Web"
+
 #~ msgid "Add Items"
 #~ msgstr "Tambah Item"
+
 #~ msgid "Add Items to the Panel"
 #~ msgstr "Tambah Item ke Panel"
+
 #~ msgid "Available Items"
 #~ msgstr "Item Tersedia"
+
 #~ msgid "Remove Panel"
 #~ msgstr "Hapus Panel"
+
 #~ msgid "New Panel"
 #~ msgstr "Panel Baru"
+
 #~ msgid "Panel Actions"
 #~ msgstr "Aksi Panel"
+
 #~ msgid "Program Launcher"
 #~ msgstr "Peluncur Program"
+
 #~ msgid "Failed to launch 'xfce4-panel -c'"
 #~ msgstr "Gagal menjalankan 'xfce4-panel -c'"
+
 #~ msgid "Xfce 4 Panel Manager"
 #~ msgstr "Manajer Panel Xfce 4"
-
