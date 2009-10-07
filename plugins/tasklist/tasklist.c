@@ -292,8 +292,8 @@ tasklist_plugin_size_request (TasklistPlugin *tasklist,
             size += TASKLIST_HANDLE_SIZE;
 
         /* use the requested size when it is bigger then the prefered size */
-        if (tasklist->width > size)
-           size = tasklist->width;
+        if (tasklist->fixed_width)
+            size = MAX (100, tasklist->width);
 
         /* get plugin orientation */
         orientation = xfce_panel_plugin_get_orientation (tasklist->panel_plugin);
@@ -355,6 +355,7 @@ tasklist_plugin_read (TasklistPlugin *tasklist)
     tasklist->flat_buttons   = TRUE;
     tasklist->show_handles   = TRUE;
     tasklist->width          = 300;
+    tasklist->fixed_width    = FALSE;
 
     /* get rc file name */
     file = xfce_panel_plugin_lookup_rc_file (tasklist->panel_plugin);
@@ -375,6 +376,7 @@ tasklist_plugin_read (TasklistPlugin *tasklist)
             tasklist->flat_buttons   = xfce_rc_read_bool_entry (rc, "flat_buttons", tasklist->flat_buttons);
             tasklist->show_handles   = xfce_rc_read_bool_entry (rc, "show_handles", tasklist->show_handles);
             tasklist->width          = xfce_rc_read_int_entry  (rc, "width",tasklist->width);
+            tasklist->fixed_width    = xfce_rc_read_bool_entry (rc, "fixed_width", tasklist->fixed_width);
 
             /* only set expand flag if xinerama is used */
             if (tasklist_using_xinerama (tasklist->panel_plugin))
@@ -414,6 +416,7 @@ tasklist_plugin_write (TasklistPlugin *tasklist)
             xfce_rc_write_bool_entry (rc, "expand", tasklist->expand);
             xfce_rc_write_bool_entry (rc, "flat_buttons", tasklist->flat_buttons);
             xfce_rc_write_bool_entry (rc, "show_handles", tasklist->show_handles);
+            xfce_rc_write_bool_entry (rc, "fixed_width", tasklist->fixed_width);
 
             /* close the rc file */
             xfce_rc_close (rc);

@@ -100,9 +100,20 @@ tasklist_show_handle_toggled (GtkToggleButton *tb,
     tasklist->show_handles = gtk_toggle_button_get_active (tb);
 
     if (tasklist->show_handles)
-    	gtk_widget_show (tasklist->handle);
+        gtk_widget_show (tasklist->handle);
     else
-    	gtk_widget_hide (tasklist->handle);
+        gtk_widget_hide (tasklist->handle);
+}
+
+
+
+static void
+tasklist_fixed_width_toggled (GtkToggleButton *tb,
+                              TasklistPlugin  *tasklist)
+{
+    tasklist->fixed_width = gtk_toggle_button_get_active (tb);
+
+    gtk_widget_queue_resize (GTK_WIDGET (tasklist->panel_plugin));
 }
 
 
@@ -114,6 +125,15 @@ tasklist_width_changed (GtkSpinButton  *sb,
     tasklist->width = gtk_spin_button_get_value_as_int (sb);
 
     gtk_widget_queue_resize (GTK_WIDGET (tasklist->panel_plugin));
+}
+
+
+
+static void
+tasklist_width_sensitive (GtkToggleButton *tb,
+                          GtkWidget       *sb)
+{
+    gtk_widget_set_sensitive (sb, gtk_toggle_button_get_active (tb));
 }
 
 
@@ -169,9 +189,11 @@ tasklist_dialogs_configure (TasklistPlugin *tasklist)
     hbox = gtk_hbox_new (FALSE, 12);
     gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-    label = gtk_label_new_with_mnemonic (_("_Minimum width:"));
-    gtk_misc_set_alignment (GTK_MISC (label), 0, 0.5);
-    gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
+    cb = gtk_check_button_new_with_mnemonic (_("Fi_xed length (pixels):"));
+    gtk_box_pack_start (GTK_BOX (hbox), cb, FALSE, FALSE, 0);
+    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (cb), tasklist->fixed_width);
+    g_signal_connect (G_OBJECT (cb), "toggled",
+                      G_CALLBACK (tasklist_fixed_width_toggled), tasklist);
 
     /* an arbitrary max of 4000 should be future proof, right? */
     spin = gtk_spin_button_new_with_range (100, 4000, 10);
@@ -180,6 +202,9 @@ tasklist_dialogs_configure (TasklistPlugin *tasklist)
     gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
     g_signal_connect (G_OBJECT (spin), "value-changed",
                       G_CALLBACK (tasklist_width_changed), tasklist);
+    gtk_widget_set_sensitive (spin, tasklist->fixed_width);
+    g_signal_connect (G_OBJECT (cb), "toggled",
+                      G_CALLBACK (tasklist_width_sensitive), spin);
 
     if (tasklist_using_xinerama (tasklist->panel_plugin))
     {
@@ -220,7 +245,7 @@ tasklist_dialogs_configure (TasklistPlugin *tasklist)
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Never group tasks"));
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Automatically group tasks"));
     gtk_combo_box_append_text (GTK_COMBO_BOX (cb), _("Always group tasks"));
-    
+
     /* keep order above in sync with WnckTasklistGroupingType */
 
     gtk_combo_box_set_active (GTK_COMBO_BOX (cb), tasklist->grouping);
