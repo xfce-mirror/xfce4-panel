@@ -156,7 +156,7 @@ void
 tasklist_dialogs_configure (TasklistPlugin *tasklist)
 {
     GtkWidget *dlg, *mainvbox, *vbox, *frame, *cb,
-              *hbox, *label, *spin;
+              *hbox, *spin;
 
     xfce_panel_plugin_block_menu (tasklist->panel_plugin);
 
@@ -199,7 +199,6 @@ tasklist_dialogs_configure (TasklistPlugin *tasklist)
     spin = gtk_spin_button_new_with_range (100, 4000, 10);
     gtk_box_pack_start (GTK_BOX (hbox), spin, FALSE, FALSE, 0);
     gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), tasklist->width);
-    gtk_label_set_mnemonic_widget (GTK_LABEL (label), spin);
     g_signal_connect (G_OBJECT (spin), "value-changed",
                       G_CALLBACK (tasklist_width_changed), tasklist);
     gtk_widget_set_sensitive (spin, tasklist->fixed_width);
