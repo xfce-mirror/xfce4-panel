@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 23:16+0100\n"
+"POT-Creation-Date: 2009-10-16 14:27+0200\n"
 "PO-Revision-Date: 2007-09-21 00:43+0200\n"
 "Last-Translator: Mohamed Magdy <mohamed.m.k@gmail.com>\n"
 "Language-Team: Arabeyes Translation & Documentation <admin@arabeyes.org>\n"
@@ -65,8 +65,8 @@ msgstr "أضف شيء جديد"
 msgid "Customize Panel..."
 msgstr "خصص الشريط"
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "خروج"
 
@@ -78,29 +78,29 @@ msgstr "أعد البدأ"
 msgid "About the Xfce Panel"
 msgstr "حول شريط اكسفس"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "اخرج من شريط اكسفس؟"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "شريط Xfce"
 
-#: ../panel/panel-app.c:903
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "لا يمكنك حذف الائحة الأخيرة. هل تود إنهاء البرنامج؟"
 
-#: ../panel/panel-app.c:930
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "ازل الشريط \"%d\"?"
 
-#: ../panel/panel-app.c:934
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "الائخة المختارة وجميع خياراتها سيتم حذفها."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "مطوّر"
 
@@ -208,22 +208,22 @@ msgid "Span Monitors"
 msgstr "الشاشات"
 
 #: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../plugins/launcher/launcher-dialog.c:1555
 msgid "Left"
 msgstr "يسار"
 
 #: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1556
 msgid "Right"
 msgstr "يمين"
 
 #: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Top"
 msgstr "الأعلى"
 
 #: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Bottom"
 msgstr "الأسفل"
 
@@ -250,11 +250,11 @@ msgstr "إخفاء تلقائي"
 msgid "Orientation:"
 msgstr "الاتجاه :"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "أفقي"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "عمودي"
 
@@ -272,7 +272,7 @@ msgstr "اختيار الشاشة"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "مظهر"
@@ -320,26 +320,26 @@ msgstr "الشريط"
 msgid "Customize the panel settings"
 msgstr "خصص الشريط"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:456
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "إغلاق الشاشة"
 
-#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.c:416
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "زر العمل"
 
-#: ../plugins/actions/actions.c:445
+#: ../plugins/actions/actions.c:444
 #, fuzzy
 msgid "_Select action type:"
 msgstr "إختر نوع أمر"
 
-#: ../plugins/actions/actions.c:457
+#: ../plugins/actions/actions.c:456
 msgid "Quit + Lock screen"
 msgstr "خروج + إغلاق الشاشة"
 
-#: ../plugins/actions/actions.c:468
+#: ../plugins/actions/actions.c:467
 #, fuzzy
 msgid "_Orientation:"
 msgstr "الاتجاه :"
@@ -419,119 +419,119 @@ msgstr "اظهر التطبيقات المصغرة فقط"
 msgid "Show applications of _all workspaces"
 msgstr "أظهر البرامج من جميع ساحات العمل"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 #, fuzzy
 msgid "Use all available _space"
 msgstr "استخدم كل المساحة المتاحة"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "عنصر جديد"
 
-#: ../plugins/launcher/launcher-exec.c:574
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "لم أستطع تشغيل \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:609
+#: ../plugins/launcher/launcher-dialog.c:606
 msgid "No icon"
 msgstr "لا أيقونة"
 
-#: ../plugins/launcher/launcher-dialog.c:631
+#: ../plugins/launcher/launcher-dialog.c:628
 msgid "Select an Application"
 msgstr "إختر برنامج"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:638
 msgid "All Files"
 msgstr "جميع الملفات"
 
-#: ../plugins/launcher/launcher-dialog.c:646
+#: ../plugins/launcher/launcher-dialog.c:643
 msgid "Executable Files"
 msgstr "الملفات التنفيذية"
 
-#: ../plugins/launcher/launcher-dialog.c:661
+#: ../plugins/launcher/launcher-dialog.c:658
 msgid "Perl Scripts"
 msgstr "بيرل سكريبت"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:664
 msgid "Python Scripts"
 msgstr "بايذن سكريبت"
 
-#: ../plugins/launcher/launcher-dialog.c:673
+#: ../plugins/launcher/launcher-dialog.c:670
 msgid "Ruby Scripts"
 msgstr "روبي سكريبت"
 
-#: ../plugins/launcher/launcher-dialog.c:679
+#: ../plugins/launcher/launcher-dialog.c:676
 msgid "Shell Scripts"
 msgstr "شيل سكريبت"
 
 #. TRANSLATORS: Fallback name for a launcher item without a name
-#: ../plugins/launcher/launcher-dialog.c:755
-#: ../plugins/launcher/launcher-dialog.c:844
-#: ../plugins/launcher/launcher-dialog.c:1337
+#: ../plugins/launcher/launcher-dialog.c:752
+#: ../plugins/launcher/launcher-dialog.c:841
+#: ../plugins/launcher/launcher-dialog.c:1334
 msgid "Unnamed"
 msgstr ""
 
-#: ../plugins/launcher/launcher-dialog.c:757
+#: ../plugins/launcher/launcher-dialog.c:754
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "اختر أيقونة لـ·\"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1119
 #, fuzzy
 msgid "_Name:"
 msgstr "الاسم"
 
-#: ../plugins/launcher/launcher-dialog.c:1140
+#: ../plugins/launcher/launcher-dialog.c:1137
 #, fuzzy
 msgid "_Description:"
 msgstr "الوصف"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1156
 #, fuzzy
 msgid "_Icon:"
 msgstr "أيقونة"
 
-#: ../plugins/launcher/launcher-dialog.c:1177
+#: ../plugins/launcher/launcher-dialog.c:1174
 #, fuzzy
 msgid "Co_mmand:"
 msgstr "أمر "
 
-#: ../plugins/launcher/launcher-dialog.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1201
 #, fuzzy
 msgid "_Working Directory:"
 msgstr "_المجلد الحالي"
 
-#: ../plugins/launcher/launcher-dialog.c:1210
+#: ../plugins/launcher/launcher-dialog.c:1207
 #, fuzzy
 msgid "Select a Working Directory"
 msgstr "إختر مجلد"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1228
 msgid "Run in _terminal"
 msgstr "تنفيذ في _سطر اﻷوامر"
 
-#: ../plugins/launcher/launcher-dialog.c:1247
+#: ../plugins/launcher/launcher-dialog.c:1244
 msgid "Use _startup notification"
 msgstr "أستخدم _تنبية بدأ التشغيل"
 
-#: ../plugins/launcher/launcher-dialog.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1518
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "برنامج"
 
 #. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
 #. string as short as possible.
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1548
 msgid "A_rrow:"
 msgstr "_سهم:"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1554
 msgid "Default"
 msgstr "تلقائي"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Inside Button"
 msgstr "داخل الزر"
 
@@ -591,11 +591,11 @@ msgstr "_مؤشر"
 msgid "_Dots"
 msgstr "_نقط"
 
-#: ../plugins/showdesktop/showdesktop.c:33
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr "استرجع النوافذ المخفية"
 
-#: ../plugins/showdesktop/showdesktop.c:34
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr "اخفي النوافذ واظهر سطح المكتب"
 
@@ -641,40 +641,40 @@ msgstr "البرامج المحجوبة"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "فشل في الحصول على الإختيار من أجل الشاشة·%d"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:232
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "قائمة المهام"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
+#: ../plugins/tasklist/tasklist-dialogs.c:192
 #, fuzzy
-msgid "_Minimum width:"
-msgstr "العرض الأدنى:"
+msgid "Fi_xed length (pixels):"
+msgstr "الحجم (بكسل):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:217
 #, fuzzy
 msgid "Use _flat buttons"
 msgstr "استخدم ازرار مفلطحة"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 #, fuzzy
 msgid "Show _handle"
 msgstr "أظهر المؤشر"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
 msgstr "اظهر المهام من كل _مساحات العمل"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:244
 msgid "Never group tasks"
 msgstr "لا تجمع المهام أبداً"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Automatically group tasks"
 msgstr "جمع المهام تلقائياً"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Always group tasks"
 msgstr "اجمع المهام دوماً"
 
@@ -808,6 +808,10 @@ msgstr ""
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "مدير الائحة :"
+
+#, fuzzy
+#~ msgid "_Minimum width:"
+#~ msgstr "العرض الأدنى:"
 
 #~ msgid "Unknown"
 #~ msgstr "مجهول"

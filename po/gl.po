@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2009-04-19 12:31+0100\n"
+"POT-Creation-Date: 2009-10-16 14:27+0200\n"
+"PO-Revision-Date: 2009-08-22 13:13+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -68,8 +68,8 @@ msgstr "Engadir novos elementos..."
 msgid "Customize Panel..."
 msgstr "Personalizar o panel..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "Saír"
 
@@ -81,29 +81,29 @@ msgstr "Reiniciar"
 msgid "About the Xfce Panel"
 msgstr "Acerca do panel de Xfce"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Saír do panel de Xfce?"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Panel de Xfce"
 
-#: ../panel/panel-app.c:903
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Non se pode eliminar o último panel. Desexa saír da aplicación?"
 
-#: ../panel/panel-app.c:930
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Eliminar o panel \"%d\"?"
 
-#: ../panel/panel-app.c:934
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "Eliminaranse e panel seleccionado e tódolos seus elementos."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Desenvolvedor"
 
@@ -138,9 +138,8 @@ msgstr "Mostra o diálogo \"Engadir novo elemento\""
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
 #: ../panel/main.c:91
-#, fuzzy
 msgid "Failed to open display"
-msgstr "Fallo ao abrir a pantalla do sistema de xanelas X '%s'\n"
+msgstr ""
 
 #: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
@@ -201,27 +200,26 @@ msgid "Full Height"
 msgstr "Altura completa"
 
 #: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
-#, fuzzy
 msgid "Span Monitors"
-msgstr "Separar Monitores"
+msgstr ""
 
 #: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../plugins/launcher/launcher-dialog.c:1555
 msgid "Left"
 msgstr "Esquerda"
 
 #: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1556
 msgid "Right"
 msgstr "Dereita"
 
 #: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Top"
 msgstr "Arriba"
 
 #: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Bottom"
 msgstr "Abaixo"
 
@@ -246,11 +244,11 @@ msgstr "Auto _ocultar"
 msgid "Orientation:"
 msgstr "Orientación:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "Vertical"
 
@@ -259,9 +257,8 @@ msgid "Handle:"
 msgstr "Asa:"
 
 #: ../panel/panel-dialogs.c:1193
-#, fuzzy
 msgid "At both sides"
-msgstr "En todas as caras"
+msgstr "Nos dous lados"
 
 #: ../panel/panel-dialogs.c:1273
 msgid "Select Monitor"
@@ -269,7 +266,7 @@ msgstr "Seleccione monitor"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Aparencia"
@@ -312,25 +309,25 @@ msgstr "Panel"
 msgid "Customize the panel settings"
 msgstr "Personalizar a configuración do panel"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:456
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "Bloquear a pantalla"
 
-#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.c:416
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Botóns de accións"
 
-#: ../plugins/actions/actions.c:445
+#: ../plugins/actions/actions.c:444
 msgid "_Select action type:"
 msgstr "_Seleccione o tipo de acción:"
 
-#: ../plugins/actions/actions.c:457
+#: ../plugins/actions/actions.c:456
 msgid "Quit + Lock screen"
 msgstr "Saír e bloquear a pantalla"
 
-#: ../plugins/actions/actions.c:468
+#: ../plugins/actions/actions.c:467
 msgid "_Orientation:"
 msgstr "_Orientación:"
 
@@ -407,113 +404,113 @@ msgstr "Só mostrar as aplicacións _minimizadas"
 msgid "Show applications of _all workspaces"
 msgstr "Mostrar as aplicacións de _tódolos espazos de traballo"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 msgid "Use all available _space"
 msgstr "Usar todo o e_spazo dispoñible"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "Novo elemento"
 
-#: ../plugins/launcher/launcher-exec.c:574
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Fallo ó executar \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:609
+#: ../plugins/launcher/launcher-dialog.c:606
 msgid "No icon"
 msgstr "Sen icona"
 
-#: ../plugins/launcher/launcher-dialog.c:631
+#: ../plugins/launcher/launcher-dialog.c:628
 msgid "Select an Application"
 msgstr "Seleccionar unha aplicación"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:638
 msgid "All Files"
 msgstr "Tódolos ficheiros"
 
-#: ../plugins/launcher/launcher-dialog.c:646
+#: ../plugins/launcher/launcher-dialog.c:643
 msgid "Executable Files"
 msgstr "Ficheiros executables"
 
-#: ../plugins/launcher/launcher-dialog.c:661
+#: ../plugins/launcher/launcher-dialog.c:658
 msgid "Perl Scripts"
 msgstr "Scripts en Perl"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:664
 msgid "Python Scripts"
 msgstr "Scripts en Python"
 
-#: ../plugins/launcher/launcher-dialog.c:673
+#: ../plugins/launcher/launcher-dialog.c:670
 msgid "Ruby Scripts"
 msgstr "Scripts en Ruby"
 
-#: ../plugins/launcher/launcher-dialog.c:679
+#: ../plugins/launcher/launcher-dialog.c:676
 msgid "Shell Scripts"
 msgstr "Scripts de Shell"
 
 # Innominado?
 #. TRANSLATORS: Fallback name for a launcher item without a name
-#: ../plugins/launcher/launcher-dialog.c:755
-#: ../plugins/launcher/launcher-dialog.c:844
-#: ../plugins/launcher/launcher-dialog.c:1337
+#: ../plugins/launcher/launcher-dialog.c:752
+#: ../plugins/launcher/launcher-dialog.c:841
+#: ../plugins/launcher/launcher-dialog.c:1334
 msgid "Unnamed"
 msgstr "Sen nome"
 
-#: ../plugins/launcher/launcher-dialog.c:757
+#: ../plugins/launcher/launcher-dialog.c:754
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Seleccione unha icona para \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1119
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: ../plugins/launcher/launcher-dialog.c:1140
+#: ../plugins/launcher/launcher-dialog.c:1137
 msgid "_Description:"
 msgstr "_Descrición:"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1156
 msgid "_Icon:"
 msgstr "_Icona:"
 
-#: ../plugins/launcher/launcher-dialog.c:1177
+#: ../plugins/launcher/launcher-dialog.c:1174
 msgid "Co_mmand:"
 msgstr "Co_mando:"
 
-#: ../plugins/launcher/launcher-dialog.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1201
 msgid "_Working Directory:"
 msgstr "Directorio de _traballo:"
 
-#: ../plugins/launcher/launcher-dialog.c:1210
+#: ../plugins/launcher/launcher-dialog.c:1207
 msgid "Select a Working Directory"
 msgstr "Seleccione un directorio de traballo"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1228
 msgid "Run in _terminal"
 msgstr "Executar nun _terminal"
 
-#: ../plugins/launcher/launcher-dialog.c:1247
+#: ../plugins/launcher/launcher-dialog.c:1244
 msgid "Use _startup notification"
 msgstr "Usar unha notificación de _comezo"
 
-#: ../plugins/launcher/launcher-dialog.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1518
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Iniciador"
 
 #. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
 #. string as short as possible.
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1548
 msgid "A_rrow:"
 msgstr "F_recha:"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1554
 msgid "Default"
 msgstr "Predeterminado"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Inside Button"
 msgstr "Dentro do botón"
 
@@ -531,7 +528,7 @@ msgstr "Número de _columnas:"
 
 #: ../plugins/pager/pager.c:418
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Cambiar de escritorio usando a _roda do rato"
+msgstr "Cambiar de espazo de traballo usando a _roda do rato"
 
 #: ../plugins/pager/pager.c:426
 msgid "Show workspace _names"
@@ -551,9 +548,8 @@ msgid "_Empty space"
 msgstr "_Espazo baleiro"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
-msgstr "espazo baleiro no taboleiro"
+msgstr ""
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -567,11 +563,11 @@ msgstr "_Asa"
 msgid "_Dots"
 msgstr "_Puntos"
 
-#: ../plugins/showdesktop/showdesktop.c:33
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr "Restaurar as ventás ocultas"
 
-#: ../plugins/showdesktop/showdesktop.c:34
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr "Ocultar as ventás e mostrar o escritorio"
 
@@ -613,38 +609,38 @@ msgstr "Aplicacións ocultas"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Produciuse un erro ó adquirir a selección do xestor para a pantalla %d"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:232
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Lista de _tarefas"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
-msgid "_Minimum width:"
-msgstr "Largura _mínima:"
-
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:192
 #, fuzzy
-msgid "Use _flat buttons"
-msgstr "Ocultar os botóns da xanela"
+msgid "Fi_xed length (pixels):"
+msgstr "_Tamaño (píxeles):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:217
+msgid "Use _flat buttons"
+msgstr "Usar botóns _planos"
+
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Show _handle"
 msgstr "Mostrar a _asa"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
 msgstr "Mostrar as tarefas de todos os escritorios virtuais"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:244
 msgid "Never group tasks"
 msgstr "Nunca agrupar as tarefas"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Automatically group tasks"
 msgstr "Agrupar as tarefas automaticamente"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Always group tasks"
 msgstr "Agrupar as tarefas sempre"
 
@@ -777,3 +773,6 @@ msgstr "Cambiar entre as ventás abertas usando un menú"
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Administrador de paneis"
+
+#~ msgid "_Minimum width:"
+#~ msgstr "Largura _mínima:"

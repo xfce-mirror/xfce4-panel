@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 23:16+0100\n"
+"POT-Creation-Date: 2009-10-16 14:27+0200\n"
 "PO-Revision-Date: 2009-01-15 10:53+0100\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
@@ -64,8 +64,8 @@ msgstr "Přidat nové položky..."
 msgid "Customize Panel..."
 msgstr "Přizpůsobit panel..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "Ukončit"
 
@@ -77,29 +77,29 @@ msgstr "Restartovat"
 msgid "About the Xfce Panel"
 msgstr "O Panelu Xfce"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Ukončit Panel Xfce?"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: ../panel/panel-app.c:903
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "Není možné odstranit poslední panel. Chcete ukončit program?"
 
-#: ../panel/panel-app.c:930
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Odstranit panel „%d“?"
 
-#: ../panel/panel-app.c:934
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "Vybraný panel a všechny jeho položky budou odstraněny."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Vývojář"
 
@@ -200,22 +200,22 @@ msgid "Span Monitors"
 msgstr "Roztáhnout přes více monitorů"
 
 #: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../plugins/launcher/launcher-dialog.c:1555
 msgid "Left"
 msgstr "Vlevo"
 
 #: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1556
 msgid "Right"
 msgstr "Vpravo"
 
 #: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Top"
 msgstr "Nahoře"
 
 #: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Bottom"
 msgstr "Dole"
 
@@ -240,11 +240,11 @@ msgstr "_Automaticky skrývat"
 msgid "Orientation:"
 msgstr "Orientace:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "Vodorovná"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "Svislá"
 
@@ -262,7 +262,7 @@ msgstr "Vyberte monitor"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Vzhled"
@@ -305,25 +305,25 @@ msgstr "Panel"
 msgid "Customize the panel settings"
 msgstr "Přizpůsobit nastavení panelu"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:456
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "Uzamknout obrazovku"
 
-#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.c:416
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Tlačítka akcí"
 
-#: ../plugins/actions/actions.c:445
+#: ../plugins/actions/actions.c:444
 msgid "_Select action type:"
 msgstr "_Vyberte typ akce:"
 
-#: ../plugins/actions/actions.c:457
+#: ../plugins/actions/actions.c:456
 msgid "Quit + Lock screen"
 msgstr "Ukončit a uzamknout obrazovku"
 
-#: ../plugins/actions/actions.c:468
+#: ../plugins/actions/actions.c:467
 msgid "_Orientation:"
 msgstr "_Orientace:"
 
@@ -400,112 +400,112 @@ msgstr "Zobrazovat pouze _minimalizované aplikace"
 msgid "Show applications of _all workspaces"
 msgstr "Zobrazovat aplikace ze _všech pracovních ploch"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 msgid "Use all available _space"
 msgstr "Použít veškerý _dostupný prostor"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "Přidat novou položku"
 
-#: ../plugins/launcher/launcher-exec.c:574
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Nepodařilo se spustit „%s“"
 
-#: ../plugins/launcher/launcher-dialog.c:609
+#: ../plugins/launcher/launcher-dialog.c:606
 msgid "No icon"
 msgstr "Bez ikony"
 
-#: ../plugins/launcher/launcher-dialog.c:631
+#: ../plugins/launcher/launcher-dialog.c:628
 msgid "Select an Application"
 msgstr "Vyberte aplikaci"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:638
 msgid "All Files"
 msgstr "Všechny soubory"
 
-#: ../plugins/launcher/launcher-dialog.c:646
+#: ../plugins/launcher/launcher-dialog.c:643
 msgid "Executable Files"
 msgstr "Spustitelné soubory"
 
-#: ../plugins/launcher/launcher-dialog.c:661
+#: ../plugins/launcher/launcher-dialog.c:658
 msgid "Perl Scripts"
 msgstr "Skripty jazyka Perl"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:664
 msgid "Python Scripts"
 msgstr "Skripty jazyka Python"
 
-#: ../plugins/launcher/launcher-dialog.c:673
+#: ../plugins/launcher/launcher-dialog.c:670
 msgid "Ruby Scripts"
 msgstr "Skripty jazyka Ruby"
 
-#: ../plugins/launcher/launcher-dialog.c:679
+#: ../plugins/launcher/launcher-dialog.c:676
 msgid "Shell Scripts"
 msgstr "Shellové skripty"
 
 #. TRANSLATORS: Fallback name for a launcher item without a name
-#: ../plugins/launcher/launcher-dialog.c:755
-#: ../plugins/launcher/launcher-dialog.c:844
-#: ../plugins/launcher/launcher-dialog.c:1337
+#: ../plugins/launcher/launcher-dialog.c:752
+#: ../plugins/launcher/launcher-dialog.c:841
+#: ../plugins/launcher/launcher-dialog.c:1334
 msgid "Unnamed"
 msgstr "Nepojmenovaný"
 
-#: ../plugins/launcher/launcher-dialog.c:757
+#: ../plugins/launcher/launcher-dialog.c:754
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Vyberte ikonu pro „%s“"
 
-#: ../plugins/launcher/launcher-dialog.c:1122
+#: ../plugins/launcher/launcher-dialog.c:1119
 msgid "_Name:"
 msgstr "_Název:"
 
-#: ../plugins/launcher/launcher-dialog.c:1140
+#: ../plugins/launcher/launcher-dialog.c:1137
 msgid "_Description:"
 msgstr "_Popis:"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
+#: ../plugins/launcher/launcher-dialog.c:1156
 msgid "_Icon:"
 msgstr "_Ikona:"
 
-#: ../plugins/launcher/launcher-dialog.c:1177
+#: ../plugins/launcher/launcher-dialog.c:1174
 msgid "Co_mmand:"
 msgstr "Pří_kaz:"
 
-#: ../plugins/launcher/launcher-dialog.c:1204
+#: ../plugins/launcher/launcher-dialog.c:1201
 msgid "_Working Directory:"
 msgstr "_Pracovní adresář:"
 
-#: ../plugins/launcher/launcher-dialog.c:1210
+#: ../plugins/launcher/launcher-dialog.c:1207
 msgid "Select a Working Directory"
 msgstr "Vyberte pracovní adresář"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1228
 msgid "Run in _terminal"
 msgstr "Spustit v _terminálu"
 
-#: ../plugins/launcher/launcher-dialog.c:1247
+#: ../plugins/launcher/launcher-dialog.c:1244
 msgid "Use _startup notification"
 msgstr "Použít oznámení při _spuštění"
 
-#: ../plugins/launcher/launcher-dialog.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1518
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Spouštěč"
 
 #. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
 #. string as short as possible.
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1548
 msgid "A_rrow:"
 msgstr "Š_ipka:"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1554
 msgid "Default"
 msgstr "Výchozí"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Inside Button"
 msgstr "V tlačítku"
 
@@ -558,11 +558,11 @@ msgstr "Ú_chytka"
 msgid "_Dots"
 msgstr "_Tečky"
 
-#: ../plugins/showdesktop/showdesktop.c:33
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr "Obnovit skrytá okna"
 
-#: ../plugins/showdesktop/showdesktop.c:34
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr "Skrýt okna a zobrazit pracovní plochu"
 
@@ -604,37 +604,38 @@ msgstr "Skryté aplikace"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Nepodařilo se získat správce výběru pro obrazovku %d"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:232
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Seznam úloh"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
-msgid "_Minimum width:"
-msgstr "_Nejmenší šířka:"
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+#, fuzzy
+msgid "Fi_xed length (pixels):"
+msgstr "_Velikost (v pixelech):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:217
 msgid "Use _flat buttons"
 msgstr "P_oužít plochá tlačítka"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Show _handle"
 msgstr "Zobrazova_t úchytku"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
 msgstr "Zobr_azovat úlohy ze všech pracovních ploch"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:244
 msgid "Never group tasks"
 msgstr "Nikdy neseskupovat úlohy"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Automatically group tasks"
 msgstr "Automaticky seskupovat úkoly"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Always group tasks"
 msgstr "Vždy seskupovat úkoly"
 
@@ -767,6 +768,9 @@ msgstr "Přepínání oken nabídkou"
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Správce panelu"
+
+#~ msgid "_Minimum width:"
+#~ msgstr "_Nejmenší šířka:"
 
 #~ msgid "Unknown"
 #~ msgstr "Neznámý"

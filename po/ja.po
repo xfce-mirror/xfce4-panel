@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.5.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-02-25 23:32+0900\n"
-"PO-Revision-Date: 2009-02-14 00:28+0900\n"
+"POT-Creation-Date: 2009-10-16 14:27+0200\n"
+"PO-Revision-Date: 2009-10-09 00:37+0900\n"
 "Last-Translator: Masato Hashimoto <cabezon.hashimoto@gmail.com>\n"
 "Language-Team: Japanese <xfce-users-jp@ml.fdiary.net>\n"
 "MIME-Version: 1.0\n"
@@ -64,8 +64,8 @@ msgstr "新しいアイテムの追加..."
 msgid "Customize Panel..."
 msgstr "パネルの設定..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "終了"
 
@@ -77,30 +77,30 @@ msgstr "再起動"
 msgid "About the Xfce Panel"
 msgstr "Xfce パネルについて"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Xfce パネルを終了しますか?"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Xfce パネル"
 
-#: ../panel/panel-app.c:903
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr ""
 "最後のパネルは削除できません。このプログラムを終了してもよろしいですか?"
 
-#: ../panel/panel-app.c:930
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "パネル \"%d\" を削除しますか?"
 
-#: ../panel/panel-app.c:934
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "選択したパネルとそこにある全てのアイテムが削除されます。"
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "開発者"
 
@@ -247,11 +247,11 @@ msgstr "自動的に隠す(_H)"
 msgid "Orientation:"
 msgstr "パネルの方向:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "水平"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "垂直"
 
@@ -269,7 +269,7 @@ msgstr "モニタの選択"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "外観"
@@ -314,26 +314,26 @@ msgstr "パネル"
 msgid "Customize the panel settings"
 msgstr "パネルの設定をカスタマイズします"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:456
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "画面をロック"
 
-#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.c:416
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "アクションボタン"
 
 # In ja translation: This is the label for combobox in Action button property dialog. Coordinate with the usual style.
-#: ../plugins/actions/actions.c:445
+#: ../plugins/actions/actions.c:444
 msgid "_Select action type:"
 msgstr "アクションのタイプ(_S):"
 
-#: ../plugins/actions/actions.c:457
+#: ../plugins/actions/actions.c:456
 msgid "Quit + Lock screen"
 msgstr "終了して画面をロック"
 
-#: ../plugins/actions/actions.c:468
+#: ../plugins/actions/actions.c:467
 msgid "_Orientation:"
 msgstr "パネルの方向(_O):"
 
@@ -410,16 +410,16 @@ msgstr "最小化したアプリケーションのみ表示する(_M)"
 msgid "Show applications of _all workspaces"
 msgstr "全ワークスペースのアプリケーションを表示する(_A)"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 msgid "Use all available _space"
 msgstr "利用可能な全スペースを使用する(_S)"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:852 ../plugins/launcher/launcher.c:919
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "新しいアイテム"
 
-#: ../plugins/launcher/launcher-exec.c:576
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "\"%s\" を起動できませんでした"
@@ -569,12 +569,12 @@ msgid "_Dots"
 msgstr "点(_D)"
 
 # Tip help
-#: ../plugins/showdesktop/showdesktop.c:33
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr "隠したウィンドウを元に戻します"
 
 # Tip help
-#: ../plugins/showdesktop/showdesktop.c:34
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr "ウィンドウを隠してデスクトップを表示します"
 
@@ -617,37 +617,37 @@ msgstr "隠すアプリケーション"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "スクリーン %d の管理セレクションの取得に失敗しました"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:232
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "タスクリスト"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
-msgid "_Minimum width:"
-msgstr "最小幅(_M):"
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+msgid "Fi_xed length (pixels):"
+msgstr "サイズを固定(_X) (ピクセル):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:217
 msgid "Use _flat buttons"
 msgstr "フラットボタンを使用する(_F)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Show _handle"
 msgstr "取っ手を表示する(_H)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
 msgstr "全ワークスペースのタスクを表示する(_A)"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:244
 msgid "Never group tasks"
 msgstr "タスクをまとめない"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Automatically group tasks"
 msgstr "自動的にタスクをまとめる"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Always group tasks"
 msgstr "常にタスクをまとめる"
 
@@ -782,3 +782,6 @@ msgstr "開いているウィンドウをメニューを使って切り替えま
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "パネルマネージャ"
+
+#~ msgid "_Minimum width:"
+#~ msgstr "最小幅(_M):"

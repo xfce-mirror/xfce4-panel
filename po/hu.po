@@ -5,10 +5,10 @@
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: hu\n"
+"Project-Id-Version: untitled\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-07-10 17:20+0200\n"
-"PO-Revision-Date: 2009-07-10 17:44+0200\n"
+"POT-Creation-Date: 2009-10-16 14:27+0200\n"
+"PO-Revision-Date: 2009-06-26 01:41+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at gnome dot hu>\n"
 "MIME-Version: 1.0\n"
@@ -30,7 +30,8 @@ msgid "Remove \"%s\"?"
 msgstr "Eltávolítja ezt: „%s”?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid "The item will be removed from the panel and its configuration will be lost."
+msgid ""
+"The item will be removed from the panel and its configuration will be lost."
 msgstr "Az elem el lesz távolítva a panelről, beállításai elvesznek."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -162,7 +163,7 @@ msgstr "A modul („%s”) nem nyitható meg"
 
 #: ../panel/panel-dialogs.c:611
 msgid "Add New Items"
-msgstr "Új elemek hozzáadása"
+msgstr "Új elemek felvétele"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
@@ -229,7 +230,7 @@ msgstr "_Rögzített pozíció"
 
 #: ../panel/panel-dialogs.c:1017
 msgid "Freely _moveable"
-msgstr "Szabadon m_ozgatható"
+msgstr "Szabadon _mozgatható"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -261,7 +262,7 @@ msgstr "Válasszon monitort"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Megjelenés"
@@ -399,7 +400,7 @@ msgstr "Csak mi_nimalizált alkalmazások megjelenítése"
 msgid "Show applications of _all workspaces"
 msgstr "Minden m_unkaterület alkalmazásainak megjelenítése"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 msgid "Use all available _space"
 msgstr "_Teljes rendelkezésre álló terület használata"
 
@@ -459,7 +460,7 @@ msgstr "Válassza ki „%s” ikonját"
 
 #: ../plugins/launcher/launcher-dialog.c:1119
 msgid "_Name:"
-msgstr "Né_v:"
+msgstr "_Név:"
 
 #: ../plugins/launcher/launcher-dialog.c:1137
 msgid "_Description:"
@@ -603,37 +604,38 @@ msgstr "Rejtett alkalmazások"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "A kezelőkiválasztás megszerzése meghiúsult a(z) %d. képernyőhöz"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:232
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Feladatlista"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
-msgid "_Minimum width:"
-msgstr "_Minimális szélesség:"
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+#, fuzzy
+msgid "Fi_xed length (pixels):"
+msgstr "_Méret (képpont):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
+#: ../plugins/tasklist/tasklist-dialogs.c:217
 msgid "Use _flat buttons"
 msgstr "_Lapos gombok használata"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Show _handle"
 msgstr "F_ogantyú megjelenítése"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
 msgstr "Összes m_unkaterület feladatainak megjelenítése"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:244
 msgid "Never group tasks"
 msgstr "Ne csoportosítsa a feladatokat"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Automatically group tasks"
 msgstr "Automatikusan csoportosítsa a feladatokat"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Always group tasks"
 msgstr "Mindig csoportosítsa a feladatokat"
 
@@ -767,3 +769,5 @@ msgstr "Átváltás a nyitott ablakok között, menü használatával"
 msgid "Panel Manager"
 msgstr "Panelkezelő"
 
+#~ msgid "_Minimum width:"
+#~ msgstr "_Minimális szélesség:"

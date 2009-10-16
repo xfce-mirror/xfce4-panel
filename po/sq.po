@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 23:16+0100\n"
-"PO-Revision-Date: 2008-11-11 00:36+0200\n"
+"POT-Creation-Date: 2009-10-16 14:27+0200\n"
+"PO-Revision-Date: 2009-09-26 01:32+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -53,18 +53,16 @@ msgstr "Hiq"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
-#, fuzzy
 msgid "Add New Items..."
-msgstr "Shto Element të Ri"
+msgstr "Shto Elemente të Rinj..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
-#, fuzzy
 msgid "Customize Panel..."
-msgstr "Përshtasni Panel"
+msgstr "Përshtasni Panel..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:284
-#: ../plugins/actions/actions.c:318 ../plugins/actions/actions.c:455
+#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "Lër"
 
@@ -76,64 +74,59 @@ msgstr "Rinis"
 msgid "About the Xfce Panel"
 msgstr "Rreth Panelit Xfce"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:902
+#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Të dal nga Paneli Xfce?"
 
-#: ../panel/panel-app.c:900 ../panel/panel-app.c:932 ../panel/panel-app.c:965
+#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Panel Xfce"
 
-#: ../panel/panel-app.c:903
+#: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
 msgstr "S'mund të hiqni panelin e fundit. Doni të dilni nga programi?"
 
-#: ../panel/panel-app.c:930
+#: ../panel/panel-app.c:934
 #, c-format
 msgid "Remove Panel \"%d\"?"
 msgstr "Të heq Panelin \"%d\"?"
 
-#: ../panel/panel-app.c:934
+#: ../panel/panel-app.c:938
 msgid "The selected panel and all its items will be removed."
 msgstr "Paneli i përzgjedhur dhe tërë elementet e tij do të hiqen."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:972 ../panel/panel-app.c:973
+#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Zhvillues"
 
 #: ../panel/main.c:60
 msgid "Print version information and exit"
-msgstr ""
+msgstr "Shtyp të dhëna versioni dhe dil"
 
 #: ../panel/main.c:61
-#, fuzzy
 msgid "Show 'Customize Panel' dialog"
-msgstr "Përshtasni Panel"
+msgstr "Shfaq dialogun 'Përshtasni Panel'"
 
 #: ../panel/main.c:62
-#, fuzzy
 msgid "Save the panel configuration"
-msgstr "Ruaje formësimin"
+msgstr "Ruaje formësimin e panelit"
 
 #: ../panel/main.c:63
-#, fuzzy
 msgid "Restart the running instance of xfce4-panel"
-msgstr "Po riniset xfce4-panel..."
+msgstr "Rinise instancën xhiruese të xfce4-panel-it"
 
 #: ../panel/main.c:64
-#, fuzzy
 msgid "Log out the active session"
-msgstr "Dil ose kyç ekranin"
+msgstr "Dil nga sesioni aktiv"
 
 #: ../panel/main.c:65
 msgid "Close all panels and end the program"
 msgstr "Mbyll tërë panelet dhe përfundoje programin"
 
 #: ../panel/main.c:66
-#, fuzzy
 msgid "Show 'Add New Items' dialog"
-msgstr "Shto Element të Ri"
+msgstr "Shfaq dialogun 'Shto Elementë të Rinj'"
 
 #. TRANSLATORS: Errors when gtk_init failed, probably the command
 #. executed without xserver running
@@ -152,9 +145,8 @@ msgid "Please report bugs to <%s>."
 msgstr "Ju lutem njoftoni të meta te <%s>."
 
 #: ../panel/main.c:151
-#, fuzzy
 msgid "Xfce4-panel already running"
-msgstr "xfce4-panel është në xhirim e sipër"
+msgstr "Xfce4-panel është në xhirim e sipër"
 
 #: ../panel/main.c:162
 msgid "Restarting xfce4-panel..."
@@ -167,24 +159,22 @@ msgid "Could not open \"%s\" module"
 msgstr "Nuk hap dot modul \"%s\""
 
 #: ../panel/panel-dialogs.c:611
-#, fuzzy
 msgid "Add New Items"
-msgstr "Shto Element të Ri"
+msgstr "Shto Elemente të Rinj"
 
 #. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
-#, fuzzy
 msgid ""
 "Drag items from the list to a panel or remove\n"
 "them by dragging them back to the list."
 msgstr ""
-"Tërhiqni në panel elementë prej një liste ose hiqini duke i tërhequr "
-"mbrapsht deri te lista."
+"Tërhiqni në panel elementë prej një liste ose hiqini\n"
+"duke i tërhequr mbrapsht deri te lista."
 
 #: ../panel/panel-dialogs.c:653
 msgid "_Search:"
-msgstr ""
+msgstr "_Kërko:"
 
 #: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
@@ -203,27 +193,26 @@ msgid "Full Height"
 msgstr "Gjerësi e Plotë"
 
 #: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
-#, fuzzy
 msgid "Span Monitors"
 msgstr "Ndaji Monitorët"
 
 #: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
-#: ../plugins/launcher/launcher-dialog.c:1558
+#: ../plugins/launcher/launcher-dialog.c:1555
 msgid "Left"
 msgstr "Majtas"
 
 #: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
-#: ../plugins/launcher/launcher-dialog.c:1559
+#: ../plugins/launcher/launcher-dialog.c:1556
 msgid "Right"
 msgstr "Djathtas"
 
 #: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
-#: ../plugins/launcher/launcher-dialog.c:1560
+#: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Top"
 msgstr "Sipër"
 
 #: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
-#: ../plugins/launcher/launcher-dialog.c:1561
+#: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Bottom"
 msgstr "Poshtë"
 
@@ -233,14 +222,12 @@ msgid "Position"
 msgstr "Vendndodhje"
 
 #: ../panel/panel-dialogs.c:1011
-#, fuzzy
 msgid "_Fixed position"
-msgstr "Vendndodhje Fikse"
+msgstr "Vendndodhje _fikse"
 
 #: ../panel/panel-dialogs.c:1017
-#, fuzzy
 msgid "Freely _moveable"
-msgstr "Lirisht i Lëvizshëm"
+msgstr "Lirisht i _lëvizshëm"
 
 #: ../panel/panel-dialogs.c:1140
 msgid "Auto_hide"
@@ -250,11 +237,11 @@ msgstr "Vetëfshih"
 msgid "Orientation:"
 msgstr "Drejtim:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "Horizontalisht"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:483
+#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "Vertikalisht"
 
@@ -272,25 +259,22 @@ msgstr "Përzgjidhni Monitor"
 
 #: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
-#: ../plugins/tasklist/tasklist-dialogs.c:166
+#: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
 msgid "Appearance"
 msgstr "Dukje"
 
 #: ../panel/panel-dialogs.c:1414
-#, fuzzy
 msgid "_Size (pixels):"
-msgstr "Madhësi (piksela):"
+msgstr "_Madhësi (piksela):"
 
 #: ../panel/panel-dialogs.c:1445
-#, fuzzy
 msgid "_Transparency (%):"
-msgstr "Tejdukshmëri (%):"
+msgstr "_Tejdukshmëri (%):"
 
 #: ../panel/panel-dialogs.c:1471
-#, fuzzy
 msgid "Make active panel _opaque"
-msgstr "Bëje panelin veprues të marrtë"
+msgstr "Panelin veprues bëje të _marrtë"
 
 #: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
@@ -301,13 +285,12 @@ msgstr "Panel %d"
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1594
 msgid "Remove the currently selected panel"
-msgstr ""
+msgstr "Hiq panelin e përzgjedhur tani "
 
 #. TRANSLATORS: Tooltip for the add button in the customize panel dialog
 #: ../panel/panel-dialogs.c:1608
-#, fuzzy
 msgid "Add a new panel"
-msgstr "Shtoni objekte të reja"
+msgstr "Shtoni panel të ri"
 
 #: ../panel/panel-dialogs.c:1668
 #: ../settings/xfce4-panel-manager.desktop.in.h:2
@@ -316,33 +299,30 @@ msgstr "Panel"
 
 #: ../panel/panel-dialogs.c:1675
 #: ../settings/xfce4-panel-manager.desktop.in.h:1
-#, fuzzy
 msgid "Customize the panel settings"
-msgstr "Përshtasni Panel"
+msgstr "Përshtasni rregullimet për panelin"
 
-#: ../plugins/actions/actions.c:265 ../plugins/actions/actions.c:301
-#: ../plugins/actions/actions.c:456
+#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "Kyç ekranin"
 
-#: ../plugins/actions/actions.c:417
+#: ../plugins/actions/actions.c:416
 #: ../plugins/actions/actions.desktop.in.in.h:1
 msgid "Action Buttons"
 msgstr "Butona Veprimesh"
 
-#: ../plugins/actions/actions.c:445
-#, fuzzy
+#: ../plugins/actions/actions.c:444
 msgid "_Select action type:"
-msgstr "Përzgjidhni tip veprimi"
+msgstr "_Përzgjidhni lloj veprimi:"
 
-#: ../plugins/actions/actions.c:457
+#: ../plugins/actions/actions.c:456
 msgid "Quit + Lock screen"
 msgstr "Dil + Kyç ekranin"
 
-#: ../plugins/actions/actions.c:468
-#, fuzzy
+#: ../plugins/actions/actions.c:467
 msgid "_Orientation:"
-msgstr "Drejtim:"
+msgstr "_Drejtim:"
 
 #: ../plugins/clock/clock-dialog.c:357
 msgid "Custom"
@@ -410,155 +390,141 @@ msgid "Icon Box"
 msgstr "Kuti Ikonash"
 
 #: ../plugins/iconbox/iconbox.c:929
-#, fuzzy
 msgid "Only show _minimized applications"
-msgstr "Shfaq vetëm zbatime të minimizuara"
+msgstr "Shfaq vetëm zbatime të _minimizuara"
 
 #: ../plugins/iconbox/iconbox.c:938
-#, fuzzy
 msgid "Show applications of _all workspaces"
-msgstr "Shfaq zbatimet në tërë hapësirat e punë"
+msgstr "Shfaq zbatimet e _tërë hapësirave të punës"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:186
-#, fuzzy
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 msgid "Use all available _space"
-msgstr "Përdor tërë hapësirën e mundshme"
+msgstr "Përdor tërë _hapësirën e mundshme"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:705 ../plugins/launcher/launcher.c:770
+#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "Element i Ri"
 
-#: ../plugins/launcher/launcher-exec.c:574
+#: ../plugins/launcher/launcher-exec.c:564
 #, c-format
 msgid "Failed to launch \"%s\""
 msgstr "Dështoi nisja e \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:609
+#: ../plugins/launcher/launcher-dialog.c:606
 msgid "No icon"
 msgstr "Pa ikonë"
 
-#: ../plugins/launcher/launcher-dialog.c:631
+#: ../plugins/launcher/launcher-dialog.c:628
 msgid "Select an Application"
 msgstr "Përzgjidhni Zbatim"
 
-#: ../plugins/launcher/launcher-dialog.c:641
+#: ../plugins/launcher/launcher-dialog.c:638
 msgid "All Files"
 msgstr "Tërë Kartelat"
 
-#: ../plugins/launcher/launcher-dialog.c:646
+#: ../plugins/launcher/launcher-dialog.c:643
 msgid "Executable Files"
 msgstr "Kartela të Ekzekutueshmish"
 
-#: ../plugins/launcher/launcher-dialog.c:661
+#: ../plugins/launcher/launcher-dialog.c:658
 msgid "Perl Scripts"
 msgstr "Programthe Perl"
 
-#: ../plugins/launcher/launcher-dialog.c:667
+#: ../plugins/launcher/launcher-dialog.c:664
 msgid "Python Scripts"
 msgstr "Programthe Python"
 
-#: ../plugins/launcher/launcher-dialog.c:673
+#: ../plugins/launcher/launcher-dialog.c:670
 msgid "Ruby Scripts"
 msgstr "Programthe Ruby"
 
-#: ../plugins/launcher/launcher-dialog.c:679
+#: ../plugins/launcher/launcher-dialog.c:676
 msgid "Shell Scripts"
 msgstr "Programthe Shell"
 
 #. TRANSLATORS: Fallback name for a launcher item without a name
-#: ../plugins/launcher/launcher-dialog.c:755
-#: ../plugins/launcher/launcher-dialog.c:844
-#: ../plugins/launcher/launcher-dialog.c:1337
+#: ../plugins/launcher/launcher-dialog.c:752
+#: ../plugins/launcher/launcher-dialog.c:841
+#: ../plugins/launcher/launcher-dialog.c:1334
 msgid "Unnamed"
 msgstr "I paemërt"
 
-#: ../plugins/launcher/launcher-dialog.c:757
+#: ../plugins/launcher/launcher-dialog.c:754
 #, c-format
 msgid "Select an Icon for \"%s\""
 msgstr "Përzgjidhni një Ikonë për \"%s\""
 
-#: ../plugins/launcher/launcher-dialog.c:1122
-#, fuzzy
+#: ../plugins/launcher/launcher-dialog.c:1119
 msgid "_Name:"
-msgstr "_Emër"
+msgstr "_Emër:"
 
-#: ../plugins/launcher/launcher-dialog.c:1140
-#, fuzzy
+#: ../plugins/launcher/launcher-dialog.c:1137
 msgid "_Description:"
-msgstr "_Përshkrim"
+msgstr "_Përshkrim:"
 
-#: ../plugins/launcher/launcher-dialog.c:1159
-#, fuzzy
+#: ../plugins/launcher/launcher-dialog.c:1156
 msgid "_Icon:"
-msgstr "_Ikonë"
+msgstr "_Ikonë:"
 
-#: ../plugins/launcher/launcher-dialog.c:1177
-#, fuzzy
+#: ../plugins/launcher/launcher-dialog.c:1174
 msgid "Co_mmand:"
-msgstr "_Urdhër"
+msgstr "_Urdhër:"
 
-#: ../plugins/launcher/launcher-dialog.c:1204
-#, fuzzy
+#: ../plugins/launcher/launcher-dialog.c:1201
 msgid "_Working Directory:"
-msgstr "_Drejtoria e Punës"
+msgstr "_Drejtoria e Punës:"
 
-#: ../plugins/launcher/launcher-dialog.c:1210
-#, fuzzy
+#: ../plugins/launcher/launcher-dialog.c:1207
 msgid "Select a Working Directory"
-msgstr "Përzgjidhni Drejtori"
+msgstr "Përzgjidhni Drejtori Pune"
 
-#: ../plugins/launcher/launcher-dialog.c:1231
+#: ../plugins/launcher/launcher-dialog.c:1228
 msgid "Run in _terminal"
 msgstr "Xhiroje në t_erminal"
 
-#: ../plugins/launcher/launcher-dialog.c:1247
+#: ../plugins/launcher/launcher-dialog.c:1244
 msgid "Use _startup notification"
 msgstr "Përdor _njoftime nisjesh"
 
-#: ../plugins/launcher/launcher-dialog.c:1521
+#: ../plugins/launcher/launcher-dialog.c:1518
 #: ../plugins/launcher/launcher.desktop.in.in.h:1
 msgid "Launcher"
 msgstr "Nisës"
 
 #. TRANSLATORS: Arrow position for a launcher with > 1 item. Keep this
 #. string as short as possible.
-#: ../plugins/launcher/launcher-dialog.c:1551
+#: ../plugins/launcher/launcher-dialog.c:1548
 msgid "A_rrow:"
 msgstr "_Shigjetë:"
 
-#: ../plugins/launcher/launcher-dialog.c:1557
+#: ../plugins/launcher/launcher-dialog.c:1554
 msgid "Default"
 msgstr "Parazgjedhje"
 
-#: ../plugins/launcher/launcher-dialog.c:1562
+#: ../plugins/launcher/launcher-dialog.c:1559
 msgid "Inside Button"
 msgstr "Brenda Butonit"
 
 #: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
-#, fuzzy
 msgid "Workspace Switcher"
-msgstr "Hapësirë pune %d"
+msgstr "Këmbyes Hapësirash Pune"
 
 #: ../plugins/pager/pager.c:397
-#, fuzzy
 msgid "Number _of rows:"
-msgstr "Numër rreshtash:"
+msgstr "Numër _rreshtash:"
 
 #: ../plugins/pager/pager.c:401
-#, fuzzy
 msgid "Number _of columns:"
-msgstr "Numër shtyllash:"
+msgstr "Numër _shtyllash:"
 
 #: ../plugins/pager/pager.c:418
-#, fuzzy
 msgid "Switch workspaces using the mouse _wheel"
-msgstr "Këmbe hapësira pune duke përdorur rrotëz miu"
+msgstr "Këmbe hapësira pune duke përdorur _rrotëz miu"
 
 #: ../plugins/pager/pager.c:426
-#, fuzzy
 msgid "Show workspace _names"
-msgstr "Shfaq emra hapësirash pune"
+msgstr "Shfaq _emra hapësirash pune"
 
 #: ../plugins/separator/separator.c:409
 #: ../plugins/separator/separator.desktop.in.in.h:2
@@ -570,14 +536,12 @@ msgid "Separator Style"
 msgstr "Stil Ndarësi"
 
 #: ../plugins/separator/separator.c:436
-#, fuzzy
 msgid "_Empty space"
-msgstr "Hapësirë _Bosh"
+msgstr "Hapësirë _bosh"
 
 #: ../plugins/separator/separator.c:445
-#, fuzzy
 msgid "E_xpanding empty space"
-msgstr "_Zgjerim Hapësire Bosh"
+msgstr "_Zgjerim hapësire bosh"
 
 #: ../plugins/separator/separator.c:454
 msgid "_Line"
@@ -591,35 +555,32 @@ msgstr "_Dorëz"
 msgid "_Dots"
 msgstr "_Pika"
 
-#: ../plugins/showdesktop/showdesktop.c:33
+#: ../plugins/showdesktop/showdesktop.c:32
 msgid "Restore hidden windows"
 msgstr "Rikthe dritare të fshehura"
 
-#: ../plugins/showdesktop/showdesktop.c:34
+#: ../plugins/showdesktop/showdesktop.c:33
 msgid "Hide windows and show desktop"
 msgstr "Fshih dritare dhe shfaq desktopë"
 
 #: ../plugins/systray/xfce-tray-plugin.c:70
 #: ../plugins/systray/xfce-tray-dialogs.c:333
 #: ../plugins/systray/systray.desktop.in.in.h:2
-#, fuzzy
 msgid "Notification Area"
-msgstr "Njoftime Urgjencash"
+msgstr "Zonë Njoftimesh"
 
 #. TRANSLATORS: This message is shown in an info dialog when the users
 #. add a notification area to a screen with a running systray manager.
 #: ../plugins/systray/xfce-tray-plugin.c:98
-#, fuzzy
 msgid "There is already a notification area running on this screen"
-msgstr "Ka tashmë një shtyllë sistemi që xhiron në këtë ekran"
+msgstr "Ka tashmë një zonë njoftimesh që xhiron në këtë ekran"
 
 #. TRANSLATORS: Bit of a weird text, but this is shown when for some
 #. reason another tray takes the ownership of the tray icons and this
 #. tray becomes unusable.
 #: ../plugins/systray/xfce-tray-plugin.c:221
-#, fuzzy
 msgid "The tray manager lost selection"
-msgstr "Përgjegjësi humbi kontrollin mbi përzgjedhjen"
+msgstr "Përgjegjësi i mbajtëses humbi përzgjedhjen"
 
 #: ../plugins/systray/xfce-tray-dialogs.c:281
 msgid "Are you sure you want to clear the list of known applications?"
@@ -640,40 +601,38 @@ msgstr "Zbatime të Fshehur"
 msgid "Failed to acquire manager selection for screen %d"
 msgstr "Dështoi pasja e përzgjedhjes së administratorit për skenën %d"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:143
-#: ../plugins/tasklist/tasklist-dialogs.c:208
+#: ../plugins/tasklist/tasklist-dialogs.c:163
+#: ../plugins/tasklist/tasklist-dialogs.c:232
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Listë Veprimesh"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:172
+#: ../plugins/tasklist/tasklist-dialogs.c:192
 #, fuzzy
-msgid "_Minimum width:"
-msgstr "Gjerësia Më e Vogël:"
+msgid "Fi_xed length (pixels):"
+msgstr "_Madhësi (piksela):"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:193
-#, fuzzy
+#: ../plugins/tasklist/tasklist-dialogs.c:217
 msgid "Use _flat buttons"
-msgstr "Përdor butona të sheshtë"
+msgstr "Përdor butona të _sheshtë"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:199
-#, fuzzy
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Show _handle"
-msgstr "Shfaq dorezë"
+msgstr "Shfaq _dorezë"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
 msgstr "Shfaq veprime prej tërë hapësirave të punës"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:220
+#: ../plugins/tasklist/tasklist-dialogs.c:244
 msgid "Never group tasks"
 msgstr "Mos grupo kurrë akte"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:221
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Automatically group tasks"
 msgstr "Grup akte vetvetiu"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:222
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Always group tasks"
 msgstr "Grupo akte përherë"
 
@@ -776,39 +735,39 @@ msgid "Program launcher with optional menu"
 msgstr "Nisës programi me menu opsionale"
 
 #: ../plugins/pager/pager.desktop.in.in.h:1
-#, fuzzy
 msgid "Switch between virtual desktops"
-msgstr "Pamje miniaturë e tërë desktopëve virtualë"
+msgstr "Kalo nga një desktop virtual te tjetri"
 
 #: ../plugins/separator/separator.desktop.in.in.h:1
 msgid "Adds a space or a line between panel items"
 msgstr "Shto hapësirë ose vijë midis elementësh paneli"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:1
-#, fuzzy
 msgid "Hide all windows and show the desktop"
-msgstr "Fshih dritare dhe shfaq desktopë"
+msgstr "Fshih tërë dritaret dhe shfaq desktopin"
 
 #: ../plugins/showdesktop/showdesktop.desktop.in.in.h:2
 msgid "Show Desktop"
 msgstr "Shfaq Desktop"
 
 #: ../plugins/systray/systray.desktop.in.in.h:1
-#, fuzzy
 msgid "Area where notification icons appear"
-msgstr "Shfaq ikona njoftimesh"
+msgstr "Zonë ku shfaqen ikona njoftimesh"
 
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:1
 msgid "Switch between open windows using buttons"
-msgstr ""
+msgstr "Hidhu nga njëra dritare e hapur në tjetrën duke përdorur butona"
 
 #: ../plugins/windowlist/windowlist.desktop.in.in.h:1
 msgid "Switch between open windows using a menu"
-msgstr ""
+msgstr "Hidhu nga njëra dritare e hapur në tjetrën duke përdorur një menu"
 
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Përgjegjës Panelesh"
+
+#~ msgid "_Minimum width:"
+#~ msgstr "Gjerësia më e _vogël:"
 
 #~ msgid "Unknown"
 #~ msgstr "E panjohur"
