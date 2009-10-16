@@ -4,6 +4,21 @@
 - Fix launcher with 'Run in Terminal' (part of bug #5301).
 - Fix typo preventing build on older gtk versions.
 - Don't send -r to session restart command (bug #5454).
+- Add dist-hook: all to the API docs Makefile.am as well.
+- Add dist-hook: all to the libxfce4panel/ Makefile.am.
+- Add missing translation.
+- Merge translation from master back to xfce-4.6.
+- Remove unused code.	Nick Schermer	1	-2/+1
+- Add option to tasklist to force a fixed width (bug #5045).
+- Get the time the same as orange does, hopefully should fix bug #5352.
+- Better check for the lcd resize when the number of hour digits changes (bug #5218).
+- Use g_timeout_add_seconds when available for the clock timeout.
+- Resync tooltip and clock timeout when they are out of sync (bug #2957).
+- Remove the hour interval from the clock, minutes are good enough.
+- Use Git in the build files and drop unneeded po files.
+- Use g_markup_printf_escaped in the launcher tooltip (bug #5507).
+- A whole bunch of translation updated (tr, pt, ca, ja, es, da, gl, sq, lv, sk, ru,
+  el, gl, kk, hu, eu, ast, ro)
 
 
 4.6.1
@@ -64,13 +79,13 @@
 - Remove signal disconnect left after the patch of bug #4474.
 - Fix xrandr problem so it's possible to change the panel's
   monitor after a monitor has been removed (bug #3620).
-- Panel does not adhere to 'fullwidth' property when using 
+- Panel does not adhere to 'fullwidth' property when using
   vertical orientation after restarting (bug #4456).
 - Implement SmRestartImmediately (bug #4516).
-- Reverse the order of the launcher menu when the panel is on 
+- Reverse the order of the launcher menu when the panel is on
   the top of the screen (bug #4450).
 - Don't spawn zombies (bug #4490).
-- Quote commands in the launcher when selecting an application 
+- Quote commands in the launcher when selecting an application
   (bug #4507, bug #4549).
 - Restore panel workspace names after panel restart (bug #4589).
 - Update the tooltip of the clock when it is visible.
