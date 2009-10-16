@@ -2,8 +2,8 @@ Bug tracking system
 ===================
 
 To report bugs or file feature requests for xfce4-panel, please
-use the Xfce bugzilla at http://bugzilla.xfce.org/. The product
-is Xfce, component xfce4-panel.
+use the Xfce bugzilla at http://bugzilla.xfce.org/. The category
+is Xfce, product Xfce4-panel.
 Before reporting the bug, please search the bug tracker, to make
 sure it wasn't reported already before.
 
@@ -15,14 +15,14 @@ Please submit patches to the Xfce bug tracking system or use the
 xfce4-dev mailinglists.
 
 Please send a patch againts a recent version of xfce4-panel. Patches
-against the Subversion trunk branch are most preferable. You can always
-access the trunk branch from
+against the Git master branch are most preferable. You can always
+access the master branch from
 
-  http://svn.xfce.org/svn/xfce/xfce4-panel/trunk
+  http://git.xfce.org/xfce/xfce4-panel/
 
-or using an installed Subversion client
+or using an installed Git client
 
-  svn co http://svn.xfce.org/svn/xfce/xfce4-panel/trunk xfce4-panel
+  git clone git://git.xfce.org/xfce/xfce4-panel
 
 
 Coding Style
@@ -64,19 +64,12 @@ Coding Style
 ChangeLogs
 ==========
 
-I use the svn2cl package to create the changelog from the SVN log messages.
-
-  - Website: http://ch.tudelft.nl/~arthur/svn2cl/ . 
-  - Current version: 0.8. 
-  - Command line: svn2cl.sh --linelen=74 --break-before-msg.
-
-Note: I don't care about linelen, but with this parameter the changes with
-      previous ChangeLog were smallest.
+We use the logs produced by git.
 
 
 Misc
 ====
-- If you have SVN access it is ok to commit trivial changes directly, but 
+- If you have Git access it is ok to commit trivial changes directly, but 
   please send a patch to the mailing list for discussion for any non-trivial
   or non-obvious changes.
 - As an exception to the rule above, if you are managing an Xfce release, feel 
