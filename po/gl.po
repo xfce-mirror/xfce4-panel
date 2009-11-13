@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-10-07 22:00+0200\n"
-"PO-Revision-Date: 2009-08-22 13:13+0100\n"
+"PO-Revision-Date: 2009-11-13 13:37+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,7 @@ msgid "Remove \"%s\"?"
 msgstr "Eliminar \"%s\"?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
+msgid "The item will be removed from the panel and its configuration will be lost."
 msgstr "O elemento eliminarase do panel e perderase a súa configuración."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
@@ -59,17 +58,21 @@ msgid "Remove"
 msgstr "Eliminar"
 
 #. TRANSLATORS: Add menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:903 ../panel/panel.c:606
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:903
+#: ../panel/panel.c:606
 msgid "Add New Items..."
 msgstr "Engadir novos elementos..."
 
 #. TRANSLATORS: Customize menu item in the right-click plugin menu
-#: ../libxfce4panel/xfce-panel-plugin-iface.c:915 ../panel/panel.c:595
+#: ../libxfce4panel/xfce-panel-plugin-iface.c:915
+#: ../panel/panel.c:595
 msgid "Customize Panel..."
 msgstr "Personalizar o panel..."
 
-#: ../panel/panel.c:621 ../plugins/actions/actions.c:283
-#: ../plugins/actions/actions.c:317 ../plugins/actions/actions.c:454
+#: ../panel/panel.c:621
+#: ../plugins/actions/actions.c:283
+#: ../plugins/actions/actions.c:317
+#: ../plugins/actions/actions.c:454
 msgid "Quit"
 msgstr "Saír"
 
@@ -81,11 +84,14 @@ msgstr "Reiniciar"
 msgid "About the Xfce Panel"
 msgstr "Acerca do panel de Xfce"
 
-#: ../panel/panel-app.c:259 ../panel/panel-app.c:906
+#: ../panel/panel-app.c:259
+#: ../panel/panel-app.c:906
 msgid "Exit Xfce Panel?"
 msgstr "Saír do panel de Xfce?"
 
-#: ../panel/panel-app.c:904 ../panel/panel-app.c:936 ../panel/panel-app.c:969
+#: ../panel/panel-app.c:904
+#: ../panel/panel-app.c:936
+#: ../panel/panel-app.c:969
 msgid "Xfce Panel"
 msgstr "Panel de Xfce"
 
@@ -103,7 +109,8 @@ msgid "The selected panel and all its items will be removed."
 msgstr "Eliminaranse e panel seleccionado e tódolos seus elementos."
 
 #. TRANSLATORS: Used in the credits tab in the panel's about dialog
-#: ../panel/panel-app.c:976 ../panel/panel-app.c:977
+#: ../panel/panel-app.c:976
+#: ../panel/panel-app.c:977
 msgid "Developer"
 msgstr "Desenvolvedor"
 
@@ -139,7 +146,7 @@ msgstr "Mostra o diálogo \"Engadir novo elemento\""
 #. executed without xserver running
 #: ../panel/main.c:91
 msgid "Failed to open display"
-msgstr ""
+msgstr "Produciuse un erro ao abrir a pantalla"
 
 #: ../panel/main.c:104
 msgid "The Xfce development team. All rights reserved."
@@ -183,42 +190,51 @@ msgstr ""
 msgid "_Search:"
 msgstr "_Buscar:"
 
-#: ../panel/panel-dialogs.c:881 ../panel/panel-dialogs.c:1117
+#: ../panel/panel-dialogs.c:881
+#: ../panel/panel-dialogs.c:1117
 msgid "Normal Width"
 msgstr "Ancho normal"
 
-#: ../panel/panel-dialogs.c:882 ../panel/panel-dialogs.c:1118
+#: ../panel/panel-dialogs.c:882
+#: ../panel/panel-dialogs.c:1118
 msgid "Full Width"
 msgstr "Ancho máximo"
 
-#: ../panel/panel-dialogs.c:886 ../panel/panel-dialogs.c:1122
+#: ../panel/panel-dialogs.c:886
+#: ../panel/panel-dialogs.c:1122
 msgid "Normal Height"
 msgstr "Altura normal"
 
-#: ../panel/panel-dialogs.c:887 ../panel/panel-dialogs.c:1123
+#: ../panel/panel-dialogs.c:887
+#: ../panel/panel-dialogs.c:1123
 msgid "Full Height"
 msgstr "Altura completa"
 
-#: ../panel/panel-dialogs.c:895 ../panel/panel-dialogs.c:1132
+#: ../panel/panel-dialogs.c:895
+#: ../panel/panel-dialogs.c:1132
 msgid "Span Monitors"
 msgstr ""
 
-#: ../panel/panel-dialogs.c:958 ../panel/panel-dialogs.c:1197
+#: ../panel/panel-dialogs.c:958
+#: ../panel/panel-dialogs.c:1197
 #: ../plugins/launcher/launcher-dialog.c:1555
 msgid "Left"
 msgstr "Esquerda"
 
-#: ../panel/panel-dialogs.c:960 ../panel/panel-dialogs.c:1199
+#: ../panel/panel-dialogs.c:960
+#: ../panel/panel-dialogs.c:1199
 #: ../plugins/launcher/launcher-dialog.c:1556
 msgid "Right"
 msgstr "Dereita"
 
-#: ../panel/panel-dialogs.c:965 ../panel/panel-dialogs.c:1204
+#: ../panel/panel-dialogs.c:965
+#: ../panel/panel-dialogs.c:1204
 #: ../plugins/launcher/launcher-dialog.c:1557
 msgid "Top"
 msgstr "Arriba"
 
-#: ../panel/panel-dialogs.c:967 ../panel/panel-dialogs.c:1206
+#: ../panel/panel-dialogs.c:967
+#: ../panel/panel-dialogs.c:1206
 #: ../plugins/launcher/launcher-dialog.c:1558
 msgid "Bottom"
 msgstr "Abaixo"
@@ -244,11 +260,13 @@ msgstr "Auto _ocultar"
 msgid "Orientation:"
 msgstr "Orientación:"
 
-#: ../panel/panel-dialogs.c:1170 ../plugins/actions/actions.c:481
+#: ../panel/panel-dialogs.c:1170
+#: ../plugins/actions/actions.c:481
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ../panel/panel-dialogs.c:1172 ../plugins/actions/actions.c:482
+#: ../panel/panel-dialogs.c:1172
+#: ../plugins/actions/actions.c:482
 msgid "Vertical"
 msgstr "Vertical"
 
@@ -264,7 +282,8 @@ msgstr "Nos dous lados"
 msgid "Select Monitor"
 msgstr "Seleccione monitor"
 
-#: ../panel/panel-dialogs.c:1401 ../plugins/clock/clock-dialog.c:500
+#: ../panel/panel-dialogs.c:1401
+#: ../plugins/clock/clock-dialog.c:500
 #: ../plugins/systray/xfce-tray-dialogs.c:350
 #: ../plugins/tasklist/tasklist-dialogs.c:186
 #: ../plugins/windowlist/windowlist-dialog.c:187
@@ -283,7 +302,8 @@ msgstr "_Transparencia (%):"
 msgid "Make active panel _opaque"
 msgstr "Facer _opaco o panel activo"
 
-#: ../panel/panel-dialogs.c:1514 ../panel/panel-dialogs.c:1550
+#: ../panel/panel-dialogs.c:1514
+#: ../panel/panel-dialogs.c:1550
 #: ../panel/panel-dialogs.c:1574
 #, c-format
 msgid "Panel %d"
@@ -309,7 +329,8 @@ msgstr "Panel"
 msgid "Customize the panel settings"
 msgstr "Personalizar a configuración do panel"
 
-#: ../plugins/actions/actions.c:264 ../plugins/actions/actions.c:300
+#: ../plugins/actions/actions.c:264
+#: ../plugins/actions/actions.c:300
 #: ../plugins/actions/actions.c:455
 msgid "Lock screen"
 msgstr "Bloquear a pantalla"
@@ -404,12 +425,14 @@ msgstr "Só mostrar as aplicacións _minimizadas"
 msgid "Show applications of _all workspaces"
 msgstr "Mostrar as aplicacións de _tódolos espazos de traballo"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/iconbox/iconbox.c:946
+#: ../plugins/tasklist/tasklist-dialogs.c:211
 msgid "Use all available _space"
 msgstr "Usar todo o e_spazo dispoñible"
 
 #. TRANSLATORS: Name of a newly created launcher
-#: ../plugins/launcher/launcher.c:901 ../plugins/launcher/launcher.c:968
+#: ../plugins/launcher/launcher.c:901
+#: ../plugins/launcher/launcher.c:968
 msgid "New Item"
 msgstr "Novo elemento"
 
@@ -514,7 +537,8 @@ msgstr "Predeterminado"
 msgid "Inside Button"
 msgstr "Dentro do botón"
 
-#: ../plugins/pager/pager.c:368 ../plugins/pager/pager.desktop.in.in.h:2
+#: ../plugins/pager/pager.c:368
+#: ../plugins/pager/pager.desktop.in.in.h:2
 msgid "Workspace Switcher"
 msgstr "Selector de espazos de traballo"
 
@@ -616,9 +640,8 @@ msgid "Task List"
 msgstr "Lista de _tarefas"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:192
-#, fuzzy
 msgid "Fi_xed length (pixels):"
-msgstr "_Tamaño (píxeles):"
+msgstr "Lon_xitude fixa (píxels):"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:218
 msgid "Use _flat buttons"
@@ -682,12 +705,8 @@ msgid "Window List"
 msgstr "Lista de ventás"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Aviso urxente</i> o botón pestanexará cando unha aplicación precise a súa "
-"atención."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Aviso urxente</i> o botón pestanexará cando unha aplicación precise a súa atención."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -776,3 +795,4 @@ msgstr "Administrador de paneis"
 
 #~ msgid "_Minimum width:"
 #~ msgstr "Largura _mínima:"
+
