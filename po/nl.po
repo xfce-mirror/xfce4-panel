@@ -2,12 +2,12 @@
 # Copyright (C) 2002-2009 The Xfce development team.
 # This file is distributed under the same license as the xfce4-panel package.
 # Jasper Huijsmans <jasper@xfce.org>, 2005.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-panel 4.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-07 22:00+0200\n"
+"POT-Creation-Date: 2009-12-20 18:48+0000\n"
 "PO-Revision-Date: 2006-08-12 17:06+0200\n"
 "Last-Translator: Nick Schermer <nick@xfce.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -28,11 +28,8 @@ msgid "Remove \"%s\"?"
 msgstr "\"%s\" verwijderen?"
 
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:620
-msgid ""
-"The item will be removed from the panel and its configuration will be lost."
-msgstr ""
-"Het item zal verwijderd worden van het paneel en de bijbehorende "
-"configuratie gaat verloren."
+msgid "The item will be removed from the panel and its configuration will be lost."
+msgstr "Het item zal verwijderd worden van het paneel en de bijbehorende configuratie gaat verloren."
 
 #. TRANSLATORS: Properties menu item in the right-click plugin menu
 #: ../libxfce4panel/xfce-panel-plugin-iface.c:836
@@ -87,8 +84,7 @@ msgstr "Xfce Paneel"
 
 #: ../panel/panel-app.c:907
 msgid "You can't remove the last panel. Would you like to exit the program?"
-msgstr ""
-"U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
+msgstr "U kunt het laatste paneel niet verwijderen. Wilt u het programma afsluiten?"
 
 #: ../panel/panel-app.c:934
 #, c-format
@@ -166,7 +162,8 @@ msgstr "Kon \"%s\" module niet openen"
 msgid "Add New Items"
 msgstr "Nieuwe items toevoegen"
 
-#. TRANSLATORS: Make sure this string is equally spread in the add items dialog,
+#. TRANSLATORS: Make sure this string is equally spread in the add items
+#. dialog,
 #. since gtk labels do not update text wrapping on a dialog resize.
 #: ../panel/panel-dialogs.c:642
 msgid ""
@@ -401,7 +398,7 @@ msgstr "Alleen ge_minimaliseerde toepassingen tonen"
 msgid "Show applications of _all workspaces"
 msgstr "Vensters van _alle bureaubladen tonen"
 
-#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:211
+#: ../plugins/iconbox/iconbox.c:946 ../plugins/tasklist/tasklist-dialogs.c:210
 msgid "Use all available _space"
 msgstr "Alle be_schikbare ruimte opvullen"
 
@@ -598,7 +595,8 @@ msgstr "Aa_ntal rijen:"
 msgid "Hidden Applications"
 msgstr "Verborgen Toepassingen"
 
-#. TRANSALTORS: Error returned when the tray manager failed to start. This won't
+#. TRANSALTORS: Error returned when the tray manager failed to start. This
+#. won't
 #. show up normally since this is already checked when the plugin is added.
 #: ../plugins/systray/xfce-tray-manager.c:433
 #, c-format
@@ -606,37 +604,32 @@ msgid "Failed to acquire manager selection for screen %d"
 msgstr "Het is mislukt om het mededelingengebied op te starten voor scherm %d"
 
 #: ../plugins/tasklist/tasklist-dialogs.c:163
-#: ../plugins/tasklist/tasklist-dialogs.c:233
+#: ../plugins/tasklist/tasklist-dialogs.c:232
 #: ../plugins/tasklist/tasklist.desktop.in.in.h:2
 msgid "Task List"
 msgstr "Takenlijst"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:192
-#, fuzzy
-msgid "Fi_xed length (pixels):"
-msgstr "Grootte (pixel_s):"
-
-#: ../plugins/tasklist/tasklist-dialogs.c:218
+#: ../plugins/tasklist/tasklist-dialogs.c:217
 msgid "Use _flat buttons"
 msgstr "Platte _knoppen gebruiken"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:224
+#: ../plugins/tasklist/tasklist-dialogs.c:223
 msgid "Show _handle"
 msgstr "_Handgreep tonen"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:236
+#: ../plugins/tasklist/tasklist-dialogs.c:235
 msgid "Show tasks from _all workspaces"
 msgstr "Taken van _alle bureaubladen tonen"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:245
+#: ../plugins/tasklist/tasklist-dialogs.c:244
 msgid "Never group tasks"
 msgstr "Taken nooit groeperen"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:246
+#: ../plugins/tasklist/tasklist-dialogs.c:245
 msgid "Automatically group tasks"
 msgstr "Taken automatisch groeperen"
 
-#: ../plugins/tasklist/tasklist-dialogs.c:247
+#: ../plugins/tasklist/tasklist-dialogs.c:246
 msgid "Always group tasks"
 msgstr "Taken altijd groeperen"
 
@@ -678,12 +671,8 @@ msgid "Window List"
 msgstr "Vensterlijst"
 
 #: ../plugins/windowlist/windowlist-dialog.c:148
-msgid ""
-"<i>Urgency notification</i> will blink the button when an application needs "
-"attention."
-msgstr ""
-"<i>Urgentie-notificatie</i> zal de knop doen knipperen wanneer de toepassing "
-"aandacht vraagt."
+msgid "<i>Urgency notification</i> will blink the button when an application needs attention."
+msgstr "<i>Urgentie-notificatie</i> zal de knop doen knipperen wanneer de toepassing aandacht vraagt."
 
 #. Button Urgency Notification
 #: ../plugins/windowlist/windowlist-dialog.c:155
@@ -769,6 +758,10 @@ msgstr "Wisselen tussen open vensters met behulp van een menu"
 #: ../settings/xfce4-panel-manager.desktop.in.h:3
 msgid "Panel Manager"
 msgstr "Paneel Manager"
+
+#: ../plugins/tasklist/tasklist-dialogs.c:192
+msgid "Fi_xed length (pixels):"
+msgstr "Grootte (pixel_s):"
 
 #~ msgid "_Minimum width:"
 #~ msgstr "_Minimale breedte:"
