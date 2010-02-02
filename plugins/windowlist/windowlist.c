@@ -116,6 +116,15 @@ menulist_workspace_name (WnckWorkspace *workspace,
 /**
  * Menu Actions
  **/
+static gboolean
+menu_destroy (gpointer user_data)
+{
+  gtk_widget_destroy (GTK_WIDGET (user_data));
+  return FALSE;
+}
+
+
+
 static void
 menu_deactivated (GtkWidget *menu,
                   GtkWidget *button)
@@ -125,7 +134,7 @@ menu_deactivated (GtkWidget *menu,
     gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button),
                                   FALSE);
     if (menu)
-        gtk_widget_destroy (menu);
+        g_idle_add (menu_destroy, menu);
 }
 
 
