@@ -48,7 +48,8 @@ libclock_la_LIBADD =							\
 	$(GTK_LIBS)							\
 	$(CAIRO_LIBS)							\
 	$(LIBXFCE4UTIL_LIBS)						\
-	$(LIBXFCEGUI4_LIBS)
+	$(LIBXFCEGUI4_LIBS)						\
+	-lm
 
 libclock_la_DEPENDENCIES =						\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la

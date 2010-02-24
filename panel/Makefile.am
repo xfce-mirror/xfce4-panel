@@ -54,7 +54,8 @@ xfce4_panel_LDADD =								\
 	$(LIBXFCEGUI4_LIBS)							\
 	$(LIBSTARTUP_NOTIFICATION_LIBS)						\
 	$(GMODULE_LIBS)								\
-	$(LIBX11_LIBS)
+	$(LIBX11_LIBS)								\
+	-lm
 
 xfce4_panel_DEPENDENCIES =							\
 	$(top_builddir)/libxfce4panel/libxfce4panel.la
