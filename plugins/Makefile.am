@@ -2,6 +2,7 @@
 SUBDIRS = \
 	actions \
 	clock \
+	directorymenu \
 	launcher \
 	pager \
 	separator \
