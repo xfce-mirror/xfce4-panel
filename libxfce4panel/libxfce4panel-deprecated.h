@@ -161,11 +161,11 @@ enum /*< skip >*/
     \
     g_return_if_fail (GTK_IS_PLUG (plug)); \
     g_return_if_fail (XFCE_IS_PANEL_PLUGIN (xpp)); \
-    g_return_if_fail (GDK_IS_WINDOW (plug->window)); \
+    g_return_if_fail (GDK_IS_WINDOW (gtk_widget_get_window (plug))); \
     g_return_if_fail (_xpp_atom != GDK_NONE); \
     \
     event.type = GDK_CLIENT_EVENT; \
-    event.window = plug->window; \
+    event.window = gtk_widget_get_window (plug); \
     event.send_event = TRUE; \
     event.message_type = _xpp_atom; \
     event.data_format = 16; \
