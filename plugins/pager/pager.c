@@ -58,19 +58,15 @@ static void     pager_plugin_configure_plugin          (XfcePanelPlugin   *panel
 
 struct _PagerPluginClass
 {
-  /* parent class */
   XfcePanelPluginClass __parent__;
 };
 
 struct _PagerPlugin
 {
-  /* parent type */
   XfcePanelPlugin __parent__;
 
-  /* the wnck pager */
   GtkWidget     *wnck_pager;
 
-  /* the active wnck screen */
   WnckScreen    *wnck_screen;
 
   /* settings */
