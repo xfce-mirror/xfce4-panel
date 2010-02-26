@@ -34,7 +34,9 @@ typedef struct _ShowDesktopPlugin      ShowDesktopPlugin;
 #define XFCE_IS_SHOW_DESKTOP_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_SHOW_DESKTOP_PLUGIN))
 #define XFCE_SHOW_DESKTOP_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_SHOW_DESKTOP_PLUGIN, ShowDesktopPluginClass))
 
-GType show_desktop_plugin_get_type (void) G_GNUC_CONST;
+GType show_desktop_plugin_get_type      (void) G_GNUC_CONST;
+
+void  show_desktop_plugin_register_type (GTypeModule *type_module);
 
 G_END_DECLS
 

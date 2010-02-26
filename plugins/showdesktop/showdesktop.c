@@ -58,10 +58,8 @@ struct _ShowDesktopPlugin
 
 
 
-/* define and register the plugin */
-G_DEFINE_TYPE (ShowDesktopPlugin, show_desktop_plugin, XFCE_TYPE_PANEL_PLUGIN)
-
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_SHOW_DESKTOP_PLUGIN)
+/* define the plugin */
+XFCE_PANEL_DEFINE_PLUGIN (ShowDesktopPlugin, show_desktop_plugin)
 
 
 
