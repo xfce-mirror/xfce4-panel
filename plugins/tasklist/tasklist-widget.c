@@ -487,8 +487,16 @@ xfce_tasklist_size_allocate (GtkWidget     *widget,
         continue;
 
       /* calculate the child position */
-      child_allocation.x = allocation->x + (i / rows) * width;
-      child_allocation.y = allocation->y + (i % rows) * height;
+      if (tasklist->orientation == GTK_ORIENTATION_HORIZONTAL)
+        {
+          child_allocation.x = allocation->x + (i / rows) * width;
+          child_allocation.y = allocation->y + (i % rows) * height;
+        }
+      else
+        {
+          child_allocation.x = allocation->x + (i % rows) * width;
+          child_allocation.y = allocation->y + (i / rows) * height;
+        }
 
       /* allocate the child */
       gtk_widget_size_allocate (child->button, &child_allocation);
@@ -1481,4 +1489,10 @@ xfce_tasklist_set_orientation (XfceTasklist   *tasklist,
                                GtkOrientation  orientation)
 {
   panel_return_if_fail (XFCE_IS_TASKLIST (tasklist));
+  
+  if (tasklist->orientation != orientation)
+    {
+      tasklist->orientation = orientation;
+      gtk_widget_queue_resize (GTK_WIDGET (tasklist));
+    }
 }
