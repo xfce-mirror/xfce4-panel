@@ -256,8 +256,8 @@ main (gint argc, gchar **argv)
 
 #if defined(HAVE_SYS_PRCTL_H) && defined(PR_SET_NAME)
   /* change the process name to something that makes sence */
-  g_snprintf (process_name, sizeof (process_name), "panel-%s-%d",
-              wrapper_name, opt_unique_id);
+  g_snprintf (process_name, sizeof (process_name), "panel-%d-%s",
+              opt_unique_id, wrapper_name);
   if (prctl (PR_SET_NAME, (gulong) process_name, 0, 0, 0) == -1)
     g_warning ("Failed to set the process name to \"%s\".", process_name);
 #endif
