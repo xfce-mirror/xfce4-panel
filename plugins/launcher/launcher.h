@@ -15,35 +15,49 @@
  * Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef __XFCE_TEST_PLUGIN_H__
-#define __XFCE_TEST_PLUGIN_H__
+#ifndef __XFCE_LAUNCHER_PLUGIN_H__
+#define __XFCE_LAUNCHER_PLUGIN_H__
 
 #include <gtk/gtk.h>
 #include <libxfce4panel/libxfce4panel.h>
 
 G_BEGIN_DECLS
 
-typedef struct _XfceTestPluginClass    XfceTestPluginClass;
-typedef struct _XfceTestPlugin         XfceTestPlugin;
-typedef struct _XfceTestPluginEntry    XfceTestPluginEntry;
-typedef enum   _XfceTestPluginArrowPos XfceTestPluginArrowPos;
+typedef struct _LauncherPluginClass    LauncherPluginClass;
+typedef struct _LauncherPlugin         LauncherPlugin;
+typedef struct _LauncherPluginEntry    LauncherPluginEntry;
+typedef enum   _LauncherPluginArrowPos LauncherPluginArrowPos;
 
-#define XFCE_TYPE_TEST_PLUGIN            (xfce_test_plugin_get_type ())
-#define XFCE_TEST_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_TEST_PLUGIN, XfceTestPlugin))
-#define XFCE_TEST_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_TEST_PLUGIN, XfceTestPluginClass))
-#define XFCE_IS_TEST_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_TEST_PLUGIN))
-#define XFCE_IS_TEST_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_TEST_PLUGIN))
-#define XFCE_TEST_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_TEST_PLUGIN, XfceTestPluginClass))
+#define XFCE_TYPE_LAUNCHER_PLUGIN            (launcher_plugin_get_type ())
+#define XFCE_LAUNCHER_PLUGIN(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPlugin))
+#define XFCE_LAUNCHER_PLUGIN_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPluginClass))
+#define XFCE_IS_LAUNCHER_PLUGIN(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), XFCE_TYPE_LAUNCHER_PLUGIN))
+#define XFCE_IS_LAUNCHER_PLUGIN_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), XFCE_TYPE_LAUNCHER_PLUGIN))
+#define XFCE_LAUNCHER_PLUGIN_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), XFCE_TYPE_LAUNCHER_PLUGIN, LauncherPluginClass))
 
-#define LIST_HAS_ONE_ENTRY(list)         ((list) != NULL && (list)->next == NULL)
-#define LIST_HAS_TWO_OR_MORE_ENTRIES     ((list) != NULL && (list)->next != NULL)
+#define LIST_HAS_ONE_ENTRY(list)             ((list) != NULL && (list)->next == NULL)
+#define LIST_HAS_TWO_OR_MORE_ENTRIES(list)   ((list) != NULL && (list)->next != NULL)
+#define launcher_plugin_filenames_free(list) G_STMT_START{ \
+                                             g_slist_foreach (list, (GFunc) g_free, NULL); \
+                                             g_slist_free (list); \
+                                             }G_STMT_END
 
-struct _XfceTestPluginClass
+enum _LauncherPluginArrowPos
+{
+  ARROW_POS_DEFAULT,
+  ARROW_POS_LEFT,
+  ARROW_POS_RIGHT,
+  ARROW_POS_TOP,
+  ARROW_POS_BOTTOM,
+  ARROW_POS_INSIDE_BUTTON
+};
+
+struct _LauncherPluginClass
 {
   XfcePanelPluginClass __parent__;
 };
 
-struct _XfceTestPlugin
+struct _LauncherPlugin
 {
   XfcePanelPlugin __parent__;
 
@@ -51,11 +65,11 @@ struct _XfceTestPlugin
   guint                   move_clicked_to_button : 1;
   guint                   disable_tooltips : 1;
   guint                   show_labels : 1;
-  XfceTestPluginArrowPos  arrow_position;
+  LauncherPluginArrowPos  arrow_position;
 
   /* list of entries in the launcher */
   GList                  *entries;
-  
+
   /* store the icon theme */
   GtkIconTheme           *icon_theme;
 
@@ -73,7 +87,7 @@ struct _XfceTestPlugin
   guint                   menu_reversed_order : 1;
 };
 
-struct _XfceTestPluginEntry
+struct _LauncherPluginEntry
 {
   gchar *name;
   gchar *comment;
@@ -87,22 +101,23 @@ struct _XfceTestPluginEntry
 #endif
 };
 
-enum _XfceTestPluginArrowPos
+/* target types for dropping in the launcher plugin */
+static const GtkTargetEntry drop_targets[] =
 {
-  ARROW_POS_DEFAULT,
-  ARROW_POS_LEFT,
-  ARROW_POS_RIGHT,
-  ARROW_POS_TOP,
-  ARROW_POS_BOTTOM,
-  ARROW_POS_INSIDE_BUTTON  
+    { "text/uri-list", 0, 0, },
+    { "STRING",	       0, 0 },
+    { "UTF8_STRING",   0, 0 },
+    { "text/plain",    0, 0 },
 };
 
-GType      xfce_test_plugin_get_type (void) G_GNUC_CONST;
+GType      launcher_plugin_get_type (void) G_GNUC_CONST;
 
-void       xfce_test_plugin_rebuild  (XfceTestPlugin *plugin, gboolean update_icon);
+void       launcher_plugin_rebuild  (LauncherPlugin *plugin, gboolean update_icon);
 
-GdkPixbuf *xfce_test_plugin_load_pixbuf (const gchar *name, gint size, GtkIconTheme *icon_theme);
+GSList *launcher_plugin_filenames_from_selection_data (GtkSelectionData *selection_data);
+
+GdkPixbuf *launcher_plugin_load_pixbuf (const gchar *name, gint size, GtkIconTheme *icon_theme);
 
 G_END_DECLS
 
-#endif /* !__XFCE_TEST_PLUGIN_H__ */
+#endif /* !__XFCE_LAUNCHER_PLUGIN_H__ */

@@ -19,83 +19,93 @@
 #include <config.h>
 #endif
 
+#include <exo/exo.h>
 #include <libxfce4util/libxfce4util.h>
-#include <libxfce4panel/libxfce4panel.h>
+#include <libxfce4ui/libxfce4ui.h>
 
-#include "xfce-test-plugin.h"
+#include "launcher.h"
 
-
-
-static void xfce_test_plugin_class_init (XfceTestPluginClass *klass);
-static void xfce_test_plugin_init (XfceTestPlugin *plugin);
-static void xfce_test_plugin_construct (XfcePanelPlugin *panel_plugin);
-static void xfce_test_plugin_free_data (XfcePanelPlugin *panel_plugin);
-static void xfce_test_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
-static gboolean xfce_test_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
-static void xfce_test_plugin_save (XfcePanelPlugin *panel_plugin);
-static void xfce_test_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
-static void xfce_test_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin, gint position);
-static void xfce_test_plugin_icon_theme_changed (GtkIconTheme *icon_theme, XfceTestPlugin *plugin);
-static void xfce_test_plugin_update_icon (XfceTestPlugin *plugin);
-static void xfce_test_plugin_reorder_buttons (XfceTestPlugin *plugin);
-static inline gchar *xfce_test_plugin_read_entry (XfceRc *rc, const gchar *name);
-static gboolean xfce_test_plugin_read (XfceTestPlugin *plugin);
-static void xfce_test_plugin_button_state_changed (GtkWidget *button_a, GtkStateType state, GtkWidget *button_b);
-static gboolean xfce_test_plugin_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, XfceTestPluginEntry *entry);
-static gboolean xfce_test_plugin_icon_button_pressed (GtkWidget *button, GdkEventButton *event, XfceTestPlugin *plugin);
-static gboolean xfce_test_plugin_icon_button_released (GtkWidget *button, GdkEventButton *event, XfceTestPlugin *plugin);
-static void xfce_test_plugin_icon_button_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y, GtkSelectionData *selection_data, guint info, guint time, XfceTestPlugin *plugin);
-static gboolean xfce_test_plugin_icon_button_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, XfceTestPlugin *plugin);
-static gboolean xfce_test_plugin_arrow_button_pressed (GtkWidget *button, GdkEventButton *event, XfceTestPlugin *plugin);
-static gboolean xfce_test_plugin_menu_popup (gpointer user_data);
-static void xfce_test_plugin_menu_popup_destroyed (gpointer user_data);
-static void xfce_test_plugin_menu_deactivate (GtkWidget *menu, XfceTestPlugin *plugin);
-static void xfce_test_plugin_menu_destroy (XfceTestPlugin *plugin);
-static void xfce_test_plugin_menu_build (XfceTestPlugin *plugin);
-static gboolean xfce_test_plugin_menu_item_released (GtkMenuItem *menu_item, GdkEventButton *event, XfceTestPluginEntry *entry);
-static XfceTestPluginEntry *xfce_test_plugin_entry_new_default (void);
-static void xfce_test_plugin_entry_free (XfceTestPluginEntry *entry);
+#define MENU_POPUP_DELAY  (225)
+#define ARROW_BUTTON_SIZE (16)
+#define TOOLTIP_ICON_SIZE (32)
+#define MENU_ICON_SIZE    (24)
 
 
 
-static GQuark xfce_test_plugin_quark = 0;
+static void launcher_plugin_class_init (LauncherPluginClass *klass);
+static void launcher_plugin_init (LauncherPlugin *plugin);
+static void launcher_plugin_construct (XfcePanelPlugin *panel_plugin);
+static void launcher_plugin_free_data (XfcePanelPlugin *panel_plugin);
+static void launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin, GtkOrientation orientation);
+static gboolean launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin, gint size);
+static void launcher_plugin_save (XfcePanelPlugin *panel_plugin);
+static void launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin);
+static void launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin, gint position);
+static void launcher_plugin_execute_string_append_quoted (GString *string, const gchar *unquoted);
+static gchar *launcher_plugin_execute_parse_command (LauncherPluginEntry *entry, GSList *file_list);
+static void launcher_plugin_execute (GdkScreen *screen, LauncherPluginEntry *entry, GSList *file_list);
+static void launcher_plugin_execute_from_clipboard (GdkScreen *screen, LauncherPluginEntry *entry);
+static void launcher_plugin_icon_theme_changed (GtkIconTheme *icon_theme, LauncherPlugin *plugin);
+static void launcher_plugin_update_icon (LauncherPlugin *plugin);
+static void launcher_plugin_reorder_buttons (LauncherPlugin *plugin);
+static inline gchar *launcher_plugin_read_entry (XfceRc *rc, const gchar *name);
+static gboolean launcher_plugin_read (LauncherPlugin *plugin);
+static void launcher_plugin_button_state_changed (GtkWidget *button_a, GtkStateType state, GtkWidget *button_b);
+static gboolean launcher_plugin_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPluginEntry *entry);
+static gboolean launcher_plugin_icon_button_pressed (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
+static gboolean launcher_plugin_icon_button_released (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
+static void launcher_plugin_icon_button_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y, GtkSelectionData *selection_data, guint info, guint time, LauncherPlugin *plugin);
+static gboolean launcher_plugin_icon_button_query_tooltip (GtkWidget *widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip *tooltip, LauncherPlugin *plugin);
+static gboolean launcher_plugin_arrow_button_pressed (GtkWidget *button, GdkEventButton *event, LauncherPlugin *plugin);
+static gboolean launcher_plugin_menu_popup (gpointer user_data);
+static void launcher_plugin_menu_popup_destroyed (gpointer user_data);
+static void launcher_plugin_menu_deactivate (GtkWidget *menu, LauncherPlugin *plugin);
+static void launcher_plugin_menu_destroy (LauncherPlugin *plugin);
+static void launcher_plugin_menu_build (LauncherPlugin *plugin);
+static gboolean launcher_plugin_menu_item_released (GtkMenuItem *menu_item, GdkEventButton *event, LauncherPluginEntry *entry);
+static LauncherPluginEntry *launcher_plugin_entry_new_default (void);
+static void launcher_plugin_entry_free (LauncherPluginEntry *entry);
 
 
 
-G_DEFINE_TYPE (XfceTestPlugin, xfce_test_plugin, XFCE_TYPE_PANEL_PLUGIN);
+static GQuark launcher_plugin_quark = 0;
+
+
+
+G_DEFINE_TYPE (LauncherPlugin, launcher_plugin, XFCE_TYPE_PANEL_PLUGIN);
 
 
 
 /* register the panel plugin */
-XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_TEST_PLUGIN);
+XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_LAUNCHER_PLUGIN);
 
 
 
 static void
-xfce_test_plugin_class_init (XfceTestPluginClass *klass)
+launcher_plugin_class_init (LauncherPluginClass *klass)
 {
   XfcePanelPluginClass *plugin_class;
 
   plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
-  plugin_class->construct = xfce_test_plugin_construct;
-  plugin_class->free_data = xfce_test_plugin_free_data;
-  plugin_class->orientation_changed = xfce_test_plugin_orientation_changed;
-  plugin_class->size_changed = xfce_test_plugin_size_changed;
-  plugin_class->save = xfce_test_plugin_save;
-  plugin_class->configure_plugin = xfce_test_plugin_configure_plugin;
-  plugin_class->screen_position_changed = xfce_test_plugin_screen_position_changed;
+  plugin_class->construct = launcher_plugin_construct;
+  plugin_class->free_data = launcher_plugin_free_data;
+  plugin_class->orientation_changed = launcher_plugin_orientation_changed;
+  plugin_class->size_changed = launcher_plugin_size_changed;
+  plugin_class->save = launcher_plugin_save;
+  plugin_class->configure_plugin = launcher_plugin_configure_plugin;
+  plugin_class->screen_position_changed = launcher_plugin_screen_position_changed;
 
   /* initialize the quark */
-  xfce_test_plugin_quark = g_quark_from_static_string ("xfce-test-plugin");
+  launcher_plugin_quark = g_quark_from_static_string ("xfce-test-plugin");
 }
 
 
 
 static void
-xfce_test_plugin_init (XfceTestPlugin *plugin)
+launcher_plugin_init (LauncherPlugin *plugin)
 {
   GdkScreen *screen;
-  
+
   /* initialize variables */
   plugin->entries = NULL;
   plugin->menu = NULL;
@@ -105,9 +115,6 @@ xfce_test_plugin_init (XfceTestPlugin *plugin)
   plugin->menu_reversed_order = FALSE;
   plugin->show_labels = FALSE; /* TODO */
   plugin->arrow_position = ARROW_POS_DEFAULT;
-
-  /* show the configure menu item */
-  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
 
   /* create the dialog widgets */
   plugin->box = xfce_hvbox_new (GTK_ORIENTATION_HORIZONTAL, FALSE, 0);
@@ -132,43 +139,49 @@ xfce_test_plugin_init (XfceTestPlugin *plugin)
 
   /* signals */
   g_signal_connect (G_OBJECT (plugin->icon_button), "state-changed",
-                    G_CALLBACK (xfce_test_plugin_button_state_changed), plugin->arrow_button);
+                    G_CALLBACK (launcher_plugin_button_state_changed), plugin->arrow_button);
   g_signal_connect (G_OBJECT (plugin->arrow_button), "state-changed",
-                    G_CALLBACK (xfce_test_plugin_button_state_changed), plugin->icon_button);
+                    G_CALLBACK (launcher_plugin_button_state_changed), plugin->icon_button);
 
   g_signal_connect (G_OBJECT (plugin->icon_button), "button-press-event",
-                    G_CALLBACK (xfce_test_plugin_icon_button_pressed), plugin);
+                    G_CALLBACK (launcher_plugin_icon_button_pressed), plugin);
   g_signal_connect (G_OBJECT (plugin->icon_button), "button-release-event",
-                    G_CALLBACK (xfce_test_plugin_icon_button_released), plugin);
-                    
+                    G_CALLBACK (launcher_plugin_icon_button_released), plugin);
+
   gtk_drag_dest_set (plugin->icon_button, 0, drop_targets, /* TODO check flags */
                      G_N_ELEMENTS (drop_targets), GDK_ACTION_COPY);
   g_signal_connect (G_OBJECT (plugin->icon_button), "drag-data-received",
-                    G_CALLBACK (xfce_test_plugin_icon_button_drag_data_received), plugin);
+                    G_CALLBACK (launcher_plugin_icon_button_drag_data_received), plugin);
+
+  g_signal_connect (G_OBJECT (plugin->arrow_button), "button-press-event",
+                    G_CALLBACK (launcher_plugin_arrow_button_pressed), plugin);
 
   g_object_set (G_OBJECT (plugin->icon_button), "has-tooltip", TRUE, NULL);
   g_signal_connect (G_OBJECT (plugin->icon_button), "query-tooltip",
-                    G_CALLBACK (xfce_test_plugin_icon_button_query_tooltip), plugin);
-                    
-  /* store the icon theme */
+                    G_CALLBACK (launcher_plugin_icon_button_query_tooltip), plugin);
+
+  /* store and monitor the icon theme */
   screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-  plugin->icon_theme = screen ? gtk_icon_theme_get_for_screen (screen) 
-                         : gtk_icon_theme_get_default ();
-  g_signal_connect (G_OBJECT (plugin->icon_theme), "changed", 
-                    G_CALLBACK (xfce_test_plugin_icon_theme_changed), plugin);
+  plugin->icon_theme = screen ? gtk_icon_theme_get_for_screen (screen) : gtk_icon_theme_get_default ();
+  g_signal_connect (G_OBJECT (plugin->icon_theme), "changed",
+                    G_CALLBACK (launcher_plugin_icon_theme_changed), plugin);
 }
 
 
 
 static void
-xfce_test_plugin_construct (XfcePanelPlugin *panel_plugin)
+launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 {
-  XfceTestPlugin      *plugin = XFCE_TEST_PLUGIN (panel_plugin);
+  LauncherPlugin      *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   const gchar * const *filenames;
   guint                i;
   
+  /* show the configure menu item */
+  xfce_panel_plugin_menu_show_configure (XFCE_PANEL_PLUGIN (plugin));
+  
+
   /* read the plugin configuration */
-  if (xfce_test_plugin_read (plugin) == FALSE)
+  if (launcher_plugin_read (plugin) == FALSE)
     {
       /* try to build a launcher from the passed arguments */
       filenames = xfce_panel_plugin_get_arguments (panel_plugin);
@@ -178,31 +191,34 @@ xfce_test_plugin_construct (XfcePanelPlugin *panel_plugin)
           for (i = 0; filenames[i] != NULL; i++)
             {
                 /* TODO */
-                g_message ("%s", filenames[i]);
+                g_message ("TODO %s", filenames[i]);
             }
         }
-      
+
       /* create a new launcher if there are still no entries */
       if (plugin->entries == NULL)
-        plugin->entries = g_list_prepend (plugin->entries, xfce_test_plugin_entry_new_default ());
+        plugin->entries = g_list_prepend (plugin->entries, launcher_plugin_entry_new_default ());
     }
-    
+
   /* set the arrow direction */
-  xfce_test_plugin_screen_position_changed (panel_plugin, 0 /* TODO */);
-  
+  launcher_plugin_screen_position_changed (panel_plugin, 0 /* TODO */);
+
   /* set the buttons in the correct position */
-  launcher_plugin_pack_buttons (launcher);
-  
+  launcher_plugin_reorder_buttons (plugin);
+
   /* change the visiblity of the arrow button */
-  launcher_menu_destroy (launcher);
+  launcher_plugin_menu_destroy (plugin);
+  
+  /* update the icon */
+  launcher_plugin_update_icon (plugin);
 }
 
 
 
 static void
-xfce_test_plugin_free_data (XfcePanelPlugin *panel_plugin)
+launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
 {
-  XfceTestPlugin *plugin = XFCE_TEST_PLUGIN (panel_plugin);
+  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
 
   /* stop popup timeout */
   if (G_UNLIKELY (plugin->popup_timeout_id))
@@ -213,71 +229,71 @@ xfce_test_plugin_free_data (XfcePanelPlugin *panel_plugin)
     gtk_widget_destroy (plugin->menu);
 
   /* remove the entries */
-  g_list_foreach (plugin->entries, (GFunc) xfce_test_plugin_entry_free, NULL);
+  g_list_foreach (plugin->entries, (GFunc) launcher_plugin_entry_free, NULL);
   g_list_free (plugin->entries);
 }
 
 
 
 static void
-xfce_test_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
-                                      GtkOrientation   orientation)
+launcher_plugin_orientation_changed (XfcePanelPlugin *panel_plugin,
+                                     GtkOrientation   orientation)
 {
   /* update the arrow direction */
-  xfce_test_plugin_screen_position_changed (panel_plugin, 0 /* TODO */);
-  
+  launcher_plugin_screen_position_changed (panel_plugin, 0 /* TODO */);
+
   /* reorder the buttons */
-  xfce_test_plugin_reorder_buttons (XFCE_TEST_PLUGIN (panel_plugin));
+  launcher_plugin_reorder_buttons (XFCE_LAUNCHER_PLUGIN (panel_plugin));
 
   /* update the plugin size */
-  xfce_test_plugin_size_changed (plugin, xfce_panel_plugin_get_size (panel_plugin));
+  launcher_plugin_size_changed (panel_plugin, xfce_panel_plugin_get_size (panel_plugin));
 }
 
 
 
 static gboolean
-xfce_test_plugin_size_changed (XfcePanelPlugin *panel_plugin,
-                               gint             size)
+launcher_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                              gint             size)
 {
-  XfceTestPlugin *plugin = XFCE_TEST_PLUGIN (panel_plugin);
+  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   gint            width, height;
   GtkOrientation  orientation;
-  
+
   /* init size */
   width = height = size;
-  
-  if (plugin->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON
+
+  if (plugin->arrow_position != ARROW_POS_INSIDE_BUTTON
       && LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->entries))
     {
       /* get the orientation of the panel */
       orientation = xfce_panel_plugin_get_orientation (panel_plugin);
-      
-      switch (launcher->arrow_position)
+
+      switch (plugin->arrow_position)
         {
-          case LAUNCHER_ARROW_DEFAULT:
+          case ARROW_POS_DEFAULT:
             if (orientation == GTK_ORIENTATION_HORIZONTAL)
-              width += LAUNCHER_ARROW_SIZE;
+              width += ARROW_BUTTON_SIZE;
             else
-              height += LAUNCHER_ARROW_SIZE;
+              height += ARROW_BUTTON_SIZE;
             break;
-            
-          case LAUNCHER_ARROW_LEFT:
-          case LAUNCHER_ARROW_RIGHT:
+
+          case ARROW_POS_LEFT:
+          case ARROW_POS_RIGHT:
             if (orientation == GTK_ORIENTATION_HORIZONTAL)
-              width += LAUNCHER_ARROW_SIZE;
+              width += ARROW_BUTTON_SIZE;
             else
-              height -= LAUNCHER_ARROW_SIZE;
+              height -= ARROW_BUTTON_SIZE;
             break;
 
           default:
             if (orientation == GTK_ORIENTATION_HORIZONTAL)
-              width -= LAUNCHER_ARROW_SIZE;
+              width -= ARROW_BUTTON_SIZE;
             else
-              height += LAUNCHER_ARROW_SIZE;
+              height += ARROW_BUTTON_SIZE;
             break;
         }
     }
-    
+
   /* set the size */
   gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), width, height);
 
@@ -287,15 +303,16 @@ xfce_test_plugin_size_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-xfce_test_plugin_save (XfcePanelPlugin *panel_plugin)
+launcher_plugin_save (XfcePanelPlugin *panel_plugin)
 {
+  LauncherPlugin       *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
   gchar                *file;
   gchar               **groups;
   gchar                 group[10];
   XfceRc               *rc;
   GList                *li;
   guint                 i;
-  XfceTestPluginEntry  *entry;
+  LauncherPluginEntry  *entry;
 
   /* get rc file name, create it if needed */
   file = xfce_panel_plugin_save_location (panel_plugin, TRUE);
@@ -321,9 +338,10 @@ xfce_test_plugin_save (XfcePanelPlugin *panel_plugin)
           xfce_rc_write_bool_entry (rc, "MoveFirst", plugin->move_clicked_to_button);
           xfce_rc_write_bool_entry (rc, "DisableTooltips", plugin->disable_tooltips);
           xfce_rc_write_bool_entry (rc, "ShowLabels", plugin->show_labels);
+          xfce_rc_write_int_entry (rc, "ArrowPosition", plugin->arrow_position);
 
           /* save all the entries */
-          for (li = launcher->entries, i = 0; li != NULL; li = li->next, i++)
+          for (li = plugin->entries, i = 0; li != NULL; li = li->next, i++)
             {
               entry = li->data;
 
@@ -345,7 +363,7 @@ xfce_test_plugin_save (XfcePanelPlugin *panel_plugin)
 
               xfce_rc_write_bool_entry (rc, "Terminal", entry->terminal);
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
-              xfce_rc_write_bool_entry (rc, "StartupNotify", entry->startup);
+              xfce_rc_write_bool_entry (rc, "StartupNotify", entry->startup_notify);
 #endif
             }
 
@@ -358,7 +376,7 @@ xfce_test_plugin_save (XfcePanelPlugin *panel_plugin)
 
 
 static void
-xfce_test_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
+launcher_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 {
 
 }
@@ -366,11 +384,11 @@ xfce_test_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
 
 
 static void
-xfce_test_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
-                                          gint             position)
+launcher_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
+                                         gint             position)
 {
   GtkArrowType    arrow_type;
-  XfceTestPlugin *plugin = XFCE_TEST_PLUGIN (panel_plugin);
+  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (panel_plugin);
 
   /* get the arrow type */
   arrow_type = xfce_panel_plugin_arrow_type (panel_plugin);
@@ -382,34 +400,283 @@ xfce_test_plugin_screen_position_changed (XfcePanelPlugin *panel_plugin,
 
 
 static void
-xfce_test_plugin_icon_theme_changed (GtkIconTheme   *icon_theme, 
-                                     XfceTestPlugin *plugin)
+launcher_plugin_execute_string_append_quoted (GString     *string,
+                                              const gchar *unquoted)
 {
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
-  panel_return_if_fail (GTK_IS_ICON_THEME (icon_theme));
+  gchar *quoted;
+
+  quoted = g_shell_quote (unquoted);
+  g_string_append (string, quoted);
+  g_free (quoted);
+}
+
+
+
+static gchar *
+launcher_plugin_execute_parse_command (LauncherPluginEntry *entry,
+                                       GSList              *file_list)
+{
+  GString     *cmd = g_string_sized_new (50);
+  const gchar *p;
+  gchar       *tmp;
+  GSList      *li;
   
-  /* set the new icon theme */
-  plugin->icon_theme = icon_theme;
-  
-  /* update the button icon */
-  xfce_test_plugin_update_icon (plugin);
-  
-  /* destroy the menu */
-  xfce_test_plugin_menu_destroy (plugin);
+  /* parse the execute command */
+  for (p = entry->exec; *p != '\0'; ++p)
+    {
+      if (p[0] == '%' && p[1] != '\0')
+        {
+          switch (*++p)
+            {
+              /* a single filename or url */
+              case 'u':
+              case 'f':
+                if (file_list != NULL)
+                  launcher_plugin_execute_string_append_quoted (cmd, (gchar *) file_list->data);
+                break;
+
+              /* a list of filenames or urls */
+              case 'U':
+              case 'F':
+                for (li = file_list; li != NULL; li = li->next)
+                  {
+                    if (G_LIKELY (li != file_list))
+                      g_string_append_c (cmd, ' ');
+                    
+                    launcher_plugin_execute_string_append_quoted (cmd, (gchar *) li->data);
+                  }
+                break;
+                
+              /* directory containing the file that would be passed in a %f field */
+              case 'd':
+                if (file_list != NULL)
+                  {
+                    tmp = g_path_get_dirname ((gchar *) file_list->data);
+                    if (tmp != NULL)
+                      {
+                        launcher_plugin_execute_string_append_quoted (cmd, tmp);
+                        g_free (tmp);
+                      }
+                  }
+                break;
+                
+              /* list of directories containing the files that would be passed in to a %F field */
+              case 'D':
+                for (li = file_list; li != NULL; li = li->next)
+                  {
+                    tmp = g_path_get_dirname (li->data);
+                    if (tmp != NULL)
+                      {
+                        if (G_LIKELY (li != file_list))
+                          g_string_append_c (cmd, ' ');
+
+                        launcher_plugin_execute_string_append_quoted (cmd, tmp);
+                        g_free (tmp);
+                      }
+                  }
+                break;
+                
+              /* a single filename (without path) */
+              case 'n':
+                if (file_list != NULL)
+                  {
+                    tmp = g_path_get_basename ((gchar *) file_list->data);
+                    if (tmp != NULL)
+                      {
+                        launcher_plugin_execute_string_append_quoted (cmd, tmp);
+                        g_free (tmp);
+                      }
+                  }
+                break;
+
+              /* a list of filenames (without paths) */
+              case 'N':
+                for (li = file_list; li != NULL; li = li->next)
+                  {
+                    tmp = g_path_get_basename (li->data);
+                    if (tmp != NULL)
+                      {
+                        if (G_LIKELY (li != file_list))
+                          g_string_append_c (cmd, ' ');
+
+                        launcher_plugin_execute_string_append_quoted (cmd, tmp);
+                        g_free (tmp);
+                      }
+                  }
+                break;
+                
+              /* the icon name used in the panel */
+              case 'i':
+                if (G_LIKELY (entry->icon != NULL))
+                  {
+                    g_string_append (cmd, "--icon ");
+                    launcher_plugin_execute_string_append_quoted (cmd, entry->icon);
+                  }
+                break;
+                
+              /* the 'translated' name of the application */
+              case 'c':
+                if (G_LIKELY (entry->name != NULL))
+                  launcher_plugin_execute_string_append_quoted (cmd, entry->name);
+                break;
+                
+              /* percentage character */
+              case '%':
+                g_string_append_c (cmd, '%');
+                break;
+            }
+        }
+      else
+        {
+          g_string_append_c (cmd, *p);
+        }
+    }
+
+  /* return the command */
+  return g_string_free (cmd, FALSE);
 }
 
 
 
 static void
-xfce_test_plugin_update_icon (XfceTestPlugin *plugin)
+launcher_plugin_execute (GdkScreen           *screen,
+                         LauncherPluginEntry *entry,
+                         GSList              *file_list)
 {
-  XfceTestPluginEntry *entry;
+  GSList   *li, fake;
+  gboolean  succeed = TRUE;
+  gchar    *command_line;
+  gboolean  startup_notify;
+  GError   *error = NULL;
+
+  /* set the startup notification boolean */
+#ifdef HAVE_LIBSTARTUP_NOTIFICATION
+  startup_notify = entry->startup_notify;
+#else
+  startup_notify = FALSE;
+#endif
   
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
+  /* leave when no command has been set */
+  if (G_UNLIKELY (entry->exec == NULL || *entry->exec == '\0'))
+    return;
   
+  /* make sure we've set a screen */
+  if (G_UNLIKELY (screen == NULL))
+    screen = gdk_screen_get_default ();
+
+  /* check if we have multiple files to launches */
+  if (file_list != NULL && LIST_HAS_TWO_OR_MORE_ENTRIES (file_list)
+       && !(strstr (entry->exec, "%F") || strstr (entry->exec, "%U")))
+    {
+      /* fake an empty list */
+      fake.next = NULL;
+          
+      /* run a new instance for each file in the list */
+      for (li = file_list; li != NULL && succeed; li = li->next)
+        {
+          /* point to data */
+          fake.data = li->data;
+              
+          /* parse the command and execute the command */
+          command_line = launcher_plugin_execute_parse_command (entry, &fake);
+          succeed = xfce_execute_on_screen (screen, command_line, entry->terminal, startup_notify, &error);
+          g_free (command_line);
+        }
+    }
+  else
+    {
+      /* parse the command and execute the command */
+      command_line = launcher_plugin_execute_parse_command (entry, file_list);
+      succeed = xfce_execute_on_screen (screen, command_line, entry->terminal, startup_notify, &error);
+      g_free (command_line);
+    }
+    
+  if (G_UNLIKELY (succeed == FALSE))
+    {
+      g_message ("Failed to execute: %s", error->message);
+      g_error_free (error);
+    }
+}
+
+
+
+static void
+launcher_plugin_execute_from_clipboard (GdkScreen           *screen,
+                                        LauncherPluginEntry *entry)
+{
+  GtkClipboard     *clipboard;
+  gchar            *text = NULL;
+  GSList           *filenames;
+  GtkSelectionData  selection_data;
+  
+  /* get the primary clipboard text */
+  clipboard = gtk_clipboard_get (GDK_SELECTION_PRIMARY);
+  if (G_LIKELY (clipboard))
+    text = gtk_clipboard_wait_for_text (clipboard);
+    
+  /* try other clipboard if this one was empty */
+  if (text == NULL)
+    {
+      /* get the secondary clipboard text */
+      clipboard = gtk_clipboard_get (GDK_SELECTION_CLIPBOARD);
+      if (G_LIKELY (clipboard))
+        text = gtk_clipboard_wait_for_text (clipboard);
+    }
+    
+  if (G_LIKELY (text))
+    {
+      /* create some fake selection data */
+      selection_data.data = (guchar *) text;
+      selection_data.length = 1;
+      
+      /* parse the filelist, this way we can handle 'copied' file from thunar */
+      filenames = launcher_plugin_filenames_from_selection_data (&selection_data);
+      if (G_LIKELY (filenames))
+        {
+          /* run the command with filenames from the clipboard */
+          launcher_plugin_execute (screen, entry, filenames);
+
+          /* cleanup */
+          launcher_plugin_filenames_free (filenames);
+        }
+
+      /* cleanup */
+      g_free (text);
+    }
+}
+
+
+
+static void
+launcher_plugin_icon_theme_changed (GtkIconTheme   *icon_theme,
+                                    LauncherPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_ICON_THEME (icon_theme));
+
+  /* set the new icon theme */
+  plugin->icon_theme = icon_theme;
+
+  /* update the button icon */
+  launcher_plugin_update_icon (plugin);
+
+  /* destroy the menu */
+  launcher_plugin_menu_destroy (plugin);
+}
+
+
+
+static void
+launcher_plugin_update_icon (LauncherPlugin *plugin)
+{
+  LauncherPluginEntry *entry;
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (plugin->entries != NULL);
+
   /* get the first entry */
   entry = plugin->entries->data;
-  
+
   if (g_path_is_absolute (entry->icon))
     xfce_scaled_image_set_from_file (XFCE_SCALED_IMAGE (plugin->image), entry->icon);
   else
@@ -419,41 +686,41 @@ xfce_test_plugin_update_icon (XfceTestPlugin *plugin)
 
 
 void
-xfce_test_plugin_rebuild (XfceTestPlugin *plugin,
-                          gboolean        update_icon)
+launcher_plugin_rebuild (LauncherPlugin *plugin,
+                         gboolean        update_icon)
 {
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
-  
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+
   /* destroy the popup menu */
-  xfce_test_plugin_menu_destroy (plugin);
-  
+  launcher_plugin_menu_destroy (plugin);
+
   /* reorder the buttons */
-  xfce_test_plugin_reorder_buttons (plugin);
-  
+  launcher_plugin_reorder_buttons (plugin);
+
   /* update the size */
-  xfce_test_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
-                                 xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin));
+  launcher_plugin_size_changed (XFCE_PANEL_PLUGIN (plugin),
+                                xfce_panel_plugin_get_size (XFCE_PANEL_PLUGIN (plugin)));
 
   /* update the icon if needed */
   if (update_icon)
-    xfce_test_plugin_update_icon (plugin);
+    launcher_plugin_update_icon (plugin);
 }
 
 
 
 static void
-xfce_test_plugin_reorder_buttons (XfceTestPlugin *plugin)
+launcher_plugin_reorder_buttons (LauncherPlugin *plugin)
 {
   GtkOrientation         orientation;
-  XfceTestPluginArrowPos arrow_position = plugin->arrow_position;
-  
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
+  LauncherPluginArrowPos arrow_position = plugin->arrow_position;
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
   if (arrow_position == ARROW_POS_DEFAULT)
     {
       /* get the plugin orientation */
       orientation = xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin));
-      
+
       if (orientation == GTK_ORIENTATION_HORIZONTAL)
         arrow_position = ARROW_POS_RIGHT;
       else
@@ -462,27 +729,27 @@ xfce_test_plugin_reorder_buttons (XfceTestPlugin *plugin)
   else if (arrow_position == ARROW_POS_INSIDE_BUTTON)
     {
       /* nothing to pack */
-      return; 
+      return;
     }
-  
+
   /* set the position of the arrow button in the box */
   gtk_box_reorder_child (GTK_BOX (plugin->box), plugin->arrow_button,
-                         (arrow_position == LAUNCHER_ARROW_LEFT 
-                          || arrow_position == LAUNCHER_ARROW_TOP) ? 0 : -1);
-  
+                         (arrow_position == ARROW_POS_LEFT
+                          || arrow_position == ARROW_POS_TOP) ? 0 : -1);
+
   /* set the hxbox orientation */
-  if (arrow_position == LAUNCHER_ARROW_LEFT || arrow_position == LAUNCHER_ARROW_RIGHT)
+  if (arrow_position == ARROW_POS_LEFT || arrow_position == ARROW_POS_RIGHT)
     orientation = GTK_ORIENTATION_HORIZONTAL;
   else
     orientation = GTK_ORIENTATION_VERTICAL;
-  
-  xfce_hvbox_set_orientation (XFCE_HVBOX (launcher->box), orientation);
+
+  xfce_hvbox_set_orientation (XFCE_HVBOX (plugin->box), orientation);
 }
 
 
 
 static inline gchar *
-xfce_test_plugin_read_entry (XfceRc      *rc,
+launcher_plugin_read_entry (XfceRc      *rc,
                              const gchar *name)
 {
     const gchar *temp;
@@ -498,15 +765,15 @@ xfce_test_plugin_read_entry (XfceRc      *rc,
 
 
 static gboolean
-xfce_test_plugin_read (XfceTestPlugin *plugin)
+launcher_plugin_read (LauncherPlugin *plugin)
 {
   gchar               *file;
   XfceRc              *rc;
   guint                i;
   gchar                group[10];
-  XfceTestPluginEntry *entry;
+  LauncherPluginEntry *entry;
 
-  panel_return_val_if_fail (XFCE_IS_TEST_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
   /* get rc file name, create it if needed */
   file = xfce_panel_plugin_lookup_rc_file (XFCE_PANEL_PLUGIN (plugin));
@@ -523,6 +790,8 @@ xfce_test_plugin_read (XfceTestPlugin *plugin)
           plugin->move_clicked_to_button = xfce_rc_read_bool_entry (rc, "MoveFirst", FALSE);
           plugin->disable_tooltips = xfce_rc_read_bool_entry (rc, "DisableTooltips", FALSE);
           plugin->show_labels = xfce_rc_read_bool_entry (rc, "ShowLabels", FALSE);
+          plugin->arrow_position = CLAMP (xfce_rc_read_int_entry (rc, "ArrowPosition", ARROW_POS_DEFAULT),
+                                          ARROW_POS_DEFAULT, ARROW_POS_INSIDE_BUTTON);
 
           /* read all the entries */
           for (i = 0; i < 100 /* arbitrary */; i++)
@@ -534,7 +803,7 @@ xfce_test_plugin_read (XfceTestPlugin *plugin)
               xfce_rc_set_group (rc, group);
 
               /* create entry */
-              entry = g_slice_new (XfceTestPluginEntry);
+              entry = g_slice_new (LauncherPluginEntry);
               entry->name = launcher_plugin_read_entry (rc, "Name");
               entry->comment = launcher_plugin_read_entry (rc, "Comment");
               entry->icon = launcher_plugin_read_entry (rc, "Icon");
@@ -542,7 +811,7 @@ xfce_test_plugin_read (XfceTestPlugin *plugin)
               entry->path = launcher_plugin_read_entry (rc, "Path");
               entry->terminal = xfce_rc_read_bool_entry (rc, "Terminal", FALSE);
 #ifdef HAVE_LIBSTARTUP_NOTIFICATION
-              entry->startup = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
+              entry->startup_notify = xfce_rc_read_bool_entry (rc, "StartupNotify", FALSE);
 #endif
 
               /* prepend to the list */
@@ -563,7 +832,7 @@ xfce_test_plugin_read (XfceTestPlugin *plugin)
 
 
 GSList *
-xfce_test_plugin_filenames_from_selection_data (GtkSelectionData *selection_data)
+launcher_plugin_filenames_from_selection_data (GtkSelectionData *selection_data)
 {
   gchar  **uri_list;
   GSList  *filenames = NULL;
@@ -602,19 +871,19 @@ xfce_test_plugin_filenames_from_selection_data (GtkSelectionData *selection_data
 
 
 GdkPixbuf *
-xfce_test_plugin_load_pixbuf (const gchar  *name,
-                              gint          size,
-                              GtkIconTheme *icon_theme)
+launcher_plugin_load_pixbuf (const gchar  *name,
+                             gint          size,
+                             GtkIconTheme *icon_theme)
 {
   GdkPixbuf *pixbuf, *scaled;
-  
+
   panel_return_val_if_fail (size > 0, NULL);
-  panel_return_val_if_fail (GTK_IS_ICON_THEME (theme), NULL);
-  
+  panel_return_val_if_fail (GTK_IS_ICON_THEME (icon_theme), NULL);
+
   /* return null if there is no name */
   if (G_UNLIKELY (name == NULL || *name == '\0'))
     return NULL;
-  
+
   /* load the icon from a file or the icon theme */
   if (g_path_is_absolute (name))
     {
@@ -637,16 +906,17 @@ xfce_test_plugin_load_pixbuf (const gchar  *name,
 
 
 static gboolean
-xfce_test_plugin_query_tooltip (GtkWidget           *widget,
-                                gint                 x,
-                                gint                 y,
-                                gboolean             keyboard_mode,
-                                GtkTooltip          *tooltip,
-                                XfceTestPluginEntry *entry)
+launcher_plugin_query_tooltip (GtkWidget           *widget,
+                               gint                 x,
+                               gint                 y,
+                               gboolean             keyboard_mode,
+                               GtkTooltip          *tooltip,
+                               LauncherPluginEntry *entry)
 {
   gchar        *string;
   GdkPixbuf    *pixbuf;
   GtkIconTheme *icon_theme;
+  GdkScreen    *screen;
 
   if (G_LIKELY (entry && entry->name))
     {
@@ -667,7 +937,7 @@ xfce_test_plugin_query_tooltip (GtkWidget           *widget,
           icon_theme = gtk_icon_theme_get_for_screen (screen);
 
           /* try to load a pixbuf */
-          pixbuf = xfce_test_plugin_load_pixbuf (entry->icon, TOOLTIP_ICON_SIZE, icon_theme);
+          pixbuf = launcher_plugin_load_pixbuf (entry->icon, TOOLTIP_ICON_SIZE, icon_theme);
           if (G_LIKELY (pixbuf))
             {
               /* set the tooltip icon and release it */
@@ -687,9 +957,9 @@ xfce_test_plugin_query_tooltip (GtkWidget           *widget,
 
 
 static void
-xfce_test_plugin_button_state_changed (GtkWidget    *button_a,
-                                       GtkStateType  state,
-                                       GtkWidget    *button_b)
+launcher_plugin_button_state_changed (GtkWidget    *button_a,
+                                      GtkStateType  state,
+                                      GtkWidget    *button_b)
 {
   /* sync the button states */
   if (GTK_WIDGET_STATE (button_b) != GTK_WIDGET_STATE (button_a)
@@ -700,13 +970,13 @@ xfce_test_plugin_button_state_changed (GtkWidget    *button_a,
 
 
 static gboolean
-xfce_test_plugin_icon_button_pressed (GtkWidget      *button,
-                                      GdkEventButton *event,
-                                      XfceTestPlugin *plugin)
+launcher_plugin_icon_button_pressed (GtkWidget      *button,
+                                     GdkEventButton *event,
+                                     LauncherPlugin *plugin)
 {
   guint modifiers;
 
-  panel_return_val_if_fail (XFCE_IS_TEST_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
   /* get the default accelerator modifier mask */
   modifiers = event->state & gtk_accelerator_get_default_mod_mask ();
@@ -716,13 +986,13 @@ xfce_test_plugin_icon_button_pressed (GtkWidget      *button,
     return FALSE;
 
   /* popup the menu or start the popup timeout */
-  if (plugin->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
-    xfce_test_plugin_menu_popup (plugin);
-  else if (launcher->popup_timeout_id == 0
-           && LIST_HAS_TWO_OR_MORE_ENTRIES (launcher->entries))
-    plugin->popup_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT, XFCE_TEST_PLUGIN_POPUP_DELAY,
-                                                   xfce_test_plugin_menu_popup, plugin,
-                                                   xfce_test_plugin_menu_popup_destroyed);
+  if (plugin->arrow_position == ARROW_POS_INSIDE_BUTTON)
+    launcher_plugin_menu_popup (plugin);
+  else if (plugin->popup_timeout_id == 0
+           && LIST_HAS_TWO_OR_MORE_ENTRIES (plugin->entries))
+    plugin->popup_timeout_id = g_timeout_add_full (G_PRIORITY_DEFAULT, MENU_POPUP_DELAY,
+                                                   launcher_plugin_menu_popup, plugin,
+                                                   launcher_plugin_menu_popup_destroyed);
 
   return FALSE;
 }
@@ -730,14 +1000,15 @@ xfce_test_plugin_icon_button_pressed (GtkWidget      *button,
 
 
 static gboolean
-xfce_test_plugin_icon_button_released (GtkWidget      *button,
-                                       GdkEventButton *event,
-                                       XfceTestPlugin *plugin)
+launcher_plugin_icon_button_released (GtkWidget      *button,
+                                      GdkEventButton *event,
+                                      LauncherPlugin *plugin)
 {
-  XfceTestPluginEntry *entry;
+  LauncherPluginEntry *entry;
   GdkScreen           *screen;
 
-  panel_return_val_if_fail (XFCE_IS_TEST_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (plugin->entries != NULL, FALSE);
 
   /* remove a delayout popup timeout */
   if (G_LIKELY (plugin->popup_timeout_id != 0))
@@ -745,7 +1016,7 @@ xfce_test_plugin_icon_button_released (GtkWidget      *button,
 
   /* only accept click in the button and don't respond on multiple clicks */
   if (GTK_BUTTON (button)->in_button
-      && launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON)
+      && plugin->arrow_position != ARROW_POS_INSIDE_BUTTON)
     {
       /* get the first launcher entry */
       entry = plugin->entries->data;
@@ -755,9 +1026,9 @@ xfce_test_plugin_icon_button_released (GtkWidget      *button,
 
       /* execute the command on button 1 and 2 */
       if (event->button == 1)
-        xfce_test_plugin_execute (screen, entry, NULL);
+        launcher_plugin_execute (screen, entry, NULL);
       else if (event->button == 2)
-        xfce_test_plugin_execute_from_clipboard (screen, entry);
+        launcher_plugin_execute_from_clipboard (screen, entry);
     }
 
   return FALSE;
@@ -766,34 +1037,35 @@ xfce_test_plugin_icon_button_released (GtkWidget      *button,
 
 
 static void
-xfce_test_plugin_icon_button_drag_data_received (GtkWidget        *widget,
-                                                 GdkDragContext   *context,
-                                                 gint              x,
-                                                 gint              y,
-                                                 GtkSelectionData *selection_data,
-                                                 guint             info,
-                                                 guint             time,
-                                                 XfceTestPlugin   *plugin)
+launcher_plugin_icon_button_drag_data_received (GtkWidget        *widget,
+                                                GdkDragContext   *context,
+                                                gint              x,
+                                                gint              y,
+                                                GtkSelectionData *selection_data,
+                                                guint             info,
+                                                guint             time,
+                                                LauncherPlugin   *plugin)
 {
   GSList *filenames;
-  
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
-  
+
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
+  panel_return_if_fail (plugin->entries != NULL);
+
   /* leave when arrow is inside the button */
-  if (plugin->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
+  if (plugin->arrow_position == ARROW_POS_INSIDE_BUTTON)
     return;
-  
+
   /* get the filenames from the selection data */
-  filenames = xfce_test_plugin_filenames_from_selection_data (selection_data);
+  filenames = launcher_plugin_filenames_from_selection_data (selection_data);
   if (G_LIKELY (filenames))
     {
       /* execute */
-      launcher_execute (gtk_widget_get_screen (widget), plugin->entries->data, filenames);
-    
+      launcher_plugin_execute (gtk_widget_get_screen (widget), plugin->entries->data, filenames);
+
       /* cleanup */
-      xfce_test_plugin_filenames_free (filenames);
+      launcher_plugin_filenames_free (filenames);
     }
-  
+
   /* finish the drag */
   gtk_drag_finish (context, TRUE, FALSE, time);
 }
@@ -801,36 +1073,37 @@ xfce_test_plugin_icon_button_drag_data_received (GtkWidget        *widget,
 
 
 static gboolean
-xfce_test_plugin_icon_button_query_tooltip (GtkWidget      *widget,
-                                            gint            x,
-                                            gint            y,
-                                            gboolean        keyboard_mode,
-                                            GtkTooltip     *tooltip,
-                                            XfceTestPlugin *plugin)
+launcher_plugin_icon_button_query_tooltip (GtkWidget      *widget,
+                                           gint            x,
+                                           gint            y,
+                                           gboolean        keyboard_mode,
+                                           GtkTooltip     *tooltip,
+                                           LauncherPlugin *plugin)
 {
-  panel_return_val_if_fail (XFCE_IS_TEST_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (plugin->entries != NULL, FALSE);
 
   /* don't show tooltips on a menu button or when tooltips are disabled */
   if (plugin->disable_tooltips
-      || plugin->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON)
+      || plugin->arrow_position == ARROW_POS_INSIDE_BUTTON)
     return FALSE;
 
   /* run the tooltip query function */
-  return xfce_test_plugin_query_tooltip (widget, x, y, keyboard_mode, tooltip, plugin->entries->data);
+  return launcher_plugin_query_tooltip (widget, x, y, keyboard_mode, tooltip, plugin->entries->data);
 }
 
 
 
 static gboolean
-xfce_test_plugin_arrow_button_pressed (GtkWidget      *button,
-                                       GdkEventButton *event,
-                                       XfceTestPlugin *plugin)
+launcher_plugin_arrow_button_pressed (GtkWidget      *button,
+                                      GdkEventButton *event,
+                                      LauncherPlugin *plugin)
 {
-  panel_return_val_if_fail (XFCE_IS_TEST_PLUGIN (plugin), FALSE);
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
   /* only popup when button 1 is pressed */
   if (event->button == 1)
-    xfce_test_plugin_menu_popup (plugin);
+    launcher_plugin_menu_popup (plugin);
 
   return FALSE;
 }
@@ -838,13 +1111,13 @@ xfce_test_plugin_arrow_button_pressed (GtkWidget      *button,
 
 
 static gboolean
-xfce_test_plugin_menu_popup (gpointer user_data)
+launcher_plugin_menu_popup (gpointer user_data)
 {
-  XfceTestPlugin *plugin = XFCE_TEST_PLUGIN (user_data);
+  LauncherPlugin *plugin = XFCE_LAUNCHER_PLUGIN (user_data);
 
   /* build the menu */
   if (G_UNLIKELY (plugin->menu == NULL))
-    xfce_test_plugin_menu_build (plugin);
+    launcher_plugin_menu_build (plugin);
 
   GDK_THREADS_ENTER ();
 
@@ -865,18 +1138,18 @@ xfce_test_plugin_menu_popup (gpointer user_data)
 
 
 static void
-xfce_test_plugin_menu_popup_destroyed (gpointer user_data)
+launcher_plugin_menu_popup_destroyed (gpointer user_data)
 {
-  XFCE_TEST_PLUGIN (user_data)->popup_timeout_id = 0;
+  XFCE_LAUNCHER_PLUGIN (user_data)->popup_timeout_id = 0;
 }
 
 
 
 static void
-xfce_test_plugin_menu_deactivate (GtkWidget      *menu,
-                                  XfceTestPlugin *plugin)
+launcher_plugin_menu_deactivate (GtkWidget      *menu,
+                                 LauncherPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == menu);
 
   /* deactivate the arrow button */
@@ -886,9 +1159,9 @@ xfce_test_plugin_menu_deactivate (GtkWidget      *menu,
 
 
 static void
-xfce_test_plugin_menu_destroy (XfceTestPlugin *plugin)
+launcher_plugin_menu_destroy (LauncherPlugin *plugin)
 {
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
 
   if (G_LIKELY (plugin->menu != NULL))
     {
@@ -901,7 +1174,7 @@ xfce_test_plugin_menu_destroy (XfceTestPlugin *plugin)
     }
 
   /* set the visibility of the arrow button */
-  if (plugin->arrow_position == LAUNCHER_ARROW_INSIDE_BUTTON
+  if (plugin->arrow_position == ARROW_POS_INSIDE_BUTTON
       || LIST_HAS_ONE_ENTRY (plugin->entries))
     gtk_widget_hide (plugin->arrow_button);
   else
@@ -911,36 +1184,36 @@ xfce_test_plugin_menu_destroy (XfceTestPlugin *plugin)
 
 
 static void
-xfce_test_plugin_menu_build (XfceTestPlugin *plugin)
+launcher_plugin_menu_build (LauncherPlugin *plugin)
 {
   GList               *li;
   guint                n;
-  XfceTestPluginEntry *entry;
+  LauncherPluginEntry *entry;
   GtkWidget           *mi, *image;
   GdkScreen           *screen;
   GdkPixbuf           *pixbuf;
 
-  panel_return_if_fail (XFCE_IS_TEST_PLUGIN (plugin));
+  panel_return_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin));
   panel_return_if_fail (plugin->menu == NULL);
 
   /* create a new menu */
   plugin->menu = gtk_menu_new ();
   screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
-  gtk_menu_set_screen (GTK_MENU (launcher->menu), screen);
-  g_signal_connect (G_OBJECT (plugin->menu), "deactivate", G_CALLBACK (xfce_test_plugin_menu_deactivate), plugin);
+  gtk_menu_set_screen (GTK_MENU (plugin->menu), screen);
+  g_signal_connect (G_OBJECT (plugin->menu), "deactivate", G_CALLBACK (launcher_plugin_menu_deactivate), plugin);
 
   /* walk through the entries */
   for (li = plugin->entries, n = 0; li != NULL; li = li->next, n++)
     {
       /* skip the first entry when the arrow is visible */
-      if (n == 0 && launcher->arrow_position != LAUNCHER_ARROW_INSIDE_BUTTON)
+      if (n == 0 && plugin->arrow_position != ARROW_POS_INSIDE_BUTTON)
         continue;
 
       entry = li->data;
 
       /* create menu item */
       mi = gtk_image_menu_item_new_with_label (entry->name ? entry->name : _("New Item"));
-      g_object_set_qdata (G_OBJECT (mi), xfce_test_plugin_quark, plugin);
+      g_object_set_qdata (G_OBJECT (mi), launcher_plugin_quark, plugin);
       g_object_set (G_OBJECT (mi), "has-tooltip", TRUE, NULL);
       gtk_widget_show (mi);
 
@@ -951,16 +1224,16 @@ xfce_test_plugin_menu_build (XfceTestPlugin *plugin)
         gtk_menu_shell_prepend (GTK_MENU_SHELL (plugin->menu), mi);
 
       /* connect signals */
-      g_signal_connect (G_OBJECT (mi), "button-release-event", G_CALLBACK (xfce_test_plugin_menu_item_released), entry);
+      g_signal_connect (G_OBJECT (mi), "button-release-event", G_CALLBACK (launcher_plugin_menu_item_released), entry);
 
       if (plugin->disable_tooltips == FALSE)
-        g_signal_connect (G_OBJECT (mi), "query-tooltip", G_CALLBACK (xfce_test_plugin_query_tooltip), entry);
+        g_signal_connect (G_OBJECT (mi), "query-tooltip", G_CALLBACK (launcher_plugin_query_tooltip), entry);
 
       /* try to set an image */
       if (G_LIKELY (entry->icon))
         {
           /* load pixbuf */
-          pixbuf = xfce_test_plugin_load_pixbuf (entry->icon, MENU_ICON_SIZE, plugin->icon_theme);
+          pixbuf = launcher_plugin_load_pixbuf (entry->icon, MENU_ICON_SIZE, plugin->icon_theme);
           if (G_LIKELY (pixbuf))
             {
               /* set image */
@@ -978,24 +1251,24 @@ xfce_test_plugin_menu_build (XfceTestPlugin *plugin)
 
 
 static gboolean
-xfce_test_plugin_menu_item_released (GtkMenuItem         *menu_item,
-                                     GdkEventButton      *event,
-                                     XfceTestPluginEntry *entry)
+launcher_plugin_menu_item_released (GtkMenuItem         *menu_item,
+                                    GdkEventButton      *event,
+                                    LauncherPluginEntry *entry)
 {
-  XfceTestPlugin *plugin;
+  LauncherPlugin *plugin;
   GdkScreen      *screen;
 
   /* get the plugin */
-  plugin = g_object_get_qdata (G_OBJECT (menu_item), xfce_test_plugin_quark);
-  panel_return_val_if_fail (XFCE_IS_TEST_PLUGIN (plugin), FALSE);
+  plugin = g_object_get_qdata (G_OBJECT (menu_item), launcher_plugin_quark);
+  panel_return_val_if_fail (XFCE_IS_LAUNCHER_PLUGIN (plugin), FALSE);
 
   /* get the current screen */
   screen = gtk_widget_get_screen (GTK_WIDGET (plugin));
 
   if (event->button != 2)
-    launcher_execute (screen, entry, NULL);
+    launcher_plugin_execute (screen, entry, NULL);
   else
-    launcher_execute_from_clipboard (screen, entry);
+    launcher_plugin_execute_from_clipboard (screen, entry);
 
   /* move the item to the first position if enabled */
   if (G_UNLIKELY (plugin->move_clicked_to_button))
@@ -1005,34 +1278,36 @@ xfce_test_plugin_menu_item_released (GtkMenuItem         *menu_item,
       plugin->entries = g_list_prepend (plugin->entries, entry);
 
       /* destroy the menu and update the icon */
-      xfce_test_plugin_menu_destroy (plugin);
-      xfce_test_plugin_icon_button_set_icon (plugin);
+      launcher_plugin_menu_destroy (plugin);
+      launcher_plugin_update_icon (plugin);
     }
+
+  return FALSE;
 }
 
 
 
-static XfceTestPluginEntry *
-xfce_test_plugin_entry_new_default (void)
+static LauncherPluginEntry *
+launcher_plugin_entry_new_default (void)
 {
-  XfceTestPluginEntry *entry;
-  
+  LauncherPluginEntry *entry;
+
   /* allocate */
-  entry = g_slice_new0 (XfceTestPluginEntry);
+  entry = g_slice_new0 (LauncherPluginEntry);
   entry->name = g_strdup (_("New Item"));
   entry->icon = g_strdup ("applications-other");
-  
+
   /* TODO remove after test */
   if (entry->comment)
     g_critical ("while crearing the default entry, vars were not null");
-  
+
   return entry;
 }
 
 
 
 static void
-xfce_test_plugin_entry_free (XfceTestPluginEntry *entry)
+launcher_plugin_entry_free (LauncherPluginEntry *entry)
 {
   /* free data */
   g_free (entry->name);
@@ -1040,7 +1315,7 @@ xfce_test_plugin_entry_free (XfceTestPluginEntry *entry)
   g_free (entry->path);
   g_free (entry->icon);
   g_free (entry->exec);
-  
+
   /* free structure */
-  g_slice_free (XfceTestPluginEntry, entry);
+  g_slice_free (LauncherPluginEntry, entry);
 }
