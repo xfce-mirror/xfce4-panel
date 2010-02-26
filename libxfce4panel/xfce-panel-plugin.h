@@ -88,28 +88,28 @@ struct _XfcePanelPlugin
 PANEL_SYMBOL_EXPORT
 GType                xfce_panel_plugin_get_type            (void) G_GNUC_CONST;
 
-const gchar         *xfce_panel_plugin_get_name            (XfcePanelPlugin   *plugin);
+const gchar         *xfce_panel_plugin_get_name            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar         *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin);
+const gchar         *xfce_panel_plugin_get_display_name    (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar         *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin);
+const gchar         *xfce_panel_plugin_get_comment         (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-gint                 xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin);
+gint                 xfce_panel_plugin_get_unique_id       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar         *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin);
+const gchar         *xfce_panel_plugin_get_property_base   (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-const gchar * const *xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin);
+const gchar * const *xfce_panel_plugin_get_arguments       (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-gint                 xfce_panel_plugin_get_size            (XfcePanelPlugin   *plugin);
+gint                 xfce_panel_plugin_get_size            (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-gboolean             xfce_panel_plugin_get_expand          (XfcePanelPlugin   *plugin);
+gboolean             xfce_panel_plugin_get_expand          (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 void                 xfce_panel_plugin_set_expand          (XfcePanelPlugin   *plugin,
                                                             gboolean           expand);
 
-GtkOrientation       xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin);
+GtkOrientation       xfce_panel_plugin_get_orientation     (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
-XfceScreenPosition   xfce_panel_plugin_get_screen_position (XfcePanelPlugin   *plugin);
+XfceScreenPosition   xfce_panel_plugin_get_screen_position (XfcePanelPlugin   *plugin) G_GNUC_PURE;
 
 void                 xfce_panel_plugin_take_window         (XfcePanelPlugin   *plugin,
                                                             GtkWindow         *window);
