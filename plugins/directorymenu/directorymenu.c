@@ -715,13 +715,19 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
           /* skip hidden files if disabled by the user */
           if (!plugin->hidden_files
               && g_file_info_get_is_hidden (info))
-            continue;
+            {
+              g_object_unref (G_OBJECT (info));
+              continue;
+            }
 
           /* if the file is not a directory, check the file patterns */
           if (g_file_info_get_file_type (info) != G_FILE_TYPE_DIRECTORY)
             {
               if (plugin->patterns == NULL)
-                continue;
+                {
+                  g_object_unref (G_OBJECT (info));
+                  continue;
+                }
 
               visible = FALSE;
               display_name = g_file_info_get_display_name (info);
@@ -731,11 +737,16 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
                      visible = TRUE;
 
               if (!visible)
-                continue;
+                {
+                  g_object_unref (G_OBJECT (info));
+                  continue;
+                }
             }
 
           infos = g_slist_insert_sorted (infos, info, directory_menu_plugin_menu_sort);
         }
+
+      g_object_unref (G_OBJECT (iter));
 
       if (G_LIKELY (infos != NULL))
         {
@@ -751,7 +762,10 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
 
           display_name = g_file_info_get_display_name (info);
           if (G_UNLIKELY (display_name == NULL))
-            continue;
+            {
+              g_object_unref (G_OBJECT (info));
+              continue;
+            }
 
           file = g_file_get_child (dir, g_file_info_get_name (info));
           icon = NULL;
@@ -809,7 +823,7 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
 
               g_signal_connect_data (G_OBJECT (mi), "activate",
                   G_CALLBACK (directory_menu_plugin_menu_launch_desktop_file),
-                  desktopinfom (GClosureNotify) g_object_unref, 0);
+                  desktopinfo, (GClosureNotify) g_object_unref, 0);
 
               g_object_unref (G_OBJECT (file));
             }
@@ -820,10 +834,11 @@ directory_menu_plugin_menu_load (GtkWidget           *menu,
                   G_CALLBACK (directory_menu_plugin_menu_launch), file,
                   (GClosureNotify) g_object_unref, 0);
             }
+
+          g_object_unref (G_OBJECT (info));
         }
 
       g_slist_free (infos);
-      g_object_unref (G_OBJECT (iter));
     }
 }
 
