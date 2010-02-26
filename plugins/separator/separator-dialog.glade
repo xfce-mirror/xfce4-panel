@@ -49,6 +49,12 @@
                           <object class="GtkComboBox" id="style">
                             <property name="visible">True</property>
                             <property name="model">style-model</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                              <attributes>
+                                <attribute name="text">0</attribute>
+                              </attributes>
+                            </child>
                           </object>
                           <packing>
                             <property name="position">1</property>
@@ -61,12 +67,12 @@
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="expand">
+                        <property name="label" translatable="yes">_Expand</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="use_underline">True</property>
                         <property name="draw_indicator">True</property>
-                        <property name="label" translatable="yes">_Expand</property>
                       </object>
                       <packing>
                         <property name="position">1</property>
@@ -95,12 +101,11 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="close-button">
+                <property name="label" translatable="yes">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
-                <property name="label" translatable="yes">gtk-close</property>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -115,6 +120,9 @@
         </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="0">close-button</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkListStore" id="style-model">
     <columns>

@@ -66,6 +66,12 @@
                               <object class="GtkComboBox" id="style">
                                 <property name="visible">True</property>
                                 <property name="model">style-model</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                                  <attributes>
+                                    <attribute name="text">0</attribute>
+                                  </attributes>
+                                </child>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -80,12 +86,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="flat-buttons">
+                            <property name="label" translatable="yes">Show _flat buttons</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Show _flat buttons</property>
                           </object>
                           <packing>
                             <property name="position">1</property>
@@ -93,12 +99,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-handle">
+                            <property name="label" translatable="yes">Show _handle</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Show _handle</property>
                           </object>
                           <packing>
                             <property name="position">2</property>
@@ -154,6 +160,9 @@
                             <child>
                               <object class="GtkComboBox" id="combobox2">
                                 <property name="visible">True</property>
+                                <child>
+                                  <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                                </child>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -167,12 +176,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="include-all-workspaces">
+                            <property name="label" translatable="yes">Show windows from _all workspaces</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Show windows from _all workspaces</property>
                           </object>
                           <packing>
                             <property name="position">1</property>
@@ -180,12 +189,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-only-minimized">
+                            <property name="label" translatable="yes">Show only _minimized windows</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Show only _minimized windows</property>
                           </object>
                           <packing>
                             <property name="position">2</property>
@@ -193,12 +202,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="switch-workspace-on-unminimize">
+                            <property name="label" translatable="yes">Restore minimized windows to current _workspace</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Restore minimized windows to current _workspace</property>
                           </object>
                           <packing>
                             <property name="position">3</property>
@@ -206,12 +215,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="show-wireframes">
+                            <property name="label" translatable="yes">D_raw window frame when hovering a button</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">D_raw window frame when hovering a button</property>
                           </object>
                           <packing>
                             <property name="position">4</property>
@@ -246,12 +255,11 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="close-button">
+                <property name="label" translatable="yes">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
-                <property name="label" translatable="yes">gtk-close</property>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -266,5 +274,8 @@
         </child>
       </object>
     </child>
+    <action-widgets>
+      <action-widget response="0">close-button</action-widget>
+    </action-widgets>
   </object>
 </interface>

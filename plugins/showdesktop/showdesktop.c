@@ -188,8 +188,8 @@ show_desktop_plugin_toggled (GtkToggleButton   *button,
 
   /* update the tooltip */
   gtk_widget_set_tooltip_text (GTK_WIDGET (button),
-                               active ? _("Restore hidden windows") :
-                                 _("Hide windows and show desktop"));
+                               active ? _("Restore the minimized windows") :
+                                 _("Minimize all open windows and show the desktop"));
 }
 
 

@@ -50,7 +50,7 @@ BUILT_SOURCES = \
 	$(libseparator_built_sources)
 
 DISTCLEANFILES = \
-	$(libclock_built_sources)
+	$(libseparator_built_sources)
 
 separator-dialog_glade.h: separator-dialog.glade
 	exo-csource --static --strip-comments --strip-content --name=separator_dialog_glade $< >$@

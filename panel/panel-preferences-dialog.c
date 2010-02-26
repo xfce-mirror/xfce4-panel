@@ -193,17 +193,6 @@ panel_preferences_dialog_init (PanelPreferencesDialog *dialog)
   gtk_tree_view_column_set_attributes (column, renderer, "text", COLUMN_DISPLAY_NAME, NULL);
   gtk_tree_view_append_column (GTK_TREE_VIEW (treeview), column);
 
-  /* TODO remove when implemented by glade */
-  GtkCellRenderer *cell1 = gtk_cell_renderer_text_new ();
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "panel-combobox");
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (object), cell1, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (object), cell1, "text", 0, NULL);
-
-  GtkCellRenderer *cell2 = gtk_cell_renderer_text_new ();
-  object = gtk_builder_get_object (GTK_BUILDER (dialog), "horizontal");
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (object), cell2, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (object), cell2, "text", 0, NULL);
-
   /* rebuild the panel combobox */
   panel_preferences_dialog_panel_combobox_rebuild (dialog);
 

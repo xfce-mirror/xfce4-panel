@@ -3,6 +3,27 @@
   <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-requires xfce4 0.0 -->
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="orientation-store">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Vertical</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Horizontal</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="panel-liststore">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="item-liststore"/>
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Xfce Panel Preferences</property>
     <property name="window_position">center-on-parent</property>
@@ -26,6 +47,12 @@
                   <object class="GtkComboBox" id="panel-combobox">
                     <property name="visible">True</property>
                     <property name="model">panel-liststore</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
                   </object>
                   <packing>
                     <property name="position">0</property>
@@ -118,6 +145,12 @@
                                       <object class="GtkComboBox" id="horizontal">
                                         <property name="visible">True</property>
                                         <property name="model">orientation-store</property>
+                                        <child>
+                                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                                          <attributes>
+                                            <attribute name="text">0</attribute>
+                                          </attributes>
+                                        </child>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -622,7 +655,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -635,7 +667,6 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
               </object>
               <packing>
                 <property name="position">1</property>
@@ -651,26 +682,10 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="orientation-store">
-    <columns>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Vertical</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Horizontal</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="panel-liststore">
-    <columns>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-    </columns>
+    <action-widgets>
+      <action-widget response="0">button-close</action-widget>
+      <action-widget response="0">button-help</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkAdjustment" id="size">
     <property name="value">16</property>
@@ -704,12 +719,11 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkListStore" id="item-liststore"/>
   <object class="GtkSizeGroup" id="sizegroup1">
     <widgets>
-      <widget name="label7"/>
-      <widget name="label9"/>
       <widget name="label10"/>
+      <widget name="label9"/>
+      <widget name="label7"/>
     </widgets>
   </object>
 </interface>

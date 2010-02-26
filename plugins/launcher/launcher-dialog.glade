@@ -3,6 +3,32 @@
   <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-requires xfce4 0.0 -->
   <!-- interface-naming-policy toplevel-contextual -->
+  <object class="GtkListStore" id="arrow-position-store">
+    <columns>
+      <!-- column-name title -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">Default</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Left</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Right</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Top</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Bottom</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Inside Button</col>
+      </row>
+    </data>
+  </object>
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Launcher Properties</property>
     <property name="window_position">center</property>
@@ -294,12 +320,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="entry-terminal2">
+                            <property name="label" translatable="yes">Run in _terminal</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Run in _terminal</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -311,12 +337,12 @@
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="entry-startup-notify2">
+                            <property name="label" translatable="yes">Use _statup notification</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="label" translatable="yes">Use _statup notification</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -400,12 +426,12 @@
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkCheckButton" id="disable-tooltips">
+                    <property name="label" translatable="yes">Disable t_ooltips</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
-                    <property name="label" translatable="yes">Disable t_ooltips</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -414,12 +440,12 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="show-labels">
+                    <property name="label" translatable="yes">Show _labels instead of icons</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
-                    <property name="label" translatable="yes">Show _labels instead of icons</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -428,12 +454,12 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="move-first">
+                    <property name="label" translatable="yes">Show last _used entry in panel</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
-                    <property name="label" translatable="yes">Show last _used entry in panel</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -461,6 +487,12 @@
                         <property name="visible">True</property>
                         <property name="model">arrow-position-store</property>
                         <property name="button_sensitivity">on</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -499,12 +531,11 @@
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="close-button">
+                <property name="label" translatable="yes">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
-                <property name="response_id">0</property>
-                <property name="label" translatable="yes">gtk-close</property>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -519,31 +550,8 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkListStore" id="arrow-position-store">
-    <columns>
-      <!-- column-name title -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Default</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Left</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Right</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Top</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Bottom</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Inside Button</col>
-      </row>
-    </data>
+    <action-widgets>
+      <action-widget response="0">close-button</action-widget>
+    </action-widgets>
   </object>
 </interface>

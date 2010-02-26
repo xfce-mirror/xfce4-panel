@@ -303,12 +303,6 @@ separator_plugin_configure_plugin (XfcePanelPlugin *panel_plugin)
       object = gtk_builder_get_object (builder, "style");
       xfconf_g_property_bind (plugin->channel, "/style", G_TYPE_UINT, object, "active");
 
-      /* TODO remove when implemented by glade */
-      GtkCellRenderer *cell1 = gtk_cell_renderer_text_new ();
-      object = gtk_builder_get_object (builder, "style");
-      gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (object), cell1, TRUE);
-      gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (object), cell1, "text", 0, NULL);
-
       gtk_widget_show (GTK_WIDGET (dialog));
     }
   else
