@@ -24,11 +24,14 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
 EXTRA_DIST = 								\
+	$(desktop_in_in_files)						\
 	intltool-extract.in						\
 	intltool-merge.in						\
 	intltool-update.in
 
 DISTCLEANFILES =							\
+	$(desktop_in_files)						\
+	$(desktop_DATA)							\
 	intltool-extract						\
 	intltool-merge							\
 	intltool-update
