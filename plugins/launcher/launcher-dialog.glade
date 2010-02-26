@@ -37,6 +37,8 @@
       <column type="gchararray"/>
       <!-- column-name filename -->
       <column type="gchararray"/>
+      <!-- column-name search -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkListStore" id="entry-store">
@@ -100,7 +102,7 @@
                             <child>
                               <object class="GtkCellRendererText" id="entryrenderername"/>
                               <attributes>
-                                <attribute name="text">1</attribute>
+                                <attribute name="markup">1</attribute>
                               </attributes>
                             </child>
                           </object>
@@ -747,7 +749,7 @@
                         <child>
                           <object class="GtkCellRendererText" id="addrenderername"/>
                           <attributes>
-                            <attribute name="text">1</attribute>
+                            <attribute name="markup">1</attribute>
                           </attributes>
                         </child>
                       </object>

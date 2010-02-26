@@ -152,7 +152,8 @@ launcher_plugin_property_changed (XfconfChannel  *channel,
   else if (exo_str_is_equal (property_name, "/entries"))
     {
       /* free entries */
-      g_slist_foreach (plugin->entries, (GFunc) launcher_plugin_entry_free, NULL);
+      g_slist_foreach (plugin->entries, (GFunc)
+                       launcher_plugin_entry_free, NULL);
       g_slist_free (plugin->entries);
       plugin->entries = NULL;
 
@@ -188,13 +189,17 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
   gtk_widget_set_has_tooltip (widget, TRUE);
   gtk_widget_show (widget);
   g_signal_connect (G_OBJECT (widget), "button-press-event",
-                    G_CALLBACK (launcher_plugin_button_press_event), plugin);
+                    G_CALLBACK (launcher_plugin_button_press_event),
+                    plugin);
   g_signal_connect (G_OBJECT (widget), "button-release-event",
-                    G_CALLBACK (launcher_plugin_button_release_event), plugin);
+                    G_CALLBACK (launcher_plugin_button_release_event),
+                    plugin);
   g_signal_connect (G_OBJECT (widget), "query-tooltip",
-                    G_CALLBACK (launcher_plugin_button_query_tooltip), plugin);
+                    G_CALLBACK (launcher_plugin_button_query_tooltip),
+                    plugin);
   g_signal_connect (G_OBJECT (widget), "drag-data-received",
-                    G_CALLBACK (launcher_plugin_button_drag_data_received), plugin);
+                    G_CALLBACK (launcher_plugin_button_drag_data_received),
+                    plugin);
 
   plugin->image = xfce_scaled_image_new ();
   gtk_container_add (GTK_CONTAINER (plugin->button), plugin->image);
@@ -209,12 +214,16 @@ launcher_plugin_construct (XfcePanelPlugin *panel_plugin)
 
   /* sync button states */
   g_signal_connect (G_OBJECT (plugin->button), "state-changed",
-                    G_CALLBACK (launcher_plugin_button_state_changed), plugin->arrow);
+                    G_CALLBACK (launcher_plugin_button_state_changed),
+                    plugin->arrow);
   g_signal_connect (G_OBJECT (plugin->arrow), "state-changed",
-                    G_CALLBACK (launcher_plugin_button_state_changed), plugin->button);
+                    G_CALLBACK (launcher_plugin_button_state_changed),
+                    plugin->button);
 
   /* load global settings */
-  plugin->disable_tooltips = xfconf_channel_get_bool (plugin->channel, "/disable-tooltips", FALSE);
+  plugin->disable_tooltips = xfconf_channel_get_bool (plugin->channel,
+                                                      "/disable-tooltips",
+                                                      FALSE);
 
   /* load the entries */
   launcher_plugin_entries_load (plugin);
@@ -237,7 +246,8 @@ launcher_plugin_free_data (XfcePanelPlugin *panel_plugin)
   xfconf_shutdown ();
 
   /* free entries */
-  g_slist_foreach (plugin->entries, (GFunc) launcher_plugin_entry_free, NULL);
+  g_slist_foreach (plugin->entries, (GFunc)
+                   launcher_plugin_entry_free, NULL);
   g_slist_free (plugin->entries);
 }
 
@@ -273,7 +283,8 @@ launcher_plugin_save (XfcePanelPlugin *panel_plugin)
   LauncherEntry  *entry;
 
   /* save the global settings */
-  xfconf_channel_set_bool (plugin->channel, "/disable-tooltips", plugin->disable_tooltips);
+  xfconf_channel_set_bool (plugin->channel, "/disable-tooltips",
+                           plugin->disable_tooltips);
 
   length = g_slist_length (plugin->entries);
   if (G_LIKELY (length > 0))
@@ -574,8 +585,9 @@ launcher_plugin_entry_exec_on_screen (LauncherEntry *entry,
                                   NULL, &argv, &error))
     {
       /* launch the command on the screen */
-      succeed = xfce_execute_argv_on_screen (screen, entry->path, argv, NULL,
-                                             G_SPAWN_SEARCH_PATH, entry->startup_notify,
+      succeed = xfce_execute_argv_on_screen (screen, entry->path, argv,
+                                             NULL, G_SPAWN_SEARCH_PATH,
+                                             entry->startup_notify,
                                              event_time, entry->icon, &error);
 
       /* cleanup */
@@ -619,12 +631,15 @@ launcher_plugin_entry_exec (LauncherEntry *entry,
       for (li = uri_list; li != NULL && proceed; li = li->next)
         {
           fake.data = li->data;
-          proceed = launcher_plugin_entry_exec_on_screen (entry, event_time, screen, &fake);
+          proceed = launcher_plugin_entry_exec_on_screen (entry,
+                                                          event_time,
+                                                          screen, &fake);
         }
     }
   else
     {
-      launcher_plugin_entry_exec_on_screen (entry, event_time, screen, uri_list);
+      launcher_plugin_entry_exec_on_screen (entry, event_time, screen,
+                                            uri_list);
     }
 }
 
@@ -689,7 +704,8 @@ launcher_plugin_exec_parse (LauncherEntry   *entry,
               case 'F':
                 for (li = uri_list; li != NULL; li = li->next)
                   {
-                    filename = g_filename_from_uri ((const gchar *) li->data, NULL, NULL);
+                    filename = g_filename_from_uri ((const gchar *) li->data,
+                                                    NULL, NULL);
                     if (G_LIKELY (filename != NULL))
                       launcher_plugin_exec_append_quoted (string, filename);
                     g_free (filename);
@@ -705,7 +721,8 @@ launcher_plugin_exec_parse (LauncherEntry   *entry,
               case 'U':
                 for (li = uri_list; li != NULL; li = li->next)
                   {
-                    launcher_plugin_exec_append_quoted (string, (const gchar *) li->data);
+                    launcher_plugin_exec_append_quoted (string, (const gchar *)
+                                                        li->data);
 
                     if (*p == 'u')
                       break;
