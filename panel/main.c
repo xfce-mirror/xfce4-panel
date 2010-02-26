@@ -253,6 +253,13 @@ main (gint argc, gchar **argv)
   /* enter the main loop */
   gtk_main ();
 
+  /* release session reference */
+  exit_style = panel_dbus_service_get_exit_style ();
+  if (exit_style == PANEL_DBUS_EXIT_QUIT
+      || exit_style == PANEL_DBUS_EXIT_RESTART)
+    xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_NORMAL);
+  g_object_unref (G_OBJECT (sm_client));
+
   /* release dbus service */
   g_object_unref (G_OBJECT (dbus_service));
 
@@ -264,13 +271,6 @@ main (gint argc, gchar **argv)
 
   /* release application reference */
   g_object_unref (G_OBJECT (application));
-
-  /* release session reference */
-  exit_style = panel_dbus_service_get_exit_style ();
-  if (exit_style == PANEL_DBUS_EXIT_QUIT
-      || exit_style == PANEL_DBUS_EXIT_RESTART)
-    xfce_sm_client_set_restart_style (sm_client, XFCE_SM_CLIENT_RESTART_NORMAL);
-  g_object_unref (G_OBJECT (sm_client));
 
   /* whether we need to restart */
   if (exit_style == PANEL_DBUS_EXIT_RESTART)
