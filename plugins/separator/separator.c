@@ -258,8 +258,11 @@ separator_plugin_expose_event (GtkWidget      *widget,
                           &(event->area),
                           widget, "handlebox",
                           alloc->x, alloc->y,
-                          alloc->width, alloc->height,
-                          xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)));
+                          alloc->width,
+                          alloc->height,
+                          xfce_panel_plugin_get_orientation (XFCE_PANEL_PLUGIN (plugin)) ==
+                              GTK_ORIENTATION_HORIZONTAL ? GTK_ORIENTATION_VERTICAL
+                              : GTK_ORIENTATION_HORIZONTAL);
         break;
 
       case SEPARATOR_PLUGIN_STYLE_DOTS:

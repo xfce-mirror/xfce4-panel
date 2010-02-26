@@ -375,7 +375,7 @@ static void
 window_menu_plugin_style_set (GtkWidget *widget,
                               GtkStyle  *previous_style)
 {
-   WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
+  WindowMenuPlugin *plugin = XFCE_WINDOW_MENU_PLUGIN (widget);
 
   /* let gtk update the widget style */
   (*GTK_WIDGET_CLASS (window_menu_plugin_parent_class)->style_set) (widget, previous_style);
