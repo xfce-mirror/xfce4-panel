@@ -533,7 +533,7 @@ migrate_46_plugin_systray (XfconfChannel *channel,
       xfce_rc_set_group (rc, "Global");
 
       migrate_46_plugin_bool ("ShowFrame", "show-frame", TRUE);
-      migrate_46_plugin_bool ("Rows", "rows", 1);
+      migrate_46_plugin_uint ("Rows", "rows", 1);
     }
 
   if (xfce_rc_has_group (rc, "Applications"))

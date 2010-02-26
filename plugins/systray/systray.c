@@ -134,10 +134,10 @@ systray_plugin_class_init (SystrayPluginClass *klass)
 
   g_object_class_install_property (gobject_class,
                                    PROP_ROWS,
-                                   g_param_spec_int ("rows",
-                                                     NULL, NULL,
-                                                     1, 10, 1,
-                                                     EXO_PARAM_READWRITE));
+                                   g_param_spec_uint ("rows",
+                                                      NULL, NULL,
+                                                      1, 10, 1,
+                                                      EXO_PARAM_READWRITE));
 
   g_object_class_install_property (gobject_class,
                                    PROP_SHOW_FRAME,
@@ -176,13 +176,13 @@ systray_plugin_get_property (GObject    *object,
                              GParamSpec *pspec)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
-  gint           rows;
+  guint          rows;
 
   switch (prop_id)
     {
       case PROP_ROWS:
         rows = systray_box_get_rows (XFCE_SYSTRAY_BOX (plugin->box));
-        g_value_set_int (value, rows);
+        g_value_set_uint (value, rows);
         break;
 
       case PROP_SHOW_FRAME:
@@ -204,14 +204,13 @@ systray_plugin_set_property (GObject      *object,
                              GParamSpec   *pspec)
 {
   SystrayPlugin *plugin = XFCE_SYSTRAY_PLUGIN (object);
-  gint           rows;
   gboolean       show_frame;
 
   switch (prop_id)
     {
       case PROP_ROWS:
-        rows = g_value_get_int (value);
-        systray_box_set_rows (XFCE_SYSTRAY_BOX (plugin->box), rows);
+        systray_box_set_rows (XFCE_SYSTRAY_BOX (plugin->box),
+                              g_value_get_uint (value));
         break;
 
       case PROP_SHOW_FRAME:
