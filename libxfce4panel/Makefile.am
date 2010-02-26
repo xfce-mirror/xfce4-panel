@@ -20,7 +20,8 @@ libxfce4panel_headers =							\
 	xfce-hvbox.h							\
 	xfce-panel-convenience.h					\
 	xfce-panel-macros.h						\
-	xfce-panel-plugin.h
+	xfce-panel-plugin.h						\
+	xfce-scaled-image.h
 
 libxfce4panel_includedir =						\
 	$(includedir)/xfce4/libxfce4panel
@@ -36,7 +37,8 @@ libxfce4panel_la_SOURCES =						\
 	xfce-panel-convenience.c					\
 	xfce-panel-plugin.c						\
 	xfce-panel-plugin-provider.c					\
-	xfce-panel-plugin-provider.h
+	xfce-panel-plugin-provider.h					\
+	xfce-scaled-image.c
 
 libxfce4panel_la_CFLAGS =						\
 	$(GTK_CFLAGS)							\
