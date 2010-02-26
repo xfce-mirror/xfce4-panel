@@ -38,6 +38,10 @@ enum
 
 
 
+gboolean panel_debug_enabled = FALSE;
+
+
+
 void
 panel_debug (const gchar *domain,
              const gchar *message,
@@ -72,6 +76,8 @@ panel_debug (const gchar *domain,
           level = DEBUG_LEVEL_FILTER_DOMAINS;
           domains = g_strsplit (value, ":", -1);
         }
+
+      panel_debug_enabled = (level != DEBUG_LEVEL_NONE);
 
       g_once_init_leave (&level__volatile, level);
     }

@@ -24,6 +24,8 @@
 
 #define PANEL_DEBUG_BOOL(bool) ((bool) ? "true" : "false")
 
+extern gboolean panel_debug_enabled;
+
 void panel_debug (const gchar *domain,
                   const gchar *message,
                   ...);

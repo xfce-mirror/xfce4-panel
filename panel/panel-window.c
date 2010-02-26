@@ -45,7 +45,6 @@
 
 #define SNAP_DISTANCE         (10)
 #define SET_OLD_WM_STRUTS     (FALSE)
-#define STRUTS_DEBUGGING      (FALSE)
 #define DEFAULT_POPUP_DELAY   (225)
 #define DEFAULT_POPDOWN_DELAY (350)
 #define HANDLE_SPACING        (4)
@@ -1336,11 +1335,9 @@ panel_window_screen_struts_set (PanelWindow *window)
   GdkRectangle  *alloc = &window->alloc;
   guint          i;
   gboolean       update_struts = FALSE;
-#if STRUTS_DEBUGGING
-  gint           n;
-  const gchar   *names1[] = { "left", "right", "top", "bottom" };
-  const gchar   *names2[] = { "y",    "y",     "x",    "x" };
-#endif
+  gint           n = -1;
+  const gchar   *strut_border[] = { "left", "right", "top", "bottom" };
+  const gchar   *strut_xy[] = { "y", "y", "x", "x" };
 
   panel_return_if_fail (PANEL_IS_WINDOW (window));
   panel_return_if_fail (GDK_IS_WINDOW (GTK_WIDGET (window)->window));
@@ -1415,26 +1412,28 @@ panel_window_screen_struts_set (PanelWindow *window)
   if (gdk_error_trap_pop () != 0)
     g_critical ("Failed to set the struts");
 
-#if STRUTS_DEBUGGING
-  /* debugging output */
-  if (struts[STRUT_LEFT] != 0)
-    n = STRUT_LEFT;
-  else if (struts[STRUT_RIGHT] != 0)
-    n = STRUT_RIGHT;
-  else if (struts[STRUT_TOP] != 0)
-    n = STRUT_TOP;
-  else if (struts[STRUT_BOTTOM] != 0)
-    n = STRUT_BOTTOM;
-  else
-    n = -1;
+  if (panel_debug_enabled)
+    {
+      if (struts[STRUT_LEFT] != 0)
+        n = STRUT_LEFT;
+      else if (struts[STRUT_RIGHT] != 0)
+        n = STRUT_RIGHT;
+      else if (struts[STRUT_TOP] != 0)
+        n = STRUT_TOP;
+      else if (struts[STRUT_BOTTOM] != 0)
+        n = STRUT_BOTTOM;
+      else
+        panel_debug (PANEL_DEBUG_DOMAIN_STRUTS, "unset");
 
-  if (n == -1)
-    g_message ("Struts updated: Reset to zero.");
-  else
-    g_message ("Struts updated: %s = %ld, start_%s = %ld, end_%s = %ld.",
-               names1[n], struts[n], names2[n], struts[4 + n * 2],
-               names2[n], struts[5 + n * 2]);
-#endif
+      if (n != -1)
+        {
+          panel_debug (PANEL_DEBUG_DOMAIN_STRUTS,
+                       "%s=%ld, start_%s=%ld, end_%s=%ld",
+                       strut_border[n], struts[n],
+                       strut_xy[n], struts[4 + n * 2],
+                       strut_xy[n], struts[5 + n * 2]);
+        }
+    }
 }
 
 
