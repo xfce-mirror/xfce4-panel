@@ -130,7 +130,7 @@ main (gint argc, gchar **argv)
   PanelApplication *application;
   GError           *error = NULL;
   PanelDBusService *dbus_service;
-  gboolean          result;
+  gboolean          succeed = FALSE;
   guint             i;
   const gint        signums[] = { SIGHUP, SIGINT, SIGQUIT, SIGTERM };
   const gchar      *error_msg;
@@ -153,7 +153,7 @@ main (gint argc, gchar **argv)
   if (!g_option_context_parse (context, &argc, &argv, &error))
     {
       g_print ("%s: %s.\n", PACKAGE_NAME, error->message);
-      g_print (_("Type '%s --help' for usage."), G_LOG_DOMAIN);
+      g_print (_("Type \"%s --help\" for usage."), G_LOG_DOMAIN);
       g_print ("\n");
       g_error_free (error);
 
@@ -161,10 +161,8 @@ main (gint argc, gchar **argv)
     }
   g_option_context_free (context);
 
-  /* initialize gtk */
   gtk_init (&argc, &argv);
 
-  /* handle option arguments */
   if (opt_version)
     {
       /* print version information */
@@ -179,48 +177,44 @@ main (gint argc, gchar **argv)
   else if (opt_preferences >= 0)
     {
       /* send a signal to the running instance to show the preferences dialog */
-      result = panel_dbus_client_display_preferences_dialog (opt_preferences, &error);
+      succeed = panel_dbus_client_display_preferences_dialog (opt_preferences, &error);
       goto dbus_return;
     }
   else if (opt_add_items >= 0)
     {
       /* send a signal to the running instance to show the add items dialog */
-      result = panel_dbus_client_display_items_dialog (opt_add_items, &error);
+      succeed = panel_dbus_client_display_items_dialog (opt_add_items, &error);
       goto dbus_return;
     }
   else if (opt_save)
     {
       /* send a save signal to the running instance */
-      result = panel_dbus_client_save (&error);
+      succeed = panel_dbus_client_save (&error);
       goto dbus_return;
     }
   else if (opt_add != NULL)
     {
-      /* stop any running startup notification */
-      gdk_notify_startup_complete ();
-
-      /* send a add new item signal to the running instance */
-      result = panel_dbus_client_add_new_item (opt_add, opt_arguments, &error);
+      /* send a add-new-item signal to the running instance */
+      succeed = panel_dbus_client_add_new_item (opt_add, opt_arguments, &error);
       goto dbus_return;
     }
   else if (opt_restart || opt_quit)
     {
       /* send a terminate signal to the running instance */
-      result = panel_dbus_client_terminate (opt_restart, &error);
+      succeed = panel_dbus_client_terminate (opt_restart, &error);
       goto dbus_return;
     }
   else if (opt_plugin_event != NULL)
     {
       /* send the plugin event to the running instance */
-      result = panel_dbus_client_plugin_event (opt_plugin_event, &error);
+      succeed = panel_dbus_client_plugin_event (opt_plugin_event, &error);
       goto dbus_return;
     }
   else if (panel_dbus_client_check_instance_running ())
     {
       /* quit without error if and instance is running */
-      result = TRUE;
+      succeed = TRUE;
 
-      /* print message */
       g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("There is already a running instance"));
       goto dbus_return;
     }
@@ -236,20 +230,17 @@ main (gint argc, gchar **argv)
       g_error_free (error);
     }
 
-  /* create dbus service */
-  dbus_service = panel_dbus_service_get ();
-
-  /* create a new application */
-  application = panel_application_get ();
-
   /* setup signal handlers to properly quit the main loop */
   for (i = 0; i < G_N_ELEMENTS (signums); i++)
     signal (signums[i], signal_handler_quit);
 
-  /* enter the main loop */
+  dbus_service = panel_dbus_service_get ();
+
+  application = panel_application_get ();
+
   gtk_main ();
 
-  /* release dbus service */
+  /* make sure there are no incomming events when we close */
   g_object_unref (G_OBJECT (dbus_service));
 
   /* destroy all the opened dialogs */
@@ -258,19 +249,13 @@ main (gint argc, gchar **argv)
   /* save the configuration */
   panel_application_save (application, TRUE);
 
-  /* release application reference */
   g_object_unref (G_OBJECT (application));
-
-  /* release session reference */
   g_object_unref (G_OBJECT (sm_client));
 
-  /* whether we need to restart */
   if (panel_dbus_service_get_restart ())
     {
-      /* message */
-      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting"));
-
       /* spawn ourselfs again */
+      g_print ("%s: %s\n\n", G_LOG_DOMAIN, _("Restarting"));
       g_spawn_command_line_async (argv[0], NULL);
     }
 
@@ -303,7 +288,7 @@ dbus_return:
       if (error->code == DBUS_GERROR_NAME_HAS_NO_OWNER)
         {
           g_clear_error (&error);
-          g_set_error (&error, 0, 0, _("No running instance of %s found"), G_LOG_DOMAIN);
+          g_set_error (&error, 0, 0, _("No running instance of %s was found"), G_LOG_DOMAIN);
         }
 
       /* show error dialog */
@@ -311,5 +296,5 @@ dbus_return:
       g_error_free (error);
     }
 
-  return result ? EXIT_SUCCESS : EXIT_FAILURE;
+  return succeed ? EXIT_SUCCESS : EXIT_FAILURE;
 }
