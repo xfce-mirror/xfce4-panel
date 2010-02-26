@@ -44,6 +44,9 @@ struct _XfcePanelPluginClass
   /*< private >*/
   GtkEventBoxClass __parent__;
 
+  /*< object oriented plugins >*/
+  void     (*construct)               (XfcePanelPlugin *plugin);
+
   /*< signals >*/
   void     (*screen_position_changed) (XfcePanelPlugin *plugin,
                                        gint             position);

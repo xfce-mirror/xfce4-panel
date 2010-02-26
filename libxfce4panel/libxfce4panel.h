@@ -34,6 +34,25 @@ G_BEGIN_DECLS
 
 #undef LIBXFCE4PANEL_INSIDE_LIBXFCE4PANEL_H
 
+#define XFCE_PANEL_PLUGIN_REGISTER_OBJECT(TYPE) \
+  PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
+  __xpp_construct_obj (const gchar  *name, \
+                       const gchar  *id, \
+                       const gchar  *display_name, \
+                       gchar       **arguments, \
+                       GdkScreen    *screen) \
+  { \
+    panel_return_val_if_fail (GDK_IS_SCREEN (screen), NULL); \
+    panel_return_val_if_fail (name != NULL && id != NULL, NULL); \
+    panel_return_val_if_fail (g_type_is_a (TYPE, XFCE_TYPE_PANEL_PLUGIN), NULL); \
+    \
+    return g_object_new (TYPE, \
+                         "name", name, \
+                         "id", id, \
+                         "display-name", display_name, \
+                         "arguments", arguments, NULL); \
+  }
+
 #define XFCE_PANEL_PLUGIN_REGISTER(init_func) \
   XFCE_PANEL_PLUGIN_REGISTER_EXTENDED (init_func, {})
 
@@ -42,21 +61,21 @@ G_BEGIN_DECLS
 
 #define XFCE_PANEL_PLUGIN_REGISTER_EXTENDED(construct_func, CODE) \
   static void \
-  xfce_panel_plugin_realize (XfcePanelPlugin *plugin) \
+  __xpp_realize (XfcePanelPlugin *plugin) \
   { \
     panel_return_if_fail (XFCE_IS_PANEL_PLUGIN (plugin)); \
     \
-    g_signal_handlers_disconnect_by_func (G_OBJECT (plugin), G_CALLBACK (xfce_panel_plugin_realize), NULL); \
+    g_signal_handlers_disconnect_by_func (G_OBJECT (plugin), G_CALLBACK (__xpp_realize), NULL); \
     \
     (*construct_func) (plugin); \
   } \
   \
   PANEL_SYMBOL_EXPORT G_MODULE_EXPORT XfcePanelPlugin * \
-  xfce_panel_plugin_construct (const gchar  *name, \
-                               const gchar  *id, \
-                               const gchar  *display_name, \
-                               gchar       **arguments, \
-                               GdkScreen    *screen) \
+  __xpp_construct (const gchar  *name, \
+                   const gchar  *id, \
+                   const gchar  *display_name, \
+                   gchar       **arguments, \
+                   GdkScreen    *screen) \
   { \
     XfcePanelPlugin *plugin = NULL; \
     \
@@ -71,7 +90,7 @@ G_BEGIN_DECLS
                                "display-name", display_name, \
                                "arguments", arguments, NULL); \
         \
-        g_signal_connect_after (G_OBJECT (plugin), "realize", G_CALLBACK (xfce_panel_plugin_realize), NULL); \
+        g_signal_connect_after (G_OBJECT (plugin), "realize", G_CALLBACK (__xpp_realize), NULL); \
       } \
     \
     return plugin; \

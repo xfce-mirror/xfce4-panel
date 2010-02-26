@@ -39,6 +39,7 @@ typedef const gchar *(*ProviderToPlugin) (XfcePanelPluginProvider *provider);
 static void         xfce_panel_plugin_class_init             (XfcePanelPluginClass         *klass);
 static void         xfce_panel_plugin_init                   (XfcePanelPlugin              *plugin);
 static void         xfce_panel_plugin_provider_init          (XfcePanelPluginProviderIface *iface);
+static void         xfce_panel_plugin_constructed            (GObject                      *object);
 static void         xfce_panel_plugin_get_property           (GObject                      *object,
                                                               guint                         prop_id,
                                                               GValue                       *value,
@@ -106,6 +107,9 @@ struct _XfcePanelPluginPrivate
   GtkOrientation       orientation;
   XfceScreenPosition   screen_position;
 
+  /* prevent free_data in dispose from running twice */
+  guint                disposed : 1;
+
   /* plugin menu */
   GtkMenu             *menu;
 
@@ -136,7 +140,11 @@ xfce_panel_plugin_class_init (XfcePanelPluginClass *klass)
   /* add private data */
   g_type_class_add_private (klass, sizeof (XfcePanelPluginPrivate));
 
+  /* reset class contruct function */
+  klass->construct = NULL;
+
   gobject_class = G_OBJECT_CLASS (klass);
+  gobject_class->constructed = xfce_panel_plugin_constructed;
   gobject_class->get_property = xfce_panel_plugin_get_property;
   gobject_class->set_property = xfce_panel_plugin_set_property;
   gobject_class->dispose = xfce_panel_plugin_dispose;
@@ -373,6 +381,7 @@ xfce_panel_plugin_init (XfcePanelPlugin *plugin)
   plugin->priv->menu = NULL;
   plugin->priv->menu_blocked = 0;
   plugin->priv->registered_menus = 0;
+  plugin->priv->disposed = FALSE;
 
   /* hide the event box window to make the plugin transparent */
   gtk_event_box_set_visible_window (GTK_EVENT_BOX (plugin), FALSE);
@@ -389,6 +398,19 @@ xfce_panel_plugin_provider_init (XfcePanelPluginProviderIface *iface)
   iface->set_orientation = xfce_panel_plugin_set_orientation;
   iface->set_screen_position = xfce_panel_plugin_set_screen_position;
   iface->save = xfce_panel_plugin_save;
+}
+
+
+
+static void
+xfce_panel_plugin_constructed (GObject *object)
+{
+  XfcePanelPluginClass *klass = XFCE_PANEL_PLUGIN_GET_CLASS (object);
+
+  /* check if there is a construct class attached to this plugin,
+   * if there is, execute it */
+  if (klass->construct != NULL)
+    (*klass->construct) (XFCE_PANEL_PLUGIN (object));
 }
 
 
@@ -464,8 +486,16 @@ xfce_panel_plugin_set_property (GObject      *object,
 static void
 xfce_panel_plugin_dispose (GObject *object)
 {
-  /* allow the plugin to cleanup */
-  g_signal_emit (G_OBJECT (object), plugin_signals[FREE_DATA], 0);
+  XfcePanelPlugin *plugin = XFCE_PANEL_PLUGIN (object);
+
+  if (plugin->priv->disposed == FALSE)
+    {
+      /* allow the plugin to cleanup */
+      g_signal_emit (G_OBJECT (object), plugin_signals[FREE_DATA], 0);
+
+      /* plugin disposed, don't try this again */
+      plugin->priv->disposed = TRUE;
+    }
 
   (*G_OBJECT_CLASS (xfce_panel_plugin_parent_class)->dispose) (object);
 }
