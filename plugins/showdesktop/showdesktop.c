@@ -1,0 +1,205 @@
+/* $Id$ */
+/*
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU Library General Public License
+ * along with this library; if not, write to the Free Software Foundation,
+ * Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
+ */
+
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
+#include <libxfce4util/libxfce4util.h>
+
+#include "showdesktop.h"
+
+static void     show_desktop_plugin_class_init              (ShowDesktopPluginClass *klass);
+static void     show_desktop_plugin_init                    (ShowDesktopPlugin      *plugin);
+static void     show_desktop_plugin_screen_changed          (GtkWidget              *widget,
+                                                             GdkScreen              *previous_screen);
+static void     show_desktop_plugin_free_data               (XfcePanelPlugin        *panel_plugin);
+static gboolean show_desktop_plugin_size_changed            (XfcePanelPlugin        *panel_plugin,
+                                                             gint                    size);
+static void     show_desktop_plugin_toggled                 (GtkToggleButton        *button,
+                                                             ShowDesktopPlugin      *plugin);
+static void     show_desktop_plugin_showing_desktop_changed (WnckScreen             *wnck_screen,
+                                                             ShowDesktopPlugin      *plugin);
+
+
+
+struct _ShowDesktopPluginClass
+{
+	XfcePanelPluginClass __parent__;
+};
+
+struct _ShowDesktopPlugin
+{
+	XfcePanelPlugin __parent__;
+
+	/* the toggle button */
+	GtkWidget  *button;
+
+	/* the wnck screen */
+	WnckScreen *wnck_screen;
+
+	/* wnck signal */
+	gulong      showing_desktop_changed_id;
+};
+
+
+
+G_DEFINE_TYPE (ShowDesktopPlugin, show_desktop_plugin, XFCE_TYPE_PANEL_PLUGIN);
+
+
+
+/* register the panel plugin */
+XFCE_PANEL_PLUGIN_REGISTER_OBJECT (XFCE_TYPE_SHOW_DESKTOP_PLUGIN);
+
+
+
+static void
+show_desktop_plugin_class_init (ShowDesktopPluginClass *klass)
+{
+  GtkWidgetClass       *gtkwidget_class;
+  XfcePanelPluginClass *plugin_class;
+
+  gtkwidget_class = GTK_WIDGET_CLASS (klass);
+  gtkwidget_class->screen_changed = show_desktop_plugin_screen_changed;
+
+  plugin_class = XFCE_PANEL_PLUGIN_CLASS (klass);
+  plugin_class->free_data = show_desktop_plugin_free_data;
+  plugin_class->size_changed = show_desktop_plugin_size_changed;
+}
+
+
+
+static void
+show_desktop_plugin_init (ShowDesktopPlugin *plugin)
+{
+  GtkWidget *button, *image;
+
+  /* init */
+  plugin->wnck_screen = NULL;
+  plugin->showing_desktop_changed_id = 0;
+
+  /* create the toggle button */
+  button = plugin->button = xfce_create_panel_toggle_button ();
+  gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
+  gtk_container_add (GTK_CONTAINER (plugin), button);
+  g_signal_connect (G_OBJECT (button), "toggled", G_CALLBACK (show_desktop_plugin_toggled), plugin);
+  xfce_panel_plugin_add_action_widget (XFCE_PANEL_PLUGIN (plugin), button);
+  gtk_widget_show (button);
+
+  /* add an icon */
+  image = xfce_scaled_image_new_from_icon_name ("user-desktop");
+  gtk_container_add (GTK_CONTAINER (button), image);
+  gtk_widget_show (image);
+}
+
+
+
+static void
+show_desktop_plugin_screen_changed (GtkWidget *widget,
+                                    GdkScreen *previous_screen)
+{
+  ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (widget);
+
+  panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (widget));
+
+  /* disconnect signals from an existing wnck screen */
+  if (plugin->showing_desktop_changed_id != 0)
+    {
+      g_signal_handler_disconnect (plugin->wnck_screen, plugin->showing_desktop_changed_id);
+      plugin->showing_desktop_changed_id = 0;
+    }
+
+  /* set the new wnck screen */
+  plugin->wnck_screen = wnck_screen_get (gdk_screen_get_number (gtk_widget_get_screen (widget)));
+  plugin->showing_desktop_changed_id = g_signal_connect (G_OBJECT (plugin->wnck_screen),
+                                                         "showing-desktop-changed",
+                                                         G_CALLBACK (show_desktop_plugin_showing_desktop_changed),
+                                                         plugin);
+
+  /* toggle the button to the current state or update the tooltip */
+  if (G_UNLIKELY (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (plugin->button)) !=
+        wnck_screen_get_showing_desktop (plugin->wnck_screen)))
+    show_desktop_plugin_showing_desktop_changed (plugin->wnck_screen, plugin);
+  else
+    show_desktop_plugin_toggled (GTK_TOGGLE_BUTTON (plugin->button), plugin);
+}
+
+
+
+static void
+show_desktop_plugin_free_data (XfcePanelPlugin *panel_plugin)
+{
+  ShowDesktopPlugin *plugin = XFCE_SHOW_DESKTOP_PLUGIN (panel_plugin);
+
+  /* disconnect handle */
+  if (plugin->showing_desktop_changed_id != 0)
+    g_signal_handler_disconnect (plugin->wnck_screen, plugin->showing_desktop_changed_id);
+}
+
+
+
+static gboolean
+show_desktop_plugin_size_changed (XfcePanelPlugin *panel_plugin,
+                                  gint             size)
+{
+  panel_return_val_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (panel_plugin), FALSE);
+  
+  /* keep the button squared */
+  gtk_widget_set_size_request (GTK_WIDGET (panel_plugin), size, size);
+
+  return TRUE;
+}
+
+
+
+static void
+show_desktop_plugin_toggled (GtkToggleButton   *button,
+                             ShowDesktopPlugin *plugin)
+{
+  gboolean active;
+
+  panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
+  panel_return_if_fail (GTK_IS_TOGGLE_BUTTON (button));
+  panel_return_if_fail (WNCK_IS_SCREEN (plugin->wnck_screen));
+
+  /* get the button state */
+  active = gtk_toggle_button_get_active (button);
+
+  /* toggle the desktop */
+  if (active != wnck_screen_get_showing_desktop (plugin->wnck_screen))
+    wnck_screen_toggle_showing_desktop (plugin->wnck_screen, active);
+
+  /* update the tooltip */
+  gtk_widget_set_tooltip_text (GTK_WIDGET (button),
+                               active ? _("Restore hidden windows") :
+                                 _("Hide windows and show desktop"));
+}
+
+
+
+static void
+show_desktop_plugin_showing_desktop_changed (WnckScreen        *wnck_screen,
+                                             ShowDesktopPlugin *plugin)
+{
+  panel_return_if_fail (XFCE_IS_SHOW_DESKTOP_PLUGIN (plugin));
+  panel_return_if_fail (WNCK_IS_SCREEN (wnck_screen));
+  panel_return_if_fail (plugin->wnck_screen == wnck_screen);
+
+  /* toggle the button */
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (plugin->button),
+                                wnck_screen_get_showing_desktop (wnck_screen));
+}

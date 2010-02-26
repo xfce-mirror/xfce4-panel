@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <interface>
-  <requires lib="gtk+" version="2.14"/>
+  <!-- interface-requires gtk+ 2.12 -->
   <!-- interface-requires xfce4 0.0 -->
   <!-- interface-naming-policy toplevel-contextual -->
   <object class="XfceTitledDialog" id="dialog">
     <property name="title" translatable="yes">Launcher Properties</property>
-    <property name="window_position">GTK_WIN_POS_CENTER</property>
+    <property name="window_position">center</property>
     <property name="icon_name">gtk-properties</property>
-    <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+    <property name="type_hint">normal</property>
     <property name="has_separator">False</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
@@ -31,9 +31,9 @@
                       <object class="GtkScrolledWindow" id="scrolledwindow1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                        <property name="vscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
-                        <property name="shadow_type">GTK_SHADOW_IN</property>
+                        <property name="hscrollbar_policy">automatic</property>
+                        <property name="vscrollbar_policy">automatic</property>
+                        <property name="shadow_type">in</property>
                         <child>
                           <object class="GtkTreeView" id="entry-treeview">
                             <property name="visible">True</property>
@@ -124,7 +124,7 @@
                                 <child>
                                   <object class="GtkArrow" id="arrow1">
                                     <property name="visible">True</property>
-                                    <property name="arrow_type">GTK_ARROW_DOWN</property>
+                                    <property name="arrow_type">down</property>
                                   </object>
                                   <packing>
                                     <property name="position">1</property>
@@ -292,7 +292,7 @@
                               <object class="GtkImage" id="image5">
                                 <property name="visible">True</property>
                                 <property name="stock">gtk-open</property>
-                                <property name="icon_size">1</property>
+                                <property name="icon-size">1</property>
                               </object>
                             </child>
                           </object>
@@ -308,7 +308,7 @@
                         <child>
                           <object class="GtkFileChooserButton" id="entry-working-directory">
                             <property name="visible">True</property>
-                            <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
+                            <property name="action">select-folder</property>
                             <property name="title" translatable="yes">Select A Working Directory</property>
                           </object>
                           <packing>
@@ -323,9 +323,10 @@
                           <object class="GtkCheckButton" id="entry-terminal">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="label" translatable="yes">Run in _terminal</property>
+                            <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">Run in _terminal</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -339,9 +340,10 @@
                           <object class="GtkCheckButton" id="entry-startup-notify">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="label" translatable="yes">Use _statup notification</property>
+                            <property name="receives_default">False</property>
                             <property name="use_underline">True</property>
                             <property name="draw_indicator">True</property>
+                            <property name="label" translatable="yes">Use _statup notification</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -365,7 +367,7 @@
                                   <object class="GtkImage" id="image6">
                                     <property name="visible">True</property>
                                     <property name="stock">gtk-execute</property>
-                                    <property name="icon_size">5</property>
+                                    <property name="icon-size">5</property>
                                   </object>
                                 </child>
                               </object>
@@ -407,9 +409,10 @@
                   <object class="GtkCheckButton" id="disable-tooltips">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Disable t_ooltips</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
+                    <property name="label" translatable="yes">Disable t_ooltips</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -420,9 +423,10 @@
                   <object class="GtkCheckButton" id="show-labels">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Show _labels instead of icons</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
+                    <property name="label" translatable="yes">Show _labels instead of icons</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -433,9 +437,10 @@
                   <object class="GtkCheckButton" id="move-first">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
-                    <property name="label" translatable="yes">Show last _used entry in panel</property>
+                    <property name="receives_default">False</property>
                     <property name="use_underline">True</property>
                     <property name="draw_indicator">True</property>
+                    <property name="label" translatable="yes">Show last _used entry in panel</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -462,7 +467,7 @@
                       <object class="GtkComboBox" id="arrow-position">
                         <property name="visible">True</property>
                         <property name="model">arrow-position-store</property>
-                        <property name="button_sensitivity">GTK_SENSITIVITY_ON</property>
+                        <property name="button_sensitivity">on</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -498,14 +503,15 @@
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area2">
             <property name="visible">True</property>
-            <property name="layout_style">GTK_BUTTONBOX_END</property>
+            <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="close-button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <property name="label" translatable="yes">gtk-close</property>
                 <property name="use_stock">True</property>
+                <property name="response_id">0</property>
+                <property name="label" translatable="yes">gtk-close</property>
               </object>
               <packing>
                 <property name="position">0</property>
@@ -514,7 +520,7 @@
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="pack_type">GTK_PACK_END</property>
+            <property name="pack_type">end</property>
             <property name="position">0</property>
           </packing>
         </child>

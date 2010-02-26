@@ -116,10 +116,11 @@ xfce_tray_dialogs_icon (GtkIconTheme *icon_theme,
     const gchar *p;
     const gchar *fallback[][2] =
     {
-        /* application name ,  fallback icon name or path */
-        { "xfce-mcs-manager", "input-mouse" },
-        { "bluetooth-applet", "stock_bluetooth" },
-        { "gdl_box",          "/opt/google/desktop/resource/gdl_small.png" }
+        /* application name , fallback icon name or path */
+        { "xfce-mcs-manager",      "input-mouse" },
+        { "bluetooth-applet",      "stock_bluetooth" },
+        { "gdl_box",               "/opt/google/desktop/resource/gdl_small.png" },
+        { "networkmanager applet", "network-workgroup" },
     };
 
     /* return null on no name */
