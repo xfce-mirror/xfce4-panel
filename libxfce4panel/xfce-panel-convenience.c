@@ -101,33 +101,3 @@ xfce_panel_allow_customization (void)
 
   return allow_customization;
 }
-
-
-
-PANEL_SYMBOL_EXPORT void
-xfce_panel_cairo_set_source_rgba (cairo_t  *cr,
-                                  GdkColor *color,
-                                  gdouble   alpha)
-{
-  g_return_if_fail (cr != NULL);
-  g_return_if_fail (color != NULL);
-  g_return_if_fail (alpha >= 0.00 && alpha <= 1.00);
-
-  if (alpha >= 1.00)
-    {
-      /* set normal source color */
-      cairo_set_source_rgb (cr,
-                            color->red / 65535.00,
-                            color->green / 65535.00,
-                            color->blue / 65535.00);
-    }
-  else
-    {
-      /* set source color with alpha */
-      cairo_set_source_rgba (cr,
-                             color->red / 65535.00,
-                             color->green / 65535.00,
-                             color->blue / 65535.00,
-                             alpha);
-    }
-}
