@@ -21,6 +21,8 @@ libsystray_la_SOURCES = \
 	$(libsystray_built_sources) \
 	systray.c \
 	systray.h \
+	systray-box.c \
+	systray-box.h \
 	systray-manager.c \
 	systray-manager.h
 
