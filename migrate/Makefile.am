@@ -36,7 +36,7 @@ xfce4_panel_migrate_LDADD = \
 	$(GTK_LIBS) \
 	$(XFCONF_LIBS) \
 	$(LIBXFCE4UTIL_LIBS) \
-	$(LIBXF		CE4UI_LIBS)
+	$(LIBXFCE4UI_LIBS)
 
 EXTRA_DIST = \
 	default.xml
